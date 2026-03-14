@@ -268,6 +268,10 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
                 fontSize: '0.625rem', fontWeight: 700, textTransform: 'uppercase',
                 letterSpacing: '0.1em', color: 'var(--color-text-faint)',
                 borderBottom: '1px solid var(--color-border)',
+                position: 'sticky',
+                left: 0,
+                zIndex: 2,
+                background: 'var(--color-bg-surface, #09090b)',
               }}>
                 Band / Category
               </th>
@@ -328,6 +332,10 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
                     <td style={{
                       padding: '0.5rem 0.75rem',
                       borderRight: '1px solid var(--color-border)',
+                      position: 'sticky',
+                      left: 0,
+                      zIndex: 1,
+                      background: 'var(--color-bg-deep, #09090b)',
                     }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span style={{

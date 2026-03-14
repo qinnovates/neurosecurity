@@ -9,6 +9,7 @@ export default function BciVisionToggle() {
   });
   const clickTimes = useRef<number[]>([]);
   const [showCtf, setShowCtf] = useState(false);
+  const [ctfSource, setCtfSource] = useState<'click' | 'search' | 'music'>('click');
   const [passphrase, setPassphrase] = useState('');
   const [ctfState, setCtfState] = useState<'prompt' | 'denied' | 'granted'>('prompt');
   const pendingNav = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -19,15 +20,29 @@ export default function BciVisionToggle() {
     setIsOn(saved);
   }, []);
 
+  // Listen for ONI/music search trigger from Nav search bar
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const term = (e as CustomEvent<string>).detail || '';
+      const isMusicSearch = ['kulhi', 'kulhi loach', 'kulhi loaches', 'keviano'].includes(term);
+      setCtfSource(isMusicSearch ? 'music' : 'search');
+      setShowCtf(true);
+      setCtfState('prompt');
+      setPassphrase('');
+    };
+    window.addEventListener('oni-trigger', handler);
+    return () => window.removeEventListener('oni-trigger', handler);
+  }, []);
+
   const toggle = useCallback(() => {
     const now = Date.now();
     clickTimes.current.push(now);
-    if (clickTimes.current.length > 3) clickTimes.current.shift();
+    if (clickTimes.current.length > 5) clickTimes.current.shift();
 
-    // Easter egg: 3 clicks within 1.5 seconds
-    if (clickTimes.current.length === 3) {
-      const delta = clickTimes.current[2] - clickTimes.current[0];
-      if (delta < 1500) {
+    // Easter egg: 5 clicks within 2.5 seconds
+    if (clickTimes.current.length >= 5) {
+      const delta = clickTimes.current[clickTimes.current.length - 1] - clickTimes.current[0];
+      if (delta < 2500) {
         clickTimes.current = [];
         if (pendingNav.current) {
           clearTimeout(pendingNav.current);
@@ -36,6 +51,7 @@ export default function BciVisionToggle() {
         document.documentElement.classList.add('crt-flicker');
         setTimeout(() => {
           document.documentElement.classList.remove('crt-flicker');
+          setCtfSource('click');
           setShowCtf(true);
           setCtfState('prompt');
           setPassphrase('');
@@ -126,9 +142,8 @@ export default function BciVisionToggle() {
               boxShadow: '0 0 40px rgba(0,255,0,0.05)',
             }}
           >
-            <div style={{ opacity: 0.7 }}>
-              {'>'} ONI FRAMEWORK v14.0 — ARCHIVED<br />
-              {'>'} NEURAL SECURITY CLEARANCE REQUIRED
+            <div style={{ opacity: 0.8 }}>
+              {'>'} ONI FRAMEWORK v14.0 — ARCHIVED
             </div>
 
             <div className="my-4 h-1 rounded-full overflow-hidden" style={{ background: '#111' }}>
@@ -142,26 +157,76 @@ export default function BciVisionToggle() {
               />
             </div>
 
-            <p className="mb-4">WELCOME, OPERATOR.</p>
-            <p className="mb-1" style={{ opacity: 0.8 }}>The 14-layer model was archived.</p>
-            <p className="mb-1" style={{ opacity: 0.8 }}>But it left something behind.</p>
-            <p className="mb-4" style={{ opacity: 0.8 }}>Find the signal in the noise.</p>
+            {ctfSource === 'click' ? (
+              <>
+                <p className="mb-4" style={{ opacity: 0.9 }}>
+                  Nice. This is how security engineers start thinking. We click things to see if they break. We poke at edges. We test assumptions.
+                </p>
+                <p className="mb-1" style={{ opacity: 0.8 }}>You just did exactly that. Keep going.</p>
+                <p className="mb-1" style={{ opacity: 0.8 }}>QIF started as something called ONI — 14 layers, way too ambitious.</p>
+                <p className="mb-4" style={{ opacity: 0.8 }}>It was archived. But it left a trail.</p>
+              </>
+            ) : ctfSource === 'music' ? (
+              <>
+                <p className="mb-4" style={{ opacity: 0.9 }}>
+                  You came back for the music. That means something.
+                </p>
+                <p className="mb-4" style={{ opacity: 0.8 }}>
+                  Before all of this — before QIF, before TARA, before the hourglass — there was just a kid at a piano trying to make something beautiful. That never stopped. It just found new instruments.
+                </p>
+                <div
+                  className="my-4 p-4 rounded-lg"
+                  style={{ background: 'rgba(0,255,0,0.03)', border: '1px solid rgba(0,255,0,0.1)' }}
+                >
+                  <p style={{ opacity: 0.7, fontSize: '0.85rem', marginBottom: '0.5rem' }}>
+                    &ldquo;Don&apos;t ever give up no matter if it&apos;s on your music, dreams, or your PII.&rdquo;
+                  </p>
+                  <p style={{ opacity: 0.4, fontSize: '0.75rem' }}>— Derivation Log #8</p>
+                </div>
+                <p className="mb-1" style={{ opacity: 0.8 }}>The security framework is one instrument.</p>
+                <p className="mb-1" style={{ opacity: 0.8 }}>The piano is another.</p>
+                <p className="mb-4" style={{ opacity: 0.8 }}>Same person. Same curiosity. Different keys.</p>
+              </>
+            ) : (
+              <>
+                <p className="mb-4" style={{ opacity: 0.9 }}>
+                  You searched for it. That means you read the research. That means you care.
+                </p>
+                <div
+                  className="my-4 p-4 rounded-lg"
+                  style={{ background: 'rgba(0,255,0,0.03)', border: '1px solid rgba(0,255,0,0.1)' }}
+                >
+                  <p style={{ opacity: 0.7, fontSize: '0.85rem', marginBottom: '0.5rem' }}>
+                    &ldquo;Don&apos;t ever give up no matter if it&apos;s on your music, dreams, or your PII.&rdquo;
+                  </p>
+                  <p style={{ opacity: 0.4, fontSize: '0.75rem' }}>— Derivation Log #8</p>
+                </div>
+                <p className="mb-1" style={{ opacity: 0.8 }}>ONI was the dream. 14 layers. One person. No funding. No team.</p>
+                <p className="mb-1" style={{ opacity: 0.8 }}>It was too big. But the dream didn&apos;t die — it just got honest.</p>
+                <p className="mb-4" style={{ opacity: 0.8 }}>QIF is what happens when you don&apos;t give up but you do get real.</p>
+              </>
+            )}
 
-            <p className="mb-4" style={{ color: '#00aa00', opacity: 0.6 }}>
-              HINT: The derivation log remembers what the framework forgot.
+            <p className="mb-4" style={{ color: '#00aa00', opacity: 0.7 }}>
+              The derivation log remembers what the framework forgot.
             </p>
 
             {ctfState === 'granted' ? (
               <div>
-                <p className="mb-2">{'>'} SIGNAL ACQUIRED.</p>
-                <p className="mb-2">{'>'} COHERENCE: 0.94</p>
+                <p className="mb-2" style={{ color: '#ffcc00' }}>{'>'} You got it. Welcome in.</p>
                 <p className="mb-4" style={{ color: '#ffcc00' }}>
                   {'>'} FLAG{'{'}oni_14_layers_remember{'}'}
                 </p>
-                <p className="mb-1" style={{ opacity: 0.7 }}>
-                  The ONI Framework was the seed. QIF is what grew from it.
+                <p className="mb-2" style={{ opacity: 0.8 }}>
+                  The ONI Framework was the original idea — 14 layers, built from scratch by one person asking &ldquo;what if we treated the brain like a network?&rdquo;
                 </p>
-                <p className="my-4" style={{ opacity: 0.6 }}>
+                <p className="mb-2" style={{ opacity: 0.8 }}>
+                  It was too big. So it became QIF. Simpler. Honest about what it knows and doesn&apos;t know.
+                </p>
+                <p className="mb-4" style={{ opacity: 0.8 }}>
+                  But the curiosity that built ONI is the same curiosity that brought you here. That&apos;s what matters.
+                </p>
+                <p className="my-4" style={{ opacity: 0.7 }}>
                   Kevin said he&apos;d plug the piano back in at 100 likes.
                 </p>
                 <a
@@ -173,8 +238,8 @@ export default function BciVisionToggle() {
                 >
                   Kulhi Loaches — Keviano (SoundCloud)
                 </a>
-                <p style={{ opacity: 0.5, fontSize: '0.75rem' }}>
-                  More flags are hidden in the research. Keep reading. Keep questioning.
+                <p style={{ opacity: 0.6, fontSize: '0.75rem' }}>
+                  More flags are hidden in the research. Keep reading. Keep questioning. That&apos;s the whole game.
                 </p>
               </div>
             ) : (
@@ -208,8 +273,8 @@ export default function BciVisionToggle() {
                 </div>
 
                 {ctfState === 'denied' && (
-                  <p className="mt-3 animate-pulse" style={{ color: '#ff4444' }}>
-                    {'>'} ACCESS DENIED. TRY AGAIN.
+                  <p className="mt-3" style={{ color: '#ff8844' }}>
+                    {'>'} Not quite — but you&apos;re close. The answer is in the research.
                   </p>
                 )}
               </div>
@@ -217,10 +282,10 @@ export default function BciVisionToggle() {
 
             <button
               onClick={() => setShowCtf(false)}
-              className="mt-6 text-xs opacity-40 hover:opacity-70 transition-opacity"
-              style={{ color: '#00ff00' }}
+              className="mt-6 text-xs hover:opacity-100 transition-opacity"
+              style={{ color: '#00ff00', opacity: 0.6 }}
             >
-              [CLOSE]
+              [ESC or click to close]
             </button>
           </div>
         </div>

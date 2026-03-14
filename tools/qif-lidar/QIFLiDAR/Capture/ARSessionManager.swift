@@ -145,7 +145,7 @@ final class ARSessionManager: NSObject, ObservableObject {
 
 // MARK: - ARSessionDelegate
 
-extension ARSessionManager: @preconcurrency ARSessionDelegate {
+extension ARSessionManager: ARSessionDelegate {
     nonisolated func session(_ session: ARSession, didUpdate frame: ARFrame) {
         Task { @MainActor in
             // Depth + confidence

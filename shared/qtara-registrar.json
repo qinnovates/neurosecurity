@@ -906,7 +906,7 @@
         "tier": 2,
         "tier_label": "mid_term",
         "timeline": "2031-2038",
-        "gate_reason": "Selective neural ransomware needs bidirectional 10k+ channel implant; thermal budget gates channel count at current process nodes",
+        "gate_reason": "Selective neural ransomware needs bidirectional 10k+ channel implant; thermal budget gates channel count at current process nodes. Note: Selective neural ransomware requires 10k+ channels (Tier 2). Coarse DBS/RNS parameter ransomware is Tier 0 with existing device access — see technique description for scope.",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-02-18"
       },
@@ -4628,7 +4628,7 @@
       "sources": [
         "Meng et al. 2024"
       ],
-      "status": "EMERGING",
+      "status": "THEORETICAL",
       "severity": "critical",
       "ui_category": "DS",
       "notes": "Small adversarial perturbation injected into closed-loop BCI amplifies through feedback cycle. Each loop iteration increases deviation until system destabilizes. NeuroPace RNS, DBS with LFP sensing vulnerable.",
@@ -7525,7 +7525,7 @@
         "Willett et al. 2023 (Nature)",
         "Meta FAIR 2023"
       ],
-      "status": "DEMONSTRATED",
+      "status": "EMERGING",
       "severity": "critical",
       "ui_category": "CI",
       "notes": "Decode inner speech from neural signals without user consent. High-density arrays (Neuralink, Utah) approach word-level accuracy. Consumer EEG at phoneme level. Merges with 'Covert Speech Decoding' from 2024-2026 research.",
@@ -9673,7 +9673,7 @@
       },
       "tara": {
         "mechanism": "Physical tampering with implanted or wearable BCI electrodes",
-        "dual_use": "silicon_only",
+        "dual_use": "probable",
         "clinical": null,
         "governance": {
           "consent_tier": "enhanced",
@@ -10917,7 +10917,7 @@
       "sources": [
         "NATO STO 2024 (Cognitive Warfare concept)"
       ],
-      "status": "EMERGING",
+      "status": "THEORETICAL",
       "severity": "critical",
       "ui_category": "PS",
       "notes": "State-level exploitation of BCI infrastructure for cognitive warfare: mass influence, decision degradation, combat effectiveness reduction. Combines multiple techniques (T2101-T2106, T2506). Military BCI programs (DARPA N3, BrainSTORMS) as targets.",
@@ -10938,7 +10938,7 @@
       },
       "tara": {
         "mechanism": "Coordinated manipulation of cognitive function across populations via compromised BCI infrastructure",
-        "dual_use": "silicon_only",
+        "dual_use": "probable",
         "clinical": null,
         "governance": {
           "consent_tier": "prohibited",
@@ -20590,11 +20590,10 @@
       "id": "QIF-T0108",
       "attack": "Neuromorphic mimicry attack (synaptic weight tampering)",
       "tactic": "QIF-B.IN",
-      "bands": "N3-N5",
+      "bands": "S1-S2",
       "band_ids": [
-        "N3",
-        "N4",
-        "N5"
+        "S1",
+        "S2"
       ],
       "coupling": null,
       "access": null,
@@ -20634,11 +20633,10 @@
       "id": "QIF-T0109",
       "attack": "Data alignment exploitation",
       "tactic": "QIF-B.EV",
-      "bands": "N3-N5",
+      "bands": "S2-I0",
       "band_ids": [
-        "N3",
-        "N4",
-        "N5"
+        "S2",
+        "I0"
       ],
       "coupling": null,
       "access": null,

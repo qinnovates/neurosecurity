@@ -67,6 +67,14 @@ const subPages = [
     stat: `${atlasData.bands.reduce((s, b) => s + b.brainRegions.length, 0)} regions`,
     color: '#10b981',
   },
+  {
+    title: 'Domain Matrix',
+    description: 'Techniques organized by biological domain and interaction mode — the full domain-by-mode taxonomy.',
+    href: '/atlas/domains/',
+    icon: 'heart',
+    stat: '11 domains',
+    color: '#ec4899',
+  },
 ];
 
 const iconSvg: Record<string, string> = {

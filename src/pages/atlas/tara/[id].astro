@@ -1,6 +1,7 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import BrainVisualization from '@/components/brain/BrainVisualization.tsx';
+import EvidenceTierBanner from '../../../components/atlas/EvidenceTierBanner';
 import { THREAT_VECTORS, SEVERITY_COLORS } from '@/lib/threat-data';
 import { getValidationForTechnique, TIER_COLORS, STATUS_LABELS, STATUS_COLORS, VALIDATION_TIERS } from '@/lib/validation-data';
 import type { ValidationTierId } from '@/lib/validation-data';
@@ -145,6 +146,15 @@ const hasGovernance = nr || reg;
       </span>
     </div>
     <h2 class="text-2xl font-bold text-[var(--color-text-primary)] mb-4">{threat.name}</h2>
+
+    <EvidenceTierBanner
+      client:load
+      tier={threat.status === 'CONFIRMED' ? 'validated_replication' : threat.status === 'DEMONSTRATED' ? 'demonstrated_lab' : threat.status === 'THEORETICAL' ? 'theoretical_modeled' : threat.status === 'EMERGING' ? 'demonstrated_case' : 'speculative'}
+      status={threat.status}
+      confidenceNote=""
+      lastVerified=""
+    />
+
     <p class="text-lg text-[var(--color-text-muted)] leading-relaxed mb-6">
       {threat.description}
     </p>

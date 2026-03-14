@@ -96,7 +96,7 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
     gtag('config', 'G-DKB9RWW0C2');
   </script>
 
-  <!-- Theme + Vision mode initialization (prevent flash) -->
+  <!-- Theme + Vision mode + Lens initialization (prevent flash) -->
   <script is:inline>
     (function(){
       try {
@@ -105,15 +105,21 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
         var vision = isVisionPage && localStorage.getItem('bci-vision') === 'on';
         document.documentElement.setAttribute('data-theme', vision ? 'dark' : 'light');
         document.documentElement.setAttribute('data-vision', vision ? 'on' : 'off');
+        var lens = localStorage.getItem('qif-lens') || 'security';
+        document.documentElement.setAttribute('data-lens', lens);
       } catch(e) {
         document.documentElement.setAttribute('data-theme', 'light');
         document.documentElement.setAttribute('data-vision', 'off');
+        document.documentElement.setAttribute('data-lens', 'security');
       }
     })();
   </script>
 </head>
 <body class="min-h-screen">
-  <slot />
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[var(--color-accent-primary)] focus:text-white focus:text-sm focus:font-bold">Skip to content</a>
+  <main id="main-content">
+    <slot />
+  </main>
 
   <!-- Scroll-driven reveal observer -->
   <script>

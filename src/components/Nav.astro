@@ -1,5 +1,6 @@
 ---
 import Search from 'astro-pagefind/components/Search';
+import LensToggle from './LensToggle.tsx';
 import { TARA_TECHNIQUES } from '../lib/qif-constants';
 
 const currentPath = Astro.url.pathname;
@@ -34,6 +35,7 @@ const atlasGroups: NavGroup[] = [
   {
     title: 'Framework',
     links: [
+      { href: '/atlas/clinical/', label: 'Clinical', desc: 'DSM-5 mappings, therapeutic analogs, device safety' },
       { href: '/atlas/', label: 'Atlas Dashboard', desc: 'Unified hourglass, brain, and threat landscape' },
       { href: '/framework/', label: 'QIF Framework', desc: '11-band hourglass architecture' },
       { href: '/atlas/tara/', label: 'TARA Catalog', desc: `${TARA_TECHNIQUES} techniques scored with NISS` },
@@ -120,6 +122,7 @@ const navSections: NavSection[] = [
           <div class="relative" data-dropdown={section.id}>
             <a
               href={section.href}
+              aria-expanded="false"
               class:list={[
                 "flex items-center gap-1 px-2.5 py-2 rounded-lg text-sm font-medium transition-colors",
                 section.isActive
@@ -128,7 +131,7 @@ const navSections: NavSection[] = [
               ]}
             >
               {section.label}
-              <svg class="w-3 h-3 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="w-3 h-3 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
               </svg>
             </a>
@@ -169,6 +172,7 @@ const navSections: NavSection[] = [
 
       <!-- Right side -->
       <div class="flex items-center gap-2">
+        <LensToggle client:idle />
         <!-- BCI Vision toggle -->
         <a
           href="/vision/"
@@ -185,7 +189,7 @@ const navSections: NavSection[] = [
 
         <!-- Explore Atlas CTA (desktop) -->
         <a
-          href="/demo-atlas/"
+          href="/atlas/"
           class:list={[
             "hidden md:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-colors",
             currentPath.startsWith('/atlas')
@@ -253,7 +257,7 @@ const navSections: NavSection[] = [
       <!-- Mobile CTAs -->
       <div class="pb-2 mb-2 border-b border-[var(--color-border)] space-y-2">
         <a
-          href="/demo-atlas/"
+          href="/atlas/"
           class="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-[var(--color-accent-secondary)] text-white text-sm font-medium text-center hover:bg-[var(--color-accent-secondary)]/90 transition-colors"
         >
           <svg class="w-4 h-4" viewBox="0 0 32 32" fill="none">
@@ -371,17 +375,24 @@ const navSections: NavSection[] = [
       const menu = dropdown.querySelector<HTMLElement>('.dropdown-menu');
       let timeout: ReturnType<typeof setTimeout>;
 
+      const trigger = dropdown.querySelector<HTMLElement>('a[aria-expanded]');
+
       function show() {
         document.querySelectorAll<HTMLElement>('.dropdown-menu').forEach(m => {
           if (m !== menu) m.classList.add('hidden');
         });
+        document.querySelectorAll<HTMLElement>('[data-dropdown] a[aria-expanded]').forEach(t => {
+          if (t !== trigger) t.setAttribute('aria-expanded', 'false');
+        });
         clearTimeout(timeout);
         menu?.classList.remove('hidden');
+        trigger?.setAttribute('aria-expanded', 'true');
       }
 
       function hide() {
         timeout = setTimeout(() => {
           menu?.classList.add('hidden');
+          trigger?.setAttribute('aria-expanded', 'false');
         }, 150);
       }
 
@@ -431,6 +442,34 @@ const navSections: NavSection[] = [
         input?.focus();
       }, 50);
     }
+
+    // ONI easter egg: typing "oni" in search triggers the CTF
+    function watchForOni() {
+      const searchContainer = document.getElementById('search-container');
+      if (!searchContainer) return;
+      const observer = new MutationObserver(() => {
+        const input = searchContainer.querySelector<HTMLInputElement>('.pagefind-ui__search-input');
+        if (!input || input.dataset.oniWatched) return;
+        input.dataset.oniWatched = 'true';
+        input.addEventListener('input', () => {
+          const val = input.value.trim().toLowerCase();
+          if (val === 'oni' || val === 'kulhi' || val === 'kulhi loach' || val === 'kulhi loaches' || val === 'keviano') {
+            // Trigger the CTF via the BCI Vision toggle
+            closeSearch();
+            setTimeout(() => {
+              document.documentElement.classList.add('crt-flicker');
+              setTimeout(() => {
+                document.documentElement.classList.remove('crt-flicker');
+                // Dispatch a custom event that BciVisionToggle listens for
+                window.dispatchEvent(new CustomEvent('oni-trigger', { detail: val }));
+              }, 300);
+            }, 200);
+          }
+        });
+      });
+      observer.observe(searchContainer, { childList: true, subtree: true });
+    }
+    watchForOni();
 
     function closeSearch() {
       searchModal?.classList.add('hidden');

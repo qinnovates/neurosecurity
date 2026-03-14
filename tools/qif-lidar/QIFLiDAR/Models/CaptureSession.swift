@@ -2,7 +2,7 @@ import Foundation
 
 /// Metadata for a single capture session — exported as manifest.json
 struct CaptureManifest: Codable {
-    let version: String = "1.0"
+    let anversion: String = "1.0"
     let app: String = "QIF-LiDAR"
     let captureDate: String
     let durationSeconds: Double

@@ -22,6 +22,10 @@
 	<string>1</string>
 	<key>NSCameraUsageDescription</key>
 	<string>QIF LiDAR uses the camera and LiDAR sensor to capture spatial depth data for research purposes.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>QIF LiDAR uses motion sensors to capture IMU data alongside depth frames for research.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>QIF LiDAR saves recorded LiDAR sessions as videos to your Photos library.</string>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -34,6 +38,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 </dict>
 </plist>

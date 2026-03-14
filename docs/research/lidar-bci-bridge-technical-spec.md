@@ -738,9 +738,87 @@ Each Phase 2 experiment follows this protocol:
 
 ---
 
-## 12. AI Disclosure
+## 12. Field Test Findings (2026-03-14)
 
-This technical specification was drafted with AI assistance (Claude Opus 4.6). The architectural design, hypothesis framing, TARA mappings, and experimental design reflect the author's research direction. All technical claims about Apple frameworks, model specifications, and device capabilities are verified against official documentation. The connection between LiDAR spatial sensing and vision prosthesis security is the author's original research contribution.
+First device deployment of QIF-LiDAR on iPhone 16 Pro Max. The following findings emerged from hands-on testing. See also: [Derivation Log Entry 91](../../qif-framework/QIF-DERIVATION-LOG.md#entry-91-lidar-sensor-limitations).
+
+### 12.1 iPhone LiDAR Sensor Limitations
+
+**Resolution is severely limiting.** The dToF sensor produces a 256x192 depth map (49,152 points). Rendered on a 1290x2796 display, each depth pixel maps to approximately 7x15 screen pixels. The result appears filtered or blurry compared to the RGB camera (4032x3024). Visible grid artifacts from the VCSEL dot array are present even after Apple's interpolation.
+
+**Fur scatters infrared light.** A white dog was not reliably detected by the LiDAR depth sensor. Fur is not a hard reflective surface — IR photons penetrate into the fur, scatter at multiple depths, and return noisy or absent signal. This is consistent with findings in autonomous vehicle LiDAR research, where animals are among the hardest objects to detect. This directly impacts the HarnessDetector module (Section 4.4), which relies on LiDAR depth protrusion to identify harness handles.
+
+**Material-dependent failures.** In addition to fur, dToF LiDAR is known to fail on transparent surfaces (glass), highly absorptive surfaces (dark matte objects), and specular surfaces (mirrors, polished metal). These failure modes are inherent to indirect time-of-flight sensing and are not addressable through software.
+
+### 12.2 Architectural Implication
+
+The guide dog detection pipeline's three-signal design (Section 4) is validated by these findings: YOLO dog detection (Signal 1, RGB) and re-ID embedding matching (Signal 2, RGB) do not depend on LiDAR and are unaffected by fur scattering. Only Signal 3 (harness depth detection) is degraded. The architecture correctly treats LiDAR as a supplementary signal, not the primary classifier.
+
+### 12.3 Platform Pivot: Multi-Sensor and Head-Mounted Devices
+
+**iPhone LiDAR is not feasible as the primary sensor for vision prosthesis prototyping.** The resolution, grid artifacts, and material-dependent failures make it unsuitable for the spatial awareness fidelity required.
+
+**Next platform: Meta Quest (Oculus) headset.** Advantages over iPhone LiDAR:
+- Stereo RGB cameras with passthrough — higher resolution spatial awareness via stereo depth estimation
+- Head-mounted form factor matches the actual use case for vision prosthesis (worn device, not handheld)
+- Built-in hand/body tracking
+- Spatial computing SDK with scene understanding
+- Larger developer ecosystem for XR accessibility applications
+
+**iPhone LiDAR remains useful for:** quick depth measurements (tap-to-measure), general 3D scanning at room scale, proof-of-concept demos, and raw depth data export for offline ML training.
+
+### 12.4 Sensor Hierarchy Revision: Camera-First, Not Depth-First
+
+Field testing revealed a fundamental architectural insight: **the sensor pipeline for prosthetic vision should be camera-first, not depth-first.** This inverts the original assumption in Section 2 that LiDAR depth sensing would be the primary input.
+
+**Reasoning:**
+
+Current prostheses produce 60–378 phosphenes. Even next-generation devices (1,000+ channels) will not approach camera resolution. The output is fundamentally low-resolution. Therefore, the bottleneck is not sensor resolution — it is ML classification. The question is not "how many depth pixels can we capture" but "can we correctly label what matters in the scene."
+
+The pipeline is reductive, not preservative:
+
+```
+High-res RGB camera → ML classification → simplified scene map → low-res phosphene output
+```
+
+The camera captures everything. ML decides what matters. The output to the brain is labeled points with positions: "dog at 2m center, wall at 4m left, car at 15m right." Full spatial detail is never transmitted to the patient — it is compressed into semantically meaningful objects.
+
+**Three range zones require different sensors:**
+
+| Range | Need | Best Sensor |
+|-------|------|-------------|
+| Long (5–50m) | "What's ahead on the sidewalk" | RGB camera + ML object detection |
+| Medium (1–5m) | "Where are walls, furniture, people" | Stereo depth estimation |
+| Close (<1m) | "Where is the harness handle" | LiDAR/ToF or stereo + ML segmentation |
+
+**Revised sensor hierarchy:**
+
+1. **Primary:** Wide-angle RGB camera (ML object detection at all ranges)
+2. **Secondary:** Stereo depth estimation (distance without dedicated depth sensor)
+3. **Supplementary:** IMU (orientation, motion context)
+4. **Optional:** LiDAR/ToF (close-range precision, not required)
+
+**Security implication:** If the camera is primary, adversarial attacks on the visual classifier (adversarial patches, perturbation attacks) become the highest-priority threat vector, not depth sensor spoofing. The ML model IS the prosthesis — a compromised model is a compromised sense. This makes model integrity a patient safety issue, not just a cybersecurity concern. Multi-sensor fusion provides defense-in-depth: an attacker who fools the RGB classifier still faces depth data that contradicts the false classification.
+
+See also: [Derivation Log Entry 92](../../qif-framework/QIF-DERIVATION-LOG.md#entry-92-sensor-hierarchy).
+
+### 12.5 Phosphene Color Ramp Design
+
+During testing, the depth visualization was iterated through several color ramps. A phosphene-informed design was developed based on reported characteristics of electrically-induced phosphenes in the literature:
+
+- White/achromatic phosphenes are the most common and lowest-threshold (Brindley & Lewin 1968, Schmidt et al. 1996)
+- Yellow is second most commonly reported, particularly at higher stimulation currents
+- Blue is occasionally reported in cortical stimulation (Penfield & Rasmussen 1950)
+- Color is not reliably controllable in current prostheses (Dobelle 2000)
+- Brightness (current amplitude) is the primary reliable information channel
+
+The prototype uses a blue-teal ramp (bright teal near → blue mid → dim blue-grey far → dark) which stays within the reported phosphene color range while using brightness as the primary depth cue. This is framed as "informed by phosphene research," not "what prosthetic vision looks like" — individual variation is substantial and no visualization can be authoritative.
+
+---
+
+## 13. AI Disclosure
+
+This technical specification was drafted with AI assistance (Claude Opus 4.6). Field test findings (Section 12) documented with AI assistance during live device testing. The architectural design, hypothesis framing, TARA mappings, and experimental design reflect the author's research direction. All technical claims about Apple frameworks, model specifications, and device capabilities are verified against official documentation. The connection between LiDAR spatial sensing and vision prosthesis security is the author's original research contribution.
 
 ---
 

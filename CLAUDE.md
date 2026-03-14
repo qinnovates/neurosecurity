@@ -142,6 +142,52 @@ Three project files must stay in sync with changes. All follow the same pattern:
 **When:** New version released, discovery/derivation changes framework, cross-AI validation results, preprint published, new tool/page ships, hardware validation, dataset expansion.
 **Stats to update:** threat_techniques, bci_devices, brain_regions, physics_constraints, hourglass_bands, tara_tactics, neurorights_mapped, dsm5_diagnoses_mapped, research_sources, derivation_log_entries, field_journal_entries, blog_posts, cross_ai_validations, plus version fields.
 
+### Registrar Update Protocol (`shared/qtara-registrar.json`)
+
+**When:** New techniques added, fields renamed/added, taxonomy changes, NISS version updates, or any structural change to the TARA registrar.
+
+**This is a large-scale update that touches the entire stack.** Follow this checklist in order:
+
+```
+1.  Branch:      git checkout -b feature-name
+2.  Tag:         git tag pre-feature-name
+3.  Script:      Write migration script (shared/scripts/migrate-*.py), run --dry-run first
+4.  Source:      Update shared/qtara-registrar.json (source of truth)
+5.  Chains:      Update shared/tara-chains.json if attack chains affected
+6.  TypeScript:  src/lib/threat-data.ts → kql-tables.ts → kql-engine.ts → neurogovernance-data.ts
+7.  Python:      shared/qtara/src/qtara/models.py → scripts → SDK → stix.py → cli.py
+8.  Precompute:  Run all shared/scripts/ pipelines (impact chains, DSM mappings)
+9.  SDK sync:    Copy registrar to shared/qtara/src/qtara/data/qtara-registrar.json
+10. Pages:       Update Astro pages (atlas/tara/[id].astro, guardrails), API endpoints
+11. Components:  Update React dashboard components if new fields need UI
+12. Docs:        Changelog, timeline (qif-timeline.json), current whitepaper draft only
+13. Taxonomy:    Verify domain×mode matrix has no empty cells (11 domains × 3 modes = 33 cells)
+14. Validation:  Run registrar-sync-check workflow locally or via CI
+15. Build:       npm run build && npm run type-check
+16. Test:        pytest (SDK), KQL queries, API responses, visual check
+17. PR:          Single atomic PR with all changes
+```
+
+**DO NOT TOUCH during registrar updates:**
+- Old blog posts (archived content)
+- Old whitepaper versions (`src/pages/research/whitepaper/v*.astro`, `docs/research/whitepaper/`)
+- Published DOIs or Zenodo uploads
+- Git history
+
+**Key files in dependency order:**
+1. `shared/qtara-registrar.json` — source of truth
+2. `src/lib/threat-data.ts` — TypeScript adapter (ThreatVector interface)
+3. `src/lib/kql-tables.ts` — KQL table builder (flattens JSON → queryable columns)
+4. `src/lib/kql-engine.ts` — KQL engine (field aliases, indexes)
+5. `shared/qtara/src/qtara/models.py` — Python SDK Pydantic models
+6. `shared/scripts/compute-impact-chains.mjs` — precompute pipeline
+
+**Field rename protocol:** When renaming a field (e.g., `attack` → `technique`):
+- Keep old field as deprecated alias
+- Add KQL field alias in `kql-engine.ts` so old queries still work
+- Use fallback pattern everywhere: `t.technique || t.attack`
+- New code references new field name only
+
 ## Citation & Preprint Integrity Protocol
 
 This protocol exists because preprint v1.0 shipped with 3 fabricated citations. Every citation MUST be verified.

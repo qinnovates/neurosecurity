@@ -1,4 +1,6 @@
 import SwiftUI
+import ReplayKit
+import Photos
 
 struct ContentView: View {
     @StateObject private var sessionManager = ARSessionManager()
@@ -8,9 +10,11 @@ struct ContentView: View {
     @State private var ocrEnabled = false
     @State private var segmentationMask: [UInt8]? = nil
     @State private var tapDepthInfo: TapDepthInfo? = nil
+    @State private var recordingError: String? = nil
 
     private let segmentationService = SegmentationService()
     private let exporter = SessionExporter()
+    private let screenRecorder = RPScreenRecorder.shared()
 
     var body: some View {
         ZStack {
@@ -97,7 +101,11 @@ struct ContentView: View {
 
                         // Record button
                         Button {
-                            isRecording.toggle()
+                            if isRecording {
+                                stopRecording()
+                            } else {
+                                startRecording()
+                            }
                         } label: {
                             ZStack {
                                 Circle()
@@ -212,6 +220,60 @@ struct ContentView: View {
                 exporter.exportGuideDogDetection(guideDogDetector.currentDetection())
             }
             exporter.advanceFrame()
+        }
+    }
+
+    // MARK: - Screen Recording
+
+    private func startRecording() {
+        guard screenRecorder.isAvailable else {
+            recordingError = "Screen recording not available"
+            return
+        }
+
+        screenRecorder.startRecording { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    recordingError = error.localizedDescription
+                } else {
+                    isRecording = true
+                }
+            }
+        }
+    }
+
+    private func stopRecording() {
+        let tempURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent("QIFLiDAR-\(Int(Date().timeIntervalSince1970)).mp4")
+
+        screenRecorder.stopRecording(withOutput: tempURL) { error in
+            DispatchQueue.main.async {
+                isRecording = false
+                if let error = error {
+                    recordingError = error.localizedDescription
+                    return
+                }
+                // Auto-save to Photos
+                PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
+                    guard status == .authorized else {
+                        DispatchQueue.main.async {
+                            recordingError = "Photos access denied"
+                        }
+                        return
+                    }
+                    PHPhotoLibrary.shared().performChanges {
+                        PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: tempURL)
+                    } completionHandler: { success, error in
+                        // Clean up temp file
+                        try? FileManager.default.removeItem(at: tempURL)
+                        if !success {
+                            DispatchQueue.main.async {
+                                recordingError = error?.localizedDescription ?? "Save failed"
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
