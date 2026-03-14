@@ -487,15 +487,15 @@ const essentialPosts = allPosts
         <div class="glass rounded-xl p-6 relative overflow-hidden">
           <div class="absolute top-0 left-0 w-1 h-full" style="background: #06b6d4;"></div>
           <p class="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style="color: #06b6d4;">Ethics of Neuroscience</p>
-          <p class="text-sm font-semibold mb-2">Defines the rules</p>
-          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">What ethical principles should govern brain research and neural devices? Consent, privacy, cognitive liberty, and the rights of people using BCIs.</p>
-          <p class="text-[10px] text-[var(--color-text-faint)] mt-3 font-semibold">BCI security governance lives here.</p>
+          <p class="text-sm font-semibold mb-2">Defines what a BCI must never do</p>
+          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">When can a device alter neural activity without explicit consent? Who owns the data a BCI reads from your cortex? Can an employer require a neural interface? This branch produces the consent models, data sovereignty rules, and access policies that governance enforces.</p>
+          <p class="text-[10px] text-[var(--color-text-faint)] mt-3 font-semibold">Ienca &amp; Andorno (2017), Yuste et al. (2017), Chile Constitution Art. 19 &sect;25.</p>
         </div>
         <div class="glass rounded-xl p-6 relative overflow-hidden">
           <div class="absolute top-0 left-0 w-1 h-full" style="background: #8b5cf6;"></div>
           <p class="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style="color: #8b5cf6;">Neuroscience of Ethics</p>
-          <p class="text-sm font-semibold mb-2">Informs the design</p>
-          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">What can brain science tell us about moral reasoning? How neural processes produce ethical judgments shapes the constraints we build into the framework.</p>
+          <p class="text-sm font-semibold mb-2">Defines what a framework must protect</p>
+          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">The prefrontal cortex mediates moral reasoning. The insula drives empathy. The amygdala calibrates threat response. If a BCI can modulate these structures, it can alter a person's ethical judgment itself. This branch tells us which neural pathways require the highest protection tier.</p>
           <p class="text-[10px] text-[var(--color-text-faint)] mt-3 font-semibold">Same name, fundamentally different question.</p>
         </div>
       </div>
@@ -514,14 +514,14 @@ const essentialPosts = allPosts
           { name: 'Psychological Continuity', count: 28, color: '#8b5cf6' },
           { name: 'Equal Access', count: 0, color: '#10b981' },
         ].map((right) => (
-          <div class="glass rounded-xl p-4 text-center">
+          <a href="/research/neuroethics-landscape/" class="glass rounded-xl p-4 text-center card-hover">
             <p class="text-2xl font-bold mb-1" style={`color: ${right.color};`}>{right.count}</p>
             <p class="text-xs font-semibold text-[var(--color-text-primary)] mb-1">{right.name}</p>
             <p class="text-[10px] text-[var(--color-text-faint)]">techniques that could violate</p>
-          </div>
+          </a>
         ))}
       </div>
-      <div class="text-center mt-8"><a href="/research/neuroethics-landscape/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">Explore neurorights mapping &rarr;</a></div>
+      <div class="text-center mt-8"><a href="/research/neuroethics-landscape/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">Full neuroethics landscape, scholarship survey, and rights mapping &rarr;</a></div>
     </div>
   </section>
 
@@ -597,10 +597,10 @@ const essentialPosts = allPosts
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">How a security engineer found a neuroscience problem</h2>
       <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed">
         <p>
-          In 2021, COVID collided with PTSD from a traumatic event years earlier. My cognition fragmented in specific, measurable ways: memory consolidation disrupted, threat detection hyperactivated, self-model corrupted. As a security engineer, I recognized the pattern. <strong class="text-[var(--color-text-primary)]">These were the same failure modes I'd expect from a targeted attack on a brain-computer interface</strong> — except no device was involved.
+          I was studying a diagram of the thalamus — the brain's sensory relay — when I recognized the architecture. Every signal entering the cortex passes through this one structure. Compromise it, and you control what a person perceives. I had built that exact chokepoint in network security: <strong class="text-[var(--color-text-primary)]">a SIEM correlation engine. All signals in, one classification out.</strong> That was not a metaphor. That was a shared architecture with no security framework on the biological side.
         </p>
         <p>
-          The "attacker" was endogenous: inflammation and neuroplasticity changes, operating on the same neural substrate that BCI devices read and write. If biology can produce these failure modes naturally, <strong class="text-[var(--color-text-primary)]">what happens when we connect programmable devices to the same pathways?</strong>
+          Months of personal experience with neurological disruption — COVID compounding PTSD — had already shown me what those failure modes look like from the inside. <strong class="text-[var(--color-text-primary)]">If biology can produce these outcomes without a device, what happens when we connect programmable hardware to the same pathways?</strong>
         </p>
       </div>
     </div>
@@ -617,6 +617,9 @@ const essentialPosts = allPosts
         </p>
         <p>
           This dual-use reality means BCI security is not an engineering problem. <strong class="text-[var(--color-text-primary)]">It is a patient rights problem.</strong> Every proposed neurorights framework — cognitive liberty, mental privacy, psychological continuity — can be violated through technical pathways that already exist. The question is whether we build governance before the harm, or after.
+        </p>
+        <p>
+          Right now, BCI governance is like writing fire codes without building fire hydrants or fire stations. The neuroethics community has defined the rights. Legislators are passing laws. But <strong class="text-[var(--color-text-primary)]">nobody has built the technical infrastructure to enforce any of it.</strong>
         </p>
         <p>
           <strong class="text-[var(--color-text-primary)]">IEEE's own BMI standards roadmap identifies BCI-specific security standards as an open standardization gap.</strong> This atlas is an attempt to fill it. Open source. Open data. Ready for peer review.
@@ -657,8 +660,11 @@ const essentialPosts = allPosts
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">
         The research is open. Start anywhere.
       </h2>
+      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto mb-4">
+        Security engineers, neuroscientists, patients, policymakers — the framework is open and ready for your expertise.
+      </p>
       <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto mb-8">
-        No login, no paywall. Read the whitepaper, explore the threat atlas, or browse the governance framework. Everything is published for researchers, clinicians, and policymakers to evaluate, critique, and build upon.
+        No login, no paywall. Read the whitepaper, explore the threat atlas, or browse the governance framework. Everything is published to evaluate, critique, and build upon.
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
