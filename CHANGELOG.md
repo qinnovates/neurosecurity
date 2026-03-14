@@ -4,7 +4,14 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: 55d4b56d468af8d143f90ea430222513e8d6756e -->
+<!-- changelog-marker: ee7c67f99d5e0d139c2c410d3cb63e8d7d3e4cf9 -->
+
+## 2026-03-14
+
+### Added
+- Add Tools section to README — link Conductor, NeuroSIM, macshield ([ee7c67f](https://github.com/qinnovates/qinnovate/commit/ee7c67f))
+- TARA domain taxonomy, dual lens system, UI component library, and site overhaul ([d988ead](https://github.com/qinnovates/qinnovate/commit/d988ead))
+
 
 ## 2026-03-13
 
