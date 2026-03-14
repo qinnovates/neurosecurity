@@ -6,6 +6,7 @@
 import { useState, useMemo } from 'react';
 import type { ThreatVector, Severity } from '../../lib/threat-data';
 import { SEVERITY_COLORS } from '../../lib/threat-data';
+import { useLens } from '../hooks/useLens';
 
 type DeviceType = 'DBS System' | 'Motor BCI' | 'EEG Headset' | 'Cochlear Implant' | 'Retinal Prosthesis' | 'VNS' | 'Responsive Neurostimulator';
 
@@ -37,6 +38,8 @@ const SEVERITIES: Severity[] = ['critical', 'high', 'medium', 'low'];
 interface Props { techniques: ThreatVector[] }
 
 export default function DeviceFilter({ techniques }: Props) {
+  const { lens } = useLens();
+  const isClinical = lens === 'clinical';
   const [device, setDevice] = useState<DeviceType | ''>('');
 
   const filtered = useMemo(() => {
@@ -131,7 +134,7 @@ export default function DeviceFilter({ techniques }: Props) {
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8125rem' }}>
               <thead>
                 <tr>
-                  {['ID', 'Name', 'Severity', 'NISS', 'Bands'].map(h => (
+                  {['ID', isClinical ? 'Therapeutic Analog' : 'Technique', 'Severity', 'NISS', 'Bands'].map(h => (
                     <th key={h} style={{
                       padding: '0.5rem 0.625rem', textAlign: 'left', fontWeight: 700,
                       fontSize: '0.625rem', textTransform: 'uppercase', letterSpacing: '0.05em',
@@ -151,7 +154,7 @@ export default function DeviceFilter({ techniques }: Props) {
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)'; }}
                   >
                     <td style={{ padding: '0.375rem 0.625rem', borderBottom: '1px solid rgba(255,255,255,0.04)', fontFamily: 'var(--font-mono, monospace)', fontSize: '0.75rem', whiteSpace: 'nowrap' }}>{t.id}</td>
-                    <td style={{ padding: '0.375rem 0.625rem', borderBottom: '1px solid rgba(255,255,255,0.04)', fontWeight: 500, maxWidth: '18rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t.name}</td>
+                    <td style={{ padding: '0.375rem 0.625rem', borderBottom: '1px solid rgba(255,255,255,0.04)', fontWeight: 500, maxWidth: '18rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{isClinical ? t.nameClinical : t.name}</td>
                     <td style={{ padding: '0.375rem 0.625rem', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
                       <span style={{
                         display: 'inline-block', padding: '0.1rem 0.4rem', borderRadius: '9999px',

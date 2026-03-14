@@ -18,6 +18,9 @@ def main():
     list_parser.add_argument("--band", help="Filter by neural band (e.g., N1)")
     list_parser.add_argument("--tier", help="Filter by physics feasibility tier (0-3, or X)")
     list_parser.add_argument("--severity", help="Filter by severity (critical, high, medium, low)")
+    list_parser.add_argument("--domain", help="Filter by TARA domain (e.g., VIS, AUD, SOM)")
+    list_parser.add_argument("--mode", help="Filter by TARA mode (R=Recon, M=Manipulation, D=Disruption)")
+    list_parser.add_argument("--enriched-only", action="store_true", help="Exclude skeleton/unenriched techniques")
 
     # Info Command
     info_parser = subparsers.add_parser("info", help="Get detailed info for a technique")
@@ -26,6 +29,7 @@ def main():
     # STIX Command
     stix_parser = subparsers.add_parser("stix", help="Export techniques to STIX 2.1 JSON")
     stix_parser.add_argument("--output", help="Output file path", default="stix_bundle.json")
+    stix_parser.add_argument("--include-pending", action="store_true", help="Include unenriched/skeleton techniques")
 
     # Stats Command
     subparsers.add_parser("stats", help="Show technique statistics by tier, severity, and status")
@@ -56,20 +60,35 @@ def main():
         elif args.band:
             techniques = loader.list_techniques(band=args.band)
             title_extra = f" (Band: {args.band})"
+        elif args.domain:
+            techniques = loader.list_by_domain(args.domain)
+            title_extra = f" (Domain: {args.domain})"
+        elif args.mode:
+            techniques = loader.list_by_mode(args.mode)
+            title_extra = f" (Mode: {args.mode})"
         else:
             techniques = loader.list_techniques()
             title_extra = ""
+
+        # Apply enriched-only filter on top of other filters
+        if args.enriched_only:
+            techniques = [t for t in techniques if not t.tara_enrichment_pending]
+            title_extra += " [enriched only]"
 
         table = Table(title=f"TARA Techniques{title_extra}")
         table.add_column("ID", style="cyan")
         table.add_column("Name", style="green")
         table.add_column("Severity", style="bold")
         table.add_column("Bands")
+        table.add_column("Domain")
+        table.add_column("Mode")
         table.add_column("Tier")
 
         for t in techniques:
             tier_str = str(t.physics_feasibility.tier) if t.physics_feasibility else "-"
-            table.add_row(t.id, t.attack, t.severity, t.bands, tier_str)
+            domain_str = t.tara_domain_primary or "-"
+            mode_str = t.tara_mode or "-"
+            table.add_row(t.id, t.attack, t.severity, t.bands, domain_str, mode_str, tier_str)
 
         console.print(table)
 
@@ -91,6 +110,23 @@ def main():
             panel_content += f"Timeline: {pf.timeline}\n"
             if pf.gate_reason:
                 panel_content += f"Gate: {pf.gate_reason}\n"
+
+        # v2 taxonomy fields
+        if t.tara_domain_primary or t.tara_mode:
+            panel_content += f"\n[bold cyan]v2 Taxonomy:[/bold cyan]\n"
+            if t.tara_domain_primary:
+                domains = [t.tara_domain_primary] + (t.tara_domain_secondary or [])
+                panel_content += f"Domain: {', '.join(domains)}\n"
+            if t.tara_mode:
+                mode_labels = {"R": "Reconnaissance", "M": "Manipulation", "D": "Disruption"}
+                panel_content += f"Mode: {t.tara_mode} ({mode_labels.get(t.tara_mode, t.tara_mode)})\n"
+            if t.tara_drift:
+                drift_labels = {"A": "Acute", "C": "Cumulative", "L": "Latent", "P": "Persistent"}
+                panel_content += f"Drift: {t.tara_drift} ({drift_labels.get(t.tara_drift, t.tara_drift)})\n"
+            if t.biological_target is not None:
+                panel_content += f"Biological Target: {'Yes' if t.biological_target else 'No'}\n"
+            if t.tara_enrichment_pending:
+                panel_content += f"[yellow]Enrichment Pending[/yellow]\n"
 
         if t.tara:
             panel_content += f"\n[bold yellow]TARA Enrichment:[/bold yellow]\n"
@@ -119,10 +155,12 @@ def main():
 
     elif args.command == "stix":
         techniques = loader.list_techniques()
-        bundle = StixExporter.to_bundle(techniques)
+        include_pending = getattr(args, 'include_pending', False)
+        bundle = StixExporter.to_bundle(techniques, include_pending=include_pending)
+        exported_count = len(bundle["objects"]) - 1  # subtract identity object
+        console.print(f"[green]Successfully exported {exported_count} techniques to {args.output}[/green]")
         with open(args.output, 'w') as f:
             json.dump(bundle, f, indent=2)
-        console.print(f"[green]Successfully exported {len(techniques)} techniques to {args.output}[/green]")
 
     elif args.command == "stats":
         stats = loader.get_statistics()

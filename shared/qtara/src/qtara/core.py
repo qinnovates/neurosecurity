@@ -54,6 +54,26 @@ class TaraLoader:
             if t.physics_feasibility and t.physics_feasibility.tier == tier
         ]
 
+    def list_by_domain(self, domain: str) -> List[ThreatTechnique]:
+        """Filter techniques by TARA domain (e.g., VIS, AUD, SOM)."""
+        if not self._registry:
+            self.load()
+        domain_upper = domain.upper()
+        return [
+            t for t in self._registry.techniques
+            if t.tara_domain_primary and t.tara_domain_primary.upper() == domain_upper
+        ]
+
+    def list_by_mode(self, mode: str) -> List[ThreatTechnique]:
+        """Filter techniques by TARA mode (R=Reconnaissance, M=Manipulation, D=Disruption)."""
+        if not self._registry:
+            self.load()
+        mode_upper = mode.upper()
+        return [
+            t for t in self._registry.techniques
+            if t.tara_mode and t.tara_mode.upper() == mode_upper
+        ]
+
     def list_by_severity(self, severity: str) -> List[ThreatTechnique]:
         if not self._registry:
             self.load()

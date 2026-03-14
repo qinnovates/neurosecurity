@@ -156,7 +156,12 @@ const hasGovernance = nr || reg;
       </span>
       <DriftBadge client:load drift={threat.tara_drift ?? null} driftWindow={threat.tara_drift_window ?? null} />
     </div>
-    <h2 class="text-2xl font-bold text-[var(--color-text-primary)] mb-4">{threat.name}</h2>
+    <h2
+      class="text-2xl font-bold text-[var(--color-text-primary)] mb-4"
+      id="technique-name"
+      data-name-security={threat.name}
+      data-name-clinical={threat.nameClinical}
+    >{threat.name}</h2>
 
     <EvidenceTierBanner
       client:load
@@ -504,4 +509,26 @@ const hasGovernance = nr || reg;
 
     </div><!-- /content -->
   </div><!-- /container -->
+
+  <script>
+    import { getLens, LENS_EVENT, type Lens } from '../../../lib/lens';
+
+    function applyLens(lens: Lens) {
+      const el = document.getElementById('technique-name');
+      if (!el) return;
+      const name = lens === 'clinical'
+        ? el.dataset.nameClinical
+        : el.dataset.nameSecurity;
+      if (name) el.textContent = name;
+    }
+
+    // Apply on load
+    applyLens(getLens());
+
+    // Listen for lens changes
+    window.addEventListener(LENS_EVENT, (e: Event) => {
+      const detail = (e as CustomEvent<{ lens: Lens }>).detail;
+      applyLens(detail.lens);
+    });
+  </script>
 </PageLayout>

@@ -6,6 +6,7 @@
 import { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import type { ThreatVector, Severity, Status, CategoryId } from '../../lib/threat-data';
 import { SEVERITY_COLORS, STATUS_COLORS, THREAT_CATEGORIES } from '../../lib/threat-data';
+import { useLens } from '../hooks/useLens';
 
 // ═══ Band groupings ═══
 
@@ -97,6 +98,8 @@ function bandColor(band: string) {
 interface Props { techniques: ThreatVector[] }
 
 export default function TaraExplorer({ techniques }: Props) {
+  const { lens } = useLens();
+  const isClinical = lens === 'clinical';
   const [searchTerm, setSearchTerm] = useState('');
   const [selSeverity, setSelSeverity] = useState<Set<Severity>>(new Set());
   const [selStatus, setSelStatus] = useState<Set<Status>>(new Set());
@@ -134,7 +137,8 @@ export default function TaraExplorer({ techniques }: Props) {
     const q = debouncedSearch.toLowerCase();
     return techniques.filter(t => {
       if (q && !t.name.toLowerCase().includes(q) && !t.id.toLowerCase().includes(q)
-        && !t.tactic.toLowerCase().includes(q) && !t.description.toLowerCase().includes(q)) return false;
+        && !t.tactic.toLowerCase().includes(q) && !t.description.toLowerCase().includes(q)
+        && !t.nameClinical.toLowerCase().includes(q)) return false;
       if (selSeverity.size > 0 && !selSeverity.has(t.severity)) return false;
       if (selStatus.size > 0 && !selStatus.has(t.status)) return false;
       if (selBands.size > 0 && !t.bands.some(b => selBands.has(b))) return false;
@@ -219,7 +223,7 @@ export default function TaraExplorer({ techniques }: Props) {
           <thead>
             <tr>
               <th style={S.th}>ID</th>
-              <th style={S.th}>Name</th>
+              <th style={S.th}>{isClinical ? 'Therapeutic Analog' : 'Technique'}</th>
               <th style={S.th}>Severity</th>
               <th style={S.th}>Status</th>
               <th style={S.th}>NISS</th>
@@ -236,7 +240,7 @@ export default function TaraExplorer({ techniques }: Props) {
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)'; }}
               >
                 <td style={{ ...S.td, ...S.mono }}>{t.id}</td>
-                <td style={{ ...S.td, fontWeight: 500 }}>{t.name}</td>
+                <td style={{ ...S.td, fontWeight: 500 }}>{isClinical ? t.nameClinical : t.name}</td>
                 <td style={S.td}>
                   <span style={{ ...S.badge, background: SEVERITY_COLORS[t.severity]?.bg ?? '#333', color: SEVERITY_COLORS[t.severity]?.text ?? '#aaa' }}>
                     {t.severity}

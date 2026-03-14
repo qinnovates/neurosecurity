@@ -15,6 +15,7 @@
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails, Data Lake Sprint
 | Entry | Topic | Link |
 |-------|-------|------|
+| 97 | TARA expansion to 135 techniques: 26 new skeleton techniques (T0110-T0135) filling domain×mode gaps, v2 taxonomy fields, SDK v0.3.0, dual-lens wiring | [Entry 97](#entry-97-tara-135-expansion) |
 | 96 | 6-expert cross-domain review: Mode F (failure), Operational Readiness tiers, evidence prominence, clinical gaps | [Entry 96](#entry-96-six-expert-review) |
 | 95 | Drift metric: proposed for NISS, corrected to TARA — describes technique temporal behavior, not patient impact | [Entry 95](#entry-95-niss-cognitive-drift) |
 | 94 | Cross-AI clinical review: clinicians think indication→target→parameter→outcome, not domain→mode | [Entry 94](#entry-94-clinical-review) |
@@ -387,6 +388,39 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 - **Model:** Claude Opus 4.6
 - **Role:** Co-derivation (architectural mapping), literature synthesis (Kellmeyer integration)
 - **Human-Decided:** Blockchain = provenance only; neural data never on-chain; NSP as primary integration point; connection to NFT experience
+
+---
+
+## Entry 97: TARA Expansion to 135 Techniques — Domain×Mode Gap Fill, SDK v0.3.0, Dual-Lens Wiring {#entry-97-tara-135-expansion}
+
+**Date:** 2026-03-14, ~06:00
+**Classification:** VERIFIED (implemented and deployed)
+**AI Systems:** Claude Opus 4.6 (parallel subagents for taxonomy migration, enrichment, SDK sync, UI wiring)
+**Connected entries:** [Entry 93](#entry-93-tara-domain-taxonomy), [Entry 95](#entry-95-niss-cognitive-drift), [Entry 96](#entry-96-six-expert-review)
+
+### Context
+
+Entry 93 proposed the v2 domain taxonomy (11 biological domains × 3 interaction modes). Entry 96's expert review identified empty cells in the domain×mode matrix. This entry fills those gaps.
+
+### What happened
+
+1. **26 new techniques (T0110-T0135)** added as skeleton entries to fill domain×mode gaps identified in the matrix analysis. Each skeleton has: ID, attack name, tactic, bands, severity, domain, mode, and drift classification. Total TARA catalog: 109 → 135 techniques.
+
+2. **v2 taxonomy fields backfilled** on all 103 previously enriched techniques: `tara_domain_primary`, `tara_mode`, `tara_drift`, `biological_target`, `evidence_tier`, `operational_readiness`. Migration script: `shared/scripts/backfill-taxonomy.py`.
+
+3. **Skeleton filtering** — unenriched techniques (with `tara_enrichment_pending: true`) are now excluded from Navigator JSON and STIX 2.1 exports. An `enriched` boolean was added to the ThreatVector TypeScript interface. This prevents publishing unvalidated data while keeping skeletons in the registrar for tracking.
+
+4. **Python SDK bumped to v0.3.0** — 12 new Pydantic fields, STIX export filters skeletons by default, CLI gains `--domain`, `--mode`, `--enriched-only` flags, core adds `list_by_domain()` and `list_by_mode()` methods. All 6 tests passing.
+
+5. **Dual-lens wiring** — security/clinical lens toggle now connected to TaraExplorer (search + table), DomainMatrix (tooltips + drawer), DeviceFilter (table rows), and technique detail pages (dynamic h2 swap via CustomEvent). When lens="clinical", technique names swap to therapeutic analogs site-wide.
+
+6. **8-agent Quorum post-mortem** identified top 3 improvements: skeleton credibility (fixed via filtering), conversion mechanism (email capture added then removed — Kevin decided against it; BibTeX cite button kept), orphan integration (NissRadarChart wired into detail pages, /atlas/chains/ page created).
+
+### Decisions
+
+- **Kevin:** No email capture on the site. Removed Formspree form.
+- **Kevin:** QIF acronym expanded once on homepage ("Quantified Interconnection Framework") despite the "never expand" rule — Quorum's Naive User agent identified it as the #1 comprehension barrier.
+- **Skeleton enrichment deferred** to a dedicated enrichment pass rather than shipping with placeholder clinical data. Better to have 103 fully enriched + 32 tracked skeletons than 135 with inconsistent quality.
 
 ---
 
