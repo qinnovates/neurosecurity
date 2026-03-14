@@ -96,6 +96,8 @@ export default function BciVisionToggle() {
       {/* Toggle Button */}
       <button
         onClick={toggle}
+        role="switch"
+        aria-checked={isOn}
         className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-4 py-2.5 rounded-full text-xs font-medium tracking-wide transition-all duration-300"
         style={{
           background: isOn
@@ -261,6 +263,7 @@ export default function BciVisionToggle() {
                     value={passphrase}
                     onChange={(e) => setPassphrase(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter') handleCtfSubmit(); }}
+                    aria-label="Enter passphrase"
                     className="flex-1 bg-transparent border-b outline-none px-1 py-0.5"
                     style={{
                       borderColor: 'rgba(0,255,0,0.3)',
