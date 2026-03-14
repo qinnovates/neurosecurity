@@ -87,8 +87,8 @@ class ThreatTechnique(BaseModel):
     band_ids: List[str] = Field(default_factory=list)
     coupling: Optional[str] = None
     access: Optional[str] = None
-    classical: Optional[str] = None
-    quantum: Optional[str] = None
+    classical: Optional[Union[str, bool]] = None
+    quantum: Optional[Union[str, bool]] = None
     sources: List[str] = []
     status: str
     severity: str
@@ -104,6 +104,20 @@ class ThreatTechnique(BaseModel):
     neurorights: Optional[NeurorightsMapped] = None
     regulatory: Optional[RegulatoryData] = None
     cross_references: Optional[CrossReferences] = None
+
+    # v2 taxonomy fields
+    tara_domain_primary: Optional[str] = None
+    tara_domain_secondary: List[str] = Field(default_factory=list)
+    tara_mode: Optional[str] = None  # R=Reconnaissance, M=Manipulation, D=Disruption
+    tara_drift: Optional[str] = None  # A=Acute, C=Cumulative, L=Latent, P=Persistent
+    tara_drift_window: Optional[str] = None
+    tara_direction: Optional[str] = None
+    tara_alias: Optional[str] = None
+    use_context_tags: List[str] = Field(default_factory=list)
+    biological_target: Optional[bool] = None
+    evidence_tier: Optional[str] = None  # e.g. "peer_reviewed", "demonstrated_lab"
+    operational_readiness: Optional[str] = None  # e.g. "weaponized", "proof_of_concept"
+    tara_enrichment_pending: bool = False
 
     @property
     def canonical_name(self) -> str:

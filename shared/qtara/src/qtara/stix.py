@@ -4,7 +4,18 @@ from .models import ThreatTechnique
 
 class StixExporter:
     @staticmethod
-    def to_bundle(techniques: List[ThreatTechnique]) -> dict:
+    def to_bundle(techniques: List[ThreatTechnique], include_pending: bool = False) -> dict:
+        """Generate a STIX 2.1 bundle from TARA techniques.
+
+        Args:
+            techniques: List of ThreatTechnique objects to export.
+            include_pending: If False (default), techniques with
+                tara_enrichment_pending=True are excluded from the bundle.
+        """
+        # Filter out skeleton/unenriched techniques unless explicitly included
+        if not include_pending:
+            techniques = [t for t in techniques if not t.tara_enrichment_pending]
+
         stix_objects = []
 
         # 1. Identity Object (Qinnovate)

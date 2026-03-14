@@ -178,7 +178,7 @@ export default function DomainMatrix({ techniques }: Props) {
                         <ul className="space-y-0.5 max-h-32 overflow-y-auto">
                           {ts.slice(0, 8).map(t => (
                             <li key={t.id} className="truncate" style={{ color: css.sec }}>
-                              <span style={{ color: SEVERITY_COLORS[t.severity].text }}>{'>'}</span> {t.name}
+                              <span style={{ color: SEVERITY_COLORS[t.severity].text }}>{'>'}</span> {lens === 'clinical' ? t.nameClinical : t.name}
                             </li>
                           ))}
                           {n > 8 && <li style={{ color: css.muted }}>+{n - 8} more</li>}
@@ -237,7 +237,7 @@ export default function DomainMatrix({ techniques }: Props) {
                   <div key={t.id} className="flex items-center gap-2 px-2 py-1.5 rounded text-xs"
                     style={{ background: SEVERITY_COLORS[t.severity].bg, border: `1px solid ${SEVERITY_COLORS[t.severity].border}` }}>
                     <span className="font-mono shrink-0" style={{ color: SEVERITY_COLORS[t.severity].text }}>{t.id}</span>
-                    <span className="truncate" style={{ color: 'var(--color-text-primary, #e2e8f0)' }}>{t.name}</span>
+                    <span className="truncate" style={{ color: 'var(--color-text-primary, #e2e8f0)' }}>{lens === 'clinical' ? t.nameClinical : t.name}</span>
                     <span className="ml-auto shrink-0 font-mono text-[10px]" style={{ color: SEVERITY_COLORS[t.severity].text }}>
                       {t.niss.score.toFixed(1)}
                     </span>
