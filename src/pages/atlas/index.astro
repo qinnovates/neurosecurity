@@ -75,6 +75,14 @@ const subPages = [
     stat: '11 domains',
     color: '#ec4899',
   },
+  {
+    title: 'Device Filter',
+    description: 'Filter techniques by your device type.',
+    href: '/atlas/device-filter/',
+    icon: 'shield',
+    stat: '7 devices',
+    color: '#06b6d4',
+  },
 ];
 
 const iconSvg: Record<string, string> = {
@@ -141,7 +149,7 @@ const iconSvg: Record<string, string> = {
   </div>
 
   <!-- Sub-Page Navigation Cards -->
-  <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-10">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
     {subPages.map((page) => (
       <a
         href={page.href}

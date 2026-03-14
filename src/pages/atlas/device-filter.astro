@@ -1,0 +1,8 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import DeviceFilter from '../../components/atlas/DeviceFilter';
+import { THREAT_VECTORS } from '../../lib/threat-data';
+---
+<PageLayout title="Device Threat Profile | Qinnovate" breadcrumbs={[{label:'Atlas',href:'/atlas/'},{label:'Device Filter'}]}>
+  <DeviceFilter client:load techniques={THREAT_VECTORS} />
+</PageLayout>

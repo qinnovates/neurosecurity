@@ -22,7 +22,7 @@ import json
 import sys
 from pathlib import Path
 
-REGISTRAR = Path(__file__).parent.parent / "shared" / "qtara-registrar.json"
+REGISTRAR = Path(__file__).parent.parent / "qtara-registrar.json"
 
 # --- Mapping Rules ---
 
