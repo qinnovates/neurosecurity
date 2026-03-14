@@ -32,6 +32,21 @@
   --spacing-section: 6rem;
   --spacing-card: 1.5rem;
 
+  /* Clinical Domain Colors (therapeutic taxonomy) */
+  --color-clinical-movement: #22c55e;  /* green-500 — Movement & Motor */
+  --color-clinical-seizure: #ef4444;   /* red-500 — Seizure & Epilepsy */
+  --color-clinical-mood: #f59e0b;      /* amber-500 — Mood & Affective */
+  --color-clinical-cognitive: #8b5cf6; /* violet-500 — Cognitive & Neurodev */
+  --color-clinical-pain: #06b6d4;      /* cyan-500 — Pain & Somatosensory */
+  --color-clinical-sleep: #3b82f6;     /* blue-500 — Sleep & Circadian */
+  --color-clinical-comms: #10b981;     /* emerald-500 — Communication & Rehab */
+
+  /* Severity Colors (shared across security + clinical views) */
+  --color-severity-critical: #ef4444;  /* red-500 */
+  --color-severity-high: #f59e0b;      /* amber-500 */
+  --color-severity-medium: #eab308;    /* yellow-500 */
+  --color-severity-low: #94a3b8;       /* slate-400 */
+
   /* TARA Domain Colors (light mode — WCAG AA on white backgrounds) */
   --color-domain-vis: #7c3aed;    /* violet-600 — Vision */
   --color-domain-aud: #9333ea;    /* purple-600 — Audition */

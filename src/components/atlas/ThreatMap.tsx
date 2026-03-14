@@ -23,6 +23,8 @@ const KILLCHAIN_ORDER = [
   'QIF-D.HV', 'QIF-P.DS', 'QIF-N.MD', 'QIF-C.EX', 'QIF-E.RD', 'QIF-M.SV',
 ];
 
+// Matches CSS tokens: --color-severity-critical, --color-severity-high, --color-severity-medium, --color-severity-low
+// TODO: migrate to CSS custom properties via getComputedStyle or data attributes when runtime access is feasible
 const SEVERITY_COLORS: Record<string, string> = {
   critical: '#ef4444',
   high: '#f59e0b',
@@ -30,6 +32,7 @@ const SEVERITY_COLORS: Record<string, string> = {
   low: '#94a3b8',
 };
 
+// TODO: add --color-zone-neural, --color-zone-interface, --color-zone-synthetic tokens to global.css
 const ZONE_COLORS: Record<string, string> = {
   neural: '#22c55e',
   interface: '#f59e0b',

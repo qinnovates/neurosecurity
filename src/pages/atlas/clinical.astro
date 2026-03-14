@@ -257,6 +257,12 @@ const evidenceColor = (level: string) => {
 };
 
 // ═══ CLINICAL DOMAIN CARDS DATA ═══
+// TODO: migrate to var(--color-clinical-*) CSS custom properties from global.css
+// These run in Astro frontmatter (build time) so they can't reference CSS vars directly.
+// To migrate: use data-domain attributes on elements + CSS selectors instead of inline styles,
+// or create a shared color constants module that generates both the CSS tokens and these values.
+// Canonical tokens: --color-clinical-movement, --color-clinical-seizure, --color-clinical-mood,
+// --color-clinical-cognitive, --color-clinical-pain, --color-clinical-sleep, --color-clinical-comms
 const DOMAIN_META: Record<string, { color: string; description: string }> = {
   movement:  { color: '#22c55e', description: "Parkinson's, tremor, stroke, paralysis, gait disorders" },
   seizure:   { color: '#ef4444', description: 'Epilepsy, seizure management, status epilepticus' },
