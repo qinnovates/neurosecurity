@@ -39,11 +39,10 @@ const tacticColors: Record<string, string> = {
   breadcrumbs={[{ label: 'Whitepaper' }]}
   wide={true}
 >
-  <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
-    <!-- Sidebar -->
+  <div class="lg:grid lg:grid-cols-[220px_1fr_200px] lg:gap-8 xl:gap-12">
+    <!-- Left sidebar — Table of Contents -->
     <aside class="hidden lg:block">
       <div class="sticky top-24">
-        <WhitepaperVersionSelector currentVersion="v8.0" />
         <nav class="space-y-1" aria-label="Table of contents">
           <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">Table of Contents</p>
           {[
@@ -1902,5 +1901,12 @@ const tacticColors: Record<string, string> = {
       </footer>
 
     </div>
+
+    <!-- Right sidebar — Version Archives -->
+    <aside class="hidden lg:block">
+      <div class="sticky top-24">
+        <WhitepaperVersionSelector currentVersion="v8.0" />
+      </div>
+    </aside>
   </div>
 </PageLayout>
