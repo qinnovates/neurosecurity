@@ -1,0 +1,40 @@
+name: QIFLiDAR
+options:
+  bundleIdPrefix: com.qinnovate
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "16.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    TARGETED_DEVICE_FAMILY: "1,2"
+    INFOPLIST_FILE: QIFLiDAR/Resources/Info.plist
+    DEVELOPMENT_TEAM: ""
+
+targets:
+  QIFLiDAR:
+    type: application
+    platform: iOS
+    sources:
+      - QIFLiDAR
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.qinnovate.qif-lidar
+        INFOPLIST_FILE: QIFLiDAR/Resources/Info.plist
+    info:
+      path: QIFLiDAR/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: QIF LiDAR
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        NSCameraUsageDescription: "QIF LiDAR uses the camera and LiDAR sensor to capture spatial depth data for research purposes."
+        UIRequiredDeviceCapabilities:
+          - arkit
+          - lidar

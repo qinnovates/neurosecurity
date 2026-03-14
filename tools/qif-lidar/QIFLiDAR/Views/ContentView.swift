@@ -1,0 +1,297 @@
+import SwiftUI
+
+struct ContentView: View {
+    @StateObject private var sessionManager = ARSessionManager()
+    @StateObject private var guideDogDetector = GuideDogDetector()
+    @State private var displayMode: DisplayMode = .rawDepth
+    @State private var isRecording = false
+    @State private var ocrEnabled = false
+    @State private var segmentationMask: [UInt8]? = nil
+
+    private let segmentationService = SegmentationService()
+    private let exporter = SessionExporter()
+
+    var body: some View {
+        ZStack {
+            // LiDAR renderer (full screen)
+            DepthRendererView(
+                depthMap: sessionManager.depthMap,
+                confidenceMap: sessionManager.confidenceMap,
+                cameraFrame: sessionManager.cameraFrame,
+                displayMode: displayMode,
+                segmentationMask: segmentationMask,
+                guideDogBBox: guideDogDetector.isDetected ? guideDogDetector.boundingBox : nil
+            )
+            .ignoresSafeArea()
+
+            // Controls overlay
+            VStack {
+                // Top bar — mode selector
+                HStack {
+                    Picker("Mode", selection: $displayMode) {
+                        ForEach(DisplayMode.allCases) { mode in
+                            Text(mode.rawValue).tag(mode)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .padding(.horizontal)
+                }
+                .padding(.top, 8)
+                .background(.ultraThinMaterial)
+
+                Spacer()
+
+                // Guide dog direction indicator (when in guide dog mode)
+                if displayMode == .guideDog && guideDogDetector.isDetected {
+                    GuideDogDirectionView(direction: guideDogDetector.direction)
+                        .padding(.bottom, 20)
+                }
+
+                // Bottom bar
+                VStack(spacing: 8) {
+                    // Stats bar
+                    HStack(spacing: 16) {
+                        StatBadge(label: "FPS", value: "60")
+                        StatBadge(label: "Frames", value: "\(sessionManager.frameCount)")
+                        StatBadge(label: "Conf", value: confidenceSummary)
+
+                        if displayMode == .guideDog {
+                            StatBadge(
+                                label: "Dog",
+                                value: guideDogDetector.isDetected ?
+                                    String(format: "%.0f%%", guideDogDetector.confidence * 100) : "—",
+                                highlight: guideDogDetector.isDetected
+                            )
+                        }
+
+                        if displayMode == .aiClassification {
+                            StatBadge(label: "AI", value: segmentationMask != nil ? "ON" : "—")
+                        }
+                    }
+                    .font(.caption.monospaced())
+
+                    // Control buttons
+                    HStack(spacing: 24) {
+                        // OCR toggle
+                        Button {
+                            ocrEnabled.toggle()
+                        } label: {
+                            Label("OCR", systemImage: "text.viewfinder")
+                                .font(.caption)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 6)
+                                .background(ocrEnabled ? Color.blue.opacity(0.3) : Color.gray.opacity(0.3))
+                                .clipShape(Capsule())
+                        }
+
+                        // Record button
+                        Button {
+                            isRecording.toggle()
+                        } label: {
+                            ZStack {
+                                Circle()
+                                    .fill(isRecording ? Color.red : Color.white.opacity(0.3))
+                                    .frame(width: 64, height: 64)
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 3)
+                                    .frame(width: 70, height: 70)
+                                if isRecording {
+                                    RoundedRectangle(cornerRadius: 4)
+                                        .fill(Color.white)
+                                        .frame(width: 24, height: 24)
+                                } else {
+                                    Circle()
+                                        .fill(Color.red)
+                                        .frame(width: 54, height: 54)
+                                }
+                            }
+                        }
+
+                        // Export
+                        Button {
+                            exportSession()
+                        } label: {
+                            Label("Export", systemImage: "square.and.arrow.up")
+                                .font(.caption)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 6)
+                                .background(Color.gray.opacity(0.3))
+                                .clipShape(Capsule())
+                        }
+                    }
+                }
+                .padding()
+                .background(.ultraThinMaterial)
+            }
+
+            // Privacy indicator — always visible
+            VStack {
+                HStack {
+                    Spacer()
+                    PrivacyBadge()
+                        .padding(.trailing, 8)
+                        .padding(.top, 60)
+                }
+                Spacer()
+            }
+        }
+        .onAppear {
+            sessionManager.start()
+        }
+        .onDisappear {
+            sessionManager.stop()
+        }
+        .onChange(of: sessionManager.cameraFrame) { _, frame in
+            processFrame(frame)
+        }
+        .preferredColorScheme(.dark)
+    }
+
+    // MARK: - Frame Processing
+
+    private func processFrame(_ frame: CVPixelBuffer?) {
+        guard let frame = frame else { return }
+
+        // Run AI classification if in AI mode
+        if displayMode == .aiClassification {
+            segmentationService.segment(frame) { mask in
+                // Convert MLMultiArray to [UInt8] for renderer
+                if let mask = mask {
+                    var result = [UInt8](repeating: 0, count: mask.count)
+                    for i in 0..<mask.count {
+                        result[i] = UInt8(mask[i].intValue)
+                    }
+                    DispatchQueue.main.async {
+                        self.segmentationMask = result
+                    }
+                }
+            }
+        }
+
+        // Run guide dog detection if in guide dog mode (3-signal: YOLO + re-ID + harness)
+        if displayMode == .guideDog {
+            guideDogDetector.detect(
+                frame,
+                depthMap: sessionManager.depthMap,
+                confidenceMap: sessionManager.confidenceMap
+            )
+        }
+
+        // Export frame data if recording
+        if isRecording {
+            if let depth = sessionManager.depthMap {
+                exporter.exportDepthFrame(depth)
+            }
+            if let conf = sessionManager.confidenceMap {
+                exporter.exportConfidenceFrame(conf, histogram: sessionManager.confidenceHistogram)
+            }
+            if let intrinsics = sessionManager.cameraIntrinsics {
+                exporter.exportIntrinsics(intrinsics)
+            }
+            if let transform = sessionManager.cameraTransform {
+                exporter.exportTransform(transform)
+            }
+            if let imu = sessionManager.latestIMU {
+                exporter.exportIMU(imu)
+            }
+            if let env = sessionManager.latestEnvironment {
+                exporter.exportEnvironment(env)
+            }
+            if displayMode == .guideDog {
+                exporter.exportGuideDogDetection(guideDogDetector.currentDetection())
+            }
+            exporter.advanceFrame()
+        }
+    }
+
+    private func exportSession() {
+        let manifest = PrivacyGuard.generateManifest(
+            startTime: Date().addingTimeInterval(-Double(sessionManager.frameCount) / 60.0),
+            endTime: Date(),
+            frameCount: sessionManager.frameCount,
+            frameRate: 60,
+            modesActive: [displayMode],
+            ocrEnabled: ocrEnabled
+        )
+        exporter.exportManifest(manifest)
+    }
+
+    private var confidenceSummary: String {
+        let h = sessionManager.confidenceHistogram
+        let total = max(h.low + h.medium + h.high, 1)
+        let highPct = (h.high * 100) / total
+        return "\(highPct)%"
+    }
+}
+
+// MARK: - Guide Dog Direction Indicator
+
+struct GuideDogDirectionView: View {
+    let direction: String
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: arrowSystemName)
+                .font(.title)
+                .foregroundStyle(.green)
+                .shadow(color: .green.opacity(0.6), radius: 8)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("GUIDE DOG")
+                    .font(.caption2.bold())
+                    .foregroundStyle(.green.opacity(0.8))
+                Text(direction.uppercased())
+                    .font(.title3.bold())
+                    .foregroundStyle(.green)
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 12)
+        .background(Color.green.opacity(0.15))
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+    }
+
+    private var arrowSystemName: String {
+        switch direction {
+        case "left": return "arrow.left.circle.fill"
+        case "right": return "arrow.right.circle.fill"
+        case "center": return "checkmark.circle.fill"
+        default: return "questionmark.circle"
+        }
+    }
+}
+
+// MARK: - Subviews
+
+struct StatBadge: View {
+    let label: String
+    let value: String
+    var highlight: Bool = false
+
+    var body: some View {
+        VStack(spacing: 2) {
+            Text(label)
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+            Text(value)
+                .font(.caption.monospaced().bold())
+                .foregroundStyle(highlight ? .green : .primary)
+        }
+    }
+}
+
+struct PrivacyBadge: View {
+    var body: some View {
+        HStack(spacing: 4) {
+            Image(systemName: "lock.shield.fill")
+                .font(.caption2)
+            Text("NO LOCATION")
+                .font(.system(size: 9, weight: .bold, design: .monospaced))
+        }
+        .foregroundStyle(.green)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(Color.green.opacity(0.15))
+        .clipShape(Capsule())
+    }
+}
