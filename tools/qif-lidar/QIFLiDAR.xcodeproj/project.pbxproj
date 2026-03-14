@@ -1,0 +1,427 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03C45CD6173B5C06FBCAB700 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC15961C5B1006E8F1D89C5 /* ContentView.swift */; };
+		08C866B9BAB0D44C3CD01633 /* SessionExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E80AAFCDA3B5C1E1A762D /* SessionExporter.swift */; };
+		1FC65136F85195505DEC7DEB /* SegmentationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AEB572AF8CBFF8E3538F32 /* SegmentationService.swift */; };
+		274443FFA5ACAEF98ABCE9E1 /* DepthRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172D02A02A914D2C1C70532 /* DepthRenderer.swift */; };
+		578EF01A1432ADED64A4CE3D /* SegmentationClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAFDBADCF99C615D2ABA6DD /* SegmentationClasses.swift */; };
+		57F045708D00CD31A6D30D1F /* DepthShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = F507DED6A683A5CACDFB8C19 /* DepthShaders.metal */; };
+		59CC6D72ACF327C1B0959549 /* DeepLabV3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = ECBD2F4BF56575C07231CDEE /* DeepLabV3.mlmodel */; };
+		5A2B48BCB89DAB029AA1245F /* CaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1EEC69F71EDDB07653461E /* CaptureSession.swift */; };
+		6C7246FD4D921697D0E64063 /* YOLOv8n.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 5674CC8BA6D0B3219FD38567 /* YOLOv8n.mlpackage */; };
+		7BFA5C4871CDC18C95F0933E /* PrivacyGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9138CD677816EFE61402374F /* PrivacyGuard.swift */; };
+		9AB77197BB6D3954E6A419F4 /* HarnessDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9105A01D18A6BE81E4E1794 /* HarnessDetector.swift */; };
+		A153F806D105994EBE36D750 /* GuideDogDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BF4275E89C51DA93DA1CE6 /* GuideDogDetector.swift */; };
+		A1C40D7BAB6EC5CB30B02065 /* DogEmbeddingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86F2E05033134B179A2A884 /* DogEmbeddingService.swift */; };
+		A4D742ED4C83A1B55ED5A658 /* QIFLiDARApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BD183B944B91C992275EC /* QIFLiDARApp.swift */; };
+		C31991E4B7918F334EFAE379 /* DisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B2D4198E5C4BD6BD3F9E22 /* DisplayMode.swift */; };
+		DFE582E829BD04C7AFAC37E7 /* ARSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004919991B2D514969ADBFDD /* ARSessionManager.swift */; };
+		E0E4D291F22EC6B783CF797E /* DogReID.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 9D49E66374B882B47E47DDBD /* DogReID.mlpackage */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		004919991B2D514969ADBFDD /* ARSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionManager.swift; sourceTree = "<group>"; };
+		008E80AAFCDA3B5C1E1A762D /* SessionExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionExporter.swift; sourceTree = "<group>"; };
+		0D1EEC69F71EDDB07653461E /* CaptureSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSession.swift; sourceTree = "<group>"; };
+		0EAFDBADCF99C615D2ABA6DD /* SegmentationClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentationClasses.swift; sourceTree = "<group>"; };
+		2172D02A02A914D2C1C70532 /* DepthRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthRenderer.swift; sourceTree = "<group>"; };
+		27AEE13BADC9728D036E8B6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		53AEB572AF8CBFF8E3538F32 /* SegmentationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentationService.swift; sourceTree = "<group>"; };
+		5674CC8BA6D0B3219FD38567 /* YOLOv8n.mlpackage */ = {isa = PBXFileReference; path = YOLOv8n.mlpackage; sourceTree = "<group>"; };
+		5BC15961C5B1006E8F1D89C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9138CD677816EFE61402374F /* PrivacyGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyGuard.swift; sourceTree = "<group>"; };
+		99BF4275E89C51DA93DA1CE6 /* GuideDogDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideDogDetector.swift; sourceTree = "<group>"; };
+		9D49E66374B882B47E47DDBD /* DogReID.mlpackage */ = {isa = PBXFileReference; path = DogReID.mlpackage; sourceTree = "<group>"; };
+		A86F2E05033134B179A2A884 /* DogEmbeddingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogEmbeddingService.swift; sourceTree = "<group>"; };
+		A9BC7A2FDBBDC35A572A7013 /* QIFLiDAR.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = QIFLiDAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B39BD183B944B91C992275EC /* QIFLiDARApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QIFLiDARApp.swift; sourceTree = "<group>"; };
+		C9105A01D18A6BE81E4E1794 /* HarnessDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarnessDetector.swift; sourceTree = "<group>"; };
+		ECBD2F4BF56575C07231CDEE /* DeepLabV3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DeepLabV3.mlmodel; sourceTree = "<group>"; };
+		F1B2D4198E5C4BD6BD3F9E22 /* DisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMode.swift; sourceTree = "<group>"; };
+		F507DED6A683A5CACDFB8C19 /* DepthShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = DepthShaders.metal; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		030BF2777EC42CBF33F921A1 = {
+			isa = PBXGroup;
+			children = (
+				5ED1E8D58F23A28BC20BA5E4 /* QIFLiDAR */,
+				D9306708F07CEE15230FC222 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		19B33F946F9EE55A8EF050DE /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				2172D02A02A914D2C1C70532 /* DepthRenderer.swift */,
+				F507DED6A683A5CACDFB8C19 /* DepthShaders.metal */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
+		2F79E0DE77168243D73A95A4 /* GuideBot */ = {
+			isa = PBXGroup;
+			children = (
+				A86F2E05033134B179A2A884 /* DogEmbeddingService.swift */,
+				99BF4275E89C51DA93DA1CE6 /* GuideDogDetector.swift */,
+				C9105A01D18A6BE81E4E1794 /* HarnessDetector.swift */,
+			);
+			path = GuideBot;
+			sourceTree = "<group>";
+		};
+		3B9AC3AD90ED69B0CC3C0CCD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5BC15961C5B1006E8F1D89C5 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5ED1E8D58F23A28BC20BA5E4 /* QIFLiDAR */ = {
+			isa = PBXGroup;
+			children = (
+				E65E5DC4DD7C51C1F239D501 /* App */,
+				B39296261905F72FB1296202 /* Capture */,
+				89C696E881584E10DE8343EB /* Export */,
+				2F79E0DE77168243D73A95A4 /* GuideBot */,
+				CF921294716DE11EF220F2B6 /* Models */,
+				63BC7946DD7C813B98512463 /* Privacy */,
+				19B33F946F9EE55A8EF050DE /* Renderer */,
+				722BC5B7F81D23AC494D5690 /* Resources */,
+				3B9AC3AD90ED69B0CC3C0CCD /* Views */,
+			);
+			path = QIFLiDAR;
+			sourceTree = "<group>";
+		};
+		63BC7946DD7C813B98512463 /* Privacy */ = {
+			isa = PBXGroup;
+			children = (
+				9138CD677816EFE61402374F /* PrivacyGuard.swift */,
+			);
+			path = Privacy;
+			sourceTree = "<group>";
+		};
+		722BC5B7F81D23AC494D5690 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ECBD2F4BF56575C07231CDEE /* DeepLabV3.mlmodel */,
+				9D49E66374B882B47E47DDBD /* DogReID.mlpackage */,
+				27AEE13BADC9728D036E8B6F /* Info.plist */,
+				5674CC8BA6D0B3219FD38567 /* YOLOv8n.mlpackage */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		89C696E881584E10DE8343EB /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				008E80AAFCDA3B5C1E1A762D /* SessionExporter.swift */,
+			);
+			path = Export;
+			sourceTree = "<group>";
+		};
+		B39296261905F72FB1296202 /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				004919991B2D514969ADBFDD /* ARSessionManager.swift */,
+				53AEB572AF8CBFF8E3538F32 /* SegmentationService.swift */,
+			);
+			path = Capture;
+			sourceTree = "<group>";
+		};
+		CF921294716DE11EF220F2B6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0D1EEC69F71EDDB07653461E /* CaptureSession.swift */,
+				F1B2D4198E5C4BD6BD3F9E22 /* DisplayMode.swift */,
+				0EAFDBADCF99C615D2ABA6DD /* SegmentationClasses.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D9306708F07CEE15230FC222 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A9BC7A2FDBBDC35A572A7013 /* QIFLiDAR.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E65E5DC4DD7C51C1F239D501 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B39BD183B944B91C992275EC /* QIFLiDARApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		888F9A794BE0A48167C5340A /* QIFLiDAR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 44321AAC3A76B4172F35B099 /* Build configuration list for PBXNativeTarget "QIFLiDAR" */;
+			buildPhases = (
+				46F76F4D8ED89348B1842091 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QIFLiDAR;
+			packageProductDependencies = (
+			);
+			productName = QIFLiDAR;
+			productReference = A9BC7A2FDBBDC35A572A7013 /* QIFLiDAR.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B56EB57441308DE8B7B549F4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					888F9A794BE0A48167C5340A = {
+						DevelopmentTeam = "";
+					};
+				};
+			};
+			buildConfigurationList = 5751E7DCD491148957490D18 /* Build configuration list for PBXProject "QIFLiDAR" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 030BF2777EC42CBF33F921A1;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				888F9A794BE0A48167C5340A /* QIFLiDAR */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		46F76F4D8ED89348B1842091 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFE582E829BD04C7AFAC37E7 /* ARSessionManager.swift in Sources */,
+				5A2B48BCB89DAB029AA1245F /* CaptureSession.swift in Sources */,
+				03C45CD6173B5C06FBCAB700 /* ContentView.swift in Sources */,
+				59CC6D72ACF327C1B0959549 /* DeepLabV3.mlmodel in Sources */,
+				274443FFA5ACAEF98ABCE9E1 /* DepthRenderer.swift in Sources */,
+				57F045708D00CD31A6D30D1F /* DepthShaders.metal in Sources */,
+				C31991E4B7918F334EFAE379 /* DisplayMode.swift in Sources */,
+				A1C40D7BAB6EC5CB30B02065 /* DogEmbeddingService.swift in Sources */,
+				E0E4D291F22EC6B783CF797E /* DogReID.mlpackage in Sources */,
+				A153F806D105994EBE36D750 /* GuideDogDetector.swift in Sources */,
+				9AB77197BB6D3954E6A419F4 /* HarnessDetector.swift in Sources */,
+				7BFA5C4871CDC18C95F0933E /* PrivacyGuard.swift in Sources */,
+				A4D742ED4C83A1B55ED5A658 /* QIFLiDARApp.swift in Sources */,
+				578EF01A1432ADED64A4CE3D /* SegmentationClasses.swift in Sources */,
+				1FC65136F85195505DEC7DEB /* SegmentationService.swift in Sources */,
+				08C866B9BAB0D44C3CD01633 /* SessionExporter.swift in Sources */,
+				6C7246FD4D921697D0E64063 /* YOLOv8n.mlpackage in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		389ACF7E59F36D22B224A3BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = QIFLiDAR/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.qinnovate.qif-lidar";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BE4870245D92F551F33A1F70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = QIFLiDAR/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C545E53A09D61CF990CD938C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = QIFLiDAR/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.qinnovate.qif-lidar";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D6613A79FE1FDA9A54C1158E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = QIFLiDAR/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		44321AAC3A76B4172F35B099 /* Build configuration list for PBXNativeTarget "QIFLiDAR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				389ACF7E59F36D22B224A3BE /* Debug */,
+				C545E53A09D61CF990CD938C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5751E7DCD491148957490D18 /* Build configuration list for PBXProject "QIFLiDAR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6613A79FE1FDA9A54C1158E /* Debug */,
+				BE4870245D92F551F33A1F70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B56EB57441308DE8B7B549F4 /* Project object */;
+}

@@ -1,0 +1,29 @@
+# Xcode
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/
+build/
+*.moved-aside
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift
+.build/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Core ML compiled models (generated at build time)
+*.mlmodelc
+
+# Env
+.env*
+*.xcuserstate
