@@ -1,164 +1,68 @@
 ---
-title: Decision Log
-description: Rolling changelog of architectural decisions with RACI attribution
+title: "Decision Log"
+description: "RACI-attributed architectural decisions extracted from the QIF Derivation Log"
+order: 5
 ---
+
+<!-- AUTO-GENERATED from QIF-DERIVATION-LOG.md — do not edit directly -->
+<!-- Regenerate: npm run decisions | Last generated: 2026-03-15 -->
 
 # Decision Log
 
-Rolling changelog of architectural decisions, implementation choices, and their attribution.
-Tracks WHO decided, WHO built, WHO reviewed — like a RACI matrix for every significant change.
+Rolling record of framework decisions extracted from the [QIF Derivation Log](../qif-framework/QIF-DERIVATION-LOG.md).
+Each entry links back to the full derivation context.
 
-**RACI Key:**
-- **R** (Responsible) — Did the work
-- **A** (Accountable) — Made the final decision
-- **C** (Consulted) — Provided input that shaped the decision
-- **I** (Informed) — Notified of the outcome
+**Last generated:** 2026-03-15 at 02:49:28
 
-**Actor Key:**
-- **KQ** — Kevin Qi (human)
-- **Claude** — Claude Opus 4.6 (primary AI)
-- **Quorum** — Quorum swarm (multi-agent review)
-- **Quorum:DA** — Devil's Advocate agent specifically
-- **Quorum:Sec** — Security Engineer agent
-- **Quorum:Perf** — Performance Engineer agent
-- **Quorum:Neuro** — Neuroethics Reviewer agent
-- **Quorum:FE** — Frontend/React Architect agent
-- **Quorum:DataEng** — Data Engineer agent
-- **Quorum:DevOps** — DevOps/DataOps agent
-- **Quorum:NDS** — Neuro Data Scientist agent
+**RACI Key:** R (Responsible) | A (Accountable) | C (Consulted) | I (Informed)
+
+**RAG Status:** 🟢 Verified | 🟠 Inferred | 🟡 Hypothesis | 🔴 Correction | ⚪ Other
 
 ---
 
-## 2026-03-15: Data Studio — Parquet Migration & Dataset Browser
+## Summary
 
-### Session Overview
-- **Duration:** Single session
-- **Scope:** Full Data Studio build (Phases 1-3) + security review
-- **Trigger:** KQ requested Parquet format introduction inspired by HuggingFace datasets
+| Metric | Value |
+|--------|-------|
+| Total decisions | 15 |
+| Total derivation entries | 105 |
+| Date range | 2026-02-03 to 2026-03-05 |
+| Accountable (all decisions) | Kevin Qi |
 
----
+## Table of Contents
 
-### Phase 0: Architecture Design (Quorum Swarm #1 — 8 agents)
-
-| Decision | Chosen | Rejected | R | A | C | I |
-|----------|--------|----------|---|---|---|---|
-| Data format | Parquet (Zstd L3) | Keep JSON only | Quorum:DataEng | KQ | Quorum:DA | All |
-| Query engine | Two-engine (hyparquet browse + DuckDB-WASM SQL) | DuckDB-WASM for everything | Quorum:Arch | KQ | Quorum:DA, Quorum:Perf | All |
-| EEG data scope | Cohort aggregates in browser, per-subject as download | Per-subject in browser | Quorum:Sec, Quorum:NDS | KQ | Quorum:Neuro | All |
-| Table library | TanStack Table (15KB) | AG Grid (100KB) | Quorum:FE | Claude | — | KQ |
-| SQL editor | CodeMirror 6 (200KB) | Monaco (2MB+) | Quorum:FE | Claude | — | KQ |
-| EEG chart library | uPlot (48KB) | Recharts (SVG, can't handle 160K points) | Quorum:FE | Claude | — | KQ |
-| Parquet compression | Zstd level 3 | Snappy | Quorum:DataEng | Claude | Quorum:DevOps | KQ |
-| Row group strategy | Single row group per file | Multiple (impossible at <10K rows) | Quorum:DataEng | Claude | — | KQ |
-| DuckDB-WASM delivery | CDN (jsDelivr, no npm dep) | npm install (35MB in node_modules) | Claude | KQ | Quorum:Arch | — |
-| Nested registrar handling | Bridge tables (flat) | LIST<STRUCT> (nested Parquet) | Quorum:DataEng | Claude | — | KQ |
-| CI pipeline | GitHub Actions on shared/*.json change | Manual rebuild | Quorum:DevOps | Claude | — | KQ |
-| EEG privacy | Grand averages only, strip all EDF headers | Per-subject with anonymization | Quorum:Sec | KQ | Quorum:NDS, Quorum:Neuro | All |
-
-**Key dissent (Devil's Advocate):**
-- "DuckDB-WASM is 34.6MB for 4.3MB of data — 8x overhead" → Resolved by two-engine strategy (95% never load WASM)
-- "Parquet overhead on small files exceeds JSON" → Accepted; small files get REF badge, not hidden
-- "SQL console answers a question nobody asked" → Accepted as valid concern; SQL console is opt-in, lazy-loaded
-- "HuggingFace is the wrong reference architecture at this scale" → Partially accepted; built pragmatic version, not copy
+- [February 2026](#february-2026) (7 decisions)
+- [January 2026](#january-2026) (8 decisions)
 
 ---
 
-### Phase 1: Performance Fix — Prop Serialization Elimination
+## February 2026
 
-| Change | What | R | A |
-|--------|------|---|---|
-| Identified 2-3MB prop serialization as #1 inefficiency | Performance audit of kql-tables.ts data flow | Quorum:Perf | Claude |
-| Created generate-kql-json.mjs | Prebuild script exporting KQL tables as static JSON | Claude | KQ |
-| Modified BciKql.tsx to self-fetch | tables prop optional, fetches /data/kql-tables.json on mount | Claude | KQ |
-| Split impact_chains to lazy-load file | 1.8MB loaded only when user queries impact_chains table | Claude | KQ |
-| Updated 6 Astro pages | Pass tables={{}} instead of tables={kqlTables} | Claude | KQ |
+| # | Date | Decision | Classification | RACI | AI Level |
+|---|------|----------|---------------|------|----------|
+| 🟢 [99](../qif-framework/QIF-DERIVATION-LOG.md#entry-99-data-studio-parquet-datalake-and-quorum-) | 2026-03-15 | Data Studio, Parquet Datalake, and Quorum-Driven Governance | VERIFIED (implemented, built, reviewed by two Quorum swarms) | See entry | — |
+| 🟠 [98](../qif-framework/QIF-DERIVATION-LOG.md#entry-98-icd-10-neurological-gap-dsm-5-tr-cannot-) | 2026-03-15 | ICD-10 Neurological Gap — DSM-5-TR Cannot Express 38% of TARA Outcomes | INFERRED (evidence-based analysis validated by 8-agent Quorum swarm) | See entry | — |
+| 🟢 [97](../qif-framework/QIF-DERIVATION-LOG.md#entry-97-tara-expansion-to-135-techniques-domain-) | 2026-03-14 | TARA Expansion to 135 Techniques — Domain×Mode Gap Fill, SDK v0.3.0, Dual-Lens W | VERIFIED (implemented and deployed) | See entry | — |
+| 🟢 [90](../qif-framework/QIF-DERIVATION-LOG.md#entry-90-data-lake-sprint-kql-first-architecture-) | 2026-03-10 | Data Lake Sprint — KQL-First Architecture, Security Hardening, Clinical Drill-Do | VERIFIED (engineering decisions, implemented and deployed) | See entry | — |
+| 🟡 [89](../qif-framework/QIF-DERIVATION-LOG.md#entry-89-neuroethics-to-bci-vision-the-story-arc-) | 2026-03-07 | Neuroethics to BCI Vision — The Story Arc, Color Science, and Equity-First Neuro | HYPOTHESIS (vision statement + design direction, not validated claims) | See entry | — |
+| ⚪ [86](../qif-framework/QIF-DERIVATION-LOG.md#entry-86-epistemic-reckoning-research-compiled-ma) | 2026-03-06 | Epistemic Reckoning — Research Compiled, Major Overhaul Needed | DECISION (epistemic methodology + project direction) | See entry | — |
+| 🟡 [84](../qif-framework/QIF-DERIVATION-LOG.md#entry-84-privacy-preserving-neural-data-architect) | 2026-03-05 | Privacy-Preserving Neural Data Architecture — HE, DP, Data Fiduciaries, Consent  | HYPOTHESIS | See entry | — |
 
-**Result:** 98% page weight reduction (2.3MB inline → ~50KB empty props + 558KB async fetch)
+## January 2026
 
----
-
-### Phase 2: Parquet Conversion + Data Studio Page
-
-| Change | What | R | A |
-|--------|------|---|---|
-| Created generate-parquet.py | PyArrow conversion: 27 JSON → 31 Parquet (722KB total, 77% reduction) | Claude | KQ |
-| Designed Parquet schema for registrar | Bridge tables: techniques, technique_dsm, technique_neurorights | Quorum:DataEng | Claude |
-| Built /data-studio/ page | Astro page with dataset catalog, Quick Start code examples | Claude | KQ |
-| Built DataStudioBrowser.tsx | React component: search, category filters, preview table, download links | Claude | KQ |
-
-**Compression highlights (computed, not estimated):**
-- impact_chains: 1,919KB → 15KB (99%)
-- technique_dsm: 129KB → 5KB (96%)
-- techniques: 145KB → 36KB (75%)
+| # | Date | Decision | Classification | RACI | AI Level |
+|---|------|----------|---------------|------|----------|
+| 🟠 [83](../qif-framework/QIF-DERIVATION-LOG.md#entry-83-unaltered-vs-self-originating-ca-resolve) | 2026-02-28 | Unaltered vs Self-Originating — CA Resolved as MI Engineering Extension | INFERRED (cross-AI validated, not peer-reviewed) | See entry | — |
+| 🟢 [81](../qif-framework/QIF-DERIVATION-LOG.md#entry-81-niss-v1-1-cr-cd-weight-normalization-pre) | 2026-02-26 | NISS v1.1 — CR/CD Weight Normalization + Preprint v1.5 Cross-AI Validation | VERIFIED (cross-AI validated: Gemini 2.0 CLI + ChatGPT 5.2) | See entry | — |
+| 🟢 [80](../qif-framework/QIF-DERIVATION-LOG.md#entry-80-niss-v1-1-cg-split-into-cr-cognitive-rec) | 2026-02-25 | NISS v1.1 — CG Split into CR (Cognitive Reconnaissance) + CD (Cognitive Disrupti | VERIFIED | See entry | — |
+| ⚪ [67](../qif-framework/QIF-DERIVATION-LOG.md#entry-67-t0103-detection-methods-ethical-neurosec) | 2026-02-18 | T0103 Detection Methods + Ethical Neurosecurity Governance Gaps | ANALYSIS (detection methods) + GOVERNANCE (ethics code + gaps) + INTELLIGENCE (SAIL Lab consolidation) | See entry | — |
+| 🟢 [60](../qif-framework/QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis-live-sessi) | 2026-02-18 | BCI Limits Equation Synthesis — Live Session | HYPOTHESIS (novel constraint system) + VERIFIED (individual physics values) | See entry | — |
+| 🟢 [58](../qif-framework/QIF-DERIVATION-LOG.md#entry-58-neurorights-cross-validation-against-est) | 2026-02-17 | Neurorights Cross-Validation Against Established Frameworks | VERIFIED (literature cross-validation, multi-AI confirmed) | See entry | — |
+| ⚪ [23](../qif-framework/QIF-DERIVATION-LOG.md#entry-23-classical-quantum-bridge-shared-threat-m) | 2026-02-03 | Classical-Quantum Bridge — Shared Threat Matrix | Architectural — affects cross-model data flow, threat documentation, as-code principle | See entry | — |
+| ⚪ [22](../qif-framework/QIF-DERIVATION-LOG.md#entry-22-classical-hourglass-reconciliation-and-c) | 2026-02-03 | Classical-Hourglass Reconciliation and Cognitive Sovereignty Rename | Architectural — affects layer naming, model relationship, public positioning | See entry | — |
 
 ---
 
-### Phase 3: EEG Data + SQL Console (3 parallel agents)
+*15 decisions extracted from 105 derivation log entries.*
 
-| Change | What | R | A |
-|--------|------|---|---|
-| Built process-eeg-to-parquet.py | MNE-Python pipeline: EDF/MAT → filter → epoch → PSD → Parquet | Claude (agent) | KQ |
-| Added TARA mappings to 7 EEG datasets | Signal-level technique mappings with neuromodesty qualifiers | Claude | KQ |
-| Built /data-studio/eeg/ page | EEG browser with condition filters, TARA links, frequency band reference | Claude (agent) | KQ |
-| Built SQLConsole.tsx + useDuckDB.ts | Lazy-loaded DuckDB-WASM from CDN, query validation, CSV export | Claude (agent) | KQ |
-| Added AAN TBR disclaimer | theta/beta ratio insufficient for ADHD diagnosis per AAN 2016 | Quorum:Neuro | Claude |
-
-**Privacy controls (process-eeg-to-parquet.py):**
-- Epoch-relative timestamps (no wall-clock)
-- Anonymized subject IDs (MI_S01, EP_C01, etc.)
-- Stripped: meas_date, subject_info, experimenter, description, proj_name, proj_id, device_info, file_id
-
----
-
-### Security Review (Quorum Swarm #2 — 4 agents, 8 roles)
-
-| Finding | Severity | Found by | Fixed by | Decision by |
-|---------|----------|----------|----------|-------------|
-| COPY/ATTACH/EXPORT bypass query validation | CRITICAL | Quorum:Sec | Claude | KQ |
-| Double-quoted read_parquet paths bypass check | HIGH | Quorum:Sec | Claude | KQ |
-| CDN version mismatch (@latest vs @1.29.0) | HIGH | Quorum:Sec | Claude | KQ |
-| Promise.race doesn't cancel DuckDB query | MEDIUM | Quorum:Sec | Documented | KQ |
-| 558KB fetched on every preview click (no cache) | HIGH | Quorum:Perf, Quorum:FE | Claude | KQ |
-| CSV export revoke timing | MEDIUM | Quorum:FE | Claude | KQ |
-| Singleton race in StrictMode | LOW | Quorum:FE | Documented (dev-only) | Claude |
-| Incomplete EDF PII stripping | MEDIUM | Quorum:Sec | Claude | KQ |
-| Preview shows KQL JSON, not Parquet | MEDIUM | Quorum:DA | Claude (disclaimer) | KQ |
-| 1-row datasets clutter catalog | LOW | Quorum:DA | Claude (REF badge) | KQ |
-| Missing "Redistributable only" EEG filter | LOW | Quorum:UX | Claude | KQ |
-| ADHD TBR needs AAN disclaimer | LOW | Quorum:Neuro | Claude | KQ |
-| All 6 Morse neuromodesty checks | PASS | Quorum:Neuro | N/A | N/A |
-
-**Fixes applied:**
-- P0 (Security): Query validation hardened, CDN pinned, double-quote bypass closed
-- P1 (Performance): Fetch caching added, CSV timing fixed
-- P2 (Quality): Schema disclaimer, REF badges, redistributable filter, EDF stripping, AAN disclaimer
-
----
-
-### Unresolved / Deferred
-
-| Item | Why deferred | Owner |
-|------|-------------|-------|
-| DuckDB-WASM end-to-end test in preview | Needs manual browser testing | KQ |
-| SRI integrity hashes for WASM bundles | Need to compute from specific version | KQ |
-| Promise.race query cancellation | DuckDB-WASM may not support cancel | Claude (research) |
-| hyparquet for direct Parquet browsing | Waiting on adoption data — KQL JSON works for now | KQ |
-| TanStack Table / CodeMirror 6 / uPlot | Not yet needed — current inline table + textarea works | KQ |
-| Service worker for offline access | Overkill at current scale | — |
-
----
-
-## How to Read This Log
-
-Each entry follows this structure:
-1. **Date + Title** — What happened
-2. **Session Overview** — Scope, trigger, duration
-3. **Decision Tables** — RACI attribution for each choice
-4. **Dissent** — What the Devil's Advocate challenged (and whether it was accepted)
-5. **Findings** — What review agents found
-6. **Deferred** — What was intentionally not done (and why)
-
-The goal is full attribution: every architectural decision traces back to a human decision-maker (A), an implementer (R), and the consultants who shaped it (C). This supports:
-- Academic transparency (AI disclosure requirements)
-- Governance audit trail (who approved what)
-- Future maintainability (why was this choice made?)
+*Generated by [Quorum](https://qinnovate.com) governance pipeline*

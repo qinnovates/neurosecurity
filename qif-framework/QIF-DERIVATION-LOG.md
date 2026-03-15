@@ -15,6 +15,8 @@
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails, Data Lake Sprint
 | Entry | Topic | Link |
 |-------|-------|------|
+| 99 | Data Studio + Parquet datalake: Quorum-driven architecture, TARA-EEG signal mappings, RACI decision attribution | [Entry 99](#entry-99-data-studio-quorum-governance) |
+| 98 | ICD-10 neurological gap: DSM-5-TR cannot express 38% of TARA outcomes | [Entry 98](#entry-98-icd10-neuro-gap) |
 | 97 | TARA expansion to 135 techniques: 26 new skeleton techniques (T0110-T0135) filling domain×mode gaps, v2 taxonomy fields, SDK v0.3.0, dual-lens wiring | [Entry 97](#entry-97-tara-135-expansion) |
 | 96 | 6-expert cross-domain review: Mode F (failure), Operational Readiness tiers, evidence prominence, clinical gaps | [Entry 96](#entry-96-six-expert-review) |
 | 95 | Drift metric: proposed for NISS, corrected to TARA — describes technique temporal behavior, not patient impact | [Entry 95](#entry-95-niss-cognitive-drift) |
@@ -388,6 +390,80 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 - **Model:** Claude Opus 4.6
 - **Role:** Co-derivation (architectural mapping), literature synthesis (Kellmeyer integration)
 - **Human-Decided:** Blockchain = provenance only; neural data never on-chain; NSP as primary integration point; connection to NFT experience
+
+---
+
+## Entry 99: Data Studio, Parquet Datalake, and Quorum-Driven Governance {#entry-99-data-studio-quorum-governance}
+
+**Date:** 2026-03-15, ~22:00
+**Classification:** VERIFIED (implemented, built, reviewed by two Quorum swarms)
+**AI Systems:** Claude Opus 4.6, Quorum swarm #1 (8 agents: Data Engineer, Platform Architect, Neuro Data Scientist, Frontend DataViz, Performance Engineer, DevOps, Security Engineer, Devil's Advocate), Quorum swarm #2 (4 agents covering 8 roles: Security, React/Frontend, Neuroethics+UX+DA, Performance)
+**Connected entries:** [Entry 90](#entry-90-data-lake-sprint) (KQL-first architecture), [Entry 97](#entry-97-tara-135-expansion) (TARA 135)
+
+### The Insight
+
+Building the Quorum plugin (published 2026-03-14) created a new capability: deploying swarms of specialized agents to fact-check, stress-test, and review architectural decisions before implementation. This session was the first full-cycle use of Quorum for a major build — not just reviewing existing work, but designing the architecture through structured dissent, building it, then reviewing the output with a second swarm.
+
+The key realization: Quorum changes the epistemic posture of the project. Instead of one human + one AI making decisions, decisions now pass through structured adversarial review. The Devil's Advocate agent challenged fundamental assumptions ("DuckDB-WASM is 34.6MB for 4.3MB of data — 8x overhead"). The Security Engineer found 3 critical vulnerabilities in the SQL console query validation. The Neuroethics Reviewer verified all 6 Morse neuromodesty checks. None of these would have been caught in a single-pass implementation.
+
+But there is a limit: I can only validate what I know and what I learn as I review the review. When a Quorum swarm returns 8 expert reports, I am the final filter. I catch inconsistencies and inaccuracies by digging into them — but my ability to catch errors is bounded by my domain knowledge. The swarm amplifies verification, it does not replace human judgment. This is the same principle as the human-in-the-loop requirement in the Guardrails: AI tools extend capability, they do not substitute accountability.
+
+### What Was Built
+
+**Phase 1 — Performance:** Eliminated 2-3MB of JSON prop serialization from every BciKql page. Tables now fetched asynchronously from static JSON. Impact chains (1.8MB) lazy-loaded only when queried. 98% page weight reduction.
+
+**Phase 2 — Parquet datalake:** Converted 27 JSON files to 31 Parquet datasets (722KB total, 77% reduction from 3.1MB JSON). Compression highlights: impact_chains 1,919KB to 15KB (99%), technique_dsm 129KB to 5KB (96%). Built Data Studio page at `/data-studio/` with dataset catalog, Quick Start code examples (pandas, DuckDB, Polars), and downloadable Parquet files.
+
+**Phase 3 — EEG + SQL:** Built MNE-Python preprocessing pipeline for EEG data (EDF/MAT to Parquet with full privacy controls). Added TARA technique mappings to 7 real EEG datasets with neuromodesty-compliant qualifiers. Built EEG browser at `/data-studio/eeg/` with 16 datasets. Built DuckDB-WASM SQL console loaded from CDN (no npm dependency, lazy-loaded).
+
+**Governance — Decision Log:** Introduced `governance/DECISION-LOG.md` — a RACI-style rolling changelog that attributes every architectural decision to its human decision-maker, AI implementer, and swarm consultants. This exists because the Quorum plugin makes multi-agent decisions traceable. Every entry records who was Responsible, Accountable, Consulted, and Informed.
+
+### The Decision Log
+
+**Why it was introduced:** The Quorum plugin enables swarms of 8+ agents to review and shape decisions. Without attribution, these become opaque "AI said so" outcomes. The Decision Log makes every decision traceable: which agent found the issue, which human approved the fix, which dissent was accepted vs rejected.
+
+**What it tracks:**
+- RACI matrix per decision (R/A/C/I with named actors: KQ, Claude, Quorum:DA, Quorum:Sec, etc.)
+- Devil's Advocate dissent and whether it was accepted
+- Security findings with severity, finder, fixer, and decision-maker
+- Deferred items with explicit "why" and owner
+
+**Location:** [`governance/DECISION-LOG.md`](../governance/DECISION-LOG.md)
+
+### TARA-EEG Signal Mappings
+
+Seven real EEG datasets now have TARA technique mappings describing which signal-level characteristics are relevant for threat modeling:
+
+| Dataset | TARA | Signal Pattern |
+|---------|------|---------------|
+| ADHD Mendeley | QIF-T0001 | Frontal theta elevation at Fz |
+| ADHD IEEE Children | QIF-T0001 | Pediatric theta/beta ratio |
+| CHB-MIT Epilepsy | QIF-T0025 | Ictal spike-wave complexes |
+| Motor Imagery | QIF-T0067, T0009 | Mu rhythm ERD, posterior alpha |
+| Sleep-EDF | QIF-T0063 | Sleep stage transition patterns |
+| Alcoholism UCI | QIF-T0001 | Chronic ERP degradation |
+
+All mappings use "for threat modeling purposes" qualifier. ADHD datasets include AAN practice advisory disclaimer (theta/beta ratio alone insufficient for diagnosis, PMID 27760867). All 6 Morse neuromodesty checks verified by Quorum:Neuro agent.
+
+### Security Review Findings
+
+Quorum swarm #2 found 3 critical issues in the SQL console query validation:
+1. COPY/ATTACH/EXPORT statements bypassed the blocklist (matched function-call syntax, not statement syntax)
+2. Double-quoted paths in read_parquet bypassed single-quote validation
+3. CDN version mismatch (`@latest` vs `@1.29.0`) created supply chain risk
+
+All three were fixed before merge. Full findings in [`governance/DECISION-LOG.md`](../governance/DECISION-LOG.md).
+
+### Human Decision
+
+Kevin decided: (1) Introduce Parquet format for the datalake, inspired by HuggingFace datasets. (2) Use Quorum swarms for both architecture design and security review. (3) Introduce the RACI Decision Log because Quorum makes multi-agent decisions traceable — and because "I can only validate what I know and what I learn as I review the review." (4) Accept the Devil's Advocate's challenge on DuckDB-WASM size by adopting the two-engine strategy. (5) EEG data in browser uses cohort aggregates only (re-identification risk). (6) All TARA-EEG mappings must pass neuromodesty checks.
+
+### AI Collaboration
+
+- **Model:** Claude Opus 4.6
+- **Role:** Implementation (3 phases), Quorum orchestration (2 swarms, ~12 agents total)
+- **Cross-AI:** None (internal Quorum validation only)
+- **Human-Decided:** Parquet introduction, Quorum review requirement, Decision Log introduction, two-engine strategy acceptance, EEG privacy controls, TARA-EEG mapping approval, security fix approval
 
 ---
 

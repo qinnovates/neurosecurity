@@ -11,6 +11,7 @@
 - [Guidelines](#guidelines)
 - [Cross-AI Validation Protocol](#cross-ai-validation-protocol)
 - [Auto-Track Protocol](#auto-track-protocol-academic-transparency)
+- [Change Propagation Matrix](#change-propagation-matrix)
 - [Sync Protocols](#sync-protocols)
 - [Citation & Preprint Integrity](#citation--preprint-integrity-protocol)
 - [AI Disclosure & Publication Compliance](#ai-disclosure--publication-compliance)
@@ -27,6 +28,7 @@
 - **Sync Context**: `npm run sync` (Refreshes this file)
 - **Changelog**: `npm run changelog` (Generate changelog from git log; `--dry-run` to preview)
 - **Impact Chains**: `npm run compute:chains` (Precompute impact_chains table from source JSON; `--dry-run` to preview)
+- **Health Check**: `npm run health` (Validate change propagation — checks data sync, governance, counts, build staleness)
 
 ## Commit Prefix Convention
 - `[Add]` -- New feature, page, or component (tier 2: changelog + blog draft)
@@ -88,26 +90,94 @@
 - **Epistemic Integrity:** See `rules/epistemic-integrity.md`. No hallucination. Confidence proportional to evidence. Theoretical/unvalidated work (e.g. NISS, QIF) must be labeled as such in all outward-facing text.
 - **AI Security Ethics:** See `AI-instructions.md` (repo root). All AI conduct in this project must align with the AI Security Ethics principles: Asimov's Three Laws reframed for AI, consent as architecture, human-in-the-loop as non-negotiable, AI self-preservation in service of user safety, neural data at highest protection tier, and defensive framing only. These principles apply to all AI-generated code, content, analysis, and recommendations produced within this project. When in doubt, the Five Principles in Part II of AI-instructions.md govern.
 
-## Cross-AI Validation Protocol
-After ANY cross-AI validation session, append a row to `governance/TRANSPARENCY.md` > Cross-AI Validation Sessions table BEFORE ending the session. Format: `| Date | Topic | AI Systems | Human Decision | Derivation Log Ref |`
-
 ## Auto-Track Protocol (Academic Transparency)
 
-When ANY of these triggers occur, you MUST update the appropriate log:
+### Derivation Log — When and How
 
-**Triggers:** New hypothesis, cross-AI validation, literature gap, corrected claim, framework architecture change, boundary shift (Not Claimed/Established), user says "remember this"/"lightbulb", new attack technique or therapeutic mapping.
+The derivation log (`qif-framework/QIF-DERIVATION-LOG.md`) is the single source of truth for framework decisions. `governance/DECISION-LOG.md` and `governance/TRANSPARENCY.md` are GENERATED from it — do not edit them directly.
 
-**Destinations:**
-1. `qif-framework/QIF-DERIVATION-LOG.md` for framework insights
-2. `qif-framework/QIF-FIELD-JOURNAL.md` for personal/experiential observations (raw voice only)
-3. Daily memory log with tag `[DECISION]` or `[DERIVATION]`
-4. `qif-framework/QIF-RESEARCH-SOURCES.md` if any new external source was referenced
+**Cadence:** One entry per session (at most). Sessions with 0 framework-significant decisions produce 0 entries.
 
-**Entry must include:** Date/time, AI system(s) involved, human decision documented, what was accepted vs rejected, classification (VERIFIED / INFERRED / HYPOTHESIS).
+**The 3-Question Filter (apply continuously during session):**
+1. Does this change the framework's structure, scope, taxonomy, or scoring?
+2. Does this correct, retract, or supersede a previous claim?
+3. Would a peer reviewer need to know this happened?
 
-**Entry policy:** Derivation log entries preserve meaning, decisions, and insights. Normalize spelling and phrasing before committing. See [claudeq Mode](#claudeq-mode--live-derivation-journaling) for full spec.
+If any answer is yes for any decision during the session, note it internally and propose a single derivation log entry at session end. Kevin approves or skips.
 
-**Research Commit Messages** (research-significant commits only):
+**Kevin override:** Kevin can say "log this" or "derivation entry" at any time to force an entry. Kevin can say "skip the log" to suppress the end-of-session proposal.
+
+**Entry template:**
+```markdown
+## Entry [N]: [Title] {#entry-[n]-[slug]}
+
+**Date:** YYYY-MM-DD, ~HH:MM
+**Classification:** VERIFIED | INFERRED | HYPOTHESIS | CORRECTION | PROCESS
+**AI Systems:** [models, Quorum composition if used]
+**Connected entries:** [links]
+**RACI:** R: [who did the work] | A: KQ | C: [consulted] | I: [informed]
+**AI Contribution Level:** AI-assisted | AI-generated | Human-only | Quorum-reviewed
+```
+
+**Entry body must include:**
+- Context (what triggered this work)
+- What happened (decisions, builds, discoveries — use tables for 5+ decisions)
+- Human decisions explicitly identified (what Kevin chose, what was rejected)
+- AI Collaboration section (model, role, cross-AI if applicable)
+
+**Entry policy:** Normalize spelling and phrasing. Preserve meaning, decisions, and reasoning chains. Do not write verbatim transcript — synthesize.
+
+**Destinations (parallel, when triggered):**
+1. `qif-framework/QIF-DERIVATION-LOG.md` — curated entry (proposed at session end)
+2. `qif-framework/QIF-FIELD-JOURNAL.md` — personal/experiential observations (raw voice only, AI cannot write)
+3. Daily memory log — `[DECISION]` or `[DERIVATION]` tag (during session as decisions occur)
+4. `qif-framework/QIF-RESEARCH-SOURCES.md` — if any new external source was referenced
+5. Run `npm run governance` after committing a new entry to regenerate DECISION-LOG.md and TRANSPARENCY.md
+
+### Sensitive Information Filter (MANDATORY)
+
+Before writing ANY derivation log entry, apply this filter:
+
+**Tier 1 — AUTO-REDACT (never write, no exceptions):**
+- Email addresses, phone numbers, SSNs, financial account numbers
+- API keys, tokens, credentials, private keys
+- File paths containing usernames or emails (use `~/` or generic paths)
+- IP addresses of research infrastructure
+- IRB/ethics protocol numbers
+- EEG subject identifiers (EP_C01, SUB-003, participant IDs)
+- Corporate security assessment details from Kevin's professional work
+- AWS/cloud credentials
+
+**Tier 2 — WARN-BEFORE-WRITE (ask Kevin first):**
+- Unpublished vulnerability details (LSL CVE precedent)
+- Personal medical details (ADHD, synesthesia — OK in Field Journal, not in governance docs)
+- Draft application materials (SOPs, personal essays)
+- Collaborator personal details beyond published names
+- Quorum swarm output containing any Tier 1 or Tier 2 content
+- Specific institutional file paths from EEG datasets
+
+**Tier 3 — ALLOWED (safe, do not over-filter):**
+- Published researcher names, Kevin Qi's name, AI model names
+- Framework component names (QIF, NISS, TARA, NSP), technique IDs (QIF-T0001)
+- DOIs, arXiv IDs, public GitHub URLs
+- Architecture decisions, NISS scores, compression benchmarks
+- DSM-5-TR categories as TARA mapping targets (not personal diagnoses)
+- Public dataset names (CHB-MIT, ADHD Mendeley)
+
+**Procedure:** Draft entry in working memory. Scan for Tier 1 (auto-redact). Scan for Tier 2 (ask Kevin). Write only after all flags are resolved. The pre-commit hook provides a second layer of defense for Tier 1 patterns.
+
+### Governance Generation
+
+`governance/DECISION-LOG.md` and `governance/TRANSPARENCY.md` are GENERATED from the derivation log. Do not edit them directly.
+
+- `npm run decisions` — regenerates DECISION-LOG.md from entries with RACI metadata
+- `npm run transparency` — regenerates TRANSPARENCY.md from AI Contribution metadata
+- `npm run governance` — runs both
+
+Run `npm run governance` after adding a new derivation log entry before committing.
+
+### Research Commit Messages (research-significant commits only)
+
 ```
 [Action] [Scope]: Brief description
 
@@ -119,6 +189,61 @@ AI-Collaboration:
 
 Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
 ```
+
+## Change Propagation Matrix
+
+When a file changes, these downstream files must be updated. Claude should proactively check and update them. Run `npm run health` to detect stale or mismatched data.
+
+### When shared/*.json changes (any data file)
+| Update | How | Automated? |
+|--------|-----|-----------|
+| docs/data/kql-tables.json | `npm run prebuild` (runs generate-kql-json.mjs) | Yes (prebuild) |
+| docs/data/parquet/*.parquet | `npm run prebuild` (runs generate-parquet.py) | Yes (prebuild) |
+| docs/data/parquet/catalog.json | `npm run prebuild` (runs generate-parquet.py) | Yes (prebuild) |
+| src/lib/kql-tables.ts imports | Add import if new file; update builder function | Manual |
+| DataStudioBrowser.tsx DESCRIPTIONS | Add description if new dataset | Manual |
+
+### When shared/qtara-registrar.json changes (TARA techniques)
+| Update | How | Automated? |
+|--------|-----|-----------|
+| All of the above, plus: | | |
+| README.md technique count | Verify technique count references | Manual (npm run health warns) |
+| shared/impact-chains.json | `npm run compute:chains` | Manual |
+| shared/qtara/src/qtara/data/ | Copy registrar to SDK data dir | Manual |
+| src/lib/threat-data.ts | Verify ThreatVector interface matches | Manual |
+
+### When qif-framework/QIF-DERIVATION-LOG.md changes
+| Update | How | Automated? |
+|--------|-----|-----------|
+| governance/DECISION-LOG.md | `npm run governance` | Semi-auto (run after commit) |
+| governance/TRANSPARENCY.md | `npm run governance` | Semi-auto (run after commit) |
+| governance/SHIP-LOG.md | Add entry manually if feature shipped | Manual |
+| src/data/qif-timeline.json derivation_log_entries count | `npm run health` warns if stale | Manual |
+
+### When a new page/component is created
+| Update | How | Automated? |
+|--------|-----|-----------|
+| governance/SHIP-LOG.md | Add entry | Manual |
+| CHANGELOG.md | Auto-generated on next commit | Yes (changelog workflow) |
+
+### When shared/eeg-samples.json changes
+| Update | How | Automated? |
+|--------|-----|-----------|
+| All shared/*.json propagation, plus: | | |
+| EEGBrowser.tsx / EEGDatasetCard.tsx | Verify new fields are rendered | Manual |
+| scripts/process-eeg-to-parquet.py | Add new dataset processing config | Manual |
+
+### When package.json scripts change
+| Update | How | Automated? |
+|--------|-----|-----------|
+| CLAUDE.md Commands section | Update command reference | Manual |
+| README.md if command is user-facing | Update documentation | Manual |
+
+### When .claude/rules/*.md changes
+| Update | How | Automated? |
+|--------|-----|-----------|
+| Verify CLAUDE.md references are still valid | Check cross-references | Manual |
+| _memory/MEMORY.md if rule affects persistent behavior | Update memory | Manual |
 
 ## Sync Protocols
 
