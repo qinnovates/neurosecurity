@@ -21871,17 +21871,10 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:E/RV:P/NP:N",
-        "score": 3.4,
-        "severity": "low",
+        "score": 4.7,
+        "severity": "medium",
         "pins": false,
-        "components": {
-          "amplitude": 2.0,
-          "frequency": 3.0,
-          "duration": 2.0,
-          "reversibility": 8.0,
-          "detectability": 4.0,
-          "coverage": 3.0
-        }
+        "components": null
       },
       "cross_references": {
         "related_ids": [
@@ -22012,17 +22005,10 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:E/RV:P/NP:N",
-        "score": 3.3,
-        "severity": "low",
+        "score": 4.7,
+        "severity": "medium",
         "pins": false,
-        "components": {
-          "amplitude": 1.5,
-          "frequency": 2.5,
-          "duration": 2.0,
-          "reversibility": 8.5,
-          "detectability": 3.5,
-          "coverage": 4.0
-        }
+        "components": null
       },
       "cross_references": {
         "related_ids": []
@@ -22151,17 +22137,10 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:N",
-        "score": 3.4,
-        "severity": "low",
+        "score": 5.4,
+        "severity": "medium",
         "pins": true,
-        "components": {
-          "amplitude": 1.0,
-          "frequency": 2.0,
-          "duration": 3.0,
-          "reversibility": 9.0,
-          "detectability": 3.0,
-          "coverage": 5.0
-        }
+        "components": null
       },
       "cross_references": {
         "related_ids": []
@@ -22288,17 +22267,10 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:E/RV:P/NP:T",
-        "score": 3.3,
-        "severity": "low",
+        "score": 5.4,
+        "severity": "medium",
         "pins": false,
-        "components": {
-          "amplitude": 1.5,
-          "frequency": 2.0,
-          "duration": 2.5,
-          "reversibility": 9.0,
-          "detectability": 4.0,
-          "coverage": 3.0
-        }
+        "components": null
       },
       "cross_references": {
         "related_ids": [
@@ -22430,17 +22402,10 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:P/RV:P/NP:N",
-        "score": 3.8,
-        "severity": "low",
+        "score": 4.7,
+        "severity": "medium",
         "pins": true,
-        "components": {
-          "amplitude": 3.0,
-          "frequency": 2.5,
-          "duration": 4.0,
-          "reversibility": 6.0,
-          "detectability": 3.0,
-          "coverage": 5.0
-        }
+        "components": null
       },
       "cross_references": {
         "related_ids": []
@@ -22569,17 +22534,10 @@
       "niss": {
         "version": "1.1",
         "vector": "NISS:1.1/BI:L/CR:L/CD:L/CV:P/RV:P/NP:N",
-        "score": 3.6,
+        "score": 3.4,
         "severity": "low",
         "pins": false,
-        "components": {
-          "amplitude": 2.0,
-          "frequency": 3.0,
-          "duration": 4.0,
-          "reversibility": 7.0,
-          "detectability": 2.5,
-          "coverage": 4.0
-        }
+        "components": null
       },
       "cross_references": {
         "related_ids": []
