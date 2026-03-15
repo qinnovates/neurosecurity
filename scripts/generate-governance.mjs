@@ -102,7 +102,7 @@ function generateDecisionLog(entries) {
     '',
     '**RACI Key:** R (Responsible) | A (Accountable) | C (Consulted) | I (Informed)',
     '',
-    '**RAG Status:** 🟢 Verified | 🟠 Inferred | 🟡 Hypothesis | 🔴 Correction | ⚪ Other',
+    '**Status:** ✅ Shipped/Verified | 🟠 Inferred | 🟡 Hypothesis/Backlogged | 🔴 Correction | ⚪ Other',
     '',
     '---',
     '',
@@ -145,21 +145,22 @@ function generateDecisionLog(entries) {
     const monthName = new Date(month + '-01').toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
     lines.push(`## ${monthName}`);
     lines.push('');
-    lines.push('| # | Date | Decision | Classification | RACI | AI Level |');
-    lines.push('|---|------|----------|---------------|------|----------|');
+    lines.push('| Status | # | Date | Decision | Classification | RACI | AI Level |');
+    lines.push('|--------|---|------|----------|---------------|------|----------|');
 
     for (const d of byMonth[month].sort((a, b) => b.num - a.num)) {
       const raci = d.raci || 'See entry';
       const level = d.contributionLevel || '—';
       const dateShort = d.date.match(/\d{4}-\d{2}-\d{2}/)?.[0] || d.date;
-      // RAG status indicator based on classification
+      // Ship status based on classification
       const cls = (d.classification || '').toLowerCase();
-      const rag = cls.includes('verified') ? '🟢'
+      const status = cls.includes('verified') ? '✅'
         : cls.includes('correction') ? '🔴'
         : cls.includes('hypothesis') ? '🟡'
         : cls.includes('inferred') ? '🟠'
+        : cls.includes('process') ? '✅'
         : '⚪';
-      lines.push(`| ${rag} [${d.num}](../qif-framework/QIF-DERIVATION-LOG.md#entry-${d.num}-${d.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40)}) | ${dateShort} | ${d.title.slice(0, 80)} | ${d.classification} | ${raci} | ${level} |`);
+      lines.push(`| ${status} | [${d.num}](../qif-framework/QIF-DERIVATION-LOG.md#entry-${d.num}-${d.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40)}) | ${dateShort} | ${d.title.slice(0, 80)} | ${d.classification} | ${raci} | ${level} |`);
     }
     lines.push('');
   }

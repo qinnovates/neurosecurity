@@ -80,7 +80,7 @@ function checkDataConsistency() {
   console.log(`\n${GREEN}[health]${RESET} Checking data consistency...`);
 
   // 1. Validate all datalake/*.json files
-  const sharedDir = resolve(ROOT, 'shared');
+  const sharedDir = resolve(ROOT, 'datalake');
   let jsonFiles;
   try {
     jsonFiles = readdirSync(sharedDir).filter(f => f.endsWith('.json'));
@@ -213,12 +213,14 @@ function checkGovernanceSync() {
     fail('governance/TRANSPARENCY.md missing');
   }
 
-  // 4. Ship log exists
-  const shipLogPath = 'governance/SHIP-LOG.md';
-  if (fileExists(shipLogPath)) {
-    pass('Ship log present');
-  } else {
-    warn('governance/SHIP-LOG.md missing');
+  // 4. Decision log has status column (replaces ship log)
+  if (fileExists('governance/DECISION-LOG.md')) {
+    const dl = readText('governance/DECISION-LOG.md');
+    if (dl.includes('Status')) {
+      pass('Decision log has status column');
+    } else {
+      warn('Decision log missing status column (run: npm run governance)');
+    }
   }
 }
 
@@ -291,7 +293,7 @@ function checkCountConsistency() {
 function checkBuildArtifacts() {
   console.log(`\n${GREEN}[health]${RESET} Checking build artifacts...`);
 
-  const sharedDir = resolve(ROOT, 'shared');
+  const sharedDir = resolve(ROOT, 'datalake');
   let jsonFiles;
   try {
     jsonFiles = readdirSync(sharedDir).filter(f => f.endsWith('.json'));
