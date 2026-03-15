@@ -5,9 +5,9 @@
 > validation agents (quantum physics, neuroscience, cybersecurity) during the
 > framework review conducted on 2026-02-02.
 >
-> **Last updated:** 2026-03-11
+> **Last updated:** 2026-03-14
 > **Sources extracted from:** Three parallel validation agent sessions + ongoing research + landscape research agents
-> **Total unique sources:** 328+
+> **Total unique sources:** 340+
 
 ---
 
@@ -735,6 +735,49 @@ This markdown file remains the human-readable catalog of record. The KQL datalak
 | BD2 | Merge Labs. (2025). Founded by Caltech researchers. $252M seed at $850M valuation (OpenAI lead). | https://mergelabs.io | Crawl: BCI Market | Ultrasound-based non-invasive high-bandwidth BCI. Section 12.2 investor class diversification. |
 | BD3 | FDA. (2025). "Breakthrough Device Designations: Neuralink Speech Restoration (May 2025), Blindsight (Sep 2024)." | https://www.fda.gov/medical-devices/breakthrough-devices-program | Crawl: FDA/Regulatory | Regulatory pathway acceleration signals. Feeds Section 2.3.1 investment analysis. |
 
+## 17. AI Security Market & Ecosystem
+
+> Sources added 2026-03-14 from research swarm on AI security market landscape. Verified market data, startup funding, MCP ecosystem growth, and adoption metrics.
+
+### AI Security Market Data
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| AIS1 | Grand View Research. (2025). "AI in Cybersecurity Market Size, Share & Trends." | https://www.grandviewresearch.com/industry-analysis/artificial-intelligence-ai-cyber-security-market | Research Swarm: AI Security | AI in cybersecurity market $30-34B (2025), projected $60-93B by 2030 (18-22% CAGR). Context for BCI security market positioning. |
+| AIS2 | Fortune Business Insights. (2025). "AI in Cybersecurity Market Size, Share & Industry Analysis." | https://www.fortunebusinessinsights.com/ai-in-cybersecurity-market-109188 | Research Swarm: AI Security | Independent AI cybersecurity market estimate converging with Grand View. Cross-validation of TAM context. |
+| AIS3 | Precedence Research. (2025). "AI in Cybersecurity Market Size, 2025-2034." | https://www.precedenceresearch.com/artificial-intelligence-in-cybersecurity-market | Research Swarm: AI Security | Third independent AI cybersecurity market estimate. CAGR 18-22% range validated across three analyst firms. |
+| AIS4 | Mordor Intelligence. (2025). "Threat Intelligence Market Size & Share Analysis." | https://www.mordorintelligence.com/industry-reports/global-threat-intelligence-market | Research Swarm: AI Security | Threat intelligence market $9.2-11.6B (2025), projected $17-23B by 2030. Adjacent market for QIF's detection capabilities. |
+| AIS5 | MarketsandMarkets. (2025). "Threat Intelligence Market." | https://www.marketsandmarkets.com/Market-Reports/threat-intelligence-security-market-150715995.html | Research Swarm: AI Security | Second independent threat intelligence market estimate. Cross-validated with Mordor Intelligence. |
+
+### AI Security Startups & Acquisitions
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| AIS6 | BusinessWire. (2025). "7AI Raises $130M Series A." | https://www.businesswire.com/ | Research Swarm: AI Security | Largest cybersecurity Series A in history. $700M valuation. Agentic SOC architecture parallels neurosecurity appliance concept. |
+| AIS7 | TechCrunch. (2026). "Vega Security Raises $120M Series B." | https://techcrunch.com/ | Research Swarm: AI Security | $185M total funding, $700M valuation. Federated detection model relevant to distributed BCI sensor networks. |
+| AIS8 | Mastercard. (2025). "Mastercard Completes Acquisition of Recorded Future." | https://investor.mastercard.com/ | Research Swarm: AI Security | $2.65B acquisition (Q1 2025). ~$300M ARR, 1,900+ clients. Sets valuation benchmarks for threat intelligence platforms. |
+
+### MCP Ecosystem & Infrastructure
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| AIS9 | Linux Foundation. (2025). "MCP Donated to Linux Foundation AAIF." | https://www.linuxfoundation.org/ | Research Swarm: AI Security | 10,000+ active servers, 97M+ monthly SDK downloads. Founding members: Anthropic, OpenAI, Google, Microsoft, AWS, Block, Bloomberg, Cloudflare. Infrastructure layer for future BCI security tool integration. |
+
+### AI Security Adoption & Sentiment
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| AIS10 | Darktrace. (2025). "CISO Survey: Generative AI in Security." | https://darktrace.com/ | Research Swarm: AI Security | 77% of CISOs have generative AI in their security stack (1,500+ respondents). Adoption baseline for BCI security market readiness. |
+
+### Threat Intelligence Research
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| AIS11 | Bouwman X et al. (2024). "Sharing Cyber Threat Intelligence: Does It Really Help?" NDSS 2024. | https://www.ndss-symposium.org/ | Research Swarm: AI Security | 2,063 STIX objects/day vs 450,000 new malware/day. Only 0.09% of indicators include detection rules. Demonstrates CTI sharing gap that QIF/TARA threat catalog could address for the neural domain. |
+| AIS12 | (2025). "ICS Observables and STIX Representation Gaps." arXiv:2512.18714. | https://arxiv.org/abs/2512.18714 | Research Swarm: AI Security | 53% of ICS observables lack adequate STIX representation. Validates QIF's approach of building domain-specific threat vocabularies rather than relying on generic STIX. |
+| AIS13 | (2025). "Attack Tree Scaffolding for LLM Threat Reasoning." arXiv:2509.07939. | https://arxiv.org/abs/2509.07939 | Research Swarm: AI Security | Attack tree scaffolding improves LLM reasoning 2x (74.4% vs 35.2% baseline). Methodology applicable to AI-assisted TARA threat enumeration. |
+| AIS14 | (2024). "CTINexus: STIX Entity Extraction from Threat Reports." arXiv:2410.21060. | https://arxiv.org/abs/2410.21060 | Research Swarm: AI Security | 87.80% F1 on STIX entity extraction from threat reports. Demonstrates feasibility of automated threat intelligence extraction that could be applied to BCI security literature. |
+
 ---
 
 ## Appendix: Source Statistics
@@ -755,12 +798,13 @@ This markdown file remains the human-readable catalog of record. The KQL datalak
 | Neuroethics & Governance (JHU/CELLS) | 5 | 2025 | 2006 |
 | Institutional Neuroethics Programs | 21 | 2025 | 2004 |
 | Market & Investment Data | 15 | 2025 | 2024 |
+| AI Security Market & Ecosystem | 14 | 2026 | 2024 |
 | Clinical Trials & Adverse Events | 2 | 2025 | 2018 |
 | Vulnerability & CVE Data | 1 | 2023 | 2023 |
 | Neurorights Legislation | 4 | 2025 | 2021 |
 | Global Neuroethics Policy & Governance | 19 | 2025 | 2020 |
 | BCI Companies & Devices | 3 | 2025 | 2025 |
-| **Total** | **326** | | |
+| **Total** | **340** | | |
 
 | Source | Sources Found |
 |--------|---------------|
@@ -777,6 +821,7 @@ This markdown file remains the human-readable catalog of record. The KQL datalak
 | Multi-Source Gap Analysis — Policy (Mar 5) | ~19 |
 | Multi-Source Gap Analysis — Security (Mar 5) | ~13 |
 | BCI/Stimulation/Dual-Use Citation Sync (Mar 11) | ~18 |
+| AI Security Market Research Swarm (Mar 14) | ~14 |
 
 ---
 

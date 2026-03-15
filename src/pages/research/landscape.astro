@@ -100,6 +100,139 @@ const policyCount = policyTimeline.length;
     industryTimeline={industryTimeline}
   />
 
+  <!-- AI Security Market Context -->
+  <section class="mt-12" id="ai-security-market">
+    <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3">AI Security Market Context</h2>
+    <p class="text-base text-[var(--color-text-muted)] max-w-3xl mb-6">
+      BCI security does not exist in isolation. The broader AI security market is experiencing explosive growth, with billions flowing into agentic security products, threat intelligence platforms, and AI-driven detection. This context matters because BCI security tools will compete for the same engineering talent, investor attention, and enterprise budgets as these platforms.
+    </p>
+
+    <!-- Market size cards -->
+    <div class="grid sm:grid-cols-3 gap-6 mb-8">
+      <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-primary)]">
+        <p class="text-xs text-[var(--color-text-faint)] uppercase tracking-wider mb-2">AI in Cybersecurity (as of 2025)</p>
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">$30-34B</p>
+        <p class="text-sm text-[var(--color-text-muted)] mt-2">Projected $60-93B by 2030 (18-22% CAGR)</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-2">Grand View Research, Fortune Business Insights, Precedence Research</p>
+      </div>
+      <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-secondary)]">
+        <p class="text-xs text-[var(--color-text-faint)] uppercase tracking-wider mb-2">Threat Intelligence Market (as of 2025)</p>
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">$9.2-11.6B</p>
+        <p class="text-sm text-[var(--color-text-muted)] mt-2">Projected $17-23B by 2030</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-2">Mordor Intelligence, MarketsandMarkets</p>
+      </div>
+      <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-tertiary)]">
+        <p class="text-xs text-[var(--color-text-faint)] uppercase tracking-wider mb-2">AI Security Funding (2025)</p>
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">$6.34B</p>
+        <p class="text-sm text-[var(--color-text-muted)] mt-2">Nearly 3x increase from 2024</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-2">Software Strategies Blog aggregated data</p>
+      </div>
+    </div>
+
+    <!-- Enterprise AI Security Products -->
+    <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">Enterprise AI Security Products</h3>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-[var(--color-border)]">
+            <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Product</th>
+            <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium">Pricing</th>
+            <th class="text-left py-3 px-4 text-[var(--color-text-faint)] font-medium hidden sm:table-cell">Key Metric</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[var(--color-border)]/50">
+            <td class="py-3 px-4 font-medium">Microsoft Security Copilot</td>
+            <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">$4/SCU/hour</td>
+            <td class="py-3 px-4 text-[var(--color-text-muted)] hidden sm:table-cell">Free for M365 E5 customers (1,000+ users, 400 SCUs/month)</td>
+          </tr>
+          <tr class="border-b border-[var(--color-border)]/50">
+            <td class="py-3 px-4 font-medium">SentinelOne Purple AI</td>
+            <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">$80K-$250K+/yr</td>
+            <td class="py-3 px-4 text-[var(--color-text-muted)] hidden sm:table-cell">40% attach rate on new licenses</td>
+          </tr>
+          <tr class="border-b border-[var(--color-border)]/50">
+            <td class="py-3 px-4 font-medium">CrowdStrike Charlotte AI</td>
+            <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">Bundled w/ Falcon</td>
+            <td class="py-3 px-4 text-[var(--color-text-muted)] hidden sm:table-cell">CrowdStrike ARR $4.92B (+23% YoY)</td>
+          </tr>
+          <tr class="border-b border-[var(--color-border)]/50">
+            <td class="py-3 px-4 font-medium">Recorded Future</td>
+            <td class="py-3 px-4 font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">~$300M ARR</td>
+            <td class="py-3 px-4 text-[var(--color-text-muted)] hidden sm:table-cell">Acquired by Mastercard for $2.65B (Q1 2025); 1,900+ clients</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- AI Security Startups -->
+    <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">Breakout AI Security Startups</h3>
+    <div class="grid sm:grid-cols-2 gap-6 mb-8">
+      <div class="glass rounded-xl p-6">
+        <p class="text-lg font-bold text-[var(--color-text-primary)]">7AI</p>
+        <p class="text-sm text-[var(--color-text-muted)] mt-1">Agentic SOC platform</p>
+        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)] mt-3">$130M Series A</p>
+        <p class="text-sm text-[var(--color-text-muted)]">$700M valuation (Dec 2025). Largest cybersecurity Series A in history.</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-2">Source: BusinessWire, SecurityWeek</p>
+      </div>
+      <div class="glass rounded-xl p-6">
+        <p class="text-lg font-bold text-[var(--color-text-primary)]">Vega Security</p>
+        <p class="text-sm text-[var(--color-text-muted)] mt-1">Federated detection platform</p>
+        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)] mt-3">$185M total</p>
+        <p class="text-sm text-[var(--color-text-muted)]">$700M valuation. $65M + $120M Series B (Feb 2026).</p>
+        <p class="text-xs text-[var(--color-text-faint)] mt-2">Source: TechCrunch, SecurityWeek</p>
+      </div>
+    </div>
+
+    <!-- MCP Ecosystem -->
+    <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">MCP Ecosystem Growth</h3>
+    <div class="glass rounded-xl p-6 mb-8 max-w-3xl">
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 text-center mb-4">
+        <div>
+          <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">10,000+</p>
+          <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Active Servers</p>
+        </div>
+        <div>
+          <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">97M+</p>
+          <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Monthly SDK Downloads</p>
+        </div>
+        <div>
+          <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">8</p>
+          <p class="text-xs text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Founding Members</p>
+        </div>
+      </div>
+      <p class="text-sm text-[var(--color-text-muted)]">
+        MCP (Model Context Protocol) was donated to the Linux Foundation (Dec 2025). Founding members: Anthropic, OpenAI, Google, Microsoft, AWS, Block, Bloomberg, Cloudflare. Production security servers already deployed by Wiz, SOCRadar, Snyk, and OpenCTI.
+      </p>
+      <p class="text-xs text-[var(--color-text-faint)] mt-2">Source: Linux Foundation AAIF announcement, vendor announcements</p>
+    </div>
+
+    <!-- Adoption signals -->
+    <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">Adoption Signals</h3>
+    <div class="space-y-3 mb-8 max-w-3xl">
+      <div class="glass rounded-xl p-4 border-l-3 border-[var(--color-status-safe)]">
+        <p class="text-sm text-[var(--color-text-muted)]"><strong class="text-[var(--color-text-primary)]">77%</strong> of CISOs have generative AI somewhere in their security stack (Darktrace survey, 1,500+ CISOs)</p>
+      </div>
+      <div class="glass rounded-xl p-4 border-l-3 border-[var(--color-status-warn)]">
+        <p class="text-sm text-[var(--color-text-muted)]"><strong class="text-[var(--color-text-primary)]">59%</strong> of organizations have agentic AI security "work in progress" (Dec 2024-Jan 2025 survey)</p>
+      </div>
+      <div class="glass rounded-xl p-4 border-l-3 border-[var(--color-status-danger)]">
+        <p class="text-sm text-[var(--color-text-muted)]"><strong class="text-[var(--color-text-primary)]">67%</strong> of security professionals describe AI security tools as "glorified SOAR with better LLM summaries"</p>
+      </div>
+      <div class="glass rounded-xl p-4 border-l-3 border-[var(--color-accent-primary)]">
+        <p class="text-sm text-[var(--color-text-muted)]"><strong class="text-[var(--color-text-primary)]">40%</strong> of RSAC 2025 session submissions (of 2,800+) were AI-related</p>
+      </div>
+    </div>
+
+    <!-- Why this matters callout -->
+    <div class="glass rounded-xl p-6 sm:p-8 max-w-3xl border-l-4 border-[var(--color-accent-primary)]">
+      <h4 class="font-semibold mb-2">Why This Matters for BCI Security</h4>
+      <p class="text-sm text-[var(--color-text-muted)]">
+        The AI security market validates that enterprises will pay for AI-powered threat detection, and investors will fund it aggressively. BCI security sits at the intersection of two growth curves: the $2-3B BCI device market and the $30-34B AI security market. The infrastructure (MCP, agentic architectures, threat intelligence platforms) being built now is the same infrastructure a neurosecurity appliance would plug into. The question is not whether this market will exist, but whether anyone is building the neural-specific layer.
+      </p>
+    </div>
+  </section>
+
   <!-- KQL: Query Engine (all tables from data lake) -->
   <section class="mt-12 glass rounded-xl p-6 sm:p-8">
     <BciKql client:only="react" tables={klqTables} />
@@ -304,7 +437,11 @@ Maximize: n_ch (channels) OR I_total (bandwidth) OR Cs (coherence)</code></pre>
         <li>FDA device status: 510(k), PMA, Breakthrough Device, IDE databases</li>
         <li>Publication counts: PubMed search ("brain-computer interface"), approximate</li>
         <li>CVE data: NIST National Vulnerability Database, ICS-CERT advisories</li>
-        <li>Market projections: Grand View Research, Fortune Business Insights</li>
+        <li>BCI market projections: Grand View Research, Fortune Business Insights, Precedence Research, Mordor Intelligence</li>
+        <li>AI security market data: Grand View Research, Fortune Business Insights, Precedence Research, MarketsandMarkets (as of 2025)</li>
+        <li>AI security product pricing: Microsoft, SentinelOne, CrowdStrike investor reports, TrustRadius</li>
+        <li>Startup funding: BusinessWire, TechCrunch, SecurityWeek, Mastercard investor announcements</li>
+        <li>MCP ecosystem: Linux Foundation AAIF announcement, vendor documentation</li>
         <li>Policy/regulatory: Government gazette publications, legislative tracking services</li>
       </ul>
       <p class="mt-3">
