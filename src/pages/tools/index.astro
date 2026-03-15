@@ -1,0 +1,142 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Tools & Plugins — Qinnovate"
+  description="Open-source security tools and AI plugins for brain-computer interface security, threat intelligence, and multi-agent reasoning."
+  breadcrumbs={[{ label: 'Tools & Plugins' }]}
+>
+  <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">Tools & Plugins</h1>
+  <p class="text-[var(--color-text-muted)] mb-10 max-w-2xl">
+    Open-source tools for neurosecurity research and AI-assisted development. Everything here is free, open-source, and built to ship.
+  </p>
+
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+    <!-- BCI Security -->
+    <a
+      href="https://github.com/qinnovates/bci-security"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="group glass rounded-xl p-6 border border-[var(--color-border)] hover:border-[var(--color-accent-primary)]/40 transition-all hover:shadow-lg"
+    >
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-lg bg-[var(--color-accent-primary)]/10 flex items-center justify-center text-[var(--color-accent-primary)]">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-primary)] transition-colors">BCI Security</h2>
+          <span class="text-xs text-[var(--color-text-faint)]">Claude Code Plugin</span>
+        </div>
+      </div>
+      <p class="text-sm text-[var(--color-text-muted)] mb-4">
+        Threat modeling and security analysis for brain-computer interfaces. 135 TARA techniques, NISS severity scoring, 3 code scanning rules, and 8 neuroethics guardrails — all inside Claude Code.
+      </p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] font-medium">Security</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)] font-medium">AI Plugin</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-tertiary)]/10 text-[var(--color-accent-tertiary)] font-medium">Neurosecurity</span>
+      </div>
+      <div class="flex items-center gap-1 text-xs text-[var(--color-text-faint)] group-hover:text-[var(--color-accent-primary)] transition-colors">
+        <span>View on GitHub</span>
+        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+        </svg>
+      </div>
+    </a>
+
+    <!-- Quorum -->
+    <a
+      href="https://github.com/qinnovates/quorum"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="group glass rounded-xl p-6 border border-[var(--color-border)] hover:border-[var(--color-accent-secondary)]/40 transition-all hover:shadow-lg"
+    >
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-lg bg-[var(--color-accent-secondary)]/10 flex items-center justify-center text-[var(--color-accent-secondary)]">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-secondary)] transition-colors">Quorum</h2>
+          <span class="text-xs text-[var(--color-text-faint)]">Claude Code Plugin</span>
+        </div>
+      </div>
+      <p class="text-sm text-[var(--color-text-muted)] mb-4">
+        Multi-agent intelligence for any question. Assembles expert swarms that research, debate, and validate answers. Built-in Devil's Advocate, 5-layer hallucination detection, and Socratic dialectic mode.
+      </p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)] font-medium">Multi-Agent</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] font-medium">AI Plugin</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-tertiary)]/10 text-[var(--color-accent-tertiary)] font-medium">Reasoning</span>
+      </div>
+      <div class="flex items-center gap-1 text-xs text-[var(--color-text-faint)] group-hover:text-[var(--color-accent-secondary)] transition-colors">
+        <span>View on GitHub</span>
+        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+        </svg>
+      </div>
+    </a>
+
+    <!-- macshield -->
+    <a
+      href="https://github.com/qinnovates/macshield"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="group glass rounded-xl p-6 border border-[var(--color-border)] hover:border-[var(--color-accent-tertiary)]/40 transition-all hover:shadow-lg"
+    >
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-lg bg-[var(--color-accent-tertiary)]/10 flex items-center justify-center text-[var(--color-accent-tertiary)]">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-tertiary)] transition-colors">macshield</h2>
+          <span class="text-xs text-[var(--color-text-faint)]">CLI Tool &middot; Homebrew</span>
+        </div>
+      </div>
+      <p class="text-sm text-[var(--color-text-muted)] mb-4">
+        macOS security posture analyzer. Network trust assessment, port scanning, DNS audit, firewall verification, and hardening recommendations. Securing BCI research endpoints starts at the host.
+      </p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-tertiary)]/10 text-[var(--color-accent-tertiary)] font-medium">Endpoint Security</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] font-medium">CLI</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)] font-medium">Homebrew</span>
+      </div>
+      <div class="flex items-center gap-1 text-xs text-[var(--color-text-faint)] group-hover:text-[var(--color-accent-tertiary)] transition-colors">
+        <span>View on GitHub</span>
+        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+        </svg>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Intel & APIs section -->
+  <div class="mt-12 pt-8 border-t border-[var(--color-border)]">
+    <h2 class="text-xl font-semibold font-[family-name:var(--font-heading)] mb-4">Data & APIs</h2>
+    <div class="grid gap-4 md:grid-cols-2">
+      <a href="/tools/intel/" class="group glass rounded-lg p-4 border border-[var(--color-border)] hover:border-[var(--color-accent-primary)]/30 transition-all">
+        <h3 class="text-sm font-semibold group-hover:text-[var(--color-accent-primary)] transition-colors">Intel & APIs</h3>
+        <p class="text-xs text-[var(--color-text-faint)] mt-1">STIX 2.1 export, REST API, Python SDK, 74+ verified research sources</p>
+      </a>
+      <a href="/research/data-lake/" class="group glass rounded-lg p-4 border border-[var(--color-border)] hover:border-[var(--color-accent-primary)]/30 transition-all">
+        <h3 class="text-sm font-semibold group-hover:text-[var(--color-accent-primary)] transition-colors">Data Lake Dashboard</h3>
+        <p class="text-xs text-[var(--color-text-faint)] mt-1">Live metrics across all QIF data sources</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Status note -->
+  <p class="mt-10 text-xs text-[var(--color-text-faint)]">
+    All tools are open-source. QIF, TARA, and NISS are proposed research tools, not adopted standards.
+    Full documentation lives on each tool's GitHub README.
+  </p>
+
+</PageLayout>

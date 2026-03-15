@@ -392,6 +392,26 @@
       "type": "milestone",
       "title": "Joined FIRST.org CVSS Special Interest Group",
       "description": "Registered as CVSS SIG member via FIRST portal. Contributing domain expertise on neural interface security scoring. The SIG noted no existing domain experts in BCI security among current members."
+    },
+    {
+      "date": "2026-03-14",
+      "type": "release",
+      "title": "BCI Security Plugin v1.0: Claude Code Marketplace",
+      "description": "Published the first neurotechnology security plugin for any AI coding platform. 6 skills (TARA lookup, NISS scoring, neuromodesty check, threat modeling, code scanning, interactive learning), 2 slash commands (/bci, /bci-scan), 1 threat modeling agent, 1 neural data detection hook. Zero dependencies. Designed by 8-agent Quorum swarm, validated by 4-agent review swarm. Dual-licensed: Apache 2.0 (code), CC BY-SA 4.0 (data). github.com/qinnovates/bci-security",
+      "stats_snapshot": {
+        "threat_techniques": 135,
+        "tara_version": "v1.7"
+      }
+    },
+    {
+      "date": "2026-03-14",
+      "type": "release",
+      "title": "TARA v1.7: 135 Techniques with Full Evidence Tiers",
+      "description": "Expanded from 109 to 135 techniques across 11 biological domains. Added 26 new techniques (QIF-T0110-T0135) covering neuroendocrine, glial, neurovascular, and receptor domains. 6 evidence tiers (CONFIRMED/EMERGING/DEMONSTRATED/THEORETICAL/PLAUSIBLE/SPECULATIVE). Full FDORA Section 524B regulatory mapping. 21-agent validation swarm with zero fabricated techniques.",
+      "stats_snapshot": {
+        "threat_techniques": 135,
+        "research_sources": 311
+      }
     }
   ]
 }
