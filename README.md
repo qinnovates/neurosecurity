@@ -55,7 +55,53 @@ npm run build     # Build site (282 pages)
 
 The author is a security engineer with ~15 years of IT and security infrastructure experience, not a mathematician, physicist, or neuroscientist. AI tools (primarily Claude, with Gemini and ChatGPT for cross-validation) were used extensively. All AI-derived claims should be treated as **proposed and unvalidated** until independently verified by domain experts.
 
-**Full transparency:** [Transparency Statement](governance/TRANSPARENCY.md) | [Derivation Log](qif-framework/QIF-DERIVATION-LOG.md) (99+ entries) | [Ship Log](governance/SHIP-LOG.md) | [Decision Log](governance/DECISION-LOG.md) | [Validation Status](VALIDATION.md)
+**Full transparency:** [Transparency Statement](governance/TRANSPARENCY.md) | [Derivation Log](qif-framework/QIF-DERIVATION-LOG.md) (99+ entries) | [Decision Log](governance/DECISION-LOG.md) | [Validation Status](VALIDATION.md)
+
+---
+
+## Repository Structure
+
+```
+qinnovate/
+├── src/                              # Astro 5 website (qinnovate.com)
+│   ├── pages/data-studio/            # Dataset browser + EEG viewer
+│   ├── components/data-studio/       # DataStudioBrowser, EEGBrowser, SQLConsole
+│   ├── hooks/useDuckDB.ts            # DuckDB-WASM singleton (CDN-loaded)
+│   └── lib/kql-tables.ts             # Universal KQL table builder
+│
+├── qif-framework/                    # QIF specification + implementations
+│   ├── nsp/nsp-core/                 # Neural Sensory Protocol (Rust, PQ-secure)
+│   ├── runemate/forge/               # Runemate DSL compiler (Rust)
+│   ├── QIF-DERIVATION-LOG.md         # 99+ entries — single source of truth
+│   ├── QIF-FIELD-JOURNAL.md          # First-person research observations
+│   └── QIF-RESEARCH-SOURCES.md       # 309+ verified sources
+│
+├── shared/                           # Cross-cutting data + tools (datalake)
+│   ├── qtara-registrar.json          # TARA techniques (135, CVSS + NISS)
+│   ├── impact-chains.json            # Precomputed threat-to-outcome chains
+│   ├── bci-landscape.json            # 57 companies, 68 devices
+│   ├── eeg-samples.json              # 16 EEG datasets with TARA mappings
+│   ├── qtara/                        # Python SDK (pip install qtara)
+│   └── scripts/                      # Data pipeline scripts
+│
+├── governance/                       # Ethics, consent, policy, audit trail
+│   ├── TRANSPARENCY.md               # AI disclosure (auto-generated)
+│   ├── DECISION-LOG.md               # RACI decisions + ship status (auto-generated)
+│   └── CODE_OF_CONDUCT.md            # Contributor guidelines
+│
+├── scripts/                          # Build + data pipelines
+│   ├── generate-parquet.py           # JSON → Parquet (PyArrow, Zstd L3)
+│   ├── generate-kql-json.mjs         # KQL tables → static JSON for browser
+│   ├── generate-governance.mjs       # Derivation log → Decision/Transparency
+│   ├── process-eeg-to-parquet.py     # MNE-Python EEG preprocessing
+│   └── governance-precommit.sh       # Sensitive data scanner (pre-commit hook)
+│
+├── paper/                            # Academic publications (LaTeX)
+├── tools/                            # Security tools (neurowall, macshield)
+├── docs/                             # Built site + static data
+│   └── data/parquet/                 # 31 Parquet datasets (722KB total)
+└── .github/workflows/                # CI/CD (deploy, audit, sync)
+```
 
 ---
 
@@ -303,8 +349,8 @@ This project uses a **single-source-of-truth model** for decision tracking. One 
               ┌────────────────┼────────────────┐
               ▼                ▼                ▼
    ┌─────────────────┐ ┌─────────────┐ ┌──────────────┐
-   │ DECISION-LOG.md │ │TRANSPARENCY │ │  SHIP-LOG.md │
-   │ (auto-generated)│ │.md (auto)   │ │  (manual)    │
+   │ DECISION-LOG.md │ │TRANSPARENCY │
+   │ (auto-generated)│ │.md (auto)   │
    │ npm run decisions│ │npm run      │ │  ✅🚧📋❌    │
    └─────────────────┘ │transparency │ └──────────────┘
                         └─────────────┘
@@ -315,7 +361,6 @@ This project uses a **single-source-of-truth model** for decision tracking. One 
 | **[QIF-DERIVATION-LOG.md](qif-framework/QIF-DERIVATION-LOG.md)** | Lab notebook — every framework insight, decision, correction. RACI attribution, AI contribution level per entry. | Kevin (future self), peer reviewers, collaborators | Per session (max 1 entry) |
 | **[DECISION-LOG.md](governance/DECISION-LOG.md)** | RACI tables — who decided, who built, who reviewed. | Governance auditors, future collaborators | Auto-generated: `npm run decisions` |
 | **[TRANSPARENCY.md](governance/TRANSPARENCY.md)** | AI collaboration disclosure — contribution matrix, correction count, tool versions. | Peer reviewers, venues (arXiv, ACM, IEEE) | Auto-generated: `npm run transparency` |
-| **[SHIP-LOG.md](governance/SHIP-LOG.md)** | High-level feature tracker — what shipped, what's backlogged, with status checkmarks. | Kevin, anyone wanting a quick overview | Manual, per session |
 | **[QIF-FIELD-JOURNAL.md](qif-framework/QIF-FIELD-JOURNAL.md)** | Personal/experiential observations. Kevin's raw voice. AI cannot write this. | Kevin only | When something surprises him |
 | **[CHANGELOG.md](CHANGELOG.md)** | Auto-generated from git commits. What changed, not why. | Developers, contributors | Auto: `npm run changelog` |
 
@@ -334,59 +379,12 @@ All research data is served as open Parquet datasets at [qinnovate.com/data-stud
 
 ### Sensitive Information Controls
 
-A [3-tier filter](governance/SHIP-LOG.md) prevents sensitive data from reaching the public repo:
+A 3-tier filter prevents sensitive data from reaching the public repo:
 - **Tier 1 (auto-redact):** Emails, API keys, subject IDs, IRB numbers, home paths — Claude blocks inline, pre-commit hook catches in staged diffs
 - **Tier 2 (warn-before-write):** Unpublished vulns, personal medical details, draft applications — Claude asks Kevin before including
 - **Tier 3 (allowed):** Published names, DOIs, technique IDs, architecture decisions, NISS scores
 
 Pre-commit hook: `scripts/governance-precommit.sh` (13 regex patterns, whitelist for known-safe)
-
----
-
-## Repository Structure
-
-```
-qinnovates/qinnovate/
-├── qif-framework/                    # QIF specification + implementations
-│   ├── nsp/nsp-core/                 # Neural Sensory Protocol (Rust, PQ-secure)
-│   ├── runemate/forge/               # Runemate DSL compiler (Rust)
-│   ├── QIF-DERIVATION-LOG.md         # 99+ entries — single source of truth
-│   ├── QIF-FIELD-JOURNAL.md          # First-person research observations
-│   └── QIF-RESEARCH-SOURCES.md       # 309+ verified sources
-│
-├── shared/                           # Cross-cutting data + tools (datalake)
-│   ├── qtara-registrar.json          # TARA techniques (135, CVSS + NISS)
-│   ├── impact-chains.json            # Precomputed threat-to-outcome chains
-│   ├── bci-landscape.json            # 57 companies, 68 devices
-│   ├── eeg-samples.json              # 16 EEG datasets with TARA mappings
-│   ├── qtara/                        # Python SDK (pip install qtara)
-│   └── scripts/                      # Data pipeline scripts
-│
-├── governance/                       # Ethics, consent, policy, audit trail
-│   ├── TRANSPARENCY.md               # AI disclosure (auto-generated)
-│   ├── DECISION-LOG.md               # RACI decisions (auto-generated)
-│   ├── SHIP-LOG.md                   # Feature tracker (✅🚧📋❌)
-│   └── CODE_OF_CONDUCT.md            # Contributor guidelines
-│
-├── scripts/                          # Build + data pipelines
-│   ├── generate-parquet.py           # JSON → Parquet (PyArrow, Zstd L3)
-│   ├── generate-kql-json.mjs         # KQL tables → static JSON for browser
-│   ├── generate-governance.mjs       # Derivation log → Decision/Transparency
-│   ├── process-eeg-to-parquet.py     # MNE-Python EEG preprocessing
-│   └── governance-precommit.sh       # Sensitive data scanner (pre-commit hook)
-│
-├── src/                              # Astro 5 website (qinnovate.com)
-│   ├── pages/data-studio/            # Dataset browser + EEG viewer
-│   ├── components/data-studio/       # DataStudioBrowser, EEGBrowser, SQLConsole
-│   ├── hooks/useDuckDB.ts            # DuckDB-WASM singleton (CDN-loaded)
-│   └── lib/kql-tables.ts             # Universal KQL table builder
-│
-├── paper/                            # Academic publications (LaTeX)
-├── tools/                            # Security tools (neurowall, macshield)
-├── docs/                             # Built site + static data
-│   └── data/parquet/                 # 31 Parquet datasets (722KB total)
-└── .github/workflows/                # CI/CD (deploy, audit, sync)
-```
 
 ---
 
@@ -468,8 +466,7 @@ npm run health            # Verify counts match across README, timeline, etc.
 1. Build and test locally: `npm run dev`
 2. Run health check: `npm run health`
 3. Run type check: `npm run type-check`
-4. Update [SHIP-LOG.md](governance/SHIP-LOG.md) with a status row
-5. Commit with prefix: `[Add]` for features, `[Fix]` for bugs, `docs:` for documentation
+4. Commit with prefix: `[Add]` for features, `[Fix]` for bugs, `docs:` for documentation
 
 ### Governance (for AI-assisted contributions)
 
@@ -541,7 +538,7 @@ This work needs collaborators. The research base is compiled (309+ verified sour
 
 If you work with neural data, BCI design, neuroethics, health policy, or regulatory compliance, please reach out.
 
-**Contact:** kevin@qinnovate.com
+**Contact:** [GitHub Issues](https://github.com/qinnovates/qinnovate/issues)
 **Website:** [qinnovate.com](https://qinnovate.com)
 **GitHub:** [github.com/qinnovates](https://github.com/qinnovates)
 
