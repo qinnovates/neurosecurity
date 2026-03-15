@@ -4,7 +4,16 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: dcf9728044370fc73558172c1e7a6791096b4f68 -->
+<!-- changelog-marker: b0be9280ea512616be3efe5e0cf8d2c52a8eeeb2 -->
+
+## 2026-03-15
+
+### Added
+- BCI use cases page, hero text update, DeviantArt archive ([b0be928](https://github.com/qinnovates/qinnovate/commit/b0be928))
+
+### Fixed
+- QIF_VERSION 7.0→8.0 + whitepaper section numbering ([3d4c316](https://github.com/qinnovates/qinnovate/commit/3d4c316))
+
 
 ## Both
 
