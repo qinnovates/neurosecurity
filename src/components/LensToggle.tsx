@@ -1,139 +1,162 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { useLens } from './hooks/useLens';
 import type { Lens } from '../lib/lens';
 import { LENS_LABELS } from '../lib/lens';
 
-const LENSES: Lens[] = ['security', 'clinical'];
+const LENSES: Lens[] = ['security', 'both', 'clinical'];
+
+const ACCENT: Record<Lens, { bg: string; border: string; text: string; glow: string }> = {
+  security: {
+    bg: 'rgba(59, 130, 246, 0.15)',
+    border: 'rgba(59, 130, 246, 0.3)',
+    text: '#3b82f6',
+    glow: '0 0 10px rgba(59, 130, 246, 0.1)',
+  },
+  both: {
+    bg: 'rgba(59, 130, 246, 0.15)',
+    border: 'rgba(59, 130, 246, 0.3)',
+    text: '#3b82f6',
+    glow: '0 0 10px rgba(59, 130, 246, 0.1)',
+  },
+  clinical: {
+    bg: 'rgba(6, 182, 212, 0.15)',
+    border: 'rgba(6, 182, 212, 0.3)',
+    text: '#06b6d4',
+    glow: '0 0 10px rgba(6, 182, 212, 0.1)',
+  },
+};
 
 /**
- * Segmented control for switching between Security and Clinical lenses.
- * Renders as a glass-morphism pill with a sliding indicator.
- * Keyboard shortcuts: S = security, C = clinical (when not focused on an input).
+ * 3-state segmented control: Security | Both | Clinical.
+ * Compact pill with sliding indicator and roving tabindex.
  */
 export default function LensToggle() {
   const { lens, setLens } = useLens();
+  const groupRef = useRef<HTMLDivElement>(null);
 
-  // Keyboard shortcuts
+  // Keyboard shortcuts (S / B / C when not in an input)
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      // Skip if user is typing in an input, textarea, or contenteditable
       const target = e.target as HTMLElement;
       if (
         target.tagName === 'INPUT' ||
         target.tagName === 'TEXTAREA' ||
         target.tagName === 'SELECT' ||
         target.isContentEditable
-      ) {
-        return;
-      }
-
-      // Skip if modifier keys are held
+      ) return;
       if (e.ctrlKey || e.metaKey || e.altKey) return;
 
-      if (e.key === 's' || e.key === 'S') {
-        e.preventDefault();
-        setLens('security');
-      } else if (e.key === 'c' || e.key === 'C') {
-        e.preventDefault();
-        setLens('clinical');
-      }
+      const key = e.key.toLowerCase();
+      if (key === 's') { e.preventDefault(); setLens('security'); }
+      else if (key === 'b') { e.preventDefault(); setLens('both'); }
+      else if (key === 'c') { e.preventDefault(); setLens('clinical'); }
     }
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [setLens]);
 
+  // Roving tabindex: arrow keys move between buttons
+  const onKeyDown = useCallback((e: React.KeyboardEvent, idx: number) => {
+    let next = idx;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      next = (idx + 1) % LENSES.length;
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      next = (idx - 1 + LENSES.length) % LENSES.length;
+    } else {
+      return;
+    }
+    e.preventDefault();
+    const buttons = groupRef.current?.querySelectorAll<HTMLButtonElement>('[role="radio"]');
+    if (buttons?.[next]) {
+      buttons[next].focus();
+      setLens(LENSES[next]);
+    }
+  }, [setLens]);
+
   const activeIndex = LENSES.indexOf(lens);
+  const accent = ACCENT[lens];
+  const shortcutKeys: Record<Lens, string> = { security: 'S', both: 'B', clinical: 'C' };
 
   return (
-    <div
-      className="relative inline-flex items-center rounded-full p-0.5"
-      style={{
-        background: 'var(--color-glass-bg)',
-        border: '1px solid var(--color-glass-border)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-      }}
-      role="radiogroup"
-      aria-label="Analysis lens"
-    >
-      {/* Sliding indicator */}
-      <span
-        className="absolute top-0.5 bottom-0.5 rounded-full transition-all duration-300 ease-out"
+    <div style={{ position: 'relative' }}>
+      <div
+        ref={groupRef}
+        className="relative inline-flex items-center rounded-full p-px"
         style={{
-          width: 'calc(50% - 2px)',
-          left: activeIndex === 0 ? '2px' : 'calc(50%)',
-          background:
-            lens === 'security'
-              ? 'rgba(59, 130, 246, 0.15)'
-              : 'rgba(6, 182, 212, 0.15)',
-          border: `1px solid ${
-            lens === 'security'
-              ? 'rgba(59, 130, 246, 0.3)'
-              : 'rgba(6, 182, 212, 0.3)'
-          }`,
-          boxShadow:
-            lens === 'security'
-              ? '0 0 12px rgba(59, 130, 246, 0.1)'
-              : '0 0 12px rgba(6, 182, 212, 0.1)',
+          background: 'var(--color-glass-bg)',
+          border: '1px solid var(--color-glass-border)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
         }}
-        aria-hidden="true"
-      />
+        role="radiogroup"
+        aria-label="Analysis lens"
+      >
+        {/* Sliding indicator */}
+        <span
+          className="absolute top-px bottom-px rounded-full transition-all duration-300 ease-out"
+          style={{
+            width: `calc(${100 / LENSES.length}% - 2px)`,
+            left: `calc(${(activeIndex * 100) / LENSES.length}% + 1px)`,
+            background: accent.bg,
+            border: `1px solid ${accent.border}`,
+            boxShadow: accent.glow,
+          }}
+          aria-hidden="true"
+        />
 
-      {LENSES.map((l) => {
-        const isActive = lens === l;
-        const label = LENS_LABELS[l];
+        {LENSES.map((l, i) => {
+          const isActive = lens === l;
+          const colors = ACCENT[l];
+          const label = LENS_LABELS[l];
 
-        return (
-          <button
-            key={l}
-            type="button"
-            role="radio"
-            aria-checked={isActive}
-            aria-label={`${label.name} lens${l === 'security' ? ' (S)' : ' (C)'}`}
-            onClick={() => setLens(l)}
-            className="relative z-10 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition-colors duration-200 cursor-pointer select-none"
-            style={{
-              color: isActive
-                ? l === 'security'
-                  ? 'var(--color-accent-primary)'
-                  : 'var(--color-accent-secondary)'
-                : 'var(--color-text-muted)',
-            }}
-          >
-            {/* Status dot */}
-            <span
-              className="inline-block w-1.5 h-1.5 rounded-full transition-all duration-300"
+          return (
+            <button
+              key={l}
+              type="button"
+              role="radio"
+              aria-checked={isActive}
+              aria-label={`${label.name} lens (${shortcutKeys[l]})`}
+              onClick={() => setLens(l)}
+              onKeyDown={(e) => onKeyDown(e, i)}
+              tabIndex={isActive ? 0 : -1}
+              className="relative z-10 flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium tracking-wide transition-colors duration-200 cursor-pointer select-none"
               style={{
-                background: isActive
-                  ? l === 'security'
-                    ? '#3b82f6'
-                    : '#06b6d4'
-                  : 'var(--color-text-faint)',
-                boxShadow: isActive
-                  ? l === 'security'
-                    ? '0 0 6px rgba(59, 130, 246, 0.5)'
-                    : '0 0 6px rgba(6, 182, 212, 0.5)'
-                  : 'none',
+                color: isActive ? colors.text : 'var(--color-text-muted)',
               }}
-              aria-hidden="true"
-            />
-            <span style={{ letterSpacing: '0.05em' }}>{label.name}</span>
-            <kbd
-              className="hidden sm:inline-block ml-0.5 px-1 py-px rounded text-[0.6rem] font-mono transition-opacity duration-200"
-              style={{
-                background: 'var(--color-bg-elevated)',
-                border: '1px solid var(--color-border)',
-                color: 'var(--color-text-faint)',
-                opacity: isActive ? 0.7 : 0.4,
-              }}
-              aria-hidden="true"
             >
-              {l === 'security' ? 'S' : 'C'}
-            </kbd>
-          </button>
-        );
-      })}
+              {/* Status dot */}
+              <span
+                className="inline-block w-1 h-1 rounded-full transition-all duration-300"
+                style={{
+                  background: isActive ? colors.text : 'var(--color-text-faint)',
+                  boxShadow: isActive ? `0 0 4px ${colors.text}80` : 'none',
+                }}
+                aria-hidden="true"
+              />
+              <span style={{ letterSpacing: '0.05em' }}>{label.name}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Live announcer for screen readers */}
+      <div
+        aria-live="polite"
+        className="sr-only"
+        style={{
+          position: 'absolute',
+          width: '1px',
+          height: '1px',
+          padding: 0,
+          margin: '-1px',
+          overflow: 'hidden',
+          clip: 'rect(0, 0, 0, 0)',
+          whiteSpace: 'nowrap',
+          border: 0,
+        }}
+      >
+        {lens === 'both' ? 'Viewing both lenses' : `Viewing as ${LENS_LABELS[lens].name}`}
+      </div>
     </div>
   );
 }
