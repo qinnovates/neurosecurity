@@ -47,7 +47,7 @@ function getStructure() {
   - \`lib/\`: Utility functions and constants
 - \`qif-framework/\`: QIF security specification docs
 - \`governance/\`: Policy and ethics documents
-- \`shared/\`: Shared data (Source of Truth)
+- \`datalake/\`: Shared data (Source of Truth)
 - \`public/\`: Static assets
 `;
     return structure;
@@ -62,7 +62,7 @@ const techStack = `## Tech Stack
 const guidelines = `## Guidelines
 - Use Semantic HTML.
 - Follow Tailwind v4 conventions.
-- Update \`shared/\` JSON files for data changes, which are copied to \`docs/data\` during build.
+- Update \`datalake/\` JSON files for data changes, which are copied to \`docs/data\` during build.
 - Documentation is a primary product; keep markdown clean and standard.
 `;
 

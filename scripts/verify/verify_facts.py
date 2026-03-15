@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Fact consistency checker — validates hardcoded stats against source data.
-Reads shared/qtara-registrar.json as source of truth.
+Reads datalake/qtara-registrar.json as source of truth.
 
 Usage:
   python3 scripts/verify/verify_facts.py

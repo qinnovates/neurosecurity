@@ -8,10 +8,10 @@ mkdir -p docs/data docs/data/parquet docs/papers
 
 # 2. Copy source JSON to docs/data (static serving)
 echo "[prebuild] Copying data files..."
-cp shared/qtara-registrar.json docs/data/
-cp shared/derivation-timeline.json docs/data/
-cp shared/validation-registry.json docs/data/
-cp shared/research-registry.json docs/data/
+cp datalake/qtara-registrar.json docs/data/
+cp datalake/derivation-timeline.json docs/data/
+cp datalake/validation-registry.json docs/data/
+cp datalake/research-registry.json docs/data/
 
 # 3. Generate KQL JSON (async-fetchable tables for BciKql)
 echo "[prebuild] Generating KQL JSON..."

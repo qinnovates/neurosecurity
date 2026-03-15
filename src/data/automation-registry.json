@@ -97,7 +97,7 @@
         "scripts/verify/run_all.py",
         "paper/",
         "blogs/",
-        "shared/qtara-registrar.json",
+        "datalake/qtara-registrar.json",
         "qif-framework/"
       ],
       "outputs": [
@@ -120,7 +120,7 @@
         "qif-framework/README.md",
         "oni-framework/README.md",
         "governance/README.md",
-        "shared/README.md"
+        "datalake/README.md"
       ],
       "outputs": [
         "GitHub Wiki pages (Home, QIF-Framework, ONI-Framework, Governance, Classical-Quantum-Bridge)"
@@ -195,9 +195,9 @@
       "last_triggered": "2026-03-14T10:22:37Z",
       "last_status": "failure",
       "dependencies": [
-        "shared/qtara/",
-        "shared/qtara-registrar.json",
-        "shared/scripts/sync-package-data.py"
+        "datalake/qtara/",
+        "datalake/qtara-registrar.json",
+        "datalake/scripts/sync-package-data.py"
       ],
       "outputs": [
         "PyPI package (qtara)",
@@ -523,7 +523,7 @@
       "last_status": "unknown",
       "dependencies": [
         "src/data/qif-timeline.json",
-        "shared/qtara-registrar.json",
+        "datalake/qtara-registrar.json",
         "src/data/milestones.json",
         "src/lib/glossary-constants.ts"
       ],
@@ -603,7 +603,7 @@
       "last_status": "success",
       "dependencies": [
         "scripts/fetch-intel.mjs",
-        "shared/bci-landscape.json"
+        "datalake/bci-landscape.json"
       ],
       "outputs": [
         "src/data/bci-intel-feed.json"
@@ -622,7 +622,7 @@
       "last_status": "unknown",
       "dependencies": [
         "RSS feed URLs (configured in script)",
-        "shared/bci-landscape.json"
+        "datalake/bci-landscape.json"
       ],
       "outputs": [
         "src/data/bci-intel-feed.json"
@@ -640,10 +640,10 @@
       "last_triggered": null,
       "last_status": null,
       "dependencies": [
-        "shared/bci-landscape.json",
-        "shared/qtara-registrar.json",
-        "shared/neurosecurity-scores.json",
-        "shared/cve-technique-mapping.json",
+        "datalake/bci-landscape.json",
+        "datalake/qtara-registrar.json",
+        "datalake/neurosecurity-scores.json",
+        "datalake/cve-technique-mapping.json",
         "scripts/generate-valuation-chart.py"
       ],
       "outputs": [

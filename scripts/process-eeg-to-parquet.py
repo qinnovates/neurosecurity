@@ -473,7 +473,7 @@ def process_epilepsy_chbmit(data_dir: Path, notch_freq: float,
 
     if not dataset_dir.exists():
         print(f"  Dataset directory not found: {dataset_dir}")
-        print(f"  Run: npm run eeg:download or python3 shared/scripts/download-eeg-samples.py --dataset epilepsy-chbmit")
+        print(f"  Run: npm run eeg:download or python3 datalake/scripts/download-eeg-samples.py --dataset epilepsy-chbmit")
         return None
 
     edfs = find_edf_files(dataset_dir)

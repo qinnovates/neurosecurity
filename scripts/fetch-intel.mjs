@@ -21,7 +21,7 @@ import { randomBytes } from 'node:crypto';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 const FEED_PATH = resolve(ROOT, 'src/data/bci-intel-feed.json');
-const LANDSCAPE_PATH = resolve(ROOT, 'shared/bci-landscape.json');
+const LANDSCAPE_PATH = resolve(ROOT, 'datalake/bci-landscape.json');
 
 const FETCH_TIMEOUT_MS = 10000;
 const MAX_RESPONSE_BYTES = 5 * 1024 * 1024; // 5 MB cap per feed response

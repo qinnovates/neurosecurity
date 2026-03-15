@@ -5,7 +5,7 @@ on:
     paths:
       - 'paper/**'
       - 'blogs/**'
-      - 'shared/qtara-registrar.json'
+      - 'datalake/qtara-registrar.json'
       - 'src/lib/whitepaper-stats.ts'
       - 'qif-framework/**'
   push:

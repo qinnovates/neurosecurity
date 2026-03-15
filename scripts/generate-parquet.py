@@ -7,7 +7,7 @@ Generates:
   docs/data/parquet/catalog.json      — metadata manifest for the Data Studio
 
 Architecture:
-  shared/*.json → PyArrow → docs/data/parquet/*.parquet
+  datalake/*.json → PyArrow → docs/data/parquet/*.parquet
   Served as static files at /data/parquet/ on the live site.
 
 Usage:
@@ -24,7 +24,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 ROOT = Path(__file__).resolve().parent.parent
-SHARED = ROOT / "shared"
+SHARED = ROOT / "datalake"
 SRC_DATA = ROOT / "src" / "data"
 OUT = ROOT / "docs" / "data" / "parquet"
 
