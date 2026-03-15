@@ -108,10 +108,10 @@ const tacticColors: Record<string, string> = {
             This paper proposes a secure BCI architecture derived from security engineering and ethics.
           </p>
           <p>
-            It started with a question: what would threat modeling for the human mind look like? That question led me into the world of brain-computer interfaces &mdash; and quickly made clear that you cannot build for the brain the way you build for a screen. The technical architecture alone is not enough. To do this right from the design phase, I applied two decades of security instincts and went deep into the disciplines that should inform every decision at this layer: neuroethics, AI ethics, and the emerging fields of neurorights and neuroprivacy.
+            It started with a question: what would threat modeling for the human mind look like? That question led me into the world of brain-computer interfaces, and quickly made clear that you cannot build for the brain the way you build for a screen. The technical architecture alone is not enough. To do this right from the design phase, I applied two decades of security instincts and went deep into the disciplines that should inform every decision at this layer: neuroethics, AI ethics, and the emerging fields of neurorights and neuroprivacy.
           </p>
           <p>
-            I believe it is vital for the adoption of BCIs &mdash; and in the best interest of every company building them &mdash; that we embed ethics and security by design. The last thing we should do in pursuit of cures for the sick and the unable is introduce vulnerabilities to an already vulnerable mind. It is our duty as engineers and architects to understand the full scope in which a clinical remedy may introduce more risk than reward, and to design systems that make that calculus transparent.
+            I believe it is vital for the adoption of BCIs, and in the best interest of every company building them, that we embed ethics and security by design. The last thing we should do in pursuit of cures for the sick and the unable is introduce vulnerabilities to an already vulnerable mind. It is our duty as engineers and architects to understand the full scope in which a clinical remedy may introduce more risk than reward, and to design systems that make that calculus transparent.
           </p>
           <p>
             That is the mission behind this paper.
@@ -223,7 +223,7 @@ const tacticColors: Record<string, string> = {
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The Proposal</h2>
         <div class="prose mb-8">
           <p>
-            Every transformative technology gets one chance to build its foundation right. The internet did not take that chance. TCP/IP shipped without authentication. HTTP shipped without encryption. DNS shipped without integrity verification. We spent the next four decades bolting on security after the fact &mdash; TLS, DNSSEC, OAuth, zero-trust architectures &mdash; each one a patch on a foundation that was never designed to be secure.
+            Every transformative technology gets one chance to build its foundation right. The internet did not take that chance. TCP/IP shipped without authentication. HTTP shipped without encryption. DNS shipped without integrity verification. We spent the next four decades bolting on security after the fact. TLS, DNSSEC, OAuth, zero-trust architectures. Each one a patch on a foundation that was never designed to be secure.
           </p>
           <p>
             Brain-computer interfaces are at that same inflection point. The first cortical implants are in human skulls. The first commercial devices are shipping. And the security architecture is, once again, an afterthought. The difference this time is that the attack surface is not a credit card number or a social security record. It is the human nervous system. There are no rollbacks for neural tissue damage. There is no &ldquo;change your password&rdquo; for a compromised sensory cortex.
@@ -237,7 +237,7 @@ const tacticColors: Record<string, string> = {
         <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-primary);">
           <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">The Blank Slate</h3>
           <p class="text-sm text-[var(--color-text-muted)]">
-            We are building from a blank slate &mdash; and that is the advantage. We have full knowledge of every security failure that preceded us. The goal is to design a BCI security architecture that introduces as little technical debt as possible. Every layer is intentional. Every protocol earns its place. Where the internet added security as middleware, this architecture embeds it at the kernel level. Where medical devices shipped firmware as proprietary black boxes, this architecture proposes open-source auditability from day one.
+            We are building from a blank slate. That is the advantage. We have full knowledge of every security failure that preceded us. The goal is to design a BCI security architecture that introduces as little technical debt as possible. Every layer is intentional. Every protocol earns its place. Where the internet added security as middleware, this architecture embeds it at the kernel level. Where medical devices shipped firmware as proprietary black boxes, this architecture proposes open-source auditability from day one.
           </p>
         </div>
 
@@ -245,7 +245,7 @@ const tacticColors: Record<string, string> = {
         <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-secondary);">
           <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">The Vision</h3>
           <p class="text-sm text-[var(--color-text-muted)]">
-            QIF proposes a BCI security architecture designed to stand the test of time &mdash; not for a product cycle, but for the full span of a human life. A person implanted at 30 may carry that device for 70 years. The architecture must outlast the company that built it, the protocol standard it launched with, and the threat landscape it was designed against. Second Sight ceased operations in 2020, leaving Argus II patients with unsupported hardware in their eyes. That cannot happen again.
+            QIF proposes a BCI security architecture designed to stand the test of time. Not for a product cycle, but for the full span of a human life. A person implanted at 30 may carry that device for 70 years. The architecture must outlast the company that built it, the protocol standard it launched with, and the threat landscape it was designed against. Second Sight ceased operations in 2020, leaving Argus II patients with unsupported hardware in their eyes. That cannot happen again.
           </p>
         </div>
 
@@ -253,7 +253,7 @@ const tacticColors: Record<string, string> = {
         <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-tertiary);">
           <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">Patient-First Equity</h3>
           <p class="text-sm text-[var(--color-text-muted)]">
-            The starting point is the patient. The people who need BCIs most urgently &mdash; those with severe motor impairment, blindness, locked-in syndrome &mdash; are also the most vulnerable to exploitation by closed systems they cannot inspect, modify, or leave. Building patient sovereignty into the architecture is not a feature. It is a prerequisite for equitable access. The patient can inspect every signal entering their nervous system. The patient can disconnect without asking a cloud service for permission. The patient can switch hardware without being locked into a vendor's ecosystem.
+            The starting point is the patient. The people who need BCIs most urgently, those with severe motor impairment, blindness, locked-in syndrome, are also the most vulnerable to exploitation by closed systems they cannot inspect, modify, or leave. Building patient sovereignty into the architecture is not a feature. It is a prerequisite for equitable access. The patient can inspect every signal entering their nervous system. The patient can disconnect without asking a cloud service for permission. The patient can switch hardware without being locked into a vendor's ecosystem.
           </p>
         </div>
       </section>
@@ -264,7 +264,7 @@ const tacticColors: Record<string, string> = {
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The Defense Paradox</h2>
         <div class="prose mb-8">
           <p>
-            Every security defense introduces new attack surface. This is inevitable. SSL was designed to secure the web &mdash; and gave us Heartbleed. Firewalls were designed to filter traffic &mdash; and became misconfiguration targets. Password managers were designed to store credentials &mdash; and LastPass was breached. The defense paradox is not an argument against defense. It is a design constraint: <strong>minimize the number of layers, because each layer is a place the paradox can bite.</strong>
+            Every security defense introduces new attack surface. This is inevitable. SSL was designed to secure the web and gave us Heartbleed. Firewalls were designed to filter traffic and became misconfiguration targets. Password managers were designed to store credentials, and LastPass was breached. The defense paradox is not an argument against defense. It is a design constraint: <strong>minimize the number of layers, because each layer is a place the paradox can bite.</strong>
           </p>
         </div>
 
@@ -283,7 +283,7 @@ const tacticColors: Record<string, string> = {
             <div class="glass-subtle rounded-lg p-4 text-center">
               <div class="text-3xl mb-2">&#x1F6E1;</div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)]">Armor</p>
-              <p class="text-xs text-[var(--color-text-muted)]">Piling on layers &mdash; brute-force protection. Heavy, slow, vulnerable at joints.</p>
+              <p class="text-xs text-[var(--color-text-muted)]">Piling on layers. Brute-force protection. Heavy, slow, vulnerable at joints.</p>
             </div>
             <div class="glass-subtle rounded-lg p-4 text-center">
               <div class="text-3xl mb-2">&#x2694;</div>
@@ -297,7 +297,7 @@ const tacticColors: Record<string, string> = {
             </div>
           </div>
           <p class="text-sm text-[var(--color-text-muted)]">
-            We are not trying to fabricate steel from iron ore. We are engineering a metaphorical polymer. <strong>AI has the potential to be that polymer</strong> &mdash; but only if it is crafted with precision. The fundamentals are non-negotiable: human-in-the-loop oversight at every decision boundary, consent that is explicit and informed rather than implicit or buried in terms of service, and neurorights enforced at the architecture level rather than assumed by policy. Without these constraints, AI-driven neural security becomes AI-driven neural surveillance. The difference between the two is not the technology &mdash; it is the governance. Beyond ethics, the engineering challenge is equally unforgiving: <strong>configuration drift</strong> must not occur. Drift is too common in code, and at wide scale with neural devices, it would be catastrophic.
+            We are not trying to fabricate steel from iron ore. We are engineering a metaphorical polymer. <strong>AI has the potential to be that polymer</strong>, but only if it is crafted with precision. The fundamentals are non-negotiable: human-in-the-loop oversight at every decision boundary, consent that is explicit and informed rather than implicit or buried in terms of service, and neurorights enforced at the architecture level rather than assumed by policy. Without these constraints, AI-driven neural security becomes AI-driven neural surveillance. The difference between the two is not the technology. It is the governance. Beyond ethics, the engineering challenge is equally unforgiving: <strong>configuration drift</strong> must not occur. Drift is too common in code, and at wide scale with neural devices, it would be catastrophic.
           </p>
         </div>
 
@@ -373,12 +373,12 @@ const tacticColors: Record<string, string> = {
       <section id="landscape" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">BCI Industry Landscape</h2>
         <p class="text-sm text-[var(--color-text-muted)] mb-6">
-          Over $5 billion in disclosed funding deployed into BCI companies. None have published security documentation. This section surveys the current landscape of companies building neural interface technology.
+          Over $5 billion in disclosed funding deployed into BCI companies. To our knowledge, none have published public-facing security documentation. This section surveys the current landscape of companies building neural interface technology.
         </p>
 
         <div class="glass rounded-xl p-5 sm:p-6 mb-8" style="border-left: 4px solid #ef4444;">
           <p class="text-sm text-[var(--color-text-muted)]">
-            <strong class="text-[var(--color-text-primary)]">The security gap:</strong> No BCI manufacturer &mdash; Neuralink, Synchron, Blackrock Neurotech, Science Corp, OpenBCI, or Emotiv &mdash; has published an independent security audit or a full wireless security specification. Emotiv's AES-128-ECB encryption was <a href="https://www.cryptofails.com/post/70333773685/broadcast-your-brain-fixed-key-ecb-mode" class="text-[var(--color-accent-primary)]">publicly broken in 2010</a>. OpenBCI's protocol documentation contains zero mentions of encryption.
+            <strong class="text-[var(--color-text-primary)]">The security gap:</strong> To our knowledge, no BCI manufacturer, Neuralink, Synchron, Blackrock Neurotech, Science Corp, OpenBCI, or Emotiv, has published an independent security audit or a full wireless security specification. Emotiv's AES-128-ECB encryption was <a href="https://www.cryptofails.com/post/70333773685/broadcast-your-brain-fixed-key-ecb-mode" class="text-[var(--color-accent-primary)]">publicly broken in 2010</a>. OpenBCI's protocol documentation contains zero mentions of encryption.
           </p>
         </div>
 
@@ -417,7 +417,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="glass rounded-xl p-5 mb-8 border-l-4 border-amber-500">
           <p class="text-sm text-[var(--color-text-muted)]">
-            <strong class="text-amber-500">Disclaimer:</strong> This is not an exhaustive list. Other players are actively emerging in the BCI space &mdash; including companies in stimulation therapy, consumer EEG, neurofeedback, and BCI-adjacent neural data. The landscape is evolving rapidly and this section will be updated as new entrants are identified and researched.
+            <strong class="text-amber-500">Disclaimer:</strong> This is not an exhaustive list. Other companies are building in stimulation therapy, consumer EEG, neurofeedback, and neural data analytics. This section will be updated as new entrants are identified.
           </p>
         </div>
       </section>
@@ -440,7 +440,7 @@ const tacticColors: Record<string, string> = {
       <section id="funding" class="mb-16">
         <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-3">BCI Industry Funding</h2>
         <p class="text-sm text-[var(--color-text-muted)] mb-4">
-          Over $5 billion in disclosed funding deployed into BCI companies (Neuralink $363M, Synchron $145M, Paradromics $103M, Precision Neuroscience $93M, and others). None have published security documentation. Click any company for funding rounds and investors.
+          Over $5 billion in disclosed funding deployed into BCI companies (Neuralink $363M, Synchron $145M, Paradromics $103M, Precision Neuroscience $93M, and others). To our knowledge, none have published public-facing security documentation. Click any company for funding rounds and investors.
         </p>
         <div class="glass rounded-xl overflow-hidden mb-2" style="height: 580px;">
           <iframe
@@ -610,7 +610,7 @@ const tacticColors: Record<string, string> = {
             Existing vulnerability scoring systems were designed for software. CVSS v4.0 measures three properties: confidentiality, integrity, and availability. These are sufficient for databases and web servers. These metrics are insufficient for devices that directly interface with the human brain. CVSS cannot express biological tissue damage. It cannot quantify the loss of cognitive integrity. It lacks metrics for consent violation, irreversibility, and neuroplastic change.
           </p>
           <p>
-            The result is a scoring gap. Current CVSS scores for BCI vulnerabilities capture only a partial picture of potential impact. A signal injection attack that induces phantom sensory perception receives the same severity score as a buffer overflow &mdash; despite one being a software bug and the other a direct violation of an individual's subjective experience.
+            The result is a scoring gap. Current CVSS scores for BCI vulnerabilities capture only a partial picture of potential impact. A signal injection attack that induces phantom sensory perception receives the same severity score as a buffer overflow, despite one being a software bug and the other a direct violation of an individual's subjective experience.
           </p>
           <p>
             This is an immediate concern. The threat surface already exists. We have catalogued <strong>{stats.totalTechniques} techniques</strong> across 8 categories, from signal injection to cognitive integrity violations. <strong>{stats.threat.critical} are critical severity</strong>. <strong>{stats.pinsCount} trigger the PINS flag</strong> for Potential Impact to Neural Safety. <strong>{stats.irreversibleCount} cause irreversible or partially irreversible damage</strong>.
@@ -721,10 +721,10 @@ const tacticColors: Record<string, string> = {
         <div class="prose mb-8">
           <h3>3.3 Architecture</h3>
           <p>
-            The QIF Hourglass is an 11-band architectural model that maps all potential threat surfaces within a BCI &mdash; from the highest cortical structures through the electrode-tissue boundary and into the synthetic processing chain.
+            The QIF Hourglass is an 11-band architectural model that maps all potential threat surfaces within a BCI, from the highest cortical structures through the electrode-tissue boundary and into the synthetic processing chain.
           </p>
           <p>
-            Seven bands are <strong>neural</strong> (N7 Neocortex through N1 Spinal Cord), representing biological tissue with distinct functional properties and vulnerability profiles. One band is the <strong>interface</strong> (I0), the electrode-tissue boundary where biological signals are converted to digital data &mdash; and where the highest concentration of techniques converges. Three bands are <strong>synthetic</strong> (S1 Near-Field through S3 Far-Field), covering the electronic processing, host compute, and communication chain.
+            Seven bands are <strong>neural</strong> (N7 Neocortex through N1 Spinal Cord), representing biological tissue with distinct functional properties and vulnerability profiles. One band is the <strong>interface</strong> (I0), the electrode-tissue boundary where biological signals are converted to digital data, and where the highest concentration of techniques converges. Three bands are <strong>synthetic</strong> (S1 Near-Field through S3 Far-Field), covering the electronic processing, host compute, and communication chain.
           </p>
           <p>
             The hourglass shape is deliberate. I0, the neural interface band, constitutes the architectural chokepoint. All signals must traverse this point. With over half of the {stats.totalTechniques} catalogued techniques targeting this band, it represents the majority of the total threat surface. Securing I0 is the single highest-leverage investment in BCI safety.
@@ -1026,7 +1026,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mb-8">
           <p>
-            NISS scores are computed as a weighted average of all assessed metrics, normalized to a 0&ndash;10 scale. Default weights: BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0. CR and CD are weighted at 0.5 each to maintain backward compatibility with v1.0&rsquo;s single Cognitive Integrity dimension &mdash; keeping cognitive contribution at 20% of the total score. Severity bands align with CVSS thresholds: 0.0 (None), 0.1&ndash;3.9 (Low), 4.0&ndash;6.9 (Medium), 7.0&ndash;8.9 (High), and 9.0&ndash;10.0 (Critical). Four context profiles (Clinical, Research, Consumer, Military) override these defaults for domain-specific scoring.
+            NISS scores are computed as a weighted average of all assessed metrics, normalized to a 0&ndash;10 scale. Default weights: BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0. CR and CD are weighted at 0.5 each to maintain backward compatibility with v1.0&rsquo;s single Cognitive Integrity dimension, keeping cognitive contribution at 20% of the total score. Severity bands align with CVSS thresholds: 0.0 (None), 0.1&ndash;3.9 (Low), 4.0&ndash;6.9 (Medium), 7.0&ndash;8.9 (High), and 9.0&ndash;10.0 (Critical). Four context profiles (Clinical, Research, Consumer, Military) override these defaults for domain-specific scoring.
           </p>
         </div>
 
@@ -1134,7 +1134,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mb-8">
           <p>
-            Ienca &amp; Andorno (2017) proposed four neurorights: Mental Privacy, Cognitive Liberty, Mental Integrity, and Psychological Continuity. Chile enshrined them in law. The OECD published neurotechnology governance guidelines (2019). But nobody had tested them against an actual threat taxonomy.
+            Ienca &amp; Andorno (2017) proposed four neurorights: Mental Privacy, Cognitive Liberty, Mental Integrity, and Psychological Continuity. Chile enshrined them in law. The OECD published neurotechnology governance guidelines (2019). But to our knowledge, no published work had tested them against a systematic threat taxonomy.
           </p>
           <p>
             Every technique in the TARA atlas is now mapped to the affected neurorights through a systematic, multi-layer process: UI category provides the primary signal, DSM-5-TR cluster adds overlays, and NISS vector components refine the result. This mapping is deterministic and reproducible &mdash; the same technique always maps to the same rights.
@@ -1195,7 +1195,7 @@ const tacticColors: Record<string, string> = {
         <div class="glass rounded-xl p-6 mb-8" style="border-left: 4px solid #ef4444;">
           <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-3">The Gap</h3>
           <p class="text-sm text-[var(--color-text-muted)] mb-4">
-            Five neurorights have been proposed. Philosophical frameworks define what they mean. None specify how a BCI system would actually enforce them.
+            Ienca &amp; Andorno (2017) proposed four neurorights. With Equitable Access (from Yuste/NeuroRights Foundation, 2017), QIF maps five. Philosophical frameworks define what they mean. None specify how a BCI system would actually enforce them.
           </p>
           <div class="space-y-4">
             <div>
@@ -1344,7 +1344,7 @@ const tacticColors: Record<string, string> = {
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">8.3 AI Ethics: The Regulatory Environment</h2>
         <div class="prose mb-8">
           <p>
-            BCIs that use AI for stimulation decisions, signal decoding, or adaptive learning are subject to an emerging regulatory landscape that spans AI ethics, medical device law, and neurotechnology governance. This section maps the frameworks that will define the legal environment QIF operates within.
+            BCIs that use AI for stimulation decisions, signal decoding, or adaptive learning are subject to emerging regulation that spans AI ethics, medical device law, and neurotechnology governance. This section maps the frameworks that will define the legal environment QIF operates within.
           </p>
         </div>
 
@@ -1417,7 +1417,7 @@ const tacticColors: Record<string, string> = {
             Post-quantum cryptography is production-ready for web traffic &mdash; OpenSSL&nbsp;3.5, BoringSSL, and wolfSSL all ship ML-KEM today, and roughly 43% of connections through Cloudflare already use hybrid post-quantum key agreement. But <strong>none of this reaches the BCI data link.</strong> Bluetooth Low Energy, the only practical wireless transport for implanted devices, uses ECDH on the P-256 curve for key exchange &mdash; an algorithm that Shor&rsquo;s algorithm breaks outright. The Bluetooth specification (through&nbsp;5.4) offers <strong>no post-quantum upgrade path</strong>.
           </p>
           <p class="text-sm text-[var(--color-text-muted)] mb-3">
-            The device landscape confirms the urgency. No BCI manufacturer &mdash; Neuralink, Synchron, Blackrock Neurotech, OpenBCI, or Emotiv &mdash; has published an independent security audit or a full wireless security specification. Emotiv&rsquo;s AES-128-ECB encryption was <a href="https://www.cryptofails.com/post/70333773685/broadcast-your-brain-fixed-key-ecb-mode" class="text-[var(--color-accent-primary)]">publicly broken in 2010</a>. OpenBCI&rsquo;s protocol documentation contains zero mentions of encryption. A 2021 ACM&nbsp;Computing&nbsp;Surveys review concluded that &ldquo;from the security perspective, BCIs are in an early and immature stage&rdquo; (<a href="https://dl.acm.org/doi/10.1145/3427376" class="text-[var(--color-accent-primary)]">Bernal&nbsp;et&nbsp;al.</a>).
+            The device landscape confirms the urgency. To our knowledge, no BCI manufacturer, Neuralink, Synchron, Blackrock Neurotech, OpenBCI, or Emotiv, has published an independent security audit or a full wireless security specification. Emotiv&rsquo;s AES-128-ECB encryption was <a href="https://www.cryptofails.com/post/70333773685/broadcast-your-brain-fixed-key-ecb-mode" class="text-[var(--color-accent-primary)]">publicly broken in 2010</a>. OpenBCI&rsquo;s protocol documentation contains zero mentions of encryption. A 2021 ACM&nbsp;Computing&nbsp;Surveys review concluded that &ldquo;from the security perspective, BCIs are in an early and immature stage&rdquo; (<a href="https://dl.acm.org/doi/10.1145/3427376" class="text-[var(--color-accent-primary)]">Bernal&nbsp;et&nbsp;al.</a>).
           </p>
           <p class="text-sm text-[var(--color-text-muted)] mb-3">
             Meanwhile, NIST&rsquo;s IR&nbsp;8547 transition timeline mandates deprecation by 2030 and disallowance by 2035 &mdash; but provides <strong>no device-specific migration guidance</strong> for BLE, IoT, or medical devices. No existing standard tells a BCI manufacturer how to migrate from ECDH to ML-KEM on a 40&nbsp;mW power budget.
@@ -1429,7 +1429,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mb-8">
           <p>
-            The Neural Sensory Protocol (NSP) is a proposed post-quantum security protocol specifically designed for BCI data links. It protects every neural data frame using ML-KEM key exchange (NIST&rsquo;s quantum-resistant replacement for classical key exchange, standardized as FIPS 203), ML-DSA digital signatures (the quantum-resistant replacement for RSA and ECDSA signing, FIPS 204), and AES-256-GCM authenticated encryption (which both encrypts data and cryptographically verifies it has not been tampered with in transit). Power modeling against the Neuralink N1 reference platform estimates an overhead of <strong>approximately 3.25%</strong> of a 40 mW implant budget (hardware validation pending).
+            The Neural Sensory Protocol (NSP) is a proposed post-quantum security protocol specifically designed for BCI data links. It protects every neural data frame using ML-KEM key exchange (NIST&rsquo;s quantum-resistant replacement for classical key exchange, standardized as FIPS 203), ML-DSA digital signatures (the quantum-resistant replacement for RSA and ECDSA signing, FIPS 204), and AES-256-GCM authenticated encryption (which both encrypts data and cryptographically verifies it has not been tampered with in transit). Power modeling against the Neuralink N1 reference platform estimates an overhead of <strong>approximately 3&ndash;4%</strong> of a 40 mW implant budget (AI-derived estimate, hardware validation pending).
           </p>
           <p>
             NSP defines five independent defense layers. Each layer operates independently &mdash; failure of one does not compromise the others:
@@ -1596,7 +1596,7 @@ const tacticColors: Record<string, string> = {
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">11. What&rsquo;s Next</h2>
         <div class="prose mb-8">
           <p>
-            QIF is designed as a living framework. As neural device technology matures, the evolving threat landscape necessitates a corresponding evolution of the framework. Our immediate priorities:
+            QIF is designed as a living framework. As neural devices mature, new threats will emerge. The framework has to keep up. Our immediate priorities:
           </p>
         </div>
 
@@ -1619,7 +1619,7 @@ const tacticColors: Record<string, string> = {
             <div class="w-1 rounded-full bg-[var(--color-accent-tertiary)] shrink-0"></div>
             <div>
               <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-1">Runemate Forge v1.0</h4>
-              <p class="text-xs text-[var(--color-text-muted)]">Native Staves DSL compiler with multimodal support (visual, auditory, haptic). Hand-rolled lexer, recursive descent parser, TARA safety bounds at compile time. 67.8% compression, 430&micro;s compile+encrypt (simulation). Targeting IEC 62304 Class C. Today&rsquo;s BCIs are outward-only (Neuralink, BrainGate); Runemate targets the next generation of inward-rendering implants.</p>
+              <p class="text-xs text-[var(--color-text-muted)]">Native Staves DSL compiler with multimodal support (visual, auditory, haptic). Hand-rolled lexer, recursive descent parser, TARA safety bounds at compile time. 67.8% compression, 430&micro;s compile+encrypt (AI-derived simulation estimate, hardware validation pending). Targeting IEC 62304 Class C. Today&rsquo;s BCIs are outward-only (Neuralink, BrainGate); Runemate targets the next generation of inward-rendering implants.</p>
               <p class="text-xs text-[var(--color-text-muted)] mt-2">
                 <strong>Hardware-first rendering architecture:</strong> The vision restoration pipeline uses depth sensors (Kinect-class hardware) as the primary spatial input, with AI operating as a color reconstruction layer on top &mdash; not as the sole rendering engine. This is intentional by design. Hardware sensors return deterministic geometry: distance, surface, edges. AI uses depth and transforms (much like Unreal Engine) to infer and render color back into the scene rather than generating the full environment from scratch. We propose this as a <strong>human-continuity guardrail</strong>: the principle that a patient&rsquo;s primary sensory experience must never fully depend on software that can fail, be corrupted, or go offline. The hardware provides that continuity. If the AI layer fails or goes offline during system upgrades or patches, the spatial environment is still visually represented through hardware sensor data alone. Color may not exist temporarily during outages &mdash; but vision itself persists from the depth data. You lose the paint, not the canvas.
               </p>
