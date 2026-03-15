@@ -1,0 +1,47 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="BCI Security Plugin — Use Cases — Qinnovate"
+  description="Who the BCI security plugin is for: neurotech startups, medical device teams, researchers, security engineers, students, and educators."
+  breadcrumbs={[{ label: 'Tools', href: '/tools/' }, { label: 'BCI Use Cases' }]}
+>
+  <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">Who This Is For</h1>
+  <p class="text-[var(--color-text-muted)] mb-10 max-w-2xl">
+    Security, compliance, and engineering tools for brain-computer interfaces — inside your editor.
+    <a href="https://github.com/qinnovates/bci-security" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">View on GitHub</a>
+  </p>
+
+  <div class="prose max-w-3xl">
+
+    <h2 id="neurotech-startup">Neurotech startup shipping a consumer EEG headband</h2>
+    <p>You're building on BrainFlow and BLE. You don't have a dedicated security team. Run <code>/bci-scan .</code> on your codebase — it flags unencrypted Bluetooth streams, PII leaking through EDF headers, and transport gaps you didn't know were there. Generate a threat model filtered to your device class. Export it for your FDA premarket cybersecurity submission. What used to take a consultant and three weeks takes you an afternoon.</p>
+
+    <h2 id="medical-device-team">Medical device security team assessing an implanted BCI</h2>
+    <p>You already know how to threat model. Now you need the threat catalog. 135 techniques mapped across biological domains — signal injection at the electrode-tissue interface, firmware manipulation, cognitive side-channel attacks. Score each with NISS to prioritize remediation by neural impact, not just CVSS base score. Your existing workflow, extended to a surface area nobody else has mapped.</p>
+
+    <h2 id="researcher">Researcher writing a BCI security paper</h2>
+    <p>The threat taxonomy is structured, sourced, and queryable. Look up techniques by domain, severity, or evidence tier. Run the neuromodesty checker on your draft before submission — it catches overclaims that reviewers will flag anyway. Better to find them yourself.</p>
+
+    <h2 id="security-engineer">Security engineer who's never touched neurotechnology</h2>
+    <p>You know CVSS. You know ATT&CK. NISS and TARA are the BCI equivalents — same logic, different layer of the stack. Start with <code>/bci-scan --demo</code> to see a threat report in 30 seconds. Run <code>/bci learn quickstart</code> for a 5-minute overview. The glossary handles the rest. You're not starting over. You're extending what you already know.</p>
+
+    <h2 id="student">Student exploring neurosecurity as a career</h2>
+    <p>Install the plugin. Run the demo. Walk through the learning modules. The 135-technique catalog with evidence tiers and therapeutic analogs is a structured introduction to a field that barely has a name yet. Most people will discover neurosecurity in five years. You're here now.</p>
+
+    <h2 id="pair-programming">Pair programming with Claude on a BCI project</h2>
+    <p>The plugin activates automatically when it detects BCI library imports — <code>pylsl</code>, <code>brainflow</code>, <code>mne</code>, <code>pyedflib</code>. Claude flags unsafe patterns as you code: unencrypted LSL streams, PII in neural data headers, hardcoded device credentials. No special commands. Security guidance embedded in your workflow, not bolted on after.</p>
+
+    <h2 id="code-review">Code review on a BCI pull request</h2>
+    <p>Point Claude at a PR touching BCI code. The passive scanner catches transport security gaps, data storage issues, and missing consent metadata. Generate a <code>/bci report</code> to attach to the review — specific TARA technique references, NISS severity scores, and remediation guidance. The reviewer sees exactly what's wrong and why it matters.</p>
+
+    <h2 id="regulatory">Regulatory prep for FDA submission</h2>
+    <p>Use <code>/bci threat-model</code> to generate a structured threat assessment mapped to your device class. The output references IEC 14971 and FDA premarket cybersecurity guidance. Hand the Markdown to your regulatory consultant — they fill in the clinical gaps, you save hours of threat enumeration. The framework does the heavy lifting. The human makes the judgment calls.</p>
+
+    <h2 id="teaching">Teaching a neurosecurity course</h2>
+    <p>Assign <code>/bci learn tara</code> and <code>/bci learn niss</code> as interactive coursework. Students explore 135 real threat techniques — they query, filter, and reason about threats hands-on. Each technique includes evidence tiers, therapeutic analogs, and severity scores. It's not a paper they skim. It's a tool they use.</p>
+
+  </div>
+
+</PageLayout>
