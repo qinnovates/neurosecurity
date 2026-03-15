@@ -41,6 +41,7 @@ interface Props { techniques: ThreatVector[] }
 export default function TaraExplorer({ techniques }: Props) {
   const { lens } = useLens();
   const isClinical = lens === 'clinical';
+  const isBoth = lens === 'both';
   const [searchTerm, setSearchTerm] = useState('');
   const [selSeverity, setSelSeverity] = useState<Set<Severity>>(new Set());
   const [selStatus, setSelStatus] = useState<Set<Status>>(new Set());
@@ -184,7 +185,7 @@ export default function TaraExplorer({ techniques }: Props) {
         <table className="w-full text-[13px]" style={{ borderCollapse: 'collapse' }}>
           <thead>
             <tr>
-              {['ID', isClinical ? 'Therapeutic Analog' : 'Technique', 'Severity', 'Status', 'NISS', 'Bands'].map(h => (
+              {['ID', isClinical ? 'Therapeutic Analog' : 'Technique', 'Severity', 'Status', 'NISS', 'Bands'].map((h: string) => (
                 <th key={h} className="px-2.5 py-2 text-left font-bold text-[10px] uppercase tracking-wide whitespace-nowrap"
                   style={{ color: 'var(--color-accent-primary, #60a5fa)', background: 'rgba(0,0,0,0.04)', borderBottom: '2px solid rgba(59,130,246,0.25)' }}>{h}</th>
               ))}
@@ -198,7 +199,14 @@ export default function TaraExplorer({ techniques }: Props) {
                 onClick={() => { window.location.href = `/atlas/tara/${t.id}/`; }}
               >
                 <td className="px-2.5 py-1.5 whitespace-nowrap max-w-56 overflow-hidden text-ellipsis font-mono text-xs" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>{t.id}</td>
-                <td className="px-2.5 py-1.5 whitespace-nowrap max-w-56 overflow-hidden text-ellipsis font-medium" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>{isClinical ? t.nameClinical : t.name}</td>
+                <td className="px-2.5 py-1.5 max-w-56 overflow-hidden text-ellipsis font-medium" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', whiteSpace: isBoth ? 'normal' : 'nowrap' }}>
+                  {isBoth ? (
+                    <div>
+                      <div className="truncate">{t.name}</div>
+                      <div className="truncate text-[11px]" style={{ color: 'var(--color-text-muted, #94a3b8)' }}>{t.nameClinical}</div>
+                    </div>
+                  ) : isClinical ? t.nameClinical : t.name}
+                </td>
                 <td className="px-2.5 py-1.5 whitespace-nowrap max-w-56 overflow-hidden text-ellipsis" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
                   <span className="inline-block px-1.5 py-[0.1rem] rounded-full text-[10px] font-semibold tracking-[0.02em]"
                     style={{ background: SEVERITY_COLORS[t.severity]?.bg ?? '#333', color: SEVERITY_COLORS[t.severity]?.text ?? '#aaa' }}>

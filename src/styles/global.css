@@ -62,13 +62,6 @@
   --color-domain-sil: #4b5563;    /* gray-600 — Silicon */
 }
 
-/* ═══ Lens-Driven Accent Shift ═══ */
-/* When clinical lens is active, swap the primary accent to cyan */
-:root[data-lens="clinical"] {
-  --color-accent-primary: #06b6d4;
-  --color-glow-primary: rgba(6, 182, 212, 0.15);
-}
-
 /* Hero byline — light mode: faint text, dark mode: radial gold gradient */
 .hero-byline {
   color: var(--color-text-faint);

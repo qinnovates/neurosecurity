@@ -560,10 +560,29 @@ const hasGovernance = nr || reg;
     function applyLens(lens: Lens) {
       const el = document.getElementById('technique-name');
       if (!el) return;
-      const name = lens === 'clinical'
-        ? el.dataset.nameClinical
-        : el.dataset.nameSecurity;
-      if (name) el.textContent = name;
+      const secName = el.dataset.nameSecurity ?? '';
+      const clinName = el.dataset.nameClinical ?? '';
+
+      if (lens === 'both') {
+        // Security name as h2, clinical name as subtitle
+        el.innerHTML = '';
+        el.textContent = secName;
+        const sub = document.createElement('div');
+        sub.className = 'text-base font-medium mt-1';
+        sub.style.color = 'var(--color-text-muted)';
+        sub.textContent = clinName;
+        el.after(sub);
+        // Remove any previous subtitle
+        const existing = el.parentElement?.querySelector('.lens-subtitle');
+        if (existing) existing.remove();
+        sub.classList.add('lens-subtitle');
+      } else {
+        // Remove subtitle if present
+        const existing = el.parentElement?.querySelector('.lens-subtitle');
+        if (existing) existing.remove();
+        const name = lens === 'clinical' ? clinName : secName;
+        el.textContent = name;
+      }
     }
 
     // Apply on load

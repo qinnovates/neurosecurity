@@ -40,6 +40,7 @@ interface Props { techniques: ThreatVector[] }
 export default function DeviceFilter({ techniques }: Props) {
   const { lens } = useLens();
   const isClinical = lens === 'clinical';
+  const isBoth = lens === 'both';
   const [device, setDevice] = useState<DeviceType | ''>('');
 
   const filtered = useMemo(() => {
@@ -154,7 +155,14 @@ export default function DeviceFilter({ techniques }: Props) {
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)'; }}
                   >
                     <td style={{ padding: '0.375rem 0.625rem', borderBottom: '1px solid rgba(255,255,255,0.04)', fontFamily: 'var(--font-mono, monospace)', fontSize: '0.75rem', whiteSpace: 'nowrap' }}>{t.id}</td>
-                    <td style={{ padding: '0.375rem 0.625rem', borderBottom: '1px solid rgba(255,255,255,0.04)', fontWeight: 500, maxWidth: '18rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{isClinical ? t.nameClinical : t.name}</td>
+                    <td style={{ padding: '0.375rem 0.625rem', borderBottom: '1px solid rgba(255,255,255,0.04)', fontWeight: 500, maxWidth: '18rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: isBoth ? 'normal' : 'nowrap' }}>
+                      {isBoth ? (
+                        <div>
+                          <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t.name}</div>
+                          <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: '0.6875rem', color: 'var(--color-text-muted, #94a3b8)' }}>{t.nameClinical}</div>
+                        </div>
+                      ) : isClinical ? t.nameClinical : t.name}
+                    </td>
                     <td style={{ padding: '0.375rem 0.625rem', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
                       <span style={{
                         display: 'inline-block', padding: '0.1rem 0.4rem', borderRadius: '9999px',

@@ -1,4 +1,6 @@
 ---
+import LensToggle from '../LensToggle.tsx';
+
 interface Props {
   current: string;
 }
@@ -24,26 +26,35 @@ function isActive(href: string, currentPath: string): boolean {
 ---
 
 <nav
-  class="atlas-view-switcher sticky z-30 -mx-4 px-4 py-2 overflow-x-auto scrollbar-hide"
+  class="atlas-view-switcher sticky z-30 -mx-4 px-4 py-2 scrollbar-hide"
   style="top: var(--nav-height, 64px); background: color-mix(in srgb, var(--color-glass-bg) 85%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-glass-border);"
   aria-label="Atlas sub-navigation"
 >
-  <div class="flex items-center gap-1.5 min-w-max">
-    {tabs.map((tab) => {
-      const active = isActive(tab.href, current);
-      return (
-        <a
-          href={tab.href}
-          class:list={[
-            'atlas-tab inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 whitespace-nowrap',
-            active ? 'atlas-tab--active' : 'atlas-tab--inactive',
-          ]}
-          aria-current={active ? 'page' : undefined}
-        >
-          {tab.label}
-        </a>
-      );
-    })}
+  <div class="flex items-center gap-1.5">
+    {/* Scrollable tabs */}
+    <div class="flex-1 overflow-x-auto scrollbar-hide">
+      <div class="flex items-center gap-1.5 min-w-max">
+        {tabs.map((tab) => {
+          const active = isActive(tab.href, current);
+          return (
+            <a
+              href={tab.href}
+              class:list={[
+                'atlas-tab inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 whitespace-nowrap',
+                active ? 'atlas-tab--active' : 'atlas-tab--inactive',
+              ]}
+              aria-current={active ? 'page' : undefined}
+            >
+              {tab.label}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+    {/* Divider + pinned lens toggle */}
+    <div class="flex-shrink-0 border-l border-white/10 pl-2 ml-1">
+      <LensToggle client:idle />
+    </div>
   </div>
 </nav>
 

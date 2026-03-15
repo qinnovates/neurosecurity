@@ -5,7 +5,7 @@
  * Zero React dependencies. Uses localStorage + CustomEvent for cross-island sync.
  */
 
-export type Lens = 'security' | 'clinical';
+export type Lens = 'security' | 'both' | 'clinical';
 
 /** localStorage key */
 export const LENS_KEY = 'qif-lens';
@@ -16,6 +16,7 @@ export const LENS_EVENT = 'qif-lens-change';
 /** Human-readable labels per lens */
 export const LENS_LABELS: Record<Lens, { name: string; short: string }> = {
   security: { name: 'Security', short: 'SEC' },
+  both: { name: 'Both', short: 'ALL' },
   clinical: { name: 'Clinical', short: 'CLN' },
 };
 
@@ -43,6 +44,21 @@ export const LENS_DEFAULTS: Record<
     ],
     collapsedSections: ['clinical_mapping', 'dsm5_reference'],
   },
+  both: {
+    sortField: 'niss_score',
+    visibleColumns: [
+      'technique',
+      'tactic',
+      'domain',
+      'niss_score',
+      'severity',
+      'attack_vector',
+      'brain_region',
+      'pathway',
+      'clinical_severity',
+    ],
+    collapsedSections: [],
+  },
   clinical: {
     sortField: 'clinical_severity',
     visibleColumns: [
@@ -67,6 +83,11 @@ export const LENS_COLORS: Record<Lens, Record<string, string>> = {
     '--lens-accent-glow': 'var(--color-glow-primary)',
     '--lens-indicator': '#3b82f6',
   },
+  both: {
+    '--lens-accent': 'var(--color-accent-primary)',
+    '--lens-accent-glow': 'var(--color-glow-primary)',
+    '--lens-indicator': '#3b82f6',
+  },
   clinical: {
     '--lens-accent': 'var(--color-accent-secondary)',
     '--lens-accent-glow': 'var(--color-glow-secondary)',
@@ -74,11 +95,12 @@ export const LENS_COLORS: Record<Lens, Record<string, string>> = {
   },
 };
 
-/** Read current lens from localStorage (defaults to 'security'). */
+/** Read current lens from localStorage (defaults to 'both'). */
 export function getLens(): Lens {
-  if (typeof window === 'undefined') return 'security';
+  if (typeof window === 'undefined') return 'both';
   const stored = localStorage.getItem(LENS_KEY);
-  return stored === 'clinical' ? 'clinical' : 'security';
+  if (stored === 'security' || stored === 'both' || stored === 'clinical') return stored;
+  return 'both';
 }
 
 /** Set lens, persist to localStorage, update DOM attributes, apply colors, and dispatch sync event. */
@@ -100,10 +122,11 @@ export function setLens(lens: Lens): void {
   );
 }
 
-/** Toggle between security and clinical. Returns the new lens. */
+/** Cycle through security → both → clinical → security. Returns the new lens. */
 export function toggleLens(): Lens {
   const current = getLens();
-  const next: Lens = current === 'security' ? 'clinical' : 'security';
+  const order: Lens[] = ['security', 'both', 'clinical'];
+  const next = order[(order.indexOf(current) + 1) % order.length];
   setLens(next);
   return next;
 }

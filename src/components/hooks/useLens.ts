@@ -14,7 +14,7 @@ import {
  * LENS_EVENT CustomEvents so all Astro islands stay in sync.
  */
 export function useLens() {
-  const [lens, setLensState] = useState<Lens>('security');
+  const [lens, setLensState] = useState<Lens>('both');
 
   // Hydrate from localStorage on mount
   useEffect(() => {
