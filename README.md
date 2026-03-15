@@ -2,40 +2,77 @@
 
 ![divider](https://raw.githubusercontent.com/qinnovates/qinnovate/main/docs/images/divider-qinnovate.svg)
 
-</div>
-
 # Qinnovate
 
-Open security research for brain-computer interfaces. Vendor-agnostic. Apache 2.0.
+**Open security research for brain-computer interfaces**
 
-> **By using this repository, you consent to the terms in [DISCLAIMER.md](DISCLAIMER.md).** This project is early-stage research in active development — not a validated standard, not a clinical tool, not production software. All security testing must be conducted in simulated or controlled laboratory environments. The human brain is not a test environment. See the full [Disclaimer, Terms of Use & Responsible Research Policy](DISCLAIMER.md), [Code of Conduct](governance/CODE_OF_CONDUCT.md), and [Security Policy](SECURITY.md) before contributing or applying any material from this project.
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18640105-blue)](https://doi.org/10.5281/zenodo.18640105)
+[![Site](https://img.shields.io/badge/Site-qinnovate.com-gold)](https://qinnovate.com)
+[![Data Studio](https://img.shields.io/badge/Data_Studio-31_datasets-green)](https://qinnovate.com/data-studio/)
+[![TARA](https://img.shields.io/badge/TARA-135_techniques-red)](https://qinnovate.com/atlas/tara/)
 
-This project asks a question that existing frameworks have not yet systematically addressed: **what happens to a patient when their brain-computer interface is compromised?** Not the data. Not the device. The person.
+</div>
+
+> **By using this repository, you consent to the terms in [DISCLAIMER.md](DISCLAIMER.md).** This is early-stage research — not a validated standard, not a clinical tool, not production software. The human brain is not a test environment. See [DISCLAIMER.md](DISCLAIMER.md), [Code of Conduct](governance/CODE_OF_CONDUCT.md), and [Security Policy](SECURITY.md).
+
+This project asks a question that no existing framework has systematically addressed: **what happens to a patient when their brain-computer interface is compromised?** Not the data. Not the device. The person.
 
 ---
 
-### About This Work
+## Quick Start
 
-The author is a security engineer with ~15 years of IT and security infrastructure experience, not a mathematician, physicist, or neuroscientist. AI tools (primarily Claude, with Gemini and ChatGPT for cross-validation) were used extensively — for literature synthesis, code generation, threat modeling, and writing. All AI-derived claims should be treated as **proposed and unvalidated** until independently verified by domain experts.
+**Browse the data:** [qinnovate.com/data-studio](https://qinnovate.com/data-studio/) — 31 open datasets, downloadable as Parquet
 
-The framework, threat taxonomy, and governance structure are the author's contributions. Mathematical formalizations (signal integrity scoring, physics-derived equations) are future work pending collaboration with physicists and neuroscientists.
+**Query with Python:**
+```python
+import pandas as pd
+df = pd.read_parquet("https://qinnovate.com/data/parquet/techniques.parquet")
+df[df.severity == "critical"]
+```
 
-**Full transparency:** [Transparency Statement](governance/TRANSPARENCY.md) | [Derivation Log](qif-framework/QIF-DERIVATION-LOG.md) (99+ entries) | [Ship Log](governance/SHIP-LOG.md) | [Validation Status](VALIDATION.md)
+**Query with DuckDB:**
+```sql
+SELECT * FROM read_parquet('https://qinnovate.com/data/parquet/techniques.parquet')
+WHERE severity = 'critical' ORDER BY niss_score DESC;
+```
+
+**Run the site locally:**
+```bash
+git clone https://github.com/qinnovates/qinnovate.git
+cd qinnovate && npm ci && npm run dev
+```
+
+**Validate everything:**
+```bash
+npm run health    # Check data sync, governance, counts
+npm run build     # Build site (282 pages)
+```
+
+---
+
+## About This Work
+
+The author is a security engineer with ~15 years of IT and security infrastructure experience, not a mathematician, physicist, or neuroscientist. AI tools (primarily Claude, with Gemini and ChatGPT for cross-validation) were used extensively. All AI-derived claims should be treated as **proposed and unvalidated** until independently verified by domain experts.
+
+**Full transparency:** [Transparency Statement](governance/TRANSPARENCY.md) | [Derivation Log](qif-framework/QIF-DERIVATION-LOG.md) (99+ entries) | [Ship Log](governance/SHIP-LOG.md) | [Decision Log](governance/DECISION-LOG.md) | [Validation Status](VALIDATION.md)
 
 ---
 
 ## Table of Contents
 
+- [Quick Start](#quick-start)
 - [Validation Summary](#validation-summary)
 - [What This Project Contains](#what-this-project-contains)
 - [The TARA Insight](#the-tara-insight)
 - [Why Neurosecurity](#why-neurosecurity)
 - [Architecture](#architecture)
-- [Terminology](#terminology)
+- [Data Studio & Open Datasets](#data-studio--datalake)
+- [Governance & Logging](#governance--logging-architecture)
+- [Developer Commands](#developer-commands)
 - [Repository Structure](#repository-structure)
-- [Site Revision History](#site-revision-history)
-- [Collaboration](#collaboration)
 - [Tools](#tools)
+- [Collaboration](#collaboration)
 
 ---
 
@@ -43,7 +80,8 @@ The framework, threat taxonomy, and governance structure are the author's contri
 
 | Tool | What It Does | Install |
 |------|-------------|---------|
-| **[Quorum](https://github.com/qinnovates/quorum)** | Orchestrate a swarm of AI experts on any question. Multiple specialists debate, research, validate — then a supervisor delivers the verdict. | `claude install qinnovates/quorum` |
+| **[Quorum](https://github.com/qinnovates/quorum)** | Orchestrate a swarm of AI experts on any question. Structured dissent, fact-checking, multi-agent validation. | `claude install qinnovates/quorum` |
+| **[BCI Security Plugin](https://github.com/qinnovates/bci-security-plugin)** | First BCI security toolkit for AI coding assistants. Scans code for neural data handling issues. | `claude install qinnovates/bci-security-plugin` |
 | **[NeuroSIM](https://github.com/qinnovates/neurosim)** | Neural Security Operations Simulator. BCI signal processing meets security operations. | See repo |
 | **[macshield](https://github.com/qinnovates/macshield)** | Network-aware macOS security hardening. | `brew install qinnovates/tools/macshield` |
 
@@ -349,6 +387,96 @@ qinnovates/qinnovate/
 │   └── data/parquet/                 # 31 Parquet datasets (722KB total)
 └── .github/workflows/                # CI/CD (deploy, audit, sync)
 ```
+
+---
+
+## Developer Commands
+
+All commands run from the repo root.
+
+### Build & Serve
+
+| Command | What It Does |
+|---------|-------------|
+| `npm run dev` | Start dev server (runs prebuild first) |
+| `npm run build` | Production build (282 pages, runs prebuild first) |
+| `npm run preview` | Preview built site from `dist/` |
+| `npm run health` | Validate data sync, governance, counts — run before committing |
+
+### Data Pipeline
+
+| Command | What It Does |
+|---------|-------------|
+| `npm run prebuild` | Full pipeline: copy JSON → generate KQL → generate Parquet → regen governance |
+| `npm run compute:chains` | Recompute impact chains from registrar (after adding techniques) |
+| `npm run governance` | Regenerate DECISION-LOG.md + TRANSPARENCY.md from derivation log |
+| `npm run decisions` | Regenerate DECISION-LOG.md only |
+| `npm run transparency` | Regenerate TRANSPARENCY.md only |
+| `npm run changelog` | Auto-generate CHANGELOG.md from git history |
+
+### Research & Verification
+
+| Command | What It Does |
+|---------|-------------|
+| `npm run verify` | Run all verification scripts (citations, facts, crossrefs) |
+| `npm run verify:citations` | Check citation integrity against Crossref |
+| `npm run citations` | Sync research-registry.json → QIF-RESEARCH-SOURCES.md |
+| `npm run type-check` | TypeScript type checking (0 errors required) |
+
+### EEG Data
+
+| Command | What It Does |
+|---------|-------------|
+| `npm run eeg:list` | List available EEG datasets and their status |
+| `npm run eeg:download` | Download all redistributable EEG datasets |
+| `npm run eeg:process` | Run MNE-Python pipeline: EDF/MAT → Parquet |
+
+### Intel Feeds
+
+| Command | What It Does |
+|---------|-------------|
+| `npm run fetch-news` | Fetch BCI news from 14 RSS feeds |
+| `npm run fetch-intel` | Fetch BCI intel from 45+ feeds + Google News |
+
+---
+
+## Contributing Workflow
+
+### Before You Start
+
+1. Read [DISCLAIMER.md](DISCLAIMER.md) and [Code of Conduct](governance/CODE_OF_CONDUCT.md)
+2. Run `npm ci` to install dependencies
+3. Run `npm run health` to verify your environment is clean
+4. Run `npm run build` to verify the site builds
+
+### When You Change Data (`shared/*.json`)
+
+The [Change Propagation Matrix](CLAUDE.md#change-propagation-matrix) tells you what else needs updating:
+
+```
+shared/*.json changes → npm run prebuild (auto-generates KQL JSON + Parquet + governance)
+```
+
+If you change `shared/qtara-registrar.json` (the TARA technique catalog), also run:
+```bash
+npm run compute:chains    # Recompute impact chains
+npm run health            # Verify counts match across README, timeline, etc.
+```
+
+### When You Add a Feature
+
+1. Build and test locally: `npm run dev`
+2. Run health check: `npm run health`
+3. Run type check: `npm run type-check`
+4. Update [SHIP-LOG.md](governance/SHIP-LOG.md) with a status row
+5. Commit with prefix: `[Add]` for features, `[Fix]` for bugs, `docs:` for documentation
+
+### Governance (for AI-assisted contributions)
+
+If AI tools were used in your contribution:
+1. The derivation log entry is written by the project maintainer (Kevin)
+2. `npm run governance` regenerates the [Decision Log](governance/DECISION-LOG.md) and [Transparency Statement](governance/TRANSPARENCY.md) from the derivation log
+3. This runs automatically in `npm run prebuild` — you don't need to do it manually
 
 ---
 
