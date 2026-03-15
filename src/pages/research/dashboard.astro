@@ -1,0 +1,316 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { getKqlTables, getDataLakeStats } from '@/lib/kql-tables';
+import DashboardQueryPanel from '@/components/bci/DashboardQueryPanel';
+
+const kqlTables = getKqlTables();
+const stats = getDataLakeStats();
+
+// --- Stats bar values ---
+const totalTechniques = stats.techniques;
+const totalDevices = stats.devices;
+const totalCompanies = stats.companies;
+const totalSources = (kqlTables.sources || []).length;
+const totalTables = stats.totalTables;
+const totalRows = stats.totalRows;
+
+// --- Category groupings with row counts ---
+interface TableCategory {
+  name: string;
+  color: string;
+  icon: string;
+  tables: { name: string; label: string; rows: number }[];
+}
+
+function tableEntry(name: string, label: string): { name: string; label: string; rows: number } {
+  return { name, label, rows: (kqlTables[name] || []).length };
+}
+
+const categories: TableCategory[] = [
+  {
+    name: 'Core Neuroscience',
+    color: 'text-cyan-400',
+    icon: '\u{1F9E0}',
+    tables: [
+      tableEntry('brain_regions', 'Brain Regions'),
+      tableEntry('hourglass_bands', 'Hourglass Bands'),
+      tableEntry('neural_pathways', 'Neural Pathways'),
+      tableEntry('neurotransmitters', 'Neurotransmitters'),
+      tableEntry('nt_receptors', 'NT Receptors'),
+      tableEntry('cofactors', 'Cofactors'),
+      tableEntry('cranial_nerves', 'Cranial Nerves'),
+      tableEntry('neuroendocrine_axes', 'Neuroendocrine Axes'),
+      tableEntry('neuroendocrine_receptors', 'Neuroendocrine Receptors'),
+      tableEntry('glial_cells', 'Glial Cells'),
+      tableEntry('glial_markers', 'Glial Markers'),
+      tableEntry('bbb_proteins', 'BBB Proteins'),
+      tableEntry('meningeal_system', 'Meningeal System'),
+      tableEntry('receptor_families', 'Receptor Families'),
+      tableEntry('receptor_subunits', 'Receptor Subunits'),
+    ].filter(t => t.rows > 0),
+  },
+  {
+    name: 'Threats & Security',
+    color: 'text-red-400',
+    icon: '\u{1F6E1}',
+    tables: [
+      tableEntry('techniques', 'TARA Techniques'),
+      tableEntry('tactics', 'TARA Tactics'),
+      tableEntry('cves', 'CVE Mappings'),
+      tableEntry('impact_chains', 'Impact Chains'),
+      tableEntry('neurosecurity_scores', 'Neurosecurity Scores'),
+    ].filter(t => t.rows > 0),
+  },
+  {
+    name: 'Clinical',
+    color: 'text-purple-400',
+    icon: '\u{1FA7A}',
+    tables: [
+      tableEntry('dsm5', 'DSM-5 Conditions'),
+      tableEntry('neurological_conditions', 'Neurological Conditions'),
+    ].filter(t => t.rows > 0),
+  },
+  {
+    name: 'Industry & Market',
+    color: 'text-amber-400',
+    icon: '\u{1F4C8}',
+    tables: [
+      tableEntry('companies', 'Companies'),
+      tableEntry('devices', 'Devices'),
+      tableEntry('funding', 'Funding Rounds'),
+      tableEntry('market_forecasts', 'Market Forecasts'),
+      tableEntry('grants', 'Government Grants'),
+      tableEntry('acquisitions', 'Acquisitions'),
+      tableEntry('vc_deals', 'VC Deals'),
+      tableEntry('adjacent_markets', 'Adjacent Markets'),
+      tableEntry('security_gap', 'Security Gap'),
+      tableEntry('sources', 'Sources'),
+      tableEntry('cross_portfolio', 'Cross-Portfolio VCs'),
+      tableEntry('sovereign_funds', 'Sovereign Funds'),
+      tableEntry('big_tech_bci', 'Big Tech BCI'),
+      tableEntry('pe_firms', 'PE Firms'),
+      tableEntry('intel_defense', 'Intel/Defense'),
+      tableEntry('notable_investors', 'Notable Investors'),
+      tableEntry('investment_patterns', 'Investment Patterns'),
+      tableEntry('hardware_specs', 'Hardware Specs'),
+      tableEntry('comms', 'Comms & Attack Surface'),
+    ].filter(t => t.rows > 0),
+  },
+  {
+    name: 'Governance',
+    color: 'text-green-400',
+    icon: '\u{2696}',
+    tables: [
+      tableEntry('neurorights', 'Neurorights'),
+      tableEntry('controls', 'Security Controls'),
+      tableEntry('consent_tiers', 'Consent Tiers'),
+      tableEntry('frameworks', 'Frameworks'),
+      tableEntry('nsp_layers', 'NSP Layers'),
+      tableEntry('policy', 'Policy Timeline'),
+    ].filter(t => t.rows > 0),
+  },
+  {
+    name: 'Simulation',
+    color: 'text-indigo-400',
+    icon: '\u{1F52C}',
+    tables: [
+      tableEntry('neuron_types', 'Neuron Types'),
+      tableEntry('cortical_layers', 'Cortical Layers'),
+      tableEntry('action_potential_phases', 'Action Potential Phases'),
+      tableEntry('ion_channels', 'Ion Channels'),
+      tableEntry('sim_receptors', 'Sim Receptors'),
+      tableEntry('dendritic_spines', 'Dendritic Spines'),
+      tableEntry('brain_networks', 'Brain Networks'),
+      tableEntry('conduction_velocities', 'Conduction Velocities'),
+      tableEntry('synapse_parameters', 'Synapse Parameters'),
+      tableEntry('oscillation_bands', 'Oscillation Bands'),
+      tableEntry('white_matter_tracts', 'White Matter Tracts'),
+      tableEntry('synaptic_plasticity', 'Synaptic Plasticity'),
+      tableEntry('eeg_electrodes', 'EEG Electrodes'),
+      tableEntry('eeg_samples', 'EEG Sample Datasets'),
+    ].filter(t => t.rows > 0),
+  },
+  {
+    name: 'Operations',
+    color: 'text-teal-400',
+    icon: '\u{2699}',
+    tables: [
+      tableEntry('validations', 'Validations'),
+      tableEntry('automations', 'Automations'),
+      tableEntry('milestones', 'Milestones'),
+      tableEntry('publications', 'Publications'),
+      tableEntry('news', 'News Feed'),
+      tableEntry('intel_feed', 'Intel Feed'),
+      tableEntry('intel_sources', 'Intel Sources'),
+      tableEntry('tam_sam_som', 'TAM/SAM/SOM'),
+      tableEntry('convergence', 'Convergence Timeline'),
+      tableEntry('momentum', 'Investment Momentum'),
+      tableEntry('risk_profile', 'Risk Profile'),
+    ].filter(t => t.rows > 0),
+  },
+  {
+    name: 'Timelines',
+    color: 'text-sky-400',
+    icon: '\u{1F4C5}',
+    tables: [
+      tableEntry('neuroethics_timeline', 'Neuroethics'),
+      tableEntry('neurosecurity_timeline', 'Neurosecurity'),
+      tableEntry('ai_ethics_timeline', 'AI Ethics'),
+      tableEntry('industry_timeline', 'Industry'),
+      tableEntry('derivation_milestones', 'Derivation Milestones'),
+    ].filter(t => t.rows > 0),
+  },
+].filter(cat => cat.tables.length > 0);
+
+// Count totals per category
+function categoryRowCount(cat: TableCategory): number {
+  return cat.tables.reduce((sum, t) => sum + t.rows, 0);
+}
+---
+
+<PageLayout
+  title="QIF Dashboard"
+  description="Single pane of glass across the QIF data lake. Live stats, table catalog, and quick queries across all KQL tables."
+  breadcrumbs={[{ label: 'Research', href: '/research/' }, { label: 'Dashboard' }]}
+  wide={true}
+>
+  <!-- Header -->
+  <div class="mb-8 reveal">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3">
+      QIF Dashboard
+    </h1>
+    <p class="text-base text-[var(--color-text-muted)] max-w-3xl">
+      Single pane of glass across {totalTables} KQL tables and {totalRows.toLocaleString()} rows of BCI security intelligence.
+    </p>
+  </div>
+
+  <!-- ═══ STATS BAR ═══ -->
+  <section class="glass rounded-xl p-6 sm:p-8 mb-10 reveal">
+    <h2 class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-5">
+      Data Lake at a Glance
+    </h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
+      <div class="glass rounded-lg p-4">
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">
+          {totalTechniques}
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Threat Techniques</p>
+      </div>
+      <div class="glass rounded-lg p-4">
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">
+          {totalDevices}
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">BCI Devices</p>
+      </div>
+      <div class="glass rounded-lg p-4">
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">
+          {totalCompanies}
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Companies</p>
+      </div>
+      <div class="glass rounded-lg p-4">
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-amber-400">
+          {totalSources}
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Research Sources</p>
+      </div>
+      <div class="glass rounded-lg p-4">
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-cyan-400">
+          {totalTables}
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">KQL Tables</p>
+      </div>
+      <div class="glass rounded-lg p-4">
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-purple-400">
+          {totalRows.toLocaleString()}
+        </p>
+        <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Total Rows</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CATEGORY CARDS ═══ -->
+  <section class="mb-10 reveal">
+    <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">Table Catalog</h2>
+    <p class="text-xs text-[var(--color-text-faint)] mb-6">
+      {totalTables} tables organized into {categories.length} categories. Click any table name to query it.
+    </p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      {categories.map((cat) => (
+        <div class="glass rounded-xl p-5 flex flex-col">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class:list={["text-sm font-semibold", cat.color]}>
+              <span class="mr-1.5">{cat.icon}</span>{cat.name}
+            </h3>
+            <span class="text-[10px] font-mono text-[var(--color-text-faint)]">
+              {cat.tables.length} tables / {categoryRowCount(cat).toLocaleString()} rows
+            </span>
+          </div>
+          <div class="space-y-1 flex-1">
+            {cat.tables.map((t) => (
+              <div class="flex items-center justify-between text-xs group">
+                <a
+                  href={`/research/landscape/?q=${encodeURIComponent(t.name + ' | take 25')}`}
+                  class="text-[var(--color-text-muted)] group-hover:text-[var(--color-accent-primary)] transition-colors truncate mr-2"
+                >
+                  {t.label}
+                </a>
+                <span class="font-mono text-[var(--color-text-faint)] shrink-0">{t.rows}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══ QUICK QUERIES ═══ -->
+  <section class="mb-10 reveal">
+    <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1">Quick Queries</h2>
+    <p class="text-xs text-[var(--color-text-faint)] mb-6">
+      Run preset KQL queries with one click. Results appear inline.
+    </p>
+    <DashboardQueryPanel client:only="react" />
+  </section>
+
+  <!-- ═══ FULL CONSOLE LINK ═══ -->
+  <section class="mb-16 reveal">
+    <a
+      href="/research/landscape/"
+      class="glass rounded-xl p-6 sm:p-8 flex items-center justify-between group hover:ring-1 hover:ring-[var(--color-accent-primary)] transition-all block"
+    >
+      <div>
+        <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1 group-hover:text-[var(--color-accent-primary)] transition-colors">
+          Open Full KQL Console
+        </h2>
+        <p class="text-xs text-[var(--color-text-faint)]">
+          Write custom queries across all {totalTables} tables. Supports where, sort, project, summarize, join, distinct, and count operators.
+        </p>
+      </div>
+      <svg class="w-6 h-6 text-[var(--color-text-faint)] group-hover:text-[var(--color-accent-primary)] transition-colors shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg>
+    </a>
+  </section>
+
+  <!-- ═══ DATA LAKE LINK ═══ -->
+  <section class="mb-16 reveal">
+    <a
+      href="/research/data-lake/"
+      class="glass rounded-xl p-6 sm:p-8 flex items-center justify-between group hover:ring-1 hover:ring-[var(--color-accent-secondary)] transition-all block"
+    >
+      <div>
+        <h2 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-1 group-hover:text-[var(--color-accent-secondary)] transition-colors">
+          Detailed Data Lake View
+        </h2>
+        <p class="text-xs text-[var(--color-text-faint)]">
+          Full breakdown with charts, aggregations, and drill-downs into every data domain.
+        </p>
+      </div>
+      <svg class="w-6 h-6 text-[var(--color-text-faint)] group-hover:text-[var(--color-accent-secondary)] transition-colors shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg>
+    </a>
+  </section>
+</PageLayout>
