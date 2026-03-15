@@ -169,7 +169,7 @@ const tacticColors: Record<string, string> = {
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Author's Note</h2>
         <div class="prose">
           <p>
-            I built this framework because no one else had. There was no threat model for the human mind, so I wrote one.
+            I built this framework because no one else had. To my knowledge, there was no threat model for the human mind. So I wrote one.
           </p>
           <p>
             It started with a question: what would threat modeling for the human mind look like? That question led me into the world of brain-computer interfaces, and quickly made clear that you cannot build for the brain the way you build for a screen. The technical architecture alone is not enough. To do this right from the design phase, I applied two decades of security instincts and went deep into the disciplines that should inform every decision at this layer: neuroethics, AI ethics, and the emerging fields of neurorights and neuroprivacy.
@@ -787,7 +787,7 @@ const tacticColors: Record<string, string> = {
               <strong class="text-[var(--color-text-primary)]">NSP without QIF</strong> encrypts data but cannot detect manipulation at the electrode-tissue boundary. A protocol without an underlying threat model provides protection without informed strategy.
             </p>
             <p>
-              <strong class="text-[var(--color-text-primary)]">Both without a compiler</strong> encounter a significant bandwidth challenge. Post-quantum cryptographic keys &mdash; the mathematical structures that protect data from future quantum computers &mdash; are 18&ndash;46&times; larger than their classical equivalents. This overhead strains adoption on implants operating within a 40 mW power budget over Bluetooth Low Energy (BLE). Runemate&rsquo;s proposed Staves DSL compiler targets 65&ndash;90% compression of multimodal BCI content in benchmarks, aiming to make post-quantum security practical on constrained hardware. Unlike today&rsquo;s outward-only BCIs (Neuralink N1, BrainGate) where all rendering happens on a phone, Runemate targets next-generation implants that render content inward &mdash; directly to cortical tissue &mdash; requiring on-chip decode, safety-check, and render with no external device in the loop.
+              <strong class="text-[var(--color-text-primary)]">Both without a compiler</strong> hit a bandwidth wall. Post-quantum cryptographic keys &mdash; the mathematical structures that protect data from future quantum computers &mdash; are 18&ndash;46&times; larger than their classical equivalents. This overhead strains adoption on implants operating within a 40 mW power budget over Bluetooth Low Energy (BLE). Runemate&rsquo;s proposed Staves DSL compiler targets 65&ndash;90% compression of multimodal BCI content in benchmarks, aiming to make post-quantum security practical on constrained hardware. Unlike today&rsquo;s outward-only BCIs (Neuralink N1, BrainGate) where all rendering happens on a phone, Runemate targets next-generation implants that render content inward &mdash; directly to cortical tissue &mdash; requiring on-chip decode, safety-check, and render with no external device in the loop.
             </p>
           </div>
         </div>
@@ -1163,7 +1163,7 @@ const tacticColors: Record<string, string> = {
               </div>
             </div>
             <div class="glass rounded-xl p-5">
-              <h4 class="text-sm font-semibold mb-2">Amplitude Flooding (T-0014)</h4>
+              <h4 class="text-sm font-semibold mb-2">Envelope Modulation (T-0014)</h4>
               <div class="space-y-2 text-xs">
                 <div class="flex justify-between"><span class="text-[var(--color-text-faint)]">CVSS 4.0</span><span class="font-mono font-bold text-[#f59e0b]">5.3</span></div>
                 <div class="flex justify-between"><span class="text-[var(--color-text-faint)]">NISS 1.1</span><span class="font-mono font-bold text-[#ef4444]">8.1</span></div>
@@ -1174,7 +1174,7 @@ const tacticColors: Record<string, string> = {
               <h4 class="text-sm font-semibold mb-2">EEG Eavesdropping (T-0003)</h4>
               <div class="space-y-2 text-xs">
                 <div class="flex justify-between"><span class="text-[var(--color-text-faint)]">CVSS 4.0</span><span class="font-mono font-bold text-[#f59e0b]">7.5</span></div>
-                <div class="flex justify-between"><span class="text-[var(--color-text-faint)]">NISS 1.1</span><span class="font-mono font-bold text-[#f59e0b]">4.3</span></div>
+                <div class="flex justify-between"><span class="text-[var(--color-text-faint)]">NISS 1.1</span><span class="font-mono font-bold text-[#f59e0b]">2.7</span></div>
                 <p class="text-[var(--color-text-faint)] pt-1 border-t border-[var(--color-border)]/30">CVSS rates high (confidentiality). NISS rates lower: no biological impact, no neuroplastic change, fully reversible. Different framework, different priorities.</p>
               </div>
             </div>
@@ -1411,7 +1411,7 @@ const tacticColors: Record<string, string> = {
         <div class="prose mb-8">
           <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)]">Policy-Layer Rights</h3>
           <p>
-            Three additional neurorights proposed by Yuste and the NeuroRights Foundation (2017) and reinforced by UNESCO's 2025 Recommendation &mdash; <strong>equitable access to mental augmentation</strong>, <strong>protection from algorithmic bias</strong>, and <strong>free will</strong> &mdash; are not mapped in the threat taxonomy. These are distributive justice and governance concerns: no attack technique directly violates &ldquo;fair access,&rdquo; and algorithmic bias arises from systems processing neural data, not from attacks on the interface itself. Free will substantially overlaps with Cognitive Liberty in the context of threat-to-harm mappings. These rights are addressed at QIF's governance layer rather than the security layer. See <a href="/governance/">Governance &rarr; Neuroethics Alignment</a> for the full mapping.
+            Three additional neurorights proposed by Yuste and the NeuroRights Foundation (2017) and reinforced by UNESCO's 2025 Recommendation &mdash; <strong>equitable access to mental augmentation</strong>, <strong>protection from algorithmic bias</strong>, and <strong>free will</strong> &mdash; are not mapped in the threat taxonomy. These are distributive justice and governance concerns: no attack technique directly violates &ldquo;fair access,&rdquo; and algorithmic bias arises from systems processing neural data, not from attacks on the interface itself. Free will substantially overlaps with Cognitive Liberty when mapping threats to harm. These rights are addressed at QIF's governance layer rather than the security layer. See <a href="/governance/">Governance &rarr; Neuroethics Alignment</a> for the full mapping.
           </p>
         </div>
 
@@ -1452,7 +1452,7 @@ const tacticColors: Record<string, string> = {
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">8. Governance</h2>
         <div class="prose mb-8">
           <p>
-            Each technique within the TARA atlas is assigned a consent tier reflecting the minimum regulatory oversight necessary for its deployment. These tiers are derived directly from NISS scores: higher biological impact, lower reversibility, and greater consent violation necessitate stricter governance.
+            Each technique within the TARA atlas is assigned a consent tier reflecting the minimum regulatory oversight necessary for its deployment. These tiers are derived directly from NISS scores: higher biological impact, lower reversibility, and greater consent violation require stricter governance.
           </p>
         </div>
 
@@ -2356,7 +2356,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mb-4">
           <p>
-            The distinction between motor and cognitive neurons is not architectural &mdash; it is procedural. The five-tier model enforces that distinction through consent gates, not through hardware limitations. This is an honest acknowledgment that the technology capable of restoring movement is the same technology capable of modifying thought. The guardrails must be as robust as the capability they constrain.
+            The distinction between motor and cognitive neurons is not architectural &mdash; it is procedural. The five-tier model enforces that distinction through consent gates, not through hardware limitations. This is an honest acknowledgment that the technology capable of restoring movement is the same technology capable of modifying thought. The guardrails must be as strong as the capability they constrain.
           </p>
         </div>
 
@@ -3299,6 +3299,15 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
           </div>
         </div>
 
+        <div class="prose mb-8">
+          <p>
+            The internet got one chance to build its foundation right, and missed it. Brain-computer interfaces are getting that same chance right now. The chips are in human skulls. The clinical trials are running. The question is not whether these devices need security. The question is whether we build it before or after the first patient is harmed.
+          </p>
+          <p>
+            This framework is one proposal. It is open, it is incomplete, and it is waiting for better ideas. What it is not is optional. Neural devices will be secured. The only question is by whom, and whether patients had a voice in the design.
+          </p>
+        </div>
+
         <div class="glass rounded-xl p-6 text-center">
           <p class="text-[var(--color-text-muted)] text-sm mb-4">
             QIF, its underlying standards, and the TARA atlas are all maintained as open resources. For developers of devices that interface with the brain, we offer support in securing these critical systems.
@@ -3312,15 +3321,6 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
             </a>
           </div>
         </div>
-
-        <div class="mt-8 prose">
-          <p>
-            The internet got one chance to build its foundation right, and missed it. Brain-computer interfaces are getting that same chance right now. The chips are in human skulls. The clinical trials are running. The question is not whether these devices need security. The question is whether we build it before or after the first patient is harmed.
-          </p>
-          <p>
-            This framework is one proposal. It is open, it is incomplete, and it is waiting for better ideas. What it is not is optional. Neural devices will be secured. The only question is by whom, and whether patients had a voice in the design.
-          </p>
-        </div>
       </section>
 
 
@@ -3333,7 +3333,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
           {[
             { term: 'BCI', def: 'Brain-Computer Interface. A device that reads or writes neural signals.' },
             { term: 'QIF', def: 'The proposed open security framework described in this paper.' },
-            { term: 'TARA', def: 'The threat technique catalog. 135 attack techniques mapped to therapeutic analogs.' },
+            { term: 'TARA', def: 'The threat technique catalog. Attack techniques mapped to therapeutic analogs across 11 biological domains.' },
             { term: 'NISS', def: 'Neural Impact Scoring System. 6-dimension severity scoring that supplements CVSS.' },
             { term: 'NSP', def: 'Neural Sensory Protocol. Post-quantum wire protocol for neural data streams.' },
             { term: 'CVSS', def: 'Common Vulnerability Scoring System (FIRST.org). Industry standard for IT.' },
