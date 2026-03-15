@@ -1,0 +1,65 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import BciDirectory from '@/components/bci/BciDirectory';
+import { getBciDirectoryDevices, getBciDirectoryCompanies, getBciDirectoryStats } from '@/lib/bci-directory-data';
+
+const devices = getBciDirectoryDevices();
+const companies = getBciDirectoryCompanies();
+const stats = getBciDirectoryStats();
+---
+
+<PageLayout
+  title="BCI Directory — Qinnovate"
+  description="57 BCI companies and 68 devices. Filter by type, FDA status, security posture, and more. The most comprehensive open BCI device directory."
+  breadcrumbs={[{ label: 'BCI Directory' }]}
+  wide={true}
+>
+  <div class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3">BCI Directory</h1>
+    <p class="text-base text-[var(--color-text-muted)] max-w-2xl">
+      57 companies. 68 devices. Security posture, FDA status, funding, and attack surface data — filterable and open.
+    </p>
+  </div>
+
+  <BciDirectory
+    client:only="react"
+    devices={devices}
+    companies={companies}
+    stats={stats}
+  />
+
+  <!-- Related -->
+  <div class="mt-16 mb-8">
+    <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">Related Resources</h2>
+    <p class="text-sm mb-8" style="color: var(--color-text-muted);">
+      The directory is one layer of the QIF ecosystem. Use these tools to go deeper on threats, hardware specs, and security controls.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <a href="/atlas/" class="block p-5 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <div class="text-lg font-semibold mb-1" style="color: var(--color-text-primary);">Threat Atlas</div>
+        <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">
+          Force-directed graph of threat techniques. Search by device or technique name, see kill chain relationships and hourglass band coverage.
+        </p>
+      </a>
+      <a href="/research/bci-explorer/" class="block p-5 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <div class="text-lg font-semibold mb-1" style="color: var(--color-text-primary);">BCI Explorer</div>
+        <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">
+          24 devices with full hardware specs, brain region mappings, physics constraints, and threat vectors from FDA filings and datasheets.
+        </p>
+      </a>
+      <a href="/TARA/" class="block p-5 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <div class="text-lg font-semibold mb-1" style="color: var(--color-text-primary);">TARA Registry</div>
+        <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">
+          Full threat technique registry with NISS scores, attack chains, and defensive controls mapped to the hourglass model.
+        </p>
+      </a>
+      <a href="/research/use-cases/" class="block p-5 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <div class="text-lg font-semibold mb-1" style="color: var(--color-text-primary);">Use Cases</div>
+        <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">
+          Real-world BCI deployment scenarios with threat profiles, governance requirements, and security control recommendations.
+        </p>
+      </a>
+    </div>
+  </div>
+</PageLayout>

@@ -315,7 +315,10 @@ function buildCompanies(): Row[] {
     category: c.company_category || '',
     founded: c.founded,
     status: c.status,
+    headquarters: c.headquarters || '',
+    employees_approx: c.employees_approx || 0,
     security_posture: c.security_posture,
+    security_notes: (c.security_notes || '').slice(0, 200),
     funding_total_usd: c.funding_total_usd || 0,
     valuation_usd: c.valuation_usd || 0,
     device_count: (c.devices || []).length,
@@ -335,6 +338,14 @@ function buildDevices(): Row[] {
       units_deployed: d.units_deployed || '',
       first_human: d.first_human || '',
       target_use: d.target_use || '',
+      price_usd: d.price_usd || 0,
+      cve_count: (d.cves_known || []).length,
+      company_type: c.type || '',
+      company_category: c.company_category || '',
+      company_status: c.status || '',
+      company_funding: c.funding_total_usd || 0,
+      security_posture: c.security_posture || '',
+      attack_surface_count: (c.tara_attack_surface || []).length,
     }))
   );
 }
