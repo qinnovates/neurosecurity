@@ -1,5 +1,432 @@
 [
   {
+    "id": "2c6a0e78",
+    "title": "[object Object]",
+    "date": "2026-03-15",
+    "url": "hxxps://www[.]fiercebiotech[.]com/medtech/china-approves-first-brain-computer-interface-implant-paralyzed-patients-sector-heats",
+    "source": "Fierce Biotech",
+    "source_category": "product",
+    "summary": "Developed by the Shanghai-based Neuracle Technology, the system includes implanted EEG electrodes linked to a pneumatic, robotic glove that can grasp objects.",
+    "tags": [
+      "product"
+    ],
+    "companies": [
+      "Neuracle Technology"
+    ],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "9cc5e1a0",
+    "title": "Neural Correlates of Listening States, Cognitive Load, and Selective Attention in an Ecological Multi-Talker Scenario",
+    "date": "2026-03-15",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]03[.]13[.]711289v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "This study assessed neural responses to continuous speech to classify listening state, cognitive load, and selective auditory attention in complex acoustic environments. EEG was recorded while partici",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "b80091ca",
+    "title": "Improving aphasia with daily sessions of tDCS: an open-label study coupled to high-density EEG",
+    "date": "2026-03-15",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26000501?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: May–June 2026Source: Brain Stimulation, Volume 19, Issue 3Author(s): Amina Ben Salah, Marie Villain, Esteban Munoz-Musat, Aude Sangare, Camille Nobis, Zoé Zana, Bertrand Hermann, Ben",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "c69d7707",
+    "title": "Electric and Magnetic Field Characteristics of the Re5 Brain Stimulation System",
+    "date": "2026-03-15",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26000513?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: Available online 14 March 2026Source: Brain StimulationAuthor(s): Dexuan Tang, Zhi-De Deng, Aapo Nummenmaa, Reinhold Ludwig, Gregory Noetscher, Sergey Makaroff, Gustav Bizik",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "b316dad4",
+    "title": "State-Dependent Fornix-Hippocampal Communication and the Impact of Deep Brain Stimulation: Insights from Supervised Learning, Granger Causality and Causal Discovery Analyses",
+    "date": "2026-03-15",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26000471?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: Available online 10 March 2026Source: Brain StimulationAuthor(s): Scott Stanslaski, Theoden Ivan Netoff",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "f26c56e2",
+    "title": "Advancing intraoperative brain mapping: First-in-human evaluation of flexible high-density electrocorticography grids for epilepsy surgery",
+    "date": "2026-03-15",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926001631?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: 15 April 2026Source: NeuroImage, Volume 330Author(s): Sem Hoogteijling, Carmen Gelpke, Eline V. Schaft, Ziyi Wang, Tessa Souhoka, Pieter van Eijsden, Anna Diop, Karolina Janikowska, ",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "13b78f14",
+    "title": "Open access individual finger movement dataset with fNIRS",
+    "date": "2026-03-15",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1747655",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "b6049af3",
+    "title": "Brain Abstracted: Simplification in the History and Philosophy of Neuroscience",
+    "date": "2026-03-15",
+    "url": "hxxps://direct[.]mit[.]edu/books/oa-monograph/5741/The-Brain-AbstractedSimplification-in-the-History",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://direct.mit.edu/books/oa-monograph/5741/The-Brain-AbstractedSimplification-in-the-History Comments URL: https://news.ycombinator.com/item?id=47387659 Points: 2 # Comments: 0",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "85298cf9",
+    "title": "Z80-MBC2: a 4 ICs homebrew Z80 computer",
+    "date": "2026-03-15",
+    "url": "hxxps://hackaday[.]io/project/159973-z80-mbc2-a-4-ics-homebrew-z80-computer",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://hackaday.io/project/159973-z80-mbc2-a-4-ics-homebrew-z80-computer Comments URL: https://news.ycombinator.com/item?id=47387186 Points: 9 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "5f0b1d40",
+    "title": "Ask HN: Med student interested in bci startups..where do I start?",
+    "date": "2026-03-15",
+    "url": "hxxps://news[.]ycombinator[.]com/item?id=47384852",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "I am a First yr med student at aiims in india am 20 yrs old.My long term goal is to have a bci startup and the reason is I was always interested in innovation and intersection of tech and med but I ne",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "204424b2",
+    "title": "Show HN: A brain-inspired neural network that builds its own hierarchy on demand",
+    "date": "2026-03-15",
+    "url": "hxxps://github[.]com/cucar/robot_brain",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://github.com/cucar/robot_brain Comments URL: https://news.ycombinator.com/item?id=47384670 Points: 1 # Comments: 1",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "5dadc665",
+    "title": "The Brain Stores Quadruples: Why Context Is the Missing Primitive in AI",
+    "date": "2026-03-15",
+    "url": "hxxps://gizmohan[.]substack[.]com/p/agents-as-labor",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://gizmohan.substack.com/p/agents-as-labor Comments URL: https://news.ycombinator.com/item?id=47383896 Points: 2 # Comments: 2",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "6ec89c53",
+    "title": "China grants approval for first-ever invasive brain implant - Latest news from Azerbaijan",
+    "date": "2026-03-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihwFBVV95cUxOZUlzVUhVU2lTcWdqTmRIcjBnTE1TZmlEX2hPRkJMN1ZwcHFEdGZRSlpzcnVPaFlNX2o4a0J3NS1objctUUpLQ1RRQmdLejQ4NjFKbnV5R1JVZEZSVkphQmJJaVlDUEF6b2pSS055cktvRzVRbElCZXF2dV9yeEY5QUlqRzlwb3c?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "China grants approval for first-ever invasive brain implant&nbsp;&nbsp;Latest news from Azerbaijan",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "3d685a05",
+    "title": "Circuit response to neuromodulation characterized with simultaneous deep brain stimulation and precision neuroimaging in humans",
+    "date": "2026-03-13",
+    "url": "hxxps://www[.]nature[.]com/articles/s41593-026-02228-w",
+    "source": "Nature Neuroscience",
+    "source_category": "research",
+    "summary": "",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "e8dee0d6",
+    "title": "Dog-Inspired Robot: How Gestures Help AI Master the Art of &#8220;Fetch&#8221;",
+    "date": "2026-03-13",
+    "url": "hxxps://neurosciencenews[.]com/dog-inspired-robot-gesture-30316/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Teaching robots new tricks. By modeling the way dogs read human gestures, Brown University scientists have created a robot that can find objects in cluttered rooms with nearly 90% accuracy.",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "00197107",
+    "title": "Bayesian decoding and its application in reading out spatial memory from neural ensembles",
+    "date": "2026-03-13",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae0c3c",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Spatial memory serves as a foundation to establish cognitive map, supporting navigation and decision-making processes across species. Essential brain regions such as the hippocampus and entorhinal cor",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "b60a3e9e",
+    "title": "Reliability of individual finger force prediction from electromyographic signals recorded from surface arrays: implications for assistive device use",
+    "date": "2026-03-13",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae4ccb",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. High-density surface electromyography (HD-sEMG) has shown promise as a means of providing intuitive user control of assistive devices. Using motor unit (MU) firing activities obtained from ",
+    "tags": [
+      "product",
+      "policy",
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "90a222ac",
+    "title": "Oligodendrocyte-specific fus depletion preserves CA1 single-unit fidelity and stabilizes network dynamics during chronic recording",
+    "date": "2026-03-13",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae4d8b",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Loss of oligodendrocytes (OLs) and myelin impairs neuronal firing and network stability, whereas enhancing oligodendrogenesis with clemastine improves electrophysiological stability in cort",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "06c64bbc",
+    "title": "Personalized transcranial electrical stimulation: a review of computational modeling and optimization",
+    "date": "2026-03-13",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae4d8d",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Personalized transcranial electrical stimulation (tES) has gained increasing attention due to the substantial inter-individual variability in brain anatomy and physiology. While previous re",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "0f10a6a2",
+    "title": "GSK’s RSV vaccine wins broader FDA clearance",
+    "date": "2026-03-13",
+    "url": "hxxps://www[.]biopharmadive[.]com/news/gsk-arexvy-fda-approve-rsv-younger-adults/814652/",
+    "source": "BioPharma Dive",
+    "source_category": "product",
+    "summary": "The approval represents a win in what&rsquo;s been a difficult regulatory environment of late for vaccine makers, and could boost uptake of a shot that&rsquo;s posted flattening sales after an initial",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "1a28cede",
+    "title": "In a first for China, Neuracle’s brain-computer interface wins approval - South China Morning Post",
+    "date": "2026-03-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMizwFBVV95cUxQdlhPRjRBZU8xTWluWm1GUGN4d1l0LTFpcWtYZHFsSE91M0plZFlleTgzNllZa2FmRFdrb0F6VU1sNjFrU0xsNndpeWhBZGN0MU8wWTd6N3lDUnpHSU9iQnQyWklsTU5rWG85RXozby1sYm5fd3ROWjh6LWNDTTNLMThjd1lrVUU2ZUhIYnBKNEtMWWhvM1dmSG15ME15bFVrNkctVTNTNDR3bkJXSG9DMlc5eUI3WWd3ZWk2VmhuMm40U21ZQ2dEYVl2ZGZlSVXSAc8BQVVfeXFMTWNRZm11dlE0SnBRcVl0NUJId1l0UjBPRlg0RDhNNlZMSW5nTW5ickZXamp6cGdBeGZ4eUJMRUs2eW5IRDI0czZWeGVYMkUwZ3NobHlFcS1zZnJxNFpZV3FNQW1kZXpnV3M4dVc4M3hkYXNjR1BWX2tDNXdpQW1JbGh6Q3NkQ1cybzV0aEJwNXZ1TmFNY0VlWFluTDhJaU5Eb2JWaDNPVjM1ODFyMUNCWXFVTFpWNEpNb2NUMUpXVS1VQ09mMlF2NEpKdTJrRjMw?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "In a first for China, Neuracle’s brain-computer interface wins approval&nbsp;&nbsp;South China Morning Post",
+    "tags": [
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "a2e40b9d",
+    "title": "Gestala: $21 Million Raised For Ultrasound Brain-Computer Interface Technology - Pulse 2.0",
+    "date": "2026-03-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxNOVRpUW1ZbjI2bFFyVVp5ZFEzQXRIeE82dVhkTDJMWEdwbkVLRWM4bTNxMlg4Z0NzXzg3M21ZQXlrTmF4TlpHV0RqQmxTampoNkdwX0NxUEViYUhpUzVoWmFPZ1pCX0dSUkplbjFRWnZIQVZFRE9WMG9JajMzMVVhNzI0QWFrNThmTzBMYjkzQl9LczM2dDYtZnZMVXrSAaIBQVVfeXFMT0xXRDJuMTBaNV9LcnZFUmY0U1E0V1V1X3hfSng2cFRmbkhJcF9VZkgzOUZ6WUFlV1lVU0JleV9FTTFkdmhCSkJObHdZYzJSMEQwb1REVkFuOWQ3eVh6UGxOVUk0bWJSRDlfeDQ0dUpDMGNEa3hDM2VyVmNiaXE5dDVkWC12SURnNTJfWFhSNWk2SUVydlYwc1QwZGtUMWRrOE1n?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Gestala: $21 Million Raised For Ultrasound Brain-Computer Interface Technology&nbsp;&nbsp;Pulse 2.0",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "619e343b",
+    "title": "China's First Commercial BCI Approval & Neurotech Funding Surge in 2026 - News and Statistics - IndexBox - Market Intelligence Platform",
+    "date": "2026-03-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiswFBVV95cUxQQ3dFelRkVEVacUE5SmpXQ3JqbXFPLXo2eDVBNWlBQjRZLWwzZzM4TkJnN3FJWVlreWFuMzdDWDhMRVI1SG5yVWFfbFczYkxLNUVnR1l4eUg4cmlUN2pVaVlwcktic0NtT1VWczBlcjRSR09VRWhRdV9ZTEhKMVV2cDhXZzVnSjRESlladTJEWUhnd1loVE5qM1hJV3lYdDlYYmtwOVhuVXhMel91TkRpa3JCMA?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "China's First Commercial BCI Approval & Neurotech Funding Surge in 2026 - News and Statistics&nbsp;&nbsp;IndexBox - Market Intelligence Platform",
+    "tags": [
+      "funding",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "b27bb496",
+    "title": "Alibaba leads RMB 500 million investment in BCI startup StairMed - KrASIA",
+    "date": "2026-03-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAFBVV95cUxPSzZaUm1TbXBxcUJnUHBnQk93UVBwN3IwaFJxMFJvSERXb045emdpNlBESWdsWFFvMVVZNXdsRkMwTksxWVI4aU9RRWc1S1ZDM1NIQWhrX2xFMF94dnRQYmFYUVZpaUFEZG0yNkVOM2pNUVg2dWJNSF9RYXdYSnVva3BTNEpLVUdsUkhZMw?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Alibaba leads RMB 500 million investment in BCI startup StairMed&nbsp;&nbsp;KrASIA",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "ef61acb0",
+    "title": "China just approved its first brain implant for commercial use, a world first - Scientific American",
+    "date": "2026-03-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivAFBVV95cUxObEsxc2pCMnRadUdaR3BJczZKWVNCVW5pdUQ0SVJOUVVKNU8xZGNlOE5qMDNmck5JcnZnZ01hWF80dXd1UGZ5TVZrTmV4azNXRWpXcG9GZExEa29rbXlrb3lHWm4yZTRnWE5HRUVQdFFrQXJFYzJQbUQwU2pXU1NrZ1V3NmhySUlPZThQb0FhYkEyV1JBSjE5eWpCal9WelFOU0tqUGNnVWVtQlZicnVXOW5aZDRsTHprY3lOLQ?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "China just approved its first brain implant for commercial use, a world first&nbsp;&nbsp;Scientific American",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "35eb9fa5",
+    "title": "China Approves First Brain Implant for Commercial Use - Bloomberg.com",
+    "date": "2026-03-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxQWnlHc3F3TzgyelBLU1VfVWtkT3doUXVFOFUyTE5jUk5uR3BXeFlQTjhjNkNOVko3T3BucWpiYWplM0JnbWYxbDB4OVJfR3V4SHBtNGhvZURwY2tVcEZnaUxvZG03dG1MOWJmV0ZxeUYzbXJzOUcweGxIY1NJa2tnNWhpcnpzNm5YbllkTmVZaVFoZlJtSFQxTm5CS0hSaTZxa1VCekxMaw?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "China Approves First Brain Implant for Commercial Use&nbsp;&nbsp;Bloomberg.com",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "5278210f",
+    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - TechCrunch",
+    "date": "2026-03-12",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxOX2Jtd3dNTy13MzNlOUpQRVlFN0RaLUYxMFd4VzJYZnR3TzFtRlFOa21PaWM5NzZiX1NTUGMxZkk1OTZmcG0xRDhhejYwOUM0RHFMYlZCQ1RZNEczQjR4Z1VZbEp3czA3bzB1UE1sYUNuS3o0dmdvazN4MmVtUTRqNTNDeHdvSnZrT0M4c3RUUVg2am5pa25FQ2ZSX2VBdVpaVHFRZmZXUnpRLUJwR1pObw?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;TechCrunch",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "ac69ecd4",
+    "title": "Chinese BCI startup Gestala raises $21.6M for non-invasive ultrasound brain tech - The Next Web",
+    "date": "2026-03-12",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMickFVX3lxTE1Pb3ZQVV9ZVGdpd1B3OFVDMENFNlpMX0VZQlhOZVpLWkxZbXFFQ0ItcDVfeExLMjRQNklmRDVlV2lTUExDTnR0NGp4MFRiZlBPVDhOaXNYLXdkTmZzU0tpYW5ZWXFFSnlURWE4RWVhV2h5Zw?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Chinese BCI startup Gestala raises $21.6M for non-invasive ultrasound brain tech&nbsp;&nbsp;The Next Web",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "10718c7f",
+    "title": "Chinese ultrasound-based BCI startup Gestala raises $21.7M - MassDevice",
+    "date": "2026-03-12",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxNN1VVNzZ4Q0dnNzFqNDB4Z3ZfU2V5b0hzWjh5cXp4cTNqWW1BeGVJNXEwaTlScmJHdGNYb2RjSGlMVFBNVkZJamM4dUNLeGRkM3lGdkYyam1OU3BmTUlULUxxZEtuSEoybjU5eGt0YW4wTEdJcnhwZDZkY05xY1hvRk1pdU9uUmNDVGZaUlRB?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Chinese ultrasound-based BCI startup Gestala raises $21.7M&nbsp;&nbsp;MassDevice",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
+    "id": "3d54ea3d",
+    "title": "PolyU all-acoustics brain-computer interface system forges new paths for Parkinson’s disease therapy through precise ultrasound neuromodulation - The National Tribune",
+    "date": "2026-03-12",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwJBVV95cUxQSWhVN3JnajRLR3NTS1NUa2JtbDVJU3R5eE1wNlh6dHFENTBweUR5TW9vcWVva2Y5TEwydXdIcTVCNjFzcGZpMjdTR3lmX3d6Q0pPZUUxZWRRYnhsZkQ3ejlaSkljenhyeVU2dlZBMk51NFFSc1ZNNWE0eU1xbkVaaEtheTVkLVctMXBuQUdLSmd1SGlxa0dIVk5HWEVwbklhZDhlcVRIMmFnR29obGtNQVExaG9HaXFjOEVoSWJ6U0RuRlVrUWRQYTRFNktldHhPLTd1dFQxTlV2Vm9HdzlSa3RhNmM2YV9WR3VERElyNlVTLXVfYWVqaHBvYS1XU3U4ellqT3h1SXd4SFU?oc=5",
+    "source": "GN: Emerging Modalities",
+    "source_category": "research",
+    "summary": "PolyU all-acoustics brain-computer interface system forges new paths for Parkinson’s disease therapy through precise ultrasound neuromodulation&nbsp;&nbsp;The National Tribune",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
     "id": "eb544dde",
     "title": "A Variational Latent Equilibrium for Learning in Cortex",
     "date": "2026-03-11",
@@ -254,6 +681,20 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "8ef6c56a",
+    "title": "Gestalt Technology Secures $214M in Angel Round Funding for Ultrasonic Brain - Computer Interface Clinical Development | 36Kr Exclusive - 让一部分人先看到未来",
+    "date": "2026-03-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTFBidWF4MGM3X0tKZVAtenhzb29BTVlDU0hnN3UtcXpybmtMRG84b2hOMHV1WncwR3FkaGJCQzBLVlJSQWJBSVNhelducVAyRWxtR1dj?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Gestalt Technology Secures $214M in Angel Round Funding for Ultrasonic Brain - Computer Interface Clinical Development | 36Kr Exclusive&nbsp;&nbsp;让一部分人先看到未来",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
   },
   {
     "id": "edd87ca1",
@@ -966,6 +1407,20 @@
     "fetched": "2026-03-11"
   },
   {
+    "id": "4da63f35",
+    "title": "Profile of David Baker, Demis Hassabis, and John Jumper: 2024 Nobel laureates in chemistry",
+    "date": "2026-02-27",
+    "url": "hxxps://www[.]pnas[.]org/doi/abs/10[.]1073/pnas[.]2422539123?af=R",
+    "source": "PNAS",
+    "source_category": "research",
+    "summary": "Proceedings of the National Academy of Sciences, Volume 123, Issue 10, March 2026. The 2024 Nobel Prize in Chemistry recognized revolutionary computational success in predicting protein structures fro",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
     "id": "8f1fd8e9",
     "title": "Brain implants: What’s standing in the way of pivotal trials, FDA approval - statnews.com",
     "date": "2026-02-26",
@@ -1322,6 +1777,21 @@
     "fetched": "2026-02-21"
   },
   {
+    "id": "883b7177",
+    "title": "Understanding FDA's QMSR and Cybersecurity Mandates for Medical Devices - Medical Device and Diagnostic industry",
+    "date": "2026-02-18",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwwFBVV95cUxPcDlZVFhydTJOaXo2MFpNTERMVEMyLUxtLUNPd3VaNV9HcVprQmtyb2RsUzl1dFNLLTB5ZVdEdEJjaFpIUExDSFdXQ015ejR0RDkzVjI2NGtsV2tiTjdjTVFLdC16ZjBRVTZYQkluenBNbERGbHV0ZGlncGoyMWhLa0tNdUxjTGtsWVhpVjhld05QSnRwQ29nUlhfc1lfN18zNXFSMVhlU0trLUJ3T3AyX2pic1ZLLWUxVENZQVRjSnJRTzA?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "Understanding FDA's QMSR and Cybersecurity Mandates for Medical Devices&nbsp;&nbsp;Medical Device and Diagnostic industry",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
     "id": "d4dfea1f",
     "title": "What Will It Take to Design a Brain Implant That Lasts a Lifetime? - the-scientist.com",
     "date": "2026-02-17",
@@ -1517,6 +1987,20 @@
     "fetched": "2026-03-11"
   },
   {
+    "id": "fd9b4133",
+    "title": "Musculoskeletal Simulation-Based Multi-Criteria Optimization Framework for Exoskeleton Design",
+    "date": "2026-01-28",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11367100",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Robotic exoskeletons can enhance human locomotion by reducing its metabolic cost. Designing effective wearable assistive devices requires a systematic approach that accounts for the influence of devic",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
     "id": "7a5f7875",
     "title": "Technology-Enhanced Dual-Task Testing for Alzheimer’s Disease and Related Dementias: A Review of Trends, Tools, and Emerging Directions",
     "date": "2026-01-26",
@@ -1587,6 +2071,22 @@
     ],
     "companies": [],
     "fetched": "2026-02-22"
+  },
+  {
+    "id": "a81416a2",
+    "title": "OpenAI Invests in Merge Labs to advance BCI tech - BioWorld MedTech",
+    "date": "2026-01-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPcUdXSDFvTG5uczVNYTdfTXdlSE10elNEcXM4R3RCNlM5a19IYzktT213M05YRkJKMGRWZnpHcXFxa2VyVzVjM3JiQjY2TnZrMWN4ZDZubUoyeFpVN2dqM1NYN3dMdVRuVU13UlR5cmczc2tPdG5RbWtVRmlVVkFtdjltTkVQTEtnOVJaN29LN2VvU0k?oc=5",
+    "source": "GN: Neurotech M&A",
+    "source_category": "funding",
+    "summary": "OpenAI Invests in Merge Labs to advance BCI tech&nbsp;&nbsp;BioWorld MedTech",
+    "tags": [
+      "general"
+    ],
+    "companies": [
+      "Merge Labs"
+    ],
+    "fetched": "2026-03-15"
   },
   {
     "id": "a9e03216",
@@ -1856,6 +2356,20 @@
     ],
     "companies": [],
     "fetched": "2026-02-21"
+  },
+  {
+    "id": "fd288a87",
+    "title": "The Next Frontier For AI Is The Human Brain - Forbes",
+    "date": "2025-12-07",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimAFBVV95cUxNSlBDaE14andOZ0p2V245eDl2VW9jeHpRZVlPbFMyTDc5T2NwUS1vZnB1WEVkeUhvRFZxRVNKcllMUDVFV1BOUVJwMFp6Y0l2eVpfVHdtM3pHZE5CSmtnU3FSN1ZCUWl3aUxlNmthWVU3VVNxU1NuYndnRjYyOU9DTlFUdWF1N2tSdGxtRTZSVkRDSkliNTduLQ?oc=5",
+    "source": "GN: Emerging Modalities",
+    "source_category": "research",
+    "summary": "The Next Frontier For AI Is The Human Brain&nbsp;&nbsp;Forbes",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
   },
   {
     "id": "53d27173",
@@ -2385,6 +2899,20 @@
     "fetched": "2026-03-11"
   },
   {
+    "id": "65126ee1",
+    "title": "The Past, Present And Future Of Brain-Computer Interfaces - Forbes",
+    "date": "2025-10-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxNeTFhWjAtaXRDbzdFeC1nSkZoclQwNjhUX2JZVWtTTzRBN25sNW5hNzVvSTIwWWlqRHZJMFdnby1NVVRPdWxreDJSWkVROUtUdlpTV2RpbUM1RUM3bG1hQU5VUkZ6NUg2cXRkT1prOFpYR3FWUDY5VUN1cEVHSDRSX1ZxeUlEamFEV3V5MjZpSU1PRzN6NWJIVXVlenN2RGNU?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "The Past, Present And Future Of Brain-Computer Interfaces&nbsp;&nbsp;Forbes",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
     "id": "536f116f",
     "title": "Senators ask FTC to study neurotechnology's promises, implications - IAPP",
     "date": "2025-10-03",
@@ -2558,6 +3086,23 @@
     "fetched": "2026-03-11"
   },
   {
+    "id": "5b191da0",
+    "title": "Weekly Rundown: Neuralink launches first UK trial of brain chip - Drug Discovery News",
+    "date": "2025-08-08",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMifkFVX3lxTFBKcW1FcXV6RHoyeXctU1F0OWNNY0F5QXFBNWxPQWFaUUdYWWRjaERuZzFRTW5VUXFVelFvdVVEUXptY3gyVkk3V3hNSmxIbjN0SnhoZXBQX1lzNDZIUEt4T19iVEpEanN2ZlpjM3JEQzVFcDE3cXM5eDZWeHVaZw?oc=5",
+    "source": "GN: Neurotech Patents",
+    "source_category": "product",
+    "summary": "Weekly Rundown: Neuralink launches first UK trial of brain chip&nbsp;&nbsp;Drug Discovery News",
+    "tags": [
+      "product",
+      "research"
+    ],
+    "companies": [
+      "Neuralink"
+    ],
+    "fetched": "2026-03-15"
+  },
+  {
     "id": "a86a827d",
     "title": "DOJ secures first of its kind cybersecurity False Claims Act settlement - White & Case LLP",
     "date": "2025-08-05",
@@ -2645,6 +3190,21 @@
     ],
     "companies": [],
     "fetched": "2026-02-21"
+  },
+  {
+    "id": "64a38ec3",
+    "title": "FDA Expands Premarket Medical Device Cyber Guidance - BankInfoSecurity",
+    "date": "2025-06-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilwFBVV95cUxOalkyMWgxZ1J1YXo2QU9kaUxiblBRZWlVVkZvbnhacGdoTjV6dGxGd1lMcnFCeWw3NU1ReE8zZmVNcDdONzk2elNyZmxFa1hPSGtUQ3BSY0NCeXBFT1ZvMnZXcmJXcDNxTm5leERXbjFINllkVTUyQlJkM01VR0JsU2otcVlLSl9WNlR6Ul9RQUhXOEFEUjMw?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "FDA Expands Premarket Medical Device Cyber Guidance&nbsp;&nbsp;BankInfoSecurity",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
   },
   {
     "id": "db8e0406",
@@ -2828,6 +3388,20 @@
     "fetched": "2026-03-11"
   },
   {
+    "id": "498aa6fd",
+    "title": "Cala® Health Closes Oversubscribed $50 Million Financing To Propel Growth - PR Newswire",
+    "date": "2024-12-09",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixgFBVV95cUxPNXNGM29KTG9xRkJHRVREaGlhXzVaZGw4OGo5ZWJGLUxJZEdiWkhCamxDbGlwdHhmN2NVVFdxZUcyQndyeUp6UFZyN3FTZTUzMHNMQ01peGJiR3huTUNDbW5lS0ItZnBreXdnU1BZUHIxU0FkSlFkOWpnRjcyM2dTbGhYLUJJYkF6UWJsMlhVTzl6WGg2OElad0hFd0paajIwby1KVmRpcUFUUjBsN01TUF9tT05TY2t4Tjg1REV1bVRjSzdzNGc?oc=5",
+    "source": "GN: Neurotech VC",
+    "source_category": "funding",
+    "summary": "Cala® Health Closes Oversubscribed $50 Million Financing To Propel Growth&nbsp;&nbsp;PR Newswire",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
+  },
+  {
     "id": "5e8cc8ee",
     "title": "A New Path to Noninvasive Brain-Computer Interface - Johns Hopkins University Applied Physics Laboratory",
     "date": "2024-11-14",
@@ -2840,6 +3414,20 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "db142b65",
+    "title": "I Tried These Brain-Tracking Headphones That Claim to Improve Focus - WIRED",
+    "date": "2024-09-24",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxNTUpaOElTR0dFcHFiNlF0bFB0V2ZrbmNwTHB3RGtHQndKQzBCMEVnMkRMUjFHVTlGQXlRODVQd0FwX0VOQWpma0pCZl9KLVp0a2U1WXF1VU1kYi0wbVFYV3AzcVlIQXJJLUZWSVRhVVNyS3lJdWo4ZlNHbDVYYnloZmpMV0lnRkxOcHNwRHpaVQ?oc=5",
+    "source": "GN: Consumer EEG",
+    "source_category": "product",
+    "summary": "I Tried These Brain-Tracking Headphones That Claim to Improve Focus&nbsp;&nbsp;WIRED",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
   },
   {
     "id": "a9571c8b",
@@ -2955,6 +3543,21 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "ae224993",
+    "title": "Rice University medical device spinout secures nearly $19M series A - InnovationMap",
+    "date": "2024-01-24",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxPQmlXYU1RWGg2b2JzTUhvSDFCaFlHVlczbHRFMU5PUmdLNXZ5NlVaQVhYeFdRT2p0bDViZ2ZBalpRMmhya2V0OUliRmRVcW1vWGtxSXZfVlZBcTdlbm1RcHlxZkZQdWVqbjg3VlhiQ0YxcC1KTmFKMzBiYURkT3F4UUxKUkhTRThWV28yZkhueURQcl9i?oc=5",
+    "source": "GN: Neurotech VC",
+    "source_category": "funding",
+    "summary": "Rice University medical device spinout secures nearly $19M series A&nbsp;&nbsp;InnovationMap",
+    "tags": [
+      "funding",
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
   },
   {
     "id": "79fad7f5",
@@ -3127,6 +3730,21 @@
     ],
     "companies": [],
     "fetched": "2026-02-21"
+  },
+  {
+    "id": "7639efab",
+    "title": "Comparison of Medical and Consumer Wireless EEG Systems for Use in Clinical Trials - Frontiers",
+    "date": "2017-08-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimgFBVV95cUxNdHdDdEVrQm1jdG40UE9zSFNFbUpEcFkwUVo3MHd0eHZzX1l4UldXVTFRYlBRcFNvOHFjcHlDa1EwNy0tX21ZMlRmalp3QnFZMHZGc2loSlptOXFpT2JoYTkxTUliSzE1ZldnSU1KYzUwOGsxVy13d3BqMnZxeExIYlJQR0FXempVbWhCVzBIaUQ5NGxCanhacFhR?oc=5",
+    "source": "GN: Consumer EEG",
+    "source_category": "product",
+    "summary": "Comparison of Medical and Consumer Wireless EEG Systems for Use in Clinical Trials&nbsp;&nbsp;Frontiers",
+    "tags": [
+      "research",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-03-15"
   },
   {
     "id": "c2ac28fe",
