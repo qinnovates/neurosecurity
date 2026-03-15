@@ -112,7 +112,7 @@
         "CL": 77,
         "MI": 91,
         "DI": 63,
-        "PC": 28,
+        "PC": 79,
         "IDA": 5
       },
       "cci_stats": {
@@ -629,7 +629,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.96
       },
@@ -888,7 +889,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 1.8
       },
@@ -1417,7 +1419,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 1.44
       },
@@ -1590,7 +1593,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 1.44
       },
@@ -2011,7 +2015,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.96
       },
@@ -2294,7 +2299,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.96
       },
@@ -2573,7 +2579,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 1.2
       },
@@ -3935,7 +3942,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.48
       },
@@ -4073,7 +4081,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.48
       },
@@ -5294,7 +5303,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.48
       },
@@ -6317,7 +6327,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.96
       },
@@ -8458,7 +8469,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 1.8
       },
@@ -9164,7 +9176,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.96
       },
@@ -10111,7 +10124,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.48
       },
@@ -10252,7 +10266,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 1.2
       },
@@ -10401,7 +10416,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.96
       },
@@ -11846,7 +11862,8 @@
         "affected": [
           "MP",
           "CL",
-          "MI"
+          "MI",
+          "PC"
         ],
         "cci": 1.8
       },
@@ -12402,7 +12419,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.96
       },
@@ -13603,7 +13621,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.8
       },
@@ -13866,7 +13885,8 @@
         "affected": [
           "MP",
           "CL",
-          "MI"
+          "MI",
+          "PC"
         ],
         "cci": 1.35
       },
@@ -14752,7 +14772,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 1.8
       },
@@ -15311,7 +15332,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 1.44
       },
@@ -16228,7 +16250,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 1.8
       },
@@ -20145,7 +20168,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 1.8
       },
@@ -21006,7 +21030,8 @@
           "CL",
           "MI",
           "DI",
-          "IDA"
+          "IDA",
+          "PC"
         ],
         "cci": 2.25
       },
@@ -21748,7 +21773,8 @@
           "MP",
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.96
       },
@@ -22283,7 +22309,8 @@
       "neurorights": {
         "affected": [
           "MP",
-          "CL"
+          "CL",
+          "PC"
         ],
         "cci": 0.24
       },
@@ -22840,7 +22867,8 @@
         "affected": [
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.6
       },
@@ -22941,8 +22969,8 @@
         "icd10": {
           "primary": [
             {
-              "code": "H81.3",
-              "name": "Other peripheral vertigo",
+              "code": "H81.399",
+              "name": "Other peripheral vertigo, unspecified ear",
               "confidence": "established"
             },
             {
@@ -23017,7 +23045,8 @@
         "affected": [
           "CL",
           "MI",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.6
       },
@@ -23113,13 +23142,13 @@
         "icd10": {
           "primary": [
             {
-              "code": "H81.3",
-              "name": "Other peripheral vertigo",
+              "code": "H81.399",
+              "name": "Other peripheral vertigo, unspecified ear",
               "confidence": "established"
             },
             {
-              "code": "H55",
-              "name": "Nystagmus and other irregular eye movements",
+              "code": "H55.00",
+              "name": "Unspecified nystagmus",
               "confidence": "established"
             }
           ],
@@ -23186,7 +23215,8 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI"
+          "MI",
+          "PC"
         ],
         "cci": 0.36
       },
@@ -23278,13 +23308,13 @@
         "icd10": {
           "primary": [
             {
-              "code": "H81.3",
-              "name": "Other peripheral vertigo",
+              "code": "H81.399",
+              "name": "Other peripheral vertigo, unspecified ear",
               "confidence": "established"
             },
             {
-              "code": "H93.1",
-              "name": "Tinnitus",
+              "code": "H93.19",
+              "name": "Tinnitus, unspecified ear",
               "confidence": "probable"
             }
           ],
@@ -23453,8 +23483,8 @@
         "icd10": {
           "primary": [
             {
-              "code": "H81.0",
-              "name": "Meniere's disease (iatrogenic analog)",
+              "code": "H81.03",
+              "name": "Meniere's disease, bilateral (iatrogenic analog)",
               "confidence": "established"
             },
             {
@@ -26333,7 +26363,8 @@
       "neurorights": {
         "affected": [
           "CL",
-          "MI"
+          "MI",
+          "PC"
         ],
         "cci": 0.48
       },
@@ -26505,7 +26536,8 @@
         "affected": [
           "MI",
           "CL",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.96
       },
@@ -26599,8 +26631,8 @@
               "confidence": "established"
             },
             {
-              "code": "H53.1",
-              "name": "Subjective visual disturbances",
+              "code": "H53.10",
+              "name": "Unspecified subjective visual disturbances",
               "confidence": "established"
             }
           ],
@@ -26675,7 +26707,8 @@
         "affected": [
           "MI",
           "CL",
-          "DI"
+          "DI",
+          "PC"
         ],
         "cci": 0.96
       },
@@ -26765,20 +26798,20 @@
         "icd10": {
           "primary": [
             {
-              "code": "H93.1",
-              "name": "Tinnitus (iatrogenic)",
+              "code": "H93.13",
+              "name": "Tinnitus, bilateral (iatrogenic)",
               "confidence": "established"
             },
             {
-              "code": "H83.3",
-              "name": "Noise effects on inner ear",
+              "code": "H83.3X3",
+              "name": "Noise effects on inner ear, bilateral",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
-              "code": "H81.3",
-              "name": "Other peripheral vertigo (current spread)",
+              "code": "H81.399",
+              "name": "Other peripheral vertigo, unspecified ear (current spread)",
               "confidence": "probable"
             }
           ],
