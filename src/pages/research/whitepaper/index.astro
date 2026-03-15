@@ -66,8 +66,8 @@ const tacticColors: Record<string, string> = {
             { href: '#tara', label: '4. TARA Atlas' },
             { href: '#niss', label: '5. NISS Scoring' },
             { href: '#neural-impact', label: '6. Neural Impact Chain' },
-            { href: '#governance', label: '7. Governance' },
-            { href: '#nsp', label: '8. NSP Protocol' },
+            { href: '#governance', label: '8. Governance' },
+            { href: '#nsp', label: '9. NSP Protocol' },
           ].map((item) => (
             <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
               {item.label}
@@ -190,6 +190,69 @@ const tacticColors: Record<string, string> = {
       </section>
 
 
+      <!-- ═══ THE PROPOSAL ═══ -->
+      <section id="proposal" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The Proposal</h2>
+        <div class="prose mb-8">
+          <p>
+            Every transformative technology gets one chance to build its foundation right. The internet did not take that chance. TCP/IP shipped without authentication. HTTP shipped without encryption. DNS shipped without integrity verification. We spent the next four decades bolting on security after the fact. TLS, DNSSEC, OAuth, zero-trust architectures. Each one a patch on a foundation that was never designed to be secure.
+          </p>
+          <p>
+            Brain-computer interfaces are at that same inflection point. The first cortical implants are in human skulls. The first commercial devices are shipping. And the security architecture is, once again, an afterthought. The difference this time is that the attack surface is not a credit card number or a social security record. It is the human nervous system. There are no rollbacks for neural tissue damage. There is no &ldquo;change your password&rdquo; for a compromised sensory cortex.
+          </p>
+          <p>
+            This is not a warning. It is a proposal.
+          </p>
+        </div>
+
+        <!-- The Blank Slate -->
+        <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-primary);">
+          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">The Blank Slate</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            We are building from a blank slate. That is the advantage. We have full knowledge of every security failure that preceded us. The goal is to design a BCI security architecture that introduces as little technical debt as possible. Every layer is intentional. Every protocol earns its place. Where the internet added security as middleware, this architecture embeds it at the kernel level. Where medical devices shipped firmware as proprietary black boxes, this architecture proposes open-source auditability from day one.
+          </p>
+        </div>
+
+        <!-- The Vision -->
+        <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-secondary);">
+          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">The Vision</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            QIF proposes a BCI security architecture designed to stand the test of time. Not for a product cycle, but for the full span of a human life. A person implanted at 30 may carry that device for 70 years. The architecture must outlast the company that built it, the protocol standard it launched with, and the threat environment it was designed against.
+          </p>
+        </div>
+
+        <!-- Second Sight Case Study -->
+        <div class="glass rounded-xl p-6 mb-6 border-l-4 border-[#ef4444]">
+          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">This already happened.</h3>
+          <div class="space-y-3 text-sm text-[var(--color-text-muted)]">
+            <p>
+              In March 2020, Second Sight Medical Products announced it would wind down operations, laying off 84 of 108 employees. More than 350 patients worldwide had Argus II retinal implants in their eyes. They were not notified directly. Some learned from their vision rehabilitation therapists, who had just been laid off.
+            </p>
+            <p>
+              The company stopped software upgrades, stopped supplying replacement components, and stopped answering physician support lines. One patient needed an MRI to check for a possible brain tumor. His doctors could not proceed because the Argus II's interaction with MRI magnetic fields required manufacturer consultation, and the manufacturer was not responding. He got a CT scan instead. He still does not know if he has a brain tumor.
+            </p>
+            <p>
+              Another patient heard a small beeping sound while changing trains in a New York subway station. Her device powered down permanently. It never worked again. The defunct hardware remains in her eye because explantation surgery risks retinal detachment and further vision loss.
+            </p>
+            <p>
+              Second Sight did not formally dissolve. It merged with Nano Precision Medical in 2022, becoming Vivani Medical. The neurostimulation business was spun off as Cortigent in 2025. No structured support program for the 350+ Argus II patients has been publicly announced.
+            </p>
+            <p class="text-xs text-[var(--color-text-faint)]">
+              Sources: <a href="https://spectrum.ieee.org/bionic-eye-obsolete" class="text-[var(--color-accent-primary)]">IEEE Spectrum</a> (Strickland & Harris, 2022), <a href="https://www.businesswire.com/news/home/20200330005581/en/" class="text-[var(--color-accent-primary)]">BusinessWire</a> (March 30, 2020).
+            </p>
+          </div>
+        </div>
+
+        <!-- The Direction -->
+        <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-tertiary);">
+          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">Patient-First Equity</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            The starting point is the patient. The people who need BCIs most urgently, those with severe motor impairment, blindness, locked-in syndrome, are also the most vulnerable to exploitation by closed systems they cannot inspect, modify, or leave. Building patient sovereignty into the architecture is not a feature. It is a prerequisite for equitable access. The patient can inspect every signal entering their nervous system. The patient can disconnect without asking a cloud service for permission. The patient can switch hardware without being locked into a vendor's ecosystem.
+          </p>
+        </div>
+      </section>
+
+
       <!-- ═══ CLAIMS & DISCLAIMERS ═══ -->
       <section id="claims" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Claims and Disclaimers</h2>
@@ -278,69 +341,6 @@ const tacticColors: Record<string, string> = {
               </tr>
             </tbody>
           </table>
-        </div>
-      </section>
-
-
-      <!-- ═══ THE PROPOSAL ═══ -->
-      <section id="proposal" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The Proposal</h2>
-        <div class="prose mb-8">
-          <p>
-            Every transformative technology gets one chance to build its foundation right. The internet did not take that chance. TCP/IP shipped without authentication. HTTP shipped without encryption. DNS shipped without integrity verification. We spent the next four decades bolting on security after the fact. TLS, DNSSEC, OAuth, zero-trust architectures. Each one a patch on a foundation that was never designed to be secure.
-          </p>
-          <p>
-            Brain-computer interfaces are at that same inflection point. The first cortical implants are in human skulls. The first commercial devices are shipping. And the security architecture is, once again, an afterthought. The difference this time is that the attack surface is not a credit card number or a social security record. It is the human nervous system. There are no rollbacks for neural tissue damage. There is no &ldquo;change your password&rdquo; for a compromised sensory cortex.
-          </p>
-          <p>
-            This is not a warning. It is a proposal.
-          </p>
-        </div>
-
-        <!-- The Blank Slate -->
-        <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-primary);">
-          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">The Blank Slate</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">
-            We are building from a blank slate. That is the advantage. We have full knowledge of every security failure that preceded us. The goal is to design a BCI security architecture that introduces as little technical debt as possible. Every layer is intentional. Every protocol earns its place. Where the internet added security as middleware, this architecture embeds it at the kernel level. Where medical devices shipped firmware as proprietary black boxes, this architecture proposes open-source auditability from day one.
-          </p>
-        </div>
-
-        <!-- The Vision -->
-        <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-secondary);">
-          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">The Vision</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">
-            QIF proposes a BCI security architecture designed to stand the test of time. Not for a product cycle, but for the full span of a human life. A person implanted at 30 may carry that device for 70 years. The architecture must outlast the company that built it, the protocol standard it launched with, and the threat environment it was designed against.
-          </p>
-        </div>
-
-        <!-- Second Sight Case Study -->
-        <div class="glass rounded-xl p-6 mb-6 border-l-4 border-[#ef4444]">
-          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">This already happened.</h3>
-          <div class="space-y-3 text-sm text-[var(--color-text-muted)]">
-            <p>
-              In March 2020, Second Sight Medical Products announced it would wind down operations, laying off 84 of 108 employees. More than 350 patients worldwide had Argus II retinal implants in their eyes. They were not notified directly. Some learned from their vision rehabilitation therapists, who had just been laid off.
-            </p>
-            <p>
-              The company stopped software upgrades, stopped supplying replacement components, and stopped answering physician support lines. One patient needed an MRI to check for a possible brain tumor. His doctors could not proceed because the Argus II's interaction with MRI magnetic fields required manufacturer consultation, and the manufacturer was not responding. He got a CT scan instead. He still does not know if he has a brain tumor.
-            </p>
-            <p>
-              Another patient heard a small beeping sound while changing trains in a New York subway station. Her device powered down permanently. It never worked again. The defunct hardware remains in her eye because explantation surgery risks retinal detachment and further vision loss.
-            </p>
-            <p>
-              Second Sight did not formally dissolve. It merged with Nano Precision Medical in 2022, becoming Vivani Medical. The neurostimulation business was spun off as Cortigent in 2025. No structured support program for the 350+ Argus II patients has been publicly announced.
-            </p>
-            <p class="text-xs text-[var(--color-text-faint)]">
-              Sources: <a href="https://spectrum.ieee.org/bionic-eye-obsolete" class="text-[var(--color-accent-primary)]">IEEE Spectrum</a> (Strickland & Harris, 2022), <a href="https://www.businesswire.com/news/home/20200330005581/en/" class="text-[var(--color-accent-primary)]">BusinessWire</a> (March 30, 2020).
-            </p>
-          </div>
-        </div>
-
-        <!-- The Direction -->
-        <div class="glass rounded-xl p-6 mb-6" style="border-left: 4px solid var(--color-accent-tertiary);">
-          <h3 class="font-semibold font-[family-name:var(--font-heading)] mb-3">Patient-First Equity</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">
-            The starting point is the patient. The people who need BCIs most urgently, those with severe motor impairment, blindness, locked-in syndrome, are also the most vulnerable to exploitation by closed systems they cannot inspect, modify, or leave. Building patient sovereignty into the architecture is not a feature. It is a prerequisite for equitable access. The patient can inspect every signal entering their nervous system. The patient can disconnect without asking a cloud service for permission. The patient can switch hardware without being locked into a vendor's ecosystem.
-          </p>
         </div>
       </section>
 
@@ -1256,7 +1256,7 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <div class="prose mb-8">
-          <p>Current severity distribution across 135 techniques: 20 high, 59 medium, 55 low, 1 none. The 4-level NP scale provides finer granularity &mdash; techniques previously scored as structural (NP:S) may now score as partial (NP:P) where recovery is possible with intervention.</p>
+          <p>Current severity distribution across 135 techniques: 24 structural, 6 partial, 38 temporary, 67 none. The 4-level NP scale provides finer granularity. Techniques previously scored as structural (NP:S) may now score as partial (NP:P) where recovery is possible with intervention.</p>
           <p><strong>Why NP has no traditional analogue.</strong> A firewall breach does not make future breaches easier by physically restructuring the target network. A neural attack with NP:S does exactly that. The brain adapts through Hebbian learning, making the attack&rsquo;s effects self-reinforcing. For these techniques, &ldquo;turn it off&rdquo; is not sufficient remediation. The damage persists after the device is removed because the damage is encoded in the biology, not the technology.</p>
         </div>
 
@@ -1344,7 +1344,7 @@ const tacticColors: Record<string, string> = {
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- 6.5 NEURORIGHTS MAPPING                                   -->
+      <!-- 7. NEURORIGHTS MAPPING                                   -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="neurorights" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">7. Neurorights Mapping</h2>
@@ -1446,7 +1446,7 @@ const tacticColors: Record<string, string> = {
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- 7. GOVERNANCE                                             -->
+      <!-- 8. GOVERNANCE                                             -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="governance" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">8. Governance</h2>
@@ -1565,7 +1565,7 @@ const tacticColors: Record<string, string> = {
       <!-- AI ETHICS REGULATORY ENVIRONMENT                             -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="ai-ethics" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">8.3 AI Ethics: The Regulatory Environment</h2>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">8.3 AI Ethics: The Regulatory Environment</h3>
         <div class="prose mb-8">
           <p>
             BCIs that use AI for stimulation decisions, signal decoding, or adaptive learning are subject to emerging regulation that spans AI ethics, medical device law, and neurotechnology governance. This section maps the frameworks that will define the legal environment QIF operates within.
@@ -1624,7 +1624,7 @@ const tacticColors: Record<string, string> = {
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- 8. NSP PROTOCOL                                           -->
+      <!-- 9. NSP PROTOCOL                                           -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="nsp" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">9. NSP Protocol</h2>
@@ -1671,7 +1671,7 @@ const tacticColors: Record<string, string> = {
               <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">Hardware Root of Trust</h4>
             </div>
             <p class="text-xs text-[var(--color-text-muted)]">
-              Firmware integrity and secure boot chain. Ensures the device is running authentic, untampered software from the moment it powers on. Uses SPHINCS+ hash-based signatures (FIPS 205) for firmware attestation &mdash; chosen because hash-based cryptography has no known quantum attack vector.
+              Firmware integrity and secure boot chain. Ensures the device is running authentic, untampered software from the moment it powers on. Uses SPHINCS+ hash-based signatures (FIPS 205) for firmware attestation, chosen because hash-based cryptography has no known quantum attack vector.
             </p>
           </div>
           <div class="glass rounded-xl p-5">
@@ -1689,7 +1689,7 @@ const tacticColors: Record<string, string> = {
               <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">QI Signal Integrity</h4>
             </div>
             <p class="text-xs text-[var(--color-text-muted)]">
-              Physics-based signal validation at the electrode-tissue boundary. Uses STFT (Short-Time Fourier Transform) spectral analysis to decompose neural signals into their frequency components over time. Injected signals that violate the expected scale-frequency relationship (<span class="font-[family-name:var(--font-mono)]">L&nbsp;=&nbsp;v/f</span>) are flagged &mdash; catching attacks that cryptography alone cannot detect.
+              Physics-based signal validation at the electrode-tissue boundary. Uses STFT (Short-Time Fourier Transform) spectral analysis to decompose neural signals into their frequency components over time. Injected signals that violate the expected scale-frequency relationship (<span class="font-[family-name:var(--font-mono)]">L&nbsp;=&nbsp;v/f</span>) are flagged, catching attacks that cryptography alone cannot detect.
             </p>
           </div>
           <div class="glass rounded-xl p-5">
@@ -1707,20 +1707,20 @@ const tacticColors: Record<string, string> = {
               <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm">EM Environment</h4>
             </div>
             <p class="text-xs text-[var(--color-text-muted)]">
-              Electromagnetic interference detection and spectral scanning. Monitors the RF environment around the device for anomalous emissions that could indicate active signal injection or intermodulation attacks &mdash; where external electromagnetic fields interact with the implant&rsquo;s own circuitry to produce unintended signals.
+              Electromagnetic interference detection and spectral scanning. Monitors the RF environment around the device for anomalous emissions that could indicate active signal injection or intermodulation attacks, where external electromagnetic fields interact with the implant&rsquo;s own circuitry to produce unintended signals.
             </p>
           </div>
         </div>
 
         <div class="prose mb-8">
           <p>
-            The protocol is specified across three device tiers: implanted (most constrained, &le;40 mW), wearable (moderate power budget), and external (unconstrained). Not all tiers require all layers &mdash; consumer wearables implement Layers 1&ndash;3, while implanted devices implement all five. Each tier uses the same cryptographic primitives but with different parameter sets and duty cycles.
+            The protocol is specified across three device tiers: implanted (most constrained, &le;40 mW), wearable (moderate power budget), and external (unconstrained). Not all tiers require all layers. Consumer wearables implement Layers 1&ndash;3, while implanted devices implement all five. Each tier uses the same cryptographic primitives but with different parameter sets and duty cycles.
           </p>
           <p>
-            Post-quantum key sizes represent the primary implementation challenge. ML-KEM-768 public keys are 1,184 bytes &mdash; 18 times larger than classical X25519 keys (the standard used in most encrypted connections today). <a href="/guardrails/runemate/" class="text-[var(--color-accent-primary)]">Runemate</a> &mdash; a purpose-built compression layer for BCI payloads &mdash; mitigates this by encoding neural interface content (visual, auditory, haptic) through a closed-vocabulary DSL, achieving 65&ndash;90% compression and net bandwidth savings over classical transport for typical BCI content exceeding 23&nbsp;KB.
+            Post-quantum key sizes represent the primary implementation challenge. ML-KEM-768 public keys are 1,184 bytes, 18 times larger than classical X25519 keys (the standard used in most encrypted connections today). <a href="/guardrails/runemate/" class="text-[var(--color-accent-primary)]">Runemate</a>, a purpose-built compression layer for BCI payloads, mitigates this by encoding neural interface content (visual, auditory, haptic) through a closed-vocabulary DSL, achieving 65&ndash;90% compression and net bandwidth savings over classical transport for typical BCI content exceeding 23&nbsp;KB.
           </p>
           <p>
-            <strong>Scope:</strong> NSP secures the I0 data link &mdash; the wireless boundary between implant and external device. It does not address physical-layer failures such as electrode migration, chronic immune response, or biocompatibility degradation. These are clinical monitoring concerns outside the protocol&rsquo;s threat model.
+            <strong>Scope:</strong> NSP secures the I0 data link, the wireless boundary between implant and external device. It does not address physical-layer failures such as electrode migration, chronic immune response, or biocompatibility degradation. These are clinical monitoring concerns outside the protocol&rsquo;s threat model.
           </p>
         </div>
 
@@ -1735,13 +1735,13 @@ const tacticColors: Record<string, string> = {
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- 12. THE NEURAL TERMINAL                                      -->
+      <!-- 10. THE NEURAL TERMINAL                                      -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="neural-terminal" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">12. The Neural Terminal</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">10. The Neural Terminal</h2>
 
-        <!-- 12.1 Why Not a Browser -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">12.1 Why Not a Browser</h3>
+        <!-- 10.1 Why Not a Browser -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">10.1 Why Not a Browser</h3>
         <div class="prose mb-8">
           <p>
             Web browsers are rendering engines built for screens. They parse HTML into a Document Object Model (DOM), execute JavaScript in a sandboxed runtime, apply CSS stylesheets through a cascade algorithm, composite visual layers, and rasterize the result onto a pixel grid. This pipeline &mdash; which evolved from Tim Berners-Lee&rsquo;s original WorldWideWeb (1990) through Mosaic, Netscape, and the modern Chromium/WebKit duopoly &mdash; assumes a rectangular display with fixed pixel density, a pointing device, and a keyboard.
@@ -1803,15 +1803,15 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mb-8">
           <p>
-            Each layer of the browser stack represents a class of vulnerabilities accumulated over three decades of web development. These vulnerabilities exist because browsers must execute arbitrary code from arbitrary sources &mdash; a requirement that is antithetical to the security needs of an implanted medical device.
+            Each layer of the browser stack represents a class of vulnerabilities accumulated over three decades of web development. These vulnerabilities exist because browsers must execute arbitrary code from arbitrary sources, a requirement that is antithetical to the security needs of an implanted medical device.
           </p>
           <p>
             Runemate eliminates the browser entirely. Content is compiled from a declarative, non-Turing-complete DSL (Staves) into compact bytecode, validated against TARA safety bounds at compile time, encrypted via NSP, and delivered directly to the on-device interpreter (Scribe). There is no arbitrary code execution. There is no third-party extension model. There is no DOM.
           </p>
         </div>
 
-        <!-- 12.2 Why Not an App Store -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">12.2 Why Not an App Store</h3>
+        <!-- 10.2 Why Not an App Store -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">10.2 Why Not an App Store</h3>
         <div class="prose mb-8">
           <p>
             App stores introduce three categories of risk that are unacceptable for neural devices:
@@ -1823,7 +1823,7 @@ const tacticColors: Record<string, string> = {
             <div class="w-1 rounded-full bg-[#ef4444] shrink-0"></div>
             <div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Centralized control</p>
-              <p class="text-xs text-[var(--color-text-muted)]">A patient&rsquo;s perceptual experience would be subject to a platform&rsquo;s content policies, review timelines, and commercial decisions. If the app store operator decides to remove a perceptual application, the patient loses a component of their sensory experience. This is qualitatively different from losing access to a mobile app &mdash; it is the digital equivalent of confiscating a prosthetic limb.</p>
+              <p class="text-xs text-[var(--color-text-muted)]">A patient&rsquo;s perceptual experience would be subject to a platform&rsquo;s content policies, review timelines, and commercial decisions. If the app store operator decides to remove a perceptual application, the patient loses a component of their sensory experience. This is qualitatively different from losing access to a mobile app. It is the digital equivalent of confiscating a prosthetic limb.</p>
             </div>
           </div>
           <div class="glass rounded-xl p-5 flex gap-4">
@@ -1842,8 +1842,8 @@ const tacticColors: Record<string, string> = {
           </div>
         </div>
 
-        <!-- 12.3 The Terminal as Interface -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">12.3 The Terminal as Interface</h3>
+        <!-- 10.3 The Terminal as Interface -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">10.3 The Terminal as Interface</h3>
         <div class="prose mb-4">
           <p>
             The terminal is the proposed primary interface for neural devices. It provides:
@@ -1869,14 +1869,14 @@ const tacticColors: Record<string, string> = {
             <div class="w-1 rounded-full bg-[#06b6d4] shrink-0"></div>
             <div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Auditability</p>
-              <p class="text-xs text-[var(--color-text-muted)]">Every packet entering the nervous system is logged and inspectable. <code>runemate log --stream</code> provides real-time visibility into what content is being delivered and what stimulation patterns are being generated &mdash; the neural equivalent of <code>tcpdump</code>.</p>
+              <p class="text-xs text-[var(--color-text-muted)]">Every packet entering the nervous system is logged and inspectable. <code>runemate log --stream</code> provides real-time visibility into what content is being delivered and what stimulation patterns are being generated, the neural equivalent of <code>tcpdump</code>.</p>
             </div>
           </div>
           <div class="glass rounded-xl p-5 flex gap-4">
             <div class="w-1 rounded-full bg-[#06b6d4] shrink-0"></div>
             <div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Offline operation</p>
-              <p class="text-xs text-[var(--color-text-muted)]"><code>runemate --offline</code> ensures the device functions without a network connection, without a cloud service, and without phoning home. The terminal makes this verifiable &mdash; the patient can confirm that no outbound connections are active.</p>
+              <p class="text-xs text-[var(--color-text-muted)]"><code>runemate --offline</code> ensures the device functions without a network connection, without a cloud service, and without phoning home. The terminal makes this verifiable. The patient can confirm that no outbound connections are active.</p>
             </div>
           </div>
           <div class="glass rounded-xl p-5 flex gap-4">
@@ -1888,8 +1888,8 @@ const tacticColors: Record<string, string> = {
           </div>
         </div>
 
-        <!-- 12.4 Autodidactic Navigation -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">12.4 Autodidactic Navigation</h3>
+        <!-- 10.4 Autodidactic Navigation -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">10.4 Autodidactic Navigation</h3>
         <div class="prose mb-8">
           <p>
             Traditional interfaces impose a navigation paradigm: menus, scroll, tap, swipe. These paradigms were designed for fingers on glass. They do not translate to a cortical interface where input may arrive via motor cortex BCI, subvocalization, or eye tracking.
@@ -1908,16 +1908,16 @@ const tacticColors: Record<string, string> = {
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- 13. PATIENT SELF-SOVEREIGNTY                                -->
+      <!-- 11. PATIENT SELF-SOVEREIGNTY                                -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="patient-sovereignty" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">13. Patient Self-Sovereignty</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">11. Patient Self-Sovereignty</h2>
 
-        <!-- 13.1 The Four Rights -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">13.1 The Four Rights</h3>
+        <!-- 11.1 The Four Rights -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">11.1 The Four Rights</h3>
         <div class="prose mb-4">
           <p>
-            When a device IS the patient&rsquo;s sensory system, the conventional user-vendor relationship is inadequate. The patient is not a &ldquo;user&rdquo; in the consumer technology sense &mdash; they are a person whose perception depends on the correct, continuous, and trustworthy operation of an implanted system. This relationship demands four operational rights:
+            When a device IS the patient&rsquo;s sensory system, the conventional user-vendor relationship is inadequate. The patient is not a &ldquo;user&rdquo; in the consumer technology sense. They are a person whose perception depends on the correct, continuous, and trustworthy operation of an implanted system. This relationship demands four operational rights:
           </p>
         </div>
 
@@ -1940,30 +1940,30 @@ const tacticColors: Record<string, string> = {
             <div class="w-1 rounded-full bg-[#10b981] shrink-0"></div>
             <div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Right to customize</p>
-              <p class="text-xs text-[var(--color-text-muted)]">Sighted users choose dark mode, font sizes, and color schemes. A patient with a cortical prosthesis should be able to adjust contrast curves, phosphene brightness, temporal refresh rates, and spatial resolution &mdash; not through a settings menu designed by someone who can see, but through direct parameter control that reflects the patient&rsquo;s subjective perceptual experience.</p>
+              <p class="text-xs text-[var(--color-text-muted)]">Sighted users choose dark mode, font sizes, and color schemes. A patient with a cortical prosthesis should be able to adjust contrast curves, phosphene brightness, temporal refresh rates, and spatial resolution, not through a settings menu designed by someone who can see, but through direct parameter control that reflects the patient&rsquo;s subjective perceptual experience.</p>
             </div>
           </div>
           <div class="glass rounded-xl p-5 flex gap-4">
             <div class="w-1 rounded-full bg-[#10b981] shrink-0"></div>
             <div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Right to disconnect</p>
-              <p class="text-xs text-[var(--color-text-muted)]">The device must function without a network connection, without a cloud service, and without phoning home. An implanted medical device that requires continuous internet connectivity to operate is a device that can be remotely disabled &mdash; by a network outage, a server decommission, or a corporate bankruptcy. The terminal makes disconnected operation verifiable.</p>
+              <p class="text-xs text-[var(--color-text-muted)]">The device must function without a network connection, without a cloud service, and without phoning home. An implanted medical device that requires continuous internet connectivity to operate is a device that can be remotely disabled by a network outage, a server decommission, or a corporate bankruptcy. The terminal makes disconnected operation verifiable.</p>
             </div>
           </div>
         </div>
 
-        <!-- 13.2 Subvocalization and Intent -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">13.2 Subvocalization and Intent</h3>
+        <!-- 11.2 Subvocalization and Intent -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">11.2 Subvocalization and Intent</h3>
         <!-- TIER 3: Subvocalization-based BCI control is a research-stage capability, not a deployed technology. Claims about motor cortex BCI capturing intended speech are projections — needs Kevin's review -->
         <div class="prose mb-8">
           <p>
-            In a proposed neural OS, the patient controls AI through subvocalization &mdash; thinking commands rather than typing them. Subvocalization BCI is an experimental prototype (e.g., MIT AlterEgo) that captures intended speech or motor commands before they reach the muscles, enabling silent, private interaction with the system.
+            In a proposed neural OS, the patient controls AI through subvocalization, thinking commands rather than typing them. Subvocalization BCI is an experimental prototype (e.g., MIT AlterEgo) that captures intended speech or motor commands before they reach the muscles, enabling silent, private interaction with the system.
           </p>
           <p>
             The AI is the tool. It processes, suggests, retrieves, compiles, renders. But the decision to act, the consent to a thought becoming an action, the creative impulse that initiates a query or dismisses a suggestion &mdash; that is the human. That is what the terminal architecture protects.
           </p>
           <p>
-            Without this boundary, AI does not augment human capability. It replaces it. The patient becomes a passenger in their own perceptual system &mdash; receiving whatever the algorithm decides to deliver, with no mechanism to inspect, reject, or redirect.
+            Without this boundary, AI does not augment human capability. It replaces it. The patient becomes a passenger in their own perceptual system, receiving whatever the algorithm decides to deliver, with no mechanism to inspect, reject, or redirect.
           </p>
           <p>
             The distinction is operational:
@@ -1993,8 +1993,8 @@ const tacticColors: Record<string, string> = {
           </p>
         </div>
 
-        <!-- 13.3 The Steering Argument -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">13.3 The Steering Argument</h3>
+        <!-- 11.3 The Steering Argument -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">11.3 The Steering Argument</h3>
         <div class="prose mb-8">
           <p>
             If we do not have free will through consent and agency, then who is driving the car if we are not steering?
@@ -2007,8 +2007,8 @@ const tacticColors: Record<string, string> = {
           </p>
         </div>
 
-        <!-- 13.4 Protecting Creativity -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">13.4 Protecting Creativity</h3>
+        <!-- 11.4 Protecting Creativity -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">11.4 Protecting Creativity</h3>
         <div class="prose mb-8">
           <p>
             Creativity requires agency &mdash; the ability to combine ideas in unexpected ways, to follow a thought that no algorithm would predict, to say &ldquo;no, show me something else.&rdquo; If the AI drives and the patient rides, creativity does not diminish &mdash; it atrophies. Not because AI cannot generate, but because the human loses the practice of choosing. And a capacity that is not exercised degrades.
@@ -2024,13 +2024,13 @@ const tacticColors: Record<string, string> = {
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- 14. AUTONOMY GUARDRAILS                                     -->
+      <!-- 12. AUTONOMY GUARDRAILS                                     -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="autonomy-guardrails" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">14. Autonomy Guardrails</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">12. Autonomy Guardrails</h2>
 
-        <!-- 14.1 The Autonomy Spectrum -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">14.1 The Autonomy Spectrum</h3>
+        <!-- 12.1 The Autonomy Spectrum -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">12.1 The Autonomy Spectrum</h3>
         <div class="prose mb-4">
           <p>
             Assistive autonomy exists on a spectrum. The automotive industry has standardized this spectrum (SAE J3016), and the mapping to neural interfaces is instructive:
@@ -2093,15 +2093,15 @@ const tacticColors: Record<string, string> = {
             Levels 1&ndash;2 are clearly therapeutic. Level 5 is clearly a violation of cognitive liberty. The design challenge &mdash; and the ethical battleground &mdash; is Levels 3&ndash;4: systems that operate autonomously within a bounded domain, with the patient in a supervisory role.
           </p>
           <p>
-            Lane-keep assist is Level 1. The system nudges; the driver can override instantly. Lane-keep control is Level 2. The system actively steers; the driver must exert force to override. For a nerve-damage patient whose BCI corrects their gait, Level 2 is appropriate &mdash; the system compensates for damaged motor pathways, and the patient retains the ability to override (e.g., to stop, turn, sit down).
+            Lane-keep assist is Level 1. The system nudges; the driver can override instantly. Lane-keep control is Level 2. The system actively steers; the driver must exert force to override. For a nerve-damage patient whose BCI corrects their gait, Level 2 is appropriate. The system compensates for damaged motor pathways, and the patient retains the ability to override (e.g., to stop, turn, sit down).
           </p>
           <p>
             The question is: what happens when the same architecture is applied to cognitive function?
           </p>
         </div>
 
-        <!-- 14.2 The Escalation Problem -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">14.2 The Escalation Problem</h3>
+        <!-- 12.2 The Escalation Problem -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">12.2 The Escalation Problem</h3>
         <div class="prose mb-4">
           <p>
             Consider a patient with spinal nerve damage who receives a BCI for motor restoration. The following escalation is medically plausible:
@@ -2129,7 +2129,7 @@ const tacticColors: Record<string, string> = {
             <div class="w-1 rounded-full bg-[#f59e0b] shrink-0"></div>
             <div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Step 3: Quit alcohol</p>
-              <p class="text-xs text-[var(--color-text-muted)]">The patient developed an alcohol dependency during recovery. They ask the BCI to help. This is still therapeutic, but the system is now modifying behavioral patterns, not motor patterns. The BCI has become a governor for decision-making &mdash; a fundamentally different function than the walking assistance it was originally consented for.</p>
+              <p class="text-xs text-[var(--color-text-muted)]">The patient developed an alcohol dependency during recovery. They ask the BCI to help. This is still therapeutic, but the system is now modifying behavioral patterns, not motor patterns. The BCI has become a governor for decision-making, a fundamentally different function than the walking assistance it was originally consented for.</p>
             </div>
           </div>
           <div class="glass rounded-xl p-5 flex gap-4">
@@ -2137,7 +2137,7 @@ const tacticColors: Record<string, string> = {
             <div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Step 4: Run faster than the body allows</p>
               <!-- TIER 3: Motor cortex override of fatigue signals — this is a projected scenario, not demonstrated — needs Kevin's review -->
-              <p class="text-xs text-[var(--color-text-muted)]">The patient, now mobile and sober, asks the BCI to enhance their running performance by overriding central fatigue signals in motor cortex. This crosses from therapeutic to enhancement. Central fatigue modulation (suppressing the brain&rsquo;s protective fatigue signaling) could mask injury risk &mdash; the musculoskeletal system has not been augmented alongside the neural interface.</p>
+              <p class="text-xs text-[var(--color-text-muted)]">The patient, now mobile and sober, asks the BCI to enhance their running performance by overriding central fatigue signals in motor cortex. This crosses from therapeutic to enhancement. Central fatigue modulation (suppressing the brain&rsquo;s protective fatigue signaling) could mask injury risk. The musculoskeletal system has not been augmented alongside the neural interface.</p>
             </div>
           </div>
         </div>
@@ -2148,14 +2148,14 @@ const tacticColors: Record<string, string> = {
           </p>
         </div>
 
-        <!-- 14.3 Ghost in the Shell -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">14.3 Ghost in the Shell</h3>
+        <!-- 12.3 Ghost in the Shell -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">12.3 Ghost in the Shell</h3>
         <div class="prose mb-8">
           <p>
             The title references Masamune Shirow&rsquo;s 1989 manga (and Mamoru Oshii&rsquo;s 1995 film), which posed the question directly: if a human consciousness (the &ldquo;ghost&rdquo;) runs on a cybernetic body (the &ldquo;shell&rdquo;), and the shell has rules the ghost cannot override, is the ghost free?
           </p>
           <p>
-            This is not science fiction when applied to neural interfaces. If the kernel &mdash; Neurowall &mdash; has immutable safety rules that the patient cannot override, then the patient&rsquo;s consciousness operates within constraints set by the system&rsquo;s designers. The manufacturer, the regulator, the clinician &mdash; some combination of these entities decided what the patient is and is not allowed to do with their own neural device.
+            This is not science fiction when applied to neural interfaces. If the kernel (Neurowall) has immutable safety rules that the patient cannot override, then the patient&rsquo;s consciousness operates within constraints set by the system&rsquo;s designers. The manufacturer, the regulator, the clinician: some combination of these entities decided what the patient is and is not allowed to do with their own neural device.
           </p>
           <p>
             The resolution proposed here is: <strong>the kernel protects the hardware, not the software.</strong>
@@ -2171,14 +2171,14 @@ const tacticColors: Record<string, string> = {
             <div class="w-1 rounded-full bg-[#06b6d4] shrink-0"></div>
             <div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Amplitude ceiling</p>
-              <p class="text-xs text-[var(--color-text-muted)]">The electrical current delivered to neural tissue cannot exceed the tissue damage threshold. This is a physics constraint &mdash; exceeding it destroys neurons. The limit is not a policy choice; it is a material property of cortical tissue.</p>
+              <p class="text-xs text-[var(--color-text-muted)]">The electrical current delivered to neural tissue cannot exceed the tissue damage threshold. This is a physics constraint. Exceeding it destroys neurons. The limit is not a policy choice; it is a material property of cortical tissue.</p>
             </div>
           </div>
           <div class="glass rounded-xl p-5 flex gap-4">
             <div class="w-1 rounded-full bg-[#06b6d4] shrink-0"></div>
             <div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Rate limiting</p>
-              <p class="text-xs text-[var(--color-text-muted)]">Stimulation pulses cannot fire faster than the neural refractory period allows. This is a biological constraint &mdash; neurons that have not recovered from the previous pulse cannot respond to the next one. Exceeding this rate does not produce stronger stimulation; it produces tissue damage.</p>
+              <p class="text-xs text-[var(--color-text-muted)]">Stimulation pulses cannot fire faster than the neural refractory period allows. This is a biological constraint. Neurons that have not recovered from the previous pulse cannot respond to the next one. Exceeding this rate does not produce stronger stimulation; it produces tissue damage.</p>
             </div>
           </div>
           <div class="glass rounded-xl p-5 flex gap-4">
@@ -2197,12 +2197,12 @@ const tacticColors: Record<string, string> = {
           </p>
           <!-- TIER 3: Claims about VTA/NAc stimulation parameters being unsettled — accurate framing, but the specific neural circuits referenced need verification — needs Kevin's review -->
           <p>
-            But the escalation scenario in Section 14.2 breaks this clean separation. When the patient asks to quit alcohol, the relevant &ldquo;tissue&rdquo; is the reward circuit. The &ldquo;safe amplitude&rdquo; for modifying dopaminergic pathways in the ventral tegmental area (VTA) or nucleus accumbens (NAc) is not a settled question &mdash; it is an active area of neuroscience research with conflicting results across studies. No standardized safe parameters have been established by regulatory bodies; published parameters are from experimental studies and require subject-specific calibration. And &ldquo;run faster than body allows&rdquo; puts the motor cortex in conflict with the musculoskeletal system, which has its own damage thresholds that the neural kernel cannot measure.
+            But the escalation scenario in Section 12.2 breaks this clean separation. When the patient asks to quit alcohol, the relevant &ldquo;tissue&rdquo; is the reward circuit. The &ldquo;safe amplitude&rdquo; for modifying dopaminergic pathways in the ventral tegmental area (VTA) or nucleus accumbens (NAc) is not a settled question &mdash; it is an active area of neuroscience research with conflicting results across studies. No standardized safe parameters have been established by regulatory bodies; published parameters are from experimental studies and require subject-specific calibration. And &ldquo;run faster than body allows&rdquo; puts the motor cortex in conflict with the musculoskeletal system, which has its own damage thresholds that the neural kernel cannot measure.
           </p>
         </div>
 
-        <!-- 14.4 The Five-Tier Guardrail Model -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">14.4 The Five-Tier Guardrail Model</h3>
+        <!-- 12.4 The Five-Tier Guardrail Model -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">12.4 The Five-Tier Guardrail Model</h3>
         <div class="prose mb-4">
           <p>
             The proposed resolution is a five-tier guardrail model that separates immutable physical safety from configurable therapeutic and policy decisions:
@@ -2259,15 +2259,15 @@ const tacticColors: Record<string, string> = {
             The kernel (Neurowall) enforces Tiers 1&ndash;2. These limits cannot be overridden by the patient, the clinician, the manufacturer, or a software update. They are derived from the physical and biological properties of neural tissue.
           </p>
           <p>
-            Tiers 3&ndash;5 live in the capability system, where consent is explicit, domain-scoped, time-bounded, and revocable. The patient can expand their BCI&rsquo;s scope &mdash; but only through a deliberate, auditable consent process, never through scope creep.
+            Tiers 3&ndash;5 live in the capability system, where consent is explicit, domain-scoped, time-bounded, and revocable. The patient can expand their BCI&rsquo;s scope, but only through a deliberate, auditable consent process, never through scope creep.
           </p>
         </div>
 
-        <!-- 14.5 Operationalized: The Addiction Scenario -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">14.5 Operationalized: The Addiction Scenario</h3>
+        <!-- 12.5 Operationalized: The Addiction Scenario -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">12.5 Operationalized: The Addiction Scenario</h3>
         <div class="prose mb-4">
           <p>
-            Applying the five-tier model to the escalation scenario in Section 14.2:
+            Applying the five-tier model to the escalation scenario in Section 12.2:
           </p>
           <p>
             The patient&rsquo;s walk-assist BCI was consented under Tier 4 for motor cortex (M1) only. When they say &ldquo;help me quit painkillers&rdquo;:
@@ -2277,7 +2277,7 @@ const tacticColors: Record<string, string> = {
         <div class="space-y-3 mb-8">
           <div class="glass rounded-xl p-5 sm:p-6 my-0 not-prose">
             <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">1. Domain recognition</p>
-            <p class="text-xs text-[var(--color-text-muted)]">The system identifies that the request targets limbic/prefrontal circuits &mdash; outside the consented motor scope. The capability <code>modify.limbic</code> is not in the patient&rsquo;s current session.</p>
+            <p class="text-xs text-[var(--color-text-muted)]">The system identifies that the request targets limbic/prefrontal circuits, outside the consented motor scope. The capability <code>modify.limbic</code> is not in the patient&rsquo;s current session.</p>
           </div>
           <div class="glass rounded-xl p-5 sm:p-6 my-0 not-prose">
             <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">2. Consent gate</p>
@@ -2302,7 +2302,7 @@ const tacticColors: Record<string, string> = {
         <div class="space-y-3 mb-8">
           <div class="glass rounded-xl p-5 sm:p-6 my-0 not-prose">
             <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">5. Kernel enforcement (Tier 1)</p>
-            <p class="text-xs text-[var(--color-text-muted)]">The requested stimulation pattern would suppress central fatigue signaling beyond safe thresholds, masking the body&rsquo;s protective signals. The Neurowall kernel rejects the command &mdash; not because a policy prohibits enhancement, but because overriding fatigue protection creates unacceptable injury risk.</p>
+            <p class="text-xs text-[var(--color-text-muted)]">The requested stimulation pattern would suppress central fatigue signaling beyond safe thresholds, masking the body&rsquo;s protective signals. The Neurowall kernel rejects the command, not because a policy prohibits enhancement, but because overriding fatigue protection creates unacceptable injury risk.</p>
           </div>
           <div class="glass rounded-xl p-5 sm:p-6 my-0 not-prose">
             <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">6. Tier 5 flag</p>
@@ -2316,8 +2316,8 @@ const tacticColors: Record<string, string> = {
           </p>
         </div>
 
-        <!-- 14.6 Motor vs. Cognitive Neurons -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">14.6 Motor vs. Cognitive Neurons</h3>
+        <!-- 12.6 Motor vs. Cognitive Neurons -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">12.6 Motor vs. Cognitive Neurons</h3>
         <div class="prose mb-8">
           <p>
             The escalation problem raises a fundamental question: if we allow assistive control over motor neurons (gait correction), how do we prevent the same architecture from being applied to cognitive neurons (thought modification)?
@@ -2371,13 +2371,13 @@ const tacticColors: Record<string, string> = {
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- 15. PASSWORDLESS SECURITY ARCHITECTURE                      -->
+      <!-- 13. PASSWORDLESS SECURITY ARCHITECTURE                      -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="passwordless-security" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">15. Passwordless Security Architecture</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">13. Passwordless Security Architecture</h2>
 
-        <!-- 15.1 Why Passwords Fail for Neural Devices -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">15.1 Why Passwords Fail for Neural Devices</h3>
+        <!-- 13.1 Why Passwords Fail for Neural Devices -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">13.1 Why Passwords Fail for Neural Devices</h3>
         <div class="prose mb-4">
           <p>
             Passwords assume a user who can type, a device with a keyboard, and a transmission channel that can be secured. None of these assumptions hold for implanted neural devices:
@@ -2413,12 +2413,12 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mb-8">
           <p>
-            The security architecture must be passwordless by design &mdash; not as a convenience feature, but as a medical necessity.
+            The security architecture must be passwordless by design, not as a convenience feature, but as a medical necessity.
           </p>
         </div>
 
-        <!-- 15.2 Factor 1: Post-Quantum Key Cryptography -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">15.2 Factor 1: Post-Quantum Key Cryptography</h3>
+        <!-- 13.2 Factor 1: Post-Quantum Key Cryptography -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">13.2 Factor 1: Post-Quantum Key Cryptography</h3>
         <div class="prose mb-4">
           <p>
             The NSP handshake establishes a session using ML-KEM-768 (NIST FIPS 203, finalized August 2024) for key encapsulation and ML-DSA-65 (NIST FIPS 204, finalized August 2024) for digital signatures. The device&rsquo;s identity is a hardware-bound keypair provisioned at implantation and stored in a secure enclave on the implanted processor.
@@ -2438,7 +2438,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mb-8">
           <p>
-            There is no password to remember, no token to carry, and no credential to phish. The device proves its identity through a cryptographic challenge-response that requires possession of the hardware key &mdash; which cannot be extracted from the secure enclave without physical access to the implanted chip.
+            There is no password to remember, no token to carry, and no credential to phish. The device proves its identity through a cryptographic challenge-response that requires possession of the hardware key, which cannot be extracted from the secure enclave without physical access to the implanted chip.
           </p>
           <!-- TIER 3: Implant lifetimes vary significantly by type — needs Kevin's review -->
           <p>
@@ -2446,12 +2446,12 @@ const tacticColors: Record<string, string> = {
           </p>
         </div>
 
-        <!-- 15.3 Factor 2: Biomarker MFA -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">15.3 Factor 2: Biomarker MFA</h3>
+        <!-- 13.3 Factor 2: Biomarker MFA -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">13.3 Factor 2: Biomarker MFA</h3>
         <!-- TIER 3: Neural biomarker authentication — the stability and spoofing resistance claims reference research (Napflin et al. 2007) but the operational model described here (continuous passive biomarker verification) is a design projection, not a deployed system — needs Kevin's review -->
         <div class="prose mb-4">
           <p>
-            The second authentication factor is the patient themselves. Neural biomarkers &mdash; unique patterns in electrophysiological signals &mdash; are as individual as fingerprints and as difficult to forge. Short-term stability (30-day retest) has been demonstrated in lab settings. Long-term stability across months, emotional states, and aging remains an open research question.
+            The second authentication factor is the patient themselves. Neural biomarkers, unique patterns in electrophysiological signals, are as individual as fingerprints and as difficult to forge. Short-term stability (30-day retest) has been demonstrated in lab settings. Long-term stability across months, emotional states, and aging remains an open research question.
           </p>
         </div>
 
@@ -2533,11 +2533,11 @@ const tacticColors: Record<string, string> = {
           </p>
         </div>
 
-        <!-- 15.4 Continuous Authentication -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">15.4 Continuous Authentication</h3>
+        <!-- 13.4 Continuous Authentication -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">13.4 Continuous Authentication</h3>
         <div class="prose mb-4">
           <p>
-            Traditional authentication is a gate: prove your identity once, then operate freely until the session expires. For a neural device, this model is insufficient. The device should continuously verify that the person using it is the person it was calibrated for &mdash; not through repeated login prompts, but through passive biometric monitoring that is already occurring as part of the device&rsquo;s normal operation.
+            Traditional authentication is a gate: prove your identity once, then operate freely until the session expires. For a neural device, this model is insufficient. The device should continuously verify that the person using it is the person it was calibrated for, not through repeated login prompts, but through passive biometric monitoring that is already occurring as part of the device&rsquo;s normal operation.
           </p>
           <p>
             The continuous authentication model:
@@ -2564,8 +2564,8 @@ const tacticColors: Record<string, string> = {
           </div>
         </div>
 
-        <!-- 15.5 Capability-Based Access Control -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">15.5 Capability-Based Access Control</h3>
+        <!-- 13.5 Capability-Based Access Control -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">13.5 Capability-Based Access Control</h3>
         <div class="prose mb-4">
           <p>
             The terminal does not grant root. It uses capability-based security (Dennis &amp; Van Horn, 1966), where each session, script, and command has explicitly declared capabilities:
@@ -2593,12 +2593,12 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
 
         <div class="prose mb-8">
           <p>
-            No command can exceed its declared capabilities. Capability escalation requires multi-party cryptographic consent &mdash; not a password prompt, not a sudo command, but a signed authorization from the required parties (patient, clinician, manufacturer, depending on the operation).
+            No command can exceed its declared capabilities. Capability escalation requires multi-party cryptographic consent, not a password prompt, not a sudo command, but a signed authorization from the required parties (patient, clinician, manufacturer, depending on the operation).
           </p>
         </div>
 
-        <!-- 15.6 Neurorights as ACL Flags -->
-        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">15.6 Neurorights as ACL Flags</h3>
+        <!-- 13.6 Neurorights as ACL Flags -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">13.6 Neurorights as ACL Flags</h3>
         <div class="prose mb-4">
           <p>
             The five proposed neurorights (Yuste et al., 2017; Ienca &amp; Andorno, 2017) map to access control flags enforced at the protocol level:
@@ -2647,7 +2647,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
 
         <div class="prose mb-4">
           <p>
-            These are not philosophical concepts in this architecture. They are ACL flags enforced at the Neurowall kernel level. A content provider that attempts to modify stimulation parameters without the <code>integrity.write</code> capability receives a permission denial &mdash; not a policy discussion.
+            These are not philosophical concepts in this architecture. They are ACL flags enforced at the Neurowall kernel level. A content provider that attempts to modify stimulation parameters without the <code>integrity.write</code> capability receives a permission denial, not a policy discussion.
           </p>
         </div>
 
@@ -2662,10 +2662,10 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
 
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!-- 16. NEURAL OS ARCHITECTURE                                  -->
+<!-- 14. NEURAL OS ARCHITECTURE                                  -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 <section id="neural-os" class="mb-20">
-  <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">16. Neural OS Architecture</h2>
+  <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">14. Neural OS Architecture</h2>
 
   <div class="prose mb-8">
     <p>
@@ -2673,7 +2673,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
     </p>
   </div>
 
-  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">16.1 The Linux Mapping</h3>
+  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">14.1 The Linux Mapping</h3>
 
   <div class="overflow-x-auto mb-8">
     <table class="w-full text-sm border-collapse">
@@ -2729,14 +2729,14 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
     </table>
   </div>
 
-  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">16.2 CLI Security Analysis</h3>
+  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">14.2 CLI Security Analysis</h3>
 
   <div class="prose mb-8">
     <p>
       A reasonable objection: does adding a CLI to a neural device introduce new attack surface?
     </p>
     <p>
-      No. The CLI does not expand the attack surface beyond what already exists. Runemate already executes bytecode &mdash; the Scribe interpreter processes arbitrary compiled content on-device. The execution surface already exists. A CLI is a structured, capability-gated interface to that same execution engine. It is a <em>subset</em> of what the interpreter can do, constrained by explicit capability tokens.
+      No. The CLI does not expand the attack surface beyond what already exists. Runemate already executes bytecode. The Scribe interpreter processes arbitrary compiled content on-device. The execution surface already exists. A CLI is a structured, capability-gated interface to that same execution engine. It is a <em>subset</em> of what the interpreter can do, constrained by explicit capability tokens.
     </p>
   </div>
 
@@ -2761,7 +2761,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
         <div class="w-1 rounded-full shrink-0" style="background: #10b981;"></div>
         <div>
           <h4 class="font-semibold font-[family-name:var(--font-heading)] text-sm mb-1">No shell injection</h4>
-          <p class="text-xs text-[var(--color-text-muted)]">There is no <code>exec()</code>, no <code>system()</code>, no string interpolation into command invocations. Commands are parsed through the same recursive descent parser that handles Staves bytecode &mdash; same security properties, same input validation, same bounds checking.</p>
+          <p class="text-xs text-[var(--color-text-muted)]">There is no <code>exec()</code>, no <code>system()</code>, no string interpolation into command invocations. Commands are parsed through the same recursive descent parser that handles Staves bytecode, with the same security properties, same input validation, same bounds checking.</p>
         </div>
       </div>
       <div class="glass rounded-xl p-4 flex gap-4">
@@ -2780,7 +2780,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
     </p>
   </div>
 
-  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">16.3 Why Open Source</h3>
+  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">14.3 Why Open Source</h3>
 
   <div class="prose mb-8">
     <p>The same reasons Linux won:</p>
@@ -2827,12 +2827,12 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
 
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!-- 17. VISION RESTORATION PIPELINE                             -->
+<!-- 15. VISION RESTORATION PIPELINE                             -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 <section id="vision-pipeline" class="mb-20">
-  <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">17. Vision Restoration Pipeline</h2>
+  <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">15. Vision Restoration Pipeline</h2>
 
-  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">17.1 Runemate + NSP for Vision</h3>
+  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">15.1 Runemate + NSP for Vision</h3>
 
   <div class="prose mb-6">
     <p>
@@ -2878,7 +2878,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
 
   <div class="prose mb-8">
     <p>
-      The Forge compiler on the gateway converts internet content (HTML, images, video) into semantic visual intent &mdash; not pixel data, but structural content: &ldquo;heading, paragraph, image with these edges, link.&rdquo; This intent is compiled into Staves bytecode, validated against TARA safety bounds (ensuring no stimulation pattern exceeds tissue-safe thresholds), and encrypted via NSP for transmission.
+      The Forge compiler on the gateway converts internet content (HTML, images, video) into semantic visual intent, not pixel data, but structural content: &ldquo;heading, paragraph, image with these edges, link.&rdquo; This intent is compiled into Staves bytecode, validated against TARA safety bounds (ensuring no stimulation pattern exceeds tissue-safe thresholds), and encrypted via NSP for transmission.
     </p>
     <!-- TIER 3: 67.8% compression ratio is from v1.0 Forge benchmark on text-based content — needs Kevin's review -->
     <p>
@@ -2889,7 +2889,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
     </p>
   </div>
 
-  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">17.2 Multimodal Content Delivery</h3>
+  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">15.2 Multimodal Content Delivery</h3>
 
   <div class="prose mb-8">
     <p>
@@ -2914,12 +2914,12 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
 
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!-- 18. GOVERNANCE (EXTENDED)                                   -->
+<!-- 16. GOVERNANCE (EXTENDED)                                   -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 <section id="governance-extended" class="mb-20">
-  <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">18. Governance</h2>
+  <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">16. Governance</h2>
 
-  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">18.1 RACI Matrix</h3>
+  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">16.1 RACI Matrix</h3>
 
   <div class="prose mb-6">
     <p>
@@ -2960,7 +2960,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
     </p>
   </div>
 
-  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">18.2 Neuroethics and Neurorights Mapping</h3>
+  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">16.2 Neuroethics and Neurorights Mapping</h3>
 
   <div class="prose mb-6">
     <p>
@@ -3007,12 +3007,12 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
     </p>
   </div>
 
-  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">18.3 Open Source Neural Atlas</h3>
+  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">16.3 Open Source Neural Atlas</h3>
 
   <div class="glass rounded-xl p-6 mb-8" style="border-left: 4px solid var(--color-accent-secondary);">
     <p class="text-sm font-semibold text-[var(--color-accent-secondary)] mb-2">Why it matters now</p>
     <p class="text-sm text-[var(--color-text-muted)]">
-      Second Sight&rsquo;s 2020 closure left Argus II patients with unsupported hardware in their eyes. Open standards prevent this. TCP/IP took 9 years from proposal to adoption &mdash; the discussion must precede the technology.
+      Second Sight&rsquo;s 2020 closure left Argus II patients with unsupported hardware in their eyes. Open standards prevent this. TCP/IP took 9 years from proposal to adoption. The discussion must precede the technology.
     </p>
   </div>
 
@@ -3047,7 +3047,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
     </p>
   </div>
 
-  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">18.4 Open Questions</h3>
+  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">16.4 Open Questions</h3>
 
   <div class="prose mb-6">
     <p>
@@ -3109,10 +3109,10 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
 
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!-- 19. RESEARCH VALIDATION: FIELD EVIDENCE                     -->
+<!-- 17. RESEARCH VALIDATION: FIELD EVIDENCE                     -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 <section id="research-validation" class="mb-20">
-  <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">19. Research Validation: Field Evidence</h2>
+  <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">17. Research Validation: Field Evidence</h2>
 
   <div class="prose mb-8">
     <p>
@@ -3130,14 +3130,14 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
     </p>
   </div>
 
-  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">19.1 NISS and the Standards Community</h3>
+  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">17.1 NISS and the Standards Community</h3>
 
   <div class="prose mb-8">
     <p>
       NISS attracted attention from the FIRST.org community responsible for maintaining CVSS, the global standard for vulnerability severity scoring. The author was invited to contribute NISS to the CVSS Resources repository as a domain-specific extension for neural interface vulnerabilities.
     </p>
     <p>
-      The author declined &mdash; temporarily. NISS is currently a single-author derivation. The mathematical model has not been independently reviewed, replicated, or stress-tested by another researcher. Contributing it to a standards resource repository before that independent validation would be premature and would risk lending unearned authority to unvalidated math.
+      The author declined, temporarily. NISS is currently a single-author derivation. The mathematical model has not been independently reviewed, replicated, or stress-tested by another researcher. Contributing it to a standards resource repository before that independent validation would be premature and would risk lending unearned authority to unvalidated math.
     </p>
   </div>
 
@@ -3147,7 +3147,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
     </p>
   </div>
 
-  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">19.2 Preprint and Publication Status</h3>
+  <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">17.2 Preprint and Publication Status</h3>
 
   <div class="prose mb-8">
     <p>
@@ -3167,13 +3167,13 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- 9. HOW TO HELP                                             -->
+      <!-- 18. HOW TO HELP                                             -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="adopt" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">10. How to Help</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">18. How to Help</h2>
         <div class="prose mb-8">
           <p>
-            QIF is open research, not a finished product. It was built by one independent researcher with AI collaboration &mdash; no lab, no faculty advisor, no institutional review board. The framework, the threat taxonomy, the scoring system, and the neurorights mappings all need stress testing by domain experts. Nothing here has been peer-reviewed yet. Here's where your expertise fits.
+            QIF is open research, not a finished product. It was built by one independent researcher with AI collaboration. No lab, no faculty advisor, no institutional review board. The framework, the threat taxonomy, the scoring system, and the neurorights mappings all need stress testing by domain experts. Nothing here has been peer-reviewed yet. Here's where your expertise fits.
           </p>
         </div>
 
@@ -3252,10 +3252,10 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
 
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- 12. WHAT'S NEXT                                           -->
+      <!-- 19. WHAT'S NEXT                                           -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="roadmap" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">11. What&rsquo;s Next</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">19. What&rsquo;s Next</h2>
         <div class="prose mb-8">
           <p>
             QIF is designed as a living framework. As neural devices mature, new threats will emerge. The framework has to keep up. Our immediate priorities:
@@ -3357,10 +3357,10 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
       </section>
 
       <!-- ═══════════════════════════════════════════════════════════ -->
-      <!-- 13. LIMITATIONS & TRANSPARENCY                             -->
+      <!-- 20. LIMITATIONS & TRANSPARENCY                             -->
       <!-- ═══════════════════════════════════════════════════════════ -->
       <section id="limitations" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">12. Limitations, AI Methodology &amp; Transparency</h2>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">20. Limitations, AI Methodology &amp; Transparency</h2>
 
         <div class="prose mb-8">
           <p>
@@ -3369,12 +3369,12 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
         </div>
 
         <!-- Limitations -->
-        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-8 mb-4">12.1 Known Limitations</h3>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-8 mb-4">20.1 Known Limitations</h3>
 
         <div class="space-y-3 mb-8">
           <div class="glass-subtle rounded-lg p-4">
             <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">No empirical validation on real BCI devices</p>
-            <p class="text-xs text-[var(--color-text-muted)]">TARA was developed through literature review, threat modeling, and systematic analysis &mdash; not penetration testing of neural hardware. One real-world software vulnerability has been validated (see case studies); neural-zone validation requires clinical access unavailable to independent researchers.</p>
+            <p class="text-xs text-[var(--color-text-muted)]">TARA was developed through literature review, threat modeling, and systematic analysis, not penetration testing of neural hardware. One real-world software vulnerability has been validated (see case studies); neural-zone validation requires clinical access unavailable to independent researchers.</p>
           </div>
           <div class="glass-subtle rounded-lg p-4">
             <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">DSM-5-TR references are for threat modeling, not clinical diagnosis</p>
@@ -3395,11 +3395,11 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
         </div>
 
         <!-- Key Design Decisions -->
-        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">12.2 Key Design Decisions</h3>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">20.2 Key Design Decisions</h3>
 
         <div class="prose mb-6">
           <p>
-            Every architectural choice in QIF is documented in a <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md" class="text-[var(--color-accent-primary)]">106-entry derivation log</a> written like a lab notebook. Below are the pivotal decisions that shaped the framework &mdash; each one traceable to a specific entry with full reasoning chains.
+            Every architectural choice in QIF is documented in a <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md" class="text-[var(--color-accent-primary)]">106-entry derivation log</a> written like a lab notebook. Below are the pivotal decisions that shaped the framework, each one traceable to a specific entry with full reasoning chains.
           </p>
         </div>
 
@@ -3412,7 +3412,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
                 <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-1-osi-layers-are-meaningless-for-bci" class="text-[10px] text-[var(--color-accent-primary)] hover:underline shrink-0">Entry 1</a>
               </div>
               <p class="text-xs text-[var(--color-text-muted)]">
-                The original 14-layer model stacked neural layers on top of the OSI networking model. I realized this was actively misleading &mdash; there is no MAC addressing in the cortex, no IP routing in neural tissue. The entire OSI heritage was stripped and replaced with a model derived from neuroscience and physics, not 1984 telecom.
+                The original 14-layer model stacked neural layers on top of the OSI networking model. I realized this was actively misleading. There is no MAC addressing in the cortex, no IP routing in neural tissue. The entire OSI heritage was stripped and replaced with a model derived from neuroscience and physics, not 1984 telecom.
               </p>
             </div>
           </div>
@@ -3438,7 +3438,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
                 <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-31-nsp-goes-post-quantum--the-implant-lifetime-argument" class="text-[10px] text-[var(--color-accent-primary)] hover:underline shrink-0">Entry 31</a>
               </div>
               <p class="text-xs text-[var(--color-text-muted)]">
-                A brain implant cannot be firmware-updated like a phone. If it ships with RSA-2048 and quantum computers break RSA in 2035, every patient with that implant is permanently exposed. NIST mandates legacy encryption deprecated by 2030 and disallowed by 2035. NSP was designed PQC-first (ML-KEM, ML-DSA) because neural data has a lifetime shelf life &mdash; adversaries are already harvesting encrypted traffic to crack later.
+                A brain implant cannot be firmware-updated like a phone. If it ships with RSA-2048 and quantum computers break RSA in 2035, every patient with that implant is permanently exposed. NIST mandates legacy encryption deprecated by 2030 and disallowed by 2035. NSP was designed PQC-first (ML-KEM, ML-DSA) because neural data has a lifetime shelf life. Adversaries are already harvesting encrypted traffic to crack later.
               </p>
             </div>
           </div>
@@ -3503,7 +3503,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
         </div>
 
         <!-- AI Methodology -->
-        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">12.3 AI Methodology</h3>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">20.3 AI Methodology</h3>
 
         <div class="prose mb-6">
           <p>
@@ -3546,7 +3546,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
         </div>
 
         <!-- Audit Trail -->
-        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">12.4 Audit Trail</h3>
+        <h3 class="text-xl font-bold font-[family-name:var(--font-heading)] mt-12 mb-4">20.4 Audit Trail</h3>
 
         <div class="prose mb-6">
           <p>
