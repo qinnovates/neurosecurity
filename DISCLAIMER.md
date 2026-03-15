@@ -2,7 +2,7 @@
 
 **Effective Date:** 2026-03-11
 **Last Updated:** 2026-03-11
-**Maintainer:** Kevin Qi ([@qikevinl](https://github.com/qikevinl))
+**Maintainer:** Kevin Qi ([QInnovate](https://github.com/qinnovates))
 
 ---
 

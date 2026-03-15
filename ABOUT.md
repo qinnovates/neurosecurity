@@ -58,7 +58,7 @@ The goal is not to provide final answers. It's to start the right questions, and
 
 This is a conversation I cannot have alone. I'm looking for academics, researchers, neuroscientists, and policymakers to refine QIF and establish ethical guidelines for where technology should and shouldn't go. The gaps are the research agenda.
 
-If you work with neural data, BCI design, neuroethics, health policy, or regulatory compliance, [please reach out](mailto:kevin@qinnovate.com).
+If you work with neural data, BCI design, neuroethics, health policy, or regulatory compliance, [please reach out](https://github.com/qinnovates/qinnovate/issues).
 
 **From designing web 1.0 to securing web 5.0. Let's connect the net together.**
 

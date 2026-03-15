@@ -157,7 +157,7 @@ If any of these opportunities match your expertise:
 - **Hardware Engineers:** Embedded implementation (nRF5340, NXP i.MX RT685), power profiling, BLE transport
 - **Physicists:** BCI Limits equation validation, signal integrity formalization, decoherence measurements
 
-Contact: kevin@qinnovate.com | [GitHub Issues](https://github.com/qinnovates/qinnovate/issues)
+Contact: [GitHub Issues](https://github.com/qinnovates/qinnovate/issues)
 
 ---
 
