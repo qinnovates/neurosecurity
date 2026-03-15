@@ -5,8 +5,8 @@
 
 import registrar from '../../shared/qtara-registrar.json';
 
-export const QIF_VERSION = '7.0';
-export const LATEST_WHITEPAPER_VERSION = '7.0';
+export const QIF_VERSION = '8.0';
+export const LATEST_WHITEPAPER_VERSION = '8.0';
 export const LATEST_WHITEPAPER_HREF = '/research/whitepaper/';
 export const QIF_ARCHITECTURE = 'Hourglass';
 export const QIF_BANDS = 11;
