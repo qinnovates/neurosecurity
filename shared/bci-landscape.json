@@ -1,8 +1,8 @@
 {
-  "version": "2.1",
-  "generated": "2026-03-13",
-  "last_crawled": "2026-03-13",
-  "last_verified": "2026-03-13",
+  "version": "2.2",
+  "generated": "2026-03-14",
+  "last_crawled": "2026-03-14",
+  "last_verified": "2026-03-14",
   "description": "Comprehensive BCI industry landscape tracker. Tracks companies, devices, security posture, funding, regulatory milestones, and publication trends. Part of the QIF project's mission to map the BCI security gap.",
   "companies": [
     {
@@ -2451,6 +2451,118 @@
         "source_url": "https://www.precedenceresearch.com/electroencephalography-devices-market"
       }
     ],
+    "ai_security_market": [
+      {
+        "year": 2025,
+        "value_billion_usd_low": 30,
+        "value_billion_usd_high": 34,
+        "source": "Grand View Research, Fortune Business Insights, Precedence Research",
+        "note": "AI in Cybersecurity market (range across 3 analyst firms)"
+      },
+      {
+        "year": 2030,
+        "value_billion_usd_low": 60,
+        "value_billion_usd_high": 93,
+        "cagr_percent_low": 18,
+        "cagr_percent_high": 22,
+        "source": "Grand View Research, Fortune Business Insights, Precedence Research",
+        "note": "Projected AI in Cybersecurity market"
+      }
+    ],
+    "threat_intelligence_market": [
+      {
+        "year": 2025,
+        "value_billion_usd_low": 9.2,
+        "value_billion_usd_high": 11.6,
+        "source": "Mordor Intelligence, MarketsandMarkets"
+      },
+      {
+        "year": 2030,
+        "value_billion_usd_low": 17,
+        "value_billion_usd_high": 23,
+        "source": "Mordor Intelligence, MarketsandMarkets"
+      }
+    ],
+    "ai_security_funding": [
+      {
+        "year": 2025,
+        "total_usd": 6340000000,
+        "note": "Nearly 3x from 2024",
+        "source": "Software Strategies Blog aggregated data"
+      }
+    ],
+    "ai_security_startups": [
+      {
+        "company": "7AI",
+        "amount_usd": 130000000,
+        "series": "Series A",
+        "date": "2025-12",
+        "valuation_usd": 700000000,
+        "focus": "Agentic SOC",
+        "note": "Largest cybersecurity Series A in history",
+        "source": "BusinessWire, SecurityWeek"
+      },
+      {
+        "company": "Vega Security",
+        "amount_usd": 185000000,
+        "series": "Series B (total)",
+        "date": "2026-02",
+        "valuation_usd": 700000000,
+        "focus": "Federated detection",
+        "note": "$65M + $120M Series B",
+        "source": "TechCrunch, SecurityWeek"
+      }
+    ],
+    "ai_security_products": [
+      {
+        "product": "Microsoft Security Copilot",
+        "vendor": "Microsoft",
+        "pricing": "$4/SCU/hour; free for M365 E5 customers (1,000+ users, 400 SCUs/month)",
+        "source": "Microsoft pricing page"
+      },
+      {
+        "product": "SentinelOne Purple AI",
+        "vendor": "SentinelOne",
+        "pricing": "$80K-$250K+/year",
+        "attach_rate": "40% on new licenses",
+        "source": "TrustRadius, UnderDefense"
+      },
+      {
+        "product": "CrowdStrike Charlotte AI",
+        "vendor": "CrowdStrike",
+        "pricing": "Bundled with Falcon tiers",
+        "arr_usd": 4920000000,
+        "arr_growth_yoy": 0.23,
+        "source": "CrowdStrike investor reports"
+      },
+      {
+        "product": "Recorded Future",
+        "vendor": "Mastercard (acquired Q1 2025)",
+        "pricing": "~$300M ARR",
+        "acquisition_price_usd": 2650000000,
+        "clients": 1900,
+        "source": "Mastercard investor announcement"
+      }
+    ],
+    "mcp_ecosystem": {
+      "active_servers": 10000,
+      "monthly_sdk_downloads": 97000000,
+      "governance": "Linux Foundation AAIF (donated Dec 2025)",
+      "founding_members": ["Anthropic", "OpenAI", "Google", "Microsoft", "AWS", "Block", "Bloomberg", "Cloudflare"],
+      "production_security_servers": ["Wiz", "SOCRadar", "Snyk", "OpenCTI"],
+      "source": "Linux Foundation press release, vendor announcements"
+    },
+    "ai_security_adoption": {
+      "agentic_ai_wip_percent": 59,
+      "agentic_ai_wip_source": "Dec 2024-Jan 2025 survey",
+      "ciso_genai_adoption_percent": 77,
+      "ciso_genai_source": "Darktrace survey, 1,500+ CISOs",
+      "glorified_soar_percent": 67,
+      "glorified_soar_source": "Security professional survey",
+      "rsac_2025_ai_submissions_percent": 40,
+      "rsac_2025_total_submissions": 2800,
+      "rsac_2025_source": "RSAC 2025"
+    },
     "bci_implant_market": [
       {
         "year": 2025,
@@ -4040,7 +4152,10 @@
       "PubMed (approximate BCI search term counts)",
       "NIST NVD for CVE data",
       "ICS-CERT advisories",
-      "Grand View Research, Fortune Business Insights",
+      "Grand View Research, Fortune Business Insights, Precedence Research, Mordor Intelligence, MarketsandMarkets",
+      "AI security: Microsoft, SentinelOne, CrowdStrike investor reports, TrustRadius",
+      "Startup funding: BusinessWire, TechCrunch, SecurityWeek, Mastercard investor announcements",
+      "MCP ecosystem: Linux Foundation AAIF, vendor documentation",
       "State legislature websites"
     ],
     "limitations": [
