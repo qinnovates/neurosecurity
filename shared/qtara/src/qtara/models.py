@@ -46,12 +46,21 @@ class TARAEnrichment(BaseModel):
     dsm5: Optional[DSM5] = None
     icd10: Optional[ICD10] = None
 
+class NissComponents(BaseModel):
+    amplitude: float = 0.0
+    frequency: float = 0.0
+    duration: float = 0.0
+    reversibility: float = 0.0
+    detectability: float = 0.0
+    coverage: float = 0.0
+
 class NissData(BaseModel):
     version: str = "1.0"
     vector: str
     score: float
     severity: str
     pins: bool = False
+    components: Optional[NissComponents] = None
 
 class PhysicsFeasibility(BaseModel):
     tier: Union[int, str]
@@ -85,8 +94,13 @@ class Fdora524b(BaseModel):
 class RegulatoryData(BaseModel):
     fdora_524b: Optional[Fdora524b] = None
 
+class FeedsInto(BaseModel):
+    targets: List[str] = []
+    note: Optional[str] = None
+
 class CrossReferences(BaseModel):
     related_ids: List[str] = []
+    secondary_tactics: List[str] = Field(default_factory=list)
 
 class ThreatTechnique(BaseModel):
     model_config = ConfigDict(extra="ignore")
@@ -116,6 +130,7 @@ class ThreatTechnique(BaseModel):
     neurorights: Optional[NeurorightsMapped] = None
     regulatory: Optional[RegulatoryData] = None
     cross_references: Optional[CrossReferences] = None
+    feeds_into: Optional[FeedsInto] = None
 
     # v2 taxonomy fields
     tara_domain_primary: Optional[str] = None
