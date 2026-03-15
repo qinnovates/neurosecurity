@@ -71,6 +71,7 @@
 
 /* ═══ Dark Theme (BCI Vision) ═══ */
 :root[data-theme="dark"] {
+  --color-hero-byline: #f59e0b;
   --color-bg-deep: #09090b;
   --color-bg-surface: #18181b;
   --color-bg-elevated: #27272a;
