@@ -41,7 +41,7 @@ All files in `shared/`. This is the single source of truth — site components, 
 
 ### Layer 1: Threat Techniques (Macro)
 
-**`qtara-registrar.json`** — 109 techniques, 16 tactics, 8 domains
+**`qtara-registrar.json`** — 135 techniques, 16 tactics, 8 domains
 
 | Field | Links To | Cardinality |
 |-------|----------|-------------|
