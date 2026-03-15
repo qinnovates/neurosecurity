@@ -100,12 +100,12 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
         var theme = vision ? 'dark' : (savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
         document.documentElement.setAttribute('data-theme', theme);
         document.documentElement.setAttribute('data-vision', vision ? 'on' : 'off');
-        var lens = localStorage.getItem('qif-lens') || 'security';
+        var lens = localStorage.getItem('qif-lens') || 'both';
         document.documentElement.setAttribute('data-lens', lens);
       } catch(e) {
         document.documentElement.setAttribute('data-theme', 'light');
         document.documentElement.setAttribute('data-vision', 'off');
-        document.documentElement.setAttribute('data-lens', 'security');
+        document.documentElement.setAttribute('data-lens', 'both');
       }
     })();
   </script>

@@ -135,7 +135,7 @@ export default function DeviceFilter({ techniques }: Props) {
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8125rem' }}>
               <thead>
                 <tr>
-                  {['ID', isClinical ? 'Therapeutic Analog' : 'Technique', 'Severity', 'NISS', 'Bands'].map(h => (
+                  {['ID', isClinical ? 'Therapeutic Analog' : isBoth ? 'Technique / Analog' : 'Technique', 'Severity', 'NISS', 'Bands'].map(h => (
                     <th key={h} style={{
                       padding: '0.5rem 0.625rem', textAlign: 'left', fontWeight: 700,
                       fontSize: '0.625rem', textTransform: 'uppercase', letterSpacing: '0.05em',
@@ -159,7 +159,9 @@ export default function DeviceFilter({ techniques }: Props) {
                       {isBoth ? (
                         <div>
                           <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t.name}</div>
-                          <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: '0.6875rem', color: 'var(--color-text-muted, #94a3b8)' }}>{t.nameClinical}</div>
+                          <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: '0.6875rem', color: 'var(--color-text-muted, #94a3b8)' }}>
+                            {t.nameClinical ? t.nameClinical : <span style={{ fontStyle: 'italic', opacity: 0.5 }}>(silicon-only)</span>}
+                          </div>
                         </div>
                       ) : isClinical ? t.nameClinical : t.name}
                     </td>

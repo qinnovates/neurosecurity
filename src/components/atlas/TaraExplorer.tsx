@@ -185,7 +185,7 @@ export default function TaraExplorer({ techniques }: Props) {
         <table className="w-full text-[13px]" style={{ borderCollapse: 'collapse' }}>
           <thead>
             <tr>
-              {['ID', isClinical ? 'Therapeutic Analog' : 'Technique', 'Severity', 'Status', 'NISS', 'Bands'].map((h: string) => (
+              {['ID', isClinical ? 'Therapeutic Analog' : isBoth ? 'Technique / Analog' : 'Technique', 'Severity', 'Status', 'NISS', 'Bands'].map((h: string) => (
                 <th key={h} className="px-2.5 py-2 text-left font-bold text-[10px] uppercase tracking-wide whitespace-nowrap"
                   style={{ color: 'var(--color-accent-primary, #60a5fa)', background: 'rgba(0,0,0,0.04)', borderBottom: '2px solid rgba(59,130,246,0.25)' }}>{h}</th>
               ))}
@@ -203,7 +203,9 @@ export default function TaraExplorer({ techniques }: Props) {
                   {isBoth ? (
                     <div>
                       <div className="truncate">{t.name}</div>
-                      <div className="truncate text-[11px]" style={{ color: 'var(--color-text-muted, #94a3b8)' }}>{t.nameClinical}</div>
+                      <div className="truncate text-[11px]" style={{ color: 'var(--color-text-muted, #94a3b8)' }}>
+                        {t.nameClinical ? t.nameClinical : <span style={{ fontStyle: 'italic', opacity: 0.5 }}>(silicon-only)</span>}
+                      </div>
                     </div>
                   ) : isClinical ? t.nameClinical : t.name}
                 </td>

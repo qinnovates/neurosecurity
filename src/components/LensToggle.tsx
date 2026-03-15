@@ -9,19 +9,19 @@ const ACCENT: Record<Lens, { bg: string; border: string; text: string; glow: str
   security: {
     bg: 'rgba(59, 130, 246, 0.15)',
     border: 'rgba(59, 130, 246, 0.3)',
-    text: '#3b82f6',
+    text: '#1d4ed8',
     glow: '0 0 10px rgba(59, 130, 246, 0.1)',
   },
   both: {
     bg: 'rgba(59, 130, 246, 0.15)',
     border: 'rgba(59, 130, 246, 0.3)',
-    text: '#3b82f6',
+    text: '#1d4ed8',
     glow: '0 0 10px rgba(59, 130, 246, 0.1)',
   },
   clinical: {
     bg: 'rgba(6, 182, 212, 0.15)',
     border: 'rgba(6, 182, 212, 0.3)',
-    text: '#06b6d4',
+    text: '#0e7490',
     glow: '0 0 10px rgba(6, 182, 212, 0.1)',
   },
 };
@@ -33,6 +33,9 @@ const ACCENT: Record<Lens, { bg: string; border: string; text: string; glow: str
 export default function LensToggle() {
   const { lens, setLens } = useLens();
   const groupRef = useRef<HTMLDivElement>(null);
+  const hasMounted = useRef(false);
+
+  useEffect(() => { hasMounted.current = true; }, []);
 
   // Keyboard shortcuts (S / B / C when not in an input)
   useEffect(() => {
@@ -119,20 +122,11 @@ export default function LensToggle() {
               onClick={() => setLens(l)}
               onKeyDown={(e) => onKeyDown(e, i)}
               tabIndex={isActive ? 0 : -1}
-              className="relative z-10 flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium tracking-wide transition-colors duration-200 cursor-pointer select-none"
+              className="relative z-10 flex items-center px-2 py-2 rounded-full text-[11px] font-semibold tracking-wide transition-colors duration-200 cursor-pointer select-none"
               style={{
                 color: isActive ? colors.text : 'var(--color-text-muted)',
               }}
             >
-              {/* Status dot */}
-              <span
-                className="inline-block w-1 h-1 rounded-full transition-all duration-300"
-                style={{
-                  background: isActive ? colors.text : 'var(--color-text-faint)',
-                  boxShadow: isActive ? `0 0 4px ${colors.text}80` : 'none',
-                }}
-                aria-hidden="true"
-              />
               <span style={{ letterSpacing: '0.05em' }}>{label.name}</span>
             </button>
           );
@@ -155,7 +149,7 @@ export default function LensToggle() {
           border: 0,
         }}
       >
-        {lens === 'both' ? 'Viewing both lenses' : `Viewing as ${LENS_LABELS[lens].name}`}
+        {hasMounted.current ? (lens === 'both' ? 'Viewing both lenses' : `Viewing as ${LENS_LABELS[lens].name}`) : ''}
       </div>
     </div>
   );
