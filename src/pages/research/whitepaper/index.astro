@@ -1003,7 +1003,7 @@ const tacticColors: Record<string, string> = {
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">5. NISS Scoring</h2>
         <div class="prose mb-8">
           <p>
-            The Neural Impact Scoring System (NISS) is a proposed vulnerability scoring system purpose-built for neural devices. In contrast to CVSS, which measures confidentiality, integrity, and availability, NISS quantifies six dimensions specifically relevant to brain-computer interfaces:
+            NISS is a proposed vulnerability scoring system built for neural devices. CVSS measures three things: confidentiality, integrity, availability. NISS measures six:
           </p>
         </div>
 
@@ -1122,6 +1122,38 @@ const tacticColors: Record<string, string> = {
 
         <NissGapChart />
 
+        <!-- NISS vs CVSS Side-by-Side -->
+        <div class="mt-8 mb-8">
+          <p class="font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-4">Same technique, different scores</p>
+          <div class="grid sm:grid-cols-3 gap-4">
+            <div class="glass rounded-xl p-5">
+              <h4 class="text-sm font-semibold mb-2">Signal Injection (T-0001)</h4>
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between"><span class="text-[var(--color-text-faint)]">CVSS 4.0</span><span class="font-mono font-bold text-[#f59e0b]">6.5</span></div>
+                <div class="flex justify-between"><span class="text-[var(--color-text-faint)]">NISS 1.1</span><span class="font-mono font-bold text-[#f59e0b]">6.1</span></div>
+                <p class="text-[var(--color-text-faint)] pt-1 border-t border-[var(--color-border)]/30">CVSS captures integrity violation. Misses: biological tissue impact, consent violation, partial reversibility, temporary neuroplastic change.</p>
+              </div>
+            </div>
+            <div class="glass rounded-xl p-5">
+              <h4 class="text-sm font-semibold mb-2">Amplitude Flooding (T-0014)</h4>
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between"><span class="text-[var(--color-text-faint)]">CVSS 4.0</span><span class="font-mono font-bold text-[#f59e0b]">5.3</span></div>
+                <div class="flex justify-between"><span class="text-[var(--color-text-faint)]">NISS 1.1</span><span class="font-mono font-bold text-[#ef4444]">8.1</span></div>
+                <p class="text-[var(--color-text-faint)] pt-1 border-t border-[var(--color-border)]/30">CVSS: availability impact only. NISS: critical biological impact, forced consent violation, irreversible neural pathway changes. The 2.8-point gap is the scoring blind spot.</p>
+              </div>
+            </div>
+            <div class="glass rounded-xl p-5">
+              <h4 class="text-sm font-semibold mb-2">EEG Eavesdropping (T-0003)</h4>
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between"><span class="text-[var(--color-text-faint)]">CVSS 4.0</span><span class="font-mono font-bold text-[#f59e0b]">7.5</span></div>
+                <div class="flex justify-between"><span class="text-[var(--color-text-faint)]">NISS 1.1</span><span class="font-mono font-bold text-[#f59e0b]">4.3</span></div>
+                <p class="text-[var(--color-text-faint)] pt-1 border-t border-[var(--color-border)]/30">CVSS rates high (confidentiality). NISS rates lower: no biological impact, no neuroplastic change, fully reversible. Different framework, different priorities.</p>
+              </div>
+            </div>
+          </div>
+          <p class="text-xs text-[var(--color-text-faint)] mt-3">CVSS scores are estimated equivalents (for threat modeling purposes). NISS scores from the TARA registrar. Both are proposed, unvalidated.</p>
+        </div>
+
         <div class="glass rounded-xl p-5 mt-8 mb-8 text-center" style="border-left: 3px solid var(--color-accent-secondary);">
           <p class="text-sm text-[var(--color-text-muted)]">
             <strong class="text-[var(--color-text-primary)]">Mathematical formalization</strong> &mdash; signal integrity equations, spectral decomposition, and coupling mechanisms &mdash; is future work pending collaboration with domain experts. This section presents the scoring system; the underlying physics constraints are documented at <a href="/research/physics/" class="text-[var(--color-accent-primary)]">BCI Physics Constraints</a>.
@@ -1196,8 +1228,7 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <div class="prose mb-8">
-          <!-- TIER 3: NP rescoring results (26 scores shifted) — needs Kevin's review -->
-          <p>Recalculating all techniques against the 4-level scale shifted 26 scores. The finer NP granularity revealed several techniques&rsquo; plasticity impact was partial, not structural.</p>
+          <p>Current severity distribution across 135 techniques: 20 high, 54 medium, 60 low, 1 none. The 4-level NP scale provides finer granularity &mdash; techniques previously scored as structural (NP:S) may now score as partial (NP:P) where recovery is possible with intervention.</p>
           <p><strong>Why NP has no traditional analogue.</strong> A firewall breach does not make future breaches easier by physically restructuring the target network. A neural attack with NP:S does exactly that. The brain adapts through Hebbian learning, making the attack&rsquo;s effects self-reinforcing. For these techniques, &ldquo;turn it off&rdquo; is not sufficient remediation. The damage persists after the device is removed because the damage is encoded in the biology, not the technology.</p>
         </div>
 
