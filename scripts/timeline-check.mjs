@@ -24,9 +24,9 @@ const DRY_RUN = args.includes('--dry-run');
 // Paths (relative to repo root)
 // ---------------------------------------------------------------------------
 const TIMELINE_PATH = resolve(ROOT, 'src/data/qif-timeline.json');
-const REGISTRY_PATH = resolve(ROOT, 'shared/qtara-registrar.json');
+const REGISTRY_PATH = resolve(ROOT, 'datalake/qtara-registrar.json');
 const INVENTORY_PATH = resolve(ROOT, 'docs/bci-hardware-inventory.json');
-const ATLAS_PATH = resolve(ROOT, 'shared/qif-brain-bci-atlas.json');
+const ATLAS_PATH = resolve(ROOT, 'datalake/qif-brain-bci-atlas.json');
 const CONSTRAINTS_PATH = resolve(ROOT, 'src/lib/bci-limits-constants.ts');
 
 // ---------------------------------------------------------------------------

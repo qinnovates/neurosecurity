@@ -3,7 +3,7 @@
  * Single source of truth for all QIF values used on the site.
  */
 
-import registrar from '../../shared/qtara-registrar.json';
+import registrar from '../../datalake/qtara-registrar.json';
 
 export const QIF_VERSION = '8.0';
 export const LATEST_WHITEPAPER_VERSION = '8.0';

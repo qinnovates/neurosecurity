@@ -63,7 +63,7 @@
   - `archive/oni-framework/`: Legacy ONI 14-layer model
 - `governance/`: Policy, ethics, and process documents
   - `processes/`: Standards development lifecycle
-- `shared/`: Cross-cutting data + tools (Source of Truth)
+- `datalake/`: Cross-cutting data + tools (Source of Truth)
   - `qtara/`: Python SDK (pip install qtara)
   - `scripts/`: Data pipeline scripts (TARA, NISS, DSM-5, impact chains precompute)
   - `archive/`: Deprecated/merged data files
@@ -85,7 +85,7 @@
 ## Guidelines
 - Use Semantic HTML.
 - Follow Tailwind v4 conventions.
-- Update `shared/` JSON files for data changes, which are copied to `docs/data` during build.
+- Update `datalake/` JSON files for data changes, which are copied to `docs/data` during build.
 - Documentation is a primary product; keep markdown clean and standard.
 - **Epistemic Integrity:** See `rules/epistemic-integrity.md`. No hallucination. Confidence proportional to evidence. Theoretical/unvalidated work (e.g. NISS, QIF) must be labeled as such in all outward-facing text.
 - **AI Security Ethics:** See `AI-instructions.md` (repo root). All AI conduct in this project must align with the AI Security Ethics principles: Asimov's Three Laws reframed for AI, consent as architecture, human-in-the-loop as non-negotiable, AI self-preservation in service of user safety, neural data at highest protection tier, and defensive framing only. These principles apply to all AI-generated code, content, analysis, and recommendations produced within this project. When in doubt, the Five Principles in Part II of AI-instructions.md govern.
@@ -194,7 +194,7 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
 
 When a file changes, these downstream files must be updated. Claude should proactively check and update them. Run `npm run health` to detect stale or mismatched data.
 
-### When shared/*.json changes (any data file)
+### When datalake/*.json changes (any data file)
 | Update | How | Automated? |
 |--------|-----|-----------|
 | docs/data/kql-tables.json | `npm run prebuild` (runs generate-kql-json.mjs) | Yes (prebuild) |
@@ -203,13 +203,13 @@ When a file changes, these downstream files must be updated. Claude should proac
 | src/lib/kql-tables.ts imports | Add import if new file; update builder function | Manual |
 | DataStudioBrowser.tsx DESCRIPTIONS | Add description if new dataset | Manual |
 
-### When shared/qtara-registrar.json changes (TARA techniques)
+### When datalake/qtara-registrar.json changes (TARA techniques)
 | Update | How | Automated? |
 |--------|-----|-----------|
 | All of the above, plus: | | |
 | README.md technique count | Verify technique count references | Manual (npm run health warns) |
-| shared/impact-chains.json | `npm run compute:chains` | Manual |
-| shared/qtara/src/qtara/data/ | Copy registrar to SDK data dir | Manual |
+| datalake/impact-chains.json | `npm run compute:chains` | Manual |
+| datalake/qtara/src/qtara/data/ | Copy registrar to SDK data dir | Manual |
 | src/lib/threat-data.ts | Verify ThreatVector interface matches | Manual |
 
 ### When qif-framework/QIF-DERIVATION-LOG.md changes
@@ -226,10 +226,10 @@ When a file changes, these downstream files must be updated. Claude should proac
 | governance/SHIP-LOG.md | Add entry | Manual |
 | CHANGELOG.md | Auto-generated on next commit | Yes (changelog workflow) |
 
-### When shared/eeg-samples.json changes
+### When datalake/eeg-samples.json changes
 | Update | How | Automated? |
 |--------|-----|-----------|
-| All shared/*.json propagation, plus: | | |
+| All datalake/*.json propagation, plus: | | |
 | EEGBrowser.tsx / EEGDatasetCard.tsx | Verify new fields are rendered | Manual |
 | scripts/process-eeg-to-parquet.py | Add new dataset processing config | Manual |
 
@@ -255,7 +255,7 @@ Three project files must stay in sync with changes. All follow the same pattern:
 **IMPORTANT: Whenever a new citation or source is used anywhere in the project, ALL THREE citation stores must be updated:**
 1. `qif-framework/QIF-RESEARCH-SOURCES.md` — living catalog with IDs, URLs, and relevance
 2. `paper/references.bib` — BibTeX entry for LaTeX/preprint use
-3. `shared/research-registry.json` — structured JSON registry (researchers, institutions, standards, legislation)
+3. `datalake/research-registry.json` — structured JSON registry (researchers, institutions, standards, legislation)
 
 ### Automation Registry (`src/data/automation-registry.json`)
 **Script:** `scripts/update-automation-registry.mjs` | **CI:** `.github/workflows/update-registry.yml` (daily)
@@ -267,7 +267,7 @@ Three project files must stay in sync with changes. All follow the same pattern:
 **When:** New version released, discovery/derivation changes framework, cross-AI validation results, preprint published, new tool/page ships, hardware validation, dataset expansion.
 **Stats to update:** threat_techniques, bci_devices, brain_regions, physics_constraints, hourglass_bands, tara_tactics, neurorights_mapped, dsm5_diagnoses_mapped, research_sources, derivation_log_entries, field_journal_entries, blog_posts, cross_ai_validations, plus version fields.
 
-### Registrar Update Protocol (`shared/qtara-registrar.json`)
+### Registrar Update Protocol (`datalake/qtara-registrar.json`)
 
 **When:** New techniques added, fields renamed/added, taxonomy changes, NISS version updates, or any structural change to the TARA registrar.
 
@@ -276,13 +276,13 @@ Three project files must stay in sync with changes. All follow the same pattern:
 ```
 1.  Branch:      git checkout -b feature-name
 2.  Tag:         git tag pre-feature-name
-3.  Script:      Write migration script (shared/scripts/migrate-*.py), run --dry-run first
-4.  Source:      Update shared/qtara-registrar.json (source of truth)
-5.  Chains:      Update shared/tara-chains.json if attack chains affected
+3.  Script:      Write migration script (datalake/scripts/migrate-*.py), run --dry-run first
+4.  Source:      Update datalake/qtara-registrar.json (source of truth)
+5.  Chains:      Update datalake/tara-chains.json if attack chains affected
 6.  TypeScript:  src/lib/threat-data.ts → kql-tables.ts → kql-engine.ts → neurogovernance-data.ts
-7.  Python:      shared/qtara/src/qtara/models.py → scripts → SDK → stix.py → cli.py
-8.  Precompute:  Run all shared/scripts/ pipelines (impact chains, DSM mappings)
-9.  SDK sync:    Copy registrar to shared/qtara/src/qtara/data/qtara-registrar.json
+7.  Python:      datalake/qtara/src/qtara/models.py → scripts → SDK → stix.py → cli.py
+8.  Precompute:  Run all datalake/scripts/ pipelines (impact chains, DSM mappings)
+9.  SDK sync:    Copy registrar to datalake/qtara/src/qtara/data/qtara-registrar.json
 10. Pages:       Update Astro pages (atlas/tara/[id].astro, guardrails), API endpoints
 11. Components:  Update React dashboard components if new fields need UI
 12. Docs:        Changelog, timeline (qif-timeline.json), current whitepaper draft only
@@ -300,12 +300,12 @@ Three project files must stay in sync with changes. All follow the same pattern:
 - Git history
 
 **Key files in dependency order:**
-1. `shared/qtara-registrar.json` — source of truth
+1. `datalake/qtara-registrar.json` — source of truth
 2. `src/lib/threat-data.ts` — TypeScript adapter (ThreatVector interface)
 3. `src/lib/kql-tables.ts` — KQL table builder (flattens JSON → queryable columns)
 4. `src/lib/kql-engine.ts` — KQL engine (field aliases, indexes)
-5. `shared/qtara/src/qtara/models.py` — Python SDK Pydantic models
-6. `shared/scripts/compute-impact-chains.mjs` — precompute pipeline
+5. `datalake/qtara/src/qtara/models.py` — Python SDK Pydantic models
+6. `datalake/scripts/compute-impact-chains.mjs` — precompute pipeline
 
 **Field rename protocol:** When renaming a field (e.g., `attack` → `technique`):
 - Keep old field as deprecated alias

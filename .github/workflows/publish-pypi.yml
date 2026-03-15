@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'shared/qtara-registrar.json'
-      - 'shared/qtara/**'
+      - 'datalake/qtara-registrar.json'
+      - 'datalake/qtara/**'
   workflow_dispatch:
 
 permissions:
@@ -29,23 +29,23 @@ jobs:
         pip install build twine
 
     - name: Sync TARA data
-      run: python shared/scripts/sync-package-data.py
+      run: python datalake/scripts/sync-package-data.py
 
     - name: Build binary wheel and source tarball
       run: |
-        cd shared/qtara
+        cd datalake/qtara
         python -m build
 
     - name: Check package
       run: |
-        cd shared/qtara
+        cd datalake/qtara
         twine check dist/*
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v7 # TODO: pin to SHA
       with:
         name: dist-qtara
-        path: shared/qtara/dist/
+        path: datalake/qtara/dist/
 
   publish:
     needs: build
@@ -76,7 +76,7 @@ jobs:
       id: version
       run: |
         pip install tomllib 2>/dev/null || true
-        VERSION=$(python3 -c "import tomllib; print(tomllib.load(open('shared/qtara/pyproject.toml','rb'))['project']['version'])")
+        VERSION=$(python3 -c "import tomllib; print(tomllib.load(open('datalake/qtara/pyproject.toml','rb'))['project']['version'])")
         echo "version=$VERSION" >> "$GITHUB_OUTPUT"
         echo "tag=qtara-v$VERSION" >> "$GITHUB_OUTPUT"
 

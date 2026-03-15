@@ -9,7 +9,7 @@
         "src/*"
       ],
       "@shared/*": [
-        "shared/*"
+        "datalake/*"
       ]
     }
   }

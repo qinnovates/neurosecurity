@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate BCI Industry Cumulative Valuation chart for Q1 2026 Intelligence Report.
-Reads from shared/bci-landscape.json, outputs PNG to docs/images/.
+Reads from datalake/bci-landscape.json, outputs PNG to docs/images/.
 """
 
 import json

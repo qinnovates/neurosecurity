@@ -26,7 +26,7 @@ import fact_check_field_journal
 
 MODULES = [
     ('Citations', verify_citations, ['paper/', '.bib']),
-    ('Facts', verify_facts, ['shared/qtara-registrar.json', 'whitepaper-stats']),
+    ('Facts', verify_facts, ['datalake/qtara-registrar.json', 'whitepaper-stats']),
     ('Blog Claims', audit_blog_claims, ['blogs/']),
     ('Cross-References', verify_crossrefs, ['src/', 'qif-framework/', 'README']),
     ('Field Journal Fact-Check', fact_check_field_journal, ['blogs/', 'qif-framework/QIF-FIELD-JOURNAL']),

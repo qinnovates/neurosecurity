@@ -79,13 +79,13 @@ function readText(relPath) {
 function checkDataConsistency() {
   console.log(`\n${GREEN}[health]${RESET} Checking data consistency...`);
 
-  // 1. Validate all shared/*.json files
+  // 1. Validate all datalake/*.json files
   const sharedDir = resolve(ROOT, 'shared');
   let jsonFiles;
   try {
     jsonFiles = readdirSync(sharedDir).filter(f => f.endsWith('.json'));
   } catch {
-    fail('Cannot read shared/ directory');
+    fail('Cannot read datalake/ directory');
     return;
   }
 
@@ -158,17 +158,17 @@ function checkDataConsistency() {
   }
 
   // 5. Technique count in registrar
-  const registrarPath = 'shared/qtara-registrar.json';
+  const registrarPath = 'datalake/qtara-registrar.json';
   if (fileExists(registrarPath)) {
     try {
       const registrar = readJSON(registrarPath);
       const techniques = Array.isArray(registrar) ? registrar : (registrar.techniques || []);
       pass(`Registrar loaded: ${techniques.length} techniques`);
     } catch {
-      fail('Cannot parse shared/qtara-registrar.json');
+      fail('Cannot parse datalake/qtara-registrar.json');
     }
   } else {
-    fail('shared/qtara-registrar.json missing');
+    fail('datalake/qtara-registrar.json missing');
   }
 }
 
@@ -228,7 +228,7 @@ function checkCountConsistency() {
   console.log(`\n${GREEN}[health]${RESET} Checking counts...`);
 
   // Get technique count from registrar
-  const registrarPath = 'shared/qtara-registrar.json';
+  const registrarPath = 'datalake/qtara-registrar.json';
   let techniqueCount = null;
   if (fileExists(registrarPath)) {
     try {
@@ -296,11 +296,11 @@ function checkBuildArtifacts() {
   try {
     jsonFiles = readdirSync(sharedDir).filter(f => f.endsWith('.json'));
   } catch {
-    fail('Cannot read shared/ directory');
+    fail('Cannot read datalake/ directory');
     return;
   }
 
-  // Find newest shared/*.json mtime
+  // Find newest datalake/*.json mtime
   let newestSharedMtime = 0;
   let newestSharedFile = '';
   for (const file of jsonFiles) {
@@ -320,7 +320,7 @@ function checkBuildArtifacts() {
   if (fileExists(kqlPath) && newestSharedMtime > 0) {
     const kqlMtime = fileMtime(kqlPath);
     if (kqlMtime < newestSharedMtime) {
-      warn(`docs/data/kql-tables.json is older than shared/${newestSharedFile} (run: npm run prebuild)`);
+      warn(`docs/data/kql-tables.json is older than datalake/${newestSharedFile} (run: npm run prebuild)`);
     } else {
       pass('KQL tables up to date');
     }
@@ -331,7 +331,7 @@ function checkBuildArtifacts() {
   if (fileExists(catalogPath) && newestSharedMtime > 0) {
     const catMtime = fileMtime(catalogPath);
     if (catMtime < newestSharedMtime) {
-      warn(`docs/data/parquet/catalog.json is older than shared/${newestSharedFile} (run: npm run prebuild)`);
+      warn(`docs/data/parquet/catalog.json is older than datalake/${newestSharedFile} (run: npm run prebuild)`);
     } else {
       pass('Parquet catalog up to date');
     }

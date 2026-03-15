@@ -4,13 +4,13 @@ on:
   push:
     branches: [main]
     paths:
-      - 'shared/qtara-registrar.json'
+      - 'datalake/qtara-registrar.json'
       - 'src/lib/threat-data.ts'
       - 'src/lib/kql-tables.ts'
-      - 'shared/qtara/src/qtara/models.py'
+      - 'datalake/qtara/src/qtara/models.py'
   pull_request:
     paths:
-      - 'shared/qtara-registrar.json'
+      - 'datalake/qtara-registrar.json'
   workflow_dispatch:
 
 permissions:
@@ -31,13 +31,13 @@ jobs:
           python-version: '3.12'
 
       - name: Validate registrar JSON
-        run: python3 -c "import json; d=json.load(open('shared/qtara-registrar.json')); print(f'Valid JSON: {len(d[\"techniques\"])} techniques')"
+        run: python3 -c "import json; d=json.load(open('datalake/qtara-registrar.json')); print(f'Valid JSON: {len(d[\"techniques\"])} techniques')"
 
       - name: Check technique field presence
         run: |
           python3 -c "
           import json, sys
-          d = json.load(open('shared/qtara-registrar.json'))
+          d = json.load(open('datalake/qtara-registrar.json'))
           errors = []
           for t in d['techniques']:
               tid = t.get('id', 'UNKNOWN')
@@ -64,21 +64,21 @@ jobs:
 
       - name: Check SDK copy in sync
         run: |
-          if [ -f shared/qtara/src/qtara/data/qtara-registrar.json ]; then
-            if ! diff -q shared/qtara-registrar.json shared/qtara/src/qtara/data/qtara-registrar.json > /dev/null 2>&1; then
-              echo "::error::SDK bundled registrar is out of sync with source. Copy shared/qtara-registrar.json to shared/qtara/src/qtara/data/"
+          if [ -f datalake/qtara/src/qtara/data/qtara-registrar.json ]; then
+            if ! diff -q datalake/qtara-registrar.json datalake/qtara/src/qtara/data/qtara-registrar.json > /dev/null 2>&1; then
+              echo "::error::SDK bundled registrar is out of sync with source. Copy datalake/qtara-registrar.json to datalake/qtara/src/qtara/data/"
               exit 1
             fi
             echo "SDK copy in sync"
           else
-            echo "::warning::SDK bundled registrar not found at shared/qtara/src/qtara/data/qtara-registrar.json"
+            echo "::warning::SDK bundled registrar not found at datalake/qtara/src/qtara/data/qtara-registrar.json"
           fi
 
       - name: Check technique count matches timeline
         run: |
           python3 -c "
           import json
-          reg = json.load(open('shared/qtara-registrar.json'))
+          reg = json.load(open('datalake/qtara-registrar.json'))
           timeline = json.load(open('src/data/qif-timeline.json'))
           reg_count = len(reg['techniques'])
           tl_count = timeline.get('stats', {}).get('threat_techniques', 0)

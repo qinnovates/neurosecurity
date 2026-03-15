@@ -2,7 +2,7 @@
 /**
  * generate-citations.mjs
  *
- * Source of truth: shared/research-registry.json
+ * Source of truth: datalake/research-registry.json
  * Generates:
  *   1. Landscape-relevant sections appended to QIF-RESEARCH-SOURCES.md
  *      (scholarship + timeline entries not already present)
@@ -21,7 +21,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 
-const REGISTRY_PATH = resolve(ROOT, 'shared/research-registry.json');
+const REGISTRY_PATH = resolve(ROOT, 'datalake/research-registry.json');
 const SOURCES_PATH = resolve(ROOT, 'qif-framework/QIF-RESEARCH-SOURCES.md');
 const LANDSCAPE_PATH = resolve(ROOT, 'src/pages/landscape.astro');
 
@@ -37,7 +37,7 @@ let updates = [];
 
 // ── 1. Check landscape.astro imports from registry ──
 const landscapeContent = readFileSync(LANDSCAPE_PATH, 'utf-8');
-if (!landscapeContent.includes("import registry from '../../shared/research-registry.json'")) {
+if (!landscapeContent.includes("import registry from '../../datalake/research-registry.json'")) {
   issues.push('landscape.astro does not import from research-registry.json');
 }
 
