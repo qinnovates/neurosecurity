@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 /**
  * DualUseSplit — The dual-use discovery visualization.
- * 109 dots start unified, then split: 77 mirror to therapy (green), 25 remain as silicon-only (dimmed).
+ * 135 dots start unified, then split: 77 mirror to therapy (green), 25 remain as silicon-only (dimmed).
  * The emotional peak of the scroll narrative.
  */
 

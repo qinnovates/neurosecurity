@@ -135,8 +135,8 @@ function PublicationChart({ data }: { data: BciLandscapeProps['publicationTrends
     const bSec = ssxySec / ssxx;
     const aSec = meanLnSec - bSec * meanX;
 
-    // Threat vectors: 109 techniques in 2026, growing ~20% per year as attack surface expands
-    const threatBase = 109;
+    // Threat vectors: 135 techniques in 2026, growing ~20% per year as attack surface expands
+    const threatBase = 135;
     const lastYear = sorted[sorted.length - 1].year;
 
     const historical = sorted.map((d, i) => ({

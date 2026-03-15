@@ -32,6 +32,21 @@ const neurorightsSet = new Set<string>(['EA']); // Equal Access is structural, n
 techniques.forEach((t: any) => (t?.neurorights?.affected ?? []).forEach((r: string) => neurorightsSet.add(r)));
 const neurorightsCount = neurorightsSet.size;
 
+// Compute severity breakdown from registrar (build-time)
+const bySeverity: Record<string, number> = { critical: 0, high: 0, medium: 0, low: 0 };
+techniques.forEach((t: any) => {
+  const sev = t.niss?.severity || t.severity || 'low';
+  if (bySeverity[sev] !== undefined) bySeverity[sev]++;
+});
+
+// Compute neurorights counts from registrar (build-time)
+const neurorightsCounts: Record<string, number> = { MI: 0, MP: 0, CL: 0, PC: 0, EA: 0 };
+techniques.forEach((t: any) => {
+  (t?.neurorights?.affected ?? []).forEach((r: string) => {
+    if (neurorightsCounts[r] !== undefined) neurorightsCounts[r]++;
+  });
+});
+
 // Essential reading: latest 6 non-changelog posts (excludes auto-generated summaries)
 const allPosts = await getCollection('blog');
 const essentialPosts = allPosts
@@ -144,7 +159,7 @@ const essentialPosts = allPosts
       <ThreatAtlasViz
         client:visible
         total={totalThreats}
-        bySeverity={{ critical: 29, high: 60, medium: 17, low: 3 }}
+        bySeverity={bySeverity}
       />
       <p class="text-sm text-[var(--color-text-muted)] mt-8 max-w-md mx-auto leading-relaxed">
         Attack techniques catalogued, scored, and mapped across 11 bands.
@@ -181,11 +196,11 @@ const essentialPosts = allPosts
       <NeurorightsPentagon
         client:visible
         rights={[
-          { code: 'MI', name: 'Mental Integrity', count: 81, color: '#ef4444' },
-          { code: 'MP', name: 'Mental Privacy', count: 64, color: '#f59e0b' },
-          { code: 'CL', name: 'Cognitive Liberty', count: 60, color: '#3b82f6' },
-          { code: 'PC', name: 'Psychological Continuity', count: 28, color: '#8b5cf6' },
-          { code: 'EA', name: 'Equal Access', count: 0, color: '#10b981' },
+          { code: 'MI', name: 'Mental Integrity', count: neurorightsCounts.MI, color: '#ef4444' },
+          { code: 'MP', name: 'Mental Privacy', count: neurorightsCounts.MP, color: '#f59e0b' },
+          { code: 'CL', name: 'Cognitive Liberty', count: neurorightsCounts.CL, color: '#3b82f6' },
+          { code: 'PC', name: 'Psychological Continuity', count: neurorightsCounts.PC, color: '#8b5cf6' },
+          { code: 'EA', name: 'Equal Access', count: neurorightsCounts.EA, color: '#10b981' },
         ]}
       />
       <p class="text-sm text-[var(--color-text-muted)] mt-8 max-w-md mx-auto leading-relaxed">

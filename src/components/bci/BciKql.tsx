@@ -454,6 +454,20 @@ export default function BciKql({ tables }: BciKqlProps) {
     }
   }, [sortCol]);
 
+  // Listen for external query injection (e.g. from Astro example pills)
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<string>).detail;
+      if (detail && typeof detail === 'string') {
+        setQuery(detail);
+        setSortCol(null);
+        if (inputRef.current) inputRef.current.value = detail;
+      }
+    };
+    window.addEventListener('kql:inject', handler);
+    return () => window.removeEventListener('kql:inject', handler);
+  }, []);
+
   useEffect(() => {
     if (inputRef.current && inputRef.current.value !== query) {
       inputRef.current.value = query;

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * ThreatAtlasViz — 109 severity-colored dots scatter then cluster onto brain regions.
+ * ThreatAtlasViz — 135 severity-colored dots scatter then cluster onto brain regions.
  * Dots start random, then migrate to their anatomical band region on the brain image.
  * Counter animates 0→total.
  */

@@ -260,6 +260,89 @@ const iconSvg: Record<string, string> = {
       <span class="text-[10px] uppercase tracking-[0.12em] font-mono px-3 py-1 rounded-full" style="color: var(--color-accent-primary); background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(59, 130, 246, 0.12);">[ Query Engine ]</span>
       <div class="flex-1 h-px" style="background: linear-gradient(to left, transparent, var(--color-border), var(--color-accent-primary), var(--color-border));" />
     </div>
+    <!-- Example Queries -->
+    <div class="mb-4">
+      <p class="text-[10px] uppercase tracking-[0.1em] font-mono mb-2.5" style="color: var(--color-text-faint);">Try a query</p>
+      <div class="flex flex-wrap gap-2" id="kql-examples">
+        <button class="kql-example-pill" data-query='techniques | where severity == "critical"'>
+          <span class="kql-pill-label">Show critical threats</span>
+          <code class="kql-pill-query">techniques | where severity == "critical"</code>
+        </button>
+        <button class="kql-example-pill" data-query='techniques | where bands has "I0"'>
+          <span class="kql-pill-label">Threats at the interface band</span>
+          <code class="kql-pill-query">techniques | where bands has "I0"</code>
+        </button>
+        <button class="kql-example-pill" data-query='techniques | where tara_domain == "VIS"'>
+          <span class="kql-pill-label">Visual domain attacks</span>
+          <code class="kql-pill-query">techniques | where tara_domain == "VIS"</code>
+        </button>
+        <button class="kql-example-pill" data-query='techniques | where dual_use == "confirmed"'>
+          <span class="kql-pill-label">Dual-use techniques</span>
+          <code class="kql-pill-query">techniques | where dual_use == "confirmed"</code>
+        </button>
+      </div>
+    </div>
+
+    <style>
+      .kql-example-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.375rem 0.75rem;
+        border-radius: 9999px;
+        border: 1px solid var(--color-glass-border, rgba(255,255,255,0.08));
+        background: var(--color-glass-bg, rgba(255,255,255,0.03));
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+      }
+      .kql-example-pill:hover {
+        border-color: var(--color-accent-primary, #3b82f6);
+        background: rgba(59, 130, 246, 0.06);
+      }
+      .kql-example-pill:active {
+        transform: scale(0.97);
+      }
+      .kql-pill-label {
+        font-size: 0.6875rem;
+        color: var(--color-text-muted, #94a3b8);
+      }
+      .kql-pill-query {
+        font-family: var(--font-mono, monospace);
+        font-size: 0.625rem;
+        color: var(--color-accent-primary, #3b82f6);
+        opacity: 0.7;
+        display: none;
+      }
+      @media (min-width: 640px) {
+        .kql-pill-query { display: inline; }
+      }
+    </style>
+
+    <script>
+      document.getElementById('kql-examples')?.addEventListener('click', (e) => {
+        const pill = (e.target as HTMLElement).closest('.kql-example-pill') as HTMLElement | null;
+        if (!pill) return;
+        const query = pill.dataset.query;
+        if (!query) return;
+
+        // Dispatch event to BciKql React island
+        window.dispatchEvent(new CustomEvent('kql:inject', { detail: query }));
+
+        // Scroll the KQL component into view
+        const kqlEl = document.querySelector('[data-kql-root]') || pill.closest('.mt-12')?.querySelector('.glass, [style]');
+        if (kqlEl) kqlEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Brief visual feedback on the pill
+        pill.style.borderColor = 'var(--color-accent-primary, #3b82f6)';
+        pill.style.background = 'rgba(59, 130, 246, 0.12)';
+        setTimeout(() => {
+          pill.style.borderColor = '';
+          pill.style.background = '';
+        }, 600);
+      });
+    </script>
+
     <BciKql client:only="react" tables={kqlTables} />
   </div>
 
