@@ -2,9 +2,9 @@
 
 > **This is the CANONICAL reference for all QIF equations, values, and definitions.**
 > **All blogs, repo docs, and publications MUST be consistent with this file.**
-> **Last validated: 2026-02-14**
-> **Last audit: 2026-02-14**
-> **Next audit due: 2026-02-16**
+> **Last validated: 2026-03-15**
+> **Last audit: 2026-03-15** (full NISS severity audit, technique count verification, ICD-10 split)
+> **Next audit due: 2026-04-01**
 >
 > ## Update Triggers
 > This document gets updated (and then synced outward to repo → blogs) whenever:
@@ -605,31 +605,86 @@ Full derivations: QIF-DERIVATION-LOG.md Entry 35
 
 ---
 
-## 10. TARA Interactive Visualization (Entry 54, 2026-02-14)
+## 10. TARA Registry (Current State)
 
-### 10.1 The "Connected System" Principle
+> **Last computed: 2026-03-15 from `shared/qtara-registrar.json`**
+
+### 10.1 Technique Count & Taxonomy
+
+| Metric | Value |
+|--------|-------|
+| **Total techniques** | 135 |
+| **NISS version** | v1.1 (all techniques) |
+| **Domains** | 12 (AUD, AUT, COG, EMO, IDN, LNG, MEM, MOT, SIL, SOM, VES, VIS) |
+| **Modes** | 3 (R=Read, M=Manipulate, D=Disrupt) |
+| **Tactics** | 16 unique |
+| **PINS flagged** | 39 |
+
+### 10.2 NISS Severity Distribution
+
+| Severity | Count | Percentage |
+|----------|-------|------------|
+| High (7.0-8.9) | 20 | 14.8% |
+| Medium (4.0-6.9) | 59 | 43.7% |
+| Low (0.1-3.9) | 55 | 40.7% |
+| None (0.0) | 1 | 0.7% |
+
+**NP levels:** N (None), T (Temporary/3.3), P (Partial/6.7), S (Structural/10.0) — 4-level scale since v1.1.1
+
+### 10.3 Clinical Mappings
+
+| Mapping | Techniques Covered |
+|---------|--------------------|
+| DSM-5-TR (F-codes) | 76 of 135 |
+| ICD-10 (G/H/R-codes) | 32 of 135 |
+
+**Schema note:** DSM-5-TR codes (F-codes) live in `tara.dsm5`. ICD-10 codes (G/H/R-codes for neurological conditions) live in `tara.icd10`. These were split on 2026-03-15 — previously all codes were in `dsm5`.
+
+### 10.4 Neurorights Distribution
+
+| Right | Techniques | % |
+|-------|-----------|---|
+| MP (Mental Privacy) | 106 | 78.5% |
+| MI (Mental Integrity) | 101 | 74.8% |
+| CL (Cognitive Liberty) | 85 | 63.0% |
+| PC (Psychological Continuity) | 79 | 58.5% |
+| DI (Dynamical Integrity) | 76 | 56.3% |
+| IDA (Informational Disassociation) | 5 | 3.7% |
+
+### 10.5 TARA Interactive Visualization (Entry 54, 2026-02-14)
+
+**The "Connected System" Principle:**
 TARA is not a static list; it is a **cyber-physical system**.
 - **Physics Layer (3D Hourglass)**: Represents the physical interface (I0) and tissue interaction.
 - **Semantic Layer (Threat Grid)**: Represents the logical attack vectors and clinical outcomes.
 - **Interaction**: Clicking a 3D band (Physics) filters the Grid (Semantics). This proves that *physical location determines logical capability*.
 
-### 10.2 The Dual-Use Toggle (Neuroethics)
+**The Dual-Use Toggle (Neuroethics):**
 To strictly adhere to VERA neuroethics, the system **MUST** allow toggling between:
 1.  **Attacker Perspective**: Shows "Kill Chain", "Severity", "Exploit".
 2.  **Therapeutic Perspective**: Shows "Clinical Pathway", "Beneficence", "Treatment".
 
 **The Data is Identical.** The *perspective* changes. This visualizes the **Dual-Use Dilemma**: the same mechanism used to cure (DBS) can be used to harm (Signal Injection).
 
-### 10.3 Diagnostic Mapping (Neural Impact Chain)
-- **Mechanism:** Attack Vector → I0 Interface → Brain Structure → Cognitive Function → Psychiatric Diagnosis.
-- **Classification:** DSM-5-TR Clusters (Cognitive/Psychotic, Mood/Trauma, Motor, etc.).
-- **Purpose:** Translates technical signal disruption into recognizable clinical risk.
+### 10.6 Diagnostic Mapping (Neural Impact Chain)
+- **Mechanism:** Attack Vector → I0 Interface → Brain Structure → Cognitive Function → Clinical Outcome.
+- **Classification:** DSM-5-TR Clusters + ICD-10 Neurological Codes.
+- **Purpose:** Translates technical signal disruption into recognizable clinical risk (for threat modeling purposes).
 
 ---
 
+## 11. Version History
+
+| Component | Version | Date | Key Change |
+|-----------|---------|------|------------|
+| Hourglass architecture | v4.0 | 2026-02-06 | 7-1-3 band expansion |
+| NISS scoring | v1.1.1 | 2026-03-15 | 4-level NP scale, ICD-10 separation |
+| TARA registry | 135 techniques | 2026-03-15 | 26 new techniques (T0110-T0135), 12 domains × 3 modes |
+| QIF-TRUTH.md | v4.3 | 2026-03-15 | Added TARA current state, version tracking, severity audit |
+
 ---
 
-*Document version: 4.2*
+*Document version: 4.3*
 *Created: 2026-02-02*
-*Last updated: 2026-02-18*
+*Last updated: 2026-03-15*
 *Maintainer: Kevin Qi*
