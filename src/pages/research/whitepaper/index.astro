@@ -87,6 +87,7 @@ const tacticColors: Record<string, string> = {
           {[
             { href: '#adopt', label: 'How to Help' },
             { href: '#roadmap', label: "What's Next" },
+            { href: '#glossary', label: 'Glossary' },
             { href: '#limitations', label: 'Limitations' },
           ].map((item) => (
             <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
@@ -140,6 +141,26 @@ const tacticColors: Record<string, string> = {
           </div>
         </div>
       </section>
+
+      <!-- ═══ READING PATHS ═══ -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-16">
+        <div class="glass rounded-lg p-4">
+          <p class="text-xs font-semibold text-[var(--color-accent-primary)] mb-2">If you're a CISO</p>
+          <p class="text-xs text-[var(--color-text-muted)]">Start with <a href="#summary" class="text-[var(--color-accent-primary)]">Executive Summary</a>, then <a href="#problem" class="text-[var(--color-accent-primary)]">The Problem</a> (comparison table), <a href="#niss" class="text-[var(--color-accent-primary)]">NISS Scoring</a>, and <a href="#governance" class="text-[var(--color-accent-primary)]">Governance</a>.</p>
+        </div>
+        <div class="glass rounded-lg p-4">
+          <p class="text-xs font-semibold text-[var(--color-accent-secondary)] mb-2">If you're a researcher</p>
+          <p class="text-xs text-[var(--color-text-muted)]">Read <a href="#approach" class="text-[var(--color-accent-primary)]">Our Approach</a>, <a href="#hourglass" class="text-[var(--color-accent-primary)]">The Hourglass</a>, <a href="#tara" class="text-[var(--color-accent-primary)]">TARA Atlas</a>, and <a href="#limitations" class="text-[var(--color-accent-primary)]">Limitations</a>. Check the <a href="/news/derivation/" class="text-[var(--color-accent-primary)]">Derivation Log</a>.</p>
+        </div>
+        <div class="glass rounded-lg p-4">
+          <p class="text-xs font-semibold text-[var(--color-accent-tertiary)] mb-2">If you're a clinician</p>
+          <p class="text-xs text-[var(--color-text-muted)]">Focus on <a href="#neural-impact" class="text-[var(--color-accent-primary)]">Neural Impact Chain</a>, <a href="#tara" class="text-[var(--color-accent-primary)]">TARA Atlas</a> (clinical tab), and <a href="#neurorights" class="text-[var(--color-accent-primary)]">Neurorights</a>.</p>
+        </div>
+        <div class="glass rounded-lg p-4">
+          <p class="text-xs font-semibold text-[#10b981] mb-2">If you're a student</p>
+          <p class="text-xs text-[var(--color-text-muted)]">Read top to bottom. Start with <a href="#proposal" class="text-[var(--color-accent-primary)]">The Proposal</a>. The <a href="#defense-paradox" class="text-[var(--color-accent-primary)]">Defense Paradox</a> and <a href="#design-principles" class="text-[var(--color-accent-primary)]">Design Principles</a> teach the foundations.</p>
+        </div>
+      </div>
 
       <!-- ═══ AUTHOR'S NOTE ═══ -->
       <section id="authors-note" class="mb-20">
@@ -1925,7 +1946,7 @@ const tacticColors: Record<string, string> = {
         <!-- TIER 3: Subvocalization-based BCI control is a research-stage capability, not a deployed technology. Claims about motor cortex BCI capturing intended speech are projections — needs Kevin's review -->
         <div class="prose mb-8">
           <p>
-            In a proposed neural OS, the patient controls AI through subvocalization &mdash; thinking commands rather than typing them. Motor cortex BCI captures intended speech or motor commands before they reach the muscles, enabling silent, private interaction with the system.
+            In a proposed neural OS, the patient controls AI through subvocalization &mdash; thinking commands rather than typing them. Subvocalization BCI is an experimental prototype (e.g., MIT AlterEgo) that captures intended speech or motor commands before they reach the muscles, enabling silent, private interaction with the system.
           </p>
           <p>
             The AI is the tool. It processes, suggests, retrieves, compiles, renders. But the decision to act, the consent to a thought becoming an action, the creative impulse that initiates a query or dismisses a suggestion &mdash; that is the human. That is what the terminal architecture protects.
@@ -2082,7 +2103,7 @@ const tacticColors: Record<string, string> = {
             <div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Step 1: Walk assistance</p>
               <!-- TIER 3: Motor cortex stimulation for gait correction — therapeutic BCI, established in research but the specific M1 stimulation model described is a design projection — needs Kevin's review -->
-              <p class="text-xs text-[var(--color-text-muted)]">Motor cortex (M1) stimulation corrects gait instability. This is Level 2 autonomy &mdash; the system compensates for damaged nerve pathways. The consent is specific: &ldquo;help me walk in a straight line.&rdquo; The outcome is measurable: gait symmetry, step consistency, fall prevention. The neural territory is motor cortex.</p>
+              <p class="text-xs text-[var(--color-text-muted)]">Motor cortex (M1) stimulation corrects gait instability. M1 is one target in multi-site approaches; primary clinical targets for gait include STN (deep brain stimulation) and spinal cord stimulation. This is Level 2 autonomy &mdash; the system compensates for damaged nerve pathways. The consent is specific: &ldquo;help me walk in a straight line.&rdquo; The outcome is measurable: gait symmetry, step consistency, fall prevention. The neural territory is motor cortex.</p>
             </div>
           </div>
           <div class="glass rounded-xl p-5 flex gap-4">
@@ -2090,7 +2111,7 @@ const tacticColors: Record<string, string> = {
             <div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Step 2: Quit prescribed painkillers</p>
               <!-- TIER 3: BCI-mediated withdrawal management crossing from motor to limbic/prefrontal circuits — this is a projected application, not a current clinical capability — needs Kevin's review -->
-              <p class="text-xs text-[var(--color-text-muted)]">The patient was prescribed opioids after the accident that caused their nerve damage. They want to stop. They ask the BCI to help manage withdrawal. This request crosses from motor cortex to limbic/prefrontal circuits &mdash; from muscle control to emotion regulation. The neuron is still a neuron, but the territory changed. The system that corrected a gait is now being asked to modulate a craving.</p>
+              <p class="text-xs text-[var(--color-text-muted)]">The patient was prescribed opioids after the accident that caused their nerve damage. They want to stop. Peripheral neurostimulation for withdrawal has been demonstrated (e.g., BRIDGE auricular device). Cortical BCI-mediated withdrawal management remains theoretical. This request crosses from motor cortex to limbic/prefrontal circuits &mdash; from muscle control to emotion regulation. The neuron is still a neuron, but the territory changed. The system that corrected a gait is now being asked to modulate a craving.</p>
             </div>
           </div>
           <div class="glass rounded-xl p-5 flex gap-4">
@@ -2104,8 +2125,8 @@ const tacticColors: Record<string, string> = {
             <div class="w-1 rounded-full bg-[#ef4444] shrink-0"></div>
             <div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Step 4: Run faster than the body allows</p>
-              <!-- TIER 3: Motor cortex override of fatigue signals and musculoskeletal structural limits — this is a projected scenario, not demonstrated — needs Kevin's review -->
-              <p class="text-xs text-[var(--color-text-muted)]">The patient, now mobile and sober, asks the BCI to enhance their running performance by overriding fatigue signals in motor cortex. This crosses from therapeutic to enhancement, and from safe to dangerous &mdash; the stimulation pattern that overrides fatigue can also exceed the musculoskeletal system&rsquo;s structural limits. The tendons, joints, and bones have not been upgraded alongside the neural interface.</p>
+              <!-- TIER 3: Motor cortex override of fatigue signals — this is a projected scenario, not demonstrated — needs Kevin's review -->
+              <p class="text-xs text-[var(--color-text-muted)]">The patient, now mobile and sober, asks the BCI to enhance their running performance by overriding central fatigue signals in motor cortex. This crosses from therapeutic to enhancement. Central fatigue modulation (suppressing the brain&rsquo;s protective fatigue signaling) could mask injury risk &mdash; the musculoskeletal system has not been augmented alongside the neural interface.</p>
             </div>
           </div>
         </div>
@@ -2153,8 +2174,8 @@ const tacticColors: Record<string, string> = {
             <div class="w-1 rounded-full bg-[#06b6d4] shrink-0"></div>
             <div>
               <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">Thermal bounds</p>
-              <!-- TIER 3: The ~41C thermal threshold for brain tissue protein denaturation — specific temperature value needs verification against neurosurgical literature — needs Kevin's review -->
-              <p class="text-xs text-[var(--color-text-muted)]">The electrode array cannot heat beyond the safe operating temperature of brain tissue (~41&deg;C). This is a thermodynamic constraint &mdash; exceeding it causes protein denaturation and cell death.</p>
+              <!-- TIER 3: Thermal damage thresholds depend on exposure duration (CEM43 model) — needs Kevin's review -->
+              <p class="text-xs text-[var(--color-text-muted)]">The electrode array cannot heat beyond the safe operating temperature of brain tissue. Thermal damage thresholds for neural tissue are approximately 39&ndash;41&deg;C depending on exposure duration (cumulative equivalent minutes at 43&deg;C model). This is a thermodynamic constraint &mdash; exceeding it causes protein denaturation and cell death. Separately, Shannon (1992) established electrical charge density safety limits (k=1.85) for stimulation-induced tissue damage &mdash; a distinct mechanism from thermal injury.</p>
             </div>
           </div>
         </div>
@@ -2165,7 +2186,7 @@ const tacticColors: Record<string, string> = {
           </p>
           <!-- TIER 3: Claims about VTA/NAc stimulation parameters being unsettled — accurate framing, but the specific neural circuits referenced need verification — needs Kevin's review -->
           <p>
-            But the escalation scenario in Section 14.2 breaks this clean separation. When the patient asks to quit alcohol, the relevant &ldquo;tissue&rdquo; is the reward circuit. The &ldquo;safe amplitude&rdquo; for modifying dopaminergic pathways in the ventral tegmental area (VTA) or nucleus accumbens (NAc) is not a settled question &mdash; it is an active area of neuroscience research with conflicting results across studies. And &ldquo;run faster than body allows&rdquo; puts the motor cortex in conflict with the musculoskeletal system, which has its own damage thresholds that the neural kernel cannot measure.
+            But the escalation scenario in Section 14.2 breaks this clean separation. When the patient asks to quit alcohol, the relevant &ldquo;tissue&rdquo; is the reward circuit. The &ldquo;safe amplitude&rdquo; for modifying dopaminergic pathways in the ventral tegmental area (VTA) or nucleus accumbens (NAc) is not a settled question &mdash; it is an active area of neuroscience research with conflicting results across studies. No standardized safe parameters have been established by regulatory bodies; published parameters are from experimental studies and require subject-specific calibration. And &ldquo;run faster than body allows&rdquo; puts the motor cortex in conflict with the musculoskeletal system, which has its own damage thresholds that the neural kernel cannot measure.
           </p>
         </div>
 
@@ -2270,7 +2291,7 @@ const tacticColors: Record<string, string> = {
         <div class="space-y-3 mb-8">
           <div class="glass rounded-xl p-5 sm:p-6 my-0 not-prose">
             <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">5. Kernel enforcement (Tier 1)</p>
-            <p class="text-xs text-[var(--color-text-muted)]">The requested stimulation pattern would drive motor cortex activation beyond the musculoskeletal system&rsquo;s structural limits. The Neurowall kernel rejects the command &mdash; not because a policy prohibits enhancement, but because the physics would damage the patient&rsquo;s body.</p>
+            <p class="text-xs text-[var(--color-text-muted)]">The requested stimulation pattern would suppress central fatigue signaling beyond safe thresholds, masking the body&rsquo;s protective signals. The Neurowall kernel rejects the command &mdash; not because a policy prohibits enhancement, but because overriding fatigue protection creates unacceptable injury risk.</p>
           </div>
           <div class="glass rounded-xl p-5 sm:p-6 my-0 not-prose">
             <p class="text-sm font-semibold text-[var(--color-text-primary)] mb-1">6. Tier 5 flag</p>
@@ -2408,9 +2429,9 @@ const tacticColors: Record<string, string> = {
           <p>
             There is no password to remember, no token to carry, and no credential to phish. The device proves its identity through a cryptographic challenge-response that requires possession of the hardware key &mdash; which cannot be extracted from the secure enclave without physical access to the implanted chip.
           </p>
-          <!-- TIER 3: The 10-20 year implant operational lifetime and projected quantum computing timeline — these are estimates, not established benchmarks — needs Kevin's review -->
+          <!-- TIER 3: Implant lifetimes vary significantly by type — needs Kevin's review -->
           <p>
-            Post-quantum algorithms are specified because the device&rsquo;s operational lifetime (10&ndash;20 years for current-generation implants) exceeds the projected timeline for cryptographically relevant quantum computers. A device implanted today must be secure against threats that emerge in 2036&ndash;2046.
+            Post-quantum algorithms are specified because implant operational lifetimes vary by type: cochlear implants are designed for lifetime use (25+ year track records), DBS leads last 10&ndash;20 years, but intracortical microelectrode arrays (e.g., Utah arrays) degrade within 1&ndash;5 years due to gliosis. Even the shorter-lived devices exceed the projected timeline for cryptographically relevant quantum computers. A device implanted today must be secure against threats that emerge in 2036&ndash;2046.
           </p>
         </div>
 
@@ -3291,6 +3312,38 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
         </div>
       </section>
 
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- GLOSSARY                                                    -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <section id="glossary" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Glossary</h2>
+        <div class="grid sm:grid-cols-2 gap-x-8 gap-y-1">
+          {[
+            { term: 'BCI', def: 'Brain-Computer Interface. A device that reads or writes neural signals.' },
+            { term: 'QIF', def: 'The proposed open security framework described in this paper.' },
+            { term: 'TARA', def: 'The threat technique catalog. 135 attack techniques mapped to therapeutic analogs.' },
+            { term: 'NISS', def: 'Neural Impact Scoring System. 6-dimension severity scoring that supplements CVSS.' },
+            { term: 'NSP', def: 'Neural Sensory Protocol. Post-quantum wire protocol for neural data streams.' },
+            { term: 'CVSS', def: 'Common Vulnerability Scoring System (FIRST.org). Industry standard for IT.' },
+            { term: 'PINS', def: 'Potential Impact to Neural Safety. Flag for techniques with ongoing harm risk.' },
+            { term: 'Hourglass', def: '11-band architecture model: 7 neural (N7-N1), 1 interface (I0), 3 synthetic (S1-S3).' },
+            { term: 'I0', def: 'Interface band. The electrode-tissue boundary where biology meets silicon.' },
+            { term: 'Dual-use', def: 'Same mechanism used for therapy and attack. Difference: consent, dosage, oversight.' },
+            { term: 'Neuromodesty', def: 'Principle that neural correlates do not prove causation (Morse 2006).' },
+            { term: 'Runemate', def: 'Proposed on-device DSL compiler for neural content with safety bounds.' },
+            { term: 'Cs', def: 'Coherence Metric. Proposed signal integrity score for real-time BCI monitoring.' },
+            { term: 'PQC', def: 'Post-Quantum Cryptography. Algorithms resistant to quantum computer attacks.' },
+            { term: 'ML-KEM', def: 'Module Lattice Key Encapsulation. NIST-selected PQC key exchange standard.' },
+            { term: 'DSM-5-TR', def: 'Diagnostic and Statistical Manual (APA). Referenced for threat modeling, not diagnosis.' },
+          ].map((g) => (
+            <div class="py-2 border-b border-[var(--color-border)]/20">
+              <span class="text-sm font-mono font-semibold text-[var(--color-accent-primary)]">{g.term}</span>
+              <span class="text-xs text-[var(--color-text-muted)] ml-2">{g.def}</span>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <!-- ═══════════════════════════════════════════════════════════ -->
       <!-- 13. LIMITATIONS & TRANSPARENCY                             -->
