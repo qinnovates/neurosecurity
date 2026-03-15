@@ -4,7 +4,13 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: 90632f1251382fe21e67cca7bbd05d7d4dee5134 -->
+<!-- changelog-marker: d3dc47bbb5dfe0d0e2320dcac4f5bd7010d5b289 -->
+
+## Both
+
+### Updated
+- Lens redesign: 3-state (Security ([d3dc47b](https://github.com/qinnovates/qinnovate/commit/d3dc47b))
+
 
 ## 2026-03-14
 
