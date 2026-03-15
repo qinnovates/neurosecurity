@@ -46,6 +46,7 @@ const tacticColors: Record<string, string> = {
         <nav class="space-y-1" aria-label="Table of contents">
           <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">Table of Contents</p>
           {[
+            { href: '#summary', label: 'Executive Summary' },
             { href: '#authors-note', label: "Author's Note" },
             { href: '#claims', label: 'Claims & Disclaimers' },
             { href: '#proposal', label: 'The Proposal' },
@@ -100,12 +101,30 @@ const tacticColors: Record<string, string> = {
         </div>
       </div>
 
+      <!-- ═══ EXECUTIVE SUMMARY ═══ -->
+      <section id="summary" class="mb-16">
+        <div class="glass rounded-xl p-8 border-l-4 border-[var(--color-accent-primary)]">
+          <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">Executive Summary</h2>
+          <div class="space-y-3 text-sm text-[var(--color-text-muted)]">
+            <p>
+              Brain-computer interfaces are shipping in human skulls with no security standard protecting them. The same techniques used therapeutically to treat depression, Parkinson's, and blindness can be weaponized through the same physical mechanisms. The difference between therapy and attack is consent, dosage, and oversight. No existing framework addresses this.
+            </p>
+            <p>
+              QIF is a proposed open security framework for neural devices. It provides three things: <strong>TARA</strong>, a catalog of {stats.totalTechniques} attack techniques mapped to their therapeutic analogs across 11 biological domains; <strong>NISS</strong>, a 6-dimensional severity scoring system that captures what CVSS cannot (biological impact, consent violation, reversibility, neuroplasticity); and <strong>NSP</strong>, a post-quantum wire protocol designed for the 50+ year lifespan of implanted devices.
+            </p>
+            <p>
+              This is a proposed framework, not an adopted standard. It has not been independently peer-reviewed. It is built by one researcher with 15 years of security engineering experience. Everything here is open-source, open to criticism, and designed to be replaced by something better.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <!-- ═══ AUTHOR'S NOTE ═══ -->
       <section id="authors-note" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Author's Note</h2>
         <div class="prose">
           <p>
-            This paper proposes a secure BCI architecture derived from security engineering and ethics.
+            I built this framework because no one else had. There was no threat model for the human mind, so I wrote one.
           </p>
           <p>
             It started with a question: what would threat modeling for the human mind look like? That question led me into the world of brain-computer interfaces, and quickly made clear that you cannot build for the brain the way you build for a screen. The technical architecture alone is not enough. To do this right from the design phase, I applied two decades of security instincts and went deep into the disciplines that should inform every decision at this layer: neuroethics, AI ethics, and the emerging fields of neurorights and neuroprivacy.
@@ -620,9 +639,36 @@ const tacticColors: Record<string, string> = {
         <div class="glass rounded-xl p-6 mt-8 border-l-4 border-[#ef4444]">
           <p class="font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-2">The gap in numbers</p>
           <p class="text-sm text-[var(--color-text-muted)]">
-            Of the catalogued techniques, {stats.nissGapPercentage}% possess neural-specific impacts that CVSS v4.0 cannot adequately express.
-            Prior to NISS, critical dimensions such as biological impact, cognitive reconnaissance, cognitive disruption, consent violation, reversibility, and neuroplastic change were not quantifiable within existing vulnerability scoring frameworks.
+            CVSS v4.0 cannot score {stats.nissGapPercentage}% of the catalogued techniques. Their neural-specific impacts have no CVSS equivalent. Before NISS, no scoring framework could quantify biological impact, cognitive disruption, consent violation, reversibility, or neuroplastic change.
           </p>
+        </div>
+
+        <div class="overflow-x-auto mt-8 mb-4">
+          <p class="font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-3">How QIF compares</p>
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="border-b-2 border-[var(--color-border)]">
+                <th class="text-left py-3 pr-4 text-[var(--color-text-faint)] font-medium text-xs uppercase">Capability</th>
+                <th class="text-center py-3 px-3 text-[var(--color-text-faint)] font-medium text-xs uppercase">CVSS 4.0</th>
+                <th class="text-center py-3 px-3 text-[var(--color-text-faint)] font-medium text-xs uppercase">ATT&amp;CK</th>
+                <th class="text-center py-3 px-3 text-[var(--color-text-faint)] font-medium text-xs uppercase">IEC 62443</th>
+                <th class="text-center py-3 px-3 text-[var(--color-accent-primary)] font-semibold text-xs uppercase">QIF</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 pr-4 text-[var(--color-text-muted)]">Neural impact scoring</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#10b981]">&#10003;</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 pr-4 text-[var(--color-text-muted)]">BCI threat technique catalog</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#f59e0b]">Partial</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#10b981]">&#10003;</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 pr-4 text-[var(--color-text-muted)]">Dual-use mapping (therapy &#8596; attack)</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#10b981]">&#10003;</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 pr-4 text-[var(--color-text-muted)]">Consent violation metrics</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#10b981]">&#10003;</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 pr-4 text-[var(--color-text-muted)]">Reversibility / neuroplasticity</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#10b981]">&#10003;</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 pr-4 text-[var(--color-text-muted)]">Post-quantum protocol</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#10b981]">&#10003;</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 pr-4 text-[var(--color-text-muted)]">Neuroethics guardrails</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td><td class="py-2 px-3 text-center text-[#10b981]">&#10003;</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 pr-4 text-[var(--color-text-muted)]">IT/enterprise coverage</td><td class="py-2 px-3 text-center text-[#10b981]">&#10003;</td><td class="py-2 px-3 text-center text-[#10b981]">&#10003;</td><td class="py-2 px-3 text-center text-[#10b981]">&#10003;</td><td class="py-2 px-3 text-center text-[#ef4444]">&#10007;</td></tr>
+              <tr class="border-b border-[var(--color-border)]/50"><td class="py-2 pr-4 text-[var(--color-text-muted)]">Industry adoption</td><td class="py-2 px-3 text-center text-[#10b981]">Standard</td><td class="py-2 px-3 text-center text-[#10b981]">Standard</td><td class="py-2 px-3 text-center text-[#10b981]">Standard</td><td class="py-2 px-3 text-center text-[#f59e0b]">Proposed</td></tr>
+              <tr><td class="py-2 pr-4 text-[var(--color-text-muted)]">Peer review</td><td class="py-2 px-3 text-center text-[#10b981]">Yes</td><td class="py-2 px-3 text-center text-[#10b981]">Yes</td><td class="py-2 px-3 text-center text-[#10b981]">Yes</td><td class="py-2 px-3 text-center text-[#f59e0b]">Pending</td></tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-[var(--color-text-faint)] mt-2">QIF supplements these frameworks for a domain they do not cover. It does not replace them.</p>
         </div>
       </section>
 
@@ -637,7 +683,7 @@ const tacticColors: Record<string, string> = {
             The same physics that makes a BCI technique dangerous also makes it therapeutic. Transcranial magnetic stimulation treats depression and induces seizures. Deep brain stimulation manages Parkinson's and causes involuntary movement. The mechanism is identical. The difference is intent, dosage, and governance.
           </p>
           <p>
-            This is the central insight behind QIF: security and clinical safety are not separate problems. They are two views of the same system. A framework that only catalogs threats misses half the picture. A framework that only tracks therapies misses the risks. QIF maps both, for every technique, in a single proposed framework.
+            Security and clinical safety are not separate problems. They are two views of the same system. A framework that only catalogs threats misses half the picture. A framework that only tracks therapies misses the risks. QIF maps both, for every technique, in a single proposed framework.
           </p>
           <p>
             All publications are released under the Apache 2.0 license. Neural security standards are too critical to be proprietary. The people whose brains will be connected deserve to understand exactly how they are protected.
@@ -1650,6 +1696,15 @@ const tacticColors: Record<string, string> = {
             </a>
           </div>
         </div>
+
+        <div class="mt-8 prose">
+          <p>
+            The internet got one chance to build its foundation right, and missed it. Brain-computer interfaces are getting that same chance right now. The chips are in human skulls. The clinical trials are running. The question is not whether these devices need security. The question is whether we build it before or after the first patient is harmed.
+          </p>
+          <p>
+            This framework is one proposal. It is open, it is incomplete, and it is waiting for better ideas. What it is not is optional. Neural devices will be secured. The only question is by whom, and whether patients had a voice in the design.
+          </p>
+        </div>
       </section>
 
 
@@ -1661,7 +1716,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mb-8">
           <p>
-            QIF was developed by a single independent researcher. The framework, threat taxonomy, scoring system, clinical mappings, and architectural decisions reflect one perspective. Multi-disciplinary peer review is essential before any component informs clinical or regulatory practice.
+            QIF was developed by a single independent researcher. The framework, threat taxonomy, scoring system, clinical mappings, and architectural decisions are mine. One perspective. Multi-disciplinary peer review is essential before any component informs clinical or regulatory practice.
           </p>
         </div>
 
@@ -1804,7 +1859,7 @@ const tacticColors: Record<string, string> = {
 
         <div class="prose mb-6">
           <p>
-            Given the multi-disciplinary scale of this project &mdash; spanning {stats.totalTechniques} attack techniques across clinical, neural, and digital domains &mdash; Large Language Models (Claude, Gemini, ChatGPT) were used as computational research assistants to help synthesize regulatory datasets, cross-reference neuroscience literature, and generate code for data pipelines and visualizations.
+            This project spans {stats.totalTechniques} attack techniques across clinical, neural, and digital domains. I used Claude, Gemini, and ChatGPT as computational research assistants to synthesize regulatory datasets, cross-reference neuroscience literature, and generate code. Every AI-generated claim was verified against primary sources. The verification methodology and full AI interaction protocol are documented in the <a href="/news/derivation/" class="text-[var(--color-accent-primary)]">Derivation Log</a>.
           </p>
         </div>
 
