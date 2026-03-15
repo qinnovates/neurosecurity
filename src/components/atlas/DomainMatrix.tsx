@@ -49,12 +49,13 @@ function SeverityBar({ c }: { c: Record<Severity, number> }) {
 }
 
 export default function DomainMatrix({ techniques }: Props) {
-  const [lens, setL] = useState<Lens>(() => typeof window !== 'undefined' ? getLens() : 'security');
+  const [lens, setL] = useState<Lens>('both');
   const [hovered, setHovered] = useState<string | null>(null);
   const [selected, setSelected] = useState<{ d: DomainCode; m: ModeCode } | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    setL(getLens());
     const h = (e: Event) => setL((e as CustomEvent).detail.lens);
     window.addEventListener(LENS_EVENT, h);
     return () => window.removeEventListener(LENS_EVENT, h);
@@ -177,8 +178,10 @@ export default function DomainMatrix({ techniques }: Props) {
                         <div className="font-semibold mb-1" style={{ color: mc }}>{DOMAIN_LABELS[domain]} / {MODE_LABELS[mode][lens]}</div>
                         <ul className="space-y-0.5 max-h-32 overflow-y-auto">
                           {ts.slice(0, 8).map(t => (
-                            <li key={t.id} className="truncate" style={{ color: css.sec }}>
-                              <span style={{ color: SEVERITY_COLORS[t.severity].text }}>{'>'}</span> {lens === 'both' ? `${t.name} (Clinical: ${t.nameClinical})` : lens === 'clinical' ? t.nameClinical : t.name}
+                            <li key={t.id} style={{ color: css.sec }}>
+                              <span style={{ color: SEVERITY_COLORS[t.severity].text }}>{'>'}</span> {lens === 'both' ? (
+                                <><span>{t.name}</span><br/><span style={{fontSize:'0.75em',opacity:0.7}}>({t.nameClinical || 'silicon-only'})</span></>
+                              ) : lens === 'clinical' ? t.nameClinical : t.name}
                             </li>
                           ))}
                           {n > 8 && <li style={{ color: css.muted }}>+{n - 8} more</li>}
@@ -237,7 +240,11 @@ export default function DomainMatrix({ techniques }: Props) {
                   <div key={t.id} className="flex items-center gap-2 px-2 py-1.5 rounded text-xs"
                     style={{ background: SEVERITY_COLORS[t.severity].bg, border: `1px solid ${SEVERITY_COLORS[t.severity].border}` }}>
                     <span className="font-mono shrink-0" style={{ color: SEVERITY_COLORS[t.severity].text }}>{t.id}</span>
-                    <span className="truncate" style={{ color: 'var(--color-text-primary, #e2e8f0)' }}>{lens === 'both' ? `${t.name} (Clinical: ${t.nameClinical})` : lens === 'clinical' ? t.nameClinical : t.name}</span>
+                    <span className="truncate" style={{ color: 'var(--color-text-primary, #e2e8f0)' }}>
+                      {lens === 'both' ? (
+                        <><span>{t.name}</span> <span style={{fontSize:'0.75em',opacity:0.7}}>({t.nameClinical || 'silicon-only'})</span></>
+                      ) : lens === 'clinical' ? t.nameClinical : t.name}
+                    </span>
                     <span className="ml-auto shrink-0 font-mono text-[10px]" style={{ color: SEVERITY_COLORS[t.severity].text }}>
                       {t.niss.score.toFixed(1)}
                     </span>
