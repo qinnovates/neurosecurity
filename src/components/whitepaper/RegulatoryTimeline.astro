@@ -1,0 +1,82 @@
+---
+/**
+ * Regulatory Timeline — shows convergence of AI, BCI, and neurotechnology regulation.
+ * Demonstrates that the window for proactive architecture is closing.
+ */
+const events = [
+  { year: '2019', label: 'OECD Neurotech Guidelines', type: 'policy', desc: 'First international neurotechnology governance recommendation' },
+  { year: '2021', label: 'Chile Neurorights Law', type: 'law', desc: 'First country to enshrine neurorights in constitution (Law 21.383)' },
+  { year: '2023', label: 'FDA FDORA 524B', type: 'law', desc: 'Refuse-to-Accept policy: BCI submissions without cybersecurity documentation rejected' },
+  { year: '2024', label: 'EU AI Act Entry', type: 'law', desc: 'High-risk AI classification applies to BCI-adjacent medical devices' },
+  { year: '2024', label: 'CoE AI Convention', type: 'policy', desc: 'Framework Convention on AI opened for signature (Sept 5). EU + additional countries' },
+  { year: '2025', label: 'UNESCO Neuroethics', type: 'policy', desc: 'First global standard on ethics of neurotechnology (Nov 12)' },
+  { year: '2025', label: 'NIST IR 8547 (Draft)', type: 'standard', desc: 'Proposes PQC migration: deprecate classical crypto by 2030, disallow by 2035' },
+  { year: '2026', label: 'EU AI Act Enforcement', type: 'law', desc: 'Full enforcement of high-risk AI requirements including medical devices' },
+  { year: '2030', label: 'NIST PQC Deprecation', type: 'standard', desc: 'Classical cryptography deprecated for federal systems. Neural data with 50+ year lifespan is already at risk.' },
+  { year: '2035', label: 'NIST PQC Disallowance', type: 'standard', desc: 'Classical cryptography disallowed. Any BCI shipping today without PQC will need retrofit.' },
+];
+
+const typeColors: Record<string, string> = {
+  law: '#ef4444',
+  policy: '#f59e0b',
+  standard: '#06b6d4',
+};
+
+const typeLabels: Record<string, string> = {
+  law: 'Law / Regulation',
+  policy: 'Policy / Guideline',
+  standard: 'Technical Standard',
+};
+---
+
+<div class="glass rounded-xl p-6">
+  <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1 text-[var(--color-text-primary)]">
+    Regulatory Convergence Timeline
+  </h3>
+  <p class="text-xs text-[var(--color-text-faint)] mb-2">
+    The window for proactive architecture is closing. Regulation is arriving from three directions simultaneously.
+  </p>
+
+  {/* Legend */}
+  <div class="flex gap-4 mb-5">
+    {Object.entries(typeLabels).map(([key, label]) => (
+      <div class="flex items-center gap-1.5">
+        <div class="w-2 h-2 rounded-full" style={`background: ${typeColors[key]};`}></div>
+        <span class="text-[10px] text-[var(--color-text-faint)]">{label}</span>
+      </div>
+    ))}
+  </div>
+
+  {/* Timeline */}
+  <div class="relative">
+    {/* Horizontal line */}
+    <div class="absolute top-5 left-0 right-0 h-0.5 bg-[var(--color-border)]"></div>
+
+    <div class="grid grid-cols-5 sm:grid-cols-10 gap-1">
+      {events.map((event) => (
+        <div class="relative group">
+          {/* Dot */}
+          <div class="relative z-10 mx-auto w-3 h-3 rounded-full border-2 border-[var(--color-bg-primary)]" style={`background: ${typeColors[event.type]};`}></div>
+
+          {/* Year */}
+          <p class="text-[10px] font-mono font-bold text-center mt-1" style={`color: ${typeColors[event.type]};`}>{event.year}</p>
+
+          {/* Label */}
+          <p class="text-[9px] text-center text-[var(--color-text-muted)] leading-tight mt-0.5 line-clamp-2">{event.label}</p>
+
+          {/* Tooltip on hover */}
+          <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-20 w-48">
+            <div class="glass rounded-lg p-3 shadow-xl border border-[var(--color-border)]">
+              <p class="text-[10px] font-semibold" style={`color: ${typeColors[event.type]};`}>{event.label} ({event.year})</p>
+              <p class="text-[10px] text-[var(--color-text-muted)] mt-1">{event.desc}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <p class="text-xs text-[var(--color-text-faint)] mt-5">
+    A BCI implanted today must comply with regulations that do not yet exist. Post-quantum cryptography, neurorights legislation, and AI governance are converging on a single timeline. Designing for compliance now is cheaper than retrofitting later.
+  </p>
+</div>

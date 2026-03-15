@@ -14,6 +14,8 @@ import NissGapChart from '@/components/whitepaper/NissGapChart.astro';
 import CategoryBreakdown from '@/components/whitepaper/CategoryBreakdown.astro';
 import ConsentTierChart from '@/components/whitepaper/ConsentTierChart.astro';
 import NeuralImpactChain from '@/components/whitepaper/NeuralImpactChain.astro';
+import AttackChainWalkthrough from '@/components/whitepaper/AttackChainWalkthrough.astro';
+import RegulatoryTimeline from '@/components/whitepaper/RegulatoryTimeline.astro';
 
 const stats = getWhitepaperStats();
 const latestChange = getLatestChangelog();
@@ -792,6 +794,11 @@ const tacticColors: Record<string, string> = {
       </section>
 
 
+      <!-- ═══ ATTACK CHAIN WALKTHROUGH ═══ -->
+      <div class="mb-20">
+        <AttackChainWalkthrough />
+      </div>
+
       <!-- ═══════════════════════════════════════════════════════════ -->
       <!-- 3. THE HOURGLASS                                          -->
       <!-- ═══════════════════════════════════════════════════════════ -->
@@ -1563,6 +1570,10 @@ const tacticColors: Record<string, string> = {
           <p>
             BCIs that use AI for stimulation decisions, signal decoding, or adaptive learning are subject to emerging regulation that spans AI ethics, medical device law, and neurotechnology governance. This section maps the frameworks that will define the legal environment QIF operates within.
           </p>
+        </div>
+
+        <div class="mb-8">
+          <RegulatoryTimeline />
         </div>
 
         <div class="grid sm:grid-cols-2 gap-4 mb-8">
