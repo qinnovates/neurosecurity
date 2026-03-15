@@ -9,6 +9,16 @@ class DSM5(BaseModel):
     cluster: str
     primary: List[DSM5Primary]
 
+class ICD10Entry(BaseModel):
+    code: str
+    name: str
+
+class ICD10(BaseModel):
+    cluster: Optional[str] = None
+    primary: List[ICD10Entry] = []
+    secondary: List[ICD10Entry] = []
+    risk_class: Optional[str] = None
+
 class ClinicalEnrichment(BaseModel):
     therapeutic_analog: Optional[str] = None
     conditions: List[str] = []
@@ -33,6 +43,8 @@ class TARAEnrichment(BaseModel):
     clinical: Optional[ClinicalEnrichment] = None
     governance: Optional[GovernanceEnrichment] = None
     engineering: Optional[EngineeringEnrichment] = None
+    dsm5: Optional[DSM5] = None
+    icd10: Optional[ICD10] = None
 
 class NissData(BaseModel):
     version: str = "1.0"
