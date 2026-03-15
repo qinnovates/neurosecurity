@@ -45,35 +45,49 @@ const tacticColors: Record<string, string> = {
       <div class="sticky top-24">
         <nav class="space-y-1" aria-label="Table of contents">
           <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-3">Table of Contents</p>
+          {/* Front Matter */}
           {[
             { href: '#summary', label: 'Executive Summary' },
-            { href: '#authors-note', label: "Author's Note" },
-            { href: '#claims', label: 'Claims & Disclaimers' },
             { href: '#proposal', label: 'The Proposal' },
-            { href: '#defense-paradox', label: 'Defense Paradox' },
-            { href: '#design-principles', label: 'Design Principles' },
             { href: '#landscape', label: 'BCI Industry' },
-            { href: '#problem', label: 'The Problem' },
-            { href: '#approach', label: 'Our Approach' },
-            { href: '#hourglass', label: 'The Hourglass' },
-            { href: '#tara', label: 'TARA Atlas' },
-            { href: '#niss', label: 'NISS Scoring' },
-            { href: '#neural-impact', label: 'Neural Impact Chain' },
-            { href: '#neurorights', label: 'Neurorights Mapping' },
-            { href: '#governance', label: 'Governance' },
-            { href: '#ai-ethics', label: 'AI Ethics' },
-            { href: '#nsp', label: 'NSP Protocol' },
-            { href: '#neural-terminal', label: 'The Neural Terminal' },
-            { href: '#patient-sovereignty', label: 'Patient Self-Sovereignty' },
-            { href: '#autonomy-guardrails', label: 'Autonomy Guardrails' },
-            { href: '#passwordless-security', label: 'Passwordless Security' },
-            { href: '#neural-os', label: 'Neural OS Architecture' },
+          ].map((item) => (
+            <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
+              {item.label}
+            </a>
+          ))}
+          <div class="my-2 border-t border-[var(--color-border)]/30"></div>
+          {/* Core Framework */}
+          {[
+            { href: '#problem', label: '1. The Problem' },
+            { href: '#approach', label: '2. Our Approach' },
+            { href: '#hourglass', label: '3. The Hourglass' },
+            { href: '#tara', label: '4. TARA Atlas' },
+            { href: '#niss', label: '5. NISS Scoring' },
+            { href: '#neural-impact', label: '6. Neural Impact Chain' },
+            { href: '#governance', label: '7. Governance' },
+            { href: '#nsp', label: '8. NSP Protocol' },
+          ].map((item) => (
+            <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
+              {item.label}
+            </a>
+          ))}
+          <div class="my-2 border-t border-[var(--color-border)]/30"></div>
+          {/* Vision & Implementation */}
+          {[
+            { href: '#neural-terminal', label: 'Neural Terminal' },
+            { href: '#neural-os', label: 'Neural OS' },
             { href: '#vision-pipeline', label: 'Vision Restoration' },
-            { href: '#governance-extended', label: 'Governance (Extended)' },
-            { href: '#research-validation', label: 'Research Validation' },
+          ].map((item) => (
+            <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
+              {item.label}
+            </a>
+          ))}
+          <div class="my-2 border-t border-[var(--color-border)]/30"></div>
+          {/* Meta */}
+          {[
             { href: '#adopt', label: 'How to Help' },
             { href: '#roadmap', label: "What's Next" },
-            { href: '#limitations', label: 'Limitations & Transparency' },
+            { href: '#limitations', label: 'Limitations' },
           ].map((item) => (
             <a href={item.href} class="block text-sm py-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors border-l-2 border-transparent hover:border-[var(--color-accent-primary)] pl-3">
               {item.label}
@@ -1119,6 +1133,81 @@ const tacticColors: Record<string, string> = {
             Explore NISS Scoring &rarr;
           </a>
         </div>
+
+        <!-- 5.8 Beyond DSM-5-TR -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-12 mb-4">5.8 Beyond DSM-5-TR: Sensory and Neurological Weighting</h3>
+        <div class="prose mb-8">
+          <p>The current NISS scoring maps attack outcomes to DSM-5-TR diagnostic categories for threat modeling purposes. This mapping is useful but incomplete. DSM-5-TR is a psychiatric classification system. It was not designed to capture the full spectrum of neurological disruption that a BCI attack could produce.</p>
+          <p><strong>Sensory modality disruption.</strong> A BCI attack that corrupts olfactory processing &mdash; causing phantosmia, anosmia, or parosmia &mdash; has no primary DSM-5-TR diagnostic category. The same is true for vestibular disruption, somatosensory attacks, and gustatory hallucinations. These are clinically documented neurological conditions with ICD-11 codes and known neural pathway correlates. They are not psychiatric disorders.</p>
+          <p><strong>Neurological disorders absent from DSM.</strong> Conditions like tinnitus, central pain syndrome, cortical blindness, prosopagnosia, spatial neglect, and movement disorders are well-characterized in neurology. A BCI attack targeting the relevant circuits could induce or exacerbate any of them.</p>
+        </div>
+
+        <!-- TIER 3: NISS v2.0 ICD-11 extension scope and weighting factors — needs Kevin's review -->
+        <div class="glass rounded-xl p-5 sm:p-6 my-6 not-prose" style="border-left: 4px solid var(--color-accent-tertiary);">
+          <p class="text-xs font-semibold tracking-[0.12em] uppercase text-[var(--color-accent-tertiary)] mb-3">NISS v2.0 Extension (Proposed)</p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm" style="border-collapse: collapse;">
+              <thead>
+                <tr>
+                  <th class="text-left py-2 px-3 text-[var(--color-text-faint)] border-b" style="border-color: var(--color-border);">Source</th>
+                  <th class="text-left py-2 px-3 text-[var(--color-text-faint)] border-b" style="border-color: var(--color-border);">What It Adds</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--color-text-muted)]">
+                <tr><td class="py-2 px-3 border-b" style="border-color: var(--color-border);"><strong>ICD-11 Ch. 8</strong></td><td class="py-2 px-3 border-b" style="border-color: var(--color-border);">Tinnitus, neuropathic pain, vestibular disorders, movement disorders</td></tr>
+                <tr><td class="py-2 px-3 border-b" style="border-color: var(--color-border);"><strong>ICD-11 Ch. 22</strong></td><td class="py-2 px-3 border-b" style="border-color: var(--color-border);">Anosmia, phantosmia, paresthesia, proprioceptive dysfunction</td></tr>
+                <tr><td class="py-2 px-3"><strong>Neurology literature</strong></td><td class="py-2 px-3">Cortical stimulation studies documenting sensory disruption in therapeutic BCI use</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-5 sm:p-6 my-4 not-prose" style="border-left: 4px solid var(--color-status-warning);">
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-0">
+            <strong class="text-[var(--color-text-primary)]">Note.</strong> All ICD-11 and neurological disorder mappings are for threat modeling purposes. NISS produces severity scores corresponding to clinical outcome categories, not clinical diagnoses.
+          </p>
+        </div>
+
+        <!-- 5.9 Neuroplasticity Metric -->
+        <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mt-12 mb-4">5.9 The Neuroplasticity Metric (NP)</h3>
+        <div class="prose mb-8">
+          <p>Traditional cybersecurity scoring assumes attacks are discrete events. Neural attacks break this assumption. The brain is a learning system. It rewires itself in response to sustained input. An attack that delivers malicious stimulation patterns over time does not just cause momentary disruption &mdash; it causes the brain to <em>adapt</em> to the malicious pattern, creating lasting neural pathway changes that persist after the attack ends.</p>
+          <p>NP values (expanded from 3 to 4 levels in v1.1.1):</p>
+        </div>
+
+        <div class="glass rounded-xl p-5 sm:p-6 my-6 not-prose">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm" style="border-collapse: collapse;">
+              <thead>
+                <tr>
+                  <th class="text-left py-2 px-3 text-[var(--color-text-faint)] border-b" style="border-color: var(--color-border);">Value</th>
+                  <th class="text-left py-2 px-3 text-[var(--color-text-faint)] border-b" style="border-color: var(--color-border);">Score</th>
+                  <th class="text-left py-2 px-3 text-[var(--color-text-faint)] border-b" style="border-color: var(--color-border);">Meaning</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--color-text-muted)]">
+                <tr><td class="py-2 px-3 border-b" style="border-color: var(--color-border);"><strong>N</strong> (None)</td><td class="py-2 px-3 border-b" style="border-color: var(--color-border);">0.0</td><td class="py-2 px-3 border-b" style="border-color: var(--color-border);">No lasting neural pathway changes</td></tr>
+                <tr><td class="py-2 px-3 border-b" style="border-color: var(--color-border);"><strong>T</strong> (Temporary)</td><td class="py-2 px-3 border-b" style="border-color: var(--color-border);">3.3</td><td class="py-2 px-3 border-b" style="border-color: var(--color-border);">Temporary plasticity changes, resolve over days to weeks</td></tr>
+                <tr><td class="py-2 px-3 border-b" style="border-color: var(--color-border);"><strong>P</strong> (Partial)</td><td class="py-2 px-3 border-b" style="border-color: var(--color-border);">6.7</td><td class="py-2 px-3 border-b" style="border-color: var(--color-border);">Partial structural changes; recovery possible with intervention</td></tr>
+                <tr><td class="py-2 px-3"><strong>S</strong> (Structural)</td><td class="py-2 px-3">10.0</td><td class="py-2 px-3">Permanent or long-lasting neural pathway reorganization</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="prose mb-8">
+          <!-- TIER 3: NP rescoring results (26 scores shifted) — needs Kevin's review -->
+          <p>Recalculating all techniques against the 4-level scale shifted 26 scores. The finer NP granularity revealed several techniques&rsquo; plasticity impact was partial, not structural.</p>
+          <p><strong>Why NP has no traditional analogue.</strong> A firewall breach does not make future breaches easier by physically restructuring the target network. A neural attack with NP:S does exactly that. The brain adapts through Hebbian learning, making the attack&rsquo;s effects self-reinforcing. For these techniques, &ldquo;turn it off&rdquo; is not sufficient remediation. The damage persists after the device is removed because the damage is encoded in the biology, not the technology.</p>
+        </div>
+
+        <!-- TIER 3: NP grounding in maladaptive plasticity literature — needs Kevin's review -->
+        <div class="glass rounded-xl p-5 sm:p-6 my-4 not-prose" style="border-left: 4px solid var(--color-status-warning);">
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-0">
+            <strong class="text-[var(--color-text-primary)]">Note.</strong> NP is a proposed metric within an unvalidated scoring system. The claim that specific attacks cause structural neuroplasticity is grounded in the neuroscience literature on maladaptive plasticity (Pascual-Leone et al. 2005, Merzenich et al. 2014) but has not been validated in the specific context of BCI attack scenarios. The mapping from attack technique to NP score is the author&rsquo;s assessment, not an empirically calibrated measurement.
+          </p>
+        </div>
+
       </section>
 
 
