@@ -203,6 +203,23 @@
       ]
     },
     {
+      "version": "1.8",
+      "date": "2026-03-15",
+      "title": "ICD-10 Code Corrections, PC Backfill, Neurological Mappings Expansion",
+      "summary": "Quorum-validated ICD-10 corrections: G20→G25.89 (21 refs, Parkinson's-specific FY2025), non-billable parents→billable subcodes (G40→G40.909, G43→G43.909, etc.), H-code laterality fixes (10 codes), PC neurorights backfill (46→79/135), 8 new neurological mappings (NEURO-043 to NEURO-050: cardiac R00.x, device T85.1xx, TIA G45.9, headache G44.309, acoustic H93.3X9). SDK models updated for components, feeds_into, secondary_tactics fields.",
+      "added": [],
+      "changed": [
+        "G20 replaced with G25.89 across 21 references",
+        "Non-billable parent codes replaced with billable subcodes",
+        "H-codes updated with required laterality characters",
+        "PC neurorights added to 33 techniques where NP>None",
+        "6 NISS severity band violations corrected",
+        "SDK NissData model updated with components field",
+        "SDK CrossReferences model updated with secondary_tactics",
+        "SDK ThreatTechnique model updated with feeds_into"
+      ]
+    },
+    {
       "version": "1.7",
       "date": "2026-02-21",
       "title": "Origin Classification + 6 New Techniques from Literature Gap Analysis",
