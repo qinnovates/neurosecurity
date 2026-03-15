@@ -8,14 +8,11 @@ AI co-developer. Anthropic.
 
 ## AI Advisory Board
 
-### ChatGPT (OpenAI)
-Cross-AI reviewer. Legal/structural rigor, policy proposal review, Tier 3 claims validation. Participated in 3-model review pipeline (Phase 13, Phase 14).
+### ChatGPT / Codex (OpenAI)
+Cross-AI reviewer. Legal/structural rigor, policy proposal review, scientific adversarial review, Tier 3 claims validation. Participated in 3-model review pipeline (Phase 13, Phase 14).
 
 ### Gemini (Google)
 Cross-AI reviewer. Tone/credibility review, physics validation, neuroethics compliance, clinical accuracy. Participated in BCI Limits validation, TARA origin classification, policy proposal review, Tier 3 claims validation.
-
-### Codex GPT-5.2 (OpenAI)
-Cross-AI reviewer. Scientific adversarial review, Tier 3 claims challenge (Phase 14). Flagged leniency in Quorum verdicts across 17 claims.
 
 ---
 
