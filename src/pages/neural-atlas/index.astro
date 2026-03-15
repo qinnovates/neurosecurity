@@ -46,9 +46,9 @@ const totalTechniques = THREAT_VECTORS.length;
 ---
 
 <PageLayout
-  title="BrainSIEM Walkthrough — Your First 60 Seconds"
-  description="A guided walkthrough of one real BCI attack technique. Understand the hourglass model, NISS scoring, and TARA dual-use mapping before launching the full BrainSIEM dashboard."
-  breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'BrainSIEM', href: '/demo-atlas/' }, { label: 'Walkthrough' }]}
+  title="Neural Atlas — Your First 60 Seconds"
+  description="A guided walkthrough of one real BCI attack technique. Understand the hourglass model, NISS scoring, and TARA dual-use mapping, then launch the full Neural Atlas dashboard."
+  breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'Neural Atlas' }]}
 >
   <!-- Hero -->
   <section class="mb-16 reveal">
@@ -404,12 +404,21 @@ const totalTechniques = THREAT_VECTORS.length;
 
   <!-- Footer CTA -->
   <section class="mb-12 text-center reveal">
-    <a href="/atlas/" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-bold transition-all hover:scale-[1.02]" style="background: linear-gradient(135deg, #22d3ee, #06b6d4); color: #0a0e17; box-shadow: 0 2px 12px rgba(34, 211, 238, 0.2);">
-      Now explore {totalTechniques - 1} more techniques
-      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-      </svg>
-    </a>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+      <a href="/demo-atlas/" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg text-base font-bold transition-all hover:scale-[1.02]" style="background: linear-gradient(135deg, #22d3ee, #06b6d4); color: #0a0e17; box-shadow: 0 4px 20px rgba(34, 211, 238, 0.3);">
+        <svg class="w-5 h-5" viewBox="0 0 32 32" fill="none">
+          <path d="M8 16 Q12 8 16 16 Q20 24 24 16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
+        </svg>
+        Launch Neural Atlas Dashboard
+      </a>
+      <a href="/atlas/" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium transition-all hover:scale-[1.02]" style="background: var(--color-glass-bg); border: 1px solid var(--color-border); color: var(--color-text-primary);">
+        Browse {totalTechniques} techniques in the TARA Atlas
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        </svg>
+      </a>
+    </div>
     <p class="text-[10px] font-mono mt-6 tracking-[0.08em] inline-flex items-center gap-2 px-4 py-1.5 rounded-full" style="color: var(--color-text-faint); background: var(--color-glass-bg); border: 1px solid var(--color-glass-border);">
       <span class="w-1 h-1 rounded-full" style="background: var(--color-status-warn);"></span>
       PROPOSED FRAMEWORK &middot; NOT VALIDATED &middot; OPEN TO CRITIQUE

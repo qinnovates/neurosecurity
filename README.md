@@ -172,11 +172,11 @@ This is early-stage research by a solo researcher. Empirical validation requires
 
 | Component | Description | Status |
 |-----------|-------------|--------|
-| **[BrainSIEM](https://qinnovate.com/demo-atlas/)** | Browser-based neural security monitoring with sample EEG data, threat detection, and NISS scoring | Published |
+| **[Neural Atlas](https://qinnovate.com/neural-atlas/)** | Browser-based neural security monitoring with sample EEG data, threat detection, and NISS scoring | Published |
 | **[Neurowall](./tools/neurowall/)** | Neural firewall prototype (differential privacy + NISS + policy engine) | In development, v0.8 |
 | **[macshield](https://github.com/qinnovates/macshield)** | macOS workstation hardening for public WiFi | v0.4.1 |
 
-**BrainSIEM — Built With:**
+**Neural Atlas — Built With:**
 | Technology | Purpose |
 |-----------|---------|
 | BrainFlow | 40+ BCI devices |
