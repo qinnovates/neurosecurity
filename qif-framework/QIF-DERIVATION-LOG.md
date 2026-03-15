@@ -391,6 +391,74 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 
 ---
 
+## Entry 98: ICD-10 Neurological Gap — DSM-5-TR Cannot Express 38% of TARA Outcomes {#entry-98-icd10-neuro-gap}
+
+**Date:** 2026-03-15, ~01:30
+**Classification:** INFERRED (evidence-based analysis validated by 8-agent Quorum swarm)
+**AI Systems:** Claude Opus 4.6 (8-agent Quorum: Clinical Neurologist, BCI Engineer, Neuroethicist, ICD-10 Coding Specialist, Security Researcher, Devil's Advocate, Naive User, Regulatory Affairs Specialist)
+**Connected entries:** Entry 97 (TARA 135 expansion), Entry 96 (Six-expert review), Entry 95 (NISS 3.0)
+
+### The Problem
+
+Analysis of the TARA registrar revealed that 51 of 135 techniques (38%) land in a `non_diagnostic` DSM-5-TR category — because DSM-5-TR only covers mental/behavioral disorders (ICD-10 Chapter F). BCI attacks target the nervous system directly. Their primary outcomes are neurological (seizures, movement disorders, vestibular dysfunction, hearing loss, autonomic disruption), not psychiatric. Psychiatric effects are secondary — they emerge from sustained neurological disruption.
+
+The registrar's `dsm5` field already contained 14 non-F ICD-10 codes (G-codes for nervous system, H-codes for eye/ear, R-codes for symptoms) across 61 references — evidence the field had organically grown past DSM-5-TR's jurisdictional boundary. The field name was factually misleading.
+
+### The Discovery
+
+Even DSM-5-TR uses ICD-10-CM F-codes — it has no independent coding system. The `dsm5` field was always an ICD-10-CM field restricted to one chapter. What TARA needs is coverage across the ICD-10 chapters relevant to BCI attack outcomes:
+- **Chapter V (F00-F99):** Mental and behavioral disorders — the existing coverage
+- **Chapter VI (G00-G99):** Diseases of the nervous system — epilepsy, movement disorders, neuropathy, pain
+- **Chapter VII (H00-H59):** Diseases of the eye/ear — vestibular, tinnitus, hearing loss, visual defects
+- **Chapter XVIII (R00-R99):** Symptoms and signs — dizziness, amnesia, cardiac arrhythmia, syncope
+- **Chapter XIX (S/T codes):** Injury and device complications — T85.1xx for implanted neurostimulator complications
+
+### Quorum Validation Results (8 agents, 22+ published sources cited)
+
+**Wrong codes found:** G20 (now Parkinson's-specific per FY2025, not a movement disorder category — use G25.89), G90.1 (Riley-Day genetic syndrome — cannot be acquired), G90.0 ("idiopathic" contradicts device-attributable cause — use G90.89), G51.0 (Bell's palsy is specifically idiopathic — use G51.8 for device-induced).
+
+**Rejected proposals:** H81.1 (BPPV — GVS doesn't displace otoconia, physics incorrect), G56.0 (carpal tunnel — no credible attack vector), H53.9 (redundant with existing codes).
+
+**Highest-severity gap found:** Cardiac arrhythmia codes (R00.0 tachycardia, R00.1 bradycardia) for VNS attack outcomes — documented, life-threatening, and completely unmapped.
+
+**Missing code family:** T85.1xx (complications of implanted electronic neurostimulator) — the most directly applicable ICD-10 family for BCI adverse events, entirely absent.
+
+**Architectural consensus:** Direct technique→ICD code mapping encodes a clinical claim regardless of qualifiers (Neuroethicist + Devil's Advocate + Regulatory Affairs converged independently). The data model must use resolved references with evidence tiers, not direct assertion.
+
+### Architectural Decision
+
+**Field name:** `clinical_outcome_refs` (not `icd10_neuro` — the `_refs` suffix signals reference status, not diagnostic assignment)
+
+**Structure:** Resolved references to NEURO-XXX IDs from `qif-neurological-mappings.json`, with harm domain and evidence floor:
+```json
+"clinical_outcome_refs": {
+  "neuro_ids": ["NEURO-001", "NEURO-008"],
+  "harm_domain": "sensory:auditory",
+  "evidence_floor": "demonstrated"
+}
+```
+
+**Two-layer output:** Internal artifacts retain full ICD-10 codes with citations. Submission-mode output uses ISO 14971-compatible harm descriptions only — no ICD codes in regulatory artifacts. FDA's 2023 premarket cybersecurity guidance does not require or mention ICD-10 coding; it expects ISO 14971 severity scales.
+
+**Neuromodesty compliance:** G1 resolved by reference architecture (no direct causal assertion). G7 resolved by mandatory defensive_control pairing (already required by QIF guardrails). G3 resolved by field naming convention.
+
+### Proposed additions: 28 → 14 accepted, 5 rejected, 5 replaced, 4 consolidated
+
+Plus 9 new codes identified as missing (R00.0, R00.1, T85.190A, T85.730A, G45, R55, G44.309, H93.3x, Y83.8).
+
+### Human Decision
+
+Kevin decided: (1) cPTSD excluded — ICD-11 only, not in DSM-5-TR; (2) if not DSM, identify what DSM misses — leading to the ICD-10 gap analysis; (3) Quorum validation required before implementation. The architectural decision (reference-based field, two-layer output) emerged from the swarm and is presented for Kevin's approval.
+
+### AI Collaboration
+
+- **Model:** Claude Opus 4.6
+- **Role:** Gap analysis, 8-agent Quorum validation swarm, architectural synthesis
+- **Cross-AI:** None (internal validation only)
+- **Human-Decided:** Exclude cPTSD, require ICD-10 gap analysis, require Quorum validation, accept/reject architectural recommendations
+
+---
+
 ## Entry 97: TARA Expansion to 135 Techniques — Domain×Mode Gap Fill, SDK v0.3.0, Dual-Lens Wiring {#entry-97-tara-135-expansion}
 
 **Date:** 2026-03-14, ~06:00
