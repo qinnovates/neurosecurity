@@ -7,25 +7,25 @@
     "maintainer": "Kevin Qi"
   },
   "current_stats": {
-    "as_of": "2026-03-14",
+    "as_of": "2026-03-15",
     "threat_techniques": 135,
-    "bci_devices": 24,
+    "bci_devices": 68,
     "brain_regions": 37,
     "physics_constraints": 13,
     "hourglass_bands": 11,
     "tara_tactics": 16,
-    "neurorights_mapped": 4,
+    "neurorights_mapped": 6,
     "dsm5_diagnoses_mapped": 68,
     "physics_constants_verified": 14,
     "preprint_version": "v1.5",
     "nsp_version": "v0.5",
-    "tara_version": "v1.7",
+    "tara_version": "v1.8",
     "atlas_version": "v1.2.0",
-    "derivation_log_entries": 70,
+    "derivation_log_entries": 106,
     "field_journal_entries": 20,
     "neurowall_version": "v0.8",
     "blog_posts": 59,
-    "cross_ai_validations": 9,
+    "cross_ai_validations": 14,
     "research_sources": 311
   },
   "milestones": [
@@ -412,6 +412,49 @@
         "threat_techniques": 135,
         "research_sources": 311
       }
+    },
+    {
+      "date": "2026-03-15",
+      "type": "release",
+      "title": "TARA v1.8: ICD-10 Field Split + NISS Re-scoring",
+      "description": "Separated ICD-10 codes (G/H/R) from DSM-5-TR codes (F) across 38 techniques — 64 codes moved to new icd10 field. Re-scored all 26 new techniques (T0110-T0135) from placeholder vectors to individually assessed NISS vectors. Quorum-validated. 6 PINS flags added. Components block deprecated. Severity distribution: 20 high, 59 medium, 55 low, 1 none.",
+      "stats_snapshot": {
+        "threat_techniques": 135,
+        "tara_version": "v1.8"
+      }
+    },
+    {
+      "date": "2026-03-15",
+      "type": "milestone",
+      "title": "Phase 14: Three-Model Tier 3 Validation",
+      "description": "17 Tier 3 claims (math, physics, engineering, clinical) validated by Claude Quorum (8 agents), Codex GPT-5.2, and Gemini CLI. 1 claim removed (motor cortex structural override — neuromodesty violation). 1 citation corrected (Shannon 1992 — electrical, not thermal). 8 claims qualified with evidence-based caveats. All 3 models agreed on removal.",
+      "stats_snapshot": {
+        "cross_ai_validations": 14
+      }
+    },
+    {
+      "date": "2026-03-15",
+      "type": "release",
+      "title": "Whitepaper v8.0: 8 New Sections Rendered",
+      "description": "Sections 12-19 rendered from draft to site: Neural Terminal, Patient Self-Sovereignty, Autonomy Guardrails, Passwordless Security, Neural OS Architecture, Vision Restoration Pipeline, Governance Extended, Research Validation. Plus NISS 5.8-5.9 (sensory weighting, neuroplasticity metric). Derivation log count corrected to 106.",
+      "stats_snapshot": {
+        "derivation_log_entries": 106
+      }
+    },
+    {
+      "date": "2026-03-15",
+      "type": "release",
+      "title": "BCI Directory: HuggingFace-Style Device Explorer",
+      "description": "New page at /bci/directory/ — 57 companies, 68 devices in filterable card grid. 4-mode lens toggle (Security/Clinical/Market/Research), entity toggle (Company/Device), filter chips, KQL-powered search, dynamic aggregate counters, inline detail expansion.",
+      "stats_snapshot": {
+        "bci_devices": 68
+      }
+    },
+    {
+      "date": "2026-03-15",
+      "type": "milestone",
+      "title": "QIF-TRUTH v4.3: Full NISS/TARA Current State",
+      "description": "Source of truth updated with computed numbers: 135 techniques, 12 domains, 3 modes, severity 20/59/55/1, neurorights distribution, ICD-10 split documentation, version history table. All numbers from registrar, not estimated."
     }
   ]
 }
