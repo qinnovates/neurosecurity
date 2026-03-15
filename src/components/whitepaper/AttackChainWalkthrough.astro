@@ -1,0 +1,110 @@
+---
+/**
+ * Attack Chain Walkthrough — traces one technique through the full QIF pipeline.
+ * Shows how all components connect: Hourglass → TARA → NISS → DSM-5 → Defense
+ */
+const steps = [
+  {
+    label: 'Entry Point',
+    band: 'S2',
+    bandName: 'Transport',
+    color: '#3b82f6',
+    content: 'Attacker on local network discovers an unencrypted LSL stream broadcasting raw EEG data from a research headset.',
+    technique: 'QIF-T0003',
+    techniqueName: 'Signal Eavesdropping',
+  },
+  {
+    label: 'Pivot',
+    band: 'S1',
+    bandName: 'Near-Field',
+    color: '#8b5cf6',
+    content: 'Using captured signal characteristics (dominant alpha frequency, electrode impedance profile), attacker crafts a spoofed signal matching the device signature.',
+    technique: 'QIF-T0009',
+    techniqueName: 'RF False Brainwave Injection',
+  },
+  {
+    label: 'Injection',
+    band: 'I0',
+    bandName: 'Interface',
+    color: '#ef4444',
+    content: 'Crafted RF signal couples through the electrode-tissue boundary at I0. The device cannot distinguish injected signal from endogenous neural activity.',
+    technique: 'QIF-T0001',
+    techniqueName: 'Signal Injection',
+  },
+  {
+    label: 'Neural Impact',
+    band: 'N7',
+    bandName: 'Neocortex',
+    color: '#f59e0b',
+    content: 'Injected signal disrupts cortical oscillations at target frequency band. Neurofeedback application provides incorrect feedback based on corrupted signal.',
+    niss: 'NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T → 6.1 (Medium)',
+  },
+  {
+    label: 'Clinical Reference',
+    band: 'DSM-5',
+    bandName: 'Threat Model',
+    color: '#06b6d4',
+    content: 'For threat modeling purposes: disruption pattern corresponds to adjustment disorder categories. This is a threat modeling reference, not a diagnostic claim.',
+    qualifier: true,
+  },
+  {
+    label: 'Defense',
+    band: 'Control',
+    bandName: 'Mitigation',
+    color: '#10b981',
+    content: 'Break the chain at S2: encrypt the LSL stream (TLS tunnel or BrainFlow encrypted WebSocket). Break at I0: amplitude bounds and impedance monitoring. Break at N7: coherence metric (Cs) anomaly detection.',
+    defenses: ['Transport encryption', 'Amplitude bounds at I0', 'Coherence monitoring'],
+  },
+];
+---
+
+<div class="glass rounded-xl p-6">
+  <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1 text-[var(--color-text-primary)]">
+    Worked Example: Signal Injection via Compromised Stream
+  </h3>
+  <p class="text-xs text-[var(--color-text-faint)] mb-6">
+    One technique traced through the full QIF pipeline. Hourglass band → TARA technique → NISS score → clinical reference → defensive control.
+  </p>
+
+  <div class="relative">
+    {/* Vertical connector line */}
+    <div class="absolute left-[19px] top-4 bottom-4 w-0.5 bg-gradient-to-b from-[#3b82f6] via-[#ef4444] to-[#10b981] opacity-30"></div>
+
+    <div class="space-y-4">
+      {steps.map((step, i) => (
+        <div class="flex gap-4 relative">
+          {/* Node */}
+          <div class="shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-white text-xs font-bold z-10" style={`background: ${step.color};`}>
+            {step.band}
+          </div>
+
+          {/* Content */}
+          <div class="flex-1 glass-subtle rounded-lg p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs font-semibold uppercase tracking-wider" style={`color: ${step.color};`}>{step.label}</span>
+              <span class="text-xs text-[var(--color-text-faint)]">{step.bandName}</span>
+              {step.technique && (
+                <a href={`/atlas/tara/${step.technique.replace('QIF-', '')}/`} class="text-[10px] font-mono text-[var(--color-accent-primary)] hover:underline ml-auto">{step.technique}</a>
+              )}
+            </div>
+            <p class="text-xs text-[var(--color-text-muted)]">{step.content}</p>
+            {step.niss && (
+              <p class="text-[10px] font-mono text-[var(--color-text-faint)] mt-2 bg-black/5 rounded px-2 py-1">{step.niss}</p>
+            )}
+            {step.defenses && (
+              <div class="flex flex-wrap gap-1.5 mt-2">
+                {step.defenses.map((d) => (
+                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#10b981]/10 text-[#10b981] font-medium">{d}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <p class="text-xs text-[var(--color-text-faint)] mt-4">
+    The chain breaks at any defended point. Three independent controls (transport encryption, amplitude bounds, coherence monitoring) must all fail for the attack to reach neural impact. Defense in depth, not defense in one layer.
+  </p>
+</div>
