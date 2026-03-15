@@ -763,6 +763,6 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
       <span class="text-[10px] uppercase tracking-[0.12em] font-mono" style="color: var(--color-text-faint);">Query Engine</span>
       <div class="flex-1 h-px" style="background: var(--color-border);" />
     </div>
-    <BciKql client:only="react" tables={kqlTables} />
+    <BciKql client:only="react" tables={{}} />
   </div>
 </PageLayout>

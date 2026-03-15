@@ -397,7 +397,10 @@ function formatValue(val: unknown, field: string): React.ReactNode {
 
 // --- Component ---
 
-export default function BciKql({ tables }: BciKqlProps) {
+export default function BciKql({ tables: tablesProp }: BciKqlProps) {
+  const [fetchedTables, setFetchedTables] = useState<TableData | null>(null);
+  const isEmpty = !tablesProp || Object.keys(tablesProp).length === 0;
+  const [loading, setLoading] = useState(isEmpty);
   const [query, setQuery] = useState('companies');
   const [inputFocused, setInputFocused] = useState(false);
   const [sortCol, setSortCol] = useState<string | null>(null);
@@ -405,7 +408,35 @@ export default function BciKql({ tables }: BciKqlProps) {
   const [syntaxOpen, setSyntaxOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Build indexes once on mount
+  // Fetch tables from static JSON when no prop is provided (eliminates 2-3MB prop serialization)
+  useEffect(() => {
+    if (!isEmpty) return;
+    let cancelled = false;
+    fetch('/data/kql-tables.json')
+      .then(r => r.json())
+      .then(data => { if (!cancelled) { setFetchedTables(data); setLoading(false); } })
+      .catch(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [isEmpty]);
+
+  const tables: TableData = (isEmpty ? fetchedTables : tablesProp) || {};
+
+  // Lazy-load impact chains on first query that needs them
+  const chainsLoadedRef = useRef(false);
+  useEffect(() => {
+    if (chainsLoadedRef.current || !isEmpty) return;
+    if (!query.includes('impact_chains')) return;
+    if (tables['impact_chains']) return;
+    chainsLoadedRef.current = true;
+    fetch('/data/kql-impact-chains.json')
+      .then(r => r.json())
+      .then(data => {
+        setFetchedTables(prev => ({ ...prev, ...data }));
+      })
+      .catch(() => { /* impact chains unavailable */ });
+  }, [query, tables, isEmpty]);
+
+  // Build indexes once tables are loaded
   const indexes = useMemo(() => buildIndexes(tables), [tables]);
 
   const tableStats = useMemo(() => {
@@ -474,6 +505,19 @@ export default function BciKql({ tables }: BciKqlProps) {
     }
   }, [query]);
 
+  if (loading) {
+    return (
+      <div style={S.container}>
+        <div style={S.header}>
+          <h2 style={S.title}>KLQ</h2>
+          <span style={{ fontSize: '0.875rem', color: 'var(--color-text-muted, #94a3b8)' }}>
+            Loading data lake...
+          </span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={S.container}>
       <div style={S.header}>
@@ -534,13 +578,19 @@ export default function BciKql({ tables }: BciKqlProps) {
             <span>{columns.length} column{columns.length !== 1 ? 's' : ''}</span>
           </div>
           <table style={S.table}>
+            <caption className="sr-only">KQL query results from {result.tableName}</caption>
             <thead>
               <tr>
                 {columns.map(col => (
                   <th
                     key={col}
                     style={S.th}
+                    scope="col"
+                    role="button"
+                    tabIndex={0}
+                    aria-sort={sortCol === col ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
                     onClick={() => handleHeaderClick(col)}
+                    onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleHeaderClick(col); } }}
                   >
                     {col.replace(/_/g, ' ')}
                     {sortCol === col ? (sortDir === 'asc' ? ' \u25B2' : ' \u25BC') : ''}
