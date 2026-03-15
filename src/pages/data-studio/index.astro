@@ -1,0 +1,120 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import DataStudioBrowser from '@/components/data-studio/DataStudioBrowser';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Load Parquet catalog at build time
+let catalog: any = { _meta: {}, datasets: {} };
+try {
+  const raw = fs.readFileSync(path.resolve('docs/data/parquet/catalog.json'), 'utf-8');
+  catalog = JSON.parse(raw);
+} catch { /* catalog not yet generated */ }
+
+const datasets = Object.entries(catalog.datasets || {}).map(([id, meta]: [string, any]) => ({
+  id,
+  rows: meta.rows,
+  columns: meta.columns,
+  columnNames: meta.column_names || [],
+  sizeBytes: meta.size_bytes || 0,
+  compression: meta.compression || 'zstd',
+}));
+
+const totalRows = datasets.reduce((s: number, d: any) => s + d.rows, 0);
+const totalSize = datasets.reduce((s: number, d: any) => s + d.sizeBytes, 0);
+
+// Also load KQL manifest for richer metadata
+let kqlManifest: Record<string, any> = {};
+try {
+  const raw = fs.readFileSync(path.resolve('docs/data/kql-manifest.json'), 'utf-8');
+  kqlManifest = JSON.parse(raw);
+} catch { /* not yet generated */ }
+---
+
+<PageLayout
+  title="Data Studio — QIF Open Datasets"
+  description={`Browse ${datasets.length} neurosecurity datasets with ${totalRows.toLocaleString()} rows. Download as Parquet or query with KQL.`}
+  breadcrumbs={[{ label: 'Research', href: '/research/' }, { label: 'Data Studio' }]}
+  wide={true}
+>
+  <div class="min-h-screen -mt-4 pt-4">
+    <div class="max-w-[1400px] mx-auto">
+      <!-- Hero -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-16">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">Data Studio</span>
+            <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+            <span class="text-[11px] font-semibold text-emerald-500 uppercase tracking-widest">Open Data</span>
+          </div>
+          <h1 class="text-5xl sm:text-7xl font-semibold tracking-tight text-slate-900 mb-6">
+            QIF Data Studio
+          </h1>
+          <p class="text-2xl text-slate-500 font-medium leading-relaxed tracking-tight">
+            Browse, query, and download every dataset in the QIF research datalake.
+            All data is open, versioned, and available as Parquet for direct use in pandas, Polars, or DuckDB.
+          </p>
+        </div>
+
+        <div class="flex flex-row sm:flex-col gap-4">
+          <div class="bg-white px-8 py-5 rounded-[2rem] border border-slate-100 shadow-sm min-w-[200px]">
+            <span class="block text-[11px] text-slate-400 font-semibold mb-1">Datasets</span>
+            <span class="text-3xl font-semibold text-slate-900">{datasets.length}</span>
+          </div>
+          <div class="bg-slate-900 px-8 py-5 rounded-[2rem] shadow-xl shadow-slate-900/10 min-w-[200px]">
+            <span class="block text-[11px] text-slate-500 font-semibold mb-1">Total Rows</span>
+            <span class="text-3xl font-semibold text-emerald-400">{totalRows.toLocaleString()}</span>
+          </div>
+          <div class="bg-purple-50 px-8 py-5 rounded-[2rem] border border-purple-100 shadow-sm min-w-[200px]">
+            <span class="block text-[11px] text-purple-500 font-semibold mb-1">Parquet Size</span>
+            <span class="text-3xl font-semibold text-purple-700">{(totalSize / 1024).toFixed(0)}KB</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Start -->
+      <div class="bg-slate-50 rounded-2xl p-8 mb-12 border border-slate-100">
+        <h2 class="text-lg font-semibold text-slate-900 mb-4">Quick Start</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div>
+            <h3 class="text-sm font-semibold text-slate-500 mb-2">Python / pandas</h3>
+            <pre class="text-xs bg-white rounded-xl p-4 border border-slate-200 overflow-x-auto"><code class="text-slate-700">import pandas as pd
+df = pd.read_parquet(
+  "https://qinnovate.com/data/parquet/techniques.parquet"
+)</code></pre>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-slate-500 mb-2">DuckDB</h3>
+            <pre class="text-xs bg-white rounded-xl p-4 border border-slate-200 overflow-x-auto"><code class="text-slate-700">SELECT * FROM read_parquet(
+  'https://qinnovate.com/data/parquet/techniques.parquet'
+) WHERE severity = 'critical';</code></pre>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-slate-500 mb-2">Polars</h3>
+            <pre class="text-xs bg-white rounded-xl p-4 border border-slate-200 overflow-x-auto"><code class="text-slate-700">import polars as pl
+df = pl.read_parquet(
+  "https://qinnovate.com/data/parquet/techniques.parquet"
+)</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dataset Browser (React island) -->
+      <DataStudioBrowser
+        client:load
+        datasets={datasets}
+      />
+
+      <!-- Data License -->
+      <div class="mt-16 pt-8 border-t border-slate-100 max-w-3xl">
+        <h2 class="text-xl font-semibold text-slate-900 mb-3">Data License</h2>
+        <p class="text-sm text-slate-500 leading-relaxed">
+          QIF framework data is licensed under <a href="https://creativecommons.org/licenses/by/4.0/" class="text-blue-600 underline" target="_blank" rel="noopener noreferrer">CC-BY 4.0</a>.
+          Attribution: "QIF Framework, qinnovate.com".
+          NISS scores and TARA techniques are proposed research outputs — AI-derived, not independently validated.
+          See <a href="/guardrails/" class="text-blue-600 underline">Guardrails</a> for epistemic constraints.
+        </p>
+      </div>
+    </div>
+  </div>
+</PageLayout>

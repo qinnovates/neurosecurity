@@ -1,3 +1,4 @@
+// @ts-nocheck — archived script, source module no longer exists
 /**
  * Generates governance/ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md from the
  * single source of truth at src/data/code-of-ethics.ts

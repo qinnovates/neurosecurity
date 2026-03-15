@@ -19,6 +19,7 @@ const mockThreats = [
         id: 'TARA-001',
         name: 'Test Threat',
         category: 'SI',
+        tactic: 'SI',
         severity: 'critical',
         status: 'CONFIRMED',
         bands: ['N7'],
@@ -27,7 +28,9 @@ const mockThreats = [
             dual_use: 'confirmed',
             clinical: {
                 therapeutic_analog: 'Deep Brain Stimulation',
-                conditions: ['Parkinson\'s']
+                conditions: ['Parkinson\'s'],
+                fda_status: 'approved',
+                evidence_level: 'established'
             }
         },
         dsm5: {

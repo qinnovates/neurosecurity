@@ -627,7 +627,7 @@ function BrainTab({ device }: { device: BciDevice }) {
 }
 
 function SecurityTab({ device }: { device: BciDevice }) {
-  const [crbPopulation, setCrbPopulation] = useState(CRB_POPULATIONS[0]);
+  const [crbPopulation, setCrbPopulation] = useState<typeof CRB_POPULATIONS[number]>(CRB_POPULATIONS[0]);
 
   if (device.threatCount === 0) {
     return (
