@@ -6,7 +6,7 @@ import ObfuscatedEmail from '@/components/ObfuscatedEmail.astro';
 
 <PageLayout
   title="About — Qinnovate"
-  description="I'm Kevin Qi — a full-stack builder specialized in security, designing and shipping since age 12. BCI researcher building open governance frameworks for brain-computer interface safety."
+  description="I'm Kevin Qi — a security engineer and BCI researcher building open governance frameworks for brain-computer interface safety."
   breadcrumbs={[{ label: 'About' }]}
   wide
 >
@@ -18,6 +18,7 @@ import ObfuscatedEmail from '@/components/ObfuscatedEmail.astro';
         <div class="sticky top-24 max-h-[80vh] overflow-y-auto">
           <ul class="space-y-1 text-sm" id="toc-list">
             <li><a href="#about-me" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">About Me</a></li>
+            <li><a href="#security-foundation" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Security Foundation</a></li>
             <li><a href="#the-origin" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">The Origin</a></li>
             <li><a href="#why-now" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Why Now</a></li>
             <li><a href="#why-neuroethics" class="toc-link block py-1 pl-3 border-l-2 border-transparent text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors">Why Neuroethics</a></li>
@@ -50,8 +51,17 @@ import ObfuscatedEmail from '@/components/ObfuscatedEmail.astro';
         Not what happens to the data. Not what happens to the device. What happens to the <em>person</em>. I couldn't find a framework that answered that, so I built one. That's the goal: an OSI model for the mind.
       </p>
       <p>
-        I've been building on the web since I was 12. In the early 2000s, the internet was going through a pivotal transition — from chaotic, animated GeoCities-style pages to structured, semi-professional layouts for forums and portals. During middle school, I co-founded <strong>AGFX</strong> with a friend — an online community built around Photoshop, digital art, and graphic design. We were part of the first wave of digital art makers in Web 1.0. Much of what I did was design tutorials and marketing — finding every avenue to spread the work and bring visitors in during the early days of the internet. We taught each other techniques, shared tutorials, gave feedback on each other's work, brainstormed ideas, and built a space where creative people could learn together. Our tutorials hit the Top 100 on Good-Tutorials.com. We grew to roughly 3,000 community members, running on IRC, AIM, and InvisionFree forums. I wrote CSS hacks to override default forum UI without server access — early front-end engineering born out of the need to make things look right. I stepped away after freshman year of high school, but that experience shaped everything that followed: full-stack building, design, marketing, and the instinct to find an audience for the work.
+        Co-founded AGFX, a 3,000-member digital design community, at age 12. Learned systems thinking, audience-building, and infrastructure by necessity. That instinct to build something useful and make it accessible never left.
       </p>
+
+      <h2 id="security-foundation">Security Foundation</h2>
+      <p>
+        For 15 years, I built detection and response infrastructure at scale. SIEM architecture at Chromocell. QRadar deployment at Freedom Mortgage. Security operations at HarperCollins. Splunk infrastructure at Blackstone. Splunk Enterprise Security at Tinder, then across Match Group. The work was always the same pattern: identify the signals, classify the threats, build the detections, tune for false positives.
+      </p>
+      <p>
+        By the time I left Match Group, I had built that pattern from scratch at every company I'd worked for. Then I asked a question I couldn't answer with existing frameworks: what happens when the system being attacked isn't a network — it's a nervous system?
+      </p>
+
       <p>
         That question about BCI safety didn't come from a textbook. A B12 deficiency damaged my nervous system. I couldn't walk for months. My hands were uncontrollable. I didn't feel like myself. Once you've felt your own nervous system fail you, the idea of plugging a machine into that system carries weight. It also gave me something I didn't expect: a personal understanding of how the brain adapts, breaks, and heals. That perspective is what drives this work.
       </p>
@@ -91,10 +101,7 @@ import ObfuscatedEmail from '@/components/ObfuscatedEmail.astro';
 
       <h2 id="what-i-built">What I Built</h2>
       <p>
-        I catalogued BCI attack techniques from published literature: 60 at first, merged from three inventories. Then I asked: <em>what do computers and neurons actually have in common?</em> The answer was physics. Signals operating at different scales, from electromagnetic fields up through cortical oscillations. That became QIF's layered architecture.
-      </p>
-      <p>
-        When I mapped those techniques across the frequency bands, gaps appeared everywhere. The catalogue grew to 135. I traced each technique through neural pathways, cognitive functions, and psychiatric outcomes. CVSS wasn't built for this. It can't express whether damage is reversible or whether the patient can detect the violation. So I designed NISS for neural harm.
+        <strong>QIF</strong> — an 11-band security architecture for brain-computer interfaces, grounded in the physics shared by silicon and biology. <strong>TARA</strong> — a threat taxonomy of 135 catalogued attack techniques, each traced through neural pathways to clinical outcomes. <strong>NISS</strong> — a scoring system that extends CVSS for neural harm, capturing reversibility, patient awareness, and cognitive impact.
       </p>
       <p>
         <strong>78 of those 135 techniques have direct therapeutic counterparts.</strong> The same stimulation that causes involuntary motor activation as a side effect treats Parkinson's therapeutically. The boundary between risk and treatment is not the mechanism. It is consent, dosage, and oversight. That insight is what convinced me that BCI safety is fundamentally a governance problem, not just an engineering one.
@@ -111,13 +118,13 @@ import ObfuscatedEmail from '@/components/ObfuscatedEmail.astro';
       <h2 id="about-this-work">About This Work</h2>
       <div class="glass rounded-xl p-5 sm:p-6 my-4 not-prose" style="border-left: 4px solid var(--color-status-warning);">
         <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
-          <strong class="text-[var(--color-text-primary)]">Transparency notice.</strong> I am not a mathematician, physicist, or neuroscientist. I am a security engineer with ~15 years of IT and security infrastructure experience who recognized that brain-computer interfaces have no published security framework and decided to build one.
+          <strong class="text-[var(--color-text-primary)]">Transparency notice.</strong> I am a security architect with 15 years of threat modeling experience, not a neuroscientist. AI tools helped synthesize across domains, but the threat modeling methodology and governance architecture are mine. The neuroscience, physics, and clinical mappings require independent expert review.
         </p>
         <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
           AI tools (primarily Claude, with Gemini and ChatGPT for cross-validation) were used extensively throughout this project: for mathematical derivations, physics modeling, literature synthesis, code generation, and writing. Every AI-derived claim — especially equations, engineering benchmarks, and clinical mappings — should be treated as <strong>proposed and unvalidated</strong> until independently verified by domain experts.
         </p>
         <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-0">
-          What I bring is the security architecture, threat modeling methodology, and the question that started it all: <em>what happens to the person when their neural interface is compromised?</em> The framework, threat taxonomy, and governance structure are my contributions. The math and physics require expert review. This work is offered in good faith as a starting point for that review.
+          This work is offered in good faith as a starting point for expert review. The framework, threat taxonomy, and governance structure are my contributions. The math and physics need domain specialists to validate.
         </p>
       </div>
 
@@ -129,9 +136,13 @@ import ObfuscatedEmail from '@/components/ObfuscatedEmail.astro';
         The <a href="https://github.com/qinnovates/qinnovate/blob/main/governance/TRANSPARENCY.md">Transparency Statement</a> documents every AI interaction. The <a href="https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md">Derivation Log</a> traces 93 entries of human decision-making so any reviewer can follow the reasoning and challenge it.
       </p>
 
+      <p>
+        The long-term vision is a Neurosecurity Appliance — the same SIEM + firewall + detection engine pattern I built at every company, applied to the interface between silicon and biology.
+      </p>
+
       <h2 id="what-comes-next">What Comes Next</h2>
       <p>
-        I built the technical foundation. 135 techniques catalogued, scored, and mapped to clinical outcomes. An 11-band architecture grounded in physics. A scoring system that extends CVSS for neural harm. That foundation is open source and available for any research group to test, validate, or refute.
+        The technical foundation is in place: 135 techniques catalogued, scored, and mapped to clinical outcomes. An 11-band architecture grounded in physics. A scoring system that extends CVSS for neural harm. That foundation is open source and available for any research group to test, validate, or refute.
       </p>
       <p>
         What I want to focus on next is the policy layer: governance frameworks, consent models, regulatory alignment, and ethical guidelines that ensure BCI technologies are developed safely and equitably. That is why I'm pursuing a master's in Neuroethics and Bioethics. The technical work showed me where the risks are. Graduate study will help me understand how to build the protections.
