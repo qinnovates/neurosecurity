@@ -163,7 +163,6 @@ function EllipsePath() {
 
   return (
     <line>
-      {/* @ts-expect-error: R3F primitive line geometry */}
       <primitive object={geo} attach="geometry" />
       <lineBasicMaterial color="#4b5563" transparent opacity={0.3} />
     </line>

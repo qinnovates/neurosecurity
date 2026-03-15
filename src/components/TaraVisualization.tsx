@@ -92,7 +92,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
     const [activeTechnique, setActiveTechnique] = useState<ThreatVector | null>(null);
     const [viewMode, setViewMode] = useState<ViewMode>('modality');
     const [neurorightFilter, setNeurorightFilter] = useState<NeurorightCode | null>(null);
-    const [crbPopulation, setCrbPopulation] = useState(CRB_POPULATIONS[0]);
+    const [crbPopulation, setCrbPopulation] = useState<typeof CRB_POPULATIONS[number]>(CRB_POPULATIONS[0]);
     const [sortMode, setSortMode] = useState<SortMode>('default');
 
     // Derived: Group bands by zone

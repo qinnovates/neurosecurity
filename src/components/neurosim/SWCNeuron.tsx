@@ -175,7 +175,7 @@ export default function SWCNeuron({
         (current.y - cy) * scale,
         (current.z - cz) * scale,
       ));
-      const kids = children.get(current.id)?.filter(id => !visited.has(id));
+      const kids: number[] | undefined = children.get(current.id)?.filter(id => !visited.has(id));
       current = kids && kids.length > 0 ? nodeMap.get(kids[0]) : undefined;
     }
 

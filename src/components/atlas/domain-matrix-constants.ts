@@ -78,10 +78,10 @@ export const MODE_COLORS: Record<ModeCode, string> = {
   D: '#ef4444',
 };
 
-export const MODE_LABELS: Record<ModeCode, { security: string; clinical: string }> = {
-  R: { security: 'Reconnaissance', clinical: 'Recording' },
-  M: { security: 'Manipulation', clinical: 'Modulation' },
-  D: { security: 'Disruption', clinical: 'Damage' },
+export const MODE_LABELS: Record<ModeCode, Record<string, string>> = {
+  R: { security: 'Reconnaissance', clinical: 'Recording', both: 'Recon / Recording' },
+  M: { security: 'Manipulation', clinical: 'Modulation', both: 'Manip / Modulation' },
+  D: { security: 'Disruption', clinical: 'Damage', both: 'Disruption / Damage' },
 };
 
 // ═══ Technique → Domain Mapping ═══

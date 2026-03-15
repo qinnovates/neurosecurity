@@ -23,7 +23,8 @@
       "subjects": 79,
       "subjectBreakdown": "37 ADHD + 42 healthy controls, ages 20-68, 56M/23F",
       "paradigm": "Eyes open, eyes closed, cognitive challenge, sound listening",
-      "taraId": null,
+      "taraId": "QIF-T0001",
+      "taraRelevance": "Frontal theta elevation at Fz illustrates signal-level characteristics that a signal injection attack would produce (for threat modeling purposes). Note: theta/beta ratio alone is insufficient for ADHD diagnosis per AAN practice advisory (2016, PMID 27760867)",
       "notes": "CC BY 4.0 — freely redistributable with attribution. Subject 7 female ADHD group has corrupted signal. Published by Nasrabadi et al."
     },
     {
@@ -43,7 +44,8 @@
       "subjects": 121,
       "subjectBreakdown": "61 ADHD + 60 controls, ages 7-12, boys and girls",
       "paradigm": "Resting state, 10-20 standard montage",
-      "taraId": null,
+      "taraId": "QIF-T0001",
+      "taraRelevance": "Pediatric ADHD theta/beta ratio at frontal electrodes demonstrates what abnormal slow-wave injection would produce (for threat modeling purposes). Note: theta/beta ratio alone is insufficient for ADHD diagnosis per AAN practice advisory (2016, PMID 27760867)",
       "notes": "IEEE DataPort Open Access — requires IEEE account, no redistribution rights. DSM-IV diagnosed, Ritalin-treated up to 6 months."
     },
     {
@@ -83,7 +85,8 @@
       "subjects": 22,
       "subjectBreakdown": "22 pediatric (23 cases), 5M ages 3-22, 17F ages 1.5-19. 664 EDF files, 198 seizure events.",
       "paradigm": "Continuous monitoring, post-medication-withdrawal, seizure annotations in .seizures files",
-      "taraId": null,
+      "taraId": "QIF-T0025",
+      "taraRelevance": "Ictal onset patterns (high-amplitude delta, spike-wave complexes) represent what neuronal jamming would produce (for threat modeling purposes)",
       "notes": "Children's Hospital Boston / MIT. ODC-BY — freely redistributable. Gold standard for seizure detection research."
     },
     {
@@ -103,7 +106,8 @@
       "subjects": 197,
       "subjectBreakdown": "SC: 153 healthy adults 25-101 (1987-91). ST: 44 recordings, 22 subjects, temazepam study (1994).",
       "paradigm": "Whole-night PSG, sleep stage labels: W, N1, N2, N3, REM",
-      "taraId": null,
+      "taraId": "QIF-T0063",
+      "taraRelevance": "Sleep stage transitions show natural band power shifts; noise masking attacks would disrupt these detectable transitions (for threat modeling purposes)",
       "notes": "ODC-BY — freely redistributable. Standard benchmark for sleep staging algorithms."
     },
     {
@@ -123,7 +127,8 @@
       "subjects": 109,
       "subjectBreakdown": "109 volunteers, 1500+ recordings, BCI2000 system",
       "paradigm": "Real and imagined movement: left fist, right fist, both fists, both feet + baseline",
-      "taraId": null,
+      "taraId": "QIF-T0067,QIF-T0009",
+      "taraRelevance": "Motor imagery ERD (mu rhythm suppression at C3/C4) is the signal a replay attack would capture; resting alpha is the RF entrainment target (for threat modeling purposes)",
       "notes": "ODC-BY — freely redistributable. Already integrated in qif-lab/src/real_data.py via download_eegbci()."
     },
     {
@@ -163,7 +168,8 @@
       "subjects": 122,
       "subjectBreakdown": "Alcoholic (genetic predisposition) vs. control, visual stimulus paradigm",
       "paradigm": "Visual stimulus matching: 1-stimulus, match, no-match conditions",
-      "taraId": null,
+      "taraId": "QIF-T0001",
+      "taraRelevance": "Chronic exposure effects on ERP morphology illustrate long-term neural signal degradation patterns (for threat modeling purposes)",
       "notes": "CC BY 4.0 — freely redistributable. Often confused with ADHD in secondary sources; this is alcoholism data."
     },
     {

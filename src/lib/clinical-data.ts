@@ -156,7 +156,7 @@ function getPathways(): ClinicalPathway[] {
     therapeuticApplications: p.therapeutic_applications ?? [],
     confidence: p.confidence ?? 'MEDIUM',
   }));
-  return _pathwaysCache;
+  return _pathwaysCache!;
 }
 
 function getNeurotransmitters(): ClinicalNeurotransmitter[] {
@@ -188,7 +188,7 @@ function getNeurotransmitters(): ClinicalNeurotransmitter[] {
     keyEnzymes: (nt.synthesis_pathway ?? []).map((s: any) => s.enzyme_gene).filter(Boolean),
     confidence: nt.confidence ?? 'MEDIUM',
   }));
-  return _neurotransmittersCache;
+  return _neurotransmittersCache!;
 }
 
 function getRegions(): ClinicalRegion[] {
