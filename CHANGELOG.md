@@ -4,7 +4,14 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: 7ff1bbb6ad0113f9f6ed65ad4a24427af2ce0564 -->
+<!-- changelog-marker: b7843393e6cb4074844610ecda19a145e03fe508 -->
+
+## 2026-03-16
+
+### Fixed
+- update FUNDING.yml to personal GitHub account (qikevinl) ([b784339](https://github.com/qinnovates/qinnovate/commit/b784339))
+
+
 
 ## 2026-03-15
 
