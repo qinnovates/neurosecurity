@@ -1,21 +1,93 @@
 [
   {
     "type": "external",
-    "title": "[object Object]",
-    "date": "2026-03-15",
-    "url": "hxxps://www[.]fiercebiotech[.]com/medtech/china-approves-first-brain-computer-interface-implant-paralyzed-patients-sector-heats",
-    "source": "Fierce Biotech",
-    "summary": "Developed by the Shanghai-based Neuracle Technology, the system includes implanted EEG electrodes linked to a pneumatic, robotic glove that can grasp objects.",
+    "title": "STAT+: A brain-computer interface allowed people with paralysis to type with their minds",
+    "date": "2026-03-16",
+    "url": "hxxps://www[.]statnews[.]com/2026/03/16/brain-computer-interface/?utm_campaign=rss",
+    "source": "STAT News",
+    "summary": "Two people with paralysis were able to type using a brain-computer interface that decodes attempted finger movement, a new study showed.",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Noland explained how his Neuralink implant (Eve) works with threads in the motor cortex, it is reading neural patterns and maps them to cursor control. Now imagine scaling that to speech: more threads in the brain's speech centers could decode full sentence - x.com",
-    "date": "2026-03-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiYkFVX3lxTE9pbzB0RUZOQk1tcVNzRWo1N1pkSXc2dGFRUTdMbEhudF9HdERTUy1YdXhQZTZicDU3OW9UUVA2eHBqOFd6MVRXUmZnSlFSaVFhODVfVFIzdVoxWmcteFJRV0VR?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Noland explained how his Neuralink implant (Eve) works with threads in the motor cortex, it is reading neural patterns and maps them to cursor control. Now imagine scaling that to speech: more threads",
+    "title": "A brain-computer interface allowed people with paralysis to type with their mind - statnews.com",
+    "date": "2026-03-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMibkFVX3lxTE5HcC1qZ2Jkb0UwSWpFTWdHdGdRQjdyWjNsRjNldmxyNzY0T2R5TGx3bzQ2ZGpobG5GaVZrbklPRXM3ZjZTaGlVb0RfQWxzRzlDSExMM2t5cVVHdFJxU2FveUtlRDlxTGdCVWR1clNB?oc=5",
+    "source": "Google News — BCI",
+    "summary": "A brain-computer interface allowed people with paralysis to type with their mind&nbsp;&nbsp;statnews.com",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain computer interface enables rapid communication for two people with paralysis - Medical Xpress",
+    "date": "2026-03-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikAFBVV95cUxQcjNYeG9kR3VxLTJZVTFfN2xOOEQweC1BOUxrb2t4SjVybDNMOXdfeVpZLV9QMEoxYUJ3dlFEck56MWxhRzg5TWJ4LWJJb0NVZXduSmFDTDVRVUItaW45YXlBNExxTkF1dG0zQzRhOG5FVVNIZ3dpZ1FtakZwSHNnQ3BzSUttWmdQYjZXaDdGYm4?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain computer interface enables rapid communication for two people with paralysis&nbsp;&nbsp;Medical Xpress",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Noland Arbaugh, world’s first Neuralink user, to keynote Robotics Summit - The Robot Report",
+    "date": "2026-03-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxOa2JFSjRLZW1TcHNXWlNLVXdkUksySXZzenlVd01PSHo0SkV2T2F4ajkyRFBUYjE4dG5JLUlMTjE5eHdDbGdaUUcwdkVRcnMzUzdteS1abFdpS1RsV254VzdVd3dDMUxSV3JYc0p1Sk5yT3BybEZRbUJOOTZab1lHOHJ0Y0FEYktzaW1GTEpreXBScENUQmUxczFnMlN3TEQxV1lMaTdn?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Noland Arbaugh, world’s first Neuralink user, to keynote Robotics Summit&nbsp;&nbsp;The Robot Report",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China First to Approve Invasive BCI Device for Commercial Use - 조선일보",
+    "date": "2026-03-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPR2RYX2R2N3prY1JhamNrOFdjRHRrckVwX1AzZGF2RGI3RGdpQkNRcGNCN2E2djhZS3g1Ri04Q25CbUxudXl2aWVpenlYQjRkZVdrcjVjMEJaTVE2Uld1aDFTVWpPRnVJZjB3Sm55VFNla2tOQWJkcVBPbVRJWFRhUHc0dEFkak5C?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "China First to Approve Invasive BCI Device for Commercial Use&nbsp;&nbsp;조선일보",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China Approves World's First Invasive Brain-Computer Interface Device - 조선일보",
+    "date": "2026-03-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxOZ1lrRDFnZWx1WElwSm5IOVg5cVhlZXNGcnQ4bGppZl9xeWJWaUFPMF93cXZVSUFYUHpWQ09FRGg2SzB0amRDWDBzUF9ETUoxYko1RU80VFB6R0E3bmNnUXV3LTNMS2ZyUER6Y2Q3LXFVQXNna0l1cGRyOWp4QlFKWGo0ODZYWGUt?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "China Approves World's First Invasive Brain-Computer Interface Device&nbsp;&nbsp;조선일보",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Toward Robust, Reproducible, and Widely Accessible Intracranial Language Brain-Computer Interfaces: A Comprehensive Review of Neural Mechanisms, Hardware, Algorithms, Evaluation, Clinical Pathways and Future Directions",
+    "date": "2026-03-16",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]12279",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.12279v1 Announce Type: new Abstract: Intracranial language brain-computer interfaces (BCIs) are a promising route for restoring communication in people with severe motor and speech impairme",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "The DIME Architecture: A Unified Operational Algorithm for Neural Representation, Dynamics, Control and Integration",
+    "date": "2026-03-16",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]12286",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.12286v1 Announce Type: new Abstract: Modern neuroscience has accumulated extensive evidence on perception, memory, prediction, valuation, and consciousness, yet still lacks an explicit oper",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Formation of Artificial Neural Assemblies by Biologically Plausible Inhibition Mechanisms",
+    "date": "2026-03-16",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]12416",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.12416v1 Announce Type: new Abstract: As proposed by Hebb's theory, neural assemblies are groups of excitatory neurons that fire synchronously and exhibit high synaptic density, representing",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Towards unified brain-to-text decoding across speech production and perception",
+    "date": "2026-03-16",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]12628",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.12628v1 Announce Type: new Abstract: Speech production and perception are the main ways humans communicate daily. Prior brain-to-text decoding studies have largely focused on a single modal",
+    "category": "research"
   },
   {
     "type": "external",
@@ -24,15 +96,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxOWEJ5bHZNeUl3M3RQSjdfVEJGZnptbGVjTUIwZkZ0eGtrYVJqLVpVX1V4WW9FQUVkOFUwX3BNeDNzRFJJZWdtTTNlXzFocWRPNlVwakFtSV82TXdVZGtfcm9tamc2MnVWX3YtTFZUUEl0UXJSb2N1TU9EdWZpUGw3ZDYzLUh3elp2NV9JalhLRF9mMkY1WDJEMVdGRWpnNVBHQ1ZsVlFuRQ?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Has China beaten Elon Musk’s Neuralink to a commercial brain implant?&nbsp;&nbsp;Euronews.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China approves market launch of brain-computer interface medical device in world first - Reuters",
-    "date": "2026-03-13",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi5wFBVV95cUxQYVIzY19seFh0ZFBudTdBTTE1NnQ2eWZISVUzZFdGcFpPMHIyUlRJd2IxWXR0YVNDWk1PTmFTejNGUjZZUVRST29PZlRIdWVQOU9Zelh5cTI3Mk9kR3FtdGVjRXdHaWxEcFhqczlRallwY1dHNzJMZ0R6Z3dlQkczelpaWnp3MWpqdmJRdEVuZURuRU85WmN3TDRLUDJFQ3pEV3hxM0hxQk5VdzZ1aGdQVWMwODllXzlBV3lBQ25zNW5hWmI1MzIzVnhMY0t1TjY4emdHNFU0S2Z1MDR4VVdpUXpZTnJkX2s?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China approves market launch of brain-computer interface medical device in world first&nbsp;&nbsp;Reuters",
     "category": "neurotechnology"
   },
   {
@@ -64,15 +127,6 @@
   },
   {
     "type": "external",
-    "title": "In a first for China, Neuracle’s brain-computer interface wins approval - South China Morning Post",
-    "date": "2026-03-13",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMizwFBVV95cUxQdlhPRjRBZU8xTWluWm1GUGN4d1l0LTFpcWtYZHFsSE91M0plZFlleTgzNllZa2FmRFdrb0F6VU1sNjFrU0xsNndpeWhBZGN0MU8wWTd6N3lDUnpHSU9iQnQyWklsTU5rWG85RXozby1sYm5fd3ROWjh6LWNDTTNLMThjd1lrVUU2ZUhIYnBKNEtMWWhvM1dmSG15ME15bFVrNkctVTNTNDR3bkJXSG9DMlc5eUI3WWd3ZWk2VmhuMm40U21ZQ2dEYVl2ZGZlSVXSAc8BQVVfeXFMTWNRZm11dlE0SnBRcVl0NUJId1l0UjBPRlg0RDhNNlZMSW5nTW5ickZXamp6cGdBeGZ4eUJMRUs2eW5IRDI0czZWeGVYMkUwZ3NobHlFcS1zZnJxNFpZV3FNQW1kZXpnV3M4dVc4M3hkYXNjR1BWX2tDNXdpQW1JbGh6Q3NkQ1cybzV0aEJwNXZ1TmFNY0VlWFluTDhJaU5Eb2JWaDNPVjM1ODFyMUNCWXFVTFpWNEpNb2NUMUpXVS1VQ09mMlF2NEpKdTJrRjMw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "In a first for China, Neuracle’s brain-computer interface wins approval&nbsp;&nbsp;South China Morning Post",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Gestala: $21 Million Raised For Ultrasound Brain-Computer Interface Technology - Pulse 2.0",
     "date": "2026-03-13",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxNOVRpUW1ZbjI2bFFyVVp5ZFEzQXRIeE82dVhkTDJMWEdwbkVLRWM4bTNxMlg4Z0NzXzg3M21ZQXlrTmF4TlpHV0RqQmxTampoNkdwX0NxUEViYUhpUzVoWmFPZ1pCX0dSUkplbjFRWnZIQVZFRE9WMG9JajMzMVVhNzI0QWFrNThmTzBMYjkzQl9LczM2dDYtZnZMVXrSAaIBQVVfeXFMT0xXRDJuMTBaNV9LcnZFUmY0U1E0V1V1X3hfSng2cFRmbkhJcF9VZkgzOUZ6WUFlV1lVU0JleV9FTTFkdmhCSkJObHdZYzJSMEQwb1REVkFuOWQ3eVh6UGxOVUk0bWJSRDlfeDQ0dUpDMGNEa3hDM2VyVmNiaXE5dDVkWC12SURnNTJfWFhSNWk2SUVydlYwc1QwZGtUMWRrOE1n?oc=5",
@@ -100,15 +154,6 @@
   },
   {
     "type": "external",
-    "title": "Chinese ultrasound-based BCI startup Gestala raises $21.7M - MassDevice",
-    "date": "2026-03-12",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxNN1VVNzZ4Q0dnNzFqNDB4Z3ZfU2V5b0hzWjh5cXp4cTNqWW1BeGVJNXEwaTlScmJHdGNYb2RjSGlMVFBNVkZJamM4dUNLeGRkM3lGdkYyam1OU3BmTUlULUxxZEtuSEoybjU5eGt0YW4wTEdJcnhwZDZkY05xY1hvRk1pdU9uUmNDVGZaUlRB?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Chinese ultrasound-based BCI startup Gestala raises $21.7M&nbsp;&nbsp;MassDevice",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C - Crunchbase News",
     "date": "2026-03-05",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
@@ -123,15 +168,6 @@
     "url": "hxxps://spectrum[.]ieee[.]org/cyborg-stem-cell-therapy-for-diabetes",
     "source": "IEEE Spectrum",
     "summary": "Lab-grown cell therapies for diabetes are edging toward the clinic. Researchers can now coax stem cells to behave like pancreatic islets, the tiny clusters of cells that regulate blood sugar. But even",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Elon Musk's Neuralink plans $8.2M expansion, new hires in Texas - Austin American-Statesman",
-    "date": "2026-02-27",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimgFBVV95cUxPNTVvTENIR1F0WktJVzRRaWJla2twOXhJc0plZFpQTE1CMFVkLWVZTzNZamxtc2NtTFpTQjlneWx4SzBHTFA3WEN5eVJqdGVLSE5Ea3IzZFZSWlVvcjRWZjVpR1FPTlVmTkhLcWxERllPVWhDU3BKdnFUV3RQcF9mY3J3bjZHcmV4NGNWb2NuMzE4bFhLQlFqQ2hB?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk's Neuralink plans $8.2M expansion, new hires in Texas&nbsp;&nbsp;Austin American-Statesman",
     "category": "neurotechnology"
   },
   {
@@ -154,15 +190,6 @@
   },
   {
     "type": "external",
-    "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
-    "date": "2026-01-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology - CSIS | Center for Strategic and International Studies",
     "date": "2025-11-04",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPanNMOEN0Yy16RElvSXJjMk4zR25qd2tGQXhDZDI2cmo0Yk5kSmZNQXJfSnhQb0tOdUJUY3BOQlc0akVlOGZ5aGpBekVWd0NNV1R6enN5Q0RVRnFKX2JhSWRuVVA2MUNkNHJOd0k4NjRLdjZtVUxkZlluWFVUNU0zN21VajFiOW9Udl9aTjhTQ1dkSEphZTAtWVR5MU5ZalQySDdJWTFB?oc=5",
@@ -181,20 +208,20 @@
   },
   {
     "type": "external",
-    "title": "Congress Introduces Neural Data Bill - Inside Privacy",
-    "date": "2025-10-03",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxQcW5Tb0RFN2dJOE1rRmtJZjltdUVlNzhTdGpUN0U1Y1RIMVhJVllNWXZGc3ZBNGt1VHRqNWQ5YUx2dVFfZUxZRFZhRW9CbzNoLUk0VWdJY0kzczc3dTQ5X1NoOF9pYy1HR01OallOMFFHaC1pdlJ2U3NON0JzdGRfenNYYlhGYzJXdXc?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Congress Introduces Neural Data Bill&nbsp;&nbsp;Inside Privacy",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
     "title": "Senators ask FTC to study neurotechnology's promises, implications - IAPP",
     "date": "2025-10-03",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxNS3FBelpMZGNUWExYbEtEQzZtLXNYRGJnRjhsNjFTYTRrMHpMYW9iU2ZlM3JqM3BBendfblNmNHVNUURrNG4xNzlRNU1xLWN5ZmIzNVJSR1JBRTFBclU5NHFQMTUxLVQ2OEY4bVJJS3VRRFVFcm95NEZpbTRtY1lhWDdBdmJydTI2MHBLNVJvVkxUS0E?oc=5",
     "source": "Google News — MIND Act",
     "summary": "Senators ask FTC to study neurotechnology's promises, implications&nbsp;&nbsp;IAPP",
+    "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "Congress Introduces Neural Data Bill - Inside Privacy",
+    "date": "2025-10-03",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxQcW5Tb0RFN2dJOE1rRmtJZjltdUVlNzhTdGpUN0U1Y1RIMVhJVllNWXZGc3ZBNGt1VHRqNWQ5YUx2dVFfZUxZRFZhRW9CbzNoLUk0VWdJY0kzczc3dTQ5X1NoOF9pYy1HR01OallOMFFHaC1pdlJ2U3NON0JzdGRfenNYYlhGYzJXdXc?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Congress Introduces Neural Data Bill&nbsp;&nbsp;Inside Privacy",
     "category": "neuroethics"
   }
 ]
