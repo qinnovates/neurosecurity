@@ -1,29 +1,74 @@
 [
   {
     "type": "external",
-    "title": "STAT+: A brain-computer interface allowed people with paralysis to type with their minds",
-    "date": "2026-03-16",
-    "url": "hxxps://www[.]statnews[.]com/2026/03/16/brain-computer-interface/?utm_campaign=rss",
-    "source": "STAT News",
-    "summary": "Two people with paralysis were able to type using a brain-computer interface that decodes attempted finger movement, a new study showed.",
+    "title": "Paradromics kicks off BCI partnership program to advance tech - MassDevice",
+    "date": "2026-03-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMid0FVX3lxTE5wYlhDRHdtbmphanVZMGx6b2FNWjFZUEtwSDVQZS00OEk1Z21vTFlic1FnZGlLd3hacGdtWXdEVzlMeF9VMFRGTkxWd2FyaHVLaXVCYklaekxadzVya3VYdHN2Z3NZVm9ORC1pR3pjRWVXTTVYRWt3?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Paradromics kicks off BCI partnership program to advance tech&nbsp;&nbsp;MassDevice",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "A brain-computer interface allowed people with paralysis to type with their mind - statnews.com",
+    "title": "China Approves First Invasive BCI Device - 조선일보",
+    "date": "2026-03-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxOZ1lrRDFnZWx1WElwSm5IOVg5cVhlZXNGcnQ4bGppZl9xeWJWaUFPMF93cXZVSUFYUHpWQ09FRGg2SzB0amRDWDBzUF9ETUoxYko1RU80VFB6R0E3bmNnUXV3LTNMS2ZyUER6Y2Q3LXFVQXNna0l1cGRyOWp4QlFKWGo0ODZYWGUt?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China Approves First Invasive BCI Device&nbsp;&nbsp;조선일보",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "First Neuralink patient explains living one year with brain chip | Elizabeth Vargas Reports - KXAN Austin",
+    "date": "2026-03-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi5gFBVV95cUxNQnY2dDUyZnktLU11TW9PUjFIZERMNVFTUDBOeDRUV1VXYmNfbFRyZkNfajdDSWlzVUs1Qlpaa29GRDFzUHZtR2VfSzNGeERGZDdaQjhoYVNielJfTjh5bUFoU1dkTE9NMUwwVk5OVlR5SHcyQW9hT1BsRFVHS2dlRFNHRnRtdy1IX1RLcnNiQklJeVFiNGY3dmpXVG03dWE0SFlFUnVqUXk5ajhXTEJ1UVhaOWNqSmpqLUhHaTNIVE1lN2l3LUw5Nk0yUGdHaGNDM0c1THRhREN6dkV3TlpmdWljOGxzdw?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "First Neuralink patient explains living one year with brain chip | Elizabeth Vargas Reports&nbsp;&nbsp;KXAN Austin",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "BCMI-Driven Motion Control Detection: EEG-Based Machine Learning and Interaction Entropy for High-Order Brain Networks",
+    "date": "2026-03-17",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]15208",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.15208v1 Announce Type: new Abstract: This study investigates the cognitive motor control detection and the underlying neuroregulatory mechanisms during music-assisted simulated driving. Usi",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "The Neuroscience of Transformers",
+    "date": "2026-03-17",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]15339",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.15339v1 Announce Type: new Abstract: Neuroscience has long informed the development of artificial neural networks, but the success of modern architectures invites, in turn, the converse: ca",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "A brain-computer interface allowed people with paralysis to type with their minds - statnews.com",
     "date": "2026-03-16",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMibkFVX3lxTE5HcC1qZ2Jkb0UwSWpFTWdHdGdRQjdyWjNsRjNldmxyNzY0T2R5TGx3bzQ2ZGpobG5GaVZrbklPRXM3ZjZTaGlVb0RfQWxzRzlDSExMM2t5cVVHdFJxU2FveUtlRDlxTGdCVWR1clNB?oc=5",
     "source": "Google News — BCI",
-    "summary": "A brain-computer interface allowed people with paralysis to type with their mind&nbsp;&nbsp;statnews.com",
+    "summary": "A brain-computer interface allowed people with paralysis to type with their minds&nbsp;&nbsp;statnews.com",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Brain computer interface enables rapid communication for two people with paralysis - Medical Xpress",
+    "title": "China Clears First Brain-Computer Implant for Commercial Use - Sixth Tone",
     "date": "2026-03-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikAFBVV95cUxQcjNYeG9kR3VxLTJZVTFfN2xOOEQweC1BOUxrb2t4SjVybDNMOXdfeVpZLV9QMEoxYUJ3dlFEck56MWxhRzg5TWJ4LWJJb0NVZXduSmFDTDVRVUItaW45YXlBNExxTkF1dG0zQzRhOG5FVVNIZ3dpZ1FtakZwSHNnQ3BzSUttWmdQYjZXaDdGYm4?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiT0FVX3lxTE1mTERTMXMtSTVxZFBiZ21mMnBEclYxaW9qb3hxaEkyY2EzbmZWTUl0YXVBeGxpZkJ3ZVlQamhOa2JNek1vV25DdEhHNUMtakU?oc=5",
     "source": "Google News — BCI",
-    "summary": "Brain computer interface enables rapid communication for two people with paralysis&nbsp;&nbsp;Medical Xpress",
+    "summary": "China Clears First Brain-Computer Implant for Commercial Use&nbsp;&nbsp;Sixth Tone",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain implant allows people who are paralyzed to type using their thoughts at speed of texting - Scientific American",
+    "date": "2026-03-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiugFBVV95cUxNX3BwdkNneHJ4X25FSmlvYk5JT01PVmJFaVpYSzJnVWVJNUpmLTV5Vy1pZ3ZxR292TzhZVWZENVYySDAxb0M0c0lpdExXWmhOUjR3TG82ZWdQQVVZNEU3ZHhQdEVtR2ZLaDhYZmp0dUNPLWRtcFVTOE9XLWJDMU5iMldVb29jS2NHd1ZLbS16MjVqODlNNE0xX1RVQzdMU1dQZ3BqUXlBc3ByenQzZkFFSmRhVDJELTVMYWc?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain implant allows people who are paralyzed to type using their thoughts at speed of texting&nbsp;&nbsp;Scientific American",
     "category": "neurotechnology"
   },
   {
@@ -37,92 +82,11 @@
   },
   {
     "type": "external",
-    "title": "China First to Approve Invasive BCI Device for Commercial Use - 조선일보",
-    "date": "2026-03-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPR2RYX2R2N3prY1JhamNrOFdjRHRrckVwX1AzZGF2RGI3RGdpQkNRcGNCN2E2djhZS3g1Ri04Q25CbUxudXl2aWVpenlYQjRkZVdrcjVjMEJaTVE2Uld1aDFTVWpPRnVJZjB3Sm55VFNla2tOQWJkcVBPbVRJWFRhUHc0dEFkak5C?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "China First to Approve Invasive BCI Device for Commercial Use&nbsp;&nbsp;조선일보",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China Approves World's First Invasive Brain-Computer Interface Device - 조선일보",
-    "date": "2026-03-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxOZ1lrRDFnZWx1WElwSm5IOVg5cVhlZXNGcnQ4bGppZl9xeWJWaUFPMF93cXZVSUFYUHpWQ09FRGg2SzB0amRDWDBzUF9ETUoxYko1RU80VFB6R0E3bmNnUXV3LTNMS2ZyUER6Y2Q3LXFVQXNna0l1cGRyOWp4QlFKWGo0ODZYWGUt?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "China Approves World's First Invasive Brain-Computer Interface Device&nbsp;&nbsp;조선일보",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Toward Robust, Reproducible, and Widely Accessible Intracranial Language Brain-Computer Interfaces: A Comprehensive Review of Neural Mechanisms, Hardware, Algorithms, Evaluation, Clinical Pathways and Future Directions",
-    "date": "2026-03-16",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]12279",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.12279v1 Announce Type: new Abstract: Intracranial language brain-computer interfaces (BCIs) are a promising route for restoring communication in people with severe motor and speech impairme",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "The DIME Architecture: A Unified Operational Algorithm for Neural Representation, Dynamics, Control and Integration",
-    "date": "2026-03-16",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]12286",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.12286v1 Announce Type: new Abstract: Modern neuroscience has accumulated extensive evidence on perception, memory, prediction, valuation, and consciousness, yet still lacks an explicit oper",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Formation of Artificial Neural Assemblies by Biologically Plausible Inhibition Mechanisms",
-    "date": "2026-03-16",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]12416",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.12416v1 Announce Type: new Abstract: As proposed by Hebb's theory, neural assemblies are groups of excitatory neurons that fire synchronously and exhibit high synaptic density, representing",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Towards unified brain-to-text decoding across speech production and perception",
-    "date": "2026-03-16",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]12628",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.12628v1 Announce Type: new Abstract: Speech production and perception are the main ways humans communicate daily. Prior brain-to-text decoding studies have largely focused on a single modal",
-    "category": "research"
-  },
-  {
-    "type": "external",
     "title": "Has China beaten Elon Musk’s Neuralink to a commercial brain implant? - Euronews.com",
     "date": "2026-03-14",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxOWEJ5bHZNeUl3M3RQSjdfVEJGZnptbGVjTUIwZkZ0eGtrYVJqLVpVX1V4WW9FQUVkOFUwX3BNeDNzRFJJZWdtTTNlXzFocWRPNlVwakFtSV82TXdVZGtfcm9tamc2MnVWX3YtTFZUUEl0UXJSb2N1TU9EdWZpUGw3ZDYzLUh3elp2NV9JalhLRF9mMkY1WDJEMVdGRWpnNVBHQ1ZsVlFuRQ?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Has China beaten Elon Musk’s Neuralink to a commercial brain implant?&nbsp;&nbsp;Euronews.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China Approves First Brain Implant for Commercial Use - Bloomberg.com",
-    "date": "2026-03-13",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxQWnlHc3F3TzgyelBLU1VfVWtkT3doUXVFOFUyTE5jUk5uR3BXeFlQTjhjNkNOVko3T3BucWpiYWplM0JnbWYxbDB4OVJfR3V4SHBtNGhvZURwY2tVcEZnaUxvZG03dG1MOWJmV0ZxeUYzbXJzOUcweGxIY1NJa2tnNWhpcnpzNm5YbllkTmVZaVFoZlJtSFQxTm5CS0hSaTZxa1VCekxMaw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China Approves First Brain Implant for Commercial Use&nbsp;&nbsp;Bloomberg.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China just approved its first brain implant for commercial use, a world first - Scientific American",
-    "date": "2026-03-13",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivAFBVV95cUxObEsxc2pCMnRadUdaR3BJczZKWVNCVW5pdUQ0SVJOUVVKNU8xZGNlOE5qMDNmck5JcnZnZ01hWF80dXd1UGZ5TVZrTmV4azNXRWpXcG9GZExEa29rbXlrb3lHWm4yZTRnWE5HRUVQdFFrQXJFYzJQbUQwU2pXU1NrZ1V3NmhySUlPZThQb0FhYkEyV1JBSjE5eWpCal9WelFOU0tqUGNnVWVtQlZicnVXOW5aZDRsTHprY3lOLQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China just approved its first brain implant for commercial use, a world first&nbsp;&nbsp;Scientific American",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China approves first brain-computer interface implant for paralyzed patients, as sector heats up - Fierce Biotech",
-    "date": "2026-03-13",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxPbkttQjlBa0UwbVY0MXlqaUhhWVQycG5haV90NWoyZmh1am1DcF92Ni1uTnVFRXlSVU5SVEZ6YXJVNEZZZWVIUmdCNTJQNzJaT0p5a2haUWJtT1BndmJjcUYyWUhDdkdfTTBlbXNiS216dy1DOGU5U0sxWjE5Y014N3FWaFJWakNldERKcmpoOWhFOUd5MFdKQ1pnMGFWNFl4cDlXaVcxbHRQVlJTcFNELUN3SVg1VVVxXzNtQ09Halk?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China approves first brain-computer interface implant for paralyzed patients, as sector heats up&nbsp;&nbsp;Fierce Biotech",
     "category": "neurotechnology"
   },
   {
@@ -187,6 +151,15 @@
     "source": "Google News — MIND Act",
     "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
     "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
+    "date": "2026-01-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
