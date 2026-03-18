@@ -1,0 +1,303 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="BCI Security Plugin — Qinnovate"
+  description="Open-source BCI security toolkit for AI coding platforms. Threat modeling, vulnerability scoring, PII detection, regulatory compliance, and neuroethics compliance for brain-computer interfaces."
+  breadcrumbs={[{ label: 'BCI', href: '/bci/directory/' }, { label: 'Security Plugin' }]}
+>
+  <div class="max-w-4xl">
+
+    <!-- Hero -->
+    <div class="mb-12">
+      <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3">BCI Security Plugin</h1>
+      <p class="text-base mb-6" style="color: var(--color-text-muted);">
+        Open-source security toolkit for AI coding platforms. Scans BCI code, detects PII in neural data, generates compliance reports, and enforces neuroethics guardrails. Works with any AI agent that can read files and follow structured prompts.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="https://github.com/qinnovates/bci-security" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors" style="background: var(--color-accent); color: white;">
+          GitHub Repository
+        </a>
+        <a href="/data-studio/eeg" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); color: var(--color-text-primary);">
+          EEG Data Studio
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Start -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Test It Today</h2>
+      <p class="text-sm mb-4" style="color: var(--color-text-muted);">No BCI device needed. The plugin ships with pre-tagged sample data from open research.</p>
+
+      <div class="p-5 rounded-xl border mb-6" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <h3 class="font-semibold mb-3" style="color: var(--color-text-primary);">Install</h3>
+        <pre class="text-sm overflow-x-auto p-3 rounded-lg mb-3" style="background: var(--color-bg-primary);"><code>git clone https://github.com/qinnovates/bci-security.git</code></pre>
+        <p class="text-xs mb-2" style="color: var(--color-text-muted);"><strong>Claude Code:</strong></p>
+        <pre class="text-sm overflow-x-auto p-3 rounded-lg mb-3" style="background: var(--color-bg-primary);"><code>claude plugins install --scope user ./bci-security</code></pre>
+        <p class="text-xs" style="color: var(--color-text-muted);"><strong>Other AI platforms:</strong> The plugin is pure markdown and JSON. No compiled code, no dependencies. Copy the skills/ directory contents into your platform's skill format, or paste SKILL.md instructions directly into your AI conversation with the relevant data JSON.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <code class="text-sm font-mono" style="color: var(--color-accent);">/bci-scan --demo</code>
+          <p class="text-xs mt-2" style="color: var(--color-text-muted);">Scan sample ADHD research data. See all 7 detection rules catch transport, PII, credential, ML, and stimulation issues.</p>
+        </div>
+        <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <code class="text-sm font-mono" style="color: var(--color-accent);">/bci anonymize --demo</code>
+          <p class="text-xs mt-2" style="color: var(--color-text-muted);">Scan neural data files for PII in headers, filenames, and metadata. Get anonymization scripts.</p>
+        </div>
+        <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <code class="text-sm font-mono" style="color: var(--color-accent);">/bci compliance --demo</code>
+          <p class="text-xs mt-2" style="color: var(--color-text-muted);">Map findings to GDPR, CCPA, Chile Neurorights, UNESCO, Mind Act, and HIPAA.</p>
+        </div>
+        <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <code class="text-sm font-mono" style="color: var(--color-accent);">/bci explain QIF-T0001</code>
+          <p class="text-xs mt-2" style="color: var(--color-text-muted);">Look up any of 135 TARA threat techniques with three layers of detail.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What It Does -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Capabilities</h2>
+      <div class="space-y-3">
+        <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="font-semibold text-sm mb-1" style="color: var(--color-text-primary);">7 Code Scanning Rules</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">Transport encryption, data storage PII, API credentials, regulatory PII, ML model security, stimulation safety bounds, MNE/NWB pipeline security</p>
+        </div>
+        <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="font-semibold text-sm mb-1" style="color: var(--color-text-primary);">BCI Data Anonymizer</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">Scans EDF, BDF, XDF, FIF, NWB, GDF, CSV, MAT files for PII. Checks filenames, headers, subject metadata. Generates pyedflib, MNE, and pynwb remediation scripts.</p>
+        </div>
+        <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="font-semibold text-sm mb-1" style="color: var(--color-text-primary);">Regulatory Compliance Reports</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">9 compliance domains mapped to GDPR, CCPA, Chile Neurorights, UNESCO Recommendation, Mind Act, and HIPAA. 18 PII detection patterns with remediation roadmaps.</p>
+        </div>
+        <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="font-semibold text-sm mb-1" style="color: var(--color-text-primary);">135 TARA Threat Techniques</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">Full threat catalog with NISS severity scoring (6 neural-specific dimensions), evidence tiers, therapeutic analogs, and defensive controls per QIF hourglass band.</p>
+        </div>
+        <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="font-semibold text-sm mb-1" style="color: var(--color-text-primary);">Security Hardrails</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">Guardrails (8 neuroethics constraints, regulatory mappings, status qualifiers) + Hardening (10 credential regex patterns, prompt injection defense, report sanitization, consent gate, pre-commit hook).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADHD vs ASD -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">ADHD vs ASD: EEG Differences for Threat Modeling</h2>
+      <p class="text-sm mb-4" style="color: var(--color-text-muted);">Different neurodevelopmental conditions produce different signal environments. TARA techniques affect ADHD and ASD users differently. The sample data includes both conditions so threat models account for population-specific risk profiles. These are EEG pattern references for threat modeling purposes, not diagnostic markers.</p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs border-collapse">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <th class="text-left p-2 font-semibold" style="color: var(--color-text-primary);">EEG Marker</th>
+              <th class="text-left p-2 font-semibold" style="color: var(--color-text-primary);">ADHD</th>
+              <th class="text-left p-2 font-semibold" style="color: var(--color-text-primary);">ASD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td class="p-2" style="color: var(--color-text-muted);">Gamma at rest</td>
+              <td class="p-2" style="color: var(--color-text-muted);">Nothing notable</td>
+              <td class="p-2" style="color: var(--color-text-muted);">Elevated (g=0.37) — strongest ASD-specific power marker</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td class="p-2" style="color: var(--color-text-muted);">Theta at Cz</td>
+              <td class="p-2" style="color: var(--color-text-muted);">Elevated in subgroup</td>
+              <td class="p-2" style="color: var(--color-text-muted);">No deviation</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td class="p-2" style="color: var(--color-text-muted);">Alpha</td>
+              <td class="p-2" style="color: var(--color-text-muted);">Coherence disrupted</td>
+              <td class="p-2" style="color: var(--color-text-muted);">Power reduced globally</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td class="p-2" style="color: var(--color-text-muted);">P300 latency</td>
+              <td class="p-2" style="color: var(--color-text-muted);">Prolonged</td>
+              <td class="p-2" style="color: var(--color-text-muted);">Normal (amplitude reduced only)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td class="p-2" style="color: var(--color-text-muted);">N170 face ERP</td>
+              <td class="p-2" style="color: var(--color-text-muted);">Normal (gaze-specific only)</td>
+              <td class="p-2" style="color: var(--color-text-muted);">Broadly delayed — most replicated ASD ERP finding</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td class="p-2" style="color: var(--color-text-muted);">Connectivity</td>
+              <td class="p-2" style="color: var(--color-text-muted);">Alpha-band frontal disruption</td>
+              <td class="p-2" style="color: var(--color-text-muted);">Long-range underconnectivity across multiple bands</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs mt-3" style="color: var(--color-text-muted);">
+        A TARA technique operating in gamma at rest hits an elevated baseline in ASD but not ADHD. A technique timed to P300 windows hits delayed responses in ADHD but normal timing in ASD. Coherence patterns are structurally different: ADHD disrupts alpha frontal networks, ASD disrupts broader temporal-frontal pathways.
+      </p>
+    </section>
+
+    <!-- Sample Data -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Sample EEG Data</h2>
+      <p class="text-sm mb-4" style="color: var(--color-text-muted);">Qinnovate compiled and pre-tagged these samples from published open-access research. All datasets are anonymized metadata and configuration only. No raw EEG signal data is distributed through the plugin.</p>
+
+      <div class="overflow-x-auto mb-4">
+        <table class="w-full text-xs border-collapse">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <th class="text-left p-2 font-semibold" style="color: var(--color-text-primary);">Dataset</th>
+              <th class="text-left p-2 font-semibold" style="color: var(--color-text-primary);">Subjects</th>
+              <th class="text-left p-2 font-semibold" style="color: var(--color-text-primary);">Channels</th>
+              <th class="text-left p-2 font-semibold" style="color: var(--color-text-primary);">DSM-5</th>
+              <th class="text-left p-2 font-semibold" style="color: var(--color-text-primary);">License</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td class="p-2" style="color: var(--color-text-muted);">ADHD Adult Resting State</td>
+              <td class="p-2" style="color: var(--color-text-muted);">79 (37 ADHD + 42 controls)</td>
+              <td class="p-2" style="color: var(--color-text-muted);">5</td>
+              <td class="p-2" style="color: var(--color-text-muted);">F90.0</td>
+              <td class="p-2" style="color: var(--color-text-muted);">CC BY 4.0</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td class="p-2" style="color: var(--color-text-muted);">ADHD Children</td>
+              <td class="p-2" style="color: var(--color-text-muted);">121 (61 ADHD + 60 controls)</td>
+              <td class="p-2" style="color: var(--color-text-muted);">19</td>
+              <td class="p-2" style="color: var(--color-text-muted);">F90.0</td>
+              <td class="p-2" style="color: var(--color-text-muted);">Academic</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td class="p-2" style="color: var(--color-text-muted);">ADHD Focus + Gameplay</td>
+              <td class="p-2" style="color: var(--color-text-muted);">ADHD during tasks</td>
+              <td class="p-2" style="color: var(--color-text-muted);">14</td>
+              <td class="p-2" style="color: var(--color-text-muted);">F90.0</td>
+              <td class="p-2" style="color: var(--color-text-muted);">Academic</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-sm mb-2" style="color: var(--color-text-muted);">
+        Explore all 16 datasets in the <a href="/data-studio/eeg" class="underline" style="color: var(--color-accent);">EEG Data Studio</a>. Filter by condition (ADHD, epilepsy, motor imagery, emotion), type (real, synthetic, simulated attack), or search by DSM-5 code.
+      </p>
+    </section>
+
+    <!-- Device Integration -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Device Integration</h2>
+      <p class="text-sm mb-4" style="color: var(--color-text-muted);">The plugin scans code that connects to devices. It does not connect to devices directly. Community-supported integrations based on open-source SDKs. QInnovate is not affiliated with any device manufacturer.</p>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <div class="p-3 rounded-lg border text-center" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="text-sm font-semibold" style="color: var(--color-text-primary);">OpenBCI</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">Cyton, Ganglion, Daisy</p>
+        </div>
+        <div class="p-3 rounded-lg border text-center" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="text-sm font-semibold" style="color: var(--color-text-primary);">BrainFlow</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">20+ board support</p>
+        </div>
+        <div class="p-3 rounded-lg border text-center" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="text-sm font-semibold" style="color: var(--color-text-primary);">MNE-Python</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">Research analysis</p>
+        </div>
+        <div class="p-3 rounded-lg border text-center" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="text-sm font-semibold" style="color: var(--color-text-primary);">NWB / pynwb</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">DANDI Archive</p>
+        </div>
+        <div class="p-3 rounded-lg border text-center" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="text-sm font-semibold" style="color: var(--color-text-primary);">Emotiv</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">CortexPy API</p>
+        </div>
+        <div class="p-3 rounded-lg border text-center" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="text-sm font-semibold" style="color: var(--color-text-primary);">LSL</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">Lab Streaming Layer</p>
+        </div>
+      </div>
+
+      <p class="text-xs mt-4 p-3 rounded-lg" style="background: var(--color-bg-secondary); color: var(--color-text-muted);">
+        <strong>Security notice:</strong> Before connecting any BCI device to an AI-assisted analysis pipeline, ensure your network is secure and segmented. Have security experts review your integration and compliance experts review regulatory requirements. If your institution is using an AI coding platform for BCI research, they have likely already performed the necessary security reviews and compliance checks for that platform's data processing agreement. See the <a href="https://github.com/qinnovates/bci-security/blob/main/docs/INTEGRATION.md" target="_blank" rel="noopener noreferrer" class="underline" style="color: var(--color-accent);">full Integration Guide</a> for details.
+      </p>
+    </section>
+
+    <!-- Security Hardrails -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Security Hardrails</h2>
+      <p class="text-sm mb-4" style="color: var(--color-text-muted);">Hardrails = guardrails (ethical constraints) + hardening (technical enforcement). Both layers apply to every scan, report, and assessment.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="font-semibold text-sm mb-2" style="color: var(--color-text-primary);">Guardrails</div>
+          <ul class="text-xs space-y-1" style="color: var(--color-text-muted);">
+            <li>8 neuroethics constraints from published literature</li>
+            <li>6 regulatory frameworks (GDPR, CCPA, Chile, UNESCO, Mind Act, HIPAA)</li>
+            <li>Status qualifiers on all QIF references</li>
+            <li>Dual-use framing: every threat paired with defense</li>
+          </ul>
+        </div>
+        <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="font-semibold text-sm mb-2" style="color: var(--color-text-primary);">Hardening</div>
+          <ul class="text-xs space-y-1" style="color: var(--color-text-muted);">
+            <li>10 credential regex patterns (zero-tolerance redaction)</li>
+            <li>17-keyword prompt injection defense</li>
+            <li>7-rule report sanitization with self-verification</li>
+            <li>Neural data consent gate</li>
+            <li>Pre-commit hook blocking secrets and session artifacts</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Caveats -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">What This Is and What It Isn't</h2>
+      <p class="text-sm mb-3" style="color: var(--color-text-muted);">
+        This plugin is designed for reviewing anonymized BCI data with AI coding agents. It performs clinical and threat mapping based on patterns that research labs derive from their own data. Qinnovate provides pre-tagged samples from open research so you can test. The plugin is modular: use one skill or all eight.
+      </p>
+      <ul class="text-xs space-y-1 mb-4" style="color: var(--color-text-muted);">
+        <li>Research tool, not a medical device</li>
+        <li>Not legal advice — compliance mappings are simplified for threat modeling</li>
+        <li>"No issues detected" does not mean "compliant"</li>
+        <li>All findings require independent verification by qualified professionals</li>
+        <li>TARA and NISS are proposed frameworks, not adopted standards</li>
+      </ul>
+      <p class="text-sm" style="color: var(--color-text-muted);">
+        <a href="https://github.com/qinnovates/bci-security/blob/main/LEGAL.md" target="_blank" rel="noopener noreferrer" class="underline" style="color: var(--color-accent);">Full legal notices and privacy disclaimer</a>
+      </p>
+    </section>
+
+    <!-- Links -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Documentation</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <a href="https://github.com/qinnovates/bci-security" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="text-sm font-semibold mb-1" style="color: var(--color-text-primary);">README</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">Installation, commands, quick start</p>
+        </a>
+        <a href="https://github.com/qinnovates/bci-security/blob/main/docs/SAFETY.md" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="text-sm font-semibold mb-1" style="color: var(--color-text-primary);">SAFETY.md</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">Security specification, trust model, credential patterns</p>
+        </a>
+        <a href="https://github.com/qinnovates/bci-security/blob/main/docs/ARCHITECTURE.md" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="text-sm font-semibold mb-1" style="color: var(--color-text-primary);">ARCHITECTURE.md</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">Component map, data flow, hardrails model</p>
+        </a>
+        <a href="https://github.com/qinnovates/bci-security/blob/main/docs/INTEGRATION.md" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="text-sm font-semibold mb-1" style="color: var(--color-text-primary);">INTEGRATION.md</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">OpenBCI, BrainFlow, MNE, NWB, Emotiv, LSL</p>
+        </a>
+        <a href="https://github.com/qinnovates/bci-security/blob/main/LEGAL.md" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="text-sm font-semibold mb-1" style="color: var(--color-text-primary);">LEGAL.md</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">Legal notices, privacy, liability limitations</p>
+        </a>
+        <a href="/data-studio/eeg" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+          <div class="text-sm font-semibold mb-1" style="color: var(--color-text-primary);">EEG Data Studio</div>
+          <p class="text-xs" style="color: var(--color-text-muted);">Browse 16 EEG datasets, filter by condition</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</PageLayout>
