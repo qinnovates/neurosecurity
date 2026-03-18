@@ -11,14 +11,14 @@ import PageLayout from '@/layouts/PageLayout.astro';
     <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-8">Privacy Policy</h1>
 
     <div class="max-w-3xl space-y-8">
-      <p class="text-sm text-[var(--color-text-faint)]">Last updated: March 14, 2026</p>
+      <p class="text-sm text-[var(--color-text-faint)]">Last updated: March 18, 2026</p>
 
       <p>Plain language. No legalese. Here's exactly what happens with your data when you use qinnovate.com or any qinnovate tool.</p>
 
       <!-- Who we are -->
       <section>
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Who we are</h2>
-        <p>Qinnovate is a personal open-source research project maintained by Kevin Qi. It is not a company or registered business entity. All tools are provided under the Apache 2.0 license.</p>
+        <p>Qinnovate is a personal open-source research project maintained by Kevin Qi. It is not a company or registered business entity. Tools are provided under the Apache 2.0 or MIT license.</p>
         <p class="mt-2">Contact: Open an issue at <a href="https://github.com/qinnovates/qinnovate/issues" class="text-[var(--color-accent)] hover:underline">github.com/qinnovates/qinnovate/issues</a> or reach out through the <a href="/about" class="text-[var(--color-accent)] hover:underline">About page</a>.</p>
       </section>
 
@@ -96,12 +96,33 @@ import PageLayout from '@/layouts/PageLayout.astro';
         <p class="mt-2">Full technical details: <a href="https://github.com/qinnovates/quorum/blob/main/docs/SAFETY.md" class="text-[var(--color-accent)] hover:underline">SAFETY.md on GitHub</a></p>
       </section>
 
+      <!-- Engram -->
+      <section>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Engram (AI memory compression plugin)</h2>
+        <p class="mb-4">Engram compresses, indexes, and optionally encrypts your AI assistant's memory artifacts. All processing is local.</p>
+        <ul class="space-y-2 list-disc pl-6">
+          <li><strong>No data leaves your machine.</strong> Zero telemetry. No network calls. No cloud dependency.</li>
+          <li><strong>Compression:</strong> Reads your AI session files, compresses them locally, stores compressed versions alongside or in place of originals.</li>
+          <li><strong>Semantic index:</strong> Extracts keywords and summaries from your files, stored locally at <code>~/.engram/semantic-index.json</code>. Never transmitted.</li>
+          <li><strong>Encryption (optional):</strong> Uses the <code>age</code> encryption tool with ML-KEM-768 post-quantum cryptography. Private keys are stored in your macOS Keychain or your chosen vault — never by Engram, never transmitted, never stored on disk as files.</li>
+          <li><strong>Rust crypto sidecar:</strong> The <code>engram-vault</code> binary handles all private key operations. Keys enter only the sidecar's locked memory, never Python's address space.</li>
+          <li><strong>Audit logging (opt-in, disabled by default):</strong> If enabled, logs operation type, tier, and a 6-character hash prefix. Never logs file paths, content, queries, keys, or PII. Regex-based secret detection blocks any log line matching known secret patterns.</li>
+        </ul>
+        <p class="mt-4">Source code: <a href="https://github.com/qinnovates/engram" class="text-[var(--color-accent)] hover:underline">github.com/qinnovates/engram</a></p>
+      </section>
+
       <!-- Other tools -->
       <section>
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Other qinnovate tools</h2>
-        <ul class="space-y-2 list-disc pl-6">
-          <li><strong>NeuroSIM:</strong> Runs locally. No data leaves your machine. No telemetry.</li>
-          <li><strong>macshield:</strong> Runs locally. No telemetry. No network calls to qinnovate.</li>
+        <p class="mb-4">All tools run locally with no telemetry and no network calls to qinnovate unless stated otherwise.</p>
+        <ul class="space-y-4 list-disc pl-6">
+          <li><strong>Open Neural Atlas (NeuroSIM):</strong> Interactive 3D brain visualization. Runs in-browser. No data collection. No accounts.</li>
+          <li><strong>macshield:</strong> macOS network-aware hardening. Runs locally. No telemetry. No network calls to qinnovate.</li>
+          <li><strong>qtara:</strong> Python SDK for TARA registry management. Runs locally. Fetches public JSON data from qinnovate.com API endpoints (no authentication, no personal data transmitted).</li>
+          <li><strong>Neurowall:</strong> Neural firewall prototype. Runs on local hardware (OpenBCI). No cloud dependency. No data transmitted.</li>
+          <li><strong>QIF-LiDAR:</strong> iPhone depth sensing for vision prosthesis research. Runs on-device. Camera data stays on your phone. No cloud upload.</li>
+          <li><strong>Dogma (in development):</strong> Pet wellness tracker. When released, will process data on-device. Privacy policy will be updated before release.</li>
+          <li><strong>BCI Security plugin:</strong> Claude Code plugin for BCI threat analysis. Same privacy model as Quorum — queries processed by Anthropic, qinnovate never sees your data.</li>
         </ul>
       </section>
 
