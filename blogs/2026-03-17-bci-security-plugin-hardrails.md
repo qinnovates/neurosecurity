@@ -160,7 +160,7 @@ None of this replaces clinical judgment. EEG biomarkers for neurodevelopmental c
 
 The BCI security angle: if EEG-based diagnostic tools become clinical reality, the neural data they collect is among the most sensitive health data imaginable. A recording that can distinguish ADHD from ASD contains enough neural signature information to re-identify individuals, infer cognitive profiles, and reveal clinical conditions the person may not have disclosed. Every regulatory framework referenced in this plugin, from GDPR Article 9 to Chile's Neurorights Law, applies with full force. The security of diagnostic BCI pipelines is not a future concern. It's a present design requirement.
 
-You can explore all 16 compiled EEG datasets in the [Data Studio](https://qinnovate.com/data-studio/eeg). Filter by condition, type (real, synthetic, simulated attack), or search by DSM-5 code. Each entry links to the original open-access source.
+You can explore all EEG datasets in the [Demo Atlas](https://qinnovate.com/demo-atlas/?view=signals). Filter by condition, type (real, synthetic, simulated attack), or search by DSM-5 code. Each entry links to the original open-access source.
 
 The sample data in the plugin is metadata and configuration only. No raw EEG signal data is distributed. The plugin tests its detection rules against the metadata structure, filenames, headers, and code patterns that reference these datasets.
 
@@ -197,6 +197,28 @@ The plugin doesn't connect to devices. It scans the code that connects to device
 QInnovate is not affiliated with any device manufacturer. These are community-supported integrations based on open-source SDKs and published APIs.
 
 **Important:** Before connecting any BCI device to an AI-assisted analysis pipeline, your network must be secure, and your organization should have security and compliance experts review the integration. If your institution is using an AI coding platform for BCI research, they have likely already performed the necessary security reviews and compliance checks for that platform's data processing.
+
+## The Insight That Drives Everything
+
+104 out of 161 cataloged techniques share physical mechanisms with therapeutic treatments.
+
+tDCS for depression uses the same current delivery as signal injection. DBS for Parkinson's uses the same closed-loop stimulation as neural ransomware. EEG monitoring uses the same passive signal capture as eavesdropping. Neurofeedback training uses the same reward pathways as cognitive manipulation.
+
+The mechanism is identical. The boundary between therapy and attack is three things: consent, dosage, and oversight.
+
+If you're a clinician, your treatment protocols already define the safe parameter space. If you're a security engineer, the therapeutic parameters define "normal." Your detection logic is the delta between therapeutic behavior and anomalous behavior.
+
+The plugin's `/bci learn clinical` path walks through this mapping with clinical depth, grouped by treatment modality, with evidence tiers for each dual-use claim.
+
+## Who This Is For
+
+**Developers building BCI products.** The scanner activates automatically when it detects BCI library imports. It flags unencrypted streams, PII in data files, missing consent metadata, and unsafe stimulation parameters as you code. Security guidance embedded in your workflow, not bolted on after.
+
+**Security engineers doing threat assessments.** If you know ATT&CK, you already know the model. `/bci learn ttp` maps TARA's 16 tactics to ATT&CK equivalents and shows you the four that have no equivalent. NISS is to CVSS what TARA is to ATT&CK.
+
+**Clinicians reviewing device security.** `/bci learn clinical` speaks your language. Every technique maps to a treatment you already know. The six NISS dimensions map to clinical parameters you already monitor. Your expertise in safe dosage boundaries IS security expertise.
+
+**Researchers and students.** Install the plugin, run the demo, explore the catalog. 161 techniques with evidence tiers, therapeutic analogs, and severity scores. A structured introduction to a field that barely exists yet.
 
 ## What This Is and What It Isn't
 
