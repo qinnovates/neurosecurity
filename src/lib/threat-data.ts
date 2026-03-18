@@ -168,6 +168,14 @@ export interface ThreatVector {
   physicsFeasibility: PhysicsFeasibility | null;
   /** Whether this technique has full TARA enrichment (not a skeleton stub) */
   enriched: boolean;
+  /** TARA domain alias: TARA-{DOMAIN}-{MODE}-{NNN} */
+  taraAlias: string | null;
+  /** Primary biological domain (VIS, AUD, SOM, VES, MOT, EMO, COG, MEM, LNG, AUT, IDN, SIL) */
+  taraDomainPrimary: string | null;
+  /** Secondary biological domains */
+  taraDomainSecondary: string[];
+  /** Mode: R=Reconnaissance, M=Manipulation, D=Disruption */
+  taraMode: string | null;
 }
 
 /** Transform registry techniques → ThreatVector[] */
@@ -195,7 +203,20 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
   enriched: !t.tara_enrichment_pending,
   neurorights: t.neurorights ?? null,
   regulatory: t.regulatory ?? null,
+  taraAlias: t.tara_alias ?? null,
+  taraDomainPrimary: t.tara_domain_primary ?? null,
+  taraDomainSecondary: t.tara_domain_secondary ?? [],
+  taraMode: t.tara_mode ?? null,
 }));
+
+/** Dynamic technique count from registrar — use this instead of hardcoding */
+export const TECHNIQUE_COUNT = THREAT_VECTORS.length;
+
+/** Dynamic domain count */
+export const DOMAIN_COUNT = new Set(THREAT_VECTORS.map(t => t.taraDomainPrimary).filter(Boolean)).size;
+
+/** Dynamic tactic count */
+export const TACTIC_COUNT = new Set(THREAT_VECTORS.map(t => t.tactic).filter(Boolean)).size;
 
 /** Severity color map */
 export const SEVERITY_COLORS = {

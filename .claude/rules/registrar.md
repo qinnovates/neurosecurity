@@ -46,6 +46,22 @@ paths:
 5. `datalake/qtara/src/qtara/models.py` — Python SDK Pydantic models
 6. `datalake/scripts/compute-impact-chains.mjs` — precompute pipeline
 
+**Technique count references:** NEVER hardcode technique counts in .astro pages or docs.
+Use `import { TECHNIQUE_COUNT } from '@lib/threat-data'` in Astro/TS, or pull from registrar `statistics.total_techniques` in scripts.
+If you must reference a count in markdown, run `npm run health` after — it checks README, QIF-TRUTH, whitepaper, and 7 other files for stale counts.
+
+**TARA alias rules:**
+- NEVER hardcode alias numbers (TARA-COG-M-003) in technique definitions. Compute dynamically from current registrar state.
+- Research agents propose technique CARDS with names/mechanisms. Migration scripts assign IDs and aliases.
+- Alias format: `TARA-{DOMAIN}-{MODE}-{NNN}` where NNN is sequential within each domain-mode pair.
+- If a technique is reclassified (domain changes), the alias changes but the canonical QIF-Txxxx ID NEVER changes.
+
+**Citation verification gate:** Every new technique must have at least one DOI/PMID-verified citation.
+Migration scripts should verify DOIs via Crossref API before accepting a technique as CONFIRMED or DEMONSTRATED.
+Unverifiable citations get status: THEORETICAL with an explicit `citation_unverified: true` flag.
+
+**Batch all techniques before propagating:** Add ALL techniques for the session first, THEN run prebuild + propagation + health check. Never interleave technique addition with count propagation.
+
 **Field rename protocol:** When renaming a field (e.g., `attack` > `technique`):
 - Keep old field as deprecated alias
 - Add KQL field alias in `kql-engine.ts` so old queries still work

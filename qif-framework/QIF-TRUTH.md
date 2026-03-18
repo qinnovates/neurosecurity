@@ -613,7 +613,7 @@ Full derivations: QIF-DERIVATION-LOG.md Entry 35
 
 | Metric | Value |
 |--------|-------|
-| **Total techniques** | 135 |
+| **Total techniques | 161 |
 | **NISS version** | v1.1 (all techniques) |
 | **Domains** | 12 (AUD, AUT, COG, EMO, IDN, LNG, MEM, MOT, SIL, SOM, VES, VIS) |
 | **Modes** | 3 (R=Read, M=Manipulate, D=Disrupt) |
@@ -635,8 +635,8 @@ Full derivations: QIF-DERIVATION-LOG.md Entry 35
 
 | Mapping | Techniques Covered |
 |---------|--------------------|
-| DSM-5-TR (F-codes) | 76 of 135 |
-| ICD-10 (G/H/R-codes) | 32 of 135 |
+| DSM-5-TR (F-codes) | 76 of 161 |
+| ICD-10 (G/H/R-codes) | 32 of 161 |
 
 **Schema note:** DSM-5-TR codes (F-codes) live in `tara.dsm5`. ICD-10 codes (G/H/R-codes for neurological conditions) live in `tara.icd10`. These were split on 2026-03-15 — previously all codes were in `dsm5`.
 
@@ -679,7 +679,7 @@ To strictly adhere to VERA neuroethics, the system **MUST** allow toggling betwe
 |-----------|---------|------|------------|
 | Hourglass architecture | v4.0 | 2026-02-06 | 7-1-3 band expansion |
 | NISS scoring | v1.1.1 | 2026-03-15 | 4-level NP scale, ICD-10 separation |
-| TARA registry | 135 techniques | 2026-03-15 | 26 new techniques (T0110-T0135), 12 domains × 3 modes |
+| TARA registry | 161 techniques | 2026-03-15 | 52 new techniques (T0110-T0161), 12 domains × 3 modes |
 | QIF-TRUTH.md | v4.3 | 2026-03-15 | Added TARA current state, version tracking, severity audit |
 
 ---

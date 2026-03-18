@@ -267,6 +267,35 @@ function checkCountConsistency() {
     }
   }
 
+  // Check additional files for stale technique counts
+  const additionalFiles = [
+    'qif-framework/QIF-TRUTH.md',
+    'qif-framework/QIF-WHITEPAPER-V8-DRAFT.md',
+    'qif-framework/QIF-WHITEPAPER.md',
+    'qif-framework/tara-threat/README.md',
+    'qif-framework/README.md',
+    'datalake/QIF-DATA-MAPPING.md',
+    'src/data/convergence-data.ts',
+  ];
+  for (const fp of additionalFiles) {
+    if (fileExists(fp)) {
+      const content = readText(fp);
+      const lines = content.split('\n');
+      const countPattern = /(\d+)\s*technique/gi;
+      for (let i = 0; i < lines.length; i++) {
+        // Skip changelog/version history lines (historical — correct at that time)
+        if (lines[i].includes('changelog') || lines[i].includes('v1.') || lines[i].includes('summary":')) continue;
+        let match;
+        while ((match = countPattern.exec(lines[i])) !== null) {
+          const mentioned = parseInt(match[1], 10);
+          if (mentioned !== techniqueCount && mentioned > 50) { // Only flag counts > 50 to avoid false positives
+            warn(`${fp} line ${i + 1}: says "${mentioned}" but registrar has ${techniqueCount}`);
+          }
+        }
+      }
+    }
+  }
+
   // Check derivation log entry count vs governance reports
   const derivLogPath = 'qif-framework/QIF-DERIVATION-LOG.md';
   const transparencyPath = 'governance/TRANSPARENCY.md';

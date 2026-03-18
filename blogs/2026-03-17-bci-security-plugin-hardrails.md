@@ -7,7 +7,7 @@ author: "Kevin Qi"
 fact_checked: true
 fact_check_date: "2026-03-17"
 fact_check_notes:
-  - "[verified] 135 TARA techniques count matches tara-techniques.json"
+  - "[verified] 161 TARA techniques count matches tara-techniques.json"
   - "[verified] 18 PII detection patterns count matches pii-patterns.json"
   - "[verified] 6 regulatory frameworks referenced are correctly named"
   - "[verified] Chile Neurorights Law enacted 2021 (constitutional amendment)"
@@ -31,7 +31,7 @@ Eight skills, seven scan rules:
 2. **Anonymizes neural data** before processing. Scans EDF, BDF, XDF, FIF, NWB, GDF, CSV, and MAT files for PII in headers, filenames, and metadata. Generates remediation scripts you review and run
 3. **Detects PII in neural data pipelines** using 18 pattern-matching rules mapped to GDPR, CCPA, Chile Neurorights, UNESCO, Mind Act, and HIPAA
 4. **Generates compliance reports** across 9 regulatory domains with remediation roadmaps
-5. **Looks up threat techniques** from TARA, a catalog of 135 attack techniques targeting neural systems
+5. **Looks up threat techniques** from TARA, a catalog of 161 attack techniques targeting neural systems
 6. **Scores severity** using NISS, a neural-specific supplement to CVSS with 6 dimensions (biological impact, coherence disruption, consent violation, reversibility, neuroplasticity, coupling risk)
 7. **Checks neuroethics compliance** against 8 published guardrails from the literature
 8. **Teaches** through interactive walkthroughs that use real TARA catalog data
@@ -88,7 +88,7 @@ This maps the sample findings to specific regulatory articles: GDPR Article 9 (s
 /bci learn tara
 ```
 
-Browse 135 attack techniques with three layers of detail. See the therapeutic analog for each one. 106 out of 135 techniques share mechanisms with therapeutic treatments. The difference between therapy and attack is consent, dosage, and oversight.
+Browse 161 attack techniques with three layers of detail. See the therapeutic analog for each one. 106 out of 161 techniques share mechanisms with therapeutic treatments. The difference between therapy and attack is consent, dosage, and oversight.
 
 ## The Sample Data: ADHD EEG From Open Research
 

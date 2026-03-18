@@ -398,7 +398,7 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 ## Entry 101: TARA Naming Convention — Should IDs Encode Taxonomy? {#entry-101-tara-naming-convention}
 
 **Date:** 2026-03-17, ~19:00 (live session)
-**Classification:** OPEN QUESTION (pending 50-agent Quorum org-mode swarm)
+**Classification:** DECISION — Option C (Hybrid) adopted and implemented. 161 techniques aliased.
 **AI Systems:** Claude Opus 4.6, [Quorum](https://github.com/qinnovates/quorum) org-mode swarm (3 subteams: fact-check, taxonomy-design, security-engineering + Socrates + Plato)
 **Connected entries:** [Entry 100](#entry-100-dopamine-wavelength-quorum-swarm) (dopamine swarm produced 6 TARA-LIGHT-xx technique cards), [Entry 97](#entry-97-tara-135-expansion) (135 techniques, v2 taxonomy fields)
 
@@ -511,14 +511,23 @@ Migration cost for Option B (hierarchical): would break every KQL query, site co
 4. **None of the 6 techniques implicate MP (Mental Privacy)** — they all deliver stimulation, none read neural signals
 5. **tPBM and INS get Tier 0** — the hardware already exists commercially; the threat is misuse, not invention
 
-### Decision: Naming Convention
+### Decision: Naming Convention — ADOPTED and IMPLEMENTED
 
-[2026-03-17 ~20:45] **Kevin decides.** All 3 teams converge on Option C (Hybrid). The evidence from MITRE/CAPEC/CWE/CVSS is unanimous. The codebase already has the schema. Recommendation presented for Kevin's approval:
+[2026-03-17 ~20:45] **Kevin decides.** All 3 teams converge on Option C (Hybrid). Evidence from MITRE/CAPEC/CWE/CVSS is unanimous.
 
-- Keep `QIF-Txxxx` as canonical (stable, machine-parseable, no migration)
-- Populate `tara_alias` field with `TARA-{DOMAIN}-{MODE}-{NNN}` format
-- Display alias in UIs, use canonical in code/KQL/citations
-- Dual-use neutral: modes are R/M/D (physical description, not intent)
+[2026-03-17 ~22:30] **IMPLEMENTED.** Migration scripts populated `tara_alias` for all 161 techniques. Pipeline validated: prebuild → health (12/12, 0 warnings) → build (296 pages, 0 errors).
+
+**The hybrid naming convention is now live across the full stack:**
+- **Canonical ID (permanent):** `QIF-Txxxx` — flat sequential, never changes, used in code/KQL/citations/STIX
+- **TARA alias (human-readable):** `TARA-{DOMAIN}-{MODE}-{NNN}` — displayed in UIs, analyst docs, IR runbooks
+- **12 biological domains:** VIS, AUD, SOM, VES, MOT, EMO, COG, MEM, LNG, AUT, IDN, SIL
+- **3 dual-use neutral modes:** R (Reconnaissance), M (Manipulation), D (Disruption)
+- **New tactic:** `QIF-N.NM` (Nanoparticle-Mediated Neuromodulation)
+- **Precedent:** MITRE ATT&CK, CAPEC, CWE, CVSS — no major framework encodes taxonomy in the ID
+- **Taxonomy proposal:** `docs/research/tara-domain-taxonomy-proposal.md` status: PROPOSED → ADOPTED
+- **Classification protocol:** Entry 101 decision tree for future technique discovery
+
+**Receptor Expansion (same session):** After dopamine (6 techniques), Kevin asked "now lets do the same with other receptors." Quorum ponder ranked 9 receptor systems by expected TARA yield. Top 4 executed: GABA (7), ACh (5), Serotonin (4), Glutamate (4) = 20 additional techniques (QIF-T0142–T0161). Total session output: 26 new techniques, registrar at 161.
 
 ### New Techniques Discovered! 6 TARA Entries from a Single Question
 
