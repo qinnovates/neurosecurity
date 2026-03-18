@@ -210,12 +210,17 @@ export function applySort(rows: Row[], clause: string): Row[] {
   return dir === 'desc' ? sorted.reverse() : sorted;
 }
 
+// Dangerous keys that could pollute prototypes if used as object keys
+const FORBIDDEN_KEYS = new Set(['__proto__', 'constructor', 'prototype', 'toString', 'valueOf', 'hasOwnProperty']);
+
 export function applyProject(rows: Row[], clause: string): Row[] {
-  const fields = clause.split(',').map(f => f.trim()).filter(Boolean);
+  const fields = clause.split(',').map(f => f.trim()).filter(f => f && !FORBIDDEN_KEYS.has(f));
   return rows.map(row => {
-    const out: Row = {};
+    const out: Row = Object.create(null); // null prototype — immune to pollution
     for (const f of fields) {
-      out[f] = row[f];
+      if (Object.prototype.hasOwnProperty.call(row, f)) {
+        out[f] = row[f];
+      }
     }
     return out;
   });

@@ -288,18 +288,23 @@ export default function SQLConsole() {
   const handleExportCSV = useCallback(() => {
     if (!result || result.rows.length === 0) return;
 
-    const header = result.columns.join(',');
+    const escapeCSV = (val: unknown): string => {
+      if (val == null) return '';
+      let str = String(val);
+      // Formula injection protection: prefix values starting with =, +, -, @, \t, \r
+      // These can trigger formula execution in Excel/LibreOffice when CSV is opened
+      if (/^[=+\-@\t\r]/.test(str)) {
+        str = "'" + str;
+      }
+      // Escape CSV: wrap in quotes if contains comma, quote, newline, or carriage return
+      if (str.includes(',') || str.includes('"') || str.includes('\n') || str.includes('\r') || str.includes('\t')) {
+        return '"' + str.replace(/"/g, '""') + '"';
+      }
+      return str;
+    };
+    const header = result.columns.map(c => escapeCSV(c)).join(',');
     const rows = result.rows.map(row =>
-      result.columns.map(col => {
-        const val = row[col];
-        if (val == null) return '';
-        const str = String(val);
-        // Escape CSV: wrap in quotes if contains comma, quote, or newline
-        if (str.includes(',') || str.includes('"') || str.includes('\n')) {
-          return '"' + str.replace(/"/g, '""') + '"';
-        }
-        return str;
-      }).join(',')
+      result.columns.map(col => escapeCSV(row[col])).join(',')
     );
 
     const csv = [header, ...rows].join('\n');
