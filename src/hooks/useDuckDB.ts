@@ -35,10 +35,12 @@ interface DuckDBInstance {
 const MAX_RESULT_ROWS = 10_000;
 const QUERY_TIMEOUT_MS = 10_000;
 
-// jsDelivr CDN paths for DuckDB-WASM bundles — pinned to specific version
-// Both the ESM loader and WASM bundles MUST use the same version
+// DuckDB-WASM bundles — vendored locally to eliminate CDN supply chain risk
+// WASM + worker files served from /duckdb/ (copied to public/duckdb/ at build)
+// ESM loader still from jsDelivr (dynamic import of local ESM not supported by Vite)
 const DUCKDB_VERSION = '1.29.0';
 const JSDELIVR_BASE = `https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@${DUCKDB_VERSION}/dist`;
+const LOCAL_BASE = '/duckdb';
 
 // All known parquet datasets served from /data/parquet/
 const PARQUET_DATASETS = [
@@ -105,15 +107,16 @@ async function initDuckDB(): Promise<DuckDBInstance> {
   const scriptUrl = `${JSDELIVR_BASE}/duckdb-browser.cjs`;
   const duckdb = await loadDuckDBFromCDN(scriptUrl);
 
-  // Use jsDelivr CDN bundles
+  // Use vendored local bundles (eliminates CDN supply chain risk)
+  // Files served from public/duckdb/ → /duckdb/ at runtime
   const DUCKDB_BUNDLES = {
     mvp: {
-      mainModule: `${JSDELIVR_BASE}/duckdb-mvp.wasm`,
-      mainWorker: `${JSDELIVR_BASE}/duckdb-browser-mvp.worker.js`,
+      mainModule: `${LOCAL_BASE}/duckdb-mvp.wasm`,
+      mainWorker: `${LOCAL_BASE}/duckdb-browser-mvp.worker.js`,
     },
     eh: {
-      mainModule: `${JSDELIVR_BASE}/duckdb-eh.wasm`,
-      mainWorker: `${JSDELIVR_BASE}/duckdb-browser-eh.worker.js`,
+      mainModule: `${LOCAL_BASE}/duckdb-eh.wasm`,
+      mainWorker: `${LOCAL_BASE}/duckdb-browser-eh.worker.js`,
     },
   };
 
