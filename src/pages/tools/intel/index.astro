@@ -80,6 +80,7 @@ const categoryConfig: Record<string, { label: string; color: string }> = {
   security: { label: 'Security', color: 'var(--color-accent-primary)' },
   general: { label: 'General', color: 'var(--color-text-faint)' },
 };
+import { TARA_TECHNIQUES } from '../../../lib/qif-constants';
 ---
 
 <PageLayout
@@ -271,7 +272,7 @@ const categoryConfig: Record<string, { label: string; color: string }> = {
     </summary>
     <div class="px-6 pb-6 space-y-6">
       <p class="text-sm text-[var(--color-text-muted)]">
-        All 161 TARA threat techniques are available as a STIX 2.1 bundle for integration with threat intelligence platforms (MISP, OpenCTI, Splunk ES, Microsoft Sentinel, etc.).
+        All {TARA_TECHNIQUES} TARA threat techniques are available as a STIX 2.1 bundle for integration with threat intelligence platforms (MISP, OpenCTI, Splunk ES, Microsoft Sentinel, etc.).
       </p>
 
       <div>

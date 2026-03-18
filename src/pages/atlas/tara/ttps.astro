@@ -66,11 +66,12 @@ const matrixBands = HOURGLASS_BANDS.map(b => ({
 const SEVERITY_COLORS: Record<string, string> = {
   critical: '#ef4444', high: '#f59e0b', medium: '#eab308', low: '#94a3b8',
 };
+import { TARA_TECHNIQUES } from '../../../lib/qif-constants';
 ---
 
 <PageLayout
   title="Threat Matrix — TARA Tactics, Techniques & Procedures"
-  description="Interactive threat matrix mapping 161 BCI attack techniques across 11 hourglass bands and 9 attack categories. Explore the full TARA taxonomy."
+  description="Interactive threat matrix mapping {TARA_TECHNIQUES} BCI attack techniques across 11 hourglass bands and 9 attack categories. Explore the full TARA taxonomy."
   breadcrumbs={[
     { label: 'Neural Atlas', href: '/atlas/' },
     { label: 'TARA', href: '/atlas/tara/' },

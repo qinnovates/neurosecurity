@@ -1,0 +1,12 @@
+---
+/**
+ * TechCount — renders the current TARA technique count dynamically.
+ * Use instead of hardcoding "161" in any page.
+ * Usage: <TechCount /> or with prefix: <TechCount prefix="Browse" suffix="techniques" />
+ */
+import { STATS } from '../lib/qif-stats';
+interface Props { prefix?: string; suffix?: string; }
+const { prefix = '', suffix = '' } = Astro.props;
+const count = STATS.techniques.total;
+---
+{prefix}{prefix ? ' ' : ''}{count}{suffix ? ' ' : ''}{suffix}
