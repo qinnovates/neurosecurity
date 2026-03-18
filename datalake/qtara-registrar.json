@@ -27325,7 +27325,7 @@
         }
       },
       "sources": [
-        "Kujirai 1993 J Physiol 471:501-519 PMID:8392356"
+        "Kujirai 1993 J Physiol 471:501-519 PMID:8120818"
       ],
       "tara_alias": "TARA-COG-M-013"
     },
@@ -27372,8 +27372,8 @@
         }
       },
       "sources": [
-        "Valls-Sole 1992 PMID:1374989",
-        "McDonnell 2006 PMC8206493"
+        "Valls-Sole 1992 PMID:1282453",
+        "McDonnell 2006 PMID:16489434 DOI:10.1007/s00221-006-0365-2"
       ],
       "tara_alias": "TARA-COG-M-014"
     },
@@ -27954,7 +27954,7 @@
         }
       },
       "sources": [
-        "Zeng 2022 PMID:35998565",
+        "Zhu 2023 PMID:35998565",
         "Duque 2023 DOI:10.1073/pnas.2300291120 PMC10161134"
       ],
       "tara_alias": "TARA-EMO-M-011"
@@ -28007,7 +28007,7 @@
         }
       },
       "sources": [
-        "Lin 2017 PMID:28672900 PMC5488474",
+        "Wu 2017 PMID:28672900 PMC5488474",
         "Zhao 2019 PMID:31929820 PMC6942800"
       ],
       "tara_alias": "TARA-EMO-M-012"
@@ -28055,8 +28055,8 @@
         }
       },
       "sources": [
-        "Booij 2003 PMC3756112",
-        "Bell 2001 PMID:21339754"
+        "Young 2013 PMC3756112",
+        "van Donkelaar 2011 PMID:21339754"
       ],
       "tara_alias": "TARA-EMO-M-013"
     },
@@ -28103,7 +28103,7 @@
         }
       },
       "sources": [
-        "Cassidy 2020 DOI:10.1038/s41598-020-77111-0",
+        "Heimrath 2020 DOI:10.1038/s41598-020-77111-0",
         "Nitsche 2003 PMC2343495"
       ],
       "tara_alias": "TARA-AUT-M-003"
@@ -28152,7 +28152,7 @@
         }
       },
       "sources": [
-        "Gu & Han 2019 Current Biology DOI:10.1016/j.cub.2019.08.058 PMID:31543454",
+        "Gu & Han 2019 Current Biology DOI:10.1016/j.cub.2019.08.021 PMID:31588000",
         "Deffieux 2023 Neuron DOI:10.1016/j.neuron.2023.02.002"
       ],
       "tara_alias": "TARA-COG-M-021"
@@ -28235,7 +28235,7 @@
         "tier_label": "mid_term"
       },
       "tara": {
-        "mechanism": "Brief suprathreshold focal stimulation raises local [K+]ext past CSD ignition threshold (~12mM). CaV-dependent NMDA activation required for ignition. Once ignited: SELF-PROPAGATING K+/glutamate positive feedback wave at 2-5mm/min across cortex. Attacker delivers brief burst and withdraws; CSD continues autonomously 1-5min. Aftermath: 5-15min cortical silence (spreading depression). ECT reliably generates postictal CSD in mice AND humans (Lehmkuhl 2025, Nature Communications). Distinct from T0026/T0029: self-propagating after trigger withdrawal.",
+        "mechanism": "Brief suprathreshold focal stimulation raises local [K+]ext past CSD ignition threshold (~12mM). CaV-dependent NMDA activation required for ignition. Once ignited: SELF-PROPAGATING K+/glutamate positive feedback wave at 2-5mm/min across cortex. Attacker delivers brief burst and withdraws; CSD continues autonomously 1-5min. Aftermath: 5-15min cortical silence (spreading depression). ECT reliably generates postictal CSD in mice AND humans (Rosenthal 2025, Nature Communications). Distinct from T0026/T0029: self-propagating after trigger withdrawal.",
         "dual_use": "confirmed",
         "clinical": {
           "therapeutic_analog": "CSD as migraine intervention target; ECT therapeutic mechanism",
@@ -28253,8 +28253,8 @@
         }
       },
       "sources": [
-        "Lehmkuhl 2025 Nature Communications DOI:10.1038/s41467-025-59900-1",
-        "Enger 2023 PMC10408042"
+        "Rosenthal 2025 Nature Communications DOI:10.1038/s41467-025-59900-1",
+        "Vitale 2023 PMC10408042"
       ],
       "tara_alias": "TARA-AUT-D-004"
     }
