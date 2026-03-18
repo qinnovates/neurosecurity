@@ -1,6 +1,6 @@
 ---
 title: "Architecting Brain's Memory To Solve AI Context Persistence"
-subtitle: "A Semantic Indexing, KV Caching, and Lookup Tables approach for AI Memory — solving persistence, storage, and hardware constraints."
+subtitle: "A security engineer's approach to tackling AI context persistence and hardware constraints by modeling how the human brain stores and retrieves memory."
 date: 2026-03-18
 author: "Kevin Qi"
 tags: [engram, ai-memory, compression, post-quantum, kv-cache, lookup-tables, semantic-indexing, deepseek, parquet]
