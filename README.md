@@ -10,7 +10,7 @@
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18640105-blue)](https://doi.org/10.5281/zenodo.18640105)
 [![Site](https://img.shields.io/badge/Site-qinnovate.com-gold)](https://qinnovate.com)
 [![Data Studio](https://img.shields.io/badge/Data_Studio-31_datasets-green)](https://qinnovate.com/data-studio/)
-[![TARA](https://img.shields.io/badge/TARA-135_techniques-red)](https://qinnovate.com/atlas/tara/)
+[![TARA](https://img.shields.io/badge/TARA-141_techniques-red)](https://qinnovate.com/atlas/tara/)
 
 </div>
 
@@ -77,7 +77,7 @@ qinnovate/
 │   └── QIF-RESEARCH-SOURCES.md       # 309+ verified sources
 │
 ├── shared/                           # Cross-cutting data + tools (datalake)
-│   ├── qtara-registrar.json          # TARA techniques (135, CVSS + NISS)
+│   ├── qtara-registrar.json          # TARA techniques (141, CVSS + NISS)
 │   ├── impact-chains.json            # Precomputed threat-to-outcome chains
 │   ├── bci-landscape.json            # 57 companies, 68 devices
 │   ├── eeg-samples.json              # 16 EEG datasets with TARA mappings
@@ -160,7 +160,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 |-----------|-------------|--------|
 | **[QIF](https://qinnovate.com/framework/)** | 11-band hourglass security architecture for BCIs | Proposed, v7.0 |
 | **[Working Paper](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper (CC-BY 4.0) | Published |
-| **[TARA](https://qinnovate.com/atlas/tara/)** | 135 BCI technique pairs, STIX 2.1 registry | v1.7 |
+| **[TARA](https://qinnovate.com/atlas/tara/)** | 141 BCI technique pairs, STIX 2.1 registry | v1.7 |
 | **[qtara](https://pypi.org/project/qtara/)** | Python SDK for TARA registry management and STIX export | v0.2.0 |
 | **[NSP](https://qinnovate.com/tools/nsp/)** | Post-quantum wire protocol for BCI data links | In development, v0.5 |
 | **[NISS](https://qinnovate.com/atlas/scoring/)** | CVSS v4.0 extension proposal for neural interfaces (6 neural metrics) | Proposed, v1.1 |
@@ -207,11 +207,11 @@ This is early-stage research by a solo researcher. Empirical validation requires
 
 ## The TARA Insight
 
-TARA started as an attack matrix. 135 BCI techniques catalogued from published literature. Something unexpected emerged: the same mechanisms kept showing up on the therapeutic side.
+TARA started as an attack matrix. 141 BCI techniques catalogued from published literature. Something unexpected emerged: the same mechanisms kept showing up on the therapeutic side.
 
 Signal injection is an attack vector. It is also the basis of neurostimulation therapy for depression, Parkinson's, and chronic pain. The boundary between attack and therapy is not the mechanism. It is consent, dosage, and oversight.
 
-About 75% of the 135 techniques map to a therapeutic counterpart today. This means the same framework that scores whether an attack is dangerous can also help bound whether a therapy is safe. TARA is both a threat registry and a safety reference.
+About 75% of the 141 techniques map to a therapeutic counterpart today. This means the same framework that scores whether an attack is dangerous can also help bound whether a therapy is safe. TARA is both a threat registry and a safety reference.
 
 [TARA Atlas](https://qinnovate.com/atlas/tara/) | [TARA blog post](https://qinnovate.com/news/2026-02-09-tara-therapeutic-atlas-of-risks-and-applications/)
 
@@ -229,7 +229,7 @@ Three fields converge on BCIs. None covers the full problem alone.
 
 **Neurosecurity** (Denning, Matsuoka & Kohno, 2009) bridges all three. QIF is one attempt to operationalize that bridge — taking phenomena described by neuroscientists and concerns raised by neuroethicists and putting them into a testable security framework.
 
-[Neurosecurity Governance](governance/NEUROSECURITY_GOVERNANCE.md) | [Origin classification of all 135 techniques](shared/qtara-registrar.json)
+[Neurosecurity Governance](governance/NEUROSECURITY_GOVERNANCE.md) | [Origin classification of all 141 techniques](shared/qtara-registrar.json)
 
 ---
 
@@ -245,7 +245,7 @@ An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spina
 
 ### TARA
 
-135 techniques spanning 8 domains and 16 tactics. Each technique scored with CVSS v4.0 base vectors + proposed NISS extension metrics. MITRE-compatible IDs.
+141 techniques spanning 8 domains and 16 tactics. Each technique scored with CVSS v4.0 base vectors + proposed NISS extension metrics. MITRE-compatible IDs.
 
 - **Atlas:** [qinnovate.com/atlas/tara](https://qinnovate.com/atlas/tara/)
 - **API:** [`/api/tara.json`](https://qinnovate.com/api/tara.json) (full dataset, no auth) | [`/api/stix.json`](https://qinnovate.com/api/stix.json) (STIX 2.1 bundle)
@@ -526,7 +526,7 @@ This repository is archived by [Software Heritage](https://archive.softwareherit
 
 The same git history that lets you trace how a security framework evolved is the same history that bug bounty hunters use to find leaked secrets in force-pushed commits. Tools like [TruffleHog](https://github.com/trufflesecurity/trufflehog) and [Gitleaks](https://github.com/gitleaks/gitleaks) scan git history to surface credentials that developers thought they deleted. The mechanism is identical. The difference is consent and intent.
 
-This is the same principle that runs through the entire project. TARA documents 135 BCI techniques where the attack mechanism and the therapeutic mechanism are physically identical. Signal injection is how you compromise a neural interface. It is also how you treat Parkinson's disease. The tool does not determine the use. The boundary is always consent, oversight, and intent.
+This is the same principle that runs through the entire project. TARA documents 141 BCI techniques where the attack mechanism and the therapeutic mechanism are physically identical. Signal injection is how you compromise a neural interface. It is also how you treat Parkinson's disease. The tool does not determine the use. The boundary is always consent, oversight, and intent.
 
 We publish full history because transparency is the foundation of trust in security research. Every claim in this repo can be traced to the commit where it was introduced, the source that informed it, and the [derivation log entry](qif-framework/QIF-DERIVATION-LOG.md) where the decision was made. If something was wrong, you can see when it was corrected and why.
 
