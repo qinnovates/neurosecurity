@@ -20,6 +20,35 @@ Auto-maintained by `scripts/changelog-update.mjs`.
 - update news feed cache [skip ci-deploy] ([054710f](https://github.com/qinnovates/qinnovate/commit/054710f))
 
 
+## 2026-03-18
+
+### Research
+- 12-agent Quorum swarm: dopamine wavelength research — mapped complete 10-step DA synthesis pathway, cofactor dependencies (Fe2+, BH4, B6), and wavelength-to-mechanism table (632.8nm to 2120nm) with 90+ DOI-verified citations
+- 4-receptor expansion: GABA (7), ACh (5), Serotonin (4), Glutamate (4) — 20 additional techniques from pathway-specific Quorum agents
+- Fact-check swarm caught 1 hallucinated citation (fabricated author + inverted finding on real DOI)
+
+### Added
+- 26 new TARA techniques (QIF-T0136–T0161): dopamine photobiomodulation, UCNP optogenetics, HUP photovoltaic NPs, photothermal Au NPs, INS, magnetothermal, SICI-TMS, LICI-TMS, cTBS, anodal tDCS GABA depletion, gamma-tACS, FUS thalamic GABA, GENUS 40Hz sensory entrainment, implanted VNS cholinergic, tVNS, TMS-mAChR, AChE inhibition BCI corruption (nerve agents), cholinergic medication inference, VNS serotonin, tFUS DRN serotonin, electroacupuncture 5-HT, acute tryptophan depletion, E/I ratio manipulation, LIFU astrocytic gliotransmission, FUS-BBB excitotoxic priming, cortical spreading depression
+- New tactic: QIF-N.NM (Nanoparticle-Mediated Neuromodulation)
+- Hybrid naming convention (Option C): `QIF-Txxxx` canonical + `TARA-{DOMAIN}-{MODE}-{NNN}` alias for all 161 techniques
+- Wavelength classification decision tree for future technique discovery (Entry 101)
+- Migration scripts with built-in delta validation: `migrate-tara-aliases.py`, `migrate-receptor-techniques.py`, `propagate-technique-count.py`
+- Derivation Log Entries 100 (dopamine research), 101 (naming convention + receptor expansion)
+- Field Journal Entry 027 (Quorum at scale — Socrates/Plato agent architecture)
+
+### Updated
+- TARA registrar: 135 → 161 techniques, `tara_alias` populated for all, `tara_taxonomy_version` 1.0
+- Taxonomy proposal status: PROPOSED → ADOPTED
+- Whitepaper v8 draft: technique counts updated (109 → 161)
+- 29 files propagated with updated technique counts (58 replacements)
+- QIF-TRUTH.md: total techniques, domain distribution updated
+- README.md: technique count badges and references
+- T0136 enriched: serotonin + ACh added to `tara_domain_secondary` (same CCO mechanism)
+- T0009 enriched: indirect corticothalamic-raphe serotonin pathway documented
+- Governance docs auto-regenerated from derivation log
+- SDK registrar copy synced
+- Pipeline validated: prebuild → health (12/12) → build (296 pages, 0 errors)
+
 ## 2026-03-16
 
 ### Fixed

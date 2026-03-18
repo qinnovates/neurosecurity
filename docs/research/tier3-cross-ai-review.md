@@ -22,7 +22,7 @@ QIF is a proposed BCI security framework (not peer-reviewed, not adopted). The w
 | 13 | NISS v2.0 ICD-11 scope | VERIFIED | KEEP |
 | 14 | Five weighting factors (R/FI/PS/CE/MC) | AI-DERIVED | KEEP (labeled as proposed) |
 | 15 | Severity scale for non-DSM outcomes | AI-DERIVED | KEEP (labeled as proposed) |
-| 16 | "19 high / 37 medium / 52 low / 1 none" | STALE | RECOMPUTE (now 27/53/54/1 across 135 techniques) |
+| 16 | "19 high / 37 medium / 52 low / 1 none" | STALE | RECOMPUTE (now 27/53/54/1 across 161 techniques) |
 | 17 | Pascual-Leone 2005, Merzenich 2014 | VERIFIED (DOIs confirmed) | KEEP |
 
 ## Your Task

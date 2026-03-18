@@ -6,7 +6,7 @@ You're building on BrainFlow and BLE. You don't have a dedicated security team. 
 
 ## Medical device security team assessing an implanted BCI
 
-You already know how to threat model. Now you need the threat catalog. 135 techniques mapped across biological domains — signal injection at the electrode-tissue interface, firmware manipulation, cognitive side-channel attacks. Score each with NISS to prioritize remediation by neural impact, not just CVSS base score. Your existing workflow, extended to a surface area nobody else has mapped.
+You already know how to threat model. Now you need the threat catalog. 161 techniques mapped across biological domains — signal injection at the electrode-tissue interface, firmware manipulation, cognitive side-channel attacks. Score each with NISS to prioritize remediation by neural impact, not just CVSS base score. Your existing workflow, extended to a surface area nobody else has mapped.
 
 ## Researcher writing a BCI security paper
 
@@ -18,7 +18,7 @@ You know CVSS. You know ATT&CK. NISS and TARA are the BCI equivalents — same l
 
 ## Student exploring neurosecurity as a career
 
-Install the plugin. Run the demo. Walk through the learning modules. The 135-technique catalog with evidence tiers and therapeutic analogs is a structured introduction to a field that barely has a name yet. Most people will discover neurosecurity in five years. You're here now.
+Install the plugin. Run the demo. Walk through the learning modules. The 161-technique catalog with evidence tiers and therapeutic analogs is a structured introduction to a field that barely has a name yet. Most people will discover neurosecurity in five years. You're here now.
 
 ## Pair programming with Claude on a BCI project
 
@@ -34,4 +34,4 @@ Use `/bci threat-model` to generate a structured threat assessment mapped to you
 
 ## Teaching a neurosecurity course
 
-Assign `/bci learn tara` and `/bci learn niss` as interactive coursework. Students explore 135 real threat techniques — they query, filter, and reason about threats hands-on. Each technique includes evidence tiers, therapeutic analogs, and severity scores. It's not a paper they skim. It's a tool they use.
+Assign `/bci learn tara` and `/bci learn niss` as interactive coursework. Students explore 161 real threat techniques — they query, filter, and reason about threats hands-on. Each technique includes evidence tiers, therapeutic analogs, and severity scores. It's not a paper they skim. It's a tool they use.

@@ -5,7 +5,7 @@
 ## The Full Chain
 
 ```
-TARA Technique (109)
+TARA Technique (161)
   ↓ band_ids[]
 Hourglass Band (11: N7→N1, I0, S1→S3)
   ↓ regions in band
@@ -41,7 +41,7 @@ All files in `shared/`. This is the single source of truth — site components, 
 
 ### Layer 1: Threat Techniques (Macro)
 
-**`qtara-registrar.json`** — 135 techniques, 16 tactics, 8 domains
+**`qtara-registrar.json`** — 161 techniques, 16 tactics, 8 domains
 
 | Field | Links To | Cardinality |
 |-------|----------|-------------|

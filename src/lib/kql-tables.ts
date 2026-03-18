@@ -184,6 +184,10 @@ function buildTechniques(): Row[] {
       physics_tier: t.physics_tier || '',
       dual_use: t.dual_use || '',
       consent_tier: t.consent_tier || '',
+      tara_alias: t.tara_alias || '',
+      tara_domain: t.tara_domain_primary || '',
+      tara_domain_secondary: (t.tara_domain_secondary || []).join(', '),
+      tara_mode: t.tara_mode || '',
     };
   });
 }
@@ -1131,6 +1135,10 @@ function buildEegSamples(): Row[] {
     subject_breakdown: s.subjectBreakdown ?? '',
     paradigm: s.paradigm ?? '',
     tara_id: s.taraId ?? '',
+    tara_relevance: s.taraRelevance ?? '',
+    paper_doi: s.paperDoi ?? '',
+    data_doi: s.dataDoi ?? '',
+    research_tags: Array.isArray(s.researchTags) ? s.researchTags.join(', ') : '',
     notes: s.notes ?? '',
   }));
 }

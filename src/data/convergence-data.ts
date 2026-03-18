@@ -399,7 +399,7 @@ export const CONVERGENCE_GAPS: ConvergenceGap[] = [
     existingAnalog: 'MITRE ATT&CK catalogs hundreds of enterprise techniques across 14 tactics.',
     neuralDifference: 'No neural injection, cognitive exfiltration, neurostimulation manipulation, or signal dynamics disruption in any MITRE matrix. Neural attacks have no TTP classification.',
     coveredBy: ['MITRE ATT&CK (structure only)'],
-    qifSolution: 'TARA provides 135 BCI techniques across 15 tactics with MITRE-compatible IDs and dual-use therapeutic mappings.',
+    qifSolution: 'TARA provides 161 BCI techniques across 15 tactics with MITRE-compatible IDs and dual-use therapeutic mappings.',
   },
   {
     id: 'biological-endpoint-security',
@@ -501,7 +501,7 @@ export const PREDECESSOR_RESEARCH: PredecessorResearch[] = [
     title: 'A Framework and Taxonomy of Attacks on Brain-Computer Interfaces',
     venue: 'arXiv preprint',
     contribution: 'Most comprehensive BCI attack taxonomy before TARA. Organized attacks by confidentiality, integrity, and availability.',
-    whatQifAdds: 'TARA extends from their CIA foundation to 135 techniques with NISS scoring, dual-use classification, and DSM-5-TR psychiatric impact mappings.',
+    whatQifAdds: 'TARA extends from their CIA foundation to 161 techniques with NISS scoring, dual-use classification, and DSM-5-TR psychiatric impact mappings.',
   },
   {
     authors: 'Schroder',

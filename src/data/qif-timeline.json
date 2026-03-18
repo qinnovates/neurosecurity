@@ -8,7 +8,7 @@
   },
   "current_stats": {
     "as_of": "2026-03-15",
-    "threat_techniques": 135,
+    "threat_techniques": 161,
     "bci_devices": 68,
     "brain_regions": 37,
     "physics_constraints": 13,
@@ -399,7 +399,7 @@
       "title": "BCI Security Plugin v1.0: Claude Code Marketplace",
       "description": "Published the first neurotechnology security plugin for any AI coding platform. 6 skills (TARA lookup, NISS scoring, neuromodesty check, threat modeling, code scanning, interactive learning), 2 slash commands (/bci, /bci-scan), 1 threat modeling agent, 1 neural data detection hook. Zero dependencies. Designed by 8-agent Quorum swarm, validated by 4-agent review swarm. Dual-licensed: Apache 2.0 (code), CC BY-SA 4.0 (data). github.com/qinnovates/bci-security",
       "stats_snapshot": {
-        "threat_techniques": 135,
+        "threat_techniques": 161,
         "tara_version": "v1.7"
       }
     },
@@ -409,7 +409,7 @@
       "title": "TARA v1.7: 135 Techniques with Full Evidence Tiers",
       "description": "Expanded from 109 to 135 techniques across 11 biological domains. Added 26 new techniques (QIF-T0110-T0135) covering neuroendocrine, glial, neurovascular, and receptor domains. 6 evidence tiers (CONFIRMED/EMERGING/DEMONSTRATED/THEORETICAL/PLAUSIBLE/SPECULATIVE). Full FDORA Section 524B regulatory mapping. 21-agent validation swarm with zero fabricated techniques.",
       "stats_snapshot": {
-        "threat_techniques": 135,
+        "threat_techniques": 161,
         "research_sources": 311
       }
     },
@@ -419,7 +419,7 @@
       "title": "TARA v1.8: ICD-10 Field Split + NISS Re-scoring",
       "description": "Separated ICD-10 codes (G/H/R) from DSM-5-TR codes (F) across 38 techniques — 64 codes moved to new icd10 field. Re-scored all 26 new techniques (T0110-T0135) from placeholder vectors to individually assessed NISS vectors. Quorum-validated. 6 PINS flags added. Components block deprecated. Severity distribution: 20 high, 59 medium, 55 low, 1 none.",
       "stats_snapshot": {
-        "threat_techniques": 135,
+        "threat_techniques": 161,
         "tara_version": "v1.8"
       }
     },

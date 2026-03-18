@@ -415,7 +415,7 @@ QI catches direct attacks (Mechanism A). It partially catches harmonic and envel
 
 ### 6.3 Unified Threat Taxonomy
 
-QIF maintains a registry of **109 attack techniques** organized into **11 tactics** across **7 operational domains** using the **QIF Locus Taxonomy v1.0**, a BCI-native threat classification system. Each technique is scored using **NISS v1.1** (Neural Impact Scoring System), a purpose-built alternative to CVSS that prioritizes human impact over system impact. Full specifications for both systems follow in Sections 6.4 and 6.5.
+QIF maintains a registry of **161 attack techniques** organized into **11 tactics** across **7 operational domains** using the **QIF Locus Taxonomy v1.0**, a BCI-native threat classification system. Each technique is scored using **NISS v1.1** (Neural Impact Scoring System), a purpose-built alternative to CVSS that prioritizes human impact over system impact. Full specifications for both systems follow in Sections 6.4 and 6.5.
 
 ## 6.4 QIF Locus Taxonomy
 
@@ -425,7 +425,7 @@ QIF maintains a registry of **109 attack techniques** organized into **11 tactic
 
 Existing threat taxonomies (MITRE ATT&CK, CAPEC, CWE) were designed for traditional IT systems. They classify attacks by what happens to *software and networks*. Brain-computer interfaces require a taxonomy that classifies attacks by what happens to *neural tissue, cognition, and human identity*. This is a fundamentally different attack surface.
 
-The QIF Locus Taxonomy, developed by Qinnovate, addresses this gap. "Locus" refers to the anatomical or functional *location* where the attack operates --- neural, cognitive, physiological, data, device, model, or energy domain. The taxonomy was derived from an analysis of all 109 known BCI attack techniques, grouping them by the primary system they target rather than the IT tactic they employ. It is the first threat classification system purpose-built for neural interfaces.
+The QIF Locus Taxonomy, developed by Qinnovate, addresses this gap. "Locus" refers to the anatomical or functional *location* where the attack operates --- neural, cognitive, physiological, data, device, model, or energy domain. The taxonomy was derived from an analysis of all 161 known BCI attack techniques, grouping them by the primary system they target rather than the IT tactic they employ. It is the first threat classification system purpose-built for neural interfaces.
 
 ### 6.4.2 Nomenclature
 
@@ -485,7 +485,7 @@ Each domain contains one or more tactics, each describing an adversary's operati
 
 ### 6.4.5 Registry Structure
 
-Each of the 99 techniques records: the Locus tactic it belongs to, the hourglass bands it targets, physical coupling mechanism (where applicable), detection capability (classical vs. QI-enhanced), evidence sources, evidence status (Confirmed / Demonstrated / Theoretical / Emerging), a NISS severity score, and legacy cross-references to prior identifiers. The full registry is machine-readable JSON, updated as new techniques are identified.
+Each of the 161 techniques records: the Locus tactic it belongs to, the hourglass bands it targets, physical coupling mechanism (where applicable), detection capability (classical vs. QI-enhanced), evidence sources, evidence status (Confirmed / Demonstrated / Theoretical / Emerging), a NISS severity score, and legacy cross-references to prior identifiers. The full registry is machine-readable JSON, updated as new techniques are identified.
 
 Evidence status breakdown:
 
@@ -619,7 +619,7 @@ Context profiles are applied using the weighted formula from Section 6.5.2. The 
 
 ### 6.5.7 Registry Distribution
 
-Across all 99 techniques in the TARA registry, NISS scoring produces the following severity distribution:
+Across all 161 techniques in the TARA registry, NISS scoring produces the following severity distribution:
 
 | Severity | Count |
 |----------|-------|
@@ -715,7 +715,7 @@ This analysis demonstrates that QIF's taxonomy and scoring systems are not specu
 
 ### 6.7.1 The Dual-Use Observation
 
-A systematic audit of the 109-technique registry revealed an unexpected pattern: the physical mechanisms underlying many attack techniques are identical to the mechanisms underlying established medical therapies. Signal injection (QIF-T0001) uses the same electrode current delivery as deep brain stimulation (DBS), which treats Parkinson's disease, essential tremor, dystonia, OCD, and epilepsy in over 160,000 patients worldwide [86]. Neural entrainment manipulation uses the same frequency-locking physics as therapeutic transcranial alternating current stimulation (tACS). Bifurcation forcing operates in the same dynamical parameter space as controlled DBS that shifts neural dynamics toward a healthy attractor state.
+A systematic audit of the 161-technique registry revealed an unexpected pattern: the physical mechanisms underlying many attack techniques are identical to the mechanisms underlying established medical therapies. Signal injection (QIF-T0001) uses the same electrode current delivery as deep brain stimulation (DBS), which treats Parkinson's disease, essential tremor, dystonia, OCD, and epilepsy in over 160,000 patients worldwide [86]. Neural entrainment manipulation uses the same frequency-locking physics as therapeutic transcranial alternating current stimulation (tACS). Bifurcation forcing operates in the same dynamical parameter space as controlled DBS that shifts neural dynamics toward a healthy attractor state.
 
 The preliminary breakdown: **35 to 40 techniques** where the attack mechanism has a published therapeutic counterpart (electrode stimulation, entrainment, neuromodulation), roughly **10 ambiguous cases** where the attack vector is digital but the payload affects tissue, and **18 to 20 pure-silicon techniques** (firmware, supply chain, ML model attacks) with no therapeutic analog. Same electrode. Same current. Same physics. Different intent, consent, and oversight.
 

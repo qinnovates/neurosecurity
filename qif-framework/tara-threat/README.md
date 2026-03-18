@@ -20,7 +20,7 @@ Each PoC documents a specific technique's feasibility, attack mechanism, and val
 
 ## As-Code Principle
 
-The canonical source of truth for all 109 TARA techniques is `config.py`. JSON output is generated, not hand-edited. To add or modify techniques:
+The canonical source of truth for all 161 TARA techniques is `config.py`. JSON output is generated, not hand-edited. To add or modify techniques:
 
 1. Edit `config.py` in `qif-lab/`
 2. Run `python shared/scripts/populate-tara.py`
@@ -36,4 +36,4 @@ The canonical source of truth for all 109 TARA techniques is `config.py`. JSON o
 
 ---
 
-*135 techniques, 15 tactics, 8 domains. Apache 2.0.*
+*161 techniques, 15 tactics, 8 domains. Apache 2.0.*

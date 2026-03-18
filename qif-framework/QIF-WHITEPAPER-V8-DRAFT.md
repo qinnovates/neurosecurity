@@ -101,7 +101,7 @@ The window for this is finite. Once devices ship at scale with baked-in architec
 
 This paper does three things.
 
-**First, it maps the full attack surface** of brain-computer interfaces — not hypothetically, but technically. 109 attack techniques across 7 domains, scored with a neural-specific severity system (NISS), cataloged in a dual-use registry (TARA) that bridges security and medicine. Every technique that can harm can also heal. The boundary between the two is consent, dosage, and oversight. The Neural Impact Chain traces each attack from physical mechanism through neural band to clinical outcome, mapped to DSM-5-TR diagnostic categories for threat modeling purposes.
+**First, it maps the full attack surface** of brain-computer interfaces — not hypothetically, but technically. 161 attack techniques across 7 domains, scored with a neural-specific severity system (NISS), cataloged in a dual-use registry (TARA) that bridges security and medicine. Every technique that can harm can also heal. The boundary between the two is consent, dosage, and oversight. The Neural Impact Chain traces each attack from physical mechanism through neural band to clinical outcome, mapped to DSM-5-TR diagnostic categories for threat modeling purposes.
 
 **Second, it proposes the architecture.** An 11-band security model (the QIF Hourglass) spanning from quantum physics to social engineering. A post-quantum encrypted wire protocol (NSP). A rendering pipeline (Runemate) that eliminates the browser, the app store, and every unnecessary layer between patient and experience. A passwordless authentication system (PQKC + Biomarker MFA) built on cryptographic identity and biological uniqueness. A five-tier guardrail model distinguishing physics constraints from policy decisions. A neural operating system mapped to the Linux model that has proven itself across five decades. A patient terminal that gives direct, scriptable, auditable control — not through a prescribed interface, but through autodidactic navigation where each patient designs their own way of interacting with the system.
 
@@ -144,7 +144,7 @@ Think of the stubborn eyelash — half fallen off, half poking at your eyeball. 
 
 Security works the same way. The instinct is to throw another layer at the problem — another firewall rule, another authentication check, another middleware service. But each layer is a finger poking at the eye. The architecture proposed in this paper does not stack defenses for the sake of stacking them. It selects the minimum set of precise tools, each purpose-built for its layer, each doing one thing and doing it without creating the next vulnerability.
 
-This paper names the remaining risks explicitly (see Section 6: Attack Surface Analysis, 109 techniques cataloged). The defense paradox does not invalidate the architecture. It disciplines it. If you cannot eliminate a layer, you minimize its privilege, audit its behavior, and design it so that its failure does not cascade into the layers below it. Defense in depth is not about stacking walls. It is about ensuring that when one wall falls — and it will — the next wall does not depend on the one that broke.
+This paper names the remaining risks explicitly (see Section 6: Attack Surface Analysis, 161 techniques cataloged). The defense paradox does not invalidate the architecture. It disciplines it. If you cannot eliminate a layer, you minimize its privilege, audit its behavior, and design it so that its failure does not cascade into the layers below it. Defense in depth is not about stacking walls. It is about ensuring that when one wall falls — and it will — the next wall does not depend on the one that broke.
 
 ### Design Principles
 
@@ -193,7 +193,7 @@ v6.3 established the threat model, scoring system, and wire protocol. v8.0 answe
 | v6.3 (What) | v8.0 (Who + How) |
 |-------------|-----------------|
 | QI equation measures integrity | Five-tier guardrail model defines who sets the thresholds |
-| TARA catalogs 109 techniques | Governance RACI maps accountability for every scenario |
+| TARA catalogs 161 techniques | Governance RACI maps accountability for every scenario |
 | NISS scores severity | Autonomy spectrum classifies when intervention is justified |
 | NSP encrypts the wire | Passwordless auth (PQKC + biomarker MFA) defines identity |
 | Runemate compresses content | Neural terminal gives patients direct control |
@@ -241,7 +241,7 @@ New sections (12-18) address: patient sovereignty, the neural terminal, autonomy
 - [6. Attack Surface Analysis](#6-attack-surface-analysis)
   - 6.1 Five Cross-Domain Attack Coupling Mechanisms (A-E)
   - 6.2 Detection Boundaries (honest assessment)
-  - 6.3 Unified Threat Taxonomy (109 techniques, 11 tactics, 7 domains)
+  - 6.3 Unified Threat Taxonomy (161 techniques, 11 tactics, 7 domains)
   - 6.4 QIF Locus Taxonomy (BCI-native classification)
   - 6.5 NISS v1.1 — Neural Impact Scoring System
   - 6.6 Case Study: Algorithmic Psychosis Induction
@@ -333,7 +333,7 @@ Framework:  QIF Hourglass (11 bands) — defines WHAT to protect
                 ├── 5 Attack Mechanisms (A-E) — HOW attacks propagate
                 │
                 ├── Locus Taxonomy (7 domains, 11 tactics) — CLASSIFIES threats
-                │   └── 109 techniques cataloged
+                │   └── 161 techniques cataloged
                 │
                 ├── NISS v1.1 — SCORES severity (neural-specific, not CVSS)
                 │
@@ -434,7 +434,7 @@ Governance: RACI Matrix — WHO DECIDES                        ← NEW in v8.0
 | `/threat-models/tara/` | Full TARA technique browser | Section 6.3-6.7 |
 | `/threat-models/analysis/` | Neural Impact Chain analysis | Section 6.6 |
 | `/threat-models/scoring/` | NISS scoring details | Section 6.5 |
-| `/TARA/[id]` | Individual technique pages (109) | Section 6.4 |
+| `/TARA/[id]` | Individual technique pages (161) | Section 6.4 |
 | `/whitepaper/` | Whitepaper page | This document |
 | `/research/` | Research hub | Appendix C |
 
@@ -442,7 +442,7 @@ Governance: RACI Matrix — WHO DECIDES                        ← NEW in v8.0
 
 | Data File | Contents | Whitepaper Section |
 |-----------|---------|-------------------|
-| `shared/qtara/tara_data.json` | 109 techniques, full registry | Section 6.3-6.7 |
+| `shared/qtara/tara_data.json` | 161 techniques, full registry | Section 6.3-6.7 |
 | `shared/dsm5_niss_mappings.json` | DSM-5-TR → NISS mappings | Section 6.6 |
 | `shared/niss_severity_data.json` | NISS scoring data | Section 6.5 |
 | `src/data/qif-timeline.json` | Framework milestone timeline | All sections |
@@ -460,7 +460,7 @@ Visualizations that exist on the site and can be referenced/embedded in the whit
 |--------------|----------|-------|
 | 3D Hourglass | `/` hero section, `/vision/` | 11-band architecture, band widths, I0 bottleneck |
 | Brain Atlas | `/vision/` BCI section | 8 neural bands mapped to brain anatomy, technique counts per region |
-| TARA Technique Browser | `/threat-models/tara/` | Searchable/filterable 109-technique registry |
+| TARA Technique Browser | `/threat-models/tara/` | Searchable/filterable 161-technique registry |
 | Neural Impact Chain | `/threat-models/analysis/` | DAG showing attack propagation through bands |
 | NISS Scoring | `/threat-models/scoring/` | Severity scoring breakdown |
 | Neuroethics Timeline | `/vision/` | Key neuroethics milestones |
@@ -476,7 +476,7 @@ Visualizations that exist on the site and can be referenced/embedded in the whit
 
 | Asset | Format | Records | Location |
 |-------|--------|---------|----------|
-| TARA Registry | JSON | 109 techniques | `shared/qtara/tara_data.json` |
+| TARA Registry | JSON | 161 techniques | `shared/qtara/tara_data.json` |
 | DSM-5-TR Mappings | JSON | 45 diagnoses mapped | `shared/dsm5_niss_mappings.json` |
 | NISS Scores | JSON | 109 severity records | `shared/niss_severity_data.json` |
 | Research Registry | JSON | 100+ sources | `shared/research-registry.json` |
@@ -1121,7 +1121,7 @@ NP values (expanded from 3 to 4 levels in v1.1.1):
 
 The original 3-level scale (N/T/S) collapsed meaningfully different outcomes. The jump from T(5) to S(10) treated recoverable structural changes the same as permanent rewiring. The new P (Partial) level captures the clinical middle ground: chronic low-level neurofeedback drift, partial cortical map reorganization from sustained stimulation — scenarios where rehabilitation is possible but not guaranteed.
 
-Recalculating all 109 TARA techniques against the 4-level scale shifted 26 scores. Two techniques (motor hijacking, OTA firmware exploitation) dropped from high to medium severity — the finer NP granularity revealed their plasticity impact was partial, not structural. Final severity distribution: 19 high, 37 medium, 52 low, 1 none.
+Recalculating all 161 TARA techniques against the 4-level scale shifted 26 scores. Two techniques (motor hijacking, OTA firmware exploitation) dropped from high to medium severity — the finer NP granularity revealed their plasticity impact was partial, not structural. Final severity distribution: 19 high, 37 medium, 52 low, 1 none.
 
 **NP weight is 1.0** — equal to Biological Impact and Reversibility — because structural neuroplasticity represents a category of harm that no other metric captures: the attack persists in the victim's biology after the device is removed.
 
@@ -1188,7 +1188,7 @@ The new sections (12-18) complete the arc:
 | 11-band hourglass (Section 4) | Neural OS maps each band to a system layer (Section 16) |
 | QI equation (Section 5) | Five-tier model defines who sets the thresholds QI measures against (Section 14) |
 | 5 attack mechanisms (Section 6.1) | Terminal eliminates 3 attack surface layers (browser, app store, window manager) (Section 12) |
-| Locus Taxonomy + 109 techniques (Section 6.3-6.4) | RACI maps accountability for detecting and responding to each technique (Section 18.1) |
+| Locus Taxonomy + 161 techniques (Section 6.3-6.4) | RACI maps accountability for detecting and responding to each technique (Section 18.1) |
 | NISS scoring (Section 6.5) | Autonomy spectrum defines when intervention is justified based on severity (Section 14.1) |
 | Algorithmic Psychosis case study (Section 6.6) | Escalation scenario extends the case study pattern to motor→cognitive creep (Section 14.2) |
 | TARA dual-use registry (Section 6.7) | Governance projection gets neurorights ACL enforcement (Section 15.6) |
@@ -1227,7 +1227,7 @@ This appendix documents all major changes between v7.0 (February 21, 2026) and v
 
 **NISS v1.1 — Metric Split and Normalization**
 - Split the original CG (Cognitive) metric into two: **CR (Cognitive Reconnaissance)** and **CD (Cognitive Disruption)**, separating unauthorized neural read access from unauthorized neural write access. The original CG conflated passive surveillance with active manipulation — a distinction that matters for both threat modeling and governance response. (Entries 80–81)
-- Renormalized all 109 TARA technique scores against the new 6-metric vector (BI, CR, CD, CV, RV, NP). Published as preprint v1.5 on Zenodo.
+- Renormalized all 161 TARA technique scores against the new 6-metric vector (BI, CR, CD, CV, RV, NP). Published as preprint v1.5 on Zenodo.
 
 **Attack Primitive Decomposition**
 - Derived the five fundamental attack mechanisms from physics first principles rather than observed exploits. Every technique in the TARA registry decomposes into combinations of these primitives. (Entry 74)
@@ -1308,7 +1308,7 @@ This appendix documents all major changes between v7.0 (February 21, 2026) and v
 - Added molecular-level drill-down capability: neurotransmitter → synthesis pathway → cofactors → receptors → molecular dependencies. Clinical users can trace from dopamine depletion through phenylalanine hydroxylase to iron and BH4 cofactor requirements.
 
 **NP Metric Expanded to 4 Levels**
-- Added P (Partial, 6.7) between T (Temporary, 3.3) and S (Structural, 10.0). The original 3-level scale collapsed recoverable structural changes and permanent rewiring into the same bucket. Recalculated all 109 TARA techniques — 26 scores changed, 2 severity shifts. Updated across: niss-parser.ts, recalculate-niss.py, 05-niss.tex, scoring.astro, whitepaper/index.astro, both registrar copies.
+- Added P (Partial, 6.7) between T (Temporary, 3.3) and S (Structural, 10.0). The original 3-level scale collapsed recoverable structural changes and permanent rewiring into the same bucket. Recalculated all 161 TARA techniques — 26 scores changed, 2 severity shifts. Updated across: niss-parser.ts, recalculate-niss.py, 05-niss.tex, scoring.astro, whitepaper/index.astro, both registrar copies.
 
 **NISS Neurological Extension Documentation**
 - Published `NISS-NEUROLOGICAL-EXTENSION.md`: 42 neurological conditions across 7 categories, CD broadening rationale, NP expansion rationale, impact chain documentation (technique → band → pathway → condition → NISS metric), data architecture, backward compatibility, KQL query examples.
