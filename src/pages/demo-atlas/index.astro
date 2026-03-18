@@ -1,0 +1,107 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import DemoAtlas from '../../components/demo-atlas/DemoAtlas.tsx';
+import { STATS, ALL_TECHNIQUES, ALL_DEVICES, ALL_EEG_SAMPLES, ALL_CONDITIONS } from '../../lib/qif-stats';
+
+const title = 'Demo Atlas | qinnovate';
+const description = `Explore ${STATS.techniques.total} BCI threat techniques, ${STATS.devices.total} devices, and ${STATS.eeg.total} EEG datasets in one unified workflow. Auto-matching maps devices to threats, conditions to therapeutics, and signals to patterns.`;
+
+// Slim down technique data for client (only fields the React island needs)
+const slimTechniques = ALL_TECHNIQUES.map((t: any) => ({
+  id: t.id,
+  attack: t.attack,
+  tara_alias: t.tara_alias || '',
+  tara_domain_primary: t.tara_domain_primary || '',
+  tara_domain_secondary: t.tara_domain_secondary || [],
+  tara_mode: t.tara_mode || '',
+  tactic: t.tactic,
+  severity: t.severity,
+  status: t.status,
+  bands: t.bands || '',
+  band_ids: t.band_ids || [],
+  ui_category: t.ui_category || '',
+  niss: {
+    score: t.niss?.score || 0,
+    severity: t.niss?.severity || 'none',
+    vector: t.niss?.vector || '',
+  },
+  mechanism: t.tara?.mechanism || '',
+  dual_use: t.tara?.dual_use || '',
+  clinical: t.tara?.clinical ? {
+    therapeutic_analog: t.tara.clinical.therapeutic_analog || '',
+    conditions: t.tara.clinical.conditions || [],
+    fda_status: t.tara.clinical.fda_status || 'none',
+    evidence_level: t.tara.clinical.evidence_level || '',
+  } : null,
+  physics_tier: t.physics_feasibility?.tier ?? null,
+  physics_label: t.physics_feasibility?.tier_label || '',
+  sources: t.sources || [],
+}));
+
+// Slim down device data
+const slimDevices = ALL_DEVICES.map((d: any) => ({
+  name: d.name || d.device || '',
+  company: d.company || '',
+  type: d.type || '',
+  channels: d.channels || d.channel_count || 0,
+  modality: d.modality || '',
+  fda_status: d.fda_status || d.fda || '',
+  sampling_rate: d.sampling_rate || 0,
+  electrode_type: d.electrode_type || '',
+  tara_attack_surface: d.tara_attack_surface || [],
+}));
+
+// Slim EEG samples
+const slimEEG = ALL_EEG_SAMPLES.map((s: any) => ({
+  name: s.name || '',
+  source: s.source || '',
+  type: s.type || '',
+  channels: s.channels || 0,
+  samplingRateHz: s.samplingRateHz || s.sampling_rate || 0,
+  format: s.format || '',
+  license: s.license || '',
+  subjects: s.subjects || 0,
+  paradigm: s.paradigm || '',
+  taraId: s.taraId || s.tara_id || '',
+  taraRelevance: s.taraRelevance || s.tara_relevance || '',
+  condition: s.condition || s.conditions || [],
+  dsm5Code: s.dsm5Code || '',
+  url: s.url || s.sourceUrl || '',
+}));
+
+const stats = {
+  totalTechniques: STATS.techniques.total,
+  totalDevices: STATS.devices.total,
+  totalCompanies: STATS.devices.companies,
+  totalEEG: STATS.eeg.total,
+  totalParquet: STATS.parquet.total,
+  totalDomains: STATS.techniques.domains,
+  totalTactics: STATS.techniques.tactics,
+  totalConditions: STATS.techniques.conditions,
+  dualUse: STATS.techniques.dualUse,
+  severityBreakdown: STATS.techniques.bySeverity,
+  statusBreakdown: STATS.techniques.byStatus,
+  domainBreakdown: STATS.techniques.byDomain,
+};
+
+const conditions = ALL_CONDITIONS;
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  wide={true}
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Demo Atlas' },
+  ]}
+>
+  <DemoAtlas
+    client:load
+    techniques={slimTechniques}
+    devices={slimDevices}
+    eegSamples={slimEEG}
+    stats={stats}
+    conditions={conditions}
+  />
+</PageLayout>
