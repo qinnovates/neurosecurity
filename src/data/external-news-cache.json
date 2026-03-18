@@ -1,20 +1,38 @@
 [
   {
     "type": "external",
+    "title": "The immediate effect of kangaroo mother care on Mother-infant inter-brain synchrony and infant brain function",
+    "date": "2026-03-18",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]16501",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.16501v1 Announce Type: new Abstract: Kangaroo mother care (KMC) is an intervention involving skin-to-skin contact that promotes physiological stability and supports long-term neurodevelopme",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Laya: A LeJEPA Approach to EEG via Latent Prediction over Reconstruction",
+    "date": "2026-03-18",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]16281",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.16281v1 Announce Type: cross Abstract: Electroencephalography (EEG) is a widely used tool for studying brain function, with applications in clinical neuroscience, diagnosis, and brain-compu",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Bayesian Inference of Psychometric Variables From Brain and Behavior in Implicit Association Tests",
+    "date": "2026-03-18",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]16741",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.16741v1 Announce Type: cross Abstract: Objective. We establish a principled method for inferring mental health related psychometric variables from neural and behavioral data using the Impli",
+    "category": "research"
+  },
+  {
+    "type": "external",
     "title": "Paradromics kicks off BCI partnership program to advance tech - MassDevice",
     "date": "2026-03-17",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMid0FVX3lxTE5wYlhDRHdtbmphanVZMGx6b2FNWjFZUEtwSDVQZS00OEk1Z21vTFlic1FnZGlLd3hacGdtWXdEVzlMeF9VMFRGTkxWd2FyaHVLaXVCYklaekxadzVya3VYdHN2Z3NZVm9ORC1pR3pjRWVXTTVYRWt3?oc=5",
     "source": "Google News — BCI",
     "summary": "Paradromics kicks off BCI partnership program to advance tech&nbsp;&nbsp;MassDevice",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China Approves First Invasive BCI Device - 조선일보",
-    "date": "2026-03-17",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxOZ1lrRDFnZWx1WElwSm5IOVg5cVhlZXNGcnQ4bGppZl9xeWJWaUFPMF93cXZVSUFYUHpWQ09FRGg2SzB0amRDWDBzUF9ETUoxYko1RU80VFB6R0E3bmNnUXV3LTNMS2ZyUER6Y2Q3LXFVQXNna0l1cGRyOWp4QlFKWGo0ODZYWGUt?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China Approves First Invasive BCI Device&nbsp;&nbsp;조선일보",
     "category": "neurotechnology"
   },
   {
@@ -28,21 +46,12 @@
   },
   {
     "type": "external",
-    "title": "BCMI-Driven Motion Control Detection: EEG-Based Machine Learning and Interaction Entropy for High-Order Brain Networks",
-    "date": "2026-03-17",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]15208",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.15208v1 Announce Type: new Abstract: This study investigates the cognitive motor control detection and the underlying neuroregulatory mechanisms during music-assisted simulated driving. Usi",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "The Neuroscience of Transformers",
-    "date": "2026-03-17",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]15339",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.15339v1 Announce Type: new Abstract: Neuroscience has long informed the development of artificial neural networks, but the success of modern architectures invites, in turn, the converse: ca",
-    "category": "research"
+    "title": "Brain Computer Interface Enables Rapid Communication for Two People with Paralysis - Mass General Brigham",
+    "date": "2026-03-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi2AFBVV95cUxObjlkNWktN3FZLVdmbU9HcGs4UWJHYTFRSjlWb1pQd2F2anFNZGFFQXNfb254UUdqaGlWOFRTY2FMSXFJZXpSNm5fS0lqQl9sblFYdktnLWdxbjhfMXJQOXljNFNRdTMtc3lhYVBHb0ZHeC1hS0gyTXE4VEd5WWdCa3hVV0xfSG1ucHEwLThRdWpBYm81bmpnS1JmdDR5Q1V6TVd4WGtuR1p1MUNSaW5SbDZkSm1Uc0tJWC1rNjV0cndiZ3J1WDBzQnFGeHY0bGZqY2ZaNU5peUY?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain Computer Interface Enables Rapid Communication for Two People with Paralysis&nbsp;&nbsp;Mass General Brigham",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -136,6 +145,15 @@
   },
   {
     "type": "external",
+    "title": "Elon Musk's Neuralink plans $8.2M expansion, new hires in Texas - Austin American-Statesman",
+    "date": "2026-02-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimgFBVV95cUxPNTVvTENIR1F0WktJVzRRaWJla2twOXhJc0plZFpQTE1CMFVkLWVZTzNZamxtc2NtTFpTQjlneWx4SzBHTFA3WEN5eVJqdGVLSE5Ea3IzZFZSWlVvcjRWZjVpR1FPTlVmTkhLcWxERllPVWhDU3BKdnFUV3RQcF9mY3J3bjZHcmV4NGNWb2NuMzE4bFhLQlFqQ2hB?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk's Neuralink plans $8.2M expansion, new hires in Texas&nbsp;&nbsp;Austin American-Statesman",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
     "date": "2026-01-29",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
@@ -160,15 +178,6 @@
     "source": "Google News — MIND Act",
     "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says - Reuters",
-    "date": "2026-01-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi3wFBVV95cUxPMWEwLU1QOHU2WjNFeUM2MEVqSDU3Ujh1UnVFYW5jd0ZqelRCcGR5dlpMZ3pCd0UxaVVPYlRMN0ZQc0lDQ1RfNTJFaG5saTNHcE4ydDNrbEhxNjduWTBkenJiUjhvdnhKc2tRVTg1UXV4QzNiZGF3ZEQxZllLZV9OQ3BuMEtFcS1CMWI1TkZtS2pIZWRvUE1JTVdWSzhVellKQ3c2dkxCWUJGNnNQcjAtX3RqMlhLNVBxOGxjSExUN0tkbjJXSWlHRkJZX0R6ZzRLUkt0WTQ5UGdnQTBvemJJ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink plans 'high-volume' brain implant production by 2026, Musk says&nbsp;&nbsp;Reuters",
-    "category": "neurotechnology"
   },
   {
     "type": "external",
