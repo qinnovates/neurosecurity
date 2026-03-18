@@ -4,7 +4,21 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: df89609b59c235a8e7e604d1013b2019c4d710a5 -->
+<!-- changelog-marker: e30f0d505530d864d92ca03ea04ea75ed881c8bc -->
+
+## 2026-03-17
+
+### Added
+- BCI Security Plugin blog post and website page ([9249666](https://github.com/qinnovates/qinnovate/commit/9249666))
+- Agentic AI scaffold: decompose monolithic CLAUDE.md into 3-layer hierarchy + per-directory READMEs ([dd89772](https://github.com/qinnovates/qinnovate/commit/dd89772))
+
+### Updated
+- ADHD vs ASD differential diagnosis, research gaps, face ERP dissociation ([e30f0d5](https://github.com/qinnovates/qinnovate/commit/e30f0d5))
+
+### Other
+- resolve news cache conflict (accept remote) ([1b90a48](https://github.com/qinnovates/qinnovate/commit/1b90a48))
+- update news feed cache [skip ci-deploy] ([054710f](https://github.com/qinnovates/qinnovate/commit/054710f))
+
 
 ## 2026-03-16
 
