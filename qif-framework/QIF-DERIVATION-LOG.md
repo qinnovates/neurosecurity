@@ -15,6 +15,7 @@
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails, Data Lake Sprint
 | Entry | Topic | Link |
 |-------|-------|------|
+| 102 | Quorum v3→v4.1 + EEG Data Lake: Adaptive Intelligence, divergence engine, anti-boxing, ASD/ADHD signal differentiators, 14-dataset catalog with DSM-5 tagging, state-dependent markers, KQL integration | [Entry 102](#entry-102-quorum-v4-eeg-data-lake) |
 | 101 | TARA naming convention evolution: should IDs encode taxonomy? Flat vs hierarchical vs hybrid. 50-agent Quorum org-mode swarm for fact-check + taxonomy design | [Entry 101](#entry-101-tara-naming-convention) |
 | 100 | Dopamine wavelength research: 12-agent Quorum swarm mapping photon→DA pathways, TARA technique cards, cofactor dependencies, NP transduction, clinical validation gaps | [Entry 100](#entry-100-dopamine-wavelength-quorum-swarm) |
 | 99 | Data Studio + Parquet datalake: Quorum-driven architecture, TARA-EEG signal mappings, RACI decision attribution | [Entry 99](#entry-99-data-studio-quorum-governance) |
@@ -392,6 +393,78 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 - **Model:** Claude Opus 4.6
 - **Role:** Co-derivation (architectural mapping), literature synthesis (Kellmeyer integration)
 - **Human-Decided:** Blockchain = provenance only; neural data never on-chain; NSP as primary integration point; connection to NFT experience
+
+---
+
+## Entry 102: Quorum v4.1 + EEG Data Lake — Adaptive Intelligence & ASD/ADHD Signal Differentiation {#entry-102-quorum-v4-eeg-data-lake}
+
+**Date:** 2026-03-17 to 2026-03-18 (extended session)
+**Classification:** DECISION + RESEARCH — Quorum architecture redesigned. EEG data lake established. ASD/ADHD signal differentiation mapped.
+**AI Systems:** Claude Opus 4.6, [Quorum](https://github.com/qinnovates/quorum) (multiple swarms: 11-agent feature design, 6-agent adaptive intelligence, 3-agent anti-boxing validation, 3-agent philosophical fidelity review), 10+ research subagents
+**Connected entries:** [Entry 101](#entry-101-tara-naming-convention) (Quorum used for TARA naming), [Entry 99](#entry-99-data-studio-quorum-governance) (Data Studio + EEG samples), [Entry 90](#entry-90-data-lake-sprint) (KQL-first architecture)
+
+### Track 1: Quorum v3.0.0 → v4.1.0
+
+**What happened:** Quorum went from a flat-5-default multi-agent reasoning plugin to a context-aware, self-configuring system with structural protections against both hallucination and creative suppression.
+
+**Releases shipped:**
+- **v3.1.0:** Research + Validation workflow. Two-stage pattern (research swarm → validation swarm). Three-tier verdicts: VALIDATED / FLAGGED / BLOCKED. Panel provenance. Scope disclaimers.
+- **v3.2.0:** Security hardening. Removed Bash/Write/Edit from manifest `allowed-tools` (CRITICAL fix — these were available to all agents despite docs saying supervisor-only). Added injection defense to all agent templates. Credential detection patterns. Profile sanitization.
+- **v4.0.0:** Adaptive Intelligence. Project profiles (`_swarm/project-profile.json`). Task classification gate (4-dimension scoring: domain count, certainty demand, scope, artifact → auto-config). Config transparency block. Adaptive output templates (AUDIT / RESEARCH / DIALECTIC / DECISION / ORG / EXPLORE). Prompt optimization with `--ponder` and Socratic Gate auto-trigger.
+- **v4.1.0:** SKILL.md split (1490 → 250 lines). Divergence engine (Provocateur archetype, EXPLORE mode, preserve-if-unique triage, creative disruption check). Structural protections (adversarial immunity, Socratic follow-ups, refutation resistance, Socratic Remainder, inverted early termination). Anti-boxing rules (profiles are floors not ceilings, Domain Outsider never from profile, condition-based outsider injection).
+
+**Key architectural decisions:**
+
+1. **Profiles are floors, not ceilings.** Project profiles accelerate common-case configuration but must never constrain what domains the supervisor can pull in. Kevin raised this concern directly: "will that hinder the context and where we need to think more abstractly? I fear it will force it to work in a box." The anti-boxing rules are the structural response.
+
+2. **Constraint kills creativity. Transparency kills hallucination.** This became the design principle connecting the convergence engine (evidence audit, contradiction check, validation pipeline) with the divergence engine (Provocateur, EXPLORE mode, partition overlap). Both are load-bearing. The hallucination disclaimer (13 verified citations on transformer mathematics, biological confabulation, information theory, Knightian uncertainty) explains why no LLM is hallucination-proof — it is a structural property of probabilistic systems, not a fixable bug.
+
+3. **Structural protections must be enforced, not aspirational.** Three validators (Creative Constraints, Divergent Thinking, Socratic Fidelity) found that efficiency mechanisms (pruning, early termination, template constraints) systematically killed dissent while anti-boxing rules were soft instructions. The fix: adversarial agents are immune to pruning, Socratic follow-ups are mandatory (2-3 questions, not just 1), unanimous agreement increases scrutiny instead of triggering early termination.
+
+4. **Socratic Gate replaces Falsifiability with Contestability.** The Philosophy of Inquiry validator pointed out that Falsifiability penalizes normative questions ("Should we prioritize autonomy over safety?") — exactly the questions dialectic mode was designed for. Contestability ("Could reasonable, informed people disagree?") captures both empirical and normative disagreement.
+
+### Track 2: EEG Data Lake
+
+**What happened:** Built a 14-dataset EEG catalog (7 ASD, 6 ADHD, 1 IDD) with 4-axis tagging (DSM-5-TR diagnosis codes, research tags, source attribution, TARA relevance). Researched ASD/ADHD signal differentiation with 20+ verified meta-analytic sources. Discovered state-dependent markers are the key differentiator. Integrated with qinnovate KQL tables (27 EEG samples in Parquet).
+
+**Datasets ingested:**
+- Dickinson Brain Aging (28 ASD + 28 TD, resting-state, adults, CC BY 4.0) — 1 GB downloaded
+- BCIAUT-P300 (15 ASD, P300 BCI, CC BY 4.0) — pending Kaggle download
+- SFARI ds006780 (multi-paradigm, CC0) — pending OpenNeuro download
+- Move4AS (14 ASD + 20 TD, motor + motion capture, CC BY 4.0)
+- 6 ADHD datasets (Nasrabadi children, Mendeley adults, TDBRAIN, FOCUS, Duric qEEG, BALLADEER)
+
+**Key research findings:**
+
+1. **At rest, ADHD and ASD overlap. During tasks, they diverge in opposite directions.** This is the central finding. Error monitoring shows the same ERN reduction but opposite behavioral consequences (ADHD: post-error slowing, ASD: post-error speeding). Theta transitions diverge (ADHD: theta rises with eyes-open and correlates with inattention; ASD: theta doesn't rise and the correlation is absent). Face processing N170 separates cleanly (ASD: broadly delayed; ADHD: normal except gaze-specific).
+
+2. **No published ADHD-vs-ASD EEG classifier exists above 80% accuracy.** Everyone classifies disorder-vs-controls. The clinically important question is unanswered with EEG alone. This is a research gap Kevin is positioned to address.
+
+3. **The face processing double dissociation (Tye et al. 2014)** is the cleanest separation: same paradigm, same recording, different ERP windows. N170 (170ms) impaired in ASD = early perceptual encoding. N400 (400ms) impaired in ADHD = later semantic/affective integration. Both impaired in ASD+ADHD.
+
+4. **ADHD-specific hyperconnectivity is invisible at rest (Shephard et al. 2019).** It only emerges during attentional control and social cognition tasks. Resting-state-only studies fundamentally cannot separate these conditions at the connectivity level.
+
+5. **The comorbid group (ASD+ADHD) is not additive (Watanabe & Watanabe 2023).** It runs on a unique frontoparietal mechanism not seen in pure ADHD. Cannot be treated as a blend.
+
+**TARA implications:** Gamma band at rest interacts with elevated ASD baseline. Frontocentral theta is elevated in ADHD subgroup. Alpha coherence distinguishes conditions at connectivity level. ERP timing (P300 latency, N170 latency) produces different signal landscapes per condition. Pe is shared — error-monitoring techniques produce similar interference in both.
+
+**Data governance:** All datasets tagged with source DOIs, licenses (CC0/CC-BY-4.0/DUA), and use case justification. HBN requires formal DUA — cannot go in public data lake. BALLADEER DOI flagged as UNVERIFIED. CITATIONS.md has 14 entries with full attribution.
+
+### Artifacts Produced
+
+| Artifact | Location |
+|----------|----------|
+| Quorum v4.1.0 | https://github.com/qinnovates/quorum/releases/tag/v4.1.0 |
+| Quorum SKILL.md (250 lines) | `~/.claude/skills/swarm/SKILL.md` |
+| EEG Data Lake catalog | `eeg-data-lake/parquet/eeg-datasets.json` (14 datasets) |
+| EEG Data Lake tagging schema | `eeg-data-lake/docs/TAGGING-SCHEMA.md` |
+| ASD/ADHD signal differentiators | `eeg-data-lake/docs/ADHD-vs-ASD-EEG-Patterns.md` |
+| State-dependent markers | `eeg-data-lake/docs/ADHD-vs-ASD-State-Dependent-Markers.md` |
+| Dickinson raw data | `eeg-data-lake/raw/dickinson-brain-aging/` (1 GB, 56 subjects) |
+| Qinnovate EEG samples | `datalake/eeg-samples.json` (27 samples) |
+| Qinnovate Parquet | `docs/data/parquet/eeg_samples.parquet` (17 KB) |
+| Hallucination disclaimer | `quorum/docs/SAFETY.md` Section 0 (13 verified citations) |
+| Swarm reports | `_swarm/2026-03-17-quorum-validate-feature.md`, `_swarm/2026-03-17-quorum-adaptive-intelligence.md`, `_swarm/2026-03-17-quorum-anti-boxing-validation.md`, `_swarm/2026-03-17-autism-eeg-datasets.md` |
 
 ---
 
