@@ -3,7 +3,7 @@
   "generated_from": "qif-lab/src/config.py",
   "framework": "Quantified Interconnection Framework (QIF) for Neural Security",
   "statistics": {
-    "total_techniques": 135,
+    "total_techniques": 141,
     "total_tactics": 16,
     "total_domains": 8,
     "by_tactic": {
@@ -180,7 +180,7 @@
       "qif_theoretical": 6,
       "qif_chain_synthesis": 5
     },
-    "tara_taxonomy_version": "provisional"
+    "tara_taxonomy_version": "1.0"
   },
   "changelog": [
     {
@@ -510,6 +510,14 @@
       "description": "Exploiting consumer device sensors for side-channel extraction of user input, keystrokes, and interaction patterns via acoustic, optical, and RF emanations.",
       "legacy_ids": [],
       "legacy_name": "Side-Channel"
+    },
+    {
+      "id": "QIF-N.NM",
+      "name": "Nanoparticle-Mediated Neuromodulation",
+      "domain": "Neural",
+      "domain_code": "N",
+      "action_code": "NM",
+      "description": "Techniques using co-located nanoparticle transducers (UCNP, HUP, Au NPs) to convert external energy into local neural modulation. Requires prior NP injection at target site."
     }
   ],
   "techniques": [
@@ -688,7 +696,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Signal injection",
-      "tara_alias": null,
+      "tara_alias": "TARA-SOM-M-001",
       "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -948,7 +956,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Neural ransomware",
-      "tara_alias": null,
+      "tara_alias": "TARA-MOT-D-001",
       "tara_domain_primary": "MOT",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -1138,7 +1146,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Eavesdropping / signal interception",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-R-001",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -1305,7 +1313,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Man-in-the-middle",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-001",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -1479,7 +1487,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Quantum tunneling exploit",
-      "tara_alias": null,
+      "tara_alias": "TARA-SOM-M-002",
       "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -1653,7 +1661,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Davydov soliton attack",
-      "tara_alias": null,
+      "tara_alias": "TARA-SOM-M-003",
       "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -1807,7 +1815,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Protocol manipulation",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-001",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -2075,7 +2083,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Command hijacking",
-      "tara_alias": null,
+      "tara_alias": "TARA-MOT-M-001",
       "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -2359,7 +2367,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "RF false brainwave injection",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-M-001",
       "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -2639,7 +2647,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "ELF neural entrainment",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-M-002",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -2901,7 +2909,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Intermodulation (BCI signal weaponized)",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-M-003",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -3138,7 +3146,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Pulsed microwave (Frey effect)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUD-M-001",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -3399,7 +3407,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Temporal interference (deep targeting)",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-M-004",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -3700,7 +3708,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Envelope modulation (stealth carrier)",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-M-005",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -3863,7 +3871,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Directed energy (thermal I0 damage)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SOM-D-001",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -4002,7 +4010,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Professor X backdoor (training-time)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-002",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -4141,7 +4149,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Transfer learning backdoor",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-003",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -4281,7 +4289,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Adversarial filter attack",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-004",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -4423,7 +4431,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Universal adversarial perturbation (UAP)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-005",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -4574,7 +4582,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Membership inference on neural data",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-002",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -4724,7 +4732,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Federated gradient leakage",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-003",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -4946,7 +4954,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Neurofeedback falsification",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-M-006",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -5221,7 +5229,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Closed-loop perturbation cascade",
-      "tara_alias": null,
+      "tara_alias": "TARA-MOT-D-002",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -5364,7 +5372,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Training data poisoning (model bias injection)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-006",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -5659,7 +5667,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Neuronal jamming",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-D-001",
       "tara_domain_primary": "MOT",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -5943,7 +5951,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Neuronal flooding",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-D-002",
       "tara_domain_primary": "MOT",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -6221,7 +6229,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Neuronal scanning",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-R-002",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -6388,7 +6396,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Neural selective forwarding",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-007",
       "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -6670,7 +6678,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Neural DoS (stimulation flood)",
-      "tara_alias": null,
+      "tara_alias": "TARA-MOT-D-003",
       "tara_domain_primary": "MOT",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -6950,7 +6958,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Motor hijacking",
-      "tara_alias": null,
+      "tara_alias": "TARA-MOT-M-002",
       "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -7084,7 +7092,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Battery drain attack (resource depletion)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-D-001",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -7340,7 +7348,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Identity spoofing (neural biometric)",
-      "tara_alias": null,
+      "tara_alias": "TARA-IDN-M-001",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -7586,7 +7594,7 @@
         "qif_contribution": "formalization"
       },
       "technique": "Identity erosion (long-term personality drift)",
-      "tara_alias": null,
+      "tara_alias": "TARA-IDN-M-002",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -7831,7 +7839,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Working memory poisoning",
-      "tara_alias": null,
+      "tara_alias": "TARA-MEM-M-001",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -8047,7 +8055,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "P300 interrogation",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-R-003",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -8266,7 +8274,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Thought decoding (covert speech)",
-      "tara_alias": null,
+      "tara_alias": "TARA-LNG-R-001",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -8531,7 +8539,7 @@
         "qif_contribution": "formalization"
       },
       "technique": "Agency manipulation",
-      "tara_alias": null,
+      "tara_alias": "TARA-IDN-M-003",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -8775,7 +8783,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Brainprint theft",
-      "tara_alias": null,
+      "tara_alias": "TARA-IDN-R-001",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -9020,7 +9028,7 @@
         "qif_contribution": "formalization"
       },
       "technique": "Self-model corruption",
-      "tara_alias": null,
+      "tara_alias": "TARA-IDN-D-001",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -9234,7 +9242,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Neurophishing",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-M-007",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -9483,7 +9491,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Cognitive biometric inference",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-R-004",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -9628,7 +9636,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "BLE/RF side-channel",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-004",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -9767,7 +9775,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Supply chain compromise (firmware backdoor)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-008",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -9904,7 +9912,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Cloud infrastructure attack",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-009",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -10040,7 +10048,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Harvest-now-decrypt-later",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-005",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -10183,7 +10191,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "OTA firmware weaponization",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-010",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -10325,7 +10333,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Mass BCI compromise (platform attack)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-D-002",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -10474,7 +10482,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Electrode compromise (physical tamper)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-011",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -10611,7 +10619,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Wireless authentication bypass",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-012",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -10753,7 +10761,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Hardware fault injection (voltage/EM glitching)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-013",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -10925,7 +10933,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Neural data privacy breach",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-R-005",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -11173,7 +11181,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "ERP harvesting",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-R-006",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -11420,7 +11428,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Cognitive state capture",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-R-007",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -11664,7 +11672,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Memory extraction",
-      "tara_alias": null,
+      "tara_alias": "TARA-MEM-R-001",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -11924,7 +11932,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "BCI cognitive warfare",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-D-003",
       "tara_domain_primary": "MOT",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -12169,7 +12177,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Neuro-surveillance",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-R-008",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -12319,7 +12327,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Network mapping (BCI topology)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-006",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -12478,7 +12486,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Calibration poisoning",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-014",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -12692,7 +12700,7 @@
         "qif_contribution": "original_derivation"
       },
       "technique": "Pattern lock (learned pathway persistence)",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-M-008",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -12935,7 +12943,7 @@
         "qif_contribution": "original_derivation"
       },
       "technique": "Memory implant (cross-session persistence)",
-      "tara_alias": null,
+      "tara_alias": "TARA-MEM-M-002",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -13093,7 +13101,7 @@
         "qif_contribution": "original_derivation"
       },
       "technique": "Coherence mimicry",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-015",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -13307,7 +13315,7 @@
         "qif_contribution": "original_derivation"
       },
       "technique": "Gradual drift (slow parameter shift)",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-M-009",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -13467,7 +13475,7 @@
         "qif_contribution": "original_derivation"
       },
       "technique": "Noise injection (detection masking)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-016",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -13681,7 +13689,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "User consent fatigue (neural permission flooding)",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-M-010",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -13948,7 +13956,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Algorithmic psychosis induction (recommendation weaponization)",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-D-004",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -14260,7 +14268,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Slow drift / boiling frog (adiabatic phase space manipulation)",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-M-011",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -14555,7 +14563,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Phase dynamics replay/mimicry (GAN-synthesized or RF-injected neural trajectories)",
-      "tara_alias": null,
+      "tara_alias": "TARA-VIS-M-001",
       "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -14834,7 +14842,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Bifurcation forcing (critical parameter manipulation to trigger neural state transitions)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUT-D-001",
       "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -15132,7 +15140,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Separatrix leakage (meta-biometric extraction from dynamical transition observations)",
-      "tara_alias": null,
+      "tara_alias": "TARA-IDN-R-002",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -15394,7 +15402,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Integrator/resonator type switching (tonic excitability manipulation)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUT-M-001",
       "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -15565,7 +15573,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Baseline adaptation poisoning (re-enrollment window exploitation)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-M-017",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -15725,7 +15733,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Transducer inversion (acoustic eavesdropping via speaker-to-microphone reprogramming)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-007",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -15993,7 +16001,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Ear-canal neural eavesdropping via modified consumer earbud (supply chain in-ear EEG)",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-R-009",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -16310,7 +16318,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "Cognitive inference from longitudinal in-ear EEG (personalized cognitive profiling)",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-R-010",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -16489,7 +16497,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Ultrasonic sonar vital sign extraction (inaudible Doppler physiological sensing)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUT-R-001",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -16664,7 +16672,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Haptic motor body sonar (taptic engine repurposing for tissue impedance profiling)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SOM-R-001",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -16849,7 +16857,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "IR vascular mapping via Face ID system (NIR hemoglobin absorption imaging)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUT-R-002",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -17030,7 +17038,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "LiDAR remote pulse detection (laser Doppler vibrometry for cardiac waveform extraction)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUT-R-003",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -17216,7 +17224,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Ear canal acoustic fingerprinting (ANC echo profiling for covert identification)",
-      "tara_alias": null,
+      "tara_alias": "TARA-IDN-R-003",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -17372,7 +17380,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Gyroscope acoustic eavesdropping (MEMS speech capture via resonant frequency aliasing)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUD-R-001",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -17530,7 +17538,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Accelerometer speech reconstruction (vibration-to-audio via surface-coupled MEMS)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUD-R-002",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -17689,7 +17697,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Ultrasonic cross-device tracking (inaudible beacon correlation for user identification)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-008",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -17846,7 +17854,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Acoustic keystroke inference (typing sound classification for credential extraction)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-009",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -18022,7 +18030,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Remote photoplethysmography (camera-based pulse and blood oxygen extraction)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUT-R-004",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -18279,7 +18287,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Eye tracking cognitive state inference (gaze pattern analysis for attention and intent profiling)",
-      "tara_alias": null,
+      "tara_alias": "TARA-VIS-R-001",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -18433,7 +18441,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Ambient light sensor side-channel exfiltration (screen content inference via reflected light)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-010",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -18593,7 +18601,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Accelerometer keystroke inference (touchscreen tap localization for PIN/password recovery)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-011",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -18770,7 +18778,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Gait biometric identification (IMU-based walking pattern fingerprint for persistent tracking)",
-      "tara_alias": null,
+      "tara_alias": "TARA-MOT-R-001",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -19023,7 +19031,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Tremor and movement neurological profiling (IMU-based motor disorder detection and health inference)",
-      "tara_alias": null,
+      "tara_alias": "TARA-MOT-R-002",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -19232,7 +19240,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "WiFi CSI passive body sensing (through-wall vital signs, 3D pose reconstruction, respiratory and gait biometric inference via dedicated or commodity WiFi hardware)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUT-R-005",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -19393,7 +19401,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "BLE physical-layer device fingerprinting (radio frequency imperfection tracking)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-012",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -19627,7 +19635,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Thermal facial stress and emotion inference (IR thermography for autonomic nervous system state extraction)",
-      "tara_alias": null,
+      "tara_alias": "TARA-EMO-R-001",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -19805,7 +19813,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "PPG pulse waveform biometric identification (cardiac signature fingerprinting via wearable optical sensor)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUT-R-006",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -19962,7 +19970,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Magnetometer speaker-leakage eavesdropping (magnetic field emanation capture from speaker voice coils)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-013",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -20225,7 +20233,7 @@
         "qif_contribution": "chain_synthesis"
       },
       "technique": "Acoustic-to-neural profiling pipeline (consumer earbud escalation from audio to cognitive exploitation)",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-R-011",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -20399,7 +20407,7 @@
         "qif_contribution": "chain_synthesis"
       },
       "technique": "Multi-modal biometric fusion attack (cross-sensor identity correlation for persistent tracking)",
-      "tara_alias": null,
+      "tara_alias": "TARA-IDN-R-004",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -20636,7 +20644,7 @@
         "qif_contribution": "chain_synthesis"
       },
       "technique": "Cross-device physiological correlation (phone + watch + earbuds comprehensive health profiling)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUT-R-007",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -20810,7 +20818,7 @@
         "qif_contribution": "chain_synthesis"
       },
       "technique": "WiFi + camera passive surveillance fusion (through-wall presence detection with visual identification)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-014",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -21088,7 +21096,7 @@
         "qif_contribution": "chain_synthesis"
       },
       "technique": "Consumer-sensor-to-BCI kill chain escalation (pre-implant reconnaissance and cognitive priming via consumer devices)",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-R-012",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -21277,7 +21285,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Neural steganographic encoding (inaudible audio watermarking for covert neural command/biofingerprint channel)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUD-M-002",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -21461,7 +21469,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Multi-modal keystroke inference via acoustic-optical-RF fusion (password/input recovery without mic/camera permissions)",
-      "tara_alias": null,
+      "tara_alias": "TARA-SIL-R-015",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -21635,7 +21643,7 @@
         "qif_contribution": "threat_recontextualization"
       },
       "technique": "Passive facial geometry estimation via display-as-illuminator inverse photometry (presence/orientation detection without camera)",
-      "tara_alias": null,
+      "tara_alias": "TARA-VIS-R-002",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -21835,7 +21843,7 @@
         "qif_contribution": "framework_mapping"
       },
       "technique": "SSVEP Frequency Hijack via Imperceptible Display Flicker",
-      "tara_alias": null,
+      "tara_alias": "TARA-VIS-M-002",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -21890,10 +21898,10 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Neural spoofing",
-      "tara_alias": null,
-      "tara_domain_primary": null,
+      "tara_alias": "TARA-SOM-M-004",
+      "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
-      "tara_mode": null,
+      "tara_mode": "M",
       "tara_drift": null,
       "tara_drift_window": null,
       "tara_direction": null,
@@ -22022,10 +22030,10 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Neural sybil",
-      "tara_alias": null,
-      "tara_domain_primary": null,
+      "tara_alias": "TARA-SOM-M-005",
+      "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
-      "tara_mode": null,
+      "tara_mode": "M",
       "tara_drift": null,
       "tara_drift_window": null,
       "tara_direction": null,
@@ -22154,10 +22162,10 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Neural sinkhole",
-      "tara_alias": null,
-      "tara_domain_primary": null,
+      "tara_alias": "TARA-SOM-D-002",
+      "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
-      "tara_mode": null,
+      "tara_mode": "D",
       "tara_drift": null,
       "tara_drift_window": null,
       "tara_direction": null,
@@ -22286,10 +22294,10 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Neural nonce replay",
-      "tara_alias": null,
-      "tara_domain_primary": null,
+      "tara_alias": "TARA-SOM-M-006",
+      "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
-      "tara_mode": null,
+      "tara_mode": "M",
       "tara_drift": null,
       "tara_drift_window": null,
       "tara_direction": null,
@@ -22420,10 +22428,10 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Neuromorphic mimicry attack (synaptic weight tampering)",
-      "tara_alias": null,
-      "tara_domain_primary": null,
+      "tara_alias": "TARA-SIL-M-018",
+      "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
-      "tara_mode": null,
+      "tara_mode": "M",
       "tara_drift": null,
       "tara_drift_window": null,
       "tara_direction": null,
@@ -22549,10 +22557,10 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Data alignment exploitation",
-      "tara_alias": null,
-      "tara_domain_primary": null,
+      "tara_alias": "TARA-SIL-M-019",
+      "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
-      "tara_mode": null,
+      "tara_mode": "M",
       "tara_drift": null,
       "tara_drift_window": null,
       "tara_direction": null,
@@ -22676,7 +22684,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Vestibular balance profiling",
-      "tara_alias": null,
+      "tara_alias": "TARA-VES-R-001",
       "tara_domain_primary": "VES",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -22829,7 +22837,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "GVS motion illusion injection",
-      "tara_alias": null,
+      "tara_alias": "TARA-VES-M-001",
       "tara_domain_primary": "VES",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -23007,7 +23015,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Vestibular-ocular reflex manipulation",
-      "tara_alias": null,
+      "tara_alias": "TARA-VES-M-002",
       "tara_domain_primary": "VES",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -23178,7 +23186,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Cochlear-vestibular crosstalk exploitation",
-      "tara_alias": null,
+      "tara_alias": "TARA-VES-M-003",
       "tara_domain_primary": "VES",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -23347,7 +23355,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Vestibular overload (vertigo induction)",
-      "tara_alias": null,
+      "tara_alias": "TARA-VES-D-001",
       "tara_domain_primary": "VES",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -23519,7 +23527,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Cumulative tissue excitability shift",
-      "tara_alias": null,
+      "tara_alias": "TARA-SOM-M-007",
       "tara_domain_primary": "SOM",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -23696,7 +23704,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Progressive reward pathway desensitization",
-      "tara_alias": null,
+      "tara_alias": "TARA-EMO-M-001",
       "tara_domain_primary": "EMO",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -23860,7 +23868,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Incremental memory consolidation interference",
-      "tara_alias": null,
+      "tara_alias": "TARA-MEM-D-001",
       "tara_domain_primary": "MEM",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -24034,7 +24042,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Cumulative speech degradation",
-      "tara_alias": null,
+      "tara_alias": "TARA-LNG-D-001",
       "tara_domain_primary": "LNG",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -24206,7 +24214,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Delayed emotional baseline shift",
-      "tara_alias": null,
+      "tara_alias": "TARA-EMO-M-002",
       "tara_domain_primary": "EMO",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -24376,7 +24384,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Latent cognitive decline via chronic electrode micromotion",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-D-005",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -24549,7 +24557,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Sleep architecture manipulation",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUT-M-002",
       "tara_domain_primary": "AUT",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -24726,7 +24734,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Chronic epileptogenic focus creation (kindling)",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUT-D-002",
       "tara_domain_primary": "AUT",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -24891,7 +24899,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Structural motor pathway reorganization",
-      "tara_alias": null,
+      "tara_alias": "TARA-MOT-M-003",
       "tara_domain_primary": "MOT",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -25061,7 +25069,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Autobiographical narrative coherence disruption",
-      "tara_alias": null,
+      "tara_alias": "TARA-IDN-D-002",
       "tara_domain_primary": "IDN",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -25221,7 +25229,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Longitudinal neural fingerprint extraction",
-      "tara_alias": null,
+      "tara_alias": "TARA-IDN-R-005",
       "tara_domain_primary": "IDN",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -25369,7 +25377,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Progressive visual response mapping",
-      "tara_alias": null,
+      "tara_alias": "TARA-VIS-R-003",
       "tara_domain_primary": "VIS",
       "tara_domain_secondary": [],
       "tara_mode": "R",
@@ -25510,7 +25518,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Acute fear circuit activation",
-      "tara_alias": null,
+      "tara_alias": "TARA-EMO-M-003",
       "tara_domain_primary": "EMO",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -25674,7 +25682,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Hedonic tone suppression",
-      "tara_alias": null,
+      "tara_alias": "TARA-EMO-M-004",
       "tara_domain_primary": "EMO",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -25836,7 +25844,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Emotional flooding (affect overload)",
-      "tara_alias": null,
+      "tara_alias": "TARA-EMO-D-001",
       "tara_domain_primary": "EMO",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -25998,7 +26006,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Empathy circuit disruption",
-      "tara_alias": null,
+      "tara_alias": "TARA-EMO-D-002",
       "tara_domain_primary": "EMO",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -26158,7 +26166,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Speech production hijacking",
-      "tara_alias": null,
+      "tara_alias": "TARA-LNG-M-001",
       "tara_domain_primary": "LNG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -26326,7 +26334,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Comprehension interference",
-      "tara_alias": null,
+      "tara_alias": "TARA-LNG-M-002",
       "tara_domain_primary": "LNG",
       "tara_domain_secondary": [],
       "tara_mode": "M",
@@ -26498,7 +26506,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Visual cortex overstimulation",
-      "tara_alias": null,
+      "tara_alias": "TARA-VIS-D-001",
       "tara_domain_primary": "VIS",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -26669,7 +26677,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Cochlear implant overstimulation",
-      "tara_alias": null,
+      "tara_alias": "TARA-AUD-D-001",
       "tara_domain_primary": "AUD",
       "tara_domain_secondary": [],
       "tara_mode": "D",
@@ -26847,7 +26855,7 @@
       },
       "tara_enrichment_pending": false,
       "technique": "Neural pathway chaining (off-target propagation exploitation)",
-      "tara_alias": null,
+      "tara_alias": "TARA-COG-M-012",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [
         "MOT",
@@ -26980,6 +26988,296 @@
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
       }
+    },
+    {
+      "id": "QIF-T0136",
+      "attack": "Transcranial photobiomodulation (670/808nm)",
+      "tactic": "QIF-E.RD",
+      "bands": "I0-N1",
+      "band_ids": [
+        "I0",
+        "N1"
+      ],
+      "status": "CONFIRMED",
+      "severity": "low",
+      "ui_category": "EX",
+      "classical": "Yes",
+      "quantum": "No",
+      "tara_alias": "TARA-EMO-M-005",
+      "tara_domain_primary": "EMO",
+      "tara_domain_secondary": [
+        "COG"
+      ],
+      "tara_mode": "M",
+      "physics_feasibility": {
+        "tier": 0,
+        "tier_label": "feasible_now"
+      },
+      "tara": {
+        "mechanism": "Propagating NIR photons (670/808nm) absorbed by mitochondrial cytochrome c oxidase (CCO) in dopaminergic neurons. CCO activation increases ATP production, upregulates tyrosine hydroxylase (TH) and VMAT2 expression over days-weeks. Neuroprotective, not acutely stimulatory. Requires cofactor readiness (Fe2+, BH4, B6).",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Transcranial photobiomodulation for Parkinson's disease neuroprotection",
+          "conditions": [
+            "Parkinson's disease",
+            "neurodegeneration",
+            "traumatic brain injury"
+          ],
+          "fda_status": "investigational",
+          "evidence_level": "preclinical_strong"
+        },
+        "governance": {
+          "consent_tier": "standard",
+          "data_classification": "non_sensitive",
+          "safety_ceiling": "ANSI Z136.1 skin MPE: 330 mW/cm2 at 808nm"
+        }
+      },
+      "sources": [
+        "Oueslati 2015 DOI:10.1371/journal.pone.0140880",
+        "Gordon 2023 DOI:10.1111/ejn.15973",
+        "Gu 2017 DOI:10.1016/j.cellsig.2017.06.007"
+      ]
+    },
+    {
+      "id": "QIF-T0137",
+      "attack": "UCNP-mediated optogenetic dopamine release (980nm)",
+      "tactic": "QIF-N.NM",
+      "bands": "I0-N3",
+      "band_ids": [
+        "I0",
+        "N1",
+        "N2",
+        "N3"
+      ],
+      "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "DM",
+      "classical": "Yes",
+      "quantum": "No",
+      "tara_alias": "TARA-EMO-M-006",
+      "tara_domain_primary": "EMO",
+      "tara_domain_secondary": [
+        "COG",
+        "MOT"
+      ],
+      "tara_mode": "M",
+      "physics_feasibility": {
+        "tier": 1,
+        "tier_label": "near_term"
+      },
+      "tara": {
+        "mechanism": "980nm NIR excitation of NaYF4:Yb/Tm upconversion nanoparticles (UCNPs) injected into VTA. UCNPs emit 450/475nm blue light locally, activating ChR2 channelrhodopsin expressed in dopaminergic neurons via viral vector. Triggers acute dopamine release on millisecond timescale. Requires both genetic modification (ChR2 expression) and NP injection (neurosurgery).",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Deep brain optogenetic stimulation for Parkinson's disease",
+          "conditions": [
+            "Parkinson's disease",
+            "depression",
+            "addiction"
+          ],
+          "fda_status": "none",
+          "evidence_level": "preclinical"
+        },
+        "governance": {
+          "consent_tier": "IRB",
+          "data_classification": "sensitive_neural",
+          "safety_ceiling": "Requires stereotactic neurosurgery + gene therapy"
+        }
+      },
+      "sources": [
+        "Gong 2018 DOI:10.1126/science.aaq1144",
+        "Liu 2021 DOI:10.1038/s41467-021-25993-7"
+      ]
+    },
+    {
+      "id": "QIF-T0138",
+      "attack": "HUP photovoltaic nanoparticle dopamine stimulation (980nm)",
+      "tactic": "QIF-N.NM",
+      "bands": "I0-N3",
+      "band_ids": [
+        "I0",
+        "N1",
+        "N2",
+        "N3"
+      ],
+      "status": "EMERGING",
+      "severity": "high",
+      "ui_category": "DM",
+      "classical": "Yes",
+      "quantum": "No",
+      "tara_alias": "TARA-EMO-M-007",
+      "tara_domain_primary": "EMO",
+      "tara_domain_secondary": [
+        "COG",
+        "MOT"
+      ],
+      "tara_mode": "M",
+      "physics_feasibility": {
+        "tier": 1,
+        "tier_label": "near_term"
+      },
+      "tara": {
+        "mechanism": "980nm NIR excitation of hybrid upconversion-photovoltaic (HUP) nanoparticles (NaYF4:Yb/Tm + WO3-x nanorods) injected into VTA. UCNPs upconvert to 450nm; WO3-x generates capacitive photocurrent that depolarizes neurons directly. NO genetic modification required. Triggers acute dopamine release. 78% Y-maze place preference in mice.",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Non-genetic deep brain photovoltaic stimulation",
+          "conditions": [
+            "Parkinson's disease",
+            "depression"
+          ],
+          "fda_status": "none",
+          "evidence_level": "preclinical"
+        },
+        "governance": {
+          "consent_tier": "IRB",
+          "data_classification": "sensitive_neural",
+          "safety_ceiling": "39.2 W/cm2 at VTA (mouse); human safety not established"
+        }
+      },
+      "sources": [
+        "Jin 2025 DOI:10.1126/sciadv.adt4771"
+      ]
+    },
+    {
+      "id": "QIF-T0139",
+      "attack": "Photothermal gold nanoparticle TRPV1 dopamine activation",
+      "tactic": "QIF-N.NM",
+      "bands": "I0-N2",
+      "band_ids": [
+        "I0",
+        "N1",
+        "N2"
+      ],
+      "status": "DEMONSTRATED",
+      "severity": "medium",
+      "ui_category": "DM",
+      "classical": "Yes",
+      "quantum": "No",
+      "tara_alias": "TARA-EMO-M-008",
+      "tara_domain_primary": "EMO",
+      "tara_domain_secondary": [
+        "SOM"
+      ],
+      "tara_mode": "M",
+      "physics_feasibility": {
+        "tier": 1,
+        "tier_label": "near_term"
+      },
+      "tara": {
+        "mechanism": "NIR light (680-1100nm, tunable by nanorod aspect ratio) absorbed by antibody-conjugated gold nanorods at neuronal membrane. Photothermal conversion raises local temperature above 43.8C TRPV1 activation threshold. Ca2+ influx triggers action potential. DA-specific effect inferred but not directly demonstrated in VTA. Narrow thermal safety window (43.8-47C).",
+        "dual_use": "possible",
+        "clinical": {
+          "therapeutic_analog": "Wireless photothermal deep brain stimulation",
+          "conditions": [
+            "Parkinson's disease"
+          ],
+          "fda_status": "none",
+          "evidence_level": "preclinical"
+        },
+        "governance": {
+          "consent_tier": "IRB",
+          "data_classification": "sensitive_neural",
+          "safety_ceiling": "TRPV1 activation 43.8C; neuron damage >60C; 3-7C margin"
+        }
+      },
+      "sources": [
+        "Carvalho-de-Souza 2015 DOI:10.1016/j.neuron.2015.02.033"
+      ]
+    },
+    {
+      "id": "QIF-T0140",
+      "attack": "Infrared neural stimulation (1875nm fiber contact)",
+      "tactic": "QIF-N.MD",
+      "bands": "I0-N1",
+      "band_ids": [
+        "I0",
+        "N1"
+      ],
+      "status": "CONFIRMED",
+      "severity": "medium",
+      "ui_category": "SI",
+      "classical": "Yes",
+      "quantum": "No",
+      "tara_alias": "TARA-SOM-M-008",
+      "tara_domain_primary": "SOM",
+      "tara_domain_secondary": [
+        "AUD"
+      ],
+      "tara_mode": "M",
+      "physics_feasibility": {
+        "tier": 0,
+        "tier_label": "feasible_now"
+      },
+      "tara": {
+        "mechanism": "Pulsed 1875nm IR light delivered via contact fiber optic. Water absorption generates localized thermal transient (1-10C rise) activating TRPV4 channels and membrane capacitance changes. NOT applied to dopamine neurons. Demonstrated in cochlear, vestibular, spinal nerve, somatosensory cortex. Safety ratio only 2:1 (stimulation:damage threshold).",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Optical cochlear implant, infrared nerve stimulation",
+          "conditions": [
+            "hearing loss",
+            "peripheral neuropathy"
+          ],
+          "fda_status": "investigational",
+          "evidence_level": "clinical_pilot"
+        },
+        "governance": {
+          "consent_tier": "enhanced",
+          "data_classification": "PHI",
+          "safety_ceiling": "Damage threshold 0.3-0.4 J/cm2; narrow 2:1 ratio"
+        }
+      },
+      "sources": [
+        "Cayce 2011 DOI:10.1016/j.neuroimage.2011.03.084",
+        "Pan 2023 DOI:10.1016/j.brs.2023.01.006"
+      ]
+    },
+    {
+      "id": "QIF-T0141",
+      "attack": "Magnetothermal nanoparticle TRPV1 stimulation (AMF)",
+      "tactic": "QIF-E.RD",
+      "bands": "I0-N3",
+      "band_ids": [
+        "I0",
+        "N1",
+        "N2",
+        "N3"
+      ],
+      "status": "DEMONSTRATED",
+      "severity": "high",
+      "ui_category": "EX",
+      "classical": "Yes",
+      "quantum": "No",
+      "tara_alias": "TARA-EMO-M-009",
+      "tara_domain_primary": "EMO",
+      "tara_domain_secondary": [
+        "MOT"
+      ],
+      "tara_mode": "M",
+      "physics_feasibility": {
+        "tier": 1,
+        "tier_label": "near_term"
+      },
+      "tara": {
+        "mechanism": "Alternating magnetic field (160-570 kHz, NOT optical) drives hysteretic heating of injected iron-oxide or ferrite nanoparticles. Local temperature rise >43.8C activates TRPV1 channels. Reversed Parkinson's symptoms in MPTP/6-OHDA mice. WARNING: iron-oxide NPs in VTA/SNc add exogenous iron to brain regions where Fenton chemistry is a neurotoxicity risk. 10ug/ml ferric oxide depleted cellular DA by 68% in 24hrs (Imam 2015).",
+        "dual_use": "confirmed",
+        "clinical": {
+          "therapeutic_analog": "Magnetothermal deep brain stimulation for Parkinson's",
+          "conditions": [
+            "Parkinson's disease"
+          ],
+          "fda_status": "none",
+          "evidence_level": "preclinical"
+        },
+        "governance": {
+          "consent_tier": "IRB",
+          "data_classification": "sensitive_neural",
+          "safety_ceiling": "TRPV1 thermal window; iron accumulation toxicity risk"
+        }
+      },
+      "sources": [
+        "Hescham 2021 DOI:10.1038/s41467-021-25837-4",
+        "Imam 2015 PMID:26099304"
+      ]
     }
   ],
   "deprecated": [
