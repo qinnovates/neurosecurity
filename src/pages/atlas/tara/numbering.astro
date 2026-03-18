@@ -70,6 +70,98 @@ const syntheticBands = HOURGLASS_BANDS.filter(b => b.id.startsWith('S'));
       </p>
     </div>
 
+    <!-- TARA Domain Aliases -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading);">TARA Domain Aliases</h2>
+      <p class="text-sm mb-6" style="color: var(--color-text-muted);">
+        Every technique has two identifiers. The <strong>canonical ID</strong> (<code>QIF-Txxxx</code>) is permanent, machine-parseable, and used in code, KQL queries, citations, and STIX exports. The <strong>TARA alias</strong> (<code>TARA-{'{DOMAIN}'}-{'{MODE}'}-{'{NNN}'}</code>) is human-readable, displayed in UIs and analyst docs. The alias encodes the biological domain and interaction mode.
+      </p>
+
+      <div class="mb-8">
+        <h3 class="text-lg font-semibold mb-3">Format</h3>
+        <div class="p-4 rounded-lg" style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(148, 163, 184, 0.1);">
+          <code class="text-base" style="color: var(--color-accent-primary);">TARA-{'{DOMAIN}'}-{'{MODE}'}-{'{NNN}'}</code>
+          <p class="text-xs mt-2" style="color: var(--color-text-muted);">Example: <code>TARA-EMO-M-005</code> = Affect domain, Manipulation mode, technique #5</p>
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <h3 class="text-lg font-semibold mb-3">12 Biological Domains</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm" style="border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.15);">
+                <th class="text-left py-2 px-3 font-semibold" style="color: var(--color-text-muted);">Code</th>
+                <th class="text-left py-2 px-3 font-semibold" style="color: var(--color-text-muted);">Domain</th>
+                <th class="text-left py-2 px-3 font-semibold" style="color: var(--color-text-muted);">What It Covers</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['VIS', 'Vision', 'Visual cortex, eye tracking, SSVEP, retinal prosthetics'],
+                ['AUD', 'Audition', 'Cochlear, auditory cortex, Frey effect, acoustic'],
+                ['SOM', 'Somatosensory', 'Electrode-tissue interface, signal injection, thermal'],
+                ['VES', 'Vestibular', 'Balance, GVS, vestibulo-ocular reflex'],
+                ['MOT', 'Motor', 'Motor cortex, NMJ, command hijacking, prosthetics'],
+                ['EMO', 'Affect', 'Reward/dopamine, mood, fear circuits, hedonic tone'],
+                ['COG', 'Cognition', 'Attention, working memory, executive function, EEG'],
+                ['MEM', 'Memory', 'Hippocampal, memory extraction, consolidation'],
+                ['LNG', 'Language', 'Speech production, Broca/Wernicke, covert speech'],
+                ['AUT', 'Autonomic', 'Heart rate, sleep, HRV, vital signs, seizure'],
+                ['IDN', 'Identity', 'Brainprint, agency, self-model, biometric'],
+                ['SIL', 'Silicon', 'Hardware, firmware, protocols, ML models, supply chain'],
+              ].map(([code, name, desc]) => (
+                <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.06);">
+                  <td class="py-2 px-3"><code style="color: var(--color-accent-primary);">{code}</code></td>
+                  <td class="py-2 px-3 font-medium">{name}</td>
+                  <td class="py-2 px-3" style="color: var(--color-text-muted);">{desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <h3 class="text-lg font-semibold mb-3">3 Interaction Modes (Dual-Use Neutral)</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm" style="border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.15);">
+                <th class="text-left py-2 px-3 font-semibold" style="color: var(--color-text-muted);">Code</th>
+                <th class="text-left py-2 px-3 font-semibold" style="color: var(--color-text-muted);">Mode</th>
+                <th class="text-left py-2 px-3 font-semibold" style="color: var(--color-text-muted);">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.06);">
+                <td class="py-2 px-3"><code style="color: var(--color-accent-primary);">R</code></td>
+                <td class="py-2 px-3 font-medium">Reconnaissance</td>
+                <td class="py-2 px-3" style="color: var(--color-text-muted);">Passive observation, signal capture, inference, profiling</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.06);">
+                <td class="py-2 px-3"><code style="color: var(--color-accent-primary);">M</code></td>
+                <td class="py-2 px-3 font-medium">Manipulation</td>
+                <td class="py-2 px-3" style="color: var(--color-text-muted);">Active modulation, stimulation, parameter alteration, therapeutic intervention</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-3"><code style="color: var(--color-accent-primary);">D</code></td>
+                <td class="py-2 px-3 font-medium">Disruption</td>
+                <td class="py-2 px-3" style="color: var(--color-text-muted);">Denial of service, jamming, flooding, tissue damage, functional impairment</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs mt-3" style="color: var(--color-text-muted);">
+          Modes describe <em>what</em> the technique physically does, not <em>why</em>. The same M-mode technique can be a therapeutic intervention or an attack. The boundary is consent, dosage, and oversight.
+        </p>
+      </div>
+
+      <div class="p-4 rounded-lg text-xs" style="background: rgba(30, 41, 59, 0.3); color: var(--color-text-muted);">
+        <strong>Design precedent:</strong> MITRE ATT&CK, CAPEC, and CWE all use flat opaque IDs with taxonomy in metadata. The TARA alias follows the same pattern as the CVSS vector string alongside CVE IDs — a human-readable encoding that travels alongside the stable canonical identifier.
+      </div>
+    </div>
+
     <!-- Tactic IDs -->
     <div class="mb-16">
       <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading);">Tactic IDs</h2>

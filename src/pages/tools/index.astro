@@ -1,5 +1,6 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import { TARA_TECHNIQUES } from '../../lib/qif-constants';
 ---
 
 <PageLayout
@@ -33,7 +34,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
         </div>
       </div>
       <p class="text-sm text-[var(--color-text-muted)] mb-4">
-        Threat modeling and security analysis for brain-computer interfaces. 161 TARA techniques, NISS severity scoring, 3 code scanning rules, and 8 neuroethics guardrails — all inside Claude Code. <a href="/tools/bci-use-cases/" class="text-[var(--color-accent-primary)] hover:underline">See use cases</a>.
+        Threat modeling and security analysis for brain-computer interfaces. {TARA_TECHNIQUES} TARA techniques, NISS severity scoring, 3 code scanning rules, and 8 neuroethics guardrails — all inside Claude Code. <a href="/tools/bci-use-cases/" class="text-[var(--color-accent-primary)] hover:underline">See use cases</a>.
       </p>
       <div class="flex flex-wrap gap-2 mb-4">
         <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] font-medium">Security</span>

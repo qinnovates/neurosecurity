@@ -1,5 +1,6 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import { TARA_TECHNIQUES } from '../../lib/qif-constants';
 ---
 
 <PageLayout
@@ -53,7 +54,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
         </div>
         <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
           <code class="text-sm font-mono" style="color: var(--color-accent);">/bci explain QIF-T0001</code>
-          <p class="text-xs mt-2" style="color: var(--color-text-muted);">Look up any of 161 TARA threat techniques with three layers of detail.</p>
+          <p class="text-xs mt-2" style="color: var(--color-text-muted);">Look up any of {TARA_TECHNIQUES} TARA threat techniques with three layers of detail.</p>
         </div>
       </div>
     </section>
@@ -75,7 +76,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
           <p class="text-xs" style="color: var(--color-text-muted);">9 compliance domains mapped to GDPR, CCPA, Chile Neurorights, UNESCO Recommendation, Mind Act, and HIPAA. 18 PII detection patterns with remediation roadmaps.</p>
         </div>
         <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
-          <div class="font-semibold text-sm mb-1" style="color: var(--color-text-primary);">161 TARA Threat Techniques</div>
+          <div class="font-semibold text-sm mb-1" style="color: var(--color-text-primary);">{TARA_TECHNIQUES} TARA Threat Techniques</div>
           <p class="text-xs" style="color: var(--color-text-muted);">Full threat catalog with NISS severity scoring (6 neural-specific dimensions), evidence tiers, therapeutic analogs, and defensive controls per QIF hourglass band.</p>
         </div>
         <div class="p-4 rounded-xl border" style="border-color: var(--color-border); background: var(--color-bg-secondary);">

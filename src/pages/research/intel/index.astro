@@ -1,5 +1,6 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import { TARA_TECHNIQUES } from '../../../lib/qif-constants';
 ---
 
 <PageLayout title="BCI Intel Reports | Qinnovate" description="Quarterly threat intelligence publications covering the BCI industry's security posture, funding, regulatory milestones, and emerging attack surfaces.">
@@ -26,7 +27,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
                   Q1 2026 BCI Intelligence Report
                 </h3>
                 <p class="text-sm text-[var(--color-text-muted)] mt-1">
-                  57 companies, $5.93B tracked funding, $482M Q1 activity. 161 attack techniques, 81% CVE blind spot. Intelligence community enters BCI.
+                  57 companies, $5.93B tracked funding, $482M Q1 activity. {TARA_TECHNIQUES} attack techniques, 81% CVE blind spot. Intelligence community enters BCI.
                 </p>
               </div>
               <div class="flex items-center gap-2 shrink-0 ml-4">
@@ -61,7 +62,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
     <div class="mt-10 glass rounded-xl border border-[var(--color-border)] p-5">
       <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-2">Methodology</h3>
       <p class="text-sm text-[var(--color-text-muted)]">
-        Reports are generated from the QIF datalake: BCI Landscape Tracker (57+ companies), TARA threat catalog (161 techniques), NISS device scoring (20 devices), CVE-Technique mapping (55 CVEs), and the BCI Intel Feed (215+ items). All funding figures, regulatory milestones, and device specifications are verified against primary sources. Coverage is expanding each quarter.
+        Reports are generated from the QIF datalake: BCI Landscape Tracker (57+ companies), TARA threat catalog ({TARA_TECHNIQUES} techniques), NISS device scoring (20 devices), CVE-Technique mapping (55 CVEs), and the BCI Intel Feed (215+ items). All funding figures, regulatory milestones, and device specifications are verified against primary sources. Coverage is expanding each quarter.
       </p>
     </div>
   </div>
