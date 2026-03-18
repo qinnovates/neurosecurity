@@ -132,14 +132,26 @@ const S: Record<string, CSSProperties> = {
 
 // ── URL State ──────────────────────────────────────────────────────────
 
+const VALID_VIEWS: View[] = ['hub', 'devices', 'device-profile', 'conditions', 'therapeutic', 'threats', 'signals', 'console'];
+const MAX_PARAM_LEN = 200;
+
+function sanitizeParam(v: string | null): string {
+  if (!v) return '';
+  return v.slice(0, MAX_PARAM_LEN).replace(/[<>"'`\x00-\x1f]/g, '');
+}
+
 function readURL(): { view: View; device: string; condition: string; technique: string } {
   if (typeof window === 'undefined') return { view: 'hub', device: '', condition: '', technique: '' };
   const p = new URLSearchParams(window.location.search);
+  const rawView = p.get('view') || '';
+  const view: View = VALID_VIEWS.includes(rawView as View)
+    ? rawView as View
+    : (p.get('device') ? 'device-profile' : p.get('condition') ? 'therapeutic' : 'hub');
   return {
-    view: (p.get('view') as View) || (p.get('device') ? 'device-profile' : p.get('condition') ? 'therapeutic' : 'hub'),
-    device: p.get('device') || '',
-    condition: p.get('condition') || '',
-    technique: p.get('technique') || '',
+    view,
+    device: sanitizeParam(p.get('device')),
+    condition: sanitizeParam(p.get('condition')),
+    technique: sanitizeParam(p.get('technique')),
   };
 }
 

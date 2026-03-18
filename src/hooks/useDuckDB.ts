@@ -163,30 +163,40 @@ async function initDuckDB(): Promise<DuckDBInstance> {
 function validateQuery(sql: string): string | null {
   const normalized = sql.toLowerCase();
 
-  // Block read_parquet with both single and double quotes — only allow /data/parquet/ paths
-  const readFnMatch = normalized.match(/read_parquet\s*\(\s*['"]([^'"]+)['"]/);
-  if (readFnMatch) {
-    const path = readFnMatch[1];
-    if (!path.startsWith(ALLOWED_PARQUET_PREFIX)) {
+  // Block read_parquet — validate ALL occurrences (matchAll, not match)
+  // Security: previous version only checked first occurrence — multi-call bypass possible
+  const readFnMatches = [...normalized.matchAll(/read_parquet\s*\(\s*['"]([^'"]+)['"]/g)];
+  for (const m of readFnMatches) {
+    if (!m[1].startsWith(ALLOWED_PARQUET_PREFIX)) {
       return `Only local parquet files are allowed. Use paths starting with ${ALLOWED_PARQUET_PREFIX}`;
     }
   }
 
-  // Block http/https URLs outside of the allowed pattern
+  // Block http/https URLs and file:// protocol
   if (/https?:\/\//.test(normalized) && !normalized.includes(ALLOWED_PARQUET_PREFIX)) {
     return 'External URLs are not allowed. Query the pre-registered dataset views directly.';
   }
+  if (/file:\/\//.test(normalized)) {
+    return 'File URLs are not allowed.';
+  }
 
   // Block dangerous statements (word-boundary match, no parens required)
-  const blockedStatements = ['copy', 'export', 'attach', 'create', 'alter', 'drop', 'install', 'load'];
+  // Includes PRAGMA for DuckDB settings manipulation
+  const blockedStatements = ['copy', 'export', 'attach', 'create', 'alter', 'drop', 'install', 'load', 'pragma', 'set', 'reset'];
   for (const stmt of blockedStatements) {
     if (new RegExp(`\\b${stmt}\\b`, 'i').test(normalized)) {
       return `"${stmt.toUpperCase()}" statements are not allowed. Use SELECT queries on the available dataset views.`;
     }
   }
 
-  // Block filesystem/network functions (with parens — catches read_csv(), read_json(), etc.)
-  const blockedFns = ['read_csv', 'read_json', 'read_text', 'write_parquet', 'write_csv', 'httpfs', 'postgres_scan'];
+  // Block filesystem/network/introspection functions
+  // Includes DuckDB-specific table functions that expose internal state
+  const blockedFns = [
+    'read_csv', 'read_json', 'read_text', 'write_parquet', 'write_csv',
+    'httpfs', 'postgres_scan', 'parquet_scan', 'glob', 'delta_scan', 'iceberg_scan',
+    'duckdb_extensions', 'duckdb_settings', 'duckdb_views', 'duckdb_columns',
+    'duckdb_tables', 'duckdb_constraints', 'duckdb_databases', 'duckdb_functions',
+  ];
   for (const fn of blockedFns) {
     if (new RegExp(`\\b${fn}\\s*\\(`, 'i').test(normalized)) {
       return `The function "${fn}" is not allowed in the SQL console. Use SELECT queries on the available dataset views.`;
