@@ -121,6 +121,45 @@ The TARA implication: a technique operating in gamma at rest hits an elevated ba
 
 This is why the sample data includes both conditions. Different signal environments produce different risk profiles. The plugin's threat model should account for the neural population being protected, not assume a single "normal" baseline. These are EEG pattern references for threat modeling purposes, not diagnostic markers.
 
+### The Diagnostic Problem This Points To
+
+The ADHD-ASD table above isn't just a security concern. It's a clinical one.
+
+ADHD and ASD share enough surface symptoms that misdiagnosis is common. The clinical term is **camouflaging** (Hull et al. 2017, Lai et al. 2017): individuals with high-functioning ASD develop compensatory behaviors that mask core ASD features, causing clinicians to see ADHD-like attention and executive function issues instead. This is particularly prevalent in women and adults who learned to compensate early. The environment introduces masking behaviors that make differential diagnosis difficult from behavioral observation alone.
+
+The consequences are real. Misdiagnosis leads to mis-medication: stimulants prescribed for ADHD can increase anxiety and sensory overload in ASD. SSRIs prescribed for the anxiety that follows misdiagnosis may not address the underlying condition. Years of wrong treatment before a correct diagnosis is not uncommon.
+
+EEG offers something behavioral observation can't: objective signal-level data that doesn't depend on whether the patient has learned to mask.
+
+**Three research gaps that BCI-assisted diagnostics could address:**
+
+1. **No ADHD-vs-ASD EEG classifier exists at clinical accuracy (>80%).** Published classifiers compare one disorder against typically developing controls. The clinically important question, distinguishing ADHD from ASD in the same individual, is unanswered.
+
+2. **No validated multi-paradigm EEG battery for differential diagnosis.** The ABC-CT consortium has an ASD-vs-TD battery. No 4-group battery (ASD, ADHD, ASD+ADHD, typically developing) exists. You can't differentially diagnose what you can't differentially measure.
+
+3. **Resting-state EEG alone is insufficient.** Shephard et al. (2019) demonstrated that ADHD connectivity differences are invisible at rest. The cognitive state during recording is the variable. This means any diagnostic EEG battery needs task-state paradigms, not just eyes-open/eyes-closed resting recordings.
+
+**The face processing double dissociation**
+
+This is the cleanest published result for differential EEG diagnosis. Same paradigm (face processing), same recording, two different ERP time windows:
+
+| Window | ADHD | ASD | ASD+ADHD |
+|--------|------|-----|----------|
+| N170 (170ms) | Normal | Impaired — early perceptual encoding broken | Impaired |
+| N400 (400ms) | Impaired — later semantic/affective integration broken | Normal | Impaired |
+
+One face task, two time windows, complete separation. That's what a well-designed control study looks like. The N170 indexes early face perception (disrupted in ASD). The N400 indexes later meaning integration (disrupted in ADHD). The comorbid group shows both. A BCI system monitoring both windows during a face processing task could, in principle, provide objective signal-level evidence to support clinical differential diagnosis.
+
+**What exists now to build on**
+
+The Healthy Brain Network (HBN) dataset provides a starting point: 3,000+ subjects with multi-paradigm EEG recordings and transdiagnostic clinical assessments. It includes approximately 66 ASD and 406 ADHD subjects with the same recording protocols. A research program could extract these subgroups, compare resting-state features (where ASD differences are visible but ADHD differences are not), compare task-state features (where both become visible), model the rest-to-task transition per group, and build the first ASD-vs-ADHD feature-space classifier using task-state data. Validation against the BCIAUT-P300 dataset (task data, ASD subjects) would provide an independent check.
+
+**The responsible framing**
+
+None of this replaces clinical judgment. EEG biomarkers for neurodevelopmental conditions are research tools, not diagnostic instruments. Published effect sizes are moderate (g=0.3-0.5 for most markers), sample sizes are small, and replication across sites is limited. The value is supplementary: providing objective signal-level data to a clinician who is already conducting a comprehensive evaluation, not automating diagnosis.
+
+The BCI security angle: if EEG-based diagnostic tools become clinical reality, the neural data they collect is among the most sensitive health data imaginable. A recording that can distinguish ADHD from ASD contains enough neural signature information to re-identify individuals, infer cognitive profiles, and reveal clinical conditions the person may not have disclosed. Every regulatory framework referenced in this plugin, from GDPR Article 9 to Chile's Neurorights Law, applies with full force. The security of diagnostic BCI pipelines is not a future concern. It's a present design requirement.
+
 You can explore all 16 compiled EEG datasets in the [Data Studio](https://qinnovate.com/data-studio/eeg). Filter by condition, type (real, synthetic, simulated attack), or search by DSM-5 code. Each entry links to the original open-access source.
 
 The sample data in the plugin is metadata and configuration only. No raw EEG signal data is distributed. The plugin tests its detection rules against the metadata structure, filenames, headers, and code patterns that reference these datasets.

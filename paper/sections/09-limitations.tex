@@ -220,9 +220,28 @@ and revising it until it holds up to scrutiny. There is a lot more to do.
         conditions such as ADHD and autism spectrum disorder, where diagnostic
         overlap and behavioral masking (camouflaging) present challenges for
         traditional assessment instruments (Hull et~al.\ 2017, Lai et~al.\ 2017).
+        Three specific research gaps are positioned for investigation:
+        (a)~no ADHD-vs-ASD EEG classifier at clinical accuracy ($>$80\%) exists---published
+        classifiers compare one disorder against typically developing controls, not against
+        each other; (b)~no validated multi-paradigm EEG battery for 4-group differential
+        diagnosis (ASD, ADHD, ASD+ADHD, typically developing) exists---the ABC-CT consortium
+        battery is ASD-vs-TD only; and (c)~resting-state EEG alone is insufficient for ADHD
+        discrimination---Shephard et~al.\ (2019) demonstrated that ADHD connectivity
+        differences are invisible at rest, meaning task-state paradigms are required.
+        A particularly promising result is the face processing double dissociation:
+        in the same paradigm, the N170 component (170ms, early perceptual encoding)
+        is impaired in ASD while the N400 component (400ms, semantic/affective integration)
+        is impaired in ADHD, with the comorbid group showing both impairments. One task,
+        two time windows, complete separation. The Healthy Brain Network dataset (3,000+
+        subjects, multi-paradigm, transdiagnostic) provides a potential training set with
+        approximately 66~ASD and 406~ADHD subjects under identical recording protocols.
         This requires independent clinical validation, larger and more diverse
         datasets, and formal sensitivity/specificity analysis before any clinical
-        application. Documentation: \url{https://github.com/qinnovates/qinnovate/blob/main/shared/EEG-DATA-PIPELINE.md}
+        application. The security implication is direct: EEG recordings capable of
+        differentiating neurodevelopmental conditions contain neural signature information
+        sufficient for re-identification and clinical inference, making the security of
+        diagnostic BCI pipelines a present design requirement, not a future concern.
+        Documentation: \url{https://github.com/qinnovates/qinnovate/blob/main/shared/EEG-DATA-PIPELINE.md}
   \item \textbf{LiDAR-to-BCI Bridge --- vision prosthesis security prototype}:
         We are developing a commodity-hardware prototype that uses iPhone LiDAR to
         demonstrate the sensor-to-classification pipeline required by neural vision
