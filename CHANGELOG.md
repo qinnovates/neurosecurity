@@ -6,6 +6,23 @@ Auto-maintained by `scripts/changelog-update.mjs`.
 
 <!-- changelog-marker: cdd2d564a85eb80c5c5b763368fd18c6553c5e3f -->
 
+## 2026-03-19
+
+### Added (Engram)
+- Verbose logging mode for compliance (SOC 2, HIPAA, GDPR Article 30, PCI-DSS) — opt-in `audit_verbose` config ([cd9b90a](https://github.com/qinnovates/engram/commit/cd9b90a))
+- PQ-encrypted syslog forwarding — each log entry individually encrypted via Rust sidecar (ML-KEM-768 + AES-256-GCM) for SIEM ingestion ([cd9b90a](https://github.com/qinnovates/engram/commit/cd9b90a))
+- Secure-the-full-log-path guidance: 5-layer breakdown (source, transit, SIEM, analyst workstation, backups) with PQC at every Engram-controlled layer
+- Third-party risk section: forwarder vetting checklist, disable telemetry/phone-home, pin versions, minimal permissions
+- Security double-edged sword: pros/cons of verbose logging, compliance-driven modularity ("modular like Legos")
+- Expanded secret detection patterns: AWS, Azure, GCP, Slack, Windows paths, hex key material, Grok-equivalent comments for SIEM operators
+
+### Fixed (Engram)
+- Tier allowlist validation on `audit_syslog.tier` in both config deserialization and logger init — prevents protocol injection via sidecar line protocol ([b5e7d89](https://github.com/qinnovates/engram/commit/b5e7d89))
+- Explicit 0600 permissions on `audit.encf.log` creation (was inheriting umask) ([b5e7d89](https://github.com/qinnovates/engram/commit/b5e7d89))
+- Explicit UTF-8 encoding on all audit file opens — prevents silent gaps on non-UTF-8 locales ([b5e7d89](https://github.com/qinnovates/engram/commit/b5e7d89))
+- Word-boundary anchors on secret keyword regex (`\btoken\b` not `token`) — prevents false-positive redaction on legitimate values like "rotation" ([b5e7d89](https://github.com/qinnovates/engram/commit/b5e7d89))
+- First-failure stderr warning for syslog encryption errors — misconfiguration no longer silently invisible ([b5e7d89](https://github.com/qinnovates/engram/commit/b5e7d89))
+
 ## 2026-03-17
 
 ### Added
