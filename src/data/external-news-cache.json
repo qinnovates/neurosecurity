@@ -1,29 +1,38 @@
 [
   {
     "type": "external",
-    "title": "NeuroNarrator: A Generalist EEG-to-Text Foundation Model for Clinical Interpretation via Spectro-Spatial Grounding and Temporal State-Space Reasoning",
-    "date": "2026-03-19",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]16880",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.16880v1 Announce Type: cross Abstract: Electroencephalography (EEG) provides a non-invasive window into neural dynamics at high temporal resolution and plays a pivotal role in clinical neur",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "EEG-Based Brain-LLM Interface for Human Preference Aligned Generation",
-    "date": "2026-03-19",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]16897",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.16897v1 Announce Type: cross Abstract: Large language models (LLMs) are becoming an increasingly important component of human--computer interaction, enabling users to coordinate a wide rang",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Paradromics launches academic collaboration programme for BCI advancement - Medical Device Network",
+    "title": "The immediate effect of kangaroo mother care on Mother-infant inter-brain synchrony and infant brain function",
     "date": "2026-03-18",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiuAFBVV95cUxPMGVOMXlwNFhOaW1wVENZUW82UktiUjdKeE9aQzNTVTB1aDdPQk5ZT2pMeDQ4ZVh5Z21ybXJmbjhnb0xLS0lYaXZmOVdQS2pXWDdYTmNkMlFIVDZ3VEZucmw3WWNGdG5GM094cmJmUTlTc3RTNzlvSUZWeHM4TkRKeW5qT1l6TnI2N0lWaGR1ZFVBV05zUWRtbEdWMlpSYTk0S085VmNxUU9aUVlvZTE2M2pPLU9MQnUx?oc=5",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]16501",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.16501v1 Announce Type: new Abstract: Kangaroo mother care (KMC) is an intervention involving skin-to-skin contact that promotes physiological stability and supports long-term neurodevelopme",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Laya: A LeJEPA Approach to EEG via Latent Prediction over Reconstruction",
+    "date": "2026-03-18",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]16281",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.16281v1 Announce Type: cross Abstract: Electroencephalography (EEG) is a widely used tool for studying brain function, with applications in clinical neuroscience, diagnosis, and brain-compu",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Bayesian Inference of Psychometric Variables From Brain and Behavior in Implicit Association Tests",
+    "date": "2026-03-18",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]16741",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.16741v1 Announce Type: cross Abstract: Objective. We establish a principled method for inferring mental health related psychometric variables from neural and behavioral data using the Impli",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Paradromics kicks off BCI partnership program to advance tech - MassDevice",
+    "date": "2026-03-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMid0FVX3lxTE5wYlhDRHdtbmphanVZMGx6b2FNWjFZUEtwSDVQZS00OEk1Z21vTFlic1FnZGlLd3hacGdtWXdEVzlMeF9VMFRGTkxWd2FyaHVLaXVCYklaekxadzVya3VYdHN2Z3NZVm9ORC1pR3pjRWVXTTVYRWt3?oc=5",
     "source": "Google News — BCI",
-    "summary": "Paradromics launches academic collaboration programme for BCI advancement&nbsp;&nbsp;Medical Device Network",
+    "summary": "Paradromics kicks off BCI partnership program to advance tech&nbsp;&nbsp;MassDevice",
     "category": "neurotechnology"
   },
   {
@@ -55,20 +64,20 @@
   },
   {
     "type": "external",
-    "title": "Brain implant allows people who are paralyzed to type using their thoughts at speed of texting - Scientific American",
-    "date": "2026-03-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiugFBVV95cUxNX3BwdkNneHJ4X25FSmlvYk5JT01PVmJFaVpYSzJnVWVJNUpmLTV5Vy1pZ3ZxR292TzhZVWZENVYySDAxb0M0c0lpdExXWmhOUjR3TG82ZWdQQVVZNEU3ZHhQdEVtR2ZLaDhYZmp0dUNPLWRtcFVTOE9XLWJDMU5iMldVb29jS2NHd1ZLbS16MjVqODlNNE0xX1RVQzdMU1dQZ3BqUXlBc3ByenQzZkFFSmRhVDJELTVMYWc?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain implant allows people who are paralyzed to type using their thoughts at speed of texting&nbsp;&nbsp;Scientific American",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "A brain-computer interface allowed people with paralysis to type with their minds - statnews.com",
     "date": "2026-03-16",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMibkFVX3lxTE5HcC1qZ2Jkb0UwSWpFTWdHdGdRQjdyWjNsRjNldmxyNzY0T2R5TGx3bzQ2ZGpobG5GaVZrbklPRXM3ZjZTaGlVb0RfQWxzRzlDSExMM2t5cVVHdFJxU2FveUtlRDlxTGdCVWR1clNB?oc=5",
     "source": "Google News — BCI",
     "summary": "A brain-computer interface allowed people with paralysis to type with their minds&nbsp;&nbsp;statnews.com",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain implant allows people who are paralyzed to type using their thoughts at speed of texting - Scientific American",
+    "date": "2026-03-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiugFBVV95cUxNX3BwdkNneHJ4X25FSmlvYk5JT01PVmJFaVpYSzJnVWVJNUpmLTV5Vy1pZ3ZxR292TzhZVWZENVYySDAxb0M0c0lpdExXWmhOUjR3TG82ZWdQQVVZNEU3ZHhQdEVtR2ZLaDhYZmp0dUNPLWRtcFVTOE9XLWJDMU5iMldVb29jS2NHd1ZLbS16MjVqODlNNE0xX1RVQzdMU1dQZ3BqUXlBc3ByenQzZkFFSmRhVDJELTVMYWc?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain implant allows people who are paralyzed to type using their thoughts at speed of texting&nbsp;&nbsp;Scientific American",
     "category": "neurotechnology"
   },
   {
@@ -100,8 +109,26 @@
   },
   {
     "type": "external",
+    "title": "Gestala: $21 Million Raised For Ultrasound Brain-Computer Interface Technology - Pulse 2.0",
+    "date": "2026-03-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxNOVRpUW1ZbjI2bFFyVVp5ZFEzQXRIeE82dVhkTDJMWEdwbkVLRWM4bTNxMlg4Z0NzXzg3M21ZQXlrTmF4TlpHV0RqQmxTampoNkdwX0NxUEViYUhpUzVoWmFPZ1pCX0dSUkplbjFRWnZIQVZFRE9WMG9JajMzMVVhNzI0QWFrNThmTzBMYjkzQl9LczM2dDYtZnZMVXrSAaIBQVVfeXFMT0xXRDJuMTBaNV9LcnZFUmY0U1E0V1V1X3hfSng2cFRmbkhJcF9VZkgzOUZ6WUFlV1lVU0JleV9FTTFkdmhCSkJObHdZYzJSMEQwb1REVkFuOWQ3eVh6UGxOVUk0bWJSRDlfeDQ0dUpDMGNEa3hDM2VyVmNiaXE5dDVkWC12SURnNTJfWFhSNWk2SUVydlYwc1QwZGtUMWRrOE1n?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Gestala: $21 Million Raised For Ultrasound Brain-Computer Interface Technology&nbsp;&nbsp;Pulse 2.0",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain-computer interface startup Subsense doubles footprint with Mountain View lab - The Business Journals",
+    "date": "2026-03-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxNcDhFU0d2VzFMcU9rQmJLUG10MHhOSUtWY3QwVFVjRVp2dHd6TDFKRktsTW5KN2JhbVpYU0VZT1JKenE2THNCMHhkYmNFdEpTbFl3YWZXUVNEeDJWZFVuRV91S3ZMU0pDclk0dGMwcUJnQzM0d2pMTFRmWEFtdWlQbDdiR1R4dG9WanVB?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Brain-computer interface startup Subsense doubles footprint with Mountain View lab&nbsp;&nbsp;The Business Journals",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - TechCrunch",
-    "date": "2026-03-11",
+    "date": "2026-03-12",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxOX2Jtd3dNTy13MzNlOUpQRVlFN0RaLUYxMFd4VzJYZnR3TzFtRlFOa21PaWM5NzZiX1NTUGMxZkk1OTZmcG0xRDhhejYwOUM0RHFMYlZCQ1RZNEczQjR4Z1VZbEp3czA3bzB1UE1sYUNuS3o0dmdvazN4MmVtUTRqNTNDeHdvSnZrT0M4c3RUUVg2am5pa25FQ2ZSX2VBdVpaVHFRZmZXUnpRLUJwR1pObw?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;TechCrunch",
@@ -127,24 +154,6 @@
   },
   {
     "type": "external",
-    "title": "Elon Musk's Neuralink plans $8.2M expansion, new hires in Texas - Austin American-Statesman",
-    "date": "2026-02-27",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimgFBVV95cUxPNTVvTENIR1F0WktJVzRRaWJla2twOXhJc0plZFpQTE1CMFVkLWVZTzNZamxtc2NtTFpTQjlneWx4SzBHTFA3WEN5eVJqdGVLSE5Ea3IzZFZSWlVvcjRWZjVpR1FPTlVmTkhLcWxERllPVWhDU3BKdnFUV3RQcF9mY3J3bjZHcmV4NGNWb2NuMzE4bFhLQlFqQ2hB?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk's Neuralink plans $8.2M expansion, new hires in Texas&nbsp;&nbsp;Austin American-Statesman",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
-    "date": "2026-01-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Two Years of Telepathy - Neuralink",
     "date": "2026-01-28",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
@@ -163,6 +172,15 @@
   },
   {
     "type": "external",
+    "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
+    "date": "2026-01-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology - CSIS | Center for Strategic and International Studies",
     "date": "2025-11-04",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPanNMOEN0Yy16RElvSXJjMk4zR25qd2tGQXhDZDI2cmo0Yk5kSmZNQXJfSnhQb0tOdUJUY3BOQlc0akVlOGZ5aGpBekVWd0NNV1R6enN5Q0RVRnFKX2JhSWRuVVA2MUNkNHJOd0k4NjRLdjZtVUxkZlluWFVUNU0zN21VajFiOW9Udl9aTjhTQ1dkSEphZTAtWVR5MU5ZalQySDdJWTFB?oc=5",
@@ -178,15 +196,6 @@
     "source": "Google News — MIND Act",
     "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "The Past, Present And Future Of Brain-Computer Interfaces - Forbes",
-    "date": "2025-10-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxNeTFhWjAtaXRDbzdFeC1nSkZoclQwNjhUX2JZVWtTTzRBN25sNW5hNzVvSTIwWWlqRHZJMFdnby1NVVRPdWxreDJSWkVROUtUdlpTV2RpbUM1RUM3bG1hQU5VUkZ6NUg2cXRkT1prOFpYR3FWUDY5VUN1cEVHSDRSX1ZxeUlEamFEV3V5MjZpSU1PRzN6NWJIVXVlenN2RGNU?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "The Past, Present And Future Of Brain-Computer Interfaces&nbsp;&nbsp;Forbes",
-    "category": "neurotechnology"
   },
   {
     "type": "external",
