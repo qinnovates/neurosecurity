@@ -32,7 +32,11 @@
     "decisions": "node scripts/generate-governance.mjs decisions",
     "transparency": "node scripts/generate-governance.mjs transparency",
     "governance": "node scripts/generate-governance.mjs",
-    "health": "node scripts/propagation-check.mjs"
+    "health": "node scripts/propagation-check.mjs",
+    "version:show": "bash scripts/version.sh show",
+    "version:patch": "bash scripts/version.sh patch",
+    "version:minor": "bash scripts/version.sh minor",
+    "version:major": "bash scripts/version.sh major"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",

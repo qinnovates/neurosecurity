@@ -8,6 +8,7 @@
 - `update-automation-registry.mjs` -- Syncs automation registry
 - `timeline-check.mjs` -- Validates timeline stats (`--fix` to auto-update)
 - `compute-impact-chains.mjs` -- Precomputes attack chain relationships
+- `version.sh` -- Semantic versioning manager (`major|minor|patch|show`, supports `--dry-run` and `--no-tag`)
 
 ## Conventions
 - Run `npm run prebuild` (not individual scripts) to ensure correct execution order
