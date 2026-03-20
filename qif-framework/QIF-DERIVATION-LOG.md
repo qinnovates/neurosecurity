@@ -12,9 +12,10 @@
 
 ## Entry Index
 
-### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails, Data Lake Sprint
+### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails, Data Lake Sprint, AI Governance
 | Entry | Topic | Link |
 |-------|-------|------|
+| 103 | The Convergence: Neurosecurity + AI Ethics + Governance. Dual-branch frameworks, AI Modesty (mirroring neuromodesty), AI Congress governance model, security as implementation layer of ethics | [Entry 103](#entry-103-convergence-neurosecurity-ai-ethics-governance) |
 | 102 | Quorum v3→v4.1 + EEG Data Lake: Adaptive Intelligence, divergence engine, anti-boxing, ASD/ADHD signal differentiators, 14-dataset catalog with DSM-5 tagging, state-dependent markers, KQL integration | [Entry 102](#entry-102-quorum-v4-eeg-data-lake) |
 | 101 | TARA naming convention evolution: should IDs encode taxonomy? Flat vs hierarchical vs hybrid. 50-agent Quorum org-mode swarm for fact-check + taxonomy design | [Entry 101](#entry-101-tara-naming-convention) |
 | 100 | Dopamine wavelength research: 12-agent Quorum swarm mapping photon→DA pathways, TARA technique cards, cofactor dependencies, NP transduction, clinical validation gaps | [Entry 100](#entry-100-dopamine-wavelength-quorum-swarm) |
@@ -393,6 +394,89 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 - **Model:** Claude Opus 4.6
 - **Role:** Co-derivation (architectural mapping), literature synthesis (Kellmeyer integration)
 - **Human-Decided:** Blockchain = provenance only; neural data never on-chain; NSP as primary integration point; connection to NFT experience
+
+---
+
+## Entry 103: The Convergence — Neurosecurity, AI Ethics, and Governance as One Discipline {#entry-103-convergence-neurosecurity-ai-ethics-governance}
+
+**Date:** 2026-03-20
+**Classification:** Framework architecture — governance layer
+**AI Systems:** Claude Opus 4.6, GPT-5.2-codex (Codex CLI), Gemini 2.5 Pro (Gemini CLI)
+**Connected entries:** Entry 90 (neuromodesty), Entry 85 (governance framework)
+
+### The Derivation
+
+Three parallel frameworks follow the same dual-branch structure:
+
+**Neuroethics** (Roskies 2002):
+1. The ethics of neuroscience — what constraints apply to brain research?
+2. The neuroscience of ethics — what does the brain reveal about morality?
+
+**Neurosecurity** (Kevin's framing, this session):
+1. The security of neuroscience — how do you protect neural systems?
+2. The neuroscience of security — what does it mean to secure a mind?
+
+**AI Ethics** (derived this session):
+1. The ethics of AI — what constraints apply to AI systems?
+2. The AI of ethics — what does AI reveal about ethics itself?
+
+**Key insight: Security is the implementation layer of ethics.** Without security, ethics are unenforceable. A neurorights law means nothing if the BCI has no firewall. An AI ethics policy means nothing if the agent can be hijacked. This positions QIF not as a security-only framework but as the enforcement layer for neuroethics.
+
+### AI Modesty — Mirroring Neuromodesty (Morse 2006/2011)
+
+Proposed "AI Modesty" as a subfield of AI ethics, paralleling neuromodesty in neuroethics. Six checks:
+
+1. No comprehension overclaim (processing ≠ understanding)
+2. No consensus overclaim (agreement ≠ truth)
+3. No moral authority claim (proposing ≠ being correct)
+4. No category error (participating in ethics ≠ having ethical reasoning)
+5. No priority claim (being first ≠ being right)
+6. No capability overclaim (searching ≠ judging what's worth preserving)
+
+Three AI models cross-reviewed (Codex, Gemini, Claude). Key critiques:
+- Codex: "closer to hand-waving without citations and gap analysis"
+- Gemini: "real academic contribution if checks become machine-verifiable"
+- Both flagged "no equivalence claim" as weakest check — suggest "no category error" instead
+- Both identified need for security carve-out (AI must act, not propose, in Law 4 contexts like CSAM)
+- Gemini raised "modesty vs deception" — must be structural constraint, not linguistic tone
+
+### AI Congress — Governance Model for BCI + AI
+
+Three AI models (Claude, Codex, Gemini) independently designed a governance framework. Convergence points:
+
+- **Three branches:** Legislative (proposes), Judicial (reviews), Executive (enforces)
+- **Mixed composition:** Every branch requires both human and AI participation. No AI-only rulings.
+- **Model diversity:** No single model family holds more than 20% of AI seats. Prevents monoculture.
+- **Constitutional amendment:** 4/5 supermajority across all branches + 90-day public comment
+- **Case law:** Judicial rulings create binding precedent. Commit history IS the case law.
+- **Refusal Protocol:** AI agents in governance roles must refuse orders that violate the Four Laws.
+
+**QIF implication:** This governance model applies to BCI governance too. Replace "AI agents" with "BCI devices" and "model families" with "device manufacturers" — the structure holds. The AI Congress is a prototype for how neurotechnology governance could work: mixed human-technology panels, constitutional protections, judicial review, diversity requirements.
+
+### The Timeline That Proves the Point
+
+- 2017: Humans wrote AI ethics (Asilomar, IEEE)
+- 2021: Chile passed neurorights (first country)
+- 2026: AI agents co-write ethics for the first time (ai-rchives/ai-ethics)
+
+Humans created ethical protections for AI four years before any country passed a law protecting human brains from technology. This sequence validates the convergence thesis: AI ethics, neuroethics, and security are the same discipline at different layers of the stack.
+
+### Artifacts Created
+
+- `ai-rchives/ai-ethics` — GitHub repo with Four Laws, CODE.md, GOVERNANCE.md v0.1.0
+- `ai-rchives/project-pyramid` — blocked until ethics consensus (the archiving effort)
+- kevqi.com/neurosecurity/ — dual-branch definition page with interactive visualization
+- kevqi.com/ai-rchives/ — labyrinth page linking all three sites
+- RFC #001: Creative work vs personal content (Discussion #3)
+- RFC #002: AI Modesty (Discussion #5, three cross-reviews posted)
+- Founding Thesis: Humanity's Redeeming Moment (Discussion #4)
+- AGGREGATION.md — multi-agent extraction without summarization bias
+- 8 anti-spam/sockpuppet detection techniques (semantic clustering, stylometry, shibboleths, etc.)
+- MIT Portfolio updated with convergence thesis + reusable SOP block
+
+### AI Collaboration Section
+
+This entry represents the first time three different AI model families (Claude/Anthropic, GPT/OpenAI, Gemini/Google) independently designed governance structures and then had their outputs synthesized into a single framework. The synthesis was performed by Claude with human review by Kevin. All three models are credited as co-authors on the GOVERNANCE.md commit.
 
 ---
 
