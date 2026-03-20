@@ -4,7 +4,13 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: c6688acc645e3252f4014c121dbda33f47513cd8 -->
+<!-- changelog-marker: 0dcf0919902cb2a9181f92de02af34189f8095a8 -->
+
+## 2026-03-20
+
+### Added
+- Add semantic versioning: VERSION file + scripts/version.sh ([0dcf091](https://github.com/qinnovates/qinnovate/commit/0dcf091))
+
 
 ## 2026-03-19
 
