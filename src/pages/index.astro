@@ -664,7 +664,7 @@ import { TARA_TECHNIQUES } from '../lib/qif-constants';
 
       <div class="mt-4 text-center">
         <button
-          onclick="navigator.clipboard.writeText(`@misc{qi2026qif,\n  author = {Qi, Kevin L.},\n  title = {QIF: Quantified Interconnection Framework for Brain-Computer Interface Security},\n  year = {2026},\n  doi = {10.5281/zenodo.18640105},\n  url = {https://qinnovate.com},\n  note = {Proposed framework, not yet peer-reviewed}\n}`).then(() => this.textContent = 'Copied!')"
+          id="copy-bibtex-btn"
           class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-colors"
           style="background: var(--color-bg-elevated); border: 1px solid var(--color-border); color: var(--color-text-muted)"
         >
@@ -680,4 +680,11 @@ import { TARA_TECHNIQUES } from '../lib/qif-constants';
 
   <Footer />
   <BciVisionToggle client:idle />
+
+  <script>
+    document.getElementById('copy-bibtex-btn')?.addEventListener('click', function() {
+      const bibtex = '@misc{qi2026qif,\n  author = {Qi, Kevin L.},\n  title = {QIF: Quantified Interconnection Framework for Brain-Computer Interface Security},\n  year = {2026},\n  doi = {10.5281/zenodo.18640105},\n  url = {https://qinnovate.com},\n  note = {Proposed framework, not yet peer-reviewed}\n}';
+      navigator.clipboard.writeText(bibtex).then(() => { this.textContent = 'Copied!'; });
+    });
+  </script>
 </BaseLayout>
