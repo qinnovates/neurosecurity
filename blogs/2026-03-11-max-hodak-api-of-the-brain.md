@@ -2,8 +2,8 @@
 title: "How Ethical Hackers Can Cure Blindness"
 subtitle: "A capture-process-inject attack chain maps 1:1 to a vision restoration pipeline. I mapped every stage through TARA."
 date: 2026-03-11
-tags: [BCI, neurosecurity, QIF, TARA, clinical-mapping, vision-restoration, dual-use, interview-analysis, case-study]
-type: case-study
+tags: [BCI, neurosecurity, QIF, TARA, clinical-mapping, vision-restoration, dual-use, interview-analysis]
+type: analysis
 author: Qinnovate
 fact_checked: true
 fact_check_notes:

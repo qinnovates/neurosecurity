@@ -2,7 +2,7 @@
 title: "Q1 2026 BCI Intelligence Report"
 date: 2026-03-13
 tags: [neurosecurity, threat-intelligence, bci-security, research, report]
-type: case-study
+type: report
 description: "Quarterly threat intelligence report covering the BCI industry's security posture, funding activity, regulatory milestones, and emerging attack surface — Q1 2026."
 ---
 
