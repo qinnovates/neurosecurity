@@ -4,7 +4,17 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: 2d78507e6f6a3e720d11008b62c80ed286cdfc96 -->
+<!-- changelog-marker: 51ebdb2b6437c3149324a8e972aa5f484ce582bd -->
+
+## 2026-03-21
+
+### Research
+- Derivation log entries 104-105: NSP spatial + audit trail ([51ebdb2](https://github.com/qinnovates/qinnovate/commit/51ebdb2))
+
+### Other
+- Update Field Journal #025: reframe language, add video ([f747663](https://github.com/qinnovates/qinnovate/commit/f747663))
+
+
 
 ## 2026-03-20
 
