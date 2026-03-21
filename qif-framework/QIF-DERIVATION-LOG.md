@@ -15,6 +15,8 @@
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails, Data Lake Sprint, AI Governance
 | Entry | Topic | Link |
 |-------|-------|------|
+| 105 | NSP Audit Trail: Exploratory — immutable AI/BCI audit logs via hash chain + NSP + optional blockchain anchoring. For medical device compliance (FDA, NIST). Hash chain for local integrity, RFC 3161 for temporal proof, blockchain for cross-org trust. | [Entry 105](#entry-105-nsp-audit-trail-exploratory) |
+| 104 | NSP Spatial Extension: Merkle proofs + rollups for peer-to-peer spatial sharing in Spot. Blockchain investigated and rejected (latency, offline, battery). Merkle tree integrity + NSP payload wrapping + QKC key rotation = secure federated spatial discovery. Engram as memory substrate. First real-world NSP implementation outside neural signals. | [Entry 104](#entry-104-nsp-spatial-merkle-proofs) |
 | 103 | The Convergence: Neurosecurity + AI Ethics + Governance. Dual-branch frameworks, AI Modesty (mirroring neuromodesty), AI Congress governance model, security as implementation layer of ethics | [Entry 103](#entry-103-convergence-neurosecurity-ai-ethics-governance) |
 | 102 | Quorum v3→v4.1 + EEG Data Lake: Adaptive Intelligence, divergence engine, anti-boxing, ASD/ADHD signal differentiators, 14-dataset catalog with DSM-5 tagging, state-dependent markers, KQL integration | [Entry 102](#entry-102-quorum-v4-eeg-data-lake) |
 | 101 | TARA naming convention evolution: should IDs encode taxonomy? Flat vs hierarchical vs hybrid. 50-agent Quorum org-mode swarm for fact-check + taxonomy design | [Entry 101](#entry-101-tara-naming-convention) |
@@ -394,6 +396,160 @@ Kevin identified the connection between his NFT work and Kellmeyer's data fiduci
 - **Model:** Claude Opus 4.6
 - **Role:** Co-derivation (architectural mapping), literature synthesis (Kellmeyer integration)
 - **Human-Decided:** Blockchain = provenance only; neural data never on-chain; NSP as primary integration point; connection to NFT experience
+
+---
+
+## Entry 105: NSP Audit Trail — Immutable AI/BCI System Logs (Exploratory) {#entry-105-nsp-audit-trail-exploratory}
+
+**Date:** 2026-03-20
+**Classification:** HYPOTHESIS
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** [Entry 104](#entry-104-nsp-spatial-merkle-proofs), [Entry 84](#entry-84-privacy-preserving-neural-data)
+**Tags:** NSP, audit, blockchain, compliance, exploratory
+
+### Context
+
+While designing Merkle proof integrity for Spot's spatial peer sharing (Entry 104), Kevin explored whether blockchain could serve as an immutable audit log for AI/BCI system events — not for real-time spatial data (rejected in Entry 104), but for compliance-grade audit trails where latency tolerance is hours, not milliseconds.
+
+### The Idea
+
+AI systems in medical/BCI contexts will need provably immutable audit logs. FDA and NIST are moving toward mandatory AI audit trails for medical devices. A BCI running QIF AI0 would need to prove: what signals were detected, what enforcement actions were taken, what Cs scores were at time of decision — without exposing the neural data itself.
+
+### Proposed Architecture (Exploratory)
+
+Three layers, each solving a different trust problem:
+
+1. **Git-style hash chain (local integrity).** Each audit event's hash includes the previous hash. Tamper with any event and every subsequent hash breaks. Free, instant, offline. NSP wraps each event before it enters the chain.
+
+2. **RFC 3161 timestamp authority (temporal proof).** Periodically anchor the chain head to a trusted timestamp authority. Proves the log existed at time T. Courts already accept this as evidence. One HTTP call per day.
+
+3. **Blockchain anchoring (cross-organizational trust).** Optional. When multiple organizations (hospitals, device manufacturers, regulators) need to verify the same audit trail without trusting each other. Anchor Merkle root to a public chain. Only the root hash goes on-chain — never data, never keys, never content.
+
+### Separation of Concerns
+
+```
+Source system:   Holds keys + raw data. Never shared.
+Audit device:    Holds encrypted logs + hash chain. No keys.
+Blockchain:      Holds root hashes only. No data, no keys.
+```
+
+No single point has everything. NSP ensures each event is signed at the source. Merkle proofs allow selective verification without exposing the full log.
+
+### Why This Matters for QIF
+
+The regulatory landscape is converging:
+- FDA premarket cybersecurity guidance increasingly mentions AI audit requirements
+- NIST AI RMF requires traceability of AI decisions
+- EU AI Act mandates logging for high-risk AI systems
+- BCI devices sit at the intersection of all three
+
+The organization that has the audit trail solution ready when the regulation drops has first-mover advantage. QIF already has the components: NSP for payload integrity, Cs for scoring, Engram for tiered storage. The audit chain is a composition of existing pieces.
+
+### Status
+
+Exploratory. Kevin's thinking-out-loud captured for prior art and future development. No implementation planned for current phase. The components (NSP, Engram, Cs) exist and would compose into this architecture when the regulatory requirement materializes.
+
+### Human Decision
+
+Kevin originated the blockchain audit log concept, evaluated it against alternatives (hash chain, transparency logs, RFC 3161), and decided to log it publicly for prior art rather than keep it private. Reasoning: the idea is independently derivable by anyone reading the same regulatory landscape; the moat is the existing QIF stack, not the idea itself.
+
+### AI Collaboration
+
+Claude Opus 4.6 evaluated five alternative approaches (Merkle + timestamp authority, git-style hash chain, Certificate Transparency model, blockchain anchoring, hybrid), recommended hash chain + RFC 3161 as the practical starting point with blockchain as a future upgrade for cross-org trust scenarios.
+
+---
+
+## Entry 104: NSP Spatial Extension — Merkle Proofs and Federated Spatial Discovery {#entry-104-nsp-spatial-merkle-proofs}
+
+**Date:** 2026-03-20
+**Classification:** DERIVED
+**AI Systems:** Claude Opus 4.6
+**Connected entries:** [Entry 92](#entry-92-sensor-hierarchy), [Entry 91](#entry-91-lidar-sensor-limitations), [Entry 84](#entry-84-privacy-preserving-neural-data)
+**Tags:** NSP, Spot, Engram, spatial, Merkle, federated, BLE
+
+### The Problem
+
+Spot (LiDAR navigation app) generates spatial memory as blind users walk — routes, hazards, benches, indoor layouts. This data is valuable to other Spot users approaching the same area. But peer-to-peer sharing of spatial data introduces a threat model parallel to neural signal injection: a malicious actor broadcasting "no stairs ahead" where stairs exist causes physical harm.
+
+Kevin investigated blockchain as a validation mechanism for peer-shared spatial data. Rejected on four grounds: latency (minutes vs milliseconds needed), offline requirement (Spot's core value is zero network dependency), battery (LiDAR already drains the phone), and storage (full chain on every device is impractical).
+
+### The Derivation Path
+
+**Kevin's reasoning chain:**
+1. "Can we use blockchain to validate spatial data?" — investigated
+2. "The entire chain needs to be stored on local device" — identified the storage problem
+3. "That led me down to Merkle proofs and rollup concepts" — found the right primitives
+4. "We use NSP wrapper idea using QKC!" — connected it to existing QIF architecture
+5. "And it shares over BLE like a handoff" — peer-to-peer, no server
+
+### The Insight: NSP Generalizes Beyond Neural Signals
+
+The same protocol designed for neural signal integrity at the I0 boundary applies to spatial geometry integrity at the BLE boundary. The architecture is identical:
+
+| Neural Domain | Spatial Domain |
+|---|---|
+| Electrode signal at I0 | Geometry snapshot at BLE antenna |
+| Cs validates signal coherence | Cs validates geometry consensus |
+| NSP wraps + signs payload | NSP wraps + signs geometry |
+| Amplitude bounds block injection | Additive-only blocks hazard removal |
+| QKC rotates session keys | QKC rotates BLE device identity |
+
+This is the first demonstration that NSP is not domain-specific. It is a general-purpose integrity protocol for any sensor data crossing a trust boundary.
+
+### Merkle Proofs for Spatial Memory
+
+Each user's spatial memory (stored in Engram) forms a Merkle tree. Each leaf is a geometry artifact (route segment, hazard marker, bench location). To share one piece of spatial data, the user sends only the Merkle proof path (log(n) hashes) — not the entire spatial memory.
+
+**Rollups:** A 30-minute walk generating 200 geometry snapshots is batched into one Engram artifact with one Merkle leaf. One signature, one hash. 200x less crypto overhead.
+
+**Why not blockchain:** Blockchain solves "consensus without trust among many anonymous parties." Spot solves "consensus between 2-5 nearby devices where physics (LiDAR) provides ground truth." Merkle proofs provide the integrity verification. Cs provides the trust scoring. The user's own sensors provide the final validation. No mining. No chain. No network.
+
+### Engram as Memory Substrate
+
+Engram's four-tier compression maps directly to spatial data lifecycle:
+- **Hot:** Live LiDAR detections, current frame
+- **Warm:** This week's routes, recent POIs (zstd-3, 4-5x compression)
+- **Cold:** Last month's routes as semantic summaries (zstd-9, 8-12x)
+- **Frozen:** Archived routes in Parquet columnar format (20-50x)
+
+Engram's existing SHA-256 integrity hashing, post-quantum encryption (ML-KEM-768), and Rust crypto sidecar all apply without modification. The spatial extension adds: Merkle tree structure, rollup batching, NSP payload encoding, and BLE peer exchange.
+
+### Security Rules (7)
+
+1. Hazards are additive-only (peers add, never remove)
+2. Rotating BLE identity (new ID every 15 min via QKC)
+3. Semantic summaries only, not raw point clouds (prevents location fingerprinting)
+4. Geometry distances fuzzed +/- 0.5m
+5. Consensus before trust (peer data starts at Cs = 0.3, needs 3+ confirmations)
+6. NSP-signed payloads with device attestation
+7. No GPS in payload (matched by LiDAR signature, not coordinates)
+
+### QIF AI0 Stack Realized
+
+```
+Spot    (Output)       Haptic + voice feedback
+Engram  (Memory)       Tiered spatial compression + Merkle integrity
+NSP     (Enforcement)  Signed payloads + zero-trust at BLE boundary
+Cs      (Detection)    Coherence scoring across sensors + peers
+```
+
+This is the first working demonstration of all four QIF AI0 layers operating together outside neural signal processing.
+
+### Implementation Status
+
+Documented in:
+- `spot/docs/design/SPOT-DESIGN.md` — full threat model and security architecture
+- `engram/docs/SPATIAL-EXTENSION.md` — tier mapping, Merkle structure, CLI extensions, implementation phases
+
+Phase 5 feature. Requires security review before implementation. The NSP payload format for spatial geometry and QKC key exchange over BLE are the critical new components.
+
+### Human Decision
+
+Kevin originated the blockchain investigation, identified its limitations for the mobile/offline use case, and made the connection to NSP + QKC as the correct alternative. The Merkle proof and rollup concepts were introduced as the cryptographic primitives that give blockchain's integrity guarantees without blockchain's overhead. Kevin directed that this be documented in the QIF derivation log with NSP tag.
+
+### AI Collaboration
+
+Claude Opus 4.6 mapped the neural-to-spatial architecture parallel, specified the 7 security rules, wrote the threat model, and documented the Engram spatial extension. The blockchain rejection rationale and the NSP connection were Kevin's insights; the formalization was collaborative.
 
 ---
 
