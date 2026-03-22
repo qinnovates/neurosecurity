@@ -58,3 +58,4 @@ model/qif-lab/data/
 credentials.*
 docs/
 drafts/
+package-lock.json
