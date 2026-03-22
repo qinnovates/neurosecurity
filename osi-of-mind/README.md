@@ -1,109 +1,106 @@
-# QIF Framework
+# The OSI of Mind
 
-A ground-up architectural redesign of BCI security, built from neuroscience constraints rather than retrofitted IT models.
+If someone loses their vision and a BCI can restore it, every layer between the electrode and the cortex must be secure. Not just encrypted. Not just authenticated. Secure in a way that accounts for the fact that the endpoint is a human brain.
 
-## Quick Links
+This directory contains every piece of that puzzle.
 
-| | |
-|---|---|
-| [Whitepaper (v6.3)](whitepapers/QIF-WHITEPAPER.md) | Full framework specification ([v8.0 draft](whitepapers/QIF-WHITEPAPER-V8-DRAFT.md)) |
-| [Wiki / Glossary](whitepapers/QIF-WIKI.md) | Every term, equation, and concept defined |
-| [Source of Truth](whitepapers/QIF-TRUTH.md) | Canonical reference for all QIF equations and values |
-| [Preprint (PDF)](https://qinnovate.com/papers/qif-bci-security-2026.pdf) | Zenodo preprint (DOI: [10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)) |
-
----
-
-## Structure
+## How the Pieces Fit
 
 ```
-osi-of-mind/
-├── specs/                          # Core specifications
-│   ├── NSP-PROTOCOL-SPEC.md       # Neural Sensory Protocol v0.5 (post-quantum)
-│   ├── RUNEMATE.md                # Neural rendering compiler (Staves DSL)
-│   ├── NISS-NEUROLOGICAL-EXTENSION.md  # NISS clinical extensions
-│   ├── qif-sec-guardrails.md      # Physics-derived defense architecture
-│   ├── INTEGRATION-ROADMAP.md     # NSP + Runemate + Neurowall integration path
-│   └── PROPAGATION.md             # How canonical truth flows through the project
-│
-├── whitepapers/                    # Published and draft papers
-│   ├── QIF-WHITEPAPER.md          # v6.3 (stable)
-│   ├── QIF-WHITEPAPER-V8-DRAFT.md # v8.0 (current draft)
-│   ├── QIF-TRUTH.md               # Canonical equations and values
-│   ├── QIF-SCIENTIFIC-PAPER-FUTURE.md  # Full academic paper outline
-│   └── QIF-WIKI.md                # Knowledge base / glossary
-│
-├── logs/                           # Derivation logs (non-primary)
-│   └── NEURORIGHTS-DERIVATION-LOG.md
-│
-├── QIF-DERIVATION-LOG.md          # Single source of truth (113 entries)
-├── QIF-FIELD-JOURNAL.md           # First-person research observations
-├── QIF-RESEARCH-SOURCES.md        # 340+ verified citations
-├── GUARDRAILS.md                  # Neuroethics constraint mapping (G1-G8)
-├── VALIDATION.md                  # Validation framework and status
-│
-├── framework/                      # 9-document architecture series (read in order)
-├── nsp/                            # NSP Rust implementation (PQ-secure)
-├── runemate/                       # Runemate Rust compiler
-├── research/                       # Research methodology and hypotheses
-├── (qif-lab archived to _archive/)
-├── tara-threat/                    # TARA threat catalog
-├── tools/                          # Security tools (neurowall, neurosim, macshield)
-└── images/                         # Diagrams
+                    ┌─────────────────────────┐
+                    │      RESTORED VISION     │
+                    │   (the goal, not the tech)│
+                    └────────────┬────────────┘
+                                 │
+              ┌──────────────────┼──────────────────┐
+              ▼                  ▼                   ▼
+     ┌────────────────┐ ┌───────────────┐ ┌─────────────────┐
+     │   QIF Model    │ │     NISS      │ │   GUARDRAILS    │
+     │  (architecture)│ │   (scoring)   │ │  (constraints)  │
+     │                │ │               │ │                 │
+     │ 11-band        │ │ 6 neural      │ │ 8 neuroethics   │
+     │ hourglass:     │ │ metrics that  │ │ checks that     │
+     │ maps every     │ │ CVSS can't    │ │ prevent the     │
+     │ layer from     │ │ express —     │ │ security tools  │
+     │ cortex to      │ │ reversibility,│ │ from becoming   │
+     │ cloud          │ │ consent,      │ │ surveillance    │
+     │                │ │ neuroplastic  │ │ tools           │
+     │                │ │ change        │ │                 │
+     └───────┬────────┘ └───────┬───────┘ └────────┬────────┘
+             │                  │                   │
+             ▼                  ▼                   ▼
+     ┌────────────────┐ ┌───────────────┐ ┌─────────────────┐
+     │     TARA       │ │  Neurowall    │ │    Governance   │
+     │  (threat map)  │ │  (detection)  │ │    (policy)     │
+     │                │ │               │ │                 │
+     │ 161 techniques │ │ Real-time     │ │ Consent models, │
+     │ — every known  │ │ coherence     │ │ neurorights,    │
+     │ way a BCI can  │ │ monitoring.   │ │ regulatory      │
+     │ be attacked.   │ │ Detects when  │ │ compliance.     │
+     │ 75% have       │ │ signals       │ │ Who decides     │
+     │ therapeutic    │ │ deviate from  │ │ what the device │
+     │ counterparts   │ │ baseline      │ │ is allowed      │
+     │                │ │               │ │ to do           │
+     └───────┬────────┘ └───────┬───────┘ └────────┬────────┘
+             │                  │                   │
+             ▼                  ▼                   ▼
+     ┌────────────────┐ ┌───────────────┐ ┌─────────────────┐
+     │     NSP        │ │   Runemate    │ │   Coherence     │
+     │  (encryption)  │ │  (rendering)  │ │   Metric (Cs)   │
+     │                │ │               │ │                 │
+     │ Post-quantum   │ │ Compiles      │ │ Multi-signal    │
+     │ wire protocol. │ │ visual        │ │ confidence      │
+     │ ML-KEM-768,    │ │ content into  │ │ score. Fuses    │
+     │ AES-256-GCM.   │ │ electrode     │ │ multiple data   │
+     │ Secures the    │ │ stimulation   │ │ streams into    │
+     │ pipe between   │ │ patterns.     │ │ one trust       │
+     │ device and     │ │ This is how   │ │ signal: is      │
+     │ brain          │ │ vision gets   │ │ this neural     │
+     │                │ │ restored      │ │ activity real?  │
+     └────────────────┘ └───────────────┘ └─────────────────┘
 ```
 
----
+**Read top to bottom:** The goal is restored vision. To get there safely, you need architecture (QIF), threat awareness (TARA), scoring (NISS), constraints (Guardrails), detection (Neurowall), encryption (NSP), rendering (Runemate), trust measurement (Cs), and governance (policy). Remove any piece and the patient is exposed.
 
-## Architecture (9 documents)
+**Read bottom to top:** NSP secures the wire. Runemate encodes the signal. Cs validates it. Neurowall monitors it. TARA maps what can go wrong. NISS scores how bad it is. Guardrails keep the tools honest. QIF holds the architecture together. Governance decides who gets to use it and how.
 
-Read in order. Each builds on the previous.
+## Directory Map
 
-| # | Document | What It Covers |
-|---|----------|---------------|
-| 01 | [WHY-REVAMP](framework/01-WHY-REVAMP.md) | Why the original model was fundamentally flawed |
-| 02 | [KNOWNS-AND-UNKNOWNS](framework/02-KNOWNS-AND-UNKNOWNS.md) | What neuroscience has confirmed vs. what remains open |
-| 03 | [BCI-CAPABILITIES](framework/03-BCI-CAPABILITIES.md) | Every proven BCI READ/WRITE/CLOSED-LOOP today |
-| 04 | [FRAMEWORKS-ANALYSIS](framework/04-FRAMEWORKS-ANALYSIS.md) | OSI, Kandel, biological organization |
-| 05 | [PROPOSED-MODEL](framework/05-PROPOSED-MODEL.md) | The funnel model and quantum tunneling thought experiment |
-| 06 | [GAP-ANALYSIS](framework/06-GAP-ANALYSIS.md) | Known limits vs. open questions |
-| 07 | [QUANTUM-BIOLOGY](framework/07-QUANTUM-BIOLOGY.md) | What's proven, what's not, and the measurement wall |
-| 08 | [QUANTUM-INTEGER](framework/08-QUANTUM-INTEGER.md) | Q: the labeled gap for quantum unknowns |
-| 09 | [QUANTUM-NEUROSECURITY](framework/09-QUANTUM-NEUROSECURITY.md) | Quantum bridges, DSKE, defense-in-depth |
+| Directory | What | Status |
+|-----------|------|--------|
+| [specs/](specs/) | NSP, Runemate, NISS extensions, guardrails, integration roadmap | Active specs |
+| [whitepapers/](whitepapers/) | QIF Whitepaper v6.3, v8.0 draft, wiki, canonical truth | v8.0 in progress |
+| [framework/](framework/) | 9-document architecture series (read in order) | Complete |
+| [nsp/](nsp/) | NSP Rust implementation (post-quantum) | In development |
+| [runemate/](runemate/) | Runemate compiler (Staves DSL → bytecode) | v1.0 compiler |
+| [tools/](tools/) | Neurowall, neurosim, macshield | Prototypes |
+| [tara-threat/](tara-threat/) | TARA technique deep-dives and PoCs | Active |
+| [logs/](logs/) | Neurorights derivation log | Active |
 
----
+## Source of Truth
 
-## Derivation & Process
+These files stay at root because every build script depends on them:
 
-| Document | Purpose |
-|----------|---------|
-| [Derivation Log](QIF-DERIVATION-LOG.md) | 113 entries tracing every research decision and insight |
-| [Field Journal](QIF-FIELD-JOURNAL.md) | Personal/experiential observations (raw voice) |
-| [Research Sources](QIF-RESEARCH-SOURCES.md) | 340+ verified citations, DOIs, and references |
-| [Neurorights Log](logs/NEURORIGHTS-DERIVATION-LOG.md) | Neurorights framework derivation |
+| File | What |
+|------|------|
+| [QIF-DERIVATION-LOG.md](QIF-DERIVATION-LOG.md) | 113 entries — every decision, insight, correction |
+| [QIF-FIELD-JOURNAL.md](QIF-FIELD-JOURNAL.md) | First-person research observations (Kevin's voice) |
+| [QIF-RESEARCH-SOURCES.md](QIF-RESEARCH-SOURCES.md) | 340+ verified citations |
+| [GUARDRAILS.md](GUARDRAILS.md) | 8 neuroethics constraints (G1-G8) |
+| [VALIDATION.md](VALIDATION.md) | What has been tested, what has not |
 
----
+## The Vision Problem
 
-## Neuroethics & Governance
+A cortical visual prosthesis takes camera input, processes it, and stimulates the visual cortex through an electrode array. The patient sees phosphenes — points of light — that form a rough image.
 
-See [governance/](../governance/) for the full policy library. Key documents:
+Every layer of that pipeline is an attack surface. A compromised rendering engine could inject false visual percepts. A tampered wire protocol could alter stimulation patterns. A rogue firmware update could change electrode behavior without the patient knowing.
 
-| Document | Focus |
-|----------|-------|
-| [GUARDRAILS](GUARDRAILS.md) | 8 neuroethics constraints mapped to QIF scope limits |
-| [QIF-NEUROETHICS](../governance/policy/QIF-NEUROETHICS.md) | Open ethical questions and thesis foundation |
-| [Governance Questions](../governance/QIF-GOVERNANCE-QUESTIONS.md) | Who decides what for the brain (RACI) |
-| [Transparency](../governance/TRANSPARENCY.md) | Human-AI collaboration audit trail |
+QIF maps these layers. TARA catalogs the threats. NISS scores the harm. NSP encrypts the pipe. Runemate compiles the content. Neurowall watches for anomalies. Guardrails prevent the security tools from being repurposed for surveillance. Governance decides who has authority over the device.
 
----
-
-## Key Concepts
-
-- **11-Band Hourglass** : N7-N1 | I0 | S1-S3 (7 neural, 1 interface, 3 synthetic)
-- **Coherence Metric (Cs)** : Operational core of QIF
-- **NISS** : Extends CVSS for neural harm (reversibility, patient awareness)
-- **TARA** : [Threat Atlas](../datalake/qtara/) mapping 161 techniques across the hourglass
+No single piece solves the problem. Together, they are the security architecture that makes it possible to restore vision without exposing the patient to risks that current frameworks cannot even describe.
 
 ---
 
 *Author: Kevin Qi*
 *Status: Active Design Phase*
-*See also: [Website](https://qinnovate.com) | [TARA Atlas](https://qinnovate.com/TARA/) | [Preprint](https://doi.org/10.5281/zenodo.18640105)*
+*See also: [qinnovate.com](https://qinnovate.com) | [TARA Atlas](https://qinnovate.com/TARA/) | [Preprint](https://doi.org/10.5281/zenodo.18640105)*
