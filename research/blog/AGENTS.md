@@ -1,4 +1,4 @@
-# blogs/ -- Astro Content Collection (Blog Posts + Field Journals)
+# research/blog/ -- Astro Content Collection (Blog Posts + Field Journals)
 
 ## Structure
 - `YYYY-MM-DD-slug.md` -- Blog posts (technical/security articles)

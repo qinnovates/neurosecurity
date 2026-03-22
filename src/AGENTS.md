@@ -26,5 +26,5 @@
 
 ## Data Flow
 ```
-datalake/*.json > prebuild copies to docs/data/ > kql-tables.ts builds tables > components query via KQL
+datalake/*.json > prebuild copies to site/data/ > kql-tables.ts builds tables > components query via KQL
 ```

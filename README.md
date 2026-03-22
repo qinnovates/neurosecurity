@@ -41,6 +41,20 @@ This project does both. It asks a question no existing framework has systematica
 
 ---
 
+## Navigate
+
+| Section | What You'll Find |
+|---------|-----------------|
+| [Quick Start](#quick-start) | Clone, query, browse |
+| [What This Contains](#what-this-project-contains) | Frameworks, tools, governance, research |
+| [TARA Insight](#the-tara-insight) | Why 75% of attacks have therapeutic counterparts |
+| [Architecture](#architecture) | QIF, TARA, NISS, NSP, Runemate |
+| [Data Studio](#data-studio--datalake) | 31 open datasets, DuckDB, Parquet |
+| [Developer Commands](#developer-commands) | npm scripts for build, verify, deploy |
+| [Contributing](#contributing-workflow) | How to contribute |
+
+---
+
 ## Quick Start
 
 **Browse the data:** [qinnovate.com/data-studio](https://qinnovate.com/data-studio/) — 31 open datasets, downloadable as Parquet
@@ -113,23 +127,6 @@ neurosecurity/
 ├── scripts/                          # Build + data pipelines
 └── .github/workflows/                # CI/CD (deploy, audit, sync)
 ```
-
----
-
-## Table of Contents
-
-- [Quick Start](#quick-start)
-- [Validation Summary](#validation-summary)
-- [What This Project Contains](#what-this-project-contains)
-- [The TARA Insight](#the-tara-insight)
-- [Why Neurosecurity](#why-neurosecurity)
-- [Architecture](#architecture)
-- [Data Studio & Open Datasets](#data-studio--datalake)
-- [Governance & Logging](#governance--logging-architecture)
-- [Developer Commands](#developer-commands)
-- [Repository Structure](#repository-structure)
-- [Tools](#tools)
-- [Collaboration](#collaboration)
 
 ---
 
@@ -294,7 +291,8 @@ Native DSL compiler (67.8% compression in simulation). Phase 2/3 goal: compile s
 
 ---
 
-## Automation & Data Pipelines
+<details>
+<summary><h2>Automation & Data Pipelines</h2></summary>
 
 ### News Feed (Daily)
 
@@ -334,6 +332,8 @@ Both pipelines use exit code 2 (no changes) to skip unnecessary commits. Manual 
 | [`verify-citations.yml`](.github/workflows/verify-citations.yml) | On push | Check citation integrity |
 | [`changelog.yml`](.github/workflows/changelog.yml) | On push | Auto-generate changelog from git log |
 
+</details>
+
 ---
 
 ## Terminology
@@ -347,7 +347,8 @@ Both pipelines use exit code 2 (no changes) to skip unnecessary commits. Manual 
 
 ---
 
-## Governance & Logging Architecture
+<details>
+<summary><h2>Governance & Logging Architecture</h2></summary>
 
 This project uses a **single-source-of-truth model** for decision tracking. One file captures everything; other documents are generated from it.
 
@@ -375,6 +376,8 @@ This project uses a **single-source-of-truth model** for decision tracking. One 
 | **[QIF-FIELD-JOURNAL.md](model/QIF-FIELD-JOURNAL.md)** | Personal/experiential observations. Kevin's raw voice. AI cannot write this. | Kevin only | When something surprises him |
 | **[CHANGELOG.md](CHANGELOG.md)** | Auto-generated from git commits. What changed, not why. | Developers, contributors | Auto: `npm run changelog` |
 
+</details>
+
 ### Data Studio & Datalake
 
 All research data is served as open Parquet datasets at [qinnovate.com/data-studio/](https://qinnovate.com/data-studio/).
@@ -399,7 +402,8 @@ Pre-commit hook: `scripts/governance-precommit.sh` (13 regex patterns, whitelist
 
 ---
 
-## Developer Commands
+<details>
+<summary><h2>Developer Commands</h2></summary>
 
 All commands run from the repo root.
 
@@ -447,6 +451,8 @@ All commands run from the repo root.
 | `npm run fetch-news` | Fetch BCI news from 14 RSS feeds |
 | `npm run fetch-intel` | Fetch BCI intel from 45+ feeds + Google News |
 
+</details>
+
 ---
 
 ## Contributing Workflow
@@ -488,7 +494,8 @@ If AI tools were used in your contribution:
 
 ---
 
-## Site Revision History
+<details>
+<summary><h2>Site Revision History</h2></summary>
 
 Each weekly snapshot is tagged in git. Click the tag to browse code at that point, or checkout locally to run the site (`git checkout <tag> && npm ci && npm run dev`).
 
@@ -501,9 +508,12 @@ Each weekly snapshot is tagged in git. Click the tag to browse code at that poin
 | W06 | Feb 9 | [`site-W06-2026-02-09`](https://github.com/qinnovates/qinnovate/tree/site-W06-2026-02-09) | 14-layer to hourglass migration, TARA atlas, OG social cards |
 | W05 | Feb 2 | [`site-W05-2026-02-02`](https://github.com/qinnovates/qinnovate/tree/site-W05-2026-02-02) | Initial launch: landing page, 9 blog posts |
 
+</details>
+
 ---
 
-## Browse the Full History
+<details>
+<summary><h2>Browse the Full History</h2></summary>
 
 Every decision, revision, and deleted line in this repository is preserved in git. You can time-travel to any point in the project's history using GitHub's native tools.
 
@@ -540,6 +550,8 @@ The same git history that lets you trace how a security framework evolved is the
 This is the same principle that runs through the entire project. TARA documents 161 BCI techniques where the attack mechanism and the therapeutic mechanism are physically identical. Signal injection is how you compromise a neural interface. It is also how you treat Parkinson's disease. The tool does not determine the use. The boundary is always consent, oversight, and intent.
 
 We publish full history because transparency is the foundation of trust in security research. Every claim in this repo can be traced to the commit where it was introduced, the source that informed it, and the [derivation log entry](model/QIF-DERIVATION-LOG.md) where the decision was made. If something was wrong, you can see when it was corrected and why.
+
+</details>
 
 ---
 

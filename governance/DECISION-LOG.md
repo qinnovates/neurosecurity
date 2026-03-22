@@ -12,7 +12,7 @@ order: 5
 Rolling record of framework decisions extracted from the [QIF Derivation Log](../model/QIF-DERIVATION-LOG.md).
 Each entry links back to the full derivation context.
 
-**Last generated:** 2026-03-22 at 02:54:32
+**Last generated:** 2026-03-22 at 03:22:01
 
 **RACI Key:** R (Responsible) | A (Accountable) | C (Consulted) | I (Informed)
 

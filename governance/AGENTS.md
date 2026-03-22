@@ -3,12 +3,16 @@
 ## Structure
 - `DECISION-LOG.md` -- GENERATED from derivation log (do not edit directly)
 - `TRANSPARENCY.md` -- GENERATED from derivation log (do not edit directly)
-- `SHIP-LOG.md` -- Manual feature shipping log (add entry when features ship)
+- `SHIP-LOG.md` -- Manual feature shipping log
+- `policy/` -- Neuroethics, AI ethics, consent, accessibility, governance proposals
 - `processes/` -- Standards development lifecycle documents
+- `outreach/` -- Standards body engagement (FIRST/CVSS, MITRE CWE)
+- `scripts/` -- Governance generation scripts
 
-## Important
-`DECISION-LOG.md` and `TRANSPARENCY.md` are auto-generated. To update them:
+## Regenerating
 ```bash
 npm run governance
 ```
-This regenerates both from `model/QIF-DERIVATION-LOG.md`. See `.claude/rules/derivation-log.md` for the full protocol.
+This rebuilds DECISION-LOG.md and TRANSPARENCY.md from `model/QIF-DERIVATION-LOG.md`.
+
+See README.md for details.
