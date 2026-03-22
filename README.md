@@ -14,7 +14,7 @@
 
 </div>
 
-> **By using this repository, you consent to the terms in [CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy](CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy).** This is early-stage research — not a validated standard, not a clinical tool, not production software. The human brain is not a test environment. See [CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy](CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy), [Code of Conduct](CODE_OF_CONDUCT.md), and [Security Policy](SECURITY.md).
+> **By using this repository, you consent to the terms in [CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy](CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy).** This is early-stage research — not a validated standard, not a clinical tool, not production software. The human brain is not a test environment. See [CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy](CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy), [Code of Conduct](governance/CODE_OF_CONDUCT.md), and [Security Policy](governance/SECURITY.md).
 
 ## What is Neurosecurity?
 
@@ -374,7 +374,7 @@ This project uses a **single-source-of-truth model** for decision tracking. One 
 | **[DECISION-LOG.md](governance/DECISION-LOG.md)** | RACI tables — who decided, who built, who reviewed. | Governance auditors, future collaborators | Auto-generated: `npm run decisions` |
 | **[TRANSPARENCY.md](governance/TRANSPARENCY.md)** | AI collaboration disclosure — contribution matrix, correction count, tool versions. | Peer reviewers, venues (arXiv, ACM, IEEE) | Auto-generated: `npm run transparency` |
 | **[QIF-FIELD-JOURNAL.md](model/QIF-FIELD-JOURNAL.md)** | Personal/experiential observations. Kevin's raw voice. AI cannot write this. | Kevin only | When something surprises him |
-| **[CHANGELOG.md](CHANGELOG.md)** | Auto-generated from git commits. What changed, not why. | Developers, contributors | Auto: `npm run changelog` |
+| **[CHANGELOG.md](governance/CHANGELOG.md)** | Auto-generated from git commits. What changed, not why. | Developers, contributors | Auto: `npm run changelog` |
 
 </details>
 
@@ -459,7 +459,7 @@ All commands run from the repo root.
 
 ### Before You Start
 
-1. Read [CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy](CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy) and [Code of Conduct](CODE_OF_CONDUCT.md)
+1. Read [CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy](CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy) and [Code of Conduct](governance/CODE_OF_CONDUCT.md)
 2. Run `npm ci` to install dependencies
 3. Run `npm run health` to verify your environment is clean
 4. Run `npm run build` to verify the site builds
