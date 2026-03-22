@@ -18,26 +18,20 @@
 
 ## What is Neurosecurity?
 
-Every field that touches the brain has two faces. Neuroethics established this structure in 2002 (Roskies): the **ethics of neuroscience** asks how to conduct brain research responsibly, while the **neuroscience of ethics** asks what the brain reveals about moral reasoning itself. One governs the science. The other lets the science inform governance.
+Neuroethics has two hemispheres (Roskies, 2002): the *ethics of neuroscience* governs how brain research is conducted, while the *neuroscience of ethics* asks what the brain reveals about moral reasoning. Neurosecurity follows the same structure:
 
-Neurosecurity follows the same pattern.
+**Security of Neuroscience** — Defending neural systems. Threat modeling, scoring, encryption, monitoring. Engineering that works today.
 
-**Security of Neuroscience** (Applied) — How do we defend neural systems? Traditional security engineering applied to brain-computer interfaces: threat modeling, severity scoring, encryption, real-time monitoring. Known threats, known defenses, tools that work today.
-
-**Neuroscience of Security** (Foundational) — What does the brain teach us about security itself? What new threats, rights, and principles emerge as BCIs evolve? Where are the boundaries between attack and therapy, surveillance and monitoring, data and identity? This is the work that needs to happen before the technology outpaces our ability to govern it.
+**Neuroscience of Security** — What the brain teaches us about security. New threats, new rights, and the boundaries between attack and therapy that need to be drawn before the technology outpaces governance.
 
 | | Security of Neuroscience | Neuroscience of Security |
 |---|---|---|
 | **Question** | How do we defend neural systems? | What are we defending, and from what? |
-| **Timeframe** | Now — build with today's tools | Ahead — prepare for tomorrow's threats |
 | **Method** | Engineering | Research + philosophy |
 | **Output** | Tools, protocols, detections | Principles, rights, governance |
-| **In this repo** | TARA, NISS, NSP, Neurowall, QIF Model | Governance questions, neurorights, dual-use insight, consent boundaries |
-| **Parallel** | *Ethics of neuroscience* (Roskies) | *Neuroscience of ethics* (Roskies) |
+| **In this repo** | TARA, NISS, NSP, Neurowall, QIF Model | Governance, neurorights, dual-use insight |
 
-Applied without foundational is blind — you're defending something you don't understand. Foundational without applied is toothless — you're philosophizing without building anything.
-
-This project does both. It asks a question no existing framework has systematically addressed: **what happens to a patient when their brain-computer interface is compromised?** Not the data. Not the device. The person.
+This project does both. It asks: **what happens to a patient when their brain-computer interface is compromised?** Not the data. Not the device. The person.
 
 ---
 
