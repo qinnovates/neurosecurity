@@ -1,12 +1,5 @@
 # Security Policy
 
-## Supported Versions
-
-| Version | Supported |
-| ------- | --------- |
-| QIF (Hourglass) | Supported |
-| ONI 14-layer | Deprecated |
-
 ## Reporting a Vulnerability
 
 If you discover a security vulnerability in the QIF specification, TARA registrar, or any component of this framework, please report it through **GitHub Issues**:
