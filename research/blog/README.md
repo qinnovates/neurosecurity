@@ -40,19 +40,19 @@ Fields `fact_checked`, `fact_check_date`, and `fact_check_notes` are optional wi
 
 ## Field Journal Pipeline
 
-Field journal entries originate in `qif-framework/QIF-FIELD-JOURNAL.md` and are automatically converted to blog posts via CI:
+Field journal entries originate in `model/QIF-FIELD-JOURNAL.md` and are automatically converted to blog posts via CI:
 
 1. Kevin writes a raw entry in `QIF-FIELD-JOURNAL.md`
 2. Push to `main` triggers the `field-journal-blog.yml` workflow
-3. `scripts/field-journal-to-blog.mjs` generates the blog markdown with frontmatter
+3. `src/scripts/field-journal-to-blog.mjs` generates the blog markdown with frontmatter
 4. The fact-check gate runs before committing (see below)
-5. If the gate passes, the post is committed to `blogs/`
+5. If the gate passes, the post is committed to `research/blog/`
 
-Manual conversion: `node scripts/field-journal-to-blog.mjs`
+Manual conversion: `node src/scripts/field-journal-to-blog.mjs`
 
 ## Fact-Check Gate
 
-Before a blog post is committed by CI, `scripts/verify/fact_check_field_journal.py` runs:
+Before a blog post is committed by CI, `src/scripts/verify/fact_check_field_journal.py` runs:
 
 - **Errors (block publish):** Dead DOIs, unresolvable arXiv refs, broken hyperlinks
 - **Warnings (advisory):** Unsourced numerical claims, unverified named citations, flagged standards references
@@ -61,20 +61,20 @@ Use `--inject` to write `fact_checked`, `fact_check_date`, and `fact_check_notes
 
 ```bash
 # Check all posts
-python scripts/verify/fact_check_field_journal.py
+python src/scripts/verify/fact_check_field_journal.py
 
 # Check specific posts
-python scripts/verify/fact_check_field_journal.py --posts blogs/2026-02-21-*.md
+python src/scripts/verify/fact_check_field_journal.py --posts research/blog/2026-02-21-*.md
 
 # Inject results into frontmatter
-python scripts/verify/fact_check_field_journal.py --inject
+python src/scripts/verify/fact_check_field_journal.py --inject
 ```
 
 ## Writing a New Post
 
-1. Create `blogs/YYYY-MM-DD-slug.md` with the frontmatter schema above
+1. Create `research/blog/YYYY-MM-DD-slug.md` with the frontmatter schema above
 2. Write content in markdown
-3. Run `python scripts/verify/fact_check_field_journal.py --posts blogs/YYYY-MM-DD-slug.md` to verify
+3. Run `python src/scripts/verify/fact_check_field_journal.py --posts research/blog/YYYY-MM-DD-slug.md` to verify
 4. Set `fact_checked: true` after reviewing results
 5. Commit and push
 
