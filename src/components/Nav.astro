@@ -15,7 +15,6 @@ const missionGroups: NavGroup[] = [
     title: 'About',
     links: [
       { href: '/mission/', label: 'Mission Statement', desc: 'Unified model for BCI risk, equity, and informed consent' },
-      { href: '/vision/', label: 'Vision', desc: 'The future of neural interface security' },
       { href: '/about/', label: 'About Me', desc: 'Kevin L. Qi — from detection infrastructure to neurosecurity' },
       { href: '/news/roadmap/', label: 'Roadmap', desc: 'Milestones and version history' },
     ],
@@ -91,7 +90,7 @@ const rndGroups: NavGroup[] = [
   },
 ];
 
-const isMissionActive = ['/mission/', '/vision/', '/about/'].some(p => currentPath.startsWith(p))
+const isMissionActive = ['/mission/', '/about/'].some(p => currentPath.startsWith(p))
   || currentPath.startsWith('/governance/') || currentPath === '/news/roadmap/';
 const isAtlasActive = currentPath.startsWith('/atlas/') || currentPath.startsWith('/framework/')
   || currentPath.startsWith('/security/') || currentPath.startsWith('/tools/')
@@ -174,19 +173,6 @@ const navSections: NavSection[] = [
       <!-- Right side -->
       <div class="flex items-center gap-2">
         <ThemeToggle />
-        <!-- BCI Vision toggle -->
-        <a
-          href="/vision/"
-          class:list={[
-            "hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all border",
-            currentPath === '/vision/'
-              ? "bg-[var(--color-accent-tertiary)]/15 text-[var(--color-accent-tertiary)] border-[var(--color-accent-tertiary)]/30"
-              : "bg-transparent text-[var(--color-text-faint)] border-[var(--color-border)] hover:text-[var(--color-accent-tertiary)] hover:border-[var(--color-accent-tertiary)]/30"
-          ]}
-        >
-          <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-tertiary)] animate-pulse"></span>
-          BCI Vision
-        </a>
 
         <!-- Explore Atlas CTA (desktop) -->
         <a
@@ -274,20 +260,6 @@ const navSections: NavSection[] = [
           Read the Whitepaper
         </a>
       </div>
-
-      <!-- Mobile BCI Vision link -->
-      <a
-        href="/vision/"
-        class:list={[
-          "flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-          currentPath === '/vision/'
-            ? "text-[var(--color-accent-tertiary)] bg-[var(--color-accent-tertiary)]/10"
-            : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
-        ]}
-      >
-        <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-tertiary)] animate-pulse"></span>
-        BCI Vision
-      </a>
 
       <!-- Mobile nav sections with nested groups -->
       {navSections.map((section) => (
