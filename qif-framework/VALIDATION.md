@@ -189,7 +189,7 @@ This is the most architecturally significant validation result. The guardrails d
 - Architecture is concept design, not implemented
 - Cross-AI verification does not substitute for peer review
 
-**Source:** [`qif-framework/qif-sec-guardrails.md`](qif-framework/qif-sec-guardrails.md)
+**Source:** [`qif-framework/specs/qif-sec-guardrails.md`](specs/qif-sec-guardrails.md)
 
 ---
 

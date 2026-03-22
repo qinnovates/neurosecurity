@@ -269,9 +269,9 @@ function checkCountConsistency() {
 
   // Check additional files for stale technique counts
   const additionalFiles = [
-    'qif-framework/QIF-TRUTH.md',
-    'qif-framework/QIF-WHITEPAPER-V8-DRAFT.md',
-    'qif-framework/QIF-WHITEPAPER.md',
+    'qif-framework/whitepapers/QIF-TRUTH.md',
+    'qif-framework/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md',
+    'qif-framework/whitepapers/QIF-WHITEPAPER.md',
     'qif-framework/tara-threat/README.md',
     'qif-framework/README.md',
     'datalake/QIF-DATA-MAPPING.md',

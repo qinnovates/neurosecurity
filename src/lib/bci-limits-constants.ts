@@ -1,5 +1,5 @@
 /**
- * BCI Limits Equation Constants — derived from qif-framework/qif-sec-guardrails.md
+ * BCI Limits Equation Constants — derived from qif-framework/specs/qif-sec-guardrails.md
  * 13 physics constraints defining the fundamental boundaries of BCI design.
  */
 

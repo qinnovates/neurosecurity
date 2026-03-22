@@ -17,7 +17,7 @@ Posts are markdown files named `YYYY-MM-DD-slug.md`. Two categories:
 - **Blog posts:** Technical/security articles (e.g., `2026-02-18-the-invisible-flicker-attack-...md`)
 - **Field journal entries:** Raw personal observations from Kevin's research journal, prefixed with `field-journal-NNN` (e.g., `2026-02-21-field-journal-018-...md`)
 
-Currently 42 posts (18 field journal entries, 24 technical posts).
+Currently 71 posts.
 
 ## Frontmatter Schema
 

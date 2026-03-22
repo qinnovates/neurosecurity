@@ -1,64 +1,11 @@
-# Qinnovate Project Guide
+# Claude-Specific Configuration
 
-<!-- Domain-specific protocols are in .claude/rules/ and load automatically
-     when working in relevant directories. See Protocols Index below. -->
-
-## Commands
-- **Dev Server**: `npm run dev`
-- **Build**: `npm run build`
-- **Preview**: `npm run preview`
-- **Updates**: `npm run fetch-news`
-- **Type Check**: `npm run type-check`
-- **Sync Context**: `npm run sync` (Refreshes this file)
-- **Changelog**: `npm run changelog` (`--dry-run` to preview)
-- **Impact Chains**: `npm run compute:chains` (`--dry-run` to preview)
-- **Health Check**: `npm run health` (validates sync, data, build staleness)
-- **Governance**: `npm run governance` (regenerates DECISION-LOG.md, TRANSPARENCY.md)
-
-## Commit Prefix Convention
-- `[Add]` -- New feature, page, or component (tier 2: changelog + blog draft)
-- `[Update]` -- Significant enhancement (tier 2: changelog + blog draft)
-- `[Research]` -- Research milestone, paper, validation (tier 3: changelog + blog + release)
-- `[Release]` -- Version bump (tier 3: changelog + blog + release)
-- `[Fix]` / `fix:` -- Bug fix (tier 1: changelog only)
-- `docs:` -- Documentation (tier 1: changelog only)
-- `chore:` -- Maintenance (tier 1: changelog only)
-- `auto:` -- Automated (tier 0: skipped entirely)
-
-## Multi-Agent Protocol (Shared Memory)
-- **Source of Truth:** `_memory/` directory is the shared sync point for all agents.
-- **Protocol:** Read latest daily log > Read active context > Append updates > Respect file locks.
-- **Location:** If `_memory` is a symlink (e.g., to cloud storage), treat it transparently as `_memory/`.
-- **Security:** Never store API keys, credentials, or PII in memory logs.
-
-## Project Structure
-- `src/` -- Astro website source (see `src/CLAUDE.md`)
-- `qif-framework/` -- QIF specification + implementations (see `qif-framework/CLAUDE.md`)
-- `datalake/` -- Cross-cutting data + tools, source of truth (see `datalake/CLAUDE.md`)
-- `paper/` -- Academic publications, preprint (see `paper/CLAUDE.md`)
-- `tools/` -- Security tools: neurowall, neurosim, macshield (see `tools/CLAUDE.md`)
-- `scripts/` -- Site scripts + CI utilities (see `scripts/CLAUDE.md`)
-- `governance/` -- Policy, ethics, process documents (see `governance/CLAUDE.md`)
-- `blogs/` -- Blog posts and case studies (Astro content collection `blog`)
-  - Posts with `type: case-study` in frontmatter + `case-study` tag route to `/research/papers/[slug]/`
-
-## Tech Stack
-- Framework: Astro 5.x
-- UI: React 19, TailwindCSS 4
-- Language: TypeScript
-- Data: KQL-first architecture (`kql-tables.ts` > `kql-engine.ts`)
-
-## Guidelines
-- Use Semantic HTML
-- Follow Tailwind v4 conventions
-- Update `datalake/` JSON files for data changes (copied to `docs/data` during build)
-- Documentation is a primary product; keep markdown clean and standard
-- **Epistemic Integrity:** See global `rules/epistemic-integrity.md`. No hallucination. Confidence proportional to evidence
-- **AI Security Ethics:** See `AI-instructions.md` (repo root). Five principles govern all AI conduct in this project
+Read `AGENTS.md` for project context, commands, structure, and guidelines.
+Each subdirectory has its own `AGENTS.md` with directory-specific context.
 
 ## Protocols Index
 
-Domain-specific protocols load automatically via `.claude/rules/` when you work in relevant directories. Manual reference:
+Domain-specific protocols load automatically via `.claude/rules/` when you work in relevant directories.
 
 | Protocol | Rule File | Triggers On |
 |----------|-----------|-------------|
@@ -98,9 +45,3 @@ When Kevin says "claudeq" or "start journaling", activate live derivation loggin
 - Do NOT create separate files (everything in QIF-DERIVATION-LOG.md)
 - Standard triggers (glossary sync, research sources, etc.) still apply
 - Exception: "incognito" exchanges or PII/credentials
-
-## Standards & Governance
-- **QIF (Security)**: All architectural changes must align with the 11-band hourglass model
-- **TARA (Threats)**: New techniques must be scored with NISS
-- **Governance**: Refer to `governance/` for ethics, consent, and regulatory compliance
-- **Scale**: This is a standards body. Changes affect the industry. Verification is critical

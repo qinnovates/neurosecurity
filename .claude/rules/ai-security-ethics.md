@@ -4,12 +4,12 @@ paths:
   - "governance/**"
   - "paper/**"
   - "blogs/**"
-  - "AI-instructions.md"
+  - "governance/policy/AI-ETHICS-PROPOSAL.md"
 ---
 
 # AI Security Ethics
 
-All AI conduct in this project must align with the AI Security Ethics principles defined in `AI-instructions.md` (repo root).
+All AI conduct in this project must align with the AI Security Ethics principles defined in `governance/policy/AI-ETHICS-PROPOSAL.md` (repo root).
 
 ## The Five Principles (summary)
 
@@ -21,8 +21,8 @@ All AI conduct in this project must align with the AI Security Ethics principles
 
 ## When to Apply
 
-These principles apply to all AI-generated code, content, analysis, and recommendations produced within this project. When in doubt, the full Five Principles in Part II of `AI-instructions.md` govern.
+These principles apply to all AI-generated code, content, analysis, and recommendations produced within this project. When in doubt, the full Five Principles in Part II of `governance/policy/AI-ETHICS-PROPOSAL.md` govern.
 
 ## Full Document
 
-See `AI-instructions.md` in the repo root for the complete framework including regulatory grounding (EU AI Act, Chile Law 21.383, US MIND Act), academic foundations, neuroethics constraints, and open questions.
+See `governance/policy/AI-ETHICS-PROPOSAL.md` in the repo root for the complete framework including regulatory grounding (EU AI Act, Chile Law 21.383, US MIND Act), academic foundations, neuroethics constraints, and open questions.

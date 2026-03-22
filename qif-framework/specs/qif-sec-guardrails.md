@@ -5,6 +5,7 @@
 **Origin:** Derivation Log Entry 60 (BCI Limits Equation Synthesis) + Entry 59 (Thalamic Gating + Guardrails Mapping)
 **Classification:** HYPOTHESIS (novel integration) + VERIFIED (individual components)
 **Author:** Kevin Qi, with AI co-derivation (Claude Opus 4.6)
+**See also:** [GUARDRAILS.md](../GUARDRAILS.md) (neuroethics constraint mapping, G1-G8)
 
 ---
 

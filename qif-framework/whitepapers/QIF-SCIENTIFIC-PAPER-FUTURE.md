@@ -16,7 +16,7 @@
 **Current Whitepaper:** [QIF Whitepaper v8.0](https://qinnovate.com/research/whitepaper/) — the canonical, up-to-date framework document
 **Academic Preprint:** [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) — *Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces* (Qi, 2026)
 
-> **Purpose:** This document serves as the scientific and mathematical deep-dive companion to the [QIF Whitepaper v8.0](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-WHITEPAPER-V8-DRAFT.md). It preserves the full derivation context, formulas, and validation roadmap for all quantitative claims. The whitepaper references this document for detailed scientific and mathematical treatment.
+> **Purpose:** This document serves as the scientific and mathematical deep-dive companion to the [QIF Whitepaper v8.0](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md). It preserves the full derivation context, formulas, and validation roadmap for all quantitative claims. The whitepaper references this document for detailed scientific and mathematical treatment.
 
 ---
 
@@ -883,7 +883,7 @@ The NP 4-level rescoring in v1.1.1 shifted 26 technique scores and produced a mo
 
 ### 6.5.9 NISS Validation Status
 
-NISS is a **proposed, unvalidated** scoring system. It has not been independently peer-reviewed or adopted by any standards body. The author was invited by FIRST.org to contribute to the CVSS Resources ecosystem but is deliberately declining until at least one independent researcher has reviewed the scoring methodology, attempted to break it, and either confirmed its soundness or identified corrections. See [QIF Whitepaper v8.0](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-WHITEPAPER-V8-DRAFT.md), Section 19.1 for the full validation roadmap.
+NISS is a **proposed, unvalidated** scoring system. It has not been independently peer-reviewed or adopted by any standards body. The author was invited by FIRST.org to contribute to the CVSS Resources ecosystem but is deliberately declining until at least one independent researcher has reviewed the scoring methodology, attempted to break it, and either confirmed its soundness or identified corrections. See [QIF Whitepaper v8.0](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md), Section 19.1 for the full validation roadmap.
 
 ## 6.6 Case Study: Algorithmic Psychosis Induction
 
@@ -1589,7 +1589,7 @@ The full economic analysis supporting this section, including per-company invest
 
 ## 14. Future Work
 
-> **Note:** This section reflects the validation roadmap as of v8.0 (March 2026). Items marked DONE have been completed since v7.0. For the full, current validation roadmap, see [QIF Whitepaper v8.0](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-WHITEPAPER-V8-DRAFT.md), Section 10 (Future Work) and Section 19 (Research Validation).
+> **Note:** This section reflects the validation roadmap as of v8.0 (March 2026). Items marked DONE have been completed since v7.0. For the full, current validation roadmap, see [QIF Whitepaper v8.0](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md), Section 10 (Future Work) and Section 19 (Research Validation).
 
 ### 14.1 Immediate Priorities
 

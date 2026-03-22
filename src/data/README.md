@@ -13,3 +13,6 @@ JSON and TypeScript data files consumed by the KQL engine and site components. M
 | `intel-sources.json` | Manual | Intelligence source definitions |
 | `milestones.json` | Manual | Project milestone markers |
 | `convergence-data.ts` | Manual | Convergence visualization dataset |
+| `archive/` | — | Archived data file versions |
+
+Most files are auto-generated during `npm run prebuild` from `datalake/` sources. Edit the source in `datalake/`, not here.

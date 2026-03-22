@@ -1,6 +1,14 @@
+---
+title: "NeuroEthics — Running Questions & Thesis Foundation"
+description: "Open ethical questions QIF raises and thesis foundation for neuroethics research"
+order: 10
+---
+
 # QIF NeuroEthics — Running Questions & Thesis Foundation
 
 > **Living document.** These are the open ethical questions that QIF raises — questions that *must* be answered before quantum-aware BCI security can be deployed responsibly. This document grows as Kevin Qi pursues neuroethics in graduate school, filling unknowns from a position of rigorous academic inquiry.
+>
+> **See also:** [QIF-GOVERNANCE-QUESTIONS.md](../QIF-GOVERNANCE-QUESTIONS.md) (RACI governance perspective) | [GUARDRAILS.md](../../qif-framework/GUARDRAILS.md) (neuroethics constraint mapping)
 >
 > **Why neuroethics first:** The QIF framework is technically ready to model quantum phenomena at the BCI interface. But technical readiness without ethical grounding is dangerous. Kevin chose neuroethics as his academic path *because* these questions cannot be answered by engineers alone — they require philosophy, law, neuroscience, and public policy working together. The framework's value is zero if it enables surveillance, discrimination, or loss of cognitive liberty. Neuroethics comes first because it *must*.
 >
@@ -37,6 +45,7 @@ This question sits at the intersection of quantum physics, neuroscience, cyberse
 | 10 | [The Decoherence Governance Gap](#q10-the-decoherence-governance-gap) | Regulatory, Science | OPEN | MEDIUM |
 | 11 | [Open Collaboration Call to Governing Bodies](#q11-open-collaboration-call-to-governing-bodies) | Policy, Multi-stakeholder | OPEN | CRITICAL |
 | 12 | [Who Governs Your Own Brain Data?](#q12-who-governs-your-own-brain-data) | Self-Sovereignty, Policy, Philosophy | OPEN | CRITICAL |
+| 13 | [Thalamic BCIs: When Surgery Catches Up](#q13-thalamic-bcis-when-surgery-catches-up) | Neuroethics, Regulation, Surgical Ethics | OPEN | HIGH |
 
 ---
 
@@ -132,7 +141,7 @@ The quantum biometric is not just another biometric. It is a window into the qua
 - **Falls short:** Does not address quantum-level phenomena or the specific challenge of physically unclonable biometrics
 - **Gap:** Groundbreaking but still classical in its assumptions about what "neural data" means.
 
-##### 7. UNESCO Recommendation on the Ethics of Neurotechnology (2023)
+##### 7. UNESCO Recommendation on the Ethics of Neurotechnology (2025)
 
 - **Applies because:** Non-binding but influential framework for neurotechnology governance
 - **Covers:** Dignity, autonomy, privacy, equity, transparency, responsibility, sustainability
@@ -519,6 +528,42 @@ The goal: ensure that when consumer BCIs arrive, we have answers to "who governs
 
 - [The CIV Lifecycle Documentation](https://github.com/qinnovates/qinnovate#the-qinnovate-engine-continuous-iteration--validation-civ)
 - [Qinnovate Standards Repository](https://github.com/qinnovates/qinnovate)
+
+---
+
+## QUESTION 13 {#q13-thalamic-bcis-when-surgery-catches-up}
+
+### Thalamic BCIs: What Happens When Surgical Procedures Advance Enough to Make Them Viable?
+
+**Date raised:** 2026-02-18
+**Domains:** Neuroethics, Regulation, Surgical Ethics, BCI Security
+**Status:** OPEN
+**Priority:** HIGH
+**Source:** MIT OCW 9.13 learning + Gemini cross-validation
+
+#### The Question
+
+Right now, BCIs are not implanted at the thalamus for recording because of surgical risk (deep access through corona radiata/internal capsule), single point of failure (damage disrupts all sensory modalities), gliosis (dense tissue walls off electrodes faster), decoding complexity (mixed relay signals vs clean cortical somatotopy), and latency (relay loop adds milliseconds). DBS does target thalamic structures for stimulation (VIM for tremor, ANT for epilepsy), but that's writing signals in, not reading them out.
+
+But surgical procedures and medicine will advance. Robotic surgery, better electrode materials, anti-gliosis coatings, improved decoding algorithms. When thalamic BCIs for recording become viable:
+
+1. **A device at the thalamus has access to essentially all sensory traffic** (vision, audition, somatosensory, proprioception — everything except olfaction). What governance framework should exist *before* this becomes technically feasible?
+2. **How do you obtain informed consent** for a device that could access all sensory modalities simultaneously? Current consent frameworks are built for single-modality BCIs (motor cortex for movement, auditory cortex for hearing).
+3. **What are the security implications of a compromised thalamic BCI vs a cortical one?** In QIF terms, I0-subcortical has fewer biological gating layers bypassed but access to mixed sensory relay traffic — a different and potentially more dangerous threat profile.
+4. **Should there be a regulatory distinction** between cortical BCIs (single-modality access) and thalamic BCIs (multi-modality access)? Current FDA classifications don't differentiate by implant depth.
+5. **Who decides when the risk/reward threshold has shifted enough** to justify thalamic implantation for recording? Clinicians? Ethics boards? Patients? Regulators?
+6. **The olfactory exception:** A thalamic BCI would be "smell-blind" since olfaction bypasses the thalamus. If you wanted full sensory capture, you'd still need a separate sensor at the olfactory bulb. Does this create a regulatory loophole or a natural privacy protection?
+
+#### Why This Is Not Hypothetical
+
+- DBS already targets thalamic/subthalamic structures in 160,000+ patients globally
+- Robotic neurosurgery is advancing (ROSA, Neuromate systems)
+- Anti-inflammatory electrode coatings are in active research
+- The transition from "too risky" to "clinically viable" can happen faster than governance frameworks can adapt (precedent: social media regulation lag)
+
+#### Connection to QIF
+
+The I0 depth subclassification (Entry 59) was created specifically to capture this distinction. I0-cortical, I0-subcortical, I0-spinal/peripheral, and I0-noninvasive have different security profiles because they bypass different numbers of biological gating layers. The thalamic BCI question is the most acute case of I0-subcortical risk.
 
 ---
 

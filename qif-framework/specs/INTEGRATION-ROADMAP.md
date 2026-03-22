@@ -243,8 +243,8 @@ NSP is the single source of truth for cryptography and compression across the en
 
 ## Related Documents
 
-- [NSP Protocol Spec](qif-framework/NSP-PROTOCOL-SPEC.md)
-- [Runemate Forge](qif-framework/RUNEMATE.md)
+- [NSP Protocol Spec](NSP-PROTOCOL-SPEC.md)
+- [Runemate Forge](RUNEMATE.md)
 - [Neurowall README](tools/neurowall/README.md)
 - [Neurowall MVP Prototype](tools/neurowall/MVP_PROTOTYPE.md)
 - [Neurowall Architecture](tools/neurowall/ARCHITECTURE.md)

@@ -10,7 +10,7 @@ title: "AI Ethics: Principles, Frameworks, and the Governance of Artificial Inte
 **Date:** 2026-03-11
 **Status:** Living Document
 **Companion to:** QIF-WHITEPAPER-V8-DRAFT.md, QIF-GOVERNANCE-QUESTIONS.md, QIF-NEUROETHICS.md
-**See also:** [AI-instructions.md](../AI-instructions.md) — operational AI conduct principles that govern how AI systems behave within this project
+**See also:** [AI-ETHICS-PROPOSAL.md](AI-ETHICS-PROPOSAL.md) — operational AI conduct principles that govern how AI systems behave within this project
 
 ---
 
@@ -627,7 +627,7 @@ That is the blank slate argument. The opportunity to embed these principles at t
 
 ## Operational AI Conduct Principles
 
-This document covers the academic and regulatory landscape of AI ethics. For the operational principles that govern how AI systems actually behave within this project — Asimov's Three Laws reframed for AI, consent as architecture, human-in-the-loop as non-negotiable, neural data at the highest protection tier, and defensive framing only — see **[AI-instructions.md](https://github.com/qinnovates/qinnovate/blob/main/AI-instructions.md)**.
+This document covers the academic and regulatory landscape of AI ethics. For the operational principles that govern how AI systems actually behave within this project — Asimov's Three Laws reframed for AI, consent as architecture, human-in-the-loop as non-negotiable, neural data at the highest protection tier, and defensive framing only — see **[AI-ETHICS-PROPOSAL.md](https://github.com/qinnovates/qinnovate/blob/main/governance/policy/AI-ETHICS-PROPOSAL.md)**.
 
 That document translates the frameworks surveyed here into enforceable conduct rules for any AI agent operating on this codebase.
 

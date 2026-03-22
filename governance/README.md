@@ -2,52 +2,45 @@
 
 Neuroethics, regulatory compliance, and process documents for the QIF framework.
 
-## Table of Contents
+## Structure
 
-- [Ethics](#ethics)
-- [Neurosecurity Governance](#neurosecurity-governance)
-- [Process & Standards](#process--standards)
-- [Community](#community)
+```
+governance/
+├── DECISION-LOG.md              # Auto-generated from derivation log
+├── TRANSPARENCY.md              # Auto-generated from derivation log
+├── SHIP-LOG.md                  # Feature release tracking
+├── SCAFFOLD-LOG.md              # Project initialization decisions
+├── MATURITY.md                  # Capability maturity model
+├── QIF-GOVERNANCE-QUESTIONS.md  # Who decides what for the brain (RACI)
+│
+├── policy/                      # Ethics, compliance, and regulatory docs
+│   ├── AI-ETHICS-PROPOSAL.md    # AI ethics principles for neural security
+│   ├── AI-ETHICS.md             # AI disclosure and human-in-the-loop
+│   ├── QIF-NEUROETHICS.md       # Open ethical questions and thesis foundation
+│   ├── NEUROSECURITY_GOVERNANCE.md        # Unified governance framework
+│   ├── NEUROSECURITY_POLICY_PROPOSAL.md   # 6 asks for 6 organizations
+│   ├── NEUROETHICS_LEGISLATION_SURVEY.md  # Global neurorights law mapping
+│   ├── INFORMED_CONSENT_FRAMEWORK.md      # BCI consent + pediatric/incapacity
+│   ├── POST_DEPLOYMENT_ETHICS.md          # Post-market monitoring
+│   ├── DATA_POLICY_FAQ.md                 # Neural data handling, retention
+│   └── ACCESSIBILITY.md                   # Inclusive BCI design requirements
+│
+├── outreach/                    # Standards body engagement
+├── processes/                   # Development lifecycle and protocols
+└── _archive/                    # Consolidated prior versions (see ../_archive/governance/)
+```
 
-## Ethics
+## Auto-Generated Files
 
-| Document | Scope |
-|----------|-------|
-| [Informed Consent Framework](INFORMED_CONSENT_FRAMEWORK.md) | BCI-specific consent protocols + pediatric & incapacity considerations |
-| [Post-Deployment Ethics](POST_DEPLOYMENT_ETHICS.md) | Ongoing monitoring obligations after deployment |
-| [QIF Neuroethics](QIF-NEUROETHICS.md) | 11 open questions on quantum biometric governance |
-
-## Neurosecurity Governance
-
-| Document | Scope |
-|----------|-------|
-| [Neurosecurity Governance](NEUROSECURITY_GOVERNANCE.md) | Unified: why neurosecurity, GRC gaps, framework analysis, neuroethics alignment, UNESCO alignment, regulatory compliance, convergence strategy |
-| [Closing the Neurosecurity Gap](NEUROSECURITY_POLICY_PROPOSAL.md) | Policy recommendations: six asks for six organizations, phased timeline, QIF as reference implementation |
-| [Neuroethics Legislation Survey](NEUROETHICS_LEGISLATION_SURVEY.md) | Comprehensive survey: 10 enacted laws, 12+ pending bills, 11+ international instruments, 6 regional instruments, academic frameworks, landmark court decisions (fact-checked March 2026) |
-
-Previous standalone documents (NEUROSECURITY.md, NEUROSECURITY-GRC.md, NEUROSECURITY_GRC_CONVERGENCE.md, NEUROETHICS_ALIGNMENT.md, UNESCO_ALIGNMENT.md, REGULATORY_COMPLIANCE.md, ETHICAL-NEUROSECURITY-CODE-OF-ETHICS.md) have been consolidated into the unified document above. Originals are preserved in `archive/`.
-
-## Process & Standards
-
-| Document | Scope |
-|----------|-------|
-| [Transparency](TRANSPARENCY.md) | Human-AI collaboration audit trails |
-| [Data Policy FAQ](DATA_POLICY_FAQ.md) | Neural data handling, retention, deletion |
-| [Accessibility](ACCESSIBILITY.md) | Inclusive BCI design requirements |
-
-### Processes
-
-| Document | Scope |
-|----------|-------|
-| [Qinnovate Lifecycle](processes/qinnovate-lifecycle.md) | Standards development lifecycle |
-| [Auto-Scribe Protocol](processes/auto-scribe-protocol.md) | Automated documentation protocol |
+`DECISION-LOG.md` and `TRANSPARENCY.md` are generated from `qif-framework/QIF-DERIVATION-LOG.md`. Do not edit directly. Run:
+```bash
+npm run governance
+```
 
 ## Community
 
-| Document | Scope |
-|----------|-------|
-| [Code of Conduct](CODE_OF_CONDUCT.md) | Community standards and contribution guidelines |
+See [Code of Conduct](../CODE_OF_CONDUCT.md) at the repo root.
 
 ---
 
-*All governance documents are published under [Apache 2.0](../LICENSE) alongside the rest of the Qinnovate project.*
+*All governance documents are published under [Apache 2.0](../LICENSE).*

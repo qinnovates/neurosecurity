@@ -7,7 +7,7 @@
 > **Author:** Kevin Qi
 > **Parent Framework:** QIF (Quantified Interconnection Framework)
 > **Delivery Protocol:** NSP (Neural Sensory Protocol)
-> **Integration Roadmap:** [qif-framework/INTEGRATION-ROADMAP.md](../qif-framework/INTEGRATION-ROADMAP.md)
+> **Integration Roadmap:** [qif-framework/specs/INTEGRATION-ROADMAP.md](INTEGRATION-ROADMAP.md)
 
 ---
 

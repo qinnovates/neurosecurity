@@ -489,12 +489,12 @@ Visualizations that exist on the site and can be referenced/embedded in the whit
 
 | Document | Lines | Purpose |
 |----------|-------|---------|
-| `qif-framework/RUNEMATE.md` | 2960 | Full Runemate specification |
-| `qif-framework/NSP-PROTOCOL-SPEC.md` | — | Full NSP protocol spec |
+| `qif-framework/specs/RUNEMATE.md` | 2960 | Full Runemate specification |
+| `qif-framework/specs/NSP-PROTOCOL-SPEC.md` | — | Full NSP protocol spec |
 | `qif-framework/GUARDRAILS.md` | 200 | 8 neuroethics → neurosecurity guardrails |
-| `qif-framework/QIF-NEUROETHICS.md` | 564 | 12 open ethical questions |
-| `qif-framework/QIF-GOVERNANCE-QUESTIONS.md` | 631 | 30+ governance questions, RACI matrix |
-| `qif-framework/qif-sec-guardrails.md` | 425 | Physics-derived security architecture |
+| `governance/policy/QIF-NEUROETHICS.md` | 564 | 12 open ethical questions |
+| `governance/QIF-GOVERNANCE-QUESTIONS.md` | 631 | 30+ governance questions, RACI matrix |
+| `qif-framework/specs/qif-sec-guardrails.md` | 425 | Physics-derived security architecture |
 | `qif-framework/QIF-DERIVATION-LOG.md` | — | Decision and derivation journal |
 | `qif-framework/QIF-FIELD-JOURNAL.md` | — | Personal/experiential observations |
 | `qif-framework/QIF-RESEARCH-SOURCES.md` | — | Living research citation catalog |

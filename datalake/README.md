@@ -18,7 +18,7 @@ This folder contains the unified BCI/neural security threat taxonomy using MITRE
 
 ```
 shared/
-├── qtara-registrar.json         # 103 techniques, 11 tactics, MITRE-compatible (CURRENT)
+├── qtara-registrar.json         # 161 techniques, 16 tactics, MITRE-compatible (CURRENT)
 ├── qif-brain-bci-atlas.json     # Brain-BCI region mappings
 ├── qif-dsm-mappings.json        # DSM-5-TR diagnostic mappings
 ├── qif-ethics-controls.json     # Ethics control mappings
@@ -39,7 +39,7 @@ shared/
 
 ## qtara-registrar.json (Current)
 
-**103 techniques** across **11 MITRE-compatible tactics**, generated from `config.py` (as-code).
+**161 techniques** across **16 MITRE-compatible tactics**, generated from `config.py` (as-code).
 
 ### ID Scheme
 
@@ -110,10 +110,12 @@ const grouped = Object.groupBy(registry.techniques, t => t.category);
 
 | Status | Count | Meaning |
 |--------|-------|---------|
-| CONFIRMED | 13 | Demonstrated in real BCI systems or documented incidents |
-| DEMONSTRATED | 15 | Proven in research/lab settings |
-| THEORETICAL | 19 | Physically plausible, not yet demonstrated |
-| EMERGING | 13 | Recently identified, under active research |
+| CONFIRMED | 29 | Demonstrated in real BCI systems or documented incidents |
+| DEMONSTRATED | 43 | Proven in research/lab settings |
+| THEORETICAL | 61 | Physically plausible, not yet demonstrated |
+| EMERGING | 26 | Recently identified, under active research |
+| PLAUSIBLE | 1 | Physically plausible, limited evidence |
+| SPECULATIVE | 1 | Hypothetical, no direct evidence yet |
 
 ## threat-matrix.json (DEPRECATED)
 

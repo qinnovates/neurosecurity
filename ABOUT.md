@@ -10,9 +10,7 @@
 
 # About — Kevin Qi
 
-I'm **Kevin Qi**, a security engineer and aspiring neuroethics researcher. I started this project with a question: *what happens to a patient when their brain-computer interface fails to protect them?*
-
-Not what happens to the data. Not what happens to the device. What happens to the *person*. I couldn't find a framework that answered that, so I built one. This is the OSI of Mind.
+I'm **Kevin Qi**, a security engineer and aspiring neuroethics researcher.
 
 I've been building on the web since I was 12. In the early 2000s, the internet was going through a pivotal transition — from chaotic, animated GeoCities-style pages to structured, semi-professional layouts for forums and portals. I co-founded a design studio called **AGFX** with a friend named Aaron who I met over the internet, and we were at the forefront of that shift. We were part of the first generation of digital natives who proved that high-level technical collaboration didn't require a physical office — we built AGFX through IRC, AIM, and the Envisionboard (InvisionFree) support forums we managed. I stopped supporting it after high school as life got busy.
 
@@ -30,25 +28,19 @@ My background is in cybersecurity. I understand layered defense, threat modeling
 
 I catalogued every known BCI attack technique I could find: 60 at first, merged from three inventories. Then I asked: *what do computers and neurons actually have in common?* The answer was physics. Signals operating at different scales, from electromagnetic fields up through cortical oscillations. That became QIF's layered architecture.
 
-When I mapped those techniques across the frequency bands, gaps appeared everywhere. The catalogue grew to 109. I traced each technique through neural pathways, cognitive functions, and psychiatric outcomes. CVSS wasn't built for this. It can't express whether damage is reversible or whether the patient can detect the violation. So I designed NISS for neural harm.
-
-**78 of those 109 techniques have direct therapeutic counterparts.** The same stimulation that causes involuntary motor activation as a side effect treats Parkinson's therapeutically. The boundary between risk and treatment is not the mechanism. It is consent, dosage, and oversight. That insight is what convinced me that BCI safety is fundamentally a governance problem, not just an engineering one.
-
-## The Hourglass
-
-The framework is an 11-band, 3-zone architecture with the Neural Interface (I0) at its waist. Biology above. Silicon below. The [TARA Atlas](https://qinnovate.com/TARA/) maps 109 techniques across this hierarchy, each scored and traced to clinical outcomes through the Neural Impact Chain.
+When I mapped those techniques across the frequency bands, gaps appeared everywhere. The catalogue grew to 161. I traced each technique through neural pathways, cognitive functions, and psychiatric outcomes. CVSS wasn't built for this. It can't express whether damage is reversible or whether the patient can detect the violation. So I designed NISS for neural harm.
 
 I was inspired by Francis Preston Venable's *The Development of the Periodic Law* (1896), found in a bookstore in Istanbul. It documented how the periodic table went through dozens of visual representations before arriving at the grid we know today. Mendeleev didn't just organize what was known. He left gaps for what wasn't. Those gaps predicted elements that were later discovered. QIF follows the same principle: organizing what we know, highlighting what we don't, evolving as discovery fills the gaps.
+
+For more on the framework architecture and the therapeutic counterpart insight, see [README.md](README.md#the-tara-insight).
 
 ## How AI Was Used
 
 AI (predominantly Claude, alongside Gemini and ChatGPT) helped me lay out ideas, validate research, and tie together pieces I mapped out. The architecture, scoring, clinical mappings, and cross-domain connections are mine. AI helped get the work out of my head and into a form others can evaluate.
 
-The [Transparency Statement](governance/TRANSPARENCY.md) documents every AI interaction. The [Derivation Log](qif-framework/QIF-DERIVATION-LOG.md) traces 80+ entries of human decision-making so any reviewer can follow the reasoning and challenge it.
+Full disclosure: [Transparency Statement](governance/TRANSPARENCY.md) | [AI Ethics Principles](governance/policy/AI-ETHICS-PROPOSAL.md) | [Derivation Log](qif-framework/QIF-DERIVATION-LOG.md) (113 entries)
 
 ## What Comes Next
-
-I built the technical foundation. 109 techniques catalogued, scored, and mapped to clinical outcomes. An 11-band architecture grounded in physics. A scoring system that extends CVSS for neural harm. That foundation is open source and available for any research group to test, validate, or refute.
 
 What I want to focus on next is the policy layer: governance frameworks, consent models, regulatory alignment, and ethical guidelines that ensure BCI technologies are developed safely and equitably. That is why I'm pursuing a master's in Neuroethics and Bioethics. The technical work showed me where the risks are. Graduate study will help me understand how to build the protections.
 

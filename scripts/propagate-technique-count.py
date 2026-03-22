@@ -27,9 +27,9 @@ WHITEPAPER_OLD = "109"
 # Files to NEVER modify (historical, archived, or derivation log entries that are append-only)
 SKIP_FILES = {
     "qif-framework/QIF-DERIVATION-LOG.md",  # Historical entries — append only
-    "qif-framework/NEURORIGHTS-DERIVATION-LOG.md",  # Historical
+    "qif-framework/logs/NEURORIGHTS-DERIVATION-LOG.md",  # Historical
     "qif-framework/research/CROSS-AI-WHITEPAPER-PROMPT.md",  # Historical prompt
-    "qif-framework/QIF-SCIENTIFIC-PAPER-FUTURE.md",  # Future draft, separate review
+    "qif-framework/whitepapers/QIF-SCIENTIFIC-PAPER-FUTURE.md",  # Future draft, separate review
     "qif-framework/research/QIF-SCIENTIFIC-HYPOTHESES.md",  # Hypotheses doc
     "governance/DECISION-LOG.md",  # Auto-generated, will be regenerated
     "governance/TRANSPARENCY.md",  # Auto-generated
@@ -101,7 +101,7 @@ CONTENT_FILES = [
     "src/components/bci/BciLandscape.tsx",
     "qif-framework/README.md",
     "qif-framework/tara-threat/README.md",
-    "qif-framework/QIF-TRUTH.md",
+    "qif-framework/whitepapers/QIF-TRUTH.md",
     "datalake/QIF-DATA-MAPPING.md",
     "docs/tools/bci-plugin-use-cases.md",
     "blogs/2026-03-17-bci-security-plugin-hardrails.md",
@@ -109,8 +109,8 @@ CONTENT_FILES = [
 ]
 
 WHITEPAPER_FILES = [
-    "qif-framework/QIF-WHITEPAPER-V8-DRAFT.md",
-    "qif-framework/QIF-WHITEPAPER.md",
+    "qif-framework/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md",
+    "qif-framework/whitepapers/QIF-WHITEPAPER.md",
 ]
 
 TIMELINE_FILE = "src/data/qif-timeline.json"

@@ -145,9 +145,9 @@ These are the files whose evolution tells the story of this project:
 
 | File | What it captures |
 |------|-----------------|
-| [`qif-framework/QIF-DERIVATION-LOG.md`](../qif-framework/QIF-DERIVATION-LOG.md) | 86 entries of research decisions, hypotheses, and corrections |
+| [`qif-framework/QIF-DERIVATION-LOG.md`](../qif-framework/QIF-DERIVATION-LOG.md) | 113 entries of research decisions, hypotheses, and corrections |
 | [`qif-framework/QIF-FIELD-JOURNAL.md`](../qif-framework/QIF-FIELD-JOURNAL.md) | First-person research observations |
-| [`qif-framework/QIF-RESEARCH-SOURCES.md`](../qif-framework/QIF-RESEARCH-SOURCES.md) | 309+ verified sources — watch for additions and corrections |
+| [`qif-framework/QIF-RESEARCH-SOURCES.md`](../qif-framework/QIF-RESEARCH-SOURCES.md) | 340+ verified sources — watch for additions and corrections |
 | [`governance/TRANSPARENCY.md`](../governance/TRANSPARENCY.md) | Cross-AI validation sessions, audit trail |
 | [`VALIDATION.md`](../VALIDATION.md) | What has been tested, what has not |
 | [`shared/qtara-registrar.json`](../shared/qtara-registrar.json) | TARA technique registry — the core dataset |

@@ -24,6 +24,7 @@ React 19 and Astro components for the qinnovate.com site. Organized by feature d
 | `tara/` | 2 | TARA technique viewer, searchable threat browser |
 | `therapeutics/` | 1 | Therapeutic applications overview |
 | `whitepaper/` | 10 | Whitepaper section renderer, LaTeX preview, citation list, version selector |
+| `demo-atlas/` | — | Demo Atlas components |
 | `__tests__/` | 1 | Component tests |
 
 ## Root Components
@@ -55,4 +56,5 @@ React 19 and Astro components for the qinnovate.com site. Organized by feature d
 | `PublicationCard.astro` | Astro | Publication listing card |
 | `ObfuscatedEmail.astro` | Astro | Anti-scrape email display |
 | `ThemeToggle.astro` | Astro | Light/dark theme toggle |
+| `TechCount.astro` | Astro | Technology count display |
 | `index.ts` | TS | Barrel export |

@@ -4,7 +4,7 @@
 > **Version:** 0.1
 > **Date:** 2026-02-21
 
-Generates synthetic EEG signals with TARA-mapped attack patterns for testing BCI security defenses. Each attack generator is tied to a QIF-T technique ID from the [TARA registry](../../../shared/qtara/src/qtara/data/qtara-registrar.json) (103 techniques).
+Generates synthetic EEG signals with TARA-mapped attack patterns for testing BCI security defenses. Each attack generator is tied to a QIF-T technique ID from the [TARA registry](../../../shared/qtara/src/qtara/data/qtara-registrar.json) (161 techniques).
 
 ## Quick Start
 
@@ -150,7 +150,7 @@ The test harness (`test_nic_chains.py`) currently has its own inline generators.
 
 ## Data Sources
 
-- **TARA Registry:** `shared/qtara/src/qtara/data/qtara-registrar.json` (103 techniques, v4.0)
+- **TARA Registry:** `shared/qtara/src/qtara/data/qtara-registrar.json` (161 techniques, v4.0)
 - **NIC Bands:** QIF 11-band hourglass model (N1-N7, I0, S1-S3)
 - **NISS Scoring:** Neural Impact Scoring System v1.0
 - **QIF Tactics:** 16 tactic codes (QIF-S.HV, QIF-N.IJ, QIF-B.EV, etc.)

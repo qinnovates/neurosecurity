@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformer Visualized</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0f;
+    color: #e0e0e0;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    overflow-x: hidden;
+  }
+
+  .scene {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    text-align: center;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #7eb8ff, #c084fc, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 48px;
+  }
+
+  /* ── Tab Navigation ── */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    padding: 10px 20px;
+    border: 1px solid #222;
+    border-radius: 8px;
+    background: #111;
+    color: #888;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+  }
+
+  .tab:hover { border-color: #444; color: #ccc; }
+  .tab.active {
+    background: #1a1a2e;
+    border-color: #7eb8ff;
+    color: #7eb8ff;
+    box-shadow: 0 0 20px rgba(126,184,255,0.1);
+  }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── Section: Attention ── */
+  .attention-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .attention-grid { grid-template-columns: 1fr; }
+  }
+
+  .sentence-input {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .word-token {
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: #161625;
+    border: 1px solid #2a2a4a;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+    user-select: none;
+  }
+
+  .word-token:hover { border-color: #7eb8ff; }
+  .word-token.selected {
+    background: #1a1a3e;
+    border-color: #7eb8ff;
+    color: #7eb8ff;
+    box-shadow: 0 0 16px rgba(126,184,255,0.2);
+  }
+
+  .word-token.target {
+    border-color: #c084fc;
+    box-shadow: 0 0 12px rgba(192,132,252,0.15);
+  }
+
+  .heatmap {
+    display: grid;
+    gap: 2px;
+    margin-top: 16px;
+  }
+
+  .heat-cell {
+    aspect-ratio: 1;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.7);
+    transition: all 0.4s;
+    cursor: default;
+    position: relative;
+  }
+
+  .heat-cell::after {
+    content: attr(data-score);
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 0.7rem;
+    font-weight: bold;
+  }
+
+  .heat-cell:hover::after { opacity: 1; }
+
+  .heat-label {
+    font-size: 0.65rem;
+    color: #666;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 2px;
+  }
+
+  .explanation-box {
+    background: #111119;
+    border: 1px solid #1e1e3a;
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .explanation-box h3 {
+    color: #c084fc;
+    margin-bottom: 12px;
+    font-size: 1rem;
+  }
+
+  .explanation-box p {
+    color: #999;
+    line-height: 1.7;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+
+  .math-block {
+    background: #0d0d1a;
+    border: 1px solid #1a1a30;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    font-size: 0.85rem;
+    color: #7eb8ff;
+    text-align: center;
+    line-height: 2;
+    overflow-x: auto;
+  }
+
+  /* ── Section: Architecture ── */
+  .arch-container {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+  }
+
+  .arch-stack {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+  }
+
+  .arch-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    position: absolute;
+    left: -32px;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+    font-size: 0.7rem;
+    color: #555;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .arch-block {
+    width: 220px;
+    padding: 14px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.75rem;
+    transition: all 0.4s;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid transparent;
+  }
+
+  .arch-block:hover {
+    transform: scale(1.05);
+    z-index: 10;
+  }
+
+  .arch-block.attention {
+    background: linear-gradient(135deg, #1a1a3e, #1e1040);
+    border-color: #3a2a6e;
+  }
+  .arch-block.attention:hover { border-color: #7c5cbf; box-shadow: 0 0 24px rgba(124,92,191,0.2); }
+
+  .arch-block.ffn {
+    background: linear-gradient(135deg, #1a2a1a, #102a1e);
+    border-color: #2a5a3a;
+  }
+  .arch-block.ffn:hover { border-color: #4a9a5a; box-shadow: 0 0 24px rgba(74,154,90,0.2); }
+
+  .arch-block.norm {
+    background: #151520;
+    border-color: #2a2a3a;
+    padding: 8px;
+    font-size: 0.65rem;
+    color: #666;
+  }
+
+  .arch-block.embed {
+    background: linear-gradient(135deg, #2a1a1a, #301a20);
+    border-color: #5a2a3a;
+  }
+  .arch-block.embed:hover { border-color: #aa4a6a; box-shadow: 0 0 24px rgba(170,74,106,0.2); }
+
+  .arch-block.output {
+    background: linear-gradient(135deg, #1a2a2a, #102a30);
+    border-color: #2a5a6a;
+  }
+
+  .arch-arrow {
+    color: #333;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .arch-title {
+    font-size: 0.8rem;
+    color: #888;
+    text-align: center;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .block-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 0.72rem;
+    color: #bbb;
+    width: 240px;
+    line-height: 1.5;
+    z-index: 100;
+    text-align: left;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  .arch-block:hover .block-tooltip { display: block; }
+
+  /* ── Section: Flow Animation ── */
+  .flow-scene {
+    position: relative;
+    height: 500px;
+    border: 1px solid #1a1a2a;
+    border-radius: 16px;
+    background: #08080f;
+    overflow: hidden;
+  }
+
+  .flow-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .flow-btn {
+    padding: 10px 24px;
+    border: 1px solid #2a2a4a;
+    border-radius: 8px;
+    background: #111;
+    color: #ccc;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+  }
+
+  .flow-btn:hover { border-color: #7eb8ff; color: #7eb8ff; }
+  .flow-btn.active { background: #1a1a3e; border-color: #7eb8ff; }
+
+  .flow-step-label {
+    text-align: center;
+    color: #7eb8ff;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    min-height: 24px;
+  }
+
+  .flow-step-desc {
+    text-align: center;
+    color: #666;
+    font-size: 0.78rem;
+    margin-bottom: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 40px;
+    line-height: 1.6;
+  }
+
+  .token-ball {
+    position: absolute;
+    width: 60px;
+    height: 32px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 5;
+  }
+
+  .flow-zone {
+    position: absolute;
+    border: 1px dashed #1a1a3a;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .flow-zone.active-zone {
+    border-color: #3a3a6a;
+    background: rgba(126,184,255,0.03);
+  }
+
+  .attention-line {
+    position: absolute;
+    height: 2px;
+    transform-origin: left center;
+    z-index: 3;
+    border-radius: 1px;
+    transition: opacity 0.5s;
+  }
+
+  /* ── Section: Multi-Head ── */
+  .heads-container {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .head-card {
+    width: 140px;
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid #222;
+    background: #111;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .head-card:hover { border-color: #555; }
+  .head-card.active-head {
+    border-color: var(--head-color, #7eb8ff);
+    box-shadow: 0 0 20px rgba(126,184,255,0.15);
+  }
+
+  .head-card h4 {
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+    color: var(--head-color, #7eb8ff);
+  }
+
+  .head-card p {
+    font-size: 0.65rem;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  .head-focus {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--head-color, #7eb8ff);
+    margin: 8px auto 0;
+    box-shadow: 0 0 10px var(--head-color, #7eb8ff);
+  }
+
+  /* ── Section: Positional Encoding ── */
+  .pos-canvas-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  canvas#posCanvas {
+    border: 1px solid #1a1a2a;
+    border-radius: 12px;
+    background: #08080f;
+  }
+
+  .pos-controls {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .pos-controls label {
+    color: #888;
+    font-size: 0.78rem;
+  }
+
+  .pos-controls input[type="range"] {
+    width: 120px;
+    accent-color: #7eb8ff;
+  }
+
+  /* ── Section: QKV ── */
+  .qkv-demo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .qkv-demo { grid-template-columns: 1fr; }
+  }
+
+  .qkv-card {
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #222;
+    text-align: center;
+  }
+
+  .qkv-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+
+  .qkv-card .qkv-name {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 12px;
+  }
+
+  .qkv-card .analogy {
+    font-size: 0.8rem;
+    color: #aaa;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  .qkv-card .technical {
+    font-size: 0.72rem;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .qkv-q { background: #141428; border-color: #2a2a5a; }
+  .qkv-q h3 { color: #7eb8ff; }
+  .qkv-k { background: #1a1428; border-color: #3a2a5a; }
+  .qkv-k h3 { color: #c084fc; }
+  .qkv-v { background: #142814; border-color: #2a5a2a; }
+  .qkv-v h3 { color: #4ade80; }
+
+  /* ── Connector Lines (SVG) ── */
+  .connector-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── Comparison Table ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.78rem;
+  }
+
+  .compare-table th {
+    background: #151520;
+    padding: 12px;
+    text-align: left;
+    color: #7eb8ff;
+    border-bottom: 1px solid #2a2a4a;
+  }
+
+  .compare-table td {
+    padding: 12px;
+    border-bottom: 1px solid #1a1a2a;
+    color: #999;
+  }
+
+  .compare-table tr:hover td { background: #0f0f1a; }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: bold;
+  }
+
+  .tag-old { background: #2a1a1a; color: #f87171; }
+  .tag-new { background: #1a2a1a; color: #4ade80; }
+
+  .section-desc {
+    text-align: center;
+    color: #666;
+    font-size: 0.82rem;
+    max-width: 650px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+
+  .legend {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    color: #888;
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <h1>Transformer</h1>
+  <p class="subtitle">Vaswani et al., 2017 &mdash; "Attention Is All You Need"</p>
+
+  <div class="tabs">
+    <button class="tab active" data-panel="qkv">Q, K, V</button>
+    <button class="tab" data-panel="attention">Attention Map</button>
+    <button class="tab" data-panel="multihead">Multi-Head</button>
+    <button class="tab" data-panel="positional">Position Encoding</button>
+    <button class="tab" data-panel="architecture">Architecture</button>
+    <button class="tab" data-panel="flow">Token Flow</button>
+    <button class="tab" data-panel="compare">Why It Won</button>
+  </div>
+
+  <!-- ═══════ QKV ═══════ -->
+  <div class="panel active" id="panel-qkv">
+    <p class="section-desc">Every word asks a question (Q), offers a label (K), and carries information (V). Attention = matching questions to labels, then reading the info.</p>
+
+    <div class="qkv-demo">
+      <div class="qkv-card qkv-q">
+        <h3>Q</h3>
+        <div class="qkv-name">Query</div>
+        <div class="analogy">"What am I looking for?"</div>
+        <div class="technical">Each token generates a Query vector. It's what this token wants to know from the rest of the sequence. Like a search query.</div>
+      </div>
+      <div class="qkv-card qkv-k">
+        <h3>K</h3>
+        <div class="qkv-name">Key</div>
+        <div class="analogy">"Here's my label."</div>
+        <div class="technical">Each token also generates a Key vector. Keys are compared against Queries to determine relevance. Like a file label that gets matched to search terms.</div>
+      </div>
+      <div class="qkv-card qkv-v">
+        <h3>V</h3>
+        <div class="qkv-name">Value</div>
+        <div class="analogy">"Here's my actual content."</div>
+        <div class="technical">The actual information payload. Once Q and K determine how much attention to pay, V is what gets read. Like the file contents behind the label.</div>
+      </div>
+    </div>
+
+    <div class="explanation-box">
+      <h3>How They Work Together</h3>
+      <div class="math-block">
+        Attention(Q, K, V) = softmax(Q &times; K<sup>T</sup> / &radic;d<sub>k</sub>) &times; V
+      </div>
+      <p><strong>Step 1:</strong> Multiply Q by K<sup>T</sup> &mdash; this gives a score for every pair of tokens. High score = "these two tokens are relevant to each other."</p>
+      <p><strong>Step 2:</strong> Divide by &radic;d<sub>k</sub> &mdash; prevents scores from getting too large (stabilizes gradients).</p>
+      <p><strong>Step 3:</strong> Softmax &mdash; converts scores into probabilities (they sum to 1).</p>
+      <p><strong>Step 4:</strong> Multiply by V &mdash; each token's output is now a weighted mix of all Value vectors, weighted by relevance.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ Attention Map ═══════ -->
+  <div class="panel" id="panel-attention">
+    <p class="section-desc">Click any word to see what it "pays attention to." Brighter = stronger connection. This is what the Q&times;K<sup>T</sup> matrix looks like.</p>
+
+    <div class="attention-grid">
+      <div>
+        <div class="sentence-input" id="sentenceTokens"></div>
+        <div id="heatmapContainer"></div>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#1a1a3e"></div> Low attention</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#5a4abf"></div> Medium</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#c084fc"></div> High attention</div>
+        </div>
+      </div>
+      <div class="explanation-box">
+        <h3>Self-Attention</h3>
+        <p>In self-attention, Q, K, and V all come from the <strong>same</strong> input sequence. Each word "queries" every other word to decide what's relevant.</p>
+        <p>The heatmap shows the attention matrix &mdash; each cell is the dot product between one word's Query and another word's Key, after softmax.</p>
+        <p><strong>"it"</strong> strongly attends to <strong>"cat"</strong> because the model learned that pronouns reference earlier nouns. This is the core insight &mdash; no recurrence needed, just pattern matching across the whole sequence at once.</p>
+        <p>This replaces the sequential processing of RNNs. Instead of hoping information about "cat" survives through 5 time steps to reach "it", the transformer directly connects them in one operation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ Multi-Head ═══════ -->
+  <div class="panel" id="panel-multihead">
+    <p class="section-desc">One attention head can only focus on one type of relationship. Multiple heads let the model see grammar, meaning, position, and coreference simultaneously.</p>
+
+    <div class="heads-container" id="headsContainer"></div>
+
+    <div id="multiHeadSentence" style="margin-bottom: 20px;"></div>
+    <div id="multiHeadHeatmap"></div>
+
+    <div class="explanation-box" style="margin-top: 24px;">
+      <h3>Why Multiple Heads?</h3>
+      <p>The original paper uses <strong>8 parallel attention heads</strong>. Each head has its own Q, K, V projection matrices, so each learns to focus on different linguistic relationships.</p>
+      <p>After all heads compute their attention, the results are <strong>concatenated</strong> and passed through a linear layer. This gives the model a rich, multi-perspective view of the input.</p>
+      <p>Think of it like 8 people reading the same sentence, each highlighting different things &mdash; one marks grammar, another marks who-refers-to-what, another marks semantic similarity.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ Positional Encoding ═══════ -->
+  <div class="panel" id="panel-positional">
+    <p class="section-desc">Transformers have no built-in sense of word order. Positional encodings inject position information using sine and cosine waves at different frequencies.</p>
+
+    <div class="pos-controls">
+      <label>Positions: <span id="posCountLabel">20</span></label>
+      <input type="range" id="posCount" min="5" max="50" value="20">
+      <label>Dimensions: <span id="dimCountLabel">64</span></label>
+      <input type="range" id="dimCount" min="8" max="128" value="64">
+    </div>
+
+    <div class="pos-canvas-container">
+      <canvas id="posCanvas" width="800" height="360"></canvas>
+    </div>
+
+    <div class="explanation-box">
+      <h3>How It Works</h3>
+      <div class="math-block">
+        PE(pos, 2i) = sin(pos / 10000<sup>2i/d</sup>)<br>
+        PE(pos, 2i+1) = cos(pos / 10000<sup>2i/d</sup>)
+      </div>
+      <p>Each position gets a unique pattern of sines and cosines. Low dimensions oscillate fast (capturing nearby positions), high dimensions oscillate slowly (capturing distant structure).</p>
+      <p>This encoding is <strong>added</strong> to the word embedding, so the model sees both what a word means and where it sits. The sinusoidal design lets the model generalize to sequences longer than it was trained on.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ Architecture ═══════ -->
+  <div class="panel" id="panel-architecture">
+    <p class="section-desc">The full transformer has an Encoder (reads input) and a Decoder (generates output). Each is a stack of identical layers. Hover blocks for details.</p>
+
+    <div class="arch-container">
+      <div>
+        <div class="arch-title">Encoder (x6)</div>
+        <div class="arch-stack">
+          <div class="arch-block embed">
+            Input Embedding + Positional Encoding
+            <div class="block-tooltip">Converts words to 512-dimensional vectors, then adds positional encoding so the model knows word order.</div>
+          </div>
+          <div class="arch-arrow">&uarr;</div>
+          <div class="arch-block attention">
+            Multi-Head Self-Attention
+            <div class="block-tooltip">Each word attends to every other word in the input. 8 parallel heads capture different relationship types. This is the key innovation.</div>
+          </div>
+          <div class="arch-block norm">Add &amp; Layer Norm</div>
+          <div class="arch-arrow">&uarr;</div>
+          <div class="arch-block ffn">
+            Feed-Forward Network
+            <div class="block-tooltip">Two linear transformations with ReLU in between. Applied to each position independently. This is where the model "thinks" about what it learned from attention.</div>
+          </div>
+          <div class="arch-block norm">Add &amp; Layer Norm</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="arch-title">Decoder (x6)</div>
+        <div class="arch-stack">
+          <div class="arch-block embed">
+            Output Embedding + Positional Encoding
+            <div class="block-tooltip">Same as encoder input, but for the target sequence (shifted right by one position during training).</div>
+          </div>
+          <div class="arch-arrow">&uarr;</div>
+          <div class="arch-block attention" style="border-color: #5a2a6e;">
+            Masked Multi-Head Self-Attention
+            <div class="block-tooltip">Same as encoder attention, but MASKED: each position can only attend to earlier positions. Prevents "cheating" by looking at future words during generation.</div>
+          </div>
+          <div class="arch-block norm">Add &amp; Layer Norm</div>
+          <div class="arch-arrow">&uarr;</div>
+          <div class="arch-block attention" style="border-color: #2a5a6e;">
+            Multi-Head Cross-Attention
+            <div class="block-tooltip">Q comes from decoder, K and V come from encoder output. This is how the decoder "reads" the input. The bridge between encoder and decoder.</div>
+          </div>
+          <div class="arch-block norm">Add &amp; Layer Norm</div>
+          <div class="arch-arrow">&uarr;</div>
+          <div class="arch-block ffn">
+            Feed-Forward Network
+            <div class="block-tooltip">Same structure as encoder FFN. Two linear layers with ReLU. Processes each position independently.</div>
+          </div>
+          <div class="arch-block norm">Add &amp; Layer Norm</div>
+          <div class="arch-arrow">&uarr;</div>
+          <div class="arch-block output">
+            Linear + Softmax &rarr; Output Probabilities
+            <div class="block-tooltip">Projects to vocabulary size, then softmax gives probability distribution over all possible next words. Pick the highest probability (or sample).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ Token Flow ═══════ -->
+  <div class="panel" id="panel-flow">
+    <p class="section-desc">Watch tokens move through the transformer. Each step shows what happens to the data as it passes through the architecture.</p>
+
+    <div class="flow-controls">
+      <button class="flow-btn" id="flowPrev">&larr; Prev</button>
+      <button class="flow-btn" id="flowPlay">&#9654; Play</button>
+      <button class="flow-btn" id="flowNext">Next &rarr;</button>
+      <button class="flow-btn" id="flowReset">Reset</button>
+    </div>
+
+    <div class="flow-step-label" id="flowLabel">Step 0: Input Sentence</div>
+    <div class="flow-step-desc" id="flowDesc">Raw text is split into tokens. Each token is a word or subword piece.</div>
+
+    <div class="flow-scene" id="flowScene">
+      <div class="flow-zone" id="zone-embed" style="left:40px;top:20px;width:calc(100% - 80px);height:70px;">embedding</div>
+      <div class="flow-zone" id="zone-attn" style="left:40px;top:110px;width:calc(100% - 80px);height:120px;">self-attention</div>
+      <div class="flow-zone" id="zone-ffn" style="left:40px;top:250px;width:calc(100% - 80px);height:80px;">feed-forward</div>
+      <div class="flow-zone" id="zone-out" style="left:40px;top:350px;width:calc(100% - 80px);height:80px;">output</div>
+    </div>
+  </div>
+
+  <!-- ═══════ Why It Won ═══════ -->
+  <div class="panel" id="panel-compare">
+    <p class="section-desc">The Transformer didn't just improve translation scores. It fundamentally changed what's computationally possible.</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th><span class="tag tag-old">RNN/LSTM</span> Before</th>
+          <th><span class="tag tag-new">Transformer</span> After</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Processing order</td>
+          <td>Sequential (word by word)</td>
+          <td>Parallel (all words at once)</td>
+        </tr>
+        <tr>
+          <td>Long-range memory</td>
+          <td>Degrades over distance (vanishing gradient)</td>
+          <td>Direct connection between any two tokens</td>
+        </tr>
+        <tr>
+          <td>GPU utilization</td>
+          <td>Poor (sequential bottleneck)</td>
+          <td>Excellent (matrix multiplications parallelize)</td>
+        </tr>
+        <tr>
+          <td>Training time (WMT en-de)</td>
+          <td>Days to weeks</td>
+          <td>12 hours (base) / 3.5 days (big)</td>
+        </tr>
+        <tr>
+          <td>Hardware</td>
+          <td>8+ GPUs, still slow</td>
+          <td>8 P100 GPUs, outperformed SOTA</td>
+        </tr>
+        <tr>
+          <td>Context handling</td>
+          <td>Fixed hidden state, compresses everything</td>
+          <td>Attention over full context window</td>
+        </tr>
+        <tr>
+          <td>Scalability</td>
+          <td>Diminishing returns with size</td>
+          <td>Scaling laws: more params = better (GPT, etc.)</td>
+        </tr>
+        <tr>
+          <td>Generality</td>
+          <td>Good at sequences</td>
+          <td>Text, images, audio, video, code, robotics...</td>
+        </tr>
+        <tr>
+          <td>Complexity per layer</td>
+          <td>O(n &times; d&sup2;) sequential</td>
+          <td>O(n&sup2; &times; d) parallel &mdash; quadratic in n, but parallelizable</td>
+        </tr>
+        <tr>
+          <td>Key tradeoff</td>
+          <td>Linear in sequence length, but can't parallelize</td>
+          <td>Quadratic in sequence length, but fully parallel</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="explanation-box">
+      <h3>The Insight That Changed Everything</h3>
+      <p>The bet was simple: <strong>sacrifice sequential efficiency for parallelism.</strong> RNNs process tokens one at a time in O(n) steps but can't use GPU parallelism. Transformers compare every token to every other token (O(n&sup2;)) but can do it all in one parallel operation.</p>
+      <p>For modern GPU hardware, O(n&sup2;) parallel beats O(n) sequential. This is why the transformer won &mdash; not because it's theoretically more efficient, but because it matches the hardware we actually have.</p>
+      <p>This one architectural choice is what enabled GPT, BERT, Claude, Gemini, DALL-E, Stable Diffusion, and everything else in the current AI wave.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Tab switching ──
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+  });
+});
+
+// ── Attention Map ──
+const sentence = ["The", "cat", "sat", "on", "the", "mat", "because", "it", "was", "tired"];
+
+// Simulated attention weights (realistic-ish self-attention pattern)
+const attentionWeights = [
+  [0.45, 0.08, 0.06, 0.05, 0.15, 0.05, 0.04, 0.04, 0.04, 0.04], // The
+  [0.10, 0.40, 0.10, 0.05, 0.05, 0.05, 0.05, 0.10, 0.05, 0.05], // cat
+  [0.05, 0.15, 0.35, 0.10, 0.05, 0.15, 0.05, 0.03, 0.04, 0.03], // sat
+  [0.04, 0.05, 0.15, 0.30, 0.06, 0.25, 0.05, 0.03, 0.04, 0.03], // on
+  [0.20, 0.05, 0.05, 0.08, 0.30, 0.18, 0.04, 0.03, 0.04, 0.03], // the
+  [0.05, 0.05, 0.12, 0.15, 0.18, 0.30, 0.05, 0.03, 0.04, 0.03], // mat
+  [0.04, 0.08, 0.08, 0.04, 0.04, 0.05, 0.30, 0.15, 0.12, 0.10], // because
+  [0.05, 0.35, 0.05, 0.03, 0.03, 0.03, 0.10, 0.20, 0.08, 0.08], // it -> cat!
+  [0.03, 0.08, 0.05, 0.03, 0.03, 0.03, 0.08, 0.15, 0.35, 0.17], // was
+  [0.03, 0.12, 0.04, 0.03, 0.03, 0.03, 0.06, 0.18, 0.13, 0.35], // tired
+];
+
+const tokenContainer = document.getElementById('sentenceTokens');
+const heatmapContainer = document.getElementById('heatmapContainer');
+
+sentence.forEach((word, i) => {
+  const el = document.createElement('div');
+  el.className = 'word-token';
+  el.textContent = word;
+  el.addEventListener('click', () => selectToken(i));
+  tokenContainer.appendChild(el);
+});
+
+function selectToken(idx) {
+  document.querySelectorAll('#sentenceTokens .word-token').forEach((el, i) => {
+    el.classList.remove('selected', 'target');
+    if (i === idx) el.classList.add('selected');
+  });
+  renderHeatmap(idx);
+}
+
+function renderHeatmap(selectedIdx) {
+  const n = sentence.length;
+  heatmapContainer.innerHTML = '';
+
+  const grid = document.createElement('div');
+  grid.className = 'heatmap';
+  grid.style.gridTemplateColumns = `40px repeat(${n}, 1fr)`;
+
+  // Header row
+  const corner = document.createElement('div');
+  grid.appendChild(corner);
+  sentence.forEach(w => {
+    const lbl = document.createElement('div');
+    lbl.className = 'heat-label';
+    lbl.textContent = w;
+    grid.appendChild(lbl);
+  });
+
+  // Data rows
+  for (let i = 0; i < n; i++) {
+    const rowLabel = document.createElement('div');
+    rowLabel.className = 'heat-label';
+    rowLabel.style.textAlign = 'right';
+    rowLabel.style.paddingRight = '4px';
+    rowLabel.textContent = sentence[i];
+    grid.appendChild(rowLabel);
+
+    for (let j = 0; j < n; j++) {
+      const cell = document.createElement('div');
+      cell.className = 'heat-cell';
+      const val = attentionWeights[i][j];
+      const intensity = Math.pow(val, 0.6);
+
+      const r = Math.round(30 + intensity * 162);
+      const g = Math.round(20 + intensity * 82);
+      const b = Math.round(40 + intensity * 212);
+      cell.style.background = `rgba(${r}, ${g}, ${b}, ${0.3 + intensity * 0.7})`;
+      cell.setAttribute('data-score', val.toFixed(2));
+
+      if (selectedIdx !== undefined) {
+        if (i === selectedIdx) {
+          cell.style.outline = '1px solid rgba(126,184,255,0.4)';
+        }
+      }
+
+      // Highlight the row of the selected token with boosted brightness
+      if (selectedIdx !== undefined && i === selectedIdx) {
+        const boost = Math.pow(val, 0.4);
+        cell.style.background = `rgba(${Math.round(50 + boost * 180)}, ${Math.round(30 + boost * 100)}, ${Math.round(80 + boost * 180)}, ${0.4 + boost * 0.6})`;
+
+        // Mark target tokens
+        if (val > 0.15 && j !== i) {
+          document.querySelectorAll('#sentenceTokens .word-token')[j]?.classList.add('target');
+        }
+      }
+
+      grid.appendChild(cell);
+    }
+  }
+
+  heatmapContainer.appendChild(grid);
+}
+
+renderHeatmap(7); // Default: select "it"
+document.querySelectorAll('#sentenceTokens .word-token')[7]?.classList.add('selected');
+
+// ── Multi-Head Attention ──
+const heads = [
+  { name: "Head 1", focus: "Syntax/Grammar", color: "#7eb8ff", weights: [
+    [0.6,0.05,0.05,0.05,0.1,0.05,0.03,0.03,0.02,0.02],
+    [0.15,0.5,0.1,0.05,0.05,0.05,0.03,0.03,0.02,0.02],
+    [0.05,0.2,0.4,0.1,0.05,0.1,0.03,0.03,0.02,0.02],
+    [0.05,0.05,0.2,0.3,0.05,0.2,0.05,0.03,0.04,0.03],
+    [0.3,0.05,0.05,0.08,0.3,0.1,0.04,0.03,0.03,0.02],
+    [0.05,0.05,0.1,0.2,0.2,0.3,0.03,0.03,0.02,0.02],
+    [0.03,0.05,0.1,0.03,0.03,0.05,0.4,0.1,0.11,0.1],
+    [0.05,0.1,0.05,0.03,0.03,0.03,0.1,0.35,0.13,0.13],
+    [0.03,0.05,0.05,0.03,0.03,0.03,0.05,0.2,0.4,0.13],
+    [0.03,0.05,0.03,0.03,0.03,0.03,0.05,0.1,0.25,0.4]]},
+  { name: "Head 2", focus: "Coreference", color: "#c084fc", weights: [
+    [0.3,0.1,0.05,0.05,0.2,0.05,0.05,0.1,0.05,0.05],
+    [0.1,0.3,0.05,0.05,0.05,0.05,0.05,0.2,0.05,0.1],
+    [0.05,0.1,0.3,0.05,0.05,0.1,0.1,0.1,0.1,0.05],
+    [0.05,0.05,0.1,0.3,0.05,0.2,0.1,0.05,0.05,0.05],
+    [0.3,0.05,0.05,0.05,0.3,0.1,0.05,0.05,0.03,0.02],
+    [0.05,0.05,0.1,0.15,0.15,0.3,0.05,0.05,0.05,0.05],
+    [0.03,0.1,0.05,0.03,0.03,0.05,0.3,0.2,0.11,0.1],
+    [0.05,0.45,0.03,0.02,0.02,0.02,0.08,0.15,0.08,0.1],
+    [0.03,0.15,0.03,0.02,0.02,0.02,0.05,0.2,0.3,0.18],
+    [0.03,0.2,0.03,0.02,0.02,0.02,0.05,0.25,0.1,0.28]]},
+  { name: "Head 3", focus: "Semantics", color: "#4ade80", weights: [
+    [0.25,0.15,0.05,0.05,0.25,0.1,0.05,0.03,0.04,0.03],
+    [0.1,0.2,0.1,0.05,0.05,0.1,0.05,0.1,0.1,0.15],
+    [0.05,0.1,0.2,0.15,0.05,0.2,0.1,0.05,0.05,0.05],
+    [0.05,0.05,0.2,0.2,0.05,0.25,0.1,0.03,0.04,0.03],
+    [0.25,0.1,0.05,0.05,0.2,0.2,0.05,0.03,0.04,0.03],
+    [0.05,0.1,0.2,0.2,0.1,0.2,0.05,0.03,0.04,0.03],
+    [0.05,0.05,0.05,0.05,0.05,0.05,0.2,0.15,0.15,0.2],
+    [0.05,0.2,0.05,0.03,0.03,0.03,0.15,0.15,0.15,0.16],
+    [0.03,0.1,0.08,0.03,0.03,0.03,0.1,0.15,0.2,0.25],
+    [0.03,0.15,0.05,0.03,0.03,0.03,0.1,0.2,0.18,0.2]]},
+  { name: "Head 4", focus: "Position/Distance", color: "#f472b6", weights: [
+    [0.5,0.25,0.1,0.05,0.03,0.02,0.02,0.01,0.01,0.01],
+    [0.25,0.35,0.2,0.1,0.03,0.02,0.02,0.01,0.01,0.01],
+    [0.1,0.2,0.3,0.2,0.1,0.03,0.03,0.02,0.01,0.01],
+    [0.05,0.1,0.2,0.3,0.2,0.08,0.03,0.02,0.01,0.01],
+    [0.03,0.05,0.1,0.2,0.3,0.2,0.05,0.03,0.02,0.02],
+    [0.02,0.03,0.05,0.1,0.2,0.35,0.15,0.05,0.03,0.02],
+    [0.01,0.02,0.03,0.05,0.08,0.15,0.35,0.2,0.07,0.04],
+    [0.01,0.01,0.02,0.03,0.05,0.08,0.2,0.35,0.18,0.07],
+    [0.01,0.01,0.01,0.02,0.03,0.05,0.08,0.2,0.4,0.19],
+    [0.01,0.01,0.01,0.01,0.02,0.03,0.05,0.1,0.26,0.5]]}
+];
+
+const headsEl = document.getElementById('headsContainer');
+heads.forEach((head, i) => {
+  const card = document.createElement('div');
+  card.className = 'head-card' + (i === 0 ? ' active-head' : '');
+  card.style.setProperty('--head-color', head.color);
+  card.innerHTML = `<h4>${head.name}</h4><p>${head.focus}</p><div class="head-focus"></div>`;
+  card.addEventListener('click', () => selectHead(i));
+  headsEl.appendChild(card);
+});
+
+function selectHead(idx) {
+  document.querySelectorAll('.head-card').forEach((c, i) => {
+    c.classList.toggle('active-head', i === idx);
+  });
+  renderMultiHeadHeatmap(idx);
+}
+
+function renderMultiHeadHeatmap(headIdx) {
+  const n = sentence.length;
+  const container = document.getElementById('multiHeadHeatmap');
+  container.innerHTML = '';
+
+  const grid = document.createElement('div');
+  grid.className = 'heatmap';
+  grid.style.gridTemplateColumns = `40px repeat(${n}, 1fr)`;
+  grid.style.maxWidth = '600px';
+  grid.style.margin = '0 auto';
+
+  const corner = document.createElement('div');
+  grid.appendChild(corner);
+  sentence.forEach(w => {
+    const lbl = document.createElement('div');
+    lbl.className = 'heat-label';
+    lbl.textContent = w;
+    grid.appendChild(lbl);
+  });
+
+  const head = heads[headIdx];
+  const color = head.color;
+  const [cr, cg, cb] = hexToRgb(color);
+
+  for (let i = 0; i < n; i++) {
+    const rowLabel = document.createElement('div');
+    rowLabel.className = 'heat-label';
+    rowLabel.style.textAlign = 'right';
+    rowLabel.style.paddingRight = '4px';
+    rowLabel.textContent = sentence[i];
+    grid.appendChild(rowLabel);
+
+    for (let j = 0; j < n; j++) {
+      const cell = document.createElement('div');
+      cell.className = 'heat-cell';
+      const val = head.weights[i][j];
+      const intensity = Math.pow(val, 0.5);
+      cell.style.background = `rgba(${cr}, ${cg}, ${cb}, ${0.1 + intensity * 0.8})`;
+      cell.setAttribute('data-score', val.toFixed(2));
+      grid.appendChild(cell);
+    }
+  }
+
+  container.appendChild(grid);
+}
+
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
+  return [r, g, b];
+}
+
+renderMultiHeadHeatmap(0);
+
+// ── Positional Encoding ──
+const posCanvas = document.getElementById('posCanvas');
+const posCtx = posCanvas.getContext('2d');
+
+function drawPositionalEncoding() {
+  const positions = parseInt(document.getElementById('posCount').value);
+  const dims = parseInt(document.getElementById('dimCount').value);
+  document.getElementById('posCountLabel').textContent = positions;
+  document.getElementById('dimCountLabel').textContent = dims;
+
+  const w = posCanvas.width;
+  const h = posCanvas.height;
+  const cellW = (w - 60) / dims;
+  const cellH = (h - 40) / positions;
+
+  posCtx.fillStyle = '#08080f';
+  posCtx.fillRect(0, 0, w, h);
+
+  // Axis labels
+  posCtx.fillStyle = '#555';
+  posCtx.font = '10px monospace';
+  posCtx.textAlign = 'center';
+  posCtx.fillText('Dimension →', w / 2, h - 5);
+
+  posCtx.save();
+  posCtx.translate(12, h / 2);
+  posCtx.rotate(-Math.PI / 2);
+  posCtx.fillText('Position →', 0, 0);
+  posCtx.restore();
+
+  for (let pos = 0; pos < positions; pos++) {
+    for (let i = 0; i < dims; i++) {
+      const dModel = dims;
+      let val;
+      if (i % 2 === 0) {
+        val = Math.sin(pos / Math.pow(10000, i / dModel));
+      } else {
+        val = Math.cos(pos / Math.pow(10000, (i - 1) / dModel));
+      }
+
+      // Map [-1, 1] to color
+      const norm = (val + 1) / 2; // 0 to 1
+      const r = Math.round(norm * 126 + (1 - norm) * 20);
+      const g = Math.round(norm * 184 + (1 - norm) * 20);
+      const b = Math.round(norm * 255 + (1 - norm) * 60);
+
+      posCtx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+      posCtx.fillRect(30 + i * cellW, 10 + pos * cellH, Math.max(cellW - 0.5, 1), Math.max(cellH - 0.5, 1));
+    }
+  }
+
+  // Scale bar
+  const barY = 10;
+  const barW = 80;
+  const barX = w - barW - 20;
+  for (let px = 0; px < barW; px++) {
+    const t = px / barW;
+    const r2 = Math.round(t * 126 + (1 - t) * 20);
+    const g2 = Math.round(t * 184 + (1 - t) * 20);
+    const b2 = Math.round(t * 255 + (1 - t) * 60);
+    posCtx.fillStyle = `rgb(${r2}, ${g2}, ${b2})`;
+    posCtx.fillRect(barX + px, barY, 1, 8);
+  }
+  posCtx.fillStyle = '#555';
+  posCtx.font = '9px monospace';
+  posCtx.textAlign = 'left';
+  posCtx.fillText('-1', barX, barY + 18);
+  posCtx.textAlign = 'right';
+  posCtx.fillText('+1', barX + barW, barY + 18);
+}
+
+document.getElementById('posCount').addEventListener('input', drawPositionalEncoding);
+document.getElementById('dimCount').addEventListener('input', drawPositionalEncoding);
+drawPositionalEncoding();
+
+// ── Token Flow Animation ──
+const flowSteps = [
+  {
+    label: "Step 0: Input Sentence",
+    desc: "Raw text is split into tokens. Each token is a word or subword piece.",
+    positions: [[80,45],[200,45],[320,45],[440,45],[560,45]],
+    zone: null,
+    lines: false
+  },
+  {
+    label: "Step 1: Embedding",
+    desc: "Each token is converted to a 512-dimensional vector. Positional encoding is added so the model knows word order.",
+    positions: [[80,40],[200,40],[320,40],[440,40],[560,40]],
+    zone: "zone-embed",
+    lines: false
+  },
+  {
+    label: "Step 2: Self-Attention (Q × K^T)",
+    desc: "Every token computes Query, Key, Value vectors. Each Query is compared against all Keys to produce attention scores. This happens in parallel.",
+    positions: [[80,140],[200,140],[320,140],[440,140],[560,140]],
+    zone: "zone-attn",
+    lines: true
+  },
+  {
+    label: "Step 3: Weighted Sum (× V)",
+    desc: "Attention scores weight the Value vectors. Each token's output is a weighted combination of ALL tokens' values. High-attention tokens contribute more.",
+    positions: [[80,180],[200,180],[320,180],[440,180],[560,180]],
+    zone: "zone-attn",
+    lines: false
+  },
+  {
+    label: "Step 4: Feed-Forward Network",
+    desc: "Each token passes independently through 2 linear layers with ReLU. This is where the model 'processes' what it learned from attention. No cross-token interaction here.",
+    positions: [[80,275],[200,275],[320,275],[440,275],[560,275]],
+    zone: "zone-ffn",
+    lines: false
+  },
+  {
+    label: "Step 5: Output Probabilities",
+    desc: "Final linear projection + softmax produces a probability distribution over the entire vocabulary. The highest probability token is the prediction.",
+    positions: [[80,375],[200,375],[320,375],[440,375],[560,375]],
+    zone: "zone-out",
+    lines: false
+  }
+];
+
+const tokenWords = ["The", "cat", "sat", "on", "mat"];
+const tokenColors = ["#7eb8ff","#c084fc","#4ade80","#f472b6","#fbbf24"];
+const flowScene = document.getElementById('flowScene');
+let currentStep = 0;
+let flowPlaying = false;
+let flowInterval;
+
+// Create token balls
+const balls = tokenWords.map((word, i) => {
+  const ball = document.createElement('div');
+  ball.className = 'token-ball';
+  ball.textContent = word;
+  ball.style.background = tokenColors[i];
+  ball.style.color = '#000';
+  ball.style.left = flowSteps[0].positions[i][0] + 'px';
+  ball.style.top = flowSteps[0].positions[i][1] + 'px';
+  flowScene.appendChild(ball);
+  return ball;
+});
+
+function setFlowStep(step) {
+  currentStep = step;
+  const s = flowSteps[step];
+  document.getElementById('flowLabel').textContent = s.label;
+  document.getElementById('flowDesc').textContent = s.desc;
+
+  // Move tokens
+  balls.forEach((ball, i) => {
+    ball.style.left = s.positions[i][0] + 'px';
+    ball.style.top = s.positions[i][1] + 'px';
+  });
+
+  // Highlight active zone
+  document.querySelectorAll('.flow-zone').forEach(z => z.classList.remove('active-zone'));
+  if (s.zone) document.getElementById(s.zone)?.classList.add('active-zone');
+
+  // Attention lines
+  clearAttentionLines();
+  if (s.lines) {
+    setTimeout(() => drawAttentionLines(), 400);
+  }
+}
+
+function clearAttentionLines() {
+  document.querySelectorAll('.attention-line').forEach(l => l.remove());
+}
+
+function drawAttentionLines() {
+  const s = flowSteps[currentStep];
+  if (!s.lines) return;
+
+  for (let i = 0; i < 5; i++) {
+    for (let j = 0; j < 5; j++) {
+      if (i === j) continue;
+      const x1 = s.positions[i][0] + 30;
+      const y1 = s.positions[i][1] + 16;
+      const x2 = s.positions[j][0] + 30;
+      const y2 = s.positions[j][1] + 16;
+
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+      const len = Math.sqrt(dx*dx + dy*dy);
+      const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+      const line = document.createElement('div');
+      line.className = 'attention-line';
+      const opacity = 0.1 + Math.random() * 0.4;
+      line.style.background = `rgba(126, 184, 255, ${opacity})`;
+      line.style.width = len + 'px';
+      line.style.left = x1 + 'px';
+      line.style.top = y1 + 'px';
+      line.style.transform = `rotate(${angle}deg)`;
+      flowScene.appendChild(line);
+    }
+  }
+}
+
+document.getElementById('flowNext').addEventListener('click', () => {
+  if (currentStep < flowSteps.length - 1) setFlowStep(currentStep + 1);
+});
+
+document.getElementById('flowPrev').addEventListener('click', () => {
+  if (currentStep > 0) setFlowStep(currentStep - 1);
+});
+
+document.getElementById('flowReset').addEventListener('click', () => {
+  flowPlaying = false;
+  clearInterval(flowInterval);
+  setFlowStep(0);
+});
+
+document.getElementById('flowPlay').addEventListener('click', () => {
+  if (flowPlaying) {
+    flowPlaying = false;
+    clearInterval(flowInterval);
+    return;
+  }
+  flowPlaying = true;
+  if (currentStep >= flowSteps.length - 1) currentStep = -1;
+  flowInterval = setInterval(() => {
+    if (currentStep < flowSteps.length - 1) {
+      setFlowStep(currentStep + 1);
+    } else {
+      flowPlaying = false;
+      clearInterval(flowInterval);
+    }
+  }, 2000);
+});
+
+setFlowStep(0);
+</script>
+</body>
+</html>

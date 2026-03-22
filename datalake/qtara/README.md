@@ -2,7 +2,7 @@
 
 **Threat Analysis & Risk Assessment (TARA)** framework for Neural Security.
 
-The `qtara` package provides programmatic access to the TARA registry (103 techniques), NISS (Neural Impact Scoring System) calculators, physics feasibility tiers, and STIX 2.1 exporters.
+The `qtara` package provides programmatic access to the TARA registry (161 techniques), NISS (Neural Impact Scoring System) calculators, physics feasibility tiers, and STIX 2.1 exporters.
 
 ## Installation
 
@@ -12,7 +12,7 @@ pip install qtara
 
 ## Features
 
-- **TARA Registry:** Query 103 verified BCI threat techniques with full enrichment data.
+- **TARA Registry:** Query 161 verified BCI threat techniques with full enrichment data.
 - **Physics Feasibility Tiers:** Filter techniques by physics feasibility (T0: feasible now, T1: mid-term, T2: far-term, T3: no physics gate).
 - **NISS Scorer:** Calculate neural impact scores based on physics-derived metrics.
 - **CVSS + Neurorights:** Access CVSS 4.0 mappings and neuroright impact data per technique.

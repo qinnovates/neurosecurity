@@ -74,7 +74,7 @@ Each derivation log uses its own prefix:
 | Log | Location | Scope |
 |-----|----------|-------|
 | **QIF Derivation Log** | `qif-framework/QIF-DERIVATION-LOG.md` (standards) / `drafts/ai-working/QIF-DERIVATION-LOG.md` (source of truth) | Core QIF equations, layer architecture, coherence metrics, quantum indeterminacy |
-| **Runemate Derivation Log** | `qif-framework/RUNEMATE.md` (standards) / `drafts/ai-working/RUNEMATE.md` (source of truth) | Rendering pipeline, Staves notation, visual cortex architecture, BCI display |
+| **Runemate Derivation Log** | `qif-framework/specs/RUNEMATE.md` (standards) / `drafts/ai-working/RUNEMATE.md` (source of truth) | Rendering pipeline, Staves notation, visual cortex architecture, BCI display |
 
 ### When to Create a New Log
 
@@ -197,7 +197,7 @@ The derivation log is the bridge between informal discovery and formal standardi
 
 - [VERA Engine (Qinnovate Lifecycle)](./qinnovate-lifecycle.md)
 - [QIF Framework](../qif-framework/)
-- [Runemate Specification](../qif-framework/RUNEMATE.md)
+- [Runemate Specification](../qif-framework/specs/RUNEMATE.md)
 - [Governance Standards](../governance/)
 
 ---

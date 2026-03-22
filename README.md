@@ -14,7 +14,7 @@
 
 </div>
 
-> **By using this repository, you consent to the terms in [DISCLAIMER.md](DISCLAIMER.md).** This is early-stage research — not a validated standard, not a clinical tool, not production software. The human brain is not a test environment. See [DISCLAIMER.md](DISCLAIMER.md), [Code of Conduct](governance/CODE_OF_CONDUCT.md), and [Security Policy](SECURITY.md).
+> **By using this repository, you consent to the terms in [DISCLAIMER.md](DISCLAIMER.md).** This is early-stage research — not a validated standard, not a clinical tool, not production software. The human brain is not a test environment. See [DISCLAIMER.md](DISCLAIMER.md), [Code of Conduct](CODE_OF_CONDUCT.md), and [Security Policy](SECURITY.md).
 
 This project asks a question that no existing framework has systematically addressed: **what happens to a patient when their brain-computer interface is compromised?** Not the data. Not the device. The person.
 
@@ -55,7 +55,7 @@ npm run build     # Build site (282 pages)
 
 The author is a security engineer with ~15 years of IT and security infrastructure experience, not a mathematician, physicist, or neuroscientist. AI tools (primarily Claude, with Gemini and ChatGPT for cross-validation) were used extensively. All AI-derived claims should be treated as **proposed and unvalidated** until independently verified by domain experts.
 
-**Full transparency:** [Transparency Statement](governance/TRANSPARENCY.md) | [Derivation Log](qif-framework/QIF-DERIVATION-LOG.md) (99+ entries) | [Decision Log](governance/DECISION-LOG.md) | [Validation Status](VALIDATION.md)
+**Full transparency:** [Transparency Statement](governance/TRANSPARENCY.md) | [Derivation Log](qif-framework/QIF-DERIVATION-LOG.md) (99+ entries) | [Decision Log](governance/DECISION-LOG.md) | [Validation Status](qif-framework/VALIDATION.md)
 
 ---
 
@@ -74,7 +74,7 @@ qinnovate/
 │   ├── runemate/forge/               # Runemate DSL compiler (Rust)
 │   ├── QIF-DERIVATION-LOG.md         # 99+ entries — single source of truth
 │   ├── QIF-FIELD-JOURNAL.md          # First-person research observations
-│   └── QIF-RESEARCH-SOURCES.md       # 309+ verified sources
+│   └── QIF-RESEARCH-SOURCES.md       # 340+ verified sources
 │
 ├── shared/                           # Cross-cutting data + tools (datalake)
 │   ├── qtara-registrar.json          # TARA techniques (161, CVSS + NISS)
@@ -135,17 +135,17 @@ qinnovate/
 
 ### Validation Summary
 
-Solo research, tested honestly. Full methodology and limitations at **[VALIDATION.md](VALIDATION.md)** | **[Live dashboard](https://qinnovate.com/research/validation/)**
+Solo research, tested honestly. Full methodology and limitations at **[VALIDATION.md](qif-framework/VALIDATION.md)** | **[Live dashboard](https://qinnovate.com/research/validation/)**
 
 | What | Result | Tier |
 |------|--------|------|
-| [Neurowall coherence monitor](VALIDATION.md#val-001) | 11/14 at 15s, 9/9 at 20s, 50-run stats, 0% FPR | Simulation + Independent |
-| [BrainFlow validation](VALIDATION.md#val-002) | 16-channel, 100% detection, 0% FPR | Independent |
-| [Physics security guardrails](VALIDATION.md#val-007) | 12/13 constraints verified, 4-layer architecture | Analytical + Cross-AI |
-| [Protocol vulnerability](VALIDATION.md#val-006) | Real vulnerability in BCI streaming protocol, responsibly disclosed | Disclosed |
-| [NSP transport](VALIDATION.md#val-003) | Round-trip simulation PASS, 65-90% compression | Simulation |
-| [NISS scoring engine](VALIDATION.md#val-004) | 109/109 techniques scored, PINS flags correct | Simulation |
-| [Citation verification](VALIDATION.md#val-009) | 3 fabricated citations caught and removed from preprint v1.0 | Audit |
+| [Neurowall coherence monitor](qif-framework/VALIDATION.md#val-001) | 11/14 at 15s, 9/9 at 20s, 50-run stats, 0% FPR | Simulation + Independent |
+| [BrainFlow validation](qif-framework/VALIDATION.md#val-002) | 16-channel, 100% detection, 0% FPR | Independent |
+| [Physics security guardrails](qif-framework/VALIDATION.md#val-007) | 12/13 constraints verified, 4-layer architecture | Analytical + Cross-AI |
+| [Protocol vulnerability](qif-framework/VALIDATION.md#val-006) | Real vulnerability in BCI streaming protocol, responsibly disclosed | Disclosed |
+| [NSP transport](qif-framework/VALIDATION.md#val-003) | Round-trip simulation PASS, 65-90% compression | Simulation |
+| [NISS scoring engine](qif-framework/VALIDATION.md#val-004) | 109/109 techniques scored, PINS flags correct | Simulation |
+| [Citation verification](qif-framework/VALIDATION.md#val-009) | 3 fabricated citations caught and removed from preprint v1.0 | Audit |
 | **Not yet tested** | NISS clinical validation, DSM-5-TR mappings, BCI Limits Eq, real EEG, real hardware, real attacks | |
 
 This is early-stage research by a solo researcher. Empirical validation requires BCI hardware, IRB approval, and clinical expertise. Everything is published openly so research groups with those resources can test, validate, refute, or extend it.
@@ -158,14 +158,14 @@ This is early-stage research by a solo researcher. Empirical validation requires
 
 | Component | Description | Status |
 |-----------|-------------|--------|
-| **[QIF](https://qinnovate.com/framework/)** | 11-band hourglass security architecture for BCIs | Proposed, v7.0 |
+| **[QIF](https://qinnovate.com/framework/)** | 11-band hourglass security architecture for BCIs | Proposed, v6.3 ([v8.0 draft](qif-framework/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md)) |
 | **[Working Paper](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper (CC-BY 4.0) | Published |
 | **[TARA](https://qinnovate.com/atlas/tara/)** | 161 BCI technique pairs, STIX 2.1 registry | v1.7 |
 | **[qtara](https://pypi.org/project/qtara/)** | Python SDK for TARA registry management and STIX export | v0.2.0 |
 | **[NSP](https://qinnovate.com/tools/nsp/)** | Post-quantum wire protocol for BCI data links | In development, v0.5 |
 | **[NISS](https://qinnovate.com/atlas/scoring/)** | CVSS v4.0 extension proposal for neural interfaces (6 neural metrics) | Proposed, v1.1 |
 | **[Runemate](https://qinnovate.com/tools/runemate/)** | Native DSL compiler (67.8% compression in simulation) | v1.0 Compiler |
-| **[Security Guardrails](qif-framework/qif-sec-guardrails.md)** | Physics-derived defense architecture for BCIs | Concept |
+| **[Security Guardrails](qif-framework/specs/qif-sec-guardrails.md)** | Physics-derived defense architecture for BCIs | Concept |
 | **[Knight's Watch](https://qinnovate.com/vision/)** | Opt-in community deterrence mesh for missing children and anti-trafficking. Privacy-first (no raw data leaves device), COPPA-compliant by architecture, blockchain-auditable participation. Inherits NSP/Neurowall/Runemate stack | Concept |
 
 ### Tools
@@ -189,15 +189,15 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | Component | Description | Status |
 |-----------|-------------|--------|
 | **[Governance Wiki](https://qinnovate.com/governance/)** | Ethics, consent, regulatory compliance, accessibility | Published |
-| **[Neurosecurity Governance](governance/NEUROSECURITY_GOVERNANCE.md)** | Neurorights mapping, UNESCO alignment, GRC gap analysis | Published |
-| **[Policy Proposal](governance/NEUROSECURITY_POLICY_PROPOSAL.md)** | 6 recommendations for NIST, MITRE, FIRST, IEEE, FDA, UNESCO | v1.2 |
+| **[Neurosecurity Governance](governance/policy/NEUROSECURITY_GOVERNANCE.md)** | Neurorights mapping, UNESCO alignment, GRC gap analysis | Published |
+| **[Policy Proposal](governance/policy/NEUROSECURITY_POLICY_PROPOSAL.md)** | 6 recommendations for NIST, MITRE, FIRST, IEEE, FDA, UNESCO | v1.2 |
 
 ### Research & Academic
 
 | Component | Description | Status |
 |-----------|-------------|--------|
 | **[Zenodo](https://doi.org/10.5281/zenodo.18640105)** | Working paper, CC-BY 4.0, LaTeX source included | Published |
-| **[Research Sources](qif-framework/QIF-RESEARCH-SOURCES.md)** | 309+ verified sources across 9 domains | Active |
+| **[Research Sources](qif-framework/QIF-RESEARCH-SOURCES.md)** | 340+ verified sources across 9 domains | Active |
 | **[CVE-TARA Mapping](shared/cve-technique-mapping.json)** | 55 NVD-verified CVEs mapped to 21 TARA techniques | Published |
 | **[EEG Data Pipeline](shared/EEG-DATA-PIPELINE.md)** | Curated EEG datasets, synthetic generation, KQL tagging, license verification | Active |
 | FIRST.org CVSS SIG | NISS proposed as CVSS v4.0 extension; outreach in progress | In progress |
@@ -229,7 +229,7 @@ Three fields converge on BCIs. None covers the full problem alone.
 
 **Neurosecurity** (Denning, Matsuoka & Kohno, 2009) bridges all three. QIF is one attempt to operationalize that bridge — taking phenomena described by neuroscientists and concerns raised by neuroethicists and putting them into a testable security framework.
 
-[Neurosecurity Governance](governance/NEUROSECURITY_GOVERNANCE.md) | [Origin classification of all 161 techniques](shared/qtara-registrar.json)
+[Neurosecurity Governance](governance/policy/NEUROSECURITY_GOVERNANCE.md) | [Origin classification of all 161 techniques](shared/qtara-registrar.json)
 
 ---
 
@@ -240,7 +240,7 @@ Three fields converge on BCIs. None covers the full problem alone.
 An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spinal Cord), a physical interface boundary (I0, the electrode-tissue interface), and 3 synthetic bands organized by physics regime and spatial scale (S1 Near-Field/On-Device, S2 Guided-Wave/Host-Local, S3 Far-Field/Wide-Area).
 
 - **Site:** [qinnovate.com/framework](https://qinnovate.com/framework/)
-- **Whitepaper:** [qinnovate.com/research/whitepaper](https://qinnovate.com/research/whitepaper/) (v7.1)
+- **Whitepaper:** [qinnovate.com/research/whitepaper](https://qinnovate.com/research/whitepaper/) (v6.3, v8.0 in progress)
 - **Working Paper:** [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)
 
 ### TARA
@@ -442,7 +442,7 @@ All commands run from the repo root.
 
 ### Before You Start
 
-1. Read [DISCLAIMER.md](DISCLAIMER.md) and [Code of Conduct](governance/CODE_OF_CONDUCT.md)
+1. Read [DISCLAIMER.md](DISCLAIMER.md) and [Code of Conduct](CODE_OF_CONDUCT.md)
 2. Run `npm ci` to install dependencies
 3. Run `npm run health` to verify your environment is clean
 4. Run `npm run build` to verify the site builds
@@ -520,7 +520,7 @@ https://github.githistory.xyz/qinnovates/qinnovate/blob/main/qif-framework/QIF-D
 **Permanent archive (survives repo deletion):**
 This repository is archived by [Software Heritage](https://archive.softwareheritage.org/browse/origin/https://github.com/qinnovates/qinnovate/). Software Heritage assigns ISO-standard identifiers (SWHID) to every commit, directory, and file. If this repo ever disappears from GitHub, the archive persists.
 
-**Full reference guide:** [`archive/README.md`](archive/README.md) — complete docs on all history tools, security scanning references, and key documents to track.
+**Full reference guide:** [`_archive/README.md`](_archive/README.md) — complete docs on all history tools, security scanning references, and key documents to track.
 
 ### Why This Matters
 
@@ -534,7 +534,7 @@ We publish full history because transparency is the foundation of trust in secur
 
 ## Collaboration
 
-This work needs collaborators. The research base is compiled (309+ verified sources). The threat taxonomy and scoring system exist. What comes next — empirical validation, clinical mappings, signal integrity formalization — requires domain expertise the author does not have alone.
+This work needs collaborators. The research base is compiled (340+ verified sources). The threat taxonomy and scoring system exist. What comes next — empirical validation, clinical mappings, signal integrity formalization — requires domain expertise the author does not have alone.
 
 If you work with neural data, BCI design, neuroethics, health policy, or regulatory compliance, please reach out.
 

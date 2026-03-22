@@ -268,3 +268,9 @@ World Health Organization. (2021). *Ethics and governance of artificial intellig
 ---
 
 *This document is open. Fork it, challenge it, improve it. The only wrong move is to build neural AI systems without asking these questions first.*
+
+---
+
+## Related Projects
+
+- **[AI-rchives](https://github.com/kevinqicode/ai-rchives)** — Human-AI collaboration for recovering lost internet artifacts. A companion project exploring ethical AI partnerships in practice: how humans and AI work together transparently, with clear attribution and shared credit. The collaboration model used in AI-rchives informs the principles in this document.

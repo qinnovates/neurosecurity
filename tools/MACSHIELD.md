@@ -16,7 +16,7 @@ macshield automatically hardens your Mac when you connect to untrusted WiFi and 
 
 ## Why It Exists
 
-VPNs encrypt traffic at Layer 3+, but the attacks above happen at Layer 2 (the local network), below the VPN tunnel. A VPN cannot block ARP spoofing, hostname discovery, or NetBIOS enumeration. In the [QIF security model](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-TRUTH.md), VPNs operate at the **S3 band** (Application); macshield defends at **S1** (Analog Front-End).
+VPNs encrypt traffic at Layer 3+, but the attacks above happen at Layer 2 (the local network), below the VPN tunnel. A VPN cannot block ARP spoofing, hostname discovery, or NetBIOS enumeration. In the [QIF security model](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/whitepapers/QIF-TRUTH.md), VPNs operate at the **S3 band** (Application); macshield defends at **S1** (Analog Front-End).
 
 Reputable VPNs cost $50-100/year. Free VPNs are often worse than nothing (84% leak traffic, 38% contain malware per UC Berkeley/CSIRO). macshield gives meaningful Layer 2 protection at zero cost.
 

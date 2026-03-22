@@ -220,7 +220,7 @@ By using this project, you agree to indemnify, defend, and hold harmless the aut
 
 ## 8. Acceptance
 
-By cloning, forking, downloading, or otherwise using any part of this repository, you acknowledge that you have read, understood, and agree to be bound by this Disclaimer, the project [LICENSE](LICENSE) (Apache 2.0), the [Code of Conduct](governance/CODE_OF_CONDUCT.md), and the [Security Policy](SECURITY.md).
+By cloning, forking, downloading, or otherwise using any part of this repository, you acknowledge that you have read, understood, and agree to be bound by this Disclaimer, the project [LICENSE](LICENSE) (Apache 2.0), the [Code of Conduct](CODE_OF_CONDUCT.md), and the [Security Policy](SECURITY.md).
 
 If you do not agree to these terms, do not use this project.
 
@@ -237,12 +237,12 @@ This Disclaimer shall be governed by and construed in accordance with the laws o
 | Document | Description |
 |----------|-------------|
 | [LICENSE](LICENSE) | Apache License 2.0 — full terms |
-| [Code of Conduct](governance/CODE_OF_CONDUCT.md) | Neuroethics-grounded community standards |
+| [Code of Conduct](CODE_OF_CONDUCT.md) | Neuroethics-grounded community standards |
 | [Security Policy](SECURITY.md) | Vulnerability reporting and disclosure |
 | [Transparency Statement](governance/TRANSPARENCY.md) | AI collaboration audit trail |
-| [Informed Consent Framework](governance/INFORMED_CONSENT_FRAMEWORK.md) | Consent model for BCI contexts |
-| [Neuroethics Legislation Survey](governance/NEUROETHICS_LEGISLATION_SURVEY.md) | Global neural data legislation tracker |
-| [QIF Neuroethics Alignment](governance/QIF-NEUROETHICS.md) | How QIF embeds neuroethics principles |
+| [Informed Consent Framework](governance/policy/INFORMED_CONSENT_FRAMEWORK.md) | Consent model for BCI contexts |
+| [Neuroethics Legislation Survey](governance/policy/NEUROETHICS_LEGISLATION_SURVEY.md) | Global neural data legislation tracker |
+| [QIF Neuroethics Alignment](governance/policy/QIF-NEUROETHICS.md) | How QIF embeds neuroethics principles |
 
 ---
 
