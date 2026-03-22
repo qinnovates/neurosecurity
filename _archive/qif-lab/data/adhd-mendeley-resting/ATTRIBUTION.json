@@ -1,0 +1,22 @@
+{
+  "id": "adhd-mendeley-resting",
+  "name": "ADHD Adult Resting State + Cognitive",
+  "source": "mendeley",
+  "source_url": "https://data.mendeley.com/datasets/6k4g25fhzg/1",
+  "license": "cc-by-4",
+  "redistributable": true,
+  "conditions": [
+    "adhd",
+    "resting-state",
+    "cognitive-challenge",
+    "sound-listening"
+  ],
+  "dsm5_code": "F90.0",
+  "channels": 5,
+  "sampling_rate_hz": 256,
+  "format": "mat",
+  "subjects": 79,
+  "paradigm": "Eyes open, eyes closed, cognitive challenge, sound listening",
+  "notes": "CC BY 4.0 \u2014 freely redistributable with attribution. Subject 7 female ADHD group has corrupted signal. Published by Nasrabadi et al.",
+  "downloaded_by": "shared/scripts/download-eeg-samples.py"
+}
