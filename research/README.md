@@ -1,34 +1,51 @@
-# Research
+---
+title: "QIF Research Documents"
+status: "active"
+---
 
-Unified directory for all QIF research output: blog posts, the academic paper, and clinical reference notes.
+# QIF Research Documents
+
+Living research documents that feed into the QIF framework, website, and publications. These files are rendered dynamically on the website at build time via Astro content collections.
 
 ## Structure
 
 ```
 research/
-  blog/           # 71 posts (field journals + technical articles)
-  paper/          # LaTeX preprint (Zenodo-published)
-    figures/
-    sections/
-    scripts/
-    references.bib
-    main.tex
-  clinical/       # Clinical neuroscience research notes
-    qeeg-research.md
+  README.md                    ← This file
+  ferrocene-exploration.md     ← Compiler qualification research (renders on /runemate)
+  techniques/                  ← Per-technique deep dives, mapped to TARA QIF-T numbers
+    QIF-T0103-ssvep-frequency-hijack.md
+    QIF-T0040-neurophishing.md
+    ...
 ```
 
-## Blog Posts
+## Technique Documents
 
-71 posts including field journal entries and technical articles. Published at [qinnovate.com/news](https://qinnovate.com/news/).
+Each file in `techniques/` maps 1:1 to a TARA technique ID. The filename format is `QIF-TNNNN-slug.md`. These contain:
 
-Posts with `type: case-study` in frontmatter route to `/research/papers/[slug]/`.
+- Full threat model and attack scenarios
+- Research citations with verified DOIs
+- Neural Impact Chain (NIC) mapping
+- DSM-5-TR diagnostic implications
+- Security guardrails and defenses
+- Blog post references
+- Open research questions
 
-## Academic Paper
+Update these as research progresses. The derivation log captures the discovery sessions; these files capture the refined, citable analysis.
 
-LaTeX preprint published on Zenodo (DOI: [10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)).
+## Adding a New Document
 
-Source in `paper/main.tex`. Build with `make` in the `paper/` directory.
+1. Create the markdown file with frontmatter (`title`, `status`, `updated`)
+2. The `research` content collection in `src/content.config.ts` auto-discovers all `.md` files here
+3. Reference from website pages using `getEntry('research', 'filename-without-extension')`
+4. Update this README if it's a new category
 
-## Clinical Notes
+## Relationship to Other Documents
 
-Research notes on clinical neuroscience relevant to QIF threat modeling. All DSM-5-TR references are for threat modeling purposes, not clinical claims.
+| Document | Purpose |
+|----------|---------|
+| `QIF-DERIVATION-LOG.md` | Raw discovery sessions (Kevin's voice, timestamped) |
+| `QIF-RESEARCH-SOURCES.md` | Bibliography of all cited sources |
+| `qif-sec-guardrails.md` | Physics-derived defense architecture |
+| `research/*.md` | Refined analysis per topic, rendered on website |
+| `research/techniques/*.md` | Per-TARA-technique deep dives |

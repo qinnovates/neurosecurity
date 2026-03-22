@@ -24,7 +24,7 @@ import {
 
 const MAX_KB = 509.3; // largest classical total, used to scale chart bars
 
-// Dynamic research docs - rendered from markdown in model/research/
+// Dynamic research docs - rendered from markdown in research/
 const ferroceneEntry = await getEntry('research', 'ferrocene-exploration');
 const ferroceneContent = ferroceneEntry ? await render(ferroceneEntry) : null;
 ---
@@ -567,7 +567,7 @@ const ferroceneContent = ferroceneEntry ? await render(ferroceneEntry) : null;
         </div>
       </section>
 
-      <!-- Compiler Qualification: Ferrocene (dynamically rendered from model/research/ferrocene-exploration.md) -->
+      <!-- Compiler Qualification: Ferrocene (dynamically rendered from research/ferrocene-exploration.md) -->
       <section id="ferrocene" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Compiler Qualification: Ferrocene</h2>
         {ferroceneContent ? (
@@ -575,11 +575,11 @@ const ferroceneContent = ferroceneEntry ? await render(ferroceneEntry) : null;
             <ferroceneContent.Content />
           </div>
         ) : (
-          <p class="text-sm text-[var(--color-text-muted)]">Ferrocene research document not found. See <a href="https://github.com/qinnovates/neurosecurity/blob/main/model/research/ferrocene-exploration.md" class="text-[var(--color-accent-primary)] hover:underline">the source document on GitHub</a>.</p>
+          <p class="text-sm text-[var(--color-text-muted)]">Ferrocene research document not found. See <a href="https://github.com/qinnovates/neurosecurity/blob/main/research/ferrocene-exploration.md" class="text-[var(--color-accent-primary)] hover:underline">the source document on GitHub</a>.</p>
         )}
         <div class="mt-4 pt-3 border-t border-[var(--color-border)]">
           <p class="text-xs text-[var(--color-text-faint)]">
-            This section is rendered from <a href="https://github.com/qinnovates/neurosecurity/blob/main/model/research/ferrocene-exploration.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">model/research/ferrocene-exploration.md</a>. Update the source document and rebuild to see changes here.
+            This section is rendered from <a href="https://github.com/qinnovates/neurosecurity/blob/main/research/ferrocene-exploration.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">research/ferrocene-exploration.md</a>. Update the source document and rebuild to see changes here.
           </p>
         </div>
       </section>

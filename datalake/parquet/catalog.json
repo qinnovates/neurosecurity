@@ -1,9 +1,9 @@
 {
   "_meta": {
-    "generated": "2026-03-18T09:41:09.192029+00:00",
+    "generated": "2026-03-22T09:11:05.991543+00:00",
     "compression": "zstd",
     "compression_level": 3,
-    "pyarrow_version": "23.0.1",
+    "pyarrow_version": "18.1.0",
     "total_datasets": 31,
     "total_rows": 6984
   },
@@ -40,9 +40,9 @@
         "consent_tier",
         "notes"
       ],
-      "size_bytes": 36500,
+      "size_bytes": 36096,
       "compression": "zstd",
-      "source": "docs/data/parquet/techniques.parquet"
+      "source": "datalake/parquet/techniques.parquet"
     },
     "technique_dsm": {
       "rows": 890,
@@ -54,9 +54,9 @@
         "confidence",
         "dsm_type"
       ],
-      "size_bytes": 4138,
+      "size_bytes": 4063,
       "compression": "zstd",
-      "source": "docs/data/parquet/technique_dsm.parquet"
+      "source": "datalake/parquet/technique_dsm.parquet"
     },
     "technique_neurorights": {
       "rows": 452,
@@ -65,9 +65,9 @@
         "technique_id",
         "right_code"
       ],
-      "size_bytes": 1412,
+      "size_bytes": 1382,
       "compression": "zstd",
-      "source": "docs/data/parquet/technique_neurorights.parquet"
+      "source": "datalake/parquet/technique_neurorights.parquet"
     },
     "impact_chains": {
       "rows": 4428,
@@ -88,9 +88,9 @@
         "dsm_name",
         "dsm_cluster"
       ],
-      "size_bytes": 14359,
+      "size_bytes": 14133,
       "compression": "zstd",
-      "source": "docs/data/parquet/impact_chains.parquet"
+      "source": "datalake/parquet/impact_chains.parquet"
     },
     "brain_regions": {
       "rows": 38,
@@ -116,9 +116,9 @@
         "bci_relevance_detail",
         "clinical_notes"
       ],
-      "size_bytes": 64010,
+      "size_bytes": 63615,
       "compression": "zstd",
-      "source": "docs/data/parquet/brain_regions.parquet"
+      "source": "datalake/parquet/brain_regions.parquet"
     },
     "hourglass_bands": {
       "rows": 11,
@@ -132,9 +132,9 @@
         "severity_if_compromised",
         "description"
       ],
-      "size_bytes": 4024,
+      "size_bytes": 3921,
       "compression": "zstd",
-      "source": "docs/data/parquet/hourglass_bands.parquet"
+      "source": "datalake/parquet/hourglass_bands.parquet"
     },
     "companies": {
       "rows": 57,
@@ -157,9 +157,9 @@
         "device_count",
         "tara_attack_surface"
       ],
-      "size_bytes": 15128,
+      "size_bytes": 14908,
       "compression": "zstd",
-      "source": "docs/data/parquet/companies.parquet"
+      "source": "datalake/parquet/companies.parquet"
     },
     "devices": {
       "rows": 68,
@@ -176,9 +176,9 @@
         "target_use",
         "company"
       ],
-      "size_bytes": 6656,
+      "size_bytes": 6507,
       "compression": "zstd",
-      "source": "docs/data/parquet/devices.parquet"
+      "source": "datalake/parquet/devices.parquet"
     },
     "neural_pathways": {
       "rows": 46,
@@ -200,9 +200,9 @@
         "therapeutic_applications",
         "confidence"
       ],
-      "size_bytes": 18317,
+      "size_bytes": 18096,
       "compression": "zstd",
-      "source": "docs/data/parquet/neural_pathways.parquet"
+      "source": "datalake/parquet/neural_pathways.parquet"
     },
     "neurotransmitters": {
       "rows": 18,
@@ -224,9 +224,9 @@
         "bci_relevance",
         "confidence"
       ],
-      "size_bytes": 36747,
+      "size_bytes": 36533,
       "compression": "zstd",
-      "source": "docs/data/parquet/neurotransmitters.parquet"
+      "source": "datalake/parquet/neurotransmitters.parquet"
     },
     "dsm_clusters": {
       "rows": 1,
@@ -241,9 +241,9 @@
         "persistent_personality",
         "non_diagnostic"
       ],
-      "size_bytes": 22979,
+      "size_bytes": 22861,
       "compression": "zstd",
-      "source": "docs/data/parquet/dsm_clusters.parquet"
+      "source": "datalake/parquet/dsm_clusters.parquet"
     },
     "neurological_conditions": {
       "rows": 50,
@@ -262,9 +262,9 @@
         "niss_affected",
         "confidence"
       ],
-      "size_bytes": 12734,
+      "size_bytes": 12556,
       "compression": "zstd",
-      "source": "docs/data/parquet/neurological_conditions.parquet"
+      "source": "datalake/parquet/neurological_conditions.parquet"
     },
     "cranial_nerves": {
       "rows": 12,
@@ -290,9 +290,9 @@
         "dsm_source",
         "clinical_notes"
       ],
-      "size_bytes": 25542,
+      "size_bytes": 25266,
       "compression": "zstd",
-      "source": "docs/data/parquet/cranial_nerves.parquet"
+      "source": "datalake/parquet/cranial_nerves.parquet"
     },
     "neuroendocrine": {
       "rows": 7,
@@ -319,9 +319,9 @@
         "disruption_effects",
         "confidence"
       ],
-      "size_bytes": 34014,
+      "size_bytes": 33728,
       "compression": "zstd",
-      "source": "docs/data/parquet/neuroendocrine.parquet"
+      "source": "datalake/parquet/neuroendocrine.parquet"
     },
     "glial_cells": {
       "rows": 6,
@@ -340,9 +340,9 @@
         "qif_band",
         "security_implications"
       ],
-      "size_bytes": 23230,
+      "size_bytes": 23056,
       "compression": "zstd",
-      "source": "docs/data/parquet/glial_cells.parquet"
+      "source": "datalake/parquet/glial_cells.parquet"
     },
     "neurovascular": {
       "rows": 1,
@@ -360,9 +360,9 @@
         "clinical_conditions",
         "research_gaps"
       ],
-      "size_bytes": 79403,
+      "size_bytes": 79244,
       "compression": "zstd",
-      "source": "docs/data/parquet/neurovascular.parquet"
+      "source": "datalake/parquet/neurovascular.parquet"
     },
     "receptors": {
       "rows": 20,
@@ -388,9 +388,9 @@
         "bci_relevance",
         "confidence"
       ],
-      "size_bytes": 43618,
+      "size_bytes": 43341,
       "compression": "zstd",
-      "source": "docs/data/parquet/receptors.parquet"
+      "source": "datalake/parquet/receptors.parquet"
     },
     "cve_mappings": {
       "rows": 55,
@@ -405,9 +405,9 @@
         "category",
         "validation"
       ],
-      "size_bytes": 7420,
+      "size_bytes": 7301,
       "compression": "zstd",
-      "source": "docs/data/parquet/cve_mappings.parquet"
+      "source": "datalake/parquet/cve_mappings.parquet"
     },
     "security_controls": {
       "rows": 1,
@@ -417,9 +417,9 @@
         "controls_by_band",
         "nsp_layers"
       ],
-      "size_bytes": 18543,
+      "size_bytes": 18500,
       "compression": "zstd",
-      "source": "docs/data/parquet/security_controls.parquet"
+      "source": "datalake/parquet/security_controls.parquet"
     },
     "ethics_controls": {
       "rows": 1,
@@ -430,9 +430,9 @@
         "MI",
         "PC"
       ],
-      "size_bytes": 6800,
+      "size_bytes": 6742,
       "compression": "zstd",
-      "source": "docs/data/parquet/ethics_controls.parquet"
+      "source": "datalake/parquet/ethics_controls.parquet"
     },
     "guardrails": {
       "rows": 8,
@@ -445,9 +445,9 @@
         "neuroethics",
         "neurosecurity"
       ],
-      "size_bytes": 7157,
+      "size_bytes": 7070,
       "compression": "zstd",
-      "source": "docs/data/parquet/guardrails.parquet"
+      "source": "datalake/parquet/guardrails.parquet"
     },
     "neurosecurity_scores": {
       "rows": 22,
@@ -463,9 +463,9 @@
         "details",
         "vector"
       ],
-      "size_bytes": 6364,
+      "size_bytes": 6235,
       "compression": "zstd",
-      "source": "docs/data/parquet/neurosecurity_scores.parquet"
+      "source": "datalake/parquet/neurosecurity_scores.parquet"
     },
     "research_explorer": {
       "rows": 73,
@@ -478,9 +478,9 @@
         "domain",
         "category"
       ],
-      "size_bytes": 8337,
+      "size_bytes": 8244,
       "compression": "zstd",
-      "source": "docs/data/parquet/research_explorer.parquet"
+      "source": "datalake/parquet/research_explorer.parquet"
     },
     "research_institutions": {
       "rows": 27,
@@ -496,9 +496,9 @@
         "layer",
         "tags"
       ],
-      "size_bytes": 6518,
+      "size_bytes": 6386,
       "compression": "zstd",
-      "source": "docs/data/parquet/research_institutions.parquet"
+      "source": "datalake/parquet/research_institutions.parquet"
     },
     "research_standards": {
       "rows": 14,
@@ -514,9 +514,9 @@
         "qifRelevance",
         "tags"
       ],
-      "size_bytes": 5619,
+      "size_bytes": 5489,
       "compression": "zstd",
-      "source": "docs/data/parquet/research_standards.parquet"
+      "source": "datalake/parquet/research_standards.parquet"
     },
     "research_legislation": {
       "rows": 12,
@@ -531,9 +531,9 @@
         "status",
         "tags"
       ],
-      "size_bytes": 3818,
+      "size_bytes": 3703,
       "compression": "zstd",
-      "source": "docs/data/parquet/research_legislation.parquet"
+      "source": "datalake/parquet/research_legislation.parquet"
     },
     "validation_registry": {
       "rows": 9,
@@ -552,9 +552,9 @@
         "related_tara_ids",
         "date"
       ],
-      "size_bytes": 10963,
+      "size_bytes": 10787,
       "compression": "zstd",
-      "source": "docs/data/parquet/validation_registry.parquet"
+      "source": "datalake/parquet/validation_registry.parquet"
     },
     "eeg_samples": {
       "rows": 26,
@@ -580,9 +580,9 @@
         "taraRelevance",
         "notes"
       ],
-      "size_bytes": 15127,
+      "size_bytes": 14857,
       "compression": "zstd",
-      "source": "docs/data/parquet/eeg_samples.parquet"
+      "source": "datalake/parquet/eeg_samples.parquet"
     },
     "intel_feed": {
       "rows": 258,
@@ -599,9 +599,9 @@
         "companies",
         "fetched"
       ],
-      "size_bytes": 63043,
+      "size_bytes": 62903,
       "compression": "zstd",
-      "source": "docs/data/parquet/intel_feed.parquet"
+      "source": "datalake/parquet/intel_feed.parquet"
     },
     "intel_sources": {
       "rows": 211,
@@ -616,9 +616,9 @@
         "notes",
         "intel_feed"
       ],
-      "size_bytes": 14096,
+      "size_bytes": 13981,
       "compression": "zstd",
-      "source": "docs/data/parquet/intel_sources.parquet"
+      "source": "datalake/parquet/intel_sources.parquet"
     },
     "timeline": {
       "rows": 1,
@@ -628,9 +628,9 @@
         "current_stats",
         "milestones"
       ],
-      "size_bytes": 11798,
+      "size_bytes": 11763,
       "compression": "zstd",
-      "source": "docs/data/parquet/timeline.parquet"
+      "source": "datalake/parquet/timeline.parquet"
     }
   }
 }
