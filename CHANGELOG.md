@@ -1,6 +1,6 @@
 # Changelog
 
-<!-- changelog-marker: 612f26b8f201da912d70146b940f920e70226ea8 -->
+<!-- changelog-marker: b7c33ea14f409aa6fa366ceeffc11101a616b2e3 -->
 
 ## 2026-03-22
 
