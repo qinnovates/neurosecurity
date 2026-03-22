@@ -4,7 +4,17 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 Auto-maintained by `scripts/changelog-update.mjs`.
 
-<!-- changelog-marker: 51ebdb2b6437c3149324a8e972aa5f484ce582bd -->
+<!-- changelog-marker: 52e0c34e544ef3b77f1a22951eeae523b6d71cc0 -->
+
+## 2026-03-22
+
+### Updated
+- Major repo restructure: neurosecurity architecture ([52e0c34](https://github.com/qinnovates/qinnovate/commit/52e0c34))
+
+### Docs
+- major documentation cleanup and restructure ([b7b0267](https://github.com/qinnovates/qinnovate/commit/b7b0267))
+
+
 
 ## 2026-03-21
 
