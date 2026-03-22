@@ -1,5 +1,5 @@
 /**
- * Neurowall Constants — derived from tools/neurowall/ documentation
+ * Neurowall Constants — derived from osi-of-mind/tools/neurowall/ documentation
  * Single source of truth for all Neurowall values used on the site.
  */
 
