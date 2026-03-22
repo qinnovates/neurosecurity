@@ -4,7 +4,7 @@
 
 If you discover a security vulnerability in the QIF specification, TARA registrar, or any component of this framework, please report it through **GitHub Issues**:
 
-1. Open an issue at [github.com/qinnovates/qinnovate/issues](https://github.com/qinnovates/qinnovate/issues)
+1. Open an issue 
 2. Label it `security`
 3. Include: description, steps to reproduce (if applicable), potential impact, suggested fix (if any)
 
