@@ -3,12 +3,12 @@
 Convert QIF JSON datalake to Parquet format.
 
 Generates:
-  site/data/parquet/*.parquet         — one file per logical table
-  site/data/parquet/catalog.json      — metadata manifest for the Data Studio
+  datalake/parquet/*.parquet           — one file per logical table
+  datalake/parquet/catalog.json       — metadata manifest for the Data Studio
 
 Architecture:
-  datalake/*.json → PyArrow → site/data/parquet/*.parquet
-  Served as static files at /data/parquet/ on the live site.
+  datalake/*.json → PyArrow → datalake/parquet/*.parquet
+  Prebuild copies to site/data/parquet/ for serving on the live site.
 
 Usage:
   python3 scripts/generate-parquet.py
@@ -26,7 +26,7 @@ import pyarrow.parquet as pq
 ROOT = Path(__file__).resolve().parent.parent
 SHARED = ROOT / "datalake"
 SRC_DATA = ROOT / "src" / "data"
-OUT = ROOT / "docs" / "data" / "parquet"
+OUT = ROOT / "datalake" / "parquet"
 
 # Zstd level 3: 30-50% better compression than Snappy, sub-ms decompression at these sizes
 COMPRESSION = "zstd"

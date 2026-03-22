@@ -25,6 +25,12 @@ else
   echo "[prebuild] Skipping Parquet (pyarrow not installed)"
 fi
 
+# 4b. Copy Parquet from datalake to site for serving
+if [ -d datalake/parquet ]; then
+  echo "[prebuild] Copying Parquet to site/data/parquet/..."
+  cp -r datalake/parquet/* site/data/parquet/
+fi
+
 # 5. Regenerate governance docs from derivation log
 echo "[prebuild] Regenerating governance docs..."
 node scripts/generate-governance.mjs
