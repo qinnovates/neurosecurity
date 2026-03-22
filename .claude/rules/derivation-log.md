@@ -1,7 +1,7 @@
 ---
 paths:
-  - "qif-framework/QIF-DERIVATION-LOG.md"
-  - "qif-framework/QIF-FIELD-JOURNAL.md"
+  - "model/QIF-DERIVATION-LOG.md"
+  - "model/QIF-FIELD-JOURNAL.md"
   - "governance/DECISION-LOG.md"
   - "governance/TRANSPARENCY.md"
 ---
@@ -10,7 +10,7 @@ paths:
 
 ## Derivation Log -- When and How
 
-The derivation log (`qif-framework/QIF-DERIVATION-LOG.md`) is the single source of truth for framework decisions. `governance/DECISION-LOG.md` and `governance/TRANSPARENCY.md` are GENERATED from it -- do not edit them directly.
+The derivation log (`model/QIF-DERIVATION-LOG.md`) is the single source of truth for framework decisions. `governance/DECISION-LOG.md` and `governance/TRANSPARENCY.md` are GENERATED from it -- do not edit them directly.
 
 **Cadence:** One entry per session (at most). Sessions with 0 framework-significant decisions produce 0 entries.
 
@@ -44,10 +44,10 @@ If any answer is yes for any decision during the session, note it internally and
 **Entry policy:** Normalize spelling and phrasing. Preserve meaning, decisions, and reasoning chains. Do not write verbatim transcript -- synthesize.
 
 **Destinations (parallel, when triggered):**
-1. `qif-framework/QIF-DERIVATION-LOG.md` -- curated entry (proposed at session end)
-2. `qif-framework/QIF-FIELD-JOURNAL.md` -- personal/experiential observations (raw voice only, AI cannot write)
+1. `model/QIF-DERIVATION-LOG.md` -- curated entry (proposed at session end)
+2. `model/QIF-FIELD-JOURNAL.md` -- personal/experiential observations (raw voice only, AI cannot write)
 3. Daily memory log -- `[DECISION]` or `[DERIVATION]` tag (during session as decisions occur)
-4. `qif-framework/QIF-RESEARCH-SOURCES.md` -- if any new external source was referenced
+4. `model/QIF-RESEARCH-SOURCES.md` -- if any new external source was referenced
 5. Run `npm run governance` after committing a new entry to regenerate DECISION-LOG.md and TRANSPARENCY.md
 
 ## Sensitive Information Filter (MANDATORY)

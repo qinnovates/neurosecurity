@@ -29,7 +29,7 @@ When a file changes, these downstream files must be updated. Run `npm run health
 | datalake/qtara/src/qtara/data/ | Copy registrar to SDK data dir | Manual |
 | src/lib/threat-data.ts | Verify ThreatVector interface matches | Manual |
 
-## When qif-framework/QIF-DERIVATION-LOG.md changes
+## When model/QIF-DERIVATION-LOG.md changes
 | Update | How | Automated? |
 |--------|-----|-----------|
 | governance/DECISION-LOG.md | `npm run governance` | Semi-auto (run after commit) |

@@ -8,7 +8,7 @@ order: 10
 
 > **Living document.** These are the open ethical questions that QIF raises — questions that *must* be answered before quantum-aware BCI security can be deployed responsibly. This document grows as Kevin Qi pursues neuroethics in graduate school, filling unknowns from a position of rigorous academic inquiry.
 >
-> **See also:** [QIF-GOVERNANCE-QUESTIONS.md](../QIF-GOVERNANCE-QUESTIONS.md) (RACI governance perspective) | [GUARDRAILS.md](../../qif-framework/GUARDRAILS.md) (neuroethics constraint mapping)
+> **See also:** [QIF-GOVERNANCE-QUESTIONS.md](../QIF-GOVERNANCE-QUESTIONS.md) (RACI governance perspective) | [GUARDRAILS.md](../../model/GUARDRAILS.md) (neuroethics constraint mapping)
 >
 > **Why neuroethics first:** The QIF framework is technically ready to model quantum phenomena at the BCI interface. But technical readiness without ethical grounding is dangerous. Kevin chose neuroethics as his academic path *because* these questions cannot be answered by engineers alone — they require philosophy, law, neuroscience, and public policy working together. The framework's value is zero if it enables surveillance, discrimination, or loss of cognitive liberty. Neuroethics comes first because it *must*.
 >

@@ -214,7 +214,7 @@ We just need to start building.
 
 ## Appendix: Author's Raw Notes (Unedited, Preserved for Transparency)
 
-The following are the author's original, unedited notes from which these principles were derived. They are preserved per the author's commitment to epistemic transparency. For corrected versions with context, see [QIF Field Journal Entry 023](../qif-framework/QIF-FIELD-JOURNAL.md#entry-023).
+The following are the author's original, unedited notes from which these principles were derived. They are preserved per the author's commitment to epistemic transparency. For corrected versions with context, see [QIF Field Journal Entry 023](../model/QIF-FIELD-JOURNAL.md#entry-023).
 
 ### Note 1 (2026-03-06):
 > If BCIs can help cure blindness, then it is our rights as our rights, duties, responbitilies and sole proprietorships of those who are protected under the neuroethics act(s) to help those who are vulnerable. Under (section X of Y article, page #, and site it as an academic would), in neurorights and neuroethics publications <list related> it is our duty as fellow people who are willing and able to help others. Where willing and able is defined as those who want to and aspire to make a change from their heart, mind, and soul to help those vulnerable and physically deemed clinical use FDA for BCIs such as loss of vision, (and other uses in research thats approved today), we should protect their neurorights that I hope one day becomes influence for some policy work and actual lawyers writing from... There's so many angles this xan be addressed as policies hopefully after much needed strict collaboration and review to UNESCO,-- needs a lot of work. This is my thesis too.

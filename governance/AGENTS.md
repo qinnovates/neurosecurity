@@ -11,4 +11,4 @@
 ```bash
 npm run governance
 ```
-This regenerates both from `qif-framework/QIF-DERIVATION-LOG.md`. See `.claude/rules/derivation-log.md` for the full protocol.
+This regenerates both from `model/QIF-DERIVATION-LOG.md`. See `.claude/rules/derivation-log.md` for the full protocol.

@@ -45,7 +45,7 @@ function getStructure() {
     structure += `  - \`components/\`: React/Astro components
   - \`layouts/\`: Page layouts
   - \`lib/\`: Utility functions and constants
-- \`qif-framework/\`: QIF security specification docs
+- \`model/\`: QIF security specification docs
 - \`governance/\`: Policy and ethics documents
 - \`datalake/\`: Shared data (Source of Truth)
 - \`public/\`: Static assets
@@ -62,7 +62,7 @@ const techStack = `## Tech Stack
 const guidelines = `## Guidelines
 - Use Semantic HTML.
 - Follow Tailwind v4 conventions.
-- Update \`datalake/\` JSON files for data changes, which are copied to \`docs/data\` during build.
+- Update \`datalake/\` JSON files for data changes, which are copied to \`site/data\` during build.
 - Documentation is a primary product; keep markdown clean and standard.
 `;
 

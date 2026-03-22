@@ -16,10 +16,10 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const JOURNAL_PATH = join(ROOT, 'qif-framework', 'QIF-FIELD-JOURNAL.md');
-const BLOGS_DIR = join(ROOT, 'blogs');
+const BLOGS_DIR = join(ROOT, 'research/blog');
 const DRY_RUN = process.argv.includes('--dry-run');
 
-const REPO_URL = 'https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md';
+const REPO_URL = 'https://github.com/qinnovates/qinnovate/blob/main/model/QIF-FIELD-JOURNAL.md';
 
 // Map keywords from "Connected to:" lines to tags
 const TAG_MAP = {

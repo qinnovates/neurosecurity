@@ -37,7 +37,7 @@ import timelineRaw from '@/data/qif-timeline.json';
 import newsRaw from '@/data/external-news-cache.json';
 import validationRaw from '@shared/validation-registry.json';
 import automationRaw from '@/data/automation-registry.json';
-import hardwareRaw from '../../docs/bci-hardware-inventory.json';
+import hardwareRaw from '../../site/bci-hardware-inventory.json';
 import intelFeedRaw from '@/data/bci-intel-feed.json';
 import intelSourcesRaw from '@/data/intel-sources.json';
 

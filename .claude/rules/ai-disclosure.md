@@ -1,7 +1,7 @@
 ---
 paths:
-  - "paper/**"
-  - "blogs/**"
+  - "research/paper/**"
+  - "research/blog/**"
 ---
 
 # AI Disclosure & Publication Compliance

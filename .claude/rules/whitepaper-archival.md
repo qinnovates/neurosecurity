@@ -1,6 +1,6 @@
 ---
 paths:
-  - "src/pages/research/whitepaper/**"
+  - "src/pages/research/whiteresearch/paper/**"
   - "src/components/WhitepaperVersionSelector.astro"
 ---
 

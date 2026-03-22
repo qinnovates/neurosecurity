@@ -117,12 +117,12 @@ qinnovate/
 │   │   ├── citation-integrity.md          # 27 lines | paths: paper/**, research-registry
 │   │   ├── ai-disclosure.md               # 35 lines | paths: paper/**, blogs/**
 │   │   ├── whitepaper-archival.md         # 28 lines | paths: whitepaper pages
-│   │   └── ai-security-ethics.md          # 28 lines | paths: qif-framework/**, governance/**
+│   │   └── ai-security-ethics.md          # 28 lines | paths: model/**, governance/**
 │   └── agents/
 │       └── data-pipeline.md               # 32 lines | datalake specialist
 ├── src/CLAUDE.md                          # 30 lines -- Astro patterns, KQL data flow
 ├── datalake/CLAUDE.md                     # 26 lines -- source of truth, pipeline, SDK
-├── qif-framework/CLAUDE.md                # 19 lines -- hourglass model, derivation log
+├── model/CLAUDE.md                # 19 lines -- hourglass model, derivation log
 ├── paper/CLAUDE.md                        # 20 lines -- LaTeX, BibTeX, make deploy
 ├── tools/CLAUDE.md                        # 11 lines -- neurowall, neurosim, macshield
 ├── scripts/CLAUDE.md                      # 15 lines -- prebuild pipeline
@@ -249,7 +249,7 @@ SAVINGS: ~6,820 tokens (43%) — and every loaded rule is RELEVANT to the task
 | sync-protocols.md | 30 | ~200 | QIF-RESEARCH-SOURCES, automation-registry, timeline |
 | ai-disclosure.md | 35 | ~230 | paper/**, blogs/** |
 | whitepaper-archival.md | 28 | ~180 | src/pages/research/whitepaper/** |
-| ai-security-ethics.md | 28 | ~180 | qif-framework/**, governance/**, paper/** |
+| ai-security-ethics.md | 28 | ~180 | model/**, governance/**, paper/** |
 | citation-integrity.md | 27 | ~180 | paper/**, research-registry |
 | **Conditional total** | **371** | **~2,420** | **Only when relevant** |
 
@@ -312,7 +312,7 @@ When Claude reads or edits a file matching any of these patterns, the rule loads
 | `citation-integrity.md` | Citation verification protocol | `paper/**`, `QIF-RESEARCH-SOURCES`, `research-registry.json` | 27 |
 | `ai-disclosure.md` | Publication compliance checklist | `paper/**`, `blogs/**` | 35 |
 | `whitepaper-archival.md` | Version archival protocol | `src/pages/research/whitepaper/**`, `WhitepaperVersionSelector.astro` | 28 |
-| `ai-security-ethics.md` | AI ethics gateway | `qif-framework/**`, `governance/**`, `paper/**`, `blogs/**` | 28 |
+| `ai-security-ethics.md` | AI ethics gateway | `model/**`, `governance/**`, `paper/**`, `blogs/**` | 28 |
 
 ---
 
@@ -344,7 +344,7 @@ Every subdirectory CLAUDE.md follows the same template:
 |-----------|-------|-------------|
 | `src/CLAUDE.md` | 30 | Astro 5.x patterns, React 19 islands, KQL-first data flow, component organization |
 | `datalake/CLAUDE.md` | 26 | Source of truth declaration, pipeline diagram, SDK testing, key files |
-| `qif-framework/CLAUDE.md` | 19 | Hourglass model constraint, derivation log reference, generated files warning |
+| `model/CLAUDE.md` | 19 | Hourglass model constraint, derivation log reference, generated files warning |
 | `paper/CLAUDE.md` | 20 | LaTeX build command, BibTeX verification requirement, DOI convention |
 | `tools/CLAUDE.md` | 11 | Defensive framing constraint, exploit code location policy |
 | `scripts/CLAUDE.md` | 15 | Prebuild pipeline, idempotency requirement, dry-run convention |
@@ -468,7 +468,7 @@ See `_swarm/2026-03-17-unix-agent-scaffold.md` for the complete 8-agent delibera
 | `.claude/agents/data-pipeline.md` | 32 | Data pipeline specialist |
 | `src/CLAUDE.md` | 30 | Astro site orientation |
 | `datalake/CLAUDE.md` | 26 | Data pipeline orientation |
-| `qif-framework/CLAUDE.md` | 19 | Framework orientation |
+| `model/CLAUDE.md` | 19 | Framework orientation |
 | `paper/CLAUDE.md` | 20 | Academic paper orientation |
 | `tools/CLAUDE.md` | 11 | Security tools orientation |
 | `scripts/CLAUDE.md` | 15 | Scripts orientation |

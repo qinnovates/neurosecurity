@@ -1,9 +1,9 @@
 ---
 paths:
-  - "qif-framework/**"
+  - "model/**"
   - "governance/**"
-  - "paper/**"
-  - "blogs/**"
+  - "research/paper/**"
+  - "research/blog/**"
   - "governance/policy/AI-ETHICS-PROPOSAL.md"
 ---
 

@@ -1,17 +1,17 @@
-# Qinnovate -- AI Agent Context
+# Neurosecurity -- AI Agent Context
 
-BCI security research repo: website (Astro 5 + React 19 + TailwindCSS 4), framework specs (QIF, TARA, NISS, NSP), research data, governance, tools. Each subdirectory has its own `AGENTS.md`.
+BCI security research: website (Astro 5 + React 19 + TailwindCSS 4), QIF model (specs, TARA, NISS, NSP), research data, governance, tools. Each subdirectory has its own `AGENTS.md`.
 
 ## Structure
 - `src/` -- Astro website (TypeScript, KQL-first data via `kql-tables.ts`)
-- `qif-framework/` -- QIF specs (`specs/`), whitepapers (`whitepapers/`), derivation logs, NSP + Runemate (Rust)
+- `model/` -- QIF model: specs (`specs/`), whitepapers (`whitepapers/`), derivation logs, NSP + Runemate (Rust)
+- `research/` -- Blog posts (`blog/`), academic paper (`paper/`), clinical notes (`clinical/`)
 - `datalake/` -- Source of truth for all JSON data
-- `paper/` -- Academic preprint (LaTeX)
+- `governance/` -- Policy (`policy/`), ethics, process (DECISION-LOG + TRANSPARENCY auto-generated)
 - `tools/` -- neurowall, neurosim, macshield
 - `scripts/` -- Build + data pipelines
-- `governance/` -- Policy (`policy/`), ethics, process (DECISION-LOG + TRANSPARENCY auto-generated)
-- `blogs/` -- Astro content collection (`type: case-study` routes to `/research/papers/`)
-- `docs/` -- GitHub Pages build output (don't edit HTML) + working docs in `learn/`, `product/`, `research/`
+- `site/` -- GitHub Pages build output (don't edit directly) + static assets
+- `static/` -- Unprocessed assets served at site root
 
 ## Key Commands
 `npm run dev` | `npm run build` | `npm run health` (validate sync) | `npm run governance` (regen from derivation log)

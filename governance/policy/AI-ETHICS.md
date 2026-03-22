@@ -627,7 +627,7 @@ That is the blank slate argument. The opportunity to embed these principles at t
 
 ## Operational AI Conduct Principles
 
-This document covers the academic and regulatory landscape of AI ethics. For the operational principles that govern how AI systems actually behave within this project — Asimov's Three Laws reframed for AI, consent as architecture, human-in-the-loop as non-negotiable, neural data at the highest protection tier, and defensive framing only — see **[AI-ETHICS-PROPOSAL.md](https://github.com/qinnovates/qinnovate/blob/main/governance/policy/AI-ETHICS-PROPOSAL.md)**.
+This document covers the academic and regulatory landscape of AI ethics. For the operational principles that govern how AI systems actually behave within this project — Asimov's Three Laws reframed for AI, consent as architecture, human-in-the-loop as non-negotiable, neural data at the highest protection tier, and defensive framing only — see **[AI-ETHICS-PROPOSAL.md](https://github.com/qinnovates/neurosecurity/blob/main/governance/policy/AI-ETHICS-PROPOSAL.md)**.
 
 That document translates the frameworks surveyed here into enforceable conduct rules for any AI agent operating on this codebase.
 

@@ -17,7 +17,7 @@ personal/
 .DS_Store
 
 # Build artifacts
-docs/data/
+site/data/
 
 # Rust
 **/target/
@@ -40,11 +40,11 @@ fact-check-report.json
 .vercel
 
 # Audio files (too large for git)
-docs/learn/autodidactive/auditory/**/*.mp3
+site/learn/autodidactive/auditory/**/*.mp3
 *.wav
 
 # EEG data files (downloaded via shared/scripts/download-eeg-samples.py)
-qif-framework/qif-lab/data/
+model/qif-lab/data/
 *.edf
 *.bdf
 *.mat
