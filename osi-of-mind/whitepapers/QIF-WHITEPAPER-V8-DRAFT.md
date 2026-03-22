@@ -489,15 +489,15 @@ Visualizations that exist on the site and can be referenced/embedded in the whit
 
 | Document | Lines | Purpose |
 |----------|-------|---------|
-| `model/specs/RUNEMATE.md` | 2960 | Full Runemate specification |
-| `model/specs/NSP-PROTOCOL-SPEC.md` | — | Full NSP protocol spec |
-| `model/GUARDRAILS.md` | 200 | 8 neuroethics → neurosecurity guardrails |
+| `osi-of-mind/specs/RUNEMATE.md` | 2960 | Full Runemate specification |
+| `osi-of-mind/specs/NSP-PROTOCOL-SPEC.md` | — | Full NSP protocol spec |
+| `osi-of-mind/GUARDRAILS.md` | 200 | 8 neuroethics → neurosecurity guardrails |
 | `governance/policy/QIF-NEUROETHICS.md` | 564 | 12 open ethical questions |
 | `governance/QIF-GOVERNANCE-QUESTIONS.md` | 631 | 30+ governance questions, RACI matrix |
-| `model/specs/qif-sec-guardrails.md` | 425 | Physics-derived security architecture |
-| `model/QIF-DERIVATION-LOG.md` | — | Decision and derivation journal |
-| `model/QIF-FIELD-JOURNAL.md` | — | Personal/experiential observations |
-| `model/QIF-RESEARCH-SOURCES.md` | — | Living research citation catalog |
+| `osi-of-mind/specs/qif-sec-guardrails.md` | 425 | Physics-derived security architecture |
+| `osi-of-mind/QIF-DERIVATION-LOG.md` | — | Decision and derivation journal |
+| `osi-of-mind/QIF-FIELD-JOURNAL.md` | — | Personal/experiential observations |
+| `osi-of-mind/QIF-RESEARCH-SOURCES.md` | — | Living research citation catalog |
 | `governance/INFORMED_CONSENT_FRAMEWORK.md` | 446 | Consent protocols (incl. pediatric) |
 | `governance/NEUROSECURITY_GOVERNANCE.md` | — | Unified governance framework |
 | `governance/TRANSPARENCY.md` | 275 | Human-AI collaboration audit trail |

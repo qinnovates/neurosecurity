@@ -9,7 +9,7 @@ TRANSPARENCY="$REPO_ROOT/governance/TRANSPARENCY.md"
 # Check multiple possible locations for the Derivation Log
 DERIV_LOG=""
 for candidate in \
-    "$REPO_ROOT/model/QIF-DERIVATION-LOG.md" \
+    "$REPO_ROOT/osi-of-mind/QIF-DERIVATION-LOG.md" \
     "$REPO_ROOT/../mindloft/drafts/ai-working/QIF-DERIVATION-LOG.md" \
     "$REPO_ROOT/../drafts/ai-working/QIF-DERIVATION-LOG.md"; do
     if [ -f "$candidate" ]; then
@@ -39,5 +39,5 @@ if [ -n "$DERIV_LOG" ] && [ -f "$DERIV_LOG" ]; then
     fi
 else
     echo "WARNING: Derivation Log not found."
-    echo "Checked: model/, ../mindloft/drafts/ai-working/, ../drafts/ai-working/"
+    echo "Checked: osi-of-mind/, ../mindloft/drafts/ai-working/, ../drafts/ai-working/"
 fi

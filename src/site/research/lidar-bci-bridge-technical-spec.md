@@ -740,7 +740,7 @@ Each Phase 2 experiment follows this protocol:
 
 ## 12. Field Test Findings (2026-03-14)
 
-First device deployment of QIF-LiDAR on iPhone 16 Pro Max. The following findings emerged from hands-on testing. See also: [Derivation Log Entry 91](../../model/QIF-DERIVATION-LOG.md#entry-91-lidar-sensor-limitations).
+First device deployment of QIF-LiDAR on iPhone 16 Pro Max. The following findings emerged from hands-on testing. See also: [Derivation Log Entry 91](../../osi-of-mind/QIF-DERIVATION-LOG.md#entry-91-lidar-sensor-limitations).
 
 ### 12.1 iPhone LiDAR Sensor Limitations
 
@@ -800,7 +800,7 @@ The camera captures everything. ML decides what matters. The output to the brain
 
 **Security implication:** If the camera is primary, adversarial attacks on the visual classifier (adversarial patches, perturbation attacks) become the highest-priority threat vector, not depth sensor spoofing. The ML model IS the prosthesis — a compromised model is a compromised sense. This makes model integrity a patient safety issue, not just a cybersecurity concern. Multi-sensor fusion provides defense-in-depth: an attacker who fools the RGB classifier still faces depth data that contradicts the false classification.
 
-See also: [Derivation Log Entry 92](../../model/QIF-DERIVATION-LOG.md#entry-92-sensor-hierarchy).
+See also: [Derivation Log Entry 92](../../osi-of-mind/QIF-DERIVATION-LOG.md#entry-92-sensor-hierarchy).
 
 ### 12.5 Phosphene Color Ramp Design
 

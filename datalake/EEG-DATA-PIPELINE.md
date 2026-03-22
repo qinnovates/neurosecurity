@@ -137,7 +137,7 @@ npm run eeg:download -- --all
 npm run eeg:download -- --all --dry-run
 ```
 
-Downloads are saved to `model/qif-lab/data/<dataset-id>/` with `ATTRIBUTION.json` and `ATTRIBUTION.md` generated per dataset. Large data files (`.edf`, `.mat`, `.bdf`) are gitignored.
+Downloads are saved to `osi-of-mind/qif-lab/data/<dataset-id>/` with `ATTRIBUTION.json` and `ATTRIBUTION.md` generated per dataset. Large data files (`.edf`, `.mat`, `.bdf`) are gitignored.
 
 ## File Reference
 
@@ -146,7 +146,7 @@ Downloads are saved to `model/qif-lab/data/<dataset-id>/` with `ATTRIBUTION.json
 | `shared/eeg-samples.json` | Dataset registry (source of truth) |
 | `shared/scripts/download-eeg-samples.py` | Download script with attribution generation |
 | `src/lib/kql-tables.ts` | KQL table builder (includes `eeg_samples` table) |
-| `model/qif-lab/data/` | Downloaded data directory (gitignored) |
+| `osi-of-mind/qif-lab/data/` | Downloaded data directory (gitignored) |
 | `.gitignore` | Excludes `.edf`, `.mat`, `.bdf` data files |
 
 ## Citation

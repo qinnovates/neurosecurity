@@ -178,13 +178,13 @@ function checkGovernanceSync() {
   console.log(`\n${GREEN}[health]${RESET} Checking governance sync...`);
 
   // 1. Derivation log exists
-  const derivLogPath = 'model/QIF-DERIVATION-LOG.md';
+  const derivLogPath = 'osi-of-mind/QIF-DERIVATION-LOG.md';
   if (fileExists(derivLogPath)) {
     const content = readText(derivLogPath);
     const entryHeaders = content.match(/^## Entry \d+/gm) || [];
     pass(`Derivation log: ${entryHeaders.length} entries`);
   } else {
-    fail('model/QIF-DERIVATION-LOG.md missing');
+    fail('osi-of-mind/QIF-DERIVATION-LOG.md missing');
   }
 
   // 2. Decision log AUTO-GENERATED header
@@ -269,11 +269,11 @@ function checkCountConsistency() {
 
   // Check additional files for stale technique counts
   const additionalFiles = [
-    'model/whitepapers/QIF-TRUTH.md',
-    'model/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md',
-    'model/whitepapers/QIF-WHITEPAPER.md',
-    'model/tara-threat/README.md',
-    'model/README.md',
+    'osi-of-mind/whitepapers/QIF-TRUTH.md',
+    'osi-of-mind/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md',
+    'osi-of-mind/whitepapers/QIF-WHITEPAPER.md',
+    'osi-of-mind/tara-threat/README.md',
+    'osi-of-mind/README.md',
     'datalake/QIF-DATA-MAPPING.md',
     'src/data/convergence-data.ts',
   ];
@@ -297,7 +297,7 @@ function checkCountConsistency() {
   }
 
   // Check derivation log entry count vs governance reports
-  const derivLogPath = 'model/QIF-DERIVATION-LOG.md';
+  const derivLogPath = 'osi-of-mind/QIF-DERIVATION-LOG.md';
   const transparencyPath = 'governance/TRANSPARENCY.md';
   if (fileExists(derivLogPath) && fileExists(transparencyPath)) {
     const derivContent = readText(derivLogPath);

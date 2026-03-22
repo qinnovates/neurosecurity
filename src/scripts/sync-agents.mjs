@@ -45,7 +45,7 @@ function getStructure() {
     structure += `  - \`components/\`: React/Astro components
   - \`layouts/\`: Page layouts
   - \`lib/\`: Utility functions and constants
-- \`model/\`: QIF security specification docs
+- \`osi-of-mind/\`: QIF security specification docs
 - \`governance/\`: Policy and ethics documents
 - \`datalake/\`: Shared data (Source of Truth)
 - \`public/\`: Static assets

@@ -1,7 +1,7 @@
 ---
 paths:
   - "research/paper/**"
-  - "model/QIF-RESEARCH-SOURCES.md"
+  - "osi-of-mind/QIF-RESEARCH-SOURCES.md"
   - "datalake/research-registry.json"
 ---
 

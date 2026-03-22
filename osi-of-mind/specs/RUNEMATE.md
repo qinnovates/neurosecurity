@@ -7,7 +7,7 @@
 > **Author:** Kevin Qi
 > **Parent Framework:** QIF (Quantified Interconnection Framework)
 > **Delivery Protocol:** NSP (Neural Sensory Protocol)
-> **Integration Roadmap:** [model/specs/INTEGRATION-ROADMAP.md](INTEGRATION-ROADMAP.md)
+> **Integration Roadmap:** [osi-of-mind/specs/INTEGRATION-ROADMAP.md](INTEGRATION-ROADMAP.md)
 
 ---
 
@@ -77,7 +77,7 @@ But the deeper innovation is this: Staves is not compressed HTML — it is the f
 
 **Goals may change.** The multimodal architecture is grounded in neuroscience research (topographic cortical maps), but cortical rendering is unvalidated at consumer scale. No commercial BCI does inward rendering today. As hardware matures and clinical data emerges, the bytecode format, safety bounds, and modality support may change significantly. We document what we know, flag what we don't, and update when we learn.
 
-> See `model/runemate/forge/STATUS.md` for the canonical engineering status document.
+> See `osi-of-mind/runemate/forge/STATUS.md` for the canonical engineering status document.
 
 ### State of the Art: How BCIs Work Today
 

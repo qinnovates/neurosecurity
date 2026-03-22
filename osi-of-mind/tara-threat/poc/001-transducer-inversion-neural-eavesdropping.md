@@ -187,4 +187,4 @@ Kevin's notes for future investigation:
 
 *Status: WIP. Kevin to revisit with Maxwell's derivation and physical test design.*
 *Created: 2026-02-10*
-*Location: qinnovates/qinnovate/model/tara-threat/*
+*Location: qinnovates/qinnovate/osi-of-mind/tara-threat/*

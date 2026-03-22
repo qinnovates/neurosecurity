@@ -60,7 +60,7 @@ NUMERICAL_CLAIM_PATTERN = re.compile(
 
 # URLs to skip (anchors within same repo, relative paths)
 SKIP_URL_PREFIXES = [
-    'https://github.com/qinnovates/qinnovate/blob/main/model/QIF-FIELD-JOURNAL.md#',
+    'https://github.com/qinnovates/qinnovate/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#',
 ]
 
 # Source patterns that indicate a claim is backed

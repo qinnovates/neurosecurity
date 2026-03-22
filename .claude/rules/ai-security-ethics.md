@@ -1,6 +1,6 @@
 ---
 paths:
-  - "model/**"
+  - "osi-of-mind/**"
   - "governance/**"
   - "research/paper/**"
   - "research/blog/**"

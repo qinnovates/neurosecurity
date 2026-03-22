@@ -16,7 +16,7 @@ A ground-up architectural redesign of BCI security, built from neuroscience cons
 ## Structure
 
 ```
-model/
+osi-of-mind/
 ├── specs/                          # Core specifications
 │   ├── NSP-PROTOCOL-SPEC.md       # Neural Sensory Protocol v0.5 (post-quantum)
 │   ├── RUNEMATE.md                # Neural rendering compiler (Staves DSL)

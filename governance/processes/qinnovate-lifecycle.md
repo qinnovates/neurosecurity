@@ -109,7 +109,7 @@ VERA represents Qinnovate's maturation from a development-focused lifecycle to a
 
 - [Research Lifecycle Diagram](../README.md#-research-lifecycle-continuous-innovation-cycle)
 - [Governance Standards](../governance/)
-- [QIF Framework](../model/)
+- [QIF Framework](../osi-of-mind/)
 - [ONI Framework](../oni-framework/)
 
 ---
