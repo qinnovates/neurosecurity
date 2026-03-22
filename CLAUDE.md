@@ -1,7 +1,7 @@
 # Claude-Specific Configuration
 
 Read `AGENTS.md` for project context, commands, structure, and guidelines.
-Each subdirectory has its own `AGENTS.md` with directory-specific context.
+When entering any directory, read its `AGENTS.md` for local context. There are no subdirectory CLAUDE.md files — all directory context lives in AGENTS.md.
 
 ## Protocols Index
 
