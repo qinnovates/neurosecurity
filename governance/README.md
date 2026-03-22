@@ -6,6 +6,11 @@ Neuroethics, regulatory compliance, and process documents for the QIF framework.
 
 ```
 governance/
+├── CHANGELOG.md                 # Project changelog
+├── CODE_OF_CONDUCT.md           # Code of conduct (includes former DISCLAIMER.md)
+├── CONTRIBUTING.md              # Contribution guidelines
+├── SECURITY.md                  # Security policy
+├── CONTEXT.md                   # Root project context (AI agent entry point)
 ├── DECISION-LOG.md              # Auto-generated from derivation log
 ├── TRANSPARENCY.md              # Auto-generated from derivation log
 ├── SHIP-LOG.md                  # Feature release tracking
@@ -39,7 +44,7 @@ npm run governance
 
 ## Community
 
-See [Code of Conduct](../CODE_OF_CONDUCT.md) at the repo root.
+See [Code of Conduct](CODE_OF_CONDUCT.md) in this directory.
 
 ---
 

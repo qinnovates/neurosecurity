@@ -47,6 +47,7 @@ model/
 ├── research/                       # Research methodology and hypotheses
 ├── (qif-lab archived to _archive/)
 ├── tara-threat/                    # TARA threat catalog
+├── tools/                          # Security tools (neurowall, neurosim, macshield)
 └── images/                         # Diagrams
 ```
 

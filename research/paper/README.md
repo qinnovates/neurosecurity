@@ -41,7 +41,7 @@ cd paper
 # Build PDF
 make pdf
 
-# Build and deploy to docs/papers/
+# Build and deploy to src/site/papers/
 make deploy
 
 # Generate figures
@@ -51,7 +51,7 @@ make figures
 make clean
 ```
 
-The `make deploy` target copies the compiled PDF to `docs/papers/qif-bci-security-2026.pdf`, which is served by GitHub Pages.
+The `make deploy` target copies the compiled PDF to `src/site/papers/qif-bci-security-2026.pdf`, which is served by GitHub Pages.
 
 ## Structure
 

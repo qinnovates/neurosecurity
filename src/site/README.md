@@ -1,4 +1,4 @@
-# static/ -- Static Assets
+# site/ -- Built Output + Static Assets
 
 Files served as-is at the site root. Not processed by Astro's build pipeline.
 

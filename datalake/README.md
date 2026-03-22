@@ -17,7 +17,7 @@ This folder contains the unified BCI/neural security threat taxonomy using MITRE
 ## Files
 
 ```
-shared/
+datalake/
 ├── qtara-registrar.json         # 161 techniques, 16 tactics, MITRE-compatible (CURRENT)
 ├── qif-brain-bci-atlas.json     # Brain-BCI region mappings
 ├── qif-dsm-mappings.json        # DSM-5-TR diagnostic mappings
@@ -123,13 +123,7 @@ const grouped = Object.groupBy(registry.techniques, t => t.category);
 
 ## Source of Truth
 
-The canonical source is `config.py` in the QIF Lab. The JSON is generated via:
-
-```bash
-cd qif-lab && python generate_threat_registry.py
-```
-
-Change config.py, re-run the generator, copy to this repo. As-code, single source of truth.
+The canonical source is `config.py` (archived to `_archive/qif-lab/`). The JSON is generated via the registrar update protocol. See `.claude/rules/registrar.md` for the full workflow.
 
 ---
 
