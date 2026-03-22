@@ -17,7 +17,7 @@ personal/
 .DS_Store
 
 # Build artifacts
-site/data/
+src/site/data/
 
 # Rust
 **/target/

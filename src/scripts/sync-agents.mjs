@@ -62,7 +62,7 @@ const techStack = `## Tech Stack
 const guidelines = `## Guidelines
 - Use Semantic HTML.
 - Follow Tailwind v4 conventions.
-- Update \`datalake/\` JSON files for data changes, which are copied to \`site/data\` during build.
+- Update \`datalake/\` JSON files for data changes, which are copied to \`src/site/data\` during build.
 - Documentation is a primary product; keep markdown clean and standard.
 `;
 

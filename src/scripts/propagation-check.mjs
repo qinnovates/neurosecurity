@@ -108,16 +108,16 @@ function checkDataConsistency() {
   }
 
   // 2. KQL tables JSON
-  const kqlPath = 'site/data/kql-tables.json';
+  const kqlPath = 'src/site/data/kql-tables.json';
   if (fileExists(kqlPath)) {
     try {
       readJSON(kqlPath);
       pass(`KQL tables present (${fileSizeKB(kqlPath)}KB)`);
     } catch {
-      fail('site/data/kql-tables.json exists but is invalid JSON');
+      fail('src/site/data/kql-tables.json exists but is invalid JSON');
     }
   } else {
-    warn('site/data/kql-tables.json missing (run: npm run prebuild)');
+    warn('src/site/data/kql-tables.json missing (run: npm run prebuild)');
   }
 
   // 3. Parquet catalog
@@ -347,11 +347,11 @@ function checkBuildArtifacts() {
   }
 
   // Check KQL tables staleness
-  const kqlPath = 'site/data/kql-tables.json';
+  const kqlPath = 'src/site/data/kql-tables.json';
   if (fileExists(kqlPath) && newestSharedMtime > 0) {
     const kqlMtime = fileMtime(kqlPath);
     if (kqlMtime < newestSharedMtime) {
-      warn(`site/data/kql-tables.json is older than datalake/${newestSharedFile} (run: npm run prebuild)`);
+      warn(`src/site/data/kql-tables.json is older than datalake/${newestSharedFile} (run: npm run prebuild)`);
     } else {
       pass('KQL tables up to date');
     }
