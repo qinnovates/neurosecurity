@@ -1,6 +1,6 @@
 # Claude-Specific Configuration
 
-Read `CONTEXT.md` for project context, commands, structure, and guidelines.
+Read `governance/CONTEXT.md` for project context, commands, structure, and guidelines.
 When entering any directory, read its `CONTEXT.md` for local context. There are no subdirectory CLAUDE.md files — all directory context lives in CONTEXT.md.
 
 ## Protocols Index
