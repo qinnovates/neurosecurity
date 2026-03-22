@@ -1,8 +1,8 @@
 <div align="center">
 
-![divider](https://raw.githubusercontent.com/qinnovates/qinnovate/main/docs/images/divider-qinnovate.svg)
+![divider](https://raw.githubusercontent.com/qinnovates/neurosecurity/main/site/images/divider-qinnovate.svg)
 
-# Qinnovate
+# Neurosecurity
 
 **Open security research for brain-computer interfaces**
 
@@ -16,7 +16,25 @@
 
 > **By using this repository, you consent to the terms in [DISCLAIMER.md](DISCLAIMER.md).** This is early-stage research — not a validated standard, not a clinical tool, not production software. The human brain is not a test environment. See [DISCLAIMER.md](DISCLAIMER.md), [Code of Conduct](CODE_OF_CONDUCT.md), and [Security Policy](SECURITY.md).
 
-This project asks a question that no existing framework has systematically addressed: **what happens to a patient when their brain-computer interface is compromised?** Not the data. Not the device. The person.
+## What is Neurosecurity?
+
+**Neurosecurity** (Denning, Matsuoka & Kohno, 2009) is the study of two complementary questions:
+
+**Applied Neurosecurity** — How do we defend neural systems with the tools we have? Threat models, severity scoring, encryption, real-time monitoring. This is traditional security thinking applied to brain-computer interfaces: known threats, known defenses, engineering that works today.
+
+**Foundational Neurosecurity** — What new threats, rights, and principles emerge as BCIs evolve? What does the brain's own architecture teach us about security? Where are the boundaries between attack and therapy, surveillance and monitoring, data and identity? This is the work that needs to happen before the technology outpaces our ability to govern it.
+
+| | Applied | Foundational |
+|---|---|---|
+| **Question** | How do we defend neural systems? | What are we defending, and from what? |
+| **Timeframe** | Now — build with today's tools | Ahead — prepare for tomorrow's threats |
+| **Method** | Engineering | Research + philosophy |
+| **Output** | Tools, protocols, detections | Principles, rights, governance |
+| **In this repo** | TARA, NISS, NSP, Neurowall, QIF Model | Governance questions, neurorights, dual-use insight, consent boundaries |
+
+Applied without foundational is blind — you're defending something you don't understand. Foundational without applied is toothless — you're philosophizing without building anything.
+
+This project does both. It asks a question no existing framework has systematically addressed: **what happens to a patient when their brain-computer interface is compromised?** Not the data. Not the device. The person.
 
 ---
 
@@ -39,8 +57,8 @@ WHERE severity = 'critical' ORDER BY niss_score DESC;
 
 **Run the site locally:**
 ```bash
-git clone https://github.com/qinnovates/qinnovate.git
-cd qinnovate && npm ci && npm run dev
+git clone https://github.com/qinnovates/neurosecurity.git
+cd neurosecurity && npm ci && npm run dev
 ```
 
 **Validate everything:**
@@ -55,51 +73,41 @@ npm run build     # Build site (282 pages)
 
 The author is a security engineer with ~15 years of IT and security infrastructure experience, not a mathematician, physicist, or neuroscientist. AI tools (primarily Claude, with Gemini and ChatGPT for cross-validation) were used extensively. All AI-derived claims should be treated as **proposed and unvalidated** until independently verified by domain experts.
 
-**Full transparency:** [Transparency Statement](governance/TRANSPARENCY.md) | [Derivation Log](model/QIF-DERIVATION-LOG.md) (99+ entries) | [Decision Log](governance/DECISION-LOG.md) | [Validation Status](model/VALIDATION.md)
+**Full transparency:** [Transparency Statement](governance/TRANSPARENCY.md) | [Derivation Log](model/QIF-DERIVATION-LOG.md) (113 entries) | [Decision Log](governance/DECISION-LOG.md) | [Validation Status](model/VALIDATION.md)
 
 ---
 
 ## Repository Structure
 
 ```
-qinnovate/
+neurosecurity/
 ├── src/                              # Astro 5 website (qinnovate.com)
-│   ├── pages/data-studio/            # Dataset browser + EEG viewer
-│   ├── components/data-studio/       # DataStudioBrowser, EEGBrowser, SQLConsole
-│   ├── hooks/useDuckDB.ts            # DuckDB-WASM singleton (CDN-loaded)
-│   └── lib/kql-tables.ts             # Universal KQL table builder
+├── site/                             # Built site output (GitHub Pages)
 │
-├── model/                    # QIF specification + implementations
-│   ├── nsp/nsp-core/                 # Neural Sensory Protocol (Rust, PQ-secure)
-│   ├── runemate/forge/               # Runemate DSL compiler (Rust)
-│   ├── QIF-DERIVATION-LOG.md         # 99+ entries — single source of truth
+├── model/                            # QIF Model — specs, whitepapers, derivation logs
+│   ├── specs/                        # NSP, Runemate, NISS, guardrails
+│   ├── whitepapers/                  # v6.3, v8.0 draft, wiki, truth
+│   ├── QIF-DERIVATION-LOG.md         # 113 entries — single source of truth
 │   ├── QIF-FIELD-JOURNAL.md          # First-person research observations
 │   └── QIF-RESEARCH-SOURCES.md       # 340+ verified sources
 │
-├── shared/                           # Cross-cutting data + tools (datalake)
+├── research/                         # Blog posts, academic paper, clinical notes
+│   ├── blog/                         # Field journal entries + technical posts
+│   ├── paper/                        # LaTeX preprint (Zenodo DOI)
+│   └── clinical/                     # Clinical research notes (threat modeling refs)
+│
+├── datalake/                         # Source of truth for all data
 │   ├── qtara-registrar.json          # TARA techniques (161, CVSS + NISS)
 │   ├── impact-chains.json            # Precomputed threat-to-outcome chains
-│   ├── bci-landscape.json            # 57 companies, 68 devices
-│   ├── eeg-samples.json              # 16 EEG datasets with TARA mappings
-│   ├── qtara/                        # Python SDK (pip install qtara)
-│   └── scripts/                      # Data pipeline scripts
+│   └── qtara/                        # Python SDK (pip install qtara)
 │
 ├── governance/                       # Ethics, consent, policy, audit trail
-│   ├── TRANSPARENCY.md               # AI disclosure (auto-generated)
-│   ├── DECISION-LOG.md               # RACI decisions + ship status (auto-generated)
-│   └── CODE_OF_CONDUCT.md            # Contributor guidelines
+│   ├── policy/                       # 10 policy documents (neurorights, consent, accessibility)
+│   ├── DECISION-LOG.md               # Auto-generated from derivation log
+│   └── TRANSPARENCY.md               # Auto-generated AI disclosure
 │
+├── tools/                            # Security tools (neurowall, neurosim, macshield)
 ├── scripts/                          # Build + data pipelines
-│   ├── generate-parquet.py           # JSON → Parquet (PyArrow, Zstd L3)
-│   ├── generate-kql-json.mjs         # KQL tables → static JSON for browser
-│   ├── generate-governance.mjs       # Derivation log → Decision/Transparency
-│   ├── process-eeg-to-parquet.py     # MNE-Python EEG preprocessing
-│   └── governance-precommit.sh       # Sensitive data scanner (pre-commit hook)
-│
-├── paper/                            # Academic publications (LaTeX)
-├── tools/                            # Security tools (neurowall, macshield)
-├── docs/                             # Built site + static data
-│   └── data/parquet/                 # 31 Parquet datasets (722KB total)
 └── .github/workflows/                # CI/CD (deploy, audit, sync)
 ```
 
@@ -343,7 +351,7 @@ This project uses a **single-source-of-truth model** for decision tracking. One 
 ```
                     ┌──────────────────────────────┐
                     │  QIF-DERIVATION-LOG.md       │  ← Single source of truth
-                    │  (99+ entries, lab notebook)  │     Write here. Everything else derives.
+                    │  (113 entries, lab notebook)  │     Write here. Everything else derives.
                     └──────────┬───────────────────┘
                                │
               ┌────────────────┼────────────────┐
