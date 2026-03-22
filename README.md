@@ -139,6 +139,8 @@ Solo research, tested honestly. Full methodology and limitations at **[VALIDATIO
 
 This is early-stage research by a solo researcher. Empirical validation requires BCI hardware, IRB approval, and clinical expertise. Everything is published openly so research groups with those resources can test, validate, refute, or extend it.
 
+</details>
+
 ---
 
 <details>
@@ -344,7 +346,7 @@ Both pipelines use exit code 2 (no changes) to skip unnecessary commits. Manual 
 ---
 
 <details>
-<summary><h2>Governance & Logging Architecture</h2></summary>
+<summary><strong>Governance & Logging Architecture</strong></summary>
 
 This project uses a **single-source-of-truth model** for decision tracking. One file captures everything; other documents are generated from it.
 
@@ -405,7 +407,7 @@ Pre-commit hook: `src/scripts/governance-precommit.sh` (13 regex patterns, white
 ---
 
 <details>
-<summary><h2>Developer Commands</h2></summary>
+<summary><strong>Developer Commands</strong></summary>
 
 All commands run from the repo root.
 
@@ -500,7 +502,7 @@ If AI tools were used in your contribution:
 ---
 
 <details>
-<summary><h2>Site Revision History</h2></summary>
+<summary><strong>Site Revision History</strong></summary>
 
 Each weekly snapshot is tagged in git. Click the tag to browse code at that point, or checkout locally to run the site (`git checkout <tag> && npm ci && npm run dev`).
 
@@ -518,7 +520,7 @@ Each weekly snapshot is tagged in git. Click the tag to browse code at that poin
 ---
 
 <details>
-<summary><h2>Browse the Full History</h2></summary>
+<summary><strong>Browse the Full History</strong></summary>
 
 Every decision, revision, and deleted line in this repository is preserved in git. You can time-travel to any point in the project's history using GitHub's native tools.
 
