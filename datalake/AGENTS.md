@@ -12,7 +12,7 @@
 
 ## Pipeline
 ```
-JSON source > prebuild copies to docs/data/ > generate-kql-json.mjs > generate-parquet.py
+JSON source > prebuild copies to site/data/ > generate-kql-json.mjs > generate-parquet.py
 ```
 Run `npm run prebuild` after any data change. Run `npm run health` to verify sync.
 
