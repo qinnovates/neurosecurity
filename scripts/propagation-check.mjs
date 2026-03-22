@@ -121,7 +121,7 @@ function checkDataConsistency() {
   }
 
   // 3. Parquet catalog
-  const catalogPath = 'site/data/parquet/catalog.json';
+  const catalogPath = 'datalake/parquet/catalog.json';
   if (fileExists(catalogPath)) {
     try {
       const catalog = readJSON(catalogPath);
@@ -130,14 +130,14 @@ function checkDataConsistency() {
         : Array.isArray(catalog) ? catalog.length : Object.keys(catalog).length;
       pass(`Parquet catalog present (${datasetCount} datasets)`);
     } catch {
-      fail('site/data/parquet/catalog.json exists but is invalid JSON');
+      fail('datalake/parquet/catalog.json exists but is invalid JSON');
     }
   } else {
-    warn('site/data/parquet/catalog.json missing (run: npm run prebuild)');
+    warn('datalake/parquet/catalog.json missing (run: npm run prebuild)');
   }
 
   // 4. Parquet file count vs catalog dataset count
-  const parquetDir = resolve(ROOT, 'site/data/parquet');
+  const parquetDir = resolve(ROOT, 'datalake/parquet');
   if (fileExists(catalogPath) && existsSync(parquetDir)) {
     try {
       const catalog = readJSON(catalogPath);
@@ -358,11 +358,11 @@ function checkBuildArtifacts() {
   }
 
   // Check parquet catalog staleness
-  const catalogPath = 'site/data/parquet/catalog.json';
+  const catalogPath = 'datalake/parquet/catalog.json';
   if (fileExists(catalogPath) && newestSharedMtime > 0) {
     const catMtime = fileMtime(catalogPath);
     if (catMtime < newestSharedMtime) {
-      warn(`site/data/parquet/catalog.json is older than datalake/${newestSharedFile} (run: npm run prebuild)`);
+      warn(`datalake/parquet/catalog.json is older than datalake/${newestSharedFile} (run: npm run prebuild)`);
     } else {
       pass('Parquet catalog up to date');
     }

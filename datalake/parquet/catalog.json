@@ -1,0 +1,636 @@
+{
+  "_meta": {
+    "generated": "2026-03-18T09:41:09.192029+00:00",
+    "compression": "zstd",
+    "compression_level": 3,
+    "pyarrow_version": "23.0.1",
+    "total_datasets": 31,
+    "total_rows": 6984
+  },
+  "datasets": {
+    "techniques": {
+      "rows": 161,
+      "columns": 27,
+      "column_names": [
+        "id",
+        "name",
+        "tactic",
+        "severity",
+        "status",
+        "bands",
+        "ui_category",
+        "dual_use",
+        "niss_score",
+        "niss_vector",
+        "niss_severity",
+        "niss_bi",
+        "niss_cr",
+        "niss_cd",
+        "niss_cv",
+        "niss_rv",
+        "niss_np",
+        "physics_tier",
+        "physics_tier_label",
+        "regulatory_cyber_device",
+        "regulatory_coverage",
+        "cvss_base_vector",
+        "origin_domain",
+        "origin_classical",
+        "origin_quantum",
+        "consent_tier",
+        "notes"
+      ],
+      "size_bytes": 36500,
+      "compression": "zstd",
+      "source": "docs/data/parquet/techniques.parquet"
+    },
+    "technique_dsm": {
+      "rows": 890,
+      "columns": 5,
+      "column_names": [
+        "technique_id",
+        "dsm_code",
+        "dsm_name",
+        "confidence",
+        "dsm_type"
+      ],
+      "size_bytes": 4138,
+      "compression": "zstd",
+      "source": "docs/data/parquet/technique_dsm.parquet"
+    },
+    "technique_neurorights": {
+      "rows": 452,
+      "columns": 2,
+      "column_names": [
+        "technique_id",
+        "right_code"
+      ],
+      "size_bytes": 1412,
+      "compression": "zstd",
+      "source": "docs/data/parquet/technique_neurorights.parquet"
+    },
+    "impact_chains": {
+      "rows": 4428,
+      "columns": 14,
+      "column_names": [
+        "technique_id",
+        "technique_name",
+        "severity",
+        "niss_score",
+        "band_id",
+        "band_name",
+        "region_id",
+        "region_name",
+        "pathway_id",
+        "pathway_name",
+        "neurotransmitter",
+        "dsm_code",
+        "dsm_name",
+        "dsm_cluster"
+      ],
+      "size_bytes": 14359,
+      "compression": "zstd",
+      "source": "docs/data/parquet/impact_chains.parquet"
+    },
+    "brain_regions": {
+      "rows": 38,
+      "columns": 19,
+      "column_names": [
+        "id",
+        "name",
+        "abbreviation",
+        "qif_band",
+        "parent_structure",
+        "depth_class",
+        "hemisphere",
+        "function",
+        "response_latency_ms",
+        "oscillation_bands",
+        "connections",
+        "allen_atlas_id",
+        "brodmann_areas",
+        "how_it_works",
+        "sub_structures",
+        "processing_pipeline",
+        "signal_type",
+        "bci_relevance_detail",
+        "clinical_notes"
+      ],
+      "size_bytes": 64010,
+      "compression": "zstd",
+      "source": "docs/data/parquet/brain_regions.parquet"
+    },
+    "hourglass_bands": {
+      "rows": 11,
+      "columns": 7,
+      "column_names": [
+        "id",
+        "name",
+        "zone",
+        "determinacy",
+        "qi_range",
+        "severity_if_compromised",
+        "description"
+      ],
+      "size_bytes": 4024,
+      "compression": "zstd",
+      "source": "docs/data/parquet/hourglass_bands.parquet"
+    },
+    "companies": {
+      "rows": 57,
+      "columns": 16,
+      "column_names": [
+        "name",
+        "type",
+        "modality",
+        "founded",
+        "headquarters",
+        "status",
+        "acquired_by",
+        "funding_total_usd",
+        "funding_note",
+        "valuation_usd",
+        "employees_approx",
+        "security_posture",
+        "security_notes",
+        "company_category",
+        "device_count",
+        "tara_attack_surface"
+      ],
+      "size_bytes": 15128,
+      "compression": "zstd",
+      "source": "docs/data/parquet/companies.parquet"
+    },
+    "devices": {
+      "rows": 68,
+      "columns": 10,
+      "column_names": [
+        "name",
+        "type",
+        "channels",
+        "electrode_type",
+        "fda_status",
+        "units_deployed",
+        "first_human",
+        "price_usd",
+        "target_use",
+        "company"
+      ],
+      "size_bytes": 6656,
+      "compression": "zstd",
+      "source": "docs/data/parquet/devices.parquet"
+    },
+    "neural_pathways": {
+      "rows": 46,
+      "columns": 15,
+      "column_names": [
+        "id",
+        "name",
+        "type",
+        "neurotransmitter",
+        "origin",
+        "origin_band",
+        "targets",
+        "target_bands",
+        "function",
+        "bci_relevance",
+        "dsm_conditions",
+        "dsm_names",
+        "disruption_effects",
+        "therapeutic_applications",
+        "confidence"
+      ],
+      "size_bytes": 18317,
+      "compression": "zstd",
+      "source": "docs/data/parquet/neural_pathways.parquet"
+    },
+    "neurotransmitters": {
+      "rows": 18,
+      "columns": 15,
+      "column_names": [
+        "id",
+        "name",
+        "abbreviation",
+        "chemical_class",
+        "synthesis_pathway",
+        "degradation",
+        "transporter",
+        "vesicular_transporter",
+        "receptors",
+        "cofactor_dependencies",
+        "primary_qif_bands",
+        "primary_regions",
+        "dsm_conditions",
+        "bci_relevance",
+        "confidence"
+      ],
+      "size_bytes": 36747,
+      "compression": "zstd",
+      "source": "docs/data/parquet/neurotransmitters.parquet"
+    },
+    "dsm_clusters": {
+      "rows": 1,
+      "columns": 8,
+      "column_names": [
+        "cognitive_psychotic",
+        "mood_trauma",
+        "substance_impulse",
+        "neurodevelopmental",
+        "somatic_sleep",
+        "motor_neurocognitive",
+        "persistent_personality",
+        "non_diagnostic"
+      ],
+      "size_bytes": 22979,
+      "compression": "zstd",
+      "source": "docs/data/parquet/dsm_clusters.parquet"
+    },
+    "neurological_conditions": {
+      "rows": 50,
+      "columns": 12,
+      "column_names": [
+        "id",
+        "code",
+        "name",
+        "category",
+        "subcategory",
+        "definition",
+        "pathway_ids",
+        "bands",
+        "bci_attack_vector",
+        "niss_primary",
+        "niss_affected",
+        "confidence"
+      ],
+      "size_bytes": 12734,
+      "compression": "zstd",
+      "source": "docs/data/parquet/neurological_conditions.parquet"
+    },
+    "cranial_nerves": {
+      "rows": 12,
+      "columns": 19,
+      "column_names": [
+        "id",
+        "number",
+        "name",
+        "type",
+        "nuclei",
+        "fiber_types",
+        "neurotransmitters",
+        "neurotransmitter_details",
+        "qif_band",
+        "qif_band_rationale",
+        "qif_band_confidence",
+        "functions",
+        "course",
+        "bci_relevance",
+        "bci_devices",
+        "bci_notes",
+        "dsm_conditions",
+        "dsm_source",
+        "clinical_notes"
+      ],
+      "size_bytes": 25542,
+      "compression": "zstd",
+      "source": "docs/data/parquet/cranial_nerves.parquet"
+    },
+    "neuroendocrine": {
+      "rows": 7,
+      "columns": 20,
+      "column_names": [
+        "id",
+        "name",
+        "abbreviation",
+        "pathway",
+        "hypothalamic_hormone",
+        "co_releasing",
+        "pituitary_hormone",
+        "target_hormone",
+        "receptors",
+        "feedback_type",
+        "feedback_details",
+        "qif_band",
+        "qif_notes",
+        "functions",
+        "dsm_conditions",
+        "epigenetic_notes",
+        "bci_relevance",
+        "bci_notes",
+        "disruption_effects",
+        "confidence"
+      ],
+      "size_bytes": 34014,
+      "compression": "zstd",
+      "source": "docs/data/parquet/neuroendocrine.parquet"
+    },
+    "glial_cells": {
+      "rows": 6,
+      "columns": 12,
+      "column_names": [
+        "id",
+        "name",
+        "origin",
+        "subtypes",
+        "functions",
+        "markers",
+        "genes",
+        "molecular_markers",
+        "calcium_signaling",
+        "bci_relevance",
+        "qif_band",
+        "security_implications"
+      ],
+      "size_bytes": 23230,
+      "compression": "zstd",
+      "source": "docs/data/parquet/glial_cells.parquet"
+    },
+    "neurovascular": {
+      "rows": 1,
+      "columns": 11,
+      "column_names": [
+        "_metadata",
+        "blood_brain_barrier",
+        "cerebral_blood_supply",
+        "neurovascular_coupling",
+        "meninges",
+        "meningeal_spaces",
+        "cerebrospinal_fluid",
+        "glymphatic_system",
+        "meningeal_lymphatics",
+        "clinical_conditions",
+        "research_gaps"
+      ],
+      "size_bytes": 79403,
+      "compression": "zstd",
+      "source": "docs/data/parquet/neurovascular.parquet"
+    },
+    "receptors": {
+      "rows": 20,
+      "columns": 19,
+      "column_names": [
+        "id",
+        "name",
+        "type",
+        "superfamily",
+        "ligand",
+        "parent_neurotransmitter",
+        "gene_family",
+        "subunits",
+        "ion_selectivity",
+        "activation_requirements",
+        "signaling_mechanism",
+        "key_modulators",
+        "dependency_chain",
+        "brain_regions",
+        "function",
+        "pharmacological_agents",
+        "dsm_conditions",
+        "bci_relevance",
+        "confidence"
+      ],
+      "size_bytes": 43618,
+      "compression": "zstd",
+      "source": "docs/data/parquet/receptors.parquet"
+    },
+    "cve_mappings": {
+      "rows": 55,
+      "columns": 8,
+      "column_names": [
+        "cve_id",
+        "product",
+        "cvss",
+        "cwe",
+        "description",
+        "tara_techniques",
+        "category",
+        "validation"
+      ],
+      "size_bytes": 7420,
+      "compression": "zstd",
+      "source": "docs/data/parquet/cve_mappings.parquet"
+    },
+    "security_controls": {
+      "rows": 1,
+      "columns": 3,
+      "column_names": [
+        "_metadata",
+        "controls_by_band",
+        "nsp_layers"
+      ],
+      "size_bytes": 18543,
+      "compression": "zstd",
+      "source": "docs/data/parquet/security_controls.parquet"
+    },
+    "ethics_controls": {
+      "rows": 1,
+      "columns": 4,
+      "column_names": [
+        "MP",
+        "CL",
+        "MI",
+        "PC"
+      ],
+      "size_bytes": 6800,
+      "compression": "zstd",
+      "source": "docs/data/parquet/ethics_controls.parquet"
+    },
+    "guardrails": {
+      "rows": 8,
+      "columns": 6,
+      "column_names": [
+        "id",
+        "name",
+        "category",
+        "source",
+        "neuroethics",
+        "neurosecurity"
+      ],
+      "size_bytes": 7157,
+      "compression": "zstd",
+      "source": "docs/data/parquet/guardrails.parquet"
+    },
+    "neurosecurity_scores": {
+      "rows": 22,
+      "columns": 9,
+      "column_names": [
+        "device",
+        "type",
+        "purpose",
+        "n_techniques",
+        "overall_score",
+        "severity",
+        "subscores",
+        "details",
+        "vector"
+      ],
+      "size_bytes": 6364,
+      "compression": "zstd",
+      "source": "docs/data/parquet/neurosecurity_scores.parquet"
+    },
+    "research_explorer": {
+      "rows": 73,
+      "columns": 6,
+      "column_names": [
+        "name",
+        "subtitle",
+        "detail",
+        "contribution",
+        "domain",
+        "category"
+      ],
+      "size_bytes": 8337,
+      "compression": "zstd",
+      "source": "docs/data/parquet/research_explorer.parquet"
+    },
+    "research_institutions": {
+      "rows": 27,
+      "columns": 9,
+      "column_names": [
+        "id",
+        "name",
+        "fullName",
+        "country",
+        "lab",
+        "focus",
+        "researchers",
+        "layer",
+        "tags"
+      ],
+      "size_bytes": 6518,
+      "compression": "zstd",
+      "source": "docs/data/parquet/research_institutions.parquet"
+    },
+    "research_standards": {
+      "rows": 14,
+      "columns": 9,
+      "column_names": [
+        "id",
+        "name",
+        "body",
+        "scope",
+        "status",
+        "year",
+        "url",
+        "qifRelevance",
+        "tags"
+      ],
+      "size_bytes": 5619,
+      "compression": "zstd",
+      "source": "docs/data/parquet/research_standards.parquet"
+    },
+    "research_legislation": {
+      "rows": 12,
+      "columns": 8,
+      "column_names": [
+        "id",
+        "name",
+        "jurisdiction",
+        "year",
+        "type",
+        "neurorights",
+        "status",
+        "tags"
+      ],
+      "size_bytes": 3818,
+      "compression": "zstd",
+      "source": "docs/data/parquet/research_legislation.parquet"
+    },
+    "validation_registry": {
+      "rows": 9,
+      "columns": 12,
+      "column_names": [
+        "id",
+        "component",
+        "category",
+        "tiers",
+        "status",
+        "summary",
+        "methodology",
+        "results",
+        "limitations",
+        "source_docs",
+        "related_tara_ids",
+        "date"
+      ],
+      "size_bytes": 10963,
+      "compression": "zstd",
+      "source": "docs/data/parquet/validation_registry.parquet"
+    },
+    "eeg_samples": {
+      "rows": 26,
+      "columns": 19,
+      "column_names": [
+        "id",
+        "name",
+        "source",
+        "sourceUrl",
+        "type",
+        "condition",
+        "dsm5Code",
+        "channels",
+        "channelNames",
+        "samplingRateHz",
+        "format",
+        "license",
+        "redistributable",
+        "subjects",
+        "subjectBreakdown",
+        "paradigm",
+        "taraId",
+        "taraRelevance",
+        "notes"
+      ],
+      "size_bytes": 15127,
+      "compression": "zstd",
+      "source": "docs/data/parquet/eeg_samples.parquet"
+    },
+    "intel_feed": {
+      "rows": 258,
+      "columns": 10,
+      "column_names": [
+        "id",
+        "title",
+        "date",
+        "url",
+        "source",
+        "source_category",
+        "summary",
+        "tags",
+        "companies",
+        "fetched"
+      ],
+      "size_bytes": 63043,
+      "compression": "zstd",
+      "source": "docs/data/parquet/intel_feed.parquet"
+    },
+    "intel_sources": {
+      "rows": 211,
+      "columns": 8,
+      "column_names": [
+        "name",
+        "category",
+        "tier",
+        "url",
+        "rss_url",
+        "has_api",
+        "notes",
+        "intel_feed"
+      ],
+      "size_bytes": 14096,
+      "compression": "zstd",
+      "source": "docs/data/parquet/intel_sources.parquet"
+    },
+    "timeline": {
+      "rows": 1,
+      "columns": 3,
+      "column_names": [
+        "_metadata",
+        "current_stats",
+        "milestones"
+      ],
+      "size_bytes": 11798,
+      "compression": "zstd",
+      "source": "docs/data/parquet/timeline.parquet"
+    }
+  }
+}
