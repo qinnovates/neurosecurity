@@ -33,7 +33,7 @@ jobs:
           python-version: '3.11'
 
       - name: Generate blog posts from field journal
-        run: node scripts/field-journal-to-blog.mjs
+        run: node src/scripts/field-journal-to-blog.mjs
 
       - name: Detect new posts
         id: check
@@ -58,9 +58,9 @@ jobs:
           NEW_POSTS: ${{ steps.check.outputs.new_posts }}
         run: |
           if [ -n "$NEW_POSTS" ]; then
-            python3 scripts/verify/fact_check_field_journal.py --inject --ci --posts $NEW_POSTS
+            python3 src/scripts/verify/fact_check_field_journal.py --inject --ci --posts $NEW_POSTS
           else
-            python3 scripts/verify/fact_check_field_journal.py --inject --ci
+            python3 src/scripts/verify/fact_check_field_journal.py --inject --ci
           fi
 
       - name: Upload fact-check report

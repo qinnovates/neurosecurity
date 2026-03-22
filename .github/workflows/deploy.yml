@@ -34,7 +34,7 @@ jobs:
         run: npm ci
 
       - name: Fetch latest news
-        run: node scripts/fetch-news.mjs || true
+        run: node src/scripts/fetch-news.mjs || true
 
       - name: Build
         run: npm run build

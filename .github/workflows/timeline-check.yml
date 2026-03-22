@@ -23,9 +23,9 @@ jobs:
       - name: Run timeline check
         id: check
         continue-on-error: true
-        run: node scripts/timeline-check.mjs --dry-run
+        run: node src/scripts/timeline-check.mjs --dry-run
 
       - name: Warn if stale
         if: steps.check.outcome == 'failure'
         run: |
-          echo "::warning::QIF timeline stats appear stale. Run 'node scripts/timeline-check.mjs --fix' locally to update."
+          echo "::warning::QIF timeline stats appear stale. Run 'node src/scripts/timeline-check.mjs --fix' locally to update."

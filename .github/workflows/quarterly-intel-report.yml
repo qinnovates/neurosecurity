@@ -63,7 +63,7 @@ jobs:
           echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
 
       - name: Generate valuation chart
-        run: python3 scripts/generate-valuation-chart.py
+        run: python3 src/scripts/generate-valuation-chart.py
 
       - name: Compute data metrics
         id: metrics

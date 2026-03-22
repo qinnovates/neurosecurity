@@ -56,3 +56,5 @@ model/qif-lab/data/
 *.pem
 *.key
 credentials.*
+docs/
+drafts/
