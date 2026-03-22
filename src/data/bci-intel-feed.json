@@ -1,5 +1,477 @@
 [
   {
+    "id": "da92f235",
+    "title": "Dissociable contributions of cortical thickness and surface area to cognitive ageing: evidence from multiple longitudinal cohorts.",
+    "date": "2026-03-22",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]03[.]20[.]713139v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "Cortical volume, a widely-used marker of brain ageing, is the product of two genetically and developmentally dissociable morphometric features: thickness and area. However, it remains unclear whether ",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "22df1f20",
+    "title": "Transcranial ultrasound neuromodulation: A registry-based analysis of global clinical trials",
+    "date": "2026-03-22",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26000537?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: May–June 2026Source: Brain Stimulation, Volume 19, Issue 3Author(s): Aaron Loh, Grace Attalla, Ghazaleh Darmani, Can Sarica, Alexandre Boutet, Jürgen Germann, Gavin JB. Elias, Steven",
+    "tags": [
+      "research",
+      "opinion",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "df3e3c35",
+    "title": "Implant-friendly MRI of deep brain stimulation patients at 3T",
+    "date": "2026-03-22",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926001837?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: 1 May 2026Source: NeuroImage, Volume 331Author(s): Nur Izzati Huda Zulkarnain, Alireza Sadeghi-Tarakameh, Jeromy Thotland, Noam Harel, Yigitcan Eryaman",
+    "tags": [
+      "product",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "56385a2e",
+    "title": "Unlocking interbrain neural signatures differences during triadic cooperation and competition: Evidence from EEG hyperscanning",
+    "date": "2026-03-22",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926001825?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: 1 May 2026Source: NeuroImage, Volume 331Author(s): Yuqin Li, Senqi Li, Jiaxin Xie, Dezhong Yao, Fali Li, Peng Xu, Jintao Wu, Lin Jiang",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "4317edbf",
+    "title": "Enhancing the response inhibition skill of soccer players with repeated tDCS: a randomized controlled ERP study",
+    "date": "2026-03-22",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1738168",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "ObjectiveThis study investigated the effects of repeated transcranial direct current stimulation on response inhibition and sought to elucidate the underlying neurobehavioral mechanisms.MethodsIn a ra",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "b8598604",
+    "title": "Processing and analysis of portable EEG data for cognitive load assessment in neurotypical university students",
+    "date": "2026-03-22",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1737723",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "The use of electroencephalogram (EEG) to gain insight into cognitive and metacognitive processing during task execution is being pioneered in natural learning contexts; an opportunity not without its ",
+    "tags": [
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "2e9c964b",
+    "title": "Effects of escitalopram on synaptic density in the healthy human brain (2023)",
+    "date": "2026-03-22",
+    "url": "hxxps://www[.]nature[.]com/articles/s41380-023-02285-8",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.nature.com/articles/s41380-023-02285-8 Comments URL: https://news.ycombinator.com/item?id=47479615 Points: 1 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "f961403a",
+    "title": "Show HN: Mnemo – a universal local brain for projects, usable by multiple agents",
+    "date": "2026-03-22",
+    "url": "hxxps://github[.]com/joshndala/mnemo-agent",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://github.com/joshndala/mnemo-agent Comments URL: https://news.ycombinator.com/item?id=47479182 Points: 3 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "aceb8c7c",
+    "title": "Whole-Brain Connectomic Graph Model Enables Locomotion Control in Fruit Fly",
+    "date": "2026-03-22",
+    "url": "hxxps://arxiv[.]org/abs/2602[.]17997",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://arxiv.org/abs/2602.17997 Comments URL: https://news.ycombinator.com/item?id=47478878 Points: 2 # Comments: 0",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "7e6a8daf",
+    "title": "3Blue1Brown — This picture broke my brain [video]",
+    "date": "2026-03-22",
+    "url": "hxxps://www[.]youtube[.]com/watch?v=ldxFjLJ3rVY",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.youtube.com/watch?v=ldxFjLJ3rVY Comments URL: https://news.ycombinator.com/item?id=47478614 Points: 2 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "57898f35",
+    "title": "You can now buy a DIY quantum computer",
+    "date": "2026-03-22",
+    "url": "hxxps://www[.]newscientist[.]com/article/2520214-you-can-now-buy-a-diy-quantum-computer/",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.newscientist.com/article/2520214-you-can-now-buy-a-diy-quantum-computer/ Comments URL: https://news.ycombinator.com/item?id=47477852 Points: 2 # Comments: 2",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "478c4bf8",
+    "title": "Meta Funds University Teams To Explore Wider Applications Of sEMG Wristband Input - UploadVR",
+    "date": "2026-03-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikAFBVV95cUxOT0pCYlBIWTJWVkxreXhuc3F1cVFITUVrN1hlZm5lX0xTb2FCSkoyNldTSVJCSDVSWDlhbGZMd3BXZTdLeEVBYlNDX2ZIajhjWWVIS2h5NmFGYnQ1QWlmaGdTX1RuSTV6SVBLVVBzdlc1a0p5bUQ3NnNnSThKMG1HUDR5WkhmNzQ1WTV0Mjk3dDY?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Meta Funds University Teams To Explore Wider Applications Of sEMG Wristband Input&nbsp;&nbsp;UploadVR",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "6670e0f9",
+    "title": "LivaNova eyes 2027 launch of neural sleep apnoea therapy after FDA approval",
+    "date": "2026-03-20",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/livanova-eyes-2027-launch-of-neural-sleep-apnoea-therapy-after-fda-approval/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "LivaNova's aura6000 system delivers synchronised electrical pulses to the hypoglossal nerve to prevent airways collapse in OSA patients during sleep. The post LivaNova eyes 2027 launch of neural sleep",
+    "tags": [
+      "product",
+      "regulatory",
+      "clinical"
+    ],
+    "companies": [
+      "LivaNova"
+    ],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "dbc1620c",
+    "title": "Spectral Geometry of Infant Resting-State fNIRS Connectivity: Bilingual vs Monolingual",
+    "date": "2026-03-20",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]03[.]20[.]707714v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "Abstract. Purpose: We test whether bilingual versus monolingual language environments in early infancy are associated with differences in intrinsic functional organization measured from resting-state ",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "11567a43",
+    "title": "Longeviti Neuro Solutions Appoints T. Rowe Price CEO Robert W. Sharps to Board of Directors",
+    "date": "2026-03-20",
+    "url": "hxxps://www[.]globenewswire[.]com/news-release/2026/03/20/3259825/0/en/Longeviti-Neuro-Solutions-Appoints-T-Rowe-Price-CEO-Robert-W-Sharps-to-Board-of-Directors[.]html",
+    "source": "GlobeNewswire Biotech",
+    "source_category": "funding",
+    "summary": "T. Rowe Price CEO Robert Sharps joins Longeviti Neuro Solutions board, signaling growth as the company scales its AI-enabled neurotechnology platform.",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "efddffbd",
+    "title": "China Greenlights Commercial Brain Chips, Leapfrogs US Trials - The Tech Buzz",
+    "date": "2026-03-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimAFBVV95cUxQNVp5Qklrc0U4QkJMSk9JOEo1SXdVZDk1RFZ4TGkxNzVyZmtabDJWS0lOMUcwanBUNWpyMXdTSDVsMVg3Q0ViUEtITWZxbjJHZkFBeVJwa1hFX0I2NG9aMnFXdkk5YWRzdllPRjUxTlVKVnNscmFJV0xJdE5temQ3X3RVQlJjSTRGR2hLTVJIR0hSSmhXNzA0Zg?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "China Greenlights Commercial Brain Chips, Leapfrogs US Trials&nbsp;&nbsp;The Tech Buzz",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "8628d20d",
+    "title": "Five Canadian scaleups crack Thrive Top 50 AgTech Companies list",
+    "date": "2026-03-19",
+    "url": "hxxps://betakit[.]com/five-canadian-scaleups-crack-thrive-top-50-agtech-companies-list/",
+    "source": "BetaKit",
+    "source_category": "news",
+    "summary": "4AG Robotics, BinSentry, among companies recognized as “most innovative scaleups.” The post Five Canadian scaleups crack Thrive Top 50 AgTech Companies list first appeared on BetaKit.",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "7d9c4548",
+    "title": "New Radio Wave Therapy for 1 in 3 Brain Disorders",
+    "date": "2026-03-19",
+    "url": "hxxps://neurosciencenews[.]com/trfs-radio-frequency-brain-stimulation-30338/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study reveals how precise radio waves can bypass the skull to treat neurological diseases without surgery or drugs.",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "d8b60c28",
+    "title": "Near-invisible c-VEP-based passive BCI for mental workload monitoring",
+    "date": "2026-03-19",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae4ff6",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Flickering visual stimuli, either periodic steady-state visual evoked potential (VEP) or aperiodic code-based VEP (c-VEP), have shown strong potential for implementing reactive brain–comput",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "886bab97",
+    "title": "Temporal dynamics and heterogeneity of oligodendrocytes lineage responses to intracortical electrode implantation",
+    "date": "2026-03-19",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae50bd",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Implantable neural electrodes are essential tools for recording brain activity, yet their long-term performance is often compromised by neuroinflammatory responses following implantation. A",
+    "tags": [
+      "product",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "fd94f003",
+    "title": "Bluesky announces $100M Series B after CEO transition",
+    "date": "2026-03-19",
+    "url": "hxxps://techcrunch[.]com/2026/03/19/bluesky-announces-100m-series-b-after-ceo-transition/",
+    "source": "TechCrunch Startups",
+    "source_category": "funding",
+    "summary": "The additional funds have been used to scale Bluesky's team, while the company continues to develop Bluesky's app and the underlying ATProto that powers it.",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "06e391b2",
+    "title": "FDA Tightens Its Medical Device Cybersecurity Guidance - FedTech Magazine",
+    "date": "2026-03-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqgFBVV95cUxPbHBtaFNVSGpZR0o5NlFRdVUyV3RsTS1QcjVZLXZPS0FNSzdQTFpfN0hNZVhCbHA3WUxGeFNMR3BNNmtWVEVDYnVyN19qdlZaM0h1cDRueFRTN3ZndFpERElVUnlDQURTOVRyWnhxekpRWV9kSnNZQXhncl9MNURnaHNhYVVqSjVBUXJjRGFxa3NNaGJrcFgzQlhfTzMtclQxVmlnZFhKaXU2QQ?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "FDA Tightens Its Medical Device Cybersecurity Guidance&nbsp;&nbsp;FedTech Magazine",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "90d3dd16",
+    "title": "Exclusive: Stripe Alum Raises $9M For Meadow To Help People Plan Funerals Online",
+    "date": "2026-03-18",
+    "url": "hxxps://news[.]crunchbase[.]com/venture/stripe-alum-raises-online-funeral-planning-startup-meadow/",
+    "source": "Crunchbase News",
+    "source_category": "funding",
+    "summary": "Co-founded by Stripes alum Sam Gerstenzang, online funeral planning startup Meadow Memorials has raised a $9 million Series A funding round led by Lachy Groom and Haystack.",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "11471dbb",
+    "title": "JenaValve snags FDA approval in aortic regurgitation",
+    "date": "2026-03-18",
+    "url": "hxxps://www[.]medtechdive[.]com/news/jenavalve-fda-approval-aortic-regurgitation/815120/",
+    "source": "MedTech Dive",
+    "source_category": "product",
+    "summary": "The approval comes two months after Edwards Lifesciences scuttled plans to buy JenaValve for $945 million amid opposition from the Federal Trade Commission.",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "20259d9e",
+    "title": "Mapping deep brain stimulation-modulated circuits via precision neuroimaging",
+    "date": "2026-03-18",
+    "url": "hxxps://www[.]nature[.]com/articles/s41593-026-02229-9",
+    "source": "Nature Neuroscience",
+    "source_category": "research",
+    "summary": "",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "a08f5467",
+    "title": "Cortical regulation of collective social dynamics during environmental challenge",
+    "date": "2026-03-18",
+    "url": "hxxps://www[.]nature[.]com/articles/s41593-026-02224-0",
+    "source": "Nature Neuroscience",
+    "source_category": "research",
+    "summary": "",
+    "tags": [
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "bc5f68a5",
+    "title": "Brain state dependent repetitive transcranial magnetic stimulation improves motor learning outcomes",
+    "date": "2026-03-18",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae4dbe",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Motor learning is key to successful neuro-rehabilitation. Combinations of brain–computer interfaces (BCIs) and repetitive transcranial magnetic stimulation (rTMS) have been proposed for neu",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "6b064237",
+    "title": "Exclusive: Candex Extends Series C To $40M+ To Help Enterprises Easily Onboard Global Vendors",
+    "date": "2026-03-17",
+    "url": "hxxps://news[.]crunchbase[.]com/venture/fintech-startup-candex-raises-40m-seriesc-extension/",
+    "source": "Crunchbase News",
+    "source_category": "funding",
+    "summary": "New York-based Candex, a startup that helps large companies pay small, one-time, or irregular vendors without the administrative headache or risk that comes with onboarding them, has grown its July Se",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "59621a2c",
+    "title": "Effect of noninvasive transspinal direct current electrical stimulation of cervical enlargement on the excitability of different hand muscles",
+    "date": "2026-03-17",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae49fc",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Transspinal electrical direct current (DC) stimulation is a noninvasive method of modulating the activity of spinal cord neurons. However, the effects and their mechanisms remain unclear. A",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "a3fd1cce",
+    "title": "CLAS-hdEEG: high-density EEG software platform for real-time delta wave detection and closed-loop auditory stimulation",
+    "date": "2026-03-17",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae4e5b",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Closed-loop auditory stimulation (CLAS) can enhance slow oscillations during non-rapid eye movement sleep; however, its broader use has been limited by technical and temporal constraints. W",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "524310be",
+    "title": "FDA’s 2026 cybersecurity guidance introduces stricter rules for MedTech - Medical Buyer",
+    "date": "2026-03-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxNOUpnd183Vy1XeG1oTXFSWFZwaFhjTy1xS3NSd1d6a0JLMFJMdmhSVlJ2MFIwZUdGOHItQWpmYVJLZV9TdENmNDV5amxaN2YyeXRMT0ZFTUdqOTBoRUhLYUlJYlR6Ui1ibzFSWnRiVG9KSGJhNE1ZemZxN0ItUXRDWVQwbWFQX0U0X2lSU3NEOGlFcEU3UnQ4SmhldUJRODQ?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "FDA’s 2026 cybersecurity guidance introduces stricter rules for MedTech&nbsp;&nbsp;Medical Buyer",
+    "tags": [
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "1db6296b",
+    "title": "Investigational Brain Implant Restores High-Speed Communication",
+    "date": "2026-03-16",
+    "url": "hxxps://neurosciencenews[.]com/brain-computer-interface-typing-paralysis-30325/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new brain-computer interface translates attempted finger movements into text, allowing individuals with paralysis to type with near-human accuracy.",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "768f74a1",
+    "title": "China Clears First Brain-Computer Implant for Commercial Use - Sixth Tone",
+    "date": "2026-03-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiT0FVX3lxTE1mTERTMXMtSTVxZFBiZ21mMnBEclYxaW9qb3hxaEkyY2EzbmZWTUl0YXVBeGxpZkJ3ZVlQamhOa2JNek1vV25DdEhHNUMtakU?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "China Clears First Brain-Computer Implant for Commercial Use&nbsp;&nbsp;Sixth Tone",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
     "id": "2c6a0e78",
     "title": "[object Object]",
     "date": "2026-03-15",
@@ -369,6 +841,21 @@
     ],
     "companies": [],
     "fetched": "2026-03-15"
+  },
+  {
+    "id": "722830c6",
+    "title": "China approves first brain-computer interface implant for paralyzed patients, as sector heats up - Fierce Biotech",
+    "date": "2026-03-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxPbkttQjlBa0UwbVY0MXlqaUhhWVQycG5haV90NWoyZmh1am1DcF92Ni1uTnVFRXlSVU5SVEZ6YXJVNEZZZWVIUmdCNTJQNzJaT0p5a2haUWJtT1BndmJjcUYyWUhDdkdfTTBlbXNiS216dy1DOGU5U0sxWjE5Y014N3FWaFJWakNldERKcmpoOWhFOUd5MFdKQ1pnMGFWNFl4cDlXaVcxbHRQVlJTcFNELUN3SVg1VVVxXzNtQ09Halk?oc=5",
+    "source": "GN: BCI FDA",
+    "source_category": "regulatory",
+    "summary": "China approves first brain-computer interface implant for paralyzed patients, as sector heats up&nbsp;&nbsp;Fierce Biotech",
+    "tags": [
+      "product",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
   },
   {
     "id": "5278210f",
@@ -1421,6 +1908,20 @@
     "fetched": "2026-03-15"
   },
   {
+    "id": "1553d4bf",
+    "title": "FDA issues revised cybersecurity premarket submission guidance to align with quality management system regulation - DLA Piper",
+    "date": "2026-02-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxPU3ZHeU9jcnBnUmtsbXF2eEEyRUtPRkJxU2VTa0RzXzc5ckFIRWFXVkdxdVpJOTJ4WFJlR3pMaHNDeFFZNXdJWHlqT3hfeEpiNXdBQmQzZmJ0Z0l1SnBiT29pMldqaHg4MEtnbVluQkRpREk3UUpqWV90RjF6OXVnYWRJMHJobTI1QWhNT19fQV94aFhhaElSNjlPa19PZDZPSVZRNHdDd2lBV2E3ZkVFcEZzNkNXR2txdTBERWI0R3k?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "FDA issues revised cybersecurity premarket submission guidance to align with quality management system regulation&nbsp;&nbsp;DLA Piper",
+    "tags": [
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
     "id": "8f1fd8e9",
     "title": "Brain implants: What’s standing in the way of pivotal trials, FDA approval - statnews.com",
     "date": "2026-02-26",
@@ -1820,6 +2321,34 @@
     "fetched": "2026-02-22"
   },
   {
+    "id": "2ad96111",
+    "title": "Corrections to “Development of an Adaptive Serious Game System for Facial Paralysis Rehabilitation: A Facial Movement Recognition Pilot Study”",
+    "date": "2026-02-10",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11390731",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Presents corrections to the paper, Corrections to “Development of an Adaptive Serious Game System for Facial Paralysis Rehabilitation: A Facial Movement Recognition Pilot Study”.",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "b5e86791",
+    "title": "Hierarchical Classification of EMG Signal for Hand and Wrist Gestures and Forces in Myoelectric Control",
+    "date": "2026-02-06",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11373116",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "The loss of an upper limb significantly affects daily activities, making advanced prosthesis control crucial for improving the quality of life. Pattern recognition applied to electromyographic signals",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
     "id": "5dd77f76",
     "title": "At-Home Brain Stimulation for Depression Is Just the Start",
     "date": "2026-02-05",
@@ -1892,6 +2421,34 @@
       "Neuralink"
     ],
     "fetched": "2026-02-21"
+  },
+  {
+    "id": "95b58049",
+    "title": "Functional Assessment of a Flexible Thermal Stimulation Device for Hand Edema Elimination in Stroke Survivors",
+    "date": "2026-01-29",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11367718",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Stroke survivors often suffer from severe discomfort caused by persistent hand edema, including hand pain, restricted knuckle mobility, and negative emotions, which significantly hinders normal rehabi",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "bd86886f",
+    "title": "Behavioral Cloning of Physiotherapists in Adapting Robot Control Parameter",
+    "date": "2026-01-29",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11367816",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Robot-aided rehabilitation effectively supports treatment of upper-limb disorders and enhances outcomes when combined with traditional therapy. Artificial intelligence enables behavioral cloning of ph",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
   },
   {
     "id": "5b7ef9f5",
@@ -2013,6 +2570,21 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "4c9cb394",
+    "title": "First-of-its-kind Cleanroom Turns Inventions into Devices Ready for FDA Approval - UC San Diego Today",
+    "date": "2026-01-26",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirgFBVV95cUxOVFFMVFFNMmFUTEN6VHdrZWVxbXNJT0IwQjdZX0xDc2lLTjZkN1Z6TVlIU05NbjhNd1Z1cHBZbV91QTJKVmNIQ1FNSm1udnpvWDB4d3d1N1ZJZTY0TVc2cGpZVm5tSmNSaEZ5NlVTZHIxbnZEa3UyMm9jRWtjUXJqRGZoeUp1TVpKZE1GVk1Ha21SWjVLRjhNT2VLOUNsTVotZG5EUVotVkxjNjZuMmc?oc=5",
+    "source": "GN: BCI FDA",
+    "source_category": "regulatory",
+    "summary": "First-of-its-kind Cleanroom Turns Inventions into Devices Ready for FDA Approval&nbsp;&nbsp;UC San Diego Today",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
   },
   {
     "id": "885ca0a6",
@@ -2149,6 +2721,22 @@
     "fetched": "2026-02-21"
   },
   {
+    "id": "47208f49",
+    "title": "Medtronic Partners With Precision Neuroscience to Develop Brain Surgery Imaging System - Yahoo Finance",
+    "date": "2026-01-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimwFBVV95cUxOYXNTLUVKcEc4WHM5c3czV21LbnJpcEt3RDhQcVVVOUwzQUZSUlJjd1p0WlNUdVp0SlBxNDBTZDIteWQ3ekhyQWQ0ai1OWjFOcERBYlFhcFNxOWh2WVBHRE5vTlR5dXhaZVdjZHZpbHlMa3U2bDJaYkJ2MFVWRTM5RGM2Uk5DNnhraTc4OFl3a1pHNVR6RFFLemhiaw?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "Medtronic Partners With Precision Neuroscience to Develop Brain Surgery Imaging System&nbsp;&nbsp;Yahoo Finance",
+    "tags": [
+      "partnership"
+    ],
+    "companies": [
+      "Precision Neuroscience"
+    ],
+    "fetched": "2026-03-22"
+  },
+  {
     "id": "11a493a5",
     "title": "Ozlo enhances its ‘Sleepbuds’ by acquiring Irish neurotech company Segotia - Mugglehead Magazine",
     "date": "2026-01-12",
@@ -2161,6 +2749,37 @@
     ],
     "companies": [],
     "fetched": "2026-02-21"
+  },
+  {
+    "id": "880794a5",
+    "title": "Medtronic and Neuralink Rival Precision Form Partnership - Bloomberg.com",
+    "date": "2026-01-12",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitgFBVV95cUxQWEpWeFRwcW12cmpjYk1LY1lheTlRUnpOQTRZRTRFVGJ5TzVpdmhqVnFhSThjTUs2VEM3d0FYN1lUMzlUNHI2ZEVGUkttZnV1ekc4QktSanJzV0UzazlPQzBYUDNOQmJDVFd6QTdIY2dUX1pOMVN3ZzJXeFkxajdHUWRPRy1JUHhGcFNKQ0s5ak5pTXlJalZOdkVZRF9Zd1hwV0pHSHFfc1p6Z3JiRVNyRkY0S1ZUUQ?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "Medtronic and Neuralink Rival Precision Form Partnership&nbsp;&nbsp;Bloomberg.com",
+    "tags": [
+      "partnership"
+    ],
+    "companies": [
+      "Neuralink"
+    ],
+    "fetched": "2026-03-22"
+  },
+  {
+    "id": "37b9d8fe",
+    "title": "NeuraWorx Closes Seed Funding Round - Medical Product Outsourcing",
+    "date": "2026-01-12",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMif0FVX3lxTE5YMVdRWllNbzlWREhUVnZ2WnJ3ZGgwNjg5eFVHdjRGNDdSRWRyUkhkMUlhQXAzNkxNVEFmTy03Q0pWSXM2VktrcDhpSWJUdHpOLUJGTmNULTFBOTViYzl6Zm1mbmlpQ3o4ZjA1NEZPUm5FbWVVMDFoTnFnV1I1QzQ?oc=5",
+    "source": "GN: Neurotech VC",
+    "source_category": "funding",
+    "summary": "NeuraWorx Closes Seed Funding Round&nbsp;&nbsp;Medical Product Outsourcing",
+    "tags": [
+      "funding",
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
   },
   {
     "id": "da412952",
@@ -2190,6 +2809,20 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "0c0bf209",
+    "title": "HyperX Announces Brain Reading AI Gaming Headset at CES 2026 - GamesHub",
+    "date": "2026-01-07",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqwFBVV95cUxPWFhVX1lyT2FrOExKZWc4YmlxTUdDT3FKOTI4UE5TZlpXNzFqdnN3ZERYVkdqNWlyNlR2TVNndFEtU2RGT0M4V0ZyY09DOUZoYldPWC01VXhOWUdDak9hdWNFQUJEUzRiVzFMTjNMQlAyNnU1SGU3UVZnaWc2aHVfNUxOWktfU2h1emVRN0Vxc1hqTFlCckppa1RMZTZvUHNkSEM1T3NyemllVGs?oc=5",
+    "source": "GN: Consumer EEG",
+    "source_category": "product",
+    "summary": "HyperX Announces Brain Reading AI Gaming Headset at CES 2026&nbsp;&nbsp;GamesHub",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
   },
   {
     "id": "aed7c1a3",
@@ -2266,6 +2899,22 @@
       "Neuralink"
     ],
     "fetched": "2026-02-21"
+  },
+  {
+    "id": "2b4801e9",
+    "title": "Neurable raises $35M to scale brain-computer interface AI - MobiHealthNews",
+    "date": "2025-12-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQNUdjbkt0d2wta25wWEoyN3lGRjAtUDE1bWxPb2J5eW15RzhadjMxd3NfQmM4N3BadHRETURWak9FMk9iYmd5OTE4WVo0bjNlZkhPbkVHTFdGTlQtM0JBcVZaQUVpeDlXd0liRFRkM2drUkZoWGR5bURpQmFZZWItYkd2NjV2VHpIVVJERkxMX1NaLVE?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Neurable raises $35M to scale brain-computer interface AI&nbsp;&nbsp;MobiHealthNews",
+    "tags": [
+      "general"
+    ],
+    "companies": [
+      "Neurable"
+    ],
+    "fetched": "2026-03-22"
   },
   {
     "id": "1948a8cc",
@@ -2461,6 +3110,22 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "9aafc553",
+    "title": "WVU Rockefeller Neuroscience Institute, Precision Neuroscience expand partnership on next generation brain-computer interface technology - WVU Medicine",
+    "date": "2025-11-21",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirwJBVV95cUxOVTBFeFJmNWwxSndNbHh3VGxXdmpBOWxFSmN1SFhGa1BfRkI3MzZfUzRhNk1vb2JOaEc0VTFJaThZZ0RPck5Fd2xzTnlKRDlHbjZ0bjRQQzNtTzcwbTlzcmk4T29MX2VLQVBaVUJVVXNZVGoyOWYtVEcxenYtWi1pQjdjS2VCeHd4WndHYVJ5WmVZUnNTMzN3NDQtaGdSV2FJSUFyZENaa3dpSFR3VzZrMFpWckFlNWhEajItOTkwcG02cmhOb1oyckNfWW55UGZQQTFWd2F3V1plU21YM3lITG04Tm1fbE9tWnBnX213UFZLNGJ5VjBMTFFyT0dwTG50ZGJ6V3RZaUFwNzZLMmlDS2tNZ0JzZHA2TE9vT0xadnBiMWRxZ3N5c0l6NFhFRms?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "WVU Rockefeller Neuroscience Institute, Precision Neuroscience expand partnership on next generation brain-computer interface technology&nbsp;&nbsp;WVU Medicine",
+    "tags": [
+      "partnership"
+    ],
+    "companies": [
+      "Precision Neuroscience"
+    ],
+    "fetched": "2026-03-22"
   },
   {
     "id": "2573635f",
@@ -2796,6 +3461,20 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "50d109e8",
+    "title": "Mind Over Matter: Decoding Chinaâ€™s BCI Push - BioSpectrum Asia",
+    "date": "2025-11-01",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxOOEFCbllRdV9BMHJ6bWV2T08walhLYjdiSGoxNFAxc0hNWkxIZ1pKUTNITkx1SW0ydXZtbEJldjVVWnV3MTluT281RUpaOGVRWk1KLUhOR0dKbmNlMlhTMjZwTU9xTXdZZ0ExSDQtVnBpTWVORHozcVFuTzVWS3NXaEVRU1M5aEx1ZlhDWWRpOUduZEFoUWhOaE5LOWM?oc=5",
+    "source": "GN: Neurotech Patents",
+    "source_category": "product",
+    "summary": "Mind Over Matter: Decoding Chinaâ€™s BCI Push&nbsp;&nbsp;BioSpectrum Asia",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
   },
   {
     "id": "6be9540f",
@@ -3402,6 +4081,20 @@
     "fetched": "2026-03-15"
   },
   {
+    "id": "155791cb",
+    "title": "Top digital health funding: Morgan Health backs analytics company - Modern Healthcare",
+    "date": "2024-12-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilwFBVV95cUxNa3ZOdlhpaGRadFo1bG1EM3FibXpicmduRF9WT0d5aTJYM3VGYnhMTWJJVWYwcGd5dWo2Q0Vzc0U1YjB5aGltTlc0cTB4OElacVE2ZzVFNDFRcmh5VUpSYmswYmlDMUtrWURBVlY0enJ6cVNUYWJZckhjTXdyR3NzYXRobjVfWFdPZzVFY0plblhXeVllcUhz?oc=5",
+    "source": "GN: Neurotech VC",
+    "source_category": "funding",
+    "summary": "Top digital health funding: Morgan Health backs analytics company&nbsp;&nbsp;Modern Healthcare",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
+  },
+  {
     "id": "5e8cc8ee",
     "title": "A New Path to Noninvasive Brain-Computer Interface - Johns Hopkins University Applied Physics Laboratory",
     "date": "2024-11-14",
@@ -3428,6 +4121,20 @@
     ],
     "companies": [],
     "fetched": "2026-03-15"
+  },
+  {
+    "id": "b25f918a",
+    "title": "Online transcranial Doppler ultrasonographic control of an onscreen keyboard - Frontiers",
+    "date": "2024-07-03",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimgFBVV95cUxQdU91eU00aTVLeTNjVlJMVm9BWEN4OTdZYzZUNzlNSzUycGo3OGtmRWdHWjVrdzhRRFc4SEMzRnYyR3NDdHIybkFRRlNEZHc2R25PMENFWkN1VnJ5OU04MEtHN3pvQXowc3Etdm0tcXlyMzRkUDE3UzNaSEpyZk1DRVpsRS0yM21JTXNrT3hjNUQtTVZJa0xzeHN3?oc=5",
+    "source": "GN: Emerging Modalities",
+    "source_category": "research",
+    "summary": "Online transcranial Doppler ultrasonographic control of an onscreen keyboard&nbsp;&nbsp;Frontiers",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-03-22"
   },
   {
     "id": "a9571c8b",
