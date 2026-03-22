@@ -61,7 +61,7 @@ This isn't a manifesto about neuroethics. It's the story of how one person arriv
 | Lyric | Surface | Hidden |
 |-------|---------|--------|
 | "Fox in the cog" | Clever animal stuck in machinery | Inverting "cog in the machine" — he was never just a part, he was the disruption |
-| "Swiping my dreams" | Scrolling through dating apps (Tinder career) | Having dreams stolen/swiped away |
+| "Swiping my dreams" | Scrolling through dating apps | Having dreams stolen/swiped away |
 | "Castles in the clouds" | Impossible dreams | Cloud computing — 15 years building infrastructure no one sees |
 | "Engrained with the names" | Engraved, etched in | In the grain — wood grain, grandfather's legacy |
 | "Take a seat" | Sit down at the table | Take your rightful place in governance |
@@ -200,7 +200,7 @@ The chalk is at your feet
 | "Charging rent for what's free" | Cognitive liberty | Watching cognitive freedom taken by Alzheimer's |
 | "Consent / The principle that locks from within" | QIF dual-use framework | The boundary between healing and harm |
 | "The signals wouldn't stay" | Neural signal integrity | B12 deficiency — personal myelin degradation |
-| "Fifteen years of blue-lit screens" | Career → Brain SIEM | Chromocell → Freedom → HarperCollins → Blackstone → Tinder → Match |
+| "Fifteen years of blue-lit screens" | Career → Brain SIEM | 15 years of security infrastructure — same pattern, different layer |
 | "Walls for strangers, castles in the clouds" | Neurosecurity appliance | The insight that the brain needs a firewall too |
 | "Words in her prayers would still be guarded" | Neural equity | Grandmother's Alzheimer's — the mind that can't defend itself |
 | "The equity the lady holds up brave" | UNESCO neurorights recommendation | Equitable access — not just for those who can afford it |
