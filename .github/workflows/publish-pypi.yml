@@ -29,7 +29,7 @@ jobs:
         pip install build twine
 
     - name: Sync TARA data
-      run: python datalake/scripts/sync-package-data.py
+      run: python datalake/src/scripts/sync-package-data.py
 
     - name: Build binary wheel and source tarball
       run: |

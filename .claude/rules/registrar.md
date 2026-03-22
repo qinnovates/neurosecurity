@@ -15,12 +15,12 @@ paths:
 ```
 1.  Branch:      git checkout -b feature-name
 2.  Tag:         git tag pre-feature-name
-3.  Script:      Write migration script (datalake/scripts/migrate-*.py), run --dry-run first
+3.  Script:      Write migration script (datalake/src/scripts/migrate-*.py), run --dry-run first
 4.  Source:      Update datalake/qtara-registrar.json (source of truth)
 5.  Chains:      Update datalake/tara-chains.json if attack chains affected
 6.  TypeScript:  src/lib/threat-data.ts > kql-tables.ts > kql-engine.ts > neurogovernance-data.ts
 7.  Python:      datalake/qtara/src/qtara/models.py > scripts > SDK > stix.py > cli.py
-8.  Precompute:  Run all datalake/scripts/ pipelines (impact chains, DSM mappings)
+8.  Precompute:  Run all datalake/src/scripts/ pipelines (impact chains, DSM mappings)
 9.  SDK sync:    Copy registrar to datalake/qtara/src/qtara/data/qtara-registrar.json
 10. Pages:       Update Astro pages (atlas/tara/[id].astro, guardrails), API endpoints
 11. Components:  Update React dashboard components if new fields need UI
@@ -44,7 +44,7 @@ paths:
 3. `src/lib/kql-tables.ts` — KQL table builder (flattens JSON > queryable columns)
 4. `src/lib/kql-engine.ts` — KQL engine (field aliases, indexes)
 5. `datalake/qtara/src/qtara/models.py` — Python SDK Pydantic models
-6. `datalake/scripts/compute-impact-chains.mjs` — precompute pipeline
+6. `datalake/src/scripts/compute-impact-chains.mjs` — precompute pipeline
 
 **Technique count references:** NEVER hardcode technique counts in .astro pages or docs.
 Use `import { TECHNIQUE_COUNT } from '@lib/threat-data'` in Astro/TS, or pull from registrar `statistics.total_techniques` in scripts.

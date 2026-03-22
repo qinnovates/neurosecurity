@@ -123,8 +123,8 @@ neurosecurity/
 │   ├── DECISION-LOG.md               # Auto-generated from derivation log
 │   └── TRANSPARENCY.md               # Auto-generated AI disclosure
 │
-├── tools/                            # Security tools (neurowall, neurosim, macshield)
-├── scripts/                          # Build + data pipelines
+├── model/tools/                            # Security tools (neurowall, neurosim, macshield)
+├── src/scripts/                          # Build + data pipelines
 └── .github/workflows/                # CI/CD (deploy, audit, sync)
 ```
 

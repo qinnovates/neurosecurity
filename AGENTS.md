@@ -8,10 +8,10 @@ BCI security research: website (Astro 5 + React 19 + TailwindCSS 4), QIF model (
 - `research/` -- Blog posts (`blog/`), academic paper (`paper/`), clinical notes (`clinical/`)
 - `datalake/` -- Source of truth for all JSON data
 - `governance/` -- Policy (`policy/`), ethics, process (DECISION-LOG + TRANSPARENCY auto-generated)
-- `tools/` -- neurowall, neurosim, macshield
-- `scripts/` -- Build + data pipelines
+- `model/tools/` -- neurowall, neurosim, macshield
+- `src/scripts/` -- Build + data pipelines
 - `site/` -- GitHub Pages build output (don't edit directly) + static assets
-- `static/` -- Unprocessed assets served at site root
+- `site/` (static assets) -- Unprocessed assets served at site root
 
 ## Key Commands
 `npm run dev` | `npm run build` | `npm run health` (validate sync) | `npm run governance` (regen from derivation log)

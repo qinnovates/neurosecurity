@@ -69,7 +69,7 @@ jobs:
           CHANGED_FILES: ${{ steps.changed-files.outputs.files }}
         run: |
           echo "Scanning changed files in PR..."
-          python .github/security-audit/scripts/audit.py \
+          python .github/security-audit/src/scripts/audit.py \
             --config .github/security-audit/patterns/secrets.json \
             --format text \
             --severity "$AUDIT_SEVERITY" \
@@ -85,7 +85,7 @@ jobs:
           AUDIT_SEVERITY: ${{ inputs.severity || 'low' }}
         run: |
           echo "Scanning all tracked files..."
-          python .github/security-audit/scripts/audit.py \
+          python .github/security-audit/src/scripts/audit.py \
             --all \
             --config .github/security-audit/patterns/secrets.json \
             --format text \
@@ -97,7 +97,7 @@ jobs:
       - name: Generate SARIF report
         if: always()
         run: |
-          python .github/security-audit/scripts/audit.py \
+          python .github/security-audit/src/scripts/audit.py \
             --all \
             --config .github/security-audit/patterns/secrets.json \
             --format sarif \
@@ -196,7 +196,7 @@ jobs:
           fi
 
   # TruffleHog job removed - requires third-party action permissions
-  # The custom audit script in .github/security-audit/scripts/audit.py
+  # The custom audit script in .github/security-audit/src/scripts/audit.py
   # provides equivalent secret scanning functionality
   #
   # To re-enable TruffleHog:

@@ -48,7 +48,7 @@ When a file changes, these downstream files must be updated. Run `npm run health
 |--------|-----|-----------|
 | All datalake/*.json propagation, plus: | | |
 | EEGBrowser.tsx / EEGDatasetCard.tsx | Verify new fields are rendered | Manual |
-| scripts/process-eeg-to-parquet.py | Add new dataset processing config | Manual |
+| src/scripts/process-eeg-to-parquet.py | Add new dataset processing config | Manual |
 
 ## When package.json scripts change
 | Update | How | Automated? |
