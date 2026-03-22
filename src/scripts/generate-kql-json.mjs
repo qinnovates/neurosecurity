@@ -3,8 +3,8 @@
  * Prebuild: Export KQL tables as static JSON files for client-side fetching.
  *
  * Splits the data into:
- *   site/data/kql-tables.json         — all tables EXCEPT impact_chains (~800KB)
- *   site/data/kql-impact-chains.json  — impact_chains only (~2.1MB, lazy-loaded)
+ *   src/site/data/kql-tables.json         — all tables EXCEPT impact_chains (~800KB)
+ *   src/site/data/kql-impact-chains.json  — impact_chains only (~2.1MB, lazy-loaded)
  *
  * This eliminates the 2-3MB prop serialization overhead where Astro embedded
  * the entire KQL table set as inline JSON in every BciKql page.
@@ -31,7 +31,7 @@ const ROOT = resolve(__dirname, '../..');
 // For now, we generate from a simpler Node script that calls tsx.
 
 async function main() {
-  const outDir = resolve(ROOT, 'site/data');
+  const outDir = resolve(ROOT, 'src/site/data');
   mkdirSync(outDir, { recursive: true });
 
   // Use tsx to run the TypeScript table builder

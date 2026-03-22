@@ -8,7 +8,7 @@ Generates:
 
 Architecture:
   datalake/*.json → PyArrow → datalake/parquet/*.parquet
-  Prebuild copies to site/data/parquet/ for serving on the live site.
+  Prebuild copies to src/site/data/parquet/ for serving on the live site.
 
 Usage:
   python3 scripts/generate-parquet.py

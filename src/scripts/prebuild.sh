@@ -4,14 +4,14 @@ set -e
 echo "[prebuild] Starting..."
 
 # 1. Create output directories
-mkdir -p site/data site/data/parquet site/papers
+mkdir -p src/site/data src/site/data/parquet src/site/papers
 
-# 2. Copy source JSON to site/data (static serving)
+# 2. Copy source JSON to src/site/data (static serving)
 echo "[prebuild] Copying data files..."
-cp datalake/qtara-registrar.json site/data/
-cp datalake/derivation-timeline.json site/data/
-cp datalake/validation-registry.json site/data/
-cp datalake/research-registry.json site/data/
+cp datalake/qtara-registrar.json src/site/data/
+cp datalake/derivation-timeline.json src/site/data/
+cp datalake/validation-registry.json src/site/data/
+cp datalake/research-registry.json src/site/data/
 
 # 3. Generate KQL JSON (async-fetchable tables for BciKql)
 echo "[prebuild] Generating KQL JSON..."
@@ -27,8 +27,8 @@ fi
 
 # 4b. Copy Parquet from datalake to site for serving
 if [ -d datalake/parquet ]; then
-  echo "[prebuild] Copying Parquet to site/data/parquet/..."
-  cp -r datalake/parquet/* site/data/parquet/
+  echo "[prebuild] Copying Parquet to src/site/data/parquet/..."
+  cp -r datalake/parquet/* src/site/data/parquet/
 fi
 
 # 5. Regenerate governance docs from derivation log
@@ -37,7 +37,7 @@ node scripts/generate-governance.mjs
 
 # 6. Copy paper PDF if it exists
 if [ -f research/paper/main.pdf ]; then
-  cp research/paper/main.pdf site/papers/qif-bci-security-2026.pdf
+  cp research/paper/main.pdf src/site/papers/qif-bci-security-2026.pdf
 fi
 
 echo "[prebuild] Done."
