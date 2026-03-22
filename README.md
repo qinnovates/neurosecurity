@@ -14,7 +14,7 @@
 
 </div>
 
-> **By using this repository, you consent to the terms in [DISCLAIMER.md](DISCLAIMER.md).** This is early-stage research — not a validated standard, not a clinical tool, not production software. The human brain is not a test environment. See [DISCLAIMER.md](DISCLAIMER.md), [Code of Conduct](CODE_OF_CONDUCT.md), and [Security Policy](SECURITY.md).
+> **By using this repository, you consent to the terms in [CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy](CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy).** This is early-stage research — not a validated standard, not a clinical tool, not production software. The human brain is not a test environment. See [CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy](CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy), [Code of Conduct](CODE_OF_CONDUCT.md), and [Security Policy](SECURITY.md).
 
 ## What is Neurosecurity?
 
@@ -459,7 +459,7 @@ All commands run from the repo root.
 
 ### Before You Start
 
-1. Read [DISCLAIMER.md](DISCLAIMER.md) and [Code of Conduct](CODE_OF_CONDUCT.md)
+1. Read [CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy](CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy) and [Code of Conduct](CODE_OF_CONDUCT.md)
 2. Run `npm ci` to install dependencies
 3. Run `npm run health` to verify your environment is clean
 4. Run `npm run build` to verify the site builds
