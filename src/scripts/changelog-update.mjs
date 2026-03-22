@@ -18,7 +18,7 @@ import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = join(__dirname, '..');
+const ROOT = join(__dirname, '..', '..');
 const CHANGELOG_PATH = join(ROOT, 'CHANGELOG.md');
 const DIST_DIR = join(ROOT, 'dist');
 const DRY_RUN = process.argv.includes('--dry-run');

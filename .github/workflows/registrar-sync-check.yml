@@ -31,7 +31,12 @@ jobs:
           python-version: '3.12'
 
       - name: Validate registrar JSON
-        run: python3 -c "import json; d=json.load(open('datalake/qtara-registrar.json')); print(f'Valid JSON: {len(d[\"techniques\"])} techniques')"
+        run: |
+          python3 -c "
+          import json
+          d = json.load(open('datalake/qtara-registrar.json'))
+          print(f'Valid JSON: {len(d[\"techniques\"])} techniques')
+          "
 
       - name: Check technique field presence
         run: |
