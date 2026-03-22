@@ -45,7 +45,7 @@ model/
 ├── nsp/                            # NSP Rust implementation (PQ-secure)
 ├── runemate/                       # Runemate Rust compiler
 ├── research/                       # Research methodology and hypotheses
-├── qif-lab/                        # Python equation testing and whitepaper engine
+├── (qif-lab archived to _archive/)
 ├── tara-threat/                    # TARA threat catalog
 └── images/                         # Diagrams
 ```

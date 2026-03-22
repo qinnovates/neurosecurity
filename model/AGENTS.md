@@ -13,7 +13,7 @@
 - `nsp/` -- NSP Rust implementation
 - `runemate/` -- Runemate Rust compiler
 - `research/` -- Research methodology
-- `qif-lab/` -- Python equation testing
+- `qif-lab archived to `_archive/qif-lab/`
 - `tara-threat/` -- TARA threat catalog
 
 ## Conventions
