@@ -29,7 +29,7 @@ Open items, outreach, and follow-ups. Check this file when resuming work.
 
 ### Security Guardrails Integration
 - **Status:** Document complete (`qif-sec-guardrails.md`). Now linked from /security and /framework pages.
-- **Needs:** Publish as standalone white paper on Zenodo? Add to model/README.md table.
+- **Needs:** Publish as standalone white paper on Zenodo? Add to osi-of-mind/README.md table.
 
 ## Outreach Queue
 

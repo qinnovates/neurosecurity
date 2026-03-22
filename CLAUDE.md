@@ -16,11 +16,11 @@ Domain-specific protocols load automatically via `.claude/rules/` when you work 
 | Citation Integrity | `.claude/rules/citation-integrity.md` | `research/paper/**`, `QIF-RESEARCH-SOURCES`, `research-registry` |
 | AI Disclosure | `.claude/rules/ai-disclosure.md` | `research/paper/**`, `research/blog/**` |
 | Whitepaper Archival | `.claude/rules/whitepaper-archival.md` | `src/pages/research/whitepaper/**` |
-| AI Security Ethics | `.claude/rules/ai-security-ethics.md` | `model/**`, `governance/**`, `research/**` |
+| AI Security Ethics | `.claude/rules/ai-security-ethics.md` | `osi-of-mind/**`, `governance/**`, `research/**` |
 
 ## claudeq Mode -- Live Derivation Journaling
 
-When Kevin says "claudeq" or "start journaling", activate live derivation logging to `model/QIF-DERIVATION-LOG.md`.
+When Kevin says "claudeq" or "start journaling", activate live derivation logging to `osi-of-mind/QIF-DERIVATION-LOG.md`.
 
 ### Activation Steps
 1. Announce: "Derivation journal active. Tracking all exchanges to QIF-DERIVATION-LOG.md."

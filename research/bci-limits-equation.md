@@ -10,7 +10,7 @@ Nobody has published the equation that tells you what a brain-computer interface
 
 Individual constraints exist in the literature. Thermal limits. Electrode safety thresholds. Bandwidth caps. But no one has coupled them into a single system. No unified physics model says: given these materials, this brain region, this process node, and this implant geometry, here is the boundary of what is buildable, and here is when that boundary moves.
 
-This post presents that system. It came out of a derivation session documented in [Entry 60 of the QIF Derivation Log](https://github.com/qinnovates/neurosecurity/blob/main/model/QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis), where I was trying to answer a simpler question: how far behind are BCI chips compared to consumer silicon?
+This post presents that system. It came out of a derivation session documented in [Entry 60 of the QIF Derivation Log](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis), where I was trying to answer a simpler question: how far behind are BCI chips compared to consumer silicon?
 
 The answer led somewhere I didn't expect.
 
@@ -177,7 +177,7 @@ The one constraint I cannot validate yet is the coherence metric (Cs). No BCI ha
 
 **DOIs verified:** Marblestone (10.3389/fncom.2013.00137) and Stevenson (10.1038/nn.2731) confirmed via Crossref API on 2026-02-18. Title, authors, year, journal all match.
 
-The full derivation, including the verbatim back-and-forth that produced this system, is available in [QIF Derivation Log Entry 60](https://github.com/qinnovates/neurosecurity/blob/main/model/QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis). The QIF preprint covering the broader framework is at [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105).
+The full derivation, including the verbatim back-and-forth that produced this system, is available in [QIF Derivation Log Entry 60](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis). The QIF preprint covering the broader framework is at [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105).
 
 . . .
 

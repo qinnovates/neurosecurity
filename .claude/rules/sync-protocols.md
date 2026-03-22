@@ -1,6 +1,6 @@
 ---
 paths:
-  - "model/QIF-RESEARCH-SOURCES.md"
+  - "osi-of-mind/QIF-RESEARCH-SOURCES.md"
   - "src/data/automation-registry.json"
   - "src/data/qif-timeline.json"
   - "paper/references.bib"
@@ -11,11 +11,11 @@ paths:
 
 Three project files must stay in sync with changes. All follow the same pattern: **when a relevant change occurs, update the file, update its metadata (date/counts), and verify with the associated script if one exists.**
 
-## Research Sources (`model/QIF-RESEARCH-SOURCES.md`)
+## Research Sources (`osi-of-mind/QIF-RESEARCH-SOURCES.md`)
 **When:** New citation in `paper/references.bib`, blog references research, NSP cites new RFC/NIST, new TARA technique references research, any new DOI/arXiv/RFC referenced for the first time.
 **How:** Add to correct domain section (Quantum Physics, Neuroscience, BCI Technology, Cybersecurity, etc.) using table format `| ID | Citation | URL | Source | QIF Relevance |`. Update header date and Appendix statistics.
 **IMPORTANT: Whenever a new citation or source is used anywhere in the project, ALL THREE citation stores must be updated:**
-1. `model/QIF-RESEARCH-SOURCES.md` — living catalog with IDs, URLs, and relevance
+1. `osi-of-mind/QIF-RESEARCH-SOURCES.md` — living catalog with IDs, URLs, and relevance
 2. `paper/references.bib` — BibTeX entry for LaTeX/preprint use
 3. `datalake/research-registry.json` — structured JSON registry (researchers, institutions, standards, legislation)
 

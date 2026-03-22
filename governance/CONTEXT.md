@@ -4,7 +4,7 @@ BCI security research: website (Astro 5 + React 19 + TailwindCSS 4), QIF model (
 
 ## Structure
 - `src/` -- Astro website (TypeScript, KQL-first data via `kql-tables.ts`)
-- `model/` -- QIF specs, whitepapers, derivation logs, NSP + Runemate (Rust), tools (neurowall, neurosim, macshield)
+- `osi-of-mind/` -- QIF specs, whitepapers, derivation logs, NSP + Runemate (Rust), tools (neurowall, neurosim, macshield)
 - `research/` -- Blog posts, academic paper, clinical notes
 - `datalake/` -- Source of truth for all JSON data
 - `governance/` -- Policy, ethics, process (DECISION-LOG + TRANSPARENCY auto-generated)

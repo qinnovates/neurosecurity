@@ -73,8 +73,8 @@ Each derivation log uses its own prefix:
 
 | Log | Location | Scope |
 |-----|----------|-------|
-| **QIF Derivation Log** | `model/QIF-DERIVATION-LOG.md` (standards) / `drafts/ai-working/QIF-DERIVATION-LOG.md` (source of truth) | Core QIF equations, layer architecture, coherence metrics, quantum indeterminacy |
-| **Runemate Derivation Log** | `model/specs/RUNEMATE.md` (standards) / `drafts/ai-working/RUNEMATE.md` (source of truth) | Rendering pipeline, Staves notation, visual cortex architecture, BCI display |
+| **QIF Derivation Log** | `osi-of-mind/QIF-DERIVATION-LOG.md` (standards) / `drafts/ai-working/QIF-DERIVATION-LOG.md` (source of truth) | Core QIF equations, layer architecture, coherence metrics, quantum indeterminacy |
+| **Runemate Derivation Log** | `osi-of-mind/specs/RUNEMATE.md` (standards) / `drafts/ai-working/RUNEMATE.md` (source of truth) | Rendering pipeline, Staves notation, visual cortex architecture, BCI display |
 
 ### When to Create a New Log
 
@@ -89,8 +89,8 @@ Create a new derivation log when insights emerge that don't fit existing logs. E
 
 Each log exists in two locations:
 
-1. **Source of truth:** `qinnovates/qinnovate/model/` — full detail, verbose reasoning, all context
-2. **Standards copy:** `qinnovates/qinnovate/model/` — same entries, may be condensed for public consumption
+1. **Source of truth:** `qinnovates/qinnovate/osi-of-mind/` — full detail, verbose reasoning, all context
+2. **Standards copy:** `qinnovates/qinnovate/osi-of-mind/` — same entries, may be condensed for public consumption
 
 **Propagation order:** Always write to the source of truth first, then sync to the standards copy.
 
@@ -196,8 +196,8 @@ The derivation log is the bridge between informal discovery and formal standardi
 ## Related Resources
 
 - [VERA Engine (Qinnovate Lifecycle)](./qinnovate-lifecycle.md)
-- [QIF Framework](../model/)
-- [Runemate Specification](../model/specs/RUNEMATE.md)
+- [QIF Framework](../osi-of-mind/)
+- [Runemate Specification](../osi-of-mind/specs/RUNEMATE.md)
 - [Governance Standards](../governance/)
 
 ---

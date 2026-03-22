@@ -3,7 +3,7 @@
 > **QIF Module — Neurosim**
 > **Status:** v0.1 (Initial)
 > **Date:** 2026-02-21
-> **Parent Framework:** [QIF v4.0 Hourglass](../../model/README.md) / [Neurowall](../neurowall/README.md)
+> **Parent Framework:** [QIF v4.0 Hourglass](../../osi-of-mind/README.md) / [Neurowall](../neurowall/README.md)
 
 Neurosim is a neural signal simulation toolkit for testing BCI security defenses. It generates synthetic attack signals mapped to the QIF TARA registry and validates detection pipelines.
 

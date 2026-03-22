@@ -1,4 +1,4 @@
-# model/ -- QIF Model: Specifications, Research & Implementations
+# osi-of-mind/ -- QIF Model: Specifications, Research & Implementations
 
 ## Structure
 - `QIF-DERIVATION-LOG.md` -- Source of truth (113 entries)

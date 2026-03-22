@@ -978,8 +978,8 @@ UNESCO. (2025). Recommendation on the Ethics of Neurotechnology. 43rd General Co
 - [NEUROSECURITY_GOVERNANCE.md](NEUROSECURITY_GOVERNANCE.md) (the analysis this proposal builds on)
 - [POST_DEPLOYMENT_ETHICS.md](POST_DEPLOYMENT_ETHICS.md) (device lifecycle and abandonment)
 - [INFORMED_CONSENT_FRAMEWORK.md](INFORMED_CONSENT_FRAMEWORK.md) (consent protocols)
-- [QIF Framework README](../model/README.md) (technical framework overview)
-- [NSP Protocol Spec](../model/specs/NSP-PROTOCOL-SPEC.md) (encryption protocol)
+- [QIF Framework README](../osi-of-mind/README.md) (technical framework overview)
+- [NSP Protocol Spec](../osi-of-mind/specs/NSP-PROTOCOL-SPEC.md) (encryption protocol)
 - [Neurowall](../tools/neurowall/README.md) (neural security monitor)
 
 ---

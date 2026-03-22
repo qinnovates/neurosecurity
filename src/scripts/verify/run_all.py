@@ -28,8 +28,8 @@ MODULES = [
     ('Citations', verify_citations, ['paper/', '.bib']),
     ('Facts', verify_facts, ['datalake/qtara-registrar.json', 'whitepaper-stats']),
     ('Blog Claims', audit_blog_claims, ['research/blog/']),
-    ('Cross-References', verify_crossrefs, ['src/', 'model/', 'README']),
-    ('Field Journal Fact-Check', fact_check_field_journal, ['research/blog/', 'model/QIF-FIELD-JOURNAL']),
+    ('Cross-References', verify_crossrefs, ['src/', 'osi-of-mind/', 'README']),
+    ('Field Journal Fact-Check', fact_check_field_journal, ['research/blog/', 'osi-of-mind/QIF-FIELD-JOURNAL']),
 ]
 
 

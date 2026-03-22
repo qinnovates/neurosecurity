@@ -6,7 +6,7 @@
 # Or:      ln -sf ../../scripts/governance-precommit.sh .git/hooks/pre-commit
 
 SENSITIVE_FILES=(
-  "model/QIF-DERIVATION-LOG.md"
+  "osi-of-mind/QIF-DERIVATION-LOG.md"
   "governance/DECISION-LOG.md"
   "governance/TRANSPARENCY.md"
 )

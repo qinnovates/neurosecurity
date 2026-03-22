@@ -38,7 +38,7 @@ Requires Rust (edition 2024 for nsp-core, 2021 for nsp).
 
 ```bash
 # Build both crates
-cd model/nsp
+cd osi-of-mind/nsp
 cargo build
 
 # Run tests

@@ -7,12 +7,12 @@ on:
       - 'research/blog/**'
       - 'datalake/qtara-registrar.json'
       - 'src/lib/whitepaper-stats.ts'
-      - 'model/**'
+      - 'osi-of-mind/**'
   push:
     branches: [main]
     paths:
       - 'research/blog/**'
-      - 'model/**'
+      - 'osi-of-mind/**'
 
 permissions:
   contents: read

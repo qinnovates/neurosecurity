@@ -4,8 +4,8 @@
 > **Status:** Phase 1 Architecture (Design-Complete)
 > **Date:** 2026-02-21
 > **Authors:** Kevin Qi, Antigravity (Gemini)
-> **Parent Framework:** [QIF v4.0 Hourglass](../../model/README.md) / [NSP v0.5](../../model/specs/NSP-PROTOCOL-SPEC.md) / [Runemate](../../model/specs/RUNEMATE.md)
-> **Integration Roadmap:** [model/specs/INTEGRATION-ROADMAP.md](../../model/specs/INTEGRATION-ROADMAP.md)
+> **Parent Framework:** [QIF v4.0 Hourglass](../../osi-of-mind/README.md) / [NSP v0.5](../../osi-of-mind/specs/NSP-PROTOCOL-SPEC.md) / [Runemate](../../osi-of-mind/specs/RUNEMATE.md)
+> **Integration Roadmap:** [osi-of-mind/specs/INTEGRATION-ROADMAP.md](../../osi-of-mind/specs/INTEGRATION-ROADMAP.md)
 
 ---
 
@@ -192,11 +192,11 @@ The QIF Neurosecurity Stack positions Neurowall and Runemate as sibling defense 
 
 ## Derivation History
 
-**QIF-level derivations** (in [QIF-NEUROWALL-DERIVATION-LOG.md](../../model/QIF-NEUROWALL-DERIVATION-LOG.md)):
+**QIF-level derivations** (in [QIF-NEUROWALL-DERIVATION-LOG.md](../../osi-of-mind/QIF-NEUROWALL-DERIVATION-LOG.md)):
 
-- **[Entry 68](../../model/QIF-NEUROWALL-DERIVATION-LOG.md#entry-68-guardrails-ssvep-thalamic-gate-raw):** Security Guardrails Synthesis + SSVEP Discovery + Thalamic Gate Model. Physics layer as boundary, not control.
-- **[Entry 69](../../model/QIF-NEUROWALL-DERIVATION-LOG.md#entry-69-nist-iso-hardened-mapping):** NIST/ISO Hardened Compliance Mapping. Bridges neurorights to auditable technical evidence (NIST SP 800-53 / ISO 27001).
-- **[Entry 70](../../model/QIF-NEUROWALL-DERIVATION-LOG.md#entry-70-wearable-neural-firewall):** Wearable Neural Firewall. Full architectural derivation: NSP v0.5 integration, Merkle amortization, Delta+LZ4 compression, Runemate Scribe execution.
+- **[Entry 68](../../osi-of-mind/QIF-NEUROWALL-DERIVATION-LOG.md#entry-68-guardrails-ssvep-thalamic-gate-raw):** Security Guardrails Synthesis + SSVEP Discovery + Thalamic Gate Model. Physics layer as boundary, not control.
+- **[Entry 69](../../osi-of-mind/QIF-NEUROWALL-DERIVATION-LOG.md#entry-69-nist-iso-hardened-mapping):** NIST/ISO Hardened Compliance Mapping. Bridges neurorights to auditable technical evidence (NIST SP 800-53 / ISO 27001).
+- **[Entry 70](../../osi-of-mind/QIF-NEUROWALL-DERIVATION-LOG.md#entry-70-wearable-neural-firewall):** Wearable Neural Firewall. Full architectural derivation: NSP v0.5 integration, Merkle amortization, Delta+LZ4 compression, Runemate Scribe execution.
 
 **Neurowall-specific engineering log** (in [NEUROWALL-DERIVATION-LOG.md](./NEUROWALL-DERIVATION-LOG.md)):
 

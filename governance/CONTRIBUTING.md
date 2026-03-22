@@ -17,4 +17,4 @@ Cross-AI reviewer. Tone/credibility review, physics validation, neuroethics comp
 ---
 
 ## Kevin's Dog
-Qinnovate's first service dog contributor. Pressed "Enter" and "3" during the initial build session, contributing to the guide dog detection pipeline in the most direct way possible — by being present while we built it for dogs like them. [Read more](https://github.com/qinnovates/neurosecurity/blob/main/model/QIF-FIELD-JOURNAL.md#entry-026).
+Qinnovate's first service dog contributor. Pressed "Enter" and "3" during the initial build session, contributing to the guide dog detection pipeline in the most direct way possible — by being present while we built it for dogs like them. [Read more](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#entry-026).

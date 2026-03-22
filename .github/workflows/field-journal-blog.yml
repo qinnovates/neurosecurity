@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'model/QIF-FIELD-JOURNAL.md'
+      - 'osi-of-mind/QIF-FIELD-JOURNAL.md'
   workflow_dispatch:
 
 concurrency:

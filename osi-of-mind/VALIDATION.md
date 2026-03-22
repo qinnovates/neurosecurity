@@ -91,7 +91,7 @@
 - Latency benchmarks are desktop-class, not embedded
 - No real BCI data streams tested
 
-**Source:** [`model/nsp/nsp-core/`](model/nsp/nsp-core/)
+**Source:** [`osi-of-mind/nsp/nsp-core/`](osi-of-mind/nsp/nsp-core/)
 
 ---
 
@@ -114,7 +114,7 @@
 - Clinical appropriateness of score magnitudes not validated by clinicians
 - Equal-weight default assumption untested against real BCI incident data
 
-**Source:** [`model/NISS-v1.0-SPEC.md`](model/NISS-v1.0-SPEC.md), [`shared/qtara-registrar.json`](shared/qtara-registrar.json)
+**Source:** [`osi-of-mind/NISS-v1.0-SPEC.md`](osi-of-mind/NISS-v1.0-SPEC.md), [`shared/qtara-registrar.json`](shared/qtara-registrar.json)
 
 ---
 
@@ -139,7 +139,7 @@
 
 **Related TARA techniques:** QIF-T0001, QIF-T0003, QIF-T0005
 
-**Source:** [`model/`](model/)
+**Source:** [`osi-of-mind/`](osi-of-mind/)
 
 ---
 
@@ -189,7 +189,7 @@ This is the most architecturally significant validation result. The guardrails d
 - Architecture is concept design, not implemented
 - Cross-AI verification does not substitute for peer review
 
-**Source:** [`model/specs/qif-sec-guardrails.md`](specs/qif-sec-guardrails.md)
+**Source:** [`osi-of-mind/specs/qif-sec-guardrails.md`](specs/qif-sec-guardrails.md)
 
 ---
 

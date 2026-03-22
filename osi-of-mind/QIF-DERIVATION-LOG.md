@@ -1969,7 +1969,7 @@ The original NP scale (N/T/S) was too coarse. A binary jump from T(5) to S(10) c
 
 ### 13. NISS Neurological Extension — Full Documentation
 
-Published `model/NISS-NEUROLOGICAL-EXTENSION.md` documenting the complete neurological extension to NISS:
+Published `osi-of-mind/NISS-NEUROLOGICAL-EXTENSION.md` documenting the complete neurological extension to NISS:
 
 - **42 neurological conditions** across 7 categories mapped to NISS metrics
 - **CD (Cognitive Disruption) broadening rationale** — CD now covers neurological disruption beyond cognitive processes
@@ -2291,7 +2291,7 @@ Each researcher entry includes: institution, country (ISO 3166-1), expertise tag
 **2. Triple-Sync Citation Protocol**
 
 Established in CLAUDE.md: every new citation or source used anywhere in the project must update ALL THREE stores:
-1. `model/QIF-RESEARCH-SOURCES.md` — living catalog with IDs, URLs, relevance
+1. `osi-of-mind/QIF-RESEARCH-SOURCES.md` — living catalog with IDs, URLs, relevance
 2. `paper/references.bib` — BibTeX for LaTeX/preprint
 3. `shared/research-registry.json` — structured JSON for cross-referencing and site features
 
@@ -3881,7 +3881,7 @@ QIF's genuine contributions to the neurorights framework are:
 
 ### Files Changed
 
-CA references removed from: governance/NEUROETHICS_ALIGNMENT.md, governance/CODE_OF_CONDUCT.md, model/QIF-TRUTH.md, src/lib/threat-data.ts, src/lib/brain-view-data.ts, src/lib/neurogovernance-data.ts, src/lib/glossary-constants.ts, src/pages/neurogovernance.astro, src/pages/whitepaper/index.astro, src/pages/whitepaper/v6.astro, src/pages/TARA/[id].astro, src/data/milestones.json, shared/qif-ethics-controls.json, shared/qtara-registrar.json (62 techniques), scripts/enrich-neurorights.py, blogs/2026-02-16-your-brain-has-rights-we-counted-them.md, and archive ONI_Whitepaper.md copies.
+CA references removed from: governance/NEUROETHICS_ALIGNMENT.md, governance/CODE_OF_CONDUCT.md, osi-of-mind/QIF-TRUTH.md, src/lib/threat-data.ts, src/lib/brain-view-data.ts, src/lib/neurogovernance-data.ts, src/lib/glossary-constants.ts, src/pages/neurogovernance.astro, src/pages/whitepaper/index.astro, src/pages/whitepaper/v6.astro, src/pages/TARA/[id].astro, src/data/milestones.json, shared/qif-ethics-controls.json, shared/qtara-registrar.json (62 techniques), scripts/enrich-neurorights.py, blogs/2026-02-16-your-brain-has-rights-we-counted-them.md, and archive ONI_Whitepaper.md copies.
 
 ### AI Collaboration
 
@@ -5206,7 +5206,7 @@ This framework is aligned with NIMH's Research Domain Criteria (RDoC) approach �
 *Created: 2026-02-02*
 *Last entry: #54 (2026-02-14)*
 *Maintainer: Kevin Qi*
-*Location: qinnovates/qinnovate/model/QIF-DERIVATION-LOG.md*
+*Location: qinnovates/qinnovate/osi-of-mind/QIF-DERIVATION-LOG.md*
 
 ---
 
@@ -9954,7 +9954,7 @@ None of these are framework-breaking. They're presentation and rigor improvement
 ## Entry 15: QIF v3.1 — 7-Band Symmetric Model (Validated by External Research)
 
 **Date:** 2026-02-02
-**Location:** `qinnovates/qinnovate/model/qif-lab/`
+**Location:** `qinnovates/qinnovate/osi-of-mind/qif-lab/`
 **Status:** IMPLEMENTED
 **Depends on:** Entry 14
 

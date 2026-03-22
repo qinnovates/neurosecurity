@@ -39,7 +39,7 @@ This project does both. It asks: **what happens to a patient when their brain-co
 
 ```
 neurosecurity/
-├── model/            QIF Model — specs, whitepapers, derivation logs, threat catalog
+├── osi-of-mind/            QIF Model — specs, whitepapers, derivation logs, threat catalog
 ├── research/         Blog posts, academic paper, clinical notes
 ├── datalake/         TARA registry (161 techniques), datasets, parquet
 ├── governance/       Policy, ethics, consent, changelog, security policy
@@ -51,7 +51,7 @@ Each directory has a `CONTEXT.md` with a summary and file map. Start with any di
 
 | Start here | If you want to... |
 |------------|-------------------|
-| [model/](model/) | Read the QIF Model, TARA specs, or whitepapers |
+| [osi-of-mind/](osi-of-mind/) | Read the QIF Model, TARA specs, or whitepapers |
 | [research/blog/](research/blog/) | Read field journal entries and technical posts |
 | [datalake/](datalake/) | Query or download the 161-technique threat registry |
 | [governance/](governance/) | Review policy, ethics, or the decision log |
@@ -95,7 +95,7 @@ npm run build     # Build site (282 pages)
 
 The author is a security engineer with ~15 years of IT and security infrastructure experience, not a mathematician, physicist, or neuroscientist. AI tools (primarily Claude, with Gemini and ChatGPT for cross-validation) were used extensively. All AI-derived claims should be treated as **proposed and unvalidated** until independently verified by domain experts.
 
-**Full transparency:** [Transparency Statement](governance/TRANSPARENCY.md) | [Derivation Log](model/QIF-DERIVATION-LOG.md) (113 entries) | [Decision Log](governance/DECISION-LOG.md) | [Validation Status](model/VALIDATION.md)
+**Full transparency:** [Transparency Statement](governance/TRANSPARENCY.md) | [Derivation Log](osi-of-mind/QIF-DERIVATION-LOG.md) (113 entries) | [Decision Log](governance/DECISION-LOG.md) | [Validation Status](osi-of-mind/VALIDATION.md)
 
 ---
 
@@ -118,17 +118,17 @@ The author is a security engineer with ~15 years of IT and security infrastructu
 <details>
 <summary><strong>Validation Summary</strong></summary>
 
-Solo research, tested honestly. Full methodology and limitations at **[VALIDATION.md](model/VALIDATION.md)** | **[Live dashboard](https://qinnovate.com/research/validation/)**
+Solo research, tested honestly. Full methodology and limitations at **[VALIDATION.md](osi-of-mind/VALIDATION.md)** | **[Live dashboard](https://qinnovate.com/research/validation/)**
 
 | What | Result | Tier |
 |------|--------|------|
-| [Neurowall coherence monitor](model/VALIDATION.md#val-001) | 11/14 at 15s, 9/9 at 20s, 50-run stats, 0% FPR | Simulation + Independent |
-| [BrainFlow validation](model/VALIDATION.md#val-002) | 16-channel, 100% detection, 0% FPR | Independent |
-| [Physics security guardrails](model/VALIDATION.md#val-007) | 12/13 constraints verified, 4-layer architecture | Analytical + Cross-AI |
-| [Protocol vulnerability](model/VALIDATION.md#val-006) | Real vulnerability in BCI streaming protocol, responsibly disclosed | Disclosed |
-| [NSP transport](model/VALIDATION.md#val-003) | Round-trip simulation PASS, 65-90% compression | Simulation |
-| [NISS scoring engine](model/VALIDATION.md#val-004) | 109/109 techniques scored, PINS flags correct | Simulation |
-| [Citation verification](model/VALIDATION.md#val-009) | 3 fabricated citations caught and removed from preprint v1.0 | Audit |
+| [Neurowall coherence monitor](osi-of-mind/VALIDATION.md#val-001) | 11/14 at 15s, 9/9 at 20s, 50-run stats, 0% FPR | Simulation + Independent |
+| [BrainFlow validation](osi-of-mind/VALIDATION.md#val-002) | 16-channel, 100% detection, 0% FPR | Independent |
+| [Physics security guardrails](osi-of-mind/VALIDATION.md#val-007) | 12/13 constraints verified, 4-layer architecture | Analytical + Cross-AI |
+| [Protocol vulnerability](osi-of-mind/VALIDATION.md#val-006) | Real vulnerability in BCI streaming protocol, responsibly disclosed | Disclosed |
+| [NSP transport](osi-of-mind/VALIDATION.md#val-003) | Round-trip simulation PASS, 65-90% compression | Simulation |
+| [NISS scoring engine](osi-of-mind/VALIDATION.md#val-004) | 109/109 techniques scored, PINS flags correct | Simulation |
+| [Citation verification](osi-of-mind/VALIDATION.md#val-009) | 3 fabricated citations caught and removed from preprint v1.0 | Audit |
 | **Not yet tested** | NISS clinical validation, DSM-5-TR mappings, BCI Limits Eq, real EEG, real hardware, real attacks | |
 
 This is early-stage research by a solo researcher. Empirical validation requires BCI hardware, IRB approval, and clinical expertise. Everything is published openly so research groups with those resources can test, validate, refute, or extend it.
@@ -144,14 +144,14 @@ This is early-stage research by a solo researcher. Empirical validation requires
 
 | Component | Description | Status |
 |-----------|-------------|--------|
-| **[QIF](https://qinnovate.com/framework/)** | 11-band hourglass security architecture for BCIs | Proposed, v6.3 ([v8.0 draft](model/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md)) |
+| **[QIF](https://qinnovate.com/framework/)** | 11-band hourglass security architecture for BCIs | Proposed, v6.3 ([v8.0 draft](osi-of-mind/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md)) |
 | **[Working Paper](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper (CC-BY 4.0) | Published |
 | **[TARA](https://qinnovate.com/atlas/tara/)** | 161 BCI technique pairs, STIX 2.1 registry | v1.7 |
 | **[qtara](https://pypi.org/project/qtara/)** | Python SDK for TARA registry management and STIX export | v0.2.0 |
 | **[NSP](https://qinnovate.com/tools/nsp/)** | Post-quantum wire protocol for BCI data links | In development, v0.5 |
 | **[NISS](https://qinnovate.com/atlas/scoring/)** | CVSS v4.0 extension proposal for neural interfaces (6 neural metrics) | Proposed, v1.1 |
 | **[Runemate](https://qinnovate.com/tools/runemate/)** | Native DSL compiler (67.8% compression in simulation) | v1.0 Compiler |
-| **[Security Guardrails](model/specs/qif-sec-guardrails.md)** | Physics-derived defense architecture for BCIs | Concept |
+| **[Security Guardrails](osi-of-mind/specs/qif-sec-guardrails.md)** | Physics-derived defense architecture for BCIs | Concept |
 | **[Knight's Watch](https://qinnovate.com/vision/)** | Opt-in community deterrence mesh for missing children and anti-trafficking. Privacy-first (no raw data leaves device), COPPA-compliant by architecture, blockchain-auditable participation. Inherits NSP/Neurowall/Runemate stack | Concept |
 
 ### Tools
@@ -159,7 +159,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | Component | Description | Status |
 |-----------|-------------|--------|
 | **[Neural Atlas](https://qinnovate.com/neural-atlas/)** | Browser-based neural security monitoring with sample EEG data, threat detection, and NISS scoring | Published |
-| **[Neurowall](./model/tools/neurowall/)** | Neural firewall prototype (differential privacy + NISS + policy engine) | In development, v0.8 |
+| **[Neurowall](./osi-of-mind/tools/neurowall/)** | Neural firewall prototype (differential privacy + NISS + policy engine) | In development, v0.8 |
 | **[macshield](https://github.com/qinnovates/macshield)** | macOS workstation hardening for public WiFi | v0.4.1 |
 
 **Neural Atlas — Built With:**
@@ -183,7 +183,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | Component | Description | Status |
 |-----------|-------------|--------|
 | **[Zenodo](https://doi.org/10.5281/zenodo.18640105)** | Working paper, CC-BY 4.0, LaTeX source included | Published |
-| **[Research Sources](model/QIF-RESEARCH-SOURCES.md)** | 340+ verified sources across 9 domains | Active |
+| **[Research Sources](osi-of-mind/QIF-RESEARCH-SOURCES.md)** | 340+ verified sources across 9 domains | Active |
 | **[CVE-TARA Mapping](datalake/cve-technique-mapping.json)** | 55 NVD-verified CVEs mapped to 21 TARA techniques | Published |
 | **[EEG Data Pipeline](datalake/EEG-DATA-PIPELINE.md)** | Curated EEG datasets, synthetic generation, KQL tagging, license verification | Active |
 | FIRST.org CVSS SIG | NISS proposed as CVSS v4.0 extension; outreach in progress | In progress |
@@ -267,14 +267,14 @@ A proposed CVSS v4.0 extension for neural interfaces. Six metrics that CVSS cann
 Post-quantum wire protocol (v0.5). ML-KEM-768, ML-DSA, AES-256-GCM-SIV at the frame level. Designed for implant-class hardware. Performance claims are from simulation only — hardware validation pending.
 
 - **Spec:** [qinnovate.com/guardrails/nsp](https://qinnovate.com/guardrails/nsp/)
-- **Implementation:** [model/nsp/nsp-core/](model/nsp/nsp-core/) (Rust)
+- **Implementation:** [osi-of-mind/nsp/nsp-core/](osi-of-mind/nsp/nsp-core/) (Rust)
 
 ### Runemate
 
 Native DSL compiler (67.8% compression in simulation). Phase 2/3 goal: compile semantic content into electrode stimulation patterns for direct cortical rendering (vision restoration). This is speculative — the compiler exists, the cortical rendering does not.
 
 - **Spec:** [qinnovate.com/guardrails/runemate](https://qinnovate.com/guardrails/runemate/)
-- **Compiler:** [model/runemate/forge/](model/runemate/forge/) (Rust)
+- **Compiler:** [osi-of-mind/runemate/forge/](osi-of-mind/runemate/forge/) (Rust)
 
 </details>
 
@@ -362,10 +362,10 @@ This project uses a **single-source-of-truth model** for decision tracking. One 
 
 | Document | Purpose | Audience | Maintained |
 |----------|---------|----------|------------|
-| **[QIF-DERIVATION-LOG.md](model/QIF-DERIVATION-LOG.md)** | Lab notebook — every framework insight, decision, correction. RACI attribution, AI contribution level per entry. | Kevin (future self), peer reviewers, collaborators | Per session (max 1 entry) |
+| **[QIF-DERIVATION-LOG.md](osi-of-mind/QIF-DERIVATION-LOG.md)** | Lab notebook — every framework insight, decision, correction. RACI attribution, AI contribution level per entry. | Kevin (future self), peer reviewers, collaborators | Per session (max 1 entry) |
 | **[DECISION-LOG.md](governance/DECISION-LOG.md)** | RACI tables — who decided, who built, who reviewed. | Governance auditors, future collaborators | Auto-generated: `npm run decisions` |
 | **[TRANSPARENCY.md](governance/TRANSPARENCY.md)** | AI collaboration disclosure — contribution matrix, correction count, tool versions. | Peer reviewers, venues (arXiv, ACM, IEEE) | Auto-generated: `npm run transparency` |
-| **[QIF-FIELD-JOURNAL.md](model/QIF-FIELD-JOURNAL.md)** | Personal/experiential observations. Kevin's raw voice. AI cannot write this. | Kevin only | When something surprises him |
+| **[QIF-FIELD-JOURNAL.md](osi-of-mind/QIF-FIELD-JOURNAL.md)** | Personal/experiential observations. Kevin's raw voice. AI cannot write this. | Kevin only | When something surprises him |
 | **[CHANGELOG.md](governance/CHANGELOG.md)** | Auto-generated from git commits. What changed, not why. | Developers, contributors | Auto: `npm run changelog` |
 
 </details>
@@ -536,7 +536,7 @@ Replace `v1.0` and `v2.0` with any two tags, branches, or commit SHAs. GitHub re
 **Visual file history:**
 Replace `github.com` with `github.githistory.xyz` in any file URL to see an animated diff of every commit that touched that file. Example:
 ```
-https://github.githistory.xyz/qinnovates/neurosecurity/blob/main/model/QIF-DERIVATION-LOG.md
+https://github.githistory.xyz/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md
 ```
 
 **Permanent archive (survives repo deletion):**
@@ -550,7 +550,7 @@ The same git history that lets you trace how a security framework evolved is the
 
 This is the same principle that runs through the entire project. TARA documents 161 BCI techniques where the attack mechanism and the therapeutic mechanism are physically identical. Signal injection is how you compromise a neural interface. It is also how you treat Parkinson's disease. The tool does not determine the use. The boundary is always consent, oversight, and intent.
 
-We publish full history because transparency is the foundation of trust in security research. Every claim in this repo can be traced to the commit where it was introduced, the source that informed it, and the [derivation log entry](model/QIF-DERIVATION-LOG.md) where the decision was made. If something was wrong, you can see when it was corrected and why.
+We publish full history because transparency is the foundation of trust in security research. Every claim in this repo can be traced to the commit where it was introduced, the source that informed it, and the [derivation log entry](osi-of-mind/QIF-DERIVATION-LOG.md) where the decision was made. If something was wrong, you can see when it was corrected and why.
 
 </details>
 

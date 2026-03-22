@@ -392,7 +392,7 @@ Requires Rust (edition 2024).
 
 ```bash
 # Build the compiler
-cd model/runemate/forge
+cd osi-of-mind/runemate/forge
 cargo build
 
 # Run tests

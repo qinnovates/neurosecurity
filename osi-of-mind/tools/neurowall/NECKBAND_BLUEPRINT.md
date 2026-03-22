@@ -2,7 +2,7 @@
 
 > **Status:** Concept / Early Research
 > **Date:** 2026-02-21
-> **Origin:** [Field Journal Entry 018](../model/QIF-FIELD-JOURNAL.md#entry-018) — "Building the Moat Around the Castle"
+> **Origin:** [Field Journal Entry 018](../osi-of-mind/QIF-FIELD-JOURNAL.md#entry-018) — "Building the Moat Around the Castle"
 > **Related:** [BCI Limits Equation](../research/bci-limits-equation.md) | [Architecture](./ARCHITECTURE.md) | [MVP Prototype](./MVP_PROTOTYPE.md)
 
 ---
@@ -326,4 +326,4 @@ The neckband sits comfortably within all physical constraints. Unlike invasive B
 
 ---
 
-*Concept by Kevin L. Qi. See [Field Journal Entry 018](../model/QIF-FIELD-JOURNAL.md#entry-018) for the origin story.*
+*Concept by Kevin L. Qi. See [Field Journal Entry 018](../osi-of-mind/QIF-FIELD-JOURNAL.md#entry-018) for the origin story.*

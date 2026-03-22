@@ -2,7 +2,7 @@
 """
 EEG Preprocessing Pipeline — Raw EEG (EDF, MAT) to Parquet for QIF Data Studio.
 
-Reads downloaded EEG data from model/qif-lab/data/<dataset-id>/, applies
+Reads downloaded EEG data from osi-of-mind/qif-lab/data/<dataset-id>/, applies
 MNE-Python preprocessing (filtering, downsampling, artifact rejection, PSD), and
 outputs Parquet files to src/site/data/parquet/eeg/ for the static Astro site.
 

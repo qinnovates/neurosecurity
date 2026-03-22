@@ -7,7 +7,7 @@ Date:           2026-02-18
 Status:         Implemented (Alpha)
 Author:         Kevin Qi (Qinnovate)
 Framework:      QIF v4.0 Hourglass Model (11-band, 7-1-3)
-Integration:    model/specs/INTEGRATION-ROADMAP.md (unified NSP + Runemate + Neurowall roadmap)
+Integration:    osi-of-mind/specs/INTEGRATION-ROADMAP.md (unified NSP + Runemate + Neurowall roadmap)
 ```
 
 ---
@@ -1776,7 +1776,7 @@ Version:        0.5
 Status:         Draft
 Date:           2026-02-18
 Author:         Kevin Qi (Qinnovate)
-Location:       qinnovates/qinnovate/model/
+Location:       qinnovates/qinnovate/osi-of-mind/
 Related:        NSP-PITCH.md, NSP-USE-CASE.md, QIF-TRUTH.md
 Reviewed by:    Gemini (Google, independent peer review rounds 1-2),
                 Claude Opus 4.6 (Anthropic, cryptographic security audit, round 3)

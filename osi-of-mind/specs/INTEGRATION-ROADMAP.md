@@ -248,4 +248,4 @@ NSP is the single source of truth for cryptography and compression across the en
 - [Neurowall README](tools/neurowall/README.md)
 - [Neurowall MVP Prototype](tools/neurowall/MVP_PROTOTYPE.md)
 - [Neurowall Architecture](tools/neurowall/ARCHITECTURE.md)
-- [TARA Techniques](model/QIF-TARA-TECHNIQUES.md)
+- [TARA Techniques](osi-of-mind/QIF-TARA-TECHNIQUES.md)
