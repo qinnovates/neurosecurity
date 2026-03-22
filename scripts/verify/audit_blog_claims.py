@@ -13,7 +13,7 @@ from pathlib import Path
 
 from utils import REPO_ROOT, make_result, print_report
 
-BLOGS_DIR = REPO_ROOT / 'blogs'
+BLOGS_DIR = REPO_ROOT / 'research/blog'
 
 # Patterns that suggest factual claims needing sources
 CLAIM_PATTERNS = [

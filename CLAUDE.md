@@ -13,14 +13,14 @@ Domain-specific protocols load automatically via `.claude/rules/` when you work 
 | Sync Protocols | `.claude/rules/sync-protocols.md` | `QIF-RESEARCH-SOURCES`, `automation-registry`, `qif-timeline` |
 | Registrar Update | `.claude/rules/registrar.md` | `qtara-registrar.json`, `tara-chains`, `qtara/**` |
 | Derivation Log | `.claude/rules/derivation-log.md` | `QIF-DERIVATION-LOG`, `QIF-FIELD-JOURNAL`, `DECISION-LOG` |
-| Citation Integrity | `.claude/rules/citation-integrity.md` | `paper/**`, `QIF-RESEARCH-SOURCES`, `research-registry` |
-| AI Disclosure | `.claude/rules/ai-disclosure.md` | `paper/**`, `blogs/**` |
+| Citation Integrity | `.claude/rules/citation-integrity.md` | `research/paper/**`, `QIF-RESEARCH-SOURCES`, `research-registry` |
+| AI Disclosure | `.claude/rules/ai-disclosure.md` | `research/paper/**`, `research/blog/**` |
 | Whitepaper Archival | `.claude/rules/whitepaper-archival.md` | `src/pages/research/whitepaper/**` |
-| AI Security Ethics | `.claude/rules/ai-security-ethics.md` | `qif-framework/**`, `governance/**`, `paper/**`, `blogs/**` |
+| AI Security Ethics | `.claude/rules/ai-security-ethics.md` | `model/**`, `governance/**`, `research/**` |
 
 ## claudeq Mode -- Live Derivation Journaling
 
-When Kevin says "claudeq" or "start journaling", activate live derivation logging to `qif-framework/QIF-DERIVATION-LOG.md`.
+When Kevin says "claudeq" or "start journaling", activate live derivation logging to `model/QIF-DERIVATION-LOG.md`.
 
 ### Activation Steps
 1. Announce: "Derivation journal active. Tracking all exchanges to QIF-DERIVATION-LOG.md."

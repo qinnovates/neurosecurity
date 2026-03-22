@@ -3,11 +3,11 @@
 Convert QIF JSON datalake to Parquet format.
 
 Generates:
-  docs/data/parquet/*.parquet         — one file per logical table
-  docs/data/parquet/catalog.json      — metadata manifest for the Data Studio
+  site/data/parquet/*.parquet         — one file per logical table
+  site/data/parquet/catalog.json      — metadata manifest for the Data Studio
 
 Architecture:
-  datalake/*.json → PyArrow → docs/data/parquet/*.parquet
+  datalake/*.json → PyArrow → site/data/parquet/*.parquet
   Served as static files at /data/parquet/ on the live site.
 
 Usage:

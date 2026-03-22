@@ -118,7 +118,7 @@ jobs:
           DATE=${{ steps.quarter.outputs.date }}
           QUARTER_LOWER=$(echo $QUARTER | tr '[:upper:]' '[:lower:]')
 
-          FILENAME="blogs/${DATE}-${QUARTER_LOWER}-${YEAR}-bci-intelligence-report.md"
+          FILENAME="research/blog/${DATE}-${QUARTER_LOWER}-${YEAR}-bci-intelligence-report.md"
 
           cat > "$FILENAME" << EOF
           ---

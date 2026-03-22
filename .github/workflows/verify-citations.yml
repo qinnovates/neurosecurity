@@ -3,16 +3,16 @@ name: Verify Citations & Facts
 on:
   pull_request:
     paths:
-      - 'paper/**'
-      - 'blogs/**'
+      - 'research/paper/**'
+      - 'research/blog/**'
       - 'datalake/qtara-registrar.json'
       - 'src/lib/whitepaper-stats.ts'
-      - 'qif-framework/**'
+      - 'model/**'
   push:
     branches: [main]
     paths:
-      - 'blogs/**'
-      - 'qif-framework/**'
+      - 'research/blog/**'
+      - 'model/**'
 
 permissions:
   contents: read

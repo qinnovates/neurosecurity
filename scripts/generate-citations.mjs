@@ -22,7 +22,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 
 const REGISTRY_PATH = resolve(ROOT, 'datalake/research-registry.json');
-const SOURCES_PATH = resolve(ROOT, 'qif-framework/QIF-RESEARCH-SOURCES.md');
+const SOURCES_PATH = resolve(ROOT, 'model/QIF-RESEARCH-SOURCES.md');
 const LANDSCAPE_PATH = resolve(ROOT, 'src/pages/landscape.astro');
 
 const dryRun = process.argv.includes('--dry-run');

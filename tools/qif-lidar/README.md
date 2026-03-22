@@ -108,7 +108,7 @@ QIFLiDAR/
 This tool is part of the QIF research program exploring sensor-to-perception pipelines for BCI safety.
 
 - **Tech spec:** `tools/qif-lidar/project.yml`
-- **Derivation log:** Entries 91--92 in `qif-framework/QIF-DERIVATION-LOG.md` cover the phosphene ramp derivation and field test observations
+- **Derivation log:** Entries 91--92 in `model/QIF-DERIVATION-LOG.md` cover the phosphene ramp derivation and field test observations
 
 ---
 

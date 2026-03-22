@@ -42,7 +42,7 @@ Example: editing `datalake/qtara-registrar.json` triggers both `registrar.md` an
 | `citation-integrity.md` | `paper/**`, research registry | Citation verification (anti-hallucination) |
 | `ai-disclosure.md` | `paper/**`, `blogs/**` | Publication AI disclosure compliance |
 | `whitepaper-archival.md` | `src/pages/research/whitepaper/**` | Whitepaper version archival protocol |
-| `ai-security-ethics.md` | `qif-framework/**`, `governance/**` | AI Security Ethics framework gateway |
+| `ai-security-ethics.md` | `model/**`, `governance/**` | AI Security Ethics framework gateway |
 
 ## Agents
 

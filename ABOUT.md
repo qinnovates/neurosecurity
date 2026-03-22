@@ -38,7 +38,7 @@ For more on the framework architecture and the therapeutic counterpart insight, 
 
 AI (predominantly Claude, alongside Gemini and ChatGPT) helped me lay out ideas, validate research, and tie together pieces I mapped out. The architecture, scoring, clinical mappings, and cross-domain connections are mine. AI helped get the work out of my head and into a form others can evaluate.
 
-Full disclosure: [Transparency Statement](governance/TRANSPARENCY.md) | [AI Ethics Principles](governance/policy/AI-ETHICS-PROPOSAL.md) | [Derivation Log](qif-framework/QIF-DERIVATION-LOG.md) (113 entries)
+Full disclosure: [Transparency Statement](governance/TRANSPARENCY.md) | [AI Ethics Principles](governance/policy/AI-ETHICS-PROPOSAL.md) | [Derivation Log](model/QIF-DERIVATION-LOG.md) (113 entries)
 
 ## What Comes Next
 

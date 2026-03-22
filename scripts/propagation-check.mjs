@@ -108,20 +108,20 @@ function checkDataConsistency() {
   }
 
   // 2. KQL tables JSON
-  const kqlPath = 'docs/data/kql-tables.json';
+  const kqlPath = 'site/data/kql-tables.json';
   if (fileExists(kqlPath)) {
     try {
       readJSON(kqlPath);
       pass(`KQL tables present (${fileSizeKB(kqlPath)}KB)`);
     } catch {
-      fail('docs/data/kql-tables.json exists but is invalid JSON');
+      fail('site/data/kql-tables.json exists but is invalid JSON');
     }
   } else {
-    warn('docs/data/kql-tables.json missing (run: npm run prebuild)');
+    warn('site/data/kql-tables.json missing (run: npm run prebuild)');
   }
 
   // 3. Parquet catalog
-  const catalogPath = 'docs/data/parquet/catalog.json';
+  const catalogPath = 'site/data/parquet/catalog.json';
   if (fileExists(catalogPath)) {
     try {
       const catalog = readJSON(catalogPath);
@@ -130,14 +130,14 @@ function checkDataConsistency() {
         : Array.isArray(catalog) ? catalog.length : Object.keys(catalog).length;
       pass(`Parquet catalog present (${datasetCount} datasets)`);
     } catch {
-      fail('docs/data/parquet/catalog.json exists but is invalid JSON');
+      fail('site/data/parquet/catalog.json exists but is invalid JSON');
     }
   } else {
-    warn('docs/data/parquet/catalog.json missing (run: npm run prebuild)');
+    warn('site/data/parquet/catalog.json missing (run: npm run prebuild)');
   }
 
   // 4. Parquet file count vs catalog dataset count
-  const parquetDir = resolve(ROOT, 'docs/data/parquet');
+  const parquetDir = resolve(ROOT, 'site/data/parquet');
   if (fileExists(catalogPath) && existsSync(parquetDir)) {
     try {
       const catalog = readJSON(catalogPath);
@@ -178,13 +178,13 @@ function checkGovernanceSync() {
   console.log(`\n${GREEN}[health]${RESET} Checking governance sync...`);
 
   // 1. Derivation log exists
-  const derivLogPath = 'qif-framework/QIF-DERIVATION-LOG.md';
+  const derivLogPath = 'model/QIF-DERIVATION-LOG.md';
   if (fileExists(derivLogPath)) {
     const content = readText(derivLogPath);
     const entryHeaders = content.match(/^## Entry \d+/gm) || [];
     pass(`Derivation log: ${entryHeaders.length} entries`);
   } else {
-    fail('qif-framework/QIF-DERIVATION-LOG.md missing');
+    fail('model/QIF-DERIVATION-LOG.md missing');
   }
 
   // 2. Decision log AUTO-GENERATED header
@@ -269,11 +269,11 @@ function checkCountConsistency() {
 
   // Check additional files for stale technique counts
   const additionalFiles = [
-    'qif-framework/whitepapers/QIF-TRUTH.md',
-    'qif-framework/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md',
-    'qif-framework/whitepapers/QIF-WHITEPAPER.md',
-    'qif-framework/tara-threat/README.md',
-    'qif-framework/README.md',
+    'model/whitepapers/QIF-TRUTH.md',
+    'model/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md',
+    'model/whitepapers/QIF-WHITEPAPER.md',
+    'model/tara-threat/README.md',
+    'model/README.md',
     'datalake/QIF-DATA-MAPPING.md',
     'src/data/convergence-data.ts',
   ];
@@ -297,7 +297,7 @@ function checkCountConsistency() {
   }
 
   // Check derivation log entry count vs governance reports
-  const derivLogPath = 'qif-framework/QIF-DERIVATION-LOG.md';
+  const derivLogPath = 'model/QIF-DERIVATION-LOG.md';
   const transparencyPath = 'governance/TRANSPARENCY.md';
   if (fileExists(derivLogPath) && fileExists(transparencyPath)) {
     const derivContent = readText(derivLogPath);
@@ -347,22 +347,22 @@ function checkBuildArtifacts() {
   }
 
   // Check KQL tables staleness
-  const kqlPath = 'docs/data/kql-tables.json';
+  const kqlPath = 'site/data/kql-tables.json';
   if (fileExists(kqlPath) && newestSharedMtime > 0) {
     const kqlMtime = fileMtime(kqlPath);
     if (kqlMtime < newestSharedMtime) {
-      warn(`docs/data/kql-tables.json is older than datalake/${newestSharedFile} (run: npm run prebuild)`);
+      warn(`site/data/kql-tables.json is older than datalake/${newestSharedFile} (run: npm run prebuild)`);
     } else {
       pass('KQL tables up to date');
     }
   }
 
   // Check parquet catalog staleness
-  const catalogPath = 'docs/data/parquet/catalog.json';
+  const catalogPath = 'site/data/parquet/catalog.json';
   if (fileExists(catalogPath) && newestSharedMtime > 0) {
     const catMtime = fileMtime(catalogPath);
     if (catMtime < newestSharedMtime) {
-      warn(`docs/data/parquet/catalog.json is older than datalake/${newestSharedFile} (run: npm run prebuild)`);
+      warn(`site/data/parquet/catalog.json is older than datalake/${newestSharedFile} (run: npm run prebuild)`);
     } else {
       pass('Parquet catalog up to date');
     }

@@ -32,7 +32,7 @@ governance/
 
 ## Auto-Generated Files
 
-`DECISION-LOG.md` and `TRANSPARENCY.md` are generated from `qif-framework/QIF-DERIVATION-LOG.md`. Do not edit directly. Run:
+`DECISION-LOG.md` and `TRANSPARENCY.md` are generated from `model/QIF-DERIVATION-LOG.md`. Do not edit directly. Run:
 ```bash
 npm run governance
 ```

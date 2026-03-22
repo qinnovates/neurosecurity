@@ -31,7 +31,7 @@ from utils import (
 import urllib.request
 import urllib.error
 
-BLOGS_DIR = REPO_ROOT / 'blogs'
+BLOGS_DIR = REPO_ROOT / 'research/blog'
 
 # ── Patterns ──
 
@@ -60,7 +60,7 @@ NUMERICAL_CLAIM_PATTERN = re.compile(
 
 # URLs to skip (anchors within same repo, relative paths)
 SKIP_URL_PREFIXES = [
-    'https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md#',
+    'https://github.com/qinnovates/qinnovate/blob/main/model/QIF-FIELD-JOURNAL.md#',
 ]
 
 # Source patterns that indicate a claim is backed

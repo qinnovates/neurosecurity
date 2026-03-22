@@ -10,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   site: 'https://qinnovate.com',
-  publicDir: 'docs',
+  publicDir: 'site',
   redirects: {
     // Legacy short routes
     '/threats/': '/atlas/tara/',
