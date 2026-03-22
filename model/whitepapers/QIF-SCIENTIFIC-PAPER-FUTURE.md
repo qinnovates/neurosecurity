@@ -1585,7 +1585,7 @@ All five analytical frameworks converge on the same conclusion: BCI is in its fi
 
 QIF does not exist to slow BCI innovation. It exists so that when the first neural data breach occurs, when the first BCI-specific regulation is promulgated, when insurance companies begin requiring neural device security certifications, the groundwork is already in place. The security framework that exists at the inflection point defines the industry's response. NIST CSF shaped enterprise security. ISO/SAE 21434 shaped automotive cybersecurity. The framework that shapes BCI security will be the one that was built before it was needed.
 
-The full economic analysis supporting this section, including per-company investor tracking, cross-portfolio analysis, and detailed TAM methodology, is available in the companion research document (`model/research/BCI-ECONOMIC-ANALYSIS.md`) and queryable via the BCI Landscape API (Section 7.8).
+The full economic analysis supporting this section, including per-company investor tracking, cross-portfolio analysis, and detailed TAM methodology, is available in the companion research document (`research/BCI-ECONOMIC-ANALYSIS.md`) and queryable via the BCI Landscape API (Section 7.8).
 
 ## 14. Future Work
 

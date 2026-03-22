@@ -15,7 +15,7 @@ import atlas from '@shared/qif-brain-bci-atlas.json';
 import ethicsData from '@shared/qif-ethics-controls.json';
 import dsmData from '@shared/qif-dsm-mappings.json';
 import securityData from '@shared/qif-security-controls.json';
-import hardwareInventory from '../../site/bci-hardware-inventory.json';
+import hardwareInventory from '../site/bci-hardware-inventory.json';
 import { HOURGLASS_BANDS, HOURGLASS_WIDTHS } from './qif-constants';
 import { THREAT_VECTORS, type ThreatVector, type BandId } from './threat-data';
 

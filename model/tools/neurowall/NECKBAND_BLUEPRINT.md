@@ -3,7 +3,7 @@
 > **Status:** Concept / Early Research
 > **Date:** 2026-02-21
 > **Origin:** [Field Journal Entry 018](../model/QIF-FIELD-JOURNAL.md#entry-018) — "Building the Moat Around the Castle"
-> **Related:** [BCI Limits Equation](../model/research/bci-limits-equation.md) | [Architecture](./ARCHITECTURE.md) | [MVP Prototype](./MVP_PROTOTYPE.md)
+> **Related:** [BCI Limits Equation](../research/bci-limits-equation.md) | [Architecture](./ARCHITECTURE.md) | [MVP Prototype](./MVP_PROTOTYPE.md)
 
 ---
 

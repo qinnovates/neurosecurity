@@ -230,10 +230,10 @@ Screen flicker as a subliminal channel is decades old. BCIs simply give the atta
 
 | Technique | NISS | Severity | Neurorights | Detection Status |
 |-----------|------|----------|-------------|------------------|
-| [T0066 — Boiling Frog (Adiabatic Slow Drift)](../../model/research/techniques/) | 7.4 | High | CL, MI, PC | **Evaded** at 15s. Caught at 20s+ with hardware reference electrode. |
-| [T0067 — Phase Dynamics Replay / Mimicry](../../model/research/techniques/) | 6.4 | Medium | CL, MI, PC | **Evaded** ~90% at 15s. Requires biological TLS challenge-response. |
-| [T0103 — SSVEP Frequency Hijack (Neural Steganography)](../../model/research/techniques/QIF-T0103-ssvep-frequency-hijack.md) | 6.4 | Medium | MP, MI | Detected by SSVEP correlation + spectral peak. |
-| [T0040 — Neurophishing (Subliminal Stimuli)](../../model/research/techniques/) | 5.7 | Medium | MP, CL, MI | Dual-use: same technique used therapeutically (Implicit Association Test). |
+| [T0066 — Boiling Frog (Adiabatic Slow Drift)](../../research/techniques/) | 7.4 | High | CL, MI, PC | **Evaded** at 15s. Caught at 20s+ with hardware reference electrode. |
+| [T0067 — Phase Dynamics Replay / Mimicry](../../research/techniques/) | 6.4 | Medium | CL, MI, PC | **Evaded** ~90% at 15s. Requires biological TLS challenge-response. |
+| [T0103 — SSVEP Frequency Hijack (Neural Steganography)](../../research/techniques/QIF-T0103-ssvep-frequency-hijack.md) | 6.4 | Medium | MP, MI | Detected by SSVEP correlation + spectral peak. |
+| [T0040 — Neurophishing (Subliminal Stimuli)](../../research/techniques/) | 5.7 | Medium | MP, CL, MI | Dual-use: same technique used therapeutically (Implicit Association Test). |
 
 ### Why These Are Hard
 

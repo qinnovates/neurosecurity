@@ -3311,7 +3311,7 @@ Key insight from Kevin: "the Billy index is for average middle income americans.
 - **[DECISION]** Separated consumer indexes (Billy, Big Mac, XLY) from institutional indexes (PitchBook, Cambridge, Preqin) as proper audience framing for investors vs. general public
 - **[DECISION]** Elliott Wave analysis included with explicit limitations and caveats, not presented as forecast
 - **[DECISION]** Contribution count updated 17 -> 18
-- **[DECISION]** Full economic analysis companion document at `model/research/BCI-ECONOMIC-ANALYSIS.md` (detailed data, per-company investor tracking, methodology)
+- **[DECISION]** Full economic analysis companion document at `research/BCI-ECONOMIC-ANALYSIS.md` (detailed data, per-company investor tracking, methodology)
 - **[DECISION]** Whitepaper section is the condensed version; companion doc has full 8-section analysis with all citations
 
 ### Data Sources Crawled

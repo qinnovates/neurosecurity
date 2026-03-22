@@ -15,12 +15,12 @@ cp datalake/research-registry.json src/site/data/
 
 # 3. Generate KQL JSON (async-fetchable tables for BciKql)
 echo "[prebuild] Generating KQL JSON..."
-node scripts/generate-kql-json.mjs
+node src/scripts/generate-kql-json.mjs
 
 # 4. Generate Parquet datasets (optional — requires pyarrow)
 if python3 -c "import pyarrow" 2>/dev/null; then
   echo "[prebuild] Generating Parquet..."
-  python3 scripts/generate-parquet.py
+  python3 src/scripts/generate-parquet.py
 else
   echo "[prebuild] Skipping Parquet (pyarrow not installed)"
 fi
@@ -33,7 +33,7 @@ fi
 
 # 5. Regenerate governance docs from derivation log
 echo "[prebuild] Regenerating governance docs..."
-node scripts/generate-governance.mjs
+node src/scripts/generate-governance.mjs
 
 # 6. Copy paper PDF if it exists
 if [ -f research/paper/main.pdf ]; then

@@ -8,7 +8,7 @@
  * All computation runs at build time in Astro frontmatter.
  */
 
-import hardwareInventory from '../../site/bci-hardware-inventory.json';
+import hardwareInventory from '../site/bci-hardware-inventory.json';
 import atlas from '@shared/qif-brain-bci-atlas.json';
 import neurosecurityScores from '@shared/neurosecurity-scores.json';
 import { THREAT_VECTORS, type ThreatVector, type BandId, SEVERITY_COLORS } from './threat-data';
