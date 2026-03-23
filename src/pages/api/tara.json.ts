@@ -14,7 +14,7 @@ export const GET: APIRoute = async () => {
         status: 200,
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Origin': '*', // NOTE: wildcard CORS is intentional for public data. Do NOT add credentials support without restricting origin.
             'Cache-Control': 'public, max-age=3600',
         },
     });

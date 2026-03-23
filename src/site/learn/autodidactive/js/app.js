@@ -12,7 +12,7 @@ import { getRelated, getPathWithEdges, getAllNodes, getAllEdges } from './graph.
 import { search, highlightMatch, groupResults } from './search.js';
 import { renderPathList, renderPathDetail, markStepComplete, LEARNING_PATHS } from './paths.js?v=7';
 import { initCanvas, addNodeToCanvas, addPathToCanvas, setLayout, renderTray, renderCanvasControls, saveCanvas, loadCanvas, stopAnimation, getActiveContext, syncNotes } from './canvas.js';
-import { processMessage, processMessageTier3, renderChat, clearChat, trackStyle, getLearningStyle, getTutorPrefs, setTutorPref, initTier2, testConnection, processSynthesis } from './tutor.js?v=7';
+import { processMessage, processMessageTier3, renderChat, clearChat, trackStyle, getLearningStyle, getTutorPrefs, setTutorPref, initTier2, testConnection, processSynthesis, initTutorActionDelegation } from './tutor.js?v=7';
 import { renderEthicsTimeline } from './ethics-timeline.js';
 import { ETHICS_TIMELINE } from './data/ethics.js';
 import { renderNeuroanatomy } from './neuroanatomy.js';
@@ -1528,11 +1528,11 @@ function handleSearchInput(e) {
     for (const [type, items] of Object.entries(grouped)) {
       html += `<div class="search-group"><div class="search-group-title">${esc(type)}</div>`;
       for (const item of items) {
-        const onclick = item.type === 'Labs' ? `window._openLab('${item.id}'); window._closeSearch();`
-          : item.type === 'People' || item.type === 'Quotes' || item.type === 'Books' ? `window._openPerson('${item.id}'); window._closeSearch();`
-            : `window._closeSearch();`;
+        const searchAction = item.type === 'Labs' ? 'openLab'
+          : (item.type === 'People' || item.type === 'Quotes' || item.type === 'Books') ? 'openPerson'
+            : 'close';
         html += `
-          <div class="search-result-item" onclick="${onclick}">
+          <div class="search-result-item" data-search-action="${searchAction}" data-search-id="${esc(item.id || '')}">
             <div class="search-result-source">${esc(item.source)}</div>
             <div class="search-result-snippet">${highlightMatch(item.snippet, query)}</div>
             <div class="search-result-field">${esc(item.field)}</div>
@@ -1766,12 +1766,23 @@ function initApp() {
 
   // Search
   document.getElementById('search-input').addEventListener('input', handleSearchInput);
+  // Delegated click handler for search results (avoids inline onclick injection)
+  document.getElementById('search-results').addEventListener('click', (e) => {
+    const item = e.target.closest('.search-result-item[data-search-action]');
+    if (!item) return;
+    const action = item.dataset.searchAction;
+    const id = item.dataset.searchId;
+    if (action === 'openLab' && window._openLab) window._openLab(id);
+    else if (action === 'openPerson' && window._openPerson) window._openPerson(id);
+    window._closeSearch && window._closeSearch();
+  });
   document.getElementById('search-close').addEventListener('click', closeSearch);
   document.getElementById('search-overlay').addEventListener('click', (e) => {
     if (e.target === e.currentTarget) closeSearch();
   });
 
   // Tutor
+  initTutorActionDelegation(document.getElementById('tutor-messages'));
   document.getElementById('tutor-send').addEventListener('click', sendTutorMessage);
   document.getElementById('tutor-input').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') sendTutorMessage();

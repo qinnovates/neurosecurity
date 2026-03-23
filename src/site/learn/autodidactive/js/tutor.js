@@ -509,10 +509,10 @@ export function renderChat() {
     if (msg.actions && msg.actions.length > 0) {
       actionsHtml = '<div class="tutor-actions">' +
         msg.actions.map(a => {
-          if (a.action === 'openPerson') return `<button class="tutor-action-btn" onclick="window._openPerson('${a.id}')">${esc(a.label)}</button>`;
-          if (a.action === 'openLab') return `<button class="tutor-action-btn" onclick="window._openLab('${a.id}')">${esc(a.label)}</button>`;
-          if (a.action === 'openPath') return `<button class="tutor-action-btn" onclick="window._openPath('${a.id}')">${esc(a.label)}</button>`;
-          if (a.action === 'showOnCanvas') return `<button class="tutor-action-btn" onclick="window._showOnCanvas('${JSON.stringify(a.ids).replace(/"/g, '&quot;')}')">${esc(a.label)}</button>`;
+          if (a.action === 'openPerson') return `<button class="tutor-action-btn" data-action="openPerson" data-id="${esc(a.id)}">${esc(a.label)}</button>`;
+          if (a.action === 'openLab') return `<button class="tutor-action-btn" data-action="openLab" data-id="${esc(a.id)}">${esc(a.label)}</button>`;
+          if (a.action === 'openPath') return `<button class="tutor-action-btn" data-action="openPath" data-id="${esc(a.id)}">${esc(a.label)}</button>`;
+          if (a.action === 'showOnCanvas') return `<button class="tutor-action-btn" data-action="showOnCanvas" data-ids="${esc(JSON.stringify(a.ids))}">${esc(a.label)}</button>`;
           return `<button class="tutor-action-btn">${esc(a.label)}</button>`;
         }).join('') +
         '</div>';
@@ -520,6 +520,23 @@ export function renderChat() {
 
     return `<div class="tutor-msg tutor-msg--tutor"><div class="tutor-msg-text">${html}</div>${actionsHtml}</div>`;
   }).join('');
+}
+
+// Delegated click handler for tutor action buttons (avoids inline onclick injection)
+export function initTutorActionDelegation(container) {
+  if (!container) return;
+  container.addEventListener('click', (e) => {
+    const btn = e.target.closest('.tutor-action-btn[data-action]');
+    if (!btn) return;
+    const action = btn.dataset.action;
+    const id = btn.dataset.id;
+    if (action === 'openPerson' && window._openPerson) window._openPerson(id);
+    else if (action === 'openLab' && window._openLab) window._openLab(id);
+    else if (action === 'openPath' && window._openPath) window._openPath(id);
+    else if (action === 'showOnCanvas' && window._showOnCanvas) {
+      try { window._showOnCanvas(btn.dataset.ids); } catch (_) {}
+    }
+  });
 }
 
 export function clearChat() {
@@ -564,7 +581,7 @@ export async function initTier2() {
 
   try {
     // Dynamic import — only loads if user opted in
-    const { CreateMLCEngine } = await import('https://esm.run/@mlc-ai/web-llm');
+    const { CreateMLCEngine } = await import('https://esm.run/@mlc-ai/web-llm@0.2.74');
     webllmEngine = await CreateMLCEngine('SmolLM2-1.7B-Instruct-q4f16_1-MLC', {
       initProgressCallback: (progress) => {
         const el = document.getElementById('tutor-tier2-status');
@@ -621,8 +638,19 @@ export async function processMessageTier2(query) {
 
 // ── Tier 3: External LLM (Ollama / OpenAI / Anthropic) ───────────────────────
 
+// SSRF guard: only allow Ollama URLs pointing to localhost
+function isAllowedOllamaUrl(url) {
+  try {
+    const parsed = new URL(url);
+    return ['localhost', '127.0.0.1', '[::1]'].includes(parsed.hostname);
+  } catch { return false; }
+}
+
 async function callOllama(messages, prefs) {
   const base = (prefs.ollamaUrl || 'http://localhost:11434').replace(/\/+$/, '');
+  if (!isAllowedOllamaUrl(base)) {
+    throw new Error('Ollama URL must point to localhost (127.0.0.1, localhost, or [::1])');
+  }
   const resp = await fetch(`${base}/v1/chat/completions`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -733,6 +761,9 @@ export async function testConnection() {
   try {
     if (prefs.provider === 'ollama') {
       const base = (prefs.ollamaUrl || 'http://localhost:11434').replace(/\/+$/, '');
+      if (!isAllowedOllamaUrl(base)) {
+        return { ok: false, message: 'Ollama URL must point to localhost (127.0.0.1, localhost, or [::1])' };
+      }
       const resp = await fetch(`${base}/api/tags`);
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const data = await resp.json();

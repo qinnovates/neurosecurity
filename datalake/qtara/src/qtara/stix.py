@@ -29,7 +29,7 @@ class StixExporter:
             "name": "Qinnovate Interface Framework (QIF)",
             "identity_class": "organization",
             "sectors": ["technology", "healthcare", "research"],
-            "contact_information": "security@qinnovate.com"
+            "contact_information": "https://qinnovate.com"
         })
 
         for t in techniques:
