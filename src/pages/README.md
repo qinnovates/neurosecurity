@@ -11,7 +11,6 @@ Each `.astro` file or directory becomes a URL on qinnovate.com. Astro file-based
 | File | Route | Purpose |
 |------|-------|---------|
 | `index.astro` | `/` | Homepage (also hosts BCI Vision toggle mode) |
-| `about.astro` | `/about/` | About qinnovate |
 | `framework.astro` | `/framework/` | QIF framework overview |
 | `privacy.astro` | `/privacy/` | Privacy policy |
 | `vision.astro` | `/vision/` | Vision statement |
