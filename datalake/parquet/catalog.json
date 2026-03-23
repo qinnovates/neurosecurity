@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-03-22T09:27:12.703368+00:00",
+    "generated": "2026-03-23T10:44:38.640804+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
     "total_datasets": 31,
-    "total_rows": 6984
+    "total_rows": 7033
   },
   "datasets": {
     "techniques": {
@@ -585,7 +585,7 @@
       "source": "datalake/parquet/eeg_samples.parquet"
     },
     "intel_feed": {
-      "rows": 258,
+      "rows": 307,
       "columns": 10,
       "column_names": [
         "id",
@@ -599,7 +599,7 @@
         "companies",
         "fetched"
       ],
-      "size_bytes": 62903,
+      "size_bytes": 71675,
       "compression": "zstd",
       "source": "datalake/parquet/intel_feed.parquet"
     },

@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "qtara"
 version = "0.3.0"
 authors = [
-  { name="Qinnovate", email="security@qinnovate.com" },
+  { name="Qinnovate" },
 ]
 description = "Threat Analysis & Risk Assessment (TARA) Framework for Neural Security"
 readme = "README.md"

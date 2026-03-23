@@ -3,7 +3,7 @@
 ## The OSI of Mind: Why Brain-Computer Interfaces Need a Universal Security Standard
 
 **Kevin L. Qi**
-qikevinl@github
+github.com/qinnovates
 
 *Version 1.1 — January 2026*
 
