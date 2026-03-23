@@ -34,14 +34,26 @@ I am guesstimating that the probability of the future of UI/UX for the next 5 ye
 
 I'm just excited to see where other artists who embrace AI to help express their inner creativity and see where the UI/UX of apps and websites head to next. Of course this is also a great time for all artists as the world is seeking for true genuine human emotion and creative expression through their works in the age of the AI Renaissance. After all, the Renaissance did occur following a period of rediscovery of old books that were once lost which sparked society to see the world very differently, leading to arts, inventions, and more.
 
-How sure am I about any of this? Well, I didn't want to spend money setting this up this viral trend open source product called MiroFish so I tried to use a smaller scale version of their "prediction" engine which essentially is like the Quorum plugin I built except MiroFish can scale out WAYYYYY bigger and has persistent memory and persona in each. I haven't used it myself yet so I can't really speak too much about it except that a Chinese college student shared what he was doing on Rednote and some Chinese billionaire said he'd pay him (I think $4M? Need to fact check if it's USD) to predict the market based on news intel. Realistically, it's not that complex and a lot of large companies do this today.
+How sure am I about any of this? Well, I'm familiar with the open source project from a Chinese student who made millions building what most of us who manage and orchestrate large swarms of agentic AIs do already. He was just wise to showcase it and got the right investor. 10 days... yea, that's where all the money is going into these days.
 
-This goes to show that as long as you have the passion and the creative mind to do something, it's possible, even more now than before. The barrier to entry has been leveled but this also means the ability to be creative, think abstractly, and being an artist is even more in demand while also knowing one's own limitations and gaps in knowledge.
+I already had a smaller scale version of a swarm orchestrator that spins up agents, except just not to that scale. You can do this at a small scale using any AI model if you just feed it the proper data, the adequate amount, and yea. It identifies the appropriate subject matter experts, automatically identifies the teams necessary, and uses math to statistically calculate the minimum and maximum numbers to ensure the agents each took turns to converse in the quorum following psychology's collective intelligence - not merely the sum of individual IQs, but heavily determined by the group's interaction patterns, specifically how individuals talk and communicate. A high collective IQ is better predicted by the group's collaboration process than by the average intelligence of its members.
 
-P.s. I had Claude run the predictions and it says in 10 years apps will be using the "humanism" design. It's interesting because the aesthetic is similar to Anthropic's app and theme now. I always thought the color scheme was off but now I wonder if Anthropic ran the prediction model way before it went live and were like "yep! Trust the fortune teller that knows stats and probabilities from data."
+See: [Quorum](https://github.com/qinnovates/quorum)
 
-None of this was edited, not even planned... I'll upload the page Claude built when I asked it to predict what artists and designers would be building in 10 years.
+This goes to show that as long as you have the passion and the creative mind to do something, it's possible, even more now than before. The barrier to entry has been leveled but this also means the ability to be creative, think abstractly, and be an artist is even more in demand while also knowing one's own limitations and gaps in knowledge.
+
+P.s. I had an AI run the predictions and it says in 10 years apps will be using the "humanism" design. It's interesting because the aesthetic is similar to some AI apps and themes now. I always thought those color schemes were off but now I wonder if they ran a prediction model way before going live and were like "yep! Trust the fortune teller that knows stats and probabilities from data."
+
+None of this was edited, not even planned... I'll upload the page the AI built when I asked it to predict what artists and designers would be building in 10 years.
 
 P.p.s. I also started drawing and sketching in my journal the other night. I was very shocked at how decent it turned out! I haven't sketched in forever! Probably since AP Art in HS honestly. Drawing ideas is so much easier to retain than writing sometimes.
 
-[View the prediction page Claude built: POST-CYBERPUNK — The Human Web Returns](/post-cyberpunk.html)
+## Now For The Harder Questions
+
+Will the "Neo Y2K Bubble Pop" just be another trend again?
+
+I wonder if DaVinci stopped to think "Hmm following this crazy plague, I shall call this the Renaeesancehe." (jk, idk how old Italians would pronounce it then.)
+
+[View the prediction page the AI built: POST-CYBERPUNK — The Human Web Returns](/post-cyberpunk.html)
+
+[Read the Medium post](https://medium.com/@qikevinl/my-unofficial-apple-wallpaper-index-analysis-on-the-return-of-0b09c1f42de5?postPublishedType=repub)
