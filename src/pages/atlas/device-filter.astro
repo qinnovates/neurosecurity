@@ -4,7 +4,7 @@ import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
 import DeviceFilter from '../../components/atlas/DeviceFilter';
 import { THREAT_VECTORS } from '../../lib/threat-data';
 ---
-<PageLayout title="Device Threat Profile | Qinnovate" breadcrumbs={[{label:'Atlas',href:'/atlas/'},{label:'Device Filter'}]}>
+<PageLayout title="Device Threat Profile | Qinnovate" description="Filter BCI attack techniques by device type, modality, and signal characteristics. Match your hardware to its threat surface." breadcrumbs={[{label:'Atlas',href:'/atlas/'},{label:'Device Filter'}]}>
   <AtlasViewSwitcher current="/atlas/device-filter/" />
   <DeviceFilter client:load techniques={THREAT_VECTORS} />
 </PageLayout>
