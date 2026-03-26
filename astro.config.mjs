@@ -62,7 +62,13 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    sitemap(),
+    sitemap({
+      serialize(item) {
+        // Add lastmod to all sitemap entries using build time as default
+        item.lastmod = new Date().toISOString();
+        return item;
+      },
+    }),
     pagefind(),
   ],
   vite: {

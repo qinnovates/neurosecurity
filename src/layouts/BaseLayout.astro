@@ -21,6 +21,7 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
+  <meta name="author" content="Kevin L. Qi" />
   <link rel="canonical" href={canonicalURL} />
 
   <!-- Favicon -->
@@ -47,7 +48,7 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
   <meta name="twitter:image" content={resolvedOgImage} />
   <meta name="twitter:creator" content="@qikevinl" />
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD Structured Data (escape </script> to prevent injection) -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -56,7 +57,23 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
     "description": "Open research on brain-computer interface security and governance.",
     "foundingDate": "2026",
     "sameAs": ["https://github.com/qinnovates"]
-  })} />
+  }).replace(/<\//g, '<\\/')} />
+
+  <!-- WebSite schema with SearchAction for sitelinks search box -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Qinnovate",
+    "url": "https://qinnovate.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://qinnovate.com/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }).replace(/<\//g, '<\\/')} />
 
   {breadcrumbs && (
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -71,21 +88,24 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
           ...(crumb.href ? { "item": new URL(crumb.href, Astro.site).toString() } : {}),
         })),
       ],
-    })} />
+    }).replace(/<\//g, '<\\/')} />
   )}
 
   <!-- RSS autodiscovery -->
   <link rel="alternate" type="application/rss+xml" title="Qinnovate Intel" href="/rss.xml" />
 
-  <!-- Security headers (meta tags for GitHub Pages; Cloudflare adds HTTP headers too) -->
+  <!-- Security headers (meta tags for non-CSP headers; Cloudflare adds HTTP headers too) -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="X-Frame-Options" content="DENY" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.jsdelivr.net; connect-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' data:; worker-src 'self' blob: https://cdn.jsdelivr.net; frame-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self';" />
+  <!-- CSP is enforced via _headers file (Cloudflare Pages). Meta-tag CSP removed to avoid conflict. -->
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
   <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
 
   <title>{title} | Qinnovate</title>
+
+  <!-- Additional head content from child layouts -->
+  <slot name="head" />
 
   <!-- View Transitions -->
   <ViewTransitions />
@@ -137,6 +157,9 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
     initScrollReveal();
     document.addEventListener('astro:after-swap', initScrollReveal);
   </script>
-  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7e92b0e996474c9e9502b816aa36beed"}'></script><!-- End Cloudflare Web Analytics -->
+  <!-- Cloudflare Web Analytics -->
+  <!-- TODO: Add SRI integrity hash when Cloudflare publishes one for this beacon version -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7e92b0e996474c9e9502b816aa36beed"}' crossorigin="anonymous"></script>
+  <!-- End Cloudflare Web Analytics -->
 </body>
 </html>

@@ -25,6 +25,23 @@ const tacticColors: Record<string, string> = {
   breadcrumbs={[{ label: 'Framework' }]}
   maxWidth="wide"
 >
+  <!-- TechArticle schema for framework page -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "QIF Framework — BCI Security Architecture",
+    "description": `The Quantified Interconnection Framework — a proposed 11-band hourglass security architecture for brain-computer interfaces with ${totalTechniques} catalogued attack techniques.`,
+    "author": { "@type": "Person", "name": "Kevin L. Qi", "url": "https://qinnovate.com" },
+    "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
+    "mainEntityOfPage": "https://qinnovate.com/framework/",
+    "dateModified": new Date().toISOString().split('T')[0],
+    "keywords": "BCI security framework, brain-computer interface security, TARA threat catalog, NISS scoring, neural interface security, QIF",
+    "about": {
+      "@type": "Thing",
+      "name": "Brain-Computer Interface Security",
+    }
+  }).replace(/<\//g, '<\\/')} />
+
   <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
     <!-- Sidebar (sticky TOC) -->
     <aside class="hidden lg:block">
@@ -379,4 +396,44 @@ const tacticColors: Record<string, string> = {
       </section>
     </div>
   </div>
+
+  <!-- FAQ structured data for rich snippets -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the QIF Framework?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Quantified Interconnection Framework (QIF) is a proposed open security architecture for brain-computer interfaces. It uses an 11-band hourglass model spanning from silicon hardware through biological tissue, with threat modeling (TARA), neural impact scoring (NISS), and defense specifications."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is TARA in BCI security?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `TARA (Threat Atlas & Risk Architecture) is QIF's threat catalog containing ${totalTechniques} catalogued BCI attack techniques organized across ${totalDomains} domains and ${totalTactics} tactics. Each technique is scored for neural impact severity and mapped to affected neurorights.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is NISS scoring?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Neural Impact Scoring System (NISS) is a proposed severity scoring methodology for BCI threats. It measures physical signal-level disruption — not cognitive or psychological states — to quantify the potential impact of attack techniques on neural interfaces."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is QIF an adopted standard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. QIF is a proposed, unvalidated research framework in active development. It has not been adopted by any standards body and has not undergone independent peer review. It is intended as a starting point for the BCI security community."
+        }
+      }
+    ]
+  }).replace(/<\//g, '<\\/')} />
 </PageLayout>

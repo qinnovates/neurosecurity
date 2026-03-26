@@ -32,6 +32,16 @@ const pubBreadcrumbs = [
   articleMeta={{ publishedTime: date.toISOString(), author: "Qinnovate", tags }}
   breadcrumbs={pubBreadcrumbs}
 >
+  <!-- Google Scholar citation meta tags -->
+  <Fragment slot="head">
+    <meta name="citation_title" content={title} />
+    <meta name="citation_author" content="Kevin L. Qi" />
+    <meta name="citation_publication_date" content={`${date.getFullYear()}/${String(date.getMonth()+1).padStart(2,'0')}/${String(date.getDate()).padStart(2,'0')}`} />
+    <meta name="citation_online_date" content={`${date.getFullYear()}/${String(date.getMonth()+1).padStart(2,'0')}/${String(date.getDate()).padStart(2,'0')}`} />
+    <meta name="citation_journal_title" content="Qinnovate" />
+    <meta name="citation_fulltext_html_url" content={canonicalURL.toString()} />
+  </Fragment>
+
   <Nav />
 
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">

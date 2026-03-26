@@ -1,6 +1,36 @@
+# Default: allow all crawlers
 User-agent: *
 Allow: /
 Disallow: /governance/processes/
 Disallow: /governance/outreach-tracker/
+
+# Explicitly allow AI search crawlers for citation eligibility
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Block training-only crawlers (not search-related)
+User-agent: CCBot
+Disallow: /
+
+User-agent: img2dataset
+Disallow: /
 
 Sitemap: https://qinnovate.com/sitemap-index.xml

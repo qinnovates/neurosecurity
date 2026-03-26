@@ -135,8 +135,8 @@ const hasGovernance = nr || reg;
 ---
 
 <PageLayout
-  title={`${threat.id}: ${threat.name} | TARA Atlas`}
-  description={threat.description}
+  title={`${threat.id}: ${threat.name} — BCI Attack Technique`}
+  description={`${threat.description} Severity: ${threat.severity}. NISS score: ${nissBase}/10. Domains: ${threat.bands?.join(', ') || 'N/A'}. Part of the TARA threat catalog for brain-computer interface security.`}
   breadcrumbs={[
     { label: 'Atlas', href: '/atlas/' },
     { label: 'TARA', href: '/atlas/tara/' },
@@ -144,6 +144,23 @@ const hasGovernance = nr || reg;
   ]}
   wide={true}
 >
+  <!-- TechArticle schema for each technique page -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": `${threat.id}: ${threat.name}`,
+    "description": threat.description,
+    "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
+    "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
+    "mainEntityOfPage": `https://qinnovate.com/atlas/tara/${threat.id}/`,
+    "about": {
+      "@type": "Thing",
+      "name": "Brain-Computer Interface Security",
+      "description": "Security analysis of brain-computer interface attack techniques"
+    },
+    "keywords": `BCI security, ${threat.name}, brain-computer interface attack, ${threat.severity} severity, neural threat, TARA catalog`,
+  }).replace(/<\//g, '<\\/')} />
+
   <div class="max-w-5xl mx-auto mb-8">
     <div>
     <div class="flex items-center gap-3 mb-2">
