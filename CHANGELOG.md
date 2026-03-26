@@ -1,6 +1,23 @@
 # Changelog
 
-<!-- changelog-marker: 0f29d5246d471f97fde310fe53c2297af561bc40 -->
+<!-- changelog-marker: e6cc1b494fd2fdebfc10d73adf56454146b2a9f1 -->
+
+## 2026-03-26
+
+### Other
+- SEO optimization: AI search readiness, structured data, meta tags ([e6cc1b4](https://github.com/qinnovates/qinnovate/commit/e6cc1b4))
+
+## 2026-03-25
+
+### Other
+- update news feed cache [skip ci-deploy] ([2279f0b](https://github.com/qinnovates/qinnovate/commit/2279f0b))
+
+## 2026-03-24
+
+### Other
+- update news feed cache [skip ci-deploy] ([dbbe881](https://github.com/qinnovates/qinnovate/commit/dbbe881))
+
+
 
 ## 2026-03-23
 
