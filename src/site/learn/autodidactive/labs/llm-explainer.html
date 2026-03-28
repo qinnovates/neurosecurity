@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How LLMs Work: Vectors to Transformers</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.183.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.183.0/examples/jsm/"
+  }
+}
+</script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+  h1 { text-align: center; font-size: 2.2rem; margin: 20px 0 5px; color: #7faaff; }
+  .subtitle { text-align: center; color: #888; margin-bottom: 10px; font-size: 0.95rem; }
+
+  .hero-note {
+    background: linear-gradient(135deg, #111128, #111118);
+    border: 1px solid #2a2a4a;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 0 auto 35px;
+    max-width: 800px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #aaa;
+  }
+  .hero-note strong { color: #c77dff; }
+  .hero-note em { color: #7faaff; font-style: normal; }
+
+  .section { margin-bottom: 55px; }
+  .section h2 {
+    color: #7faaff; font-size: 1.3rem; margin-bottom: 10px;
+    border-bottom: 1px solid #222; padding-bottom: 5px;
+  }
+  .section p { color: #bbb; line-height: 1.7; margin-bottom: 10px; font-size: 0.95rem; }
+  .hl-r { color: #ff6b6b; font-weight: 600; }
+  .hl-b { color: #7faaff; font-weight: 600; }
+  .hl-g { color: #4ecdc4; font-weight: 600; }
+  .hl-y { color: #ffd93d; font-weight: 600; }
+  .hl-p { color: #c77dff; font-weight: 600; }
+
+  .three-wrap {
+    position: relative; margin: 15px auto; width: 100%;
+    border-radius: 8px; overflow: hidden; background: #111118;
+  }
+  .three-wrap canvas { display: block; width: 100% !important; height: 400px !important; }
+
+  .controls {
+    display: flex; gap: 15px; justify-content: center;
+    flex-wrap: wrap; margin: 15px 0;
+  }
+  .controls label {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.85rem; color: #999;
+  }
+  .controls input[type="range"] { width: 120px; accent-color: #7faaff; }
+  button {
+    background: #222; color: #7faaff; border: 1px solid #333;
+    padding: 8px 18px; border-radius: 6px; cursor: pointer;
+    font-size: 0.85rem; transition: all 0.2s;
+  }
+  button:hover { background: #2a2a3a; border-color: #7faaff; }
+  button.active { background: #7faaff; color: #000; }
+
+  .info-box {
+    background: #111118; border: 1px solid #222; border-radius: 8px;
+    padding: 15px; margin: 10px 0; font-size: 0.9rem; line-height: 1.7;
+  }
+
+  .readout {
+    text-align: center; font-family: 'Courier New', monospace;
+    font-size: 0.85rem; color: #666; margin: 5px 0; min-height: 22px;
+  }
+
+  .eq-block {
+    text-align: center; margin: 18px 0; font-size: 1.2rem; color: #7faaff;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+  @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .fact-card {
+    background: #111118; border: 1px solid #222; border-radius: 8px;
+    padding: 12px; font-size: 0.85rem; line-height: 1.5;
+  }
+  .fact-card strong { color: #7faaff; }
+
+  details {
+    background: #0d0d18;
+    border: 1px solid #1a1a2a;
+    border-radius: 8px;
+    margin: 12px 0;
+    overflow: hidden;
+  }
+  details summary {
+    padding: 12px 16px;
+    cursor: pointer;
+    color: #c77dff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+  }
+  details summary:hover { background: #111128; }
+  details summary::before {
+    content: '\25B6';
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+  details[open] summary::before { transform: rotate(90deg); }
+  details .deep-content {
+    padding: 0 16px 16px;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: #aaa;
+  }
+  details .deep-content p { margin-bottom: 8px; }
+  details .deep-content strong { color: #7faaff; }
+
+  .toc {
+    background: #111118; border: 1px solid #222; border-radius: 10px;
+    padding: 20px 25px; margin: 0 auto 35px; max-width: 600px;
+  }
+  .toc h3 { color: #7faaff; margin-bottom: 10px; font-size: 1rem; }
+  .toc a {
+    display: block; color: #888; text-decoration: none;
+    padding: 4px 0; font-size: 0.88rem; transition: color 0.2s;
+  }
+  .toc a:hover { color: #7faaff; }
+  .toc a span { color: #444; margin-right: 6px; }
+
+  .token-display {
+    display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+    margin: 15px 0; min-height: 40px;
+  }
+  .token {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 6px 12px; border-radius: 6px; font-size: 0.85rem;
+    font-family: 'Courier New', monospace; cursor: default;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .token:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+  .token .tok-id { font-size: 0.7rem; opacity: 0.6; }
+
+  .sentence-input {
+    width: 100%; padding: 12px 16px; background: #111118;
+    border: 1px solid #333; border-radius: 8px; color: #e0e0e0;
+    font-size: 0.95rem; font-family: inherit; outline: none;
+    transition: border-color 0.2s;
+  }
+  .sentence-input:focus { border-color: #7faaff; }
+
+  .attn-matrix {
+    display: grid; gap: 1px; margin: 15px auto; width: fit-content;
+    background: #1a1a2a; border-radius: 8px; overflow: hidden; padding: 1px;
+  }
+  .attn-cell {
+    width: 52px; height: 52px; display: flex; align-items: center;
+    justify-content: center; font-size: 0.65rem; font-family: monospace;
+    transition: background 0.3s;
+  }
+  .attn-header {
+    background: #1a1a2a; color: #888; font-size: 0.7rem;
+    font-weight: 600; text-align: center;
+  }
+
+  .prob-bar-container { margin: 15px 0; }
+  .prob-bar-row {
+    display: flex; align-items: center; gap: 10px; margin: 4px 0;
+    font-size: 0.82rem; font-family: monospace;
+  }
+  .prob-bar-label { width: 80px; text-align: right; color: #999; }
+  .prob-bar-track {
+    flex: 1; height: 22px; background: #1a1a2a; border-radius: 4px;
+    overflow: hidden; position: relative;
+  }
+  .prob-bar-fill {
+    height: 100%; border-radius: 4px; transition: width 0.5s ease;
+  }
+  .prob-bar-val { width: 50px; color: #666; }
+
+  .arch-flow {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0; margin: 20px auto; max-width: 400px;
+  }
+  .arch-block {
+    width: 100%; padding: 14px; text-align: center; font-size: 0.85rem;
+    font-weight: 600; border-radius: 8px; position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .arch-block:hover { transform: scale(1.03); box-shadow: 0 0 20px rgba(127,170,255,0.15); }
+  .arch-block .arch-sub { font-weight: 400; font-size: 0.75rem; opacity: 0.7; margin-top: 3px; }
+  .arch-arrow {
+    width: 2px; height: 24px; background: #333; position: relative;
+  }
+  .arch-arrow::after {
+    content: ''; position: absolute; bottom: -4px; left: -4px;
+    border-left: 5px solid transparent; border-right: 5px solid transparent;
+    border-top: 6px solid #333;
+  }
+
+  .gen-output {
+    font-family: 'Courier New', monospace; font-size: 1.1rem;
+    line-height: 1.8; padding: 15px; background: #111118;
+    border: 1px solid #222; border-radius: 8px; min-height: 60px;
+    margin: 15px 0;
+  }
+  .gen-token { transition: opacity 0.3s; }
+  .gen-token.latest { color: #4ecdc4; text-decoration: underline; }
+  .gen-cursor {
+    display: inline-block; width: 2px; height: 1.1em;
+    background: #7faaff; animation: blink 1s step-end infinite;
+    vertical-align: text-bottom; margin-left: 2px;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>How LLMs Work</h1>
+<p class="subtitle">From vectors to the Transformer architecture that changed everything.</p>
+
+<div class="hero-note">
+  <strong>Why this is interactive, not a lecture.</strong>
+  Language models look like magic until you see the pieces. Every piece is simple math:
+  <em>vectors</em> (lists of numbers), <em>dot products</em> (multiplying and adding),
+  and <em>softmax</em> (turning numbers into probabilities). The genius of the 2017
+  Google paper "Attention Is All You Need" was combining these simple operations in a way
+  that lets a machine learn patterns in language. This lab lets you see and manipulate
+  every step.
+</div>
+
+<div class="toc">
+  <h3>Contents</h3>
+  <a href="#tokens"><span>1.</span> Tokens: How Machines Read Text</a>
+  <a href="#vectors"><span>2.</span> Vectors: Words as Points in Space</a>
+  <a href="#embeddings"><span>3.</span> Embedding Space: Meaning Has Geometry</a>
+  <a href="#dotproduct"><span>4.</span> Dot Products: Measuring Similarity</a>
+  <a href="#attention"><span>5.</span> Attention: The Core Breakthrough</a>
+  <a href="#transformer"><span>6.</span> The Transformer Block: Full Architecture</a>
+  <a href="#generation"><span>7.</span> Generation: One Token at a Time</a>
+</div>
+
+<!-- ========== 1: TOKENS ========== -->
+<div class="section" id="tokens">
+  <h2>1. Tokens: How Machines Read Text</h2>
+  <p>Machines don't read letters. They split text into <span class="hl-p">tokens</span> &mdash; chunks that might be whole words, parts of words, or single characters. Each token gets a unique number (an ID). The model only ever sees these numbers.</p>
+
+  <input class="sentence-input" id="tokenInput" type="text"
+    value="The cat sat on the mat" placeholder="Type a sentence...">
+  <div class="token-display" id="tokenDisplay"></div>
+  <div class="readout" id="tokenReadout"></div>
+
+  <div class="info-box">
+    <strong>Why tokens, not letters?</strong> Common words like "the" are a single token.
+    Rare words get split: "unbelievable" might become <span class="hl-p">["un", "believ", "able"]</span>.
+    This is called <strong>Byte-Pair Encoding (BPE)</strong>. It finds the most frequent character
+    pairs and merges them, repeating until you have a vocabulary of ~50,000 tokens. GPT-4 uses
+    about 100,000. Every token maps to a vector &mdash; that's the next step.
+  </div>
+
+  <details>
+    <summary>Deep dive: Why not just use words?</summary>
+    <div class="deep-content">
+      <p>If every word were a token, you'd need millions of tokens to cover all languages, typos, code, and made-up words. The vocabulary would be enormous and most tokens would rarely appear, making them impossible to learn well.</p>
+      <p>BPE solves this by learning <strong>subword units</strong>. Common words stay whole. Rare words decompose into known pieces. The model can handle any input &mdash; even words it's never seen &mdash; by combining subword tokens it has seen.</p>
+      <p><strong>Example:</strong> "ChatGPT" might tokenize as ["Chat", "G", "PT"]. The model knows "Chat" from other contexts, "G" as a letter, and "PT" from abbreviations. It can reason about the whole word from its parts.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ========== 2: VECTORS ========== -->
+<div class="section" id="vectors">
+  <h2>2. Vectors: Words as Points in Space</h2>
+  <p>Each token ID maps to a <span class="hl-b">vector</span> &mdash; a list of numbers (typically 768 to 12,288 of them). Think of it as coordinates in a high-dimensional space. Here we project them down to 3D so you can see them. <span class="hl-g">Drag to rotate. Scroll to zoom.</span></p>
+
+  <div class="three-wrap" id="vectorScene"></div>
+  <div class="readout" id="vectorReadout">Hover over a point to see its word</div>
+
+  <div class="controls">
+    <button id="vecGroupSemantic" class="active">Semantic Clusters</button>
+    <button id="vecGroupRandom">Random Layout</button>
+    <button id="vecReset">Reset View</button>
+  </div>
+
+  <div class="info-box">
+    Each point is a word. Words with <span class="hl-b">similar meanings cluster together</span>.
+    Animals group near animals. Colors near colors. Verbs near verbs. The model learned this
+    structure from billions of sentences &mdash; nobody programmed the clusters by hand.<br><br>
+    <strong>Real models use 768+ dimensions.</strong> We're showing 3D, but the actual space has
+    hundreds of dimensions. Each dimension captures some aspect of meaning &mdash; no single dimension
+    means "animal" or "color," but combinations of dimensions encode those concepts.
+  </div>
+
+  <details>
+    <summary>Deep dive: How does a list of numbers encode meaning?</summary>
+    <div class="deep-content">
+      <p>A vector like <strong>[0.2, -0.5, 0.8, ...]</strong> doesn't have one "meaning dimension." Instead, meaning emerges from <strong>relative positions</strong>. "King" and "queen" are close together. "King" and "banana" are far apart. The distance and direction between vectors IS the meaning.</p>
+      <p>This is called a <strong>distributed representation</strong>. No single number tells you the word is an animal. But the pattern across all 768 numbers, taken together, encodes everything the model knows about that word.</p>
+      <p>The embedding matrix is literally a lookup table: token ID 4521 &rarr; row 4521 of a giant matrix. That row is the vector. The matrix starts random and is learned during training.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ========== 3: EMBEDDING SPACE ========== -->
+<div class="section" id="embeddings">
+  <h2>3. Embedding Space: Meaning Has Geometry</h2>
+  <p>The most famous discovery about word vectors: <span class="hl-r">king</span> &minus; <span class="hl-b">man</span> + <span class="hl-g">woman</span> &approx; <span class="hl-y">queen</span>. Vector arithmetic captures analogies. The direction from "man" to "woman" is the same direction as "king" to "queen." Meaning is geometry.</p>
+
+  <div class="three-wrap" id="analogyScene"></div>
+  <div class="readout" id="analogyReadout">Drag to rotate. Watch the analogy vectors.</div>
+
+  <div class="controls">
+    <button id="analogyKQ" class="active">King &rarr; Queen</button>
+    <button id="analogyParis">France &rarr; Paris</button>
+    <button id="analogyTense">Walk &rarr; Walked</button>
+  </div>
+
+  <div class="eq-block">
+    $\vec{\text{king}} - \vec{\text{man}} + \vec{\text{woman}} \approx \vec{\text{queen}}$
+  </div>
+
+  <div class="info-box">
+    The <span class="hl-p">purple arrow</span> shows the analogy direction. It's the same vector
+    offset each time: subtract one concept, add another, and you land near the right answer.<br><br>
+    <strong>This means the model learned abstract relationships as directions in space.</strong>
+    Gender is a direction. Country-to-capital is a direction. Past tense is a direction.
+    These weren't programmed &mdash; they emerged from patterns in text.
+  </div>
+
+  <details>
+    <summary>Deep dive: Word2Vec and the geometry of language</summary>
+    <div class="deep-content">
+      <p><strong>Mikolov et al. (2013)</strong> at Google discovered this with Word2Vec. The idea: train a small neural network to predict a word from its neighbors (or vice versa). The hidden layer weights become the word vectors. The prediction task forces the network to encode meaning into the vector positions.</p>
+      <p>Why does arithmetic work? If "king" and "queen" appear in similar contexts except for gender-related words, the network learns to represent them identically except along the "gender direction." Subtracting "man" and adding "woman" moves along that direction.</p>
+      <p>Modern LLMs use <strong>contextual embeddings</strong> (each word's vector changes based on the sentence it's in), but the geometric intuition still holds. The embedding space is where meaning lives.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ========== 4: DOT PRODUCTS ========== -->
+<div class="section" id="dotproduct">
+  <h2>4. Dot Products: Measuring Similarity</h2>
+  <p>How do you measure if two vectors point in the same direction? The <span class="hl-g">dot product</span>. Multiply corresponding numbers and add them up. If it's large and positive, the vectors are similar. Near zero means unrelated. Negative means opposite.</p>
+
+  <div class="three-wrap" id="dotScene"></div>
+  <div class="readout" id="dotReadout">Drag the green vector to change the angle</div>
+
+  <div class="controls">
+    <label>Angle <input type="range" id="dotAngle" min="0" max="360" value="30"></label>
+    <button id="dotReset">Reset</button>
+  </div>
+
+  <div class="eq-block">
+    $\vec{a} \cdot \vec{b} = \sum_{i=1}^{n} a_i \cdot b_i = |\vec{a}||\vec{b}|\cos\theta$
+  </div>
+
+  <div class="info-box">
+    The <span class="hl-r">red vector</span> is fixed. The <span class="hl-g">green vector</span> rotates.
+    The <span class="hl-y">yellow arc</span> shows the angle between them. The dot product is shown in the readout.<br><br>
+    <strong>This is the core operation of attention.</strong> When the model asks "how relevant is word A to word B?",
+    it computes the dot product of their vectors. High dot product = high relevance = pay more attention.
+  </div>
+
+  <details>
+    <summary>Deep dive: Why cosine similarity?</summary>
+    <div class="deep-content">
+      <p>The dot product scales with vector length: longer vectors have larger dot products regardless of direction. To isolate the <em>direction</em> (meaning similarity, not magnitude), we normalize: divide by both vector lengths. This gives <strong>cosine similarity</strong>: $\cos\theta = \frac{\vec{a} \cdot \vec{b}}{|\vec{a}||\vec{b}|}$</p>
+      <p>Cosine similarity ranges from -1 (opposite) through 0 (orthogonal) to +1 (identical direction). In embedding space, "cat" and "kitten" might have cosine similarity 0.85. "Cat" and "democracy" might be 0.05. The model uses this to decide which words should influence each other.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ========== 5: ATTENTION ========== -->
+<div class="section" id="attention">
+  <h2>5. Attention: The Core Breakthrough</h2>
+  <p>This is the insight from Google's 2017 paper <em>"Attention Is All You Need"</em> (Vaswani et al.) that changed everything. Each word asks a question (<span class="hl-b">Query</span>), advertises what it contains (<span class="hl-r">Key</span>), and holds its information (<span class="hl-g">Value</span>). Attention computes: for each Query, how well does it match each Key? Then it mixes Values weighted by those match scores.</p>
+
+  <div id="attnMatrixContainer"></div>
+  <div class="readout" id="attnReadout">Hover over cells to see attention weights</div>
+
+  <div class="controls">
+    <button id="attnHead1" class="active">Head 1: Subject-Verb</button>
+    <button id="attnHead2">Head 2: Adjective-Noun</button>
+    <button id="attnHead3">Head 3: Positional</button>
+  </div>
+
+  <div class="eq-block">
+    $\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^T}{\sqrt{d_k}}\right)V$
+  </div>
+
+  <div class="info-box">
+    <strong>The matrix above shows attention weights</strong> for the sentence "The cat sat on the mat."
+    Brighter cells mean stronger attention. Each row is a Query (the word asking). Each column is a Key
+    (the word being asked about).<br><br>
+    <strong>$\sqrt{d_k}$ scaling:</strong> Without dividing by $\sqrt{d_k}$ (the vector dimension),
+    dot products grow large in high dimensions, pushing softmax into extreme values where gradients vanish.
+    Scaling keeps the distribution smooth and trainable.<br><br>
+    <strong>Multi-head:</strong> The model runs attention multiple times in parallel with different
+    learned projections. Each "head" learns to attend to different relationships &mdash; one might track
+    syntax, another coreference, another semantic roles.
+  </div>
+
+  <details>
+    <summary>Deep dive: Why "Attention Is All You Need" was revolutionary</summary>
+    <div class="deep-content">
+      <p>Before 2017, the dominant approach for language was <strong>recurrent neural networks (RNNs/LSTMs)</strong>. They processed words one at a time, left to right, carrying a hidden state. Two fatal problems:</p>
+      <p><strong>1. Sequential bottleneck.</strong> You can't parallelize. Word 100 has to wait for words 1-99 to finish. Training was painfully slow.</p>
+      <p><strong>2. Long-range dependencies.</strong> By word 100, the hidden state has been overwritten so many times that information about word 1 is mostly lost. LSTMs helped but didn't solve this.</p>
+      <p>The Transformer fixes both. <strong>Attention connects every word directly to every other word</strong>, regardless of distance. Word 100 can attend to word 1 with a single matrix multiplication. And the entire sequence processes in parallel &mdash; massive GPU speedups.</p>
+      <p>The name "Transformer" comes from the idea that the network <em>transforms</em> representations through layers of attention. The paper was authored by Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, and Polosukhin at Google Brain and Google Research.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Deep dive: Query, Key, Value &mdash; the database analogy</summary>
+    <div class="deep-content">
+      <p>Think of a database lookup. You have a <strong>query</strong> ("find me articles about cats"). The database has <strong>keys</strong> (article tags). Each key is associated with a <strong>value</strong> (the article content). You match your query against all keys and retrieve the matching values.</p>
+      <p>Attention does the same thing, but <em>soft</em>. Instead of exact match (returns 1 article), it returns a <strong>weighted blend</strong> of ALL values, where the weights are determined by how well each key matches the query. A good match gets weight 0.5, a mediocre match gets 0.05, a bad match gets 0.001.</p>
+      <p>The Query, Key, and Value vectors are created by multiplying the input embedding by three different learned weight matrices: $Q = XW_Q$, $K = XW_K$, $V = XW_V$. The model learns what to ask (Q), what to advertise (K), and what to send (V) during training.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ========== 6: TRANSFORMER BLOCK ========== -->
+<div class="section" id="transformer">
+  <h2>6. The Transformer Block: Full Architecture</h2>
+  <p>A Transformer is a stack of identical blocks. Each block has two stages: <span class="hl-b">multi-head attention</span> (tokens talk to each other) and a <span class="hl-g">feed-forward network</span> (each token thinks independently). Residual connections and layer normalization keep the signal stable through dozens of layers.</p>
+
+  <div class="arch-flow" id="archFlow">
+    <div class="arch-block" style="background:#1a1a3a;border:1px solid #7faaff;">
+      Input Embeddings + Positional Encoding
+      <div class="arch-sub">Token IDs &rarr; vectors + position info</div>
+    </div>
+    <div class="arch-arrow"></div>
+    <div class="arch-block" style="background:#1a2a1a;border:1px solid #4ecdc4;cursor:pointer;" id="archAttn">
+      Multi-Head Self-Attention
+      <div class="arch-sub">Every token attends to every other token</div>
+    </div>
+    <div class="arch-arrow"></div>
+    <div class="arch-block" style="background:#2a1a1a;border:1px solid #ff6b6b;">
+      Add &amp; Layer Norm
+      <div class="arch-sub">Residual connection: output = input + attention(input)</div>
+    </div>
+    <div class="arch-arrow"></div>
+    <div class="arch-block" style="background:#2a2a1a;border:1px solid #ffd93d;cursor:pointer;" id="archFFN">
+      Feed-Forward Network (FFN)
+      <div class="arch-sub">2 linear layers with ReLU/GELU. Where knowledge is stored.</div>
+    </div>
+    <div class="arch-arrow"></div>
+    <div class="arch-block" style="background:#2a1a1a;border:1px solid #ff6b6b;">
+      Add &amp; Layer Norm
+      <div class="arch-sub">Another residual: output = input + FFN(input)</div>
+    </div>
+    <div class="arch-arrow"></div>
+    <div class="arch-block" style="background:#1a1a2a;border:1px solid #c77dff;">
+      &times; N layers (GPT-3: 96, GPT-4: ~120, Claude: undisclosed)
+      <div class="arch-sub">Stack these blocks. Deeper = more abstract reasoning.</div>
+    </div>
+  </div>
+
+  <div class="three-wrap" id="transformerScene"></div>
+  <div class="readout" id="transformerReadout">Data flows upward through the Transformer layers</div>
+
+  <div class="info-box">
+    <strong>Residual connections</strong> are critical. Without them, gradients vanish in deep networks.
+    The "Add" step means each layer's output is <em>added</em> to its input. The layer only needs to learn
+    the <em>difference</em> &mdash; what to change, not the whole representation from scratch. This is why
+    you can stack 96+ layers without the signal degrading.<br><br>
+    <strong>Layer Norm</strong> rescales vectors to unit variance. Without it, activation magnitudes
+    drift and training becomes unstable.<br><br>
+    <strong>The FFN is where facts are stored.</strong> Research (Geva et al. 2021) shows the feed-forward
+    layers act as key-value memories. The first linear layer is the key (pattern matcher), and the second
+    is the value (the fact retrieved). "The capital of France" &rarr; "Paris" lives in the FFN weights.
+  </div>
+
+  <details>
+    <summary>Deep dive: Positional encoding &mdash; why position matters</summary>
+    <div class="deep-content">
+      <p>Attention treats input as a SET, not a sequence. "The cat ate the fish" and "The fish ate the cat" would look identical without position information. The Transformer adds a <strong>positional encoding</strong> to each embedding so the model knows word order.</p>
+      <p>The original paper used sinusoidal functions: $PE_{(pos, 2i)} = \sin(pos / 10000^{2i/d})$ and $PE_{(pos, 2i+1)} = \cos(pos / 10000^{2i/d})$. Each position gets a unique pattern of sines and cosines at different frequencies. The model can learn to read relative positions from the interference patterns.</p>
+      <p>Modern models (GPT, Claude, Llama) use <strong>learned positional embeddings</strong> or <strong>Rotary Position Embeddings (RoPE)</strong> instead. RoPE encodes position by rotating the query and key vectors, which elegantly makes the dot product depend only on relative position, not absolute.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Deep dive: Residual connections &mdash; the superhighway</summary>
+    <div class="deep-content">
+      <p>Imagine a 96-layer network. Each layer is a function $f_i$. Without residuals, the output is $f_{96}(f_{95}(...f_1(x)))$. The gradient must backpropagate through ALL 96 functions. If any function's gradient is slightly less than 1, the signal decays exponentially. This is the <strong>vanishing gradient problem</strong>.</p>
+      <p>With residuals, each layer computes $x + f_i(x)$ instead of $f_i(x)$. The gradient gets a direct path: the "+ x" creates a shortcut that carries the gradient straight through, undiminished. The layer only needs to learn the <em>residual</em> &mdash; what to add &mdash; not the entire transformation. This idea came from He et al. (2015, ResNet) and is why we can build networks with hundreds of layers.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ========== 7: GENERATION ========== -->
+<div class="section" id="generation">
+  <h2>7. Generation: One Token at a Time</h2>
+  <p>An LLM generates text by predicting the <span class="hl-g">next token</span>, then feeding that prediction back as input, repeating until it decides to stop. At each step, the model outputs a probability distribution over the entire vocabulary. <span class="hl-y">Temperature</span> controls how random the choice is.</p>
+
+  <div class="gen-output" id="genOutput">
+    <span class="gen-token">The</span> <span class="gen-token">cat</span> <span class="gen-cursor"></span>
+  </div>
+  <div class="prob-bar-container" id="probBars"></div>
+  <div class="readout" id="genReadout">Press Generate to see next-token prediction</div>
+
+  <div class="controls">
+    <button id="genStep">Generate Next Token</button>
+    <button id="genAuto">Auto-Generate</button>
+    <button id="genReset">Reset</button>
+    <label>Temperature <input type="range" id="tempSlider" min="1" max="30" value="7"></label>
+    <span id="tempVal" style="color:#ffd93d;font-size:0.85rem;">0.7</span>
+  </div>
+
+  <div class="eq-block">
+    $p(x_i) = \frac{e^{z_i / T}}{\sum_j e^{z_j / T}}$
+  </div>
+
+  <div class="info-box">
+    <strong>Temperature (T)</strong> controls creativity. At <span class="hl-b">T=0</span>, the model always
+    picks the highest-probability token (greedy, deterministic). At <span class="hl-y">T=1.0</span>, it samples
+    according to the raw probabilities. At <span class="hl-r">T &gt; 1.0</span>, the distribution flattens &mdash;
+    rare tokens become more likely, output gets wilder.<br><br>
+    <strong>The full generation loop:</strong><br>
+    1. Feed all tokens so far through the Transformer<br>
+    2. Get probability distribution over vocabulary from the last position<br>
+    3. Sample a token from that distribution (controlled by temperature)<br>
+    4. Append the new token and go to step 1<br><br>
+    This is <strong>autoregressive generation</strong>. The model sees everything it's written so far. Each new token is conditioned on all previous tokens through the attention mechanism.
+  </div>
+
+  <details>
+    <summary>Deep dive: Top-k, top-p, and why greedy decoding is bad</summary>
+    <div class="deep-content">
+      <p><strong>Greedy decoding</strong> (always pick the top token) produces repetitive, boring text. It gets stuck in loops because the most likely next token after "The cat is" might always be "a" and then "cat" again.</p>
+      <p><strong>Top-k sampling:</strong> Only sample from the top k most likely tokens. If k=50, tokens ranked 51+ get zero probability. This prevents very unlikely (often nonsensical) tokens from being chosen.</p>
+      <p><strong>Top-p (nucleus) sampling:</strong> Instead of a fixed count, include tokens until their cumulative probability exceeds p. If p=0.9, you include enough tokens to cover 90% of the probability mass. More adaptive than top-k: sometimes 5 tokens cover 90%, sometimes 200 do.</p>
+      <p><strong>In practice</strong>, production LLMs use a combination: top-p with a moderate temperature. Claude, GPT, and others tune these per-task for the right balance of coherence and creativity.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Deep dive: The scaling hypothesis &mdash; why bigger works</summary>
+    <div class="deep-content">
+      <p>The remarkable finding of the last 5 years: <strong>making the model bigger, with more data, reliably makes it smarter</strong>. This is the "scaling law" (Kaplan et al. 2020). Loss decreases as a power law with model size, dataset size, and compute.</p>
+      <p>GPT-2 (2019): 1.5B parameters. Could write paragraphs. GPT-3 (2020): 175B parameters. Could write essays and do few-shot learning. GPT-4 (2023): rumored ~1.8T parameters (MoE). Can reason, code, pass exams.</p>
+      <p>Nobody fully understands WHY this works. The Transformer architecture seems to be unusually efficient at extracting and storing patterns from text. More parameters = more capacity to store patterns = more things the model "knows." But whether there are fundamental limits, or whether scaling will continue to produce qualitative leaps, is an open research question.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<div class="section" style="text-align:center;border-top:1px solid #222;padding-top:30px;">
+  <p style="color:#666;font-size:0.85rem;">
+    Built for <strong style="color:#7faaff;">Autodidactive</strong> &mdash; learn by doing, not by reading.
+    <br>The math is real. The visualizations are simplified projections of high-dimensional operations.
+    <br>Paper: <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener noreferrer"
+    style="color:#c77dff;">Vaswani et al., "Attention Is All You Need" (2017)</a>
+  </p>
+</div>
+
+</div><!-- /.container -->
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ── Utilities ──────────────────────────────────────────────────────────────
+
+function createScene(containerId, opts = {}) {
+  const container = document.getElementById(containerId);
+  if (!container) return null;
+
+  const width = container.clientWidth;
+  const height = opts.height || 400;
+  container.style.height = height + 'px';
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x111118);
+
+  const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+  camera.position.set(opts.camX || 0, opts.camY || 0, opts.camZ || 8);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.08;
+  controls.enablePan = opts.enablePan !== false;
+
+  const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+  scene.add(ambient);
+  const directional = new THREE.DirectionalLight(0xffffff, 0.8);
+  directional.position.set(5, 10, 5);
+  scene.add(directional);
+
+  function onResize() {
+    const w = container.clientWidth;
+    camera.aspect = w / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, height);
+  }
+  window.addEventListener('resize', onResize);
+
+  return { scene, camera, renderer, controls, container };
+}
+
+// ── 1: TOKENIZER (simple BPE-like visual) ──────────────────────────────────
+
+const TOKEN_COLORS = [
+  '#ff6b6b', '#7faaff', '#4ecdc4', '#ffd93d', '#c77dff',
+  '#ff9f43', '#54a0ff', '#5f27cd', '#01a3a4', '#f368e0'
+];
+
+// Simple whitespace + punctuation tokenizer for demonstration
+function simpleTokenize(text) {
+  const tokens = [];
+  const regex = /(\s+|[.,!?;:'"()\[\]{}]|[A-Za-z]+|[0-9]+|.)/g;
+  let match;
+  let id = 1000;
+  while ((match = regex.exec(text)) !== null) {
+    const tok = match[1];
+    if (tok.trim().length === 0) continue;
+    // Split long words into subwords for demonstration
+    if (tok.length > 5 && /^[A-Za-z]+$/.test(tok)) {
+      const mid = Math.ceil(tok.length * 0.6);
+      tokens.push({ text: tok.slice(0, mid), id: id++ });
+      tokens.push({ text: tok.slice(mid), id: id++ });
+    } else {
+      tokens.push({ text: tok, id: id++ });
+    }
+  }
+  return tokens;
+}
+
+function renderTokens() {
+  const input = document.getElementById('tokenInput');
+  const display = document.getElementById('tokenDisplay');
+  const readout = document.getElementById('tokenReadout');
+  const text = input.value;
+  const tokens = simpleTokenize(text);
+
+  display.innerHTML = tokens.map((t, i) => {
+    const color = TOKEN_COLORS[i % TOKEN_COLORS.length];
+    return `<span class="token" style="background:${color}22;border:1px solid ${color}55;color:${color}">
+      ${t.text}<span class="tok-id">#${t.id}</span>
+    </span>`;
+  }).join('');
+
+  readout.textContent = `${tokens.length} tokens from ${text.split(/\s+/).filter(Boolean).length} words`;
+}
+
+document.getElementById('tokenInput').addEventListener('input', renderTokens);
+renderTokens();
+
+// ── 2: VECTOR SPACE (3D point cloud) ────────────────────────────────────────
+
+const WORD_DATA = {
+  semantic: [
+    // Animals
+    { word: 'cat', pos: [-2, 1.5, 0.5], color: 0xff6b6b },
+    { word: 'dog', pos: [-1.8, 1.2, -0.3], color: 0xff6b6b },
+    { word: 'fish', pos: [-2.3, 1.8, 1.0], color: 0xff6b6b },
+    { word: 'bird', pos: [-1.5, 2.0, 0.2], color: 0xff6b6b },
+    { word: 'mouse', pos: [-2.1, 1.0, 0.8], color: 0xff6b6b },
+    // Actions
+    { word: 'run', pos: [1.5, -0.5, 1.0], color: 0x4ecdc4 },
+    { word: 'walk', pos: [1.2, -0.8, 0.5], color: 0x4ecdc4 },
+    { word: 'jump', pos: [1.8, -0.2, 1.5], color: 0x4ecdc4 },
+    { word: 'swim', pos: [1.0, -1.0, 0.8], color: 0x4ecdc4 },
+    { word: 'fly', pos: [1.6, 0.2, 1.8], color: 0x4ecdc4 },
+    // Colors
+    { word: 'red', pos: [0, -2, -1.5], color: 0xffd93d },
+    { word: 'blue', pos: [0.3, -1.8, -1.8], color: 0xffd93d },
+    { word: 'green', pos: [-0.2, -2.2, -1.2], color: 0xffd93d },
+    { word: 'yellow', pos: [0.5, -1.6, -1.6], color: 0xffd93d },
+    // Abstract
+    { word: 'think', pos: [2.5, 2, -1], color: 0xc77dff },
+    { word: 'know', pos: [2.2, 2.3, -0.5], color: 0xc77dff },
+    { word: 'believe', pos: [2.8, 1.8, -1.3], color: 0xc77dff },
+    { word: 'dream', pos: [2.0, 2.5, -0.8], color: 0xc77dff },
+    // Objects
+    { word: 'table', pos: [-0.5, -0.5, -3], color: 0xff9f43 },
+    { word: 'chair', pos: [-0.2, -0.8, -2.7], color: 0xff9f43 },
+    { word: 'house', pos: [-0.8, 0.0, -3.2], color: 0xff9f43 },
+    { word: 'car', pos: [0.2, -0.3, -2.5], color: 0xff9f43 },
+  ]
+};
+
+const vecCtx = createScene('vectorScene', { camZ: 10 });
+if (vecCtx) {
+  const { scene, camera, renderer, controls } = vecCtx;
+  const pointGroup = new THREE.Group();
+  scene.add(pointGroup);
+
+  const labels = [];
+  const raycaster = new THREE.Raycaster();
+  const mouse = new THREE.Vector2();
+  const spheres = [];
+
+  function buildPoints(layout) {
+    pointGroup.clear();
+    spheres.length = 0;
+
+    WORD_DATA.semantic.forEach((w, i) => {
+      const pos = layout === 'semantic' ? w.pos : [
+        (Math.random() - 0.5) * 6,
+        (Math.random() - 0.5) * 6,
+        (Math.random() - 0.5) * 6
+      ];
+
+      const geo = new THREE.SphereGeometry(0.15, 16, 16);
+      const mat = new THREE.MeshStandardMaterial({ color: w.color, emissive: w.color, emissiveIntensity: 0.3 });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(pos[0], pos[1], pos[2]);
+      mesh.userData = { word: w.word, color: w.color };
+      pointGroup.add(mesh);
+      spheres.push(mesh);
+    });
+  }
+
+  buildPoints('semantic');
+
+  // Add subtle grid
+  const gridHelper = new THREE.GridHelper(10, 10, 0x222233, 0x181825);
+  gridHelper.position.y = -3;
+  scene.add(gridHelper);
+
+  // Axis lines
+  const axMat = new THREE.LineBasicMaterial({ color: 0x333355 });
+  [[[-5,0,0],[5,0,0]], [[0,-5,0],[0,5,0]], [[0,0,-5],[0,0,5]]].forEach(pair => {
+    const geo = new THREE.BufferGeometry().setFromPoints(pair.map(p => new THREE.Vector3(...p)));
+    scene.add(new THREE.Line(geo, axMat));
+  });
+
+  const vecReadout = document.getElementById('vectorReadout');
+
+  vecCtx.container.addEventListener('mousemove', (e) => {
+    const rect = renderer.domElement.getBoundingClientRect();
+    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    raycaster.setFromCamera(mouse, camera);
+    const hits = raycaster.intersectObjects(spheres);
+    if (hits.length > 0) {
+      const w = hits[0].object.userData;
+      vecReadout.textContent = `"${w.word}" — vector in embedding space`;
+      hits[0].object.scale.setScalar(1.5);
+    } else {
+      vecReadout.textContent = 'Hover over a point to see its word';
+      spheres.forEach(s => s.scale.setScalar(1.0));
+    }
+  });
+
+  document.getElementById('vecGroupSemantic').addEventListener('click', () => {
+    buildPoints('semantic');
+    document.getElementById('vecGroupSemantic').classList.add('active');
+    document.getElementById('vecGroupRandom').classList.remove('active');
+  });
+  document.getElementById('vecGroupRandom').addEventListener('click', () => {
+    buildPoints('random');
+    document.getElementById('vecGroupRandom').classList.add('active');
+    document.getElementById('vecGroupSemantic').classList.remove('active');
+  });
+  document.getElementById('vecReset').addEventListener('click', () => {
+    camera.position.set(0, 0, 10);
+    controls.reset();
+  });
+
+  (function animateVec() {
+    requestAnimationFrame(animateVec);
+    controls.update();
+    renderer.render(scene, camera);
+  })();
+}
+
+// ── 3: ANALOGY SPACE ────────────────────────────────────────────────────────
+
+const ANALOGIES = {
+  'king-queen': {
+    points: [
+      { word: 'king', pos: [1.5, 2, 0], color: 0xff6b6b },
+      { word: 'queen', pos: [1.5, 2, 2], color: 0xffd93d },
+      { word: 'man', pos: [-1.5, 0, 0], color: 0x7faaff },
+      { word: 'woman', pos: [-1.5, 0, 2], color: 0x4ecdc4 },
+    ],
+    arrows: [[0, 1], [2, 3]],  // parallel arrows showing the gender direction
+  },
+  'france-paris': {
+    points: [
+      { word: 'France', pos: [-1.5, 2, 0], color: 0xff6b6b },
+      { word: 'Paris', pos: [-1.5, 2, 2], color: 0xffd93d },
+      { word: 'Germany', pos: [1.5, 0, 0], color: 0x7faaff },
+      { word: 'Berlin', pos: [1.5, 0, 2], color: 0x4ecdc4 },
+    ],
+    arrows: [[0, 1], [2, 3]],
+  },
+  'walk-walked': {
+    points: [
+      { word: 'walk', pos: [-1.5, 1.5, 0], color: 0xff6b6b },
+      { word: 'walked', pos: [-1.5, 1.5, 2], color: 0xffd93d },
+      { word: 'run', pos: [1.5, -0.5, 0], color: 0x7faaff },
+      { word: 'ran', pos: [1.5, -0.5, 2], color: 0x4ecdc4 },
+    ],
+    arrows: [[0, 1], [2, 3]],
+  }
+};
+
+function makeTextSprite(text, color) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = 256;
+  canvas.height = 64;
+  ctx.fillStyle = 'transparent';
+  ctx.fillRect(0, 0, 256, 64);
+  ctx.font = 'bold 32px Segoe UI, system-ui, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#' + color.toString(16).padStart(6, '0');
+  ctx.fillText(text, 128, 42);
+  const texture = new THREE.CanvasTexture(canvas);
+  const mat = new THREE.SpriteMaterial({ map: texture, transparent: true });
+  const sprite = new THREE.Sprite(mat);
+  sprite.scale.set(2, 0.5, 1);
+  return sprite;
+}
+
+const anaCtx = createScene('analogyScene', { camZ: 8, camY: 1 });
+if (anaCtx) {
+  const { scene, camera, renderer, controls } = anaCtx;
+  const analogyGroup = new THREE.Group();
+  scene.add(analogyGroup);
+
+  function makeArrow(from, to, color) {
+    const dir = new THREE.Vector3().subVectors(to, from);
+    const len = dir.length();
+    dir.normalize();
+    const arrow = new THREE.ArrowHelper(dir, from, len, color, 0.3, 0.15);
+    return arrow;
+  }
+
+  function buildAnalogy(key) {
+    analogyGroup.clear();
+    const data = ANALOGIES[key];
+
+    data.points.forEach(p => {
+      const geo = new THREE.SphereGeometry(0.18, 16, 16);
+      const mat = new THREE.MeshStandardMaterial({ color: p.color, emissive: p.color, emissiveIntensity: 0.4 });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(...p.pos);
+      analogyGroup.add(mesh);
+
+      const label = makeTextSprite(p.word, p.color);
+      label.position.set(p.pos[0], p.pos[1] + 0.5, p.pos[2]);
+      analogyGroup.add(label);
+    });
+
+    // Draw parallel arrows (the analogy direction)
+    data.arrows.forEach(([i, j]) => {
+      const from = new THREE.Vector3(...data.points[i].pos);
+      const to = new THREE.Vector3(...data.points[j].pos);
+      const arrow = makeArrow(from, to, 0xc77dff);
+      analogyGroup.add(arrow);
+    });
+
+    // Draw connecting lines showing the parallelogram
+    const linesMat = new THREE.LineBasicMaterial({ color: 0x333355, transparent: true, opacity: 0.5 });
+    const pairs = [[0, 2], [1, 3]];
+    pairs.forEach(([i, j]) => {
+      const geo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(...data.points[i].pos),
+        new THREE.Vector3(...data.points[j].pos),
+      ]);
+      analogyGroup.add(new THREE.Line(geo, linesMat));
+    });
+  }
+
+  buildAnalogy('king-queen');
+
+  document.getElementById('analogyKQ').addEventListener('click', () => {
+    buildAnalogy('king-queen');
+    document.querySelectorAll('#analogyKQ,#analogyParis,#analogyTense').forEach(b => b.classList.remove('active'));
+    document.getElementById('analogyKQ').classList.add('active');
+  });
+  document.getElementById('analogyParis').addEventListener('click', () => {
+    buildAnalogy('france-paris');
+    document.querySelectorAll('#analogyKQ,#analogyParis,#analogyTense').forEach(b => b.classList.remove('active'));
+    document.getElementById('analogyParis').classList.add('active');
+  });
+  document.getElementById('analogyTense').addEventListener('click', () => {
+    buildAnalogy('walk-walked');
+    document.querySelectorAll('#analogyKQ,#analogyParis,#analogyTense').forEach(b => b.classList.remove('active'));
+    document.getElementById('analogyTense').classList.add('active');
+  });
+
+  (function animateAna() {
+    requestAnimationFrame(animateAna);
+    controls.update();
+    renderer.render(scene, camera);
+  })();
+}
+
+// ── 4: DOT PRODUCT ──────────────────────────────────────────────────────────
+
+const dotCtx = createScene('dotScene', { camZ: 6, camY: 0 });
+if (dotCtx) {
+  const { scene, camera, renderer, controls } = dotCtx;
+  controls.enableRotate = false;
+
+  // Fixed red vector
+  const redDir = new THREE.Vector3(2, 0, 0);
+  const redArrow = new THREE.ArrowHelper(redDir.clone().normalize(), new THREE.Vector3(0,0,0), 2, 0xff6b6b, 0.2, 0.12);
+  scene.add(redArrow);
+
+  // Green vector (rotatable)
+  let angleDeg = 30;
+  const greenArrow = new THREE.ArrowHelper(new THREE.Vector3(1,0,0), new THREE.Vector3(0,0,0), 2, 0x4ecdc4, 0.2, 0.12);
+  scene.add(greenArrow);
+
+  // Arc to show angle
+  const arcGroup = new THREE.Group();
+  scene.add(arcGroup);
+
+  // Projection line
+  const projLine = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]),
+    new THREE.LineBasicMaterial({ color: 0xffd93d, transparent: true, opacity: 0.5 })
+  );
+  scene.add(projLine);
+
+  function updateDot() {
+    const rad = (angleDeg * Math.PI) / 180;
+    const gx = Math.cos(rad);
+    const gy = Math.sin(rad);
+    greenArrow.setDirection(new THREE.Vector3(gx, gy, 0).normalize());
+
+    // Dot product: a.b = |a||b|cos(theta)
+    const dotProduct = 2 * 2 * Math.cos(rad);
+    const cosSim = Math.cos(rad);
+
+    document.getElementById('dotReadout').textContent =
+      `Angle: ${angleDeg}°  |  Dot product: ${dotProduct.toFixed(2)}  |  cos(θ): ${cosSim.toFixed(3)}`;
+
+    // Draw arc
+    arcGroup.clear();
+    const arcPoints = [];
+    const arcSteps = Math.max(2, Math.abs(Math.round(angleDeg / 3)));
+    const arcRadius = 0.7;
+    for (let i = 0; i <= arcSteps; i++) {
+      const a = (i / arcSteps) * rad;
+      arcPoints.push(new THREE.Vector3(Math.cos(a) * arcRadius, Math.sin(a) * arcRadius, 0));
+    }
+    const arcGeo = new THREE.BufferGeometry().setFromPoints(arcPoints);
+    const arcLine = new THREE.Line(arcGeo, new THREE.LineBasicMaterial({ color: 0xffd93d }));
+    arcGroup.add(arcLine);
+
+    // Projection
+    const projX = 2 * Math.cos(rad) * Math.cos(0); // project green onto red
+    const positions = projLine.geometry.attributes.position;
+    if (positions) {
+      positions.setXYZ(0, gx * 2, gy * 2, 0);
+      positions.setXYZ(1, gx * 2 * Math.cos(rad), 0, 0);
+      positions.needsUpdate = true;
+    }
+  }
+
+  updateDot();
+
+  document.getElementById('dotAngle').addEventListener('input', (e) => {
+    angleDeg = parseFloat(e.target.value);
+    updateDot();
+  });
+  document.getElementById('dotReset').addEventListener('click', () => {
+    angleDeg = 30;
+    document.getElementById('dotAngle').value = 30;
+    updateDot();
+  });
+
+  // Add grid
+  const grid = new THREE.GridHelper(8, 8, 0x222233, 0x181825);
+  grid.rotation.x = Math.PI / 2;
+  scene.add(grid);
+
+  camera.position.set(0, 0, 6);
+
+  (function animateDot() {
+    requestAnimationFrame(animateDot);
+    renderer.render(scene, camera);
+  })();
+}
+
+// ── 5: ATTENTION MATRIX ─────────────────────────────────────────────────────
+
+const ATTN_TOKENS = ['The', 'cat', 'sat', 'on', 'the', 'mat'];
+
+const ATTN_HEADS = {
+  head1: {
+    name: 'Subject-Verb',
+    weights: [
+      [0.8, 0.05, 0.05, 0.03, 0.04, 0.03],
+      [0.1, 0.4, 0.35, 0.05, 0.05, 0.05],
+      [0.05, 0.45, 0.3, 0.08, 0.05, 0.07],
+      [0.05, 0.05, 0.3, 0.4, 0.1, 0.1],
+      [0.1, 0.05, 0.05, 0.05, 0.6, 0.15],
+      [0.03, 0.05, 0.1, 0.12, 0.2, 0.5],
+    ]
+  },
+  head2: {
+    name: 'Adjective-Noun',
+    weights: [
+      [0.3, 0.5, 0.05, 0.05, 0.05, 0.05],
+      [0.15, 0.3, 0.15, 0.1, 0.1, 0.2],
+      [0.05, 0.1, 0.5, 0.2, 0.05, 0.1],
+      [0.05, 0.05, 0.2, 0.3, 0.15, 0.25],
+      [0.05, 0.05, 0.05, 0.05, 0.3, 0.5],
+      [0.05, 0.1, 0.05, 0.1, 0.3, 0.4],
+    ]
+  },
+  head3: {
+    name: 'Positional',
+    weights: [
+      [0.6, 0.25, 0.08, 0.04, 0.02, 0.01],
+      [0.2, 0.45, 0.2, 0.08, 0.04, 0.03],
+      [0.08, 0.2, 0.4, 0.18, 0.08, 0.06],
+      [0.04, 0.08, 0.2, 0.38, 0.18, 0.12],
+      [0.02, 0.04, 0.08, 0.18, 0.4, 0.28],
+      [0.01, 0.03, 0.06, 0.12, 0.28, 0.5],
+    ]
+  }
+};
+
+function renderAttention(headKey) {
+  const container = document.getElementById('attnMatrixContainer');
+  const head = ATTN_HEADS[headKey];
+  const size = ATTN_TOKENS.length;
+
+  const cols = size + 1;
+  let html = `<div class="attn-matrix" style="grid-template-columns: repeat(${cols}, 52px);">`;
+
+  // Header row
+  html += `<div class="attn-cell attn-header">Q\\K</div>`;
+  ATTN_TOKENS.forEach(t => {
+    html += `<div class="attn-cell attn-header">${t}</div>`;
+  });
+
+  // Data rows
+  head.weights.forEach((row, ri) => {
+    html += `<div class="attn-cell attn-header">${ATTN_TOKENS[ri]}</div>`;
+    row.forEach((val, ci) => {
+      const intensity = Math.round(val * 255);
+      const bg = `rgba(127, 170, 255, ${val * 0.9 + 0.05})`;
+      html += `<div class="attn-cell" style="background:${bg};color:${val > 0.3 ? '#000' : '#aaa'}"
+        onmouseover="document.getElementById('attnReadout').textContent='${ATTN_TOKENS[ri]} → ${ATTN_TOKENS[ci]}: ${val.toFixed(2)} attention weight'"
+      >${val.toFixed(2)}</div>`;
+    });
+  });
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+renderAttention('head1');
+
+document.getElementById('attnHead1').addEventListener('click', () => {
+  renderAttention('head1');
+  document.querySelectorAll('#attnHead1,#attnHead2,#attnHead3').forEach(b => b.classList.remove('active'));
+  document.getElementById('attnHead1').classList.add('active');
+});
+document.getElementById('attnHead2').addEventListener('click', () => {
+  renderAttention('head2');
+  document.querySelectorAll('#attnHead1,#attnHead2,#attnHead3').forEach(b => b.classList.remove('active'));
+  document.getElementById('attnHead2').classList.add('active');
+});
+document.getElementById('attnHead3').addEventListener('click', () => {
+  renderAttention('head3');
+  document.querySelectorAll('#attnHead1,#attnHead2,#attnHead3').forEach(b => b.classList.remove('active'));
+  document.getElementById('attnHead3').classList.add('active');
+});
+
+// ── 6: TRANSFORMER VISUALIZATION (3D data flow) ────────────────────────────
+
+const tfCtx = createScene('transformerScene', { camZ: 12, camY: 3 });
+if (tfCtx) {
+  const { scene, camera, renderer, controls } = tfCtx;
+
+  const LAYERS = [
+    { label: 'Embeddings', y: -4, color: 0x7faaff },
+    { label: 'Attention', y: -1.5, color: 0x4ecdc4 },
+    { label: 'Add+Norm', y: 0.5, color: 0xff6b6b },
+    { label: 'FFN', y: 2.5, color: 0xffd93d },
+    { label: 'Add+Norm', y: 4.5, color: 0xff6b6b },
+    { label: 'Output', y: 7, color: 0xc77dff },
+  ];
+
+  // Layer planes
+  LAYERS.forEach(layer => {
+    const geo = new THREE.BoxGeometry(8, 0.3, 3);
+    const mat = new THREE.MeshStandardMaterial({
+      color: layer.color,
+      transparent: true,
+      opacity: 0.25,
+      emissive: layer.color,
+      emissiveIntensity: 0.15
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.y = layer.y;
+    scene.add(mesh);
+
+    const label = makeTextSprite(layer.label, layer.color);
+    label.position.set(-5.5, layer.y, 0);
+    label.scale.set(3, 0.75, 1);
+    scene.add(label);
+  });
+
+  // Data particles flowing upward
+  const PARTICLE_COUNT = 60;
+  const particleGeo = new THREE.BufferGeometry();
+  const positions = new Float32Array(PARTICLE_COUNT * 3);
+  const colors = new Float32Array(PARTICLE_COUNT * 3);
+  const velocities = new Float32Array(PARTICLE_COUNT);
+
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 6;
+    positions[i * 3 + 1] = -5 + Math.random() * 13;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 2;
+    velocities[i] = 0.01 + Math.random() * 0.03;
+
+    const col = new THREE.Color(0x7faaff);
+    colors[i * 3] = col.r;
+    colors[i * 3 + 1] = col.g;
+    colors[i * 3 + 2] = col.b;
+  }
+
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  const particleMat = new THREE.PointsMaterial({ size: 0.12, vertexColors: true, transparent: true, opacity: 0.8 });
+  const particles = new THREE.Points(particleGeo, particleMat);
+  scene.add(particles);
+
+  function colorForY(y) {
+    if (y < -2.5) return new THREE.Color(0x7faaff);
+    if (y < 0) return new THREE.Color(0x4ecdc4);
+    if (y < 1.5) return new THREE.Color(0xff6b6b);
+    if (y < 3.5) return new THREE.Color(0xffd93d);
+    if (y < 5.5) return new THREE.Color(0xff6b6b);
+    return new THREE.Color(0xc77dff);
+  }
+
+  (function animateTf() {
+    requestAnimationFrame(animateTf);
+
+    const pos = particles.geometry.attributes.position;
+    const col = particles.geometry.attributes.color;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      let y = pos.getY(i) + velocities[i];
+      if (y > 8) {
+        y = -5;
+        pos.setX(i, (Math.random() - 0.5) * 6);
+        pos.setZ(i, (Math.random() - 0.5) * 2);
+      }
+      pos.setY(i, y);
+
+      const c = colorForY(y);
+      col.setXYZ(i, c.r, c.g, c.b);
+    }
+    pos.needsUpdate = true;
+    col.needsUpdate = true;
+
+    controls.update();
+    renderer.render(scene, camera);
+  })();
+}
+
+// ── 7: GENERATION ───────────────────────────────────────────────────────────
+
+const GEN_VOCAB = {
+  'The cat': [
+    { token: 'sat', logit: 3.2 },
+    { token: 'jumped', logit: 2.1 },
+    { token: 'slept', logit: 1.8 },
+    { token: 'ran', logit: 1.5 },
+    { token: 'ate', logit: 1.2 },
+    { token: 'purred', logit: 0.9 },
+    { token: 'watched', logit: 0.7 },
+  ],
+  'The cat sat': [
+    { token: 'on', logit: 4.1 },
+    { token: 'down', logit: 2.0 },
+    { token: 'quietly', logit: 1.3 },
+    { token: 'beside', logit: 1.1 },
+    { token: 'near', logit: 0.8 },
+    { token: 'in', logit: 0.6 },
+    { token: 'still', logit: 0.4 },
+  ],
+  'The cat sat on': [
+    { token: 'the', logit: 4.5 },
+    { token: 'a', logit: 2.2 },
+    { token: 'my', logit: 1.0 },
+    { token: 'his', logit: 0.7 },
+    { token: 'her', logit: 0.6 },
+    { token: 'its', logit: 0.3 },
+    { token: 'our', logit: 0.1 },
+  ],
+  'The cat sat on the': [
+    { token: 'mat', logit: 3.8 },
+    { token: 'roof', logit: 2.5 },
+    { token: 'floor', logit: 2.2 },
+    { token: 'bed', logit: 1.9 },
+    { token: 'table', logit: 1.5 },
+    { token: 'couch', logit: 1.2 },
+    { token: 'windowsill', logit: 0.8 },
+  ],
+  'The cat sat on the mat': [
+    { token: '.', logit: 4.0 },
+    { token: 'and', logit: 2.5 },
+    { token: ',', logit: 2.0 },
+    { token: 'quietly', logit: 1.0 },
+    { token: 'again', logit: 0.5 },
+    { token: 'today', logit: 0.3 },
+    { token: 'outside', logit: 0.1 },
+  ],
+  'The cat sat on the mat.': [
+    { token: 'The', logit: 2.8 },
+    { token: 'It', logit: 2.5 },
+    { token: 'She', logit: 1.2 },
+    { token: 'A', logit: 1.0 },
+    { token: 'Then', logit: 0.9 },
+    { token: 'Outside', logit: 0.4 },
+    { token: 'Nothing', logit: 0.2 },
+  ],
+};
+
+function softmax(logits, temperature) {
+  const scaled = logits.map(l => l / temperature);
+  const maxVal = Math.max(...scaled);
+  const exps = scaled.map(s => Math.exp(s - maxVal));
+  const sum = exps.reduce((a, b) => a + b, 0);
+  return exps.map(e => e / sum);
+}
+
+function sampleFromProbs(tokens, probs) {
+  const r = Math.random();
+  let cumulative = 0;
+  for (let i = 0; i < probs.length; i++) {
+    cumulative += probs[i];
+    if (r < cumulative) return tokens[i];
+  }
+  return tokens[tokens.length - 1];
+}
+
+let genTokens = ['The', 'cat'];
+let genAutoInterval = null;
+
+function getTemperature() {
+  return parseFloat(document.getElementById('tempSlider').value) / 10;
+}
+
+function renderGeneration() {
+  const output = document.getElementById('genOutput');
+  output.innerHTML = genTokens.map((t, i) =>
+    `<span class="gen-token ${i === genTokens.length - 1 ? 'latest' : ''}">${t}</span>`
+  ).join(' ') + '<span class="gen-cursor"></span>';
+
+  const key = genTokens.join(' ');
+  const candidates = GEN_VOCAB[key];
+  const barsContainer = document.getElementById('probBars');
+
+  if (candidates) {
+    const temp = getTemperature();
+    const probs = softmax(candidates.map(c => c.logit), temp);
+
+    barsContainer.innerHTML = candidates.map((c, i) => {
+      const pct = (probs[i] * 100).toFixed(1);
+      const width = probs[i] * 100;
+      const hue = 200 - probs[i] * 150;
+      return `<div class="prob-bar-row">
+        <span class="prob-bar-label">${c.token}</span>
+        <div class="prob-bar-track">
+          <div class="prob-bar-fill" style="width:${width}%;background:hsl(${hue},70%,55%)"></div>
+        </div>
+        <span class="prob-bar-val">${pct}%</span>
+      </div>`;
+    }).join('');
+
+    document.getElementById('genReadout').textContent =
+      `Temperature: ${temp.toFixed(1)} | ${candidates.length} candidates | Context: ${genTokens.length} tokens`;
+  } else {
+    barsContainer.innerHTML = '<div style="text-align:center;color:#666;padding:15px;">End of pre-built sequence. Press Reset to start over.</div>';
+    document.getElementById('genReadout').textContent = 'Generation complete';
+    if (genAutoInterval) {
+      clearInterval(genAutoInterval);
+      genAutoInterval = null;
+      document.getElementById('genAuto').classList.remove('active');
+    }
+  }
+}
+
+function generateStep() {
+  const key = genTokens.join(' ');
+  const candidates = GEN_VOCAB[key];
+  if (!candidates) return false;
+
+  const temp = getTemperature();
+  const probs = softmax(candidates.map(c => c.logit), temp);
+  const chosen = sampleFromProbs(candidates.map(c => c.token), probs);
+  genTokens.push(chosen);
+  renderGeneration();
+  return true;
+}
+
+document.getElementById('genStep').addEventListener('click', generateStep);
+
+document.getElementById('genAuto').addEventListener('click', () => {
+  if (genAutoInterval) {
+    clearInterval(genAutoInterval);
+    genAutoInterval = null;
+    document.getElementById('genAuto').classList.remove('active');
+  } else {
+    document.getElementById('genAuto').classList.add('active');
+    genAutoInterval = setInterval(() => {
+      if (!generateStep()) {
+        clearInterval(genAutoInterval);
+        genAutoInterval = null;
+        document.getElementById('genAuto').classList.remove('active');
+      }
+    }, 800);
+  }
+});
+
+document.getElementById('genReset').addEventListener('click', () => {
+  if (genAutoInterval) {
+    clearInterval(genAutoInterval);
+    genAutoInterval = null;
+    document.getElementById('genAuto').classList.remove('active');
+  }
+  genTokens = ['The', 'cat'];
+  renderGeneration();
+});
+
+document.getElementById('tempSlider').addEventListener('input', (e) => {
+  document.getElementById('tempVal').textContent = (parseFloat(e.target.value) / 10).toFixed(1);
+  renderGeneration();
+});
+
+renderGeneration();
+
+</script>
+</body>
+</html>
