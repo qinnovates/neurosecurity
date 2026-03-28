@@ -1,6 +1,19 @@
 # Changelog
 
-<!-- changelog-marker: 07f935647d8d2d6d8b6e91948d14614473e7d181 -->
+<!-- changelog-marker: 57f137d3fe579afdcfe2a48f67c4b9e943fac2f0 -->
+
+## 2026-03-28
+
+### Other
+- feat(autodidactive): add interactive LLM explainer lab ([57f137d](https://github.com/qinnovates/qinnovate/commit/57f137d))
+- update news feed cache [skip ci-deploy] ([e3bf446](https://github.com/qinnovates/qinnovate/commit/e3bf446))
+
+## 2026-03-27
+
+### Other
+- update news feed cache [skip ci-deploy] ([fac39f4](https://github.com/qinnovates/qinnovate/commit/fac39f4))
+
+
 
 ## 2026-03-26
 
