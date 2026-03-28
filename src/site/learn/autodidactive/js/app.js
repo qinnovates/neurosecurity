@@ -7,6 +7,7 @@ import { QUANTUM } from './data/quantum.js';
 import { CYBERSECURITY } from './data/cybersecurity.js';
 import { PATTERNS, IMPLEMENT_PRACTICES, INFLUENTIAL_BOOKS } from './data/patterns.js';
 import { CALCULUS_LABS } from './data/calculus.js';
+import { LLM_LABS } from './data/llm.js';
 import { initNoteWall, getNotesForBackground } from './notewall.js';
 import { getRelated, getPathWithEdges, getAllNodes, getAllEdges } from './graph.js';
 import { search, highlightMatch, groupResults } from './search.js';
@@ -103,7 +104,7 @@ const CATEGORIES = [
       { id: 'sec-neurowall', label: 'Neurowall',    data: CYBERSECURITY, type: 'neurowall' }
     ]},
   { id: 'science',   label: 'Science',   icon: '🔬', data: SCIENCE_PEOPLE, type: 'people' },
-  { id: 'math',      label: 'Math',      icon: '📐', data: CALCULUS_LABS,   type: 'labs' },
+  { id: 'math',      label: 'Math',      icon: '📐', data: [...CALCULUS_LABS, ...LLM_LABS], type: 'labs' },
   { id: 'paths',     label: 'Paths',     icon: '🗺️', data: LEARNING_PATHS, type: 'paths' }
 ];
 
@@ -118,6 +119,7 @@ const FIELDS = [
   { id: 'cybersecurity', label: 'Cybersecurity', data: CYBERSECURITY },
   { id: 'ethics', label: 'Ethics', data: ETHICS_TIMELINE.filter(e => !e.isContext) },
   { id: 'calculus', label: 'Calculus', data: CALCULUS_LABS },
+  { id: 'llm', label: 'LLMs', data: LLM_LABS },
   { id: 'paths', label: 'Paths', data: LEARNING_PATHS }
 ];
 
