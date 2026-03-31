@@ -92,6 +92,9 @@ const ALLOWED_PARQUET_PREFIX = '/data/parquet/';
 async function loadDuckDBFromCDN(_scriptUrl: string): Promise<any> {
   // Use the ESM bundle from jsDelivr via dynamic import with a URL
   // Vite/Rollup cannot statically resolve a full URL, so this stays out of the bundle
+  // SECURITY: SRI (Subresource Integrity) cannot be applied to dynamic import() — this is
+  // a known browser limitation. WASM and worker files are already vendored locally (see
+  // LOCAL_BASE). TODO: Vendor the ESM loader locally as well to eliminate this CDN dependency.
   const moduleUrl = `https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm`;
   return import(/* @vite-ignore */ moduleUrl);
 }
@@ -133,6 +136,9 @@ async function initDuckDB(): Promise<DuckDBInstance> {
 
   // Register all parquet datasets as views using read_parquet()
   // Only uses relative URLs pointing to /data/parquet/*.parquet
+  // SECURITY: dataset and url are derived from PARQUET_DATASETS constant (hardcoded).
+  // Do NOT load dataset names from external config or user input — this uses string
+  // interpolation in SQL which would become an injection vector.
   for (const dataset of PARQUET_DATASETS) {
     const url = `${ALLOWED_PARQUET_PREFIX}${dataset}.parquet`;
     try {
@@ -164,7 +170,32 @@ async function initDuckDB(): Promise<DuckDBInstance> {
  * - EXPORT DATABASE / EXPORT TABLE
  */
 function validateQuery(sql: string): string | null {
-  const normalized = sql.toLowerCase();
+  // Strip SQL comments before validation to prevent bypass
+  let stripped = sql.replace(/--.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '');
+
+  // Block semicolons — only allow single statements
+  if (stripped.replace(/;[\s]*$/, '').includes(';')) {
+    return 'Multiple statements are not allowed. Submit one query at a time.';
+  }
+
+  // Allowlist check: first non-whitespace token must be SELECT or WITH
+  const firstToken = stripped.trim().split(/\s+/)[0]?.toUpperCase();
+  if (firstToken && firstToken !== 'SELECT' && firstToken !== 'WITH') {
+    return `Only SELECT and WITH queries are allowed. Found: "${firstToken}".`;
+  }
+
+  const normalized = stripped.toLowerCase();
+
+  // Block information_schema, pg_catalog, and duckdb_ system schemas
+  if (/\binformation_schema\b/i.test(normalized)) {
+    return '"information_schema" access is not allowed.';
+  }
+  if (/\bpg_catalog\b/i.test(normalized)) {
+    return '"pg_catalog" access is not allowed.';
+  }
+  if (/\bduckdb_\w+\s*\(/i.test(normalized)) {
+    return 'DuckDB system functions are not allowed.';
+  }
 
   // Block read_parquet — validate ALL occurrences (matchAll, not match)
   // Security: previous version only checked first occurrence — multi-call bypass possible

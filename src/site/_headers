@@ -4,4 +4,6 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
+  # TODO: Configure CSP violation reporting endpoint (e.g., report-uri https://qinnovate.report-uri.com/r/d/csp/enforce)
+  # Once configured, add to the CSP below: report-uri https://qinnovate.report-uri.com/r/d/csp/enforce
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.jsdelivr.net https://esm.run; connect-src 'self' https://api.openai.com https://api.anthropic.com https://cloudflareinsights.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' data:; worker-src 'self' blob: https://cdn.jsdelivr.net; frame-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'

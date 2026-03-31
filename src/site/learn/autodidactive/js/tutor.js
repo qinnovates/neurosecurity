@@ -562,17 +562,32 @@ const DEFAULT_PREFS = {
   webSearch: true
 };
 
+// SECURITY: API keys are stored in sessionStorage (cleared when tab closes).
+// Non-sensitive prefs (tier flags, model names, Socratic mode) stay in localStorage
+// so they persist across sessions. The apiKey field is NEVER written to localStorage.
+// Your API key is stored in browser session memory only and cleared when you close the tab.
 export function getTutorPrefs() {
   try {
-    const saved = JSON.parse(localStorage.getItem(TUTOR_KEY));
-    return saved ? { ...DEFAULT_PREFS, ...saved } : { ...DEFAULT_PREFS };
+    const saved = JSON.parse(localStorage.getItem(TUTOR_KEY)) || {};
+    const sessionSaved = JSON.parse(sessionStorage.getItem(TUTOR_KEY)) || {};
+    // Merge: localStorage for non-sensitive prefs, sessionStorage for apiKey
+    return { ...DEFAULT_PREFS, ...saved, apiKey: sessionSaved.apiKey || DEFAULT_PREFS.apiKey };
   } catch { return { ...DEFAULT_PREFS }; }
 }
 
 export function setTutorPref(key, value) {
   const prefs = getTutorPrefs();
   prefs[key] = value;
-  localStorage.setItem(TUTOR_KEY, JSON.stringify(prefs));
+  if (key === 'apiKey') {
+    // API keys go to sessionStorage only (cleared when tab closes)
+    const sessionData = JSON.parse(sessionStorage.getItem(TUTOR_KEY) || '{}');
+    sessionData.apiKey = value;
+    sessionStorage.setItem(TUTOR_KEY, JSON.stringify(sessionData));
+  } else {
+    // Non-sensitive prefs persist in localStorage (without apiKey)
+    const { apiKey: _removed, ...safePrefs } = prefs;
+    localStorage.setItem(TUTOR_KEY, JSON.stringify(safePrefs));
+  }
 }
 
 export async function initTier2() {
@@ -639,10 +654,12 @@ export async function processMessageTier2(query) {
 // ── Tier 3: External LLM (Ollama / OpenAI / Anthropic) ───────────────────────
 
 // SSRF guard: only allow Ollama URLs pointing to localhost
+// Covers all loopback forms: localhost, 127.x.x.x, IPv6 [::1], ::1, and long-form
 function isAllowedOllamaUrl(url) {
   try {
     const parsed = new URL(url);
-    return ['localhost', '127.0.0.1', '[::1]'].includes(parsed.hostname);
+    const h = parsed.hostname;
+    return /^(localhost|127\.\d+\.\d+\.\d+|\[?::1\]?|0:0:0:0:0:0:0:1)$/.test(h);
   } catch { return false; }
 }
 

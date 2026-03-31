@@ -1203,6 +1203,13 @@
 </div>
 
 <script>
+// ── XSS escape utility ──────────────────────────────────────────────────────
+function esc(str) {
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
+}
+
 // ═══════════════════════════════════════════════════════════════════════════════
 // DATA
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -2065,17 +2072,17 @@ function renderCard(person) {
   if (isWarning) card.style.borderColor = '#ff4444';
   card.innerHTML = `
     <div class="card-header">
-      <div class="avatar" style="background:${hashColor(person.id)}">${person.emoji}</div>
+      <div class="avatar" style="background:${hashColor(person.id)}">${esc(person.emoji)}</div>
       <div class="card-info">
-        <h3>${person.name}</h3>
-        <div class="card-dates">${person.dates}</div>
-        <div class="card-tagline">${person.tagline}</div>
+        <h3>${esc(person.name)}</h3>
+        <div class="card-dates">${esc(person.dates)}</div>
+        <div class="card-tagline">${esc(person.tagline)}</div>
       </div>
     </div>
     <div class="card-fields">
-      ${person.fields.map(f => `<span class="field-tag">${f}</span>`).join('')}
+      ${person.fields.map(f => `<span class="field-tag">${esc(f)}</span>`).join('')}
     </div>
-    <div class="card-quote">${person.quote}</div>
+    <div class="card-quote">${esc(person.quote)}</div>
     <div class="expand-hint">Click to explore &rarr;</div>
   `;
   card.addEventListener('click', () => openModal(person));
@@ -2088,37 +2095,37 @@ function openModal(person) {
 
   body.innerHTML = `
     <div class="modal-hero">
-      <h2>${person.emoji} ${person.name}</h2>
-      <div class="dates">${person.dates}</div>
-      <div class="essence">${person.tagline}</div>
+      <h2>${esc(person.emoji)} ${esc(person.name)}</h2>
+      <div class="dates">${esc(person.dates)}</div>
+      <div class="essence">${esc(person.tagline)}</div>
     </div>
 
     <div class="detail-section label-struggle">
       <h4><span class="icon">🔥</span> THE STRUGGLE</h4>
-      <p>${person.struggle}</p>
+      <p>${esc(person.struggle)}</p>
     </div>
 
     <div class="detail-section label-moment">
       <h4><span class="icon">⚡</span> THE MOMENT</h4>
-      <p>${person.moment}</p>
+      <p>${esc(person.moment)}</p>
     </div>
 
     <div class="detail-section label-framework">
       <h4><span class="icon">🧠</span> THE FRAMEWORK</h4>
-      <ul>${person.framework.map(f => `<li>${f}</li>`).join('')}</ul>
+      <ul>${person.framework.map(f => `<li>${esc(f)}</li>`).join('')}</ul>
     </div>
 
     <div class="detail-section label-habits">
       <h4><span class="icon">🔄</span> THE HABITS</h4>
-      <ul>${person.habits.map(h => `<li>${h}</li>`).join('')}</ul>
+      <ul>${person.habits.map(h => `<li>${esc(h)}</li>`).join('')}</ul>
     </div>
 
     <div class="detail-section label-quotes">
       <h4><span class="icon">💬</span> QUOTES</h4>
       ${person.quotes.map(q => `
         <div class="quote-block">
-          "${q.text}"
-          <span class="attribution">— ${q.src}</span>
+          "${esc(q.text)}"
+          <span class="attribution">— ${esc(q.src)}</span>
         </div>
       `).join('')}
     </div>
@@ -2126,8 +2133,8 @@ function openModal(person) {
     ${INFLUENTIAL_BOOKS.filter(b => b.reader === person.name).map(b => `
     <div class="detail-section" style="border-left: 3px solid var(--accent5); margin-left: 0;">
       <h4 style="color: var(--accent5);"><span class="icon">📖</span> THE BOOK THAT MADE THEM</h4>
-      <p><strong style="color:var(--accent5); font-style:italic;">${b.title}</strong> by ${b.author}</p>
-      <p style="margin-top:0.5rem;">${b.desc}</p>
+      <p><strong style="color:var(--accent5); font-style:italic;">${esc(b.title)}</strong> by ${esc(b.author)}</p>
+      <p style="margin-top:0.5rem;">${esc(b.desc)}</p>
     </div>
     `).join('')}
 
@@ -2135,8 +2142,8 @@ function openModal(person) {
       <h4><span class="icon">🎯</span> IMPLEMENT THIS</h4>
       ${person.takeaways.map(t => `
         <div class="takeaway-item">
-          <strong>${t.title}</strong>
-          ${t.desc}
+          <strong>${esc(t.title)}</strong>
+          ${esc(t.desc)}
         </div>
       `).join('')}
     </div>
@@ -2145,11 +2152,11 @@ function openModal(person) {
       <h4 style="color: var(--gold);"><span class="icon">🧠</span> TEST YOUR RECALL</h4>
       <div class="recall-prompt">
         <h5>Active Recall</h5>
-        <p>Without scrolling up — what was ${person.name.split(' ')[0]}'s core framework? What was their defining struggle?</p>
+        <p>Without scrolling up — what was ${esc(person.name.split(' ')[0])}'s core framework? What was their defining struggle?</p>
         <button class="recall-btn" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Reveal Summary</button>
         <div class="recall-reveal">
-          <p><strong>Framework:</strong> ${(() => { let s = person.framework[0]; while (/<[^>]+>/.test(s)) s = s.replace(/<[^>]+>/g, ''); return s; })()}</p>
-          <p><strong>Struggle:</strong> ${person.struggle.split('.').slice(0,2).join('.')+'.'}</p>
+          <p><strong>Framework:</strong> ${esc((() => { let s = person.framework[0]; while (/<[^>]+>/.test(s)) s = s.replace(/<[^>]+>/g, ''); return s; })())}</p>
+          <p><strong>Struggle:</strong> ${esc(person.struggle.split('.').slice(0,2).join('.')+'.')}</p>
         </div>
       </div>
     </div>
@@ -2494,7 +2501,7 @@ const pGrid = document.getElementById('patternsGrid');
 PATTERNS.forEach(p => {
   const card = document.createElement('div');
   card.className = 'pattern-card';
-  card.innerHTML = `<h4>${p.title}</h4><p>${p.desc}</p><div class="names">${p.names}</div>`;
+  card.innerHTML = `<h4>${esc(p.title)}</h4><p>${esc(p.desc)}</p><div class="names">${esc(p.names)}</div>`;
   pGrid.appendChild(card);
 });
 
@@ -2508,9 +2515,9 @@ sorted.forEach(p => {
   const item = document.createElement('div');
   item.className = 'timeline-item';
   item.innerHTML = `
-    <div class="timeline-content" data-id="${p.id}">
-      <div class="era">${p.dates}</div>
-      <h5>${p.emoji} ${p.name}</h5>
+    <div class="timeline-content" data-id="${esc(p.id)}">
+      <div class="era">${esc(p.dates)}</div>
+      <h5>${esc(p.emoji)} ${esc(p.name)}</h5>
     </div>
     <div class="timeline-dot"></div>
   `;
@@ -2527,10 +2534,10 @@ IMPLEMENT_PRACTICES.forEach(p => {
   const card = document.createElement('div');
   card.className = 'implement-card';
   card.innerHTML = `
-    <h4>${p.title}</h4>
-    <div class="origin">From: ${p.origin}</div>
-    <p>${p.desc}</p>
-    <div class="how"><strong>How to start:</strong> ${p.how}</div>
+    <h4>${esc(p.title)}</h4>
+    <div class="origin">From: ${esc(p.origin)}</div>
+    <p>${esc(p.desc)}</p>
+    <div class="how"><strong>How to start:</strong> ${esc(p.how)}</div>
   `;
   iGrid.appendChild(card);
 });
@@ -2615,10 +2622,10 @@ ACTION_EXAMPLES.forEach(a => {
   const card = document.createElement('div');
   card.className = 'action-card';
   card.innerHTML = `
-    <h4>${a.title}</h4>
-    <div class="who">${a.who}</div>
-    <p>${a.desc}</p>
-    <div class="lesson">${a.lesson}</div>
+    <h4>${esc(a.title)}</h4>
+    <div class="who">${esc(a.who)}</div>
+    <p>${esc(a.desc)}</p>
+    <div class="lesson">${esc(a.lesson)}</div>
   `;
   aGrid.appendChild(card);
 });
@@ -2779,10 +2786,10 @@ INFLUENTIAL_BOOKS.forEach(b => {
   const card = document.createElement('div');
   card.className = 'book-card';
   card.innerHTML = `
-    <div class="reader">${b.reader}</div>
-    <h4>${b.title}</h4>
-    <div class="author">by ${b.author}</div>
-    <p>${b.desc}</p>
+    <div class="reader">${esc(b.reader)}</div>
+    <h4>${esc(b.title)}</h4>
+    <div class="author">by ${esc(b.author)}</div>
+    <p>${esc(b.desc)}</p>
   `;
   bGrid.appendChild(card);
 });
@@ -2938,14 +2945,14 @@ JOURNAL_ENTRIES.forEach(entry => {
   el.innerHTML = `
     <div class="journal-entry-header">
       <div>
-        <h4>${entry.title}</h4>
-        <div class="entry-meta">${entry.meta}</div>
+        <h4>${esc(entry.title)}</h4>
+        <div class="entry-meta">${esc(entry.meta)}</div>
       </div>
       <span class="chevron">&#9654;</span>
     </div>
     <div class="journal-entry-body">
       ${entry.body}
-      <a class="journal-link" href="${entry.githubLink}" target="_blank" rel="noopener noreferrer">Read full deep-dive on GitHub &rarr;</a>
+      <a class="journal-link" href="${esc(entry.githubLink)}" target="_blank" rel="noopener noreferrer">Read full deep-dive on GitHub &rarr;</a>
     </div>
   `;
   el.querySelector('.journal-entry-header').addEventListener('click', () => {
