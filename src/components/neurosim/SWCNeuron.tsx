@@ -117,6 +117,8 @@ export default function SWCNeuron({
   const pulseProgress = useRef(0);
 
   useEffect(() => {
+    // SECURITY: Only allow fetching from known local paths to prevent SSRF
+    if (!url.startsWith('/models/') && !url.startsWith('/data/')) return;
     fetch(url)
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);

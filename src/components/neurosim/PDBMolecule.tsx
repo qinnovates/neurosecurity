@@ -91,6 +91,8 @@ export default function PDBMolecule({
   const groupRef = useRef<THREE.Group>(null);
 
   useEffect(() => {
+    // SECURITY: Only allow fetching from known local paths to prevent SSRF
+    if (!url.startsWith('/models/') && !url.startsWith('/data/')) return;
     fetch(url)
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
