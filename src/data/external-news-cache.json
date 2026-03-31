@@ -1,21 +1,39 @@
 [
   {
     "type": "external",
-    "title": "Meet the Man Making Music With His Brain Implant",
-    "date": "2026-03-30",
-    "url": "hxxps://www[.]wired[.]com/story/meet-the-man-making-music-with-his-brain-implant/",
-    "source": "Wired",
-    "summary": "Galen Buckwalter says brain-computer interfaces will have to be enjoyable to use if the technology is going to be successful.",
+    "title": "Boosting your brain with a chip carries a price - The Japan Times",
+    "date": "2026-03-31",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPaEllVzkwci1DU1hjclBiaHhwaW1LMHhVckI5OXFFQlJwOUJtNWtlVkM1TXREV09fYVY2eFVMRmNRYUpZUnhSVFUtRjVNTkw5R1hxbUFqaW04X1hNekVFcE56X0tCWTNXRVd5RHNid0pnZHZGaWV1N1g4Z01qVElPNzZfcldabjZwRXQ4UXNUbkZHY28?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Boosting your brain with a chip carries a price&nbsp;&nbsp;The Japan Times",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Experts Predict Imminent Breakthrough in China’s Brain-Computer Interfaces - ForkLog",
-    "date": "2026-03-30",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMingFBVV95cUxPTThTR3NGcjE4M2lXV0c4ZTUtQmZpcGRFTXIyQzhPMTh3cEtMSFk0MlJSdy1UVXJHU20wa2lZWUw4bmxzYTE0TmYydkNLVGZDNnhmckI2N2NFRGlCamNIVVJ2Xzhjb2gyVnc3LWtJWGE5eFRUTGh2Y2dnMmRLOXZPWWFuR1ItNzduS3RtTE5WLUh1SzNvcVVyOWRxZVU4Zw?oc=5",
+    "title": "Science Corp. Appoints Murat Günel, MD, as Medical Director for Brain-Computer Interfaces - BioSpace",
+    "date": "2026-03-31",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixAFBVV95cUxNQ3RrcWhVejRXYlo5UTFLeDFGdW1zMWJhdm5Sb0hGeW5kUVRBY05HWmVVU2NEM0dNT3JPTjVfSEFKZ2JJUm1ScWtYeFJXSFNvV1plMTFjTnVqUEl0ZG4zQkVmT29yWjg1aHc4aWhvNzZVYzNEd3ZsZWhqX0hocGNCbGxmMHFlbUNLQUZ3NE55d2Y0M2R0VTdrQkVpVDVGaVVFdHBxV1VOUkVUZm5WOTNtaF8xSTRtX3htNDdyVGdWRFk4cUlG?oc=5",
     "source": "Google News — BCI",
-    "summary": "Experts Predict Imminent Breakthrough in China’s Brain-Computer Interfaces&nbsp;&nbsp;ForkLog",
+    "summary": "Science Corp. Appoints Murat Günel, MD, as Medical Director for Brain-Computer Interfaces&nbsp;&nbsp;BioSpace",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Information in a recurrent Retina-V1 network with realistic noise, feedback and nonlinearities",
+    "date": "2026-03-31",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]27347",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.27347v1 Announce Type: new Abstract: Quantitative estimation of information flow in early vision with psychophysically realistic networks is still an open issue. This is because, up to date",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Energy Landscapes of Emotion: Quantifying Brain Network Stability During Happy and Sad Face Processing Using EEG-Based Hopfield Energy",
+    "date": "2026-03-31",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]27644",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.27644v1 Announce Type: new Abstract: Understanding how the human brain instantiates distinct emotional states is a key challenge in affective neuroscience. While network-based approaches ha",
+    "category": "research"
   },
   {
     "type": "external",
@@ -28,39 +46,21 @@
   },
   {
     "type": "external",
-    "title": "This Man Makes Music With His Mind—And That's The Point - The Tech Buzz",
+    "title": "New BCI Decodes Deep-Brain Thoughts - Neuroscience News",
     "date": "2026-03-30",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikgFBVV95cUxOQkhBTDN3RF9aamptUkE0VGZNcnJicjgzZUEyWTVPTktKQ3dwRS1DTDlrVU1aTVVJZDljYTg5NnNLVVVWOVJNMU12V0k3aGNRbjZRWTl5OTBHcjhoR3hmc0tRQ1JDakQwblNPOEVnbE1Hb3gwdEd2R3JnamJPWU0wNU56ZTdlUUF2UW9GN0xDczd1QQ?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMieEFVX3lxTE96Q1l5Y0twblRQdE93OXBjTFFvYXlsbjFDby1PdHptX3llN2J3d3JBMWxVWjFmZXVSWUFFZnlWaklUSnBKWXZORjJBSDAtUHVDRjBMU00wM2hYNER2Zkg1WEU5MnZIaTR4c1pJQzZtSnplNWpoYklTVA?oc=5",
     "source": "Google News — BCI",
-    "summary": "This Man Makes Music With His Mind—And That's The Point&nbsp;&nbsp;The Tech Buzz",
+    "summary": "New BCI Decodes Deep-Brain Thoughts&nbsp;&nbsp;Neuroscience News",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Boosting your brain with a chip carries a price - The Japan Times",
-    "date": "2026-03-30",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPaEllVzkwci1DU1hjclBiaHhwaW1LMHhVckI5OXFFQlJwOUJtNWtlVkM1TXREV09fYVY2eFVMRmNRYUpZUnhSVFUtRjVNTkw5R1hxbUFqaW04X1hNekVFcE56X0tCWTNXRVd5RHNid0pnZHZGaWV1N1g4Z01qVElPNzZfcldabjZwRXQ4UXNUbkZHY28?oc=5",
+    "title": "‘Doctrine of the Mean’: how US lost a 2-decade race to China in brain implants - South China Morning Post",
+    "date": "2026-03-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxNdXQtNTQ3ZFAwQmNXaGdYT0d6d1ZkZVZKLWtZdkN2eTUzM2hnWnkxWFlhaGZTZjVMdmY5b1VVUGlLQ3BEZ1M4WjJ4SGF6RmNmX3YyVVNNRXlVVTMwb0k0MHR6azRGZHk2U2Q3dWNDbUl4cE1MZTUtQTJfVFptS044eU5PTW5MZWw4MGwzTUJIUUxQaG5UREhtdG5xZVRwZGx3N3Z1VURPZjJPMGV2ZmN6N0p4MTFKVDDSAbcBQVVfeXFMT01xVnVKemMxMlY4akF0dU1VcHFhSU1FODFJYm9hNXJ4QV9mSjdGdmdyMkExeEMxUUpfS1dDTU9NRHNLTmZ5V05uNlFrUktFZmZrQnFRMzFVRW1Uem1KRURkY3VSS1h2R3BpR09sTGs4czZqcUFSMjgtWXJWWm41UDFQWnRvSTVWY2ZRTzlCWnpzakZvbkNjcFc0d0RBbXNqWG1uQzJyM1B4UFl4WndEMFJqUDlqX2Vr?oc=5",
     "source": "Google News — BCI",
-    "summary": "Boosting your brain with a chip carries a price&nbsp;&nbsp;The Japan Times",
+    "summary": "‘Doctrine of the Mean’: how US lost a 2-decade race to China in brain implants&nbsp;&nbsp;South China Morning Post",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Longitudinal Boundary Sharpness Coefficient Slopes Predict Time to Alzheimer's Disease Conversion in Mild Cognitive Impairment: A Survival Analysis Using the ADNI Cohort",
-    "date": "2026-03-30",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]26007",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.26007v1 Announce Type: new Abstract: Predicting whether someone with mild cognitive impairment (MCI) will progress to Alzheimer's disease (AD) is crucial in the early stages of neurodegener",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Passivity-Based Control of Electrographic Seizures in a Neural Mass Model of Epilepsy",
-    "date": "2026-03-30",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]25991",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.25991v1 Announce Type: cross Abstract: Recent advances in neurotechnologies and decades of scientific and clinical research have made closed-loop electrical neuromodulation one of the most ",
-    "category": "research"
   },
   {
     "type": "external",
@@ -69,15 +69,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxPNDNOTTNlc2h2Z1loaXJmZ2NObXJ1Y19XczlTeXRRV3h5U1VVcWxzZlgtQjktSWRCdFFWT2dVRW5OUm9lRV9DVGhIMzJDcHJYeVN1VlprMDgtbWRUdFJRZ1ZYMGhNb01lazF6WExSM3NDRmtsNmo2anlGY2VUSFBXSFByeU5udTAwVXQ0?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Neuralink Patient Using Brain Chip to Carry Out Important Life Task: Playing World of Warcraft&nbsp;&nbsp;Futurism",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed' - Tom's Hardware",
-    "date": "2026-03-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiyAJBVV95cUxPSDhtM1h6d0ZqQWFMSFNpRG5DMHZSM3pVTDJMTk1VNjdialFzMUhPTlZuT21uUVlxb0FZNzM5cGh1TWNYQjFxeWpTR0FjSGRyVk8zejVDWVVVeDZ1NEpocjM1Sk0zeVNUcEVGX0RkYXdBUXY0dVF1NktpdWhBMVlOa0xqREMwemd2ZFZHTXFPS05NN3FSNmJ5cUp2OVFLS0FJZTVOV2ZnSFNWM0JBSTBDM1lFZWJFQWZoZnZmeUFIdHhuUXNXNUNsV3VZN3NSeWtMZmFwdnBoWlh6TVJwSlBPcWdBZVJyYXZhWEZ3VTZlZTFZd09sakZWQjhUanNYQlJQaXFzZl9oMlRuOVNQWVF3bVhpakxWVUp0RXpRT0J0Y0hDdWVobFJ6aXprTUtQbk1iSGZZbU8xblZBcE15b3VQRHlHR2k5NXdY?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed'&nbsp;&nbsp;Tom'",
     "category": "neurotechnology"
   },
   {
@@ -91,6 +82,15 @@
   },
   {
     "type": "external",
+    "title": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed' - Tom's Hardware",
+    "date": "2026-03-26",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiyAJBVV95cUxPSDhtM1h6d0ZqQWFMSFNpRG5DMHZSM3pVTDJMTk1VNjdialFzMUhPTlZuT21uUVlxb0FZNzM5cGh1TWNYQjFxeWpTR0FjSGRyVk8zejVDWVVVeDZ1NEpocjM1Sk0zeVNUcEVGX0RkYXdBUXY0dVF1NktpdWhBMVlOa0xqREMwemd2ZFZHTXFPS05NN3FSNmJ5cUp2OVFLS0FJZTVOV2ZnSFNWM0JBSTBDM1lFZWJFQWZoZnZmeUFIdHhuUXNXNUNsV3VZN3NSeWtMZmFwdnBoWlh6TVJwSlBPcWdBZVJyYXZhWEZ3VTZlZTFZd09sakZWQjhUanNYQlJQaXFzZl9oMlRuOVNQWVF3bVhpakxWVUp0RXpRT0J0Y0hDdWVobFJ6aXprTUtQbk1iSGZZbU8xblZBcE15b3VQRHlHR2k5NXdY?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed'&nbsp;&nbsp;Tom'",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Can Electrical Stimulation Restore Sight?",
     "date": "2026-03-26",
     "url": "hxxps://spectrum[.]ieee[.]org/optic-nerve-damage-electrical-stimulation",
@@ -100,20 +100,11 @@
   },
   {
     "type": "external",
-    "title": "Brain Computer Interface Enables Rapid Communication for Two People with Paralysis - Mass General Brigham",
-    "date": "2026-03-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi2AFBVV95cUxObjlkNWktN3FZLVdmbU9HcGs4UWJHYTFRSjlWb1pQd2F2anFNZGFFQXNfb254UUdqaGlWOFRTY2FMSXFJZXpSNm5fS0lqQl9sblFYdktnLWdxbjhfMXJQOXljNFNRdTMtc3lhYVBHb0ZHeC1hS0gyTXE4VEd5WWdCa3hVV0xfSG1ucHEwLThRdWpBYm81bmpnS1JmdDR5Q1V6TVd4WGtuR1p1MUNSaW5SbDZkSm1Uc0tJWC1rNjV0cndiZ3J1WDBzQnFGeHY0bGZqY2ZaNU5peUY?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain Computer Interface Enables Rapid Communication for Two People with Paralysis&nbsp;&nbsp;Mass General Brigham",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Chinese ultrasound-based BCI startup Gestala raises $21.7M - MassDevice",
-    "date": "2026-03-12",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxNN1VVNzZ4Q0dnNzFqNDB4Z3ZfU2V5b0hzWjh5cXp4cTNqWW1BeGVJNXEwaTlScmJHdGNYb2RjSGlMVFBNVkZJamM4dUNLeGRkM3lGdkYyam1OU3BmTUlULUxxZEtuSEoybjU5eGt0YW4wTEdJcnhwZDZkY05xY1hvRk1pdU9uUmNDVGZaUlRB?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Chinese ultrasound-based BCI startup Gestala raises $21.7M&nbsp;&nbsp;MassDevice",
+    "title": "First Neuralink patient explains living one year with brain chip | Elizabeth Vargas Reports - KXAN Austin",
+    "date": "2026-03-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi5gFBVV95cUxNQnY2dDUyZnktLU11TW9PUjFIZERMNVFTUDBOeDRUV1VXYmNfbFRyZkNfajdDSWlzVUs1Qlpaa29GRDFzUHZtR2VfSzNGeERGZDdaQjhoYVNielJfTjh5bUFoU1dkTE9NMUwwVk5OVlR5SHcyQW9hT1BsRFVHS2dlRFNHRnRtdy1IX1RLcnNiQklJeVFiNGY3dmpXVG03dWE0SFlFUnVqUXk5ajhXTEJ1UVhaOWNqSmpqLUhHaTNIVE1lN2l3LUw5Nk0yUGdHaGNDM0c1THRhREN6dkV3TlpmdWljOGxzdw?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "First Neuralink patient explains living one year with brain chip | Elizabeth Vargas Reports&nbsp;&nbsp;KXAN Austin",
     "category": "neurotechnology"
   },
   {
@@ -123,6 +114,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxOX2Jtd3dNTy13MzNlOUpQRVlFN0RaLUYxMFd4VzJYZnR3TzFtRlFOa21PaWM5NzZiX1NTUGMxZkk1OTZmcG0xRDhhejYwOUM0RHFMYlZCQ1RZNEczQjR4Z1VZbEp3czA3bzB1UE1sYUNuS3o0dmdvazN4MmVtUTRqNTNDeHdvSnZrT0M4c3RUUVg2am5pa25FQ2ZSX2VBdVpaVHFRZmZXUnpRLUJwR1pObw?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;TechCrunch",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
+    "date": "2026-01-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
@@ -145,20 +145,11 @@
   },
   {
     "type": "external",
-    "title": "Sam Altman’s New Brain Venture, Merge Labs, Will Spin Out of a Nonprofit - WIRED",
-    "date": "2025-12-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxPTVlNdnB6X0dpZ2I2Q1lOMnVHdk9hazhMUFk4YnFjakNkblVCaFF6MUpsa2ZSVDhYVk83QUJYSDVCbS1aLVFlRGJqdXQ0T3VZVS1jRHNZUnpNRXR6eXp6TkhQTXhBREZiRFZsWGhCRGNQLU5VT3Fua0I1aXdfUWdseVc2OGIybG9TN1EyUUNhamhTaEVBTmF2bEktdHAxandkRWN3YXRhY1o2RXlVdTdqYw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Sam Altman’s New Brain Venture, Merge Labs, Will Spin Out of a Nonprofit&nbsp;&nbsp;WIRED",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Non-surgical brain-computer interface startup lands new funding - longevity.technology",
+    "title": "Non-surgical brain-computer interface startup lands new funding - Longevity.Technology",
     "date": "2025-12-11",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxQZUs4LXBHeDF5eV92WGk3aVFuZkJPMlEtamtDaThhTUt4amRMRzFNNC1ZcXNIYWRGLVpmaWlDMEVIcDFqLU1YdzhZejFLOUdhZk5NcEFMNmFTamswTC03dFdOLUNvQ3UyQ2xoY1NGd0VYRHhKV2t5MjNtcW5ZWDc2N3BIcjJCNlF1RFZKeWNIZFJqd1U1dXFEQVl4dTBuSDg?oc=5",
     "source": "Google News — Neural Startups",
-    "summary": "Non-surgical brain-computer interface startup lands new funding&nbsp;&nbsp;longevity.technology",
+    "summary": "Non-surgical brain-computer interface startup lands new funding&nbsp;&nbsp;Longevity.Technology",
     "category": "neurotechnology"
   },
   {
@@ -178,6 +169,15 @@
     "source": "Google News — MIND Act",
     "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
     "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "The Past, Present And Future Of Brain-Computer Interfaces - Forbes",
+    "date": "2025-10-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxNeTFhWjAtaXRDbzdFeC1nSkZoclQwNjhUX2JZVWtTTzRBN25sNW5hNzVvSTIwWWlqRHZJMFdnby1NVVRPdWxreDJSWkVROUtUdlpTV2RpbUM1RUM3bG1hQU5VUkZ6NUg2cXRkT1prOFpYR3FWUDY5VUN1cEVHSDRSX1ZxeUlEamFEV3V5MjZpSU1PRzN6NWJIVXVlenN2RGNU?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "The Past, Present And Future Of Brain-Computer Interfaces&nbsp;&nbsp;Forbes",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
