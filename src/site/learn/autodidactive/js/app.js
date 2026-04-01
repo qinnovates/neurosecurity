@@ -80,11 +80,6 @@ const SCIENCE_PEOPLE = [...POLYMATHS, ...NEUROSCIENCE, ...QUANTUM];
 const ETHICS_ALL = [...ETHICS_TIMELINE.filter(e => !e.isContext), ...PHILOSOPHERS, ...NEUROETHICS_PEOPLE];
 
 const CATEGORIES = [
-  { id: 'custom', label: 'Custom', icon: '🛠️', data: [...CALCULUS_LABS, ...LLM_LABS], type: 'group',
-    subs: [
-      { id: 'custom-calculus', label: 'Calculus', data: CALCULUS_LABS, type: 'labs' },
-      { id: 'custom-llm',     label: 'LLMs',     data: LLM_LABS,     type: 'labs' }
-    ]},
   { id: 'ethics', label: 'Ethics', icon: '⚖️', data: ETHICS_ALL, type: 'group',
     subs: [
       { id: 'ethics-timeline',    label: 'Timeline',     data: ETHICS_TIMELINE.filter(e => !e.isContext), type: 'timeline' },
@@ -326,6 +321,7 @@ function navigate(view) {
 
   // Initialize views on navigation
   if (view === 'home') renderHome();
+  if (view === 'interactive') renderInteractive();
   if (view === 'learn') renderLearn();
   if (view === 'notewall') renderNoteWall();
   if (view === 'audio') renderAudioView();
@@ -380,6 +376,40 @@ function renderHome() {
         </div>
       </div>
     </div>
+  `;
+}
+
+// ── Interactive View ────────────────────────────────────────────────────────
+const INTERACTIVE_SECTIONS = [
+  { label: 'Calculus', labs: CALCULUS_LABS },
+  { label: 'LLMs',     labs: LLM_LABS }
+];
+
+function renderInteractive() {
+  const container = document.getElementById('view-interactive');
+  container.innerHTML = `
+    <div class="learn-header">
+      <h2 class="learn-title">Interactive</h2>
+    </div>
+    ${INTERACTIVE_SECTIONS.map(section => `
+      <div class="interactive-section">
+        <h3 class="interactive-section-title">${section.label}</h3>
+        <div class="card-grid">
+          ${section.labs.map(lab => `
+            <div class="person-card" onclick="window._openLab('${lab.id}')">
+              <div class="person-card-header">
+                <span class="person-card-emoji">${lab.emoji}</span>
+                <div>
+                  <div class="person-card-name">${esc(lab.name)}</div>
+                  <div class="person-card-tagline">${esc(lab.tagline || '')}</div>
+                </div>
+              </div>
+              <p class="person-card-desc">${esc(lab.description || '')}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('')}
   `;
 }
 
