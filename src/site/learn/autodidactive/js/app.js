@@ -80,6 +80,11 @@ const SCIENCE_PEOPLE = [...POLYMATHS, ...NEUROSCIENCE, ...QUANTUM];
 const ETHICS_ALL = [...ETHICS_TIMELINE.filter(e => !e.isContext), ...PHILOSOPHERS, ...NEUROETHICS_PEOPLE];
 
 const CATEGORIES = [
+  { id: 'custom', label: 'Custom', icon: '🛠️', data: [...CALCULUS_LABS, ...LLM_LABS], type: 'group',
+    subs: [
+      { id: 'custom-calculus', label: 'Calculus', data: CALCULUS_LABS, type: 'labs' },
+      { id: 'custom-llm',     label: 'LLMs',     data: LLM_LABS,     type: 'labs' }
+    ]},
   { id: 'ethics', label: 'Ethics', icon: '⚖️', data: ETHICS_ALL, type: 'group',
     subs: [
       { id: 'ethics-timeline',    label: 'Timeline',     data: ETHICS_TIMELINE.filter(e => !e.isContext), type: 'timeline' },
@@ -104,7 +109,6 @@ const CATEGORIES = [
       { id: 'sec-neurowall', label: 'Neurowall',    data: CYBERSECURITY, type: 'neurowall' }
     ]},
   { id: 'science',   label: 'Science',   icon: '🔬', data: SCIENCE_PEOPLE, type: 'people' },
-  { id: 'math',      label: 'Math',      icon: '📐', data: [...CALCULUS_LABS, ...LLM_LABS], type: 'labs' },
   { id: 'paths',     label: 'Paths',     icon: '🗺️', data: LEARNING_PATHS, type: 'paths' }
 ];
 
