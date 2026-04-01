@@ -1,6 +1,24 @@
 # Changelog
 
-<!-- changelog-marker: 57f137d3fe579afdcfe2a48f67c4b9e943fac2f0 -->
+<!-- changelog-marker: 6594f3c45aba3af0e7933b978e8a4c9089198eda -->
+
+## 2026-03-31
+
+### Other
+- feat(autodidactive): add Custom section with labs at top of category grid ([6594f3c](https://github.com/qinnovates/qinnovate/commit/6594f3c))
+- security: harden fetch, SQL validation, API key storage, and CSP ([a220363](https://github.com/qinnovates/qinnovate/commit/a220363))
+- update news feed cache [skip ci-deploy] ([7e25e5c](https://github.com/qinnovates/qinnovate/commit/7e25e5c))
+
+## 2026-03-30
+
+### Other
+- update news feed cache [skip ci-deploy] ([d56781e](https://github.com/qinnovates/qinnovate/commit/d56781e))
+
+## 2026-03-29
+
+### Other
+- update news feed cache [skip ci-deploy] ([16ee01d](https://github.com/qinnovates/qinnovate/commit/16ee01d))
+
 
 ## 2026-03-28
 
