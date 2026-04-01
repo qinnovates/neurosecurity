@@ -1684,6 +1684,22 @@ h4 {
   flex: 1;
 }
 
+/* ── Interactive View ───────────────────────────────────────────────────── */
+.interactive-section {
+  margin-bottom: var(--space-lg);
+}
+
+.interactive-section-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+  padding-left: var(--space-xs);
+}
+
 /* ── Category Grid ──────────────────────────────────────────────────────── */
 .category-grid {
   display: grid;
