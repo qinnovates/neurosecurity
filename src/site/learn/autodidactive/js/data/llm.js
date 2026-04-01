@@ -9,5 +9,15 @@ export const LLM_LABS = [
     src: 'labs/llm-explainer.html',
     topics: ['vectors', 'embeddings', 'attention', 'transformers', 'generation', 'softmax'],
     difficulty: 'intermediate'
+  },
+  {
+    id: 'transformer-attention',
+    name: 'Transformer Visualized',
+    tagline: 'Step through attention heads, residual streams, and layer norms',
+    emoji: '⚡',
+    description: 'A visual walkthrough of the Transformer architecture — see how queries, keys, and values flow through multi-head attention, how residual connections preserve information, and how layer normalization stabilizes training.',
+    src: 'labs/transformer-attention.html',
+    topics: ['attention', 'multi-head', 'residual', 'layer norm', 'transformer'],
+    difficulty: 'intermediate'
   }
 ];
