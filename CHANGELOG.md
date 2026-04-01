@@ -1,6 +1,12 @@
 # Changelog
 
-<!-- changelog-marker: 6594f3c45aba3af0e7933b978e8a4c9089198eda -->
+<!-- changelog-marker: cfa1a9499f0f35795d1327df1fc92de5d207a120 -->
+
+## 2026-04-01
+
+### Other
+- feat(autodidactive): add Interactive tab for custom labs ([cfa1a94](https://github.com/qinnovates/qinnovate/commit/cfa1a94))
+
 
 ## 2026-03-31
 
