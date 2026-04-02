@@ -1,6 +1,60 @@
 [
   {
     "type": "external",
+    "title": "It’s not easy to get depression-detecting AI through the FDA",
+    "date": "2026-04-02",
+    "url": "hxxps://www[.]theverge[.]com/ai-artificial-intelligence/905864/depression-detecting-ai-kintsugi-clinical-ai-startup-shut-down",
+    "source": "The Verge",
+    "summary": "For the past seven years, the California-based startup Kintsugi has been developing AI designed to detect signs of depression and anxiety from a person's speech. But after failing to secure FDA cleara",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "A New Implant Aims to Rewire the Brain to Help Stroke Patients",
+    "date": "2026-04-02",
+    "url": "hxxps://www[.]wired[.]com/story/a-new-implant-aims-to-rewire-the-brain-to-help-stroke-patients/",
+    "source": "Wired",
+    "summary": "Epia Neuro’s brain-computer interface will include a motorized glove to help stroke patients recover movement in their hand.",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "[object Object]",
+    "date": "2026-04-02",
+    "url": "hxxps://www[.]fiercebiotech[.]com/medtech/epia-neuro-launches-bci-device-help-stroke-patients-rework-their-brain-signals",
+    "source": "Fierce Biotech",
+    "summary": "Epia Neuro is the latest medtech startup looking to tap the potential of brain-computer interface technology, launching with a device that aims to turn brain signals into digital commands.",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "A New Implant Aims to Rewire the Brain to Help Stroke Patients - WIRED",
+    "date": "2026-04-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxOcV8zOGpIaHgzenY2Q1dzZVFfbXlfUU1KX1paNDdxN0xxSmpHRVppR1NkME96M1VoYl9wc3VyQWpJbmNEclVnMWhYRmNzR3diUDFsSkJSUDZDaDIzU0pOR3BDeTdDaG5WMVJiSVcwZmJ2RW9VU0RadU5BN3ZmVzBYSGdjcllSVUM2ZjJvZWl1WWxiaUhHR2c?oc=5",
+    "source": "Google News — BCI",
+    "summary": "A New Implant Aims to Rewire the Brain to Help Stroke Patients&nbsp;&nbsp;WIRED",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Epia Neuro launches with BCI device to help stroke patients rework brain signals - Fierce Biotech",
+    "date": "2026-04-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxORU5SLWxUTnNBUUctVERCWjBGQkt2RGxDVHpqakc5OVVvMXl0b1A0b00yZUVXZHoyTXhlVXYzZlZiS2F2enVWYUhEbU5WWjh6TjI2TlJuWWlpNC1FNTZBTU5QaE14UGZoWmdvVWliTjZzSnQ5djNxRHZHZkMtRm53OHlvUERPd3dOMENoQ1dtRGZkb3Z1Z0hLN3h3VFZXel93R0lWVVlUNnFzZXFSdUFBUUhXcUpkUnc?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Epia Neuro launches with BCI device to help stroke patients rework brain signals&nbsp;&nbsp;Fierce Biotech",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Ultrasonic Brain Computer Interfaces for Enhancing Human-Machine Cognition",
+    "date": "2026-04-02",
+    "url": "hxxps://arxiv[.]org/abs/2604[.]00349",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2604.00349v1 Announce Type: new Abstract: Low-intensity transcranial focused ultrasound (tFUS) is rapidly emerging as a transformative non-invasive brain stimulation (NIBS) modality characterize",
+    "category": "research"
+  },
+  {
+    "type": "external",
     "title": "China is moving faster on next-gen tech. The U.S. is trying to keep up - Fast Company",
     "date": "2026-04-01",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqAFBVV95cUxQUHJ2TWpMN1BXSy1lZUNCbGplaXlKTFJOV01fSlBEYjVoaEVOeEg4Umg4ZW5ERVdvcG1pczhoVkdNY3hTcHM0WWFNblFUQXpRRV9aZVdMTHUtQzN5emxobWJENnVvclpJNkRTNjNTU2RLb3VfVC1jM3VvQWRVNHlFczlHUEhGWmJxWHNMR0VBb0oxUlc1dkVvRkZTZjdLbDNjRnIwOVFnNEw?oc=5",
@@ -10,30 +64,12 @@
   },
   {
     "type": "external",
-    "title": "Predicting Neuromodulation Outcome for Parkinson's Disease with Generative Virtual Brain Model",
+    "title": "Neuralink Patient Went from Brain Surgery to Playing World of Warcraft Solely With His Mind in Just 80 days - zmescience.com",
     "date": "2026-04-01",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]29176",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.29176v1 Announce Type: new Abstract: Parkinson's disease (PD) affects over ten million people worldwide. Although temporal interference (TI) and deep brain stimulation (DBS) are promising t",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Convergent Representations of Linguistic Constructions in Human and Artificial Neural Systems",
-    "date": "2026-04-01",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]29617",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.29617v1 Announce Type: new Abstract: Understanding how the brain processes linguistic constructions is a central challenge in cognitive neuroscience and linguistics. Recent computational st",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Copy-Spread-Annihilate Dynamics in Degree-Assortative Networks",
-    "date": "2026-04-01",
-    "url": "hxxps://arxiv[.]org/abs/2603[.]29833",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2603.29833v1 Announce Type: new Abstract: In many systems, communication proceeds by broadcasting rather than single source-target routing, but network structures that maximize signal lifetime a",
-    "category": "research"
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi3AFBVV95cUxNaWEyQmdZb0pDMGFYLWFIQ3RTV20yT08tbmZfNmtubWc3TTk0SkhsVFZsT3FBd0lYbjFNc2pEX0R6T2RNSlk5aUxMd1JERGpCVVRENEtIc2o0dGRRSjBaNWllRDd0ZC1nb0JzdUxKQUNUQVNMT21DdUtqNkxkeHhzNU04eXhJWmMtb25ic21BaGlBb3JKQk9TTDEwbUxqYW9HYlpsYVVSTU9tMmZjWDJOT2l6OG10WWVQNjNSaFJaeGtZV3A5cy1VUUpfZDdlZ2lUTEtMRk5vSk5maTlU?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink Patient Went from Brain Surgery to Playing World of Warcraft Solely With His Mind in Just 80 days&nbsp;&nbsp;zmescience.com",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -64,24 +100,6 @@
   },
   {
     "type": "external",
-    "title": "Meet the Man Making Music With His Brain Implant - WIRED",
-    "date": "2026-03-30",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMigwFBVV95cUxQYXoxWm5SWWJmWWNUZFFvNVRqUDRCVXZfam1rUUhIU1FZME5OcFpJS0dsQlVDNm5yRDVzZndaWHJHRGY0cnU1QW4wczlrcG9TSnZlYlZ1dVQ5cmlLUXFkOF9xRXY4YmdDNnQ5cXpoekZ2UzNqYXB3WEJhemU1NWxRNHQ2UQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Meet the Man Making Music With His Brain Implant&nbsp;&nbsp;WIRED",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "‘Doctrine of the Mean’: how the US lost a 2-decade race to China in brain implants - South China Morning Post",
-    "date": "2026-03-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxNdXQtNTQ3ZFAwQmNXaGdYT0d6d1ZkZVZKLWtZdkN2eTUzM2hnWnkxWFlhaGZTZjVMdmY5b1VVUGlLQ3BEZ1M4WjJ4SGF6RmNmX3YyVVNNRXlVVTMwb0k0MHR6azRGZHk2U2Q3dWNDbUl4cE1MZTUtQTJfVFptS044eU5PTW5MZWw4MGwzTUJIUUxQaG5UREhtdG5xZVRwZGx3N3Z1VURPZjJPMGV2ZmN6N0p4MTFKVDA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "‘Doctrine of the Mean’: how the US lost a 2-decade race to China in brain implants&nbsp;&nbsp;South China Morning Post",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Neuralink Patient Using Brain Chip to Carry Out Important Life Task: Playing World of Warcraft - Futurism",
     "date": "2026-03-29",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxPNDNOTTNlc2h2Z1loaXJmZ2NObXJ1Y19XczlTeXRRV3h5U1VVcWxzZlgtQjktSWRCdFFWT2dVRW5OUm9lRV9DVGhIMzJDcHJYeVN1VlprMDgtbWRUdFJRZ1ZYMGhNb01lazF6WExSM3NDRmtsNmo2anlGY2VUSFBXSFByeU5udTAwVXQ0?oc=5",
@@ -91,29 +109,11 @@
   },
   {
     "type": "external",
-    "title": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed' - Tom's Hardware",
-    "date": "2026-03-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiyAJBVV95cUxPSDhtM1h6d0ZqQWFMSFNpRG5DMHZSM3pVTDJMTk1VNjdialFzMUhPTlZuT21uUVlxb0FZNzM5cGh1TWNYQjFxeWpTR0FjSGRyVk8zejVDWVVVeDZ1NEpocjM1Sk0zeVNUcEVGX0RkYXdBUXY0dVF1NktpdWhBMVlOa0xqREMwemd2ZFZHTXFPS05NN3FSNmJ5cUp2OVFLS0FJZTVOV2ZnSFNWM0JBSTBDM1lFZWJFQWZoZnZmeUFIdHhuUXNXNUNsV3VZN3NSeWtMZmFwdnBoWlh6TVJwSlBPcWdBZVJyYXZhWEZ3VTZlZTFZd09sakZWQjhUanNYQlJQaXFzZl9oMlRuOVNQWVF3bVhpakxWVUp0RXpRT0J0Y0hDdWVobFJ6aXprTUtQbk1iSGZZbU8xblZBcE15b3VQRHlHR2k5NXdY?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed'&nbsp;&nbsp;Tom'",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Can Electrical Stimulation Restore Sight?",
     "date": "2026-03-26",
     "url": "hxxps://spectrum[.]ieee[.]org/optic-nerve-damage-electrical-stimulation",
     "source": "IEEE Spectrum",
     "summary": "The optic nerve is like a high-speed fiber-optic cable between your eyes and your brain. But once that cable is cut, whether through trauma or disease, the nerve cannot be repaired and vision cannot b",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "‘It gave me a new way to live’ — 100 days after a Neuralink brain implant, this user says he’s never going back - TechRadar",
-    "date": "2026-03-24",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi9gFBVV95cUxOYkJPRWRuMnM0ei1aYzljUTdkd0VpVkV0VE1xSFF3N0RiRXFVcHlTZDdtLWJzWWRDUFl4TnBabFVTZEU5TkZ6OFA3QWZMS21RcUZGZmg1a09ZZXBqeGlqSWpTSWswckMzMEcxMThMbUE1M1RFZEJBRWNXZXk2MGlweEV0bllEVHljd1l1Wm5qY0NFejVzc01kN0piNDFkbm5mWEpNWkZLLXRtNXp4SnRVWDMxZUZ1Qng0ZDM3ZzBxWk5tYWpvR19iY3pFRDJfM293ejFkLVpxMlpQQTZoVG1ITWtGMHNIcGtlMWZyb011QW9FMGcwblE?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "‘It gave me a new way to live’ — 100 days after a Neuralink brain implant, this user says he’s never going back&nbsp;&nbsp;TechRadar",
     "category": "neurotechnology"
   },
   {
@@ -145,30 +145,30 @@
   },
   {
     "type": "external",
+    "title": "Beijing backs brain implant push to rival Elon Musk’s Neuralink - ft.com",
+    "date": "2026-02-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihAFBVV95cUxOTnlaZFF4Rng2a1lNQ1A0cnhQWTh1RWRKQlVaSFZ6alNMcHZURGVzaWFBczdUU0tCYXljUzN0dGVKVmxua2xSNGRUM1hwbVMweFJ5SEkyRFRDMnYwdVRoWjIycEJyaUhscGJTM3VicXBfZTdKS0R2NzUzVm9pc0RTTHdVdzE?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Beijing backs brain implant push to rival Elon Musk’s Neuralink&nbsp;&nbsp;ft.com",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
+    "date": "2026-01-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Are Neural Organoids Part of “Neurotechnology”? - Stanford Law School",
     "date": "2026-01-28",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPbm93YzhYYVQ2c0hGSzdqZVhYcThZNU9na0xYcDdRamJFekhTcE9rVlViOHkxNk5yUmYyWFRPYkd2Wnd1Zk1ueFpPM0Ntel9pLWJkVFN3RDcyeGpfZDRBek9EbnBXWF81V0owSXVkVkhFNkNVR3JRZkpSbzRYckJESmQxWTBQaktB?oc=5",
     "source": "Google News — MIND Act",
     "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Sam Altman’s New Brain Venture, Merge Labs, Will Spin Out of a Nonprofit - WIRED",
-    "date": "2025-12-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxPTVlNdnB6X0dpZ2I2Q1lOMnVHdk9hazhMUFk4YnFjakNkblVCaFF6MUpsa2ZSVDhYVk83QUJYSDVCbS1aLVFlRGJqdXQ0T3VZVS1jRHNZUnpNRXR6eXp6TkhQTXhBREZiRFZsWGhCRGNQLU5VT3Fua0I1aXdfUWdseVc2OGIybG9TN1EyUUNhamhTaEVBTmF2bEktdHAxandkRWN3YXRhY1o2RXlVdTdqYw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Sam Altman’s New Brain Venture, Merge Labs, Will Spin Out of a Nonprofit&nbsp;&nbsp;WIRED",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Non-surgical brain-computer interface startup lands new funding - Longevity.Technology",
-    "date": "2025-12-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxQZUs4LXBHeDF5eV92WGk3aVFuZkJPMlEtamtDaThhTUt4amRMRzFNNC1ZcXNIYWRGLVpmaWlDMEVIcDFqLU1YdzhZejFLOUdhZk5NcEFMNmFTamswTC03dFdOLUNvQ3UyQ2xoY1NGd0VYRHhKV2t5MjNtcW5ZWDc2N3BIcjJCNlF1RFZKeWNIZFJqd1U1dXFEQVl4dTBuSDg?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Non-surgical brain-computer interface startup lands new funding&nbsp;&nbsp;Longevity.Technology",
-    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -187,6 +187,15 @@
     "source": "Google News — MIND Act",
     "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
     "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "The Past, Present And Future Of Brain-Computer Interfaces - Forbes",
+    "date": "2025-10-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxNeTFhWjAtaXRDbzdFeC1nSkZoclQwNjhUX2JZVWtTTzRBN25sNW5hNzVvSTIwWWlqRHZJMFdnby1NVVRPdWxreDJSWkVROUtUdlpTV2RpbUM1RUM3bG1hQU5VUkZ6NUg2cXRkT1prOFpYR3FWUDY5VUN1cEVHSDRSX1ZxeUlEamFEV3V5MjZpSU1PRzN6NWJIVXVlenN2RGNU?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "The Past, Present And Future Of Brain-Computer Interfaces&nbsp;&nbsp;Forbes",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
