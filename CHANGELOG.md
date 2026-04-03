@@ -1,6 +1,18 @@
 # Changelog
 
-<!-- changelog-marker: cfa1a9499f0f35795d1327df1fc92de5d207a120 -->
+<!-- changelog-marker: 025c3209a45425385130bded60b8b324bf083870 -->
+
+## 2026-04-03
+
+### Other
+- blog: Terminal Blog #003 — Quantum Thoughts ([025c320](https://github.com/qinnovates/qinnovate/commit/025c320))
+
+## 2026-04-02
+
+### Other
+- update news feed cache [skip ci-deploy] ([e221627](https://github.com/qinnovates/qinnovate/commit/e221627))
+
+
 
 ## 2026-04-01
 
