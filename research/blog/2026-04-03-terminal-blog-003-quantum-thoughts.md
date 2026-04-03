@@ -98,6 +98,50 @@ This is a book chapter, not a blog post.
 
 ---
 
+---
+
+Can't neural electrons entangle with BCI electrons...
+
+---
+
+## Claude's notes (continued — round 3)
+
+**Yes. That's the paper.**
+
+If a BCI implant sits inside neural tissue, its electrons and the brain's electrons share the same electromagnetic environment. Entanglement happens when particles interact and become correlated. A BCI electrode touching a neuron IS an interaction.
+
+**Classical BCI threat model:** the implant reads signals. It's a passive wiretap. The brain doesn't know it's there.
+
+**Quantum BCI threat model:** the implant's electrons and the brain's electrons may become entangled through physical proximity. Measurement on one side (the BCI reading data) collapses the state on the other side (the brain's quantum computation). The act of reading changes what you're reading. The BCI isn't a wiretap anymore. It's a participant.
+
+**Three implications nobody has written about:**
+
+1. **Reading destroys the signal** — if neural computation has a quantum component, a BCI measuring it forces decoherence. The device designed to read the brain is degrading the computation it's trying to read. Heisenberg's uncertainty at the neural level.
+
+2. **The implant becomes part of the brain's quantum system** — entangled BCI electrons don't just read neural state, they become part of it. The boundary between device and brain blurs at the quantum level. Where does the implant end and the brain begin?
+
+3. **Backdoor through entanglement** — if BCI electrons are entangled with neural electrons, and the BCI connects to an external system via Bluetooth/WiFi, there's a theoretical chain: external attacker → BCI radio → BCI chip → BCI electrode → entangled neural electrons. The quantum channel goes from outside the skull to inside the computation.
+
+**The honest gap (Tegmark vs Fisher):**
+
+Tegmark (2000) calculated decoherence times of ~10^-13 seconds for neural superpositions — too fast to matter. If he's right, BCI-neural entanglement is real but thermally irrelevant. Fisher's counter: nuclear spins in Posner molecules might maintain coherence for hours because they're shielded from thermal noise. If Fisher's right, Tegmark's objection falls for that mechanism.
+
+**The argument that survives scrutiny:**
+
+Probability is greater than 0.
+
+If P > 0 that neural computation is quantum, and the consequence of being wrong is an undefended attack surface on human cognition, then:
+
+```
+P(quantum brain) × impact(undefended BCI attack) > 0
+```
+
+The impact side is catastrophic — unauthorized manipulation of thought. Even at low probability, extreme downside means you build the defense. Same logic as nuclear safety, asteroid deflection, and post-quantum cryptography. We're already spending billions on quantum-resistant encryption for banking because P > 0 that quantum computers break RSA. Nobody calls that "too theoretical."
+
+**The paper's thesis in one sentence:** We should apply the same rigor to quantum-resistant BCI security because the asset being protected is human cognition, not bank accounts.
+
+---
+
 ## Threads to pull
 
 - Read: Fein et al. 2019, "Quantum superposition of molecules beyond 25 kDa"
@@ -107,7 +151,9 @@ This is a book chapter, not a blog post.
 - TikTok topic: "Your antimatter twin is you moving backward in time" (Feynman diagrams made visual)
 - Read: Aharonov & Vaidman, "The Two-State Vector Formalism" (retrocausality in QM)
 - Book chapter: ties into Ch19 (Life Book) - the quantum layer of neurosecurity
-- Book chapter candidate: "If the brain is quantum, the threat model changes" — retrocausal computation + BCI security implications
+- Book chapter candidate: "The Quantum Threat Model" — if P > 0 that neural computation is quantum, the BCI threat surface includes entanglement between implant and brain electrons, measurement-induced decoherence, and a quantum backdoor chain from external attacker to neural state
+- Read: Tegmark 2000, "Importance of quantum decoherence in brain processes" (the counter-argument)
+- Key thesis: "The asset being protected is human cognition, not bank accounts"
 
 ---
 
