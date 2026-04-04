@@ -1,6 +1,13 @@
 # Changelog
 
-<!-- changelog-marker: 60b7f047790ec820bb8a9b1b054b603fdacbd5ee -->
+<!-- changelog-marker: 2bdaba3caf9571c0515d89ec154dc98a1b724ac8 -->
+
+## 2026-04-04
+
+### Other
+- Remove personal narrative from mission page ([2bdaba3](https://github.com/qinnovates/qinnovate/commit/2bdaba3))
+
+
 
 ## 2026-04-03
 
