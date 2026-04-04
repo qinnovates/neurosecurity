@@ -1,29 +1,11 @@
 [
   {
     "type": "external",
-    "title": "Interpretable Electrophysiological Features of Resting-State EEG Capture Cortical Network Dynamics in Parkinsons Disease",
-    "date": "2026-04-03",
-    "url": "hxxps://arxiv[.]org/abs/2604[.]01475",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2604.01475v1 Announce Type: new Abstract: Parkinsons disease (PD) alters cortical neural dynamics, yet reliable non-invasive electrophysiological biomarkers remain elusive. This study examined w",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Phase estimation with autoregressive padding (PEAP): addressing inaccuracies and biases in EEG analysis",
-    "date": "2026-04-03",
-    "url": "hxxps://arxiv[.]org/abs/2604[.]02212",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2604.02212v1 Announce Type: new Abstract: Accurate phase estimation at the edge of data segments is crucial for EEG applications such as EEG-TMS in offline and real-time data analysis. Our resea",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "A New Implant Aims to Rewire the Brain to Help Stroke Patients - WIRED",
+    "title": "A New Implant Aims to Rewire the Brain to Help Stroke Patients - wired.com",
     "date": "2026-04-02",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxOcV8zOGpIaHgzenY2Q1dzZVFfbXlfUU1KX1paNDdxN0xxSmpHRVppR1NkME96M1VoYl9wc3VyQWpJbmNEclVnMWhYRmNzR3diUDFsSkJSUDZDaDIzU0pOR3BDeTdDaG5WMVJiSVcwZmJ2RW9VU0RadU5BN3ZmVzBYSGdjcllSVUM2ZjJvZWl1WWxiaUhHR2c?oc=5",
     "source": "Google News — BCI",
-    "summary": "A New Implant Aims to Rewire the Brain to Help Stroke Patients&nbsp;&nbsp;WIRED",
+    "summary": "A New Implant Aims to Rewire the Brain to Help Stroke Patients&nbsp;&nbsp;wired.com",
     "category": "neurotechnology"
   },
   {
@@ -46,29 +28,11 @@
   },
   {
     "type": "external",
-    "title": "From Joysticks to Neural Implants: What BCI Technology Means for Drone Warfare - en.defence-ua.com",
-    "date": "2026-04-02",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirwFBVV95cUxNbWFuX0tUYXNzZG9KTWdreXdBRld3dUp6R3dSd2lIN2NLLWRtVmFmbjRNM2J5MmlEbjQxUXdIQVNrQkxDbHUtblYxYW82Yy03Ums1VGZuTGc2STRjdEZ6U2hyRk1iTHU4TU9JTzBSQTFrcFdyM3pNTXREX1FwU3Mzc3hscnNYeDJjSkozTlBSMkhUeTAxTmZZdlNRTVFodUhRaXhTcHF0VENZdm9acEhF?oc=5",
-    "source": "Google News — BCI",
-    "summary": "From Joysticks to Neural Implants: What BCI Technology Means for Drone Warfare&nbsp;&nbsp;en.defence-ua.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "China is moving faster on next-gen tech. The U.S. is trying to keep up - Fast Company",
     "date": "2026-04-01",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqAFBVV95cUxQUHJ2TWpMN1BXSy1lZUNCbGplaXlKTFJOV01fSlBEYjVoaEVOeEg4Umg4ZW5ERVdvcG1pczhoVkdNY3hTcHM0WWFNblFUQXpRRV9aZVdMTHUtQzN5emxobWJENnVvclpJNkRTNjNTU2RLb3VfVC1jM3VvQWRVNHlFczlHUEhGWmJxWHNMR0VBb0oxUlc1dkVvRkZTZjdLbDNjRnIwOVFnNEw?oc=5",
     "source": "Google News — BCI",
     "summary": "China is moving faster on next-gen tech. The U.S. is trying to keep up&nbsp;&nbsp;Fast Company",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink Patient Went from Brain Surgery to Playing World of Warcraft Solely With His Mind in Just 80 days - ZME Science",
-    "date": "2026-04-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi3AFBVV95cUxNaWEyQmdZb0pDMGFYLWFIQ3RTV20yT08tbmZfNmtubWc3TTk0SkhsVFZsT3FBd0lYbjFNc2pEX0R6T2RNSlk5aUxMd1JERGpCVVRENEtIc2o0dGRRSjBaNWllRDd0ZC1nb0JzdUxKQUNUQVNMT21DdUtqNkxkeHhzNU04eXhJWmMtb25ic21BaGlBb3JKQk9TTDEwbUxqYW9HYlpsYVVSTU9tMmZjWDJOT2l6OG10WWVQNjNSaFJaeGtZV3A5cy1VUUpfZDdlZ2lUTEtMRk5vSk5maTlU?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink Patient Went from Brain Surgery to Playing World of Warcraft Solely With His Mind in Just 80 days&nbsp;&nbsp;ZME Science",
     "category": "neurotechnology"
   },
   {
@@ -82,38 +46,11 @@
   },
   {
     "type": "external",
-    "title": "Neuralink Brain Chips are Powering the Next Step in Thought Control - Tech Times",
-    "date": "2026-03-31",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitgFBVV95cUxOdVlaT0tfMm5Zcm5KWklKVEluZWozQmhrakVrVGVyeGZMOUhGbDY0bi1YZXg5cjV0T0tvblhhYmNaQ0paMDhXZUpTaWhJRTdVY2JqdUtablFneDZxNy1XcFJTLUtMbkpvczRiWmdLLWVvbVlMWUtEaVVnTkI4STY3SWw1Zk5LcVotNnFDM2ZTREZHVkJLSWpIMUw4QTUwcHJZaUxlNGpVaFVjbl9WOXgzYzlFclBMdw?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink Brain Chips are Powering the Next Step in Thought Control&nbsp;&nbsp;Tech Times",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Neuralink Patient Using Brain Chip to Carry Out Important Life Task: Playing World of Warcraft - Futurism",
     "date": "2026-03-29",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxPNDNOTTNlc2h2Z1loaXJmZ2NObXJ1Y19XczlTeXRRV3h5U1VVcWxzZlgtQjktSWRCdFFWT2dVRW5OUm9lRV9DVGhIMzJDcHJYeVN1VlprMDgtbWRUdFJRZ1ZYMGhNb01lazF6WExSM3NDRmtsNmo2anlGY2VUSFBXSFByeU5udTAwVXQ0?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Neuralink Patient Using Brain Chip to Carry Out Important Life Task: Playing World of Warcraft&nbsp;&nbsp;Futurism",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed' - Tom's Hardware",
-    "date": "2026-03-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiyAJBVV95cUxPSDhtM1h6d0ZqQWFMSFNpRG5DMHZSM3pVTDJMTk1VNjdialFzMUhPTlZuT21uUVlxb0FZNzM5cGh1TWNYQjFxeWpTR0FjSGRyVk8zejVDWVVVeDZ1NEpocjM1Sk0zeVNUcEVGX0RkYXdBUXY0dVF1NktpdWhBMVlOa0xqREMwemd2ZFZHTXFPS05NN3FSNmJ5cUp2OVFLS0FJZTVOV2ZnSFNWM0JBSTBDM1lFZWJFQWZoZnZmeUFIdHhuUXNXNUNsV3VZN3NSeWtMZmFwdnBoWlh6TVJwSlBPcWdBZVJyYXZhWEZ3VTZlZTFZd09sakZWQjhUanNYQlJQaXFzZl9oMlRuOVNQWVF3bVhpakxWVUp0RXpRT0J0Y0hDdWVobFJ6aXprTUtQbk1iSGZZbU8xblZBcE15b3VQRHlHR2k5NXdY?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed'&nbsp;&nbsp;Tom'",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink patient raiding in World of Warcraft after only 100 days of having the implant installed calls it 'pure magic… exploring Azeroth hands-free at full speed' - PC Gamer",
-    "date": "2026-03-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAJBVV95cUxPSjZLMHd3cUluWU1lTTZUUV9kaDdDZEppMGZzOENxM2R3LXhMaXdwcXpQaFdCaEtxUzU1MkdkNHhDS0xXcTVRdkdPSUdINXJWR01wVUY2X0l2bFBDb29oRm9qTEM4LUQwWlFKWlJDZnB1Y0EyVFpvNjc2anNmbUdHQ2lGb1Y1MF9VVnVOLURRWTU4T2JqcGlQT0ZUWmRNSml2TVNKcHNfRmdPXzJDRS0yN2xjQzU3WVEtQmxfYjU1ekplZTFxVzR2ZGE1YWNmd1NzTzk4VWFVZlZhbWpVWldBNzlDTVlLTGtYYk5YMGNndVRjVlMtYzBFT2luMllVTFRpNVlsRGF5Z0prZlJHbjFHekpZMU05ZWp4SE9xaHB5OWprUmxHYVBzSVJRV3dqSkY0SEY3OA?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink patient raiding in World of Warcraft after only 100 days of having the implant installed calls it 'pure magic… exploring Azeroth hands-free at full speed'&nbsp;&nbsp;PC Gamer",
     "category": "neurotechnology"
   },
   {
@@ -127,11 +64,47 @@
   },
   {
     "type": "external",
-    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - Yahoo Finance",
+    "title": "First human patient with Elon Musk's Neuralink brain chip Noland Arbaugh shares 100 days update; says: 10 - The Times of India",
+    "date": "2026-03-25",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiugJBVV95cUxNMXE3N3BGY2VIOVY2N204U0V6MlVyX0hiS2tCbEo0WDBjVFBUX1pyMWdvY2lqTXR0eVBWaHk2OWt4Mnp6SEJzMFVxVkpMR3k1ZUJwNERWZkFYcV9keDZqNWc5cnhweHc5Qmc2amlTT05QeHZMWkVneFUyd0kwSmtWT1JRbnAzZTlBZXJHSDd0NGtoUm1IM0NCbXlHbEZhci1MLTVuM0FXbWVfMWtQYmpmV2VucjdJQnZtVlBmVnRKSng3elc3N2xEOTNyRUY0WE1JVldXWW1jZW5iZ3ZQQ2xYc2E0c0pudG5VQnI0NHUxeEIzbmQxSjRFRE90eTQ0QkdzdF9qWXZPSktvWXJYZGhJVzktdGdvblJ0VWc2TDVJTEJ1NlgzZFBtMUtrdEJkSTlDMTBLMjdXa1BSZ9IBvwJBVV95cUxNTmFkd3dzMG8zaE1mWDhnV2tOeU5zdTFkSmZrSHl4NUl2bUYxOWl3YmFOcUJDM3lOdVBTSVltc3ZNaXU0Tm5DMlBpMk5CcEE5QUVWN2NpNXlkOHEtZTVwRjlEYXZKMGJrNGxwT0h2QTl0LTJoR0NwVzhpWDJBOXNIRnFTeFJCVloxd2xwRE1Rc2lVOGh5eWE1ZF9iMktEcnYwc3JrWDdrRVZFdjI2eXpLU2tBSEFfQ2dfSFpxSVdfSjBnbnRrZ1VpZnZ2VXFOUGNCUDY0cFFhd3A2ZjlPUXJHM3VSdWtRejFNZFNaUVJpb0RPemdKc1RSQk1CMXhZa19GSXJwNTdrY1MzWVNmbHV6dHE0NThwWEl2VkJzeTRfWk13UWFRdHR3OVp4RmQzNjRVMTlxc2lyckt1bDVlSHBR?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "First human patient with Elon Musk's Neuralink brain chip Noland Arbaugh shares 100 days update; says: 10&nbsp;&nbsp;The Times of India",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China Beat Elon Musk’s Neuralink to Approve the World’s First Commercial Brain Implant - ZME Science",
+    "date": "2026-03-23",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivgFBVV95cUxQU25CMUlTMFZ3eWZrS1EzMXNzbE5DSkwwa013X1Q2aEp6TkZSWlRiNy1ZMVJGV2dyN1FoQVZBcXlMNnBUWWNDTmNNbExuQ0twYkNlSGhiX2R1ZDVRb2FBSDBLbllkRkVyS2ZpVG02YnFkYnp4a3Nuc05mSFlXelU4WERvZmlVWDI1b3g1dmw5SEtOY2MtdUpWWHdwdEhrU2FwdE9ia2N1VGs3Ni13M3lwd2pubUlGM3Y0dzFnZzBn?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "China Beat Elon Musk’s Neuralink to Approve the World’s First Commercial Brain Implant&nbsp;&nbsp;ZME Science",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Beijing-backed brain chip firm says it is 3 years behind Musk's Neuralink - Reuters",
+    "date": "2026-03-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi3AFBVV95cUxQbVhseDRjaEs3RTZ4cEJrNjBUc3R5UkZUZ05Odkg1UTdsWVpuX3hoQmhIcFo5Qi1Pb1VQdVdyWVUxSmJBUEJGbERZNEhYMHRXNVN1ZzB4clNTbWRLaWRoLWo5dVZaUlF3c2tvRkxPcGU2WEVINmpkNjg1XzdLY19JSHZRZHl6b1lpNE9kSElCMDdGUHdtOElIMkhPY2VIZVlOZGxOOVM2cEktTW0zeHZhSDBEbjVjamFyU2hCZ2JXT1c0LTU4MkNrTVMwd2h6dUEweWZXcEwxeTZnSjdC?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Beijing-backed brain chip firm says it is 3 years behind Musk's Neuralink&nbsp;&nbsp;Reuters",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - TechCrunch",
     "date": "2026-03-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxOZVlpbGd3b3AzZTdhc2ZVdmdGNUExenN2XzRwR1dBRHdkZE5iYm5iejJvMHBQOFJGRzF0bmZXWTY2cndUaUN6aWJhZVVURDQta1ptYy1HeWJQRTFGM3paSnlrc3lPbEJQTFgxRGVQZUMyNkd3N1pzanlzZDg2bVYxY2VmWEEtQXRsMTRNNVd3?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxOX2Jtd3dNTy13MzNlOUpQRVlFN0RaLUYxMFd4VzJYZnR3TzFtRlFOa21PaWM5NzZiX1NTUGMxZkk1OTZmcG0xRDhhejYwOUM0RHFMYlZCQ1RZNEczQjR4Z1VZbEp3czA3bzB1UE1sYUNuS3o0dmdvazN4MmVtUTRqNTNDeHdvSnZrT0M4c3RUUVg2am5pa25FQ2ZSX2VBdVpaVHFRZmZXUnpRLUJwR1pObw?oc=5",
     "source": "Google News — Neural Startups",
-    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;Yahoo Finance",
+    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;TechCrunch",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China could see widespread use of brain-computer tech in 3-5 years, expert says - Reuters",
+    "date": "2026-03-08",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixgFBVV95cUxOU3JyamFoOHZ6UnpmbWVJX0YzNVRiYTNNcXBxT2hVWHZhMlpUOUNTSUdWR1RxUGo3UUxmdDlFTS10TjZranpxc05jT0pQV28zbTltRzM1NW42VGpOeERDWDhqZnRobWx3VVJBQnEtWTZ4UC1USzlfZnRISWhCekluNW9IdjllMHdzR1dadjRXd1VVTF9lRnpxNHh5Mi1YeTdKdEVtdmtKVkd1TkxOMTNMdmRCRVhXalBxNE5xN2RnZmRnNlVqR3c?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China could see widespread use of brain-computer tech in 3-5 years, expert says&nbsp;&nbsp;Reuters",
     "category": "neurotechnology"
   },
   {
@@ -145,39 +118,30 @@
   },
   {
     "type": "external",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - wired.com",
+    "date": "2026-01-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;wired.com",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Two Years of Telepathy - Neuralink",
+    "date": "2026-01-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Two Years of Telepathy&nbsp;&nbsp;Neuralink",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Are Neural Organoids Part of “Neurotechnology”? - Stanford Law School",
     "date": "2026-01-28",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPbm93YzhYYVQ2c0hGSzdqZVhYcThZNU9na0xYcDdRamJFekhTcE9rVlViOHkxNk5yUmYyWFRPYkd2Wnd1Zk1ueFpPM0Ntel9pLWJkVFN3RDcyeGpfZDRBek9EbnBXWF81V0owSXVkVkhFNkNVR3JRZkpSbzRYckJESmQxWTBQaktB?oc=5",
     "source": "Google News — MIND Act",
     "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
-    "date": "2026-01-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Sam Altman’s New Brain Venture, Merge Labs, Will Spin Out of a Nonprofit - WIRED",
-    "date": "2025-12-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxPTVlNdnB6X0dpZ2I2Q1lOMnVHdk9hazhMUFk4YnFjakNkblVCaFF6MUpsa2ZSVDhYVk83QUJYSDVCbS1aLVFlRGJqdXQ0T3VZVS1jRHNZUnpNRXR6eXp6TkhQTXhBREZiRFZsWGhCRGNQLU5VT3Fua0I1aXdfUWdseVc2OGIybG9TN1EyUUNhamhTaEVBTmF2bEktdHAxandkRWN3YXRhY1o2RXlVdTdqYw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Sam Altman’s New Brain Venture, Merge Labs, Will Spin Out of a Nonprofit&nbsp;&nbsp;WIRED",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Non-surgical brain-computer interface startup lands new funding - Longevity.Technology",
-    "date": "2025-12-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxQZUs4LXBHeDF5eV92WGk3aVFuZkJPMlEtamtDaThhTUt4amRMRzFNNC1ZcXNIYWRGLVpmaWlDMEVIcDFqLU1YdzhZejFLOUdhZk5NcEFMNmFTamswTC03dFdOLUNvQ3UyQ2xoY1NGd0VYRHhKV2t5MjNtcW5ZWDc2N3BIcjJCNlF1RFZKeWNIZFJqd1U1dXFEQVl4dTBuSDg?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Non-surgical brain-computer interface startup lands new funding&nbsp;&nbsp;Longevity.Technology",
-    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -196,6 +160,15 @@
     "source": "Google News — MIND Act",
     "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
     "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "The Past, Present And Future Of Brain-Computer Interfaces - Forbes",
+    "date": "2025-10-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxNeTFhWjAtaXRDbzdFeC1nSkZoclQwNjhUX2JZVWtTTzRBN25sNW5hNzVvSTIwWWlqRHZJMFdnby1NVVRPdWxreDJSWkVROUtUdlpTV2RpbUM1RUM3bG1hQU5VUkZ6NUg2cXRkT1prOFpYR3FWUDY5VUN1cEVHSDRSX1ZxeUlEamFEV3V5MjZpSU1PRzN6NWJIVXVlenN2RGNU?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "The Past, Present And Future Of Brain-Computer Interfaces&nbsp;&nbsp;Forbes",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
