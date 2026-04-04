@@ -77,19 +77,6 @@ const phases = [
     dateRange: ['2026-02-10', '2026-12-31'],
     status: 'active' as const,
   },
-  {
-    version: 'v6.x',
-    title: 'Validation & Standards',
-    dateRange: null,
-    status: 'planned' as const,
-    planned: [
-      'Peer-reviewed paper submission',
-      'NSP submitted to IETF/IEEE',
-      'NISS accepted as CVSS v4.0 extension',
-      'Open-source reference implementation',
-      'Formal verification results',
-    ],
-  },
 ];
 
 function statusColor(status: string) {

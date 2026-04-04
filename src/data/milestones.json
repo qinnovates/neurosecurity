@@ -24,19 +24,19 @@
     },
     {
       "id": "neural-stream-01",
-      "title": "Popular BCI Protocol Library (Industry Standard)",
-      "summary": "Three-phase exploit chain against the de-facto industry standard for neural data streaming. Responsible disclosure in progress; private channel established.",
+      "title": "Lab Streaming Layer (LSL) Transport Protocol",
+      "summary": "Transport and discovery protocol vulnerabilities affecting confidentiality and integrity of streamed neural data. Full report with CWE mappings, CVSS v4.0 scoring, and working PoC submitted via responsible disclosure. LSL team acknowledged and is building Secure LSL (https://eeglab.org/secureLSL/) with end-to-end encryption, device authentication, replay protection, and session key rotation. Mitigation: upgrade to Secure LSL when available.",
       "status": "disclosed",
       "date": "2026-02-11",
       "cwes": [
-        "CWE-787",
-        "CWE-190",
-        "CWE-125"
+        "CWE-319",
+        "CWE-306",
+        "CWE-354"
       ],
       "disclosed_to": [
-        "Protocol maintainers"
+        "sccn/liblsl maintainers"
       ],
-      "href": null
+      "href": "https://github.com/sccn/liblsl/issues/262"
     }
   ],
   "standards": [
@@ -44,7 +44,7 @@
       "id": "niss-first",
       "title": "NISS v1.0",
       "body": "FIRST.org CVSS SIG",
-      "summary": "Formal proposal for NISS registration as a CVSS v4.0 extension under Section 3.11 of the User Guide.",
+      "summary": "Formally reviewed by the FIRST.org CVSS SIG in a SIG meeting. The SIG acknowledged the proposal but currently lacks subject-matter experts in neurotechnology to evaluate implementation. FIRST.org offered to add NISS as a resource in their GitHub repo sources. Kevin was accepted as a member of the CVSS SIG committee and is actively looking for SMEs who can help implement the extension correctly across international standards.",
       "status": "submitted",
       "date": "2026-02-11",
       "href": "/atlas/scoring/"

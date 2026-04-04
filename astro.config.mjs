@@ -17,6 +17,7 @@ export default defineConfig({
     '/niss/': '/atlas/scoring/',
     '/advisory/': '/alliance/',
     '/TARA/': '/atlas/tara/',
+    '/TARA/[...slug]': '/atlas/tara/[...slug]',
     '/scoring/': '/atlas/scoring/',
     '/case-studies/': '/atlas/analysis/',
     '/case-studies/t0079-anc-fingerprint/': '/atlas/analysis/t0079-anc-fingerprint/',
