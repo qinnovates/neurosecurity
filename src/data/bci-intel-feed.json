@@ -1,5 +1,288 @@
 [
   {
+    "id": "2233a67a",
+    "title": "Inter-brain synchrony during collaborative gaming: an investigation using theta-burst stimulation at the right temporal-parietal junction",
+    "date": "2026-04-05",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926002211?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: 15 May 2026Source: NeuroImage, Volume 332Author(s): S.H. Jessica Tan, S.P. Jessie Leuk, Wei-Peng Teo",
+    "tags": [
+      "partnership"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "259d5a40",
+    "title": "Spiking neural networks provide accurate and time-efficient models for whisker stimulus classification of the awake mouse",
+    "date": "2026-04-05",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1605209",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "Machine learning algorithms have great potential for classifying brain activity, and lightweight classifier algorithms, requiring little computational resources, can be used on low-energy neuromorphic",
+    "tags": [
+      "policy",
+      "partnership"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "6530edbc",
+    "title": "Wavelet event-related EEG phase coherence as a discriminant biomarker of the cognitive status in Parkinson’s and Lewy body disease",
+    "date": "2026-04-05",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1696861",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "BackgroundHuman cognition is derived from functional cortical long-range connectivity, as reflected by phase synchronization between electrode pairs of low-frequency electroencephalographic (EEG) acti",
+    "tags": [
+      "funding",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "d15126c1",
+    "title": "Is consciousness the brain's consistency model? [pdf]",
+    "date": "2026-04-05",
+    "url": "hxxps://users[.]cs[.]utah[.]edu/~vijay/papers/waci26[.]pdf",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://users.cs.utah.edu/~vijay/papers/waci26.pdf Comments URL: https://news.ycombinator.com/item?id=47651441 Points: 1 # Comments: 0",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "a9604555",
+    "title": "A brain scan before a prescription? Geneva's bet on precision psychiatry",
+    "date": "2026-04-05",
+    "url": "hxxps://www[.]swissinfo[.]ch/eng/ai-and-medicine/a-brain-scan-before-a-prescription-genevas-bet-on-precision-psychiatry/91162302",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.swissinfo.ch/eng/ai-and-medicine/a-brain-scan-before-a-prescription-genevas-bet-on-precision-psychiatry/91162302 Comments URL: https://news.ycombinator.com/item?id=47649275 Po",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "e898b7b0",
+    "title": "Man-Computer Symbiosis (1960)",
+    "date": "2026-04-05",
+    "url": "hxxps://www[.]organism[.]earth/library/document/man-computer-symbiosis",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.organism.earth/library/document/man-computer-symbiosis Comments URL: https://news.ycombinator.com/item?id=47648227 Points: 2 # Comments: 1",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "dbd21067",
+    "title": "Computer for Taxes",
+    "date": "2026-04-05",
+    "url": "hxxps://www[.]perplexity[.]ai/hub/blog/introducing-computer-for-taxes",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.perplexity.ai/hub/blog/introducing-computer-for-taxes Comments URL: https://news.ycombinator.com/item?id=47645661 Points: 3 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "d51dafc0",
+    "title": "Introduction to Computer Music (2009) [pdf]",
+    "date": "2026-04-05",
+    "url": "hxxps://composerprogrammer[.]com/introductiontocomputermusic[.]pdf",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://composerprogrammer.com/introductiontocomputermusic.pdf Comments URL: https://news.ycombinator.com/item?id=47645432 Points: 201 # Comments: 63",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "b8b81ea9",
+    "title": "After fighting malware for decades, this cybersecurity veteran is now hacking drones",
+    "date": "2026-04-04",
+    "url": "hxxps://techcrunch[.]com/2026/04/04/after-fighting-malware-for-decades-this-cybersecurity-veteran-is-now-hacking-drones/",
+    "source": "TechCrunch",
+    "source_category": "news",
+    "summary": "Mikko Hyppönen is one of the most recognizable faces of the cybersecurity industry. After fighting computer viruses, worms, and malware, for more than 35 years, he tells TechCrunch why he is now worki",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "40a7c613",
+    "title": "Dynamic cortical routing mediates temporal attention",
+    "date": "2026-04-04",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]04[.]03[.]716160v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "Selecting information from dynamic streams requires mechanisms that prioritize a visual stimulus at a specific moment over preceding and subsequent stimuli at the same location. Whereas selective temp",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "4019c3fe",
+    "title": "Early peripheral immune signaling precedes tau elevation and blood-brain barrier disruption in Alzheimer's disease",
+    "date": "2026-04-04",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]04[.]02[.]716122v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "Neuroinflammation, along with amyloid beta (A{beta}) deposition, phospho-tau (ptau) accumulation, blood-brain barrier (BBB) disruption, and cognitive decline are recognized components of Alzheimer's d",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "6e44aa12",
+    "title": "Chinese BCI startup StairMed closes $72.8M financing - MassDevice",
+    "date": "2026-04-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiekFVX3lxTE9zbmFZdXc3MV9rLVhVZTlSR0l5LWNjTW9DUTJzZ2dPeC1pNEdZNUJfMGZkMWdpWjVWSHloUVotclR5M2Y5S2RXNHYxdHl6NUZhakVLNWVrV0F6LUZneWFybGJCSlQxWWMyWVVxd0p3NHRNLWJYazJlT2ZB?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Chinese BCI startup StairMed closes $72.8M financing&nbsp;&nbsp;MassDevice",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "b821435d",
+    "title": "Prevalence of sympathetic fibers within the rat cervical vagus, and functional consequence on physiological effects mediated by vagus nerve stimulation (VNS)",
+    "date": "2026-04-01",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae52b7",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Electrical stimulation of the vagus nerve (VNS) is an Food and Drug Administration approved therapy for epilepsy, depression and rehabilitation after stroke, with recent clinical trials to ",
+    "tags": [
+      "research",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "7c015a6d",
+    "title": "China venture capital funding set to hit record in Q1 on state-led tech push - WKZO",
+    "date": "2026-04-01",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqAFBVV95cUxOWTk5d3BHTHBLRHVEeGxLRi1wOTF1REhPYXhZbmdwU0pXbWdycVpxNXFEUUd5UkN6U1ZXQjZvanBZa3lkdjFRN01ZeWpraU0tYlAtNU9hcG81WlVaZkxoYUFEbTFmdTdYd1p3OTFubGVORVJXdzE4RmdSeTlXODZzVTNfWnF3ZjVvYnFSdF9DcnF3RmxOR0haNi1ZQkxzTFJza1dxNlZNNm4?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "China venture capital funding set to hit record in Q1 on state-led tech push&nbsp;&nbsp;WKZO",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "e7117d35",
+    "title": "The Largest Recent Seed Rounds Are All For AI Companies",
+    "date": "2026-03-31",
+    "url": "hxxps://news[.]crunchbase[.]com/venture/data-largest-seed-rounds-ai-startups/",
+    "source": "Crunchbase News",
+    "source_category": "funding",
+    "summary": "A majority of top seed funding recipients in the past six months operate at the intersection of AI and the physical world. Using Crunchbase data, we take a look at some of the sector's biggest seed ro",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "1c4645a2",
+    "title": "Multi-head noise regression for single-channel EEG: estimating ocular and muscle contamination to guide artifact removal",
+    "date": "2026-03-31",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae541d",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Electroencephalography (EEG) is often contaminated by ocular electrooculographic (EOG) and muscle electromyographic (EMG) artifacts, yet many pipelines apply uniform denoising, risking dist",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "4cd22cdd",
+    "title": "Limb position effect in myoelectric control: strategies for optimisation and standardisation",
+    "date": "2026-03-31",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae54ce",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Myoelectric control uses electromyography (EMG) signals for muscle-machine interfacing with applications in prostheses, augmented/virtual reality, and consumer electronics. However, factors",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "1d2000e4",
+    "title": "A comprehensive, physician-trained algorithm to remove artifactual false positive high frequency oscillations in long-term intracranial EEG",
+    "date": "2026-03-30",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae512b",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. High frequency oscillations (HFOs) are a promising biomarker of epilepsy, but automated detectors have significant risk for false positives due to diverse EEG artifacts. Many of these artif",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "605a5036",
+    "title": "Incorporating a variety of synaptic dynamics in neuromorphic hardware: different types of inhibition and plasticity",
+    "date": "2026-03-30",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae512d",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. This study aims to design a CMOS-based circuit that mimics the behavior of real brain synapses, focusing on both plasticity and inhibition. The goal is to improve the biological realism and",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "4b0f11fc",
+    "title": "Who Owns Digital Thoughts? The Limits of Property Law and the 2025 UNESCO Recommendation on the Ethics of Neurotechnology - Stanford Law School",
+    "date": "2026-03-30",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi7gFBVV95cUxPamR0QzdEVkoxcDJjaHBvR2djMVYxZVFBRTFXSDMxVC0yMnMtSy1ORE5ZVTJQakNWUXJsWTJqUDBkaHpjTHhiSHRVQ2FRQVVWaV9kM0ExbHREVkF3QjBpcTh0LTBpdDkzaUZPYjlSdVNIWXRfMDM5Tnl0Nk55X3VuRmVjb2x4NlBiWGRUdFpsZ3d2dE9DdV9pSUszdWxtU2IxRlBKVlJHRmNacWhYaXZoMnVBMWhYQ19wRU5ONGFUMlBWbzZkRGRrLU1TYXBtWE1DUzdzdlJmd09IbHd5YmlteVROWjNvU3F3QnVkWjhB?oc=5",
+    "source": "GN: Neurotech Regulation",
+    "source_category": "regulatory",
+    "summary": "Who Owns Digital Thoughts? The Limits of Property Law and the 2025 UNESCO Recommendation on the Ethics of Neurotechnology&nbsp;&nbsp;Stanford Law School",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
     "id": "b48f60ff",
     "title": "High-definition tDCS restores adaptable neural dynamics in migraine",
     "date": "2026-03-29",
@@ -153,6 +436,20 @@
     ],
     "companies": [],
     "fetched": "2026-03-29"
+  },
+  {
+    "id": "e11312d3",
+    "title": "‘Doctrine of the Mean’: how US lost a 2-decade race to China in brain implants - South China Morning Post",
+    "date": "2026-03-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxNdXQtNTQ3ZFAwQmNXaGdYT0d6d1ZkZVZKLWtZdkN2eTUzM2hnWnkxWFlhaGZTZjVMdmY5b1VVUGlLQ3BEZ1M4WjJ4SGF6RmNmX3YyVVNNRXlVVTMwb0k0MHR6azRGZHk2U2Q3dWNDbUl4cE1MZTUtQTJfVFptS044eU5PTW5MZWw4MGwzTUJIUUxQaG5UREhtdG5xZVRwZGx3N3Z1VURPZjJPMGV2ZmN6N0p4MTFKVDDSAbcBQVVfeXFMT01xVnVKemMxMlY4akF0dU1VcHFhSU1FODFJYm9hNXJ4QV9mSjdGdmdyMkExeEMxUUpfS1dDTU9NRHNLTmZ5V05uNlFrUktFZmZrQnFRMzFVRW1Uem1KRURkY3VSS1h2R3BpR09sTGs4czZqcUFSMjgtWXJWWm41UDFQWnRvSTVWY2ZRTzlCWnpzakZvbkNjcFc0d0RBbXNqWG1uQzJyM1B4UFl4WndEMFJqUDlqX2Vr?oc=5",
+    "source": "GN: BCI FDA",
+    "source_category": "regulatory",
+    "summary": "‘Doctrine of the Mean’: how US lost a 2-decade race to China in brain implants&nbsp;&nbsp;South China Morning Post",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
   },
   {
     "id": "32740240",
@@ -2254,6 +2551,20 @@
     "fetched": "2026-03-29"
   },
   {
+    "id": "afa8ee68",
+    "title": "Brain Tech Startup Science Corp. Raises $230 Million to Treat Blindness - Bloomberg.com",
+    "date": "2026-03-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivAFBVV95cUxNLU1Va3hSVVJNRkJxZE5JQTFIZ0xoVlo0bHdrZHlhYnpFTTlVRmtCeFhyN2pYeFBHaXdzNlVQODA3OXhtc0c3clNIdUwweW5nNmtHQ1o4SmR6Ym5PVEczcm14SzN4REhJLWFyTkk3VjNaWktNTThNekVVdHBackh0ZHlZY2EybjNjQ0RvQS1KUC16eFpRMkxzVTBrQXlfaHpVNW9BRWdFS05tT2dOUzlCczZ3Ml9TV0htTUtZZw?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "Brain Tech Startup Science Corp. Raises $230 Million to Treat Blindness&nbsp;&nbsp;Bloomberg.com",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
     "id": "ab921b92",
     "title": "What It’s Like to Have a Brain Implant for 5 Years - WIRED",
     "date": "2026-03-04",
@@ -2524,6 +2835,20 @@
     "fetched": "2026-03-11"
   },
   {
+    "id": "f84a248e",
+    "title": "An Optimal Control-Based Digital Computational Framework for Predicting the Entire Cycle Sit-to-Stand Motion in Unilateral Transtibial Amputees",
+    "date": "2026-02-23",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11408072",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Sit-to-stand movement is the prerequisite for other lower limb movements and determines the independent living ability of lower limb amputees. Although optimal control theory enables human motion pred",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
     "id": "97ac67c8",
     "title": "China&#8217;s brain-computer interface industry is racing ahead",
     "date": "2026-02-22",
@@ -2721,6 +3046,20 @@
     "fetched": "2026-02-21"
   },
   {
+    "id": "205d998b",
+    "title": "HD-sEMG-Based Control Using Neck Muscles and Shallow Neural Networks: Assessing Performance in Rehabilitation-Oriented Tasks",
+    "date": "2026-02-19",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11400601",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "This paper investigated the suitability of the integrated Recursive Rehabilitation Control Network (RRC-Net)/High-Density Electrode Array (HDE-Array) system for performing two multi-Degree of Freedom ",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
     "id": "29e26bb0",
     "title": "Beijing backs brain implant push to rival Elon Musk’s Neuralink - Financial Times",
     "date": "2026-02-18",
@@ -2778,6 +3117,48 @@
     ],
     "companies": [],
     "fetched": "2026-02-21"
+  },
+  {
+    "id": "69c110ac",
+    "title": "Data Glove and Controller Utilized in a Ball-Catching Task With Virtual Reality Differentially Modulate Corticospinal Excitability During Combined Action Observation and Motor Imagery",
+    "date": "2026-02-16",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11397087",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Virtual reality (VR) enhances the vividness of motor imagery (MI) when combined with action observation (AO). While prior studies suggest differences in self-awareness and motor practice when using a ",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "7c3c2fd3",
+    "title": "Myo-Hand XP: User-Centered Co-Design, Clinical Implementation, and Commercial Translation of an Immersive Virtual Reality Intervention for Myoelectric Prosthesis Training",
+    "date": "2026-02-16",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11397108",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Myoelectric prostheses offer functional restoration for people living with upper limb loss or differences, but mastery requires intensive, often monotonous training, leading to high abandonment rates.",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
+  },
+  {
+    "id": "3da74467",
+    "title": "Ankle Exoskeleton Assistance Reduces Knee Contact Force During Walking in Individuals With Cerebral Palsy",
+    "date": "2026-02-16",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11397111",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Musculoskeletal health is critical for physical and mental well-being. Most people with cerebral palsy (CP) experience gait disorders that are associated with increased joint loading, pain, and degene",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
   },
   {
     "id": "4eecf05d",
@@ -3160,6 +3541,22 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "d38ba27a",
+    "title": "Sam Altman’s Merge Labs Secures $252M Seed Led by OpenAI: BCI Progress in the Era of Unified AI Tools Like AICC - FinancialContent",
+    "date": "2026-01-23",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgJBVV95cUxQZGV0UV9CWU41SXZsRXNrdDhOVzBoUDBOZllvYzMxbzZwdFBZR3RPMk9xdllQSFdXck9IbjNuZTFnWU5lRTR5OU1uMUNXbENUdzUwakpMNVdQT3pYelgwY05jTWhwSWZXMS1peWh1aFkzN3BqemZKUDhobXc4RGlsMEdkRGxVU3V4YTdZQmtSVGhaMlVZWmpDcFdJSG1sSDlFLVZHZkhIbTBHLTR5ZTBnSnFMbV9YQkJ1TV95Y3ZqcHc4d1FJbmd2WF9kWko1ZGdueV92aU5JUkJlRkRyY1dUZVFBT0duMThjOVI5UEJPanNUbnlyYWJZM1dCQ0RaOUw2ZmMwSk0zTlNFZDExUGc?oc=5",
+    "source": "GN: Neurotech M&A",
+    "source_category": "funding",
+    "summary": "Sam Altman’s Merge Labs Secures $252M Seed Led by OpenAI: BCI Progress in the Era of Unified AI Tools Like AICC&nbsp;&nbsp;FinancialContent",
+    "tags": [
+      "general"
+    ],
+    "companies": [
+      "Merge Labs"
+    ],
+    "fetched": "2026-04-05"
   },
   {
     "id": "5e7f0548",
@@ -3612,6 +4009,22 @@
     "fetched": "2026-03-15"
   },
   {
+    "id": "3a6a9b3e",
+    "title": "After Neuralink, Max Hodak is building something even wilder - TechCrunch",
+    "date": "2025-12-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxQSjJTc21pdHkzVk1aRnZSeFM4V05CbVBUWmRTZGJTZmN6UmN5bHZ1Z1RpR0dwRl9NUkdaYm0xRGtXWWhadUtYX0pOWlJUcUJobVJoZDlHMTIzRmlzeW9GMzl4YlBvMVhZTlVPMFF4TWhuS2dlUHllRlItYWFPMWVaamJwYzVvOGNoUVJMUTdhX19PT1d0Qnc?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "After Neuralink, Max Hodak is building something even wilder&nbsp;&nbsp;TechCrunch",
+    "tags": [
+      "general"
+    ],
+    "companies": [
+      "Neuralink"
+    ],
+    "fetched": "2026-04-05"
+  },
+  {
     "id": "53d27173",
     "title": "Unlocking Neuroscience and Neurotech Investment Opportunities - BioXconomy",
     "date": "2025-12-04",
@@ -3856,6 +4269,21 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "251a4ad1",
+    "title": "Kim Kardashian’s Skims draws $5 billion valuation in reminder that, for the best consumer companies, there’s always a market - fortune.com",
+    "date": "2025-11-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihgFBVV95cUxQTmRpMDJFZW5lZ2JoRnE3Zlg3TEU3SnFlcGNRM09xWDRXRURweENMRkpSY1BMVmdNMFJvWV9vVWlDbkNkdTgwYnFWVFV0RlFhbWdpTmpJdzdMTTdvaGF2LWViU21ENVh2NWVSc2lBWEoxYUJ1NmNrUEpaSEdoVkJZcVdmbGNGZw?oc=5",
+    "source": "GN: Neurotech VC",
+    "source_category": "funding",
+    "summary": "Kim Kardashian’s Skims draws $5 billion valuation in reminder that, for the best consumer companies, there’s always a market&nbsp;&nbsp;fortune.com",
+    "tags": [
+      "funding",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
   },
   {
     "id": "43a26000",
@@ -4138,6 +4566,20 @@
     ],
     "companies": [],
     "fetched": "2026-02-21"
+  },
+  {
+    "id": "0143609d",
+    "title": "The Dawn of Neurotechnology and its Legal Challenges - SCC Online",
+    "date": "2025-10-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiogFBVV95cUxQd09kYy00LUNEZmtPSm8zakdFVUpOYWg1ODhKbFlTT05lQjl0TG9RNTVFUXRVOF9ubmZlaHJidE96Wm5nb3I4d0FqRG5mZF9qZ0k1OVZ6bEh6SWVKNERvYzA1UDhLOFhtT3UwaTQ3cVAxVHZ3akxVMER6V2JaeUF3MHhJdk1nNENHVm4xdlJYUWctTGdqMG9INnhuRGVnTXUtRkE?oc=5",
+    "source": "GN: Neurorights",
+    "source_category": "policy",
+    "summary": "The Dawn of Neurotechnology and its Legal Challenges&nbsp;&nbsp;SCC Online",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
   },
   {
     "id": "2800866e",
@@ -4827,6 +5269,20 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "cd1b505b",
+    "title": "Who’s Reading Your Mind? Exploring the Intersection of Neural Data and Privacy Protections - Epstein Becker Green",
+    "date": "2024-05-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMizgFBVV95cUxOc2xJdG5BbFVodlNmV3c3NVJOTDVMTzU2RkpxdkRadHNHYzFnQkZWVjlBbG9vRzBjNUlMZGkyTVhNN21ESjFXZXVNeXVfckt2cFRfdDB4U3FvdVJBT0h3UV9BTU51RDlRZ0RsVGJBazZVdk42U2FJSlpfLXg5eHpOTUF3TmZ3MEs4anQ2YW5INTM3Tzkyc2p2dHIycTlkT3VzVzBMVm5LVkpCT2NZeWs2ZGNuUXRLOVF4OGVLTUdRWnRSTnVmcVJmUkYzWlRBQQ?oc=5",
+    "source": "GN: Neurorights",
+    "source_category": "policy",
+    "summary": "Who’s Reading Your Mind? Exploring the Intersection of Neural Data and Privacy Protections&nbsp;&nbsp;Epstein Becker Green",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-05"
   },
   {
     "id": "e74e6a3e",
