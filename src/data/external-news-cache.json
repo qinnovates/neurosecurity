@@ -1,38 +1,83 @@
 [
   {
     "type": "external",
-    "title": "Elon Musk highlights Neuralink’s potential for restoring vision and hearing - The News International",
-    "date": "2026-04-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxPUmY4LTR5UVRRMmJBT2Q2RXdDdjhxQWRLMWdSUkp1S3o2NFVxVHpabEg5WkNDYmlmZ0twcjRfZTdXTmoxczNTS2lsWm5FMzg5V1U4em5FcGt1Uk1BazFHRTc1YXNIbFVGNENMb3pwTVQwd3BFZDNSTklwaHM1LWFqZmNWbFBmaEdHN1BjZm5jOFF6RDYtX3pmTVlDLXN1QlZDQ1A3clZNb2NCZTdLcTRuaUwwcXdxN2fSAbMBQVVfeXFMT05tcmpzQ0l4a2UzMnZoM2tGM3lUdm94RWVCQThPbzNhd01pakJrWDZhbEpsRERhTzVkVlRWNUpFUlBhVkV6dk1KZGtkWDk5SDBIclpmMWhIQWJOQkU3N2xaWk9UM3ZRV1RkenZhS3REMjExT0Fpd1VfX2cxOEVsbjdLMGQ0V2s4T0NGa1VENWZ3VWU5S3JjNUxQeXZwaXM0QUNyR3RhWWFqVjlHcXBxVzdlbzQ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk highlights Neuralink’s potential for restoring vision and hearing&nbsp;&nbsp;The News International",
+    "title": "[object Object]",
+    "date": "2026-04-06",
+    "url": "hxxps://www[.]fiercebiotech[.]com/medtech/zetos-latest-eeg-device-garners-fda-510k-clearance-outpatient-use",
+    "source": "Fierce Biotech",
+    "summary": "Zeto, which makes brainwave monitors for emergency rooms, received a third FDA clearance for an EEG device. The latest is intended for use in outpatient clinics or at home.",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "A New Implant Aims to Rewire the Brain to Help Stroke Patients - wired.com",
-    "date": "2026-04-02",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxOcV8zOGpIaHgzenY2Q1dzZVFfbXlfUU1KX1paNDdxN0xxSmpHRVppR1NkME96M1VoYl9wc3VyQWpJbmNEclVnMWhYRmNzR3diUDFsSkJSUDZDaDIzU0pOR3BDeTdDaG5WMVJiSVcwZmJ2RW9VU0RadU5BN3ZmVzBYSGdjcllSVUM2ZjJvZWl1WWxiaUhHR2c?oc=5",
+    "title": "Alameda startup emerges from stealth with brain implant for stroke patients - The Business Journals",
+    "date": "2026-04-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxPRWxpejVLM0doWmhYZVRORWFRUHFmSmRUNXlvM0xKN3ZWNDFPYTJoN1RnV2F4QVg3WW5WOHU0aXJCYUg4bk01ek9qMnkyYm02QXdhVm53S3ZQUE9WVHNPTEVtNFkyYWRlTlE2bEltN3RSWE1zY0dZWk1SQzYzNFVtZFc2bDlKSXdHRVNxWUxPa1hpV1lVako4YmVSRDQtTkctejViVTM0RQ?oc=5",
     "source": "Google News — BCI",
-    "summary": "A New Implant Aims to Rewire the Brain to Help Stroke Patients&nbsp;&nbsp;wired.com",
+    "summary": "Alameda startup emerges from stealth with brain implant for stroke patients&nbsp;&nbsp;The Business Journals",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China Just Approved the World’s First Commercial Brain Chip — And It’s a Narrow, Invasive One That Actually Works - QUASA Connect",
+    "date": "2026-04-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMizgFBVV95cUxOZ3Nfcmx2TDRBU3FSb3BPUkxjVFgwSFlNNG9NdVlqcWdIMHRvWXdVc280aXRHMkM3b29maDRUaG12WmJqVXpheHhydFdwYV9oSVJGczJJSEdKMVVlUzJwWnlPR3lrUHhHcS1IUlN4aTM4bmRiQnZWS1o5WDBiWExraHcxbWMtTUFzamFob3RQVy1zZUtqR0RSZERRZXBfTkxidm5EbDhZcF9qem5iYmdDVzl5WUtDR0ZrRExzbUMwWGpQZEFwRGFMeVZyVU1mdw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China Just Approved the World’s First Commercial Brain Chip — And It’s a Narrow, Invasive One That Actually Works&nbsp;&nbsp;QUASA Connect",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink Says It Wants To Restore Hearing By Bypassing The Ear - Dataconomy",
+    "date": "2026-04-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxQR0hFaEkwWkhwWFl2d01NbEJVME5wUWNDZnU3bGV2NkMxaTg0VlhkT3NtOGk0Smk0UEV3VmZmemc2UG9jX1huSTBNeE9JYVlKcWtQM0tTWXBrMmhOeWtSLTUtN01fTVktd0JadFFhNWtCTmxDTGp5M3NuZ0R3RkJZWjlhZ1duaU9IUUEwNExFalZ2QnJwUHc2ampJdndnQzg?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink Says It Wants To Restore Hearing By Bypassing The Ear&nbsp;&nbsp;Dataconomy",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Temporal structure of the language hierarchy within small cortical patches",
+    "date": "2026-04-06",
+    "url": "hxxps://arxiv[.]org/abs/2604[.]03021",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2604.03021v1 Announce Type: new Abstract: Speech production requires the rapid coordination of a complex hierarchy of linguistic units, transforming a semantic representation into a precise sequ",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Neural correlates of perceptual consciousness from within: a narrative review of human intracranial research",
+    "date": "2026-04-06",
+    "url": "hxxps://arxiv[.]org/abs/2510[.]08736",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2510.08736v2 Announce Type: replace Abstract: Despite many years of research, the quest to identify neural correlates of perceptual consciousness (NCC) remains unresolved. One major obstacle lie",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Integrated representational signatures strengthen specificity in brains and models",
+    "date": "2026-04-06",
+    "url": "hxxps://arxiv[.]org/abs/2510[.]20847",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2510.20847v2 Announce Type: replace Abstract: The extent to which different neural or artificial neural networks (models) rely on equivalent representations to support similar tasks remains a ce",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Escaping the BLEU Trap: A Signal-Grounded Framework with Decoupled Semantic Guidance for EEG-to-Text Decoding",
+    "date": "2026-04-06",
+    "url": "hxxps://arxiv[.]org/abs/2603[.]03312",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2603.03312v2 Announce Type: replace-cross Abstract: Decoding natural language from non-invasive EEG signals is a promising yet challenging task. However, current state-of-the-art models remain c",
+    "category": "research"
   },
   {
     "type": "external",
     "title": "Epia Neuro launches with BCI device to help stroke patients rework brain signals - Fierce Biotech",
     "date": "2026-04-02",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxORU5SLWxUTnNBUUctVERCWjBGQkt2RGxDVHpqakc5OVVvMXl0b1A0b00yZUVXZHoyTXhlVXYzZlZiS2F2enVWYUhEbU5WWjh6TjI2TlJuWWlpNC1FNTZBTU5QaE14UGZoWmdvVWliTjZzSnQ5djNxRHZHZkMtRm53OHlvUERPd3dOMENoQ1dtRGZkb3Z1Z0hLN3h3VFZXel93R0lWVVlUNnFzZXFSdUFBUUhXcUpkUnc?oc=5",
-    "source": "Google News — BCI",
+    "source": "Google News — Neural Startups",
     "summary": "Epia Neuro launches with BCI device to help stroke patients rework brain signals&nbsp;&nbsp;Fierce Biotech",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain-computer interface tech advances from R&D to clinical trials - news.cgtn.com",
-    "date": "2026-04-02",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxNWG8yWUJSMzVqLXZ4aUJKUGloa3pjTEQxcnl0Z1lnQnljdU9fX2RPdzFacXNsN0pjWnpfLUg4dkh6c0JsZTZqQ1VfbTJydENlQk5BaWh4Ul9QM2dYbmJyRWZ5dy1IYmY0QlozaU9HNXRoU09EOXdoRWtBQ0JPbUROdHdOSHZEWm95NzIzYmN4OV9OSE9zNGZETml1anNWYk1Xd0ZVZlEyLTNjZm9iWU94cV9GdWJBZ0ptaHNKVGZ0NS0?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-computer interface tech advances from R&D to clinical trials&nbsp;&nbsp;news.cgtn.com",
     "category": "neurotechnology"
   },
   {
@@ -73,11 +118,29 @@
   },
   {
     "type": "external",
-    "title": "Beijing-backed brain chip firm says it is 3 years behind Musk's Neuralink - Reuters",
-    "date": "2026-03-20",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi3AFBVV95cUxQbVhseDRjaEs3RTZ4cEJrNjBUc3R5UkZUZ05Odkg1UTdsWVpuX3hoQmhIcFo5Qi1Pb1VQdVdyWVUxSmJBUEJGbERZNEhYMHRXNVN1ZzB4clNTbWRLaWRoLWo5dVZaUlF3c2tvRkxPcGU2WEVINmpkNjg1XzdLY19JSHZRZHl6b1lpNE9kSElCMDdGUHdtOElIMkhPY2VIZVlOZGxOOVM2cEktTW0zeHZhSDBEbjVjamFyU2hCZ2JXT1c0LTU4MkNrTVMwd2h6dUEweWZXcEwxeTZnSjdC?oc=5",
+    "title": "First Neuralink patient explains living one year with brain chip | Elizabeth Vargas Reports - KXAN Austin",
+    "date": "2026-03-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi5gFBVV95cUxNQnY2dDUyZnktLU11TW9PUjFIZERMNVFTUDBOeDRUV1VXYmNfbFRyZkNfajdDSWlzVUs1Qlpaa29GRDFzUHZtR2VfSzNGeERGZDdaQjhoYVNielJfTjh5bUFoU1dkTE9NMUwwVk5OVlR5SHcyQW9hT1BsRFVHS2dlRFNHRnRtdy1IX1RLcnNiQklJeVFiNGY3dmpXVG03dWE0SFlFUnVqUXk5ajhXTEJ1UVhaOWNqSmpqLUhHaTNIVE1lN2l3LUw5Nk0yUGdHaGNDM0c1THRhREN6dkV3TlpmdWljOGxzdw?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Beijing-backed brain chip firm says it is 3 years behind Musk's Neuralink&nbsp;&nbsp;Reuters",
+    "summary": "First Neuralink patient explains living one year with brain chip | Elizabeth Vargas Reports&nbsp;&nbsp;KXAN Austin",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "In a first for China, Neuracle’s brain-computer interface wins approval - South China Morning Post",
+    "date": "2026-03-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMizwFBVV95cUxQdlhPRjRBZU8xTWluWm1GUGN4d1l0LTFpcWtYZHFsSE91M0plZFlleTgzNllZa2FmRFdrb0F6VU1sNjFrU0xsNndpeWhBZGN0MU8wWTd6N3lDUnpHSU9iQnQyWklsTU5rWG85RXozby1sYm5fd3ROWjh6LWNDTTNLMThjd1lrVUU2ZUhIYnBKNEtMWWhvM1dmSG15ME15bFVrNkctVTNTNDR3bkJXSG9DMlc5eUI3WWd3ZWk2VmhuMm40U21ZQ2dEYVl2ZGZlSVXSAc8BQVVfeXFMTWNRZm11dlE0SnBRcVl0NUJId1l0UjBPRlg0RDhNNlZMSW5nTW5ickZXamp6cGdBeGZ4eUJMRUs2eW5IRDI0czZWeGVYMkUwZ3NobHlFcS1zZnJxNFpZV3FNQW1kZXpnV3M4dVc4M3hkYXNjR1BWX2tDNXdpQW1JbGh6Q3NkQ1cybzV0aEJwNXZ1TmFNY0VlWFluTDhJaU5Eb2JWaDNPVjM1ODFyMUNCWXFVTFpWNEpNb2NUMUpXVS1VQ09mMlF2NEpKdTJrRjMw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "In a first for China, Neuracle’s brain-computer interface wins approval&nbsp;&nbsp;South China Morning Post",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - TechCrunch",
+    "date": "2026-03-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxOX2Jtd3dNTy13MzNlOUpQRVlFN0RaLUYxMFd4VzJYZnR3TzFtRlFOa21PaWM5NzZiX1NTUGMxZkk1OTZmcG0xRDhhejYwOUM0RHFMYlZCQ1RZNEczQjR4Z1VZbEp3czA3bzB1UE1sYUNuS3o0dmdvazN4MmVtUTRqNTNDeHdvSnZrT0M4c3RUUVg2am5pa25FQ2ZSX2VBdVpaVHFRZmZXUnpRLUJwR1pObw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;TechCrunch",
     "category": "neurotechnology"
   },
   {
@@ -91,29 +154,29 @@
   },
   {
     "type": "external",
-    "title": "China’s ultrasound brain tech race heats up - Fox News",
-    "date": "2026-03-02",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMie0FVX3lxTE5YYU9JMU9IN0FiclJKUE9XVXk4WWg4VGdxT1RzZ3hXakpFX3hTLWg5Y3NTVGZGNnhOU3l3djYza0JHV3VFSk9yY0hDVlc3V3BnY1BpTFdqVy1zT2dBWjlWdVlSM0M0eFhMbDlTNjVlelVnV2VNVWh1YlNwONIBgAFBVV95cUxNTHlIUWFxa1ZXNXE4ZTF5Qm9aUXhaU3ZQWmxQOWhJdVNqRXNWZ3FwYWZURGV2ZUlDbWN1bHBnMEJNY21iSlRtaWo4R1h0RXZkaXgtT3dtUnFXSHlRLXVZbTc4cmtRZ0hKT3poczFVaXFQVm9Kdm1JWTlzWXpLbWFSOA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China’s ultrasound brain tech race heats up&nbsp;&nbsp;Fox News",
+    "title": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C - news.crunchbase.com",
+    "date": "2026-03-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;news.crunchbase.com",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - wired.com",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
     "date": "2026-01-29",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
     "source": "Google News — Neural Startups",
-    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;wired.com",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Two Years of Telepathy - Neuralink",
+    "title": "Two Years of Telepathy - neuralink.com",
     "date": "2026-01-28",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Two Years of Telepathy&nbsp;&nbsp;Neuralink",
+    "summary": "Two Years of Telepathy&nbsp;&nbsp;neuralink.com",
     "category": "neurotechnology"
   },
   {
@@ -132,15 +195,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Non-surgical brain-computer interface startup lands new funding - Longevity.Technology",
-    "date": "2025-12-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxQZUs4LXBHeDF5eV92WGk3aVFuZkJPMlEtamtDaThhTUt4amRMRzFNNC1ZcXNIYWRGLVpmaWlDMEVIcDFqLU1YdzhZejFLOUdhZk5NcEFMNmFTamswTC03dFdOLUNvQ3UyQ2xoY1NGd0VYRHhKV2t5MjNtcW5ZWDc2N3BIcjJCNlF1RFZKeWNIZFJqd1U1dXFEQVl4dTBuSDg?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Non-surgical brain-computer interface startup lands new funding&nbsp;&nbsp;Longevity.Technology",
     "category": "neurotechnology"
   },
   {
@@ -178,14 +232,5 @@
     "source": "Google News — MIND Act",
     "summary": "Congress Introduces Neural Data Bill&nbsp;&nbsp;Inside Privacy",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Exclusive: Startup lets you query AI with silent speech - axios.com",
-    "date": "2025-09-08",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihwFBVV95cUxOX3czQ01Xb2REeUx1elVzSXI5UUhaSHhxUWthcG9teTl5Sk9NYTU4cmZnenN2aVRfemZnT3dvV0d2V194MzVvTGZWU0V1eUFEQWstWFpYZy13WFh3Tnk4TFdDSFZPc2VjZ3BYZWhacjFyemVqZm9zYTRSaUZSS0lGNTlCNm9xaWM?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Exclusive: Startup lets you query AI with silent speech&nbsp;&nbsp;axios.com",
-    "category": "neurotechnology"
   }
 ]
