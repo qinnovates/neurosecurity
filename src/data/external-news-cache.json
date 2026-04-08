@@ -1,21 +1,30 @@
 [
   {
     "type": "external",
-    "title": "Researcher develops brain-computer technology to help people with motor impairments communicate more easily - Kennesaw State University",
-    "date": "2026-04-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiswFBVV95cUxQWkZZRndETDRzd1VLNDh0aDhNU1FDcVhacDUzeVVnV3F0eE41bWhrTDlHMHNaV2dQX2NWeWZsLWs1ZGdwck8wQm9IbVMzZDg1LWZxSGlfbGlnRGxXM01pWUVUMFZQSC0xOHVkU2gyNVQ4MWRfMExpVnFZNVd1b3JEZ3FGdF9ZbV9xaFhRSmJXRVczbzJhLTNudHFpZ3Q2R3U2OUlVWl9la19scFZ0NFhRUU0yNA?oc=5",
+    "title": "CorTec wins FDA breakthrough nod for BCI system - MassDevice",
+    "date": "2026-04-08",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMickFVX3lxTFBUY2hnZFR6VmJCXzB3ZnJSeklZcVN5TFkxSFlZdEdyT3RKRXhuUkNKYmFjUXFIa2JSUmpPSlFwOGhVM3BNVzFiZGdUMVl5M0pwR0VpUVd6VHg2ZXN5bzRoa1RJNVhMNHZWT3k5ajJseGNsUQ?oc=5",
     "source": "Google News — BCI",
-    "summary": "Researcher develops brain-computer technology to help people with motor impairments communicate more easily&nbsp;&nbsp;Kennesaw State University",
+    "summary": "CorTec wins FDA breakthrough nod for BCI system&nbsp;&nbsp;MassDevice",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Neuralink's Brain Chip Achieves New Breakthrough: ALS Patients Can Speak with Minds and Communicate in \"Original Voices\" - 36氪",
-    "date": "2026-04-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTE9xMUdRWlZEc200UUQtYUlxQ0xJZmhxQVdnTnVaOU95a0VIY3VmQXRjNFdLakFrWkdnN3VONHhZTUhXOVZZNHRhMDBVRGg4cWxKZFdF?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink's Brain Chip Achieves New Breakthrough: ALS Patients Can Speak with Minds and Communicate in \"Original Voices\"&nbsp;&nbsp;36氪",
-    "category": "neurotechnology"
+    "title": "Hierarchical Mesh Transformers with Topology-Guided Pretraining for Morphometric Analysis of Brain Structures",
+    "date": "2026-04-08",
+    "url": "hxxps://arxiv[.]org/abs/2604[.]05215",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2604.05215v1 Announce Type: cross Abstract: Representation learning on large-scale unstructured volumetric and surface meshes poses significant challenges in neuroimaging, especially when models",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Pursuit of biomarkers of brain diseases: Beyond cohort comparisons",
+    "date": "2026-04-08",
+    "url": "hxxps://arxiv[.]org/abs/2509[.]10547",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2509.10547v2 Announce Type: replace Abstract: Despite the diversity and volume of brain data acquired and advanced AI-based algorithms to analyze them, brain features are rarely used in clinics ",
+    "category": "research"
   },
   {
     "type": "external",
@@ -28,28 +37,10 @@
   },
   {
     "type": "external",
-    "title": "Neurological Plausibility of AI-Generated Music for Commercial Environments: An In-Silico Cortical Investigation Using Wubble and TRIBE v2",
-    "date": "2026-04-07",
-    "url": "hxxps://arxiv[.]org/abs/2604[.]04025",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2604.04025v1 Announce Type: new Abstract: Background music shapes attention, affect, and approach behavior in commercial environments, yet the neural plausibility of AI-generated music for such ",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "BCI Maker Epia Neuro Bets On ‘Intent-Driven’ Rehab For Stroke Patients With Implant, Glove - Citeline News & Insights",
-    "date": "2026-04-06",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwJBVV95cUxQRGZTV2tmZi1hU3dZWkxQVU01Vy16NnJEQzVjMGZoM0ZOQ3puNE0yV0tVYU1MbGZSeUdVcS1KZkZtU3RsUTN5T3pVbXJONDhWal9NYXhxYS1nZDFGQUlQN1lwMGxhanBsVENiMTJpV01uazNWVkkwdUFUdC1IRkRQYVlIc2l1N1NEU0tSN0w5VnhKUGxVUzk1aF9DX1NUelZaQkQ3NXZmaUhlakNpaF9QMWFYa0swb21sUzYxX3NPczVmUlBJRlJOVkJjYjBpemducEFhU1RuNGVxeF9SQjVkdmVTOXY2YXNXM1I2T00tUkhLTGdGUEVPTVE3Q1p4WTFzX1pVYVkyYWpoY2cyWFNoWE83Q0pLQ0xPbFltQm41dw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "BCI Maker Epia Neuro Bets On ‘Intent-Driven’ Rehab For Stroke Patients With Implant, Glove&nbsp;&nbsp;Citeline News & Insights",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Alameda startup emerges from stealth with brain implant for stroke patients - The Business Journals",
     "date": "2026-04-06",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxPRWxpejVLM0doWmhYZVRORWFRUHFmSmRUNXlvM0xKN3ZWNDFPYTJoN1RnV2F4QVg3WW5WOHU0aXJCYUg4bk01ek9qMnkyYm02QXdhVm53S3ZQUE9WVHNPTEVtNFkyYWRlTlE2bEltN3RSWE1zY0dZWk1SQzYzNFVtZFc2bDlKSXdHRVNxWUxPa1hpV1lVako4YmVSRDQtTkctejViVTM0RQ?oc=5",
-    "source": "Google News — Neural Startups",
+    "source": "Google News — BCI",
     "summary": "Alameda startup emerges from stealth with brain implant for stroke patients&nbsp;&nbsp;The Business Journals",
     "category": "neurotechnology"
   },
@@ -91,20 +82,47 @@
   },
   {
     "type": "external",
-    "title": "Can Electrical Stimulation Restore Sight?",
+    "title": "Neuralink patient raiding in World of Warcraft after only 100 days of having the implant installed calls it 'pure magic… exploring Azeroth hands-free at full speed' - PC Gamer",
     "date": "2026-03-26",
-    "url": "hxxps://spectrum[.]ieee[.]org/optic-nerve-damage-electrical-stimulation",
-    "source": "IEEE Spectrum",
-    "summary": "The optic nerve is like a high-speed fiber-optic cable between your eyes and your brain. But once that cable is cut, whether through trauma or disease, the nerve cannot be repaired and vision cannot b",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAJBVV95cUxPSjZLMHd3cUluWU1lTTZUUV9kaDdDZEppMGZzOENxM2R3LXhMaXdwcXpQaFdCaEtxUzU1MkdkNHhDS0xXcTVRdkdPSUdINXJWR01wVUY2X0l2bFBDb29oRm9qTEM4LUQwWlFKWlJDZnB1Y0EyVFpvNjc2anNmbUdHQ2lGb1Y1MF9VVnVOLURRWTU4T2JqcGlQT0ZUWmRNSml2TVNKcHNfRmdPXzJDRS0yN2xjQzU3WVEtQmxfYjU1ekplZTFxVzR2ZGE1YWNmd1NzTzk4VWFVZlZhbWpVWldBNzlDTVlLTGtYYk5YMGNndVRjVlMtYzBFT2luMllVTFRpNVlsRGF5Z0prZlJHbjFHekpZMU05ZWp4SE9xaHB5OWprUmxHYVBzSVJRV3dqSkY0SEY3OA?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink patient raiding in World of Warcraft after only 100 days of having the implant installed calls it 'pure magic… exploring Azeroth hands-free at full speed'&nbsp;&nbsp;PC Gamer",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "First human patient with Elon Musk's Neuralink brain chip Noland Arbaugh shares 100 days update; says: 10 - timesofindia.indiatimes.com",
-    "date": "2026-03-25",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiugJBVV95cUxNMXE3N3BGY2VIOVY2N204U0V6MlVyX0hiS2tCbEo0WDBjVFBUX1pyMWdvY2lqTXR0eVBWaHk2OWt4Mnp6SEJzMFVxVkpMR3k1ZUJwNERWZkFYcV9keDZqNWc5cnhweHc5Qmc2amlTT05QeHZMWkVneFUyd0kwSmtWT1JRbnAzZTlBZXJHSDd0NGtoUm1IM0NCbXlHbEZhci1MLTVuM0FXbWVfMWtQYmpmV2VucjdJQnZtVlBmVnRKSng3elc3N2xEOTNyRUY0WE1JVldXWW1jZW5iZ3ZQQ2xYc2E0c0pudG5VQnI0NHUxeEIzbmQxSjRFRE90eTQ0QkdzdF9qWXZPSktvWXJYZGhJVzktdGdvblJ0VWc2TDVJTEJ1NlgzZFBtMUtrdEJkSTlDMTBLMjdXa1BSZ9IBvwJBVV95cUxNTmFkd3dzMG8zaE1mWDhnV2tOeU5zdTFkSmZrSHl4NUl2bUYxOWl3YmFOcUJDM3lOdVBTSVltc3ZNaXU0Tm5DMlBpMk5CcEE5QUVWN2NpNXlkOHEtZTVwRjlEYXZKMGJrNGxwT0h2QTl0LTJoR0NwVzhpWDJBOXNIRnFTeFJCVloxd2xwRE1Rc2lVOGh5eWE1ZF9iMktEcnYwc3JrWDdrRVZFdjI2eXpLU2tBSEFfQ2dfSFpxSVdfSjBnbnRrZ1VpZnZ2VXFOUGNCUDY0cFFhd3A2ZjlPUXJHM3VSdWtRejFNZFNaUVJpb0RPemdKc1RSQk1CMXhZa19GSXJwNTdrY1MzWVNmbHV6dHE0NThwWEl2VkJzeTRfWk13UWFRdHR3OVp4RmQzNjRVMTlxc2lyckt1bDVlSHBR?oc=5",
+    "title": "Computational framework to predict and shape human–machine interactions in closed-loop, co-adaptive neural interfaces - Nature",
+    "date": "2026-03-23",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE1TY3FxOGlOU1RnMXE3M0pJdGFBN1JIZ3RlWUJIdGpYYzdKM0NabTBDNGIyRVhIcXRnTnNqdkYySzNMbTVnZUNxZm9rLTBWWHNiTnJuNGtOYlRxS29QeGFv?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Computational framework to predict and shape human–machine interactions in closed-loop, co-adaptive neural interfaces&nbsp;&nbsp;Nature",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China Beat Elon Musk’s Neuralink to Approve the World’s First Commercial Brain Implant - ZME Science",
+    "date": "2026-03-23",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivgFBVV95cUxQU25CMUlTMFZ3eWZrS1EzMXNzbE5DSkwwa013X1Q2aEp6TkZSWlRiNy1ZMVJGV2dyN1FoQVZBcXlMNnBUWWNDTmNNbExuQ0twYkNlSGhiX2R1ZDVRb2FBSDBLbllkRkVyS2ZpVG02YnFkYnp4a3Nuc05mSFlXelU4WERvZmlVWDI1b3g1dmw5SEtOY2MtdUpWWHdwdEhrU2FwdE9ia2N1VGs3Ni13M3lwd2pubUlGM3Y0dzFnZzBn?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "First human patient with Elon Musk's Neuralink brain chip Noland Arbaugh shares 100 days update; says: 10&nbsp;&nbsp;timesofindia.indiatimes.com",
+    "summary": "China Beat Elon Musk’s Neuralink to Approve the World’s First Commercial Brain Implant&nbsp;&nbsp;ZME Science",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China Approves the First Brain Chips for Sale—and Has a Plan to Dominate the Industry - WIRED",
+    "date": "2026-03-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxOSXFnTTg5WkdFbTF2czJObjlOV2NBOHpXaHhSaDdBU3lMN3lPQnNNdVJZbktaUlE2U0tlem1PcUpQYjBGb1RPekhkTkRVX3VZSS1WVWQtQmUyQlFoRnN2ZVJKSWEzMHlmSWlwMDZqN3FXdkJGc0lfenVuN05yNWFwa3V0SEllOGNWRmtNMjVIQmMyZFA5WW1sLXZUVHg?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China Approves the First Brain Chips for Sale—and Has a Plan to Dominate the Industry&nbsp;&nbsp;WIRED",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Beijing-backed brain chip firm says it is 3 years behind Musk's Neuralink - Reuters",
+    "date": "2026-03-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi3AFBVV95cUxQbVhseDRjaEs3RTZ4cEJrNjBUc3R5UkZUZ05Odkg1UTdsWVpuX3hoQmhIcFo5Qi1Pb1VQdVdyWVUxSmJBUEJGbERZNEhYMHRXNVN1ZzB4clNTbWRLaWRoLWo5dVZaUlF3c2tvRkxPcGU2WEVINmpkNjg1XzdLY19JSHZRZHl6b1lpNE9kSElCMDdGUHdtOElIMkhPY2VIZVlOZGxOOVM2cEktTW0zeHZhSDBEbjVjamFyU2hCZ2JXT1c0LTU4MkNrTVMwd2h6dUEweWZXcEwxeTZnSjdC?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Beijing-backed brain chip firm says it is 3 years behind Musk's Neuralink&nbsp;&nbsp;Reuters",
     "category": "neurotechnology"
   },
   {
@@ -114,33 +132,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMi5gFBVV95cUxNQnY2dDUyZnktLU11TW9PUjFIZERMNVFTUDBOeDRUV1VXYmNfbFRyZkNfajdDSWlzVUs1Qlpaa29GRDFzUHZtR2VfSzNGeERGZDdaQjhoYVNielJfTjh5bUFoU1dkTE9NMUwwVk5OVlR5SHcyQW9hT1BsRFVHS2dlRFNHRnRtdy1IX1RLcnNiQklJeVFiNGY3dmpXVG03dWE0SFlFUnVqUXk5ajhXTEJ1UVhaOWNqSmpqLUhHaTNIVE1lN2l3LUw5Nk0yUGdHaGNDM0c1THRhREN6dkV3TlpmdWljOGxzdw?oc=5",
     "source": "Google News — Neuralink",
     "summary": "First Neuralink patient explains living one year with brain chip | Elizabeth Vargas Reports&nbsp;&nbsp;KXAN Austin",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain implant allows people who are paralyzed to type using their thoughts at speed of texting - Scientific American",
-    "date": "2026-03-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiugFBVV95cUxNX3BwdkNneHJ4X25FSmlvYk5JT01PVmJFaVpYSzJnVWVJNUpmLTV5Vy1pZ3ZxR292TzhZVWZENVYySDAxb0M0c0lpdExXWmhOUjR3TG82ZWdQQVVZNEU3ZHhQdEVtR2ZLaDhYZmp0dUNPLWRtcFVTOE9XLWJDMU5iMldVb29jS2NHd1ZLbS16MjVqODlNNE0xX1RVQzdMU1dQZ3BqUXlBc3ByenQzZkFFSmRhVDJELTVMYWc?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain implant allows people who are paralyzed to type using their thoughts at speed of texting&nbsp;&nbsp;Scientific American",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China approves market launch of brain-computer interface medical device in world first - Reuters",
-    "date": "2026-03-13",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi5wFBVV95cUxQYVIzY19seFh0ZFBudTdBTTE1NnQ2eWZISVUzZFdGcFpPMHIyUlRJd2IxWXR0YVNDWk1PTmFTejNGUjZZUVRST29PZlRIdWVQOU9Zelh5cTI3Mk9kR3FtdGVjRXdHaWxEcFhqczlRallwY1dHNzJMZ0R6Z3dlQkczelpaWnp3MWpqdmJRdEVuZURuRU85WmN3TDRLUDJFQ3pEV3hxM0hxQk5VdzZ1aGdQVWMwODllXzlBV3lBQ25zNW5hWmI1MzIzVnhMY0t1TjY4emdHNFU0S2Z1MDR4VVdpUXpZTnJkX2s?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China approves market launch of brain-computer interface medical device in world first&nbsp;&nbsp;Reuters",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - TechCrunch",
-    "date": "2026-03-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxOX2Jtd3dNTy13MzNlOUpQRVlFN0RaLUYxMFd4VzJYZnR3TzFtRlFOa21PaWM5NzZiX1NTUGMxZkk1OTZmcG0xRDhhejYwOUM0RHFMYlZCQ1RZNEczQjR4Z1VZbEp3czA3bzB1UE1sYUNuS3o0dmdvazN4MmVtUTRqNTNDeHdvSnZrT0M4c3RUUVg2am5pa25FQ2ZSX2VBdVpaVHFRZmZXUnpRLUJwR1pObw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;TechCrunch",
     "category": "neurotechnology"
   },
   {
@@ -190,11 +181,11 @@
   },
   {
     "type": "external",
-    "title": "Senators ask FTC to study neurotechnology's promises, implications - iapp.org",
+    "title": "Senators ask FTC to study neurotechnology's promises, implications - IAPP",
     "date": "2025-10-03",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxNS3FBelpMZGNUWExYbEtEQzZtLXNYRGJnRjhsNjFTYTRrMHpMYW9iU2ZlM3JqM3BBendfblNmNHVNUURrNG4xNzlRNU1xLWN5ZmIzNVJSR1JBRTFBclU5NHFQMTUxLVQ2OEY4bVJJS3VRRFVFcm95NEZpbTRtY1lhWDdBdmJydTI2MHBLNVJvVkxUS0E?oc=5",
     "source": "Google News — MIND Act",
-    "summary": "Senators ask FTC to study neurotechnology's promises, implications&nbsp;&nbsp;iapp.org",
+    "summary": "Senators ask FTC to study neurotechnology's promises, implications&nbsp;&nbsp;IAPP",
     "category": "neuroethics"
   },
   {
