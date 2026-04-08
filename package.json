@@ -39,7 +39,7 @@
     "version:major": "bash src/scripts/version.sh major"
   },
   "dependencies": {
-    "@astrojs/react": "^4.2.0",
+    "@astrojs/react": "^5.0.2",
     "@astrojs/rss": "^4.0.17",
     "@astrojs/sitemap": "^3.7.1",
     "@react-hook/window-size": "^3.1.1",
