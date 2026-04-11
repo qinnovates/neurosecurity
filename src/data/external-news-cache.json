@@ -1,11 +1,29 @@
 [
   {
     "type": "external",
-    "title": "Suspect Arrested for Allegedly Throwing Molotov Cocktail at Sam Altman’s Home",
-    "date": "2026-04-10",
-    "url": "hxxps://www[.]wired[.]com/story/sam-altman-home-attack-openai-san-franisco-office-threat/",
-    "source": "Wired",
-    "summary": "An attacker allegedly threw a molotov cocktail at the OpenAI CEO’s residence before making threats outside of the startup’s headquarters.",
+    "title": "Sam Altman responds to ‘incendiary’ New Yorker article after attack on his home",
+    "date": "2026-04-11",
+    "url": "hxxps://techcrunch[.]com/2026/04/11/sam-altman-responds-to-incendiary-new-yorker-article-after-attack-on-his-home/",
+    "source": "TechCrunch",
+    "summary": "The OpenAI CEO's new blog post responds to both an apparent attack on his home and an in-depth New Yorker profile raising questions about his trustworthiness.",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Your article about AI doesn’t need AI art",
+    "date": "2026-04-11",
+    "url": "hxxps://www[.]theverge[.]com/ai-artificial-intelligence/910460/new-yorker-david-szauder-illustration-generative-ai",
+    "source": "The Verge",
+    "summary": "The illustration for The New Yorker's profile of OpenAI CEO Sam Altman is a jump scare. Altman stands in a blue sweater with a blank expression. Around his head hovers a cluster of disembodied faces -",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "CorTec receives FDA ‘breakthrough’ designation for brain-computer interface in stroke rehabilitation - Robotics & Automation News",
+    "date": "2026-04-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi6wFBVV95cUxPT0J5MGVQQjNtTkstUVpyMG4zaDQteWlReS1UOTBHdGw1eUtfSXdrczE0R0JzOU1hTlNNWFM5ZXhkdmNKdkQ1MU5saDdCRWx0VVBORDBZYWdfOTh3TmVJa1ZNZmpIcTBuVnpOWFBKRXdtb1ZmS2dxb2VkeVJoSXdSTS1zeGFLMnQ0OWY5VnZfS0F5Qnd6eW5GVmZ3eUNIUEg0dktIQmJLNXdlQXd5VWttYmtEVXlqaFZ3cWlRS0ppUzFYS1FRN2l2TTlubG1BMjhORlJfdGNDSDlXOGVEazFhQmNlZ1N5NkdSVGsw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "CorTec receives FDA ‘breakthrough’ designation for brain-computer interface in stroke rehabilitation&nbsp;&nbsp;Robotics & Automation News",
     "category": "neurotechnology"
   },
   {
@@ -19,11 +37,11 @@
   },
   {
     "type": "external",
-    "title": "Colorado’s First Implanted Brain Computer Interface Surgery Marks a New Era in Neurological Research - CU Anschutz newsroom",
+    "title": "Colorado’s First Implanted Brain Computer Interface Surgery Marks a New Era in Neurological Research - University of Colorado Anschutz",
     "date": "2026-04-09",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMi1wFBVV95cUxQREY5M3lyWnhsWjViLS05QTY2aWxuLVZ4VU5UV2t0TkZmU090Q3hvNk1BUElZUlYxT2plZ0RmaFhlaGVJeXB3a3V3bE9uWTVDdnlBUlhDemtJUUtCOWQ0cDZNNTBXd2hBbXhHNW5WaU45c2Q4RmpScjZ3X2ZkaEJvelUwWnFBRV8xVGljS1FFUWZ5MzhMYVNMdUFfOVFTQ1RfVFJiWWdfbkhIYndnY29HOHFlMGJoWHVJTnRBLTR3cmdjODZYWkhjV0xmZUw1bGFSeG5vVlgxVdIB5wFBVV95cUxOZUxyR0dVWHZ5c01nT1pXOVdKdTdRRC11bG9ULXJPT3ZnbERkd2dBclN3dGFELUlQNEdMN1dFSFZuN0dTZ2hQenc4WVRpa0Z4Z0YybzFtekNndEZxWmNUeDZvSzJTMHhqTVdQSW1NT01nVmhTMkx6dFlsOXFxN0dpN1h1YjR4RFZ6U3d0YjZtZnhpQmdpY2paRWRnNmVIcm1PTkdwNl9uSmVjUEVxQ0FUUldkcXJJZzAxV3hsRTdIdkc4Qm56YTktdDRxX0ZKUVNyUDYyRFVqSTZBRU5zb0NmOVk5aDNEYjQ?oc=5",
     "source": "Google News — BCI",
-    "summary": "Colorado’s First Implanted Brain Computer Interface Surgery Marks a New Era in Neurological Research&nbsp;&nbsp;CU Anschutz newsroom",
+    "summary": "Colorado’s First Implanted Brain Computer Interface Surgery Marks a New Era in Neurological Research&nbsp;&nbsp;University of Colorado Anschutz",
     "category": "neurotechnology"
   },
   {
@@ -55,6 +73,15 @@
   },
   {
     "type": "external",
+    "title": "Epia Neuro launches with BCI device to help stroke patients rework brain signals - Fierce Biotech",
+    "date": "2026-04-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxORU5SLWxUTnNBUUctVERCWjBGQkt2RGxDVHpqakc5OVVvMXl0b1A0b00yZUVXZHoyTXhlVXYzZlZiS2F2enVWYUhEbU5WWjh6TjI2TlJuWWlpNC1FNTZBTU5QaE14UGZoWmdvVWliTjZzSnQ5djNxRHZHZkMtRm53OHlvUERPd3dOMENoQ1dtRGZkb3Z1Z0hLN3h3VFZXel93R0lWVVlUNnFzZXFSdUFBUUhXcUpkUnc?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Epia Neuro launches with BCI device to help stroke patients rework brain signals&nbsp;&nbsp;Fierce Biotech",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Neuralink Patient Using Brain Chip to Carry Out Important Life Task: Playing World of Warcraft - Futurism",
     "date": "2026-03-29",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxPNDNOTTNlc2h2Z1loaXJmZ2NObXJ1Y19XczlTeXRRV3h5U1VVcWxzZlgtQjktSWRCdFFWT2dVRW5OUm9lRV9DVGhIMzJDcHJYeVN1VlprMDgtbWRUdFJRZ1ZYMGhNb01lazF6WExSM3NDRmtsNmo2anlGY2VUSFBXSFByeU5udTAwVXQ0?oc=5",
@@ -69,15 +96,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE1TY3FxOGlOU1RnMXE3M0pJdGFBN1JIZ3RlWUJIdGpYYzdKM0NabTBDNGIyRVhIcXRnTnNqdkYySzNMbTVnZUNxZm9rLTBWWHNiTnJuNGtOYlRxS29QeGFv?oc=5",
     "source": "Google News — BCI",
     "summary": "Computational framework to predict and shape human–machine interactions in closed-loop, co-adaptive neural interfaces&nbsp;&nbsp;Nature",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China Approves the First Brain Chips for Sale—and Has a Plan to Dominate the Industry - WIRED",
-    "date": "2026-03-20",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxOSXFnTTg5WkdFbTF2czJObjlOV2NBOHpXaHhSaDdBU3lMN3lPQnNNdVJZbktaUlE2U0tlem1PcUpQYjBGb1RPekhkTkRVX3VZSS1WVWQtQmUyQlFoRnN2ZVJKSWEzMHlmSWlwMDZqN3FXdkJGc0lfenVuN05yNWFwa3V0SEllOGNWRmtNMjVIQmMyZFA5WW1sLXZUVHg?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China Approves the First Brain Chips for Sale—and Has a Plan to Dominate the Industry&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
@@ -127,15 +145,6 @@
   },
   {
     "type": "external",
-    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
-    "date": "2026-01-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Two Years of Telepathy - Neuralink",
     "date": "2026-01-28",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
@@ -154,6 +163,15 @@
   },
   {
     "type": "external",
+    "title": "Sam Altman’s New Brain Venture, Merge Labs, Will Spin Out of a Nonprofit - WIRED",
+    "date": "2025-12-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxPTVlNdnB6X0dpZ2I2Q1lOMnVHdk9hazhMUFk4YnFjakNkblVCaFF6MUpsa2ZSVDhYVk83QUJYSDVCbS1aLVFlRGJqdXQ0T3VZVS1jRHNZUnpNRXR6eXp6TkhQTXhBREZiRFZsWGhCRGNQLU5VT3Fua0I1aXdfUWdseVc2OGIybG9TN1EyUUNhamhTaEVBTmF2bEktdHAxandkRWN3YXRhY1o2RXlVdTdqYw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Sam Altman’s New Brain Venture, Merge Labs, Will Spin Out of a Nonprofit&nbsp;&nbsp;WIRED",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology - CSIS | Center for Strategic and International Studies",
     "date": "2025-11-04",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPanNMOEN0Yy16RElvSXJjMk4zR25qd2tGQXhDZDI2cmo0Yk5kSmZNQXJfSnhQb0tOdUJUY3BOQlc0akVlOGZ5aGpBekVWd0NNV1R6enN5Q0RVRnFKX2JhSWRuVVA2MUNkNHJOd0k4NjRLdjZtVUxkZlluWFVUNU0zN21VajFiOW9Udl9aTjhTQ1dkSEphZTAtWVR5MU5ZalQySDdJWTFB?oc=5",
@@ -169,15 +187,6 @@
     "source": "Google News — MIND Act",
     "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "The Past, Present And Future Of Brain-Computer Interfaces - Forbes",
-    "date": "2025-10-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxNeTFhWjAtaXRDbzdFeC1nSkZoclQwNjhUX2JZVWtTTzRBN25sNW5hNzVvSTIwWWlqRHZJMFdnby1NVVRPdWxreDJSWkVROUtUdlpTV2RpbUM1RUM3bG1hQU5VUkZ6NUg2cXRkT1prOFpYR3FWUDY5VUN1cEVHSDRSX1ZxeUlEamFEV3V5MjZpSU1PRzN6NWJIVXVlenN2RGNU?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "The Past, Present And Future Of Brain-Computer Interfaces&nbsp;&nbsp;Forbes",
-    "category": "neurotechnology"
   },
   {
     "type": "external",
