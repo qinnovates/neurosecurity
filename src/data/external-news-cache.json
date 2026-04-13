@@ -1,6 +1,42 @@
 [
   {
     "type": "external",
+    "title": "Did Neuralink make the wrong bet? - The Verge",
+    "date": "2026-04-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiZkFVX3lxTE9fM182NHF0alZ3aGZlZEhjZkVUejFrVXNRc05JS3pHeG8yWkNzemFnelg4M1NvSlR3dS16Z3hxeVItU1RBdHRZa19YdXBOLUMxOVFhRkFacUJGWUZlNkd6aE00bjVrdw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Did Neuralink make the wrong bet?&nbsp;&nbsp;The Verge",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink's BCI Bet Hits Reality Wall as Musk's Vision Stalls - The Tech Buzz",
+    "date": "2026-04-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimgFBVV95cUxOSXViemE5aWVIVzM4VGppd3ZFM1ZNeFE4bWRReXZ2N3JvMWs5UDZMVUNDc3FXZWFLdUZENWktOUJrMmdOSTJRcHliVUJ5LWc0czNzUWQxaFFUQVVTM0IxdUowZ0ZyakJzdVFJWkxVOHREbm9oM3diSlM3aXRIR2dXQ0JaSURMYm1EOHRFd1NWZU5JSDA0eE1RQmdB?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink's BCI Bet Hits Reality Wall as Musk's Vision Stalls&nbsp;&nbsp;The Tech Buzz",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "The Fast Lane Hypothesis: Von Economo Neurons Implement a Biological Speed-Accuracy Tradeoff",
+    "date": "2026-04-13",
+    "url": "hxxps://arxiv[.]org/abs/2604[.]09229",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2604.09229v1 Announce Type: cross Abstract: Von Economo neurons (VENs) are large bipolar projection neurons found exclusively in the anterior cingulate cortex (ACC) and frontal insula of species",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "PaceLLM: Brain-Inspired Large Language Models for Long-Context Understanding",
+    "date": "2026-04-13",
+    "url": "hxxps://arxiv[.]org/abs/2506[.]17310",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2506.17310v3 Announce Type: replace Abstract: While Large Language Models (LLMs) demonstrate strong performance across domains, their long-context capabilities are limited by transient neural ac",
+    "category": "research"
+  },
+  {
+    "type": "external",
     "title": "China issues national standards for BCI and emerging tech - news.cgtn.com",
     "date": "2026-04-11",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAFBVV95cUxPZ2hGNjV3dkhIYkRobzN0QWFOWktrWUlyMVhpWjFJWEZRRjZQY0d1eGxaTUxlWThmWWx3U24yQjQ4OFZ6RjhpSHl0WU4xMHdsd0tWZXM4S3NLOHhSUExWV0VXRXdZYWUtLUVDRE5YM0t0dWx0dWFYbVg3TVhXWU1wMXFYZ3JmX0FWRzdOSFhEQXp4bHRFemVhcUFFUlRWNldVRWh5dVVnY0w3STJVQXNORWhmOTA?oc=5",
@@ -19,38 +55,11 @@
   },
   {
     "type": "external",
-    "title": "Colorado’s First Implanted Brain Computer Interface Surgery Marks a New Era in Neurological Research - University of Colorado Anschutz",
-    "date": "2026-04-09",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi1wFBVV95cUxQREY5M3lyWnhsWjViLS05QTY2aWxuLVZ4VU5UV2t0TkZmU090Q3hvNk1BUElZUlYxT2plZ0RmaFhlaGVJeXB3a3V3bE9uWTVDdnlBUlhDemtJUUtCOWQ0cDZNNTBXd2hBbXhHNW5WaU45c2Q4RmpScjZ3X2ZkaEJvelUwWnFBRV8xVGljS1FFUWZ5MzhMYVNMdUFfOVFTQ1RfVFJiWWdfbkhIYndnY29HOHFlMGJoWHVJTnRBLTR3cmdjODZYWkhjV0xmZUw1bGFSeG5vVlgxVdIB5wFBVV95cUxOZUxyR0dVWHZ5c01nT1pXOVdKdTdRRC11bG9ULXJPT3ZnbERkd2dBclN3dGFELUlQNEdMN1dFSFZuN0dTZ2hQenc4WVRpa0Z4Z0YybzFtekNndEZxWmNUeDZvSzJTMHhqTVdQSW1NT01nVmhTMkx6dFlsOXFxN0dpN1h1YjR4RFZ6U3d0YjZtZnhpQmdpY2paRWRnNmVIcm1PTkdwNl9uSmVjUEVxQ0FUUldkcXJJZzAxV3hsRTdIdkc4Qm56YTktdDRxX0ZKUVNyUDYyRFVqSTZBRU5zb0NmOVk5aDNEYjQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Colorado’s First Implanted Brain Computer Interface Surgery Marks a New Era in Neurological Research&nbsp;&nbsp;University of Colorado Anschutz",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink tech paves path to psychopolitics study - Medical Xpress",
-    "date": "2026-04-09",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAFBVV95cUxNeVFDRl8tSDNMTWV0MHFCQURCUVNvRjI2MWllWWpNaERGMFY0YmJnTEFyMmZPSXVqaEMzU2N5N0E2OFlqWEc4eEh1eV9TSDhKNDdvNVUyT3h6OUc4THJLeWNndWhvMUtHU1BMdG5tTnlWdVNRdVVveExMczlEalRPb0l0TGxnNi1sR1Z4bQ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink tech paves path to psychopolitics study&nbsp;&nbsp;Medical Xpress",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Chip Can Project Video the Size of a Grain of Sand",
     "date": "2026-04-09",
     "url": "hxxps://spectrum[.]ieee[.]org/mems-photonics",
     "source": "IEEE Spectrum",
     "summary": "By many estimates, quantum computers will need millions of qubits to realize their potential applications in cybersecurity, drug development, and other industries. The problem is, anyone who has wante",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Alibaba leads China brain-machine interface startup StairMed's funding round - DealStreetAsia",
-    "date": "2026-04-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAFBVV95cUxOdzhVVW5Ud2NWc1c5Z3JCMGY1dGp2ZlRnTHpnUUJqcXZnSHVmSXMwa2JWNjBTMFg5V1R2MWQ1YzZoQll1WDI0M25XMEE2THNseW9wMFl1TjN5cm1qa013YWRWN1ZBZU53VTU2Q29VNTFfUVVDMDFYOHRjRlNiQjJNTkZmTjJCdmJZT0pjMg?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Alibaba leads China brain-machine interface startup StairMed's funding round&nbsp;&nbsp;DealStreetAsia",
     "category": "neurotechnology"
   },
   {
@@ -78,15 +87,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE1TY3FxOGlOU1RnMXE3M0pJdGFBN1JIZ3RlWUJIdGpYYzdKM0NabTBDNGIyRVhIcXRnTnNqdkYySzNMbTVnZUNxZm9rLTBWWHNiTnJuNGtOYlRxS29QeGFv?oc=5",
     "source": "Google News — BCI",
     "summary": "Computational framework to predict and shape human–machine interactions in closed-loop, co-adaptive neural interfaces&nbsp;&nbsp;Nature",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "First Neuralink patient explains living one year with brain chip | Elizabeth Vargas Reports - KXAN Austin",
-    "date": "2026-03-17",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi5gFBVV95cUxNQnY2dDUyZnktLU11TW9PUjFIZERMNVFTUDBOeDRUV1VXYmNfbFRyZkNfajdDSWlzVUs1Qlpaa29GRDFzUHZtR2VfSzNGeERGZDdaQjhoYVNielJfTjh5bUFoU1dkTE9NMUwwVk5OVlR5SHcyQW9hT1BsRFVHS2dlRFNHRnRtdy1IX1RLcnNiQklJeVFiNGY3dmpXVG03dWE0SFlFUnVqUXk5ajhXTEJ1UVhaOWNqSmpqLUhHaTNIVE1lN2l3LUw5Nk0yUGdHaGNDM0c1THRhREN6dkV3TlpmdWljOGxzdw?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "First Neuralink patient explains living one year with brain chip | Elizabeth Vargas Reports&nbsp;&nbsp;KXAN Austin",
     "category": "neurotechnology"
   },
   {
@@ -127,6 +127,15 @@
   },
   {
     "type": "external",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
+    "date": "2026-01-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Two Years of Telepathy - Neuralink",
     "date": "2026-01-28",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
@@ -145,15 +154,6 @@
   },
   {
     "type": "external",
-    "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
-    "date": "2026-01-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology - CSIS | Center for Strategic and International Studies",
     "date": "2025-11-04",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPanNMOEN0Yy16RElvSXJjMk4zR25qd2tGQXhDZDI2cmo0Yk5kSmZNQXJfSnhQb0tOdUJUY3BOQlc0akVlOGZ5aGpBekVWd0NNV1R6enN5Q0RVRnFKX2JhSWRuVVA2MUNkNHJOd0k4NjRLdjZtVUxkZlluWFVUNU0zN21VajFiOW9Udl9aTjhTQ1dkSEphZTAtWVR5MU5ZalQySDdJWTFB?oc=5",
@@ -169,6 +169,15 @@
     "source": "Google News — MIND Act",
     "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
     "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "The Past, Present And Future Of Brain-Computer Interfaces - Forbes",
+    "date": "2025-10-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxNeTFhWjAtaXRDbzdFeC1nSkZoclQwNjhUX2JZVWtTTzRBN25sNW5hNzVvSTIwWWlqRHZJMFdnby1NVVRPdWxreDJSWkVROUtUdlpTV2RpbUM1RUM3bG1hQU5VUkZ6NUg2cXRkT1prOFpYR3FWUDY5VUN1cEVHSDRSX1ZxeUlEamFEV3V5MjZpSU1PRzN6NWJIVXVlenN2RGNU?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "The Past, Present And Future Of Brain-Computer Interfaces&nbsp;&nbsp;Forbes",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
