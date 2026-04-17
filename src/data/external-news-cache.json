@@ -1,6 +1,42 @@
 [
   {
     "type": "external",
+    "title": "Gazing Into Sam Altman’s Orb Now Proves You’re Human on Tinder",
+    "date": "2026-04-17",
+    "url": "hxxps://www[.]wired[.]com/story/gazing-into-sam-altmans-orb-now-proves-youre-human-on-tinder/",
+    "source": "Wired",
+    "summary": "Honestly, what’s hotter than a real person?",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Forget Neuralink, this Silicon Valley startup is building a cap that can read your brain - India Today",
+    "date": "2026-04-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi6gFBVV95cUxPbHRlU054N0wwOFhuNlV5aXg4NVFlTk9LQ2NpSF9sWFdScUZSVkFfN0NuUVBKT19pYlJ3azZZZTN4ZDFvaG5qTDNoZWZRWEJtVzNKQmdoNmlaLWc1WkEtS1hndXctVFh5T19iWGFtYUhNcm8yeE13TFRTS3ZkTnViVG1fME0xbG8wS0xSdU5WYmdPTWJVc0NsTDkxVWlqVlRaamRZcjhyNFRDYnRQVlU4Umg0NHBudHN0cHZUM1lWSnVWeWlYVGk2Sm04ZWxPS0NUNzFRQmg5VjMzb3lfVWp0LWFkXzhxcXNFaVHSAe8BQVVfeXFMT3FiaUpRLXlBOXdNLUQtUi01elM3LWx2ZnJmekJjbmlIZ2lWXzAwTDVxaF9Fd0EwUlFlaklueXdsc2xIWDVXSDN5ZHBuUEppX0dIYkdTQ2N2bV8wcFJ1T0Q2WjhjRjY1ZzQ3OEZRNTFrNkxsOWFib2JrSUQ2c25meHlCLWZmNmhwemFzbnpmSGFRWENPN2JMTENKaE1teGFHbVNFckxPbkp3NzhYQjRNMTgwRGZDUlluX1ZWY2o0SWE3cHFXRHRDdnkteEZsSW9HSjdwSWFYeW5wQW1KUWZTNzBsalRCblplUWozVVFsT1U?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Forget Neuralink, this Silicon Valley startup is building a cap that can read your brain&nbsp;&nbsp;India Today",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Bridging scalp and intracranial EEG in BCI via pretrained neural representations and geometric constraint embedding",
+    "date": "2026-04-17",
+    "url": "hxxps://arxiv[.]org/abs/2604[.]14202",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2604.14202v1 Announce Type: new Abstract: Electroencephalography (EEG) has become one of the key modalities underpinning brain-computer interfaces (BCIs) due to its high temporal resolution, rap",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Robust Evaluation of Neural Encoding Models via ground-truth approximation",
+    "date": "2026-04-17",
+    "url": "hxxps://arxiv[.]org/abs/2604[.]14694",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2604.14694v1 Announce Type: new Abstract: Encoding models enable measurement of how our brains represent sensory inputs using electro-and magneto-encephalography (MEEG). Evaluating how closely e",
+    "category": "research"
+  },
+  {
+    "type": "external",
     "title": "This Beanie Is Designed to Read Your Thoughts - WIRED",
     "date": "2026-04-16",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMif0FVX3lxTE1rbzVMQzNKTEpzQk9OVF9LR3FPWFFKaHBQNHBoNTRUQkZHS2RyeG01UC1yeGVneUhabVVUc0xuYzY5WmlYc2lDZ3E1ekFabDh6WkZEc3JFbEVQUHJCYno2OGY5TmpKY1d0LV9QWDNrQnd3MFpubTJZVHNmWWFGams?oc=5",
@@ -10,11 +46,11 @@
   },
   {
     "type": "external",
-    "title": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation - Medical Xpress",
+    "title": "BrainCo’s brain-computer interface wows at HSBC summit with mind-controlled hand - South China Morning Post",
     "date": "2026-04-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxOMkhzblhTLUd4aEZmQ3R3dkR0bGlIYWpUNGpFaE5GSHZMam1TNEZvbHhqaE4taEx6eUV1TWgwRHdudllDLTJXSHJ5YnNJTW44UEljaFNCQnFRZkhaNk9oZjFCUllQc2toSGxhU0JtdXoxaUdjaHFPb0FlTmQ0aTl0djh3VHNtVWlrcTZmTlMzZw?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixgFBVV95cUxPamNhZEZVV2ZkeS1Sb3lCSDdUQXRQNTJTX3BRYS1YVGo4aTlXWEx2czE3eWIybTJGYWdleFVaR3N3bUxyQ2xENERfTzhBb3MzSm5xUFZ6ck94LU05Z1k2QlFHWFJwb29PQ2pMeTdVVGhrbU9GZ0pFUktfekdDUDRJdGg5TFJrQVl4eHNDSUo0M1d4MVFsTWo2V2pJU1Jta25GOGRCcG5KTHdrOHYydkdDaGJ0N09UNVBXal9BaW4zRUg2WjBoa2fSAcYBQVVfeXFMTjdpamdpRENTTGYtcXU4eUx4NG9pMzR4c2c1NXRTT0J6Ri1LRmVfQlBpX05CV1hDZ1hYeFV5U0FmWTlkNGNoR1hhLTMzZjNCNkV5UFBSZjBqejVlOE8zeUtDMksta2VLZUYxakZ2LVRyOWcwdUZhajJQb0c1Z3VQTWZPbzBsX0dyVndzV0FKNExRazNhUG11TlpBeGRXcXo1OWctOFU2czVGTUFXdXRqeHBWYy0yYXZHWmZxVklCQWFUNkZkLWpB?oc=5",
     "source": "Google News — BCI",
-    "summary": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation&nbsp;&nbsp;Medical Xpress",
+    "summary": "BrainCo’s brain-computer interface wows at HSBC summit with mind-controlled hand&nbsp;&nbsp;South China Morning Post",
     "category": "neurotechnology"
   },
   {
@@ -28,6 +64,24 @@
   },
   {
     "type": "external",
+    "title": "Neuralink Patients Describe Brain Implant as “Life-Changing” in New Video - TeslaNorth.com",
+    "date": "2026-04-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqgFBVV95cUxQZ0p0OGV1TmU5bGx4Y3I5Vi1wUmt0d1lxRTBZcFBsNC1zZjNqNDlUTmIzTzNKRTV4NkpUdlBmU2FYSEJibGVpOUhoTDdUdlZ4cklaVVhpaFU5ekU2LVExUmE3UElMMDk2MTdiX3hjN1VXRlZDYW1GVXhLTE1zRzVnMzB2TklpUHluZTFITWlmQmFFZXFTTUJDUU5FVjhQcmpVdHRRZWlSaWlkdw?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink Patients Describe Brain Implant as “Life-Changing” in New Video&nbsp;&nbsp;TeslaNorth.com",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "A Silicon Valley startup wants to sell you a brain-reading beanie - Boing Boing",
+    "date": "2026-04-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxQUVNHeU5NaVo5UFJaVnBKc1J3ZXBuaWNCOWxrMUt0MW1ZSEdCNlhhTkQ2eHYwWGljWENvZE9SVHhKVUlaWUJkQjMyWWRHY2JMOUIwRE5yTHJhQ2U0MEwzSEFrUWJ6ZlV2SkduY2VNVHRkUjNwcmhhbEtNNnY4T0lRZ2RPRDlLOFZTNWJjbXRHeHNpdmZMUHpMQUVYY0R1aGR4MkEweTQ1ONIBrAFBVV95cUxOVm1iMjhqRGVnQlRGSzBZYjRPWnRVY1RjQWNoM1pLTXBDY0c0WXJ1MGQxNjVjRFJJSGpDQWtXZVExbnB5T3hldGNRYVExc3lHd1kyNnpnVm02SHViaElINDVua28ybEtmaDlFZzl3RjRNNDNtNVJfNUZ6X3NzbW10VEw3R3dEYm1XTjFwNU9nMUcwWVpGM1NDOUlBX1d1ay1TSWNlR1VDb0U0eEZa?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "A Silicon Valley startup wants to sell you a brain-reading beanie&nbsp;&nbsp;Boing Boing",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Paralyzed Man Gets Brain-Computer Implant in Breakthrough Procedure That Helped Restore Feeling in His Fingers - People.com",
     "date": "2026-04-14",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMimwFBVV95cUxQbEltUll2WXc3Sm01SlhfSl95SDJuYzh6dklKaE8tbVBOSjNuUi04cGItVXZWazhNMmppUjNocFlub3ZaNXU3WFFab0VSZlpZekpLRkxycnVSVE9LVDN3WUNJS0l6N09PYzBPaGVZazd5UmlPM2RNcy1BMDZ0N2ZQQjR1UzZKeTFVMDNrSFJHdnBQYmQ2dWlWMnVrMA?oc=5",
@@ -37,11 +91,11 @@
   },
   {
     "type": "external",
-    "title": "Max Hodak’s Science Corp. is preparing to place its first sensor in a human brain - TechCrunch",
+    "title": "What It’s Like to Live With an Experimental Brain Implant - IEEE Spectrum",
     "date": "2026-04-14",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAFBVV95cUxQblhjRHFJZHJ3ZHFKeVBTUEVfOEU0QTlpdkVXTk9tSXpXRWttcDdraVVDRHVUbFdxR0pfNVhoUHdJYU9PNEQ0SG91aXNNamw0aEU1RFdRTmZINTFzU3dDaUNkb1ZLbkNaeGpSS1NWRVFSYk5yTHlfTmtmYUpFUk9PNFhPdk1JN2ZxWmZ0S3ZJZDFXb3pfRGlqWXBsSS1UemFPRE13am1CLVFJUHMzcXRnRmE1b3I?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiWEFVX3lxTE5EdkRVS3RlNGpZWHVGSTBQLVpmeV9aQnM5N3NaRFgwcDJwZVVLV3JYN0tFWG1xTGJXNlNSVWpNbV9SV2N3eDIyRDNuMlh2alpzcXB0eU41T3HSAWxBVV95cUxQaVVOby1KWDN5NVVWY3lRc0RXZ2pPU05uTkthN3NNSkIwYUZfTXVWNXg3VDlmbnd1TXVBMU16M1JUVkRvUWhKVkNCOW1CbFpuMjhDbmFVMWVaNGpCVTByOE9hUXNiLTU2YkNWbGs?oc=5",
     "source": "Google News — BCI",
-    "summary": "Max Hodak’s Science Corp. is preparing to place its first sensor in a human brain&nbsp;&nbsp;TechCrunch",
+    "summary": "What It’s Like to Live With an Experimental Brain Implant&nbsp;&nbsp;IEEE Spectrum",
     "category": "neurotechnology"
   },
   {
@@ -64,15 +118,6 @@
   },
   {
     "type": "external",
-    "title": "How Neuralink brain chip transformed life of ALS sufferer - NewsNation",
-    "date": "2026-04-10",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxPUnNNNzlfRWxqQ0NXeE5qMDFmNnNDWURHRmctSXFacFBRMzNFS0lDdW9xcGItUmxPMjJlX2dKMkVmOGlEQi1TRVJEZlpIVnV6TFlTbV9RcGxQbWJTaDl1dWF6RE9rbzJ1ZlBVdTg0cUtvWjdSTGl3Yi03WmZ0MG5CVXJnRnRHRUVXbnBqZU1ubFJfZkVu0gGaAUFVX3lxTE9OeDBpSDYwNjJDVkthdmZ1ZFAwSlR3VW5sajVObmFERGlXOG5MRERtTnlwdzhDMWM2a2N1S0F3bjJ2VVM4am1LOEN0bm1FTjlfTHE3NlZkZVF0YkRyS0E0blA2N0lnT0Z1MmlYUmNlQkRkQW5ya0N2SkNMa2wyTjhSY1VmakVrZ0dfdkRxV2dzbmthQUx6RWdQbkE?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "How Neuralink brain chip transformed life of ALS sufferer&nbsp;&nbsp;NewsNation",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Chip Can Project Video the Size of a Grain of Sand",
     "date": "2026-04-09",
     "url": "hxxps://spectrum[.]ieee[.]org/mems-photonics",
@@ -82,20 +127,20 @@
   },
   {
     "type": "external",
-    "title": "Epia Neuro launches with BCI device to help stroke patients rework brain signals - Fierce Biotech",
-    "date": "2026-04-02",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxORU5SLWxUTnNBUUctVERCWjBGQkt2RGxDVHpqakc5OVVvMXl0b1A0b00yZUVXZHoyTXhlVXYzZlZiS2F2enVWYUhEbU5WWjh6TjI2TlJuWWlpNC1FNTZBTU5QaE14UGZoWmdvVWliTjZzSnQ5djNxRHZHZkMtRm53OHlvUERPd3dOMENoQ1dtRGZkb3Z1Z0hLN3h3VFZXel93R0lWVVlUNnFzZXFSdUFBUUhXcUpkUnc?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Epia Neuro launches with BCI device to help stroke patients rework brain signals&nbsp;&nbsp;Fierce Biotech",
+    "title": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed' - Tom's Hardware",
+    "date": "2026-03-26",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiyAJBVV95cUxPSDhtM1h6d0ZqQWFMSFNpRG5DMHZSM3pVTDJMTk1VNjdialFzMUhPTlZuT21uUVlxb0FZNzM5cGh1TWNYQjFxeWpTR0FjSGRyVk8zejVDWVVVeDZ1NEpocjM1Sk0zeVNUcEVGX0RkYXdBUXY0dVF1NktpdWhBMVlOa0xqREMwemd2ZFZHTXFPS05NN3FSNmJ5cUp2OVFLS0FJZTVOV2ZnSFNWM0JBSTBDM1lFZWJFQWZoZnZmeUFIdHhuUXNXNUNsV3VZN3NSeWtMZmFwdnBoWlh6TVJwSlBPcWdBZVJyYXZhWEZ3VTZlZTFZd09sakZWQjhUanNYQlJQaXFzZl9oMlRuOVNQWVF3bVhpakxWVUp0RXpRT0J0Y0hDdWVobFJ6aXprTUtQbk1iSGZZbU8xblZBcE15b3VQRHlHR2k5NXdY?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed'&nbsp;&nbsp;Tom'",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Neuralink Patient Using Brain Chip to Carry Out Important Life Task: Playing World of Warcraft - Futurism",
-    "date": "2026-03-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxPNDNOTTNlc2h2Z1loaXJmZ2NObXJ1Y19XczlTeXRRV3h5U1VVcWxzZlgtQjktSWRCdFFWT2dVRW5OUm9lRV9DVGhIMzJDcHJYeVN1VlprMDgtbWRUdFJRZ1ZYMGhNb01lazF6WExSM3NDRmtsNmo2anlGY2VUSFBXSFByeU5udTAwVXQ0?oc=5",
+    "title": "Beijing-backed brain chip firm says it is 3 years behind Musk's Neuralink - Reuters",
+    "date": "2026-03-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi3AFBVV95cUxQbVhseDRjaEs3RTZ4cEJrNjBUc3R5UkZUZ05Odkg1UTdsWVpuX3hoQmhIcFo5Qi1Pb1VQdVdyWVUxSmJBUEJGbERZNEhYMHRXNVN1ZzB4clNTbWRLaWRoLWo5dVZaUlF3c2tvRkxPcGU2WEVINmpkNjg1XzdLY19JSHZRZHl6b1lpNE9kSElCMDdGUHdtOElIMkhPY2VIZVlOZGxOOVM2cEktTW0zeHZhSDBEbjVjamFyU2hCZ2JXT1c0LTU4MkNrTVMwd2h6dUEweWZXcEwxeTZnSjdC?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Neuralink Patient Using Brain Chip to Carry Out Important Life Task: Playing World of Warcraft&nbsp;&nbsp;Futurism",
+    "summary": "Beijing-backed brain chip firm says it is 3 years behind Musk's Neuralink&nbsp;&nbsp;Reuters",
     "category": "neurotechnology"
   },
   {
@@ -118,20 +163,20 @@
   },
   {
     "type": "external",
+    "title": "What's the age of your brain? Neurotechnology study by Colorado doctor has the answer. - CBS News",
+    "date": "2026-02-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxQRDVMbXFjMmZmdGJyZXI1QVVxUFhPMlU0QTduS3gwMm84S1FhOEFRc0RRa281SklXOVlmTVo3Sm5VVW4taUZWUXhhM3RNT0E5VFpRdWx1UG9Nc05MZTdrbzlHb2kxR1JVakFnaTduWVV2amU2QmVwU09OSG4ycUZsTFNBWllRSFQ0SFNCd2wxZw?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "What's the age of your brain? Neurotechnology study by Colorado doctor has the answer.&nbsp;&nbsp;CBS News",
+    "category": "neuroethics"
+  },
+  {
+    "type": "external",
     "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
     "date": "2026-01-29",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Two Years of Telepathy - Neuralink",
-    "date": "2026-01-28",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Two Years of Telepathy&nbsp;&nbsp;Neuralink",
     "category": "neurotechnology"
   },
   {
@@ -145,12 +190,21 @@
   },
   {
     "type": "external",
-    "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
-    "date": "2026-01-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
-    "category": "neurotechnology"
+    "title": "AI-powered military neurotech: Mind enhancement or control? - Institute for National Strategic Studies (INSS)",
+    "date": "2026-01-26",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi0wFBVV95cUxPRkVaRGVUZUV6ZlNZOWpHanZxdVZFTzRvaDBoWUJySkM5S3JmVXJ6TC1hRmtNeHFIb0JsTTZobmRjRjU0dlpIVjRJTDJsRXAtZnFuMUoxcndxTU1DM0pzV0xveHJ3WloycVBsVmx2VzJzY3J5TzNaNDJ1blh0ZDBuNERaM2hwMUM0S3JDa3F3dWV5MkZSWUtybHNFSmdwcDRaUnl5ZHVWeDJqaUJrTlROdzZ4cW56UEkwblpiY3dVUkVVYTJmNzJxaDY1MlFvT3JVOG04?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "AI-powered military neurotech: Mind enhancement or control?&nbsp;&nbsp;Institute for National Strategic Studies (INSS)",
+    "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "Big Tech Wants Direct Access to Our Brains - The New York Times",
+    "date": "2025-11-18",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikAFBVV95cUxPdGp4VktMc3lUOWFRazdBSHpibWM5bDA4V2ZrMkpYanZGbHhldFlWaEhxcUxRNjl2TU94WURNbXR4aF96M3JoVGVic3ljd0lxMFBVYkh6emNNVHU4LWs4QnU2V252VEhXTlhtaFduckdjazJyQXVTNENFSkIySG1ndXJfNWREZFpRUmNDS0dHbVM?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Big Tech Wants Direct Access to Our Brains&nbsp;&nbsp;The New York Times",
+    "category": "neuroethics"
   },
   {
     "type": "external",
@@ -163,38 +217,11 @@
   },
   {
     "type": "external",
-    "title": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data - Davis Wright Tremaine",
-    "date": "2025-10-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPR0g3MFdtRG5ZekMyUFlxbXEzVkJ3SVJ5c2hqTTlIRHVyb0lNc2NzRTdSN3VYT2NNSl9VQ043b3l1ei1aZEpkajNiU1FRY2tYb3hBWE9IOUVmRVoxZTh2bzM0MGRTa00yeDFVT2d5c21aa1VJRFJzNExhRVlvTl9TejNKaFB5eHEwTUd2eHFQcHlKTWhtWHJseWxFNmU0aWJvZGZzSVh3?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
     "title": "The Past, Present And Future Of Brain-Computer Interfaces - Forbes",
     "date": "2025-10-05",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxNeTFhWjAtaXRDbzdFeC1nSkZoclQwNjhUX2JZVWtTTzRBN25sNW5hNzVvSTIwWWlqRHZJMFdnby1NVVRPdWxreDJSWkVROUtUdlpTV2RpbUM1RUM3bG1hQU5VUkZ6NUg2cXRkT1prOFpYR3FWUDY5VUN1cEVHSDRSX1ZxeUlEamFEV3V5MjZpSU1PRzN6NWJIVXVlenN2RGNU?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "The Past, Present And Future Of Brain-Computer Interfaces&nbsp;&nbsp;Forbes",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Senators ask FTC to study neurotechnology's promises, implications - IAPP",
-    "date": "2025-10-03",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxNS3FBelpMZGNUWExYbEtEQzZtLXNYRGJnRjhsNjFTYTRrMHpMYW9iU2ZlM3JqM3BBendfblNmNHVNUURrNG4xNzlRNU1xLWN5ZmIzNVJSR1JBRTFBclU5NHFQMTUxLVQ2OEY4bVJJS3VRRFVFcm95NEZpbTRtY1lhWDdBdmJydTI2MHBLNVJvVkxUS0E?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Senators ask FTC to study neurotechnology's promises, implications&nbsp;&nbsp;IAPP",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "The MIND Act: Balancing Innovation and Privacy in Neurotechnology - JD Supra",
-    "date": "2025-09-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihwFBVV95cUxQYkt5Qk5UWFcxakVtUE0tRVVSWUZyZ0RSQ2JYaHRDWVBILW85LXVjU3lBMVNhNDBFdm41aWpaTUZBbnlsMmRmaWlIVk1CNERFLU84ZXNmWC1MOHZmSnFWbWY3dnRHS1hXSzhsSlpQdVFCVk4tN092S0hncXRGNHBTblpyY2kyY2c?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "The MIND Act: Balancing Innovation and Privacy in Neurotechnology&nbsp;&nbsp;JD Supra",
-    "category": "neuroethics"
   }
 ]
