@@ -1,5 +1,511 @@
 [
   {
+    "id": "1b18ee20",
+    "title": "Intermittent theta burst stimulation for attention deficit hyperactivity disorder",
+    "date": "2026-04-19",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26000756?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: May–June 2026Source: Brain Stimulation, Volume 19, Issue 3Author(s): Brian C. Kavanaugh, Megan M. Vigne, Christopher Legere, Gian DePamphilis, Eric Tirrell, W. Luke Acuff, Joshua Bro",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "83906b9a",
+    "title": "Effects of propofol on high-density EEG in disorders of consciousness: An exploratory study of patient-specific neurophysiological modulation",
+    "date": "2026-04-19",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926002302?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: June 2026Source: NeuroImage, Volume 333Author(s): Rosalie Girard Pepin, Rose Jutras, Loudrick Lahaie, Hanieh Bazregarzadeh, Antonio Martin, Charlotte Maschke, Mohamed Badawy, Justin ",
+    "tags": [
+      "research",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "3ab80187",
+    "title": "Distinct neurodynamics underlie empathy for infant pain: An EEG study of temporal and oscillatory mechanisms",
+    "date": "2026-04-19",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926002430?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: June 2026Source: NeuroImage, Volume 333Author(s): Chunyan Liu, Yi Jiang",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "a661c4bc",
+    "title": "EEG-based stroke severity classification using higher-order topological features and graph convolutional networks",
+    "date": "2026-04-19",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1791960",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "IntroductionElectroencephalography (EEG)-based stroke analysis has mainly relied on conventional signal and network descriptors, while higher-order brain network structures remain insufficiently chara",
+    "tags": [
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "9e868443",
+    "title": "Brain-computer interfaces: an engineering black-box swindle or a lone advance guided by deep learning",
+    "date": "2026-04-19",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1783020",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "c1d5d3c5",
+    "title": "Effect of low-intensity focused ultrasound on hippocampus of alcohol addicted mice: a preliminary study",
+    "date": "2026-04-19",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1789927",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "Alcohol addiction is a chronic relapsing brain disorder characterized by significant neurobiological changes, particularly within the hippocampus, which mediates emotional regulation and reward-seekin",
+    "tags": [
+      "regulatory",
+      "research",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "b0007832",
+    "title": "Exploring individual biases in BCI research and users: Does gender matter?",
+    "date": "2026-04-19",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2025[.]1695370",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "ObjectiveBrain-Computer Interface (BCI) is an interdisciplinary research field characterized by rapid technological advances and collaborative efforts to develop user-friendly, adaptive devices that e",
+    "tags": [
+      "product",
+      "policy",
+      "partnership"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "f1a5ec9e",
+    "title": "Impaired event-related theta spectral coherence in emotional facial expression processing in neurodegenerative disorders",
+    "date": "2026-04-19",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1708832",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "IntroductionThe ability to recognize emotional facial expressions relies on brain functional networks, particularly in the right hemisphere, and is impaired in neurodegenerative conditions such as Alz",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "418b908a",
+    "title": "Three gene therapy pioneers just won the Breakthrough Prize. This is their story",
+    "date": "2026-04-18",
+    "url": "hxxps://endpoints[.]news/three-gene-therapy-pioneers-just-won-the-breakthrough-prize-this-is-their-story/",
+    "source": "Endpoints News",
+    "source_category": "product",
+    "summary": "A trio of scientists behind the first gene therapy approved in the United States have been awarded a Breakthrough Prize in Life Sciences. It’s arguably one of the most prominent recognitions yet for t",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "6ee8a29a",
+    "title": "3D-Printed &#8220;Honeycomb&#8221; Sensors Match Your Unique Neural Map",
+    "date": "2026-04-18",
+    "url": "hxxps://neurosciencenews[.]com/personalized-3d-printed-brain-electrodes-30550/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Researchers have developed 3D-printed, honeycomb-structured hydrogel electrodes that perfectly match the unique folds of a patient's brain for safer, high-quality neural monitoring.",
+    "tags": [
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "95a7fc52",
+    "title": "Marathon battery life makes Keychron’s Ultra 8K keyboards its best yet",
+    "date": "2026-04-17",
+    "url": "hxxps://www[.]theverge[.]com/tech/914085/keychron-q1-v5-ultra-8k-zmk-mechanical-keyboards-review",
+    "source": "The Verge",
+    "source_category": "news",
+    "summary": "Keychron's expansive keyboard catalog covers everything from basic full-size mechanical boards to niche layouts like southpaw Alice or a one-handed half-keyboard for gaming. Its Q and V series are amo",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "83edaee1",
+    "title": "Dublin tech company Vox Talk raises €1.35m in pre-seed round",
+    "date": "2026-04-17",
+    "url": "hxxps://www[.]siliconrepublic[.]com/start-ups/dublin-tech-company-vox-talk-pre-seed-round-growth-teams",
+    "source": "Silicon Republic",
+    "source_category": "news",
+    "summary": "The investment will be put towards the acceleration of commercial adoption across Europe and the US, as well as to advance product development and grow Vox Talk’s team. Read more: Dublin tech company ",
+    "tags": [
+      "funding",
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "8605953b",
+    "title": "Philips secures FDA clearance for AI-enabled CT system",
+    "date": "2026-04-17",
+    "url": "hxxps://www[.]medtechdive[.]com/news/philips-secures-fda-clearance-for-ai-enabled-ct-system/817786/",
+    "source": "MedTech Dive",
+    "source_category": "product",
+    "summary": "The company aims to increase its share of the premium CT device market through 2028.",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "3e32b303",
+    "title": "Philips secures FDA clearance for Verida spectral CT system",
+    "date": "2026-04-17",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/philips-fda-clearance-spectral-ct-verida/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "Philips has received 510(k) clearance from the US Food and Drug Administration (FDA) for its Verida spectral CT system. The post Philips secures FDA clearance for Verida spectral CT system appeared fi",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "be6a55f2",
+    "title": "AI Restores Voices Through Microscopic Neck Movements",
+    "date": "2026-04-17",
+    "url": "hxxps://neurosciencenews[.]com/ai-voice-restoration-neck-movement-30547/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Researchers have developed a wearable AI sensor that reconstructs speech by reading microscopic neck movements, allowing patients without vocal cords to \"speak\" again.",
+    "tags": [
+      "product",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "8c133037",
+    "title": "Loop raises $95M to build supply chain AI that predicts disruptions",
+    "date": "2026-04-17",
+    "url": "hxxps://techcrunch[.]com/2026/04/17/loop-raises-95m-to-build-supply-chain-ai-that-predicts-disruptions/",
+    "source": "TechCrunch Startups",
+    "source_category": "funding",
+    "summary": "The San Francisco startup closed a Series C funding round led by Antonio Gracias' firm Valor, which is a major backer of xAI.",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "6f87cfed",
+    "title": "Exclusive: Repeat Founders Raise $20M For Spektr, A Fintech Compliance Startup, In NEA-Led Series A",
+    "date": "2026-04-16",
+    "url": "hxxps://news[.]crunchbase[.]com/venture/fintech-compliance-founders-20m-seriesa-spektr/",
+    "source": "Crunchbase News",
+    "source_category": "funding",
+    "summary": "Copenhagen-based Spektr, which uses AI to tackle the manual drudgery of financial compliance, raised $20 million in a Series A funding round, the company tells Crunchbase News exclusively.",
+    "tags": [
+      "funding",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "4c94750a",
+    "title": "Designing Implants that Don&#8217;t Scar the Brain",
+    "date": "2026-04-16",
+    "url": "hxxps://neurosciencenews[.]com/flexible-brain-implants-polyimide-biocompatibility-30538/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Can brain implants restore sight? Researchers have mapped how the brain reacts to neural probes, finding that flexible polyimide is the key to long-term biocompatibility.",
+    "tags": [
+      "product",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "97f03481",
+    "title": "Physiologically inspired modeling of cortical dynamics through spiking neural networks",
+    "date": "2026-04-16",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae5b27",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. The characterization of neural activity underlying neurophysiological function presents a major challenge in computational neuroscience. Several methods have been proposed to investigate co",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "45dcc33a",
+    "title": "Philips receives FDA 510(k) clearance for Verida, the world’s first AI-powered detector-based spectral CT*, advancing diagnostic precision across clinical applications",
+    "date": "2026-04-16",
+    "url": "hxxps://www[.]globenewswire[.]com/news-release/2026/04/16/3275385/0/en/Philips-receives-FDA-510-k-clearance-for-Verida-the-world-s-first-AI-powered-detector-based-spectral-CT-advancing-diagnostic-precision-across-clinical-applications[.]html",
+    "source": "GlobeNewswire MedEquip",
+    "source_category": "funding",
+    "summary": "April 16, 2026",
+    "tags": [
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "d15bd07f",
+    "title": "Sonire Therapeutics raises $18m for tumour ablation platform advancement",
+    "date": "2026-04-15",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/sonire-therapeutics-raises-18m-for-tumour-ablation-platform-advancement/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "Sonire said the Series A funds will allow it to complete the randomised control trial of its high-intensity focused ultrasound system in Japan. The post Sonire Therapeutics raises $18m for tumour abla",
+    "tags": [
+      "funding",
+      "research",
+      "partnership"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "cead02e5",
+    "title": "Astronaut Clock: Blood Test Tracks Biological Rhythms in Minutes",
+    "date": "2026-04-15",
+    "url": "hxxps://neurosciencenews[.]com/smartphone-melatonin-test-circadian-rhythm-30531/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Researchers have created a 15-minute blood test using europium nanoparticles and a smartphone to track melatonin levels, helping astronauts and shift workers manage their biological clocks.",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "75d254d9",
+    "title": "Printable Artificial Neurons That &#8220;Talk&#8221; to Living Brain Cells",
+    "date": "2026-04-15",
+    "url": "hxxps://neurosciencenews[.]com/printed-artificial-neurons-brain-communication-30529/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Researchers printed artificial neurons that successfully \"talk\" to living brain cells. These flexible devices could lead to energy-efficient AI and advanced brain-machine implants.",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "137c68c4",
+    "title": "An EEG-based framework for exploring adaptive rhythmic human–machine interaction",
+    "date": "2026-04-15",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae573d",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Understanding rhythmic human–human interaction and its underlying mechanisms can enhance experiential value and enjoyment by providing a tailored experience and supporting applications in m",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "d213617c",
+    "title": "Multi-dimensional characterization and tracking of motor unit action potentials",
+    "date": "2026-04-15",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae5b26",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Decomposition of high-density surface electromyography (HDsEMG) signals allows identification of individual motor unit firing times and provides a spatiotemporal image of their action poten",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "9dd6c609",
+    "title": "Two’s company: Astrocytes and microglia team up to refine developing circuits",
+    "date": "2026-04-15",
+    "url": "hxxps://www[.]cell[.]com/neuron/fulltext/S0896-6273(26)00215-1?rss=yes",
+    "source": "Neuron",
+    "source_category": "research",
+    "summary": "In this issue of Neuron, Ramirez et al. identify a mechanism through which astrocytes and microglia interact to refine developing thalamocortical circuits. The C-terminal fragment of astrocyte-derived",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "06deed46",
+    "title": "What It’s Like to Live With an Experimental Brain Implant",
+    "date": "2026-04-14",
+    "url": "hxxps://spectrum[.]ieee[.]org/bci-user-experience",
+    "source": "IEEE Spectrum",
+    "source_category": "research",
+    "summary": "Scott Imbrie vividly remembers the first time he used a robotic arm to shake someone’s hand and felt the robotic limb as if it were his own. “I still get goosebumps when I think about that initial con",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "5eeccc0c",
+    "title": "Minibrains Reveal Personalized Paths for Rett Syndrome",
+    "date": "2026-04-14",
+    "url": "hxxps://neurosciencenews[.]com/rett-syndrome-organoid-30526/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Neuroscientists used 3D \"minibrains\" to discover that different Rett syndrome mutations cause distinct brain abnormalities. The study reveals that personalized treatments, tailored to specific genetic",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "16a1d1f7",
+    "title": "Blood Test Predicts Alzheimer’s Years Before Scans",
+    "date": "2026-04-14",
+    "url": "hxxps://neurosciencenews[.]com/ptau217-blood-test-alzheimers-30521/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A blood test for pTau217 can predict Alzheimer's pathology and cognitive decline years before brain scans show abnormalities.",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "a434979c",
+    "title": "A novel neurophysiological approach to evaluate the impact of virtual training on skills acquisition",
+    "date": "2026-04-14",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae5a06",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Objective evaluation of operational training remains challenging, particularly when comparing physical training with virtual reality (VR) training. Behavioral and subjective measures captur",
+    "tags": [
+      "funding",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "7a6e5329",
+    "title": "Max Hodak’s Science Corp. is preparing to place its first sensor in a human brain - TechCrunch",
+    "date": "2026-04-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAFBVV95cUxQblhjRHFJZHJ3ZHFKeVBTUEVfOEU0QTlpdkVXTk9tSXpXRWttcDdraVVDRHVUbFdxR0pfNVhoUHdJYU9PNEQ0SG91aXNNamw0aEU1RFdRTmZINTFzU3dDaUNkb1ZLbkNaeGpSS1NWRVFSYk5yTHlfTmtmYUpFUk9PNFhPdk1JN2ZxWmZ0S3ZJZDFXb3pfRGlqWXBsSS1UemFPRE13am1CLVFJUHMzcXRnRmE1b3I?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "Max Hodak’s Science Corp. is preparing to place its first sensor in a human brain&nbsp;&nbsp;TechCrunch",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "8467bac7",
+    "title": "Science Corp to attempt first human brain sensor placement - MSN",
+    "date": "2026-04-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi4gFBVV95cUxNNnh4enZSc19sWjloWlRUQ01EUUNOUjAxVnRhenBra0RlY3lTaFJCZUg0TEFrZkQycGt4ZVg3dTFJcWxaR0x4NXQzTW8xUGJiNDkxa2VNYnkwbkdFaTZNaWRqYUNmZ0VWM1EzaHg4UUtXbXZVYm5qdTYzSGotUkFUSmVTdUxlTTZaN0huMGh5dXlmZzdvMFlPSzZTWHd0YWViT3NqU3NESjlBcWI5dkl2dllvWUdTeWFXZ2VjREg5T3pFN1BGVW1ZZHdacGFtS2F6ZUFMZEFVWFdub19BQWhCRDZB?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "Science Corp to attempt first human brain sensor placement&nbsp;&nbsp;MSN",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "5cd48c44",
+    "title": "Science Corp is preparing to place its first brain sensor in a human, betting biology will beat electrodes - The Next Web",
+    "date": "2026-04-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxQVXF5bWpaejJ4b2tKMUFPcGh1d2xQODg3RGRvU0xXdjR5X01ITEJBMGU3Z2VXRWJJajVQeHBxTXNJc2dlRHl1blB2M2JCTGNYaWl2aC1ZdGZsOXpFMDgzTmwxU0pDbnhuSVFvRDNwQ3llWnlPdXlpdUVibXdnVnF3bjRVa3NTc256ZVBKa0tLMA?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "Science Corp is preparing to place its first brain sensor in a human, betting biology will beat electrodes&nbsp;&nbsp;The Next Web",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "3b0c1dd7",
+    "title": "Randomness Solves Robotic Gridlock",
+    "date": "2026-04-13",
+    "url": "hxxps://neurosciencenews[.]com/swarm-robotics-randomness-efficiency-30517/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Adding a \"wiggle\" of randomness to robotic movement prevents gridlock in swarms. This \"noise\" allows robots to self-organize and optimize task efficiency in crowded spaces.",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "93f974b4",
+    "title": "Did Neuralink make the wrong bet? - The Verge",
+    "date": "2026-04-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiZkFVX3lxTE9fM182NHF0alZ3aGZlZEhjZkVUejFrVXNRc05JS3pHeG8yWkNzemFnelg4M1NvSlR3dS16Z3hxeVItU1RBdHRZa19YdXBOLUMxOVFhRkFacUJGWUZlNkd6aE00bjVrdw?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "Did Neuralink make the wrong bet?&nbsp;&nbsp;The Verge",
+    "tags": [
+      "general"
+    ],
+    "companies": [
+      "Neuralink"
+    ],
+    "fetched": "2026-04-19"
+  },
+  {
     "id": "ac314e3a",
     "title": "Auricular unified regulation of regions and afferents (AURORA): a multi-afferent auricular neuromodulation framework for depression",
     "date": "2026-04-12",
@@ -1097,6 +1603,20 @@
     "fetched": "2026-03-29"
   },
   {
+    "id": "29717078",
+    "title": "Law, neuroscience, and authenticity by design: protecting users’ minds in the digital sphere - Frontiers",
+    "date": "2026-03-25",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikgFBVV95cUxQZUFUOVBDMW1iS2JjRlQ0cV9zaktfTkhTWlNUTHVYbWVGVGlGYlhfY3VtUGRUbXpLbjNORWloaWVYRGxjeVVWcnBJWFFzNUFGd3JrWi1HWHFZaFVhcV9xS2N0aEttUlFoX09JeEg4QmQtcWVpbWhQdDZYR1cwUTl3OE51RDF1NVBvT3ZkYlROR2JEZw?oc=5",
+    "source": "GN: Neurotech Regulation",
+    "source_category": "regulatory",
+    "summary": "Law, neuroscience, and authenticity by design: protecting users’ minds in the digital sphere&nbsp;&nbsp;Frontiers",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
     "id": "717e80da",
     "title": "China Beat Elon Musk’s Neuralink to Approve the World’s First Commercial Brain Implant - ZME Science",
     "date": "2026-03-23",
@@ -1782,6 +2302,23 @@
     ],
     "companies": [],
     "fetched": "2026-03-15"
+  },
+  {
+    "id": "b913e729",
+    "title": "China challenges Neuralink with world’s first commercial approval for brain implant - Interesting Engineering",
+    "date": "2026-03-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxQcUlDLWlfanIteE9pQ2IxWnY2V0hSTGQ0UTEwZGJleS1VLVBpUTFIdF9oMjZzdktQejlsS3pKVkFvSjJTa1ZZR1NxOEVHdGh1M1JvVmtXNHAwNm9ieWlfbWR3b3VNMmhLTnlFMy1MQkhRSTVqR3ZVNEhHc2dIMGNsVUlZaHF1ZjhqY3BTOV9qTWNURVcx?oc=5",
+    "source": "GN: BCI FDA",
+    "source_category": "regulatory",
+    "summary": "China challenges Neuralink with world’s first commercial approval for brain implant&nbsp;&nbsp;Interesting Engineering",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [
+      "Neuralink"
+    ],
+    "fetched": "2026-04-19"
   },
   {
     "id": "3d685a05",
@@ -3051,6 +3588,21 @@
     "fetched": "2026-03-11"
   },
   {
+    "id": "d73af7cf",
+    "title": "Intelligent System for Upper Limb Motor Assessment Using Inertial Sensors and Machine Learning for Telerehabilitation Therapies",
+    "date": "2026-03-02",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11418721",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Neurological injuries can lead to a significant disability, particularly in upper limb motor function, impairing patients’ ability to perform Activities of Daily Living (ADLs). Telerehabilitation has ",
+    "tags": [
+      "policy",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
     "id": "613ba0d2",
     "title": "New Tech Tracks Living Brain Activity Noninvasively",
     "date": "2026-03-01",
@@ -3080,6 +3632,20 @@
     "fetched": "2026-03-11"
   },
   {
+    "id": "89244d65",
+    "title": "Hearing Voices in Your Head and Voice to Skull Technology (V2K): Scientific Evidence, Patents, and Technical Reality - nerdbot",
+    "date": "2026-03-01",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi2wFBVV95cUxObkl5VjFqb3ZTZDhRSDRiS00tRUNyMUFpdkxudFBGUUxTeDZhSE8tTXB6dXp2RzBsa3FfLWEyNEFOTDJCMjRyNjRfUVFkS3lld3JJUmlodmhuZWN5YmxjUUQ1VXBQZHo1WUozUFBhMjhQNXMtRWhoSVhPOXpxXy1UTlZKdVJ2RHRzdW5hY1hWWFNhUHpRT2l5dzBxRGRWbmhmV0lZS2VSRm5LOE80REpFSFlfOHRaNTBhZ0RXTkY4WnM4N0NrajNVYmNkM3MxYkw3R2M5RmJpUmNxSGc?oc=5",
+    "source": "GN: Neurotech Patents",
+    "source_category": "product",
+    "summary": "Hearing Voices in Your Head and Voice to Skull Technology (V2K): Scientific Evidence, Patents, and Technical Reality&nbsp;&nbsp;nerdbot",
+    "tags": [
+      "patent"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
     "id": "4da63f35",
     "title": "Profile of David Baker, Demis Hassabis, and John Jumper: 2024 Nobel laureates in chemistry",
     "date": "2026-02-27",
@@ -3106,6 +3672,34 @@
     ],
     "companies": [],
     "fetched": "2026-03-22"
+  },
+  {
+    "id": "1b5d256c",
+    "title": "Simulating Muscle-Level Energetic Cost When Humans Walk With a Passive Biarticular Thigh Exosuit",
+    "date": "2026-02-27",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11417279",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Passive exosuits offer potential for reducing the metabolic cost of walking, but evaluating their effectiveness is challenging due to difficulties in measuring internal biomechanics and muscle-level e",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
+    "id": "b21eefca",
+    "title": "Immediate Aftereffect of tACS on Directed Functional Brain Networks in Subacute Stroke Patients",
+    "date": "2026-02-27",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11417283",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Transcranial alternating current stimulation (tACS) can modulate endogenous oscillations in the brain by inducing neural plasticity and is considered beneficial for the restoration of brain function. ",
+    "tags": [
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
   },
   {
     "id": "8f1fd8e9",
@@ -5454,6 +6048,20 @@
     "fetched": "2026-03-11"
   },
   {
+    "id": "463fd706",
+    "title": "Wave of State Legislation Targets Mental Privacy and Neural Data - JD Supra",
+    "date": "2025-05-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiggFBVV95cUxPM1Bod2JpM0M0TUVfVVA4NjlYLTJ5dkloZml5a2otc21WMHRpN0x3YkdfYUt3d1R4dWhxQ0ZPcExEZHU5WHZTdXdtcDJtX1JOS3V3eWhwZDNQb3V4YkFtcXpYM1lKQ2RZaUM0SC04alg3dGZDU2Y4MUt1d2cxY3FhY3RR?oc=5",
+    "source": "GN: Neurorights",
+    "source_category": "policy",
+    "summary": "Wave of State Legislation Targets Mental Privacy and Neural Data&nbsp;&nbsp;JD Supra",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
     "id": "d1054fb9",
     "title": "The neurotechnology patent landscape in a time of neuroethics - Nature",
     "date": "2025-05-08",
@@ -5789,6 +6397,20 @@
     "fetched": "2026-02-21"
   },
   {
+    "id": "70453789",
+    "title": "Navigating Section 524B - Wind River Software",
+    "date": "2024-03-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMia0FVX3lxTE9MZGE4RWlmU2VBWEcwaXdpSWpMbVdTbkpiNU9WVWZ0SXotRkVjazdoTGkxdGhVOFhESTVmcEliQS1vTER1Q25HbjJDM0k1WE5VS3JfMUtLTm9OVllzVEhMYklmZjR1dVNWUl9V?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "Navigating Section 524B&nbsp;&nbsp;Wind River Software",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
+  },
+  {
     "id": "dd3a882a",
     "title": "Rice Biotech Launch Pad startup Motif Neurotech closes Series A financing of $18.75 million - Rice University",
     "date": "2024-01-24",
@@ -5862,6 +6484,22 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "28bb1d08",
+    "title": "Recent Progress in Wearable Brain–Computer Interface (BCI) Devices Based on Electroencephalogram (EEG) for Medical Applications: A Review - Science Partner Journals",
+    "date": "2023-10-24",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiWEFVX3lxTE9WNU84aDk0SGEwQzNocWJSSDUzX19VYm8waV82elNzWUpNdE54NzlFOTVJbG9QTlBoRGhacV9NMUE5ZjBoUW9DOVdiSHJoRTVJMExYX3dWSVk?oc=5",
+    "source": "GN: Consumer EEG",
+    "source_category": "product",
+    "summary": "Recent Progress in Wearable Brain–Computer Interface (BCI) Devices Based on Electroencephalogram (EEG) for Medical Applications: A Review&nbsp;&nbsp;Science Partner Journals",
+    "tags": [
+      "product",
+      "research",
+      "partnership"
+    ],
+    "companies": [],
+    "fetched": "2026-04-19"
   },
   {
     "id": "349c10d1",
