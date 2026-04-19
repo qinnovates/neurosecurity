@@ -1,42 +1,6 @@
 [
   {
     "type": "external",
-    "title": "What It’s Like to Live With an Experimental Brain Implant - IEEE Spectrum",
-    "date": "2026-04-18",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiWEFVX3lxTE5EdkRVS3RlNGpZWHVGSTBQLVpmeV9aQnM5N3NaRFgwcDJwZVVLV3JYN0tFWG1xTGJXNlNSVWpNbV9SV2N3eDIyRDNuMlh2alpzcXB0eU41T3HSAWxBVV95cUxQaVVOby1KWDN5NVVWY3lRc0RXZ2pPU05uTkthN3NNSkIwYUZfTXVWNXg3VDlmbnd1TXVBMU16M1JUVkRvUWhKVkNCOW1CbFpuMjhDbmFVMWVaNGpCVTByOE9hUXNiLTU2YkNWbGs?oc=5",
-    "source": "Google News — BCI",
-    "summary": "What It’s Like to Live With an Experimental Brain Implant&nbsp;&nbsp;IEEE Spectrum",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain-Computer Interface Market to Reach USD 9.27 Billion - openPR.com",
-    "date": "2026-04-18",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimAFBVV95cUxNaWlyeVZmZXFnNklsNlFsaEQ2b1J1SnBPdmZ3Qk50eWhmUWRJbzVXcWxIMDM5RkxERjN1T2RSUzNLSElYUXJUZ2t4UGxUSXM4WjEyTzN3X3dYbHRBSndFeUVTaEtiLVQ1NlJTUVR5b0NvTHFUUTkwTllEd0FCWC0zdFFBQmdlWnFrckVUNUxpRGRpeDdmWk5SRA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-Computer Interface Market to Reach USD 9.27 Billion&nbsp;&nbsp;openPR.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain computer interface enables rapid communication for two people with paralysis - Technology Org",
-    "date": "2026-04-18",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivgFBVV95cUxOOWZiaXNtcDlNS2hnZ3BTSkZsNWNYYjFRTklnWjlvWWtaTHItVVRUbXBGX1JXZWE5UW9fMjhBaWdkclBzbnlKSXVjZUhmZWM3UXgyeVRIQ2cyVHZVWHM0S2E0UnVxeWtlNU1tcE9fUkZRQVVCWFdqdXYybE1nV2dfdWJrQWctUGpTZW9PWHJGbWlqRzZJX1N4bGFPOHNrUmNhY3dPeDdEQ0FLUU4wWDRxNE1nX3laRHdlVk83OE53?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain computer interface enables rapid communication for two people with paralysis&nbsp;&nbsp;Technology Org",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Sam Altman&#8217;s project World looks to scale its human verification empire. First stop: Tinder.",
-    "date": "2026-04-17",
-    "url": "hxxps://techcrunch[.]com/2026/04/17/sam-altmans-project-world-looks-to-scale-its-human-verification-empire-first-stop-tinder/",
-    "source": "TechCrunch",
-    "summary": "World, which has raised eyebrows (but also a lot of interest) with its Orb-centered anonymous verification project, is looking to expand its influence via a bevy of new partnerships.",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Forget Neuralink, this Silicon Valley startup is building a cap that can read your brain - India Today",
     "date": "2026-04-17",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMi6gFBVV95cUxPbHRlU054N0wwOFhuNlV5aXg4NVFlTk9LQ2NpSF9sWFdScUZSVkFfN0NuUVBKT19pYlJ3azZZZTN4ZDFvaG5qTDNoZWZRWEJtVzNKQmdoNmlaLWc1WkEtS1hndXctVFh5T19iWGFtYUhNcm8yeE13TFRTS3ZkTnViVG1fME0xbG8wS0xSdU5WYmdPTWJVc0NsTDkxVWlqVlRaamRZcjhyNFRDYnRQVlU4Umg0NHBudHN0cHZUM1lWSnVWeWlYVGk2Sm04ZWxPS0NUNzFRQmg5VjMzb3lfVWp0LWFkXzhxcXNFaVHSAe8BQVVfeXFMT3FiaUpRLXlBOXdNLUQtUi01elM3LWx2ZnJmekJjbmlIZ2lWXzAwTDVxaF9Fd0EwUlFlaklueXdsc2xIWDVXSDN5ZHBuUEppX0dIYkdTQ2N2bV8wcFJ1T0Q2WjhjRjY1ZzQ3OEZRNTFrNkxsOWFib2JrSUQ2c25meHlCLWZmNmhwemFzbnpmSGFRWENPN2JMTENKaE1teGFHbVNFckxPbkp3NzhYQjRNMTgwRGZDUlluX1ZWY2o0SWE3cHFXRHRDdnkteEZsSW9HSjdwSWFYeW5wQW1KUWZTNzBsalRCblplUWozVVFsT1U?oc=5",
@@ -64,11 +28,20 @@
   },
   {
     "type": "external",
-    "title": "Neuralink Milestone: ALS Patient Regains Voice via Thought-to-Speech - newspress.co.in",
+    "title": "New brain-computer interface allows monkeys to navigate 3D virtual reality - R&D World",
     "date": "2026-04-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilwFBVV95cUxQR2MwbHg4T0ZKWGJtQS1GcU1jQ250VFBaZHJpWHppdjREVnRobHBQM3YwTHc4S2l4YTZ4M21kWHNxMUtJVllqOU9ZTG9KT24tbEJvYVBkSG9wWk1FRUtDT20wbnlJVXc1TzJHdmxSQkc0WkxHcWRxeEpJQVhnSmxCV3NKbXVVaWk0cmNWUmFOSEtWN1RkWkpF?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqAFBVV95cUxNTHdhMnRpUlRoZ0NKcVZHN3V6UVpxMWQyOE94QmNsVlREYWZSaDY3OU1TR0ZlVVV0NUdIaTZ5N0h5R0ZXdVI2eTlpWmdmZWRuV1FsekdNVVpVQWdUYTFYSkxjdjQyVFByVmZMMTMxamptZUJtUlYwVVk4TGowaDdJczhiM3NlZWZRTFZjaVcybHdldmhoOUU5QWhwcUhzMXFsTi0xRTFSang?oc=5",
+    "source": "Google News — BCI",
+    "summary": "New brain-computer interface allows monkeys to navigate 3D virtual reality&nbsp;&nbsp;R&D World",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink Patients Describe Brain Implant as “Life-Changing” in New Video - TeslaNorth.com",
+    "date": "2026-04-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqgFBVV95cUxQZ0p0OGV1TmU5bGx4Y3I5Vi1wUmt0d1lxRTBZcFBsNC1zZjNqNDlUTmIzTzNKRTV4NkpUdlBmU2FYSEJibGVpOUhoTDdUdlZ4cklaVVhpaFU5ekU2LVExUmE3UElMMDk2MTdiX3hjN1VXRlZDYW1GVXhLTE1zRzVnMzB2TklpUHluZTFITWlmQmFFZXFTTUJDUU5FVjhQcmpVdHRRZWlSaWlkdw?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Neuralink Milestone: ALS Patient Regains Voice via Thought-to-Speech&nbsp;&nbsp;newspress.co.in",
+    "summary": "Neuralink Patients Describe Brain Implant as “Life-Changing” in New Video&nbsp;&nbsp;TeslaNorth.com",
     "category": "neurotechnology"
   },
   {
@@ -82,11 +55,11 @@
   },
   {
     "type": "external",
-    "title": "Former Neuralink President’s Startup to Test Biohybrid Chip on Humans - ForkLog",
-    "date": "2026-04-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilwFBVV95cUxOdHRzdHZKY0xWTWQ4YlFyYkp0aHJWS2F0WnJtN2x5dmx6X1Jfbk5tdjdzTHVIa2ZMS2czRVc0LVM3dWR5aVZ2dWlHU0hNZGx3ODZncC1GSGd3dU1FVzlnVF9oQXV5RFFWSk14aU13eHZaaTlQZEV6d0tSZ1JJaE0zRjhwOFFHZ05SY0llTDdpUFlQYV8xOFRR?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Former Neuralink President’s Startup to Test Biohybrid Chip on Humans&nbsp;&nbsp;ForkLog",
+    "title": "Surgery in Colorado is first in the world to implant brain-computer interface in higher levels of the brain - CBS News",
+    "date": "2026-04-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxQSXJwOGl6LWdKV1VqMkFQX2hWNDN3U0NYeVBZQ09lTDFCWTFmUVRfYUJERy1xWVNZNEtOUXh1UXgzT0dJckttLTR5MUw4bUVfZVBWSDA5U0sxMVBKQlhQckdZNlVnUnU1WGFYdC1kWVVMdGJ1b3dnc3otLXJ3VG5xYzlKbGtCNUprVzR6VVdlWTEySkZsMFhaVGl1WG5CaTl2RFN3LWZYbGNjNEpH?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Surgery in Colorado is first in the world to implant brain-computer interface in higher levels of the brain&nbsp;&nbsp;CBS News",
     "category": "neurotechnology"
   },
   {
@@ -109,6 +82,15 @@
   },
   {
     "type": "external",
+    "title": "Colorado’s First Implanted Brain Computer Interface Surgery Marks a New Era in Neurological Research - University of Colorado Anschutz",
+    "date": "2026-04-09",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi1wFBVV95cUxQREY5M3lyWnhsWjViLS05QTY2aWxuLVZ4VU5UV2t0TkZmU090Q3hvNk1BUElZUlYxT2plZ0RmaFhlaGVJeXB3a3V3bE9uWTVDdnlBUlhDemtJUUtCOWQ0cDZNNTBXd2hBbXhHNW5WaU45c2Q4RmpScjZ3X2ZkaEJvelUwWnFBRV8xVGljS1FFUWZ5MzhMYVNMdUFfOVFTQ1RfVFJiWWdfbkhIYndnY29HOHFlMGJoWHVJTnRBLTR3cmdjODZYWkhjV0xmZUw1bGFSeG5vVlgxVdIB5wFBVV95cUxOZUxyR0dVWHZ5c01nT1pXOVdKdTdRRC11bG9ULXJPT3ZnbERkd2dBclN3dGFELUlQNEdMN1dFSFZuN0dTZ2hQenc4WVRpa0Z4Z0YybzFtekNndEZxWmNUeDZvSzJTMHhqTVdQSW1NT01nVmhTMkx6dFlsOXFxN0dpN1h1YjR4RFZ6U3d0YjZtZnhpQmdpY2paRWRnNmVIcm1PTkdwNl9uSmVjUEVxQ0FUUldkcXJJZzAxV3hsRTdIdkc4Qm56YTktdDRxX0ZKUVNyUDYyRFVqSTZBRU5zb0NmOVk5aDNEYjQ?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Colorado’s First Implanted Brain Computer Interface Surgery Marks a New Era in Neurological Research&nbsp;&nbsp;University of Colorado Anschutz",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Chip Can Project Video the Size of a Grain of Sand",
     "date": "2026-04-09",
     "url": "hxxps://spectrum[.]ieee[.]org/mems-photonics",
@@ -118,11 +100,11 @@
   },
   {
     "type": "external",
-    "title": "‘It gave me a new way to live’ — 100 days after a Neuralink brain implant, this user says he’s never going back - TechRadar",
-    "date": "2026-03-24",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi9gFBVV95cUxOYkJPRWRuMnM0ei1aYzljUTdkd0VpVkV0VE1xSFF3N0RiRXFVcHlTZDdtLWJzWWRDUFl4TnBabFVTZEU5TkZ6OFA3QWZMS21RcUZGZmg1a09ZZXBqeGlqSWpTSWswckMzMEcxMThMbUE1M1RFZEJBRWNXZXk2MGlweEV0bllEVHljd1l1Wm5qY0NFejVzc01kN0piNDFkbm5mWEpNWkZLLXRtNXp4SnRVWDMxZUZ1Qng0ZDM3ZzBxWk5tYWpvR19iY3pFRDJfM293ejFkLVpxMlpQQTZoVG1ITWtGMHNIcGtlMWZyb011QW9FMGcwblE?oc=5",
+    "title": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed' - Tom's Hardware",
+    "date": "2026-03-26",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiyAJBVV95cUxPSDhtM1h6d0ZqQWFMSFNpRG5DMHZSM3pVTDJMTk1VNjdialFzMUhPTlZuT21uUVlxb0FZNzM5cGh1TWNYQjFxeWpTR0FjSGRyVk8zejVDWVVVeDZ1NEpocjM1Sk0zeVNUcEVGX0RkYXdBUXY0dVF1NktpdWhBMVlOa0xqREMwemd2ZFZHTXFPS05NN3FSNmJ5cUp2OVFLS0FJZTVOV2ZnSFNWM0JBSTBDM1lFZWJFQWZoZnZmeUFIdHhuUXNXNUNsV3VZN3NSeWtMZmFwdnBoWlh6TVJwSlBPcWdBZVJyYXZhWEZ3VTZlZTFZd09sakZWQjhUanNYQlJQaXFzZl9oMlRuOVNQWVF3bVhpakxWVUp0RXpRT0J0Y0hDdWVobFJ6aXprTUtQbk1iSGZZbU8xblZBcE15b3VQRHlHR2k5NXdY?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "‘It gave me a new way to live’ — 100 days after a Neuralink brain implant, this user says he’s never going back&nbsp;&nbsp;TechRadar",
+    "summary": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed'&nbsp;&nbsp;Tom'",
     "category": "neurotechnology"
   },
   {
@@ -141,6 +123,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPS0YxUk82N2IzSE16bDNnQS1Ba1hzMmZZNklwZXd0ZFJ4aThsS0xLdC1OdE1CWHMxTWUtU1U0M3EwNWd6NU1vQUxiZGhnelBJbXQ2anRZY2l1a1hsazZlakdBRE1QblVjNFpYZ1BTZDVnRm4zYmNLNHVTVVFLcGNvbmlSMFEzMGktRmJVbldQU2U2RW8?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Brain-computer interface startup Science raises $230M&nbsp;&nbsp;SiliconANGLE",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C - Crunchbase News",
+    "date": "2026-03-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;Crunchbase News",
     "category": "neurotechnology"
   },
   {
