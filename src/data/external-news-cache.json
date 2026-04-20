@@ -1,12 +1,30 @@
 [
   {
     "type": "external",
-    "title": "Forget Neuralink, this Silicon Valley startup is building a cap that can read your brain - India Today",
-    "date": "2026-04-17",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi6gFBVV95cUxPbHRlU054N0wwOFhuNlV5aXg4NVFlTk9LQ2NpSF9sWFdScUZSVkFfN0NuUVBKT19pYlJ3azZZZTN4ZDFvaG5qTDNoZWZRWEJtVzNKQmdoNmlaLWc1WkEtS1hndXctVFh5T19iWGFtYUhNcm8yeE13TFRTS3ZkTnViVG1fME0xbG8wS0xSdU5WYmdPTWJVc0NsTDkxVWlqVlRaamRZcjhyNFRDYnRQVlU4Umg0NHBudHN0cHZUM1lWSnVWeWlYVGk2Sm04ZWxPS0NUNzFRQmg5VjMzb3lfVWp0LWFkXzhxcXNFaVHSAe8BQVVfeXFMT3FiaUpRLXlBOXdNLUQtUi01elM3LWx2ZnJmekJjbmlIZ2lWXzAwTDVxaF9Fd0EwUlFlaklueXdsc2xIWDVXSDN5ZHBuUEppX0dIYkdTQ2N2bV8wcFJ1T0Q2WjhjRjY1ZzQ3OEZRNTFrNkxsOWFib2JrSUQ2c25meHlCLWZmNmhwemFzbnpmSGFRWENPN2JMTENKaE1teGFHbVNFckxPbkp3NzhYQjRNMTgwRGZDUlluX1ZWY2o0SWE3cHFXRHRDdnkteEZsSW9HSjdwSWFYeW5wQW1KUWZTNzBsalRCblplUWozVVFsT1U?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Forget Neuralink, this Silicon Valley startup is building a cap that can read your brain&nbsp;&nbsp;India Today",
+    "title": "What It’s Like to Live With an Experimental Brain Implant - IEEE Spectrum",
+    "date": "2026-04-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiWEFVX3lxTE5EdkRVS3RlNGpZWHVGSTBQLVpmeV9aQnM5N3NaRFgwcDJwZVVLV3JYN0tFWG1xTGJXNlNSVWpNbV9SV2N3eDIyRDNuMlh2alpzcXB0eU41T3HSAWxBVV95cUxQaVVOby1KWDN5NVVWY3lRc0RXZ2pPU05uTkthN3NNSkIwYUZfTXVWNXg3VDlmbnd1TXVBMU16M1JUVkRvUWhKVkNCOW1CbFpuMjhDbmFVMWVaNGpCVTByOE9hUXNiLTU2YkNWbGs?oc=5",
+    "source": "Google News — BCI",
+    "summary": "What It’s Like to Live With an Experimental Brain Implant&nbsp;&nbsp;IEEE Spectrum",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Machine learning approaches to uncover the neural mechanisms of motivated behaviour: from ADHD to individual differences in effort and reward sensitivity",
+    "date": "2026-04-20",
+    "url": "hxxps://arxiv[.]org/abs/2604[.]15363",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2604.15363v1 Announce Type: new Abstract: Motivated behaviour relies on the brain's capacity to evaluate effort and reward. Dysregulation within these processes contributes to a spectrum of cond",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Seeing the imagined: a latent functional alignment in visual imagery decoding from fMRI data",
+    "date": "2026-04-20",
+    "url": "hxxps://arxiv[.]org/abs/2604[.]15374",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2604.15374v1 Announce Type: new Abstract: Recent progress in visual brain decoding from fMRI has been enabled by large-scale datasets such as the Natural Scenes Dataset (NSD) and powerful diffus",
+    "category": "research"
   },
   {
     "type": "external",
@@ -37,29 +55,11 @@
   },
   {
     "type": "external",
-    "title": "Neuralink Patients Describe Brain Implant as “Life-Changing” in New Video - TeslaNorth.com",
-    "date": "2026-04-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqgFBVV95cUxQZ0p0OGV1TmU5bGx4Y3I5Vi1wUmt0d1lxRTBZcFBsNC1zZjNqNDlUTmIzTzNKRTV4NkpUdlBmU2FYSEJibGVpOUhoTDdUdlZ4cklaVVhpaFU5ekU2LVExUmE3UElMMDk2MTdiX3hjN1VXRlZDYW1GVXhLTE1zRzVnMzB2TklpUHluZTFITWlmQmFFZXFTTUJDUU5FVjhQcmpVdHRRZWlSaWlkdw?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink Patients Describe Brain Implant as “Life-Changing” in New Video&nbsp;&nbsp;TeslaNorth.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "A Silicon Valley startup wants to sell you a brain-reading beanie - Boing Boing",
     "date": "2026-04-16",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxQUVNHeU5NaVo5UFJaVnBKc1J3ZXBuaWNCOWxrMUt0MW1ZSEdCNlhhTkQ2eHYwWGljWENvZE9SVHhKVUlaWUJkQjMyWWRHY2JMOUIwRE5yTHJhQ2U0MEwzSEFrUWJ6ZlV2SkduY2VNVHRkUjNwcmhhbEtNNnY4T0lRZ2RPRDlLOFZTNWJjbXRHeHNpdmZMUHpMQUVYY0R1aGR4MkEweTQ1ONIBrAFBVV95cUxOVm1iMjhqRGVnQlRGSzBZYjRPWnRVY1RjQWNoM1pLTXBDY0c0WXJ1MGQxNjVjRFJJSGpDQWtXZVExbnB5T3hldGNRYVExc3lHd1kyNnpnVm02SHViaElINDVua28ybEtmaDlFZzl3RjRNNDNtNVJfNUZ6X3NzbW10VEw3R3dEYm1XTjFwNU9nMUcwWVpGM1NDOUlBX1d1ay1TSWNlR1VDb0U0eEZa?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "A Silicon Valley startup wants to sell you a brain-reading beanie&nbsp;&nbsp;Boing Boing",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Surgery in Colorado is first in the world to implant brain-computer interface in higher levels of the brain - CBS News",
-    "date": "2026-04-14",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxQSXJwOGl6LWdKV1VqMkFQX2hWNDN3U0NYeVBZQ09lTDFCWTFmUVRfYUJERy1xWVNZNEtOUXh1UXgzT0dJckttLTR5MUw4bUVfZVBWSDA5U0sxMVBKQlhQckdZNlVnUnU1WGFYdC1kWVVMdGJ1b3dnc3otLXJ3VG5xYzlKbGtCNUprVzR6VVdlWTEySkZsMFhaVGl1WG5CaTl2RFN3LWZYbGNjNEpH?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Surgery in Colorado is first in the world to implant brain-computer interface in higher levels of the brain&nbsp;&nbsp;CBS News",
     "category": "neurotechnology"
   },
   {
@@ -82,6 +82,15 @@
   },
   {
     "type": "external",
+    "title": "How Neuralink brain chip transformed life of ALS sufferer - NewsNation",
+    "date": "2026-04-10",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxPUnNNNzlfRWxqQ0NXeE5qMDFmNnNDWURHRmctSXFacFBRMzNFS0lDdW9xcGItUmxPMjJlX2dKMkVmOGlEQi1TRVJEZlpIVnV6TFlTbV9RcGxQbWJTaDl1dWF6RE9rbzJ1ZlBVdTg0cUtvWjdSTGl3Yi03WmZ0MG5CVXJnRnRHRUVXbnBqZU1ubFJfZkVu0gGaAUFVX3lxTE9OeDBpSDYwNjJDVkthdmZ1ZFAwSlR3VW5sajVObmFERGlXOG5MRERtTnlwdzhDMWM2a2N1S0F3bjJ2VVM4am1LOEN0bm1FTjlfTHE3NlZkZVF0YkRyS0E0blA2N0lnT0Z1MmlYUmNlQkRkQW5ya0N2SkNMa2wyTjhSY1VmakVrZ0dfdkRxV2dzbmthQUx6RWdQbkE?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "How Neuralink brain chip transformed life of ALS sufferer&nbsp;&nbsp;NewsNation",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Colorado’s First Implanted Brain Computer Interface Surgery Marks a New Era in Neurological Research - University of Colorado Anschutz",
     "date": "2026-04-09",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMi1wFBVV95cUxQREY5M3lyWnhsWjViLS05QTY2aWxuLVZ4VU5UV2t0TkZmU090Q3hvNk1BUElZUlYxT2plZ0RmaFhlaGVJeXB3a3V3bE9uWTVDdnlBUlhDemtJUUtCOWQ0cDZNNTBXd2hBbXhHNW5WaU45c2Q4RmpScjZ3X2ZkaEJvelUwWnFBRV8xVGljS1FFUWZ5MzhMYVNMdUFfOVFTQ1RfVFJiWWdfbkhIYndnY29HOHFlMGJoWHVJTnRBLTR3cmdjODZYWkhjV0xmZUw1bGFSeG5vVlgxVdIB5wFBVV95cUxOZUxyR0dVWHZ5c01nT1pXOVdKdTdRRC11bG9ULXJPT3ZnbERkd2dBclN3dGFELUlQNEdMN1dFSFZuN0dTZ2hQenc4WVRpa0Z4Z0YybzFtekNndEZxWmNUeDZvSzJTMHhqTVdQSW1NT01nVmhTMkx6dFlsOXFxN0dpN1h1YjR4RFZ6U3d0YjZtZnhpQmdpY2paRWRnNmVIcm1PTkdwNl9uSmVjUEVxQ0FUUldkcXJJZzAxV3hsRTdIdkc4Qm56YTktdDRxX0ZKUVNyUDYyRFVqSTZBRU5zb0NmOVk5aDNEYjQ?oc=5",
@@ -100,20 +109,11 @@
   },
   {
     "type": "external",
-    "title": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed' - Tom's Hardware",
-    "date": "2026-03-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiyAJBVV95cUxPSDhtM1h6d0ZqQWFMSFNpRG5DMHZSM3pVTDJMTk1VNjdialFzMUhPTlZuT21uUVlxb0FZNzM5cGh1TWNYQjFxeWpTR0FjSGRyVk8zejVDWVVVeDZ1NEpocjM1Sk0zeVNUcEVGX0RkYXdBUXY0dVF1NktpdWhBMVlOa0xqREMwemd2ZFZHTXFPS05NN3FSNmJ5cUp2OVFLS0FJZTVOV2ZnSFNWM0JBSTBDM1lFZWJFQWZoZnZmeUFIdHhuUXNXNUNsV3VZN3NSeWtMZmFwdnBoWlh6TVJwSlBPcWdBZVJyYXZhWEZ3VTZlZTFZd09sakZWQjhUanNYQlJQaXFzZl9oMlRuOVNQWVF3bVhpakxWVUp0RXpRT0J0Y0hDdWVobFJ6aXprTUtQbk1iSGZZbU8xblZBcE15b3VQRHlHR2k5NXdY?oc=5",
+    "title": "Neuralink Patient Using Brain Chip to Carry Out Important Life Task: Playing World of Warcraft - Futurism",
+    "date": "2026-03-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxPNDNOTTNlc2h2Z1loaXJmZ2NObXJ1Y19XczlTeXRRV3h5U1VVcWxzZlgtQjktSWRCdFFWT2dVRW5OUm9lRV9DVGhIMzJDcHJYeVN1VlprMDgtbWRUdFJRZ1ZYMGhNb01lazF6WExSM3NDRmtsNmo2anlGY2VUSFBXSFByeU5udTAwVXQ0?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Paralyzed army vet can now play World of Warcraft using 'science fiction… magic… brilliant…' Neuralink brain implant — 'I’m now raiding, and exploring Azeroth hands-free at full speed'&nbsp;&nbsp;Tom'",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Beijing-backed brain chip firm says it is 3 years behind Musk's Neuralink - Reuters",
-    "date": "2026-03-20",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi3AFBVV95cUxQbVhseDRjaEs3RTZ4cEJrNjBUc3R5UkZUZ05Odkg1UTdsWVpuX3hoQmhIcFo5Qi1Pb1VQdVdyWVUxSmJBUEJGbERZNEhYMHRXNVN1ZzB4clNTbWRLaWRoLWo5dVZaUlF3c2tvRkxPcGU2WEVINmpkNjg1XzdLY19JSHZRZHl6b1lpNE9kSElCMDdGUHdtOElIMkhPY2VIZVlOZGxOOVM2cEktTW0zeHZhSDBEbjVjamFyU2hCZ2JXT1c0LTU4MkNrTVMwd2h6dUEweWZXcEwxeTZnSjdC?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Beijing-backed brain chip firm says it is 3 years behind Musk's Neuralink&nbsp;&nbsp;Reuters",
+    "summary": "Neuralink Patient Using Brain Chip to Carry Out Important Life Task: Playing World of Warcraft&nbsp;&nbsp;Futurism",
     "category": "neurotechnology"
   },
   {
@@ -136,12 +136,30 @@
   },
   {
     "type": "external",
+    "title": "Two Years of Telepathy - Neuralink",
+    "date": "2026-01-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Two Years of Telepathy&nbsp;&nbsp;Neuralink",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Are Neural Organoids Part of “Neurotechnology”? - Stanford Law School",
     "date": "2026-01-28",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPbm93YzhYYVQ2c0hGSzdqZVhYcThZNU9na0xYcDdRamJFekhTcE9rVlViOHkxNk5yUmYyWFRPYkd2Wnd1Zk1ueFpPM0Ntel9pLWJkVFN3RDcyeGpfZDRBek9EbnBXWF81V0owSXVkVkhFNkNVR3JRZkpSbzRYckJESmQxWTBQaktB?oc=5",
     "source": "Google News — MIND Act",
     "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
     "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
+    "date": "2026-01-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
