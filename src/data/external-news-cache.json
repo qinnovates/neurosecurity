@@ -1,65 +1,29 @@
 [
   {
     "type": "external",
-    "title": "Opinion: STAT+: I’m an expert on presidential health. The 25th Amendment is not an option for removing Trump",
-    "date": "2026-04-21",
-    "url": "hxxps://www[.]statnews[.]com/2026/04/21/25th-amendment-trump-physician-medical-decline/?utm_campaign=rss",
-    "source": "STAT News",
-    "summary": "Those calling for Trump’s removal under the 25th Amendment are misguided. Here’s why, writes Lawrence K. Altman.",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China approves world's first implantable brain-computer interface for medical use - People's Daily Online",
-    "date": "2026-04-21",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE1NYUQ5R2FNM3pvNVk2MUJDa2VGUlRzTUVZX2ktX0xkZ3ZYaTB6eFN4MW53aXZrTU5ib2kxZUFCYjJvVUs5ci05UW1kdUNmNmZ6cEpHem0xcU1hLVZGczNrUTR0OA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China approves world's first implantable brain-computer interface for medical use&nbsp;&nbsp;People's Daily Online",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "What It’s Like to Live With an Experimental Brain Implant - IEEE Spectrum",
-    "date": "2026-04-21",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiWEFVX3lxTE5EdkRVS3RlNGpZWHVGSTBQLVpmeV9aQnM5N3NaRFgwcDJwZVVLV3JYN0tFWG1xTGJXNlNSVWpNbV9SV2N3eDIyRDNuMlh2alpzcXB0eU41T3HSAWxBVV95cUxQaVVOby1KWDN5NVVWY3lRc0RXZ2pPU05uTkthN3NNSkIwYUZfTXVWNXg3VDlmbnd1TXVBMU16M1JUVkRvUWhKVkNCOW1CbFpuMjhDbmFVMWVaNGpCVTByOE9hUXNiLTU2YkNWbGs?oc=5",
-    "source": "Google News — BCI",
-    "summary": "What It’s Like to Live With an Experimental Brain Implant&nbsp;&nbsp;IEEE Spectrum",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Implantable BCI Systems - Trend Hunter",
-    "date": "2026-04-21",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiaEFVX3lxTE1qTTRndlVVblYyc0VUMXhWb2o1WE9tVUE4ZTFhZF8yQ0hOSF9BLTU5U2tWTDFsTDJ6Q09iSEZNQ0N6cEJZbGlfQUJsV0RTRDdRUkI0NGxXS2JlcGVGX1FGcE40TTVEbVhH0gFuQVVfeXFMTUluNG4yX2tNTW5wV1JEYTlTXzFmWjc4UDJSbUVIcGtlblJXVmZ3SGRXV2NLdVRZR0lnRzFLX3BHNW9GV0hHRDJUV01uX0piMUFvZlNPaWlvbEFOTzhnbGFvUUZmQ2lCU010ZDc0cnc?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Implantable BCI Systems&nbsp;&nbsp;Trend Hunter",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "MLE-Toolbox: An Open-Source Toolbox for Comprehensive EEG and MEG Data Analysis",
-    "date": "2026-04-21",
-    "url": "hxxps://arxiv[.]org/abs/2604[.]16463",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2604.16463v1 Announce Type: new Abstract: MLE-Toolbox is a comprehensive open-source MATLAB toolbox for end-to-end analysis of magnetoencephalography (MEG) and electroencephalography (EEG) data.",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Poisson Flow Model of Cortical Folding Pattern",
-    "date": "2026-04-21",
-    "url": "hxxps://arxiv[.]org/abs/2604[.]17291",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2604.17291v1 Announce Type: new Abstract: Cortical folding reflects coordinated neurodevelopmental processes and provides a sensitive marker of neurological disease. In juvenile myoclonic epilep",
-    "category": "research"
-  },
-  {
-    "type": "external",
     "title": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation - Medical Xpress",
     "date": "2026-04-16",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxOMkhzblhTLUd4aEZmQ3R3dkR0bGlIYWpUNGpFaE5GSHZMam1TNEZvbHhqaE4taEx6eUV1TWgwRHdudllDLTJXSHJ5YnNJTW44UEljaFNCQnFRZkhaNk9oZjFCUllQc2toSGxhU0JtdXoxaUdjaHFPb0FlTmQ0aTl0djh3VHNtVWlrcTZmTlMzZw?oc=5",
     "source": "Google News — BCI",
     "summary": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation&nbsp;&nbsp;Medical Xpress",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "New brain-computer interface allows monkeys to navigate 3D virtual reality - R&D World",
+    "date": "2026-04-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqAFBVV95cUxNTHdhMnRpUlRoZ0NKcVZHN3V6UVpxMWQyOE94QmNsVlREYWZSaDY3OU1TR0ZlVVV0NUdIaTZ5N0h5R0ZXdVI2eTlpWmdmZWRuV1FsekdNVVpVQWdUYTFYSkxjdjQyVFByVmZMMTMxamptZUJtUlYwVVk4TGowaDdJczhiM3NlZWZRTFZjaVcybHdldmhoOUU5QWhwcUhzMXFsTi0xRTFSang?oc=5",
+    "source": "Google News — BCI",
+    "summary": "New brain-computer interface allows monkeys to navigate 3D virtual reality&nbsp;&nbsp;R&D World",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "This Beanie Is Designed to Read Your Thoughts - WIRED",
+    "date": "2026-04-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMif0FVX3lxTE1rbzVMQzNKTEpzQk9OVF9LR3FPWFFKaHBQNHBoNTRUQkZHS2RyeG01UC1yeGVneUhabVVUc0xuYzY5WmlYc2lDZ3E1ekFabDh6WkZEc3JFbEVQUHJCYno2OGY5TmpKY1d0LV9QWDNrQnd3MFpubTJZVHNmWWFGams?oc=5",
+    "source": "Google News — BCI",
+    "summary": "This Beanie Is Designed to Read Your Thoughts&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
@@ -91,6 +55,15 @@
   },
   {
     "type": "external",
+    "title": "How Neuralink brain chip transformed life of ALS sufferer - NewsNation",
+    "date": "2026-04-10",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxPUnNNNzlfRWxqQ0NXeE5qMDFmNnNDWURHRmctSXFacFBRMzNFS0lDdW9xcGItUmxPMjJlX2dKMkVmOGlEQi1TRVJEZlpIVnV6TFlTbV9RcGxQbWJTaDl1dWF6RE9rbzJ1ZlBVdTg0cUtvWjdSTGl3Yi03WmZ0MG5CVXJnRnRHRUVXbnBqZU1ubFJfZkVu0gGaAUFVX3lxTE9OeDBpSDYwNjJDVkthdmZ1ZFAwSlR3VW5sajVObmFERGlXOG5MRERtTnlwdzhDMWM2a2N1S0F3bjJ2VVM4am1LOEN0bm1FTjlfTHE3NlZkZVF0YkRyS0E0blA2N0lnT0Z1MmlYUmNlQkRkQW5ya0N2SkNMa2wyTjhSY1VmakVrZ0dfdkRxV2dzbmthQUx6RWdQbkE?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "How Neuralink brain chip transformed life of ALS sufferer&nbsp;&nbsp;NewsNation",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Colorado’s First Implanted Brain Computer Interface Surgery Marks a New Era in Neurological Research - University of Colorado Anschutz",
     "date": "2026-04-09",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMi1wFBVV95cUxQREY5M3lyWnhsWjViLS05QTY2aWxuLVZ4VU5UV2t0TkZmU090Q3hvNk1BUElZUlYxT2plZ0RmaFhlaGVJeXB3a3V3bE9uWTVDdnlBUlhDemtJUUtCOWQ0cDZNNTBXd2hBbXhHNW5WaU45c2Q4RmpScjZ3X2ZkaEJvelUwWnFBRV8xVGljS1FFUWZ5MzhMYVNMdUFfOVFTQ1RfVFJiWWdfbkhIYndnY29HOHFlMGJoWHVJTnRBLTR3cmdjODZYWkhjV0xmZUw1bGFSeG5vVlgxVdIB5wFBVV95cUxOZUxyR0dVWHZ5c01nT1pXOVdKdTdRRC11bG9ULXJPT3ZnbERkd2dBclN3dGFELUlQNEdMN1dFSFZuN0dTZ2hQenc4WVRpa0Z4Z0YybzFtekNndEZxWmNUeDZvSzJTMHhqTVdQSW1NT01nVmhTMkx6dFlsOXFxN0dpN1h1YjR4RFZ6U3d0YjZtZnhpQmdpY2paRWRnNmVIcm1PTkdwNl9uSmVjUEVxQ0FUUldkcXJJZzAxV3hsRTdIdkc4Qm56YTktdDRxX0ZKUVNyUDYyRFVqSTZBRU5zb0NmOVk5aDNEYjQ?oc=5",
@@ -114,6 +87,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxPNDNOTTNlc2h2Z1loaXJmZ2NObXJ1Y19XczlTeXRRV3h5U1VVcWxzZlgtQjktSWRCdFFWT2dVRW5OUm9lRV9DVGhIMzJDcHJYeVN1VlprMDgtbWRUdFJRZ1ZYMGhNb01lazF6WExSM3NDRmtsNmo2anlGY2VUSFBXSFByeU5udTAwVXQ0?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Neuralink Patient Using Brain Chip to Carry Out Important Life Task: Playing World of Warcraft&nbsp;&nbsp;Futurism",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain Computer Interface Enables Rapid Communication for Two People with Paralysis - Mass General Brigham",
+    "date": "2026-03-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi2AFBVV95cUxObjlkNWktN3FZLVdmbU9HcGs4UWJHYTFRSjlWb1pQd2F2anFNZGFFQXNfb254UUdqaGlWOFRTY2FMSXFJZXpSNm5fS0lqQl9sblFYdktnLWdxbjhfMXJQOXljNFNRdTMtc3lhYVBHb0ZHeC1hS0gyTXE4VEd5WWdCa3hVV0xfSG1ucHEwLThRdWpBYm81bmpnS1JmdDR5Q1V6TVd4WGtuR1p1MUNSaW5SbDZkSm1Uc0tJWC1rNjV0cndiZ3J1WDBzQnFGeHY0bGZqY2ZaNU5peUY?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain Computer Interface Enables Rapid Communication for Two People with Paralysis&nbsp;&nbsp;Mass General Brigham",
     "category": "neurotechnology"
   },
   {
@@ -159,15 +141,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
     "source": "Google News — Neuralink",
     "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink to kick-start 'high-volume production' of brain-computer interface devices, Elon Musk says - Fierce Biotech",
-    "date": "2026-01-02",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQYXdTY3MxMnRVV1QtMjBFZFUtNFpHRWV4OHItaFFPRWFwQWl0b2dVNGJjbjVQZDFXYnNWekZjcVU4Sm5YeWFBSjF2dzBoRUpwQVVZckhXZDdRV29vYV9POFFsNjJIQnVQcGVrTkJfTGlPbkJucEpSckwtcElpaEJZZnYzVUE0cndZQ2VwVjluTnRwa0hiXzJBU0F0NlhPUXUzWkNuWG40MnBoUmRkM3JRUVBQSExvcGFvVDlkYXZ2X013dw?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink to kick-start 'high-volume production' of brain-computer interface devices, Elon Musk says&nbsp;&nbsp;Fierce Biotech",
     "category": "neurotechnology"
   },
   {
