@@ -132,11 +132,20 @@ const reg = (threat.regulatory as any)?.fdora_524b as {
   gaps: string[];
 } | null;
 const hasGovernance = nr || reg;
+
+// --- SEO meta: keep title ≤70 chars, description ≤160 chars, guard against
+// undefined fields (QIF-T0137..T0161 lacked `description`). ---
+const _titleName = threat.name.length > 42 ? threat.name.slice(0, 39) + '…' : threat.name;
+const _metaTitle = `${threat.id}: ${_titleName} | Qinnovate`;
+
+const _descSource = (threat.description || threat.name || 'BCI attack technique').replace(/\s+/g, ' ').trim();
+const _descSummary = _descSource.length > 90 ? _descSource.slice(0, 87) + '…' : _descSource;
+const _metaDescription = `${_descSummary} — ${threat.severity} severity, NISS ${nissBase}/10.`.slice(0, 160);
 ---
 
 <PageLayout
-  title={`${threat.id}: ${threat.name} — BCI Attack Technique`}
-  description={`${threat.description} Severity: ${threat.severity}. NISS score: ${nissBase}/10. Domains: ${threat.bands?.join(', ') || 'N/A'}. Part of the TARA threat catalog for brain-computer interface security.`}
+  title={_metaTitle}
+  description={_metaDescription}
   breadcrumbs={[
     { label: 'Atlas', href: '/atlas/' },
     { label: 'TARA', href: '/atlas/tara/' },

@@ -15,9 +15,14 @@ export default defineConfig({
     // Legacy short routes
     '/threats/': '/atlas/tara/',
     '/niss/': '/atlas/scoring/',
-    '/advisory/': '/alliance/',
+    '/advisory/': '/governance/',
+    '/alliance/': '/governance/',
     '/TARA/': '/atlas/tara/',
     '/neural-atlas/': '/atlas/',
+    // Nav/footer refs without pages → governance hub as fallback
+    '/glossary/': '/atlas/',
+    '/adopt/': '/research/whitepaper/',
+    '/governance/ai-ethics/': '/governance/ai-security-ethics/',
     '/scoring/': '/atlas/scoring/',
     '/case-studies/': '/atlas/analysis/',
     '/case-studies/t0079-anc-fingerprint/': '/atlas/analysis/t0079-anc-fingerprint/',
@@ -60,6 +65,21 @@ export default defineConfig({
 
     // 2026-03-10 Nav restructure redirects
     '/licensing/': '/about/',
+
+    // 2026-04-23 consolidation: /learn/*.html → autodidactive labs canonical
+    '/learn/calculus-bci-limits.html': '/learn/autodidactive/labs/calculus-bci-limits.html',
+    '/learn/calculus-fundamentals.html': '/learn/autodidactive/labs/calculus-fundamentals.html',
+    '/learn/calculus-signals.html': '/learn/autodidactive/labs/calculus-signals.html',
+
+    // 2026-04-23 audit: paper rename (neuromodesty check #2 — "predict" → "map to")
+    '/research/papers/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/': '/research/papers/2026-02-13-the-neural-impact-chain-when-niss-scores-map-to-psychiatric-risk-categories/',
+    // 2026-04-23 audit: historical inbound link referenced /news/... instead of /research/papers/...
+    '/news/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/': '/research/papers/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/',
+    // Historical uppercase casing on governance docs
+    '/governance/REGULATORY_COMPLIANCE/': '/governance/',
+    '/governance/UNESCO_ALIGNMENT/': '/governance/',
+    '/governance/TRANSPARENCY/': '/governance/transparency/',
+    '/governance/foundations/': '/governance/',
   },
   integrations: [
     react(),

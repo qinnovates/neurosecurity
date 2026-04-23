@@ -12,8 +12,34 @@ export const QIF_ARCHITECTURE = 'Hourglass';
 export const QIF_BANDS = 11;
 export const QIF_ESTABLISHED = 2026;
 
+/**
+ * Canonical acronym expansions. Single source of truth for every page.
+ * Audit 2026-04-23 found 4 incompatible QIF expansions and 5 TARA
+ * expansions across the codebase — these constants eliminate drift.
+ */
+export const QIF_FULL_NAME = 'Quantified Interconnection Framework';
+export const TARA_FULL_NAME = 'Threat and Risk Analysis';
+export const NISS_FULL_NAME = 'Neural Impact Scoring System';
+export const ATLAS_LABEL = 'Neural Atlas';
+
 /** TARA technique count — derived dynamically from qtara-registrar.json */
-export const TARA_TECHNIQUES = (registrar as { techniques: unknown[] }).techniques.length;
+const _techniques = (registrar as { techniques: unknown[] }).techniques;
+export const TARA_TECHNIQUES = _techniques.length;
+
+/** Registrar-derived facts — reuse across pages instead of hardcoding numbers. */
+type _RawTechnique = {
+  status?: string;
+  niss?: { severity?: string };
+  severity?: string;
+  tara?: { dsm5?: { primary?: unknown[] }; clinical?: { therapeutic_analog?: unknown } };
+  neurorights?: { affected?: string[] };
+};
+const _techs = _techniques as _RawTechnique[];
+export const TARA_THERAPEUTIC = _techs.filter(t => t?.tara?.clinical?.therapeutic_analog).length;
+export const TARA_DSM5 = _techs.filter(t => (t?.tara?.dsm5?.primary?.length ?? 0) > 0).length;
+export const TARA_CONFIRMED = _techs.filter(t => t.status === 'CONFIRMED').length;
+export const TARA_DEMONSTRATED = _techs.filter(t => t.status === 'DEMONSTRATED').length;
+export const TARA_THEORETICAL = _techs.filter(t => ['THEORETICAL', 'EMERGING', 'PLAUSIBLE', 'SPECULATIVE'].includes(t.status ?? '')).length;
 
 /** Hourglass bands (7-1-3 asymmetric) */
 export const HOURGLASS_BANDS = [
@@ -70,8 +96,7 @@ export const QI_CANDIDATES = {
   },
 } as const;
 
-export const QIF_NAME = "Quantified Interconnection Framework";
-export const QIF_FULL_NAME = "Quantified Interconnection Framework (QIF)";
+export const QIF_NAME = QIF_FULL_NAME;
 export const QIF_DESCRIPTION = "A proposed open framework for brain-computer interface security, mapping the boundary where silicon meets neuron through an 11-band hourglass architecture.";
 
 /** Three pillars of Qinnovate */
@@ -91,7 +116,7 @@ export const PILLARS = [
   {
     id: 'tara',
     name: 'TARA',
-    fullName: 'Therapeutic Applications & Risk Assessment',
+    fullName: 'Threat and Risk Analysis',
     tagline: 'The TARA Atlas',
     description: `${TARA_TECHNIQUES} BCI techniques mapped across four projections — modality, clinical, diagnostic (DSM-5-TR), and governance — each scored with NISS and traced through the Neural Impact Chain from attack to clinical outcome.`,
     href: '/atlas/tara/',
