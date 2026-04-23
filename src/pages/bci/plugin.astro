@@ -17,7 +17,7 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
         Open-source security toolkit for AI coding platforms. Scans BCI code, detects PII in neural data, generates compliance reports, and enforces neuroethics guardrails. Works with any AI agent that can read files and follow structured prompts.
       </p>
       <div class="flex flex-wrap gap-3">
-        <a href="https://github.com/qinnovates/bci-security" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors" style="background: var(--color-accent); color: white;">
+        <a href="https://github.com/bci-security/plugin" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors" style="background: var(--color-accent); color: white;">
           GitHub Repository
         </a>
         <a href="/data-studio/eeg" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); color: var(--color-text-primary);">
@@ -33,7 +33,7 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
 
       <div class="p-5 rounded-xl border mb-6" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
         <h3 class="font-semibold mb-3" style="color: var(--color-text-primary);">Install</h3>
-        <pre class="text-sm overflow-x-auto p-3 rounded-lg mb-3" style="background: var(--color-bg-primary);"><code>git clone https://github.com/qinnovates/bci-security.git</code></pre>
+        <pre class="text-sm overflow-x-auto p-3 rounded-lg mb-3" style="background: var(--color-bg-primary);"><code>git clone https://github.com/bci-security/plugin.git</code></pre>
         <p class="text-xs mb-2" style="color: var(--color-text-muted);"><strong>Claude Code:</strong></p>
         <pre class="text-sm overflow-x-auto p-3 rounded-lg mb-3" style="background: var(--color-bg-primary);"><code>claude plugins install --scope user ./bci-security</code></pre>
         <p class="text-xs" style="color: var(--color-text-muted);"><strong>Other AI platforms:</strong> The plugin is pure markdown and JSON. No compiled code, no dependencies. Copy the skills/ directory contents into your platform's skill format, or paste SKILL.md instructions directly into your AI conversation with the relevant data JSON.</p>
@@ -219,7 +219,7 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
       </div>
 
       <p class="text-xs mt-4 p-3 rounded-lg" style="background: var(--color-bg-secondary); color: var(--color-text-muted);">
-        <strong>Security notice:</strong> Before connecting any BCI device to an AI-assisted analysis pipeline, ensure your network is secure and segmented. Have security experts review your integration and compliance experts review regulatory requirements. If your institution is using an AI coding platform for BCI research, they have likely already performed the necessary security reviews and compliance checks for that platform's data processing agreement. See the <a href="https://github.com/qinnovates/bci-security/blob/main/docs/INTEGRATION.md" target="_blank" rel="noopener noreferrer" class="underline" style="color: var(--color-accent);">full Integration Guide</a> for details.
+        <strong>Security notice:</strong> Before connecting any BCI device to an AI-assisted analysis pipeline, ensure your network is secure and segmented. Have security experts review your integration and compliance experts review regulatory requirements. If your institution is using an AI coding platform for BCI research, they have likely already performed the necessary security reviews and compliance checks for that platform's data processing agreement. See the <a href="https://github.com/bci-security/plugin/blob/main/docs/INTEGRATION.md" target="_blank" rel="noopener noreferrer" class="underline" style="color: var(--color-accent);">full Integration Guide</a> for details.
       </p>
     </section>
 
@@ -265,7 +265,7 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
         <li>TARA and NISS are proposed frameworks, not adopted standards</li>
       </ul>
       <p class="text-sm" style="color: var(--color-text-muted);">
-        <a href="https://github.com/qinnovates/bci-security/blob/main/LEGAL.md" target="_blank" rel="noopener noreferrer" class="underline" style="color: var(--color-accent);">Full legal notices and privacy disclaimer</a>
+        <a href="https://github.com/bci-security/plugin/blob/main/LEGAL.md" target="_blank" rel="noopener noreferrer" class="underline" style="color: var(--color-accent);">Full legal notices and privacy disclaimer</a>
       </p>
     </section>
 
@@ -273,23 +273,23 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
     <section class="mb-8">
       <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Documentation</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        <a href="https://github.com/qinnovates/bci-security" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <a href="https://github.com/bci-security/plugin" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
           <div class="text-sm font-semibold mb-1" style="color: var(--color-text-primary);">README</div>
           <p class="text-xs" style="color: var(--color-text-muted);">Installation, commands, quick start</p>
         </a>
-        <a href="https://github.com/qinnovates/bci-security/blob/main/docs/SAFETY.md" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <a href="https://github.com/bci-security/plugin/blob/main/docs/SAFETY.md" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
           <div class="text-sm font-semibold mb-1" style="color: var(--color-text-primary);">SAFETY.md</div>
           <p class="text-xs" style="color: var(--color-text-muted);">Security specification, trust model, credential patterns</p>
         </a>
-        <a href="https://github.com/qinnovates/bci-security/blob/main/docs/ARCHITECTURE.md" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <a href="https://github.com/bci-security/plugin/blob/main/docs/ARCHITECTURE.md" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
           <div class="text-sm font-semibold mb-1" style="color: var(--color-text-primary);">ARCHITECTURE.md</div>
           <p class="text-xs" style="color: var(--color-text-muted);">Component map, data flow, hardrails model</p>
         </a>
-        <a href="https://github.com/qinnovates/bci-security/blob/main/docs/INTEGRATION.md" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <a href="https://github.com/bci-security/plugin/blob/main/docs/INTEGRATION.md" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
           <div class="text-sm font-semibold mb-1" style="color: var(--color-text-primary);">INTEGRATION.md</div>
           <p class="text-xs" style="color: var(--color-text-muted);">OpenBCI, BrainFlow, MNE, NWB, Emotiv, LSL</p>
         </a>
-        <a href="https://github.com/qinnovates/bci-security/blob/main/LEGAL.md" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
+        <a href="https://github.com/bci-security/plugin/blob/main/LEGAL.md" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-xl border transition-colors hover:border-[var(--color-accent)]" style="border-color: var(--color-border); background: var(--color-bg-secondary);">
           <div class="text-sm font-semibold mb-1" style="color: var(--color-text-primary);">LEGAL.md</div>
           <p class="text-xs" style="color: var(--color-text-muted);">Legal notices, privacy, liability limitations</p>
         </a>

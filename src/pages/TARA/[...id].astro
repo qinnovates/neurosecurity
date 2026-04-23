@@ -1,0 +1,12 @@
+---
+// Legacy route: preserved for inbound links to /TARA/QIF-Txxxx/.
+// Emits per-technique HTTP-level redirects to /atlas/tara/QIF-Txxxx/.
+import { THREAT_VECTORS } from '@/lib/threat-data';
+
+export function getStaticPaths() {
+  return THREAT_VECTORS.map((t) => ({ params: { id: t.id } }));
+}
+
+const { id } = Astro.params;
+return Astro.redirect(`/atlas/tara/${id}/`, 301);
+---

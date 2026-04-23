@@ -23,7 +23,7 @@ const missionGroups: NavGroup[] = [
     links: [
       { href: '/research/neuroethics-landscape/', label: 'Neuroethics Landscape', desc: 'Modern timeline of neuroethics scholarship' },
       { href: '/governance/rights/', label: 'Neurorights', desc: '5 proposed neurorights mapped to hourglass bands' },
-      { href: '/governance/ai-ethics/', label: 'AI Ethics', desc: 'Principles, frameworks, and regulatory landscape' },
+      { href: '/governance/ai-security-ethics/', label: 'AI Ethics', desc: 'Principles, frameworks, and regulatory landscape' },
       { href: '/governance/', label: 'Code of Ethics', desc: 'Ethical commitments and conduct standards' },
     ],
   },
@@ -203,7 +203,7 @@ const navSections: NavSection[] = [
           href="https://github.com/qinnovates/neurosecurity"
           target="_blank"
           rel="noopener noreferrer"
-          class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors"
+          class="inline-flex items-center justify-center min-w-[44px] min-h-[44px] rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors"
           aria-label="GitHub"
         >
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -214,7 +214,7 @@ const navSections: NavSection[] = [
         <!-- Search button -->
         <button
           id="search-btn"
-          class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors"
+          class="inline-flex items-center justify-center min-w-[44px] min-h-[44px] rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors"
           aria-label="Search"
         >
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -225,9 +225,10 @@ const navSections: NavSection[] = [
         <!-- Mobile menu button -->
         <button
           id="mobile-menu-btn"
-          class="lg:hidden p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors"
+          class="lg:hidden inline-flex items-center justify-center min-w-[44px] min-h-[44px] rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors"
           aria-label="Open menu"
           aria-expanded="false"
+          aria-controls="mobile-menu"
         >
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -238,7 +239,13 @@ const navSections: NavSection[] = [
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="lg:hidden hidden border-t border-[var(--color-border)] max-h-[80vh] overflow-y-auto">
+  <div
+    id="mobile-menu"
+    class="lg:hidden hidden border-t border-[var(--color-border)] max-h-[80vh] overflow-y-auto bg-[var(--color-bg-deep)]"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Main navigation"
+  >
     <div class="px-4 py-3 space-y-1">
       <!-- Mobile CTAs -->
       <div class="pb-2 mb-2 border-b border-[var(--color-border)] space-y-2">
@@ -326,147 +333,199 @@ const navSections: NavSection[] = [
 </div>
 
 <script>
-  function initNav() {
-    // Mobile menu
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
+  // Nav lives under `transition:persist`, so the DOM element survives SPA
+  // navigations. Re-running per-swap init would accumulate duplicate listeners
+  // and leak MutationObservers. Instead:
+  //   - Document-level click/keydown delegation: attach ONCE at module scope.
+  //   - Per-element hover bindings (desktop dropdowns): dataset-guarded so
+  //     each element is bound at most once.
+  //   - MutationObserver: explicitly disconnect the previous one on re-init.
+  (function initNavOnce() {
+    const MENU_OPEN_CLASS = 'nav-menu-open';
+    let oniObserver: MutationObserver | null = null;
+    let focusBeforeMenu: HTMLElement | null = null;
 
-    menuBtn?.addEventListener('click', () => {
-      const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
-      menuBtn.setAttribute('aria-expanded', String(!expanded));
-      mobileMenu?.classList.toggle('hidden');
-    });
+    function $(id: string): HTMLElement | null {
+      return document.getElementById(id);
+    }
 
-    document.addEventListener('astro:before-swap', () => {
-      mobileMenu?.classList.add('hidden');
-      menuBtn?.setAttribute('aria-expanded', 'false');
-    });
-
-    // Desktop dropdowns (hover + focus)
-    document.querySelectorAll<HTMLElement>('[data-dropdown]').forEach((dropdown) => {
-      const menu = dropdown.querySelector<HTMLElement>('.dropdown-menu');
-      let timeout: ReturnType<typeof setTimeout>;
-
-      const trigger = dropdown.querySelector<HTMLElement>('a[aria-expanded]');
-
-      function show() {
-        document.querySelectorAll<HTMLElement>('.dropdown-menu').forEach(m => {
-          if (m !== menu) m.classList.add('hidden');
-        });
-        document.querySelectorAll<HTMLElement>('[data-dropdown] a[aria-expanded]').forEach(t => {
-          if (t !== trigger) t.setAttribute('aria-expanded', 'false');
-        });
-        clearTimeout(timeout);
-        menu?.classList.remove('hidden');
-        trigger?.setAttribute('aria-expanded', 'true');
+    function setMenuOpen(open: boolean): void {
+      const menu = $('mobile-menu');
+      const btn = $('mobile-menu-btn');
+      if (!menu || !btn) return;
+      menu.classList.toggle('hidden', !open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      document.body.classList.toggle(MENU_OPEN_CLASS, open);
+      if (open) {
+        focusBeforeMenu = (document.activeElement as HTMLElement) ?? null;
+        const firstFocusable = menu.querySelector<HTMLElement>('a, button, [tabindex]:not([tabindex="-1"])');
+        firstFocusable?.focus();
+      } else if (focusBeforeMenu) {
+        focusBeforeMenu.focus();
+        focusBeforeMenu = null;
       }
+    }
 
-      function hide() {
-        timeout = setTimeout(() => {
-          menu?.classList.add('hidden');
-          trigger?.setAttribute('aria-expanded', 'false');
-        }, 150);
-      }
+    function toggleMenu(): void {
+      const menu = $('mobile-menu');
+      if (!menu) return;
+      setMenuOpen(menu.classList.contains('hidden'));
+    }
 
-      dropdown.addEventListener('mouseenter', show);
-      dropdown.addEventListener('mouseleave', hide);
-      dropdown.addEventListener('focusin', show);
-      dropdown.addEventListener('focusout', (e) => {
-        if (!dropdown.contains((e as FocusEvent).relatedTarget as Node)) {
-          hide();
-        }
-      });
-    });
+    function closeMenu(): void { setMenuOpen(false); }
 
-    // Mobile section accordion toggles
-    document.querySelectorAll<HTMLElement>('[data-mobile-toggle]').forEach((btn) => {
-      const key = btn.getAttribute('data-mobile-toggle');
-      const list = document.querySelector<HTMLElement>(`[data-mobile-list="${key}"]`);
-      const chevron = document.querySelector<HTMLElement>(`[data-chevron="${key}"]`);
-
-      btn.addEventListener('click', () => {
-        list?.classList.toggle('hidden');
-        chevron?.classList.toggle('rotate-180');
-      });
-    });
-
-    // Mobile group sub-accordion toggles
-    document.querySelectorAll<HTMLElement>('[data-mobile-group]').forEach((btn) => {
-      const key = btn.getAttribute('data-mobile-group');
-      const list = document.querySelector<HTMLElement>(`[data-mobile-group-list="${key}"]`);
-      const chevron = document.querySelector<HTMLElement>(`[data-group-chevron="${key}"]`);
-
-      btn.addEventListener('click', () => {
-        list?.classList.toggle('hidden');
-        chevron?.classList.toggle('rotate-90');
-      });
-    });
-
-    // Search modal
-    const searchBtn = document.getElementById('search-btn');
-    const searchModal = document.getElementById('search-modal');
-    const searchBackdrop = document.getElementById('search-backdrop');
-
-    function openSearch() {
-      searchModal?.classList.remove('hidden');
+    function openSearch(): void {
+      const modal = $('search-modal');
+      modal?.classList.remove('hidden');
       setTimeout(() => {
-        const input = searchModal?.querySelector<HTMLInputElement>('.pagefind-ui__search-input');
-        input?.focus();
+        modal?.querySelector<HTMLInputElement>('.pagefind-ui__search-input')?.focus();
       }, 50);
     }
 
-    // ONI easter egg: typing "oni" in search triggers the CTF
-    function watchForOni() {
-      const searchContainer = document.getElementById('search-container');
+    function closeSearch(): void {
+      $('search-modal')?.classList.add('hidden');
+    }
+
+    function toggleAccordion(key: string | null): void {
+      if (!key) return;
+      document.querySelector(`[data-mobile-list="${key}"]`)?.classList.toggle('hidden');
+      document.querySelector(`[data-chevron="${key}"]`)?.classList.toggle('rotate-180');
+    }
+
+    function toggleGroupAccordion(key: string | null): void {
+      if (!key) return;
+      document.querySelector(`[data-mobile-group-list="${key}"]`)?.classList.toggle('hidden');
+      document.querySelector(`[data-group-chevron="${key}"]`)?.classList.toggle('rotate-90');
+    }
+
+    // ── Delegated click ────────────────────────────────────────────────
+    document.addEventListener('click', (e) => {
+      const t = e.target;
+      if (!(t instanceof Element)) return;
+
+      if (t.closest('#mobile-menu-btn')) { toggleMenu(); return; }
+      if (t.closest('#search-btn')) { openSearch(); return; }
+      if (t.closest('#search-backdrop')) { closeSearch(); return; }
+
+      const mobileToggle = t.closest<HTMLElement>('[data-mobile-toggle]');
+      if (mobileToggle) {
+        toggleAccordion(mobileToggle.getAttribute('data-mobile-toggle'));
+        return;
+      }
+
+      const groupToggle = t.closest<HTMLElement>('[data-mobile-group]');
+      if (groupToggle) {
+        toggleGroupAccordion(groupToggle.getAttribute('data-mobile-group'));
+        return;
+      }
+
+      // Tapping a link inside the open mobile menu should close the menu
+      if (t.closest('#mobile-menu a[href]')) closeMenu();
+    });
+
+    // ── Delegated keydown ──────────────────────────────────────────────
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        const modal = $('search-modal');
+        if (modal?.classList.contains('hidden')) openSearch();
+        else closeSearch();
+        return;
+      }
+      if (e.key === 'Escape') {
+        closeSearch();
+        closeMenu();
+      }
+    });
+
+    // ── SPA lifecycle: register ONCE ───────────────────────────────────
+    document.addEventListener('astro:before-swap', () => {
+      closeSearch();
+      closeMenu();
+    });
+
+    // ── Per-element hover bindings (idempotent) ────────────────────────
+    function bindDropdowns(): void {
+      document.querySelectorAll<HTMLElement>('[data-dropdown]').forEach((dropdown) => {
+        if (dropdown.dataset.navBound === '1') return;
+        dropdown.dataset.navBound = '1';
+
+        const menu = dropdown.querySelector<HTMLElement>('.dropdown-menu');
+        const trigger = dropdown.querySelector<HTMLElement>('a[aria-expanded]');
+        let timeout: ReturnType<typeof setTimeout>;
+
+        const show = () => {
+          document.querySelectorAll<HTMLElement>('.dropdown-menu').forEach(m => {
+            if (m !== menu) m.classList.add('hidden');
+          });
+          document.querySelectorAll<HTMLElement>('[data-dropdown] a[aria-expanded]').forEach(t => {
+            if (t !== trigger) t.setAttribute('aria-expanded', 'false');
+          });
+          clearTimeout(timeout);
+          menu?.classList.remove('hidden');
+          trigger?.setAttribute('aria-expanded', 'true');
+        };
+
+        const hide = () => {
+          timeout = setTimeout(() => {
+            menu?.classList.add('hidden');
+            trigger?.setAttribute('aria-expanded', 'false');
+          }, 150);
+        };
+
+        dropdown.addEventListener('mouseenter', show);
+        dropdown.addEventListener('mouseleave', hide);
+        dropdown.addEventListener('focusin', show);
+        dropdown.addEventListener('focusout', (ev) => {
+          if (!dropdown.contains((ev as FocusEvent).relatedTarget as Node)) hide();
+        });
+      });
+    }
+
+    // ── ONI easter egg: replace observer, never accumulate ─────────────
+    function watchForOni(): void {
+      oniObserver?.disconnect();
+      oniObserver = null;
+
+      const searchContainer = $('search-container');
       if (!searchContainer) return;
-      const observer = new MutationObserver(() => {
+
+      oniObserver = new MutationObserver(() => {
         const input = searchContainer.querySelector<HTMLInputElement>('.pagefind-ui__search-input');
         if (!input || input.dataset.oniWatched) return;
         input.dataset.oniWatched = 'true';
         input.addEventListener('input', () => {
           const val = input.value.trim().toLowerCase();
-          if (val === 'oni' || val === 'kulhi' || val === 'kulhi loach' || val === 'kulhi loaches' || val === 'keviano') {
-            // Trigger the CTF via the BCI Vision toggle
+          if (['oni', 'kulhi', 'kulhi loach', 'kulhi loaches', 'keviano'].includes(val)) {
             closeSearch();
             setTimeout(() => {
               document.documentElement.classList.add('crt-flicker');
               setTimeout(() => {
                 document.documentElement.classList.remove('crt-flicker');
-                // Dispatch a custom event that BciVisionToggle listens for
                 window.dispatchEvent(new CustomEvent('oni-trigger', { detail: val }));
               }, 300);
             }, 200);
           }
         });
       });
-      observer.observe(searchContainer, { childList: true, subtree: true });
-    }
-    watchForOni();
-
-    function closeSearch() {
-      searchModal?.classList.add('hidden');
+      oniObserver.observe(searchContainer, { childList: true, subtree: true });
     }
 
-    searchBtn?.addEventListener('click', openSearch);
-    searchBackdrop?.addEventListener('click', closeSearch);
+    function initPerElement(): void {
+      bindDropdowns();
+      watchForOni();
+    }
 
-    document.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        if (searchModal?.classList.contains('hidden')) {
-          openSearch();
-        } else {
-          closeSearch();
-        }
-      }
-      if (e.key === 'Escape') {
-        closeSearch();
-      }
-    });
-
-    document.addEventListener('astro:before-swap', closeSearch);
-  }
-
-  initNav();
-  document.addEventListener('astro:after-swap', initNav);
+    initPerElement();
+    document.addEventListener('astro:after-swap', initPerElement);
+  })();
 </script>
+
+<style is:global>
+  /* Lock body scroll while mobile menu is open (iOS Safari-safe) */
+  body.nav-menu-open {
+    overflow: hidden;
+    touch-action: none;
+  }
+</style>

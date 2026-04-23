@@ -72,12 +72,15 @@ import { TARA_TECHNIQUES } from '../lib/qif-constants';
 
     <HeroParticles client:idle />
 
-    <div class="relative z-10 text-center max-w-4xl mx-auto pt-24">
+    <div class="relative z-10 text-center w-full max-w-4xl mx-auto pt-24">
       <p class="text-xs font-medium tracking-[0.2em] uppercase mb-6 hero-byline">
         <strong>Brain-Computer Interface Research by</strong> Kevin L. Qi
       </p>
 
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.15]">
+      <h1
+        class="font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.15] break-words"
+        style="font-size: clamp(1.25rem, 5vw, 3rem); overflow-wrap: anywhere;"
+      >
         <span class="text-[var(--color-text-primary)]">The First Open Security Framework</span>
         <br />
         <span class="bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
@@ -85,20 +88,20 @@ import { TARA_TECHNIQUES } from '../lib/qif-constants';
         </span>
       </h1>
 
-      <p class="text-base sm:text-lg text-[var(--color-text-muted)] mb-10 max-w-2xl mx-auto leading-relaxed">
-        Security architecture. Threat catalog. Compliance tooling. Engineering specs. {totalThreats} attack techniques catalogued across an <a href="/bci/landscape/" class="text-[var(--color-accent-primary)] hover:underline">$8 billion industry</a>.* Everything a BCI team needs to ship safe — from threat model to defense specification to clinical analogues.
+      <p class="text-sm sm:text-base md:text-lg text-[var(--color-text-muted)] mb-10 max-w-2xl mx-auto leading-relaxed break-words">
+        Security architecture. Threat catalog. Compliance tooling. Engineering specs. {totalThreats} attack techniques catalogued across an <a href="/research/landscape/" class="text-[var(--color-accent-primary)] hover:underline">$8 billion industry</a>.* Everything a BCI team needs to ship safe — from threat model to defense specification to clinical analogues.
       </p>
 
       <!-- Dual-audience CTAs -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
         <a
-          href="/TARA/"
+          href="/atlas/tara/"
           class="px-6 py-3 rounded-lg bg-[var(--color-accent-primary)] text-white font-medium hover:bg-[var(--color-accent-primary)]/90 transition-colors"
         >
           See the Threat Atlas
         </a>
         <a
-          href="/whitepaper/"
+          href="/research/whitepaper/"
           class="px-6 py-3 rounded-lg glass text-[var(--color-text-primary)] font-medium hover:bg-white/10 transition-colors"
         >
           Read the Framework
@@ -106,15 +109,15 @@ import { TARA_TECHNIQUES } from '../lib/qif-constants';
       </div>
 
       <!-- One Real Attack -->
-      <div class="glass rounded-xl p-6 max-w-2xl mx-auto mt-10 mb-6 text-left" style="border-left: 3px solid var(--color-accent-primary);">
-        <p class="text-[10px] font-mono tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-3">What a BCI attack actually looks like</p>
-        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
+      <div class="glass rounded-xl p-4 sm:p-6 max-w-2xl mx-auto mt-10 mb-6 text-left" style="border-left: 3px solid var(--color-accent-primary);">
+        <p class="text-[10px] font-mono tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-3 break-words">What a BCI attack actually looks like</p>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3 break-words">
           A brain-computer interface reads your motor intent — "move right hand." An attacker intercepts that signal and replays it. Your hand moves when you didn't tell it to.
         </p>
-        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3 break-words">
           The same mechanism — electrical signal repetition — is used therapeutically in stroke recovery. Same physics. Different intent.
         </p>
-        <p class="text-xs text-[var(--color-text-faint)]">
+        <p class="text-xs text-[var(--color-text-faint)] break-words">
           This is one of {totalThreats} catalogued techniques. <a href="/atlas/" class="text-[var(--color-accent-primary)] hover:underline">Launch Neural Atlas &rarr;</a>
         </p>
       </div>
@@ -128,7 +131,7 @@ import { TARA_TECHNIQUES } from '../lib/qif-constants';
       </div>
 
       <p class="text-[10px] text-[var(--color-text-faint)] mt-4">
-        *Median estimate across <a href="/bci/landscape/" class="underline hover:text-[var(--color-text-muted)] transition-colors">9 market research firms</a>.
+        *Projected BCI market by 2032. Median estimate across <a href="/research/landscape/" class="underline hover:text-[var(--color-text-muted)] transition-colors">9 market research firms</a>. Distinct from disclosed venture funding to date ($4B through 2024, per Pitchbook/Tracxn) — cited separately in the <a href="/research/whitepaper/" class="underline hover:text-[var(--color-text-muted)] transition-colors">whitepaper</a>.
       </p>
       <p class="text-[10px] mt-1" style="color: var(--color-text-faint)">{confirmed} confirmed · {demonstrated} demonstrated · {theoretical} theoretical</p>
 
@@ -277,7 +280,7 @@ import { TARA_TECHNIQUES } from '../lib/qif-constants';
           </h3>
         </div>
         <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
-          28 consumer sensor exploitation techniques validated with real devices. ANC earbuds extract ear canal biometrics at &minus;47 dB below music. No firmware exploit. Just physics.
+          28 consumer sensor exploitation techniques demonstrated on real devices in published research. ANC earbuds extract ear canal biometrics at &minus;47 dB below music. No firmware exploit. Just physics.
         </p>
       </a>
 
@@ -331,7 +334,7 @@ import { TARA_TECHNIQUES } from '../lib/qif-constants';
         </div>
         <div class="flex flex-col sm:flex-row gap-3 shrink-0">
           <a
-            href="/TARA/#diagnostic"
+            href="/atlas/tara/#diagnostic"
             class="px-5 py-2.5 rounded-lg bg-[var(--color-accent-secondary)] text-white font-medium text-sm hover:bg-[var(--color-accent-secondary)]/90 transition-colors text-center"
           >
             Explore Diagnostic View
