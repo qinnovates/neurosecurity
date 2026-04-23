@@ -1,5 +1,6 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import { TARA_DSM5 } from '@/lib/qif-constants';
 
 const caseStudies = [
   {
@@ -58,11 +59,11 @@ const caseStudies = [
   {
     title: 'The Neural Impact Chain',
     subtitle: 'When security scores map to psychiatric categories',
-    href: '/research/papers/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/',
+    href: '/research/papers/2026-02-13-the-neural-impact-chain-when-niss-scores-map-to-psychiatric-risk-categories/',
     date: '2026-02-13',
     type: 'Research Analysis',
     tags: ['TARA', 'DSM-5-TR', 'NISS', 'Psychiatry', 'RDoC'],
-    description: '99 BCI attack techniques mapped to DSM-5-TR diagnoses. NISS scores correlate with clinical categories. When a BCI attack disrupts your amygdala, what happens to your mental health?',
+    description: `${TARA_DSM5} BCI attack techniques mapped to DSM-5-TR diagnostic categories (for threat modeling purposes). NISS scores correlate with clinical categories. When a BCI attack disrupts your amygdala, what happens to your mental health?`,
     techniques: [],
   },
   {

@@ -7,7 +7,7 @@ Copy-paste the prompt below into both Gemini and ChatGPT. The full taxonomy docu
 ## PROMPT (paste this + the document below into Gemini AND ChatGPT)
 
 ```
-You are reviewing a proposed taxonomy reframe for TARA (Threat Assessment and Risk Analysis), a catalog of 109 brain-computer interface (BCI) threat techniques within QIF, a proposed neurosecurity framework.
+You are reviewing a proposed taxonomy reframe for TARA (Threat and Risk Analysis), a catalog of 109 brain-computer interface (BCI) threat techniques within QIF, a proposed neurosecurity framework.
 
 The current taxonomy organizes techniques by ATTACK METHOD (16 tactic categories like "Neural Injection," "Data Harvest," "Cognitive Exploitation"). The proposed reframe organizes techniques by BIOLOGICAL DOMAIN (11 domains: Vision, Audition, Somatosensory, Vestibular, Motor, Affect, Cognition, Memory, Language, Autonomic, Identity) + a 12th domain for Silicon-only (no biological target), crossed with 3 INTERACTION MODES (Reconnaissance, Manipulation, Disruption).
 

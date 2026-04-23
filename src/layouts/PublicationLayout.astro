@@ -19,6 +19,15 @@ interface Props {
 const { title, date: rawDate, tags, source, subtitle, factChecked, factCheckDate } = Astro.props;
 const date = rawDate instanceof Date ? rawDate : new Date(rawDate);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Meta description: prefer subtitle; else assemble from title + tags + date
+// to satisfy SEO (≥50 chars) and avoid the generic "— Qinnovate Publications"
+// trailer that was flagged as too short in the 2026-04-23 audit.
+const _dateStr = date.toISOString().slice(0, 10);
+const _tagStr = (tags || []).slice(0, 4).map((t: string) => cleanTag(t)).filter(Boolean).join(', ');
+const metaDescription = (subtitle && subtitle.length >= 50)
+  ? subtitle
+  : `${title}${subtitle ? ` — ${subtitle}` : ''}. Field journal entry from Qinnovate BCI security research${_tagStr ? ` (${_tagStr})` : ''}, published ${_dateStr}.`;
 const pubBreadcrumbs = [
   { label: 'News', href: '/news/' },
   { label: title },
@@ -27,7 +36,7 @@ const pubBreadcrumbs = [
 
 <BaseLayout
   title={title}
-  description={subtitle || `${title} — Qinnovate Publications`}
+  description={metaDescription}
   ogType="article"
   articleMeta={{ publishedTime: date.toISOString(), author: "Qinnovate", tags }}
   breadcrumbs={pubBreadcrumbs}

@@ -4,6 +4,21 @@ import WhitepaperVersionSelector from '@/components/WhitepaperVersionSelector.as
 import { getWhitepaperStats } from '@/lib/whitepaper-stats';
 import { getLatestChangelog, getTacticsWithCounts, THREAT_DOMAINS } from '@/lib/threat-data';
 import { PILLARS, HOURGLASS_BANDS, HOURGLASS_WIDTHS, TARA_TECHNIQUES } from '@/lib/qif-constants';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+// Derivation-log entry count at build time. Reads the log and counts
+// lines starting with "## Entry" — single source of truth is the log itself.
+function countDerivationEntries(): number {
+  try {
+    const path = resolve(process.cwd(), 'osi-of-mind/QIF-DERIVATION-LOG.md');
+    const content = readFileSync(path, 'utf-8');
+    return (content.match(/^## Entry /gm) || []).length;
+  } catch {
+    return 0;
+  }
+}
+const derivationEntryCount = countDerivationEntries();
 
 // Visualization components
 import HourglassChart from '@/components/whitepaper/HourglassChart.astro';
@@ -915,7 +930,7 @@ const tacticColors: Record<string, string> = {
         </p>
         <div class="prose mb-8">
           <p>
-            TARA (Therapeutic Applications &amp; Risk Assessment) is a dual-use atlas of {stats.totalTechniques} BCI techniques. Every entry is three things at once: a security threat, an ethical concern, and a potential therapy. Of these, {stats.tara.dualUse.confirmed} have confirmed therapeutic applications with published clinical evidence. {stats.dsm5.withDsm5} are mapped to DSM-5-TR psychiatric diagnoses. This is not a threat registry with clinical notes appended. It is a single atlas built from the ground up to serve security engineers, clinicians, researchers, and regulators from the same source of truth.
+            TARA (Threat and Risk Analysis) is a dual-use atlas of {stats.totalTechniques} BCI techniques. Every entry is three things at once: a security threat, an ethical concern, and a potential therapy. Of these, {stats.tara.dualUse.confirmed} have confirmed therapeutic applications with published clinical evidence. {stats.dsm5.withDsm5} are mapped to DSM-5-TR psychiatric diagnoses. This is not a threat registry with clinical notes appended. It is a single atlas built from the ground up to serve security engineers, clinicians, researchers, and regulators from the same source of truth.
           </p>
           <p>
             TARA exposes each technique through four explicit projections:
@@ -3160,7 +3175,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
 
   <div class="glass rounded-xl p-5 text-center mb-8" style="border-left: 3px solid var(--color-accent-tertiary);">
     <p class="text-xs text-[var(--color-text-muted)]">
-      The complete derivation log contains 106 entries spanning the full development arc, from the first &ldquo;OSI is wrong&rdquo; insight through TARA expansion, NISS scoring, neurorights mapping, and the Neural OS architecture. Every entry documents the human decision, which AI systems were involved, and what was accepted versus rejected. Read the full log at <a href="https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md" class="text-[var(--color-accent-primary)]">QIF-DERIVATION-LOG.md</a>.
+      The complete derivation log contains {derivationEntryCount} entries spanning the full development arc, from the first &ldquo;OSI is wrong&rdquo; insight through TARA expansion, NISS scoring, neurorights mapping, and the Neural OS architecture. Every entry documents the human decision, which AI systems were involved, and what was accepted versus rejected. Read the full log at <a href="https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md" class="text-[var(--color-accent-primary)]">QIF-DERIVATION-LOG.md</a>.
     </p>
   </div>
 </section>
@@ -3498,7 +3513,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
 
         <div class="glass rounded-xl p-5 text-center mb-8" style="border-left: 3px solid var(--color-accent-tertiary);">
           <p class="text-xs text-[var(--color-text-muted)]">
-            The complete derivation log contains 106 entries spanning weeks of development, from the first &ldquo;OSI is wrong&rdquo; insight through the final neurorights restructuring. Every entry documents the human decision, which AI systems were involved, and what was accepted versus rejected. Read the full log at <a href="https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md" class="text-[var(--color-accent-primary)]">QIF-DERIVATION-LOG.md</a>.
+            The complete derivation log contains {derivationEntryCount} entries spanning weeks of development, from the first &ldquo;OSI is wrong&rdquo; insight through the final neurorights restructuring. Every entry documents the human decision, which AI systems were involved, and what was accepted versus rejected. Read the full log at <a href="https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md" class="text-[var(--color-accent-primary)]">QIF-DERIVATION-LOG.md</a>.
           </p>
         </div>
 

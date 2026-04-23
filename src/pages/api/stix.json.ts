@@ -15,7 +15,7 @@ function convertToStix(threats: typeof THREAT_VECTORS) {
         spec_version: "2.1",
         created: "2026-01-01T00:00:00.000Z",
         modified: timestamp,
-        name: "Qinnovate Interface Framework (QIF)",
+        name: "Quantified Interconnection Framework (QIF)",
         identity_class: "organization",
         sectors: ["technology", "healthcare", "research"],
         contact_information: "https://qinnovate.com"

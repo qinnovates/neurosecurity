@@ -131,7 +131,7 @@ But good science starts with someone saying: *that's weird. Let me write it down
 
 *This post is adapted from the [QIF Field Journal](qif-framework/QIF-FIELD-JOURNAL.md) — a living, append-only research journal maintained alongside the QIF framework.*
 
-*Part of the [QIF (Quantum Indeterministic Framework for Neural Security)](https://github.com/qinnovates/qinnovate) research.*
+*Part of the [QIF (Quantified Interconnection Framework for Neural Security)](https://github.com/qinnovates/qinnovate) research.*
 
 **Sub-Tags:** #Synesthesia #Neuroplasticity #BCI #Neuroscience #QIF #FieldJournal #Coherence #Neurodivergence #Meditation #BrainComputerInterface
 

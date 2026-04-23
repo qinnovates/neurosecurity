@@ -146,8 +146,18 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     shortDef: 'A proposed CVSS v4.0 extension for neural security (0-10 scale).',
     fullDef: 'Developed by Qinnovate as the first CVSS v4.0 extension for neural security, following FIRST.org\'s extension framework (User Guide §3.11). Six equally-weighted extension metrics: Biological Impact (BI), Cognitive Reconnaissance (CR, read-side attacks), Cognitive/Functional Disruption (CD, write-side attacks), Consent Violation (CV), Reversibility (RV), Neuroplasticity (NP). The former Cognitive Integrity (CG) metric was split into CR and CD in NISS v1.1 to distinguish unauthorized neural data extraction from unauthorized neural state modification. Context profiles (Clinical, Research, Consumer, Military) provide domain-specific weighting. Every technique carries both a NISS extension vector and a CVSS v4.0 base vector. 94.4% of TARA techniques require NISS for full-fidelity scoring. PINS flag triggers when BI >= High or RV = Irreversible. Severity: Critical (9.0+), High (7.0-8.9), Medium (4.0-6.9), Low (0.1-3.9).',
     formula: 'NISS = (BI + CR + CD + CV + RV + NP) / 6',
-    relatedTerms: ['tara-taxonomy', 'tara'],
+    relatedTerms: ['tara-taxonomy', 'tara', 'nsv2'],
     href: '/atlas/scoring/',
+    tags: ['metric', 'original'],
+  },
+  {
+    id: 'nsv2',
+    term: 'NSv2.1 (Neurosecurity Score Framework)',
+    type: 'metric',
+    shortDef: 'A proposed device-level risk framework that consumes NISS technique scores.',
+    fullDef: 'The Neurosecurity Score v2.1 is a proposed multi-layer risk framework that aggregates NISS scores across four neurorights dimensions (Ienca & Andorno, 2017) with physics-based feasibility gating and population-adjusted context baselines. NISS is the technique-level scoring metric; NSv2.1 is the device- and deployment-level risk framework that models NISS in operational context. Vector example: NSv2.1:6.02/CL:6.31/MI:6.32/MP:5.88/PC:4.59/EA:7.37.',
+    relatedTerms: ['niss', 'tara', 'tara-taxonomy'],
+    href: '/atlas/scoring/#nsv2',
     tags: ['metric', 'original'],
   },
 
@@ -174,7 +184,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
   },
   {
     id: 'tara',
-    term: 'TARA (Therapeutic Applications & Risk Assessment)',
+    term: 'TARA (Threat and Risk Analysis)',
     type: 'component',
     shortDef: 'Interactive threat atlas mapping BCI attack vectors across four domains.',
     fullDef: 'A comprehensive threat atlas organizing BCI threats across Security, Clinical, Governance, and Engineering domains. Contains technique entries scored with NISS and classified using the TARA Taxonomy. Provides filterable, searchable access to the full QIF threat model.',

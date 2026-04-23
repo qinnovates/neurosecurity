@@ -1,6 +1,6 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
-import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, QIF_VERSION, TARA_TECHNIQUES } from '@/lib/qif-constants';
+import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, QIF_VERSION, TARA_TECHNIQUES, QIF_FULL_NAME, TARA_FULL_NAME } from '@/lib/qif-constants';
 import { THREAT_VECTORS, THREAT_TACTICS, THREAT_DOMAINS, getTacticsWithCounts } from '@/lib/threat-data';
 
 const tacticsWithCounts = getTacticsWithCounts();
@@ -21,7 +21,7 @@ const tacticColors: Record<string, string> = {
 
 <PageLayout
   title="QIF Framework"
-  description="The Quantified Interconnection Framework — a proposed 11-band hourglass security architecture for brain-computer interfaces."
+  description={`The ${QIF_FULL_NAME} — a proposed 11-band hourglass security architecture for brain-computer interfaces.`}
   breadcrumbs={[{ label: 'Framework' }]}
   maxWidth="wide"
 >
@@ -30,7 +30,7 @@ const tacticColors: Record<string, string> = {
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "QIF Framework — BCI Security Architecture",
-    "description": `The Quantified Interconnection Framework — a proposed 11-band hourglass security architecture for brain-computer interfaces with ${totalTechniques} catalogued attack techniques.`,
+    "description": `The ${QIF_FULL_NAME} — a proposed 11-band hourglass security architecture for brain-computer interfaces with ${totalTechniques} catalogued attack techniques.`,
     "author": { "@type": "Person", "name": "Kevin L. Qi", "url": "https://qinnovate.com" },
     "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
     "mainEntityOfPage": "https://qinnovate.com/framework/",
@@ -81,10 +81,10 @@ const tacticColors: Record<string, string> = {
             Existing cybersecurity models were built for networks and servers. Ethics frameworks handle consent and privacy. Neither asks what happens at the boundary — where silicon meets neuron — when something goes wrong. That's the question QIF answers.
           </p>
           <p>
-            The <strong>Quantified Interconnection Framework (QIF)</strong> is a proposed open security framework that attempts to bridge this gap. It defines a threat model and security architecture for the interface between silicon and neuron, built on three proposed systems:
+            The <strong>{QIF_FULL_NAME} (QIF)</strong> is a proposed open security framework that attempts to bridge this gap. It defines a threat model and security architecture for the interface between silicon and neuron, built on three proposed systems:
           </p>
           <ul>
-            <li><strong>TARA Atlas</strong> (Therapeutic Applications &amp; Risk Assessment) — a proposed dual-use atlas that classifies each BCI technique as both a security threat and a potential therapeutic application, with mappings to DSM-5-TR psychiatric diagnostic categories (for threat modeling purposes, not diagnostic claims)</li>
+            <li><strong>TARA Atlas</strong> ({TARA_FULL_NAME}) — a proposed dual-use atlas that classifies each BCI technique as both a security threat and a potential therapeutic application, with mappings to DSM-5-TR psychiatric diagnostic categories (for threat modeling purposes, not diagnostic claims)</li>
             <li><strong>NISS</strong> (Neural Impact Scoring System) — a proposed CVSS v4.0 extension adding six neural-specific metrics: biological impact, cognitive reconnaissance, cognitive disruption, consent violation, reversibility, and neuroplasticity</li>
             <li><strong>NSP</strong> (Neural Sensory Protocol) — a proposed five-layer, post-quantum wire protocol for securing BCI data links (hardware validation pending)</li>
           </ul>
@@ -204,7 +204,7 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <h3 id="taxonomy" class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">TARA Atlas</h3>
-        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-4">Therapeutic Applications &amp; Risk Assessment &ensp;|&ensp; Proposed by Qinnovate</p>
+        <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-primary)] mb-4">{TARA_FULL_NAME} &ensp;|&ensp; Proposed by Qinnovate</p>
         <div class="prose mb-6">
           <p>
             TARA is a proposed dual-use atlas where every entry is simultaneously a security threat, a clinical risk, and a potential therapeutic application. It is a proposed classification system designed for neural interfaces, organizing {totalTechniques} techniques by the anatomical or functional <em>locus</em> where they operate, across {totalDomains} domains and {totalTactics} tactics using a <code>QIF-[Domain].[Action]</code> format.
@@ -407,7 +407,7 @@ const tacticColors: Record<string, string> = {
         "name": "What is the QIF Framework?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The Quantified Interconnection Framework (QIF) is a proposed open security architecture for brain-computer interfaces. It uses an 11-band hourglass model spanning from silicon hardware through biological tissue, with threat modeling (TARA), neural impact scoring (NISS), and defense specifications."
+          "text": `The ${QIF_FULL_NAME} (QIF) is a proposed open security architecture for brain-computer interfaces. It uses an 11-band hourglass model spanning from silicon hardware through biological tissue, with threat modeling (TARA), neural impact scoring (NISS), and defense specifications.`
         }
       },
       {
@@ -415,7 +415,7 @@ const tacticColors: Record<string, string> = {
         "name": "What is TARA in BCI security?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `TARA (Threat Atlas & Risk Architecture) is QIF's threat catalog containing ${totalTechniques} catalogued BCI attack techniques organized across ${totalDomains} domains and ${totalTactics} tactics. Each technique is scored for neural impact severity and mapped to affected neurorights.`
+          "text": `TARA (${TARA_FULL_NAME}) is QIF's threat catalog containing ${totalTechniques} catalogued BCI attack techniques organized across ${totalDomains} domains and ${totalTactics} tactics. Each technique is scored for neural impact severity and mapped to affected neurorights.`
         }
       },
       {

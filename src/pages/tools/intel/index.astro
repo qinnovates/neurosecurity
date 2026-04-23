@@ -2,6 +2,7 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { TARA_TECHNIQUES } from '@/lib/qif-constants';
 
 interface IntelItem {
   id: string;
@@ -316,7 +317,7 @@ curl -o tara-stix.json https://qinnovate.com/api/stix.json
         <h4 class="text-sm font-semibold mb-2">What's in the Bundle</h4>
         <div class="space-y-1.5 text-sm text-[var(--color-text-muted)]">
           <p><strong>Identity object</strong> — Qinnovate as the source organization</p>
-          <p><strong>161 Attack Patterns</strong> — One per TARA technique, with kill chain phases, severity, band mapping, and dual-use classification</p>
+          <p><strong>{TARA_TECHNIQUES} Attack Patterns</strong> — One per TARA technique, with kill chain phases, severity, band mapping, and dual-use classification</p>
           <p><strong>External References</strong> — Each object links back to its TARA detail page</p>
           <p><strong>Custom Properties</strong> — <code class="text-xs bg-[var(--color-bg-secondary)] px-1 rounded">x_qif_severity</code>, <code class="text-xs bg-[var(--color-bg-secondary)] px-1 rounded">x_qif_bands</code>, <code class="text-xs bg-[var(--color-bg-secondary)] px-1 rounded">x_qif_dual_use</code></p>
         </div>

@@ -24,7 +24,7 @@ export function renderTARA(container, TARA_TECHNIQUES, TARA_STATS) {
   container.innerHTML = `
     <div class="vision-section">
       <div class="vision-intro">
-        <p>TARA (Threat Atlas for Risk Assessment) catalogs ${TARA_TECHNIQUES.length} attack techniques mapped across the QIF hourglass. Each technique is classified by status, severity, affected bands, and dual-use potential.</p>
+        <p>TARA (Threat and Risk Analysis) catalogs ${TARA_TECHNIQUES.length} attack techniques mapped across the QIF hourglass. Each technique is classified by status, severity, affected bands, and dual-use potential.</p>
         <p class="vision-qualifier"><em>TARA is a proposed threat catalog by Qinnovate. Techniques marked CONFIRMED are documented in published literature. Others are theoretical projections for defensive planning. This catalog exists to inform defense, not enable attack.</em></p>
       </div>
 
