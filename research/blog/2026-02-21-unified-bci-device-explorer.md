@@ -75,7 +75,7 @@ The 13 constraints are grouped into five categories:
 
 Each constraint page shows the equation, a plain-English explanation, the physical constant values used, and how it connects to BCI design decisions.
 
-No published paper unifies all 13 of these constraints into a single system. This is original work, documented in [Entry 60 of the QIF Derivation Log](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md). The system was independently [cross-validated by Gemini 2.5 Pro](https://github.com/qinnovates/qinnovate/blob/main/governance/TRANSPARENCY.md), which verified 12 of 13 constraints as correct and identified 2 corrections (mechanical mismatch ratio inverted, Johnson noise temperature corrected to 310K). Both corrections were applied.
+No published paper unifies all 13 of these constraints into a single system. This is original work, documented in [Entry 60 of the QIF Derivation Log](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md). The system was independently [cross-validated by Gemini 2.5 Pro](https://github.com/qinnovates/neurosecurity/blob/main/governance/TRANSPARENCY.md), which verified 12 of 13 constraints as correct and identified 2 corrections (mechanical mismatch ratio inverted, Johnson noise temperature corrected to 310K). Both corrections were applied.
 
 ### 3. Security Guardrails
 
@@ -205,7 +205,7 @@ The BCI Research Hub builds on several other QIF components that are also public
 
 - **[QIF Security Model](https://qinnovate.com/security/)** - The 11-band hourglass model, coherence scoring pipeline, and the four-step Map-Score-Protect-Deliver framework.
 
-- **[Neural Security Protocol (NSP)](https://qinnovate.com/nsp/)** - Post-quantum secure transport protocol for neural data. ML-KEM-768 key exchange, ML-DSA-65 signatures, 5-layer neurosecurity stack. [Rust implementation](https://github.com/qinnovates/qinnovate/tree/main/qif-framework/nsp/nsp-core) available.
+- **[Neural Security Protocol (NSP)](https://qinnovate.com/nsp/)** - Post-quantum secure transport protocol for neural data. ML-KEM-768 key exchange, ML-DSA-65 signatures, 5-layer neurosecurity stack. [Rust implementation](https://github.com/qinnovates/neurosecurity/tree/main/osi-of-mind/nsp/nsp-core) available.
 
 - **[Neurowall](https://qinnovate.com/publications/2026-02-21-neurowall-simulation-results/)** - Signal integrity monitor simulation. 7 of 9 attack types detected at 15 seconds, 9 of 9 at 30 seconds. ROC-optimized operating point: 5% false positive rate, 100% true positive rate at threshold=12, duration=20s.
 
@@ -221,9 +221,9 @@ The BCI Research Hub builds on several other QIF components that are also public
 
 BCI security is too important to be locked behind paywalls or proprietary databases. The devices listed in this explorer are being implanted in human brains right now. The attack techniques in TARA are not theoretical, they are grounded in published research with demonstrated feasibility. The physics constraints are laws of nature, not trade secrets.
 
-We compiled it, verified it, cross-referenced it, and put it behind a single GET request with no authentication. The source data is on [GitHub](https://github.com/qinnovates/qinnovate). The API is at [qinnovate.com/api/qif.json](https://qinnovate.com/api/qif.json). The [API documentation](https://qinnovate.com/bci/api/) explains every field.
+We compiled it, verified it, cross-referenced it, and put it behind a single GET request with no authentication. The source data is on [GitHub](https://github.com/qinnovates/neurosecurity). The API is at [qinnovate.com/api/qif.json](https://qinnovate.com/api/qif.json). The [API documentation](https://qinnovate.com/bci/api/) explains every field.
 
-Use it. Build on it. If you find an error, [open an issue](https://github.com/qinnovates/qinnovate/issues). If you want to add a device or technique, submit a pull request.
+Use it. Build on it. If you find an error, [open an issue](https://github.com/qinnovates/neurosecurity/issues). If you want to add a device or technique, submit a pull request.
 
 ## What's Next
 

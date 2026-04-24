@@ -14,9 +14,8 @@ from pathlib import Path
 
 from utils import REPO_ROOT, make_result, print_report
 
-TRUE_REPO_ROOT = REPO_ROOT.parent
-REGISTRY_PATH = TRUE_REPO_ROOT / 'datalake' / 'qtara-registrar.json'
-STATS_TS_PATH = TRUE_REPO_ROOT / 'src' / 'lib' / 'whitepaper-stats.ts'
+REGISTRY_PATH = REPO_ROOT / 'datalake' / 'qtara-registrar.json'
+STATS_TS_PATH = REPO_ROOT / 'src' / 'lib' / 'whitepaper-stats.ts'
 
 
 def run() -> dict:
@@ -26,7 +25,7 @@ def run() -> dict:
     if not REGISTRY_PATH.exists():
         details.append({
             'level': 'error',
-            'message': f'Registry file not found: {REGISTRY_PATH.relative_to(TRUE_REPO_ROOT)}',
+            'message': f'Registry file not found: {REGISTRY_PATH.relative_to(REPO_ROOT)}',
         })
         return make_result(1, 0, details)
 

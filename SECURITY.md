@@ -15,7 +15,7 @@ If you discover a security vulnerability in this project, please report it respo
 ### How to Report
 
 1. Email: **security@qinnovate.com**
-2. Or use GitHub's private vulnerability reporting: [Report a vulnerability](https://github.com/qinnovates/qinnovate/security/advisories/new)
+2. Or use GitHub's private vulnerability reporting: [Report a vulnerability](https://github.com/qinnovates/neurosecurity/security/advisories/new)
 
 ### What to Include
 

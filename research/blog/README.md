@@ -26,7 +26,7 @@ Currently 71 posts.
 title: "Post Title"
 subtitle: "Optional subtitle"
 date_posted: "YYYY-MM-DD"
-source: "https://github.com/qinnovates/qinnovate/blob/main/..."  # optional
+source: "https://github.com/qinnovates/neurosecurity/blob/main/..."  # optional
 tags: ["#Tag1", "#Tag2"]
 author: "Kevin Qi"
 fact_checked: false          # set to true after verification

@@ -22,7 +22,7 @@ const ROOT = join(__dirname, '..', '..');
 const CHANGELOG_PATH = join(ROOT, 'CHANGELOG.md');
 const DIST_DIR = join(ROOT, 'dist');
 const DRY_RUN = process.argv.includes('--dry-run');
-const REPO_URL = 'https://github.com/qinnovates/qinnovate';
+const REPO_URL = 'https://github.com/qinnovates/neurosecurity';
 
 // --- Tier Classification ---
 

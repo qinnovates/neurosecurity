@@ -206,7 +206,7 @@ If you're at a **funding agency**: The gap between quantum physics and BCI secur
 
 ---
 
-*Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/qinnovate).*
+*Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/neurosecurity).*
 
 ---
 

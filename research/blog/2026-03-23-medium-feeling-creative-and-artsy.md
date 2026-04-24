@@ -6,7 +6,7 @@ type: medium-post
 tags: [design, ui-ux, ai, art, y2k, prediction, creativity]
 status: draft
 description: "300 design iterations, one muse, and a prediction engine — where UI/UX is heading after cyberpunk burns out"
-original: "Terminal Blog #002 — https://github.com/qinnovates/qinnovate/blob/main/research/blog/2026-03-23-terminal-blog-002-feeling-creative-and-artsy.md"
+original: "Terminal Blog #002 — https://github.com/qinnovates/neurosecurity/blob/main/research/blog/2026-03-23-terminal-blog-002-feeling-creative-and-artsy.md"
 ---
 
 How The "Apple Wallpaper Index" Predicted the Neo-Y2K Bubble Pop & The Return Of...
@@ -42,7 +42,7 @@ See: [Quorum](https://github.com/qinnovates/quorum)
 
 Oh yea, so I just used this to run the predictions about UI/UX and it says in 10 years apps will be using the "humanism" design. It's interesting because the aesthetic is similar to some AI apps and themes now. I always thought those color schemes were off but now I wonder if they ran a prediction model way before going live and were like "yep! Trust the fortune teller that knows stats and probabilities from data."
 
-See the original blog if you want to see the AI design predictions: [Terminal Blog #002](https://github.com/qinnovates/qinnovate/blob/main/research/blog/2026-03-23-terminal-blog-002-feeling-creative-and-artsy.md)
+See the original blog if you want to see the AI design predictions: [Terminal Blog #002](https://github.com/qinnovates/neurosecurity/blob/main/research/blog/2026-03-23-terminal-blog-002-feeling-creative-and-artsy.md)
 
 ## The AI Renaissance
 
@@ -58,4 +58,4 @@ I wonder if DaVinci stopped to think "Hmm following this crazy plague, I shall c
 
 ---
 
-*This post started as an unedited [Terminal Blog #002](https://github.com/qinnovates/qinnovate/blob/main/research/blog/2026-03-23-terminal-blog-002-feeling-creative-and-artsy.md) - straight from the terminal, no word processor. The prediction engine referenced is [Quorum](https://github.com/qinnovates/quorum), a multi-persona AI review plugin I built and published on the Anthropic marketplace.*
+*This post started as an unedited [Terminal Blog #002](https://github.com/qinnovates/neurosecurity/blob/main/research/blog/2026-03-23-terminal-blog-002-feeling-creative-and-artsy.md) - straight from the terminal, no word processor. The prediction engine referenced is [Quorum](https://github.com/qinnovates/quorum), a multi-persona AI review plugin I built and published on the Anthropic marketplace.*
