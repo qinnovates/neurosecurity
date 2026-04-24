@@ -1,4 +1,4 @@
-Demo Atlas — Proprietary License
+Demo Atlas — Proprietary License (Source-Available, Non-Commercial)
 Copyright (c) 2026 Qinnovate LLC. All rights reserved.
 
 ═══════════════════════════════════════════════════════════════════════════════
@@ -19,42 +19,64 @@ Apache License 2.0 that governs the rest of this project.
 
 TERMS
 
-1. Grant. Qinnovate LLC grants you a non-exclusive, non-transferable,
-   revocable, royalty-free license to VIEW this source code and to EVALUATE
-   the live Demo Atlas UI at https://qinnovate.com/demo-atlas solely for
-   personal, non-commercial, non-production evaluation and research purposes.
+1. License grant. Qinnovate LLC grants you a non-exclusive, non-transferable,
+   revocable, royalty-free license to:
+
+   a. VIEW this source code in this repository;
+   b. EVALUATE the live Demo Atlas UI at https://qinnovate.com/demo-atlas;
+   c. MAKE FAIR USE of the UI and source for non-commercial journalism,
+      academic writing, blog posts, social media, conference presentations,
+      and similar public-interest commentary, including reproducing
+      screenshots, short source excerpts, and scoring examples, provided
+      attribution to "Qinnovate LLC" and a link back to
+      https://qinnovate.com/demo-atlas is included;
+   d. USE INTERNALLY for non-commercial evaluation at your own organization,
+      including copying short code excerpts into internal procurement,
+      security-review, or research documents;
+   e. REFERENCE AND CITE this work in academic, independent, or
+      institutional research (peer-reviewed or otherwise), including in
+      grant proposals, dissertations, course materials, and technical
+      reports;
+   f. RUN this code locally for personal learning and experimentation,
+      including modification for private non-commercial use.
 
 2. Restrictions. You may NOT, without prior written permission from
    Qinnovate LLC:
-   a. Copy, modify, adapt, translate, or create derivative works of this code
-      or UI (in whole or in part)
-   b. Use this code or UI for any commercial purpose, including in any
-      product, service, or offering (paid or unpaid) that competes with or
-      substitutes for Qinnovate LLC offerings
-   c. Distribute, sublicense, rent, lease, sell, or transfer this code,
-      compiled artifacts, or the UI to any third party
-   d. Host, deploy, or make available this code or UI on any infrastructure
-      you control or operate for the benefit of others
-   e. Remove, alter, or obscure any copyright, trademark, or other
-      proprietary notice
-   f. Use the Qinnovate LLC name, logo, or marks in any way that suggests
-      endorsement, partnership, or affiliation without written consent
-   g. Reverse-engineer, decompile, or disassemble compiled artifacts
-      (the source is provided for viewing; this does not grant rights to
-      reverse-engineer anything not provided as source)
-   h. Use any data, taxonomy, threat catalog, scoring methodology, or
-      research artifact accessed through this UI to train, fine-tune, or
-      augment any machine-learning model without written permission
 
-3. Carve-out for defensive research. Academic or independent security
-   researchers may reference this Demo Atlas in non-commercial, peer-reviewed
-   publications with proper attribution to Qinnovate LLC. This carve-out does
-   not grant rights under section 2.
+   a. Use this code, UI, or any substantial extract for any COMMERCIAL
+      PURPOSE, including in any product, service, or offering (paid or
+      unpaid) that competes with, substitutes for, or embeds Qinnovate LLC
+      offerings;
+   b. Use this code, UI, or any substantial extract in PRODUCTION at any
+      organization (your own or a third party's);
+   c. REDISTRIBUTE, sublicense, rent, lease, or sell this code, compiled
+      artifacts, or the UI as a standalone work or as part of a bundled
+      product;
+   d. HOST, DEPLOY, or otherwise make this code or UI available as a
+      service on any infrastructure you control or operate for the benefit
+      of third parties;
+   e. REMOVE, alter, or obscure any copyright, license, trademark, or
+      other proprietary notice. The in-UI footer crediting Qinnovate LLC
+      must remain visible in any reproduction of the running UI;
+   f. USE the Qinnovate LLC name, logos, or marks in any way that suggests
+      endorsement, partnership, or affiliation without written consent
+      (factual attribution under section 1(c) is permitted);
+   g. USE any data, taxonomy, threat catalog, scoring methodology, or
+      research artifact accessed through this UI or its source to train,
+      fine-tune, augment, or evaluate any machine-learning model without
+      written permission. This restriction applies to automated crawlers,
+      LLM training pipelines, and synthetic-data generation.
+
+3. Change Date. Four (4) years after the first commit establishing this
+   license (2026-04-24), or on 2030-04-24, whichever is later, this license
+   will automatically convert to the Apache License, Version 2.0. At that
+   point the "Additional Use Grant" restrictions in section 2 lapse and the
+   repository-wide Apache 2.0 license governs Demo Atlas.
 
 4. Ownership. All intellectual property rights in the Demo Atlas — including
    source code, UI designs, trade dress, assembled data, taxonomies, threat
    catalogs, scoring methodologies, and visual presentations — remain the
-   sole property of Qinnovate LLC.
+   sole property of Qinnovate LLC until the Change Date in section 3.
 
 5. No warranty. The Demo Atlas is provided "AS IS", without warranty of any
    kind, express or implied, including but not limited to warranties of
@@ -64,14 +86,14 @@ TERMS
    any claim, damages, or other liability arising from the Demo Atlas or
    its use.
 
-7. Termination. Qinnovate LLC may revoke this permission at any time for
-   any reason. Upon revocation, you must cease all use and delete all
-   copies in your possession or control.
+7. Termination. Qinnovate LLC may revoke the non-commercial license in
+   section 1 for willful breach of section 2 (restrictions). Good-faith use
+   under section 1 is not grounds for termination.
 
 8. Governing law. This license is governed by the laws of the State of
    Delaware, USA, without regard to its conflict-of-laws principles.
 
 ═══════════════════════════════════════════════════════════════════════════════
 
-Commercial licensing: commercial@qinnovate.com
+Commercial / production licensing: commercial@qinnovate.com
 Questions: legal@qinnovate.com

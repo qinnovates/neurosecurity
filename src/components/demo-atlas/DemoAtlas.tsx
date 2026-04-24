@@ -599,9 +599,9 @@ export default function DemoAtlas({ techniques, devices, eegSamples, stats, cond
         letterSpacing: '0.02em',
       }}
     >
-      © 2026 Qinnovate LLC. All rights reserved. Demo Atlas is a proprietary
-      proof-of-concept, licensed separately from the repository-wide Apache 2.0
-      source tree. View and evaluate for non-commercial research only.{' '}
+      © 2026 Qinnovate LLC. Demo Atlas is source-available for non-commercial
+      evaluation, research, and fair-use reference with attribution. Commercial
+      or production use requires a separate license.{' '}
       <a
         href="https://github.com/qinnovates/neurosecurity/blob/main/src/components/demo-atlas/LICENSE"
         target="_blank"
