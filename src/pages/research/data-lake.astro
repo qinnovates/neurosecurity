@@ -322,14 +322,14 @@ const bandColors: Record<string, string> = {
         <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-4">VC Deal Flow by Year</h3>
         <div class="flex items-end gap-3 h-32">
           {vcDeals.map((y: any) => {
-            const maxDeals = Math.max(...vcDeals.map((v: any) => v.total_deals || 0));
-            const pct = maxDeals > 0 ? ((y.total_deals || 0) / maxDeals) * 100 : 0;
+            const maxDeals = Math.max(...vcDeals.map((v: any) => v.deals || 0));
+            const pct = maxDeals > 0 ? ((y.deals || 0) / maxDeals) * 100 : 0;
             return (
               <div class="flex flex-col items-center flex-1">
-                <span class="text-[10px] font-mono text-green-400 mb-1">{y.total_deals}</span>
+                <span class="text-[10px] font-mono text-green-400 mb-1">{y.deals}</span>
                 <div class="w-full rounded-t" style={`height: ${pct}%; background: linear-gradient(to top, var(--color-accent-primary), #22c55e)`} />
                 <span class="text-[9px] text-[var(--color-text-faint)] mt-1">{y.year}</span>
-                <span class="text-[8px] font-mono text-[var(--color-text-faint)]">${Math.round((y.total_invested_usd || 0) / 1_000_000)}M</span>
+                <span class="text-[8px] font-mono text-[var(--color-text-faint)]">${Math.round((y.total_usd || 0) / 1_000_000)}M</span>
               </div>
             );
           })}
@@ -530,7 +530,7 @@ const bandColors: Record<string, string> = {
       <div class="glass rounded-xl p-5">
         <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-4">Brain Regions by QIF Band</h3>
         <div class="space-y-2">
-          {qifBands.map((b: any) => {
+          {qifBands.filter((b: any) => (regionsByBand[b.id] || 0) > 0).map((b: any) => {
             const count = regionsByBand[b.id] || 0;
             const maxRegions = Math.max(...Object.values(regionsByBand) as number[]);
             const pct = maxRegions > 0 ? (count / maxRegions) * 100 : 0;
@@ -546,7 +546,16 @@ const bandColors: Record<string, string> = {
             );
           })}
         </div>
-        <p class="text-[10px] text-[var(--color-text-faint)] mt-3">{totalRegions} brain structures across {totalBands} QIF hourglass bands</p>
+        {(() => {
+          const mappedBands = qifBands.filter((b: any) => (regionsByBand[b.id] || 0) > 0).length;
+          const synthetic = totalBands - mappedBands;
+          return (
+            <p class="text-[10px] text-[var(--color-text-faint)] mt-3">
+              {totalRegions} brain structures across {mappedBands} neural bands
+              {synthetic > 0 && <span> &middot; {synthetic} interface/system bands (I0, S1–S3) carry no brain regions by design</span>}
+            </p>
+          );
+        })()}
       </div>
 
       <!-- Neural pathways breakdown -->
