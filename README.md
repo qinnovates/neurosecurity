@@ -62,18 +62,24 @@ Each directory has a `CONTEXT.md` with a summary and file map. Start with any di
 
 ## Quick Start
 
+> **Pilot / MVP.** Data Studio is in early access. Schema, URLs, and coverage may change without notice. Not intended for production pipelines.
+
 **Browse the data:** [qinnovate.com/data-studio](https://qinnovate.com/data-studio/) — 31 open datasets, downloadable as Parquet
 
 **Query with Python:**
 ```python
-import pandas as pd
-df = pd.read_parquet("https://qinnovate.com/data/parquet/techniques.parquet")
+import pandas as pd, requests, io
+url = "https://qinnovate.com/data/parquet/techniques.parquet"
+df = pd.read_parquet(io.BytesIO(requests.get(url).content))
 df[df.severity == "critical"]
 ```
 
-**Query with DuckDB:**
+**Query with DuckDB (download first — edge CDN may reject some clients):**
+```bash
+curl -O https://qinnovate.com/data/parquet/techniques.parquet
+```
 ```sql
-SELECT * FROM read_parquet('https://qinnovate.com/data/parquet/techniques.parquet')
+SELECT * FROM read_parquet('techniques.parquet')
 WHERE severity = 'critical' ORDER BY niss_score DESC;
 ```
 
