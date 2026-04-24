@@ -1,11 +1,14 @@
 # Changelog
 
-<!-- changelog-marker: a1787b0acde50146d5b1af837ff712ab298f63ee -->
+<!-- changelog-marker: 347e1586bb97dfd3851cd338632cfabae94b4393 -->
 
 ## 2026-04-24
 
 ### Other
 - fix(ci): bump security workflow to node 22 + sync SDK registrar (#55) ([ec6ce17](https://github.com/qinnovates/qinnovate/commit/ec6ce17))
+- fix(verify): correct verify_citations bib path + handle policy-site 403s (#58) ([a1787b0](https://github.com/qinnovates/neurosecurity/commit/a1787b0))
+- chore(deps): Bump rand in /osi-of-mind/runemate/forge (#52) ([70199f0](https://github.com/qinnovates/neurosecurity/commit/70199f0))
+- fix(ci): correct REPO_ROOT, migrate dead blog URLs, update generators (#57) ([df930b0](https://github.com/qinnovates/neurosecurity/commit/df930b0))
 
 
 ## 2026-04-23
