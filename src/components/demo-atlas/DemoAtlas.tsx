@@ -5,6 +5,10 @@
  * Architecture: Hub → Device Picker / Condition Picker → Profile → Threats → Signals → Console
  * All data injected as props at build time. Zero runtime fetches.
  * All counts computed from props. ZERO hardcoded numbers.
+ *
+ * © 2026 Qinnovate LLC. All rights reserved.
+ * PROPRIETARY — see src/components/demo-atlas/LICENSE. Not covered by the
+ * repository-wide Apache 2.0 license. Commercial use requires written permission.
  */
 
 import { useState, useMemo, useCallback, useEffect, type CSSProperties } from 'react';
@@ -582,8 +586,40 @@ export default function DemoAtlas({ techniques, devices, eegSamples, stats, cond
     'console': () => <div style={{ opacity: 0.5 }}>Query console coming in Phase 3. Use the existing Data Studio for now.</div>,
   };
 
+  const copyrightFooter = (
+    <div
+      style={{
+        marginTop: '48px',
+        paddingTop: '16px',
+        borderTop: '1px solid rgba(255,255,255,0.06)',
+        fontSize: '10px',
+        lineHeight: 1.5,
+        textAlign: 'center',
+        opacity: 0.45,
+        letterSpacing: '0.02em',
+      }}
+    >
+      © 2026 Qinnovate LLC. Demo Atlas is source-available for non-commercial
+      evaluation, research, and fair-use reference with attribution. Commercial
+      or production use requires a separate license.{' '}
+      <a
+        href="https://github.com/qinnovates/neurosecurity/blob/main/src/components/demo-atlas/LICENSE"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ color: 'inherit', textDecoration: 'underline' }}
+      >
+        License
+      </a>
+    </div>
+  );
+
   if (view === 'hub') {
-    return <div style={S.container}>{renderHub()}</div>;
+    return (
+      <div style={S.container}>
+        {renderHub()}
+        {copyrightFooter}
+      </div>
+    );
   }
 
   return (
@@ -594,6 +630,7 @@ export default function DemoAtlas({ techniques, devices, eegSamples, stats, cond
           {(panels[view] || panels.hub)()}
         </div>
       </div>
+      {copyrightFooter}
     </div>
   );
 }
