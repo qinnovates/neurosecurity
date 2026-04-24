@@ -1,0 +1,159 @@
+{
+  "_metadata": {
+    "atlas": "Destrieux (aparc.a2009s)",
+    "mesh": "fsaverage5",
+    "vertices_per_hemisphere": 10242,
+    "faces_per_hemisphere": 20480,
+    "total_vertices": 20484,
+    "total_faces": 40960,
+    "qif_version": "8.0",
+    "band_index": {
+      "N7": 0,
+      "N6": 1
+    },
+    "generator": "generate-cortical-mesh.py"
+  },
+  "face_stats": {
+    "N7_neocortex": 34028,
+    "N6_limbic": 6932,
+    "total": 40960
+  },
+  "destrieux_to_qif": {
+    "G_and_S_frontomargin": "N7",
+    "G_and_S_occipital_inf": "N7",
+    "G_and_S_paracentral": "N7",
+    "G_and_S_subcentral": "N7",
+    "G_and_S_transv_frontopol": "N7",
+    "G_and_S_cingul-Ant": "N6",
+    "G_and_S_cingul-Mid-Ant": "N6",
+    "G_and_S_cingul-Mid-Post": "N6",
+    "G_cingul-Post-dorsal": "N6",
+    "G_cingul-Post-ventral": "N6",
+    "G_cuneus": "N7",
+    "G_front_inf-Opercular": "N7",
+    "G_front_inf-Orbital": "N7",
+    "G_front_inf-Triangul": "N7",
+    "G_front_middle": "N7",
+    "G_front_sup": "N7",
+    "G_Ins_lg_and_S_cent_ins": "N6",
+    "G_insular_short": "N6",
+    "G_occipital_middle": "N7",
+    "G_occipital_sup": "N7",
+    "G_oc-temp_lat-fusifor": "N7",
+    "G_oc-temp_med-Lingual": "N7",
+    "G_oc-temp_med-Parahip": "N6",
+    "G_orbital": "N7",
+    "G_pariet_inf-Angular": "N7",
+    "G_pariet_inf-Supramar": "N7",
+    "G_parietal_sup": "N7",
+    "G_postcentral": "N7",
+    "G_precentral": "N7",
+    "G_precuneus": "N7",
+    "G_rectus": "N6",
+    "G_subcallosal": "N6",
+    "G_temp_sup-G_T_transv": "N7",
+    "G_temp_sup-Lateral": "N7",
+    "G_temp_sup-Plan_polar": "N7",
+    "G_temp_sup-Plan_tempo": "N7",
+    "G_temporal_inf": "N7",
+    "G_temporal_middle": "N7",
+    "Lat_Fis-ant-Horizont": "N7",
+    "Lat_Fis-ant-Vertical": "N7",
+    "Lat_Fis-post": "N7",
+    "Pole_occipital": "N7",
+    "Pole_temporal": "N7",
+    "S_calcarine": "N7",
+    "S_central": "N7",
+    "S_cingul-Marginalis": "N6",
+    "S_circular_insula_ant": "N6",
+    "S_circular_insula_inf": "N6",
+    "S_circular_insula_sup": "N6",
+    "S_collat_transv_ant": "N6",
+    "S_collat_transv_post": "N7",
+    "S_front_inf": "N7",
+    "S_front_middle": "N7",
+    "S_front_sup": "N7",
+    "S_interm_prim-Jensen": "N7",
+    "S_intrapariet_and_P_trans": "N7",
+    "S_oc_middle_and_Lunatus": "N7",
+    "S_oc_sup_and_transversal": "N7",
+    "S_occipital_ant": "N7",
+    "S_oc-temp_lat": "N7",
+    "S_oc-temp_med_and_Lingual": "N7",
+    "S_orbital_lateral": "N7",
+    "S_orbital_med-olfact": "N6",
+    "S_orbital-H_Shaped": "N7",
+    "S_parieto_occipital": "N7",
+    "S_pericallosal": "N6",
+    "S_postcentral": "N7",
+    "S_precentral-inf-part": "N7",
+    "S_precentral-sup-part": "N7",
+    "S_suborbital": "N6",
+    "S_subparietal": "N6",
+    "S_temporal_inf": "N7",
+    "S_temporal_sup": "N7",
+    "S_temporal_transverse": "N7"
+  },
+  "n6_limbic_regions": [
+    "G_Ins_lg_and_S_cent_ins",
+    "G_and_S_cingul-Ant",
+    "G_and_S_cingul-Mid-Ant",
+    "G_and_S_cingul-Mid-Post",
+    "G_cingul-Post-dorsal",
+    "G_cingul-Post-ventral",
+    "G_insular_short",
+    "G_oc-temp_med-Parahip",
+    "G_rectus",
+    "G_subcallosal",
+    "S_cingul-Marginalis",
+    "S_circular_insula_ant",
+    "S_circular_insula_inf",
+    "S_circular_insula_sup",
+    "S_collat_transv_ant",
+    "S_orbital_med-olfact",
+    "S_pericallosal",
+    "S_suborbital",
+    "S_subparietal"
+  ],
+  "impact_region_faces": {
+    "broca": {
+      "face_count": 691,
+      "destrieux_regions": [
+        "G_front_inf-Opercular",
+        "G_front_inf-Triangul"
+      ]
+    },
+    "wernicke": {
+      "face_count": 2068,
+      "destrieux_regions": [
+        "G_pariet_inf-Supramar",
+        "G_temp_sup-Lateral",
+        "G_temp_sup-Plan_tempo"
+      ]
+    },
+    "hippocampus": {
+      "face_count": 787,
+      "destrieux_regions": [
+        "G_oc-temp_med-Parahip",
+        "S_collat_transv_ant"
+      ]
+    },
+    "cingulate": {
+      "face_count": 2781,
+      "destrieux_regions": [
+        "G_and_S_cingul-Ant",
+        "G_and_S_cingul-Mid-Ant",
+        "G_and_S_cingul-Mid-Post",
+        "G_cingul-Post-dorsal",
+        "G_cingul-Post-ventral",
+        "S_cingul-Marginalis"
+      ]
+    },
+    "striatum": [],
+    "substantia_nigra": [],
+    "thalamus": [],
+    "hypothalamus": [],
+    "pons": [],
+    "midbrain": []
+  }
+}

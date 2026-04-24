@@ -1,0 +1,22 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import QifBrainViewer from '@/components/brain/QifBrainViewer';
+import { getBrainViewData } from '@/lib/brain-view-data';
+
+const brainViews = getBrainViewData();
+---
+
+<PageLayout title="QIF Brain Viewer Test" description="Testing fsaverage5 cortical surface with QIF band coloring">
+  <main class="max-w-5xl mx-auto px-4 py-12">
+    <h1 class="text-2xl font-bold mb-2">QIF Cortical Surface Viewer</h1>
+    <p class="text-sm text-slate-500 mb-6">
+      fsaverage5 cortical mesh (20,484 vertices) colored by QIF band.
+      N7 Neocortex (dark green) &bull; N6 Limbic (lighter green).
+      Sulcal depth modulates brightness. Click bands in legend to highlight.
+    </p>
+    <QifBrainViewer
+      client:only="react"
+      views={brainViews}
+    />
+  </main>
+</PageLayout>
