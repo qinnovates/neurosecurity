@@ -1,5 +1,6 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+// Astro 6: ViewTransitions removed; use ClientRouter component instead.
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -10,9 +11,7 @@ interface Props {
   breadcrumbs?: { label: string; href?: string }[];
 }
 
-import { QIF_FULL_NAME } from '../lib/qif-constants';
-
-const { title, description = `${QIF_FULL_NAME} for Brain-Computer Interface Security`, ogImage, ogType = "website", articleMeta, breadcrumbs } = Astro.props;
+const { title, description = "Quantum Indeterministic Framework for Brain-Computer Interface Security", ogImage, ogType = "website", articleMeta, breadcrumbs } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site).toString();
 ---
@@ -96,19 +95,21 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
   <!-- RSS autodiscovery -->
   <link rel="alternate" type="application/rss+xml" title="Qinnovate Intel" href="/rss.xml" />
 
-  <!-- Security headers: only directives that are valid via <meta http-equiv>.
-       X-Frame-Options and Permissions-Policy are HTTP-header-only (set in _headers);
-       including them here triggers browser warnings. -->
+  <!-- Security headers (meta tags for non-CSP headers; Cloudflare adds HTTP headers too) -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <!-- CSP is enforced via _headers file (Cloudflare Pages). Meta-tag CSP removed to avoid conflict. -->
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
+  <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
 
   <title>{title} | Qinnovate</title>
 
   <!-- Additional head content from child layouts -->
   <slot name="head" />
 
-  <!-- View Transitions -->
-  <ViewTransitions />
+  <!-- View Transitions (Astro 6: ClientRouter replaces ViewTransitions) -->
+  <ClientRouter />
 
 
   <!-- Theme + Vision mode + Lens initialization (prevent flash) -->
