@@ -29,10 +29,22 @@ verify-report.json
 # Quorum / swarm working artifacts
 _swarm/
 
-# LaTeX build artifacts (leak local paths)
+# LaTeX build artifacts
 *.fls
 *.aux
 *.fdb_latexmk
+*.bbl
+*.blg
+*.toc
+*.out
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.synctex.gz
+*.bcf
+*.run.xml
 
 # Files removed from tracking for path-leak scrub (2026-04-24)
 # Kept locally but never pushed — regenerate locally if needed
