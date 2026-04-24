@@ -3,7 +3,7 @@
 title: "Field Journal #003: The Governance Question and Building the CIV Lifecycle"
 subtitle: "From the QIF Field Journal"
 date_posted: "2026-02-05"
-source: "https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md#003--2026-02-05"
+source: "https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#003--2026-02-05"
 tags: ["#FieldJournal","#QIF","#Neuroethics","#Neuralink","#Quantum","#NSP","#BCI"]
 author: "Kevin Qi"
 fact_checked: true
@@ -36,9 +36,9 @@ The lifecycle is my answer to the governance vacuum. Not a complete answer — I
 
 ---
 
-*This entry is part of the [QIF Field Journal](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md), a living, append-only research journal documenting first-person observations at the intersection of neurosecurity, BCI engineering, and neurorights. The journal exists because neural privacy is a right, not a feature. Tools like [macshield](https://github.com/qinnovates/macshield) protect digital identity on networks; this research works toward protecting cognitive identity at the neural interface.*
+*This entry is part of the [QIF Field Journal](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md), a living, append-only research journal documenting first-person observations at the intersection of neurosecurity, BCI engineering, and neurorights. The journal exists because neural privacy is a right, not a feature. Tools like macshield protect digital identity on networks; this research works toward protecting cognitive identity at the neural interface.*
 
-[Read this entry in context](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md#003--2026-02-05)
+[Read this entry in context](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#003--2026-02-05)
 
 ---
 

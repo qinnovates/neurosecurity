@@ -8,7 +8,7 @@ If you discover a security vulnerability in the QIF specification, TARA registra
 2. Label it `security`
 3. Include: description, steps to reproduce (if applicable), potential impact, suggested fix (if any)
 
-For vulnerabilities that should not be disclosed publicly before a fix is available, use [GitHub's private vulnerability reporting](https://github.com/qinnovates/qinnovate/security/advisories/new).
+For vulnerabilities that should not be disclosed publicly before a fix is available, use [GitHub's private vulnerability reporting](https://github.com/qinnovates/neurosecurity/security/advisories/new).
 
 ## Disclosure Policy
 

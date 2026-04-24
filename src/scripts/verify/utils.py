@@ -15,7 +15,7 @@ from typing import Optional
 CACHE_DIR = Path(__file__).parent / '.cache'
 CACHE_DIR.mkdir(exist_ok=True)
 
-REPO_ROOT = Path(__file__).parent.parent.parent
+REPO_ROOT = Path(__file__).parent.parent.parent.parent
 
 # Rate limiting
 _last_request_time = 0.0

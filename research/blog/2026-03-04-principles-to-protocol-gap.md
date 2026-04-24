@@ -90,8 +90,8 @@ What is needed:
 
 The full neuroethics landscape survey, with all 23 frameworks compared and 12+ institutions mapped, is available at [/landscape/](/landscape/).
 
-The source bibliography (255+ verified citations) is maintained in the [QIF Research Sources Registry](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-RESEARCH-SOURCES.md).
+The source bibliography (255+ verified citations) is maintained in the [QIF Research Sources Registry](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-RESEARCH-SOURCES.md).
 
 ---
 
-*Written with AI assistance (Claude). Research compilation by 6 parallel agents; all claims and citations verified by the author. Full AI collaboration transparency log at [governance/TRANSPARENCY.md](https://github.com/qinnovates/qinnovate/blob/main/governance/TRANSPARENCY.md).*
+*Written with AI assistance (Claude). Research compilation by 6 parallel agents; all claims and citations verified by the author. Full AI collaboration transparency log at [governance/TRANSPARENCY.md](https://github.com/qinnovates/neurosecurity/blob/main/governance/TRANSPARENCY.md).*

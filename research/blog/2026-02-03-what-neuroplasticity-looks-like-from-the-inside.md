@@ -129,15 +129,15 @@ But good science starts with someone saying: *that's weird. Let me write it down
 
 · · ·
 
-*This post is adapted from the [QIF Field Journal](qif-framework/QIF-FIELD-JOURNAL.md) — a living, append-only research journal maintained alongside the QIF framework.*
+*This post is adapted from the [QIF Field Journal](osi-of-mind/QIF-FIELD-JOURNAL.md) — a living, append-only research journal maintained alongside the QIF framework.*
 
-*Part of the [QIF (Quantum Indeterministic Framework for Neural Security)](https://github.com/qinnovates/qinnovate) research.*
+*Part of the [QIF (Quantum Indeterministic Framework for Neural Security)](https://github.com/qinnovates/neurosecurity) research.*
 
 **Sub-Tags:** #Synesthesia #Neuroplasticity #BCI #Neuroscience #QIF #FieldJournal #Coherence #Neurodivergence #Meditation #BrainComputerInterface
 
 ---
 
-*Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/qinnovate).*
+*Follow my work and research. Collaborate and contribute on [GitHub](https://github.com/qinnovates/neurosecurity).*
 
 ---
 

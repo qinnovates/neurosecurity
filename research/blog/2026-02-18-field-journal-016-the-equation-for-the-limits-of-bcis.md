@@ -3,7 +3,7 @@
 title: "Field Journal #016: The Equation for the Limits of BCIs"
 subtitle: "From the QIF Field Journal"
 date_posted: "2026-02-18"
-source: "https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md#entry-016"
+source: "https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#entry-016"
 tags: ["#FieldJournal","#QIF","#BCI","#Coherence"]
 author: "Kevin Qi"
 fact_checked: true
@@ -62,9 +62,9 @@ Missing components I need to identify:
 
 ---
 
-*This entry is part of the [QIF Field Journal](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md), a living, append-only research journal documenting first-person observations at the intersection of neurosecurity, BCI engineering, and neurorights. The journal exists because neural privacy is a right, not a feature. Tools like [macshield](https://github.com/qinnovates/macshield) protect digital identity on networks; this research works toward protecting cognitive identity at the neural interface.*
+*This entry is part of the [QIF Field Journal](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md), a living, append-only research journal documenting first-person observations at the intersection of neurosecurity, BCI engineering, and neurorights. The journal exists because neural privacy is a right, not a feature. Tools like macshield protect digital identity on networks; this research works toward protecting cognitive identity at the neural interface.*
 
-[Read this entry in context](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md#entry-016)
+[Read this entry in context](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#entry-016)
 
 ---
 

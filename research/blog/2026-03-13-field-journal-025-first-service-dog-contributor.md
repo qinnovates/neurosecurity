@@ -2,7 +2,7 @@
 title: "Field Journal #025: Qinnovate's First Service Dog Contributor"
 subtitle: "From the QIF Field Journal"
 date_posted: "2026-03-13"
-source: "https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md#entry-025"
+source: "https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#entry-025"
 tags: ["fieldjournal", "qif", "bci", "vision-restoration", "service-dog"]
 author: "Kevin Qi"
 fact_checked: true
@@ -41,7 +41,7 @@ My dog hit enter on a script tonight. Somewhere down the line, a service dog is 
 
 I can just imagine all the friends he'll make one day.
 
-He's in the [CONTRIBUTORS.md](https://github.com/qinnovates/qinnovate/blob/main/CONTRIBUTORS.md) now. Right where he belongs.
+He's in the [CONTRIBUTORS.md](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/tools/qif-lidar/CONTRIBUTORS.md) now. Right where he belongs.
 
 **Observation:** The best technology serves relationships, not just individuals. Vision restoration isn't about pixels hitting a cortex. It's about a person seeing the face of someone who has been there for them all along. Build for that.
 

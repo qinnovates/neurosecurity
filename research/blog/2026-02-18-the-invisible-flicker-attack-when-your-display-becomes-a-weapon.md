@@ -16,7 +16,7 @@ This is neural steganography weaponized: hidden messages written in photons, dec
 
 This post documents the full threat model for what we are calling **SSVEP Frequency Hijack** (QIF-T0103), chains it with the SAIL Lab's sensory-channel attack research into a complete **Neural Impact Chain**, and shows how QIF's [TARA registry](https://qinnovate.com/TARA) had already mapped three related techniques before we specifically analyzed this vector.
 
-The full derivation session is documented in [Entry 66 of the QIF Derivation Log](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-66-ssvep-frequency-hijack-discovery).
+The full derivation session is documented in [Entry 66 of the QIF Derivation Log](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-66-ssvep-frequency-hijack-discovery).
 
 ## What Is SSVEP and Why It Matters
 
@@ -336,7 +336,7 @@ The hard truth: most consumer BCIs (Muse, Emotiv, OpenBCI) implement none of the
 
 For traditional IT security, we have decades of tooling, threat models, and incident response playbooks. For BCI security, we are starting from zero. There is no BCI-SIEM. There is no neural IDS. There is no standard for what constitutes a "clean" EEG baseline versus a compromised one.
 
-This is exactly the gap that [QIF's Security Guardrails](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/qif-sec-guardrails.md) and the [TARA registry](https://qinnovate.com/TARA) are designed to fill. But the tools to implement them do not exist yet. Building them is the work ahead.
+This is exactly the gap that [QIF's Security Guardrails](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/specs/qif-sec-guardrails.md) and the [TARA registry](https://qinnovate.com/TARA) are designed to fill. But the tools to implement them do not exist yet. Building them is the work ahead.
 
 ## A Note on Why This Is Published
 
@@ -356,7 +356,7 @@ If you work in BCI security, neurotechnology, or neuroethics: Qinnovate's [Ethic
 
 3. **Guardrail G3 implementation.** Stimulus-response correlation checking is the most immediately deployable defense. If the BCI only accepts commands that match stimuli it intentionally presented, external frequency injection fails. This should be standard practice.
 
-4. **Integration with [QIF Security Guardrails](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/qif-sec-guardrails.md).** The five guardrails above need to be formalized in the guardrails document and mapped to specific hourglass bands and physics constraints.
+4. **Integration with [QIF Security Guardrails](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/specs/qif-sec-guardrails.md).** The five guardrails above need to be formalized in the guardrails document and mapped to specific hourglass bands and physics constraints.
 
 5. **Ethical neurosecurity governance.** Bug bounty programs, safe harbor language for researchers, responsible disclosure pipelines, and dual-use publication review processes. The [Code of Ethics](https://qinnovate.com/security/#ethics) sets the principles. The operational programs need to follow.
 
@@ -373,4 +373,4 @@ If you work in BCI security, neurotechnology, or neuroethics: Qinnovate's [Ethic
 
 ---
 
-*The discovery process for this threat model is documented in [Entry 66 of the QIF Derivation Log](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-66-ssvep-frequency-hijack-discovery). The Neural Impact Chain methodology was established in [Entry 53](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-DERIVATION-LOG.md#entry-53-tara-to-dsm-5-tr-diagnostic-mapping-via-neural-impact-chain). Written with AI assistance (Claude). All claims verified by the author.*
+*The discovery process for this threat model is documented in [Entry 66 of the QIF Derivation Log](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-66-ssvep-frequency-hijack-discovery). The Neural Impact Chain methodology was established in [Entry 53](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-53-tara-to-dsm-5-tr-diagnostic-mapping-via-neural-impact-chain). Written with AI assistance (Claude). All claims verified by the author.*
