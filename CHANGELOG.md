@@ -1,6 +1,12 @@
 # Changelog
 
-<!-- changelog-marker: 215c52a15828b1e41c7bc189b8c5fa3b4a345e6b -->
+<!-- changelog-marker: ec6ce17c74f7aa3fe0ca3b32c55a3f87312ad8b8 -->
+
+## 2026-04-24
+
+### Other
+- fix(ci): bump security workflow to node 22 + sync SDK registrar (#55) ([ec6ce17](https://github.com/qinnovates/qinnovate/commit/ec6ce17))
+
 
 ## 2026-04-23
 
