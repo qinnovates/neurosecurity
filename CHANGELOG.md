@@ -1,6 +1,6 @@
 # Changelog
 
-<!-- changelog-marker: 4a544bff7374a8b89c90502c210c514ddcbb1f38 -->
+<!-- changelog-marker: 9248ec1b6b071e5ca3ebe65cc07e51e63eed2fef -->
 
 ## 2026-04-24
 
@@ -12,6 +12,7 @@
 - fix(changelog): merge entries into existing date section instead of skipping (#60) ([271c8c1](https://github.com/qinnovates/neurosecurity/commit/271c8c1))
 - fix(ci): add pull-rebase retry to changelog push (#59) ([fc323c1](https://github.com/qinnovates/neurosecurity/commit/fc323c1))
 - fix(ci): harden changelog push + repair publish-pypi + dependabot-auto-merge (#61) ([4a544bf](https://github.com/qinnovates/neurosecurity/commit/4a544bf))
+- chore(ci): pin remaining action SHAs (supply-chain hygiene) (#62) ([9248ec1](https://github.com/qinnovates/neurosecurity/commit/9248ec1))
 
 
 ## 2026-04-23
