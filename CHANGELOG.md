@@ -1,6 +1,6 @@
 # Changelog
 
-<!-- changelog-marker: 347e1586bb97dfd3851cd338632cfabae94b4393 -->
+<!-- changelog-marker: 271c8c18bcf1e6f65f2460b603b1af3dcbecf51e -->
 
 ## 2026-04-24
 
@@ -9,6 +9,8 @@
 - fix(verify): correct verify_citations bib path + handle policy-site 403s (#58) ([a1787b0](https://github.com/qinnovates/neurosecurity/commit/a1787b0))
 - chore(deps): Bump rand in /osi-of-mind/runemate/forge (#52) ([70199f0](https://github.com/qinnovates/neurosecurity/commit/70199f0))
 - fix(ci): correct REPO_ROOT, migrate dead blog URLs, update generators (#57) ([df930b0](https://github.com/qinnovates/neurosecurity/commit/df930b0))
+- fix(changelog): merge entries into existing date section instead of skipping (#60) ([271c8c1](https://github.com/qinnovates/neurosecurity/commit/271c8c1))
+- fix(ci): add pull-rebase retry to changelog push (#59) ([fc323c1](https://github.com/qinnovates/neurosecurity/commit/fc323c1))
 
 
 ## 2026-04-23
