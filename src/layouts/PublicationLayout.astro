@@ -54,7 +54,7 @@ const pubBreadcrumbs = [
       "author": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
       "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
       "mainEntityOfPage": canonicalURL.toString(),
-    })} />
+    }).replace(/<\//g, '<\\/')} />
 
     <Breadcrumbs items={pubBreadcrumbs} />
 

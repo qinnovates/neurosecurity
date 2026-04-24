@@ -1,5 +1,6 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+// Astro 6: ViewTransitions removed; use ClientRouter component instead.
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -107,8 +108,8 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
   <!-- Additional head content from child layouts -->
   <slot name="head" />
 
-  <!-- View Transitions -->
-  <ViewTransitions />
+  <!-- View Transitions (Astro 6: ClientRouter replaces ViewTransitions) -->
+  <ClientRouter />
 
 
   <!-- Theme + Vision mode + Lens initialization (prevent flash) -->
