@@ -59,16 +59,28 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add CHANGELOG.md
-          if [ -n "$(git status --porcelain research/blog/)" ]; then
-            git add research/blog/
-          fi
-          git diff --cached --quiet && exit 0
-          git commit -m "auto: update changelog"
+          commit_and_push() {
+            git add CHANGELOG.md
+            if [ -n "$(git status --porcelain research/blog/)" ]; then
+              git add research/blog/
+            fi
+            git diff --cached --quiet && return 0
+            git commit -m "auto: update changelog"
+            git push
+          }
+          if commit_and_push; then exit 0; fi
+          # Push rejected — another workflow beat us. Reset to fresh main,
+          # regenerate the changelog against the new state, and retry.
           for attempt in 1 2 3; do
-            if git push; then exit 0; fi
-            echo "push rejected (attempt $attempt); rebasing on latest main"
-            git pull --rebase origin main
+            echo "push rejected (attempt $attempt); resetting to origin/main and regenerating"
+            git fetch origin main
+            git reset --hard origin/main
+            node src/scripts/changelog-update.mjs 2>&1 || {
+              ec=$?
+              [ "$ec" -eq 2 ] && { echo "no changes after reset; done"; exit 0; }
+              exit $ec
+            }
+            if commit_and_push; then exit 0; fi
           done
           echo "push failed after 3 attempts"
           exit 1
