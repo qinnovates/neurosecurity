@@ -30,6 +30,9 @@ BOT_BLOCKED_DOMAINS = {
     'mitpress.mit.edu',
     'neurology.mhmedical.com',
     'mhmedical.com',
+    'ssrn.com',
+    'oecd.org',
+    'ohchr.org',
 }
 
 

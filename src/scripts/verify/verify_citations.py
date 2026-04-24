@@ -19,7 +19,7 @@ from utils import (
 )
 
 BIB_FILES = [
-    REPO_ROOT / 'paper' / 'references.bib',
+    REPO_ROOT / 'research' / 'paper' / 'references.bib',
 ]
 
 
