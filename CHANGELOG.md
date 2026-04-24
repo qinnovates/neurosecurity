@@ -1,6 +1,6 @@
 # Changelog
 
-<!-- changelog-marker: 271c8c18bcf1e6f65f2460b603b1af3dcbecf51e -->
+<!-- changelog-marker: 4a544bff7374a8b89c90502c210c514ddcbb1f38 -->
 
 ## 2026-04-24
 
@@ -11,6 +11,7 @@
 - fix(ci): correct REPO_ROOT, migrate dead blog URLs, update generators (#57) ([df930b0](https://github.com/qinnovates/neurosecurity/commit/df930b0))
 - fix(changelog): merge entries into existing date section instead of skipping (#60) ([271c8c1](https://github.com/qinnovates/neurosecurity/commit/271c8c1))
 - fix(ci): add pull-rebase retry to changelog push (#59) ([fc323c1](https://github.com/qinnovates/neurosecurity/commit/fc323c1))
+- fix(ci): harden changelog push + repair publish-pypi + dependabot-auto-merge (#61) ([4a544bf](https://github.com/qinnovates/neurosecurity/commit/4a544bf))
 
 
 ## 2026-04-23
