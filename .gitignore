@@ -23,8 +23,11 @@ src/site/data/
 **/target/
 
 # Verification cache
-scripts/verify/.cache/
+src/scripts/verify/.cache/
 verify-report.json
+
+# Quorum / swarm working artifacts
+_swarm/
 
 # Personal / sensitive — NEVER commit personal drafts
 # School applications, SOPs, personal emails, speeches, security assessments for individuals
