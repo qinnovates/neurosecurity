@@ -188,3 +188,21 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+CARVE-OUT: Demo Atlas
+
+The following paths are EXCLUDED from the Apache License 2.0 above and are
+governed by a separate proprietary license (see src/components/demo-atlas/LICENSE):
+
+  - src/components/demo-atlas/**
+  - src/pages/demo-atlas/**
+  - src/site/demo-atlas/**
+  - Build artifacts derived from the above and deployed to
+    https://qinnovate.com/demo-atlas
+
+© 2026 Qinnovate LLC. All rights reserved. The Demo Atlas is a proprietary
+proof-of-concept. It may be viewed and evaluated for non-commercial research
+purposes only. Commercial or production use requires written permission.
+Contact: commercial@qinnovate.com

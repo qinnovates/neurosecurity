@@ -1,6 +1,10 @@
 /**
  * NTSSGauge — Neural Threat Surface Score + Coherence Metric (Cs)
  *
+ * © 2026 Qinnovate LLC. All rights reserved.
+ * PROPRIETARY — see src/components/demo-atlas/LICENSE. Not covered by the
+ * repository-wide Apache 2.0 license. Commercial use requires written permission.
+ *
  * Dual-ring semicircular gauge:
  *   Outer ring: NTSS (0-100) — how exposed is this dataset to TARA techniques?
  *   Inner ring: Cs (0-1.0) — estimated signal coherence from metadata
