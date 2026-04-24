@@ -1,6 +1,105 @@
 # Changelog
 
-<!-- changelog-marker: 7b295114a3f7b5f56cffbbb25586e7e7d309311a -->
+<!-- changelog-marker: 215c52a15828b1e41c7bc189b8c5fa3b4a345e6b -->
+
+## 2026-04-23
+
+### Other
+- security: close JSON-LD XSS escape gap + Astro 6 ClientRouter ([215c52a](https://github.com/qinnovates/qinnovate/commit/215c52a))
+- fix(ci): resolve 4 failing automation workflows ([8d8be00](https://github.com/qinnovates/qinnovate/commit/8d8be00))
+- update news feed cache [skip ci-deploy] ([10867e9](https://github.com/qinnovates/qinnovate/commit/10867e9))
+
+## 2026-04-22
+
+### Other
+- update news feed cache [skip ci-deploy] ([a4f69ac](https://github.com/qinnovates/qinnovate/commit/a4f69ac))
+
+## 2026-04-21
+
+### Other
+- update news feed cache [skip ci-deploy] ([ef9920b](https://github.com/qinnovates/qinnovate/commit/ef9920b))
+
+## 2026-04-20
+
+### Other
+- update news feed cache [skip ci-deploy] ([76491dd](https://github.com/qinnovates/qinnovate/commit/76491dd))
+
+## 2026-04-19
+
+### Other
+- update news feed cache [skip ci-deploy] ([b39a34f](https://github.com/qinnovates/qinnovate/commit/b39a34f))
+
+## 2026-04-18
+
+### Other
+- update news feed cache [skip ci-deploy] ([a38d658](https://github.com/qinnovates/qinnovate/commit/a38d658))
+
+## 2026-04-17
+
+### Other
+- update news feed cache [skip ci-deploy] ([23c4854](https://github.com/qinnovates/qinnovate/commit/23c4854))
+
+## 2026-04-16
+
+### Other
+- update news feed cache [skip ci-deploy] ([0244678](https://github.com/qinnovates/qinnovate/commit/0244678))
+
+## 2026-04-15
+
+### Other
+- update news feed cache [skip ci-deploy] ([b2bcb12](https://github.com/qinnovates/qinnovate/commit/b2bcb12))
+
+## 2026-04-14
+
+### Other
+- update news feed cache [skip ci-deploy] ([b25d5e2](https://github.com/qinnovates/qinnovate/commit/b25d5e2))
+
+## 2026-04-13
+
+### Other
+- update news feed cache [skip ci-deploy] ([c4741c5](https://github.com/qinnovates/qinnovate/commit/c4741c5))
+
+## 2026-04-12
+
+### Other
+- update news feed cache [skip ci-deploy] ([f5af2f7](https://github.com/qinnovates/qinnovate/commit/f5af2f7))
+
+## 2026-04-11
+
+### Other
+- update news feed cache [skip ci-deploy] ([94797e2](https://github.com/qinnovates/qinnovate/commit/94797e2))
+
+## 2026-04-10
+
+### Other
+- update news feed cache [skip ci-deploy] ([417568f](https://github.com/qinnovates/qinnovate/commit/417568f))
+
+## 2026-04-09
+
+### Other
+- update news feed cache [skip ci-deploy] ([8047a3c](https://github.com/qinnovates/qinnovate/commit/8047a3c))
+
+## 2026-04-08
+
+### Other
+- update news feed cache [skip ci-deploy] ([9d3afd3](https://github.com/qinnovates/qinnovate/commit/9d3afd3))
+
+## 2026-04-07
+
+### Other
+- update news feed cache [skip ci-deploy] ([f5aadbe](https://github.com/qinnovates/qinnovate/commit/f5aadbe))
+
+## 2026-04-06
+
+### Other
+- update news feed cache [skip ci-deploy] ([a5533df](https://github.com/qinnovates/qinnovate/commit/a5533df))
+
+## 2026-04-05
+
+### Other
+- update news feed cache [skip ci-deploy] ([85d9b25](https://github.com/qinnovates/qinnovate/commit/85d9b25))
+
+
 
 ## 2026-04-04
 
