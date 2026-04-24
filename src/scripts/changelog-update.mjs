@@ -276,16 +276,51 @@ function main() {
     const markerIdx = existing.indexOf(newMarker);
     if (markerIdx > -1) {
       const afterMarker = markerIdx + newMarker.length;
-      // Check if the date section already exists
+      // For dates that already have a section, merge new entries into it.
+      // For new dates, keep them in newSections to be inserted after the marker.
       for (const date of dates) {
         const dateHeader = `## ${date}`;
-        if (existing.includes(dateHeader)) {
-          // Date already has entries, merge new ones
-          // For simplicity, skip dates that already exist
-          console.log(`  skipping ${date} (already in changelog)`);
-          newSections = newSections.replace(formatDateSection(date, byDate[date]), '');
+        if (!existing.includes(dateHeader)) continue;
+
+        const dateCommits = byDate[date];
+        const byCategory = {};
+        for (const c of dateCommits) {
+          (byCategory[c.category] = byCategory[c.category] || []).push(c);
         }
+
+        // Slice out the existing date section (header through just before the next `## ` or EOF)
+        const secStart = existing.indexOf(dateHeader);
+        const afterHeader = secStart + dateHeader.length;
+        const nextDateRel = existing.substring(afterHeader).search(/\n## /);
+        const secEnd = nextDateRel > -1 ? afterHeader + nextDateRel : existing.length;
+        let section = existing.substring(secStart, secEnd);
+
+        for (const cat of Object.keys(byCategory)) {
+          const lines = byCategory[cat].map(c => {
+            const h = c.hash.substring(0, 7);
+            return `- ${c.display} ([${h}](${REPO_URL}/commit/${h}))`;
+          }).join('\n');
+          const catHeader = `### ${cat}`;
+
+          if (section.includes(catHeader)) {
+            // Append to matching `### Category` sub-section
+            const catStart = section.indexOf(catHeader);
+            const afterCat = catStart + catHeader.length;
+            const nextCatRel = section.substring(afterCat).search(/\n### /);
+            const catEnd = nextCatRel > -1 ? afterCat + nextCatRel : section.length;
+            const catTrimmed = section.substring(catStart, catEnd).replace(/\n+$/, '');
+            section = section.substring(0, catStart) + catTrimmed + '\n' + lines + '\n\n' + section.substring(catEnd);
+          } else {
+            // Create a new `### Category` within this date section
+            section = section.replace(/\n+$/, '') + `\n\n${catHeader}\n${lines}\n\n`;
+          }
+        }
+
+        existing = existing.substring(0, secStart) + section + existing.substring(secEnd);
+        newSections = newSections.replace(formatDateSection(date, byDate[date]), '');
+        console.log(`  merged ${dateCommits.length} commit(s) into existing ${date}`);
       }
+
       if (newSections.trim()) {
         existing = existing.substring(0, afterMarker) + '\n' + newSections + existing.substring(afterMarker);
       }
