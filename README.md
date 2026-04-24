@@ -60,37 +60,6 @@ Each directory has a `CONTEXT.md` with a summary and file map. Start with any di
 
 ---
 
-## Quick Start
-
-**Browse the data:** [qinnovate.com/data-studio](https://qinnovate.com/data-studio/) — 31 open datasets, downloadable as Parquet
-
-**Query with Python:**
-```python
-import pandas as pd
-df = pd.read_parquet("https://qinnovate.com/data/parquet/techniques.parquet")
-df[df.severity == "critical"]
-```
-
-**Query with DuckDB:**
-```sql
-SELECT * FROM read_parquet('https://qinnovate.com/data/parquet/techniques.parquet')
-WHERE severity = 'critical' ORDER BY niss_score DESC;
-```
-
-**Run the site locally:**
-```bash
-git clone https://github.com/qinnovates/neurosecurity.git
-cd neurosecurity && npm ci && npm run dev
-```
-
-**Validate everything:**
-```bash
-npm run health    # Check data sync, governance, counts
-npm run build     # Build site (282 pages)
-```
-
----
-
 ## About This Work
 
 The author is a security engineer with ~15 years of IT and security infrastructure experience, not a mathematician, physicist, or neuroscientist. AI tools (primarily Claude, with Gemini and ChatGPT for cross-validation) were used extensively. All AI-derived claims should be treated as **proposed and unvalidated** until independently verified by domain experts.
@@ -110,8 +79,6 @@ The author is a security engineer with ~15 years of IT and security infrastructu
 |------|-------------|---------|
 | **[Quorum](https://github.com/qinnovates/quorum)** | Orchestrate a swarm of AI experts on any question. Structured dissent, fact-checking, multi-agent validation. | `claude install qinnovates/quorum` |
 | **[BCI Security Plugin](https://github.com/qinnovates/bci-security-plugin)** | First BCI security toolkit for AI coding assistants. Scans code for neural data handling issues. | `claude install qinnovates/bci-security-plugin` |
-| **[NeuroSIM](https://github.com/qinnovates/neurosim)** | Neural Security Operations Simulator. BCI signal processing meets security operations. | See repo |
-| **[macshield](https://github.com/qinnovates/macshield)** | Network-aware macOS security hardening. | `brew install qinnovates/tools/macshield` |
 
 </details>
 
@@ -152,7 +119,6 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | **[NISS](https://qinnovate.com/atlas/scoring/)** | CVSS v4.0 extension proposal for neural interfaces (6 neural metrics) | Proposed, v1.1 |
 | **[Runemate](https://qinnovate.com/tools/runemate/)** | Native DSL compiler (67.8% compression in simulation) | v1.0 Compiler |
 | **[Security Guardrails](osi-of-mind/specs/qif-sec-guardrails.md)** | Physics-derived defense architecture for BCIs | Concept |
-| **[Knight's Watch](https://qinnovate.com/vision/)** | Opt-in community deterrence mesh for missing children and anti-trafficking. Privacy-first (no raw data leaves device), COPPA-compliant by architecture, blockchain-auditable participation. Inherits NSP/Neurowall/Runemate stack | Concept |
 
 ### Tools
 
