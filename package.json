@@ -39,16 +39,16 @@
     "version:major": "bash src/scripts/version.sh major"
   },
   "dependencies": {
-    "@astrojs/react": "^4.2.0",
-    "@astrojs/rss": "^4.0.17",
-    "@astrojs/sitemap": "^3.7.1",
+    "@astrojs/react": "^5.0.4",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
     "@react-hook/window-size": "^3.1.1",
     "@react-three/drei": "^10.0.0",
     "@react-three/fiber": "^9.0.0",
     "@tailwindcss/vite": "^4.2.1",
     "@types/katex": "^0.16.0",
     "@types/three": "^0.172.0",
-    "astro": "^5.17.0",
+    "astro": "^6.1.9",
     "astro-pagefind": "^1.8.5",
     "fast-xml-parser": "^5.5.6",
     "katex": "^0.16.38",
@@ -67,8 +67,5 @@
     "jsdom": "^28.1.0",
     "typescript": "^5.8.0",
     "vitest": "^4.0.18"
-  },
-  "overrides": {
-    "fast-xml-parser": "^5.5.6"
   }
 }

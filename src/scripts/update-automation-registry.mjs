@@ -15,7 +15,7 @@ import { resolve, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const REGISTRY_PATH = resolve(__dirname, '..', 'src', 'data', 'automation-registry.json');
+const REGISTRY_PATH = resolve(__dirname, '..', 'data', 'automation-registry.json');
 
 function getWorkflowFilename(sourcePath) {
   if (!sourcePath) return null;
