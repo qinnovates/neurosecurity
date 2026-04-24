@@ -84,3 +84,4 @@ model/qif-lab/data/
 credentials.*
 docs/
 drafts/
+.gstack/
