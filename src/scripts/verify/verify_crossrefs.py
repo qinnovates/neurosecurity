@@ -31,9 +31,9 @@ PUBLIC_FILE_GLOBS = [
 ]
 
 QIF_CONSTANTS = REPO_ROOT / 'src' / 'lib' / 'qif-constants.ts'
-QIF_TRUTH = REPO_ROOT / 'qif-framework' / 'QIF-TRUTH.md'
+QIF_TRUTH = REPO_ROOT / 'osi-of-mind' / 'whitepapers' / 'QIF-TRUTH.md'
 GLOSSARY = REPO_ROOT / 'src' / 'lib' / 'glossary-constants.ts'
-WHITEPAPER_MD = REPO_ROOT / 'qif-framework' / 'QIF-WHITEPAPER.md'
+WHITEPAPER_MD = REPO_ROOT / 'osi-of-mind' / 'whitepapers' / 'QIF-WHITEPAPER.md'
 
 
 def check_version_dois() -> list[dict]:

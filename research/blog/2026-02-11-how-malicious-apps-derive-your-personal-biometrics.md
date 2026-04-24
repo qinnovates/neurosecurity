@@ -109,7 +109,7 @@ For device manufacturers: lock sensor access behind explicit permissions. Rate-l
 
 For policymakers: the EU AI Act's provisions on emotion recognition systems and biometric identification apply to several techniques in this registry. The Illinois Biometric Information Privacy Act (BIPA) applies to ear canal fingerprinting, gait biometrics, and PPG waveform identification. But no current regulation addresses the aggregate: the multi-modal biometric fusion that combines individually regulated data streams into a surveillance capability that exceeds the sum of its parts.
 
-For researchers: the full TARA registry is machine-readable JSON, available in the [QIF repository](https://github.com/qinnovates/qinnovate). Every technique entry includes sources, evidence status, CVSS and NISS scores, clinical dual-use mappings, and governance requirements. If you are working on sensor security, privacy-preserving sensing, or BCI security, the registry is designed to be built upon.
+For researchers: the full TARA registry is machine-readable JSON, available in the [QIF repository](https://github.com/qinnovates/neurosecurity). Every technique entry includes sources, evidence status, CVSS and NISS scores, clinical dual-use mappings, and governance requirements. If you are working on sensor security, privacy-preserving sensing, or BCI security, the registry is designed to be built upon.
 
 ## The Map Before the Territory
 

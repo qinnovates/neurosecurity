@@ -54,7 +54,7 @@ export default defineConfig({
     '/open-research/roadmap/': '/news/roadmap/',
     '/open-research/derivation/': '/news/derivation/',
     '/research/whitepaper/whitepaper/': '/research/whitepaper/',
-    '/pitch/': 'https://github.com/qinnovates/qinnovate',
+    '/pitch/': 'https://github.com/qinnovates/neurosecurity',
     '/learning/': '/about/',
     '/about/milestones/': '/news/roadmap/',
 

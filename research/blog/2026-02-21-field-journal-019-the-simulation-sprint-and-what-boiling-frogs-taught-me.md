@@ -3,7 +3,7 @@
 title: "Field Journal #019: The Simulation Sprint and What Boiling Frogs Taught Me"
 subtitle: "From the QIF Field Journal"
 date_posted: "2026-02-21"
-source: "https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md#entry-019"
+source: "https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#entry-019"
 tags: ["#FieldJournal","#QIF","#BCI","#TARA"]
 author: "Kevin Qi"
 fact_checked: true
@@ -46,9 +46,9 @@ The ROC analysis was the cherry on top. FPR=5%, TPR=100% at threshold=12 over 20
 
 ---
 
-*This entry is part of the [QIF Field Journal](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md), a living, append-only research journal documenting first-person observations at the intersection of neurosecurity, BCI engineering, and neurorights. The journal exists because neural privacy is a right, not a feature. Tools like [macshield](https://github.com/qinnovates/macshield) protect digital identity on networks; this research works toward protecting cognitive identity at the neural interface.*
+*This entry is part of the [QIF Field Journal](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md), a living, append-only research journal documenting first-person observations at the intersection of neurosecurity, BCI engineering, and neurorights. The journal exists because neural privacy is a right, not a feature. Tools like macshield protect digital identity on networks; this research works toward protecting cognitive identity at the neural interface.*
 
-[Read this entry in context](https://github.com/qinnovates/qinnovate/blob/main/qif-framework/QIF-FIELD-JOURNAL.md#entry-019)
+[Read this entry in context](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#entry-019)
 
 ---
 

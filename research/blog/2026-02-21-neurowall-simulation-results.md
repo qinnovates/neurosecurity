@@ -2,7 +2,7 @@
 title: "Neurowall: Building a Neural Firewall from Scratch and Testing It Against 15 Attack Scenarios"
 subtitle: "Signal coherence, adaptive spectral detection, and honest results from a BCI defense simulation"
 date_posted: "2026-02-21"
-source: "https://github.com/qinnovates/qinnovate/tree/main/tools/neurowall"
+source: "https://github.com/qinnovates/neurosecurity/tree/main/tools/neurowall"
 tags: ["#Neurowall","#QIF","#BCI","#SignalSecurity","#TARA","#Simulation","#NeuralFirewall"]
 author: "Kevin Qi"
 fact_checked: false
@@ -216,7 +216,7 @@ The engine was Gemini-validated (Phase 11): clean vs attack behavior confirmed, 
 - Biological TLS challenge-response protocol for phase replay defense (Phase 2)
 - Adaptive thresholding to close the threshold-aware ramp gap
 
-All simulation code, ROC data, and charts are available in the [Neurowall repository](https://github.com/qinnovates/qinnovate/tree/main/tools/neurowall).
+All simulation code, ROC data, and charts are available in the [Neurowall repository](https://github.com/qinnovates/neurosecurity/tree/main/tools/neurowall).
 
 **Dive deeper:** [TARA-Neurowall — the Brain SIEM vision](/tools/#tara-neurowall) combines this detection engine with TARA's threat intelligence into a full neurosecurity monitoring platform.
 

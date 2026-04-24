@@ -111,7 +111,7 @@ The author is a security engineer with ~15 years of IT and security infrastructu
 | **[Quorum](https://github.com/qinnovates/quorum)** | Orchestrate a swarm of AI experts on any question. Structured dissent, fact-checking, multi-agent validation. | `claude install qinnovates/quorum` |
 | **[BCI Security Plugin](https://github.com/qinnovates/bci-security-plugin)** | First BCI security toolkit for AI coding assistants. Scans code for neural data handling issues. | `claude install qinnovates/bci-security-plugin` |
 | **[NeuroSIM](https://github.com/qinnovates/neurosim)** | Neural Security Operations Simulator. BCI signal processing meets security operations. | See repo |
-| **[macshield](https://github.com/qinnovates/macshield)** | Network-aware macOS security hardening. | `brew install qinnovates/tools/macshield` |
+| **macshield** | Network-aware macOS security hardening. | `brew install qinnovates/tools/macshield` |
 
 </details>
 
@@ -160,7 +160,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 |-----------|-------------|--------|
 | **[Neural Atlas](https://qinnovate.com/neural-atlas/)** | Browser-based neural security monitoring with sample EEG data, threat detection, and NISS scoring | Published |
 | **[Neurowall](./osi-of-mind/tools/neurowall/)** | Neural firewall prototype (differential privacy + NISS + policy engine) | In development, v0.8 |
-| **[macshield](https://github.com/qinnovates/macshield)** | macOS workstation hardening for public WiFi | v0.4.1 |
+| **macshield** | macOS workstation hardening for public WiFi | v0.4.1 |
 
 **Neural Atlas — Built With:**
 | Technology | Purpose |

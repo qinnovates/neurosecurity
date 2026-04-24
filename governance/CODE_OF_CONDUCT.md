@@ -62,7 +62,7 @@ These four principles are recognized in international neuroethics scholarship (I
 
 ### Medical and Accessibility Considerations
 
-> **This section is a draft and needs broader community input.** The author has personal experience with how biological conditions (B12 deficiency leading to neurological symptoms) can affect cognition and behavior in ways that may resemble code of conduct violations. This lived experience informs but should not solely define the policy. If you have perspective on this, please [open a discussion](https://github.com/qinnovates/qinnovate/discussions).
+> **This section is a draft and needs broader community input.** The author has personal experience with how biological conditions (B12 deficiency leading to neurological symptoms) can affect cognition and behavior in ways that may resemble code of conduct violations. This lived experience informs but should not solely define the policy. If you have perspective on this, please [open a discussion](https://github.com/qinnovates/neurosecurity/discussions).
 
 We are building a framework to protect brains. Some of the people in this community have brains that work differently, whether from neurological conditions, psychiatric diagnoses, neurodivergence, medication effects, nutritional deficiencies, or the very BCI devices we study. A code of conduct for a neurosecurity project that does not account for this would be hypocritical.
 
@@ -135,7 +135,7 @@ This project uses artificial intelligence in research and development. The same 
 
 ## Enforcement
 
-Report violations to the maintainer via [GitHub Security Advisories](https://github.com/qinnovates/qinnovate/security/advisories/new) or the contact methods in the About page. All reports will be investigated promptly, fairly, and confidentially.
+Report violations to the maintainer via [GitHub Security Advisories](https://github.com/qinnovates/neurosecurity/security/advisories/new) or the contact methods in the About page. All reports will be investigated promptly, fairly, and confidentially.
 
 Maintainers may remove, edit, or reject contributions that violate this Code, and may temporarily or permanently restrict participation by individuals who engage in harmful conduct. For contributions touching neuroethics-sensitive areas, maintainers will consult the project's [governance documents](/governance/) before making decisions.
 
