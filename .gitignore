@@ -29,6 +29,17 @@ verify-report.json
 # Quorum / swarm working artifacts
 _swarm/
 
+# LaTeX build artifacts (leak local paths)
+*.fls
+*.aux
+*.fdb_latexmk
+
+# Files removed from tracking for path-leak scrub (2026-04-24)
+# Kept locally but never pushed — regenerate locally if needed
+src/scripts/migrate-tara-aliases.py
+src/scripts/governance-precommit.sh
+src/site/research/tier3-codex-review.md
+
 # Personal / sensitive — NEVER commit personal drafts
 # School applications, SOPs, personal emails, speeches, security assessments for individuals
 drafts/*
