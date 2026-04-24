@@ -1000,3 +1000,17 @@ const bandColors: Record<string, string> = {
     </div>
   </section>
 </PageLayout>
+
+<script>
+  // Data-lake is a long dashboard; the global .reveal observer can leave sections
+  // opacity:0 for print, prerender, fast anchor jumps, or deep-scroll loads. Force
+  // all .reveal* sections on this page to the revealed state immediately so every
+  // chart is visible regardless of scroll position.
+  const force = () => document
+    .querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-stagger')
+    .forEach((el) => el.classList.add('revealed'));
+  force();
+  document.addEventListener('astro:page-load', force);
+  document.addEventListener('astro:after-swap', force);
+  window.addEventListener('beforeprint', force);
+</script>
