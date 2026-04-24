@@ -65,7 +65,13 @@ jobs:
           fi
           git diff --cached --quiet && exit 0
           git commit -m "auto: update changelog"
-          git push
+          for attempt in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rejected (attempt $attempt); rebasing on latest main"
+            git pull --rebase origin main
+          done
+          echo "push failed after 3 attempts"
+          exit 1
 
       - name: Create GitHub Release
         if: steps.generate.outputs.max_tier == '3' && steps.generate.outputs.changed == 'true'
