@@ -1,15 +1,6 @@
 [
   {
     "type": "external",
-    "title": "OpenAI CEO apologizes to Tumbler Ridge community",
-    "date": "2026-04-25",
-    "url": "hxxps://techcrunch[.]com/2026/04/25/openai-ceo-apologizes-to-tumbler-ridge-community/",
-    "source": "TechCrunch",
-    "summary": "In a letter to the residents of Tumbler Ridge, Canada, OpenAI CEO Sam Altman said he is “deeply sorry” that his company failed to alert law enforcement about the suspect in a recent mass shooting.",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "The Chinese tech milestone nobody is talking about: brain chips - Jing Daily",
     "date": "2026-04-25",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxQU3Y0ZGIwSmlXQjV5Y0xlcllHdGN3bm5kZTVSRnhHWVJONk1MblN1Z1E4ZGRZUU5ZVm42XzFScnJjcXg1R25wb2pvd1FTWVc2dEZOYXNKX3dpR3hPSnYtN2E4Z2x1cmtzNzYtZVFFVWttZlEzamVMMGpEUWlWLXhKbDYwaGlGbUVHM0E?oc=5",
@@ -28,11 +19,11 @@
   },
   {
     "type": "external",
-    "title": "Man diagnosed with ALS lost his speech can now communicate via Neuralink brain chip - Moneycontrol.com",
-    "date": "2026-04-25",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi3gFBVV95cUxPa3huaURlRUFfZE5JbDlFLTBGRWVhaDhtNlJhSEZlQ3QwZURGLTMxNW43OVowT0luUGFZY1l4NlFGSEd1NHhyOWNhalROcDNvUWcxQ290ZXNTcXFjb1BXS1IzMjJDSnRnR216b0FtdThMZ1FaVjRjdE5XRDBVR2VtdGotMTZOT1dMQzFqLWlSdUhsQlFjRFA0ejk0THZHUkU3bE1OZDIzNkFndFp2NEMtcnBMTE9jd0ljNDY3RzdQZ3Q1SHpOS3p2dHB6NzJFeGVwUFhHdGVzcVRfVUZTT2fSAeMBQVVfeXFMUGZqVHIyQ3UtTjV6WWJ2ZWU1R0JvdW93X1pjVzJYNnNkQVpIdnRleDJ3UEk1V3Y3V01jeWxVT0dRS05fdTZYZkFlYjR5akd3WUZtRzRyT2cwbmgtRzRmMHg4eEZhMkl4YW9zby1uTnkzbnB6aFZlYU1lRnVjaW93QXZPSWVCQVlMTWhwZ2tjQkZVeXBxUFZxV1FXeDBkbGhyYl9xc1RqTmlGOFNOWEVfOWctZmFvZFFjRnV5SjlYeUlTUFBKZklzNWJwdzIzdmtVTHN2eHRiSWdKNDFRektzMTFvU3M?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Man diagnosed with ALS lost his speech can now communicate via Neuralink brain chip&nbsp;&nbsp;Moneycontrol.com",
+    "title": "Brain Computer Interface Implant Price in United States - Market Insights - IndexBox",
+    "date": "2026-04-24",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxQNF9oNHhlb3VWNjlxQ2xxR1hUUkloblFlR0FtLUdJaGFDNkxXajdGaXk5SWRmOFhPbGd3eWR0QzJwOTA4d0Q4dmpabG15TS1qVk5Mb0dvWXV4ZWxIUUlGUE13dVo4Tnh4dlRnOFg2eHYzODNDNXZ5TVUwRlhvWjdwZjVZUDAxZEhJYWxJNFNvUEgxV2hidk9sUmhfcVRrdGs?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain Computer Interface Implant Price in United States - Market Insights&nbsp;&nbsp;IndexBox",
     "category": "neurotechnology"
   },
   {
@@ -51,6 +42,15 @@
     "url": "hxxps://spectrum[.]ieee[.]org/bci-user-experience",
     "source": "IEEE Spectrum",
     "summary": "Scott Imbrie vividly remembers the first time he used a robotic arm to shake someone’s hand and felt the robotic limb as if it were his own. “I still get goosebumps when I think about that initial con",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Did Neuralink make the wrong bet? - The Verge",
+    "date": "2026-04-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiZkFVX3lxTE9fM182NHF0alZ3aGZlZEhjZkVUejFrVXNRc05JS3pHeG8yWkNzemFnelg4M1NvSlR3dS16Z3hxeVItU1RBdHRZa19YdXBOLUMxOVFhRkFacUJGWUZlNkd6aE00bjVrdw?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Did Neuralink make the wrong bet?&nbsp;&nbsp;The Verge",
     "category": "neurotechnology"
   },
   {
@@ -82,29 +82,11 @@
   },
   {
     "type": "external",
-    "title": "Epia Neuro launches with BCI device to help stroke patients rework brain signals - Fierce Biotech",
-    "date": "2026-04-02",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxORU5SLWxUTnNBUUctVERCWjBGQkt2RGxDVHpqakc5OVVvMXl0b1A0b00yZUVXZHoyTXhlVXYzZlZiS2F2enVWYUhEbU5WWjh6TjI2TlJuWWlpNC1FNTZBTU5QaE14UGZoWmdvVWliTjZzSnQ5djNxRHZHZkMtRm53OHlvUERPd3dOMENoQ1dtRGZkb3Z1Z0hLN3h3VFZXel93R0lWVVlUNnFzZXFSdUFBUUhXcUpkUnc?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Epia Neuro launches with BCI device to help stroke patients rework brain signals&nbsp;&nbsp;Fierce Biotech",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Neuralink Patient Using Brain Chip to Carry Out Important Life Task: Playing World of Warcraft - Futurism",
     "date": "2026-03-29",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxPNDNOTTNlc2h2Z1loaXJmZ2NObXJ1Y19XczlTeXRRV3h5U1VVcWxzZlgtQjktSWRCdFFWT2dVRW5OUm9lRV9DVGhIMzJDcHJYeVN1VlprMDgtbWRUdFJRZ1ZYMGhNb01lazF6WExSM3NDRmtsNmo2anlGY2VUSFBXSFByeU5udTAwVXQ0?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Neuralink Patient Using Brain Chip to Carry Out Important Life Task: Playing World of Warcraft&nbsp;&nbsp;Futurism",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain Computer Interface Enables Rapid Communication for Two People with Paralysis - Mass General Brigham",
-    "date": "2026-03-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi2AFBVV95cUxObjlkNWktN3FZLVdmbU9HcGs4UWJHYTFRSjlWb1pQd2F2anFNZGFFQXNfb254UUdqaGlWOFRTY2FMSXFJZXpSNm5fS0lqQl9sblFYdktnLWdxbjhfMXJQOXljNFNRdTMtc3lhYVBHb0ZHeC1hS0gyTXE4VEd5WWdCa3hVV0xfSG1ucHEwLThRdWpBYm81bmpnS1JmdDR5Q1V6TVd4WGtuR1p1MUNSaW5SbDZkSm1Uc0tJWC1rNjV0cndiZ3J1WDBzQnFGeHY0bGZqY2ZaNU5peUY?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain Computer Interface Enables Rapid Communication for Two People with Paralysis&nbsp;&nbsp;Mass General Brigham",
     "category": "neurotechnology"
   },
   {
@@ -123,6 +105,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;Crunchbase News",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
+    "date": "2026-01-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
