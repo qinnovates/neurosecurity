@@ -1,38 +1,65 @@
 [
   {
     "type": "external",
-    "title": "The Chinese tech milestone nobody is talking about: brain chips - Jing Daily",
+    "title": "A Brain Implant for Depression Is About to Be Tested in Humans",
+    "date": "2026-04-27",
+    "url": "hxxps://www[.]wired[.]com/story/a-brain-implant-for-depression-is-about-to-be-tested-in-humans/",
+    "source": "Wired",
+    "summary": "While many brain-computer interface companies are focused on helping paralyzed people communicate, Motif Neurotech is targeting mental health disorders.",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Akso Health starts AI brain-signal project for therapy and machines - Stock Titan",
+    "date": "2026-04-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivAFBVV95cUxNSmp0R0tkX1BkRHhxNVFGUTZnTERKUWRWc3JfTVE2VnlDY3hJdFgtME1yRTZNWHlvTDcyVVJzck9UTDRPeXBWV05tRnRkcXhFZFZkdmdCT0h3NHNkQml6NWRFdEg0cC1rNUpXTnVOWUhzU2xGVmRndkN6ZTA3NHA5S0NlWnY4Sk5CcU1XUXhZQlBOYkQzT1dlUUxUTFd4ZXpaU3dPWXZiY0tQb0xMV0NTVnVCWnQ1aThXSW9xMQ?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Akso Health starts AI brain-signal project for therapy and machines&nbsp;&nbsp;Stock Titan",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Motif Neurotech Receives FDA Approval to Begin First Clinical Trial of its Therapeutic BCI for Treatment-Resistant Depression - Business Wire",
+    "date": "2026-04-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwJBVV95cUxQcWdVbENNR0k2VE1iakZ5Q2RudzROV2lIX0dkTWZ2ajdsQWs4NVlnZlNuMjFyY1ZkVHJLdDhtQUczdVJzUXoxd2VMOW13S2ZkUThBQUgtby1ydDZTNUgwUU9iVXgxZUxlWEN1dk9uUl9xbUJfTVRLZ0Fvc01seG5lNXhLZFNRU19uLUxHU2d3RU92SC1FdENEaXJ1VlcwZDdvdFg0OHB2UUZqN0FNak1IRjJXY3lrVzE0LVk0U3Z0UDNUNzJjUHlSVEtFbVBXY0ZZTnJPREpySVdVNEJfUVZ0VlU5RlpTTEJoZU53V0RjVlVsUXdRNVExTERIY0xqTnZXQ3NQVVlRMkd0X2VrMldB?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Motif Neurotech Receives FDA Approval to Begin First Clinical Trial of its Therapeutic BCI for Treatment-Resistant Depression&nbsp;&nbsp;Business Wire",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Resting-State EEG Biomarkers of Tinnitus Robust to Cross-Subject and Cross-Platform Variation",
+    "date": "2026-04-27",
+    "url": "hxxps://arxiv[.]org/abs/2604[.]22116",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2604.22116v1 Announce Type: new Abstract: Tinnitus is a prevalent auditory condition lacking objective biomarkers, motivating the search for reliable neural signatures. EEG, being a noninvasive ",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Earable Platform with Integrated Simultaneous EEG Sensing and Auditory Stimulation",
+    "date": "2026-04-27",
+    "url": "hxxps://arxiv[.]org/abs/2604[.]22137",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2604.22137v1 Announce Type: new Abstract: Conventional scalp-based EEG systems are cumbersome to use, requiring extensive setup, restrictive wiring, and conductive gels that can dry out and limi",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Early Preconfiguration Failure: A Novel Predictor of the Repetitive Subconcussion",
+    "date": "2026-04-27",
+    "url": "hxxps://arxiv[.]org/abs/2604[.]22275",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2604.22275v1 Announce Type: new Abstract: Early diagnosis and assessment of repetitive subconcussive (rSC) brain injuries are crucial for early clinical intervention. Conventional methods, large",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "The Chinese tech milestone nobody is talking about: Brain chips - Jing Daily",
     "date": "2026-04-25",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxQU3Y0ZGIwSmlXQjV5Y0xlcllHdGN3bm5kZTVSRnhHWVJONk1MblN1Z1E4ZGRZUU5ZVm42XzFScnJjcXg1R25wb2pvd1FTWVc2dEZOYXNKX3dpR3hPSnYtN2E4Z2x1cmtzNzYtZVFFVWttZlEzamVMMGpEUWlWLXhKbDYwaGlGbUVHM0E?oc=5",
     "source": "Google News — BCI",
-    "summary": "The Chinese tech milestone nobody is talking about: brain chips&nbsp;&nbsp;Jing Daily",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain Computer Interface Stocks: 10 Plays Beyond Neuralink - InvestorPlace",
-    "date": "2026-04-25",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiugFBVV95cUxQTUl3aV9TeXRkb3YzUTd0ckxBLVYzdS1wX25IZ3V0UWUyemdPWGdiRFVucXZyeGRsczBXNW5rM1lhM0dSaUFDYm43R1ZRVVBabTZjc01jTmpkUHQ0VEpGRWV5cjVYQVNLNTFiSGpFV1dxYnI0dkFOb2U2NUp3ZDZUSzBnb1dQY1U4VHZzTERHck5fM193MC10NmNWVGRaNnBMQmRXcDdnajRpYndza21KTV9iNkpGdXRTZ2c?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain Computer Interface Stocks: 10 Plays Beyond Neuralink&nbsp;&nbsp;InvestorPlace",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain Computer Interface Implant Price in United States - Market Insights - IndexBox",
-    "date": "2026-04-24",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxQNF9oNHhlb3VWNjlxQ2xxR1hUUkloblFlR0FtLUdJaGFDNkxXajdGaXk5SWRmOFhPbGd3eWR0QzJwOTA4d0Q4dmpabG15TS1qVk5Mb0dvWXV4ZWxIUUlGUE13dVo4Tnh4dlRnOFg2eHYzODNDNXZ5TVUwRlhvWjdwZjVZUDAxZEhJYWxJNFNvUEgxV2hidk9sUmhfcVRrdGs?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain Computer Interface Implant Price in United States - Market Insights&nbsp;&nbsp;IndexBox",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation - Medical Xpress",
-    "date": "2026-04-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxOMkhzblhTLUd4aEZmQ3R3dkR0bGlIYWpUNGpFaE5GSHZMam1TNEZvbHhqaE4taEx6eUV1TWgwRHdudllDLTJXSHJ5YnNJTW44UEljaFNCQnFRZkhaNk9oZjFCUllQc2toSGxhU0JtdXoxaUdjaHFPb0FlTmQ0aTl0djh3VHNtVWlrcTZmTlMzZw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation&nbsp;&nbsp;Medical Xpress",
+    "summary": "The Chinese tech milestone nobody is talking about: Brain chips&nbsp;&nbsp;Jing Daily",
     "category": "neurotechnology"
   },
   {
@@ -91,6 +118,33 @@
   },
   {
     "type": "external",
+    "title": "China Beat Elon Musk’s Neuralink to Approve the World’s First Commercial Brain Implant - ZME Science",
+    "date": "2026-03-23",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivgFBVV95cUxQU25CMUlTMFZ3eWZrS1EzMXNzbE5DSkwwa013X1Q2aEp6TkZSWlRiNy1ZMVJGV2dyN1FoQVZBcXlMNnBUWWNDTmNNbExuQ0twYkNlSGhiX2R1ZDVRb2FBSDBLbllkRkVyS2ZpVG02YnFkYnp4a3Nuc05mSFlXelU4WERvZmlVWDI1b3g1dmw5SEtOY2MtdUpWWHdwdEhrU2FwdE9ia2N1VGs3Ni13M3lwd2pubUlGM3Y0dzFnZzBn?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "China Beat Elon Musk’s Neuralink to Approve the World’s First Commercial Brain Implant&nbsp;&nbsp;ZME Science",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain Computer Interface Enables Rapid Communication for Two People with Paralysis - Mass General Brigham",
+    "date": "2026-03-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi2AFBVV95cUxObjlkNWktN3FZLVdmbU9HcGs4UWJHYTFRSjlWb1pQd2F2anFNZGFFQXNfb254UUdqaGlWOFRTY2FMSXFJZXpSNm5fS0lqQl9sblFYdktnLWdxbjhfMXJQOXljNFNRdTMtc3lhYVBHb0ZHeC1hS0gyTXE4VEd5WWdCa3hVV0xfSG1ucHEwLThRdWpBYm81bmpnS1JmdDR5Q1V6TVd4WGtuR1p1MUNSaW5SbDZkSm1Uc0tJWC1rNjV0cndiZ3J1WDBzQnFGeHY0bGZqY2ZaNU5peUY?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain Computer Interface Enables Rapid Communication for Two People with Paralysis&nbsp;&nbsp;Mass General Brigham",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - Yahoo Finance",
+    "date": "2026-03-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxOZVlpbGd3b3AzZTdhc2ZVdmdGNUExenN2XzRwR1dBRHdkZE5iYm5iejJvMHBQOFJGRzF0bmZXWTY2cndUaUN6aWJhZVVURDQta1ptYy1HeWJQRTFGM3paSnlrc3lPbEJQTFgxRGVQZUMyNkd3N1pzanlzZDg2bVYxY2VmWEEtQXRsMTRNNVd3?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;Yahoo Finance",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Brain-computer interface startup Science raises $230M - SiliconANGLE",
     "date": "2026-03-05",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPS0YxUk82N2IzSE16bDNnQS1Ba1hzMmZZNklwZXd0ZFJ4aThsS0xLdC1OdE1CWHMxTWUtU1U0M3EwNWd6NU1vQUxiZGhnelBJbXQ2anRZY2l1a1hsazZlakdBRE1QblVjNFpYZ1BTZDVnRm4zYmNLNHVTVVFLcGNvbmlSMFEzMGktRmJVbldQU2U2RW8?oc=5",
@@ -105,15 +159,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;Crunchbase News",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
-    "date": "2026-01-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
