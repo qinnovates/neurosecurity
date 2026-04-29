@@ -1,8 +1,8 @@
 {
   "version": "2.2",
   "generated": "2026-03-14",
-  "last_crawled": "2026-03-14",
-  "last_verified": "2026-03-14",
+  "last_crawled": "2026-04-29T04:07:49Z",
+  "last_verified": "2026-04-29T04:19:08Z",
   "description": "Comprehensive BCI industry landscape tracker. Tracks companies, devices, security posture, funding, regulatory milestones, and publication trends. Part of the QIF project's mission to map the BCI security gap.",
   "companies": [
     {
@@ -680,7 +680,11 @@
         }
       ],
       "funding_rounds": [
-        { "round": "Seed", "date": "2026-01", "amount_usd": 252000000 }
+        {
+          "round": "Seed",
+          "date": "2026-01",
+          "amount_usd": 252000000
+        }
       ],
       "company_category": "startup"
     },
@@ -1259,10 +1263,26 @@
         }
       ],
       "funding_rounds": [
-        { "round": "Seed", "date": "2021-07", "amount_usd": 47000000 },
-        { "round": "Pixium Vision acquisition", "date": "2024-04", "amount_usd": null },
-        { "round": "Convertible Note", "date": "2025-04", "amount_usd": 104000000 },
-        { "round": "Series C", "date": "2026-03", "amount_usd": 230000000 }
+        {
+          "round": "Seed",
+          "date": "2021-07",
+          "amount_usd": 47000000
+        },
+        {
+          "round": "Pixium Vision acquisition",
+          "date": "2024-04",
+          "amount_usd": null
+        },
+        {
+          "round": "Convertible Note",
+          "date": "2025-04",
+          "amount_usd": 104000000
+        },
+        {
+          "round": "Series C",
+          "date": "2026-03",
+          "amount_usd": 230000000
+        }
       ],
       "company_category": "growth_stage"
     },
@@ -2227,6 +2247,212 @@
         }
       ],
       "company_category": "startup"
+    },
+    {
+      "name": "Wispr AI",
+      "type": "non-invasive",
+      "modality": "sEMG (silent speech)",
+      "founded": "2021",
+      "headquarters": "Mountain View, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 30000000,
+      "funding_note": "Series A $30M led by Menlo Ventures, 2025-06. Hardware silent-speech wearable shelved; pivoted to Wispr Flow iOS dictation. Patent US12,482,449 (granted 2025-11-25) covers EMG-wearable→LLM pipeline.",
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "EMG silent-speech wearable patent (US12,482,449) issued 2025-11-25 to Garg/Kothari/Leonardo. No commercial hardware; current product is Flow iOS keyboard. Verified 2026-04-29.",
+      "tara_attack_surface": [],
+      "devices": [],
+      "company_category": "early_stage"
+    },
+    {
+      "name": "Sonera Inc.",
+      "type": "non-invasive",
+      "modality": "magnetomyography + mechanomyography (MxG)",
+      "founded": null,
+      "headquarters": "USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "funding_note": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Wearable optically-pumped magnetometer (20-OPM) headphone for silent-speech recognition. 86% per-user on 12-command vocabulary; necklace form factor also demoed. bioRxiv 2025.08.04.668236 (preprint 2025-08-05). Verified 2026-04-29.",
+      "tara_attack_surface": [],
+      "devices": [],
+      "company_category": "early_stage"
+    },
+    {
+      "name": "Araya Inc.",
+      "type": "non-invasive",
+      "modality": "EEG/EMG silent-speech research",
+      "founded": null,
+      "headquarters": "Tokyo, Japan",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "funding_note": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Heterogeneous-electrode silent-speech decoding (arXiv:2506.13835, Interspeech 2025). 95.3% on healthy / 54.5% on speech-impaired participant. Authors Inoue, Sato, Tomeoka et al. Verified 2026-04-29.",
+      "tara_attack_surface": [],
+      "devices": [],
+      "company_category": "research"
+    },
+    {
+      "name": "NAOX Technologies",
+      "type": "non-invasive",
+      "modality": "in-ear EEG",
+      "founded": null,
+      "headquarters": "France",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "funding_note": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "FDA 510(k) cleared 2026-01 for Naox Link (NX01) — first FDA-cleared in-ear EEG device. Single-channel; indicated age 6+ for epilepsy/sleep monitoring. K-number not publicly disclosed in coverage. Verified 2026-04-29.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Naox Link (NX01)",
+          "type": "non-invasive",
+          "channels": 1,
+          "electrode_type": "in-ear (dry)",
+          "fda_status": "510(k) cleared (2026-01)",
+          "units_deployed": null,
+          "first_human": "2026-01",
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "early_stage"
+    },
+    {
+      "name": "IDUN Technologies",
+      "type": "non-invasive",
+      "modality": "in-ear EEG",
+      "founded": "2017",
+      "headquarters": "Zurich, Switzerland",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "funding_note": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Launched IDUN Guardian 4 (2026-03-08): in-ear EEG earbud with Dryode ear-tip sensors, ADI biopotential front-end, Qualcomm Snapdragon S7. Jaw-clench detection demonstrated on-device at CES 2026. Developer presale; consumer CE/FCC certification planned Q2 2026. Verified 2026-04-29.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "IDUN Guardian 4",
+          "type": "non-invasive",
+          "channels": null,
+          "electrode_type": "in-ear (Dryode)",
+          "fda_status": "research/developer",
+          "units_deployed": null,
+          "first_human": "2026-03",
+          "price_usd": null,
+          "target_use": "research",
+          "cves_known": []
+        }
+      ],
+      "company_category": "early_stage"
+    },
+    {
+      "name": "Cerca Magnetics",
+      "type": "non-invasive",
+      "modality": "OPM-MEG",
+      "founded": null,
+      "headquarters": "Nottingham, UK",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "funding_note": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Wearable OPM-MEG systems. Selected by Epilepsy Research Institute and University of Nottingham for £1.5M Innovate UK NHS adoption pathway (started 2025-09). Verified 2026-04-29.",
+      "tara_attack_surface": [],
+      "devices": [],
+      "company_category": "early_stage"
+    },
+    {
+      "name": "Pupil Labs",
+      "type": "non-invasive",
+      "modality": "eye tracking + multimodal (with OpenBCI)",
+      "founded": "2014",
+      "headquarters": "Berlin, Germany",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "funding_note": null,
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Joint with OpenBCI: Galea Neon — wireless all-in-one EEG/EOG/EMG/EDA/PPG + eye tracking headset (shipping 2025-10). Verified 2026-04-29.",
+      "tara_attack_surface": [],
+      "devices": [],
+      "company_category": "early_stage"
+    },
+    {
+      "name": "AlterEgo AI Inc.",
+      "type": "non-invasive",
+      "modality": "sEMG (subvocal speech)",
+      "founded": "2025",
+      "headquarters": "USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "funding_note": "Commercial spin-out from MIT Media Lab Fluid Interfaces (Arnav Kapur / Pattie Maes lineage). USPTO assignment of US10,878,818 from MIT to Alterego AI Inc. recorded 2025-04-21. Public announcement at Axios AI+ Summit 2025-09-17.",
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Successor to AlterEgo MIT research (US10,878,818). Subvocal/silent-speech wearable, sEMG-based. Founders Arnav Kapur, Max Newlon. Distinct from existing 'AlterEgo (MIT Media Lab)' research entry. Verified 2026-04-29.",
+      "tara_attack_surface": [],
+      "devices": [],
+      "company_category": "early_stage"
+    },
+    {
+      "name": "NIRx Medical Technologies",
+      "type": "non-invasive",
+      "modality": "fNIRS",
+      "founded": null,
+      "headquarters": "Berlin, Germany / Glen Head, NY",
+      "status": "active",
+      "acquired_by": "Gilde Healthcare (combined ops with Artinis, 2025-07)",
+      "funding_total_usd": null,
+      "funding_note": "Combined under Gilde Healthcare with Artinis 2025-07. Brand operations retained separately.",
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "fNIRS research-systems vendor. Merged operationally with Artinis under Gilde Healthcare 2025-07-08. Verified 2026-04-29.",
+      "tara_attack_surface": [],
+      "devices": [],
+      "company_category": "established"
+    },
+    {
+      "name": "Artinis Medical Systems",
+      "type": "non-invasive",
+      "modality": "fNIRS",
+      "founded": "1995",
+      "headquarters": "Elst, Netherlands",
+      "status": "active",
+      "acquired_by": "Gilde Healthcare (combined ops with NIRx, 2025-07)",
+      "funding_total_usd": null,
+      "funding_note": "Combined under Gilde Healthcare with NIRx 2025-07.",
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "fNIRS research-systems vendor. iMotions × Artinis software integration partnership 2025-06-25. Brite Ultra hyperscanning fNIRS (claim: up to 30 simultaneous participants) — claim not directly verified. Verified 2026-04-29.",
+      "tara_attack_surface": [],
+      "devices": [],
+      "company_category": "established"
     }
   ],
   "adjacent_tech": [
@@ -2548,8 +2774,22 @@
       "active_servers": 10000,
       "monthly_sdk_downloads": 97000000,
       "governance": "Linux Foundation AAIF (donated Dec 2025)",
-      "founding_members": ["Anthropic", "OpenAI", "Google", "Microsoft", "AWS", "Block", "Bloomberg", "Cloudflare"],
-      "production_security_servers": ["Wiz", "SOCRadar", "Snyk", "OpenCTI"],
+      "founding_members": [
+        "Anthropic",
+        "OpenAI",
+        "Google",
+        "Microsoft",
+        "AWS",
+        "Block",
+        "Bloomberg",
+        "Cloudflare"
+      ],
+      "production_security_servers": [
+        "Wiz",
+        "SOCRadar",
+        "Snyk",
+        "OpenCTI"
+      ],
       "source": "Linux Foundation press release, vendor announcements"
     },
     "ai_security_adoption": {
@@ -3926,20 +4166,131 @@
     }
   },
   "industry_timeline": [
-    { "year": 2004, "label": "BrainGate first implant", "type": "milestone" },
-    { "year": 2012, "label": "Emotiv EPOC launch", "type": "company" },
-    { "year": 2016, "label": "Neuralink founded", "type": "company" },
-    { "year": 2017, "label": "Kernel founded", "type": "company" },
-    { "year": 2019, "label": "CTRL-Labs acquired by Meta ($500M+)", "type": "milestone" },
-    { "year": 2022, "label": "NextMind acquired by Snap", "type": "milestone" },
-    { "year": 2022.3, "label": "Synchron first US implant", "type": "milestone" },
-    { "year": 2023, "label": "FDA FDORA cybersecurity mandate", "type": "regulatory" },
-    { "year": 2023.3, "label": "FDA Neuralink IDE approved", "type": "regulatory" },
-    { "year": 2024, "label": "Neuralink first human implant", "type": "milestone" },
-    { "year": 2024.3, "label": "Colorado neural data law", "type": "regulatory" },
-    { "year": 2024.6, "label": "California SB 1223", "type": "regulatory" },
-    { "year": 2025, "label": "UNESCO neurotechnology recommendation", "type": "regulatory" },
-    { "year": 2026, "label": "QIF/TARA published", "type": "security" }
+    {
+      "year": 2004,
+      "label": "BrainGate first implant",
+      "type": "milestone"
+    },
+    {
+      "year": 2012,
+      "label": "Emotiv EPOC launch",
+      "type": "company"
+    },
+    {
+      "year": 2016,
+      "label": "Neuralink founded",
+      "type": "company"
+    },
+    {
+      "year": 2017,
+      "label": "Kernel founded",
+      "type": "company"
+    },
+    {
+      "year": 2019,
+      "label": "CTRL-Labs acquired by Meta ($500M+)",
+      "type": "milestone"
+    },
+    {
+      "year": 2022,
+      "label": "NextMind acquired by Snap",
+      "type": "milestone"
+    },
+    {
+      "year": 2022.3,
+      "label": "Synchron first US implant",
+      "type": "milestone"
+    },
+    {
+      "year": 2023,
+      "label": "FDA FDORA cybersecurity mandate",
+      "type": "regulatory"
+    },
+    {
+      "year": 2023.3,
+      "label": "FDA Neuralink IDE approved",
+      "type": "regulatory"
+    },
+    {
+      "year": 2024,
+      "label": "Neuralink first human implant",
+      "type": "milestone"
+    },
+    {
+      "year": 2024.3,
+      "label": "Colorado neural data law",
+      "type": "regulatory"
+    },
+    {
+      "year": 2024.6,
+      "label": "California SB 1223",
+      "type": "regulatory"
+    },
+    {
+      "year": 2025,
+      "label": "UNESCO neurotechnology recommendation",
+      "type": "regulatory"
+    },
+    {
+      "year": 2025.241,
+      "label": "Precision Neuroscience Layer 7 FDA 510(k) cleared (K242618)",
+      "type": "regulatory"
+    },
+    {
+      "year": 2025.5,
+      "label": "UC Davis instantaneous voice-synthesis BCI (Nature)",
+      "type": "milestone"
+    },
+    {
+      "year": 2025.55,
+      "label": "Meta sEMG generic neuromotor interface (Nature)",
+      "type": "milestone"
+    },
+    {
+      "year": 2025.616,
+      "label": "Stanford/BrainGate inner-speech BCI (Cell)",
+      "type": "milestone"
+    },
+    {
+      "year": 2025.75,
+      "label": "Meta Neural Band launches with Ray-Ban Display ($799)",
+      "type": "company"
+    },
+    {
+      "year": 2025.884,
+      "label": "Paradromics Connect-One FDA IDE (speech restoration EFS)",
+      "type": "regulatory"
+    },
+    {
+      "year": 2025.961,
+      "label": "NeuroXess first battery-integrated implanted BCI (China)",
+      "type": "milestone"
+    },
+    {
+      "year": 2026,
+      "label": "QIF/TARA published",
+      "type": "security"
+    },
+    {
+      "year": 2026.05,
+      "label": "Precision Neuroscience × Medtronic StealthStation partnership",
+      "type": "company"
+    },
+    {
+      "year": 2026.203,
+      "label": "BrainGate bimanual typing neuroprosthesis (Nature Neurosci)",
+      "type": "milestone"
+    },
+    {
+      "year": 2026.21,
+      "label": "NMPA approves Neuracle NEO (first market-approved invasive BCI)",
+      "type": "regulatory"
+    },
+    {
+      "year": 2026.27,
+      "label": "CorTec Brain Interchange FDA BDD (stroke motor rehab)",
+      "type": "regulatory"
+    }
   ],
   "policy_timeline": [
     {
@@ -4085,16 +4436,48 @@
       "jurisdiction": "EU"
     },
     {
+      "date": "2025-09",
+      "event": "MIND Act 2025 reintroduced (Cantwell/Schumer/Markey)",
+      "type": "law",
+      "jurisdiction": "USA (federal)",
+      "scope": "proposed",
+      "note": "Reintroduction of Mental Integrity in the Digital Age Act. Directs FTC study of neural-data governance gaps across HIPAA/COPPA/FTC Act. Covers implants and consumer wearables."
+    },
+    {
+      "date": "2025-10",
+      "event": "Montana SB 163: extends MGIPA to neurotechnology data (CNS+PNS)",
+      "type": "law",
+      "jurisdiction": "USA (Montana)",
+      "scope": "state-statute",
+      "note": "Distinct from 2024-10 SB 214. Aligns Montana definition with California/Colorado (CNS+PNS), broader than Connecticut's CNS-only definition."
+    },
+    {
       "date": "2025-11",
       "event": "UNESCO neurotechnology ethics recommendation",
       "type": "standard",
       "jurisdiction": "International"
     },
     {
+      "date": "2025-12",
+      "event": "secureLSL: transparent libsodium encryption layer for LSL biosignal streams",
+      "type": "guidance",
+      "jurisdiction": "International (technical)",
+      "scope": "implementation",
+      "note": "SCCN/EEGLAB-published mitigation responding to LSL transport-layer disclosure. eeglab.org/secureLSL/"
+    },
+    {
       "date": "2026-01",
       "event": "California SB 1223 neural data protections effective",
       "type": "law",
       "jurisdiction": "USA (California)"
+    },
+    {
+      "date": "2026-02",
+      "event": "liblsl coordinated disclosure (sccn/liblsl#262)",
+      "type": "disclosure",
+      "jurisdiction": "International (technical)",
+      "scope": "vulnerability",
+      "note": "Public disclosure request for LSL transport / discovery vulnerabilities affecting confidentiality and integrity of streamed neural data. 90-day window."
     }
   ],
   "publication_trends": [

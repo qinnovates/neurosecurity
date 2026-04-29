@@ -1327,7 +1327,7 @@
       "manufacturer": "Precision Neuroscience Corp.",
       "device_name": "Layer 7 Cortical Interface",
       "device_type": "invasive_minimally_invasive",
-      "fda_status": "510(k) cleared (K242618, 2025); for up to 30-day use",
+      "fda_status": "510(k) cleared (K242618, 2025-03-30); for up to 30-day use",
       "target_indication": "Intraoperative cortical mapping; future: chronic BCI",
       "core_specs": {
         "channel_count": {
