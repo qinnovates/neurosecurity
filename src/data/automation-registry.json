@@ -1,7 +1,7 @@
 {
   "$schema": "automation-registry",
   "description": "Central registry of all automation, workflows, triggers, and scheduled tasks in the qinnovate project.",
-  "last_updated": "2026-04-29T02:28:48.880Z",
+  "last_updated": "2026-04-30T02:29:32.468Z",
   "entries": [
     {
       "id": "gh-deploy",
@@ -11,7 +11,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/deploy.yml",
       "status": "active",
-      "last_triggered": "2026-04-24T11:21:05Z",
+      "last_triggered": "2026-04-29T04:23:42Z",
       "last_status": "success",
       "dependencies": [
         "src/",
@@ -31,7 +31,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/changelog.yml",
       "status": "active",
-      "last_triggered": "2026-04-24T11:20:21Z",
+      "last_triggered": "2026-04-29T04:22:53Z",
       "last_status": "success",
       "dependencies": [
         "scripts/changelog-update.mjs",
@@ -73,7 +73,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-news.yml",
       "status": "active",
-      "last_triggered": "2026-04-28T18:11:44Z",
+      "last_triggered": "2026-04-29T18:06:43Z",
       "last_status": "success",
       "dependencies": [
         "scripts/fetch-news.mjs"
@@ -135,7 +135,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/timeline-check.yml",
       "status": "active",
-      "last_triggered": "2026-04-24T11:20:21Z",
+      "last_triggered": "2026-04-29T04:22:54Z",
       "last_status": "success",
       "dependencies": [
         "scripts/timeline-check.mjs",
@@ -580,7 +580,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-registry.yml",
       "status": "active",
-      "last_triggered": "2026-04-29T02:28:28Z",
+      "last_triggered": "2026-04-30T02:29:17Z",
       "last_status": "unknown",
       "dependencies": [
         "scripts/update-automation-registry.mjs",
