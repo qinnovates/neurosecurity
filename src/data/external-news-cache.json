@@ -1,30 +1,12 @@
 [
   {
     "type": "external",
-    "title": "Live updates from Elon Musk and Sam Altman’s court battle over the future of OpenAI",
-    "date": "2026-04-30",
-    "url": "hxxps://www[.]theverge[.]com/tech/917225/sam-altman-elon-musk-openai-lawsuit",
-    "source": "The Verge",
-    "summary": "Sam Altman and Elon Musk are facing off in a high-stakes trial that could alter the future of OpenAI and its most well-known product, ChatGPT. In 2024, Musk filed a lawsuit accusing OpenAI of abandoni",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Axoft Raises $55M Series A to Advance Brain-Computer Interface Technology - citybiz",
-    "date": "2026-04-30",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxNd1hyN1FTMjM0NkJpQWdrZTN2N2o4YVVUUmoweEQwQzNEalpJSGo5RDZjRmg2MmFUNVNIek41RkxLMGdfNHFabjNGSXJZbzY3YjNnSEN6d1l3QmcteGdNZGp2MlhSbFhhNzNYOFJ1bE1DajdScmwzUlozRjVucVZ6WUlybVJUTGRvQjdiZDZLT2dhcTdJYUpGNVpxdkt0YU5mZFV6OW51eVZsS25xcGU1bQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Axoft Raises $55M Series A to Advance Brain-Computer Interface Technology&nbsp;&nbsp;citybiz",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "The man who built Internet Explorer and sold a brain-computer interface to Meta is raising $500M to make AI less power-hungry - Tech Funding News",
-    "date": "2026-04-30",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimAFBVV95cUxPQnlZQXN3dG1aTnZtU1pEZGM5ek8xRjJEcTdPSTRsc3AxM2VRNmZxRHhsTlBnX0hfVHBDR1BiamwyTGxqWThBeHZaRTRXSEVoaURHbkt5T3Nra0VhOHJzX0R4OUdZU2l5eDRicl93aWo4VEZWWEdLeFBYVWQydVJqLTJIaDZlY0ZoTkR5RWZZeGxmMDBQQTRzeA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "The man who built Internet Explorer and sold a brain-computer interface to Meta is raising $500M to make AI less power-hungry&nbsp;&nbsp;Tech Funding News",
-    "category": "neurotechnology"
+    "title": "Cortex-Inspired Continual Learning: Unsupervised Instantiation and Recovery of Functional Task Networks",
+    "date": "2026-05-01",
+    "url": "hxxps://arxiv[.]org/abs/2604[.]24637",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2604.24637v2 Announce Type: replace-cross Abstract: Block-sequential continual learning demands that a single model both protect prior solutions from catastrophic forgetting and efficiently infe",
+    "category": "research"
   },
   {
     "type": "external",
@@ -37,11 +19,20 @@
   },
   {
     "type": "external",
-    "title": "Axoft Raises $55 Million Series A To Advance Clinical Trials For Its Bio-Inspired Brain-Computer Interface - Pulse 2.0",
+    "title": "Convicted US Scientist Leads Brain-Computer Research Lab In China - Arise News",
     "date": "2026-04-30",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwwFBVV95cUxQdDBfd0pXZXVsUFFQRTBSSFhYdnVkMU53MjBxbi01cFRJbDlSekJtb2pTRlhuT1drUkxzQlVXV2tZbVpjZUFpU2hwd1RJVFVaYWVHM1hlYzRyeV93Y3VNQkp2dE9GR1R5VmJZakd2TTJXa292R2pZZ3FGN3BNZ0tLc3dDTk9tWkxIMUUxMVI2VUozS1ZWWTdDN1FVc1RoYnhwREVmV1JabzE3TTgzVmVfMnY4aXZpa0hDRktJRm15VVR0bHfSAcgBQVVfeXFMTXQ3TkVLOWFZc0d6Z1RMU0NERmtmU2xqczh6Z1ZpYUhHTmNOdWV5RjBvVG1KQkY5blBzT0JZc3ZBbzM5VzFGRDUwUDVqamtQVW9uV1YzbzNvTUJoMjB6QlZsSGZLdXcwWTZ2RGZFUG5GXzk4TF9NY3p1MmdXYmt1THU4UTFHcDAyS3I2QkFqMDEzSWNiRXpVdXJXbVJDWDJXYWRGRU9VOWNFUmR4d0xwb2NBUjl5dC02bEZMcHlPOGVxdy1uWlc1dWI?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikAFBVV95cUxOMC1sanItRHFGYlY4alYwdld0WlRWM1AzS3cyeVljcDUtUUgtaGpFREJnSmVhblFnZWtmZzBJWG1NSlJtc1lqTU1oV25hQWtzOGs1QXFFSVBPUmVjT051U1BUUXlhMXVwUmNEbnU1QkxHT2ZBWjEzRjIwRjZIR1J3Y2xwNVZYdlJLYUhrYnFFeUo?oc=5",
     "source": "Google News — BCI",
-    "summary": "Axoft Raises $55 Million Series A To Advance Clinical Trials For Its Bio-Inspired Brain-Computer Interface&nbsp;&nbsp;Pulse 2.0",
+    "summary": "Convicted US Scientist Leads Brain-Computer Research Lab In China&nbsp;&nbsp;Arise News",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Convicted ex-Harvard scientist, Charles Lieber, now leads China's brain-computer interface lab in Shenzhen - WION",
+    "date": "2026-04-30",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi4gFBVV95cUxPRDU0TlU2Ml9ZaVRXdENqVTJ3YVFaTjZUMVZvQnlWbWQyZDJFb0gwcGlrQ0xiZDVEdHo1cWJRY0FlV3U4UG9EeHBuZU5xMi1LcHNnd29BSWI4M2d2bEw4cmhkYjFwVVRMMEFqT2hsM2hHNTIzbHlTeEdOdlpSUHNManYtelJXdlEyTW8tR29KcjJZc0hKdFl2UE5MZnVxd0hhQzRfeko3QmxQdlZUWDFrQ1l5cVEyRXhkUkRzZnRXUlVEdGFlVDNFaDNPQUIxRDVYV3UyR1NmRTAwUVkxd2dRZnlR0gHnAUFVX3lxTE44RGdFT0RfRGVJZWdCRmc1Z0VuWXpjdV81ZUNzUDg4TVF1RjJZWElBTWdxTGMwR1hlUVNaUzJNd2hpSVRxcFg0czUwODFFdVhFazBXUVFZNW5CdFotXzY1RFR4VVd5S21IbWNXY3NRdVVscjh1Ykhxb1JuZ2w2Y2lNVnJfMjZ1Vi1IVmdWTTdCWFExM2dDd0dTTWJVVFpkQk01YjhoMjFtX2RvSFdBVlFGZGNGYU9CMnA4UlFGRWVta3llTkk4WFRGZGZNS2w1UXFrUEF5ckUtczRUclhSYmhFVkhwc25pQQ?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Convicted ex-Harvard scientist, Charles Lieber, now leads China's brain-computer interface lab in Shenzhen&nbsp;&nbsp;WION",
     "category": "neurotechnology"
   },
   {
@@ -55,38 +46,38 @@
   },
   {
     "type": "external",
-    "title": "How does Neuralink work? - Green Prophet",
-    "date": "2026-04-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMibkFVX3lxTE5GYWdOcy1XU0xoclh3d0lIb1dyajMtNFJkLTNfck1PUmt1WkJ4dGpTcGdBSHh5dHhrNnl2c09VNFhLWk5rNTNpSjJ4LWFhZnhkRUNnc0cyclluTGJjaloxaGFlbXN5SVRuS0x2LWNR?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "How does Neuralink work?&nbsp;&nbsp;Green Prophet",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Rahul Chhabra: Ownership drives community success, activating the top 1% can transform startups, and non-invasive BCIs are revolutionizing brain imaging | TWIST - Crypto Briefing",
-    "date": "2026-04-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwJBVV95cUxORjZNWW4wcFpISTNqc2V5bUVQcmNpVDJUUWVuMXprX01aTU92aXNDRnJnOFRMdF9USlRaZmtqRFVaTl9UYkY2YTlzRUg3UXU2WnhrMm9PMzFHYWFlZFVreUlWVjJaU0gzd2FRamxJQURSSGdUTXZDOEhicjFOeG40bzlfdVhURF9nMERlMm9DS1BhdXRBdnpZZG1adlhzM2pfSUV2M3VTLWNwLUlBUVM4NklsZTVlUklvX25fWHFZY3dnTEV5QUctdWx5emhsSGJreWc0V0gwbXQ3ZXNaLUE1LVlUdzB1X2dGS05WSmFyajRMYVpCejU5ekJJY09PM25zeE42cHFKdm4tT2xHbXVR?oc=5",
+    "title": "The man who built Internet Explorer and sold a brain-computer interface to Meta is raising $500M to make AI less power-hungry - Tech Funding News",
+    "date": "2026-04-30",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimAFBVV95cUxPQnlZQXN3dG1aTnZtU1pEZGM5ek8xRjJEcTdPSTRsc3AxM2VRNmZxRHhsTlBnX0hfVHBDR1BiamwyTGxqWThBeHZaRTRXSEVoaURHbkt5T3Nra0VhOHJzX0R4OUdZU2l5eDRicl93aWo4VEZWWEdLeFBYVWQydVJqLTJIaDZlY0ZoTkR5RWZZeGxmMDBQQTRzeA?oc=5",
     "source": "Google News — Neural Startups",
-    "summary": "Rahul Chhabra: Ownership drives community success, activating the top 1% can transform startups, and non-invasive BCIs are revolutionizing brain imaging | TWIST&nbsp;&nbsp;Crypto Briefing",
+    "summary": "The man who built Internet Explorer and sold a brain-computer interface to Meta is raising $500M to make AI less power-hungry&nbsp;&nbsp;Tech Funding News",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "The Download: Musk and Altman&#8217;s legal showdown, and AI’s profit problem",
-    "date": "2026-04-28",
-    "url": "hxxps://www[.]technologyreview[.]com/2026/04/28/1136479/the-download-musk-altman-openai-trial-ai-profit-problem/",
-    "source": "MIT Technology Review",
-    "summary": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. Elon Musk and Sam Altman are going to court over O",
-    "category": "research"
+    "title": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface - Business Wire",
+    "date": "2026-04-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAJBVV95cUxPUnZXem1VbEVFZmQ3YXZDYkJOQmZnVmZmWVNHTzFJLXRqX1NidTRoQmtlc1BBUlI1MWx2VU51N0dNZDNVb0Y1UFJfWmxsTjFnOTBMQjlqQVhYSmVkVG44SXZWcktoZXZCdG1aZkV1c0dRQTlWYzBtY3pyTTV2NWkxSWlHdF84d3NhYi1MU2V5Rmc2VjdBRWhLTm9FVUlJb0k5WlVWa1dFRUdlekFzTW9tOG50VXFPV3UtUWRsMlUweENGR0NKUmNublg4YlRiV09ZbW4tdk5sOGZFVVBMYWFEM0JWaFNBeDRRTjdTVXNjNzdfdXFUSXI2Wm1KMlZTYThLdnBBNGVLWWhnYUFT?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface&nbsp;&nbsp;Business Wire",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Brain-computer interface based on Rice research wins FDA approval for first clinical trial - Rice University",
+    "title": "Neuralink Patient Uses Brain Chip to Control Robotic Arm and Pilot Drone - The Debrief",
+    "date": "2026-04-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxPQnZLcVlLdzRpb00zQ0lVS0ZSXzlsZVA4TnZzZS1fRlI1eEdDVG1ULWU3QkI3NWN6NW82NkJFeVZncTV1ZG5SRWl6bmY2eF85Unpua3dYSmdvZzh2Vk1LdkZTQjRBc1RMLWxRa0F0cmszQjhmMXVKanltNE9jQWxOSnZXUFFhNEFDR0FlNzNQdWJsNUc0YzBwcjB3UU4?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink Patient Uses Brain Chip to Control Robotic Arm and Pilot Drone&nbsp;&nbsp;The Debrief",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Get Ready for More Brain-Scanning Consumer Gadgets - WIRED",
     "date": "2026-04-28",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitgFBVV95cUxNbjczeTVPZl80UTV2UElfaW85YjFDa2dmbG9ZMFBQWXl2TFN3WFFLelN0MGtVaXN0eW50Vk1uOWhFTUZDaUF2V3BfeUZpS2VHMWhQQmJaOGpoa3c4dWVqMmZWd0FhRkZST1NZR2t0eEx0dmh4QnZ2bzR1M0lSU094c1g1VWRPcVVKbEhsZXV5anotellOckUwUDlsUWc4bWpmWHlKSVRuNXlfRFhadi1GRWZZZUQ1Zw?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihgFBVV95cUxPTFVUODhmQ2JqY2NlenpmVF9pUEQ2eVZkR1k1S2tha1BDOGM5SzF3WFI5YjlORVpGODdXejV2b1FDYjhZQzhOc28yeXBTcW9FSUFjUk5hNjY4RzdSak9uXzZVSGxsUWt5YjIwanBOUW1mdHA2cVBMWjVxaEFacU9ZRk1GaFJWdw?oc=5",
     "source": "Google News — BCI",
-    "summary": "Brain-computer interface based on Rice research wins FDA approval for first clinical trial&nbsp;&nbsp;Rice University",
+    "summary": "Get Ready for More Brain-Scanning Consumer Gadgets&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
@@ -136,20 +127,20 @@
   },
   {
     "type": "external",
-    "title": "Your brain for sale? The new frontier of neural data - The Conversation",
-    "date": "2026-04-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxPdFNPU0haTVFQZXhPWkREZndLUnFqZzdZX0E1VUJkRXNaM3pWS0RMOFp3c0wzQWhKZDluc2pGSGo3dDU1NzJub0RsUUpuZkhtaF9IelpXaW01ckt4TzR5VG00SkpMWGswZFNXUHF4bFpZYTJpTW1MUHpVWndldkV4ajdob0NZX0xhdHZBWlFFVQ?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Your brain for sale? The new frontier of neural data&nbsp;&nbsp;The Conversation",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
     "title": "Brain-computer interface startup Science raises $230M - SiliconANGLE",
     "date": "2026-03-05",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPS0YxUk82N2IzSE16bDNnQS1Ba1hzMmZZNklwZXd0ZFJ4aThsS0xLdC1OdE1CWHMxTWUtU1U0M3EwNWd6NU1vQUxiZGhnelBJbXQ2anRZY2l1a1hsazZlakdBRE1QblVjNFpYZ1BTZDVnRm4zYmNLNHVTVVFLcGNvbmlSMFEzMGktRmJVbldQU2U2RW8?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Brain-computer interface startup Science raises $230M&nbsp;&nbsp;SiliconANGLE",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
+    "date": "2026-01-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
@@ -186,6 +177,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPR0g3MFdtRG5ZekMyUFlxbXEzVkJ3SVJ5c2hqTTlIRHVyb0lNc2NzRTdSN3VYT2NNSl9VQ043b3l1ei1aZEpkajNiU1FRY2tYb3hBWE9IOUVmRVoxZTh2bzM0MGRTa00yeDFVT2d5c21aa1VJRFJzNExhRVlvTl9TejNKaFB5eHEwTUd2eHFQcHlKTWhtWHJseWxFNmU0aWJvZGZzSVh3?oc=5",
     "source": "Google News — MIND Act",
     "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
+    "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "Congress Introduces Neural Data Bill - Inside Privacy",
+    "date": "2025-10-03",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxQcW5Tb0RFN2dJOE1rRmtJZjltdUVlNzhTdGpUN0U1Y1RIMVhJVllNWXZGc3ZBNGt1VHRqNWQ5YUx2dVFfZUxZRFZhRW9CbzNoLUk0VWdJY0kzczc3dTQ5X1NoOF9pYy1HR01OallOMFFHaC1pdlJ2U3NON0JzdGRfenNYYlhGYzJXdXc?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Congress Introduces Neural Data Bill&nbsp;&nbsp;Inside Privacy",
     "category": "neuroethics"
   },
   {
