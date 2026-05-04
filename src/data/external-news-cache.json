@@ -1,12 +1,75 @@
 [
   {
     "type": "external",
-    "title": "This mind-reading beanie could make keyboards obsolete - New Atlas",
-    "date": "2026-05-03",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMidkFVX3lxTE1nMkVaQnVlOWk1b2pndlpGTVdTNTJ4ZTd0LU5FaTBLa2NjWTM0ekxTZjVKWHl4OXJHRDlXTkwyWVlwWXFMbmRkX2xUMVkwOGtKS3NvaGRwd0tHNjdqYjBEZ2diZlpXLVRSSG1OclF2aGxoY2d1S2c?oc=5",
-    "source": "Google News — BCI",
-    "summary": "This mind-reading beanie could make keyboards obsolete&nbsp;&nbsp;New Atlas",
+    "title": "Elon Musk sent ominous texts to Greg Brockman, Sam Altman after asking for a settlement, OpenAI claims",
+    "date": "2026-05-04",
+    "url": "hxxps://techcrunch[.]com/2026/05/04/elon-musk-sent-ominous-texts-to-greg-brockman-sam-altman-after-asking-for-a-settlement-openai-claims/",
+    "source": "TechCrunch",
+    "summary": "Musk texted OpenAI's president and co-founder saying that he and CEO Sam Altman \"will be the most hated men in America.\"",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Live updates from Elon Musk and Sam Altman’s court battle over the future of OpenAI",
+    "date": "2026-05-04",
+    "url": "hxxps://www[.]theverge[.]com/tech/917225/sam-altman-elon-musk-openai-lawsuit",
+    "source": "The Verge",
+    "summary": "Sam Altman and Elon Musk are facing off in a high-stakes trial that could alter the future of OpenAI and its most well-known product, ChatGPT. In 2024, Musk filed a lawsuit accusing OpenAI of abandoni",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Week one of the Musk v. Altman trial: What it was like in the room",
+    "date": "2026-05-04",
+    "url": "hxxps://www[.]technologyreview[.]com/2026/05/04/1136826/week-one-of-the-musk-v-altman-trial-what-it-was-like-in-the-room/",
+    "source": "MIT Technology Review",
+    "summary": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first,&#160;sign up here. Two of the most powerful people in AI—Sam Altman and Elon",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "(AmazingAnhui) CHINA-ANHUI-HEFEI-BCI RESEARCH (CN) - Big News Network.com",
+    "date": "2026-05-04",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilwFBVV95cUxNdnZldGxNbWlQTF84VHBHZkdZWlZBVmhoNE93S1g4UUdGRUxrclZOaW1tVGJCTTRIRnNPZE9zOVl1LW1rQ1NMTzhkRUE2UjNfdkUxVHN4UGZTNUlzdFVsNWFiWHR0ZzNaNi1laGc4ZnhNNU5kc3BZeFgyN3o2N0w1X3BYLXdhWG5nQU1ZYTcyTzNQcG01Z0gw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "(AmazingAnhui) CHINA-ANHUI-HEFEI-BCI RESEARCH (CN)&nbsp;&nbsp;Big News Network.com",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuronal electricality founded in murburn-thermodynamic principles: 2. Comparisons, evidenced explanations, and predictions",
+    "date": "2026-05-04",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]00014",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.00014v1 Announce Type: new Abstract: The analyses presented herein demonstrate that neuronal electrical activity can be consistently interpreted as a manifestation of murburn redox-mediated",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Self-organized criticality enables conscious integration through brain-body resonance",
+    "date": "2026-05-04",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]00024",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.00024v1 Announce Type: new Abstract: The \"binding problem\" of how distributed neural activity unifies into conscious experience has remained an open challenge since its articulation in 1890",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "MoDAl: Self-Supervised Neural Modality Discovery via Decorrelation for Speech Neuroprosthesis",
+    "date": "2026-05-04",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]00025",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.00025v1 Announce Type: new Abstract: Speech neuroprosthesis systems decode intended speech from neural activity in the absence of audible output, offering a path to restoring communication ",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Toward Magnetic-Field-Free Quantum Computing and Quantum Reservoir Computing in Engineered Organic Materials: A Unified Framework from the 3-Layer Quantum Brain Hypothesis",
+    "date": "2026-05-04",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]00026",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.00026v1 Announce Type: new Abstract: We extend the spin-vortex-induced loop-current (SVILC) qubit [Wakaura2017] and the 3-Layer Quantum Brain Hypothesis to engineered organic materials oper",
+    "category": "research"
   },
   {
     "type": "external",
@@ -46,15 +109,6 @@
   },
   {
     "type": "external",
-    "title": "Convicted ex-Harvard scientist, Charles Lieber, now leads China's brain-computer interface lab in Shenzhen - WION",
-    "date": "2026-04-30",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi4gFBVV95cUxPRDU0TlU2Ml9ZaVRXdENqVTJ3YVFaTjZUMVZvQnlWbWQyZDJFb0gwcGlrQ0xiZDVEdHo1cWJRY0FlV3U4UG9EeHBuZU5xMi1LcHNnd29BSWI4M2d2bEw4cmhkYjFwVVRMMEFqT2hsM2hHNTIzbHlTeEdOdlpSUHNManYtelJXdlEyTW8tR29KcjJZc0hKdFl2UE5MZnVxd0hhQzRfeko3QmxQdlZUWDFrQ1l5cVEyRXhkUkRzZnRXUlVEdGFlVDNFaDNPQUIxRDVYV3UyR1NmRTAwUVkxd2dRZnlR0gHnAUFVX3lxTE44RGdFT0RfRGVJZWdCRmc1Z0VuWXpjdV81ZUNzUDg4TVF1RjJZWElBTWdxTGMwR1hlUVNaUzJNd2hpSVRxcFg0czUwODFFdVhFazBXUVFZNW5CdFotXzY1RFR4VVd5S21IbWNXY3NRdVVscjh1Ykhxb1JuZ2w2Y2lNVnJfMjZ1Vi1IVmdWTTdCWFExM2dDd0dTTWJVVFpkQk01YjhoMjFtX2RvSFdBVlFGZGNGYU9CMnA4UlFGRWVta3llTkk4WFRGZGZNS2w1UXFrUEF5ckUtczRUclhSYmhFVkhwc25pQQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Convicted ex-Harvard scientist, Charles Lieber, now leads China's brain-computer interface lab in Shenzhen&nbsp;&nbsp;WION",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Neuralink unveils surgical robot to fully automate brain chip implants - Interesting Engineering",
     "date": "2026-04-30",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxQczV6SGJDbkQtRVFsX05jRWk2eXpyUVh0U1NnamF3cWhaaHo1Tm56YXhSRTU5MnhaZlNQX2VlaDVuVWlQVHVTdElZX25ESXloN3FNTm1Rd0VCaFhiRkkyLWxrT2h3dG1rOVhfRlpNaTlMVG1yVWhqSEliTGdSNGw3cHJKcFhGQTMtMHNWdmdoZGstYmZ0Tmc?oc=5",
@@ -73,11 +127,11 @@
   },
   {
     "type": "external",
-    "title": "Neuralink Patient Uses Brain Chip to Control Robotic Arm and Pilot Drone - The Debrief",
+    "title": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface - Business Wire",
     "date": "2026-04-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxPQnZLcVlLdzRpb00zQ0lVS0ZSXzlsZVA4TnZzZS1fRlI1eEdDVG1ULWU3QkI3NWN6NW82NkJFeVZncTV1ZG5SRWl6bmY2eF85Unpua3dYSmdvZzh2Vk1LdkZTQjRBc1RMLWxRa0F0cmszQjhmMXVKanltNE9jQWxOSnZXUFFhNEFDR0FlNzNQdWJsNUc0YzBwcjB3UU4?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink Patient Uses Brain Chip to Control Robotic Arm and Pilot Drone&nbsp;&nbsp;The Debrief",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAJBVV95cUxPUnZXem1VbEVFZmQ3YXZDYkJOQmZnVmZmWVNHTzFJLXRqX1NidTRoQmtlc1BBUlI1MWx2VU51N0dNZDNVb0Y1UFJfWmxsTjFnOTBMQjlqQVhYSmVkVG44SXZWcktoZXZCdG1aZkV1c0dRQTlWYzBtY3pyTTV2NWkxSWlHdF84d3NhYi1MU2V5Rmc2VjdBRWhLTm9FVUlJb0k5WlVWa1dFRUdlekFzTW9tOG50VXFPV3UtUWRsMlUweENGR0NKUmNublg4YlRiV09ZbW4tdk5sOGZFVVBMYWFEM0JWaFNBeDRRTjdTVXNjNzdfdXFUSXI2Wm1KMlZTYThLdnBBNGVLWWhnYUFT?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface&nbsp;&nbsp;Business Wire",
     "category": "neurotechnology"
   },
   {
@@ -87,15 +141,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiuAFBVV95cUxOUDVLamNxZnVJeC1QRXYzeXVwcFIwTkdOZ2NaRUJ4bkZ0a0NuZzdsRXRYRUhOd1d2bWpwVWVZYkh3NnVncV8zSHZTMnFXWG96V0tjMWdaRy1SckVzM0x0eWlKZEtRZHdfWTVKcVNCUjdCdWtmTVNKYUZtVmdlcnFlRW1mWlpsX04xb3RHQ1lQRnVpeEFtWmwwQ2pzWGxpUXR0RHppekJ2RnloX1dNaUREbW5Vdk1DLUhr?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "BCI startup Neurable looks to license its ‘mind-reading’ tech for consumer wearables&nbsp;&nbsp;TechCrunch",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Gabe Newell’s brain-computer interface startup to reveal first chips later this year - MSN",
-    "date": "2026-04-27",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiANBVV95cUxNTkVQUlBYYVQyemFpTzNNTTJJcGhPaXNha3pIbk90dkR3WXYtcDZvTV9tSERWaGNFQUlnVXRwd2F4bzR3cnV6M0ljbElIeGRQcUQwT0x6bklxelBiTEg1WG53c09SSlBPSkRNVFR1QlpQWnp5eU5vbXJYSmk3aEp5RTlXOUQ4TXZkZnNRWjM3bl9xRVJwQVlOODF1WFlIZWltTGtzR3dwU2tzWHdUcHFpbGdqUzRGRGd3RWFJc0pKMzZ4QkJ4SGtfY3pwTXYwUmhoYWQ1U2lkdHB6Q09lNTZMUmVkYm43d1N1c3J3Y0I0b0o4TU9Kb2ItOE90a1F3aUJpOTBzSWgtNER1Q0FMVUZZSm5BNzRib2Y0T1ZWNXFvZzBVcmxodkt2UWVTNlRmdmpGekFqSWJIMlcySnpFTV8zY0Z5Sk5YZGpmME5aZGhVM0EyNmJjZ1JnRXdwR09FSXBPMlB6a3dlODh4NTZ5d19ib2JEbFFKa21MWnQtMjNKckVIR2M5eC1NbA?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Gabe Newell’s brain-computer interface startup to reveal first chips later this year&nbsp;&nbsp;MSN",
     "category": "neurotechnology"
   },
   {
@@ -163,6 +208,15 @@
   },
   {
     "type": "external",
+    "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
+    "date": "2026-01-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology - CSIS | Center for Strategic and International Studies",
     "date": "2025-11-04",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPanNMOEN0Yy16RElvSXJjMk4zR25qd2tGQXhDZDI2cmo0Yk5kSmZNQXJfSnhQb0tOdUJUY3BOQlc0akVlOGZ5aGpBekVWd0NNV1R6enN5Q0RVRnFKX2JhSWRuVVA2MUNkNHJOd0k4NjRLdjZtVUxkZlluWFVUNU0zN21VajFiOW9Udl9aTjhTQ1dkSEphZTAtWVR5MU5ZalQySDdJWTFB?oc=5",
@@ -178,6 +232,15 @@
     "source": "Google News — MIND Act",
     "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
     "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "The Past, Present And Future Of Brain-Computer Interfaces - Forbes",
+    "date": "2025-10-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxNeTFhWjAtaXRDbzdFeC1nSkZoclQwNjhUX2JZVWtTTzRBN25sNW5hNzVvSTIwWWlqRHZJMFdnby1NVVRPdWxreDJSWkVROUtUdlpTV2RpbUM1RUM3bG1hQU5VUkZ6NUg2cXRkT1prOFpYR3FWUDY5VUN1cEVHSDRSX1ZxeUlEamFEV3V5MjZpSU1PRzN6NWJIVXVlenN2RGNU?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "The Past, Present And Future Of Brain-Computer Interfaces&nbsp;&nbsp;Forbes",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
