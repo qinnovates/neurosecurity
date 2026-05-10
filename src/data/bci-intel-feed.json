@@ -1,5 +1,441 @@
 [
   {
+    "id": "e7e5a5ed",
+    "title": "SPARK-DBS: Toward standardized analysis of deep brain stimulation data",
+    "date": "2026-05-10",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26000914?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: Available online 9 May 2026Source: Brain StimulationAuthor(s): Savir Madan, Patricia Zvarova, Konstantin Butenko, Till A. Dembek, Bahne H. Bahners, Lukas L. Goede, Garance M. Meyer, ",
+    "tags": [
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "f5070f27",
+    "title": "Brain-age defines a structural signature of outcomes after vagus nerve stimulation in children",
+    "date": "2026-05-10",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X2600094X?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: Available online 8 May 2026Source: Brain StimulationAuthor(s): Timur H. Latypov, Hrishikesh Suresh, Flavia Venetucci Gouveia, Karim Mithani, Alexandre Berger, Simeon M. Wong, Sebasti",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "e6cdf4a7",
+    "title": "Estimation of head motion in structural MRI and its impact on cortical morphometry",
+    "date": "2026-05-10",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1817743",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "Motion-related artifacts are inevitable in Magnetic Resonance Imaging (MRI) and can bias automated neuroanatomical metrics such as cortical thickness. These biases can interfere with statistical analy",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "8bf4c622",
+    "title": "Brain-computer interfaces and neural synchronization in esports: a systematic review of effects on reaction time, decision-making, and cognitive performance",
+    "date": "2026-05-10",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1774230",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "BackgroundThe rapid expansion of esports has intensified interest in the cognitive and neurophysiological mechanisms underlying elite performance, particularly reaction time (RT), decision-making (DM)",
+    "tags": [
+      "funding",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "22561ec9",
+    "title": "Open Music – visual programming / computer-aided music composition environment",
+    "date": "2026-05-10",
+    "url": "hxxps://github[.]com/openmusic-project/openmusic",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://github.com/openmusic-project/openmusic Comments URL: https://news.ycombinator.com/item?id=48085250 Points: 1 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "63b99789",
+    "title": "Chrome's AI features may be hogging 4GB of your computer storage",
+    "date": "2026-05-10",
+    "url": "hxxps://www[.]theverge[.]com/tech/924933/google-chrome-4gb-gemini-nano-ai-features",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.theverge.com/tech/924933/google-chrome-4gb-gemini-nano-ai-features Comments URL: https://news.ycombinator.com/item?id=48084710 Points: 42 # Comments: 21",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "968fbf19",
+    "title": "Brain scans reveal a difference between psychopaths and other people",
+    "date": "2026-05-10",
+    "url": "hxxps://www[.]sciencedaily[.]com/releases/2026/05/260510030946[.]htm",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.sciencedaily.com/releases/2026/05/260510030946.htm Comments URL: https://news.ycombinator.com/item?id=48083522 Points: 5 # Comments: 1",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "32457e28",
+    "title": "Colabro: AI Employee for Your Computer",
+    "date": "2026-05-10",
+    "url": "hxxps://colabroai[.]com",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://colabroai.com Comments URL: https://news.ycombinator.com/item?id=48081534 Points: 2 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "b07ace29",
+    "title": "Pocket Raspberry Pi Computer for Hackers [Pre-Sale]",
+    "date": "2026-05-10",
+    "url": "hxxps://shop[.]m5stack[.]com/pages/m5-cardputerzero",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://shop.m5stack.com/pages/m5-cardputerzero Comments URL: https://news.ycombinator.com/item?id=48080607 Points: 3 # Comments: 1",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "5a2946ff",
+    "title": "Hippocampal representations of partner and novel individuals in monogamous California mice during pair bond formation",
+    "date": "2026-05-09",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]05[.]08[.]723922v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "The hippocampal CA2 region is critical for social novelty recognition memory, the discrimination of whether a conspecific is novel or familiar. However, its role in forming a memory of a pair-bonded m",
+    "tags": [
+      "partnership"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "7c7805a4",
+    "title": "FDA clears Bright Uro’s abdominal sensor for evaluating bladder dysfunction",
+    "date": "2026-05-08",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/fda-clears-bright-uro-abdominal-sensor-for-evaluating-bladder-dysfunction/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "The approval of Bright Uro’s Glean abdominal sensor advances the capabilities of its broader Glean urodynamics system that gained FDA approval in March 2025. The post FDA clears Bright Uro’s abdominal",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "fb5b4c88",
+    "title": "FDA greenlights Rivanna’s AI musculoskeletal imaging system",
+    "date": "2026-05-08",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/fda-greenlight-rivanna-ai-musculoskeletal-imaging-system/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "With FDA clearance in hand, Rivanna highlighted that it will accelerate the development of further AI capabilities for the Accuro XV system. The post FDA greenlights Rivanna’s AI musculoskeletal imagi",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "59bdc6dc",
+    "title": "Glucotrack seeks FDA approval for clinical study of CBGM technology",
+    "date": "2026-05-08",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/glucotrack-fda-approval-study-cbgm-technology/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "Glucotrack has submitted an IDE application to the US FDA, seeking approval to begin a clinical study in the US for its CBGM technology. The post Glucotrack seeks FDA approval for clinical study of CB",
+    "tags": [
+      "product",
+      "regulatory",
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "2f03b15f",
+    "title": "Brain Stimulation Boosts Willpower to Quit Smoking",
+    "date": "2026-05-08",
+    "url": "hxxps://neurosciencenews[.]com/rtms-brain-stimulation-smoking-30658/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Addiction is a biological imbalance where reward systems overpower self-control. Researchers have demonstrated that using rTMS to stimulate the dorsolateral prefrontal cortex can restore this balance,",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "c9b714c8",
+    "title": "Why Massive AI Models Actually Generalize Better",
+    "date": "2026-05-08",
+    "url": "hxxps://neurosciencenews[.]com/physics-toy-model-ai-learning-30656/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Physicists have developed a mathematical \"toy model\" using statistical physics to explain one of the great mysteries of deep learning: why massive neural networks learn patterns instead of just memori",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "7afc1f2b",
+    "title": "Organic Synaptic Transistors for Sustainable AI Developed",
+    "date": "2026-05-08",
+    "url": "hxxps://neurosciencenews[.]com/organic-synaptic-transistors-neuromorphic-ai-30653/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "By developing organic transistors that mimic neural synapses, the team has identified how molecular interfaces can be engineered to create \"neuromorphic\" computers that learn and store data simultaneo",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "22c71e66",
+    "title": "Weekly Dose of Optimism #192",
+    "date": "2026-05-08",
+    "url": "hxxps://www[.]notboring[.]co/p/weekly-dose-of-optimism-192",
+    "source": "Not Boring",
+    "source_category": "opinion",
+    "summary": "UFO Disclosure, GENE-26.5, Neuralink Brain Surgeon Robot, Magnesium, Aalo DSA, GDM x EVE + Extra Doses",
+    "tags": [
+      "general"
+    ],
+    "companies": [
+      "Neuralink"
+    ],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "18d51d93",
+    "title": "argenx Announces U.S. FDA Approval Expanding VYVGART and VYVGART Hytrulo for Use in All Adult Patients Living with gMG",
+    "date": "2026-05-08",
+    "url": "hxxps://www[.]globenewswire[.]com/news-release/2026/05/08/3291372/0/en/argenx-Announces-U-S-FDA-Approval-Expanding-VYVGART-and-VYVGART-Hytrulo-for-Use-in-All-Adult-Patients-Living-with-gMG[.]html",
+    "source": "GlobeNewswire Biotech",
+    "source_category": "funding",
+    "summary": "May 8, 2026, 5:20 PM CET",
+    "tags": [
+      "product",
+      "regulatory",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "b0bf5c29",
+    "title": "Alpha Tau Completes Patient Enrollment in its U.S. Pivotal Skin Cancer Study, Advancing Towards Goal of FDA Approval of Alpha DaRT® to Treat Recurrent Cutaneous Squamous Cell Carcinoma",
+    "date": "2026-05-08",
+    "url": "hxxps://www[.]globenewswire[.]com/news-release/2026/05/08/3291075/0/en/Alpha-Tau-Completes-Patient-Enrollment-in-its-U-S-Pivotal-Skin-Cancer-Study-Advancing-Towards-Goal-of-FDA-Approval-of-Alpha-DaRT-to-Treat-Recurrent-Cutaneous-Squamous-Cell-Carcinom[.]html",
+    "source": "GlobeNewswire MedEquip",
+    "source_category": "funding",
+    "summary": "Alpha Tau Completes Patient Enrollment in its U.S. Pivotal Skin Cancer Study, Advancing Towards Goal of FDA Approval of Alpha DaRT® to ReSTART",
+    "tags": [
+      "product",
+      "regulatory",
+      "research",
+      "partnership",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "280e6cdb",
+    "title": "Live only at TechCrunch Disrupt 2026: Why most founders are already behind on raising a Series A in 2027",
+    "date": "2026-05-08",
+    "url": "hxxps://techcrunch[.]com/2026/05/08/live-only-at-techcrunch-disrupt-2026-why-most-founders-are-already-behind-on-raising-a-series-a-in-2027/",
+    "source": "TechCrunch Startups",
+    "source_category": "funding",
+    "summary": "Learn what it takes to build a Series A in 2027 from top VCs at TechCrunch Disrupt 2026, taking place at San Francisco’s Moscone West on October 13-15. Register today to hear this session live on the ",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "9a4c7223",
+    "title": "Behind the $4 Billion Boom in Brain - Computer Interfaces: Five Investment Logics and an Unconsolidated Track - eu.36kr.com",
+    "date": "2026-05-08",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTE1BUFpQYWlrOXRtUkprSXRMRzRydUlfVG5Jd0VGY0U0MGhFVWctT0V5LU1Jc24zSzl1dERHa3YtVEhoRUtab05IQXZJQTBSWUFOS1Nz?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Behind the $4 Billion Boom in Brain - Computer Interfaces: Five Investment Logics and an Unconsolidated Track&nbsp;&nbsp;eu.36kr.com",
+    "tags": [
+      "funding",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "3ff22e3c",
+    "title": "Consumer Brain-Sensing Platforms - Trend Hunter",
+    "date": "2026-05-08",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiYkFVX3lxTE04a3NaOVZQeElfVW5lSFBXNG5FdmNud002ajlERnFwRzNxZ0lrbFl0cE5fSW1MaUdCTTFwMmcyRTFBXzdIOWtrZDUxbEg3Q3BFR3Rqa19hMlpFU3YwNlJsUkh30gFiQVVfeXFMTThrc1o5VlB4SV9VbmVIUFc0bkV2Y253TTZqOURGcXBHM3FnSWtsWXRwTl9JbUxpR0JNMXAyZzJFMUFfN0g5a2tkNTFsSDdDcEVHdGprX2EyWkVTdjA2UmxSSHc?oc=5",
+    "source": "GN: Consumer EEG",
+    "source_category": "product",
+    "summary": "Consumer Brain-Sensing Platforms&nbsp;&nbsp;Trend Hunter",
+    "tags": [
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "3566bd6e",
+    "title": "Exclusive: Fazeshift Scores $17M As Investors Bet On AI-Powered Finance Ops, Starting With Accounts Receivable",
+    "date": "2026-05-07",
+    "url": "hxxps://news[.]crunchbase[.]com/fintech/fazeshift-accounts-receivable-ai-finance-ops-startup-funding/",
+    "source": "Crunchbase News",
+    "source_category": "funding",
+    "summary": "Fazeshift, a startup that uses AI agents to automate accounts receivable, has raised $17 million in a Series A round of funding, it tells Crunchbase News exclusively.",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "19db28db",
+    "title": "Magnetic Pulses Restore Brain Circuits to Treat Depression",
+    "date": "2026-05-07",
+    "url": "hxxps://neurosciencenews[.]com/tms-depression-dendritic-spines-30642/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Researchers have discovered that accelerated magnetic stimulation selectively targets IT neurons to regrow lost synaptic connections, providing the first cellular-level evidence of how TMS repairs the",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "3cf4a967",
+    "title": "Houston startup’s brain implant for depression advances to clinical trial - InnovationMap",
+    "date": "2026-05-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihwFBVV95cUxPbUwwcDY3cHF5YjUxWFlEMVRXdmlONFBXX2VmaTRnR1dULWhDOFlZRENyRkRiRE9VNThxLXlHTTNtMEV1S2M5T1dXT21acFlLTHpaM0JSN1V6YWEtMXZobHYzcUowcFdCelFhSmhvOGVfQUZVSy00a2E5bFM3M3lObFRLTVpFc00?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "Houston startup’s brain implant for depression advances to clinical trial&nbsp;&nbsp;InnovationMap",
+    "tags": [
+      "product",
+      "research",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "34efedf2",
+    "title": "Integration of iEEG local microstate dynamics and neuro rank graph score for accurate SOZ localization",
+    "date": "2026-05-05",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae62a8",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Accurate localization of the seizure onset zone (SOZ) is critical for successful surgical intervention in drug-resistant epilepsy. high frequency oscillation (HFO)-based SOZ localization me",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "aad4fe50",
+    "title": "An index to probe cortical excitability",
+    "date": "2026-05-04",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae5559",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Cortical excitability can be defined as the cortex’s responsiveness to incoming stimuli. It can be probed with brain stimulation, either globally and non-invasively, using transcranial magn",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "ed67b74f",
+    "title": "Compression detects changes in spiking neural data from cortical lesions",
+    "date": "2026-05-04",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae555b",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. The complexity of neural data changes as the brain processes information during events. Universal lossless compression algorithms, which are broadly applicable and grounded in information t",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "99c3d1c1",
+    "title": "Uncovering relationships in multi-channel EEG data using principal Hessian directions and Ricci flow",
+    "date": "2026-05-04",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae5f4c",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. The high-dimensional nature of multi-channel EEG data poses major challenges for downstream classification. Uncovering connectivity relationships and network structure between EEG channels ",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "89dca1af",
+    "title": "Characterization of a flexible cap for simultaneous OPM-MEG and EEG measurements",
+    "date": "2026-05-04",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae60cf",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Combining magnetoencephalography (MEG) and electroencephalography (EEG) can lead to more accurate source reconstruction results. Previous efforts of simultaneous EEG and MEG using optically",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
     "id": "5fdd9f16",
     "title": "Pinch restoration in post-stroke hemiplegia rehabilitation: A case report of motor task-synchronized precision repetitive transcranial magnetic stimulation",
     "date": "2026-05-03",
@@ -464,6 +900,20 @@
       "Neurable"
     ],
     "fetched": "2026-05-03"
+  },
+  {
+    "id": "843bfc2e",
+    "title": "Now You Could \"Control Your Dreams\" Too - Prophetic AI Launches a Brain-Tech Wearable Called Halo - Dailyhunt",
+    "date": "2026-04-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAJBVV95cUxPaE1mZ3ItZE1wOHN1RkhaU3h2bEFXZGh1Y05jUERsM2Yxc1hoUkpudlUtRnU3bVRCSXB4VUdNV1BzMS1ibG9QcVd1dEltN0lKR2JIdkFpX0taOS1waVh5aEUyTWxUb2xrRTdOVnlJQzJQV3JRTnBXTGpNdnd0dWFrU0JNZEUzVy03Z1FRWlR6SDFJamRwTXN5WjYwZHp3Qjl0WFdfcXFud25CTFMwOE1Mc2xBRXZGODZfRDR1V00zMTVNNzNVWmRieUpFN09LQkFpZzRna0IxOTBGX2NlaGxfRGM3NTljRkh5c0RNUUE3UVNyYUd4djdmUGoybVFUdFNBOTBLMzhvRFE?oc=5",
+    "source": "GN: Emerging Modalities",
+    "source_category": "research",
+    "summary": "Now You Could \"Control Your Dreams\" Too - Prophetic AI Launches a Brain-Tech Wearable Called Halo&nbsp;&nbsp;Dailyhunt",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
   },
   {
     "id": "6a52d920",
@@ -1633,6 +2083,21 @@
     "fetched": "2026-04-12"
   },
   {
+    "id": "5c8dd2fd",
+    "title": "Beacon Biosignals upsizes Series B to $97M - MassDevice",
+    "date": "2026-04-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMib0FVX3lxTE53MEFuWC1JekhKNnh0QXM3dEp0T1VxNWlMVWJSdXRUMWhGVDI3M1liZnBhc241N3hrLWdDVUJtdEI1QVEwOVNHY25aakNOcWVWYk5SdWpWRDhlaW9lbU1pWm45SmJWdkxsNmlnMmpXRQ?oc=5",
+    "source": "GN: Neurotech VC",
+    "source_category": "funding",
+    "summary": "Beacon Biosignals upsizes Series B to $97M&nbsp;&nbsp;MassDevice",
+    "tags": [
+      "funding",
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
     "id": "2233a67a",
     "title": "Inter-brain synchrony during collaborative gaming: an investigation using theta-burst stimulation at the right temporal-parietal junction",
     "date": "2026-04-05",
@@ -2457,6 +2922,20 @@
     "fetched": "2026-03-29"
   },
   {
+    "id": "0229ee22",
+    "title": "A High-Quality and Robust Intravascular Electromyography (iEMG) Acquisition Method for Locomotor Tasks",
+    "date": "2026-03-23",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11454644",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Electromyography (EMG) is essential in medical and rehabilitation fields for assessing neuromuscular functions. However, mainstream traditional surface EMG (sEMG) is susceptible to electrode displacem",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
     "id": "da92f235",
     "title": "Dissociable contributions of cortical thickness and surface area to cognitive ageing: evidence from multiple longitudinal cohorts.",
     "date": "2026-03-22",
@@ -2688,6 +3167,20 @@
     "fetched": "2026-03-22"
   },
   {
+    "id": "ebf6057f",
+    "title": "High-Frequency rTMS Facilitates Mental Fatigue Recovery in Healthy Young Adults",
+    "date": "2026-03-20",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11449361",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "In the contemporary society, mental fatigue is a major challenge to the efficiency of production and safety of daily life, highlighting the necessity of exploring effective intervention strategies. He",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
     "id": "8628d20d",
     "title": "Five Canadian scaleups crack Thrive Top 50 AgTech Companies list",
     "date": "2026-03-19",
@@ -2774,6 +3267,20 @@
     "fetched": "2026-03-22"
   },
   {
+    "id": "cc622335",
+    "title": "Intraspinal Microstimulation of Dorsolateral Funiculus for Coordinated Bladder Control",
+    "date": "2026-03-19",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11447339",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Neurogenic lower urinary tract dysfunction (NLUTD) represents a common and severe complication following spinal cord injury (SCI), profoundly impacting the quality of life and contributing to signific",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
     "id": "90d3dd16",
     "title": "Exclusive: Stripe Alum Raises $9M For Meadow To Help People Plan Funerals Online",
     "date": "2026-03-18",
@@ -2843,6 +3350,34 @@
     ],
     "companies": [],
     "fetched": "2026-03-22"
+  },
+  {
+    "id": "c700ee02",
+    "title": "Diffusion-Augmented Spatiotemporal Graph Convolution for Clinical Gait and Motor Function Assessment",
+    "date": "2026-03-18",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11442781",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Accurate assessment of gross motor function in children with cerebral palsy (CP) is essential for clinical decision-making, yet current practice is limited by data scarcity, severe class imbalance, an",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
+    "id": "db16deb2",
+    "title": "Predicting Fall Risk in Community-Dwelling Older Adults Using a Fine-Tuned Quantized Large Language Model",
+    "date": "2026-03-18",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11442639",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Computerized posturography has been employed to quantify an individual’s intrinsic balance control under varying stances, thereby presenting the potential to support autonomous and ambulatory fall ris",
+    "tags": [
+      "partnership"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
   },
   {
     "id": "6b064237",
@@ -4613,6 +5148,20 @@
     "fetched": "2026-04-19"
   },
   {
+    "id": "94a39cc5",
+    "title": "Temple Raises $54 Million To Build High-Performance Wearable For Elite Athletes - Ventureburn",
+    "date": "2026-02-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxQUlZJSHUzaG1WQ1BKQWM5Yi1VYzU4MUtUNDZDRTJvaTVacGFNSm1xanZIYjc5S1JlSzFhVXZEdkVpcHhlY2xTLU1WekxFYmoxOGhKR29EbXVnY3lUTUstV2NFS2I3MjB4S0NBQloxYUwyQnh3aHh3QzJtcGxQWlJPSjVxU3JtazF5Rk5LV3kteW01STI2ODZhQWU0ZHBFX3ZXZk1kb1Vn0gGmAUFVX3lxTFBSVklIdTNobVZDUEpBYzliLVVjNTgxS1Q0NkNFMm9pNVpwYU1KbXFqdkhiNzlLUmVLMWFVdkR2RWlweGVjbFMtTVZ6TEViajE4aEpHb0RtdWdjeVRNSy1XY0VLYjcyMHhLQ0FCWjFhTDJCeHdoeHdDMm1wbFBaUk9KNXFTcm1rMXlGTktXeS15bTVJMjY4NmFBZTRkcEVfdldmTWRvVWc?oc=5",
+    "source": "GN: Neurotech VC",
+    "source_category": "funding",
+    "summary": "Temple Raises $54 Million To Build High-Performance Wearable For Elite Athletes&nbsp;&nbsp;Ventureburn",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
+  },
+  {
     "id": "4da63f35",
     "title": "Profile of David Baker, Demis Hassabis, and John Jumper: 2024 Nobel laureates in chemistry",
     "date": "2026-02-27",
@@ -4913,6 +5462,20 @@
     ],
     "companies": [],
     "fetched": "2026-02-22"
+  },
+  {
+    "id": "d448fd36",
+    "title": "China’s brain-computer interface industry is racing ahead - Yahoo Finance",
+    "date": "2026-02-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxPMlVtOGRJZHoxS3N6d1A0YkZUb3pTTVFVTnhHelBzNE1EY0FJQTNQb3ZHa21XMWl0ZDNZNGpSWTYyWUEwS2hjOEpZNDgyUURlS0Y2OWViUnNjbXFwdnJoM2VMQkYwdWlYbnpnZFQ3eGcwWV9PNjR2MEFBdXhGNS1KeHNMTDBHU2xRUnZoNVFR?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "China’s brain-computer interface industry is racing ahead&nbsp;&nbsp;Yahoo Finance",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
   },
   {
     "id": "99200766",
@@ -5832,6 +6395,20 @@
     ],
     "companies": [],
     "fetched": "2026-03-29"
+  },
+  {
+    "id": "f2be4ece",
+    "title": "Moving neural implant research closer to commercialization - The Pennsylvania State University",
+    "date": "2026-01-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxOZVhrVTdtUV9BTUVrZXpUdl9EZ2pjUENLY1VDMXdtUVRkeVZFNjQ1WHY5cFZTc2ZiYnl6alp4S0JHd3FNSDhZeFh6TTJTS3c1RHdrZjhXR3FDM19ZNTROVEdRUlFrTjJqTTdlVlVvUWEyWEYyS1NiMlFzZF9Oa2Rib2N5bjFGV2loR1NHTnNtNXpOVnowcHdZMmFzZ1ZQa2U0UzVma3YtQQ?oc=5",
+    "source": "GN: Neurotech Patents",
+    "source_category": "product",
+    "summary": "Moving neural implant research closer to commercialization&nbsp;&nbsp;The Pennsylvania State University",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-05-10"
   },
   {
     "id": "8f624877",
