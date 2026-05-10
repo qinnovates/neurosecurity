@@ -1,11 +1,20 @@
 [
   {
     "type": "external",
-    "title": "Neuralink – Weekly Recap - TipRanks",
-    "date": "2026-05-09",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiekFVX3lxTE01TUxqMmMwdFNQeF9XTFFfd21wdkJzQWQ5LXFnM1hrNVZhWUhFcmIyM2VSOVBka1J4X3hteTN1dDMyV0N3OVVVblNXdU1SV2hoYXY5Ykt3cDFpSnlzaHVMb3RsSFEzcUxVc0ZaYklwQjctVEhoWGFCNkNR?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink – Weekly Recap&nbsp;&nbsp;TipRanks",
+    "title": "This Coloradan can plug his brain into a computer. He’s trying to help turn science fiction into reality. - The Denver Post",
+    "date": "2026-05-10",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMifEFVX3lxTE95WnVubEVOWGNWU2lMckhENkhXWTZ1Rl9QbkNyanF4ckJsWmU5dHFFUG5Wc0JtUDd6OHZ4UTVUNGx2MWpzbGhzUWZZNlJZRE96NDVHX25lQlVqY18yN0JCMDE0NG1od25vQnNXMms1Qjd0aXhoNUtxd2R3MWc?oc=5",
+    "source": "Google News — BCI",
+    "summary": "This Coloradan can plug his brain into a computer. He’s trying to help turn science fiction into reality.&nbsp;&nbsp;The Denver Post",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Shanghai Brain-Computer Interface Company, Officially Expands into Thailand - Gasgoo",
+    "date": "2026-05-10",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi0gFBVV95cUxNS1hVNExOZ2JXNHJNNGxleXlPWTN6THQteDlJdXBLVi1rdmhvLTJuOVM1b3hQLVREeUhaSTJ3TUkzTUEwMHVYTFJ6aFFEaHNZM0o4SkNrYWhqRklpZUhqaUpkbHRRQTVIRk90cm44MThxaG92ckVudmxadXdUNVVhanllSENSQzliS201UjJzVXBJYllpYXRjT0FOM1VBckpQcG54elZDdzFaVmpnbEo3blUwX1g4M1EwOXljUVZxQmxwc1JBbE1ObzBBNks0N3hkaGc?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Shanghai Brain-Computer Interface Company, Officially Expands into Thailand&nbsp;&nbsp;Gasgoo",
     "category": "neurotechnology"
   },
   {
@@ -28,6 +37,15 @@
   },
   {
     "type": "external",
+    "title": "Elon Musk shares Neuralink update; says: We are building a surgical robot to help solve any … - The Times of India",
+    "date": "2026-05-08",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMigwJBVV95cUxNOS1fZ0lkY24wbkZiTFBsX09QSjN5Qlp2WDNoY0o2Zjh4cTlMNGRxczBMd0huc1R1Tlh2RjRMOTVWUFhFekZjcm9JOFkwWm9ZS2NFS0pUZndGUkRsREducFZLUEtENFdrMDhwUXNCZERmUDlPSVJWWFpxNVA0SjEwZ2NhVDB5LVU3MGVKSjFjNjRLS0NFUTI0YmJNNXZ6bzNuODM1ZUpxUmNJcGtlcU9uR05zeThpOHhzZXIyTmkwUnRndVMzT1dZRFBVVmQxSTJCS0lCWEF2cXgtVlZtSWx5anllLXBOcmJKMzk1V2FQUmNrR2dnR3loN01lNnQ1LVhMbE4w0gGIAkFVX3lxTE5hOUJRS3Z6dF9TY01ZeEtVLVRiZnNRUVRHS1N2X0lZVjhUUGZPSmJiMElyLVFTRHRTek9PTnhkbllsWVVkb3FiVHhjc3NmNzRRZzNWNUxkRk1uLVFfM3Ftb21qRHlkaEFWOXRISENNLW04Y21ZaEE3ZEN6eG9aSDFQVGNxR1J6ZFNodWpyTnR6dFpuZWJfRXJhWkpoeVlKdUVHc2ptTEZOaUNXVXRkRGZUVTRtNnZkLUJKcnludUtPcDFXQzEtdEtQZHdVTk0xcm9iYVR5Y1Ywdk9jSllmalBuZXFFVHBMZHpPakNuRURJZWxYR3VOdGFpX2Roc1k4RDloWk9uc1VSdg?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk shares Neuralink update; says: We are building a surgical robot to help solve any …&nbsp;&nbsp;The Times of India",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "A big question for brain-computer interface tech: How big is the market? - Yahoo Finance",
     "date": "2026-05-07",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxNdzFOa3RsY09SR1pjcGZNdFIzX2pQRDBLVkgwM0FvOWk2YjdCOUdOQ0QzVFRQbzctWlZiODhueThrdHVWdXRrY0R4cllVbGhocm1PWmhhVmJJZXN2bE5zVWlmWlV4UWg2NXZ3cEpwNm8tTDVsNVNUYm1vVjRPMjRJazVLZWdXeFMybE5ETURfMHRkWUZzb1hvQXl3MWhxU0ZpWmlGRw?oc=5",
@@ -37,20 +55,20 @@
   },
   {
     "type": "external",
-    "title": "Tech company claims its new caps and beanies can read your mind and put it on a screen — no brain implant required - New York Post",
+    "title": "Elon Musk’s Sperm Donation to Neuralink Executive Sparks Ethics Debate - Yahoo",
     "date": "2026-05-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi4gFBVV95cUxOMFluZ00wN2FRdW9Qb0NZVUlmOHNEY3c4N3EtRW5QRDJhdTBUUkh0UzA3RlVfdzJUbnA1cFhRSkhfcjZRUUFXb2ViTUhoYWNRNHVTN2t1SkdBZlNxMWlEdWgwdlQzdDFKMl9KanMtTnIxajAtaHcwS3A2RFMzXzNySkVER2lzdU9kSUpGSFdQMmJqNF91WENXZWp6ZmNUM05reXJ1dTZxa0ZUUXMwc2RBS1BwdnhTc05hbXBhbGpPYW5sV3lzMEs1U3RiWXd4dHRlbFZ4WTU3TG54NVhaWlFyYkx3?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Tech company claims its new caps and beanies can read your mind and put it on a screen — no brain implant required&nbsp;&nbsp;New York Post",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxNNnZFTVpTVHE0TE5QOEF5SEtyTkhaRkdvMDlMbDV6VmhMR0o0UTItV2pQaHNlSVZVRm9fdDdSMWRJZXpXdE5pSVd2aTRPZkJkLUNZUDZuVHJEZDY2U2kzZmNBclpiRFVnNEZfOFpZSENDT01GWEVCWEJCOVRwaDY5MWY3c3NhdmRCLTVQaXp3?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk’s Sperm Donation to Neuralink Executive Sparks Ethics Debate&nbsp;&nbsp;Yahoo",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Who is Shivon Zilis? Meet the Elon Musk exec who's set to testify on his behalf - Business Insider",
-    "date": "2026-05-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxNWnpOZ1Q2ZnlqNExzYVBzaG1va0U4T0lySEZDaGhUREc2Rm8tLXpKT2xPVm50eGZOX19meU1PVF9VSXNIVDJ2a25uamtkMVJVejd4WmZ0N05DcHVNWVktcWUwY0pKeE5DX3JRYnpzX3JWWk9vaUxkNWdvMHlqajV6OWVlQlBSSEdtbUNz?oc=5",
+    "title": "Shivon Zilis, mother of four of Elon Musk’s children, testifies in OpenAI trial - The Guardian",
+    "date": "2026-05-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxPTXZmS3B5ZmExeEVQVWJxTExuU2dGVVBmdHAwRUphRUtic2xjY3RUZnMwTVloSUZkemJ1T0czcW5ya1gtWDNocWRibThVNE5HRThSRWktX0NLNkFPdnhsMnI5eFpBREFaS2RPejFSSVJWdDItWVQ4YkZ0UGtKNC1ERnQ0VzBXTUxoTnlkMW1Wa0d0Zmo0X1ZJZ2xEMW5ncjg?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Who is Shivon Zilis? Meet the Elon Musk exec who's set to testify on his behalf&nbsp;&nbsp;Business Insider",
+    "summary": "Shivon Zilis, mother of four of Elon Musk’s children, testifies in OpenAI trial&nbsp;&nbsp;The Guardian",
     "category": "neurotechnology"
   },
   {
@@ -82,33 +100,6 @@
   },
   {
     "type": "external",
-    "title": "Gabe Newell’s brain-computer interface startup to reveal first chips later this year - MSN",
-    "date": "2026-04-27",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiANBVV95cUxQNWViTkNsRXZBeXR0ZE1Kcl90OXdwZjZhY2ZSRHJ3eURpbEQzc292bGpyZDhsM3V6Zi1xQlZOYlVKS0RndFI2MEFBR3ZvcVRiQkY0eGlka0l1ZWU0dDBtZkx3d0kyZkQtTGZOQk5qZW9SYklwUEtGUlN6VVh6TDRacFlhOUVlRWYxNlhiQWktcThOWVplNlZ6X1hRUlc1c3RjcGtOTjN6VG9rVVpKZjJfd0hYdVhmY2xyeFhQcFVsMUdmUkRvREJkSW1MS3JRNjlMZTRIVWNUUUdUM3pfQVFrVldOcHIzRFdSWnRLclpmWlBMeTlLc3dsd3FuTFpvbW54MU83Y0ZSZmw3T3M1blprQmlXZ19pcVRJeU1TbV82d2c5UGRrc0FsZHpsMDQ2OUFWaXpIWTB1N1VSWktzb1pJalB6a19yRF9zYXR4WXh3aE1ka0tpM2t1a0VpSGlFLTdqUVBGTUZ6cVlvZVNEUU45UEZVc19MMER1TjA5Z0pyd0FuclJHRVB3Mg?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Gabe Newell’s brain-computer interface startup to reveal first chips later this year&nbsp;&nbsp;MSN",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation - Medical Xpress",
-    "date": "2026-04-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxOMkhzblhTLUd4aEZmQ3R3dkR0bGlIYWpUNGpFaE5GSHZMam1TNEZvbHhqaE4taEx6eUV1TWgwRHdudllDLTJXSHJ5YnNJTW44UEljaFNCQnFRZkhaNk9oZjFCUllQc2toSGxhU0JtdXoxaUdjaHFPb0FlTmQ0aTl0djh3VHNtVWlrcTZmTlMzZw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation&nbsp;&nbsp;Medical Xpress",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "How Neuralink brain chip transformed life of ALS sufferer - NewsNation",
-    "date": "2026-04-10",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxPUnNNNzlfRWxqQ0NXeE5qMDFmNnNDWURHRmctSXFacFBRMzNFS0lDdW9xcGItUmxPMjJlX2dKMkVmOGlEQi1TRVJEZlpIVnV6TFlTbV9RcGxQbWJTaDl1dWF6RE9rbzJ1ZlBVdTg0cUtvWjdSTGl3Yi03WmZ0MG5CVXJnRnRHRUVXbnBqZU1ubFJfZkVu0gGaAUFVX3lxTE9OeDBpSDYwNjJDVkthdmZ1ZFAwSlR3VW5sajVObmFERGlXOG5MRERtTnlwdzhDMWM2a2N1S0F3bjJ2VVM4am1LOEN0bm1FTjlfTHE3NlZkZVF0YkRyS0E0blA2N0lnT0Z1MmlYUmNlQkRkQW5ya0N2SkNMa2wyTjhSY1VmakVrZ0dfdkRxV2dzbmthQUx6RWdQbkE?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "How Neuralink brain chip transformed life of ALS sufferer&nbsp;&nbsp;NewsNation",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Brain-computer interface startup Science raises $230M - SiliconANGLE",
     "date": "2026-03-05",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPS0YxUk82N2IzSE16bDNnQS1Ba1hzMmZZNklwZXd0ZFJ4aThsS0xLdC1OdE1CWHMxTWUtU1U0M3EwNWd6NU1vQUxiZGhnelBJbXQ2anRZY2l1a1hsazZlakdBRE1QblVjNFpYZ1BTZDVnRm4zYmNLNHVTVVFLcGNvbmlSMFEzMGktRmJVbldQU2U2RW8?oc=5",
@@ -123,6 +114,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;Crunchbase News",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
+    "date": "2026-01-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
