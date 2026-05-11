@@ -1,6 +1,87 @@
 [
   {
     "type": "external",
+    "title": "The Download: the hantavirus outbreak and Musk v. Altman week 2",
+    "date": "2026-05-11",
+    "url": "hxxps://www[.]technologyreview[.]com/2026/05/11/1137031/the-download-hantavirus-outbreak-musk-altman-trial/",
+    "source": "MIT Technology Review",
+    "summary": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. Here’s what you need to know about the cruise ship",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "To Advance Precision Surgery, Investigators Test New Brain-Computer Interface - Johns Hopkins Medicine",
+    "date": "2026-05-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiowFBVV95cUxQUzl6RGZGSUFIeGZheGtHVDNMcG5qdFB0N1YxM1FkVlBoc3ZIZG9XUHc2cDAyRnNGMGI0QUZfc2lYM25lTDlkVTdFaGtnUnlBVXpGZWxJSXJ3SGd3dER1WkhkakNjaWRQS0FjX1BwMHgycE9obVJmRnR3N3VfQWhtQUd0UHB1eVYzcGgtcnFTWE5iMGE2RUI3WFNmX0U4a1pIaVdn?oc=5",
+    "source": "Google News — BCI",
+    "summary": "To Advance Precision Surgery, Investigators Test New Brain-Computer Interface&nbsp;&nbsp;Johns Hopkins Medicine",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Colorado man becomes world’s first to have brain plugged into computer at this level - 98.5 KYGO",
+    "date": "2026-05-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiowFBVV95cUxPNHFNakNUeFpaanZCcTk5WEV4S0JjSFlJTVhNSklnQXd3T2dNaW5zd0FQX01DNzJ3TnFBV25QVmxTN0wwRXQ1Tjg1WkNVd2hwb21iRDNDSzlFVm9HbmxnRW1QQkk3QzRuTmdvNlBrOUdha1Vfb2QxQS1laVpzVEdqOENaZ19yZ3VrZEd2LVVxakdlcl9ucGY0REZmTlZNNzRWQjNN?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Colorado man becomes world’s first to have brain plugged into computer at this level&nbsp;&nbsp;98.5 KYGO",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain-Computer Interface Raised 3.8 Billion Yuan in Q1 2026, Surpassing Last Year's Total; Investment Logic Shifts from \"Concepts\" to \"Industrialization\" - 36Kr",
+    "date": "2026-05-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTE9uTVJseExiTmc1YW1RV1M0ajNGdEJLcjlSdloyeWJZRlZjUHdXeHVOSW02cWExQTRMcU1jSUdVMmktby1kS3N5QW1pR1pVay13MUdr?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain-Computer Interface Raised 3.8 Billion Yuan in Q1 2026, Surpassing Last Year's Total; Investment Logic Shifts from \"Concepts\" to \"Industrialization\"&nbsp;&nbsp;36Kr",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain Implant Market 2026-2036 : How Neuralink, Medtronic, and Abbott Are Transforming Neurotechnology - openPR.com",
+    "date": "2026-05-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxNYlhqdks0dkNuV0NQbXNUMWoybGQ4Y0w3eUdjZV9WYlFGTURWM0tNUU1Ib0JfaDVNTHZ2bTd2UmtkMHNzZk5fdkRITlNxNnZZLVhYa3lINEtWb3VXemNrVUQyeVEzR2MyekhsQzRXXzhzWnRPQm5Ib2tQb1RxaEZvNGxWVVRDNld0MWdRUmVfbUFmNkZh?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Brain Implant Market 2026-2036 : How Neuralink, Medtronic, and Abbott Are Transforming Neurotechnology&nbsp;&nbsp;openPR.com",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Dynamical mechanisms of flexible phase-locking in cortical theta oscillators",
+    "date": "2026-05-11",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]08014",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.08014v1 Announce Type: new Abstract: Oscillatory activity in auditory cortex is thought to play a central role in auditory and speech processing by synchronizing neural rhythms to external ",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Partitioning Neural Co-Variability",
+    "date": "2026-05-11",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]06995",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.06995v1 Announce Type: cross Abstract: Trial-to-trial variability of neural responses has been linked to important aspects of neural computation and is essential for understanding how neuro",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Reason to Play: Behavioral and Brain Alignment Between Frontier LRMs and Human Game Learners",
+    "date": "2026-05-11",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]08019",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.08019v1 Announce Type: cross Abstract: Humans rapidly learn abstract knowledge when encountering novel environments and flexibly deploy this knowledge to guide efficient and intelligent act",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Brain-computer interface: Beijing’s next technological gamble - Table.Briefings",
+    "date": "2026-05-10",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxNOXBmdmxnUlhncm5GS3FnbGhrWk1lSDIybUhvTHlIajc4RW1LbXoxNThaRkMwcEhPN1cxSHpzeDZDRjllQjhfdUhfeDIta2o5Q0c1cm16Q183eFM5OHlyUVZ6dkFSN1hBVWpibUR6NTdrcVA5dk5ONTFEMmRHSHRlS0JyRHd3N2JramxsaDgxOUFPem9QejVzQ3ltbUJsakluWnJvRUx0bnlWX2Ex?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain-computer interface: Beijing’s next technological gamble&nbsp;&nbsp;Table.Briefings",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "This Coloradan can plug his brain into a computer. He’s trying to help turn science fiction into reality. - The Denver Post",
     "date": "2026-05-10",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMifEFVX3lxTE95WnVubEVOWGNWU2lMckhENkhXWTZ1Rl9QbkNyanF4ckJsWmU5dHFFUG5Wc0JtUDd6OHZ4UTVUNGx2MWpzbGhzUWZZNlJZRE96NDVHX25lQlVqY18yN0JCMDE0NG1od25vQnNXMms1Qjd0aXhoNUtxd2R3MWc?oc=5",
@@ -10,29 +91,11 @@
   },
   {
     "type": "external",
-    "title": "Shanghai Brain-Computer Interface Company, Officially Expands into Thailand - Gasgoo",
+    "title": "Why Brain Implants Are More Than a Sci-Fi Fantasy - Bloomberg.com",
     "date": "2026-05-10",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi0gFBVV95cUxNS1hVNExOZ2JXNHJNNGxleXlPWTN6THQteDlJdXBLVi1rdmhvLTJuOVM1b3hQLVREeUhaSTJ3TUkzTUEwMHVYTFJ6aFFEaHNZM0o4SkNrYWhqRklpZUhqaUpkbHRRQTVIRk90cm44MThxaG92ckVudmxadXdUNVVhanllSENSQzliS201UjJzVXBJYllpYXRjT0FOM1VBckpQcG54elZDdzFaVmpnbEo3blUwX1g4M1EwOXljUVZxQmxwc1JBbE1ObzBBNks0N3hkaGc?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Shanghai Brain-Computer Interface Company, Officially Expands into Thailand&nbsp;&nbsp;Gasgoo",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Musk v. Altman week 2: OpenAI fires back, and Shivon Zilis reveals that Musk tried to poach Sam Altman",
-    "date": "2026-05-08",
-    "url": "hxxps://www[.]technologyreview[.]com/2026/05/08/1137008/musk-v-altman-week-2-openai-fires-back-and-shivon-zilis-reveals-that-musk-tried-to-poach-sam-altman/",
-    "source": "MIT Technology Review",
-    "summary": "In the second week of the landmark trial between Elon Musk and OpenAI, Musk’s motivations for bringing the suit were under scrutiny. Last week, Musk took the stand, alleging that OpenAI CEO Sam Altman",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Inside Shivon Zilis’s complicated role in the Musk-OpenAI battle - Fortune",
-    "date": "2026-05-08",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxNdER0RHRTQjJfWXZxcW9ZTGpSQW4wQ1V2LVZjQ2l4clduMXQ0RExDYzUyaE02NnVhV3hqM3ZPR0tfdk5aNXc5SWN6NC04V0pDRWlVWlFCMS1LQ0dZanduWUJPbllqSnY5SWJTSWRsN2tlYjluczV2ZzdsNExXZ3QxM1pnWnVQekcycmc?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixgFBVV95cUxQTWpjS1QxcUVtUHByYlFuT2dSN3BjRXV2RUtkX2MwT0QyY1k1V1JrWjF1LVdvYkMtbHNubDI5VjNqeGRaS3JtWlVUa0RNcXIwaEZ5S0hQZXI0bFJ2bkFKZmF4RU5CQnY4ZzVJN296TFFrRF81aVd4ekl0WTVrVjl4NmdsNlVNWWxDcTVuR3FOMGZwQkhaNDVaNFREMlRvRDhvOWI1Y2pYSkF4OFJuN1BONHFCdDhQOXFBdkhydWZkaUJRVl9aa0E?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Inside Shivon Zilis’s complicated role in the Musk-OpenAI battle&nbsp;&nbsp;Fortune",
+    "summary": "Why Brain Implants Are More Than a Sci-Fi Fantasy&nbsp;&nbsp;Bloomberg.com",
     "category": "neurotechnology"
   },
   {
@@ -46,33 +109,6 @@
   },
   {
     "type": "external",
-    "title": "A big question for brain-computer interface tech: How big is the market? - Yahoo Finance",
-    "date": "2026-05-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxNdzFOa3RsY09SR1pjcGZNdFIzX2pQRDBLVkgwM0FvOWk2YjdCOUdOQ0QzVFRQbzctWlZiODhueThrdHVWdXRrY0R4cllVbGhocm1PWmhhVmJJZXN2bE5zVWlmWlV4UWg2NXZ3cEpwNm8tTDVsNVNUYm1vVjRPMjRJazVLZWdXeFMybE5ETURfMHRkWUZzb1hvQXl3MWhxU0ZpWmlGRw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "A big question for brain-computer interface tech: How big is the market?&nbsp;&nbsp;Yahoo Finance",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Elon Musk’s Sperm Donation to Neuralink Executive Sparks Ethics Debate - Yahoo",
-    "date": "2026-05-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxNNnZFTVpTVHE0TE5QOEF5SEtyTkhaRkdvMDlMbDV6VmhMR0o0UTItV2pQaHNlSVZVRm9fdDdSMWRJZXpXdE5pSVd2aTRPZkJkLUNZUDZuVHJEZDY2U2kzZmNBclpiRFVnNEZfOFpZSENDT01GWEVCWEJCOVRwaDY5MWY3c3NhdmRCLTVQaXp3?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk’s Sperm Donation to Neuralink Executive Sparks Ethics Debate&nbsp;&nbsp;Yahoo",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Shivon Zilis, mother of four of Elon Musk’s children, testifies in OpenAI trial - The Guardian",
-    "date": "2026-05-06",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxPTXZmS3B5ZmExeEVQVWJxTExuU2dGVVBmdHAwRUphRUtic2xjY3RUZnMwTVloSUZkemJ1T0czcW5ya1gtWDNocWRibThVNE5HRThSRWktX0NLNkFPdnhsMnI5eFpBREFaS2RPejFSSVJWdDItWVQ4YkZ0UGtKNC1ERnQ0VzBXTUxoTnlkMW1Wa0d0Zmo0X1ZJZ2xEMW5ncjg?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Shivon Zilis, mother of four of Elon Musk’s children, testifies in OpenAI trial&nbsp;&nbsp;The Guardian",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Bionic Tech Must Prove Itself Beyond the Lab",
     "date": "2026-05-05",
     "url": "hxxps://spectrum[.]ieee[.]org/assistive-technology",
@@ -82,20 +118,20 @@
   },
   {
     "type": "external",
-    "title": "Symbiotic brain-machine drawing via visual brain-computer interfaces - Nature",
-    "date": "2026-05-04",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE9yT0lWaEIyMkd6cFdoVEZUUktzdmh0eWZ6cEE4Y01wYUN6YUJPVVQ2RXBheUlHaUFObnRXZW90aWE5ZDFHWDZ0UjRYeEV3ZElTV3lUYWRoMENVRW41dTFV?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Symbiotic brain-machine drawing via visual brain-computer interfaces&nbsp;&nbsp;Nature",
+    "title": "How Neuralink brain chip transformed life of ALS sufferer - NewsNation",
+    "date": "2026-04-10",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxPUnNNNzlfRWxqQ0NXeE5qMDFmNnNDWURHRmctSXFacFBRMzNFS0lDdW9xcGItUmxPMjJlX2dKMkVmOGlEQi1TRVJEZlpIVnV6TFlTbV9RcGxQbWJTaDl1dWF6RE9rbzJ1ZlBVdTg0cUtvWjdSTGl3Yi03WmZ0MG5CVXJnRnRHRUVXbnBqZU1ubFJfZkVu0gGaAUFVX3lxTE9OeDBpSDYwNjJDVkthdmZ1ZFAwSlR3VW5sajVObmFERGlXOG5MRERtTnlwdzhDMWM2a2N1S0F3bjJ2VVM4am1LOEN0bm1FTjlfTHE3NlZkZVF0YkRyS0E0blA2N0lnT0Z1MmlYUmNlQkRkQW5ya0N2SkNMa2wyTjhSY1VmakVrZ0dfdkRxV2dzbmthQUx6RWdQbkE?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "How Neuralink brain chip transformed life of ALS sufferer&nbsp;&nbsp;NewsNation",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Brain-computer interface based on Rice research wins FDA approval for first clinical trial - Rice University",
-    "date": "2026-04-28",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitgFBVV95cUxNbjczeTVPZl80UTV2UElfaW85YjFDa2dmbG9ZMFBQWXl2TFN3WFFLelN0MGtVaXN0eW50Vk1uOWhFTUZDaUF2V3BfeUZpS2VHMWhQQmJaOGpoa3c4dWVqMmZWd0FhRkZST1NZR2t0eEx0dmh4QnZ2bzR1M0lSU094c1g1VWRPcVVKbEhsZXV5anotellOckUwUDlsUWc4bWpmWHlKSVRuNXlfRFhadi1GRWZZZUQ1Zw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-computer interface based on Rice research wins FDA approval for first clinical trial&nbsp;&nbsp;Rice University",
+    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - TechCrunch",
+    "date": "2026-03-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxOX2Jtd3dNTy13MzNlOUpQRVlFN0RaLUYxMFd4VzJYZnR3TzFtRlFOa21PaWM5NzZiX1NTUGMxZkk1OTZmcG0xRDhhejYwOUM0RHFMYlZCQ1RZNEczQjR4Z1VZbEp3czA3bzB1UE1sYUNuS3o0dmdvazN4MmVtUTRqNTNDeHdvSnZrT0M4c3RUUVg2am5pa25FQ2ZSX2VBdVpaVHFRZmZXUnpRLUJwR1pObw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;TechCrunch",
     "category": "neurotechnology"
   },
   {
@@ -114,15 +150,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;Crunchbase News",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
-    "date": "2026-01-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
