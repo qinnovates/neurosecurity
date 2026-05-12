@@ -1,11 +1,47 @@
 [
   {
     "type": "external",
-    "title": "The Download: the hantavirus outbreak and Musk v. Altman week 2",
-    "date": "2026-05-11",
-    "url": "hxxps://www[.]technologyreview[.]com/2026/05/11/1137031/the-download-hantavirus-outbreak-musk-altman-trial/",
-    "source": "MIT Technology Review",
-    "summary": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. Here’s what you need to know about the cruise ship",
+    "title": "Musk mulled handing OpenAI to his children, Altman testifies",
+    "date": "2026-05-12",
+    "url": "hxxps://techcrunch[.]com/2026/05/12/musk-mulled-handing-openai-to-his-children-altman-testifies/",
+    "source": "TechCrunch",
+    "summary": "OpenAI's CEO recalls a \"particularly hair-raising\" conversation with the SpaceX founder.",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Sam Altman says Elon Musk’s mind games were damaging OpenAI",
+    "date": "2026-05-12",
+    "url": "hxxps://www[.]theverge[.]com/ai-artificial-intelligence/928861/openai-sam-altman-elon-musk-damage",
+    "source": "The Verge",
+    "summary": "OpenAI CEO Sam Altman says Elon Musk did \"huge damage\" to the culture of the AI startup. During testimony as part of Musk's lawsuit against OpenAI, Altman said Musk required OpenAI president Greg Broc",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "World’s first higher-level BCI surgery restores sensory functions - Interesting Engineering",
+    "date": "2026-05-12",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilwFBVV95cUxNN2lOQ0dFNUFGc2VwSXlzTGVoRUowaFJYdG5Ta2dyTXQxUGNlYXowLXZVTUVOQUJLLVBIaERkU0x6bTBFWG9Ud2YxMXgwNTZralBERWV3Ukp4dTgtWGN5YzVOaVB6b1ZQMTREMnE5YnFlRkJRSVJsd3lDQUtGWG5SVFAzQ0hqUDRIUkdpYk4xalF0c2J3Z0Rn?oc=5",
+    "source": "Google News — BCI",
+    "summary": "World’s first higher-level BCI surgery restores sensory functions&nbsp;&nbsp;Interesting Engineering",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Cortico-cerebellar modularity as an architectural inductive bias for efficient temporal learning",
+    "date": "2026-05-12",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]10356",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.10356v1 Announce Type: new Abstract: The cerebellum and cerebral cortex form tightly coupled circuits thought to support flexible and efficient temporal processing. How this interaction sha",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "NeuralBench: A Unifying Framework to Benchmark NeuroAI Models",
+    "date": "2026-05-12",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]08495",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.08495v1 Announce Type: cross Abstract: Deep learning and large public datasets have recently catalyzed the proliferation of AI models for processing brain recordings. However, systematicall",
     "category": "research"
   },
   {
@@ -16,60 +52,6 @@
     "source": "Google News — BCI",
     "summary": "To Advance Precision Surgery, Investigators Test New Brain-Computer Interface&nbsp;&nbsp;Johns Hopkins Medicine",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Colorado man becomes world’s first to have brain plugged into computer at this level - 98.5 KYGO",
-    "date": "2026-05-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiowFBVV95cUxPNHFNakNUeFpaanZCcTk5WEV4S0JjSFlJTVhNSklnQXd3T2dNaW5zd0FQX01DNzJ3TnFBV25QVmxTN0wwRXQ1Tjg1WkNVd2hwb21iRDNDSzlFVm9HbmxnRW1QQkk3QzRuTmdvNlBrOUdha1Vfb2QxQS1laVpzVEdqOENaZ19yZ3VrZEd2LVVxakdlcl9ucGY0REZmTlZNNzRWQjNN?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Colorado man becomes world’s first to have brain plugged into computer at this level&nbsp;&nbsp;98.5 KYGO",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain-Computer Interface Raised 3.8 Billion Yuan in Q1 2026, Surpassing Last Year's Total; Investment Logic Shifts from \"Concepts\" to \"Industrialization\" - 36Kr",
-    "date": "2026-05-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTE9uTVJseExiTmc1YW1RV1M0ajNGdEJLcjlSdloyeWJZRlZjUHdXeHVOSW02cWExQTRMcU1jSUdVMmktby1kS3N5QW1pR1pVay13MUdr?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-Computer Interface Raised 3.8 Billion Yuan in Q1 2026, Surpassing Last Year's Total; Investment Logic Shifts from \"Concepts\" to \"Industrialization\"&nbsp;&nbsp;36Kr",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain Implant Market 2026-2036 : How Neuralink, Medtronic, and Abbott Are Transforming Neurotechnology - openPR.com",
-    "date": "2026-05-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxNYlhqdks0dkNuV0NQbXNUMWoybGQ4Y0w3eUdjZV9WYlFGTURWM0tNUU1Ib0JfaDVNTHZ2bTd2UmtkMHNzZk5fdkRITlNxNnZZLVhYa3lINEtWb3VXemNrVUQyeVEzR2MyekhsQzRXXzhzWnRPQm5Ib2tQb1RxaEZvNGxWVVRDNld0MWdRUmVfbUFmNkZh?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Brain Implant Market 2026-2036 : How Neuralink, Medtronic, and Abbott Are Transforming Neurotechnology&nbsp;&nbsp;openPR.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Dynamical mechanisms of flexible phase-locking in cortical theta oscillators",
-    "date": "2026-05-11",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]08014",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.08014v1 Announce Type: new Abstract: Oscillatory activity in auditory cortex is thought to play a central role in auditory and speech processing by synchronizing neural rhythms to external ",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Partitioning Neural Co-Variability",
-    "date": "2026-05-11",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]06995",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.06995v1 Announce Type: cross Abstract: Trial-to-trial variability of neural responses has been linked to important aspects of neural computation and is essential for understanding how neuro",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Reason to Play: Behavioral and Brain Alignment Between Frontier LRMs and Human Game Learners",
-    "date": "2026-05-11",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]08019",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.08019v1 Announce Type: cross Abstract: Humans rapidly learn abstract knowledge when encountering novel environments and flexibly deploy this knowledge to guide efficient and intelligent act",
-    "category": "research"
   },
   {
     "type": "external",
@@ -118,20 +100,20 @@
   },
   {
     "type": "external",
-    "title": "How Neuralink brain chip transformed life of ALS sufferer - NewsNation",
-    "date": "2026-04-10",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxPUnNNNzlfRWxqQ0NXeE5qMDFmNnNDWURHRmctSXFacFBRMzNFS0lDdW9xcGItUmxPMjJlX2dKMkVmOGlEQi1TRVJEZlpIVnV6TFlTbV9RcGxQbWJTaDl1dWF6RE9rbzJ1ZlBVdTg0cUtvWjdSTGl3Yi03WmZ0MG5CVXJnRnRHRUVXbnBqZU1ubFJfZkVu0gGaAUFVX3lxTE9OeDBpSDYwNjJDVkthdmZ1ZFAwSlR3VW5sajVObmFERGlXOG5MRERtTnlwdzhDMWM2a2N1S0F3bjJ2VVM4am1LOEN0bm1FTjlfTHE3NlZkZVF0YkRyS0E0blA2N0lnT0Z1MmlYUmNlQkRkQW5ya0N2SkNMa2wyTjhSY1VmakVrZ0dfdkRxV2dzbmthQUx6RWdQbkE?oc=5",
+    "title": "How Neuralink allows man to fly drone with his mind - NewsNation",
+    "date": "2026-04-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPQ3UwMjl5MXBOeHdHZU9tZHlxcWx2RkFzRkxVQTY3UC11S0pzVktsS216cUY2YnB1OVM2b3NmSDVSQlA4bFU0OHJhdTh3NG5YdjZUOTNzTFFta0RxNUVUQU5Hc0J1X1VrZEZhbkxhcFA0SFZnVHhoR0psVURxOXFTd3hBcGt1eWpx0gGOAUFVX3lxTE9EQlNjc0NJSk9obHF1VVBkNDE2RWQwQXZ3MGp3WEdYNVJUbmpZMnBxTmlZaTJkZWhlLWo0ZVlIZ2hQU0xONTlEOEFwZVR2ellmUGJoT0ZVd3FtVXNqMWFMcUpXMkt3TXNMbU4wdEMwTnVtbUxpMmF0bmtQU21VaWkzMjBVSG41R3AybV93VkE?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "How Neuralink brain chip transformed life of ALS sufferer&nbsp;&nbsp;NewsNation",
+    "summary": "How Neuralink allows man to fly drone with his mind&nbsp;&nbsp;NewsNation",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - TechCrunch",
-    "date": "2026-03-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxOX2Jtd3dNTy13MzNlOUpQRVlFN0RaLUYxMFd4VzJYZnR3TzFtRlFOa21PaWM5NzZiX1NTUGMxZkk1OTZmcG0xRDhhejYwOUM0RHFMYlZCQ1RZNEczQjR4Z1VZbEp3czA3bzB1UE1sYUNuS3o0dmdvazN4MmVtUTRqNTNDeHdvSnZrT0M4c3RUUVg2am5pa25FQ2ZSX2VBdVpaVHFRZmZXUnpRLUJwR1pObw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;TechCrunch",
+    "title": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation - Medical Xpress",
+    "date": "2026-04-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxOMkhzblhTLUd4aEZmQ3R3dkR0bGlIYWpUNGpFaE5GSHZMam1TNEZvbHhqaE4taEx6eUV1TWgwRHdudllDLTJXSHJ5YnNJTW44UEljaFNCQnFRZkhaNk9oZjFCUllQc2toSGxhU0JtdXoxaUdjaHFPb0FlTmQ0aTl0djh3VHNtVWlrcTZmTlMzZw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation&nbsp;&nbsp;Medical Xpress",
     "category": "neurotechnology"
   },
   {
@@ -154,6 +136,15 @@
   },
   {
     "type": "external",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
+    "date": "2026-01-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Two Years of Telepathy - Neuralink",
     "date": "2026-01-28",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
@@ -169,6 +160,15 @@
     "source": "Google News — MIND Act",
     "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
     "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
+    "date": "2026-01-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
