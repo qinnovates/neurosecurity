@@ -1,47 +1,65 @@
 [
   {
     "type": "external",
-    "title": "Musk mulled handing OpenAI to his children, Altman testifies",
-    "date": "2026-05-12",
-    "url": "hxxps://techcrunch[.]com/2026/05/12/musk-mulled-handing-openai-to-his-children-altman-testifies/",
-    "source": "TechCrunch",
-    "summary": "OpenAI's CEO recalls a \"particularly hair-raising\" conversation with the SpaceX founder.",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Sam Altman says Elon Musk’s mind games were damaging OpenAI",
-    "date": "2026-05-12",
-    "url": "hxxps://www[.]theverge[.]com/ai-artificial-intelligence/928861/openai-sam-altman-elon-musk-damage",
+    "title": "Microsoft doesn’t want any of this",
+    "date": "2026-05-13",
+    "url": "hxxps://www[.]theverge[.]com/ai-artificial-intelligence/929692/microsoft-musk-altman-openai-trial",
     "source": "The Verge",
-    "summary": "OpenAI CEO Sam Altman says Elon Musk did \"huge damage\" to the culture of the AI startup. During testimony as part of Musk's lawsuit against OpenAI, Altman said Musk required OpenAI president Greg Broc",
+    "summary": "Maybe I'm just punch-drunk in my third week attending Musk v. Altman, but I have become very, very fond of Microsoft during the course of this trial. They don't want to be here any more than I do. The",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "World’s first higher-level BCI surgery restores sensory functions - Interesting Engineering",
-    "date": "2026-05-12",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilwFBVV95cUxNN2lOQ0dFNUFGc2VwSXlzTGVoRUowaFJYdG5Ta2dyTXQxUGNlYXowLXZVTUVOQUJLLVBIaERkU0x6bTBFWG9Ud2YxMXgwNTZralBERWV3Ukp4dTgtWGN5YzVOaVB6b1ZQMTREMnE5YnFlRkJRSVJsd3lDQUtGWG5SVFAzQ0hqUDRIUkdpYk4xalF0c2J3Z0Rn?oc=5",
+    "title": "OpenAI Brings Its Ass to Court",
+    "date": "2026-05-13",
+    "url": "hxxps://www[.]wired[.]com/story/musk-altman-trial-ass-statue-evidence/",
+    "source": "Wired",
+    "summary": "In Musk v. Altman, the company sought to show the jury a remarkable trophy as physical proof of Elon Musk’s concerning behavior.",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain-computer interface technology enables paralyzed art teacher to draw again - People's Daily Online",
+    "date": "2026-05-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiZEFVX3lxTE1LUWtTNlR6TFpTZ2xZeGhZSFlKNGRQQkhlQko2NkpKanJPTG5NRE91QkRuQW1jWFNOREJBZDJ0UXdsX3VSVllPZjB5MTRJTzhDZWlwSUQtVFFncXR1YldoQ1cwR0U?oc=5",
     "source": "Google News — BCI",
-    "summary": "World’s first higher-level BCI surgery restores sensory functions&nbsp;&nbsp;Interesting Engineering",
+    "summary": "Brain-computer interface technology enables paralyzed art teacher to draw again&nbsp;&nbsp;People's Daily Online",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Cortico-cerebellar modularity as an architectural inductive bias for efficient temporal learning",
-    "date": "2026-05-12",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]10356",
+    "title": "Brain Computer Interface Technology Research: the global - openPR.com",
+    "date": "2026-05-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxOQS1YQTlrT1YtOG0tdnRZZlJMNXloTjRKTm10Yzd5OXNHa3BmeFZYSWlSc0xmTlZrdE1aaXh3WDZwTnFUeUlfa3ZWQlhqclN6WkVTZFpkQmd4NE5oWjAwS0tUYXczNmhWTlJqd0FUTzdTN0txMVpZYW9mT2FNLU9waEtHRU8zZ1MwY0pnMTZXUnBJLUU4QWc?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain Computer Interface Technology Research: the global&nbsp;&nbsp;openPR.com",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Self-organized MT Direction Maps Emerge from Spatiotemporal Contrastive Optimization",
+    "date": "2026-05-13",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]11718",
     "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.10356v1 Announce Type: new Abstract: The cerebellum and cerebral cortex form tightly coupled circuits thought to support flexible and efficient temporal processing. How this interaction sha",
+    "summary": "arXiv:2605.11718v1 Announce Type: new Abstract: The spatial and functional organization of the primate visual cortex is a fundamental problem in neuroscience. While recent computational frameworks lik",
     "category": "research"
   },
   {
     "type": "external",
-    "title": "NeuralBench: A Unifying Framework to Benchmark NeuroAI Models",
-    "date": "2026-05-12",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]08495",
+    "title": "Empirical scaling laws in balanced networks with conductance-based synapses",
+    "date": "2026-05-13",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]12404",
     "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.08495v1 Announce Type: cross Abstract: Deep learning and large public datasets have recently catalyzed the proliferation of AI models for processing brain recordings. However, systematicall",
+    "summary": "arXiv:2605.12404v1 Announce Type: new Abstract: Strongly coupled, recurrent, balanced network models have been successful in describing and predicting many phenomena observed in cortical neural record",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Interpretable EEG Microstate Discovery via Variational Deep Embedding: A Systematic Architecture Search with Multi-Quadrant Evaluation",
+    "date": "2026-05-13",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]10947",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.10947v1 Announce Type: cross Abstract: EEG microstate analysis segments continuous brain electrical activity into brief, quasi-stable topographic configurations that reflect discrete functi",
     "category": "research"
   },
   {
@@ -60,15 +78,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxNOXBmdmxnUlhncm5GS3FnbGhrWk1lSDIybUhvTHlIajc4RW1LbXoxNThaRkMwcEhPN1cxSHpzeDZDRjllQjhfdUhfeDIta2o5Q0c1cm16Q183eFM5OHlyUVZ6dkFSN1hBVWpibUR6NTdrcVA5dk5ONTFEMmRHSHRlS0JyRHd3N2JramxsaDgxOUFPem9QejVzQ3ltbUJsakluWnJvRUx0bnlWX2Ex?oc=5",
     "source": "Google News — BCI",
     "summary": "Brain-computer interface: Beijing’s next technological gamble&nbsp;&nbsp;Table.Briefings",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "This Coloradan can plug his brain into a computer. He’s trying to help turn science fiction into reality. - The Denver Post",
-    "date": "2026-05-10",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMifEFVX3lxTE95WnVubEVOWGNWU2lMckhENkhXWTZ1Rl9QbkNyanF4ckJsWmU5dHFFUG5Wc0JtUDd6OHZ4UTVUNGx2MWpzbGhzUWZZNlJZRE96NDVHX25lQlVqY18yN0JCMDE0NG1od25vQnNXMms1Qjd0aXhoNUtxd2R3MWc?oc=5",
-    "source": "Google News — BCI",
-    "summary": "This Coloradan can plug his brain into a computer. He’s trying to help turn science fiction into reality.&nbsp;&nbsp;The Denver Post",
     "category": "neurotechnology"
   },
   {
@@ -100,11 +109,29 @@
   },
   {
     "type": "external",
+    "title": "Startup Says It Can Read Your Brain Signals Using a Pair of Headphones - Futurism",
+    "date": "2026-04-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihAFBVV95cUxQR29EVDlILUNWVHhmNFYycEgyMTM1dzFHRmRGYnNSSm4xV3Z1eGpJY2l5ODd1NE5GY1ZmUXRCZGhhQjFzVVJiN2ZXR0NxY25IbkNBVjRyRVh4VkFLSDROajJVTjRiY0RVSUh1dU1zRUEyb3k3a2J0b2NOX3RNX0VRTTBkYmo?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Startup Says It Can Read Your Brain Signals Using a Pair of Headphones&nbsp;&nbsp;Futurism",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "How Neuralink allows man to fly drone with his mind - NewsNation",
     "date": "2026-04-27",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPQ3UwMjl5MXBOeHdHZU9tZHlxcWx2RkFzRkxVQTY3UC11S0pzVktsS216cUY2YnB1OVM2b3NmSDVSQlA4bFU0OHJhdTh3NG5YdjZUOTNzTFFta0RxNUVUQU5Hc0J1X1VrZEZhbkxhcFA0SFZnVHhoR0psVURxOXFTd3hBcGt1eWpx0gGOAUFVX3lxTE9EQlNjc0NJSk9obHF1VVBkNDE2RWQwQXZ3MGp3WEdYNVJUbmpZMnBxTmlZaTJkZWhlLWo0ZVlIZ2hQU0xONTlEOEFwZVR2ellmUGJoT0ZVd3FtVXNqMWFMcUpXMkt3TXNMbU4wdEMwTnVtbUxpMmF0bmtQU21VaWkzMjBVSG41R3AybV93VkE?oc=5",
     "source": "Google News — Neuralink",
     "summary": "How Neuralink allows man to fly drone with his mind&nbsp;&nbsp;NewsNation",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Gabe Newell’s brain-computer interface startup to reveal first chips later this year - MSN",
+    "date": "2026-04-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiANBVV95cUxQNWViTkNsRXZBeXR0ZE1Kcl90OXdwZjZhY2ZSRHJ3eURpbEQzc292bGpyZDhsM3V6Zi1xQlZOYlVKS0RndFI2MEFBR3ZvcVRiQkY0eGlka0l1ZWU0dDBtZkx3d0kyZkQtTGZOQk5qZW9SYklwUEtGUlN6VVh6TDRacFlhOUVlRWYxNlhiQWktcThOWVplNlZ6X1hRUlc1c3RjcGtOTjN6VG9rVVpKZjJfd0hYdVhmY2xyeFhQcFVsMUdmUkRvREJkSW1MS3JRNjlMZTRIVWNUUUdUM3pfQVFrVldOcHIzRFdSWnRLclpmWlBMeTlLc3dsd3FuTFpvbW54MU83Y0ZSZmw3T3M1blprQmlXZ19pcVRJeU1TbV82d2c5UGRrc0FsZHpsMDQ2OUFWaXpIWTB1N1VSWktzb1pJalB6a19yRF9zYXR4WXh3aE1ka0tpM2t1a0VpSGlFLTdqUVBGTUZ6cVlvZVNEUU45UEZVc19MMER1TjA5Z0pyd0FuclJHRVB3Mg?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Gabe Newell’s brain-computer interface startup to reveal first chips later this year&nbsp;&nbsp;MSN",
     "category": "neurotechnology"
   },
   {
@@ -136,15 +163,6 @@
   },
   {
     "type": "external",
-    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
-    "date": "2026-01-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Two Years of Telepathy - Neuralink",
     "date": "2026-01-28",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
@@ -168,15 +186,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
     "source": "Google News — Neuralink",
     "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Non-surgical brain-computer interface startup lands new funding - Longevity.Technology",
-    "date": "2025-12-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxQZUs4LXBHeDF5eV92WGk3aVFuZkJPMlEtamtDaThhTUt4amRMRzFNNC1ZcXNIYWRGLVpmaWlDMEVIcDFqLU1YdzhZejFLOUdhZk5NcEFMNmFTamswTC03dFdOLUNvQ3UyQ2xoY1NGd0VYRHhKV2t5MjNtcW5ZWDc2N3BIcjJCNlF1RFZKeWNIZFJqd1U1dXFEQVl4dTBuSDg?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Non-surgical brain-computer interface startup lands new funding&nbsp;&nbsp;Longevity.Technology",
     "category": "neurotechnology"
   },
   {
@@ -208,11 +217,11 @@
   },
   {
     "type": "external",
-    "title": "Congress Introduces Neural Data Bill - Inside Privacy",
+    "title": "Senators ask FTC to study neurotechnology's promises, implications - IAPP",
     "date": "2025-10-03",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxQcW5Tb0RFN2dJOE1rRmtJZjltdUVlNzhTdGpUN0U1Y1RIMVhJVllNWXZGc3ZBNGt1VHRqNWQ5YUx2dVFfZUxZRFZhRW9CbzNoLUk0VWdJY0kzczc3dTQ5X1NoOF9pYy1HR01OallOMFFHaC1pdlJ2U3NON0JzdGRfenNYYlhGYzJXdXc?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxNS3FBelpMZGNUWExYbEtEQzZtLXNYRGJnRjhsNjFTYTRrMHpMYW9iU2ZlM3JqM3BBendfblNmNHVNUURrNG4xNzlRNU1xLWN5ZmIzNVJSR1JBRTFBclU5NHFQMTUxLVQ2OEY4bVJJS3VRRFVFcm95NEZpbTRtY1lhWDdBdmJydTI2MHBLNVJvVkxUS0E?oc=5",
     "source": "Google News — MIND Act",
-    "summary": "Congress Introduces Neural Data Bill&nbsp;&nbsp;Inside Privacy",
+    "summary": "Senators ask FTC to study neurotechnology's promises, implications&nbsp;&nbsp;IAPP",
     "category": "neuroethics"
   },
   {
