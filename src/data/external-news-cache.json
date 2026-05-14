@@ -1,29 +1,11 @@
 [
   {
     "type": "external",
-    "title": "Microsoft doesn’t want any of this",
-    "date": "2026-05-13",
-    "url": "hxxps://www[.]theverge[.]com/ai-artificial-intelligence/929692/microsoft-musk-altman-openai-trial",
+    "title": "Live updates from Elon Musk and Sam Altman’s court battle over the future of OpenAI",
+    "date": "2026-05-14",
+    "url": "hxxps://www[.]theverge[.]com/tech/917225/sam-altman-elon-musk-openai-lawsuit",
     "source": "The Verge",
-    "summary": "Maybe I'm just punch-drunk in my third week attending Musk v. Altman, but I have become very, very fond of Microsoft during the course of this trial. They don't want to be here any more than I do. The",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "OpenAI Brings Its Ass to Court",
-    "date": "2026-05-13",
-    "url": "hxxps://www[.]wired[.]com/story/musk-altman-trial-ass-statue-evidence/",
-    "source": "Wired",
-    "summary": "In Musk v. Altman, the company sought to show the jury a remarkable trophy as physical proof of Elon Musk’s concerning behavior.",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain-computer interface technology enables paralyzed art teacher to draw again - People's Daily Online",
-    "date": "2026-05-13",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiZEFVX3lxTE1LUWtTNlR6TFpTZ2xZeGhZSFlKNGRQQkhlQko2NkpKanJPTG5NRE91QkRuQW1jWFNOREJBZDJ0UXdsX3VSVllPZjB5MTRJTzhDZWlwSUQtVFFncXR1YldoQ1cwR0U?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-computer interface technology enables paralyzed art teacher to draw again&nbsp;&nbsp;People's Daily Online",
+    "summary": "Sam Altman and Elon Musk are facing off in a high-stakes trial that could alter the future of OpenAI and its most well-known product, ChatGPT. In 2024, Musk filed a lawsuit accusing OpenAI of abandoni",
     "category": "neurotechnology"
   },
   {
@@ -37,47 +19,11 @@
   },
   {
     "type": "external",
-    "title": "Self-organized MT Direction Maps Emerge from Spatiotemporal Contrastive Optimization",
-    "date": "2026-05-13",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]11718",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.11718v1 Announce Type: new Abstract: The spatial and functional organization of the primate visual cortex is a fundamental problem in neuroscience. While recent computational frameworks lik",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Empirical scaling laws in balanced networks with conductance-based synapses",
-    "date": "2026-05-13",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]12404",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.12404v1 Announce Type: new Abstract: Strongly coupled, recurrent, balanced network models have been successful in describing and predicting many phenomena observed in cortical neural record",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Interpretable EEG Microstate Discovery via Variational Deep Embedding: A Systematic Architecture Search with Multi-Quadrant Evaluation",
-    "date": "2026-05-13",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]10947",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.10947v1 Announce Type: cross Abstract: EEG microstate analysis segments continuous brain electrical activity into brief, quasi-stable topographic configurations that reflect discrete functi",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "To Advance Precision Surgery, Investigators Test New Brain-Computer Interface - Johns Hopkins Medicine",
-    "date": "2026-05-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiowFBVV95cUxQUzl6RGZGSUFIeGZheGtHVDNMcG5qdFB0N1YxM1FkVlBoc3ZIZG9XUHc2cDAyRnNGMGI0QUZfc2lYM25lTDlkVTdFaGtnUnlBVXpGZWxJSXJ3SGd3dER1WkhkakNjaWRQS0FjX1BwMHgycE9obVJmRnR3N3VfQWhtQUd0UHB1eVYzcGgtcnFTWE5iMGE2RUI3WFNmX0U4a1pIaVdn?oc=5",
+    "title": "World’s first BCI technology targets high-level brain function to restore independence - Interesting Engineering",
+    "date": "2026-05-12",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilwFBVV95cUxNN2lOQ0dFNUFGc2VwSXlzTGVoRUowaFJYdG5Ta2dyTXQxUGNlYXowLXZVTUVOQUJLLVBIaERkU0x6bTBFWG9Ud2YxMXgwNTZralBERWV3Ukp4dTgtWGN5YzVOaVB6b1ZQMTREMnE5YnFlRkJRSVJsd3lDQUtGWG5SVFAzQ0hqUDRIUkdpYk4xalF0c2J3Z0Rn?oc=5",
     "source": "Google News — BCI",
-    "summary": "To Advance Precision Surgery, Investigators Test New Brain-Computer Interface&nbsp;&nbsp;Johns Hopkins Medicine",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain-computer interface: Beijing’s next technological gamble - Table.Briefings",
-    "date": "2026-05-10",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxNOXBmdmxnUlhncm5GS3FnbGhrWk1lSDIybUhvTHlIajc4RW1LbXoxNThaRkMwcEhPN1cxSHpzeDZDRjllQjhfdUhfeDIta2o5Q0c1cm16Q183eFM5OHlyUVZ6dkFSN1hBVWpibUR6NTdrcVA5dk5ONTFEMmRHSHRlS0JyRHd3N2JramxsaDgxOUFPem9QejVzQ3ltbUJsakluWnJvRUx0bnlWX2Ex?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-computer interface: Beijing’s next technological gamble&nbsp;&nbsp;Table.Briefings",
+    "summary": "World’s first BCI technology targets high-level brain function to restore independence&nbsp;&nbsp;Interesting Engineering",
     "category": "neurotechnology"
   },
   {
@@ -109,11 +55,29 @@
   },
   {
     "type": "external",
-    "title": "Startup Says It Can Read Your Brain Signals Using a Pair of Headphones - Futurism",
+    "title": "Convicted former Harvard scientist rebuilds brain computer lab in China - Reuters",
+    "date": "2026-05-01",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxNYmExYzMxSXNMR1MzSXBvUy05Yk5PUGdUQmhTLWpqYVh2MHduaUNwdUJXdUlDdDZQOFpBUWhYVENTR2FlTnFsNGRyVm1OemUwSlFobGZIS2dkYk1Yc0hJY2stQUZLSXdYN3cwLTZFTldYX3JxUGZzb05qTjJRV0Q3NFFaalNkdXZVMXBlSGpxVmxVbkRvNWZrbVhNazZSUDktQ1FobzluQjZGa3ZNTElzS2dQcUJIaTA?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Convicted former Harvard scientist rebuilds brain computer lab in China&nbsp;&nbsp;Reuters",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink unveils surgical robot to fully automate brain chip implants - Interesting Engineering",
+    "date": "2026-04-30",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxQczV6SGJDbkQtRVFsX05jRWk2eXpyUVh0U1NnamF3cWhaaHo1Tm56YXhSRTU5MnhaZlNQX2VlaDVuVWlQVHVTdElZX25ESXloN3FNTm1Rd0VCaFhiRkkyLWxrT2h3dG1rOVhfRlpNaTlMVG1yVWhqSEliTGdSNGw3cHJKcFhGQTMtMHNWdmdoZGstYmZ0Tmc?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink unveils surgical robot to fully automate brain chip implants&nbsp;&nbsp;Interesting Engineering",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface - Business Wire",
     "date": "2026-04-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihAFBVV95cUxQR29EVDlILUNWVHhmNFYycEgyMTM1dzFHRmRGYnNSSm4xV3Z1eGpJY2l5ODd1NE5GY1ZmUXRCZGhhQjFzVVJiN2ZXR0NxY25IbkNBVjRyRVh4VkFLSDROajJVTjRiY0RVSUh1dU1zRUEyb3k3a2J0b2NOX3RNX0VRTTBkYmo?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Startup Says It Can Read Your Brain Signals Using a Pair of Headphones&nbsp;&nbsp;Futurism",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAJBVV95cUxPUnZXem1VbEVFZmQ3YXZDYkJOQmZnVmZmWVNHTzFJLXRqX1NidTRoQmtlc1BBUlI1MWx2VU51N0dNZDNVb0Y1UFJfWmxsTjFnOTBMQjlqQVhYSmVkVG44SXZWcktoZXZCdG1aZkV1c0dRQTlWYzBtY3pyTTV2NWkxSWlHdF84d3NhYi1MU2V5Rmc2VjdBRWhLTm9FVUlJb0k5WlVWa1dFRUdlekFzTW9tOG50VXFPV3UtUWRsMlUweENGR0NKUmNublg4YlRiV09ZbW4tdk5sOGZFVVBMYWFEM0JWaFNBeDRRTjdTVXNjNzdfdXFUSXI2Wm1KMlZTYThLdnBBNGVLWWhnYUFT?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface&nbsp;&nbsp;Business Wire",
     "category": "neurotechnology"
   },
   {
@@ -136,11 +100,11 @@
   },
   {
     "type": "external",
-    "title": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation - Medical Xpress",
+    "title": "This Beanie Is Designed to Read Your Thoughts - WIRED",
     "date": "2026-04-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxOMkhzblhTLUd4aEZmQ3R3dkR0bGlIYWpUNGpFaE5GSHZMam1TNEZvbHhqaE4taEx6eUV1TWgwRHdudllDLTJXSHJ5YnNJTW44UEljaFNCQnFRZkhaNk9oZjFCUllQc2toSGxhU0JtdXoxaUdjaHFPb0FlTmQ0aTl0djh3VHNtVWlrcTZmTlMzZw?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMif0FVX3lxTE1rbzVMQzNKTEpzQk9OVF9LR3FPWFFKaHBQNHBoNTRUQkZHS2RyeG01UC1yeGVneUhabVVUc0xuYzY5WmlYc2lDZ3E1ekFabDh6WkZEc3JFbEVQUHJCYno2OGY5TmpKY1d0LV9QWDNrQnd3MFpubTJZVHNmWWFGams?oc=5",
     "source": "Google News — BCI",
-    "summary": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation&nbsp;&nbsp;Medical Xpress",
+    "summary": "This Beanie Is Designed to Read Your Thoughts&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
@@ -163,6 +127,15 @@
   },
   {
     "type": "external",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
+    "date": "2026-01-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Two Years of Telepathy - Neuralink",
     "date": "2026-01-28",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
@@ -178,15 +151,6 @@
     "source": "Google News — MIND Act",
     "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
-    "date": "2026-01-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
-    "category": "neurotechnology"
   },
   {
     "type": "external",
