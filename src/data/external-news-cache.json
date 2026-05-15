@@ -1,38 +1,56 @@
 [
   {
     "type": "external",
-    "title": "Live updates from Elon Musk and Sam Altman’s court battle over the future of OpenAI",
-    "date": "2026-05-14",
-    "url": "hxxps://www[.]theverge[.]com/tech/917225/sam-altman-elon-musk-openai-lawsuit",
-    "source": "The Verge",
-    "summary": "Sam Altman and Elon Musk are facing off in a high-stakes trial that could alter the future of OpenAI and its most well-known product, ChatGPT. In 2024, Musk filed a lawsuit accusing OpenAI of abandoni",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain Computer Interface Technology Research: the global - openPR.com",
-    "date": "2026-05-13",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxOQS1YQTlrT1YtOG0tdnRZZlJMNXloTjRKTm10Yzd5OXNHa3BmeFZYSWlSc0xmTlZrdE1aaXh3WDZwTnFUeUlfa3ZWQlhqclN6WkVTZFpkQmd4NE5oWjAwS0tUYXczNmhWTlJqd0FUTzdTN0txMVpZYW9mT2FNLU9waEtHRU8zZ1MwY0pnMTZXUnBJLUU4QWc?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain Computer Interface Technology Research: the global&nbsp;&nbsp;openPR.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "World’s first BCI technology targets high-level brain function to restore independence - Interesting Engineering",
-    "date": "2026-05-12",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilwFBVV95cUxNN2lOQ0dFNUFGc2VwSXlzTGVoRUowaFJYdG5Ta2dyTXQxUGNlYXowLXZVTUVOQUJLLVBIaERkU0x6bTBFWG9Ud2YxMXgwNTZralBERWV3Ukp4dTgtWGN5YzVOaVB6b1ZQMTREMnE5YnFlRkJRSVJsd3lDQUtGWG5SVFAzQ0hqUDRIUkdpYk4xalF0c2J3Z0Rn?oc=5",
-    "source": "Google News — BCI",
-    "summary": "World’s first BCI technology targets high-level brain function to restore independence&nbsp;&nbsp;Interesting Engineering",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Why Brain Implants Are More Than a Sci-Fi Fantasy - Bloomberg.com",
-    "date": "2026-05-10",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixgFBVV95cUxQTWpjS1QxcUVtUHByYlFuT2dSN3BjRXV2RUtkX2MwT0QyY1k1V1JrWjF1LVdvYkMtbHNubDI5VjNqeGRaS3JtWlVUa0RNcXIwaEZ5S0hQZXI0bFJ2bkFKZmF4RU5CQnY4ZzVJN296TFFrRF81aVd4ekl0WTVrVjl4NmdsNlVNWWxDcTVuR3FOMGZwQkhaNDVaNFREMlRvRDhvOWI1Y2pYSkF4OFJuN1BONHFCdDhQOXFBdkhydWZkaUJRVl9aa0E?oc=5",
+    "title": "How to Hack the ‘God Button’: Could Neuralink Replace the Cannabis Ritual? - High Times Magazine",
+    "date": "2026-05-15",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxPc3FvcHZ0UkZhUUt5eHpVelU2c0JFUnlXOEhwWDVUR0lKWl9RSXVkX1hkVW1OR0JrQmhSWUVSb1BIa3lQOE5ISlZ1TUpZOU5Ud1dPc0tSTmZEQkt3UlhuVGhYTlVKVm1mQVNIQ1hvZFQ0ZFNQNl9jRDd0Sk4tdkl0X1J4ZUpibGxOMFoxSXJ2WURaandXdmRnRWdfYnVkVUVKVWtiWnBQRWU2SXFO?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Why Brain Implants Are More Than a Sci-Fi Fantasy&nbsp;&nbsp;Bloomberg.com",
+    "summary": "How to Hack the ‘God Button’: Could Neuralink Replace the Cannabis Ritual?&nbsp;&nbsp;High Times Magazine",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Feature Visualization Recovers Known Cortical Selectivity from TRIBE v2",
+    "date": "2026-05-15",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]13904",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.13904v1 Announce Type: new Abstract: Brain encoder models predict cortical fMRI responses from the internal activations of pretrained vision and language networks, and are typically evaluat",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Do Language Models Align with Brains? Prediction Scores Are Not Enough",
+    "date": "2026-05-15",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]14025",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.14025v1 Announce Type: new Abstract: Brain-language model comparisons often interpret neural prediction scores as evidence that model representations capture brain-relevant language computa",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Approximate Macroscopic Dynamics of Spiking Neural Networks Based on Solutions to the Transport Equation",
+    "date": "2026-05-15",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]14319",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.14319v1 Announce Type: new Abstract: Firing rate fluctuations in neural populations are observed experimentally over multiple time scales, in single neurons, across trials when elicited by ",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "To Advance Precision Surgery, Investigators Test New Brain-Computer Interface - Johns Hopkins Medicine",
+    "date": "2026-05-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiowFBVV95cUxQUzl6RGZGSUFIeGZheGtHVDNMcG5qdFB0N1YxM1FkVlBoc3ZIZG9XUHc2cDAyRnNGMGI0QUZfc2lYM25lTDlkVTdFaGtnUnlBVXpGZWxJSXJ3SGd3dER1WkhkakNjaWRQS0FjX1BwMHgycE9obVJmRnR3N3VfQWhtQUd0UHB1eVYzcGgtcnFTWE5iMGE2RUI3WFNmX0U4a1pIaVdn?oc=5",
+    "source": "Google News — BCI",
+    "summary": "To Advance Precision Surgery, Investigators Test New Brain-Computer Interface&nbsp;&nbsp;Johns Hopkins Medicine",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain-computer interface: Beijing’s next technological gamble - Table.Briefings",
+    "date": "2026-05-10",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxNOXBmdmxnUlhncm5GS3FnbGhrWk1lSDIybUhvTHlIajc4RW1LbXoxNThaRkMwcEhPN1cxSHpzeDZDRjllQjhfdUhfeDIta2o5Q0c1cm16Q183eFM5OHlyUVZ6dkFSN1hBVWpibUR6NTdrcVA5dk5ONTFEMmRHSHRlS0JyRHd3N2JramxsaDgxOUFPem9QejVzQ3ltbUJsakluWnJvRUx0bnlWX2Ex?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain-computer interface: Beijing’s next technological gamble&nbsp;&nbsp;Table.Briefings",
     "category": "neurotechnology"
   },
   {
@@ -55,11 +73,11 @@
   },
   {
     "type": "external",
-    "title": "Convicted former Harvard scientist rebuilds brain computer lab in China - Reuters",
-    "date": "2026-05-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxNYmExYzMxSXNMR1MzSXBvUy05Yk5PUGdUQmhTLWpqYVh2MHduaUNwdUJXdUlDdDZQOFpBUWhYVENTR2FlTnFsNGRyVm1OemUwSlFobGZIS2dkYk1Yc0hJY2stQUZLSXdYN3cwLTZFTldYX3JxUGZzb05qTjJRV0Q3NFFaalNkdXZVMXBlSGpxVmxVbkRvNWZrbVhNazZSUDktQ1FobzluQjZGa3ZNTElzS2dQcUJIaTA?oc=5",
+    "title": "Symbiotic brain-machine drawing via visual brain-computer interfaces - Nature",
+    "date": "2026-05-04",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE9yT0lWaEIyMkd6cFdoVEZUUktzdmh0eWZ6cEE4Y01wYUN6YUJPVVQ2RXBheUlHaUFObnRXZW90aWE5ZDFHWDZ0UjRYeEV3ZElTV3lUYWRoMENVRW41dTFV?oc=5",
     "source": "Google News — BCI",
-    "summary": "Convicted former Harvard scientist rebuilds brain computer lab in China&nbsp;&nbsp;Reuters",
+    "summary": "Symbiotic brain-machine drawing via visual brain-computer interfaces&nbsp;&nbsp;Nature",
     "category": "neurotechnology"
   },
   {
@@ -73,11 +91,20 @@
   },
   {
     "type": "external",
-    "title": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface - Business Wire",
+    "title": "Startup Says It Can Read Your Brain Signals Using a Pair of Headphones - Futurism",
     "date": "2026-04-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAJBVV95cUxPUnZXem1VbEVFZmQ3YXZDYkJOQmZnVmZmWVNHTzFJLXRqX1NidTRoQmtlc1BBUlI1MWx2VU51N0dNZDNVb0Y1UFJfWmxsTjFnOTBMQjlqQVhYSmVkVG44SXZWcktoZXZCdG1aZkV1c0dRQTlWYzBtY3pyTTV2NWkxSWlHdF84d3NhYi1MU2V5Rmc2VjdBRWhLTm9FVUlJb0k5WlVWa1dFRUdlekFzTW9tOG50VXFPV3UtUWRsMlUweENGR0NKUmNublg4YlRiV09ZbW4tdk5sOGZFVVBMYWFEM0JWaFNBeDRRTjdTVXNjNzdfdXFUSXI2Wm1KMlZTYThLdnBBNGVLWWhnYUFT?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihAFBVV95cUxQR29EVDlILUNWVHhmNFYycEgyMTM1dzFHRmRGYnNSSm4xV3Z1eGpJY2l5ODd1NE5GY1ZmUXRCZGhhQjFzVVJiN2ZXR0NxY25IbkNBVjRyRVh4VkFLSDROajJVTjRiY0RVSUh1dU1zRUEyb3k3a2J0b2NOX3RNX0VRTTBkYmo?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Startup Says It Can Read Your Brain Signals Using a Pair of Headphones&nbsp;&nbsp;Futurism",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain-computer interface based on Rice research wins FDA approval for first clinical trial - Rice University",
+    "date": "2026-04-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitgFBVV95cUxNbjczeTVPZl80UTV2UElfaW85YjFDa2dmbG9ZMFBQWXl2TFN3WFFLelN0MGtVaXN0eW50Vk1uOWhFTUZDaUF2V3BfeUZpS2VHMWhQQmJaOGpoa3c4dWVqMmZWd0FhRkZST1NZR2t0eEx0dmh4QnZ2bzR1M0lSU094c1g1VWRPcVVKbEhsZXV5anotellOckUwUDlsUWc4bWpmWHlKSVRuNXlfRFhadi1GRWZZZUQ1Zw?oc=5",
     "source": "Google News — BCI",
-    "summary": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface&nbsp;&nbsp;Business Wire",
+    "summary": "Brain-computer interface based on Rice research wins FDA approval for first clinical trial&nbsp;&nbsp;Rice University",
     "category": "neurotechnology"
   },
   {
@@ -100,11 +127,11 @@
   },
   {
     "type": "external",
-    "title": "This Beanie Is Designed to Read Your Thoughts - WIRED",
+    "title": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation - Medical Xpress",
     "date": "2026-04-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMif0FVX3lxTE1rbzVMQzNKTEpzQk9OVF9LR3FPWFFKaHBQNHBoNTRUQkZHS2RyeG01UC1yeGVneUhabVVUc0xuYzY5WmlYc2lDZ3E1ekFabDh6WkZEc3JFbEVQUHJCYno2OGY5TmpKY1d0LV9QWDNrQnd3MFpubTJZVHNmWWFGams?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxOMkhzblhTLUd4aEZmQ3R3dkR0bGlIYWpUNGpFaE5GSHZMam1TNEZvbHhqaE4taEx6eUV1TWgwRHdudllDLTJXSHJ5YnNJTW44UEljaFNCQnFRZkhaNk9oZjFCUllQc2toSGxhU0JtdXoxaUdjaHFPb0FlTmQ0aTl0djh3VHNtVWlrcTZmTlMzZw?oc=5",
     "source": "Google News — BCI",
-    "summary": "This Beanie Is Designed to Read Your Thoughts&nbsp;&nbsp;WIRED",
+    "summary": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation&nbsp;&nbsp;Medical Xpress",
     "category": "neurotechnology"
   },
   {
@@ -123,15 +150,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;Crunchbase News",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
-    "date": "2026-01-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
