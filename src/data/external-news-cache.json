@@ -1,38 +1,47 @@
 [
   {
     "type": "external",
-    "title": "Elon Musk has lost his lawsuit against Sam Altman and OpenAI",
-    "date": "2026-05-18",
-    "url": "hxxps://techcrunch[.]com/2026/05/18/elon-musk-has-lost-his-lawsuit-against-sam-altman-and-openai/",
-    "source": "TechCrunch",
-    "summary": "Elon Musk's claim that he was mistreated by his OpenAI cofounders failed after nine California jurors decided in a unanimous verdict that his lawsuits had been filed too late.",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "All of the updates from Elon Musk and Sam Altman’s battle over OpenAI",
-    "date": "2026-05-18",
-    "url": "hxxps://www[.]theverge[.]com/tech/917225/sam-altman-elon-musk-openai-lawsuit",
-    "source": "The Verge",
-    "summary": "Sam Altman and Elon Musk are facing off in a high-stakes trial that could alter the future of OpenAI and its most well-known product, ChatGPT. In 2024, Musk filed a lawsuit accusing OpenAI of abandoni",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Elon Musk loses his case against Sam Altman",
-    "date": "2026-05-18",
-    "url": "hxxps://www[.]theverge[.]com/ai-artificial-intelligence/932383/jury-verdict-musk-v-altman-openai-trial",
-    "source": "The Verge",
-    "summary": "After around two hours of deliberation, the jury has reached a unanimous verdict in Musk v. Altman, the tech trial of the year. The group found that two claims were barred by the statute of limitation",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "The Download: Musk v. Altman week 3, and Trump’s tech trading",
-    "date": "2026-05-18",
-    "url": "hxxps://www[.]technologyreview[.]com/2026/05/18/1137407/the-download-musk-altman-trial-trump-tech-trading/",
+    "title": "The Download: Musk v. Altman, smart glasses for warfare, and Google I/O",
+    "date": "2026-05-19",
+    "url": "hxxps://www[.]technologyreview[.]com/2026/05/19/1137505/the-download-musk-altman-trial-smart-glasses-warfare-google-i-o/",
     "source": "MIT Technology Review",
-    "summary": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. Musk v. Altman week 3: Musk and Altman traded blow",
+    "summary": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. Here’s why Elon Musk lost his suit against OpenAI ",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Here’s why Elon Musk lost his suit against OpenAI",
+    "date": "2026-05-19",
+    "url": "hxxps://www[.]technologyreview[.]com/2026/05/18/1137488/elon-musk-suit-openai-verdict/",
+    "source": "MIT Technology Review",
+    "summary": "On Monday, the jury in Musk v. Altman dealt Elon Musk a major blow—reaching a unanimous advisory verdict that he had sued OpenAI too late and, as a result, his claims are barred by the applicable stat",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Convicted Harvard Scientist Rebuilds Career in China Through Controversial Brain-Computer Interface Lab - The Debrief",
+    "date": "2026-05-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixgFBVV95cUxONmpZd0tSbXJwdE5KUUFvNjYwMGYxUTZVQlJyMldrNnlMWml4eEZpU0YxZXNEbUdmUWZQNzNqYjRmNVVrSC1tMmJ3WUtONWtpZnp3Ni1kMzVEd1N4d2hIM1JNeVM2QkI3UXhVYVZzQnNVbXJlZlpDMnoxZmxtdm5fdG5yNXRWV2NhSzdIX3ZKWE01Q2o1ZjY1Z1V6NHQ0RE55clcyV3M5bUJTZ0pkcUZid0E0Yi1rbkxrd3NDa1JmTGh1eFRjaGc?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Convicted Harvard Scientist Rebuilds Career in China Through Controversial Brain-Computer Interface Lab&nbsp;&nbsp;The Debrief",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Elon Musk Compares His Work to Miracles Performed by Jesus Christ - Futurism",
+    "date": "2026-05-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMibEFVX3lxTE1mTV9fV0hIRDNMQmhQUjMyempvTjdEQ3Y2VHNSSkdIZUl2YjU2MFpUWTNXUUZoVkowVk1YamRkSVhMV005WHI2cTZLNTZ6NlZicUE3YVFSOUIwcUlQczF2eU1vV2l5dF9BbkZDSA?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk Compares His Work to Miracles Performed by Jesus Christ&nbsp;&nbsp;Futurism",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Mechanistically Interpretable Neural Encoding Reveals Fine-Grained Functional Selectivity in Human Visual Cortex",
+    "date": "2026-05-19",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]16468",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.16468v1 Announce Type: cross Abstract: A central goal in understanding human vision is to uncover the visual features that drive neuronal activity. A growing body of work has used artificia",
     "category": "research"
   },
   {
@@ -46,24 +55,6 @@
   },
   {
     "type": "external",
-    "title": "Brain Chips Are Coming to the Gulf. Any Volunteers? - WIRED Middle East",
-    "date": "2026-05-18",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiggFBVV95cUxOVngyUXdmVGJWYWlVSkw2VG5VbXZVT1c0YVV4RDJ2a2RyZjVSd3dYOVJoc0hfR2c2NG1WUW9nUnd6WUtOZWZVb1hRY2VmTENIMlkzejVFc3VkemdwenJIOHl4dXg4aTI1eXJDQ0pMZGxyU1NRMGR5eThwWlRjZEdjbmJ3?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain Chips Are Coming to the Gulf. Any Volunteers?&nbsp;&nbsp;WIRED Middle East",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "May 18, 2026: Republican gubernatorial primary debate; Tina Peters granted clemency; controlling computers with your brain - Colorado Public Radio",
-    "date": "2026-05-18",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirwFBVV95cUxPTkc5RTNmQV82TTd5bXZXTkg5eVp5Y0p2Z05ral83QkNOZUxDQkNJQXZCejJzWHRRYllhX0FhQjZ0STluVjJVVmtYYlBDdVJOcmNXaUVlTEIzMXg3YUY4Sld4Q3VaQlM4N0RaWGtUODB6eVlMZjluTXA3VEFVQnNSQkxwUWg2ZDYwejgzTElFMklvekNsU0htUElISkRvbFVhbXl5UVFpeGJPWm41dGRv?oc=5",
-    "source": "Google News — BCI",
-    "summary": "May 18, 2026: Republican gubernatorial primary debate; Tina Peters granted clemency; controlling computers with your brain&nbsp;&nbsp;Colorado Public Radio",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Elon Musk compares his company’s work to that of Jesus - MarketWatch",
     "date": "2026-05-18",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxQZUhMMEp3akhPMEZvUmNtYVRXTjkwb3Y0T3pGZmtsbl9uNVo3aTk4ODNmYkRSYVFaWW85TWVpQmVsQjNBUzFtTUJPTk9tcmdKMFlrVWhTWVZVNUw4UjNxUFNxUUxQLTd4RUhuSXRkTl9vYVkzYTFNRXBGWTdHR2NVVFQ4NFh4cmtDT05zR05FUkdmRnlCR09vZzJtS2g?oc=5",
@@ -73,47 +64,11 @@
   },
   {
     "type": "external",
-    "title": "Beyond Flickering: Introducing Code-Modulated Motion Visual Evoked Potentials for Brain-Computer Interfacing",
+    "title": "How Neuralink brain chip transformed life of ALS sufferer | Katie Pavlich Tonight - WFLA",
     "date": "2026-05-18",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]15801",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.15801v1 Announce Type: new Abstract: A code-modulated motion visual evoked potential (c-MVEP) for brain-computer interfacing (BCI) is presented in this study. This paradigm uses pseudo-rand",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "From Clever Hans to Scientific Discovery: Interpreting EEG Foundational Transformers with LRP",
-    "date": "2026-05-18",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]11885",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.11885v1 Announce Type: cross Abstract: Emerging foundation models (FMs) in electroencephalography (EEG) promise a path to scale deep learning in diagnostics and brain-computer interfaces de",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "The Syncytial Mesh Model: A Mesoscale Control-Field Framework for Scale-Dependent Coherence in the Brain",
-    "date": "2026-05-18",
-    "url": "hxxps://arxiv[.]org/abs/2412[.]12106",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2412.12106v3 Announce Type: replace Abstract: The Syncytial Mesh Model introduces a three-layered framework for large-scale brain dynamics integrating local neural circuitry, macrostructural con",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Musk v. Altman week 3: Elon Musk and Sam Altman traded blows over each other’s credibility. Now the jury will pick a side.",
-    "date": "2026-05-15",
-    "url": "hxxps://www[.]technologyreview[.]com/2026/05/15/1137357/musk-v-altman-week-3/",
-    "source": "MIT Technology Review",
-    "summary": "In the final week of the Musk v. Altman trial, lawyers traded blows over Elon Musk’s and OpenAI CEO Sam Altman’s credibility. Altman was grilled on his alleged history of lying and self-dealing involv",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "How to Hack the ‘God Button’: Could Neuralink Replace the Cannabis Ritual? - High Times Magazine",
-    "date": "2026-05-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxPc3FvcHZ0UkZhUUt5eHpVelU2c0JFUnlXOEhwWDVUR0lKWl9RSXVkX1hkVW1OR0JrQmhSWUVSb1BIa3lQOE5ISlZ1TUpZOU5Ud1dPc0tSTmZEQkt3UlhuVGhYTlVKVm1mQVNIQ1hvZFQ0ZFNQNl9jRDd0Sk4tdkl0X1J4ZUpibGxOMFoxSXJ2WURaandXdmRnRWdfYnVkVUVKVWtiWnBQRWU2SXFO?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxQNUs4b1N5NUE5eThIb1Y0N29JaXB3WnZ2VlRRb3k3RTdvczJEZ0laZE5vZnRKUE9oX0NxdkVmTVZQY3BKajR4Y1pnSVhNMjNnZ3Nrb0pDYkswdlVLUzNJcFV6Z001Ui1xOFRDUUQ3ZUZMYWlselFMMHNWaGFNd0tMR0k2YzdTVzU5Z19HM2ZCSTUtb2djRkUtSmJfMXdDUHZkTWN2NDJ1b0gzeGNDVm5LSXcyZjdIYzg?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "How to Hack the ‘God Button’: Could Neuralink Replace the Cannabis Ritual?&nbsp;&nbsp;High Times Magazine",
+    "summary": "How Neuralink brain chip transformed life of ALS sufferer | Katie Pavlich Tonight&nbsp;&nbsp;WFLA",
     "category": "neurotechnology"
   },
   {
@@ -127,6 +82,15 @@
   },
   {
     "type": "external",
+    "title": "This app lets kids with disabilities use devices with their minds. Now anyone can download it - CBC",
+    "date": "2026-05-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxNOVFFN2NYU3VxTmlHV3lyb1hmaWFabV9OVzVaeXJfRWdWcUFYUHczWC1ESHh4aGZIOWZWOGxhaE1aa002OXB4dWpTbTBiZHJXV0Fob1NVRXRUWjQ0NWx5Um5PLVZveG5VYzgwYnd3MVI4VkdoVmR0Y1Bza3BFUjI2a0Y5UVl1NGE0S1kyTVg3dVlpdE5VT2NraEhjTkliZnVa?oc=5",
+    "source": "Google News — BCI",
+    "summary": "This app lets kids with disabilities use devices with their minds. Now anyone can download it&nbsp;&nbsp;CBC",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Neuralink unveils surgical robot to fully automate brain chip implants - Interesting Engineering",
     "date": "2026-04-30",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxQczV6SGJDbkQtRVFsX05jRWk2eXpyUVh0U1NnamF3cWhaaHo1Tm56YXhSRTU5MnhaZlNQX2VlaDVuVWlQVHVTdElZX25ESXloN3FNTm1Rd0VCaFhiRkkyLWxrT2h3dG1rOVhfRlpNaTlMVG1yVWhqSEliTGdSNGw3cHJKcFhGQTMtMHNWdmdoZGstYmZ0Tmc?oc=5",
@@ -136,29 +100,29 @@
   },
   {
     "type": "external",
-    "title": "Brain-computer interface based on Rice research wins FDA approval for first clinical trial - Rice University",
-    "date": "2026-04-28",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitgFBVV95cUxNbjczeTVPZl80UTV2UElfaW85YjFDa2dmbG9ZMFBQWXl2TFN3WFFLelN0MGtVaXN0eW50Vk1uOWhFTUZDaUF2V3BfeUZpS2VHMWhQQmJaOGpoa3c4dWVqMmZWd0FhRkZST1NZR2t0eEx0dmh4QnZ2bzR1M0lSU094c1g1VWRPcVVKbEhsZXV5anotellOckUwUDlsUWc4bWpmWHlKSVRuNXlfRFhadi1GRWZZZUQ1Zw?oc=5",
+    "title": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface - Business Wire",
+    "date": "2026-04-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAJBVV95cUxPUnZXem1VbEVFZmQ3YXZDYkJOQmZnVmZmWVNHTzFJLXRqX1NidTRoQmtlc1BBUlI1MWx2VU51N0dNZDNVb0Y1UFJfWmxsTjFnOTBMQjlqQVhYSmVkVG44SXZWcktoZXZCdG1aZkV1c0dRQTlWYzBtY3pyTTV2NWkxSWlHdF84d3NhYi1MU2V5Rmc2VjdBRWhLTm9FVUlJb0k5WlVWa1dFRUdlekFzTW9tOG50VXFPV3UtUWRsMlUweENGR0NKUmNublg4YlRiV09ZbW4tdk5sOGZFVVBMYWFEM0JWaFNBeDRRTjdTVXNjNzdfdXFUSXI2Wm1KMlZTYThLdnBBNGVLWWhnYUFT?oc=5",
     "source": "Google News — BCI",
-    "summary": "Brain-computer interface based on Rice research wins FDA approval for first clinical trial&nbsp;&nbsp;Rice University",
+    "summary": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface&nbsp;&nbsp;Business Wire",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation - Medical Xpress",
+    "title": "This Beanie Is Designed to Read Your Thoughts - WIRED",
     "date": "2026-04-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxOMkhzblhTLUd4aEZmQ3R3dkR0bGlIYWpUNGpFaE5GSHZMam1TNEZvbHhqaE4taEx6eUV1TWgwRHdudllDLTJXSHJ5YnNJTW44UEljaFNCQnFRZkhaNk9oZjFCUllQc2toSGxhU0JtdXoxaUdjaHFPb0FlTmQ0aTl0djh3VHNtVWlrcTZmTlMzZw?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMif0FVX3lxTE1rbzVMQzNKTEpzQk9OVF9LR3FPWFFKaHBQNHBoNTRUQkZHS2RyeG01UC1yeGVneUhabVVUc0xuYzY5WmlYc2lDZ3E1ekFabDh6WkZEc3JFbEVQUHJCYno2OGY5TmpKY1d0LV9QWDNrQnd3MFpubTJZVHNmWWFGams?oc=5",
     "source": "Google News — BCI",
-    "summary": "A two-way brain interface could help restore walking after paralysis by linking thoughts, robotic legs and sensation&nbsp;&nbsp;Medical Xpress",
+    "summary": "This Beanie Is Designed to Read Your Thoughts&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "How Neuralink brain chip transformed life of ALS sufferer - NewsNation",
-    "date": "2026-04-10",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxPUnNNNzlfRWxqQ0NXeE5qMDFmNnNDWURHRmctSXFacFBRMzNFS0lDdW9xcGItUmxPMjJlX2dKMkVmOGlEQi1TRVJEZlpIVnV6TFlTbV9RcGxQbWJTaDl1dWF6RE9rbzJ1ZlBVdTg0cUtvWjdSTGl3Yi03WmZ0MG5CVXJnRnRHRUVXbnBqZU1ubFJfZkVu0gGaAUFVX3lxTE9OeDBpSDYwNjJDVkthdmZ1ZFAwSlR3VW5sajVObmFERGlXOG5MRERtTnlwdzhDMWM2a2N1S0F3bjJ2VVM4am1LOEN0bm1FTjlfTHE3NlZkZVF0YkRyS0E0blA2N0lnT0Z1MmlYUmNlQkRkQW5ya0N2SkNMa2wyTjhSY1VmakVrZ0dfdkRxV2dzbmthQUx6RWdQbkE?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "How Neuralink brain chip transformed life of ALS sufferer&nbsp;&nbsp;NewsNation",
+    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - TechCrunch",
+    "date": "2026-03-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxOX2Jtd3dNTy13MzNlOUpQRVlFN0RaLUYxMFd4VzJYZnR3TzFtRlFOa21PaWM5NzZiX1NTUGMxZkk1OTZmcG0xRDhhejYwOUM0RHFMYlZCQ1RZNEczQjR4Z1VZbEp3czA3bzB1UE1sYUNuS3o0dmdvazN4MmVtUTRqNTNDeHdvSnZrT0M4c3RUUVg2am5pa25FQ2ZSX2VBdVpaVHFRZmZXUnpRLUJwR1pObw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;TechCrunch",
     "category": "neurotechnology"
   },
   {
@@ -205,15 +169,6 @@
     "source": "Google News — MIND Act",
     "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Non-surgical brain-computer interface startup lands new funding - Longevity.Technology",
-    "date": "2025-12-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxQZUs4LXBHeDF5eV92WGk3aVFuZkJPMlEtamtDaThhTUt4amRMRzFNNC1ZcXNIYWRGLVpmaWlDMEVIcDFqLU1YdzhZejFLOUdhZk5NcEFMNmFTamswTC03dFdOLUNvQ3UyQ2xoY1NGd0VYRHhKV2t5MjNtcW5ZWDc2N3BIcjJCNlF1RFZKeWNIZFJqd1U1dXFEQVl4dTBuSDg?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Non-surgical brain-computer interface startup lands new funding&nbsp;&nbsp;Longevity.Technology",
-    "category": "neurotechnology"
   },
   {
     "type": "external",
