@@ -9,7 +9,6 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18640105-blue)](https://doi.org/10.5281/zenodo.18640105)
 [![Site](https://img.shields.io/badge/Site-qinnovate.com-gold)](https://qinnovate.com)
-[![Data Studio](https://img.shields.io/badge/Data_Studio-31_datasets-green)](https://qinnovate.com/data-studio/)
 [![TARA](https://img.shields.io/badge/TARA-161_techniques-red)](https://qinnovate.com/atlas/tara/)
 
 </div>
@@ -39,9 +38,8 @@ This project does both. It asks: **what happens to a patient when their brain-co
 
 ```
 neurosecurity/
-├── osi-of-mind/            QIF Model — specs, whitepapers, derivation logs, threat catalog
+├── osi-of-mind/     QIF Model — specs, whitepapers, derivation logs, threat catalog
 ├── research/         Blog posts, academic paper, clinical notes
-├── datalake/         TARA registry (161 techniques), datasets, parquet
 ├── governance/       Policy, ethics, consent, changelog, security policy
 ├── src/              Website source (Astro) + build scripts
 └── _archive/         Historical (ONI framework, old prompts)
@@ -53,53 +51,9 @@ Each directory has a `CONTEXT.md` with a summary and file map. Start with any di
 |------------|-------------------|
 | [osi-of-mind/](osi-of-mind/) | Read the QIF Model, TARA specs, or whitepapers |
 | [research/blog/](research/blog/) | Read field journal entries and technical posts |
-| [datalake/](datalake/) | Query or download the 161-technique threat registry |
 | [governance/](governance/) | Review policy, ethics, or the decision log |
 | [src/](src/) | Work on the website or build scripts |
 | [qinnovate.com](https://qinnovate.com) | Browse everything rendered |
-
----
-
-## Quick Start
-
-> **Pilot / MVP.** Data Studio is in early access. Schema, URLs, and coverage may change without notice. Not intended for production pipelines.
-
-**Browse the data:** [qinnovate.com/data-studio](https://qinnovate.com/data-studio/) — 31 open datasets, downloadable as Parquet
-
-**Query with Python:**
-```python
-import pandas as pd, requests, io
-url = "https://qinnovate.com/data/parquet/techniques.parquet"
-df = pd.read_parquet(io.BytesIO(requests.get(url).content))
-df[df.severity == "critical"]
-```
-
-**Query with DuckDB (download first — edge CDN may reject some clients):**
-```bash
-curl -O https://qinnovate.com/data/parquet/techniques.parquet
-```
-```sql
-SELECT * FROM read_parquet('techniques.parquet')
-WHERE severity = 'critical' ORDER BY niss_score DESC;
-```
-
-**Run the site locally:**
-```bash
-git clone https://github.com/qinnovates/neurosecurity.git
-cd neurosecurity && npm ci && npm run dev
-```
-
-**Validate everything:**
-```bash
-npm run health    # Check data sync, governance, counts
-npm run build     # Build site (282 pages)
-```
-
----
-
-## About This Work
-
-The author is a security engineer with ~15 years of IT and security infrastructure experience, not a mathematician, physicist, or neuroscientist. AI tools (primarily Claude, with Gemini and ChatGPT for cross-validation) were used extensively. All AI-derived claims should be treated as **proposed and unvalidated** until independently verified by domain experts.
 
 **Full transparency:** [Transparency Statement](governance/TRANSPARENCY.md) | [Derivation Log](osi-of-mind/QIF-DERIVATION-LOG.md) (113 entries) | [Decision Log](governance/DECISION-LOG.md) | [Validation Status](osi-of-mind/VALIDATION.md)
 
@@ -151,30 +105,19 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | Component | Description | Status |
 |-----------|-------------|--------|
 | **[QIF](https://qinnovate.com/framework/)** | 11-band hourglass security architecture for BCIs | Proposed, v6.3 ([v8.0 draft](osi-of-mind/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md)) |
-| **[Working Paper](https://doi.org/10.5281/zenodo.18640105)** | Peer-citable academic paper (CC-BY 4.0) | Published |
 | **[TARA](https://qinnovate.com/atlas/tara/)** | 161 BCI technique pairs, STIX 2.1 registry | v1.7 |
 | **[qtara](https://pypi.org/project/qtara/)** | Python SDK for TARA registry management and STIX export | v0.2.0 |
 | **[NSP](https://qinnovate.com/tools/nsp/)** | Post-quantum wire protocol for BCI data links | In development, v0.5 |
 | **[NISS](https://qinnovate.com/atlas/scoring/)** | CVSS v4.0 extension proposal for neural interfaces (6 neural metrics) | Proposed, v1.1 |
 | **[Runemate](https://qinnovate.com/tools/runemate/)** | Native DSL compiler (67.8% compression in simulation) | v1.0 Compiler |
 | **[Security Guardrails](osi-of-mind/specs/qif-sec-guardrails.md)** | Physics-derived defense architecture for BCIs | Concept |
-| **[Knight's Watch](https://qinnovate.com/vision/)** | Opt-in community deterrence mesh for missing children and anti-trafficking. Privacy-first (no raw data leaves device), COPPA-compliant by architecture, blockchain-auditable participation. Inherits NSP/Neurowall/Runemate stack | Concept |
 
 ### Tools
 
 | Component | Description | Status |
 |-----------|-------------|--------|
-| **[Neural Atlas](https://qinnovate.com/neural-atlas/)** | Browser-based neural security monitoring with sample EEG data, threat detection, and NISS scoring | Published |
+| **[Neural Atlas](https://qinnovate.com/neural-atlas/)** | Browser-based neural security monitoring with sample EEG data, threat detection, and NISS scoring | Published (Demo)
 | **[Neurowall](./osi-of-mind/tools/neurowall/)** | Neural firewall prototype (differential privacy + NISS + policy engine) | In development, v0.8 |
-| **macshield** | macOS workstation hardening for public WiFi | v0.4.1 |
-
-**Neural Atlas — Built With:**
-| Technology | Purpose |
-|-----------|---------|
-| BrainFlow | 40+ BCI devices |
-| React + Vite | Frontend |
-| Web Workers | In-browser engine |
-| FFT | Client-side PSD analysis |
 
 ### Governance
 
@@ -248,9 +191,10 @@ An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spina
 
 161 techniques spanning 8 domains and 16 tactics. Each technique scored with CVSS v4.0 base vectors + proposed NISS extension metrics. MITRE-compatible IDs.
 
+[Legacy: Requires further updates and refining]
 - **Atlas:** [qinnovate.com/atlas/tara](https://qinnovate.com/atlas/tara/)
 - **API:** [`/api/tara.json`](https://qinnovate.com/api/tara.json) (full dataset, no auth) | [`/api/stix.json`](https://qinnovate.com/api/stix.json) (STIX 2.1 bundle)
-- **SDK:** `pip install qtara`
+- **SDK:** `pip install qtara` 
 
 ### NISS
 
@@ -281,51 +225,6 @@ Native DSL compiler (67.8% compression in simulation). Phase 2/3 goal: compile s
 
 - **Spec:** [qinnovate.com/guardrails/runemate](https://qinnovate.com/guardrails/runemate/)
 - **Compiler:** [osi-of-mind/runemate/forge/](osi-of-mind/runemate/forge/) (Rust)
-
-</details>
-
----
-
-<details>
-<summary><strong>Automation & Data Pipelines</strong></summary>
-
-### News Feed (Daily)
-
-Fetches 14 RSS feeds filtered for BCI/neurotech relevance. Maintains a rolling 30-item cache for the site's news page.
-
-| | |
-|---|---|
-| **Script** | `npm run fetch-news` → [`src/scripts/fetch-news.mjs`](src/scripts/fetch-news.mjs) |
-| **Schedule** | Daily at 17:00 UTC (noon EST) via [`update-news.yml`](.github/workflows/update-news.yml) |
-| **Output** | [`src/data/external-news-cache.json`](src/data/external-news-cache.json) (rolling 30 items) |
-| **Commit** | `chore: update news feed cache [skip ci-deploy]` (only if changed) |
-
-### Intel Feed (Weekly)
-
-Fetches 45+ RSS feeds plus 9 Google News queries. Auto-tags items (funding, product, regulatory, research, policy, patent, clinical, partnership), extracts company mentions from [`bci-landscape.json`](datalake/bci-landscape.json), and fuzzy-deduplicates (Jaccard trigram similarity). Items accumulate — the feed grows over time.
-
-| | |
-|---|---|
-| **Script** | `npm run fetch-intel` → [`src/scripts/fetch-intel.mjs`](src/scripts/fetch-intel.mjs) |
-| **Schedule** | Weekly, Sunday 17:00 UTC via [`update-intel.yml`](.github/workflows/update-intel.yml) |
-| **Output** | [`src/data/bci-intel-feed.json`](src/data/bci-intel-feed.json) (accumulating) |
-| **Sources registry** | [`src/data/intel-sources.json`](src/data/intel-sources.json) (204 sources, 39 with RSS) |
-| **Commit** | `auto: update BCI intel feed [skip ci-deploy]` (only if new items after dedup) |
-
-**Feed source categories:** News & Press, Biotech/MedTech, Research/Academic, Market Research, VC Blogs/Newsletters, Regulatory (FDA, NIST), Google News (9 BCI-specific queries).
-
-Both pipelines use exit code 2 (no changes) to skip unnecessary commits. Manual runs: `workflow_dispatch` enabled on both.
-
-### Other Automated Workflows
-
-| Workflow | Schedule | Purpose |
-|----------|----------|---------|
-| [`deploy.yml`](.github/workflows/deploy.yml) | On push to main | Build and deploy site to GitHub Pages |
-| [`timeline-check.yml`](.github/workflows/timeline-check.yml) | On push | Verify `qif-timeline.json` stats are current |
-| [`update-registry.yml`](.github/workflows/update-registry.yml) | Daily | Sync automation registry |
-| [`security-audit.yml`](.github/workflows/security-audit.yml) | On push | `npm audit` for dependency vulnerabilities |
-| [`verify-citations.yml`](.github/workflows/verify-citations.yml) | On push | Check citation integrity |
-| [`changelog.yml`](.github/workflows/changelog.yml) | On push | Auto-generate changelog from git log |
 
 </details>
 
@@ -376,21 +275,7 @@ This project uses a **single-source-of-truth model** for decision tracking. One 
 
 </details>
 
-<details>
-<summary><strong>Data Studio & Datalake</strong></summary>
-
-All research data is served as open Parquet datasets at [qinnovate.com/data-studio/](https://qinnovate.com/data-studio/).
-
-| Layer | What | Location |
-|-------|------|----------|
-| **Storage** | 27 JSON files (source of truth) | `datalake/*.json`, `src/data/*.json` |
-| **Parquet** | 31 compressed datasets (77% reduction) | `datalake/parquet/*.parquet` |
-| **Query** | KQL engine (build-time) + DuckDB-WASM SQL (browser, lazy-loaded) | `src/lib/kql-tables.ts`, `src/hooks/useDuckDB.ts` |
-| **Browse** | Data Studio catalog + EEG sample browser | `/data-studio/`, `/data-studio/eeg/` |
-| **Download** | Every dataset as `.parquet` — direct use in pandas, Polars, DuckDB | `/data/parquet/*.parquet` |
-| **EEG Pipeline** | MNE-Python: EDF/MAT → filter → epoch → PSD → Parquet | `src/scripts/process-eeg-to-parquet.py` |
-
-</details>
+---
 
 <details>
 <summary><strong>Sensitive Information Controls</strong></summary>
@@ -411,34 +296,7 @@ Pre-commit hook: `src/scripts/governance-precommit.sh` (13 regex patterns, white
 
 All commands run from the repo root.
 
-### Build & Serve
-
-| Command | What It Does |
-|---------|-------------|
-| `npm run dev` | Start dev server (runs prebuild first) |
-| `npm run build` | Production build (282 pages, runs prebuild first) |
-| `npm run preview` | Preview built site from `dist/` |
-| `npm run health` | Validate data sync, governance, counts — run before committing |
-
-### Data Pipeline
-
-| Command | What It Does |
-|---------|-------------|
-| `npm run prebuild` | Full pipeline: copy JSON → generate KQL → generate Parquet → regen governance |
-| `npm run compute:chains` | Recompute impact chains from registrar (after adding techniques) |
-| `npm run governance` | Regenerate DECISION-LOG.md + TRANSPARENCY.md from derivation log |
-| `npm run decisions` | Regenerate DECISION-LOG.md only |
-| `npm run transparency` | Regenerate TRANSPARENCY.md only |
-| `npm run changelog` | Auto-generate CHANGELOG.md from git history |
-
-### Research & Verification
-
-| Command | What It Does |
-|---------|-------------|
-| `npm run verify` | Run all verification scripts (citations, facts, crossrefs) |
-| `npm run verify:citations` | Check citation integrity against Crossref |
-| `npm run citations` | Sync research-registry.json → QIF-RESEARCH-SOURCES.md |
-| `npm run type-check` | TypeScript type checking (0 errors required) |
+---
 
 ### EEG Data
 
@@ -448,47 +306,12 @@ All commands run from the repo root.
 | `npm run eeg:download` | Download all redistributable EEG datasets |
 | `npm run eeg:process` | Run MNE-Python pipeline: EDF/MAT → Parquet |
 
-### Intel Feeds
-
-| Command | What It Does |
-|---------|-------------|
-| `npm run fetch-news` | Fetch BCI news from 14 RSS feeds |
-| `npm run fetch-intel` | Fetch BCI intel from 45+ feeds + Google News |
-
 </details>
 
 ---
 
 <details>
 <summary><strong>Contributing Workflow</strong></summary>
-
-### Before You Start
-
-1. Read [CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy](governance/CODE_OF_CONDUCT.md#disclaimer-terms-of-use--responsible-research-policy) and [Code of Conduct](governance/CODE_OF_CONDUCT.md)
-2. Run `npm ci` to install dependencies
-3. Run `npm run health` to verify your environment is clean
-4. Run `npm run build` to verify the site builds
-
-### When You Change Data (`datalake/*.json`)
-
-The [Change Propagation Matrix](CLAUDE.md#change-propagation-matrix) tells you what else needs updating:
-
-```
-datalake/*.json changes → npm run prebuild (auto-generates KQL JSON + Parquet + governance)
-```
-
-If you change `datalake/qtara-registrar.json` (the TARA technique catalog), also run:
-```bash
-npm run compute:chains    # Recompute impact chains
-npm run health            # Verify counts match across README, timeline, etc.
-```
-
-### When You Add a Feature
-
-1. Build and test locally: `npm run dev`
-2. Run health check: `npm run health`
-3. Run type check: `npm run type-check`
-4. Commit with prefix: `[Add]` for features, `[Fix]` for bugs, `docs:` for documentation
 
 ### Governance (for AI-assisted contributions)
 
