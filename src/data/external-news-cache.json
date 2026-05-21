@@ -1,20 +1,38 @@
 [
   {
     "type": "external",
-    "title": "Anthropic and OpenAI take their beef to the midterm elections",
-    "date": "2026-05-20",
-    "url": "hxxps://www[.]theverge[.]com/column/934684/anthropic-openai-super-pac-beef-alex-bores",
-    "source": "The Verge",
-    "summary": "Hello and welcome to Regulator, a newsletter for Verge subscribers about the car crashes piling up on a daily basis at the Washington-based intersection of technology and politics. If you're not a sub",
+    "title": "Elon Musk’s Neuralink reveals new robotic system for BCI brain implant surgeries - MobiHealthNews",
+    "date": "2026-05-21",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxPQXdyWDJjSkItLVEteVNNbjNORmgtaDhhbjgzQWY5RjFQREVUR0phWTBXbzBoTUtQdXN1NUJzRjZFd05RM2VVT1pUdkdkVXhtS0hzVG1LTkZLU29Id3BmcFlyejkyRDduSVdOa3pkQlJYZm9mcnlpbEpjWmtQaml4c1NHbHZscFg3cU9VZDZocnRRWjY5QVZlSG1PaG92cGlQenMyaG1wbjZ0ZmJwNE5QZA?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk’s Neuralink reveals new robotic system for BCI brain implant surgeries&nbsp;&nbsp;MobiHealthNews",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Neurosoft Bioelectronics Closes $7.5M Oversubscribed Seed Round to Build Stretchable and Scalable Brain-Computer Interfaces - Morningstar",
+    "title": "World’s first Neuralink user to keynote at DeviceTalks Boston - MassDevice",
+    "date": "2026-05-21",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxQM2dtTWVuUWRNeDlrbzlyY0tmSGdoUEowc2JhV01XeHVFajhXWkVFQzBHLUZvV1RzeDBTNDRlQmg4WHhLdmh1VnZPb1pXbFpFd1VKUUw5cFczcE9tMlM0QmZBbTU0NS1wcGhsTGtUeFoyRG4wU0NaNENiRHdKeUFxRkFrQXlueFJCbjVsV0NKMWZ1R3dsbWZoNVhFMk0?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "World’s first Neuralink user to keynote at DeviceTalks Boston&nbsp;&nbsp;MassDevice",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Platonic Representations in the Human Brain: Unsupervised Recovery of Universal Geometry",
+    "date": "2026-05-21",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]20496",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.20496v1 Announce Type: new Abstract: The Strong Platonic Representation Hypothesis suggests that representational convergence in artificial neural networks can be harnessed constructively: ",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "China launches 1st clinical trial for fully implantable BCI - news.cgtn.com",
     "date": "2026-05-20",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikAJBVV95cUxOYW5YZThsaXJOVmdPUVVfX0U1a1UyTzBjazg4V29PVTJFMk9IWnkyRTNRSk91cm5ydVU2WTZGdDlUcmRmSms1Zk5OaS02Nnc2b1V1ZHpGaFZkX1dFQzlPRkxuOENKdmQ5MTVZUkdBa3ZpVDBsUDZoQjg5OVBXLS1nUTNTcUY0dTc3M1Zwamx3bVhWczV4MS1vMl9MdWhRSjUwcDZWZDZDejJfS0JtOG9icnlzdTNJVkc0OFBMV1hkLUNBSGdSUTd1STdQVTZ5QmFnMkRNLU5Kb1k2SllmcWJkZ2VGR1RVcHZsMlhjczVvZUZlaTJ3WjJpZjBUcUNneHZ2M1RXWllMaHFOM1JKTXFTZQ?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxQTTgzYnI5NTdhdWhqdV8yaTNleEY3VEpjZW9vX1NnLURZRW5CMTA3VkVLeEtXUDdXeWMwTzlBUmFkenMyTmxSdUVMMmduMmpzX1V6aEphcFRaX2F4bEpzWnRfRTdaMXNpQ05NSWFzWUd3c0lKVVNQbU4yal9oRWJ4U3VROXpoZHR6QUtrN09PcUZXZU1QbDhQN2l5empkWno5WkJOdkttQ2k3WXFCNDVtd0pla2pxdzA?oc=5",
     "source": "Google News — BCI",
-    "summary": "Neurosoft Bioelectronics Closes $7.5M Oversubscribed Seed Round to Build Stretchable and Scalable Brain-Computer Interfaces&nbsp;&nbsp;Morningstar",
+    "summary": "China launches 1st clinical trial for fully implantable BCI&nbsp;&nbsp;news.cgtn.com",
     "category": "neurotechnology"
   },
   {
@@ -28,24 +46,6 @@
   },
   {
     "type": "external",
-    "title": "This Neuralink Patient is Transforming Thoughts Into Art in a New Brain-Computer Interface Breakthrough - The Debrief",
-    "date": "2026-05-20",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixgFBVV95cUxPVWVxZkpwLTFBMk9hRkl4M2hsa3NiY2FYajdZeEdVUlpkZXhCVGV0QUZUZHU3TzdoNTNrM0RVUVZSQ0I4aU96RVN1VEpaR2lqWjJyN2JvdkRadFg3SmUweWR6NWlUa2JFbEl6TWd3UzlmTjVINV95LXpyYXBaekFvOGo0eE1MSTMzbFZvUEE3WF9Cajhna0tQMm5CVEg4TkNNU1dzTkNIX2tzbmVjbmRWV0JPYThoMlRseVIxVGZoU01ZcVNVTWc?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "This Neuralink Patient is Transforming Thoughts Into Art in a New Brain-Computer Interface Breakthrough&nbsp;&nbsp;The Debrief",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink Robot Reaches Any Brain Region: Parkinson's, Epilepsy, Depression Now Within Surgical Scope - Tech Times",
-    "date": "2026-05-20",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi3wFBVV95cUxPMGEwT3Utc0IwVEI0Nzh6TENoOEU3TXZId0E5UmdJNlphUzZkVGVZMlFaZFZ0UV9PR0xTR0JGazJ4TTdoNWktQkotdFpXM1RGZ2hTLXlJcThYa1ItbXpfSXhqTFk2clh6NXlwbjZJWjFWRWU0Nnd3M0RpZFIzdHlqYXUwWklWYXdHTVJOeUlkdUhNa19mRG1LMVc5U3BjT1h3b2doandxVWx2eGozcXRwSWVPZWRNQWZGdUxUR3JXSDB5TW5XRVUyX3hoSzVqR0tmUTl6dnBmYlFMcTJxcVhJ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink Robot Reaches Any Brain Region: Parkinson's, Epilepsy, Depression Now Within Surgical Scope&nbsp;&nbsp;Tech Times",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Neurosoft Bioelectronics raises USD 7.5M Seed round for brain-computer interfaces - Venturelab Swiss",
     "date": "2026-05-20",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxPZ3R4ODk3cDFFT0xLbUs3cThPRExaWm1GdHFMbi1kdGwya0VfcDRvaW1xX0NMakZMVWxtSUpZeXlSRXJGLS1Xd2dmcUh2RUZBTkpEbWFQLVRzbGdaYkJscWhOaGxZSFNCVm1fQXNreXhQVEktTGZyZlVxR3BIQnBIN3B6RzJjQ215b19zTXJfX2Q0UUJWVGZJeHdDME41Q2pleUNMWlBqOG1Kb01L?oc=5",
@@ -55,48 +55,12 @@
   },
   {
     "type": "external",
-    "title": "Conserved Kinematic Representations enable Zero-Shot Decoding in Handwriting BCIs",
+    "title": "Neurosoft Bioelectronics Closes $7.5M Oversubscribed Seed Round - Startupticker.ch",
     "date": "2026-05-20",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]19048",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.19048v1 Announce Type: new Abstract: While intracortical Brain-Computer Interfaces (iBCIs) that decode imagined handwriting have achieved high communication rates for Latin scripts, they re",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Brain alignment of reasoning and action representations from vision-language and action models during naturalistic gameplay",
-    "date": "2026-05-20",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]19352",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.19352v1 Announce Type: new Abstract: Understanding how humans and artificial intelligence systems predict and plan by interacting with their environment is a fundamental challenge at the in",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "BCI-sift: An automated feature selection toolbox for Brain Computer Interface applications",
-    "date": "2026-05-20",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]19646",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.19646v1 Announce Type: new Abstract: Advancements in clinical Brain-Computer Interfaces (BCIs) depend on precise and reliable signal interpretation. However, the high-dimensional and noisy ",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Roundtables: Inside the Musk v. Altman Trial",
-    "date": "2026-05-19",
-    "url": "hxxps://www[.]technologyreview[.]com/2026/05/19/1137454/roundtables-inside-the-musk-v-altman-trial/",
-    "source": "MIT Technology Review",
-    "summary": "Listen to the session or watch below Elon Musk lost his suit against OpenAI, in which he alleged CEO Sam Altman and President Greg Brockman had deceived him over the company’s non-profit status. Watch",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "The Download: Musk v. Altman, smart glasses for warfare, and Google I/O",
-    "date": "2026-05-19",
-    "url": "hxxps://www[.]technologyreview[.]com/2026/05/19/1137505/the-download-musk-altman-trial-smart-glasses-warfare-google-i-o/",
-    "source": "MIT Technology Review",
-    "summary": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. Here’s why Elon Musk lost his suit against OpenAI ",
-    "category": "research"
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxOVzdrTEtrTGpPbFBKQWdlVjZudERETEtJbVRlU2lZZXJYQnQyc1lmWUpVUk9iOHVHVFZBMVZvVGpaZVV6UXRsVW1FVlh2dUxJWTlFaHNSQUEwbDJJRWt3QVJ3V29IU1gtVmFMeVFXSF9EMFp1b0g0T1NxYmtPRzdiUlhCZ0NmdmlURmtYRG5ZV1dYcHRVeWY2eERUMmtfY2Yw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Neurosoft Bioelectronics Closes $7.5M Oversubscribed Seed Round&nbsp;&nbsp;Startupticker.ch",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -105,6 +69,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMixgFBVV95cUxONmpZd0tSbXJwdE5KUUFvNjYwMGYxUTZVQlJyMldrNnlMWml4eEZpU0YxZXNEbUdmUWZQNzNqYjRmNVVrSC1tMmJ3WUtONWtpZnp3Ni1kMzVEd1N4d2hIM1JNeVM2QkI3UXhVYVZzQnNVbXJlZlpDMnoxZmxtdm5fdG5yNXRWV2NhSzdIX3ZKWE01Q2o1ZjY1Z1V6NHQ0RE55clcyV3M5bUJTZ0pkcUZid0E0Yi1rbkxrd3NDa1JmTGh1eFRjaGc?oc=5",
     "source": "Google News — BCI",
     "summary": "Convicted Harvard Scientist Rebuilds Career in China Through Controversial Brain-Computer Interface Lab&nbsp;&nbsp;The Debrief",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Can You Invest in Neuralink Pre-IPO? Details & Alternatives - The Motley Fool",
+    "date": "2026-05-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxPazRYMFBVOFNTZl9lRWxHd08xZzJJVVY4Z01yTGoxS19OQUJMVExKRjdIY2lITzcteU4zUTJxS09Kd0EyQXhGY25qeDVqd3ZvMEw1dkpjc0FfMnM2QzV5bXJkdWlUWHdrbEh0T0RrZXQ4Z21xcEJTdTIzazJwZVJ3aVFNajJtdEdnNDQ5RklB?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Can You Invest in Neuralink Pre-IPO? Details & Alternatives&nbsp;&nbsp;The Motley Fool",
     "category": "neurotechnology"
   },
   {
@@ -136,15 +109,6 @@
   },
   {
     "type": "external",
-    "title": "Neuralink unveils surgical robot to fully automate brain chip implants - Interesting Engineering",
-    "date": "2026-04-30",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxQczV6SGJDbkQtRVFsX05jRWk2eXpyUVh0U1NnamF3cWhaaHo1Tm56YXhSRTU5MnhaZlNQX2VlaDVuVWlQVHVTdElZX25ESXloN3FNTm1Rd0VCaFhiRkkyLWxrT2h3dG1rOVhfRlpNaTlMVG1yVWhqSEliTGdSNGw3cHJKcFhGQTMtMHNWdmdoZGstYmZ0Tmc?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink unveils surgical robot to fully automate brain chip implants&nbsp;&nbsp;Interesting Engineering",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface - Business Wire",
     "date": "2026-04-29",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAJBVV95cUxPUnZXem1VbEVFZmQ3YXZDYkJOQmZnVmZmWVNHTzFJLXRqX1NidTRoQmtlc1BBUlI1MWx2VU51N0dNZDNVb0Y1UFJfWmxsTjFnOTBMQjlqQVhYSmVkVG44SXZWcktoZXZCdG1aZkV1c0dRQTlWYzBtY3pyTTV2NWkxSWlHdF84d3NhYi1MU2V5Rmc2VjdBRWhLTm9FVUlJb0k5WlVWa1dFRUdlekFzTW9tOG50VXFPV3UtUWRsMlUweENGR0NKUmNublg4YlRiV09ZbW4tdk5sOGZFVVBMYWFEM0JWaFNBeDRRTjdTVXNjNzdfdXFUSXI2Wm1KMlZTYThLdnBBNGVLWWhnYUFT?oc=5",
@@ -168,15 +132,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;Crunchbase News",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
-    "date": "2026-01-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
