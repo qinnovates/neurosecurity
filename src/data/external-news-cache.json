@@ -1,11 +1,47 @@
 [
   {
     "type": "external",
-    "title": "Elon Musk’s Neuralink reveals new robotic system for BCI brain implant surgeries - MobiHealthNews",
-    "date": "2026-05-21",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxPQXdyWDJjSkItLVEteVNNbjNORmgtaDhhbjgzQWY5RjFQREVUR0phWTBXbzBoTUtQdXN1NUJzRjZFd05RM2VVT1pUdkdkVXhtS0hzVG1LTkZLU29Id3BmcFlyejkyRDduSVdOa3pkQlJYZm9mcnlpbEpjWmtQaml4c1NHbHZscFg3cU9VZDZocnRRWjY5QVZlSG1PaG92cGlQenMyaG1wbjZ0ZmJwNE5QZA?oc=5",
+    "title": "STAT+: Longevity startup Retro Biosciences says latest fundraising values it at $1.8 billion",
+    "date": "2026-05-22",
+    "url": "hxxps://www[.]statnews[.]com/2026/05/22/retro-biosciences-longevity-valuation/?utm_campaign=rss",
+    "source": "STAT News",
+    "summary": "Retro Biosciences, the longevity startup backed by OpenAI CEO Sam Altman, has raised more money at a $1.8 billion valuation, it announced Friday.",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neurosoft Bioelectronics: $7.5 Million Seed Round Closed To Advance Stretchable Brain-Computer Interfaces - Pulse 2.0",
+    "date": "2026-05-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxOcTViQWIzT3JjRHJxSGpYZFFsZ0pPOGUyMm45bWYySlV1Z1ktVEVWNDk2SFlqLS1XSWFYSGtBSFFka3VibHdvektsZnlXbU5yNTJxbVFWeEY3clhoSlpyTFZNZEtTX3FQcjZncHRib0ZoaGozZkdlMHdxOTFWNmwtSjNwYjhpNnNxVXRNbGxlMEVFSFM0SHRFbE9UdGFLbmlsT1pad0w5RW9hZ3Jwbl9uWjVqY01EVExadVc2dFozeUfSAcYBQVVfeXFMTWo2NzFldUFwaURidDQyYmY2UTNtMWFXNGY0cU5US3NpdHVEZnZSRDAxWWFTS2ZLMzBENjFKTFBfNlExeElFeTg2V2o1b2YwbmY2d0tyTlh4SkpCN0x3azZ0MEt6eXZCeS1jdHU4b2c3VXFKYWdsYzZxUkh5YXNyOWVpNWZqNExVLXQwbU92NUFzNjc2enlTaGR5eUREYVFyMWVRdjFsb1ZONXFYY0xJTnpHTmk3WGYtRi1pWUtTejdzeTh1cXR3?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Neurosoft Bioelectronics: $7.5 Million Seed Round Closed To Advance Stretchable Brain-Computer Interfaces&nbsp;&nbsp;Pulse 2.0",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Blind YouTuber Kim Hansol Addresses Neuralink Rumors, Confirms PD Romance - 조선일보",
+    "date": "2026-05-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxNQzU1eF9IRkN2WmFhME5aQXdoYlpGdXlJQlJfNFBwTEZ3ZTRRNGMwMk1sSnpHNlNkRGZNU0F1dE5iYzhpYkNBTDRYdWV5cG9SNUxhSVItdVpSbDJNc3dpQWQ1THZNZ3VDdkNCcEFMM29sQ1UtOFdyNEZKUmo4M2VsRHlrckw0NE9kVV9hZE9B?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Elon Musk’s Neuralink reveals new robotic system for BCI brain implant surgeries&nbsp;&nbsp;MobiHealthNews",
+    "summary": "Blind YouTuber Kim Hansol Addresses Neuralink Rumors, Confirms PD Romance&nbsp;&nbsp;조선일보",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Learning sequence timing and control of replay speed in networks of spiking neurons",
+    "date": "2026-05-22",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]22523",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.22523v1 Announce Type: new Abstract: Processing sequential inputs is a fundamental brain function, underlying tasks such as sensory perception, language, and motor control. A challenge in s",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Brain–computer interface technology is enabling children with physical disabilities to play video games with their minds - University of Calgary",
+    "date": "2026-05-21",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxQM0cwVE5JUzBlUmMwZDQzQnlJUmI1NXpnRll6SE1qaWZNNktBQkttNi1jUVRIWWVkWWR6azdpRm5qZU9FZkg5R1lrVGhQVF9vaWlPU25TVXhXNGpHWXdQd3VsVnRvZTN3MkY5SGxqaDZHN2tlR0gzSmpzMkRoakNRUndnMWNtUEhlZWd4WW1oTUdzdER0dnkxWE1id3EtTHJwQzBibWtUMmg3TDNFVm8yUkF0YWtvbUFPNTM0d01pYzM?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain–computer interface technology is enabling children with physical disabilities to play video games with their minds&nbsp;&nbsp;University of Calgary",
     "category": "neurotechnology"
   },
   {
@@ -13,35 +49,35 @@
     "title": "World’s first Neuralink user to keynote at DeviceTalks Boston - MassDevice",
     "date": "2026-05-21",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxQM2dtTWVuUWRNeDlrbzlyY0tmSGdoUEowc2JhV01XeHVFajhXWkVFQzBHLUZvV1RzeDBTNDRlQmg4WHhLdmh1VnZPb1pXbFpFd1VKUUw5cFczcE9tMlM0QmZBbTU0NS1wcGhsTGtUeFoyRG4wU0NaNENiRHdKeUFxRkFrQXlueFJCbjVsV0NKMWZ1R3dsbWZoNVhFMk0?oc=5",
-    "source": "Google News — Neuralink",
+    "source": "Google News — BCI",
     "summary": "World’s first Neuralink user to keynote at DeviceTalks Boston&nbsp;&nbsp;MassDevice",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Platonic Representations in the Human Brain: Unsupervised Recovery of Universal Geometry",
+    "title": "Elon Musk's Neuralink reveals new robotic system for BCI brain implant surgeries - MobiHealthNews",
     "date": "2026-05-21",
-    "url": "hxxps://arxiv[.]org/abs/2605[.]20496",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2605.20496v1 Announce Type: new Abstract: The Strong Platonic Representation Hypothesis suggests that representational convergence in artificial neural networks can be harnessed constructively: ",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "China launches 1st clinical trial for fully implantable BCI - news.cgtn.com",
-    "date": "2026-05-20",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxQTTgzYnI5NTdhdWhqdV8yaTNleEY3VEpjZW9vX1NnLURZRW5CMTA3VkVLeEtXUDdXeWMwTzlBUmFkenMyTmxSdUVMMmduMmpzX1V6aEphcFRaX2F4bEpzWnRfRTdaMXNpQ05NSWFzWUd3c0lKVVNQbU4yal9oRWJ4U3VROXpoZHR6QUtrN09PcUZXZU1QbDhQN2l5empkWno5WkJOdkttQ2k3WXFCNDVtd0pla2pxdzA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China launches 1st clinical trial for fully implantable BCI&nbsp;&nbsp;news.cgtn.com",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxPQXdyWDJjSkItLVEteVNNbjNORmgtaDhhbjgzQWY5RjFQREVUR0phWTBXbzBoTUtQdXN1NUJzRjZFd05RM2VVT1pUdkdkVXhtS0hzVG1LTkZLU29Id3BmcFlyejkyRDduSVdOa3pkQlJYZm9mcnlpbEpjWmtQaml4c1NHbHZscFg3cU9VZDZocnRRWjY5QVZlSG1PaG92cGlQenMyaG1wbjZ0ZmJwNE5QZA?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk's Neuralink reveals new robotic system for BCI brain implant surgeries&nbsp;&nbsp;MobiHealthNews",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Neurosoft Bioelectronics Closes $7.5M Oversubscribed Seed Round to Build Stretchable and Scalable Brain-Computer Interfaces - BioSpace",
+    "title": "Neurosoft Bioelectronics garners $7.5M for brain-computer interface technology - MobiHealthNews",
     "date": "2026-05-20",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi9AFBVV95cUxNSGFjalNOOThfN3lscTQ2M1NTZFE0Ujl0N3ZCXzdGSDFmODlvLTBhNnp6ZVBKVkhnS1BKdWJPdENvcmFjejUxZzY0NWRsczB4QlBKVU9GNm1mWjRrUVdONXFFZ0lNbVBJZ0t1XzVVR0k1TEhvZEFLeTlURUN1TUROR05ITXdqWTRSNzBhR3ZxZEtnZHlfZ1NKZ28zV1FhZk42bXpyUlNQTHNqVFVwYWRBemx4Qk1SWHBTSFBxWnBLN1c3amtzRFJGUllSYkszZXFBakZZbXZQN2duamhnSHRsRU80cVFqclhqMVVGZGxqNkpzczdj?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxObGZOYUpRZ2l3aS01RUg5TXFseWtLMVR3MFhKTzVrSWY1WEJhUWxibVlHUUxaUExvYTdqeFBrT3UxWDAtUEpOSTZ2REFTb3JjY0pwekltZVA4Y3UxRXdBYzNJR3RoMEViRWFISk9Fa3AyYkdpTVJXOEtubDJmdTRiWlV3RmlLLU9NdkROdHVKTVctU0tCU1I5VHVyQzhmSTM1dzVnZklucGNhQWMx?oc=5",
     "source": "Google News — BCI",
-    "summary": "Neurosoft Bioelectronics Closes $7.5M Oversubscribed Seed Round to Build Stretchable and Scalable Brain-Computer Interfaces&nbsp;&nbsp;BioSpace",
+    "summary": "Neurosoft Bioelectronics garners $7.5M for brain-computer interface technology&nbsp;&nbsp;MobiHealthNews",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Carolina Aguilar: Brain-Computer Interfaces that Heal Neural Circuits - Inside Precision Medicine",
+    "date": "2026-05-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi6gFBVV95cUxPWFZUX3ROaTkwZzNIbHBHSHN6Z1VJb1h0VEUzRzRPUUM3ZnFPTWZ3VTltNlR2UzZnVE1IVW5uLTdRbXVRTjM5YWpyMXN5U1pnYnFSX0dpa2doNUU4by1FOFlCU0lySUI4cVhkZ1FXNGtDRE1iSy00N0Q4bVpLQmJieFp6b3YyblFvOGhqQmc1NzU3T2Vrb1NBTWdTOHd6UlFlYXJGaHBWRFVkZVRMTG9jN0JYWExNY1oyWXJUYkNfbnFXeEFiNXBhX0FsdS1kRFlZLTdVVEFSWWJBZTRHOXdGR1hET3RPNWtsdUE?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Carolina Aguilar: Brain-Computer Interfaces that Heal Neural Circuits&nbsp;&nbsp;Inside Precision Medicine",
     "category": "neurotechnology"
   },
   {
@@ -64,33 +100,6 @@
   },
   {
     "type": "external",
-    "title": "Convicted Harvard Scientist Rebuilds Career in China Through Controversial Brain-Computer Interface Lab - The Debrief",
-    "date": "2026-05-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixgFBVV95cUxONmpZd0tSbXJwdE5KUUFvNjYwMGYxUTZVQlJyMldrNnlMWml4eEZpU0YxZXNEbUdmUWZQNzNqYjRmNVVrSC1tMmJ3WUtONWtpZnp3Ni1kMzVEd1N4d2hIM1JNeVM2QkI3UXhVYVZzQnNVbXJlZlpDMnoxZmxtdm5fdG5yNXRWV2NhSzdIX3ZKWE01Q2o1ZjY1Z1V6NHQ0RE55clcyV3M5bUJTZ0pkcUZid0E0Yi1rbkxrd3NDa1JmTGh1eFRjaGc?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Convicted Harvard Scientist Rebuilds Career in China Through Controversial Brain-Computer Interface Lab&nbsp;&nbsp;The Debrief",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Can You Invest in Neuralink Pre-IPO? Details & Alternatives - The Motley Fool",
-    "date": "2026-05-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxPazRYMFBVOFNTZl9lRWxHd08xZzJJVVY4Z01yTGoxS19OQUJMVExKRjdIY2lITzcteU4zUTJxS09Kd0EyQXhGY25qeDVqd3ZvMEw1dkpjc0FfMnM2QzV5bXJkdWlUWHdrbEh0T0RrZXQ4Z21xcEJTdTIzazJwZVJ3aVFNajJtdEdnNDQ5RklB?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Can You Invest in Neuralink Pre-IPO? Details & Alternatives&nbsp;&nbsp;The Motley Fool",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain implants allow us to move and talk. But they could also be hacked - The Conversation",
-    "date": "2026-05-18",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqAFBVV95cUxNbUtGS3dEa085YVpZUGRUNUhNRmRZQmVtWF9IaGhBRVg2SnVKTENUNTZ6MHhZNnZKYUpwYnhGQkNYc1hsaU4yX2cyaXJjNDNaRUZ6dU1lVjMtVkwxbjBHb2JRb2kyMjlqc3BtUllNSjhzb2ZYRXM1VnJlVFplTmY1N3hOeWhPOGRsSHZiUW5pa1JsbV9LaUdiUlhWTW5aSmZNVGFsVXBaeEk?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain implants allow us to move and talk. But they could also be hacked&nbsp;&nbsp;The Conversation",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Elon Musk compares his company’s work to that of Jesus - MarketWatch",
     "date": "2026-05-18",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxQZUhMMEp3akhPMEZvUmNtYVRXTjkwb3Y0T3pGZmtsbl9uNVo3aTk4ODNmYkRSYVFaWW85TWVpQmVsQjNBUzFtTUJPTk9tcmdKMFlrVWhTWVZVNUw4UjNxUFNxUUxQLTd4RUhuSXRkTl9vYVkzYTFNRXBGWTdHR2NVVFQ4NFh4cmtDT05zR05FUkdmRnlCR09vZzJtS2g?oc=5",
@@ -109,15 +118,6 @@
   },
   {
     "type": "external",
-    "title": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface - Business Wire",
-    "date": "2026-04-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAJBVV95cUxPUnZXem1VbEVFZmQ3YXZDYkJOQmZnVmZmWVNHTzFJLXRqX1NidTRoQmtlc1BBUlI1MWx2VU51N0dNZDNVb0Y1UFJfWmxsTjFnOTBMQjlqQVhYSmVkVG44SXZWcktoZXZCdG1aZkV1c0dRQTlWYzBtY3pyTTV2NWkxSWlHdF84d3NhYi1MU2V5Rmc2VjdBRWhLTm9FVUlJb0k5WlVWa1dFRUdlekFzTW9tOG50VXFPV3UtUWRsMlUweENGR0NKUmNublg4YlRiV09ZbW4tdk5sOGZFVVBMYWFEM0JWaFNBeDRRTjdTVXNjNzdfdXFUSXI2Wm1KMlZTYThLdnBBNGVLWWhnYUFT?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface&nbsp;&nbsp;Business Wire",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Brain-computer interface startup Science raises $230M - SiliconANGLE",
     "date": "2026-03-05",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPS0YxUk82N2IzSE16bDNnQS1Ba1hzMmZZNklwZXd0ZFJ4aThsS0xLdC1OdE1CWHMxTWUtU1U0M3EwNWd6NU1vQUxiZGhnelBJbXQ2anRZY2l1a1hsazZlakdBRE1QblVjNFpYZ1BTZDVnRm4zYmNLNHVTVVFLcGNvbmlSMFEzMGktRmJVbldQU2U2RW8?oc=5",
@@ -127,11 +127,11 @@
   },
   {
     "type": "external",
-    "title": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C - Crunchbase News",
-    "date": "2026-03-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
+    "date": "2026-01-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
     "source": "Google News — Neural Startups",
-    "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;Crunchbase News",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
