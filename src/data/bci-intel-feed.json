@@ -1,5 +1,493 @@
 [
   {
+    "id": "6e50c80a",
+    "title": "System Boosts Speech Volume Based on Brain Signal",
+    "date": "2026-05-24",
+    "url": "hxxps://spectrum[.]ieee[.]org/eeg-hearing-aid-volume-control",
+    "source": "IEEE Spectrum",
+    "source_category": "research",
+    "summary": "It can be difficult to carry on conversation in a crowded public setting, and even more so with any degree of hearing loss. But what if you could amplify only the person you wanted to hear and suppres",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "c93bbec4",
+    "title": "Lysergic acid diethylamide pretreatment prolongs brain-stimulation induced neural activity changes",
+    "date": "2026-05-24",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26001075?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: July–August 2026Source: Brain Stimulation, Volume 19, Issue 4Author(s): Lucas L. Dwiel, Mackenzi L. Prina, Elise M. Bragg, Matthew Company, Lucky L. Drucker, Laetitia R. Reduron, Bry",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "b4ff3125",
+    "title": "Effect of high, low, and asymmetric frequency stimulation of the subthalamic nucleus in Parkinson's disease",
+    "date": "2026-05-24",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26000987?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: July–August 2026Source: Brain Stimulation, Volume 19, Issue 4Author(s): Zhitong Zeng, Zhengyu Lin, Peng Huang, Yixin Pan, Chencheng Zhang, Bomin Sun, Dianyou Li",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "e8c9e407",
+    "title": "Single-trial EEG-based classification reveals instrument-specific timbre perception via traditional machine learning classifiers",
+    "date": "2026-05-24",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926003253?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: 1 August 2026Source: NeuroImage, Volume 336Author(s): P. Satkunarajah, S.D. Power, B.R. Zendel",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "75c7d704",
+    "title": "Functional brain alterations associated with acupuncture for chronic pain: a scoping review of fMRI studies",
+    "date": "2026-05-24",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1819418",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "BackgroundChronic pain (CP) is a public health challenge recognized as involving large-scale functional brain dysregulation. Acupuncture is widely used as a non-pharmacological intervention for CP, ye",
+    "tags": [
+      "funding",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "55149951",
+    "title": "Clinical evaluation of communication brain computer interfaces in amyotrophic lateral sclerosis: a landscape analysis",
+    "date": "2026-05-24",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1771146",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "IntroductionAmyotrophic lateral sclerosis (ALS) is a progressive motor neuron disease that leads to severe motor impairment, including loss of communication ability, and ultimately death. Communicatio",
+    "tags": [
+      "funding",
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "f662f20b",
+    "title": "FieldStation42 – Turn your computer into a vintage TV cable system",
+    "date": "2026-05-24",
+    "url": "hxxps://fieldstation42[.]com/",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://fieldstation42.com/ Comments URL: https://news.ycombinator.com/item?id=48258787 Points: 2 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "3c86e938",
+    "title": "Usborne 1980s Computer Books",
+    "date": "2026-05-24",
+    "url": "hxxps://usborne[.]com/us/books/computer-and-coding-books",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://usborne.com/us/books/computer-and-coding-books Comments URL: https://news.ycombinator.com/item?id=48258194 Points: 87 # Comments: 28",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "5e62c175",
+    "title": "Handwriting but not typewriting leads to widespread brain connectivity",
+    "date": "2026-05-24",
+    "url": "hxxps://www[.]frontiersin[.]org/journals/psychology/articles/10[.]3389/fpsyg[.]2023[.]1219945/full",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1219945/full Comments URL: https://news.ycombinator.com/item?id=48256714 Points: 3 # Comments: 1",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "4db3252d",
+    "title": "Computer-Use-Linux",
+    "date": "2026-05-24",
+    "url": "hxxps://news[.]ycombinator[.]com/item?id=48255883",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Hi, Since apps like Codex and Claude don't provide support for computer use for Linux desktop users, iv'e built my own own one. https://github.com/agent-sh/computer-use-linux `npm install -g @agent-sh",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "102b75f9",
+    "title": "Computer Science Achievement and Writing Skills Predict Vibe Coding Proficiency",
+    "date": "2026-05-24",
+    "url": "hxxps://dl[.]acm[.]org/doi/10[.]1145/3772318[.]3791666",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://dl.acm.org/doi/10.1145/3772318.3791666 Comments URL: https://news.ycombinator.com/item?id=48255592 Points: 4 # Comments: 1",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "cad53156",
+    "title": "Layer 6 corticothalamic neurons show diverse and dynamic responses that support a role in cortical gain control in noisy environments",
+    "date": "2026-05-23",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]05[.]22[.]726967v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "Listening in complex environments requires the enhancement of relevant sounds and suppression of irrelevant ones. Corticothalamic neurons (CTNs) in auditory cortex layer (L) 6 provide modulatory feedb",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "fd015f09",
+    "title": "Obsessive-compulsive disorder and abstract sequence task contributions shift prefrontal cortical connectivity",
+    "date": "2026-05-23",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]05[.]22[.]727273v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "Obsessive-compulsive disorder (OCD) is characterized, in part, by repetitive, sequential behaviors, such as cleaning rituals, yet underlying neural circuitry related to abstract sequencing in OCD rema",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "4bc36b62",
+    "title": "Brain Region Discovered for Abstract Thought",
+    "date": "2026-05-23",
+    "url": "hxxps://neurosciencenews[.]com/ventral-premotor-cortex-abstract-thinking-30753/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study provides the first direct neural evidence of \"compositional generalization,\" the cognitive capacity to recombine familiar elements into novel ideas.",
+    "tags": [
+      "research",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "9723286b",
+    "title": "Does Recording Hardware Matter for Clinical Speech Recognition Evaluating ASR Performance Across Consumer Devices",
+    "date": "2026-05-22",
+    "url": "hxxps://www[.]medrxiv[.]org/content/10[.]64898/2026[.]05[.]19[.]26353590v1?rss=1",
+    "source": "medRxiv Health",
+    "source_category": "research",
+    "summary": "Ambient clinical intelligence (ACI) systems use automatic speech recognition (ASR) to capture patient-provider conversations for downstream clinical documentation. However, many ASR evaluations are co",
+    "tags": [
+      "funding",
+      "product",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "ad7237df",
+    "title": "Turning motor intentions into words: an MRCP-based BCI speller for motor-impaired users enhanced by task-specific calibration",
+    "date": "2026-05-22",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae6bef",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Communication is fundamental to human interaction, yet neuromuscular disorders can severely restrict it. For individuals with advanced conditions such as locked-in syndrome, maintaining rel",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "8e85464f",
+    "title": "Gated edge-node interaction graph convolutional network for ADHD classification",
+    "date": "2026-05-22",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae6bf0",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Attention deficit hyperactivity disorder (ADHD) remains challenging to diagnose objectively and often relies on subjective clinical assessments. Although graph neural network-based methods ",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "b0b3d7c5",
+    "title": "Neurosoft Bioelectronics: $7.5 Million Seed Round Closed To Advance Stretchable Brain-Computer Interfaces - Pulse 2.0",
+    "date": "2026-05-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxOcTViQWIzT3JjRHJxSGpYZFFsZ0pPOGUyMm45bWYySlV1Z1ktVEVWNDk2SFlqLS1XSWFYSGtBSFFka3VibHdvektsZnlXbU5yNTJxbVFWeEY3clhoSlpyTFZNZEtTX3FQcjZncHRib0ZoaGozZkdlMHdxOTFWNmwtSjNwYjhpNnNxVXRNbGxlMEVFSFM0SHRFbE9UdGFLbmlsT1pad0w5RW9hZ3Jwbl9uWjVqY01EVExadVc2dFozeUfSAcYBQVVfeXFMTWo2NzFldUFwaURidDQyYmY2UTNtMWFXNGY0cU5US3NpdHVEZnZSRDAxWWFTS2ZLMzBENjFKTFBfNlExeElFeTg2V2o1b2YwbmY2d0tyTlh4SkpCN0x3azZ0MEt6eXZCeS1jdHU4b2c3VXFKYWdsYzZxUkh5YXNyOWVpNWZqNExVLXQwbU92NUFzNjc2enlTaGR5eUREYVFyMWVRdjFsb1ZONXFYY0xJTnpHTmk3WGYtRi1pWUtTejdzeTh1cXR3?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Neurosoft Bioelectronics: $7.5 Million Seed Round Closed To Advance Stretchable Brain-Computer Interfaces&nbsp;&nbsp;Pulse 2.0",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "a39bd30c",
+    "title": "Guardant wins FDA approval for updated liquid biopsy",
+    "date": "2026-05-21",
+    "url": "hxxps://www[.]medtechdive[.]com/news/guardant-wins-fda-approval-for-updated-liquid-biopsy/820829/",
+    "source": "MedTech Dive",
+    "source_category": "product",
+    "summary": "The company could secure a higher price for the new test than for its older, narrower product, Wall Street analysts said.",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "e9d7b75c",
+    "title": "Machine Learning Doubles Depression Remission Rate",
+    "date": "2026-05-21",
+    "url": "hxxps://neurosciencenews[.]com/machine-learning-imap-depression-30744/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Can an algorithmic approach to lifestyle tracking radically improve depression treatment? A milestone clinical trial demonstrates that personalizing behavioral care via machine learning can nearly dou",
+    "tags": [
+      "research",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "7b089970",
+    "title": "RNA Origami and Nanopores Accurately Size ALS Genes",
+    "date": "2026-05-21",
+    "url": "hxxps://neurosciencenews[.]com/rna-origami-nanopore-genetics-als-30749/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study introduces an innovative platform capable of accurately sizing the toxic repeat expansion mutations that drive muscular dystrophy, Huntington’s disease, and ALS.",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "bb64fbe1",
+    "title": "Nexalin Technology Secures Key Neurostimulation Legislative Provision & Commends U.S. House-Passed Report Language Expanding Non-Invasive Deep Brain Neurostimulation Research at the Department of Veterans Affairs for Traumatic Brain Injury",
+    "date": "2026-05-21",
+    "url": "hxxps://www[.]globenewswire[.]com/news-release/2026/05/21/3299313/0/en/Nexalin-Technology-Secures-Key-Neurostimulation-Legislative-Provision-Commends-U-S-House-Passed-Report-Language-Expanding-Non-Invasive-Deep-Brain-Neurostimulation-Research-at-the-D[.]html",
+    "source": "GlobeNewswire MedEquip",
+    "source_category": "funding",
+    "summary": "U.S. House Appropriations Committee report language directs VA to support additional research evaluating non-invasive deep brain neurostimulation technologies for veterans with treatment-resistant tra",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "91a34568",
+    "title": "Elon Musk's Neuralink reveals new robotic system for BCI brain implant surgeries - MobiHealthNews",
+    "date": "2026-05-21",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxPQXdyWDJjSkItLVEteVNNbjNORmgtaDhhbjgzQWY5RjFQREVUR0phWTBXbzBoTUtQdXN1NUJzRjZFd05RM2VVT1pUdkdkVXhtS0hzVG1LTkZLU29Id3BmcFlyejkyRDduSVdOa3pkQlJYZm9mcnlpbEpjWmtQaml4c1NHbHZscFg3cU9VZDZocnRRWjY5QVZlSG1PaG92cGlQenMyaG1wbjZ0ZmJwNE5QZA?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "Elon Musk's Neuralink reveals new robotic system for BCI brain implant surgeries&nbsp;&nbsp;MobiHealthNews",
+    "tags": [
+      "product"
+    ],
+    "companies": [
+      "Neuralink"
+    ],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "f7690e80",
+    "title": "Interpretable EEG biomarkers for neurological disease models in mice using bag-of-waves classifiers",
+    "date": "2026-05-20",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae4d8c",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Electroencephalograms (EEGs) are time-series records of the electrical potential from collective neural activity in the brain. EEG waveform patterns—rhythmic and irregular oscillations and ",
+    "tags": [
+      "funding",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "9a7caf1d",
+    "title": "Neurosoft Bioelectronics garners $7.5M for brain-computer interface technology - MobiHealthNews",
+    "date": "2026-05-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxObGZOYUpRZ2l3aS01RUg5TXFseWtLMVR3MFhKTzVrSWY1WEJhUWxibVlHUUxaUExvYTdqeFBrT3UxWDAtUEpOSTZ2REFTb3JjY0pwekltZVA4Y3UxRXdBYzNJR3RoMEViRWFISk9Fa3AyYkdpTVJXOEtubDJmdTRiWlV3RmlLLU9NdkROdHVKTVctU0tCU1I5VHVyQzhmSTM1dzVnZklucGNhQWMx?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Neurosoft Bioelectronics garners $7.5M for brain-computer interface technology&nbsp;&nbsp;MobiHealthNews",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "695777dc",
+    "title": "Neurosoft Bioelectronics Closes $7.5M Oversubscribed Seed Round to Build Stretchable and Scalable Brain-Computer Interfaces - Business Wire",
+    "date": "2026-05-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwJBVV95cUxQMy0tZ3o1MnAtaHR4RWVLbm90SG01a1Y3RnNWZk1vSGNRVEo4TEJMRjRSTmdubjdlNENRaGwwLUlsb0xrZmF0MEJFZUhMSVozeG51ak9fYkV1SjdXbnMwQ0U5eVFnSVR2emtHb3EzMmRGUS1jZlhWOEFld1NzZ1ozU3dwSnVfcUE2aWJrcUxDZm1LbzF4RmhKQy1EVHVmOEtMdU9CMGtieG5ueDVabzBDMUhYLUJ3RGRkVWFJZm5Yai05Tm40STlDczl6OE5fQkRrM3JYOUhVaHJPZWpiQThBcDhaTnduV0dfS294Sm8xeWgzYzdSRGNlSHZ2R2FKRUZxZkNvWEhXNERoeFJYVXlv?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Neurosoft Bioelectronics Closes $7.5M Oversubscribed Seed Round to Build Stretchable and Scalable Brain-Computer Interfaces&nbsp;&nbsp;Business Wire",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "0e1cae5f",
+    "title": "Neurosoft Bioelectronics closes $7.5M seed funding round to support BCI - MassDevice",
+    "date": "2026-05-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMieEFVX3lxTE01bFJIVmUwVE91VUJscEJaOUEwVGN5SWFqX1VDQ1VpRWZsM284YWFaQWl2d09tNXZKcW5yTkh2aHZDUUFSYlhuNFJqRFVPNjJRd1pGR3hyRDNlRUlSeFZacloxVktVZkQ0UUlXUDZVenNwT19mQnZvUQ?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Neurosoft Bioelectronics closes $7.5M seed funding round to support BCI&nbsp;&nbsp;MassDevice",
+    "tags": [
+      "funding",
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "6d59b403",
+    "title": "Neurosoft Bioelectronics Raises $7.5M to Scale Brain-Computer Interface Platform - citybiz",
+    "date": "2026-05-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiugFBVV95cUxNV2h1eVpKcTluUW1HV19sRTJ4RXhrNjF4U0QzWEVHUk5jcGVqMks0Nk44YU5KckpHQVdYM3JFRmVrM0hPNExSR3dYcVZNT2hURkVYNHZJWTYwVFp2Z21VTHRMZTU4V0FmMm5iTF9zMWZCUzR0VExULU56Q3BMai1VVkdfUU5lcjFTT1lIcHhJeGwzZ3ZjQUcwUjJmUkY1TEhickN0TFhrWjQyM0ZoMGQ4SFNaaGpaYjRSTWc?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Neurosoft Bioelectronics Raises $7.5M to Scale Brain-Computer Interface Platform&nbsp;&nbsp;citybiz",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "642c4b37",
+    "title": "Neurosoft Bioelectronics raises $7.5M for scalable brain-computer interfaces - Tech.eu",
+    "date": "2026-05-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxNVlJsYUF5ajA5Ymc4cHdvalBfejU4RExoLWQtWkdxbEx2UkdXUjNUMnhCbmJRMnFJWEhqYVhIYnk1U3A0QUVJeV9JeTNvNFVsOUZxMkdNV2RaTnZ1elFmemhEeUF4MEZXSThwOHVWdTZjeG9pclJLMDkxY1Nmc1oxMklHQ1NOY1VXZDJZa2FELTNXX25RUERZaWw4aldVdkh5cnpZdQ?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Neurosoft Bioelectronics raises $7.5M for scalable brain-computer interfaces&nbsp;&nbsp;Tech.eu",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "0d4b68aa",
+    "title": "Neurotech Brain Analytics: Neuratia Labs ONYX Wearable EEG Debut - AI CERTs",
+    "date": "2026-05-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilwFBVV95cUxPSm84RHNwMTFQZC1GQ0dPc2U5Q1FXSnRXSm51WTkycFpJMWZMa1Y0c1ZVZmFCSTNpaDV1OXcxeVRhOXVMZlhwX21jNVJOS2pQNVB0OF9tQUUxMGdNczlQTEJnbWRqaU9lZ1dDejRYX0JlSVN2bndpSmp6dFV4ZnBseDFBSmh4dmZnZ0tDQy1qVVhaa1pYMDNR?oc=5",
+    "source": "GN: Consumer EEG",
+    "source_category": "product",
+    "summary": "Neurotech Brain Analytics: Neuratia Labs ONYX Wearable EEG Debut&nbsp;&nbsp;AI CERTs",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "59d1ca8b",
+    "title": "Tracking Facial Micromovements to Measure Pain",
+    "date": "2026-05-19",
+    "url": "hxxps://neurosciencenews[.]com/ai-facial-micromovements-pain-30729/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study demonstrates that tracking high-speed facial micromovement spikes provides an objective, quantifiable metric for human discomfort.",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "83a29689",
+    "title": "Neural mechanisms underlying leg muscle responses during cervical transcutaneous spinal cord stimulation",
+    "date": "2026-05-19",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae697b",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Transcutaneous spinal cord stimulation (tSCS) is increasingly used as a neuromodulation technique to improve motor function after neuromotor disorders. Cervical tSCS has been reported to in",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "0546fc26",
+    "title": "Connected Biochip Tracks How Diabetes Triggers Dementia",
+    "date": "2026-05-18",
+    "url": "hxxps://neurosciencenews[.]com/glucobrain-organ-on-chip-diabetes-dementia-30719/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study launched the GlucoBrain project, a multi-disciplinary initiative to build a first-of-its-kind \"organ-on-chip\" device that bridges the gut, pancreas, and brain.",
+    "tags": [
+      "product",
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "825357a2",
+    "title": "Characterization of the electrode–tissue interface during long-term deep brain stimulation in the 6-OHDA rat model of Parkinson’s disease",
+    "date": "2026-05-18",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae668d",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Deep brain stimulation is an established therapy for neurological disorders such as Parkinson’s disease, but its underlying mechanisms and tissue effects remain incompletely understood. A p",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
     "id": "991d9022",
     "title": "Adenosine signaling in rapid antidepressant action",
     "date": "2026-05-17",
@@ -2212,6 +2700,35 @@
     "fetched": "2026-04-26"
   },
   {
+    "id": "293266a0",
+    "title": "Science Corp’s Revolutionary Brain Sensor: Max Hodak’s Biohybrid Breakthrough Nears Human Trials - Binance",
+    "date": "2026-04-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiZEFVX3lxTFBBblVNSHdaNmEzblg5eDBYYTN0anlfUDdIOU9GZEU1VkxZN19EMTRLMHB0SUtMNXQyTGlYaHBQNHI4SktTZUVuUHB2SXdCdlA3MTBRVGRtZW9jRFl3d01ES0o3Ymw?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "Science Corp’s Revolutionary Brain Sensor: Max Hodak’s Biohybrid Breakthrough Nears Human Trials&nbsp;&nbsp;Binance",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "d88f01c0",
+    "title": "FDA’s New Era of Compliance in QMSR, Cybersecurity, & AI - Medical Device and Diagnostic industry",
+    "date": "2026-04-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxPX2RjbFFfaFpEVFNTLUF0UkVQNTQ3VnZmUzExeVk1ams3ZVpTMG50UjJ1bXd3T2RWM0lHMEFpNFVROU85QWJ4X1RHRUhmbGVxX09CaldQa3JWakRvdDhtdUNFazVqQ2pWdjc2M19VVHoyTU1vQmVmN2ZGWWkxZDktYlFNSVgya1pJYkpROVNRUVFGSGc4VEtZc1BHREthTi1lMDRGLXJFN2c5akg0WVZITmdkb0hJeHV5dUdzR3hhQVNPUQ?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "FDA’s New Era of Compliance in QMSR, Cybersecurity, & AI&nbsp;&nbsp;Medical Device and Diagnostic industry",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
     "id": "3b0c1dd7",
     "title": "Randomness Solves Robotic Gridlock",
     "date": "2026-04-13",
@@ -2240,6 +2757,21 @@
       "Neuralink"
     ],
     "fetched": "2026-04-19"
+  },
+  {
+    "id": "3c94cc7d",
+    "title": "E2T: EEG-to-Trajectory Transformer for Motor Imagery-Based Fully-DoF Motion Prediction",
+    "date": "2026-04-13",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11480906",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Brain–computer interfaces (BCIs) using electroencephalography (EEG) enable non-invasive, real-time interaction for individuals with motor impairments by decoding neural signals associated with movemen",
+    "tags": [
+      "policy",
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
   },
   {
     "id": "ac314e3a",
@@ -2428,6 +2960,22 @@
     "fetched": "2026-04-12"
   },
   {
+    "id": "a62b38be",
+    "title": "Muscle Network of Parkinson’s Gait: A 12-Month Longitudinal Analysis Before and After Deep Brain Stimulation Surgery",
+    "date": "2026-04-09",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11478511",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Bilateral Deep Brain Stimulation (DBS) of the subthalamic nucleus is commonly used for treating motor symptoms in patients with advanced Parkinson’s Disease (PD). The aim of this study is to quantitat",
+    "tags": [
+      "research",
+      "opinion",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
     "id": "5f6b7a32",
     "title": "Closed-loop transcranial ultrasound stimulation based on NREM and REM sleep for bidirectional modulation of sleep neural oscillation and memory",
     "date": "2026-04-08",
@@ -2458,6 +3006,20 @@
     "fetched": "2026-04-12"
   },
   {
+    "id": "1f59ac14",
+    "title": "Design and Validation of a Modified Delayed Output Feedback Controller for Hip Exoskeleton Assistance",
+    "date": "2026-04-08",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11477841",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "This study proposes a control algorithm, Modified Delayed Output Feedback Control (MDOFC), for energy-efficient hip assistance without explicit gait phase estimation. Conventional gait-assistive contr",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
     "id": "81f765fc",
     "title": "Gestala Highlights Early Funding Momentum and Hiring Drive in Ultrasound-Based BCI - TipRanks",
     "date": "2026-04-07",
@@ -2484,6 +3046,35 @@
     ],
     "companies": [],
     "fetched": "2026-04-12"
+  },
+  {
+    "id": "6a8ff4ba",
+    "title": "Edge Computing for Environment-Based Locomotion Modes Prediction and Terrain Features Calculation in Lower Limb Prostheses",
+    "date": "2026-04-07",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11475903",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Wearable lower-limb prostheses benefit from environment-aware control, yet strict on-device constraints (size and compute) make real-time perception and decision-making challenging. We present an edge",
+    "tags": [
+      "product",
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
+    "id": "ce9a9962",
+    "title": "Tracking Neural Activity Underlying Postural Control Dysfunction in a VR-Induced System: Demonstration Using BioVRSea",
+    "date": "2026-04-07",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11475822",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Disrupted postural control (PC), a hallmark of neurological conditions such as Parkinson’s disease (PD) and mild traumatic brain injury (mTBI), is associated with altered neural oscillatory dynamics m",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
   },
   {
     "id": "7db6be87",
@@ -7875,6 +8466,20 @@
     "fetched": "2026-03-11"
   },
   {
+    "id": "8849a79d",
+    "title": "Congress Introduces Neural Data Bill - Inside Privacy",
+    "date": "2025-10-03",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxQcW5Tb0RFN2dJOE1rRmtJZjltdUVlNzhTdGpUN0U1Y1RIMVhJVllNWXZGc3ZBNGt1VHRqNWQ5YUx2dVFfZUxZRFZhRW9CbzNoLUk0VWdJY0kzczc3dTQ5X1NoOF9pYy1HR01OallOMFFHaC1pdlJ2U3NON0JzdGRfenNYYlhGYzJXdXc?oc=5",
+    "source": "GN: Neurorights",
+    "source_category": "policy",
+    "summary": "Congress Introduces Neural Data Bill&nbsp;&nbsp;Inside Privacy",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
+  },
+  {
     "id": "ff45e4c6",
     "title": "Brain Computer Interface (BCI) Research Report 2025-2035: - GlobeNewswire",
     "date": "2025-10-01",
@@ -7915,6 +8520,20 @@
     ],
     "companies": [],
     "fetched": "2026-05-17"
+  },
+  {
+    "id": "b3764e3e",
+    "title": "Securing Neuro-Privacy - Vidhi Centre for Legal Policy",
+    "date": "2025-09-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiZ0FVX3lxTE1ILURkckZVRVZSMjI0RjBLa2t0OUZ0MTFzY1IyQnZDUWlENlluc0VIdm9acXpKaTkxdXh6c0Y1VzViTTFOSWI2cmh4Wk9EZGRJT2h6dGJjaVZCNjVxeURubmFLU0hiRTQ?oc=5",
+    "source": "GN: Neurorights",
+    "source_category": "policy",
+    "summary": "Securing Neuro-Privacy&nbsp;&nbsp;Vidhi Centre for Legal Policy",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
   },
   {
     "id": "16bb5d6b",
@@ -8785,6 +9404,20 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "801cebe3",
+    "title": "Artificially intelligent neural interfaces: DARPA funds Emory/GT/Northwestern research | Emory University | Atlanta GA - Emory University",
+    "date": "2019-07-01",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMie0FVX3lxTE8xX3RIQ1lUQklqZU5XU0YwX1ltRm1XMUxOYlh5UGxadjZtbDVMS2FYcjdDcnNxUUV6VVJULVhrd2dhZnU4OE5qQWdPYmRIYkh2TGpxVmJGOUF0cEZHRTJKdGR3cmlkbE5VTkt4WEtDS1g5b1dJMDE2c2tWWQ?oc=5",
+    "source": "GN: Gov Funding Neuro",
+    "source_category": "funding",
+    "summary": "Artificially intelligent neural interfaces: DARPA funds Emory/GT/Northwestern research | Emory University | Atlanta GA&nbsp;&nbsp;Emory University",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-24"
   },
   {
     "id": "7ad12218",
