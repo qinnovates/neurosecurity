@@ -1,7 +1,7 @@
 {
   "$schema": "automation-registry",
   "description": "Central registry of all automation, workflows, triggers, and scheduled tasks in the qinnovate project.",
-  "last_updated": "2026-05-24T02:44:06.143Z",
+  "last_updated": "2026-05-25T02:53:01.853Z",
   "entries": [
     {
       "id": "gh-deploy",
@@ -52,7 +52,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/security-audit.yml",
       "status": "active",
-      "last_triggered": "2026-05-20T08:51:49Z",
+      "last_triggered": "2026-05-24T02:44:55Z",
       "last_status": "success",
       "dependencies": [
         ".github/security-audit/scripts/audit.py",
@@ -73,7 +73,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-news.yml",
       "status": "active",
-      "last_triggered": "2026-05-23T17:51:53Z",
+      "last_triggered": "2026-05-24T17:48:58Z",
       "last_status": "success",
       "dependencies": [
         "scripts/fetch-news.mjs"
@@ -580,7 +580,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-registry.yml",
       "status": "active",
-      "last_triggered": "2026-05-24T02:43:48Z",
+      "last_triggered": "2026-05-25T02:52:47Z",
       "last_status": "unknown",
       "dependencies": [
         "scripts/update-automation-registry.mjs",
@@ -599,7 +599,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-intel.yml",
       "status": "active",
-      "last_triggered": "2026-05-17T17:56:19Z",
+      "last_triggered": "2026-05-24T17:57:31Z",
       "last_status": "success",
       "dependencies": [
         "scripts/fetch-intel.mjs",
