@@ -1,6 +1,15 @@
 [
   {
     "type": "external",
+    "title": "GazeBehavior Annotation Toolkit (GBAT): AI-powered toolkit for automatic annotation of egocentric eye-tracking and video data of child-caregiver interaction",
+    "date": "2026-05-25",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]22962",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.22962v1 Announce Type: cross Abstract: Video recordings of child-caregiver interactions enable investigation of attentional dynamics during naturalistic behavior. Such multimodal recording ",
+    "category": "research"
+  },
+  {
+    "type": "external",
     "title": "Elon Musk’s ‘Jesus-level miracles’ remark on Neuralink sparks row - WION",
     "date": "2026-05-24",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMirwFBVV95cUxPWS03dllLOWU5dVR4LU05cmxwMVQyTWQteXhrUXhkWVlSWVZpWUdfRExXdlppbEFyOE5kQkNPSm9laTQxUTc1QmZtcG94dUpXSFV2NWZtZ3ZPb19mUm1fS1hNNmtOWTIyVGx2anhWX1ZDUF9ORGhBSGRMTEt2Zk9sMVZnNVRQelFVckZyNXhrTjlHbFQ0LTNKVXp2YW9RWHVLbjFYMlNtWTZpaXBINEww0gG0AUFVX3lxTE8xSU84YTR3WE53Z0k5bUZ5ZFdJemg3NEVqQm0zcVFXWG1jQlFqR1lJLVB4Q0lZV2N6YUQ2dzNlZEl0Mkhnb1NNNWFzcUhWMUtQT2tFMFVXRy02cGxGUWxyU3M5V3FlUTd5dnFnOHBBQlB2NHUyY0ctdUdrdGM0NXh6c1JEemRiVlpBOVVGZUlwWlNjdXpfQzZhSVhzYTZVaEF6QnhSdTRIbDhqcDRKZlJfakhENA?oc=5",
@@ -10,20 +19,20 @@
   },
   {
     "type": "external",
-    "title": "Musk sparks backlash as he calls Neuralink 'Jesus-level miracle' - The News International",
-    "date": "2026-05-24",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxNTHJfaDhFMmg0TlZCWXc1TnNlZ3p6VUg1TkJpek84WXpNZEwxQXJ3OHFBbFhwbHZkbkI0ZlJjcHpZM245cDBSZy02QVQyTk1FNEJ6T0trNHRzQjR4SkxES0MtMkZNTG9ubWhpSW5NOFBtNWROSWw5dllfak5Eb2tkbkNvUmNWSDhKYnM3Rk16THVqUjJHWFNJOUo4VWZlbG8?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Musk sparks backlash as he calls Neuralink 'Jesus-level miracle'&nbsp;&nbsp;The News International",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "System Boosts Speech Volume Based on Brain Signal",
     "date": "2026-05-24",
     "url": "hxxps://spectrum[.]ieee[.]org/eeg-hearing-aid-volume-control",
     "source": "IEEE Spectrum",
     "summary": "It can be difficult to carry on conversation in a crowded public setting, and even more so with any degree of hearing loss. But what if you could amplify only the person you wanted to hear and suppres",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neurosoft Bioelectronics: $7.5 Million Seed Round Closed To Advance Stretchable Brain-Computer Interfaces - Pulse 2.0",
+    "date": "2026-05-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxOcTViQWIzT3JjRHJxSGpYZFFsZ0pPOGUyMm45bWYySlV1Z1ktVEVWNDk2SFlqLS1XSWFYSGtBSFFka3VibHdvektsZnlXbU5yNTJxbVFWeEY3clhoSlpyTFZNZEtTX3FQcjZncHRib0ZoaGozZkdlMHdxOTFWNmwtSjNwYjhpNnNxVXRNbGxlMEVFSFM0SHRFbE9UdGFLbmlsT1pad0w5RW9hZ3Jwbl9uWjVqY01EVExadVc2dFozeUfSAcYBQVVfeXFMTWo2NzFldUFwaURidDQyYmY2UTNtMWFXNGY0cU5US3NpdHVEZnZSRDAxWWFTS2ZLMzBENjFKTFBfNlExeElFeTg2V2o1b2YwbmY2d0tyTlh4SkpCN0x3azZ0MEt6eXZCeS1jdHU4b2c3VXFKYWdsYzZxUkh5YXNyOWVpNWZqNExVLXQwbU92NUFzNjc2enlTaGR5eUREYVFyMWVRdjFsb1ZONXFYY0xJTnpHTmk3WGYtRi1pWUtTejdzeTh1cXR3?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Neurosoft Bioelectronics: $7.5 Million Seed Round Closed To Advance Stretchable Brain-Computer Interfaces&nbsp;&nbsp;Pulse 2.0",
     "category": "neurotechnology"
   },
   {
@@ -55,15 +64,6 @@
   },
   {
     "type": "external",
-    "title": "Neurosoft Bioelectronics garners $7.5M for brain-computer interface technology - MobiHealthNews",
-    "date": "2026-05-20",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxObGZOYUpRZ2l3aS01RUg5TXFseWtLMVR3MFhKTzVrSWY1WEJhUWxibVlHUUxaUExvYTdqeFBrT3UxWDAtUEpOSTZ2REFTb3JjY0pwekltZVA4Y3UxRXdBYzNJR3RoMEViRWFISk9Fa3AyYkdpTVJXOEtubDJmdTRiWlV3RmlLLU9NdkROdHVKTVctU0tCU1I5VHVyQzhmSTM1dzVnZklucGNhQWMx?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Neurosoft Bioelectronics garners $7.5M for brain-computer interface technology&nbsp;&nbsp;MobiHealthNews",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Neurosoft Bioelectronics Closes $7.5M Oversubscribed Seed Round to Build Stretchable and Scalable Brain-Computer Interfaces - Business Wire",
     "date": "2026-05-20",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwJBVV95cUxQMy0tZ3o1MnAtaHR4RWVLbm90SG01a1Y3RnNWZk1vSGNRVEo4TEJMRjRSTmdubjdlNENRaGwwLUlsb0xrZmF0MEJFZUhMSVozeG51ak9fYkV1SjdXbnMwQ0U5eVFnSVR2emtHb3EzMmRGUS1jZlhWOEFld1NzZ1ozU3dwSnVfcUE2aWJrcUxDZm1LbzF4RmhKQy1EVHVmOEtMdU9CMGtieG5ueDVabzBDMUhYLUJ3RGRkVWFJZm5Yai05Tm40STlDczl6OE5fQkRrM3JYOUhVaHJPZWpiQThBcDhaTnduV0dfS294Sm8xeWgzYzdSRGNlSHZ2R2FKRUZxZkNvWEhXNERoeFJYVXlv?oc=5",
@@ -78,6 +78,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxPZ3R4ODk3cDFFT0xLbUs3cThPRExaWm1GdHFMbi1kdGwya0VfcDRvaW1xX0NMakZMVWxtSUpZeXlSRXJGLS1Xd2dmcUh2RUZBTkpEbWFQLVRzbGdaYkJscWhOaGxZSFNCVm1fQXNreXhQVEktTGZyZlVxR3BIQnBIN3B6RzJjQ215b19zTXJfX2Q0UUJWVGZJeHdDME41Q2pleUNMWlBqOG1Kb01L?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Neurosoft Bioelectronics raises USD 7.5M Seed round for brain-computer interfaces&nbsp;&nbsp;Venturelab Swiss",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Elon Musk compares his company’s work to that of Jesus - MarketWatch",
+    "date": "2026-05-18",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxQZUhMMEp3akhPMEZvUmNtYVRXTjkwb3Y0T3pGZmtsbl9uNVo3aTk4ODNmYkRSYVFaWW85TWVpQmVsQjNBUzFtTUJPTk9tcmdKMFlrVWhTWVZVNUw4UjNxUFNxUUxQLTd4RUhuSXRkTl9vYVkzYTFNRXBGWTdHR2NVVFQ4NFh4cmtDT05zR05FUkdmRnlCR09vZzJtS2g?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk compares his company’s work to that of Jesus&nbsp;&nbsp;MarketWatch",
     "category": "neurotechnology"
   },
   {
@@ -114,15 +123,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPS0YxUk82N2IzSE16bDNnQS1Ba1hzMmZZNklwZXd0ZFJ4aThsS0xLdC1OdE1CWHMxTWUtU1U0M3EwNWd6NU1vQUxiZGhnelBJbXQ2anRZY2l1a1hsazZlakdBRE1QblVjNFpYZ1BTZDVnRm4zYmNLNHVTVVFLcGNvbmlSMFEzMGktRmJVbldQU2U2RW8?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Brain-computer interface startup Science raises $230M&nbsp;&nbsp;SiliconANGLE",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C - Crunchbase News",
-    "date": "2026-03-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;Crunchbase News",
     "category": "neurotechnology"
   },
   {
@@ -169,6 +169,15 @@
     "source": "Google News — MIND Act",
     "summary": "AI-powered military neurotech: Mind enhancement or control?&nbsp;&nbsp;Military Times",
     "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "Non-surgical brain-computer interface startup lands new funding - Longevity.Technology",
+    "date": "2025-12-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxQZUs4LXBHeDF5eV92WGk3aVFuZkJPMlEtamtDaThhTUt4amRMRzFNNC1ZcXNIYWRGLVpmaWlDMEVIcDFqLU1YdzhZejFLOUdhZk5NcEFMNmFTamswTC03dFdOLUNvQ3UyQ2xoY1NGd0VYRHhKV2t5MjNtcW5ZWDc2N3BIcjJCNlF1RFZKeWNIZFJqd1U1dXFEQVl4dTBuSDg?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Non-surgical brain-computer interface startup lands new funding&nbsp;&nbsp;Longevity.Technology",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
