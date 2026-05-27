@@ -1,20 +1,29 @@
 [
   {
     "type": "external",
+    "title": "[object Object]",
+    "date": "2026-05-27",
+    "url": "hxxps://www[.]fiercebiotech[.]com/cro/kordata-dynamics-launches-neural-focused-ai-clinical-trial-model",
+    "source": "Fierce Biotech",
+    "summary": "Kordata Dynamics is emerging from stealth with the aim to redefine clinical trial execution by processing neural data while taking advantage of the FDA’s recent push for real-time clinical trials.",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neurosoft Bioelectronics raises USD 7.5 million to advance its brain interface platform - Greater Geneva Bern area",
+    "date": "2026-05-26",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirwFBVV95cUxPUFJmS3JyUXYwQ0s4aUxRQTZFaS1zRGE4NllvMklSVjNaNGZHSUcwRWk4bFF0MTQwQkI4RVpvalFKU2o1YzhadjE2Y3FweDBQckxrMUt4MmNobFVNd0JPQXQyQzlUTm11ZzZxdGxiSlZPdVluLTVXclU4N0h5NUtQbU04a2xjbzltX3cyVXFXNUFlaDhkWDgydzFRUnhCSWNBblNJNVdmRUgzN3dieDNJ?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Neurosoft Bioelectronics raises USD 7.5 million to advance its brain interface platform&nbsp;&nbsp;Greater Geneva Bern area",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Ability Neurotech can begin study of BCI in ALS patients - MassDevice",
     "date": "2026-05-26",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMic0FVX3lxTE9vdk9QQndLU3FUbWhfQmpfU25WSXNMbXV1Nl9oVS03R2pWaGxWcndiQUlaZXpyVDdpLXdpUmhid05LOF9DdWZ5OVdnZVh4SlVVTmVJVm9sY1QxT01sclQ1dXBNNE5LTDg0N0x0blRrM3VoWWc?oc=5",
     "source": "Google News — BCI",
     "summary": "Ability Neurotech can begin study of BCI in ALS patients&nbsp;&nbsp;MassDevice",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Prophetic Warning Emerges After Elon Musk Compares Neuralink Technology to Jesus' Miracles - Charisma Magazine Online",
-    "date": "2026-05-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiygFBVV95cUxOZkhuUUZGa0NtSUU4WHJZdVFMM0pYMkxMNnFVc05rRDMxVEhkbG9XSnFJLVlEZW5HMVNBSjhSY1dIOE5fLWxHTTVlV3NqT2tCTDRmTHJSbEprWDd6Y0FrRDlrcGk5LTdpczZtNldfVXN6M1Q0UEdGZnZtN0J3T1BSM1Q0enJVdDBPLWFNUU1sbzNrTk5ucjROd2R1bi1jVTNiajN6em5mQmlmUHBoaXl6RWtkVFRYRzNmU2ctaGwxNDNXSVB1YnowQnl3?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Prophetic Warning Emerges After Elon Musk Compares Neuralink Technology to Jesus' Miracles&nbsp;&nbsp;Charisma Magazine Online",
     "category": "neurotechnology"
   },
   {
@@ -28,11 +37,11 @@
   },
   {
     "type": "external",
-    "title": "Scientists warn brain implants helping patients speak and move could also be hackable - The Cool Down",
-    "date": "2026-05-25",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxOMFZUeTRtRmZrN1RXZjNrczFPNHBXdTdLWlRvdGVSbldpazVtRmJRbWpEOEFPRjlYNjZTU0gxSW0zZXJabF9EdWYtZERPTG9zNU84X1RBbzBpdG1pdlV0aWNWbUE2U1RsVUxmd3RoM3VTVDRFeUh6Z29pOUcyUU9RWXJBeTJxQWdfbW40RWllcFRHbmM?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Scientists warn brain implants helping patients speak and move could also be hackable&nbsp;&nbsp;The Cool Down",
+    "title": "‘Jesus-Level Technologies’—Elon Musk Promotes Neuralink’s Scientific ‘Miracles’ - ChurchLeaders",
+    "date": "2026-05-26",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMingFBVV95cUxNcWhHNktOTEsydGJoNkFWYTFZLUUySkdacGpOY0VZLW1jem1lRVl6WWx0SUlONWU0ajhLdVc5aHBkeml3bGEzOVo5NlZLOUdWNEhHdWVHVjJGRjd4MzlOdldTZE5kMElPZ2M5T3BGdVAtNWhqQXlseUhuREdRY3g3cGlsVG95OThlQlJHeHlJZWlwTlBBYXVXd19MbFJQZw?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "‘Jesus-Level Technologies’—Elon Musk Promotes Neuralink’s Scientific ‘Miracles’&nbsp;&nbsp;ChurchLeaders",
     "category": "neurotechnology"
   },
   {
@@ -46,7 +55,7 @@
   },
   {
     "type": "external",
-    "title": "System Boosts Speech Volume Based on Brain Signal",
+    "title": "System Boosts Speech Volume Based on Brain Signals",
     "date": "2026-05-24",
     "url": "hxxps://spectrum[.]ieee[.]org/eeg-hearing-aid-volume-control",
     "source": "IEEE Spectrum",
@@ -64,20 +73,11 @@
   },
   {
     "type": "external",
-    "title": "Neurosoft Bioelectronics raises USD 7.5M Seed round for brain-computer interfaces - Venturelab Swiss",
-    "date": "2026-05-20",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxPZ3R4ODk3cDFFT0xLbUs3cThPRExaWm1GdHFMbi1kdGwya0VfcDRvaW1xX0NMakZMVWxtSUpZeXlSRXJGLS1Xd2dmcUh2RUZBTkpEbWFQLVRzbGdaYkJscWhOaGxZSFNCVm1fQXNreXhQVEktTGZyZlVxR3BIQnBIN3B6RzJjQ215b19zTXJfX2Q0UUJWVGZJeHdDME41Q2pleUNMWlBqOG1Kb01L?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Neurosoft Bioelectronics raises USD 7.5M Seed round for brain-computer interfaces&nbsp;&nbsp;Venturelab Swiss",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain implants allow us to move and talk. But they could also be hacked - The Conversation",
-    "date": "2026-05-17",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqAFBVV95cUxNbUtGS3dEa085YVpZUGRUNUhNRmRZQmVtWF9IaGhBRVg2SnVKTENUNTZ6MHhZNnZKYUpwYnhGQkNYc1hsaU4yX2cyaXJjNDNaRUZ6dU1lVjMtVkwxbjBHb2JRb2kyMjlqc3BtUllNSjhzb2ZYRXM1VnJlVFplTmY1N3hOeWhPOGRsSHZiUW5pa1JsbV9LaUdiUlhWTW5aSmZNVGFsVXBaeEk?oc=5",
+    "title": "This app lets kids with disabilities use devices with their minds. Now anyone can download it - CBC",
+    "date": "2026-05-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxNOVFFN2NYU3VxTmlHV3lyb1hmaWFabV9OVzVaeXJfRWdWcUFYUHczWC1ESHh4aGZIOWZWOGxhaE1aa002OXB4dWpTbTBiZHJXV0Fob1NVRXRUWjQ0NWx5Um5PLVZveG5VYzgwYnd3MVI4VkdoVmR0Y1Bza3BFUjI2a0Y5UVl1NGE0S1kyTVg3dVlpdE5VT2NraEhjTkliZnVa?oc=5",
     "source": "Google News — BCI",
-    "summary": "Brain implants allow us to move and talk. But they could also be hacked&nbsp;&nbsp;The Conversation",
+    "summary": "This app lets kids with disabilities use devices with their minds. Now anyone can download it&nbsp;&nbsp;CBC",
     "category": "neurotechnology"
   },
   {
@@ -100,20 +100,20 @@
   },
   {
     "type": "external",
-    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - Yahoo Finance",
-    "date": "2026-03-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxOZVlpbGd3b3AzZTdhc2ZVdmdGNUExenN2XzRwR1dBRHdkZE5iYm5iejJvMHBQOFJGRzF0bmZXWTY2cndUaUN6aWJhZVVURDQta1ptYy1HeWJQRTFGM3paSnlrc3lPbEJQTFgxRGVQZUMyNkd3N1pzanlzZDg2bVYxY2VmWEEtQXRsMTRNNVd3?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;Yahoo Finance",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Brain-computer interface startup Science raises $230M - SiliconANGLE",
     "date": "2026-03-05",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPS0YxUk82N2IzSE16bDNnQS1Ba1hzMmZZNklwZXd0ZFJ4aThsS0xLdC1OdE1CWHMxTWUtU1U0M3EwNWd6NU1vQUxiZGhnelBJbXQ2anRZY2l1a1hsazZlakdBRE1QblVjNFpYZ1BTZDVnRm4zYmNLNHVTVVFLcGNvbmlSMFEzMGktRmJVbldQU2U2RW8?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Brain-computer interface startup Science raises $230M&nbsp;&nbsp;SiliconANGLE",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
+    "date": "2026-01-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
@@ -133,6 +133,15 @@
     "source": "Google News — MIND Act",
     "summary": "Are Neural Organoids Part of “Neurotechnology”?&nbsp;&nbsp;Stanford Law School",
     "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
+    "date": "2026-01-15",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
