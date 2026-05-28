@@ -1,29 +1,74 @@
 [
   {
     "type": "external",
-    "title": "[object Object]",
+    "title": "Clinical trial seeks to advance intuitive assistive robotics for people with paralysis - Rice University",
+    "date": "2026-05-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqgFBVV95cUxPbkVjY3RFenk3dHdZRk1EbC1mRFBfaDhCVVh2aVNGSjhNek80R3NUN2p1R1NoaXo4d2YxTEQxbTFzZENrd295dy1CSHE4RGttSFlwMlRRV2MySnczR1N2cVNac1FfQ2xSMGdENEs2RTNaVmVxOWc3WWV4THlLMUtXdENxTGRlTDBkWE8zYjJmbk1pZzRlamplSVRrNWFEcUxiazE1V0p3V0luZw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Clinical trial seeks to advance intuitive assistive robotics for people with paralysis&nbsp;&nbsp;Rice University",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Optical brain implant moves into real-world use - Longevity.Technology",
+    "date": "2026-05-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxNWUljUUxCRFZ6ZUUwWXdqLWxpX2dFMVNEN0h0czJuSVZlREtONUNhWnhEcXBBTWlZcFNCekFQaU1zTGw1bTlaZnBqa3ZONWk2b3k1MzBWTVNsOFhUbW14RXFodlpvdVFaVzZHOWNRajJFZjhMOU5FWWpMUVZfaF9hYXRsMkV5aVRKN1E?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Optical brain implant moves into real-world use&nbsp;&nbsp;Longevity.Technology",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Five questions every neurosurgeon should ask before implanting an AI-enabled neural device - NeuroNews International",
+    "date": "2026-05-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxNMnFrTTFEQUk3MmpaeVBxTjdQalQwZFltN2FkTVBVWmctYWJaZUdHczB0N2FxNllUQlM4X3p4NjluNWZxeFBPRlVwY2xWb28wOGlwMWFseXd5eG5aWlZKWnJUQXF2Z1BWUkozTVFFZDI3U1duZWp1bTh1V2x5cVoxMkxhSzR3aVAxZTRN?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Five questions every neurosurgeon should ask before implanting an AI-enabled neural device&nbsp;&nbsp;NeuroNews International",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink's DJ Seo on Brain-AI Race - StartupHub.ai",
+    "date": "2026-05-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxNNmhVcFlNSlVnMTFBTHcwMS1WUWJhQm1jVzdnYkI0YnBfclNFc3R4QjFaempFZzA2eHZRbXpkNUVWOUVKSDBNMWlrNlFmN3p1bm1QcExqT2ViUnBTSTk5enhhQlpUWG1rVy1mdWxVOWZYM0lReGFLVDdOcl9telZjcXNadmhOSTdsTXRlS3pjMA?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink's DJ Seo on Brain-AI Race&nbsp;&nbsp;StartupHub.ai",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Misalignment Between Backpropagation and the Hierarchy of Brain Responses to Images",
+    "date": "2026-05-28",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]28693",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.28693v1 Announce Type: new Abstract: Backpropagation is the core learning mechanism underlying deep learning. However, whether and how this algorithm is implemented in the brain remains hig",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "EEG-FM-Audit: A Systematic Evaluation and Analysis Pipeline for EEG Foundation Models",
+    "date": "2026-05-28",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]26910",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.26910v1 Announce Type: cross Abstract: Large EEG Foundation Models (FMs) have shown great potential for decoding EEG signals across diverse cognitive tasks. However, existing EEG-FM studies",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "ABILITY Neurotech gets approval to trial brain-computer interface in ALS patients - NR Times",
     "date": "2026-05-27",
-    "url": "hxxps://www[.]fiercebiotech[.]com/cro/kordata-dynamics-launches-neural-focused-ai-clinical-trial-model",
-    "source": "Fierce Biotech",
-    "summary": "Kordata Dynamics is emerging from stealth with the aim to redefine clinical trial execution by processing neural data while taking advantage of the FDA’s recent push for real-time clinical trials.",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxOa19JVTNlN1g2TlZZNXRFR19zankxR1RyNVNNT2pTd0NfSlBISnpMOXZNNTlkTXhWUVRrZVU3ZUp2eWxBWGlyYnRWdFo3TkVEY3Q5dWRMZ21XX0RHMWNrRHoyY0dyLWI1MGh5WVhjT21pSjhjbWtnX0c0M1BQZFBzLUZUeE5tLTAwUjRHQVJuc2NhWXlKdVh0Ynk3ZTJrMTFqTGtGOEJzbERCTEdENVpIcg?oc=5",
+    "source": "Google News — BCI",
+    "summary": "ABILITY Neurotech gets approval to trial brain-computer interface in ALS patients&nbsp;&nbsp;NR Times",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Neurosoft Bioelectronics raises USD 7.5 million to advance its brain interface platform - Greater Geneva Bern area",
-    "date": "2026-05-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirwFBVV95cUxPUFJmS3JyUXYwQ0s4aUxRQTZFaS1zRGE4NllvMklSVjNaNGZHSUcwRWk4bFF0MTQwQkI4RVpvalFKU2o1YzhadjE2Y3FweDBQckxrMUt4MmNobFVNd0JPQXQyQzlUTm11ZzZxdGxiSlZPdVluLTVXclU4N0h5NUtQbU04a2xjbzltX3cyVXFXNUFlaDhkWDgydzFRUnhCSWNBblNJNVdmRUgzN3dieDNJ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Neurosoft Bioelectronics raises USD 7.5 million to advance its brain interface platform&nbsp;&nbsp;Greater Geneva Bern area",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Ability Neurotech can begin study of BCI in ALS patients - MassDevice",
-    "date": "2026-05-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMic0FVX3lxTE9vdk9QQndLU3FUbWhfQmpfU25WSXNMbXV1Nl9oVS03R2pWaGxWcndiQUlaZXpyVDdpLXdpUmhid05LOF9DdWZ5OVdnZVh4SlVVTmVJVm9sY1QxT01sclQ1dXBNNE5LTDg0N0x0blRrM3VoWWc?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Ability Neurotech can begin study of BCI in ALS patients&nbsp;&nbsp;MassDevice",
+    "title": "Elon Musk predicts brain implant company Neuralink will soon yield 'Jesus-level miracles of science' - Christian Post",
+    "date": "2026-05-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxOU0MxZDJlaTUwRTFaSEVTSlItdjg4Ql9lNkVFSERnaVl6YkNoWkduby12WnNFWERlVk85LXRqVjRlOVVMaU5Dd0RramJMa3FMUDNQRVMxZTVlSFpUOWIwQnRTU0tqTktOQTlQNUQ4SHM5SEowRjNZWTVUclJ6Z01NaWN4alFvSkJqcjZRSWFzcDhkMGY4?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk predicts brain implant company Neuralink will soon yield 'Jesus-level miracles of science'&nbsp;&nbsp;Christian Post",
     "category": "neurotechnology"
   },
   {
@@ -33,24 +78,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiuwFBVV95cUxNX2E0Mkt0MlNZXzdVS2haVUh6OGxYZFp4Rk9HTnI3UW5zWkJYR0dqcldZc1NIem5rRGlnUW5KQ05CaFZqMmNTYURBNEJyNEtrajhaUElvZWZ4dThaVEtVTXQ4TmZXT2dSX1AteU43RGNaZnA2VnRyWTR5R0k5al9XZUtFajRfdGxVd2xQT3JydERJaV81TjFUU3VnWWx6dDNqbjZ5VElpZElYY2VOVkMzN0ZMX3VLN3huWk5z?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Is the Elon Musk Neuralink-NBA social media post real?&nbsp;&nbsp;USA Today",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "‘Jesus-Level Technologies’—Elon Musk Promotes Neuralink’s Scientific ‘Miracles’ - ChurchLeaders",
-    "date": "2026-05-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMingFBVV95cUxNcWhHNktOTEsydGJoNkFWYTFZLUUySkdacGpOY0VZLW1jem1lRVl6WWx0SUlONWU0ajhLdVc5aHBkeml3bGEzOVo5NlZLOUdWNEhHdWVHVjJGRjd4MzlOdldTZE5kMElPZ2M5T3BGdVAtNWhqQXlseUhuREdRY3g3cGlsVG95OThlQlJHeHlJZWlwTlBBYXVXd19MbFJQZw?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "‘Jesus-Level Technologies’—Elon Musk Promotes Neuralink’s Scientific ‘Miracles’&nbsp;&nbsp;ChurchLeaders",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Elon Musk’s ‘Jesus-level miracles’ remark on Neuralink sparks row - WION",
-    "date": "2026-05-24",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirwFBVV95cUxPWS03dllLOWU5dVR4LU05cmxwMVQyTWQteXhrUXhkWVlSWVZpWUdfRExXdlppbEFyOE5kQkNPSm9laTQxUTc1QmZtcG94dUpXSFV2NWZtZ3ZPb19mUm1fS1hNNmtOWTIyVGx2anhWX1ZDUF9ORGhBSGRMTEt2Zk9sMVZnNVRQelFVckZyNXhrTjlHbFQ0LTNKVXp2YW9RWHVLbjFYMlNtWTZpaXBINEww0gG0AUFVX3lxTE8xSU84YTR3WE53Z0k5bUZ5ZFdJemg3NEVqQm0zcVFXWG1jQlFqR1lJLVB4Q0lZV2N6YUQ2dzNlZEl0Mkhnb1NNNWFzcUhWMUtQT2tFMFVXRy02cGxGUWxyU3M5V3FlUTd5dnFnOHBBQlB2NHUyY0ctdUdrdGM0NXh6c1JEemRiVlpBOVVGZUlwWlNjdXpfQzZhSVhzYTZVaEF6QnhSdTRIbDhqcDRKZlJfakhENA?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk’s ‘Jesus-level miracles’ remark on Neuralink sparks row&nbsp;&nbsp;WION",
     "category": "neurotechnology"
   },
   {
@@ -73,29 +100,20 @@
   },
   {
     "type": "external",
-    "title": "This app lets kids with disabilities use devices with their minds. Now anyone can download it - CBC",
-    "date": "2026-05-02",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxNOVFFN2NYU3VxTmlHV3lyb1hmaWFabV9OVzVaeXJfRWdWcUFYUHczWC1ESHh4aGZIOWZWOGxhaE1aa002OXB4dWpTbTBiZHJXV0Fob1NVRXRUWjQ0NWx5Um5PLVZveG5VYzgwYnd3MVI4VkdoVmR0Y1Bza3BFUjI2a0Y5UVl1NGE0S1kyTVg3dVlpdE5VT2NraEhjTkliZnVa?oc=5",
+    "title": "Symbiotic brain-machine drawing via visual brain-computer interfaces - Nature",
+    "date": "2026-05-04",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE9yT0lWaEIyMkd6cFdoVEZUUktzdmh0eWZ6cEE4Y01wYUN6YUJPVVQ2RXBheUlHaUFObnRXZW90aWE5ZDFHWDZ0UjRYeEV3ZElTV3lUYWRoMENVRW41dTFV?oc=5",
     "source": "Google News — BCI",
-    "summary": "This app lets kids with disabilities use devices with their minds. Now anyone can download it&nbsp;&nbsp;CBC",
+    "summary": "Symbiotic brain-machine drawing via visual brain-computer interfaces&nbsp;&nbsp;Nature",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Convicted former Harvard scientist rebuilds brain computer lab in China - Reuters",
-    "date": "2026-05-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxNYmExYzMxSXNMR1MzSXBvUy05Yk5PUGdUQmhTLWpqYVh2MHduaUNwdUJXdUlDdDZQOFpBUWhYVENTR2FlTnFsNGRyVm1OemUwSlFobGZIS2dkYk1Yc0hJY2stQUZLSXdYN3cwLTZFTldYX3JxUGZzb05qTjJRV0Q3NFFaalNkdXZVMXBlSGpxVmxVbkRvNWZrbVhNazZSUDktQ1FobzluQjZGa3ZNTElzS2dQcUJIaTA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Convicted former Harvard scientist rebuilds brain computer lab in China&nbsp;&nbsp;Reuters",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface - Business Wire",
-    "date": "2026-04-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAJBVV95cUxPUnZXem1VbEVFZmQ3YXZDYkJOQmZnVmZmWVNHTzFJLXRqX1NidTRoQmtlc1BBUlI1MWx2VU51N0dNZDNVb0Y1UFJfWmxsTjFnOTBMQjlqQVhYSmVkVG44SXZWcktoZXZCdG1aZkV1c0dRQTlWYzBtY3pyTTV2NWkxSWlHdF84d3NhYi1MU2V5Rmc2VjdBRWhLTm9FVUlJb0k5WlVWa1dFRUdlekFzTW9tOG50VXFPV3UtUWRsMlUweENGR0NKUmNublg4YlRiV09ZbW4tdk5sOGZFVVBMYWFEM0JWaFNBeDRRTjdTVXNjNzdfdXFUSXI2Wm1KMlZTYThLdnBBNGVLWWhnYUFT?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Axoft Secures $55M Series A to Advance Clinical Trials Globally for its Bio-Inspired, Implantable Brain-Computer Interface&nbsp;&nbsp;Business Wire",
+    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - Yahoo Finance",
+    "date": "2026-03-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxOZVlpbGd3b3AzZTdhc2ZVdmdGNUExenN2XzRwR1dBRHdkZE5iYm5iejJvMHBQOFJGRzF0bmZXWTY2cndUaUN6aWJhZVVURDQta1ptYy1HeWJQRTFGM3paSnlrc3lPbEJQTFgxRGVQZUMyNkd3N1pzanlzZDg2bVYxY2VmWEEtQXRsMTRNNVd3?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;Yahoo Finance",
     "category": "neurotechnology"
   },
   {
@@ -105,15 +123,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPS0YxUk82N2IzSE16bDNnQS1Ba1hzMmZZNklwZXd0ZFJ4aThsS0xLdC1OdE1CWHMxTWUtU1U0M3EwNWd6NU1vQUxiZGhnelBJbXQ2anRZY2l1a1hsazZlakdBRE1QblVjNFpYZ1BTZDVnRm4zYmNLNHVTVVFLcGNvbmlSMFEzMGktRmJVbldQU2U2RW8?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Brain-computer interface startup Science raises $230M&nbsp;&nbsp;SiliconANGLE",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
-    "date": "2026-01-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
