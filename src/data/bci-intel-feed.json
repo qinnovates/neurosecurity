@@ -1,5 +1,400 @@
 [
   {
+    "id": "b1ca6f31",
+    "title": "Olfactory learning potentiates long-range cortical GABAergic inputs onto adult-born neurons.",
+    "date": "2026-05-31",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]05[.]29[.]728424v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "Adult neurogenesis in the olfactory bulb (OB) contributes to structural and functional plasticity, influencing olfactory perception, learning, and memory. Adult-born granule cells (abGCs) exhibit uniq",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "2e719af3",
+    "title": "Children Read Intent in Human Eyes but Not in Robots",
+    "date": "2026-05-31",
+    "url": "hxxps://neurosciencenews[.]com/humanoid-robot-gaze-child-30790/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "While children as young as 3 years old read intentions and preferences in a human's eyes, they do not recognize this nonverbal communication in a humanoid robot's gaze.",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "3ddba6bc",
+    "title": "From network to needle: Integrating structural and functional connectivity for DBS",
+    "date": "2026-05-31",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26000963?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: July–August 2026Source: Brain Stimulation, Volume 19, Issue 4Author(s): M. Bot, A.W.G. Buijink, M. Beudel",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "6d7c444e",
+    "title": "Dose-response associations of total pulse dose and intersession interval with clinical outcomes in accelerated rTMS for major depressive episodes: A systematic review and meta-analysis",
+    "date": "2026-05-31",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26001063?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: July–August 2026Source: Brain Stimulation, Volume 19, Issue 4Author(s): Vincent Xi-Yu Wang, Dhvani D. Mehta, Jonathan Downar, Victor M. Tang, Cheng-Ta Li, Bernard Le Foll",
+    "tags": [
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "f66e45f3",
+    "title": "Vagal afferents gate cortical excitability in a kainate-induced mouse model of temporal lobe epilepsy",
+    "date": "2026-05-31",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26001105?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: July–August 2026Source: Brain Stimulation, Volume 19, Issue 4Author(s): Taichi Sayanagi, Kenzo Kosugi, Luisa Cassini Ascencao, Kaito Makino, Yuya Takabatake, Mariateresa Merante, Tak",
+    "tags": [
+      "partnership"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "9ca2977d",
+    "title": "Prefrontal tDCS modulates behavioural and neural signatures associated with consciousness",
+    "date": "2026-05-31",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926003307?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: 1 August 2026Source: NeuroImage, Volume 336Author(s): Aude Sangare, Esteban Munoz-Musat, Bertrand Hermann, Caroline Herault, Laouen Belloli, Manon Breton, Alaina Borden, Amina Ben Sa",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "a8833d92",
+    "title": "From categorization to quantification: Stage-dependent neural and behavioral mechanisms of facial emotion recognition",
+    "date": "2026-05-31",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926003265?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: 1 August 2026Source: NeuroImage, Volume 336Author(s): Wenbin Pan, Ran Zhou, Siying Li, Qi Chen, Junhua Dang, Hong Li",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "ff0af457",
+    "title": "Neural reorganization of dialect perception within a critical two-month window in infancy: A longitudinal fNIRS study",
+    "date": "2026-05-31",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926003216?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: 1 August 2026Source: NeuroImage, Volume 336Author(s): Nikola Paillereau, Sára Mádrová, Torsten Wüstenberg",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "934f6feb",
+    "title": "Event-related oscillations in human action observation: the roles of action types and EEG baselines",
+    "date": "2026-05-31",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926003319?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: 1 August 2026Source: NeuroImage, Volume 336Author(s): Samaneh S Dastgheib, Jürgen M Kaufmann, Stephan Moratti, Stefan R Schweinberger",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "2dbed2d7",
+    "title": "Emotion recognition based on the temporal patterns of electroencephalogram signals and electrodermal response signals using the TRANSFORMER network",
+    "date": "2026-05-31",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1835552",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "IntroductionEmotion recognition using physiological signals plays an important role in affective neuroscience and human-centered artificial intelligence. Current methods still face challenges in long-",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "cfc3ef26",
+    "title": "Key Chemistry Question Answered, No Quantum Computer Required",
+    "date": "2026-05-31",
+    "url": "hxxps://www[.]quantamagazine[.]org/key-chemistry-question-answered-no-quantum-computer-required-20260529/",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.quantamagazine.org/key-chemistry-question-answered-no-quantum-computer-required-20260529/ Comments URL: https://news.ycombinator.com/item?id=48347895 Points: 1 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "74604de6",
+    "title": "Creatine raise brain energy levels and slow Alzheimer's cognitive decline by 30%",
+    "date": "2026-05-31",
+    "url": "hxxps://thesciverse[.]org/scientists-found-that-the-creatine-supplement-millions-take-for-muscle-gains-is-quietly-raising-brain-energy-levels-and-slowing-early-alzheimers-cognitive-decline-by-30/",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://thesciverse.org/scientists-found-that-the-creatine-supplement-millions-take-for-muscle-gains-is-quietly-raising-brain-energy-levels-and-slowing-early-alzheimers-cognitive-decline-",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "8667cebf",
+    "title": "Radiation Device Placed in Brain Cuts Tumor Recurrence, Boosts Survival",
+    "date": "2026-05-31",
+    "url": "hxxps://www[.]wsj[.]com/health/healthcare/radiation-device-placed-in-brain-cuts-tumor-recurrence-boosts-survival-ae1966fd",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.wsj.com/health/healthcare/radiation-device-placed-in-brain-cuts-tumor-recurrence-boosts-survival-ae1966fd Comments URL: https://news.ycombinator.com/item?id=48345742 Points: 2",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "07e390d2",
+    "title": "Researchers teach brain cells to play 'Doom'",
+    "date": "2026-05-31",
+    "url": "hxxps://phys[.]org/news/2026-05-brain-cells-play-doom[.]html",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://phys.org/news/2026-05-brain-cells-play-doom.html Comments URL: https://news.ycombinator.com/item?id=48345679 Points: 2 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "3ed1032a",
+    "title": "Muxcard, a dyi credit card size computer",
+    "date": "2026-05-31",
+    "url": "hxxps://github[.]com/krauseler/muxcard",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://github.com/krauseler/muxcard Comments URL: https://news.ycombinator.com/item?id=48342399 Points: 4 # Comments: 1",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "61d2b61f",
+    "title": "Researchers Use Collagen Tiles to Stop Brain Cancer Recurrence",
+    "date": "2026-05-30",
+    "url": "hxxps://neurosciencenews[.]com/collagen-tiles-brain-cancer-30786/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Tile-based radiation therapy (TBRT) dramatically improves local tumor control over the current standard of care.",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "cd67eef5",
+    "title": "Caffeine reversed memory problems caused by sleep deprivation",
+    "date": "2026-05-30",
+    "url": "hxxps://www[.]sciencedaily[.]com/releases/2026/05/260529043654[.]htm",
+    "source": "ScienceDaily Neuro",
+    "source_category": "research",
+    "summary": "Scientists discovered that sleep deprivation damages a key brain circuit responsible for social memory, making it harder to recognize familiar individuals. In laboratory studies, caffeine restored com",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "72daa3ba",
+    "title": "A Biological Signature of Consciousness Found",
+    "date": "2026-05-29",
+    "url": "hxxps://neurosciencenews[.]com/thalamus-oscillation-consciousness-30787/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "By capturing these pristine intracranial signals, the study introduces an objective, measurable biomarker to optimize deep-brain therapies and revolutionize our clinical understanding of conscious sta",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "47bdcc12",
+    "title": "Localized Synergistic Nanofibers Could Eliminate Glioblastoma",
+    "date": "2026-05-28",
+    "url": "hxxps://neurosciencenews[.]com/nanomesh-synergistic-glioblastoma-treatment-30783/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study details a localized \"NanoMesh\" implant that delivers three synergistic drugs directly to the site of glioblastoma tumors.",
+    "tags": [
+      "product",
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "c29bf171",
+    "title": "Contraceptive Drug May Reverse Spinal Paralysis",
+    "date": "2026-05-28",
+    "url": "hxxps://neurosciencenews[.]com/organoids-lynestrenol-reverse-spinal-paralysis-30778/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study leverages 3D stem cell organoids to prove that previously \"irreversible\" central nervous system damage can, in fact, be reversed. By growing interconnected \"mini-brains\" and spinal cords i",
+    "tags": [
+      "research",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "ddb54658",
+    "title": "Distinct electrophysiological profiles of bacterial mechanosensitive channels for sonogenetic actuator selection",
+    "date": "2026-05-28",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae6f83",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Sonogenetics combines ultrasound stimulation with genetically encoded mechanosensitive (MS) ion channels for cell-targeted neuromodulation. Actuator choice, however, remains largely empiric",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "063773d0",
+    "title": "An online brain-computer interface for detecting incongruity in augmented reality applications",
+    "date": "2026-05-28",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae6ff1",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Augmented reality can provide digital information about physical entities presented within its real-world context. However, this information might disagree with the user’s expectations due ",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "bc5b78ec",
+    "title": "Physiology-aware latent shift adaptation for sEMG-based hand kinematics decoding across able-bodied and amputee populations",
+    "date": "2026-05-28",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae6ff2",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Decoding continuous hand kinematics from surface electromyography (sEMG) across able-bodied and amputee populations remains a significant challenge, as amputation induces systematic alterat",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "30178437",
+    "title": "Ear-Based Vagus Stimulation Boosts Brain Motor Zones",
+    "date": "2026-05-25",
+    "url": "hxxps://neurosciencenews[.]com/tavns-vagus-nerve-motor-cortex-20756/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Transcutaneous auricular vagus nerve stimulation (taVNS) directly pairs with and enhances the human motor system during active movement.",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "eaf6403b",
+    "title": "Across-speaker articulatory reconstruction from sensorimotor cortex for generalizable brain–computer interfaces",
+    "date": "2026-05-25",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae4cca",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Accurate reconstruction of articulatory features from brain activity could facilitate the development of speech brain–computer interfaces (BCIs) for communication in people with vocal tract",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "2cd0a7f9",
+    "title": "Adapting frozen foundation models for montage-agnostic high-resolution EEG event segmentation",
+    "date": "2026-05-25",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae6142",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Deploying brain–computer interfaces (BCIs) outside controlled laboratories requires detecting neural events in continuous electroencephalography (EEG) without relying on time-locked synchro",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "ce58cbea",
+    "title": "Vermont’s Neurological Rights Law Reshapes AI Privacy Standards - AI CERTs",
+    "date": "2026-05-25",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxONDQ2bWlVN2NLMHBaZnpHaUEwYVJEUXU0aVljUkotdEtxWm5pb0F4Y253Q0toVTMxcTVIY2ZrVDNDUUFDekd4cEZzNXRYSzZ0cGNqMVJNYkRZQWdIdFFLNVF2QjRWZngySUsteFFlY01paWxzamFxSTRBa2VWa2h1SG9LaFQtdmVETTE4bWwwdWRfWW0yNlE?oc=5",
+    "source": "GN: Neurorights",
+    "source_category": "policy",
+    "summary": "Vermont’s Neurological Rights Law Reshapes AI Privacy Standards&nbsp;&nbsp;AI CERTs",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "764521f5",
+    "title": "World Wearable EEG Headsets - Market Analysis, Forecast, Size, Trends and Insights - IndexBox",
+    "date": "2026-05-25",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivwFBVV95cUxQQ3paWXVPSUpZM0xpWkUxc0xUXzAzend3OTlpMUZCdFg5NzFockNvMk1NWGJ0WWVqZWVRUTBVMS1xTmRDZE1LN1FBVjF5RzBtVTlHM3FKSXhLblJFd2ZucWJzb0dDSW5fSXF3TmV6LVRXSEo0Z0lHeTBoRk9SYXNpMmlMNXI4ZmtTZFF6VklvRnR0NDlpSlRTdVNHNXFTb0pTaDRtUDIwWGljWjJXR2FlaDhtVjYwb0UzcVF2QXVwVQ?oc=5",
+    "source": "GN: Consumer EEG",
+    "source_category": "product",
+    "summary": "World Wearable EEG Headsets - Market Analysis, Forecast, Size, Trends and Insights&nbsp;&nbsp;IndexBox",
+    "tags": [
+      "product",
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
     "id": "6e50c80a",
     "title": "System Boosts Speech Volume Based on Brain Signal",
     "date": "2026-05-24",
@@ -1341,6 +1736,20 @@
     "fetched": "2026-05-10"
   },
   {
+    "id": "0030c6bb",
+    "title": "Pentagon’s Alleged “Mind Control” Program - Modern Diplomacy",
+    "date": "2026-05-04",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMigwFBVV95cUxPbnJlYXpUYURlQUVqMUV5UndqdXh1YWxfdG5fRlBoS0pSam1EaUZCX0U3c1NnSXhlTGlYaHlzSHozMTVaNGtnWXpqUEpjTmpiTkU4R3gxTmw2aGpuUkE1QzgtNFotbnFFbjlvaEhyNkdiT2tlRjMxQlBSdVE1cWlBb1RuRQ?oc=5",
+    "source": "GN: Gov Funding Neuro",
+    "source_category": "funding",
+    "summary": "Pentagon’s Alleged “Mind Control” Program&nbsp;&nbsp;Modern Diplomacy",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
     "id": "5fdd9f16",
     "title": "Pinch restoration in post-stroke hemiplegia rehabilitation: A case report of motor task-synchronized precision repetitive transcranial magnetic stimulation",
     "date": "2026-05-03",
@@ -1821,6 +2230,38 @@
     "fetched": "2026-05-10"
   },
   {
+    "id": "cfa3f633",
+    "title": "BCI startup Neurable looks to license its ‘mind-reading’ tech for consumer wearables - Yahoo Finance",
+    "date": "2026-04-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxNZVp4TGpkOEtMOGxzQ0l2SDZKdGY3aHg2eWptLUg2dHY4T1RfellVcktnUHY4ZGU3eHAyTlpoRUNta3E4S1AwMEdOMHdrbXlFQS1HcmNOYUdNOGhrQl90N2dJbktmUTFRZm9rYjMxYS02MUhsaGh1dVNNQ3FFa191SmZsX3pzWU5xYjMwdVBNVTVUeWZFX2J4U0NvOXlPT0JjR2pETV93?oc=5",
+    "source": "GN: Consumer EEG",
+    "source_category": "product",
+    "summary": "BCI startup Neurable looks to license its ‘mind-reading’ tech for consumer wearables&nbsp;&nbsp;Yahoo Finance",
+    "tags": [
+      "product"
+    ],
+    "companies": [
+      "Neurable"
+    ],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "05082e46",
+    "title": "Brain-Computer Interface Stocks: 14 Supply Chain Plays Before the Neuralink IPO - MarketWise",
+    "date": "2026-04-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilwFBVV95cUxOY0xPVVNRNzlFVk5kYzhJUUhCQjRISUtDMWN1U3BMeUhWQnRkd29nUmFhYmdwSkFjU1VrOWtVSUQ3b3c5Y1lwdTJpYXdONk9uOEdIQjFvV3lodFFieWpnQ05WLUVoejRUWC10aHUtbXE3REdfMjYzR0ZPNDlVbVllZU9rLWc4Rjh0OFowWGZSMFdSU2NGektJ?oc=5",
+    "source": "GN: Neurotech M&A",
+    "source_category": "funding",
+    "summary": "Brain-Computer Interface Stocks: 14 Supply Chain Plays Before the Neuralink IPO&nbsp;&nbsp;MarketWise",
+    "tags": [
+      "funding"
+    ],
+    "companies": [
+      "Neuralink"
+    ],
+    "fetched": "2026-05-31"
+  },
+  {
     "id": "6a52d920",
     "title": "Exclusive: Goldman Sachs Leads $60M Series C For Personal Loan Fintech Kashable",
     "date": "2026-04-27",
@@ -1895,6 +2336,23 @@
     ],
     "companies": [],
     "fetched": "2026-05-17"
+  },
+  {
+    "id": "58bda225",
+    "title": "Motif Neurotech wins FDA IDE to evaluate brain implant for treating depression - MassDevice",
+    "date": "2026-04-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMidEFVX3lxTE5zOGpCQ0Y2ZWJtWWNvNURXbldMVUxHOUlBb3podGNSQ000X3lrTGh1OV9jbkZoRmFrUzhsUmU4UVYtNDd6aFQzODNWNzljTnZWWGVXRDh6X2VXTW9ic0JTRTRUc2NNcFA5cFpOUlFlZXhhMC0x?oc=5",
+    "source": "GN: BCI FDA",
+    "source_category": "regulatory",
+    "summary": "Motif Neurotech wins FDA IDE to evaluate brain implant for treating depression&nbsp;&nbsp;MassDevice",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [
+      "Motif Neurotech"
+    ],
+    "fetched": "2026-05-31"
   },
   {
     "id": "301be27a",
@@ -2413,6 +2871,21 @@
     "fetched": "2026-04-19"
   },
   {
+    "id": "5a7029ac",
+    "title": "Binaural Beat Stimulation for Cognitive and Psychological Enhancement in Alzheimer’s Disease: A Pilot Study",
+    "date": "2026-04-17",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11483227",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Alzheimer’s disease (AD) is a progressive neurodegenerative disorder that impairs cognitive and psychological performance and adversely impacts daily routines and activities. We hypothesized that Bina",
+    "tags": [
+      "research",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
     "id": "6f87cfed",
     "title": "Exclusive: Repeat Founders Raise $20M For Spektr, A Fintech Compliance Startup, In NEA-Led Series A",
     "date": "2026-04-16",
@@ -2774,6 +3247,48 @@
     "fetched": "2026-05-24"
   },
   {
+    "id": "be17a718",
+    "title": "Cortical and Kinematic Correlates of Feedback-Based Head Stabilization During Treadmill Walking",
+    "date": "2026-04-13",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11480220",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Human motor control relies on the integration of sensory information to ensure stable and efficient movement. Augmented feedback (aFB) provides external cues that can enhance movement execution, yet l",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "342afab8",
+    "title": "Feedback-Related Dynamics of Hierarchical Error Processing in Goal-Directed Action",
+    "date": "2026-04-13",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11480901",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "The performance monitoring system is essential for adaptive behavior and the development of brain-machine interfaces that utilize neural feedback signals. The posterior medial frontal cortex generates",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
+    "id": "e5b018af",
+    "title": "Ultra-High Frequency-Low Intensity Magnetic Stimulation Enhances Functional Recovery in a Rat Model for Chronic Capsule Infarct",
+    "date": "2026-04-13",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11480907",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Stroke causes motor and cognitive impairments. Neural stimulation techniques such as repetitive transcranial magnetic stimulation (rTMS) and transcranial direct current stimulation (tDCS) has shown pr",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
     "id": "ac314e3a",
     "title": "Auricular unified regulation of regions and afferents (AURORA): a multi-afferent auricular neuromodulation framework for depression",
     "date": "2026-04-12",
@@ -2871,6 +3386,20 @@
     ],
     "companies": [],
     "fetched": "2026-04-12"
+  },
+  {
+    "id": "8a4153ee",
+    "title": "Neurotechnology and the Transformation of War’s Human Domain - Small Wars Journal",
+    "date": "2026-04-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiogFBVV95cUxQQWtWTnJPaWpqWC1Tdkk2ZDdqbjlJekFpYTZkWjFob3hpQnBGV01HbjQ1RS02MUliZWJjU0U2eWxFaE9KS1E3N2NCYm9BMUZyU1pYYWx4MDNYR1J1U09SeFM3VVBmN1BJejVLN2REdmFpV2x6QzB4N18xclhYR2djMWM3eWNkSERzdWhDUkJ4aGVXb3plekJXcjNMR0J3NkRsQWc?oc=5",
+    "source": "GN: Neurorights",
+    "source_category": "policy",
+    "summary": "Neurotechnology and the Transformation of War’s Human Domain&nbsp;&nbsp;Small Wars Journal",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
   },
   {
     "id": "ad1722d1",
@@ -7282,6 +7811,20 @@
     "fetched": "2026-04-05"
   },
   {
+    "id": "2c536c51",
+    "title": "Nita Farahany Wants to Protect Our Brain Data - Duke Today",
+    "date": "2026-01-23",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMifkFVX3lxTFBNcVhab3JwbTR2VmdVNlBCUkwwMl9mRzltTDBNZVlKNi1ycWVnVFpHYmlrN09LNkkteUcyTkgtejBjN2Y3c0JNbElPXzlJSmhDMkhUelRmdV9ZVHNac3BZXzIzZTVnTERLTnJzdjdHcmVxTTlmX0YxNHZWeHJjZw?oc=5",
+    "source": "GN: Neurorights",
+    "source_category": "policy",
+    "summary": "Nita Farahany Wants to Protect Our Brain Data&nbsp;&nbsp;Duke Today",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
+  },
+  {
     "id": "5e7f0548",
     "title": "The FDA Raised the Bar on MedTech Cybersecurity: Are Companies Ready? - MedTech Intelligence",
     "date": "2026-01-20",
@@ -8363,6 +8906,21 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "62982ddd",
+    "title": "Vielight Awarded Patent for Photobiomodulation-Based Vagus Nerve Stimulation Device - Medical Product Outsourcing",
+    "date": "2025-10-21",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivwFBVV95cUxPTS03WldtVTBFekxrdkdxSUtmQjcyb3NTX281d3FrOFUzTlFfQ0RBRHJsRVhJcXhEampDTDZPOGdLTTdvOXhRanZHaFMtelZfLVY5bzVkYmh3d0MyVm44U1QxY0J6dDRHNXI0Z3c5Q0wwNFZpYm5QN0JDbUxORE8xY1ZWOXdCSF9pTllwVEc0ekZjam05c3U0bHJkeFVFT3NYdmJRUnJKd3lLOWlTUGhOVGtOckxDWDk4ZkVOT3NsOA?oc=5",
+    "source": "GN: Neurotech Patents",
+    "source_category": "product",
+    "summary": "Vielight Awarded Patent for Photobiomodulation-Based Vagus Nerve Stimulation Device&nbsp;&nbsp;Medical Product Outsourcing",
+    "tags": [
+      "product",
+      "patent"
+    ],
+    "companies": [],
+    "fetched": "2026-05-31"
   },
   {
     "id": "20d0b814",
