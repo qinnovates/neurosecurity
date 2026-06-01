@@ -1,6 +1,60 @@
 [
   {
     "type": "external",
+    "title": "Florida sues OpenAI, Sam Altman, in first-of-its-kind lawsuit over violent incidents",
+    "date": "2026-06-01",
+    "url": "hxxps://techcrunch[.]com/2026/06/01/florida-sues-openai-sam-altman-in-first-of-its-kind-lawsuit-over-violent-incidents/",
+    "source": "TechCrunch",
+    "summary": "The lawsuit partially revolves around a shooting at Florida State University last year, and ChatGPT's alleged role in the incident.",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "The Download: China&#8217;s brain implant ambitions",
+    "date": "2026-06-01",
+    "url": "hxxps://www[.]technologyreview[.]com/2026/06/01/1138207/the-download-china-bci-brain-implant-nvidia-ai-chips-laptops/",
+    "source": "MIT Technology Review",
+    "summary": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. China has approved the world’s first invasive brai",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "China has approved the world’s first invasive brain-computer chip—here’s what’s next",
+    "date": "2026-06-01",
+    "url": "hxxps://www[.]technologyreview[.]com/2026/06/01/1138133/china-world-first-brain-chip/",
+    "source": "MIT Technology Review",
+    "summary": "One day last October, sitting in the courtyard of his house in China’s Henan province, Dong Hui decided to see if he could hold a pen to write.&#160; Dong, 39, had sustained spinal cord injuries in a ",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "China has approved the world’s first invasive brain-computer chip—here’s what’s next - MIT Technology Review",
+    "date": "2026-06-01",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxQM2FuRkthYlMxeHROLVZfWGotRUNla3B2OWlMbzJyR0thQmNfNjd0SjF2NVZWRGFmNG0zZHF1NzFTYmtyVW9PLW9EbW13ZUp2bm04YzFVLVZOR1lZSlowUERrN0RGSU5SMnlMS1JnTXo4eGcya2FfTzBLWjd2WWhQbVdWeVN1VWk10gGOAUFVX3lxTE1FSUpJX2EyRElaMk5NZW9hZEhRSzdlS1U1eUM4TDFuZnh6YXBFTUlfQUx1aTNPV0dTaGo1TzhkNTFPVzlKOXQtSW1Lc3ZUS2tiWGFCMFFFQUlmYjRpZTBJVTNLTURYb1VFcllpYjBSbjNaU09zdzZmWVJMUEd3NEZINnkyb1UzQW1yYjNoS0E?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China has approved the world’s first invasive brain-computer chip—here’s what’s next&nbsp;&nbsp;MIT Technology Review",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Wearable headband combines AI and mindfulness to alleviate car sickness - Advanced Science News",
+    "date": "2026-06-01",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxNRkFhV25KLXFQVjY4LVM4RXpENlFBSGQzOEJQQjBLdEFuNmE5ZldITXRxczJpQ052eVdabnJxOTJhblJtUnQ5bVhTclQtb2tyd1p4N19NMHo3Ql8xTEF6d0VLUUFiVlQ3bHFiTVZnNmpTcFctdHRDYllHcTZ4c0pfdFhiR2d5eTZqcllFbnhRVHg5b1lT?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Wearable headband combines AI and mindfulness to alleviate car sickness&nbsp;&nbsp;Advanced Science News",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Musk’s Neuralink Brain Implant Company Hires Federal Lobbyists - Bloomberg Government News",
+    "date": "2026-06-01",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirgFBVV95cUxPQTdOR3g1X0ZJcVZzenVPbDZNaHJKUnpZWnlvQ2IzcEU3MWhfSFc0ck1VbU1tZmw0RFdHY0lRNVZFUjVYcFV3bUVSaTlCcVlFTmZ5dWdRcnZ6MkJabzMtaEhSQkN6V3VYUFlvTldGcUFvZEVxelJKMUpJZjFuRURRMnpOVjBGTW5CS3VSR00xamdoOTkzSURqNFdUdEJ5SzhmWUJZOXQtaDBpa2ZwZlE?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Musk’s Neuralink Brain Implant Company Hires Federal Lobbyists&nbsp;&nbsp;Bloomberg Government News",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "This NYC Startup Is Implanting More Brain Chips Than Neuralink - cheddar.com",
     "date": "2026-05-29",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMimAFBVV95cUxNbktQOHg2WmdSSHR2Nkx5OXE3SzdraVNVN2E3LUNmOWtVa3NCczY4TTM0U0JaUndQaWd5UWVwc3pxWGRkZjdQR1ZLVkE5eklRNmp2UzZkRGkwbXdFOHZvdENOaHAyNkZzd1hpM2VQNFRxY0tQS1VwVl9UOHBraTRhUEpCRG4zV1l2TlNPNjhWcWpVRVFRV2Zqaw?oc=5",
@@ -19,15 +73,6 @@
   },
   {
     "type": "external",
-    "title": "Is the Elon Musk Neuralink-NBA social media post real? - USA Today",
-    "date": "2026-05-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiuwFBVV95cUxNX2E0Mkt0MlNZXzdVS2haVUh6OGxYZFp4Rk9HTnI3UW5zWkJYR0dqcldZc1NIem5rRGlnUW5KQ05CaFZqMmNTYURBNEJyNEtrajhaUElvZWZ4dThaVEtVTXQ4TmZXT2dSX1AteU43RGNaZnA2VnRyWTR5R0k5al9XZUtFajRfdGxVd2xQT3JydERJaV81TjFUU3VnWWx6dDNqbjZ5VElpZElYY2VOVkMzN0ZMX3VLN3huWk5z?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Is the Elon Musk Neuralink-NBA social media post real?&nbsp;&nbsp;USA Today",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "System Boosts Speech Volume Based on Brain Signals",
     "date": "2026-05-24",
     "url": "hxxps://spectrum[.]ieee[.]org/eeg-hearing-aid-volume-control",
@@ -42,15 +87,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxPQXdyWDJjSkItLVEteVNNbjNORmgtaDhhbjgzQWY5RjFQREVUR0phWTBXbzBoTUtQdXN1NUJzRjZFd05RM2VVT1pUdkdkVXhtS0hzVG1LTkZLU29Id3BmcFlyejkyRDduSVdOa3pkQlJYZm9mcnlpbEpjWmtQaml4c1NHbHZscFg3cU9VZDZocnRRWjY5QVZlSG1PaG92cGlQenMyaG1wbjZ0ZmJwNE5QZA?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Elon Musk's Neuralink reveals new robotic system for BCI brain implant surgeries&nbsp;&nbsp;MobiHealthNews",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Symbiotic brain-machine drawing via visual brain-computer interfaces - Nature",
-    "date": "2026-05-04",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE9yT0lWaEIyMkd6cFdoVEZUUktzdmh0eWZ6cEE4Y01wYUN6YUJPVVQ2RXBheUlHaUFObnRXZW90aWE5ZDFHWDZ0UjRYeEV3ZElTV3lUYWRoMENVRW41dTFV?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Symbiotic brain-machine drawing via visual brain-computer interfaces&nbsp;&nbsp;Nature",
     "category": "neurotechnology"
   },
   {
@@ -82,29 +118,11 @@
   },
   {
     "type": "external",
-    "title": "Brain computer interface enables rapid communication for two people with paralysis - Brown University",
-    "date": "2026-03-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMidkFVX3lxTE1JbG4tdF9kdUs0TW9lUldXOHhPdjB5bEItOXgwNzFZaUUyY29TRjJDQ2NlQTJ6UWdhZk5xbVlfaFpvUGJuN0xpVTZjRjdSZUNQeDJ1UDZkbmYtb3pvWng1Z2xoYU5pb0tYekpPWnY3WV9BR21SbGc?oc=5",
+    "title": "Daily briefing: China approves world-first brain–computer interface device - Nature",
+    "date": "2026-03-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTFA2MW5FT3B0RGRUR01pUm5mU0ZzQW1xS2tVbGpHcVQ0SU1FVnF2SXEwdHBTLXJ0ZGVlMXZfRXFpN1U4ZklvZm56YXpGZjNfSllLbmZ2d2I0cWtsTkFnMHBr?oc=5",
     "source": "Google News — BCI",
-    "summary": "Brain computer interface enables rapid communication for two people with paralysis&nbsp;&nbsp;Brown University",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain Computer Interface Enables Rapid Communication for Two People with Paralysis - Mass General Brigham",
-    "date": "2026-03-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi2AFBVV95cUxObjlkNWktN3FZLVdmbU9HcGs4UWJHYTFRSjlWb1pQd2F2anFNZGFFQXNfb254UUdqaGlWOFRTY2FMSXFJZXpSNm5fS0lqQl9sblFYdktnLWdxbjhfMXJQOXljNFNRdTMtc3lhYVBHb0ZHeC1hS0gyTXE4VEd5WWdCa3hVV0xfSG1ucHEwLThRdWpBYm81bmpnS1JmdDR5Q1V6TVd4WGtuR1p1MUNSaW5SbDZkSm1Uc0tJWC1rNjV0cndiZ3J1WDBzQnFGeHY0bGZqY2ZaNU5peUY?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain Computer Interface Enables Rapid Communication for Two People with Paralysis&nbsp;&nbsp;Mass General Brigham",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Chinese brain interface startup Gestala raises $21M just two months after launch - TechCrunch",
-    "date": "2026-03-11",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxOX2Jtd3dNTy13MzNlOUpQRVlFN0RaLUYxMFd4VzJYZnR3TzFtRlFOa21PaWM5NzZiX1NTUGMxZkk1OTZmcG0xRDhhejYwOUM0RHFMYlZCQ1RZNEczQjR4Z1VZbEp3czA3bzB1UE1sYUNuS3o0dmdvazN4MmVtUTRqNTNDeHdvSnZrT0M4c3RUUVg2am5pa25FQ2ZSX2VBdVpaVHFRZmZXUnpRLUJwR1pObw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Chinese brain interface startup Gestala raises $21M just two months after launch&nbsp;&nbsp;TechCrunch",
+    "summary": "Daily briefing: China approves world-first brain–computer interface device&nbsp;&nbsp;Nature",
     "category": "neurotechnology"
   },
   {
@@ -132,6 +150,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Two Years of Telepathy&nbsp;&nbsp;Neuralink",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
+    "date": "2026-01-15",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
     "category": "neurotechnology"
   },
   {
