@@ -1,48 +1,39 @@
 [
   {
     "type": "external",
-    "title": "Helion, the Sam Altman-backed fusion startup, raises $465M to build a power plant for Microsoft",
-    "date": "2026-06-04",
-    "url": "hxxps://techcrunch[.]com/2026/06/04/helion-the-sam-altman-backed-fusion-startup-raises-465m-to-build-a-power-plant-for-microsoft/",
-    "source": "TechCrunch",
-    "summary": "Fusion startup Helion is racing to complete a power plant for Microsoft by 2028. A fresh infusion of cash should help with that.",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China has turned brain implants into a commercial medical race - Startup Fortune",
-    "date": "2026-06-04",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxPRlplckJzUUF3MTVsYk1iX1I4ZHdoNXFacWtNWmc1NnhLWVdYeFRRTmd1aUhlLVE0U1BKWl9uMlk2NDV5TzBGZW5yV1laVG1PU281TjdIZG92SDhFRUR4dV9qRXVHa3V2MEMwZmdLSEU2QkRXU2pMNjh6TXdOUXFiQmxzdDZfTU81bEV3Z0FKMjduR0Rp?oc=5",
+    "title": "Murat Günel Named Medical Director for Brain-Computer Interfaces at Science Corporation - Medical Product Outsourcing",
+    "date": "2026-06-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixAFBVV95cUxOLWNGTWJBMU53cVIwRFVOSjdjVGZHcUx6WkI3RWdNdURvb3M0S2tFZVlwWDVJc0tXWmVXWi1uRWVLbC1YZmRtR2lRenRreFlPQXp4VDBqSHpjZXJzLUEyRGl0Q25UbXFGbWRZcTZ6ZjR0a01yenh1RUlKY0ZzR1NwbkQwQ2xHLUNGQ2t0TXkwTEctV2FGSW14MDl0VWg1ZkwxR19UVS1PR0xaVnktdC1sV1dQcGtZRkJqaFVmTmwtb2pVdDAt?oc=5",
     "source": "Google News — BCI",
-    "summary": "China has turned brain implants into a commercial medical race&nbsp;&nbsp;Startup Fortune",
+    "summary": "Murat Günel Named Medical Director for Brain-Computer Interfaces at Science Corporation&nbsp;&nbsp;Medical Product Outsourcing",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Brain-Computer Interface: Can Startups in All Its Subfields Secure Funding This Year? - 36Kr",
+    "title": "Brain-Computer Interfaces (BCIs) & Neurotechnology: The Next Frontier in Electronics Engineering - ELE Times",
+    "date": "2026-06-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitgFBVV95cUxNa2I3a2h2dFhUOU82UU0xLXFZS3BXT3pKUHRUY3JWaWVFR2RKemdhSGZHblJzUFVhQkFMRXNMMl85YmQxWDk5VEF5N1JjN2dBcWVoQVZYMUxNOHU2V0pFNTJHZ05FZFVqVWZmNFdkZFM3Z1Q3Sm1kUS0wY2lwaDBjSkRxc0hqdGFkd1lFZ21EclMwWGhFMnAwQ1VvTjhUQnBHbHBDY2k0WVF3ZDNpLUsyazc1Rmtadw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain-Computer Interfaces (BCIs) & Neurotechnology: The Next Frontier in Electronics Engineering&nbsp;&nbsp;ELE Times",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Cross-scale spatially-aware generative modeling of transcriptomic programs underlying neurodegenerative brain organization",
+    "date": "2026-06-05",
+    "url": "hxxps://arxiv[.]org/abs/2606[.]05870",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2606.05870v1 Announce Type: new Abstract: Neurodegenerative disorders such as Alzheimer's disease exhibit highly organized patterns of regional brain vulnerability, yet the biological mechanisms",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Brain-Computer Interface: Can Startups in All Its Subfields Secure Funding This Year? - 36 Kr",
     "date": "2026-06-04",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTFBWbURXaHE0UHpEd0tuSTE3QVNvWHZmMm5kQnc1R1NpX1Y1dGpSZWtUczBkNE1WUjhzcVNjbWtyalVVSWtTc3p0UXpIZGdGYU5palRB?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-Computer Interface: Can Startups in All Its Subfields Secure Funding This Year?&nbsp;&nbsp;36Kr",
+    "source": "Google News — Neural Startups",
+    "summary": "Brain-Computer Interface: Can Startups in All Its Subfields Secure Funding This Year?&nbsp;&nbsp;36 Kr",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Elon Musk: I am confident that Neuralink will restore hearing one day, just as we will restore eyesight w - The Times of India",
-    "date": "2026-06-04",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwJBVV95cUxQaDljOG04SW9BMGtFR0xCWGRZOWtMdVNOUmxzazJEVzBqVzE1VmZFQlA2XzZQTVdiaVZWNEVDbXdsa01FLUJYWUQ4WFQ0MG01cWh2ZzB5QVNjNmo2R2ZQRzFHbXN3SVZwLWZ4ekJuYkEzeGdmVVlvbkRkWTZhOThxamQ5VHZMTlpDUlpVeDV4b2FxeGs3LVdOaVpBdm5ObURHaXlrUktXM3VSY2k0MTZhREtndUhCWUFISEtBVi1Pc1M5ajRlNzZiU2U0d2Q2VUIxa1lCZHJETEtqVkRSNlU1RkFiUFBzWDd0Q0tGbVdRSzFqVWNRR2xDT1g0NTdtb1VLN3dCbUlnNHRTbUdDdTZNLXkyTkU3NjV5YXBjSmFuc9IBpAJBVV95cUxPOGFXVGI3aE5PMUE5UXVRa0Z4cktmQjBYSXYyYWZMQzhvRWVCanpETVFkdDA1VXdYVFc4S01MYkl2YXpTaEl6NlVNUXJUSlc5UWsyckdjSXZDSHkzMGlfRDRUQ0M1Y0hKRGo5eDc4cHdERWlEbTBNQXhXMGcxNC1RSkVFblhUVWVyOWpLV3FlQXk0cXZGaW5ZV1V0QXNxajhmNXB5Z2lkTXdZUFR5d055X2ExSjVOZmMzOUhoQTZDRmJzVXhlTEE0eTRacVFNbUhISTAzY052WjN0dkVOeWlJaTRoOURLeEtpaEFmb2hsbEtrdkN6eE1JSS1rRzJlaXFKcWpZUFFfdmZvdTFtcmYwYm50YVZHLVBMTVM3RUZwVXBoOWc2?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk: I am confident that Neuralink will restore hearing one day, just as we will restore eyesight w&nbsp;&nbsp;The Times of India",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Discrete signaling mediates chaotic regularization in recurrent neural networks",
-    "date": "2026-06-04",
-    "url": "hxxps://arxiv[.]org/abs/2606[.]04426",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2606.04426v1 Announce Type: new Abstract: Cortical circuits operate in a regime of intrinsic chaos, where even tiny changes in input can lead to divergent neural responses. Yet, remarkably, popu",
-    "category": "research"
   },
   {
     "type": "external",
@@ -69,15 +60,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxQM2FuRkthYlMxeHROLVZfWGotRUNla3B2OWlMbzJyR0thQmNfNjd0SjF2NVZWRGFmNG0zZHF1NzFTYmtyVW9PLW9EbW13ZUp2bm04YzFVLVZOR1lZSlowUERrN0RGSU5SMnlMS1JnTXo4eGcya2FfTzBLWjd2WWhQbVdWeVN1VWk10gGOAUFVX3lxTE1FSUpJX2EyRElaMk5NZW9hZEhRSzdlS1U1eUM4TDFuZnh6YXBFTUlfQUx1aTNPV0dTaGo1TzhkNTFPVzlKOXQtSW1Lc3ZUS2tiWGFCMFFFQUlmYjRpZTBJVTNLTURYb1VFcllpYjBSbjNaU09zdzZmWVJMUEd3NEZINnkyb1UzQW1yYjNoS0E?oc=5",
     "source": "Google News — BCI",
     "summary": "China has approved the world’s first invasive brain-computer chip—here’s what’s next&nbsp;&nbsp;MIT Technology Review",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Musk’s Neuralink Brain Implant Company Hires Federal Lobbyists - Bloomberg Government News",
-    "date": "2026-06-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirgFBVV95cUxPQTdOR3g1X0ZJcVZzenVPbDZNaHJKUnpZWnlvQ2IzcEU3MWhfSFc0ck1VbU1tZmw0RFdHY0lRNVZFUjVYcFV3bUVSaTlCcVlFTmZ5dWdRcnZ6MkJabzMtaEhSQkN6V3VYUFlvTldGcUFvZEVxelJKMUpJZjFuRURRMnpOVjBGTW5CS3VSR00xamdoOTkzSURqNFdUdEJ5SzhmWUJZOXQtaDBpa2ZwZlE?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Musk’s Neuralink Brain Implant Company Hires Federal Lobbyists&nbsp;&nbsp;Bloomberg Government News",
     "category": "neurotechnology"
   },
   {
@@ -109,6 +91,15 @@
   },
   {
     "type": "external",
+    "title": "Elon Musk compares his company’s work to that of Jesus - MarketWatch",
+    "date": "2026-05-18",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxQZUhMMEp3akhPMEZvUmNtYVRXTjkwb3Y0T3pGZmtsbl9uNVo3aTk4ODNmYkRSYVFaWW85TWVpQmVsQjNBUzFtTUJPTk9tcmdKMFlrVWhTWVZVNUw4UjNxUFNxUUxQLTd4RUhuSXRkTl9vYVkzYTFNRXBGWTdHR2NVVFQ4NFh4cmtDT05zR05FUkdmRnlCR09vZzJtS2g?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk compares his company’s work to that of Jesus&nbsp;&nbsp;MarketWatch",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Symbiotic brain-machine drawing via visual brain-computer interfaces - Nature",
     "date": "2026-05-04",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE9yT0lWaEIyMkd6cFdoVEZUUktzdmh0eWZ6cEE4Y01wYUN6YUJPVVQ2RXBheUlHaUFObnRXZW90aWE5ZDFHWDZ0UjRYeEV3ZElTV3lUYWRoMENVRW41dTFV?oc=5",
@@ -123,6 +114,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPS0YxUk82N2IzSE16bDNnQS1Ba1hzMmZZNklwZXd0ZFJ4aThsS0xLdC1OdE1CWHMxTWUtU1U0M3EwNWd6NU1vQUxiZGhnelBJbXQ2anRZY2l1a1hsazZlakdBRE1QblVjNFpYZ1BTZDVnRm4zYmNLNHVTVVFLcGNvbmlSMFEzMGktRmJVbldQU2U2RW8?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Brain-computer interface startup Science raises $230M&nbsp;&nbsp;SiliconANGLE",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
+    "date": "2026-01-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
@@ -145,11 +145,11 @@
   },
   {
     "type": "external",
-    "title": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs - TechCrunch",
-    "date": "2026-01-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxOLXhFQXhxUHRoRHJJLVRERVpoaGtHdkp5TTB2VFFRU29LU1ZZVmZRalpaTUlNVk9PNTl3WkN0cHJKYXd4VUVfcWRDZTlkdmh2ZktWYkJjM3ZlTTMtTFZXaHhCek9zbzVQbmxTTVBvQ2Yzb192MHJKS1dmd1VkYmM0SkNwUmRneklOQUN5dTRJX3hTcHJCTHZUZGdvVEQ5RUpxUS1wa21QVXc0cFZp?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "OpenAI invests in Sam Altman’s brain computer interface startup Merge Labs&nbsp;&nbsp;TechCrunch",
+    "title": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI? - statnews.com",
+    "date": "2026-01-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxQcElIalZIUTRGZDhtbmdvcEEzWVJVaEpwM3NZYk42bjNtcnp5eHFsdzhKak93aHhwU2VVRHpDclFBbDZ4d3hOZ0lRaWxsVmVza0lWWS04RHhES1hqV0R5UzBZcFpEZU82RHUwNldhN0F4TkZPSFo3d1ZlZG9qRHBWYmRpLURxdVBRcWxQVHhlSGtUUzZpNmpBQy1xYnFaOEhiR2xsS1Jn?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "What does Neuralink want — to help people with paralysis, or prepare for a war with AI?&nbsp;&nbsp;statnews.com",
     "category": "neurotechnology"
   },
   {
