@@ -1,5 +1,466 @@
 [
   {
+    "id": "6850d50b",
+    "title": "Connectional neuroanatomy of U-fibers in the rhesus monkey brain",
+    "date": "2026-06-07",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]06[.]06[.]730597v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "The superficial white matter (SWM), the region of white matter immediately beneath the gray matter-white matter (GM-WM) border, contains short cortico-cortical association fibers that interconnect nei",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "f8f7ae1a",
+    "title": "Thalamic Nuclei Differentially Coordinate Propagation of Cortical Slow Oscillations",
+    "date": "2026-06-07",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]06[.]05[.]730542v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "Sleep slow oscillations (SOs) vary in the spatial extent of their cortical propagation, ranging from widespread Global events to spatially restricted Frontal events. These distinctions could have func",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "0621e9ea",
+    "title": "Cortical folding patterns are encoded in the geometry of the unfolded neocortex.",
+    "date": "2026-06-07",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]06[.]05[.]730475v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "Cortical folding patterns are conserved across individuals of gyrencephalic species and are closely related to cytoarchitectural organisation, connectivity, and function. Early morphogen gradients hav",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "a8c1e948",
+    "title": "EEG biomarkers of accelerated prolonged intermittent theta-burst stimulation in depression: Machine learning with a minimal-electrode montage",
+    "date": "2026-06-07",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26001129?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: July–August 2026Source: Brain Stimulation, Volume 19, Issue 4Author(s): Chun-Hung Chang, Alexander T. Sack, Che-Sheng Chu, Hsin-An Chang",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "73797da6",
+    "title": "Cerebellar rTMS ameliorates cognitive impairment in Alzheimer's disease: A randomized trial",
+    "date": "2026-06-07",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26001154?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: July–August 2026Source: Brain Stimulation, Volume 19, Issue 4Author(s): Duohao Wang, Jiaxuan Fan, Tingting Wang, Fanyu Tang, Qun Yao, Xing Ye, Xinyang Qi, Minjie Tian, Xingjian Lin, ",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "f89abcae",
+    "title": "Decoding the behavioral responses after online social evaluation using EEG-based multivariate pattern analysis",
+    "date": "2026-06-07",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926003423?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: 15 August 2026Source: NeuroImage, Volume 337Author(s): Yujie Zhang, Xukai Zhang, Hong Li",
+    "tags": [
+      "funding",
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "e70ef029",
+    "title": "Mirrored structural symmetry index (VMSSI): a novel approach for diagnosing MR-negative focal cortical dysplasia using structural MRI",
+    "date": "2026-06-07",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1780677",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "BackgroundFocal cortical dysplasia (FCD) is a common cause of drug-resistant epilepsy, yet its diagnosis remains challenging, particularly for magnetic resonance imaging (MRI)-negative FCD. In this st",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "f9f974a9",
+    "title": "Exploring ceramide as a novel biomarker and therapeutic target for Alzheimer’s disease",
+    "date": "2026-06-07",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1771302",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "Metabolic dysregulation is increasingly being recognized as a hallmark across various neurodegenerative diseases. While Alzheimer’s disease (AD) is well-established as a dual proteinopathy characteriz",
+    "tags": [
+      "regulatory",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "09cd7f9c",
+    "title": "Enhancing seizure prediction using a DC-SA-EBiLSTM framework with self-attention mechanism",
+    "date": "2026-06-07",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1856135",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "BackgroundAccurately predicting seizures remains challenging. With advances in smart medical technology, EEG-based monitoring has become essential. This study aims to improve prediction accuracy using",
+    "tags": [
+      "funding",
+      "research",
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "cbb762d5",
+    "title": "Linking EEG markers of oscillopathy and default mode network dysfunction in Alzheimer’s disease",
+    "date": "2026-06-07",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1750878",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "Alzheimer’s disease (AD) is a progressive neurodegenerative disorder characterized by cognitive decline and multifaceted neuropathology. Although fluid biomarkers cerebrospinal fluid (CSF) amyloid-β a",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "f37fc48e",
+    "title": "It&#8217;s Time for Technology to Lift Maternal Care",
+    "date": "2026-06-07",
+    "url": "hxxps://medcitynews[.]com/2026/06/its-time-for-technology-to-lift-maternal-care/",
+    "source": "MedCity News",
+    "source_category": "funding",
+    "summary": "Improving maternal safety will not come from adding more data or more devices. It will come from building systems that help clinicians recognize risk earlier and communicate and act with confidence in",
+    "tags": [
+      "product",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "56c75a57",
+    "title": "Bronstein, Gewirtz &amp; Grossman LLC Urges Badger Meter, Inc. Investors to Act: Class Action Filed Alleging Investor Harm",
+    "date": "2026-06-07",
+    "url": "hxxps://www[.]prnewswire[.]com/news-releases/bronstein-gewirtz--grossman-llc-urges-badger-meter-inc-investors-to-act-class-action-filed-alleging-investor-harm-302792164[.]html",
+    "source": "PR Newswire",
+    "source_category": "funding",
+    "summary": "NEW YORK, June 7, 2026 /PRNewswire/ -- Bronstein, Gewirtz & Grossman, LLC, a nationally recognized investor-rights law firm, announces that a class action lawsuit has been filed against Badger Meter, ",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "691681f1",
+    "title": "Bronstein, Gewirtz &amp; Grossman LLC Urges GeneDx Holdings Corp. Investors to Act: Class Action Filed Alleging Investor Harm",
+    "date": "2026-06-07",
+    "url": "hxxps://www[.]prnewswire[.]com/news-releases/bronstein-gewirtz--grossman-llc-urges-genedx-holdings-corp-investors-to-act-class-action-filed-alleging-investor-harm-302792165[.]html",
+    "source": "PR Newswire",
+    "source_category": "funding",
+    "summary": "NEW YORK, June 7, 2026 /PRNewswire/ -- Bronstein, Gewirtz & Grossman, LLC, a nationally recognized investor-rights law firm, announces that a class action lawsuit has been filed against GeneDx Holding",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "a3716568",
+    "title": "Synchron Brain Implant Targets 2026 Pivotal Trial for First FDA-Approved BCI - Tech Times",
+    "date": "2026-06-07",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixgFBVV95cUxOS0tHS25kZFFZSjlucWhuRkJHOGNIUmxzYVZrQlBsQTlFX3pjMkllZDlMaXEzbzRMREh1cVhiZFlkdEtkeEVuX1ZKZFBfdGVTNXZBWk9JX2wxMzdta0ZELU5kUDdrVklma1dpYW1UaC1PLVZ5WEVrMV8xTjNFVHZaSEh5U2FldWF1ei1QWkdyWmNQbFpfenJsNG5qb1FESml0Q0xjUEJIbEtFLWVDMWNuZFJiS3Iya0NJeU9adVY0MTF2QkY4Vmc?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Synchron Brain Implant Targets 2026 Pivotal Trial for First FDA-Approved BCI&nbsp;&nbsp;Tech Times",
+    "tags": [
+      "product",
+      "regulatory",
+      "research"
+    ],
+    "companies": [
+      "Synchron"
+    ],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "48230037",
+    "title": "China approves first commercial brain-computer implant - Let's Data Science",
+    "date": "2026-06-07",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxNLU5NWF9scUxJZlNOTl9DM0E5NUxFZ0I5c1ViM0JHaE1FMnJzeFVfQUE4WXhOZk40bkJuNVBjZk5rb01XSDdCeGZUNkZ2MVR1SzB6SnV1MGRUcU53aGQwaU5Xa19HZnBmcFktOU9qbGJ2dlp0UkxYSjd2UDhoZm5pYUF3ckRKOEltdWJ0RFExUFpRa3RZeDR4Nk5Dck4?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "China approves first commercial brain-computer implant&nbsp;&nbsp;Let's Data Science",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "2d98d3f9",
+    "title": "What is a brain-computer interface, and how does it work? - news.cgtn.com",
+    "date": "2026-06-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivgFBVV95cUxOWHVZTy01SVk1c2otbTg3SlBnSk5XYkNhaTRrdnpCMjRMTndzVjNzS0NHdGZvLUZ6M244MVU2ekF1bEREZzJsZk5LdEw1NTZYMHJINWRsbGFHMTBEenZMTWV1eDZRdVljMmRUWVRxVGxmWkxZWm1OeDh1M1ZpM19ib01FQ0RrQk9XZTRoRjgtdEN3MXFKXzlBRi0wZGxJc3lCQ0lnQmR3bHRHYzMxVnMwUDIwNzdGSUFiLWZEX0xB?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "What is a brain-computer interface, and how does it work?&nbsp;&nbsp;news.cgtn.com",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "bd6d2ebb",
+    "title": "Zepto Life Technology’s mould infection panel obtains FDA breakthrough designation",
+    "date": "2026-06-05",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/zepto-life-technology-mould-infection-panel-obtains-fda-breakthrough-designation/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "Zepto Life’s FungiFlex mould panel is designed to identify 14 clinically important mould species based on cell free fungal DNA detected in plasma. The post Zepto Life Technology’s mould infection pane",
+    "tags": [
+      "regulatory",
+      "partnership"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "e931d660",
+    "title": "FDA approves GE HealthCare’s MIM Contour ProtégéAI+ 2.0 software",
+    "date": "2026-06-05",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/fda-approves-ge-mim-contour-protegeai/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "GE HealthCare has received 510(k) clearance from the FDA for its AI-powered MIM Contour ProtégéAI+ 2.0 software. The post FDA approves GE HealthCare’s MIM Contour ProtégéAI+ 2.0 software appeared firs",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "f24d105a",
+    "title": "Exclusive: Scotch Raises $20M Series A To Disrupt Legacy Liquor Retail Tech With AI",
+    "date": "2026-06-04",
+    "url": "hxxps://news[.]crunchbase[.]com/venture/scotch-raises-ai-funding-liquor-retail-tech/",
+    "source": "Crunchbase News",
+    "source_category": "funding",
+    "summary": "All-in-one software ecosystem provider Scotch is a Denver-based AI-native operating system designed specifically for liquor store owners.",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "e0525f93",
+    "title": "AI Detects Early Epilepsy Signs in EEG Data",
+    "date": "2026-06-04",
+    "url": "hxxps://neurosciencenews[.]com/epilepsy-ai-eeg-waveform-30823/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study demonstrates that machine learning can accurately identify genetic epilepsy markers entirely from baseline brain waves.",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "e3111868",
+    "title": "Printing Monolithic Electronic Skins That Emulate Brain Chemistry",
+    "date": "2026-06-04",
+    "url": "hxxps://neurosciencenews[.]com/neuromorphic-electronics-biocompatible-computing-30822/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study outlines how rigid silicon architectures are shifting toward soft, brain-inspired electronics that mechanically conform to biological tissues.",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "f968dfc4",
+    "title": "A color-coded SSVEP-based brain–computer interface",
+    "date": "2026-06-04",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae7309",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Steady-state visual evoked potential (SSVEP) based brain–computer interfaces (BCIs) predominantly employ frequency, phase, or spatial coding. This study proposes a color-dimension SSVEP enc",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "4959e83e",
+    "title": "Brain-Computer Interface: Can Startups in All Its Subfields Secure Funding This Year? - 36 Kr",
+    "date": "2026-06-04",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTFBWbURXaHE0UHpEd0tuSTE3QVNvWHZmMm5kQnc1R1NpX1Y1dGpSZWtUczBkNE1WUjhzcVNjbWtyalVVSWtTc3p0UXpIZGdGYU5palRB?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Brain-Computer Interface: Can Startups in All Its Subfields Secure Funding This Year?&nbsp;&nbsp;36 Kr",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "1eb69718",
+    "title": "NeuroSense Device Tracks Brain Fluid to Detect Infections",
+    "date": "2026-06-02",
+    "url": "hxxps://neurosciencenews[.]com/neurosense-brain-injury-fluid-sensor-30804/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Researchers create a continuous monitoring platform engineered to protect brain-injury patients from severe drainage infections.",
+    "tags": [
+      "product",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "5bf60b2c",
+    "title": "Dual-VCT: A dual-branch VMD-CNN-transformer model for local field potentials decoding",
+    "date": "2026-06-02",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae6bf1",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Local field potential (LFP) decoding is critical for the clinical translation of intracortical brain-machine interfaces, yet existing decoding methods are limited by three key bottlenecks: ",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "58c3a775",
+    "title": "Endovascular stimulation as a therapeutic strategy for the treatment of cardiopulmonary disorders",
+    "date": "2026-06-02",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae6bf2",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Endovascular electrical stimulation is a minimally invasive technique that delivers electrical impulses through the vascular system to achieve neuromodulation or neuromuscular stimulation. Compared wi",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "e6789240",
+    "title": "Netherlands approves trial of brain implant for ALS communication - ALS News Today",
+    "date": "2026-06-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxOVFJyQm01eklIbGpCX3R2dlpyX2tHRkVjcmlvVTk0VV9RX2RwZzcyVnhvczV2UmNfU3pfSkFsQlE0Rkx1bXo4S3FNZEZyaFZUaWlXODNxQURRUW52YVhzYVdDdi02Y0NFZkVkRlJtbUp3dDduN2RWOWdCV1ZTTnd3UEEyTlllZW5zdWhsc0JYTkN2bGs?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "Netherlands approves trial of brain implant for ALS communication&nbsp;&nbsp;ALS News Today",
+    "tags": [
+      "product",
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "de4cb769",
+    "title": "DBS Remodels White Matter Paths to Reverse Depression",
+    "date": "2026-06-01",
+    "url": "hxxps://neurosciencenews[.]com/dbs-white-matter-depression-30797/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study provides the first direct evidence that deep brain stimulation (DBS) remodels white matter pathways and alters communication across large-scale neural networks.",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "3ddb5c16",
+    "title": "AI System Successfully Decodes and Tracks Pain via EEG",
+    "date": "2026-06-01",
+    "url": "hxxps://neurosciencenews[.]com/pain-ai-platform-eeg-delta-waves-30793/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study introduces an artificial intelligence framework that analyzes EEG signals to objectively classify pain intensity.",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "916367b9",
+    "title": "Neuropixels Opto Probe Rewrites Brain Data",
+    "date": "2026-06-01",
+    "url": "hxxps://neurosciencenews[.]com/neuropixels-opto-brain-probe-30791/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study introduces Neuropixels Opto, an ultra-thin silicon probe narrower than a human hair capable of simultaneously monitoring and manipulating hundreds of individual neurons deep within the bra",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "d6fa50ff",
+    "title": "Mesoscale tissue properties and electric fields in brain stimulation: bridging the macroscopic and microscopic scales using layer-specific cortical conductivity",
+    "date": "2026-06-01",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae6ff0",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Accurate simulations of electric fields (E-fields) in neural stimulation depend on tissue conductivity representations that link underlying microscopic tissue structure with macroscopic ass",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "293b79b6",
+    "title": "China has approved the world’s first invasive brain-computer chip—here’s what’s next - MIT Technology Review",
+    "date": "2026-06-01",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxQM2FuRkthYlMxeHROLVZfWGotRUNla3B2OWlMbzJyR0thQmNfNjd0SjF2NVZWRGFmNG0zZHF1NzFTYmtyVW9PLW9EbW13ZUp2bm04YzFVLVZOR1lZSlowUERrN0RGSU5SMnlMS1JnTXo4eGcya2FfTzBLWjd2WWhQbVdWeVN1VWk10gGOAUFVX3lxTE1FSUpJX2EyRElaMk5NZW9hZEhRSzdlS1U1eUM4TDFuZnh6YXBFTUlfQUx1aTNPV0dTaGo1TzhkNTFPVzlKOXQtSW1Lc3ZUS2tiWGFCMFFFQUlmYjRpZTBJVTNLTURYb1VFcllpYjBSbjNaU09zdzZmWVJMUEd3NEZINnkyb1UzQW1yYjNoS0E?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "China has approved the world’s first invasive brain-computer chip—here’s what’s next&nbsp;&nbsp;MIT Technology Review",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
     "id": "b1ca6f31",
     "title": "Olfactory learning potentiates long-range cortical GABAergic inputs onto adult-born neurons.",
     "date": "2026-05-31",
@@ -210,6 +671,20 @@
     "fetched": "2026-05-31"
   },
   {
+    "id": "b243661d",
+    "title": "But do we need high bandwidth? Applications and scaling challenges of invasive brain–computer interfaces",
+    "date": "2026-05-31",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae6dfd",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Invasive brain–computer interfaces (iBCIs) have expanded from single to thousands of channels, primarily driven by the goal to restore autonomy and social participation for people with severe neurolog",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
     "id": "61d2b61f",
     "title": "Researchers Use Collagen Tiles to Stop Brain Cancer Recurrence",
     "date": "2026-05-30",
@@ -322,6 +797,20 @@
     ],
     "companies": [],
     "fetched": "2026-05-31"
+  },
+  {
+    "id": "7c0bc4f6",
+    "title": "Stryker breach makes medical device cybersecurity a boardroom issue - Today's Medical Developments",
+    "date": "2026-05-26",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxQVkZRX2Rtd2p5OUdmZm95Y0dtV21SUWdNWk1WcXVvQU1ncUZSaUdyak5CdlhHVTFQRWJwNmlCMHlkU1FfWE1DWTRJZGdRdHJtdC01V1I0eWQ4QTQtbnhaRGpMMkFBVjZHSWhVSHN1ZnNQb0xiemtoZjlYdUNQRTFiRkE2NXNQRHE4SDRWd0wtY3pVZUNZeGw2MmM5U1BtbmNFWVFRNFY1cml3ZTl1ckR5UjF1X3piYm8?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "Stryker breach makes medical device cybersecurity a boardroom issue&nbsp;&nbsp;Today's Medical Developments",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
   },
   {
     "id": "30178437",
@@ -824,6 +1313,20 @@
     ],
     "companies": [],
     "fetched": "2026-05-24"
+  },
+  {
+    "id": "c1fdc63a",
+    "title": "Neurosoft Bioelectronics raises USD 7.5M Seed round for brain-computer interfaces - Venturelab Swiss",
+    "date": "2026-05-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxPZ3R4ODk3cDFFT0xLbUs3cThPRExaWm1GdHFMbi1kdGwya0VfcDRvaW1xX0NMakZMVWxtSUpZeXlSRXJGLS1Xd2dmcUh2RUZBTkpEbWFQLVRzbGdaYkJscWhOaGxZSFNCVm1fQXNreXhQVEktTGZyZlVxR3BIQnBIN3B6RzJjQ215b19zTXJfX2Q0UUJWVGZJeHdDME41Q2pleUNMWlBqOG1Kb01L?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Neurosoft Bioelectronics raises USD 7.5M Seed round for brain-computer interfaces&nbsp;&nbsp;Venturelab Swiss",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
   },
   {
     "id": "59d1ca8b",
@@ -2610,6 +3113,20 @@
     "fetched": "2026-04-26"
   },
   {
+    "id": "38e2cb50",
+    "title": "An Optimized Encoding BCI Framework: Implementing Massive Command With Minimal Calibration",
+    "date": "2026-04-22",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11493511",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "As a critical metric for brain-computer interfaces (BCIs), the number of commands directly defines the control capacity for practical applications. However, existing BCIs often suffer from limited com",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
     "id": "035a935e",
     "title": "AI Voices Outperform Human Speech in Noisy Environments",
     "date": "2026-04-21",
@@ -2622,6 +3139,48 @@
     ],
     "companies": [],
     "fetched": "2026-04-26"
+  },
+  {
+    "id": "9cb6d7f6",
+    "title": "Topology-Learnable Static-Dynamic Graph Convolutional Network for Brain Disorder Detection With Functional MRI",
+    "date": "2026-04-21",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11489072",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Graph convolutional networks (GCNs) have been widely used and achieved remarkable results in brain disorder classification using functional connectivity (FC) graphs derived from resting-state function",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "12663164",
+    "title": "Enhancing the Performance of Event-Related Potential-Based Brain–Computer Interfaces Under Cognitive Distraction: A Multiwindow Adaptive Approach",
+    "date": "2026-04-20",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11488373",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Event-related potential (ERP)-based brain-- computer interfaces (BCIs) require focused attention to presented stimuli. However, their applications in real life frequently involve environments that dem",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
+    "id": "8b61fb14",
+    "title": "Prefrontal Hierarchical Control of Corticomuscular Coherence in Stroke",
+    "date": "2026-04-20",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11488384",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Stroke recovery involves reorganization of large-scale brain networks, yet most neurophysiological biomarkers assess either motor or cognitive function in isolation. To address this limitation, we int",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
   },
   {
     "id": "1b18ee20",
@@ -2884,6 +3443,20 @@
     ],
     "companies": [],
     "fetched": "2026-05-31"
+  },
+  {
+    "id": "6ec527dd",
+    "title": "Transformer-Based Context-Informed Incremental Learning With sDTW Alignment Unlocks Fast and Precise Regression-Based Myoelectric Control",
+    "date": "2026-04-17",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11483217",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Regression-based myoelectric interfaces hold the promise of enabling intuitive proportional and simultaneous control but remain limited by calibration sensitivity, unpredictable dynamics, and inconsis",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
   },
   {
     "id": "6f87cfed",
@@ -6674,6 +7247,20 @@
     "fetched": "2026-04-05"
   },
   {
+    "id": "44d0e202",
+    "title": "EEG dataset of consumer- and research-grade systems - Nature",
+    "date": "2026-03-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE9NR0ZUMjJLV1R0MzFhRjAtRmFsRGJTRGNBNTU1dThJNVNHQ3JRbk93YkdvcDJJdEU3ak5BMHZtTkNVMkhlRk5RNFhFWUR2SGpOOG5QWDlqQXJpejE5dWpJ?oc=5",
+    "source": "GN: Consumer EEG",
+    "source_category": "product",
+    "summary": "EEG dataset of consumer- and research-grade systems&nbsp;&nbsp;Nature",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
+  },
+  {
     "id": "ab921b92",
     "title": "What It’s Like to Have a Brain Implant for 5 Years - WIRED",
     "date": "2026-03-04",
@@ -6985,6 +7572,20 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "a142d8b4",
+    "title": "Neurofeedback Systems Market Size to Hit USD 2.95 Billion by 2035 - Precedence Research",
+    "date": "2026-02-25",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMicEFVX3lxTFA1WHFrbzBMS2NqTHlFZWxsZmo2Y0NPalZDb0E1RzdkMzkwaWRPZDRJUlRRclBNUDJMdF92X0pBTVdJcGRDZU12OHZtQ01jU2h5U3FZcW9IdWQzOWIyNnoyUk5RRUF2MzEwR0JoMmhXVkg?oc=5",
+    "source": "GN: Consumer EEG",
+    "source_category": "product",
+    "summary": "Neurofeedback Systems Market Size to Hit USD 2.95 Billion by 2035&nbsp;&nbsp;Precedence Research",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
   },
   {
     "id": "da39d4cd",
@@ -7456,6 +8057,20 @@
     ],
     "companies": [],
     "fetched": "2026-03-29"
+  },
+  {
+    "id": "75a320d3",
+    "title": "Neuromodulation and rehabilitation of post-stroke cognitive impairment: challenges and prospects - Frontiers",
+    "date": "2026-02-12",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikgFBVV95cUxQNjFWMkdpdFBCRHlrc2p0ZEN5a0tudGtMT2tSaVJyUHNOUVZtNTFCQlVhUGVTRGhMRWNLSk1yVURsY1BHeXNzMllBNVNoem1xR2REM05BRlU4VWV4di1iblJLdHFqTXRoRmNZejJ5ZTRWSTBiRFplazNCZDIxM3VfdU1uS2FoZmlFb2FETkxTZWxhdw?oc=5",
+    "source": "GN: Emerging Modalities",
+    "source_category": "research",
+    "summary": "Neuromodulation and rehabilitation of post-stroke cognitive impairment: challenges and prospects&nbsp;&nbsp;Frontiers",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
   },
   {
     "id": "0c7add84",
@@ -9285,6 +9900,20 @@
     ],
     "companies": [],
     "fetched": "2026-05-03"
+  },
+  {
+    "id": "9f0e0156",
+    "title": "New DARPA-Funded Project Aims to Unravel the Brain’s Learning Secrets - USC Viterbi School of Engineering",
+    "date": "2025-07-31",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisgFBVV95cUxNRGw1Umx0NUo5R3ljWnlWU09FVDk3dFE5TnZtYUlRM0JUX09Wdk0yWGJLZExybnRTMGdSdTRlZWRGMHJ4MWRlSHNBVGlLLW5xZE9DdjZTeS1xLVFrR3RwbDVrUUpGR0hSZXY0MjY0RE1xWjFKeXZLdTdvQ0JsX3cydWwzSVJ2dU5pbHhvd3g1bHQ0SDZ0WHNPaXhUSldWS0V6bkVpa2FpbGZsQXhpczRaN1NB?oc=5",
+    "source": "GN: Gov Funding Neuro",
+    "source_category": "funding",
+    "summary": "New DARPA-Funded Project Aims to Unravel the Brain’s Learning Secrets&nbsp;&nbsp;USC Viterbi School of Engineering",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-07"
   },
   {
     "id": "dae3b5ba",
