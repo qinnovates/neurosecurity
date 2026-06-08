@@ -1,11 +1,29 @@
 [
   {
     "type": "external",
-    "title": "China approves first commercial brain-computer implant - Let's Data Science",
-    "date": "2026-06-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxNLU5NWF9scUxJZlNOTl9DM0E5NUxFZ0I5c1ViM0JHaE1FMnJzeFVfQUE4WXhOZk40bkJuNVBjZk5rb01XSDdCeGZUNkZ2MVR1SzB6SnV1MGRUcU53aGQwaU5Xa19HZnBmcFktOU9qbGJ2dlp0UkxYSjd2UDhoZm5pYUF3ckRKOEltdWJ0RFExUFpRa3RZeDR4Nk5Dck4?oc=5",
+    "title": "China Approves World's First Commercial Brain-Computer Interface Implant - OECD AI Policy Observatory",
+    "date": "2026-06-08",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiV0FVX3lxTE55ZENaUDhSMklnTlpsRTRKZ05LYWpjTUMxSS1fcFoxVVhrT3pvalBoUUpWdklMOThURFQ3V01xbjF5QmY5QnVDMG5pc3VwYjNObGdzUmE2VQ?oc=5",
     "source": "Google News — BCI",
-    "summary": "China approves first commercial brain-computer implant&nbsp;&nbsp;Let's Data Science",
+    "summary": "China Approves World's First Commercial Brain-Computer Interface Implant&nbsp;&nbsp;OECD AI Policy Observatory",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "The Identity Trap in EEG Foundation Models: A Diagnostic Audit",
+    "date": "2026-06-08",
+    "url": "hxxps://arxiv[.]org/abs/2606[.]06647",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2606.06647v1 Announce Type: cross Abstract: Objective. EEG foundation models (FMs) report strong accuracy on clinical resting-state EEG. However, high accuracy under subject-disjoint cross-valid",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "China beats Elon Musk to launch world’s first commercial brain chip - New York Post",
+    "date": "2026-06-07",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxNNktkZHJ1SmdzeVBhQ01wbG44djlxd1BuenB5cV9rYmJkaU96cnVrU19xVHdIOGRBelFCYk54ZHVLeWc4Z1RnZk1JcDRPZVdIT3NLVWF4RXdsdWtXRXNFcHJyaDg2LXI5UHNRMGtxRFEwckpBbmhiYkhERVhOZG1Tc3d2STY5RE1nUHpxWWhOWVVNc2xqbTVBOF9pdVpjaWtybHJ5Mw?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "China beats Elon Musk to launch world’s first commercial brain chip&nbsp;&nbsp;New York Post",
     "category": "neurotechnology"
   },
   {
@@ -64,15 +82,6 @@
   },
   {
     "type": "external",
-    "title": "Musk’s Neuralink Brain Implant Company Hires Federal Lobbyists - Bloomberg Government News",
-    "date": "2026-06-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirgFBVV95cUxPQTdOR3g1X0ZJcVZzenVPbDZNaHJKUnpZWnlvQ2IzcEU3MWhfSFc0ck1VbU1tZmw0RFdHY0lRNVZFUjVYcFV3bUVSaTlCcVlFTmZ5dWdRcnZ6MkJabzMtaEhSQkN6V3VYUFlvTldGcUFvZEVxelJKMUpJZjFuRURRMnpOVjBGTW5CS3VSR00xamdoOTkzSURqNFdUdEJ5SzhmWUJZOXQtaDBpa2ZwZlE?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Musk’s Neuralink Brain Implant Company Hires Federal Lobbyists&nbsp;&nbsp;Bloomberg Government News",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "System Boosts Speech Volume Based on Brain Signals",
     "date": "2026-05-24",
     "url": "hxxps://spectrum[.]ieee[.]org/eeg-hearing-aid-volume-control",
@@ -100,20 +109,20 @@
   },
   {
     "type": "external",
-    "title": "Neurosoft Bioelectronics raises USD 7.5M Seed round for brain-computer interfaces - Venturelab Swiss",
-    "date": "2026-05-20",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxPZ3R4ODk3cDFFT0xLbUs3cThPRExaWm1GdHFMbi1kdGwya0VfcDRvaW1xX0NMakZMVWxtSUpZeXlSRXJGLS1Xd2dmcUh2RUZBTkpEbWFQLVRzbGdaYkJscWhOaGxZSFNCVm1fQXNreXhQVEktTGZyZlVxR3BIQnBIN3B6RzJjQ215b19zTXJfX2Q0UUJWVGZJeHdDME41Q2pleUNMWlBqOG1Kb01L?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Neurosoft Bioelectronics raises USD 7.5M Seed round for brain-computer interfaces&nbsp;&nbsp;Venturelab Swiss",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Symbiotic brain-machine drawing via visual brain-computer interfaces - Nature",
     "date": "2026-05-04",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE9yT0lWaEIyMkd6cFdoVEZUUktzdmh0eWZ6cEE4Y01wYUN6YUJPVVQ2RXBheUlHaUFObnRXZW90aWE5ZDFHWDZ0UjRYeEV3ZElTV3lUYWRoMENVRW41dTFV?oc=5",
     "source": "Google News — BCI",
     "summary": "Symbiotic brain-machine drawing via visual brain-computer interfaces&nbsp;&nbsp;Nature",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required - WIRED",
+    "date": "2026-01-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQaktnRUZSQjdDSmdmWDI1ODlBd05JaThWbnA3OUxKOFhMODlHbG0zbFlIeFREWDV6LUo3aExwbUdnOUJBR2RTS3lZSG9aMkptZXU3R3JCbzRGQm5vMnllWDExc2xxX0dXaWNJalg3cEpqRWlPdi15ZmFrNzRPNzhqUFEyNDRDXzZmZjZlTi13OTdHN2hNTXJUSkt1c3hwcko1TUhJempuMUltcjBNNFQxaDFZQ09POE0tZEZIdHNaZW9VZw?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "This Chinese Startup Wants to Build a New Brain-Computer Interface—No Implant Required&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
   },
   {
