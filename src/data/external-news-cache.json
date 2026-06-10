@@ -1,6 +1,33 @@
 [
   {
     "type": "external",
+    "title": "Sleep EEG Signal Criticality as a Non-Invasive Predictor of Cognitive Decline in Dementia",
+    "date": "2026-06-10",
+    "url": "hxxps://arxiv[.]org/abs/2606[.]10889",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2606.10889v1 Announce Type: new Abstract: Early detection of neurodegeneration remains a critical clinical challenge. This study investigates whether sleep EEG signal criticality, quantified via",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "GRAFT: Gain-Recalibrated Adapters for Transformer-Based Neural Population Activity Modeling",
+    "date": "2026-06-10",
+    "url": "hxxps://arxiv[.]org/abs/2606[.]11066",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2606.11066v1 Announce Type: cross Abstract: Neural population activity models can recover rich temporal structure from binned spikes, but their read-in and readout layers often remain tied to a ",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Human learning of noninvasive brain–computer interfaces via manifold geometry - Nature",
+    "date": "2026-06-09",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE5WUnhzQWxDVU9CWG1SeGUzNHQwR1A1NHQ4MFg2enJ0clJLTWdOSjBfLTR4UmJBTGZRNmJ1b2JxV0Z0bWFsY2FsZC1iWHhLblBlbUxjM3RqeWgwMlpLaGhr?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Human learning of noninvasive brain–computer interfaces via manifold geometry&nbsp;&nbsp;Nature",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "A brain-computer interface that works with, not against, the brain - YaleNews",
     "date": "2026-06-09",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxNbHRkYzgwQkRKY0pTRnE1UzRfaEpIMG5hNFF2N09fb05PQ3VUenR0d1RsbWVFTm9iQVVQSk5iQUxXZ3dDLWw1RUtxQklJczBQc0EyeDdEVWxGTGxWUHA4VTlzV21fYWZ5NGdwd2FfN3lscV84UzM2dkl1aGxCeTVSbUNYOFpBcTJV?oc=5",
@@ -10,39 +37,12 @@
   },
   {
     "type": "external",
-    "title": "Brain-Computer Interface Aligns with Brain Function - Mirage News",
-    "date": "2026-06-09",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihAFBVV95cUxPN1FPbThRZ2E5Z0V0clFlUkVMbnA5Tzk3Z1ByTjROWjNNcm9tVVZMMko5dWUybW41VUtNbVhkbTNaS3dCNVBDVjZ3Tnd3RG9ucGIxZ2VaY0pNYlJ5cGw3blJiVkdsNWRiQ1dqMERuQWdsdnh2ZC1hS1ZhYVlHd090Ni0tYWY?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-Computer Interface Aligns with Brain Function&nbsp;&nbsp;Mirage News",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Teaching Machines to Read the Brain: Guan Cuntai on the Future of Brain-Computer Interfaces - hun-ren.hu",
-    "date": "2026-06-09",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixwFBVV95cUxPd1JDaG9VWlBtXzBYWVBzUGxmemRncUlyYVphQ1U1NlMtOHVEM3pJSTVsMXBtU2g5X0txZUhFZThxS0pwZ1AyRGlXZ1kxUU5zSE40SEdPeWFGUXZFVWUya25RNWZyOC1kLXp1cVlCSHBzeE9JalpsUG82LUhCd2xYazlLdmUtNE5iak5GRkEyMkR4SVkzTjk0UDdxZWlxRnV0MVMxSHkwZkRiOWEzWVVFS1daU0hjTzZMVnlDWDZoZGNySUFGZlpj?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Teaching Machines to Read the Brain: Guan Cuntai on the Future of Brain-Computer Interfaces&nbsp;&nbsp;hun-ren.hu",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Elon Musk claims new 'Jesus-level' brain chip can restore sight to the blind - KTXS",
     "date": "2026-06-09",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxNcW9JLUtKcTRRYmVmeGlSYkplWVIyNU5uYTVsZXZYTHZuV0dtS08zZEgwWEM4MHBURGp3YkdBMnM2R0dxcmZ5cmxVcVpyS0tZR0w1Mm5oUXdYZ0JLUjRQdHBzaWxsSnNRYmtobXo0NlpBUG9BQWlQUHRDUUVIX2FVam5PSjM4aWFWT2EySXlOVklETFFVNGd5TWM3cnczZDViWXJ6dQ?oc=5",
-    "source": "Google News — BCI",
+    "source": "Google News — Neuralink",
     "summary": "Elon Musk claims new 'Jesus-level' brain chip can restore sight to the blind&nbsp;&nbsp;KTXS",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Discovering Functionally Selective Brain Regions with a Deep Topographic Multimodal Model",
-    "date": "2026-06-09",
-    "url": "hxxps://arxiv[.]org/abs/2606[.]09770",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2606.09770v1 Announce Type: new Abstract: Nearby neurons in cortex share similar response profiles, producing systematic spatial organization across sensory and cognitive systems. Recent topogra",
-    "category": "research"
   },
   {
     "type": "external",
@@ -55,11 +55,11 @@
   },
   {
     "type": "external",
-    "title": "Brain-Computer Interface: Can Startups in All Its Subfields Secure Funding This Year? - 36Kr",
-    "date": "2026-06-04",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTFBWbURXaHE0UHpEd0tuSTE3QVNvWHZmMm5kQnc1R1NpX1Y1dGpSZWtUczBkNE1WUjhzcVNjbWtyalVVSWtTc3p0UXpIZGdGYU5palRB?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Brain-Computer Interface: Can Startups in All Its Subfields Secure Funding This Year?&nbsp;&nbsp;36Kr",
+    "title": "What is a brain-computer interface, and how does it work? - news.cgtn.com",
+    "date": "2026-06-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiswFBVV95cUxQdkdEc2JDRC1HLUl1eVlESUZHbk1KbmhLVFA2b2lzTDZ0QmYwOGJFczdjSHp0WXp2dVRuSGJoRXVsbTRibEdTbGRsM01ReEFWNVFjQ0x0NE9fRFM2Y0FlbWliaW9PN3JLZ2xGYXV0djB5T1FrQno4VzVSbERIb0RvQmRpdG5lNGdYTUJtWEk0QnBvLXZlNG03WHg4WlJpWXZvSzVJaExfSkVCOGo2dV9WdjI0dw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "What is a brain-computer interface, and how does it work?&nbsp;&nbsp;news.cgtn.com",
     "category": "neurotechnology"
   },
   {
@@ -75,7 +75,7 @@
     "type": "external",
     "title": "China has approved the world’s first invasive brain-computer chip—here’s what’s next - MIT Technology Review",
     "date": "2026-06-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxQM2FuRkthYlMxeHROLVZfWGotRUNla3B2OWlMbzJyR0thQmNfNjd0SjF2NVZWRGFmNG0zZHF1NzFTYmtyVW9PLW9EbW13ZUp2bm04YzFVLVZOR1lZSlowUERrN0RGSU5SMnlMS1JnTXo4eGcya2FfTzBLWjd2WWhQbVdWeVN1VWk1?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxQM2FuRkthYlMxeHROLVZfWGotRUNla3B2OWlMbzJyR0thQmNfNjd0SjF2NVZWRGFmNG0zZHF1NzFTYmtyVW9PLW9EbW13ZUp2bm04YzFVLVZOR1lZSlowUERrN0RGSU5SMnlMS1JnTXo4eGcya2FfTzBLWjd2WWhQbVdWeVN1VWk10gGOAUFVX3lxTE1FSUpJX2EyRElaMk5NZW9hZEhRSzdlS1U1eUM4TDFuZnh6YXBFTUlfQUx1aTNPV0dTaGo1TzhkNTFPVzlKOXQtSW1Lc3ZUS2tiWGFCMFFFQUlmYjRpZTBJVTNLTURYb1VFcllpYjBSbjNaU09zdzZmWVJMUEd3NEZINnkyb1UzQW1yYjNoS0E?oc=5",
     "source": "Google News — BCI",
     "summary": "China has approved the world’s first invasive brain-computer chip—here’s what’s next&nbsp;&nbsp;MIT Technology Review",
     "category": "neurotechnology"
@@ -109,11 +109,29 @@
   },
   {
     "type": "external",
-    "title": "Neurosoft Bioelectronics raises USD 7.5M Seed round for brain-computer interfaces - Venturelab Swiss",
+    "title": "Neurosoft Bioelectronics garners $7.5M for brain-computer interface technology - MobiHealthNews",
     "date": "2026-05-20",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxPZ3R4ODk3cDFFT0xLbUs3cThPRExaWm1GdHFMbi1kdGwya0VfcDRvaW1xX0NMakZMVWxtSUpZeXlSRXJGLS1Xd2dmcUh2RUZBTkpEbWFQLVRzbGdaYkJscWhOaGxZSFNCVm1fQXNreXhQVEktTGZyZlVxR3BIQnBIN3B6RzJjQ215b19zTXJfX2Q0UUJWVGZJeHdDME41Q2pleUNMWlBqOG1Kb01L?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxObGZOYUpRZ2l3aS01RUg5TXFseWtLMVR3MFhKTzVrSWY1WEJhUWxibVlHUUxaUExvYTdqeFBrT3UxWDAtUEpOSTZ2REFTb3JjY0pwekltZVA4Y3UxRXdBYzNJR3RoMEViRWFISk9Fa3AyYkdpTVJXOEtubDJmdTRiWlV3RmlLLU9NdkROdHVKTVctU0tCU1I5VHVyQzhmSTM1dzVnZklucGNhQWMx?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Neurosoft Bioelectronics garners $7.5M for brain-computer interface technology&nbsp;&nbsp;MobiHealthNews",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China approves market launch of brain-computer interface medical device in world first - Reuters",
+    "date": "2026-03-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi5wFBVV95cUxQYVIzY19seFh0ZFBudTdBTTE1NnQ2eWZISVUzZFdGcFpPMHIyUlRJd2IxWXR0YVNDWk1PTmFTejNGUjZZUVRST29PZlRIdWVQOU9Zelh5cTI3Mk9kR3FtdGVjRXdHaWxEcFhqczlRallwY1dHNzJMZ0R6Z3dlQkczelpaWnp3MWpqdmJRdEVuZURuRU85WmN3TDRLUDJFQ3pEV3hxM0hxQk5VdzZ1aGdQVWMwODllXzlBV3lBQ25zNW5hWmI1MzIzVnhMY0t1TjY4emdHNFU0S2Z1MDR4VVdpUXpZTnJkX2s?oc=5",
     "source": "Google News — Neural Startups",
-    "summary": "Neurosoft Bioelectronics raises USD 7.5M Seed round for brain-computer interfaces&nbsp;&nbsp;Venturelab Swiss",
+    "summary": "China approves market launch of brain-computer interface medical device in world first&nbsp;&nbsp;Reuters",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C - Crunchbase News",
+    "date": "2026-03-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;Crunchbase News",
     "category": "neurotechnology"
   },
   {
