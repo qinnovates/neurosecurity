@@ -1,5 +1,323 @@
 [
   {
+    "id": "6758cc63",
+    "title": "Corrigendum to “Revisiting subcallosal cingulate deep brain stimulation for depression: Long-term safety and effectiveness outcomes from a pooled analysis of 172 implanted patients” [Brain Stimul 18 (2025) 1632-1640]",
+    "date": "2026-06-14",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26001130?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: July–August 2026Source: Brain Stimulation, Volume 19, Issue 4Author(s): Lyndahl M. Himes, Helen S. Mayberg, Mustafa M. Husain, Paul E. Holtzheimer, Andres M. Lozano, Sidney H. Kenned",
+    "tags": [
+      "product",
+      "opinion",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "55404dbf",
+    "title": "The inconsistent effects of tDCS in rehabilitation and cognitive enhancement: sources of variability and paths to personalization",
+    "date": "2026-06-14",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1817726",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "Background/aimsTranscranial direct current stimulation (tDCS) has emerged as a promising intervention in both rehabilitation and cognitive enhancement, yet its effects remain inconsistent across studi",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "c85c9a37",
+    "title": "A prospective, open-label feasibility study protocol of home-based transcranial direct current stimulation for major depressive disorder in elective lumbar spine surgery candidates",
+    "date": "2026-06-14",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1860063",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "BackgroundDepression is common among elective lumbar spine surgery candidates and is associated with worse postoperative outcomes. Home-based transcranial direct current stimulation (tDCS) has demonst",
+    "tags": [
+      "funding",
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "e8ba0dea",
+    "title": "Rocket Pharma Reaps $180M From Sale of FDA Drug Review Fast Pass",
+    "date": "2026-06-14",
+    "url": "hxxps://medcitynews[.]com/2026/06/rocket-pharmaceuticals-rare-disease-priority-review-voucher-prv-rckt/",
+    "source": "MedCity News",
+    "source_category": "funding",
+    "summary": "Rocket Pharmaceuticals received the rare pediatric disease priority review voucher with the accelerated FDA approval for Kresladi in March. The non-dilutive capital from the voucher’s sale will suppor",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "0240a79a",
+    "title": "I indexed 669 GB of my GoPro videos using my M1 Max computer and local ML models",
+    "date": "2026-06-14",
+    "url": "hxxps://news[.]ycombinator[.]com/item?id=48528029",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "TLDR: I had 2,207 GoPro videos, and I need to rewatch them to find interesting moments from my cycling journey. I built a project to index them locally on my M1 Max using open-source ML models, search",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "75c4398e",
+    "title": "Brief Notes on Computer Word and Byte Sizes",
+    "date": "2026-06-14",
+    "url": "hxxps://www[.]cs[.]columbia[.]edu/~smb/blog/2023-03/2023-03-07[.]html",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.cs.columbia.edu/~smb/blog/2023-03/2023-03-07.html Comments URL: https://news.ycombinator.com/item?id=48526760 Points: 4 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "6cae654d",
+    "title": "GIER: A Danish computer from 1961 with a role in the modern astronomy",
+    "date": "2026-06-14",
+    "url": "hxxps://arxiv[.]org/abs/1704[.]05828",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://arxiv.org/abs/1704.05828 Comments URL: https://news.ycombinator.com/item?id=48523445 Points: 1 # Comments: 0",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "0427132b",
+    "title": "UK digital ID gets brain trust to 'challenge' ministers on policy",
+    "date": "2026-06-14",
+    "url": "hxxps://www[.]theregister[.]com/public-sector/2026/06/12/uk-digital-id-gets-brain-trust-to-challenge-ministers-on-policy/5254650",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.theregister.com/public-sector/2026/06/12/uk-digital-id-gets-brain-trust-to-challenge-ministers-on-policy/5254650 Comments URL: https://news.ycombinator.com/item?id=48523036 Po",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "2c2ee060",
+    "title": "China beats Elon Musk's 'Jesus-level technology' to launch world's first commercial brain chip - The Times of India",
+    "date": "2026-06-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikgJBVV95cUxOd2d3eEp3Y2lVWXdxS3pvTnpLMEhpZEJWQVFCNlU4elA1bF9zYk5lVVNUZ3BjS1BpTW9HUXdLUk1Ec21ud3hpNl83dnd2VWNxcnN1VW9fSElQbk5RN1FhQWttNFlPQ1ozVUFFZ3d3dVdLNHMyUTZjYTN3Z2xGc0g3WWtURzJPQWIzTTY0dnBLcWo0QWxjZG1WYWw5WG1QQ0RiSXN0RGVCS1R3TDI2X09uYTVnMnVXY0ZpTXBYcTVMOVJtbjJEa3NfZmlkQW9iS05aT1JQYzEzcG15NDhKWmxjRTRmTmk4eU1vX0pUZjZlY2Rmd0I0Sl9XbENOdHZKVmRKUGdsU00yQnFUS0QwVDY1UG9n0gGXAkFVX3lxTE5jaEFrRlNVXzhWWUdGaWZzMWdCNWZPNmR1U2ZvNk5Odzl2c284cWJVandUa0M3Rkh4LUt6b0ppWUdTUlVDNWp4enhjbG5nS1pBMVhwVFA2eE9lNFY3UEpyM1dMUGhoX1pEUm96bzFBVG0tTXFfYlFMN2VSM08wUzFxTWVsQzBSOVViaWlmZUw5Mi1PckNJNmZ0Y1BTVmVVa2FpNzhMUVIwUkhnQ09NaDN1bTBuTGd3bWtoMGpQX2RFWWRuOC1GVVEwLWpmSERpeHJwSHp5MENZSklKVFNORFRwS3hYbDAyaW4wTGdleTkyeHRKcjhQM3haX2U0OWlRX01rYmhPM0JFR0dpV0lRZEFNNHVJeGNvQQ?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "China beats Elon Musk's 'Jesus-level technology' to launch world's first commercial brain chip&nbsp;&nbsp;The Times of India",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "b08964b7",
+    "title": "The Logic of Thalamic Inputs onto the Molecular Taxonomy of Cortical Neurons Reveals a Visual Hierarchy",
+    "date": "2026-06-13",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]06[.]12[.]731929v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "The hierarchical organization of sensory cortices and the rich molecular taxonomy of their cell types are defining features of the mammalian cortex. Cortical areas along this hierarchy are reciprocall",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "c11b7a7b",
+    "title": "Brain-inspired chip runs near absolute zero, could transform quantum computing",
+    "date": "2026-06-13",
+    "url": "hxxps://www[.]sciencedaily[.]com/releases/2026/06/260612032024[.]htm",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.sciencedaily.com/releases/2026/06/260612032024.htm Comments URL: https://news.ycombinator.com/item?id=48516229 Points: 4 # Comments: 1",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "cd2c9739",
+    "title": "Homegrown BCI system set to expand - China Daily - Global Edition",
+    "date": "2026-06-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiggFBVV95cUxNOEFZaEp4d3gxY1FnTEtzLUQ3SUxMMU1aalZScDlRbkJna2ZxR0wtZHZvaFZqZ2k0VzZFeDJvTW9SLUJaOXg1ZmhlalZLLVptdkRQWUpScDAtOFJ4ODUwTVc4UkJ2QnpmWXRyS1JndjlNMWhsQ1ZaSHc5YVpJT2ZwSFl3?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "Homegrown BCI system set to expand&nbsp;&nbsp;China Daily - Global Edition",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "de56a846",
+    "title": "Maneva raises $27-million USD Series A to expand AI vision in manufacturing",
+    "date": "2026-06-12",
+    "url": "hxxps://betakit[.]com/maneva-raises-27-million-usd-series-a-to-expand-ai-vision-in-manufacturing/",
+    "source": "BetaKit",
+    "source_category": "news",
+    "summary": "Capital will be used to scale into North America, expand into Asian markets. The post Maneva raises $27-million USD Series A to expand AI vision in manufacturing first appeared on BetaKit.",
+    "tags": [
+      "funding",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "ec4fce44",
+    "title": "Why Galway is ideal for organisations with a growing tech identity",
+    "date": "2026-06-12",
+    "url": "hxxps://www[.]siliconrepublic[.]com/careers/galway-ideal-location-organisations-growing-tech-identity-viatris-renttherunway",
+    "source": "Silicon Republic",
+    "source_category": "news",
+    "summary": "The west of Ireland is fast becoming a globally recognised hub of technological activity and achievement. Read more: Why Galway is ideal for organisations with a growing tech identity",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "371b39b7",
+    "title": "Wave Neuroscience wins FDA clearance for precision PTSD therapy",
+    "date": "2026-06-12",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/wave-neuroscience-wins-fda-clearance-for-precision-ptsd-therapy/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "Wave’s MeRT platform records individual patient brain data to tailor transcranial magnetic stimulation (TMS) therapy for PTSD treatment. The post Wave Neuroscience wins FDA clearance for precision PTS",
+    "tags": [
+      "product",
+      "regulatory",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "aeb5f6a9",
+    "title": "Room-Specialized Mixture-of-Experts for In-Home ADL Recognition with Ambient Sensors",
+    "date": "2026-06-12",
+    "url": "hxxps://www[.]medrxiv[.]org/content/10[.]64898/2026[.]06[.]10[.]26355390v1?rss=1",
+    "source": "medRxiv Health",
+    "source_category": "research",
+    "summary": "Monitoring activities of daily living (ADLs) in the home is a promising approach for tracking dementia progression in older adults. While ambient sensor-based ADL systems are well-studied, most existi",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "c41f7cf4",
+    "title": "Base10 Partners Closes 2 Funds Totaling $850M To Invest In Real Economy Automation",
+    "date": "2026-06-11",
+    "url": "hxxps://news[.]crunchbase[.]com/venture/base10-partners-invests-real-economy-automation-ajao/",
+    "source": "Crunchbase News",
+    "source_category": "funding",
+    "summary": "With a strong focus on logistics, payroll, construction and other sectors, San Francisco-based Base10 Partners has raised two funds totaling $850 million: a seed and Series A fund 4, and a Series B fu",
+    "tags": [
+      "funding",
+      "partnership"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "d0c0d665",
+    "title": "China approves first commercial brain-computer interface as NeuroXess trials begin - Crypto Briefing",
+    "date": "2026-06-09",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMicEFVX3lxTE1hblg2aVVDeWNSZUVoaVJBQzZqYnJfZEZuZmVFbTZtUWc1WDJmdGt1N2FDZThWdDh5V1RiRXdEeHZsWHpDQ0RxcXFUVGlxQVBmRWN1bUNJc3F5Y3pCR3I0MGxxanU0WnFWZ3FUcUI3Zjk?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "China approves first commercial brain-computer interface as NeuroXess trials begin&nbsp;&nbsp;Crypto Briefing",
+    "tags": [
+      "research"
+    ],
+    "companies": [
+      "NeuroXess"
+    ],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "599a479c",
+    "title": "How Bigger ACVs Are Bringing Direct Sales Back To Vertical AI",
+    "date": "2026-06-08",
+    "url": "hxxps://news[.]crunchbase[.]com/ai/bigger-acvs-bring-direct-sales-vertical-ai-agarwal-defy/",
+    "source": "Crunchbase News",
+    "source_category": "funding",
+    "summary": "Successful vertical AI startups are increasingly using channels like private equity networks and industry conferences to drive distribution, recognizing that larger deal sizes require a fundamentally ",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "ca9fd69b",
+    "title": "Computational neuroelectrophysiology and artificial intelligence for drug-resistant epilepsy: recent advances, current challenges, and future directions",
+    "date": "2026-06-08",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae6bf4",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Drug-resistant epilepsy (DRE) affects approximately 30% of epilepsy patients, with surgical cure rates below 70%. This challenge drives a fundamental paradigm shift from localizing a discrete epilepto",
+    "tags": [
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "a253a091",
+    "title": "Broad vs narrow focus: how frequency and focal size affect transcranial ultrasound stimulation in motor cortex",
+    "date": "2026-06-08",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae730a",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Transcranial ultrasound stimulation (TUS) is a noninvasive neuromodulation technique offering millimeter-scale precision and deep targeting. However, the trade-off between fundamental frequ",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "dd4a4bca",
+    "title": "Development and feasibility of a motor imagery-based brain–computer interface-controlled closed-loop functional electrical stimulation system for swallowing rehabilitation",
+    "date": "2026-06-08",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae730b",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Conventional swallowing functional electrical stimulation (FES) is usually delivered in open loop or triggered by peripheral signals, which may not align precisely with voluntary swallowing",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
     "id": "6850d50b",
     "title": "Connectional neuroanatomy of U-fibers in the rhesus monkey brain",
     "date": "2026-06-07",
@@ -217,6 +535,34 @@
     ],
     "companies": [],
     "fetched": "2026-06-07"
+  },
+  {
+    "id": "472045a9",
+    "title": "Transformer-based network with spatial correlation change and multi-segment attention for sequential EMG recognition",
+    "date": "2026-06-07",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae697a",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Surface electromyography (sEMG)-based motion recognition technologies have found widespread application across various fields. While researchers increasingly emphasize the decoding of compl",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "317b22f6",
+    "title": "China beats Elon Musk to launch world’s first commercial brain chip - New York Post",
+    "date": "2026-06-07",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxNNktkZHJ1SmdzeVBhQ01wbG44djlxd1BuenB5cV9rYmJkaU96cnVrU19xVHdIOGRBelFCYk54ZHVLeWc4Z1RnZk1JcDRPZVdIT3NLVWF4RXdsdWtXRXNFcHJyaDg2LXI5UHNRMGtxRFEwckpBbmhiYkhERVhOZG1Tc3d2STY5RE1nUHpxWWhOWVVNc2xqbTVBOF9pdVpjaWtybHJ5Mw?oc=5",
+    "source": "GN: BCI FDA",
+    "source_category": "regulatory",
+    "summary": "China beats Elon Musk to launch world’s first commercial brain chip&nbsp;&nbsp;New York Post",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
   },
   {
     "id": "2d98d3f9",
@@ -1357,6 +1703,21 @@
     "fetched": "2026-05-24"
   },
   {
+    "id": "f6a00483",
+    "title": "China moves AI brain implants from trials towards real-world use - Nature",
+    "date": "2026-05-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE4yTURKVU8zTHNCMVhfWGF1U2s0bHJyQ3VYR0JBbjUydjkwT3h5bHh6UkNES0g5d2pmQ3M0bkVmVDNqTmt2bHBRb3FTZWxXdi1yYWpwUTZ6Qi1oRmNuZDlN?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "China moves AI brain implants from trials towards real-world use&nbsp;&nbsp;Nature",
+    "tags": [
+      "product",
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
     "id": "0546fc26",
     "title": "Connected Biochip Tracks How Diabetes Triggers Dementia",
     "date": "2026-05-18",
@@ -1740,6 +2101,20 @@
     ],
     "companies": [],
     "fetched": "2026-05-17"
+  },
+  {
+    "id": "42131bef",
+    "title": "The EU's AI Act could indirectly regulate emerging neurotechnologies - UOC",
+    "date": "2026-05-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMigAFBVV95cUxOTkw3WVlVWXZBOWJsOWU0bGxMbXdnaktHRFFtdmoxWlFVVEVnNkRrWHVpdUttQVdKb0t2NzlkMjJkcGdHYUhydE1kYVJpOWlOeGpQSjVjdFNSb0xGdVc2aVRLVVNTYVhmbUtnOW04UlJyVG5QQmtCMkRNcHFOWk14Tw?oc=5",
+    "source": "GN: Neurotech Regulation",
+    "source_category": "regulatory",
+    "summary": "The EU's AI Act could indirectly regulate emerging neurotechnologies&nbsp;&nbsp;UOC",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
   },
   {
     "id": "211a8f83",
@@ -2253,6 +2628,21 @@
     "fetched": "2026-05-31"
   },
   {
+    "id": "273ea1b8",
+    "title": "Directional Tolerance of Electrode Displacement in STN-DBS: An Analysis Based on Volume of Tissue Activated",
+    "date": "2026-05-04",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11503438",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "The therapeutic efficacy of deep brain stimulation for Parkinson’s disease critically depends on accurate electrode placement. While previous studies have described the side effects associated with di",
+    "tags": [
+      "policy",
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
     "id": "5fdd9f16",
     "title": "Pinch restoration in post-stroke hemiplegia rehabilitation: A case report of motor task-synchronized precision repetitive transcranial magnetic stimulation",
     "date": "2026-05-03",
@@ -2579,6 +2969,21 @@
     "fetched": "2026-05-03"
   },
   {
+    "id": "9e42b6c7",
+    "title": "A Dynamic Time Warping-Aware Series-Temporal Transformer for Automated Thresholding of Auditory Brainstem Responses",
+    "date": "2026-04-30",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11502006",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Auditory brainstem response (ABR) is widely used in clinical practice to assess hearing, with thresholds typically determined by clinicians via visual inspection—a process prone to human bias. Various",
+    "tags": [
+      "funding",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
     "id": "74e34daa",
     "title": "Medtronic wins FDA approval for updated mitral replacement valve",
     "date": "2026-04-29",
@@ -2672,6 +3077,49 @@
     ],
     "companies": [],
     "fetched": "2026-05-03"
+  },
+  {
+    "id": "2f1da155",
+    "title": "Kinematic-Synergy-Based Robotic Feedback Promotes Short-Term Retention of Altered Human Bimanual Motor Behavior",
+    "date": "2026-04-29",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11500534",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Lasting improved motor performance is a major goal of human-centered robotics research. Literature shows adaptation to robotic intervention but points to washout of adapted motor patterns and after-ef",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "e91651bb",
+    "title": "Brain-Controlled Wheeled Mobile Robots: A Shared Control Framework Integrating Event-Triggered Mechanism and Deep Reinforcement Learning",
+    "date": "2026-04-29",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11501263",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "This study addresses the problem of quantifying user control authority in brain-computer shared control by integrating Event-Triggered Control (ETC) with Deep Reinforcement Learning (DRL). Firstly, an",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
+  },
+  {
+    "id": "49defd6b",
+    "title": "Effects of Wearable Continuous Normal-Force Tactile Feedback Applied to the Fingertip on Standing Balance in Healthy Young Adults",
+    "date": "2026-04-29",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11500542",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Wearable balance-assistance systems predominantly rely on vibrotactile cues that are well suited for transient event detection but may provide a physiologically mismatched representation for the slow,",
+    "tags": [
+      "product",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
   },
   {
     "id": "e266a8a2",
@@ -3181,6 +3629,20 @@
     ],
     "companies": [],
     "fetched": "2026-06-07"
+  },
+  {
+    "id": "84894df4",
+    "title": "AdvaMed® Cybersecurity Summit - AdvaMed® - Advanced Medical Technology Association®",
+    "date": "2026-04-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiZEFVX3lxTE02MzhIOTJRTGlabGsyUC03X3pNZlhNT2tZc244OWxDRkpVVjJWSy14Tk8tV2hIUUxabnVkemJCcnRoOTM3VDN5RTd1ZGVWdGtPd1FGTHNMTHpaTThfQUNLTjZZRUY?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "AdvaMed® Cybersecurity Summit&nbsp;&nbsp;AdvaMed® - Advanced Medical Technology Association®",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
   },
   {
     "id": "1b18ee20",
@@ -10532,6 +10994,20 @@
     ],
     "companies": [],
     "fetched": "2026-03-11"
+  },
+  {
+    "id": "15edbd2c",
+    "title": "Medical device cybersecurity: Complying with Section 524B - Crowe",
+    "date": "2023-05-31",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikAFBVV95cUxQdnhTdjExQnlIb3FkOUNqTTJfN0Y4S1RNU2dxcE5YdHUxR0ZWZFIwR0U2NXZQOEhISktuRVdCWi1sb3BRb0VnWGpoallBUGgyOFpYeHRQel9PRV9weW5SVjlpR2tQTzBQQ2VKTVpaeGw5N0MtN19DeE05WmpEUUJfdnVORVp3NzlGczJTN0Y5NXY?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "Medical device cybersecurity: Complying with Section 524B&nbsp;&nbsp;Crowe",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-06-14"
   },
   {
     "id": "eeb5d853",
