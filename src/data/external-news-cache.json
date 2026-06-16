@@ -1,6 +1,33 @@
 [
   {
     "type": "external",
+    "title": "The Download: the first brain implant power user and South Korea’s AI obsession",
+    "date": "2026-06-16",
+    "url": "hxxps://www[.]technologyreview[.]com/2026/06/16/1139010/the-download-brain-implant-power-user-bci-south-korea-ai-obsession/",
+    "source": "MIT Technology Review",
+    "summary": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. This man with ALS is the first “power user” of a b",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "OpTI-Mouse: Optimization for Targeted Temporal Interference Stimulation in the Mouse Brain",
+    "date": "2026-06-16",
+    "url": "hxxps://arxiv[.]org/abs/2606[.]15192",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2606.15192v1 Announce Type: new Abstract: Temporal Interference (TI) stimulation enables deep brain targeting, yet precise optimization tools for mouse models remain limited. We developed a comp",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "EEGDash: An open-source platform for machine learning on public neurophysiological data",
+    "date": "2026-06-16",
+    "url": "hxxps://arxiv[.]org/abs/2606[.]16041",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2606.16041v1 Announce Type: new Abstract: Public neurophysiological datasets are increasingly accessible but remain hard to reuse: turning one into a trained model still takes thousands of lines",
+    "category": "research"
+  },
+  {
+    "type": "external",
     "title": "This man with ALS is &#8220;the first power user&#8221; of a brain implant that lets him speak",
     "date": "2026-06-15",
     "url": "hxxps://www[.]technologyreview[.]com/2026/06/15/1138953/man-als-first-power-user-brain-implant-speak-bci/",
@@ -19,6 +46,15 @@
   },
   {
     "type": "external",
+    "title": "Brain-computer interface enables independent, accurate communication for man living with ALS - Medical Xpress",
+    "date": "2026-06-15",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikgFBVV95cUxOd2lKblJzUjJ3ZHFiOTV0cTk2aDhhbWNSVDc1UVVwOFZ4RjdJWlRDTi0wSWJJWWQ0TTdkYl9YN1k4dEkybUFvNVBWa1VmMGZTZ25tZkYxS1V2TExzREZQcVM4akk1MWdYTUhiS0FkdVM3cXRzcE9vMzY3QUlZVGFQS1pxalg5eEpLSW5oVmRfSHNzZw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain-computer interface enables independent, accurate communication for man living with ALS&nbsp;&nbsp;Medical Xpress",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "This man with ALS is “the first power user” of a brain implant that lets him speak - MIT Technology Review",
     "date": "2026-06-15",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiowFBVV95cUxQZXdPazduem5mcjNMcE5weEVHVVRUR3Z5VHRZblQ0aW50NmJLXzFEeG4xWS1WZE9SYlJRUzhjSzFwOHNrNDd2VnlieFp1VjdYYUQyX29kMGh3SkdyOVBreWgzTHZuZS1Bak5Nd1VIMTAtdXd3Q3FvX0N5VEtiTVhrX2NvaVhvby1pdnIxODIyaC0tc2FnWnNDQ1dYWndGbzhYUnVz0gGoAUFVX3lxTE5qSEpFQmVDS0MxcnIzdGR0R3l1ZFIxcGZwMHRrQ1JLZW16VnZfUVMtTzFLZDdJT1dSeUlGWWNxTm1rc1dfT2F3ZmRnMWh2bGcyWkJXaXhqYUkxTGg4bVJuR09uaFduTEFPUURIa2k0U3drZkNBU01pT2NSUkU0M0FEQ0JnOC1uR213aDVSdzlRV05DTzJZTUJyTlR1d20xeTBNVkg0R0l2RA?oc=5",
@@ -28,11 +64,11 @@
   },
   {
     "type": "external",
-    "title": "Brain-computer interface enables independent, accurate communication for man living with ALS - Medical Xpress",
+    "title": "Samsung wins 1st Neuralink chip order as Musk broadens supply chain - KED Global",
     "date": "2026-06-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikgFBVV95cUxOd2lKblJzUjJ3ZHFiOTV0cTk2aDhhbWNSVDc1UVVwOFZ4RjdJWlRDTi0wSWJJWWQ0TTdkYl9YN1k4dEkybUFvNVBWa1VmMGZTZ25tZkYxS1V2TExzREZQcVM4akk1MWdYTUhiS0FkdVM3cXRzcE9vMzY3QUlZVGFQS1pxalg5eEpLSW5oVmRfSHNzZw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-computer interface enables independent, accurate communication for man living with ALS&nbsp;&nbsp;Medical Xpress",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMid0FVX3lxTE5qZGNTWG1qWUNLQnlTbDhMTlBkSmc4UVQwem92eUZIYTR5VW9aLWFVNm11d0gxeGtaZXlfdUFBOER2SjB5LXV2VS1abnVxOUhMUzhXNEljc09sZTh0T3lPNGJpSlUxVUd4bi1UVlExdnI1VUhDLVNz?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Samsung wins 1st Neuralink chip order as Musk broadens supply chain&nbsp;&nbsp;KED Global",
     "category": "neurotechnology"
   },
   {
@@ -46,21 +82,12 @@
   },
   {
     "type": "external",
-    "title": "Samsung has further diversified its portfolio, thanks to Elon Musk - Notebookcheck",
+    "title": "Samsung said to be making next-generation Neuralink brain chip - SamMobile",
     "date": "2026-06-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirwFBVV95cUxQNjk4a0pWYWhFTE1fZ0tGZlo0Q0pUckpUY25LZTVPdTdRVEp3YVZtTFo1R1ZuaUFiTkg0UWtRTmVzYjJjVW41d0VaOHhJSmpKMFRyMllrRXJ5MW5PTmZlbFBnWmh6T1ZWRGxRWHdHVGtJUzNRRlFXMnZEcERreGdDNFdGT3M4d0R6UnR2WDkzX3lBdERPa1JVRktIdTB6Zk5VX1hBUGFzdzFSeVRjRXJn?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxNMUtSRlI1MWZhZzJsbFJycGlJM1ZvbGxtbzhHc3pWUFpqNV9Db191MmpnVzVuS19oRktIUjNjeHhOYjZtbzcydFVIYlBQbW9RU1QyS1NoMnJDY19nV0R0U255a0thRzRUUkJ6cUFCUlFrQTVITGQzYXBIcUF1azU3TkltUDJKLTZkemVrNldB?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Samsung has further diversified its portfolio, thanks to Elon Musk&nbsp;&nbsp;Notebookcheck",
+    "summary": "Samsung said to be making next-generation Neuralink brain chip&nbsp;&nbsp;SamMobile",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Decoding Semantic Categories from Picture-Naming EEG",
-    "date": "2026-06-15",
-    "url": "hxxps://arxiv[.]org/abs/2606[.]14614",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2606.14614v1 Announce Type: new Abstract: Picture naming requires the transformation of visual object information into a spoken lexical response through perceptual, semantic, lexical, and articu",
-    "category": "research"
   },
   {
     "type": "external",
@@ -91,11 +118,11 @@
   },
   {
     "type": "external",
-    "title": "More and more of Musk's companies end up under the same roof. Here's a look at his sprawling empire - Fortune",
-    "date": "2026-06-13",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikAFBVV95cUxOb0x1ZWcwTWtvOTNqbGZEbjFSWGtNaHB3bnpfaDJJX1liNlA2cHlOa0xFOXc4c1NjQnJCMnRGZTZOWjFJa2hxcmhjNkdNNWJjYnJoZzBzRVBpdThmQ0JqZ0M1RlpoTlF6MlR2UXBrT1FSZjh1UUpsbkc3OEhvYjJwanYxTGs3OHdMVnlBaWUxRDM?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "More and more of Musk's companies end up under the same roof. Here's a look at his sprawling empire&nbsp;&nbsp;Fortune",
+    "title": "Brain-Computer Interface: Can Startups in All Its Subfields Secure Funding This Year? - 36 Kr",
+    "date": "2026-06-04",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTFBWbURXaHE0UHpEd0tuSTE3QVNvWHZmMm5kQnc1R1NpX1Y1dGpSZWtUczBkNE1WUjhzcVNjbWtyalVVSWtTc3p0UXpIZGdGYU5palRB?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Brain-Computer Interface: Can Startups in All Its Subfields Secure Funding This Year?&nbsp;&nbsp;36 Kr",
     "category": "neurotechnology"
   },
   {
@@ -114,15 +141,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;Crunchbase News",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain-computer interface startup Science raises $230M - SiliconANGLE",
-    "date": "2026-03-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPS0YxUk82N2IzSE16bDNnQS1Ba1hzMmZZNklwZXd0ZFJ4aThsS0xLdC1OdE1CWHMxTWUtU1U0M3EwNWd6NU1vQUxiZGhnelBJbXQ2anRZY2l1a1hsazZlakdBRE1QblVjNFpYZ1BTZDVnRm4zYmNLNHVTVVFLcGNvbmlSMFEzMGktRmJVbldQU2U2RW8?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Brain-computer interface startup Science raises $230M&nbsp;&nbsp;SiliconANGLE",
     "category": "neurotechnology"
   },
   {
