@@ -1,11 +1,74 @@
 [
   {
     "type": "external",
-    "title": "Can neurons speak? Semantic narration of vision at single-cell resolution",
-    "date": "2026-06-18",
-    "url": "hxxps://arxiv[.]org/abs/2606[.]18667",
+    "title": "The film about Sam Altman has been dropped by Amazon MGM",
+    "date": "2026-06-19",
+    "url": "hxxps://www[.]theverge[.]com/ai-artificial-intelligence/952906/sam-altman-film-artificial-openai-amazon-mgm-dropped",
+    "source": "The Verge",
+    "summary": "Luca Guadagnino's film about OpenAI CEO Sam Altman, Artificial, has reportedly been dropped by Amazon MGM. The film, which stars Andrew Garfield and covers the rollercoaster five days in 2023 spanning",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "The Download: AI bottleneck debates, and BCI trials take off",
+    "date": "2026-06-19",
+    "url": "hxxps://www[.]technologyreview[.]com/2026/06/19/1139327/the-download-llms-bottleneck-breakthrough-bci-trials-take-off/",
+    "source": "MIT Technology Review",
+    "summary": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. A startup claims it broke through a bottleneck tha",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Brain-computer interface trials are taking off",
+    "date": "2026-06-19",
+    "url": "hxxps://www[.]technologyreview[.]com/2026/06/19/1139270/brain-computer-interface-trials-are-taking-off/",
+    "source": "MIT Technology Review",
+    "summary": "This week, I covered the story of Casey Harrell—a man with ALS who is “the first power user” of a brain implant, according to the researchers who worked with him. Harrell is paralyzed and unable to sp",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "A brain-computer interface has, for the first time, restored fluent everyday speech to a person who had lost it — a man with ALS who had not spoken aloud in years until a small implant from the BrainGate clinical trial began translating his attempts to speak dire - Space Daily",
+    "date": "2026-06-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiugJBVV95cUxPV1h3X0I1OF9ReE9vZW1nSXl2Tkw1Yklzc3FDc1lOU1Q1cUZ6aXc2RUt2OV9STkhJZk1ya285Qmw4b3ZzRFg1cElaZmFvQXdzYnZkeGF6bTRZT1hSLXpVZmxTUnhqRUt3ODN3akpUd0lEYlJEVFNRUFYwSTZzRTQ5UE1Wbmw4U0w4cENsbG1iX1RHcVZYbnlFRUI1N0VYbnZ1V2d3MGVqeFpoeDNHbHREOGJXM2FzbkVSUm1tMDRyc2RSZ0FUOXFCNEJTX0taaW9SbXNISlhid1hvbmdDUnpsc1hpeDFwSjh1QlBtYkdXNzlPRGtHWTcyVDVYcmt3alZWTzJnUmFBeTF1STF0R1FBQkFtSU0xZ21idThGN0lZT3dSWXlVS2FkVm9DdmlWYVlaVXNXclpNYnpYQQ?oc=5",
+    "source": "Google News — BCI",
+    "summary": "A brain-computer interface has, for the first time, restored fluent everyday speech to a person who had lost it — a man with ALS who had not spoken aloud in years until a small implant from the BrainG",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Scientists Let People Play Video Games Using Only Their Thoughts - SciTechDaily",
+    "date": "2026-06-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxPNUN4ZGpEZ09rWGZfMUZIc29MTEFndmVFak1FX21KUVhTeHJ0cTAxTTNwT2h1MlBEZzRORERGLWRwTTA5dzZwZmFaUHh6Wl9BalhKNG5Obm9JTlBheXFubHdHcXdld2ZoMnd1LUkteFNINnZfbW9CcTRrdEFrV0RuWE5RcUlMbDMyRXlTa0dUVWRJaEh4?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Scientists Let People Play Video Games Using Only Their Thoughts&nbsp;&nbsp;SciTechDaily",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China's brain chip breakthrough raises big questions - Fox News",
+    "date": "2026-06-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihwFBVV95cUxPNWNFMlBvZkotWThzSFd2T0FFazZlX00xZ2t6ekJLMTlUODJEeU1qODhoeUVIM2FCRTc1ZVlKbjlwaG1TUFA2dUFJYmNlYV9FTHBzVHlIRmZjLVNQbTJzejFJbHdBREh6OGNqcG1sdHBzX0VFblFteFh0dWh0WWhEMWxfSGp6QWvSAYwBQVVfeXFMT0tpQ2MwUGZvNzNObTNkaWdVcmRFU3BNRk1sVkl1cjczZUpvUnc2SWt5OFpKaVZMRk1GVDhFZWlyRjBmdzdybnV6ajV5WUNyODhnUlhoaFo1aEdlRHpsUmp0ckplQUM5a0RXTjBJbWZLZG5FYW1UZlM3WHF1SEVWcEVVODNCbEVoR2s2UnE?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "China's brain chip breakthrough raises big questions&nbsp;&nbsp;Fox News",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Synchronization modes in bipartite oscillator networks",
+    "date": "2026-06-19",
+    "url": "hxxps://arxiv[.]org/abs/2606[.]20345",
     "source": "arXiv Neuroscience",
-    "summary": "arXiv:2606.18667v1 Announce Type: new Abstract: Identifying what individual neurons encode in higher-order visual cortex is an open problem. Responses resist intuitive parameterization, and the deep-n",
+    "summary": "arXiv:2606.20345v1 Announce Type: cross Abstract: Collective oscillations in neuronal systems often arise from interactions between excitatory and inhibitory populations rather than from recurrent cou",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "A Deep Generative Model for Resting-State EEG Synthesis and Transferable Representation Learning",
+    "date": "2026-06-19",
+    "url": "hxxps://arxiv[.]org/abs/2503[.]02636",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2503.02636v5 Announce Type: replace Abstract: Resting-state EEG provides a non-invasive view of spontaneous brain activity, but extracting meaningful patterns is often limited by scarce high-qua",
     "category": "research"
   },
   {
@@ -19,38 +82,38 @@
   },
   {
     "type": "external",
-    "title": "ALS Patient, 47, Gains Ability to Speak and Sustain Full-Time Job Using Experimental Brain-Computer Interface - People.com",
+    "title": "Clinical Trial Tests Fully Implantable BCI for Advanced ALS - Neuroscience News",
     "date": "2026-06-17",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiuwFBVV95cUxNR25zQ0cyUXBzYmZoVGsxTnJvUmp0VHlMQzNSaHB3ZjdITlJvZTZRZEdld1NZT3ZNbk1zT2lmb29SOW1IR3ZKbGpINTlTdUtPMy1KSEVxYWQxYlhrcjRfWmtzaXROVk1sakVIZzZsTUswdk9qVEtQVHVhMGNZOWtocVN5YjlnUVQxRTBQem5qcklkcUxDN2VXVE5FdnB4NElIZ2Q5R184TTM2ckY5WUxhWHFLUzZWUTVqeUR3?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMid0FVX3lxTE5tc3MwcGZzUDhNRHVhNVdvOHVTZVVRd0J2M1FucVFkUGJnQzFSQ1ZWc1BqclBSV0l5RkFydTJ2TWZrVnQ0MVFxZDhIT19SMDNIVzJDQklBOHZtYnU2VjQ3QmI1YWlEN1Yxcmd3UVU0bl94REtid0Rz?oc=5",
     "source": "Google News — BCI",
-    "summary": "ALS Patient, 47, Gains Ability to Speak and Sustain Full-Time Job Using Experimental Brain-Computer Interface&nbsp;&nbsp;People.com",
+    "summary": "Clinical Trial Tests Fully Implantable BCI for Advanced ALS&nbsp;&nbsp;Neuroscience News",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Long-term independent use of an intracortical brain–computer interface for speech and cursor control - Nature",
-    "date": "2026-06-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTFA5TUN2eFdLenpER2VBWV9iYzR6dy1CNkdUTHYyLVRYUHJmMlcwTjUzNW1Gek9ZbGd0bDU0MlJfTzBzVXd4Z2pid0FTMmxFeU5Mbk9aREM0dHk3clFzUFJF?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Long-term independent use of an intracortical brain–computer interface for speech and cursor control&nbsp;&nbsp;Nature",
+    "title": "Neuralink competitor Paradromics just implanted its first brain-chip device. The next step is restoring speech. - Business Insider",
+    "date": "2026-06-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisgFBVV95cUxNMFJHcDlxNVVrZ3NRSTZ1Q2J4Xzcxa09EX1VrUHZ0b29OYjJhUkRXUWVCMnV5ejdYSUVaSWdRUTdfVUZndGpvMnRrUEdQc0pJeEZBay1JRFVhZVFBaTRFWmFZbndmNTFOeDlOZ0pmeEl5Vkp5YlotcFRHOE9BeE1xN1ZnUjNfTTlGaktCVVp6U3hQdW02d2NmS2xzZnRSMUgtUWJGLWJYdk9NZm15bTNCaEZn?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink competitor Paradromics just implanted its first brain-chip device. The next step is restoring speech.&nbsp;&nbsp;Business Insider",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Brain-computer interface enables independent, accurate communication for man living with ALS - Medical Xpress",
-    "date": "2026-06-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikgFBVV95cUxOd2lKblJzUjJ3ZHFiOTV0cTk2aDhhbWNSVDc1UVVwOFZ4RjdJWlRDTi0wSWJJWWQ0TTdkYl9YN1k4dEkybUFvNVBWa1VmMGZTZ25tZkYxS1V2TExzREZQcVM4akk1MWdYTUhiS0FkdVM3cXRzcE9vMzY3QUlZVGFQS1pxalg5eEpLSW5oVmRfSHNzZw?oc=5",
+    "title": "AI and brain-computer interface allow speechless ALS patient to work a full-time job - The Register",
+    "date": "2026-06-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi1gFBVV95cUxPYlFaM0RUOUNzR3d3WWFiZ09fVFY5dHNQSzRpWE9sVWNYYjVJLTNKWHQzaEZxN0Jua1ZZdXg4YVQ2bXAwODI5OEFLdEtKTDNDUTFPU3NtLTZRb1ZjU2xsUFE0U3hpTEkzQVA3UUo2NUtybGxFQnk1ZmFMY01jZjRGWERxZEkzOW5DSU9QOE1VaXgzYjdkNTlOOUxoMXJYLXRrVGpiWnJFZ0N6Q254TzhINzFFTloxOUVSbFc1czZick1GTnpabzFNOEFlWGQtenI4VUVfcG1n?oc=5",
     "source": "Google News — BCI",
-    "summary": "Brain-computer interface enables independent, accurate communication for man living with ALS&nbsp;&nbsp;Medical Xpress",
+    "summary": "AI and brain-computer interface allow speechless ALS patient to work a full-time job&nbsp;&nbsp;The Register",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Two years, 2 million words: How a brain implant transformed an ALS patient’s life - The Washington Post",
-    "date": "2026-06-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivAFBVV95cUxQM2hBcmxJZi02VHF6SUU5RDVwQTI1cW1pWHl0RGZBVVdJaUhzTWEyRDZOZFNCWXotQlJJU2RtYnRQRVdCNUs0YnlUdzdnbHpyaHoxeUZLaGVXNDY5aGwtRmx6YW83UUF4amlZT3RZdlMxd3p4WEhVY21SY2xEaVBSQnhoRzVSNmY0MVNzNGJiYzg5OUdCSDlfV1FxemFhcFRNc2g4bVRoU3o0RXNQQmh6VDlIaVZqbEVjX096aw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Two years, 2 million words: How a brain implant transformed an ALS patient’s life&nbsp;&nbsp;The Washington Post",
+    "title": "China beats Elon Musk's 'Jesus-level technology' to launch world's first commercial brain chip - The Times of India",
+    "date": "2026-06-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikgJBVV95cUxOd2d3eEp3Y2lVWXdxS3pvTnpLMEhpZEJWQVFCNlU4elA1bF9zYk5lVVNUZ3BjS1BpTW9HUXdLUk1Ec21ud3hpNl83dnd2VWNxcnN1VW9fSElQbk5RN1FhQWttNFlPQ1ozVUFFZ3d3dVdLNHMyUTZjYTN3Z2xGc0g3WWtURzJPQWIzTTY0dnBLcWo0QWxjZG1WYWw5WG1QQ0RiSXN0RGVCS1R3TDI2X09uYTVnMnVXY0ZpTXBYcTVMOVJtbjJEa3NfZmlkQW9iS05aT1JQYzEzcG15NDhKWmxjRTRmTmk4eU1vX0pUZjZlY2Rmd0I0Sl9XbENOdHZKVmRKUGdsU00yQnFUS0QwVDY1UG9n0gGXAkFVX3lxTE5jaEFrRlNVXzhWWUdGaWZzMWdCNWZPNmR1U2ZvNk5Odzl2c284cWJVandUa0M3Rkh4LUt6b0ppWUdTUlVDNWp4enhjbG5nS1pBMVhwVFA2eE9lNFY3UEpyM1dMUGhoX1pEUm96bzFBVG0tTXFfYlFMN2VSM08wUzFxTWVsQzBSOVViaWlmZUw5Mi1PckNJNmZ0Y1BTVmVVa2FpNzhMUVIwUkhnQ09NaDN1bTBuTGd3bWtoMGpQX2RFWWRuOC1GVVEwLWpmSERpeHJwSHp5MENZSklKVFNORFRwS3hYbDAyaW4wTGdleTkyeHRKcjhQM3haX2U0OWlRX01rYmhPM0JFR0dpV0lRZEFNNHVJeGNvQQ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "China beats Elon Musk's 'Jesus-level technology' to launch world's first commercial brain chip&nbsp;&nbsp;The Times of India",
     "category": "neurotechnology"
   },
   {
@@ -60,6 +123,24 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMib0FVX3lxTE5LbzQzRjNfdzdFaGhTRG5wWXZuNEFFZTUwUTdPamN3VDV6ZUZnQ1R3OThFaG1rVFZ1cF9YQWVQN3JXLXlZU0g0TnVHeGlpMmZ0UUlDcUtkRG1uUUJ1MFNSVGxCN0dETGlRZDRFTGI5aw?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Brain-Computer Interface Startup SiClink Raises Millions for Visual Reconstruction Technology&nbsp;&nbsp;Pandaily",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Elon Musk Compares His Work to Miracles Performed by Jesus Christ - Futurism",
+    "date": "2026-05-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMibEFVX3lxTE1mTV9fV0hIRDNMQmhQUjMyempvTjdEQ3Y2VHNSSkdIZUl2YjU2MFpUWTNXUUZoVkowVk1YamRkSVhMV005WHI2cTZLNTZ6NlZicUE3YVFSOUIwcUlQczF2eU1vV2l5dF9BbkZDSA?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk Compares His Work to Miracles Performed by Jesus Christ&nbsp;&nbsp;Futurism",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Elon Musk compares his company’s work to that of Jesus - MarketWatch",
+    "date": "2026-05-18",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxQZUhMMEp3akhPMEZvUmNtYVRXTjkwb3Y0T3pGZmtsbl9uNVo3aTk4ODNmYkRSYVFaWW85TWVpQmVsQjNBUzFtTUJPTk9tcmdKMFlrVWhTWVZVNUw4UjNxUFNxUUxQLTd4RUhuSXRkTl9vYVkzYTFNRXBGWTdHR2NVVFQ4NFh4cmtDT05zR05FUkdmRnlCR09vZzJtS2g?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk compares his company’s work to that of Jesus&nbsp;&nbsp;MarketWatch",
     "category": "neurotechnology"
   },
   {
