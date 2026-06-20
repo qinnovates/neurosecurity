@@ -1,15 +1,6 @@
 [
   {
     "type": "external",
-    "title": "The film about Sam Altman has been dropped by Amazon MGM",
-    "date": "2026-06-19",
-    "url": "hxxps://www[.]theverge[.]com/ai-artificial-intelligence/952906/sam-altman-film-artificial-openai-amazon-mgm-dropped",
-    "source": "The Verge",
-    "summary": "Luca Guadagnino's film about OpenAI CEO Sam Altman, Artificial, has reportedly been dropped by Amazon MGM. The film, which stars Andrew Garfield and covers the rollercoaster five days in 2023 spanning",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "The Download: AI bottleneck debates, and BCI trials take off",
     "date": "2026-06-19",
     "url": "hxxps://www[.]technologyreview[.]com/2026/06/19/1139327/the-download-llms-bottleneck-breakthrough-bci-trials-take-off/",
@@ -28,11 +19,11 @@
   },
   {
     "type": "external",
-    "title": "A brain-computer interface has, for the first time, restored fluent everyday speech to a person who had lost it — a man with ALS who had not spoken aloud in years until a small implant from the BrainGate clinical trial began translating his attempts to speak dire - Space Daily",
+    "title": "Brain-computer interface trials are taking off - MIT Technology Review",
     "date": "2026-06-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiugJBVV95cUxPV1h3X0I1OF9ReE9vZW1nSXl2Tkw1Yklzc3FDc1lOU1Q1cUZ6aXc2RUt2OV9STkhJZk1ya285Qmw4b3ZzRFg1cElaZmFvQXdzYnZkeGF6bTRZT1hSLXpVZmxTUnhqRUt3ODN3akpUd0lEYlJEVFNRUFYwSTZzRTQ5UE1Wbmw4U0w4cENsbG1iX1RHcVZYbnlFRUI1N0VYbnZ1V2d3MGVqeFpoeDNHbHREOGJXM2FzbkVSUm1tMDRyc2RSZ0FUOXFCNEJTX0taaW9SbXNISlhid1hvbmdDUnpsc1hpeDFwSjh1QlBtYkdXNzlPRGtHWTcyVDVYcmt3alZWTzJnUmFBeTF1STF0R1FBQkFtSU0xZ21idThGN0lZT3dSWXlVS2FkVm9DdmlWYVlaVXNXclpNYnpYQQ?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxOMkNhVFltNTRIUVBtaktCc0MtN3FnX3o1OGhQTmdpWXR3ZHJVLUVWS2hPTlEtVTlKT1Q1ZnVHU2VvRk9fZTVIcDZuTlF3d3BicmNCOVJsZFVzTzhwamVHV0xKSTBMMzVQOWxrajFEQVVDMFFiaVFGTDF5UEJsZmM3SUdIVDRLX3RxVFpHMVVNMkhxd3B6dVM4X05fMGh2QXJU0gGmAUFVX3lxTE03TXpQZmhHbmtYTWdBTXZwWmI1ZlBPX0s0UDM5dkhUU0pKUzNVV2ZOeGtWU3paZFc3d2FvZlBWQ1RRS0tSdjB4LWdzMG9lRzhjSmNwZ0d4bjR0Ty1jc0lPMzA4QjZjRWJ1N2ZYVUVGVVJBWExVZWZTMFh4YUdtcVhienI3VlluQnhyRzEzSVFOVmsySF80MHNudWlaZmFqTk9BS2hTeHc?oc=5",
     "source": "Google News — BCI",
-    "summary": "A brain-computer interface has, for the first time, restored fluent everyday speech to a person who had lost it — a man with ALS who had not spoken aloud in years until a small implant from the BrainG",
+    "summary": "Brain-computer interface trials are taking off&nbsp;&nbsp;MIT Technology Review",
     "category": "neurotechnology"
   },
   {
@@ -46,30 +37,21 @@
   },
   {
     "type": "external",
+    "title": "A brain-computer interface has, for the first time, restored fluent everyday speech to a person who had lost it — a man with ALS who had not spoken aloud in years until a small implant from the BrainGate clinical trial began translating his attempts to speak dire - Space Daily",
+    "date": "2026-06-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiugJBVV95cUxPV1h3X0I1OF9ReE9vZW1nSXl2Tkw1Yklzc3FDc1lOU1Q1cUZ6aXc2RUt2OV9STkhJZk1ya285Qmw4b3ZzRFg1cElaZmFvQXdzYnZkeGF6bTRZT1hSLXpVZmxTUnhqRUt3ODN3akpUd0lEYlJEVFNRUFYwSTZzRTQ5UE1Wbmw4U0w4cENsbG1iX1RHcVZYbnlFRUI1N0VYbnZ1V2d3MGVqeFpoeDNHbHREOGJXM2FzbkVSUm1tMDRyc2RSZ0FUOXFCNEJTX0taaW9SbXNISlhid1hvbmdDUnpsc1hpeDFwSjh1QlBtYkdXNzlPRGtHWTcyVDVYcmt3alZWTzJnUmFBeTF1STF0R1FBQkFtSU0xZ21idThGN0lZT3dSWXlVS2FkVm9DdmlWYVlaVXNXclpNYnpYQQ?oc=5",
+    "source": "Google News — BCI",
+    "summary": "A brain-computer interface has, for the first time, restored fluent everyday speech to a person who had lost it — a man with ALS who had not spoken aloud in years until a small implant from the BrainG",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "China's brain chip breakthrough raises big questions - Fox News",
     "date": "2026-06-19",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMihwFBVV95cUxPNWNFMlBvZkotWThzSFd2T0FFazZlX00xZ2t6ekJLMTlUODJEeU1qODhoeUVIM2FCRTc1ZVlKbjlwaG1TUFA2dUFJYmNlYV9FTHBzVHlIRmZjLVNQbTJzejFJbHdBREh6OGNqcG1sdHBzX0VFblFteFh0dWh0WWhEMWxfSGp6QWvSAYwBQVVfeXFMT0tpQ2MwUGZvNzNObTNkaWdVcmRFU3BNRk1sVkl1cjczZUpvUnc2SWt5OFpKaVZMRk1GVDhFZWlyRjBmdzdybnV6ajV5WUNyODhnUlhoaFo1aEdlRHpsUmp0ckplQUM5a0RXTjBJbWZLZG5FYW1UZlM3WHF1SEVWcEVVODNCbEVoR2s2UnE?oc=5",
     "source": "Google News — Neuralink",
     "summary": "China's brain chip breakthrough raises big questions&nbsp;&nbsp;Fox News",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Synchronization modes in bipartite oscillator networks",
-    "date": "2026-06-19",
-    "url": "hxxps://arxiv[.]org/abs/2606[.]20345",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2606.20345v1 Announce Type: cross Abstract: Collective oscillations in neuronal systems often arise from interactions between excitatory and inhibitory populations rather than from recurrent cou",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "A Deep Generative Model for Resting-State EEG Synthesis and Transferable Representation Learning",
-    "date": "2026-06-19",
-    "url": "hxxps://arxiv[.]org/abs/2503[.]02636",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2503.02636v5 Announce Type: replace Abstract: Resting-state EEG provides a non-invasive view of spontaneous brain activity, but extracting meaningful patterns is often limited by scarce high-qua",
-    "category": "research"
   },
   {
     "type": "external",
@@ -82,11 +64,11 @@
   },
   {
     "type": "external",
-    "title": "Clinical Trial Tests Fully Implantable BCI for Advanced ALS - Neuroscience News",
+    "title": "ALS Patient, 47, Gains Ability to Speak and Sustain Full-Time Job Using Experimental Brain-Computer Interface - People.com",
     "date": "2026-06-17",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMid0FVX3lxTE5tc3MwcGZzUDhNRHVhNVdvOHVTZVVRd0J2M1FucVFkUGJnQzFSQ1ZWc1BqclBSV0l5RkFydTJ2TWZrVnQ0MVFxZDhIT19SMDNIVzJDQklBOHZtYnU2VjQ3QmI1YWlEN1Yxcmd3UVU0bl94REtid0Rz?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiuwFBVV95cUxNR25zQ0cyUXBzYmZoVGsxTnJvUmp0VHlMQzNSaHB3ZjdITlJvZTZRZEdld1NZT3ZNbk1zT2lmb29SOW1IR3ZKbGpINTlTdUtPMy1KSEVxYWQxYlhrcjRfWmtzaXROVk1sakVIZzZsTUswdk9qVEtQVHVhMGNZOWtocVN5YjlnUVQxRTBQem5qcklkcUxDN2VXVE5FdnB4NElIZ2Q5R184TTM2ckY5WUxhWHFLUzZWUTVqeUR3?oc=5",
     "source": "Google News — BCI",
-    "summary": "Clinical Trial Tests Fully Implantable BCI for Advanced ALS&nbsp;&nbsp;Neuroscience News",
+    "summary": "ALS Patient, 47, Gains Ability to Speak and Sustain Full-Time Job Using Experimental Brain-Computer Interface&nbsp;&nbsp;People.com",
     "category": "neurotechnology"
   },
   {
@@ -100,11 +82,11 @@
   },
   {
     "type": "external",
-    "title": "AI and brain-computer interface allow speechless ALS patient to work a full-time job - The Register",
-    "date": "2026-06-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi1gFBVV95cUxPYlFaM0RUOUNzR3d3WWFiZ09fVFY5dHNQSzRpWE9sVWNYYjVJLTNKWHQzaEZxN0Jua1ZZdXg4YVQ2bXAwODI5OEFLdEtKTDNDUTFPU3NtLTZRb1ZjU2xsUFE0U3hpTEkzQVA3UUo2NUtybGxFQnk1ZmFMY01jZjRGWERxZEkzOW5DSU9QOE1VaXgzYjdkNTlOOUxoMXJYLXRrVGpiWnJFZ0N6Q254TzhINzFFTloxOUVSbFc1czZick1GTnpabzFNOEFlWGQtenI4VUVfcG1n?oc=5",
-    "source": "Google News — BCI",
-    "summary": "AI and brain-computer interface allow speechless ALS patient to work a full-time job&nbsp;&nbsp;The Register",
+    "title": "Samsung And Elon Musk Partner Up Again, This Time For The 4th-Generation Neuralink Chip Under The 4nm Process, TSMC Seemingly Dropped - Wccftech",
+    "date": "2026-06-15",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxOSkdIenR1Nk5lSU1BTE9RZkV4YlVSazFHRkxHUVZIUTVieTdvN3ItcG1kTlZQbWJnRXFKdy1YYnh5dkZQMUhUNWJ5QTdyampjZXV5TlhRaDZiMGNDZngzUmJ6ckRBcnlRa3hldE00dmRIUEZrRmRHSGdxMDJUa04zMDhNUnJHU1o2bjF6V0ZobFJ4Y2PSAZgBQVVfeXFMTWFmZjc0Z0ZuSUpQdXU2ekVNV1dNOHV1czRfdmRzVVowVWo3dzRQanZSdkRvcVVjbDF5SjVFSVJYOW83R3hMQ2w3amIyMDNnWEJucWFjbzhzaU9uclp4VXhrYTBCMlZtVXJOS0lYYW5mNGJaUUtMRTZRWC1EZ1pZZEVETmVybmFBLUpLWXY4Z3NxUFJhcE8yQmk?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Samsung And Elon Musk Partner Up Again, This Time For The 4th-Generation Neuralink Chip Under The 4nm Process, TSMC Seemingly Dropped&nbsp;&nbsp;Wccftech",
     "category": "neurotechnology"
   },
   {
@@ -127,20 +109,11 @@
   },
   {
     "type": "external",
-    "title": "Elon Musk Compares His Work to Miracles Performed by Jesus Christ - Futurism",
-    "date": "2026-05-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMibEFVX3lxTE1mTV9fV0hIRDNMQmhQUjMyempvTjdEQ3Y2VHNSSkdIZUl2YjU2MFpUWTNXUUZoVkowVk1YamRkSVhMV005WHI2cTZLNTZ6NlZicUE3YVFSOUIwcUlQczF2eU1vV2l5dF9BbkZDSA?oc=5",
+    "title": "Elon Musk predicts brain implant company Neuralink will soon yield 'Jesus-level miracles of science' - Christian Post",
+    "date": "2026-05-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxOU0MxZDJlaTUwRTFaSEVTSlItdjg4Ql9lNkVFSERnaVl6YkNoWkduby12WnNFWERlVk85LXRqVjRlOVVMaU5Dd0RramJMa3FMUDNQRVMxZTVlSFpUOWIwQnRTU0tqTktOQTlQNUQ4SHM5SEowRjNZWTVUclJ6Z01NaWN4alFvSkJqcjZRSWFzcDhkMGY4?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Elon Musk Compares His Work to Miracles Performed by Jesus Christ&nbsp;&nbsp;Futurism",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Elon Musk compares his company’s work to that of Jesus - MarketWatch",
-    "date": "2026-05-18",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxQZUhMMEp3akhPMEZvUmNtYVRXTjkwb3Y0T3pGZmtsbl9uNVo3aTk4ODNmYkRSYVFaWW85TWVpQmVsQjNBUzFtTUJPTk9tcmdKMFlrVWhTWVZVNUw4UjNxUFNxUUxQLTd4RUhuSXRkTl9vYVkzYTFNRXBGWTdHR2NVVFQ4NFh4cmtDT05zR05FUkdmRnlCR09vZzJtS2g?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk compares his company’s work to that of Jesus&nbsp;&nbsp;MarketWatch",
+    "summary": "Elon Musk predicts brain implant company Neuralink will soon yield 'Jesus-level miracles of science'&nbsp;&nbsp;Christian Post",
     "category": "neurotechnology"
   },
   {
