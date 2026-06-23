@@ -1,39 +1,57 @@
 [
   {
     "type": "external",
-    "title": "The Download: AI bottleneck debates, and BCI trials take off",
-    "date": "2026-06-19",
-    "url": "hxxps://www[.]technologyreview[.]com/2026/06/19/1139327/the-download-llms-bottleneck-breakthrough-bci-trials-take-off/",
-    "source": "MIT Technology Review",
-    "summary": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. A startup claims it broke through a bottleneck tha",
+    "title": "What Are Brain-Computer Interfaces and How Do They Treat Neurological Disorders? - News-Medical",
+    "date": "2026-06-23",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixgFBVV95cUxQMEM2SkVGTlk1WkNUMFJIeUVIMmFQSFo3dzJfVWpWT3Z5WW1aVlgyNnhTQ28yd09fSmJ5elM4WTlES0VtUVhxTWJBb0VEdXFoVzdXV2NTUjRLRC16RThLWDdSN19QMEFIMlg1d2FfVFJmYUFJRThINnFpejI5VDZmVURYMzEyWnNyZDRPaVhWcEJRNFdfWXhtOGNhbTdaSENsS2pqWHY5a2xTaXA0YXVabmY3YzlOVjF2ZlJUYmdySnRac01zT0E?oc=5",
+    "source": "Google News — BCI",
+    "summary": "What Are Brain-Computer Interfaces and How Do They Treat Neurological Disorders?&nbsp;&nbsp;News-Medical",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Adaptive conduction delays and phase locking in spiking Haken Lighthouse networks",
+    "date": "2026-06-23",
+    "url": "hxxps://arxiv[.]org/abs/2606[.]21508",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2606.21508v1 Announce Type: new Abstract: We develop a theory of phase-locked activity in delayed spiking networks using the Haken Lighthouse model as an analytically tractable event-based descr",
     "category": "research"
   },
   {
     "type": "external",
-    "title": "Brain-computer interface trials are taking off - MIT Technology Review",
-    "date": "2026-06-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxOMkNhVFltNTRIUVBtaktCc0MtN3FnX3o1OGhQTmdpWXR3ZHJVLUVWS2hPTlEtVTlKT1Q1ZnVHU2VvRk9fZTVIcDZuTlF3d3BicmNCOVJsZFVzTzhwamVHV0xKSTBMMzVQOWxrajFEQVVDMFFiaVFGTDF5UEJsZmM3SUdIVDRLX3RxVFpHMVVNMkhxd3B6dVM4X05fMGh2QXJU0gGmAUFVX3lxTE03TXpQZmhHbmtYTWdBTXZwWmI1ZlBPX0s0UDM5dkhUU0pKUzNVV2ZOeGtWU3paZFc3d2FvZlBWQ1RRS0tSdjB4LWdzMG9lRzhjSmNwZ0d4bjR0Ty1jc0lPMzA4QjZjRWJ1N2ZYVUVGVVJBWExVZWZTMFh4YUdtcVhienI3VlluQnhyRzEzSVFOVmsySF80MHNudWlaZmFqTk9BS2hTeHc?oc=5",
+    "title": "Delay coordinates synchronization and induces abrupt transition in excitable networks",
+    "date": "2026-06-23",
+    "url": "hxxps://arxiv[.]org/abs/2606[.]21703",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2606.21703v1 Announce Type: new Abstract: Neuronal communication is inherently time-delayed, due to the finite speed of signal propagation. Although often considered challenging or disruptive, s",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Have brain-computer interfaces finally arrived? - BioWorld News",
+    "date": "2026-06-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikAFBVV95cUxOVS1kaWVjSVdKYnVrcEpiMThJYmJoOGpGdWlsQlJaTk1ieWlaUUhYR0tpWkIzMXAyU091ZWhKRlZZaFpVb2kyckhWN3lsRXVEU2hRaVdyWW1ndURFRU5HZ2RzajI4OFFKaVJhYzBieFZ3VE9IRlRLVTVfd1ZtbnpUaDBmc25FS0UyNENodWJiSVI?oc=5",
     "source": "Google News — BCI",
-    "summary": "Brain-computer interface trials are taking off&nbsp;&nbsp;MIT Technology Review",
+    "summary": "Have brain-computer interfaces finally arrived?&nbsp;&nbsp;BioWorld News",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Doctors implant first wireless brain-computer device designed to restore communication - The Brighter Side of News",
-    "date": "2026-06-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwwFBVV95cUxONFZfLW9ORXZWYWlRQ0ZkSUZrMy1pQ2NRWmI1TlBPQWlobkl0NnlqYm9XUk1KSTljb25rMXdLV2xKUExvRmcwTUw0ZHlEZ0taa3U3elBGTEZvUElWcTlySlM0YjcxdTF6UWltMU15MHNuRjdmbkpIdUlUb1huUTM3NlVHY2NpZXVSYzd0M1ZsRDRjQ2hjRll1ZjMwd0FGc0ROcGtCYmpLUXdLX3NtYzUtTjBtd2xERlI5NkMyaHNIM0VqTUk?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Doctors implant first wireless brain-computer device designed to restore communication&nbsp;&nbsp;The Brighter Side of News",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China's brain chip breakthrough raises big questions - Fox News",
-    "date": "2026-06-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxPaVNRbnpYYm1jckxXN0JudmkxckNOTTNWOENtZUFOa1I1TGdWeHRQc0FOV0NULUFNYVhDWnFhajllNEtHaXNBVTAxSS02V2dCeUxYdXRXN1NUaTJKQk1DWFlIb2pxR05jOWJyYlRlZnNxc0xOWU5SdGt3UkZXaTZyM2VLdFBJdmhjeDFSWFRn0gGTAUFVX3lxTE1VenhCWmx1WWJ6VmVlbDh3WGswakhJS3lfazhWZDRxQkpEeW9jbW1PLXd3cDZhd1BxNkFVa1k3MWZ1S0l5aTRwblgyWDFuTUk4eVdBaWZpUnpwdVlBYW50XzBoTWdIODNtaTl6QVl1LVI5YVRWazhIdjVZN2ViaVFEVGREbVJ3SDRqNVRFSW5qYVgtaw?oc=5",
+    "title": "Neuralink Reaches 26th Patient in Ongoing Brain-Computer Interface Trials - BASENOR - Tesla Accessories",
+    "date": "2026-06-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxNNFNVTGVnMGF0MUFZUTFjRVNKN2pyT2Q4R0Y3Mi1PSkdkb09vR3FpZjhleF9LSHVnX294RkNJLUhQYnBLY1ZtUEhqdF90a3gxbVk2RlN2VFVXbnVWZ1hBbWdWYlVVQVVGalhQdm96X2tvWEo4azhRek1jc0tXT0dhN3hyTnBzVVQ1alVDa0F3VExhMG8zUnZ1dm1sYmFJRUZhVFlMcTFHVTI3Yktn?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "China's brain chip breakthrough raises big questions&nbsp;&nbsp;Fox News",
+    "summary": "Neuralink Reaches 26th Patient in Ongoing Brain-Computer Interface Trials&nbsp;&nbsp;BASENOR - Tesla Accessories",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Rotating Spiral Brain Waves Act as a Space-and-Time Clock - Neuroscience News",
+    "date": "2026-06-18",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMie0FVX3lxTE5Db25QUk5iWEdVSVpNLV9pbEQ3Z0FwbGFuMDhFbUtrRHl0X2htNE45Q1lCemhheUFVeV9iZ0xpcjFlVENrUVhBN2pmTnNDa052RVdYTTd5U0F4YXBVdHJDM2dSNzFmSjhiMlpMaDdfaVhQQU5RdWg3dkVLWQ?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Rotating Spiral Brain Waves Act as a Space-and-Time Clock&nbsp;&nbsp;Neuroscience News",
+    "category": "neuroethics"
   },
   {
     "type": "external",
@@ -55,47 +73,38 @@
   },
   {
     "type": "external",
-    "title": "Samsung wins 1st Neuralink chip order as Musk broadens supply chain - KED Global",
+    "title": "Samsung And Elon Musk Partner Up Again, This Time For The 4th-Generation Neuralink Chip Under The 4nm Process, TSMC Seemingly Dropped - Wccftech",
     "date": "2026-06-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMid0FVX3lxTE5qZGNTWG1qWUNLQnlTbDhMTlBkSmc4UVQwem92eUZIYTR5VW9aLWFVNm11d0gxeGtaZXlfdUFBOER2SjB5LXV2VS1abnVxOUhMUzhXNEljc09sZTh0T3lPNGJpSlUxVUd4bi1UVlExdnI1VUhDLVNz?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxOSkdIenR1Nk5lSU1BTE9RZkV4YlVSazFHRkxHUVZIUTVieTdvN3ItcG1kTlZQbWJnRXFKdy1YYnh5dkZQMUhUNWJ5QTdyampjZXV5TlhRaDZiMGNDZngzUmJ6ckRBcnlRa3hldE00dmRIUEZrRmRHSGdxMDJUa04zMDhNUnJHU1o2bjF6V0ZobFJ4Y2PSAZgBQVVfeXFMTWFmZjc0Z0ZuSUpQdXU2ekVNV1dNOHV1czRfdmRzVVowVWo3dzRQanZSdkRvcVVjbDF5SjVFSVJYOW83R3hMQ2w3amIyMDNnWEJucWFjbzhzaU9uclp4VXhrYTBCMlZtVXJOS0lYYW5mNGJaUUtMRTZRWC1EZ1pZZEVETmVybmFBLUpLWXY4Z3NxUFJhcE8yQmk?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Samsung wins 1st Neuralink chip order as Musk broadens supply chain&nbsp;&nbsp;KED Global",
+    "summary": "Samsung And Elon Musk Partner Up Again, This Time For The 4th-Generation Neuralink Chip Under The 4nm Process, TSMC Seemingly Dropped&nbsp;&nbsp;Wccftech",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "A brain-computer interface that works with, not against, the brain - YaleNews",
-    "date": "2026-06-09",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxNbHRkYzgwQkRKY0pTRnE1UzRfaEpIMG5hNFF2N09fb05PQ3VUenR0d1RsbWVFTm9iQVVQSk5iQUxXZ3dDLWw1RUtxQklJczBQc0EyeDdEVWxGTGxWUHA4VTlzV21fYWZ5NGdwd2FfN3lscV84UzM2dkl1aGxCeTVSbUNYOFpBcTJV?oc=5",
+    "title": "China beats Elon Musk's 'Jesus-level technology' to launch world's first commercial brain chip - The Times of India",
+    "date": "2026-06-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikgJBVV95cUxOd2d3eEp3Y2lVWXdxS3pvTnpLMEhpZEJWQVFCNlU4elA1bF9zYk5lVVNUZ3BjS1BpTW9HUXdLUk1Ec21ud3hpNl83dnd2VWNxcnN1VW9fSElQbk5RN1FhQWttNFlPQ1ozVUFFZ3d3dVdLNHMyUTZjYTN3Z2xGc0g3WWtURzJPQWIzTTY0dnBLcWo0QWxjZG1WYWw5WG1QQ0RiSXN0RGVCS1R3TDI2X09uYTVnMnVXY0ZpTXBYcTVMOVJtbjJEa3NfZmlkQW9iS05aT1JQYzEzcG15NDhKWmxjRTRmTmk4eU1vX0pUZjZlY2Rmd0I0Sl9XbENOdHZKVmRKUGdsU00yQnFUS0QwVDY1UG9n0gGXAkFVX3lxTE5jaEFrRlNVXzhWWUdGaWZzMWdCNWZPNmR1U2ZvNk5Odzl2c284cWJVandUa0M3Rkh4LUt6b0ppWUdTUlVDNWp4enhjbG5nS1pBMVhwVFA2eE9lNFY3UEpyM1dMUGhoX1pEUm96bzFBVG0tTXFfYlFMN2VSM08wUzFxTWVsQzBSOVViaWlmZUw5Mi1PckNJNmZ0Y1BTVmVVa2FpNzhMUVIwUkhnQ09NaDN1bTBuTGd3bWtoMGpQX2RFWWRuOC1GVVEwLWpmSERpeHJwSHp5MENZSklKVFNORFRwS3hYbDAyaW4wTGdleTkyeHRKcjhQM3haX2U0OWlRX01rYmhPM0JFR0dpV0lRZEFNNHVJeGNvQQ?oc=5",
     "source": "Google News — BCI",
-    "summary": "A brain-computer interface that works with, not against, the brain&nbsp;&nbsp;YaleNews",
+    "summary": "China beats Elon Musk's 'Jesus-level technology' to launch world's first commercial brain chip&nbsp;&nbsp;The Times of India",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Neuralink brain implant gives paralyzed artist ability to create art again - NewsNation",
-    "date": "2026-06-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxNNlVWVUpRRmRSX2MtWVZnbDk3bGhSTk9zYzRMdDdQTnFSMGtNei1sWWt6RTlCU05rNlpXZVVDZVI1bkRBS2JWRTJrdDBYeV9CR1BpSFNDcnRFSE94OUlEWWlSUUFXTndKTXVIZTFYNzVnZ2RQelBzTWJYeTBkYjR4amRXaHdaX1pQMHRMaHl30gGTAUFVX3lxTE8tb19jWGdNcnJia01TckRaV3RMVXVId0VfaGVVREFsXzlELUdNWWdjdFRPazllR0RYa0ltR3A2cDVZOUQ3Tmo1ZEQtemxpYzlZZGNQdGhvV05SMllNRWxNbFJqakExYzVyN2Y5YjFtNk5wOEhxSEFkZlRfa0h4SW5nYVFwUXNXSWhzek9kVWtfaHp6SQ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink brain implant gives paralyzed artist ability to create art again&nbsp;&nbsp;NewsNation",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain-Computer Interface Startup SiClink Raises Millions for Visual Reconstruction Technology - Pandaily",
-    "date": "2026-06-02",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMib0FVX3lxTE5LbzQzRjNfdzdFaGhTRG5wWXZuNEFFZTUwUTdPamN3VDV6ZUZnQ1R3OThFaG1rVFZ1cF9YQWVQN3JXLXlZU0g0TnVHeGlpMmZ0UUlDcUtkRG1uUUJ1MFNSVGxCN0dETGlRZDRFTGI5aw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Brain-Computer Interface Startup SiClink Raises Millions for Visual Reconstruction Technology&nbsp;&nbsp;Pandaily",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Musk’s Neuralink Brain Implant Company Hires Federal Lobbyists - Bloomberg Government News",
+    "title": "China has approved the world’s first invasive brain-computer chip—here’s what’s next - MIT Technology Review",
     "date": "2026-06-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirgFBVV95cUxPQTdOR3g1X0ZJcVZzenVPbDZNaHJKUnpZWnlvQ2IzcEU3MWhfSFc0ck1VbU1tZmw0RFdHY0lRNVZFUjVYcFV3bUVSaTlCcVlFTmZ5dWdRcnZ6MkJabzMtaEhSQkN6V3VYUFlvTldGcUFvZEVxelJKMUpJZjFuRURRMnpOVjBGTW5CS3VSR00xamdoOTkzSURqNFdUdEJ5SzhmWUJZOXQtaDBpa2ZwZlE?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxQM2FuRkthYlMxeHROLVZfWGotRUNla3B2OWlMbzJyR0thQmNfNjd0SjF2NVZWRGFmNG0zZHF1NzFTYmtyVW9PLW9EbW13ZUp2bm04YzFVLVZOR1lZSlowUERrN0RGSU5SMnlMS1JnTXo4eGcya2FfTzBLWjd2WWhQbVdWeVN1VWk10gGOAUFVX3lxTE1FSUpJX2EyRElaMk5NZW9hZEhRSzdlS1U1eUM4TDFuZnh6YXBFTUlfQUx1aTNPV0dTaGo1TzhkNTFPVzlKOXQtSW1Lc3ZUS2tiWGFCMFFFQUlmYjRpZTBJVTNLTURYb1VFcllpYjBSbjNaU09zdzZmWVJMUEd3NEZINnkyb1UzQW1yYjNoS0E?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China has approved the world’s first invasive brain-computer chip—here’s what’s next&nbsp;&nbsp;MIT Technology Review",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Elon Musk predicts brain implant company Neuralink will soon yield 'Jesus-level miracles of science' - Christian Post",
+    "date": "2026-05-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxOU0MxZDJlaTUwRTFaSEVTSlItdjg4Ql9lNkVFSERnaVl6YkNoWkduby12WnNFWERlVk85LXRqVjRlOVVMaU5Dd0RramJMa3FMUDNQRVMxZTVlSFpUOWIwQnRTU0tqTktOQTlQNUQ4SHM5SEowRjNZWTVUclJ6Z01NaWN4alFvSkJqcjZRSWFzcDhkMGY4?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Musk’s Neuralink Brain Implant Company Hires Federal Lobbyists&nbsp;&nbsp;Bloomberg Government News",
+    "summary": "Elon Musk predicts brain implant company Neuralink will soon yield 'Jesus-level miracles of science'&nbsp;&nbsp;Christian Post",
     "category": "neurotechnology"
   },
   {
@@ -109,21 +118,12 @@
   },
   {
     "type": "external",
-    "title": "Convicted former Harvard scientist rebuilds brain computer lab in China - Reuters",
-    "date": "2026-05-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxNYmExYzMxSXNMR1MzSXBvUy05Yk5PUGdUQmhTLWpqYVh2MHduaUNwdUJXdUlDdDZQOFpBUWhYVENTR2FlTnFsNGRyVm1OemUwSlFobGZIS2dkYk1Yc0hJY2stQUZLSXdYN3cwLTZFTldYX3JxUGZzb05qTjJRV0Q3NFFaalNkdXZVMXBlSGpxVmxVbkRvNWZrbVhNazZSUDktQ1FobzluQjZGa3ZNTElzS2dQcUJIaTA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Convicted former Harvard scientist rebuilds brain computer lab in China&nbsp;&nbsp;Reuters",
+    "title": "Elon Musk Compares His Work to Miracles Performed by Jesus Christ - Futurism",
+    "date": "2026-05-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMibEFVX3lxTE1mTV9fV0hIRDNMQmhQUjMyempvTjdEQ3Y2VHNSSkdIZUl2YjU2MFpUWTNXUUZoVkowVk1YamRkSVhMV005WHI2cTZLNTZ6NlZicUE3YVFSOUIwcUlQczF2eU1vV2l5dF9BbkZDSA?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk Compares His Work to Miracles Performed by Jesus Christ&nbsp;&nbsp;Futurism",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Your brain for sale? The new frontier of neural data - The Conversation",
-    "date": "2026-04-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxPdFNPU0haTVFQZXhPWkREZndLUnFqZzdZX0E1VUJkRXNaM3pWS0RMOFp3c0wzQWhKZDluc2pGSGo3dDU1NzJub0RsUUpuZkhtaF9IelpXaW01ckt4TzR5VG00SkpMWGswZFNXUHF4bFpZYTJpTW1MUHpVWndldkV4ajdob0NZX0xhdHZBWlFFVQ?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Your brain for sale? The new frontier of neural data&nbsp;&nbsp;The Conversation",
-    "category": "neuroethics"
   },
   {
     "type": "external",
@@ -132,6 +132,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxQZzh6Z1Y5VV8wLTdhZW5INEQxTGxuU0pwMFg0X1E1RTUyUE5CNlZkRUlpQ25McjFmYWR6ejkyVGNIZE5ESGpGakNJc0c3U041Xy1PMnJnaHJWc3FwaGVLSEdGSUcyUXNkREZVVnpiZXRLYVN5aXFmLWJ2QTZKR0dyMXZGYk5iUVJTSDhRU1NoTEFqRDg?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C&nbsp;&nbsp;Crunchbase News",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain-computer interface startup Science raises $230M - SiliconANGLE",
+    "date": "2026-03-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPS0YxUk82N2IzSE16bDNnQS1Ba1hzMmZZNklwZXd0ZFJ4aThsS0xLdC1OdE1CWHMxTWUtU1U0M3EwNWd6NU1vQUxiZGhnelBJbXQ2anRZY2l1a1hsazZlakdBRE1QblVjNFpYZ1BTZDVnRm4zYmNLNHVTVVFLcGNvbmlSMFEzMGktRmJVbldQU2U2RW8?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Brain-computer interface startup Science raises $230M&nbsp;&nbsp;SiliconANGLE",
     "category": "neurotechnology"
   },
   {
