@@ -29,6 +29,387 @@
     "fetched": "2026-06-21"
   },
   {
+    "id": "1ad39ae2",
+    "title": "Time space signatures of hybrid search resolution using EEG and eye movements concurrent recordings",
+    "date": "2026-06-28",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]06[.]22[.]733836v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "Understanding how the brain supports visual search in naturalistic environments, where attention and memory must work together to find targets among distractors, requires analysing neural signals wher",
+    "tags": [
+      "funding",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "f9a5b3b2",
+    "title": "Enhancing slow-wave sleep via non-invasive brain stimulation modulates brain-to-blood clearance of Alzheimer's disease biomarkers",
+    "date": "2026-06-28",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]06[.]22[.]733841v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "Sleep disturbances and neurodegeneration form a bidirectional vicious cycle. During slow-wave sleep, glymphatic processes are thought to facilitate the clearance of metabolic waste, including proteins",
+    "tags": [
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "4615c348",
+    "title": "DyAMNet: dynamic adversarial and contrastive network for EEG biometrics",
+    "date": "2026-06-28",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1815191",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "IntroductionElectroencephalogram (EEG)-based biometric recognition for brain–computer interfaces faces challenges from domain shifts, temporal nonstationarity, and limited scalability.MethodsTo addres",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "9dbc9b76",
+    "title": "Biological performance evaluation of graphene nanoplatelets for intracranial direct current stimulation",
+    "date": "2026-06-28",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1664084",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "Graphene nanoplatelets (GNPs) offer promising properties for neural interface applications, particularly in intracranial direct current (DC) stimulation, due to their high charge injection capacity, f",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "d9833aca",
+    "title": "Programmable Probabilistic Computer with 1M p-bits",
+    "date": "2026-06-28",
+    "url": "hxxps://arxiv[.]org/abs/2606[.]25313",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://arxiv.org/abs/2606.25313 Comments URL: https://news.ycombinator.com/item?id=48708496 Points: 11 # Comments: 0",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "907498a1",
+    "title": "What Split-Brain Patients Reveal About Consciousness",
+    "date": "2026-06-28",
+    "url": "hxxps://thereader[.]mitpress[.]mit[.]edu/what-split-brain-patients-reveal-about-consciousness/",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://thereader.mitpress.mit.edu/what-split-brain-patients-reveal-about-consciousness/ Comments URL: https://news.ycombinator.com/item?id=48706237 Points: 3 # Comments: 2",
+    "tags": [
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "1ef4ecb3",
+    "title": "Old Computer Challenge",
+    "date": "2026-06-27",
+    "url": "hxxp://occ[.]sdf[.]org/",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: http://occ.sdf.org/ Comments URL: https://news.ycombinator.com/item?id=48702320 Points: 4 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "106d1c17",
+    "title": "What Ozempic does to the gut-brain axis",
+    "date": "2026-06-27",
+    "url": "hxxps://www[.]psychologytoday[.]com/au/blog/mood-by-microbe/202606/what-ozempic-does-to-the-gut-brain-axis",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.psychologytoday.com/au/blog/mood-by-microbe/202606/what-ozempic-does-to-the-gut-brain-axis Comments URL: https://news.ycombinator.com/item?id=48701984 Points: 184 # Comments: ",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "a6ccdb86",
+    "title": "The prime your computer finds while you sleep",
+    "date": "2026-06-27",
+    "url": "hxxps://primecrunch[.]com/blog/3/the-prime-your-computer-finds-while-you-sleep",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://primecrunch.com/blog/3/the-prime-your-computer-finds-while-you-sleep Comments URL: https://news.ycombinator.com/item?id=48701787 Points: 3 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "00c8b403",
+    "title": "The seed rounds you may have missed in H1",
+    "date": "2026-06-26",
+    "url": "hxxps://sifted[.]eu/articles/h1-seed-rounds-2026/",
+    "source": "Sifted",
+    "source_category": "news",
+    "summary": "",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "c52d95b2",
+    "title": "Dual Brain-Machine Interfaces Unlock Bionic Hand Kinesthesia",
+    "date": "2026-06-26",
+    "url": "hxxps://neurosciencenews[.]com/prosthetic-kinesthesia-brain-machine-interface-30954/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study combining data from two distinct brain-machine interfaces has revealed that the human brain processes artificial movement sensations as coordinated, subconscious hand synergies rather than",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "b121ffda",
+    "title": "Overcoming Endothelial Sorting to Cure Glioblastoma",
+    "date": "2026-06-26",
+    "url": "hxxps://neurosciencenews[.]com/protein-corona-blood-brain-barrier-nanomedicine-30953/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Researchers present a shift in neuro-nanomedicine, reframing the \"protein corona\", the layer of blood proteins that coat nanoparticles, as a programmable, five-stage navigation interface capable of gu",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "d65863e7",
+    "title": "Hybrid VR and Nerve Stimulation Doubles Stroke Recovery",
+    "date": "2026-06-26",
+    "url": "hxxps://neurosciencenews[.]com/multisensy-vr-stroke-rehabilitation-30952/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A \"MultiSensy\" platform, which combines immersive VR with transcutaneous electrical nerve stimulation, generates double the upper limb motor recovery in chronic stroke patients compared to conventiona",
+    "tags": [
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "6790a068",
+    "title": "Neurosurgical Team Saves Young Woman From Paralysis",
+    "date": "2026-06-26",
+    "url": "hxxps://neurosciencenews[.]com/laparoscopic-pelvic-schwannoma-30958/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A surgical team successfully performed a rare laparoscopic removal of a 5-centimeter pelvic schwannoma, utilizing a 32-channel intraoperative neuromonitoring system to protect vital sacral nerve roots",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "14eca743",
+    "title": "Can We Synchronize Human Brainwaves to Boost Connection?",
+    "date": "2026-06-26",
+    "url": "hxxps://neurosciencenews[.]com/social-synchrony-brainwave-alignment-30957/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Researchers mapped \"social synchrony,\" showing that face-to-face communication physically aligns the brainwaves of participants.",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "ebb19b8c",
+    "title": "Hilbert transforms and wavelets are not equivalent in extracting parameters from electrophysiology signals for phase-amplitude coupling studies",
+    "date": "2026-06-25",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae7eaf",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. In functional connectivity studies based on electrophysiological measurements, there are two popular approaches for extracting narrowband representations of brain activity time series and t",
+    "tags": [
+      "funding",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "b254c40d",
+    "title": "Exclusive: XCures Lands $46M Series B To Clean Up Messy Medical Records With AI",
+    "date": "2026-06-24",
+    "url": "hxxps://news[.]crunchbase[.]com/venture/xcures-lands-seriesb-medical-records-ai/",
+    "source": "Crunchbase News",
+    "source_category": "funding",
+    "summary": "XCures, a startup that uses AI to streamline patient data and medical records, has closed a Innovius Capital-led $46 million Series B financing round, it tells Crunchbase News exclusively.",
+    "tags": [
+      "funding",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "53987d2d",
+    "title": "New Platform Accelerates VR Cybersickness Research",
+    "date": "2026-06-24",
+    "url": "hxxps://neurosciencenews[.]com/vera-platform-vr-cybersickness-30951/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study has bypassed traditional lab bottlenecks by collecting cybersickness data from 250 remote Meta Quest users in just 15 days, aiming for a 2,000-person cohort to map individual tracking diff",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "4d696102",
+    "title": "Personalized fMRI Scans Supercharge TMS Depression Treatment",
+    "date": "2026-06-24",
+    "url": "hxxps://neurosciencenews[.]com/fmri-guided-accelerated-tms-depression-30948/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Using personalized fMRI resting-state scans to target accelerated TMS improves depression response rates to 80% compared to 60% for standard scalp targeting, offering a fast, one-week therapeutic time",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "5e47e6c5",
+    "title": "fNIRS single-trial decoding improves systematically with higher optode density, model-based noise regression, and image reconstruction",
+    "date": "2026-06-24",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae782f",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Advances in high-density (HD) diffuse optical tomography (HD-DOT) promise to overcome long-standing performance limitations in classification of sparse functional near-infrared spectroscopy",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "79fcdb2f",
+    "title": "Awake Brain Probes Map Spontaneous vs. Fake Laughter",
+    "date": "2026-06-23",
+    "url": "hxxps://neurosciencenews[.]com/dual-brain-networks-human-laughter-30939/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study analyzing awake brain stimulation data reveals that human laughter is driven by two separate networks: an ancient, emotional \"spontaneous\" circuit and a motor-driven \"volitional\" circuit t",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "f7393c05",
+    "title": "Electrically evoked calcium waves and membrane oscillations reveal astrocytic excitability in the neurostimulation range",
+    "date": "2026-06-23",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae6bf3",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Electrical brain stimulation (EBS) has emerged as a valuable therapeutic tool for neurological and psychiatric disorders, but its underlying mechanisms remain poorly understood. Namely, the",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "5b20e7ff",
+    "title": "Lempel–Ziv complexity of simultaneous surface electromyography and magnetomyography during muscle fatigue",
+    "date": "2026-06-23",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae795e",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Complexity-based metrics have been applied to surface electromyography (sEMG) to characterize fatigue-related changes in the temporal structure of myoelectric signals beyond amplitude and s",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "af932ed7",
+    "title": "Lipid Molecule Slows Progressive Retinal Degeneration",
+    "date": "2026-06-22",
+    "url": "hxxps://neurosciencenews[.]com/erucamide-retinal-degeneration-vision-loss-30930/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Restoring the lipid molecule erucamide via silicon nanoparticles activates retinal myeloid cells via the TMEM19 protein, stabilizing the neurovascular unit and significantly slowing progressive retina",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "48957a01",
+    "title": "HRGNN: hierarchical region-aware graph neural network for interpretable EEG-Based emotion recognition",
+    "date": "2026-06-22",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae70a9",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Electroencephalography (EEG)-based emotion recognition has increasingly adopted graph neural networks (GNNs) to model functional connectivity. However, most existing approaches operate at t",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "da862205",
+    "title": "Q&#038;A with Felix Schwock, PhD student at University of Washington and Best Poster Award Winner at the 2025 IEEE Brain Discovery and Neurotechnology Workshop",
+    "date": "2026-06-22",
+    "url": "hxxps://brain[.]ieee[.]org/podcasts/qa-with-felix-schwock-phd-student-at-university-of-washington-and-best-poster-award-winner-at-the-2025-ieee-brain-discovery-and-neurotechnology-workshop/",
+    "source": "IEEE Brain Initiative",
+    "source_category": "research",
+    "summary": "",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "879ccecb",
+    "title": "Episode 29: Q&#038;A with Dr. Anahita Kyani, Director of Neuroscience, Data Science and Digital Health at Johnson &#038; Johnson Innovative Medicine",
+    "date": "2026-06-22",
+    "url": "hxxps://brain[.]ieee[.]org/podcasts/episode-29-qa-with-dr-anahita-kyani-director-of-neuroscience-data-science-and-digital-health-at-johnson-johnson-innovative-medicine/",
+    "source": "IEEE Brain Initiative",
+    "source_category": "research",
+    "summary": "",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
     "id": "705862f1",
     "title": "Effect of pulse width and shape on transcranial magnetic stimulation induced heart-brain coupling",
     "date": "2026-06-21",
@@ -2501,6 +2882,20 @@
     "fetched": "2026-06-14"
   },
   {
+    "id": "ffa5ebd7",
+    "title": "Robotic Exoskeleton-Guided Wrist Motion Assessment in Young and Older Adults",
+    "date": "2026-05-13",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11517557",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "This paper describes motion assessment in young adults (YA) and older adults (OA) during the use of an upper limb rehabilitation robot (ULRR). An experimental protocol was proposed to collect kinemati",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
     "id": "211a8f83",
     "title": "Fundamental limitations of kilohertz-frequency carriers in afferent fibre recruitment with transcutaneous spinal cord stimulation",
     "date": "2026-05-12",
@@ -2527,6 +2922,34 @@
     ],
     "companies": [],
     "fetched": "2026-06-21"
+  },
+  {
+    "id": "c00a2722",
+    "title": "User-Centered Design of a Dexterous Hand Prosthesis: Hierarchical Sensorimotor Controller Based on the Three-Axis Tactile Feedback and EMG Decoder",
+    "date": "2026-05-12",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11514297",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Humans can skillfully grasp a wide variety of things without crushing or dropping them, thanks to their tactile sensory abilities and sensorimotor reflexes. Moreover, humans are not only proficient at",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
+  },
+  {
+    "id": "6190d627",
+    "title": "EEG-Based Pain Classification via Sample Selection to Mitigate Subjective Label Bias",
+    "date": "2026-05-12",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11515232",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Quantifying pain intensity is essential for enabling personalized pain management. Recently, electroencephalography (EEG)-based approaches have been investigated to estimate pain levels, particularly ",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
   },
   {
     "id": "3d7df298",
@@ -2574,6 +2997,21 @@
       "Science Corporation"
     ],
     "fetched": "2026-05-17"
+  },
+  {
+    "id": "fecf911b",
+    "title": "Forecasting Dropout in Home-Based Movement Rehabilitation After Stroke With Sensors and Machine Learning",
+    "date": "2026-05-11",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11515240",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Adherence to home-based rehabilitation can support recovery after stroke, yet many patients disengage within the first few weeks. While prior studies have examined perseverance in small samples or und",
+    "tags": [
+      "opinion",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-06-28"
   },
   {
     "id": "e7e5a5ed",
