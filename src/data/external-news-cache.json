@@ -1,20 +1,38 @@
 [
   {
     "type": "external",
+    "title": "More than a feeling: Expressive style influences cortical speech tracking in subjective cognitive decline",
+    "date": "2026-06-29",
+    "url": "hxxps://arxiv[.]org/abs/2509[.]21277",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2509.21277v3 Announce Type: replace Abstract: Subjective cognitive decline (SCD) doubles dementia risk. This study investigates how self-perceived cognitive worsening shapes neural dynamics duri",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Exploiting network topology in brain-scale simulations of spiking neural networks",
+    "date": "2026-06-29",
+    "url": "hxxps://arxiv[.]org/abs/2602[.]23274",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2602.23274v2 Announce Type: replace-cross Abstract: Simulation code for conventional supercomputers serves as a reference for neuromorphic computing systems. The present bottleneck of distribute",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "California-developed brain implant helps man with ALS communicate - KTLA",
+    "date": "2026-06-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxQVklzUmFESllZbTYwY2pMSS1Iamt2eDkwbmVnc0w0aFF0R0ZuSFF2bnl3SFE4WXVhR3g0aWhSb0hRXzBXQlF0bEVxd2E0S00xNWtJbDRTSzdISHQxWEw3MzdhMFBmZDVTbFlMbXktQTI0cmRWanlpeDljYmFBUVBqUkJUR1l1cXF1aEk2YTZkRWp2Qm1uWEJieW1qWldxUHdT0gGmAUFVX3lxTFBuNE9oNzlBQ1NIbWswQV9DNGJYcTRUYVdEdjZTN0hpWDFReGRJSXNVWGs3a21ycjQxOVJ5ZmZxN2EwMFFqM09Pa1JONjEyUEdsNFJQZDJfamwzOUpCQzJPdzd6OGhXUWkzbTVlSlhOYkdndHV2Q01EM1JRUnNuS0pOaXZMVEFYT0J5US1uUmwtWkhPVkVOcWc0UUpNOXhFc0ZMczBQbnc?oc=5",
+    "source": "Google News — BCI",
+    "summary": "California-developed brain implant helps man with ALS communicate&nbsp;&nbsp;KTLA",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Is NVIDIA Corporation (NVDA) One of the Best Brain-Computer Interface Stocks to Buy? - Yahoo Finance",
     "date": "2026-06-27",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMingFBVV95cUxPMmNyZTNFblpYTHJTbFRvckVHTXlfZUo0ckMwTzlCMWZPeWFQUzJIU1ZfWmp4N3hhdzlGelo2UEFoNGFadE8wRFFIdWdGYV9maEFPbHp1TEhrX1lJa0M1ZVQzenVfZnZxLTlIRGFsZnRhaGp5TnF2aVFsMzZxRjlMN1h5SVVfYlVibTdhMk56SlgtLU5UcTFRYUFKcm1GUQ?oc=5",
     "source": "Google News — BCI",
     "summary": "Is NVIDIA Corporation (NVDA) One of the Best Brain-Computer Interface Stocks to Buy?&nbsp;&nbsp;Yahoo Finance",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "10 Best Brain-Computer Interface Stocks to Buy - Insider Monkey",
-    "date": "2026-06-25",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxQVnA2Y3ZFcUpBaXFuNWNqTVpYVG82VVFndlBacXhMNHRLY28wZjFkaHozaVFnQUI2RzFOVnMwckNsOF9tV2ZCWTZlYnl6RnF3UnZhTDlWVjNLSFlpRkVIZHRISjZxVDFNZjFGLTJpeEFRMHdnMm1ESkJ0VUdTM1hiNlo5WFl6Y2N0TUZxQm80WE9WV0dS0gGcAUFVX3lxTE5jcEpsWlZWUFl2RG5OX3RhUFlqYlk1MFBuMzJ3dVBNcFZHajZNUDBlR091MU15RmthdUhaNEl4MjgyNEtXWG11YXFRZmxLdFhGeVIzM0ozdnZ3YVdCaEZRc2RUdFQxUXlEaTNKUUszYlBlWDRBRFRhNzQxYnZSczhnczZmb0lTMF83WE56blpNZWp5ZXlZeC1EbXFJOQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "10 Best Brain-Computer Interface Stocks to Buy&nbsp;&nbsp;Insider Monkey",
     "category": "neurotechnology"
   },
   {
@@ -37,15 +55,6 @@
   },
   {
     "type": "external",
-    "title": "AI and brain-computer interface allow speechless ALS patient to work a full-time job - The Register",
-    "date": "2026-06-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi1gFBVV95cUxPYlFaM0RUOUNzR3d3WWFiZ09fVFY5dHNQSzRpWE9sVWNYYjVJLTNKWHQzaEZxN0Jua1ZZdXg4YVQ2bXAwODI5OEFLdEtKTDNDUTFPU3NtLTZRb1ZjU2xsUFE0U3hpTEkzQVA3UUo2NUtybGxFQnk1ZmFMY01jZjRGWERxZEkzOW5DSU9QOE1VaXgzYjdkNTlOOUxoMXJYLXRrVGpiWnJFZ0N6Q254TzhINzFFTloxOUVSbFc1czZick1GTnpabzFNOEFlWGQtenI4VUVfcG1n?oc=5",
-    "source": "Google News — BCI",
-    "summary": "AI and brain-computer interface allow speechless ALS patient to work a full-time job&nbsp;&nbsp;The Register",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Long-term independent use of an intracortical brain–computer interface for speech and cursor control - Nature",
     "date": "2026-06-15",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTFA5TUN2eFdLenpER2VBWV9iYzR6dy1CNkdUTHYyLVRYUHJmMlcwTjUzNW1Gek9ZbGd0bDU0MlJfTzBzVXd4Z2pid0FTMmxFeU5Mbk9aREM0dHk3clFzUFJF?oc=5",
@@ -55,20 +64,29 @@
   },
   {
     "type": "external",
+    "title": "Samsung And Elon Musk Partner Up Again, This Time For The 4th-Generation Neuralink Chip Under The 4nm Process, TSMC Seemingly Dropped - Wccftech",
+    "date": "2026-06-15",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxOSkdIenR1Nk5lSU1BTE9RZkV4YlVSazFHRkxHUVZIUTVieTdvN3ItcG1kTlZQbWJnRXFKdy1YYnh5dkZQMUhUNWJ5QTdyampjZXV5TlhRaDZiMGNDZngzUmJ6ckRBcnlRa3hldE00dmRIUEZrRmRHSGdxMDJUa04zMDhNUnJHU1o2bjF6V0ZobFJ4Y2PSAZgBQVVfeXFMTWFmZjc0Z0ZuSUpQdXU2ekVNV1dNOHV1czRfdmRzVVowVWo3dzRQanZSdkRvcVVjbDF5SjVFSVJYOW83R3hMQ2w3amIyMDNnWEJucWFjbzhzaU9uclp4VXhrYTBCMlZtVXJOS0lYYW5mNGJaUUtMRTZRWC1EZ1pZZEVETmVybmFBLUpLWXY4Z3NxUFJhcE8yQmk?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Samsung And Elon Musk Partner Up Again, This Time For The 4th-Generation Neuralink Chip Under The 4nm Process, TSMC Seemingly Dropped&nbsp;&nbsp;Wccftech",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "A brain-computer interface that works with, not against, the brain - YaleNews",
+    "date": "2026-06-09",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxNbHRkYzgwQkRKY0pTRnE1UzRfaEpIMG5hNFF2N09fb05PQ3VUenR0d1RsbWVFTm9iQVVQSk5iQUxXZ3dDLWw1RUtxQklJczBQc0EyeDdEVWxGTGxWUHA4VTlzV21fYWZ5NGdwd2FfN3lscV84UzM2dkl1aGxCeTVSbUNYOFpBcTJV?oc=5",
+    "source": "Google News — BCI",
+    "summary": "A brain-computer interface that works with, not against, the brain&nbsp;&nbsp;YaleNews",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "China has approved the world’s first invasive brain-computer chip—here’s what’s next - MIT Technology Review",
     "date": "2026-06-01",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxQM2FuRkthYlMxeHROLVZfWGotRUNla3B2OWlMbzJyR0thQmNfNjd0SjF2NVZWRGFmNG0zZHF1NzFTYmtyVW9PLW9EbW13ZUp2bm04YzFVLVZOR1lZSlowUERrN0RGSU5SMnlMS1JnTXo4eGcya2FfTzBLWjd2WWhQbVdWeVN1VWk10gGOAUFVX3lxTE1FSUpJX2EyRElaMk5NZW9hZEhRSzdlS1U1eUM4TDFuZnh6YXBFTUlfQUx1aTNPV0dTaGo1TzhkNTFPVzlKOXQtSW1Lc3ZUS2tiWGFCMFFFQUlmYjRpZTBJVTNLTURYb1VFcllpYjBSbjNaU09zdzZmWVJMUEd3NEZINnkyb1UzQW1yYjNoS0E?oc=5",
     "source": "Google News — BCI",
     "summary": "China has approved the world’s first invasive brain-computer chip—here’s what’s next&nbsp;&nbsp;MIT Technology Review",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Musk’s Neuralink Brain Implant Company Hires Federal Lobbyists - Bloomberg Government News",
-    "date": "2026-06-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirgFBVV95cUxPQTdOR3g1X0ZJcVZzenVPbDZNaHJKUnpZWnlvQ2IzcEU3MWhfSFc0ck1VbU1tZmw0RFdHY0lRNVZFUjVYcFV3bUVSaTlCcVlFTmZ5dWdRcnZ6MkJabzMtaEhSQkN6V3VYUFlvTldGcUFvZEVxelJKMUpJZjFuRURRMnpOVjBGTW5CS3VSR00xamdoOTkzSURqNFdUdEJ5SzhmWUJZOXQtaDBpa2ZwZlE?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Musk’s Neuralink Brain Implant Company Hires Federal Lobbyists&nbsp;&nbsp;Bloomberg Government News",
     "category": "neurotechnology"
   },
   {
@@ -136,15 +154,6 @@
   },
   {
     "type": "external",
-    "title": "Big Tech Wants Direct Access to Our Brains - The New York Times",
-    "date": "2025-11-18",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikAFBVV95cUxPdGp4VktMc3lUOWFRazdBSHpibWM5bDA4V2ZrMkpYanZGbHhldFlWaEhxcUxRNjl2TU94WURNbXR4aF96M3JoVGVic3ljd0lxMFBVYkh6emNNVHU4LWs4QnU2V252VEhXTlhtaFduckdjazJyQXVTNENFSkIySG1ndXJfNWREZFpRUmNDS0dHbVM?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Big Tech Wants Direct Access to Our Brains&nbsp;&nbsp;The New York Times",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
     "title": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology - CSIS | Center for Strategic and International Studies",
     "date": "2025-11-04",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPanNMOEN0Yy16RElvSXJjMk4zR25qd2tGQXhDZDI2cmo0Yk5kSmZNQXJfSnhQb0tOdUJUY3BOQlc0akVlOGZ5aGpBekVWd0NNV1R6enN5Q0RVRnFKX2JhSWRuVVA2MUNkNHJOd0k4NjRLdjZtVUxkZlluWFVUNU0zN21VajFiOW9Udl9aTjhTQ1dkSEphZTAtWVR5MU5ZalQySDdJWTFB?oc=5",
@@ -177,6 +186,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxNS3FBelpMZGNUWExYbEtEQzZtLXNYRGJnRjhsNjFTYTRrMHpMYW9iU2ZlM3JqM3BBendfblNmNHVNUURrNG4xNzlRNU1xLWN5ZmIzNVJSR1JBRTFBclU5NHFQMTUxLVQ2OEY4bVJJS3VRRFVFcm95NEZpbTRtY1lhWDdBdmJydTI2MHBLNVJvVkxUS0E?oc=5",
     "source": "Google News — MIND Act",
     "summary": "Senators ask FTC to study neurotechnology's promises, implications&nbsp;&nbsp;IAPP",
+    "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "The MIND Act: Balancing Innovation and Privacy in Neurotechnology - JD Supra",
+    "date": "2025-09-26",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihwFBVV95cUxQYkt5Qk5UWFcxakVtUE0tRVVSWUZyZ0RSQ2JYaHRDWVBILW85LXVjU3lBMVNhNDBFdm41aWpaTUZBbnlsMmRmaWlIVk1CNERFLU84ZXNmWC1MOHZmSnFWbWY3dnRHS1hXSzhsSlpQdVFCVk4tN092S0hncXRGNHBTblpyY2kyY2c?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "The MIND Act: Balancing Innovation and Privacy in Neurotechnology&nbsp;&nbsp;JD Supra",
     "category": "neuroethics"
   }
 ]
