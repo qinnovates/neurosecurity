@@ -1,12 +1,39 @@
 [
   {
     "type": "external",
-    "title": "Neuralink Just Pierced The Brain’s Armor: First Human Transdural Implant Success - Dallas Express",
-    "date": "2026-07-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisgFBVV95cUxOYjk0ZFZIYWRmZmU2c0pMMGh4elNyOU9NbkdCbTdld0RCcDQxWWQxYkVXX0N6T0dQeWVHTlM1SEVSVTlMMnZGbDI4d2dNUkpEUmxFUmNWbnR1QUJDRVNmSjRSbXVQUDZoV0d5YzBMRUVPcGNJM085cTRMdFNtNGhDRWxJVDI2N0pIVWZVd3RFLV9zVkNHYmlHdFhhOTlaRERjT2oweGwwWkMzd0tOc2pzQkZ3?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink Just Pierced The Brain’s Armor: First Human Transdural Implant Success&nbsp;&nbsp;Dallas Express",
+    "title": "OpenAI proposed donating 5% of its equity to a US sovereign wealth fund",
+    "date": "2026-07-02",
+    "url": "hxxps://techcrunch[.]com/2026/07/02/openai-proposed-donating-5-of-its-equity-to-a-us-sovereign-wealth-fund/",
+    "source": "TechCrunch",
+    "summary": "OpenAI CEO Sam Altman has reportedly proposed giving 5% of the company’s equity to a U.S. sovereign wealth fund, reviving discussions about letting the public share in the financial gains from the AI ",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Vancouver 'RoboCop' is 1st Canadian ALS patient to receive Elon Musk's Neuralink brain implant - CBC",
+    "date": "2026-07-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxQOTJhc1RuMHIxNlZTZlBhNFZwekhTaEppZDRETDZxeXlaTnRzYlluSzdTajlON0tPd1EyOVRjdlFITDJMTUJvTU02STNyakxIYWV2Q2k1WUJQMTBMSmVCMjFRM21vcHVLTzZFN0RrQktTakNjbTBhWHB4UXhZMWJKRldrcFhRYjRfQ29HaHZzblFlRVJHWTZJZEY0RHlwRXZPYmsxSQ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Vancouver 'RoboCop' is 1st Canadian ALS patient to receive Elon Musk's Neuralink brain implant&nbsp;&nbsp;CBC",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "NeuroCogMap Reveals Cognitive Organization of Large Language Models",
+    "date": "2026-07-02",
+    "url": "hxxps://arxiv[.]org/abs/2607[.]00397",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2607.00397v1 Announce Type: new Abstract: Understanding how complex cognitive functions are organized within artificial systems is central to interpreting large language models (LLMs) and relati",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Neuronal electricality founded in murburn-thermodynamic principles: 2. Comparisons, evidenced explanations, and predictions",
+    "date": "2026-07-02",
+    "url": "hxxps://arxiv[.]org/abs/2605[.]00014",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2605.00014v2 Announce Type: replace Abstract: The analyses presented herein demonstrate that neuronal electrical activity can be consistently interpreted as a manifestation of murburn redox-medi",
+    "category": "research"
   },
   {
     "type": "external",
@@ -16,24 +43,6 @@
     "source": "Google News — Neuralink",
     "summary": "Elon Musk’s Brain-chip Startup Aims for Scalability with New Transdural Procedure&nbsp;&nbsp;Road to VR",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "As Elon Musk promises 'Jesus-Level' miracles from Neuralink: Here’s what he means - The Times of India",
-    "date": "2026-07-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi8gFBVV95cUxNRXI0ekN1OG1xX2g0ZEJMV2pDTkc1RWNkYTJiY0ZPb2FrLVlFWXVrbGZiMDNRd0NraFBVeHhLWEtfQ3I1V3R0OTJFdXBCTTU2em1yanhfUnVvMWpyS3dwNjVKUzNmR3MzSTRXODIzWk4wRGdEVUNHemNHUGRCRWNVSk5hWFdrR3hQemM0LXl6VHpZS0VvMHYtT3FmVjNOY0dkNGkxSjJwaW1qbVctQ2dCNXJtTld4VE9rRThpX1JsN1dYS3dXRUIyam9lT3lXRWNFTm5VVS1KNndEMTIwV1I1RFpObVpFOVhSZjJETnVZaEZRZw?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "As Elon Musk promises 'Jesus-Level' miracles from Neuralink: Here’s what he means&nbsp;&nbsp;The Times of India",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Stationary covariance spectra of discrete-time non-normal random recurrent dynamics",
-    "date": "2026-07-01",
-    "url": "hxxps://arxiv[.]org/abs/2606[.]31944",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2606.31944v1 Announce Type: new Abstract: Principal component analysis is widely used to characterize structure in the dynamics of recurrent neural networks. For stationary noise-driven dynamics",
-    "category": "research"
   },
   {
     "type": "external",
@@ -55,11 +64,11 @@
   },
   {
     "type": "external",
-    "title": "Meta’s Brain AI Takes a Step Closer to Telepathy With Improved Thought-to-Text Decoding - Road to VR",
+    "title": "Twin Technology for Restoring Sight and Touch - Neuroscience News",
     "date": "2026-06-30",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiakFVX3lxTFB2Zk9KcDQwWTgtaERFT2xUWnpsVlhKWTdLUFR6dVpHOTNiSDlVaE1FLU9aYlQ2T3RXc2FPZEFtUkgyaVRDMTJNNmxTenNjVDJnNE1NcU5UVmhtVEstenM5alpKOW1SNG1EU1E?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMie0FVX3lxTE5ENGFUR1VNU2dfOFhCbTA1ZXpWZHRLZHdrVnFDNzFROGp3M000UXVQUzBlQ0Z6ZXRnN25nSGQyU3BzTmczVmtjbERoTFZHRHVXamNPVGNiWjBTOVVhOUVfRGZieEVmYUg2NDdlU1VsYV9QVGlkQ1lpZkRaYw?oc=5",
     "source": "Google News — BCI",
-    "summary": "Meta’s Brain AI Takes a Step Closer to Telepathy With Improved Thought-to-Text Decoding&nbsp;&nbsp;Road to VR",
+    "summary": "Twin Technology for Restoring Sight and Touch&nbsp;&nbsp;Neuroscience News",
     "category": "neurotechnology"
   },
   {
@@ -73,20 +82,29 @@
   },
   {
     "type": "external",
-    "title": "California-developed brain implant helps man with ALS communicate - KTLA",
-    "date": "2026-06-28",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxQVklzUmFESllZbTYwY2pMSS1Iamt2eDkwbmVnc0w0aFF0R0ZuSFF2bnl3SFE4WXVhR3g0aWhSb0hRXzBXQlF0bEVxd2E0S00xNWtJbDRTSzdISHQxWEw3MzdhMFBmZDVTbFlMbXktQTI0cmRWanlpeDljYmFBUVBqUkJUR1l1cXF1aEk2YTZkRWp2Qm1uWEJieW1qWldxUHdT0gGmAUFVX3lxTFBuNE9oNzlBQ1NIbWswQV9DNGJYcTRUYVdEdjZTN0hpWDFReGRJSXNVWGs3a21ycjQxOVJ5ZmZxN2EwMFFqM09Pa1JONjEyUEdsNFJQZDJfamwzOUpCQzJPdzd6OGhXUWkzbTVlSlhOYkdndHV2Q01EM1JRUnNuS0pOaXZMVEFYT0J5US1uUmwtWkhPVkVOcWc0UUpNOXhFc0ZMczBQbnc?oc=5",
-    "source": "Google News — BCI",
-    "summary": "California-developed brain implant helps man with ALS communicate&nbsp;&nbsp;KTLA",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Neuralink competitor Paradromics just implanted its first brain-chip device. The next step is restoring speech. - Business Insider",
     "date": "2026-06-17",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMisgFBVV95cUxNMFJHcDlxNVVrZ3NRSTZ1Q2J4Xzcxa09EX1VrUHZ0b29OYjJhUkRXUWVCMnV5ejdYSUVaSWdRUTdfVUZndGpvMnRrUEdQc0pJeEZBay1JRFVhZVFBaTRFWmFZbndmNTFOeDlOZ0pmeEl5Vkp5YlotcFRHOE9BeE1xN1ZnUjNfTTlGaktCVVp6U3hQdW02d2NmS2xzZnRSMUgtUWJGLWJYdk9NZm15bTNCaEZn?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Neuralink competitor Paradromics just implanted its first brain-chip device. The next step is restoring speech.&nbsp;&nbsp;Business Insider",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China has approved the world’s first invasive brain-computer chip—here’s what’s next - MIT Technology Review",
+    "date": "2026-06-01",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxQM2FuRkthYlMxeHROLVZfWGotRUNla3B2OWlMbzJyR0thQmNfNjd0SjF2NVZWRGFmNG0zZHF1NzFTYmtyVW9PLW9EbW13ZUp2bm04YzFVLVZOR1lZSlowUERrN0RGSU5SMnlMS1JnTXo4eGcya2FfTzBLWjd2WWhQbVdWeVN1VWk10gGOAUFVX3lxTE1FSUpJX2EyRElaMk5NZW9hZEhRSzdlS1U1eUM4TDFuZnh6YXBFTUlfQUx1aTNPV0dTaGo1TzhkNTFPVzlKOXQtSW1Lc3ZUS2tiWGFCMFFFQUlmYjRpZTBJVTNLTURYb1VFcllpYjBSbjNaU09zdzZmWVJMUEd3NEZINnkyb1UzQW1yYjNoS0E?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China has approved the world’s first invasive brain-computer chip—here’s what’s next&nbsp;&nbsp;MIT Technology Review",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Elon Musk's Neuralink reveals new robotic system for BCI brain implant surgeries - MobiHealthNews",
+    "date": "2026-05-21",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxPQXdyWDJjSkItLVEteVNNbjNORmgtaDhhbjgzQWY5RjFQREVUR0phWTBXbzBoTUtQdXN1NUJzRjZFd05RM2VVT1pUdkdkVXhtS0hzVG1LTkZLU29Id3BmcFlyejkyRDduSVdOa3pkQlJYZm9mcnlpbEpjWmtQaml4c1NHbHZscFg3cU9VZDZocnRRWjY5QVZlSG1PaG92cGlQenMyaG1wbjZ0ZmJwNE5QZA?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk's Neuralink reveals new robotic system for BCI brain implant surgeries&nbsp;&nbsp;MobiHealthNews",
     "category": "neurotechnology"
   },
   {
@@ -145,11 +163,11 @@
   },
   {
     "type": "external",
-    "title": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology - CSIS | Center for Strategic and International Studies",
-    "date": "2025-11-04",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPanNMOEN0Yy16RElvSXJjMk4zR25qd2tGQXhDZDI2cmo0Yk5kSmZNQXJfSnhQb0tOdUJUY3BOQlc0akVlOGZ5aGpBekVWd0NNV1R6enN5Q0RVRnFKX2JhSWRuVVA2MUNkNHJOd0k4NjRLdjZtVUxkZlluWFVUNU0zN21VajFiOW9Udl9aTjhTQ1dkSEphZTAtWVR5MU5ZalQySDdJWTFB?oc=5",
+    "title": "Big Tech Wants Direct Access to Our Brains - The New York Times",
+    "date": "2025-11-18",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikAFBVV95cUxPdGp4VktMc3lUOWFRazdBSHpibWM5bDA4V2ZrMkpYanZGbHhldFlWaEhxcUxRNjl2TU94WURNbXR4aF96M3JoVGVic3ljd0lxMFBVYkh6emNNVHU4LWs4QnU2V252VEhXTlhtaFduckdjazJyQXVTNENFSkIySG1ndXJfNWREZFpRUmNDS0dHbVM?oc=5",
     "source": "Google News — MIND Act",
-    "summary": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology&nbsp;&nbsp;CSIS | Center for Strategic and International Studies",
+    "summary": "Big Tech Wants Direct Access to Our Brains&nbsp;&nbsp;The New York Times",
     "category": "neuroethics"
   },
   {
@@ -181,11 +199,11 @@
   },
   {
     "type": "external",
-    "title": "The MIND Act: Balancing Innovation and Privacy in Neurotechnology - JD Supra",
-    "date": "2025-09-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihwFBVV95cUxQYkt5Qk5UWFcxakVtUE0tRVVSWUZyZ0RSQ2JYaHRDWVBILW85LXVjU3lBMVNhNDBFdm41aWpaTUZBbnlsMmRmaWlIVk1CNERFLU84ZXNmWC1MOHZmSnFWbWY3dnRHS1hXSzhsSlpQdVFCVk4tN092S0hncXRGNHBTblpyY2kyY2c?oc=5",
+    "title": "Congress Introduces Neural Data Bill - Inside Privacy",
+    "date": "2025-10-03",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxQcW5Tb0RFN2dJOE1rRmtJZjltdUVlNzhTdGpUN0U1Y1RIMVhJVllNWXZGc3ZBNGt1VHRqNWQ5YUx2dVFfZUxZRFZhRW9CbzNoLUk0VWdJY0kzczc3dTQ5X1NoOF9pYy1HR01OallOMFFHaC1pdlJ2U3NON0JzdGRfenNYYlhGYzJXdXc?oc=5",
     "source": "Google News — MIND Act",
-    "summary": "The MIND Act: Balancing Innovation and Privacy in Neurotechnology&nbsp;&nbsp;JD Supra",
+    "summary": "Congress Introduces Neural Data Bill&nbsp;&nbsp;Inside Privacy",
     "category": "neuroethics"
   }
 ]
