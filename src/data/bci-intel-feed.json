@@ -1,5 +1,212 @@
 [
   {
+    "id": "daa55ff1",
+    "title": "Focal volume, steering, and aberration correction in transcranial focused ultrasound: reconsidering the tradeoffs between single-element transducers, phased arrays, and acoustic holograms",
+    "date": "2026-07-05",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1891259",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "Transducer architecture is an increasingly important design consideration in transcranial focused ultrasound, where focal precision, electronic steering, skull-aberration correction, workflow complexi",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "4063aba8",
+    "title": "Effects of BCI-based lower limb robots on lower limb function and cognition in stroke patients: a preliminary systematic review",
+    "date": "2026-07-05",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1782862",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "BackgroundBCI-based lower limb robots (BCI-LLR) represent a novel technology used in neurological rehabilitation for stroke patients. However, the effectiveness of BCI-LLR compared to traditional reha",
+    "tags": [
+      "funding",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "3d35263f",
+    "title": "Bronstein, Gewirtz &amp; Grossman LLC Urges Genius Group Limited Investors to Act: Class Action Filed Alleging Investor Harm",
+    "date": "2026-07-05",
+    "url": "hxxps://www[.]prnewswire[.]com/news-releases/bronstein-gewirtz--grossman-llc-urges-genius-group-limited-investors-to-act-class-action-filed-alleging-investor-harm-302816378[.]html",
+    "source": "PR Newswire",
+    "source_category": "funding",
+    "summary": "Nationally Recognized Firm Urges Genius Investors to Explore Class Action Representation NEW YORK, July 5, 2026 /PRNewswire/ -- Bronstein, Gewirtz & Grossman, LLC, a nationally recognized investor-rig",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "28a7360c",
+    "title": "Spatiotemporal transformation of neural data reveals representations of erroneous behaviors",
+    "date": "2026-07-04",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]07[.]04[.]736476v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "Abnormal states such as erroneous behaviors are generally difficult to represent from neural data. However, such states are also known to have specific spatiotemporal features, indicating a feasibilit",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "63d8c8a7",
+    "title": "Local inhibitory topology dictates the spatial compartmentalization of hippocampal sharp-wave ripples",
+    "date": "2026-07-04",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]06[.]30[.]735500v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "Hippocampal sharp-wave ripples (SWRs) are essential for memory consolidation and represent among the most synchronous oscillatory events in the brain. Yet, despite their capacity for widespread synchr",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "47d46de3",
+    "title": "Vivani strikes reverse-merger agreement with ClearOne for BCI business",
+    "date": "2026-07-03",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/vivani-strikes-reverse-merger-agreement-with-clearone-for-bci-business/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "Once the transaction completes, ClearOne will be renamed as Cortigent Holdings, setting Vivani’s BCI business up with a Nasdaq listing. The post Vivani strikes reverse-merger agreement with ClearOne f",
+    "tags": [
+      "funding",
+      "policy",
+      "partnership"
+    ],
+    "companies": [
+      "Cortigent"
+    ],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "1e6f08cc",
+    "title": "Zero-Computational Path to High-Resolution Robotic Touch",
+    "date": "2026-07-03",
+    "url": "hxxps://neurosciencenews[.]com/mechanochromic-skin-robotic-tactile-30990/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study introduces a soft robotic sensing skin made from mechanochromic materials. The polymer automatically converts mechanical strain into distinct structural color fields, allowing a low-cost c",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "8d985860",
+    "title": "This Ear-Based Device Could Save Patients from Brain Bleed Complications",
+    "date": "2026-07-03",
+    "url": "hxxps://medcitynews[.]com/2026/07/brain-bleed-medical-device/",
+    "source": "MedCity News",
+    "source_category": "funding",
+    "summary": "Aurenar&#8217;s V-Link, a non-invasive nerve stimulation device for preventing brain hemorrhage complications, just won FDA breakthrough device designation after early trials showed it cut cerebral va",
+    "tags": [
+      "product",
+      "regulatory",
+      "research",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "eb88a530",
+    "title": "Quantum tech firm BTQ to acquire France’s QPerfect",
+    "date": "2026-07-02",
+    "url": "hxxps://betakit[.]com/quantum-tech-firm-btq-to-acquire-frances-qperfect/",
+    "source": "BetaKit",
+    "source_category": "news",
+    "summary": "Vancouver-based BTQ will pay just over $30 million CAD for the French quantum firm. The post Quantum tech firm BTQ to acquire France’s QPerfect first appeared on BetaKit.",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "c5a9f552",
+    "title": "High-definition transcranial random noise stimulation enhances fluid intelligence with increasing cortical excitability",
+    "date": "2026-07-02",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae7d58",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Fluid intelligence is a core component of higher-order cognition, yet whether high-definition high-frequency transcranial random noise stimulation (HD/HF-tRNS) can enhance demanding reasoni",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "de23968d",
+    "title": "Decoding imagined Chinese speech: a capsule neural network based on bidirectional knowledge transfer for hierarchical multi-label classification",
+    "date": "2026-07-02",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae805f",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Speech imagination is one of the most important research directions in the field of brain–computer interfaces (BCIs). However, there is insufficient research on silent BCIs based on the Chi",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "6ab1ce4f",
+    "title": "Assistant Professor (Tenure-Track) in Implantable BCIs at the Technical University of Munich",
+    "date": "2026-07-02",
+    "url": "hxxps://bcisociety[.]org/assistant-professor-tenure-track-in-implantable-bcis-at-the-technical-university-of-munich/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=assistant-professor-tenure-track-in-implantable-bcis-at-the-technical-university-of-munich",
+    "source": "BCI Society",
+    "source_category": "research",
+    "summary": "The Technical University of Munich (TUM) invites applications for the position of Tenure Track Assistant Professor in » Implantable Brain-Computer Interfaces « to begin as soon as possible. The positi",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "100f9430",
+    "title": "Neuracle eyes Shanghai IPO as global BCI funding surges - BioWorld News",
+    "date": "2026-07-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxQREg2TW5GVGUyQlZKQjdoQ2VJUEFxYU1ZWGs0RUZqYzIzMUYyRjRBVHBjV0VfeEVaSnh6U25lY3ZhVTBUcWFvNDZ1WG9BYTZnOGJZbVh3WEo1ZEd2NlFtU19haEQtZk83aDJLVHMtRGk2RnVNV2ZvdmpfUWVjUnI4WV8wdm9lTW1YcUU1U3JwcWh3NF8zYnZPYzh0VE4?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Neuracle eyes Shanghai IPO as global BCI funding surges&nbsp;&nbsp;BioWorld News",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "3b23a24a",
+    "title": "First Canadian ALS patient receives Neuralink brain-computer implant - MobiHealthNews",
+    "date": "2026-07-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxOMnFsd3diR3Etbk9vU0Y1THdrWnl1Y2ZfM1IwMmwxU0lzVUN3LTVoREJwVGFtdmd0b0pwQkhMT1prd0lnVkotNlZ2LXhhUmVYODZTY19qNHFueGFrN1Z2SlVtb0pSQ2dCM21WWXVDS0YzSkV1dzRBV0tuVGxNMmktaloxVDdtSEM5by1wTVdLdEh1WlVmOVcwcC13SzVwT2hRRVlyREF3cw?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "First Canadian ALS patient receives Neuralink brain-computer implant&nbsp;&nbsp;MobiHealthNews",
+    "tags": [
+      "product",
+      "clinical"
+    ],
+    "companies": [
+      "Neuralink"
+    ],
+    "fetched": "2026-07-05"
+  },
+  {
     "id": "dd8daa16",
     "title": "[Comment] Unilateral promise and bilateral caution in focused ultrasound for Parkinson's disease",
     "date": "2026-07-01",
@@ -27,6 +234,120 @@
     ],
     "companies": [],
     "fetched": "2026-06-21"
+  },
+  {
+    "id": "f4ff794f",
+    "title": "Connecticut Classifies Brain Data as Sensitive Starting July 1: New Rights for EEG Wearable Users - Tech Times",
+    "date": "2026-07-01",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi3AFBVV95cUxOYVJKYTRSbTVIZ1d1ZG9WRU0yMmlTOTFOS21zQWdJaHdWOVJDMzRCcDhOYTZzNDFFN25UNElLeU5jb2tVT1FFVTh0LUxfMHhlS3pERGVjTFlqZHplRU1BRmhHekNHQWxReFdHdmZDMG9IYndtNG1iTkpNLW52YzRLLUp6X0FMcDdmZmxHUmZoM2JVRHlHX1pIRVBQanM3cnFkWUQ2dm9wRHdTWVdPdVRzMUhPcHI4MVlkdWdtSE14VmtIbjNHMDZId2hxdnZmd29sMlZkcFpZUnRhT0JO?oc=5",
+    "source": "GN: Consumer EEG",
+    "source_category": "product",
+    "summary": "Connecticut Classifies Brain Data as Sensitive Starting July 1: New Rights for EEG Wearable Users&nbsp;&nbsp;Tech Times",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "cf69e2ac",
+    "title": "Twin Technology for Restoring Sight and Touch",
+    "date": "2026-06-30",
+    "url": "hxxps://neurosciencenews[.]com/unified-bci-prostheses-vision-touch-30969/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Brain-computer interface (BCI) technologies developed independently for 50 years to restore sight and touch are functionally identical, establishing a unified framework that accelerates neuroprostheti",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "29e1ff64",
+    "title": "BCI Headset Detects Hidden Consciousness in Patients",
+    "date": "2026-06-30",
+    "url": "hxxps://neurosciencenews[.]com/bci-hidden-consciousness-brain-injury-30967/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "A new study uses a wearable EEG headset with real-time auditory feedback to nearly double the detection rate of hidden consciousness in unresponsive brain-injured patients from 39% to 69%.",
+    "tags": [
+      "product",
+      "research",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "d5e34cfd",
+    "title": "Deep brain stimulation from the shallows: tomorrow’s BCI technology? - BioWorld News",
+    "date": "2026-06-30",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqgFBVV95cUxNelJtNy1TajJvYlloRDRFd21WTWxvaGRWWDRIWDItRThTQnZoLWF1NWphenRjNTJVb2IxR0ZuVFdueXNRVDZ5SGlGUjhENC1GUjRsX2hNTGYzZ3BHQVBUYW1IekdMS0swTC1PUDVsS3pZOGtpOVdBeGNCWTF6Yk5pRGdQbE1ZaGpzTHVKTFd6MjFlYWxhYlBaZXB4RXRjU0Y3a0VqVWpzYmdHdw?oc=5",
+    "source": "GN: Emerging Modalities",
+    "source_category": "research",
+    "summary": "Deep brain stimulation from the shallows: tomorrow’s BCI technology?&nbsp;&nbsp;BioWorld News",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "4bbaed40",
+    "title": "Nanosensor Separates Autism From Intellectual Disability",
+    "date": "2026-06-29",
+    "url": "hxxps://neurosciencenews[.]com/nanosensor-autism-intellectual-disability-30962/",
+    "source": "Neuroscience News Neurotech",
+    "source_category": "research",
+    "summary": "Scientists demonstrates that a carbon-fiber nanosensor can differentiate Autism Spectrum Disorder from Intellectual Disability by measuring real-time nitric oxide production in undifferentiated patien",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "e7fe851b",
+    "title": "Direct delivery of modulated kilohertz frequency waveforms enable simultaneous electrical stimulation and recording with minimal-artifact",
+    "date": "2026-06-29",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae7765",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Kilohertz frequency waveforms have received increasing attention in the field of neuromodulation in recent years. These waveforms are frequently used to develop transcutaneous stimulation t",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "122cccb0",
+    "title": "Motor imagery supported by augmented reality activates motor brain areas similarly to physical movements",
+    "date": "2026-06-29",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae7e27",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Motor imagery (MI) is a well-established cognitive process that may enhance motor skills and recovery during motor rehabilitation. Integrating action observation (AO) and augmented reality ",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
+    "id": "f08f9379",
+    "title": "Stability and neurophysiological validity of graph connectivity features for non-stationary motor imagery BCIs",
+    "date": "2026-06-29",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae7ead",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Motor imagery (MI) Electroencephalography (EEG) brain–computer interfaces (BCIs) degrade under longitudinal non-stationarity, especially in amyotrophic lateral sclerosis (ALS). Functional c",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
   },
   {
     "id": "1ad39ae2",
@@ -240,6 +561,20 @@
     "fetched": "2026-06-28"
   },
   {
+    "id": "b6a4bc63",
+    "title": "Neuro-Restoration Venture Funding Market to Reach USD 435.9 Million by 2036 as Brain-Computer Interface Innovation Accelerates Clinical Investment - PR Newswire",
+    "date": "2026-06-26",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqgJBVV95cUxORGVmdlR4SUJBQ2VJMHM3ZUtoOFB6cFRRMlJhbkVQTVQ3cGRWNnhpVVFlZVFLUkJISzRDUUF6SGFqdlR2dEowc2sycXEwemVJSkU3MWE5OGlRV1NZRzl6QjNIb3FUaUhOU2k1RzRWTHltaWYtMzdzMXVSWGNabHRobGZpdmhNdHViTDhGU3NjMmZmTmIzTEtiZUE3S2h3Z1JldExqREhzSDBNdDE3UThZU1VuYXh6c0ZJcWJSWnJwWnBXV0VsNDNib2M5MjhJRmlGX01EMVZVOGtwRFZhNUhUenlMakZzTHNZYzRQUFhIM2NlYkJ5TXRXdGIyemdfaHNzM24wV2FNYmw1Qm56Z01IcVp5RU1zdm9pLWZGQlA2azhWUE9GMFFjUFJn?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Neuro-Restoration Venture Funding Market to Reach USD 435.9 Million by 2036 as Brain-Computer Interface Innovation Accelerates Clinical Investment&nbsp;&nbsp;PR Newswire",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
     "id": "ebb19b8c",
     "title": "Hilbert transforms and wavelets are not equivalent in extracting parameters from electrophysiology signals for phase-amplitude coupling studies",
     "date": "2026-06-25",
@@ -253,6 +588,20 @@
     ],
     "companies": [],
     "fetched": "2026-06-28"
+  },
+  {
+    "id": "3c203220",
+    "title": "10 Best Brain-Computer Interface Stocks to Buy - Insider Monkey",
+    "date": "2026-06-25",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxQVnA2Y3ZFcUpBaXFuNWNqTVpYVG82VVFndlBacXhMNHRLY28wZjFkaHozaVFnQUI2RzFOVnMwckNsOF9tV2ZCWTZlYnl6RnF3UnZhTDlWVjNLSFlpRkVIZHRISjZxVDFNZjFGLTJpeEFRMHdnMm1ESkJ0VUdTM1hiNlo5WFl6Y2N0TUZxQm80WE9WV0dS0gGcAUFVX3lxTE5jcEpsWlZWUFl2RG5OX3RhUFlqYlk1MFBuMzJ3dVBNcFZHajZNUDBlR091MU15RmthdUhaNEl4MjgyNEtXWG11YXFRZmxLdFhGeVIzM0ozdnZ3YVdCaEZRc2RUdFQxUXlEaTNKUUszYlBlWDRBRFRhNzQxYnZSczhnczZmb0lTMF83WE56blpNZWp5ZXlZeC1EbXFJOQ?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "10 Best Brain-Computer Interface Stocks to Buy&nbsp;&nbsp;Insider Monkey",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
   },
   {
     "id": "b254c40d",
@@ -408,6 +757,24 @@
     ],
     "companies": [],
     "fetched": "2026-06-28"
+  },
+  {
+    "id": "f084a96a",
+    "title": "University of Michigan implants Paradromics wireless brain-computer interface in first human clinical trial - Today's Medical Developments",
+    "date": "2026-06-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi4wFBVV95cUxPMThOckxab3QzOFMtcmhnQjJkQ01mR0pPR1ZMWVMyS3NXbDBVRzF6U3gxWE9zMjRxWkt2cGRPckZ3R0tpWnotektwQkRLYjlFMnpqdmlqdjUzUVVQX2hYWGZ5MFU5bnM3SldUU1hPX3F5VkV6azBreTg3UVBUazQ4bHBqbFh2NDJUY0QyUndneDBzNGZOZXgxZWlqaGhTcDVyd1FjNzFQOFIyODBUbnBWSTF1QmhmWXJya1NTaWtJUS12NlZOTUlOcmlhMFpWaDRPZVdvMlE5SUJBcEVZdkhlUVMwYw?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "University of Michigan implants Paradromics wireless brain-computer interface in first human clinical trial&nbsp;&nbsp;Today's Medical Developments",
+    "tags": [
+      "product",
+      "research",
+      "clinical"
+    ],
+    "companies": [
+      "Paradromics"
+    ],
+    "fetched": "2026-07-05"
   },
   {
     "id": "705862f1",
@@ -1009,6 +1376,20 @@
     ],
     "companies": [],
     "fetched": "2026-06-14"
+  },
+  {
+    "id": "a3ccf5c6",
+    "title": "A Sputnik moment: China’s beating the US in neuroscience - Semafor",
+    "date": "2026-06-10",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMingFBVV95cUxQdERCc2Z6ZElkbUFYTVh2SXdZcTJEV05qWHNIakkzTnVRYjJsNlJfZUgxZGZQVUFkbWw3MlB5UWkwY1ZMN0JLYWxEUVNNZDNCbDB1WThMbHRCQ3FkRFRmai1QbmVCdnd0U3ViVjByZEo5d1ZGbWVIUExmVnFiLU1Jem0wb2c1ZUQ4ZUxha3ZHaGFZUWFDLUE4cHcwb1NOUQ?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "A Sputnik moment: China’s beating the US in neuroscience&nbsp;&nbsp;Semafor",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
   },
   {
     "id": "d0c0d665",
@@ -1910,6 +2291,20 @@
     "fetched": "2026-05-31"
   },
   {
+    "id": "f420f3d2",
+    "title": "All the World's Neural Data, No Common Rule - Davis Wright Tremaine",
+    "date": "2026-05-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxNSzZsakgxaUlpX0ZBZHV2d2s5NVQzUmQ5OGtLV09VWUdXWEc4d21BZnIzMzNKdGJ3aloyTUVZbjBudXplSkRfV3JXczN4RWJ6N3dXR1RENU9pR0dNcmRobTgtaE83SERyVm45SklOQ1FJOXZfQ0hOTGZSX1ZoY3lYM2ZyYXAzSmh2NFV0QXBfUHdzdW80Q0ZMc0MxRzc5M1Q1NVR4cDZFSQ?oc=5",
+    "source": "GN: Neurotech Regulation",
+    "source_category": "regulatory",
+    "summary": "All the World's Neural Data, No Common Rule&nbsp;&nbsp;Davis Wright Tremaine",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
     "id": "7c0bc4f6",
     "title": "Stryker breach makes medical device cybersecurity a boardroom issue - Today's Medical Developments",
     "date": "2026-05-26",
@@ -2725,6 +3120,20 @@
     "fetched": "2026-05-17"
   },
   {
+    "id": "dcf35b2f",
+    "title": "Upper and Lower-Limb Motor Decoding for Adaptive and Generalized Neural Rehabilitation",
+    "date": "2026-05-15",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11520935",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Decoding motor intentions from electromyographic (EMG) signals holds transformative potential for neurorehabilitation and assistive technologies, yet existing approaches remain fundamentally constrain",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
     "id": "d2192fdf",
     "title": "Exclusive: Xpanner Lands $18M To Offer ‘Automation As A Service’ To Construction Sites",
     "date": "2026-05-14",
@@ -2795,6 +3204,20 @@
     ],
     "companies": [],
     "fetched": "2026-05-17"
+  },
+  {
+    "id": "b8deb27e",
+    "title": "Mobility Function and Aperiodic Electrocortical Activity in Younger and Older Adults",
+    "date": "2026-05-14",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11520446",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Mobility declines with age to the extent that walking speed is often considered a vital sign. Identifying electrocortical changes behind this decline would aid with early identification and interventi",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
   },
   {
     "id": "153806a4",
@@ -8458,6 +8881,20 @@
     "fetched": "2026-04-26"
   },
   {
+    "id": "0b1040c6",
+    "title": "When the brain becomes the interface: Why India must prepare for the neurotechnology era - The Hindu",
+    "date": "2026-03-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi2gFBVV95cUxPRV9CYTlQUFJnVGhZaFNLcmtqQlhrMWhnSC1pc1R6anppRDVIWnFXUmM3UlFXNF9WR0RfS19uMHZsdXVsNGRITm4yMXdrV3VDSy1nZVQ5R3FvUDlSYXhpVGJ0LUNrYk9kVmVsSks0SU9hbXU0VUVkTmoyNHI0OVA1UklkN3JHM2VnWlZoYVpfcjNveUUxbTJBX2I3M0tZc2FSZXFEZGFsZEFveUNQdzlyVkRBLVVINmpXSkQzOVdXc1lPUXVpN0FOY1B4eGN1ZTFGcHMxQkdDcVFpZ9IB4AFBVV95cUxNY1hIRTZtQUpCUVVIX1lMeHAyWjBVVEJNcE4wUzhtNWFVTUhLVW16bzFoVm1Pd0o3aHl3b3pucUp6VlJGajdLU2pLX0lSWGpNeU9JM2lHbEJ3bVplNXh1YUQ5T0U3SXUwdkFhbnRTQWJWSlo5RlZVMzFTZ3JlZERybTFVSm9pSFQ4Zm1lNFpsYl9SUUNQMVBIYjJHbGZQWmgyS0tmSTBrX0ZZbV9sdzkwbHNnQ0RaY3J1bGdlVDFmTC1HSVRZeExRT290TDAycnpYckU4UndlMC1TVXRmSWFuUg?oc=5",
+    "source": "GN: Neurotech Patents",
+    "source_category": "product",
+    "summary": "When the brain becomes the interface: Why India must prepare for the neurotechnology era&nbsp;&nbsp;The Hindu",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
     "id": "40430823",
     "title": "Science Corp., Another Braintech Startup Founded By Neuralink Alums, Raises $230M Series C",
     "date": "2026-03-05",
@@ -10201,6 +10638,20 @@
     "fetched": "2026-03-11"
   },
   {
+    "id": "722e3f68",
+    "title": "Garrett Schumacher Of Velentium Medical On Why the US Government is Getting Serious About Medical… - Medium",
+    "date": "2025-12-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi4gFBVV95cUxPcGpBa2ZLdmNZdUI1R1R4WFVwRTlvNjF3cVIzVUZrakV2YnpLM1FLUndEc3ZnVVdGdzFaUmVfSF91d1JKUW5DWlYwNWNJZ2FMR3Bzd3hHdFVwWWpnUVdteW1YZWpEdFB5TEhSUWlDZE82Vlk1dUxfcGFRQm5iT1MtRmU3eDhCLWZTY3dyUkFEczIzZE9sY2ZaSzBlREc1ZkctLXQ0bGRWZGFSNkFnbUd4VFdDSXlxRE5pY1pVekw5Ni1abElQMkpzUGpidWJlSGQzZzZtOG9wS2dnQm1MSzlmVjZn?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "Garrett Schumacher Of Velentium Medical On Why the US Government is Getting Serious About Medical…&nbsp;&nbsp;Medium",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
     "id": "4f51a49b",
     "title": "Neuralink Hires FDA Brain Chip Regulator to Lead Medical Affairs - Bloomberg",
     "date": "2025-12-09",
@@ -11180,6 +11631,20 @@
     "fetched": "2026-03-11"
   },
   {
+    "id": "16e6cf94",
+    "title": "Mapping the Brain for Alignment - Institute for Progress (IFP)",
+    "date": "2025-08-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiXEFVX3lxTFBWMHBqUWI3STBUc010b0g0WmlTMTgzSWNhRmVaaXpKaHZsb1Z4MVhIMUl4R3VsbkJLSnVyLTN5WV9GZWtPZUlrdXYzRy1NVHpWMjVDTzl3Y2YzekpP?oc=5",
+    "source": "GN: Gov Funding Neuro",
+    "source_category": "funding",
+    "summary": "Mapping the Brain for Alignment&nbsp;&nbsp;Institute for Progress (IFP)",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
+  },
+  {
     "id": "5b191da0",
     "title": "Weekly Rundown: Neuralink launches first UK trial of brain chip - Drug Discovery News",
     "date": "2025-08-08",
@@ -11611,6 +12076,20 @@
     ],
     "companies": [],
     "fetched": "2026-06-21"
+  },
+  {
+    "id": "b534075e",
+    "title": "Fenwick Represents Synapticure in $25M Series A Funding - fenwick.com",
+    "date": "2024-11-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxNNlEzLWl0UEREb0tYMm10YkJySWp4VjM2cHIzdm10MFBaTFNNLUxwYnRnRHlxVm5TX2psVDFlcjg1RnlHdlpWdzRjNnItaXZzRkdERXo5dExueGZ4dWcxYmlySVpuYkhtMEZpM0RzZVh1YnlBbEJvMjJ5TUh6cXZQc0c4MlpTa3k0NUdUY29DLVl1Sk9ONEZZN2sxYk9WazA?oc=5",
+    "source": "GN: Neurotech VC",
+    "source_category": "funding",
+    "summary": "Fenwick Represents Synapticure in $25M Series A Funding&nbsp;&nbsp;fenwick.com",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-07-05"
   },
   {
     "id": "5e8cc8ee",
