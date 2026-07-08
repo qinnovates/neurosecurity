@@ -1,6 +1,51 @@
 [
   {
     "type": "external",
+    "title": "Great Leaps in Brain-Computer Interfaces Are Plausible - Bismarck Brief",
+    "date": "2026-07-08",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMigwFBVV95cUxNX1B0dURpcHkxMW8yWmpPeURPWjZiZDdTclFsOWtoS3Ixc1RwUHllUDBDNng5cmxiOHd2bG9SNExtdHlYQk9WU0t1RnlQOHBRVzZfWjJkVFFSRlBWcGNHdGFRQUtqV2NYVTJESUpIOUd5R2lrSVhMeGlOS3c2cl94dUpZNA?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Great Leaps in Brain-Computer Interfaces Are Plausible&nbsp;&nbsp;Bismarck Brief",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "New Brain Computer Interface Trial Aims to Restore Communication for Patients With Neurological Diseases - wowo.com",
+    "date": "2026-07-08",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivwFBVV95cUxOeDBSOGVReU5EcG5JUDI2SFJSNzlvdXhKeGV4WnNhUnkxQjdzRjNQTlhaMWd5V1EzR2hCZDNxY25LLU92d1ppQjZTY3lsVEo5NGRPbFUtSDNKaXdEREk5dVR4b0lEclVQUjl1MlpDaEFXU2xucUEwdWkyY1hmZzdpS1oxakFVbVFDYzJ3bDRsVVdXVXQ5c3lFWnVkT1VoU2tybDhEMzZPNnpWeHV0Z3hYbktsdXJjN0xBb1JpRjFxOA?oc=5",
+    "source": "Google News — BCI",
+    "summary": "New Brain Computer Interface Trial Aims to Restore Communication for Patients With Neurological Diseases&nbsp;&nbsp;wowo.com",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Prof. Il-Joo Cho’s research team develops a novel brain implant for bidirectional control of neural activity using temperature - EurekAlert!",
+    "date": "2026-07-08",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiXEFVX3lxTFBUQ0tBX3UyN0NuRXdHZUx0TlB1ZzJRdnFCUEhVdS0ydEVvMlViMXdNWjBHQUd4Y2hlTVJWNHNvaFdlX1BDWkhHcFpNX3ppNDlIYkdaWWlxTXVwSS1H?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Prof. Il-Joo Cho’s research team develops a novel brain implant for bidirectional control of neural activity using temperature&nbsp;&nbsp;EurekAlert!",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Using hierarchical statistical learning models to model individual statistical learning",
+    "date": "2026-07-08",
+    "url": "hxxps://arxiv[.]org/abs/2607[.]05822",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2607.05822v1 Announce Type: new Abstract: Statistical learning is essential for individuals to discover structure in the sensory environment, especially during communication via speech or music.",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Quantifying Entrainment Evidence: A Comparison of Frequentist and Bayesian Approaches for Information Processing Pathway Maps",
+    "date": "2026-07-08",
+    "url": "hxxps://arxiv[.]org/abs/2607[.]06284",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2607.06284v1 Announce Type: new Abstract: Information Processing Pathway Maps (IPPMs) offer a scalable framework for formalizing the complex sequence of mathematical transformations applied to s",
+    "category": "research"
+  },
+  {
+    "type": "external",
     "title": "The Download: your stake in OpenAI, and the Treasury&#8217;s AI warning",
     "date": "2026-07-07",
     "url": "hxxps://www[.]technologyreview[.]com/2026/07/07/1140197/the-download-your-openai-stake-treasury-ai-warning/",
@@ -10,56 +55,11 @@
   },
   {
     "type": "external",
-    "title": "STAT+: &#8216;Secret shopper&#8217; study probes GLP-1 telehealth sites",
-    "date": "2026-07-07",
-    "url": "hxxps://www[.]statnews[.]com/2026/07/07/secret-shopper-study-glp-1-telehealth-sites-health-tech/?utm_campaign=rss",
-    "source": "STAT News",
-    "summary": "In this edition of STAT Health Tech: A 'secret shopper' study of telehealth sites prescribing GLP-1s, news about Epic, Anthropic, and brain implants.",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Neuralink tests brain implant approach that leaves protective layer intact - ALS News Today",
     "date": "2026-07-07",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxPdEpXazdLcjN1ZTY4TUVLWUtnSkNvUk9TcnJWcUJHLTc0NG9MSEo3REN2VXFZZS12VGIyVGhHZ1hoVnBiUkFPSGFfMUh6eVpEbHpzeklKcXFXZEpKQTNhcllBTXlxMGpEUUNsNVhudDJjVURScDNxcjg3MVlRSE44MkVvd3RVSDBHbHM3Q3hVdHlHWF9EekE?oc=5",
-    "source": "Google News — BCI",
+    "source": "Google News — Neuralink",
     "summary": "Neuralink tests brain implant approach that leaves protective layer intact&nbsp;&nbsp;ALS News Today",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Paradromics has a new chief clinical officer as it advances BCI tech - MassDevice",
-    "date": "2026-07-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiekFVX3lxTE5mbUdIUTFkR3NlRDRYdm1QS2hWQ0FpQ3lnaGlaLTBwOG1uZF9QYTZuN3p2ZnRRNVFvdDZiYzNEeWFoU1JEZVJka1ktRmIwc0JkTFU5dmU1T0pCUUYwUGxzSEVNRkgtS19sazFfNkp5UmFlUTNmZENsbU5n?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Paradromics has a new chief clinical officer as it advances BCI tech&nbsp;&nbsp;MassDevice",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Learning Biophysical Models of Large-Scale Multineuronal Data to Enable Precise Neurostimulation",
-    "date": "2026-07-07",
-    "url": "hxxps://arxiv[.]org/abs/2607[.]04063",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2607.04063v1 Announce Type: new Abstract: Multi-compartment Hodgkin-Huxley (HH) models provide a principled framework for predicting neural dynamics and responses to electrical stimulation. Howe",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Your family&#8217;s $300 stake in OpenAI",
-    "date": "2026-07-06",
-    "url": "hxxps://www[.]technologyreview[.]com/2026/07/06/1140176/your-familys-300-stake-in-openai/",
-    "source": "MIT Technology Review",
-    "summary": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first, sign up here. OpenAI CEO Sam Altman’s oft-discussed promise that Americans w",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "U of M Health performs first in-human wireless brain computer interface surgery - WILX",
-    "date": "2026-07-06",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitgFBVV95cUxPSEE3RUpmNFJ1TUREaWRJb0txdXBMWFNnSFBIWTVSZ3dTUHZVdEU4RHFkbGlERy1SVUhtY1ZBOGhPcWJvMWRMak9EX3hYdzdpdTZMaDktY0kzeHRNaTBBaW9rVWNHOGdXU2VLeVhJWExfbU5sQnlBUWw0Vmo3VWVXVUZrNWpEUjdyM05faHdBSldPSUVSZ2dvckNNRTJPaHRQbV9DMktSMVlqLXlnZXRfTUtQVDF6QQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "U of M Health performs first in-human wireless brain computer interface surgery&nbsp;&nbsp;WILX",
     "category": "neurotechnology"
   },
   {
@@ -69,6 +69,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxQVzdaM0NVUWJFQ0d4VGxENjNOenlOSlkxblk0SEYxNGFITUZBQlhxWk5DTWhMdlJzaEpScHVRQ0MxTFV3TTY3N0ZGWnRBR0ZuSndVY290V2VudTc0cy1CY204WDdnTTNBTE1UR1lhOGRkVGp5YjNUZ2VHYnJCRnEwREFaM0pTWThmcmhPUmNPdXgzYUxU?oc=5",
     "source": "Google News — BCI",
     "summary": "Key Updates from Several Brain-Computer Interface (BCI) Companies&nbsp;&nbsp;Medical Device and Diagnostic industry",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "U of M Health performs first in-human wireless brain computer interface surgery - WILX",
+    "date": "2026-07-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirgFBVV95cUxNajUtRU5BcGhBbF9jZjNvaDBLR3RJZTEyLVo0dWUtNUloMll1djB3VVZ2cF9oWk5XNkNhTVJ4d0p0Z1N6MWZuMW50VHVNcm14VVlUeUd4NUNzOGF1LTMxakVNblZDQ1FBc2xwRlhFcGg0b3NYTzNlVWM2Y1EzNXFZaDBydXprX2RuVU9ncV81RHB5V2FNbkJrRmdjSk5HbUFjNHMwZmRBR3NoY0o1bHfSAcIBQVVfeXFMTkxsZlc0aVFOOHQzRWRXSGxVcXVzbHZWNUJ6MnJmUmpWN1FMYnd0MTh6LWhOaFF4b2p0RTVGeHM2RDlRNVgyNllSZ0phWXAxTVh6cXNsNlJfRDBYUExoUUdUVkVwN2REQ294M1MtWllSN2hFeFVtalhKS2tzanBmQXpyRkNiekQzblRGR2dzYzJUWGpiODROWnNHcDJFdnVyVXBtTEQ3RTZIdUt5S29pTk1Sd3IwZFlQR0VCd3lfT0hhckE?oc=5",
+    "source": "Google News — BCI",
+    "summary": "U of M Health performs first in-human wireless brain computer interface surgery&nbsp;&nbsp;WILX",
     "category": "neurotechnology"
   },
   {
@@ -96,24 +105,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxQOTJhc1RuMHIxNlZTZlBhNFZwekhTaEppZDRETDZxeXlaTnRzYlluSzdTajlON0tPd1EyOVRjdlFITDJMTUJvTU02STNyakxIYWV2Q2k1WUJQMTBMSmVCMjFRM21vcHVLTzZFN0RrQktTakNjbTBhWHB4UXhZMWJKRldrcFhRYjRfQ29HaHZzblFlRVJHWTZJZEY0RHlwRXZPYmsxSQ?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Vancouver 'RoboCop' is one of 1st Canadian ALS patients to receive Elon Musk's Neuralink brain implant&nbsp;&nbsp;CBC",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain-computer interface trials are taking off - MIT Technology Review",
-    "date": "2026-06-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxOMkNhVFltNTRIUVBtaktCc0MtN3FnX3o1OGhQTmdpWXR3ZHJVLUVWS2hPTlEtVTlKT1Q1ZnVHU2VvRk9fZTVIcDZuTlF3d3BicmNCOVJsZFVzTzhwamVHV0xKSTBMMzVQOWxrajFEQVVDMFFiaVFGTDF5UEJsZmM3SUdIVDRLX3RxVFpHMVVNMkhxd3B6dVM4X05fMGh2QXJU0gGmAUFVX3lxTE03TXpQZmhHbmtYTWdBTXZwWmI1ZlBPX0s0UDM5dkhUU0pKUzNVV2ZOeGtWU3paZFc3d2FvZlBWQ1RRS0tSdjB4LWdzMG9lRzhjSmNwZ0d4bjR0Ty1jc0lPMzA4QjZjRWJ1N2ZYVUVGVVJBWExVZWZTMFh4YUdtcVhienI3VlluQnhyRzEzSVFOVmsySF80MHNudWlaZmFqTk9BS2hTeHc?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-computer interface trials are taking off&nbsp;&nbsp;MIT Technology Review",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink competitor Paradromics just implanted its first brain-chip device. The next step is restoring speech. - Business Insider",
-    "date": "2026-06-17",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisgFBVV95cUxNMFJHcDlxNVVrZ3NRSTZ1Q2J4Xzcxa09EX1VrUHZ0b29OYjJhUkRXUWVCMnV5ejdYSUVaSWdRUTdfVUZndGpvMnRrUEdQc0pJeEZBay1JRFVhZVFBaTRFWmFZbndmNTFOeDlOZ0pmeEl5Vkp5YlotcFRHOE9BeE1xN1ZnUjNfTTlGaktCVVp6U3hQdW02d2NmS2xzZnRSMUgtUWJGLWJYdk9NZm15bTNCaEZn?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink competitor Paradromics just implanted its first brain-chip device. The next step is restoring speech.&nbsp;&nbsp;Business Insider",
     "category": "neurotechnology"
   },
   {
