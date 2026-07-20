@@ -1,6 +1,51 @@
 [
   {
     "type": "external",
+    "title": "Flashy brain-computer interface allows gamers to play Black Myth: Wukong with their mind - PC Gamer",
+    "date": "2026-07-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimwJBVV95cUxQcHIxUTBUODl2ZUpGdlc2QnYxdGplcGJvQmpMTGZHbDhIck44OVlWNTN5dUVKaTVOa2xHSmdwWmwzaHRUZ2lJVzBPNTFIOXZ4ZUczWFhaeGFYSExZYmxHcWpyTE9lZE82cnlPanI2UGhtU3JaT01GWkpGdXNwMHllaHRkUTkyNzNGTkRDamstNUowUUVmLVEtUHA0TzNTeWZjQ3BJV2RlQkpYOGNBSUlHdmlLdmJMZjJ4SXZBVjlIb3dWWS1RQzBZOG11X055YnVPbTNiT2dWanJqUjY1ek9MNmVCdTF0RFdlQWF1QVlxNkdJZGExVVR4aDA4YWdINEVGSXRqR293VjRVbDI0Y0tMb21EM1FZSTJySFlv?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Flashy brain-computer interface allows gamers to play Black Myth: Wukong with their mind&nbsp;&nbsp;PC Gamer",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink-Class Implantable Neural Interface Market to Reach $2.66 Billion by 2030 Amid Rapid Growth - EIN Presswire",
+    "date": "2026-07-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi3wFBVV95cUxOSkR2YnVoRjZzXzZMc3QwVHdrSVlwYkcweWlQSGxMTXB4SHdqWVVkV0xRcHRKQ1ZWa0lRUjg4OURLY2tjelJrWFlsLTg5QjhvVjVKNzRLNFFUQ2V3aGduM20xWDZ5T0M2cWMxMGlIMFFxeXBwaF96TGVDTE95cDZJaGNjeXlOcXVRS3FGTk1nVEJhMDZQSnotVS1CMnU1YTFIQ19UUGlrQTdJZnpCSHJ2cUdGS1pyWHkySjltWHJhUFRlMmVGN3pBR0x3Z1ZlYWJwTmN5VlR5cnV2QnhzSWMw?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink-Class Implantable Neural Interface Market to Reach $2.66 Billion by 2030 Amid Rapid Growth&nbsp;&nbsp;EIN Presswire",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "The RG-Flow Transformer: Encoding Scale-Free Dynamics in Scarce EEG",
+    "date": "2026-07-20",
+    "url": "hxxps://arxiv[.]org/abs/2607[.]11950",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2607.11950v2 Announce Type: cross Abstract: Brain field potentials are scale-free: their power spectra follow a $1/f^{\\beta}$ law whose aperiodic exponent $\\beta$ tracks cortical state, and slee",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Learning the Brain's Dynamics as a Port-Hamiltonian System: A GNN-Surrogate Metriplectic Twin for Non-Equilibrium Cortical Dynamics and Closed-Loop Neuromodulation",
+    "date": "2026-07-20",
+    "url": "hxxps://arxiv[.]org/abs/2607[.]10439",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2607.10439v2 Announce Type: replace Abstract: We model human motor cortex, recorded during rest and motor-imagery BCI conditions, as a port-Hamiltonian system: a conservative interconnection (sk",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "China Applies its Industrial Playbook to Brain Chips - The Wire China",
+    "date": "2026-07-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimAFBVV95cUxPUnJTRTdtbWdxWjJhaW9XaGxXbDJWQlhqdEJLemN1VGxmc0d6TjlWWlNFVGZmcHYzeUJ4YVZUSXpIT0Jjbm5vRm5BcXVGSmxZLTBNQTM0VUplc21Ib05hSTdKaks0N2dyd0FNQk9Db2NqTTZZSEc2NE42cHZaQ1BBd1pFTWl0UTJMOHlnLTh1M21BSHJPUFRnNQ?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "China Applies its Industrial Playbook to Brain Chips&nbsp;&nbsp;The Wire China",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "BCI Neurofeedback Amplifies Brainwaves to Detect Micro-Errors - Neuroscience News",
     "date": "2026-07-18",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAFBVV95cUxQOWVxMHZQV2IxbDd0LUs2SXJ5YmRkT0JlNVVwRkV3QV9FUEdNcTJwUlZkYzBmbGRlTWtHR2hZV1VWeEFfUWNLZ3M3TUhiUGpvVFNucWhFWE9ZM1NMbUw4V09UWVBPc0RPWW1MTnhwbG9wSzVJLUNsSEhUUmVCdjFXamJDdTJ0WVRvTnpEUg?oc=5",
@@ -10,47 +55,20 @@
   },
   {
     "type": "external",
-    "title": "Paralyzed Man Feels Sensation Again With Brain Stimulation Device - the-scientist.com",
-    "date": "2026-07-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiowFBVV95cUxPOE1CWjBjdDFWSjlzY2plcUFXMldMZEhjQVkwRUN6WXREVE1rUmZkazJwLV9STW00bnhNSHV4aUlrUUVFRDJrcVdOQWdjdk52LXlEblFzWVZrX3RUT2pDTzV1Yzhmb3l6dmdqNmxxWktTdWhRVGoySWM2NUZaUlU0ZEE2X3lHZWtNLXRyTFlSZnNTX0dOYzNBbndwQjlqTlBVdjFj?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Paralyzed Man Feels Sensation Again With Brain Stimulation Device&nbsp;&nbsp;the-scientist.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China beats Elon Musk’s Neuralink to the world’s first commercial brain-computer interface implant — car crash victim given coin-sized chip that turns neural signals into hand movements - TechRadar",
-    "date": "2026-07-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi0AJBVV95cUxPODNwc0dweTlIZzJRQWhXdXluVE9MeVhEZ0ZMQ3pTTzQzUFlwTS1vdzJMM0xyUk40cW1Na0lFWHhYdTUwX3l3Z1FyS2xtc2hLckNTUnVQLUduOGF2V2paeG5naXZyV05rZS1GVkx3Rnc4MVRFbVB5TVRSU0l0WXdJWG5aWmQxbmRMNDhiaGpYbk12aDRBYjRDZ2NPV0huYm9KWFdpQjNwZ2NXRW1zbHlmRkFJQXdNSk9CdlhMNGF3Z2d1LU4wUl9lQ09SVDFZZmh1X0Q5SDd4NThuMTR2YWk4Y2VveVdIQlpqT0YzWFhDMVNCeUtYQXhKZ0o3WlVDbWd5eDI0ZzMyQ0Z2RHgtZGhGSmxOZnlNYWRtMDZEdFpqS3p4X3YySmR6ZVZNTjI4OTR4ckRTTTJhRTc5N01maFQzandIN1NRLTNJVnlSNkRLTHk?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China beats Elon Musk’s Neuralink to the world’s first commercial brain-computer interface implant — car crash victim given coin-sized chip that turns neural signals into hand movements&nbsp;&nbsp;Tec",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain implant restores the sensation of touch in a person with quadriplegia - STAT",
-    "date": "2026-07-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirgFBVV95cUxNWmhaNE9iNUVaeVlnVFZZSnAyODYzcnFnQXF0YkRrRjJnbVI3dTFkZVgxcDhZSk1lSGhRNzBqWHZITVFIcm11NDlnRjIzQ2VUSlNwZlV3MVhob3Q0NUV4cnR4NzV2a1VTUjZxcnlPYmZnLVJXdndCOTNmWFVkdVV6NDdVcTlDUUdkbkJ2UUNwVlhBQlp4cWdaakNXeW1qZlcyY0xNWjFwYXkwRlYwQVE?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain implant restores the sensation of touch in a person with quadriplegia&nbsp;&nbsp;STAT",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "After revolutionary brain-computer implant, man with paralysis can feed himself - Popular Science",
-    "date": "2026-07-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMie0FVX3lxTFBoNE1uOGozYWMxcF8wazE2UDNDdUhndHVMZUhWRVVfNkFBTUFQZEhhYV9PMWNXMmhHdlBvS0VsNVUtZUVEejFtMEp1cUlNamhtMmRrMVpHaEJfRHlIUTZrb1J5V2ZqT0RmczU4NWk4V3RneER6RU9hRWFFMA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "After revolutionary brain-computer implant, man with paralysis can feed himself&nbsp;&nbsp;Popular Science",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Brain-chip milestone: China completes world’s first commercial implant - South China Morning Post",
     "date": "2026-07-15",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxNM1NuWHJkelNjQ3pZRzlMd05pTFoxVnhqQXFjaUhSQlVhWWY5bTFYcEIwNENTVzJuMzZiOEJua1RiOWQxeGotWkQ1enVCOTNRT1pfQTc4VHNDVG9WX3IxaElCYTdkaTVYd0lnX3JBX0k4YVNKNTBkWE02UkIyZnpxN2xBVlAyODBrUHhFWXQxenE1MnZPR1ZDSGVfa0RhaWdVNzJnMUFickhsSTJ4Z0hKX1BwYndKOTc1TTBmTEV0TjnSAcABQVVfeXFMTmgza3ZfSDB6U0l6N1MybVhRZjZvRlBoN2JwOEtYYnptRHdZOVFVRlYyZ1BoOWFaSm5kV1g0N1VDeGRjNDN5X1JuQ3h4ZmdvdHprbmxuM1B4WFBldnNwR2phSzBRZllPRmI1WU5Yak1fUHY2b1NrSWFxVUFiYXhJX1U0ekFZX0Rqclh1N3hSdV9zNWREZXpkLXJIY3A5c2RNeS1lajlQOFJQVHBidldHbTRlc0dmM2tUcFVzZ2FwQ0Zk?oc=5",
-    "source": "Google News — Neuralink",
+    "source": "Google News — BCI",
     "summary": "Brain-chip milestone: China completes world’s first commercial implant&nbsp;&nbsp;South China Morning Post",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Meta's Noninvasive Brain–Computer Interface Brain2Qwerty Achieves 61% Accuracy - infoq.com",
+    "date": "2026-07-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiZ0FVX3lxTE92REd1WlZFdjB5cWZRdE9pOHFaSGE3Z0FINzV5Y1h0MUM1ZE42Zm5wX09mb29GTzIydG8yazgzWURsTnRUNXhlU2pzTHcyakNhdFNiYmtTWktlZDJXblQ4NVJWTi1taVE?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Meta's Noninvasive Brain–Computer Interface Brain2Qwerty Achieves 61% Accuracy&nbsp;&nbsp;infoq.com",
     "category": "neurotechnology"
   },
   {
@@ -78,6 +96,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMidEFVX3lxTE1YRlM4S3hPU21sQmRiR2w3Qzg2M1lvTW9aRDdBLXhyVFRpTkNyU3M3UlF5elA1YV9FaHVCaWRaU0owOW9HNGlCWnkyMi0tQ2NEaWw3QnZtTzBjRTl3U19sb0dVdzZYLXNwWm1EMHpIc0hGRnRu?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Elon Musk’s Brain-chip Startup Aims for Scalability with New Transdural Procedure&nbsp;&nbsp;Road to VR",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China has approved the world’s first invasive brain-computer chip—here’s what’s next - MIT Technology Review",
+    "date": "2026-06-01",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxQM2FuRkthYlMxeHROLVZfWGotRUNla3B2OWlMbzJyR0thQmNfNjd0SjF2NVZWRGFmNG0zZHF1NzFTYmtyVW9PLW9EbW13ZUp2bm04YzFVLVZOR1lZSlowUERrN0RGSU5SMnlMS1JnTXo4eGcya2FfTzBLWjd2WWhQbVdWeVN1VWk10gGOAUFVX3lxTE1FSUpJX2EyRElaMk5NZW9hZEhRSzdlS1U1eUM4TDFuZnh6YXBFTUlfQUx1aTNPV0dTaGo1TzhkNTFPVzlKOXQtSW1Lc3ZUS2tiWGFCMFFFQUlmYjRpZTBJVTNLTURYb1VFcllpYjBSbjNaU09zdzZmWVJMUEd3NEZINnkyb1UzQW1yYjNoS0E?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China has approved the world’s first invasive brain-computer chip—here’s what’s next&nbsp;&nbsp;MIT Technology Review",
     "category": "neurotechnology"
   },
   {
@@ -160,15 +187,6 @@
     "source": "Google News — MIND Act",
     "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "The Past, Present And Future Of Brain-Computer Interfaces - Forbes",
-    "date": "2025-10-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxNeTFhWjAtaXRDbzdFeC1nSkZoclQwNjhUX2JZVWtTTzRBN25sNW5hNzVvSTIwWWlqRHZJMFdnby1NVVRPdWxreDJSWkVROUtUdlpTV2RpbUM1RUM3bG1hQU5VUkZ6NUg2cXRkT1prOFpYR3FWUDY5VUN1cEVHSDRSX1ZxeUlEamFEV3V5MjZpSU1PRzN6NWJIVXVlenN2RGNU?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "The Past, Present And Future Of Brain-Computer Interfaces&nbsp;&nbsp;Forbes",
-    "category": "neurotechnology"
   },
   {
     "type": "external",
