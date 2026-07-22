@@ -1,30 +1,48 @@
 [
   {
     "type": "external",
-    "title": "Emergent topological structure in spontaneous brain-organoid activity",
-    "date": "2026-07-21",
-    "url": "hxxps://arxiv[.]org/abs/2607[.]16517",
+    "title": "Science Corp. launches Prima vison-restoring BCI implant in Europe - MassDevice",
+    "date": "2026-07-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMidEFVX3lxTFBtbGtxcDFqWXRmTjBOYWVDODhnRUotakFCR0ZoQWcwblNHc1RBWW0tLVVhR2Z4LU1JbzY2dzZEei1reGo0eDZ2UkhJQnRaM1BDWVNPUGVvQmt2aXRPNVJ6alU3YTdQNzlTbGN4eEdsSGJTbWtF?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Science Corp. launches Prima vison-restoring BCI implant in Europe&nbsp;&nbsp;MassDevice",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Eccentricity-Constrained CNN Training Reveals Adaptive Information Coding Around the Visual Field",
+    "date": "2026-07-22",
+    "url": "hxxps://arxiv[.]org/abs/2607[.]19316",
     "source": "arXiv Neuroscience",
-    "summary": "arXiv:2607.16517v1 Announce Type: new Abstract: Neural activity is widely held to organize on low-dimensional structure embedded in a high-dimensional state space. Persistent homology reads such struc",
+    "summary": "arXiv:2607.19316v1 Announce Type: new Abstract: In the primate visual system, center-preferring cortical populations have higher spatial resolution and overlap face- and word-selective regions while p",
     "category": "research"
   },
   {
     "type": "external",
-    "title": "Exploring Brain Networks Using Noninvasive Electrophysiological Measurements: Methods and Applications",
+    "title": "Q&A: First able-bodied individuals receive brain-computer implant - MobiHealthNews",
     "date": "2026-07-21",
-    "url": "hxxps://arxiv[.]org/abs/2607[.]17602",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2607.17602v1 Announce Type: new Abstract: Electroencephalography (EEG) and magnetoencephalography (MEG) provide noninvasive measurements of brain activity with millisecond temporal resolution, e",
-    "category": "research"
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAFBVV95cUxOR0VOYUZYMUh3Y3BmalAwUkxIUEZyTi1fVDgyOE9ZbGNQTC1ZOHVFNDA5RVNsQzNRZTlRTno5R1NId3dlM3JqTUpicklHNXpVYklqN2I3d0lDaC1LbTNPZVVJUVR6X1NkSDgwUE5GME1QWXlCUTdORE80bllYa3B6Rl9FLWdRUG55c0tHY1U5M0lsQUgydFB5Q3ZtY1lNVkJ5?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Q&A: First able-bodied individuals receive brain-computer implant&nbsp;&nbsp;MobiHealthNews",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Overcoming the BCI Calibration Bottleneck: A Clinically-Grounded Architecture using Riemannian Alignment and Stochastic Weight Averaging",
+    "title": "China’s first subdural flexible implantable BCI gains fast-track approval pathway - Global Times",
     "date": "2026-07-21",
-    "url": "hxxps://arxiv[.]org/abs/2607[.]16225",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2607.16225v1 Announce Type: cross Abstract: Brain-Computer Interfaces (BCIs) face a severe calibration bottleneck due to cross-subject spatial covariance shifts and physiological artifacts. To e",
-    "category": "research"
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiYkFVX3lxTE9JZU8zSVBycklIMEM3YTRKMUFrcEpuWFpFMVl2NlFicERuRXJJaDlkNVkxWlNGSzJBM1VLeHNmZFJnNmREMVMxbWgwSU5paTVfbmhkUmtrNXdTeHdCVUViZ3JR?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China’s first subdural flexible implantable BCI gains fast-track approval pathway&nbsp;&nbsp;Global Times",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink's valuation has surged in just over a year. Here's what's driving the frenzy. - Business Insider",
+    "date": "2026-07-21",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxNMURNWlZRX3Y3SE9PTGQ2c0JWd05uTEZEWElQdEFtRjJaSHdkek1ySk9WN2NtT2FNbV9keWNsekpmRTczLVRQUFM1Z1N1cTFvTmVOSDJ6enhlSWZWeWJRY19ab1l5Rnl1QUY1UXVXYTFYdEFkWUFIemRGU1c4d1dpcUJOMjNmYzJ2MDgtbVdXckhSZGhEOVE?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink's valuation has surged in just over a year. Here's what's driving the frenzy.&nbsp;&nbsp;Business Insider",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -33,15 +51,6 @@
     "url": "hxxps://spectrum[.]ieee[.]org/injectable-bioelectronic-implant-power-outlet",
     "source": "IEEE Spectrum",
     "summary": "Supplying power to bioelectronic implants is essential for long-term operations. However, placing a socket on them can invite invasions from microbial intruders, and wireless charging antennas are oft",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "How Closed-Loop BCIs Will Treat Depression, Anxiety, and PTSD - Neuroscience News",
-    "date": "2026-07-20",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMickFVX3lxTE9HYlFDRm1ZNnFWRXRmdk5iOUo5cFFSWDNLejV0cVBOVlJrQU1feUk0cUtvaE9yc2l0OUFsQXRQLWVwTTlqblpzeThMZXpGbkZ2OW81QkhfMEVaWmlVWXJMRXZ1Y3d6aEVTYnA3ZHl3TWxNUQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "How Closed-Loop BCIs Will Treat Depression, Anxiety, and PTSD&nbsp;&nbsp;Neuroscience News",
     "category": "neurotechnology"
   },
   {
@@ -55,20 +64,11 @@
   },
   {
     "type": "external",
-    "title": "BCI Neurofeedback Amplifies Brainwaves to Detect Micro-Errors - Neuroscience News",
-    "date": "2026-07-18",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAFBVV95cUxQOWVxMHZQV2IxbDd0LUs2SXJ5YmRkT0JlNVVwRkV3QV9FUEdNcTJwUlZkYzBmbGRlTWtHR2hZV1VWeEFfUWNLZ3M3TUhiUGpvVFNucWhFWE9ZM1NMbUw4V09UWVBPc0RPWW1MTnhwbG9wSzVJLUNsSEhUUmVCdjFXamJDdTJ0WVRvTnpEUg?oc=5",
+    "title": "How Closed-Loop BCIs Will Treat Depression, Anxiety, and PTSD - Neuroscience News",
+    "date": "2026-07-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMickFVX3lxTE9HYlFDRm1ZNnFWRXRmdk5iOUo5cFFSWDNLejV0cVBOVlJrQU1feUk0cUtvaE9yc2l0OUFsQXRQLWVwTTlqblpzeThMZXpGbkZ2OW81QkhfMEVaWmlVWXJMRXZ1Y3d6aEVTYnA3ZHl3TWxNUQ?oc=5",
     "source": "Google News — BCI",
-    "summary": "BCI Neurofeedback Amplifies Brainwaves to Detect Micro-Errors&nbsp;&nbsp;Neuroscience News",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain-chip milestone: China completes world’s first commercial implant - South China Morning Post",
-    "date": "2026-07-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxNM1NuWHJkelNjQ3pZRzlMd05pTFoxVnhqQXFjaUhSQlVhWWY5bTFYcEIwNENTVzJuMzZiOEJua1RiOWQxeGotWkQ1enVCOTNRT1pfQTc4VHNDVG9WX3IxaElCYTdkaTVYd0lnX3JBX0k4YVNKNTBkWE02UkIyZnpxN2xBVlAyODBrUHhFWXQxenE1MnZPR1ZDSGVfa0RhaWdVNzJnMUFickhsSTJ4Z0hKX1BwYndKOTc1TTBmTEV0TjnSAcABQVVfeXFMTmgza3ZfSDB6U0l6N1MybVhRZjZvRlBoN2JwOEtYYnptRHdZOVFVRlYyZ1BoOWFaSm5kV1g0N1VDeGRjNDN5X1JuQ3h4ZmdvdHprbmxuM1B4WFBldnNwR2phSzBRZllPRmI1WU5Yak1fUHY2b1NrSWFxVUFiYXhJX1U0ekFZX0Rqclh1N3hSdV9zNWREZXpkLXJIY3A5c2RNeS1lajlQOFJQVHBidldHbTRlc0dmM2tUcFVzZ2FwQ0Zk?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-chip milestone: China completes world’s first commercial implant&nbsp;&nbsp;South China Morning Post",
+    "summary": "How Closed-Loop BCIs Will Treat Depression, Anxiety, and PTSD&nbsp;&nbsp;Neuroscience News",
     "category": "neurotechnology"
   },
   {
@@ -91,29 +91,11 @@
   },
   {
     "type": "external",
-    "title": "Vancouver 'RoboCop' is one of 1st Canadian ALS patients to receive Elon Musk's Neuralink brain implant - CBC",
-    "date": "2026-07-02",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxQOTJhc1RuMHIxNlZTZlBhNFZwekhTaEppZDRETDZxeXlaTnRzYlluSzdTajlON0tPd1EyOVRjdlFITDJMTUJvTU02STNyakxIYWV2Q2k1WUJQMTBMSmVCMjFRM21vcHVLTzZFN0RrQktTakNjbTBhWHB4UXhZMWJKRldrcFhRYjRfQ29HaHZzblFlRVJHWTZJZEY0RHlwRXZPYmsxSQ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Vancouver 'RoboCop' is one of 1st Canadian ALS patients to receive Elon Musk's Neuralink brain implant&nbsp;&nbsp;CBC",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Elon Musk’s Brain-chip Startup Aims for Scalability with New Transdural Procedure - Road to VR",
     "date": "2026-07-01",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMidEFVX3lxTE1YRlM4S3hPU21sQmRiR2w3Qzg2M1lvTW9aRDdBLXhyVFRpTkNyU3M3UlF5elA1YV9FaHVCaWRaU0owOW9HNGlCWnkyMi0tQ2NEaWw3QnZtTzBjRTl3U19sb0dVdzZYLXNwWm1EMHpIc0hGRnRu?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Elon Musk’s Brain-chip Startup Aims for Scalability with New Transdural Procedure&nbsp;&nbsp;Road to VR",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China has approved the world’s first invasive brain-computer chip—here’s what’s next - MIT Technology Review",
-    "date": "2026-06-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxQM2FuRkthYlMxeHROLVZfWGotRUNla3B2OWlMbzJyR0thQmNfNjd0SjF2NVZWRGFmNG0zZHF1NzFTYmtyVW9PLW9EbW13ZUp2bm04YzFVLVZOR1lZSlowUERrN0RGSU5SMnlMS1JnTXo4eGcya2FfTzBLWjd2WWhQbVdWeVN1VWk10gGOAUFVX3lxTE1FSUpJX2EyRElaMk5NZW9hZEhRSzdlS1U1eUM4TDFuZnh6YXBFTUlfQUx1aTNPV0dTaGo1TzhkNTFPVzlKOXQtSW1Lc3ZUS2tiWGFCMFFFQUlmYjRpZTBJVTNLTURYb1VFcllpYjBSbjNaU09zdzZmWVJMUEd3NEZINnkyb1UzQW1yYjNoS0E?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China has approved the world’s first invasive brain-computer chip—here’s what’s next&nbsp;&nbsp;MIT Technology Review",
     "category": "neurotechnology"
   },
   {
