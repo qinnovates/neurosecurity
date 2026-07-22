@@ -1,7 +1,7 @@
 {
   "$schema": "automation-registry",
   "description": "Central registry of all automation, workflows, triggers, and scheduled tasks in the qinnovate project.",
-  "last_updated": "2026-07-21T02:06:06.150Z",
+  "last_updated": "2026-07-22T02:04:23.118Z",
   "entries": [
     {
       "id": "gh-deploy",
@@ -52,7 +52,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/security-audit.yml",
       "status": "active",
-      "last_triggered": "2026-07-19T02:08:04Z",
+      "last_triggered": "2026-07-21T08:16:58Z",
       "last_status": "success",
       "dependencies": [
         ".github/security-audit/scripts/audit.py",
@@ -73,7 +73,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-news.yml",
       "status": "active",
-      "last_triggered": "2026-07-20T18:47:20Z",
+      "last_triggered": "2026-07-21T18:06:43Z",
       "last_status": "success",
       "dependencies": [
         "scripts/fetch-news.mjs"
@@ -154,7 +154,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/dependabot-auto-merge.yml",
       "status": "active",
-      "last_triggered": "2026-07-01T08:13:54Z",
+      "last_triggered": "2026-07-21T08:17:12Z",
       "last_status": "failure",
       "dependencies": [
         "Dependabot PRs"
@@ -580,7 +580,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-registry.yml",
       "status": "active",
-      "last_triggered": "2026-07-21T02:05:48Z",
+      "last_triggered": "2026-07-22T02:04:08Z",
       "last_status": "unknown",
       "dependencies": [
         "scripts/update-automation-registry.mjs",
