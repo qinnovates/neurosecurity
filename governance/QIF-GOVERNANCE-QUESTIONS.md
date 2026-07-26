@@ -26,6 +26,8 @@
 - [Part III: Neuroethics and Neurorights Mapping](#part-iii-neuroethics-and-neurorights-mapping)
 - [Part IV: Security Architecture Questions](#part-iv-security-architecture-questions)
 - [Part V: The Open Source Neural Atlas Proposal](#part-v-the-open-source-neural-atlas-proposal)
+- [Part VI: Emergency Response — OS Update, Fallback, and Recovery](#part-vi-emergency-response--os-update-fallback-and-recovery)
+- [Part VII: Kernel Core Responsibility RACI](#part-vii-kernel-core-responsibility-raci)
 
 ---
 
@@ -613,6 +615,164 @@ The most realistic path is a hybrid model:
 
 ---
 
+## Part VI: Emergency Response — OS Update, Fallback, and Recovery
+
+**Status:** Draft. Added 2026-07-25, following an internal 5-panel adversarial review (safety-critical systems/hardware redundancy, GRC/governance architecture, devil's-advocate, NIST standards-process, and neuromodesty/epistemic-integrity lenses, each working independently). Companion to Part II (RACI Matrix), `NEUROSECURITY_POLICY_PROPOSAL.md` §5.1 (NIST engagement), and the `BCI-Security-Best-Practices` research wiki page.
+
+**Scope note.** This Part covers OS/kernel update safety, runtime fallback, and human emergency override for a life-critical BCI — deliberately narrower than general Incident Response. Active-compromise / cyberattack response is already covered by the "Emergency and Edge Cases" table in Part II (row: "Device under active cyber attack," AI System = Responsible via Neurowall). Where an update-triggered event is later determined to be malicious rather than defective, QIF-IR-11 below hands off to that existing row rather than duplicating it.
+
+**Status qualifier (applies to this entire Part).** Every control, threshold, and architecture pattern below is a proposed, unvalidated design — consistent with QIF's overall status. Numeric parameters (timing windows, thresholds) are illustrative examples requiring per-device and per-patient clinical validation, not established constants. "Accountable" denotes RACI process accountability, not a determination of legal liability, which is governed separately by applicable law, contract, and regulatory status.
+
+### VI.1 Architecture Correction: Floor-Promotion, Not Dual Redundancy
+
+An earlier draft of this scenario proposed continuity during a failed update via full dual-redundant kernel execution (two complete OS instances in hot-standby, with a hardware-timed handoff on failure). Internal review found this unsound for this context: it applies a hardware-fault-tolerance pattern — designed to vote between multiple lanes of *identical, already-certified* code — to a *software-version-cutover* problem, where there is no principled way to arbitrate between two genuinely different kernel versions; it introduces state-synchronization/staleness risk on failover; and for an implanted or wearable form factor it roughly doubles active power and heat load against tissue-heating and battery-life constraints that already dominate implant design.
+
+**Corrected architecture — the Safety Floor pattern.** A minimal, low-power, independently-verifiable microcontroller ("the Floor") runs a bounded, formally-tractable safety-critical control loop continuously and is never itself the target of the general-purpose OS update process. The general-purpose OS (Kernel + systemd) sits *on top of* the Floor as an enhancement layer: when healthy, it extends function beyond the Floor's baseline; when it panics, fails a health check, or is mid-revert, control does not "fail over" to a second full OS — it reverts to the Floor's baseline, which was never interrupted. This mirrors the pattern used in implantable cardiac devices: a minimal, extremely conservative pacing kernel that is not itself the subject of routine over-the-air risk, paired with a separately-updatable diagnostics layer.
+
+This reframes "Basic Mobility Mode" (originally an emergency-only last resort) as the **always-on baseline**, not an emergency measure — see VI.4 for why this floor must be defined per modality rather than as one undifferentiated "safe state."
+
+### VI.2 Governance RACI — Emergency Response Controls
+
+Reuses the six-column schema from Part II (Patient, Clinician, Manufacturer, Regulator (FDA/CE), Open Standard (QIF), AI System) for consistency — this Part does not introduce a second, competing RACI schema. Each row is a control (`QIF-IR-NN`) with an illustrative CSF 2.0 function mapping, intended as the near-term gap-analysis input referenced in `NEUROSECURITY_POLICY_PROPOSAL.md` §5.1 — targeted at NIST's OLIR submission process rather than self-convening a Community Profile working group (see VI.5).
+
+| ID | Control | Patient | Clinician | Manufacturer | Regulator | Open Standard (QIF) | AI System | CSF 2.0 Function |
+|----|---------|---------|-----------|---------------|-----------|----------------------|-----------|--------------------|
+| QIF-IR-01 | Telemetry continuity during update (Floor stays live; OS layer is what updates) | I | C | R | I | C | — | Protect / Detect |
+| QIF-IR-02 | Trigger routine (non-critical) OS/kernel update | C/A | C | R | I | — | — | Protect |
+| QIF-IR-03 | Trigger critical security patch (active CVE) | C | R/A | R | A (compressed-timeline authority) | C | I | Protect / Respond |
+| QIF-IR-04 | Runtime fallback execution (enhancement-layer panic; Floor unaffected) | I | I | R | I | — | — | Respond |
+| QIF-IR-05 | Emergency human override (hardware veto trigger) | A | R | I | I | — | I | Respond |
+| QIF-IR-06 | Override recovery and re-certification (return to OS control) | C/A | R/A | C | I | — | C | Recover |
+| QIF-IR-07 | Override abuse detection and audit (tamper-evident log, lockout after N triggers) | I | C | R | I | — | R | Detect |
+| QIF-IR-08 | Consent bootstrap when the BCI is the patient's primary communication channel | A (advance directive) | R | C | I | C | — | Govern |
+| QIF-IR-09 | Power-loss-during-write integrity (atomic partition pointer swap) | I | I | R/A | I | C | — | Protect |
+| QIF-IR-10 | Fleet-scale rollout governance and circuit breaker | I | I | R/A | C | C | C (anomaly detection) | Govern / Protect |
+| QIF-IR-11 | Post-incident root cause and regulatory notification | I | C | R | A | — | I | Recover |
+| QIF-IR-12 | Two-person integrity for non-emergency update authorization | I | R (+ independent reviewer) | C | I | — | — | Govern |
+
+**Notes on new/revised rows** (all identified via the internal review, not present in the original draft):
+- **QIF-IR-03** gives Regulator "A" for compressed-timeline authority because an unqualified Patient veto over an actively-exploited CVE patch is a safety gap, not a labeling nit — consent is still required and sought, but cannot indefinitely block a patch to a live vulnerability without an escalation path.
+- **QIF-IR-06** — emergency override with no defined path back to normal operation was a life-critical gap in the original draft.
+- **QIF-IR-07** — the override sits outside OS visibility for tamper-resistance, which also makes it capable of being tripped repeatedly (accidentally, maliciously, or by a coerced caregiver) undetected. The audit log must be written by hardware independent of the OS (write-once/tamper-evident), consistent with `BCI-Security-Best-Practices` item 15.
+- **QIF-IR-08** addresses the consent-bootstrapping paradox: if the BCI is the patient's only expressive channel, the moment a critical patch is needed may be the moment they cannot articulate consent through it. Requires an out-of-band consent path (advance directive, physical control, or caregiver-witnessed dual consent for a pre-classified "cannot wait" tier) that does not depend on the subsystem being patched.
+- **QIF-IR-10** — every other row is single-patient scoped; nothing halted a bad signed update across a device population in the original draft. Requires staged percentage rollout and an automatic global halt if aggregate fallback rate exceeds a threshold within a window, fed by anonymized aggregate telemetry distinct from per-patient sensory-motor telemetry (QIF-IR-01).
+- **QIF-IR-12** — the Clinician/Medic role held Accountable or Responsible on nearly every row in the original draft with no second check. Added an independent-reviewer requirement for non-emergency triggers; does not apply to QIF-IR-05, which must remain fast and unilateral by design.
+
+### VI.3 Technical Execution / Traceability Table
+
+Deliberately **not** a second RACI. Components execute; they do not hold organizational accountability. This table traces each governance control to the component(s) that implement it. If this table and VI.2 ever disagree, VI.2 is authoritative and this table is corrected to match — not the reverse. This avoids maintaining two independently-updated RACI-shaped documents with different natural change cadences (org/regulatory change vs. firmware/kernel release cycles), which drift.
+
+| ID | Floor (Safety MCU) | General-Purpose Kernel | systemd Suite | Bootloader / Firmware | Fleet Telemetry Aggregator |
+|----|----------------------|--------------------------|------------------|--------------------------|--------------------------------|
+| QIF-IR-01 | R (always-on baseline) | R (enhancement layer) | R (cgroup isolation) | — | — |
+| QIF-IR-02 | — | — | R (staging, signed image) | — | — |
+| QIF-IR-03 | — | — | R | — | — |
+| QIF-IR-04 | R (unaffected by OS panic) | R (panic source) | R (health check) | — | — |
+| QIF-IR-05 | R (drops OS access) | — | — | R (immutable trigger path) | — |
+| QIF-IR-06 | — | R (re-admitted after check) | R (integrity re-verify) | R (attestation) | — |
+| QIF-IR-07 | R (write-once log) | — | — | R (tamper-evident storage) | — |
+| QIF-IR-08 | — | — | — | R (out-of-band consent I/O) | — |
+| QIF-IR-09 | — | — | R (atomic pointer swap, post-checksum only) | R (power-loss-safe write) | — |
+| QIF-IR-10 | — | — | — | — | R |
+| QIF-IR-12 | — | — | R (enforces dual-sign gate) | — | — |
+
+### VI.4 Modality-Specific Fail-Safe Floor Specification
+
+A single undifferentiated "safe state" does not fit every sensory-motor pathway — freezing is a defensible floor for motor control, but a frozen visual frame or complete audio silence are each dangerous in ways specific to that modality. Each floor inherits the hardware-enforced amplitude ceiling already established in this document's governance model (Part I, Q1.1, Q3.3) — physical safety bounds are enforced in hardware and cannot be raised by any software layer, including the enhancement OS.
+
+**Motor.** Floor = the always-on MCU stability/posture controller (VI.1). On enhancement-layer failure, control reverts to this floor rather than a full stop — a hard freeze mid-gait is itself a fall risk, so the floor should implement a bounded, conservative stability-hold behavior rather than a rigid lock, pending clinical validation of what "safe" means for a given patient's mobility profile. *Confidence: theoretical, unvalidated — exact floor behavior needs a rehabilitation/gait specialist's input, not only a systems-engineering judgment.*
+
+**Vision.** Floor = fail-dark (no rendered signal) paired with a mandatory cross-modal alert (haptic or audio orientation cue) — never fail-dark silently. A last-known-good frame may substitute for fail-dark only if explicitly time-bounded and flagged to the user as stale; an unflagged frozen frame during motion (e.g., mid-street-crossing) is more dangerous than an announced blackout. True hot redundancy — the floor-promotion pattern from VI.1, extended to a scoped, always-live decode/render pipeline rather than the whole OS — may be justified for vision specifically if fail-dark-plus-alert proves clinically insufficient; this is a modality-specific decision, not inherited automatically from the motor case. *Confidence: theoretical, unvalidated.*
+
+**Auditory.** *(New — extends this framework to hearing-loss-compensation and tinnitus-suppression BCIs, per the project's Wearable Auditory BCI concept: a non-invasive, bone-conduction, glasses-integrated device with an onboard DSP/AI processing layer. The underlying hardware concept is status: draft, confidence 0.5 in the research record — the floor spec below is correspondingly earlier-stage than the motor/vision cases above, not equally mature.)*
+
+Floor = passive analog passthrough: a hard-wired, minimal circuit relaying the ambient microphone signal directly to the bone-conduction transducer, bypassing the DSP/AI processing layer entirely. **Not silence.** For a device compensating hearing loss, losing all processing is equivalent to losing hearing outright — the user loses access to traffic, alarms, and spoken warnings, which is the auditory-domain analog of vision fail-dark being dangerous, not the auditory-domain analog of a "safe" quiet state. Two failure sub-cases specific to this device class:
+- **Hearing-loss compensation failure** → revert to passive passthrough (unprocessed but present, not absent).
+- **Tinnitus active-cancellation failure** → the anti-phase canceling signal stops and the patient's phantom tone returns. Not itself a safety hazard, but must be signaled cross-modally (haptic or visual) — the audio channel cannot be trusted to announce its own failure, matching the cross-modal alert pattern used for vision.
+
+Amplitude ceiling: even though bone conduction bypasses the eardrum, sustained cochlear-hair-cell overdrive from a runaway DSP is a plausible failure mode and must be bounded by the same hardware-enforced ceiling used elsewhere in this framework, not left to software. *Confidence: theoretical, unvalidated — the underlying hardware concept has not been prototyped beyond personal bone-conduction testing per the research record; this floor spec is a design proposal to validate alongside the hardware, not a retrofit onto an existing shipped device.*
+
+### VI.5 NIST Engagement Path — Correction
+
+Internal review, cross-checked against NIST's own guidance (NIST CSWP 32, "NIST Cybersecurity Framework 2.0: A Guide to Creating Community Profiles," April 2024), found that Community Profiles are convened by trade associations, sector coordinating councils, or regulators — not by NIST on a contributor's behalf, and not typically by an unaffiliated individual. The near-term step in `NEUROSECURITY_POLICY_PROPOSAL.md` §5.1 ("convene a BCI security working group under NIST's Community Profile program") should be revised: the CSF 2.0 function-mapping columns in VI.2 are better targeted at **NIST's OLIR (Online Informative References) Program** (NISTIR 8278A) — a self-service, NIST-reviewed submission process for exactly this kind of control-to-CSF-function mapping — with a formal Community Profile treated as a possible long-term outcome once an institutional co-sponsor (professional society, university, or manufacturer) is willing to convene it, not a self-executable near-term step. Given this is FDA-regulated hardware, AAMI TIR57, ANSI/AAMI SW96, and IEEE 2621 are plausibly a more directly relevant standards chain than NIST CSF alone, and peer-reviewed publication of the underlying threat catalog and scoring methodology is a credibility prerequisite that should precede any standards-body submission, not run parallel to it. This Part deliberately does not extend SP-800-53-style formatting further than the `QIF-IR-NN` ID scheme already in use, to avoid the document appearing pre-reviewed by NIST before any actual submission exists.
+
+---
+
+## Part VII: Kernel Core Responsibility RACI
+
+**Status:** Draft. Added 2026-07-25.
+
+**Purpose.** The Kernel appears as a single undifferentiated "Responsible" actor throughout Parts II and VI, which understates what "the Kernel" actually does and collapses four functions with different threat surfaces and, in practice, different accountable parties into one label. This Part decomposes the Kernel into its four foundational responsibility domains — the standard operating-systems decomposition (hardware abstraction, resource scheduling, memory management, protection/access control) — and assigns governance accountability to each, reusing the six-column schema from Part II.
+
+| ID | Kernel Function | What It Does | Patient | Clinician | Manufacturer | Regulator | Open Standard (QIF) | AI System | Primary Threat Surface | Mapped TARA Technique(s) |
+|----|-------------------|----------------|---------|-----------|---------------|-----------|-----------------------|-----------|---------------------------|-----------------------------|
+| QIF-K-01 | Hardware Driver | Directly interfaces with electrode arrays, ADC/DAC, actuators/transducers — the only layer that touches physical signal in or out | I | C | R/A | C | C | C (anomaly detection) | Malicious or buggy driver → direct physical signal manipulation | QIF-T0043 (supply chain firmware backdoor), QIF-T0046 (OTA firmware weaponization), QIF-T0048 (electrode compromise/physical tamper), QIF-T0050 (hardware fault injection — voltage/EM glitching), QIF-T0001 (signal injection at electrode-tissue boundary) |
+| QIF-K-02 | Resource Management | Schedules CPU/IO cycles (e.g., PREEMPT_RT) and allocates bandwidth across competing processes/threads | I | C | R | I | C | C | Starvation/DoS of the safety-critical control loop by a lower-priority process | No direct match — see Coverage Gap 1 below. QIF-T0029 (Neural DoS / stimulation flood) and QIF-T0031 (battery drain) are the closest catalog entries, but both model physiological/power-layer DoS, not OS-scheduler-layer starvation of the safety-critical thread. |
+| QIF-K-03 | Memory Accountant | Allocates, isolates, and tracks memory per process; enforces that one process cannot read or write another's memory | I | I | R/A | I | C | C | Memory-safety bugs → arbitrary code execution or cross-process neural-data exfiltration | No match — see Coverage Gap 2 below. QIF-T0054/T0060/T0034 ("memory extraction," "memory implant," "working memory poisoning") were checked directly against source and confirmed to model *neurocognitive* memory (hippocampal/working-memory circuits), not kernel process memory — not applicable here despite the name overlap. |
+| QIF-K-04 | Permissions / Boundaries | Enforces the capability-tier model (Tier 1-5, Part I Q3.1) and process/trust-domain isolation | C | C | R | I | A | C | Privilege escalation / jailbreak past a tier boundary | QIF-T0049 (wireless authentication bypass), QIF-T0050 (hardware fault injection — "can bypass security checks"), QIF-T0061 (coherence mimicry — evades QIF's own detection boundary directly) |
+
+**Notes:**
+
+- **QIF-K-01 (Hardware Driver).** The function with the most direct path to physical harm — a bad driver doesn't corrupt data, it can miswrite a stimulation waveform. Manufacturer holds both R and A because they write and certify the driver; Regulator and QIF are Consulted on driver-level safety requirements — this is where the amplitude ceiling from Part I Q1.1 is actually enforced in code, not just specified on paper.
+- **QIF-K-02 (Resource Management).** This is the general case of what QIF-IR-01 (Part VI, telemetry continuity) governs for the update-fallback scenario specifically. A resource-starvation attack — e.g., a log-flush process stealing cycles from the motor driver — doesn't require compromising the driver at all, only winning the scheduler.
+- **QIF-K-03 (Memory Accountant).** "Memory accountant" is doing real work as a name, not just usage tracking — it's the boundary that prevents one process's fault or compromise from reading or corrupting another's state. This is why Part IV's Q-SEC-4 proposes formal verification specifically for this class of kernel property (seL4 precedent): memory-safety bugs are the most common root cause of confidentiality/integrity failures in general-purpose kernels, and in a BCI context, a memory-safety bug here is the most plausible software path to unauthorized read or write of live neural signal.
+- **QIF-K-04 (Permissions/Boundaries).** Open Standard (QIF) holds Accountable here, not Manufacturer — the Tier 1-5 capability model itself (which tier permits what) is a QIF governance decision (Part I, Q3.1); the Manufacturer's role is to correctly *implement* QIF's tier definitions, not to define them. This is the one row where a manufacturer implementing the boundary incorrectly is a standard-conformance failure, not only a manufacturer defect — relevant once a conformance/certification program (Part V) exists.
+
+**Relationship to TARA.** Mapped against the canonical registry (`datalake/qtara-registrar.json`, 161 techniques / 16 tactics / 8 domains — the `osi-of-mind/tara-threat/` directory holds only PoC writeups, not the catalog itself; `config.py` in `qif-lab/` is the actual source of truth). Two real coverage gaps surfaced in the process of mapping, rather than being assumed in advance:
+
+**Coverage Gap 1 — no technique for OS-scheduler-layer resource starvation (QIF-K-02).** TARA's DoS-adjacent techniques (QIF-T0029 Neural DoS, QIF-T0031 battery drain) model attacks on the physiological/power layer — flooding the neural pathway or draining the battery. None model a distinct and simpler attack: a malicious or merely buggy co-resident process winning the OS scheduler and starving the safety-critical control thread of CPU/IO cycles without touching the neural signal path at all. This is exactly the failure mode QIF-IR-01 (Part VI) and the Floor-Promotion architecture (VI.1) exist to defend against, and it currently has no corresponding entry in the threat catalog.
+
+**Coverage Gap 2 — no technique for kernel memory-safety exploitation (QIF-K-03).** Checked directly against source text: TARA's three "memory"-named techniques (QIF-T0054 memory extraction, QIF-T0060 memory implant, QIF-T0034 working memory poisoning) all model attacks on *neurocognitive* memory — hippocampal activity, long-term potentiation, working-memory circuits — not kernel process memory. There is currently no TARA technique modeling classic memory-safety exploitation (buffer overflow or use-after-free in the kernel/driver → arbitrary code execution or cross-process neural-data exfiltration). This is the exact attack class Part IV's Q-SEC-4 (seL4-style formal verification target) is proposed to defend against — the catalog that should motivate that proposal doesn't yet describe the threat it defends against.
+
+**Recommended follow-up:** add technique candidates for both gaps to `config.py` (BCI System domain, `QIF-B.*` tactics fit best) and regenerate the registry per the As-Code process in `tara-threat/README.md`, rather than hand-editing the JSON.
+
+**Part VI cross-references** (controls with a direct TARA match): QIF-IR-02/QIF-IR-03 (trigger update) → QIF-T0043, QIF-T0046; QIF-IR-05/QIF-IR-07 (override trigger/abuse) → QIF-T0050 (hardware fault injection can "bypass security checks," directly relevant to override-tampering risk); QIF-IR-08 (consent bootstrap) → QIF-T0064 (user consent fatigue / neural permission flooding — relevant if compressed-timeline consent requests under QIF-IR-03 recur often enough to induce reflexive approval). QIF-IR-09 (power-loss-during-write integrity) had no direct TARA match at time of writing. QIF-IR-10 (fleet-scale circuit breaker) was also initially assessed as having no direct match — **correction below (VII.1): QIF-T0047 "Mass BCI compromise (platform attack)" is a real, adjacent existing entry that was missed in the first pass** because it was not surfaced until a full-catalog search was run rather than a keyword sample.
+
+### VII.1 Candidate Techniques — Merged Into Live Catalog (QIF-T0162–T0165)
+
+Added 2026-07-25. The three gaps above were run through a two-wave internal review: three independent SMEs each drafted schema-conformant candidate techniques (grounded in the real catalog schema and the As-Code status/dual_use vocabulary), then an adversarial duplicate/scoping critic and a citation/schema reviewer independently stress-tested the output — the critic with direct tool access to the live 161-entry catalog file, not just the sampled excerpts the generators were given. Full disposition:
+
+| Candidate | Gap | Live ID | Disposition | Notes |
+|---|---|---|---|---|
+| Control-thread starvation via co-resident process (scheduler/synchronization abuse) | Coverage Gap 1 (K-02) | **QIF-T0162** | **Merged** — tactic corrected to QIF-P.DS per VII.2 | Originally proposed as two entries (priority-inversion blocking vs. RT-privilege/IRQ-quota abuse); the critic applied real ATT&CK precedent (T1499 Endpoint DoS's sub-technique pattern: same tactic + same outcome = one technique, mechanism-variants documented within it, not split) and recommended merging. Both mechanisms — synchronization-primitive blocking and privilege/IRQ-abuse — should be documented as named vectors inside one entry. Status: THEORETICAL. Cites the real, verified 1997 Mars Pathfinder priority-inversion incident (VxWorks) and Sha/Rajkumar/Lehoczky 1990 (IEEE Trans. Computers, DOI 10.1109/12.57058) as a non-BCI analog, not as evidence of a BCI-specific instance. |
+| Kernel/driver memory-safety exploitation — code execution / control-loop corruption | Coverage Gap 2 (K-03) | **QIF-T0163** | **Merged** — tactic QIF-B.IN confirmed correct | The critic applied the opposite ATT&CK precedent here on purpose: when one vulnerability class serves genuinely different tactics (execution vs. data harvest), ATT&CK keeps them as separate top-level techniques linked by naming/cross-reference (see T1068/T1203/T1211/T1210, all frequently the same underlying bug class, cataloged separately by tactic). Before forwarding: justify or drop the cross-reference to QIF-T0001 (currently asserted without clear justification), and add an explicit bidirectional cross-reference to the exfiltration variant below. Status: THEORETICAL. |
+| Kernel/driver memory-safety exploitation — cross-process neural-data exfiltration | Coverage Gap 2 (K-03) | **QIF-T0164** | **Merged** — tactic QIF-D.HV confirmed correct | Sibling to QIF-T0163, bidirectional cross-reference in place. Status: THEORETICAL, severity medium. |
+| OTA firmware write interruption (power-loss partition corruption) | Coverage Gap 3 (QIF-IR-09) | **QIF-T0165** | **Merged, revised** — tactic corrected to QIF-P.DS per VII.2 | Originally proposed at `status: PLAUSIBLE`. The critic checked the real status distribution across all 161 techniques: PLAUSIBLE is used exactly once (QIF-T0100, backed by six peer-reviewed sources), while THEORETICAL is the catalog's actual default for "well-documented general hazard class, no BCI-specific instance" — the exact evidence tier this candidate and its two siblings share. **Downgrade to THEORETICAL** for internal consistency. Also rewrite the mechanism to be explicitly attacker-induced (name the vector — malicious charging accessory, PMIC fault injection, forced reset during the verify-then-commit window) and move the "can also occur non-adversarially" caveat into a segregated notes annotation rather than blending it into the attack narrative. Cites NIST SP 800-193, the AOSP A/B update reference design, and Samuel et al. CCS 2010 (TUF) — all independently verified as real and accurately characterized. |
+| Fleet-scale rollout/blast-radius risk | Coverage Gap 4 (QIF-IR-10) | *(enrichment, not a technique)* | **Filed as structured enrichment** | Live now: a structured `deployment_control_gap` field is attached to **both QIF-T0043 and QIF-T0046**, explicitly cross-referenced to **QIF-IR-10** (this document, Part VI) and to **QIF-T0047 "Mass BCI compromise (platform attack)"** — a real existing entry (QIF-P.DS, EMERGING, critical: "coordinated attack exploiting standardized BCI platforms affecting millions simultaneously... monoculture risk") that models a related but mechanistically distinct risk (shared vulnerability across a device monoculture, vs. this gap's absence of staged/canary rollout for a single push). Both entries' `cross_references` were updated to link to T0047, so the two don't independently accumulate overlapping "fleet blast radius" content in isolation. The real-world analog cited (July 19, 2024 CrowdStrike Falcon content-update outage — verified real, ~8.5M Windows endpoints affected by a single unstaged global push) remains valid supporting context for the enrichment, not a BCI-specific claim. |
+
+**Blocking item — resolved (VII.2):** all tactic assignments above (QIF-B.IN for four of the five) were made by generators shown only 5 of the catalog's 16 real tactics — flagged as a likely anchoring artifact and checked against the full 16-tactic list before merge. Two were reclassified to QIF-P.DS; the other two were confirmed correct as filed. See VII.2 for the reasoning.
+
+**Schema hygiene:** all four merged entries include the real schema's nested `governance`/`engineering`/`dsm5` sub-blocks under `tara` (not just `mechanism`/`dual_use`/`clinical`) and correctly nest `dual_use` under `tara.dual_use`. The ad-hoc `reasoning_note`/`clinical_note` field names some drafts used to flag their own uncertainty were not carried into the merged entries — that uncertainty is folded into `notes` on each technique instead.
+
+**Citation integrity:** every sourced claim across all five candidates was independently re-verified this session (Sha/Rajkumar/Lehoczky 1990, the 1997 Mars Pathfinder incident, NIST SP 800-193, Samuel et al. CCS 2010, the July 2024 CrowdStrike outage, Szekeres et al. "SoK: Eternal War in Memory" 2013, four MITRE CWE entries, MITRE ATT&CK T1495) — all confirmed real and accurately characterized. No fabricated or BCI-incident-overclaiming citations found.
+
+**Merged 2026-07-25** as QIF-T0162–QIF-T0165 plus the QIF-T0043/QIF-T0046 enrichment, directly into `datalake/qtara-registrar.json` (not via `populate-tara.py` or `enrich-skeletons.py` — both were confirmed unsafe/superseded for this purpose; see the deprecation note in `populate-tara.py`'s own docstring and `tara-threat/README.md`). Verification chain run and passed: `recalculate-niss.py` reported **zero changes** against the hand-computed vectors in VII.2 — independent confirmation the by-hand NISS math was correct; `backfill-taxonomy.py` classified all four as domain `SIL` (silicon-only) via the `band_ids` check, overriding what tactic alone would have suggested; `npm run health` — 10 checks passed, 0 failures. Registry grew from 161 to 165 techniques; count references updated across the operationally-live docs that track it (root `README.md`, `osi-of-mind/README.md`, `tara-threat/README.md`, `QIF-DATA-MAPPING.md`, `convergence-data.ts`). Two whitepaper drafts (`QIF-WHITEPAPER.md`, `QIF-WHITEPAPER-V8-DRAFT.md`) and one dated historical changelog entry (`QIF-TRUTH.md`) were deliberately left untouched — the former mix current-state and historical narrative with other pre-existing stale numbers in the same sentences (11 tactics/7 domains vs. the real 16/8), and a partial fix would leave them more inconsistent, not less; the latter is a changelog row correctly describing what the registry looked like on 2026-03-15.
+
+### VII.2 Tactic Check and NISS Vectors — Verified Against Live Merge
+
+Resolved 2026-07-25 by checking the four forward candidates against all 16 real tactics (`data['tactics']`) and computing draft NISS 1.1 vectors against the real, verified rubric and formula in `qtara-registrar.json['niss_spec']` — neither was available to the original generators, who were shown only 5 of 16 tactics and no NISS rubric at all.
+
+**Tactic correction.** Two of the four candidates were misclassified. QIF-P.DS's actual definition explicitly reads "disrupting neural function, causing physical harm, **denying BCI service**, or weaponizing motor output" — a materially better fit than QIF-B.IN's "gaining initial access... via electrodes, RF, firmware, or supply chain" for a technique that never breaches anything, only denies service:
+
+- **Control-thread starvation (merged)** and **OTA write interruption** → move from QIF-B.IN to **QIF-P.DS**, alongside their true siblings QIF-T0029 and QIF-T0031 (both already there for the same reason: pure availability attacks with no access-breach step).
+- **Memory-safety — execution/control-loop corruption** stays QIF-B.IN — correctly, this one *does* breach a boundary (achieving code execution within the kernel trust domain), which is what B.IN actually models.
+- **Memory-safety — exfiltration** stays QIF-D.HV — already the correct fit, no change.
+
+**NISS vectors — verified.** Computed using the real formula (`NISS = Σ(w_i·M_i) / Σw_i`, default weights BI=1.0/CR=0.5/CD=0.5/CV=1.0/RV=1.0/NP=1.0, PINS trigger = BI≥H OR RV==I) and calibrated against five real entries (QIF-T0029, T0031, T0043, T0046, T0047). Filed as the vectors on QIF-T0162–QIF-T0165, then independently re-derived by `recalculate-niss.py` — it reported **"Changed: 0"** against these hand-computed values, confirming the by-hand math matches the canonical implementation exactly. Sub-metric letter grades (e.g., H vs. C on Biological Impact, T vs. P on Reversibility) remain judgment calls a maintainer may want to revisit, but they are no longer provisional — they're what's live:
+
+| Candidate | Tactic | Vector | Score | NISS Severity | PINS | Calibration note |
+|---|---|---|---|---|---|---|
+| Control-thread starvation | QIF-P.DS | NISS:1.1/BI:N/CR:N/CD:L/CV:N/RV:F/NP:N | 0.4 | low | false | Scored near QIF-T0031 (battery drain, 0.7/low) — comparable profile: a resource-layer DoS with no direct neural interaction. CD:L (not N) reflects that, unlike battery drain, this is immediate rather than gradual/preventable. |
+| Memory-safety — execution/control-loop corruption | QIF-B.IN | NISS:1.1/BI:H/CR:N/CD:H/CV:N/RV:T/NP:N | 2.7 | low | **true** | BI:H because corrupted control-loop state has a direct path to dangerous physical actuation (unlike the starvation candidate, which only denies function). This is the only one of the four that trips PINS (BI≥H). |
+| Memory-safety — exfiltration | QIF-D.HV | NISS:1.1/BI:N/CR:H/CD:N/CV:I/RV:F/NP:N | 2.7 | low | false | High Cognitive Reconnaissance and full Consent Violation, but the formula's heaviest weights (BI, RV, NP) are all zero for a pure data-read event with no biological harm — this is a structural property of NISS being biologically-weighted, not a scoring error. |
+| OTA write interruption | QIF-P.DS | NISS:1.1/BI:L/CR:N/CD:H/CV:P/RV:P/NP:N | 3.4 | low (just under the medium threshold of 4.0) | false | Calibrated between T0043 (backdoor persistence, 4.7/medium) and T0031 (pure resource attack, 0.7/low) — this candidate's core outcome is device bricking/malfunction, not a working malicious payload, so it sits below T0046 (full weaponization, 6.7/medium). |
+
+**On the niss.severity vs. top-level severity divergence** (e.g., a candidate landing on `niss.severity: low` while its top-level `severity` field was drafted as `high`): checked against all five real calibration entries and confirmed this is consistent house style, not an error — QIF-T0001, T0029, T0043, and T0046 all carry a top-level severity one or more tiers above their computed `niss.severity`. The top-level field appears to reflect broader engineering/safety judgment (operational danger, ease of exploitation); `niss.score` is deliberately scoped to biological/cognitive impact specifically. Both fields should be kept, not reconciled to match.
+
+**Resolved (VII.1):** `dual_use` is correctly nested under `tara.dual_use` in all four merged entries, and no ad-hoc field names were carried into the live JSON. Merged directly rather than through `populate-tara.py` (deprecated) or `enrich-skeletons.py` (superseded for this purpose) — see VII.1's closing note for the full verification chain (`recalculate-niss.py`, `backfill-taxonomy.py`, `npm run health`, all passed).
+
+---
+
 ## References
 
 - Yuste, R., et al. (2017). "Four ethical priorities for neurotechnologies and AI." *Nature*, 551, 159-163. DOI: 10.1038/551159a
@@ -625,6 +785,9 @@ The most realistic path is a hybrid model:
 - Morse, S.J. (2011). "Lost in Translation? An Essay on Law and Neuroscience." *Law and Neuroscience: Current Legal Issues*, 13.
 - Tennison, M.N. & Moreno, J.D. (2012). "Neuroscience, ethics, and national security: The state of the art." *PLoS Biology*, 10(3), e1001289.
 - Wexler, A. (2019). "Separating Neuroethics from Neurohype." *Nature Biotechnology*, 37, 988-990.
+- NIST. (2024). "NIST Cybersecurity Framework 2.0: A Guide to Creating Community Profiles." NIST CSWP 32.
+- NIST. "National Online Informative References (OLIR) Program: Submission Guidance for OLIR Developers." NISTIR 8278A, Revision 1.
+- NIST. (2024). "The NIST Cybersecurity Framework (CSF) 2.0."
 
 ---
 

@@ -41,7 +41,7 @@ This project does both. It asks: **what happens to a patient when their brain-co
 neurosecurity/
 ├── osi-of-mind/            QIF Model — specs, whitepapers, derivation logs, threat catalog
 ├── research/         Blog posts, academic paper, clinical notes
-├── datalake/         TARA registry (161 techniques), datasets, parquet
+├── datalake/         TARA registry (165 techniques), datasets, parquet
 ├── governance/       Policy, ethics, consent, changelog, security policy
 ├── src/              Website source (Astro) + build scripts
 └── _archive/         Historical (ONI framework, old prompts)
@@ -206,7 +206,7 @@ TARA started as an attack matrix. 161 BCI techniques catalogued from published l
 
 Signal injection is an attack vector. It is also the basis of neurostimulation therapy for depression, Parkinson's, and chronic pain. The boundary between attack and therapy is not the mechanism. It is consent, dosage, and oversight.
 
-About 75% of the 161 techniques map to a therapeutic counterpart today. This means the same framework that scores whether an attack is dangerous can also help bound whether a therapy is safe. TARA is both a threat registry and a safety reference.
+About 75% of the 165 techniques map to a therapeutic counterpart today. This means the same framework that scores whether an attack is dangerous can also help bound whether a therapy is safe. TARA is both a threat registry and a safety reference.
 
 [TARA Atlas](https://qinnovate.com/atlas/tara/) | [TARA blog post](https://qinnovate.com/news/2026-02-09-tara-therapeutic-atlas-of-risks-and-applications/)
 
@@ -227,7 +227,7 @@ Three fields converge on BCIs. None covers the full problem alone.
 
 **Neurosecurity** (Denning, Matsuoka & Kohno, 2009) bridges all three. QIF is one attempt to operationalize that bridge — taking phenomena described by neuroscientists and concerns raised by neuroethicists and putting them into a testable security framework.
 
-[Neurosecurity Governance](governance/policy/NEUROSECURITY_GOVERNANCE.md) | [Origin classification of all 161 techniques](datalake/qtara-registrar.json)
+[Neurosecurity Governance](governance/policy/NEUROSECURITY_GOVERNANCE.md) | [Origin classification of all 165 techniques](datalake/qtara-registrar.json)
 
 </details>
 
@@ -246,7 +246,7 @@ An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spina
 
 ### TARA
 
-161 techniques spanning 8 domains and 16 tactics. Each technique scored with CVSS v4.0 base vectors + proposed NISS extension metrics. MITRE-compatible IDs.
+165 techniques spanning 8 domains and 16 tactics. Each technique scored with CVSS v4.0 base vectors + proposed NISS extension metrics. MITRE-compatible IDs.
 
 - **Atlas:** [qinnovate.com/atlas/tara](https://qinnovate.com/atlas/tara/)
 - **API:** [`/api/tara.json`](https://qinnovate.com/api/tara.json) (full dataset, no auth) | [`/api/stix.json`](https://qinnovate.com/api/stix.json) (STIX 2.1 bundle)

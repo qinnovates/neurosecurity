@@ -3,61 +3,61 @@
   "generated_from": "qif-lab/src/config.py",
   "framework": "Quantified Interconnection Framework (QIF) for Neural Security",
   "statistics": {
-    "total_techniques": 161,
+    "total_techniques": 165,
     "total_tactics": 16,
     "total_domains": 8,
     "by_tactic": {
-      "QIF-B.EV": 6,
-      "QIF-B.IN": 6,
-      "QIF-C.EX": 17,
-      "QIF-C.IM": 6,
-      "QIF-D.HV": 11,
+      "QIF-N.IJ": 11,
+      "QIF-P.DS": 21,
+      "QIF-D.HV": 12,
+      "QIF-N.MD": 24,
       "QIF-E.RD": 13,
       "QIF-M.SV": 9,
-      "QIF-N.IJ": 11,
-      "QIF-N.MD": 24,
-      "QIF-N.NM": 3,
       "QIF-N.SC": 3,
-      "QIF-P.DS": 19,
-      "QIF-S.CH": 6,
-      "QIF-S.FP": 4,
-      "QIF-S.HV": 16,
+      "QIF-C.EX": 17,
+      "QIF-B.IN": 7,
+      "QIF-C.IM": 6,
+      "QIF-B.EV": 6,
       "QIF-S.RP": 5,
-      "QIF-S.SC": 2
+      "QIF-S.HV": 16,
+      "QIF-S.FP": 4,
+      "QIF-S.CH": 6,
+      "QIF-S.SC": 2,
+      "QIF-N.NM": 3
     },
     "by_status": {
       "CONFIRMED": 29,
-      "DEMONSTRATED": 43,
       "EMERGING": 26,
-      "THEORETICAL": 61,
+      "DEMONSTRATED": 43,
+      "THEORETICAL": 65,
       "PLAUSIBLE": 1,
       "SPECULATIVE": 1
     },
     "by_severity": {
+      "high": 72,
       "critical": 32,
-      "high": 69,
-      "medium": 56,
+      "medium": 57,
       "low": 4
     },
     "by_ui_category": {
-      "SI": 16,
-      "DS": 15,
-      "SE": 23,
-      "DM": 23,
+      "SI": 17,
+      "DS": 23,
+      "SE": 24,
+      "DM": 37,
       "PS": 7,
-      "EX": 23,
-      "PE": 9,
+      "EX": 28,
+      "PE": 10,
       "CI": 19
     },
     "by_niss_severity": {
       "critical": 0,
-      "high": 27,
-      "medium": 53,
-      "low": 54,
-      "none": 1
+      "high": 20,
+      "medium": 59,
+      "low": 59,
+      "none": 27
     },
     "niss_cvss_mapping": {
-      "pins_flagged": 33,
+      "pins_flagged": 40,
       "by_gap_group": {
         "1": 12,
         "2": 28,
@@ -9684,7 +9684,8 @@
         "related_ids": [
           "T1195",
           "T1195.001",
-          "T1195.002"
+          "T1195.002",
+          "T0047"
         ]
       },
       "tara": {
@@ -9786,7 +9787,18 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "deployment_control_gap": {
+        "risk": "fleet_wide_unstaged_rollout",
+        "description": "Blast-radius note: this technique's real-world impact is materially amplified when the malicious/defective image is pushed via a single signed OTA release to an entire patient population with no canary cohort, no staged/phased rollout, and no automatic rollback-on-anomaly gate. Under that deployment pattern the population encounters the failure/compromise at approximately the same time and discovers it independently, rather than a canary cohort surfacing it and halting further rollout. General-computing analogy (not BCI-specific): the July 19, 2024 CrowdStrike Falcon content-update incident, in which a single flawed update was pushed globally without staged rollout and caused near-simultaneous failures across millions of Windows endpoints, illustrates this dynamic at population scale.",
+        "mitigation": "staged/canary percentage rollout; automatic global halt if aggregate fallback rate exceeds threshold within window",
+        "cross_references": [
+          "QIF-IR-10",
+          "QIF-T0047",
+          "QIF-T0043",
+          "QIF-T0046"
+        ]
+      }
     },
     {
       "id": "QIF-T0044",
@@ -10092,7 +10104,8 @@
       },
       "cross_references": {
         "related_ids": [
-          "T1195.002"
+          "T1195.002",
+          "T0047"
         ],
         "secondary_tactics": [
           "QIF-B.IN"
@@ -10202,7 +10215,18 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "deployment_control_gap": {
+        "risk": "fleet_wide_unstaged_rollout",
+        "description": "Blast-radius note: this technique's real-world impact is materially amplified when the malicious/defective image is pushed via a single signed OTA release to an entire patient population with no canary cohort, no staged/phased rollout, and no automatic rollback-on-anomaly gate. Under that deployment pattern the population encounters the failure/compromise at approximately the same time and discovers it independently, rather than a canary cohort surfacing it and halting further rollout. General-computing analogy (not BCI-specific): the July 19, 2024 CrowdStrike Falcon content-update incident, in which a single flawed update was pushed globally without staged rollout and caused near-simultaneous failures across millions of Windows endpoints, illustrates this dynamic at population scale.",
+        "mitigation": "staged/canary percentage rollout; automatic global halt if aggregate fallback rate exceeds threshold within window",
+        "cross_references": [
+          "QIF-IR-10",
+          "QIF-T0047",
+          "QIF-T0043",
+          "QIF-T0046"
+        ]
+      }
     },
     {
       "id": "QIF-T0047",
@@ -21883,8 +21907,7 @@
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:E/RV:P/NP:N",
         "score": 4.7,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -22017,8 +22040,7 @@
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:E/RV:P/NP:N",
         "score": 4.7,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -22149,8 +22171,7 @@
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:N",
         "score": 5.4,
         "severity": "medium",
-        "pins": true,
-        "components": null
+        "pins": true
       },
       "cross_references": {
         "related_ids": []
@@ -22279,8 +22300,7 @@
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:E/RV:P/NP:T",
         "score": 5.4,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": [
@@ -22414,8 +22434,7 @@
         "vector": "NISS:1.1/BI:H/CR:H/CD:H/CV:P/RV:P/NP:N",
         "score": 4.7,
         "severity": "medium",
-        "pins": true,
-        "components": null
+        "pins": true
       },
       "cross_references": {
         "related_ids": []
@@ -22546,8 +22565,7 @@
         "vector": "NISS:1.1/BI:L/CR:L/CD:L/CV:P/RV:P/NP:N",
         "score": 3.4,
         "severity": "low",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -22673,8 +22691,7 @@
         "vector": "NISS:1.1/BI:N/CR:L/CD:N/CV:E/RV:F/NP:N",
         "score": 1.7,
         "severity": "low",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -22826,8 +22843,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:T/NP:T",
         "score": 4.0,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -23004,8 +23020,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:T/NP:T",
         "score": 4.0,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -23175,8 +23190,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:T/NP:T",
         "score": 4.0,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -23344,8 +23358,7 @@
         "vector": "NISS:1.1/BI:H/CR:N/CD:H/CV:E/RV:P/NP:T",
         "score": 5.4,
         "severity": "medium",
-        "pins": true,
-        "components": null
+        "pins": true
       },
       "cross_references": {
         "related_ids": []
@@ -23516,8 +23529,7 @@
         "vector": "NISS:1.1/BI:H/CR:N/CD:L/CV:E/RV:P/NP:P",
         "score": 5.7,
         "severity": "medium",
-        "pins": true,
-        "components": null
+        "pins": true
       },
       "cross_references": {
         "related_ids": []
@@ -23693,8 +23705,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:P/NP:S",
         "score": 6.1,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -23857,8 +23868,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:P/NP:P",
         "score": 5.4,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -24031,8 +24041,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:P/NP:P",
         "score": 5.4,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -24203,8 +24212,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:P/NP:S",
         "score": 6.1,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -24373,8 +24381,7 @@
         "vector": "NISS:1.1/BI:H/CR:N/CD:H/CV:E/RV:P/NP:P",
         "score": 6.1,
         "severity": "medium",
-        "pins": true,
-        "components": null
+        "pins": true
       },
       "cross_references": {
         "related_ids": []
@@ -24546,8 +24553,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:T/NP:T",
         "score": 4.0,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -24723,8 +24729,7 @@
         "vector": "NISS:1.1/BI:C/CR:N/CD:C/CV:E/RV:I/NP:S",
         "score": 8.4,
         "severity": "high",
-        "pins": true,
-        "components": null
+        "pins": true
       },
       "cross_references": {
         "related_ids": []
@@ -24888,8 +24893,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:P/NP:S",
         "score": 6.1,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -25058,8 +25062,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:C/CV:E/RV:P/NP:S",
         "score": 6.4,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -25218,8 +25221,7 @@
         "vector": "NISS:1.1/BI:N/CR:H/CD:N/CV:I/RV:F/NP:N",
         "score": 2.7,
         "severity": "low",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -25366,8 +25368,7 @@
         "vector": "NISS:1.1/BI:N/CR:H/CD:N/CV:E/RV:F/NP:N",
         "score": 2.1,
         "severity": "low",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -25507,8 +25508,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:T/NP:T",
         "score": 4.0,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -25671,8 +25671,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:P/NP:P",
         "score": 5.4,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -25833,8 +25832,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:T/NP:T",
         "score": 4.0,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -25995,8 +25993,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:P/NP:P",
         "score": 5.4,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -26155,8 +26152,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:T/NP:T",
         "score": 4.0,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -26323,8 +26319,7 @@
         "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:E/RV:T/NP:T",
         "score": 4.0,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -26495,8 +26490,7 @@
         "vector": "NISS:1.1/BI:H/CR:N/CD:H/CV:E/RV:P/NP:T",
         "score": 5.4,
         "severity": "medium",
-        "pins": true,
-        "components": null
+        "pins": true
       },
       "cross_references": {
         "related_ids": []
@@ -26666,8 +26660,7 @@
         "vector": "NISS:1.1/BI:H/CR:N/CD:H/CV:E/RV:P/NP:T",
         "score": 5.4,
         "severity": "medium",
-        "pins": true,
-        "components": null
+        "pins": true
       },
       "cross_references": {
         "related_ids": []
@@ -26844,8 +26837,7 @@
         "vector": "NISS:1.1/BI:L/CR:H/CD:H/CV:E/RV:P/NP:T",
         "score": 5.4,
         "severity": "medium",
-        "pins": false,
-        "components": null
+        "pins": false
       },
       "cross_references": {
         "related_ids": []
@@ -27040,7 +27032,8 @@
         "Gordon 2023 DOI:10.1111/ejn.15973",
         "Gu 2017 DOI:10.1016/j.cellsig.2017.06.007",
         "Mohammed 2023 DOI:10.1007/s43630-023-00497-z (5-HT + NE restoration via CCO)"
-      ]
+      ],
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0137",
@@ -27091,7 +27084,8 @@
       "sources": [
         "Gong 2018 DOI:10.1126/science.aaq1144",
         "Liu 2021 DOI:10.1038/s41467-021-25993-7"
-      ]
+      ],
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0138",
@@ -27140,7 +27134,8 @@
       },
       "sources": [
         "Jin 2025 DOI:10.1126/sciadv.adt4771"
-      ]
+      ],
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0139",
@@ -27186,7 +27181,8 @@
       },
       "sources": [
         "Carvalho-de-Souza 2015 DOI:10.1016/j.neuron.2015.02.033"
-      ]
+      ],
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0140",
@@ -27233,7 +27229,8 @@
       "sources": [
         "Cayce 2011 DOI:10.1016/j.neuroimage.2011.03.084",
         "Pan 2023 DOI:10.1016/j.brs.2023.01.006"
-      ]
+      ],
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0141",
@@ -27281,7 +27278,8 @@
       "sources": [
         "Hescham 2021 DOI:10.1038/s41467-021-25837-4",
         "Imam 2015 PMID:26099304"
-      ]
+      ],
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0142",
@@ -27328,7 +27326,8 @@
       "sources": [
         "Kujirai 1993 J Physiol 471:501-519 PMID:8120818"
       ],
-      "tara_alias": "TARA-COG-M-013"
+      "tara_alias": "TARA-COG-M-013",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0143",
@@ -27376,7 +27375,8 @@
         "Valls-Sole 1992 PMID:1282453",
         "McDonnell 2006 PMID:16489434 DOI:10.1007/s00221-006-0365-2"
       ],
-      "tara_alias": "TARA-COG-M-014"
+      "tara_alias": "TARA-COG-M-014",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0144",
@@ -27424,7 +27424,8 @@
         "Huang 2005 Neuron DOI:10.1016/j.neuron.2004.12.033",
         "Stagg 2009 J Neurophysiol DOI:10.1152/jn.91060.2008 PMID:19339458"
       ],
-      "tara_alias": "TARA-COG-D-006"
+      "tara_alias": "TARA-COG-D-006",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0145",
@@ -27472,7 +27473,8 @@
       "sources": [
         "Stagg 2009 J Neurosci DOI:10.1523/JNEUROSCI.4432-08.2009 PMID:19386916"
       ],
-      "tara_alias": "TARA-COG-M-015"
+      "tara_alias": "TARA-COG-M-015",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0146",
@@ -27518,7 +27520,8 @@
       "sources": [
         "Nowak 2017 J Neurosci DOI:10.1523/JNEUROSCI.0098-17.2017 PMID:28373400"
       ],
-      "tara_alias": "TARA-COG-M-016"
+      "tara_alias": "TARA-COG-M-016",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0147",
@@ -27567,7 +27570,8 @@
       "sources": [
         "Yang 2012 Neuropsychobiology DOI:10.1159/000336001 PMID:22378299"
       ],
-      "tara_alias": "TARA-COG-D-007"
+      "tara_alias": "TARA-COG-D-007",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0148",
@@ -27615,7 +27619,8 @@
       "sources": [
         "Iaccarino 2016 Nature DOI:10.1038/nature20587 PMID:27929004"
       ],
-      "tara_alias": "TARA-COG-M-017"
+      "tara_alias": "TARA-COG-M-017",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0149",
@@ -27667,7 +27672,8 @@
         "Bowles 2022 DOI:10.1016/j.neuron.2022.06.017 PMID:35858623",
         "Nichols 2011 DOI:10.1016/j.neuroscience.2011.05.024 PMID:21627982"
       ],
-      "tara_alias": "TARA-COG-M-018"
+      "tara_alias": "TARA-COG-M-018",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0150",
@@ -27717,7 +27723,8 @@
         "Yap 2020 PMID:33355897 DOI:10.2147/NDT.S251188",
         "PMID:32992726 PMC7599782"
       ],
-      "tara_alias": "TARA-COG-M-019"
+      "tara_alias": "TARA-COG-M-019",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0151",
@@ -27763,7 +27770,8 @@
       "sources": [
         "DOI:10.1016/j.pnpbp.2024.111167"
       ],
-      "tara_alias": "TARA-COG-M-020"
+      "tara_alias": "TARA-COG-M-020",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0152",
@@ -27814,7 +27822,8 @@
         "O'Donnell 2011 DOI:10.1007/s00204-011-0724-z PMID:21695469",
         "Yanagisawa 2006 DOI:10.1016/j.jns.2006.06.007 PMID:16962140"
       ],
-      "tara_alias": "TARA-COG-D-008"
+      "tara_alias": "TARA-COG-D-008",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0153",
@@ -27862,7 +27871,8 @@
         "Simpraga 2017 DOI:10.1038/s41598-017-06165-4 PMID:28720796",
         "Arjmandi-Rad 2024 PMID:37843690"
       ],
-      "tara_alias": "TARA-COG-R-013"
+      "tara_alias": "TARA-COG-R-013",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0154",
@@ -27909,7 +27919,8 @@
       "sources": [
         "Dorr & Debonnel 2006 PMID:16690723 PMC2702444"
       ],
-      "tara_alias": "TARA-EMO-M-010"
+      "tara_alias": "TARA-EMO-M-010",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0155",
@@ -27958,7 +27969,8 @@
         "Zhu 2023 PMID:35998565",
         "Duque 2023 DOI:10.1073/pnas.2300291120 PMC10161134"
       ],
-      "tara_alias": "TARA-EMO-M-011"
+      "tara_alias": "TARA-EMO-M-011",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0156",
@@ -28011,7 +28023,8 @@
         "Wu 2017 PMID:28672900 PMC5488474",
         "Zhao 2019 PMID:31929820 PMC6942800"
       ],
-      "tara_alias": "TARA-EMO-M-012"
+      "tara_alias": "TARA-EMO-M-012",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0157",
@@ -28059,7 +28072,8 @@
         "Young 2013 PMC3756112",
         "van Donkelaar 2011 PMID:21339754"
       ],
-      "tara_alias": "TARA-EMO-M-013"
+      "tara_alias": "TARA-EMO-M-013",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0158",
@@ -28107,7 +28121,8 @@
         "Heimrath 2020 DOI:10.1038/s41598-020-77111-0",
         "Nitsche 2003 PMC2343495"
       ],
-      "tara_alias": "TARA-AUT-M-003"
+      "tara_alias": "TARA-AUT-M-003",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0159",
@@ -28156,7 +28171,8 @@
         "Gu & Han 2019 Current Biology DOI:10.1016/j.cub.2019.08.021 PMID:31588000",
         "Deffieux 2023 Neuron DOI:10.1016/j.neuron.2023.02.002"
       ],
-      "tara_alias": "TARA-COG-M-021"
+      "tara_alias": "TARA-COG-M-021",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0160",
@@ -28206,7 +28222,8 @@
         "Lipsman 2018 Nature Communications (FUS-BBB Alzheimer's)",
         "Timbie 2024 Neurotherapeutics DOI:10.1016/j.neurot.2024.e00038"
       ],
-      "tara_alias": "TARA-AUT-D-003"
+      "tara_alias": "TARA-AUT-D-003",
+      "tara_enrichment_pending": false
     },
     {
       "id": "QIF-T0161",
@@ -28257,7 +28274,345 @@
         "Rosenthal 2025 Nature Communications DOI:10.1038/s41467-025-59900-1",
         "Vitale 2023 PMC10408042"
       ],
-      "tara_alias": "TARA-AUT-D-004"
+      "tara_alias": "TARA-AUT-D-004",
+      "tara_enrichment_pending": false
+    },
+    {
+      "id": "QIF-T0162",
+      "attack": "Control-thread starvation via co-resident process (scheduler/synchronization abuse)",
+      "tactic": "QIF-P.DS",
+      "bands": "S1–S2",
+      "band_ids": [
+        "S1",
+        "S2"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "Not applicable — pure OS-scheduler-layer attack, outside QI coherence monitoring scope (no neural signal path touched)",
+      "sources": [
+        "Sha, Rajkumar & Lehoczky, 'Priority Inheritance Protocols: An Approach to Real-Time Synchronization,' IEEE Trans. Computers, Vol. 39 No. 9, 1990, pp. 1175-1185, DOI 10.1109/12.57058",
+        "1997 Mars Pathfinder priority-inversion incident (VxWorks pipe mutex, priority inheritance disabled) — documented non-BCI RTOS analog, no BCI-specific instance known"
+      ],
+      "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "DS",
+      "notes": "A co-resident process (logging daemon, telemetry uploader, background app) sharing the same processor as the BCI's safety-critical sensory-motor control thread either (a) holds a synchronization primitive the control thread also needs without priority inheritance enabled — unbounded priority-inversion blocking, the exact class of bug behind the 1997 Mars Pathfinder incident — or (b) obtains equal/higher real-time scheduling priority or triggers an interrupt storm, starving the control thread of CPU/IO cycles via privilege/IRQ abuse rather than lock contention. Both mechanisms deny the control loop its real-time guarantee without ever touching the neural signal path (unlike QIF-T0029) or the battery (unlike QIF-T0031) — defenses tuned to detect either would not catch this class. Mitigations differ by mechanism: priority ceiling protocol / priority inheritance for (a); cgroup RT-bandwidth reservation, IRQ affinity isolation, and least-privilege scheduling-class grants for (b). This is the failure mode the QIF-IR framework's Floor-Promotion architecture (governance/QIF-GOVERNANCE-QUESTIONS.md, Part VI.1) is designed to structurally prevent — an always-on, independently-scheduled safety MCU that the general-purpose OS's scheduler cannot starve.",
+      "legacy_ids": [],
+      "legacy_technique_id": null,
+      "niss": {
+        "version": "1.1",
+        "vector": "NISS:1.1/BI:N/CR:N/CD:L/CV:N/RV:F/NP:N",
+        "score": 0.4,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "T0029",
+          "T0031"
+        ],
+        "note": "Related by threat surface (resource-layer DoS against the BCI System) but mechanistically distinct — see notes."
+      },
+      "tara": {
+        "mechanism": "Exploitation of missing/misconfigured priority inheritance on a shared kernel synchronization primitive, or direct real-time scheduling-class/IRQ privilege abuse, denying the safety-critical control thread its deterministic worst-case blocking time on a PREEMPT_RT Linux (or equivalent RTOS) kernel.",
+        "dual_use": "silicon_only",
+        "clinical": null,
+        "governance": {
+          "consent_tier": "standard",
+          "monitoring": [
+            "lock_wait_time",
+            "cpu_steal_time",
+            "irq_count_per_thread",
+            "scheduling_class_audit_log"
+          ],
+          "regulations": [
+            "FDA 21 CFR 820",
+            "IEC 62443",
+            "NIST CSF",
+            "IEC 62304"
+          ],
+          "data_classification": "restricted",
+          "safety_ceiling": "Safety-critical control loop must run on an independently-scheduled, formally-tractable safety MCU that the general-purpose OS scheduler cannot preempt or starve (Floor-Promotion architecture)"
+        },
+        "engineering": {
+          "coupling": [],
+          "parameters": {
+            "scheduling_class": "SCHED_FIFO / SCHED_DEADLINE",
+            "blocking_bound_violation": "unbounded vs. WCET assumption"
+          },
+          "hardware": [
+            "RTOS_scheduler",
+            "cgroup_RT_bandwidth_controller",
+            "interrupt_controller"
+          ],
+          "detection": "Lock-wait-time monitoring, CPU-steal-time telemetry, IRQ-count-per-thread auditing, scheduling-class change auditing"
+        },
+        "dsm5": {
+          "primary": [],
+          "secondary": [],
+          "risk_class": "none",
+          "cluster": "non_diagnostic",
+          "pathway": "S-domain only — pure OS-scheduler attack, no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
+        }
+      },
+      "tara_domain_primary": "SIL",
+      "tara_mode": "D",
+      "tara_enrichment_pending": false
+    },
+    {
+      "id": "QIF-T0163",
+      "attack": "Kernel/driver memory-safety exploitation for arbitrary code execution / control-loop corruption",
+      "tactic": "QIF-B.IN",
+      "bands": "S2–S3",
+      "band_ids": [
+        "S2",
+        "S3"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "Not applicable — software/silicon-only attack surface; no signal-layer coherence metric detects kernel memory corruption",
+      "sources": [
+        "Szekeres, Payer, Wei, Song, 'SoK: Eternal War in Memory,' IEEE S&P 2013, pp. 48-62",
+        "MITRE CWE-787: Out-of-bounds Write",
+        "MITRE CWE-416: Use After Free"
+      ],
+      "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "PE",
+      "notes": "Heap/stack buffer overflow or use-after-free in a kernel driver's data-ingestion or interrupt-handling path (e.g., an unvalidated packet-length field in the electrode/sensor parser, or a race between an interrupt handler and its cleanup routine) enabling attacker-controlled overwrite of adjacent kernel structures — function pointers, return addresses, or the safety-critical closed-loop stimulation controller's in-kernel state. General-purpose memory-safety exploitation of this shape is a well-documented, CONFIRMED attack class in Linux/embedded kernel drivers broadly (routine CVEs); its application to an implanted/wearable BCI kernel specifically is not documented in any disclosed CVE or public research known to this catalog — status is THEORETICAL, not CONFIRMED, and should not be read as implying a known BCI-specific incident. Distinct from QIF-T0054/T0060/T0034 ('memory extraction/implant/poisoning'), which model attacks on neurocognitive memory (hippocampal activity, working-memory circuits), not kernel process memory. This is the exact attack class Part IV Q-SEC-4 (formal verification of kernel memory-safety properties, seL4 precedent, governance/QIF-GOVERNANCE-QUESTIONS.md) is designed to structurally rule out. Sibling technique: QIF-T0164 (same vulnerability class, disclosure outcome rather than execution).",
+      "legacy_ids": [],
+      "legacy_technique_id": null,
+      "niss": {
+        "version": "1.1",
+        "vector": "NISS:1.1/BI:H/CR:N/CD:H/CV:N/RV:T/NP:N",
+        "score": 2.7,
+        "severity": "low",
+        "pins": true
+      },
+      "cross_references": {
+        "related_ids": [
+          "T0164"
+        ],
+        "note": "Sibling technique — same underlying memory-safety vulnerability class, execution/control-corruption outcome rather than data-exfiltration outcome. Kept as separate top-level techniques per MITRE ATT&CK convention for one vulnerability class serving genuinely different tactics (cf. T1068/T1203/T1211/T1210)."
+      },
+      "tara": {
+        "mechanism": "Attacker-supplied or attacker-influenced input (malformed sensor packet, crafted ioctl argument, malicious peripheral response) triggers a spatial or temporal memory-safety violation in kernel/driver code, allowing corruption of adjacent memory including kernel control-flow data or the runtime state of the safety-critical closed-loop control routine.",
+        "dual_use": "silicon_only",
+        "clinical": null,
+        "governance": {
+          "consent_tier": "standard",
+          "monitoring": [
+            "firmware_integrity",
+            "kernel_control_flow_integrity",
+            "access_logging",
+            "crash_dump_analysis"
+          ],
+          "regulations": [
+            "FDA 21 CFR 820",
+            "IEC 62443",
+            "NIST CSF",
+            "IEC 62304"
+          ],
+          "data_classification": "restricted",
+          "safety_ceiling": "Safety-critical kernel/driver components should target formal verification of memory-safety properties (seL4-style proof of absence of buffer overflows/UAF/null derefs)"
+        },
+        "engineering": {
+          "coupling": [],
+          "parameters": {
+            "vulnerability_class": "spatial/temporal memory safety (CWE-787, CWE-416)",
+            "trust_boundary": "kernel/driver ingestion path"
+          },
+          "hardware": [
+            "driver_data_ingestion_path",
+            "interrupt_handler",
+            "memory_management_unit"
+          ],
+          "detection": "Kernel control-flow integrity monitoring, crash-dump/fault analysis, fuzz-testing of driver input parsers, formal verification of critical paths"
+        },
+        "dsm5": {
+          "primary": [],
+          "secondary": [],
+          "risk_class": "none",
+          "cluster": "non_diagnostic",
+          "pathway": "S-domain only — kernel/software attack, no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
+        }
+      },
+      "tara_domain_primary": "SIL",
+      "tara_mode": "M",
+      "tara_enrichment_pending": false
+    },
+    {
+      "id": "QIF-T0164",
+      "attack": "Kernel/driver memory-safety exploitation for cross-process neural-data exfiltration",
+      "tactic": "QIF-D.HV",
+      "bands": "S2–S3",
+      "band_ids": [
+        "S2",
+        "S3"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "Not applicable — software/silicon-only attack surface",
+      "sources": [
+        "Szekeres, Payer, Wei, Song, 'SoK: Eternal War in Memory,' IEEE S&P 2013, pp. 48-62",
+        "MITRE CWE-125: Out-of-bounds Read",
+        "MITRE CWE-843: Type Confusion",
+        "MITRE CWE-416: Use After Free"
+      ],
+      "status": "THEORETICAL",
+      "severity": "medium",
+      "ui_category": "EX",
+      "notes": "Out-of-bounds read or type-confusion vulnerability (e.g., a signed/unsigned mismatch in an ioctl handler governing shared-memory ring-buffer bounds, or a stale pointer from a use-after-free in buffer teardown) that lets an unprivileged or lower-privilege process read memory belonging to another process or trust domain — e.g., a raw neural-signal buffer meant to be isolated to the acquisition driver — without going through any authorized data-access API. Distinct from QIF-T0054 (extraction of neurocognitive memory patterns, not kernel RAM) and from other Data Harvest techniques operating over legitimate/authorized channels: this is unauthorized cross-process/cross-privilege memory disclosure via a software defect. Sibling technique: QIF-T0163 (same vulnerability class, execution/control-corruption outcome).",
+      "legacy_ids": [],
+      "legacy_technique_id": null,
+      "niss": {
+        "version": "1.1",
+        "vector": "NISS:1.1/BI:N/CR:H/CD:N/CV:I/RV:F/NP:N",
+        "score": 2.7,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "T0163"
+        ],
+        "note": "Sibling technique — see QIF-T0163."
+      },
+      "tara": {
+        "mechanism": "A read-primitive memory-safety bug in driver buffer management defeats intended process/trust-domain isolation, allowing an unprivileged reader to obtain the contents of a supposedly isolated neural-data buffer or other cross-domain memory without authorization.",
+        "dual_use": "silicon_only",
+        "clinical": null,
+        "governance": {
+          "consent_tier": "enhanced",
+          "monitoring": [
+            "cross_process_memory_access_audit",
+            "shared_buffer_bounds_checking",
+            "access_audit_log"
+          ],
+          "regulations": [
+            "HIPAA",
+            "GDPR Art. 9",
+            "21 CFR Part 11",
+            "IEC 62304"
+          ],
+          "data_classification": "sensitive_neural",
+          "safety_ceiling": "Neural-data buffers must be isolated via memory-safe abstractions (capability-based memory regions, bounds-checked shared buffers) not solely trust-based access"
+        },
+        "engineering": {
+          "coupling": [],
+          "parameters": {
+            "vulnerability_class": "spatial memory safety / type confusion (CWE-125, CWE-843, CWE-416)",
+            "trust_boundary": "process/privilege isolation over shared neural-data buffers"
+          },
+          "hardware": [
+            "shared_memory_ring_buffer",
+            "ioctl_handler",
+            "memory_management_unit"
+          ],
+          "detection": "Cross-process memory access auditing, shared-buffer bounds enforcement, formal verification of isolation properties"
+        },
+        "dsm5": {
+          "primary": [],
+          "secondary": [],
+          "risk_class": "none",
+          "cluster": "non_diagnostic",
+          "pathway": "S-domain only — kernel/software attack, no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
+        }
+      },
+      "tara_domain_primary": "SIL",
+      "tara_mode": "R",
+      "tara_enrichment_pending": false
+    },
+    {
+      "id": "QIF-T0165",
+      "attack": "OTA firmware write interruption (power-loss partition corruption)",
+      "tactic": "QIF-P.DS",
+      "bands": "S2–S3",
+      "band_ids": [
+        "S2",
+        "S3"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "Enhanced (firmware attestation) — post-write attestation directly detects a corrupted/partial image before it can be trusted",
+      "sources": [
+        "NIST SP 800-193, 'Platform Firmware Resiliency Guidelines' (2018)",
+        "Samuel, Mathewson, Cappos, Dingledine, 'Survivable Key Compromise in Software Update Systems: A Trust Management Approach,' ACM CCS 2010",
+        "AOSP 'A/B (Seamless) System Updates' documentation (source.android.com) — reference design for correct verify-before-activate partition switching",
+        "MITRE ATT&CK T1495 'Firmware Corruption' (Enterprise, Impact tactic)"
+      ],
+      "status": "THEORETICAL",
+      "severity": "high",
+      "ui_category": "DS",
+      "notes": "Models an implementation flaw, not an inherent property, of dual-bank (A/B) OTA schemes: if the 'active partition' boot pointer is committed before the newly-written image's checksum/signature verification fully completes, an attacker who times or induces a power interruption during the flash-write window — a malicious charging accessory, PMIC fault injection, or a forced reset during the verify-then-commit window — can leave the device pointing at a corrupted or partially-written image, up to and including boot of an unverified partial image if verification itself is bypassed by the interruption. Correctly implemented A/B schemes (strict write-then-verify-then-atomic-commit ordering, per the AOSP reference design) are not vulnerable to this class. Note: the identical corruption can also occur non-adversarially (battery dies mid-update, no attacker involved) — that is a reliability hazard, tracked separately from this attacker-induced framing. Distinct from QIF-T0043 (supply chain backdoor, plants malicious content) and QIF-T0046 (OTA weaponization, delivers a working malicious payload): this technique's core outcome is denial-of-function/bricking via a timing-induced integrity failure, not delivery of a functioning malicious image.",
+      "legacy_ids": [],
+      "legacy_technique_id": null,
+      "niss": {
+        "version": "1.1",
+        "vector": "NISS:1.1/BI:L/CR:N/CD:H/CV:P/RV:P/NP:N",
+        "score": 3.4,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "T0043",
+          "T0046"
+        ],
+        "note": "Related OTA/firmware-integrity techniques — see also the deployment_control_gap enrichment on both."
+      },
+      "tara": {
+        "mechanism": "Exploits a race between two OTA sub-steps: (1) writing the new image to the inactive flash partition, and (2) verifying its integrity before atomically flipping the active-partition pointer. Correctly ordered (write, verify, commit), a power loss before commit leaves the known-good partition untouched. Where commit is not strictly gated on completed verification — or where verify+commit is not itself atomic against power loss — an interrupted write can corrupt partition-table state or leave the bootloader pointed at an unverified/partial image.",
+        "dual_use": "silicon_only",
+        "clinical": null,
+        "governance": {
+          "consent_tier": "standard",
+          "monitoring": [
+            "firmware_integrity",
+            "battery_state_at_update_start",
+            "atomic_commit_audit_log"
+          ],
+          "regulations": [
+            "FDA 21 CFR 820",
+            "IEC 62443",
+            "NIST CSF",
+            "IEC 62304"
+          ],
+          "data_classification": "restricted",
+          "safety_ceiling": "Atomic verify-then-commit write discipline mandatory; minimum battery/power-redundancy gate required before initiating any OTA write"
+        },
+        "engineering": {
+          "coupling": [],
+          "parameters": {
+            "write_discipline": "write -> verify checksum/signature -> atomic pointer commit",
+            "power_precondition": "minimum battery % or redundant power required"
+          },
+          "hardware": [
+            "A/B_partition_bootloader",
+            "flash_controller",
+            "PMIC"
+          ],
+          "detection": "Post-write attestation, boot-time partition integrity check, battery-state gating before update initiation"
+        },
+        "dsm5": {
+          "primary": [],
+          "secondary": [],
+          "risk_class": "none",
+          "cluster": "non_diagnostic",
+          "pathway": "S-domain only — firmware/bootloader attack, no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
+        }
+      },
+      "tara_domain_primary": "SIL",
+      "tara_mode": "D",
+      "tara_enrichment_pending": false
     }
   ],
   "deprecated": [

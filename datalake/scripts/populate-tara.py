@@ -3,6 +3,22 @@
 TARA Enrichment — Therapeutic Atlas of Risks and Applications
 Adds four-projection overlay data to each technique in qtara-registrar.json.
 
+DEPRECATED — DO NOT RUN (2026-07-25). This script's internal TARA dict only
+covers 71 of the current 161 techniques and predates the governance/
+engineering/dsm5 sub-fields the registry now carries. Running it against the
+current registry silently REGRESSES the 71 techniques it does recognize back
+to an older, simpler enrichment shape (confirmed: -4,623/+53 lines on a run
+that was immediately reverted). The current enrichment pipeline is:
+  - enrich-skeletons.py    (populates new "skeleton" techniques — the actual
+                             source of the current governance/engineering/
+                             dsm5 data this script's dict is missing)
+  - enrich-regulatory.py   (regulatory field enrichment)
+  - enrich-neurorights.py  (neurorights field enrichment)
+All three already resolve REGISTRY_PATH correctly; this script's path was
+also fixed same day, but that does not make it safe to run — its embedded
+reference data, not its path, is the blocker. Retire or regenerate its TARA
+dict against the current schema before ever running it again.
+
 Projections:
   1. Security  — existing fields (attack, tactic, severity, niss, etc.)
   2. Clinical  — therapeutic analog, conditions, FDA status, evidence
@@ -20,7 +36,7 @@ import os
 import copy
 from pathlib import Path
 
-REGISTRY_PATH = Path(__file__).parent.parent / "shared" / "qtara-registrar.json"
+REGISTRY_PATH = Path(__file__).parent.parent / "qtara-registrar.json"
 
 # ═══════════════════════════════════════════════════════════════════
 # TARA Schema Specification (added to registry top-level)
