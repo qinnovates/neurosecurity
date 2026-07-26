@@ -1,5 +1,394 @@
 [
   {
+    "id": "af4dea2c",
+    "title": "From detection to decision: handling artifacts in adaptive deep brain stimulation",
+    "date": "2026-07-26",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26001373?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: September–October 2026Source: Brain Stimulation, Volume 19, Issue 5Author(s): D. Hubers, B.S. Doelkahar, B.J. Keulen, M.J. Stam, M.G.J. de Neeling, B.C.M. van Wijk, P.R. Schuurman, R",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "8294b89e",
+    "title": "Prefrontal activation and connectivity during verbal fluency in autism Spectrum disorder: an fNIRS study",
+    "date": "2026-07-26",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1810519",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "ObjectiveThe neural mechanisms behind varying cognitive ability in children with Autism Spectrum Disorder (ASD) remain unclear. This study compared cortical activation and brain connectivity across AS",
+    "tags": [
+      "research",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "29dacdb8",
+    "title": "Doom running on a computer made of regex find-and-replace",
+    "date": "2026-07-26",
+    "url": "hxxps://4rh1t3ct0r7[.]github[.]io/doom-regex/",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://4rh1t3ct0r7.github.io/doom-regex/ Comments URL: https://news.ycombinator.com/item?id=49060166 Points: 2 # Comments: 1",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "b0b39bd8",
+    "title": "Use Your Brain: Engineering Standards in the Age of LLMs",
+    "date": "2026-07-26",
+    "url": "hxxps://pgaleone[.]eu/ai/2026/07/26/use-your-brain/",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://pgaleone.eu/ai/2026/07/26/use-your-brain/ Comments URL: https://news.ycombinator.com/item?id=49058440 Points: 2 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "c32a9091",
+    "title": "The first watch featuring computer functions",
+    "date": "2026-07-26",
+    "url": "hxxps://by[.]seiko-design[.]com/140th/en/topic/58[.]html",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://by.seiko-design.com/140th/en/topic/58.html Comments URL: https://news.ycombinator.com/item?id=49057130 Points: 2 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "f23eba63",
+    "title": "Operating a computer with your tongue: the Augmental MouthPad [video]",
+    "date": "2026-07-26",
+    "url": "hxxps://www[.]youtube[.]com/watch?v=xReyIF5pwRo",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.youtube.com/watch?v=xReyIF5pwRo Comments URL: https://news.ycombinator.com/item?id=49055265 Points: 2 # Comments: 0",
+    "tags": [
+      "partnership"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "633274fc",
+    "title": "Candid Camera: Rude Computer",
+    "date": "2026-07-26",
+    "url": "hxxps://www[.]youtube[.]com/watch?v=NAeQ-krLiXY",
+    "source": "Hacker News BCI",
+    "source_category": "news",
+    "summary": "Article URL: https://www.youtube.com/watch?v=NAeQ-krLiXY Comments URL: https://news.ycombinator.com/item?id=49054531 Points: 3 # Comments: 0",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "8fee721e",
+    "title": "Modeling Parkinsonian Freezing and Deep Brain Stimulation Effects in a Basal Ganglia Network",
+    "date": "2026-07-25",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]07[.]21[.]738458v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "he precise mechanism through which Deep Brain Stimulation (DBS) mitigates freezing episodes in Parkinson's disease remains unknown. We modelled Parkinsonian freezing using a model of the basal ganglia",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "14304b87",
+    "title": "Generative replay across hippocampal-neocortical circuits",
+    "date": "2026-07-25",
+    "url": "hxxps://www[.]biorxiv[.]org/content/10[.]64898/2026[.]07[.]24[.]740539v1?rss=1",
+    "source": "bioRxiv Neuro",
+    "source_category": "research",
+    "summary": "To make flexible decisions, the brain needs to make inferences between events that were not directly experienced together. In sharp-wave ripple (SWR) events, during periods of rest and sleep, spiking ",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "ee314bb3",
+    "title": "Oral GLP-1 drugs may quiet the brain’s food craving circuit",
+    "date": "2026-07-25",
+    "url": "hxxps://www[.]sciencedaily[.]com/releases/2026/07/260724061439[.]htm",
+    "source": "ScienceDaily Neuro",
+    "source_category": "research",
+    "summary": "Newer oral drugs related to semaglutide medications such as Ozempic reduced pleasure-driven eating in mice by quieting a deep brain reward circuit. The finding could open new avenues for understanding",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "b97261fa",
+    "title": "Brain-Computer Interface Commercialization Milestone: Ex-Neuralink President's Science Corp. Wins EU Approval for Retinal Chip - finance.biggo.com",
+    "date": "2026-07-25",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMidkFVX3lxTE5rUUpWUndaYl9rQVMxTnVtUVdzYUZ5cW1YLU9UdTAyQjl1YUw1ZF9TUFRvdzFiWHJBZ05ZSHEyWXBqd3VmdFpLcW5lRzFjY0xETVlYMExScFdONWYzTXpNSVJyOTlVOUFHU0ZqZ25YXzNac052enc?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "Brain-Computer Interface Commercialization Milestone: Ex-Neuralink President's Science Corp. Wins EU Approval for Retinal Chip&nbsp;&nbsp;finance.biggo.com",
+    "tags": [
+      "regulatory"
+    ],
+    "companies": [
+      "Neuralink"
+    ],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "74eed12f",
+    "title": "FDA grants 510(k) clearance to Velmeni for V4D 3D software",
+    "date": "2026-07-24",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/fda-510k-clearance-velmeni-v4d-3d/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "Velmeni has received 510(k) clearance from the US Food and Drug Administration (FDA) for its Velmeni for Dentists (V4D) 3D software. The post FDA grants 510(k) clearance to Velmeni for V4D 3D software",
+    "tags": [
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "1fb9c032",
+    "title": "Magnendo Secures $18M Series A Financing to Transform Endovascular Access for Stroke Intervention",
+    "date": "2026-07-24",
+    "url": "hxxps://www[.]globenewswire[.]com/news-release/2026/07/24/3332836/0/en/Magnendo-Secures-18M-Series-A-Financing-to-Transform-Endovascular-Access-for-Stroke-Intervention[.]html",
+    "source": "GlobeNewswire MedEquip",
+    "source_category": "funding",
+    "summary": "MIT spinout to accelerate product development and first-in-human studies of its magnetic robotic navigation platform designed to dramatically improve the s",
+    "tags": [
+      "funding",
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "084a24c1",
+    "title": "China’s First Commercial Brain Implant Shows Why Neurotechnology Needs Governance - Tech Policy Press",
+    "date": "2026-07-24",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqAFBVV95cUxQVWFhWEtjM1otWWJDcjRYa1pSMXBMTzBJSE9lcEo1NzVwY2JHOHIzclVxUlVkV01NNWNmbHUtOEZGZy0zZFcyOW4zeFdIa2d1bmJ2VHdXMjcxQ2R6UXRwRHoxeG5CSEJZWnk5QzhjVG1BQ1l0b05OdXB0Uk1ZbUhyaU5YOW5lVWZDLWJyZWUyUWJUWkdHZnlJalllc1NlNE5TLXByZnZpVG4?oc=5",
+    "source": "GN: BCI FDA",
+    "source_category": "regulatory",
+    "summary": "China’s First Commercial Brain Implant Shows Why Neurotechnology Needs Governance&nbsp;&nbsp;Tech Policy Press",
+    "tags": [
+      "product",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "4317a618",
+    "title": "SaMD Cybersecurity in 2026: Why \"Secure by Design\" Is Now a Premarket Submission Requirement, Not a Post-Launch Afterthought - Nasscom",
+    "date": "2026-07-24",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiuwFBVV95cUxPWl9SeUE0VWNWbUg1ZHJ5SkFWc0lIYmNqaENLTnV5dWVCM053bWVrMWpCTnkxTmR2REo3eE9qazVBbDRDZ0x2MVZUUXlneEZtaEdrZm1va2xKT0k5c2Y3cFJPTy1PSzRxcEQxaUc2cHpOWkpJcUJCMnFpaThfQTRJb09IYmtRNlBLZk5iOWE5bWZEQXRtRjM0dVRYNW5BYmhQdVJjdTY4NXFoWG1VMzR2aF9aTEsyQklZdms0?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "SaMD Cybersecurity in 2026: Why \"Secure by Design\" Is Now a Premarket Submission Requirement, Not a Post-Launch Afterthought&nbsp;&nbsp;Nasscom",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "2f8800c7",
+    "title": "Impact of Inaccurately Labeled Data on the Performance of Multi-label Classification for Disease Recognition",
+    "date": "2026-07-23",
+    "url": "hxxps://www[.]medrxiv[.]org/content/10[.]64898/2026[.]07[.]22[.]26358665v1?rss=1",
+    "source": "medRxiv Health",
+    "source_category": "research",
+    "summary": "The process of medical diagnostics is challenging, especially since patients can simultaneously suffer from several diseases with similar, contradictory, or even opposing diagnoses. Statistical predic",
+    "tags": [
+      "policy",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "486bbb51",
+    "title": "Cortical-SSM: a deep state space model for motor imagery decoding from EEG signals",
+    "date": "2026-07-23",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae89e8",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Classification of electroencephalogram (EEG) signals obtained during motor imagery (MI) has substantial application potential, including for communication assistance and rehabilitation supp",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "49e86b6b",
+    "title": "Lilly, with new data, to seek FDA approval of obesity drug retatrutide",
+    "date": "2026-07-23",
+    "url": "hxxps://www[.]biopharmadive[.]com/news/lilly-retatrutide-fda-application-obesity-drug-results/825987/",
+    "source": "BioPharma Dive",
+    "source_category": "product",
+    "summary": "The new findings position Lilly to file an application for the highly anticipated medicine, but also leave some questions about the additive benefits a &ldquo;triple-G&rdquo; drug has on heart health.",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "fbb9bccc",
+    "title": "Precision Neuroscience™ Appoints John Donoghue, Pioneer of Brain-Computer Interfaces, as Scientific Advisor - The Manila Times",
+    "date": "2026-07-23",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigJBVV95cUxOWXM4NURYRkdiLUxKdDNJdVY5d3JGcTh5N3hSOS1naHdSVkZrZG4xRHN6aEVxanpSdTRVWHlZYmxiR1YzT3lhQUZySkRiOWUwUjVSVUlRV0RxLWV5NTVkbFdTcjBwMVRFaS1Ka2VqVlhoc21nTzFRTGNxWTMwY1YwVGlfRTllTjN0aVBUMV95bm5yZ1JveXRmekQ5OEN6WngtckVuYjhnUE1Va0RlUGprcGIxbnRLZTNtX3FaSVp3eThKalJYZnlNXzV0dzFpYzZqMlNuSEkxbGt6ZzByQ1lGUDFhUEpENEZSWFVYMFJsbDlFUDVDQW8xOFVBejZzc2s0NVY2cm5fTk85d9IBjwJBVV95cUxNNlpGLUxTb09hcHpxN3Uza20tSk9HNm5oRkI0aTFGTm9TeHVIaWtfa3dXRkFnN0xuU2dMQlpuMzlNejZOMEt0eFlaNEhlbnpTWlRoYm4yOUNRZnlpa2NGalBvd3lmczh4SkIyM0JWRXlGU3JvanRJWVFhcjdZd0xzcEllXzE5bHFndUNXcFY1OUFLcUgyNXR1QnF1dHMwdUdSR0gtb0psSVJKbUkwZVVSUVdtM1BIVjNEMWlrdC1OUkFUbmZxM3FFZGo0emVnR1A1WDNkQ1FfdF9vby1IWnRMUE9UVG5zTGd4UTZMamdZTjFUNUVvSWpWaGx2Y0hjZ2ZRenRtVjNCRHJvaHc3NE1J?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "Precision Neuroscience™ Appoints John Donoghue, Pioneer of Brain-Computer Interfaces, as Scientific Advisor&nbsp;&nbsp;The Manila Times",
+    "tags": [
+      "general"
+    ],
+    "companies": [
+      "Precision Neuroscience"
+    ],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "9ff73598",
+    "title": "Design and validation of a stereotactic frame for independent bilateral multi-trajectory targeting",
+    "date": "2026-07-22",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae87cf",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Modern stereotactic neurosurgery increasingly relies on bilateral and multi-trajectory workflows (e.g. deep brain stimulation (DBS), stereoelectroencephalography (sEEG)), which can exceed t",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "f0aeef58",
+    "title": "US start-up wins EU approval for sight-restoring bionic eye - Financial Times",
+    "date": "2026-07-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihAFBVV95cUxPZkg0eVRoa2FRR0Q2a0VCdEhSUFVNaGQ4Z0xfYnQ5T1kxZ3p4OTlxYVlFOVN4V0x2cUZzMWpRSkkyeVRrWXAxSGtjOVQyTXlzV3dWMmN5UHF1QkVSRVBnR3o4UHBkRDMtNjlzLUVQb2JIQlFxYUd5UFBzMnBwWnllSDhtTmw?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "US start-up wins EU approval for sight-restoring bionic eye&nbsp;&nbsp;Financial Times",
+    "tags": [
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "0d76a01b",
+    "title": "Closing The Series A Gap Is The Next Great Opportunity For Black Founders In The AI Era",
+    "date": "2026-07-21",
+    "url": "hxxps://news[.]crunchbase[.]com/venture/seriesa-seed-gap-underrepresented-founders-ai-norman-green-black-ops/",
+    "source": "Crunchbase News",
+    "source_category": "funding",
+    "summary": "While 2026 has shown encouraging signs, with Black-founded startups raising approximately $643 million by late May, the strongest quarter since mid-2022, the improvement was driven largely by a handfu",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "97d26df1",
+    "title": "Candidate EEG-derived biomarkers of epileptiform discharge occurrence in epilepsy",
+    "date": "2026-07-21",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae89e7",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. In epilepsy, neuronal excitability is a key factor underlying the occurrence of epileptiform discharges (EDs). EEG-derived biomarkers that reflect ED occurrence may therefore provide object",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "e3b42258",
+    "title": "Multimodal quantification of cognitive load using a printed wearable facial bio-potential system",
+    "date": "2026-07-21",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae89e9",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Cognitive load refers to the amount of mental effort required to process information and perform tasks. It has a strong impact on both learning and task performance and, therefore, plays a ",
+    "tags": [
+      "product",
+      "policy",
+      "partnership"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "f31a3763",
+    "title": "How to Secure a Medical Device You Can’t Patch - Medical Design & Outsourcing",
+    "date": "2026-07-21",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxPbzllVnZmdDAtQmg4Yk5KRzJ1a2N0NWkzT0hHaXBrQ3pMcU9HSzJqR0pSTTYwSmthZ3o2SF8wZEh5Q3BZbjRRLWN4MDZsMFVKRGRNS2Q2VkRGVDBGdHVzZXJ1cUo4Q0dFRG4wMkxkeno1Q01rWV8xYWVoXzBFNXJaNUl1NWt1YXlWeE1pMjVmQjE3dHBU?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "How to Secure a Medical Device You Can’t Patch&nbsp;&nbsp;Medical Design & Outsourcing",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "2955b025",
+    "title": "Adolescent exposure to the psychedelic 25C-NBOMe in rats induces lasting competitive avoidance through disrupted hippocampal–prefrontal synchrony",
+    "date": "2026-07-20",
+    "url": "hxxps://www[.]nature[.]com/articles/s41593-026-02369-y",
+    "source": "Nature Neuroscience",
+    "source_category": "research",
+    "summary": "",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
+    "id": "24632df9",
+    "title": "Enhanced source localization accuracy through bidirectional deep brain stimulation (DBS) electrodes: a comparative study with non-invasive EEG methods",
+    "date": "2026-07-20",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/ae87d0",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Accurate neural source localization from electroencephalography (EEG) remains challenging for deep brain structures. This study investigates whether integrating bidirectional deep brain sti",
+    "tags": [
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-07-26"
+  },
+  {
     "id": "1032a052",
     "title": "Functional connectivity gradients depend on cortical sampling position and brain state",
     "date": "2026-07-19",
@@ -8189,6 +8578,22 @@
     ],
     "companies": [],
     "fetched": "2026-07-12"
+  },
+  {
+    "id": "5ff7663a",
+    "title": "Paradromics partners with academics to accelerate BCI development - BioWorld News",
+    "date": "2026-03-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqgFBVV95cUxNVjJ5NGtYSWxIeDdrbVh2SXlNRy1vMDNIMXRJZ0laZ2FSd3BOeEFfZXZPcVlUZDF6Z2dRdElTRVo5anFlV2tuanltemZPQXdQbkRrWEIyUWoxSzVFVVZkUmtKd1pIYjg4cVVLaGZlOUh4cTFjNExZVFMwMDNBS3dXdGVsaHM4ZFM2bkNBelRXREVEdU94SmNEREQ4OGFNMlVUUG1nREJrLVBjUQ?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "Paradromics partners with academics to accelerate BCI development&nbsp;&nbsp;BioWorld News",
+    "tags": [
+      "partnership"
+    ],
+    "companies": [
+      "Paradromics"
+    ],
+    "fetched": "2026-07-26"
   },
   {
     "id": "8628d20d",
