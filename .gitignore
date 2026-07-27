@@ -84,4 +84,6 @@ model/qif-lab/data/
 credentials.*
 docs/
 drafts/
+# core.ignorecase matches "drafts/" against "IR Playbooks/Drafts/" too — carve it back out.
+!IR Playbooks/Drafts/
 .gstack/
