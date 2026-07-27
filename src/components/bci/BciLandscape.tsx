@@ -139,7 +139,7 @@ function PublicationChart({ data }: { data: BciLandscapeProps['publicationTrends
     const threatBase = 135;
     const lastYear = sorted[sorted.length - 1].year;
 
-    const historical = sorted.map((d, i) => ({
+    const historical = sorted.map((d) => ({
       ...d,
       forecast: false,
       threat_vectors: Math.round(threatBase * Math.pow(0.83, lastYear - d.year)), // back-project
@@ -166,7 +166,7 @@ function PublicationChart({ data }: { data: BciLandscapeProps['publicationTrends
 
   // Log scale: use log10, minimum 1
   const logSafe = (v: number) => Math.log10(Math.max(v, 1));
-  const maxLog = useMemo(() => Math.max(...all.map(d => logSafe(Math.max(d.pubmed_bci, d.threat_vectors || 0)))), [all]);
+  const maxLog = useMemo(() => Math.max(...all.map(d => logSafe(Math.max(d.pubmed_bci, d.security_bci, d.threat_vectors || 0)))), [all]);
   const minLog = 0; // log10(1) = 0
 
   const W = 720;
@@ -175,7 +175,12 @@ function PublicationChart({ data }: { data: BciLandscapeProps['publicationTrends
   const plotW = W - PAD.left - PAD.right;
   const plotH = H - PAD.top - PAD.bottom;
 
-  const xScale = (i: number) => PAD.left + (i / (all.length - 1)) * plotW;
+  // X scale is by actual year, not array index — years are unevenly spaced
+  // (e.g. 2010, 2012, 2015, ... 2025) and index-based spacing distorted the
+  // trend slope by compressing sparse early years to match dense later ones.
+  const minYear = all[0].year;
+  const maxYear = all[all.length - 1].year;
+  const xScale = (year: number) => PAD.left + ((year - minYear) / (maxYear - minYear)) * plotW;
   const yScale = (v: number) => {
     const lv = logSafe(v);
     return PAD.top + plotH - ((lv - minLog) / (maxLog - minLog)) * plotH;
@@ -184,20 +189,19 @@ function PublicationChart({ data }: { data: BciLandscapeProps['publicationTrends
   // Paths for historical data only (solid lines)
   const histBci = all.slice(0, forecastStartIdx);
   const histSec = all.slice(0, forecastStartIdx);
-  const bciHistPath = histBci.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(i)},${yScale(d.pubmed_bci)}`).join(' ');
-  const secHistPath = histSec.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(i)},${yScale(d.security_bci)}`).join(' ');
-  const threatHistPath = histBci.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(i)},${yScale(d.threat_vectors || 1)}`).join(' ');
+  const bciHistPath = histBci.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(d.year)},${yScale(d.pubmed_bci)}`).join(' ');
+  const secHistPath = histSec.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(d.year)},${yScale(d.security_bci)}`).join(' ');
+  const threatHistPath = histBci.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(d.year)},${yScale(d.threat_vectors || 1)}`).join(' ');
 
   // Paths for forecast (dashed lines, includes last historical point for continuity)
   const fcData = all.slice(forecastStartIdx - 1);
-  const fcStartI = forecastStartIdx - 1;
-  const bciFcPath = fcData.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(fcStartI + i)},${yScale(d.pubmed_bci)}`).join(' ');
-  const secFcPath = fcData.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(fcStartI + i)},${yScale(d.security_bci)}`).join(' ');
-  const threatFcPath = fcData.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(fcStartI + i)},${yScale(d.threat_vectors || 1)}`).join(' ');
+  const bciFcPath = fcData.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(d.year)},${yScale(d.pubmed_bci)}`).join(' ');
+  const secFcPath = fcData.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(d.year)},${yScale(d.security_bci)}`).join(' ');
+  const threatFcPath = fcData.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(d.year)},${yScale(d.threat_vectors || 1)}`).join(' ');
 
   // Areas (full series for visual fill)
-  const fullBciPath = all.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(i)},${yScale(d.pubmed_bci)}`).join(' ');
-  const bciArea = `${fullBciPath} L${xScale(all.length - 1)},${yScale(1)} L${xScale(0)},${yScale(1)} Z`;
+  const fullBciPath = all.map((d, i) => `${i === 0 ? 'M' : 'L'}${xScale(d.year)},${yScale(d.pubmed_bci)}`).join(' ');
+  const bciArea = `${fullBciPath} L${xScale(maxYear)},${yScale(1)} L${xScale(minYear)},${yScale(1)} Z`;
 
   const secPct = sorted.length > 0
     ? ((sorted.reduce((s, d) => s + d.security_bci, 0) / sorted.reduce((s, d) => s + d.pubmed_bci, 0)) * 100).toFixed(2)
@@ -207,8 +211,10 @@ function PublicationChart({ data }: { data: BciLandscapeProps['publicationTrends
   const yTicks = [1, 10, 100, 1000, 10000];
   const tickLabel = (v: number) => v >= 1000 ? `${(v / 1000)}k` : String(v);
 
-  // X axis forecast boundary
-  const fcBoundaryX = xScale(forecastStartIdx - 0.5);
+  // X axis forecast boundary — midpoint between last historical and first forecast year
+  const fcBoundaryX = forecastStartIdx < all.length
+    ? xScale((all[forecastStartIdx - 1].year + all[forecastStartIdx].year) / 2)
+    : xScale(maxYear);
 
   return (
     <div className={GLASS}>
@@ -261,39 +267,46 @@ function PublicationChart({ data }: { data: BciLandscapeProps['publicationTrends
         {/* X axis labels */}
         {all.map((d, i) => (
           i % 2 === 0 ? (
-            <text key={d.year} x={xScale(i)} y={H - 8} textAnchor="middle" fill={d.forecast ? 'rgba(251,191,36,0.5)' : '#9ca3af'} fontSize="10" fontStyle={d.forecast ? 'italic' : 'normal'}>
+            <text key={d.year} x={xScale(d.year)} y={H - 8} textAnchor="middle" fill={d.forecast ? 'rgba(251,191,36,0.5)' : '#9ca3af'} fontSize="10" fontStyle={d.forecast ? 'italic' : 'normal'}>
               {d.year}
             </text>
           ) : null
         ))}
 
         {/* Data point dots for historical */}
-        {histBci.map((d, i) => (
+        {histBci.map((d) => (
           <g key={`dots-${d.year}`}>
-            <circle cx={xScale(i)} cy={yScale(d.pubmed_bci)} r="2.5" fill="#3b82f6" />
-            <circle cx={xScale(i)} cy={yScale(d.security_bci)} r="2.5" fill="#ef4444" />
-            <circle cx={xScale(i)} cy={yScale(d.threat_vectors || 1)} r="2" fill="#f59e0b" />
+            <circle cx={xScale(d.year)} cy={yScale(d.pubmed_bci)} r="2.5" fill="#3b82f6" />
+            <circle cx={xScale(d.year)} cy={yScale(d.security_bci)} r="2.5" fill="#ef4444" />
+            <circle cx={xScale(d.year)} cy={yScale(d.threat_vectors || 1)} r="2" fill="#f59e0b" />
           </g>
         ))}
 
-        {/* Hover targets */}
-        {all.map((d, i) => (
-          <rect
-            key={d.year}
-            x={xScale(i) - plotW / all.length / 2}
-            y={PAD.top}
-            width={plotW / all.length}
-            height={plotH}
-            fill="transparent"
-            onMouseEnter={() => setHoverIdx(i)}
-            onMouseLeave={() => setHoverIdx(null)}
-          />
-        ))}
+        {/* Hover targets — width spans the midpoint gap to each neighboring year,
+            since points are no longer evenly spaced along x */}
+        {all.map((d, i) => {
+          const prevYear = i > 0 ? all[i - 1].year : d.year - (all[1] ? all[1].year - d.year : 1);
+          const nextYear = i < all.length - 1 ? all[i + 1].year : d.year + (d.year - prevYear);
+          const xLeft = xScale((prevYear + d.year) / 2);
+          const xRight = xScale((nextYear + d.year) / 2);
+          return (
+            <rect
+              key={d.year}
+              x={xLeft}
+              y={PAD.top}
+              width={Math.max(xRight - xLeft, 0)}
+              height={plotH}
+              fill="transparent"
+              onMouseEnter={() => setHoverIdx(i)}
+              onMouseLeave={() => setHoverIdx(null)}
+            />
+          );
+        })}
 
         {/* Hover tooltip */}
         {hoverIdx !== null && (() => {
           const d = all[hoverIdx];
-          const tx = xScale(hoverIdx);
+          const tx = xScale(d.year);
           const isFc = d.forecast;
           const tipH = 56;
           return (
