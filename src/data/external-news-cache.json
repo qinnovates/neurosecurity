@@ -1,12 +1,48 @@
 [
   {
     "type": "external",
-    "title": "Elon Musk Shows Off Neuralink Patients Navigating Wheelchairs By Thought Alone— Says Implant Helps Those - Benzinga",
-    "date": "2026-07-24",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMioAJBVV95cUxOdUcyMERibUg3Q2loMWpkdm1tLTdDVVBjUTNHZVBKSFJEUjUtZ3hSeUZ0YTh3Y2dFdXJ5ZG1qWlYzY3hiMU1BbFQwSm1WOFctdVNCczdZeWNtWjQwUWJ3a2huMlk0SUY2Rl9RUjFsWmk4M25JejV1UVpBOUZrTXhRYWtMQzdXcGpGdnFPMVBJOHF6Y0N6SEc2b3plelEyaGRRMjR0b1RlcnhUVTRWQ2ZFZzZ4VFpuQUJBRGVBNVo4X0dBLVR1Z1kyOHVFSjc4SmVIUHlHcUZXV01CS092SVdKOTBQU3pvTWdNYWZNUFJqUHZWRnZoaU5faG5sLW0zRjlVTElhZ1hwU3BZSno5S3pjU3RGMlgwbFVNeXZ0MTJsMkE?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk Shows Off Neuralink Patients Navigating Wheelchairs By Thought Alone— Says Implant Helps Those&nbsp;&nbsp;Benzinga",
+    "title": "Neuvotion Announces Commercialization of Brain-Computer Interface and Brain-Body Interface Technologies – Related Clinical Study Published in Nature Medicine - Yahoo! Finance Canada",
+    "date": "2026-07-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiowFBVV95cUxQRjFNaFBVakZhVFpqVWx1T0l1SjloZ010SGFwZFMzRVo0cWEtRklvYmNVQTUwZmJXZDJXOUVpSGkwR3NsUmM0SW02UlE5N2NsNEphQWRaUTZTbUVuX0poejJIUG51ZG1EV3pILVVpTGlqV2NHSktsaW54UDZNeXZxakExcE5pcE5FaXctZmlzb0RQUy1FVmI3MFBoZlM5dW5TZGJR?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Neuvotion Announces Commercialization of Brain-Computer Interface and Brain-Body Interface Technologies – Related Clinical Study Published in Nature Medicine&nbsp;&nbsp;Yahoo! Finance Canada",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuvotion Announces Commercialization of Brain-Computer Interface and Brain-Body Interface Technologies – Related Clinical Study Published in Nature Medicine - New Castle News",
+    "date": "2026-07-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAJBVV95cUxPeS1vZmVRUmh5UzI1T2VlOVBRSG1vZUpTblUyeDFwRUdLSnNoaFhrejAzd3R0ZTFlUktXekZqV0NSTVh2OG1SSUE1cDlkRjE4cTZzaHgxbm1fMmFqNFdLLUZSRHROLUp5YXg1RzRERWJWX20wTkRjY016d0c5ZlZsOVZ3MjZsbEpNa2Y3eG90OXB2OXRGNTBId2NieDJZSktRWjJmYlBUbERWZEc4cDJuNk95eXAwSDI5MGpIcXhxZ1lWcUN6c3RRVEMwLW16TzNPdHhGZm5JSk9OWTB4MXVuY0RLU05CUUNaSGY2RGlTWWlKQU12bU5nMmU0NzBISURpWlk4RDRmc0w1c1ZhT1FvU0xESlQxUmItdHBfQ2JUWE9DaERmMDVCTVBfU2YzYUZ6WTlnRk9TTzdYeElEZ1JBcg?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Neuvotion Announces Commercialization of Brain-Computer Interface and Brain-Body Interface Technologies – Related Clinical Study Published in Nature Medicine&nbsp;&nbsp;New Castle News",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China to foster smart rehabilitation via brain-computer interface, advance need-driven applications: federation - Global Times",
+    "date": "2026-07-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiYkFVX3lxTFBpcUJhQmZ3Q1NDWUxEMXZiUXJDakF1eW0taVlUbUQ1T1JxNFlMUDEza1ZRVjRrOGpqcUktYnRqR2VMLVRLR2pNd1VjRzlvYlZPN25TeFg3ekVibHNabHpwelBB?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China to foster smart rehabilitation via brain-computer interface, advance need-driven applications: federation&nbsp;&nbsp;Global Times",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Computer Vision Based Neurology Brain Activity Rejection Architecture and Implementation",
+    "date": "2026-07-27",
+    "url": "hxxps://arxiv[.]org/abs/2607[.]21654",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2607.21654v1 Announce Type: new Abstract: The electroencephalogram (EEG) is a valuable and widely applied tool for investigating brain disorders and behavioral changes. It offers a minimally res",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Universal BCI Personalization: One API for Frozen EEG Trunks and Foundation Models",
+    "date": "2026-07-27",
+    "url": "hxxps://arxiv[.]org/abs/2607[.]22397",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2607.22397v1 Announce Type: cross Abstract: Frozen EEG encoders proliferate; per-model fine-tune defaults do not scale. We present Nimbus Personalizer: one contract encode to Bayesian head to Br",
+    "category": "research"
   },
   {
     "type": "external",
@@ -15,15 +51,6 @@
     "url": "hxxps://spectrum[.]ieee[.]org/sleep-monitoring-device",
     "source": "IEEE Spectrum",
     "summary": "When you get a good night’s sleep, you aren’t just giving your brain a chance to rest. Sleep activates a system only discovered in 2012 that washes out brain waste. Called the glymphatic system, it’s ",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "PRIMA, first brain-computer interface, commercially available in Europe to restore central vision in GA - Ophthalmology Times Europe",
-    "date": "2026-07-22",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiowFBVV95cUxPRHZ0Vm1aRzRHMDA0N0JPMV9ldE1OYjJsRmhuWlNHaGNvel9VMEFuNmpDOFpZM1JDVmNNbGc4d3ZpRTN2QXR5UjdKMm9SdFV5ZkpFUkt6cE03Ym5TX0RvR005VUhyZlk3YWZkZlRoS2NGSWVOT1ZpYTlpY085cGFCd3U0cWg5WWFCV3pRaHlEanY4dzFCaXEycW9tUGVUT0wtLVpF?oc=5",
-    "source": "Google News — BCI",
-    "summary": "PRIMA, first brain-computer interface, commercially available in Europe to restore central vision in GA&nbsp;&nbsp;Ophthalmology Times Europe",
     "category": "neurotechnology"
   },
   {
@@ -51,24 +78,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMimAFBVV95cUxPUnJTRTdtbWdxWjJhaW9XaGxXbDJWQlhqdEJLemN1VGxmc0d6TjlWWlNFVGZmcHYzeUJ4YVZUSXpIT0Jjbm5vRm5BcXVGSmxZLTBNQTM0VUplc21Ib05hSTdKaks0N2dyd0FNQk9Db2NqTTZZSEc2NE42cHZaQ1BBd1pFTWl0UTJMOHlnLTh1M21BSHJPUFRnNQ?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "China Applies its Industrial Playbook to Brain Chips&nbsp;&nbsp;The Wire China",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain-chip milestone: China completes world’s first commercial implant - South China Morning Post",
-    "date": "2026-07-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxNM1NuWHJkelNjQ3pZRzlMd05pTFoxVnhqQXFjaUhSQlVhWWY5bTFYcEIwNENTVzJuMzZiOEJua1RiOWQxeGotWkQ1enVCOTNRT1pfQTc4VHNDVG9WX3IxaElCYTdkaTVYd0lnX3JBX0k4YVNKNTBkWE02UkIyZnpxN2xBVlAyODBrUHhFWXQxenE1MnZPR1ZDSGVfa0RhaWdVNzJnMUFickhsSTJ4Z0hKX1BwYndKOTc1TTBmTEV0TjnSAcABQVVfeXFMTmgza3ZfSDB6U0l6N1MybVhRZjZvRlBoN2JwOEtYYnptRHdZOVFVRlYyZ1BoOWFaSm5kV1g0N1VDeGRjNDN5X1JuQ3h4ZmdvdHprbmxuM1B4WFBldnNwR2phSzBRZllPRmI1WU5Yak1fUHY2b1NrSWFxVUFiYXhJX1U0ekFZX0Rqclh1N3hSdV9zNWREZXpkLXJIY3A5c2RNeS1lajlQOFJQVHBidldHbTRlc0dmM2tUcFVzZ2FwQ0Zk?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-chip milestone: China completes world’s first commercial implant&nbsp;&nbsp;South China Morning Post",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Human-machine learning boosts noninvasive brain-computer control in untrained users - Tech Xplore",
-    "date": "2026-07-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihgFBVV95cUxQUFNmUWlITjZIWGhDdkVfZVRoWi04cXBpQVRXU0UtUkpIR0hYcTVjU29KajZsdnYzaHNXQXRsUFpfczJfc2lVQkNaMi02NmpNcmRLSGF1eFRYMjVBYnRkQmhMSkkxMlAyUkhka3J2UEdHVHFWWF82RHFrMWRLdm9PNzd1bXhCQQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Human-machine learning boosts noninvasive brain-computer control in untrained users&nbsp;&nbsp;Tech Xplore",
     "category": "neurotechnology"
   },
   {
@@ -127,21 +136,21 @@
   },
   {
     "type": "external",
-    "title": "Your brain for sale? The new frontier of neural data - The Conversation",
-    "date": "2026-04-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxPdFNPU0haTVFQZXhPWkREZndLUnFqZzdZX0E1VUJkRXNaM3pWS0RMOFp3c0wzQWhKZDluc2pGSGo3dDU1NzJub0RsUUpuZkhtaF9IelpXaW01ckt4TzR5VG00SkpMWGswZFNXUHF4bFpZYTJpTW1MUHpVWndldkV4ajdob0NZX0xhdHZBWlFFVQ?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Your brain for sale? The new frontier of neural data&nbsp;&nbsp;The Conversation",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
     "title": "Law, neuroscience, and authenticity by design: protecting users’ minds in the digital sphere - Frontiers",
     "date": "2026-03-25",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikgFBVV95cUxQZUFUOVBDMW1iS2JjRlQ0cV9zaktfTkhTWlNUTHVYbWVGVGlGYlhfY3VtUGRUbXpLbjNORWloaWVYRGxjeVVWcnBJWFFzNUFGd3JrWi1HWHFZaFVhcV9xS2N0aEttUlFoX09JeEg4QmQtcWVpbWhQdDZYR1cwUTl3OE51RDF1NVBvT3ZkYlROR2JEZw?oc=5",
     "source": "Google News — MIND Act",
     "summary": "Law, neuroscience, and authenticity by design: protecting users’ minds in the digital sphere&nbsp;&nbsp;Frontiers",
     "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "Two Years of Telepathy | Updates - Neuralink",
+    "date": "2026-01-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Two Years of Telepathy | Updates&nbsp;&nbsp;Neuralink",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -195,6 +204,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxNS3FBelpMZGNUWExYbEtEQzZtLXNYRGJnRjhsNjFTYTRrMHpMYW9iU2ZlM3JqM3BBendfblNmNHVNUURrNG4xNzlRNU1xLWN5ZmIzNVJSR1JBRTFBclU5NHFQMTUxLVQ2OEY4bVJJS3VRRFVFcm95NEZpbTRtY1lhWDdBdmJydTI2MHBLNVJvVkxUS0E?oc=5",
     "source": "Google News — MIND Act",
     "summary": "Senators ask FTC to study neurotechnology's promises, implications&nbsp;&nbsp;IAPP",
+    "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "Congress Introduces Neural Data Bill - Inside Privacy",
+    "date": "2025-10-03",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxQcW5Tb0RFN2dJOE1rRmtJZjltdUVlNzhTdGpUN0U1Y1RIMVhJVllNWXZGc3ZBNGt1VHRqNWQ5YUx2dVFfZUxZRFZhRW9CbzNoLUk0VWdJY0kzczc3dTQ5X1NoOF9pYy1HR01OallOMFFHaC1pdlJ2U3NON0JzdGRfenNYYlhGYzJXdXc?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Congress Introduces Neural Data Bill&nbsp;&nbsp;Inside Privacy",
     "category": "neuroethics"
   }
 ]
