@@ -78,11 +78,6 @@ export default defineConfig({
         '@shared': path.resolve(__dirname, './datalake'),
       },
     },
-    build: {
-      rollupOptions: {
-        external: ['@duckdb/duckdb-wasm'],
-      },
-    },
     plugins: [tailwindcss()],
   },
 });

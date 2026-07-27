@@ -1,0 +1,14 @@
+{
+  "datasets": [
+    { "file": "resting_eyes_closed.csv", "name": "Eyes Closed", "description": "Alpha-dominant resting state", "color": "#a855f7" },
+    { "file": "resting_eyes_open.csv", "name": "Eyes Open", "description": "Beta-dominant alert wakefulness", "color": "#3b82f6" },
+    { "file": "motor_imagery_left.csv", "name": "Motor Left", "description": "Left hand motor imagery (mu desynchronization)", "color": "#10b981" },
+    { "file": "motor_imagery_right.csv", "name": "Motor Right", "description": "Right hand motor imagery", "color": "#10b981" },
+    { "file": "p300_oddball.csv", "name": "P300 Oddball", "description": "Oddball paradigm — event-related potential", "color": "#f59e0b" },
+    { "file": "ssvep_12hz.csv", "name": "SSVEP 12Hz", "description": "Steady-state visual evoked potential at 12Hz", "color": "#06b6d4" },
+    { "file": "sleep_stage_n2.csv", "name": "Sleep N2", "description": "Stage 2 sleep — spindles and K-complexes", "color": "#6366f1" },
+    { "file": "artifact_eye_blink.csv", "name": "Eye Blink", "description": "Frontal blink artifacts for artifact rejection testing", "color": "#f97316" },
+    { "file": "seizure_simulation.csv", "name": "Seizure Sim", "description": "Evolving epileptiform activity", "color": "#ef4444" },
+    { "file": "meditation_theta.csv", "name": "Meditation", "description": "Enhanced frontal theta — relaxation state", "color": "#8b5cf6" }
+  ]
+}

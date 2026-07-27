@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — qinnovate</title>
+    <script>
+      // GitHub Pages only ever serves a root-level 404.html — it has no
+      // server-side rewrites. Brain SIEM (/brain-siem/*) is a client-side
+      // routed SPA, so a direct hit on a sub-route like /brain-siem/tara
+      // lands here. Redirect it back into the SPA's index.html with the
+      // real path preserved in a query param; main.tsx restores it via
+      // history.replaceState before the router mounts.
+      (function () {
+        var path = window.location.pathname;
+        var prefix = '/brain-siem/';
+        if (path.indexOf(prefix) === 0) {
+          var rest = path.slice(prefix.length);
+          window.location.replace(
+            prefix + '?redirect=' + encodeURIComponent(rest) + window.location.search + window.location.hash
+          );
+        }
+      })();
+    </script>
+    <style>
+      body { font-family: system-ui, sans-serif; background: #0a0e17; color: #e2e8f0; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+      main { text-align: center; }
+      a { color: #60a5fa; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>404 — Page not found</h1>
+      <p><a href="/">Back to qinnovate.com</a></p>
+    </main>
+  </body>
+</html>

@@ -1,15 +1,20 @@
 /**
  * useDuckDB — Singleton DuckDB-WASM initialization hook.
  *
- * Lazy-loads @duckdb/duckdb-wasm via dynamic import (never in main bundle).
- * WASM + JS bundles fetched from jsDelivr CDN for cross-site cache benefit.
+ * Lazy-loads @duckdb/duckdb-wasm via a normal package dynamic import
+ * (code-split into its own content-hashed chunk by Rollup — never in the
+ * main bundle, never fetched from a third-party origin at runtime).
+ * WASM + worker bundles are vendored locally under src/site/duckdb/.
  *
  * State machine: idle → loading → ready → error
  *
  * Security:
  *   - All queries run client-side only (WASM sandbox, no filesystem)
  *   - Only /data/parquet/*.parquet paths are registered (no external URLs)
- *   - SRI integrity for WASM bundle to be added after npm install
+ *   - @duckdb/duckdb-wasm is a pinned npm dependency (package-lock.json),
+ *     bundled by the build — no runtime CDN fetch, no dynamic-import SRI
+ *     gap. Previously loaded from jsDelivr via `import(url)`, which the
+ *     browser cannot apply SRI to; this closes that supply-chain gap.
  */
 
 import { useState, useCallback, useRef } from 'react';
@@ -35,11 +40,10 @@ interface DuckDBInstance {
 const MAX_RESULT_ROWS = 10_000;
 const QUERY_TIMEOUT_MS = 10_000;
 
-// DuckDB-WASM bundles — vendored locally to eliminate CDN supply chain risk
-// WASM + worker files served from /duckdb/ (copied to public/duckdb/ at build)
-// ESM loader still from jsDelivr (dynamic import of local ESM not supported by Vite)
-const DUCKDB_VERSION = '1.29.0';
-const JSDELIVR_BASE = `https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@${DUCKDB_VERSION}/dist`;
+// DuckDB-WASM bundles — vendored locally to eliminate CDN supply chain risk.
+// WASM + worker files served from /duckdb/ (copied from src/site/duckdb/ at build).
+// The JS loader itself ships as the pinned @duckdb/duckdb-wasm npm dependency,
+// bundled by Rollup as its own chunk — see loadDuckDBModule below.
 const LOCAL_BASE = '/duckdb';
 
 // All known parquet datasets served from /data/parquet/
@@ -82,21 +86,18 @@ const PARQUET_DATASETS = [
 // Allowlist: only these path prefixes are permitted for read_parquet
 const ALLOWED_PARQUET_PREFIX = '/data/parquet/';
 
-// ── CDN Loader ────────────────────────────────────────────────────────
+// ── Loader ────────────────────────────────────────────────────────────
 
 /**
- * Load DuckDB-WASM entirely from CDN — no npm dependency required.
- * This keeps the build clean (no 35MB WASM in node_modules) and
- * leverages cross-site CDN caching from jsDelivr.
+ * Load the DuckDB-WASM JS module. A normal package specifier (not a URL),
+ * so Rollup statically resolves and code-splits it into its own
+ * content-hashed chunk — served same-origin, integrity-checked by the
+ * build pipeline like every other bundled dependency. Kept as a dynamic
+ * import (rather than a static top-level import) purely to defer loading
+ * the ~35MB WASM payload until the SQL console is actually opened.
  */
-async function loadDuckDBFromCDN(_scriptUrl: string): Promise<any> {
-  // Use the ESM bundle from jsDelivr via dynamic import with a URL
-  // Vite/Rollup cannot statically resolve a full URL, so this stays out of the bundle
-  // SECURITY: SRI (Subresource Integrity) cannot be applied to dynamic import() — this is
-  // a known browser limitation. WASM and worker files are already vendored locally (see
-  // LOCAL_BASE). TODO: Vendor the ESM loader locally as well to eliminate this CDN dependency.
-  const moduleUrl = `https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm`;
-  return import(/* @vite-ignore */ moduleUrl);
+async function loadDuckDBModule(): Promise<any> {
+  return import('@duckdb/duckdb-wasm');
 }
 
 // ── Singleton ──────────────────────────────────────────────────────────
@@ -105,13 +106,10 @@ let singletonPromise: Promise<DuckDBInstance> | null = null;
 let singletonInstance: DuckDBInstance | null = null;
 
 async function initDuckDB(): Promise<DuckDBInstance> {
-  // Dynamic import from CDN — completely decoupled from the build bundle.
-  // We load the UMD build from jsDelivr so @duckdb/duckdb-wasm is NOT a build dependency.
-  const scriptUrl = `${JSDELIVR_BASE}/duckdb-browser.cjs`;
-  const duckdb = await loadDuckDBFromCDN(scriptUrl);
+  const duckdb = await loadDuckDBModule();
 
   // Use vendored local bundles (eliminates CDN supply chain risk)
-  // Files served from public/duckdb/ → /duckdb/ at runtime
+  // Files served from src/site/duckdb/ → /duckdb/ at runtime
   const DUCKDB_BUNDLES = {
     mvp: {
       mainModule: `${LOCAL_BASE}/duckdb-mvp.wasm`,
@@ -142,11 +140,20 @@ async function initDuckDB(): Promise<DuckDBInstance> {
   for (const dataset of PARQUET_DATASETS) {
     const url = `${ALLOWED_PARQUET_PREFIX}${dataset}.parquet`;
     try {
+      // DuckDB-WASM's virtual filesystem treats a bare path like this as a
+      // local file lookup, not an HTTP fetch, unless the URL is registered
+      // first. Register the relative path as a virtual name pointing at the
+      // real absolute same-origin URL, then reference that same name below.
+      const absoluteUrl = new URL(url, window.location.origin).toString();
+      await db.registerFileURL(url, absoluteUrl, duckdb.DuckDBDataProtocol.HTTP, false);
       await conn.query(
         `CREATE OR REPLACE VIEW "${dataset}" AS SELECT * FROM read_parquet('${url}')`
       );
-    } catch {
-      // Some datasets may not exist — skip silently
+    } catch (err) {
+      // Some datasets may legitimately not exist yet — degrade gracefully,
+      // but still surface it so a real regression (e.g. a broken path) is
+      // visible in devtools instead of silently making the view disappear.
+      console.warn(`[useDuckDB] Failed to register view "${dataset}":`, err);
     }
   }
 
