@@ -505,7 +505,7 @@ Visualizations that exist on the site and can be referenced/embedded in the whit
 | `governance/NEUROETHICS_LEGISLATION_SURVEY.md` | — | Global regulatory landscape |
 | `governance/POST_DEPLOYMENT_ETHICS.md` | — | Post-deployment monitoring |
 | `governance/ACCESSIBILITY.md` | — | Inclusive design requirements |
-| `IR Playbooks/Drafts/QIF-IR-Framework-Draft-2026-07-25.md` | 193 | Incident Response framework draft — OS update/fallback/recovery RACI (Part VI), Kernel Core Responsibility RACI (Part VII) |
+| `IR Playbooks/Drafts/QIF-IR-Framework-Draft-2026-07-25.md` | 157 | Incident Response framework draft — OS update/fallback/recovery RACI (Part VI), Kernel Core Responsibility RACI (Part VII) |
 
 > **⚠️ Caution — working draft.** The IR Playbooks entry above is an in-progress working copy, not a finished or reviewed document — proposed and unvalidated, consistent with QIF's overall status, not adopted by any standards body. For the canonical, published whitepaper, see **https://qinnovate.com/research/whitepaper/**.
 

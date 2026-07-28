@@ -155,38 +155,3 @@ QIF-T0163 is the only one of the four that trips PINS (Potential Impact to Neura
 **Independent verification:** `recalculate-niss.py` — the canonical, live scoring script — reported **"Changed: 0"** against these hand-computed vectors once merged. That's the by-hand math confirmed correct by the actual implementation, not just self-consistent.
 
 **On niss.severity vs. top-level severity:** all four land on `niss.severity: low` despite higher drafted top-level `severity`. Checked against five real calibration entries and confirmed this is consistent house style (QIF-T0001, T0029, T0043, T0046 all show the same pattern) — top-level severity reflects broader engineering/safety judgment; `niss.score` is deliberately scoped to biological/cognitive impact only. Not an inconsistency to fix.
-
----
-
-## The `populate-tara.py` Incident (2026-07-26) — Full Account
-
-Worth keeping in this draft as a standing caution, since it's exactly the kind of mistake a future "just run the documented workflow" attempt would repeat.
-
-1. **What happened.** `tara-threat/README.md` documented a workflow — edit `config.py`, run `populate-tara.py`, run `recalculate-niss.py` — that turned out to be stale. `qif-lab/` (where `config.py` lives) is archived under `_archive/`; the real generation scripts don't reference it. `populate-tara.py`'s own `REGISTRY_PATH` was additionally broken (pointed at a `datalake/shared/` directory that doesn't exist).
-2. **The fix that wasn't enough.** Fixing the path alone made the script *runnable* but not *safe*. Its internal hardcoded reference dict only covered 71 of the then-161 techniques and predated the richer governance/engineering/dsm5 schema. Running it regressed those 71 techniques' enrichment data — confirmed via `git diff --stat`: **-4,623 / +53 lines** on a run that touched no new content at all.
-3. **Immediate recovery.** `git checkout -- datalake/qtara-registrar.json` fully reverted the file (nothing was staged or committed at the time). Spot-checked afterward to confirm the rich multi-field `.tara` blocks were intact, not just the raw byte count.
-4. **Root-caused, not just patched.** Traced the real pipeline: `enrich-skeletons.py`, `enrich-regulatory.py`, `enrich-neurorights.py` are the actual current enrichment scripts, all correctly pathed, none touched by the incident. `populate-tara.py` was an obsolete first-generation script that should never have been run against the current catalog state. Its docstring now carries an explicit DEPRECATED / DO NOT RUN warning explaining exactly why, and `tara-threat/README.md`'s workflow section was corrected (original kept in a collapsed `<details>` block for history, not deleted).
-5. **Separately found and fixed while auditing "will this break anything":** an unrelated, pre-existing `git stash` conflict in `src/data/external-news-cache.json` (invalid JSON, 12 conflict-marker lines) — a disposable news cache, resolved by keeping the newer/fuller snapshot and discarding the stale stashed side.
-6. **The actual safe procedure for adding new techniques**, verified end-to-end and used for the QIF-T0162–T0165 merge above: hand-author the full technique object (there's no template-based shortcut — both deprecated and current scripts turned out to require hand-authored content, just in different files) directly in `datalake/qtara-registrar.json`, then run `recalculate-niss.py` → `backfill-taxonomy.py --dry-run` → `backfill-taxonomy.py` → `npm run health`.
-
----
-
-## Site / Documentation Propagation (2026-07-26)
-
-Registry grew 161 → 165 techniques. `npm run health` flagged every place the old count was hardcoded; fixed the ones that are clearly current-state, operationally-live references (not historical narrative):
-
-- **Updated:** root `README.md`, `osi-of-mind/README.md`, `osi-of-mind/tara-threat/README.md`, `datalake/QIF-DATA-MAPPING.md`, `src/data/convergence-data.ts`.
-- **Deliberately left alone:** `osi-of-mind/whitepapers/QIF-WHITEPAPER.md` and `QIF-WHITEPAPER-V8-DRAFT.md` — these mix current-state and historical-narrative references to "161" in the same document, *and* already carry other pre-existing stale numbers in the same sentences (e.g., "11 tactics across 7 domains" vs. the real 16/8) — a partial count fix would leave them more internally inconsistent, not less. Needs an editorial pass, not a find-replace. Also left alone: one dated changelog row in `QIF-TRUTH.md` correctly describing the registry's state on 2026-03-15 (historical fact, not a stale current-state claim).
-- **Site build:** ran `npm run prebuild` to regenerate `src/site/data/*` (including the copied registrar, KQL tables, and parquet catalog) so the published site reflects the new techniques and the resolved staleness warnings from `npm run health`.
-
-**Final verification:** `npm run health` — 10 checks passed, 0 failures, both times (before and after the site prebuild).
-
----
-
-## Open Items Carried Forward
-
-1. Two whitepaper drafts (`QIF-WHITEPAPER.md`, `QIF-WHITEPAPER-V8-DRAFT.md`) need an editorial pass to reconcile technique/tactic/domain counts throughout — not just the "161" occurrences, but the pre-existing "11 tactics / 7 domains" figures that don't match the real 16/8.
-2. Corresponding edit to `NEUROSECURITY_POLICY_PROPOSAL.md` §5.1 to reflect the OLIR-over-Community-Profile correction from VI.5 — not yet made.
-3. `tara-threat/README.md`'s corrected As-Code workflow is a documented known-safe state, not a properly designed process — flagged in the doc itself as needing an owner-authored rewrite.
-4. Pre-existing, unrelated to this work: four already-staged-but-uncommitted changes in the repo index (`datalake/parquet/catalog.json`, `datalake/parquet/intel_feed.parquet`, `governance/DECISION-LOG.md`, `governance/TRANSPARENCY.md`) and one untracked backup file (`datalake/bci-landscape.json.bak.2026-04-29`) — noted for awareness, not touched.
-5. Nothing in this entire body of work has been committed to git. That remains an explicit, separate decision.
