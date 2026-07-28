@@ -104,7 +104,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 
 | Component | Description | Status |
 |-----------|-------------|--------|
-| **[QIF](https://qinnovate.com/framework/)** | 11-band hourglass security architecture for BCIs | Proposed, v6.3 ([v8.0 draft](osi-of-mind/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md)) |
+| **[QIF](https://qinnovate.com/framework/)** | 11-band hourglass security architecture for BCIs | Proposed, v6.3 ([v8.0](osi-of-mind/whitepapers/QIF-WHITEPAPER-V8.md)) |
 | **[TARA](https://qinnovate.com/atlas/tara/)** | 165 BCI technique pairs, STIX 2.1 registry | v1.7 |
 | **[qtara](https://pypi.org/project/qtara/)** | Python SDK for TARA registry management and STIX export | v0.2.0 |
 | **[NSP](https://qinnovate.com/tools/nsp/)** | Post-quantum wire protocol for BCI data links | In development, v0.5 |

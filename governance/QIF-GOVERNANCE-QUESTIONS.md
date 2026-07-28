@@ -5,7 +5,7 @@
 **Author:** Kevin Qi
 **Date:** 2026-03-11
 **Status:** Active Draft
-**Companion to:** QIF-WHITEPAPER-V8-DRAFT.md, QIF-NEUROETHICS.md, NEUROSECURITY_GOVERNANCE.md
+**Companion to:** QIF-WHITEPAPER-V8.md, QIF-NEUROETHICS.md, NEUROSECURITY_GOVERNANCE.md
 
 ---
 
@@ -536,7 +536,7 @@ These are tensions that the literature has identified but not resolved. QIF does
 
 ### Q-SEC-2: How does passwordless auth work in practice?
 
-See QIF-WHITEPAPER-V8-DRAFT.md Section 15. PQKC + Biomarker MFA + Capability-based access. The key insight: the patient does not authenticate — the device authenticates to the gateway, and the patient is continuously verified via biomarkers.
+See QIF-WHITEPAPER-V8.md Section 15. PQKC + Biomarker MFA + Capability-based access. The key insight: the patient does not authenticate — the device authenticates to the gateway, and the patient is continuously verified via biomarkers.
 
 ### Q-SEC-3: What is the attack surface of interoperable neural hardware?
 

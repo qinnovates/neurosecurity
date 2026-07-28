@@ -270,7 +270,7 @@ function checkCountConsistency() {
   // Check additional files for stale technique counts
   const additionalFiles = [
     'osi-of-mind/whitepapers/QIF-TRUTH.md',
-    'osi-of-mind/whitepapers/QIF-WHITEPAPER-V8-DRAFT.md',
+    'osi-of-mind/whitepapers/QIF-WHITEPAPER-V8.md',
     'osi-of-mind/whitepapers/QIF-WHITEPAPER.md',
     'osi-of-mind/tara-threat/README.md',
     'osi-of-mind/README.md',

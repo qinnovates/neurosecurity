@@ -9,7 +9,7 @@ title: "AI Ethics: Principles, Frameworks, and the Governance of Artificial Inte
 **Author:** Kevin Qi
 **Date:** 2026-03-11
 **Status:** Living Document
-**Companion to:** QIF-WHITEPAPER-V8-DRAFT.md, QIF-GOVERNANCE-QUESTIONS.md, QIF-NEUROETHICS.md
+**Companion to:** QIF-WHITEPAPER-V8.md, QIF-GOVERNANCE-QUESTIONS.md, QIF-NEUROETHICS.md
 **See also:** [AI-ETHICS-PROPOSAL.md](AI-ETHICS-PROPOSAL.md) — operational AI conduct principles that govern how AI systems behave within this project
 
 ---
@@ -383,7 +383,7 @@ Three causes: (1) **Knowledge gaps** — correct answer absent in training data,
 
 **Mitigations:** RAG (grounding in retrieved documents), chain-of-thought prompting, Constitutional AI (self-critique against principles), calibration training.
 
-**BCI relevance:** A neural device that provides incorrect stimulation parameters because an AI was "confident" is not a software bug — it is malpractice. The system must say "I don't know" when it does not know. See Design Principle #9 in QIF-WHITEPAPER-V8-DRAFT.md.
+**BCI relevance:** A neural device that provides incorrect stimulation parameters because an AI was "confident" is not a software bug — it is malpractice. The system must say "I don't know" when it does not know. See Design Principle #9 in QIF-WHITEPAPER-V8.md.
 
 ### 5. The Black Box Problem
 
