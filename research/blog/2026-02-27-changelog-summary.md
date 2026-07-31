@@ -23,7 +23,7 @@ fact_check_notes: []
 - **NISS page: add Source & Derivation section with repo links** ([652a995](https://github.com/qinnovates/neurosecurity/commit/652a995))
   log (entries 43, 80, 81), NS derivation log (entries 3-9), preprint,
 - **Timeline: NISS v1.1, preprint v1.5, CVSS SIG milestones** ([0762890](https://github.com/qinnovates/neurosecurity/commit/0762890))
-  Zenodo preprint v1.5, NISS accepted for FIRST.org CVSS Resources repo,
+  Zenodo preprint v1.5, NISS proposed to FIRST.org CVSS Resources repo (registration deferred pending independent review),
 - **Nav tools dropdown, tools page, news cache refresh** ([6d5de1f](https://github.com/qinnovates/neurosecurity/commit/6d5de1f))
   directly to /tools/ with Neurowall anchor. Refresh external news cache.
 

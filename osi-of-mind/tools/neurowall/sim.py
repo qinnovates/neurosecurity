@@ -128,18 +128,15 @@ class PrivacyBudget:
         epsilon_total = rho_total + 2*sqrt(rho_total * ln(1/delta))
     """
     total_rho: float = 0.0
+    total_epsilon_naive: float = 0.0
     queries: int = 0
     delta: float = 1e-6  # Target delta for conversion to (eps, delta)-DP
 
     def consume(self, epsilon: float):
         """Record one Laplace mechanism query at the given epsilon."""
-        rho = (epsilon ** 2) / 2.0  # Laplace mechanism: rho = eps^2 / 2
-        # Correction: for Laplace with sensitivity 1 and parameter epsilon,
-        # the zCDP cost is actually 1/(2*epsilon^2) per query.
-        # But under pure-DP composition, each query costs epsilon.
-        # We use advanced composition (zCDP) for tighter bounds.
-        rho = 1.0 / (2.0 * epsilon * epsilon)
+        rho = (epsilon ** 2) / 2.0  # Laplace mechanism (Bun & Steinke 2016): rho = eps^2 / 2
         self.total_rho += rho
+        self.total_epsilon_naive += epsilon  # naive sequential composition: eps_total = sum(eps_i)
         self.queries += 1
 
     @property
@@ -153,11 +150,8 @@ class PrivacyBudget:
 
     @property
     def naive_epsilon(self) -> float:
-        """What basic sequential composition would give (for comparison)."""
-        # We don't track per-query epsilons, but we can estimate from rho.
-        # Each query with eps=0.5 costs rho=2.0, with eps=0.1 costs rho=50.
-        # This is just for display; the real bound is effective_epsilon.
-        return self.effective_epsilon  # Show the tighter zCDP bound
+        """What basic (non-advanced) sequential composition would give: sum of per-query epsilons."""
+        return self.total_epsilon_naive
 
 
 def apply_local_dp(

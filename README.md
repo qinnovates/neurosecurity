@@ -189,7 +189,7 @@ An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spina
 
 ### TARA
 
-165 techniques spanning 8 domains and 17 tactics. Each technique scored with CVSS v4.0 base vectors + proposed NISS extension metrics. MITRE-compatible IDs.
+165 techniques spanning 8 domains and 17 tactics. 103/165 carry CVSS v4.0 base vectors; 139/165 carry proposed NISS extension metrics (coverage expanding). MITRE-compatible IDs.
 
 [Legacy: Requires further updates and refining]
 - **Atlas:** [qinnovate.com/atlas/tara](https://qinnovate.com/atlas/tara/)
