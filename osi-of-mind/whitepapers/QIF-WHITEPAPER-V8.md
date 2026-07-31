@@ -6,7 +6,7 @@
 > — Kevin Qi
 
 **Version:** 8.0
-**Date:** 2026-07-27
+**Date:** 2026-07-27 (core v8.0 content — Sections 12–18.4 — dated 2026-03-11; Sections 18.5–18.6, IR Playbook v1, added 2026-07-25 and merged 2026-07-27; see Appendix D)
 **Author:** Kevin Qi
 **Predecessor:** QIF Whitepaper v6.3.0
 **Status:** Proposed framework — unvalidated, not adopted by any standards body (see Claims and Disclaimers below)
@@ -44,7 +44,7 @@ The concepts here span neuroscience, security architecture, ethics, law, and cli
 2. **NISS does not measure cognitive harm.** NISS scores physical signal-level disruption corresponding to specific attack techniques. It does not diagnose psychiatric conditions, predict clinical outcomes, or quantify "thought harm." DSM-5-TR category mappings are included for threat modeling purposes only — they are diagnostic category references, not diagnostic claims.
 3. **TARA is a defensive catalog.** The threat taxonomy exists to inform defense architecture, not to enable attacks. Every technique is paired with governance constraints and defensive controls. Offensive use is explicitly out of scope.
 4. **This paper does not read minds.** Current BCI technology cannot "read thoughts" in any general sense. Decoded outputs are selected from constrained vocabularies, require user cooperation, and depend on individually trained algorithms. Claims about BCI capabilities in this paper reflect published, peer-reviewed research and distinguish between current capabilities and projected future capabilities.
-5. **AI-derived content is flagged.** Portions of this paper were drafted with AI assistance (Claude). All technical claims have been reviewed by the author. AI-generated citations were independently verified through Crossref, publisher pages, or institutional records. The preprint history includes a correction for 3 fabricated citations in v1.0 that were AI-generated and not caught before publication. Full AI disclosure is in Section 9.7.
+5. **AI-derived content is flagged.** Portions of this paper were drafted with AI assistance (Claude). All technical claims have been reviewed by the author. AI-generated citations were independently verified through Crossref, publisher pages, or institutional records. The preprint history includes a correction for 3 fabricated citations in v1.0 that were AI-generated and not caught before publication. Full AI disclosure is in Section 9.7 of `QIF-WHITEPAPER.md` v6.3.
 6. **Engineering benchmarks are unverified.** Any quantitative claims about NSP compression ratios, power overhead, latency, or throughput are AI-derived estimates, not empirical measurements. They require independent engineering validation before informing design decisions.
 
 ### Epistemic Framework
@@ -65,7 +65,7 @@ Where a claim's classification is not obvious from context, it is flagged inline
 
 ## The Proposal
 
-Every transformative technology gets one chance to build its foundation right. The internet did not take that chance. TCP/IP shipped without authentication. HTTP shipped without encryption. DNS shipped without integrity verification. We spent the next four decades bolting on security after the fact — TLS, DNSSEC, OAuth, zero-trust architectures — each one a patch on a foundation that was never designed to be secure. The cost: trillions of dollars, billions of compromised records, and an entire industry dedicated to fixing what should have been built correctly from the start.
+Every transformative technology gets one chance to build its foundation right. The internet did not take that chance. TCP/IP shipped without authentication. HTTP shipped without encryption. DNS shipped without integrity verification. We spent the next four decades bolting on security after the fact — TLS, DNSSEC, OAuth, zero-trust architectures — each one a patch on a foundation that was never designed to be secure. The cost has been enormous — a global industry built substantially to compensate for a foundation that shipped without security in the first place.
 
 Brain-computer interfaces are at that same inflection point. The first cortical implants are in human skulls. The first commercial devices are shipping. And the security architecture is, once again, an afterthought. The difference this time is that the attack surface is not a credit card number or a social security record. It is the human nervous system. There are no rollbacks for neural tissue damage. There is no "change your password" for a compromised sensory cortex.
 
@@ -115,11 +115,11 @@ Add encryption, and key management becomes the target. Add authentication, and t
 
 This paradox is inescapable, and anyone who tells you otherwise is selling something. The internet's history is a four-decade case study: SSL was introduced to protect HTTP, and then Heartbleed compromised the SSL implementation itself. Firewalls were introduced to segment networks, and then firewall misconfigurations became MITRE ATT&CK's initial access vector. Password managers were introduced to fix password reuse, and then LastPass was breached — exposing every password the user thought was safe.
 
-This is security through obscurity — the belief that piling on more material solves the problem. It is how armor was built before metallurgy. Ancient and medieval armorers stacked more iron plates, added more padding, bolted on more bulk. The soldier was safer, but slower, heavier, and eventually immobilized by the weight of their own protection. Then we learned to mix iron with carbon and got steel — stronger than iron at a fraction of the weight. Not more material, but the *right* material, engineered at the atomic level. Then Stephanie Kwolek at DuPont spun a liquid crystalline polymer solution into aramid fibers and got Kevlar (1965) — five times stronger than steel by weight, flexible enough to wear as fabric. The progression was not "add more." It was "understand the problem deeper and solve it with precision."
+This is defense by accumulation, not by design — the belief that piling on more material solves the problem. It is how armor was built before metallurgy. Ancient and medieval armorers stacked more iron plates, added more padding, bolted on more bulk. The soldier was safer, but slower, heavier, and eventually immobilized by the weight of their own protection. Then we learned to mix iron with carbon and got steel — stronger than iron at a fraction of the weight. Not more material, but the *right* material, engineered at the atomic level. Then Stephanie Kwolek at DuPont spun a liquid crystalline polymer solution into aramid fibers and got Kevlar (1965) — five times stronger than steel by weight, flexible enough to wear as fabric. The progression was not "add more." It was "understand the problem deeper and solve it with precision."
 
 And then we moved beyond carbon entirely. Kevlar is not steel refined further — it is a synthetic polymer, a fundamentally different material class that solved the same problem (stopping a projectile) through a completely different mechanism (energy absorption across woven aramid fibers instead of rigid deflection). The leap from steel to Kevlar was not incremental improvement. It was rethinking the problem from the molecular level up.
 
-The same concept applies here. We are not trying to fabricate steel from iron ore — we are not trying to bolt better security onto architectures designed for screens and keyboards. We are proposing a metaphorical polymer: a fundamentally different material for a fundamentally different problem. AI can be that synthetic polymer — providing the guardrails that industry experts design, enforcing safety bounds with a precision and consistency that static rule sets cannot match, adapting to novel threat patterns in real time while maintaining the invariants that protect the patient.
+The same concept applies here. We are not trying to fabricate steel from iron ore — we are not trying to bolt better security onto architectures designed for screens and keyboards. We are proposing a metaphorical polymer: a fundamentally different material for a fundamentally different problem. AI can be that synthetic polymer — providing the guardrails that industry experts design, adapting to novel threat patterns in real time while maintaining the invariants that protect the patient. Whether it does this with more precision or consistency than static rule sets is not assumed here; it is a claim requiring independent verification, per Design Principle #9 (AI honesty, not AI obscurity) and the guardrail model in Section 14.4.
 
 But the biggest challenge is not building the polymer. It is ensuring the patient remains in full control and that **drift does not occur.**
 
@@ -144,7 +144,7 @@ Think of the stubborn eyelash — half fallen off, half poking at your eyeball. 
 
 Security works the same way. The instinct is to throw another layer at the problem — another firewall rule, another authentication check, another middleware service. But each layer is a finger poking at the eye. The architecture proposed in this paper does not stack defenses for the sake of stacking them. It selects the minimum set of precise tools, each purpose-built for its layer, each doing one thing and doing it without creating the next vulnerability.
 
-This paper names the remaining risks explicitly (see Section 6: Attack Surface Analysis, 165 techniques cataloged). The defense paradox does not invalidate the architecture. It disciplines it. If you cannot eliminate a layer, you minimize its privilege, audit its behavior, and design it so that its failure does not cascade into the layers below it. Defense in depth is not about stacking walls. It is about ensuring that when one wall falls — and it will — the next wall does not depend on the one that broke.
+This paper names the remaining risks explicitly (see Section 6: Attack Surface Analysis in `QIF-WHITEPAPER.md` v6.3, 165 techniques cataloged). The defense paradox does not invalidate the architecture. It disciplines it. If you cannot eliminate a layer, you minimize its privilege, audit its behavior, and design it so that its failure does not cascade into the layers below it. Defense in depth is not about stacking walls. It is about ensuring that when one wall falls — and it will — the next wall does not depend on the one that broke.
 
 ### Design Principles
 
@@ -221,6 +221,8 @@ New sections (12-18) address: patient sovereignty, the neural terminal, autonomy
   - [AI Ethics: The Regulatory Landscape](#ai-ethics-the-regulatory-landscape) — NIST AI RMF, UNESCO, OECD, EU AI Act, and why policy must become architecture
 
 ### Existing Sections (from v6.3, updated)
+
+> **Note:** Sections 1–11 below are carried forward from the predecessor document `QIF-WHITEPAPER.md` (v6.3) and are not reproduced in this file. This TOC entry describes their content and anchors for continuity; see `QIF-WHITEPAPER.md` for the actual text. Only Sections 6.8, 6.9, and 12–19 exist in this v8.0 document.
 
 - [The Three Pillars](#the-three-pillars-of-qinnovate)
 - [1. Abstract](#1-abstract)
@@ -314,6 +316,7 @@ New sections (12-18) address: patient sovereignty, the neural terminal, autonomy
 - [A. Visualization Index](#appendix-a-visualization-index)
 - [B. Data Assets](#appendix-b-data-assets)
 - [C. Companion Documents](#appendix-c-companion-documents)
+- [D. Version History (v7.0 → v8.0)](#appendix-d-version-history-v70--v80)
 
 ---
 
@@ -444,13 +447,13 @@ Governance: RACI Matrix — WHO DECIDES                        ← NEW in v8.0
 
 | Data File | Contents | Whitepaper Section |
 |-----------|---------|-------------------|
-| `shared/qtara/tara_data.json` | 165 techniques, full registry | Section 6.3-6.7 |
-| `shared/dsm5_niss_mappings.json` | DSM-5-TR → NISS mappings | Section 6.6 |
-| `shared/niss_severity_data.json` | NISS scoring data | Section 6.5 |
+| `datalake/qtara-registrar.json` | 165 techniques, full registry | Section 6.3-6.7 |
+| `datalake/qif-dsm-mappings.json` | DSM-5-TR → NISS mappings | Section 6.6 |
+| `datalake/qtara-registrar.json` (`.niss` field per technique) | NISS scoring data | Section 6.5 |
 | `src/data/qif-timeline.json` | Framework milestone timeline | All sections |
 | `src/data/automation-registry.json` | CI/CD and automation inventory | Appendix B |
-| `shared/research-registry.json` | Research citation registry | Section 11 |
-| `shared/qif-guardrails.json` | Guardrails data (source of truth) | Section 14 |
+| `datalake/research-registry.json` | Research citation registry | Section 11 |
+| `datalake/qif-guardrails.json` | Guardrails data (source of truth) | Section 14 |
 
 ---
 
@@ -461,7 +464,7 @@ Visualizations that exist on the site and can be referenced/embedded in the whit
 | Visualization | Location | Shows |
 |--------------|----------|-------|
 | 3D Hourglass | `/` hero section, `/vision/` | 11-band architecture, band widths, I0 bottleneck |
-| Brain Atlas | `/vision/` BCI section | 8 neural bands mapped to brain anatomy, technique counts per region |
+| Brain Atlas | `/vision/` BCI section | 7 neural bands (N7–N1) mapped to brain anatomy, technique counts per region |
 | TARA Technique Browser | `/threat-models/tara/` | Searchable/filterable 165-technique registry |
 | Neural Impact Chain | `/threat-models/analysis/` | DAG showing attack propagation through bands |
 | NISS Scoring | `/threat-models/scoring/` | Severity scoring breakdown |
@@ -478,13 +481,13 @@ Visualizations that exist on the site and can be referenced/embedded in the whit
 
 | Asset | Format | Records | Location |
 |-------|--------|---------|----------|
-| TARA Registry | JSON | 165 techniques | `shared/qtara/tara_data.json` |
-| DSM-5-TR Mappings | JSON | 45 diagnoses mapped | `shared/dsm5_niss_mappings.json` |
-| NISS Scores | JSON | 109 severity records | `shared/niss_severity_data.json` |
-| Research Registry | JSON | 100+ sources | `shared/research-registry.json` |
-| Guardrails | JSON | 8 guardrails | `shared/qif-guardrails.json` |
+| TARA Registry | JSON | 165 techniques | `datalake/qtara-registrar.json` |
+| DSM-5-TR Mappings | JSON | 45 diagnoses mapped | `datalake/qif-dsm-mappings.json` |
+| NISS Scores | JSON | 139 severity records | `datalake/qtara-registrar.json` (`.niss` field per technique) |
+| Research Registry | JSON | 97 entities | `datalake/research-registry.json` |
+| Guardrails | JSON | 8 guardrails | `datalake/qif-guardrails.json` |
 | QIF Timeline | JSON | 50+ milestones | `src/data/qif-timeline.json` |
-| BCI Devices | JSON | 12+ devices profiled | `src/data/bci-devices.json` (if exists) |
+| BCI Landscape | JSON | 67 companies profiled | `datalake/bci-landscape.json` |
 | Automation Registry | JSON | 20+ automations | `src/data/automation-registry.json` |
 
 ## Appendix C: Companion Documents
@@ -572,7 +575,7 @@ The terminal provides primitives — commands, pipes, scripts — and lets the p
 
 This is not a design limitation. It is a design principle. The terminal does not force someone new to the system to learn a prescribed way of navigating. Instead, it adapts — autodidactically — to how the user thinks and moves. The user teaches the system, not the other way around.
 
-The same philosophy made Linux the foundation of every server, every supercomputer, and every Android phone: give people the tools, and they build what they need.
+The same philosophy made Linux the foundation of nearly every web server, all 500 of the TOP500 supercomputers, and the kernel underlying most of the world's smartphones (Android): give people the tools, and they build what they need.
 
 ---
 
@@ -859,7 +862,7 @@ Runemate is the userspace layer of a proposed neural operating system. The archi
 
 A reasonable objection: does adding a CLI to a neural device introduce new attack surface?
 
-No. The CLI does not expand the attack surface beyond what already exists.
+Not in any material way. The CLI does not expand the attack surface beyond what already exists.
 
 Runemate already executes bytecode — the Scribe interpreter processes arbitrary compiled content on-device. The execution surface already exists. A CLI is a structured, capability-gated interface to that same execution engine. It is a *subset* of what the interpreter can do, constrained by explicit capability tokens.
 
@@ -1242,7 +1245,7 @@ NP values (expanded from 3 to 4 levels in v1.1.1):
 
 The original 3-level scale (N/T/S) collapsed meaningfully different outcomes. The jump from T(5) to S(10) treated recoverable structural changes the same as permanent rewiring. The new P (Partial) level captures the clinical middle ground: chronic low-level neurofeedback drift, partial cortical map reorganization from sustained stimulation — scenarios where rehabilitation is possible but not guaranteed.
 
-Recalculating all 161 TARA techniques against the 4-level scale shifted 26 scores. Two techniques (motor hijacking, OTA firmware exploitation) dropped from high to medium severity — the finer NP granularity revealed their plasticity impact was partial, not structural. Final severity distribution: 19 high, 37 medium, 52 low, 1 none.
+Recalculating the 139 NISS-scored TARA techniques against the 4-level scale shifted 26 scores. Two techniques (motor hijacking, OTA firmware exploitation) dropped from high to medium severity — the finer NP granularity revealed their plasticity impact was partial, not structural. Final severity distribution: 20 high, 59 medium, 59 low, 1 none (26 of the 165 total techniques do not yet carry NISS scores).
 
 **NP weight is 1.0** — equal to Biological Impact and Reversibility — because structural neuroplasticity represents a category of harm that no other metric captures: the attack persists in the victim's biology after the device is removed.
 
@@ -1290,7 +1293,7 @@ The invitation itself is validation that the problem NISS addresses is recognize
 
 The academic preprint of this framework is published on Zenodo (DOI: [10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105), v1.4 as of February 2026, CC-BY 4.0). arXiv submission is pending endorsement.
 
-The preprint history includes a transparency note: v1.0 shipped with 3 fabricated citations that were AI-generated and not caught before publication. These were corrected in v1.1 and the incident is disclosed in the paper's AI collaboration section. This is mentioned not as a disclaimer but as evidence that the verification protocol described in this paper (Section 9.7) exists because the author learned the hard way that AI-generated citations cannot be trusted without independent resolution.
+The preprint history includes a transparency note: v1.0 shipped with 3 fabricated citations that were AI-generated and not caught before publication. These were corrected in v1.1 and the incident is disclosed in the paper's AI collaboration section. This is mentioned not as a disclaimer but as evidence that the verification protocol described in this paper (Section 9.7 of `QIF-WHITEPAPER.md` v6.3) exists because the author learned the hard way that AI-generated citations cannot be trusted without independent resolution.
 
 ---
 
@@ -1343,9 +1346,9 @@ v8.0 stands on its own as this document — the items below are follow-on publis
 
 ---
 
-## Appendix C: Version History (v7.0 → v8.0)
+## Appendix D: Version History (v7.0 → v8.0)
 
-This appendix documents all major changes between v7.0 (February 21, 2026) and v8.0 (March 11, 2026). The derivation log entries referenced below are in `QIF-DERIVATION-LOG.md`.
+This appendix documents all major changes between v7.0 (February 21, 2026) and v8.0's initial structural expansion (March 11, 2026). It does not cover the later addition of Sections 18.5–18.6 (IR Playbook v1), added 2026-07-25 and merged 2026-07-27 without a version bump — see the note under Section 18.5. The derivation log entries referenced below are in `QIF-DERIVATION-LOG.md`.
 
 ### v7.0 → v7.1 (February 21–26)
 
@@ -1426,7 +1429,7 @@ This appendix documents all major changes between v7.0 (February 21, 2026) and v
 - Restructured navigation (renamed Governance group to Neuroethics, reordered pages). Added ethics disclaimers, consent gates for experimental features, and security hardening across the site.
 
 **Hodak Clinical Validation**
-- Max Hodak (Neuralink co-founder, Science Corp CEO) published findings aligning with TARA's neurotransmitter-to-clinical-outcome mappings, providing independent clinical validation of the framework's threat-to-impact chain. Documented as a case study.
+- Max Hodak (Neuralink co-founder, Science Corp CEO) published findings that align with TARA's neurotransmitter-to-clinical-outcome mappings — convergent external work, not independent validation of the framework itself (QIF has not undergone independent peer review; see Claims and Disclaimers). Documented as a case study.
 
 **Neurological Mapping Expansion**
 - Added molecular-level drill-down capability: neurotransmitter → synthesis pathway → cofactors → receptors → molecular dependencies. Clinical users can trace from dopamine depletion through phenylalanine hydroxylase to iron and BH4 cofactor requirements.
