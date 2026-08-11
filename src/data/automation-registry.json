@@ -1,7 +1,7 @@
 {
   "$schema": "automation-registry",
   "description": "Central registry of all automation, workflows, triggers, and scheduled tasks in the qinnovate project.",
-  "last_updated": "2026-08-10T01:15:40.017Z",
+  "last_updated": "2026-08-11T01:14:04.372Z",
   "entries": [
     {
       "id": "gh-deploy",
@@ -73,7 +73,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-news.yml",
       "status": "active",
-      "last_triggered": "2026-08-09T17:19:31Z",
+      "last_triggered": "2026-08-10T17:41:19Z",
       "last_status": "failure",
       "dependencies": [
         "scripts/fetch-news.mjs"
@@ -580,7 +580,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-registry.yml",
       "status": "active",
-      "last_triggered": "2026-08-10T01:15:22Z",
+      "last_triggered": "2026-08-11T01:13:48Z",
       "last_status": "unknown",
       "dependencies": [
         "scripts/update-automation-registry.mjs",
