@@ -1,0 +1,88 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import registry from '@shared/qtara-registrar.json';
+
+const techniques = (registry as any).techniques ?? [];
+const totalThreats = techniques.length;
+const dsm5Count = techniques.filter((t: any) => t?.tara?.dsm5?.primary?.length > 0).length;
+const neurorightsSet = new Set<string>(['EA']);
+techniques.forEach((t: any) => (t?.neurorights?.affected ?? []).forEach((r: string) => neurorightsSet.add(r)));
+const neurorightsCount = neurorightsSet.size;
+---
+
+<PageLayout
+  title="About & Transparency — Qinnovate"
+  description="Who is behind Qinnovate, the current stage of this research, and how to collaborate."
+  breadcrumbs={[{ label: 'About' }]}
+>
+  <div class="max-w-3xl mx-auto">
+    <div class="mb-16">
+      <p class="text-xs font-mono tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-6">About</p>
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-8" style="font-family: var(--font-heading);">
+        About & Transparency
+      </h1>
+      <p class="text-lg text-[var(--color-text-muted)] leading-relaxed">
+        Qinnovate's research pages (TARA, QIF, NISS, governance) are written institutionally. This page is different on purpose: it's where the person behind the work, the origin story, and the current stage of the project live.
+      </p>
+    </div>
+
+    <!-- The Origin -->
+    <section class="mb-16">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-4">The Origin</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8">How a security engineer found a neuroscience problem</h2>
+      <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed">
+        <p>
+          I was studying a diagram of the thalamus — the brain's sensory relay — when I recognized the architecture. Every signal entering the cortex passes through this one structure. Compromise it, and you control what a person perceives. I had built that exact chokepoint in network security: <strong class="text-[var(--color-text-primary)]">a SIEM correlation engine. All signals in, one classification out.</strong> That was not a metaphor. That was a shared architecture with no security framework on the biological side.
+        </p>
+        <p>
+          Months of personal experience with neurological disruption — COVID compounding PTSD — had already shown me what those failure modes look like from the inside. <strong class="text-[var(--color-text-primary)]">If biology can produce these outcomes without a device, what happens when we connect programmable hardware to the same pathways?</strong>
+        </p>
+        <p>
+          So I built TARA: I catalogued every known way to attack a brain-computer interface, scored each one for neural impact, traced the affected brain regions to psychiatric outcomes, and mapped the neurorights each technique could violate. <strong class="text-[var(--color-text-primary)]">{totalThreats} techniques. {dsm5Count} diagnostic-category references. {neurorightsCount} neurorights operationalized.</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- Why Now -->
+    <section class="mb-16">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-emerald-400 mb-4">Why Now</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8">Before mass adoption, not after</h2>
+      <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed">
+        <p>
+          Neuralink has implanted chips in human patients. Synchron's Stentrode is in FDA trials. Consumer EEG headsets sit on store shelves. These devices are tested for safety and efficacy — but <strong class="text-[var(--color-text-primary)]">no public framework exists to audit what they can do to a mind.</strong>
+        </p>
+        <p>
+          This dual-use reality means BCI security is not an engineering problem. <strong class="text-[var(--color-text-primary)]">It is a patient rights problem.</strong> Every proposed neurorights framework — cognitive liberty, mental privacy, psychological continuity — can be violated through technical pathways that already exist. The question is whether we build governance before the harm, or after.
+        </p>
+        <p>
+          Right now, BCI governance is like writing fire codes without building fire hydrants or fire stations. The neuroethics community has defined the rights. Legislators are passing laws. But <strong class="text-[var(--color-text-primary)]">nobody has built the technical infrastructure to enforce any of it.</strong>
+        </p>
+        <p>
+          <strong class="text-[var(--color-text-primary)]">IEEE's own BMI standards roadmap identifies BCI-specific security standards as an open standardization gap.</strong> This catalog is an attempt to fill it. Open source. Open data. Ready for peer review.
+        </p>
+      </div>
+    </section>
+
+    <!-- The Researcher -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6">The Researcher</h2>
+      <div class="rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <h3 class="text-lg font-bold mb-1">Kevin L. Qi</h3>
+        <p class="text-xs text-[var(--color-text-faint)] mb-4">Founder &amp; Principal Researcher</p>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+          A decade of building detection infrastructure, incident response, and security operations — from QRadar to Splunk ES across financial services, publishing, and consumer tech. The same architecture that detects network intrusions applies at the boundary between silicon and neuron. This work asks: given what neuroethics and neurorights research tells us about the stakes, what are the security implications — and what do we build?
+        </p>
+        <a href="https://github.com/qinnovates" class="text-sm text-[var(--color-accent-primary)] hover:underline">GitHub &rarr;</a>
+      </div>
+      <p class="text-xs text-[var(--color-text-faint)] mt-4 text-center">
+        Qinnovate is currently a solo research effort. Collaboration inquiries welcome.
+      </p>
+    </section>
+
+    <!-- Links -->
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/mission/" class="px-6 py-3 rounded-xl text-sm font-medium transition-colors" style="background: var(--color-bg-secondary); border: 1px solid var(--color-border);">Read the Mission &rarr;</a>
+      <a href="/governance/" class="px-6 py-3 rounded-xl bg-[var(--color-accent-primary)] text-white text-sm font-medium hover:opacity-90 transition-opacity">Governance &amp; Ethics</a>
+    </div>
+  </div>
+</PageLayout>

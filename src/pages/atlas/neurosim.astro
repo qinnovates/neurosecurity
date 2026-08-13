@@ -1,5 +1,6 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
 import NeuroSIM from '@/components/neurosim/NeuroSIM';
 import neurosimRaw from '@shared/qif-neurosim.json';
 
@@ -12,6 +13,8 @@ const simData = neurosimRaw as any;
   breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'NeuroSIM' }]}
   wide={true}
 >
+  <AtlasViewSwitcher current="/atlas/neurosim/" />
+
   <!-- Hero -->
   <div class="mb-8">
     <p class="text-xs font-mono tracking-[0.15em] uppercase mb-3" style="color: #8b5cf6;">Neural Simulation</p>
