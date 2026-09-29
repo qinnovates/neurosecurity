@@ -59,6 +59,13 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v7
         with:
           script: |
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            // Issues are disabled on this repo; the issues API returns 410 and would mask the real failure.
+            const { data: repoInfo } = await github.rest.repos.get({ owner: context.repo.owner, repo: context.repo.repo });
+            if (!repoInfo.has_issues) {
+              core.warning(`Issues are disabled; not filing a failure issue. Failed run: ${runUrl}`);
+              return;
+            }
             const title = `Intel feed pipeline failed — ${new Date().toISOString().slice(0, 10)}`;
             const existing = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
