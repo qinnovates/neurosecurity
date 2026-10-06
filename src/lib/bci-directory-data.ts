@@ -14,55 +14,70 @@ const landscape = landscapeRaw as any;
 
 export interface BciDeviceCard {
   /** Device fields */
-  name: string;
-  type: 'invasive' | 'semi_invasive' | 'non_invasive';
-  channels: number | null;
-  electrode_type: string | null;
-  fda_status: string | null;
-  units_deployed: string | null;
-  first_human: string | null;
+  device_name: string;
+  device_type: 'invasive' | 'semi_invasive' | 'non_invasive';
+  channels: number;
+  electrode_type: string;
+  fda_status: string;
+  units_deployed: string;
+  first_human: string;
   price_usd: number | null;
-  target_use: string | null;
+  target_use: string;
   cves_known: string[];
 
   /** Parent company fields */
   company_name: string;
-  company_type: 'invasive' | 'semi_invasive' | 'non_invasive';
-  company_funding_usd: number | null;
+  company_type: string;
   company_status: string;
-  company_category: string | null;
+  company_category: string;
+  company_headquarters: string;
+  company_founded: string;
+  funding_total_usd: number | null;
   security_posture: string;
+  security_notes: string;
+  tara_attack_surface: string[];
+  attack_surface_count: number;
+}
+
+export interface BciCompanyDeviceSummary {
+  name: string;
+  type: string;
+  channels: number;
+  fda_status: string;
+  target_use: string;
 }
 
 export interface BciCompanyCard {
   name: string;
-  type: 'invasive' | 'semi_invasive' | 'non_invasive';
-  founded: string | null;
-  headquarters: string | null;
+  type: string;
+  founded: string;
+  headquarters: string;
   status: string;
+  category: string;
   funding_total_usd: number | null;
   valuation_usd: number | null;
   employees_approx: number | null;
   security_posture: string;
-  security_notes: string | null;
-  company_category: string | null;
+  security_notes: string;
   tara_attack_surface: string[];
+  attack_surface_count: number;
 
   /** Computed from devices */
   device_count: number;
   total_channels: number;
-  top_fda_status: string | null;
+  top_fda_status: string;
+  devices: BciCompanyDeviceSummary[];
 }
 
 export interface BciDirectoryStats {
-  total_companies: number;
-  total_devices: number;
-  by_type: Record<string, number>;
-  by_fda_status: Record<string, number>;
-  by_target_use: Record<string, number>;
-  by_security_posture: Record<string, number>;
-  by_company_category: Record<string, number>;
-  total_funding_usd: number;
+  totalCompanies: number;
+  totalDevices: number;
+  byType: Record<string, number>;
+  byFdaStatus: Record<string, number>;
+  byTargetUse: Record<string, number>;
+  bySecurityPosture: Record<string, number>;
+  byCompanyCategory: Record<string, number>;
+  totalFundingUsd: number;
 }
 
 // ═══ Constants ═══
@@ -141,25 +156,31 @@ export function getBciDirectoryDevices(): BciDeviceCard[] {
 
   for (const company of companies) {
     const companyDevices: any[] = company.devices ?? [];
+    const attackSurface: string[] = company.tara_attack_surface ?? [];
     for (const device of companyDevices) {
       devices.push({
-        name: device.name,
-        type: device.type ?? company.type,
-        channels: device.channels ?? null,
-        electrode_type: device.electrode_type ?? null,
-        fda_status: device.fda_status ?? null,
-        units_deployed: device.units_deployed ?? null,
-        first_human: device.first_human ?? null,
+        device_name: device.name,
+        device_type: device.type ?? company.type,
+        channels: typeof device.channels === 'number' ? device.channels : 0,
+        electrode_type: device.electrode_type ?? '',
+        fda_status: device.fda_status ?? '',
+        units_deployed: device.units_deployed ?? '',
+        first_human: device.first_human ?? '',
         price_usd: device.price_usd ?? null,
-        target_use: device.target_use ?? null,
+        target_use: device.target_use ?? '',
         cves_known: device.cves_known ?? [],
 
         company_name: company.name,
         company_type: company.type,
-        company_funding_usd: company.funding_total_usd ?? null,
         company_status: company.status ?? 'unknown',
-        company_category: company.company_category ?? null,
+        company_category: company.company_category ?? '',
+        company_headquarters: company.headquarters ?? '',
+        company_founded: company.founded ?? '',
+        funding_total_usd: company.funding_total_usd ?? null,
         security_posture: company.security_posture ?? 'none_published',
+        security_notes: company.security_notes ?? '',
+        tara_attack_surface: attackSurface,
+        attack_surface_count: attackSurface.length,
       });
     }
   }
@@ -182,32 +203,42 @@ export function getBciDirectoryCompanies(): BciCompanyCard[] {
     );
 
     // Pick the highest-ranked FDA status across all devices
-    let topFda: string | null = null;
+    let topFda = '';
     let topRank = -1;
     for (const d of devices) {
       const rank = rankFdaStatus(d.fda_status);
       if (rank > topRank) {
         topRank = rank;
-        topFda = d.fda_status ?? null;
+        topFda = d.fda_status ?? '';
       }
     }
+
+    const attackSurface: string[] = c.tara_attack_surface ?? [];
 
     return {
       name: c.name,
       type: c.type,
-      founded: c.founded ?? null,
-      headquarters: c.headquarters ?? null,
+      founded: c.founded ?? '',
+      headquarters: c.headquarters ?? '',
       status: c.status ?? 'unknown',
+      category: c.company_category ?? '',
       funding_total_usd: c.funding_total_usd ?? null,
       valuation_usd: c.valuation_usd ?? null,
       employees_approx: c.employees_approx ?? null,
       security_posture: c.security_posture ?? 'none_published',
-      security_notes: c.security_notes ?? null,
-      company_category: c.company_category ?? null,
-      tara_attack_surface: c.tara_attack_surface ?? [],
+      security_notes: c.security_notes ?? '',
+      tara_attack_surface: attackSurface,
+      attack_surface_count: attackSurface.length,
       device_count: devices.length,
       total_channels: channelSum,
       top_fda_status: topFda,
+      devices: devices.map((d: any) => ({
+        name: d.name,
+        type: d.type ?? c.type,
+        channels: typeof d.channels === 'number' ? d.channels : 0,
+        fda_status: d.fda_status ?? '',
+        target_use: d.target_use ?? '',
+      })),
     };
   });
 }
@@ -254,13 +285,13 @@ export function getBciDirectoryStats(): BciDirectoryStats {
   }
 
   return {
-    total_companies: companies.length,
-    total_devices: totalDevices,
-    by_type: byType,
-    by_fda_status: byFda,
-    by_target_use: byTargetUse,
-    by_security_posture: bySecurityPosture,
-    by_company_category: byCategory,
-    total_funding_usd: totalFunding,
+    totalCompanies: companies.length,
+    totalDevices: totalDevices,
+    byType: byType,
+    byFdaStatus: byFda,
+    byTargetUse: byTargetUse,
+    bySecurityPosture: bySecurityPosture,
+    byCompanyCategory: byCategory,
+    totalFundingUsd: totalFunding,
   };
 }
