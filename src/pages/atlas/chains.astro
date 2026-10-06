@@ -5,13 +5,8 @@ import AttackChainViz from '../../components/atlas/AttackChainViz';
 import fs from 'node:fs';
 import path from 'node:path';
 
-let chainData: { chains: any[] } = { chains: [] };
-try {
-  const raw = fs.readFileSync(path.resolve('shared/tara-chains.json'), 'utf-8');
-  chainData = JSON.parse(raw);
-} catch {
-  // Fall through with empty chains
-}
+// A missing or malformed file fails the build rather than rendering an empty page.
+const chainData: { chains: any[] } = JSON.parse(fs.readFileSync(path.resolve('datalake/tara-chains.json'), 'utf-8'));
 ---
 <PageLayout title="Attack Chains | Qinnovate" description="Multi-step BCI attack sequences traversing silicon, firmware, and biological domains — visualized as kill chains in the QIF Threat Atlas." breadcrumbs={[{label:'Atlas',href:'/atlas/'},{label:'Attack Chains'}]}>
   <AtlasViewSwitcher current="/atlas/chains/" />
