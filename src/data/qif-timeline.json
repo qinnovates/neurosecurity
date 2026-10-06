@@ -7,13 +7,13 @@
     "maintainer": "Kevin Qi"
   },
   "current_stats": {
-    "as_of": "2026-03-15",
-    "threat_techniques": 161,
-    "bci_devices": 68,
-    "brain_regions": 37,
+    "as_of": "2026-10-06",
+    "threat_techniques": 165,
+    "bci_devices": 70,
+    "brain_regions": 38,
     "physics_constraints": 13,
     "hourglass_bands": 11,
-    "tara_tactics": 16,
+    "tara_tactics": 17,
     "neurorights_mapped": 6,
     "dsm5_diagnoses_mapped": 68,
     "physics_constants_verified": 14,
@@ -21,12 +21,20 @@
     "nsp_version": "v0.5",
     "tara_version": "v1.8",
     "atlas_version": "v1.2.0",
-    "derivation_log_entries": 106,
+    "derivation_log_entries": 112,
     "field_journal_entries": 20,
     "neurowall_version": "v0.8",
     "blog_posts": 59,
     "cross_ai_validations": 14,
-    "research_sources": 311
+    "research_sources": 342,
+    "techniques_niss_scored": 139,
+    "tara_domains": 12,
+    "bci_companies": 67,
+    "niss_version": "v1.1",
+    "registrar_version": "v4.0",
+    "landscape_dataset_version": "v2.2",
+    "sdk_version": "v0.3.0",
+    "whitepaper_version": "v8.0"
   },
   "milestones": [
     {
@@ -455,6 +463,18 @@
       "type": "milestone",
       "title": "QIF-TRUTH v4.3: Full NISS/TARA Current State",
       "description": "Source of truth updated with computed numbers: 135 techniques, 12 domains, 3 modes, severity 20/59/55/1, neurorights distribution, ICD-10 split documentation, version history table. All numbers from registrar, not estimated."
+    },
+    {
+      "date": "2026-10-06",
+      "type": "release",
+      "title": "Site redesign: signal-bench homepage and refreshed design tokens",
+      "description": "Homepage hero replaced by a strip chart of synthetic traces labelled from the TARA registrar; new palette and typography; nine undefined colour tokens defined; atlas technique count corrected from 492 to 165; chain data path fixed; unused embedded texture removed from the 3D brain model. Production deploys restored after failing since 2026-07-27."
+    },
+    {
+      "date": "2026-10-06",
+      "type": "milestone",
+      "title": "QIF-TRUTH v4.4 and October 2026 data refresh",
+      "description": "Tracked metrics and QIF-TRUTH section 10 recomputed by script from the registrar: 165 techniques, 17 tactics, 12 domains, 139 scored with NISS v1.1 and 26 not yet scored. Landscape, device and attack-research crawls recorded as 180 staged proposals in datalake/intake with 187 sources, pending independent fact-check. Derivation log entry 106."
     }
   ]
 }

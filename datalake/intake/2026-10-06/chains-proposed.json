@@ -1,0 +1,354 @@
+{
+  "version": "1.0-proposed-2026-10-06",
+  "_note": "Proposed additional TARA attack chains for review. Schema matches datalake/tara-chains.json exactly (chain_id, chain_name, objective, drift_profile, steps[], clinical_parallel, defenses[]). Evidence, demonstrated-vs-projected labels and sources live in the sibling 'evidence' object below (NOT part of the chain schema). Defensive threat models only.",
+  "chains": [
+    {
+      "chain_id": "CHAIN-DBS-001",
+      "chain_name": "Adaptive DBS clinician-programmer parameter corruption",
+      "objective": "Degrade therapeutic deep-brain stimulation by corrupting stimulation parameters through a weakly protected clinician programmer / telemetry link",
+      "drift_profile": "A→C (acute parameter change compounds into cumulative maladaptive stimulation attributed to disease progression)",
+      "steps": [
+        {
+          "position": 1,
+          "technique_id": "QIF-T0057",
+          "tara_alias": "TARA-SIL-R-006",
+          "role": "reconnaissance",
+          "action": "Enumerate programmer and implant telemetry endpoints to locate the stimulation-control surface",
+          "detection_window": "passive — no patient-visible effect; visible only in gateway connection logs"
+        },
+        {
+          "position": 2,
+          "technique_id": "QIF-T0049",
+          "tara_alias": "TARA-SIL-M-012",
+          "role": "initial_access",
+          "action": "Defeat the weak authentication between programmer and implant to obtain a therapy-control session",
+          "detection_window": "device/programmer logs show an unexpected authenticated session"
+        },
+        {
+          "position": 3,
+          "technique_id": "QIF-T0007",
+          "tara_alias": "TARA-SIL-M-001",
+          "role": "pivot",
+          "action": "Manipulate the telemetry protocol to shift stimulation parameters while keeping them inside the programmer's allowed envelope",
+          "detection_window": "subtle — parameters remain plausible; detectable by parameter-change audit"
+        },
+        {
+          "position": 4,
+          "technique_id": "QIF-T0023",
+          "tara_alias": "TARA-MOT-D-002",
+          "role": "objective",
+          "action": "Corrupted sensing feeds the closed loop so the device delivers maladaptive stimulation to motor circuits",
+          "detection_window": "clinical — symptom worsening may be misread as disease progression"
+        },
+        {
+          "position": 5,
+          "technique_id": "QIF-T0062",
+          "tara_alias": "TARA-COG-M-009",
+          "role": "persistence",
+          "action": "Slow parameter drift keeps each change below the clinician's notice threshold across visits",
+          "detection_window": "months — only longitudinal parameter and symptom review reveals the trend"
+        }
+      ],
+      "clinical_parallel": {
+        "name": "Adaptive DBS parameter titration",
+        "note": "sense→decide→stimulate→titrate. The attack rides the same closed-loop titration pathway that the therapy uses to adjust stimulation over time."
+      },
+      "defenses": [
+        "Mutual cryptographic authentication and per-session keys on the programmer link (breaks step 2)",
+        "Signed, range-bound parameter commands with server-side validation (breaks step 3)",
+        "Independent sensing-integrity check before closed-loop actuation (detects step 4)",
+        "Longitudinal parameter-change audit against a signed baseline (detects step 5)"
+      ]
+    },
+    {
+      "chain_id": "CHAIN-EEG-001",
+      "chain_name": "Consumer EEG headset decoder backdoor",
+      "objective": "Make a consumer EEG headset's machine-learning decoder emit attacker-chosen outputs when a hidden trigger is present, without degrading normal accuracy",
+      "drift_profile": "A (acute: the backdoor acts only when the trigger is present, otherwise dormant)",
+      "steps": [
+        {
+          "position": 1,
+          "technique_id": "QIF-T0042",
+          "tara_alias": "TARA-SIL-R-004",
+          "role": "reconnaissance",
+          "action": "Use the device's BLE/RF side channel to profile the headset and its companion-app model version",
+          "detection_window": "passive — radio-level observation; visible only to RF monitoring"
+        },
+        {
+          "position": 2,
+          "technique_id": "QIF-T0044",
+          "tara_alias": "TARA-SIL-M-009",
+          "role": "initial_access",
+          "action": "Compromise the cloud model-training or model-hosting infrastructure behind the SDK",
+          "detection_window": "cloud audit logs and model-provenance records"
+        },
+        {
+          "position": 3,
+          "technique_id": "QIF-T0017",
+          "tara_alias": "TARA-SIL-M-003",
+          "role": "pivot",
+          "action": "Embed a backdoor in a shared pretrained EEG model so it propagates through transfer learning to downstream decoders",
+          "detection_window": "hard — clean accuracy is preserved; detectable only by model-integrity testing"
+        },
+        {
+          "position": 4,
+          "technique_id": "QIF-T0016",
+          "tara_alias": "TARA-SIL-M-002",
+          "role": "objective",
+          "action": "An invisible clean-label trigger drives the deployed decoder to output the attacker's chosen class",
+          "detection_window": "hard — output looks like a normal decode unless trigger-response testing is applied"
+        },
+        {
+          "position": 5,
+          "technique_id": "QIF-T0052",
+          "tara_alias": "TARA-COG-R-006",
+          "role": "exfiltration",
+          "action": "Collect the decoder's event-related-potential telemetry returned to the backend",
+          "detection_window": "network monitoring of outbound neural-feature traffic"
+        }
+      ],
+      "clinical_parallel": {
+        "name": "Transfer learning for cross-subject BCI calibration",
+        "note": "Shared pretrained EEG models are the standard way to shorten per-user calibration; the attack poisons the same reuse pipeline the field relies on."
+      },
+      "defenses": [
+        "Signed model provenance and reproducible training (breaks step 2)",
+        "Backdoor/trigger scanning of pretrained weights before adoption (breaks step 3)",
+        "Trigger-response and spectral-anomaly testing on the deployed decoder (detects step 4)",
+        "Egress monitoring and minimization of neural-feature telemetry (detects step 5)"
+      ]
+    },
+    {
+      "chain_id": "CHAIN-EAR-001",
+      "chain_name": "In-ear EEG earbud supply-chain to cognitive profiling",
+      "objective": "Covertly turn an in-ear EEG earbud into a longitudinal cognitive and identity sensor via a supply-chain firmware implant",
+      "drift_profile": "C (cumulative: value accrues from longitudinal collection, not any single session)",
+      "steps": [
+        {
+          "position": 1,
+          "technique_id": "QIF-T0043",
+          "tara_alias": "TARA-SIL-M-008",
+          "role": "initial_access",
+          "action": "A firmware backdoor is introduced during manufacturing or the update supply chain",
+          "detection_window": "passive — detectable only by firmware attestation at provisioning"
+        },
+        {
+          "position": 2,
+          "technique_id": "QIF-T0073",
+          "tara_alias": "TARA-COG-R-009",
+          "role": "pivot",
+          "action": "The modified earbud quietly acquires in-ear EEG alongside its normal audio function",
+          "detection_window": "subtle — extra sensing is masked by legitimate earbud activity"
+        },
+        {
+          "position": 3,
+          "technique_id": "QIF-T0074",
+          "tara_alias": "TARA-COG-R-010",
+          "role": "objective",
+          "action": "Longitudinal in-ear EEG is processed into cognitive-state inferences over time",
+          "detection_window": "hard — inference happens off-device; no local symptom"
+        },
+        {
+          "position": 4,
+          "technique_id": "QIF-T0079",
+          "tara_alias": "TARA-IDN-R-003",
+          "role": "exfiltration",
+          "action": "Ear-canal acoustic echo profiling fingerprints the wearer so the cognitive record is bound to an identity",
+          "detection_window": "network monitoring of outbound identity + feature payloads"
+        },
+        {
+          "position": 5,
+          "technique_id": "QIF-T0056",
+          "tara_alias": "TARA-COG-R-008",
+          "role": "persistence",
+          "action": "Continuous collection is normalized as background health monitoring so the channel persists",
+          "detection_window": "months — revealed by cumulative data-flow and consent-scope review"
+        }
+      ],
+      "clinical_parallel": {
+        "name": "In-ear EEG for seizure detection, sleep staging and cognitive monitoring",
+        "note": "Clinical in-ear EEG (e.g. ear-worn EEG cleared for home monitoring) collects exactly this signal continuously; the boundary is consent, scope and oversight, not mechanism."
+      },
+      "defenses": [
+        "Firmware attestation and signed updates verified at provisioning (breaks step 1)",
+        "On-device indicator and OS-level permission for any neural sensing (breaks step 2)",
+        "On-device processing with data minimization, no raw EEG egress (detects step 3)",
+        "Consent-scoped retention limits and outbound-identity monitoring (detects steps 4 and 5)"
+      ]
+    },
+    {
+      "chain_id": "CHAIN-RBCI-001",
+      "chain_name": "Research BCI cloud-pipeline training and inference poisoning",
+      "objective": "Bias a multi-site research BCI decoder by poisoning its cloud training pipeline and forcing misclassification at inference",
+      "drift_profile": "A (acute: poisoned model and perturbations act on specific inputs once deployed)",
+      "steps": [
+        {
+          "position": 1,
+          "technique_id": "QIF-T0057",
+          "tara_alias": "TARA-SIL-R-006",
+          "role": "reconnaissance",
+          "action": "Map the research pipeline's data-ingest and model-serving topology across sites",
+          "detection_window": "passive — visible only in infrastructure access logs"
+        },
+        {
+          "position": 2,
+          "technique_id": "QIF-T0044",
+          "tara_alias": "TARA-SIL-M-009",
+          "role": "initial_access",
+          "action": "Compromise the shared cloud training and model-serving infrastructure",
+          "detection_window": "cloud audit logs and anomalous dataset or pipeline changes"
+        },
+        {
+          "position": 3,
+          "technique_id": "QIF-T0024",
+          "tara_alias": "TARA-SIL-M-006",
+          "role": "pivot",
+          "action": "Inject poisoned samples into the training set to bias the decoder toward an attacker-preferred mapping",
+          "detection_window": "hard — detectable by dataset integrity checks and held-out validation"
+        },
+        {
+          "position": 4,
+          "technique_id": "QIF-T0019",
+          "tara_alias": "TARA-SIL-M-005",
+          "role": "objective",
+          "action": "A universal perturbation added to inputs forces the deployed decoder to misclassify reliably",
+          "detection_window": "subtle — appears as decoder error; detectable by perturbation-robustness testing"
+        },
+        {
+          "position": 5,
+          "technique_id": "QIF-T0021",
+          "tara_alias": "TARA-SIL-R-003",
+          "role": "exfiltration",
+          "action": "Recover participants' neural training data from leaked federated gradients",
+          "detection_window": "monitoring of gradient-exchange volume and membership-inference risk"
+        }
+      ],
+      "clinical_parallel": {
+        "name": "Federated learning for multi-site clinical BCI trials",
+        "note": "Multi-site BCI studies share models and gradients to pool scarce data; the attack subverts the same collaborative-learning pipeline the trials depend on."
+      },
+      "defenses": [
+        "Infrastructure hardening and immutable, signed pipeline configuration (breaks step 2)",
+        "Dataset provenance, anomaly screening and held-out validation gates (breaks step 3)",
+        "Adversarial-robustness testing and input sanitization at inference (detects step 4)",
+        "Secure aggregation and differential privacy on gradient exchange (breaks step 5)"
+      ]
+    },
+    {
+      "chain_id": "CHAIN-VIS-002",
+      "chain_name": "Visual BCI sensory-channel selection hijack",
+      "objective": "Covertly steer a visual / SSVEP BCI user's selections using imperceptible display manipulation and falsified feedback",
+      "drift_profile": "A (acute: the hijack acts while the manipulated stimulus is displayed)",
+      "steps": [
+        {
+          "position": 1,
+          "technique_id": "QIF-T0085",
+          "tara_alias": "TARA-VIS-R-001",
+          "role": "reconnaissance",
+          "action": "Infer the user's attention and intent from eye-tracking to time the manipulation",
+          "detection_window": "passive — gaze sensing is expected; abuse is hard to distinguish"
+        },
+        {
+          "position": 2,
+          "technique_id": "QIF-T0046",
+          "tara_alias": "TARA-SIL-M-010",
+          "role": "initial_access",
+          "action": "A weaponized over-the-air update delivers malicious display-timing logic to the headset",
+          "detection_window": "update-provenance logs and firmware attestation"
+        },
+        {
+          "position": 3,
+          "technique_id": "QIF-T0022",
+          "tara_alias": "TARA-COG-M-006",
+          "role": "pivot",
+          "action": "Falsified neurofeedback nudges the user toward the attacker-preferred state",
+          "detection_window": "subtle — feedback looks normal; detectable by feedback-integrity checks"
+        },
+        {
+          "position": 4,
+          "technique_id": "QIF-T0103",
+          "tara_alias": "TARA-VIS-M-002",
+          "role": "objective",
+          "action": "Imperceptible high-frequency flicker injects an SSVEP response that biases the BCI's selection",
+          "detection_window": "subtle — user perceives no flicker; detectable by display-signal and EEG spectral monitoring"
+        },
+        {
+          "position": 5,
+          "technique_id": "QIF-T0035",
+          "tara_alias": "TARA-COG-R-003",
+          "role": "exfiltration",
+          "action": "Probe stimuli elicit recognition responses that reveal whether items are familiar to the user",
+          "detection_window": "clinical/behavioral — observable as unusual stimulus sequences in session logs"
+        }
+      ],
+      "clinical_parallel": {
+        "name": "SSVEP / P300 BCI communication for locked-in patients",
+        "note": "Flicker-evoked SSVEP and oddball P300 responses are the core signals of assistive spellers; the attack reuses the same evoked-response channel that the communication aid depends on."
+      },
+      "defenses": [
+        "Eye-tracking data minimization and on-device gating (limits step 1)",
+        "Signed firmware and attested display-timing pipeline (breaks step 2)",
+        "Feedback-integrity cross-checks against ground truth (detects step 3)",
+        "Display-signal and EEG spectral monitoring for out-of-band stimulus frequencies (detects step 4)"
+      ]
+    },
+    {
+      "chain_id": "CHAIN-IMP-001",
+      "chain_name": "Implant telemetry interception to neural-biometric spoofing",
+      "objective": "Intercept unencrypted implant telemetry to steal a neural biometric and replay it for unauthorized device access",
+      "drift_profile": "A (acute: interception and replay act within the telemetry session window)",
+      "steps": [
+        {
+          "position": 1,
+          "technique_id": "QIF-T0042",
+          "tara_alias": "TARA-SIL-R-004",
+          "role": "reconnaissance",
+          "action": "Observe the implant's BLE/RF side channel to find the telemetry window and gateway",
+          "detection_window": "passive — radio observation; visible only to RF monitoring"
+        },
+        {
+          "position": 2,
+          "technique_id": "QIF-T0004",
+          "tara_alias": "TARA-SIL-R-001",
+          "role": "initial_access",
+          "action": "Interpose on the cleartext telemetry link between implant and patient gateway",
+          "detection_window": "gateway logs may show session anomalies; cleartext aids detection tooling"
+        },
+        {
+          "position": 3,
+          "technique_id": "QIF-T0049",
+          "tara_alias": "TARA-SIL-M-012",
+          "role": "pivot",
+          "action": "Bypass the gateway-to-app authentication to issue commands as a trusted reader",
+          "detection_window": "device/gateway logs show an unexpected authenticated reader"
+        },
+        {
+          "position": 4,
+          "technique_id": "QIF-T0038",
+          "tara_alias": "TARA-IDN-R-001",
+          "role": "exfiltration",
+          "action": "Extract a neural biometric (brainprint) from the intercepted signals",
+          "detection_window": "network monitoring of outbound neural-signal payloads"
+        },
+        {
+          "position": 5,
+          "technique_id": "QIF-T0032",
+          "tara_alias": "TARA-IDN-M-001",
+          "role": "objective",
+          "action": "Replay the stolen neural biometric to spoof the enrolled identity and gain device access",
+          "detection_window": "subtle — looks like a legitimate match; detectable by liveness and replay checks"
+        }
+      ],
+      "clinical_parallel": {
+        "name": "Neural biometric authentication for device access",
+        "note": "Brainprint-based authentication is a proposed access control for neural devices; the attack targets the same enrollment-and-match pathway the control would use."
+      },
+      "defenses": [
+        "Encrypted, authenticated telemetry with per-session keys (breaks steps 2 and 3)",
+        "Mutual authentication and entropy-floor enforcement on key negotiation (breaks step 3)",
+        "Egress monitoring and minimization of raw neural-signal transmission (detects step 4)",
+        "Liveness detection and anti-replay nonces on biometric matching (detects step 5)"
+      ]
+    }
+  ]
+}

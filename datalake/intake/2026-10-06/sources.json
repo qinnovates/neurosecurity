@@ -1,0 +1,1873 @@
+[
+  {
+    "url": "BAGLEY-2026-threat-vectors-cerberus.pdf (local file supplied by requester)",
+    "title": "Threat Vectors and the State of the Art in Defense Methods for Security in Neurotechnology",
+    "publisher": "arXiv (2607.10451v1)",
+    "date": "2026-07-11",
+    "used_for": "Full read: title, authors, date, threat vectors, cogits passage, references",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://abbott.com/policies/cybersecurity/cybersecurity-coordinated-product-disclosure.html",
+    "title": "Cybersecurity coordinated product disclosure (search listing only)",
+    "publisher": "Abbott",
+    "date": "undated",
+    "used_for": "Could not be fetched (HTTP 404); basis for an UNVERIFIED item",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://api.crossref.org/works/",
+    "title": "Crossref REST API",
+    "publisher": "Crossref",
+    "date": "2026-10-06",
+    "used_for": "Resolution and metadata check of every DOI cited (about 60), plus title searches",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://api.crossref.org/works/10.1088/1741-2560/12/6/066006",
+    "title": "Crossref record 10.1088/1741-2560/12/6/066006",
+    "publisher": "Crossref",
+    "date": "2015",
+    "used_for": "DOI resolution: authors, title, year match",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://api.crossref.org/works/10.1088/1741-2560/12/6/066028",
+    "title": "Crossref record 10.1088/1741-2560/12/6/066028",
+    "publisher": "Crossref",
+    "date": "2015",
+    "used_for": "DOI resolution: authors, title, year match",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://api.fda.gov/device/510k.json?search=applicant:%22Beacon%20Biosignals%22&sort=decision_date:desc&limit=12",
+    "title": "openFDA 510(k): applicant Beacon Biosignals",
+    "publisher": "US FDA (openFDA)",
+    "date": "2026-08-25",
+    "used_for": "Dreem 3S clearances",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://api.fda.gov/device/510k.json?search=applicant:%22Ceribell%22&sort=decision_date:desc&limit=12",
+    "title": "openFDA 510(k): applicant Ceribell",
+    "publisher": "US FDA (openFDA)",
+    "date": "2026-09-16",
+    "used_for": "Ceribell clearances incl. 2026",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://api.fda.gov/device/510k.json?search=applicant:%22Cumulus%20Neuroscience%22&sort=decision_date:desc&limit=12",
+    "title": "openFDA 510(k): applicant Cumulus Neuroscience",
+    "publisher": "US FDA (openFDA)",
+    "date": "2023-04-27",
+    "used_for": "K221963",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://api.fda.gov/device/510k.json?search=applicant:%22Epitel%22&sort=decision_date:desc&limit=12",
+    "title": "openFDA 510(k): applicant Epitel",
+    "publisher": "US FDA (openFDA)",
+    "date": "2025-03-21",
+    "used_for": "REMI clearances",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://api.fda.gov/device/510k.json?search=applicant:%22Naox%22&sort=decision_date:desc&limit=12",
+    "title": "openFDA 510(k): applicant Naox",
+    "publisher": "US FDA (openFDA)",
+    "date": "2025-11-25",
+    "used_for": "K251550 NX01 decision date",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://api.fda.gov/device/510k.json?search=applicant:%22Neuroelectrics%22&sort=decision_date:desc&limit=12",
+    "title": "openFDA 510(k): applicant Neuroelectrics",
+    "publisher": "US FDA (openFDA)",
+    "date": "2026-06-13",
+    "used_for": "Enobio and Enobio Dx clearances",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://api.fda.gov/device/510k.json?search=applicant:%22Zeto%22&sort=decision_date:desc&limit=12",
+    "title": "openFDA 510(k): applicant Zeto",
+    "publisher": "US FDA (openFDA)",
+    "date": "2026-03-13",
+    "used_for": "WR19, Flexset, New Wave clearances",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://api.fda.gov/device/510k.json?search=applicant:neuropace&limit=2",
+    "title": "openFDA device 510(k) API",
+    "publisher": "US FDA",
+    "date": "last_updated 2026-09-28",
+    "used_for": "Confirm the source exists for regulatory submissions (gap 4)",
+    "collected_for": [
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://api.fda.gov/device/classification.json?search=device_name:%22implanted+brain-computer+interface%22&limit=3",
+    "title": "openFDA device classification API",
+    "publisher": "US FDA",
+    "date": "accessed 2026-10-06",
+    "used_for": "Attempted product-code lookup; returned 404 for this phrase, UNVERIFIED",
+    "collected_for": [
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://api.fda.gov/device/pma.json?search=applicant:neuropace&limit=1",
+    "title": "openFDA device PMA API",
+    "publisher": "US FDA",
+    "date": "last_updated 2026-09-28",
+    "used_for": "Confirm PMA records are available (returned P100026)",
+    "collected_for": [
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://api.fda.gov/device/recall.json?search=recalling_firm:medtronic+AND+product_description:neurostimulator&limit=2",
+    "title": "openFDA device recall API",
+    "publisher": "US FDA",
+    "date": "last_updated 2026-10-05",
+    "used_for": "Confirm recall records are available (33 results)",
+    "collected_for": [
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://api.openalex.org/works/",
+    "title": "OpenAlex API",
+    "publisher": "OpenAlex",
+    "date": "2026-10-06",
+    "used_for": "Abstracts for DOIs without a Crossref abstract",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://api.semanticscholar.org/graph/v1/paper/search/bulk",
+    "title": "Semantic Scholar Academic Graph API (bulk search)",
+    "publisher": "Semantic Scholar",
+    "date": "2026-10-06",
+    "used_for": "Literature search, 10 queries",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://archive.legmt.gov/content/Sessions/69th/Contractor_index/CH0345.pdf",
+    "title": "Montana SB 163 (2025), enrolled bill, chapter 345",
+    "publisher": "Montana Legislature",
+    "date": "2025",
+    "used_for": "Legislation entry",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2403.07945",
+    "title": "A Mathematical Framework for the Problem of Security for Cognition in Neurotechnology.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-002: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2502.05931",
+    "title": "Protecting Intellectual Property of EEG-based Neural Networks with Watermarking.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-032: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2506.12540",
+    "title": "Regulating Next-Generation Implantable Brain-Computer Interfaces: Recommendations for Ethical Development and Implementation.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-041: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2507.14339",
+    "title": "Fiduciary AI for the Future of Brain-Technology Interactions.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-040: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2507.21387",
+    "title": "Radio Adversarial Attacks on EMG-based Gesture Recognition Networks.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-012: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2509.20454",
+    "title": "Bridging Privacy and Utility: Synthesizing anonymized EEG with constraining utility functions.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-031: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2601.05789",
+    "title": "SAFE: Secure and Accurate Federated Learning for Privacy-Preserving Brain-Computer Interfaces.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-022: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2601.06040",
+    "title": "Cognitive Sovereignty and the Neurosecurity Governance Gap: Evidence from Singapore.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-045: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2602.02511",
+    "title": "Training Data Governance for Brain Foundation Models.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-039: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2605.11386",
+    "title": "Revisiting Privacy Preservation in Brain-Computer Interfaces: Conceptual Boundaries, Risk Pathways, and a Protection-Strength Grading Framework.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-044: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2606.09189",
+    "title": "Pretrained, Frozen, Still Leaking: Auditing Cross-Encoder Attribute Transfer in EEG Foundation Models.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-007: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2606.09315",
+    "title": "Brain-Prompt Injection: A Route-Safety Audit for BCI-LLM Agents.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-008: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2606.10502",
+    "title": "When VR Meets BCI",
+    "publisher": "arXiv",
+    "date": "2026-06-09",
+    "used_for": "Abstract",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2607.06630",
+    "title": "When Certificates Fail: A Unified Safety Framework for Embedded Neural Interface Models.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-015: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2607.10451",
+    "title": "Threat Vectors and the State of the Art in Defense Methods for Security in Neurotechnology",
+    "publisher": "arXiv",
+    "date": "2026-07-11",
+    "used_for": "Preprint status and metadata",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2607.25968",
+    "title": "E-MagDiP: Electro-Magnetic based Differential Privacy for EEG based Community Sensing.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-020: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2607.28191",
+    "title": "Secure Aggregation for Privacy-Preserving Federated Learning on Clinical EEG Data.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-029: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2608.16931",
+    "title": "SW-ProxyCE: Zero-Query Adversarial Transfer from Public EEG Encoders to Private Downstream Models.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-006: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2609.01856",
+    "title": "Adversarial Vulnerabilities of Neural Biomarker Identification Systems.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-003: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2609.08971",
+    "title": "NERVE Attacks: Breaking AI-Powered Brain-Computer Interfaces.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-004: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2609.11777",
+    "title": "Differentially Private EEG Feature Anonymization: A Privacy-Utility Case Study in Clinical Neurophysiology.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-030: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/abs/2609.30037",
+    "title": "AERIAL: Adversarial Evaluation of Robustness in Accuracy-Preserving Low-Precision EEG Decoders.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-016: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/html/2606.09189v1",
+    "title": "Pretrained, Frozen, Still Leaking",
+    "publisher": "arXiv",
+    "date": "2026-06-08",
+    "used_for": "Abstract and scope statement",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/html/2607.25968v1",
+    "title": "E-MagDiP",
+    "publisher": "arXiv",
+    "date": "2026-07-28",
+    "used_for": "Hardware and privacy figure",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/html/2609.01856v1",
+    "title": "Adversarial Vulnerabilities of Neural Biomarker Identification Systems",
+    "publisher": "arXiv",
+    "date": "2026-09-01",
+    "used_for": "Affiliations, threat model, results",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/html/2609.08971v1",
+    "title": "NERVE Attacks: Breaking AI-Powered Brain-Computer Interfaces",
+    "publisher": "arXiv",
+    "date": "2026-09-08",
+    "used_for": "Devices, backdoor results, limitations",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://arxiv.org/pdf/2403.07945v4",
+    "title": "A Mathematical Framework for the Problem of Security for Cognition in Neurotechnology",
+    "publisher": "arXiv",
+    "date": "2025-01-26",
+    "used_for": "Definition of cogits",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://beacon.bio/dreem-headband/",
+    "title": "Waveband (Dreem) headband page",
+    "publisher": "Beacon Biosignals",
+    "date": null,
+    "used_for": "Rename, Beacon Pal app, encryption statement",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://cdn.bitbrain.com/docs/2023/Minimal-Family-Brochure.pdf",
+    "title": "Minimal EEG family brochure (PDF)",
+    "publisher": "Bitbrain",
+    "date": "2023",
+    "used_for": "'Minimal EEG' family name; Hero layout rationale (MRCPs); SDK statements; mEEG term check",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://ceribell.com/",
+    "title": "Ceribell home page",
+    "publisher": "Ceribell, Inc.",
+    "date": "2026",
+    "used_for": "FedRAMP High statement",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://ceribell.com/security-notice/",
+    "title": "Ceribell security notice",
+    "publisher": "Ceribell, Inc.",
+    "date": null,
+    "used_for": "Vulnerability reporting policy",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/api/v2/studies",
+    "title": "ClinicalTrials.gov API v2 sponsor searches (Neuralink, Synchron, Paradromics, Motif, Axoft, INBRAIN, Science, Neurosoft, others)",
+    "publisher": "U.S. National Library of Medicine",
+    "date": "2026-10-06",
+    "used_for": "Trial status, start dates, enrollment counts",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/api/v2/studies?query.term=%22brain-computer+interface%22&pageSize=2&countTotal=true&fields=NCTId,BriefTitle,OverallStatus,LeadSponsorName,StartDate",
+    "title": "ClinicalTrials.gov API v2",
+    "publisher": "US National Library of Medicine",
+    "date": "accessed 2026-10-06",
+    "used_for": "Confirm the source exists for trial registrations (gap 5; 263 studies)",
+    "collected_for": [
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT04676854",
+    "title": "PRIMAvera",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2026-06-01",
+    "used_for": "Science Corporation pivotal trial status",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT05035823",
+    "title": "COMMAND early feasibility study",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2026-09-08",
+    "used_for": "Synchron COMMAND status and enrollment",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT06205160",
+    "title": "Flexible high-density intra-operative ECoG electrodes for epilepsy surgery",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2025-12-10",
+    "used_for": "Neurosoft clinical status",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT06368310",
+    "title": "FIH clinical investigation of graphene electrodes for brain mapping",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2026-06-30",
+    "used_for": "INBRAIN first-in-human enrollment",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT06429735",
+    "title": "PRIME study",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2026-01-09",
+    "used_for": "Neuralink estimated enrollment",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT06673264",
+    "title": "First-in-human trial of a novel soft and stretchable neural probe",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2025-09-18",
+    "used_for": "Axoft first-in-human enrollment and start date",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT07224256",
+    "title": "VOICE early feasibility study",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2025-11-04",
+    "used_for": "Neuralink speech study registration",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT07266584",
+    "title": "Restoration of central vision with PRIMA in photoreceptor degeneration",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2026-08-17",
+    "used_for": "Science Corporation new study",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT07357428",
+    "title": "Connect-One early feasibility study",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2026-04-14",
+    "used_for": "Paradromics trial status",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT07446114",
+    "title": "FOCUS-Canada",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2026-04-17",
+    "used_for": "Synchron 2026 trial",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT07533903",
+    "title": "FOCUS-Australia",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2026-06-09",
+    "used_for": "Synchron 2026 trial",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT07543367",
+    "title": "INTENT early feasibility study",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2026-05-11",
+    "used_for": "Synchron 2026 trial",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT07543406",
+    "title": "MINDZ pilot study",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2026-09-10",
+    "used_for": "Neurosoft planned study",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT07594483",
+    "title": "RESONATE",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2026-09-29",
+    "used_for": "Motif trial status",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/study/NCT07684794",
+    "title": "RESONATE - Maintenance",
+    "publisher": "ClinicalTrials.gov",
+    "date": "2026-07-06",
+    "used_for": "Motif follow-on study",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://content-astro-web.finanzen.net/nachricht/aktien/mindmaze-therapeutics-completes-organizational-simplification-and-provides-update-on-neuro-io-equity-financing-15861901",
+    "title": "MindMaze Therapeutics completes organizational simplification (search listing only)",
+    "publisher": "finanzen.net syndication",
+    "date": "2026-08",
+    "used_for": "Basis for an UNVERIFIED item",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1016/j.compbiomed.2025.111112",
+    "title": "Pitfalls of defacing whole-head MRI: re-identification risk with diffusion models and compromised research potential.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-018: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1016/j.csi.2026.104155",
+    "title": "Adversarial attacks and defenses in EEG based Brain Computer Interfaces: A comprehensive survey and future directions.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-036: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1016/j.neucom.2024.128902",
+    "title": "Spatialspectral-Backdoor: Realizing backdoor attack for deep neural networks in brain-computer interface via EEG characteristics.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-011: proposed source row (UNVERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1016/j.neunet.2025.107516",
+    "title": "Data alignment based adversarial defense benchmark for EEG-based BCIs.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-021: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1016/j.neuroimage.2025.121476",
+    "title": "Measuring the potential risk of re-identification of imaging research participants from open-source automated face recognition software.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-019: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1016/j.tins.2026.09.003",
+    "title": "When minds become data: brain-computer interfaces and the future of mental privacy.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-038: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1088/1741-2552/ad9957",
+    "title": "The 'Sandwich' meta-framework for architecture agnostic deep privacy-preserving transfer learning for non-invasive brainwave decoding.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-033: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1093/brain/awag205",
+    "title": "Risk-calibrated sharing of human brain data.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-042: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1093/idpl/ipaf014",
+    "title": "Workplace brain surveillance: the need for new approaches to protect mental privacy and neural data?",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-043: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1109/ACCESS.2025.3529477",
+    "title": "An Observer-Based Event Triggered Mechanism for the Detection and Mitigation of FDI Attacks in Deep Brain Stimulation Systems.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-017: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1109/ICHMS69701.2026.11602273",
+    "title": "Quantifying Biological Sex Leakage in Electroencephalography-Based Mental Workload Measurement and Its Impact on Model Performance.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-047: proposed source row (UNVERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1109/ISSCC49661.2025.10904583",
+    "title": "35.4: A Miniature Biomedical Implant Secured by Two-Factor Authentication with Emergency Access.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-028: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1109/IoT69654.2025.11297585",
+    "title": "Security and Privacy in IoT-Enabled EEG Brain-Computer Interfaces: A Survey and Comparative Analysis.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-037: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1109/JBHI.2025.3593443",
+    "title": "Investigating Membership Inference Attacks Against CNN Models for BCI Systems.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-009: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1109/LSP.2024.3501274",
+    "title": "Independent Components Time-Frequency Purification With Channel Consensus Against Adversarial Attack in SSVEP-Based BCIs.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-024: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1109/LSP.2025.3563446",
+    "title": "QELDBA: Query-Efficient and Low Distortion Black-Box Attack for Brainprint Recognition.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-010: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1109/LSP.2025.3580330",
+    "title": "Enhancing Adversarial Attack Detection in EEG Signals With Covariance Entropy: A Novel Framework for BCI Security.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-025: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1109/OJCOMS.2026.3684404",
+    "title": "Multi-Layer Security for Wireless BCIs via Adversarial Chaos Synergy.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-027: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1109/SMC58881.2025.11343511",
+    "title": "Quantifying the Risk of Private Information Leakage in the Metaverse with EEG-Instrumented Virtual Reality Headsets.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-013: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1109/SP63933.2026.00117",
+    "title": "When VR Meets BCI: (Un)Observable Brainwave-Aware Privacy Reconstruction in the Metaverse via Unrestricted Inbuilt Motion Sensors.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-005: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1109/TETCI.2025.3619564",
+    "title": "Multi-Scale Shapley Adaptation Pruning: Realizing Backdoor Defense in Brain-Computer Interface With Shapley-Value-Based Neural Network Pruning.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-023: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1109/TNSRE.2026.3674102",
+    "title": "Federated Learning in Offline and Online EMG Decoding: A Privacy and Performance Perspective.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-034: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.1145/3842657.3842784",
+    "title": "NeuroPriv: Adversarial Representation Learning for Privacy in Wearable EEG Systems.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-014: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.3389/fnsys.2026.1891041",
+    "title": "PQ-Neurolink: latency-aware post-quantum-ready secure communication for distributed brain-computer interfaces.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-026: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://doi.org/10.58195/bci.2025.1.005",
+    "title": "A Survey on Adversarial Security in Brain-Computer Interfaces.",
+    "publisher": "see citation",
+    "date": null,
+    "used_for": "R-035: proposed source row (VERIFIED)",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://efts.sec.gov/LATEST/search-index?q=%22brain-computer%20interface%22&forms=D",
+    "title": "EDGAR full-text search",
+    "publisher": "US SEC",
+    "date": "accessed 2026-10-06",
+    "used_for": "Attempted Form D lookup for funding events; returned 0 hits, method UNVERIFIED",
+    "collected_for": [
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://en.wikipedia.org/wiki/Fred_Ehrsam",
+    "title": "Fred Ehrsam",
+    "publisher": "Wikipedia",
+    "date": "undated",
+    "used_for": "Nudge founding and Series A (tertiary)",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://eu.36kr.com/en/p/3914507815048580",
+    "title": "Neuracle IPO: Standing at the Intersection of Technological Conviction and Financial Reality",
+    "publisher": "36Kr",
+    "date": "2026-07-28",
+    "used_for": "IPO inspection, revenue, valuation, founding-year conflict",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/",
+    "title": "PubMed E-utilities",
+    "publisher": "NCBI",
+    "date": "2026-10-06",
+    "used_for": "Literature search (10 queries) and abstracts for PMIDs 40334321, 41617748, 40816265",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22brain-computer+interface%22%5BTitle%2FAbstract%5D+AND+2024%5Bpdat%5D&rettype=count&retmode=json",
+    "title": "PubMed E-utilities esearch",
+    "publisher": "NCBI",
+    "date": "accessed 2026-10-06",
+    "used_for": "Confirm publication counts are reproducible (gap 9; returned 743 for this query)",
+    "collected_for": [
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://export.arxiv.org/api/query",
+    "title": "arXiv API",
+    "publisher": "arXiv",
+    "date": "2026-10-06",
+    "used_for": "Literature search (34 queries) and verification of 36 arXiv IDs",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://finder.techleap.nl/news/feed/echo-neurotechnologies-secures-50m-funding",
+    "title": "Echo Neurotechnologies secures $50M funding (search listing only)",
+    "publisher": "Techleap",
+    "date": "undated",
+    "used_for": "Basis for an UNVERIFIED candidate",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://frenzband.com/",
+    "title": "FRENZ Brainband",
+    "publisher": "Earable Neuroscience",
+    "date": null,
+    "used_for": "Price, wellness-device statement, iOS-only app",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://github.com/cisagov/CSAF",
+    "title": "CISA CSAF repository",
+    "publisher": "CISA",
+    "date": "accessed 2026-10-06",
+    "used_for": "Check for machine-readable advisories; repository exists, ICSMA coverage not confirmed",
+    "collected_for": [
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://global.nissannews.com/en/releases/180103-01-e",
+    "title": "Nissan Brain-to-Vehicle technology redefines future of driving",
+    "publisher": "Nissan Global Newsroom",
+    "date": "2018-01-03",
+    "used_for": "Original B2V announcement; 0.2-0.5 s claim; CES simulator demo",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://global.nissannews.com/en/releases/nissan-formula-e-team-demonstrates-brain-training-program",
+    "title": "Nissan Formula E Team demonstrates improvements in cognitive function with bespoke brain training program",
+    "publisher": "Nissan Global Newsroom",
+    "date": "2023-10-11",
+    "used_for": "Scope check: Brain to Performance is stimulation-based training, not B2V",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://ground.news/article/neuralink-accelerates-in-2026-with-less-invasive-surgery-samsung-and-27-implanted-patients",
+    "title": "Neuralink accelerates in 2026 (search listing only)",
+    "publisher": "Ground News aggregation",
+    "date": "2026-07",
+    "used_for": "Basis for an UNVERIFIED implant count",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://hlth.com/insights/news/phantom-neuro-receives-approval-for-first-in-human-study-of-phantom-x-prosthetic-control-system",
+    "title": "Phantom Neuro receives approval for first-in-human study of Phantom X",
+    "publisher": "HLTH",
+    "date": "2026-04-17",
+    "used_for": "CYBORG study approval",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://iduntechnologies.com/",
+    "title": "IDUN Guardian 4 presale page",
+    "publisher": "IDUN Technologies",
+    "date": "2026",
+    "used_for": "Price, SDK/API, cloud requirement",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://neuralink.com/vulnerability-disclosure",
+    "title": "Vulnerability Disclosure Program | Neuralink",
+    "publisher": "Neuralink",
+    "date": "undated",
+    "used_for": "Existence of a published VDP (HTTP 200, title and meta description read)",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://neurotechnology.substack.com/p/2025-snapshot",
+    "title": "2025 neurotech funding snapshot",
+    "publisher": "Neurotech Futures (Substack)",
+    "date": "2026-01-12",
+    "used_for": "Full-year 2025 total and deal count",
+    "collected_for": [
+      "market",
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://neurotechnology.substack.com/p/2025-snapshot2",
+    "title": "2025 neurotech funding snapshot, part 2",
+    "publisher": "Neurotech Futures (Substack)",
+    "date": "2026-02-03",
+    "used_for": "2025 category breakdown",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://neurotechreports.com/pages/galvani-bioelectronics-shutdown.html",
+    "title": "Galvani Bioelectronics shutdown",
+    "publisher": "Neurotech Reports",
+    "date": "2026-04-30",
+    "used_for": "Reported operational freeze and implant count",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://newmarketpitch.com/blogs/news/neurotech-funding-analysis",
+    "title": "Neurotechnology startup funding 2025-2026 (search listing only)",
+    "publisher": "NewMarketPitch",
+    "date": "2026",
+    "used_for": "Basis for an UNVERIFIED 2026 funding note",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2852",
+    "title": "CVE-2017-2852",
+    "publisher": "NIST NVD",
+    "date": "2018-06-01",
+    "used_for": "Natus Xltek NeuroWorks 8",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2858",
+    "title": "CVE-2017-2858",
+    "publisher": "NIST NVD",
+    "date": "2018-06-01",
+    "used_for": "Natus Xltek NeuroWorks 8",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2860",
+    "title": "CVE-2017-2860",
+    "publisher": "NIST NVD",
+    "date": "2018-06-01",
+    "used_for": "Natus Xltek NeuroWorks 8",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2861",
+    "title": "CVE-2017-2861",
+    "publisher": "NIST NVD",
+    "date": "2018-04-05",
+    "used_for": "Natus Xltek NeuroWorks 8",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2018-8849",
+    "title": "CVE-2018-8849",
+    "publisher": "NIST NVD",
+    "date": "2018-05-18",
+    "used_for": "Cross-check of the CISA advisory",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-49914",
+    "title": "CVE-2023-49914",
+    "publisher": "NIST NVD",
+    "date": "2023-12-02",
+    "used_for": "InteraXon Muse 2 vulnerability",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://paradromics.com/news",
+    "title": "Paradromics news index",
+    "publisher": "Paradromics",
+    "date": "2026-09-14",
+    "used_for": "Dates of 2026 company announcements",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://paradromics.com/news/paradromics-achieves-real-time-speech-connexus-brain-computer-interface/",
+    "title": "Paradromics Achieves Real-Time Speech with Connexus Brain-Computer Interface",
+    "publisher": "Paradromics",
+    "date": "2026-09-14",
+    "used_for": "What was decoded, from what signal, and what was not reported",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://petsymposium.org/2025/paperlist.php",
+    "title": "PETS 2025 paper list",
+    "publisher": "PETS",
+    "date": "2025",
+    "used_for": "Venue check",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://petsymposium.org/2026/paperlist.php",
+    "title": "PETS 2026 paper list",
+    "publisher": "PETS",
+    "date": "2026",
+    "used_for": "Venue check",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://pubmed.ncbi.nlm.nih.gov/26401885/",
+    "title": "Action prediction based on anticipatory brain potentials during simulated driving (PMID 26401885)",
+    "publisher": "PubMed / J Neural Eng",
+    "date": "2015",
+    "used_for": "Anticipatory potential decoding, lead time",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://pubmed.ncbi.nlm.nih.gov/26595103/",
+    "title": "EEG-based decoding of error-related brain activity in a real-world driving task (PMID 26595103)",
+    "publisher": "PubMed / J Neural Eng",
+    "date": "2015",
+    "used_for": "Simulator versus real-car decoding accuracy",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://pulse2.com/axoft-raises-55-million-series-a-to-advance-clinical-trials-for-its-bio-inspired-brain-computer-interface/",
+    "title": "Axoft raises $55 million Series A",
+    "publisher": "Pulse 2.0",
+    "date": "2026-04-29",
+    "used_for": "Axoft patient count and funding cross-check",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://runtimewire.com/article/paradromics-real-time-speech-personal-devices",
+    "title": "Paradromics' first BCI user generates real-time speech as trial adds personal devices",
+    "publisher": "Runtime Wire",
+    "date": "2026-09-23",
+    "used_for": "Independent summary; one participant; no accuracy figures",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://sacra.com/c/neuralink/",
+    "title": "Neuralink company profile",
+    "publisher": "Sacra",
+    "date": "undated",
+    "used_for": "Confirmed baseline funding ($1.85B, $650M Series E April 2026); no implant count",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://sacra.com/c/synchron/",
+    "title": "Synchron company profile",
+    "publisher": "Sacra",
+    "date": "undated",
+    "used_for": "Synchron total funding, Series D, company-stated valuation",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+    "title": "NVD CVE API 2.0 keyword and CVE-ID queries",
+    "publisher": "NIST NVD",
+    "date": "2026-10-06",
+    "used_for": "CVE lookups for Muse, NeuroWorks, Emotiv, NeuroSky, OpenBCI, Neuralink",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=neurostimulator&resultsPerPage=3",
+    "title": "NVD CVE API 2.0",
+    "publisher": "NIST",
+    "date": "accessed 2026-10-06",
+    "used_for": "Confirm the source exists for CVEs (gap 7; keyword returned 0 results, so vendor or CPE queries are needed)",
+    "collected_for": [
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://sp2025.ieee-security.org/accepted-papers.html",
+    "title": "IEEE S&P 2025 accepted papers",
+    "publisher": "IEEE",
+    "date": "2025",
+    "used_for": "Venue check; no BCI paper found",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://sp2026.ieee-security.org/accepted-papers.html",
+    "title": "IEEE S&P 2026 accepted papers",
+    "publisher": "IEEE",
+    "date": "2026",
+    "used_for": "Venue check; located Ni et al.",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://spain.nissannews.com/es-ES/releases/avances-en-tecnologia-nissan-para-mejorar-la-seguridad-de-los-conductores",
+    "title": "Avances en tecnología Nissan para mejorar la seguridad de los conductores",
+    "publisher": "Nissan España Newsroom",
+    "date": "2020-07-08",
+    "used_for": "0.2-0.8 s claim; partners (Bitbrain, Swiss Federal Institute of Technology, INRS Canada)",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://thenextweb.com/news/boston-scientific-cyberattack-shipping-disruption",
+    "title": "Boston Scientific discloses a cybersecurity incident causing global disruption",
+    "publisher": "The Next Web",
+    "date": "2026-08-26",
+    "used_for": "Initial 8-K coverage",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://thenextweb.com/news/precision-neuroscience-250m-series-d-1bn-valuation-ackman",
+    "title": "Precision Neuroscience raises $250m at a $1bn valuation, NYT reports",
+    "publisher": "The Next Web",
+    "date": "2026-09-24",
+    "used_for": "Precision valuation report, 100+ procedures at 18 centers, investor list",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://wearablesensing.com/dsi-24/",
+    "title": "DSI-24 product page",
+    "publisher": "Wearable Sensing",
+    "date": null,
+    "used_for": "DSI-24 specs",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.abbott.com/policies/cybersecurity.html",
+    "title": "Cybersecurity",
+    "publisher": "Abbott",
+    "date": "accessed 2026-10-06",
+    "used_for": "Same check for Abbott; page held a general commitment only, disclosure process UNVERIFIED",
+    "collected_for": [
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://www.biospace.com/press-releases/onward-medical-completes-two-additional-brain-computer-interface-implants-paired-with-spinal-cord-stimulation-technology-to-restore-thought-driven-movement",
+    "title": "ONWARD Medical completes two additional brain-computer interface implants",
+    "publisher": "ONWARD Medical via BioSpace",
+    "date": "2026-01-22",
+    "used_for": "ARC-BCI participant count",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.bitbrain.com/blog/cybersecurity-brain-computer-interface",
+    "title": "Avoiding brain hacking - Challenges of cybersecurity and privacy in Brain Computer Interfaces",
+    "publisher": "Bitbrain",
+    "date": "2018-11-21",
+    "used_for": "Vendor-published BCI threat model and BLE MiTM demonstration",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.bitbrain.com/blog/eeg-sensor-layer",
+    "title": "Main Features of the EEG Sensor Layer Explained",
+    "publisher": "Bitbrain",
+    "date": null,
+    "used_for": "Bitbrain's use of 'mobile EEG'",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.bitbrain.com/blog/nissan-brain-to-vehicle-technology",
+    "title": "Nissan's Brain-to-Vehicle Technology Connects Our Brains With Vehicles",
+    "publisher": "Bitbrain",
+    "date": "2025-06-09",
+    "used_for": "B2V headset description, timing claims, partners, linked pages; mEEG term check",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.bitbrain.com/neurotechnology-products/dry-eeg",
+    "title": "Dry EEG product category",
+    "publisher": "Bitbrain",
+    "date": null,
+    "used_for": "Current dry-EEG line-up; 'mobile and wearable dry-EEG' wording",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.bitbrain.com/neurotechnology-products/dry-eeg/air",
+    "title": "Air 8ch EEG product page",
+    "publisher": "Bitbrain",
+    "date": null,
+    "used_for": "Air specs",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.bitbrain.com/neurotechnology-products/dry-eeg/diadem",
+    "title": "Diadem 12ch EEG product page",
+    "publisher": "Bitbrain",
+    "date": null,
+    "used_for": "Diadem specs",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.bitbrain.com/neurotechnology-products/dry-eeg/hero",
+    "title": "Hero 9ch EEG product page",
+    "publisher": "Bitbrain",
+    "date": null,
+    "used_for": "Hero specs, discontinuation notice, software/SDK",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.bitbrain.com/neurotechnology-products/semi-dry-eeg/versatile-eeg",
+    "title": "Versatile EEG product page",
+    "publisher": "Bitbrain",
+    "date": null,
+    "used_for": "Versatile specs and channel variants",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.bostonscientific.com/en-US/customer-service/product-security.html",
+    "title": "Product Security",
+    "publisher": "Boston Scientific",
+    "date": "accessed 2026-10-06",
+    "used_for": "Same check for Boston Scientific (program and vulnerability-intake process described)",
+    "collected_for": [
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://www.bostonscientific.com/en-US/customer-service/product-security/responsible-disclosure.html",
+    "title": "Responsible Disclosure (Revision AC)",
+    "publisher": "Boston Scientific",
+    "date": "2025-02-17",
+    "used_for": "Published disclosure process; no bug bounty",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.businesswire.com/news/home/20251003011210/en",
+    "title": "$12.11 Bn Brain Computer Interface Market (search listing only)",
+    "publisher": "Research and Markets via Business Wire",
+    "date": "2025-10-03",
+    "used_for": "Basis for an UNVERIFIED market estimate",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.cerberus.institute/",
+    "title": "Cerberus Neurosecurity Research Institute",
+    "publisher": "Cerberus Neurosecurity Research Institute",
+    "date": null,
+    "used_for": "Institute self-description; site structure",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://www.cerberus.institute/sitemap.xml",
+    "title": "Sitemap",
+    "publisher": "Cerberus Neurosecurity Research Institute",
+    "date": null,
+    "used_for": "Confirming the site has one page",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://www.cisa.gov/news-events/ics-medical-advisories/icsma-18-137-01",
+    "title": "ICSMA-18-137-01 Medtronic N'Vision Clinician Programmer (Update A)",
+    "publisher": "CISA",
+    "date": "2018-07-12",
+    "used_for": "Historical neurostimulator programmer CVEs",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.cisa.gov/news-events/ics-medical-advisories/icsma-19-080-01",
+    "title": "ICSMA-19-080-01 Medtronic Conexus Radio Frequency Telemetry Protocol (Update C)",
+    "publisher": "CISA",
+    "date": "2021-04-08 (last revised)",
+    "used_for": "Confirm ICS medical advisories exist as a source and illustrate the attribution risk (cardiac, not neuro)",
+    "collected_for": [
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://www.digitalhealthnews.com/sam-altman-backed-merge-labs-butterfly-network-partner-to-advance-ultrasound-based-brain-computer-interfaces",
+    "title": "Butterfly Network and Merge Labs partner on ultrasound-based BCI",
+    "publisher": "Digital Health News",
+    "date": "2026-09-04",
+    "used_for": "Agreement terms",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.eldiario.es/hojaderouter/robots/ingeniera-espanola-creado-casco-coches_1_2923681.html",
+    "title": "Esta ingeniera española ha inventado un casco para que los coches te lean la mente",
+    "publisher": "elDiario.es (HojaDeRouter)",
+    "date": "2018-01-15",
+    "used_for": "Bitbrain founding (2010, University of Zaragoza spin-off); dry-electrode headset built for Nissan",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.epitel.com/",
+    "title": "Epitel home page",
+    "publisher": "Epitel, Inc.",
+    "date": "2026",
+    "used_for": "REMI description, app and cloud",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.epitel.com/cybersecurity",
+    "title": "Epitel cybersecurity page",
+    "publisher": "Epitel, Inc.",
+    "date": null,
+    "used_for": "SOC 2 Type 2, HIPAA, GDPR, Health-ISAC, Cobalt pentest",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.gtec.at/product/unicorn-hybrid-black/",
+    "title": "Unicorn Hybrid Black product page",
+    "publisher": "g.tec medical engineering",
+    "date": null,
+    "used_for": "Channels, electrodes, APIs",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.hyundaimotorgroup.com/en/story/CONT0000000000035429",
+    "title": "Hyundai Mobis M.Brain story",
+    "publisher": "Hyundai Motor Group",
+    "date": "2022-06-10",
+    "used_for": "M.Brain description, pilot numbers, app link",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.hyundaimotorgroup.com/story/CONT0000000000043965",
+    "title": "Hyundai Mobis Smart Cabin Controller story",
+    "publisher": "Hyundai Motor Group",
+    "date": "2022-07-21",
+    "used_for": "Earphone brainwave sensor in cabin controller",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.iso.org/standard/83268.html",
+    "title": "ISO/IEC 8663:2025 (fetch blocked, HTTP 403)",
+    "publisher": "ISO",
+    "date": "2025",
+    "used_for": "Attempted verification; UNVERIFIED",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://www.livanova.com/en-us/security",
+    "title": "Product Security",
+    "publisher": "LivaNova",
+    "date": "undated",
+    "used_for": "Published CVD program",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.massdevice.com/neurosoft-bioelectronics-seed-funding-bci/",
+    "title": "Neurosoft Bioelectronics seed funding (search listing only)",
+    "publisher": "MassDevice",
+    "date": "2026-05",
+    "used_for": "Basis for an UNVERIFIED funding total",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.medicaleconomics.com/view/fda-expands-device-compatibility-for-paradromics-brain-computer-interface",
+    "title": "FDA expands device compatibility for Paradromics brain-computer interface",
+    "publisher": "Medical Economics",
+    "date": "2026-08-26",
+    "used_for": "Personal-device expansion; absence of security statement",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.medtechdive.com/news/abbott-discloses-cyberattack-on-cancer-diagnostics-business/825529/",
+    "title": "Abbott discloses cyberattack on cancer diagnostics business",
+    "publisher": "MedTech Dive",
+    "date": "2026-07-17",
+    "used_for": "Corporate incident context",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.medtechdive.com/news/precision-neuroscience-raises-250m-for-brain-computer-interface-work/831344/",
+    "title": "Precision Neuroscience raises $250M for brain-computer interface work",
+    "publisher": "MedTech Dive",
+    "date": "2026-09-25",
+    "used_for": "Precision Series D amount, lead investors, total raised",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.medtronic.com/en-us/e/product-security/coordinated-disclosure-process.html",
+    "title": "Coordinated disclosure process",
+    "publisher": "Medtronic",
+    "date": "undated",
+    "used_for": "Medtronic published disclosure process",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.medtronic.com/en-us/e/product-security/security-bulletins.html",
+    "title": "Security Bulletins",
+    "publisher": "Medtronic",
+    "date": "accessed 2026-10-06",
+    "used_for": "Check whether a company coded none_published publishes product-security bulletins and a coordinated disclosure process (it does)",
+    "collected_for": [
+      "data-gap-analysis"
+    ]
+  },
+  {
+    "url": "https://www.meticulousresearch.com/product/brain-computer-interface-market-6654",
+    "title": "Brain-Computer Interface Market",
+    "publisher": "Meticulous Research",
+    "date": "2026-05",
+    "used_for": "Market size 2025, 2026, 2036",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.naox.tech/",
+    "title": "NAOX Technologies home page",
+    "publisher": "NAOX Technologies",
+    "date": "2026",
+    "used_for": "K251550 statement; not CE-marked",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.naox.tech/en/naox-link/",
+    "title": "NAOX LINK",
+    "publisher": "NAOX Technologies",
+    "date": "2026",
+    "used_for": "Single-channel, ages 6+, no diagnostic conclusions",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.naox.tech/en/naox-wave/",
+    "title": "NAOX WAVE",
+    "publisher": "NAOX Technologies",
+    "date": "2026",
+    "used_for": "OEM platform, SDK and API",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.ndss-symposium.org/ndss2025/accepted-papers/",
+    "title": "NDSS 2025 accepted papers",
+    "publisher": "Internet Society",
+    "date": "2025",
+    "used_for": "Venue check; located Pasternak et al.",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://www.ndss-symposium.org/ndss2026/accepted-papers/",
+    "title": "NDSS 2026 accepted papers",
+    "publisher": "Internet Society",
+    "date": "2026",
+    "used_for": "Venue check; no BCI paper found",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://www.neurable.com/ethics",
+    "title": "Neurable ethics page",
+    "publisher": "Neurable",
+    "date": null,
+    "used_for": "Privacy statements",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.neurable.com/products/research-kit",
+    "title": "MW75 Neuro Research Kit",
+    "publisher": "Neurable",
+    "date": null,
+    "used_for": "12-channel, 500 Hz, raw data access",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.neuroelectrics.com/solutions/enobio",
+    "title": "Enobio 8, 20, 32",
+    "publisher": "Neuroelectrics",
+    "date": null,
+    "used_for": "Channel variants, SDK",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.nissan-global.com/EN/INNOVATION/TECHNOLOGY/ARCHIVE/B2V/",
+    "title": "Brain-to-Vehicle (technology library)",
+    "publisher": "Nissan Motor Corporation",
+    "date": null,
+    "used_for": "MRCP and ErrP signals; 'skullcap'; Brain-to-Performance mention",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.sec.gov/Archives/edgar/data/0000885725/000088572526000059/bsx-20260907.htm",
+    "title": "Form 8-K, Item 1.05 Material Cybersecurity Incidents",
+    "publisher": "SEC EDGAR / Boston Scientific",
+    "date": "2026-09-07",
+    "used_for": "Incident dates, scope, materiality",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.silicon.co.uk/press-release/introducing-muse-s-athena-the-next-evolution-in-cognitive-fitness",
+    "title": "Introducing Muse S Athena: The Next Evolution in Cognitive Fitness (press release mirror)",
+    "publisher": "Interaxon via Silicon UK",
+    "date": "2025-03-18",
+    "used_for": "Athena price, sensors, raw-data statement",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.soundguys.com/nextsense-smartbuds-bring-eeg-brain-sensors-to-wireless-earbuds-for-the-first-time-152745/",
+    "title": "NextSense Smartbuds bring EEG brain sensors to wireless earbuds",
+    "publisher": "SoundGuys",
+    "date": "2026-02-09",
+    "used_for": "Smartbuds price, sensors, shipping (secondary)",
+    "collected_for": [
+      "eeg"
+    ]
+  },
+  {
+    "url": "https://www.towardshealthcare.com/insights/brain-computer-interface-market",
+    "title": "Brain Computer Interface Market",
+    "publisher": "Towards Healthcare",
+    "date": "2026-07-06",
+    "used_for": "Market size 2025, 2026, 2035",
+    "collected_for": [
+      "market"
+    ]
+  },
+  {
+    "url": "https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/martinovic",
+    "title": "On the Feasibility of Side-Channel Attacks with Brain-Computer Interfaces",
+    "publisher": "USENIX",
+    "date": "2012",
+    "used_for": "Correcting row C62",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://www.usenix.org/conference/usenixsecurity25/technical-sessions",
+    "title": "USENIX Security 2025 technical sessions",
+    "publisher": "USENIX",
+    "date": "2025",
+    "used_for": "Venue check; no BCI paper found",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://www.usenix.org/conference/usenixsecurity26/technical-sessions",
+    "title": "USENIX Security 2026 technical sessions",
+    "publisher": "USENIX",
+    "date": "2026",
+    "used_for": "Venue check; no BCI paper found",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://www.usenix.org/conference/woot25/technical-sessions",
+    "title": "WOOT 2025 technical sessions",
+    "publisher": "USENIX",
+    "date": "2025",
+    "used_for": "Venue check",
+    "collected_for": [
+      "research"
+    ]
+  },
+  {
+    "url": "https://zeto-inc.com/",
+    "title": "Zeto home page",
+    "publisher": "Zeto, Inc.",
+    "date": "2026",
+    "used_for": "Products, HIPAA cloud statement, 2026 New Wave clearance",
+    "collected_for": [
+      "eeg"
+    ]
+  }
+]

@@ -1,0 +1,569 @@
+[
+  {
+    "file": "src/site/film/reel.js",
+    "line": 221,
+    "shown_value": "'62 of 70' brain-device companies we track (footer line 229: 'SOURCE: QINNOVATE BCI LANDSCAPE DATASET, AUGUST 2026')",
+    "data_value": "59 of 67 in committed datalake/bci-landscape.json (last_verified 2026-04-29); 62 of 70 only in uncommitted ../neurosecurity/datalake/bci-landscape.json (last_verified 2026-08-13). Every dashboard built from this worktree (landscape.astro noSecCount, BciDirectory stats, KQL companies table) renders 59 / 67.",
+    "hardcoded": true,
+    "severity": "high",
+    "suggested_fix": "Either commit the August dataset before the film ships, or read both numbers from a build-time JSON emitted by prebuild (count of security_posture=='none_published' and companies.length) so the film cannot cite an unpublished file."
+  },
+  {
+    "file": "src/components/FilmReel.astro",
+    "line": 9,
+    "shown_value": "aria-label: '62 of 70 tracked companies publish nothing about their security' and '165 attack techniques'",
+    "data_value": "59 of 67 (committed) / 62 of 70 (uncommitted); 165 techniques (matches). Dataset wording is narrower: security_posture 'none_published' is recorded as 'no BCI-specific published security posture' and metadata.limitations says 'based on public information only'.",
+    "hardcoded": true,
+    "severity": "high",
+    "suggested_fix": "Generate the label from the same build-time values as the film. Reword to what the field measures: 'had no BCI-specific security documentation we could find'."
+  },
+  {
+    "file": "src/site/film/reel.js",
+    "line": 211,
+    "shown_value": "'Most say nothing about security.' (paired with 62 of 70)",
+    "data_value": "The field does not support 'say nothing': Medtronic DBS and Boston Scientific Neuromodulation are coded none_published, yet both publish a product-security page and a vulnerability-intake process (fetched 2026-10-06: medtronic.com/en-us/e/product-security/security-bulletins.html; bostonscientific.com/en-US/customer-service/product-security.html). 0 of 70 company records carry an evidence URL for the posture value.",
+    "hardcoded": true,
+    "severity": "high",
+    "suggested_fix": "Human decision: narrow the claim to 'BCI-specific' or re-code the established device makers. Add posture_evidence_url + posture_checked fields before repeating the ratio anywhere."
+  },
+  {
+    "file": "src/pages/index.astro",
+    "line": 62,
+    "shown_value": "'Built on the QIF hourglass architecture for an $8 billion industry.*' (also meta description line 49: 'an $8B industry'; footnote line 99: 'Median estimate across 9 market research firms')",
+    "data_value": "9 firms supply 2024 estimates, median $2.3B (range 1.6-4.02). $8.36B is the median of the 3 firms with a 2032 projection (6.16, 8.36, 10.86). No year in the data has 9 firms and an $8B median.",
+    "hardcoded": true,
+    "severity": "high",
+    "suggested_fix": "Compute from market_size_estimates at build time and state year and n: '$2.3B in 2024 (median of 9 estimates); projected about $8B by 2032 (median of 3)'."
+  },
+  {
+    "file": "src/pages/index.astro",
+    "line": 295,
+    "shown_value": "NISS worked example 'Signal Injection': Base Severity 6.0 + Reversibility 1.5 + Detectability 0.7 = 'Final NISS 8.2 HIGH' (lines 292-295); line 279 describes NISS as 'base severity, reversibility, and detectability'",
+    "data_value": "QIF-T0001 Signal injection: NISS 6.1, severity medium (vector BI:H/CR:H/CD:H/CV:E/RV:P/NP:T). niss_spec defines six metrics (BI, CR, CD, CV, RV, NP) combined as a weighted mean, not an additive build-up; there is no detectability metric. Highest score in the catalog is 8.4 (QIF-T0122).",
+    "hardcoded": true,
+    "severity": "high",
+    "suggested_fix": "Render the example from the registrar record (score, severity, parsed vector) and describe the six real metrics."
+  },
+  {
+    "file": "src/components/bci/BciLandscape.tsx",
+    "line": 139,
+    "shown_value": "'Known threat vectors (TARA)' series: threatBase = 135, back-projected as 135*0.83^(years back) for 2010-2025 and forward at +20%/yr (lines 139-157); plotted as solid historical line with dots",
+    "data_value": "No historical series exists. The registrar holds 165 techniques today; its changelog starts 2026-01-15 (71 techniques). Values shown for 2010-2025 are synthesized, and the base (135) is stale.",
+    "hardcoded": true,
+    "severity": "high",
+    "suggested_fix": "Remove the back-projection. Plot only dated catalog counts (changelog / snapshot index) and label any forward line as an assumption with its growth rate."
+  },
+  {
+    "file": "src/components/bci/BciLandscape.tsx",
+    "line": 119,
+    "shown_value": "Publication forecast: log-linear regression with x = array index (0..8), then 'idx = n-1+y' treated as one year ahead (line 150)",
+    "data_value": "publication_trends years are unevenly spaced (2010, 2012, 2015, 2018, 2020, 2022, 2023, 2024, 2025), so slope-per-index is not growth-per-year. The inputs are themselves described in metadata.limitations as 'approximate order-of-magnitude estimates' (all round numbers).",
+    "hardcoded": false,
+    "severity": "high",
+    "suggested_fix": "Regress on year, not index, and show the fit interval; or drop the projection until publication counts are replaced with reproducible PubMed E-utilities counts."
+  },
+  {
+    "file": "src/pages/research/landscape.astro",
+    "line": 78,
+    "shown_value": "Stat tile 'Invasive / Non-Inv' = 20/30 (nonInvasiveCount filters type === 'non_invasive', line 48)",
+    "data_value": "Committed data: 20 invasive, 40 non-invasive (30 spelled 'non_invasive' + 10 spelled 'non-invasive'), 7 semi-invasive. The tile drops 10 companies and omits semi-invasive, so it sums to 50 beside a '67 companies' tile. Uncommitted file normalises the spelling (22/40/8).",
+    "hardcoded": false,
+    "severity": "high",
+    "suggested_fix": "Normalise type in the data (one enum) and validate it in prebuild; show three buckets or label the tile 'of 67'."
+  },
+  {
+    "file": "src/lib/kql-tables.ts",
+    "line": 185,
+    "shown_value": "KQL techniques table columns dual_use, physics_tier, consent_tier read t.dual_use / t.physics_tier / t.consent_tier (lines 184-186)",
+    "data_value": "Those keys do not exist at technique top level; values live at t.tara.dual_use, t.physics_feasibility.tier(_label), t.tara.governance.consent_tier. Generated src/site/data/kql-tables.json has all three empty for 165/165 rows, so the dual-use field cannot be queried from any KQL dashboard.",
+    "hardcoded": false,
+    "severity": "high",
+    "suggested_fix": "Read the nested paths; add a prebuild assertion that key columns are non-empty for at least the share the registrar supports."
+  },
+  {
+    "file": "src/lib/kql-tables.ts",
+    "line": 380,
+    "shown_value": "buildNeurosecurityScores() reads scoresRaw.scores and fields authentication/encryption/firmware/physical",
+    "data_value": "datalake/neurosecurity-scores.json has a 'devices' array (22 records) with overall_score, severity, subscores{CL,MI,MP,PC,EA}, vector. The table is empty and is absent from the generated kql-tables.json (75 tables, no neurosecurity_scores).",
+    "hardcoded": false,
+    "severity": "high",
+    "suggested_fix": "Map from .devices with the real field names; fail the build when a declared table has zero rows."
+  },
+  {
+    "file": "src/lib/kql-tables.ts",
+    "line": 893,
+    "shown_value": "risk_profile.security_score maps posture 'minimal'->1, 'basic'->2, 'moderate'->3, anything else->4 (lines 893-894)",
+    "data_value": "Data vocabulary is none_published / minimal_claims / basic_encryption / regulatory_compliance / open_source. Generated table: all 8 non-'none_published' companies score 4/4, including the two 'minimal_claims' companies, so risk_index is wrong for them.",
+    "hardcoded": false,
+    "severity": "high",
+    "suggested_fix": "Key the map on the actual enum and throw on unknown values."
+  },
+  {
+    "file": "src/site/film/reel.js",
+    "line": 13,
+    "shown_value": "Funding bars '$0.66B 2022', '$1.4B 2023', '$2.3B 2024', '$4.8B 2025'; footer line 361 '2025 IS A PARTIAL YEAR'",
+    "data_value": "vc_aggregate_by_year matches the four values (662.6M, 1.4B, 2.3B, 4.8B). But the 2025 row is annotated 'cumulative, partial year' while its cited source (neurotechnology.substack.com/p/2025-snapshot, fetched 2026-10-06) is dated 2026-01-12 and reports '$4.8 Billion across 140 deals' for 2025. 2022 and 2023 rows have no source_url. The series is neurotechnology-wide, not BCI-only.",
+    "hardcoded": true,
+    "severity": "high",
+    "suggested_fix": "Human decision on what the 2025 value is (annual vs cumulative, full vs partial year); then fix the note and the footer together. Add source_url for 2022/2023 or mark them unverified. Read bar values from the dataset."
+  },
+  {
+    "file": "src/lib/kql-tables.ts",
+    "line": 880,
+    "shown_value": "momentum table: cumulative_invested_M = running sum of vc_aggregate_by_year (2025 row: 9,163M; yoy_growth 109%)",
+    "data_value": "If the 2025 value is cumulative, as the data note says, the running sum double counts and the YoY figure is invalid; if it is annual, the note is wrong. data.market_data.total_funding_tracked_usd (4.8B) equals the 2025 row exactly, which suggests the two were conflated.",
+    "hardcoded": false,
+    "severity": "high",
+    "suggested_fix": "Resolve the 2025 definition first; store an explicit 'basis': 'annual'|'cumulative' field and refuse to sum mixed bases."
+  },
+  {
+    "file": "src/pages/research/whitepaper/index.astro",
+    "line": 474,
+    "shown_value": "Company funding cards (lines 474-499): Neuralink $1.29B, Synchron $145M+, Paradromics $103M+, Precision $93M+, Science Corp $552M+, Blackrock $10M+",
+    "data_value": "Committed landscape: Neuralink $1.34B, Synchron $345M, Paradromics $127M, Precision $183M, Science Corporation $490M, Blackrock $210M. Uncommitted: Neuralink $1.85B. All six disagree; Science Corp is higher on the page than in the data.",
+    "hardcoded": true,
+    "severity": "high",
+    "suggested_fix": "Bind the cards to bci-landscape.json funding_total_usd (current draft only; leave archived versions untouched per whitepaper-archival rule)."
+  },
+  {
+    "file": "src/pages/research/whitepaper/index.astro",
+    "line": 709,
+    "shown_value": "'CVSS v4.0 cannot score {stats.nissGapPercentage}% of the catalogued techniques' -> renders 61.8%; the NissGapChart on the same page says 94.4% (src/components/whitepaper/NissGapChart.astro:23, hardcoded)",
+    "data_value": "whitepaper-stats.ts computes the share of techniques that HAVE both a CVSS vector and NISS > 0 (102/165 = 61.8%), which is a coverage figure, not a 'cannot score' figure. Registrar gap_group >= 2: 89 techniques = 53.9% of 165, or 86.4% of the 103 that carry a CVSS vector. Neither 61.8% nor 94.4% is supported.",
+    "hardcoded": false,
+    "severity": "high",
+    "suggested_fix": "Define the metric once (gap_group >= 2 over techniques with a CVSS vector), compute it in whitepaper-stats.ts, and use it in both places with the denominator stated."
+  },
+  {
+    "file": "src/pages/index.astro",
+    "line": 140,
+    "shown_value": "'{165} techniques. Scored, mapped, and mirrored against a therapeutic use.' (also line 62 'scored for neural impact, mapped to the neurorights they threaten, and traced to their therapeutic counterparts'; line 265 'each scored for neural impact'; qif-constants.ts:96 'each scored with NISS')",
+    "data_value": "Of 165: 139 have a NISS score (QIF-T0136..T0161 do not), 135 have a neurorights mapping, 130 have a therapeutic analog, 103 have a CVSS vector.",
+    "hardcoded": false,
+    "severity": "medium",
+    "suggested_fix": "State coverage ('139 of 165 scored so far') or scope the sentence to the enriched subset; README line 192 already does this correctly."
+  },
+  {
+    "file": "src/pages/index.astro",
+    "line": 265,
+    "shown_value": "'mapped to {neurorightsCount} neurorights' -> renders 7",
+    "data_value": "The set is seeded with 'EA' and then collects every code in neurorights.affected: MP, CL, MI, PC plus DI and IDA, which registrar.statistics.neurorights.taxonomy marks as folded into MI and MP. qif-ethics-controls.json defines 4. Elsewhere the site says 4 (governance/rights.astro:22, atlas/tara.astro:50, atlas/tara/[id].astro:359) and 5 (Nav.astro:38, DataStudioBrowser.tsx:33, NeurorightsPentagon).",
+    "hardcoded": false,
+    "severity": "medium",
+    "suggested_fix": "Pick one taxonomy (human decision: 4 or 4+EA) and derive the count from qif-ethics-controls.json; fold DI/IDA before counting."
+  },
+  {
+    "file": "src/pages/index.astro",
+    "line": 265,
+    "shown_value": "'{dsm5Count} DSM-5-TR category references' -> renders 76",
+    "data_value": "76 is the number of techniques with at least one primary DSM code, not a number of categories. Distinct codes across primary+secondary: 48. qif-dsm-mappings.json lists 40 conditions; registrar.statistics says unique_dsm_codes 15; qif-timeline.json says dsm5_diagnoses_mapped 68.",
+    "hardcoded": false,
+    "severity": "medium",
+    "suggested_fix": "Label as '76 techniques carry a DSM-5-TR category reference' or show distinct codes; retire the stale counters."
+  },
+  {
+    "file": "src/pages/index.astro",
+    "line": 161,
+    "shown_value": "'{therapeuticCount} of those same mechanisms are already used in medicine.' -> 130",
+    "data_value": "Of the 130 with a therapeutic analog, clinical.fda_status is cleared 36, approved 16, breakthrough 3, investigational 49, none 17, N/A 7, not_applicable 2. 52 are cleared or approved.",
+    "hardcoded": false,
+    "severity": "medium",
+    "suggested_fix": "Say 'have a therapeutic counterpart' (as line 233 does) or count only cleared/approved for 'already used in medicine'."
+  },
+  {
+    "file": "src/pages/index.astro",
+    "line": 203,
+    "shown_value": "'28 consumer sensor exploitation techniques validated with real devices'",
+    "data_value": "Registrar has 33 techniques under the Consumer Sensor domain (QIF-S.*) across 5 tactics. validation-registry.json records no hardware validation for that set; its entries with real hardware concern one protocol vulnerability (VAL-006), and 'Real BCI Attack Testing' is listed under not_tested. The T0079 analysis page reports one technique on 2 subjects, 2 devices.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Count from tactic prefix; say what was actually tested (one technique, n=2) and link the validation entry."
+  },
+  {
+    "file": "src/pages/index.astro",
+    "line": 36,
+    "shown_value": "ThreatAtlasViz bySeverity = {critical 3, high 29, medium 72, low 60} (sum 164) beside total 165",
+    "data_value": "Mixes NISS severity (139 techniques) with the legacy 'severity' field for the 26 unscored ones, and drops the one technique whose NISS severity is 'none'. NISS severity alone: critical 0, high 20, medium 59, low 59, none 1, unscored 26. Legacy severity alone: critical 32, high 72, medium 57, low 4 (this is what whitepaper/index.astro:702 shows as '32 are critical').",
+    "hardcoded": false,
+    "severity": "medium",
+    "suggested_fix": "Use one scale per chart and show 'not yet scored' as its own bucket."
+  },
+  {
+    "file": "src/pages/index.astro",
+    "line": 25,
+    "shown_value": "Footnote '{confirmed} confirmed, {demonstrated} demonstrated, {theoretical} theoretical' -> 27 / 43 / 95",
+    "data_value": "Status counts: CONFIRMED 27, DEMONSTRATED 43, THEORETICAL 67, EMERGING 26, PLAUSIBLE 1, SPECULATIVE 1. The 'theoretical' figure folds in 28 techniques with other statuses.",
+    "hardcoded": false,
+    "severity": "medium",
+    "suggested_fix": "Label the bucket 'theoretical or emerging' or show the six statuses."
+  },
+  {
+    "file": "src/components/TrustBar.astro",
+    "line": 12,
+    "shown_value": "'{STATS.publications} Publications' -> 18 (src/lib/qif-constants.ts:119, comment says 'updated at build time via prebuild script')",
+    "data_value": "prebuild.sh has no step that writes this value. The link target /news/ counts the blog collection, which loads 74 markdown posts from research/blog; qif-timeline.json says blog_posts 59.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Derive from getCollection('blog') or define what a 'publication' is and count that."
+  },
+  {
+    "file": "src/pages/bci/directory.astro",
+    "line": 20,
+    "shown_value": "'57 companies. 68 devices.' (also meta description line 13, plus 'The most comprehensive open BCI device directory')",
+    "data_value": "67 companies / 70 devices committed; 70 / 74 uncommitted. The component below the heading renders the computed 67 / 70. The superlative is unverified.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Use getBciDirectoryStats(); drop the superlative (neuromodesty rule 7)."
+  },
+  {
+    "file": "src/components/data-studio/DataStudioBrowser.tsx",
+    "line": 37,
+    "shown_value": "'57 companies in the BCI landscape' and line 38 '68 devices'; line 33 'the 5 neurorights'",
+    "data_value": "parquet catalog: companies 67 rows, devices 70 rows; technique_neurorights has 452 rows over 6 codes (MP, MI, CL, PC, DI, IDA).",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Drop counts from static descriptions; the row count is already shown from catalog.json."
+  },
+  {
+    "file": "src/pages/research/intel/index.astro",
+    "line": 65,
+    "shown_value": "'BCI Landscape Tracker (57+ companies) ... NISS device scoring (20 devices) ... BCI Intel Feed (215+ items). All funding figures, regulatory milestones, and device specifications are verified against primary sources.'",
+    "data_value": "67 companies; neurosecurity-scores.json has 22 devices; bci-intel-feed.json has 970 items. Primary-source claim is not supported by the fields: 42% of companies have null funding, 2 of 67 have dated funding_rounds, 16 of 44 major_funding_rounds cite aggregators (tracxn.com 11, sacra.com 5), 1 has no source_url, 0 company records carry a security evidence URL.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Compute the counts; replace the verification sentence with the actual provenance coverage."
+  },
+  {
+    "file": "src/pages/research/intel/index.astro",
+    "line": 30,
+    "shown_value": "Q1 2026 report card: '57 companies, $5.93B tracked funding, $482M Q1 activity ... 81% CVE blind spot'",
+    "data_value": "Current data: 67 companies; sum of funding_total_usd $5.96B (committed) / $7.07B (uncommitted); rounds dated 2026-01..03 sum to $538M; the 81% comes from cve-technique-mapping.json blind_spot_ratio 0.8125, computed when 62 techniques were tier-0 (99 today).",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Keep as a dated snapshot ('as of 2026-03-31') and store the report's numbers in a snapshot file so the card is reproducible."
+  },
+  {
+    "file": "src/pages/governance/rights.astro",
+    "line": 1120,
+    "shown_value": "'{165} BCI techniques across 15 tactics'",
+    "data_value": "17 tactics in registrar.tactics, all 17 in use.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Import TACTIC_COUNT from threat-data."
+  },
+  {
+    "file": "src/pages/tools/intel/index.astro",
+    "line": 319,
+    "shown_value": "'161 Attack Patterns — One per TARA technique'",
+    "data_value": "165 techniques.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Use TECHNIQUE_COUNT."
+  },
+  {
+    "file": "src/pages/atlas/scoring.astro",
+    "line": 511,
+    "shown_value": "'42 conditions | 7 categories' (also line 517)",
+    "data_value": "qif-neurological-mappings.json: 50 conditions, 7 categories.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Compute from the JSON."
+  },
+  {
+    "file": "src/pages/bci/plugin.astro",
+    "line": 185,
+    "shown_value": "'Explore all 16 datasets' (also line 298 'Browse 16 EEG datasets')",
+    "data_value": "eeg-samples.json: 26 samples (17 redistributable).",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Use EEG_COUNT from qif-stats."
+  },
+  {
+    "file": "src/pages/atlas/index.astro",
+    "line": 82,
+    "shown_value": "Domain Matrix card stat '11 domains'",
+    "data_value": "tara_domain_primary has 12 distinct values (SIL, COG, SOM, EMO, MOT, VES, AUT, LNG, IDN, VIS, MEM, AUD); chain-constants.ts says 12; registrar.domains (locus taxonomy) has 8, which README and glossary cite. Two different things are both called 'domains'.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Use DOMAIN_COUNT and name the taxonomies distinctly ('8 locus domains', '12 TARA domains: 11 biological + silicon')."
+  },
+  {
+    "file": "src/pages/governance/ai-security-ethics.astro",
+    "line": 34,
+    "shown_value": "'An $8 billion industry by 2032.* {165} attack techniques catalogued across 24 commercial devices.'",
+    "data_value": "Techniques are not catalogued per device. 24 is the size of src/site/bci-hardware-inventory.json, which includes non-commercial entries (BrainGate, DARPA N3 program, CortiCom). Landscape tracks 70 devices; tara_attack_surface is a per-company list covering 33 of 67 companies and only 23 distinct technique IDs (none above QIF-T0100).",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Separate the two facts; cite the 2032 median with n=3."
+  },
+  {
+    "file": "src/lib/bci-directory-data.ts",
+    "line": 116,
+    "shown_value": "FDA_RANK keys: approved, de_novo, cleared, breakthrough_device, breakthrough, IDE, exempt, not_required, none; unknown -> 0",
+    "data_value": "Device fda_status values in the data include fda_approved (9), 510k_cleared (3), clinical_trial (12), preclinical (6), not_applicable (4), first_in_human, submitted, unknown, and free text ('510(k) cleared (2026-01)', 'research/developer'). 16 distinct values; 'fda_approved' ranks 0, below 'exempt' (2), so top_fda_status is wrong for companies whose best device is approved.",
+    "hardcoded": false,
+    "severity": "medium",
+    "suggested_fix": "Collapse fda_status to a controlled enum plus a separate date and submission-number field; rank on the enum."
+  },
+  {
+    "file": "src/lib/qif-stats.ts",
+    "line": 63,
+    "shown_value": "STATS.techniques.dualUse = confirmed + probable -> 121 (shown as '{121} dual-use' in DemoAtlas.tsx:275)",
+    "data_value": "Three definitions are live: 121 (dual_use confirmed|probable, demo atlas), 130 (therapeutic_analog present, homepage and roadmap), 131 (dual_use != silicon_only). Homepage passes siliconOnly = 165-130 = 35 while the data has 34 silicon_only. Film and README say 'about 3 in 4' / 'about 75%'; the range is 73.3%-79.4%.",
+    "hardcoded": false,
+    "severity": "medium",
+    "suggested_fix": "Export one named constant per definition from one module and use the same one on every surface."
+  },
+  {
+    "file": "src/lib/qif-stats.ts",
+    "line": 33,
+    "shown_value": "flattenDevices() copies company.funding and company.employees",
+    "data_value": "Fields are funding_total_usd and employees_approx; companyFunding and companyEmployees are undefined for all 70 devices.",
+    "hardcoded": false,
+    "severity": "medium",
+    "suggested_fix": "Use the real field names or drop the properties."
+  },
+  {
+    "file": "src/lib/threat-data.ts",
+    "line": 641,
+    "shown_value": "getRegulatoryStats().nonCyberDevices = total - cyberDevices -> 97",
+    "data_value": "Only 135 techniques have a regulatory assessment: 68 cyber-device, 67 not; 30 are unassessed and are being counted as 'non-cyber'.",
+    "hardcoded": false,
+    "severity": "medium",
+    "suggested_fix": "Subtract from the assessed count and expose 'unassessed'."
+  },
+  {
+    "file": "src/lib/threat-data.ts",
+    "line": 290,
+    "shown_value": "getRegistryStats() spreads registry.statistics; served at /api/qif.json (src/pages/api/qif.json.ts:25)",
+    "data_value": "registrar.statistics sub-blocks were not recomputed after the catalog grew from 135 to 165: tara.enriched_techniques 135 (165 have a tara block), dual_use_breakdown 79/18/9/29 (actual 102/19/10/34), techniques_with_clinical_analog 104 (130), dsm5.unique_dsm_codes 15 (48), neurorights.techniques_by_right MP 118/MI 91/CL 77/DI 63 (actual 106/101/85/76), physics_feasibility.by_tier sums to 102 (actual: 161 assessed, feasible_now 99), by_origin sums to 109 (135 have origin). Top-level totals (165/17/8, by_status, by_severity, by_tactic) are correct.",
+    "hardcoded": false,
+    "severity": "medium",
+    "suggested_fix": "Recompute statistics in a script run by prebuild, or delete the block and compute in threat-data.ts only."
+  },
+  {
+    "file": "src/lib/threat-data.ts",
+    "line": 273,
+    "shown_value": "getStatusStats() initialises 4 statuses then does stats[t.status]++; same pattern at line 557 (fdaStatus) ",
+    "data_value": "Data has 6 statuses (PLAUSIBLE 1, SPECULATIVE 1) and an fda_status value 'not_applicable' (2) outside the declared record; incrementing an undefined key yields NaN for those buckets.",
+    "hardcoded": false,
+    "severity": "medium",
+    "suggested_fix": "Initialise from the data or default missing keys to 0."
+  },
+  {
+    "file": "src/data/qif-timeline.json",
+    "line": 11,
+    "shown_value": "current_stats (as_of 2026-03-15): threat_techniques 161, bci_devices 68, brain_regions 37, tara_tactics 16, neurorights_mapped 6, dsm5_diagnoses_mapped 68, research_sources 311, tara_version v1.8, nsp_version v0.5; rendered on /news/roadmap (roadmap.astro:35-38, 47-48) and served at /api/qif.json (qif.json.ts:64)",
+    "data_value": "165 techniques, 70 devices, 38 regions, 17 tactics, 342 rows in QIF-RESEARCH-SOURCES.md. The newest milestone in the file is also 2026-03-15, so nothing after March is on the timeline.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Generate current_stats in prebuild from the source files (timeline-check.mjs --fix exists but is not wired in)."
+  },
+  {
+    "file": "src/lib/qif-constants.ts",
+    "line": 100,
+    "shown_value": "PILLARS: TARA version '1.7', NSP version '0.4' (line 112)",
+    "data_value": "TARA: registrar 'version' 4.0, statistics.tara.version 1.6, changelog newest 1.8, qif-timeline v1.8, README v1.7. NSP: README, qif-timeline and milestones.json say 0.5. QIF: constants 8.0, milestones.json whitepaper 7.0, README 'v6.3 (v8.0)'.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Single version manifest read by constants, README check and timeline."
+  },
+  {
+    "file": "src/pages/research/whitepaper/index.astro",
+    "line": 3393,
+    "shown_value": "'{165} techniques as of v1.4 ... 26 techniques are classified as Theoretical and 1 as Speculative'",
+    "data_value": "THEORETICAL 67, SPECULATIVE 1; 26 is the EMERGING count. 'as of v1.4' no longer describes a 165-technique catalog.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Bind to getStatusStats()."
+  },
+  {
+    "file": "src/pages/research/whitepaper/index.astro",
+    "line": 462,
+    "shown_value": "'Over $4 billion in disclosed venture funding deployed into BCI companies through 2024 (source: Pitchbook, Tracxn) ... $2.3B in 2024 alone' (repeated at 529)",
+    "data_value": "vc_aggregate_by_year 2022-2024 sums to $4.36B and is labelled neurotechnology in its source; dated BCI rounds in major_funding_rounds for 2024 sum to $377M. Sum of company funding_total_usd is $5.96B. The 2022 and 2023 aggregate rows carry no source_url.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "State which series each figure comes from and its scope (neurotech vs BCI)."
+  },
+  {
+    "file": "datalake/bci-landscape.json",
+    "line": 2849,
+    "shown_value": "market_data.total_funding_tracked_usd = 4,800,000,000",
+    "data_value": "Sum of companies[].funding_total_usd = 5,958,860,000 (39 of 67 non-null); sum of major_funding_rounds = 3,334,820,000 (44 rounds, 15 companies). The stored total matches neither and equals the 2025 VC aggregate row. Site shows the 5.96B (BciDirectory) and 3.3B (BciLandscape FundingGap 'Tracked BCI funding') versions on different pages.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Delete the stored total; compute one figure with a stated basis."
+  },
+  {
+    "file": "datalake/cve-technique-mapping.json",
+    "line": 6,
+    "shown_value": "total_techniques 161, total_techniques_with_cves 21, coverage_ratio 0.1927",
+    "data_value": "165 techniques; 20 distinct technique IDs appear in the 55 mappings; 0.1927 = 21/109 (a denominator from an older catalog). Current ratio 20/165 = 12.1%. README line 136 repeats '21'. blind_spot_ratio 0.8125 (the site's '81% CVE blind spot') uses tier0_feasible_now 62; the registrar now has 99.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Recompute header fields in prebuild; drop derived numbers from the file."
+  },
+  {
+    "file": "datalake/impact-chains.json",
+    "line": 1,
+    "shown_value": "4,428 precomputed chains, presented as 'each ... traced through the Neural Impact Chain' (qif-constants.ts:96)",
+    "data_value": "Chains exist for 73 of 165 techniques (none above QIF-T0135; 92 missing). Last regenerated 2026-03-15. 'npm run compute:chains' points at datalake/src/scripts/compute-impact-chains.mjs, which does not exist (the script is at datalake/scripts/); the three eeg:* scripts have the same broken path (package.json:25-28).",
+    "hardcoded": false,
+    "severity": "medium",
+    "suggested_fix": "Fix the script paths, regenerate, and state coverage."
+  },
+  {
+    "file": "datalake/parquet/catalog.json",
+    "line": 1,
+    "shown_value": "catalog generated 2026-07-26: 31 datasets, intel_feed 942 rows; qif-stats.ts:132 hardcodes parquet total 31",
+    "data_value": "33 .parquet files are on disk (dsm_mappings and research_registry are not in the catalog); bci-intel-feed.json has 970 items. prebuild regenerates parquet only when pyarrow is installed, otherwise it copies the committed files, so parquet can lag JSON silently.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Have prebuild fail (or warn loudly) when parquet row counts differ from JSON; read the count from catalog.json."
+  },
+  {
+    "file": "src/pages/research/api.astro",
+    "line": 277,
+    "shown_value": "'crawling 74+ RSS feeds ... Updated weekly via GitHub Actions' (also line 298; Nav.astro:73 '74+ sources')",
+    "data_value": "fetch-intel.mjs defines 71 feeds (its own header says '50+'); intel-sources.json lists 211 sources, 49 flagged intel_feed, 46 with rss_url; the feed has items from 56 sources. Newest 'fetched' value in bci-intel-feed.json is 2026-07-26, ten weeks before today, in this worktree.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Compute feed count from INTEL_FEEDS; show the last-fetched date on the page instead of a cadence claim."
+  },
+  {
+    "file": "README.md",
+    "line": 90,
+    "shown_value": "'NISS scoring engine | 109/109 techniques scored'",
+    "data_value": "validation-registry.json VAL-004 says 103 techniques; the registrar has 139 of 165 scored. README line 192 says 139/165.",
+    "hardcoded": true,
+    "severity": "medium",
+    "suggested_fix": "Quote the validation entry with its date, or the live coverage."
+  },
+  {
+    "file": "src/site/film/reel.js",
+    "line": 239,
+    "shown_value": "Grid lights 3 of every 4 cells cyan (index % 4 !== 3 -> 124 of 165) under 'About 3 in 4 have a therapeutic twin' (line 250); GRID.count 165 hardcoded (line 10); '165 attack techniques' (line 249)",
+    "data_value": "165 techniques (matches). Therapeutic share is 130/165 = 78.8% by therapeutic_analog, 131/165 = 79.4% by dual_use != silicon_only, 121/165 = 73.3% by confirmed|probable. 'About 3 in 4' holds; the lit cells are a pattern, not the actual techniques.",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "Inject count and per-technique dual-use flags at build time so the grid is the data."
+  },
+  {
+    "file": "README.md",
+    "line": 152,
+    "shown_value": "'About 75% of the 165 techniques map to a therapeutic counterpart'",
+    "data_value": "73.3% to 79.4% depending on definition (see qif-stats.ts:63 finding).",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "State the definition; npm run health already checks the count."
+  },
+  {
+    "file": "README.md",
+    "line": 135,
+    "shown_value": "'340+ verified sources across 9 domains' (also line 391); framework.astro:335 says '309+ verified sources'; qif-timeline.json says 311",
+    "data_value": "osi-of-mind/QIF-RESEARCH-SOURCES.md has 342 ID rows; header 'Last updated: 2026-03-14'.",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "One counter, generated."
+  },
+  {
+    "file": "src/pages/research/landscape.astro",
+    "line": 114,
+    "shown_value": "AI security market cards: '$30-34B', '$9.2-11.6B' (line 120), '$6.34B' (line 126), product table rows",
+    "data_value": "Values equal market_data.ai_security_market / threat_intelligence_market / ai_security_funding, but are typed into the page; none of the three data entries has a source_url, and the funding figure is attributed to 'Software Strategies Blog aggregated data'.",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "Bind to the data; add source URLs or mark unverified."
+  },
+  {
+    "file": "src/pages/research/bci-explorer.astro",
+    "line": 20,
+    "shown_value": "'24 BCI devices' (also line 13; research/index.astro:114; bci/directory.astro:48)",
+    "data_value": "bci-hardware-inventory.json has 24 devices (matches). Hardcoded in four places.",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "Use the array length."
+  },
+  {
+    "file": "src/pages/research/api.astro",
+    "line": 75,
+    "shown_value": "'38 brain regions' (also line 145)",
+    "data_value": "qif-brain-bci-atlas.json has 38 regions (matches); qif-timeline.json says 37.",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "Use stats.regions."
+  },
+  {
+    "file": "src/pages/atlas/index.astro",
+    "line": 90,
+    "shown_value": "Device Filter card stat '7 devices'",
+    "data_value": "DeviceFilter.tsx lists 7 device types (matches), but these are categories, not devices; the landscape tracks 70 devices.",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "Label '7 device types' from DEVICES.length."
+  },
+  {
+    "file": "src/lib/kql-tables.ts",
+    "line": 868,
+    "shown_value": "convergence table: 'BCI (actual)' 2023 = $1.8B, 2025 = $2.8B; projected 2026-2030 values; security_spend_B values",
+    "data_value": "Not derived from market_size_estimates (2024 median $2.3B; no 2023 or 2025 BCI estimates in the data). tam_sam_som (line 853) applies fixed 6.5% TAM, 70% SAM and a SOM ramp with no source; medianCagr picks the upper-middle of 14 values (15.81%) where the median is 15.47%.",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "Move assumptions to a documented config block and label the tables as modelled."
+  },
+  {
+    "file": "src/components/bci/BciLandscape.tsx",
+    "line": 85,
+    "shown_value": "Fallback timeline: 'CTRL-Labs acquired by Meta ($500M+)'",
+    "data_value": "acquisition_history records price_usd_estimate 750,000,000 for the same deal. Fallback is only used when no industry_timeline is passed.",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "Delete the fallback or source it from the data."
+  },
+  {
+    "file": "src/pages/atlas/analysis/global-neural-data-governance.astro",
+    "line": 581,
+    "shown_value": "'99 documented attack techniques across 6 domains' (also line 632; atlas/analysis/index.astro:65 '99 BCI attack techniques mapped to DSM-5-TR'; t0079-anc-fingerprint.astro:321 '28 consumer sensor exploitation techniques across 4 tactics')",
+    "data_value": "165 techniques, 8 locus domains; 33 consumer-sensor techniques across 5 tactics. These are dated analysis articles without a visible 'as of' qualifier.",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "Leave the text; add an 'as of <date>, catalog v<x>' line to each article."
+  },
+  {
+    "file": "datalake/bci-landscape.json",
+    "line": 4087,
+    "shown_value": "security_gap.note: 'No BCI company has published a security audit, bug bounty program, or dedicated CISO hire as of Feb 2026'; bci_security_spending_documented_usd = 0",
+    "data_value": "A universal negative that the dataset cannot establish (limitations: 'public information only'), and one the same file contradicts in spirit: Natus is recorded with ICS-CERT advisories. Rendered via the KQL security_gap/sources tables.",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "Reword to 'we found none' with the search scope and date."
+  },
+  {
+    "file": "datalake/qif-brain-bci-atlas.json",
+    "line": 2432,
+    "shown_value": "bci_devices: 'SEE docs/bci-hardware-inventory.json — 24 devices'",
+    "data_value": "File lives at src/site/bci-hardware-inventory.json; there is no docs/ directory in this tree.",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "Fix the pointer or move the inventory into datalake/."
+  },
+  {
+    "file": "src/data/milestones.json",
+    "line": 3,
+    "shown_value": "metrics: techniques_catalogued 161, tactics 15, domains 8, days_active null; specifications[0].version '7.0' (line 57, rendered at roadmap.astro:226)",
+    "data_value": "165 / 17 / 8. The metrics block is not read by any page (roadmap.astro uses disclosures, standards, specifications only).",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "Remove the unused block; bind the specification versions to the version manifest."
+  },
+  {
+    "file": "src/pages/index.astro",
+    "line": 243,
+    "shown_value": "Heading 'No BCI-specific threat taxonomy existed'; section label 'Validated, Not Just Claimed' (line 184) on a page that also says 'Not independently validated' (line 127)",
+    "data_value": "Not a data mismatch: a universal-negative and a self-contradicting claim. validation-registry.json lists 9 internal validations (simulation, audit, one disclosure) and 6 not-tested items.",
+    "hardcoded": true,
+    "severity": "low",
+    "suggested_fix": "Human decision on wording under the neuromodesty rules ('we are not aware of ...'; 'internally tested')."
+  }
+]

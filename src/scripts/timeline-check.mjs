@@ -25,13 +25,38 @@ const DRY_RUN = args.includes('--dry-run');
 // ---------------------------------------------------------------------------
 const TIMELINE_PATH = resolve(ROOT, 'src/data/qif-timeline.json');
 const REGISTRY_PATH = resolve(ROOT, 'datalake/qtara-registrar.json');
-const INVENTORY_PATH = resolve(ROOT, 'site/bci-hardware-inventory.json');
+const LANDSCAPE_PATH = resolve(ROOT, 'datalake/bci-landscape.json');
+const SOURCES_PATH = resolve(ROOT, 'osi-of-mind/QIF-RESEARCH-SOURCES.md');
+const DERIVATION_LOG_PATH = resolve(ROOT, 'osi-of-mind/QIF-DERIVATION-LOG.md');
+const SDK_MANIFEST_PATH = resolve(ROOT, 'datalake/qtara/pyproject.toml');
+const CONSTANTS_PATH = resolve(ROOT, 'src/lib/qif-constants.ts');
 const ATLAS_PATH = resolve(ROOT, 'datalake/qif-brain-bci-atlas.json');
 const CONSTRAINTS_PATH = resolve(ROOT, 'src/lib/bci-limits-constants.ts');
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+/** Counts regex matches in a text file; undefined (reported as SKIP) if the file cannot be read. */
+function countMatches(path, pattern) {
+  try {
+    return (readFileSync(path, 'utf8').match(pattern) ?? []).length;
+  } catch (error) {
+    console.warn(`  [WARN] Could not read ${path}: ${error.message}`);
+    return undefined;
+  }
+}
+
+/** Reads a version string with a one-group regex; undefined (reported as SKIP) if absent or unreadable. */
+function readVersion(path, pattern) {
+  try {
+    const match = readFileSync(path, 'utf8').match(pattern);
+    return match ? `v${match[1]}` : undefined;
+  } catch (error) {
+    console.warn(`  [WARN] Could not read ${path}: ${error.message}`);
+    return undefined;
+  }
+}
+
 function readJSON(path) {
   try {
     return JSON.parse(readFileSync(path, 'utf8'));
@@ -81,11 +106,43 @@ if (registry?.techniques) {
   actual.threat_techniques = registry.techniques.length;
 }
 
-// BCI devices (from bci-hardware-inventory.json)
-const inventory = readJSON(INVENTORY_PATH);
-if (inventory?.devices) {
-  actual.bci_devices = inventory.devices.length;
+// TARA tactics and neurorights referenced by techniques (from qtara-registrar.json)
+if (Array.isArray(registry?.tactics)) {
+  actual.tara_tactics = registry.tactics.length;
 }
+if (registry?.techniques) {
+  const neurorights = new Set();
+  for (const technique of registry.techniques) {
+    for (const code of technique.neurorights?.affected ?? []) neurorights.add(code);
+  }
+  actual.neurorights_mapped = neurorights.size;
+}
+
+// Scoring coverage, domains and declared versions (from qtara-registrar.json)
+if (registry?.techniques) {
+  actual.techniques_niss_scored = registry.techniques.filter((technique) => technique.niss?.version).length;
+  actual.tara_domains = new Set(registry.techniques.map((technique) => technique.tara_domain_primary).filter(Boolean)).size;
+}
+if (registry?.niss_spec?.version) actual.niss_version = `v${registry.niss_spec.version}`;
+if (registry?.version) actual.registrar_version = `v${registry.version}`;
+
+// BCI devices (from bci-landscape.json, the dataset the device directory reads)
+const landscape = readJSON(LANDSCAPE_PATH);
+if (Array.isArray(landscape?.companies)) {
+  actual.bci_devices = landscape.companies.reduce((total, company) => total + (company.devices?.length ?? 0), 0);
+}
+
+if (Array.isArray(landscape?.companies)) actual.bci_companies = landscape.companies.length;
+if (landscape?.version) actual.landscape_dataset_version = `v${landscape.version}`;
+
+// Versions declared in the SDK manifest and the site constants
+actual.sdk_version = readVersion(SDK_MANIFEST_PATH, /^version\s*=\s*"([^"]+)"/m);
+actual.whitepaper_version = readVersion(CONSTANTS_PATH, /LATEST_WHITEPAPER_VERSION\s*=\s*'([^']+)'/);
+
+// Research sources (ID rows in the sources catalog) and derivation log entries
+actual.research_sources = countMatches(SOURCES_PATH, /^\| *[A-Z]{1,3}\d+ *\|/gm);
+// Numbered entries only: the "Entry Index" heading also starts with "## Entry".
+actual.derivation_log_entries = countMatches(DERIVATION_LOG_PATH, /^## Entry \d+/gm);
 
 // Brain regions (from qif-brain-bci-atlas.json)
 const atlas = readJSON(ATLAS_PATH);
@@ -103,7 +160,12 @@ console.log('\n=== QIF Timeline Stats Check ===\n');
 console.log(`Timeline as_of: ${stats.as_of}`);
 console.log(`Check date:     ${iso()}\n`);
 
-const fields = ['threat_techniques', 'bci_devices', 'brain_regions', 'physics_constraints'];
+const fields = [
+  'threat_techniques', 'tara_tactics', 'neurorights_mapped', 'bci_devices', 'brain_regions',
+  'physics_constraints', 'research_sources', 'derivation_log_entries',
+  'techniques_niss_scored', 'tara_domains', 'bci_companies',
+  'niss_version', 'registrar_version', 'landscape_dataset_version', 'sdk_version', 'whitepaper_version',
+];
 
 for (const field of fields) {
   const expected = stats[field];

@@ -1,0 +1,90 @@
+{
+  "version": "1.0-proposed-2026-10-06",
+  "accessed": "2026-10-06",
+  "_note": "Realism anchors for chains-proposed.json. Kept OUT of the chain records so those stay schema-exact. Each chain carries an overall demonstrated/partly-demonstrated/projected label and a per-step label derived from the technique's registrar status and the cited evidence. Defensive framing; no claim that any of these composed chains has occurred.",
+  "label_rules": {
+    "demonstrated": "Technique status DEMONSTRATED/CONFIRMED AND a specific CVE/paper/device fact supports the step as worded.",
+    "partly_demonstrated": "Technique demonstrated in lab or on offline datasets, but not shown on the named deployed device class, or only components are evidenced.",
+    "projected": "Technique status THEORETICAL/EMERGING, or the step is a plausible extrapolation not directly evidenced on hardware."
+  },
+  "chains": [
+    {
+      "chain_id": "CHAIN-DBS-001",
+      "overall_label": "projected",
+      "overall_rationale": "Initial access is demonstrated against real neurostimulator programmers/telemetry (CVEs below), but the closed-loop objective (T0023) and persistence (T0062) are THEORETICAL. No real incident of adaptive-DBS parameter corruption is claimed.",
+      "device_class": "Implanted adaptive deep-brain stimulator with a clinician programmer and patient telemetry (e.g. adaptive/closed-loop DBS systems; landscape: Medtronic BrainSense, Abbott Liberta RC).",
+      "steps": [
+        {"position": 1, "technique_id": "QIF-T0057", "label": "demonstrated", "evidence": "Device/telemetry endpoint enumeration is routine recon; registrar status CONFIRMED.", "source_url": "https://www.cisa.gov/news-events/ics-medical-advisories/icsma-19-080-01"},
+        {"position": 2, "technique_id": "QIF-T0049", "label": "demonstrated", "evidence": "CVE-2023-25931 (CVSS 6.8, CWE-620 Unverified Password Change) in Medtronic Pelvic Health clinician apps on the Smart Programmer; and the Conexus telemetry protocol 'does not implement authentication or authorization' (CVE-2019-6538, CVSS 9.3). Both show weak/absent authentication on real neurostimulator control links.", "source_url": "https://nvd.nist.gov/vuln/detail/cve-2023-25931"},
+        {"position": 3, "technique_id": "QIF-T0007", "label": "partly_demonstrated", "evidence": "Telemetry protocol manipulation demonstrated generally (registrar DEMONSTRATED, Schröder et al. 2025); parameter-shift-within-envelope on a specific adaptive DBS device not publicly shown.", "source_url": "https://arxiv.org/abs/2508.12571"},
+        {"position": 4, "technique_id": "QIF-T0023", "label": "projected", "evidence": "Closed-loop perturbation cascade is registrar THEORETICAL; extrapolated from closed-loop RNS/adaptive-DBS architecture, not demonstrated as an attack.", "source_url": "https://arxiv.org/abs/2508.12571"},
+        {"position": 5, "technique_id": "QIF-T0062", "label": "projected", "evidence": "Gradual drift is registrar THEORETICAL; a modeling construct for sub-threshold cumulative change.", "source_url": "https://www.cisa.gov/news-events/ics-medical-advisories/icsma-19-080-01"}
+      ]
+    },
+    {
+      "chain_id": "CHAIN-EEG-001",
+      "overall_label": "partly_demonstrated",
+      "overall_rationale": "The ML backdoor/transfer-learning steps are demonstrated on offline EEG datasets (Professor X, Meng et al.); cloud-infrastructure compromise is a confirmed class; but the end-to-end chain on a shipping consumer headset is not shown.",
+      "device_class": "Consumer EEG headset with a companion app and cloud/SDK ML decoder (landscape: Emotiv EPOC X/Insight, InteraXon Muse, Neurosity Crown, Arctop Neural Decode SDK).",
+      "steps": [
+        {"position": 1, "technique_id": "QIF-T0042", "label": "demonstrated", "evidence": "BLE/RF side-channel registrar CONFIRMED; Bluetooth-layer side channels well documented (e.g. KNOB CVE-2019-9506).", "source_url": "https://knobattack.com/"},
+        {"position": 2, "technique_id": "QIF-T0044", "label": "demonstrated", "evidence": "Cloud infrastructure attack registrar CONFIRMED; generic but well-established class.", "source_url": "https://arxiv.org/abs/2508.12571"},
+        {"position": 3, "technique_id": "QIF-T0017", "label": "partly_demonstrated", "evidence": "Transfer-learning backdoors on EEG models demonstrated on datasets (Meng et al. 2024, arXiv:2412.07231); propagation into a specific deployed consumer decoder not shown.", "source_url": "https://arxiv.org/html/2412.07231v1"},
+        {"position": 4, "technique_id": "QIF-T0016", "label": "partly_demonstrated", "evidence": "Professor X (Liu, Song, He, Lu, Zheng; arXiv:2409.20158) demonstrates an invisible, robust clean-label backdoor that arbitrarily manipulates EEG-BCI output across three EEG tasks and bypasses existing defenses — on offline datasets, not on a shipping headset.", "source_url": "https://arxiv.org/html/2409.20158v1"},
+        {"position": 5, "technique_id": "QIF-T0052", "label": "demonstrated", "evidence": "ERP harvesting registrar DEMONSTRATED (Bonaci et al. 2015; Martinovic et al. 2012).", "source_url": "https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/martinovic"}
+      ]
+    },
+    {
+      "chain_id": "CHAIN-EAR-001",
+      "overall_label": "projected",
+      "overall_rationale": "Supply-chain firmware backdoors (T0043) and ear-canal acoustic fingerprinting (T0079) are demonstrated classes, but the in-ear-EEG capture and cognitive-inference steps are registrar EMERGING; the composed covert-profiling chain is projected onto the newly cleared in-ear EEG device class.",
+      "device_class": "In-ear EEG earbud with a companion app (landscape: NAOX Naox Link — FDA 510(k) cleared Jan 2026, first ear-worn EEG for clinical home use; IDUN Guardian).",
+      "steps": [
+        {"position": 1, "technique_id": "QIF-T0043", "label": "demonstrated", "evidence": "Supply-chain firmware backdoor registrar CONFIRMED.", "source_url": "https://arxiv.org/abs/2508.12571"},
+        {"position": 2, "technique_id": "QIF-T0073", "label": "projected", "evidence": "In-ear EEG acquisition is established clinically (Kaveh et al. 2020; NAOX 510(k) 2026), but covert capture via a backdoored earbud is registrar EMERGING, not demonstrated.", "source_url": "https://www.massdevice.com/naox-technologies-wins-fda-clearance-for-earbud-based-eeg/"},
+        {"position": 3, "technique_id": "QIF-T0074", "label": "projected", "evidence": "Cognitive inference from longitudinal EEG is researched (Martinovic et al. 2012 reduced private-info entropy 15-40% vs chance), but longitudinal in-ear cognitive profiling as an attack is registrar EMERGING.", "source_url": "https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/martinovic"},
+        {"position": 4, "technique_id": "QIF-T0079", "label": "demonstrated", "evidence": "Ear-canal acoustic fingerprinting registrar DEMONSTRATED (NEC 2016; EarEcho, Gao et al. 2019).", "source_url": "https://www.clinicalresearchnewsonline.com/news/2026/01/12/new-in-ear-eeg-platform-opens-door-to-real-world-neurological-data-collection"},
+        {"position": 5, "technique_id": "QIF-T0056", "label": "projected", "evidence": "Neuro-surveillance registrar EMERGING; persistence framing is extrapolated.", "source_url": "https://www.massdevice.com/naox-technologies-wins-fda-clearance-for-earbud-based-eeg/"}
+      ]
+    },
+    {
+      "chain_id": "CHAIN-RBCI-001",
+      "overall_label": "partly_demonstrated",
+      "overall_rationale": "Training poisoning (T0024) and universal adversarial perturbations (T0019) are demonstrated on EEG datasets; cloud compromise and federated gradient leakage are established classes; deployment against a specific multi-site research BCI is projected.",
+      "device_class": "Research BCI with a cloud ML pipeline and multi-site federated training (landscape: OpenBCI Cyton/Galea, g.tec g.USBamp/g.Nautilus feeding a cloud decoder).",
+      "steps": [
+        {"position": 1, "technique_id": "QIF-T0057", "label": "demonstrated", "evidence": "Pipeline topology mapping registrar CONFIRMED.", "source_url": "https://arxiv.org/abs/2508.12571"},
+        {"position": 2, "technique_id": "QIF-T0044", "label": "demonstrated", "evidence": "Cloud infrastructure attack registrar CONFIRMED.", "source_url": "https://arxiv.org/abs/2508.12571"},
+        {"position": 3, "technique_id": "QIF-T0024", "label": "partly_demonstrated", "evidence": "EEG training-data poisoning demonstrated on datasets (registrar DEMONSTRATED); not on a live multi-site pipeline.", "source_url": "https://arxiv.org/html/2412.07231v1"},
+        {"position": 4, "technique_id": "QIF-T0019", "label": "partly_demonstrated", "evidence": "Universal adversarial perturbations against EEG classifiers demonstrated (Liu et al. 2024; Moosavi-Dezfooli et al. 2017); registrar DEMONSTRATED.", "source_url": "https://arxiv.org/html/2412.07231v1"},
+        {"position": 5, "technique_id": "QIF-T0021", "label": "projected", "evidence": "Federated gradient leakage registrar EMERGING (Zhu et al. 2019 deep leakage from gradients is general ML, not EEG-specific in deployment).", "source_url": "https://arxiv.org/abs/2508.12571"}
+      ]
+    },
+    {
+      "chain_id": "CHAIN-VIS-002",
+      "overall_label": "partly_demonstrated",
+      "overall_rationale": "Imperceptible-flicker SSVEP injection (T0103) and P300 interrogation (T0035) are demonstrated in the lab; OTA weaponization and neurofeedback falsification are EMERGING; the full selection-hijack chain on a consumer visual BCI is projected.",
+      "device_class": "Consumer / assistive visual BCI with a display and eye tracking (landscape: Cognixion ONE headset; SSVEP/P300 spellers; eye-tracked XR headsets).",
+      "steps": [
+        {"position": 1, "technique_id": "QIF-T0085", "label": "demonstrated", "evidence": "Eye-tracking cognitive/intent inference registrar DEMONSTRATED (Katsini et al. 2020; Sluganovic et al. 2018).", "source_url": "https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/martinovic"},
+        {"position": 2, "technique_id": "QIF-T0046", "label": "projected", "evidence": "OTA firmware weaponization registrar EMERGING; CVE-2020-27252 (unsigned-firmware race condition on a medical patient reader, CVSS 8.1) shows the mechanism is real on medical devices, but not on a visual BCI headset.", "source_url": "https://us-cert.cisa.gov/ics/advisories/icsma-20-345-01"},
+        {"position": 3, "technique_id": "QIF-T0022", "label": "projected", "evidence": "Neurofeedback falsification registrar EMERGING (Meng et al. 2024).", "source_url": "https://arxiv.org/html/2412.07231v1"},
+        {"position": 4, "technique_id": "QIF-T0103", "label": "demonstrated", "evidence": "Ming et al. 2023 (J Neural Eng 20(1):016042) demonstrated imperceptible 60 Hz SSVEP modulation driving a BCI at ~52.8 bits/min without perceptible flicker — registrar DEMONSTRATED.", "source_url": "https://doaj.org/article/1bff598ff265480a8ca412a26998509a"},
+        {"position": 5, "technique_id": "QIF-T0035", "label": "demonstrated", "evidence": "P300 interrogation registrar DEMONSTRATED (Martinovic et al. 2012; Bonaci et al. 2015).", "source_url": "https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/martinovic"}
+      ]
+    },
+    {
+      "chain_id": "CHAIN-IMP-001",
+      "overall_label": "partly_demonstrated",
+      "overall_rationale": "Telemetry MITM, cleartext interception and auth bypass are demonstrated against real implant ecosystems (Conexus, MyCareLink, KNOB); brainprint theft and neural-biometric spoofing are registrar EMERGING, so the identity-spoofing objective is projected.",
+      "device_class": "Implanted neurostimulator / BCI with wireless telemetry and a patient gateway/hub (landscape pattern: Medtronic implant telemetry + MyCareLink gateway; applies to neural implants sharing this architecture).",
+      "steps": [
+        {"position": 1, "technique_id": "QIF-T0042", "label": "demonstrated", "evidence": "BLE/RF side-channel registrar CONFIRMED; KNOB (CVE-2019-9506, CVSS 8.1) manipulates Bluetooth key entropy to 1 byte, enabling interception.", "source_url": "https://knobattack.com/"},
+        {"position": 2, "technique_id": "QIF-T0004", "label": "demonstrated", "evidence": "CVE-2019-6540 (CVSS 6.5) — Conexus telemetry transmits sensitive data in cleartext with no encryption, enabling MITM interception; registrar DEMONSTRATED.", "source_url": "https://www.cisa.gov/news-events/ics-medical-advisories/icsma-19-080-01"},
+        {"position": 3, "technique_id": "QIF-T0049", "label": "demonstrated", "evidence": "CVE-2020-25183 (CVSS 8.0) — authentication between MyCareLink Smart Patient Reader and app can be bypassed; registrar CONFIRMED.", "source_url": "https://us-cert.cisa.gov/ics/advisories/icsma-20-345-01"},
+        {"position": 4, "technique_id": "QIF-T0038", "label": "projected", "evidence": "Brainprint theft registrar EMERGING (Maiorana et al. 2016 brain biometric permanence); extraction from intercepted implant telemetry not demonstrated.", "source_url": "https://www.cisa.gov/news-events/ics-medical-advisories/icsma-19-080-01"},
+        {"position": 5, "technique_id": "QIF-T0032", "label": "projected", "evidence": "Neural-biometric identity spoofing registrar EMERGING (Maiorana et al. 2016); replay against a deployed matcher not demonstrated.", "source_url": "https://us-cert.cisa.gov/ics/advisories/icsma-20-345-01"}
+      ]
+    }
+  ]
+}
