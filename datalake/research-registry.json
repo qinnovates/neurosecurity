@@ -1,9 +1,9 @@
 {
   "metadata": {
     "version": "1.0",
-    "lastUpdated": "2026-03-11",
-    "description": "Unified registry: explorer/timelines (landscape UI) + researchers/institutions/standards/legislation (structured entities). Cross-references QIF-RESEARCH-SOURCES.md.",
-    "totalEntities": 97
+    "lastUpdated": "2026-10-06",
+    "description": "Unified registry: explorer/timelines (landscape UI) + researchers/institutions/standards/legislation (structured entities). Cross-references QIF-RESEARCH-SOURCES.md. Papers are carried on researcher entries via papers (QIF-RESEARCH-SOURCES.md IDs) and bibKeys (references.bib keys); the schema has no standalone paper collection.",
+    "totalEntities": 190
   },
   "explorer": [
     {
@@ -1741,15 +1741,20 @@
         "neurolaw"
       ],
       "papers": [
-        "E9"
+        "E9",
+        "GP27"
       ],
       "bibKeys": [
-        "bublitz2022freedom"
+        "bublitz2022freedom",
+        "bublitz2025moratorium"
       ],
       "qifRelevance": "Mental freedom and cognitive liberty framework. Anti-inflationism perspective on neurorights.",
       "tags": [
         "cognitive-liberty",
-        "neurolaw"
+        "neurolaw",
+        "neurorights",
+        "policy",
+        "governance"
       ],
       "layer": "WHY"
     },
@@ -1821,6 +1826,867 @@
       "tags": [
         "dual-use",
         "neurorights"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "ayas-kiser",
+      "name": "Ayas Kiser",
+      "institution": "Rhine-Waal University of Applied Sciences",
+      "country": "DE",
+      "expertise": [
+        "bci-authentication",
+        "ssvep"
+      ],
+      "papers": [
+        "C118"
+      ],
+      "bibKeys": [
+        "kiser2026ssvepauth"
+      ],
+      "qifRelevance": "Demonstrated SSVEP challenge-response authentication as a defence primitive (21 participants, no adversary modelled). Bears on whether a nonce-bound neural credential is replayable; a feasibility result, not a deployed or attacked system.",
+      "tags": [
+        "defence",
+        "authentication",
+        "eeg"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "xiaoqing-chen",
+      "name": "Xiaoqing Chen",
+      "institution": "Huazhong University of Science and Technology",
+      "country": "CN",
+      "expertise": [
+        "eeg-privacy",
+        "adversarial-ml"
+      ],
+      "papers": [
+        "C119"
+      ],
+      "bibKeys": [
+        "chen2025userwise"
+      ],
+      "qifRelevance": "Tested countermeasure against brainprint and cognitive-biometric extraction: user-wise perturbations made identity unlearnable while task accuracy was largely preserved. Dataset-level (6 corpora), no device or participant in the loop.",
+      "tags": [
+        "defence",
+        "privacy",
+        "eeg"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "jennifer-a-chandler",
+      "name": "Jennifer A. Chandler",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [
+        "neural-data-law",
+        "mental-privacy"
+      ],
+      "papers": [
+        "GP20"
+      ],
+      "bibKeys": [
+        "chandler2025inferring"
+      ],
+      "qifRelevance": "Ethico-legal analysis of the inference chain between neural data and a claimed mental state. Supplies language for separating demonstrated decoding from asserted decoding; normative, no empirical decoding result.",
+      "tags": [
+        "neuroethics",
+        "neurolaw",
+        "mental-privacy"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "sean-pauzauskie",
+      "name": "Sean Pauzauskie",
+      "institution": "University of Colorado / Neurorights Foundation",
+      "country": "US",
+      "expertise": [
+        "neural-data-privacy",
+        "clinical-neurology"
+      ],
+      "papers": [
+        "GP21"
+      ],
+      "bibKeys": [
+        "pauzauskie2025neuraldata"
+      ],
+      "qifRelevance": "Clinical-neurology viewpoint on neural data privacy. Context only: Crossref exposes a one-line abstract, so the specific policy recommendations were not read and must not be paraphrased as findings.",
+      "tags": [
+        "neuroethics",
+        "privacy",
+        "context-only"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "karolina-zhukoff",
+      "name": "Karolina Zhukoff",
+      "institution": "Georgia Institute of Technology",
+      "country": "US",
+      "expertise": [
+        "neuroscience-policy",
+        "non-traditional-security"
+      ],
+      "papers": [
+        "GP22"
+      ],
+      "bibKeys": [
+        "zhukoff2026cognitivesovereignty"
+      ],
+      "qifRelevance": "Conceptual reframing of Chile's 2021 amendment as a cognitive-sovereignty measure. Proposes a state-level actor framing that TARA does not currently carry; a conceptual proposal, not a legal finding and not an adopted framing.",
+      "tags": [
+        "neurorights",
+        "governance",
+        "policy"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "roman-rethwilm",
+      "name": "Roman Rethwilm",
+      "institution": "Universit\u00e4t der Bundeswehr M\u00fcnchen",
+      "country": "DE",
+      "expertise": [
+        "neural-data-law",
+        "device-regulation"
+      ],
+      "papers": [
+        "GP23"
+      ],
+      "bibKeys": [
+        "rethwilm2026nibsevidence"
+      ],
+      "qifRelevance": "Direction-sensitive: a systematic check of the five Member State references behind the EU's 2022 Class III reclassification of non-medical NIBS devices found the cited sources contained no empirical device-safety investigation or systematic adverse-event review. The finding is that the EVIDENTIARY BASIS was thin, NOT that NIBS devices are unsafe. Must not be cited as evidence of NIBS harm.",
+      "tags": [
+        "governance",
+        "policy",
+        "direction-sensitive"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "yue-zhao",
+      "name": "Yue Zhao",
+      "institution": "Hainan Normal University",
+      "country": "CN",
+      "expertise": [
+        "neural-data-consent",
+        "bci-ethics"
+      ],
+      "papers": [
+        "GP24"
+      ],
+      "bibKeys": [
+        "zhao2026consentinflux"
+      ],
+      "qifRelevance": "Normative argument that device incorporation and functional dependence can weaken the continuing authority of initial consent in long-term invasive BCI use. Governance hook for implant lifecycle risk; not an empirical study of users. The paper's claim about a March 2026 clinical approval in China is reported by the paper and was not independently checked.",
+      "tags": [
+        "consent",
+        "neuroethics",
+        "governance"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "nathan-higgins",
+      "name": "Nathan Higgins",
+      "institution": "Monash University",
+      "country": "AU",
+      "expertise": [
+        "neural-data-consent",
+        "device-abandonment"
+      ],
+      "papers": [
+        "GP25"
+      ],
+      "bibKeys": [
+        "higgins2026posttrial"
+      ],
+      "qifRelevance": "Modified Delphi consensus (24 experts) on post-trial responsibility when access to an investigational implantable neural device ends through trial failure, commercial non-viability or safety suspension. Sizes device abandonment as an availability and safety exposure QIF does not yet model.",
+      "tags": [
+        "consent",
+        "governance",
+        "clinical"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "kaifeng-huang",
+      "name": "Kaifeng Huang",
+      "institution": "Kunming University of Science and Technology",
+      "country": "CN",
+      "expertise": [
+        "neurotechnology-ethics"
+      ],
+      "papers": [
+        "GP26"
+      ],
+      "bibKeys": [
+        "huang2026ethicalrisks"
+      ],
+      "qifRelevance": "Conceptual analysis separating brain-controlled technology from neuromodulation and proposing reality, reversibility and technological dependence as assessment axes. Those axes are a candidate severity overlay for TARA; proposal only, not applied here.",
+      "tags": [
+        "neuroethics",
+        "governance"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "michael-j-young",
+      "name": "Michael J. Young",
+      "institution": "Massachusetts General Hospital",
+      "country": "US",
+      "expertise": [
+        "neural-data-consent",
+        "bci-ethics"
+      ],
+      "papers": [
+        "GP28"
+      ],
+      "bibKeys": [
+        "young2026consentstandards"
+      ],
+      "qifRelevance": "Consent framework and checklist specific to implantable BCIs. Names adaptive decoder drift and software dependence as consent-relevant device properties, linking a governance control to decoder-robustness techniques.",
+      "tags": [
+        "consent",
+        "governance",
+        "clinical"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "qing-zhang",
+      "name": "Qing Zhang",
+      "institution": "Tongji University",
+      "country": "CN",
+      "expertise": [
+        "bci-ethics",
+        "neuroscience-policy"
+      ],
+      "papers": [
+        "GP29"
+      ],
+      "bibKeys": [
+        "zhang2025psychiatricbcigov"
+      ],
+      "qifRelevance": "Three-round modified Delphi (25 experts interviewed) producing ethical-governance principles for clinical BCI research in mental disorders. Fills a governance gap for psychiatric BCI, which carries different coercion exposure than motor BCI.",
+      "tags": [
+        "governance",
+        "clinical",
+        "neuroethics"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "kimberly-l-ray",
+      "name": "Kimberly L. Ray",
+      "institution": "The University of Texas at Austin",
+      "country": "US",
+      "expertise": [
+        "neural-data-law",
+        "neuroscience-policy"
+      ],
+      "papers": [
+        "GP30"
+      ],
+      "bibKeys": [
+        "ray2026datasovereignty"
+      ],
+      "qifRelevance": "Perspective on the structural tension between treating neural and brain-health data as a national asset and open neuroscience collaboration. Data-sovereignty controls determine where neural data physically sits, which is an input to cross-border and cloud exposure modelling. Analysis, not measurement.",
+      "tags": [
+        "governance",
+        "privacy",
+        "policy"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "haoyu-wang",
+      "name": "Haoyu Wang",
+      "institution": "Harbin Medical University",
+      "country": "CN",
+      "expertise": [
+        "public-attitudes",
+        "bci-privacy"
+      ],
+      "papers": [
+        "GP31"
+      ],
+      "bibKeys": [
+        "wang2026publicacceptance"
+      ],
+      "qifRelevance": "Cross-sectional survey (337 respondents, non-probability snowball sample) reporting that a value-based privacy-calculus model does not adequately explain adoption of therapeutic non-invasive BCIs. Evidence that patient consent to neural data collection is not a free market choice, which weakens consent-based privacy defences. Not a representative sample.",
+      "tags": [
+        "consent",
+        "privacy",
+        "governance"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "pau-perez-sales",
+      "name": "Pau P\u00e9rez-Sales",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [
+        "neurotechnology-ethics",
+        "human-rights"
+      ],
+      "papers": [
+        "GP32"
+      ],
+      "bibKeys": [
+        "perezsales2026coercion"
+      ],
+      "qifRelevance": "Editorial extending Internet and Communications Ill-Treatment and Torture to fear-producing and identity-targeting practices delivered through digital channels. Relevant to coercion-class framing under international human-rights law; it does NOT evidence any neural attack and carries no neurotechnology case series.",
+      "tags": [
+        "governance",
+        "context-only"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "fabio-augusto-do-prado-marmirolli",
+      "name": "F\u00e1bio Augusto do Prado Marmirolli",
+      "institution": "Universidade Federal de S\u00e3o Paulo",
+      "country": "BR",
+      "expertise": [
+        "neural-data-consent",
+        "neural-data-law"
+      ],
+      "papers": [
+        "GP33"
+      ],
+      "bibKeys": [
+        "marmirolli2026implantableethics"
+      ],
+      "qifRelevance": "Narrative bioethical review of highly autonomous implantable medical devices, naming revocation and device deactivation as consent-bearing actions and reviewing GDPR, Brazil's LGPD and HIPAA. Adds a Latin American data-protection lens absent from the catalogue.",
+      "tags": [
+        "consent",
+        "privacy",
+        "governance"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "tingyu-dang",
+      "name": "Tingyu Dang",
+      "institution": "Huazhong University of Science and Technology",
+      "country": "CN",
+      "expertise": [
+        "eeg-robustness"
+      ],
+      "papers": [
+        "C120"
+      ],
+      "bibKeys": [
+        "dang2026bioinspiredrobustness"
+      ],
+      "qifRelevance": "Review establishing that benign EEG non-stationarity across sessions, individuals and recording conditions is large enough to mask adversarial drift \u2014 the premise the registrar's drift techniques rely on. It supports, but does not raise, their THEORETICAL status. No new decoder result.",
+      "tags": [
+        "eeg",
+        "robustness",
+        "adversarial-ml"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "esra-sumer-arpak",
+      "name": "Esra S\u00fcmer-Arpak",
+      "institution": "Lule\u00e5 University of Technology",
+      "country": "SE",
+      "expertise": [
+        "inner-speech-decoding"
+      ],
+      "papers": [
+        "B20"
+      ],
+      "bibKeys": [
+        "sumerarpak2026innerspeechfm"
+      ],
+      "qifRelevance": "Mini review of foundation-model inner-speech decoding from non-invasive signals (fMRI, EEG, MEG, fNIRS). Reports movement toward semantic-level decoding while stating that weak, non-stationary signals and acquisition variability remain limiting \u2014 the evidence base for stating what covert-speech decoding has demonstrated versus what is projected.",
+      "tags": [
+        "decoding",
+        "survey",
+        "silent-speech"
+      ],
+      "layer": "WHAT"
+    },
+    {
+      "id": "tetsuya-asakawa",
+      "name": "Tetsuya Asakawa",
+      "institution": "Shenzhen Third People\u2019s Hospital",
+      "country": "CN",
+      "expertise": [
+        "neurotechnology-ethics"
+      ],
+      "papers": [
+        "GP34"
+      ],
+      "bibKeys": [
+        "asakawa2026lifeline"
+      ],
+      "qifRelevance": "Editorial on the shift from unidirectional recording to bidirectional closed-loop neuromodulation and associated neural-data concerns. Context only: opinion piece, carries no empirical weight.",
+      "tags": [
+        "context-only",
+        "neuroethics"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "kun-fu",
+      "name": "Kun Fu",
+      "institution": "Beijing Normal-Hong Kong Baptist University",
+      "country": "CN",
+      "expertise": [
+        "bci-ethics",
+        "public-attitudes"
+      ],
+      "papers": [
+        "GP35"
+      ],
+      "bibKeys": [
+        "fu2026elderlycarereview"
+      ],
+      "qifRelevance": "Systematic review (12,423 records screened to 177 included studies) identifying six recurring ethical themes in BCI for elderly care, decomposed across acquisition, decoding and feedback. The largest systematic evidence base in this batch for a specific deployment population.",
+      "tags": [
+        "governance",
+        "clinical",
+        "survey"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "sinu-choi",
+      "name": "Sinu Choi",
+      "institution": "Hanbat National University",
+      "country": "KR",
+      "expertise": [
+        "neurotechnology-ethics",
+        "neuroscience-policy"
+      ],
+      "papers": [
+        "GP36"
+      ],
+      "bibKeys": [
+        "choi2025tdcskorea"
+      ],
+      "qifRelevance": "ELSI case analysis of non-clinical tDCS use in South Korea and Japan, documenting absent regulation in sporting and non-sporting contexts. Documents the unregulated consumer stimulation market that is a precondition for stimulation-side techniques; qualitative, not a safety trial.",
+      "tags": [
+        "governance",
+        "stimulation",
+        "policy"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "dov-greenbaum",
+      "name": "Dov Greenbaum",
+      "institution": "Reichman University",
+      "country": "IL",
+      "expertise": [
+        "neurotechnology-ethics"
+      ],
+      "papers": [
+        "GP37"
+      ],
+      "bibKeys": [
+        "greenbaum2025culturalnarratives"
+      ],
+      "qifRelevance": "Proposes a research agenda on how cultural narratives and media representation shape neurotechnology governance discourse. Context only: it is an agenda and reports no measurement, so it cannot support a claim that narrative drives regulation.",
+      "tags": [
+        "context-only",
+        "governance"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "robert-a-moumdjian",
+      "name": "Robert A. Moumdjian",
+      "institution": "Centre Hospitalier de l\u2019Universit\u00e9 de Montr\u00e9al",
+      "country": "CA",
+      "expertise": [
+        "neurotechnology-ethics"
+      ],
+      "papers": [
+        "GP38"
+      ],
+      "bibKeys": [
+        "moumdjian2025bioethicseffervescence"
+      ],
+      "qifRelevance": "Brief bioethics overview listing safety, justice, privacy, security and risk-benefit balance as the issues BCI raises in the literature. Context only: low-weight corroborating citation.",
+      "tags": [
+        "context-only",
+        "neuroethics"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "md-fahimul-kabir-chowdhury",
+      "name": "Md Fahimul Kabir Chowdhury",
+      "institution": "University of North Texas",
+      "country": "US",
+      "expertise": [
+        "eeg-security",
+        "adversarial-ml"
+      ],
+      "papers": [
+        "C121"
+      ],
+      "bibKeys": [
+        "chowdhury2026securingbci"
+      ],
+      "qifRelevance": "Conference-published corroboration that EEG decoder adversarial susceptibility is treated as a deployment-blocking property, with a lightweight convolutional model proposed as mitigation. Dataset-level, no device in the loop; specific robustness figures were not read, so none are asserted here.",
+      "tags": [
+        "adversarial-ml",
+        "eeg",
+        "defence"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "zheyuan-lin",
+      "name": "Zheyuan Lin",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [
+        "brainprint",
+        "eeg-security"
+      ],
+      "papers": [
+        "X10"
+      ],
+      "bibKeys": [
+        "lin2025listeneridentity"
+      ],
+      "qifRelevance": "Lightweight spiking-transformer person identification from EEG on a public dataset. Bears on how cheaply brainprint extraction scales; dataset-level, no attack scenario and no device in the loop, and specific accuracy figures were not read, so none are asserted.",
+      "tags": [
+        "biometrics",
+        "eeg"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "xuefu-dong",
+      "name": "Xuefu Dong",
+      "institution": "The University of Tokyo",
+      "country": "JP",
+      "expertise": [
+        "eeg-side-channels",
+        "silent-speech"
+      ],
+      "papers": [
+        "X11"
+      ],
+      "bibKeys": [
+        "dong2025hearid"
+      ],
+      "qifRelevance": "HEar-ID uses commodity ANC earbuds for simultaneous authentication and 50-word silent spelling \u2014 the same consumer earbud sensing stack the registrar treats as an attack surface, used here as a defence. Dual-use in both directions. Poster: sample size and impostor-rejection rates were not confirmed.",
+      "tags": [
+        "dual-use",
+        "biometrics",
+        "silent-speech"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "shinnosuke-horiuchi",
+      "name": "Shinnosuke Horiuchi",
+      "institution": "Rikkyo University",
+      "country": "JP",
+      "expertise": [
+        "neural-data-law",
+        "governance"
+      ],
+      "papers": [
+        "GP39"
+      ],
+      "bibKeys": [
+        "horiuchi2026sourceneutral"
+      ],
+      "qifRelevance": "Argues that source-bound rules on neural data permit circumvention, because a text- or behaviour-based system can supply the same person-linked mental-state attribution, and proposes a source-neutral trigger with tiered obligations reading the 2025 UNESCO Recommendation. Directly challenges how QIF scopes neural-data techniques; a preprint argument, not an accepted position, and no scoping change is made here.",
+      "tags": [
+        "governance",
+        "policy",
+        "preprint"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "gabriel-jason-lee",
+      "name": "Gabriel Jason Lee",
+      "institution": "University of Illinois Urbana-Champaign",
+      "country": "US",
+      "expertise": [
+        "eeg-robustness",
+        "adversarial-ml"
+      ],
+      "papers": [
+        "C122"
+      ],
+      "bibKeys": [
+        "lee2026eegtta"
+      ],
+      "qifRelevance": "Systematic study of test-time adaptation for EEG foundation models under distribution shift across settings, devices and populations. Unlabelled test-time adaptation is the window that baseline-adaptation poisoning would exploit, so this maps the legitimate mechanism rather than demonstrating an attack. Specific gains were not read.",
+      "tags": [
+        "robustness",
+        "eeg",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "mohammad-mohammadi",
+      "name": "Mohammad Mohammadi",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [
+        "eeg-robustness",
+        "adversarial-ml"
+      ],
+      "papers": [
+        "C123"
+      ],
+      "bibKeys": [
+        "mohammadi2026robustseiz"
+      ],
+      "qifRelevance": "Open-source model-agnostic harness for stress-testing EEG seizure detectors under environment, noise and adversarial shift across four public scalp-EEG corpora standardised to BIDS-EEG. Provides a reusable benchmark protocol for testing whether detection-evasion techniques transfer to real pipelines; it does not itself claim detectors fail by any stated margin.",
+      "tags": [
+        "tooling",
+        "robustness",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "byeongseo-bok",
+      "name": "Byeongseo Bok",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [
+        "neuroimaging",
+        "adversarial-ml"
+      ],
+      "papers": [
+        "C124"
+      ],
+      "bibKeys": [
+        "bok2026clipdecoding"
+      ],
+      "qifRelevance": "Reports that CLIP, widely used for brain decoding, is not optimised for neural alignment and may capture statistically predictive cues only partially reflected in brain activity. Bounds how strongly reconstruction performance can be attributed to neural information rather than model-side shortcuts; a caution about decoding validity, not an improvement claim.",
+      "tags": [
+        "decoding",
+        "robustness",
+        "preprint"
+      ],
+      "layer": "WHAT"
+    },
+    {
+      "id": "kevin-zhou",
+      "name": "Kevin Zhou",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [
+        "eeg-robustness",
+        "methodology"
+      ],
+      "papers": [
+        "C125"
+      ],
+      "bibKeys": [
+        "zhou2026fmaudit"
+      ],
+      "qifRelevance": "Direction-sensitive NEGATIVE result: under a validation-locked protocol on four-class BCI Competition IV-2a, every supervised comparator evaluated outperformed every EEG foundation-model configuration, including validation-selected fine-tuning. Any statement that EEG foundation models generalise must be qualified against this audit; it is not evidence that foundation models help.",
+      "tags": [
+        "robustness",
+        "negative-result",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "aarthy-nagarajan",
+      "name": "Aarthy Nagarajan",
+      "institution": "University of Notre Dame",
+      "country": "US",
+      "expertise": [
+        "bci-ethics",
+        "adversarial-ml"
+      ],
+      "papers": [
+        "C126"
+      ],
+      "bibKeys": [
+        "nagarajan2026slowfast"
+      ],
+      "qifRelevance": "Defines neuroadaptive overfitting: a closed-loop failure mode in which an AI-mediated BCI becomes over-optimised to short-term proxies of success, at possible cost to intent fidelity, authorship and durable benefit. It arises without any adversary; whether an adversary could induce it deliberately is a candidate framing, staged and not registered. Conceptual single-author preprint, no implementation result.",
+      "tags": [
+        "safety",
+        "preprint",
+        "candidate-framing"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "kele-xu",
+      "name": "Kele Xu",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [
+        "silent-speech",
+        "bci-security-taxonomy"
+      ],
+      "papers": [
+        "B21"
+      ],
+      "bibKeys": [
+        "xu2026ssitaxonomy"
+      ],
+      "qifRelevance": "Systematic review and taxonomy organising silent speech interfaces as an intent-to-execution pipeline over the neuro-muscular-articulatory continuum rather than by transducer. Supplies a modality taxonomy for the silent-speech cluster, which has no structured coverage in the catalogue. Preprint, not peer reviewed.",
+      "tags": [
+        "taxonomy",
+        "silent-speech",
+        "preprint"
+      ],
+      "layer": "WHAT"
+    },
+    {
+      "id": "xiran-xu",
+      "name": "Xiran Xu",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [
+        "silent-speech"
+      ],
+      "papers": [
+        "B22"
+      ],
+      "bibKeys": [
+        "xu2026aessi"
+      ],
+      "qifRelevance": "Around-ear silent speech interface reporting cross-day online reuse without test-day calibration (24 participants, 44 recordings, 25-sentence closed Mandarin set, custom hardware). Calibration-free cross-day operation is the capability that would make covert subvocal capture practical; exact accuracy was not read, so none is asserted. Preprint, not peer reviewed.",
+      "tags": [
+        "silent-speech",
+        "capability",
+        "preprint"
+      ],
+      "layer": "WHAT"
+    },
+    {
+      "id": "ruben-ruiz-mateos-serrano",
+      "name": "Ruben Ruiz-Mateos Serrano",
+      "institution": "University of Cambridge",
+      "country": "GB",
+      "expertise": [
+        "responsible-neurotech"
+      ],
+      "papers": [
+        "B23"
+      ],
+      "bibKeys": [
+        "ruizmateos2025roadmap"
+      ],
+      "qifRelevance": "Interdisciplinary roadmap spanning neuroscience, materials, device engineering, signal processing, computational modelling and regulatory frameworks. Context only: a structural map of where security sits relative to the rest of the neurotech stack; agenda-setting, no empirical weight.",
+      "tags": [
+        "context-only",
+        "roadmap",
+        "preprint"
+      ],
+      "layer": "WHAT"
+    },
+    {
+      "id": "houda-hafi",
+      "name": "Houda Hafi",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [
+        "iot-security",
+        "bci-security"
+      ],
+      "papers": [
+        "C127"
+      ],
+      "bibKeys": [
+        "hafi2026sixgbci"
+      ],
+      "qifRelevance": "Survey of technical requirements and challenges for integrating 6G into BCI systems, listing data security among expected 6G properties. Relevant to the wireless-link techniques, but the security benefit is PROJECTED about a non-deployed radio generation, not demonstrated. Preprint, not peer reviewed.",
+      "tags": [
+        "context-only",
+        "wireless",
+        "projected",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "akshaj-murhekar",
+      "name": "Akshaj Murhekar",
+      "institution": "The University of Texas at Austin",
+      "country": "US",
+      "expertise": [
+        "bci-privacy",
+        "eeg-privacy"
+      ],
+      "papers": [
+        "C128"
+      ],
+      "bibKeys": [
+        "murhekar2026sense"
+      ],
+      "qifRelevance": "Lightweight EEG-to-text framework using privacy-preserving semantic retrieval in place of LLM fine-tuning on raw EEG, motivated by neural-data exposure in conventional pipelines. Defence-side evidence that decoding-pipeline exposure is being treated as a design constraint; specific figures were not read, so none are asserted. Preprint, not peer reviewed.",
+      "tags": [
+        "defence",
+        "privacy",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "zhibo-tian",
+      "name": "Zhibo Tian",
+      "institution": "Lanzhou University",
+      "country": "CN",
+      "expertise": [
+        "bci-privacy",
+        "neuroimaging"
+      ],
+      "papers": [
+        "C129"
+      ],
+      "bibKeys": [
+        "tian2025brainguard"
+      ],
+      "qifRelevance": "Privacy-preserving collaborative training framework for multisubject image reconstruction from brain activity. Collaborative cross-subject training is the setting in which federated gradient leakage applies, so this is the mitigation side of that technique. Dataset-level. Preprint, not peer reviewed.",
+      "tags": [
+        "defence",
+        "privacy",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "ukasz-szoszkiewicz",
+      "name": "\u0141ukasz Szoszkiewicz",
+      "institution": "Adam Mickiewicz University in Pozna\u0144",
+      "country": "PL",
+      "expertise": [
+        "mental-privacy",
+        "neural-data-law"
+      ],
+      "papers": [
+        "C23"
+      ],
+      "bibKeys": [
+        "szoszkiewicz2025mentalprivacy"
+      ],
+      "qifRelevance": "Mental-privacy policy framework grounded in user agency, data solidarity and precaution. Normative; the current framing the NISS neurorights fields track.",
+      "tags": [
+        "mental-privacy",
+        "neurorights",
+        "governance"
       ],
       "layer": "WHY"
     }

@@ -1817,11 +1817,12 @@
   {
     "name": "Google Scholar",
     "category": "news",
-    "tier": "free_web",
+    "tier": "manual_only",
     "url": "https://scholar.google.com",
     "rss_url": null,
     "has_api": false,
-    "notes": "Academic search engine. Set alerts for BCI and neurotech terms."
+    "notes": "Academic search engine. DO NOT SCRIPT: robots.txt disallows /scholar and /search for User-agent: * (verified 2026-10-06) and there is no public API. Manual browser use and email alerts for BCI and neurotech terms only. Tier changed from free_web, which wrongly implied it is fetchable.",
+    "intel_feed": false
   },
   {
     "name": "Neurotechnology Industry Organization (NIO)",
@@ -1843,12 +1844,13 @@
   },
   {
     "name": "Semantic Scholar",
-    "category": "patent_ip",
-    "tier": "free_web",
+    "category": "news",
+    "tier": "free_api",
     "url": "https://www.semanticscholar.org",
     "rss_url": null,
     "has_api": true,
-    "notes": "AI-powered academic search by Allen Institute. Open API. Good for citation graphs."
+    "notes": "Literature database and citation graph from the Allen Institute. Graph API endpoint: https://api.semanticscholar.org/graph/v1/paper/search (recorded in notes because the schema has no api_url field). Unauthenticated calls share a pool that returns HTTP 429 under load — verified 429 on 2026-10-06 — so a free API key is required for reliable use. Was previously miscategorised as patent_ip.",
+    "intel_feed": true
   },
   {
     "name": "Connected Papers",
