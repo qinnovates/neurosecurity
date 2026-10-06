@@ -10,100 +10,101 @@ interface NavLink { href: string; label: string; desc?: string }
 interface NavGroup { title: string; links: NavLink[] }
 interface NavSection { id: string; label: string; href: string; groups: NavGroup[]; isActive?: boolean }
 
-const missionGroups: NavGroup[] = [
+const taraGroups: NavGroup[] = [
   {
-    title: 'About',
+    title: 'The Catalog',
     links: [
-      { href: '/mission/', label: 'Mission Statement', desc: 'Unified model for BCI risk, equity, and informed consent' },
-      { href: '/news/roadmap/', label: 'Roadmap', desc: 'Milestones and version history' },
-    ],
-  },
-  {
-    title: 'Governance',
-    links: [
-      { href: '/research/neuroethics-landscape/', label: 'Neuroethics Landscape', desc: 'Modern timeline of neuroethics scholarship' },
-      { href: '/governance/rights/', label: 'Neurorights', desc: '5 proposed neurorights mapped to hourglass bands' },
-      { href: '/governance/ai-ethics/', label: 'AI Ethics', desc: 'Principles, frameworks, and regulatory landscape' },
-      { href: '/governance/', label: 'Code of Ethics', desc: 'Ethical commitments and conduct standards' },
-    ],
-  },
-];
-
-const atlasGroups: NavGroup[] = [
-  {
-    title: 'Framework',
-    links: [
-      { href: '/atlas/clinical/', label: 'Clinical', desc: 'DSM-5 mappings, therapeutic analogs, device safety' },
-      { href: '/atlas/', label: 'Atlas Dashboard', desc: 'Unified hourglass, brain, and threat landscape' },
-      { href: '/framework/', label: 'QIF Framework', desc: '11-band hourglass architecture' },
-      { href: '/atlas/tara/', label: 'TARA Catalog', desc: `${TARA_TECHNIQUES} techniques scored with NISS` },
-      { href: '/atlas/scoring/', label: 'NISS Scoring', desc: 'Neural Impact Scoring — extending CVSS' },
-    ],
-  },
-  {
-    title: 'Analysis',
-    links: [
-      { href: '/atlas/tara/ttps/', label: 'Threat Matrix', desc: 'Tactics, techniques & procedures' },
+      { href: '/atlas/tara/', label: 'TARA Threat Catalog', desc: `${TARA_TECHNIQUES} BCI attack techniques, scored and mapped` },
+      { href: '/atlas/tara/ttps/', label: 'Threat Matrix (TTPs)', desc: 'Tactics, techniques & procedures by domain' },
       { href: '/atlas/tara/numbering/', label: 'QIF Numbering', desc: 'Technique IDs and tactic codes' },
-      { href: '/atlas/analysis/', label: 'Case Studies', desc: 'Deep dives and attack chain analysis' },
-      { href: '/research/bci-explorer/', label: 'BCI Explorer', desc: 'Interactive device and threat map' },
+      { href: '/atlas/analysis/', label: 'Case Studies', desc: 'Hardware-validated attack chain deep dives' },
     ],
   },
   {
-    title: 'Tools',
+    title: 'Apply It',
     links: [
+      { href: '/atlas/scoring/', label: 'NISS Scoring', desc: 'Neural Impact Severity Score for each technique' },
+      { href: '/atlas/clinical/', label: 'Clinical Mappings', desc: 'DSM-5-TR category references, therapeutic analogs' },
+      { href: '/demo-atlas/', label: 'Demo Atlas (PoC)', desc: 'Interactive demo — devices, EEG, and techniques unified' },
+    ],
+  },
+];
+
+const frameworkGroups: NavGroup[] = [
+  {
+    title: "What TARA Is Built On",
+    links: [
+      { href: '/framework/', label: 'QIF Hourglass Architecture', desc: 'Proposed 11-band model TARA techniques are mapped against' },
+      { href: '/governance/rights/', label: 'Neurorights', desc: '5 proposed neurorights TARA techniques are scored against' },
+    ],
+  },
+  {
+    title: "What Consumes TARA's Data",
+    links: [
+      { href: '/guardrails/', label: 'Neurowall', desc: 'Proposed signal-layer firewall at I0' },
+      { href: '/guardrails/nsp/', label: 'NSP Protocol', desc: 'Proposed post-quantum wire security' },
+      { href: '/guardrails/runemate/', label: 'Runemate', desc: 'Proposed on-device policy compiler' },
+    ],
+  },
+];
+
+const researchGroups: NavGroup[] = [
+  {
+    title: 'Publications',
+    links: [
+      { href: '/research/whitepaper/', label: 'Whitepaper', desc: 'Full QIF specification' },
+      { href: '/research/papers/', label: 'Papers', desc: 'Peer-review track submissions' },
+      { href: '/news/', label: 'Field Journal', desc: 'Research notes and announcements' },
+    ],
+  },
+  {
+    title: 'Data & Landscape',
+    links: [
+      { href: '/data-studio/', label: 'Data Studio', desc: 'Browse and SQL-query the full research datalake' },
+      { href: '/research/landscape/', label: 'BCI Landscape', desc: 'Market and device landscape' },
+      { href: '/research/bci-explorer/', label: 'BCI Hardware Explorer', desc: 'Devices, FDA filings, physics constraints' },
       { href: '/tools/', label: 'Tools & Plugins', desc: 'Open-source security tools and AI plugins' },
-      { href: '/tools/intel/', label: 'Intel & APIs', desc: 'STIX 2.1, TAXII feed, Python SDK, 74+ sources' },
-      { href: '/data-studio/', label: 'Data Studio', desc: 'Browse, download, and SQL-query the full research datalake' },
-      { href: '/data-studio/eeg/', label: 'EEG Sample Browser', desc: 'Curated EEG datasets with TARA and DSM-5 mappings' },
-      { href: '/brain-siem/', label: 'Brain SIEM', desc: 'Browser-only EEG monitoring, threat simulation, and BrainFlow API reference' },
+    ],
+  },
+  {
+    title: 'Intelligence',
+    links: [
+      { href: '/research/intel/', label: 'Quarterly Intel Reports', desc: 'Funding, regulation, threat landscape' },
+      { href: '/tools/intel/', label: 'Live Intel Feed', desc: 'STIX 2.1 / TAXII, Python SDK, 74+ sources' },
     ],
   },
 ];
 
-const rndGroups: NavGroup[] = [
+const aboutGroups: NavGroup[] = [
   {
-    title: 'Research',
+    title: 'Institute',
     links: [
-      { href: '/research/', label: 'Overview', desc: 'All research areas and methodology' },
-      { href: '/research/whitepaper/', label: 'Whitepaper', desc: 'Latest QIF specification' },
-      { href: '/research/landscape/', label: 'BCI Landscape', desc: 'Market analysis and device landscape' },
-      { href: '/atlas/clinical/', label: 'Clinical', desc: 'DSM-5 mappings & therapeutic analogs' },
+      { href: '/mission/', label: 'Mission', desc: 'Why this framework exists' },
+      { href: '/governance/', label: 'Governance & Ethics', desc: 'Code of ethics, transparency, AI-assist disclosure' },
+      { href: '/about/', label: 'About & Transparency', desc: 'Who is behind this, current stage, how to collaborate' },
     ],
   },
   {
-    title: 'Neurosecurity Stack',
+    title: 'Progress',
     links: [
-      { href: '/development/', label: 'Overview', desc: 'Proposed neurosecurity stack for neural interfaces' },
-      { href: '/guardrails/', label: 'Neurowall', desc: 'Signal-layer firewall at I0' },
-      { href: '/guardrails/nsp/', label: 'NSP Protocol', desc: 'Post-quantum wire security' },
-      { href: '/guardrails/runemate/', label: 'Runemate', desc: 'On-device policy compiler' },
-    ],
-  },
-  {
-    title: 'Updates',
-    links: [
-      { href: '/news/', label: 'Blog & Field Journals', desc: 'Announcements and research notes' },
+      { href: '/news/roadmap/', label: 'Roadmap', desc: 'Milestones and version history' },
       { href: '/news/derivation/', label: 'Derivation Log', desc: 'Live research journal' },
-      { href: '/research/validation/', label: 'Validation', desc: 'Methodology and testing results' },
-      { href: '/research/intel/', label: 'BCI Intel Reports', desc: 'Quarterly threat intelligence publications' },
     ],
   },
 ];
 
-const isMissionActive = ['/mission/'].some(p => currentPath.startsWith(p))
-  || currentPath.startsWith('/governance/') || currentPath === '/news/roadmap/';
-const isAtlasActive = currentPath.startsWith('/atlas/') || currentPath.startsWith('/framework/')
-  || currentPath.startsWith('/security/') || currentPath.startsWith('/tools/')
-  || currentPath.startsWith('/data-studio/')
-;
-const isRndActive = currentPath.startsWith('/research/') || currentPath.startsWith('/development/')
-  || currentPath.startsWith('/guardrails/') || (currentPath.startsWith('/news/') && !currentPath.startsWith('/news/roadmap/'));
+const isTaraActive = currentPath.startsWith('/atlas/') || currentPath.startsWith('/demo-atlas/');
+const isFrameworkActive = currentPath.startsWith('/framework/') || currentPath.startsWith('/guardrails/');
+const isResearchActive = currentPath.startsWith('/research/') || currentPath.startsWith('/data-studio/')
+  || currentPath.startsWith('/tools/') || (currentPath.startsWith('/news/') && !currentPath.startsWith('/news/roadmap/') && !currentPath.startsWith('/news/derivation/'));
+const isAboutActive = currentPath.startsWith('/mission/') || currentPath.startsWith('/governance/')
+  || currentPath.startsWith('/about/') || currentPath === '/news/roadmap/' || currentPath === '/news/derivation/';
 
 const navSections: NavSection[] = [
-  { id: 'mission', label: 'Mission', href: '/mission/', groups: missionGroups, isActive: isMissionActive },
-  { id: 'atlas', label: 'Atlas', href: '/atlas/', groups: atlasGroups, isActive: isAtlasActive },
-  { id: 'rnd', label: 'R&D', href: '/research/', groups: rndGroups, isActive: isRndActive },
+  { id: 'tara', label: 'TARA', href: '/atlas/tara/', groups: taraGroups, isActive: isTaraActive },
+  { id: 'framework', label: 'Framework', href: '/framework/', groups: frameworkGroups, isActive: isFrameworkActive },
+  { id: 'research', label: 'Research', href: '/research/', groups: researchGroups, isActive: isResearchActive },
+  { id: 'about', label: 'About', href: '/mission/', groups: aboutGroups, isActive: isAboutActive },
 ];
 ---
 
@@ -112,7 +113,7 @@ const navSections: NavSection[] = [
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-        <span class="text-2xl font-bold font-[family-name:var(--font-heading)] bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">Q</span>
+        <span class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">Q</span>
         <span class="text-sm font-medium tracking-wider uppercase hidden sm:inline text-[var(--color-text-primary)]">innovate</span>
         <span class="text-xs text-[var(--color-text-faint)] hidden sm:inline ml-1">|</span>
         <span class="text-xs font-medium tracking-wide hidden sm:inline text-[var(--color-text-muted)]">Open Neural Atlas</span>
@@ -176,34 +177,21 @@ const navSections: NavSection[] = [
       <div class="flex items-center gap-2">
         <ThemeToggle />
 
-        <!-- Demo Atlas (PoC) CTA — magenta -->
+        <!-- Explore TARA CTA -->
         <a
-          href="/demo-atlas/"
+          href="/atlas/tara/"
           class:list={[
             "hidden md:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-colors text-white",
-            currentPath.startsWith('/demo-atlas')
-              ? "bg-fuchsia-600"
-              : "bg-fuchsia-600/85 hover:bg-fuchsia-600"
-          ]}
-        >
-          Demo Atlas <span class="text-xs opacity-80">(PoC)</span>
-        </a>
-
-        <!-- Atlas Overview CTA — blue -->
-        <a
-          href="/atlas/"
-          class:list={[
-            "hidden md:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-colors text-white",
-            currentPath.startsWith('/atlas')
-              ? "bg-blue-600"
-              : "bg-blue-600/85 hover:bg-blue-600"
+            currentPath.startsWith('/atlas/tara')
+              ? "bg-[var(--color-accent-fill)]"
+              : "bg-[var(--color-accent-fill)] hover:opacity-90"
           ]}
         >
           <svg class="w-3.5 h-3.5" viewBox="0 0 32 32" fill="none">
             <path d="M8 16 Q12 8 16 16 Q20 24 24 16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
             <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
           </svg>
-          Atlas Overview
+          Explore TARA
         </a>
 
         <!-- Whitepaper CTA — white -->
@@ -259,20 +247,14 @@ const navSections: NavSection[] = [
       <!-- Mobile CTAs -->
       <div class="pb-2 mb-2 border-b border-[var(--color-border)] space-y-2">
         <a
-          href="/demo-atlas/"
-          class="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-fuchsia-600 text-white text-sm font-medium text-center hover:bg-fuchsia-500 transition-colors"
-        >
-          Demo Atlas <span class="text-xs opacity-80">(PoC)</span>
-        </a>
-        <a
-          href="/atlas/"
-          class="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-medium text-center hover:bg-blue-500 transition-colors"
+          href="/atlas/tara/"
+          class="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-[var(--color-accent-fill)] text-white text-sm font-medium text-center hover:opacity-90 transition-opacity"
         >
           <svg class="w-4 h-4" viewBox="0 0 32 32" fill="none">
             <path d="M8 16 Q12 8 16 16 Q20 24 24 16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
             <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
           </svg>
-          Atlas Overview
+          Explore TARA
         </a>
         <a
           href="/research/whitepaper/"

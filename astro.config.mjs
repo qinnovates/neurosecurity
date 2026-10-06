@@ -27,8 +27,8 @@ export default defineConfig({
     // Pre-2026-03-06 routes (before consolidation)
     '/neurogovernance/': '/governance/rights/',
     '/landscape/': '/research/neuroethics-landscape/',
-    '/psychiatric/': '/research/clinical/',
-    '/therapeutics/': '/atlas/therapeutics/',
+    '/psychiatric/': '/atlas/clinical/',
+    '/therapeutics/': '/atlas/clinical/#therapeutics',
     '/bci/': '/research/landscape/',
 
     // 2026-03-06 Consolidation redirects
@@ -41,14 +41,14 @@ export default defineConfig({
     '/interface-risks/landscape/': '/research/landscape/',
     '/interface-risks/explorer/': '/research/bci-explorer/',
     '/interface-risks/dashboard/': '/research/landscape/',
-    '/interface-risks/limits/': '/research/physics/',
+    '/interface-risks/limits/': '/research/landscape/#physics',
     '/interface-risks/guardrails/': '/guardrails/',
     '/interface-risks/api/': '/research/api/',
     '/neuroethics/rights/': '/governance/rights/',
     '/neuroethics/foundations/': '/governance/foundations/',
-    '/neuroethics/clinical/': '/research/clinical/',
+    '/neuroethics/clinical/': '/atlas/clinical/',
     '/neuroethics/landscape/': '/research/neuroethics-landscape/',
-    '/neuroethics/therapeutics/': '/atlas/therapeutics/',
+    '/neuroethics/therapeutics/': '/atlas/clinical/#therapeutics',
     '/signal-security/hourglass/': '/framework/',
     '/open-research/writing/': '/news/',
     '/open-research/roadmap/': '/news/roadmap/',
@@ -60,6 +60,17 @@ export default defineConfig({
 
     // 2026-03-10 Nav restructure redirects
     '/licensing/': '/about/',
+
+    // 2026-08-13 TARA-led IA restructure — dead stub/orphan page cleanup
+    '/threat-models/': '/atlas/tara/',
+    '/atlas/therapeutics/': '/atlas/clinical/#therapeutics',
+    '/tools/overview/': '/guardrails/',
+    '/tools/nsp/': '/guardrails/nsp/',
+    '/tools/runemate/': '/guardrails/runemate/',
+    '/research/clinical/': '/atlas/clinical/',
+    '/research/physics/': '/research/landscape/#physics',
+    '/security/': '/framework/',
+    '/development/': '/guardrails/',
   },
   integrations: [
     react(),

@@ -1,24 +1,20 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import AtlasDashboard from '@/components/atlas/AtlasDashboard';
+import { loadTaraChains } from '@/components/atlas/load-tara-chains';
 import BciKql from '@/components/bci/BciKql';
 import PublicationCard from '@/components/PublicationCard.astro';
 import { getAtlasData, getThreatsForBandDetail } from '@/lib/atlas-data';
 import { getBrainViewData } from '@/lib/brain-view-data';
 import { getKqlTables } from '@/lib/kql-tables';
-import { HOURGLASS_BANDS } from '@/lib/qif-constants';
+import { HOURGLASS_BANDS, TARA_TECHNIQUES } from '@/lib/qif-constants';
 import { getCollection } from 'astro:content';
 import { getPostDate } from '@/lib/utils';
 import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
-import fs from 'node:fs';
-import path from 'node:path';
 
 // Load chain data for stats
-let chainData: { chains: any[] } = { chains: [] };
-try {
-  const raw = fs.readFileSync(path.resolve('shared/tara-chains.json'), 'utf-8');
-  chainData = JSON.parse(raw);
-} catch { /* no chains yet */ }
+// A missing or malformed file fails the build rather than rendering "0 chains".
+const chainCount = loadTaraChains().length;
 
 // Build-time data computation
 const kqlTables = getKqlTables();
@@ -32,7 +28,8 @@ for (const band of HOURGLASS_BANDS) {
 }
 
 // Aggregate stats for hero
-const totalThreats = atlasData.bands.reduce((sum, b) => sum + b.threatCount, 0);
+// Each technique once. Summing per-band counts would count a technique once per band it spans.
+const totalThreats = TARA_TECHNIQUES;
 const totalDevices = atlasData.devices.length;
 const totalNeurorights = atlasData.neurorights.length;
 const totalDsmCodes = atlasData.dsmClusters.reduce((sum, c) => sum + c.conditions.length, 0);
@@ -106,7 +103,7 @@ const subPages = [
     description: 'Multi-step attack sequences traversing silicon to biological domains.',
     href: '/atlas/chains/',
     icon: 'chain',
-    stat: `${chainData.chains.length} chains`,
+    stat: `${chainCount} ${chainCount === 1 ? 'chain' : 'chains'}`,
     color: '#f97316',
   },
 ];
@@ -146,7 +143,7 @@ const iconSvg: Record<string, string> = {
         </p>
       </div>
       <div class="flex items-center gap-2 shrink-0 flex-wrap">
-        <a href="/atlas/tara/" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold transition-all hover:scale-[1.02]" style="background: linear-gradient(135deg, #22d3ee, #06b6d4); color: #0a0e17; box-shadow: 0 2px 12px rgba(34, 211, 238, 0.2);">
+        <a href="/atlas/tara/" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold transition-all hover:scale-[1.02]" style="background: var(--color-accent-fill); color: #fff;">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h2l3-6 4 12 3-8 2 2h4" /></svg>
           Explore Threat Atlas
         </a>

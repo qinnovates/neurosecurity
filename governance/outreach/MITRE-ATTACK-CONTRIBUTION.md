@@ -153,11 +153,11 @@ Engage MITRE's Center for Threat-Informed Defense (CTID) to co-develop a BCI/neu
 
 | Asset | Detail |
 |-------|--------|
-| Threat taxonomy | 109 techniques across 8 domains (TARA v1.7) |
+| Threat taxonomy | 165 techniques across 8 domains, 17 tactics (TARA v4.0) |
 | Scoring system | NISS v1.1 — CVSS v4.0 extension with 6 neural metrics |
 | STIX 2.1 feed | Machine-readable threat data ([qinnovate.com/api/stix.json](https://qinnovate.com/api/stix.json)) |
 | Published research | Zenodo preprint (DOI: 10.5281/zenodo.18640105), 193 verified sources |
-| Standards engagement | FIRST.org CVSS SIG member, NISS accepted for CVSS Resources repo |
+| Standards engagement | FIRST.org CVSS SIG member; NISS proposed as a CVSS v4.0 extension, formal registration deliberately deferred pending independent methodological review |
 | Open source | Full framework, scoring engine, and data (Apache 2.0) |
 
 ### What We Need
@@ -179,10 +179,11 @@ for brain-computer interfaces (BCIs). BCIs are a growing category of
 cyber-physical medical devices with no representation in ATT&CK, ATLAS, or
 any MITRE framework.
 
-We have published an open-source threat taxonomy (TARA, 109 techniques in
-STIX 2.1 format) and a CVSS v4.0 scoring extension (NISS, accepted for the
-FIRST.org CVSS Resources repository) that together provide a starting
-corpus for BCI threat modeling.
+We have published an open-source threat taxonomy (TARA, 165 techniques in
+STIX 2.1 format) and a CVSS v4.0 scoring extension (NISS, proposed to the
+FIRST.org CVSS Resources repository — formal registration deliberately
+deferred pending independent methodological review) that together provide
+a starting corpus for BCI threat modeling.
 
 The structural analogy to ICS is direct: BCIs are cyber-physical systems
 where compromise causes physical harm. The ICS ATT&CK domain's Safety

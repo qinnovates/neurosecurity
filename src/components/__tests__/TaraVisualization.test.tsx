@@ -1,18 +1,9 @@
 // @vitest-environment jsdom
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import { describe, it, expect, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import TaraVisualization from '../TaraVisualization';
 
 afterEach(cleanup);
-
-// Mock Hourglass3D to avoid canvas/webgl issues in test
-vi.mock('../Hourglass3D', () => ({
-    default: ({ highlightBandId, onBandClick }: any) => (
-        <div data-testid="hourglass-mock" onClick={() => onBandClick('N7')}>
-            {highlightBandId}
-        </div>
-    )
-}));
 
 const mockThreats = [
     {
@@ -48,34 +39,45 @@ const mockBands = [
     { id: 'N7', name: 'Neocortex', zone: 'Neural', color: '#ff0000' }
 ];
 
+function renderVisualization() {
+    render(<TaraVisualization threats={mockThreats} categories={mockCategories} bands={mockBands} />);
+}
+
+function openNeuralDomain() {
+    fireEvent.click(screen.getByRole('button', { name: /Neural/ }));
+}
+
 describe('TaraVisualization', () => {
-    it('renders in Attacker mode by default', () => {
-        render(<TaraVisualization threats={mockThreats} categories={mockCategories} bands={mockBands} />);
-        expect(screen.getByText('Threat Matrix')).toBeDefined();
-        expect(screen.getByText('TARA-001')).toBeDefined(); // Shows ID in attacker mode
+    it('starts on the domain picker with no techniques listed', () => {
+        renderVisualization();
+        expect(screen.getByRole('button', { name: /Neural/ })).toBeDefined();
+        expect(screen.getByRole('button', { name: /Interface/ })).toBeDefined();
+        expect(screen.getByRole('button', { name: /Synthetic/ })).toBeDefined();
+        expect(screen.queryByText('TARA-001')).toBeNull();
     });
 
-    it('switches to Therapeutic mode', () => {
-        render(<TaraVisualization threats={mockThreats} categories={mockCategories} bands={mockBands} />);
-        const doctorBtn = screen.getByRole('button', { name: 'Therapeutic' });
-        fireEvent.click(doctorBtn);
-        expect(screen.getByText('Therapeutic Indications')).toBeDefined();
-        expect(screen.getByText('Deep Brain Stimulation')).toBeDefined(); // Shows analog
+    it('lists the bands of the chosen domain', () => {
+        renderVisualization();
+        openNeuralDomain();
+        expect(screen.getByText('Select Locus')).toBeDefined();
+        expect(screen.getByRole('button', { name: /Neocortex/ })).toBeDefined();
     });
 
-    it('switches to Diagnostic mode', () => {
-        render(<TaraVisualization threats={mockThreats} categories={mockCategories} bands={mockBands} />);
-        const diagBtn = screen.getByRole('button', { name: 'Diagnostic' });
-        fireEvent.click(diagBtn);
-        expect(screen.getByText('Diagnostic Risks (DSM-5)')).toBeDefined();
-        expect(screen.getByText('F20.9')).toBeDefined(); // Shows DSM code
+    it('shows the techniques mapped to a band once it is selected', () => {
+        renderVisualization();
+        openNeuralDomain();
+        expect(screen.queryByText('TARA-001')).toBeNull();
+        fireEvent.click(screen.getByRole('button', { name: /Neocortex/ }));
+        expect(screen.getAllByText('TARA-001').length).toBeGreaterThan(0);
     });
 
-
-    it('filters by band when 3D model is clicked', () => {
-        render(<TaraVisualization threats={mockThreats} categories={mockCategories} bands={mockBands} />);
-        const hourglass = screen.getByTestId('hourglass-mock');
-        fireEvent.click(hourglass); // Clicks 'N7' based on mock
-        expect(screen.getByText('/ N7')).toBeDefined();
+    it('returns to the domain picker and clears the selection', () => {
+        renderVisualization();
+        openNeuralDomain();
+        fireEvent.click(screen.getByRole('button', { name: /Neocortex/ }));
+        fireEvent.click(screen.getByRole('button', { name: 'Back to Domains' }));
+        expect(screen.queryByText('Select Locus')).toBeNull();
+        expect(screen.queryByText('TARA-001')).toBeNull();
+        expect(screen.getByRole('button', { name: /Synthetic/ })).toBeDefined();
     });
 });

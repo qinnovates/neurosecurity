@@ -11,7 +11,20 @@ import {
   NEUROWALL_DURATION_SWEEP,
   NEUROWALL_SOVEREIGNTY_ATTACKS,
 } from '@/lib/neurowall-constants';
-import { TARA_TECHNIQUES } from '../../lib/qif-constants';
+import { TARA_TECHNIQUES, HOURGLASS_BANDS, HOURGLASS_WIDTHS } from '../../lib/qif-constants';
+
+// Bands where each spec operates — drives the mini hourglass below
+const specBands: Record<string, string[]> = {
+  neurowall: ['I0'],
+  nsp: ['S1', 'S2'],
+  runemate: ['S2', 'S3'],
+};
+
+const specColors: Record<string, string> = {
+  neurowall: '#f59e0b',
+  nsp: '#3b82f6',
+  runemate: '#8b5cf6',
+};
 ---
 
 <PageLayout
@@ -114,6 +127,35 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- Mini hourglass: which bands each spec occupies -->
+        <div class="mt-8 space-y-1.5 max-w-xl mx-auto">
+          {HOURGLASS_BANDS.map((band, i) => {
+            const width = HOURGLASS_WIDTHS[i];
+            const isNeurowall = specBands.neurowall.includes(band.id);
+            const isNsp = specBands.nsp.includes(band.id);
+            const isRunemate = specBands.runemate.includes(band.id);
+            const hasSpec = isNeurowall || isNsp || isRunemate;
+            const specColor = isNeurowall ? specColors.neurowall : isNsp ? specColors.nsp : isRunemate ? specColors.runemate : '';
+
+            return (
+              <div
+                class:list={["rounded-lg px-3 py-2 mx-auto transition-all text-center", hasSpec ? "ring-2" : ""]}
+                style={`max-width: ${width}%; border-left: 3px solid ${band.color}; background: var(--color-bg-secondary); ${hasSpec ? `ring-color: ${specColor};` : ''}`}
+              >
+                <div class="flex items-center justify-center gap-2">
+                  <span class="text-[10px] font-bold font-mono" style={`color: ${band.color};`}>{band.id}</span>
+                  <span class="text-xs">{band.name}</span>
+                  {hasSpec && (
+                    <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded" style={`color: ${specColor}; background: ${specColor}15;`}>
+                      {isNeurowall ? 'NEUROWALL' : isNsp ? 'NSP' : 'RUNEMATE'}
+                    </span>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
