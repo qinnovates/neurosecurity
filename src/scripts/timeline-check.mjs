@@ -29,6 +29,7 @@ const LANDSCAPE_PATH = resolve(ROOT, 'datalake/bci-landscape.json');
 const SOURCES_PATH = resolve(ROOT, 'osi-of-mind/QIF-RESEARCH-SOURCES.md');
 const FIELD_JOURNAL_PATH = resolve(ROOT, 'osi-of-mind/QIF-FIELD-JOURNAL.md');
 const BLOG_DIR = resolve(ROOT, 'research/blog');
+const DSM_MAPPINGS_PATH = resolve(ROOT, 'datalake/qif-dsm-mappings.json');
 const DERIVATION_LOG_PATH = resolve(ROOT, 'osi-of-mind/QIF-DERIVATION-LOG.md');
 const SDK_MANIFEST_PATH = resolve(ROOT, 'datalake/qtara/pyproject.toml');
 const CONSTANTS_PATH = resolve(ROOT, 'src/lib/qif-constants.ts');
@@ -136,7 +137,6 @@ if (registry?.techniques) {
   actual.tara_domains = new Set(registry.techniques.map((technique) => technique.tara_domain_primary).filter(Boolean)).size;
 }
 if (registry?.niss_spec?.version) actual.niss_version = `v${registry.niss_spec.version}`;
-if (registry?.statistics?.tara?.version) actual.tara_version = `v${registry.statistics.tara.version}`;
 if (registry?.version) actual.registrar_version = `v${registry.version}`;
 
 // BCI devices (from bci-landscape.json, the dataset the device directory reads)
@@ -154,16 +154,13 @@ actual.whitepaper_version = readVersion(CONSTANTS_PATH, /LATEST_WHITEPAPER_VERSI
 
 // Hourglass bands and DSM-5 codes come from the data they describe
 actual.hourglass_bands = countMatches(CONSTANTS_PATH, /^\s*\{\s*id:\s*'[NIS]\d'/gm) || undefined;
+// Same source and definition as the Atlas hub's "DSM-5 Codes" stat, so the two cannot diverge.
+const dsmMappings = readJSON(DSM_MAPPINGS_PATH);
+if (dsmMappings?.diagnostic_clusters) {
+  actual.dsm5_diagnoses_mapped = Object.values(dsmMappings.diagnostic_clusters)
+    .reduce((total, cluster) => total + (cluster.conditions?.length ?? 0), 0);
+}
 if (registry?.techniques) {
-  const dsmCodes = new Set();
-  for (const technique of registry.techniques) {
-    for (const key of ['primary', 'secondary']) {
-      for (const entry of technique.tara?.dsm5?.[key] ?? []) {
-        if (entry?.code) dsmCodes.add(entry.code);
-      }
-    }
-  }
-  actual.dsm5_diagnoses_mapped = dsmCodes.size;
   actual.techniques_with_dsm5 = registry.techniques.filter((technique) => technique.tara?.dsm5?.primary?.length).length;
 }
 
@@ -203,7 +200,7 @@ const fields = [
   'physics_constraints', 'research_sources', 'derivation_log_entries',
   'techniques_niss_scored', 'tara_domains', 'bci_companies',
   'niss_version', 'registrar_version', 'landscape_dataset_version', 'sdk_version', 'whitepaper_version',
-  'hourglass_bands', 'dsm5_diagnoses_mapped', 'techniques_with_dsm5', 'field_journal_entries', 'blog_posts', 'tara_version',
+  'hourglass_bands', 'dsm5_diagnoses_mapped', 'techniques_with_dsm5', 'field_journal_entries', 'blog_posts',
 ];
 
 for (const field of fields) {

@@ -109,9 +109,8 @@ const FIGURE_SOURCES: Record<string, string> = {
   sdk_version: 'datalake/qtara/pyproject.toml',
   whitepaper_version: 'src/lib/qif-constants.ts',
   hourglass_bands: 'src/lib/qif-constants.ts',
-  dsm5_diagnoses_mapped: 'datalake/qtara-registrar.json',
+  dsm5_diagnoses_mapped: 'datalake/qif-dsm-mappings.json',
   techniques_with_dsm5: 'datalake/qtara-registrar.json',
-  tara_version: 'datalake/qtara-registrar.json',
   field_journal_entries: 'osi-of-mind/QIF-FIELD-JOURNAL.md',
   blog_posts: 'research/blog/',
 };
