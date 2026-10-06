@@ -13,10 +13,15 @@ import DualUseSplit from '../components/DualUseSplit';
 import NeurorightsPentagon from '../components/NeurorightsPentagon';
 import '../styles/global.css';
 import registry from '@shared/qtara-registrar.json';
+import landscape from '@shared/bci-landscape.json';
+import { CODE_LABELS, METRIC_NAMES, parseNiss } from '../lib/niss-parser';
 
 // Compute hero metrics from registrar (build-time)
 const techniques = (registry as any).techniques ?? [];
 const totalThreats = techniques.length;
+// Techniques that carry a NISS vector. The claim below stays accurate while some are still unscored.
+const scoredThreats = techniques.filter((t: any) => t?.niss?.vector).length;
+const scoredPhrase = scoredThreats === totalThreats ? 'scored for neural impact' : `${scoredThreats} of them scored for neural impact so far`;
 const therapeuticCount = techniques.filter((t: any) => t?.tara?.clinical?.therapeutic_analog).length;
 const dsm5Count = techniques.filter((t: any) => t?.tara?.dsm5?.primary?.length > 0).length;
 const confirmed = techniques.filter((t: any) => t.status === 'CONFIRMED').length;
@@ -28,6 +33,34 @@ const neurorightsCount = neurorightsSet.size;
 
 // Labels for the hero signal bench, resolved from the catalog (build-time)
 const signalBenchEvents = buildSignalBenchEvents(THREAT_VECTORS);
+
+// Market size: median of the dataset's estimates for one year, so the claim and its footnote cannot drift from the data
+const MARKET_ESTIMATE_YEAR = 2024;
+const marketEstimates = landscape.market_data.market_size_estimates
+  .filter((estimate) => estimate.year === MARKET_ESTIMATE_YEAR)
+  .map((estimate) => estimate.value_billion_usd)
+  .sort((smaller, larger) => smaller - larger);
+if (marketEstimates.length === 0) {
+  throw new Error(`Homepage: bci-landscape.json has no market size estimates for ${MARKET_ESTIMATE_YEAR}. Update MARKET_ESTIMATE_YEAR in src/pages/index.astro.`);
+}
+const middleIndex = Math.floor(marketEstimates.length / 2);
+const marketMedianBillions = marketEstimates.length % 2 === 1
+  ? marketEstimates[middleIndex]
+  : (marketEstimates[middleIndex - 1] + marketEstimates[middleIndex]) / 2;
+const marketMedianLabel = `$${marketMedianBillions.toFixed(1)} billion`;
+
+// NISS worked example: one catalogued technique with its real metric values and score
+const NISS_EXAMPLE_ID = 'QIF-T0001';
+const NISS_METRIC_KEYS = ['bi', 'cr', 'cd', 'cv', 'rv', 'np'] as const;
+const nissExample = THREAT_VECTORS.find((technique) => technique.id === NISS_EXAMPLE_ID);
+if (!nissExample) {
+  throw new Error(`Homepage: technique ${NISS_EXAMPLE_ID} is not in the TARA catalog. Update NISS_EXAMPLE_ID in src/pages/index.astro.`);
+}
+const nissExampleVector = parseNiss(nissExample.niss.vector);
+const nissExampleMetrics = NISS_METRIC_KEYS.map((key) => ({
+  label: METRIC_NAMES[key],
+  value: CODE_LABELS[key][nissExampleVector[key]],
+}));
 
 // Compute severity breakdown from registrar (build-time)
 const bySeverity: Record<string, number> = { critical: 0, high: 0, medium: 0, low: 0 };
@@ -45,7 +78,7 @@ techniques.forEach((t: any) => {
 });
 ---
 
-<BaseLayout title="TARA — Open Threat Catalog for BCI Security" description={`${totalThreats} brain-computer interface attack techniques catalogued in TARA, scored with NISS and mapped to the QIF hourglass architecture. A proposed open framework for an $8B industry.`}>
+<BaseLayout title="TARA — Open Threat Catalog for BCI Security" description={`${totalThreats} brain-computer interface attack techniques catalogued in TARA and mapped to the QIF hourglass architecture, ${scoredThreats} of them scored with NISS. A proposed open framework for a ${marketMedianLabel} industry (${MARKET_ESTIMATE_YEAR} estimate).`}>
   <Nav />
 
   <!-- ═══ HERO ═══ -->
@@ -58,7 +91,7 @@ techniques.forEach((t: any) => {
       </h1>
 
       <p class="text-base sm:text-lg text-[var(--color-text-muted)] mb-8 max-w-2xl leading-relaxed">
-        TARA maps {totalThreats} BCI attack techniques — scored for neural impact, mapped to the neurorights they threaten, and traced to their therapeutic counterparts. Built on the QIF hourglass architecture for an <a href="/research/landscape/" class="text-[var(--color-accent-primary)] hover:underline">$8 billion industry</a>.*
+        TARA maps {totalThreats} BCI attack techniques — {scoredPhrase}, mapped to the neurorights they threaten, and traced to their therapeutic counterparts. Built on the QIF hourglass architecture for a <a href="/research/landscape/" class="text-[var(--color-accent-primary)] hover:underline">{marketMedianLabel} industry</a> ({MARKET_ESTIMATE_YEAR} estimate).*
       </p>
 
       <!-- Primary CTAs -->
@@ -95,7 +128,7 @@ techniques.forEach((t: any) => {
       <TrustBar />
       <p class="text-xs text-[var(--color-text-faint)] mt-4">
         {confirmed} confirmed, {demonstrated} demonstrated, {theoretical} theoretical.
-        *Median estimate across <a href="/research/landscape/" class="underline hover:text-[var(--color-text-muted)] transition-colors">9 market research firms</a>.
+        *Median of <a href="/research/landscape/" class="underline hover:text-[var(--color-text-muted)] transition-colors">{marketEstimates.length} market research estimates</a> for {MARKET_ESTIMATE_YEAR}.
       </p>
     </div>
   </section>
@@ -250,7 +283,7 @@ techniques.forEach((t: any) => {
           </div>
           <div class="glass rounded-lg p-4">
             <p class="font-semibold text-[var(--color-text-primary)] mb-1">BCI Manufacturers</p>
-            <p>Neuralink, Synchron, Blackrock, Precision Neuroscience: <strong class="text-[var(--color-text-primary)]">zero public security documentation.</strong> No threat models, no vulnerability disclosure policies.</p>
+            <p>Neuralink publishes a <a href="https://neuralink.com/vulnerability-disclosure" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">vulnerability disclosure programme</a>. For Synchron, Blackrock Neurotech and Precision Neuroscience, our landscape dataset records <strong class="text-[var(--color-text-primary)]">no published security documentation, threat model or disclosure policy.</strong></p>
           </div>
         </div>
         <div class="glass rounded-lg p-4" style="border-left: 3px solid var(--color-accent-primary);">
@@ -269,7 +302,7 @@ techniques.forEach((t: any) => {
         Every technique maps to the QIF hourglass and a NISS score.
       </h2>
       <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto">
-        QIF is a proposed 11-band architecture — biology above, silicon below, with the physical neural interface at the bottleneck where security either holds or fails. NISS scores each technique by base severity, reversibility, and detectability.
+        QIF is a proposed 11-band architecture — biology above, silicon below, with the physical neural interface at the bottleneck where security either holds or fails. NISS scores each technique on {nissExampleMetrics.length} metrics; the example below shows them for one catalogued technique.
       </p>
     </div>
 
@@ -280,12 +313,25 @@ techniques.forEach((t: any) => {
     />
 
     <div class="glass rounded-2xl p-8 max-w-lg mx-auto mt-12 reveal-scale">
-      <p class="font-mono text-xs text-[var(--color-text-faint)] mb-4">Example: Signal Injection</p>
-      <div class="space-y-4">
-        <div><div class="flex justify-between text-xs mb-1"><span class="text-[var(--color-text-muted)]">Base Severity</span><span class="font-mono">6.0</span></div><div class="h-2 rounded-full" style="background: var(--color-bg-elevated);"><div class="score-build-fill h-full rounded-full bg-[var(--color-accent-primary)]" style="width: 60%; --build-step: 0;"></div></div></div>
-        <div><div class="flex justify-between text-xs mb-1"><span class="text-[var(--color-text-muted)]">+ Reversibility</span><span class="font-mono text-amber-500">+1.5</span></div><div class="h-2 rounded-full" style="background: var(--color-bg-elevated);"><div class="score-build-fill h-full rounded-full bg-amber-500" style="width: 15%; --build-step: 1;"></div></div></div>
-        <div><div class="flex justify-between text-xs mb-1"><span class="text-[var(--color-text-muted)]">+ Detectability</span><span class="font-mono text-amber-500">+0.7</span></div><div class="h-2 rounded-full" style="background: var(--color-bg-elevated);"><div class="score-build-fill h-full rounded-full bg-amber-500" style="width: 7%; --build-step: 2;"></div></div></div>
-        <div class="pt-2 border-t" style="border-color: var(--color-border);"><div class="flex justify-between text-sm mb-1"><span class="font-semibold">Final NISS</span><span class="font-mono font-bold text-red-500">8.2 HIGH</span></div><div class="h-3 rounded-full" style="background: var(--color-bg-elevated);"><div class="score-build-fill h-full rounded-full bg-red-500" style="width: 82%; --build-step: 3;"></div></div></div>
+      <p class="font-mono text-xs text-[var(--color-text-faint)] mb-4">
+        Example: <a href={`/atlas/tara/${nissExample.id}/`} class="hover:underline">{nissExample.id}</a> {nissExample.name}
+      </p>
+      <dl class="space-y-2 text-xs">
+        {nissExampleMetrics.map((metric) => (
+          <div class="flex justify-between gap-4">
+            <dt class="text-[var(--color-text-muted)]">{metric.label}</dt>
+            <dd class="font-mono">{metric.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <div class="pt-3 mt-4 border-t" style="border-color: var(--color-border);">
+        <div class="flex justify-between text-sm mb-1">
+          <span class="font-semibold">NISS score</span>
+          <span class="font-mono font-bold">{nissExample.niss.score.toFixed(1)} {nissExample.niss.severity}</span>
+        </div>
+        <div class="h-3 rounded-full" style="background: var(--color-bg-elevated);">
+          <div class="score-build-fill h-full rounded-full bg-[var(--color-accent-primary)]" style={`width: ${nissExample.niss.score * 10}%;`}></div>
+        </div>
       </div>
     </div>
     <div class="flex flex-wrap items-center justify-center gap-2 mt-8 text-[10px] font-mono text-[var(--color-text-faint)] reveal">
