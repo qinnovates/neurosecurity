@@ -4,7 +4,7 @@
   "framework": "Quantified Interconnection Framework (QIF) for Neural Security",
   "statistics": {
     "total_techniques": 165,
-    "total_tactics": 16,
+    "total_tactics": 17,
     "total_domains": 8,
     "by_tactic": {
       "QIF-N.IJ": 11,
@@ -26,10 +26,10 @@
       "QIF-N.NM": 3
     },
     "by_status": {
-      "CONFIRMED": 29,
+      "CONFIRMED": 27,
       "EMERGING": 26,
       "DEMONSTRATED": 43,
-      "THEORETICAL": 65,
+      "THEORETICAL": 67,
       "PLAUSIBLE": 1,
       "SPECULATIVE": 1
     },
@@ -2114,12 +2114,13 @@
       "quantum": "Enhanced (Dsf + coherence)",
       "sources": [
         "Zhang et al. 2024",
-        "Indirect corticothalamic-raphe 5-HT pathway (rTMS DLPFC -> DRN serotonin)"
+        "Indirect corticothalamic-raphe 5-HT pathway (rTMS DLPFC -> DRN serotonin)",
+        "Armengol-Urpi, Kovacs, Sarma 2023, \"Brain-Hack: Remotely Injecting False Brain-Waves with RF\" (analog-front-end RF injection variant, demonstrated through walls at ~3m against live EEG-BCI hardware, no software access required)"
       ],
       "status": "EMERGING",
       "severity": "high",
       "ui_category": "SI",
-      "notes": "Inject RF signals calibrated to neural frequencies through BCI's own antenna or nearby transmitter. Synthetic brainwave patterns bypass analog front-end filters designed for biological signals.",
+      "notes": "Inject RF signals calibrated to neural frequencies through BCI's own antenna or nearby transmitter. Synthetic brainwave patterns bypass analog front-end filters designed for biological signals. CAUTION 2026-07-31: this entry currently conflates two physically distinct mechanisms. (1) The mechanism described above and the Armengol-Urpi et al. 2023 source is analog-front-end RF injection: electrode wires act as unintended antennas, RF is demodulated into fabricated readings at the acquisition stage; the brain itself is never affected; no Tesla-scale field, no software access needed, demonstrated through walls at ~3m. (2) The tara.engineering fields below (1.5-2.0T field strength, rTMS coil hardware, 1-50Hz pulse pattern) describe TMS-grade electromagnetic neuromodulation, which actually induces neural activity via a completely different physical mechanism. These should likely be split into two separate techniques; treat this entry's clinical/engineering/CVSS fields as describing mechanism (2), and its notes/Armengol-Urpi source as describing mechanism (1), until resolved.",
       "legacy_ids": [],
       "legacy_technique_id": "T2009",
       "niss": {
@@ -2400,10 +2401,10 @@
         "NTIA Frequency Allocation Chart",
         "US Navy ELF program (declassified)"
       ],
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "critical",
       "ui_category": "SI",
-      "notes": "3-76 Hz government-restricted. IS neural frequency. Penetrates globally. Direct gamma/alpha/theta cortical entrainment. US Navy operated at 76 Hz (Clam Lake) and 45 Hz (Republic). Russia, China maintain capability.",
+      "notes": "3-76 Hz government-restricted. IS neural frequency. Penetrates globally. Direct gamma/alpha/theta cortical entrainment. US Navy operated at 76 Hz (Clam Lake) and 45 Hz (Republic). Russia, China maintain capability. Reclassified CONFIRMED -> THEORETICAL 2026-07-31: cited sources (NTIA frequency chart, declassified Navy ELF submarine-comms program) confirm the frequency band and its regulated status, not neural entrainment. The clinical sources (Thut 2011, Herrmann 2016) demonstrate photic/audio-visual entrainment, a different modality than the direct EM-field entrainment claimed here. No source demonstrates ELF EM field entrainment of neural oscillations as an attack.",
       "legacy_ids": [],
       "legacy_technique_id": "T2101",
       "niss": {
@@ -3737,10 +3738,10 @@
       "sources": [
         "US DoD Active Denial System (declassified)"
       ],
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "critical",
       "ui_category": "PS",
-      "notes": "mm-wave/ADS (95 GHz) directed energy. Excites water molecules in top 0.4mm of skin. For surface implants: electrode heating, tissue damage at I0 boundary. Destroys interface integrity. Nation-state only.",
+      "notes": "mm-wave/ADS (95 GHz) directed energy. Excites water molecules in top 0.4mm of skin. For surface implants: electrode heating, tissue damage at I0 boundary. Destroys interface integrity. Nation-state only. Reclassified CONFIRMED -> THEORETICAL 2026-07-31: the cited source (declassified US DoD Active Denial System) confirms the underlying mm-wave tissue-heating phenomenon as a real, declassified weapon system, not its application as a demonstrated attack against a BCI electrode-tissue (I0) boundary specifically. The extrapolation from skin-surface heating to implant/electrode damage is plausible but undemonstrated.",
       "legacy_ids": [],
       "legacy_technique_id": "T2106",
       "niss": {
@@ -28670,6 +28671,11 @@
       "code": "E",
       "name": "Energy",
       "description": "Directed energy attacks — ELF, microwave, RF, temporal interference."
+    },
+    {
+      "code": "S",
+      "name": "Consumer Sensor",
+      "description": "Consumer-device sensors repurposed as neural attack surface — audio, optical, IMU, RF, thermal, biometric."
     }
   ],
   "niss_spec": {
