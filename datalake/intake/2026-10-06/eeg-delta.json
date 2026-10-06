@@ -1,0 +1,1394 @@
+{
+  "name": "eeg-delta",
+  "generated": "2026-10-06",
+  "baseline": {
+    "file": "../neurosecurity/datalake/bci-landscape.json (uncommitted)",
+    "last_verified": "2026-08-13",
+    "companies": 70,
+    "devices": 74
+  },
+  "summary": {
+    "adds": 19,
+    "updates": 4,
+    "items_with_unverified_fields": 19,
+    "items_marked_UNVERIFIED": 3,
+    "open_claims": 8
+  },
+  "conventions": {
+    "null": "No fetched source states the value. Not a statement that the value is zero or absent.",
+    "tara_attack_surface": "Left [] on every new company. Mapping to QIF-T identifiers is a registrar decision (.claude/rules/registrar.md) and was not attempted.",
+    "attack_surface_facts": "Sidecar outside proposed_values; not part of the existing schema.",
+    "fda_status": "Always a non-null string because BciDirectory.tsx calls status.toLowerCase() on it."
+  },
+  "items": [
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[+] name='Nissan Motor Co., Ltd. (Brain-to-Vehicle programme)'",
+      "proposed_values": {
+        "name": "Nissan Motor Co., Ltd. (Brain-to-Vehicle programme)",
+        "type": "non_invasive",
+        "modality": "EEG (automotive driver-intention decoding)",
+        "founded": null,
+        "headquarters": "Yokohama, Japan",
+        "status": "research_only",
+        "acquired_by": null,
+        "funding_total_usd": null,
+        "funding_note": "Corporate R&D programme inside an automaker; company-level funding, valuation and headcount are not applicable and are left null so they do not enter funding totals.",
+        "valuation_usd": null,
+        "employees_approx": null,
+        "security_posture": "none_published",
+        "security_notes": "Automotive EEG research programme, not a product. Nissan announced Brain-to-Vehicle (B2V) on 2018-01-03 and demonstrated elements of it on a driving simulator at CES 2018. The driver-worn EEG headset was developed with Bitbrain (Zaragoza, Spain): dry sensors, wireless, Bluetooth link to the vehicle's onboard systems per Bitbrain's 2025 article. Channel count, sampling rate, Bluetooth version, pairing and encryption are not stated by Nissan or Bitbrain. No published security documentation located. No production or on-road deployment announcement located. Verified 2026-10-06 via Nissan Global Newsroom, Nissan technology library, Bitbrain.",
+        "tara_attack_surface": [],
+        "devices": [
+          {
+            "name": "Brain-to-Vehicle (B2V) EEG headset (research prototype, with Bitbrain)",
+            "type": "non_invasive",
+            "channels": null,
+            "electrode_type": "dry",
+            "fda_status": "not_applicable",
+            "units_deployed": "research prototype; CES 2018 driving-simulator demonstration",
+            "first_human": "2018-01",
+            "price_usd": null,
+            "target_use": "research",
+            "cves_known": [],
+            "note": "Research prototype. Signals named by Nissan: movement-related cortical potentials (MRCP, preceding intentional movement) and error-related potentials (ErrP). Nissan states systems can act '0.2 to 0.5 seconds faster than the driver'; Bitbrain's article states intent prediction 'between 0.2 and 0.8 seconds before an action' and 'up to one second' ahead after per-driver calibration. No decoding accuracy is given in either company source. Public demonstration was on a driving simulator (CES 2018). Peer-reviewed EPFL-Nissan studies report: ErrP classification accuracy 0.698 +/- 0.065 in a car simulator (N=22) and 0.682 +/- 0.059 in a real car (N=8) (Zhang et al. 2015, doi:10.1088/1741-2560/12/6/066028); anticipatory-potential decoding AUC 0.83 +/- 0.13 (braking) and 0.79 +/- 0.12 (accelerating) in a simulator (N=18), detectable 320 +/- 200 ms before action (Khaliliardali et al. 2015, doi:10.1088/1741-2560/12/6/066006). The abstracts do not name the EEG hardware used and do not use the B2V name. Headset: dry sensors, under two minutes to fit, up to eight hours of operation, Bluetooth (Bitbrain). Channel count not stated."
+          }
+        ],
+        "company_category": "established",
+        "date_added": "2026-10-06",
+        "last_verified": "2026-10-06"
+      },
+      "source_url": "https://global.nissannews.com/en/releases/180103-01-e",
+      "additional_source_urls": [
+        "https://www.nissan-global.com/EN/INNOVATION/TECHNOLOGY/ARCHIVE/B2V/",
+        "https://www.bitbrain.com/blog/nissan-brain-to-vehicle-technology",
+        "https://spain.nissannews.com/es-ES/releases/avances-en-tecnologia-nissan-para-mejorar-la-seguridad-de-los-conductores",
+        "https://www.eldiario.es/hojaderouter/robots/ingeniera-espanola-creado-casco-coches_1_2923681.html",
+        "https://pubmed.ncbi.nlm.nih.gov/26595103/",
+        "https://pubmed.ncbi.nlm.nih.gov/26401885/",
+        "https://api.crossref.org/works/10.1088/1741-2560/12/6/066028",
+        "https://api.crossref.org/works/10.1088/1741-2560/12/6/066006"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "Automotive EEG programme named in the task; absent from the baseline.",
+      "verification_note": "Nissan describes B2V as 'the world's first system of its kind'; that is the company's claim and is not adopted here.",
+      "unverified_fields": [
+        "channels (not stated by Nissan or Bitbrain)",
+        "which Bitbrain model, if any, corresponds to the B2V headset (article links Hero and Diadem product pages but names neither as the B2V device)",
+        "programme status after 2020 (latest Nissan B2V-specific release located is dated 2020-07-08; the technology library page is live but undated)",
+        "company_category value (no automotive value exists in the baseline vocabulary)",
+        "first_human is the first public demonstration (CES, January 2018), not first laboratory use",
+        "founded (not fetched)"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": "Bluetooth (version not stated): 'transmits brain activity data wirelessly via Bluetooth to the vehicle's onboard systems' (Bitbrain, 2025-06-09).",
+        "companion_app": null,
+        "cloud_sync": null,
+        "sdk_or_raw_data_access": null,
+        "published_security_documentation": "None located on Nissan or Bitbrain pages.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[+] name='Bitbrain'",
+      "proposed_values": {
+        "name": "Bitbrain",
+        "type": "non_invasive",
+        "modality": "dry and water-based wearable EEG",
+        "founded": "2010",
+        "headquarters": "Zaragoza, Spain",
+        "status": "active",
+        "acquired_by": null,
+        "funding_total_usd": null,
+        "funding_note": null,
+        "valuation_usd": null,
+        "employees_approx": null,
+        "security_posture": "none_published",
+        "security_notes": "Research EEG vendor (dry 'Minimal EEG' family: Diadem, Air, Hero; water-based Versatile EEG). Developed the driver-worn EEG headset for Nissan's Brain-to-Vehicle programme. Devices stream over Bluetooth 2.1 + EDR with microSD backup; raw data via SennsLite, LSL and a C SDK. Certification listed: CE (Directive 2014/53); no 510(k) found under applicant 'Bitbrain' in openFDA. No product security documentation located; a 2018 company blog post describes a BLE man-in-the-middle demonstration against an unnamed consumer EEG headset. Verified 2026-10-06 via bitbrain.com.",
+        "tara_attack_surface": [],
+        "devices": [
+          {
+            "name": "Hero 9ch EEG",
+            "type": "non_invasive",
+            "channels": 9,
+            "electrode_type": "dry",
+            "fda_status": "not_applicable",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": null,
+            "target_use": "research",
+            "cves_known": [],
+            "note": "DISCONTINUED per manufacturer page ('has been discontinued and is no longer available'). 9 dry sensors at FC3, FCz, FC4, C3, Cz, C4, CP3, CPz, CP4 plus linked-ear reference; 256 SPS at 24 bits; Bluetooth 2.1 + EDR (10 m); autonomy > 3 h; 250 g; CE (Directive 2014/53). 2023 brochure: layout 'optimized for mu/alpha ERD/ERS, ERPs (P300, N400), MRCPs'. Linked from Bitbrain's Nissan B2V article; not named there as the B2V headset."
+          },
+          {
+            "name": "Diadem 12ch EEG",
+            "type": "non_invasive",
+            "channels": 12,
+            "electrode_type": "dry",
+            "fda_status": "not_applicable",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": null,
+            "target_use": "research",
+            "cves_known": [],
+            "note": "12 dry sensors (Fp1, Fp2, AF7, AF8, F3, F4, P3, P4, PO7, PO8, O1, O2); 256 SPS at 24 bits; Bluetooth 2.1 + EDR (10 m); autonomy > 8 h; amplifier 120 g; CE (Directive 2014/53). Linked from Bitbrain's Nissan B2V article; not named there as the B2V headset."
+          },
+          {
+            "name": "Air 8ch EEG",
+            "type": "non_invasive",
+            "channels": 8,
+            "electrode_type": "dry",
+            "fda_status": "not_applicable",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": null,
+            "target_use": "research",
+            "cves_known": [],
+            "note": "8 dry sensors (Fp1, Fp2, AF7, AF8, PO7, PO8, O1, O2); 256 SPS at 24 bits; Bluetooth 2.1 + EDR (10 m); autonomy 6 h; amplifier 82 g; CE (Directive 2014/53)."
+          },
+          {
+            "name": "Versatile EEG (8/16/32ch)",
+            "type": "non_invasive",
+            "channels": 32,
+            "electrode_type": "wet",
+            "fda_status": "not_applicable",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": null,
+            "target_use": "research",
+            "cves_known": [],
+            "note": "Water-based ('semi-dry') cap sold in 8, 16 and 32 channel variants; channels field holds the largest listed variant. 256 SPS at 24 bits; Bluetooth 2.1 + EDR (10 m). electrode_type uses the nearest baseline value; the manufacturer's term is 'water-based sensors'."
+          }
+        ],
+        "company_category": null,
+        "date_added": "2026-10-06",
+        "last_verified": "2026-10-06"
+      },
+      "source_url": "https://www.bitbrain.com/neurotechnology-products/dry-eeg/hero",
+      "additional_source_urls": [
+        "https://www.bitbrain.com/neurotechnology-products/dry-eeg/diadem",
+        "https://www.bitbrain.com/neurotechnology-products/dry-eeg/air",
+        "https://www.bitbrain.com/neurotechnology-products/semi-dry-eeg/versatile-eeg",
+        "https://www.bitbrain.com/neurotechnology-products/dry-eeg",
+        "https://cdn.bitbrain.com/docs/2023/Minimal-Family-Brochure.pdf",
+        "https://www.bitbrain.com/blog/cybersecurity-brain-computer-interface",
+        "https://www.bitbrain.com/blog/nissan-brain-to-vehicle-technology",
+        "https://www.eldiario.es/hojaderouter/robots/ingeniera-espanola-creado-casco-coches_1_2923681.html"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "Hardware partner in Nissan B2V and a mobile/dry EEG vendor absent from the baseline.",
+      "unverified_fields": [
+        "price (quote-only; not published)",
+        "fda_status (no FDA filing located; 'not_applicable' reflects CE research devices, not an FDA determination)",
+        "units_deployed",
+        "first_human",
+        "company_category"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": "Bluetooth 2.1 + EDR, 10 m line of sight (all four product pages).",
+        "companion_app": "SennsLite desktop acquisition software; Ikon App for Windows ('Android coming soon').",
+        "cloud_sync": "SennsCloud is named as the processing step for SennsMetrics; not stated as required for raw recording.",
+        "sdk_or_raw_data_access": "SennsLite raw-data recording with LabStreamingLayer (LSL) output; C SDK (Windows, Linux x86, Python integration); CSV/EDF export; microSD on-device backup (manufacturer product page).",
+        "published_security_documentation": "No product security documentation located on the product pages. Bitbrain published a 2018 blog post describing a threat model for consumer EEG headbands, including a Bluetooth Low Energy man-in-the-middle demonstration (GATTacker) against an unnamed consumer EEG headset; the post does not describe Bitbrain's own products' protections.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[+] name='Hyundai Mobis'",
+      "proposed_values": {
+        "name": "Hyundai Mobis",
+        "type": "non_invasive",
+        "modality": "ear-worn EEG (driver monitoring)",
+        "founded": null,
+        "headquarters": null,
+        "status": "active",
+        "acquired_by": null,
+        "funding_total_usd": null,
+        "funding_note": "Automotive supplier; company-level funding, valuation and headcount not applicable, left null.",
+        "valuation_usd": null,
+        "employees_approx": null,
+        "security_posture": "none_published",
+        "security_notes": "Automotive supplier. M.Brain is an earpiece that measures brainwaves around the ear to flag driver fatigue, drowsiness and distraction; it 'can also be linked with a smartphone app' (Hyundai Motor Group, 2022-06-10). Piloted with Gyeonggi-do public bus drivers. A 2022 'Smart Cabin Controller' concept adds an earphone brainwave sensor alongside a 3D camera and steering-wheel ECG. Wireless protocol, data handling and security measures are not described. Verified 2026-10-06 via hyundaimotorgroup.com.",
+        "tara_attack_surface": [],
+        "devices": [
+          {
+            "name": "M.Brain",
+            "type": "non_invasive",
+            "channels": null,
+            "electrode_type": "ear-worn (earpiece)",
+            "fda_status": "not_applicable",
+            "units_deployed": "10 units in 2021; 300 units planned for 2022 (public bus pilot)",
+            "first_human": "2021",
+            "price_usd": null,
+            "target_use": "enterprise",
+            "cves_known": [],
+            "note": "Company-reported pilot outcome (Gyeonggi Research Institute 2021 data, not peer-reviewed in the source): driving negligence decreased by 25.3% while wearing M.Brain. Hyundai Mobis calls it 'the world's first brainwave-based driver monitoring system'; that is the company's claim. Channel count and dry/wet electrode type not stated; first_human is the pilot start year (month not stated)."
+          }
+        ],
+        "company_category": "established",
+        "date_added": "2026-10-06",
+        "last_verified": "2026-10-06"
+      },
+      "source_url": "https://www.hyundaimotorgroup.com/en/story/CONT0000000000035429",
+      "additional_source_urls": [
+        "https://www.hyundaimotorgroup.com/story/CONT0000000000043965"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "Automotive/workplace EEG deployed with professional drivers; absent from the baseline.",
+      "unverified_fields": [
+        "channels",
+        "electrode dry/wet",
+        "wireless protocol",
+        "status of the bus pilot after 2022",
+        "founded",
+        "headquarters",
+        "first_human month"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": null,
+        "companion_app": "Smartphone app link stated; platform not stated.",
+        "cloud_sync": null,
+        "sdk_or_raw_data_access": null,
+        "published_security_documentation": "None located.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[+] name='Zeto, Inc.'",
+      "proposed_values": {
+        "name": "Zeto, Inc.",
+        "type": "non_invasive",
+        "modality": "gel-free clinical EEG headset",
+        "founded": null,
+        "headquarters": null,
+        "status": "active",
+        "acquired_by": null,
+        "funding_total_usd": null,
+        "funding_note": null,
+        "valuation_usd": null,
+        "employees_approx": null,
+        "security_posture": "regulatory_compliance",
+        "security_notes": "Clinical EEG headsets (Zeto ONE for critical care, New Wave for outpatient EEG) with a cloud platform the company describes as 'HIPAA compliant', with live remote viewing of video EEG. openFDA lists three 510(k) clearances: WR19 System K172735 (2018-04-17), Flexset System K233403 (2024-04-30), New Wave System K260455 (2026-03-13). No security whitepaper located. Verified 2026-10-06 via zeto-inc.com and openFDA.",
+        "tara_attack_surface": [],
+        "devices": [
+          {
+            "name": "WR19 System",
+            "type": "non_invasive",
+            "channels": null,
+            "electrode_type": "dry",
+            "fda_status": "510k_cleared",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": null,
+            "target_use": "medical",
+            "cves_known": [],
+            "note": "510(k) K172735, decision 2018-04-17, product code GWQ (openFDA)."
+          },
+          {
+            "name": "Zeto ONE",
+            "type": "non_invasive",
+            "channels": null,
+            "electrode_type": "dry",
+            "fda_status": "cleared",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": null,
+            "target_use": "medical",
+            "cves_known": [],
+            "note": "Company timeline: introduced 2024 as a second-generation system for hospital, home, ambulance and air transport. Which 510(k) covers ONE is not confirmed (Flexset System K233403 is the 2024 clearance in openFDA)."
+          },
+          {
+            "name": "New Wave System",
+            "type": "non_invasive",
+            "channels": null,
+            "electrode_type": "dry",
+            "fda_status": "510k_cleared",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": null,
+            "target_use": "medical",
+            "cves_known": [],
+            "note": "510(k) K260455, decision 2026-03-13, product code GWQ (openFDA). Company: outpatient EEGs up to 2.5 hours."
+          }
+        ],
+        "company_category": null,
+        "date_added": "2026-10-06",
+        "last_verified": "2026-10-06"
+      },
+      "source_url": "https://zeto-inc.com/",
+      "additional_source_urls": [
+        "https://api.fda.gov/device/510k.json?search=applicant:%22Zeto%22&sort=decision_date:desc&limit=12"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "FDA-cleared mobile EEG vendor with a 2026 clearance; absent from the baseline.",
+      "unverified_fields": [
+        "channels (not on fetched pages)",
+        "Zeto ONE to K233403 mapping",
+        "founded",
+        "headquarters",
+        "company_category",
+        "electrode_type (company says gel-free, soft-tip electrodes; 'dry' is the nearest baseline value)"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": "'Wireless, battery powered' (protocol not stated).",
+        "companion_app": null,
+        "cloud_sync": "Cloud platform with remote live viewing; 'HIPAA compliant cloud platform'.",
+        "sdk_or_raw_data_access": null,
+        "published_security_documentation": "HIPAA-compliance statement only.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[+] name='Epitel, Inc.'",
+      "proposed_values": {
+        "name": "Epitel, Inc.",
+        "type": "non_invasive",
+        "modality": "wearable single-channel EEG sensors",
+        "founded": null,
+        "headquarters": "Salt Lake City, Utah, USA",
+        "status": "active",
+        "acquired_by": null,
+        "funding_total_usd": null,
+        "funding_note": null,
+        "valuation_usd": null,
+        "employees_approx": null,
+        "security_posture": "regulatory_compliance",
+        "security_notes": "REMI wireless EEG: disposable wearable sensors each transmitting a single EEG channel for up to 30 days; REMI Mobile app relays data to 'the secure REMI Cloud'. Published cybersecurity page states SOC 2 Type 2 + HIPAA + GDPR compliance attestation (Prescient Assurance), Health-ISAC membership, a third-party software security assessment tool used in development and post-market surveillance, and penetration testing by Cobalt on hardware, software, server and cloud. Five 510(k) clearances in openFDA (first K203827, 2021-03-29; latest K243185, 2025-03-21). Verified 2026-10-06 via epitel.com and openFDA.",
+        "tara_attack_surface": [],
+        "devices": [
+          {
+            "name": "REMI Remote EEG Monitoring System",
+            "type": "non_invasive",
+            "channels": 4,
+            "electrode_type": null,
+            "fda_status": "510k_cleared",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": null,
+            "target_use": "medical",
+            "cves_known": [],
+            "note": "Four sensors, one channel each (company: 'only 4 sensors'; 'a single channel' per sensor). 510(k) K203827 (2021-03-29), K230933 (2023-06-30), K243185 (2025-03-21), product code OMC. Electrode type not stated on the fetched pages."
+          }
+        ],
+        "company_category": null,
+        "date_added": "2026-10-06",
+        "last_verified": "2026-10-06"
+      },
+      "source_url": "https://www.epitel.com/",
+      "additional_source_urls": [
+        "https://www.epitel.com/cybersecurity",
+        "https://api.fda.gov/device/510k.json?search=applicant:%22Epitel%22&sort=decision_date:desc&limit=12"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "FDA-cleared wearable EEG with published security attestations; absent from the baseline.",
+      "unverified_fields": [
+        "electrode_type (null)",
+        "founded",
+        "company_category (null)"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": "Sensors 'wirelessly transmit' (protocol not stated).",
+        "companion_app": "REMI Mobile on 'qualified commercial off-the-shelf mobile computing platforms'.",
+        "cloud_sync": "REMI Cloud (storage and review).",
+        "sdk_or_raw_data_access": null,
+        "published_security_documentation": "Cybersecurity page: SOC 2 Type 2 + HIPAA + GDPR attestation, Health-ISAC member, Cobalt penetration testing.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[+] name='Ceribell, Inc.'",
+      "proposed_values": {
+        "name": "Ceribell, Inc.",
+        "type": "non_invasive",
+        "modality": "point-of-care EEG headband",
+        "founded": null,
+        "headquarters": null,
+        "status": "public",
+        "acquired_by": null,
+        "funding_total_usd": null,
+        "funding_note": null,
+        "valuation_usd": null,
+        "employees_approx": null,
+        "security_posture": "regulatory_compliance",
+        "security_notes": "Point-of-care EEG (headband/headcap, monitor, Clarity seizure-detection software, EEG Portal). Company site states 'FedRAMP High cybersecurity authorization' for its portal and publishes a security notice with a vulnerability-reporting contact and a request not to disclose without written consent. openFDA lists 16 510(k) clearances, five of them in 2026 (latest: Ceribell EEG Analysis Software K261712, 2026-09-16). Verified 2026-10-06 via ceribell.com and openFDA.",
+        "tara_attack_surface": [],
+        "devices": [
+          {
+            "name": "Ceribell Point-of-Care EEG System",
+            "type": "non_invasive",
+            "channels": null,
+            "electrode_type": null,
+            "fda_status": "510k_cleared",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": null,
+            "target_use": "medical",
+            "cves_known": [],
+            "note": "Recent hardware clearances: Instant EEG Headset K254033 (2026-02-09), Brain Monitor Headband K260363 (2026-04-03), Ceribell Monitor K261101 (2026-06-30). Channel count and electrode type not on the fetched pages."
+          }
+        ],
+        "company_category": "public",
+        "date_added": "2026-10-06",
+        "last_verified": "2026-10-06"
+      },
+      "source_url": "https://ceribell.com/",
+      "additional_source_urls": [
+        "https://ceribell.com/security-notice/",
+        "https://api.fda.gov/device/510k.json?search=applicant:%22Ceribell%22&sort=decision_date:desc&limit=12"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "FDA-cleared rapid EEG vendor with published security posture; absent from the baseline.",
+      "unverified_fields": [
+        "channels",
+        "electrode_type",
+        "wireless protocol",
+        "founded",
+        "headquarters",
+        "status 'public' (inferred from the investor/SEC filings section on the company site; ticker not fetched)"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": null,
+        "companion_app": null,
+        "cloud_sync": "EEG Portal (web).",
+        "sdk_or_raw_data_access": null,
+        "published_security_documentation": "FedRAMP High authorization statement; security notice with coordinated-disclosure contact.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[+] name='Beacon Biosignals'",
+      "proposed_values": {
+        "name": "Beacon Biosignals",
+        "type": "non_invasive",
+        "modality": "EEG sleep headband",
+        "founded": null,
+        "headquarters": null,
+        "status": "active",
+        "acquired_by": null,
+        "funding_total_usd": null,
+        "funding_note": null,
+        "valuation_usd": null,
+        "employees_approx": null,
+        "security_posture": "basic_encryption",
+        "security_notes": "Waveband EEG headband (formerly Dreem 3S: 'New name, same FDA 510(k) clearance'). Beacon Pal mobile app pairs over Bluetooth and 'collects EEG data through a secure, encrypted, wireless connection'. openFDA: Dreem 3S K223539 (2023-08-18) and K242094 (2024-11-22). No detailed security documentation located. Verified 2026-10-06 via beacon.bio and openFDA.",
+        "tara_attack_surface": [],
+        "devices": [
+          {
+            "name": "Waveband (formerly Dreem 3S)",
+            "type": "non_invasive",
+            "channels": null,
+            "electrode_type": null,
+            "fda_status": "510k_cleared",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": null,
+            "target_use": "medical",
+            "cves_known": [],
+            "note": "510(k) K223539 (2023-08-18) and K242094 (2024-11-22), product code OLZ. Channel count and electrode type not on the fetched page."
+          }
+        ],
+        "company_category": null,
+        "date_added": "2026-10-06",
+        "last_verified": "2026-10-06"
+      },
+      "source_url": "https://beacon.bio/dreem-headband/",
+      "additional_source_urls": [
+        "https://api.fda.gov/device/510k.json?search=applicant:%22Beacon%20Biosignals%22&sort=decision_date:desc&limit=12"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "FDA-cleared home EEG headband, renamed since clearance; absent from the baseline.",
+      "unverified_fields": [
+        "channels",
+        "electrode_type",
+        "founded",
+        "headquarters",
+        "company_category"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": "Bluetooth (to Beacon Pal app).",
+        "companion_app": "Beacon Pal mobile app.",
+        "cloud_sync": null,
+        "sdk_or_raw_data_access": null,
+        "published_security_documentation": "One-line 'secure, encrypted, wireless connection' statement.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[+] name='Cumulus Neuroscience'",
+      "proposed_values": {
+        "name": "Cumulus Neuroscience",
+        "type": "non_invasive",
+        "modality": "EEG headset (remote neurophysiology)",
+        "founded": null,
+        "headquarters": null,
+        "status": "active",
+        "acquired_by": null,
+        "funding_total_usd": null,
+        "funding_note": null,
+        "valuation_usd": null,
+        "employees_approx": null,
+        "security_posture": "none_published",
+        "security_notes": "openFDA lists the Cumulus Functional Neurophysiology Platform, 510(k) K221963, decision 2023-04-27, product code GWQ, applicant Cumulus Neuroscience Limited. Product details were not retrievable from the company home page on 2026-10-06. Verified 2026-10-06 via openFDA only.",
+        "tara_attack_surface": [],
+        "devices": [
+          {
+            "name": "Cumulus Functional Neurophysiology Platform",
+            "type": "non_invasive",
+            "channels": null,
+            "electrode_type": null,
+            "fda_status": "510k_cleared",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": null,
+            "target_use": "medical",
+            "cves_known": []
+          }
+        ],
+        "company_category": null,
+        "date_added": "2026-10-06",
+        "last_verified": "2026-10-06"
+      },
+      "source_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Cumulus%20Neuroscience%22&sort=decision_date:desc&limit=12",
+      "additional_source_urls": [],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "FDA-cleared EEG platform absent from the baseline; regulator record only.",
+      "unverified_fields": [
+        "everything except the 510(k) record",
+        "company_category",
+        "security_posture (not assessed)"
+      ]
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[+] name='Wearable Sensing'",
+      "proposed_values": {
+        "name": "Wearable Sensing",
+        "type": "non_invasive",
+        "modality": "dry-electrode research EEG",
+        "founded": null,
+        "headquarters": null,
+        "status": "active",
+        "acquired_by": null,
+        "funding_total_usd": null,
+        "funding_note": null,
+        "valuation_usd": null,
+        "employees_approx": null,
+        "security_posture": "none_published",
+        "security_notes": "DSI-24 dry-electrode research EEG headset. Bluetooth wireless (10 m), onboard storage option, free DSI-Streamer acquisition software. No security documentation located; no 510(k) found under applicant 'Wearable Sensing' in openFDA. Verified 2026-10-06 via wearablesensing.com.",
+        "tara_attack_surface": [],
+        "devices": [
+          {
+            "name": "DSI-24",
+            "type": "non_invasive",
+            "channels": 19,
+            "electrode_type": "dry",
+            "fda_status": "unknown",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": null,
+            "target_use": "research",
+            "cves_known": [],
+            "note": "19 scalp electrodes plus 2 earclip sensors and 3 auxiliary inputs (24 channels in the spec table); 300 Hz sampling (600 Hz upgrade); Bluetooth, 10 m range; run-time > 24 h."
+          }
+        ],
+        "company_category": null,
+        "date_added": "2026-10-06",
+        "last_verified": "2026-10-06"
+      },
+      "source_url": "https://wearablesensing.com/dsi-24/",
+      "additional_source_urls": [],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "Widely used dry research EEG headset; absent from the baseline.",
+      "unverified_fields": [
+        "price",
+        "regulatory status",
+        "founded",
+        "headquarters",
+        "company_category"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": "Bluetooth, 10 m range.",
+        "companion_app": "DSI-Streamer (desktop).",
+        "cloud_sync": null,
+        "sdk_or_raw_data_access": null,
+        "published_security_documentation": "None located.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[+] name='NextSense'",
+      "proposed_values": {
+        "name": "NextSense",
+        "type": "non_invasive",
+        "modality": "in-ear EEG earbuds",
+        "founded": null,
+        "headquarters": null,
+        "status": "active",
+        "acquired_by": null,
+        "funding_total_usd": null,
+        "funding_note": null,
+        "valuation_usd": null,
+        "employees_approx": null,
+        "security_posture": "none_published",
+        "security_notes": "Smartbuds: wireless earbuds with six EEG sensors that detect sleep stages and deliver timed audio intended to strengthen slow-wave sleep. Companion app requires iOS 17+ on iPhone 12 or newer; subscription USD 14.99 per month after three free months. Source is trade press (SoundGuys, 2026-02-09); the company site returned HTTP 429 on 2026-10-06. No security documentation located. Verified 2026-10-06 via SoundGuys.",
+        "tara_attack_surface": [],
+        "devices": [
+          {
+            "name": "Smartbuds",
+            "type": "non_invasive",
+            "channels": 6,
+            "electrode_type": "in-ear",
+            "fda_status": "unknown",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": 399.99,
+            "target_use": "consumer",
+            "cves_known": [],
+            "note": "USD 399.99 list (USD 249 early-bird). Shipping reported from 2026-02-09. Regulatory status and wireless protocol not stated in the source."
+          }
+        ],
+        "company_category": null,
+        "date_added": "2026-10-06",
+        "last_verified": "2026-10-06"
+      },
+      "source_url": "https://www.soundguys.com/nextsense-smartbuds-bring-eeg-brain-sensors-to-wireless-earbuds-for-the-first-time-152745/",
+      "additional_source_urls": [],
+      "accessed": "2026-10-06",
+      "verification": "UNVERIFIED",
+      "rationale": "Newly shipping consumer in-ear EEG product (2026); absent from the baseline.",
+      "verification_note": "Secondary source only. Tried nextsense.io home and product pages three times (HTTP 429 each).",
+      "unverified_fields": [
+        "all facts rest on one trade-press article; manufacturer page not retrievable",
+        "regulatory status",
+        "founded",
+        "headquarters",
+        "company_category"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": null,
+        "companion_app": "iOS app (iOS 17+, iPhone 12 or newer).",
+        "cloud_sync": null,
+        "sdk_or_raw_data_access": null,
+        "published_security_documentation": "None located.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[+] name='Earable Neuroscience'",
+      "proposed_values": {
+        "name": "Earable Neuroscience",
+        "type": "non_invasive",
+        "modality": "EEG sleep headband",
+        "founded": null,
+        "headquarters": null,
+        "status": "active",
+        "acquired_by": null,
+        "funding_total_usd": null,
+        "funding_note": null,
+        "valuation_usd": null,
+        "employees_approx": null,
+        "security_posture": "none_published",
+        "security_notes": "FRENZ Brainband. Manufacturer page describes it as a 'wellness device and not a medical device'; companion app is iOS only. No security documentation located. Verified 2026-10-06 via frenzband.com.",
+        "tara_attack_surface": [],
+        "devices": [
+          {
+            "name": "FRENZ Brainband",
+            "type": "non_invasive",
+            "channels": null,
+            "electrode_type": null,
+            "fda_status": "not_applicable",
+            "units_deployed": null,
+            "first_human": null,
+            "price_usd": 680,
+            "target_use": "consumer",
+            "cves_known": [],
+            "note": "USD 680 on the manufacturer page. Channel count, electrode type and wireless protocol not stated on the page as retrieved."
+          }
+        ],
+        "company_category": null,
+        "date_added": "2026-10-06",
+        "last_verified": "2026-10-06"
+      },
+      "source_url": "https://frenzband.com/",
+      "additional_source_urls": [],
+      "accessed": "2026-10-06",
+      "verification": "UNVERIFIED",
+      "rationale": "Consumer EEG headband on sale; absent from the baseline.",
+      "verification_note": "Page content was read through an automated page summary (direct fetch returned HTTP 429); quotes not checked against raw HTML.",
+      "unverified_fields": [
+        "channels",
+        "electrode_type",
+        "wireless protocol",
+        "founded",
+        "headquarters",
+        "company_category"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": null,
+        "companion_app": "iOS app only ('not supported on Android devices').",
+        "cloud_sync": null,
+        "sdk_or_raw_data_access": null,
+        "published_security_documentation": "None located.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name='NAOX Technologies'].devices[+]",
+      "proposed_values": {
+        "name": "NAOX WAVE",
+        "type": "non_invasive",
+        "channels": null,
+        "electrode_type": "in-ear",
+        "fda_status": "not_applicable",
+        "units_deployed": null,
+        "first_human": null,
+        "price_usd": null,
+        "target_use": "consumer",
+        "cves_known": [],
+        "note": "OEM platform, not a finished product: EEG acquisition module, electrodes, algorithms, 'SDK & API' and a demonstration app offered to earbud manufacturers. Shown at CES 2026. Outputs named by the company: focus, relaxation, vigilance, 'brain age'. No availability date or price on the page."
+      },
+      "source_url": "https://www.naox.tech/en/naox-wave/",
+      "additional_source_urls": [
+        "https://www.naox.tech/"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "Newly announced consumer in-ear EEG platform from an existing baseline company.",
+      "unverified_fields": [
+        "channels",
+        "electrode dry/wet",
+        "availability"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": null,
+        "companion_app": "Demonstration app.",
+        "cloud_sync": null,
+        "sdk_or_raw_data_access": "'SDK & API' for integration into partner apps.",
+        "published_security_documentation": "None located.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name='Neuroelectrics'].devices[+]",
+      "proposed_values": {
+        "name": "Enobio (8/20/32) / Enobio Dx",
+        "type": "non_invasive",
+        "channels": 32,
+        "electrode_type": null,
+        "fda_status": "510k_cleared",
+        "units_deployed": null,
+        "first_human": null,
+        "price_usd": null,
+        "target_use": "medical",
+        "cves_known": [],
+        "note": "Wireless EEG in 8, 20 and 32 channel variants; channels field holds the largest. openFDA: Enobio Wireless EEG K162681 (2017-06-02) and Enobio Dx 8/20/32 K261604 (2026-06-13), product code GWQ. Company page offers an SDK/API. electrode_type not confirmed on the fetched page."
+      },
+      "source_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Neuroelectrics%22&sort=decision_date:desc&limit=12",
+      "additional_source_urls": [
+        "https://www.neuroelectrics.com/solutions/enobio"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "Baseline lists only Starstim for Neuroelectrics; Enobio Dx received a new 510(k) in June 2026.",
+      "unverified_fields": [
+        "electrode_type",
+        "price"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": "'Wireless' (protocol not stated on fetched page).",
+        "companion_app": null,
+        "cloud_sync": null,
+        "sdk_or_raw_data_access": "SDK / API stated.",
+        "published_security_documentation": "None located.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name='InteraXon (Muse)'].devices[+]",
+      "proposed_values": {
+        "name": "Muse S Athena",
+        "type": "non_invasive",
+        "channels": null,
+        "electrode_type": null,
+        "fda_status": "unknown",
+        "units_deployed": null,
+        "first_human": null,
+        "price_usd": 474.99,
+        "target_use": "consumer",
+        "cves_known": [],
+        "note": "Announced 2025-03-18: EEG plus fNIRS, with SpO2. Press release states 'remote access to both raw and scored EEG data'. EEG channel count, electrode type and regulatory status are not stated in the release."
+      },
+      "source_url": "https://www.silicon.co.uk/press-release/introducing-muse-s-athena-the-next-evolution-in-cognitive-fitness",
+      "additional_source_urls": [],
+      "accessed": "2026-10-06",
+      "verification": "UNVERIFIED",
+      "rationale": "Current Muse flagship (EEG + fNIRS) missing from the baseline, which stops at Muse S.",
+      "verification_note": "Read from a press-release mirror through an automated page summary; choosemuse.com returned HTTP 429 (three attempts), BusinessWire and Wareable HTTP 403.",
+      "unverified_fields": [
+        "channels",
+        "electrode_type",
+        "fda_status",
+        "wireless protocol"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": null,
+        "companion_app": "Muse app.",
+        "cloud_sync": null,
+        "sdk_or_raw_data_access": "'remote access to both raw and scored EEG data' (press release).",
+        "published_security_documentation": "None located in the release.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name='g.tec medical engineering'].devices[+]",
+      "proposed_values": {
+        "name": "Unicorn Hybrid Black",
+        "type": "non_invasive",
+        "channels": 8,
+        "electrode_type": "hybrid (dry/wet)",
+        "fda_status": "unknown",
+        "units_deployed": null,
+        "first_human": null,
+        "price_usd": null,
+        "target_use": "research",
+        "cves_known": [],
+        "note": "8-channel wearable EEG headset with 'hybrid wet and dry electrodes', wireless. Ships with Python, C, .NET, Android, Unity and Simulink APIs. Already present in src/site/bci-hardware-inventory.json (id gtec-unicorn) but missing from this file."
+      },
+      "source_url": "https://www.gtec.at/product/unicorn-hybrid-black/",
+      "additional_source_urls": [],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "Closes an inconsistency: the device is in the hardware inventory but not in the landscape device list.",
+      "unverified_fields": [
+        "price",
+        "regulatory status"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": "'wireless operation' (hardware inventory records Bluetooth, 2.4 GHz).",
+        "companion_app": null,
+        "cloud_sync": null,
+        "sdk_or_raw_data_access": "Python, C, .NET, Android, Unity, Simulink APIs.",
+        "published_security_documentation": "None located.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name='NAOX Technologies'].devices[name='Naox Link (NX01)']",
+      "proposed_values": {
+        "fda_status": "510k_cleared",
+        "note": "510(k) K251550, decision date 2025-11-25, product code OMC, applicant Naox Technologies SAS (openFDA). Company: single-channel in-ear EEG, adults and children 6+, 'not CE-marked and is not available for sale in the European Union', 'provides no diagnostic conclusions'."
+      },
+      "source_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Naox%22&sort=decision_date:desc&limit=12",
+      "additional_source_urls": [
+        "https://www.naox.tech/en/naox-link/",
+        "https://www.naox.tech/"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "Baseline says cleared 2026-01 with no public K-number; openFDA shows K251550 decided 2025-11-25.",
+      "unverified_fields": [
+        "first_human (baseline '2026-01' looks like the announcement month, not a first-use date)"
+      ]
+    },
+    {
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name='NAOX Technologies'].security_notes",
+      "proposed_values": {
+        "security_notes": "FDA 510(k) K251550 (decision 2025-11-25) for Naox Link (NX01), a single-channel in-ear EEG indicated for ages 6+. Not CE-marked; not sold in the EU. NAOX WAVE, an OEM in-ear EEG platform with SDK and API for earbud makers, shown at CES 2026. No security documentation located. The company's 'first FDA-cleared in-ear EEG' wording is its own claim. Verified 2026-10-06 via openFDA and naox.tech."
+      },
+      "source_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Naox%22&sort=decision_date:desc&limit=12",
+      "additional_source_urls": [
+        "https://www.naox.tech/",
+        "https://www.naox.tech/en/naox-wave/"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "Replaces 'K-number not publicly disclosed' and removes an adopted 'first' claim."
+    },
+    {
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name='Neurable'].devices[name='MW75 Neuro (with Master & Dynamic)']",
+      "proposed_values": {
+        "channels": 12,
+        "note": "Neurable's Research Kit page: '12-channel, 500hz sampling rate EEG system' with access to raw EEG and accelerometer/gyroscope data. Neurable's ethics page states CPRA compliance, data anonymisation and 'we do not sell data'; it is a privacy statement, not security documentation."
+      },
+      "source_url": "https://www.neurable.com/products/research-kit",
+      "additional_source_urls": [
+        "https://www.neurable.com/ethics"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "Baseline lists 6 channels; the manufacturer states 12.",
+      "unverified_fields": [
+        "whether the consumer MW75 Neuro and the Research Kit share the same 12-channel hardware (the page presents them as the same headphones)",
+        "reported HyperX partnership (search-result snippet only)"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": null,
+        "companion_app": null,
+        "cloud_sync": null,
+        "sdk_or_raw_data_access": "Research Kit gives raw EEG and IMU data access.",
+        "published_security_documentation": "Privacy/ethics statement only (CPRA, anonymisation, no data sales).",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name='IDUN Technologies'].devices[name='IDUN Guardian 4']",
+      "proposed_values": {
+        "note": "Still listed as PRESALE on 2026-10-06: Guardian 4 Starter CHF 999, CHF 1,299 after presale (price_usd left null; price is in CHF). Page lists 'Webapp / SDK / API Access', 'Raw EEG and IMU access', real-time and batch CSV, '12 hours on device storage' and 'Cloud connection needed'."
+      },
+      "source_url": "https://iduntechnologies.com/",
+      "additional_source_urls": [],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "Adds price and data-access facts; shows the product had not left presale by the access date.",
+      "unverified_fields": [
+        "channels",
+        "CE/FCC certification status (baseline says planned Q2 2026; not confirmed)"
+      ],
+      "attack_surface_facts": {
+        "wireless_protocol": null,
+        "companion_app": null,
+        "cloud_sync": "'Cloud connection needed'.",
+        "sdk_or_raw_data_access": "Webapp, SDK and API; raw EEG and IMU access.",
+        "published_security_documentation": "None located on the product page.",
+        "cves": "None located. No CVE database search by product name was run for this pass; treat as not checked."
+      }
+    },
+    {
+      "change": "add",
+      "target_file": "src/site/bci-hardware-inventory.json",
+      "target_key": "devices[+] id='bitbrain-hero'",
+      "proposed_values": {
+        "id": "bitbrain-hero",
+        "manufacturer": "Bitbrain Technologies",
+        "device_name": "Hero 9ch EEG (discontinued)",
+        "device_type": "non_invasive_eeg",
+        "fda_status": "CE (Directive 2014/53); research device; discontinued",
+        "target_indication": "Cognitive and sensorimotor research; motor neurorehabilitation research",
+        "core_specs": {
+          "channel_count": {
+            "value": 9,
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)",
+            "unit": "EEG channels",
+            "notes": "FC3, FCz, FC4, C3, Cz, C4, CP3, CPz, CP4; linked-ear reference (A2); REF and GND at A1."
+          },
+          "battery_life": {
+            "value": "> 3 hours",
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)"
+          },
+          "weight": {
+            "value": "250 g (with the battery)",
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)"
+          },
+          "directionality": "read-only",
+          "implant_location": "scalp (non-invasive headset)"
+        },
+        "physics_constraints": {
+          "sampling_rate": {
+            "value": 256,
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)",
+            "unit": "Hz"
+          },
+          "adc_resolution": {
+            "value": 24,
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)",
+            "unit": "bits"
+          },
+          "wireless_protocol": {
+            "value": "Bluetooth 2.1 + EDR (10 m line of sight)",
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)"
+          },
+          "electrode_material": {
+            "value": "Dry sensors, active shielding, optimized DRL",
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)"
+          }
+        }
+      },
+      "source_url": "https://www.bitbrain.com/neurotechnology-products/dry-eeg/hero",
+      "additional_source_urls": [
+        "https://cdn.bitbrain.com/docs/2023/Minimal-Family-Brochure.pdf"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "Wireless protocol and sampling rate are only rendered from this file; needed for the device to appear in BCI Explorer and the comms table."
+    },
+    {
+      "change": "add",
+      "target_file": "src/site/bci-hardware-inventory.json",
+      "target_key": "devices[+] id='bitbrain-diadem'",
+      "proposed_values": {
+        "id": "bitbrain-diadem",
+        "manufacturer": "Bitbrain Technologies",
+        "device_name": "Diadem 12ch EEG",
+        "device_type": "non_invasive_eeg",
+        "fda_status": "CE (Directive 2014/53); research device",
+        "target_indication": "Cognitive and emotional state research",
+        "core_specs": {
+          "channel_count": {
+            "value": 12,
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)",
+            "unit": "EEG channels",
+            "notes": "Fp1, Fp2, AF7, AF8, F3, F4, P3, P4, PO7, PO8, O1, O2; REF (A1), GND (Fpz)."
+          },
+          "battery_life": {
+            "value": "> 8 hours",
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)"
+          },
+          "weight": {
+            "value": "120 g (amplifier)",
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)"
+          },
+          "directionality": "read-only",
+          "implant_location": "scalp (non-invasive headset)"
+        },
+        "physics_constraints": {
+          "sampling_rate": {
+            "value": 256,
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)",
+            "unit": "Hz"
+          },
+          "adc_resolution": {
+            "value": 24,
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)",
+            "unit": "bits"
+          },
+          "wireless_protocol": {
+            "value": "Bluetooth 2.1 + EDR (10 m line of sight)",
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)"
+          },
+          "electrode_material": {
+            "value": "Dry sensors, active shielding, optimized DRL",
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)"
+          }
+        }
+      },
+      "source_url": "https://www.bitbrain.com/neurotechnology-products/dry-eeg/diadem",
+      "additional_source_urls": [],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "As above."
+    },
+    {
+      "change": "add",
+      "target_file": "src/site/bci-hardware-inventory.json",
+      "target_key": "devices[+] id='bitbrain-air'",
+      "proposed_values": {
+        "id": "bitbrain-air",
+        "manufacturer": "Bitbrain Technologies",
+        "device_name": "Air 8ch EEG",
+        "device_type": "non_invasive_eeg",
+        "fda_status": "CE (Directive 2014/53); research device",
+        "target_indication": "Basic cognitive and emotional state research",
+        "core_specs": {
+          "channel_count": {
+            "value": 8,
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)",
+            "unit": "EEG channels",
+            "notes": "Fp1, Fp2, AF7, AF8, PO7, PO8, O1, O2; REF (A1), GND (Fpz)."
+          },
+          "battery_life": {
+            "value": "6 hours",
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)"
+          },
+          "weight": {
+            "value": "82 g (amplifier)",
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)"
+          },
+          "directionality": "read-only",
+          "implant_location": "scalp (non-invasive headset)"
+        },
+        "physics_constraints": {
+          "sampling_rate": {
+            "value": 256,
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)",
+            "unit": "Hz"
+          },
+          "adc_resolution": {
+            "value": 24,
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)",
+            "unit": "bits"
+          },
+          "wireless_protocol": {
+            "value": "Bluetooth 2.1 + EDR (10 m line of sight)",
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)"
+          },
+          "electrode_material": {
+            "value": "Dry sensors, active shielding, optimized DRL",
+            "confidence": "HIGH",
+            "source": "Bitbrain product page (accessed 2026-10-06)"
+          }
+        }
+      },
+      "source_url": "https://www.bitbrain.com/neurotechnology-products/dry-eeg/air",
+      "additional_source_urls": [],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "As above."
+    },
+    {
+      "change": "add",
+      "target_file": "src/site/bci-hardware-inventory.json",
+      "target_key": "devices[+] id='nissan-b2v'",
+      "proposed_values": {
+        "id": "nissan-b2v",
+        "manufacturer": "Nissan Motor Co., Ltd. (headset developed with Bitbrain)",
+        "device_name": "Brain-to-Vehicle (B2V) EEG headset (research prototype)",
+        "device_type": "non_invasive_eeg",
+        "fda_status": "Not a medical device; automotive research prototype",
+        "target_indication": "Driver movement-intention and discomfort decoding (research)",
+        "core_specs": {
+          "channel_count": {
+            "value": null,
+            "confidence": null,
+            "source": null,
+            "unit": "EEG channels",
+            "notes": "Channel count not published by Nissan or Bitbrain."
+          },
+          "battery_life": {
+            "value": "up to 8 hours",
+            "confidence": "MEDIUM",
+            "source": "Bitbrain blog, 2025-06-09 (accessed 2026-10-06)"
+          },
+          "weight": {
+            "value": null,
+            "confidence": null,
+            "source": null
+          },
+          "directionality": "read-only",
+          "implant_location": "scalp (non-invasive headset)"
+        },
+        "physics_constraints": {
+          "sampling_rate": {
+            "value": null,
+            "confidence": null,
+            "source": null,
+            "unit": "Hz"
+          },
+          "adc_resolution": {
+            "value": null,
+            "confidence": null,
+            "source": null,
+            "unit": "bits"
+          },
+          "wireless_protocol": {
+            "value": "Bluetooth (version not stated)",
+            "confidence": "MEDIUM",
+            "source": "Bitbrain blog, 2025-06-09 (accessed 2026-10-06)"
+          },
+          "electrode_material": {
+            "value": "Dry sensors",
+            "confidence": "MEDIUM",
+            "source": "Bitbrain blog, 2025-06-09 (accessed 2026-10-06)"
+          }
+        }
+      },
+      "source_url": "https://www.bitbrain.com/blog/nissan-brain-to-vehicle-technology",
+      "additional_source_urls": [
+        "https://www.nissan-global.com/EN/INNOVATION/TECHNOLOGY/ARCHIVE/B2V/"
+      ],
+      "accessed": "2026-10-06",
+      "verification": "VERIFIED",
+      "rationale": "Lets the automotive system appear in BCI Explorer with nulls where nothing is published.",
+      "verification_note": "Confidence MEDIUM: vendor blog, not a datasheet.",
+      "unverified_fields": [
+        "channel_count",
+        "sampling_rate",
+        "adc_resolution",
+        "weight"
+      ]
+    }
+  ],
+  "proposed_fields": {
+    "note": "Not added to any entry. Fields the existing schemas lack and that these devices need. Per-item `attack_surface_facts` in this file is a sidecar in the same shape, ready to migrate.",
+    "device_level": [
+      {
+        "field": "sampling_rate_hz",
+        "type": "number|null",
+        "why": "Stated for most EEG devices; today only the 24-device hardware inventory can hold it."
+      },
+      {
+        "field": "wireless_protocol",
+        "type": "string|null",
+        "why": "Core attack-surface fact; not in bci-landscape.json at all."
+      },
+      {
+        "field": "companion_app",
+        "type": "string|null",
+        "why": "Mobile/desktop app is part of the data path."
+      },
+      {
+        "field": "cloud_sync",
+        "type": "string|null",
+        "why": "Required-cloud versus optional-cloud changes the exposure."
+      },
+      {
+        "field": "sdk_raw_access",
+        "type": "string|null",
+        "why": "Raw-data egress route (SDK, LSL, API)."
+      },
+      {
+        "field": "security_docs_url",
+        "type": "string|null",
+        "why": "Lets security_posture be evidenced per device."
+      },
+      {
+        "field": "regulatory",
+        "type": "{ jurisdiction, status, identifier, decision_date }[]",
+        "why": "fda_status cannot express CE, NMPA or 'not CE-marked'; K-numbers currently live in free text."
+      },
+      {
+        "field": "lifecycle_status",
+        "type": "'prototype'|'presale'|'available'|'discontinued'|'concept'",
+        "why": "Hero is discontinued, B2V is a prototype, Guardian 4 is presale; none can be shown."
+      },
+      {
+        "field": "modality",
+        "type": "string",
+        "why": "Device type has only three invasiveness values; EEG, fNIRS, EMG and in-ear EEG are indistinguishable at device level."
+      },
+      {
+        "field": "deployment_context",
+        "type": "string|null",
+        "why": "Automotive: simulator versus road; workplace: pilot fleet."
+      },
+      {
+        "field": "price",
+        "type": "{ amount, currency }",
+        "why": "price_usd cannot hold CHF or EUR list prices."
+      },
+      {
+        "field": "source_urls",
+        "type": "string[]",
+        "why": "Baseline cites sources only in prose ('Verified ... via ...')."
+      }
+    ],
+    "company_level": [
+      {
+        "field": "programme_partner / oem_supplier",
+        "type": "string[]",
+        "why": "Bitbrain hardware inside a Nissan programme cannot be linked."
+      },
+      {
+        "field": "company_category value 'automotive' (or 'non_bci_corporate')",
+        "type": "enum addition",
+        "why": "Automakers and suppliers do not fit startup/growth/established BCI categories."
+      }
+    ],
+    "vocabulary": [
+      {
+        "field": "target_use values 'automotive', 'workplace'",
+        "why": "Existing values: medical, research, consumer, enterprise, rehabilitation, therapeutic, developer."
+      },
+      {
+        "field": "hardware inventory device_type value 'non_invasive_eeg_research' / 'non_invasive_eeg_automotive'",
+        "why": "'non_invasive_eeg' is labelled 'EEG (Consumer)' by bci-data.ts."
+      }
+    ]
+  },
+  "unverified_claims": [
+    {
+      "claim": "'mEEG' as used on the ingested pages",
+      "status": "UNVERIFIED",
+      "detail": "The string 'mEEG' does not occur in the Bitbrain B2V article or in ten linked Bitbrain pages (checked in raw HTML), nor in the text of the 2023 Minimal EEG family brochure. Those pages use 'minimalist EEG' / 'Minimal EEG' (Bitbrain's dry-EEG product family: Diadem, Hero, Air) and 'mobile EEG' as a generic term. Outside these pages 'mEEG' is commonly an abbreviation of 'mobile EEG'; that expansion was seen only in a search-result summary and was not confirmed on a fetched page."
+    },
+    {
+      "claim": "The B2V headset is a Bitbrain Hero or Diadem",
+      "status": "UNVERIFIED",
+      "detail": "Bitbrain's article links both product pages from generic anchor text. Hero's layout covers central motor sites and its brochure names MRCPs; the article's 'up to eight hours' matches Diadem's autonomy, not Hero's (> 3 h). No source names the model."
+    },
+    {
+      "claim": "B2V programme is ongoing in 2026",
+      "status": "UNVERIFIED",
+      "detail": "Latest B2V-specific Nissan release located: Nissan Spain, 2020-07-08. Nissan's technology library page is live but undated. The 2023-10-11 Formula E release concerns Brain to Performance (brain stimulation training), a related but separate programme. Bitbrain's 2025 article says the system 'has undergone significant advancements' without citing any."
+    },
+    {
+      "claim": "Third B2V partner",
+      "status": "CONFLICT",
+      "detail": "Bitbrain's English article names the 'Canadian National Research Council'. The Nissan Spain release it links names the 'Instituto Nacional de Investigaciones Científicas de Canadá' (INRS). These are different institutions; the Nissan wording is the primary source."
+    },
+    {
+      "claim": "Link target mismatch in the Bitbrain article",
+      "status": "NOTE",
+      "detail": "Anchor text 'ProPILOT Assist 2.0' links to Nissan's 2023 Formula E Brain to Performance release, which does not describe the airline-pilot ProPILOT test the paragraph reports."
+    },
+    {
+      "claim": "Neurable and HyperX EEG gaming headset partnership (CES 2026)",
+      "status": "UNVERIFIED",
+      "detail": "Search-result snippet only; no page fetched."
+    },
+    {
+      "claim": "Mercedes-Benz VISION AVTR BCI, SmartCap LifeBand, Elemind headband, X-trodes System M (K232210), Neurosteer EEG Recorder (K221563)",
+      "status": "UNVERIFIED",
+      "detail": "Candidates not proposed as entries: Mercedes page returned HTTP 403, SmartCap site did not respond, Elemind returned HTTP 429. X-trodes and Neurosteer 510(k) records were seen in openFDA but no product page was read."
+    },
+    {
+      "claim": "CVE coverage",
+      "status": "NOT CHECKED",
+      "detail": "No NVD/CVE search by product name was run. cves_known is [] for every proposed device because none was located, not because absence was established."
+    }
+  ]
+}
