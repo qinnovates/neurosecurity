@@ -42,7 +42,8 @@ interface Props {
 }
 
 const NODE_W = 140, NODE_H = 72, GAP_X = 48, PAD_X = 24, PAD_Y = 24;
-const HEADER_H = 48, DETECT_H = 20, DETECT_GAP = 12, CLINICAL_H = 28, CLINICAL_GAP = 8;
+// Gaps leave room for the 9px lane labels drawn just above each lane.
+const HEADER_H = 48, DETECT_H = 20, DETECT_GAP = 18, CLINICAL_H = 28, CLINICAL_GAP = 18;
 
 function detectLevel(w: string): 'easy' | 'moderate' | 'hard' {
   const l = w.toLowerCase();
@@ -61,15 +62,15 @@ function MobileList({ chain }: Props) {
         const role = ROLE_CONFIG[s.role];
         return (
           <a key={s.position} href={`/atlas/tara/${s.technique_id}/`} role="listitem"
-            className="flex items-start gap-3 rounded-lg border p-3 hover:bg-slate-800/60"
+            className="flex items-start gap-3 rounded-lg border p-3 hover:bg-[var(--color-bg-surface)]"
             style={{ borderColor: st.stroke + '44' }}>
             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold"
               style={{ background: st.fill, color: st.stroke, border: `1.5px solid ${st.stroke}` }}>{s.position}</span>
             <div className="min-w-0">
-              <span className="text-xs font-mono text-slate-300">{s.tara_alias}</span>
-              <span className="text-[10px] text-slate-500 ml-2">{role.icon} {role.label}</span>
-              <p className="mt-0.5 text-xs text-slate-400 line-clamp-2">{s.action}</p>
-              <p className="mt-0.5 text-[10px] text-slate-500">Detection: {s.detection_window}</p>
+              <span className="text-xs font-mono text-[var(--color-text-primary)]">{s.tara_alias}</span>
+              <span className="text-[10px] text-[var(--color-text-faint)] ml-2">{role.icon} {role.label}</span>
+              <p className="mt-0.5 text-xs text-[var(--color-text-muted)] line-clamp-2">{s.action}</p>
+              <p className="mt-0.5 text-[10px] text-[var(--color-text-faint)]">Detection: {s.detection_window}</p>
             </div>
           </a>
         );
@@ -205,7 +206,7 @@ function SvgDiagram({ chain }: Props) {
               {s.tara_alias}
             </text>
             {/* Role label */}
-            <text x={x + NODE_W / 2} y={nodeY + 42} textAnchor="middle" fill="#64748b" fontSize={9}>
+            <text x={x + NODE_W / 2} y={nodeY + 42} textAnchor="middle" fill="var(--color-text-muted)" fontSize={9}>
               {role.icon} {role.label}
             </text>
             {/* Domain label */}
@@ -217,7 +218,7 @@ function SvgDiagram({ chain }: Props) {
       })}
 
       {/* Detection timeline */}
-      <text x={PAD_X} y={detectY - 2} fill="#64748b" fontSize={9} fontWeight={600}>DETECTABILITY</text>
+      <text x={PAD_X} y={detectY - 2} fill="var(--color-text-muted)" fontSize={9} fontWeight={600}>DETECTABILITY</text>
       {steps.map((s, i) => {
         const x = nodeX(i);
         const level = detectLevel(s.detection_window);
@@ -225,7 +226,7 @@ function SvgDiagram({ chain }: Props) {
         return (
           <g key={`det-${i}`}>
             <rect x={x} y={detectY} width={NODE_W} height={DETECT_H} rx={4} fill={c} opacity={0.25} stroke={c} strokeWidth={1} />
-            <text x={x + NODE_W / 2} y={detectY + 14} textAnchor="middle" fill={c} fontSize={8} fontWeight={600}>{level.toUpperCase()}</text>
+            <text x={x + NODE_W / 2} y={detectY + 14} textAnchor="middle" fill="var(--color-text-primary)" fontSize={8} fontWeight={600}>{level.toUpperCase()}</text>
           </g>
         );
       })}
@@ -233,7 +234,7 @@ function SvgDiagram({ chain }: Props) {
       {/* Clinical parallel lane */}
       {hasClinical && (
         <g>
-          <text x={PAD_X} y={clinicalY - 2} fill="#22c55e" fontSize={9} fontWeight={600}>
+          <text x={PAD_X} y={clinicalY - 2} fill="var(--color-accent-secondary)" fontSize={9} fontWeight={600}>
             CLINICAL PARALLEL
           </text>
           <rect
@@ -244,7 +245,7 @@ function SvgDiagram({ chain }: Props) {
           />
           <text
             x={totalW / 2} y={clinicalY + 18}
-            textAnchor="middle" fill="#22c55e" fontSize={9} opacity={0.7}
+            textAnchor="middle" fill="var(--color-accent-secondary)" fontSize={9}
           >
             {chain.clinical_parallel!.name}
           </text>
@@ -268,7 +269,7 @@ function SvgDiagram({ chain }: Props) {
             <text x={tx + 8} y={ty + 30} fill="#94a3b8" fontSize={8}>
               {tooltip.step.action.length > 50 ? tooltip.step.action.slice(0, 50) + '...' : tooltip.step.action}
             </text>
-            <text x={tx + 8} y={ty + 44} fill="#64748b" fontSize={7}>
+            <text x={tx + 8} y={ty + 44} fill="var(--color-text-muted)" fontSize={7}>
               Detection: {tooltip.step.detection_window.length > 40 ? tooltip.step.detection_window.slice(0, 40) + '...' : tooltip.step.detection_window}
             </text>
           </g>
@@ -300,16 +301,16 @@ export default function AttackChainViz({ chain }: Props) {
   return (
     <div ref={containerRef} className="w-full">
       <div className="mb-2 flex flex-wrap items-baseline gap-2">
-        <h3 className="text-sm font-semibold text-slate-200">{chain.chain_name}</h3>
-        <span className="text-[10px] font-mono text-slate-500">{chain.chain_id}</span>
-        <span className="text-[10px] text-amber-400">{chain.drift_profile}</span>
+        <h3 className="text-sm font-semibold">{chain.chain_name}</h3>
+        <span className="text-[10px] font-mono text-[var(--color-text-faint)]">{chain.chain_id}</span>
+        <span className="text-[10px] text-[var(--color-text-muted)]">{chain.drift_profile}</span>
       </div>
-      <p className="mb-3 text-xs text-slate-400">{chain.objective}</p>
+      <p className="mb-3 text-xs text-[var(--color-text-muted)]">{chain.objective}</p>
       {isMobile ? <MobileList chain={chain} /> : <SvgDiagram chain={chain} />}
       {!isMobile && chain.defenses.length > 0 && (
-        <div className="mt-3 rounded-lg border border-emerald-800/40 bg-emerald-950/20 p-3">
-          <h4 className="text-xs font-semibold text-emerald-400 mb-1">Defenses</h4>
-          <ul className="list-disc list-inside text-xs text-slate-400 space-y-0.5">
+        <div className="mt-3 rounded-lg border border-[var(--color-accent-secondary)]/40 bg-[var(--color-bg-surface)] p-3">
+          <h4 className="text-xs font-semibold text-[var(--color-accent-secondary)] mb-1">Defenses</h4>
+          <ul className="list-disc list-inside text-xs text-[var(--color-text-muted)] space-y-0.5">
             {chain.defenses.map((d, i) => <li key={i}>{d}</li>)}
           </ul>
         </div>

@@ -1,6 +1,7 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import AtlasDashboard from '@/components/atlas/AtlasDashboard';
+import { loadTaraChains } from '@/components/atlas/load-tara-chains';
 import BciKql from '@/components/bci/BciKql';
 import PublicationCard from '@/components/PublicationCard.astro';
 import { getAtlasData, getThreatsForBandDetail } from '@/lib/atlas-data';
@@ -10,12 +11,10 @@ import { HOURGLASS_BANDS, TARA_TECHNIQUES } from '@/lib/qif-constants';
 import { getCollection } from 'astro:content';
 import { getPostDate } from '@/lib/utils';
 import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
-import fs from 'node:fs';
-import path from 'node:path';
 
 // Load chain data for stats
 // A missing or malformed file fails the build rather than rendering "0 chains".
-const chainData: { chains: any[] } = JSON.parse(fs.readFileSync(path.resolve('datalake/tara-chains.json'), 'utf-8'));
+const chainCount = loadTaraChains().length;
 
 // Build-time data computation
 const kqlTables = getKqlTables();
@@ -104,7 +103,7 @@ const subPages = [
     description: 'Multi-step attack sequences traversing silicon to biological domains.',
     href: '/atlas/chains/',
     icon: 'chain',
-    stat: `${chainData.chains.length} ${chainData.chains.length === 1 ? 'chain' : 'chains'}`,
+    stat: `${chainCount} ${chainCount === 1 ? 'chain' : 'chains'}`,
     color: '#f97316',
   },
 ];
