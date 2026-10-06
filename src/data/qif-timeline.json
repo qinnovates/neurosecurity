@@ -15,16 +15,16 @@
     "hourglass_bands": 11,
     "tara_tactics": 17,
     "neurorights_mapped": 6,
-    "dsm5_diagnoses_mapped": 68,
+    "dsm5_diagnoses_mapped": 48,
     "physics_constants_verified": 14,
     "preprint_version": "v1.5",
     "nsp_version": "v0.5",
-    "tara_version": "v1.8",
+    "tara_version": "v1.6",
     "atlas_version": "v1.2.0",
     "derivation_log_entries": 112,
-    "field_journal_entries": 20,
+    "field_journal_entries": 18,
     "neurowall_version": "v0.8",
-    "blog_posts": 59,
+    "blog_posts": 76,
     "cross_ai_validations": 14,
     "research_sources": 342,
     "techniques_niss_scored": 139,
@@ -34,7 +34,8 @@
     "registrar_version": "v4.0",
     "landscape_dataset_version": "v2.2",
     "sdk_version": "v0.3.0",
-    "whitepaper_version": "v8.0"
+    "whitepaper_version": "v8.0",
+    "techniques_with_dsm5": 76
   },
   "milestones": [
     {
