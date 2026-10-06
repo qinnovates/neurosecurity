@@ -1,1566 +1,1566 @@
 {
- "generated": "2026-10-06",
- "method": "Independent web verification (Crossref, doi.org handle API, arXiv abstract and HTML full text, OpenAlex, Semantic Scholar, openFDA, NVD, ClinicalTrials.gov API v2, SEC EDGAR, company pages) plus the local Bagley PDF and local baselines. Verdicts: CONFIRMED = checked in this run and supported; FLAGGED = partly supported or worded more strongly than the source; BLOCKED = contradicted or citation does not exist.",
- "records": [
-  {
-   "artifact": "research-delta",
-   "item_key": "R-005",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref title/authors/year/pages match; abstract (Semantic Scholar and arXiv 2606.10502) gives 52.0-67.2%, >85.0%, >96.0% exactly as stated.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/SP63933.2026.00117",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-009",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref metadata match; OpenAlex abstract supports limited-knowledge MIA and the diversity/under-represented-group finding; no rates in abstract, as stated.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/JBHI.2025.3593443",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-010",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match; OpenAlex abstract: two datasets, four models, higher success with fewer queries and lower distortion.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/LSP.2025.3563446",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-013",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match; OpenAlex abstract: VR memory task EEG leaks sex, age, identity; end-to-end models best.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/SMC58881.2025.11343511",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-014",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match (Gomasta, Chhaglani, Shenoy; pp. 9-14); abstract figures 0.788/0.858/0.789/0.692 and 0.781/0.563/0.467/0.206 match.",
-   "evidence_url": "https://api.crossref.org/works/10.1145/3842657.3842784",
-   "note": "Crossref proceedings date postdates access date, as the artifact discloses."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-017",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match; abstract: FDI on accelerometer link of DBS, observer + event-triggered defence, simulation only.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/ACCESS.2025.3529477",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-018",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match; abstract: 180 training / 484 unseen subjects (469 external), surface distance smaller than population-average face, p<0.05.",
-   "evidence_url": "https://api.crossref.org/works/10.1016/j.compbiomed.2025.111112",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-019",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match; abstract: 182 participants, open-source up to 59%, commercial 92% and 98%.",
-   "evidence_url": "https://api.crossref.org/works/10.1016/j.neuroimage.2025.121476",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-021",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match; abstract (Semantic Scholar): nine defences, five datasets, three paradigms, three networks, four scenarios; combination best.",
-   "evidence_url": "https://api.crossref.org/works/10.1016/j.neunet.2025.107516",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-023",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match (vol 10, pp. 967-981); abstract datasets BCI-III-IVa/IVb, IV-1a; lower ASR, accuracy kept.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/TETCI.2025.3619564",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-024",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match; abstract: up to 46.79% accuracy and 62.87 bits/min ITR gain.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/LSP.2024.3501274",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-025",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match; abstract gives no rates or datasets, as stated.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/LSP.2025.3580330",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-026",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match; abstract: BLE-like/Wi-Fi-like profiles, 1-hop/2-hop, hybrid ML-KEM+X25519.",
-   "evidence_url": "https://api.crossref.org/works/10.3389/fnsys.2026.1891041",
-   "note": "Abstract also reports +0.45 ms p95 latency in the constrained BLE case; the artifact says results were beyond its retrieved text."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-027",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match; abstract: RMSE > 1.2 at noise variance 0.2 vs ~0.5 non-adversarial.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/OJCOMS.2026.3684404",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-028",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match; retrieved abstract is problem statement only, as stated.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/ISSCC49661.2025.10904583",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-033",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match; abstract describes three-component federated/transfer framework on BEETL.",
-   "evidence_url": "https://api.crossref.org/works/10.1088/1741-2552/ad9957",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-034",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match; abstract: offline FL gains vs online co-adaptation tensions, privacy retained.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/TNSRE.2026.3674102",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-035",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match (Meng, Wang, Luo, Wu; J. Brain-Computer Interface 1:34).",
-   "evidence_url": "https://api.crossref.org/works/10.58195/bci.2025.1.005",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-037",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match (Baghestan, Rabbani 2025).",
-   "evidence_url": "https://api.crossref.org/works/10.1109/IoT69654.2025.11297585",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-038",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match (Seymour, Ienca, Koenig-Robert 2026; no volume yet).",
-   "evidence_url": "https://api.crossref.org/works/10.1016/j.tins.2026.09.003",
-   "note": "Finding text not compared to abstract in detail."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-042",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match (Hendriks et al. 2026, Brain).",
-   "evidence_url": "https://api.crossref.org/works/10.1093/brain/awag205",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-043",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref match (Hertz 2025, IDPL 15:123-137).",
-   "evidence_url": "https://api.crossref.org/works/10.1093/idpl/ipaf014",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-006",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv title/authors match (Cong, Liu, Wu); abstract: white-box public encoder, no victim queries, transfer to linear-probe and fine-tuned models, no rates.",
-   "evidence_url": "https://arxiv.org/abs/2608.16931",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-007",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match (Tai); abstract: CI lower bound >= 0.081 across six directions, LiRA AUC 0.50-0.70, DP-SGD eps 4/8 ineffective, no waveform/identity recovery claimed.",
-   "evidence_url": "https://arxiv.org/abs/2606.09189",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-008",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match; abstract: EEGMMI 5,400 events, harmless stubs, C3 routed 1.000 under agreement+provenance, 0.000 with confirmation+provenance.",
-   "evidence_url": "https://arxiv.org/abs/2606.09315",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-012",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match (Xie); abstract: 433 MHz, Myo 7 gestures/350 samples, 97.8% -> 58.3% at 1 m 0 dBm, 85% at 3 m.",
-   "evidence_url": "https://arxiv.org/abs/2507.21387",
-   "note": "Abstract says \"Experiments on the Myo Dataset\"; over-the-air status remains unconfirmed, as the artifact says."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-015",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match (Bindra); abstract: eps 0.25, -25.7%, certificate valid for 9 subjects, identity 48.1% vs 6.7% chance.",
-   "evidence_url": "https://arxiv.org/abs/2607.06630",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-016",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match (Rehman, Shafique; cs.CV; ICASSP 2027 submission comment); abstract: 22-24% PGD accuracy at eps 0.005; transfer 0.963/0.928 vs 0.994/0.997.",
-   "evidence_url": "https://arxiv.org/abs/2609.30037",
-   "note": "Panel concern about the high sequence number is resolved: the ID resolves to this paper."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-022",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match (Jia, Chen, Wu); abstract: five datasets, MI and ERP, beats 14 methods.",
-   "evidence_url": "https://arxiv.org/abs/2601.05789",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-029",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match; abstract: TUH-derived simulated cross-silo, updates hidden under stated assumptions, overhead; HotDiSec comment present.",
-   "evidence_url": "https://arxiv.org/abs/2607.28191",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-030",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match (Sadiq, Toorani); abstract describes Gaussian/Laplace perturbation, three scenarios.",
-   "evidence_url": "https://arxiv.org/abs/2609.11777",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-031",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match (7 authors); abstract: sleep staging, re-identifiability substantially reduced, utility preserved.",
-   "evidence_url": "https://arxiv.org/abs/2509.20454",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-032",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match; abstract: DEAP, <=5% accuracy drop, 100% watermark detection, robust to fine-tuning/transfer/pruning.",
-   "evidence_url": "https://arxiv.org/abs/2502.05931",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-039",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match (Hanley et al.).",
-   "evidence_url": "https://arxiv.org/abs/2602.02511",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-040",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match (Bhattacharjee, Pilkington, Farahany).",
-   "evidence_url": "https://arxiv.org/abs/2507.14339",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-041",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match (Sirbu et al.; v2 cited).",
-   "evidence_url": "https://arxiv.org/abs/2506.12540",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-044",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match (Sun et al.).",
-   "evidence_url": "https://arxiv.org/abs/2605.11386",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-045",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match (Carter); v1 submitted 2025-12-15.",
-   "evidence_url": "https://arxiv.org/abs/2601.06040",
-   "note": "Panel flagged the 2025 year against the 2601 ID; arXiv shows v1 dated 15 Dec 2025, so \"(2025)\" is correct."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-001",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv metadata (title, 4 authors, 2026-07-11, cs.CR, no DOI/journal ref); PDF: 25 pages, 175 references, title page July 14 2026; fNIRS statement p9; reconstruction-attack statement p14; no new experiments.",
-   "evidence_url": "https://arxiv.org/abs/2607.10451",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-002",
-   "verdict": "FLAGGED",
-   "what_was_checked": "arXiv v4 (2025-01-26) title/authors match; HTML full text, Methods 2.1: cogits as qubit analogues, \"Cogito ergo sum\", explicitly not a quantum-brain claim; two hypotheses stated.",
-   "evidence_url": "https://arxiv.org/html/2403.07945v4",
-   "note": "Finding says \"The paper states both hypotheses are unvalidated extensions\". The paper calls them \"rather tame in that they can be derived from established results\". That they are untested is the reviewer's observation, not the paper's statement; reword."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-003",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match; HTML full text: +0.032/+0.051 lift over 0.103/0.111 (RSVP), MI near zero, resting-state zero-effort FAR 0.812-0.896 and lift -0.034 to -0.054; nearest-centroid, GNB, linear SVM; San Francisco affiliation.",
-   "evidence_url": "https://arxiv.org/html/2609.01856v1",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-004",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match (5 authors); HTML full text VII-A to VII-C: plain-text BLE frames captured on all three devices; 10-trigger EEGNet avg ASR 97.80, DeepSleepNet 20.0; forgery up to 61.0% (subject 9; subject 3 48.0%), cross-subject/device 44.7-52.3% vs 33.3% chance; \"we therefore make no claim of arbitrary code execution\" (V4).",
-   "evidence_url": "https://arxiv.org/html/2609.08971v1",
-   "note": "61.0% is the best of two subjects (\"up to\" in the paper). MitM was shown for the NeuroSky and Muse apps, not all three devices (see md delta 2 record)."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "research-delta.md \"What changed\" item 2 / section (b) NERVE row",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Same full text, section VII-C V2.",
-   "evidence_url": "https://arxiv.org/html/2609.08971v1",
-   "note": "\"a man-in-the-middle position on three consumer headsets\": the paper reports MitM via GATTacker where \"NeuroSky and Muse apps accepted the adversarial peripheral\"; passive sniffing covered all three. Say \"unencrypted links on three headsets; MitM on two\"."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-011",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref: Li F et al. 2025, Neurocomputing 616:128902, title matches.",
-   "evidence_url": "https://api.crossref.org/works/10.1016/j.neucom.2024.128902",
-   "note": "Identifier only. No abstract in Crossref/OpenAlex/Semantic Scholar; finding left UNVERIFIED by the artifact, correctly."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-047",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref: Tiwari, Arrabito, Davoust, Falk 2026, ICHMS pp. 392-397.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/ICHMS69701.2026.11602273",
-   "note": "Identifier only; no abstract available to me either."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-020",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv match; HTML full text: USRP B200, OpenBCI Cyton, NeuroSky MindWave Mobile 2, Sichiray Taurus 2.0, eps 38.12 for 100 participants, user study 10 participants, unmodified devices.",
-   "evidence_url": "https://arxiv.org/html/2607.25968v1",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-036",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Crossref: Sayah Ben Aissa NEH, Kerrache CA, Calafate CT 2026, Comput. Stand. Interfaces 98:104155; no abstract in Crossref/OpenAlex/S2.",
-   "evidence_url": "https://api.crossref.org/works/10.1016/j.csi.2026.104155",
-   "note": "Citation is real. Marked VERIFIED although \"content not read\", which breaks the file's own convention (R-011 and R-047 are UNVERIFIED for the same condition). Crossref family name is \"Sayah Ben Aissa\"; the proposal renders it \"Ben Aissa NEHS\"."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-048 (row C52)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref: catalogue DOI 10.1016/j.eswa.2024.125599 = Zou et al. \"Dynamic multi teacher knowledge distillation for semantic parsing in KBQA\" (ESWA 263); replacement 10.1016/j.eswa.2024.126362 = Zhong et al. 2025, ESWA 268:126362, attention-guided UAP.",
-   "evidence_url": "https://api.crossref.org/works/10.1016/j.eswa.2024.125599",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-049 (row C57)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref 404 and doi.org handle API responseCode 100 (handle not found) for 10.1109/TNSRE.2024.3392037; replacement 10.1109/TNSRE.2024.3391936 = Chen X, Wang Z, Wu D 2024, \"Alignment-Based Adversarial Training (ABAT)...\", TNSRE 32:1703-1714.",
-   "evidence_url": "https://doi.org/api/handles/10.1109/TNSRE.2024.3392037",
-   "note": "Catalogue expands ABAT as \"Adversarial Bayesian Augmented Training\" and lists Wu D first; both wrong."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-050 (row C88)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref 404 and doi.org handle not found for 10.1088/1741-2552/ac0f4e; replacement ac0f4c = Liu Zihan, Meng, Zhang, Fang, Wu 2021, JNE 18(4):0460a4.",
-   "evidence_url": "https://doi.org/api/handles/10.1088/1741-2552/ac0f4e",
-   "note": "Catalogue authors \"Liu X, Jiang X, Li J\" do not match."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-051 (row C75)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref: 10.1145/3176258.3176310 = \"Securing Wireless Neurostimulators\", Marin et al., CODASPY 2018 pp. 287-298; catalogue carries the title of the authors' cardiac-defibrillator paper.",
-   "evidence_url": "https://api.crossref.org/works/10.1145/3176258.3176310",
-   "note": "Crossref spells \"Volski\"; proposal follows Crossref, catalogue has \"Volskiy\"."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-052 (row C80)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref: DOI = \"Brain-Hack: Remotely Injecting False Brain-Waves with RF to Take Control of a Brain-Computer Interface\", CPSIoTSec 2023 pp. 53-66; catalogue title differs.",
-   "evidence_url": "https://api.crossref.org/works/10.1145/3605758.3623497",
-   "note": "\"Best Paper\" not checked. \"First demonstrated\" is the authors' own claim in the abstract; OpenAlex also returns Hossen, Tu, Hei 2023 \"A First Look at the Security of EEG-based Systems and Intelligent Algorithms under Physical Signal Injections\" (10.1145/3591197.3591304), so the priority claim should stay attributed, not adopted."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-053 (rows C77, C113)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref: 10.1109/TNSRE.2023.3273214 = Meng et al. 2023 \"EEG-Based Brain-Computer Interfaces are Vulnerable to Backdoor Attacks\"; both rows carry it; C77 title is not the paper title.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/TNSRE.2023.3273214",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-054 (row C49)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv 2503.08284 first author Lopez Madejska VM, journal ref Neurocomputing 655:131344, DOI 10.1016/j.neucom.2025.131344 (Crossref match); abstract: FLO and JAM on ~230,000-neuron mouse V1 model, JAM generally more damaging.",
-   "evidence_url": "https://arxiv.org/abs/2503.08284",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-055 (row C51)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref: Dhaya R, Kanthavel R, ICST Trans. Security and Safety 9(1), published 2025-09-30.",
-   "evidence_url": "https://api.crossref.org/works/10.4108/eetss.v9i1.9502",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-056 (row C54)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref: Tom, Ekpar, Adiqwe 2025, Journal of Information Systems and Informatics 7(3):2382-2406; catalogue journal name wrong.",
-   "evidence_url": "https://api.crossref.org/works/10.51519/journalisi.v7i3.1195",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-057 (row C56)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Crossref: 10.2139/ssrn.5291128 = Zhang H, Ma R, Gu Z et al. 2025, \"Bayesian Neural Networks Against Adversarial Attacks for EEG-Based BCI\" (SSRN). A Crossref author+topic search surfaced no other candidate.",
-   "evidence_url": "https://api.crossref.org/works/10.2139/ssrn.5291128",
-   "note": "DOI real, but that it is the paper C56 meant is an assumption (the artifact says so); it is filed under \"Fix (verified)\" with 0 unverified in the md."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-058 (row C58)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "arXiv 2412.11390 version titles: v1 \"Accurate, Robust and Privacy-Preserving Brain-Computer Interface Decoding\"; v2 \"A3E: Aligned and Augmented Adversarial Ensemble for Accurate, Robust and Privacy-Preserving EEG Decoding\"; v3 \"PAT: ...\". Authors Chen, Jia, Tu, Wu.",
-   "evidence_url": "https://arxiv.org/abs/2412.11390v2",
-   "note": "Claimed defect partly refuted: the catalogue's \"A3E\" title is an abbreviated v2 title, not a wrong title. First-author defect (Wu D listed first) stands."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-059 (row C59)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref: Samuel J et al., Sci Rep 16:4353, published online 2026-01-30.",
-   "evidence_url": "https://api.crossref.org/works/10.1038/s41598-025-34024-0",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-060 (row C62)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "USENIX page metadata: \"On the Feasibility of Side-Channel Attacks with Brain-Computer Interfaces\", Martinovic, Davies, Frank, Perito, Ros, Song, 2012 (USENIX Security 12).",
-   "evidence_url": "https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/martinovic",
-   "note": "\"No DOI exists for the USENIX version\" was not checked."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-061 (row C63)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref: Xia Kun et al., IEEE TCSS 10(5):2312-2324, Oct 2023 (11 authors); arXiv 2412.11394 journal ref agrees.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/TCSS.2022.3184818",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-062 (row B1)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref: Kunz EM et al., Cell 188(17):4658-4673.e17, 23 authors, Willett last; abstract: four participants, real-time imagined sentences, some free-form inner speech, prevention strategies.",
-   "evidence_url": "https://api.crossref.org/works/10.1016/j.cell.2025.06.015",
-   "note": "The catalogue's 125,000-word figure is not in the abstract (artifact notes this)."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "research-delta.md \"What changed\" item 1 (\"Sixteen existing catalogue rows\")",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Counted the rows in section (e) against the catalogue.",
-   "evidence_url": "osi-of-mind/QIF-RESEARCH-SOURCES.md",
-   "note": "C113 is the correct row being kept, so 15 rows are defective; C58's title defect is an earlier-version title (see R-058)."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-063 (T0009 -> DEMONSTRATED)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Armengol-Urpi 2023 abstract (OpenAlex): RF injection demonstrated on Neuroelectrics, OpenBCI and Muse hardware against three BCIs. Registrar T0009 notes: \"CAUTION 2026-07-31 ... conflates two physically distinct mechanisms\"; its engineering fields describe TMS-grade stimulation.",
-   "evidence_url": "https://api.crossref.org/works/10.1145/3605758.3623497",
-   "note": "Evidence supports DEMONSTRATED only for the analog-front-end injection mechanism. The proposal is silent on the registrar's own split recommendation; status should follow the split. E-MagDiP shows benign noise coupling, not false-signal injection."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-064 / \"Zhang et al. 2024\" (T0009) not found",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Searched Crossref (author Zhang + RF/EMI injection BCI, 2023-06 to 2025-06), OpenAlex (2024; 2023-2025), Semantic Scholar bulk (2023-2025, total 0), arXiv search (no results). No 2024 Zhang paper on RF false-brainwave injection found.",
-   "evidence_url": "https://api.crossref.org/works?query.bibliographic=radio+frequency+injection+false+brainwaves+brain-computer+interface+EEG&query.author=Zhang",
-   "note": "Nearest hits are unrelated: Zhang & Rasmussen 2023 (EM injection on differential signalling) and Hossen, Tu, Hei 2023 (physical signal injection on EEG systems, not Zhang). The same string also labels Professor X in T0016 and ATGAN in T0067, so it is a recurring placeholder. Absence in four indexes supports keeping it UNVERIFIED; it does not prove non-existence. Two Semantic Scholar relevance queries returned HTTP 429."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-075 / \"Lopez-Moreno et al. 2024\" (T0025-T0028) not found",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Searched Crossref (author Lopez-Moreno and \"López Moreno\" + BCI/neural cyberattack 2022-2025; author \"López Bernal\" 2024), OpenAlex, Semantic Scholar bulk (total 0), arXiv (no results). No Lopez-Moreno BCI paper found; the only Lopez-Moreno hit is a graphics paper.",
-   "evidence_url": "https://api.crossref.org/works?query.author=Lopez-Moreno&query.bibliographic=neural+cyberattacks+taxonomy+brain-computer+interface+neuronal+jamming+flooding",
-   "note": "Closest Murcia-group 2024 paper: Lopez Madejska, Lopez Bernal, Martinez Perez, Huertas Celdran, \"Impact of neural cyberattacks on a realistic neuronal topology from the primary visual cortex of mice\", Wireless Networks 2024, 10.1007/s11276-023-03649-2. Supports UNVERIFIED; not proof of non-existence."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-075 (proposed replacement sources for T0025-T0028)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "IEEE Access 2020 abstract (OpenAlex): defines Neuronal Flooding and Neuronal Scanning only. Neurocomputing 2025: Flooding and Jamming. Catalogue C78 (2021) is the jamming paper.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/ACCESS.2020.3017394",
-   "note": "Replacement omits C78 (jamming) and offers nothing for T0028 selective forwarding."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-067 (T0026 status, \"same in-silico studies\")",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Abstracts of 10.1109/ACCESS.2020.3017394 (FLO + SCA) and arXiv 2503.08284 / 10.1016/j.neucom.2025.131344 (FLO + JAM).",
-   "evidence_url": "https://arxiv.org/abs/2503.08284",
-   "note": "Panel marked this BLOCK. Web check: the premise holds for the 2025 Neurocomputing study (flooding and jamming in the same simulations) but is wrong for C107 (2020), which covers flooding and scanning, not jamming. Proposed status value \"DEMONSTRATED (simulation only) or keep...\" is not an enum value. Downgraded from BLOCK to FLAG."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-065 (T0020 -> DEMONSTRATED)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Cobilean 2025 abstract (OpenAlex) and Tai 2026 abstract.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/JBHI.2025.3593443",
-   "note": "Abstract supports dataset-level MIA but gives no rates or datasets; the 2026 foundation-model audit found AUC 0.50-0.70. JSON says bare \"DEMONSTRATED\" while the md says \"DEMONSTRATED (dataset level)\"."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-066 (T0032 -> DEMONSTRATED)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Qian 2025 abstract; Tapal & Bagley full text.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/LSP.2025.3563446",
-   "note": "Digital-only results, mixed by paradigm; md offers \"or keep\" but JSON gives bare DEMONSTRATED."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-068 (T0023 -> EMERGING)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Yu 2025 abstract (attack assumed in simulation); Dhaya & Kanthavel abstract (OpenAlex).",
-   "evidence_url": "https://api.crossref.org/works/10.1109/ACCESS.2025.3529477",
-   "note": "Value \"EMERGING (simulation only)\" is not an enum value; evidence is simulation."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-069 (T0004 add NERVE)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "NERVE full text VII-C V2 MitM via GATTacker; USENIX 2012 title shows Martinovic is a side-channel study.",
-   "evidence_url": "https://arxiv.org/html/2609.08971v1",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-070 (T0003 add NERVE)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "NERVE full text VII-C V1: plain-text BLE frames captured on OpenBCI, Muse 2, MindWave Mobile 2.",
-   "evidence_url": "https://arxiv.org/html/2609.08971v1",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-071 (T0016 source)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv 2409.20158: first author Liu Xuan-Hao; title \"Professor X: Manipulating EEG BCI with Invisible and Robust Backdoor Attack\".",
-   "evidence_url": "https://arxiv.org/abs/2409.20158",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-072 (T0017 source)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Crossref: Jiang, Meng, Li, Wu 2023, Sci China Inf Sci 66:182402; Bagley PDF p12 cites Jiang et al. transfer-learning poisoning [114].",
-   "evidence_url": "https://api.crossref.org/works/10.1007/s11432-022-3548-2",
-   "note": "Identifier real; that it is what \"Meng et al. 2024\" meant is an inference (artifact says so) but the item is VERIFIED."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-073 (T0018 source)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref: Meng L et al. 2024, Information Fusion 107:102316.",
-   "evidence_url": "https://api.crossref.org/works/10.1016/j.inffus.2024.102316",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-074 (T0019 sources)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref for ac0f4c and eswa.2024.126362; arXiv for 2608.16931 and 2609.30037.",
-   "evidence_url": "https://api.crossref.org/works/10.1088/1741-2552/ac0f4c",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-076 (T0036 add Kunz 2025)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref + abstract: four participants, intracortical, trained decoders, prevention strategies; consistent with \"no status change\".",
-   "evidence_url": "https://api.crossref.org/works/10.1016/j.cell.2025.06.015",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-077 (T0041 sources)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Crossref for both DOIs; arXiv for 2606.09189; abstracts support attribute leakage.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/SMC58881.2025.11343511",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-078 (card: inferential HNDL)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Bagley PDF p3, section 2.1.2 (inferential variant, cites [33]); Crossref: 10.1038/s41598-022-10710-1 = Menuet et al. 2022, Sci Rep 12:7050; abstract: decoding cognitive concepts from NeuroVault maps.",
-   "evidence_url": "https://api.crossref.org/works/10.1038/s41598-022-10710-1",
-   "note": "Panel concern that the Menuet DOI was unresolved is closed: it resolves with matching metadata."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-079 (card: brain-prompt injection)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv 2606.09315 abstract; THEORETICAL status and \"harmless tool stubs\" wording consistent.",
-   "evidence_url": "https://arxiv.org/abs/2606.09315",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-080 (card: VR motion-sensor inference, DEMONSTRATED)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Crossref + abstract only.",
-   "evidence_url": "https://api.crossref.org/works/10.1109/SP63933.2026.00117",
-   "note": "DEMONSTRATED rests on the abstract; no class count, chance level or participant number for 52.0-67.2%; md section (b) does not disclose the proposed status."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-081 (card: zero-query encoder transfer)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv 2608.16931 abstract.",
-   "evidence_url": "https://arxiv.org/abs/2608.16931",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-082 (card: cross-encoder attribute leakage)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv 2606.09189 abstract.",
-   "evidence_url": "https://arxiv.org/abs/2606.09189",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-083 (card: temporal desynchronisation)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "NERVE full text: EEGNet accuracy 0.99 at 3T/10, 0.60 at 5T/10, 0.10 (10-class chance) at 8T/10.",
-   "evidence_url": "https://arxiv.org/html/2609.08971v1",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-084 (card: RF on sEMG, UNVERIFIED)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv 2507.21387 abstract; card correctly kept THEORETICAL/UNVERIFIED.",
-   "evidence_url": "https://arxiv.org/abs/2507.21387",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-085 (card: model stealing)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Bagley PDF p13, 2.4.3; cited demonstration [132] Tramer et al. USENIX Security 2016 (general prediction APIs).",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-086 (card: federated poisoning)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Bagley PDF p12 (federated learning, [119]); registrar QIF-T0024 notes.",
-   "evidence_url": "datalake/qtara-registrar.json (QIF-T0024)",
-   "note": "T0024 notes already say \"Federated learning and crowd-sourced calibration data are vulnerable entry points\"; make this a T0024 note or justify a separate integrity technique."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "research-delta.md \"What changed\" item 3 (\"threat vectors TARA does not list ... federated poisoning\")",
-   "verdict": "BLOCKED",
-   "what_was_checked": "Registrar QIF-T0024 notes text.",
-   "evidence_url": "datalake/qtara-registrar.json (QIF-T0024)",
-   "note": "Contradicted for federated poisoning by T0024. Holds for model stealing and registry substitution (no registrar hit found by the panel). Reword to \"no dedicated entry for model stealing or registry substitution\"."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-087 (card: registry/retraining substitution)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Bagley PDF p13 section 2.4.4 and Figure 2 (p11, ML Pipeline column).",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-088 (card: air-gap channels)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Bagley PDF pp3-4 section 2.1.3.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-089 (institution: Cerberus)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Homepage text: \"A nonprofit research institute advancing open research, standards, and defenses for the neurotechnology era\"; \"Securing the brain, guarding the mind.\"; arXiv 2609.01856 prints CNRI, San Francisco, CA 94102.",
-   "evidence_url": "https://www.cerberus.institute/",
-   "note": "Nonprofit status is self-described; sitemap and 404 claims not re-checked."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-090 (researcher: Bagley)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "arXiv listing name \"Bagley, Bryce-Allen\"; PDF prints \"Bryce Allen Bagley\"; affiliations as printed.",
-   "evidence_url": "https://arxiv.org/abs/2607.10451",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-091 (explorer: Cerberus category academia)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Same sources; Tapal affiliation on 2609.01856 is CNRI + University of Luxembourg.",
-   "evidence_url": "https://arxiv.org/abs/2609.01856",
-   "note": "category \"academia\" conflicts with the artifact's own proposed_fields note that Cerberus is neither academia nor industry."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "R-092 (legislation: Montana SB 163)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Enrolled bill text (69th Legislature, 2025, SB 163, introduced by D. Zolnikov): revises the Genetic Information Privacy Act to include neurotechnology data.",
-   "evidence_url": "https://archive.legmt.gov/content/Sessions/69th/Contractor_index/CH0345.pdf",
-   "note": "Effective date not checked; \"active\" is inferred, as the artifact says."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "research-delta.md (c) \"No written definition of the status values was found\"",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Read datalake/README.md section \"Status Levels\".",
-   "evidence_url": "datalake/README.md",
-   "note": "Definitions exist: CONFIRMED \"Demonstrated in real BCI systems or documented incidents\", DEMONSTRATED \"Proven in research/lab settings\", etc. The claim was scoped to the registrar file and its rule file, but open question 1 is partly answered by the README."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "research-delta.md (a) threat-vector table mappings T0029, T0030, T0122, T0037, T0040",
-   "verdict": "FLAGGED",
-   "what_was_checked": "grep of research-delta.json: 0 occurrences of these five IDs; each appears once in the md.",
-   "evidence_url": "research-delta.json",
-   "note": "md-only mappings; regenerate the table from the JSON or add them to the JSON."
-  },
-  {
-   "artifact": "research-delta",
-   "item_key": "research-delta.md (b) Gao et al. row (\"re-created faces\")",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Gao 2025 abstract.",
-   "evidence_url": "https://api.crossref.org/works/10.1016/j.compbiomed.2025.111112",
-   "note": "md drops the JSON's limit: closer than a population-average face (p<0.05), not identification of named people."
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "title",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "PDF title page and PDF metadata; arXiv citation_title.",
-   "evidence_url": "https://arxiv.org/abs/2607.10451",
-   "note": "\"Threat Vectors and the State of the Art in Defense Methods for Security in Neurotechnology\"."
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "author name as printed",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "PDF p1 prints \"Bryce Allen Bagley1,2\"; PDF metadata and arXiv give \"Bryce-Allen Bagley\"; no \"Dr\" printed.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": "Co-authors Nathaniel Rose, Quintus Kilbourn, Matthew Canham; affiliations Cerberus, Cognitive Security Institute, Dura Labs, Flashbots as stated."
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "arXiv ID and dates",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "PDF side stamp \"arXiv:2607.10451v1 [cs.CR] 11 Jul 2026\"; title page \"July 14, 2026\"; arXiv v1 2026-07-11.",
-   "evidence_url": "https://arxiv.org/abs/2607.10451",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "length and references",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "pdfinfo 25 pages; reference list runs to [175].",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "cogits in this paper",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Single occurrence, p14, section 3.1.3: \"specific interpretable intents, thoughts, etc.-termed cogits by Bagley and Petritsch ... [23]\". Reference [23] = Ienca, Haselager, Emanuel 2018 (Nat Biotech); [16] = Bagley & Petritsch (title with \"... and AI\"). \"Bagley and colleagues are working on protocols for cognition.[24]\" is on p2.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "cogits in arXiv:2403.07945",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "v4 HTML Methods 2.1: \"we will use the term cogits - a la Descartes' famous Cogito ergo sum - for these qubit analogues\"; maximally general vector of cognitive state variables; \"in no way suggests or supports claims of a physically quantum basis for cognition\"; hypothesis 2: statistics of cogit holography correspond to distinguishability of individuals.",
-   "evidence_url": "https://arxiv.org/html/2403.07945v4",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.1.1 supply chain",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p2-3.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.1.2 HNDL + inferential variant",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p3.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.1.3 air-gap: covert/side channels, fault injection, EM pulses",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p3-4.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.1.4 hardware failing to isolate software (Spectre, Meltdown, Rowhammer)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p4.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.1.5 ransomware incl. blocked stimulation/prosthesis control",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p4-5.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": "Paper frames it as inevitable/possible (\"could be blocked\"), consistent with \"projected\"."
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector Attacks in combination",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p5.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.2.1.1 seizure induction, autonomic modulation, motor/prosthesis interference",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p6.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": "Printed heading is \"Physical Substrate and Information Processing\" under 2.2.1 \"The Brain As An Attack Surface\"."
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.2.1.2 substrate alteration incl. accidental cases",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p6.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.2.1.3 neural signals outside parenchyma; unintended pickup",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p6.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.2.1.4 neural identity (fMRI, EEG, sEMG)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p6-7.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.2.1.5 cognitive processes (PIN inference, nudging unsafe behaviour, output channel)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p7-8.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.2.2 implanted / minimally invasive / non-invasive devices",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p8.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": "Paper says non-invasive devices are \"likely to represent the most common targets\" and \"particularly vulnerable to AGAs\"; \"judged most exposed\" is a fair paraphrase."
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.2.3 connected devices",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p8.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.3.1 interception (AFE/ADC probing, Bluetooth sniffing, handshake MitM, MAC spoofing, eavesdropping)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p9.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.3.2 signal injection at acquisition layer citing Armengol-Urpi [13]",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p9.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": "Printed heading of 2.3.2 is \"Man-in-the-middle Attacks\"; its text describes RF signal injection ([13] = Armengol-Urpi et al. 2023). The proposal relabels the section by content."
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.3.3 spoofing and replay",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p9.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.3.4 software applications",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p9-10.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.3.5 cloud: breach, session hijack, containers/runtime escape, ingestion APIs, storage, cross-tenant, noisy neighbour",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p10-11.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.4.1 training-time: poisoning, transfer-learning backdoor, concept drift, federated poisoning, filter/clean-label/weight/compiler backdoors",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p11-12.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.4.2 inference-time: adversarial and universal perturbations; Figure 2 adds backdoor trigger delivery, RF signal injection, analog EM interference",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p12-13; Figure 2 p11.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": "Figure 2 boxes read from a page render."
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.4.3 extraction: model inversion, membership inference, model stealing; Figure 2 adds HNDL",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p13; Figure 2 p11.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "threat vector 2.4.4 ML pipeline: registry substitution, retraining hijack, monitoring evasion, config tampering",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Read in the PDF, p11 (Figure 2), p13.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "research-delta (Bagley paper)",
-   "item_key": "statements of limits",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "p14 \"not aware of any demonstration of reconstruction attacks on neural data ... two facts make such attacks inevitable\"; p9 \"no dedicated fNIRS spoofing attacks have been demonstrated\"; p7 \"well-validated quantitative methods for cognitive anomaly detection do not yet exist\"; p2 snapshot statement.",
-   "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-001 Precision funding_total_usd 430M",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "MedTech Dive 2026-09-25: Series D \"brings Precision Neuroscience's total funding to $430 million\"; TNW agrees.",
-   "evidence_url": "https://www.medtechdive.com/news/precision-neuroscience-raises-250m-for-brain-computer-interface-work/831344/",
-   "note": "Baseline 183M + 250M = 433M; the source total is 430M, so the baseline total may have been slightly high. Not a fabrication."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-002 Precision valuation 1,000,000,000 (UNVERIFIED)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "TNW: \"values Precision at just over $1bn, The New York Times reported\".",
-   "evidence_url": "https://thenextweb.com/news/precision-neuroscience-250m-series-d-1bn-valuation-ackman",
-   "note": "Exact 1,000,000,000 rounds \"just over\"; second-hand via NYT. The artifact already marks it UNVERIFIED; it should not populate valuation_usd."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-003 Layer 7 units_deployed",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "TNW: \"more than 100 procedures on patients at 18 medical centres\" (company statement).",
-   "evidence_url": "https://thenextweb.com/news/precision-neuroscience-250m-series-d-1bn-valuation-ackman",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-004 funding round",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "MedTech Dive/TNW: $250M Series D, Pershing Square, Ackman Oxman Institute and an undisclosed/unnamed life sciences fund led.",
-   "evidence_url": "https://www.medtechdive.com/news/precision-neuroscience-raises-250m-for-brain-computer-interface-work/831344/",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-005 timeline 2026.73",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Source dates 2026-09-24/25; decimal consistent.",
-   "evidence_url": "https://www.medtechdive.com/news/precision-neuroscience-raises-250m-for-brain-computer-interface-work/831344/",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-007 Paradromics security_notes",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "paradromics.com/news lists Aug 26 2026 \"Paradromics Receives FDA Approval to Expand BCI Access to Personal Computing Devices\"; Medical Economics: personal internet-connected devices via Convey, \"Once Paradromics completes an agreed-upon deployment and testing process\"; Sep 14 release: \"decoded in real time exactly as she intended, with no errors\", no accuracy figures.",
-   "evidence_url": "https://www.medicaleconomics.com/view/fda-expands-device-compatibility-for-paradromics-brain-computer-interface",
-   "note": "JSON wording is accurate. Its own source_url (the Sep 14 page) does not contain the device-expansion facts; those come from additional sources."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "market-delta.md finding 3 (\"implant can now connect to personal internet-connected devices\")",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Medical Economics text.",
-   "evidence_url": "https://www.medicaleconomics.com/view/fda-expands-device-compatibility-for-paradromics-brain-computer-interface",
-   "note": "md drops the condition \"once an agreed-upon deployment and testing process\" is complete."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-008 timeline 2026.65 Paradromics",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Aug 26 2026 item on paradromics.com/news.",
-   "evidence_url": "https://paradromics.com/news",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-010 Neuralink security_posture -> minimal_claims",
-   "verdict": "FLAGGED",
-   "what_was_checked": "neuralink.com/vulnerability-disclosure returns HTTP 200 with title \"Vulnerability Disclosure Program | Neuralink\" and meta description \"...reporting of security vulnerabilities in our services\"; body renders client-side (46 characters of text).",
-   "evidence_url": "https://neuralink.com/vulnerability-disclosure",
-   "note": "A VDP page exists. Scope (\"our services\"), bounty terms and date are unreadable without JavaScript, so whether it covers the implant is unknown; enum mapping is a human decision."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-011 Neuralink security_notes",
-   "verdict": "FLAGGED",
-   "what_was_checked": "VDP page as above; ClinicalTrials.gov API v2 for NCT06429735, NCT06700304, NCT07127172, NCT06992596, NCT06710626, NCT07224256: sponsors, statuses, enrollments and VOICE start 2025-10-03 all match.",
-   "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT07224256",
-   "note": "Trial facts confirmed. \"no security architecture document, audit report or bug bounty found\" cannot be supported from a page whose body was not readable."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-014 Synchron funding_note",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Sacra: Funding $345.00M; Nov 2025 $200M Series D led by Double Point Ventures; company stated valuation \"nearly $1 billion\".",
-   "evidence_url": "https://sacra.com/c/synchron/",
-   "note": "Aggregator source; transparently attributed."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-015 Synchron security_notes",
-   "verdict": "FLAGGED",
-   "what_was_checked": "ClinicalTrials.gov: NCT07446114 FOCUS-CAN (Recruiting, start 2026-03-18, est. 10), NCT07543367 INTENT (start 2026-04 est., est. 10), NCT07533903 FOCUS-AUS (start 2026-05-22, est. 10), NCT05035823 COMMAND (Active not recruiting, 6 actual), all sponsor Synchron.",
-   "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT07533903",
-   "note": "Registry facts confirmed. \"CORRECTION NEEDED ... conflicts with the registry\": absence of a pivotal-labelled study does not refute an IDE approval; flag for review instead."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-017 Motif DOT units_deployed",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "NCT07594483 RESONATE: Recruiting, start 2026-09 (estimated), est. 20, sponsor Motif Neurotech.",
-   "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT07594483",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-018 Axoft units_deployed 5",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "NCT06673264 FINESSE: Completed, actual enrollment 5, sponsor Axoft.",
-   "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT06673264",
-   "note": "Enrollment used as implant count; \"11+\" company statement not checked."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-019 Axoft first_human 2025-03",
-   "verdict": "FLAGGED",
-   "what_was_checked": "NCT06673264 start date 2025-03-14 (actual).",
-   "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT06673264",
-   "note": "Study start date, not a documented first-implant date."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-020 INBRAIN units_deployed 10",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "NCT06368310: Completed, 10 actual, sponsor University of Manchester, collaborator Inbrain Neuroelectronics, intervention \"INBRAIN Graphene Cortical Interface\".",
-   "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT06368310",
-   "note": "Resolves the panel doubt about device identity."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-021 ONWARD ARC-BCI units 7",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "BioSpace release 2026-01-22: \"Seven study participants have now received ARC-BCI Therapy\"; CHUV Lausanne.",
-   "evidence_url": "https://www.biospace.com/press-releases/onward-medical-completes-two-additional-brain-computer-interface-implants-paired-with-spinal-cord-stimulation-technology-to-restore-thought-driven-movement",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-022 Neurosoft fda_status -> clinical_trial",
-   "verdict": "FLAGGED",
-   "what_was_checked": "NCT06205160 EpiGrid: Recruiting, start 2025-01-01, est. 12, sponsor Neurosoft Bioelectronics SA, collaborators UMC Utrecht and ERC.",
-   "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT06205160",
-   "note": "Registry supports a clinical study; collaborators indicate a Netherlands study, so it is not evidence of an FDA status in an fda_status field."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-023 Neurosoft units unknown",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "NCT07543406 MINDZ-MAP: not yet recruiting, start 2026-10-01 (est.), est. 5, sponsor Neurosoft.",
-   "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT07543406",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-025 Science Corp security_notes",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "NCT07266584 PRIMAlia: Recruiting, start 2026-04-22, est. 5; NCT04676854 PRIMAvera: Active not recruiting, est. 38; sponsor Science Corporation.",
-   "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT07266584",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-026 Boston Scientific security_posture -> regulatory_compliance",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Page: scope covers on-market devices, SaMD, implants; \"acknowledge receiving your report within five (5) business days\"; \"does not have a bug bounty program\"; \"Revision AC was created 17 February 2025\".",
-   "evidence_url": "https://www.bostonscientific.com/en-US/customer-service/product-security/responsible-disclosure.html",
-   "note": "Fact confirmed; the enum value is a mapping decision. The page predates the baseline, so this corrects the baseline rather than reporting a new event."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-027 Boston Scientific security_notes (8-K)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "EDGAR 8-K, Date of Report 2026-09-07: Item 1.05; refers to the initial 8-K filed 2026-08-26; incident identified 2026-08-25; manufacturing, order processing and shipping affected; no evidence of ongoing unauthorized access; \"likely to have a material impact\" on Q3 and FY2026. No mention of implanted devices.",
-   "evidence_url": "https://www.sec.gov/Archives/edgar/data/0000885725/000088572526000059/bsx-20260907.htm",
-   "note": "Two filings exist (08-26 initial, 09-07 update); the materiality language is in the 09-07 filing, as the item says."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-028 timeline 2026.65 Boston Scientific discloses",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "8-K text cites the initial 8-K filed 2026-08-26; TNW 2026-08-26 reports the filing.",
-   "evidence_url": "https://thenextweb.com/news/boston-scientific-cyberattack-shipping-disruption",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-030 Medtronic security_posture -> regulatory_compliance",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Page (fetched with browser headers after a bot-block page): email security@medtronic.com with PGP key; \"Within five business days, Medtronic will confirm...\"; Security Bulletins menu.",
-   "evidence_url": "https://www.medtronic.com/en-us/e/product-security/coordinated-disclosure-process.html",
-   "note": "Fact confirmed; enum mapping is a human decision."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-031 Medtronic security_notes",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Disclosure page as above; NVD: CVE-2018-8849 CVSS 3.1 4.6 (N'Vision 8840/8870, PII/PHI unencrypted at rest); CVE-2018-10631 CVSS 3.1 6.3 (CNA ICS-CERT; NVD v3.0 6.8).",
-   "evidence_url": "https://nvd.nist.gov/vuln/detail/CVE-2018-10631",
-   "note": "CISA advisory page itself not fetched."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-033 LivaNova security_posture -> regulatory_compliance",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Page: Coordinated Vulnerability Disclosure program; acknowledgment within 5-7 business days; PGP key; publishes security advisories.",
-   "evidence_url": "https://www.livanova.com/en-us/security",
-   "note": "Enum mapping is a human decision."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-034 LivaNova security_notes",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Same page.",
-   "evidence_url": "https://www.livanova.com/en-us/security",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-037 Abbott security_notes",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "MedTech Dive 2026-07-17: unauthorized access to a limited number of internal systems in cancer diagnostics business incl. Exact Sciences; \"no impact on other Abbott businesses, sites or systems\" (company statement).",
-   "evidence_url": "https://www.medtechdive.com/news/abbott-discloses-cyberattack-on-cancer-diagnostics-business/825529/",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-038 Muse 2 cves_known",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "NVD CVE-2023-49914: InteraXon Muse 2, 480 MHz RF carrier with false brain wave, published 2023-12-02, CVSS 3.1 6.5.",
-   "evidence_url": "https://nvd.nist.gov/vuln/detail/CVE-2023-49914",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-039 Natus Xltek NeuroWorks cves_known (8)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "NVD: all eight listed IDs describe Natus Xltek NeuroWorks 8. NVD keyword \"NeuroWorks\" returns nine records; the ninth is CVE-2023-47800 (Natus NeuroWorks and SleepWorks before 8.4 GMA3, default SQL Server sa password \"xltek\", remote code execution).",
-   "evidence_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=NeuroWorks",
-   "note": "List is incomplete: CVE-2023-47800 applies to NeuroWorks and is omitted. The security_notes text still lists four."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-040 Merge Labs security_notes",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Digital Health News (updated 2026-09-04): multi-year licensing agreement; Poseidon ultrasound-on-chip via Butterfly Embedded; Butterfly as exclusive chip-based ultrasound partner.",
-   "evidence_url": "https://www.digitalhealthnews.com/sam-altman-backed-merge-labs-butterfly-network-partner-to-advance-ultrasound-based-brain-computer-interfaces",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-041 timeline 2026.68 Merge Labs",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Same source, early September 2026.",
-   "evidence_url": "https://www.digitalhealthnews.com/sam-altman-backed-merge-labs-butterfly-network-partner-to-advance-ultrasound-based-brain-computer-interfaces",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-045 Neuracle security_notes",
-   "verdict": "FLAGGED",
-   "what_was_checked": "36Kr page: revenue about RMB 108M in 2025, almost all from non-invasive research equipment, invasive core product zero revenue; on-site inspection selected 2026-07-01.",
-   "evidence_url": "https://eu.36kr.com/en/p/3914507815048580",
-   "note": "Values match the page, but the page names the company \"BrainCo Technology (Shanghai)\" throughout; identification with Neuracle rests on the NEO product and founders named on the page. Single secondary source."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-047 Neuracle founded 2011 (UNVERIFIED)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Same page: \"BrainCo was founded in 2011\" per the prospectus.",
-   "evidence_url": "https://eu.36kr.com/en/p/3914507815048580",
-   "note": "Same identity caveat; the artifact's UNVERIFIED label is appropriate."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-048 MindMaze security_notes (current_value \"no mention\")",
-   "verdict": "BLOCKED",
-   "what_was_checked": "Sibling baseline ../neurosecurity/datalake/bci-landscape.json MindMaze security_notes.",
-   "evidence_url": "local baseline file",
-   "note": "Baseline already records \"a small CHF 8.0M rescue equity/convertible-note financing with Neuro.io Group SA (June 2026)\". The proposal's stated current value is wrong and the append duplicates it with a different month."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-049 VC 2025 $4.8B / 140 deals",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Substack post 2026-01-12: \"2025 Neurotech Funding Snapshot $4.8 Billion across 140 deals\".",
-   "evidence_url": "https://neurotechnology.substack.com/p/2025-snapshot",
-   "note": "The publisher's own breakdown post (2025-snapshot2) gives $941m/41 deals plus \"$4+B\"/100 deals, which does not sum exactly; source-internal inconsistency, not the artifact's."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-050 Meticulous 2.2 (2025)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Page: valued at USD 2.2B in 2025, est. 2.8B in 2026, 8.6B by 2036, CAGR 11.8% 2026-2036; published May 2026.",
-   "evidence_url": "https://www.meticulousresearch.com/product/brain-computer-interface-market-6654",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-051 Meticulous 2.8 (2026)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Page: valued at USD 2.2B in 2025, est. 2.8B in 2026, 8.6B by 2036, CAGR 11.8% 2026-2036; published May 2026.",
-   "evidence_url": "https://www.meticulousresearch.com/product/brain-computer-interface-market-6654",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-052 Meticulous 8.6 (2036), CAGR 11.8%",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Page: valued at USD 2.2B in 2025, est. 2.8B in 2026, 8.6B by 2036, CAGR 11.8% 2026-2036; published May 2026.",
-   "evidence_url": "https://www.meticulousresearch.com/product/brain-computer-interface-market-6654",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-053 Towards Healthcare 3.21 (2025)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Page: USD 3.21B 2025, 3.75B 2026, 15.04B 2035, CAGR 16.7% 2026-2035.",
-   "evidence_url": "https://www.towardshealthcare.com/insights/brain-computer-interface-market",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-054 Towards Healthcare 3.75 (2026)",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Page: USD 3.21B 2025, 3.75B 2026, 15.04B 2035, CAGR 16.7% 2026-2035.",
-   "evidence_url": "https://www.towardshealthcare.com/insights/brain-computer-interface-market",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-055 Towards Healthcare 15.04 (2035), CAGR 16.7%",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Page: USD 3.21B 2025, 3.75B 2026, 15.04B 2035, CAGR 16.7% 2026-2035.",
-   "evidence_url": "https://www.towardshealthcare.com/insights/brain-computer-interface-market",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-056 Research and Markets 2.41 / CAGR 15.8% (UNVERIFIED)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Arithmetic only (source not fetched): 2.41 to 12.11 over 2025-2035 implies 17.5% CAGR; 15.8% fits 11 periods.",
-   "evidence_url": "https://www.businesswire.com/news/home/20251003011210/en",
-   "note": "Base year may be 2024; keep excluded."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "market-delta.md \"46% ... same spread the dataset already shows for 2024\"",
-   "verdict": "BLOCKED",
-   "what_was_checked": "Sibling baseline market_size_estimates for 2024: nine estimates from 1.6 (Market Research Intellect) to 4.02 (Verified Market Research).",
-   "evidence_url": "local baseline file",
-   "note": "Baseline 2024 spread is 151%, not 46%."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "market-delta.md finding 1 (\"site's headline statistic moves from 62/70 to 58/70\")",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Counted none_published: sibling baseline 62/70; published worktree datalake/bci-landscape.json 59/67.",
-   "evidence_url": "datalake/bci-landscape.json",
-   "note": "62/70 is correct against the brief's designated baseline but is not what the published dataset (and hence, per the panel, the site) shows; state both. I did not check the live site."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-058 security_gap.note",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Disclosure pages for Medtronic, Boston Scientific (no bug bounty) and LivaNova read; Neuralink page title/meta only.",
-   "evidence_url": "https://www.bostonscientific.com/en-US/customer-service/product-security/responsible-disclosure.html",
-   "note": "The listed disclosure programmes are confirmed. \"we found no BCI company with a published security audit or bug bounty\" rests on about 20 of 70 companies re-checked; scope the sentence to the companies checked."
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-059 timeline ONWARD 2026.06",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "BioSpace release dated 2026-01-22.",
-   "evidence_url": "https://www.biospace.com/press-releases/onward-medical-completes-two-additional-brain-computer-interface-implants-paired-with-spinal-cord-stimulation-technology-to-restore-thought-driven-movement",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-060 timeline Paradromics speech",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "paradromics.com Sep 14 2026 release: real-time speech and text in the first participant; no accuracy figures.",
-   "evidence_url": "https://paradromics.com/news/paradromics-achieves-real-time-speech-connexus-brain-computer-interface/",
-   "note": ""
-  },
-  {
-   "artifact": "market-delta",
-   "item_key": "M-061 Phantom Neuro add",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "HLTH 2026-04-17: approval for CYBORG first-in-human EFS, Australia/Melbourne, up to 10 below-elbow amputees, surgery at Cabrini Health; approving body not named.",
-   "evidence_url": "https://hlth.com/insights/news/phantom-neuro-receives-approval-for-first-in-human-study-of-phantom-x-prosthetic-control-system",
-   "note": "Inclusion is a scope decision."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[0] Nissan B2V (company + device)",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Nissan release 2018-01-03 (YOKOHAMA, CES); Crossref + OpenAlex abstracts: Zhang, Chavarriaga, Khaliliardali, Gheorghe, Iturrate, Millan 2015 (ErrP 0.698+/-0.065 simulator N=22, 0.682+/-0.059 real car N=8, offline) and Khaliliardali, Chavarriaga, Gheorghe, Millan 2015 (N=18 simulator).",
-   "evidence_url": "https://global.nissannews.com/en/releases/180103-01-e",
-   "note": "Figures and co-authorship (Gheorghe) confirmed. security_posture \"none_published\" and company_category \"established\" are set on the automaker, contradicting the md (see separate BLOCK). first_human 2018-01 conflicts with the 2015 human studies the note ties to the programme. Bitbrain blog not re-fetched."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "eeg-delta.md schema gap 2 (\"Proposals leave these null\")",
-   "verdict": "BLOCKED",
-   "what_was_checked": "eeg-delta.json items[0] and items[2] proposed_values.",
-   "evidence_url": "eeg-delta.json",
-   "note": "JSON sets security_posture \"none_published\" and company_category \"established\" for Nissan and Hyundai Mobis; only funding, valuation and headcount are null."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[1] Bitbrain",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Diadem page: \"Wearable 12ch Dry EEG Headset for Research\"; openFDA applicant \"Bitbrain\": no matches; NVD keyword \"Bitbrain\": 0.",
-   "evidence_url": "https://www.bitbrain.com/neurotechnology-products/dry-eeg/diadem",
-   "note": "Hero, Air, Versatile pages and CE directive wording not re-fetched."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[2] Hyundai Mobis M.Brain",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Hyundai Motor Group story: brainwave driver monitoring for fatigue, drowsiness, distraction; \"can also be linked with a smartphone app\"; 2021 Gyeonggi Research Institute data: negligence decreased 25.3% (29.7% after meals); \"world's first\" is the company's claim.",
-   "evidence_url": "https://www.hyundaimotorgroup.com/en/story/CONT0000000000035429",
-   "note": "Values match the page. The 25.3% has no sample size or comparison in the source; posture/category on the automaker per the BLOCK above."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[3] Zeto",
-   "verdict": "FLAGGED",
-   "what_was_checked": "openFDA: K172735 WR19 System 2018-04-17; K233403 \"Flexset System\" 2024-04-30; K260455 New Wave System 2026-03-13 (received 2026-02-11). zeto-inc.com: \"HIPAA compliant cloud platform\".",
-   "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Zeto%22&sort=decision_date:desc&limit=25",
-   "note": "K-numbers confirmed. No openFDA record is named \"Zeto ONE\", so fda_status \"cleared\" for Zeto ONE is not supported; regulatory_compliance rests on one HIPAA line."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[4] Epitel",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "epitel.com/cybersecurity: SOC 2 Type 2 + HIPAA + GDPR attestation via Prescient Assurance, Health-ISAC member, Cobalt penetration testing; openFDA: five records, first K203827 2021-03-29, latest K243185 2025-03-21.",
-   "evidence_url": "https://www.epitel.com/cybersecurity",
-   "note": ""
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[5] Ceribell",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "ceribell.com: \"FedRAMP High cybersecurity authorization\" (company claim); security notice asks reporters not to disclose without advance written consent; openFDA total 16, five decided in 2026 (K254033, K260363, K260998, K261101, K261712).",
-   "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Ceribell%22&sort=decision_date:desc&limit=25",
-   "note": "Count of 16 and five in 2026 are correct; the item names four 2026 K-numbers (K260998 omitted). FedRAMP status not checked on the FedRAMP marketplace."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[6] Beacon Biosignals",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "beacon.bio: \"New name, same FDA 510(k) clearance\"; \"secure, encrypted, wireless connection\"; openFDA: Dreem 3S K223539 (2023-08-18), K242094 (2024-11-22), plus K261747 \"Report Studio\" decided 2026-08-25 and SleepStageML K233438.",
-   "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Beacon%20Biosignals%22&sort=decision_date:desc&limit=25",
-   "note": "The 2026-08-25 source date matches K261747, a software clearance, not a headband record; panel suspicion resolved. basic_encryption rests on one marketing sentence."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[7] Cumulus",
-   "verdict": "FLAGGED",
-   "what_was_checked": "openFDA: K221963 Cumulus Functional Neurophysiology Platform, 2023-04-27, GWQ, applicant Cumulus Neuroscience Limited.",
-   "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Cumulus%20Neuroscience%22&sort=decision_date:desc&limit=25",
-   "note": "Only the 510(k) record is verified; the item is labelled VERIFIED while posture, status and modality are not assessed (its own unverified_fields)."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[8] Wearable Sensing DSI-24",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Product page: 19 electrodes on the head plus 2 ear clips, Bluetooth, 10 m range, onboard storage option; openFDA applicant \"Wearable Sensing\": no matches; NVD: 0.",
-   "evidence_url": "https://wearablesensing.com/dsi-24/",
-   "note": ""
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[9] NextSense security_notes (\"Verified 2026-10-06 via SoundGuys\")",
-   "verdict": "BLOCKED",
-   "what_was_checked": "eeg-delta.json items[9]: verification UNVERIFIED; company site HTTP 429.",
-   "evidence_url": "eeg-delta.json",
-   "note": "Proposed text writes a \"Verified\" stamp into an UNVERIFIED item."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[10] Earable FRENZ security_notes (\"Verified 2026-10-06 via frenzband.com\")",
-   "verdict": "BLOCKED",
-   "what_was_checked": "eeg-delta.json items[10]: verification UNVERIFIED; direct fetch returned 429, text from an automated summary.",
-   "evidence_url": "eeg-delta.json",
-   "note": "Same false verification stamp."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[11] NAOX WAVE",
-   "verdict": "FLAGGED",
-   "what_was_checked": "naox.tech NAOX WAVE page: SDK & API, earbud electrodes, validated algorithms; no channel count, no regulatory statement.",
-   "evidence_url": "https://www.naox.tech/en/naox-wave/",
-   "note": "fda_status \"not_applicable\" is not stated on the page."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[12] Neuroelectrics Enobio / Enobio Dx",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "openFDA: K261604 \"Enobio Dx (8/20/32)\", decision 2026-06-13 (a Saturday in the FDA record), received 2026-05-14; K162681 Enobio Wireless EEG 2017-06-02. Product page lists Enobio 8/20/32 and Enobio Dx 8/20/32.",
-   "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Neuroelectrics%22&sort=decision_date:desc&limit=25",
-   "note": "Panel flagged the Saturday date as suspicious; it is the date openFDA itself reports, so the artifact transcribed it faithfully."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[14] g.tec Unicorn Hybrid Black",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Product page: EEG Channels 8, 24-bit, 250 Hz; openFDA g.tec records (6) do not include Unicorn; NVD \"Unicorn Hybrid\": 0.",
-   "evidence_url": "https://www.gtec.at/product/unicorn-hybrid-black/",
-   "note": ""
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[15] NAOX Link fda_status 510k_cleared",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "openFDA: K251550 \"NX01\", Naox Technologies SAS, decision 2025-11-25, product code OMC.",
-   "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Naox%22&sort=decision_date:desc&limit=25",
-   "note": ""
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[16] NAOX security_notes",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "Same openFDA record (K251550, 2025-11-25).",
-   "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Naox%22&sort=decision_date:desc&limit=25",
-   "note": "Indication (ages 6+) and CE status not re-checked."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "items[17] Neurable channels 6 -> 12",
-   "verdict": "FLAGGED",
-   "what_was_checked": "Research Kit page: \"12-channel, 500hz sampling rate EEG system\" for \"MW75 Neuro - Research Kit\".",
-   "evidence_url": "https://www.neurable.com/products/research-kit",
-   "note": "Source is the research kit; that the consumer MW75 Neuro has the same 12 channels is unconfirmed (the item says so) but the value is marked VERIFIED."
-  },
-  {
-   "artifact": "eeg-delta",
-   "item_key": "all adds: cves_known []",
-   "verdict": "CONFIRMED",
-   "what_was_checked": "NVD keyword searches returned 0 for Zeto, Epitel, Ceribell, Beacon Biosignals, Dreem, Bitbrain, Wearable Sensing, Neuroelectrics, Neurable, Naox, Unicorn Hybrid; Cumulus and FRENZ hits are unrelated products.",
-   "evidence_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=Zeto",
-   "note": "NextSense, Enobio and Hyundai Mobis keyword queries failed (rate limit); not checked. A keyword search is not a product-level CPE search."
-  }
- ]
+  "generated": "2026-10-06",
+  "method": "Independent web verification (Crossref, doi.org handle API, arXiv abstract and HTML full text, OpenAlex, Semantic Scholar, openFDA, NVD, ClinicalTrials.gov API v2, SEC EDGAR, company pages) plus the local Bagley PDF and local baselines. Verdicts: CONFIRMED = checked in this run and supported; FLAGGED = partly supported or worded more strongly than the source; BLOCKED = contradicted or citation does not exist.",
+  "records": [
+    {
+      "artifact": "research-delta",
+      "item_key": "R-005",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref title/authors/year/pages match; abstract (Semantic Scholar and arXiv 2606.10502) gives 52.0-67.2%, >85.0%, >96.0% exactly as stated.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/SP63933.2026.00117",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-009",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref metadata match; OpenAlex abstract supports limited-knowledge MIA and the diversity/under-represented-group finding; no rates in abstract, as stated.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/JBHI.2025.3593443",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-010",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match; OpenAlex abstract: two datasets, four models, higher success with fewer queries and lower distortion.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/LSP.2025.3563446",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-013",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match; OpenAlex abstract: VR memory task EEG leaks sex, age, identity; end-to-end models best.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/SMC58881.2025.11343511",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-014",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match (Gomasta, Chhaglani, Shenoy; pp. 9-14); abstract figures 0.788/0.858/0.789/0.692 and 0.781/0.563/0.467/0.206 match.",
+      "evidence_url": "https://api.crossref.org/works/10.1145/3842657.3842784",
+      "note": "Crossref proceedings date postdates access date, as the artifact discloses."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-017",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match; abstract: FDI on accelerometer link of DBS, observer + event-triggered defence, simulation only.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/ACCESS.2025.3529477",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-018",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match; abstract: 180 training / 484 unseen subjects (469 external), surface distance smaller than population-average face, p<0.05.",
+      "evidence_url": "https://api.crossref.org/works/10.1016/j.compbiomed.2025.111112",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-019",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match; abstract: 182 participants, open-source up to 59%, commercial 92% and 98%.",
+      "evidence_url": "https://api.crossref.org/works/10.1016/j.neuroimage.2025.121476",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-021",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match; abstract (Semantic Scholar): nine defences, five datasets, three paradigms, three networks, four scenarios; combination best.",
+      "evidence_url": "https://api.crossref.org/works/10.1016/j.neunet.2025.107516",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-023",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match (vol 10, pp. 967-981); abstract datasets BCI-III-IVa/IVb, IV-1a; lower ASR, accuracy kept.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/TETCI.2025.3619564",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-024",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match; abstract: up to 46.79% accuracy and 62.87 bits/min ITR gain.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/LSP.2024.3501274",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-025",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match; abstract gives no rates or datasets, as stated.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/LSP.2025.3580330",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-026",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match; abstract: BLE-like/Wi-Fi-like profiles, 1-hop/2-hop, hybrid ML-KEM+X25519.",
+      "evidence_url": "https://api.crossref.org/works/10.3389/fnsys.2026.1891041",
+      "note": "Abstract also reports +0.45 ms p95 latency in the constrained BLE case; the artifact says results were beyond its retrieved text."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-027",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match; abstract: RMSE > 1.2 at noise variance 0.2 vs ~0.5 non-adversarial.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/OJCOMS.2026.3684404",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-028",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match; retrieved abstract is problem statement only, as stated.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/ISSCC49661.2025.10904583",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-033",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match; abstract describes three-component federated/transfer framework on BEETL.",
+      "evidence_url": "https://api.crossref.org/works/10.1088/1741-2552/ad9957",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-034",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match; abstract: offline FL gains vs online co-adaptation tensions, privacy retained.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/TNSRE.2026.3674102",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-035",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match (Meng, Wang, Luo, Wu; J. Brain-Computer Interface 1:34).",
+      "evidence_url": "https://api.crossref.org/works/10.58195/bci.2025.1.005",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-037",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match (Baghestan, Rabbani 2025).",
+      "evidence_url": "https://api.crossref.org/works/10.1109/IoT69654.2025.11297585",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-038",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match (Seymour, Ienca, Koenig-Robert 2026; no volume yet).",
+      "evidence_url": "https://api.crossref.org/works/10.1016/j.tins.2026.09.003",
+      "note": "Finding text not compared to abstract in detail."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-042",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match (Hendriks et al. 2026, Brain).",
+      "evidence_url": "https://api.crossref.org/works/10.1093/brain/awag205",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-043",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref match (Hertz 2025, IDPL 15:123-137).",
+      "evidence_url": "https://api.crossref.org/works/10.1093/idpl/ipaf014",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-006",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv title/authors match (Cong, Liu, Wu); abstract: white-box public encoder, no victim queries, transfer to linear-probe and fine-tuned models, no rates.",
+      "evidence_url": "https://arxiv.org/abs/2608.16931",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-007",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match (Tai); abstract: CI lower bound >= 0.081 across six directions, LiRA AUC 0.50-0.70, DP-SGD eps 4/8 ineffective, no waveform/identity recovery claimed.",
+      "evidence_url": "https://arxiv.org/abs/2606.09189",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-008",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match; abstract: EEGMMI 5,400 events, harmless stubs, C3 routed 1.000 under agreement+provenance, 0.000 with confirmation+provenance.",
+      "evidence_url": "https://arxiv.org/abs/2606.09315",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-012",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match (Xie); abstract: 433 MHz, Myo 7 gestures/350 samples, 97.8% -> 58.3% at 1 m 0 dBm, 85% at 3 m.",
+      "evidence_url": "https://arxiv.org/abs/2507.21387",
+      "note": "Abstract says \"Experiments on the Myo Dataset\"; over-the-air status remains unconfirmed, as the artifact says."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-015",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match (Bindra); abstract: eps 0.25, -25.7%, certificate valid for 9 subjects, identity 48.1% vs 6.7% chance.",
+      "evidence_url": "https://arxiv.org/abs/2607.06630",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-016",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match (Rehman, Shafique; cs.CV; ICASSP 2027 submission comment); abstract: 22-24% PGD accuracy at eps 0.005; transfer 0.963/0.928 vs 0.994/0.997.",
+      "evidence_url": "https://arxiv.org/abs/2609.30037",
+      "note": "Panel concern about the high sequence number is resolved: the ID resolves to this paper."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-022",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match (Jia, Chen, Wu); abstract: five datasets, MI and ERP, beats 14 methods.",
+      "evidence_url": "https://arxiv.org/abs/2601.05789",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-029",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match; abstract: TUH-derived simulated cross-silo, updates hidden under stated assumptions, overhead; HotDiSec comment present.",
+      "evidence_url": "https://arxiv.org/abs/2607.28191",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-030",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match (Sadiq, Toorani); abstract describes Gaussian/Laplace perturbation, three scenarios.",
+      "evidence_url": "https://arxiv.org/abs/2609.11777",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-031",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match (7 authors); abstract: sleep staging, re-identifiability substantially reduced, utility preserved.",
+      "evidence_url": "https://arxiv.org/abs/2509.20454",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-032",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match; abstract: DEAP, <=5% accuracy drop, 100% watermark detection, robust to fine-tuning/transfer/pruning.",
+      "evidence_url": "https://arxiv.org/abs/2502.05931",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-039",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match (Hanley et al.).",
+      "evidence_url": "https://arxiv.org/abs/2602.02511",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-040",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match (Bhattacharjee, Pilkington, Farahany).",
+      "evidence_url": "https://arxiv.org/abs/2507.14339",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-041",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match (Sirbu et al.; v2 cited).",
+      "evidence_url": "https://arxiv.org/abs/2506.12540",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-044",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match (Sun et al.).",
+      "evidence_url": "https://arxiv.org/abs/2605.11386",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-045",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match (Carter); v1 submitted 2025-12-15.",
+      "evidence_url": "https://arxiv.org/abs/2601.06040",
+      "note": "Panel flagged the 2025 year against the 2601 ID; arXiv shows v1 dated 15 Dec 2025, so \"(2025)\" is correct."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-001",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv metadata (title, 4 authors, 2026-07-11, cs.CR, no DOI/journal ref); PDF: 25 pages, 175 references, title page July 14 2026; fNIRS statement p9; reconstruction-attack statement p14; no new experiments.",
+      "evidence_url": "https://arxiv.org/abs/2607.10451",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-002",
+      "verdict": "FLAGGED",
+      "what_was_checked": "arXiv v4 (2025-01-26) title/authors match; HTML full text, Methods 2.1: cogits as qubit analogues, \"Cogito ergo sum\", explicitly not a quantum-brain claim; two hypotheses stated.",
+      "evidence_url": "https://arxiv.org/html/2403.07945v4",
+      "note": "Finding says \"The paper states both hypotheses are unvalidated extensions\". The paper calls them \"rather tame in that they can be derived from established results\". That they are untested is the reviewer's observation, not the paper's statement; reword."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-003",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match; HTML full text: +0.032/+0.051 lift over 0.103/0.111 (RSVP), MI near zero, resting-state zero-effort FAR 0.812-0.896 and lift -0.034 to -0.054; nearest-centroid, GNB, linear SVM; San Francisco affiliation.",
+      "evidence_url": "https://arxiv.org/html/2609.01856v1",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-004",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match (5 authors); HTML full text VII-A to VII-C: plain-text BLE frames captured on all three devices; 10-trigger EEGNet avg ASR 97.80, DeepSleepNet 20.0; forgery up to 61.0% (subject 9; subject 3 48.0%), cross-subject/device 44.7-52.3% vs 33.3% chance; \"we therefore make no claim of arbitrary code execution\" (V4).",
+      "evidence_url": "https://arxiv.org/html/2609.08971v1",
+      "note": "61.0% is the best of two subjects (\"up to\" in the paper). MitM was shown for the NeuroSky and Muse apps, not all three devices (see md delta 2 record)."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "research-delta.md \"What changed\" item 2 / section (b) NERVE row",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Same full text, section VII-C V2.",
+      "evidence_url": "https://arxiv.org/html/2609.08971v1",
+      "note": "\"a man-in-the-middle position on three consumer headsets\": the paper reports MitM via GATTacker where \"NeuroSky and Muse apps accepted the adversarial peripheral\"; passive sniffing covered all three. Say \"unencrypted links on three headsets; MitM on two\"."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-011",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref: Li F et al. 2025, Neurocomputing 616:128902, title matches.",
+      "evidence_url": "https://api.crossref.org/works/10.1016/j.neucom.2024.128902",
+      "note": "Identifier only. No abstract in Crossref/OpenAlex/Semantic Scholar; finding left UNVERIFIED by the artifact, correctly."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-047",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref: Tiwari, Arrabito, Davoust, Falk 2026, ICHMS pp. 392-397.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/ICHMS69701.2026.11602273",
+      "note": "Identifier only; no abstract available to me either."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-020",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv match; HTML full text: USRP B200, OpenBCI Cyton, NeuroSky MindWave Mobile 2, Sichiray Taurus 2.0, eps 38.12 for 100 participants, user study 10 participants, unmodified devices.",
+      "evidence_url": "https://arxiv.org/html/2607.25968v1",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-036",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Crossref: Sayah Ben Aissa NEH, Kerrache CA, Calafate CT 2026, Comput. Stand. Interfaces 98:104155; no abstract in Crossref/OpenAlex/S2.",
+      "evidence_url": "https://api.crossref.org/works/10.1016/j.csi.2026.104155",
+      "note": "Citation is real. Marked VERIFIED although \"content not read\", which breaks the file's own convention (R-011 and R-047 are UNVERIFIED for the same condition). Crossref family name is \"Sayah Ben Aissa\"; the proposal renders it \"Ben Aissa NEHS\"."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-048 (row C52)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref: catalogue DOI 10.1016/j.eswa.2024.125599 = Zou et al. \"Dynamic multi teacher knowledge distillation for semantic parsing in KBQA\" (ESWA 263); replacement 10.1016/j.eswa.2024.126362 = Zhong et al. 2025, ESWA 268:126362, attention-guided UAP.",
+      "evidence_url": "https://api.crossref.org/works/10.1016/j.eswa.2024.125599",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-049 (row C57)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref 404 and doi.org handle API responseCode 100 (handle not found) for 10.1109/TNSRE.2024.3392037; replacement 10.1109/TNSRE.2024.3391936 = Chen X, Wang Z, Wu D 2024, \"Alignment-Based Adversarial Training (ABAT)...\", TNSRE 32:1703-1714.",
+      "evidence_url": "https://doi.org/api/handles/10.1109/TNSRE.2024.3392037",
+      "note": "Catalogue expands ABAT as \"Adversarial Bayesian Augmented Training\" and lists Wu D first; both wrong."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-050 (row C88)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref 404 and doi.org handle not found for 10.1088/1741-2552/ac0f4e; replacement ac0f4c = Liu Zihan, Meng, Zhang, Fang, Wu 2021, JNE 18(4):0460a4.",
+      "evidence_url": "https://doi.org/api/handles/10.1088/1741-2552/ac0f4e",
+      "note": "Catalogue authors \"Liu X, Jiang X, Li J\" do not match."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-051 (row C75)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref: 10.1145/3176258.3176310 = \"Securing Wireless Neurostimulators\", Marin et al., CODASPY 2018 pp. 287-298; catalogue carries the title of the authors' cardiac-defibrillator paper.",
+      "evidence_url": "https://api.crossref.org/works/10.1145/3176258.3176310",
+      "note": "Crossref spells \"Volski\"; proposal follows Crossref, catalogue has \"Volskiy\"."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-052 (row C80)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref: DOI = \"Brain-Hack: Remotely Injecting False Brain-Waves with RF to Take Control of a Brain-Computer Interface\", CPSIoTSec 2023 pp. 53-66; catalogue title differs.",
+      "evidence_url": "https://api.crossref.org/works/10.1145/3605758.3623497",
+      "note": "\"Best Paper\" not checked. \"First demonstrated\" is the authors' own claim in the abstract; OpenAlex also returns Hossen, Tu, Hei 2023 \"A First Look at the Security of EEG-based Systems and Intelligent Algorithms under Physical Signal Injections\" (10.1145/3591197.3591304), so the priority claim should stay attributed, not adopted."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-053 (rows C77, C113)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref: 10.1109/TNSRE.2023.3273214 = Meng et al. 2023 \"EEG-Based Brain-Computer Interfaces are Vulnerable to Backdoor Attacks\"; both rows carry it; C77 title is not the paper title.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/TNSRE.2023.3273214",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-054 (row C49)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv 2503.08284 first author Lopez Madejska VM, journal ref Neurocomputing 655:131344, DOI 10.1016/j.neucom.2025.131344 (Crossref match); abstract: FLO and JAM on ~230,000-neuron mouse V1 model, JAM generally more damaging.",
+      "evidence_url": "https://arxiv.org/abs/2503.08284",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-055 (row C51)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref: Dhaya R, Kanthavel R, ICST Trans. Security and Safety 9(1), published 2025-09-30.",
+      "evidence_url": "https://api.crossref.org/works/10.4108/eetss.v9i1.9502",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-056 (row C54)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref: Tom, Ekpar, Adiqwe 2025, Journal of Information Systems and Informatics 7(3):2382-2406; catalogue journal name wrong.",
+      "evidence_url": "https://api.crossref.org/works/10.51519/journalisi.v7i3.1195",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-057 (row C56)",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Crossref: 10.2139/ssrn.5291128 = Zhang H, Ma R, Gu Z et al. 2025, \"Bayesian Neural Networks Against Adversarial Attacks for EEG-Based BCI\" (SSRN). A Crossref author+topic search surfaced no other candidate.",
+      "evidence_url": "https://api.crossref.org/works/10.2139/ssrn.5291128",
+      "note": "DOI real, but that it is the paper C56 meant is an assumption (the artifact says so); it is filed under \"Fix (verified)\" with 0 unverified in the md."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-058 (row C58)",
+      "verdict": "FLAGGED",
+      "what_was_checked": "arXiv 2412.11390 version titles: v1 \"Accurate, Robust and Privacy-Preserving Brain-Computer Interface Decoding\"; v2 \"A3E: Aligned and Augmented Adversarial Ensemble for Accurate, Robust and Privacy-Preserving EEG Decoding\"; v3 \"PAT: ...\". Authors Chen, Jia, Tu, Wu.",
+      "evidence_url": "https://arxiv.org/abs/2412.11390v2",
+      "note": "Claimed defect partly refuted: the catalogue's \"A3E\" title is an abbreviated v2 title, not a wrong title. First-author defect (Wu D listed first) stands."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-059 (row C59)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref: Samuel J et al., Sci Rep 16:4353, published online 2026-01-30.",
+      "evidence_url": "https://api.crossref.org/works/10.1038/s41598-025-34024-0",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-060 (row C62)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "USENIX page metadata: \"On the Feasibility of Side-Channel Attacks with Brain-Computer Interfaces\", Martinovic, Davies, Frank, Perito, Ros, Song, 2012 (USENIX Security 12).",
+      "evidence_url": "https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/martinovic",
+      "note": "\"No DOI exists for the USENIX version\" was not checked."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-061 (row C63)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref: Xia Kun et al., IEEE TCSS 10(5):2312-2324, Oct 2023 (11 authors); arXiv 2412.11394 journal ref agrees.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/TCSS.2022.3184818",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-062 (row B1)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref: Kunz EM et al., Cell 188(17):4658-4673.e17, 23 authors, Willett last; abstract: four participants, real-time imagined sentences, some free-form inner speech, prevention strategies.",
+      "evidence_url": "https://api.crossref.org/works/10.1016/j.cell.2025.06.015",
+      "note": "The catalogue's 125,000-word figure is not in the abstract (artifact notes this)."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "research-delta.md \"What changed\" item 1 (\"Sixteen existing catalogue rows\")",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Counted the rows in section (e) against the catalogue.",
+      "evidence_url": "osi-of-mind/QIF-RESEARCH-SOURCES.md",
+      "note": "C113 is the correct row being kept, so 15 rows are defective; C58's title defect is an earlier-version title (see R-058)."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-063 (T0009 -> DEMONSTRATED)",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Armengol-Urpi 2023 abstract (OpenAlex): RF injection demonstrated on Neuroelectrics, OpenBCI and Muse hardware against three BCIs. Registrar T0009 notes: \"CAUTION 2026-07-31 ... conflates two physically distinct mechanisms\"; its engineering fields describe TMS-grade stimulation.",
+      "evidence_url": "https://api.crossref.org/works/10.1145/3605758.3623497",
+      "note": "Evidence supports DEMONSTRATED only for the analog-front-end injection mechanism. The proposal is silent on the registrar's own split recommendation; status should follow the split. E-MagDiP shows benign noise coupling, not false-signal injection."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-064 / \"Zhang et al. 2024\" (T0009) not found",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Searched Crossref (author Zhang + RF/EMI injection BCI, 2023-06 to 2025-06), OpenAlex (2024; 2023-2025), Semantic Scholar bulk (2023-2025, total 0), arXiv search (no results). No 2024 Zhang paper on RF false-brainwave injection found.",
+      "evidence_url": "https://api.crossref.org/works?query.bibliographic=radio+frequency+injection+false+brainwaves+brain-computer+interface+EEG&query.author=Zhang",
+      "note": "Nearest hits are unrelated: Zhang & Rasmussen 2023 (EM injection on differential signalling) and Hossen, Tu, Hei 2023 (physical signal injection on EEG systems, not Zhang). The same string also labels Professor X in T0016 and ATGAN in T0067, so it is a recurring placeholder. Absence in four indexes supports keeping it UNVERIFIED; it does not prove non-existence. Two Semantic Scholar relevance queries returned HTTP 429."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-075 / \"Lopez-Moreno et al. 2024\" (T0025-T0028) not found",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Searched Crossref (author Lopez-Moreno and \"López Moreno\" + BCI/neural cyberattack 2022-2025; author \"López Bernal\" 2024), OpenAlex, Semantic Scholar bulk (total 0), arXiv (no results). No Lopez-Moreno BCI paper found; the only Lopez-Moreno hit is a graphics paper.",
+      "evidence_url": "https://api.crossref.org/works?query.author=Lopez-Moreno&query.bibliographic=neural+cyberattacks+taxonomy+brain-computer+interface+neuronal+jamming+flooding",
+      "note": "Closest Murcia-group 2024 paper: Lopez Madejska, Lopez Bernal, Martinez Perez, Huertas Celdran, \"Impact of neural cyberattacks on a realistic neuronal topology from the primary visual cortex of mice\", Wireless Networks 2024, 10.1007/s11276-023-03649-2. Supports UNVERIFIED; not proof of non-existence."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-075",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Redacted: concerns an item held from publication pending verification.",
+      "evidence_url": null,
+      "note": null
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-067 (T0026 status, \"same in-silico studies\")",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Abstracts of 10.1109/ACCESS.2020.3017394 (FLO + SCA) and arXiv 2503.08284 / 10.1016/j.neucom.2025.131344 (FLO + JAM).",
+      "evidence_url": "https://arxiv.org/abs/2503.08284",
+      "note": "Panel marked this BLOCK. Web check: the premise holds for the 2025 Neurocomputing study (flooding and jamming in the same simulations) but is wrong for C107 (2020), which covers flooding and scanning, not jamming. Proposed status value \"DEMONSTRATED (simulation only) or keep...\" is not an enum value. Downgraded from BLOCK to FLAG."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-065 (T0020 -> DEMONSTRATED)",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Cobilean 2025 abstract (OpenAlex) and Tai 2026 abstract.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/JBHI.2025.3593443",
+      "note": "Abstract supports dataset-level MIA but gives no rates or datasets; the 2026 foundation-model audit found AUC 0.50-0.70. JSON says bare \"DEMONSTRATED\" while the md says \"DEMONSTRATED (dataset level)\"."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-066 (T0032 -> DEMONSTRATED)",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Qian 2025 abstract; Tapal & Bagley full text.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/LSP.2025.3563446",
+      "note": "Digital-only results, mixed by paradigm; md offers \"or keep\" but JSON gives bare DEMONSTRATED."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-068 (T0023 -> EMERGING)",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Yu 2025 abstract (attack assumed in simulation); Dhaya & Kanthavel abstract (OpenAlex).",
+      "evidence_url": "https://api.crossref.org/works/10.1109/ACCESS.2025.3529477",
+      "note": "Value \"EMERGING (simulation only)\" is not an enum value; evidence is simulation."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-069 (T0004 add NERVE)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "NERVE full text VII-C V2 MitM via GATTacker; USENIX 2012 title shows Martinovic is a side-channel study.",
+      "evidence_url": "https://arxiv.org/html/2609.08971v1",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-070 (T0003 add NERVE)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "NERVE full text VII-C V1: plain-text BLE frames captured on OpenBCI, Muse 2, MindWave Mobile 2.",
+      "evidence_url": "https://arxiv.org/html/2609.08971v1",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-071 (T0016 source)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv 2409.20158: first author Liu Xuan-Hao; title \"Professor X: Manipulating EEG BCI with Invisible and Robust Backdoor Attack\".",
+      "evidence_url": "https://arxiv.org/abs/2409.20158",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-072 (T0017 source)",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Crossref: Jiang, Meng, Li, Wu 2023, Sci China Inf Sci 66:182402; Bagley PDF p12 cites Jiang et al. transfer-learning poisoning [114].",
+      "evidence_url": "https://api.crossref.org/works/10.1007/s11432-022-3548-2",
+      "note": "Identifier real; that it is what \"Meng et al. 2024\" meant is an inference (artifact says so) but the item is VERIFIED."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-073 (T0018 source)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref: Meng L et al. 2024, Information Fusion 107:102316.",
+      "evidence_url": "https://api.crossref.org/works/10.1016/j.inffus.2024.102316",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-074 (T0019 sources)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref for ac0f4c and eswa.2024.126362; arXiv for 2608.16931 and 2609.30037.",
+      "evidence_url": "https://api.crossref.org/works/10.1088/1741-2552/ac0f4c",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-076 (T0036 add Kunz 2025)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref + abstract: four participants, intracortical, trained decoders, prevention strategies; consistent with \"no status change\".",
+      "evidence_url": "https://api.crossref.org/works/10.1016/j.cell.2025.06.015",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-077 (T0041 sources)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Crossref for both DOIs; arXiv for 2606.09189; abstracts support attribute leakage.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/SMC58881.2025.11343511",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-078 (card: inferential HNDL)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Bagley PDF p3, section 2.1.2 (inferential variant, cites [33]); Crossref: 10.1038/s41598-022-10710-1 = Menuet et al. 2022, Sci Rep 12:7050; abstract: decoding cognitive concepts from NeuroVault maps.",
+      "evidence_url": "https://api.crossref.org/works/10.1038/s41598-022-10710-1",
+      "note": "Panel concern that the Menuet DOI was unresolved is closed: it resolves with matching metadata."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-079 (card: brain-prompt injection)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv 2606.09315 abstract; THEORETICAL status and \"harmless tool stubs\" wording consistent.",
+      "evidence_url": "https://arxiv.org/abs/2606.09315",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-080 (card: VR motion-sensor inference, DEMONSTRATED)",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Crossref + abstract only.",
+      "evidence_url": "https://api.crossref.org/works/10.1109/SP63933.2026.00117",
+      "note": "DEMONSTRATED rests on the abstract; no class count, chance level or participant number for 52.0-67.2%; md section (b) does not disclose the proposed status."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-081 (card: zero-query encoder transfer)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv 2608.16931 abstract.",
+      "evidence_url": "https://arxiv.org/abs/2608.16931",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-082 (card: cross-encoder attribute leakage)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv 2606.09189 abstract.",
+      "evidence_url": "https://arxiv.org/abs/2606.09189",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-083 (card: temporal desynchronisation)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "NERVE full text: EEGNet accuracy 0.99 at 3T/10, 0.60 at 5T/10, 0.10 (10-class chance) at 8T/10.",
+      "evidence_url": "https://arxiv.org/html/2609.08971v1",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-084 (card: RF on sEMG, UNVERIFIED)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv 2507.21387 abstract; card correctly kept THEORETICAL/UNVERIFIED.",
+      "evidence_url": "https://arxiv.org/abs/2507.21387",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-085 (card: model stealing)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Bagley PDF p13, 2.4.3; cited demonstration [132] Tramer et al. USENIX Security 2016 (general prediction APIs).",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-086 (card: federated poisoning)",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Bagley PDF p12 (federated learning, [119]); registrar QIF-T0024 notes.",
+      "evidence_url": "datalake/qtara-registrar.json (QIF-T0024)",
+      "note": "T0024 notes already say \"Federated learning and crowd-sourced calibration data are vulnerable entry points\"; make this a T0024 note or justify a separate integrity technique."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "research-delta.md \"What changed\" item 3 (\"threat vectors TARA does not list ... federated poisoning\")",
+      "verdict": "BLOCKED",
+      "what_was_checked": "Registrar QIF-T0024 notes text.",
+      "evidence_url": "datalake/qtara-registrar.json (QIF-T0024)",
+      "note": "Contradicted for federated poisoning by T0024. Holds for model stealing and registry substitution (no registrar hit found by the panel). Reword to \"no dedicated entry for model stealing or registry substitution\"."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-087 (card: registry/retraining substitution)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Bagley PDF p13 section 2.4.4 and Figure 2 (p11, ML Pipeline column).",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-088 (card: air-gap channels)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Bagley PDF pp3-4 section 2.1.3.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-089 (institution: Cerberus)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Homepage text: \"A nonprofit research institute advancing open research, standards, and defenses for the neurotechnology era\"; \"Securing the brain, guarding the mind.\"; arXiv 2609.01856 prints CNRI, San Francisco, CA 94102.",
+      "evidence_url": "https://www.cerberus.institute/",
+      "note": "Nonprofit status is self-described; sitemap and 404 claims not re-checked."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-090 (researcher: Bagley)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "arXiv listing name \"Bagley, Bryce-Allen\"; PDF prints \"Bryce Allen Bagley\"; affiliations as printed.",
+      "evidence_url": "https://arxiv.org/abs/2607.10451",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-091 (explorer: Cerberus category academia)",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Same sources; Tapal affiliation on 2609.01856 is CNRI + University of Luxembourg.",
+      "evidence_url": "https://arxiv.org/abs/2609.01856",
+      "note": "category \"academia\" conflicts with the artifact's own proposed_fields note that Cerberus is neither academia nor industry."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "R-092 (legislation: Montana SB 163)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Enrolled bill text (69th Legislature, 2025, SB 163, introduced by D. Zolnikov): revises the Genetic Information Privacy Act to include neurotechnology data.",
+      "evidence_url": "https://archive.legmt.gov/content/Sessions/69th/Contractor_index/CH0345.pdf",
+      "note": "Effective date not checked; \"active\" is inferred, as the artifact says."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "research-delta.md (c) \"No written definition of the status values was found\"",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Read datalake/README.md section \"Status Levels\".",
+      "evidence_url": "datalake/README.md",
+      "note": "Definitions exist: CONFIRMED \"Demonstrated in real BCI systems or documented incidents\", DEMONSTRATED \"Proven in research/lab settings\", etc. The claim was scoped to the registrar file and its rule file, but open question 1 is partly answered by the README."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "research-delta.md (a) threat-vector table mappings T0029, T0030, T0122, T0037, T0040",
+      "verdict": "FLAGGED",
+      "what_was_checked": "grep of research-delta.json: 0 occurrences of these five IDs; each appears once in the md.",
+      "evidence_url": "research-delta.json",
+      "note": "md-only mappings; regenerate the table from the JSON or add them to the JSON."
+    },
+    {
+      "artifact": "research-delta",
+      "item_key": "research-delta.md (b) Gao et al. row (\"re-created faces\")",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Gao 2025 abstract.",
+      "evidence_url": "https://api.crossref.org/works/10.1016/j.compbiomed.2025.111112",
+      "note": "md drops the JSON's limit: closer than a population-average face (p<0.05), not identification of named people."
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "title",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "PDF title page and PDF metadata; arXiv citation_title.",
+      "evidence_url": "https://arxiv.org/abs/2607.10451",
+      "note": "\"Threat Vectors and the State of the Art in Defense Methods for Security in Neurotechnology\"."
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "author name as printed",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "PDF p1 prints \"Bryce Allen Bagley1,2\"; PDF metadata and arXiv give \"Bryce-Allen Bagley\"; no \"Dr\" printed.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": "Co-authors Nathaniel Rose, Quintus Kilbourn, Matthew Canham; affiliations Cerberus, Cognitive Security Institute, Dura Labs, Flashbots as stated."
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "arXiv ID and dates",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "PDF side stamp \"arXiv:2607.10451v1 [cs.CR] 11 Jul 2026\"; title page \"July 14, 2026\"; arXiv v1 2026-07-11.",
+      "evidence_url": "https://arxiv.org/abs/2607.10451",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "length and references",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "pdfinfo 25 pages; reference list runs to [175].",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "cogits in this paper",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Single occurrence, p14, section 3.1.3: \"specific interpretable intents, thoughts, etc.-termed cogits by Bagley and Petritsch ... [23]\". Reference [23] = Ienca, Haselager, Emanuel 2018 (Nat Biotech); [16] = Bagley & Petritsch (title with \"... and AI\"). \"Bagley and colleagues are working on protocols for cognition.[24]\" is on p2.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "cogits in arXiv:2403.07945",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "v4 HTML Methods 2.1: \"we will use the term cogits - a la Descartes' famous Cogito ergo sum - for these qubit analogues\"; maximally general vector of cognitive state variables; \"in no way suggests or supports claims of a physically quantum basis for cognition\"; hypothesis 2: statistics of cogit holography correspond to distinguishability of individuals.",
+      "evidence_url": "https://arxiv.org/html/2403.07945v4",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.1.1 supply chain",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p2-3.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.1.2 HNDL + inferential variant",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p3.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.1.3 air-gap: covert/side channels, fault injection, EM pulses",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p3-4.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.1.4 hardware failing to isolate software (Spectre, Meltdown, Rowhammer)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p4.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.1.5 ransomware incl. blocked stimulation/prosthesis control",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p4-5.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": "Paper frames it as inevitable/possible (\"could be blocked\"), consistent with \"projected\"."
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector Attacks in combination",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p5.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.2.1.1 seizure induction, autonomic modulation, motor/prosthesis interference",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p6.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": "Printed heading is \"Physical Substrate and Information Processing\" under 2.2.1 \"The Brain As An Attack Surface\"."
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.2.1.2 substrate alteration incl. accidental cases",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p6.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.2.1.3 neural signals outside parenchyma; unintended pickup",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p6.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.2.1.4 neural identity (fMRI, EEG, sEMG)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p6-7.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.2.1.5 cognitive processes (PIN inference, nudging unsafe behaviour, output channel)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p7-8.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.2.2 implanted / minimally invasive / non-invasive devices",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p8.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": "Paper says non-invasive devices are \"likely to represent the most common targets\" and \"particularly vulnerable to AGAs\"; \"judged most exposed\" is a fair paraphrase."
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.2.3 connected devices",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p8.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.3.1 interception (AFE/ADC probing, Bluetooth sniffing, handshake MitM, MAC spoofing, eavesdropping)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p9.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.3.2 signal injection at acquisition layer citing Armengol-Urpi [13]",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p9.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": "Printed heading of 2.3.2 is \"Man-in-the-middle Attacks\"; its text describes RF signal injection ([13] = Armengol-Urpi et al. 2023). The proposal relabels the section by content."
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.3.3 spoofing and replay",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p9.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.3.4 software applications",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p9-10.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.3.5 cloud: breach, session hijack, containers/runtime escape, ingestion APIs, storage, cross-tenant, noisy neighbour",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p10-11.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.4.1 training-time: poisoning, transfer-learning backdoor, concept drift, federated poisoning, filter/clean-label/weight/compiler backdoors",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p11-12.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.4.2 inference-time: adversarial and universal perturbations; Figure 2 adds backdoor trigger delivery, RF signal injection, analog EM interference",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p12-13; Figure 2 p11.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": "Figure 2 boxes read from a page render."
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.4.3 extraction: model inversion, membership inference, model stealing; Figure 2 adds HNDL",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p13; Figure 2 p11.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "threat vector 2.4.4 ML pipeline: registry substitution, retraining hijack, monitoring evasion, config tampering",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Read in the PDF, p11 (Figure 2), p13.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "research-delta (Bagley paper)",
+      "item_key": "statements of limits",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "p14 \"not aware of any demonstration of reconstruction attacks on neural data ... two facts make such attacks inevitable\"; p9 \"no dedicated fNIRS spoofing attacks have been demonstrated\"; p7 \"well-validated quantitative methods for cognitive anomaly detection do not yet exist\"; p2 snapshot statement.",
+      "evidence_url": "local file BAGLEY-2026-threat-vectors-cerberus.pdf (Desktop copy supplied by requester)",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-001 Precision funding_total_usd 430M",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "MedTech Dive 2026-09-25: Series D \"brings Precision Neuroscience's total funding to $430 million\"; TNW agrees.",
+      "evidence_url": "https://www.medtechdive.com/news/precision-neuroscience-raises-250m-for-brain-computer-interface-work/831344/",
+      "note": "Baseline 183M + 250M = 433M; the source total is 430M, so the baseline total may have been slightly high. Not a fabrication."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-002",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Redacted: concerns an item held from publication pending verification.",
+      "evidence_url": null,
+      "note": null
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-003 Layer 7 units_deployed",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "TNW: \"more than 100 procedures on patients at 18 medical centres\" (company statement).",
+      "evidence_url": "https://thenextweb.com/news/precision-neuroscience-250m-series-d-1bn-valuation-ackman",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-004 funding round",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "MedTech Dive/TNW: $250M Series D, Pershing Square, Ackman Oxman Institute and an undisclosed/unnamed life sciences fund led.",
+      "evidence_url": "https://www.medtechdive.com/news/precision-neuroscience-raises-250m-for-brain-computer-interface-work/831344/",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-005 timeline 2026.73",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Source dates 2026-09-24/25; decimal consistent.",
+      "evidence_url": "https://www.medtechdive.com/news/precision-neuroscience-raises-250m-for-brain-computer-interface-work/831344/",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-007 Paradromics security_notes",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "paradromics.com/news lists Aug 26 2026 \"Paradromics Receives FDA Approval to Expand BCI Access to Personal Computing Devices\"; Medical Economics: personal internet-connected devices via Convey, \"Once Paradromics completes an agreed-upon deployment and testing process\"; Sep 14 release: \"decoded in real time exactly as she intended, with no errors\", no accuracy figures.",
+      "evidence_url": "https://www.medicaleconomics.com/view/fda-expands-device-compatibility-for-paradromics-brain-computer-interface",
+      "note": "JSON wording is accurate. Its own source_url (the Sep 14 page) does not contain the device-expansion facts; those come from additional sources."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "market-delta.md finding 3 (\"implant can now connect to personal internet-connected devices\")",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Medical Economics text.",
+      "evidence_url": "https://www.medicaleconomics.com/view/fda-expands-device-compatibility-for-paradromics-brain-computer-interface",
+      "note": "md drops the condition \"once an agreed-upon deployment and testing process\" is complete."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-008 timeline 2026.65 Paradromics",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Aug 26 2026 item on paradromics.com/news.",
+      "evidence_url": "https://paradromics.com/news",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-010 Neuralink security_posture -> minimal_claims",
+      "verdict": "FLAGGED",
+      "what_was_checked": "neuralink.com/vulnerability-disclosure returns HTTP 200 with title \"Vulnerability Disclosure Program | Neuralink\" and meta description \"...reporting of security vulnerabilities in our services\"; body renders client-side (46 characters of text).",
+      "evidence_url": "https://neuralink.com/vulnerability-disclosure",
+      "note": "A VDP page exists. Scope (\"our services\"), bounty terms and date are unreadable without JavaScript, so whether it covers the implant is unknown; enum mapping is a human decision."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-011 Neuralink security_notes",
+      "verdict": "FLAGGED",
+      "what_was_checked": "VDP page as above; ClinicalTrials.gov API v2 for NCT06429735, NCT06700304, NCT07127172, NCT06992596, NCT06710626, NCT07224256: sponsors, statuses, enrollments and VOICE start 2025-10-03 all match.",
+      "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT07224256",
+      "note": "Trial facts confirmed. \"no security architecture document, audit report or bug bounty found\" cannot be supported from a page whose body was not readable."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-014 Synchron funding_note",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Sacra: Funding $345.00M; Nov 2025 $200M Series D led by Double Point Ventures; company stated valuation \"nearly $1 billion\".",
+      "evidence_url": "https://sacra.com/c/synchron/",
+      "note": "Aggregator source; transparently attributed."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-015 Synchron security_notes",
+      "verdict": "FLAGGED",
+      "what_was_checked": "ClinicalTrials.gov: NCT07446114 FOCUS-CAN (Recruiting, start 2026-03-18, est. 10), NCT07543367 INTENT (start 2026-04 est., est. 10), NCT07533903 FOCUS-AUS (start 2026-05-22, est. 10), NCT05035823 COMMAND (Active not recruiting, 6 actual), all sponsor Synchron.",
+      "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT07533903",
+      "note": "Registry facts confirmed. \"CORRECTION NEEDED ... conflicts with the registry\": absence of a pivotal-labelled study does not refute an IDE approval; flag for review instead."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-017 Motif DOT units_deployed",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "NCT07594483 RESONATE: Recruiting, start 2026-09 (estimated), est. 20, sponsor Motif Neurotech.",
+      "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT07594483",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-018 Axoft units_deployed 5",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "NCT06673264 FINESSE: Completed, actual enrollment 5, sponsor Axoft.",
+      "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT06673264",
+      "note": "Enrollment used as implant count; \"11+\" company statement not checked."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-019 Axoft first_human 2025-03",
+      "verdict": "FLAGGED",
+      "what_was_checked": "NCT06673264 start date 2025-03-14 (actual).",
+      "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT06673264",
+      "note": "Study start date, not a documented first-implant date."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-020 INBRAIN units_deployed 10",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "NCT06368310: Completed, 10 actual, sponsor University of Manchester, collaborator Inbrain Neuroelectronics, intervention \"INBRAIN Graphene Cortical Interface\".",
+      "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT06368310",
+      "note": "Resolves the panel doubt about device identity."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-021 ONWARD ARC-BCI units 7",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "BioSpace release 2026-01-22: \"Seven study participants have now received ARC-BCI Therapy\"; CHUV Lausanne.",
+      "evidence_url": "https://www.biospace.com/press-releases/onward-medical-completes-two-additional-brain-computer-interface-implants-paired-with-spinal-cord-stimulation-technology-to-restore-thought-driven-movement",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-022",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Redacted: concerns an item held from publication pending verification.",
+      "evidence_url": null,
+      "note": null
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-023 Neurosoft units unknown",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "NCT07543406 MINDZ-MAP: not yet recruiting, start 2026-10-01 (est.), est. 5, sponsor Neurosoft.",
+      "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT07543406",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-025 Science Corp security_notes",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "NCT07266584 PRIMAlia: Recruiting, start 2026-04-22, est. 5; NCT04676854 PRIMAvera: Active not recruiting, est. 38; sponsor Science Corporation.",
+      "evidence_url": "https://clinicaltrials.gov/api/v2/studies/NCT07266584",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-026 Boston Scientific security_posture -> regulatory_compliance",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Page: scope covers on-market devices, SaMD, implants; \"acknowledge receiving your report within five (5) business days\"; \"does not have a bug bounty program\"; \"Revision AC was created 17 February 2025\".",
+      "evidence_url": "https://www.bostonscientific.com/en-US/customer-service/product-security/responsible-disclosure.html",
+      "note": "Fact confirmed; the enum value is a mapping decision. The page predates the baseline, so this corrects the baseline rather than reporting a new event."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-027 Boston Scientific security_notes (8-K)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "EDGAR 8-K, Date of Report 2026-09-07: Item 1.05; refers to the initial 8-K filed 2026-08-26; incident identified 2026-08-25; manufacturing, order processing and shipping affected; no evidence of ongoing unauthorized access; \"likely to have a material impact\" on Q3 and FY2026. No mention of implanted devices.",
+      "evidence_url": "https://www.sec.gov/Archives/edgar/data/0000885725/000088572526000059/bsx-20260907.htm",
+      "note": "Two filings exist (08-26 initial, 09-07 update); the materiality language is in the 09-07 filing, as the item says."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-028 timeline 2026.65 Boston Scientific discloses",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "8-K text cites the initial 8-K filed 2026-08-26; TNW 2026-08-26 reports the filing.",
+      "evidence_url": "https://thenextweb.com/news/boston-scientific-cyberattack-shipping-disruption",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-030 Medtronic security_posture -> regulatory_compliance",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Page (fetched with browser headers after a bot-block page): email security@medtronic.com with PGP key; \"Within five business days, Medtronic will confirm...\"; Security Bulletins menu.",
+      "evidence_url": "https://www.medtronic.com/en-us/e/product-security/coordinated-disclosure-process.html",
+      "note": "Fact confirmed; enum mapping is a human decision."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-031 Medtronic security_notes",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Disclosure page as above; NVD: CVE-2018-8849 CVSS 3.1 4.6 (N'Vision 8840/8870, PII/PHI unencrypted at rest); CVE-2018-10631 CVSS 3.1 6.3 (CNA ICS-CERT; NVD v3.0 6.8).",
+      "evidence_url": "https://nvd.nist.gov/vuln/detail/CVE-2018-10631",
+      "note": "CISA advisory page itself not fetched."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-033 LivaNova security_posture -> regulatory_compliance",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Page: Coordinated Vulnerability Disclosure program; acknowledgment within 5-7 business days; PGP key; publishes security advisories.",
+      "evidence_url": "https://www.livanova.com/en-us/security",
+      "note": "Enum mapping is a human decision."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-034 LivaNova security_notes",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Same page.",
+      "evidence_url": "https://www.livanova.com/en-us/security",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-037 Abbott security_notes",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "MedTech Dive 2026-07-17: unauthorized access to a limited number of internal systems in cancer diagnostics business incl. Exact Sciences; \"no impact on other Abbott businesses, sites or systems\" (company statement).",
+      "evidence_url": "https://www.medtechdive.com/news/abbott-discloses-cyberattack-on-cancer-diagnostics-business/825529/",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-038 Muse 2 cves_known",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "NVD CVE-2023-49914: InteraXon Muse 2, 480 MHz RF carrier with false brain wave, published 2023-12-02, CVSS 3.1 6.5.",
+      "evidence_url": "https://nvd.nist.gov/vuln/detail/CVE-2023-49914",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-039 Natus Xltek NeuroWorks cves_known (8)",
+      "verdict": "FLAGGED",
+      "what_was_checked": "NVD: all eight listed IDs describe Natus Xltek NeuroWorks 8. NVD keyword \"NeuroWorks\" returns nine records; the ninth is CVE-2023-47800 (Natus NeuroWorks and SleepWorks before 8.4 GMA3, default SQL Server sa password \"xltek\", remote code execution).",
+      "evidence_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=NeuroWorks",
+      "note": "List is incomplete: CVE-2023-47800 applies to NeuroWorks and is omitted. The security_notes text still lists four."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-040 Merge Labs security_notes",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Digital Health News (updated 2026-09-04): multi-year licensing agreement; Poseidon ultrasound-on-chip via Butterfly Embedded; Butterfly as exclusive chip-based ultrasound partner.",
+      "evidence_url": "https://www.digitalhealthnews.com/sam-altman-backed-merge-labs-butterfly-network-partner-to-advance-ultrasound-based-brain-computer-interfaces",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-041 timeline 2026.68 Merge Labs",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Same source, early September 2026.",
+      "evidence_url": "https://www.digitalhealthnews.com/sam-altman-backed-merge-labs-butterfly-network-partner-to-advance-ultrasound-based-brain-computer-interfaces",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-045",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Redacted: concerns an item held from publication pending verification.",
+      "evidence_url": null,
+      "note": null
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-047",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Redacted: concerns an item held from publication pending verification.",
+      "evidence_url": null,
+      "note": null
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-048",
+      "verdict": "BLOCKED",
+      "what_was_checked": "Redacted: concerns an item held from publication pending verification.",
+      "evidence_url": null,
+      "note": null
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-049 VC 2025 $4.8B / 140 deals",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Substack post 2026-01-12: \"2025 Neurotech Funding Snapshot $4.8 Billion across 140 deals\".",
+      "evidence_url": "https://neurotechnology.substack.com/p/2025-snapshot",
+      "note": "The publisher's own breakdown post (2025-snapshot2) gives $941m/41 deals plus \"$4+B\"/100 deals, which does not sum exactly; source-internal inconsistency, not the artifact's."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-050 Meticulous 2.2 (2025)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Page: valued at USD 2.2B in 2025, est. 2.8B in 2026, 8.6B by 2036, CAGR 11.8% 2026-2036; published May 2026.",
+      "evidence_url": "https://www.meticulousresearch.com/product/brain-computer-interface-market-6654",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-051 Meticulous 2.8 (2026)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Page: valued at USD 2.2B in 2025, est. 2.8B in 2026, 8.6B by 2036, CAGR 11.8% 2026-2036; published May 2026.",
+      "evidence_url": "https://www.meticulousresearch.com/product/brain-computer-interface-market-6654",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-052 Meticulous 8.6 (2036), CAGR 11.8%",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Page: valued at USD 2.2B in 2025, est. 2.8B in 2026, 8.6B by 2036, CAGR 11.8% 2026-2036; published May 2026.",
+      "evidence_url": "https://www.meticulousresearch.com/product/brain-computer-interface-market-6654",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-053 Towards Healthcare 3.21 (2025)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Page: USD 3.21B 2025, 3.75B 2026, 15.04B 2035, CAGR 16.7% 2026-2035.",
+      "evidence_url": "https://www.towardshealthcare.com/insights/brain-computer-interface-market",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-054 Towards Healthcare 3.75 (2026)",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Page: USD 3.21B 2025, 3.75B 2026, 15.04B 2035, CAGR 16.7% 2026-2035.",
+      "evidence_url": "https://www.towardshealthcare.com/insights/brain-computer-interface-market",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-055 Towards Healthcare 15.04 (2035), CAGR 16.7%",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Page: USD 3.21B 2025, 3.75B 2026, 15.04B 2035, CAGR 16.7% 2026-2035.",
+      "evidence_url": "https://www.towardshealthcare.com/insights/brain-computer-interface-market",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-056",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Redacted: concerns an item held from publication pending verification.",
+      "evidence_url": null,
+      "note": null
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "market-delta.md \"46% ... same spread the dataset already shows for 2024\"",
+      "verdict": "BLOCKED",
+      "what_was_checked": "Sibling baseline market_size_estimates for 2024: nine estimates from 1.6 (Market Research Intellect) to 4.02 (Verified Market Research).",
+      "evidence_url": "local baseline file",
+      "note": "Baseline 2024 spread is 151%, not 46%."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "market-delta.md finding 1 (\"site's headline statistic moves from 62/70 to 58/70\")",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Counted none_published: sibling baseline 62/70; published worktree datalake/bci-landscape.json 59/67.",
+      "evidence_url": "datalake/bci-landscape.json",
+      "note": "62/70 is correct against the brief's designated baseline but is not what the published dataset (and hence, per the panel, the site) shows; state both. I did not check the live site."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-058 security_gap.note",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Disclosure pages for Medtronic, Boston Scientific (no bug bounty) and LivaNova read; Neuralink page title/meta only.",
+      "evidence_url": "https://www.bostonscientific.com/en-US/customer-service/product-security/responsible-disclosure.html",
+      "note": "The listed disclosure programmes are confirmed. \"we found no BCI company with a published security audit or bug bounty\" rests on about 20 of 70 companies re-checked; scope the sentence to the companies checked."
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-059 timeline ONWARD 2026.06",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "BioSpace release dated 2026-01-22.",
+      "evidence_url": "https://www.biospace.com/press-releases/onward-medical-completes-two-additional-brain-computer-interface-implants-paired-with-spinal-cord-stimulation-technology-to-restore-thought-driven-movement",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-060 timeline Paradromics speech",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "paradromics.com Sep 14 2026 release: real-time speech and text in the first participant; no accuracy figures.",
+      "evidence_url": "https://paradromics.com/news/paradromics-achieves-real-time-speech-connexus-brain-computer-interface/",
+      "note": ""
+    },
+    {
+      "artifact": "market-delta",
+      "item_key": "M-061 Phantom Neuro add",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "HLTH 2026-04-17: approval for CYBORG first-in-human EFS, Australia/Melbourne, up to 10 below-elbow amputees, surgery at Cabrini Health; approving body not named.",
+      "evidence_url": "https://hlth.com/insights/news/phantom-neuro-receives-approval-for-first-in-human-study-of-phantom-x-prosthetic-control-system",
+      "note": "Inclusion is a scope decision."
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[0] Nissan B2V (company + device)",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Nissan release 2018-01-03 (YOKOHAMA, CES); Crossref + OpenAlex abstracts: Zhang, Chavarriaga, Khaliliardali, Gheorghe, Iturrate, Millan 2015 (ErrP 0.698+/-0.065 simulator N=22, 0.682+/-0.059 real car N=8, offline) and Khaliliardali, Chavarriaga, Gheorghe, Millan 2015 (N=18 simulator).",
+      "evidence_url": "https://global.nissannews.com/en/releases/180103-01-e",
+      "note": "Figures and co-authorship (Gheorghe) confirmed. security_posture \"none_published\" and company_category \"established\" are set on the automaker, contradicting the md (see separate BLOCK). first_human 2018-01 conflicts with the 2015 human studies the note ties to the programme. Bitbrain blog not re-fetched."
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "eeg-delta.md schema gap 2 (\"Proposals leave these null\")",
+      "verdict": "BLOCKED",
+      "what_was_checked": "eeg-delta.json items[0] and items[2] proposed_values.",
+      "evidence_url": "eeg-delta.json",
+      "note": "JSON sets security_posture \"none_published\" and company_category \"established\" for Nissan and Hyundai Mobis; only funding, valuation and headcount are null."
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[1] Bitbrain",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Diadem page: \"Wearable 12ch Dry EEG Headset for Research\"; openFDA applicant \"Bitbrain\": no matches; NVD keyword \"Bitbrain\": 0.",
+      "evidence_url": "https://www.bitbrain.com/neurotechnology-products/dry-eeg/diadem",
+      "note": "Hero, Air, Versatile pages and CE directive wording not re-fetched."
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[2] Hyundai Mobis M.Brain",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Hyundai Motor Group story: brainwave driver monitoring for fatigue, drowsiness, distraction; \"can also be linked with a smartphone app\"; 2021 Gyeonggi Research Institute data: negligence decreased 25.3% (29.7% after meals); \"world's first\" is the company's claim.",
+      "evidence_url": "https://www.hyundaimotorgroup.com/en/story/CONT0000000000035429",
+      "note": "Values match the page. The 25.3% has no sample size or comparison in the source; posture/category on the automaker per the BLOCK above."
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[3] Zeto",
+      "verdict": "FLAGGED",
+      "what_was_checked": "openFDA: K172735 WR19 System 2018-04-17; K233403 \"Flexset System\" 2024-04-30; K260455 New Wave System 2026-03-13 (received 2026-02-11). zeto-inc.com: \"HIPAA compliant cloud platform\".",
+      "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Zeto%22&sort=decision_date:desc&limit=25",
+      "note": "K-numbers confirmed. No openFDA record is named \"Zeto ONE\", so fda_status \"cleared\" for Zeto ONE is not supported; regulatory_compliance rests on one HIPAA line."
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[4] Epitel",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "epitel.com/cybersecurity: SOC 2 Type 2 + HIPAA + GDPR attestation via Prescient Assurance, Health-ISAC member, Cobalt penetration testing; openFDA: five records, first K203827 2021-03-29, latest K243185 2025-03-21.",
+      "evidence_url": "https://www.epitel.com/cybersecurity",
+      "note": ""
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[5] Ceribell",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "ceribell.com: \"FedRAMP High cybersecurity authorization\" (company claim); security notice asks reporters not to disclose without advance written consent; openFDA total 16, five decided in 2026 (K254033, K260363, K260998, K261101, K261712).",
+      "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Ceribell%22&sort=decision_date:desc&limit=25",
+      "note": "Count of 16 and five in 2026 are correct; the item names four 2026 K-numbers (K260998 omitted). FedRAMP status not checked on the FedRAMP marketplace."
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[6] Beacon Biosignals",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "beacon.bio: \"New name, same FDA 510(k) clearance\"; \"secure, encrypted, wireless connection\"; openFDA: Dreem 3S K223539 (2023-08-18), K242094 (2024-11-22), plus K261747 \"Report Studio\" decided 2026-08-25 and SleepStageML K233438.",
+      "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Beacon%20Biosignals%22&sort=decision_date:desc&limit=25",
+      "note": "The 2026-08-25 source date matches K261747, a software clearance, not a headband record; panel suspicion resolved. basic_encryption rests on one marketing sentence."
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[7] Cumulus",
+      "verdict": "FLAGGED",
+      "what_was_checked": "openFDA: K221963 Cumulus Functional Neurophysiology Platform, 2023-04-27, GWQ, applicant Cumulus Neuroscience Limited.",
+      "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Cumulus%20Neuroscience%22&sort=decision_date:desc&limit=25",
+      "note": "Only the 510(k) record is verified; the item is labelled VERIFIED while posture, status and modality are not assessed (its own unverified_fields)."
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[8] Wearable Sensing DSI-24",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Product page: 19 electrodes on the head plus 2 ear clips, Bluetooth, 10 m range, onboard storage option; openFDA applicant \"Wearable Sensing\": no matches; NVD: 0.",
+      "evidence_url": "https://wearablesensing.com/dsi-24/",
+      "note": ""
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[9]",
+      "verdict": "BLOCKED",
+      "what_was_checked": "Redacted: concerns an item held from publication pending verification.",
+      "evidence_url": null,
+      "note": null
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[10]",
+      "verdict": "BLOCKED",
+      "what_was_checked": "Redacted: concerns an item held from publication pending verification.",
+      "evidence_url": null,
+      "note": null
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[11] NAOX WAVE",
+      "verdict": "FLAGGED",
+      "what_was_checked": "naox.tech NAOX WAVE page: SDK & API, earbud electrodes, validated algorithms; no channel count, no regulatory statement.",
+      "evidence_url": "https://www.naox.tech/en/naox-wave/",
+      "note": "fda_status \"not_applicable\" is not stated on the page."
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[12] Neuroelectrics Enobio / Enobio Dx",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "openFDA: K261604 \"Enobio Dx (8/20/32)\", decision 2026-06-13 (a Saturday in the FDA record), received 2026-05-14; K162681 Enobio Wireless EEG 2017-06-02. Product page lists Enobio 8/20/32 and Enobio Dx 8/20/32.",
+      "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Neuroelectrics%22&sort=decision_date:desc&limit=25",
+      "note": "Panel flagged the Saturday date as suspicious; it is the date openFDA itself reports, so the artifact transcribed it faithfully."
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[14] g.tec Unicorn Hybrid Black",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Product page: EEG Channels 8, 24-bit, 250 Hz; openFDA g.tec records (6) do not include Unicorn; NVD \"Unicorn Hybrid\": 0.",
+      "evidence_url": "https://www.gtec.at/product/unicorn-hybrid-black/",
+      "note": ""
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[15] NAOX Link fda_status 510k_cleared",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "openFDA: K251550 \"NX01\", Naox Technologies SAS, decision 2025-11-25, product code OMC.",
+      "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Naox%22&sort=decision_date:desc&limit=25",
+      "note": ""
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[16] NAOX security_notes",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "Same openFDA record (K251550, 2025-11-25).",
+      "evidence_url": "https://api.fda.gov/device/510k.json?search=applicant:%22Naox%22&sort=decision_date:desc&limit=25",
+      "note": "Indication (ages 6+) and CE status not re-checked."
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "items[17] Neurable channels 6 -> 12",
+      "verdict": "FLAGGED",
+      "what_was_checked": "Research Kit page: \"12-channel, 500hz sampling rate EEG system\" for \"MW75 Neuro - Research Kit\".",
+      "evidence_url": "https://www.neurable.com/products/research-kit",
+      "note": "Source is the research kit; that the consumer MW75 Neuro has the same 12 channels is unconfirmed (the item says so) but the value is marked VERIFIED."
+    },
+    {
+      "artifact": "eeg-delta",
+      "item_key": "all adds: cves_known []",
+      "verdict": "CONFIRMED",
+      "what_was_checked": "NVD keyword searches returned 0 for Zeto, Epitel, Ceribell, Beacon Biosignals, Dreem, Bitbrain, Wearable Sensing, Neuroelectrics, Neurable, Naox, Unicorn Hybrid; Cumulus and FRENZ hits are unrelated products.",
+      "evidence_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=Zeto",
+      "note": "NextSense, Enobio and Hyundai Mobis keyword queries failed (rate limit); not checked. A keyword search is not a product-level CPE search."
+    }
+  ]
 }

@@ -20,13 +20,7 @@
         "datalake/intake/2026-10-06/data-gap-analysis.md",
         "datalake/intake/2026-10-06/decisions.json",
         "datalake/intake/2026-10-06/decisions.md",
-        "datalake/intake/2026-10-06/eeg-delta.json",
-        "datalake/intake/2026-10-06/eeg-delta.md",
-        "datalake/intake/2026-10-06/market-delta.json",
-        "datalake/intake/2026-10-06/market-delta.md",
         "datalake/intake/2026-10-06/quorum-review.md",
-        "datalake/intake/2026-10-06/research-delta.json",
-        "datalake/intake/2026-10-06/research-delta.md",
         "datalake/intake/2026-10-06/sources.json",
         "datalake/intake/2026-10-06/tara-mapping.json",
         "datalake/intake/2026-10-06/tara-mapping.md",
@@ -95,6 +89,19 @@
         ],
         "note_on_blocked": "BLOCKED verdicts are statements in the delta reports contradicted by the artifacts' own files or by the baseline, not fabricated sources. Raw files are kept unedited as the record of what was collected; the ledger carries the verdict.",
         "coverage_gaps": "Not re-checked: research items R-046, R-093, R-094; nine market items already self-marked unverified; five EEG items; three NVD lookups that hit a rate limit. Quorum ran with 4 panelists per artifact and no debate round."
+      },
+      "published_items": 156,
+      "held_items": 24,
+      "raw_files_withheld": {
+        "files": [
+          "market-delta.json",
+          "market-delta.md",
+          "eeg-delta.json",
+          "eeg-delta.md",
+          "research-delta.json",
+          "research-delta.md"
+        ],
+        "why": "These raw collector outputs contain the unconfirmed claims in full, including claims about named companies. They are retained in local working files and will be published once their items are verified or dropped."
       }
     }
   ],
@@ -115,26 +122,6 @@
         "checked": "MedTech Dive 2026-09-25: Series D \"brings Precision Neuroscience's total funding to $430 million\"; TNW agrees.",
         "evidence_url": "https://www.medtechdive.com/news/precision-neuroscience-raises-250m-for-brain-computer-interface-work/831344/",
         "note": "Baseline 183M + 250M = 433M; the source total is 430M, so the baseline total may have been slightly high. Not a fabrication.",
-        "reviewed": "2026-10-06"
-      },
-      "disposition": "staged"
-    },
-    {
-      "id": "market-delta-002",
-      "artifact": "market-delta",
-      "source_item_id": "M-002",
-      "change": "update",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[name=\"Precision Neuroscience\"].valuation_usd",
-      "summary": "TNW relays a New York Times report of a valuation 'just over' $1B; the company release and MedTech Dive give no valuation. Exact figure not stated.",
-      "source_url": "https://thenextweb.com/news/precision-neuroscience-250m-series-d-1bn-valuation-ackman",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": {
-        "verdict": "FLAGGED",
-        "checked": "TNW: \"values Precision at just over $1bn, The New York Times reported\".",
-        "evidence_url": "https://thenextweb.com/news/precision-neuroscience-250m-series-d-1bn-valuation-ackman",
-        "note": "Exact 1,000,000,000 rounds \"just over\"; second-hand via NYT. The artifact already marks it UNVERIFIED; it should not populate valuation_usd.",
         "reviewed": "2026-10-06"
       },
       "disposition": "staged"
@@ -305,20 +292,6 @@
         "note": "Trial facts confirmed. \"no security architecture document, audit report or bug bounty found\" cannot be supported from a page whose body was not readable.",
         "reviewed": "2026-10-06"
       },
-      "disposition": "staged"
-    },
-    {
-      "id": "market-delta-012",
-      "artifact": "market-delta",
-      "source_item_id": "M-012",
-      "change": "update",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[name=\"Neuralink\"].devices[name=\"N1 Chip\"].units_deployed",
-      "summary": "Aggregators cite 26 (June 2026) and 27 (July 2026 video by a third-party channel). No company or regulator source found. Recommend keeping the baseline value.",
-      "source_url": "https://ground.news/article/neuralink-accelerates-in-2026-with-less-invasive-surgery-samsung-and-27-implanted-patients",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": null,
       "disposition": "staged"
     },
     {
@@ -530,20 +503,6 @@
       "disposition": "staged"
     },
     {
-      "id": "market-delta-024",
-      "artifact": "market-delta",
-      "source_item_id": "M-024",
-      "change": "update",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[name=\"Neurosoft Bioelectronics\"].funding_total_usd",
-      "summary": "A search snippet of MassDevice says the seed round brought total funding to 'more than $20 million'; baseline counts the seed only.",
-      "source_url": "https://www.massdevice.com/neurosoft-bioelectronics-seed-funding-bci/",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": null,
-      "disposition": "staged"
-    },
-    {
       "id": "market-delta-025",
       "artifact": "market-delta",
       "source_item_id": "M-025",
@@ -746,20 +705,6 @@
       "disposition": "staged"
     },
     {
-      "id": "market-delta-036",
-      "artifact": "market-delta",
-      "source_item_id": "M-036",
-      "change": "update",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[name=\"Abbott Neuromodulation\"].security_posture",
-      "summary": "A web search lists an Abbott 'cybersecurity coordinated product disclosure' page, but the page could not be read. Recommend no change until a human opens it.",
-      "source_url": "https://abbott.com/policies/cybersecurity/cybersecurity-coordinated-product-disclosure.html",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": null,
-      "disposition": "staged"
-    },
-    {
       "id": "market-delta-037",
       "artifact": "market-delta",
       "source_item_id": "M-037",
@@ -874,34 +819,6 @@
       "disposition": "staged"
     },
     {
-      "id": "market-delta-043",
-      "artifact": "market-delta",
-      "source_item_id": "M-043",
-      "change": "update",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[name=\"Galvani Bioelectronics\"].status",
-      "summary": "Neurotech Reports (JoJo Platt, 2026-04-30) says operations are frozen except patient and investigator support until 2030. No GSK, Verily or Galvani statement is cited. Recommend keeping 'active' with the existing conflict flag until a primary source confirms.",
-      "source_url": "https://neurotechreports.com/pages/galvani-bioelectronics-shutdown.html",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": null,
-      "disposition": "staged"
-    },
-    {
-      "id": "market-delta-044",
-      "artifact": "market-delta",
-      "source_item_id": "M-044",
-      "change": "update",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[name=\"Galvani Bioelectronics\"].devices[name=\"Splenic Neuromodulation for RA\"].units_deployed",
-      "summary": "Single trade-press source citing unnamed sources close to the company.",
-      "source_url": "https://neurotechreports.com/pages/galvani-bioelectronics-shutdown.html",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": null,
-      "disposition": "staged"
-    },
-    {
       "id": "market-delta-045",
       "artifact": "market-delta",
       "source_item_id": "M-045",
@@ -920,60 +837,6 @@
         "reviewed": "2026-10-06"
       },
       "disposition": "staged"
-    },
-    {
-      "id": "market-delta-046",
-      "artifact": "market-delta",
-      "source_item_id": "M-046",
-      "change": "update",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[name=\"Neuracle Technology\"].valuation_usd",
-      "summary": "36Kr reports a post-money valuation of RMB 4B at the end-2025 round and an investor agreement requiring an IPO valuation of at least RMB 5B. No USD value proposed (single secondary source; FX conversion would be an estimate).",
-      "source_url": "https://eu.36kr.com/en/p/3914507815048580",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": null,
-      "disposition": "staged"
-    },
-    {
-      "id": "market-delta-047",
-      "artifact": "market-delta",
-      "source_item_id": "M-047",
-      "change": "update",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[name=\"Neuracle Technology\"].founded",
-      "summary": "36Kr says the company was founded in 2011; the baseline says 2017. Conflict not resolved.",
-      "source_url": "https://eu.36kr.com/en/p/3914507815048580",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": {
-        "verdict": "FLAGGED",
-        "checked": "Same page: \"BrainCo was founded in 2011\" per the prospectus.",
-        "evidence_url": "https://eu.36kr.com/en/p/3914507815048580",
-        "note": "Same identity caveat; the artifact's UNVERIFIED label is appropriate.",
-        "reviewed": "2026-10-06"
-      },
-      "disposition": "staged"
-    },
-    {
-      "id": "market-delta-048",
-      "artifact": "market-delta",
-      "source_item_id": "M-048",
-      "change": "update",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[name=\"MindMaze\"].security_notes",
-      "summary": "Seen only in a search-result summary.",
-      "source_url": "https://content-astro-web.finanzen.net/nachricht/aktien/mindmaze-therapeutics-completes-organizational-simplification-and-provides-update-on-neuro-io-equity-financing-15861901",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": {
-        "verdict": "BLOCKED",
-        "checked": "Sibling baseline ../neurosecurity/datalake/bci-landscape.json MindMaze security_notes.",
-        "evidence_url": "local baseline file",
-        "note": "Baseline already records \"a small CHF 8.0M rescue equity/convertible-note financing with Neuro.io Group SA (June 2026)\". The proposal's stated current value is wrong and the append duplicates it with a different month.",
-        "reviewed": "2026-10-06"
-      },
-      "disposition": "rejected"
     },
     {
       "id": "market-delta-049",
@@ -1116,40 +979,6 @@
       "disposition": "staged"
     },
     {
-      "id": "market-delta-056",
-      "artifact": "market-delta",
-      "source_item_id": "M-056",
-      "change": "add",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "market_data.market_size_estimates[]",
-      "summary": "Search-result summary of a Business Wire release (Oct 2025): $2.41B in 2025 to $12.11B by 2035, CAGR 15.8%.",
-      "source_url": "https://www.businesswire.com/news/home/20251003011210/en",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": {
-        "verdict": "FLAGGED",
-        "checked": "Arithmetic only (source not fetched): 2.41 to 12.11 over 2025-2035 implies 17.5% CAGR; 15.8% fits 11 periods.",
-        "evidence_url": "https://www.businesswire.com/news/home/20251003011210/en",
-        "note": "Base year may be 2024; keep excluded.",
-        "reviewed": "2026-10-06"
-      },
-      "disposition": "staged"
-    },
-    {
-      "id": "market-delta-057",
-      "artifact": "market-delta",
-      "source_item_id": "M-057",
-      "change": "update",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "market_data.vc_aggregate_by_year[year=2026]",
-      "summary": "No full 2026 year-to-date venture total could be confirmed. A search summary of NewMarketPitch says Q1 2026 was 'nearly $1 billion' and lists $1.56B across 22 disclosed deals for July 2025 to June 2026. No value proposed.",
-      "source_url": "https://newmarketpitch.com/blogs/news/neurotech-funding-analysis",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": null,
-      "disposition": "staged"
-    },
-    {
       "id": "market-delta-058",
       "artifact": "market-delta",
       "source_item_id": "M-058",
@@ -1227,34 +1056,6 @@
         "note": "Inclusion is a scope decision.",
         "reviewed": "2026-10-06"
       },
-      "disposition": "staged"
-    },
-    {
-      "id": "market-delta-062",
-      "artifact": "market-delta",
-      "source_item_id": "M-062",
-      "change": "add",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[]",
-      "summary": "Well-funded company absent from the baseline.",
-      "source_url": "https://en.wikipedia.org/wiki/Fred_Ehrsam",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": null,
-      "disposition": "staged"
-    },
-    {
-      "id": "market-delta-063",
-      "artifact": "market-delta",
-      "source_item_id": "M-063",
-      "change": "add",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[]",
-      "summary": "Candidate absent from the baseline.",
-      "source_url": "https://finder.techleap.nl/news/feed/echo-neurotechnologies-secures-50m-funding",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": null,
       "disposition": "staged"
     },
     {
@@ -1438,46 +1239,6 @@
       "disposition": "staged"
     },
     {
-      "id": "eeg-delta-010",
-      "artifact": "eeg-delta",
-      "source_item_id": null,
-      "change": "add",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[+] name='NextSense'",
-      "summary": "Newly shipping consumer in-ear EEG product (2026); absent from the baseline.",
-      "source_url": "https://www.soundguys.com/nextsense-smartbuds-bring-eeg-brain-sensors-to-wireless-earbuds-for-the-first-time-152745/",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": {
-        "verdict": "BLOCKED",
-        "checked": "eeg-delta.json items[9]: verification UNVERIFIED; company site HTTP 429.",
-        "evidence_url": "eeg-delta.json",
-        "note": "Proposed text writes a \"Verified\" stamp into an UNVERIFIED item.",
-        "reviewed": "2026-10-06"
-      },
-      "disposition": "rejected"
-    },
-    {
-      "id": "eeg-delta-011",
-      "artifact": "eeg-delta",
-      "source_item_id": null,
-      "change": "add",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[+] name='Earable Neuroscience'",
-      "summary": "Consumer EEG headband on sale; absent from the baseline.",
-      "source_url": "https://frenzband.com/",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": {
-        "verdict": "BLOCKED",
-        "checked": "eeg-delta.json items[10]: verification UNVERIFIED; direct fetch returned 429, text from an automated summary.",
-        "evidence_url": "eeg-delta.json",
-        "note": "Same false verification stamp.",
-        "reviewed": "2026-10-06"
-      },
-      "disposition": "rejected"
-    },
-    {
       "id": "eeg-delta-012",
       "artifact": "eeg-delta",
       "source_item_id": null,
@@ -1515,20 +1276,6 @@
         "note": "Panel flagged the Saturday date as suspicious; it is the date openFDA itself reports, so the artifact transcribed it faithfully.",
         "reviewed": "2026-10-06"
       },
-      "disposition": "staged"
-    },
-    {
-      "id": "eeg-delta-014",
-      "artifact": "eeg-delta",
-      "source_item_id": null,
-      "change": "add",
-      "target_file": "datalake/bci-landscape.json",
-      "target_key": "companies[name='InteraXon (Muse)'].devices[+]",
-      "summary": "Current Muse flagship (EEG + fNIRS) missing from the baseline, which stops at Muse S.",
-      "source_url": "https://www.silicon.co.uk/press-release/introducing-muse-s-athena-the-next-evolution-in-cognitive-fitness",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": null,
       "disposition": "staged"
     },
     {
@@ -1877,26 +1624,6 @@
         "checked": "Crossref match; OpenAlex abstract: two datasets, four models, higher success with fewer queries and lower distortion.",
         "evidence_url": "https://api.crossref.org/works/10.1109/LSP.2025.3563446",
         "note": "",
-        "reviewed": "2026-10-06"
-      },
-      "disposition": "staged"
-    },
-    {
-      "id": "research-delta-011",
-      "artifact": "research-delta",
-      "source_item_id": "R-011",
-      "change": "add",
-      "target_file": "osi-of-mind/QIF-RESEARCH-SOURCES.md",
-      "target_key": "section '4. Cybersecurity & BCI Security > Adversarial BCI Attacks & SSVEP Exploitation', new row (ID unassigned; assign at integration)",
-      "summary": "Citation metadata verified, but the finding and its direction could not be checked because no abstract was accessible. Listed for follow-up, not used as support.",
-      "source_url": "https://doi.org/10.1016/j.neucom.2024.128902",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": {
-        "verdict": "CONFIRMED",
-        "checked": "Crossref: Li F et al. 2025, Neurocomputing 616:128902, title matches.",
-        "evidence_url": "https://api.crossref.org/works/10.1016/j.neucom.2024.128902",
-        "note": "Identifier only. No abstract in Crossref/OpenAlex/Semantic Scholar; finding left UNVERIFIED by the artifact, correctly.",
         "reviewed": "2026-10-06"
       },
       "disposition": "staged"
@@ -2582,40 +2309,6 @@
       "disposition": "staged"
     },
     {
-      "id": "research-delta-046",
-      "artifact": "research-delta",
-      "source_item_id": "R-046",
-      "change": "add",
-      "target_file": "osi-of-mind/QIF-RESEARCH-SOURCES.md",
-      "target_key": "section '4. Cybersecurity & BCI Security > Neurophishing & Neural Side-Channel Attacks', new row (ID unassigned; assign at integration)",
-      "summary": "Existence confirmed on the venue page, but no DOI resolved and the finding was not read. Not used as support.",
-      "source_url": "https://www.ndss-symposium.org/ndss2025/accepted-papers/",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": null,
-      "disposition": "staged"
-    },
-    {
-      "id": "research-delta-047",
-      "artifact": "research-delta",
-      "source_item_id": "R-047",
-      "change": "add",
-      "target_file": "osi-of-mind/QIF-RESEARCH-SOURCES.md",
-      "target_key": "section '4. Cybersecurity & BCI Security > Neural Data Privacy & Neurorights', new row (ID unassigned; assign at integration)",
-      "summary": "Citation metadata verified, finding direction not checkable without the abstract. Not used as support.",
-      "source_url": "https://doi.org/10.1109/ICHMS69701.2026.11602273",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": {
-        "verdict": "CONFIRMED",
-        "checked": "Crossref: Tiwari, Arrabito, Davoust, Falk 2026, ICHMS pp. 392-397.",
-        "evidence_url": "https://api.crossref.org/works/10.1109/ICHMS69701.2026.11602273",
-        "note": "Identifier only; no abstract available to me either.",
-        "reviewed": "2026-10-06"
-      },
-      "disposition": "staged"
-    },
-    {
       "id": "research-delta-048",
       "artifact": "research-delta",
       "source_item_id": "R-048",
@@ -2936,26 +2629,6 @@
       "disposition": "staged"
     },
     {
-      "id": "research-delta-064",
-      "artifact": "research-delta",
-      "source_item_id": "R-064",
-      "change": "update",
-      "target_file": "datalake/qtara-registrar.json",
-      "target_key": "techniques[id=QIF-T0009].sources[0] and sources[1]",
-      "summary": "Two of three source strings cannot be tied to a publication on this technique.",
-      "source_url": "https://doi.org/10.1145/3605758.3623497",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": {
-        "verdict": "CONFIRMED",
-        "checked": "Searched Crossref (author Zhang + RF/EMI injection BCI, 2023-06 to 2025-06), OpenAlex (2024; 2023-2025), Semantic Scholar bulk (2023-2025, total 0), arXiv search (no results). No 2024 Zhang paper on RF false-brainwave injection found.",
-        "evidence_url": "https://api.crossref.org/works?query.bibliographic=radio+frequency+injection+false+brainwaves+brain-computer+interface+EEG&query.author=Zhang",
-        "note": "Nearest hits are unrelated: Zhang & Rasmussen 2023 (EM injection on differential signalling) and Hossen, Tu, Hei 2023 (physical signal injection on EEG systems, not Zhang). The same string also labels Professor X in T0016 and ATGAN in T0067, so it is a recurring placeholder. Absence in four indexes supports keeping it UNVERIFIED; it does not prove non-existence. Two Semantic Scholar relevance queries returned HTTP 429.",
-        "reviewed": "2026-10-06"
-      },
-      "disposition": "staged"
-    },
-    {
       "id": "research-delta-065",
       "artifact": "research-delta",
       "source_item_id": "R-065",
@@ -3156,26 +2829,6 @@
       "disposition": "staged"
     },
     {
-      "id": "research-delta-075",
-      "artifact": "research-delta",
-      "source_item_id": "R-075",
-      "change": "update",
-      "target_file": "datalake/qtara-registrar.json",
-      "target_key": "techniques[id=QIF-T0025..T0028].sources",
-      "summary": "Author name in sources differs from the origin field of the same entries and from every Murcia-group paper checked.",
-      "source_url": "https://api.crossref.org/works/10.1109/ACCESS.2020.3017394",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": {
-        "verdict": "CONFIRMED",
-        "checked": "Searched Crossref (author Lopez-Moreno and \"López Moreno\" + BCI/neural cyberattack 2022-2025; author \"López Bernal\" 2024), OpenAlex, Semantic Scholar bulk (total 0), arXiv (no results). No Lopez-Moreno BCI paper found; the only Lopez-Moreno hit is a graphics paper.",
-        "evidence_url": "https://api.crossref.org/works?query.author=Lopez-Moreno&query.bibliographic=neural+cyberattacks+taxonomy+brain-computer+interface+neuronal+jamming+flooding",
-        "note": "Closest Murcia-group 2024 paper: Lopez Madejska, Lopez Bernal, Martinez Perez, Huertas Celdran, \"Impact of neural cyberattacks on a realistic neuronal topology from the primary visual cortex of mice\", Wireless Networks 2024, 10.1007/s11276-023-03649-2. Supports UNVERIFIED; not proof of non-existence.",
-        "reviewed": "2026-10-06"
-      },
-      "disposition": "staged"
-    },
-    {
       "id": "research-delta-076",
       "artifact": "research-delta",
       "source_item_id": "R-076",
@@ -3330,26 +2983,6 @@
         "verdict": "CONFIRMED",
         "checked": "NERVE full text: EEGNet accuracy 0.99 at 3T/10, 0.60 at 5T/10, 0.10 (10-class chance) at 8T/10.",
         "evidence_url": "https://arxiv.org/html/2609.08971v1",
-        "note": "",
-        "reviewed": "2026-10-06"
-      },
-      "disposition": "staged"
-    },
-    {
-      "id": "research-delta-084",
-      "artifact": "research-delta",
-      "source_item_id": "R-084",
-      "change": "add",
-      "target_file": "datalake/qtara-registrar.json",
-      "target_key": "techniques[+] candidate card (no ID or alias; assigned by migration script per .claude/rules/registrar.md)",
-      "summary": "Abstract reports accuracy falling from 97.8% to 58.3% at 1 m, but it could not be confirmed whether this was measured over the air.",
-      "source_url": "https://arxiv.org/abs/2507.21387",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": {
-        "verdict": "CONFIRMED",
-        "checked": "arXiv 2507.21387 abstract; card correctly kept THEORETICAL/UNVERIFIED.",
-        "evidence_url": "https://arxiv.org/abs/2507.21387",
         "note": "",
         "reviewed": "2026-10-06"
       },
@@ -3514,6 +3147,228 @@
         "reviewed": "2026-10-06"
       },
       "disposition": "staged"
+    }
+  ],
+  "held_items": [
+    {
+      "id": "market-delta-002",
+      "artifact": "market-delta",
+      "source_item_id": "M-002",
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "market-delta-012",
+      "artifact": "market-delta",
+      "source_item_id": "M-012",
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "market-delta-024",
+      "artifact": "market-delta",
+      "source_item_id": "M-024",
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "market-delta-036",
+      "artifact": "market-delta",
+      "source_item_id": "M-036",
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "market-delta-043",
+      "artifact": "market-delta",
+      "source_item_id": "M-043",
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "market-delta-044",
+      "artifact": "market-delta",
+      "source_item_id": "M-044",
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "market-delta-046",
+      "artifact": "market-delta",
+      "source_item_id": "M-046",
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "market-delta-047",
+      "artifact": "market-delta",
+      "source_item_id": "M-047",
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "market-delta-048",
+      "artifact": "market-delta",
+      "source_item_id": "M-048",
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "rejected",
+      "why_held": "Rejected by independent review as contradicted by the project's own data."
+    },
+    {
+      "id": "market-delta-056",
+      "artifact": "market-delta",
+      "source_item_id": "M-056",
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "catalogue record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "market-delta-057",
+      "artifact": "market-delta",
+      "source_item_id": "M-057",
+      "change": "update",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "catalogue record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "market-delta-062",
+      "artifact": "market-delta",
+      "source_item_id": "M-062",
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "market-delta-063",
+      "artifact": "market-delta",
+      "source_item_id": "M-063",
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "eeg-delta-010",
+      "artifact": "eeg-delta",
+      "source_item_id": null,
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "rejected",
+      "why_held": "Rejected by independent review as contradicted by the project's own data."
+    },
+    {
+      "id": "eeg-delta-011",
+      "artifact": "eeg-delta",
+      "source_item_id": null,
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "rejected",
+      "why_held": "Rejected by independent review as contradicted by the project's own data."
+    },
+    {
+      "id": "eeg-delta-014",
+      "artifact": "eeg-delta",
+      "source_item_id": null,
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "company record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "research-delta-011",
+      "artifact": "research-delta",
+      "source_item_id": "R-011",
+      "change": "add",
+      "target_file": "osi-of-mind/QIF-RESEARCH-SOURCES.md",
+      "subject": "catalogue record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "research-delta-046",
+      "artifact": "research-delta",
+      "source_item_id": "R-046",
+      "change": "add",
+      "target_file": "osi-of-mind/QIF-RESEARCH-SOURCES.md",
+      "subject": "catalogue record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "research-delta-047",
+      "artifact": "research-delta",
+      "source_item_id": "R-047",
+      "change": "add",
+      "target_file": "osi-of-mind/QIF-RESEARCH-SOURCES.md",
+      "subject": "catalogue record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "research-delta-064",
+      "artifact": "research-delta",
+      "source_item_id": "R-064",
+      "change": "update",
+      "target_file": "datalake/qtara-registrar.json",
+      "subject": "catalogue record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "research-delta-075",
+      "artifact": "research-delta",
+      "source_item_id": "R-075",
+      "change": "update",
+      "target_file": "datalake/qtara-registrar.json",
+      "subject": "catalogue record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "research-delta-084",
+      "artifact": "research-delta",
+      "source_item_id": "R-084",
+      "change": "add",
+      "target_file": "datalake/qtara-registrar.json",
+      "subject": "catalogue record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
     },
     {
       "id": "research-delta-093",
@@ -3521,13 +3376,9 @@
       "source_item_id": "R-093",
       "change": "add",
       "target_file": "datalake/research-registry.json",
-      "target_key": "legislation[+] id='connecticut-sb1295'",
-      "summary": "Not confirmed at a primary source.",
-      "source_url": "https://www.cga.ct.gov/asp/cgabillstatus/cgabillstatus.asp?selBillType=Bill&which_year=2025&bill_num=1295",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": null,
-      "disposition": "staged"
+      "subject": "catalogue record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
     },
     {
       "id": "research-delta-094",
@@ -3535,13 +3386,10 @@
       "source_item_id": "R-094",
       "change": "add",
       "target_file": "datalake/research-registry.json",
-      "target_key": "standards[+] id='iso-iec-8663'",
-      "summary": "Not confirmed at a primary source.",
-      "source_url": "https://www.iso.org/standard/83268.html",
-      "accessed": "2026-10-06",
-      "verification": "UNVERIFIED",
-      "independent_review": null,
-      "disposition": "staged"
+      "subject": "catalogue record",
+      "disposition": "held-unverified",
+      "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
     }
-  ]
+  ],
+  "publication_policy": "Only items confirmed against a fetched source are published here. Items that could not be confirmed, and items an independent review contradicted, are held: their claim text and sources are not published, and only the fact that they exist is recorded. Several concern named companies, so an unconfirmed claim is not put into a public repository."
 }
