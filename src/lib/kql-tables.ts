@@ -170,6 +170,7 @@ function buildTechniques(): Row[] {
       id: t.id,
       name: t.attack || t.name,
       tactic: t.tactic,
+      parent_id: t.parent_id || '',
       severity: t.severity,
       status: t.status,
       niss_score: t.niss?.score || 0,

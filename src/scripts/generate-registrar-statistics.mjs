@@ -158,6 +158,11 @@ const statistics = {
   total_domains: Array.isArray(registrar.domains)
     ? registrar.domains.length
     : Object.keys(registrar.domains ?? {}).length,
+  // Top-level techniques versus sub-techniques, which carry a parent_id.
+  by_level: {
+    top_level: techniques.filter((technique) => !technique.parent_id).length,
+    child: techniques.filter((technique) => technique.parent_id).length,
+  },
   by_tactic: sortTally(countBy(techniques, 'tactic')),
   by_status: sortTally(countBy(techniques, 'status')),
   by_severity: sortTally(countBy(techniques, 'severity')),

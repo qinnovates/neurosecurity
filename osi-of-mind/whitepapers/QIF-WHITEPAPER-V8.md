@@ -101,7 +101,7 @@ The window for this is finite. Once devices ship at scale with baked-in architec
 
 This paper does three things.
 
-**First, it maps the full attack surface** of brain-computer interfaces — not hypothetically, but technically. 165 attack techniques across 8 domains, scored with a neural-specific severity system (NISS), cataloged in a dual-use registry (TARA) that bridges security and medicine. Every technique that can harm can also heal. The boundary between the two is consent, dosage, and oversight. The Neural Impact Chain traces each attack from physical mechanism through neural band to clinical outcome, mapped to DSM-5-TR diagnostic categories for threat modeling purposes.
+**First, it maps the full attack surface** of brain-computer interfaces — not hypothetically, but technically. 174 attack techniques across 8 domains, scored with a neural-specific severity system (NISS), cataloged in a dual-use registry (TARA) that bridges security and medicine. Every technique that can harm can also heal. The boundary between the two is consent, dosage, and oversight. The Neural Impact Chain traces each attack from physical mechanism through neural band to clinical outcome, mapped to DSM-5-TR diagnostic categories for threat modeling purposes.
 
 **Second, it proposes the architecture.** An 11-band security model (the QIF Hourglass) spanning from quantum physics to social engineering. A post-quantum encrypted wire protocol (NSP). A rendering pipeline (Runemate) that eliminates the browser, the app store, and every unnecessary layer between patient and experience. A passwordless authentication system (PQKC + Biomarker MFA) built on cryptographic identity and biological uniqueness. A five-tier guardrail model distinguishing physics constraints from policy decisions. A neural operating system mapped to the Linux model that has proven itself across five decades. A patient terminal that gives direct, scriptable, auditable control — not through a prescribed interface, but through autodidactic navigation where each patient designs their own way of interacting with the system.
 
@@ -193,7 +193,7 @@ v6.3 established the threat model, scoring system, and wire protocol. v8.0 answe
 | v6.3 (What) | v8.0 (Who + How) |
 |-------------|-----------------|
 | QI equation measures integrity | Five-tier guardrail model defines who sets the thresholds |
-| TARA catalogs 165 techniques | Governance RACI maps accountability for every scenario |
+| TARA catalogs 174 techniques | Governance RACI maps accountability for every scenario |
 | NISS scores severity | Autonomy spectrum classifies when intervention is justified |
 | NSP encrypts the wire | Passwordless auth (PQKC + biomarker MFA) defines identity |
 | Runemate compresses content | Neural terminal gives patients direct control |
@@ -243,7 +243,7 @@ New sections (12-18) address: patient sovereignty, the neural terminal, autonomy
 - [6. Attack Surface Analysis](#6-attack-surface-analysis)
   - 6.1 Five Cross-Domain Attack Coupling Mechanisms (A-E)
   - 6.2 Detection Boundaries (honest assessment)
-  - 6.3 Unified Threat Taxonomy (165 techniques, 17 tactics, 8 domains)
+  - 6.3 Unified Threat Taxonomy (174 techniques, 17 tactics, 8 domains)
   - 6.4 QIF Locus Taxonomy (BCI-native classification)
   - 6.5 NISS v1.1 — Neural Impact Scoring System
   - 6.6 Case Study: Algorithmic Psychosis Induction
@@ -338,7 +338,7 @@ Framework:  QIF Hourglass (11 bands) — defines WHAT to protect
                 ├── 5 Attack Mechanisms (A-E) — HOW attacks propagate
                 │
                 ├── Locus Taxonomy (8 domains, 17 tactics) — CLASSIFIES threats
-                │   └── 165 techniques cataloged
+                │   └── 174 techniques cataloged
                 │
                 ├── NISS v1.1 — SCORES severity (neural-specific, not CVSS)
                 │
@@ -439,7 +439,7 @@ Governance: RACI Matrix — WHO DECIDES                        ← NEW in v8.0
 | `/threat-models/tara/` | Full TARA technique browser | Section 6.3-6.7 |
 | `/threat-models/analysis/` | Neural Impact Chain analysis | Section 6.6 |
 | `/threat-models/scoring/` | NISS scoring details | Section 6.5 |
-| `/TARA/[id]` | Individual technique pages (165) | Section 6.4 |
+| `/TARA/[id]` | Individual technique pages (174) | Section 6.4 |
 | `/whitepaper/` | Whitepaper page | This document |
 | `/research/` | Research hub | Appendix C |
 
@@ -447,7 +447,7 @@ Governance: RACI Matrix — WHO DECIDES                        ← NEW in v8.0
 
 | Data File | Contents | Whitepaper Section |
 |-----------|---------|-------------------|
-| `datalake/qtara-registrar.json` | 165 techniques, full registry | Section 6.3-6.7 |
+| `datalake/qtara-registrar.json` | 174 techniques, full registry | Section 6.3-6.7 |
 | `datalake/qif-dsm-mappings.json` | DSM-5-TR → NISS mappings | Section 6.6 |
 | `datalake/qtara-registrar.json` (`.niss` field per technique) | NISS scoring data | Section 6.5 |
 | `src/data/qif-timeline.json` | Framework milestone timeline | All sections |
@@ -465,7 +465,7 @@ Visualizations that exist on the site and can be referenced/embedded in the whit
 |--------------|----------|-------|
 | 3D Hourglass | `/` hero section, `/vision/` | 11-band architecture, band widths, I0 bottleneck |
 | Brain Atlas | `/vision/` BCI section | 7 neural bands (N7–N1) mapped to brain anatomy, technique counts per region |
-| TARA Technique Browser | `/threat-models/tara/` | Searchable/filterable 165-technique registry |
+| TARA Technique Browser | `/threat-models/tara/` | Searchable/filterable 174-technique registry |
 | Neural Impact Chain | `/threat-models/analysis/` | DAG showing attack propagation through bands |
 | NISS Scoring | `/threat-models/scoring/` | Severity scoring breakdown |
 | Neuroethics Timeline | `/vision/` | Key neuroethics milestones |
@@ -481,7 +481,7 @@ Visualizations that exist on the site and can be referenced/embedded in the whit
 
 | Asset | Format | Records | Location |
 |-------|--------|---------|----------|
-| TARA Registry | JSON | 165 techniques | `datalake/qtara-registrar.json` |
+| TARA Registry | JSON | 174 techniques | `datalake/qtara-registrar.json` |
 | DSM-5-TR Mappings | JSON | 45 diagnoses mapped | `datalake/qif-dsm-mappings.json` |
 | NISS Scores | JSON | 139 severity records | `datalake/qtara-registrar.json` (`.niss` field per technique) |
 | Research Registry | JSON | 97 entities | `datalake/research-registry.json` |
@@ -506,7 +506,7 @@ Visualizations that exist on the site and can be referenced/embedded in the whit
 | `governance/INFORMED_CONSENT_FRAMEWORK.md` | 446 | Consent protocols (incl. pediatric) |
 | `governance/NEUROSECURITY_GOVERNANCE.md` | — | Unified governance framework |
 | `governance/TRANSPARENCY.md` | 275 | Human-AI collaboration audit trail |
-| `governance/MATURITY.md` | 165 | Validation status and roadmap |
+| `governance/MATURITY.md` | 174 | Validation status and roadmap |
 | `governance/NEUROETHICS_LEGISLATION_SURVEY.md` | — | Global regulatory landscape |
 | `governance/POST_DEPLOYMENT_ETHICS.md` | — | Post-deployment monitoring |
 | `governance/ACCESSIBILITY.md` | — | Inclusive design requirements |
@@ -1312,7 +1312,7 @@ The new sections (12-18) complete the arc:
 | 11-band hourglass (Section 4) | Neural OS maps each band to a system layer (Section 16) |
 | QI equation (Section 5) | Five-tier model defines who sets the thresholds QI measures against (Section 14) |
 | 5 attack mechanisms (Section 6.1) | Terminal eliminates 3 attack surface layers (browser, app store, window manager) (Section 12) |
-| Locus Taxonomy + 165 techniques (Section 6.3-6.4) | RACI maps accountability for detecting and responding to each technique (Section 18.1) |
+| Locus Taxonomy + 174 techniques (Section 6.3-6.4) | RACI maps accountability for detecting and responding to each technique (Section 18.1) |
 | NISS scoring (Section 6.5) | Autonomy spectrum defines when intervention is justified based on severity (Section 14.1) |
 | Algorithmic Psychosis case study (Section 6.6) | Escalation scenario extends the case study pattern to motor→cognitive creep (Section 14.2) |
 | TARA dual-use registry (Section 6.7) | Governance projection gets neurorights ACL enforcement (Section 15.6) |
