@@ -23,6 +23,8 @@
     "citations": "node src/scripts/generate-citations.mjs",
     "citations:check": "node src/scripts/generate-citations.mjs --check",
     "compute:chains": "node datalake/src/scripts/compute-impact-chains.mjs",
+    "cve:coverage": "node src/scripts/recompute-cve-coverage.mjs",
+    "cve:gaps": "node src/scripts/generate-cve-coverage-gaps.mjs",
     "eeg:list": "python3 datalake/src/scripts/download-eeg-samples.py --list",
     "eeg:download": "python3 datalake/src/scripts/download-eeg-samples.py --all",
     "eeg:download:adhd": "python3 datalake/src/scripts/download-eeg-samples.py --dataset adhd-mendeley-resting",

@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-06T22:13:38.261903+00:00",
+    "generated": "2026-10-06T23:12:29.714798+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
     "total_datasets": 32,
-    "total_rows": 7868
+    "total_rows": 7920
   },
   "datasets": {
     "techniques": {
@@ -393,8 +393,8 @@
       "source": "datalake/parquet/receptors.parquet"
     },
     "cve_mappings": {
-      "rows": 55,
-      "columns": 8,
+      "rows": 107,
+      "columns": 12,
       "column_names": [
         "cve_id",
         "product",
@@ -403,9 +403,13 @@
         "description",
         "tara_techniques",
         "category",
-        "validation"
+        "validation",
+        "source_url",
+        "accessed",
+        "verification",
+        "note"
       ],
-      "size_bytes": 7301,
+      "size_bytes": 24195,
       "compression": "zstd",
       "source": "datalake/parquet/cve_mappings.parquet"
     },
