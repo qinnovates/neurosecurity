@@ -8,7 +8,7 @@
  *   node scripts/timeline-check.mjs --fix      # auto-update current_stats + as_of
  */
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -27,6 +27,9 @@ const TIMELINE_PATH = resolve(ROOT, 'src/data/qif-timeline.json');
 const REGISTRY_PATH = resolve(ROOT, 'datalake/qtara-registrar.json');
 const LANDSCAPE_PATH = resolve(ROOT, 'datalake/bci-landscape.json');
 const SOURCES_PATH = resolve(ROOT, 'osi-of-mind/QIF-RESEARCH-SOURCES.md');
+const FIELD_JOURNAL_PATH = resolve(ROOT, 'osi-of-mind/QIF-FIELD-JOURNAL.md');
+const BLOG_DIR = resolve(ROOT, 'research/blog');
+const DSM_MAPPINGS_PATH = resolve(ROOT, 'datalake/qif-dsm-mappings.json');
 const DERIVATION_LOG_PATH = resolve(ROOT, 'osi-of-mind/QIF-DERIVATION-LOG.md');
 const SDK_MANIFEST_PATH = resolve(ROOT, 'datalake/qtara/pyproject.toml');
 const CONSTANTS_PATH = resolve(ROOT, 'src/lib/qif-constants.ts');
@@ -36,6 +39,16 @@ const CONSTRAINTS_PATH = resolve(ROOT, 'src/lib/bci-limits-constants.ts');
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+/** Reads a text file, or undefined if it cannot be read. */
+function readFileSafe(path) {
+  try {
+    return readFileSync(path, 'utf8');
+  } catch (error) {
+    console.warn(`  [WARN] Could not read ${path}: ${error.message}`);
+    return undefined;
+  }
+}
+
 /** Counts regex matches in a text file; undefined (reported as SKIP) if the file cannot be read. */
 function countMatches(path, pattern) {
   try {
@@ -139,6 +152,28 @@ if (landscape?.version) actual.landscape_dataset_version = `v${landscape.version
 actual.sdk_version = readVersion(SDK_MANIFEST_PATH, /^version\s*=\s*"([^"]+)"/m);
 actual.whitepaper_version = readVersion(CONSTANTS_PATH, /LATEST_WHITEPAPER_VERSION\s*=\s*'([^']+)'/);
 
+// Hourglass bands and DSM-5 codes come from the data they describe
+actual.hourglass_bands = countMatches(CONSTANTS_PATH, /^\s*\{\s*id:\s*'[NIS]\d'/gm) || undefined;
+// Same source and definition as the Atlas hub's "DSM-5 Codes" stat, so the two cannot diverge.
+const dsmMappings = readJSON(DSM_MAPPINGS_PATH);
+if (dsmMappings?.diagnostic_clusters) {
+  actual.dsm5_diagnoses_mapped = Object.values(dsmMappings.diagnostic_clusters)
+    .reduce((total, cluster) => total + (cluster.conditions?.length ?? 0), 0);
+}
+if (registry?.techniques) {
+  actual.techniques_with_dsm5 = registry.techniques.filter((technique) => technique.tara?.dsm5?.primary?.length).length;
+}
+
+// Field journal entries (unique numbered headings) and blog posts (committed markdown)
+actual.field_journal_entries = new Set(
+  (readFileSafe(FIELD_JOURNAL_PATH)?.match(/^#+\s*Entry\s*(\d+)/gm) ?? []).map((heading) => heading.match(/\d+/)[0]),
+).size || undefined;
+try {
+  actual.blog_posts = readdirSync(BLOG_DIR).filter((name) => /\.mdx?$/.test(name)).length;
+} catch (error) {
+  console.warn(`  [WARN] Could not read ${BLOG_DIR}: ${error.message}`);
+}
+
 // Research sources (ID rows in the sources catalog) and derivation log entries
 actual.research_sources = countMatches(SOURCES_PATH, /^\| *[A-Z]{1,3}\d+ *\|/gm);
 // Numbered entries only: the "Entry Index" heading also starts with "## Entry".
@@ -165,6 +200,7 @@ const fields = [
   'physics_constraints', 'research_sources', 'derivation_log_entries',
   'techniques_niss_scored', 'tara_domains', 'bci_companies',
   'niss_version', 'registrar_version', 'landscape_dataset_version', 'sdk_version', 'whitepaper_version',
+  'hourglass_bands', 'dsm5_diagnoses_mapped', 'techniques_with_dsm5', 'field_journal_entries', 'blog_posts',
 ];
 
 for (const field of fields) {

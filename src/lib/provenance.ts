@@ -73,6 +73,7 @@ const FIGURE_LABELS: Record<string, string> = {
   derivation_log_entries: 'Derivation log entries',
   field_journal_entries: 'Field journal entries',
   blog_posts: 'Blog posts',
+  techniques_with_dsm5: 'Techniques with a DSM-5-TR mapping',
   cross_ai_validations: 'Cross-AI validation runs',
   niss_version: 'NISS specification',
   registrar_version: 'TARA registrar dataset',
@@ -107,6 +108,11 @@ const FIGURE_SOURCES: Record<string, string> = {
   derivation_log_entries: 'osi-of-mind/QIF-DERIVATION-LOG.md',
   sdk_version: 'datalake/qtara/pyproject.toml',
   whitepaper_version: 'src/lib/qif-constants.ts',
+  hourglass_bands: 'src/lib/qif-constants.ts',
+  dsm5_diagnoses_mapped: 'datalake/qif-dsm-mappings.json',
+  techniques_with_dsm5: 'datalake/qtara-registrar.json',
+  field_journal_entries: 'osi-of-mind/QIF-FIELD-JOURNAL.md',
+  blog_posts: 'research/blog/',
 };
 
 function prettifyKey(key: string): string {
