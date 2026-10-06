@@ -1,13 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { AttackChain, ChainStep } from './AttackChainViz';
+import type { AttackChain, ChainStep, ClinicalParallel } from './AttackChainViz';
 import { ROLE_CONFIG } from './chain-constants';
 
 const TARA_CHAINS_PATH = 'datalake/tara-chains.json';
+const TARA_REGISTRAR_PATH = 'datalake/qtara-registrar.json';
 
 export class TaraChainsFormatError extends Error {
   constructor(detail: string) {
-    super(`${TARA_CHAINS_PATH} is not in the expected shape: ${detail}. Fix the file or update load-tara-chains.ts.`);
+    super(`${TARA_CHAINS_PATH} is not usable: ${detail}. Fix the file or update load-tara-chains.ts.`);
     this.name = 'TaraChainsFormatError';
   }
 }
@@ -27,10 +28,14 @@ function isChainStep(value: unknown): value is ChainStep {
     typeof value.technique_id === 'string' &&
     typeof value.tara_alias === 'string' &&
     typeof value.role === 'string' &&
-    value.role in ROLE_CONFIG &&
+    Object.hasOwn(ROLE_CONFIG, value.role) &&
     typeof value.action === 'string' &&
     typeof value.detection_window === 'string'
   );
+}
+
+function isOptionalClinicalParallel(value: unknown): value is ClinicalParallel | undefined {
+  return value === undefined || (isRecord(value) && typeof value.name === 'string' && typeof value.note === 'string');
 }
 
 function isAttackChain(value: unknown): value is AttackChain {
@@ -42,12 +47,20 @@ function isAttackChain(value: unknown): value is AttackChain {
     typeof value.drift_profile === 'string' &&
     Array.isArray(value.steps) &&
     value.steps.every(isChainStep) &&
+    isOptionalClinicalParallel(value.clinical_parallel) &&
     isStringArray(value.defenses)
   );
 }
 
-/** Validates parsed chain data so a malformed file fails the build with a clear message. */
-export function parseTaraChains(raw: unknown): AttackChain[] {
+function findUnknownTechnique(chain: AttackChain, knownTechniqueIds: ReadonlySet<string>): string | undefined {
+  return chain.steps.find((step) => !knownTechniqueIds.has(step.technique_id))?.technique_id;
+}
+
+/**
+ * Validates parsed chain data so a bad file fails the build with a clear message.
+ * Every step must name a technique that exists in the catalog.
+ */
+export function parseTaraChains(raw: unknown, knownTechniqueIds: ReadonlySet<string>): AttackChain[] {
   if (!isRecord(raw) || !Array.isArray(raw.chains)) {
     throw new TaraChainsFormatError('the top level must be an object with a "chains" array');
   }
@@ -55,11 +68,32 @@ export function parseTaraChains(raw: unknown): AttackChain[] {
     if (!isAttackChain(chain)) {
       throw new TaraChainsFormatError(`chains[${index}] is missing a required field or has a step with an unknown role`);
     }
+    const unknownTechnique = findUnknownTechnique(chain, knownTechniqueIds);
+    if (unknownTechnique !== undefined) {
+      throw new TaraChainsFormatError(`chains[${index}] (${chain.chain_id}) references ${unknownTechnique}, which is not in ${TARA_REGISTRAR_PATH}`);
+    }
     return chain;
   });
 }
 
-/** Build-time loader for the attack-chain catalog. Throws if the file is missing or malformed. */
+function readJson(relativePath: string): unknown {
+  const contents = fs.readFileSync(path.resolve(relativePath), 'utf-8');
+  try {
+    return JSON.parse(contents);
+  } catch (error) {
+    throw new TaraChainsFormatError(`${relativePath} is not valid JSON (${error instanceof Error ? error.message : String(error)})`);
+  }
+}
+
+function readCatalogTechniqueIds(): Set<string> {
+  const registrar = readJson(TARA_REGISTRAR_PATH);
+  if (!isRecord(registrar) || !Array.isArray(registrar.techniques)) {
+    throw new TaraChainsFormatError(`${TARA_REGISTRAR_PATH} has no "techniques" array to check chain steps against`);
+  }
+  return new Set(registrar.techniques.filter(isRecord).map((technique) => String(technique.id)));
+}
+
+/** Build-time loader for the attack-chain catalog. Throws if a file is missing or malformed. */
 export function loadTaraChains(): AttackChain[] {
-  return parseTaraChains(JSON.parse(fs.readFileSync(path.resolve(TARA_CHAINS_PATH), 'utf-8')));
+  return parseTaraChains(readJson(TARA_CHAINS_PATH), readCatalogTechniqueIds());
 }

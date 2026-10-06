@@ -174,8 +174,11 @@ export default function SignalBench({ events }: SignalBenchProps) {
       <div className="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         <div className="flex items-start justify-between gap-4">
           <div
-            onMouseEnter={() => setIsReadoutInUse(true)}
-            onMouseLeave={() => setIsReadoutInUse(false)}
+            onPointerEnter={(event) => {
+              // A tap also fires pointerenter and would leave the strip held with no visible cause.
+              if (event.pointerType === 'mouse') setIsReadoutInUse(true);
+            }}
+            onPointerLeave={() => setIsReadoutInUse(false)}
             onFocus={() => setIsReadoutInUse(true)}
             onBlur={() => setIsReadoutInUse(false)}
           >
@@ -184,7 +187,6 @@ export default function SignalBench({ events }: SignalBenchProps) {
           {!hasReducedMotion && (
             <button
               type="button"
-              aria-pressed={isPaused}
               onClick={() => setIsPaused((current) => !current)}
               className="glass shrink-0 rounded-lg px-3 py-1 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
             >

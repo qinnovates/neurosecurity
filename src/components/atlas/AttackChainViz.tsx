@@ -42,6 +42,9 @@ interface Props {
 }
 
 const NODE_W = 140, NODE_H = 72, GAP_X = 48, PAD_X = 24, PAD_Y = 24;
+// Node fills and the tooltip are fixed colours in both themes, so text on them is fixed too.
+const ON_NODE_TEXT = '#475569';
+const ON_TOOLTIP_TEXT = '#cbd5e1';
 // Gaps leave room for the 9px lane labels drawn just above each lane.
 const HEADER_H = 48, DETECT_H = 20, DETECT_GAP = 18, CLINICAL_H = 28, CLINICAL_GAP = 18;
 
@@ -206,7 +209,7 @@ function SvgDiagram({ chain }: Props) {
               {s.tara_alias}
             </text>
             {/* Role label */}
-            <text x={x + NODE_W / 2} y={nodeY + 42} textAnchor="middle" fill="var(--color-text-muted)" fontSize={9}>
+            <text x={x + NODE_W / 2} y={nodeY + 42} textAnchor="middle" fill={ON_NODE_TEXT} fontSize={9}>
               {role.icon} {role.label}
             </text>
             {/* Domain label */}
@@ -269,7 +272,7 @@ function SvgDiagram({ chain }: Props) {
             <text x={tx + 8} y={ty + 30} fill="#94a3b8" fontSize={8}>
               {tooltip.step.action.length > 50 ? tooltip.step.action.slice(0, 50) + '...' : tooltip.step.action}
             </text>
-            <text x={tx + 8} y={ty + 44} fill="var(--color-text-muted)" fontSize={7}>
+            <text x={tx + 8} y={ty + 44} fill={ON_TOOLTIP_TEXT} fontSize={7}>
               Detection: {tooltip.step.detection_window.length > 40 ? tooltip.step.detection_window.slice(0, 40) + '...' : tooltip.step.detection_window}
             </text>
           </g>

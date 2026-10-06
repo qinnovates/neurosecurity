@@ -71,7 +71,7 @@ describe('SignalBench', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Pause animation' }));
     expect(cancelAnimationFrame).toHaveBeenCalled();
     vi.mocked(requestAnimationFrame).mockClear();
-    expect(screen.getByRole('button', { name: 'Play animation' }).getAttribute('aria-pressed')).toBe('true');
+    expect(screen.getByRole('button', { name: 'Play animation' }).hasAttribute('aria-pressed')).toBe(false);
     expect(requestAnimationFrame).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole('button', { name: 'Play animation' }));
     expect(requestAnimationFrame).toHaveBeenCalled();
@@ -84,6 +84,17 @@ describe('SignalBench', () => {
     fireEvent.focus(screen.getByRole('link', { name: 'QIF-T0001' }));
     expect(cancelAnimationFrame).toHaveBeenCalled();
     expect(requestAnimationFrame).not.toHaveBeenCalled();
+  });
+
+  it('holds for a mouse hovering the readout but not for a touch', () => {
+    stubBrowser(false);
+    render(<SignalBench events={EVENTS} />);
+    const readout = screen.getByRole('link', { name: 'QIF-T0001' }).closest('div') as HTMLElement;
+    vi.mocked(cancelAnimationFrame).mockClear();
+    fireEvent.pointerEnter(readout, { pointerType: 'touch' });
+    expect(cancelAnimationFrame).not.toHaveBeenCalled();
+    fireEvent.pointerEnter(readout, { pointerType: 'mouse' });
+    expect(cancelAnimationFrame).toHaveBeenCalled();
   });
 
   it('passes labels that carry each technique status', () => {
