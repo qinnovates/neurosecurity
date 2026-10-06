@@ -3,93 +3,100 @@
   "generated_from": "qif-lab/src/config.py",
   "framework": "Quantified Interconnection Framework (QIF) for Neural Security",
   "statistics": {
+    "generator": "src/scripts/generate-registrar-statistics.mjs",
+    "generated": "2026-10-06",
     "total_techniques": 165,
     "total_tactics": 17,
     "total_domains": 8,
     "by_tactic": {
-      "QIF-N.IJ": 11,
-      "QIF-P.DS": 21,
+      "QIF-B.EV": 6,
+      "QIF-B.IN": 7,
+      "QIF-C.EX": 17,
+      "QIF-C.IM": 6,
       "QIF-D.HV": 12,
-      "QIF-N.MD": 24,
       "QIF-E.RD": 13,
       "QIF-M.SV": 9,
+      "QIF-N.IJ": 11,
+      "QIF-N.MD": 24,
+      "QIF-N.NM": 3,
       "QIF-N.SC": 3,
-      "QIF-C.EX": 17,
-      "QIF-B.IN": 7,
-      "QIF-C.IM": 6,
-      "QIF-B.EV": 6,
-      "QIF-S.RP": 5,
-      "QIF-S.HV": 16,
-      "QIF-S.FP": 4,
+      "QIF-P.DS": 21,
       "QIF-S.CH": 6,
-      "QIF-S.SC": 2,
-      "QIF-N.NM": 3
+      "QIF-S.FP": 4,
+      "QIF-S.HV": 16,
+      "QIF-S.RP": 5,
+      "QIF-S.SC": 2
     },
     "by_status": {
       "CONFIRMED": 27,
-      "EMERGING": 26,
       "DEMONSTRATED": 43,
-      "THEORETICAL": 67,
+      "EMERGING": 26,
       "PLAUSIBLE": 1,
-      "SPECULATIVE": 1
+      "SPECULATIVE": 1,
+      "THEORETICAL": 67
     },
     "by_severity": {
-      "high": 72,
       "critical": 32,
-      "medium": 57,
-      "low": 4
+      "high": 72,
+      "low": 4,
+      "medium": 57
     },
     "by_ui_category": {
-      "SI": 17,
-      "DS": 23,
-      "SE": 24,
+      "CI": 19,
       "DM": 37,
-      "PS": 7,
+      "DS": 23,
       "EX": 28,
       "PE": 10,
-      "CI": 19
+      "PS": 7,
+      "SE": 24,
+      "SI": 17
     },
     "by_niss_severity": {
       "critical": 0,
       "high": 20,
-      "medium": 59,
       "low": 59,
+      "medium": 59,
       "none": 27
     },
     "niss_cvss_mapping": {
+      "techniques_scored": 139,
+      "techniques_unscored": 26,
       "pins_flagged": 40,
       "by_gap_group": {
-        "1": 12,
-        "2": 28,
-        "3": 58
-      }
+        "1": 14,
+        "2": 30,
+        "3": 59
+      },
+      "techniques_without_cvss": 62
     },
     "tara": {
-      "version": "1.6",
-      "enriched_techniques": 135,
+      "version": "1.8",
+      "enriched_techniques": 165,
       "dual_use_breakdown": {
-        "confirmed": 79,
-        "probable": 18,
-        "possible": 9,
-        "silicon_only": 29
+        "confirmed": 102,
+        "possible": 10,
+        "probable": 19,
+        "silicon_only": 34
       },
-      "techniques_with_clinical_analog": 104,
-      "techniques_silicon_only": 29,
+      "techniques_with_clinical_analog": 130,
+      "techniques_silicon_only": 34,
       "dsm5": {
         "version": "1.0",
-        "techniques_with_dsm5": 135,
-        "unique_dsm_codes": 15,
+        "techniques_with_dsm5_block": 139,
+        "techniques_with_dsm5": 76,
+        "unique_dsm_codes": 28,
+        "unique_dsm_codes_including_secondary": 48,
         "cluster_breakdown": {
-          "motor_neurocognitive": 26,
           "cognitive_psychotic": 22,
           "mood_trauma": 27,
-          "non_diagnostic": 51,
+          "motor_neurocognitive": 26,
+          "non_diagnostic": 55,
           "persistent_personality": 9
         },
         "risk_class_breakdown": {
           "direct": 75,
           "indirect": 11,
-          "none": 49
+          "none": 53
         }
       },
       "neurorights_mapped": 135
@@ -108,16 +115,18 @@
         "Ienca & Andorno 2017 (original 4: MP, CL, MI, PC)",
         "QIF Framework (MI extended with signal dynamics, MP extended with data lifecycle)"
       ],
+      "techniques_mapped": 135,
+      "techniques_unmapped": 30,
       "techniques_by_right": {
-        "MP": 118,
-        "CL": 77,
-        "MI": 91,
-        "DI": 63,
-        "PC": 79,
-        "IDA": 5
+        "CL": 85,
+        "DI": 76,
+        "IDA": 5,
+        "MI": 101,
+        "MP": 106,
+        "PC": 79
       },
       "cci_stats": {
-        "mean": 0.75,
+        "mean": 0.89,
         "max": 2.25,
         "min": 0.1,
         "techniques_above_2": 6
@@ -126,24 +135,26 @@
     "regulatory": {
       "version": "1.0",
       "framework": "FDORA Section 3305 / Section 524B",
+      "techniques_mapped": 135,
+      "techniques_unmapped": 30,
       "cyber_device_techniques": 68,
       "non_cyber_device_techniques": 67,
       "prong_failure_reasons": {
-        "software": 61,
-        "network_connectable": 26
+        "network_connectable": 26,
+        "software": 61
       },
       "techniques_per_requirement": {
-        "TM": 135,
-        "VA": 134,
+        "PM": 130,
         "SA": 97,
         "SBOM": 61,
-        "PM": 130
+        "TM": 135,
+        "VA": 134
       },
       "coverage_stats": {
         "mean": 0.39,
         "min": 0.1,
         "max": 0.8,
-        "below_0.5": 74
+        "below_0_5": 74
       },
       "top_gaps": {
         "CVSS cannot express neural-specific impacts": 91,
@@ -159,12 +170,21 @@
       "version": "1.0",
       "analysis_date": "2026-02-18",
       "constraint_system_ref": "QIF Derivation Log Entry 60",
+      "techniques_assessed": 161,
+      "techniques_unassessed": 4,
       "by_tier": {
-        "feasible_now": 61,
-        "mid_term": 10,
-        "far_term": 2,
-        "no_physics_gate": 18,
-        "near_term": 11
+        "far_term": 4,
+        "feasible_now": 99,
+        "mid_term": 13,
+        "near_term": 22,
+        "no_physics_gate": 23
+      },
+      "by_tier_id": {
+        "0": 104,
+        "1": 22,
+        "2": 13,
+        "3": 4,
+        "X": 18
       },
       "notes": [
         "Tier 0 (feasible_now): Attack hardware exists today",
@@ -176,12 +196,21 @@
     },
     "by_origin": {
       "literature": 49,
-      "qif_recontextualized": 46,
       "neuroethics_formalized": 3,
-      "qif_theoretical": 6,
-      "qif_chain_synthesis": 5
+      "qif_chain_synthesis": 5,
+      "qif_recontextualized": 46,
+      "qif_theoretical": 32
     },
-    "tara_taxonomy_version": "1.0"
+    "tara_taxonomy_version": "1.0",
+    "editorial_fields": [
+      "neurorights.taxonomy — the neurorights abbreviation glossary",
+      "neurorights.sources — the citations the taxonomy rests on",
+      "regulatory.framework — the name of the legal framework the mapping targets",
+      "physics_feasibility.constraint_system_ref — provenance pointer to the derivation log",
+      "physics_feasibility.analysis_date — when the feasibility analysis was performed",
+      "physics_feasibility.notes — prose definitions of the feasibility tiers",
+      "tara.dsm5.version, neurorights.version, regulatory.version, physics_feasibility.version, tara_taxonomy_version — enrichment-schema versions"
+    ]
   },
   "changelog": [
     {

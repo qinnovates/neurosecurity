@@ -21,6 +21,9 @@ paths:
 6.  TypeScript:  src/lib/threat-data.ts > kql-tables.ts > kql-engine.ts > neurogovernance-data.ts
 7.  Python:      datalake/qtara/src/qtara/models.py > scripts > SDK > stix.py > cli.py
 8.  Precompute:  Run all datalake/src/scripts/ pipelines (impact chains, DSM mappings)
+8b. Statistics:  npm run registrar:stats  (regenerates the whole statistics block
+                 from the techniques array; never hand-edit it. Only the fields
+                 listed in statistics.editorial_fields are hand-maintained.)
 9.  SDK sync:    Copy registrar to datalake/qtara/src/qtara/data/qtara-registrar.json
 10. Pages:       Update Astro pages (atlas/tara/[id].astro, guardrails), API endpoints
 11. Components:  Update React dashboard components if new fields need UI

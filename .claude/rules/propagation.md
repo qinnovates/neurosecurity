@@ -24,6 +24,7 @@ When a file changes, these downstream files must be updated. Run `npm run health
 | Update | How | Automated? |
 |--------|-----|-----------|
 | All of the above, plus: | | |
+| datalake/qtara-registrar.json `statistics` | `npm run registrar:stats` (check with `npm run registrar:stats:check`) | Script |
 | README.md technique count | Verify technique count references | Manual (npm run health warns) |
 | datalake/impact-chains.json | `npm run compute:chains` | Manual |
 | datalake/qtara/src/qtara/data/ | Copy registrar to SDK data dir | Manual |
