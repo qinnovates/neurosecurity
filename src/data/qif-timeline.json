@@ -7,13 +7,13 @@
     "maintainer": "Kevin Qi"
   },
   "current_stats": {
-    "as_of": "2026-03-15",
-    "threat_techniques": 161,
-    "bci_devices": 68,
-    "brain_regions": 37,
+    "as_of": "2026-10-06",
+    "threat_techniques": 165,
+    "bci_devices": 70,
+    "brain_regions": 38,
     "physics_constraints": 13,
     "hourglass_bands": 11,
-    "tara_tactics": 16,
+    "tara_tactics": 17,
     "neurorights_mapped": 6,
     "dsm5_diagnoses_mapped": 68,
     "physics_constants_verified": 14,
@@ -21,12 +21,12 @@
     "nsp_version": "v0.5",
     "tara_version": "v1.8",
     "atlas_version": "v1.2.0",
-    "derivation_log_entries": 106,
+    "derivation_log_entries": 113,
     "field_journal_entries": 20,
     "neurowall_version": "v0.8",
     "blog_posts": 59,
     "cross_ai_validations": 14,
-    "research_sources": 311
+    "research_sources": 342
   },
   "milestones": [
     {
