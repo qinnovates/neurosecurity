@@ -1,5 +1,9 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import { getDecisionRecord } from '@/lib/provenance';
+
+// Entry count and latest entry are read from the log itself at build time.
+const record = getDecisionRecord();
 ---
 
 <PageLayout
@@ -21,7 +25,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
     <a href="https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md" target="_blank" rel="noopener" class="log-card glass rounded-xl p-6 block group">
       <div class="flex items-center gap-3 mb-3">
         <div class="text-2xl text-[var(--color-accent-primary)]">&#128218;</div>
-        <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-accent-primary)]/30 text-[var(--color-accent-primary)]">70+ entries</span>
+        <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-accent-primary)]/30 text-[var(--color-accent-primary)]">{record.entryCount} entries</span>
       </div>
       <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QIF Derivation Log</h2>
       <p class="text-sm text-[var(--color-text-muted)] mb-4">
@@ -34,7 +38,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
     <a href="https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md" target="_blank" rel="noopener" class="log-card glass rounded-xl p-6 block group">
       <div class="flex items-center gap-3 mb-3">
         <div class="text-2xl text-[var(--color-status-warn)]">&#128221;</div>
-        <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-status-warn)]/30 text-[var(--color-status-warn)]">19 entries</span>
+        <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-status-warn)]/30 text-[var(--color-status-warn)]">First-person journal</span>
       </div>
       <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">QIF Field Journal</h2>
       <p class="text-sm text-[var(--color-text-muted)] mb-4">
@@ -47,7 +51,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
     <a href="https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/tools/neurowall/NEUROWALL-DERIVATION-LOG.md" target="_blank" rel="noopener" class="log-card glass rounded-xl p-6 block group">
       <div class="flex items-center gap-3 mb-3">
         <div class="text-2xl text-[var(--color-status-danger)]">&#128737;</div>
-        <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-status-danger)]/30 text-[var(--color-status-danger)]">10 entries</span>
+        <span class="text-xs px-2 py-0.5 rounded-full border border-[var(--color-status-danger)]/30 text-[var(--color-status-danger)]">Tool engineering log</span>
       </div>
       <h2 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">Neurowall Derivation Log</h2>
       <p class="text-sm text-[var(--color-text-muted)] mb-4">
@@ -57,6 +61,29 @@ import PageLayout from '@/layouts/PageLayout.astro';
       <span class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">&rarr; View on GitHub</span>
     </a>
   </div>
+
+  <!-- Latest entry + provenance -->
+  {record.latest && (
+    <div class="glass rounded-xl p-6 mb-16" style="border-left: 3px solid var(--color-accent-primary);">
+      <p class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-faint)] mb-2">Most recent entry</p>
+      <p class="text-sm text-[var(--color-text-muted)] mb-3">
+        <span class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-text-primary)]">Entry {record.latest.number}</span>
+        {' — '}{record.latest.title}
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a
+          href={record.latest.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)] hover:underline"
+        >&rarr; Read Entry {record.latest.number}</a>
+        <a
+          href="/research/provenance/"
+          class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)] hover:underline"
+        >&rarr; Data provenance: every tracked figure and its source</a>
+      </div>
+    </div>
+  )}
 
   <!-- How to Read -->
   <div class="flex items-center gap-4 mb-10">
