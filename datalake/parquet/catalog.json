@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-06T07:27:21.480079+00:00",
+    "generated": "2026-10-06T22:13:38.261903+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
-    "total_datasets": 31,
-    "total_rows": 7712
+    "total_datasets": 32,
+    "total_rows": 7868
   },
   "datasets": {
     "techniques": {
@@ -583,6 +583,27 @@
       "size_bytes": 14857,
       "compression": "zstd",
       "source": "datalake/parquet/eeg_samples.parquet"
+    },
+    "intake_ledger": {
+      "rows": 156,
+      "columns": 12,
+      "column_names": [
+        "id",
+        "artifact",
+        "source_item_id",
+        "change",
+        "target_file",
+        "target_key",
+        "summary",
+        "source_url",
+        "accessed",
+        "verification",
+        "independent_review",
+        "disposition"
+      ],
+      "size_bytes": 33190,
+      "compression": "zstd",
+      "source": "datalake/parquet/intake_ledger.parquet"
     },
     "intel_feed": {
       "rows": 970,

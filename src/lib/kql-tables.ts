@@ -58,6 +58,9 @@ import neurosimRaw from '@shared/qif-neurosim.json';
 // EEG sample registry
 import eegSamplesRaw from '@shared/eeg-samples.json';
 
+// Research intake ledger (proposals from data refreshes — NOT published data)
+import intakeLedgerRaw from '@shared/intake/ledger.json';
+
 // Precomputed tables (eliminates O(n⁴) build-time computation)
 import impactChainsRaw from '@shared/impact-chains.json';
 
@@ -1143,6 +1146,35 @@ function buildEegSamples(): Row[] {
   }));
 }
 
+/**
+ * Research intake ledger: one row per item a data refresh gathered and the
+ * ledger publishes. These are PROPOSALS against the datasets named in
+ * `target_file` — not published data. Items the collecting agent could not
+ * confirm are held back and are deliberately absent from the ledger's `items`
+ * array, so no unverified claim text appears in this table.
+ */
+function buildIntakeLedger(): Row[] {
+  const items = (intakeLedgerRaw as any)?.items;
+  if (!Array.isArray(items)) return [];
+  return items.map((item: any) => ({
+    id: item.id,
+    batch: item.id?.split('-')?.[0] ?? '',
+    artifact: item.artifact ?? '',
+    source_item_id: item.source_item_id ?? '',
+    change: item.change ?? '',
+    target_file: item.target_file ?? '',
+    target_key: item.target_key ?? '',
+    summary: item.summary ?? '',
+    source_url: item.source_url ?? '',
+    accessed: item.accessed ?? '',
+    verification: item.verification ?? '',
+    review_verdict: item.independent_review?.verdict ?? 'not-reviewed',
+    review_checked: item.independent_review?.checked ?? '',
+    reviewed: item.independent_review?.reviewed ?? '',
+    disposition: item.disposition ?? '',
+  }));
+}
+
 // ═══ Main Builder ═══
 
 let _cache: { tables: KqlTables; stats: DataLakeStats } | null = null;
@@ -1258,6 +1290,9 @@ export function getKqlTables(): KqlTables {
 
     // EEG sample registry (tagged datasets)
     eeg_samples: buildEegSamples(),
+
+    // Research intake ledger (proposals, not published data)
+    intake_ledger: buildIntakeLedger(),
   };
 
   // Filter out empty tables — dynamic discovery

@@ -50,6 +50,7 @@ const DESCRIPTIONS: Record<string, { label: string; description: string; categor
   neuroendocrine: { label: 'Neuroendocrine Axes', description: 'HPA, HPG, HPT axes with hormone cascades', category: 'Anatomy' },
   glial_cells: { label: 'Glial Cell Types', description: 'Astrocytes, oligodendrocytes, microglia', category: 'Anatomy' },
   guardrails: { label: 'QIF Guardrails', description: 'Neuroethics constraints governing QIF output', category: 'Governance' },
+  intake_ledger: { label: 'Research Intake Ledger', description: 'Proposed dataset changes from each data refresh, with source URL and independent-review verdict. Proposals, not published data — see /research/provenance/', category: 'Governance' },
 };
 
 const CATEGORY_COLORS: Record<string, string> = {

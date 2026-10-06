@@ -263,6 +263,10 @@ def main():
         "research_legislation": (SHARED / "research-registry.json", "legislation"),
         "validation_registry": (SHARED / "validation-registry.json", "entries"),
         "eeg_samples": (SHARED / "eeg-samples.json", "samples"),
+        # Proposed dataset changes from each data refresh — proposals, not published
+        # data. Held items are absent from `items` by design, so no unverified
+        # claim text is exported here. Surfaced at /research/provenance/.
+        "intake_ledger": (SHARED / "intake/ledger.json", "items"),
     }
 
     for name, (path, key) in simple_files.items():
