@@ -206,7 +206,9 @@ function drawEventLabel(frame: SignalBenchFrame, geometry: StripGeometry, event:
   context.font = frame.labelFont;
   const metrics = context.measureText(label);
   // Hugs the write head while the event is still entering, then travels with it.
-  const x = Math.max(LABEL_PADDING_PX, Math.min(startX, geometry.headX - LABEL_HEAD_GAP_PX - metrics.width));
+  const x = Math.min(startX, geometry.headX - LABEL_HEAD_GAP_PX - metrics.width);
+  // Once the label has scrolled off the left edge it is gone; it must not stay pinned there.
+  if (x + metrics.width < 0) return;
   const baselineY = getLaneCenter(geometry, getTopAffectedChannel(event)) - geometry.amplitude - LABEL_LIFT_PX;
   const ascent = metrics.actualBoundingBoxAscent;
   context.fillStyle = frame.palette.background;

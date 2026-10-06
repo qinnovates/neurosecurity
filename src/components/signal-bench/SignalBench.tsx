@@ -87,11 +87,14 @@ function useThemeRevision(): number {
   return revision;
 }
 
-function useSignalBenchCanvas(events: SignalBenchEvent[], onEventIndexChange: (index: number) => void): RefObject<HTMLCanvasElement | null> {
+function useSignalBenchCanvas(
+  events: SignalBenchEvent[],
+  isAnimationAllowed: boolean,
+  onEventIndexChange: (index: number) => void,
+): RefObject<HTMLCanvasElement | null> {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const timeRef = useRef(INITIAL_TIME_SECONDS);
   const isOnScreen = useIsOnScreen(canvasRef);
-  const hasReducedMotion = useReducedMotion();
   const themeRevision = useThemeRevision();
 
   useEffect(() => {
@@ -103,10 +106,13 @@ function useSignalBenchCanvas(events: SignalBenchEvent[], onEventIndexChange: (i
     const palette = readPalette(canvas);
     const labelFont = readLabelFont(canvas);
     const eventKinds = events.map((event) => event.kind);
-    const eventLabels = events.map((event) => `${event.id} ${event.name}`);
+    const fullLabels = events.map((event) => `${event.id} ${event.name} (${event.status.toLowerCase()})`);
+    const compactLabels = events.map((event) => `${event.id} (${event.status.toLowerCase()})`);
     const paint = () => {
       const { width, height } = fitCanvasToElement(canvas, context);
-      const channelCount = width < COMPACT_WIDTH_PX ? COMPACT_CHANNEL_COUNT : FULL_CHANNEL_COUNT;
+      const isCompact = width < COMPACT_WIDTH_PX;
+      const channelCount = isCompact ? COMPACT_CHANNEL_COUNT : FULL_CHANNEL_COUNT;
+      const eventLabels = isCompact ? compactLabels : fullLabels;
       drawSignalBench({ context, width, height, time: timeRef.current, channelCount, eventKinds, eventLabels, labelFont, palette });
     };
 
@@ -114,7 +120,7 @@ function useSignalBenchCanvas(events: SignalBenchEvent[], onEventIndexChange: (i
     const resizeObserver = new ResizeObserver(paint);
     resizeObserver.observe(canvas);
     const stopFrameLoop =
-      hasReducedMotion || !isOnScreen
+      !isAnimationAllowed || !isOnScreen
         ? undefined
         : startFrameLoop((deltaSeconds) => {
             timeRef.current += deltaSeconds;
@@ -125,7 +131,7 @@ function useSignalBenchCanvas(events: SignalBenchEvent[], onEventIndexChange: (i
       stopFrameLoop?.();
       resizeObserver.disconnect();
     };
-  }, [events, hasReducedMotion, isOnScreen, themeRevision, onEventIndexChange]);
+  }, [events, isAnimationAllowed, isOnScreen, themeRevision, onEventIndexChange]);
 
   return canvasRef;
 }
@@ -152,7 +158,11 @@ function SignalBenchReadout({ event }: { event: SignalBenchEvent }) {
  */
 export default function SignalBench({ events }: SignalBenchProps) {
   const [eventIndex, setEventIndex] = useState(getStartedEventIndexAt(INITIAL_TIME_SECONDS));
-  const canvasRef = useSignalBenchCanvas(events, setEventIndex);
+  const [isPaused, setIsPaused] = useState(false);
+  // Held while the readout is hovered or focused so its link cannot change under the pointer.
+  const [isReadoutInUse, setIsReadoutInUse] = useState(false);
+  const hasReducedMotion = useReducedMotion();
+  const canvasRef = useSignalBenchCanvas(events, !hasReducedMotion && !isPaused && !isReadoutInUse, setEventIndex);
   if (events.length === 0) return null;
   const activeEvent = events[getScheduleSlot(eventIndex, events.length)];
 
@@ -162,7 +172,26 @@ export default function SignalBench({ events }: SignalBenchProps) {
         <canvas ref={canvasRef} aria-hidden="true" className="absolute inset-0 w-full h-full" />
       </div>
       <div className="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        <SignalBenchReadout key={activeEvent.id} event={activeEvent} />
+        <div className="flex items-start justify-between gap-4">
+          <div
+            onMouseEnter={() => setIsReadoutInUse(true)}
+            onMouseLeave={() => setIsReadoutInUse(false)}
+            onFocus={() => setIsReadoutInUse(true)}
+            onBlur={() => setIsReadoutInUse(false)}
+          >
+            <SignalBenchReadout key={activeEvent.id} event={activeEvent} />
+          </div>
+          {!hasReducedMotion && (
+            <button
+              type="button"
+              aria-pressed={isPaused}
+              onClick={() => setIsPaused((current) => !current)}
+              className="glass shrink-0 rounded-lg px-3 py-1 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
+            >
+              {isPaused ? 'Play animation' : 'Pause animation'}
+            </button>
+          )}
+        </div>
         <p className="text-xs text-[var(--color-text-faint)] mt-1">
           Synthetic illustration of signal-level interference. These traces are generated, not recorded neural data.
         </p>

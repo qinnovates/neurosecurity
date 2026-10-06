@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import SignalBench from '../signal-bench/SignalBench';
 import { drawSignalBench } from '../signal-bench/signal-bench-renderer';
 import type { SignalBenchEvent } from '../signal-bench/signal-bench-events';
@@ -57,6 +57,40 @@ describe('SignalBench', () => {
     render(<SignalBench events={EVENTS} />);
     expect(drawSignalBench).toHaveBeenCalled();
     expect(requestAnimationFrame).not.toHaveBeenCalled();
+  });
+
+  it('offers no pause control when nothing animates', () => {
+    stubBrowser(true);
+    render(<SignalBench events={EVENTS} />);
+    expect(screen.queryByRole('button')).toBeNull();
+  });
+
+  it('stops scheduling frames when paused and resumes on play', () => {
+    stubBrowser(false);
+    render(<SignalBench events={EVENTS} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Pause animation' }));
+    expect(cancelAnimationFrame).toHaveBeenCalled();
+    vi.mocked(requestAnimationFrame).mockClear();
+    expect(screen.getByRole('button', { name: 'Play animation' }).getAttribute('aria-pressed')).toBe('true');
+    expect(requestAnimationFrame).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole('button', { name: 'Play animation' }));
+    expect(requestAnimationFrame).toHaveBeenCalled();
+  });
+
+  it('holds the animation while the readout link has focus', () => {
+    stubBrowser(false);
+    render(<SignalBench events={EVENTS} />);
+    vi.mocked(requestAnimationFrame).mockClear();
+    fireEvent.focus(screen.getByRole('link', { name: 'QIF-T0001' }));
+    expect(cancelAnimationFrame).toHaveBeenCalled();
+    expect(requestAnimationFrame).not.toHaveBeenCalled();
+  });
+
+  it('passes labels that carry each technique status', () => {
+    stubBrowser(false);
+    render(<SignalBench events={EVENTS} />);
+    const frame = vi.mocked(drawSignalBench).mock.calls[0][0];
+    expect(frame.eventLabels).toContain('QIF-T0107 (theoretical)');
   });
 
   it('renders nothing without events', () => {
