@@ -113,7 +113,8 @@ if (Array.isArray(landscape?.companies)) {
 
 // Research sources (ID rows in the sources catalog) and derivation log entries
 actual.research_sources = countMatches(SOURCES_PATH, /^\| *[A-Z]{1,3}\d+ *\|/gm);
-actual.derivation_log_entries = countMatches(DERIVATION_LOG_PATH, /^## Entry /gm);
+// Numbered entries only: the "Entry Index" heading also starts with "## Entry".
+actual.derivation_log_entries = countMatches(DERIVATION_LOG_PATH, /^## Entry \d+/gm);
 
 // Brain regions (from qif-brain-bci-atlas.json)
 const atlas = readJSON(ATLAS_PATH);

@@ -12,6 +12,11 @@
 
 ## Entry Index
 
+### October 2026 (Entries 106+) — Data Refresh, Citation Audit
+| Entry | Topic | Link |
+|-------|-------|------|
+| 106 | October 2026 data refresh: landscape and device crawl, attack research survey, 63 site inconsistencies, three homepage corrections, citation defect C52, intake ledger and tracked metrics. Staged proposals pending Quorum fact-check | [Entry 106](#entry-106-october-2026-data-refresh) |
+
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails, Data Lake Sprint, AI Governance
 | Entry | Topic | Link |
 |-------|-------|------|
@@ -347,6 +352,82 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 106: October 2026 Data Refresh — Landscape Crawl, Citation Audit, Homepage Corrections, Intake Ledger {#entry-106-october-2026-data-refresh}
+
+**Date:** 2026-10-06, ~03:30
+**Classification:** CORRECTION
+**AI Systems:** Claude Opus 5.5 (orchestration, site changes, spot verification); seven Claude research subagents (market, devices, attack research, data-gap audit, independent fact-check, TARA mapping, decision panel). A Quorum review was requested and is running; it had not reported when this entry was written.
+**Connected entries:** Entry 97 (TARA expansion to 135), Entry 99 (Data Studio and Parquet data lake), Entry 101 (TARA naming convention), Entry 102 (EEG data lake)
+**RACI:** R: Claude Opus 5.5 and research subagents | A: KQ | C: none | I: none
+**AI Contribution Level:** AI-generated, pending Quorum review
+
+### Context
+
+The published landscape dataset (`datalake/bci-landscape.json`) was last verified on 2026-04-29 and listed 67 companies. A newer revision with 70 companies, dated 2026-08-13, existed only as unpublished local work. The site was redesigned and redeployed on 2026-10-06, and a short company film quoting the newer figures was prepared for the homepage. Kevin asked for a full revisit of every dataset: the BCI market and device landscape, the EEG inventory (including Nissan's Brain-to-Vehicle programme), new investments and advancements, new research on attacks against BCIs (including the Cerberus Institute paper), a gap analysis of the data itself, and a consistency pass so that the site and the data agree.
+
+### What Happened
+
+| Area | Outcome | State |
+|------|---------|-------|
+| Market and company crawl | 63 proposed changes (18 additions, 45 updates), 57 sources. The collector marked 50 verified and 13 unverified. About 20 of the 70 companies were individually re-checked, so this is a triaged sweep. | Staged |
+| Device and EEG crawl | 23 proposed changes (19 devices, 4 corrections), 45 sources; 3 unverified. Found two separate device inventories (`bci-landscape.json` and `src/site/bci-hardware-inventory.json`). | Staged |
+| Attack research survey | 94 proposed changes, 74 sources; 8 unverified. 11 candidate techniques, 5 proposed status changes, and 15 claimed defects in the existing sources catalog. | Staged |
+| Dataset gap and consistency audit | 63 places where the site shows a number the data does not support (15 high severity; 43 hardcoded). | Staged |
+| Intake ledger | `datalake/intake/ledger.json` inventories all 180 gathered items with source, collection date, collector verification and disposition. Raw batch and 187 sources under `datalake/intake/2026-10-06/`. | Committed |
+| Tracked metrics | `current_stats` in `src/data/qif-timeline.json` refreshed; the checker now derives eight fields from source. | Committed |
+| Homepage corrections | Three unsupported claims replaced with values computed from the data at build time. | Committed, awaiting review |
+
+### Corrections To Previously Published Claims
+
+These were checked directly in this session, not only reported by a subagent.
+
+| Claim as published | Finding | Correction |
+|--------------------|---------|------------|
+| Homepage: "$8 billion industry", footnoted as the median of nine market research firms | The nine 2024 estimates in the dataset have a median of $2.3B | Figure, year and estimate count now computed from the dataset |
+| Homepage NISS example: Signal Injection scores 8.2, high, built from base severity, reversibility and detectability | The registrar scores QIF-T0001 at 6.1, medium, on six different metrics | Panel now renders the technique's real metric values and score |
+| Homepage: Neuralink, Synchron, Blackrock and Precision Neuroscience publish "zero public security documentation" | Neuralink publishes a vulnerability disclosure programme page | Reworded; the statement about the other three is attributed to the dataset |
+| Sources catalog entry C52, cited with DOI 10.1016/j.eswa.2024.125599 | Crossref resolves that DOI to an unrelated paper on knowledge distillation | To be corrected during integration |
+| Atlas hub: 492 attack techniques | The hub summed per-band counts, counting a technique once per band it spans | Corrected to 165 (shipped in the redesign) |
+| Tracked metrics dated 2026-03-15 | Techniques 161, tactics 16, devices 68, brain regions 37, research sources 311 | Now 165, 17, 70, 38 and 342, derived by script |
+
+The other 14 claimed citation defects, and two registrar sources that the survey could not locate ("Zhang et al. 2024" for QIF-T0009 and "Lopez-Moreno et al. 2024" for QIF-T0025 to T0028), are reported by the collecting subagent and are not yet independently confirmed.
+
+### Latest Crawl: Reported Deltas (Staged, Pending Independent Fact-Check)
+
+None of the following has been written into a source-of-truth file. Each item is recorded in the intake ledger with its source.
+
+- **Security posture.** The collector reports that Medtronic, Boston Scientific and LivaNova publish coordinated disclosure processes, in addition to Neuralink. If accepted, companies coded `none_published` move from 62 of 70 to 58 of 70. The schema has no value for "publishes a disclosure programme".
+- **Funding.** Precision Neuroscience is reported to have closed a $250M Series D on 2026-09-24. A reported valuation is unverified.
+- **Regulatory and incidents.** Reported: an FDA letter to Paradromics dated 2026-08-26, a Boston Scientific cybersecurity incident filing for 2026-08-25, and FDA clearances for several EEG systems that the dataset lacks.
+- **Devices.** Nissan Brain-to-Vehicle is a research prototype shown on a driving simulator in 2018, built with Bitbrain; channel count, sampling rate and accuracy are not published. The pages use "Minimal EEG" for Bitbrain's dry-electrode family.
+- **Attack research.** The Cerberus Institute paper is "Threat Vectors and the State of the Art in Defense Methods for Security in Neurotechnology" by Bryce Allen Bagley, arXiv:2607.10451, a preprint review with no experiments. Its use of "Cogits" refers to a separate preprint and is untested theory. Eleven candidate techniques were proposed: one rests on a peer-reviewed demonstration, three on preprints, six on that single review, and one on an unverified source.
+
+### Human Decisions
+
+| Decision | By | Outcome |
+|----------|----|---------|
+| Run a full revisit of all datasets and the site's consistency | KQ | Approved; seven subagents launched |
+| Correct the three homepage claims ahead of the full refresh | KQ | Approved; committed, awaiting review |
+| Map new attack research into TARA with everything logged | KQ | Approved; mapping proposals in progress, nothing written to the registrar |
+| Have Quorum check the findings for hallucinated citations | KQ | Requested; running |
+| Use a confidence-scored panel for the open rules below | KQ | Requested; running |
+| Keep the 3D brain model's security policy strict by removing an unused embedded texture, not by loosening the policy | KQ | Shipped |
+
+Open, not yet decided: a written definition for each evidence status; whether a preprint can support a status above EMERGING; which candidate techniques to add; how to handle three legislation entries that could not be confirmed at primary sources; whether to merge the two device inventories; whether the unpublished August revision is the base for integration.
+
+### Method Notes
+
+- Subagents wrote proposals only, outside tracked files, each fact with a fetched source and access date. Anything unconfirmed was marked unverified and is not to be cited.
+- Staged items are proposals until an independent fact-check confirms them and Kevin accepts them. The ledger's `disposition` field records this.
+- New sources are inventoried in `datalake/intake/2026-10-06/sources.json`. They will be added to `QIF-RESEARCH-SOURCES.md`, `references.bib` and the research registry only after the fact-check, so that an unverified source cannot be cited by accident.
+- Limits: one search service rate-limited the survey; IEEE and ACM were checked only through Crossref; several manufacturer and trade pages refused requests; the market sweep was triaged, not exhaustive.
+
+### AI Collaboration
+
+Claude Opus 5.5 planned the work, wrote the site and script changes, and directly verified the corrections listed above. Research subagents performed the crawls and surveys under a shared brief requiring sourced, dated, flagged proposals. Kevin directed scope and made every decision recorded here. This entry was drafted by AI and has not yet been through Quorum review.
 
 ---
 
