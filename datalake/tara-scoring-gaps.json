@@ -1,0 +1,1165 @@
+{
+  "version": "1.0",
+  "generated": "2026-10-06",
+  "generator": "src/scripts/generate-scoring-gaps.mjs",
+  "description": "Known gaps in the TARA catalog, computed from the registrar. Published rather than hidden so that any figure derived from the catalog can be read with its limits.",
+  "unscored_techniques": {
+    "summary": {
+      "total_techniques": 165,
+      "scored": 139,
+      "unscored": 26,
+      "id_range": "QIF-T0136 to QIF-T0161",
+      "by_status": {
+        "CONFIRMED": 10,
+        "DEMONSTRATED": 8,
+        "EMERGING": 5,
+        "THEORETICAL": 3
+      },
+      "by_mode": {
+        "M": 20,
+        "D": 5,
+        "R": 1
+      }
+    },
+    "why_unscored": "NISS codes six metrics. Four of them (Biological Impact, Cognitive/Functional Disruption, Reversibility, Neuroplasticity) are claims about physical effect and persistence. These entries record the modality, its dual-use clinical counterpart and a physics feasibility tier, but not the effect, dose, persistence or access model, so those metrics cannot be coded from the entry without inventing evidence. Scoring them would produce numbers that look computed but are not.",
+    "what_would_change_this": "Per technique: a cited measurement of the physical effect and its dose, a functional or clinical outcome mapping, an access and coupling model, and evidence on persistence. The sources already cited on each entry are the place to start.",
+    "requirements": [
+      {
+        "metric": "BI",
+        "name": "Biological Impact",
+        "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement."
+      },
+      {
+        "metric": "CR",
+        "name": "Cognitive Reconnaissance",
+        "needs": "Whether the technique reads neural or cognitive content."
+      },
+      {
+        "metric": "CD",
+        "name": "Cognitive/Functional Disruption",
+        "needs": "A described disruption of cognition, perception, movement or autonomic function."
+      },
+      {
+        "metric": "CV",
+        "name": "Consent Violation",
+        "needs": "The access model: what proximity, equipment or authorisation an operator needs."
+      },
+      {
+        "metric": "RV",
+        "name": "Reversibility",
+        "needs": "Evidence of how long the effect persists and whether it resolves or is treatable."
+      },
+      {
+        "metric": "NP",
+        "name": "Neuroplasticity",
+        "needs": "Evidence of lasting structural or synaptic change, or of its absence."
+      }
+    ],
+    "techniques": [
+      {
+        "id": "QIF-T0136",
+        "attack": "Transcranial photobiomodulation (670/808nm)",
+        "status": "CONFIRMED",
+        "legacy_severity": "low",
+        "tara_mode": "M",
+        "source_count": 4,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0137",
+        "attack": "UCNP-mediated optogenetic dopamine release (980nm)",
+        "status": "DEMONSTRATED",
+        "legacy_severity": "high",
+        "tara_mode": "M",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0138",
+        "attack": "HUP photovoltaic nanoparticle dopamine stimulation (980nm)",
+        "status": "EMERGING",
+        "legacy_severity": "high",
+        "tara_mode": "M",
+        "source_count": 1,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0139",
+        "attack": "Photothermal gold nanoparticle TRPV1 dopamine activation",
+        "status": "DEMONSTRATED",
+        "legacy_severity": "medium",
+        "tara_mode": "M",
+        "source_count": 1,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0140",
+        "attack": "Infrared neural stimulation (1875nm fiber contact)",
+        "status": "CONFIRMED",
+        "legacy_severity": "medium",
+        "tara_mode": "M",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0141",
+        "attack": "Magnetothermal nanoparticle TRPV1 stimulation (AMF)",
+        "status": "DEMONSTRATED",
+        "legacy_severity": "high",
+        "tara_mode": "M",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0142",
+        "attack": "SICI-TMS GABA-A cortical inhibition (short-interval paired-pulse)",
+        "status": "CONFIRMED",
+        "legacy_severity": "medium",
+        "tara_mode": "M",
+        "source_count": 1,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0143",
+        "attack": "LICI-TMS GABA-B long-interval cortical inhibition (suprathreshold paired-pulse)",
+        "status": "CONFIRMED",
+        "legacy_severity": "medium",
+        "tara_mode": "M",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0144",
+        "attack": "cTBS GABAergic LTD interneuron upregulation (theta-burst GABA increase)",
+        "status": "CONFIRMED",
+        "legacy_severity": "high",
+        "tara_mode": "D",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0145",
+        "attack": "Anodal tDCS polarity-specific GABA depletion (MRS-measured)",
+        "status": "CONFIRMED",
+        "legacy_severity": "medium",
+        "tara_mode": "M",
+        "source_count": 1,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0146",
+        "attack": "Gamma-tACS PV-interneuron GABA-A modulation (40Hz contact entrainment)",
+        "status": "DEMONSTRATED",
+        "legacy_severity": "medium",
+        "tara_mode": "M",
+        "source_count": 1,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0147",
+        "attack": "FUS thalamic GABAergic suppression (acoustic GABA reduction)",
+        "status": "DEMONSTRATED",
+        "legacy_severity": "high",
+        "tara_mode": "D",
+        "source_count": 1,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0148",
+        "attack": "GENUS gamma-sensory entrainment of PV+ GABAergic interneurons (non-contact 40Hz)",
+        "status": "DEMONSTRATED",
+        "legacy_severity": "medium",
+        "tara_mode": "M",
+        "source_count": 1,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0149",
+        "attack": "Implanted VNS cholinergic cortical manipulation via nucleus basalis",
+        "status": "CONFIRMED",
+        "legacy_severity": "high",
+        "tara_mode": "M",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0150",
+        "attack": "Transcutaneous auricular VNS (tVNS) cholinergic modulation",
+        "status": "DEMONSTRATED",
+        "legacy_severity": "medium",
+        "tara_mode": "M",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0151",
+        "attack": "TMS cholinergic cortical perturbation via mAChR (40-63ms TEP)",
+        "status": "EMERGING",
+        "legacy_severity": "medium",
+        "tara_mode": "M",
+        "source_count": 1,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0152",
+        "attack": "AChE inhibition BCI signal corruption (organophosphate exposure)",
+        "status": "DEMONSTRATED",
+        "legacy_severity": "critical",
+        "tara_mode": "D",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0153",
+        "attack": "Cholinergic medication status inference from BCI EEG spectral biomarkers",
+        "status": "THEORETICAL",
+        "legacy_severity": "medium",
+        "tara_mode": "R",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0154",
+        "attack": "VNS disynaptic serotonin upregulation (NTS->LC->DRN pathway)",
+        "status": "CONFIRMED",
+        "legacy_severity": "medium",
+        "tara_mode": "M",
+        "source_count": 1,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0155",
+        "attack": "Transcranial focused ultrasound DRN serotonin release (Piezo1/TRPA1 mechanotransduction)",
+        "status": "EMERGING",
+        "legacy_severity": "high",
+        "tara_mode": "M",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0156",
+        "attack": "High-frequency electroacupuncture dorsal raphe serotonin drive (100Hz peripheral afferent)",
+        "status": "CONFIRMED",
+        "legacy_severity": "medium",
+        "tara_mode": "M",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0157",
+        "attack": "Acute tryptophan depletion — serotonin precursor starvation via LAT1 competition",
+        "status": "CONFIRMED",
+        "legacy_severity": "medium",
+        "tara_mode": "M",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0158",
+        "attack": "Silent excitatory/inhibitory ratio manipulation (sub-threshold seizure priming)",
+        "status": "THEORETICAL",
+        "legacy_severity": "high",
+        "tara_mode": "M",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0159",
+        "attack": "LIFU astrocytic gliotransmission (acoustic TRPA1->extrasynaptic NMDA)",
+        "status": "EMERGING",
+        "legacy_severity": "high",
+        "tara_mode": "M",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0160",
+        "attack": "FUS-BBB breach as excitotoxic glutamate priming vector",
+        "status": "THEORETICAL",
+        "legacy_severity": "critical",
+        "tara_mode": "D",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      },
+      {
+        "id": "QIF-T0161",
+        "attack": "Cortical spreading depression initiation (autonomous glutamate wave)",
+        "status": "EMERGING",
+        "legacy_severity": "critical",
+        "tara_mode": "D",
+        "source_count": 2,
+        "metrics_determinable": 1,
+        "missing_evidence": [
+          {
+            "metric": "BI",
+            "name": "Biological Impact",
+            "needs": "A described physical or biological effect on tissue, with its magnitude or a cited measurement.",
+            "absent_means": "The entry names the modality but not what it does to tissue at what dose."
+          },
+          {
+            "metric": "CD",
+            "name": "Cognitive/Functional Disruption",
+            "needs": "A described disruption of cognition, perception, movement or autonomic function.",
+            "absent_means": "No functional or clinical outcome mapping on the entry."
+          },
+          {
+            "metric": "CV",
+            "name": "Consent Violation",
+            "needs": "The access model: what proximity, equipment or authorisation an operator needs.",
+            "absent_means": "No access or coupling recorded, so the consent model cannot be derived."
+          },
+          {
+            "metric": "RV",
+            "name": "Reversibility",
+            "needs": "Evidence of how long the effect persists and whether it resolves or is treatable.",
+            "absent_means": "No persistence or drift evidence on the entry."
+          },
+          {
+            "metric": "NP",
+            "name": "Neuroplasticity",
+            "needs": "Evidence of lasting structural or synaptic change, or of its absence.",
+            "absent_means": "No evidence either way about lasting neural change."
+          }
+        ]
+      }
+    ]
+  },
+  "severity_fields": {
+    "issue": "The catalog carries two severity answers that disagree. They are computed differently, over different populations, and are not interchangeable.",
+    "fields": [
+      {
+        "field": "niss.severity",
+        "source": "Derived from the NISS vector by the scoring formula in niss_spec.",
+        "population": "139 scored techniques",
+        "scale": {
+          "none": "0.0",
+          "low": "0.1-3.9",
+          "medium": "4.0-6.9",
+          "high": "7.0-8.9",
+          "critical": "9.0-10.0"
+        },
+        "distribution": {
+          "medium": 59,
+          "low": 59,
+          "high": 20,
+          "none": 1
+        },
+        "authoritative_for": "Any statement about neural impact severity. This is what the site displays."
+      },
+      {
+        "field": "severity",
+        "source": "An original per-technique assessment that predates NISS scoring. No formula is recorded for it.",
+        "population": "all 165 techniques",
+        "distribution": {
+          "high": 72,
+          "critical": 32,
+          "medium": 57,
+          "low": 4
+        },
+        "authoritative_for": "Nothing published. Retained because it is the only severity value the 26 unscored techniques carry."
+      }
+    ],
+    "known_conflict": "No scored technique reaches NISS critical, while the legacy field marks some critical. The two are not comparable: the legacy field was not produced by the NISS formula.",
+    "resolution_status": "Open framework decision: whether to retire the legacy field, rename it so it cannot be mistaken for a NISS score, or keep it as a separate recorded assessment."
+  }
+}

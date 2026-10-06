@@ -2,6 +2,7 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
 import { NISS_SPEC, THREAT_VECTORS, getNissStats } from '@/lib/threat-data';
+import scoringGaps from '@shared/tara-scoring-gaps.json';
 const spec = NISS_SPEC as any;
 const nissStats = getNissStats();
 const totalTechniques = THREAT_VECTORS.length;
@@ -104,6 +105,7 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
           { href: '#pins', label: 'PINS Flag' },
           { href: '#formula', label: 'Formula' },
           { href: '#severity', label: 'Severity Levels' },
+          { href: '#coverage', label: 'Coverage & Known Gaps' },
           { href: '#vector', label: 'Vector Format' },
           { href: '#examples', label: 'Examples' },
           { href: '#v2-weights', label: 'v2.0 Weighting Factors' },
@@ -135,7 +137,7 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
             FIRST.org §3.11
           </span>
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-text-faint)]/30 text-[var(--color-text-faint)]">
-            6 Extension Metrics · {totalTechniques} Techniques Scored
+            6 Extension Metrics · {scoringGaps.unscored_techniques.summary.scored} of {totalTechniques} Techniques Scored
           </span>
         </div>
         <div class="prose">
@@ -382,6 +384,46 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
               <p class="text-sm text-[var(--color-text-muted)]">{level.description}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <!-- Coverage and known gaps -->
+      <section id="coverage" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Coverage &amp; Known Gaps</h2>
+        <div class="prose mb-6">
+          <p>
+            {scoringGaps.unscored_techniques.summary.scored} of {scoringGaps.unscored_techniques.summary.total_techniques} catalogued techniques carry a NISS vector.
+            The remaining {scoringGaps.unscored_techniques.summary.unscored} ({scoringGaps.unscored_techniques.summary.id_range}) are listed in the catalog but are not scored.
+            They are published unscored rather than estimated.
+          </p>
+          <p>{scoringGaps.unscored_techniques.why_unscored}</p>
+        </div>
+
+        <div class="glass rounded-xl p-5 mb-6">
+          <h3 class="text-sm font-semibold mb-3">What each unscored entry would need</h3>
+          <dl class="space-y-2 text-sm">
+            {scoringGaps.unscored_techniques.requirements.map((requirement) => (
+              <div class="flex flex-col sm:flex-row sm:gap-4">
+                <dt class="font-mono text-xs shrink-0 sm:w-56 text-[var(--color-text-primary)]">{requirement.metric} — {requirement.name}</dt>
+                <dd class="text-[var(--color-text-muted)]">{requirement.needs}</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="text-xs text-[var(--color-text-faint)] mt-4">{scoringGaps.unscored_techniques.what_would_change_this}</p>
+        </div>
+
+        <div class="glass rounded-xl p-5" style="border-left: 3px solid var(--color-status-warn);">
+          <h3 class="text-sm font-semibold mb-2">Two severity fields</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">{scoringGaps.severity_fields.issue}</p>
+          <ul class="space-y-2 text-sm text-[var(--color-text-muted)]">
+            {scoringGaps.severity_fields.fields.map((field) => (
+              <li>
+                <code class="text-xs text-[var(--color-text-primary)]">{field.field}</code> — {field.source} Computed over {field.population}.
+                <span class="block text-xs text-[var(--color-text-faint)] mt-0.5">Authoritative for: {field.authoritative_for}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="text-xs text-[var(--color-text-faint)] mt-3">{scoringGaps.severity_fields.known_conflict} {scoringGaps.severity_fields.resolution_status}</p>
         </div>
       </section>
 
