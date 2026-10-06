@@ -3,7 +3,7 @@
     "version": "1.0",
     "lastUpdated": "2026-10-06",
     "description": "Unified registry: explorer/timelines (landscape UI) + researchers/institutions/standards/legislation (structured entities). Cross-references QIF-RESEARCH-SOURCES.md. Papers are carried on researcher entries via papers (QIF-RESEARCH-SOURCES.md IDs) and bibKeys (references.bib keys); the schema has no standalone paper collection.",
-    "totalEntities": 190
+    "totalEntities": 192
   },
   "explorer": [
     {
@@ -2689,6 +2689,57 @@
         "governance"
       ],
       "layer": "WHY"
+    },
+    {
+      "id": "a-c-buglione",
+      "name": "A. C. Buglione",
+      "institution": "Independent",
+      "country": "Unknown",
+      "expertise": [
+        "bci-security",
+        "wireless-interception",
+        "fnirs"
+      ],
+      "papers": [
+        "C130"
+      ],
+      "bibKeys": [
+        "buglione2026fnirsinterception"
+      ],
+      "qifRelevance": "Reports that the Mendi neurofeedback headset transmits fNIRS sensor data over the air in cleartext with no encryption at any layer, allowing passive in-range interception. Hardware-specific to one consumer headset. Origin disclosure for CVE-2026-2671, whose NVD record cites this work as its reference. Preprint (Authorea/TechRxiv), not peer reviewed, so the result is reported rather than established. No claim is made about what the intercepted signal reveals about cognition.",
+      "tags": [
+        "attack",
+        "bci-security",
+        "cve-origin",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "syed-rafiul-hussain",
+      "name": "Syed Rafiul Hussain",
+      "institution": "Pennsylvania State University",
+      "country": "US",
+      "expertise": [
+        "wireless-protocol-security",
+        "protocol-state-machines",
+        "ble-security"
+      ],
+      "papers": [
+        "P13"
+      ],
+      "bibKeys": [
+        "rashid2024proteus"
+      ],
+      "qifRelevance": "Senior author of Proteus, a property-guided state-machine mutation tester for wireless protocol implementations. Evaluated on real hardware: 4G LTE and BLE across 23 consumer devices, 25 unique issues in 112 instances, 14 vendor-acknowledged vulnerabilities across 5 CVEs. Origin of CVE-2026-65935 (Silicon Labs RS9116W/SiWx917 BLE passkey-entry legacy-pairing bypass), cited on the NVD record as vulnerability B-E3. Peer-reviewed at ACM CCS 2024. Bears on NSP because BLE pairing-layer logic bugs sit below NSP's own crypto layer.",
+      "tags": [
+        "attack",
+        "ble",
+        "protocol-testing",
+        "cve-origin",
+        "peer-reviewed"
+      ],
+      "layer": "HOW"
     }
   ],
   "institutions": [

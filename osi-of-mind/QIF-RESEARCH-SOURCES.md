@@ -7,7 +7,7 @@
 >
 > **Last updated:** 2026-10-06
 > **Sources extracted from:** Three parallel validation agent sessions + ongoing research + landscape research agents + scholar crawl integration (2026-10-06)
-> **Total unique sources:** 380
+> **Total unique sources:** 382
 
 ---
 
@@ -428,6 +428,7 @@ This markdown file remains the human-readable catalog of record. The KQL datalak
 | C78 | López Bernal S, Huertas Celdrán A, Martínez Pérez G. (2021). "Neuronal Jamming Cyberattack over Invasive BCIs Affecting the Resolution of Tasks Requiring Visual Capabilities." Computers & Security 112:102534. DOI:10.1016/j.cose.2021.102534. | https://doi.org/10.1016/j.cose.2021.102534 | BCI Security | Invasive BCI attack prevents neuronal spike generation via jamming through compromised electrodes. First demonstrated neuronal jamming attack. Maps to TARA signal disruption and denial-of-service techniques. |
 | C79 | Martínez Beltrán ET, Quiles Pérez M, López Bernal S, Huertas Celdrán A, Martínez Pérez G. (2021). "Noise-based Cyberattacks Generating Fake P300 Waves in Brain-Computer Interfaces." Cluster Computing (Springer). DOI:10.1007/s10586-021-03326-z. | https://doi.org/10.1007/s10586-021-03326-z | BCI Security | Four noise-based attacks generate fake P300 waves; 74% classification degradation in processing phase. Demonstrates signal injection attack on cognitive BCIs. Maps to TARA spoofing and signal injection. |
 | C80 | Armengol-Urpi A, Kovacs R, Sarma SE. (2023). "Brain-Hack: Remotely Injecting False Brain-Waves with RF to Take Control of a Brain-Computer Interface." Proc. 5th Workshop on CPS&IoT Security and Privacy (CPSIoTSec), pp. 53-66. DOI:10.1145/3605758.3623497. | https://doi.org/10.1145/3605758.3623497 | BCI Security | Remote RF injection hijacks virtual keyboard speller, drone controller, and meditation app across three BCI device classes. First demonstrated RF physical-layer BCI takeover. Maps to TARA electromagnetic injection and wireless exploitation. Vendor-acknowledged as CVE-2023-49914 (InteraXon Muse 2, NVD, published 2023-12-02), which cites this paper as its reference. |
+| C130 | Buglione AC. (2026). "Wireless Interception of Functional Neuroimaging Transmissions." Authorea/TechRxiv preprint. DOI:10.22541/au.177196231.16660369/v1. | https://doi.org/10.22541/au.177196231.16660369/v1 | Verified: Crossref 2026-10-06 | Preprint (posted-content, Wiley/Authorea) — not peer reviewed, so its result is reported, not established. Documents that fNIRS sensor data from the Mendi neurofeedback headset is transmitted over the air in cleartext with no encryption at any layer of the communication stack, so an in-range listener can passively intercept the sensor stream. Hardware-specific: one consumer headset, over its own wireless link. Maps to TARA passive emission capture (QIF-T0003) and neural data privacy breach (QIF-T0051). Vendor-acknowledged as CVE-2026-2671 (Mendi Neurofeedback Headset V4 BLE handler, NVD, published 2026-03-07, CWE-319/CWE-310), whose NVD record cites this preprint as its reference; the preprint's abstract is itself written about that CVE, so it is the disclosure of record, not cited context. No claim is made about what the intercepted signal reveals about the user's cognition. |
 | C81 | Chavarriaga R et al. (2021). "Standardization of Neurotechnology for Brain-Machine Interfacing: State of the Art and Recommendations." PMC 8846370. | https://pmc.ncbi.nlm.nih.gov/articles/PMC8846370/ | Standards | IEEE-affiliated review noting scarcity of mandatory BCI security standards. Identifies standardization gaps in BMI security, safety, and interoperability. Validates QIF's positioning in the standards gap. |
 
 ### Neuroethics Governance & Scholarship (Landscape Research)
@@ -563,6 +564,7 @@ This markdown file remains the human-readable catalog of record. The KQL datalak
 |---|----------|-----|--------|---------------|
 | P11 | Antonioli D, Tippenhauer NO, Rasmussen K. (2019). "The KNOB is Broken: Exploiting Low Entropy in the Encryption Key Negotiation of Bluetooth BR/EDR." USENIX Security 2019. | https://www.usenix.org/conference/usenixsecurity19/presentation/antonioli | NSP Spec | KNOB attack forces 1-byte entropy in Bluetooth key negotiation. NSP v0.5 adds BLE channel binding in transcript hash to mitigate. |
 | P12 | Antonioli D, Tippenhauer NO, Rasmussen K. (2023). "BLUFFS: Bluetooth Forward and Future Secrecy Attacks and Defenses." ACM CCS 2023. | https://dl.acm.org/doi/10.1145/3576915.3623066 | NSP Spec | Six novel attacks on Bluetooth forward/future secrecy. Motivates NSP's channel binding and independent PQC layer above BLE. |
+| P13 | Rashid SMM, Wu T, Tu K, Ishtiaq AA, Tanvir RH, Dong Y, Chowdhury O, Hussain SR. (2024). "State Machine Mutation-based Testing Framework for Wireless Communication Protocols" (Proteus). ACM CCS 2024, pp. 2102-2116. DOI:10.1145/3658644.3690312. arXiv:2409.02905. | https://doi.org/10.1145/3658644.3690312 | Verified: Crossref + arXiv API 2026-10-06 | Peer-reviewed (ACM CCS 2024); arXiv:2409.02905 is the preprint of the same work. Proteus is a property-guided, budget-aware state-machine mutation tester for wireless protocol implementations. Evaluated on 4G LTE and BLE across 23 consumer devices (11 LTE, 12 BLE) — real hardware, not simulation — finding 25 unique issues across 112 instances, with 14 vulnerabilities acknowledged by affected vendors through 5 CVEs. Relevant to NSP because BLE pairing-layer logic bugs are below NSP's own crypto layer and must be assumed broken. Origin of CVE-2026-65935 (Silicon Labs RS9116W / SiWx917 BLE passkey-entry legacy-pairing bypass, CWE-305, CVSS v4.0 7.6): the NVD description points to "vulnerability B-E3 in the related paper below" and cites this paper, so the CVE is the vendor acknowledgement of a Proteus finding, not independent work citing it. |
 
 ---
 
@@ -825,10 +827,10 @@ This markdown file remains the human-readable catalog of record. The KQL datalak
 | Quantum Physics & Biology | 40 | 2026 | 1993 |
 | Neuroscience | 29 | 2026 | 2010 |
 | BCI Technology | 23 | 2026 | 1992 |
-| Cybersecurity & BCI Security | 129 | 2026 | 2009 |
+| Cybersecurity & BCI Security | 130 | 2026 | 2009 |
 | Electrode Technology | 7 | 2025 | 2018 |
 | Signal Coherence & Oscillations | 5 | 2015 | 1997 |
-| Cryptographic Standards (NSP) | 12 | 2025 | 2010 |
+| Cryptographic Standards (NSP) | 13 | 2025 | 2010 |
 | Consumer Sensor Exploitation | 11 | 2026 | 2014 |
 | Wireless Sensing Security | 4 | 2025 | 2024 |
 | Neuroscience Foundations (Preprint) | 8 | 2025 | 2006 |
@@ -842,7 +844,7 @@ This markdown file remains the human-readable catalog of record. The KQL datalak
 | Neurorights Legislation | 4 | 2025 | 2021 |
 | Global Neuroethics Policy & Governance | 39 | 2026 | 2020 |
 | BCI Companies & Devices | 3 | 2025 | 2025 |
-| **Total** | **380** | | |
+| **Total** | **382** | | |
 
 | Source | Sources Found |
 |--------|---------------|
@@ -861,6 +863,7 @@ This markdown file remains the human-readable catalog of record. The KQL datalak
 | BCI/Stimulation/Dual-Use Citation Sync (Mar 11) | ~18 |
 | AI Security Market Research Swarm (Mar 14) | ~14 |
 | Scholar Crawl Integration (Oct 6) | ~38 |
+| CVE-Referenced Paper Ingest (Oct 6) | 2 |
 
 ---
 
