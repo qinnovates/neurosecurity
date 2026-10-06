@@ -28,6 +28,8 @@ const REGISTRY_PATH = resolve(ROOT, 'datalake/qtara-registrar.json');
 const LANDSCAPE_PATH = resolve(ROOT, 'datalake/bci-landscape.json');
 const SOURCES_PATH = resolve(ROOT, 'osi-of-mind/QIF-RESEARCH-SOURCES.md');
 const DERIVATION_LOG_PATH = resolve(ROOT, 'osi-of-mind/QIF-DERIVATION-LOG.md');
+const SDK_MANIFEST_PATH = resolve(ROOT, 'datalake/qtara/pyproject.toml');
+const CONSTANTS_PATH = resolve(ROOT, 'src/lib/qif-constants.ts');
 const ATLAS_PATH = resolve(ROOT, 'datalake/qif-brain-bci-atlas.json');
 const CONSTRAINTS_PATH = resolve(ROOT, 'src/lib/bci-limits-constants.ts');
 
@@ -38,6 +40,17 @@ const CONSTRAINTS_PATH = resolve(ROOT, 'src/lib/bci-limits-constants.ts');
 function countMatches(path, pattern) {
   try {
     return (readFileSync(path, 'utf8').match(pattern) ?? []).length;
+  } catch (error) {
+    console.warn(`  [WARN] Could not read ${path}: ${error.message}`);
+    return undefined;
+  }
+}
+
+/** Reads a version string with a one-group regex; undefined (reported as SKIP) if absent or unreadable. */
+function readVersion(path, pattern) {
+  try {
+    const match = readFileSync(path, 'utf8').match(pattern);
+    return match ? `v${match[1]}` : undefined;
   } catch (error) {
     console.warn(`  [WARN] Could not read ${path}: ${error.message}`);
     return undefined;
@@ -105,11 +118,26 @@ if (registry?.techniques) {
   actual.neurorights_mapped = neurorights.size;
 }
 
+// Scoring coverage, domains and declared versions (from qtara-registrar.json)
+if (registry?.techniques) {
+  actual.techniques_niss_scored = registry.techniques.filter((technique) => technique.niss?.version).length;
+  actual.tara_domains = new Set(registry.techniques.map((technique) => technique.tara_domain_primary).filter(Boolean)).size;
+}
+if (registry?.niss_spec?.version) actual.niss_version = `v${registry.niss_spec.version}`;
+if (registry?.version) actual.registrar_version = `v${registry.version}`;
+
 // BCI devices (from bci-landscape.json, the dataset the device directory reads)
 const landscape = readJSON(LANDSCAPE_PATH);
 if (Array.isArray(landscape?.companies)) {
   actual.bci_devices = landscape.companies.reduce((total, company) => total + (company.devices?.length ?? 0), 0);
 }
+
+if (Array.isArray(landscape?.companies)) actual.bci_companies = landscape.companies.length;
+if (landscape?.version) actual.landscape_dataset_version = `v${landscape.version}`;
+
+// Versions declared in the SDK manifest and the site constants
+actual.sdk_version = readVersion(SDK_MANIFEST_PATH, /^version\s*=\s*"([^"]+)"/m);
+actual.whitepaper_version = readVersion(CONSTANTS_PATH, /LATEST_WHITEPAPER_VERSION\s*=\s*'([^']+)'/);
 
 // Research sources (ID rows in the sources catalog) and derivation log entries
 actual.research_sources = countMatches(SOURCES_PATH, /^\| *[A-Z]{1,3}\d+ *\|/gm);
@@ -135,6 +163,8 @@ console.log(`Check date:     ${iso()}\n`);
 const fields = [
   'threat_techniques', 'tara_tactics', 'neurorights_mapped', 'bci_devices', 'brain_regions',
   'physics_constraints', 'research_sources', 'derivation_log_entries',
+  'techniques_niss_scored', 'tara_domains', 'bci_companies',
+  'niss_version', 'registrar_version', 'landscape_dataset_version', 'sdk_version', 'whitepaper_version',
 ];
 
 for (const field of fields) {
