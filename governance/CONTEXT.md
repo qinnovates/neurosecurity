@@ -13,6 +13,7 @@ BCI security research: website (Astro 5 + React 19 + TailwindCSS 4), QIF model (
 
 ## Key Commands
 `npm run dev` | `npm run build` | `npm run health` (validate sync) | `npm run governance` (regen from derivation log)
+`npm run cve:coverage` (recompute derived counters in `datalake/cve-technique-mapping.json`) | `npm run cve:gaps` (regenerate `datalake/cve-coverage-gaps.json`) -- run both after editing the CVE mappings or the registrar
 
 ## Conventions
 Data changes go in `datalake/` then `npm run prebuild`. All QIF changes align with the 11-band hourglass. See README.md for full details.

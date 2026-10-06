@@ -431,7 +431,7 @@
           "first_human": "2018-01",
           "price_usd": 250,
           "target_use": "consumer",
-          "cves_known": []
+          "cves_known": ["CVE-2023-49914"]
         },
         {
           "name": "Muse S",
