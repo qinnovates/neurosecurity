@@ -15,6 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit
 | Entry | Topic | Link |
 |-------|-------|------|
+| 107 | CVE evidence pass: CVE-2025-4395 wrongly published as fabricated (real Medtronic record, ICSMA-25-205-01); CVE-2023-49914 is the first CVE reaching the neural bands; session corrections to homepage claims, 15 citations, tracked figures and the BCI directory | [Entry 107](#entry-107-cve-evidence-pass) |
 | 106 | October 2026 data refresh: landscape and device crawl, attack research survey, 63 site inconsistencies, three homepage corrections, citation defect C52, intake ledger and tracked metrics. Staged proposals pending Quorum fact-check | [Entry 106](#entry-106-october-2026-data-refresh) |
 
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails, Data Lake Sprint, AI Governance
@@ -352,6 +353,108 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 107: CVE Evidence Pass — A Real Vulnerability Misclassified as Fabricated, and the First Neural-Band CVE {#entry-107-cve-evidence-pass}
+
+**Date:** 2026-10-06, ~18:40
+**Classification:** CORRECTION
+**AI Systems:** Claude Opus 5 (orchestration, direct NVD verification, this entry); research subagents for the crawl, mapping, verification and scholar passes
+**Connected entries:** Entry 106 (October 2026 data refresh), Entry 99 (Data Studio and Parquet data lake), Entry 97 (TARA expansion)
+**RACI:** R: Claude Opus 5 and research subagents | A: KQ | C: none | I: none
+**AI Contribution Level:** AI-generated, each correction below independently verified against NVD by the orchestrator
+
+### Context
+
+Entry 106 recorded the October 2026 refresh and left the CVE mapping unfinished: the agent assigned to it stalled and produced nothing. A fresh pass was run, writing incrementally so a stall could not lose the work again. It resolved 61 CVEs individually at NVD and proposed 52 mappings, lifting evidence coverage from 20 of 165 techniques to 26. Two of its findings were significant enough to verify directly and to record here.
+
+### Correction: CVE-2025-4395 Is Real, Not Fabricated
+
+`datalake/cve-technique-mapping.json`, published since 2026-02-21, stated: *"CVE-2025-4395 excluded (fabricated/reserved)"*, and counted it in `hallucinations_caught: 10`.
+
+Verified at the NVD API on 2026-10-06 (`totalResults: 1`):
+
+| Field | Value |
+|-------|-------|
+| Published | 2025-07-24 |
+| Status | Deferred |
+| Product | Medtronic MyCareLink Patient Monitor |
+| Description | A built-in user account with an empty password allows an attacker with physical access to log in with no password and modify system functionality |
+| CWE | CWE-258 (empty password in configuration file) |
+| CVSS | 3.1, base 6.8, vector `AV:P/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H`, scored by security@medtronic.com |
+| Advisory | ICSMA-25-205-01 (CISA ICS medical) |
+
+The record exists, carries a vendor-assigned score and a CISA advisory, and concerns a cardiac implant's patient monitor — squarely in scope. It was discarded as a hallucination and that judgement was published.
+
+**Why this matters beyond one row.** The original pass used a second model to cross-check candidates and caught 9 genuine hallucinations. That worked. But the same process produced a false positive, and the false positive was recorded as fact in a public dataset. A hallucination filter that is never itself audited becomes a source of error with the authority of a verification step. The corrected note now states what was wrong, and `validation.corrections` records the change rather than silently editing the count.
+
+`hallucinations_caught` is corrected from 10 to 9. The CVE itself is a mapping candidate, not yet integrated.
+
+### Analysis: CVE-2023-49914 — The First CVE Reaching the Neural Bands
+
+Verified at NVD on 2026-10-06 (`totalResults: 1`):
+
+| Field | Value |
+|-------|-------|
+| Published | 2023-12-02 |
+| Status | Modified |
+| Product | InteraXon Muse 2 |
+| Description | Remote attackers cause the Muse App to report an incorrect "outstanding, calm meditation state" via a 480 MHz RF carrier modulated by a false brain wave, termed a Brain-Hack attack |
+| CWE | NVD-CWE-noinfo |
+| CVSS | 3.1, base 6.5, vector `AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N`, scored by NVD |
+| Reference | ACM DOI 10.1145/3605758.3623497 |
+
+**What makes it structurally different.** Every CVE in the map until now sits in the silicon bands: buffer overflows in EEG software, Bluetooth pairing flaws, telemetry and gateway defects. Each is a vulnerability in the computer attached to the person. This one is not. The attack couples RF energy into the analogue front end and the device reports a cognitive state that the wearer is not in. The falsified artefact is an inference about the mind, produced without touching the software stack.
+
+That is the hourglass thesis stated in a CVE record rather than in our own framework: the interface band is where a conventional software boundary stops being the relevant boundary. It is the first entry in the catalogue whose evidence reaches past I0.
+
+**Scope discipline.** NVD classes the impact as denial of service with integrity impact and no confidentiality impact (`C:N/I:H/A:N`), and the attack vector is adjacent, not network. It falsifies a reported state; it does not read or alter cognition. The honest reading is that a consumer EEG device's reported output can be driven by an adjacent RF source — not that a brain was hacked, despite the attack's name. Techniques it bears on: QIF-T0009 (RF false brainwave injection, EMERGING) and QIF-T0022 (Neurofeedback falsification, EMERGING). Both were already EMERGING on analogous published work; this is a vendor-acknowledged instance against a shipping product.
+
+**Provenance convergence.** The CVE's NVD reference is DOI 10.1145/3605758.3623497 — the Armengol-Urpi, Kovacs and Sarma "Brain-Hack" paper, which is row C80 of the research catalogue. C80 was corrected in this same session: it had carried the wrong title ("Electromagnetic Signal Injection Attacks on Brain-Computer Interfaces") against that DOI. So the catalogue cited this work under a title it does not have, while the device dataset did not record the CVE at all, and neither referenced the other. Both halves of the same evidence were held and neither was correct.
+
+The CVE appears in neither `cve-technique-mapping.json` nor `bci-landscape.json`'s record for the device.
+
+### Everything Else Corrected In This Session
+
+All of the following shipped to production on 2026-10-06 and were verified live.
+
+| Correction | Was | Now | Evidence |
+|------------|-----|-----|----------|
+| Homepage market size | "$8 billion industry", median of 9 firms | $2.3B (2024), median of the 9 estimates in the dataset | Computed from `bci-landscape.json` at build |
+| Homepage NISS example | Signal Injection 8.2 HIGH, from base severity + reversibility + detectability | QIF-T0001's real six metrics, 6.1 medium | Registrar |
+| Homepage manufacturers card | Four named companies publish "zero public security documentation" | Neuralink publishes a vulnerability disclosure programme; the dataset records none for the other three | Page fetched directly, returns 200 |
+| Homepage scored claim | 165 techniques "scored for neural impact" | 139 of 165 scored | 26 techniques carry no NISS vector |
+| Research catalogue | 15 defective rows | Corrected and each identifier re-resolved | C52's DOI resolved to an unrelated paper on knowledge distillation; C57 and C88 did not resolve at all; C75 carried a cardiac-defibrillator title against a neurostimulator DOI |
+| `dsm5_diagnoses_mapped` | 68, matching no count in the data | 40, the curated clusters the Atlas renders | `qif-dsm-mappings.json` |
+| `blog_posts` | 59 | 76 | Files in `research/blog/` |
+| `field_journal_entries` | 20 | 18 | Unique numbered headings |
+| BCI directory page | Rendered no companies in production | Renders 67 companies and 70 devices | Adapter emitted snake_case where the component read camelCase; the first dereference threw, and `client:only` left no fallback |
+| `hallucinations_caught` | 10 | 9 | This entry |
+
+Two of my own corrections in this session were themselves wrong and were fixed before merge: `tara_version` was pointed at the registrar's `statistics.tara` block, which is a stale snapshot still claiming 135 techniques, so v1.8 was downgraded to v1.6 in error; and `dsm5_diagnoses_mapped` was first set to 48 (distinct registrar codes) which disagreed with the 40 the Atlas renders. Both are recorded because the pattern matters: a figure recomputed from the wrong source is not more accurate for having been computed.
+
+### Human Decisions
+
+| Decision | By | Outcome |
+|----------|----|---------|
+| Verify everything before publishing | KQ | Applied: 156 of 180 intake items published, 24 held, unverified company claims withheld from the public repository |
+| Fix the citation defects | KQ | 15 rows corrected and merged |
+| Document the unscored techniques rather than score them | KQ | `tara-scoring-gaps.json` and `/atlas/scoring/#coverage` |
+| Surface the refresh on the site | KQ | `/research/provenance/` |
+| Correct the CVE baseline and document the vulnerability analysis | KQ | This entry |
+
+Open: whether to accept the proposed de-mapping that would drop QIF-T0001 to zero CVE evidence; whether to add 7 or 4 new techniques; whether to regenerate the registrar's stale `statistics.tara` block.
+
+### Method Notes
+
+- Both CVEs in this entry were resolved by the orchestrator directly against `services.nvd.nist.gov`, not accepted from a subagent report. An earlier claim relayed from a failed agent — that Abbott and Boston Scientific programmer CVEs existed — did not reproduce on a fresh run and is withdrawn.
+- The CVE pass was not rate-limited: 238 requests paced at 6.6 seconds. None of the 61 CVEs appears in CISA KEV.
+- Known gaps, published rather than hidden: band N2 and seven tactics still have no CVE evidence; one technique would carry 21 of 52 proposed mappings, which is a layering problem rather than a coverage win.
+
+### AI Collaboration
+
+Research subagents performed the crawls, mappings and verification under a shared brief requiring sourced, dated, independently checkable proposals. Claude Opus 5 verified each correction recorded here against the primary source before writing it. Kevin directed scope and made every decision. The staged proposals behind this entry remain unintegrated pending his review.
 
 ---
 
