@@ -19,6 +19,9 @@ import { CODE_LABELS, METRIC_NAMES, parseNiss } from '../lib/niss-parser';
 // Compute hero metrics from registrar (build-time)
 const techniques = (registry as any).techniques ?? [];
 const totalThreats = techniques.length;
+// Techniques that carry a NISS vector. The claim below stays accurate while some are still unscored.
+const scoredThreats = techniques.filter((t: any) => t?.niss?.vector).length;
+const scoredPhrase = scoredThreats === totalThreats ? 'scored for neural impact' : `${scoredThreats} of them scored for neural impact so far`;
 const therapeuticCount = techniques.filter((t: any) => t?.tara?.clinical?.therapeutic_analog).length;
 const dsm5Count = techniques.filter((t: any) => t?.tara?.dsm5?.primary?.length > 0).length;
 const confirmed = techniques.filter((t: any) => t.status === 'CONFIRMED').length;
@@ -75,7 +78,7 @@ techniques.forEach((t: any) => {
 });
 ---
 
-<BaseLayout title="TARA — Open Threat Catalog for BCI Security" description={`${totalThreats} brain-computer interface attack techniques catalogued in TARA, scored with NISS and mapped to the QIF hourglass architecture. A proposed open framework for a ${marketMedianLabel} industry (${MARKET_ESTIMATE_YEAR} estimate).`}>
+<BaseLayout title="TARA — Open Threat Catalog for BCI Security" description={`${totalThreats} brain-computer interface attack techniques catalogued in TARA and mapped to the QIF hourglass architecture, ${scoredThreats} of them scored with NISS. A proposed open framework for a ${marketMedianLabel} industry (${MARKET_ESTIMATE_YEAR} estimate).`}>
   <Nav />
 
   <!-- ═══ HERO ═══ -->
@@ -88,7 +91,7 @@ techniques.forEach((t: any) => {
       </h1>
 
       <p class="text-base sm:text-lg text-[var(--color-text-muted)] mb-8 max-w-2xl leading-relaxed">
-        TARA maps {totalThreats} BCI attack techniques — scored for neural impact, mapped to the neurorights they threaten, and traced to their therapeutic counterparts. Built on the QIF hourglass architecture for a <a href="/research/landscape/" class="text-[var(--color-accent-primary)] hover:underline">{marketMedianLabel} industry</a> ({MARKET_ESTIMATE_YEAR} estimate).*
+        TARA maps {totalThreats} BCI attack techniques — {scoredPhrase}, mapped to the neurorights they threaten, and traced to their therapeutic counterparts. Built on the QIF hourglass architecture for a <a href="/research/landscape/" class="text-[var(--color-accent-primary)] hover:underline">{marketMedianLabel} industry</a> ({MARKET_ESTIMATE_YEAR} estimate).*
       </p>
 
       <!-- Primary CTAs -->
