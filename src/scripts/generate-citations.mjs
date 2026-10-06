@@ -6,7 +6,12 @@
  * Generates:
  *   1. Landscape-relevant sections appended to QIF-RESEARCH-SOURCES.md
  *      (scholarship + timeline entries not already present)
- *   2. Validates landscape.astro imports from registry (advisory only)
+ *   2. Validates that at least one Astro page imports the registry (advisory only)
+ *
+ * Note: this check used to read a single hardcoded page (src/pages/landscape.astro).
+ * That page was renamed twice (-> src/pages/neuroethics/landscape.astro in fb0e31c3,
+ * then -> src/pages/research/neuroethics-landscape.astro in 61bcd345), which broke the
+ * script. It now discovers consumers by globbing src/pages so a rename cannot break it.
  *
  * Usage:
  *   node scripts/generate-citations.mjs           # Run sync
@@ -14,7 +19,7 @@
  *   node scripts/generate-citations.mjs --check     # CI mode: exit 1 if out of sync
  */
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -23,7 +28,19 @@ const ROOT = resolve(__dirname, '../..');
 
 const REGISTRY_PATH = resolve(ROOT, 'datalake/research-registry.json');
 const SOURCES_PATH = resolve(ROOT, 'osi-of-mind/QIF-RESEARCH-SOURCES.md');
-const LANDSCAPE_PATH = resolve(ROOT, 'src/pages/landscape.astro');
+const PAGES_DIR = resolve(ROOT, 'src/pages');
+const REGISTRY_IMPORT_PATTERN = /research-registry\.json/;
+
+/** Recursively collect every .astro page path under src/pages. */
+function collectAstroPages(dir) {
+  const pages = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const entryPath = resolve(dir, entry.name);
+    if (entry.isDirectory()) pages.push(...collectAstroPages(entryPath));
+    else if (entry.isFile() && entry.name.endsWith('.astro')) pages.push(entryPath);
+  }
+  return pages;
+}
 
 const dryRun = process.argv.includes('--dry-run');
 const checkOnly = process.argv.includes('--check');
@@ -35,10 +52,13 @@ const sourcesContent = readFileSync(SOURCES_PATH, 'utf-8');
 let issues = [];
 let updates = [];
 
-// ── 1. Check landscape.astro imports from registry ──
-const landscapeContent = readFileSync(LANDSCAPE_PATH, 'utf-8');
-if (!landscapeContent.includes("import registry from '../../datalake/research-registry.json'")) {
-  issues.push('landscape.astro does not import from research-registry.json');
+// ── 1. Check at least one Astro page consumes the registry ──
+const registryConsumers = collectAstroPages(PAGES_DIR)
+  .filter(pagePath => REGISTRY_IMPORT_PATTERN.test(readFileSync(pagePath, 'utf-8')))
+  .map(pagePath => pagePath.slice(ROOT.length + 1));
+
+if (registryConsumers.length === 0) {
+  issues.push('No page under src/pages imports research-registry.json');
 }
 
 // ── 2. Check scholarship entries exist in QIF-RESEARCH-SOURCES.md ──
@@ -87,11 +107,14 @@ if (!hasQifEntry) {
 }
 
 // ── Report ──
-console.log(`\n📊 Registry: v${registry.version} (${registry.updated})`);
+const registryVersion = registry.metadata?.version ?? registry.version ?? 'unknown';
+const registryUpdated = registry.metadata?.lastUpdated ?? registry.updated ?? 'unknown';
+console.log(`\n📊 Registry: v${registryVersion} (${registryUpdated})`);
 console.log(`   Explorer entries: ${explorerCount}`);
 console.log(`   Ethics timeline:  ${ethicsTimelineCount}`);
 console.log(`   Security timeline: ${secTimelineCount}`);
-console.log(`   Scholarship:      ${scholarshipCount}\n`);
+console.log(`   Scholarship:      ${scholarshipCount}`);
+console.log(`   Registry pages:   ${registryConsumers.length ? registryConsumers.join(', ') : 'none'}\n`);
 
 if (issues.length === 0) {
   console.log('All registry entries are synced to QIF-RESEARCH-SOURCES.md');
