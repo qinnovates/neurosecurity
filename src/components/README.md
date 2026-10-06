@@ -37,7 +37,7 @@ React 19 and Astro components for the qinnovate.com site. Organized by feature d
 | `Hourglass3D.tsx` | React | QIF hourglass model (Three.js) |
 | `HourglassReveal.tsx` | React | Hourglass scroll animation |
 | `FloatingOrbs.tsx` | React | Decorative particle effects |
-| `HeroParticles.tsx` | React | Hero section particles |
+| `signal-bench/SignalBench.tsx` | React | Homepage hero strip chart: catalogued interference classes on synthetic traces |
 | `ThreatAtlasViz.tsx` | React | Threat atlas main visualization |
 | `ThreatMatrix.tsx` | React | Threat matrix grid view |
 | `TaraVisualization.tsx` | React | TARA data visualization |

@@ -3,34 +3,48 @@
 
 /* ═══ Design Tokens — Light Theme (Academic Default) ═══ */
 @theme {
-  --color-bg-deep: #fafafa;
-  --color-bg-surface: #f4f4f5;
-  --color-bg-elevated: #e4e4e7;
-  --color-accent-primary: #3b82f6;
-  --color-accent-secondary: #06b6d4;
-  --color-accent-tertiary: #8b5cf6;
-  --color-text-primary: #09090b;
-  --color-text-muted: #52525b;
-  --color-text-faint: #71717a;
-  --color-border: rgba(0, 0, 0, 0.06);
-  --color-border-hover: rgba(0, 0, 0, 0.12);
+  --color-bg-deep: #f5f6f8;
+  --color-bg-surface: #eceef2;
+  --color-bg-elevated: #dfe2e9;
+  /* Accent roles: primary = interactive, secondary = therapeutic use, tertiary = adversarial use */
+  --color-accent-primary: #4c33b8;
+  /* Solid fills that carry white text. Kept separate so dark-mode links can be lighter than buttons. */
+  --color-accent-fill: #4c33b8;
+  --color-accent-secondary: #0b766c;
+  --color-accent-tertiary: #b81f55;
+  --color-text-primary: #10121a;
+  --color-text-muted: #4a4f5e;
+  --color-text-faint: #646a7a;
+  --color-border: rgba(16, 18, 26, 0.1);
+  --color-border-hover: rgba(16, 18, 26, 0.22);
   --color-status-safe: #10b981;
   --color-status-warn: #f59e0b;
   --color-status-danger: #ef4444;
-  --color-glass-bg: rgba(255, 255, 255, 0.8);
-  --color-glass-border: rgba(0, 0, 0, 0.06);
-  --color-glow-primary: rgba(59, 130, 246, 0.15);
-  --color-glow-secondary: rgba(6, 182, 212, 0.1);
-  --color-glow-tertiary: rgba(139, 92, 246, 0.1);
+  --color-glass-bg: rgba(255, 255, 255, 0.92);
+  --color-glass-border: rgba(16, 18, 26, 0.1);
+  --color-glow-primary: rgba(76, 51, 184, 0.15);
+  --color-glow-secondary: rgba(11, 118, 108, 0.1);
+  --color-glow-tertiary: rgba(184, 31, 85, 0.1);
 
   /* Typography */
-  --font-heading: "Inter", system-ui, sans-serif;
+  --font-heading: "Space Grotesk", "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   /* Spacing scale */
   --spacing-section: 6rem;
   --spacing-card: 1.5rem;
+
+  /* Corner radii: tight, instrument-panel corners */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.1875rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.375rem;
+  --radius-2xl: 0.5rem;
+  --radius-3xl: 0.75rem;
+
+  /* Motion */
+  --ease-signal: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Clinical Domain Colors (therapeutic taxonomy) */
   --color-clinical-movement: #22c55e;  /* green-500 — Movement & Motor */
@@ -62,32 +76,55 @@
   --color-domain-sil: #4b5563;    /* gray-600 — Silicon */
 }
 
-/* Hero byline — light mode: faint text, dark mode: radial gold gradient */
+/* ═══ Token aliases ═══
+   Names referenced across pages and components that were never defined,
+   so their declarations were dropped. Each maps to the nearest real token. */
+:root {
+  --color-bg-primary: var(--color-bg-deep);
+  --color-bg-secondary: var(--color-bg-surface);
+  --color-bg-muted: var(--color-bg-elevated);
+  --color-surface-alt: var(--color-bg-elevated);
+  --color-accent: var(--color-accent-primary);
+  --color-text: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-muted);
+  --color-status-warning: var(--color-status-warn);
+  --color-status-critical: var(--color-status-danger);
+
+  --motion-fast: 160ms;
+  --motion-base: 320ms;
+  --motion-slow: 640ms;
+  --motion-step: 180ms;
+}
+
 .hero-byline {
   color: var(--color-text-faint);
 }
-:root[data-theme="dark"] .hero-byline {
-  background: radial-gradient(circle, #fde68a 0%, #f59e0b 40%, #b45309 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+
+/* Unlayered so it outranks the base h1 size, which Tailwind utilities cannot. */
+.hero-title {
+  font-size: clamp(2.5rem, 4.4vw, 3.75rem);
+  line-height: 1.06;
 }
 
 /* ═══ Dark Theme (BCI Vision) ═══ */
 :root[data-theme="dark"] {
-  --color-bg-deep: #09090b;
-  --color-bg-surface: #18181b;
-  --color-bg-elevated: #27272a;
-  --color-text-primary: #fafafa;
-  --color-text-muted: #a1a1aa;
-  --color-text-faint: #71717a;
-  --color-border: rgba(255, 255, 255, 0.06);
-  --color-border-hover: rgba(255, 255, 255, 0.12);
-  --color-glass-bg: rgba(255, 255, 255, 0.035);
-  --color-glass-border: rgba(255, 255, 255, 0.08);
-  --color-glow-primary: rgba(59, 130, 246, 0.2);
-  --color-glow-secondary: rgba(6, 182, 212, 0.15);
-  --color-glow-tertiary: rgba(139, 92, 246, 0.15);
+  --color-bg-deep: #0c0d12;
+  --color-bg-surface: #14161d;
+  --color-bg-elevated: #1f222c;
+  --color-accent-primary: #7f66ff;
+  --color-accent-fill: #6f55ea;
+  --color-accent-secondary: #45cdbd;
+  --color-accent-tertiary: #ff6b9a;
+  --color-text-primary: #f1f2f6;
+  --color-text-muted: #a3a8b8;
+  --color-text-faint: #7d8396;
+  --color-border: rgba(255, 255, 255, 0.09);
+  --color-border-hover: rgba(255, 255, 255, 0.18);
+  --color-glass-bg: rgba(20, 22, 29, 0.92);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glow-primary: rgba(127, 102, 255, 0.2);
+  --color-glow-secondary: rgba(69, 205, 189, 0.15);
+  --color-glow-tertiary: rgba(255, 107, 154, 0.15);
 
   /* TARA Domain Colors (dark mode — brighter for dark backgrounds) */
   --color-domain-vis: #8b5cf6;    /* violet-500 */
@@ -117,14 +154,6 @@
   z-index: 0;
 }
 
-/* Dark mode glass enhancements */
-:root[data-theme="dark"] .glass {
-  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.04);
-}
-:root[data-theme="dark"] .glass:hover {
-  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.08), 0 0 20px rgba(59, 130, 246, 0.06);
-}
-
 /* Dark mode mono typography */
 :root[data-theme="dark"] .font-mono {
   letter-spacing: 0.03em;
@@ -136,6 +165,13 @@
   font-family: "Inter";
   src: url("/fonts/Inter-Variable.woff2") format("woff2");
   font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/SpaceGrotesk-Variable.woff2") format("woff2");
+  font-weight: 300 700;
   font-display: swap;
 }
 
@@ -166,24 +202,23 @@ body {
   transition: background-color 0.5s ease, color 0.3s ease;
 }
 
-/* ═══ Glassmorphism Utility ═══ */
+/* ═══ Panel Utility ═══
+   The class keeps its historical name. Panels are flat, near-opaque surfaces
+   with a hairline; only the fixed nav blurs what scrolls beneath it. */
 .glass {
   background: var(--color-glass-bg);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid var(--color-glass-border);
+  transition: border-color var(--motion-fast) ease;
 }
 
-/* Light mode glass refinement — premium depth */
-:root:not([data-theme="dark"]) .glass {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04),
-              0 4px 12px rgba(0, 0, 0, 0.03),
-              inset 0 1px 0 rgba(255, 255, 255, 0.7);
+a.glass:hover,
+button.glass:hover {
+  border-color: var(--color-border-hover);
 }
-:root:not([data-theme="dark"]) .glass:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06),
-              0 8px 24px rgba(0, 0, 0, 0.05),
-              inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+#main-nav.glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .nav-dropdown {
@@ -195,26 +230,19 @@ body {
 }
 
 .glass-subtle {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(8px) saturate(150%);
-  -webkit-backdrop-filter: blur(8px) saturate(150%);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-:root[data-theme="dark"] .glass-subtle {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
 }
 
 /* ═══ Typography ═══ */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   color: var(--color-text-primary);
 }
-h1 { letter-spacing: -0.03em; }
+h1 { letter-spacing: -0.035em; }
 
 h1 { font-size: 2.5rem; }
 h2 { font-size: 2rem; }
@@ -240,12 +268,11 @@ code, pre {
 
 /* ═══ Card Hover Effect ═══ */
 .card-hover {
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform var(--motion-fast) var(--ease-signal), border-color var(--motion-fast) ease;
 }
 
 .card-hover:hover {
-  transform: translateY(-3px) scale(1.005);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--color-accent-primary);
+  transform: translateY(-2px);
   border-color: var(--color-accent-primary);
 }
 
@@ -402,8 +429,8 @@ code, pre {
 /* ═══ Scroll Reveal Animations ═══ */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(10px);
+  transition: opacity var(--motion-slow) var(--ease-signal), transform var(--motion-slow) var(--ease-signal);
 }
 
 .reveal.revealed {
@@ -749,11 +776,79 @@ code, pre {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
+/* ═══ Signal Bench (homepage hero strip chart) ═══ */
+.signal-bench-strip {
+  border-block: 1px solid var(--color-border);
+  mask-image: linear-gradient(to right, transparent, #000 14%);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 14%);
+}
+
+@keyframes signal-readout-in {
+  from { opacity: 0; transform: translateY(4px); }
+}
+
+.signal-bench-readout {
+  animation: signal-readout-in var(--motion-base) var(--ease-signal);
+}
+
+/* ═══ Score Build (bars fill in the order the score is composed) ═══ */
+.score-build-fill {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--motion-slow) var(--ease-signal);
+  transition-delay: calc(var(--build-step, 0) * var(--motion-step));
+}
+
+.revealed .score-build-fill {
+  transform: scaleX(1);
+}
+
+/* ═══ Chain Pulse (one pass along a sequence of linked steps) ═══ */
+@keyframes chain-pulse {
+  0%, 100% { border-color: var(--color-glass-border); color: inherit; }
+  40% { border-color: var(--color-accent-primary); color: var(--color-accent-primary); }
+}
+
+.revealed .chain-step {
+  animation: chain-pulse var(--motion-slow) ease-out both;
+  animation-delay: calc(var(--chain-step, 0) * var(--motion-step));
+}
+
+/* ═══ Scroll Trace (reading progress along the bottom edge of the nav) ═══
+   Scroll-driven and CSS-only; browsers without scroll timelines simply omit it. */
+@keyframes scroll-trace {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    #main-nav::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 -1px 0;
+      height: 2px;
+      background: var(--color-accent-primary);
+      transform-origin: left;
+      animation: scroll-trace linear both;
+      pointer-events: none;
+    }
+
+    /* Separate selector on purpose: the minifier folds animation-timeline into
+       the animation shorthand, which browsers then reject as a whole. */
+    nav#main-nav::after {
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
 /* ═══ Reduced Motion ═══ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
 }
