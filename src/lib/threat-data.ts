@@ -8,6 +8,7 @@
  */
 
 import { HOURGLASS_BANDS } from './qif-constants';
+import type { EvidenceTierCode } from './evidence-tiers';
 import registry from '@shared/qtara-registrar.json';
 
 /** Attack categories (columns in the threat map) */
@@ -48,6 +49,16 @@ export type EvidenceLevel = 'meta_analysis' | 'RCT' | 'cohort' | 'case_series' |
 export type DiagnosticCluster = 'cognitive_psychotic' | 'mood_trauma' | 'motor_neurocognitive' | 'persistent_personality' | 'non_diagnostic';
 export type PhysicsTier = 0 | 1 | 2 | 3 | 'X';
 export type PhysicsTierLabel = 'feasible_now' | 'near_term' | 'mid_term' | 'far_term' | 'no_physics_gate';
+
+export interface TechniqueEvidence {
+  tier: EvidenceTierCode;
+  basis: string;
+  neural_product_cve_count: number;
+  adjacent_cve_count: number;
+  legacy_status: string | null;
+  derived_by: string;
+  derived_on: string;
+}
 
 export interface PhysicsFeasibility {
   tier: PhysicsTier;
@@ -156,6 +167,9 @@ export interface ThreatVector {
   bandsStr: string;
   /** NISS v2.0 scoring data (extension metrics: BI, CR, CD, CV, RV, NP) */
   niss: NissScore;
+  /** False when the registrar holds no `niss` block at all. The `niss` value is
+   *  then a placeholder, and its 0 score must not be displayed as a result. */
+  nissScored: boolean;
   /** CVSS v4.0 scoring data (base + supplemental metrics) */
   cvss: CvssScore | null;
   /** Cross-references (related IDs, secondary tactics) */
@@ -166,6 +180,8 @@ export interface ThreatVector {
   tara: TaraProjection | null;
   /** Physics feasibility tier (constraint system analysis) */
   physicsFeasibility: PhysicsFeasibility | null;
+  /** Derived evidence tier. Prefer this over `status`, which is the legacy field. */
+  evidence: TechniqueEvidence | null;
   /** Whether this technique has full TARA enrichment (not a skeleton stub) */
   enriched: boolean;
   /** TARA domain alias: TARA-{DOMAIN}-{MODE}-{NNN} */
@@ -201,11 +217,13 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
   description: t.notes,
   bandsStr: t.bands,
   niss: t.niss ?? { version: '1.0', vector: '', score: 0, severity: 'none', pins: false },
+  nissScored: Boolean(t.niss),
   cvss: t.cvss ?? null,
   crossRefs: t.cross_references ?? null,
   sources: t.sources ?? [],
   tara: t.tara ?? null,
   physicsFeasibility: t.physics_feasibility ?? null,
+  evidence: t.evidence ?? null,
   enriched: !t.tara_enrichment_pending,
   neurorights: t.neurorights ?? null,
   regulatory: t.regulatory ?? null,
