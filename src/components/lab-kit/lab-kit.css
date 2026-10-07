@@ -113,6 +113,7 @@
 .lab-table tbody tr:focus-visible { outline-offset: -2px; }
 .lab-table tbody tr[data-openable="true"] { cursor: pointer; }
 .lab-table tbody tr[data-openable="true"]:hover { background: var(--lab-panel-raised); }
+.lab-table tbody tr[data-quiet="true"] { opacity: 0.55; }
 .lab-table-empty { padding: 1rem 0.75rem; color: var(--lab-ink-soft); }
 
 @media (pointer: coarse) {

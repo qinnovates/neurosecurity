@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import CoverageMeter from '@/components/lab-kit/CoverageMeter';
 import Panel from '@/components/lab-kit/Panel';
 import type { CatalogTechnique } from '@/lib/threat-model/catalog-types';
@@ -14,10 +15,12 @@ interface Props {
   /** The selected part and what was placed on it, or null when the whole device is shown. */
   selected: { label: string; outcome: ElementOutcome } | null;
   techniqueById: ReadonlyMap<string, CatalogTechnique>;
+  /** The opened risk, shown under coverage so coverage never leaves the screen. */
+  children?: ReactNode;
 }
 
 /** Beside the work at all times: how much of the catalog has been assessed, and why techniques sit on the selected part. */
-export default function ModelInspector({ coverage, notAssessedGoals, goalCoverage, selected, techniqueById }: Props) {
+export default function ModelInspector({ coverage, notAssessedGoals, goalCoverage, selected, techniqueById, children }: Props) {
   return (
     <>
       <Panel title="Coverage on this device">
@@ -31,6 +34,7 @@ export default function ModelInspector({ coverage, notAssessedGoals, goalCoverag
           </p>
         ))}
       </Panel>
+      {children}
       <Panel title="Selected part">
         {selected === null
           ? <p className="lab-soft">Select a part or a connection on the diagram to see what is placed on it and why.</p>

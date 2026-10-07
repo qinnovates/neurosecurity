@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { useMemo, useRef, useState, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react';
 import { useListReflow } from './motion/use-list-reflow';
 
 export interface DataTableColumn<Row> {
@@ -19,6 +19,8 @@ interface Props<Row> {
   emptyMessage: string;
   /** When set, a row can be opened with a click or the Enter key. */
   onOpenRow?: (row: Row) => void;
+  /** Rows this returns true for are drawn quieter, for example risks already dealt with. */
+  isRowQuiet?: (row: Row) => boolean;
 }
 
 type SortDirection = 'ascending' | 'descending';
@@ -27,6 +29,9 @@ interface SortState {
   columnId: string;
   direction: SortDirection;
 }
+
+/** Controls inside a row keep their own clicks and keys; only the row itself opens. */
+const ROW_CONTROL_SELECTOR = 'select, input, button, a, label, textarea';
 
 function compareValues(left: string | number, right: string | number): number {
   if (typeof left === 'number' && typeof right === 'number') return left - right;
@@ -37,7 +42,7 @@ function compareValues(left: string | number, right: string | number): number {
  * The Lab's table: a header that stays put, sortable columns, and rows that can be walked
  * with the arrow keys. Rows slide to their new place when the set of rows changes.
  */
-export default function DataTable<Row>({ caption, columns, rows, rowKey, emptyMessage, onOpenRow }: Props<Row>) {
+export default function DataTable<Row>({ caption, columns, rows, rowKey, emptyMessage, onOpenRow, isRowQuiet }: Props<Row>) {
   const [sort, setSort] = useState<SortState | null>(null);
   const [focusedKey, setFocusedKey] = useState<string | null>(null);
   const bodyRef = useRef<HTMLTableSectionElement>(null);
@@ -70,8 +75,13 @@ export default function DataTable<Row>({ caption, columns, rows, rowKey, emptyMe
   };
 
   const handleRowKey = (event: KeyboardEvent<HTMLTableRowElement>, row: Row, index: number): void => {
+    if (event.target !== event.currentTarget) return;
     if (event.key === 'Enter' && onOpenRow !== undefined) onOpenRow(row);
     else moveFocus(event, index);
+  };
+  const handleRowClick = (event: MouseEvent<HTMLTableRowElement>, row: Row): void => {
+    if (event.target instanceof Element && event.target.closest(ROW_CONTROL_SELECTOR) !== null) return;
+    onOpenRow?.(row);
   };
 
   return (
@@ -97,9 +107,9 @@ export default function DataTable<Row>({ caption, columns, rows, rowKey, emptyMe
             const key = keys[index];
             return (
               <tr
-                key={key} data-reflow-key={key} data-openable={onOpenRow !== undefined} tabIndex={key === tabStopKey ? 0 : -1}
+                key={key} data-reflow-key={key} data-openable={onOpenRow !== undefined} data-quiet={isRowQuiet?.(row) === true} tabIndex={key === tabStopKey ? 0 : -1}
                 onFocus={() => setFocusedKey(key)} onKeyDown={(event) => handleRowKey(event, row, index)}
-                onClick={onOpenRow === undefined ? undefined : () => onOpenRow(row)}
+                onClick={onOpenRow === undefined ? undefined : (event) => handleRowClick(event, row)}
               >
                 {columns.map((column) => <td key={column.id}>{column.render(row)}</td>)}
               </tr>

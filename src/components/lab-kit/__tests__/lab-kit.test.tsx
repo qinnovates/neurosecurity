@@ -71,6 +71,17 @@ describe('DataTable', () => {
     expect(onOpenRow.mock.calls.map(([fruit]) => (fruit as Fruit).id)).toEqual(['a', 'c']);
   });
 
+  it('leaves clicks and keys inside a row\'s own controls alone', () => {
+    const onOpenRow = vi.fn();
+    const columns: readonly DataTableColumn<Fruit>[] = [...COLUMNS, { id: 'pick', header: 'Pick', render: (fruit) => <select aria-label={`Pick ${fruit.name}`}><option>yes</option></select> }];
+    render(<DataTable caption="Fruit" columns={columns} rows={FRUIT} rowKey={(fruit) => fruit.id} emptyMessage="None." onOpenRow={onOpenRow} isRowQuiet={(fruit) => fruit.id === 'c'} />);
+    const control = screen.getByRole('combobox', { name: 'Pick Banana' });
+    fireEvent.click(control);
+    fireEvent.keyDown(control, { key: 'Enter' });
+    expect(onOpenRow).not.toHaveBeenCalled();
+    expect(screen.getAllByRole('row').slice(1).map((row) => row.getAttribute('data-quiet'))).toEqual(['false', 'false', 'true']);
+  });
+
   it('says why it is empty', () => {
     renderTable([]);
     expect(screen.getByRole('status').textContent).toBe('No fruit matches.');

@@ -31,3 +31,18 @@
   .model-layout, .model-layout[data-editor="true"] { grid-template-columns: minmax(0, 1fr); }
   .model-inspector { position: static; }
 }
+
+/* The register and the detail of one risk. */
+.model-register-bar { display: flex; flex-wrap: wrap; gap: 0.375rem; padding: 0.625rem 0.625rem 0.5rem; }
+.model-register .lab-table-wrap { max-height: 70vh; }
+.model-decision { font: inherit; color: inherit; background: var(--lab-panel); border: 1px solid var(--lab-line-strong); border-radius: var(--lab-radius); padding: 0.125rem 0.25rem; }
+.model-risk-body > h3 { margin: 0.75rem 0 0.125rem; }
+.model-risk-body > p { margin: 0 0 0.25rem; }
+.model-risk-facts { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
+.model-risk-body .model-risk-vector { white-space: normal; word-break: break-all; }
+.model-risk-list { margin: 0.25rem 0 0; padding-left: 1.125rem; list-style: disc; max-height: 9rem; overflow: auto; }
+
+@media (max-width: 1100px) {
+  /* Where there is no column beside the table, the detail rises from the bottom edge over the page. */
+  .model-risk-detail { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; max-height: 72dvh; overflow: auto; border-width: 1px 0 0; border-color: var(--lab-line-strong); padding-bottom: env(safe-area-inset-bottom, 0px); }
+}
