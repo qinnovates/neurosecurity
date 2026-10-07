@@ -1,5 +1,6 @@
 import AttackChainViz from '@/components/atlas/AttackChainViz';
-import type { ChainGenerationResult, EdgeBasis, GeneratedChain } from '@/lib/threat-model/chain-types';
+import type { ChainGenerationResult, GeneratedChain } from '@/lib/threat-model/chain-types';
+import { EDGE_BASIS_LABELS } from './chain-labels';
 
 interface Props {
   chainResult: ChainGenerationResult;
@@ -7,13 +8,6 @@ interface Props {
   /** Omit in the printed report, where chains cannot be selected. */
   onSelectChain?: (chainId: string | null) => void;
 }
-
-const EDGE_BASIS_LABELS: Record<EdgeBasis, string> = {
-  'documented-relation': 'the catalog cross-references these two techniques',
-  'shared-element': 'both act on the same part of the device (structural only)',
-  'connected-elements': 'they act on directly connected parts (structural only)',
-  'reachable-elements': 'the parts are joined only through others with no step (structural only, weakest)',
-};
 
 function ChainCard({ chain, isSelected, onSelectChain }: { chain: GeneratedChain; isSelected: boolean; onSelectChain?: (chainId: string | null) => void }) {
   return (

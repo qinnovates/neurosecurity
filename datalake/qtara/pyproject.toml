@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=77.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -10,10 +10,11 @@ authors = [
 ]
 description = "Threat Analysis & Risk Assessment (TARA) Framework for Neural Security"
 readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
 requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Topic :: Security",
     "Topic :: Scientific/Engineering",
@@ -25,8 +26,9 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/qinnovates/qinnovate"
-"Bug Tracker" = "https://github.com/qinnovates/qinnovate/issues"
+"Homepage" = "https://github.com/qinnovates/neurosecurity"
+"Source" = "https://github.com/qinnovates/neurosecurity/tree/main/datalake/qtara"
+"Bug Tracker" = "https://github.com/qinnovates/neurosecurity/blob/main/SECURITY.md"
 
 [project.scripts]
 qtara = "qtara.cli:main"

@@ -18,6 +18,7 @@ const model = buildModelFromIntake(defaultAnswersFor(archetype), archetype, engi
 const report = buildThreatModelReport({ model, engineData, referenceData, generatedAt: '' });
 const catalogRows = report.riskRows.filter((row) => row.source === 'catalog');
 const strideRows = report.riskRows.filter((row) => row.source === 'stride');
+const techniqueById = new Map(engineData.techniques.map((technique) => [technique.id, technique]));
 
 function bodyRows(): HTMLElement[] {
   return screen.getAllByRole('row').slice(1);
@@ -25,7 +26,7 @@ function bodyRows(): HTMLElement[] {
 
 describe('RisksSection', () => {
   it('starts on the catalog rows and switches source with the chips, each showing its count', () => {
-    render(<RisksSection rows={report.riskRows} controlsInPlace={[]} onDecide={() => undefined} onOpenRisk={() => undefined} />);
+    render(<RisksSection rows={report.riskRows} controlsInPlace={[]} techniqueById={techniqueById} onDecide={() => undefined} onOpenRisk={() => undefined} />);
     expect(bodyRows()).toHaveLength(catalogRows.length);
     fireEvent.click(screen.getByRole('button', { name: `STRIDE baseline ${strideRows.length}` }));
     expect(bodyRows()).toHaveLength(strideRows.length);
@@ -36,7 +37,7 @@ describe('RisksSection', () => {
   it('records a decision from the row without opening the row', () => {
     const onDecide = vi.fn();
     const onOpenRisk = vi.fn();
-    render(<RisksSection rows={report.riskRows} controlsInPlace={[]} onDecide={onDecide} onOpenRisk={onOpenRisk} />);
+    render(<RisksSection rows={report.riskRows} controlsInPlace={[]} techniqueById={techniqueById} onDecide={onDecide} onOpenRisk={onOpenRisk} />);
     const firstRow = bodyRows()[0];
     const decision = within(firstRow).getByRole('combobox');
     fireEvent.click(decision);
@@ -50,7 +51,7 @@ describe('RisksSection', () => {
   it('puts addressed rows last and drops them under "Open only"', () => {
     const addressed: RiskRow = { ...catalogRows[0], status: 'accepted' };
     const rows = [addressed, ...catalogRows.slice(1)];
-    render(<RisksSection rows={rows} controlsInPlace={[]} onDecide={() => undefined} onOpenRisk={() => undefined} />);
+    render(<RisksSection rows={rows} controlsInPlace={[]} techniqueById={techniqueById} onDecide={() => undefined} onOpenRisk={() => undefined} />);
     const all = bodyRows();
     expect(all[all.length - 1].getAttribute('data-quiet')).toBe('true');
     fireEvent.click(screen.getByRole('button', { name: `Open only ${rows.length - 1}` }));
@@ -58,7 +59,7 @@ describe('RisksSection', () => {
   });
 
   it('says why it is empty when the lenses leave nothing', () => {
-    render(<RisksSection rows={[]} controlsInPlace={[]} onDecide={() => undefined} onOpenRisk={() => undefined} />);
+    render(<RisksSection rows={[]} controlsInPlace={[]} techniqueById={techniqueById} onDecide={() => undefined} onOpenRisk={() => undefined} />);
     expect(screen.getByRole('status').textContent).toContain('No risk of this kind matches the part and lenses chosen');
   });
 });

@@ -15,6 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit
 | Entry | Topic | Link |
 |-------|-------|------|
+| 111 | `evidence.tier` populated across all 176 techniques by deterministic rubric, replacing a legacy `status` word nothing re-derived; the seven-tier scheme had 0 adoption and its one consumer passed null; 6 techniques promoted; validated tiers and adjacent-CVE promotion both refused; 26 incomplete physics blocks found, and the Python SDK had never parsed its own registrar | [Entry 111](#entry-111-evidence-tier) |
 | 110 | Privilege-boundary split of QIF-T0163/T0164: QIF-T0175 (CONFIRMED on four Natus Xltek clinical EEG RCEs) and QIF-T0176 take the application-layer parsing boundary; 22 CVEs divided 11/11; no technique now exceeds the evidence-concentration threshold; three of my own recollections of the task were wrong and re-read from the record | [Entry 110](#entry-110-privilege-split) |
 | 109 | Physics tier integrity: five techniques labelled `no_physics_gate` while tiered `0` (feasible now), and 13 with no block at all counted as tier 0 by a `?? 0` fallback; validator added to CI. Whitepaper 6.5.7 attributed the `severity` field to NISS, claiming 32 critical techniques where NISS yields 0, with a mechanistic argument built on it | [Entry 109](#entry-109-physics-tier-integrity) |
 | 108 | Integration pass: `parent_id` sub-technique field and a two-level taxonomy (165 to 174); 52 CVE mappings integrated and QIF-T0001 de-mapped to zero evidence; 40 papers added; three hand-maintained blocks replaced by generators; a scoring conflict I reported that did not exist | [Entry 108](#entry-108-integration-pass) |
@@ -356,6 +357,68 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 111: A Seven-Tier Evidence Scheme That Nothing Used {#entry-111-evidence-tier}
+
+**Date:** 2026-10-07, ~05:10
+**Classification:** FRAMEWORK
+**AI Systems:** Claude Opus 5 (derivation rubric, migration, validator, this entry)
+**Connected entries:** Entry 110 (privilege split, same session), Entry 109 (physics tier integrity), Entry 108 (cross-metric conflation)
+**RACI:** R: Claude Opus 5 | A: KQ (chose this option over two narrower ones) | C: none | I: none
+**AI Contribution Level:** AI-generated; every tier derived by script from existing fields, none hand-assigned
+
+### The question that started it
+
+KQ asked why QIF-T0163 was `THEORETICAL` while holding verified CVEs, and how to move forward. The answer to the first part turned out to be structural: **nothing re-derives status when evidence arrives.** `status` is a single word assigned when a technique is authored. The CVE mapping file and the registrar are independent; the October integration attached 52 CVEs without revisiting a single status.
+
+Eight techniques consequently carried a status weaker than their own mapped evidence supported. `status` also held two values -- `PLAUSIBLE` and `SPECULATIVE`, one technique each -- that `statusToEvidenceGroup()` has no case for and silently buckets as speculative.
+
+And the field designed to fix exactly this was already built: `src/lib/evidence-tiers.ts` defines a seven-tier scheme, and `getEvidenceGroup()` *prefers* `evidence.tier` over `status`. It was populated on **0 of 176 techniques**. The one component that calls it, `DomainMatrix.tsx`, passed `null` for the evidence argument, so even a populated field would have been ignored. A designed solution had been sitting inert while the problem it addresses accumulated.
+
+### The rubric
+
+Every tier is derived by script from fields already in the repository. None was hand-assigned, and `evidence.basis` on each technique names what its tier followed from.
+
+A technique with at least one NVD-verified CVE in a neural-product category (Neural/EEG Systems, Implant Telemetry, Implant Gateway/Hub) is `demonstrated_case`: a documented instance in a shipping neural-data product is observational evidence whatever the authoring status said. Otherwise the tier follows the legacy status, with `THEORETICAL` splitting on whether `origin.category` is `literature` (someone modelled it in a paper) or not.
+
+| tier | count |
+|---|---|
+| demonstrated_case | 15 |
+| demonstrated_lab | 63 |
+| theoretical_modeled | 18 |
+| theoretical_proposed | 78 |
+| speculative | 2 |
+| validated_rct / validated_replication | 0 |
+
+Six techniques were promoted above their authoring status: QIF-T0008 (6 CVEs), T0009, T0022, T0031, T0046, T0047.
+
+### Three things the rubric refuses to do
+
+**It never assigns the two validated tiers.** Both assert that independent replication happened. No field in this repository records that, so they stay empty rather than inferred. A scheme whose top rungs are empty is honest; one whose top rungs are guessed is not.
+
+**It does not read `tara.clinical.evidence_level`.** That field holds values like "RCT", and it grades the *therapeutic analog's* evidence, not the attack's. Using it to tier attacks would have been easy, would have filled the validated tiers immediately, and would have repeated precisely the cross-metric conflation recorded in Entry 108 and found in whitepaper 6.5.7 in Entry 109. Third time in two sessions that this particular trap was available; first time it was spotted before falling in.
+
+**Adjacent CVE evidence does not promote.** Twelve techniques hold NVD-verified CVEs only in component technology -- Bluetooth stacks, RTOSes, DICOM libraries -- not in a neural-data product. The mechanism is proven; it is not proven on a BCI. The seven-tier scheme has **no rung for "demonstrated in adjacent technology"**, which is a real gap in the scheme rather than in the data. Rather than force those twelve up or drop them, the count is recorded in `evidence.adjacent_cve_count` and the gap is noted here.
+
+### Which answers the original question
+
+QIF-T0163's `THEORETICAL` was defensible after all -- but only after Entry 110's split. All 11 of its remaining CVEs are component technology (Zephyr, FreeRTOS, ThreadX, NimBLE); its neural-product evidence, the four Natus Xltek clinical EEG RCEs, moved to QIF-T0175, which tiers `demonstrated_case`. The split had already resolved the substance of the mismatch; the tiering made that visible instead of leaving it to be re-litigated.
+
+### A fourth physics defect, and an SDK that had never parsed its own data
+
+Wiring the Python model surfaced something Entry 109's validator had missed: **26 techniques carried two-field physics blocks** with no `timeline`, `gate_reason`, `constraint_system_ref` or `analysis_date`. Entry 109 checked that a block existed and that tier agreed with label; it did not check completeness. These are QIF-T0136 to T0161 -- the same batch as the 26 techniques with no NISS score, so that batch was authored with incomplete metadata throughout.
+
+The consequence was larger than a gap. `PhysicsFeasibility` in the SDK requires `timeline`, so **the Python SDK could not parse its own bundled registrar**, and nothing noticed because no test or workflow parses it. `timeline` maps 1:1 from `tier_label` across all 150 populated blocks, so backfilling the 26 is derivation from an established mapping, not invention; `gate_reason` is not derivable and is deliberately left absent. One further mismatch, `tara.dual_use` being null on QIF-T0168, made the model's non-optional `str` wrong about its own data. With both fixed, the SDK parses all 176 techniques -- as far as the record shows, for the first time.
+
+### Guards
+
+The Registrar Sync Check workflow now also requires: every technique to have an `evidence.tier` from the documented vocabulary; any technique holding neural-product CVEs to be tiered at `demonstrated_lab` or above; and every physics block to carry a `timeline`. All three were verified by reintroducing each defect and watching the validator exit 1.
+
+### Standing judgement
+
+Two patterns worth naming. First: a field that something *prefers* but nothing *populates* is worse than no field, because the fallback path looks deliberate. `getEvidenceGroup(evidence, status)` reads as a considered design; `getEvidenceGroup(null, t.status)` at the one call site is what it actually did. Second: four of this session's defects -- the physics tier, the missing blocks, the whitepaper's NISS table, and this -- share one shape. A derived value was written down once, by hand, and never re-derived when its inputs changed. Every fix in this session that will still hold in six months is a generator or a validator, not a corrected number.
 
 ---
 

@@ -1,7 +1,9 @@
-import { useMemo, useRef, useState, type ChangeEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type ChangeEvent } from 'react';
+import { useSequencePlayback } from '@/components/lab-kit/motion/use-sequence-playback';
 import { useIsOffscreen } from '@/components/lab-kit/use-is-offscreen';
 import { useMediaQuery } from '@/components/lab-kit/use-media-query';
 import { useFocus } from '@/components/workbench/FocusContext';
+import type { ModeProps } from '@/components/workbench/mode-registry';
 import type { DeviceModel, RiskStatus } from '@/lib/threat-model/device-model';
 import { DeviceModelFormatError } from '@/lib/threat-model/errors';
 import type { IntakeAnswers } from '@/lib/threat-model/intake-to-model';
@@ -14,7 +16,7 @@ import { countOpenRisksByElement } from '@/lib/threat-model/risk-register';
 import { describeElement } from '@/lib/threat-model/stride';
 import { isNeuralInterfaceElement, listTargetRegions } from '@/lib/threat-model/target-regions';
 import BeyondDevice from './BeyondDevice';
-import ChainList from './ChainList';
+import ChainsSection from './ChainsSection';
 import ComplianceChecklist from './ComplianceChecklist';
 import DeviceCanvas from './DeviceCanvas';
 import IntakeForm from './IntakeForm';
@@ -26,23 +28,13 @@ import ReplaceDeviceConfirm from './ReplaceDeviceConfirm';
 import ReportView from './ReportView';
 import RiskDetail from './RiskDetail';
 import RisksSection from './RisksSection';
-import Tabs, { tabPanelProps, type TabItem } from './Tabs';
 import TargetRegionsPanel from './TargetRegionsPanel';
 import ThreatMatrix from './ThreatMatrix';
 import './threat-model.css';
 import './model-layout.css';
 
-type SectionId = 'register' | 'map' | 'chains' | 'beyond' | 'requirements' | 'report';
-
-const SECTION_TABS: readonly TabItem<SectionId>[] = [
-  { id: 'register', label: 'Risks' },
-  { id: 'map', label: 'Attack map' },
-  { id: 'chains', label: 'Attack chains' },
-  { id: 'beyond', label: 'Around the device' },
-  { id: 'requirements', label: 'US requirements' },
-  { id: 'report', label: 'Full report' },
-];
-const SECTIONS_ID = 'tm-sections';
+/** The view that shows chains; leaving it puts the chain away. */
+const CHAINS_VIEW_ID = 'chains';
 /** At this width and above the diagram is always shown; below it, the diagram folds behind the row of parts. */
 const WIDE_SCREEN_QUERY = '(min-width: 721px)';
 const UNEXPECTED_IMPORT_ERROR = 'The model file could not be loaded: an unexpected problem occurred while reading it.';
@@ -53,11 +45,10 @@ type PendingReplacement =
   | { kind: 'import'; model: DeviceModel };
 
 /** The Model mode: describe the device in focus, then read what applies to it. */
-export default function ThreatModelStudio() {
+export default function ThreatModelStudio({ viewId }: ModeProps) {
   const { state, dispatch, report, engineData, referenceData, techniqueById, hasWork } = useFocus();
   const { archetypes } = referenceData;
   const { registrarVersion } = engineData;
-  const [activeSection, setActiveSection] = useState<SectionId>('register');
   const [lens, setLens] = useState<Lens>(EMPTY_LENS);
   const [selectedChainId, setSelectedChainId] = useState<string | null>(null);
   const [openedRiskId, setOpenedRiskId] = useState<string | null>(null);
@@ -87,6 +78,11 @@ export default function ThreatModelStudio() {
     return { ...report.chainResult, chains: report.chainResult.chains.filter((chain) => chain.steps.some((step) => step.elementId === elementId)) };
   }, [report.chainResult, activeLens]);
   const selectedChain = report.chainResult.chains.find((chain) => chain.chain_id === selectedChainId) ?? null;
+  const chainPlayback = useSequencePlayback(selectedChain?.steps.length ?? 0);
+  // A chain belongs to the Chains view: it is put away when the reader moves to another one.
+  useEffect(() => {
+    if (viewId !== CHAINS_VIEW_ID) setSelectedChainId(null);
+  }, [viewId]);
   const targetRegions = useMemo(() => listTargetRegions(model, engineData.regions), [model, engineData.regions]);
   const isInterfaceSelected = isNeuralInterfaceElement(model, activeLens.elementId);
   const regionNames = model.targetRegionIds.map((regionId) => regionById.get(regionId)?.name ?? regionId);
@@ -151,13 +147,13 @@ export default function ThreatModelStudio() {
   const canvas = (
     <DeviceCanvas
       report={report} lens={activeLens} onLensChange={setLens}
-      selectedChain={selectedChain} onClearChain={() => setSelectedChainId(null)}
+      selectedChain={selectedChain} chainPlayback={chainPlayback} onClearChain={() => setSelectedChainId(null)}
       isEditorOpen={isEditorOpen} onToggleEditor={toggleEditor}
     />
   );
 
   return (
-    <div className="tm-root model-layout" data-editor={isEditorOpen}>
+    <div className="tm-root model-layout" data-editor={isEditorOpen} data-view={viewId}>
       {isEditorOpen && (
         <aside className="tm-no-print" aria-label="Device editor">
           {pendingReplacement !== null && (
@@ -193,7 +189,7 @@ export default function ThreatModelStudio() {
             </button>
           </div>
         )}
-        <div ref={canvasRef} className="tm-no-print">
+        <div ref={canvasRef} className="model-canvas-slot tm-no-print">
           {/* A narrow screen starts on the risks; the diagram is one press away, and opens by itself to show a chain. */}
           {isWideScreen || selectedChain !== null ? canvas : (
             <details className="model-diagram-fold">
@@ -209,21 +205,25 @@ export default function ThreatModelStudio() {
           lens={activeLens} counts={lensCounts} goalCoverage={report.goalCoverage} onChange={setLens}
           selectedElementLabel={selectedElementLabel}
         />
-        <Tabs label="Threat model sections" idPrefix={SECTIONS_ID} tabs={SECTION_TABS} activeId={activeSection} onSelect={setActiveSection} />
         {isInterfaceSelected && selectedElementLabel !== null && (
           <div className="tm-no-print">
             <TargetRegionsPanel summary={targetRegions} interfaceLabel={selectedElementLabel} />
           </div>
         )}
-        <div {...tabPanelProps(SECTIONS_ID, activeSection)}>
-          {activeSection === 'register' && (
-            <RisksSection rows={rowsInView} controlsInPlace={model.controlsInPlace} onDecide={decideRisk} onOpenRisk={setOpenedRiskId} />
+        <div>
+          {viewId === 'risks' && (
+            <RisksSection rows={rowsInView} controlsInPlace={model.controlsInPlace} techniqueById={techniqueById} onDecide={decideRisk} onOpenRisk={setOpenedRiskId} />
           )}
-          {activeSection === 'map' && <section className="tm-card"><ThreatMatrix rows={rowsInView} /></section>}
-          {activeSection === 'chains' && <ChainList chainResult={chainsInView} selectedChainId={selectedChainId} onSelectChain={setSelectedChainId} />}
-          {activeSection === 'beyond' && <BeyondDevice ambientThreats={report.ambientThreats} themes={report.themes} />}
-          {activeSection === 'requirements' && <ComplianceChecklist assessment={report.cyberDeviceAssessment} items={report.complianceItems} />}
-          {activeSection === 'report' && (
+          {viewId === 'attack-map' && <section className="lab-panel model-plain-panel"><ThreatMatrix rows={rowsInView} /></section>}
+          {viewId === CHAINS_VIEW_ID && (
+            <ChainsSection
+              model={model} chainResult={chainsInView} techniqueById={techniqueById}
+              selectedChain={selectedChain} onSelectChain={setSelectedChainId} playback={chainPlayback}
+            />
+          )}
+          {viewId === 'around' && <BeyondDevice ambientThreats={report.ambientThreats} themes={report.themes} />}
+          {viewId === 'requirements' && <ComplianceChecklist assessment={report.cyberDeviceAssessment} items={report.complianceItems} />}
+          {viewId === 'report' && (
             <>
               <div className="tm-actions tm-no-print" style={{ marginBottom: '1rem' }}>
                 <button type="button" className="tm-button tm-button--primary" onClick={() => window.print()}>Print or save as PDF</button>

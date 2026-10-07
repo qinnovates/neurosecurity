@@ -109,6 +109,30 @@ export const EVIDENCE_TIER_LABELS: Record<EvidenceTierCode, string> = {
  * Map the existing Status field (CONFIRMED, DEMONSTRATED, THEORETICAL, EMERGING)
  * to the nearest evidence group. Used when a record has no explicit evidence.tier.
  */
+/**
+ * Tier-level fallback for a record with no derived `evidence.tier`.
+ *
+ * Mirrors the rubric in src/scripts/migrate-populate-evidence-tier.py and, like
+ * it, never returns a validated tier: those assert independent replication,
+ * which nothing in this repository records. The previous inline ternary on the
+ * technique page mapped CONFIRMED straight to `validated_replication`, so all
+ * 28 confirmed techniques published "Validated (Independently Replicated)".
+ */
+export function statusToEvidenceTier(status: string | undefined | null): EvidenceTierCode {
+  switch ((status ?? '').toUpperCase()) {
+    case 'CONFIRMED':
+    case 'DEMONSTRATED':
+      return 'demonstrated_lab';
+    case 'THEORETICAL':
+      return 'theoretical_proposed';
+    case 'EMERGING':
+    case 'PLAUSIBLE':
+      return 'theoretical_proposed';
+    default:
+      return 'speculative';
+  }
+}
+
 export function statusToEvidenceGroup(status: string | undefined | null): EvidenceTierGroup {
   if (!status) return 'speculative';
   switch (status.toUpperCase()) {

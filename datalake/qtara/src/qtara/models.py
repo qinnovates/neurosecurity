@@ -39,7 +39,8 @@ class EngineeringEnrichment(BaseModel):
 
 class TARAEnrichment(BaseModel):
     mechanism: Optional[str] = None
-    dual_use: str = "unknown"
+    # QIF-T0168 carries an explicit null: its dual-use class was not assessed.
+    dual_use: Optional[str] = "unknown"
     clinical: Optional[ClinicalEnrichment] = None
     governance: Optional[GovernanceEnrichment] = None
     engineering: Optional[EngineeringEnrichment] = None
@@ -65,10 +66,22 @@ class NissData(BaseModel):
 class PhysicsFeasibility(BaseModel):
     tier: Union[int, str]
     tier_label: str
-    timeline: str
+    # Optional because QIF-T0136 to T0161 were authored without gate_reason or
+    # analysis_date; timeline itself is backfilled from tier_label.
+    timeline: Optional[str] = None
     gate_reason: Optional[str] = None
     constraint_system_ref: Optional[str] = None
     analysis_date: Optional[str] = None
+
+class TechniqueEvidence(BaseModel):
+    """Derived evidence tier. Prefer this over `status`, which is the legacy field."""
+    tier: str
+    basis: str
+    neural_product_cve_count: int = 0
+    adjacent_cve_count: int = 0
+    legacy_status: Optional[str] = None
+    derived_by: Optional[str] = None
+    derived_on: Optional[str] = None
 
 class CvssData(BaseModel):
     version: str = "4.0"
@@ -126,6 +139,7 @@ class ThreatTechnique(BaseModel):
     tara: Optional[TARAEnrichment] = None
     dsm5: Optional[DSM5] = None
     physics_feasibility: Optional[PhysicsFeasibility] = None
+    evidence: Optional[TechniqueEvidence] = None
     cvss: Optional[CvssData] = None
     neurorights: Optional[NeurorightsMapped] = None
     regulatory: Optional[RegulatoryData] = None

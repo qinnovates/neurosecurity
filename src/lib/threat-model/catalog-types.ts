@@ -29,6 +29,8 @@ export interface CatalogTechnique {
   bandIds: string[];
   /** Evidence status as written in the catalog (CONFIRMED, DEMONSTRATED, EMERGING, THEORETICAL, ...). */
   evidenceStatus: string;
+  /** The catalog's derived evidence tier code (see src/lib/evidence-tiers.ts), or null when a record has none. Shown in the interface; the engine's matching still reads the status. */
+  evidenceTier: string | null;
   severity: CatalogSeverity;
   mode: TechniqueMode | null;
   /** TARA's primary biological domain code (for example MEM, VIS, AUD), or SIL for silicon. */
@@ -67,8 +69,16 @@ export interface BandControls {
   response: string[];
 }
 
+/** A tactic as the catalog names it. */
+export interface CatalogTactic {
+  id: string;
+  name: string;
+  description: string;
+}
+
 export interface EngineData {
   registrarVersion: string;
+  tactics: CatalogTactic[];
   techniques: CatalogTechnique[];
   regions: BrainRegion[];
   precedentCves: PrecedentCve[];

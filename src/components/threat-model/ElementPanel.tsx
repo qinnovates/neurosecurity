@@ -1,3 +1,4 @@
+import EvidenceMark from '@/components/lab-kit/EvidenceMark';
 import type { CatalogTechnique } from '@/lib/threat-model/catalog-types';
 import type { ElementOutcome } from '@/lib/threat-model/report-types';
 
@@ -21,7 +22,7 @@ export default function ElementPanel({ elementLabel, outcome, techniqueById }: P
               return (
                 <li key={match.techniqueId}>
                   <strong>{technique?.name ?? match.techniqueId}</strong>{' '}
-                  <span className="tm-badge">{technique?.evidenceStatus ?? 'Unknown'}</span>
+                  <EvidenceMark tier={technique?.evidenceTier ?? null} status={technique?.evidenceStatus ?? null} />
                   <div className="tm-muted">{match.reasons.map((reason) => reason.detail).join(' ')}</div>
                 </li>
               );

@@ -26,7 +26,7 @@ function sevCounts(ts: ThreatVector[]) {
 function topEvidence(ts: ThreatVector[]): EvidenceTierGroup | null {
   if (!ts.length) return null;
   const order: EvidenceTierGroup[] = ['validated', 'demonstrated', 'theoretical', 'speculative'];
-  const gs = ts.map(t => getEvidenceGroup(null, t.status));
+  const gs = ts.map(t => getEvidenceGroup(t.evidence, t.status));
   return order.find(g => gs.includes(g)) ?? 'speculative';
 }
 

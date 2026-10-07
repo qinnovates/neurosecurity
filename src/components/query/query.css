@@ -1,0 +1,22 @@
+/* Query: the tables on the left, the editor and its result on the right. */
+
+.query { display: grid; gap: 0.75rem; grid-template-columns: 18rem minmax(0, 1fr); align-items: start; }
+.query-main { min-width: 0; display: grid; gap: 0.75rem; }
+.query-group { margin: 0.75rem 0 0.25rem; }
+.query-table-list { list-style: none; margin: 0; padding: 0; }
+.query-table-list--long { max-height: 18rem; overflow: auto; }
+.query-table { display: flex; justify-content: space-between; gap: 0.5rem; width: 100%; padding: 0.1875rem 0.375rem; font: inherit; color: inherit; background: none; border: 0; border-radius: var(--lab-radius); cursor: pointer; }
+.query-table:hover { background: var(--lab-panel-raised); }
+.query-table[aria-pressed="true"] { box-shadow: inset 3px 0 0 var(--lab-select); background: var(--lab-panel-raised); }
+.query-table .lab-id { color: var(--lab-ink); }
+.query-columns { white-space: normal; word-break: break-word; }
+.query-editor { width: 100%; padding: 0.5rem 0.625rem; font-family: var(--lab-mono); font-size: 0.8125rem; color: var(--lab-ink); background: var(--lab-panel-raised); border: 1px solid var(--lab-line-strong); border-radius: var(--lab-radius); resize: vertical; }
+.query-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem 0.75rem; margin-top: 0.5rem; }
+.query-starters { display: flex; flex-wrap: wrap; gap: 0.3125rem; }
+.query-history { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3125rem; margin-top: 0.5rem; }
+.query-history .lab-chip { font-family: var(--lab-mono); font-size: 0.75rem; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.query-result { max-height: 64vh; }
+/* A bar beside each count: thin, drawn to the largest count, rounded at the data end. */
+.query-bar-cell { width: 40%; min-width: 6rem; }
+.query-bar { display: block; height: 0.625rem; min-width: 1px; background: var(--lab-ink-soft); border-radius: 0 4px 4px 0; transition: width var(--motion-move) var(--motion-ease); }
+@media (max-width: 900px) { .query { grid-template-columns: minmax(0, 1fr); } }

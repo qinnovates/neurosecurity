@@ -122,14 +122,20 @@ describe('CoverageMeter', () => {
 });
 
 describe('EvidenceMark', () => {
-  it('shows the catalog\'s own word and marks an unknown status as other', () => {
-    const { container } = render(<EvidenceMark status="SPECULATIVE" />);
-    expect(container.textContent).toBe('Speculative');
+  it('reads the tier first and shows the catalog\'s words for it', () => {
+    const { container } = render(<EvidenceMark tier="demonstrated_case" status="THEORETICAL" />);
+    expect(container.textContent).toBe('Demonstrated (Case Study / Observational)');
+    expect(container.querySelector('.lab-evidence')?.getAttribute('data-level')).toBe('demonstrated');
+  });
+
+  it('keeps a value neither scheme knows visible under its own word', () => {
+    const { container } = render(<EvidenceMark tier={null} status="PLAUSIBLE" />);
+    expect(container.textContent).toBe('Plausible');
     expect(container.querySelector('.lab-evidence')?.getAttribute('data-level')).toBe('other');
   });
 
   it('keeps an accessible name when the word is hidden', () => {
-    render(<EvidenceMark status="CONFIRMED" isLabelHidden />);
+    render(<EvidenceMark tier={null} status="CONFIRMED" isLabelHidden />);
     expect(screen.getByRole('img', { name: 'Evidence: Confirmed' })).toBeTruthy();
   });
 });
