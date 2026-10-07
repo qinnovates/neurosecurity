@@ -54,6 +54,75 @@ describe('parseTaraChains', () => {
   });
 });
 
+describe('parseTaraChains evidence field', () => {
+  const chainEvidence = { overall_label: 'projected', rationale: 'Objective step is theoretical.' };
+
+  it('accepts a chain and a step with no evidence block', () => {
+    const chain = buildChain();
+    expect(parseTaraChains({ chains: [chain] }, KNOWN_IDS)).toEqual([chain]);
+  });
+
+  it('accepts a well-formed chain evidence block, with and without the optional fields', () => {
+    for (const evidence of [
+      chainEvidence,
+      { ...chainEvidence, device_class: 'Implanted stimulator' },
+      { ...chainEvidence, extrapolation: 'Generalised from cardiac telemetry CVEs.' },
+    ]) {
+      const chain = buildChain({ evidence });
+      expect(parseTaraChains({ chains: [chain] }, KNOWN_IDS)).toEqual([chain]);
+    }
+  });
+
+  it('accepts a well-formed step evidence block', () => {
+    const steps = [{ ...buildChain().steps[0], evidence: { label: 'demonstrated', note: 'CVE resolved at NVD.', source_url: 'https://nvd.nist.gov/vuln/detail/CVE-2019-6538' } }];
+    const chain = buildChain({ steps });
+    expect(parseTaraChains({ chains: [chain] }, KNOWN_IDS)).toEqual([chain]);
+  });
+
+  it.each([
+    ['a label the page cannot draw', { overall_label: 'confirmed', rationale: 'x' }],
+    ['a missing rationale', { overall_label: 'projected' }],
+    ['a non-string rationale', { overall_label: 'projected', rationale: 7 }],
+    ['a non-string device_class', { overall_label: 'projected', rationale: 'x', device_class: 7 }],
+    ['a non-string extrapolation', { overall_label: 'projected', rationale: 'x', extrapolation: true }],
+    ['a non-object block', 'projected'],
+  ])('rejects chain evidence with %s', (_name, evidence) => {
+    expect(() => parseTaraChains({ chains: [buildChain({ evidence })] }, KNOWN_IDS)).toThrow(TaraChainsFormatError);
+  });
+
+  it.each([
+    ['a label the page cannot draw', { label: 'maybe', note: 'x' }],
+    ['a missing note', { label: 'projected' }],
+    ['a non-string source_url', { label: 'projected', note: 'x', source_url: 7 }],
+    ['a non-object block', 'projected'],
+  ])('rejects step evidence with %s', (_name, evidence) => {
+    const steps = [{ ...buildChain().steps[0], evidence }];
+    expect(() => parseTaraChains({ chains: [buildChain({ steps })] }, KNOWN_IDS)).toThrow(TaraChainsFormatError);
+  });
+
+  it.each(['constructor', 'toString', '__proto__'])('rejects the inherited key %s as an evidence label', (label) => {
+    const steps = [{ ...buildChain().steps[0], evidence: { label, note: 'x' } }];
+    expect(() => parseTaraChains({ chains: [buildChain({ steps })] }, KNOWN_IDS)).toThrow(TaraChainsFormatError);
+  });
+});
+
+describe('committed catalog', () => {
+  it('labels every step of every chain that carries chain-level evidence', () => {
+    for (const chain of loadTaraChains()) {
+      if (!chain.evidence) continue;
+      for (const step of chain.steps) {
+        expect(step.evidence, `${chain.chain_id} step ${step.position}`).toBeDefined();
+      }
+    }
+  });
+
+  it('labels no chain "demonstrated", since no cited incident reports a composed chain', () => {
+    for (const chain of loadTaraChains()) {
+      expect(chain.evidence?.overall_label).not.toBe('demonstrated');
+    }
+  });
+});
+
 describe('loadTaraChains', () => {
   it('loads the committed catalog', () => {
     expect(loadTaraChains().length).toBeGreaterThan(0);

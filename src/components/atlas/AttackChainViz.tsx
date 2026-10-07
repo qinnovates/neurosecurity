@@ -6,12 +6,27 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import {
-  DOMAIN_COLORS, ROLE_CONFIG, DETECT_COLORS,
+  DOMAIN_COLORS, ROLE_CONFIG, DETECT_COLORS, EVIDENCE_LABELS,
   extractDomain, isSilicon,
-  type DomainCode, type ChainRole,
+  type DomainCode, type ChainRole, type EvidenceLabel,
 } from './chain-constants';
 
 /* ── Types ─────────────────────────────────────────────────── */
+
+/** Realism anchor for one step: its label plus the fact and source that justify it. */
+export interface StepEvidence {
+  label: EvidenceLabel;
+  note: string;
+  source_url?: string;
+}
+
+/** Realism anchor for a whole chain. `extrapolation` is shown when the chain generalises evidence. */
+export interface ChainEvidence {
+  overall_label: EvidenceLabel;
+  rationale: string;
+  device_class?: string;
+  extrapolation?: string;
+}
 
 export interface ChainStep {
   position: number;
@@ -20,6 +35,7 @@ export interface ChainStep {
   role: ChainRole;
   action: string;
   detection_window: string;
+  evidence?: StepEvidence;
 }
 
 export interface ClinicalParallel {
@@ -35,6 +51,7 @@ export interface AttackChain {
   steps: ChainStep[];
   clinical_parallel?: ClinicalParallel;
   defenses: string[];
+  evidence?: ChainEvidence;
 }
 
 interface Props {
@@ -56,6 +73,58 @@ function detectLevel(w: string): 'easy' | 'moderate' | 'hard' {
 
 function nodeX(i: number) { return PAD_X + i * (NODE_W + GAP_X); }
 
+/**
+ * Evidence chip. The fill/text pair is fixed in both themes, like the domain node
+ * fills, so the label keeps its contrast whichever theme is active.
+ */
+function EvidenceBadge({ label, small = false }: { label: EvidenceLabel; small?: boolean }) {
+  const e = EVIDENCE_LABELS[label];
+  return (
+    <span
+      className={`inline-block rounded font-semibold ${small ? 'px-1 py-0 text-[9px]' : 'px-1.5 py-0.5 text-[10px]'}`}
+      style={{ background: e.fill, color: e.stroke, border: `1px solid ${e.stroke}66` }}
+    >
+      {e.label}
+    </span>
+  );
+}
+
+/**
+ * Chain-level realism note. States what the label rests on and, when the chain
+ * generalises evidence from another device class, says so on the page itself.
+ */
+function ChainEvidenceNote({ evidence }: { evidence: ChainEvidence }) {
+  return (
+    <div className="mb-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-surface)] p-3 text-xs">
+      {evidence.device_class && (
+        <p className="text-[var(--color-text-muted)]">
+          <span className="font-semibold text-[var(--color-text-primary)]">Device class: </span>
+          {evidence.device_class}
+        </p>
+      )}
+      <p className="mt-1 text-[var(--color-text-muted)]">
+        <span className="font-semibold text-[var(--color-text-primary)]">
+          Evidence ({EVIDENCE_LABELS[evidence.overall_label].label.toLowerCase()}):{' '}
+        </span>
+        {evidence.rationale}
+      </p>
+      {evidence.extrapolation && (
+        <p
+          className="mt-2 rounded border-l-2 p-2 text-[var(--color-text-muted)]"
+          style={{ borderColor: EVIDENCE_LABELS.projected.stroke, background: 'rgba(245, 158, 11, 0.08)' }}
+        >
+          <span className="font-semibold text-[var(--color-text-primary)]">Extrapolation: </span>
+          {evidence.extrapolation}
+        </p>
+      )}
+      <p className="mt-2 text-[10px] text-[var(--color-text-faint)]">
+        No cited incident reports this sequence being carried out end to end. Step labels show how far each
+        link is evidenced; the chain is a composition, not an observed event.
+      </p>
+    </div>
+  );
+}
+
 function MobileList({ chain }: Props) {
   return (
     <div className="space-y-3" role="list" aria-label={`Attack chain: ${chain.chain_name}`}>
@@ -72,6 +141,7 @@ function MobileList({ chain }: Props) {
             <div className="min-w-0">
               <span className="text-xs font-mono text-[var(--color-text-primary)]">{s.tara_alias}</span>
               <span className="text-[10px] text-[var(--color-text-faint)] ml-2">{role.icon} {role.label}</span>
+              {s.evidence && <span className="ml-2"><EvidenceBadge label={s.evidence.label} small /></span>}
               <p className="mt-0.5 text-xs text-[var(--color-text-muted)] line-clamp-2">{s.action}</p>
               <p className="mt-0.5 text-[10px] text-[var(--color-text-faint)]">Detection: {s.detection_window}</p>
             </div>
@@ -307,9 +377,29 @@ export default function AttackChainViz({ chain }: Props) {
         <h3 className="text-sm font-semibold">{chain.chain_name}</h3>
         <span className="text-[10px] font-mono text-[var(--color-text-faint)]">{chain.chain_id}</span>
         <span className="text-[10px] text-[var(--color-text-muted)]">{chain.drift_profile}</span>
+        {chain.evidence && <EvidenceBadge label={chain.evidence.overall_label} />}
       </div>
       <p className="mb-3 text-xs text-[var(--color-text-muted)]">{chain.objective}</p>
+      {chain.evidence && <ChainEvidenceNote evidence={chain.evidence} />}
       {isMobile ? <MobileList chain={chain} /> : <SvgDiagram chain={chain} />}
+      {!isMobile && chain.steps.some((s) => s.evidence) && (
+        <div className="mt-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-surface)] p-3">
+          <h4 className="mb-1 text-xs font-semibold text-[var(--color-text-primary)]">Step evidence</h4>
+          <ul className="space-y-1 text-xs text-[var(--color-text-muted)]">
+            {chain.steps.filter((s) => s.evidence).map((s) => (
+              <li key={s.position} className="flex flex-wrap items-baseline gap-1.5">
+                <span className="font-mono text-[10px] text-[var(--color-text-primary)]">{s.position}. {s.tara_alias}</span>
+                <EvidenceBadge label={s.evidence!.label} small />
+                <span>{s.evidence!.note}</span>
+                {s.evidence!.source_url && (
+                  <a href={s.evidence!.source_url} rel="noopener noreferrer" target="_blank"
+                    className="text-[10px] underline text-[var(--color-accent-secondary)]">source</a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       {!isMobile && chain.defenses.length > 0 && (
         <div className="mt-3 rounded-lg border border-[var(--color-accent-secondary)]/40 bg-[var(--color-bg-surface)] p-3">
           <h4 className="text-xs font-semibold text-[var(--color-accent-secondary)] mb-1">Defenses</h4>
