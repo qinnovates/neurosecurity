@@ -11,12 +11,24 @@ function esc(s) {
 }
 
 // ── TARA Threat Atlas ──────────────────────────────────────────────────────
-export function renderTARA(container, TARA_TECHNIQUES, TARA_STATS) {
+export function renderTARA(container, TARA_TECHNIQUES, TARA_STATS, TARA_CATALOG_URL) {
   const byStatus = { CONFIRMED: 0, DEMONSTRATED: 0, EMERGING: 0, THEORETICAL: 0 };
   TARA_TECHNIQUES.forEach(t => { if (byStatus[t.status] !== undefined) byStatus[t.status]++; });
 
   const bySeverity = { critical: 0, high: 0, medium: 0, low: 0 };
   TARA_TECHNIQUES.forEach(t => { if (bySeverity[t.severity] !== undefined) bySeverity[t.severity]++; });
+
+  // Dual-use figures come from the registrar's computed statistics, not from a
+  // count over the 40 techniques this view renders.
+  const taraStats = TARA_STATS.tara ?? {};
+  const breakdown = taraStats.dual_use_breakdown ?? {};
+  const dualUse = {
+    clinicalAnalog: taraStats.techniques_with_clinical_analog ?? 0,
+    confirmed: breakdown.confirmed ?? 0,
+    probable: breakdown.probable ?? 0,
+    possible: breakdown.possible ?? 0,
+    siliconOnly: breakdown.silicon_only ?? 0,
+  };
 
   const sevColor = { critical: '#dc2626', high: '#ea580c', medium: '#ca8a04', low: '#16a34a' };
   const statusLabel = { CONFIRMED: 'Confirmed in literature', DEMONSTRATED: 'Demonstrated in lab', EMERGING: 'Emerging capability', THEORETICAL: 'Theoretical/projected' };
@@ -47,12 +59,12 @@ export function renderTARA(container, TARA_TECHNIQUES, TARA_STATS) {
 
       <div class="vision-card">
         <h4 class="vision-heading">Dual-Use Reality</h4>
-        <p>77 of ${TARA_TECHNIQUES.length} techniques have clinical analogs -- the same mechanism used therapeutically (e.g., DBS for Parkinson's) can be used as an attack. The boundary between therapy and threat is consent, dosage, and oversight.</p>
+        <p>${dualUse.clinicalAnalog} of ${TARA_TECHNIQUES.length} techniques have clinical analogs -- the same mechanism used therapeutically (e.g., DBS for Parkinson's) can be used as an attack. The boundary between therapy and threat is consent, dosage, and oversight.</p>
         <div class="vision-stats">
-          <div class="vision-stat"><span class="vision-stat-num">52</span><span>Confirmed dual-use</span></div>
-          <div class="vision-stat"><span class="vision-stat-num">16</span><span>Probable</span></div>
-          <div class="vision-stat"><span class="vision-stat-num">9</span><span>Possible</span></div>
-          <div class="vision-stat"><span class="vision-stat-num">25</span><span>Silicon-only (no clinical analog)</span></div>
+          <div class="vision-stat"><span class="vision-stat-num">${dualUse.confirmed}</span><span>Confirmed dual-use</span></div>
+          <div class="vision-stat"><span class="vision-stat-num">${dualUse.probable}</span><span>Probable</span></div>
+          <div class="vision-stat"><span class="vision-stat-num">${dualUse.possible}</span><span>Possible</span></div>
+          <div class="vision-stat"><span class="vision-stat-num">${dualUse.siliconOnly}</span><span>Silicon-only (no clinical analog)</span></div>
         </div>
       </div>
 
@@ -71,7 +83,7 @@ export function renderTARA(container, TARA_TECHNIQUES, TARA_STATS) {
               <div class="tara-technique-bands">${(t.bands || []).map(b => `<span class="tara-band">${esc(b)}</span>`).join('')}</div>
             </div>
           `).join('')}
-          ${TARA_TECHNIQUES.length > 40 ? `<p class="tara-more">Showing 40 of ${TARA_TECHNIQUES.length} techniques. <a href="https://github.com/qinnovates/qinnovate/blob/main/shared/qtara-registrar.json" target="_blank" rel="noopener noreferrer">View full catalog on GitHub</a></p>` : ''}
+          ${TARA_TECHNIQUES.length > 40 ? `<p class="tara-more">Showing 40 of ${TARA_TECHNIQUES.length} techniques. <a href="${TARA_CATALOG_URL}" target="_blank" rel="noopener noreferrer">View full catalog on GitHub</a></p>` : ''}
         </div>
       </div>
     </div>
