@@ -7,19 +7,19 @@
 export const TARA_STATS = {
   "generator": "src/scripts/generate-registrar-statistics.mjs",
   "generated": "2026-10-07",
-  "total_techniques": 174,
+  "total_techniques": 176,
   "total_tactics": 17,
   "total_domains": 8,
   "by_level": {
-    "top_level": 169,
+    "top_level": 171,
     "child": 5
   },
   "by_tactic": {
     "QIF-B.EV": 6,
-    "QIF-B.IN": 7,
+    "QIF-B.IN": 8,
     "QIF-C.EX": 17,
     "QIF-C.IM": 6,
-    "QIF-D.HV": 13,
+    "QIF-D.HV": 14,
     "QIF-E.RD": 13,
     "QIF-M.SV": 16,
     "QIF-N.IJ": 11,
@@ -34,25 +34,25 @@ export const TARA_STATS = {
     "QIF-S.SC": 2
   },
   "by_status": {
-    "CONFIRMED": 27,
+    "CONFIRMED": 28,
     "DEMONSTRATED": 44,
     "EMERGING": 30,
     "PLAUSIBLE": 1,
     "SPECULATIVE": 1,
-    "THEORETICAL": 71
+    "THEORETICAL": 72
   },
   "by_severity": {
     "critical": 32,
-    "high": 77,
+    "high": 78,
     "low": 4,
-    "medium": 61
+    "medium": 62
   },
   "by_ui_category": {
     "CI": 19,
     "DM": 42,
     "DS": 23,
-    "EX": 31,
-    "PE": 11,
+    "EX": 32,
+    "PE": 12,
     "PS": 7,
     "SE": 24,
     "SI": 17
@@ -60,35 +60,35 @@ export const TARA_STATS = {
   "by_niss_severity": {
     "critical": 0,
     "high": 20,
-    "low": 65,
+    "low": 67,
     "medium": 62,
     "none": 27
   },
   "niss_cvss_mapping": {
-    "techniques_scored": 148,
+    "techniques_scored": 150,
     "techniques_unscored": 26,
-    "pins_flagged": 40,
+    "pins_flagged": 41,
     "by_gap_group": {
       "1": 14,
       "2": 30,
       "3": 59
     },
-    "techniques_without_cvss": 71
+    "techniques_without_cvss": 73
   },
   "tara": {
     "version": "1.9",
-    "enriched_techniques": 174,
+    "enriched_techniques": 176,
     "dual_use_breakdown": {
       "confirmed": 102,
       "possible": 10,
       "probable": 19,
-      "silicon_only": 42
+      "silicon_only": 44
     },
     "techniques_with_clinical_analog": 130,
-    "techniques_silicon_only": 42,
+    "techniques_silicon_only": 44,
     "dsm5": {
       "version": "1.0",
-      "techniques_with_dsm5_block": 147,
+      "techniques_with_dsm5_block": 149,
       "techniques_with_dsm5": 76,
       "unique_dsm_codes": 28,
       "unique_dsm_codes_including_secondary": 48,
@@ -96,13 +96,13 @@ export const TARA_STATS = {
         "cognitive_psychotic": 22,
         "mood_trauma": 27,
         "motor_neurocognitive": 26,
-        "non_diagnostic": 63,
+        "non_diagnostic": 65,
         "persistent_personality": 9
       },
       "risk_class_breakdown": {
         "direct": 75,
         "indirect": 11,
-        "none": 61
+        "none": 63
       }
     },
     "neurorights_mapped": 144
@@ -122,7 +122,7 @@ export const TARA_STATS = {
       "QIF Framework (MI extended with signal dynamics, MP extended with data lifecycle)"
     ],
     "techniques_mapped": 144,
-    "techniques_unmapped": 30,
+    "techniques_unmapped": 32,
     "techniques_by_right": {
       "CL": 89,
       "DI": 77,
@@ -142,7 +142,7 @@ export const TARA_STATS = {
     "version": "1.0",
     "framework": "FDORA Section 3305 / Section 524B",
     "techniques_mapped": 135,
-    "techniques_unmapped": 39,
+    "techniques_unmapped": 41,
     "cyber_device_techniques": 68,
     "non_cyber_device_techniques": 67,
     "prong_failure_reasons": {
@@ -176,21 +176,21 @@ export const TARA_STATS = {
     "version": "1.0",
     "analysis_date": "2026-02-18",
     "constraint_system_ref": "QIF Derivation Log Entry 60",
-    "techniques_assessed": 174,
+    "techniques_assessed": 176,
     "techniques_unassessed": 0,
     "by_tier": {
       "far_term": 4,
       "feasible_now": 100,
       "mid_term": 13,
       "near_term": 22,
-      "no_physics_gate": 35
+      "no_physics_gate": 37
     },
     "by_tier_id": {
       "0": 100,
       "1": 22,
       "2": 13,
       "3": 4,
-      "X": 35
+      "X": 37
     },
     "notes": [
       "Tier 0 (feasible_now): Attack hardware exists today",
@@ -396,4 +396,6 @@ export const TARA_TECHNIQUES = [
   {"id":"QIF-T0172","name":"Zero-query adversarial transfer via public EEG foundation encoder","tactic":"QIF-M.SV","description":"Adversarial inputs are crafted on an openly released EEG foundation encoder and transfer to private downstream models built on it, with no access to or queries of the victim model. Dataset level, one preprint (three EEG tasks, three general foundation encoders and one paradigm-specific encoder); the abstract gives no success rates. Delivery of such inputs to a deployed device is not shown and is projected. Recorded as a sub-technique of QIF-T0019 via parent_id: its status, NISS vector and sources are its own and do not restate the parent's.","status":"EMERGING","severity":"medium","bands":["S1","S2"],"dualUse":"silicon_only","clinicalAnalog":"","niss_severity":"medium"},
   {"id":"QIF-T0173","name":"Cross-encoder attribute leakage from released EEG foundation-model embeddings","tactic":"QIF-M.SV","description":"Embeddings released from a frozen EEG foundation encoder carry decodable signal attributes: an attribute decoder trained on one frozen encoder transferred to others (95% CI lower bound at least 0.081 over six directions), and DP-SGD at epsilon 4 and 8 left the channel essentially unchanged. The attributes shown are spectral, not personal traits: the author states the work does not show waveform exfiltration or identity recovery for held-out subjects, and inference of sensitive personal attributes from released embeddings is PROJECTED, not demonstrated. Entered as a child of QIF-T0041 (cognitive biometric inference) because the goal is the same and the representation-release stage is the new surface; the parent's status is unchanged. Evidence rests on a single single-author preprint (arXiv:2606.09189), so the status is capped at EMERGING. The same preprint reports membership inference as weak in this setting (LiRA AUC 0.50 to 0.70), which qualifies QIF-T0020. This entry was authored in the migration script, not taken from the staged proposal, which recorded this card as evidence-only; its NISS vector is therefore not one of the proposal's computed vectors. Recorded as a sub-technique of QIF-T0041 via parent_id: its status, NISS vector and sources are its own and do not restate the parent's.","status":"EMERGING","severity":"medium","bands":["S1","S2"],"dualUse":"silicon_only","clinicalAnalog":"","niss_severity":"low"},
   {"id":"QIF-T0174","name":"Federated update poisoning (malicious-client model-update manipulation)","tactic":"QIF-M.SV","description":"A participant in federated training of a shared neural decoder submits crafted model updates that bias or backdoor the global model while resembling normal non-IID variation between sites. PROJECTED for BCI: described at review level by Bagley et al. 2026 (section 2.4.1.1); no EEG-specific demonstration was found in the October 2026 research pass. Evidence basis: review only. The sole source for this entry is the Bagley et al. 2026 review preprint (arXiv:2607.10451v1), which is not peer reviewed; no demonstration against a neural decoder or BCI pipeline was found. Status is capped at THEORETICAL on that basis. Recorded as a sub-technique of QIF-T0024 via parent_id: its status, NISS vector and sources are its own and do not restate the parent's.","status":"THEORETICAL","severity":"high","bands":["S2","S3"],"dualUse":"silicon_only","clinicalAnalog":"","niss_severity":"medium"},
+  {"id":"QIF-T0175","name":"Application-layer memory-safety exploitation on the neural signal path for arbitrary code execution","tactic":"QIF-B.IN","description":"Heap or stack memory-safety violation in an unprivileged or application-privileged parser on the neural or clinical signal path -- an EEG acquisition or review application, a DICOM decoder, or a host-side BLE library -- reached by a crafted recording file, study object or peripheral response, yielding attacker-controlled execution within that process. Distinguished from QIF-T0163 by privilege domain: the compromise is confined to the parsing process and its data, and does not by itself corrupt a closed-loop control routine. Exploitable code execution of this class is public for Natus Xltek NeuroWorks 8, a clinical EEG product (CVE-2017-2853, CVE-2017-2867, CVE-2017-2868, CVE-2017-2869).","status":"CONFIRMED","severity":"high","bands":["S2","S3"],"dualUse":"silicon_only","clinicalAnalog":"","niss_severity":"low"},
+  {"id":"QIF-T0176","name":"Application-layer memory-safety exploitation on the neural signal path for out-of-bounds neural-data read","tactic":"QIF-D.HV","description":"Out-of-bounds read or over-read in an unprivileged or application-privileged parser on the neural or clinical signal path, disclosing adjacent heap contents that may include other patients' recordings or study metadata held by the same process. Distinguished from QIF-T0164 by privilege domain: the read primitive is confined to the parsing process's address space and does not cross an OS-enforced process boundary.","status":"THEORETICAL","severity":"medium","bands":["S2","S3"],"dualUse":"silicon_only","clinicalAnalog":"","niss_severity":"low"},
 ];

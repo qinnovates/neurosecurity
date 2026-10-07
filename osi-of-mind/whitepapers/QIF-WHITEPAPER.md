@@ -619,20 +619,20 @@ Context profiles are applied using the weighted formula from Section 6.5.2. The 
 
 ### 6.5.7 Registry Distribution
 
-Across the 174 techniques in the TARA registry, 148 carry a NISS v1.1 score. They distribute as follows:
+Across the 176 techniques in the TARA registry, 150 carry a NISS v1.1 score. They distribute as follows:
 
 | NISS score band | Count |
 |----------|-------|
 | Critical (9.0+) | 0 techniques |
 | High (7.0--8.9) | 20 techniques |
 | Medium (4.0--6.9) | 62 techniques |
-| Low (0.1--3.9) | 65 techniques |
+| Low (0.1--3.9) | 67 techniques |
 | Exactly 0.0 | 1 technique |
 | Not yet scored | 26 techniques |
 
 NISS scores concentrate in the low and medium bands, and no technique reaches the critical band. This is a property of what NISS measures. It scores physical signal disruption across six metrics, so a technique only scores high when it disrupts the signal substantially on several of them at once; reading and inference techniques disrupt little by construction and score low however serious their privacy consequences are. A low NISS score is therefore not a judgement that a technique matters little.
 
-The registrar's separate editorial `severity` field distributes differently -- 32 critical, 77 high, 61 medium, 4 low -- because it rates overall concern rather than signal disruption. The two must not be read as one scale. An earlier revision of this section presented the `severity` counts under NISS score-band headings and argued from them that NISS "skews toward high severity", which inverted the actual result; see Derivation Log Entry 109. The 26 unscored techniques and the two-severity-field overlap are documented at `datalake/tara-scoring-gaps.json` and published at `/atlas/scoring/#coverage`.
+The registrar's separate editorial `severity` field distributes differently -- 32 critical, 78 high, 62 medium, 4 low -- because it rates overall concern rather than signal disruption. The two must not be read as one scale. An earlier revision of this section presented the `severity` counts under NISS score-band headings and argued from them that NISS "skews toward high severity", which inverted the actual result; see Derivation Log Entry 109. The 26 unscored techniques and the two-severity-field overlap are documented at `datalake/tara-scoring-gaps.json` and published at `/atlas/scoring/#coverage`.
 
 ## 6.6 Case Study: Algorithmic Psychosis Induction
 

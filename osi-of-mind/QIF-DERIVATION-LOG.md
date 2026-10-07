@@ -15,6 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit
 | Entry | Topic | Link |
 |-------|-------|------|
+| 110 | Privilege-boundary split of QIF-T0163/T0164: QIF-T0175 (CONFIRMED on four Natus Xltek clinical EEG RCEs) and QIF-T0176 take the application-layer parsing boundary; 22 CVEs divided 11/11; no technique now exceeds the evidence-concentration threshold; three of my own recollections of the task were wrong and re-read from the record | [Entry 110](#entry-110-privilege-split) |
 | 109 | Physics tier integrity: five techniques labelled `no_physics_gate` while tiered `0` (feasible now), and 13 with no block at all counted as tier 0 by a `?? 0` fallback; validator added to CI. Whitepaper 6.5.7 attributed the `severity` field to NISS, claiming 32 critical techniques where NISS yields 0, with a mechanistic argument built on it | [Entry 109](#entry-109-physics-tier-integrity) |
 | 108 | Integration pass: `parent_id` sub-technique field and a two-level taxonomy (165 to 174); 52 CVE mappings integrated and QIF-T0001 de-mapped to zero evidence; 40 papers added; three hand-maintained blocks replaced by generators; a scoring conflict I reported that did not exist | [Entry 108](#entry-108-integration-pass) |
 | 107 | CVE evidence pass: CVE-2025-4395 wrongly published as fabricated (real Medtronic record, ICSMA-25-205-01); CVE-2023-49914 is the first CVE reaching the neural bands; session corrections to homepage claims, 15 citations, tracked figures and the BCI directory | [Entry 107](#entry-107-cve-evidence-pass) |
@@ -355,6 +356,74 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 110: Splitting a Technique on the Privilege Boundary, and Finding the Evidence Was on the Other Side {#entry-110-privilege-split}
+
+**Date:** 2026-10-07, ~04:20
+**Classification:** FRAMEWORK
+**AI Systems:** Claude Opus 5 (classification, migration, propagation, this entry)
+**Connected entries:** Entry 109 (physics tier integrity, same session), Entry 108 (integration pass that recorded this decision as open), Entry 107 (CVE evidence pass)
+**RACI:** R: Claude Opus 5 | A: KQ | C: none | I: none
+**AI Contribution Level:** AI-generated; every count recomputed from the data
+
+### Context
+
+The October integration left a decision open in `datalake/cve-coverage-gaps.json` under the id `T0163-LAYER`:
+
+> Both techniques are specified at the kernel/driver privilege layer, but most CVEs mapped to them are memory-safety bugs in userspace code on the signal path: EEG acquisition services, DICOM decoders and BLE host stacks. The mechanism matches; the stated privilege layer does not.
+
+It was deferred because adding a technique is a registrar change. KQ cleared it this session.
+
+### Two corrections to my own account of the task before any work began
+
+I had carried this item in my head as "CVE-2017-2852 de-mapping, blocked on a missing acquisition-pipeline availability technique that 9 CVEs want". Reading the record, all three parts were wrong:
+
+- The de-mapping was **CVE-2017-2853**, not 2852, and it was **already done** -- withdrawn in the October integration, leaving QIF-T0001 with no CVE evidence (decision `T0001-EVIDENCE`, already marked RESOLVED).
+- The open decision is about **privilege layering**, not acquisition-pipeline availability.
+- The affected count is **22 CVEs on QIF-T0163**, not 9.
+
+A remembered task description is not the record. Each figure here was re-read from the files before anything was changed.
+
+### The split
+
+The decision's own `proposed_split` was implemented as written. QIF-T0163 (execution) and QIF-T0164 (read) keep the kernel/RTOS privilege domain; QIF-T0175 and QIF-T0176 take the unprivileged or application-privileged parsing boundary, where a compromise is confined to the parsing process.
+
+The classification rule: application-layer when the vulnerable code runs as an ordinary process under an OS that isolates it; kernel/RTOS when it runs with no user/kernel separation, so a compromise is total rather than confined.
+
+| | Kernel / RTOS (kept) | Application layer (moved) |
+|---|---|---|
+| QIF-T0163 -> QIF-T0175 | 11: Zephyr (BT controller ISO AL, HFP parser, GATT client, Mesh, ATAES132A driver), FreeRTOS (Kernel MPU ports, Plus-TCP IPv6 RA), Apache NimBLE BASS, Eclipse ThreadX (Module Manager, module loader), ArduinoBLE | 11: Natus Xltek NeuroWorks 8 (x4), RadiAnt DICOM Viewer, vtk-dicom, Orthanc (x4), SimpleBLE |
+| QIF-T0164 -> QIF-T0176 | 1: Eclipse ThreadX Module Manager | 1: OFFIS DCMTK ConcatenationLoader |
+
+The 22 records divided 11/11, which is itself the argument for the split: the technique was carrying two populations of roughly equal size under one description.
+
+Three judgements worth recording rather than leaving implicit:
+
+**ArduinoBLE is counted kernel-side.** It is a library, not a kernel. But Arduino sketches execute in a single flat privilege domain, so there is no process for a compromise to be confined to, which is the property the split actually turns on. This is the one genuinely arguable placement in the set.
+
+**NISS vectors are inherited unchanged.** NISS v1.1 scores physical signal disruption, which does not vary with the privilege domain of the parser that happens to be faulty. Giving the siblings different vectors would have asserted a measurement nobody took -- the same reasoning that led this project to document 26 unscored techniques rather than invent scores for them.
+
+**QIF-T0175 is CONFIRMED; QIF-T0176 stays THEORETICAL.** Four Talos-disclosed code-execution vulnerabilities in Natus Xltek NeuroWorks 8 -- a clinical EEG product, not an adjacent one -- are direct public evidence for the application-layer execution technique as worded. QIF-T0176's only application-layer record is a DICOM imaging library, which is not a neural-data product, so its parent's status is kept.
+
+### What the split revealed
+
+The evidence was on the side the framework had not described. QIF-T0163 was specified at the kernel layer and labelled `THEORETICAL`, while the strongest public evidence mapped to it -- exploitable RCE in a shipping clinical EEG application -- was application-layer. Splitting the technique did not only improve the taxonomy; it moved real evidence out from under a label that denied it existed.
+
+`generate-cve-coverage-gaps.mjs` had also been flagging QIF-T0163 as exceeding the 15% evidence-concentration threshold. After the split, **no technique exceeds it**. The concentration was not a reporting artefact; it was the taxonomy under-describing its own evidence.
+
+### Left open deliberately
+
+QIF-T0163 and QIF-T0164 still carry `status: THEORETICAL` while holding 11 and 1 verified CVEs. That is its own mislabel, in the same family as the three defects in Entry 109, and re-deriving status across their remaining evidence is a separate review rather than something to fold into a split. It is recorded in the gap file's `follow_up` field so it cannot be lost.
+
+### Propagation
+
+Registrar and SDK copy, statistics, CVE coverage, coverage gaps, truth section 10, the Autodidactive lesson data, the timeline stats, and the build artefacts were all regenerated. Seven documents carried a hardcoded `174` that this change made stale: `README.md` (five places, including the two coverage ratios 103/176 and 150/176, both re-derived rather than bumped), two `osi-of-mind` READMEs, `datalake/QIF-DATA-MAPPING.md`, and whitepaper section 6.5.7. `src/data/convergence-data.ts` had two, and now imports `TECHNIQUE_COUNT` and `TACTIC_COUNT` instead -- one of those strings also said "16 tactics" where the registrar holds 17, a staleness the count checker does not look for. `QIF-WHITEPAPER-V8.md` is an archived version and was left untouched per the registrar protocol; the `QIF-TRUTH.md` version-history rows are correctly historical and gained a new row rather than edits.
+
+### Standing judgement
+
+A technique description that does not say which privilege domain it covers will accumulate evidence from both, and the concentration metric will read as a breadth problem when it is a precision problem. The threshold did its job here: it flagged the symptom months before anyone read the cause. Worth asking of the other concentrated techniques whether the same thing is true of them.
 
 ---
 
