@@ -159,3 +159,6 @@ textarea.tm-input { resize: vertical; }
   .tm-spine .tm-card { overflow-x: auto; }
   .tm-spine .tm-diagram { min-width: 34rem; max-height: none; }
 }
+
+.tm-chain-basis { margin-top: 0.5rem; font-size: 0.8125rem; }
+.tm-chain-basis > summary { cursor: pointer; font-weight: 600; }

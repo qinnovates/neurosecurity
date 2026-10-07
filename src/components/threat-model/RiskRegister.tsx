@@ -70,8 +70,15 @@ function ScoreCell({ row }: { row: RiskRow }) {
 
 export default function RiskRegister({ rows, controlsInPlace, onDecide, onToggleControl }: Props) {
   const [sourceFilter, setSourceFilter] = useState<SourceFilter>('catalog');
+  const [isOpenOnly, setOpenOnly] = useState(false);
   const isReadOnly = onDecide === undefined;
-  const visibleRows = rows.filter((row) => isReadOnly || sourceFilter === 'all' || row.source === sourceFilter);
+  const sourceRows = rows.filter((row) => isReadOnly || sourceFilter === 'all' || row.source === sourceFilter);
+  const openCount = sourceRows.filter((row) => !isRiskAddressed(row, controlsInPlace)).length;
+  // Open rows first, so triage starts at the top; the order within each group is kept.
+  const visibleRows = isReadOnly ? sourceRows : [
+    ...sourceRows.filter((row) => !isRiskAddressed(row, controlsInPlace)),
+    ...(isOpenOnly ? [] : sourceRows.filter((row) => isRiskAddressed(row, controlsInPlace))),
+  ];
 
   return (
     <div>
@@ -82,9 +89,13 @@ export default function RiskRegister({ rows, controlsInPlace, onDecide, onToggle
               {FILTER_LABELS[filter]}
             </button>
           ))}
+          <button type="button" className="tm-tab" aria-pressed={isOpenOnly} onClick={() => setOpenOnly(!isOpenOnly)}>Open only</button>
+          <span className="tm-muted tm-small" style={{ alignSelf: 'center' }} role="status">
+            {openCount} open of {sourceRows.length}. A row is addressed once it has a decision or one of its controls is marked in place.
+          </span>
         </div>
       )}
-      {visibleRows.length === 0 && <p className="tm-muted">No rows to show here.</p>}
+      {visibleRows.length === 0 && <p className="tm-muted">{isOpenOnly ? 'Nothing open here.' : 'No rows to show here.'}</p>}
       {visibleRows.length > 0 && (
         <div className="tm-table-wrap">
           <table className="tm-table">
