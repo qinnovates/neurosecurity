@@ -55,9 +55,6 @@
 .workbench-framed-note { margin: 0 0 0.625rem; color: var(--lab-ink-soft); }
 .workbench-framed-note a { color: var(--lab-select); font-weight: 600; }
 
-/* With a bar at the top and a line at the bottom, a second pinned block would leave too little room. Model's rebuild folds its diagram to a strip instead. */
-.lab-shell .tm-pinned { position: static; border-bottom: 0; }
-
 @media (max-width: 720px) {
   .lab-modes--top, .lab-device-facts, .lab-site-link, .lab-standing-full { display: none; }
   .lab-modes--bottom { display: flex; border-top: 1px solid var(--lab-line); }

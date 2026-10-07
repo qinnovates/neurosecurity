@@ -153,7 +153,7 @@ export default function QueryMode(_props: ModeProps) {
           </div>
           {history.length > 1 && (
             <div className="tm-actions" style={{ marginTop: '0.625rem' }} role="group" aria-label="Earlier queries in this visit">
-              <span className="tm-lens-label">Earlier</span>
+              <span className="lab-label">Earlier</span>
               {history.slice(1).map((query) => (
                 <button key={query} type="button" className="tm-button tm-mono tm-small" title={query} onClick={() => run(query)}>
                   {query.length > HISTORY_LABEL_LENGTH ? `${query.slice(0, HISTORY_LABEL_LENGTH)}…` : query}

@@ -36,6 +36,8 @@ export interface EdgeLine {
   labelY: number;
   /** True when the connection carries data, commands, or updates; drives the flow animation. */
   carriesPayload: boolean;
+  /** True when the path runs left to right from the link's `from` component, so an arrow for a from-to flow points right. */
+  runsLeftToRight: boolean;
 }
 
 export interface DiagramLayout {
@@ -74,7 +76,7 @@ function layoutEdges(model: DeviceModel, nodes: readonly NodeBox[]): EdgeLine[] 
     const to = nodeById.get(link.toComponentId);
     if (from === undefined || to === undefined) return [];
     const carriesPayload = link.carriesNeuralData || link.carriesStimulationCommands || link.carriesSoftwareUpdates;
-    return [{ ...routeEdge(link.id, link.medium.replaceAll('_', ' '), from, to, nodes, arcIndex), carriesPayload }];
+    return [{ ...routeEdge(link.id, link.medium.replaceAll('_', ' '), from, to, nodes, arcIndex), carriesPayload, runsLeftToRight: from.x <= to.x }];
   });
 }
 
@@ -86,7 +88,7 @@ function crossesAnotherNode(from: NodeBox, to: NodeBox, nodes: readonly NodeBox[
     && Math.abs(node.y - left.y) < NODE_HEIGHT && Math.abs(node.y - right.y) < NODE_HEIGHT);
 }
 
-function routeEdge(id: string, label: string, from: NodeBox, to: NodeBox, nodes: readonly NodeBox[], arcIndex: { next: number }): Omit<EdgeLine, 'carriesPayload'> {
+function routeEdge(id: string, label: string, from: NodeBox, to: NodeBox, nodes: readonly NodeBox[], arcIndex: { next: number }): Omit<EdgeLine, 'carriesPayload' | 'runsLeftToRight'> {
   const x1 = from.x + from.width / 2;
   const y1 = from.y + from.height / 2;
   const x2 = to.x + to.width / 2;

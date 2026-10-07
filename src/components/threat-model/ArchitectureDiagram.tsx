@@ -1,5 +1,7 @@
 import { useMemo, type KeyboardEvent } from 'react';
 import type { DeviceModel } from '@/lib/threat-model/device-model';
+import type { PayloadFlow } from '@/lib/threat-model/payload-flow';
+import type { LinkPayload } from '@/lib/threat-model/reference-data-types';
 import { ZONE_LABELS, computeDiagramLayout, type EdgeLine, type NodeBox } from './diagram-layout';
 
 export interface DiagramHighlight {
@@ -22,10 +24,38 @@ interface Props {
   onSelectElement?: (elementId: string) => void;
   openRiskCounts?: ReadonlyMap<string, number>;
   chainMarkers?: readonly ChainMarker[];
+  /**
+   * What each connection carries and which way, keyed by link id. When given, each payload gets its own
+   * moving track and an arrowhead; when omitted, a connection that carries anything shows one plain flow.
+   */
+  payloadFlows?: ReadonlyMap<string, readonly PayloadFlow[]>;
 }
 
 const MAX_LABEL_CHARACTERS = 20;
 const BADGE_RADIUS = 9;
+/** Tracks for different payloads run side by side, this far apart. */
+const TRACK_SPACING = 6;
+const ARROW_SPACING = 16;
+const ARROW_DROP = 13;
+const ARROW_RIGHT = 'M -5 -4 L 5 0 L -5 4 Z';
+const ARROW_LEFT = 'M 5 -4 L -5 0 L 5 4 Z';
+const UNDIRECTED_MARK = 'M -4 0 L 0 -4 L 4 0 L 0 4 Z';
+
+export const PAYLOAD_LABELS: Record<LinkPayload, string> = {
+  neuralData: 'neural data',
+  stimulationCommands: 'stimulation commands',
+  softwareUpdates: 'software updates',
+};
+
+function describeFlow(flow: PayloadFlow): string {
+  if (flow.sense === null) return PAYLOAD_LABELS[flow.payload];
+  return `${PAYLOAD_LABELS[flow.payload]} ${flow.sense === 'away' ? 'away from' : 'toward'} the neural interface`;
+}
+
+/** Offsets that centre `count` items around zero, `spacing` apart. */
+function spread(count: number, index: number, spacing: number): number {
+  return (index - (count - 1) / 2) * spacing;
+}
 
 function shorten(label: string): string {
   return label.length > MAX_LABEL_CHARACTERS ? `${label.slice(0, MAX_LABEL_CHARACTERS - 1)}…` : label;
@@ -61,7 +91,7 @@ function traceDelayAt(markers: readonly ChainMarker[], elementId: string): numbe
 }
 
 export default function ArchitectureDiagram({
-  model, title, highlight = null, selectedElementId = null, onSelectElement, openRiskCounts, chainMarkers = [],
+  model, title, highlight = null, selectedElementId = null, onSelectElement, openRiskCounts, chainMarkers = [], payloadFlows,
 }: Props) {
   const layout = useMemo(() => computeDiagramLayout(model), [model]);
   const interfaceId = model.components.find((component) => component.isNeuralInterface)?.id;
@@ -84,13 +114,29 @@ export default function ArchitectureDiagram({
   const renderEdge = (edge: EdgeLine) => {
     const steps = positionsAt(chainMarkers, edge.id);
     const isHighlighted = highlight?.linkIds.includes(edge.id) ?? true;
+    const flows = payloadFlows?.get(edge.id) ?? [];
+    const carried = flows.length > 0 ? `, carrying ${flows.map(describeFlow).join('; ')}` : '';
     return (
-      <g key={edge.id} className={`tm-edge ${stateClass(edge.id, isHighlighted)}`} {...interactionProps(edge.id, `Connection, ${edge.label}`)}>
-        <title>{`Connection: ${edge.label}`}</title>
+      <g key={edge.id} className={`tm-edge ${stateClass(edge.id, isHighlighted)}`} {...interactionProps(edge.id, `Connection, ${edge.label}${carried}`)}>
+        <title>{`Connection: ${edge.label}${carried}`}</title>
         <path d={edge.path} />
-        {edge.carriesPayload && isHighlighted && <path className="tm-flow" d={edge.path} />}
+        {payloadFlows === undefined && edge.carriesPayload && isHighlighted && <path className="tm-flow" d={edge.path} />}
+        {isHighlighted && flows.map((flow, index) => (
+          <path
+            key={flow.payload} className="tm-track" d={edge.path} data-payload={flow.payload}
+            data-direction={flow.isFromTo === null ? 'none' : flow.isFromTo ? 'forward' : 'backward'}
+            transform={`translate(0 ${spread(flows.length, index, TRACK_SPACING)})`}
+          />
+        ))}
+        {flows.map((flow, index) => (
+          <path
+            key={flow.payload} className="tm-payload-arrow" data-payload={flow.payload} aria-hidden="true"
+            d={flow.isFromTo === null ? UNDIRECTED_MARK : flow.isFromTo === edge.runsLeftToRight ? ARROW_RIGHT : ARROW_LEFT}
+            transform={`translate(${edge.labelX + spread(flows.length, index, ARROW_SPACING)} ${edge.labelY + ARROW_DROP})`}
+          />
+        ))}
         <text x={edge.labelX} y={edge.labelY} textAnchor="middle">{edge.label}</text>
-        {steps !== null && <Badge className="tm-step" x={edge.labelX} y={edge.labelY + 18} text={steps} delayMs={traceDelayAt(chainMarkers, edge.id)} />}
+        {steps !== null && <Badge className="tm-step" x={edge.labelX} y={edge.labelY + (flows.length > 0 ? 32 : 18)} text={steps} delayMs={traceDelayAt(chainMarkers, edge.id)} />}
       </g>
     );
   };
