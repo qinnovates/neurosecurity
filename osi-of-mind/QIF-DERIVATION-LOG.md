@@ -15,6 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit
 | Entry | Topic | Link |
 |-------|-------|------|
+| 108 | Integration pass: `parent_id` sub-technique field and a two-level taxonomy (165 to 174); 52 CVE mappings integrated and QIF-T0001 de-mapped to zero evidence; 40 papers added; three hand-maintained blocks replaced by generators; a scoring conflict I reported that did not exist | [Entry 108](#entry-108-integration-pass) |
 | 107 | CVE evidence pass: CVE-2025-4395 wrongly published as fabricated (real Medtronic record, ICSMA-25-205-01); CVE-2023-49914 is the first CVE reaching the neural bands; session corrections to homepage claims, 15 citations, tracked figures and the BCI directory | [Entry 107](#entry-107-cve-evidence-pass) |
 | 106 | October 2026 data refresh: landscape and device crawl, attack research survey, 63 site inconsistencies, three homepage corrections, citation defect C52, intake ledger and tracked metrics. Staged proposals pending Quorum fact-check | [Entry 106](#entry-106-october-2026-data-refresh) |
 
@@ -353,6 +354,102 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 108: Integration Pass — Taxonomy Gains a Second Level, and Three Generated Blocks Replace Hand-Maintained Ones {#entry-108-integration-pass}
+
+**Date:** 2026-10-06, ~20:15
+**Classification:** PROCESS
+**AI Systems:** Claude Opus 5 (orchestration, direct verification, conflict resolution, this entry); research subagents for mapping, integration, scholarship and scripting
+**Connected entries:** Entry 107 (CVE evidence pass), Entry 106 (October 2026 data refresh), Entry 101 (TARA naming convention), Entry 97 (TARA expansion to 135)
+**RACI:** R: Claude Opus 5 and subagents | A: KQ | C: decision panel (Quorum, 6 panelists + 2 adversaries) | I: none
+**AI Contribution Level:** AI-generated; every figure recorded here recomputed from the data by the orchestrator
+
+### Context
+
+Entry 107 recorded what the October refresh found and sealed before the findings were integrated. This entry records what was done with them, and three decisions that changed the framework rather than its data.
+
+### The Taxonomy Gained a Second Level
+
+Eleven candidate techniques came out of the research pass. Two positions formed: the mapping agent proposed seven new top-level techniques; a Quorum decision panel proposed four, folding five into existing entries, at confidence 0.78 against 0.30.
+
+The panel's own argument against folding was decisive: the registrar had no parent, variant or sub-technique field, so a fold becomes free text in `notes` that the status logic, the counts, the KQL tables and API consumers cannot query. It wrote that if such a field were accepted, the five should become children with their own IDs and statuses, *"which is strictly better than either option on the table."*
+
+Kevin accepted the field. The result is a **two-level taxonomy**, not a longer flat list:
+
+| | Count |
+|---|---|
+| Top-level techniques | 169 |
+| Sub-techniques (`parent_id`) | 5 |
+| **Total** | **174** |
+
+The field is `parent_id` on the child, not a `variants[]` array on the parent, because a child needs its own QIF-T id, status and NISS vector — which a nested array cannot carry and which would not appear as a row in the techniques table. It is queryable end to end: KQL column, Parquet export, the `ThreatVector` type, the Python SDK model, `statistics.by_level`, and the site search index. The detail page renders "Sub-technique of ...". The panel's objection is answered structurally rather than by assurance.
+
+Held back: two candidates, one on an unverified source, one an umbrella spanning four existing entries.
+
+### A Scoring Conflict That Did Not Exist
+
+I reported to Kevin that the proposed techniques scored 0.4 to 2.7 against same-family techniques at 5.4 to 8.0, and framed it as a convention conflict blocking the decision. He made a decision on that premise.
+
+It was wrong. The catalogue scores by mechanism, and consistently:
+
+| Group | n | Median | Range |
+|-------|---|--------|-------|
+| Read and inference techniques (`CD:N`/`CD:L`, `RV:F`) | 48 | 2.0 | 0–3.4 |
+| Manipulation techniques (`CD:H`, `RV:P`) | 64 | 6.1 | 3.4–8.4 |
+| The seven proposed | 7 | 2.4 | 0.4–2.7 |
+
+Five of the seven are inference or evasion techniques and sit exactly where the catalogue already puts that mechanism. I had grepped for machine-learning-sounding names and compared poisoning techniques against inference techniques, then called the difference a conflict. The error cost a decision cycle. Recorded because the failure mode — comparing across mechanisms and reading the difference as inconsistency — is one a reviewer should expect to recur.
+
+### One Score Corrected On Instruction
+
+QIF-T0171 (ML pipeline compromise, child of T0043) was proposed at `CV:P/RV:T` = 2.7. Kevin directed the correction: substituting a deployed decoder is done without the user's knowledge or any consent step they could refuse, so `CV:I`; and restoring a known-good model does not undo decisions already taken on the substituted model's output, so `RV:P`.
+
+Computed with the project's scorer: **4.7, medium**. The agent reported plainly that this lands *below* the expected neighbourhood — calibration poisoning and training-data poisoning are both 6.0 — and that the remaining gap comes from `CR:N` and `NP:N`, metrics it was not asked to change. **It did not raise those to force the score up.** The revision and its reasoning are recorded in the technique's own entry.
+
+### Three Hand-Maintained Blocks Became Generated
+
+Each of these published wrong figures while appearing authoritative.
+
+| Block | Was | Now |
+|-------|-----|-----|
+| `statistics` in the registrar | `enriched_techniques: 135`, `dsm5.techniques_with_dsm5: 135`, `unique_dsm_codes: 15`, `tara.version: 1.6` — frozen at the 135-technique era, with undetected drift in five further sub-blocks | `npm run registrar:stats`, derived from the techniques array and the registrar's own changelog |
+| `QIF-TRUTH.md` sections 10.1–10.4 | Stated 174 techniques above a severity table summing to 139 — self-inconsistent | `npm run truth:registry` |
+| `current_stats` in the timeline | Five figures wrong, six fields unchecked | Checker derives 22 of 28 fields from source |
+
+The pattern across all three: a figure recorded once at a moment of correctness, then left while the data moved. None was detected by review; each was found by recomputing. Where no machine-readable source exists, the figure is now labelled as recorded by hand rather than presented identically to a derived one.
+
+### Evidence Integration
+
+| Item | Outcome |
+|------|---------|
+| CVE mappings | 52 integrated; the map grew from 55 to 107 CVEs; coverage 20 of 165 techniques to 25 |
+| QIF-T0001 | De-mapped: its only CVE was a stack overflow in an EEG file-request handler, not signal delivery at the electrode interface. The catalogue's flagship technique now carries **zero** CVE evidence, which is the true state of the public record |
+| Coverage gaps | Published as computed data (`cve-coverage-gaps.json`): band N2 and seven tactics have no CVE evidence at all |
+| Cross-references | `research_refs` added to mapping records; 3 of 107 CVEs carry an academic reference. C80 and CVE-2023-49914 now point at each other, closing the gap Entry 107 identified |
+| New papers | 38 from the scholar crawl, plus 2 CVE-origin papers: Buglione (Mendi fNIRS sent in cleartext, CVE-2026-2671) and Rashid et al. (Proteus, a BLE passkey bypass reaching neural devices through a radio module, CVE-2026-65935). Catalogue 342 to 382 rows across all three stores |
+
+Google Scholar could not be crawled — it blocks automated access in `robots.txt` and has no API — and the Semantic Scholar API returned rate-limit responses to every unauthenticated call. Discovery rested on arXiv, PubMed and Crossref, so the pass is not citation-graph-complete. Both facts are recorded rather than glossed.
+
+### Human Decisions
+
+| Decision | Outcome |
+|----------|---------|
+| Verify everything before publishing | 24 of 180 intake items held; unverified claims about named companies kept out of the public repository |
+| Accept a parent field, then fold | Two-level taxonomy; five candidates became children with their own identities |
+| Correct T0171 rather than defer it | Rescored to 4.7 with the reasoning recorded |
+| Regenerate the stale statistics block rather than relabel it | Chosen after git history showed no part of it was a deliberate snapshot |
+
+### Method Notes
+
+- Every figure in this entry was recomputed by the orchestrator from the registrar, not taken from a subagent report.
+- Four PRs arrived in conflict because they were branched before their predecessors merged. Each was resolved by taking the branch's data and re-running the generators, not by choosing a side. One such resolution silently dropped `statistics.by_level`, which a regenerating script did not yet know about; it was caught by comparing the result against the branch and fixed by teaching the generator the new field. A conflict resolution that runs a generator can delete a field as easily as it reconciles one.
+- Subagents shared one worktree for part of the session and collided three times: a branch switched under a running agent, a commit landed on the wrong branch, and a script was overwritten mid-run. No work was lost, but each cost time. Later agents were given isolated worktrees.
+
+### AI Collaboration
+
+Claude Opus 5 planned the work, resolved every merge conflict, and verified each figure recorded here against the data. Subagents performed the mapping, integration, scholarship and scripting under briefs requiring sourced, independently checkable proposals. A Quorum panel of six independent panelists and two adversarial reviewers produced the confidence-scored options behind the taxonomy decision. Kevin directed scope and made every decision recorded here.
 
 ---
 
