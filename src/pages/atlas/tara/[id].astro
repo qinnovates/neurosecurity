@@ -186,6 +186,8 @@ const hasGovernance = nr || reg;
     <EvidenceTierBanner
       client:load
       tier={threat.evidence?.tier ?? statusToEvidenceTier(threat.status)}
+      population={threat.evidence?.population}
+      adjacentCveCount={threat.evidence?.adjacent_cve_count}
       status={threat.status}
       confidenceNote=""
       lastVerified=""

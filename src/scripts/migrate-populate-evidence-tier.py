@@ -77,6 +77,34 @@ NEURAL_PRODUCT_CATEGORIES = {
     "Implant Gateway/Hub",
 }
 
+# `evidence.population` records what the supporting records are *about*, which
+# the seven-tier scheme has no way to express. It is non-ordinal: it never
+# raises or lowers `tier`, which stays derived from neural-product evidence
+# alone. GRADE treats indirect population as a reported downgrade domain rather
+# than a new rung, and that is the shape copied here.
+POPULATION_BY_CATEGORY = {
+    "Neural/EEG Systems": "neural_product",
+    "Implant Telemetry": "neural_product",
+    "Implant Gateway/Hub": "neural_product",
+    "Medical Data Protocols": "adjacent_clinical",
+    "Backend/Data Systems": "adjacent_clinical",
+    "Bluetooth Protocol": "adjacent_component",
+    "RTOS": "adjacent_component",
+    "IoT Mesh": "adjacent_component",
+    "RF/SDR": "adjacent_domain",
+    "Audio/Acoustic": "adjacent_domain",
+    "EM Fault Injection / Crypto": "adjacent_domain",
+}
+
+# Most-direct wins, so a technique with both neural-product and adjacent
+# records is reported on the strongest thing it actually rests on.
+POPULATION_PRECEDENCE = [
+    "neural_product",
+    "adjacent_clinical",
+    "adjacent_component",
+    "adjacent_domain",
+]
+
 STATUS_TIERS = {
     "CONFIRMED": "demonstrated_lab",
     "DEMONSTRATED": "demonstrated_lab",
@@ -128,6 +156,24 @@ def backfill_timeline(techniques: list[dict]) -> list[str]:
     return filled
 
 
+def populations_by_technique(mappings: list[dict]) -> dict[str, str]:
+    """The most direct population any NVD-verified record for each technique rests on."""
+    seen: dict[str, set[str]] = {}
+    for record in mappings:
+        if not record.get("validation", {}).get("nvd_verified"):
+            continue
+        category = record.get("category")
+        population = POPULATION_BY_CATEGORY.get(category)
+        if population is None:
+            raise SystemExit(f"CVE category {category!r} has no population mapping; extend the script.")
+        for technique_id in record.get("tara_techniques", []):
+            seen.setdefault(technique_id, set()).add(population)
+    resolved = {}
+    for technique_id, populations in seen.items():
+        resolved[technique_id] = next(p for p in POPULATION_PRECEDENCE if p in populations)
+    return resolved
+
+
 def count_cves(mappings: list[dict]) -> tuple[Counter, Counter]:
     """Per technique: NVD-verified CVEs in a neural product, and in adjacent technology."""
     neural: Counter = Counter()
@@ -141,7 +187,7 @@ def count_cves(mappings: list[dict]) -> tuple[Counter, Counter]:
     return neural, adjacent
 
 
-def derive(technique: dict, neural_count: int, adjacent_count: int) -> dict:
+def derive(technique: dict, neural_count: int, adjacent_count: int, population: str) -> dict:
     status = (technique.get("status") or "").upper()
     if neural_count:
         tier = "demonstrated_case"
@@ -172,6 +218,7 @@ def derive(technique: dict, neural_count: int, adjacent_count: int) -> dict:
         "basis": basis,
         "neural_product_cve_count": neural_count,
         "adjacent_cve_count": adjacent_count,
+        "population": population,
         "legacy_status": technique.get("status"),
         "derived_by": DERIVED_BY,
         "derived_on": DERIVED_ON,
@@ -190,10 +237,11 @@ def main() -> None:
         print(f"[evidence-tier] backfilled physics timeline on {len(filled)} technique(s) ({filled[0].split()[0]} .. {filled[-1].split()[0]})")
 
     neural, adjacent = count_cves(mapping["mappings"])
+    populations = populations_by_technique(mapping["mappings"])
 
     promoted = []
     for technique in techniques:
-        evidence = derive(technique, neural[technique["id"]], adjacent[technique["id"]])
+        evidence = derive(technique, neural[technique["id"]], adjacent[technique["id"]], populations.get(technique["id"], "none"))
         if evidence["tier"] not in VALID_TIERS:
             raise SystemExit(f"{technique['id']}: derived unknown tier {evidence['tier']!r}; aborting.")
         was_weak = (technique.get("status") or "").upper() in {"THEORETICAL", "EMERGING", "PLAUSIBLE", "SPECULATIVE"}
@@ -205,6 +253,8 @@ def main() -> None:
     if missing:
         raise SystemExit(f"{len(missing)} technique(s) ended with no tier: {missing}")
 
+    pops = Counter(t["evidence"]["population"] for t in techniques)
+    print(f"[evidence-tier] populations: {dict(sorted(pops.items()))}")
     tiers = Counter(t["evidence"]["tier"] for t in techniques)
     print(f"[evidence-tier] {len(techniques)} techniques tiered: {dict(sorted(tiers.items()))}")
     print(f"[evidence-tier] {len(promoted)} promoted above their authoring status:")

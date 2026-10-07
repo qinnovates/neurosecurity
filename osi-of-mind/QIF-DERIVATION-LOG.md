@@ -15,6 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit
 | Entry | Topic | Link |
 |-------|-------|------|
+| 112 | `evidence.population` added as a non-ordinal dimension (GRADE precedent) so 12 adjacent-only techniques stop reading as theoretical; no tier changed, proving orthogonality; `PLAUSIBLE`/`SPECULATIVE` cases added, which exposed NaN in `getStatusStats()` and two colourless filter chips | [Entry 112](#entry-112-evidence-population) |
 | 111 | `evidence.tier` populated across all 176 techniques by deterministic rubric, replacing a legacy `status` word nothing re-derived; the seven-tier scheme had 0 adoption and its one consumer passed null; 6 techniques promoted; validated tiers and adjacent-CVE promotion both refused; 26 incomplete physics blocks found, and the Python SDK had never parsed its own registrar | [Entry 111](#entry-111-evidence-tier) |
 | 110 | Privilege-boundary split of QIF-T0163/T0164: QIF-T0175 (CONFIRMED on four Natus Xltek clinical EEG RCEs) and QIF-T0176 take the application-layer parsing boundary; 22 CVEs divided 11/11; no technique now exceeds the evidence-concentration threshold; three of my own recollections of the task were wrong and re-read from the record | [Entry 110](#entry-110-privilege-split) |
 | 109 | Physics tier integrity: five techniques labelled `no_physics_gate` while tiered `0` (feasible now), and 13 with no block at all counted as tier 0 by a `?? 0` fallback; validator added to CI. Whitepaper 6.5.7 attributed the `severity` field to NISS, claiming 32 critical techniques where NISS yields 0, with a mechanistic argument built on it | [Entry 109](#entry-109-physics-tier-integrity) |
@@ -357,6 +358,62 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 112: Saying What Evidence Is About, Not Only How Strong It Is {#entry-112-evidence-population}
+
+**Date:** 2026-10-07, ~07:30
+**Classification:** FRAMEWORK
+**AI Systems:** Claude Opus 5 (implementation, this entry); two research subagents (options, precedent, defect discovery)
+**Connected entries:** Entry 111 (evidence.tier, which left this gap open), Entry 110 (privilege split), Entry 109 (physics tier integrity)
+**RACI:** R: Claude Opus 5 | A: KQ (chose the dimension over an eighth tier) | C: two subagents | I: none
+**AI Contribution Level:** AI-generated; every value derived by script, none hand-assigned
+
+### The gap Entry 111 left open
+
+Entry 111 tiered all 176 techniques and refused to promote 12 that hold NVD-verified CVEs only in component technology. The reason was that the seven-tier scheme has no rung for "demonstrated in adjacent technology", and forcing them up would let a Bluetooth-stack CVE read as evidence on a brain-computer interface.
+
+Refusing was right, but it left those 12 *understated* rather than merely unrated. QIF-T0163 is the clearest case: its 11 CVEs are in Zephyr, FreeRTOS, ThreadX and NimBLE -- the actual firmware substrate neural wearables run on -- and it displayed as "Tier 6, Theoretical (Proposed Framework)". That is not caution; as a description of the public record it is wrong.
+
+### Why a dimension and not an eighth tier
+
+A subagent costed both and fetched precedent rather than recalling it. The load-bearing finding was GRADE section 5.2.3: indirect population is a named **downgrade domain reported alongside the rating**, not a new rung, and the size of the downgrade depends on how different the populations are. CVSS v4 does the same shape with exploit maturity, keeping it in a separate Threat group; CWE separates `Applicable_Platforms` from `Observed_Examples`. (Oxford CEBM returned 403 to the agent's fetch and was explicitly not cited from memory.)
+
+The attack on the eighth tier lands: the ordinal axis means one thing, and spending a rung on it to encode *subject matter* conflates strength with subject. It would also flatten QIF-T0163's firmware-substrate CVEs against genuinely unrelated domains, which is the same error in the opposite direction.
+
+So the tiers are untouched -- same seven, same groups, same colours, `getEvidenceGroup()` unchanged -- and a second, non-ordinal field was added:
+
+    evidence.population: neural_product | adjacent_clinical | adjacent_component | adjacent_domain | none
+
+derived from each CVE record's `category`, most-direct-wins, so a technique is reported on the strongest thing it actually rests on.
+
+| population | count |
+|---|---|
+| neural_product | 15 |
+| adjacent_clinical | 4 |
+| adjacent_component | 6 |
+| adjacent_domain | 2 |
+| none | 149 |
+
+**No tier changed.** That is the test of whether the dimension is really orthogonal, and it passed: the distribution before and after is identical.
+
+The technique page now carries one sub-line when the population is not a neural product. QIF-T0163 reads "Shown in component technology a neural device runs on -- 11 NVD-verified CVEs, none in a neural-data product." QIF-T0175, which rests on four Natus Xltek clinical EEG CVEs, shows no qualifier, because none is warranted.
+
+### The two undocumented statuses were not cosmetic
+
+`PLAUSIBLE` (QIF-T0100) and `SPECULATIVE` (QIF-T0102) had no `case` in `statusToEvidenceGroup()`. A subagent established from commit `f8186fd0` (2026-02-13), `datalake/README.md` and `enrich-regulatory.py` that both values were deliberate; the missing cases were the accident. It also found that only one of the two was actually miscoded -- `SPECULATIVE` happens to land correctly on the `default` -- while `PLAUSIBLE` made QIF-T0100 read as Tier 7 conjecture despite six citations and `feasible_now`. It did not guess at `PLAUSIBLE`'s intended rubric, which the README defines indistinguishably from `THEORETICAL`; that remains open.
+
+Widening the `Status` union surfaced two further consequences nobody had noticed:
+
+- `getStatusStats()` initialised four keys and incremented `stats[t.status]`, so those two techniques produced **NaN** rather than a count.
+- `STATUS_COLORS` held four entries, so their filter chips rendered with no background and no text colour. The map now carries `satisfies Record<Status, ...>`, which makes the compiler reject any future status that lacks a colour.
+
+### Standing judgement
+
+The pattern from Entry 111 held again: the fix that lasts is the one a type or a validator enforces. `satisfies Record<Status, ...>` is worth more than the two colours it added, because it converts "someone must remember" into "the build fails". The new CI check does the same for the population vocabulary, and additionally asserts that `population == neural_product` holds exactly when `neural_product_cve_count > 0` -- so the dimension cannot drift away from the counts it was derived from.
+
+What is still open is a judgement, not a defect: GRADE downgrades by one or two levels depending on how distant the population is. This implementation records the distance and downgrades by nothing. Whether an `adjacent_domain` technique should sit lower on the ordinal axis than an `adjacent_component` one is a rubric question for KQ, and inventing a downgrade schedule unasked would have been the same overreach as inventing a NISS metric.
 
 ---
 
