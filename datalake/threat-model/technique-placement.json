@@ -429,6 +429,23 @@
       "chainRole": "objective",
       "basis": "Hijacks visually evoked responses through display flicker. Applies where the device uses visual evoked potentials.",
       "entryPath": "senses"
+    },
+    "QIF-T0175": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "clinician_programmer",
+        "cloud_service",
+        "patient_app"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "neuralData"
+      ],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "initial_access",
+      "basis": "Runs attacker code on whichever component opens the recording or study file, so it needs a component that parses neural or clinical data rather than a path to tissue.",
+      "entryPath": "device_systems"
     }
   },
   "notPlaced": {
