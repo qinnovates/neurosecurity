@@ -27,6 +27,7 @@ import { GOVERNANCE_DOCS, REGULATORY_LANDSCAPE } from './data/governance.js';
 // Lazy-loaded data (large files loaded on demand)
 let _TARA_TECHNIQUES = null;
 let _TARA_STATS = null;
+let _TARA_CATALOG_URL = null;
 let _NISS_DEVICES = null;
 let _BCI_COMPANIES = null;
 let _BRAIN_REGIONS = null;
@@ -36,8 +37,9 @@ async function loadTARA() {
     const m = await import('./data/tara.js');
     _TARA_TECHNIQUES = m.TARA_TECHNIQUES;
     _TARA_STATS = m.TARA_STATS;
+    _TARA_CATALOG_URL = m.TARA_CATALOG_URL;
   }
-  return { techniques: _TARA_TECHNIQUES, stats: _TARA_STATS };
+  return { techniques: _TARA_TECHNIQUES, stats: _TARA_STATS, catalogUrl: _TARA_CATALOG_URL };
 }
 
 async function loadNISS() {
@@ -936,7 +938,7 @@ function renderByType(grid, type, data) {
 
   if (type === 'tara') {
     grid.innerHTML = '<p style="padding:20px;color:var(--text-dim);">Loading threat atlas...</p>';
-    loadTARA().then(({ techniques, stats }) => renderTARA(grid, techniques, stats));
+    loadTARA().then(({ techniques, stats, catalogUrl }) => renderTARA(grid, techniques, stats, catalogUrl));
     return;
   }
 

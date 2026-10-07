@@ -8,9 +8,11 @@ on:
       - 'src/lib/threat-data.ts'
       - 'src/lib/kql-tables.ts'
       - 'datalake/qtara/src/qtara/models.py'
+      - 'src/site/learn/autodidactive/js/data/tara.js'
   pull_request:
     paths:
       - 'datalake/qtara-registrar.json'
+      - 'src/site/learn/autodidactive/js/data/tara.js'
   workflow_dispatch:
 
 permissions:
@@ -97,3 +99,9 @@ jobs:
         run: |
           npm ci --ignore-scripts 2>/dev/null || true
           npx tsc --noEmit 2>&1 || echo "::warning::TypeScript type check found issues"
+
+      # Files derived from the registrar drift silently otherwise: the
+      # Autodidactive lesson sat at 109 techniques against a 174-technique
+      # registrar until someone read it.
+      - name: Check registrar-derived files are current
+        run: npm run generated:check
