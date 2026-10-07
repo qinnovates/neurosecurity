@@ -6,6 +6,7 @@ import { FocusProvider, useFocus } from './FocusContext';
 import { DEFAULT_MODE_ID, WORKBENCH_MODES, isModeId, type ModeId } from './mode-registry';
 import ModeViews from './ModeViews';
 import { defaultViewId, findView } from './view-registry';
+import '@/components/lab-kit/lab-kit.css';
 import './workbench.css';
 
 interface Props {
