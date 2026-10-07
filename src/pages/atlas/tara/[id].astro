@@ -1,4 +1,5 @@
 ---
+import { statusToEvidenceTier } from '../../../lib/evidence-tiers';
 import PageLayout from '@/layouts/PageLayout.astro';
 import BrainVisualization from '@/components/brain/BrainVisualization.tsx';
 import EvidenceTierBanner from '../../../components/atlas/EvidenceTierBanner';
@@ -138,7 +139,7 @@ const hasGovernance = nr || reg;
 
 <PageLayout
   title={`${threat.id}: ${threat.name} — BCI Attack Technique`}
-  description={`${threat.description} Severity: ${threat.severity}. NISS score: ${nissBase}/10. Domains: ${threat.bands?.join(', ') || 'N/A'}. Part of the TARA threat catalog for brain-computer interface security.`}
+  description={`${threat.description ?? threat.name} Severity: ${threat.severity}. ${threat.nissScored ? `NISS score: ${nissBase}/10.` : 'NISS: not yet scored.'} Domains: ${threat.bands?.join(', ') || 'N/A'}. Part of the TARA threat catalog for brain-computer interface security.`}
   breadcrumbs={[
     { label: 'Atlas', href: '/atlas/' },
     { label: 'TARA', href: '/atlas/tara/' },
@@ -184,7 +185,7 @@ const hasGovernance = nr || reg;
 
     <EvidenceTierBanner
       client:load
-      tier={threat.status === 'CONFIRMED' ? 'validated_replication' : threat.status === 'DEMONSTRATED' ? 'demonstrated_lab' : threat.status === 'THEORETICAL' ? 'theoretical_modeled' : threat.status === 'EMERGING' ? 'demonstrated_case' : 'speculative'}
+      tier={threat.evidence?.tier ?? statusToEvidenceTier(threat.status)}
       status={threat.status}
       confidenceNote=""
       lastVerified=""
@@ -350,7 +351,16 @@ const hasGovernance = nr || reg;
              )}
           </div>
           <div class="mt-3">
-            <NissScoreBadge client:load score={threat.niss?.score ?? 0} severity={threat.niss?.severity ?? 'low'} />
+            {threat.nissScored ? (
+              <NissScoreBadge client:load score={threat.niss.score} severity={threat.niss.severity ?? 'low'} />
+            ) : (
+              <a
+                href="/atlas/scoring/#coverage"
+                class="inline-flex items-center gap-2 rounded-lg border border-slate-500/20 bg-slate-500/10 px-3 py-1 text-sm text-slate-400 hover:underline"
+              >
+                <span aria-hidden="true">○</span> NISS not yet scored
+              </a>
+            )}
           </div>
           {threat.niss?.pins && <PinsBadge client:load pins={true} size="md" showExplanation={true} />}
           {nissVector && (

@@ -167,6 +167,9 @@ export interface ThreatVector {
   bandsStr: string;
   /** NISS v2.0 scoring data (extension metrics: BI, CR, CD, CV, RV, NP) */
   niss: NissScore;
+  /** False when the registrar holds no `niss` block at all. The `niss` value is
+   *  then a placeholder, and its 0 score must not be displayed as a result. */
+  nissScored: boolean;
   /** CVSS v4.0 scoring data (base + supplemental metrics) */
   cvss: CvssScore | null;
   /** Cross-references (related IDs, secondary tactics) */
@@ -214,6 +217,7 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
   description: t.notes,
   bandsStr: t.bands,
   niss: t.niss ?? { version: '1.0', vector: '', score: 0, severity: 'none', pins: false },
+  nissScored: Boolean(t.niss),
   cvss: t.cvss ?? null,
   crossRefs: t.cross_references ?? null,
   sources: t.sources ?? [],
