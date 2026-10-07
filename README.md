@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18640105-blue)](https://doi.org/10.5281/zenodo.18640105)
 [![Site](https://img.shields.io/badge/Site-qinnovate.com-gold)](https://qinnovate.com)
-[![TARA](https://img.shields.io/badge/TARA-174_techniques-red)](https://qinnovate.com/atlas/tara/)
+[![TARA](https://img.shields.io/badge/TARA-176_techniques-red)](https://qinnovate.com/atlas/tara/)
 
 </div>
 
@@ -105,7 +105,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | Component | Description | Status |
 |-----------|-------------|--------|
 | **[QIF](https://qinnovate.com/framework/)** | 11-band hourglass security architecture for BCIs | Proposed, v6.3 ([v8.0](osi-of-mind/whitepapers/QIF-WHITEPAPER-V8.md)) |
-| **[TARA](https://qinnovate.com/atlas/tara/)** | 174 BCI technique pairs, STIX 2.1 registry | v1.7 |
+| **[TARA](https://qinnovate.com/atlas/tara/)** | 176 BCI technique pairs, STIX 2.1 registry | v1.7 |
 | **[qtara](https://pypi.org/project/qtara/)** | Python SDK for TARA registry management and STIX export | v0.2.0 |
 | **[NSP](https://qinnovate.com/tools/nsp/)** | Post-quantum wire protocol for BCI data links | In development, v0.5 |
 | **[NISS](https://qinnovate.com/atlas/scoring/)** | CVSS v4.0 extension proposal for neural interfaces (6 neural metrics) | Proposed, v1.1 |
@@ -145,11 +145,11 @@ This is early-stage research by a solo researcher. Empirical validation requires
 <details>
 <summary><strong>The TARA Insight</strong></summary>
 
-TARA started as an attack matrix. 174 BCI techniques catalogued from published literature. Something unexpected emerged: the same mechanisms kept showing up on the therapeutic side.
+TARA started as an attack matrix. 176 BCI techniques catalogued from published literature. Something unexpected emerged: the same mechanisms kept showing up on the therapeutic side.
 
 Signal injection is an attack vector. It is also the basis of neurostimulation therapy for depression, Parkinson's, and chronic pain. The boundary between attack and therapy is not the mechanism. It is consent, dosage, and oversight.
 
-About 75% of the 174 techniques map to a therapeutic counterpart today. This means the same framework that scores whether an attack is dangerous can also help bound whether a therapy is safe. TARA is both a threat registry and a safety reference.
+About 75% of the 176 techniques map to a therapeutic counterpart today. This means the same framework that scores whether an attack is dangerous can also help bound whether a therapy is safe. TARA is both a threat registry and a safety reference.
 
 [TARA Atlas](https://qinnovate.com/atlas/tara/) | [TARA blog post](https://qinnovate.com/news/2026-02-09-tara-therapeutic-atlas-of-risks-and-applications/)
 
@@ -170,7 +170,7 @@ Three fields converge on BCIs. None covers the full problem alone.
 
 **Neurosecurity** (Denning, Matsuoka & Kohno, 2009) bridges all three. QIF is one attempt to operationalize that bridge — taking phenomena described by neuroscientists and concerns raised by neuroethicists and putting them into a testable security framework.
 
-[Neurosecurity Governance](governance/policy/NEUROSECURITY_GOVERNANCE.md) | [Origin classification of all 174 techniques](datalake/qtara-registrar.json)
+[Neurosecurity Governance](governance/policy/NEUROSECURITY_GOVERNANCE.md) | [Origin classification of all 176 techniques](datalake/qtara-registrar.json)
 
 </details>
 
@@ -189,7 +189,7 @@ An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spina
 
 ### TARA
 
-174 techniques spanning 8 domains and 17 tactics. 103/174 carry CVSS v4.0 base vectors; 148/174 carry proposed NISS extension metrics (coverage expanding). MITRE-compatible IDs.
+176 techniques spanning 8 domains and 17 tactics. 103/176 carry CVSS v4.0 base vectors; 150/176 carry proposed NISS extension metrics (coverage expanding). MITRE-compatible IDs.
 
 [Legacy: Requires further updates and refining]
 - **Atlas:** [qinnovate.com/atlas/tara](https://qinnovate.com/atlas/tara/)

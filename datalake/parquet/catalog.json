@@ -1,15 +1,15 @@
 {
   "_meta": {
-    "generated": "2026-10-07T03:34:30.883390+00:00",
+    "generated": "2026-10-07T03:43:50.435250+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
     "total_datasets": 33,
-    "total_rows": 7980
+    "total_rows": 7982
   },
   "datasets": {
     "techniques": {
-      "rows": 174,
+      "rows": 176,
       "columns": 28,
       "column_names": [
         "id",
@@ -41,7 +41,7 @@
         "consent_tier",
         "notes"
       ],
-      "size_bytes": 43659,
+      "size_bytes": 44080,
       "compression": "zstd",
       "source": "datalake/parquet/techniques.parquet"
     },
@@ -437,7 +437,7 @@
         "verification",
         "note"
       ],
-      "size_bytes": 24195,
+      "size_bytes": 24208,
       "compression": "zstd",
       "source": "datalake/parquet/cve_mappings.parquet"
     },
@@ -681,7 +681,7 @@
         "current_stats",
         "milestones"
       ],
-      "size_bytes": 13250,
+      "size_bytes": 13248,
       "compression": "zstd",
       "source": "datalake/parquet/timeline.parquet"
     }

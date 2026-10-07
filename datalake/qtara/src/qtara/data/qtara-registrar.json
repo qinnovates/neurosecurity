@@ -5,19 +5,19 @@
   "statistics": {
     "generator": "src/scripts/generate-registrar-statistics.mjs",
     "generated": "2026-10-07",
-    "total_techniques": 174,
+    "total_techniques": 176,
     "total_tactics": 17,
     "total_domains": 8,
     "by_level": {
-      "top_level": 169,
+      "top_level": 171,
       "child": 5
     },
     "by_tactic": {
       "QIF-B.EV": 6,
-      "QIF-B.IN": 7,
+      "QIF-B.IN": 8,
       "QIF-C.EX": 17,
       "QIF-C.IM": 6,
-      "QIF-D.HV": 13,
+      "QIF-D.HV": 14,
       "QIF-E.RD": 13,
       "QIF-M.SV": 16,
       "QIF-N.IJ": 11,
@@ -32,25 +32,25 @@
       "QIF-S.SC": 2
     },
     "by_status": {
-      "CONFIRMED": 27,
+      "CONFIRMED": 28,
       "DEMONSTRATED": 44,
       "EMERGING": 30,
       "PLAUSIBLE": 1,
       "SPECULATIVE": 1,
-      "THEORETICAL": 71
+      "THEORETICAL": 72
     },
     "by_severity": {
       "critical": 32,
-      "high": 77,
+      "high": 78,
       "low": 4,
-      "medium": 61
+      "medium": 62
     },
     "by_ui_category": {
       "CI": 19,
       "DM": 42,
       "DS": 23,
-      "EX": 31,
-      "PE": 11,
+      "EX": 32,
+      "PE": 12,
       "PS": 7,
       "SE": 24,
       "SI": 17
@@ -58,35 +58,35 @@
     "by_niss_severity": {
       "critical": 0,
       "high": 20,
-      "low": 65,
+      "low": 67,
       "medium": 62,
       "none": 27
     },
     "niss_cvss_mapping": {
-      "techniques_scored": 148,
+      "techniques_scored": 150,
       "techniques_unscored": 26,
-      "pins_flagged": 40,
+      "pins_flagged": 41,
       "by_gap_group": {
         "1": 14,
         "2": 30,
         "3": 59
       },
-      "techniques_without_cvss": 71
+      "techniques_without_cvss": 73
     },
     "tara": {
       "version": "1.9",
-      "enriched_techniques": 174,
+      "enriched_techniques": 176,
       "dual_use_breakdown": {
         "confirmed": 102,
         "possible": 10,
         "probable": 19,
-        "silicon_only": 42
+        "silicon_only": 44
       },
       "techniques_with_clinical_analog": 130,
-      "techniques_silicon_only": 42,
+      "techniques_silicon_only": 44,
       "dsm5": {
         "version": "1.0",
-        "techniques_with_dsm5_block": 147,
+        "techniques_with_dsm5_block": 149,
         "techniques_with_dsm5": 76,
         "unique_dsm_codes": 28,
         "unique_dsm_codes_including_secondary": 48,
@@ -94,13 +94,13 @@
           "cognitive_psychotic": 22,
           "mood_trauma": 27,
           "motor_neurocognitive": 26,
-          "non_diagnostic": 63,
+          "non_diagnostic": 65,
           "persistent_personality": 9
         },
         "risk_class_breakdown": {
           "direct": 75,
           "indirect": 11,
-          "none": 61
+          "none": 63
         }
       },
       "neurorights_mapped": 144
@@ -120,7 +120,7 @@
         "QIF Framework (MI extended with signal dynamics, MP extended with data lifecycle)"
       ],
       "techniques_mapped": 144,
-      "techniques_unmapped": 30,
+      "techniques_unmapped": 32,
       "techniques_by_right": {
         "CL": 89,
         "DI": 77,
@@ -140,7 +140,7 @@
       "version": "1.0",
       "framework": "FDORA Section 3305 / Section 524B",
       "techniques_mapped": 135,
-      "techniques_unmapped": 39,
+      "techniques_unmapped": 41,
       "cyber_device_techniques": 68,
       "non_cyber_device_techniques": 67,
       "prong_failure_reasons": {
@@ -174,21 +174,21 @@
       "version": "1.0",
       "analysis_date": "2026-02-18",
       "constraint_system_ref": "QIF Derivation Log Entry 60",
-      "techniques_assessed": 174,
+      "techniques_assessed": 176,
       "techniques_unassessed": 0,
       "by_tier": {
         "far_term": 4,
         "feasible_now": 100,
         "mid_term": 13,
         "near_term": 22,
-        "no_physics_gate": 35
+        "no_physics_gate": 37
       },
       "by_tier_id": {
         "0": 100,
         "1": 22,
         "2": 13,
         "3": 4,
-        "X": 35
+        "X": 37
       },
       "notes": [
         "Tier 0 (feasible_now): Attack hardware exists today",
@@ -29710,6 +29710,192 @@
       "tara_mode": "M",
       "tara_enrichment_pending": true,
       "parent_id": "QIF-T0024"
+    },
+    {
+      "id": "QIF-T0175",
+      "attack": "Application-layer memory-safety exploitation on the neural signal path for arbitrary code execution",
+      "tactic": "QIF-B.IN",
+      "bands": "S2–S3",
+      "band_ids": [
+        "S2",
+        "S3"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "Not applicable — software/silicon-only attack surface; no signal-layer coherence metric detects kernel memory corruption",
+      "sources": [
+        "Szekeres, Payer, Wei, Song, 'SoK: Eternal War in Memory,' IEEE S&P 2013, pp. 48-62",
+        "MITRE CWE-787: Out-of-bounds Write",
+        "MITRE CWE-416: Use After Free"
+      ],
+      "status": "CONFIRMED",
+      "severity": "high",
+      "ui_category": "PE",
+      "notes": "Heap or stack memory-safety violation in an unprivileged or application-privileged parser on the neural or clinical signal path -- an EEG acquisition or review application, a DICOM decoder, or a host-side BLE library -- reached by a crafted recording file, study object or peripheral response, yielding attacker-controlled execution within that process. Distinguished from QIF-T0163 by privilege domain: the compromise is confined to the parsing process and its data, and does not by itself corrupt a closed-loop control routine. Exploitable code execution of this class is public for Natus Xltek NeuroWorks 8, a clinical EEG product (CVE-2017-2853, CVE-2017-2867, CVE-2017-2868, CVE-2017-2869).",
+      "legacy_ids": [],
+      "niss": {
+        "version": "1.1",
+        "vector": "NISS:1.1/BI:H/CR:N/CD:H/CV:N/RV:T/NP:N",
+        "score": 2.7,
+        "severity": "low",
+        "pins": true
+      },
+      "cross_references": {
+        "related_ids": [
+          "T0164"
+        ],
+        "note": "Sibling technique — same underlying memory-safety vulnerability class, execution/control-corruption outcome rather than data-exfiltration outcome. Kept as separate top-level techniques per MITRE ATT&CK convention for one vulnerability class serving genuinely different tactics (cf. T1068/T1203/T1211/T1210).",
+        "split_from": "QIF-T0163",
+        "split_decision": "T0163-LAYER (datalake/cve-coverage-gaps.json)"
+      },
+      "tara": {
+        "mechanism": "Attacker-supplied input crosses an application parsing boundary on the signal path and triggers a spatial memory-safety violation in code running as an ordinary isolated process, giving the attacker control of that process rather than of the privileged domain.",
+        "dual_use": "silicon_only",
+        "clinical": null,
+        "governance": {
+          "consent_tier": "standard",
+          "monitoring": [
+            "firmware_integrity",
+            "kernel_control_flow_integrity",
+            "access_logging",
+            "crash_dump_analysis"
+          ],
+          "regulations": [
+            "FDA 21 CFR 820",
+            "IEC 62443",
+            "NIST CSF",
+            "IEC 62304"
+          ],
+          "data_classification": "restricted",
+          "safety_ceiling": "Safety-critical kernel/driver components should target formal verification of memory-safety properties (seL4-style proof of absence of buffer overflows/UAF/null derefs)"
+        },
+        "engineering": {
+          "coupling": [],
+          "parameters": {
+            "vulnerability_class": "spatial/temporal memory safety (CWE-787, CWE-416)",
+            "trust_boundary": "kernel/driver ingestion path"
+          },
+          "hardware": [
+            "driver_data_ingestion_path",
+            "interrupt_handler",
+            "memory_management_unit"
+          ],
+          "detection": "Kernel control-flow integrity monitoring, crash-dump/fault analysis, fuzz-testing of driver input parsers, formal verification of critical paths"
+        },
+        "dsm5": {
+          "primary": [],
+          "secondary": [],
+          "risk_class": "none",
+          "cluster": "non_diagnostic",
+          "pathway": "S-domain only — kernel/software attack, no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
+        }
+      },
+      "tara_domain_primary": "SIL",
+      "tara_mode": "M",
+      "tara_enrichment_pending": false,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "Application-layer memory-safety exploitation; software-only",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      }
+    },
+    {
+      "id": "QIF-T0176",
+      "attack": "Application-layer memory-safety exploitation on the neural signal path for out-of-bounds neural-data read",
+      "tactic": "QIF-D.HV",
+      "bands": "S2–S3",
+      "band_ids": [
+        "S2",
+        "S3"
+      ],
+      "coupling": null,
+      "access": null,
+      "classical": "Yes",
+      "quantum": "Not applicable — software/silicon-only attack surface",
+      "sources": [
+        "Szekeres, Payer, Wei, Song, 'SoK: Eternal War in Memory,' IEEE S&P 2013, pp. 48-62",
+        "MITRE CWE-125: Out-of-bounds Read",
+        "MITRE CWE-843: Type Confusion",
+        "MITRE CWE-416: Use After Free"
+      ],
+      "status": "THEORETICAL",
+      "severity": "medium",
+      "ui_category": "EX",
+      "notes": "Out-of-bounds read or over-read in an unprivileged or application-privileged parser on the neural or clinical signal path, disclosing adjacent heap contents that may include other patients' recordings or study metadata held by the same process. Distinguished from QIF-T0164 by privilege domain: the read primitive is confined to the parsing process's address space and does not cross an OS-enforced process boundary.",
+      "legacy_ids": [],
+      "niss": {
+        "version": "1.1",
+        "vector": "NISS:1.1/BI:N/CR:H/CD:N/CV:I/RV:F/NP:N",
+        "score": 2.7,
+        "severity": "low",
+        "pins": false
+      },
+      "cross_references": {
+        "related_ids": [
+          "T0163"
+        ],
+        "note": "Sibling technique — see QIF-T0163.",
+        "split_from": "QIF-T0164",
+        "split_decision": "T0163-LAYER (datalake/cve-coverage-gaps.json)"
+      },
+      "tara": {
+        "mechanism": "A read-primitive memory-safety bug in an application-layer parser discloses memory adjacent to the attacker-supplied buffer within the same process, defeating intended separation between records handled by that process rather than between trust domains.",
+        "dual_use": "silicon_only",
+        "clinical": null,
+        "governance": {
+          "consent_tier": "enhanced",
+          "monitoring": [
+            "cross_process_memory_access_audit",
+            "shared_buffer_bounds_checking",
+            "access_audit_log"
+          ],
+          "regulations": [
+            "HIPAA",
+            "GDPR Art. 9",
+            "21 CFR Part 11",
+            "IEC 62304"
+          ],
+          "data_classification": "sensitive_neural",
+          "safety_ceiling": "Neural-data buffers must be isolated via memory-safe abstractions (capability-based memory regions, bounds-checked shared buffers) not solely trust-based access"
+        },
+        "engineering": {
+          "coupling": [],
+          "parameters": {
+            "vulnerability_class": "spatial memory safety / type confusion (CWE-125, CWE-843, CWE-416)",
+            "trust_boundary": "process/privilege isolation over shared neural-data buffers"
+          },
+          "hardware": [
+            "shared_memory_ring_buffer",
+            "ioctl_handler",
+            "memory_management_unit"
+          ],
+          "detection": "Cross-process memory access auditing, shared-buffer bounds enforcement, formal verification of isolation properties"
+        },
+        "dsm5": {
+          "primary": [],
+          "secondary": [],
+          "risk_class": "none",
+          "cluster": "non_diagnostic",
+          "pathway": "S-domain only — kernel/software attack, no neural pathway",
+          "niss_correlation": "Silicon-only technique — no diagnostic mapping"
+        }
+      },
+      "tara_domain_primary": "SIL",
+      "tara_mode": "R",
+      "tara_enrichment_pending": false,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "Application-layer memory-safety exploitation; software-only",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      }
     }
   ],
   "deprecated": [

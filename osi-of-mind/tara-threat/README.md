@@ -49,4 +49,4 @@ The canonical source of truth for all 165 TARA techniques is `config.py`. JSON o
 
 ---
 
-*174 techniques, 17 tactics, 8 domains. Apache 2.0.*
+*176 techniques, 17 tactics, 8 domains. Apache 2.0.*
