@@ -65,7 +65,7 @@
 
 .tm-notice { border-left: 3px solid var(--color-severity-high); padding: 0.5rem 0.75rem; margin: 0.75rem 0; background: var(--color-bg-surface); font-size: 0.8125rem; }
 .tm-quote { border-left: 3px solid var(--color-border); padding-left: 0.625rem; margin: 0.375rem 0; font-size: 0.8125rem; color: var(--color-text-muted); }
-.tm-list { margin: 0.25rem 0 0; padding-left: 1.125rem; font-size: 0.8125rem; line-height: 1.5; }
+.tm-list { margin: 0.25rem 0 0; padding-left: 1.125rem; font-size: 0.8125rem; line-height: 1.5; list-style: disc; }
 .tm-error { color: var(--color-severity-critical); font-size: 0.8125rem; margin-top: 0.5rem; }
 .tm-print-only { display: none; }
 
@@ -73,7 +73,12 @@
   .tm-no-print { display: none !important; }
   .tm-print-only { display: block; }
   .tm-grid { display: block; }
-  .tm-card { border: 1px solid #999; break-inside: avoid; background: #fff; color: #000; }
+  .tm-card { border: 1px solid #999; background: #fff; color: #000; }
+  /* Whole sections are cards: keeping each on one page left pages half empty. Rows and headings stay together instead. */
+  .tm-table tr, .tm-heading, .tm-subheading { break-inside: avoid; }
+  .tm-heading, .tm-subheading { break-after: avoid; }
+  .tool-header, .tool-intro { display: none !important; }
+  .tm-pinned { position: static; }
   .tm-root, .tm-muted, .tm-table th { color: #000; }
   .tm-diagram { max-height: none; }
   .tm-row--addressed { opacity: 1; }
@@ -145,3 +150,12 @@ textarea.tm-input { resize: vertical; }
 @media (prefers-reduced-motion: reduce) { .tm-regions, .tm-regions-halo { animation: none; } }
 
 .tm-lens-note { flex-basis: 100%; margin: 0; padding: 0.375rem 0.625rem; font-size: 0.8125rem; border-left: 3px solid var(--color-accent-warning, #d97706); background: var(--color-glass-bg); border-radius: 0 0.375rem 0.375rem 0; }
+
+/* The device form: always open on a wide screen, folded behind its summary on a narrow one. */
+.tm-intake-summary { display: none; }
+@media (max-width: 960px) {
+  .tm-intake-summary { display: block; cursor: pointer; font-weight: 600; padding: 0.625rem 0.875rem; margin-bottom: 0.75rem; border: 1px solid var(--color-glass-border); border-radius: 0.5rem; background: var(--color-glass-bg); }
+  /* Labels in the diagram are unreadable when it shrinks to a phone's width, so it keeps its size and scrolls sideways inside its card. */
+  .tm-spine .tm-card { overflow-x: auto; }
+  .tm-spine .tm-diagram { min-width: 34rem; max-height: none; }
+}

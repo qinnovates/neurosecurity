@@ -1,13 +1,32 @@
-import { useEffect, useMemo, useState, type FormEvent } from 'react';
+import { useEffect, useMemo, useState, type FormEvent, type KeyboardEvent } from 'react';
 import { useFocus } from '@/components/workbench/FocusContext';
 import type { ModeProps } from '@/components/workbench/mode-registry';
 import { MAX_QUERY_LENGTH, buildIndexes, executeQuery, type QueryResult, type TableData } from '@/lib/kql-engine';
 import { QUERY_TABLE_DESCRIPTIONS, buildQueryTables } from '@/lib/threat-model/query-tables';
+import { escapeCsvCell } from '@/lib/threat-model/register-csv';
 import { SiteDatabaseError, loadSiteDatabase } from './load-site-database';
 import { STARTER_QUERIES } from './starter-queries';
 import '@/components/threat-model/threat-model.css';
 
 const MAX_ROWS_SHOWN = 200;
+const MAX_HISTORY = 8;
+const HISTORY_LABEL_LENGTH = 70;
+
+/** Every row of a result as CSV, with spreadsheet formula characters neutralised. */
+function toCsv(result: QueryResult): string {
+  const columns = Object.keys(result.rows[0] ?? {});
+  const lines = [columns, ...result.rows.map((row) => columns.map((column) => formatCell(row[column])))];
+  return `${lines.map((cells) => cells.map(escapeCsvCell).join(',')).join('\r\n')}\r\n`;
+}
+
+function downloadCsv(csv: string): void {
+  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  const anchor = document.createElement('a');
+  anchor.href = url;
+  anchor.download = 'tara-lab-query.csv';
+  anchor.click();
+  URL.revokeObjectURL(url);
+}
 
 function formatCell(value: unknown): string {
   if (value === null || value === undefined) return '';
@@ -63,14 +82,25 @@ export default function QueryMode(_props: ModeProps) {
   // Recomputed when the device changes, so results always describe the device in focus.
   const result = useMemo(() => executeQuery(submitted, tables, indexes), [submitted, tables, indexes]);
 
-  const submit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    setSubmitted(draft);
-  };
-  const runStarter = (query: string): void => {
+  // Kept in memory for this visit only; a reload clears it.
+  const [history, setHistory] = useState<string[]>([]);
+  const run = (query: string): void => {
     setDraft(query);
     setSubmitted(query);
+    setHistory((previous) => [query, ...previous.filter((earlier) => earlier !== query)].slice(0, MAX_HISTORY));
   };
+  const submit = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    run(draft);
+  };
+  const runOnShortcut = (event: KeyboardEvent<HTMLTextAreaElement>): void => {
+    if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) {
+      event.preventDefault();
+      run(draft);
+    }
+  };
+  const runStarter = run;
+  const canExport = result.error === null && result.rows.length > 0;
 
   return (
     <div className="tm-root tm-grid">
@@ -113,13 +143,24 @@ export default function QueryMode(_props: ModeProps) {
             <span className="tm-label">Query</span>
             <textarea
               className="tm-input tm-mono" rows={3} spellCheck={false} maxLength={MAX_QUERY_LENGTH}
-              value={draft} onChange={(event) => setDraft(event.target.value)}
+              value={draft} onChange={(event) => setDraft(event.target.value)} onKeyDown={runOnShortcut}
             />
           </label>
           <div className="tm-actions">
             <button type="submit" className="tm-button tm-button--primary">Run</button>
-            <span className="tm-muted tm-small">Pipe syntax: table | where | join t on a == b | project | sort by | summarize count() by | take. Runs in your browser.</span>
+            <button type="button" className="tm-button" disabled={!canExport} onClick={() => downloadCsv(toCsv(result))}>Export results (CSV)</button>
+            <span className="tm-muted tm-small">Pipe syntax: table | where | join t on a == b | project | sort by | summarize count() by | take. Ctrl or Cmd + Enter runs it. Runs in your browser.</span>
           </div>
+          {history.length > 1 && (
+            <div className="tm-actions" style={{ marginTop: '0.625rem' }} role="group" aria-label="Earlier queries in this visit">
+              <span className="tm-lens-label">Earlier</span>
+              {history.slice(1).map((query) => (
+                <button key={query} type="button" className="tm-button tm-mono tm-small" title={query} onClick={() => run(query)}>
+                  {query.length > HISTORY_LABEL_LENGTH ? `${query.slice(0, HISTORY_LABEL_LENGTH)}…` : query}
+                </button>
+              ))}
+            </div>
+          )}
         </form>
         <section className="tm-card" aria-live="polite">
           <ResultTable result={result} />

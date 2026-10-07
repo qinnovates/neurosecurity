@@ -52,6 +52,8 @@ export default function ThreatModelStudio() {
   const [importError, setImportError] = useState<string | null>(null);
   const [pendingReplacement, setPendingReplacement] = useState<PendingReplacement | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // On a narrow screen the form starts folded, so the diagram and risks are not a long scroll away.
+  const [isIntakeOpen, setIntakeOpen] = useState(() => window.matchMedia('(min-width: 961px)').matches);
 
   const regionById = useMemo(() => new Map(engineData.regions.map((region) => [region.id, region])), [engineData]);
   const archetype = archetypes.find((candidate) => candidate.id === state.archetypeId) ?? null;
@@ -116,6 +118,8 @@ export default function ThreatModelStudio() {
             onReplace={() => applyReplacement(pendingReplacement)} onKeep={() => setPendingReplacement(null)}
           />
         )}
+        <details className="tm-intake" open={isIntakeOpen} onToggle={(event) => setIntakeOpen(event.currentTarget.open)}>
+          <summary className="tm-intake-summary">Your device: {model.name}. Edit</summary>
         <IntakeForm
           archetypes={archetypes} regions={engineData.regions} archetype={archetype} answers={state.answers}
           onSelectPreset={(selected) => requestReplacement({ kind: 'preset', archetype: selected })} onChangeAnswers={changeAnswers}
@@ -131,6 +135,7 @@ export default function ThreatModelStudio() {
           {importError !== null && <p className="tm-error" role="alert">{importError}</p>}
           <p className="tm-muted tm-small" style={{ marginTop: '0.625rem' }}>Files are created and read in your browser. Nothing is uploaded.</p>
         </section>
+        </details>
       </aside>
 
       <div>
