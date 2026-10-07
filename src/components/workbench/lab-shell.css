@@ -1,0 +1,74 @@
+/* The shell every Lab screen sits in. Colour, type and motion tokens come from lab-kit/lab-kit.css. */
+
+:root { --lab-topbar-height: 2.75rem; }
+
+.lab-shell { display: flex; flex-direction: column; min-height: 100dvh; background: var(--lab-ground); }
+
+.lab-topbar { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: 0 0.875rem; min-height: var(--lab-topbar-height); padding: 0 0.75rem; background: var(--lab-panel); border-bottom: 1px solid var(--lab-line); }
+.lab-brand { margin: 0; font-family: var(--lab-font); font-size: 0.9375rem; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap; }
+.lab-site-link { font-size: 0.75rem; color: var(--lab-ink-soft); white-space: nowrap; }
+
+.lab-modes { display: flex; }
+.lab-mode { padding: 0 0.6875rem; min-height: var(--lab-topbar-height); font: inherit; font-weight: 500; color: var(--lab-ink-soft); background: none; border: 0; cursor: pointer; transition: color var(--motion-quick) var(--motion-ease); }
+.lab-mode:hover { color: var(--lab-ink); }
+.lab-mode[aria-current="page"] { color: var(--lab-ink); font-weight: 600; box-shadow: inset 0 -2px 0 var(--lab-select); }
+.lab-modes--bottom { display: none; }
+
+/* The device in focus sits at the right of the bar on every screen. */
+.lab-device-slot { margin-left: auto; min-width: 0; flex: 0 1 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.25rem 0.75rem; }
+.lab-device { position: relative; min-width: 0; max-width: 100%; }
+.lab-device-summary { display: flex; align-items: center; min-width: 0; gap: 0.5rem; padding: 0.25rem 0.625rem; border: 1px solid var(--lab-line-strong); border-radius: var(--lab-radius); cursor: pointer; list-style: none; white-space: nowrap; }
+.lab-device-summary::-webkit-details-marker { display: none; }
+.lab-device-name { min-width: 0; font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
+.lab-device-unsaved { flex: none; }
+.lab-device-glyph { flex: none; }
+.lab-device-glyph path { stroke: var(--lab-ink-soft); stroke-width: 1.5; }
+.lab-device-glyph circle { fill: var(--lab-panel); stroke: var(--lab-ink); stroke-width: 1.25; }
+.lab-device-glyph circle[data-interface="true"] { fill: var(--lab-ink); }
+.lab-device-unsaved { color: var(--lab-high); font-weight: 500; }
+.lab-device-alert { margin: 0; color: var(--lab-high); font-weight: 500; }
+.lab-device-panel { position: absolute; right: 0; top: calc(100% + 0.375rem); z-index: 30; width: min(22rem, calc(100vw - 1.5rem)); padding: 0.75rem; background: var(--lab-panel); border: 1px solid var(--lab-line-strong); border-radius: var(--lab-radius); }
+.lab-device-panel p { margin: 0 0 0.375rem; }
+.lab-device-list { margin: 0 0 0.625rem; padding-left: 1.125rem; list-style: disc; color: var(--lab-ink-soft); }
+.lab-remember { display: flex; align-items: center; gap: 0.375rem; margin-bottom: 0.375rem; font-weight: 500; cursor: pointer; }
+
+.lab-viewtabs { display: flex; align-items: center; gap: 0 1rem; padding: 0 0.5rem; overflow-x: auto; background: var(--lab-panel); border-bottom: 1px solid var(--lab-line); }
+.lab-viewtab-group { display: flex; align-items: center; gap: 0.125rem; }
+.lab-viewtab-group > .lab-label { padding-left: 0.25rem; white-space: nowrap; }
+.lab-viewtab { padding: 0.5rem 0.625rem; font: inherit; color: var(--lab-ink-soft); background: none; border: 0; white-space: nowrap; cursor: pointer; transition: color var(--motion-quick) var(--motion-ease); }
+.lab-viewtab:hover { color: var(--lab-ink); }
+.lab-viewtab[aria-current="page"] { color: var(--lab-ink); font-weight: 600; box-shadow: inset 0 -2px 0 var(--lab-ink); }
+
+.lab-shell-body { flex: 1; min-width: 0; padding: 0.875rem 1rem 1.5rem; }
+
+/* The statements stay at the bottom edge while the screen scrolls. */
+.lab-foot { position: sticky; bottom: 0; z-index: 15; background: var(--lab-panel); border-top: 1px solid var(--lab-line); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.lab-standing { padding: 0.4375rem 0.75rem; color: var(--lab-ink-soft); }
+.lab-standing p { margin: 0; }
+.lab-standing-brief { display: none; }
+.lab-standing-brief summary { cursor: pointer; }
+.lab-standing-more { color: var(--lab-ink); font-weight: 600; text-decoration: underline; }
+.lab-standing-brief ul { margin: 0.375rem 0 0; padding-left: 1.125rem; list-style: disc; }
+
+/* Existing site views shown in a frame, until each is rebuilt. */
+.workbench-frame { display: block; width: 100%; height: 52rem; overflow: hidden; border: 1px solid var(--lab-line); border-radius: var(--lab-radius); background: var(--lab-panel-raised); }
+.workbench-framed-note { margin: 0 0 0.625rem; color: var(--lab-ink-soft); }
+.workbench-framed-note a { color: var(--lab-select); font-weight: 600; }
+
+/* With a bar at the top and a line at the bottom, a second pinned block would leave too little room. Model's rebuild folds its diagram to a strip instead. */
+.lab-shell .tm-pinned { position: static; border-bottom: 0; }
+
+@media (max-width: 720px) {
+  .lab-modes--top, .lab-device-facts, .lab-site-link, .lab-standing-full { display: none; }
+  .lab-modes--bottom { display: flex; border-top: 1px solid var(--lab-line); }
+  .lab-modes--bottom .lab-mode { flex: 1; padding: 0; }
+  .lab-modes--bottom .lab-mode[aria-current="page"] { box-shadow: inset 0 2px 0 var(--lab-select); }
+  .lab-standing-brief { display: block; }
+  .lab-shell-body { padding: 0.75rem 0.75rem 1.25rem; }
+  .lab-topbar { flex-wrap: nowrap; }
+}
+
+@media print {
+  .lab-shell { display: block; min-height: 0; background: none; }
+  .lab-shell-body { padding: 0; }
+}

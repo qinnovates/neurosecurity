@@ -38,6 +38,10 @@ export default function ExploreMode({ onOpenMode }: ModeProps) {
 
   return (
     <div className="tm-root">
+      <p style={{ maxWidth: '48rem', marginBottom: '0.5rem' }}>
+        Threat analysis and risk assessment for neural devices. A drafting aid built on the TARA catalog, a proposed and not yet peer-reviewed catalog of attack techniques.
+        Its output is a starting point for qualified review. It is not a compliance determination.
+      </p>
       <p className="tm-muted" style={{ marginBottom: '1rem' }}>
         Device classes, not products. Each picture is drawn from a generic device of that kind, so nothing here describes a specific commercial device.
       </p>

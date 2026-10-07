@@ -7,16 +7,10 @@ import { loadThreatModelData } from '@/components/threat-model/load-engine-data'
 const { engineData, referenceData } = loadThreatModelData();
 ---
 <ToolLayout
+  isAppShell
   title="TARA Lab"
   description="Describe a neural device and get a draft threat model: architecture diagram, matched techniques, attack chain hypotheses, risk register, and a US requirements checklist."
 >
-  <div class="tm-no-print">
-    <h1 class="text-3xl font-bold" style="color: var(--color-text-primary)">TARA Lab</h1>
-    <p class="mt-3 mb-6 max-w-3xl" style="color: var(--color-text-muted)">
-      Threat analysis and risk assessment for neural devices. A drafting aid built on the TARA catalog, a proposed and not yet peer-reviewed catalog of attack techniques.
-      Its output is a starting point for qualified review. It is not a compliance determination.
-    </p>
-  </div>
   <!-- Rendered in the browser only: the report carries the time the page was opened. -->
   <WorkbenchShell client:only="react" engineData={engineData} referenceData={referenceData} />
   <noscript><p>This tool needs JavaScript. It runs entirely in your browser.</p></noscript>

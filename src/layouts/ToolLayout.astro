@@ -7,9 +7,11 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
+  /** True when the page brings its own full-width frame, so the layout adds no header or margins. */
+  isAppShell?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, isAppShell = false } = Astro.props;
 
 // Vite's dev server needs a websocket for hot reload, which this policy blocks,
 // so the policy is applied to built pages only.
@@ -68,11 +70,11 @@ const TOOL_PAGE_CSP = [
 </head>
 <body class="min-h-screen" data-pagefind-ignore>
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg" style="background: var(--color-bg-surface); color: var(--color-text-primary); border: 1px solid var(--color-accent-primary)">Skip to content</a>
-  <header class="tool-header px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl pt-6 flex items-center justify-between gap-4">
+  {!isAppShell && <header class="tool-header px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl pt-6 flex items-center justify-between gap-4">
     <a href="/atlas/" class="text-sm font-medium" style="color: var(--color-accent-primary)">&larr; Back to the site</a>
     <span class="text-xs" style="color: var(--color-text-muted)">Runs in your browser. Nothing you enter is sent anywhere.</span>
-  </header>
-  <main id="main-content" class="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl py-8">
+  </header>}
+  <main id="main-content" class={isAppShell ? undefined : 'px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl py-8'}>
     <slot />
   </main>
 </body>
