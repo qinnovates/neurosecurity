@@ -90,7 +90,7 @@ Each technique is classified by its physics feasibility:
 ## Development
 
 ```bash
-git clone https://github.com/qinnovates/qinnovate
+git clone https://github.com/qinnovates/neurosecurity
 cd shared/qtara
 pip install -e .
 ```
