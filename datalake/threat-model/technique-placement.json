@@ -1,0 +1,608 @@
+{
+  "version": "1",
+  "status": "Authored, unreviewed. One decision per catalog technique with confirmed or demonstrated evidence: where it acts on a device, or why it is not placed. Techniques with weaker evidence are not mapped yet. These decisions are this tool's own analysis and need expert review. Each placement also names how the technique gets in: through the device's own systems, at the neural interface, or through what the patient sees and hears.",
+  "placements": {
+    "QIF-T0001": {
+      "onNeuralInterface": true,
+      "componentKinds": [],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "stimulationCommands"
+      ],
+      "requiresDirection": [
+        "write",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": false,
+      "chainRole": "objective",
+      "basis": "Delivers current through the device's own stimulation path.",
+      "entryPath": "neural_interface"
+    },
+    "QIF-T0003": {
+      "onNeuralInterface": false,
+      "componentKinds": [],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "neuralData"
+      ],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "exfiltration",
+      "basis": "Intercepts recordings where they travel between components.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0004": {
+      "onNeuralInterface": false,
+      "componentKinds": [],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "neuralData",
+        "stimulationCommands",
+        "softwareUpdates"
+      ],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "pivot",
+      "basis": "Sits between two components and alters or relays what passes.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0007": {
+      "onNeuralInterface": true,
+      "componentKinds": [],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "stimulationCommands",
+        "neuralData"
+      ],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "pivot",
+      "basis": "Alters protocol messages to or from the neural interface.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0016": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "cloud_service"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": [
+        "read",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": false,
+      "chainRole": "pivot",
+      "basis": "Backdoors the decoder model where it is trained.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0017": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "cloud_service",
+        "patient_app",
+        "wearable_processor"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "softwareUpdates"
+      ],
+      "requiresDirection": [
+        "read",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": false,
+      "chainRole": "pivot",
+      "basis": "Backdoors a decoder model where it is hosted or as it is delivered.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0018": {
+      "onNeuralInterface": true,
+      "componentKinds": [
+        "wearable_processor"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": [
+        "read",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": false,
+      "chainRole": "pivot",
+      "basis": "Tampers with the signal filter chain before decoding.",
+      "entryPath": "neural_interface"
+    },
+    "QIF-T0019": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "wearable_processor",
+        "patient_app",
+        "cloud_service"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": [
+        "read",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": false,
+      "chainRole": "pivot",
+      "basis": "Feeds a decoder inputs crafted to be misclassified.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0024": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "cloud_service",
+        "patient_app"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": [
+        "read",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": false,
+      "chainRole": "pivot",
+      "basis": "Poisons the data a decoder model is trained on.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0029": {
+      "onNeuralInterface": true,
+      "componentKinds": [],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "stimulationCommands"
+      ],
+      "requiresDirection": [
+        "write",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": false,
+      "chainRole": "objective",
+      "basis": "Floods the stimulation path the device controls.",
+      "entryPath": "neural_interface"
+    },
+    "QIF-T0035": {
+      "onNeuralInterface": true,
+      "componentKinds": [
+        "patient_app"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": [
+        "read",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": true,
+      "chainRole": "exfiltration",
+      "basis": "Presents stimuli and reads the evoked response, so it needs a display path and cortical recording.",
+      "entryPath": "senses"
+    },
+    "QIF-T0041": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "cloud_service",
+        "patient_app"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": [
+        "read",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": false,
+      "chainRole": "exfiltration",
+      "basis": "Infers identity or traits from recordings where they are processed or stored.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0042": {
+      "onNeuralInterface": false,
+      "componentKinds": [],
+      "linkMedia": [
+        "bluetooth_le",
+        "proprietary_rf",
+        "wifi",
+        "nfc"
+      ],
+      "onLinksCarrying": [],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "reconnaissance",
+      "basis": "Observes radio emissions of a wireless link.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0043": {
+      "onNeuralInterface": true,
+      "componentKinds": [
+        "clinician_programmer",
+        "cloud_service"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "softwareUpdates"
+      ],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "initial_access",
+      "basis": "Enters through firmware or its delivery path.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0044": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "cloud_service"
+      ],
+      "linkMedia": [
+        "internet",
+        "cellular",
+        "wifi"
+      ],
+      "onLinksCarrying": [],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "initial_access",
+      "basis": "Attacks the back-end service and its network path.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0045": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "cloud_service"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "neuralData"
+      ],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "exfiltration",
+      "basis": "Captures encrypted recordings now for later decryption.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0048": {
+      "onNeuralInterface": true,
+      "componentKinds": [],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "initial_access",
+      "basis": "Tampers with the electrodes physically. For an implant this means surgical or supply-chain access.",
+      "entryPath": "neural_interface"
+    },
+    "QIF-T0049": {
+      "onNeuralInterface": false,
+      "componentKinds": [],
+      "linkMedia": [
+        "bluetooth_le",
+        "proprietary_rf",
+        "wifi",
+        "nfc"
+      ],
+      "onLinksCarrying": [],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "initial_access",
+      "basis": "Defeats authentication on a radio link.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0050": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "headset",
+        "wearable_processor",
+        "clinician_programmer",
+        "charger"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "initial_access",
+      "basis": "Glitches hardware an attacker can physically hold.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0051": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "cloud_service",
+        "patient_app"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "neuralData"
+      ],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "exfiltration",
+      "basis": "Exposes recordings where they are stored or in transit.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0052": {
+      "onNeuralInterface": true,
+      "componentKinds": [
+        "patient_app"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": [
+        "read",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": true,
+      "chainRole": "exfiltration",
+      "basis": "Harvests evoked responses, so it needs a display path and cortical recording.",
+      "entryPath": "senses"
+    },
+    "QIF-T0053": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "patient_app",
+        "cloud_service"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": [
+        "read",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": false,
+      "chainRole": "exfiltration",
+      "basis": "Captures decoded cognitive state where recordings are classified.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0057": {
+      "onNeuralInterface": false,
+      "componentKinds": [],
+      "linkMedia": [
+        "bluetooth_le",
+        "proprietary_rf",
+        "wifi",
+        "cellular",
+        "internet",
+        "nfc"
+      ],
+      "onLinksCarrying": [],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "reconnaissance",
+      "basis": "Maps the device's reachable network connections.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0058": {
+      "onNeuralInterface": true,
+      "componentKinds": [
+        "wearable_processor",
+        "patient_app",
+        "clinician_programmer"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "pivot",
+      "basis": "Corrupts calibration where it is performed or stored.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0067": {
+      "onNeuralInterface": true,
+      "componentKinds": [],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "stimulationCommands"
+      ],
+      "requiresDirection": [
+        "write",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": false,
+      "chainRole": "objective",
+      "basis": "Replays or synthesises neural activity patterns through the stimulation path.",
+      "entryPath": "neural_interface"
+    },
+    "QIF-T0091": {
+      "onNeuralInterface": false,
+      "componentKinds": [],
+      "linkMedia": [
+        "bluetooth_le"
+      ],
+      "onLinksCarrying": [],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "reconnaissance",
+      "basis": "Identifies and tracks a device by its Bluetooth radio characteristics.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0103": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "patient_app"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": [
+        "read",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": true,
+      "chainRole": "objective",
+      "basis": "Hijacks visually evoked responses through display flicker. Applies where the device uses visual evoked potentials.",
+      "entryPath": "senses"
+    }
+  },
+  "notPlaced": {
+    "QIF-T0012": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0013": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0014": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0025": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0065": {
+      "category": "other_device_class",
+      "reason": "Needs a content recommendation system driven by the device, which this tool does not model."
+    },
+    "QIF-T0072": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0075": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0079": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0080": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0081": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0082": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0083": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0084": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0085": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0086": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0087": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0088": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0089": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0090": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0092": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0093": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0094": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0101": {
+      "category": "consumer_sensor",
+      "reason": "Exploits a consumer-device sensor such as a microphone, motion sensor, or camera. It applies only if the product includes that sensor, which this model does not capture."
+    },
+    "QIF-T0108": {
+      "category": "other_device_class",
+      "reason": "Needs neuromorphic hardware, which this tool does not model."
+    },
+    "QIF-T0113": {
+      "category": "other_device_class",
+      "reason": "Specific to cochlear stimulation, which this tool does not model yet."
+    },
+    "QIF-T0136": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0137": {
+      "category": "nanoparticle",
+      "reason": "Needs nanoparticle transducers introduced into tissue, which is outside a device architecture model."
+    },
+    "QIF-T0139": {
+      "category": "nanoparticle",
+      "reason": "Needs nanoparticle transducers introduced into tissue, which is outside a device architecture model."
+    },
+    "QIF-T0140": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0141": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0142": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0143": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0144": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0145": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0146": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0147": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0148": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0149": {
+      "category": "other_device_class",
+      "reason": "Specific to implanted vagus nerve stimulators, which this tool does not model yet."
+    },
+    "QIF-T0150": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0152": {
+      "category": "pharmacological",
+      "reason": "Acts through a chemical or dietary exposure, not through the device."
+    },
+    "QIF-T0154": {
+      "category": "other_device_class",
+      "reason": "Specific to vagus nerve stimulation, which this tool does not model yet."
+    },
+    "QIF-T0156": {
+      "category": "external_energy",
+      "reason": "Delivered by an external energy source acting on tissue directly. It does not pass through the device's components or connections."
+    },
+    "QIF-T0157": {
+      "category": "pharmacological",
+      "reason": "Acts through a chemical or dietary exposure, not through the device."
+    }
+  }
+}

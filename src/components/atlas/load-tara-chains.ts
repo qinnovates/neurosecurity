@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { AttackChain, ChainStep, ClinicalParallel } from './AttackChainViz';
 import { ROLE_CONFIG } from './chain-constants';
+import { GENERATED_CHAIN_ID_PREFIX } from '../../lib/threat-model/chain-types';
 
 const TARA_CHAINS_PATH = 'datalake/tara-chains.json';
 const TARA_REGISTRAR_PATH = 'datalake/qtara-registrar.json';
@@ -38,7 +39,8 @@ function isOptionalClinicalParallel(value: unknown): value is ClinicalParallel |
   return value === undefined || (isRecord(value) && typeof value.name === 'string' && typeof value.note === 'string');
 }
 
-function isAttackChain(value: unknown): value is AttackChain {
+/** The shape every chain shares, curated or generated. */
+export function isAttackChain(value: unknown): value is AttackChain {
   return (
     isRecord(value) &&
     typeof value.chain_id === 'string' &&
@@ -67,6 +69,10 @@ export function parseTaraChains(raw: unknown, knownTechniqueIds: ReadonlySet<str
   return raw.chains.map((chain, index) => {
     if (!isAttackChain(chain)) {
       throw new TaraChainsFormatError(`chains[${index}] is missing a required field or has a step with an unknown role`);
+    }
+    // Generated chains are hypotheses and must never be stored alongside curated ones.
+    if (chain.chain_id.startsWith(GENERATED_CHAIN_ID_PREFIX)) {
+      throw new TaraChainsFormatError(`chains[${index}] uses the id prefix "${GENERATED_CHAIN_ID_PREFIX}", which is reserved for machine-generated chains; give a curated chain another id`);
     }
     const unknownTechnique = findUnknownTechnique(chain, knownTechniqueIds);
     if (unknownTechnique !== undefined) {

@@ -1,0 +1,68 @@
+---
+// Bare layout for tools that handle a visitor's own device details.
+// It deliberately omits what BaseLayout loads: the soft-navigation router and
+// third-party analytics. src/scripts/check-model-page.mjs enforces this on the built page.
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+// Vite's dev server needs a websocket for hot reload, which this policy blocks,
+// so the policy is applied to built pages only.
+const isBuiltPage = import.meta.env.PROD;
+const TOOL_PAGE_CSP = [
+  "default-src 'self'",
+  // Astro's island hydration and React inline styles need inline script and style.
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data:",
+  "font-src 'self' data:",
+  // Same origin only: the page may read this site's own data files and can reach no other host.
+  "connect-src 'self'",
+  "form-action 'none'",
+  "base-uri 'none'",
+  "object-src 'none'",
+].join('; ');
+---
+
+<!DOCTYPE html>
+<html lang="en-US" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="robots" content="noindex, nofollow" />
+  {isBuiltPage && <meta http-equiv="Content-Security-Policy" content={TOOL_PAGE_CSP} />}
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <title>{title} | Qinnovate</title>
+
+  <!-- Match the site theme without the shared layout (prevents a flash) -->
+  <script is:inline>
+    (function () {
+      var theme = 'light';
+      try {
+        theme = localStorage.getItem('theme')
+          || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      } catch (storageError) {
+        // Storage can be blocked by browser settings; the light theme is the safe default.
+        theme = 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body class="min-h-screen" data-pagefind-ignore>
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg" style="background: var(--color-bg-surface); color: var(--color-text-primary); border: 1px solid var(--color-accent-primary)">Skip to content</a>
+  <header class="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl pt-6 flex items-center justify-between gap-4">
+    <a href="/atlas/" class="text-sm font-medium" style="color: var(--color-accent-primary)">&larr; Back to the site</a>
+    <span class="text-xs" style="color: var(--color-text-muted)">Runs in your browser. Nothing you enter is sent anywhere.</span>
+  </header>
+  <main id="main-content" class="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl py-8">
+    <slot />
+  </main>
+</body>
+</html>

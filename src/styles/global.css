@@ -858,3 +858,10 @@ code, pre {
   outline: 2px solid var(--color-accent-primary);
   outline-offset: 2px;
 }
+
+/* A page shown inside TARA Lab's frame drops its own navigation, sub-navigation, and footer. */
+html[data-embedded] #main-nav,
+html[data-embedded] #search-modal,
+html[data-embedded] footer,
+html[data-embedded] .atlas-view-switcher { display: none !important; }
+html[data-embedded] main { padding-top: 1rem !important; }

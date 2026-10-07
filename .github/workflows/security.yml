@@ -14,5 +14,9 @@ jobs:
           node-version: '22'
       - run: npm ci
       - run: npm audit --audit-level=high
+      - name: Test
+        run: npm test
       - name: Build
         run: npm run build
+      - name: Check threat model page isolation
+        run: npm run check:model-page

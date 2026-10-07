@@ -283,6 +283,36 @@ export function applyDistinct(rows: Row[], clause: string): Row[] {
   return out;
 }
 
+interface JoinKey {
+  left: string;
+  right: string;
+}
+
+const JOIN_FIELD_PATTERN = /^\w+$/;
+
+/**
+ * Parses the part after "on". Each comma-separated condition is either one field name
+ * shared by both tables, or "left_field == right_field" when the names differ.
+ * Anything else is rejected: a condition that names no real column would otherwise
+ * match every row to every row.
+ */
+function parseJoinKeys(onClause: string): JoinKey[] {
+  return onClause.split(',').map((condition) => {
+    const sides = condition.split('==').map(side => side.trim());
+    const isValid = sides.length <= 2 && sides.every(side => JOIN_FIELD_PATTERN.test(side));
+    if (!isValid) {
+      throw new Error(`Invalid join condition "${condition.trim()}". Use "join table on field" or "join table on left_field == right_field".`);
+    }
+    return { left: sides[0], right: sides[sides.length - 1] };
+  });
+}
+
+function requireJoinColumn(rows: Row[], field: string, sideLabel: string): void {
+  if (rows.length > 0 && !rows.some(row => field in row)) {
+    throw new Error(`Join field "${field}" is not a column of ${sideLabel}.`);
+  }
+}
+
 export function applyJoin(rows: Row[], clause: string, tables: TableData): Row[] {
   const match = clause.match(/^(\w+)\s+on\s+(.+)/i);
   if (!match) throw new Error(`Invalid join: "${clause}". Expected: join table on field`);
@@ -293,27 +323,32 @@ export function applyJoin(rows: Row[], clause: string, tables: TableData): Row[]
   }
 
   const otherRows = tables[otherTable];
-  const fields = onClause.split(',').map(f => f.trim());
+  const keys = parseJoinKeys(onClause);
+  for (const key of keys) {
+    requireJoinColumn(rows, key.left, 'the rows being joined');
+    requireJoinColumn(otherRows, key.right, `table "${otherTable}"`);
+  }
+  const rightFields = keys.map(key => key.right);
 
   // Build hash of other table rows by join key
   const otherIndex = new Map<string, Row[]>();
   for (const oRow of otherRows) {
-    const key = fields.map(f => String(oRow[f] ?? '')).join('|');
+    const key = keys.map(k => String(oRow[k.right] ?? '')).join('|');
     if (!otherIndex.has(key)) otherIndex.set(key, []);
     otherIndex.get(key)!.push(oRow);
   }
 
   const result: Row[] = [];
   for (const row of rows) {
-    const key = fields.map(f => String(row[f] ?? '')).join('|');
+    const key = keys.map(k => String(row[k.left] ?? '')).join('|');
     const matches = otherIndex.get(key);
     if (matches) {
       for (const oRow of matches) {
         const merged: Row = { ...row };
         for (const [k, v] of Object.entries(oRow)) {
-          if (k in merged && !fields.includes(k)) {
+          if (k in merged && !rightFields.includes(k)) {
             merged[`${otherTable}_${k}`] = v;
-          } else {
+          } else if (!(k in merged)) {
             merged[k] = v;
           }
         }

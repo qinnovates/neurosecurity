@@ -330,7 +330,6 @@ function buildCompanies(): Row[] {
     funding_total_usd: c.funding_total_usd || 0,
     valuation_usd: c.valuation_usd || 0,
     device_count: (c.devices || []).length,
-    attack_surface_count: (c.tara_attack_surface || []).length,
   }));
 }
 
@@ -353,7 +352,6 @@ function buildDevices(): Row[] {
       company_status: c.status || '',
       company_funding: c.funding_total_usd || 0,
       security_posture: c.security_posture || '',
-      attack_surface_count: (c.tara_attack_surface || []).length,
     }))
   );
 }
@@ -899,7 +897,7 @@ function buildRiskProfile(): Row[] {
     return {
       company: c.name, type: c.type, funding_B: Number(fB.toFixed(2)),
       devices: c.device_count, security_posture: c.security_posture,
-      security_score: `${ss}/4`, attack_surfaces: c.attack_surface_count,
+      security_score: `${ss}/4`,
       risk_index: Number((fB * Math.max(c.device_count, 1) * (5 - ss)).toFixed(2)),
     };
   }).sort((a: any, b: any) => (b.risk_index as number) - (a.risk_index as number));

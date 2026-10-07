@@ -35,8 +35,6 @@ export interface BciDeviceCard {
   funding_total_usd: number | null;
   security_posture: string;
   security_notes: string;
-  tara_attack_surface: string[];
-  attack_surface_count: number;
 }
 
 export interface BciCompanyDeviceSummary {
@@ -59,8 +57,6 @@ export interface BciCompanyCard {
   employees_approx: number | null;
   security_posture: string;
   security_notes: string;
-  tara_attack_surface: string[];
-  attack_surface_count: number;
 
   /** Computed from devices */
   device_count: number;
@@ -156,7 +152,6 @@ export function getBciDirectoryDevices(): BciDeviceCard[] {
 
   for (const company of companies) {
     const companyDevices: any[] = company.devices ?? [];
-    const attackSurface: string[] = company.tara_attack_surface ?? [];
     for (const device of companyDevices) {
       devices.push({
         device_name: device.name,
@@ -179,8 +174,6 @@ export function getBciDirectoryDevices(): BciDeviceCard[] {
         funding_total_usd: company.funding_total_usd ?? null,
         security_posture: company.security_posture ?? 'none_published',
         security_notes: company.security_notes ?? '',
-        tara_attack_surface: attackSurface,
-        attack_surface_count: attackSurface.length,
       });
     }
   }
@@ -213,7 +206,6 @@ export function getBciDirectoryCompanies(): BciCompanyCard[] {
       }
     }
 
-    const attackSurface: string[] = c.tara_attack_surface ?? [];
 
     return {
       name: c.name,
@@ -227,8 +219,6 @@ export function getBciDirectoryCompanies(): BciCompanyCard[] {
       employees_approx: c.employees_approx ?? null,
       security_posture: c.security_posture ?? 'none_published',
       security_notes: c.security_notes ?? '',
-      tara_attack_surface: attackSurface,
-      attack_surface_count: attackSurface.length,
       device_count: devices.length,
       total_channels: channelSum,
       top_fda_status: topFda,

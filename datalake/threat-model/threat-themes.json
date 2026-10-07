@@ -1,0 +1,78 @@
+{
+  "version": "1",
+  "status": "Authored, unreviewed. Themes raised in a 2019 BSides Las Vegas talk by UCF's LabX, mapped onto existing TARA techniques by technique name. Most mapped techniques are rated theoretical in the catalog, so they have no placement decision and do not appear in a device's threat model. A stated gap means no entry was found by name, not that none exists.",
+  "themes": [
+    {
+      "id": "sensory-prostheses",
+      "label": "Hearing and vision implants",
+      "description": "Implants that write to a sensory pathway. Cochlear implants are the most widely used neural implant; this tool does not model them yet.",
+      "techniqueIds": [
+        "QIF-T0113",
+        "QIF-T0112",
+        "QIF-T0110",
+        "QIF-T0133",
+        "QIF-T0126"
+      ],
+      "catalogGap": "No entry found by name that is specific to retinal implants."
+    },
+    {
+      "id": "remote-sensing",
+      "label": "Reading from a distance",
+      "description": "Sensing a body's signals without touching the device or the person.",
+      "techniqueIds": [
+        "QIF-T0084",
+        "QIF-T0090",
+        "QIF-T0078",
+        "QIF-T0098"
+      ],
+      "catalogGap": null
+    },
+    {
+      "id": "seizure",
+      "label": "Seizure induction",
+      "description": "Driving neural activity towards a seizure.",
+      "techniqueIds": [
+        "QIF-T0122",
+        "QIF-T0158"
+      ],
+      "catalogGap": "No entry found by name for seizure-inducing content shown on a screen."
+    },
+    {
+      "id": "memory",
+      "label": "Memory",
+      "description": "Reading, altering, or disrupting memory formation.",
+      "techniqueIds": [
+        "QIF-T0034",
+        "QIF-T0054",
+        "QIF-T0060",
+        "QIF-T0117"
+      ],
+      "catalogGap": null
+    },
+    {
+      "id": "conditioning",
+      "label": "Conditioning over time",
+      "description": "Shaping behaviour through repeated reward or aversion.",
+      "techniqueIds": [
+        "QIF-T0116"
+      ],
+      "catalogGap": "No entry found by name for reward or aversion triggered by location."
+    },
+    {
+      "id": "arousal",
+      "label": "Consciousness and arousal",
+      "description": "Changing wakefulness or sleep.",
+      "techniqueIds": [
+        "QIF-T0121"
+      ],
+      "catalogGap": "No entry found by name for stimulation that causes loss of consciousness."
+    },
+    {
+      "id": "body-devices",
+      "label": "Other devices on the same body",
+      "description": "Using a second device a person carries or has implanted, such as an insulin pump, to affect the brain.",
+      "techniqueIds": [],
+      "catalogGap": "No entry found by name. The catalog does not cover a second body device as a route to the brain."
+    }
+  ]
+}

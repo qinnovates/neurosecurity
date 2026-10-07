@@ -13,6 +13,17 @@ Updated each session. Source of truth for "what's the status of X?"
 
 ---
 
+## 2026-10-06: TARA Lab (threat modeling for neural devices)
+
+| Feature | Status | What Was Done | Notes |
+|---------|--------|--------------|-------|
+| TARA Lab shell | 🚧 In Progress | One page at /atlas/model/ with four modes (Explore, Model, Monitor, Query) sharing one device in focus | Bare layout with a same-origin content security policy; `npm run check:model-page` fails if the built page references anything off-origin |
+| Threat model engine | 🚧 In Progress | Pure TypeScript in src/lib/threat-model/: device model, technique placement, STRIDE baseline, generated chain hypotheses, risk register, US requirements checklist, report | Placement table in datalake/threat-model/ is authored and NOT yet reviewed. Generated chains carry `origin: 'generated'` and a `GEN-` id |
+| Device spine and lenses | 🚧 In Progress | Pinned device diagram; lenses for how a technique gets in and what it does; target regions panel; "Around the device" section | Navigation shaped by a 2019 BSides Las Vegas talk; themes mapped onto TARA by name |
+| KQL join fix | 🚧 In Progress | `join t on a == b` now parses both keys and rejects non-columns | Two public presets had been returning a cross product |
+| Named-device threat counts removed | 🚧 In Progress | Device directory, query tables and Demo Atlas show specifications only for named commercial devices | Per-company technique lists remain in datalake/bci-landscape.json |
+| Test runner | 🚧 In Progress | `npm test` (vitest) added and run in the security workflow | 186 tests |
+
 ## 2026-03-15: Data Studio + Parquet Datalake
 
 | Feature | Status | What Was Done | Notes |

@@ -124,6 +124,8 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
         var theme = vision ? 'dark' : (savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
         document.documentElement.setAttribute('data-theme', theme);
         document.documentElement.setAttribute('data-vision', vision ? 'on' : 'off');
+        // Shown inside TARA Lab's frame: the page hides its own navigation and footer.
+        if (window.self !== window.top) document.documentElement.setAttribute('data-embedded', 'true');
         var lens = localStorage.getItem('qif-lens') || 'both';
         document.documentElement.setAttribute('data-lens', lens);
       } catch(e) {
@@ -160,7 +162,19 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
   </script>
   <!-- Cloudflare Web Analytics -->
   <!-- TODO: Add SRI integrity hash when Cloudflare publishes one for this beacon version -->
-  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7e92b0e996474c9e9502b816aa36beed"}' crossorigin="anonymous"></script>
+  <script is:inline>
+    // Analytics loads only on a page opened directly. A page framed inside TARA Lab stays silent,
+    // so the Lab's promise that nothing is sent anywhere holds for the views it embeds.
+    (function () {
+      if (window.self !== window.top) return;
+      var beacon = document.createElement('script');
+      beacon.defer = true;
+      beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+      beacon.crossOrigin = 'anonymous';
+      beacon.setAttribute('data-cf-beacon', '{"token": "7e92b0e996474c9e9502b816aa36beed"}');
+      document.body.appendChild(beacon);
+    })();
+  </script>
   <!-- End Cloudflare Web Analytics -->
 </body>
 </html>

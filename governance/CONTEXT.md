@@ -12,7 +12,7 @@ BCI security research: website (Astro 5 + React 19 + TailwindCSS 4), QIF model (
 - `src/site/` -- GitHub Pages build output + static assets served at site root
 
 ## Key Commands
-`npm run dev` | `npm run build` | `npm run health` (validate sync) | `npm run governance` (regen from derivation log)
+`npm run dev` | `npm run build` | `npm run health` (validate sync) | `npm run governance` (regen from derivation log) | `npm test` (unit tests) | `npm run check:model-page` (after build: fails if the TARA Lab page loads anything off-origin)
 `npm run cve:coverage` (recompute derived counters in `datalake/cve-technique-mapping.json`) | `npm run cve:gaps` (regenerate `datalake/cve-coverage-gaps.json`) -- run both after editing the CVE mappings or the registrar
 
 ## Conventions
