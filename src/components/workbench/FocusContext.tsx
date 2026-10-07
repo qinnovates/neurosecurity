@@ -8,6 +8,7 @@ import { buildThreatModelReport } from '@/lib/threat-model/build-report';
 import type { CatalogTechnique, EngineData } from '@/lib/threat-model/catalog-types';
 import type { ReferenceData } from '@/lib/threat-model/reference-data-types';
 import type { ThreatModelReport } from '@/lib/threat-model/report-types';
+import type { AttackChain } from '@/components/atlas/AttackChainViz';
 import { createInitialState, hasUserWork, studioReducer, type StudioAction, type StudioState } from '@/components/threat-model/studio-state';
 import { isRememberEnabled, restoreDevice, saveDevice, setRememberEnabled } from './device-persistence';
 
@@ -20,6 +21,8 @@ export interface Focus {
   report: ThreatModelReport;
   engineData: EngineData;
   referenceData: ReferenceData;
+  /** The hand-written chains from the catalog. They belong to no device. */
+  curatedChains: readonly AttackChain[];
   techniqueById: ReadonlyMap<string, CatalogTechnique>;
   /** True when replacing the device would lose something the user did. */
   hasWork: boolean;
@@ -35,10 +38,11 @@ const FocusContext = createContext<Focus | null>(null);
 interface ProviderProps {
   engineData: EngineData;
   referenceData: ReferenceData;
+  curatedChains: readonly AttackChain[];
   children: ReactNode;
 }
 
-export function FocusProvider({ engineData, referenceData, children }: ProviderProps) {
+export function FocusProvider({ engineData, referenceData, curatedChains, children }: ProviderProps) {
   const { registrarVersion } = engineData;
   const { archetypes } = referenceData;
   // Read once, when the page opens.
@@ -66,8 +70,8 @@ export function FocusProvider({ engineData, referenceData, children }: ProviderP
       setIsRemembered(isEnabled && wasStored);
       setStorageNotice(wasStored ? null : STORAGE_REFUSED_NOTICE);
     };
-    return { state, dispatch, report, engineData, referenceData, techniqueById, hasWork, isRemembered, setRemembered, storageNotice };
-  }, [state, report, engineData, referenceData, techniqueById, hasWork, isRemembered, storageNotice]);
+    return { state, dispatch, report, engineData, referenceData, curatedChains, techniqueById, hasWork, isRemembered, setRemembered, storageNotice };
+  }, [state, report, engineData, referenceData, curatedChains, techniqueById, hasWork, isRemembered, storageNotice]);
 
   return <FocusContext.Provider value={focus}>{children}</FocusContext.Provider>;
 }

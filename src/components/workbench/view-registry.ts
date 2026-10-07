@@ -21,23 +21,11 @@ export interface LabViewGroup {
 /** The first view of the first group is what a mode opens on. */
 export const MODE_VIEW_GROUPS: Record<ModeId, readonly LabViewGroup[]> = {
   explore: [
-    { label: 'Devices', views: [
+    { label: 'Explore', views: [
       { id: 'device-classes', label: 'Device classes', framedPath: null },
-      { id: 'directory', label: 'Companies and devices', framedPath: '/bci/directory/' },
-      { id: 'hardware', label: 'Hardware specs', framedPath: '/research/bci-explorer/' },
-    ] },
-    { label: 'TARA catalog', views: [
-      { id: 'catalog', label: 'Catalog', framedPath: '/atlas/tara/' },
-      { id: 'matrix', label: 'Threat matrix', framedPath: '/atlas/tara/ttps/' },
-      { id: 'technique-explorer', label: 'Technique explorer', framedPath: '/atlas/explorer/' },
-      { id: 'domains', label: 'Domains', framedPath: '/atlas/domains/' },
-      { id: 'scoring', label: 'Scoring', framedPath: '/atlas/scoring/' },
-      { id: 'curated-chains', label: 'Curated chains', framedPath: '/atlas/chains/' },
-    ] },
-    { label: 'Context', views: [
-      { id: 'overview', label: 'Overview', framedPath: '/atlas/' },
-      { id: 'clinical', label: 'Clinical mappings', framedPath: '/atlas/clinical/' },
-      { id: 'landscape', label: 'Industry landscape', framedPath: '/research/landscape/' },
+      { id: 'catalog', label: 'Catalog', framedPath: null },
+      { id: 'curated-chains', label: 'Curated chains', framedPath: null },
+      { id: 'specifications', label: 'Device specifications', framedPath: null },
     ] },
   ],
   model: [

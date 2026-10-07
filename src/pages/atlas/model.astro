@@ -2,9 +2,11 @@
 import ToolLayout from '@/layouts/ToolLayout.astro';
 import WorkbenchShell from '@/components/workbench/WorkbenchShell';
 import { loadThreatModelData } from '@/components/threat-model/load-engine-data';
+import { loadTaraChains } from '@/components/atlas/load-tara-chains';
 
 // Validates every data file at build time; malformed data stops the build here.
 const { engineData, referenceData } = loadThreatModelData();
+const curatedChains = loadTaraChains();
 ---
 <ToolLayout
   isAppShell
@@ -12,6 +14,6 @@ const { engineData, referenceData } = loadThreatModelData();
   description="Describe a neural device and get a draft threat model: architecture diagram, matched techniques, attack chain hypotheses, risk register, and a US requirements checklist."
 >
   <!-- Rendered in the browser only: the report carries the time the page was opened. -->
-  <WorkbenchShell client:only="react" engineData={engineData} referenceData={referenceData} />
+  <WorkbenchShell client:only="react" engineData={engineData} referenceData={referenceData} curatedChains={curatedChains} />
   <noscript><p>This tool needs JavaScript. It runs entirely in your browser.</p></noscript>
 </ToolLayout>

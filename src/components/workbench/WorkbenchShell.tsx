@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect, useMemo, useState } from 'react';
 import ModeErrorBoundary from './ModeErrorBoundary';
+import type { AttackChain } from '@/components/atlas/AttackChainViz';
 import type { EngineData } from '@/lib/threat-model/catalog-types';
 import type { ReferenceData } from '@/lib/threat-model/reference-data-types';
 import { FocusProvider } from './FocusContext';
@@ -17,13 +18,14 @@ import './lab-shell.css';
 interface Props {
   engineData: EngineData;
   referenceData: ReferenceData;
+  curatedChains: readonly AttackChain[];
 }
 
 /**
  * The frame every Lab screen sits in: one bar with the modes and the device in focus, the
  * views of the current mode, the screen itself, and the statements that never leave.
  */
-export default function WorkbenchShell({ engineData, referenceData }: Props) {
+export default function WorkbenchShell({ engineData, referenceData, curatedChains }: Props) {
   const [route, setRoute] = useState<Route>(() => parseRoute(window.location.hash));
 
   useEffect(() => {
@@ -48,7 +50,7 @@ export default function WorkbenchShell({ engineData, referenceData }: Props) {
   const selectView = (viewId: string): void => navigate({ modeId: route.modeId, viewId });
 
   return (
-    <FocusProvider engineData={engineData} referenceData={referenceData}>
+    <FocusProvider engineData={engineData} referenceData={referenceData} curatedChains={curatedChains}>
       <div className="lab lab-shell">
         <TopBar activeModeId={route.modeId} onOpenMode={openMode} />
         <ViewTabs modeId={route.modeId} activeViewId={route.viewId} onSelectView={selectView} />

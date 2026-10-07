@@ -124,3 +124,41 @@
 @media print {
   .lab-chip[aria-pressed="true"] { background: none; color: inherit; border-color: currentColor; }
 }
+
+/* Buttons. One quiet style and one primary. */
+.lab-button { padding: 0.3125rem 0.6875rem; font: inherit; font-weight: 600; color: var(--lab-ink); background: var(--lab-panel); border: 1px solid var(--lab-line-strong); border-radius: var(--lab-radius); cursor: pointer; transition: border-color var(--motion-quick) var(--motion-ease); }
+.lab-button:hover { border-color: var(--lab-ink); }
+.lab-button--primary { background: var(--lab-ink); color: var(--lab-panel); border-color: var(--lab-ink); }
+.lab-button[aria-pressed="true"] { background: var(--lab-select); color: var(--lab-select-ink); border-color: var(--lab-select); }
+
+/* A set split by evidence. Segments share the evidence mark's solidity and are separated by a gap of the surface. */
+.lab-evidence-track { display: flex; gap: 2px; height: 0.75rem; }
+.lab-evidence-segment { flex-basis: 0; min-width: 3px; border: 1.5px solid var(--lab-ink); border-radius: 1px; transition: flex-grow var(--motion-move) var(--motion-ease); }
+.lab-evidence-segment[data-level="validated"] { background: var(--lab-ink); }
+.lab-evidence-segment[data-level="demonstrated"] { background: linear-gradient(0deg, var(--lab-ink) 50%, transparent 50%); }
+.lab-evidence-segment[data-level="theoretical"] { border-style: dashed; }
+.lab-evidence-segment[data-level="speculative"], .lab-evidence-segment[data-level="other"] { border-style: dotted; border-color: var(--lab-ink-faint); }
+.lab-evidence-legend { display: flex; flex-wrap: wrap; gap: 0.125rem 1rem; margin: 0.375rem 0 0; padding: 0; list-style: none; color: var(--lab-ink-soft); }
+.lab-evidence-legend li { display: inline-flex; align-items: center; gap: 0.375rem; white-space: nowrap; }
+
+/* Anything that plays as steps in order: the transport, and the steps with the reason between them. */
+.lab-transport { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin: 0.5rem 0; }
+.lab-steps { list-style: none; margin: 0.5rem 0; padding: 0; }
+.lab-steps p { margin: 0; }
+.lab-step { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr); gap: 0.5rem; padding: 0.375rem 0.5rem; border-left: 3px solid transparent; transition: background var(--motion-quick) var(--motion-ease), opacity var(--motion-quick) var(--motion-ease); }
+.lab-step-number { display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; border: 1.5px solid var(--lab-ink); }
+.lab-steps li[data-state="reached"] .lab-step-number, .lab-steps li[data-state="now"] .lab-step-number { background: var(--lab-ink); color: var(--lab-panel); }
+.lab-steps li[data-state="now"] .lab-step { border-left-color: var(--lab-flow); background: var(--lab-panel-raised); }
+.lab-steps li[data-state="ahead"] .lab-step { opacity: 0.5; }
+/* The line between two steps is solid when the catalog relates them and dashed when only the device's structure does. */
+.lab-step-reason { margin: 0 0 0 0.75rem; padding: 0.25rem 0 0.25rem 1.375rem; border-left: 2px dashed var(--lab-line-strong); font-size: 0.75rem; }
+.lab-step-reason[data-basis="documented-relation"] { border-left-style: solid; border-left-color: var(--lab-ink-soft); }
+
+/* A list to pick from on the left and the chosen item on the right; they stack on a narrow screen. */
+.lab-split { display: grid; gap: 0.75rem; grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); align-items: start; }
+.lab-pick-list { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.375rem; }
+.lab-pick { display: grid; gap: 0.25rem; width: 100%; padding: 0.5rem 0.625rem; font: inherit; color: inherit; text-align: left; background: none; border: 1px solid var(--lab-line-strong); border-radius: var(--lab-radius); cursor: pointer; }
+.lab-pick[aria-pressed="true"] { border-color: var(--lab-select); box-shadow: inset 3px 0 0 var(--lab-select); }
+.lab-pick-sub { display: block; font-size: 0.75rem; }
+.lab-pick-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; }
+@media (max-width: 900px) { .lab-split { grid-template-columns: minmax(0, 1fr); } }

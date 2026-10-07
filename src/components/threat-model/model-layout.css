@@ -47,24 +47,5 @@
   .model-risk-detail { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; max-height: 72dvh; overflow: auto; border-width: 1px 0 0; border-color: var(--lab-line-strong); padding-bottom: env(safe-area-inset-bottom, 0px); }
 }
 
-/* Chains: the hypotheses on the left, the steps of the chosen one on the right. */
-.model-chains { display: grid; gap: 0.75rem; grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); align-items: start; }
-.model-chain-list { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.375rem; }
-.model-chain-pick { display: grid; gap: 0.25rem; width: 100%; padding: 0.5rem 0.625rem; font: inherit; color: inherit; text-align: left; background: none; border: 1px solid var(--lab-line-strong); border-radius: var(--lab-radius); cursor: pointer; }
-.model-chain-pick[aria-pressed="true"] { border-color: var(--lab-select); box-shadow: inset 3px 0 0 var(--lab-select); }
-.model-chain-name { display: block; font-size: 0.75rem; }
-.model-chain-weakest { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; }
-.model-chain-transport { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin: 0.5rem 0; }
-.model-chain-steps { list-style: none; margin: 0.5rem 0; padding: 0; }
-.model-chain-steps p { margin: 0; }
-.model-chain-step { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr); gap: 0.5rem; padding: 0.375rem 0.5rem; border-left: 3px solid transparent; transition: background var(--motion-quick) var(--motion-ease), opacity var(--motion-quick) var(--motion-ease); }
-.model-chain-number { display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; border: 1.5px solid var(--lab-ink); }
-.model-chain-steps li[data-state="reached"] .model-chain-number, .model-chain-steps li[data-state="now"] .model-chain-number { background: var(--lab-ink); color: var(--lab-panel); }
-.model-chain-steps li[data-state="now"] .model-chain-step { border-left-color: var(--lab-flow); background: var(--lab-panel-raised); }
-.model-chain-steps li[data-state="ahead"] .model-chain-step { opacity: 0.5; }
-/* The line between two steps is solid when the catalog relates them and dashed when only the device's structure does. */
-.model-chain-reason { margin: 0 0 0 0.75rem; padding: 0.25rem 0 0.25rem 1.375rem; border-left: 2px dashed var(--lab-line-strong); font-size: 0.75rem; }
-.model-chain-reason[data-basis="documented-relation"] { border-left-style: solid; border-left-color: var(--lab-ink-soft); }
-@media (max-width: 900px) { .model-chains { grid-template-columns: minmax(0, 1fr); } }
 
 .model-plain-panel { padding: 0.625rem 0.75rem; }
