@@ -22,8 +22,10 @@
  *   node src/scripts/generate-registrar-statistics.mjs --check    # exit 1 if stale
  *   node src/scripts/generate-registrar-statistics.mjs --dry-run  # print diff only
  *
- * Run after any registrar change, then sync the SDK copy
- * (datalake/qtara/src/qtara/data/qtara-registrar.json) per .claude/rules/registrar.md.
+ * Run after any registrar change. This also rewrites the SDK's bundled copy,
+ * which the Registrar Sync Check workflow requires to be byte-identical: that
+ * copy used to be a manual `cp` and drifted whenever anything touched the
+ * registrar after the copy was taken.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
@@ -31,6 +33,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const REGISTRAR_PATH = resolve(ROOT, 'datalake/qtara-registrar.json');
+const SDK_REGISTRAR_PATH = resolve(ROOT, 'datalake/qtara/src/qtara/data/qtara-registrar.json');
 
 /**
  * Fields in `statistics` that are editorial, provenance or specification
@@ -285,11 +288,19 @@ const normalise = (block) => {
 const isUnchanged = normalise(statistics) === normalise(previous);
 
 if (checkOnly) {
-  if (isUnchanged) {
+  // The SDK copy must be byte-identical; the Registrar Sync Check workflow
+  // fails the build when it is not, so check it here rather than only in CI.
+  const isSdkCopyInSync = readFileSync(SDK_REGISTRAR_PATH, 'utf8') === registrarRaw;
+  if (isUnchanged && isSdkCopyInSync) {
     console.log(`[registrar-stats] statistics block is current (${techniques.length} techniques).`);
     process.exit(0);
   }
-  console.error('[registrar-stats] statistics block is stale. Run: node src/scripts/generate-registrar-statistics.mjs');
+  if (!isUnchanged) {
+    console.error('[registrar-stats] statistics block is stale. Run: npm run registrar:stats');
+  }
+  if (!isSdkCopyInSync) {
+    console.error('[registrar-stats] the SDK bundled registrar differs from the source. Run: npm run registrar:stats');
+  }
   process.exit(1);
 }
 
@@ -300,6 +311,7 @@ if (dryRun) {
 }
 
 writeFileSync(REGISTRAR_PATH, nextRaw);
+writeFileSync(SDK_REGISTRAR_PATH, nextRaw);
 console.log(
   `[registrar-stats] ${techniques.length} techniques; TARA v${statistics.tara.version}; ` +
     `DSM-5 primary ${statistics.tara.dsm5.techniques_with_dsm5} over ${statistics.tara.dsm5.unique_dsm_codes} codes ` +

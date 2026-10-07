@@ -176,21 +176,21 @@ export const TARA_STATS = {
     "version": "1.0",
     "analysis_date": "2026-02-18",
     "constraint_system_ref": "QIF Derivation Log Entry 60",
-    "techniques_assessed": 161,
-    "techniques_unassessed": 13,
+    "techniques_assessed": 174,
+    "techniques_unassessed": 0,
     "by_tier": {
       "far_term": 4,
-      "feasible_now": 99,
+      "feasible_now": 100,
       "mid_term": 13,
       "near_term": 22,
-      "no_physics_gate": 23
+      "no_physics_gate": 35
     },
     "by_tier_id": {
-      "0": 104,
+      "0": 100,
       "1": 22,
       "2": 13,
       "3": 4,
-      "X": 18
+      "X": 35
     },
     "notes": [
       "Tier 0 (feasible_now): Attack hardware exists today",

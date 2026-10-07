@@ -62,6 +62,19 @@ jobs:
               if 'tara_drift' in t and t['tara_drift']:
                   if t['tara_drift'] not in ['A','C','L','P']:
                       errors.append(f'{tid}: invalid drift {t[\"tara_drift\"]}')
+              # getPhysicsFeasibilityStats() defaults a missing tier to 0, so a
+              # technique with no block is silently counted 'feasible now'.
+              physics = t.get('physics_feasibility')
+              if not physics:
+                  errors.append(f'{tid}: missing physics_feasibility block')
+              else:
+                  is_sentinel = physics.get('tier') == 'X'
+                  is_no_gate = physics.get('tier_label') == 'no_physics_gate'
+                  if is_sentinel != is_no_gate:
+                      errors.append(
+                          f'{tid}: tier {physics.get(\"tier\")!r} and tier_label '
+                          f'{physics.get(\"tier_label\")!r} disagree; no_physics_gate must use tier \"X\"'
+                      )
           if errors:
               for e in errors:
                   print(f'::error::{e}')
