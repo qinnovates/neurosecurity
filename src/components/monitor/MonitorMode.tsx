@@ -32,9 +32,11 @@ const SLIDER_STEP_SECONDS = 0.1;
 /** Below this width the sample list becomes a menu, so the signal is the first thing on screen. */
 const NARROW_SCREEN_QUERY = '(max-width: 1100px)';
 
-function formatTime(seconds: number): string {
-  const whole = Math.floor(seconds);
-  return `${String(Math.floor(whole / 60)).padStart(2, '0')}:${String(whole % 60).padStart(2, '0')}.${Math.floor((seconds - whole) * 10)}`;
+/** Minutes, seconds and tenths. Rounds through whole tenths so 11.1 never prints as 11.0. */
+export function formatTime(seconds: number): string {
+  const tenths = Math.floor(seconds * 10 + 1e-6);
+  const whole = Math.floor(tenths / 10);
+  return `${String(Math.floor(whole / 60)).padStart(2, '0')}:${String(whole % 60).padStart(2, '0')}.${tenths % 10}`;
 }
 
 /** Band shares for every channel over the stretch that ends at `time`; all zero until enough signal has passed. */

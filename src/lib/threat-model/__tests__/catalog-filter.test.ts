@@ -54,6 +54,7 @@ describe('lab table policy', () => {
     risk_profile: [{ company: 'Example Co', security_score: '0/4', risk_index: 13.4 }],
     companies: [{ name: 'Example Co', founded: '2016', security_posture: 'none_published', security_notes: 'text' }],
     devices: [{ device: 'Example Device', channels: 1024, cve_count: 0, security_posture: 'none_published' }],
+    comms: [{ device: 'Example Device', wireless_protocol: 'Bluetooth Low Energy', data_link_risk: 'HIGH' }],
     techniques: [{ id: 'QIF-T0001', severity: 'high' }],
   };
 
@@ -66,6 +67,7 @@ describe('lab table policy', () => {
     const allowed = applyLabTablePolicy(tables);
     expect(allowed.companies).toEqual([{ name: 'Example Co', founded: '2016' }]);
     expect(allowed.devices).toEqual([{ device: 'Example Device', channels: 1024 }]);
+    expect(allowed.comms).toEqual([{ device: 'Example Device', wireless_protocol: 'Bluetooth Low Energy' }]);
     for (const [table, columns] of Object.entries(HIDDEN_COLUMNS)) {
       for (const row of allowed[table] ?? []) for (const column of columns) expect(row).not.toHaveProperty(column);
     }

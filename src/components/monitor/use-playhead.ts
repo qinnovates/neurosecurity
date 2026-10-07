@@ -19,38 +19,43 @@ export function usePlayhead(durationSeconds: number, startAt: number): Playhead 
   const isReduced = useReducedMotion();
   const [time, setTime] = useState(Math.min(startAt, durationSeconds));
   const [isPlaying, setPlaying] = useState(!isReduced);
-  const lastFrameAt = useRef<number | null>(null);
+  // The frame loop reads and writes the position here, so it never works from a stale render.
+  const position = useRef(time);
+
+  const moveTo = useCallback((target: number): void => {
+    position.current = Math.max(0, Math.min(durationSeconds, target));
+    setTime(position.current);
+  }, [durationSeconds]);
 
   // A different recording starts from its own first full picture.
   useEffect(() => {
-    setTime(Math.min(startAt, durationSeconds));
+    moveTo(startAt);
     setPlaying(!isReduced && durationSeconds > 0);
-  }, [durationSeconds, startAt, isReduced]);
+  }, [durationSeconds, startAt, isReduced, moveTo]);
 
   useEffect(() => {
-    if (!isPlaying) { lastFrameAt.current = null; return undefined; }
+    if (!isPlaying) return undefined;
     let frame = 0;
+    let lastFrameAt: number | null = null;
     const tick = (now: number): void => {
-      const elapsedSeconds = lastFrameAt.current === null ? 0 : (now - lastFrameAt.current) / 1000;
-      lastFrameAt.current = now;
-      setTime((current) => {
-        const next = current + elapsedSeconds;
-        if (next < durationSeconds) return next;
+      const elapsedSeconds = lastFrameAt === null ? 0 : (now - lastFrameAt) / 1000;
+      lastFrameAt = now;
+      moveTo(position.current + elapsedSeconds);
+      if (position.current >= durationSeconds) {
         setPlaying(false);
-        return durationSeconds;
-      });
+        return;
+      }
       frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [isPlaying, durationSeconds]);
+  }, [isPlaying, durationSeconds, moveTo]);
 
   const play = useCallback(() => {
-    setTime((current) => (current >= durationSeconds ? 0 : current));
+    if (position.current >= durationSeconds) moveTo(0);
     setPlaying(true);
-  }, [durationSeconds]);
+  }, [durationSeconds, moveTo]);
   const pause = useCallback(() => setPlaying(false), []);
-  const seek = useCallback((target: number) => setTime(Math.max(0, Math.min(durationSeconds, target))), [durationSeconds]);
 
-  return { time, isPlaying, play, pause, seek };
+  return { time, isPlaying, play, pause, seek: moveTo };
 }

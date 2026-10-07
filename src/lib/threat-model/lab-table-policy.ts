@@ -15,6 +15,8 @@ export const HIDDEN_TABLES: readonly string[] = ['risk_profile'];
 export const HIDDEN_COLUMNS: Readonly<Record<string, readonly string[]>> = {
   companies: ['security_posture', 'security_notes'],
   devices: ['cve_count', 'security_posture'],
+  /** A risk rating for a named device's radio link. */
+  comms: ['data_link_risk'],
 };
 
 function withoutColumns(rows: readonly Row[], hidden: readonly string[]): Row[] {

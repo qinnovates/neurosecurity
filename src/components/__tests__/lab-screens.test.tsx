@@ -10,6 +10,7 @@ import { loadTaraChains } from '../atlas/load-tara-chains';
 import CatalogView from '../explore/catalog/CatalogView';
 import CuratedChains from '../explore/CuratedChains';
 import EventList from '../monitor/EventList';
+import { formatTime } from '../monitor/MonitorMode';
 import ScalpMap from '../monitor/ScalpMap';
 import SpectrumBars from '../monitor/SpectrumBars';
 import { FocusProvider } from '../workbench/FocusContext';
@@ -83,6 +84,12 @@ describe('CuratedChains', () => {
 });
 
 describe('Monitor pieces', () => {
+  it('formats the playhead in minutes, seconds and tenths without floating-point slips', () => {
+    expect(formatTime(11.1)).toBe('00:11.1');
+    expect(formatTime(0)).toBe('00:00.0');
+    expect(formatTime(75.95)).toBe('01:15.9');
+  });
+
   it('says an empty event list is not a clean bill', () => {
     render(<EventList events={[]} markers={[]} thresholdMicrovolts={75} thresholdOptions={[50, 75]} onThresholdChange={() => undefined} time={0} onSeek={() => undefined} formatTime={String} />);
     expect(screen.getByText(/That is not a clean bill: only this one rule is checked, on a synthetic signal\./)).toBeTruthy();
