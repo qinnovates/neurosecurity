@@ -2,68 +2,32 @@ import { Suspense, lazy, useEffect, useMemo, useState } from 'react';
 import ModeErrorBoundary from './ModeErrorBoundary';
 import type { EngineData } from '@/lib/threat-model/catalog-types';
 import type { ReferenceData } from '@/lib/threat-model/reference-data-types';
-import { FocusProvider, useFocus } from './FocusContext';
-import { DEFAULT_MODE_ID, WORKBENCH_MODES, isModeId, type ModeId } from './mode-registry';
+import { FocusProvider } from './FocusContext';
+import ModeNav from './ModeNav';
+import { WORKBENCH_MODES, type ModeId } from './mode-registry';
 import ModeViews from './ModeViews';
-import { defaultViewId, findView } from './view-registry';
+import { parseRoute, toHash, type Route } from './route';
+import StandingLine from './StandingLine';
+import TopBar from './TopBar';
+import { defaultViewId } from './view-registry';
+import ViewTabs from './ViewTabs';
 import '@/components/lab-kit/lab-kit.css';
-import './workbench.css';
+import './lab-shell.css';
 
 interface Props {
   engineData: EngineData;
   referenceData: ReferenceData;
 }
 
-interface Route {
-  modeId: ModeId;
-  viewId: string;
-}
-
 /**
- * The address holds only where you are: "#model" or "#explore/catalog". Device details
- * never go in it. Anything unrecognised falls back to a default instead of failing.
+ * The frame every Lab screen sits in: one bar with the modes and the device in focus, the
+ * views of the current mode, the screen itself, and the statements that never leave.
  */
-function readRoute(): Route {
-  const [modeCandidate = '', viewCandidate] = window.location.hash.replace('#', '').split('/');
-  const modeId = isModeId(modeCandidate) ? modeCandidate : DEFAULT_MODE_ID;
-  const hasKnownView = viewCandidate !== undefined && findView(modeId, viewCandidate) !== null;
-  return { modeId, viewId: hasKnownView ? viewCandidate : defaultViewId(modeId) };
-}
-
-function toHash(route: Route): string {
-  return route.viewId === defaultViewId(route.modeId) ? `#${route.modeId}` : `#${route.modeId}/${route.viewId}`;
-}
-
-/** The device every mode is looking at, always visible so switching mode never loses the thread. */
-function FocusBar() {
-  const { state, report, isRemembered, setRemembered, storageNotice } = useFocus();
-  const { model } = state;
-  const placedCount = new Set(report.riskRows.filter((row) => row.source === 'catalog').map((row) => row.techniqueId)).size;
-  return (
-    <div className="workbench-focus tm-no-print">
-      <p className="workbench-focus-facts" aria-live="polite">
-        <span className="workbench-focus-label">Device in focus</span>
-        <strong>{model.name}</strong>
-        <span>{model.direction === 'read' ? 'records' : model.direction === 'write' ? 'stimulates' : 'records and stimulates'}</span>
-        <span>{model.components.length} parts</span>
-        <span>{placedCount} techniques placed</span>
-        <span>{report.chainResult.chains.length} chain hypotheses</span>
-      </p>
-      <label className="workbench-remember">
-        <input id="workbench-remember" type="checkbox" checked={isRemembered} onChange={(event) => setRemembered(event.target.checked)} />
-        <span>{isRemembered ? 'Saved in this browser' : 'Remember in this browser'}</span>
-      </label>
-      {!isRemembered && <span className="workbench-unsaved">Not saved. A reload starts over.</span>}
-      {storageNotice !== null && <span className="workbench-unsaved" role="alert">{storageNotice}</span>}
-    </div>
-  );
-}
-
 export default function WorkbenchShell({ engineData, referenceData }: Props) {
-  const [route, setRoute] = useState<Route>(readRoute);
+  const [route, setRoute] = useState<Route>(() => parseRoute(window.location.hash));
 
   useEffect(() => {
-    const syncFromAddress = (): void => setRoute(readRoute());
+    const syncFromAddress = (): void => setRoute(parseRoute(window.location.hash));
     window.addEventListener('hashchange', syncFromAddress);
     return () => window.removeEventListener('hashchange', syncFromAddress);
   }, []);
@@ -85,27 +49,22 @@ export default function WorkbenchShell({ engineData, referenceData }: Props) {
 
   return (
     <FocusProvider engineData={engineData} referenceData={referenceData}>
-      <div className="workbench-shell">
-        <nav className="workbench-modes tm-no-print" aria-label="TARA Lab modes">
-          {WORKBENCH_MODES.map((mode) => (
-            <button
-              key={mode.id} type="button" className="workbench-mode"
-              aria-current={mode.id === route.modeId ? 'page' : undefined}
-              onClick={() => openMode(mode.id)}
-            >
-              {mode.label}
-            </button>
-          ))}
-        </nav>
-        <FocusBar />
-        {activeMode !== undefined && <p className="workbench-question tm-no-print">{activeMode.question}</p>}
-        <ModeViews modeId={route.modeId} activeViewId={route.viewId} onSelectView={selectView}>
-          <ModeErrorBoundary key={route.modeId} modeLabel={activeMode?.label ?? 'This mode'}>
-            <Suspense fallback={<p className="workbench-question" role="status">Loading…</p>}>
-              {ActiveComponent !== undefined && <ActiveComponent onOpenMode={openMode} />}
-            </Suspense>
-          </ModeErrorBoundary>
-        </ModeViews>
+      <div className="lab lab-shell">
+        <TopBar activeModeId={route.modeId} onOpenMode={openMode} />
+        <ViewTabs modeId={route.modeId} activeViewId={route.viewId} onSelectView={selectView} />
+        <div className="lab-shell-body">
+          <ModeViews modeId={route.modeId} activeViewId={route.viewId}>
+            <ModeErrorBoundary key={route.modeId} modeLabel={activeMode?.label ?? 'This mode'}>
+              <Suspense fallback={<p className="lab-soft" role="status">Loading…</p>}>
+                {ActiveComponent !== undefined && <ActiveComponent onOpenMode={openMode} />}
+              </Suspense>
+            </ModeErrorBoundary>
+          </ModeViews>
+        </div>
+        <footer className="lab-foot tm-no-print">
+          <StandingLine catalogVersion={engineData.registrarVersion} techniqueCount={engineData.techniques.length} />
+          <ModeNav activeModeId={route.modeId} onOpenMode={openMode} placement="bottom" />
+        </footer>
       </div>
     </FocusProvider>
   );
