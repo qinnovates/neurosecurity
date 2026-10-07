@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-10-07T00:23:36.212675+00:00",
+    "generated": "2026-10-07T03:12:59.658328+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
@@ -167,7 +167,7 @@
     },
     "companies": {
       "rows": 67,
-      "columns": 16,
+      "columns": 15,
       "column_names": [
         "name",
         "type",
@@ -183,10 +183,9 @@
         "security_posture",
         "security_notes",
         "company_category",
-        "device_count",
-        "tara_attack_surface"
+        "device_count"
       ],
-      "size_bytes": 16952,
+      "size_bytes": 16219,
       "compression": "zstd",
       "source": "datalake/parquet/companies.parquet"
     },

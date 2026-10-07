@@ -271,7 +271,6 @@ def main():
     for c in companies:
         row = {k: v for k, v in c.items() if not isinstance(v, (dict, list))}
         row["device_count"] = len(c.get("devices", []))
-        row["tara_attack_surface"] = ", ".join(c.get("tara_attack_surface", []))
         flat_companies.append(row)
     write_parquet("companies", flat_companies, catalog)
 
