@@ -54,12 +54,14 @@ function toTechnique(raw: Record<string, unknown>, index: number): CatalogTechni
   const detection = readNested(raw, 'tara', 'engineering', 'detection');
   const cvssVector = readNested(raw, 'cvss', 'base_vector');
   const nissVector = readNested(raw, 'niss', 'vector');
+  const evidenceTier = readNested(raw, 'evidence', 'tier');
   return {
     id,
     name: readString(raw, 'attack') ?? id,
     tactic,
     bandIds: raw.band_ids,
     evidenceStatus: readString(raw, 'status') ?? 'UNSPECIFIED',
+    evidenceTier: typeof evidenceTier === 'string' && evidenceTier.length > 0 ? evidenceTier : null,
     severity: raw.severity,
     mode: isOneOf(raw.tara_mode, TECHNIQUE_MODES) ? raw.tara_mode : null,
     domain: readString(raw, 'tara_domain_primary'),

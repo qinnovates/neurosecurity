@@ -217,7 +217,7 @@ export default function ThreatModelStudio() {
         )}
         <div {...tabPanelProps(SECTIONS_ID, activeSection)}>
           {activeSection === 'register' && (
-            <RisksSection rows={rowsInView} controlsInPlace={model.controlsInPlace} onDecide={decideRisk} onOpenRisk={setOpenedRiskId} />
+            <RisksSection rows={rowsInView} controlsInPlace={model.controlsInPlace} techniqueById={techniqueById} onDecide={decideRisk} onOpenRisk={setOpenedRiskId} />
           )}
           {activeSection === 'map' && <section className="tm-card"><ThreatMatrix rows={rowsInView} /></section>}
           {activeSection === 'chains' && <ChainList chainResult={chainsInView} selectedChainId={selectedChainId} onSelectChain={setSelectedChainId} />}

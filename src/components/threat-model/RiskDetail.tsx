@@ -36,7 +36,7 @@ export default function RiskDetail({ row, technique, placementReasons, precedent
       <div className="lab-panel-body model-risk-body">
         <p className="lab-soft">On {row.elementLabel}{row.techniqueId !== null && <> · <span className="lab-id">{row.techniqueId}</span></>}</p>
         <p className="model-risk-facts">
-          {row.evidenceStatus === null ? <span className="lab-soft">Generic baseline, not a catalog technique</span> : <EvidenceMark status={row.evidenceStatus} />}
+          {row.evidenceStatus === null ? <span className="lab-soft">Generic baseline, not a catalog technique</span> : <EvidenceMark tier={technique?.evidenceTier ?? null} status={row.evidenceStatus} />}
           {row.catalogSeverity !== null && <SeverityMark severity={row.catalogSeverity} />}
         </p>
         {row.catalogState === 'missing' && <p className="tm-notice">This technique is no longer in the catalog. The row is kept so your decision is not lost.</p>}

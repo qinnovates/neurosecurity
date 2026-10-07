@@ -3,9 +3,9 @@ import DataTable, { type DataTableColumn } from '@/components/lab-kit/DataTable'
 import EvidenceMark from '@/components/lab-kit/EvidenceMark';
 import FilterChip from '@/components/lab-kit/FilterChip';
 import SeverityMark from '@/components/lab-kit/SeverityMark';
-import { CATALOG_SEVERITIES } from '@/lib/threat-model/catalog-types';
+import { CATALOG_SEVERITIES, type CatalogTechnique } from '@/lib/threat-model/catalog-types';
 import { RISK_STATUSES, type RiskStatus } from '@/lib/threat-model/device-model';
-import { EVIDENCE_LEVELS, evidenceLevelOf } from '@/lib/threat-model/evidence-levels';
+import { describeEvidence } from '@/lib/threat-model/evidence-levels';
 import type { RiskRow } from '@/lib/threat-model/report-types';
 import { isRiskAddressed } from '@/lib/threat-model/risk-register';
 import { RISK_STATUS_LABELS } from './risk-status-labels';
@@ -16,6 +16,8 @@ interface Props {
   /** Rows the current part and lenses let through. */
   rows: readonly RiskRow[];
   controlsInPlace: readonly string[];
+  /** Looks up the catalog entry behind a row, for its evidence tier. */
+  techniqueById: ReadonlyMap<string, CatalogTechnique>;
   onDecide: (riskId: string, status: RiskStatus, note: string) => void;
   onOpenRisk: (riskId: string) => void;
 }
@@ -32,12 +34,13 @@ function matchesSource(row: RiskRow, filter: SourceFilter): boolean {
   return filter === 'all' || row.source === filter;
 }
 
-function buildColumns(onDecide: Props['onDecide']): readonly DataTableColumn<RiskRow>[] {
+function buildColumns(onDecide: Props['onDecide'], techniqueById: Props['techniqueById']): readonly DataTableColumn<RiskRow>[] {
+  const tierOf = (row: RiskRow): string | null => (row.techniqueId === null ? null : techniqueById.get(row.techniqueId)?.evidenceTier ?? null);
   return [
     {
       id: 'evidence', header: 'Evidence',
-      render: (row) => (row.evidenceStatus === null ? <span className="lab-soft">Baseline</span> : <EvidenceMark status={row.evidenceStatus} />),
-      sortValue: (row) => (row.evidenceStatus === null ? SORTS_LAST : EVIDENCE_LEVELS.indexOf(evidenceLevelOf(row.evidenceStatus))),
+      render: (row) => (row.evidenceStatus === null ? <span className="lab-soft">Baseline</span> : <EvidenceMark tier={tierOf(row)} status={row.evidenceStatus} />),
+      sortValue: (row) => (row.evidenceStatus === null ? SORTS_LAST : describeEvidence({ evidenceTier: tierOf(row), evidenceStatus: row.evidenceStatus }).rank),
     },
     {
       id: 'threat', header: 'Threat', sortValue: (row) => row.title,
@@ -66,7 +69,7 @@ function buildColumns(onDecide: Props['onDecide']): readonly DataTableColumn<Ris
 }
 
 /** The register for triage: one line per risk, evidence first, open rows on top. A row opens its detail beside the table. */
-export default function RisksSection({ rows, controlsInPlace, onDecide, onOpenRisk }: Props) {
+export default function RisksSection({ rows, controlsInPlace, techniqueById, onDecide, onOpenRisk }: Props) {
   const [sourceFilter, setSourceFilter] = useState<SourceFilter>('catalog');
   const [isOpenOnly, setOpenOnly] = useState(false);
 
@@ -91,7 +94,7 @@ export default function RisksSection({ rows, controlsInPlace, onDecide, onOpenRi
       </div>
       <DataTable
         caption={`${openRows.length} open of ${sourceRows.length}. A row is addressed once it has a decision or one of its controls is marked in place. Enter opens a row.`}
-        columns={buildColumns(onDecide)} rows={visibleRows} rowKey={(row) => row.riskId} emptyMessage={emptyMessage}
+        columns={buildColumns(onDecide, techniqueById)} rows={visibleRows} rowKey={(row) => row.riskId} emptyMessage={emptyMessage}
         onOpenRow={(row) => onOpenRisk(row.riskId)} isRowQuiet={(row) => isRiskAddressed(row, controlsInPlace)}
       />
     </section>
