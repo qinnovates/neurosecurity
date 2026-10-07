@@ -174,21 +174,21 @@
       "version": "1.0",
       "analysis_date": "2026-02-18",
       "constraint_system_ref": "QIF Derivation Log Entry 60",
-      "techniques_assessed": 161,
-      "techniques_unassessed": 13,
+      "techniques_assessed": 174,
+      "techniques_unassessed": 0,
       "by_tier": {
         "far_term": 4,
-        "feasible_now": 99,
+        "feasible_now": 100,
         "mid_term": 13,
         "near_term": 22,
-        "no_physics_gate": 23
+        "no_physics_gate": 35
       },
       "by_tier_id": {
-        "0": 104,
+        "0": 100,
         "1": 22,
         "2": 13,
         "3": 4,
-        "X": 18
+        "X": 35
       },
       "notes": [
         "Tier 0 (feasible_now): Attack hardware exists today",
@@ -22066,12 +22066,12 @@
         }
       },
       "physics_feasibility": {
-        "tier": 0,
+        "tier": "X",
         "tier_label": "no_physics_gate",
-        "timeline": "now",
+        "timeline": "none",
         "gate_reason": "Software/protocol attack — physics does not constrain",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
-        "analysis_date": "2026-03-14"
+        "analysis_date": "2026-10-07"
       }
     },
     {
@@ -22197,12 +22197,12 @@
         }
       },
       "physics_feasibility": {
-        "tier": 0,
+        "tier": "X",
         "tier_label": "no_physics_gate",
-        "timeline": "now",
+        "timeline": "none",
         "gate_reason": "Software/network attack — physics does not constrain",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
-        "analysis_date": "2026-03-14"
+        "analysis_date": "2026-10-07"
       }
     },
     {
@@ -22326,12 +22326,12 @@
         }
       },
       "physics_feasibility": {
-        "tier": 0,
+        "tier": "X",
         "tier_label": "no_physics_gate",
-        "timeline": "now",
+        "timeline": "none",
         "gate_reason": "Software/network attack — physics does not constrain",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
-        "analysis_date": "2026-03-14"
+        "analysis_date": "2026-10-07"
       }
     },
     {
@@ -22459,12 +22459,12 @@
         }
       },
       "physics_feasibility": {
-        "tier": 0,
+        "tier": "X",
         "tier_label": "no_physics_gate",
-        "timeline": "now",
+        "timeline": "none",
         "gate_reason": "Software/protocol attack — physics does not constrain",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
-        "analysis_date": "2026-03-14"
+        "analysis_date": "2026-10-07"
       }
     },
     {
@@ -22720,12 +22720,12 @@
         }
       },
       "physics_feasibility": {
-        "tier": 0,
+        "tier": "X",
         "tier_label": "no_physics_gate",
-        "timeline": "now",
+        "timeline": "none",
         "gate_reason": "Software/data pipeline attack — physics does not constrain",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
-        "analysis_date": "2026-03-14"
+        "analysis_date": "2026-10-07"
       }
     },
     {
@@ -28420,7 +28420,15 @@
       },
       "tara_domain_primary": "SIL",
       "tara_mode": "D",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "Scheduler and synchronization abuse; software-only",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0163",
@@ -28504,7 +28512,15 @@
       },
       "tara_domain_primary": "SIL",
       "tara_mode": "M",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "Kernel/driver memory-safety exploitation; software-only",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0164",
@@ -28588,7 +28604,15 @@
       },
       "tara_domain_primary": "SIL",
       "tara_mode": "R",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "Kernel/driver memory-safety exploitation; software-only",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0165",
@@ -28673,7 +28697,15 @@
       },
       "tara_domain_primary": "SIL",
       "tara_mode": "D",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "Firmware update-process attack; physics does not constrain",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0166",
@@ -28760,7 +28792,14 @@
         "cci": null
       },
       "regulatory": null,
-      "physics_feasibility": null,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "Inferential re-analysis of retained recordings; no acquisition step to gate",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      },
       "origin": {
         "category": "literature",
         "original_authors": [
@@ -28864,7 +28903,14 @@
         "cci": null
       },
       "regulatory": null,
-      "physics_feasibility": null,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "Agent action-routing manipulation; software-only",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      },
       "origin": {
         "category": "literature",
         "original_authors": [
@@ -28968,7 +29014,14 @@
         "cci": null
       },
       "regulatory": null,
-      "physics_feasibility": null,
+      "physics_feasibility": {
+        "tier": 0,
+        "tier_label": "feasible_now",
+        "timeline": "now",
+        "gate_reason": "Inertial sensors in commodity VR headsets are sensitive enough to capture pupil-linked micro-vibration; demonstrated on shipping hardware (Ni et al. 2026)",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      },
       "origin": {
         "category": "literature",
         "original_authors": [
@@ -29080,7 +29133,14 @@
         "cci": null
       },
       "regulatory": null,
-      "physics_feasibility": null,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "Signal-processing evasion against a decoder; software-only",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      },
       "origin": {
         "category": "literature",
         "original_authors": [
@@ -29180,7 +29240,14 @@
         "cci": null
       },
       "regulatory": null,
-      "physics_feasibility": null,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "Query-based model extraction; software-only",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      },
       "origin": {
         "category": "literature",
         "original_authors": [
@@ -29291,7 +29358,14 @@
         "cci": null
       },
       "regulatory": null,
-      "physics_feasibility": null,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "ML pipeline and registry compromise; software-only",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      },
       "origin": {
         "category": "literature",
         "original_authors": [
@@ -29395,7 +29469,14 @@
         "cci": null
       },
       "regulatory": null,
-      "physics_feasibility": null,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "Adversarial transfer computed offline against a public encoder; software-only",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      },
       "origin": {
         "category": "literature",
         "original_authors": [
@@ -29495,7 +29576,14 @@
         "cci": null
       },
       "regulatory": null,
-      "physics_feasibility": null,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "Attribute inference from released embeddings; software-only",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      },
       "origin": {
         "category": "literature",
         "original_authors": [
@@ -29601,7 +29689,14 @@
         "cci": null
       },
       "regulatory": null,
-      "physics_feasibility": null,
+      "physics_feasibility": {
+        "tier": "X",
+        "tier_label": "no_physics_gate",
+        "timeline": "none",
+        "gate_reason": "Federated update manipulation; software-only",
+        "constraint_system_ref": "QIF Derivation Log Entry 60",
+        "analysis_date": "2026-10-07"
+      },
       "origin": {
         "category": "literature",
         "original_authors": [

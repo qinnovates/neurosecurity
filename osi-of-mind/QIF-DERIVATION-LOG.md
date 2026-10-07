@@ -15,6 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit
 | Entry | Topic | Link |
 |-------|-------|------|
+| 109 | Physics tier integrity: five techniques labelled `no_physics_gate` while tiered `0` (feasible now), and 13 with no block at all counted as tier 0 by a `?? 0` fallback; validator added to CI. Whitepaper 6.5.7 attributed the `severity` field to NISS, claiming 32 critical techniques where NISS yields 0, with a mechanistic argument built on it | [Entry 109](#entry-109-physics-tier-integrity) |
 | 108 | Integration pass: `parent_id` sub-technique field and a two-level taxonomy (165 to 174); 52 CVE mappings integrated and QIF-T0001 de-mapped to zero evidence; 40 papers added; three hand-maintained blocks replaced by generators; a scoring conflict I reported that did not exist | [Entry 108](#entry-108-integration-pass) |
 | 107 | CVE evidence pass: CVE-2025-4395 wrongly published as fabricated (real Medtronic record, ICSMA-25-205-01); CVE-2023-49914 is the first CVE reaching the neural bands; session corrections to homepage claims, 15 citations, tracked figures and the BCI directory | [Entry 107](#entry-107-cve-evidence-pass) |
 | 106 | October 2026 data refresh: landscape and device crawl, attack research survey, 63 site inconsistencies, three homepage corrections, citation defect C52, intake ledger and tracked metrics. Staged proposals pending Quorum fact-check | [Entry 106](#entry-106-october-2026-data-refresh) |
@@ -354,6 +355,95 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 109: The Physics Tier That Said "Feasible Now" When It Meant "Not Applicable" {#entry-109-physics-tier-integrity}
+
+**Date:** 2026-10-07, ~03:40
+**Classification:** CORRECTION
+**AI Systems:** Claude Opus 5 (defect discovery, migration, validator, this entry)
+**Connected entries:** Entry 108 (integration pass that added the nine techniques with no block), Entry 60 (the physics constraint system these tiers refer to)
+**RACI:** R: Claude Opus 5 | A: KQ | C: none | I: none
+**AI Contribution Level:** AI-generated; every figure recomputed from the registrar
+
+### Context
+
+`physics_feasibility.tier` answers one question: when, if ever, does physics permit this technique? Four tiers are timelines (`0` feasible now, `1` near term, `2` mid term, `3` far term) and a fifth value is not a timeline at all -- the sentinel `X`, `no_physics_gate`, for attacks physics has no say over, such as a compromise of an ML training pipeline.
+
+While inventorying what remained open after the October refresh, I found that distinction had broken in two places.
+
+### Defect 1: tier and label disagreeing
+
+Five techniques carried `tier: 0` together with `tier_label: "no_physics_gate"`:
+
+| Technique | Attack | Its own gate_reason |
+|---|---|---|
+| QIF-T0104 | Neural spoofing | "Software/protocol attack -- physics does not constrain" |
+| QIF-T0105 | Neural sybil | "Software/network attack -- physics does not constrain" |
+| QIF-T0106 | Neural sinkhole | "Software/network attack -- physics does not constrain" |
+| QIF-T0107 | Neural nonce replay | "Software/protocol attack -- physics does not constrain" |
+| QIF-T0109 | Data alignment exploitation | "Software/data pipeline attack -- physics does not constrain" |
+
+Each one states in its own prose that physics does not constrain it, while its numeric tier asserts that physics permits it today. The other 18 `no_physics_gate` techniques use `tier: "X"` and `timeline: "none"`; these five were analysed on 2026-03-14, a later batch than the 2026-02-18 cohort, and the convention was not carried over.
+
+The label is the intended reading and the tier is the error. The consequence is not cosmetic: anything filtering `tier == 0` -- a query, a chart, a reader -- counted these five as "physics permits this now", which is a materially stronger claim than "physics has no say here". Overstating feasibility is the direction this project is least willing to err in.
+
+### Defect 2: thirteen techniques absent from every tier rollup
+
+QIF-T0162 to T0165, and the nine techniques Entry 108 added (QIF-T0166 to T0174), had no `physics_feasibility` block at all. `getPhysicsFeasibilityStats()` in `src/lib/threat-data.ts` reads `String(t.physicsFeasibility?.tier ?? 0)`, so a missing block was **silently counted as tier 0, feasible now** -- the same overstatement as defect 1, arrived at by a different route, and invisible because the fallback produced a plausible number rather than an error.
+
+Twelve of the thirteen are software, protocol, kernel or ML-pipeline attacks and take the `X` sentinel on the same grounds as the existing 18.
+
+The thirteenth does not, and the distinction matters. QIF-T0168 -- a VR headset's inertial sensors capturing pupil-linked micro-vibration -- is a *physical* side channel. Its feasibility rests on real IMU sensitivity, and it is already DEMONSTRATED on shipping hardware (Ni et al. 2026). Classing it `no_physics_gate` would have been convenient and wrong: physics constrains it, and currently permits it. It is `tier: 0`, `feasible_now`, on the evidence.
+
+### A third defect, found by the count checker: the whitepaper attributed the wrong metric to NISS
+
+`npm run health` flagged whitepaper section 6.5.7 for saying "57" where the registrar holds 174. The stale count was the smallest thing wrong with it.
+
+The section read "NISS scoring produces the following severity distribution" over a table with NISS score-band headings -- Critical (9.0+), High (7.0--8.9), Medium (4.0--6.9), Low (0.1--3.9) -- and the counts 32 / 72 / 57 / 4. Those are not NISS scores. They are the registrar's editorial `severity` field (currently 32 / 77 / 61 / 4), pasted under NISS headings, and stale as that too.
+
+What NISS v1.1 actually produces over the 148 scored techniques:
+
+| NISS score band | Whitepaper claimed | Actual |
+|---|---|---|
+| Critical (9.0+) | 32 | **0** |
+| High (7.0--8.9) | 72 | 20 |
+| Medium (4.0--6.9) | 57 | 62 |
+| Low (0.1--3.9) | 4 | 65 |
+| Exactly 0.0 | -- | 1 |
+| Not yet scored | -- | 26 |
+
+NISS puts no technique in the critical band. The whitepaper asserted 32. Worse than the numbers, the paragraph beneath them argued from the wrong data: "the skew toward high severity is expected: BCI attacks inherently involve the human body ... inflate impact scores". NISS does not skew high. It skews low -- 65 low, 62 medium, 20 high, 0 critical -- because it measures physical signal disruption, and reading and inference techniques disrupt little by construction. An inflated figure had acquired a confident mechanistic explanation, which is the shape of claim this project exists to avoid making.
+
+Section 6.5.7 now reports the NISS bands, states plainly that a low NISS score is not a judgement that a technique matters little, and names the `severity` field as a separate editorial scale that must not be read as the same ruler.
+
+This is the second time in two sessions that reading across two severity scales as if they were one has produced a false result. In Entry 108 I reported a scoring-convention conflict that did not exist, by comparing poisoning techniques against inference techniques; KQ made a decision on that false premise before I corrected it. The whitepaper defect is the same mistake committed earlier and left in the document. The scales are: NISS score (physics, six metrics, 0--10), NISS severity band (derived from that score), and the editorial `severity` field (overall concern). Three names, two rulers, and one of them is easy to mistake for the other.
+
+### Resulting distribution
+
+| tier_label | Before | After |
+|---|---|---|
+| feasible_now | 99 | 100 |
+| near_term | 22 | 22 |
+| mid_term | 13 | 13 |
+| far_term | 4 | 4 |
+| no_physics_gate | 23 | 35 |
+| **no block** | **13** | **0** |
+
+All 174 techniques are now in the rollup. No status, severity or NISS score changed.
+
+### Why this was able to happen
+
+The Registrar Sync Check workflow validated the registrar's own fields -- domains, modes, drift codes, alias prefixes -- but never checked `physics_feasibility`. Both defects were therefore reachable through ordinary edits and survived every CI run.
+
+The migration is `src/scripts/migrate-physics-tier-integrity.py`, which aborts rather than guesses if a technique is not in the state it was written for. The durable part is a validator now running in that workflow: every technique must have a block, and `tier == "X"` must hold exactly when `tier_label == "no_physics_gate"`. I confirmed it fails on both defect classes by reintroducing each one and watching it exit 1.
+
+Two related gaps closed in the same pass. The SDK's bundled registrar copy had to be kept byte-identical by a manual `cp`, and drifted the moment the statistics generator touched the registrar after the copy was taken -- during this very change. `npm run registrar:stats` now writes both files, and its `--check` mode compares them. And `npm run generated:check` gained the Autodidactive lesson's data module, which had been stale at 109 techniques; it caught that file mid-session, which is the first time one of these gates has fired on something I had not already noticed myself.
+
+### Standing judgement
+
+A sentinel sharing a type with real values is a latent defect. `tier` holding `0 | 1 | 2 | 3 | "X"` means every consumer must remember that one of those is not a timeline, and `?? 0` -- a reasonable-looking default -- silently converts "unknown" into the most alarming available claim. The validator closes the hole in the data; the shape that invited it is still there, and a future schema pass should separate "which timeline" from "is there a gate at all".
 
 ---
 
