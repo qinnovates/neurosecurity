@@ -110,6 +110,32 @@ export const EVIDENCE_TIER_LABELS: Record<EvidenceTierCode, string> = {
  * to the nearest evidence group. Used when a record has no explicit evidence.tier.
  */
 /**
+ * What a technique's supporting records are *about*, as opposed to how strong
+ * they are. Non-ordinal and deliberately separate from `EvidenceTierCode`:
+ * borrowing a rung on the strength axis to encode subject matter would make a
+ * Bluetooth-stack CVE read as BCI evidence.
+ *
+ * Precedent: GRADE treats indirect population as a reported downgrade *domain*
+ * alongside the rating rather than a new rung; CVSS v4 keeps exploit maturity
+ * in a separate Threat group; CWE separates Applicable_Platforms from
+ * Observed_Examples.
+ */
+export type EvidencePopulation =
+  | 'neural_product'
+  | 'adjacent_clinical'
+  | 'adjacent_component'
+  | 'adjacent_domain'
+  | 'none';
+
+export const EVIDENCE_POPULATION_LABELS: Record<EvidencePopulation, string> = {
+  neural_product: 'Shown on a neural-data product',
+  adjacent_clinical: 'Shown in clinical data software, not on a neural device',
+  adjacent_component: 'Shown in component technology a neural device runs on',
+  adjacent_domain: 'Shown in a related signal domain, not on a neural device',
+  none: 'No CVE-backed records',
+};
+
+/**
  * Tier-level fallback for a record with no derived `evidence.tier`.
  *
  * Mirrors the rubric in src/scripts/migrate-populate-evidence-tier.py and, like
@@ -141,9 +167,13 @@ export function statusToEvidenceGroup(status: string | undefined | null): Eviden
     case 'DEMONSTRATED':
       return 'demonstrated';
     case 'THEORETICAL':
+    // In the data since 2026-02-13 and documented in datalake/README.md, but
+    // absent here, so it fell through to `default` and read as conjecture.
+    case 'PLAUSIBLE':
       return 'theoretical';
     case 'EMERGING':
     case 'PROJECTED':
+    case 'SPECULATIVE':
       return 'speculative';
     default:
       return 'speculative';

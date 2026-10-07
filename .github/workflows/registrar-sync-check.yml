@@ -76,6 +76,10 @@ jobs:
                   errors.append(f'{tid}: missing evidence.tier; run npm run evidence:tier')
               elif evidence['tier'] not in valid_tiers:
                   errors.append(f'{tid}: unknown evidence tier {evidence["tier"]!r}')
+              elif evidence.get('population') not in ['neural_product','adjacent_clinical','adjacent_component','adjacent_domain','none']:
+                  errors.append(f'{tid}: unknown evidence population {evidence.get(\"population\")!r}')
+              elif (evidence.get('population') == 'neural_product') != (evidence.get('neural_product_cve_count', 0) > 0):
+                  errors.append(f'{tid}: population {evidence.get(\"population\")!r} disagrees with neural_product_cve_count {evidence.get(\"neural_product_cve_count\")}')
               elif evidence.get('neural_product_cve_count', 0) > 0 and evidence['tier'] not in ['validated_rct','validated_replication','demonstrated_lab','demonstrated_case']:
                   errors.append(
                       f'{tid}: holds {evidence["neural_product_cve_count"]} neural-product CVE(s) '
