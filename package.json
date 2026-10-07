@@ -27,6 +27,8 @@
     "compute:chains": "node datalake/src/scripts/compute-impact-chains.mjs",
     "registrar:stats": "node src/scripts/generate-registrar-statistics.mjs",
     "registrar:stats:check": "node src/scripts/generate-registrar-statistics.mjs --check",
+    "truth:registry": "node src/scripts/generate-truth-registry-section.mjs",
+    "truth:registry:check": "node src/scripts/generate-truth-registry-section.mjs --check",
     "cve:coverage": "node src/scripts/recompute-cve-coverage.mjs",
     "cve:gaps": "node src/scripts/generate-cve-coverage-gaps.mjs",
     "eeg:list": "python3 datalake/src/scripts/download-eeg-samples.py --list",
