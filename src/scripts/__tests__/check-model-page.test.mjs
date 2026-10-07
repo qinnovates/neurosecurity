@@ -68,6 +68,12 @@ describe('listFramedDocuments', () => {
   });
 });
 
+describe('listFramedDocuments, when the Monitor frame cannot be read', () => {
+  it('fails instead of skipping the app', () => {
+    expect(() => listFramedDocuments('', "return <iframe src={SOME_OTHER_NAME} />;")).toThrow(/address was not found/);
+  });
+});
+
 describe('findFramedAppViolations', () => {
   it('accepts an app that carries the required policy', () => {
     expect(findFramedAppViolations(buildPage({ head: '<script type="module" src="/brain-siem/assets/index.js"></script>' }))).toEqual([]);

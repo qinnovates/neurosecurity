@@ -106,10 +106,16 @@ export function findIsolationViolations(html) {
   ];
 }
 
-/** Site paths the Lab shows in a frame: pages from the view registry, and the separately built Monitor app. */
+/**
+ * Site paths the Lab shows in a frame: pages from the view registry, and the separately built Monitor app.
+ * @throws when the Monitor mode has a frame whose address this check cannot find, so a rename fails the build instead of skipping the app
+ */
 export function listFramedDocuments(registrySource, monitorSource) {
   const pages = [...registrySource.matchAll(FRAMED_PAGE_PATTERN)].map((match) => match[1]);
   const app = monitorSource.match(FRAMED_APP_PATTERN)?.[1];
+  if (app === undefined && monitorSource.includes('<iframe')) {
+    throw new Error(`${MONITOR_MODE_PATH} shows a frame, but its address was not found. Keep it in a MONITOR_APP_PATH constant so this check can read it.`);
+  }
   return { pages: [...new Set(pages)], apps: app === undefined ? [] : [app] };
 }
 
