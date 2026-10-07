@@ -97,7 +97,6 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
 
   <!-- Security headers (meta tags for non-CSP headers; Cloudflare adds HTTP headers too) -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="X-Frame-Options" content="DENY" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   <!-- CSP is enforced via _headers file (Cloudflare Pages). Meta-tag CSP removed to avoid conflict. -->
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />

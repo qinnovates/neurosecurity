@@ -208,17 +208,6 @@ techniques
          synthesis_cofactors, receptors, dsm_condition, severity
 ```
 
-### Device → Threat Exposure → Clinical Risk
-```kql
-devices
-| mv-expand tara_attack_surface
-| join kind=inner (techniques) on $left.tara_attack_surface == $right.id
-| join kind=inner (neurosecurity_scores) on device_name
-| summarize techniques=count(), avg_severity=avg(niss_score),
-           dsm_clusters=make_set(dsm_cluster) by device_name, overall_score
-| order by overall_score desc
-```
-
 ### Neurotransmitter → All Attack Vectors
 ```kql
 neural_pathways

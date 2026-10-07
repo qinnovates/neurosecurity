@@ -42,6 +42,17 @@ const TOOL_PAGE_CSP = [
 
   <!-- Match the site theme without the shared layout (prevents a flash) -->
   <script is:inline>
+    // This host cannot send a frame-ancestors header, so the page leaves any frame another site puts it in.
+    (function () {
+      if (window.top === window.self) return;
+      try {
+        void window.top.location.origin;
+      } catch (crossOriginFrame) {
+        window.top.location = window.self.location.href;
+      }
+    })();
+  </script>
+  <script is:inline>
     (function () {
       var theme = 'light';
       try {
@@ -57,7 +68,7 @@ const TOOL_PAGE_CSP = [
 </head>
 <body class="min-h-screen" data-pagefind-ignore>
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg" style="background: var(--color-bg-surface); color: var(--color-text-primary); border: 1px solid var(--color-accent-primary)">Skip to content</a>
-  <header class="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl pt-6 flex items-center justify-between gap-4">
+  <header class="tool-header px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl pt-6 flex items-center justify-between gap-4">
     <a href="/atlas/" class="text-sm font-medium" style="color: var(--color-accent-primary)">&larr; Back to the site</a>
     <span class="text-xs" style="color: var(--color-text-muted)">Runs in your browser. Nothing you enter is sent anywhere.</span>
   </header>

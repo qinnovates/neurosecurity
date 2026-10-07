@@ -21,7 +21,6 @@ function ChainCard({ chain, isSelected, onSelectChain }: { chain: GeneratedChain
       <div className="tm-actions" style={{ alignItems: 'center', marginBottom: '0.5rem' }}>
         <span className="tm-badge tm-badge--generated">Generated hypothesis</span>
         <span className="tm-badge">Weakest step: {chain.weakestEvidenceStatus}</span>
-        <span className="tm-mono">{chain.chain_id}</span>
         {onSelectChain !== undefined && (
           <button type="button" className="tm-button tm-no-print" aria-pressed={isSelected} onClick={() => onSelectChain(isSelected ? null : chain.chain_id)}>
             {isSelected ? 'Hide on diagram' : 'Show on diagram'}
@@ -29,15 +28,18 @@ function ChainCard({ chain, isSelected, onSelectChain }: { chain: GeneratedChain
         )}
       </div>
       <AttackChainViz chain={chain} />
-      <h4 className="tm-subheading">Why each step follows the last</h4>
+      {/* Folded on screen to keep the list scannable; always open in the printed report. */}
+      <details className="tm-chain-basis" open={onSelectChain === undefined}>
+        <summary>Why each step follows the last</summary>
       <ol className="tm-list">
         {chain.edges.map((edge) => (
           <li key={edge.fromPosition}>Step {edge.fromPosition} to {edge.toPosition}: {EDGE_BASIS_LABELS[edge.basis]}.</li>
         ))}
       </ol>
       <p className="tm-muted tm-small">
-        Generator {chain.generatorVersion}, catalog version {chain.registrarVersion}. A path through the model exists; that is not evidence the attack has been carried out.
+        <span className="tm-mono">{chain.chain_id}</span>. Generator {chain.generatorVersion}, catalog version {chain.registrarVersion}.
       </p>
+      </details>
     </article>
   );
 }
@@ -48,7 +50,7 @@ export default function ChainList({ chainResult, selectedChainId = null, onSelec
     <div>
       <p className="tm-muted" style={{ marginBottom: '0.75rem' }}>
         Chains are assembled along real paths in your device model, using only techniques with confirmed or demonstrated evidence.
-        Every chain is a hypothesis for review, whatever the evidence behind its individual steps.
+        Every chain is a hypothesis for review, whatever the evidence behind its individual steps: a path through the model exists, which is not evidence the attack has been carried out.
       </p>
       {wasTruncated && <p className="tm-notice">The search stopped at its limit. Other chains may exist.</p>}
       {chains.length === 0 && <p className="tm-notice">No chains to show. {emptyReason}</p>}

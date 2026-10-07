@@ -140,37 +140,8 @@ plt.tight_layout()
 plt.savefig(OUT / '03-device-types.png', dpi=150, bbox_inches='tight')
 plt.close()
 
-# ═══ Chart 4: TARA Attack Surface by Company (Top 12) ═══
-print("Chart 4: Attack surface...")
-attack_data = [(c['name'], len(c.get('tara_attack_surface', [])), c.get('type', 'unknown'))
-               for c in companies]
-attack_data = sorted(attack_data, key=lambda x: x[1], reverse=True)[:12]
-
-fig, ax = plt.subplots(figsize=(10, 6))
-names = [a[0] for a in attack_data]
-counts = [a[1] for a in attack_data]
-colors = [type_colors.get(a[2], '#64748b') for a in attack_data]
-bars = ax.barh(range(len(names)), counts, color=colors, edgecolor='none', height=0.7)
-ax.set_yticks(range(len(names)))
-ax.set_yticklabels(names)
-ax.invert_yaxis()
-ax.set_xlabel('TARA Techniques Applicable')
-ax.set_title('BCI Attack Surface by Company (TARA Techniques)', fontsize=14, fontweight='bold', pad=15)
-for i, v in enumerate(counts):
-    ax.text(v + 0.3, i, str(v), va='center', fontsize=10, color='#94a3b8')
-# Legend
-from matplotlib.patches import Patch
-legend_elements = [
-    Patch(facecolor=WARN, label='Invasive'),
-    Patch(facecolor=ACCENT3, label='Semi-invasive'),
-    Patch(facecolor=ACCENT, label='Non-invasive'),
-]
-ax.legend(handles=legend_elements, loc='lower right', fontsize=9,
-          facecolor='#1e293b', edgecolor='#334155')
-ax.grid(axis='x', alpha=0.3)
-plt.tight_layout()
-plt.savefig(OUT / '04-attack-surface.png', dpi=150, bbox_inches='tight')
-plt.close()
+# Chart 4 (attack surface by company) was removed: the site no longer attaches
+# technique lists to named companies.
 
 # ═══ Chart 5: Regulatory Coverage Gap ═══
 print("Chart 5: Regulatory gap...")

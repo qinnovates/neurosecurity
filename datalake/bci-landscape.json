@@ -19,30 +19,6 @@
       "employees_approx": 400,
       "security_posture": "none_published",
       "security_notes": "No public security documentation. Implantable N1 chip with 1024 electrodes and wireless BLE telemetry. FDA IDE approved May 2023. First human implant Jan 2024. ~20 participants globally as of Dec 2025 (12 confirmed by Sep 2025, 7 in UK GB-PRIME) across PRIME (US), CAN-PRIME (Canada, Nov 2024), GB-PRIME (UK, Jul 2025). PMA application filed Nov 2024. Series E $650M closed Jun 2025. FDA Emergency Use Authorization for calibration software in acute locked-in syndrome (Apr 2025). Verified 2026-03-13 via CNBC, Neurapod, Neuralink updates.",
-      "tara_attack_surface": [
-        "QIF-T0001",
-        "QIF-T0003",
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0010",
-        "QIF-T0015",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0025",
-        "QIF-T0030",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0045",
-        "QIF-T0048",
-        "QIF-T0061",
-        "QIF-T0063",
-        "QIF-T0065",
-        "QIF-T0081",
-        "QIF-T0085",
-        "QIF-T0090",
-        "QIF-T0095",
-        "QIF-T0100"
-      ],
       "devices": [
         {
           "name": "N1 Chip",
@@ -84,20 +60,6 @@
       "employees_approx": 120,
       "security_posture": "none_published",
       "security_notes": "No public security documentation. Endovascular Stentrode implanted via jugular vein. FDA pivotal trial IDE approved Jul 2023. 10 patients across US and Australia trials. First human 2019 (Melbourne, Australia); first US human Jul 2022. $200M Series D (Nov 2025) led by Double Point Ventures; IQT (In-Q-Tel, CIA/IC venture arm), Bezos Expeditions, QIA, and others participated. Next-gen transcatheter whole-brain interface in early development. AI decoding team established in NYC. Verified 2026-03-13.",
-      "tara_attack_surface": [
-        "QIF-T0001",
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0025",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0061",
-        "QIF-T0063",
-        "QIF-T0081",
-        "QIF-T0085"
-      ],
       "devices": [
         {
           "name": "Stentrode",
@@ -127,21 +89,6 @@
       "employees_approx": 60,
       "security_posture": "none_published",
       "security_notes": "No public security documentation. Utah Array is the most implanted cortical electrode in history (40+ patients since 2004). Used in BrainGate clinical trials. Tether invested $200M for majority stake (Apr 2024). MoveAgain BCI has FDA Breakthrough Device Designation. Launched Axon-R non-invasive AR-enabled BCI headset (partnership with Cognixion, May 2025).",
-      "tara_attack_surface": [
-        "QIF-T0001",
-        "QIF-T0003",
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0010",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0045",
-        "QIF-T0061",
-        "QIF-T0063",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "NeuroPort / Utah Array",
@@ -183,17 +130,6 @@
       "employees_approx": 80,
       "security_posture": "none_published",
       "security_notes": "No public security documentation. Layer 7 thin-film electrode array with 1024 channels. Minimally invasive placement (sits on cortical surface). FDA 510(k) cleared Mar 30, 2025 (K242618) — first high-density cortical BCI to receive full regulatory clearance. 37 patients as of clearance filing. Clearance covers electrode array for up to 30-day implantation.",
-      "tara_attack_surface": [
-        "QIF-T0001",
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0061",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "Layer 7 Cortical Interface",
@@ -223,18 +159,6 @@
       "employees_approx": 40,
       "security_posture": "none_published",
       "security_notes": "No public security documentation. Connexus DDI: 421 channels per cortical module, up to 4 modules (1,684 channels max). The 65,000-channel figure from early roadmaps was a long-term aspiration, not current spec. First-in-human acute recording May 14, 2025 at University of Michigan (Dr. Matthew Willsey, 20-min procedure during epilepsy surgery, device implanted and removed). FDA IDE approved Nov 2025 for Connect-One Early Feasibility Study (first IDE for speech restoration with a fully implantable BCI). Chronic clinical study planned Q1 2026. Verified 2026-03-13 via CNBC, Paradromics PR, Michigan Medicine.",
-      "tara_attack_surface": [
-        "QIF-T0001",
-        "QIF-T0003",
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0061",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "Connexus Direct Data Interface",
@@ -264,16 +188,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Research consortium (Brown, Stanford, MGH, Case Western). Uses Blackrock Utah Array. Academic research, not commercial. 15+ patients since 2004.",
-      "tara_attack_surface": [
-        "QIF-T0001",
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0061",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "BrainGate System (Utah Array)",
@@ -303,21 +217,6 @@
       "employees_approx": 80,
       "security_posture": "basic_encryption",
       "security_notes": "Consumer EEG. Claims AES-128 encryption for data transfer. Cloud platform for data storage. No formal security audit published. Chile Supreme Court ruled against Emotiv in 2023 neurodata privacy case.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0010",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0025",
-        "QIF-T0027",
-        "QIF-T0030",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0081",
-        "QIF-T0085",
-        "QIF-T0095"
-      ],
       "devices": [
         {
           "name": "EPOC X",
@@ -371,15 +270,6 @@
       "employees_approx": 30,
       "security_posture": "minimal_claims",
       "security_notes": "Consumer EEG with millions of units sold. MindWave single-channel headset. Minimal security documentation. Bluetooth LE.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0081",
-        "QIF-T0085"
-      ],
       "devices": [
         {
           "name": "MindWave Mobile 2",
@@ -409,17 +299,6 @@
       "employees_approx": 50,
       "security_posture": "basic_encryption",
       "security_notes": "Consumer meditation/sleep EEG. Claims Bluetooth encryption. Cloud platform with user accounts. No formal security audit published.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0025",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0081",
-        "QIF-T0085"
-      ],
       "devices": [
         {
           "name": "Muse 2",
@@ -431,7 +310,9 @@
           "first_human": "2018-01",
           "price_usd": 250,
           "target_use": "consumer",
-          "cves_known": ["CVE-2023-49914"]
+          "cves_known": [
+            "CVE-2023-49914"
+          ]
         },
         {
           "name": "Muse S",
@@ -461,17 +342,6 @@
       "employees_approx": 20,
       "security_posture": "open_source",
       "security_notes": "Open-source hardware and software. Community-auditable. No formal security certifications. Transparent by design.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0048",
-        "QIF-T0081",
-        "QIF-T0085"
-      ],
       "devices": [
         {
           "name": "Cyton",
@@ -525,14 +395,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Visual cortex BCI headband. Acquired by Snap 2022. Product discontinued. No security documentation was ever published.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "NextMind Dev Kit",
@@ -562,15 +424,6 @@
       "employees_approx": 50,
       "security_posture": "none_published",
       "security_notes": "Research-grade TD-fNIRS helmet. No published security documentation. Bryan Johnson invested $100M+ personally.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "Flow",
@@ -600,15 +453,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "EMG wristband reading motor neuron signals. Acquired by Meta 2019 for ~$500M-$1B. Now Meta's neural interface team. No public BCI security docs.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0081",
-        "QIF-T0085"
-      ],
       "devices": [
         {
           "name": "EMG Wristband (Meta Neural Interface)",
@@ -638,19 +482,6 @@
       "employees_approx": 40,
       "security_posture": "none_published",
       "security_notes": "Public Benefit Corporation spun out of Forest Neurotech (nonprofit FRO, est. 2023) in late 2025, publicly launched Jan 15, 2026. Co-founded by Sam Altman (OpenAI CEO), Alex Blania (Tools for Humanity CEO), Mikhail Shapiro (Caltech, HHMI), Sumner Norman (Forest Neurotech CEO), Tyson Aflalo (Forest Neurotech CSO), Sandro Herbig (Tools for Humanity). $252M seed led by OpenAI — largest BCI seed round ever. Also backed by Bain Capital, Interface Fund, Fifty Years, Gabe Newell (Valve). Core approach: functional ultrasound (fUS) imaging + genetically encoded molecular reporters (gas vesicle proteins) delivered via AAV gene therapy. ~100um spatial resolution, surface-to-deep-brain coverage claimed. No electrode penetration — ultrasound transducers sit on/near skull. Altman/OpenAI dual role has drawn conflict-of-interest scrutiny. Nature published scientific credibility assessment (2026). No device announced yet; Forest 1 (predecessor) is in NHS trial. No public security documentation. Gene therapy delivery vector (AAV) introduces novel TARA attack surface for genetic manipulation and viral vector integrity. OpenAI as investor raises AI-BCI convergence questions.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0010",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0025",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0061",
-        "QIF-T0081",
-        "QIF-T0085"
-      ],
       "devices": [
         {
           "name": "Ultrasound Neural Interface (unnamed)",
@@ -701,15 +532,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Academic research prototype. Subvocalization via jaw/face EMG. 92% word accuracy. No security analysis published.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0081",
-        "QIF-T0085"
-      ],
       "devices": [
         {
           "name": "AlterEgo Subvocalization Interface",
@@ -739,18 +561,6 @@
       "employees_approx": 15,
       "security_posture": "basic_encryption",
       "security_notes": "Claims on-device processing and encryption. SDK published. BLE communication. No formal security audit.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0010",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0025",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0081",
-        "QIF-T0085"
-      ],
       "devices": [
         {
           "name": "Crown",
@@ -780,20 +590,6 @@
       "employees_approx": 100,
       "security_posture": "minimal_claims",
       "security_notes": "Deployed EEG headbands in Chinese classrooms for attention monitoring. Major privacy concerns. Cloud data processing. Minimal security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0010",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0025",
-        "QIF-T0030",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0081",
-        "QIF-T0085",
-        "QIF-T0095"
-      ],
       "devices": [
         {
           "name": "Focus 1",
@@ -823,19 +619,6 @@
       "employees_approx": 5800,
       "security_posture": "regulatory_compliance",
       "security_notes": "Major medical device manufacturer. Subject to FDA cybersecurity requirements, IEC 62443, HIPAA. Limited public BCI-specific security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0025",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0045",
-        "QIF-T0061",
-        "QIF-T0063",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "EEG-1200 (Neurofax)",
@@ -865,22 +648,6 @@
       "employees_approx": null,
       "security_posture": "regulatory_compliance",
       "security_notes": "CRITICAL: Xltek EEG has KNOWN CVEs (CVE-2017-2853, 2867, 2868, 2869). One of the ONLY neurotech companies with publicly disclosed vulnerabilities. ICS-CERT advisories published.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0010",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0025",
-        "QIF-T0030",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0045",
-        "QIF-T0061",
-        "QIF-T0063",
-        "QIF-T0081",
-        "QIF-T0085"
-      ],
       "devices": [
         {
           "name": "Xltek EEG System",
@@ -915,18 +682,6 @@
       "employees_approx": 100,
       "security_posture": "none_published",
       "security_notes": "Research-grade EEG/BCI systems used in academic research globally. No published security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0025",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0045",
-        "QIF-T0061",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "g.USBamp",
@@ -968,15 +723,6 @@
       "employees_approx": 25,
       "security_posture": "none_published",
       "security_notes": "EEG+AR headset for ALS/cerebral palsy. No public security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "ONE Headset",
@@ -1006,15 +752,6 @@
       "employees_approx": 15,
       "security_posture": "none_published",
       "security_notes": "Surface cortical electrodes. Pre-clinical. No public security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0001",
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0041",
-        "QIF-T0061",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "Cortera Surface Array",
@@ -1045,15 +782,6 @@
       "employees_approx": 200,
       "security_posture": "none_published",
       "security_notes": "VR/AR neural rehabilitation platform. Motion capture + EEG. No public security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "MindMotion Go",
@@ -1083,17 +811,6 @@
       "employees_approx": 50,
       "security_posture": "none_published",
       "security_notes": "Graphene-based invasive BCI. Smallest neural implant. EU government-backed. World's first human graphene-based BCI procedure completed Sep 2024 (during brain tumor resection). €4M PERTE Chip grant (Spain, May 2025). Series B $50M closed Oct 2024. No public security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0001",
-        "QIF-T0003",
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0010",
-        "QIF-T0015",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0025"
-      ],
       "devices": [
         {
           "name": "Graphene Neural Probe",
@@ -1123,15 +840,6 @@
       "employees_approx": 30,
       "security_posture": "none_published",
       "security_notes": "EEG-enabled headphones for focus tracking. Consumer BCI in headphone form factor. No public security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "MW75 Neuro (with Master & Dynamic)",
@@ -1161,15 +869,6 @@
       "employees_approx": 20,
       "security_posture": "none_published",
       "security_notes": "Software platform for decoding brain signals from consumer EEG. Cloud-based neural analytics. No public security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "Arctop Neural Decode SDK",
@@ -1200,27 +899,6 @@
       "employees_approx": 150,
       "security_posture": "none_published",
       "security_notes": "Founded by Max Hodak (Neuralink co-founder/president, left 2021) and Alan Mardinly PhD (CSO, former Neuralink). Three device programs spanning retinal to cortical. PRIMA: 378-pixel subretinal photovoltaic implant, wireless NIR power, write-capable stimulation — elevated TARA attack surface for injection/manipulation. Science Eye: 8,192-pixel supra-retinal micro-LED + optogenetic gene therapy (deferred until post-PRIMA approval). Biohybrid: cortical surface interface using stem cell-derived living neurons in silicon scaffold (~90,000 microwells, early rodent PoC). NEJM published PRIMAvera pivotal results Oct 2025 (DOI: 10.1056/NEJMoa2501396). CE mark + FDA submissions June 2025. IQT (CIA/IC venture arm) participated in Series C — national security implications noted. No public security documentation for any device program.",
-      "tara_attack_surface": [
-        "QIF-T0001",
-        "QIF-T0003",
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0010",
-        "QIF-T0015",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0025",
-        "QIF-T0030",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0045",
-        "QIF-T0048",
-        "QIF-T0061",
-        "QIF-T0063",
-        "QIF-T0065",
-        "QIF-T0081",
-        "QIF-T0085"
-      ],
       "devices": [
         {
           "name": "PRIMA Retinal Implant",
@@ -1299,7 +977,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Invasive cortical visual prosthesis with 60-electrode subdural occipital grid. Write-capable stimulation device with no published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Orion Visual Cortex Prosthesis",
@@ -1329,7 +1006,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Acquired by Science Corporation April 2024. PRIMA IP transferred. No published security documentation prior to acquisition.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "PRIMA Subretinal Implant",
@@ -1359,7 +1035,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "AAV optogenetic gene therapy with light goggles for vision restoration. Novel modality combining gene therapy and external light device. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "GS030 Optogenetic Vision Restoration",
@@ -1389,7 +1064,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Wireless inductive subretinal microchip. Wireless power transfer creates RF attack surface. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "NR600 Retinal Implant",
@@ -1419,7 +1093,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Inhalable nanoparticles magnetically steered to brain regions. Novel delivery mechanism with unique biosecurity implications. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Nanoparticle BCI Platform",
@@ -1449,7 +1122,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "DOT miniature wireless cortical microstimulator for depression. Write-capable implant with wireless interface. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "DOT Microstimulator",
@@ -1479,7 +1151,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Ultra-soft compliant polymer neural implant. FDA Breakthrough Device designation. Novel materials approach. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Soft Neural Implant Array",
@@ -1509,7 +1180,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Low-intensity focused ultrasound (LIFU) with genetic sensitization. Write-capable neuromodulation via ultrasound. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Forest 1 Ultrasound BCI",
@@ -1540,7 +1210,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Fully implantable wireless closed-loop BCI. First human implant July 2025. Bidirectional read/write with wireless telemetry. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Brain Interchange System",
@@ -1570,7 +1239,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Closed-loop adaptive DBS with BrainSense technology. FDA approved Feb 2025. Public company (NYSE:MDT). Major medical device manufacturer with no BCI-specific published security posture.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "BrainSense Adaptive DBS",
@@ -1600,7 +1268,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Closed-loop DBS with remote programming capability. FDA approved Jan 2024. Public company (NYSE:ABT). Remote programming introduces network attack surface. No BCI-specific published security posture.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Liberta RC DBS",
@@ -1630,7 +1297,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Directional-lead DBS with 16-contact electrode. Public company (NYSE:BSX). No BCI-specific published security posture.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Vercise Genus DBS",
@@ -1660,7 +1326,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Closed-loop SCS with ECAP (evoked compound action potential) feedback control. First objective closed-loop pain management. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Evoke SCS System",
@@ -1690,7 +1355,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Implanted splenic nerve stimulation for rheumatoid arthritis. GSK (55%) + Verily (45%) joint venture. £540M GBP (~$715M USD at 2016 rate) committed over 7 years, contingent on milestone achievement. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Splenic Neuromodulation for RA",
@@ -1720,7 +1384,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "ARC-BCI system combining WIMAGINE cortical implant with epidural spinal cord stimulation. FDA Breakthrough Device. Dual-implant architecture with wireless cortical recording. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "ARC-BCI System",
@@ -1750,7 +1413,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Flexible intracortical electrode with implanted battery. 54 human implants by early 2026. Fully implanted system with no published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Fully Implanted BCI Chip",
@@ -1780,7 +1442,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "EEG-based BCI and ECoG research systems. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "EEG/BCI Research Systems",
@@ -1810,7 +1471,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Flexible high-throughput intracortical electrodes. HongShan Capital backed. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Flexible Neural Electrode Array",
@@ -1840,7 +1500,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Deep TMS with H-coil technology. Public company (NASDAQ+TASE). 100K+ patients treated, 3 FDA indications. Write-capable neuromodulation with no BCI-specific published security posture.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Deep TMS System",
@@ -1870,7 +1529,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Intraoperative MER with ML-assisted DBS targeting. First FDA/CE cleared ML algorithm for DBS electrode placement. ML decision-making in neurosurgery with no published security posture.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "NeuroOmega System + HaGuide ML",
@@ -1900,7 +1558,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Multichannel HD-tDCS and EEG platform (Starstim/Enobio). Combined read (EEG) and write (tCS) capability. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Starstim tCS+EEG Platform",
@@ -1930,7 +1587,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "At-home tDCS headset with app-guided CBT. FDA approved Dec 2025. Consumer device with app connectivity. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Flow tDCS Headset",
@@ -1960,7 +1616,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Low-intensity focused ultrasound (LIFU) platform. Founded by Mary Lou Jepsen. Write-capable neuromodulation via ultrasound. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Open-LIFU 2.0",
@@ -1990,7 +1645,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "HD-tDCS, tACS, and tRNS neurostimulation systems. Write-capable multi-modality stimulation. No published security documentation.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Depression LTE System",
@@ -2020,25 +1674,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "RNS System is a read-write closed-loop cortical BCI — continuously reads ECoG and delivers responsive stimulation. FDA PMA approved Nov 2013 (P100026) for drug-resistant focal epilepsy. Commercially deployed with thousands of patients — the most mature closed-loop BCI in clinical use. FDA Breakthrough Device Designation for idiopathic generalized epilepsy expansion. Direct TARA attack surface: closed-loop read-write device with stimulation capability. No public security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0001",
-        "QIF-T0003",
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0010",
-        "QIF-T0015",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0025",
-        "QIF-T0030",
-        "QIF-T0041",
-        "QIF-T0043",
-        "QIF-T0045",
-        "QIF-T0061",
-        "QIF-T0063",
-        "QIF-T0081",
-        "QIF-T0085"
-      ],
       "devices": [
         {
           "name": "RNS System",
@@ -2069,14 +1704,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "VNS Therapy is the longest-deployed neurostimulation system in history. 100,000+ patients implanted since FDA approval in 1997. Semi-invasive: pulse generator implanted in chest, lead wrapped around left vagus nerve. Approved for epilepsy (1997) and treatment-resistant depression (2005). Nasdaq: LIVN (public company, formed from Sorin Group + Cyberonics merger 2015). No public security documentation. Peripheral nerve modality — distinct TARA attack surface from cortical devices.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0041",
-        "QIF-T0061",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "VNS Therapy System",
@@ -2107,13 +1734,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "MIT spinout. Sensory gamma entrainment (40Hz visual + auditory stimulation) for Alzheimer's disease. $105M Series C (Mar 2026). HOPE Study: largest medical device trial focused solely on Alzheimer's (70 sites, randomized, sham-controlled). Non-invasive neuromodulation via entrainment — consumer-adjacent attack surface. No public security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0041",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "Spectris",
@@ -2144,16 +1764,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Minimally invasive cortical implant for treatment-resistant depression. Electrodes placed in skull bone, not penetrating cortex — novel minimally invasive category between EEG and deep cortical implants. FDA Early Feasibility Study completed Nov 2025, all safety/feasibility endpoints met. Proceeding to pivotal trial (US + Australia). Psychiatric indication raises distinct neuroethics considerations for TARA coverage of psychiatric targeting. No public security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0001",
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0061",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "Cortical Implant for Depression",
@@ -2184,13 +1794,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Stanford spinout. SAINT Neuromodulation System (accelerated TMS with fMRI-guided individualized targeting). FDA 510(k) cleared Sep 2022 (K220177). Breakthrough Device Designation. Commercial launch Apr 2024. $64M venture round Mar 2025 + $23.7M Series B-II May 2025. Precision targeting via fMRI raises distinct threat considerations (session manipulation, targeting drift). No public security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0041",
-        "QIF-T0081"
-      ],
       "devices": [
         {
           "name": "SAINT Neuromodulation System",
@@ -2221,16 +1824,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Software layer on top of implanted DBS devices. StrivePD is FDA-cleared 510(k) software integrating Apple Watch data with Medtronic Percept PC DBS neural sensing data. Represents the neural data pipeline/exfiltration TARA attack surface — not the implant itself, but the data pathway from implant to cloud. $12M Series A (Jan 2024, Nexus NeuroTech lead). No public security documentation.",
-      "tara_attack_surface": [
-        "QIF-T0005",
-        "QIF-T0008",
-        "QIF-T0021",
-        "QIF-T0023",
-        "QIF-T0041",
-        "QIF-T0061",
-        "QIF-T0081",
-        "QIF-T0085"
-      ],
       "devices": [
         {
           "name": "StrivePD",
@@ -2262,7 +1855,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "EMG silent-speech wearable patent (US12,482,449) issued 2025-11-25 to Garg/Kothari/Leonardo. No commercial hardware; current product is Flow iOS keyboard. Verified 2026-04-29.",
-      "tara_attack_surface": [],
       "devices": [],
       "company_category": "early_stage"
     },
@@ -2280,7 +1872,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Wearable optically-pumped magnetometer (20-OPM) headphone for silent-speech recognition. 86% per-user on 12-command vocabulary; necklace form factor also demoed. bioRxiv 2025.08.04.668236 (preprint 2025-08-05). Verified 2026-04-29.",
-      "tara_attack_surface": [],
       "devices": [],
       "company_category": "early_stage"
     },
@@ -2298,7 +1889,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Heterogeneous-electrode silent-speech decoding (arXiv:2506.13835, Interspeech 2025). 95.3% on healthy / 54.5% on speech-impaired participant. Authors Inoue, Sato, Tomeoka et al. Verified 2026-04-29.",
-      "tara_attack_surface": [],
       "devices": [],
       "company_category": "research"
     },
@@ -2316,7 +1906,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "FDA 510(k) cleared 2026-01 for Naox Link (NX01) — first FDA-cleared in-ear EEG device. Single-channel; indicated age 6+ for epilepsy/sleep monitoring. K-number not publicly disclosed in coverage. Verified 2026-04-29.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "Naox Link (NX01)",
@@ -2347,7 +1936,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Launched IDUN Guardian 4 (2026-03-08): in-ear EEG earbud with Dryode ear-tip sensors, ADI biopotential front-end, Qualcomm Snapdragon S7. Jaw-clench detection demonstrated on-device at CES 2026. Developer presale; consumer CE/FCC certification planned Q2 2026. Verified 2026-04-29.",
-      "tara_attack_surface": [],
       "devices": [
         {
           "name": "IDUN Guardian 4",
@@ -2378,7 +1966,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Wearable OPM-MEG systems. Selected by Epilepsy Research Institute and University of Nottingham for £1.5M Innovate UK NHS adoption pathway (started 2025-09). Verified 2026-04-29.",
-      "tara_attack_surface": [],
       "devices": [],
       "company_category": "early_stage"
     },
@@ -2396,7 +1983,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Joint with OpenBCI: Galea Neon — wireless all-in-one EEG/EOG/EMG/EDA/PPG + eye tracking headset (shipping 2025-10). Verified 2026-04-29.",
-      "tara_attack_surface": [],
       "devices": [],
       "company_category": "early_stage"
     },
@@ -2414,7 +2000,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "Successor to AlterEgo MIT research (US10,878,818). Subvocal/silent-speech wearable, sEMG-based. Founders Arnav Kapur, Max Newlon. Distinct from existing 'AlterEgo (MIT Media Lab)' research entry. Verified 2026-04-29.",
-      "tara_attack_surface": [],
       "devices": [],
       "company_category": "early_stage"
     },
@@ -2432,7 +2017,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "fNIRS research-systems vendor. Merged operationally with Artinis under Gilde Healthcare 2025-07-08. Verified 2026-04-29.",
-      "tara_attack_surface": [],
       "devices": [],
       "company_category": "established"
     },
@@ -2450,7 +2034,6 @@
       "employees_approx": null,
       "security_posture": "none_published",
       "security_notes": "fNIRS research-systems vendor. iMotions × Artinis software integration partnership 2025-06-25. Brite Ultra hyperscanning fNIRS (claim: up to 30 simultaneous participants) — claim not directly verified. Verified 2026-04-29.",
-      "tara_attack_surface": [],
       "devices": [],
       "company_category": "established"
     }

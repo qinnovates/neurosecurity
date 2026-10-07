@@ -12,6 +12,7 @@
  */
 
 import { useState, useMemo, useCallback, useEffect, type CSSProperties } from 'react';
+import type { ReactElement } from 'react';
 import NTSSGauge, { computeNTSS } from './NTSSGauge';
 
 // ── Types ──────────────────────────────────────────────────────────────
@@ -560,7 +561,7 @@ export default function DemoAtlas({ techniques, devices, eegSamples, stats, cond
 
   // ── Main Render ────────────────────────────────────────────────────
 
-  const panels: Record<View, () => JSX.Element> = {
+  const panels: Record<View, () => ReactElement> = {
     'hub': renderHub,
     'devices': renderDevicePicker,
     'device-profile': renderDeviceProfile,

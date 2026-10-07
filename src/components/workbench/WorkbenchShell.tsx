@@ -1,4 +1,5 @@
 import { Suspense, lazy, useEffect, useMemo, useState } from 'react';
+import ModeErrorBoundary from './ModeErrorBoundary';
 import type { EngineData } from '@/lib/threat-model/catalog-types';
 import type { ReferenceData } from '@/lib/threat-model/reference-data-types';
 import { FocusProvider, useFocus } from './FocusContext';
@@ -98,9 +99,11 @@ export default function WorkbenchShell({ engineData, referenceData }: Props) {
         <FocusBar />
         {activeMode !== undefined && <p className="workbench-question tm-no-print">{activeMode.question}</p>}
         <ModeViews modeId={route.modeId} activeViewId={route.viewId} onSelectView={selectView}>
-          <Suspense fallback={<p className="workbench-question" role="status">Loading…</p>}>
-            {ActiveComponent !== undefined && <ActiveComponent onOpenMode={openMode} />}
-          </Suspense>
+          <ModeErrorBoundary key={route.modeId} modeLabel={activeMode?.label ?? 'This mode'}>
+            <Suspense fallback={<p className="workbench-question" role="status">Loading…</p>}>
+              {ActiveComponent !== undefined && <ActiveComponent onOpenMode={openMode} />}
+            </Suspense>
+          </ModeErrorBoundary>
         </ModeViews>
       </div>
     </FocusProvider>
