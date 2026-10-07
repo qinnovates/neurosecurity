@@ -1,0 +1,162 @@
+{
+  "version": "1",
+  "jurisdiction": "US",
+  "status": "Authored checklist, not legal advice. Each requirement quotes its source. Not reviewed by a regulatory professional.",
+  "sources": [
+    {
+      "id": "fdca-524b",
+      "title": "Federal Food, Drug, and Cosmetic Act, section 524B (21 U.S.C. 360n-2), Ensuring cybersecurity of devices",
+      "url": "https://www.law.cornell.edu/uscode/text/21/360n-2",
+      "dateRead": "2026-10-06"
+    },
+    {
+      "id": "fda-premarket-2026",
+      "title": "FDA guidance: Cybersecurity in Medical Devices: Quality Management System Considerations and Content of Premarket Submissions (issued February 3, 2026; GUI00001825)",
+      "url": "https://www.fda.gov/media/119933/download",
+      "dateRead": "2026-10-06"
+    }
+  ],
+  "marketingSubmissionTypes": ["510k", "de_novo", "pma", "hde", "pdp"],
+  "scope": {
+    "sourceId": "fda-premarket-2026",
+    "quote": "a person, including a manufacturer, who submits a premarket application or submission under any of the following pathways—510(k), PMA, PDP, De Novo, or HDE—for a device that meets the definition of a “cyber device,” as defined in section 524B(c), is required to include such information as FDA may require"
+  },
+  "internetCapableMedia": {
+    "media": ["inductive", "proprietary_rf", "bluetooth_le", "nfc", "usb", "wifi", "cellular", "internet"],
+    "sourceId": "fda-premarket-2026",
+    "quote": "FDA considers devices that include any of the following features to have the ability to connect to the internet. The list below is illustrative, not exhaustive: Network, server, or Cloud Service Provider connections; Radio-frequency communications (e.g., Wi-Fi, cellular, Bluetooth, Bluetooth Low Energy); Magnetic inductive communications; and Hardware connectors capable of connecting to the internet (e.g., USB, ethernet",
+    "note": "Mapping the tool's link types onto FDA's list is this tool's own reading. NFC and proprietary RF are treated as radio-frequency communications."
+  },
+  "requirements": [
+    {
+      "id": "US-524B-B1",
+      "title": "Postmarket vulnerability plan, including coordinated disclosure",
+      "sourceId": "fdca-524b",
+      "force": "statutory",
+      "appliesTo": "marketing",
+      "evidence": "user_must_supply",
+      "suggestedFix": "Write the plan for monitoring, identifying, and addressing vulnerabilities after market entry, with a coordinated vulnerability disclosure procedure. This tool does not produce it.",
+      "quote": "submit to the Secretary a plan to monitor, identify, and address, as appropriate, in a reasonable time, postmarket cybersecurity vulnerabilities and exploits, including coordinated vulnerability disclosure and related procedures"
+    },
+    {
+      "id": "US-524B-B2",
+      "title": "Processes and procedures giving reasonable assurance the device is cybersecure",
+      "sourceId": "fdca-524b",
+      "force": "statutory",
+      "appliesTo": "marketing",
+      "evidence": "user_must_supply",
+      "suggestedFix": "Document the secure development processes and the update and patch process. The risk register here can feed that documentation but does not replace it.",
+      "quote": "design, develop, and maintain processes and procedures to provide a reasonable assurance that the device and related systems are cybersecure"
+    },
+    {
+      "id": "US-524B-B3",
+      "title": "Software bill of materials",
+      "sourceId": "fdca-524b",
+      "force": "statutory",
+      "appliesTo": "marketing",
+      "evidence": "user_must_supply",
+      "suggestedFix": "Generate a software bill of materials covering commercial, open-source, and off-the-shelf components. This tool does not read or produce one.",
+      "quote": "provide to the Secretary a software bill of materials, including commercial, open-source, and off-the-shelf software components"
+    },
+    {
+      "id": "US-FDA-THREAT-MODEL",
+      "title": "Threat modeling documentation",
+      "sourceId": "fda-premarket-2026",
+      "force": "guidance",
+      "appliesTo": "marketing",
+      "evidence": "draft_in_this_report",
+      "suggestedFix": "Use the matched techniques, baseline threats, and risk register in this report as a first draft. Have a qualified reviewer complete and sign it.",
+      "quote": "FDA recommends that premarket submissions include threat modeling documentation to demonstrate how the medical device system has been analyzed to identify potential security risks that could impact safety and effectiveness."
+    },
+    {
+      "id": "US-FDA-METHOD-RATIONALE",
+      "title": "Rationale for the threat modeling method",
+      "sourceId": "fda-premarket-2026",
+      "force": "guidance",
+      "appliesTo": "marketing",
+      "evidence": "draft_in_this_report",
+      "suggestedFix": "The method section of this report states the method used. Adapt it and say why it suits your device.",
+      "quote": "Rationale for the methodology(ies) selected should be provided with the threat modeling documentation."
+    },
+    {
+      "id": "US-FDA-ASSUMPTIONS",
+      "title": "Stated assumptions about the system and environment of use",
+      "sourceId": "fda-premarket-2026",
+      "force": "guidance",
+      "appliesTo": "marketing",
+      "evidence": "user_must_supply",
+      "suggestedFix": "List your assumptions about the environment of use, for example that networks the device touches are hostile. The tool cannot know them.",
+      "quote": "State any assumptions about the medical device system or environment of use"
+    },
+    {
+      "id": "US-FDA-EXPLOITABILITY",
+      "title": "Risk assessment based on exploitability",
+      "sourceId": "fda-premarket-2026",
+      "force": "guidance",
+      "appliesTo": "marketing",
+      "evidence": "draft_in_this_report",
+      "suggestedFix": "The register lists a CVSS base vector where the catalog has one. Rows marked not scored need an exploitability assessment from you.",
+      "quote": "security risk assessment processes focus on exploitability, or the ability to exploit vulnerabilities present within a device and/or system."
+    },
+    {
+      "id": "US-FDA-ARCHITECTURE-VIEWS",
+      "title": "Four security architecture views, with diagrams and explanatory text",
+      "sourceId": "fda-premarket-2026",
+      "force": "guidance",
+      "appliesTo": "marketing",
+      "evidence": "draft_in_this_report",
+      "suggestedFix": "The four views in this report are drafts drawn from your answers. Add the detail FDA's Appendix 2 asks for, and explanatory text for each.",
+      "quote": "FDA recommends providing, at minimum, the following types of views in premarket submissions: Global System View; Multi-Patient Harm View; Updateability/Patchability View; and Security Use Case View(s)."
+    },
+    {
+      "id": "US-FDA-IDE-CONSENT",
+      "title": "Cybersecurity risks in the informed consent form",
+      "sourceId": "fda-premarket-2026",
+      "force": "guidance",
+      "appliesTo": "ide",
+      "evidence": "user_must_supply",
+      "suggestedFix": "Add the device's cybersecurity risks to the informed consent form.",
+      "quote": "Inclusion of cybersecurity risks as part of informed consent form (21 CFR 50.25(a)(2) and 21 CFR 812.25(g));"
+    },
+    {
+      "id": "US-FDA-IDE-VIEWS",
+      "title": "Global, multi-patient, and updateability views",
+      "sourceId": "fda-premarket-2026",
+      "force": "guidance",
+      "appliesTo": "ide",
+      "evidence": "draft_in_this_report",
+      "suggestedFix": "Use the three views in this report as drafts and complete them for the investigational plan.",
+      "quote": "Global, multi-patient and updateability/patchability views (21 CFR 812.25(c), (d));"
+    },
+    {
+      "id": "US-FDA-IDE-USE-CASE-VIEWS",
+      "title": "Security use case views for functions with safety risks",
+      "sourceId": "fda-premarket-2026",
+      "force": "guidance",
+      "appliesTo": "ide",
+      "evidence": "draft_in_this_report",
+      "suggestedFix": "Use the security use case view in this report as a draft for safety-relevant functions such as implant programming.",
+      "quote": "Security use case views for functionality with safety risks (e.g., implant programming) (21 CFR 812.25(c), (d));"
+    },
+    {
+      "id": "US-FDA-IDE-SBOM",
+      "title": "Software bill of materials",
+      "sourceId": "fda-premarket-2026",
+      "force": "guidance",
+      "appliesTo": "ide",
+      "evidence": "user_must_supply",
+      "suggestedFix": "Generate a software bill of materials for the investigational device. This tool does not read or produce one.",
+      "quote": "Software Bill of Materials (21 CFR 812.25(c), (d)); and"
+    },
+    {
+      "id": "US-FDA-IDE-LABELING",
+      "title": "General labeling on connectivity, cybersecurity risks, and updates",
+      "sourceId": "fda-premarket-2026",
+      "force": "guidance",
+      "appliesTo": "ide",
+      "evidence": "user_must_supply",
+      "suggestedFix": "Describe the device's connectivity, its general cybersecurity risks, and how it is updated in the labeling.",
+      "quote": "General labeling – connectivity and associated general cybersecurity risks, updateability/process (21 CFR 812.25(f))."
+    }
+  ]
+}

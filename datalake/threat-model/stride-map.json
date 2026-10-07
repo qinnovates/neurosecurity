@@ -1,0 +1,28 @@
+{
+  "version": "1",
+  "status": "Authored, unreviewed. STRIDE per element follows the standard data-flow-diagram convention. The mapping from catalog tactics and modes to STRIDE categories is this tool's own analysis.",
+  "strideByComponentKind": {
+    "implant": ["spoofing", "tampering", "repudiation", "information_disclosure", "denial_of_service", "elevation_of_privilege"],
+    "headset": ["spoofing", "tampering", "repudiation", "information_disclosure", "denial_of_service", "elevation_of_privilege"],
+    "wearable_processor": ["spoofing", "tampering", "repudiation", "information_disclosure", "denial_of_service", "elevation_of_privilege"],
+    "clinician_programmer": ["spoofing", "tampering", "repudiation", "information_disclosure", "denial_of_service", "elevation_of_privilege"],
+    "patient_app": ["spoofing", "tampering", "repudiation", "information_disclosure", "denial_of_service", "elevation_of_privilege"],
+    "cloud_service": ["spoofing", "tampering", "repudiation", "information_disclosure", "denial_of_service", "elevation_of_privilege"],
+    "charger": ["spoofing", "tampering", "denial_of_service"]
+  },
+  "strideForLink": ["tampering", "information_disclosure", "denial_of_service"],
+  "strideByMode": {
+    "R": ["information_disclosure"],
+    "M": ["tampering"],
+    "D": ["denial_of_service"]
+  },
+  "strideByTactic": {
+    "QIF-B.IN": ["spoofing", "elevation_of_privilege"],
+    "QIF-B.EV": ["repudiation"],
+    "QIF-M.SV": ["tampering"],
+    "QIF-D.HV": ["information_disclosure"],
+    "QIF-S.HV": ["information_disclosure"],
+    "QIF-S.FP": ["information_disclosure"],
+    "QIF-S.SC": ["information_disclosure"]
+  }
+}

@@ -7,7 +7,14 @@ interface Props {
 
 const { current } = Astro.props;
 
-const tabs = [
+interface AtlasTab {
+  label: string;
+  href: string;
+  /** The target page has its own layout without the client router, so it needs a full page load. */
+  needsFullPageLoad?: boolean;
+}
+
+const tabs: AtlasTab[] = [
   { label: 'Hub', href: '/atlas/' },
   { label: 'Catalog', href: '/atlas/tara/' },
   { label: 'Scoring', href: '/atlas/scoring/' },
@@ -16,6 +23,7 @@ const tabs = [
   { label: 'Explorer', href: '/atlas/explorer/' },
   { label: 'Devices', href: '/atlas/device-filter/' },
   { label: 'Chains', href: '/atlas/chains/' },
+  { label: 'Model', href: '/atlas/model/', needsFullPageLoad: true },
   { label: 'NeuroSIM', href: '/atlas/neurosim/' },
 ];
 
@@ -45,6 +53,7 @@ function isActive(href: string, currentPath: string): boolean {
                 active ? 'atlas-tab--active' : 'atlas-tab--inactive',
               ]}
               aria-current={active ? 'page' : undefined}
+              data-astro-reload={tab.needsFullPageLoad}
             >
               {tab.label}
             </a>

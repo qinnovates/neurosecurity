@@ -28,7 +28,7 @@ const EXAMPLE_QUERIES = [
   },
   {
     label: 'Top BCI companies',
-    sql: 'SELECT company, device_count, tara_attack_surface FROM companies ORDER BY device_count DESC LIMIT 10',
+    sql: 'SELECT company, device_count FROM companies ORDER BY device_count DESC LIMIT 10',
   },
   {
     label: 'High-impact chains',

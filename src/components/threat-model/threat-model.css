@@ -1,0 +1,147 @@
+/* Styles for the threat model page. Colours come from the site's theme variables. */
+
+.tm-root { color: var(--color-text-primary); font-family: var(--font-sans, system-ui, sans-serif); }
+.tm-grid { display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); align-items: start; }
+@media (max-width: 960px) { .tm-grid { grid-template-columns: minmax(0, 1fr); } }
+
+.tm-card { background: var(--color-glass-bg); border: 1px solid var(--color-glass-border); border-radius: 0.75rem; padding: 1rem 1.125rem; }
+.tm-card + .tm-card { margin-top: 1rem; }
+.tm-heading { font-size: 1rem; font-weight: 700; margin: 0 0 0.75rem; }
+.tm-subheading { font-size: 0.875rem; font-weight: 700; margin: 1rem 0 0.375rem; }
+.tm-muted { color: var(--color-text-muted); font-size: 0.8125rem; line-height: 1.45; }
+.tm-small { font-size: 0.75rem; }
+
+.tm-field { display: block; margin-bottom: 0.875rem; }
+.tm-label { display: block; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 0.3125rem; }
+.tm-input, .tm-select { width: 100%; padding: 0.5rem 0.625rem; font-size: 0.875rem; color: inherit; background: var(--color-bg-surface); border: 1px solid var(--color-border); border-radius: 0.5rem; }
+.tm-input:focus-visible, .tm-select:focus-visible, .tm-button:focus-visible, .tm-tab:focus-visible, .tm-node:focus-visible, .tm-edge:focus-visible { outline: 2px solid var(--color-accent-primary); outline-offset: 2px; }
+.tm-checklist { max-height: 11rem; overflow-y: auto; border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.375rem 0.5rem; }
+.tm-check { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; padding: 0.1875rem 0; }
+
+.tm-button { padding: 0.4375rem 0.75rem; font-size: 0.8125rem; font-weight: 600; color: inherit; background: var(--color-bg-surface); border: 1px solid var(--color-border); border-radius: 0.5rem; cursor: pointer; }
+.tm-button:hover { border-color: var(--color-accent-primary); }
+.tm-button--primary { background: var(--color-accent-primary); border-color: var(--color-accent-primary); color: #fff; }
+.tm-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+.tm-tabs { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-bottom: 1rem; }
+.tm-tab { padding: 0.375rem 0.75rem; font-size: 0.8125rem; font-weight: 600; color: var(--color-text-muted); background: var(--color-glass-bg); border: 1px solid var(--color-glass-border); border-radius: 999px; cursor: pointer; }
+.tm-tab[aria-selected="true"], .tm-tab[aria-pressed="true"] { background: var(--color-accent-primary); border-color: var(--color-accent-primary); color: #fff; }
+[role="tabpanel"]:focus-visible { outline: 2px solid var(--color-accent-primary); outline-offset: 4px; border-radius: 0.5rem; }
+
+.tm-badge { display: inline-block; padding: 0.0625rem 0.4375rem; font-size: 0.6875rem; font-weight: 700; border-radius: 999px; border: 1px solid var(--color-border); white-space: nowrap; }
+.tm-badge--critical { color: var(--color-severity-critical); border-color: var(--color-severity-critical); }
+.tm-badge--high { color: var(--color-severity-high); border-color: var(--color-severity-high); }
+.tm-badge--medium { color: var(--color-severity-medium); border-color: var(--color-severity-medium); }
+.tm-badge--low { color: var(--color-severity-low); border-color: var(--color-severity-low); }
+.tm-badge--generated { color: var(--color-accent-primary); border-color: var(--color-accent-primary); }
+.tm-badge--warning { color: var(--color-severity-high); border-color: var(--color-severity-high); }
+
+.tm-table-wrap { overflow-x: auto; }
+.tm-table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+.tm-table th { text-align: left; font-size: 0.6875rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text-muted); padding: 0.375rem 0.5rem; border-bottom: 1px solid var(--color-border); white-space: nowrap; }
+.tm-table td { padding: 0.4375rem 0.5rem; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+.tm-mono { font-family: var(--font-mono, ui-monospace, monospace); font-size: 0.75rem; word-break: break-all; }
+.tm-row--addressed { opacity: 0.55; }
+
+.tm-diagram { width: 100%; height: auto; max-height: 30rem; }
+.tm-zone { fill: var(--color-bg-surface); stroke: var(--color-border); stroke-dasharray: 5 4; }
+.tm-zone-label { fill: var(--color-text-muted); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.tm-node { cursor: pointer; }
+.tm-node rect { fill: var(--color-bg-elevated, var(--color-bg-surface)); stroke: var(--color-border-hover, var(--color-border)); stroke-width: 1.5; }
+.tm-node text { fill: var(--color-text-primary); font-size: 13px; font-weight: 600; }
+.tm-node--interface rect { stroke: var(--color-accent-primary); stroke-width: 2.5; }
+.tm-node--selected rect { stroke: var(--color-accent-primary); stroke-width: 3; }
+.tm-edge { cursor: pointer; }
+.tm-edge path { stroke: var(--color-text-muted); stroke-width: 2; fill: none; }
+.tm-edge--selected path { stroke: var(--color-accent-primary); stroke-width: 3.5; }
+.tm-edge text { fill: var(--color-text-muted); font-size: 12px; paint-order: stroke; stroke: var(--color-bg-surface); stroke-width: 4px; }
+.tm-dimmed { opacity: 0.22; }
+.tm-heat circle { fill: var(--color-severity-high); }
+.tm-heat text, .tm-step text { fill: #fff; font-size: 10px; font-weight: 700; }
+.tm-step circle { fill: var(--color-accent-primary); }
+@media (prefers-reduced-motion: no-preference) {
+  .tm-node, .tm-edge { transition: opacity 180ms ease; }
+}
+
+.tm-notice { border-left: 3px solid var(--color-severity-high); padding: 0.5rem 0.75rem; margin: 0.75rem 0; background: var(--color-bg-surface); font-size: 0.8125rem; }
+.tm-quote { border-left: 3px solid var(--color-border); padding-left: 0.625rem; margin: 0.375rem 0; font-size: 0.8125rem; color: var(--color-text-muted); }
+.tm-list { margin: 0.25rem 0 0; padding-left: 1.125rem; font-size: 0.8125rem; line-height: 1.5; }
+.tm-error { color: var(--color-severity-critical); font-size: 0.8125rem; margin-top: 0.5rem; }
+.tm-print-only { display: none; }
+
+@media print {
+  .tm-no-print { display: none !important; }
+  .tm-print-only { display: block; }
+  .tm-grid { display: block; }
+  .tm-card { border: 1px solid #999; break-inside: avoid; background: #fff; color: #000; }
+  .tm-root, .tm-muted, .tm-table th { color: #000; }
+  .tm-diagram { max-height: none; }
+  .tm-row--addressed { opacity: 1; }
+  .tm-section { break-before: auto; margin-top: 1rem; }
+}
+
+textarea.tm-input { resize: vertical; }
+
+/* Motion. Each effect carries one meaning: flow = something travels this connection,
+   pulse = open risks here, trace = the order of steps in a chain. */
+.tm-flow { stroke: var(--color-accent-primary) !important; stroke-width: 2.5 !important; stroke-dasharray: 3 13; stroke-linecap: round; animation: tm-flow var(--motion-flow, 2.4s) linear infinite; pointer-events: none; }
+@keyframes tm-flow { to { stroke-dashoffset: -64; } }
+.tm-heat circle { transform-box: fill-box; transform-origin: center; animation: tm-pulse 2.2s var(--motion-ease, ease) infinite; }
+@keyframes tm-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.22); } }
+.tm-step { opacity: 0; animation: tm-trace 420ms var(--motion-ease, ease) forwards; }
+@keyframes tm-trace { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .tm-flow, .tm-heat circle { animation: none; }
+  .tm-step { animation: none; opacity: 1; }
+}
+@media print { .tm-flow { display: none; } .tm-step { animation: none; opacity: 1; } }
+
+.explore-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); }
+.explore-card { margin-top: 0 !important; display: flex; flex-direction: column; }
+.explore-card .tm-button { margin-top: auto; align-self: flex-start; }
+
+/* The device spine and its lenses stay on screen while the sections below them scroll. */
+.tm-pinned { position: sticky; top: 0; z-index: 5; background: var(--color-bg-primary); padding: 0.5rem 0 0.125rem; border-bottom: 1px solid var(--color-glass-border); margin-bottom: 0.75rem; }
+.tm-spine .tm-diagram { max-height: 9rem; }
+.tm-spine-bar { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.5rem; }
+.tm-spine-bar .tm-tabs { margin-bottom: 0; }
+.tm-spine-toggle { flex: none; }
+.tm-spine .tm-card { padding: 0.5rem 1rem; margin-bottom: 0; }
+.tm-pinned .tm-tabs { margin-bottom: 0.375rem; }
+.tm-spine-detail { margin-top: 0.5rem; font-size: 0.8125rem; }
+.tm-spine-detail > summary { cursor: pointer; font-weight: 600; padding: 0.25rem 0; }
+/* A short or narrow window has no room to give up to a pinned panel. */
+@media (max-width: 960px), (max-height: 760px) { .tm-pinned { position: static; border-bottom: 0; } }
+
+.tm-lensbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; margin: 0.625rem 0 0.5rem; }
+.tm-lens { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; }
+.tm-lens-label { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text-muted); }
+.tm-lens-button { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.3125rem 0.6875rem; font-size: 0.8125rem; font-weight: 600; color: var(--color-text-primary); background: var(--color-glass-bg); border: 1px solid var(--color-glass-border); border-radius: 999px; cursor: pointer; transition: border-color var(--motion-quick, 160ms) var(--motion-ease, ease), background var(--motion-quick, 160ms) var(--motion-ease, ease), transform var(--motion-quick, 160ms) var(--motion-ease, ease); }
+.tm-lens-button:hover { border-color: var(--color-accent-primary); transform: translateY(-1px); }
+.tm-lens-button[aria-pressed="true"] { background: var(--color-accent-primary); border-color: var(--color-accent-primary); color: #fff; }
+.tm-lens-button:focus-visible { outline: 2px solid var(--color-accent-primary); outline-offset: 2px; }
+.tm-count { display: inline-block; min-width: 1.5ch; font-variant-numeric: tabular-nums; font-weight: 800; }
+
+/* Rows settle into place when a lens changes what is shown. */
+.tm-table tbody tr { animation: tm-row-in 260ms var(--motion-ease, ease) both; }
+@keyframes tm-row-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .tm-table tbody tr { animation: none; } .tm-lens-button:hover { transform: none; } }
+@media print { .tm-table tbody tr { animation: none; } }
+
+/* Target regions: the neural interface's own detail, shown while that part is selected. */
+.tm-regions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1rem 1.5rem; animation: tm-row-in 320ms var(--motion-ease, ease) both; }
+.tm-regions-text { flex: 1 1 18rem; min-width: 0; }
+.tm-regions-map { flex: 0 1 18rem; width: 18rem; max-width: 100%; height: auto; }
+.tm-regions-list { list-style: none; margin: 0.625rem 0; padding: 0; display: grid; gap: 0.375rem; }
+.tm-regions-list li { display: flex; align-items: baseline; gap: 0.5rem; }
+.tm-regions-list strong { font-size: 0.9375rem; font-weight: 600; }
+.tm-regions-number { flex: none; display: inline-grid; place-items: center; width: 1.375rem; height: 1.375rem; border-radius: 999px; background: var(--color-accent-primary); color: #fff; font-size: 0.75rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.tm-regions-outline { fill: none; stroke: var(--color-border-hover, var(--color-border)); stroke-width: 2; }
+.tm-regions-other { fill: var(--color-text-muted); opacity: 0.14; }
+.tm-regions-target circle { fill: var(--color-accent-primary); }
+.tm-regions-target text { fill: #fff; font-size: 15px; font-weight: 700; }
+.tm-regions-halo { fill: var(--color-accent-primary); opacity: 0.22; transform-box: fill-box; transform-origin: center; animation: tm-region-halo 2.4s var(--motion-ease, ease) infinite; }
+@keyframes tm-region-halo { 0%, 100% { transform: scale(0.9); opacity: 0.28; } 50% { transform: scale(1.25); opacity: 0.08; } }
+@media (prefers-reduced-motion: reduce) { .tm-regions, .tm-regions-halo { animation: none; } }
+
+.tm-lens-note { flex-basis: 100%; margin: 0; padding: 0.375rem 0.625rem; font-size: 0.8125rem; border-left: 3px solid var(--color-accent-warning, #d97706); background: var(--color-glass-bg); border-radius: 0 0.375rem 0.375rem 0; }

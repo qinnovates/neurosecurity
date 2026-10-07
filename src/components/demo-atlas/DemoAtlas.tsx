@@ -32,7 +32,7 @@ interface Technique {
 interface Device {
   name: string; company: string; type: string; channels: number;
   modality: string; fda_status: string; sampling_rate: number;
-  electrode_type: string; tara_attack_surface: string[];
+  electrode_type: string;
 }
 
 interface EEGSample {
@@ -203,11 +203,12 @@ export default function DemoAtlas({ techniques, devices, eegSamples, stats, cond
   const technique = useMemo(() => techniques.find(t => t.id === selectedTechnique), [techniques, selectedTechnique]);
 
   // Filtered techniques
+  // A named commercial device never narrows the technique list: these techniques have not
+  // been tested against any product, so threat pictures are shown per device class in TARA Lab.
   const matchedTechniques = useMemo(() => {
-    if (device) return techniques.filter(t => device.tara_attack_surface.includes(t.id));
     if (selectedCondition) return techniques.filter(t => t.clinical?.conditions?.some(c => c.toLowerCase().includes(selectedCondition.toLowerCase())));
     return techniques;
-  }, [techniques, device, selectedCondition]);
+  }, [techniques, selectedCondition]);
 
   // Filtered EEG
   const matchedEEG = useMemo(() => {
@@ -230,13 +231,6 @@ export default function DemoAtlas({ techniques, devices, eegSamples, stats, cond
     if (typeFilter) result = result.filter(d => d.type === typeFilter);
     return result;
   }, [devices, search, typeFilter]);
-
-  // Severity counts for matched techniques
-  const severityCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    for (const t of matchedTechniques) counts[t.severity] = (counts[t.severity] || 0) + 1;
-    return counts;
-  }, [matchedTechniques]);
 
   // ── Render Panels ──────────────────────────────────────────────────
 
@@ -303,9 +297,6 @@ export default function DemoAtlas({ techniques, devices, eegSamples, stats, cond
             <div style={{ display: 'flex', gap: '6px', marginTop: '8px', flexWrap: 'wrap' }}>
               {d.type && <span style={{ ...S.badge, background: 'rgba(59,130,246,0.15)', color: '#93c5fd' }}>{d.type}</span>}
               <span style={{ ...S.badge, background: 'rgba(148,163,184,0.1)', color: '#94a3b8' }}>{d.channels} ch</span>
-              {d.tara_attack_surface.length > 0 && (
-                <span style={{ ...S.badge, background: 'rgba(239,68,68,0.1)', color: '#fca5a5' }}>{d.tara_attack_surface.length} threats</span>
-              )}
             </div>
           </div>
         ))}
@@ -330,7 +321,6 @@ export default function DemoAtlas({ techniques, devices, eegSamples, stats, cond
             { v: device.sampling_rate ? `${device.sampling_rate} Hz` : '—', l: 'Sampling' },
             { v: device.fda_status || '—', l: 'FDA Status' },
             { v: device.electrode_type || '—', l: 'Electrode' },
-            { v: device.tara_attack_surface.length, l: 'Threats' },
           ].map((s, i) => (
             <div key={i} style={S.specItem}>
               <div style={S.specValue}>{s.v}</div>
@@ -340,19 +330,14 @@ export default function DemoAtlas({ techniques, devices, eegSamples, stats, cond
         </div>
 
         <div style={{ marginTop: '24px' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: 600, marginBottom: '12px' }}>
-            Auto-Matched Threats ({matchedTechniques.length})
-          </h3>
-          {Object.keys(severityCounts).length > 0 && (
-            <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
-              {['critical', 'high', 'medium', 'low'].map(sev => severityCounts[sev] ? (
-                <span key={sev} style={{ ...S.badge, background: `${SEVERITY_COLORS[sev]}20`, color: SEVERITY_COLORS[sev] }}>
-                  {severityCounts[sev]} {sev}
-                </span>
-              ) : null)}
-            </div>
-          )}
-          {renderTechniqueList(matchedTechniques)}
+          <h3 style={{ fontSize: '15px', fontWeight: 600, marginBottom: '8px' }}>Threat picture</h3>
+          <p style={{ fontSize: '13px', opacity: 0.7, lineHeight: 1.5, maxWidth: '60ch' }}>
+            Specifications only. No technique in the TARA catalog has been tested against this product, so none is listed here.
+            To see which techniques apply to a device of this kind, and why, model its device class in TARA Lab.
+          </p>
+          <a href="/atlas/model/" data-astro-reload style={{ display: 'inline-block', marginTop: '10px', fontSize: '13px', fontWeight: 600, color: '#3b82f6' }}>
+            Open TARA Lab
+          </a>
         </div>
       </div>
     );

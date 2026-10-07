@@ -1,0 +1,249 @@
+{
+  "version": "1",
+  "status": "Authored, unreviewed. Generic device shapes for demonstration. They describe no specific commercial product.",
+  "archetypes": [
+    {
+      "id": "noninvasive-eeg-headset",
+      "label": "Non-invasive EEG headset",
+      "description": "Scalp EEG headset that streams recordings to a phone app, which syncs to a cloud service.",
+      "deviceCategory": "eeg_system",
+      "invasiveness": "noninvasive",
+      "direction": "read",
+      "defaultRegionIds": [
+        "pfc",
+        "m1"
+      ],
+      "components": [
+        {
+          "id": "headset",
+          "kind": "headset",
+          "label": "EEG headset",
+          "trustZone": "on_body",
+          "isSharedAcrossPatients": false,
+          "isNeuralInterface": true
+        },
+        {
+          "id": "app",
+          "kind": "patient_app",
+          "label": "Phone app",
+          "trustZone": "patient_controlled",
+          "isSharedAcrossPatients": false,
+          "isNeuralInterface": false
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud_service",
+          "label": "Cloud service",
+          "trustZone": "cloud",
+          "isSharedAcrossPatients": true,
+          "isNeuralInterface": false
+        }
+      ],
+      "links": [
+        {
+          "id": "headset-app",
+          "fromComponentId": "headset",
+          "toComponentId": "app",
+          "medium": "bluetooth_le",
+          "carriesNeuralData": true,
+          "carriesStimulationCommands": false,
+          "carriesSoftwareUpdates": true
+        },
+        {
+          "id": "app-cloud",
+          "fromComponentId": "app",
+          "toComponentId": "cloud",
+          "medium": "internet",
+          "carriesNeuralData": true,
+          "carriesStimulationCommands": false,
+          "carriesSoftwareUpdates": true
+        }
+      ],
+      "presentsStimuli": true
+    },
+    {
+      "id": "cortical-read-implant",
+      "label": "Cortical read-only motor BCI",
+      "description": "Implanted cortical recording array for cursor or device control, with a charger, a patient app, a clinician programmer, and a cloud service.",
+      "deviceCategory": "bci",
+      "invasiveness": "cortical",
+      "direction": "read",
+      "defaultRegionIds": [
+        "m1"
+      ],
+      "components": [
+        {
+          "id": "implant",
+          "kind": "implant",
+          "label": "Cortical implant",
+          "trustZone": "in_body",
+          "isSharedAcrossPatients": false,
+          "isNeuralInterface": true
+        },
+        {
+          "id": "charger",
+          "kind": "charger",
+          "label": "Charger",
+          "trustZone": "on_body",
+          "isSharedAcrossPatients": false,
+          "isNeuralInterface": false
+        },
+        {
+          "id": "app",
+          "kind": "patient_app",
+          "label": "Patient app",
+          "trustZone": "patient_controlled",
+          "isSharedAcrossPatients": false,
+          "isNeuralInterface": false
+        },
+        {
+          "id": "programmer",
+          "kind": "clinician_programmer",
+          "label": "Clinician programmer",
+          "trustZone": "clinic",
+          "isSharedAcrossPatients": true,
+          "isNeuralInterface": false
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud_service",
+          "label": "Cloud service",
+          "trustZone": "cloud",
+          "isSharedAcrossPatients": true,
+          "isNeuralInterface": false
+        }
+      ],
+      "links": [
+        {
+          "id": "charger-implant",
+          "fromComponentId": "charger",
+          "toComponentId": "implant",
+          "medium": "inductive",
+          "carriesNeuralData": false,
+          "carriesStimulationCommands": false,
+          "carriesSoftwareUpdates": false
+        },
+        {
+          "id": "implant-app",
+          "fromComponentId": "implant",
+          "toComponentId": "app",
+          "medium": "bluetooth_le",
+          "carriesNeuralData": true,
+          "carriesStimulationCommands": false,
+          "carriesSoftwareUpdates": true
+        },
+        {
+          "id": "programmer-implant",
+          "fromComponentId": "programmer",
+          "toComponentId": "implant",
+          "medium": "bluetooth_le",
+          "carriesNeuralData": true,
+          "carriesStimulationCommands": false,
+          "carriesSoftwareUpdates": true
+        },
+        {
+          "id": "app-cloud",
+          "fromComponentId": "app",
+          "toComponentId": "cloud",
+          "medium": "internet",
+          "carriesNeuralData": true,
+          "carriesStimulationCommands": false,
+          "carriesSoftwareUpdates": true
+        }
+      ],
+      "presentsStimuli": true
+    },
+    {
+      "id": "subcortical-stimulator",
+      "label": "Subcortical stimulator",
+      "description": "Implanted pulse generator delivering deep brain stimulation, set by a clinician programmer and adjusted within limits by a patient controller.",
+      "deviceCategory": "neurostimulator",
+      "invasiveness": "subcortical",
+      "direction": "write",
+      "defaultRegionIds": [
+        "stn"
+      ],
+      "components": [
+        {
+          "id": "implant",
+          "kind": "implant",
+          "label": "Pulse generator and leads",
+          "trustZone": "in_body",
+          "isSharedAcrossPatients": false,
+          "isNeuralInterface": true
+        },
+        {
+          "id": "charger",
+          "kind": "charger",
+          "label": "Charger",
+          "trustZone": "on_body",
+          "isSharedAcrossPatients": false,
+          "isNeuralInterface": false
+        },
+        {
+          "id": "controller",
+          "kind": "patient_app",
+          "label": "Patient controller",
+          "trustZone": "patient_controlled",
+          "isSharedAcrossPatients": false,
+          "isNeuralInterface": false
+        },
+        {
+          "id": "programmer",
+          "kind": "clinician_programmer",
+          "label": "Clinician programmer",
+          "trustZone": "clinic",
+          "isSharedAcrossPatients": true,
+          "isNeuralInterface": false
+        },
+        {
+          "id": "cloud",
+          "kind": "cloud_service",
+          "label": "Manufacturer cloud",
+          "trustZone": "cloud",
+          "isSharedAcrossPatients": true,
+          "isNeuralInterface": false
+        }
+      ],
+      "links": [
+        {
+          "id": "charger-implant",
+          "fromComponentId": "charger",
+          "toComponentId": "implant",
+          "medium": "inductive",
+          "carriesNeuralData": false,
+          "carriesStimulationCommands": false,
+          "carriesSoftwareUpdates": false
+        },
+        {
+          "id": "controller-implant",
+          "fromComponentId": "controller",
+          "toComponentId": "implant",
+          "medium": "bluetooth_le",
+          "carriesNeuralData": false,
+          "carriesStimulationCommands": true,
+          "carriesSoftwareUpdates": false
+        },
+        {
+          "id": "programmer-implant",
+          "fromComponentId": "programmer",
+          "toComponentId": "implant",
+          "medium": "proprietary_rf",
+          "carriesNeuralData": false,
+          "carriesStimulationCommands": true,
+          "carriesSoftwareUpdates": true
+        },
+        {
+          "id": "programmer-cloud",
+          "fromComponentId": "programmer",
+          "toComponentId": "cloud",
+          "medium": "internet",
+          "carriesNeuralData": false,
+          "carriesStimulationCommands": false,
+          "carriesSoftwareUpdates": true
+        }
+      ],
+      "presentsStimuli": false
+    }
+  ]
+}

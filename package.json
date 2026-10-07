@@ -12,6 +12,8 @@
     "fetch-news": "node src/scripts/fetch-news.mjs",
     "fetch-intel": "node src/scripts/fetch-intel.mjs",
     "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "check:model-page": "node src/scripts/check-model-page.mjs",
     "sync": "node src/scripts/sync-agents.mjs",
     "verify": "python3 src/scripts/verify/run_all.py",
     "verify:citations": "python3 src/scripts/verify/verify_citations.py",

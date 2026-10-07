@@ -75,6 +75,8 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
+      // The threat model tool is noindex while it is a review draft; keep it out of the sitemap too.
+      filter: (page) => !page.includes('/atlas/model/'),
       serialize(item) {
         // Add lastmod to all sitemap entries using build time as default
         item.lastmod = new Date().toISOString();

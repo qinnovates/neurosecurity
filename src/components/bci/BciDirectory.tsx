@@ -25,8 +25,6 @@ interface BciDeviceCard {
   funding_total_usd: number | null;
   security_posture: string;
   security_notes: string;
-  attack_surface_count: number;
-  tara_attack_surface: string[];
   company_headquarters: string;
   company_founded: string;
 }
@@ -41,7 +39,6 @@ interface BciCompanyCard {
   funding_total_usd: number | null;
   security_posture: string;
   device_count: number;
-  attack_surface_count: number;
   top_fda_status: string;
   total_channels: number;
   devices: { name: string; type: string; channels: number; fda_status: string; target_use: string }[];
@@ -127,7 +124,7 @@ function getDeviceSearchText(d: BciDeviceCard): string {
     d.device_name, d.company_name, d.device_type, d.electrode_type,
     d.fda_status, d.target_use, d.security_posture, d.security_notes,
     d.company_category, d.company_headquarters,
-    ...d.tara_attack_surface, ...d.cves_known,
+    ...d.cves_known,
   ].join(' ');
 }
 
@@ -162,7 +159,6 @@ interface SortOption {
 const DEVICE_SORT_OPTIONS: SortOption[] = [
   { label: 'Most channels', key: 'channels_desc', lenses: ['security', 'clinical', 'research'] },
   { label: 'Fewest channels', key: 'channels_asc', lenses: ['security', 'clinical', 'research'] },
-  { label: 'Most attack surfaces', key: 'attack_desc', lenses: ['security'] },
   { label: 'Most CVEs', key: 'cve_desc', lenses: ['security'] },
   { label: 'Highest funding', key: 'funding_desc', lenses: ['market'] },
   { label: 'Most recent (first human)', key: 'recent_desc', lenses: ['clinical', 'research'] },
@@ -174,7 +170,6 @@ const COMPANY_SORT_OPTIONS: SortOption[] = [
   { label: 'Most devices', key: 'devices_desc', lenses: ['security', 'clinical', 'market', 'research'] },
   { label: 'Highest funding', key: 'funding_desc', lenses: ['market'] },
   { label: 'Most channels (total)', key: 'channels_desc', lenses: ['clinical', 'research'] },
-  { label: 'Most attack surfaces', key: 'attack_desc', lenses: ['security'] },
   { label: 'Company name (A-Z)', key: 'name_asc', lenses: ['security', 'clinical', 'market', 'research'] },
 ];
 
@@ -183,7 +178,6 @@ function sortDevices(devices: BciDeviceCard[], key: string): BciDeviceCard[] {
   switch (key) {
     case 'channels_desc': return sorted.sort((a, b) => b.channels - a.channels);
     case 'channels_asc': return sorted.sort((a, b) => a.channels - b.channels);
-    case 'attack_desc': return sorted.sort((a, b) => b.attack_surface_count - a.attack_surface_count);
     case 'cve_desc': return sorted.sort((a, b) => b.cves_known.length - a.cves_known.length);
     case 'funding_desc': return sorted.sort((a, b) => (b.funding_total_usd ?? 0) - (a.funding_total_usd ?? 0));
     case 'recent_desc': return sorted.sort((a, b) => (b.first_human || '').localeCompare(a.first_human || ''));
@@ -199,7 +193,6 @@ function sortCompanies(companies: BciCompanyCard[], key: string): BciCompanyCard
     case 'devices_desc': return sorted.sort((a, b) => b.device_count - a.device_count);
     case 'funding_desc': return sorted.sort((a, b) => (b.funding_total_usd ?? 0) - (a.funding_total_usd ?? 0));
     case 'channels_desc': return sorted.sort((a, b) => b.total_channels - a.total_channels);
-    case 'attack_desc': return sorted.sort((a, b) => b.attack_surface_count - a.attack_surface_count);
     case 'name_asc': return sorted.sort((a, b) => a.name.localeCompare(b.name));
     default: return sorted;
   }
@@ -646,7 +639,6 @@ function DeviceMetrics({ device, lens }: { device: BciDeviceCard; lens: LensMode
             value={device.security_posture}
             color={getSecurityColor(device.security_posture)}
           />
-          <MetricPill icon={'\u{1F578}'} label="surfaces" value={String(device.attack_surface_count)} />
           <MetricPill
             icon={'\u{26A0}'}
             label="CVEs"
@@ -700,7 +692,6 @@ function CompanyMetrics({ company, lens }: { company: BciCompanyCard; lens: Lens
             value={company.security_posture}
             color={getSecurityColor(company.security_posture)}
           />
-          <MetricPill icon={'\u{1F578}'} label="surfaces" value={String(company.attack_surface_count)} />
           <MetricPill icon={'\u{1F4BB}'} label="devices" value={String(company.device_count)} />
         </div>
       );
@@ -872,28 +863,6 @@ function DirectoryDeviceCard({
 
           <DetailRow label="Security Posture" value={device.security_posture} />
           <DetailRow label="Security Notes" value={device.security_notes || 'None'} />
-          <DetailRow label="Attack Surfaces" value={String(device.attack_surface_count)} />
-
-          {/* Attack surface list */}
-          {device.tara_attack_surface.length > 0 && (
-            <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', marginTop: '4px' }}>
-              {device.tara_attack_surface.map(s => (
-                <span
-                  key={s}
-                  style={{
-                    fontSize: '0.625rem',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    background: 'rgba(239, 68, 68, 0.08)',
-                    color: '#ef4444',
-                    fontWeight: 500,
-                  }}
-                >
-                  {s}
-                </span>
-              ))}
-            </div>
-          )}
 
           {/* CVEs */}
           {device.cves_known.length > 0 && (
@@ -1035,7 +1004,6 @@ function DirectoryCompanyCard({
           <DetailRow label="Security Posture" value={company.security_posture} />
           <DetailRow label="Top FDA Status" value={company.top_fda_status || 'N/A'} />
           <DetailRow label="Total Channels" value={String(company.total_channels)} />
-          <DetailRow label="Attack Surfaces" value={String(company.attack_surface_count)} />
 
           {/* Devices list */}
           {company.devices.length > 0 && (
