@@ -153,7 +153,7 @@ export default function ThreatModelStudio({ viewId }: ModeProps) {
   );
 
   return (
-    <div className="tm-root model-layout" data-editor={isEditorOpen}>
+    <div className="tm-root model-layout" data-editor={isEditorOpen} data-view={viewId}>
       {isEditorOpen && (
         <aside className="tm-no-print" aria-label="Device editor">
           {pendingReplacement !== null && (
@@ -189,7 +189,7 @@ export default function ThreatModelStudio({ viewId }: ModeProps) {
             </button>
           </div>
         )}
-        <div ref={canvasRef} className="tm-no-print">
+        <div ref={canvasRef} className="model-canvas-slot tm-no-print">
           {/* A narrow screen starts on the risks; the diagram is one press away, and opens by itself to show a chain. */}
           {isWideScreen || selectedChain !== null ? canvas : (
             <details className="model-diagram-fold">

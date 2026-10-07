@@ -1,7 +1,6 @@
 /**
- * Every view TARA Lab offers, grouped under its mode. A view is either the mode's own
- * screen, which shares the device in focus, or an existing site page shown in a frame.
- * Moving a dashboard into the Lab is one entry here.
+ * Every view TARA Lab offers, grouped under its mode. Each one is the mode's own screen
+ * and shares the device in focus. Adding a view is one entry here and a branch in its mode.
  */
 
 import type { ModeId } from './mode-registry';
@@ -9,8 +8,6 @@ import type { ModeId } from './mode-registry';
 export interface LabView {
   id: string;
   label: string;
-  /** Site path of an existing page to show in a frame; null for the mode's own screen. */
-  framedPath: string | null;
 }
 
 export interface LabViewGroup {
@@ -22,37 +19,27 @@ export interface LabViewGroup {
 export const MODE_VIEW_GROUPS: Record<ModeId, readonly LabViewGroup[]> = {
   explore: [
     { label: 'Explore', views: [
-      { id: 'device-classes', label: 'Device classes', framedPath: null },
-      { id: 'catalog', label: 'Catalog', framedPath: null },
-      { id: 'curated-chains', label: 'Curated chains', framedPath: null },
-      { id: 'specifications', label: 'Device specifications', framedPath: null },
+      { id: 'device-classes', label: 'Device classes' },
+      { id: 'catalog', label: 'Catalog' },
+      { id: 'curated-chains', label: 'Curated chains' },
+      { id: 'specifications', label: 'Device specifications' },
     ] },
   ],
   model: [
     { label: 'This device', views: [
-      { id: 'risks', label: 'Risks', framedPath: null },
-      { id: 'attack-map', label: 'Attack map', framedPath: null },
-      { id: 'chains', label: 'Chains', framedPath: null },
-      { id: 'around', label: 'Around the device', framedPath: null },
-      { id: 'requirements', label: 'US requirements', framedPath: null },
-      { id: 'report', label: 'Report', framedPath: null },
+      { id: 'risks', label: 'Risks' },
+      { id: 'attack-map', label: 'Attack map' },
+      { id: 'chains', label: 'Chains' },
+      { id: 'around', label: 'Around the device' },
+      { id: 'requirements', label: 'US requirements' },
+      { id: 'report', label: 'Report' },
     ] },
   ],
   monitor: [
-    { label: 'Signals', views: [
-      { id: 'signal-monitor', label: 'Signal monitor', framedPath: null },
-      { id: 'neurosim', label: 'NeuroSIM', framedPath: '/atlas/neurosim/' },
-    ] },
+    { label: 'Signals', views: [{ id: 'signal', label: 'Signal' }] },
   ],
   query: [
-    { label: 'Ask', views: [
-      { id: 'console', label: 'Query console', framedPath: null },
-      { id: 'research-dashboard', label: 'Research dashboard', framedPath: '/research/dashboard/' },
-    ] },
-    { label: 'Datasets', views: [
-      { id: 'data-studio', label: 'Data Studio', framedPath: '/data-studio/' },
-      { id: 'eeg', label: 'EEG datasets', framedPath: '/data-studio/eeg/' },
-    ] },
+    { label: 'Ask', views: [{ id: 'console', label: 'Query console' }] },
   ],
 };
 

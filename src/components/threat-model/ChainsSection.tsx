@@ -24,11 +24,11 @@ function weakestEvidence(chain: GeneratedChain, techniqueById: Props['techniqueB
     .reduce((weakest, evidence) => (evidence.rank > weakest.rank ? evidence : weakest));
 }
 
-/** A chain named by where it goes: the part of its first step, the part of its last, and its length. */
+/** A chain named by where it goes: the part its first step acts on and the part its last step acts on. */
 function describeRoute(chain: GeneratedChain, model: DeviceModel): string {
   const first = describeElement(model, chain.steps[0].elementId);
   const last = describeElement(model, chain.steps[chain.steps.length - 1].elementId);
-  return first === last ? `Within ${first}` : `${first} to ${last}`;
+  return first === last ? `Stays on ${first}` : `Starts on ${first}, ends on ${last}`;
 }
 
 function ChainSteps({ chain, model, techniqueById, playback }: { chain: GeneratedChain; model: DeviceModel; techniqueById: Props['techniqueById']; playback: SequencePlayback }) {

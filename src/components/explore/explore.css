@@ -57,3 +57,5 @@
   .catalog, .catalog[data-panel="true"] { grid-template-columns: minmax(0, 1fr); }
   .catalog-panel { position: fixed; left: 0; right: 0; bottom: 0; top: auto; z-index: 40; max-height: 72dvh; border-width: 1px 0 0; border-color: var(--lab-line-strong); padding-bottom: env(safe-area-inset-bottom, 0px); }
 }
+
+.catalog-filter-fold > summary { cursor: pointer; font-weight: 600; padding: 0.375rem 0; }

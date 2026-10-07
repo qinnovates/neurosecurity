@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { EMPTY_CATALOG_FILTERS, countCatalogFacets, filterCatalog, isCatalogFiltered, placementStateOf, type PlacementState } from '../catalog-filter';
 import { describeEvidence } from '../evidence-levels';
 import { HIDDEN_COLUMNS, HIDDEN_TABLES, applyLabTablePolicy } from '../lab-table-policy';
+import { nearestNames } from '../nearest-names';
 import { loadEngineBundle, loadReferenceData } from './load-test-data';
 
 const bundle = loadEngineBundle();
@@ -72,5 +73,20 @@ describe('lab table policy', () => {
 
   it('passes every other table through untouched', () => {
     expect(applyLabTablePolicy(tables).techniques).toEqual(tables.techniques);
+  });
+});
+
+describe('nearestNames', () => {
+  const known = ['techniques', 'tactics', 'devices', 'my_risks', 'my_chain_steps'];
+
+  it('suggests the name someone probably meant', () => {
+    expect(nearestNames('technique', known)[0]).toBe('techniques');
+    expect(nearestNames('devics', known)).toContain('devices');
+    expect(nearestNames('risks', known)).toContain('my_risks');
+  });
+
+  it('suggests nothing when nothing is close, or nothing was typed', () => {
+    expect(nearestNames('zzzzzzzzzz', known)).toEqual([]);
+    expect(nearestNames('  ', known)).toEqual([]);
   });
 });

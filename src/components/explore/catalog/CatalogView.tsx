@@ -4,6 +4,7 @@ import DataTable, { type DataTableColumn } from '@/components/lab-kit/DataTable'
 import EvidenceBar from '@/components/lab-kit/EvidenceBar';
 import EvidenceMark from '@/components/lab-kit/EvidenceMark';
 import SeverityMark from '@/components/lab-kit/SeverityMark';
+import { useMediaQuery } from '@/components/lab-kit/use-media-query';
 import { useFocus } from '@/components/workbench/FocusContext';
 import type { ModeId } from '@/components/workbench/mode-registry';
 import { BAND_ORDER, CATALOG_SEVERITIES, type CatalogTechnique } from '@/lib/threat-model/catalog-types';
@@ -25,6 +26,8 @@ const LAYOUTS: readonly { id: CatalogLayout; label: string }[] = [
 const BAND_AXIS: readonly MatrixAxisItem[] = BAND_ORDER.map((bandId) => ({
   id: bandId, label: bandId, title: `Band ${bandId}, ${bandId.startsWith('S') ? 'silicon side' : bandId.startsWith('I') ? 'the interface' : 'neural side'}`,
 }));
+/** Below this width the filters fold away, so the techniques are the first thing on screen. */
+const NARROW_SCREEN_QUERY = '(max-width: 1100px)';
 const MODE_AXIS: readonly MatrixAxisItem[] = (['R', 'M', 'D'] as const).map((mode) => ({ id: mode, label: MODE_LABELS[mode] }));
 
 function domainLabel(code: string): string {
@@ -43,6 +46,7 @@ export default function CatalogView({ onOpenMode }: { onOpenMode: (modeId: ModeI
   const [openedId, setOpenedId] = useState<string | null>(null);
   const { techniques, tactics } = engineData;
   const deviceName = state.model.name;
+  const isNarrowScreen = useMediaQuery(NARROW_SCREEN_QUERY);
 
   const placementOf = useMemo(() => {
     const idsOnDevice = new Set(report.riskRows.flatMap((row) => (row.source === 'catalog' && row.techniqueId !== null ? [row.techniqueId] : [])));
@@ -82,12 +86,16 @@ export default function CatalogView({ onOpenMode }: { onOpenMode: (modeId: ModeI
     .filter((code) => code !== '').sort().map((code) => ({ id: code, label: domainLabel(code), title: `${domainLabel(code)} (${code})` })), [shown]);
   const tacticAxis = useMemo((): MatrixAxisItem[] => tactics.map((tactic) => ({ id: tactic.id, label: tactic.name, title: `${tactic.name} (${tactic.id})` })), [tactics]);
 
+  const filterPanel = (
+    <CatalogFilterPanel
+      filters={filters} facets={facets} evidenceValues={evidenceValues} tactics={tactics} deviceName={deviceName}
+      onChange={setFilters} onClear={() => setFilters(EMPTY_CATALOG_FILTERS)}
+    />
+  );
+
   return (
     <div className="catalog" data-panel={opened !== undefined}>
-      <CatalogFilterPanel
-        filters={filters} facets={facets} evidenceValues={evidenceValues} tactics={tactics} deviceName={deviceName}
-        onChange={setFilters} onClear={() => setFilters(EMPTY_CATALOG_FILTERS)}
-      />
+      {isNarrowScreen ? <details className="catalog-filter-fold"><summary>Filters</summary>{filterPanel}</details> : filterPanel}
       <div className="catalog-main">
         <section className="lab-panel catalog-head" aria-label="Catalog summary and layout">
           <div className="catalog-head-row">

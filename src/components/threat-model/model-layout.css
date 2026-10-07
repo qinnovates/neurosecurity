@@ -49,3 +49,8 @@
 
 
 .model-plain-panel { padding: 0.625rem 0.75rem; }
+
+/* While a chain plays, the diagram it plays on stays in view above the steps. */
+@media (min-width: 721px) and (min-height: 700px) {
+  .model-layout[data-view="chains"] .model-canvas-slot { position: sticky; top: var(--lab-topbar-height); z-index: 9; background: var(--lab-ground); padding-bottom: 0.25rem; }
+}

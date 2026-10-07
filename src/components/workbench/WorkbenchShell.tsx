@@ -6,7 +6,6 @@ import type { ReferenceData } from '@/lib/threat-model/reference-data-types';
 import { FocusProvider } from './FocusContext';
 import ModeNav from './ModeNav';
 import { WORKBENCH_MODES, type ModeId } from './mode-registry';
-import ModeViews from './ModeViews';
 import { parseRoute, toHash, type Route } from './route';
 import StandingLine from './StandingLine';
 import TopBar from './TopBar';
@@ -55,13 +54,11 @@ export default function WorkbenchShell({ engineData, referenceData, curatedChain
         <TopBar activeModeId={route.modeId} onOpenMode={openMode} />
         <ViewTabs modeId={route.modeId} activeViewId={route.viewId} onSelectView={selectView} />
         <div className="lab-shell-body">
-          <ModeViews modeId={route.modeId} activeViewId={route.viewId}>
-            <ModeErrorBoundary key={route.modeId} modeLabel={activeMode?.label ?? 'This mode'}>
-              <Suspense fallback={<p className="lab-soft" role="status">Loading…</p>}>
-                {ActiveComponent !== undefined && <ActiveComponent viewId={route.viewId} onSelectView={selectView} onOpenMode={openMode} />}
-              </Suspense>
-            </ModeErrorBoundary>
-          </ModeViews>
+          <ModeErrorBoundary key={route.modeId} modeLabel={activeMode?.label ?? 'This mode'}>
+            <Suspense fallback={<p className="lab-soft" role="status">Loading…</p>}>
+              {ActiveComponent !== undefined && <ActiveComponent viewId={route.viewId} onSelectView={selectView} onOpenMode={openMode} />}
+            </Suspense>
+          </ModeErrorBoundary>
         </div>
         <footer className="lab-foot tm-no-print">
           <StandingLine catalogVersion={engineData.registrarVersion} techniqueCount={engineData.techniques.length} />

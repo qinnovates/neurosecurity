@@ -1,8 +1,6 @@
 /* Styles for the threat model page. Colours come from the site's theme variables. */
 
 .tm-root { color: var(--color-text-primary); font-family: var(--font-sans, system-ui, sans-serif); }
-.tm-grid { display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); align-items: start; }
-@media (max-width: 960px) { .tm-grid { grid-template-columns: minmax(0, 1fr); } }
 
 .tm-card { background: var(--color-glass-bg); border: 1px solid var(--color-glass-border); border-radius: 0.75rem; padding: 1rem 1.125rem; }
 .tm-card + .tm-card { margin-top: 1rem; }
@@ -55,7 +53,8 @@
 .tm-edge path { stroke: var(--color-text-muted); stroke-width: 2; fill: none; }
 .tm-edge--selected path { stroke: var(--color-accent-primary); stroke-width: 3.5; }
 .tm-edge text { fill: var(--color-text-muted); font-size: 12px; paint-order: stroke; stroke: var(--color-bg-surface); stroke-width: 4px; }
-.tm-dimmed { opacity: 0.22; }
+/* Parts off the highlighted path step back but stay readable. */
+.tm-dimmed { opacity: 0.55; }
 /* How many open risks sit on a part: a count in ink, not a severity colour, and it does not pulse. */
 .tm-heat circle { fill: var(--lab-ink, var(--color-text-primary)); }
 .tm-heat text { fill: var(--lab-ground, var(--color-bg-deep)); font-size: 10px; font-weight: 700; }
@@ -74,7 +73,6 @@
 @media print {
   .tm-no-print { display: none !important; }
   .tm-print-only { display: block; }
-  .tm-grid { display: block; }
   .tm-card { border: 1px solid #999; background: #fff; color: #000; }
   /* Whole sections are cards: keeping each on one page left pages half empty. Rows and headings stay together instead. */
   .tm-table tr, .tm-heading, .tm-subheading { break-inside: avoid; }
@@ -116,9 +114,6 @@ textarea.tm-input { resize: vertical; }
 @media (prefers-reduced-motion: reduce) { .tm-track { animation: none; } }
 @media print { .tm-track { display: none; } }
 
-.explore-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); }
-.explore-card { margin-top: 0 !important; display: flex; flex-direction: column; }
-.explore-card .tm-button { margin-top: auto; align-self: flex-start; }
 
 
 
