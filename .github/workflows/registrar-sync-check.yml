@@ -67,7 +67,21 @@ jobs:
               physics = t.get('physics_feasibility')
               if not physics:
                   errors.append(f'{tid}: missing physics_feasibility block')
-              else:
+              elif not physics.get('timeline'):
+                  errors.append(f'{tid}: physics_feasibility has no timeline; the SDK model requires it')
+              # status is the legacy field; evidence.tier is what displays read.
+              evidence = t.get('evidence')
+              valid_tiers = ['validated_rct','validated_replication','demonstrated_lab','demonstrated_case','theoretical_modeled','theoretical_proposed','speculative']
+              if not evidence or not evidence.get('tier'):
+                  errors.append(f'{tid}: missing evidence.tier; run npm run evidence:tier')
+              elif evidence['tier'] not in valid_tiers:
+                  errors.append(f'{tid}: unknown evidence tier {evidence["tier"]!r}')
+              elif evidence.get('neural_product_cve_count', 0) > 0 and evidence['tier'] not in ['validated_rct','validated_replication','demonstrated_lab','demonstrated_case']:
+                  errors.append(
+                      f'{tid}: holds {evidence["neural_product_cve_count"]} neural-product CVE(s) '
+                      f'but is tiered {evidence["tier"]!r}, below demonstrated'
+                  )
+              if physics:
                   is_sentinel = physics.get('tier') == 'X'
                   is_no_gate = physics.get('tier_label') == 'no_physics_gate'
                   if is_sentinel != is_no_gate:
