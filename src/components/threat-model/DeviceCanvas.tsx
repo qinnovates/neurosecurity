@@ -1,4 +1,5 @@
 import { useMemo, useState, type CSSProperties } from 'react';
+import type { SequencePlayback } from '@/components/lab-kit/motion/use-sequence-playback';
 import type { GeneratedChain } from '@/lib/threat-model/chain-types';
 import { applyLens, type Lens } from '@/lib/threat-model/lens';
 import { derivePayloadFlows } from '@/lib/threat-model/payload-flow';
@@ -18,6 +19,8 @@ interface Props {
   lens: Lens;
   onLensChange: (lens: Lens) => void;
   selectedChain: GeneratedChain | null;
+  /** Where the selected chain's playback has got to; the diagram follows it. */
+  chainPlayback: SequencePlayback;
   onClearChain: () => void;
   isEditorOpen: boolean;
   onToggleEditor: () => void;
@@ -27,10 +30,8 @@ interface Props {
  * The device itself: the path from the patient outward, with what each connection carries.
  * Selecting a part narrows every section below to that part; selecting it again shows the whole device.
  */
-export default function DeviceCanvas({ report, lens, onLensChange, selectedChain, onClearChain, isEditorOpen, onToggleEditor }: Props) {
+export default function DeviceCanvas({ report, lens, onLensChange, selectedChain, chainPlayback, onClearChain, isEditorOpen, onToggleEditor }: Props) {
   const [activeView, setActiveView] = useState<ArchitectureView>('global_system');
-  // Changing the key remounts the diagram, which restarts the step-by-step playback.
-  const [replayCount, setReplayCount] = useState(0);
   const { model } = report;
 
   const payloadFlows = useMemo(() => derivePayloadFlows(model), [model]);
@@ -64,7 +65,6 @@ export default function DeviceCanvas({ report, lens, onLensChange, selectedChain
         {selectedChain !== null ? (
           <p className="model-canvas-note">
             <span className="tm-badge tm-badge--generated">Generated hypothesis</span> {selectedChain.chain_name}. A path through this model exists; that is not evidence the attack has been carried out.{' '}
-            <button type="button" className="tm-button" onClick={() => setReplayCount((count) => count + 1)}>Replay</button>{' '}
             <button type="button" className="tm-button" onClick={onClearChain}>Clear</button>
           </p>
         ) : (
@@ -72,14 +72,14 @@ export default function DeviceCanvas({ report, lens, onLensChange, selectedChain
         )}
         <div className="model-canvas-scroll" style={{ '--model-diagram-min-width': `${zoneCount * DIAGRAM_REM_PER_ZONE}rem` } as CSSProperties}>
           <ArchitectureDiagram
-            key={`${selectedChain?.chain_id ?? 'view'}-${replayCount}`}
             model={model}
             title={`${selectedChain !== null ? 'Attack chain hypothesis' : VIEW_LABELS[activeView]} of ${model.name}`}
             highlight={highlight}
             selectedElementId={lens.elementId}
             onSelectElement={selectElement}
             openRiskCounts={countOpenRisksByElement(rowsUnderLens, model.controlsInPlace)}
-            chainMarkers={chainMarkers}
+            chainSteps={chainMarkers}
+            reachedStepCount={selectedChain !== null && (chainPlayback.isPlaying || chainPlayback.reached < chainMarkers.length) ? chainPlayback.reached : undefined}
             payloadFlows={payloadFlows}
           />
         </div>

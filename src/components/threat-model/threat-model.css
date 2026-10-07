@@ -56,8 +56,10 @@
 .tm-edge--selected path { stroke: var(--color-accent-primary); stroke-width: 3.5; }
 .tm-edge text { fill: var(--color-text-muted); font-size: 12px; paint-order: stroke; stroke: var(--color-bg-surface); stroke-width: 4px; }
 .tm-dimmed { opacity: 0.22; }
-.tm-heat circle { fill: var(--color-severity-high); }
-.tm-heat text, .tm-step text { fill: #fff; font-size: 10px; font-weight: 700; }
+/* How many open risks sit on a part: a count in ink, not a severity colour, and it does not pulse. */
+.tm-heat circle { fill: var(--lab-ink, var(--color-text-primary)); }
+.tm-heat text { fill: var(--lab-ground, var(--color-bg-deep)); font-size: 10px; font-weight: 700; }
+.tm-step text { fill: #fff; font-size: 10px; font-weight: 700; }
 .tm-step circle { fill: var(--color-accent-primary); }
 @media (prefers-reduced-motion: no-preference) {
   .tm-node, .tm-edge { transition: opacity 180ms ease; }
@@ -87,18 +89,18 @@
 textarea.tm-input { resize: vertical; }
 
 /* Motion. Each effect carries one meaning: flow = something travels this connection,
-   pulse = open risks here, trace = the order of steps in a chain. */
+   the travelling ring = the order of steps in a chain. */
 .tm-flow { stroke: var(--color-accent-primary) !important; stroke-width: 2.5 !important; stroke-dasharray: 3 13; stroke-linecap: round; animation: tm-flow var(--motion-flow, 2.4s) linear infinite; pointer-events: none; }
 @keyframes tm-flow { to { stroke-dashoffset: -64; } }
-.tm-heat circle { transform-box: fill-box; transform-origin: center; animation: tm-pulse 2.2s var(--motion-ease, ease) infinite; }
-@keyframes tm-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.22); } }
-.tm-step { opacity: 0; animation: tm-trace 420ms var(--motion-ease, ease) forwards; }
-@keyframes tm-trace { from { opacity: 0; } to { opacity: 1; } }
+.tm-step--ahead circle { fill: var(--color-bg-surface); stroke: var(--color-accent-primary); stroke-width: 1.5; }
+.tm-step--ahead text { fill: var(--color-accent-primary); }
+/* The ring that marks the newest step reached; it glides from the last one, which is the order of the chain. */
+.tm-chain-traveller { fill: none; stroke: var(--lab-flow, var(--color-accent-secondary)); stroke-width: 3; pointer-events: none; transition: transform var(--motion-trace-step, 700ms) var(--motion-ease, ease); }
 @media (prefers-reduced-motion: reduce) {
-  .tm-flow, .tm-heat circle { animation: none; }
-  .tm-step { animation: none; opacity: 1; }
+  .tm-flow { animation: none; }
+  .tm-chain-traveller { transition: none; }
 }
-@media print { .tm-flow { display: none; } .tm-step { animation: none; opacity: 1; } }
+@media print { .tm-flow, .tm-chain-traveller { display: none; } }
 
 /* One moving track per payload a connection carries. The arrowhead beside the label gives the same direction without motion. */
 .tm-track { fill: none; stroke: var(--lab-flow, var(--color-accent-secondary)); stroke-linecap: round; pointer-events: none; animation: tm-track var(--motion-flow, 2.4s) linear infinite; }

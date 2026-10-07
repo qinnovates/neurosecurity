@@ -10,6 +10,9 @@ export type ModeId = typeof MODE_IDS[number];
 
 /** Everything else a mode needs comes from the shared focus (see FocusContext). */
 export interface ModeProps {
+  /** The view of this mode that the address names. */
+  viewId: string;
+  onSelectView: (viewId: string) => void;
   onOpenMode: (modeId: ModeId) => void;
 }
 

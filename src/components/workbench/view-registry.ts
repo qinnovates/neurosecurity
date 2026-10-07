@@ -41,7 +41,14 @@ export const MODE_VIEW_GROUPS: Record<ModeId, readonly LabViewGroup[]> = {
     ] },
   ],
   model: [
-    { label: 'This device', views: [{ id: 'threat-model', label: 'Threat model', framedPath: null }] },
+    { label: 'This device', views: [
+      { id: 'risks', label: 'Risks', framedPath: null },
+      { id: 'attack-map', label: 'Attack map', framedPath: null },
+      { id: 'chains', label: 'Chains', framedPath: null },
+      { id: 'around', label: 'Around the device', framedPath: null },
+      { id: 'requirements', label: 'US requirements', framedPath: null },
+      { id: 'report', label: 'Report', framedPath: null },
+    ] },
   ],
   monitor: [
     { label: 'Signals', views: [

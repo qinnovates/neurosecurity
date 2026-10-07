@@ -3,7 +3,7 @@
  * The raw files are passed in already parsed; nothing here reads from disk.
  */
 
-import { CATALOG_SEVERITIES, type BandControls, type BrainRegion, type CatalogTechnique, type EngineData, type PrecedentCve, type TechniqueMode } from './catalog-types';
+import { CATALOG_SEVERITIES, type BandControls, type BrainRegion, type CatalogTactic, type CatalogTechnique, type EngineData, type PrecedentCve, type TechniqueMode } from './catalog-types';
 import { ThreatModelDataError } from './errors';
 import { isOneOf, isRecord, isStringArray } from './guards';
 
@@ -122,14 +122,17 @@ export function buildEngineData(sources: RawEngineSources): EngineDataBundle {
   if (registrarVersion === null) throw new ThreatModelDataError(REGISTRAR_FILE, 'expected a "version" string');
   if (cveGenerated === null) throw new ThreatModelDataError(CVE_FILE, 'expected a "generated" date');
 
-  const tacticIds = requireList(registrar, 'tactics', REGISTRAR_FILE)
-    .map((tactic) => readString(tactic, 'id'))
-    .filter((tacticId): tacticId is string => tacticId !== null);
+  const tactics = requireList(registrar, 'tactics', REGISTRAR_FILE).flatMap((tactic): CatalogTactic[] => {
+    const id = readString(tactic, 'id');
+    return id === null ? [] : [{ id, name: readString(tactic, 'name') ?? id, description: readString(tactic, 'description') ?? '' }];
+  });
+  const tacticIds = tactics.map((tactic) => tactic.id);
 
   return {
     tacticIds: new Set(tacticIds),
     engineData: {
       registrarVersion,
+      tactics,
       techniques: requireList(registrar, 'techniques', REGISTRAR_FILE).map(toTechnique),
       regions: requireList(atlas, 'brain_regions', ATLAS_FILE).map(toRegion),
       precedentCves: requireList(cveMapping, 'mappings', CVE_FILE).map(toPrecedentCve),

@@ -56,7 +56,7 @@ export default function WorkbenchShell({ engineData, referenceData }: Props) {
           <ModeViews modeId={route.modeId} activeViewId={route.viewId}>
             <ModeErrorBoundary key={route.modeId} modeLabel={activeMode?.label ?? 'This mode'}>
               <Suspense fallback={<p className="lab-soft" role="status">Loading…</p>}>
-                {ActiveComponent !== undefined && <ActiveComponent onOpenMode={openMode} />}
+                {ActiveComponent !== undefined && <ActiveComponent viewId={route.viewId} onSelectView={selectView} onOpenMode={openMode} />}
               </Suspense>
             </ModeErrorBoundary>
           </ModeViews>

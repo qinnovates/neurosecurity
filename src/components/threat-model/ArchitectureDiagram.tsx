@@ -23,7 +23,13 @@ interface Props {
   selectedElementId?: string | null;
   onSelectElement?: (elementId: string) => void;
   openRiskCounts?: ReadonlyMap<string, number>;
-  chainMarkers?: readonly ChainMarker[];
+  /** The steps of a chain to mark, each on the part it acts on. */
+  chainSteps?: readonly ChainMarker[];
+  /**
+   * During playback, how many steps have been reached: those are filled, the rest outlined, and a marker
+   * travels to the newest. Omit for the still picture with every step shown.
+   */
+  reachedStepCount?: number;
   /**
    * What each connection carries and which way, keyed by link id. When given, each payload gets its own
    * moving track and an arrowhead; when omitted, a connection that carries anything shows one plain flow.
@@ -33,6 +39,7 @@ interface Props {
 
 const MAX_LABEL_CHARACTERS = 20;
 const BADGE_RADIUS = 9;
+const TRAVELLER_RADIUS = 13;
 /** Tracks for different payloads run side by side, this far apart. */
 const TRACK_SPACING = 6;
 const ARROW_SPACING = 16;
@@ -52,6 +59,13 @@ function describeFlow(flow: PayloadFlow): string {
   return `${PAYLOAD_LABELS[flow.payload]} ${flow.sense === 'away' ? 'away from' : 'toward'} the neural interface`;
 }
 
+const NODE_STEP_INSET = 4;
+
+/** A step marker on a connection sits under its label, and under the payload arrows when there are any. */
+function edgeStepY(labelY: number, flowCount: number): number {
+  return labelY + (flowCount > 0 ? 32 : 18);
+}
+
 /** Offsets that centre `count` items around zero, `spacing` apart. */
 function spread(count: number, index: number, spacing: number): number {
   return (index - (count - 1) / 2) * spacing;
@@ -68,12 +82,9 @@ function activateOnKey(event: KeyboardEvent<SVGGElement>, activate: () => void):
   }
 }
 
-/** Chain step markers appear one after another, in step order. */
-const TRACE_STEP_MS = 700;
-
-function Badge({ className, x, y, text, delayMs }: { className: string; x: number; y: number; text: string; delayMs?: number }) {
+function Badge({ className, x, y, text }: { className: string; x: number; y: number; text: string }) {
   return (
-    <g className={className} aria-hidden="true" style={delayMs === undefined ? undefined : { animationDelay: `${delayMs}ms` }}>
+    <g className={className} aria-hidden="true">
       <circle cx={x} cy={y} r={BADGE_RADIUS} />
       <text x={x} y={y + 3.5} textAnchor="middle">{text}</text>
     </g>
@@ -85,17 +96,29 @@ function positionsAt(markers: readonly ChainMarker[], elementId: string): string
   return positions.length > 0 ? positions.join(',') : null;
 }
 
-function traceDelayAt(markers: readonly ChainMarker[], elementId: string): number {
-  const positions = markers.filter((marker) => marker.elementId === elementId).map((marker) => marker.position);
-  return (Math.min(...positions) - 1) * TRACE_STEP_MS;
+/** A step marker is outlined until playback reaches the first step on its part. */
+function stepClass(markers: readonly ChainMarker[], elementId: string, reachedStepCount: number | undefined): string {
+  if (reachedStepCount === undefined) return 'tm-step';
+  const first = Math.min(...markers.filter((marker) => marker.elementId === elementId).map((marker) => marker.position));
+  return first <= reachedStepCount ? 'tm-step' : 'tm-step tm-step--ahead';
 }
 
 export default function ArchitectureDiagram({
-  model, title, highlight = null, selectedElementId = null, onSelectElement, openRiskCounts, chainMarkers = [], payloadFlows,
+  model, title, highlight = null, selectedElementId = null, onSelectElement, openRiskCounts, chainSteps = [], reachedStepCount, payloadFlows,
 }: Props) {
   const layout = useMemo(() => computeDiagramLayout(model), [model]);
   const interfaceId = model.components.find((component) => component.isNeuralInterface)?.id;
   const isInteractive = onSelectElement !== undefined;
+
+  // During playback a marker sits on the part the newest step acts on, and glides there from the last one.
+  const newestStep = reachedStepCount === undefined ? undefined : chainSteps.find((marker) => marker.position === reachedStepCount);
+  const travellerNode = layout.nodes.find((node) => node.id === newestStep?.elementId);
+  const travellerEdge = layout.edges.find((edge) => edge.id === newestStep?.elementId);
+  const travellerAt = travellerNode !== undefined
+    ? { x: travellerNode.x + NODE_STEP_INSET, y: travellerNode.y + NODE_STEP_INSET }
+    : travellerEdge !== undefined
+      ? { x: travellerEdge.labelX, y: edgeStepY(travellerEdge.labelY, payloadFlows?.get(travellerEdge.id)?.length ?? 0) }
+      : null;
 
   const stateClass = (elementId: string, isHighlighted: boolean): string => [
     highlight !== null && !isHighlighted ? 'tm-dimmed' : '',
@@ -112,7 +135,7 @@ export default function ArchitectureDiagram({
   } : {});
 
   const renderEdge = (edge: EdgeLine) => {
-    const steps = positionsAt(chainMarkers, edge.id);
+    const steps = positionsAt(chainSteps, edge.id);
     const isHighlighted = highlight?.linkIds.includes(edge.id) ?? true;
     const flows = payloadFlows?.get(edge.id) ?? [];
     const carried = flows.length > 0 ? `, carrying ${flows.map(describeFlow).join('; ')}` : '';
@@ -136,13 +159,13 @@ export default function ArchitectureDiagram({
           />
         ))}
         <text x={edge.labelX} y={edge.labelY} textAnchor="middle">{edge.label}</text>
-        {steps !== null && <Badge className="tm-step" x={edge.labelX} y={edge.labelY + (flows.length > 0 ? 32 : 18)} text={steps} delayMs={traceDelayAt(chainMarkers, edge.id)} />}
+        {steps !== null && <Badge className={stepClass(chainSteps, edge.id, reachedStepCount)} x={edge.labelX} y={edgeStepY(edge.labelY, flows.length)} text={steps} />}
       </g>
     );
   };
 
   const renderNode = (node: NodeBox) => {
-    const steps = positionsAt(chainMarkers, node.id);
+    const steps = positionsAt(chainSteps, node.id);
     const openRisks = openRiskCounts?.get(node.id) ?? 0;
     const isHighlighted = highlight?.componentIds.includes(node.id) ?? true;
     const interfaceClass = node.id === interfaceId ? 'tm-node--interface' : '';
@@ -152,7 +175,7 @@ export default function ArchitectureDiagram({
         <rect x={node.x} y={node.y} width={node.width} height={node.height} rx={10} />
         <text x={node.x + node.width / 2} y={node.y + node.height / 2 + 4} textAnchor="middle">{shorten(node.label)}</text>
         {openRisks > 0 && <Badge className="tm-heat" x={node.x + node.width - 4} y={node.y + 4} text={String(openRisks)} />}
-        {steps !== null && <Badge className="tm-step" x={node.x + 4} y={node.y + 4} text={steps} delayMs={traceDelayAt(chainMarkers, node.id)} />}
+        {steps !== null && <Badge className={stepClass(chainSteps, node.id, reachedStepCount)} x={node.x + NODE_STEP_INSET} y={node.y + NODE_STEP_INSET} text={steps} />}
       </g>
     );
   };
@@ -170,6 +193,7 @@ export default function ArchitectureDiagram({
       ))}
       {layout.edges.map(renderEdge)}
       {layout.nodes.map(renderNode)}
+      {travellerAt !== null && <circle className="tm-chain-traveller" r={TRAVELLER_RADIUS} style={{ transform: `translate(${travellerAt.x}px, ${travellerAt.y}px)` }} aria-hidden="true" />}
     </svg>
   );
 }

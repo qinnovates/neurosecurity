@@ -69,8 +69,16 @@ export interface BandControls {
   response: string[];
 }
 
+/** A tactic as the catalog names it. */
+export interface CatalogTactic {
+  id: string;
+  name: string;
+  description: string;
+}
+
 export interface EngineData {
   registrarVersion: string;
+  tactics: CatalogTactic[];
   techniques: CatalogTechnique[];
   regions: BrainRegion[];
   precedentCves: PrecedentCve[];
