@@ -603,6 +603,10 @@
     "QIF-T0157": {
       "category": "pharmacological",
       "reason": "Acts through a chemical or dietary exposure, not through the device."
+    },
+    "QIF-T0168": {
+      "category": "consumer_sensor",
+      "reason": "Reads the motion sensors of a VR headset, with no neural device on the person. It applies only if the product includes that sensor, which this model does not capture."
     }
   }
 }
