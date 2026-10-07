@@ -613,7 +613,7 @@ Full derivations: QIF-DERIVATION-LOG.md Entry 35
 
 | Metric | Value |
 |--------|-------|
-| **Total techniques** | 165 |
+| **Total techniques** | 174 |
 | **NISS version** | v1.1 on 139 techniques; 26 not yet scored (QIF-T0136 to QIF-T0161) |
 | **Domains** | 12 (AUD, AUT, COG, EMO, IDN, LNG, MEM, MOT, SIL, SOM, VES, VIS) |
 | **Modes** | 3 (D, M, R) |
@@ -643,8 +643,8 @@ Percentages are of the 139 scored techniques.
 
 | Mapping | Techniques Covered |
 |---------|--------------------|
-| DSM-5-TR (F-codes) | 76 of 165 |
-| ICD-10 (G/H/R-codes) | 38 of 165 |
+| DSM-5-TR (F-codes) | 76 of 174 |
+| ICD-10 (G/H/R-codes) | 38 of 174 |
 
 **Schema note:** DSM-5-TR codes (F-codes) live in `tara.dsm5`. ICD-10 codes (G/H/R-codes for neurological conditions) live in `tara.icd10`. These were split on 2026-03-15. Both are diagnostic category references for threat modeling, not diagnostic claims.
 
@@ -689,6 +689,7 @@ To strictly adhere to VERA neuroethics, the system **MUST** allow toggling betwe
 | NISS scoring | v1.1.1 | 2026-03-15 | 4-level NP scale, ICD-10 separation |
 | TARA registry | 161 techniques | 2026-03-15 | 52 new techniques (T0110-T0161), 12 domains × 3 modes |
 | TARA registry | 165 techniques | 2026-10-06 | Recount from the registrar: 165 techniques, 17 tactics; 26 techniques found without a NISS score |
+| TARA registry | 174 techniques | 2026-10-06 | `parent_id` sub-technique field added; 9 techniques added (QIF-T0166–QIF-T0174): 4 top-level, 5 sub-techniques of QIF-T0019/T0024/T0041/T0043/T0109 |
 | QIF-TRUTH.md | v4.3 | 2026-03-15 | Added TARA current state, version tracking, severity audit |
 | QIF-TRUTH.md | v4.4 | 2026-10-06 | Section 10 recomputed by script from the registrar; unscored techniques and undocumented status values flagged |
 

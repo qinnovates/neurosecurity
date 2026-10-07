@@ -7,7 +7,7 @@ import NissScoreBadge from '../../../components/niss/NissScoreBadge';
 import NissRadarChart from '../../../components/niss/NissRadarChart';
 import PinsBadge from '../../../components/niss/PinsBadge';
 import DriftBadge from '../../../components/tara/DriftBadge';
-import { THREAT_VECTORS, SEVERITY_COLORS } from '@/lib/threat-data';
+import { THREAT_VECTORS, SEVERITY_COLORS, getChildTechniques } from '@/lib/threat-data';
 import { parseNiss } from '@/lib/niss-parser';
 import { getValidationForTechnique, TIER_COLORS, STATUS_LABELS, STATUS_COLORS, VALIDATION_TIERS } from '@/lib/validation-data';
 import type { ValidationTierId } from '@/lib/validation-data';
@@ -23,6 +23,8 @@ export function getStaticPaths() {
 const { threat } = Astro.props;
 const severityColor = SEVERITY_COLORS[threat.severity] || SEVERITY_COLORS.low;
 const validation = getValidationForTechnique(threat.id);
+const parent = threat.parentId ? THREAT_VECTORS.find(t => t.id === threat.parentId) ?? null : null;
+const children = getChildTechniques(threat.id);
 
 // --- Build technique-specific brain view highlighting affected bands ---
 const BRAIN_REGIONS = [
@@ -212,7 +214,28 @@ const hasGovernance = nr || reg;
               <dt class="text-[var(--color-text-muted)]">Bands</dt>
               <dd>{threat.bands.join(', ')}</dd>
             </div>
+            {parent && (
+              <div class="flex justify-between">
+                <dt class="text-[var(--color-text-muted)]">Sub-technique of</dt>
+                <dd><a class="font-mono underline" href={`/atlas/tara/${parent.id}/`}>{parent.id}</a> &mdash; {parent.name}</dd>
+              </div>
+            )}
+            {children.length > 0 && (
+              <div class="flex justify-between gap-4">
+                <dt class="text-[var(--color-text-muted)]">Sub-techniques</dt>
+                <dd class="text-right">
+                  {children.map(c => (
+                    <div><a class="font-mono underline" href={`/atlas/tara/${c.id}/`}>{c.id}</a> &mdash; {c.name} ({c.status})</div>
+                  ))}
+                </dd>
+              </div>
+            )}
           </dl>
+          {children.length > 0 && (
+            <p class="text-xs text-[var(--color-text-faint)] mt-2">
+              Each sub-technique carries its own status, NISS vector and sources; a sub-technique's status is not this entry's status.
+            </p>
+          )}
         </div>
 
         <!-- Dual Use Section -->
@@ -366,6 +389,7 @@ const hasGovernance = nr || reg;
                       </a>
                     ))}
                   </div>
+                  {nr.cci !== null && nr.cci !== undefined && (
                   <div class="flex items-center gap-3 text-sm">
                     <span class="text-[var(--color-text-muted)]">Consent Complexity</span>
                     <div class="flex items-center gap-2 flex-1">
@@ -381,6 +405,7 @@ const hasGovernance = nr || reg;
                       <span class="text-[var(--color-text-faint)] text-xs">/ 4.0</span>
                     </div>
                   </div>
+                  )}
                 </div>
               )}
 

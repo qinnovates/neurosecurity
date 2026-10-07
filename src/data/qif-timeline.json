@@ -7,8 +7,8 @@
     "maintainer": "Kevin Qi"
   },
   "current_stats": {
-    "as_of": "2026-10-06",
-    "threat_techniques": 165,
+    "as_of": "2026-10-07",
+    "threat_techniques": 174,
     "bci_devices": 70,
     "brain_regions": 38,
     "physics_constraints": 13,
@@ -19,7 +19,7 @@
     "physics_constants_verified": 14,
     "preprint_version": "v1.5",
     "nsp_version": "v0.5",
-    "tara_version": "v1.8",
+    "tara_version": "v1.9",
     "atlas_version": "v1.2.0",
     "derivation_log_entries": 113,
     "field_journal_entries": 18,
@@ -27,7 +27,7 @@
     "blog_posts": 76,
     "cross_ai_validations": 14,
     "research_sources": 382,
-    "techniques_niss_scored": 139,
+    "techniques_niss_scored": 148,
     "tara_domains": 12,
     "bci_companies": 67,
     "niss_version": "v1.1",

@@ -176,6 +176,12 @@ export interface ThreatVector {
   taraDomainSecondary: string[];
   /** Mode: R=Reconnaissance, M=Manipulation, D=Disruption */
   taraMode: string | null;
+  /**
+   * Parent technique ID (QIF-Txxxx) when this entry is a sub-technique, else null.
+   * A child carries its own status, NISS vector and sources — never read a child's
+   * status as its parent's.
+   */
+  parentId: string | null;
 }
 
 /** Transform registry techniques → ThreatVector[] */
@@ -207,7 +213,13 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
   taraDomainPrimary: t.tara_domain_primary ?? null,
   taraDomainSecondary: t.tara_domain_secondary ?? [],
   taraMode: t.tara_mode ?? null,
+  parentId: t.parent_id ?? null,
 }));
+
+/** Sub-techniques of a given technique, by parent QIF-Txxxx ID */
+export function getChildTechniques(parentId: string): ThreatVector[] {
+  return THREAT_VECTORS.filter(t => t.parentId === parentId);
+}
 
 /** Dynamic technique count from registrar — use this instead of hardcoding */
 export const TECHNIQUE_COUNT = THREAT_VECTORS.length;

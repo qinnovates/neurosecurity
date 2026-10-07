@@ -54,6 +54,7 @@ export const INDEXED_FIELDS = [
   'band', 'zone', 'fda_status', 'category', 'cluster', 'tier',
   'tara_domain', 'tara_mode', 'tara_drift', 'biological_target',
   'evidence_tier', 'dual_use', 'operational_readiness',
+  'parent_id',
 ];
 
 /**

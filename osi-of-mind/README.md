@@ -33,7 +33,7 @@ This directory contains every piece of that puzzle.
      │     TARA       │ │  Neurowall    │ │    Governance   │
      │  (threat map)  │ │  (detection)  │ │    (policy)     │
      │                │ │               │ │                 │
-     │ 165 techniques │ │ Real-time     │ │ Consent models, │
+     │ 174 techniques │ │ Real-time     │ │ Consent models, │
      │ — every known  │ │ coherence     │ │ neurorights,    │
      │ way a BCI can  │ │ monitoring.   │ │ regulatory      │
      │ be attacked.   │ │ Detects when  │ │ compliance.     │
