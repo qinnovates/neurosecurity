@@ -24,7 +24,8 @@ import { downloadModelFile, downloadRegisterCsv, readModelFile } from './model-f
 import PartStrip from './PartStrip';
 import ReplaceDeviceConfirm from './ReplaceDeviceConfirm';
 import ReportView from './ReportView';
-import RiskRegister from './RiskRegister';
+import RiskDetail from './RiskDetail';
+import RisksSection from './RisksSection';
 import Tabs, { tabPanelProps, type TabItem } from './Tabs';
 import TargetRegionsPanel from './TargetRegionsPanel';
 import ThreatMatrix from './ThreatMatrix';
@@ -59,6 +60,7 @@ export default function ThreatModelStudio() {
   const [activeSection, setActiveSection] = useState<SectionId>('register');
   const [lens, setLens] = useState<Lens>(EMPTY_LENS);
   const [selectedChainId, setSelectedChainId] = useState<string | null>(null);
+  const [openedRiskId, setOpenedRiskId] = useState<string | null>(null);
   const [importError, setImportError] = useState<string | null>(null);
   const [pendingReplacement, setPendingReplacement] = useState<PendingReplacement | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -101,6 +103,18 @@ export default function ThreatModelStudio() {
   const selectedOutcome = report.elementOutcomes.find((outcome) => outcome.elementId === activeLens.elementId);
   const selectedElementLabel = activeLens.elementId === null ? null : describeElement(model, activeLens.elementId);
   const toggleEditor = (): void => setEditorOpen((isOpen) => !isOpen);
+  // A risk that no longer exists, after the device changed, closes its own panel.
+  const openedRisk = report.riskRows.find((row) => row.riskId === openedRiskId) ?? null;
+  const openedRiskOutcome = report.elementOutcomes.find((outcome) => outcome.elementId === openedRisk?.elementId);
+  const openedRiskReasons = openedRiskOutcome?.kind === 'matched'
+    ? openedRiskOutcome.matches.find((match) => match.techniqueId === openedRisk?.techniqueId)?.reasons.map((reason) => reason.detail) ?? []
+    : [];
+  /** Closing returns to the row the panel was opened from, so a keyboard reader keeps their place. */
+  const closeRisk = (): void => {
+    const rowSelector = openedRiskId === null ? null : `[data-reflow-key="${CSS.escape(openedRiskId)}"]`;
+    setOpenedRiskId(null);
+    if (rowSelector !== null) document.querySelector<HTMLElement>(rowSelector)?.focus();
+  };
 
   const applyReplacement = (replacement: PendingReplacement): void => {
     setSelectedChainId(null);
@@ -203,9 +217,7 @@ export default function ThreatModelStudio() {
         )}
         <div {...tabPanelProps(SECTIONS_ID, activeSection)}>
           {activeSection === 'register' && (
-            <section className="tm-card">
-              <RiskRegister rows={rowsInView} controlsInPlace={model.controlsInPlace} onDecide={decideRisk} onToggleControl={toggleControl} />
-            </section>
+            <RisksSection rows={rowsInView} controlsInPlace={model.controlsInPlace} onDecide={decideRisk} onOpenRisk={setOpenedRiskId} />
           )}
           {activeSection === 'map' && <section className="tm-card"><ThreatMatrix rows={rowsInView} /></section>}
           {activeSection === 'chains' && <ChainList chainResult={chainsInView} selectedChainId={selectedChainId} onSelectChain={setSelectedChainId} />}
@@ -222,11 +234,20 @@ export default function ThreatModelStudio() {
         </div>
       </div>
 
-      <aside className="model-inspector tm-no-print" aria-label="Coverage and the selected part">
+      <aside className="model-inspector tm-no-print" aria-label="Coverage, the selected part and the opened risk">
         <ModelInspector
           coverage={coverage} notAssessedGoals={notAssessedGoals} goalCoverage={report.goalCoverage} techniqueById={techniqueById}
           selected={selectedOutcome !== undefined && selectedElementLabel !== null ? { label: selectedElementLabel, outcome: selectedOutcome } : null}
-        />
+        >
+          {openedRisk !== null && (
+            <RiskDetail
+              row={openedRisk} technique={openedRisk.techniqueId === null ? undefined : techniqueById.get(openedRisk.techniqueId)}
+              placementReasons={openedRiskReasons} precedentCvesAsOf={report.precedentCvesAsOf}
+              precedentCves={report.precedentCves.filter((cve) => openedRisk.precedentCveIds.includes(cve.cveId))}
+              controlsInPlace={model.controlsInPlace} onDecide={decideRisk} onToggleControl={toggleControl} onClose={closeRisk}
+            />
+          )}
+        </ModelInspector>
       </aside>
     </div>
   );

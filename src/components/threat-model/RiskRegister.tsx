@@ -1,46 +1,19 @@
-import { useState } from 'react';
-import { MODEL_LIMITS, RISK_STATUSES, type RiskStatus } from '@/lib/threat-model/device-model';
 import { NOT_SCORED_LABEL } from '@/lib/threat-model/register-csv';
 import type { RiskRow } from '@/lib/threat-model/report-types';
 import { isRiskAddressed } from '@/lib/threat-model/risk-register';
-
-type SourceFilter = 'catalog' | 'stride' | 'all';
+import { RISK_STATUS_LABELS } from './risk-status-labels';
 
 interface Props {
   rows: readonly RiskRow[];
   controlsInPlace: readonly string[];
-  /** Omit to render a read-only register, as in the printed report. */
-  onDecide?: (riskId: string, status: RiskStatus, note: string) => void;
-  onToggleControl?: (control: string) => void;
 }
 
-const STATUS_LABELS: Record<RiskStatus, string> = {
-  open: 'Open',
-  mitigated: 'Mitigated',
-  accepted: 'Accepted',
-  not_applicable: 'Not applicable',
-};
-
-const FILTER_LABELS: Record<SourceFilter, string> = {
-  catalog: 'Neural techniques',
-  stride: 'STRIDE baseline',
-  all: 'All',
-};
-
-function ControlList({ row, controlsInPlace, onToggleControl }: { row: RiskRow; controlsInPlace: readonly string[]; onToggleControl?: (control: string) => void }) {
+function ControlList({ row, controlsInPlace }: { row: RiskRow; controlsInPlace: readonly string[] }) {
   if (row.controls.length === 0) return <span className="tm-muted tm-small">None suggested</span>;
   return (
-    <>
-      {row.controls.map((control) => (
-        <label key={control} className="tm-check">
-          <input
-            type="checkbox" checked={controlsInPlace.includes(control)} disabled={onToggleControl === undefined}
-            onChange={() => onToggleControl?.(control)}
-          />
-          <span>{control}</span>
-        </label>
-      ))}
-    </>
+    <ul className="tm-list">
+      {row.controls.map((control) => <li key={control}>{control}{controlsInPlace.includes(control) ? ' (in place)' : ''}</li>)}
+    </ul>
   );
 }
 
@@ -68,67 +41,30 @@ function ScoreCell({ row }: { row: RiskRow }) {
   );
 }
 
-export default function RiskRegister({ rows, controlsInPlace, onDecide, onToggleControl }: Props) {
-  const [sourceFilter, setSourceFilter] = useState<SourceFilter>('catalog');
-  const [isOpenOnly, setOpenOnly] = useState(false);
-  const isReadOnly = onDecide === undefined;
-  const sourceRows = rows.filter((row) => isReadOnly || sourceFilter === 'all' || row.source === sourceFilter);
-  const openCount = sourceRows.filter((row) => !isRiskAddressed(row, controlsInPlace)).length;
-  // Open rows first, so triage starts at the top; the order within each group is kept.
-  const visibleRows = isReadOnly ? sourceRows : [
-    ...sourceRows.filter((row) => !isRiskAddressed(row, controlsInPlace)),
-    ...(isOpenOnly ? [] : sourceRows.filter((row) => isRiskAddressed(row, controlsInPlace))),
-  ];
-
+/** The whole register as it is printed in the report: every row, every column, nothing to operate. */
+export default function RiskRegister({ rows, controlsInPlace }: Props) {
+  if (rows.length === 0) return <p className="tm-muted">No rows to show here.</p>;
   return (
-    <div>
-      {!isReadOnly && (
-        <div className="tm-tabs tm-no-print" role="group" aria-label="Register rows to show">
-          {(Object.keys(FILTER_LABELS) as SourceFilter[]).map((filter) => (
-            <button key={filter} type="button" className="tm-tab" aria-pressed={sourceFilter === filter} onClick={() => setSourceFilter(filter)}>
-              {FILTER_LABELS[filter]}
-            </button>
+    <div className="tm-table-wrap">
+      <table className="tm-table">
+        <thead>
+          <tr><th>Threat</th><th>Evidence</th><th>Score</th><th>Suggested controls</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.riskId} className={isRiskAddressed(row, controlsInPlace) ? 'tm-row--addressed' : undefined}>
+              <td><ThreatCell row={row} /></td>
+              <td>{row.evidenceStatus ?? <span className="tm-muted tm-small">Generic baseline</span>}</td>
+              <td><ScoreCell row={row} /></td>
+              <td><ControlList row={row} controlsInPlace={controlsInPlace} /></td>
+              <td>
+                {RISK_STATUS_LABELS[row.status]}
+                {row.note !== '' && <div className="tm-muted tm-small">{row.note}</div>}
+              </td>
+            </tr>
           ))}
-          <button type="button" className="tm-tab" aria-pressed={isOpenOnly} onClick={() => setOpenOnly(!isOpenOnly)}>Open only</button>
-          <span className="tm-muted tm-small" style={{ alignSelf: 'center' }} role="status">
-            {openCount} open of {sourceRows.length}. A row is addressed once it has a decision or one of its controls is marked in place.
-          </span>
-        </div>
-      )}
-      {visibleRows.length === 0 && <p className="tm-muted">{isOpenOnly ? 'Nothing open here.' : 'No rows to show here.'}</p>}
-      {visibleRows.length > 0 && (
-        <div className="tm-table-wrap">
-          <table className="tm-table">
-            <thead>
-              <tr><th>Threat</th><th>Evidence</th><th>Score</th><th>Suggested controls</th><th>Status</th></tr>
-            </thead>
-            <tbody>
-              {visibleRows.map((row) => (
-                <tr key={row.riskId} className={isRiskAddressed(row, controlsInPlace) ? 'tm-row--addressed' : undefined}>
-                  <td><ThreatCell row={row} /></td>
-                  <td>{row.evidenceStatus ?? <span className="tm-muted tm-small">Generic baseline</span>}</td>
-                  <td><ScoreCell row={row} /></td>
-                  <td><ControlList row={row} controlsInPlace={controlsInPlace} onToggleControl={onToggleControl} /></td>
-                  <td>
-                    {isReadOnly ? STATUS_LABELS[row.status] : (
-                      <select className="tm-select" aria-label={`Status of ${row.title}`} value={row.status} onChange={(event) => onDecide(row.riskId, event.target.value as RiskStatus, row.note)}>
-                        {RISK_STATUSES.map((status) => <option key={status} value={status}>{STATUS_LABELS[status]}</option>)}
-                      </select>
-                    )}
-                    {isReadOnly ? (row.note !== '' && <div className="tm-muted tm-small">{row.note}</div>) : (
-                      <input
-                        className="tm-input" style={{ marginTop: '0.25rem' }} type="text" placeholder="Note" aria-label={`Note for ${row.title}`}
-                        maxLength={MODEL_LIMITS.maxNoteLength} value={row.note}
-                        onChange={(event) => onDecide(row.riskId, row.status, event.target.value)}
-                      />
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+        </tbody>
+      </table>
     </div>
   );
 }
