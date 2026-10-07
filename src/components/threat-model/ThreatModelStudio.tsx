@@ -140,7 +140,7 @@ export default function ThreatModelStudio() {
             selectedChain={selectedChain} onClearChain={() => setSelectedChainId(null)}
           />
           <LensBar
-            lens={activeLens} counts={lensCounts} onChange={setLens}
+            lens={activeLens} counts={lensCounts} goalCoverage={report.goalCoverage} onChange={setLens}
             selectedElementLabel={activeLens.elementId === null ? null : describeElement(model, activeLens.elementId)}
           />
           <Tabs label="Threat model sections" idPrefix={SECTIONS_ID} tabs={SECTION_TABS} activeId={activeSection} onSelect={setActiveSection} />

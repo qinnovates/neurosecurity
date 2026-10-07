@@ -1,11 +1,12 @@
 import type { Lens, LensCounts } from '@/lib/threat-model/lens';
 import { PLACED_ENTRY_PATHS, type PlacedEntryPath } from '@/lib/threat-model/reference-data-types';
-import { THREAT_GOALS, type ThreatGoal } from '@/lib/threat-model/report-types';
+import { THREAT_GOALS, type GoalCoverage, type ThreatGoal } from '@/lib/threat-model/report-types';
 import CountUp from './CountUp';
 
 interface Props {
   lens: Lens;
   counts: LensCounts;
+  goalCoverage: Record<ThreatGoal, GoalCoverage>;
   /** Label of the selected component or link, or null when the whole device is shown. */
   selectedElementLabel: string | null;
   onChange: (lens: Lens) => void;
@@ -31,8 +32,11 @@ function toggle<Value>(values: readonly Value[], value: Value): Value[] {
  * The lenses over the device's risks. Each button shows how many open risks it would
  * leave on screen, so the bar doubles as a triage summary.
  */
-export default function LensBar({ lens, counts, selectedElementLabel, onChange }: Props) {
+export default function LensBar({ lens, counts, goalCoverage, selectedElementLabel, onChange }: Props) {
   const isNarrowed = lens.elementId !== null || lens.entryPaths.length > 0 || lens.goals.length > 0;
+  // A zero across the whole device is the misleading case: it reads as "clean" when it means "not assessed".
+  const isWholeDevice = lens.elementId === null && lens.entryPaths.length === 0;
+  const emptyGoals = isWholeDevice ? THREAT_GOALS.filter((goal) => counts.byGoal[goal] === 0) : [];
   return (
     <section className="tm-lensbar tm-no-print" aria-label="Lenses on this device's risks">
       <div className="tm-lens" role="group" aria-label="How it gets in">
@@ -69,6 +73,13 @@ export default function LensBar({ lens, counts, selectedElementLabel, onChange }
         <button type="button" className="tm-button" onClick={() => onChange({ elementId: null, entryPaths: [], goals: [] })}>Show everything</button>
       )}
       <span className="tm-muted tm-small">Counts are open risks from the neural technique catalog.</span>
+      {emptyGoals.map((goal) => (
+        <p key={goal} className="tm-lens-note">
+          <strong>{GOAL_LABELS[goal]} shows 0, which means not assessed, not no risk.</strong>{' '}
+          {goalCoverage[goal].placedTechniques} of the catalog&rsquo;s {goalCoverage[goal].catalogTechniques} techniques of this kind have a placement decision.
+          The rest have theoretical or emerging evidence, or act without passing through a device.
+        </p>
+      ))}
     </section>
   );
 }

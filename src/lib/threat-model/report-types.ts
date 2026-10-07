@@ -101,6 +101,12 @@ export interface CyberDeviceAssessment {
 }
 
 /** How much of the catalog the placement table covers, so the report can state what was not considered. */
+/** How much of the catalog's techniques of one goal can appear in a model at all. */
+export interface GoalCoverage {
+  placedTechniques: number;
+  catalogTechniques: number;
+}
+
 export interface CatalogCoverage {
   totalTechniques: number;
   placedTechniques: number;
@@ -161,6 +167,8 @@ export interface ThreatModelReport {
   ambientThreats: AmbientThreat[];
   themes: ThemeSummary[];
   catalogCoverage: CatalogCoverage;
+  /** Per goal, so an empty lens can say it means "not assessed" and not "no risk". */
+  goalCoverage: Record<ThreatGoal, GoalCoverage>;
   /** Element kinds that no placement decision covers, stated so gaps in the tool are visible. */
   coverageGaps: string[];
   /** Standing caveats printed with every report. */

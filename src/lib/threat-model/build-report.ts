@@ -7,14 +7,16 @@ import { DEFAULT_CHAIN_OPTIONS, generateChains } from './generate-chains';
 import { collectMatches, matchTechniques } from './match-techniques';
 import { collectPrecedentCves } from './precedent-cves';
 import type { ReferenceData } from './reference-data-types';
-import type { AmbientThreat, CatalogCoverage, ElementOutcome, ThemeSummary, ThemeTechnique, ThreatModelReport } from './report-types';
+import type {
+  AmbientThreat, CatalogCoverage, ElementOutcome, GoalCoverage, ThemeSummary, ThemeTechnique, ThreatGoal, ThreatModelReport,
+} from './report-types';
 import { buildRiskRegister, evidenceRank, goalOf } from './risk-register';
 
 /** Caveats printed with every report. They describe what the tool is and is not. */
 export const REPORT_LIMITATIONS: readonly string[] = [
   'This is a drafting aid. It is not a compliance determination, legal advice, or a substitute for review by a qualified regulatory or security professional.',
   'TARA and NISS are proposed research frameworks. They are not peer reviewed and are not adopted by any standards body.',
-  'The device presets, placement rules, STRIDE mapping, chain roles, and requirements checklist are this tool\'s own authored analysis and are unreviewed.',
+  'The device presets, placement rules, entry paths, themes, STRIDE mapping, chain roles, and requirements checklist are this tool\'s own analysis. They were drafted with an AI assistant and have not yet been reviewed line by line by the author.',
   'Attack chains are generated hypotheses. A chain shows that a path exists in the model; it is not evidence that the attack has been carried out.',
   'Precedent CVEs come from similar products. They are not findings about the modelled device.',
   'Only catalog techniques with confirmed or demonstrated evidence have a placement decision. The rest of the catalog is not assessed.',
@@ -48,6 +50,21 @@ function summariseCatalogCoverage(engineData: EngineData, referenceData: Referen
     notPlacedByCategory,
     notReviewedTechniques: totalTechniques - placedTechniques - Object.keys(notPlaced).length,
   };
+}
+
+function summariseGoalCoverage(engineData: EngineData, referenceData: ReferenceData): Record<ThreatGoal, GoalCoverage> {
+  const coverage: Record<ThreatGoal, GoalCoverage> = {
+    read: { placedTechniques: 0, catalogTechniques: 0 },
+    change: { placedTechniques: 0, catalogTechniques: 0 },
+    deny: { placedTechniques: 0, catalogTechniques: 0 },
+  };
+  for (const technique of engineData.techniques) {
+    const goal = goalOf(technique);
+    if (goal === null) continue;
+    coverage[goal].catalogTechniques += 1;
+    if (technique.id in referenceData.placementRules.placements) coverage[goal].placedTechniques += 1;
+  }
+  return coverage;
 }
 
 /** Evidenced techniques that do not pass through any device, best evidenced first. Classes this tool cannot model are left out. */
@@ -109,6 +126,7 @@ export function buildThreatModelReport(inputs: ReportInputs): ThreatModelReport 
     ambientThreats: listAmbientThreats(engineData, referenceData),
     themes: summariseThemes(engineData, referenceData, matchedTechniqueIds),
     catalogCoverage: summariseCatalogCoverage(engineData, referenceData),
+    goalCoverage: summariseGoalCoverage(engineData, referenceData),
     coverageGaps: listCoverageGaps(elementOutcomes),
     limitations: [...REPORT_LIMITATIONS],
   };

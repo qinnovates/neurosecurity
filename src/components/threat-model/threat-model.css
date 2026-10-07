@@ -143,3 +143,5 @@ textarea.tm-input { resize: vertical; }
 .tm-regions-halo { fill: var(--color-accent-primary); opacity: 0.22; transform-box: fill-box; transform-origin: center; animation: tm-region-halo 2.4s var(--motion-ease, ease) infinite; }
 @keyframes tm-region-halo { 0%, 100% { transform: scale(0.9); opacity: 0.28; } 50% { transform: scale(1.25); opacity: 0.08; } }
 @media (prefers-reduced-motion: reduce) { .tm-regions, .tm-regions-halo { animation: none; } }
+
+.tm-lens-note { flex-basis: 100%; margin: 0; padding: 0.375rem 0.625rem; font-size: 0.8125rem; border-left: 3px solid var(--color-accent-warning, #d97706); background: var(--color-glass-bg); border-radius: 0 0.375rem 0.375rem 0; }

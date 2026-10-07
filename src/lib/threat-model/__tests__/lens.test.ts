@@ -123,3 +123,24 @@ describe('around the device and themes', () => {
     expect(() => parsePlacementRules(broken, engineData.techniques)).toThrow(/QIF-T0049.*malformed/);
   });
 });
+
+describe('goal coverage', () => {
+  it('counts, per goal, how many catalog techniques have a placement decision', () => {
+    const { goalCoverage } = stimulator;
+    const withMode = engineData.techniques.filter((technique) => technique.mode !== null).length;
+    const counted = goalCoverage.read.catalogTechniques + goalCoverage.change.catalogTechniques + goalCoverage.deny.catalogTechniques;
+    expect(counted).toBe(withMode);
+    for (const coverage of Object.values(goalCoverage)) {
+      expect(coverage.placedTechniques).toBeLessThanOrEqual(coverage.catalogTechniques);
+    }
+    const placedTotal = goalCoverage.read.placedTechniques + goalCoverage.change.placedTechniques + goalCoverage.deny.placedTechniques;
+    expect(placedTotal).toBe(Object.keys(referenceData.placementRules.placements).length);
+  });
+
+  it('shows that deny-type techniques are mostly not placed, which is why a recording device counts none', () => {
+    const headset = reportFor('noninvasive-eeg-headset');
+    const openDeny = countOpenRisks(headset.riskRows, EMPTY_LENS, headset.model.controlsInPlace).byGoal.deny;
+    expect(openDeny).toBe(0);
+    expect(headset.goalCoverage.deny.placedTechniques).toBeLessThan(headset.goalCoverage.deny.catalogTechniques);
+  });
+});
