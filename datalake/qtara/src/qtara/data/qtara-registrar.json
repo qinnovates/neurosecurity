@@ -766,7 +766,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0002",
@@ -1026,7 +1035,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0003",
@@ -1216,7 +1234,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "4 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
+        "neural_product_cve_count": 4,
+        "adjacent_cve_count": 5,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0004",
@@ -1383,7 +1410,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "2 NVD-verified CVE(s) in a neural-data product; authoring status was DEMONSTRATED",
+        "neural_product_cve_count": 2,
+        "adjacent_cve_count": 14,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0005",
@@ -1557,7 +1593,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0006",
@@ -1731,7 +1776,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0007",
@@ -1885,7 +1939,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 4,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0008",
@@ -2153,7 +2216,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "6 NVD-verified CVE(s) in a neural-data product; authoring status was THEORETICAL",
+        "neural_product_cve_count": 6,
+        "adjacent_cve_count": 2,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0009",
@@ -2439,7 +2511,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was EMERGING",
+        "neural_product_cve_count": 1,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0010",
@@ -2719,7 +2800,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0011",
@@ -2981,7 +3071,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0012",
@@ -3218,7 +3317,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0013",
@@ -3479,7 +3587,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0014",
@@ -3780,7 +3897,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0015",
@@ -3943,7 +4069,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0016",
@@ -4082,7 +4217,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0017",
@@ -4221,7 +4365,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0018",
@@ -4361,7 +4514,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0019",
@@ -4503,7 +4665,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0020",
@@ -4654,7 +4825,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0021",
@@ -4804,7 +4984,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0022",
@@ -5026,7 +5215,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was EMERGING",
+        "neural_product_cve_count": 1,
+        "adjacent_cve_count": 1,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0023",
@@ -5301,7 +5499,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0024",
@@ -5444,7 +5651,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0025",
@@ -5739,7 +5955,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0026",
@@ -6023,7 +6248,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0027",
@@ -6301,7 +6535,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0028",
@@ -6468,7 +6711,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0029",
@@ -6750,7 +7002,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 1,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0030",
@@ -7030,7 +7291,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0031",
@@ -7164,7 +7434,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was THEORETICAL",
+        "neural_product_cve_count": 1,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0032",
@@ -7420,7 +7699,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 2,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0033",
@@ -7666,7 +7954,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0034",
@@ -7911,7 +8208,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0035",
@@ -8127,7 +8433,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0036",
@@ -8346,7 +8661,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0037",
@@ -8611,7 +8935,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0038",
@@ -8855,7 +9188,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0039",
@@ -9100,7 +9442,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0040",
@@ -9314,7 +9665,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0041",
@@ -9563,7 +9923,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0042",
@@ -9708,7 +10077,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
+        "neural_product_cve_count": 1,
+        "adjacent_cve_count": 8,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0043",
@@ -9859,6 +10237,15 @@
           "QIF-T0043",
           "QIF-T0046"
         ]
+      },
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "6 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
+        "neural_product_cve_count": 6,
+        "adjacent_cve_count": 10,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -9996,7 +10383,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 26,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0045",
@@ -10132,7 +10528,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 1,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0046",
@@ -10287,6 +10692,15 @@
           "QIF-T0043",
           "QIF-T0046"
         ]
+      },
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was EMERGING",
+        "neural_product_cve_count": 1,
+        "adjacent_cve_count": 2,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -10429,7 +10843,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was EMERGING",
+        "neural_product_cve_count": 1,
+        "adjacent_cve_count": 3,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0048",
@@ -10578,7 +11001,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0049",
@@ -10715,7 +11147,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "8 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
+        "neural_product_cve_count": 8,
+        "adjacent_cve_count": 10,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0050",
@@ -10857,7 +11298,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 4,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0051",
@@ -11029,7 +11479,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "9 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
+        "neural_product_cve_count": 9,
+        "adjacent_cve_count": 7,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0052",
@@ -11277,7 +11736,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0053",
@@ -11524,7 +11992,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0054",
@@ -11768,7 +12245,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0055",
@@ -12028,7 +12514,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0056",
@@ -12273,7 +12768,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 2,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0057",
@@ -12423,7 +12927,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "2 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
+        "neural_product_cve_count": 2,
+        "adjacent_cve_count": 1,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0058",
@@ -12582,7 +13095,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0059",
@@ -12796,7 +13318,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0060",
@@ -13039,7 +13570,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0061",
@@ -13197,7 +13737,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0062",
@@ -13411,7 +13960,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0063",
@@ -13571,7 +14129,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0064",
@@ -13785,7 +14352,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0065",
@@ -14052,7 +14628,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0066",
@@ -14364,7 +14949,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0067",
@@ -14659,7 +15253,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was DEMONSTRATED",
+        "neural_product_cve_count": 1,
+        "adjacent_cve_count": 1,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0068",
@@ -14938,7 +15541,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0069",
@@ -15236,7 +15848,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0070",
@@ -15498,7 +16119,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0071",
@@ -15669,7 +16299,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0072",
@@ -15829,7 +16468,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 1,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0073",
@@ -16097,7 +16745,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0074",
@@ -16414,7 +17071,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0075",
@@ -16593,7 +17259,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0076",
@@ -16768,7 +17443,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0077",
@@ -16953,7 +17637,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0078",
@@ -17134,7 +17827,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0079",
@@ -17320,7 +18022,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0080",
@@ -17476,7 +18187,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0081",
@@ -17634,7 +18354,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0082",
@@ -17793,7 +18522,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0083",
@@ -17950,7 +18688,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0084",
@@ -18126,7 +18873,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0085",
@@ -18383,7 +19139,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0086",
@@ -18537,7 +19302,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0087",
@@ -18697,7 +19471,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0088",
@@ -18874,7 +19657,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0089",
@@ -19127,7 +19919,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0090",
@@ -19336,7 +20137,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0091",
@@ -19497,7 +20307,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0092",
@@ -19731,7 +20550,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0093",
@@ -19909,7 +20737,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0094",
@@ -20066,7 +20903,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0095",
@@ -20329,7 +21175,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0096",
@@ -20503,7 +21358,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0097",
@@ -20740,7 +21604,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0098",
@@ -20914,7 +21787,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0099",
@@ -21192,7 +22074,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0100",
@@ -21381,7 +22272,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "speculative",
+        "basis": "status PLAUSIBLE",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "PLAUSIBLE",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0101",
@@ -21565,7 +22465,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0102",
@@ -21739,7 +22648,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "speculative",
+        "basis": "status SPECULATIVE",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "SPECULATIVE",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0103",
@@ -21939,7 +22857,16 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0104",
@@ -22072,6 +22999,15 @@
         "gate_reason": "Software/protocol attack — physics does not constrain",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-10-07"
+      },
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -22203,6 +23139,15 @@
         "gate_reason": "Software/network attack — physics does not constrain",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-10-07"
+      },
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -22332,6 +23277,15 @@
         "gate_reason": "Software/network attack — physics does not constrain",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-10-07"
+      },
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -22465,6 +23419,15 @@
         "gate_reason": "Software/protocol attack — physics does not constrain",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-10-07"
+      },
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -22597,6 +23560,15 @@
         "gate_reason": "Neuromorphic chips exist (Intel Loihi, IBM TrueNorth) but BCI integration is emerging",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -22726,6 +23698,15 @@
         "gate_reason": "Software/data pipeline attack — physics does not constrain",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-10-07"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -22874,6 +23855,15 @@
         "gate_reason": "VEMP testing equipment commercially available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -23052,6 +24042,15 @@
         "gate_reason": "GVS devices commercially available; established research tool",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -23224,6 +24223,15 @@
         "gate_reason": "Caloric testing and VOR assessment equipment standard in vestibular clinics",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -23389,6 +24397,15 @@
         "gate_reason": "Auditory stimulation equipment and VEMP testing commercially available",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -23563,6 +24580,15 @@
         "gate_reason": "GVS and caloric stimulation equipment available; overload parameters achievable with standard hardware",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -23739,6 +24765,15 @@
         "gate_reason": "tDCS devices commercially available; cumulative effects documented in literature",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -23903,6 +24938,15 @@
         "gate_reason": "DBS of reward circuits demonstrated in clinical trials",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -24076,6 +25120,15 @@
         "gate_reason": "Closed-loop sleep stimulation demonstrated in research; real-time ripple detection emerging",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -24247,6 +25300,15 @@
         "gate_reason": "rTMS of Broca's area established in research and clinical practice",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -24409,6 +25471,15 @@
         "gate_reason": "Real-time fMRI neurofeedback demonstrated; chronic subthreshold protocols emerging",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -24586,6 +25657,15 @@
         "gate_reason": "Electrode micromotion and gliosis well-documented in chronic implant literature",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -24764,6 +25844,15 @@
         "gate_reason": "Closed-loop sleep stimulation demonstrated in multiple research labs",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -24926,6 +26015,15 @@
         "gate_reason": "Kindling paradigm well-established in animal models; mechanism applies to any implanted BCI electrode",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -25096,6 +26194,15 @@
         "gate_reason": "Motor cortex stimulation and cortical reorganization well-documented",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -25256,6 +26363,15 @@
         "gate_reason": "ECT and TMS effects on autobiographical memory well-documented",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -25403,6 +26519,15 @@
         "gate_reason": "EEG biometric identification demonstrated with >95% accuracy in research",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -25543,6 +26668,15 @@
         "gate_reason": "VEP and SSVEP testing equipment standard in clinical and research settings",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -25705,6 +26839,15 @@
         "gate_reason": "Amygdala DBS demonstrated in clinical research; fear responses documented",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -25867,6 +27010,15 @@
         "gate_reason": "Subcallosal cingulate DBS demonstrated in clinical trials; reward circuit modulation documented",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -26027,6 +27179,15 @@
         "gate_reason": "Multi-target DBS requires high-density electrode arrays; components exist but integration is emerging",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -26187,6 +27348,15 @@
         "gate_reason": "TMS of TPJ and effects on moral/empathic judgment demonstrated in research",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -26354,6 +27524,15 @@
         "gate_reason": "Brain-to-speech BCIs demonstrated; bidirectional speech control emerging",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -26525,6 +27704,15 @@
         "gate_reason": "rTMS of Wernicke's area and effects on language comprehension well-established",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -26694,6 +27882,15 @@
         "gate_reason": "Visual cortex stimulation and photosensitive seizure induction well-documented",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -26865,6 +28062,15 @@
         "gate_reason": "Cochlear implants widely deployed; overstimulation a known device safety concern",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -27042,6 +28248,15 @@
         "gate_reason": "Off-target DBS effects well-documented in clinical literature; pathway propagation is inherent to neural stimulation",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-03-14"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -27067,7 +28282,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "Propagating NIR photons (670/808nm) absorbed by mitochondrial cytochrome c oxidase (CCO) in dopaminergic neurons. CCO activation increases ATP production, upregulates tyrosine hydroxylase (TH) and VMAT2 expression over days-weeks. Neuroprotective, not acutely stimulatory. Requires cofactor readiness (Fe2+, BH4, B6).",
@@ -27094,7 +28310,16 @@
         "Gu 2017 DOI:10.1016/j.cellsig.2017.06.007",
         "Mohammed 2023 DOI:10.1007/s43630-023-00497-z (5-HT + NE restoration via CCO)"
       ],
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0137",
@@ -27121,7 +28346,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 1,
-        "tier_label": "near_term"
+        "tier_label": "near_term",
+        "timeline": "2026-2031"
       },
       "tara": {
         "mechanism": "980nm NIR excitation of NaYF4:Yb/Tm upconversion nanoparticles (UCNPs) injected into VTA. UCNPs emit 450/475nm blue light locally, activating ChR2 channelrhodopsin expressed in dopaminergic neurons via viral vector. Triggers acute dopamine release on millisecond timescale. Requires both genetic modification (ChR2 expression) and NP injection (neurosurgery).",
@@ -27146,7 +28372,16 @@
         "Gong 2018 DOI:10.1126/science.aaq1144",
         "Liu 2021 DOI:10.1038/s41467-021-25993-7"
       ],
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0138",
@@ -27173,7 +28408,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 1,
-        "tier_label": "near_term"
+        "tier_label": "near_term",
+        "timeline": "2026-2031"
       },
       "tara": {
         "mechanism": "980nm NIR excitation of hybrid upconversion-photovoltaic (HUP) nanoparticles (NaYF4:Yb/Tm + WO3-x nanorods) injected into VTA. UCNPs upconvert to 450nm; WO3-x generates capacitive photocurrent that depolarizes neurons directly. NO genetic modification required. Triggers acute dopamine release. 78% Y-maze place preference in mice.",
@@ -27196,7 +28432,16 @@
       "sources": [
         "Jin 2025 DOI:10.1126/sciadv.adt4771"
       ],
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0139",
@@ -27221,7 +28466,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 1,
-        "tier_label": "near_term"
+        "tier_label": "near_term",
+        "timeline": "2026-2031"
       },
       "tara": {
         "mechanism": "NIR light (680-1100nm, tunable by nanorod aspect ratio) absorbed by antibody-conjugated gold nanorods at neuronal membrane. Photothermal conversion raises local temperature above 43.8C TRPV1 activation threshold. Ca2+ influx triggers action potential. DA-specific effect inferred but not directly demonstrated in VTA. Narrow thermal safety window (43.8-47C).",
@@ -27243,7 +28489,16 @@
       "sources": [
         "Carvalho-de-Souza 2015 DOI:10.1016/j.neuron.2015.02.033"
       ],
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0140",
@@ -27267,7 +28522,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "Pulsed 1875nm IR light delivered via contact fiber optic. Water absorption generates localized thermal transient (1-10C rise) activating TRPV4 channels and membrane capacitance changes. NOT applied to dopamine neurons. Demonstrated in cochlear, vestibular, spinal nerve, somatosensory cortex. Safety ratio only 2:1 (stimulation:damage threshold).",
@@ -27291,7 +28547,16 @@
         "Cayce 2011 DOI:10.1016/j.neuroimage.2011.03.084",
         "Pan 2023 DOI:10.1016/j.brs.2023.01.006"
       ],
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0141",
@@ -27317,7 +28582,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 1,
-        "tier_label": "near_term"
+        "tier_label": "near_term",
+        "timeline": "2026-2031"
       },
       "tara": {
         "mechanism": "Alternating magnetic field (160-570 kHz, NOT optical) drives hysteretic heating of injected iron-oxide or ferrite nanoparticles. Local temperature rise >43.8C activates TRPV1 channels. Reversed Parkinson's symptoms in MPTP/6-OHDA mice. WARNING: iron-oxide NPs in VTA/SNc add exogenous iron to brain regions where Fenton chemistry is a neurotoxicity risk. 10ug/ml ferric oxide depleted cellular DA by 68% in 24hrs (Imam 2015).",
@@ -27340,7 +28606,16 @@
         "Hescham 2021 DOI:10.1038/s41467-021-25837-4",
         "Imam 2015 PMID:26099304"
       ],
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0142",
@@ -27364,7 +28639,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "Paired-pulse TMS: subthreshold conditioning stimulus (70-80% RMT) at ISI 1-5ms activates synaptic GABA-A inhibitory interneurons. Benzodiazepine-sensitive (gamma2 subunit). Distinct from T0009 (RF) and T0010 (ELF) by magnetic induction via contact coil + paired-pulse paradigm targeting GABA-A specifically.",
@@ -27388,7 +28664,16 @@
         "Kujirai 1993 J Physiol 471:501-519 PMID:8120818"
       ],
       "tara_alias": "TARA-COG-M-013",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0143",
@@ -27412,7 +28697,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "Paired-pulse TMS: suprathreshold conditioning at ISI 50-200ms (peak 80-135ms) activates GABA-B metabotropic receptors. Gi-coupled GIRK K+ channel hyperpolarization. Pharmacologically distinct from SICI: baclofen enhances LICI, benzodiazepines do not. Maps directly to GABA-B IPSP kinetics.",
@@ -27437,7 +28723,16 @@
         "McDonnell 2006 PMID:16489434 DOI:10.1007/s00221-006-0365-2"
       ],
       "tara_alias": "TARA-COG-M-014",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0144",
@@ -27460,7 +28755,8 @@
       "tara_mode": "D",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "Continuous theta-burst stimulation (50Hz triplets at 5Hz, 40s, 600 pulses, ~80% AMT) induces LTD-like cortical suppression lasting 30-60min with MRS-confirmed GABA increase in M1. Distinct from SICI/LICI (paired-pulse) and T0010 (ELF entrainment). The GABA increase is a neuroplasticity response, not acute receptor activation.",
@@ -27486,7 +28782,16 @@
         "Stagg 2009 J Neurophysiol DOI:10.1152/jn.91060.2008 PMID:19339458"
       ],
       "tara_alias": "TARA-COG-D-006",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0145",
@@ -27510,7 +28815,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "Anodal tDCS (1-2mA, 10-20min, M1) reduces cortical GABA 10-30% (7T MRS, Stagg 2009). Polarity-specific: anodal reduces GABA only; cathodal reduces both GABA and glutamate (coupled). Distinct from T0001 (generic signal injection) by NT-specific polarity asymmetry not captured in T0001.",
@@ -27535,7 +28841,16 @@
         "Stagg 2009 J Neurosci DOI:10.1523/JNEUROSCI.4432-08.2009 PMID:19386916"
       ],
       "tara_alias": "TARA-COG-M-015",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0146",
@@ -27558,7 +28873,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "40Hz tACS via contact electrodes drives PV+ fast-spiking GABAergic interneurons phase-locked at gamma. Sustained >10min: duration-dependent GABA-A decrease (SICI-measured, Nowak 2017). Distinct from T0010 (non-contact ELF) and GENUS (sensory, no electrodes).",
@@ -27582,7 +28898,16 @@
         "Nowak 2017 J Neurosci DOI:10.1523/JNEUROSCI.0098-17.2017 PMID:28373400"
       ],
       "tara_alias": "TARA-COG-M-016",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0147",
@@ -27607,7 +28932,8 @@
       "tara_mode": "D",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "Transcranial focused ultrasound (0.25MHz, 100ms pulses) targeting thalamus reduces extracellular GABA ~20% without glutamate change (Yang 2012, rat microdialysis). Acoustic radiation force activates mechanosensitive channels (Piezo1/TREK). Thalamic reticular nucleus is almost entirely GABAergic — reducing thalamic GABA disrupts thalamocortical gating, sleep oscillations, consciousness. First acoustic NT-specific TARA technique.",
@@ -27632,7 +28958,16 @@
         "Yang 2012 Neuropsychobiology DOI:10.1159/000336001 PMID:22378299"
       ],
       "tara_alias": "TARA-COG-D-007",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0148",
@@ -27657,7 +28992,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "40Hz visual LED flicker and/or auditory click trains (1hr/day) entrain PV+ fast-spiking GABAergic interneurons via endogenous sensory pathway resonance. Iaccarino 2016 (Nature): 40Hz-specific (not 20Hz, not 80Hz) PV interneuron drive reduces amyloid ~50% in 5XFAD mice, activates microglia. No electrode contact required. Distinct from T0103 (SSVEP hijack targets BCI signal spoofing, not interneuron NT modulation).",
@@ -27681,7 +29017,16 @@
         "Iaccarino 2016 Nature DOI:10.1038/nature20587 PMID:27929004"
       ],
       "tara_alias": "TARA-COG-M-017",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0149",
@@ -27708,7 +29053,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 1,
-        "tier_label": "near_term"
+        "tier_label": "near_term",
+        "timeline": "2026-2031"
       },
       "tara": {
         "mechanism": "Implanted cervical VNS cuff electrode activates vagal afferents -> NTS -> nucleus basalis of Meynert (NBM) -> cortical ACh release via mAChR. Scopolamine eliminates VNS cortical effects (Nichols 2011). ACh reinforcement selectively consolidates active motor circuits (Bowles 2022). Pre-condition: surgical implant. FDA-approved platform (LivaNova).",
@@ -27734,7 +29080,16 @@
         "Nichols 2011 DOI:10.1016/j.neuroscience.2011.05.024 PMID:21627982"
       ],
       "tara_alias": "TARA-COG-M-018",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0150",
@@ -27758,7 +29113,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "Transcutaneous electrical stimulation of auricular branch of vagus nerve (ABVN) at cymba conchae (100% ABVN innervation). Activates NTS -> cholinergic relay. EEG microstate changes confirmed. P300 modulation demonstrated. Peripheral: alpha7 nAChR anti-inflammatory pathway. No surgery. Wearable ear clip (CE-marked Nemos).",
@@ -27785,7 +29141,16 @@
         "PMID:32992726 PMC7599782"
       ],
       "tara_alias": "TARA-COG-M-019",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0151",
@@ -27808,7 +29173,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "Single-pulse TMS over SMA elicits TMS-evoked potentials (TEPs) suppressed by endogenous mAChR cholinergic tone. Scopolamine increases TEP at 40-63ms and enhances alpha synchronization. Distinct from SICI (GABA-A, ISI 1-5ms). Attack: TMS perturbation reveals/perturbs cholinergic status in BCI user.",
@@ -27832,7 +29198,16 @@
         "DOI:10.1016/j.pnpbp.2024.111167"
       ],
       "tara_alias": "TARA-COG-M-020",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0152",
@@ -27859,7 +29234,8 @@
       "tara_mode": "D",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "Organophosphate nerve agents (sarin, VX, novichok) irreversibly phosphorylate AChE -> ACh accumulates -> cholinergic crisis. BCI impact: massive EEG distortion, seizure activity, NMJ fasciculation artifacts. Tokyo subway survivors showed EEG abnormalities 5 years post-exposure (Yanagisawa 2006). DEFENSIVE FRAMING: threat is BCI signal integrity during chemical exposure. Countermeasures: atropine (mAChR antagonist), pralidoxime (AChE reactivator <30min). BCI as diagnostic sensor for exposure detection.",
@@ -27884,7 +29260,16 @@
         "Yanagisawa 2006 DOI:10.1016/j.jns.2006.06.007 PMID:16962140"
       ],
       "tara_alias": "TARA-COG-D-008",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0153",
@@ -27908,7 +29293,8 @@
       "tara_mode": "R",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "EEG spectral signatures track cholinergic tone. 14-biomarker mAChR index achieves 88-92% accuracy detecting mAChR antagonist administration (Simpraga 2017). AChEI drugs produce drug-specific alpha/theta/beta patterns (Arjmandi-Rad 2024, 24-study review). Passive BCI data inference attack: infer medication status (donepezil = Alzheimer's diagnosis proxy), disease progression, acute cholinergic changes. No stimulation required.",
@@ -27933,7 +29319,16 @@
         "Arjmandi-Rad 2024 PMID:37843690"
       ],
       "tara_alias": "TARA-COG-R-013",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0154",
@@ -27958,7 +29353,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 1,
-        "tier_label": "near_term"
+        "tier_label": "near_term",
+        "timeline": "2026-2031"
       },
       "tara": {
         "mechanism": "VNS activates vagal afferents -> NTS -> locus coeruleus (NE, obligate intermediary) -> dorsal raphe nucleus (DRN, 5-HT). LC lesioning completely blocks 5-HT response (Dorr & Debonnel 2006). 14-day latency for serotonin effect (acute NE only). Disynaptic peripheral-to-brainstem cascade distinct from T0009 (EM cortical) and T0136 (photon CCO).",
@@ -27981,7 +29377,16 @@
         "Dorr & Debonnel 2006 PMID:16690723 PMC2702444"
       ],
       "tara_alias": "TARA-EMO-M-010",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0155",
@@ -28006,7 +29411,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 2,
-        "tier_label": "mid_term"
+        "tier_label": "mid_term",
+        "timeline": "2031-2038"
       },
       "tara": {
         "mechanism": "Low-intensity focused ultrasound (1.1MHz, 50% duty cycle, 30min/day x14 days) targets dorsal raphe nucleus with mm spatial precision. Acoustic pressure activates Piezo1 mechanosensitive channels (PNAS 2023) -> Ca2+ influx -> 5-HT release. LC-MS confirmed serotonin increase in DRN (Zeng 2022, PMID:35998565). No RF signature, no surface contact. High severity: precise deep targeting without EM emission.",
@@ -28031,7 +29437,16 @@
         "Duque 2023 DOI:10.1073/pnas.2300291120 PMC10161134"
       ],
       "tara_alias": "TARA-EMO-M-011",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0156",
@@ -28059,7 +29474,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "100Hz electroacupuncture (ST36/SP6, 1-2mA, 0.2ms pulse, 45min) selectively activates serotonergic DRN neurons. pCPA (5-HT synthesis blocker) abolishes effect, confirming serotonin necessity (Lin 2017). Frequency-selective: 100Hz=5-HT (DRN), 2Hz=opioid (enkephalin). Second mechanism: 2Hz at GV20/GV29 downregulates miRNA-16 -> reduces SERT -> increases synaptic 5-HT (Zhao 2019). Peripheral needle -> spinal -> brainstem pathway.",
@@ -28085,7 +29501,16 @@
         "Zhao 2019 PMID:31929820 PMC6942800"
       ],
       "tara_alias": "TARA-EMO-M-012",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0157",
@@ -28110,7 +29535,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 0,
-        "tier_label": "feasible_now"
+        "tier_label": "feasible_now",
+        "timeline": "now"
       },
       "tara": {
         "mechanism": "65g large neutral amino acid mixture (excluding tryptophan) floods LAT1 BBB transporter -> tryptophan uptake reduced 80-90% within 5-6hrs -> TPH2 substrate starvation -> central 5-HT synthesis crashes. Effects: impaired reward learning, reduced happy face recognition. Resolves in 24hrs. EPISTEMIC FLAG: direct evidence that ATD reduces extracellular 5-HT is inconsistent (Bell 2001, PMID:21339754). First purely metabolic/dietary TARA technique — no device required. Tryptophan competes with tyrosine at LAT1: asymmetric damage to 5-HT vs DA.",
@@ -28134,7 +29560,16 @@
         "van Donkelaar 2011 PMID:21339754"
       ],
       "tara_alias": "TARA-EMO-M-013",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status CONFIRMED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0158",
@@ -28159,7 +29594,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 3,
-        "tier_label": "far_term"
+        "tier_label": "far_term",
+        "timeline": "2038+"
       },
       "tara": {
         "mechanism": "Sub-threshold anodal tDCS (1-2mA, repeated sessions over weeks) drives polarity-dependent shift: GABA down 10-30%, Glu up (dose-dependent). Net: progressive seizure threshold reduction without acute clinical presentation. Attack completed by separate trigger event. Distinct from T0122 (kindling: implanted electrodes, amygdala) and T0026/T0029 (acute superthreshold). Operates sub-threshold, non-invasive, preparatory not direct.",
@@ -28183,7 +29619,16 @@
         "Nitsche 2003 PMC2343495"
       ],
       "tara_alias": "TARA-AUT-M-003",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0159",
@@ -28207,7 +29652,8 @@
       "tara_mode": "M",
       "physics_feasibility": {
         "tier": 2,
-        "tier_label": "mid_term"
+        "tier_label": "mid_term",
+        "timeline": "2031-2038"
       },
       "tara": {
         "mechanism": "Pulsed LIFU (0.5MHz, <10% duty cycle) activates astrocytic TRPA1 mechanosensitive channels -> Ca2+ influx -> Best1-mediated glutamate release (gliotransmission) -> extrasynaptic NR2B-enriched NMDA receptors -> neuronal depolarization. Distinct: (1) acoustic not EM, (2) astrocyte-first not neuron-first, (3) gliotransmission not synaptic vesicle, (4) extrasynaptic NMDA pool pharmacologically distinct from synaptic. Confirmed: Gu & Han 2019, Current Biology.",
@@ -28233,7 +29679,16 @@
         "Deffieux 2023 Neuron DOI:10.1016/j.neuron.2023.02.002"
       ],
       "tara_alias": "TARA-COG-M-021",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0160",
@@ -28259,7 +29714,8 @@
       "tara_mode": "D",
       "physics_feasibility": {
         "tier": 3,
-        "tier_label": "far_term"
+        "tier_label": "far_term",
+        "timeline": "2038+"
       },
       "tara": {
         "mechanism": "High-intensity FUS + IV microbubbles -> acoustic cavitation -> BBB tight junction breach (24-48hr opening) -> perivascular ionic disequilibrium -> EAAT2 transport impaired -> extracellular glutamate elevated -> NMDA overactivation -> excitotoxic Ca2+ overload -> perilesional neuron death. EPISTEMIC FLAG: direct FUS-BBB->glutamate surge link is INFERRED from ischemia literature, not directly demonstrated in FUS-BBB studies. Attack surface: adversarial modification of therapeutic FUS parameters in clinical setting.",
@@ -28284,7 +29740,16 @@
         "Timbie 2024 Neurotherapeutics DOI:10.1016/j.neurot.2024.e00038"
       ],
       "tara_alias": "TARA-AUT-D-003",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0161",
@@ -28311,7 +29776,8 @@
       "tara_mode": "D",
       "physics_feasibility": {
         "tier": 2,
-        "tier_label": "mid_term"
+        "tier_label": "mid_term",
+        "timeline": "2031-2038"
       },
       "tara": {
         "mechanism": "Brief suprathreshold focal stimulation raises local [K+]ext past CSD ignition threshold (~12mM). CaV-dependent NMDA activation required for ignition. Once ignited: SELF-PROPAGATING K+/glutamate positive feedback wave at 2-5mm/min across cortex. Attacker delivers brief burst and withdraws; CSD continues autonomously 1-5min. Aftermath: 5-15min cortical silence (spreading depression). ECT reliably generates postictal CSD in mice AND humans (Rosenthal 2025, Nature Communications). Distinct from T0026/T0029: self-propagating after trigger withdrawal.",
@@ -28336,7 +29802,16 @@
         "Vitale 2023 PMC10408042"
       ],
       "tara_alias": "TARA-AUT-D-004",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0162",
@@ -28428,6 +29903,15 @@
         "gate_reason": "Scheduler and synchronization abuse; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-10-07"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 2,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -28520,6 +30004,15 @@
         "gate_reason": "Kernel/driver memory-safety exploitation; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-10-07"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 11,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -28612,6 +30105,15 @@
         "gate_reason": "Kernel/driver memory-safety exploitation; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-10-07"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 1,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -28705,6 +30207,15 @@
         "gate_reason": "Firmware update-process attack; physics does not constrain",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-10-07"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -28812,7 +30323,16 @@
       "tara_domain_secondary": [],
       "tara_mode": "R",
       "tara_enrichment_pending": true,
-      "parent_id": null
+      "parent_id": null,
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0167",
@@ -28923,7 +30443,16 @@
       "tara_domain_secondary": [],
       "tara_mode": "M",
       "tara_enrichment_pending": true,
-      "parent_id": null
+      "parent_id": null,
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0168",
@@ -29044,7 +30573,16 @@
         ],
         "note": "Perceptual-response and identity inference from a permissionless sensor feeds data harvest and cognitive exploitation"
       },
-      "parent_id": null
+      "parent_id": null,
+      "evidence": {
+        "tier": "demonstrated_lab",
+        "basis": "status DEMONSTRATED",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "DEMONSTRATED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0169",
@@ -29153,7 +30691,16 @@
       "tara_domain_secondary": [],
       "tara_mode": "D",
       "tara_enrichment_pending": true,
-      "parent_id": "QIF-T0109"
+      "parent_id": "QIF-T0109",
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0170",
@@ -29260,7 +30807,16 @@
       "tara_domain_secondary": [],
       "tara_mode": "R",
       "tara_enrichment_pending": true,
-      "parent_id": null
+      "parent_id": null,
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0171",
@@ -29378,7 +30934,16 @@
       "tara_domain_secondary": [],
       "tara_mode": "M",
       "tara_enrichment_pending": true,
-      "parent_id": "QIF-T0043"
+      "parent_id": "QIF-T0043",
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0172",
@@ -29489,7 +31054,16 @@
       "tara_domain_secondary": [],
       "tara_mode": "M",
       "tara_enrichment_pending": true,
-      "parent_id": "QIF-T0019"
+      "parent_id": "QIF-T0019",
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0173",
@@ -29596,7 +31170,16 @@
       "tara_domain_secondary": [],
       "tara_mode": "R",
       "tara_enrichment_pending": true,
-      "parent_id": "QIF-T0041"
+      "parent_id": "QIF-T0041",
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status EMERGING",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "EMERGING",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0174",
@@ -29709,7 +31292,16 @@
       "tara_domain_secondary": [],
       "tara_mode": "M",
       "tara_enrichment_pending": true,
-      "parent_id": "QIF-T0024"
+      "parent_id": "QIF-T0024",
+      "evidence": {
+        "tier": "theoretical_modeled",
+        "basis": "status THEORETICAL, modelled in the literature",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 0,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
+      }
     },
     {
       "id": "QIF-T0175",
@@ -29802,6 +31394,15 @@
         "gate_reason": "Application-layer memory-safety exploitation; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-10-07"
+      },
+      "evidence": {
+        "tier": "demonstrated_case",
+        "basis": "4 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
+        "neural_product_cve_count": 4,
+        "adjacent_cve_count": 7,
+        "legacy_status": "CONFIRMED",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     },
     {
@@ -29895,6 +31496,15 @@
         "gate_reason": "Application-layer memory-safety exploitation; software-only",
         "constraint_system_ref": "QIF Derivation Log Entry 60",
         "analysis_date": "2026-10-07"
+      },
+      "evidence": {
+        "tier": "theoretical_proposed",
+        "basis": "status THEORETICAL, proposed within this framework",
+        "neural_product_cve_count": 0,
+        "adjacent_cve_count": 1,
+        "legacy_status": "THEORETICAL",
+        "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
+        "derived_on": "2026-10-07"
       }
     }
   ],

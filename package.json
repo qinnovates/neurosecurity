@@ -47,7 +47,8 @@
     "version:show": "bash src/scripts/version.sh show",
     "version:patch": "bash src/scripts/version.sh patch",
     "version:minor": "bash src/scripts/version.sh minor",
-    "version:major": "bash src/scripts/version.sh major"
+    "version:major": "bash src/scripts/version.sh major",
+    "evidence:tier": "python3 src/scripts/migrate-populate-evidence-tier.py"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.7",
