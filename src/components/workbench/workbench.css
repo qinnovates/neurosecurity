@@ -1,17 +1,4 @@
-/* Shell styles and the motion tokens every workbench visual draws from. */
-
-:root {
-  --motion-quick: 160ms;
-  --motion-move: 320ms;
-  --motion-flow: 2.4s;
-  --motion-trace-step: 700ms;
-  --motion-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-/* When the viewer asks for less motion, loops stop and moves are instant. */
-@media (prefers-reduced-motion: reduce) {
-  :root { --motion-quick: 0ms; --motion-move: 0ms; --motion-flow: 0s; --motion-trace-step: 0ms; }
-}
+/* Shell styles. Motion and colour tokens live in lab-kit/lab-kit.css. */
 
 .workbench-modes { display: flex; flex-wrap: wrap; gap: 0.5rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.75rem; }
 .workbench-mode { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.9375rem; font-weight: 700; color: var(--color-text-muted); background: transparent; border: 1px solid transparent; border-radius: 0.625rem; cursor: pointer; transition: color var(--motion-quick) var(--motion-ease), border-color var(--motion-quick) var(--motion-ease); }
