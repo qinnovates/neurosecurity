@@ -37,7 +37,7 @@ const TOOL_PAGE_CSP = [
   <meta name="description" content={description} />
   <meta name="robots" content="noindex, nofollow" />
   {isBuiltPage && <meta http-equiv="Content-Security-Policy" content={TOOL_PAGE_CSP} />}
-  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <title>{title} | Qinnovate</title>
 
   <!-- Match the site theme without the shared layout (prevents a flash) -->

@@ -308,7 +308,7 @@ function parseJoinKeys(onClause: string): JoinKey[] {
 }
 
 function requireJoinColumn(rows: Row[], field: string, sideLabel: string): void {
-  if (rows.length > 0 && !rows.some(row => field in row)) {
+  if (rows.length > 0 && !rows.some(row => Object.prototype.hasOwnProperty.call(row, field))) {
     throw new Error(`Join field "${field}" is not a column of ${sideLabel}.`);
   }
 }

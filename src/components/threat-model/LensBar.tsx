@@ -76,7 +76,8 @@ export default function LensBar({ lens, counts, goalCoverage, selectedElementLab
       {emptyGoals.map((goal) => (
         <p key={goal} className="tm-lens-note">
           <strong>{GOAL_LABELS[goal]} shows 0, which means not assessed, not no risk.</strong>{' '}
-          {goalCoverage[goal].placedTechniques} of the catalog&rsquo;s {goalCoverage[goal].catalogTechniques} techniques of this kind have a placement decision.
+          {goalCoverage[goal].placedTechniques} of the catalog&rsquo;s {goalCoverage[goal].catalogTechniques} techniques of this kind{' '}
+          {goalCoverage[goal].placedTechniques === 1 ? 'has' : 'have'} a placement decision.
           The rest have theoretical or emerging evidence, or act without passing through a device.
         </p>
       ))}

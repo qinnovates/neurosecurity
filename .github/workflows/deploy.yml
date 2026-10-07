@@ -39,6 +39,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Test
+        run: npm test
+
+      # The TARA Lab page promises nothing leaves the browser; a build that breaks that must not deploy.
+      - name: Check threat model page isolation
+        run: npm run check:model-page
+
       - name: Setup Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
