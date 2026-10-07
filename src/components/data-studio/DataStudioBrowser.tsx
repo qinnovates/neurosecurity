@@ -32,6 +32,7 @@ const DESCRIPTIONS: Record<string, { label: string; description: string; categor
   technique_dsm: { label: 'Technique-DSM Bridge', description: 'Maps techniques to DSM-5-TR diagnostic categories (for threat modeling)', category: 'Threats' },
   technique_neurorights: { label: 'Technique-Neurorights', description: 'Maps techniques to the 5 neurorights they affect', category: 'Threats' },
   impact_chains: { label: 'Impact Chains', description: 'Precomputed threat-to-outcome chains across the neural stack', category: 'Threats' },
+  attack_chains: { label: 'Attack Chains', description: 'Multi-step TARA attack chains, one row per step, each carrying how far it is evidenced (demonstrated / partly demonstrated / projected). Compositions of catalogued techniques, not reported incidents.', category: 'Threats' },
   brain_regions: { label: 'Brain Regions', description: '38 brain structures mapped to the QIF hourglass model', category: 'Anatomy' },
   hourglass_bands: { label: 'Hourglass Bands', description: 'The 11 QIF bands spanning silicon to neural', category: 'Framework' },
   companies: { label: 'BCI Companies', description: '57 companies in the BCI landscape with funding and security posture', category: 'Industry' },

@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { AttackChain, ChainStep, ClinicalParallel } from './AttackChainViz';
-import { ROLE_CONFIG } from './chain-constants';
+import type { AttackChain, ChainEvidence, ChainStep, ClinicalParallel, StepEvidence } from './AttackChainViz';
+import { EVIDENCE_LABELS, ROLE_CONFIG } from './chain-constants';
 import { GENERATED_CHAIN_ID_PREFIX } from '../../lib/threat-model/chain-types';
 
 const TARA_CHAINS_PATH = 'datalake/tara-chains.json';
@@ -22,6 +22,37 @@ function isStringArray(value: unknown): value is string[] {
   return Array.isArray(value) && value.every((entry) => typeof entry === 'string');
 }
 
+function isEvidenceLabel(value: unknown): boolean {
+  return typeof value === 'string' && Object.hasOwn(EVIDENCE_LABELS, value);
+}
+
+function isOptionalString(value: unknown): boolean {
+  return value === undefined || typeof value === 'string';
+}
+
+/** A step may carry a realism anchor; if it does, the label must be one the page can draw. */
+function isOptionalStepEvidence(value: unknown): value is StepEvidence | undefined {
+  return (
+    value === undefined ||
+    (isRecord(value) &&
+      isEvidenceLabel(value.label) &&
+      typeof value.note === 'string' &&
+      isOptionalString(value.source_url))
+  );
+}
+
+/** A chain may carry a realism anchor; `extrapolation` is required to be text when present. */
+function isOptionalChainEvidence(value: unknown): value is ChainEvidence | undefined {
+  return (
+    value === undefined ||
+    (isRecord(value) &&
+      isEvidenceLabel(value.overall_label) &&
+      typeof value.rationale === 'string' &&
+      isOptionalString(value.device_class) &&
+      isOptionalString(value.extrapolation))
+  );
+}
+
 function isChainStep(value: unknown): value is ChainStep {
   return (
     isRecord(value) &&
@@ -31,7 +62,8 @@ function isChainStep(value: unknown): value is ChainStep {
     typeof value.role === 'string' &&
     Object.hasOwn(ROLE_CONFIG, value.role) &&
     typeof value.action === 'string' &&
-    typeof value.detection_window === 'string'
+    typeof value.detection_window === 'string' &&
+    isOptionalStepEvidence(value.evidence)
   );
 }
 
@@ -50,7 +82,8 @@ export function isAttackChain(value: unknown): value is AttackChain {
     Array.isArray(value.steps) &&
     value.steps.every(isChainStep) &&
     isOptionalClinicalParallel(value.clinical_parallel) &&
-    isStringArray(value.defenses)
+    isStringArray(value.defenses) &&
+    isOptionalChainEvidence(value.evidence)
   );
 }
 

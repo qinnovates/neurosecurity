@@ -1,11 +1,21 @@
 {
-  "version": "1.0",
+  "version": "1.1",
+  "last_verified": "2026-10-06",
+  "_note": "Attack chains are COMPOSITIONS of catalogued TARA techniques. No chain in this file is a report of an incident: nothing cited here says any of these sequences has been carried out end to end. Each chain and each step carries an evidence label derived from the technique's current registrar status and from sources re-verified on 2026-10-06 (CVEs at the NVD REST API; papers at Crossref, the arXiv API or the publisher). Step wording stays at the abstraction of the mechanism -- enough for a defender to recognise it, with no operational detail.",
+  "label_rules": {
+    "step": {
+      "demonstrated": "Technique status DEMONSTRATED or CONFIRMED and a verified CVE, paper or device fact supports the step as worded.",
+      "partly_demonstrated": "Technique demonstrated in a lab, on offline datasets, or on a different device class than the one this chain names.",
+      "projected": "Technique status EMERGING or THEORETICAL, or the step is an extrapolation not evidenced on hardware."
+    },
+    "chain": "projected when the step that reaches the objective is projected; otherwise partly_demonstrated. demonstrated is reserved for a chain whose every step is demonstrated AND whose composition a cited incident reports; no chain in this file meets that, so no chain is labelled demonstrated."
+  },
   "chains": [
     {
       "chain_id": "CHAIN-VIS-001",
       "chain_name": "Vision prosthesis calibration compromise",
       "objective": "Permanently corrupt patient's visual perception mapping during prosthesis calibration period",
-      "drift_profile": "C\u2192P (cumulative calibration poisoning becomes persistent neural rewiring)",
+      "drift_profile": "C→P (cumulative calibration poisoning becomes persistent neural rewiring)",
       "steps": [
         {
           "position": 1,
@@ -13,7 +23,7 @@
           "tara_alias": "TARA-SIL-R-006",
           "role": "reconnaissance",
           "action": "Map BCI network topology and identify calibration endpoints",
-          "detection_window": "passive \u2014 no patient-visible effect"
+          "detection_window": "passive — no patient-visible effect"
         },
         {
           "position": 2,
@@ -29,7 +39,7 @@
           "tara_alias": "TARA-SIL-M-014",
           "role": "pivot",
           "action": "Poison calibration parameters during prosthesis learning phase",
-          "detection_window": "subtle \u2014 patient may notice slightly off percepts"
+          "detection_window": "subtle — patient may notice slightly off percepts"
         },
         {
           "position": 4,
@@ -37,7 +47,7 @@
           "tara_alias": "TARA-VIS-M-001",
           "role": "objective",
           "action": "Inject false visual percepts aligned with corrupted calibration",
-          "detection_window": "patient perceives incorrect scene \u2014 may attribute to prosthesis limitations"
+          "detection_window": "patient perceives incorrect scene — may attribute to prosthesis limitations"
         },
         {
           "position": 5,
@@ -45,12 +55,12 @@
           "tara_alias": "TARA-COG-M-009",
           "role": "persistence",
           "action": "Gradual drift ensures neural adaptation encodes corrupted mapping permanently",
-          "detection_window": "months \u2014 by the time drift is noticed, neuroplastic changes are structural"
+          "detection_window": "months — by the time drift is noticed, neuroplastic changes are structural"
         }
       ],
       "clinical_parallel": {
         "name": "Normal prosthesis calibration and adaptation",
-        "note": "camera\u2192processing\u2192calibration\u2192perception\u2192adaptation. The attack exploits the same pipeline the therapy requires."
+        "note": "camera→processing→calibration→perception→adaptation. The attack exploits the same pipeline the therapy requires."
       },
       "defenses": [
         "Cryptographic device authentication (breaks step 2)",
@@ -58,6 +68,523 @@
         "Cs coherence monitoring during calibration window (detects step 4)",
         "Longitudinal perception testing against ground truth (detects step 5)"
       ]
+    },
+    {
+      "chain_id": "CHAIN-DBS-001",
+      "chain_name": "Adaptive DBS clinician-programmer parameter corruption",
+      "objective": "Degrade therapeutic deep-brain stimulation by corrupting stimulation parameters through a weakly protected clinician programmer / telemetry link",
+      "drift_profile": "A→C (acute parameter change compounds into cumulative maladaptive stimulation attributed to disease progression)",
+      "steps": [
+        {
+          "position": 1,
+          "technique_id": "QIF-T0057",
+          "tara_alias": "TARA-SIL-R-006",
+          "role": "reconnaissance",
+          "action": "Enumerate programmer and implant telemetry endpoints to locate the stimulation-control surface",
+          "detection_window": "passive — no patient-visible effect; visible only in gateway connection logs",
+          "evidence": {
+            "label": "demonstrated",
+            "note": "Enumerating programmer and telemetry endpoints is routine reconnaissance; technique status CONFIRMED."
+          }
+        },
+        {
+          "position": 2,
+          "technique_id": "QIF-T0049",
+          "tara_alias": "TARA-SIL-M-012",
+          "role": "initial_access",
+          "action": "Defeat the weak authentication between programmer and implant to obtain a therapy-control session",
+          "detection_window": "device/programmer logs show an unexpected authenticated session",
+          "evidence": {
+            "label": "demonstrated",
+            "note": "CVE-2023-25931 (NVD CVSS 3.1 6.8, CWE-620 unverified password change) in Medtronic Pelvic Health clinician apps on the Smart Programmer, and CVE-2019-6538 (NVD CVSS 3.1 9.3, CWE-306/862) where the Conexus telemetry protocol implements no authentication or authorization. Both are cardiac/pelvic neurostimulation products, not neural implants.",
+            "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2023-25931"
+          }
+        },
+        {
+          "position": 3,
+          "technique_id": "QIF-T0007",
+          "tara_alias": "TARA-SIL-M-001",
+          "role": "pivot",
+          "action": "Manipulate the telemetry protocol to shift stimulation parameters while keeping them inside the programmer's allowed envelope",
+          "detection_window": "subtle — parameters remain plausible; detectable by parameter-change audit",
+          "evidence": {
+            "label": "partly_demonstrated",
+            "note": "Protocol manipulation is demonstrated in general (technique status DEMONSTRATED; Schroder et al. 2025, arXiv:2508.12571, review); a parameter shift held inside the allowed envelope on a specific adaptive DBS device is not publicly shown.",
+            "source_url": "https://arxiv.org/abs/2508.12571"
+          }
+        },
+        {
+          "position": 4,
+          "technique_id": "QIF-T0023",
+          "tara_alias": "TARA-MOT-D-002",
+          "role": "objective",
+          "action": "Corrupted sensing feeds the closed loop so the device delivers maladaptive stimulation to motor circuits",
+          "detection_window": "clinical — symptom worsening may be misread as disease progression",
+          "evidence": {
+            "label": "projected",
+            "note": "Closed-loop perturbation cascade is THEORETICAL: extrapolated from published closed-loop RNS and adaptive-DBS architecture, not shown as an attack.",
+            "source_url": "https://arxiv.org/abs/2508.12571"
+          }
+        },
+        {
+          "position": 5,
+          "technique_id": "QIF-T0062",
+          "tara_alias": "TARA-COG-M-009",
+          "role": "persistence",
+          "action": "Slow parameter drift keeps each change below the clinician's notice threshold across visits",
+          "detection_window": "months — only longitudinal parameter and symptom review reveals the trend",
+          "evidence": {
+            "label": "projected",
+            "note": "Gradual drift below a clinician's notice threshold is THEORETICAL; no reported case."
+          }
+        }
+      ],
+      "clinical_parallel": {
+        "name": "Adaptive DBS parameter titration",
+        "note": "sense→decide→stimulate→titrate. The attack rides the same closed-loop titration pathway that the therapy uses to adjust stimulation over time."
+      },
+      "defenses": [
+        "Mutual cryptographic authentication and per-session keys on the programmer link (breaks step 2)",
+        "Signed, range-bound parameter commands with server-side validation (breaks step 3)",
+        "Independent sensing-integrity check before closed-loop actuation (detects step 4)",
+        "Longitudinal parameter-change audit against a signed baseline (detects step 5)"
+      ],
+      "evidence": {
+        "overall_label": "projected",
+        "rationale": "Initial access is evidenced against real neurostimulator programmers and telemetry links, but the closed-loop objective and the persistence step are both THEORETICAL techniques.",
+        "device_class": "Implanted adaptive deep-brain stimulator with a clinician programmer and patient telemetry."
+      }
+    },
+    {
+      "chain_id": "CHAIN-EEG-001",
+      "chain_name": "Consumer EEG headset decoder backdoor",
+      "objective": "Make a consumer EEG headset's machine-learning decoder emit attacker-chosen outputs when a hidden trigger is present, without degrading normal accuracy",
+      "drift_profile": "A (acute: the backdoor acts only when the trigger is present, otherwise dormant)",
+      "steps": [
+        {
+          "position": 1,
+          "technique_id": "QIF-T0042",
+          "tara_alias": "TARA-SIL-R-004",
+          "role": "reconnaissance",
+          "action": "Use the device's BLE/RF side channel to profile the headset and its companion-app model version",
+          "detection_window": "passive — radio-level observation; visible only to RF monitoring",
+          "evidence": {
+            "label": "demonstrated",
+            "note": "Bluetooth-layer side channels are well documented: KNOB, CVE-2019-9506 (NVD CVSS 3.1 8.1, CWE-310/327), lets an attacker influence BR/EDR key-length negotiation. Technique status CONFIRMED.",
+            "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2019-9506"
+          }
+        },
+        {
+          "position": 2,
+          "technique_id": "QIF-T0171",
+          "tara_alias": "TARA-SIL-M-021",
+          "role": "initial_access",
+          "action": "Compromise the cloud model-training or model-hosting infrastructure behind the SDK",
+          "detection_window": "cloud audit logs and model-provenance records",
+          "evidence": {
+            "label": "projected",
+            "note": "Decoder pipeline compromise -- model registry, retraining or serving infrastructure -- is THEORETICAL for BCI; described at review level, not demonstrated on a BCI vendor's pipeline."
+          }
+        },
+        {
+          "position": 3,
+          "technique_id": "QIF-T0017",
+          "tara_alias": "TARA-SIL-M-003",
+          "role": "pivot",
+          "action": "Embed a backdoor in a shared pretrained EEG model so it propagates through transfer learning to downstream decoders",
+          "detection_window": "hard — clean accuracy is preserved; detectable only by model-integrity testing",
+          "evidence": {
+            "label": "partly_demonstrated",
+            "note": "Transfer-learning backdoors on EEG models are demonstrated on datasets (Meng et al. 2024, arXiv:2412.07231); propagation into a specific shipping consumer decoder is not shown.",
+            "source_url": "https://arxiv.org/abs/2412.07231"
+          }
+        },
+        {
+          "position": 4,
+          "technique_id": "QIF-T0016",
+          "tara_alias": "TARA-SIL-M-002",
+          "role": "objective",
+          "action": "An invisible clean-label trigger drives the deployed decoder to output the attacker's chosen class",
+          "detection_window": "hard — output looks like a normal decode unless trigger-response testing is applied",
+          "evidence": {
+            "label": "partly_demonstrated",
+            "note": "Professor X (Liu, Song, He, Lu, Zheng; arXiv:2409.20158) demonstrates an invisible clean-label backdoor that manipulates EEG-BCI output across three EEG tasks -- on offline datasets, not on a shipping headset.",
+            "source_url": "https://arxiv.org/abs/2409.20158"
+          }
+        },
+        {
+          "position": 5,
+          "technique_id": "QIF-T0052",
+          "tara_alias": "TARA-COG-R-006",
+          "role": "exfiltration",
+          "action": "Collect the decoder's event-related-potential telemetry returned to the backend",
+          "detection_window": "network monitoring of outbound neural-feature traffic",
+          "evidence": {
+            "label": "demonstrated",
+            "note": "ERP harvesting is demonstrated: Martinovic et al. 2012 (USENIX Security; no DOI) reduced the entropy of private information by about 15-40% against random guessing using consumer EEG. Bonaci et al. 2015 (doi:10.1109/mts.2015.2425551) sets out the app-store exposure.",
+            "source_url": "https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/martinovic"
+          }
+        }
+      ],
+      "clinical_parallel": {
+        "name": "Transfer learning for cross-subject BCI calibration",
+        "note": "Shared pretrained EEG models are the standard way to shorten per-user calibration; the attack poisons the same reuse pipeline the field relies on."
+      },
+      "defenses": [
+        "Signed model provenance and reproducible training (breaks step 2)",
+        "Backdoor/trigger scanning of pretrained weights before adoption (breaks step 3)",
+        "Trigger-response and spectral-anomaly testing on the deployed decoder (detects step 4)",
+        "Egress monitoring and minimization of neural-feature telemetry (detects step 5)"
+      ],
+      "evidence": {
+        "overall_label": "partly_demonstrated",
+        "rationale": "The backdoor objective is demonstrated on offline EEG datasets across three tasks, but no step has been shown on a shipping headset and the pipeline-compromise step is THEORETICAL for BCI.",
+        "device_class": "Consumer EEG headset with a companion app and a vendor-hosted machine-learning decoder."
+      }
+    },
+    {
+      "chain_id": "CHAIN-EAR-001",
+      "chain_name": "In-ear EEG earbud supply-chain to cognitive profiling",
+      "objective": "Covertly turn an in-ear EEG earbud into a longitudinal cognitive and identity sensor via a supply-chain firmware implant",
+      "drift_profile": "C (cumulative: value accrues from longitudinal collection, not any single session)",
+      "steps": [
+        {
+          "position": 1,
+          "technique_id": "QIF-T0043",
+          "tara_alias": "TARA-SIL-M-008",
+          "role": "initial_access",
+          "action": "A firmware backdoor is introduced during manufacturing or the update supply chain",
+          "detection_window": "passive — detectable only by firmware attestation at provisioning",
+          "evidence": {
+            "label": "partly_demonstrated",
+            "note": "Firmware implantation via manufacturing or the update channel is CONFIRMED as a class; CVE-2020-27252 (NVD CVSS 3.1 8.8, CWE-367) shows unsigned firmware executing on a Medtronic MyCareLink Smart patient reader through an update race condition.",
+            "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2020-27252"
+          }
+        },
+        {
+          "position": 2,
+          "technique_id": "QIF-T0073",
+          "tara_alias": "TARA-COG-R-009",
+          "role": "pivot",
+          "action": "The modified earbud quietly acquires in-ear EEG alongside its normal audio function",
+          "detection_window": "subtle — extra sensing is masked by legitimate earbud activity",
+          "evidence": {
+            "label": "projected",
+            "note": "Covert in-ear EEG acquisition alongside normal audio is EMERGING; the hardware pathway exists in cleared ear-worn EEG products but no covert-acquisition implant is reported."
+          }
+        },
+        {
+          "position": 3,
+          "technique_id": "QIF-T0074",
+          "tara_alias": "TARA-COG-R-010",
+          "role": "objective",
+          "action": "Longitudinal in-ear EEG is processed into cognitive-state inferences over time",
+          "detection_window": "hard — inference happens off-device; no local symptom",
+          "evidence": {
+            "label": "projected",
+            "note": "Longitudinal cognitive profiling from in-ear EEG is EMERGING. Cognitive inference from consumer EEG is researched (Martinovic et al. 2012, 15-40% entropy reduction vs chance), but longitudinal in-ear profiling as an attack is not demonstrated.",
+            "source_url": "https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/martinovic"
+          }
+        },
+        {
+          "position": 4,
+          "technique_id": "QIF-T0079",
+          "tara_alias": "TARA-IDN-R-003",
+          "role": "exfiltration",
+          "action": "Ear-canal acoustic echo profiling fingerprints the wearer so the cognitive record is bound to an identity",
+          "detection_window": "network monitoring of outbound identity + feature payloads",
+          "evidence": {
+            "label": "demonstrated",
+            "note": "Ear-canal acoustic fingerprinting is DEMONSTRATED; ANC earbuds already contain the inward-facing microphone and driver the method needs."
+          }
+        },
+        {
+          "position": 5,
+          "technique_id": "QIF-T0056",
+          "tara_alias": "TARA-COG-R-008",
+          "role": "persistence",
+          "action": "Continuous collection is normalized as background health monitoring so the channel persists",
+          "detection_window": "months — revealed by cumulative data-flow and consent-scope review",
+          "evidence": {
+            "label": "projected",
+            "note": "Normalising continuous collection as background health monitoring is EMERGING; a governance and consent-scope risk, not a demonstrated technique."
+          }
+        }
+      ],
+      "clinical_parallel": {
+        "name": "In-ear EEG for seizure detection, sleep staging and cognitive monitoring",
+        "note": "Clinical in-ear EEG (e.g. ear-worn EEG cleared for home monitoring) collects exactly this signal continuously; the boundary is consent, scope and oversight, not mechanism."
+      },
+      "defenses": [
+        "Firmware attestation and signed updates verified at provisioning (breaks step 1)",
+        "On-device indicator and OS-level permission for any neural sensing (breaks step 2)",
+        "On-device processing with data minimization, no raw EEG egress (detects step 3)",
+        "Consent-scoped retention limits and outbound-identity monitoring (detects steps 4 and 5)"
+      ],
+      "evidence": {
+        "overall_label": "projected",
+        "rationale": "The objective -- longitudinal cognitive profiling from in-ear EEG -- is an EMERGING technique, and the covert-acquisition and persistence steps are EMERGING too. The hardware pathway exists in cleared products; the attack does not.",
+        "device_class": "In-ear EEG earbud; ear-worn EEG is a cleared product class (for example FDA 510(k) K251550, Naox Technologies NX01, decision 2025-11-25, confirmed via the openFDA 510(k) API)."
+      }
+    },
+    {
+      "chain_id": "CHAIN-RBCI-001",
+      "chain_name": "Research BCI cloud-pipeline training and inference poisoning",
+      "objective": "Bias a multi-site research BCI decoder by poisoning its cloud training pipeline and forcing misclassification at inference",
+      "drift_profile": "A (acute: poisoned model and perturbations act on specific inputs once deployed)",
+      "steps": [
+        {
+          "position": 1,
+          "technique_id": "QIF-T0057",
+          "tara_alias": "TARA-SIL-R-006",
+          "role": "reconnaissance",
+          "action": "Map the research pipeline's data-ingest and model-serving topology across sites",
+          "detection_window": "passive — visible only in infrastructure access logs",
+          "evidence": {
+            "label": "demonstrated",
+            "note": "Mapping data-ingest and model-serving topology is routine reconnaissance; technique status CONFIRMED."
+          }
+        },
+        {
+          "position": 2,
+          "technique_id": "QIF-T0171",
+          "tara_alias": "TARA-SIL-M-021",
+          "role": "initial_access",
+          "action": "Compromise the shared cloud training and model-serving infrastructure",
+          "detection_window": "cloud audit logs and anomalous dataset or pipeline changes",
+          "evidence": {
+            "label": "projected",
+            "note": "Decoder pipeline compromise -- the infrastructure that stores, retrains or serves the model -- is THEORETICAL for BCI; described at review level, not demonstrated on a research BCI pipeline."
+          }
+        },
+        {
+          "position": 3,
+          "technique_id": "QIF-T0024",
+          "tara_alias": "TARA-SIL-M-006",
+          "role": "pivot",
+          "action": "Inject poisoned samples into the training set to bias the decoder toward an attacker-preferred mapping",
+          "detection_window": "hard — detectable by dataset integrity checks and held-out validation",
+          "evidence": {
+            "label": "partly_demonstrated",
+            "note": "EEG training-data poisoning is demonstrated on datasets (Meng et al. 2024, arXiv:2412.07231); not on a live multi-site pipeline.",
+            "source_url": "https://arxiv.org/abs/2412.07231"
+          }
+        },
+        {
+          "position": 4,
+          "technique_id": "QIF-T0019",
+          "tara_alias": "TARA-SIL-M-005",
+          "role": "objective",
+          "action": "A universal perturbation added to inputs forces the deployed decoder to misclassify reliably",
+          "detection_window": "subtle — appears as decoder error; detectable by perturbation-robustness testing",
+          "evidence": {
+            "label": "partly_demonstrated",
+            "note": "Universal adversarial perturbations are demonstrated against EEG classifiers on datasets (Meng et al. 2024, arXiv:2412.07231; method from Moosavi-Dezfooli et al. 2017, doi:10.1109/cvpr.2017.17); not against a deployed clinical decoder.",
+            "source_url": "https://arxiv.org/abs/2412.07231"
+          }
+        },
+        {
+          "position": 5,
+          "technique_id": "QIF-T0021",
+          "tara_alias": "TARA-SIL-R-003",
+          "role": "exfiltration",
+          "action": "Recover participants' neural training data from leaked federated gradients",
+          "detection_window": "monitoring of gradient-exchange volume and membership-inference risk",
+          "evidence": {
+            "label": "projected",
+            "note": "Federated gradient leakage against neural data is EMERGING; gradient inversion is established in general machine learning but recovery of participants' EEG from a real multi-site BCI trial is not reported."
+          }
+        }
+      ],
+      "clinical_parallel": {
+        "name": "Federated learning for multi-site clinical BCI trials",
+        "note": "Multi-site BCI studies share models and gradients to pool scarce data; the attack subverts the same collaborative-learning pipeline the trials depend on."
+      },
+      "defenses": [
+        "Infrastructure hardening and immutable, signed pipeline configuration (breaks step 2)",
+        "Dataset provenance, anomaly screening and held-out validation gates (breaks step 3)",
+        "Adversarial-robustness testing and input sanitization at inference (detects step 4)",
+        "Secure aggregation and differential privacy on gradient exchange (breaks step 5)"
+      ],
+      "evidence": {
+        "overall_label": "partly_demonstrated",
+        "rationale": "Poisoning and universal perturbation are demonstrated on EEG datasets, but not on a live multi-site pipeline, and the pipeline-compromise and gradient-leakage steps are THEORETICAL and EMERGING respectively.",
+        "device_class": "Multi-site research BCI with a shared cloud training pipeline and a served decoder."
+      }
+    },
+    {
+      "chain_id": "CHAIN-VIS-002",
+      "chain_name": "Visual BCI sensory-channel selection hijack",
+      "objective": "Covertly steer a visual / SSVEP BCI user's selections using imperceptible display manipulation and falsified feedback",
+      "drift_profile": "A (acute: the hijack acts while the manipulated stimulus is displayed)",
+      "steps": [
+        {
+          "position": 1,
+          "technique_id": "QIF-T0085",
+          "tara_alias": "TARA-VIS-R-001",
+          "role": "reconnaissance",
+          "action": "Infer the user's attention and intent from eye-tracking to time the manipulation",
+          "detection_window": "passive — gaze sensing is expected; abuse is hard to distinguish",
+          "evidence": {
+            "label": "demonstrated",
+            "note": "Gaze-based intent and cognitive inference is demonstrated: Katsini et al. 2020 (CHI, doi:10.1145/3313831.3376840) surveys the security and privacy uses of eye gaze, and Sluganovic et al. 2018 (ACM TOPS, doi:10.1145/3281745) builds authentication on reflexive eye movements.",
+            "source_url": "https://doi.org/10.1145/3313831.3376840"
+          }
+        },
+        {
+          "position": 2,
+          "technique_id": "QIF-T0046",
+          "tara_alias": "TARA-SIL-M-010",
+          "role": "initial_access",
+          "action": "A weaponized over-the-air update delivers malicious display-timing logic to the headset",
+          "detection_window": "update-provenance logs and firmware attestation",
+          "evidence": {
+            "label": "projected",
+            "note": "OTA firmware weaponization against implanted or worn BCIs is EMERGING as a BCI technique; the nearest demonstrated analogue is the unsigned-firmware update race in CVE-2020-27252 on a cardiac telemetry reader.",
+            "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2020-27252"
+          }
+        },
+        {
+          "position": 3,
+          "technique_id": "QIF-T0022",
+          "tara_alias": "TARA-COG-M-006",
+          "role": "pivot",
+          "action": "Falsified neurofeedback nudges the user toward the attacker-preferred state",
+          "detection_window": "subtle — feedback looks normal; detectable by feedback-integrity checks",
+          "evidence": {
+            "label": "projected",
+            "note": "Neurofeedback falsification is EMERGING; no demonstration of a falsified feedback loop steering a user's state on a deployed system."
+          }
+        },
+        {
+          "position": 4,
+          "technique_id": "QIF-T0103",
+          "tara_alias": "TARA-VIS-M-002",
+          "role": "objective",
+          "action": "Imperceptible high-frequency flicker injects an SSVEP response that biases the BCI's selection",
+          "detection_window": "subtle — user perceives no flicker; detectable by display-signal and EEG spectral monitoring",
+          "evidence": {
+            "label": "partly_demonstrated",
+            "note": "Ming, Pei, Gao and Wang 2023 (J Neural Eng 20(1):016042, doi:10.1088/1741-2552/acb50e) drove an online SSVEP BCI with imperceptible 60 Hz flicker at 52.8 +/- 1.9 bits/min using individualized space and phase modulation -- flicker the user does not perceive does carry a usable BCI response. Shown as a BCI design, not as an attack on a third party's selection.",
+            "source_url": "https://doi.org/10.1088/1741-2552/acb50e"
+          }
+        },
+        {
+          "position": 5,
+          "technique_id": "QIF-T0035",
+          "tara_alias": "TARA-COG-R-003",
+          "role": "exfiltration",
+          "action": "Probe stimuli elicit recognition responses that reveal whether items are familiar to the user",
+          "detection_window": "clinical/behavioral — observable as unusual stimulus sequences in session logs",
+          "evidence": {
+            "label": "demonstrated",
+            "note": "P300 recognition interrogation is demonstrated: Martinovic et al. 2012 (USENIX Security; no DOI) elicited recognition responses to probe stimuli with consumer EEG.",
+            "source_url": "https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/martinovic"
+          }
+        }
+      ],
+      "clinical_parallel": {
+        "name": "SSVEP / P300 BCI communication for locked-in patients",
+        "note": "Flicker-evoked SSVEP and oddball P300 responses are the core signals of assistive spellers; the attack reuses the same evoked-response channel that the communication aid depends on."
+      },
+      "defenses": [
+        "Eye-tracking data minimization and on-device gating (limits step 1)",
+        "Signed firmware and attested display-timing pipeline (breaks step 2)",
+        "Feedback-integrity cross-checks against ground truth (detects step 3)",
+        "Display-signal and EEG spectral monitoring for out-of-band stimulus frequencies (detects step 4)"
+      ],
+      "evidence": {
+        "overall_label": "partly_demonstrated",
+        "rationale": "Imperceptible 60 Hz flicker is demonstrated to drive a real SSVEP BCI, and gaze-based intent inference is demonstrated, but the access and neurofeedback-falsification steps are EMERGING and nothing demonstrates a third party's selection being steered.",
+        "device_class": "Visual / SSVEP BCI with a display-driven stimulus and integrated eye tracking."
+      }
+    },
+    {
+      "chain_id": "CHAIN-IMP-001",
+      "chain_name": "Implant telemetry interception to neural-biometric spoofing",
+      "objective": "Intercept unencrypted implant telemetry to steal a neural biometric and replay it for unauthorized device access",
+      "drift_profile": "A (acute: interception and replay act within the telemetry session window)",
+      "steps": [
+        {
+          "position": 1,
+          "technique_id": "QIF-T0042",
+          "tara_alias": "TARA-SIL-R-004",
+          "role": "reconnaissance",
+          "action": "Observe the implant's BLE/RF side channel to find the telemetry window and gateway",
+          "detection_window": "passive — radio observation; visible only to RF monitoring",
+          "evidence": {
+            "label": "demonstrated",
+            "note": "Radio-layer observation is CONFIRMED; KNOB, CVE-2019-9506 (NVD CVSS 3.1 8.1), shows Bluetooth BR/EDR key-length negotiation can be influenced down to a length that makes interception practical.",
+            "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2019-9506"
+          }
+        },
+        {
+          "position": 2,
+          "technique_id": "QIF-T0004",
+          "tara_alias": "TARA-SIL-R-001",
+          "role": "initial_access",
+          "action": "Interpose on the cleartext telemetry link between implant and patient gateway",
+          "detection_window": "gateway logs may show session anomalies; cleartext aids detection tooling",
+          "evidence": {
+            "label": "demonstrated",
+            "note": "Cleartext telemetry interception is demonstrated on real implant telemetry: CVE-2019-6540 (NVD CVSS 3.1 6.5, CWE-319) -- the Conexus protocol transmits without encryption. A cardiac product, not a neural implant.",
+            "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2019-6540"
+          }
+        },
+        {
+          "position": 3,
+          "technique_id": "QIF-T0049",
+          "tara_alias": "TARA-SIL-M-012",
+          "role": "pivot",
+          "action": "Bypass the gateway-to-app authentication to issue commands as a trusted reader",
+          "detection_window": "device/gateway logs show an unexpected authenticated reader",
+          "evidence": {
+            "label": "demonstrated",
+            "note": "Authentication bypass on the reader link is demonstrated: CVE-2020-25183 (NVD CVSS 3.1 8.0, CWE-287) -- the MyCareLink Smart patient reader and mobile app authentication method is vulnerable, allowing an attacker to act as a trusted reader. A cardiac product, not a neural implant.",
+            "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2020-25183"
+          }
+        },
+        {
+          "position": 4,
+          "technique_id": "QIF-T0038",
+          "tara_alias": "TARA-IDN-R-001",
+          "role": "exfiltration",
+          "action": "Extract a neural biometric (brainprint) from the intercepted signals",
+          "detection_window": "network monitoring of outbound neural-signal payloads",
+          "evidence": {
+            "label": "projected",
+            "note": "Extracting a neural biometric from intercepted signals is EMERGING; brainprint extraction is studied on recorded EEG, not from intercepted implant telemetry."
+          }
+        },
+        {
+          "position": 5,
+          "technique_id": "QIF-T0032",
+          "tara_alias": "TARA-IDN-M-001",
+          "role": "objective",
+          "action": "Replay the stolen neural biometric to spoof the enrolled identity and gain device access",
+          "detection_window": "subtle — looks like a legitimate match; detectable by liveness and replay checks",
+          "evidence": {
+            "label": "projected",
+            "note": "Replaying a neural biometric to spoof an enrolled identity is EMERGING; no demonstrated spoof against a deployed neural-biometric access control, which is itself a proposed rather than fielded control."
+          }
+        }
+      ],
+      "clinical_parallel": {
+        "name": "Neural biometric authentication for device access",
+        "note": "Brainprint-based authentication is a PROPOSED access control for neural devices, not an established clinical practice: unlike the other chains here, this one has no fielded therapeutic counterpart. The attack targets the same enrollment-and-match pathway such a control would use."
+      },
+      "defenses": [
+        "Encrypted, authenticated telemetry with per-session keys (breaks steps 2 and 3)",
+        "Mutual authentication and entropy-floor enforcement on key negotiation (breaks step 3)",
+        "Egress monitoring and minimization of raw neural-signal transmission (detects step 4)",
+        "Liveness detection and anti-replay nonces on biometric matching (detects step 5)"
+      ],
+      "evidence": {
+        "overall_label": "projected",
+        "rationale": "Interception and reader authentication bypass are demonstrated on real implant telemetry, but on cardiac rather than neural implants, and both the biometric extraction and the spoofing objective are EMERGING techniques.",
+        "device_class": "Implanted neural device sharing the gateway-and-reader telemetry architecture used by cardiac implants.",
+        "extrapolation": "The telemetry CVEs cited here (CVE-2019-6538, CVE-2019-6540, CVE-2020-25183, CVE-2020-27252) were reported against Medtronic CARDIAC implant and reader products, not against neural implants. This chain generalises them to neural implants on the grounds that those devices share the same implant-to-gateway-to-app telemetry architecture. That generalisation is this project's inference, not a finding in any cited advisory, and no neural-implant equivalent of these CVEs is cited."
+      }
     }
   ]
 }

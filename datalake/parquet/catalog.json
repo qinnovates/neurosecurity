@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-06T23:58:29.651172+00:00",
+    "generated": "2026-10-07T00:23:36.212675+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
-    "total_datasets": 32,
-    "total_rows": 7945
+    "total_datasets": 33,
+    "total_rows": 7980
   },
   "datasets": {
     "techniques": {
@@ -92,6 +92,34 @@
       "size_bytes": 14133,
       "compression": "zstd",
       "source": "datalake/parquet/impact_chains.parquet"
+    },
+    "attack_chains": {
+      "rows": 35,
+      "columns": 19,
+      "column_names": [
+        "chain_id",
+        "chain_name",
+        "chain_objective",
+        "drift_profile",
+        "chain_evidence_label",
+        "chain_evidence_rationale",
+        "device_class",
+        "extrapolation",
+        "clinical_parallel",
+        "step_count",
+        "position",
+        "technique_id",
+        "tara_alias",
+        "role",
+        "action",
+        "detection_window",
+        "step_evidence_label",
+        "step_evidence_note",
+        "step_evidence_source"
+      ],
+      "size_bytes": 18318,
+      "compression": "zstd",
+      "source": "datalake/parquet/attack_chains.parquet"
     },
     "brain_regions": {
       "rows": 38,
@@ -654,7 +682,7 @@
         "current_stats",
         "milestones"
       ],
-      "size_bytes": 13246,
+      "size_bytes": 13251,
       "compression": "zstd",
       "source": "datalake/parquet/timeline.parquet"
     }

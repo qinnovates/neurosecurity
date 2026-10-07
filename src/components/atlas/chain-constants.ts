@@ -47,6 +47,25 @@ export const ROLE_CONFIG: Record<ChainRole, RoleConfig> = {
   exfiltration:    { label: 'Exfil', icon: '\uD83D\uDCE4' },
 };
 
+/**
+ * How well evidenced a step or a whole chain is. Chains and steps carry this so the
+ * page never lets a composed sequence read as something observed in the field.
+ */
+export type EvidenceLabel = 'demonstrated' | 'partly_demonstrated' | 'projected';
+
+export interface EvidenceStyle {
+  label: string;
+  /** Fixed in both themes, like the domain node fills, so the chip keeps its contrast. */
+  fill: string;
+  stroke: string;
+}
+
+export const EVIDENCE_LABELS: Record<EvidenceLabel, EvidenceStyle> = {
+  demonstrated:        { label: 'Demonstrated', fill: '#dcfce7', stroke: '#15803d' },
+  partly_demonstrated: { label: 'Partly demonstrated', fill: '#fef3c7', stroke: '#b45309' },
+  projected:           { label: 'Projected', fill: '#f1f5f9', stroke: '#475569' },
+};
+
 /** Detectability levels for the detection timeline bar. */
 export const DETECT_COLORS: Record<string, string> = {
   easy: '#22c55e',

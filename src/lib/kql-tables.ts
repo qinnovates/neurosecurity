@@ -63,6 +63,7 @@ import intakeLedgerRaw from '@shared/intake/ledger.json';
 
 // Precomputed tables (eliminates O(n⁴) build-time computation)
 import impactChainsRaw from '@shared/impact-chains.json';
+import taraChainsRaw from '@shared/tara-chains.json';
 
 // ═══ Types ═══
 
@@ -931,6 +932,39 @@ function buildImpactChains(): Row[] {
   return (impactChainsRaw as any) as Row[];
 }
 
+/**
+ * TARA attack chains, flattened to one row per step so steps can be joined against
+ * `techniques` and `cves`. Carries the chain-level and step-level evidence labels, so a
+ * query cannot pick up a step without seeing how far it is actually evidenced.
+ * Source of truth: datalake/tara-chains.json (validated by load-tara-chains.ts).
+ */
+function buildAttackChains(): Row[] {
+  const chains = (taraChainsRaw as any)?.chains ?? [];
+  return chains.flatMap((c: any) =>
+    (c.steps ?? []).map((s: any) => ({
+      chain_id: c.chain_id,
+      chain_name: c.chain_name,
+      chain_objective: c.objective,
+      drift_profile: c.drift_profile,
+      chain_evidence_label: c.evidence?.overall_label ?? '',
+      chain_evidence_rationale: c.evidence?.rationale ?? '',
+      device_class: c.evidence?.device_class ?? '',
+      extrapolation: c.evidence?.extrapolation ?? '',
+      clinical_parallel: c.clinical_parallel?.name ?? '',
+      step_count: (c.steps ?? []).length,
+      position: s.position,
+      technique_id: s.technique_id,
+      tara_alias: s.tara_alias,
+      role: s.role,
+      action: s.action,
+      detection_window: s.detection_window,
+      step_evidence_label: s.evidence?.label ?? '',
+      step_evidence_note: s.evidence?.note ?? '',
+      step_evidence_source: s.evidence?.source_url ?? '',
+    })),
+  );
+}
+
 // ═══ NeuroSIM Tables ═══
 
 function buildNeuronTypes(): Row[] {
@@ -1200,6 +1234,7 @@ export function getKqlTables(): KqlTables {
     tactics: buildTactics(),
     cves: buildCves(),
     impact_chains: buildImpactChains(),
+    attack_chains: buildAttackChains(),
 
     // Clinical
     dsm5: buildDsm5(),

@@ -124,6 +124,44 @@ def flatten_neurorights_bridge(techniques: list) -> list:
     return rows
 
 
+def flatten_attack_chains(doc) -> list:
+    """One row per chain step, with the chain's fields repeated on each row.
+
+    Carries both evidence labels so a query cannot pick up a step without seeing how
+    far it is actually evidenced. Mirrors buildAttackChains() in src/lib/kql-tables.ts.
+    """
+    chains = doc.get("chains", []) if isinstance(doc, dict) else []
+    rows = []
+    for chain in chains:
+        chain_evidence = chain.get("evidence") or {}
+        clinical = chain.get("clinical_parallel") or {}
+        steps = chain.get("steps") or []
+        for step in steps:
+            step_evidence = step.get("evidence") or {}
+            rows.append({
+                "chain_id": chain.get("chain_id", ""),
+                "chain_name": chain.get("chain_name", ""),
+                "chain_objective": chain.get("objective", ""),
+                "drift_profile": chain.get("drift_profile", ""),
+                "chain_evidence_label": chain_evidence.get("overall_label", ""),
+                "chain_evidence_rationale": chain_evidence.get("rationale", ""),
+                "device_class": chain_evidence.get("device_class", ""),
+                "extrapolation": chain_evidence.get("extrapolation", ""),
+                "clinical_parallel": clinical.get("name", ""),
+                "step_count": len(steps),
+                "position": step.get("position"),
+                "technique_id": step.get("technique_id", ""),
+                "tara_alias": step.get("tara_alias", ""),
+                "role": step.get("role", ""),
+                "action": step.get("action", ""),
+                "detection_window": step.get("detection_window", ""),
+                "step_evidence_label": step_evidence.get("label", ""),
+                "step_evidence_note": step_evidence.get("note", ""),
+                "step_evidence_source": step_evidence.get("source_url", ""),
+            })
+    return rows
+
+
 def write_parquet(name: str, rows: list, catalog: dict):
     """Convert a list of dicts to a Parquet file."""
     if not rows:
@@ -214,6 +252,9 @@ def main():
     if isinstance(impact_chains, dict):
         impact_chains = impact_chains.get("chains", impact_chains.get("data", []))
     write_parquet("impact_chains", impact_chains if isinstance(impact_chains, list) else [], catalog)
+
+    # === TARA attack chains (one row per step, mirrors buildAttackChains in kql-tables.ts) ===
+    write_parquet("attack_chains", flatten_attack_chains(load_json(SHARED / "tara-chains.json")), catalog)
 
     # === Brain atlas ===
     atlas = load_json(SHARED / "qif-brain-bci-atlas.json")
