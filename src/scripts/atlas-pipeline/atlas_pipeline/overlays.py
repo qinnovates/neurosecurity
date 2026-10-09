@@ -1,4 +1,4 @@
-"""Review sheets: each shape's outline on the declared template's T1, in three planes through its centroid.
+"""Review sheets: each shape's outline on the declared template's T1, in three planes through its centre.
 
 Written to the cache for a person to look at; never committed. No automated check can stand in for
 that look.
@@ -8,42 +8,57 @@ from __future__ import annotations
 import pathlib
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw
 
-from .meshing import Mesh, sample_surface
+from .meshing import Mesh
 from .volumes import sample_at_world
 
 HALF_WIDTH_MM = 32.0
+MARGIN_MM = 8.0
 PIXEL_MM = 0.25
-SLAB_MM = 0.3
-OUTLINE_COLOUR = np.array([255, 80, 40], dtype=np.uint8)
+MAX_PANEL_PIXELS = 512
+OUTLINE_COLOUR = (255, 80, 40)
+OUTLINE_WIDTH_PIXELS = 2
 PLANES = ((1, 2, 0), (0, 2, 1), (0, 1, 2))  # (horizontal axis, vertical axis, slice axis): sagittal, coronal, axial
 
 
-def _plane_image(t1: np.ndarray, affine: np.ndarray, centre: np.ndarray, plane: tuple[int, int, int], half_width: float) -> np.ndarray:
-    horizontal, vertical, _ = plane
-    steps = np.arange(-half_width, half_width, PIXEL_MM)
-    grid_h, grid_v = np.meshgrid(steps, steps[::-1])
-    points = np.tile(centre, (grid_h.size, 1))
-    points[:, horizontal] += grid_h.ravel()
-    points[:, vertical] += grid_v.ravel()
-    return sample_at_world(t1, affine, points).reshape(grid_h.shape)
+def plane_segments(mesh: Mesh, axis: int, position: float) -> np.ndarray:
+    """Where the mesh's triangles cross the plane `axis = position`: an (n, 2, 3) array of segment end points."""
+    corners = mesh.vertices_mm[mesh.triangles]
+    offset = corners[:, :, axis] - position
+    crossing = (offset.min(axis=1) < 0) & (offset.max(axis=1) >= 0)
+    corners, offset = corners[crossing], offset[crossing]
+    segments = []
+    for triangle, distance in zip(corners, offset):
+        points = []
+        for first, second in ((0, 1), (1, 2), (2, 0)):
+            if (distance[first] < 0) != (distance[second] < 0):
+                fraction = distance[first] / (distance[first] - distance[second])
+                points.append(triangle[first] + fraction * (triangle[second] - triangle[first]))
+        if len(points) == 2:
+            segments.append(points)
+    return np.array(segments, dtype=np.float64).reshape(-1, 2, 3)
 
 
 def write_sheet(path: pathlib.Path, mesh: Mesh, t1: np.ndarray, affine: np.ndarray, t1_window: tuple[float, float]) -> None:
-    centre = (mesh.vertices_mm.min(axis=0) + mesh.vertices_mm.max(axis=0)) / 2.0
-    half_width = max(HALF_WIDTH_MM, float((mesh.vertices_mm.max(axis=0) - mesh.vertices_mm.min(axis=0)).max()) / 2.0 + 8.0)
-    surface = sample_surface(mesh.vertices_mm, mesh.triangles, PIXEL_MM)
+    low, high = mesh.vertices_mm.min(axis=0), mesh.vertices_mm.max(axis=0)
+    centre = (low + high) / 2.0
+    half_width = max(HALF_WIDTH_MM, float((high - low).max()) / 2.0 + MARGIN_MM)
+    pixel_mm = max(PIXEL_MM, 2.0 * half_width / MAX_PANEL_PIXELS)
+    steps = np.arange(-half_width, half_width, pixel_mm)
     panels = []
-    for plane in PLANES:
-        horizontal, vertical, normal = plane
-        grey = np.clip((_plane_image(t1, affine, centre, plane, half_width) - t1_window[0]) / (t1_window[1] - t1_window[0]), 0.0, 1.0)
-        rgb = np.repeat((grey * 255).astype(np.uint8)[:, :, None], 3, axis=2)
-        near = surface[np.abs(surface[:, normal] - centre[normal]) < SLAB_MM]
-        columns = np.floor((near[:, horizontal] - centre[horizontal] + half_width) / PIXEL_MM).astype(int)
-        rows = np.floor((centre[vertical] + half_width - near[:, vertical]) / PIXEL_MM).astype(int)
-        keep = (columns >= 0) & (columns < rgb.shape[1]) & (rows >= 0) & (rows < rgb.shape[0])
-        rgb[rows[keep], columns[keep]] = OUTLINE_COLOUR
-        panels.append(rgb)
+    for horizontal, vertical, normal in PLANES:
+        grid_h, grid_v = np.meshgrid(steps, steps[::-1])
+        points = np.tile(centre, (grid_h.size, 1))
+        points[:, horizontal] += grid_h.ravel()
+        points[:, vertical] += grid_v.ravel()
+        grey = np.clip((sample_at_world(t1, affine, points).reshape(grid_h.shape) - t1_window[0]) / (t1_window[1] - t1_window[0]), 0.0, 1.0)
+        panel = Image.fromarray((grey * 255).astype(np.uint8)).convert("RGB")
+        draw = ImageDraw.Draw(panel)
+        for start, end in plane_segments(mesh, normal, float(centre[normal])):
+            draw.line([((start[horizontal] - centre[horizontal] + half_width) / pixel_mm, (centre[vertical] + half_width - start[vertical]) / pixel_mm),
+                       ((end[horizontal] - centre[horizontal] + half_width) / pixel_mm, (centre[vertical] + half_width - end[vertical]) / pixel_mm)],
+                      fill=OUTLINE_COLOUR, width=OUTLINE_WIDTH_PIXELS)
+        panels.append(np.asarray(panel))
     path.parent.mkdir(parents=True, exist_ok=True)
     Image.fromarray(np.concatenate(panels, axis=1)).save(path, optimize=True)
