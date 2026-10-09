@@ -1,7 +1,9 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { TECHNIQUE_OUTCOME, describeLinks, listBandDisagreements, summariseDistribution } from '@shared/scripts/audit-technique-regions.mjs';
-import { findRationaleProblem } from '@shared/scripts/draft-technique-regions.mjs';
+import { ENTRY_RATIONALES, LINK_ROLES } from '@shared/scripts/draft-technique-regions.mjs';
+import { isTemplatedPathway } from '@shared/scripts/technique-region-candidates.mjs';
+import { resolvePointer } from '@/lib/anatomy/source-ref';
 import { parseAnatomyFiles, type AnatomyData, type RawAnatomyFiles } from '@/lib/anatomy/anatomy-inputs';
 import type { AnatomyIndex } from '@/lib/anatomy/anatomy-index-types';
 import { buildAnatomyBundle } from '@/lib/anatomy/build-anatomy-index';
@@ -38,8 +40,45 @@ const EXPECTED_OUTCOMES = {
   [TECHNIQUE_OUTCOME.ALIAS_SCOPE]: 4,
   [TECHNIQUE_OUTCOME.UNRESOLVED]: 23,
 };
-const EXPECTED_LINKS = 122;
-const EXPECTED_LINK_RESOLUTIONS = { id: 20, synonym: 3, whole_to_part: 9, part_to_whole: 2, unresolved: 88 };
+/**
+ * Every link, as `technique:term`. Pinned by identity so that swapping one
+ * term for another word leaves no test unchanged, whatever it resolves to.
+ */
+const EXPECTED_LINK_TERMS = [
+  'QIF-T0010:cortical', 'QIF-T0012:cochlea', 'QIF-T0030:motor cortex', 'QIF-T0034:hippocampal',
+  'QIF-T0034:PFC', 'QIF-T0034:DLPFC', 'QIF-T0037:basal ganglia', 'QIF-T0037:PFC',
+  'QIF-T0039:insula', 'QIF-T0039:TPJ', 'QIF-T0039:mPFC', 'QIF-T0039:PFC',
+  'QIF-T0054:hippocampal', 'QIF-T0065:visual cortex', 'QIF-T0065:prefrontal cortex', 'QIF-T0073:temporal cortex',
+  'QIF-T0100:auditory nerve', 'QIF-T0100:cortex', 'QIF-T0100:auditory cortex', 'QIF-T0100:cochlear',
+  'QIF-T0103:visual cortex', 'QIF-T0103:retina', 'QIF-T0103:optic nerve', 'QIF-T0103:V1',
+  'QIF-T0111:vestibular nerve', 'QIF-T0111:vestibular nuclei', 'QIF-T0111:cortical', 'QIF-T0112:vestibular organ',
+  'QIF-T0112:vestibular nerve', 'QIF-T0112:vestibular nuclei', 'QIF-T0112:oculomotor nuclei', 'QIF-T0112:VOR arc',
+  'QIF-T0113:CN VIII', 'QIF-T0113:cochlea', 'QIF-T0113:vestibule', 'QIF-T0113:vestibular/cochlear nuclei',
+  'QIF-T0114:vestibular organ', 'QIF-T0114:vestibular nerve', 'QIF-T0114:vestibular nuclei', 'QIF-T0114:cortical',
+  'QIF-T0115:cortical', 'QIF-T0116:nucleus_accumbens', 'QIF-T0116:VTA', 'QIF-T0116:prefrontal',
+  'QIF-T0116:reward network', 'QIF-T0117:hippocampus', 'QIF-T0117:cortical', 'QIF-T0117:declarative memory systems',
+  "QIF-T0118:Broca's area", 'QIF-T0118:corticobulbar_tract', 'QIF-T0118:cranial motor nuclei', 'QIF-T0119:amygdala',
+  'QIF-T0119:PFC', 'QIF-T0119:default mode network', 'QIF-T0121:thalamic sleep nuclei', 'QIF-T0121:cortical',
+  'QIF-T0122:amygdala', 'QIF-T0122:hippocampus', 'QIF-T0123:motor cortex', 'QIF-T0123:primary_motor_cortex',
+  'QIF-T0123:corticospinal tract', 'QIF-T0123:motor neurons', 'QIF-T0124:hippocampal', 'QIF-T0124:PFC',
+  'QIF-T0124:default mode network', 'QIF-T0126:visual cortex', 'QIF-T0127:amygdala', 'QIF-T0127:bed_nucleus_stria_terminalis',
+  'QIF-T0127:hypothalamus', 'QIF-T0127:PAG', 'QIF-T0127:autonomic nervous system', 'QIF-T0128:ventral striatum',
+  'QIF-T0128:orbitofrontal cortex', 'QIF-T0128:subcallosal_cingulate', 'QIF-T0128:reward network', 'QIF-T0129:amygdala',
+  'QIF-T0129:insula', 'QIF-T0129:ACC', 'QIF-T0129:prefrontal', 'QIF-T0130:anterior_insula',
+  'QIF-T0130:TPJ', 'QIF-T0130:mirror_neuron_system', 'QIF-T0130:social cognition network', 'QIF-T0131:motor cortex',
+  'QIF-T0131:M1_larynx', 'QIF-T0131:ventral premotor cortex', 'QIF-T0131:corticobulbar tract', 'QIF-T0131:laryngeal motor neurons',
+  "QIF-T0132:Wernicke's area", 'QIF-T0132:auditory association cortex', 'QIF-T0132:posterior_STG', 'QIF-T0132:language comprehension network',
+  'QIF-T0133:primary visual cortex', 'QIF-T0133:visual_cortex', 'QIF-T0133:thalamic relay', 'QIF-T0134:auditory nerve',
+  'QIF-T0134:cochlear nucleus', 'QIF-T0137:VTA', 'QIF-T0138:VTA', 'QIF-T0141:VTA',
+  'QIF-T0141:SNc', 'QIF-T0142:cortical', 'QIF-T0143:cortical', 'QIF-T0144:M1',
+  'QIF-T0145:M1', 'QIF-T0147:thalamus', 'QIF-T0149:vagal afferents', 'QIF-T0149:NTS',
+  'QIF-T0149:nucleus basalis of Meynert', 'QIF-T0149:cortical', 'QIF-T0150:auricular branch of vagus nerve', 'QIF-T0150:NTS',
+  'QIF-T0151:SMA', 'QIF-T0154:vagal afferents', 'QIF-T0154:NTS', 'QIF-T0154:locus coeruleus',
+  'QIF-T0154:dorsal raphe nucleus', 'QIF-T0154:brainstem', 'QIF-T0155:dorsal raphe nucleus', 'QIF-T0156:dorsal raphe',
+  'QIF-T0156:spinal', 'QIF-T0156:brainstem', 'QIF-T0161:cortex',
+];
+const EXPECTED_LINKS = EXPECTED_LINK_TERMS.length;
+const EXPECTED_LINK_RESOLUTIONS = { id: 20, synonym: 3, whole_to_part: 9, part_to_whole: 2, unresolved: 89 };
 /**
  * Every link that lights a region, as `technique:term->region`. Pinned by
  * identity: short region ids (m1, a1, acc, sma, ant) resolve whatever their
@@ -163,6 +202,7 @@ describe('drafted technique region links (guards on the committed file)', () => 
   it('holds the pinned outcome per technique and resolution per link', () => {
     const distribution = summariseDistribution(data.techniqueRegions, described);
     expect(distribution.outcomes).toEqual(EXPECTED_OUTCOMES);
+    expect(Object.entries(entries).flatMap(([techniqueId, entry]) => entry.links.map((link) => `${techniqueId}:${link.term}`))).toEqual(EXPECTED_LINK_TERMS);
     expect(distribution.links).toBe(EXPECTED_LINKS);
     expect(distribution.link_resolutions).toEqual(EXPECTED_LINK_RESOLUTIONS);
   });
@@ -175,13 +215,27 @@ describe('drafted technique region links (guards on the committed file)', () => 
     expect(new Set(lit.map(({ technique }) => technique.id)).size).toBe(EXPECTED_OUTCOMES[TECHNIQUE_OUTCOME.LIT]);
   });
 
-  it('holds no rationale that claims a check or an authority, and opens every link rationale with the structure\'s role', () => {
-    const problems = Object.entries(entries).flatMap(([techniqueId, entry]) => [
-      [techniqueId, findRationaleProblem(entry.rationale, false)],
-      ...entry.links.map((link) => [`${techniqueId}:${link.term}`, findRationaleProblem(link.evidence.rationale, true)]),
-    ]).filter(([, problem]) => problem !== null);
-    expect(problems).toEqual([]);
-    expect(findRationaleProblem('Named as the target. Reviewed and confirmed by a neuroscientist.', true)).toContain('claims a check');
+  it('holds no free prose: every rationale is one of the fixed sentences, with only the term and field name filled in', () => {
+    const fieldNameOf = (pointer: string): string => pointer.split('/').slice(3).join('.');
+    const roleSentences = (term: string, pointer: string): string[] => Object.values(LINK_ROLES as Record<string, (term: string, fieldName: string) => string>)
+      .map((render) => render(term, fieldNameOf(pointer)));
+    const entrySentences = Object.entries(ENTRY_RATIONALES as Record<string, string>)
+      .flatMap(([reason, sentence]) => (reason === 'regions' ? [sentence] : [`${reason}: ${sentence}`, `${reason}: ${sentence} Its generated band summary is not counted.`]));
+    const freeProse = Object.entries(entries).flatMap(([techniqueId, entry]) => [
+      ...(entrySentences.includes(entry.rationale) ? [] : [techniqueId]),
+      ...entry.links.filter((link) => !roleSentences(link.term, link.evidence.source_ref.pointer).includes(link.evidence.rationale)).map((link) => `${techniqueId}:${link.term}`),
+    ]);
+    expect(freeProse).toEqual([]);
+    expect(roleSentences('PFC', '/techniques/QIF-T0037/notes')).not.toContain('Named as the target. Independent verification by a neurologist found this correct.');
+  });
+
+  it('quotes no link from a generated band summary, which names a band\'s examples and not the technique\'s target', () => {
+    const pathwayLinks = Object.entries(entries).flatMap(([techniqueId, entry]) => entry.links.map((link) => ({ techniqueId, link })))
+      .filter(({ link }) => link.evidence.source_ref.pointer.endsWith('/tara/dsm5/pathway'));
+    expect(pathwayLinks.length).toBeGreaterThan(0);
+    expect(pathwayLinks.filter(({ link }) => isTemplatedPathway(String(resolvePointer(registrar, link.evidence.source_ref.pointer))))
+      .map(({ techniqueId, link }) => `${techniqueId}:${link.term}`)).toEqual([]);
+    expect(isTemplatedPathway(String(resolvePointer(registrar, '/techniques/QIF-T0037/tara/dsm5/pathway')))).toBe(true);
   });
 
   it('agrees with the audit script on what every term resolves to, whether its band agrees and whether it lights', () => {

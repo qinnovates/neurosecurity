@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
-  SKIP_CATEGORIES, TECHNIQUE_OUTCOME, auditMentions, describeLinks, listBandDisagreements,
+  CONTEXT_CATEGORIES, SKIP_CATEGORIES, TECHNIQUE_OUTCOME, auditMentions, describeLinks, listBandDisagreements,
   listPathwayBandConflicts, listTemplatedStrings, summariseDistribution,
 } from '../audit-technique-regions.mjs';
 import { DATALAKE_DIR } from '../datalake-cli.mjs';
@@ -47,7 +47,7 @@ describe('auditMentions', () => {
   it('does not let a link to a region excuse a bare word for the whole that region belongs to', () => {
     const [stimulation] = FIXTURE_REGISTRAR.techniques;
     const naming = withTechnique({ ...stimulation, tara: { ...stimulation.tara, mechanism: 'Stimulation of the basolateral amygdala and the amygdala' } });
-    const curation = withStimulation({ links: [{ term: 'basolateral amygdala', field: '/tara/mechanism', quote: 'the basolateral amygdala', rationale: 'Named as the target.' }] });
+    const curation = withStimulation({ links: [{ term: 'basolateral amygdala', field: '/tara/mechanism', quote: 'the basolateral amygdala', role: 'action_target' }] });
     expect(audit(curation, naming).map((mention) => `${mention.field}:${mention.matched}:${mention.kind}`)).toEqual([
       '/notes:prefrontal cortex:name', '/notes:prefrontal cortex:synonym', '/tara/mechanism:amygdala:whole_to_part',
     ]);
@@ -57,6 +57,7 @@ describe('auditMentions', () => {
     const skip = FIXTURE_CURATION.techniques[STIMULATION_ID].skipped[0];
     expect(() => audit(withStimulation({ skipped: [{ ...skip, category: 'unimportant' }] }))).toThrow(/skip category "unimportant" is not one of/);
     expect(() => audit(withStimulation({ skipped: [{ ...skip, text: 'medulla' }] }))).toThrow(/the skipped mention "medulla" is not in \/notes/);
+    expect(() => audit(withStimulation({ skipped: [{ ...skip, note: 'Reviewer agreed' }] }))).toThrow(/a skip has the key "note"/);
   });
 });
 
@@ -64,11 +65,10 @@ describe('describeLinks and summariseDistribution', () => {
   const curation = {
     techniques: {
       [STIMULATION_ID]: {
-        rationale: 'Fixture.',
         links: [
-          { term: 'prefrontal cortex', field: '/notes', quote: 'Targets the prefrontal cortex', rationale: 'Named as the target.' },
-          { term: 'pons', field: '/notes', quote: 'Does not reach the pons', rationale: 'Named as a fixture link outside the band tags.' },
-          { term: 'Prefrontal-Cortex circuits', field: '/tara/mechanism', quote: 'Stimulation of Prefrontal-Cortex circuits', rationale: 'Named as a fixture unresolved term.' },
+          { term: 'prefrontal cortex', field: '/notes', quote: 'Targets the prefrontal cortex', role: 'action_target' },
+          { term: 'pons', field: '/notes', quote: 'Does not reach the pons', role: 'action_target' },
+          { term: 'Prefrontal-Cortex circuits', field: '/tara/mechanism', quote: 'Stimulation of Prefrontal-Cortex circuits', role: 'action_target' },
         ],
       },
       [EAVESDROPPING_ID]: FIXTURE_CURATION.techniques[EAVESDROPPING_ID],
@@ -122,9 +122,19 @@ describe('the committed files (guards)', () => {
     expect(auditMentions(techniqueRegions, curation, registrar, atlas)).toEqual([]);
   });
 
-  it('record skips only under a listed category, each with a note', () => {
+  it('record skips as a listed category plus the quoted words, with no free prose', () => {
     const skips = Object.values(curation.techniques).flatMap((entry) => entry.skipped ?? []);
     expect(skips.length).toBeGreaterThan(0);
-    expect(skips.filter((skip) => !SKIP_CATEGORIES.includes(skip.category) || typeof skip.note !== 'string' || skip.note.trim() === '')).toEqual([]);
+    expect(skips.filter((skip) => !SKIP_CATEGORIES.includes(skip.category) || Object.keys(skip).sort().join() !== 'category,field,text')).toEqual([]);
+  });
+
+  it('give each band-level entry the reason its skips call for: context only when a skip names a structure in context', () => {
+    const misfiled = Object.entries(curation.techniques).filter(([, entry]) => entry.band_level !== undefined).filter(([, entry]) => {
+      const namesInContext = (entry.skipped ?? []).some((skip) => CONTEXT_CATEGORIES.includes(skip.category));
+      if (entry.band_level === 'structure_named_only_as_context') return !namesInContext;
+      return entry.band_level === 'no_structure_named' && namesInContext;
+    }).map(([techniqueId]) => techniqueId);
+    expect(misfiled).toEqual([]);
+    expect(Object.values(curation.techniques).filter((entry) => entry.band_level === 'structure_named_only_as_context').length).toBeGreaterThan(0);
   });
 });

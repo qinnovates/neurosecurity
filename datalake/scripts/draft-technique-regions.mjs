@@ -8,7 +8,8 @@
  * catalog's word, the quoted text and a rationale. The curation record is where
  * a reader's decisions are written down, including the ones the data file has
  * no place for: every mention that was read and deliberately not linked, with
- * the reason. Generating the data file keeps the two from drifting and lets the
+ * the reason. Neither file holds free prose: a rationale is a fixed sentence
+ * chosen by a role or a reason. Generating the data file keeps the two from drifting and lets the
  * shape change without retyping 111 entries.
  *
  * Every link is AI-drafted and unreviewed. This script never writes a review:
@@ -22,7 +23,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { DATALAKE_DIR, runAsCli } from './datalake-cli.mjs';
-import { REGISTRAR_FILE, hasNeuralBand, isTemplatedPathway } from './technique-region-candidates.mjs';
+import { REGISTRAR_FILE, hasNeuralBand, isTemplatedField, isTemplatedPathway } from './technique-region-candidates.mjs';
 
 export const CURATION_PATH = path.join(DATALAKE_DIR, 'scripts', 'technique-region-curation.json');
 export const TECHNIQUE_REGIONS_PATH = path.join(DATALAKE_DIR, 'qif-anatomy-technique-regions.json');
@@ -45,19 +46,42 @@ const POINTER_SEPARATOR = '/';
 const LIST_INDEX = /^\d+$/;
 const JSON_INDENT = 2;
 
-/** How a link's rationale must open: the role the text gives the structure. */
-export const LINK_RATIONALE_OPENINGS = Object.freeze(['Named as ', 'Adjective for ', 'The catalog\'s own target field.']);
-/** Words by which a rationale would claim a check nobody made. A review exists only as an owner's ledger entry. */
-const REVIEW_CLAIM = /\b(review(ed|s)?|confirm(ed|s)?|verif(y|ied|ies)|validat(ed|es)|approv(ed|al)|certif(y|ied)|endors(ed|es)|peer|neuroscientist|neuroanatomist|anatomist|clinician|physician|doctor|expert)\b/i;
+/**
+ * The role the registrar text gives a structure, and the one sentence written
+ * as the link's rationale for each. A rationale is never free text: only the
+ * term and the field name are filled in, so it cannot claim a review, a
+ * confirmation or an authority.
+ */
+export const LINK_ROLES = Object.freeze({
+  action_target: (_term, fieldName) => `Named in ${fieldName} as what the technique stimulates, disrupts or otherwise acts on.`,
+  recording_site: (_term, fieldName) => `Named in ${fieldName} as what the technique records or reads from.`,
+  delivery_route: (_term, fieldName) => `Named in ${fieldName} as part of the route the technique's effect is delivered through.`,
+  pathway_stage: (_term, fieldName) => `Named as a stage in the technique's own pathway text (${fieldName}).`,
+  target_field: (_term, fieldName) => `The value of the catalog's own target field (${fieldName}).`,
+  adjective: (term, fieldName) => `"${term}" is an adjective for a structure that ${fieldName} presents as acted on, read from or passed through.`,
+});
 
-/** What is wrong with a rationale or note, or null. Free text may describe the registrar's words and nothing else. */
-export function findRationaleProblem(text, isLinkRationale) {
-  const claim = REVIEW_CLAIM.exec(text);
-  if (claim !== null) return `"${claim[0]}" claims a check or an authority; a drafted rationale may not`;
-  if (isLinkRationale && !LINK_RATIONALE_OPENINGS.some((opening) => text.startsWith(opening))) {
-    return `a link's rationale must open with one of: ${LINK_RATIONALE_OPENINGS.join(' | ')}`;
-  }
-  return null;
+/** The whole rationale of an entry: one fixed sentence per scope or band-level reason. */
+export const ENTRY_RATIONALES = Object.freeze({
+  regions: 'Each link quotes this technique\'s own registrar text; nothing is added from outside it.',
+  no_structure_named: 'No field of this technique\'s registrar text names a structure.',
+  structure_named_only_as_context: 'A structure is named only as context (negation, contrast, clinical analog, citation), not as this technique\'s target.',
+  only_whole_structures_named: 'The text points only at a broad zone and names no structure within it.',
+  text_contradicts_band_tags: 'The pathway text says there is no neural pathway, while the band tags carry a neural band.',
+});
+
+const ENTRY_KEYS = Object.freeze(['band_level', 'links', 'skipped']);
+const LINK_KEYS = Object.freeze(['term', 'field', 'quote', 'role']);
+const FIELD_NAME_SEPARATOR = '.';
+
+/** `/tara/dsm5/pathway` written as `tara.dsm5.pathway`, the way the registrar's fields are spoken of. */
+function toFieldName(field) {
+  return field.split(POINTER_SEPARATOR).slice(1).join(FIELD_NAME_SEPARATOR);
+}
+
+/** The rationale the generator writes for a link with this role. */
+export function renderLinkRationale(role, term, field) {
+  return LINK_ROLES[role](term, toFieldName(field));
 }
 
 export class CurationError extends Error {
@@ -106,14 +130,27 @@ function readQuotedField(technique, curatedLink) {
   return text;
 }
 
-function rejectRationale(technique, text, isLinkRationale) {
-  const problem = findRationaleProblem(text, isLinkRationale);
-  if (problem !== null) throw new CurationError(technique.id, `rationale "${text}": ${problem}`, 'Say what the registrar text says and the role it gives the structure.');
+function rejectUnknownKeys(technique, record, allowedKeys, what) {
+  const strayKey = Object.keys(record).find((key) => !allowedKeys.includes(key));
+  if (strayKey !== undefined) {
+    throw new CurationError(technique.id, `${what} has the key "${strayKey}"`, `The keys allowed are ${allowedKeys.join(', ')}; there is no place for free prose.`);
+  }
+}
+
+function rejectUnusableLink(technique, curatedLink, fieldText) {
+  if (!Object.hasOwn(LINK_ROLES, curatedLink.role)) {
+    throw new CurationError(technique.id, `link "${curatedLink.term}" has the role "${curatedLink.role}"`, `Use one of: ${Object.keys(LINK_ROLES).join(', ')}.`);
+  }
+  if (isTemplatedField(`/techniques/${technique.id}${curatedLink.field}`, fieldText)) {
+    throw new CurationError(technique.id, `link "${curatedLink.term}" cites ${curatedLink.field}, which here is the generated band summary`,
+      'That text names a band\'s example structures, not this technique\'s target. Quote a field the technique\'s own words are in.');
+  }
 }
 
 function buildLink(technique, curatedLink) {
-  rejectRationale(technique, curatedLink.rationale, true);
+  rejectUnknownKeys(technique, curatedLink, LINK_KEYS, `link "${curatedLink.term}"`);
   const fieldText = readQuotedField(technique, curatedLink);
+  rejectUnusableLink(technique, curatedLink, fieldText);
   if (!fieldText.includes(curatedLink.quote)) {
     throw new CurationError(technique.id, `the quote "${curatedLink.quote}" is not in ${curatedLink.field}`,
       'Copy the words from the registrar exactly; if the registrar text changed, read it again before re-drafting.');
@@ -129,24 +166,25 @@ function buildLink(technique, curatedLink) {
       claim_basis: CLAIM_BASIS,
       source_ref: { file: REGISTRAR_FILE, pointer: `/techniques/${technique.id}${curatedLink.field}`, quote: curatedLink.quote },
       check_status: UNCHECKED,
-      rationale: curatedLink.rationale,
+      rationale: renderLinkRationale(curatedLink.role, curatedLink.term, curatedLink.field),
     },
     drafted_by: DRAFTER,
   };
 }
 
 function buildEntry(technique, curated) {
-  [curated.rationale, ...(curated.skipped ?? []).map((skip) => skip.note)].forEach((text) => rejectRationale(technique, text, false));
+  rejectUnknownKeys(technique, curated, ENTRY_KEYS, 'the entry');
   const hasLinks = Array.isArray(curated.links) && curated.links.length > 0;
   if (hasLinks === (curated.band_level !== undefined)) {
     throw new CurationError(technique.id, 'an entry needs either links or a band_level reason, and not both',
       'Give the links the text supports, or the reason no region could be drafted.');
   }
-  if (!hasLinks) {
-    const templatedNote = isTemplatedPathway(technique.tara?.dsm5?.pathway ?? '') ? TEMPLATED_NOTE : '';
-    return { scope: SCOPE.BAND_LEVEL, rationale: `${curated.band_level}${REASON_SEPARATOR}${curated.rationale}${templatedNote}`, links: [] };
+  if (hasLinks) return { scope: SCOPE.REGIONS, rationale: ENTRY_RATIONALES.regions, links: curated.links.map((link) => buildLink(technique, link)) };
+  if (curated.band_level === SCOPE.REGIONS || !Object.hasOwn(ENTRY_RATIONALES, curated.band_level)) {
+    throw new CurationError(technique.id, `"${curated.band_level}" is not a band-level reason`, 'Use a reason from BAND_LEVEL_REASONS in src/lib/anatomy/anatomy-types.ts.');
   }
-  return { scope: SCOPE.REGIONS, rationale: curated.rationale, links: curated.links.map((link) => buildLink(technique, link)) };
+  const templatedNote = isTemplatedPathway(technique.tara?.dsm5?.pathway ?? '') ? TEMPLATED_NOTE : '';
+  return { scope: SCOPE.BAND_LEVEL, rationale: `${curated.band_level}${REASON_SEPARATOR}${ENTRY_RATIONALES[curated.band_level]}${templatedNote}`, links: [] };
 }
 
 function rejectCoverageGaps(curatedById, neuralTechniques) {

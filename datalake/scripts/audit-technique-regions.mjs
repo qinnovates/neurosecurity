@@ -45,6 +45,12 @@ export const SKIP_CATEGORIES = Object.freeze([
   'same_structure_other_wording', 'functional_system', 'cell_class', 'organ_or_site', 'device', 'prior_demonstration', 'explanatory_context',
 ]);
 
+/** A skip is the quoted words, where they are and a category. It has no free prose. */
+const SKIP_KEYS = Object.freeze(['field', 'text', 'category']);
+
+/** Skips that mean a structure IS named, only not as this technique's target. They decide `structure_named_only_as_context`. */
+export const CONTEXT_CATEGORIES = Object.freeze(['negation', 'other_technique', 'clinical_analog', 'citation', 'prior_demonstration']);
+
 /** A word for exactly one region: its id, its name, or an alias the atlas states is a synonym. */
 export const SAME_REGION_KINDS = Object.freeze([TERM_KIND.ID, TERM_KIND.NAME, TERM_KIND.NAME_HEAD, REGION_MATCH.SYNONYM]);
 
@@ -126,6 +132,8 @@ function isInsideAny(candidate, spans) {
 
 function rejectStaleSkips(technique, skips) {
   for (const skip of skips) {
+    const strayKey = Object.keys(skip).find((key) => !SKIP_KEYS.includes(key));
+    if (strayKey !== undefined) throw new CurationError(technique.id, `a skip has the key "${strayKey}"`, `A skip is ${SKIP_KEYS.join(', ')} and nothing else.`);
     if (!SKIP_CATEGORIES.includes(skip.category)) {
       throw new CurationError(technique.id, `skip category "${skip.category}" is not one of: ${SKIP_CATEGORIES.join(', ')}`, 'Use a listed category.');
     }
