@@ -100,9 +100,10 @@ def asset_record(built: BuiltAsset, registry: Registry, evidence: dict[str, Any]
     transform = registry.inputs["transforms"].get(plan.get("transform", ""))
     computed_with = [] if transform is None else sorted({transform["moving_source"], transform["fixed_source"]} - {source_id})
     used_names = [plan[key] for key in ("file", "names_file") if key in plan]
-    fetched = {row["name"]: row["sha256"] for row in source["files"] if row.get("sha256") and (not used_names or row["name"] in used_names)}
+    fetched = {f"{source_id}/{row['name']}": row["sha256"] for row in source["files"]
+               if row.get("sha256") and (not used_names or row["name"] in used_names)}
     for input_id in computed_with:
-        fetched.update({row["name"]: row["sha256"] for row in registry.sources[input_id]["files"] if row.get("sha256")})
+        fetched.update({f"{input_id}/{row['name']}": row["sha256"] for row in registry.sources[input_id]["files"] if row.get("sha256")})
     route_step: dict[str, Any] = {"kind": source["route"]["kind"]}
     if "publisher_registration" in source["route"]:
         route_step["publisher_registration"] = source["route"]["publisher_registration"]

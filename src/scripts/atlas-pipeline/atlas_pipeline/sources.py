@@ -23,6 +23,8 @@ INPUTS_PATH = PIPELINE_DIR / "registry" / "pipeline-inputs.json"
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 SAFE_NAME_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 SHIPPING_VERDICTS = frozenset({"ship", "ship_separate_file"})
+# The blockers a pipeline-only input has by its nature: it is not redistributed, so it needs no folder and no route.
+PIPELINE_ONLY_BLOCKERS = frozenset({"not_redistributable", "no_output_folder", "route_not_settled"})
 # (commercial_use, requires_agreement, output_folder) per license id; mirrors LICENCE_FACTS in licence-rules.ts.
 LICENSE_FACTS: dict[str, tuple[bool, bool, str | None]] = {
     "cc-by-4.0": (True, False, "open"), "cc0-1.0": (True, False, "open"), "mit": (True, False, "open"),
@@ -113,9 +115,16 @@ def buildability_table(registry: Registry) -> dict[str, list[str]]:
 
 
 def is_usable_input(registry: Registry, source_id: str) -> bool:
-    """A pipeline-only input (never redistributed) may be read when it is cleared; it is never an asset's material."""
-    verdict = registry.verdicts.get(source_id)
-    return verdict is not None and verdict["clearance"]["cleared"] is True and verdict["verdict"] in SHIPPING_VERDICTS
+    """Whether the pipeline may compute with a source: buildable, or pipeline-only with terms that permit use.
+
+    A pipeline-only source is never an asset's material. It still needs a cleared, explicit, shipping
+    verdict, a license that grants commercial use, and any agreement accepted.
+    """
+    source, verdict = registry.sources[source_id], registry.verdicts.get(source_id)
+    blockers = set(buildability_blockers(source, verdict, source_id in registry.accepted_agreements))
+    if not blockers:
+        return True
+    return source["redistribute"] is False and blockers <= PIPELINE_ONLY_BLOCKERS
 
 
 def output_folder(registry: Registry, source_id: str) -> str:

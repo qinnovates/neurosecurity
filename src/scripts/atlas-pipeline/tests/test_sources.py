@@ -53,6 +53,9 @@ def test_a_pipeline_only_input_is_usable_but_never_buildable() -> None:
     assert sources.is_usable_input(registry, "mni_icbm152_2009b_sym") is True
     assert sources.buildability_blockers(registry.sources["mni_icbm152_2009b_sym"], registry.verdicts["mni_icbm152_2009b_sym"], False) == ["not_redistributable"]
     assert sources.is_usable_input(registry, "templateflow_xfm") is False
+    assert sources.is_usable_input(registry, "allen_hra_3d_2020") is True
+    assert sources.is_usable_input(registry, "harvard_aan_v2") is False
+    assert sources.is_usable_input(registry, "hcp_s1200_mmp1") is False
 
 
 def test_an_accepted_agreement_unblocks_and_a_missing_verdict_blocks() -> None:
