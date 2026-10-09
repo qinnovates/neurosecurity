@@ -4,7 +4,7 @@
  * reaches the declared template space.
  */
 
-import { DELINEATION_BASES } from './anatomy-types';
+import { DELINEATION_BASES, NO_GEOMETRY_TOKEN } from './anatomy-types';
 import { rejectBandKeys } from './band-key-scan';
 import {
   childOf, failAt, itemOf, readBoolean, readEnum, readInteger, readList, readNullable, readRecord, readString,
@@ -22,7 +22,7 @@ const SOURCES_SCHEMA_VERSION = 1;
 const MAX_NAME_LENGTH = 200;
 const MAX_TEXT_LENGTH = 1200;
 const SOURCE_KEYS = [
-  'id', 'name', 'attribution_text', 'urls', 'licence_id', 'redistribute', 'layers',
+  'id', 'name', 'attribution_text', 'urls', 'license_id', 'redistribute', 'layers',
   'delineated_in', 'arrives_in', 'route', 'delineation', 'required_text', 'files',
 ] as const;
 
@@ -90,7 +90,7 @@ function parseSource(value: unknown, location: FieldLocation, declaredSpace: str
     name: readString(record, 'name', location, MAX_NAME_LENGTH),
     attribution_text: readNullable(record, 'attribution_text', () => readString(record, 'attribution_text', location, MAX_TEXT_LENGTH)),
     urls: readWebUrlList(record, 'urls', location),
-    licence_id: readEnum(record, 'licence_id', location, LICENCE_IDS),
+    license_id: readEnum(record, 'license_id', location, LICENCE_IDS),
     redistribute: readBoolean(record, 'redistribute', location),
     layers: parseLayers(record, location),
     delineated_in: readString(record, 'delineated_in', location, MAX_NAME_LENGTH),
@@ -118,7 +118,11 @@ export function parseSources(raw: unknown): AnatomySources {
   const declaredSpace = readString(record, 'declared_space', root, MAX_NAME_LENGTH);
   const sources = readList(record, 'sources', root).map((source, index) => parseSource(source, itemOf(root, 'sources', index), declaredSpace));
   const refused = readList(record, 'considered_and_refused', root).map((entry, index) => parseRefused(entry, itemOf(root, 'considered_and_refused', index)));
-  rejectDuplicates([...sources.map((source) => source.id), ...refused.map((entry) => entry.id)], childOf(root, 'sources'), 'source id');
+  const sourceIds = [...sources.map((source) => source.id), ...refused.map((entry) => entry.id)];
+  rejectDuplicates(sourceIds, childOf(root, 'sources'), 'source id');
+  if (sourceIds.includes(NO_GEOMETRY_TOKEN)) {
+    failAt(childOf(root, 'sources'), `"${NO_GEOMETRY_TOKEN}" cannot be a source id`, 'It is reserved for the ledger key of a no_geometry record; choose another id.');
+  }
   return {
     schema_version: readSchemaVersion(record, root, SOURCES_SCHEMA_VERSION),
     status: readStatus(record, root, SOURCES_STATUS),

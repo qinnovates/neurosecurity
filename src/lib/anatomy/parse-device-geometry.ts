@@ -1,5 +1,5 @@
 /**
- * Parser for datalake/qif-device-geometry.json: the scalp fiducials the EEG
+ * Parser for datalake/qif-anatomy-device-geometry.json: the scalp fiducials the EEG
  * layout is built from, and deep-brain-stimulation lead dimensions with the
  * sources they were read in. Dimensions are facts; no table or figure from a
  * paper is reproduced. A row is drawn only while a ledger entry covers it.
@@ -15,7 +15,7 @@ import { readHttpsUrl, readId, readSchemaVersion } from './format-readers';
 import type { Point3 } from './manifest-types';
 import { DEVICE_GEOMETRY_STATUS, readStatus } from './status-sentences';
 
-export const DEVICE_GEOMETRY_FILE = 'datalake/qif-device-geometry.json';
+export const DEVICE_GEOMETRY_FILE = 'datalake/qif-anatomy-device-geometry.json';
 
 /** The four points the 10-20 construction starts from. */
 export const FIDUCIAL_IDS = ['nasion', 'inion', 'left_preauricular', 'right_preauricular'] as const;

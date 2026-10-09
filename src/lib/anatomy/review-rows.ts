@@ -9,24 +9,28 @@
 import { isValidForAddressing } from './addressing-version';
 import type { AnatomyData } from './anatomy-inputs';
 import type { IndexReviewState } from './anatomy-index-types';
-import type { AtlasLabel, CrosswalkRow, NoGeometryRecord } from './anatomy-types';
+import { NO_GEOMETRY_TOKEN, type AtlasLabel, type ContainsRelation, type CrosswalkRow, type NoGeometryRecord } from './anatomy-types';
 import type { ReviewedRow } from './build-owner-map';
 import { UNCHECKED, type CheckStatus, type EvidenceBlock } from './evidence';
 import { canonicalJson, crosswalkRowKey, digestCrosswalkRow, sha256Hex } from './row-digest';
 import { findReview, toIndexReviewState } from './review-state';
 import { SOURCE_REF_STATES, checkSourceRef, type SourceRefState } from './source-ref';
 
-const NO_GEOMETRY_ATLAS_TOKEN = 'no_geometry';
 
 export interface CheckedEvidence {
   quote_state: SourceRefState;
   check_status: CheckStatus;
 }
 
-/** A claim whose quoted words no longer appear at its pointer cannot stay checked. */
-export function checkEvidence(evidence: EvidenceBlock, data: AnatomyData): CheckedEvidence {
+/**
+ * The check status a claim may show. A file's own `check_status` is only a
+ * claim: it counts once a review covers the row as it is now, and only while
+ * the quoted words still appear at their pointer. Otherwise it reads unchecked.
+ */
+export function checkEvidence(evidence: EvidenceBlock, reviewState: IndexReviewState, data: AnatomyData): CheckedEvidence {
   const quoteState = checkSourceRef(evidence.source_ref, data.documentsByFile);
-  return { quote_state: quoteState, check_status: quoteState === SOURCE_REF_STATES.QUOTE_FOUND ? evidence.check_status : UNCHECKED };
+  const isVouchedFor = reviewState.state === 'reviewed' && quoteState === SOURCE_REF_STATES.QUOTE_FOUND;
+  return { quote_state: quoteState, check_status: isVouchedFor ? evidence.check_status : UNCHECKED };
 }
 
 export function reviewOf(data: AnatomyData, key: string, digest: string): IndexReviewState {
@@ -46,6 +50,12 @@ function listDrawingMeshes(row: CrosswalkRow, data: AnatomyData): string[] {
     .map((asset) => asset.sha256);
 }
 
+/** A declared containment gives the row's shapes another owner, so the row's review must cover it. */
+function listContainment(row: CrosswalkRow, data: AnatomyData): ContainsRelation[] {
+  if (row.subject_kind !== 'region') return [];
+  return data.crosswalk.contains.filter((relation) => relation.parent === row.subject_id || relation.child === row.subject_id);
+}
+
 export interface ReviewedCrosswalk {
   /** Rows valid for the current addressing. Only these own structures. */
   current: Array<ReviewedRow & CheckedEvidence>;
@@ -57,8 +67,9 @@ export function reviewCrosswalkRows(data: AnatomyData): ReviewedCrosswalk {
   const isCurrent = (row: CrosswalkRow): boolean => isValidForAddressing(row, data.addressingVersion);
   const current = data.crosswalk.rows.filter(isCurrent).map((row) => {
     const key = crosswalkRowKey(row);
-    const digest = digestCrosswalkRow(row, listPointedLabels(row, data), listDrawingMeshes(row, data));
-    return { row, key, digest, review_state: reviewOf(data, key, digest), ...checkEvidence(row.evidence, data) };
+    const digest = digestCrosswalkRow(row, { labels: listPointedLabels(row, data), meshSha256s: listDrawingMeshes(row, data), containment: listContainment(row, data) });
+    const reviewState = reviewOf(data, key, digest);
+    return { row, key, digest, review_state: reviewState, ...checkEvidence(row.evidence, reviewState, data) };
   });
   return { current, outdated: data.crosswalk.rows.filter((row) => !isCurrent(row)) };
 }
@@ -72,7 +83,7 @@ export interface ReviewedNoGeometry {
 
 export function reviewNoGeometry(data: AnatomyData): ReviewedNoGeometry[] {
   return data.crosswalk.no_geometry.map((record) => {
-    const key = crosswalkRowKey({ ...record, atlas: NO_GEOMETRY_ATLAS_TOKEN, part: null });
+    const key = crosswalkRowKey({ ...record, atlas: NO_GEOMETRY_TOKEN, part: null });
     const digest = sha256Hex(canonicalJson(record));
     return { record, key, digest, review_state: reviewOf(data, key, digest) };
   });

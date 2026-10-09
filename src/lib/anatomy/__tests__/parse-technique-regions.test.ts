@@ -81,6 +81,12 @@ describe('parseTechniqueRegions', () => {
     expect(() => parseEntry({ ...REGIONS_ENTRY, links: [buildLink({ evidence: otherTechnique })] })).toThrow(/source_ref: catalog text must be cited from this technique's own registrar entry/);
   });
 
+  it.each(['analyst_inference', 'catalog_parameter', 'atlas_label', 'literature'])('rejects a link whose claim basis is "%s": a link may rest only on the catalog\'s words', (claimBasis) => {
+    const evidence = { ...buildLink().evidence, claim_basis: claimBasis, ...(claimBasis === 'literature' ? { evidence_method: 'review' } : {}) };
+    expect(() => parseEntry({ ...REGIONS_ENTRY, links: [{ ...buildLink(), evidence }] }))
+      .toThrow(/links\[0\]\.evidence\.claim_basis: a technique link may rest only on the catalog's own words/);
+  });
+
   it('rejects one term linked twice for a technique, and a link valid for no addressing version', () => {
     expect(() => parseEntry({ ...REGIONS_ENTRY, links: [buildLink(), buildLink()] })).toThrow(/term "amygdala" appears twice/);
     expect(() => parseEntry({ ...REGIONS_ENTRY, links: [buildLink({ valid_for_addressing: [] })] })).toThrow(/valid_for_addressing/);

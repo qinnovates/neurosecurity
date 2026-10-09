@@ -1,7 +1,7 @@
 /** A valid one-asset manifest for parser tests. Every number is invented. */
 
 import type { AssetManifest, ManifestAsset, ManifestContext, ManifestNode } from '../manifest-types';
-import { FIXTURE_ATLAS_ID, FIXTURE_SHA256, FIXTURE_SPACE } from './anatomy-fixtures';
+import { FIXTURE_ATLAS_ID, FIXTURE_FILE_NAME, FIXTURE_SHA256, FIXTURE_SPACE } from './anatomy-fixtures';
 
 const HASH_PREFIX_LENGTH = 12;
 export const FIXTURE_ASSET_ID = 'deep-fixture';
@@ -35,15 +35,16 @@ export function buildAsset(overrides: Partial<ManifestAsset> = {}): ManifestAsse
     input_fingerprint: FIXTURE_SHA256,
     source_ids: [FIXTURE_ATLAS_ID],
     computed_with_source_ids: [],
-    licence_id: 'cc-by-4.0',
-    stated_licence_id: 'cc-by-4.0',
+    license_id: 'cc-by-4.0',
+    stated_license_id: 'cc-by-4.0',
     route: [{ kind: 'publisher_registered', publisher_registration: { target: FIXTURE_SPACE, method: 'not stated' } }],
     delineation: { basis: 'manual_mri', subjects: 10, hemispheres: 'unknown', grid_voxel_mm: 1, acquisition_voxel_mm: null, probability_meaning: 'not stated' },
     libraries: { 'scikit-image': '0.26.0' },
     nodes: [buildNode()],
     checks: [{ id: 'K6', status: 'not_run', reason: 'side assigned by construction', measured: null, threshold: null }],
-    stage_fingerprints: { fetch: FIXTURE_SHA256, register: null, resample: FIXTURE_SHA256, mesh: FIXTURE_SHA256, write: FIXTURE_SHA256 },
+    stage_fingerprints: { fetch: { [FIXTURE_FILE_NAME]: FIXTURE_SHA256 }, register: null, resample: FIXTURE_SHA256, mesh: FIXTURE_SHA256, write: FIXTURE_SHA256 },
     position_check: 'not independently checked',
+    modification_note: 'Thresholded at 0.5, meshed and smoothed. Fixture text.',
     ...overrides,
   };
 }
@@ -66,6 +67,7 @@ export function buildManifestContext(overrides: Partial<ManifestContext> = {}): 
     statedLicenceBySource: new Map([[FIXTURE_ATLAS_ID, 'cc-by-4.0']]),
     effectiveLicenceBySource: new Map([[FIXTURE_ATLAS_ID, 'cc-by-4.0']]),
     buildableSourceIds: new Set([FIXTURE_ATLAS_ID]),
+    filePinsBySource: new Map([[FIXTURE_ATLAS_ID, new Map([[FIXTURE_FILE_NAME, FIXTURE_SHA256]])]]),
     ...overrides,
   };
 }

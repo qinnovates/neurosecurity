@@ -28,8 +28,8 @@ function listRelatives(owner: IndexOwner, contains: readonly ContainsRelation[])
   if (owner.subject_kind !== 'region') return [];
   const viaContainment = (subjectId: string, via: IndexOwner['via']): IndexOwner => ({ ...owner, subject_id: subjectId, via, extent_match: null });
   return contains.flatMap((relation) => {
-    if (relation.child === owner.subject_id) return [viaContainment(relation.parent, 'declared_parent')];
-    if (relation.parent === owner.subject_id) return [viaContainment(relation.child, 'declared_child')];
+    if (relation.child === owner.subject_id) return [viaContainment(relation.parent, 'owner_contains_row_subject')];
+    if (relation.parent === owner.subject_id) return [viaContainment(relation.child, 'row_subject_contains_owner')];
     return [];
   });
 }

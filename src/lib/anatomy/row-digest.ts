@@ -9,7 +9,7 @@
 
 import { createHash } from 'node:crypto';
 import { isRecord } from '@/lib/threat-model/guards';
-import type { AtlasLabel, CrosswalkRow, TechniqueLink } from './anatomy-types';
+import type { AtlasLabel, ContainsRelation, CrosswalkRow, TechniqueLink } from './anatomy-types';
 import type { TermResolution } from './resolve-region-term';
 
 const KEY_SEPARATOR = ':';
@@ -36,12 +36,19 @@ export function techniqueLinkKey(techniqueId: string, term: string): string {
   return `${techniqueId}${KEY_SEPARATOR}${term}`;
 }
 
-/**
- * @param labels the label-table entries for the row's atlas_ids
- * @param meshSha256s the sha256 of every asset that draws those labels
- */
-export function digestCrosswalkRow(row: CrosswalkRow, labels: readonly AtlasLabel[], meshSha256s: readonly string[]): string {
-  return sha256Hex(canonicalJson({ row, labels, mesh_sha256s: [...meshSha256s].sort() }));
+/** What a crosswalk row points at or depends on. Changing any of it un-reviews the row. */
+export interface RowDependencies {
+  /** The label-table entries for the row's atlas_ids. */
+  labels: readonly AtlasLabel[];
+  /** The sha256 of every asset that draws those labels. */
+  meshSha256s: readonly string[];
+  /** Every declared containment the row's subject takes part in; each one adds an owner to a shape. */
+  containment: readonly ContainsRelation[];
+}
+
+export function digestCrosswalkRow(row: CrosswalkRow, dependencies: RowDependencies): string {
+  const containment = dependencies.containment.map((relation) => `${relation.parent}>${relation.child}`).sort();
+  return sha256Hex(canonicalJson({ row, labels: dependencies.labels, mesh_sha256s: [...dependencies.meshSha256s].sort(), containment }));
 }
 
 /** Covers the link and what its term resolves to, so reclassifying an alias un-reviews every link that uses it. */

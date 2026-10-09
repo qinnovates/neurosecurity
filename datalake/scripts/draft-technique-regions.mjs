@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Writes datalake/qif-technique-regions.json from the curation record in
+ * Writes datalake/qif-anatomy-technique-regions.json from the curation record in
  * technique-region-curation.json.
  *
  * Why two files: the data file's shape belongs to the parser in
@@ -25,7 +25,7 @@ import { DATALAKE_DIR, runAsCli } from './datalake-cli.mjs';
 import { REGISTRAR_FILE, hasNeuralBand, isTemplatedPathway } from './technique-region-candidates.mjs';
 
 export const CURATION_PATH = path.join(DATALAKE_DIR, 'scripts', 'technique-region-curation.json');
-export const TECHNIQUE_REGIONS_PATH = path.join(DATALAKE_DIR, 'qif-technique-regions.json');
+export const TECHNIQUE_REGIONS_PATH = path.join(DATALAKE_DIR, 'qif-anatomy-technique-regions.json');
 export const REGISTRAR_PATH = path.join(DATALAKE_DIR, 'qtara-registrar.json');
 
 const SCHEMA_VERSION = 2;
@@ -160,7 +160,7 @@ function runCli() {
   const registrar = JSON.parse(readFileSync(REGISTRAR_PATH, 'utf-8'));
   const generatedText = serialiseTechniqueRegions(buildTechniqueRegions(curation, registrar));
   if (readFileSync(TECHNIQUE_REGIONS_PATH, 'utf-8') === generatedText) {
-    process.stdout.write('[draft-technique-regions] datalake/qif-technique-regions.json matches the curation record.\n');
+    process.stdout.write('[draft-technique-regions] datalake/qif-anatomy-technique-regions.json matches the curation record.\n');
     return;
   }
   if (process.argv.includes('--check')) {
@@ -168,7 +168,7 @@ function runCli() {
     process.exit(1);
   }
   writeFileSync(TECHNIQUE_REGIONS_PATH, generatedText);
-  process.stdout.write('[draft-technique-regions] rewrote datalake/qif-technique-regions.json.\n');
+  process.stdout.write('[draft-technique-regions] rewrote datalake/qif-anatomy-technique-regions.json.\n');
 }
 
 runAsCli(import.meta.url, 'draft-technique-regions', runCli);

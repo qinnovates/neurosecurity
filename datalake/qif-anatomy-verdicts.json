@@ -14,7 +14,7 @@
   "verdicts": [
     {
       "source_id": "mni_icbm152_2009c_asym",
-      "verdict": "SHIP",
+      "verdict": "ship",
       "grant": "explicit",
       "treat_as": null,
       "terms_url": "https://nist.mni.mcgill.ca/icbm-152-nonlinear-atlases-2009/",
@@ -37,7 +37,7 @@
     },
     {
       "source_id": "allen_hra_3d_2020",
-      "verdict": "SHIP",
+      "verdict": "ship",
       "grant": "explicit",
       "treat_as": null,
       "terms_url": "https://creativecommons.org/licenses/by/4.0/",
@@ -60,7 +60,7 @@
     },
     {
       "source_id": "cit168_rl",
-      "verdict": "SHIP",
+      "verdict": "ship",
       "grant": "explicit",
       "treat_as": "cc-by-sa-4.0",
       "terms_url": "https://api.osf.io/v2/licenses/563c1cf88c5e4a3877f9e96a/",
@@ -83,7 +83,7 @@
     },
     {
       "source_id": "harvard_aan_v2",
-      "verdict": "SHIP",
+      "verdict": "ship",
       "grant": "explicit",
       "treat_as": null,
       "terms_url": "https://spdx.org/licenses/CC0-1.0.html",
@@ -106,7 +106,7 @@
     },
     {
       "source_id": "neudorfer_hypothalamus",
-      "verdict": "SHIP",
+      "verdict": "ship",
       "grant": "explicit",
       "treat_as": null,
       "terms_url": "https://creativecommons.org/licenses/by/4.0/",
@@ -129,7 +129,7 @@
     },
     {
       "source_id": "ahead_structures",
-      "verdict": "SHIP",
+      "verdict": "ship",
       "grant": "explicit",
       "treat_as": null,
       "terms_url": "https://creativecommons.org/licenses/by/4.0/",
@@ -152,7 +152,7 @@
     },
     {
       "source_id": "eeg_positions",
-      "verdict": "SHIP",
+      "verdict": "ship",
       "grant": "explicit",
       "treat_as": null,
       "terms_url": "https://github.com/sappelhoff/eeg_positions/blob/main/LICENSE",
@@ -175,7 +175,7 @@
     },
     {
       "source_id": "hcp1065_tracts",
-      "verdict": "SHIP-SEPARATE-FILE",
+      "verdict": "ship_separate_file",
       "grant": "interpretation",
       "treat_as": null,
       "terms_url": "http://creativecommons.org/licenses/by-sa/4.0/",
@@ -201,7 +201,7 @@
     },
     {
       "source_id": "yeo2011_cbig",
-      "verdict": "SHIP",
+      "verdict": "ship",
       "grant": "interpretation",
       "treat_as": null,
       "terms_url": "https://github.com/ThomasYeoLab/CBIG/blob/master/LICENSE.md",
@@ -228,7 +228,7 @@
     },
     {
       "source_id": "schaefer2018_cbig",
-      "verdict": "SHIP",
+      "verdict": "ship",
       "grant": "interpretation",
       "treat_as": null,
       "terms_url": "https://github.com/ThomasYeoLab/CBIG/blob/master/LICENSE.md",
@@ -254,7 +254,7 @@
     },
     {
       "source_id": "nextbrain",
-      "verdict": "SHIP",
+      "verdict": "ship",
       "grant": "explicit",
       "treat_as": null,
       "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -278,7 +278,7 @@
     },
     {
       "source_id": "massp_2_0",
-      "verdict": "SHIP",
+      "verdict": "ship",
       "grant": "explicit",
       "treat_as": null,
       "terms_url": "https://creativecommons.org/licenses/by/4.0/",
@@ -303,7 +303,7 @@
     },
     {
       "source_id": "hcp_s1200_mmp1",
-      "verdict": "NEEDS-KEVIN",
+      "verdict": "needs_owner",
       "grant": "explicit",
       "treat_as": null,
       "terms_url": "https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms",
@@ -333,7 +333,7 @@
     },
     {
       "source_id": "freesurfer_fsaverage",
-      "verdict": "NEEDS-KEVIN",
+      "verdict": "needs_owner",
       "grant": "explicit",
       "treat_as": null,
       "terms_url": "https://raw.githubusercontent.com/freesurfer/freesurfer/dev/LICENSE.txt",
@@ -364,7 +364,7 @@
     },
     {
       "source_id": "templateflow_xfm",
-      "verdict": "DO-NOT-SHIP",
+      "verdict": "do_not_ship",
       "grant": "none",
       "treat_as": null,
       "terms_url": null,

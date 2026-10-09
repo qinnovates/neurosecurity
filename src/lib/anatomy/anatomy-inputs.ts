@@ -9,12 +9,13 @@ import type { EngineData } from '@/lib/threat-model/catalog-types';
 import { currentAddressingVersion } from './addressing-version';
 import type { Crosswalk, CrosswalkContext, LabelTable, SubjectKind, TechniqueRegions } from './anatomy-types';
 import { AnatomyDataError } from './errors';
+import { show } from './field-readers';
 import { LICENCE_FACTS, assessBuildability, effectiveLicenceId, type Buildability } from './licence-rules';
 import type { AssetManifest } from './manifest-types';
 import { parseCrosswalk } from './parse-crosswalk';
 import { parseDeviceGeometry, type DeviceGeometry } from './parse-device-geometry';
 import { parseLabelTable } from './parse-label-table';
-import { parseManifest } from './parse-manifest';
+import { MANIFEST_FILE, parseManifest } from './parse-manifest';
 import { parseReviewLedger, type ReviewLedger, type ReviewerRole } from './parse-review-ledger';
 import { parseSources } from './parse-sources';
 import { REGISTRAR_FILE, parseTechniqueRegions } from './parse-technique-regions';
@@ -108,11 +109,27 @@ function parseLabelTables(
     const requiredFolder = LICENCE_FACTS[effectiveLicence.get(table.atlas) as LicenceId].output_folder;
     if (buildability.get(table.atlas)?.buildable !== true || folder === undefined || folder !== requiredFolder) {
       throw new AnatomyDataError(filePath, 'atlas', `a label table for "${table.atlas}" may not ship from this folder`,
-        `Label tables ship only for buildable sources, from the folder their licence requires ("${String(requiredFolder)}/").`);
+        `Label tables ship only for buildable sources, from the folder their licence requires ("${show(requiredFolder)}/").`);
     }
     tables.set(table.atlas, table);
   }
   return tables;
+}
+
+/** Every shipped node must carry a label of its atlas's own table, so no shape can ship unnamed or under an invented id. */
+function rejectUnlabelledNodes(manifest: AssetManifest, labelTables: ReadonlyMap<string, LabelTable>): void {
+  for (const [assetIndex, asset] of manifest.assets.entries()) {
+    for (const [nodeIndex, node] of asset.nodes.entries()) {
+      const location = `assets[${assetIndex}].nodes[${nodeIndex}].extras`;
+      const labelTable = labelTables.get(node.extras.atlas);
+      if (labelTable === undefined) {
+        throw new AnatomyDataError(MANIFEST_FILE, `${location}.atlas`, `"${show(node.extras.atlas)}" has no label table`, 'Ship labels-<atlas>.json beside the atlas\'s assets.');
+      }
+      if (!labelTable.labels.some((label) => label.id === node.extras.label_id)) {
+        throw new AnatomyDataError(MANIFEST_FILE, `${location}.label_id`, `"${show(node.extras.label_id)}" is not a label of "${node.extras.atlas}"`, 'Rebuild the label table and the asset together.');
+      }
+    }
+  }
 }
 
 function listNeuralTechniqueIds(engineData: EngineData): Set<string> {
@@ -120,7 +137,7 @@ function listNeuralTechniqueIds(engineData: EngineData): Set<string> {
 }
 
 function readManifestInputs(sources: AnatomySources): Map<string, LicenceId> {
-  return new Map(sources.sources.map((source) => [source.id, source.licence_id]));
+  return new Map(sources.sources.map((source) => [source.id, source.license_id]));
 }
 
 function buildCrosswalkContext(
@@ -159,7 +176,9 @@ export function parseAnatomyFiles(raw: RawAnatomyFiles): AnatomyData {
     statedLicenceBySource: readManifestInputs(sources),
     effectiveLicenceBySource,
     buildableSourceIds: crosswalkContext.buildableAtlasIds,
+    filePinsBySource: new Map(sources.sources.map((source) => [source.id, new Map(source.files.map((file) => [file.name, file.sha256]))])),
   });
+  if (manifest !== null) rejectUnlabelledNodes(manifest, labelTables);
   return {
     engineData: raw.engineData,
     atlas: raw.atlas,

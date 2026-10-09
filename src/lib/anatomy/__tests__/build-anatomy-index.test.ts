@@ -2,12 +2,14 @@ import { describe, expect, it } from 'vitest';
 import { isAgreementAccepted, parseAnatomyFiles, type RawAnatomyFiles } from '../anatomy-inputs';
 import type { AnatomyIndex, IndexStructure, IndexSubject } from '../anatomy-index-types';
 import { buildAnatomyBundle, type AnatomyBundle } from '../build-anatomy-index';
+import { buildOwnerMap, type ReviewedRow } from '../build-owner-map';
 import type { AnatomyEvidence } from '../build-anatomy-evidence';
 import { parseReviewLedger, type LedgerEntry } from '../parse-review-ledger';
 import { sha256Hex } from '../row-digest';
 import { ANATOMY_INDEX_STATUS } from '../status-sentences';
-import { FIXTURE_ATLAS_ID, FIXTURE_SHA256, buildVerdict } from './anatomy-fixtures';
-import { FIXTURE_ASSET_ID, buildAsset, buildManifest } from './manifest-fixtures';
+import { FIXTURE_ATLAS_ID, FIXTURE_SHA256, buildSource, buildSourcesFile, buildVerdict, buildVerdictsFile } from './anatomy-fixtures';
+import { buildRow } from './crosswalk-fixtures';
+import { FIXTURE_ASSET_ID, buildAsset, buildManifest, buildNode } from './manifest-fixtures';
 import { PATHWAY_TEXT, TECHNIQUE_ID, TRACTS_SOURCE_ID, buildLedgerFile, buildRawFiles } from './raw-files-fixture';
 
 const build = (overrides: Partial<RawAnatomyFiles> = {}): AnatomyBundle => buildAnatomyBundle(parseAnatomyFiles(buildRawFiles(overrides)));
@@ -28,13 +30,23 @@ describe('buildAnatomyBundle: owners', () => {
 
   it('gives each structure its full owner set, including subjects that reach it through a declared containment', () => {
     expect(ownerIds(structureOf(index, '7'))).toEqual(['stn:row']);
-    expect(ownerIds(structureOf(index, '8'))).toEqual(['thalamus:row', 'vim:declared_child']);
-    expect(ownerIds(structureOf(index, '9'))).toEqual(['vim:row', 'thalamus:declared_parent']);
+    expect(ownerIds(structureOf(index, '8'))).toEqual(['thalamus:row', 'vim:row_subject_contains_owner']);
+    expect(ownerIds(structureOf(index, '9'))).toEqual(['vim:row', 'thalamus:owner_contains_row_subject']);
     expect(ownerIds(structureOf(index, '10'))).toEqual(['m1:row', 'pmc:row']);
   });
 
   it('keeps a shipped shape that no record maps to, with no owner', () => {
     expect(structureOf(index, '12')).toMatchObject({ owners: [], nodes: [{ asset_id: FIXTURE_ASSET_ID, hemisphere: 'left', centroid_mm: [1, 2, 3] }] });
+  });
+
+  it('carries through whether a shape\'s sides were drawn separately or one mirrors the other', () => {
+    expect(structureOf(index, '7').nodes[0].hemispheres_drawn).toBe('unknown');
+    const delineation = { ...buildAsset().delineation, hemispheres: 'mirrored' as const };
+    expect(structureOf(build({ manifest: buildManifest([buildAsset({ delineation })]) }).index, '7').nodes[0].hemispheres_drawn).toBe('mirrored');
+  });
+
+  it('carries each asset\'s modification note', () => {
+    expect(index.assets[0].modification_note).toBe('Thresholded at 0.5, meshed and smoothed. Fixture text.');
   });
 
   it('names structures from the atlas label table and links them to their mesh node', () => {
@@ -47,9 +59,23 @@ describe('buildAnatomyBundle: subjects', () => {
 
   it('derives each subject\'s band set and geometry state', () => {
     expect(subjectOf(index, 'stn')).toMatchObject({ band_ids: ['N5'], geometry: { state: 'drawn' }, structure_keys: [`${FIXTURE_ATLAS_ID}:7`] });
-    expect(subjectOf(index, 'vim').geometry.state).toBe('contained');
     expect(subjectOf(index, 'thalamus').declared_children).toEqual(['vim']);
     expect(subjectOf(index, 'insula').geometry).toEqual({ state: 'not_mapped', reason: 'No correspondence to an atlas has been drafted for this record yet.', reason_source: null });
+  });
+
+  it('reads a subject as drawn only when a shipped mesh exists for one of its labels', () => {
+    expect(subjectOf(index, 'stn').geometry.state).toBe('drawn');
+    expect(subjectOf(index, 'thalamus').geometry).toEqual({ state: 'not_built', reason: 'A correspondence is drafted, but no shape has been built for it yet.', reason_source: null });
+    expect(subjectOf(index, 'vim').geometry.state).toBe('not_built');
+    const withFold = buildManifest([buildAsset({ nodes: [buildNode(), buildNode({ extras: { atlas: FIXTURE_ATLAS_ID, label_id: '9', hemisphere: 'both' } })] })]);
+    expect(subjectOf(build({ manifest: withFold }).index, 'vim').geometry.state).toBe('contained');
+    expect(subjectOf(build({ manifest: null }).index, 'stn').geometry.state).toBe('not_built');
+  });
+
+  it('reads a subject whose only shipped node is too small to outline as a marker, not as drawn', () => {
+    const marker = buildNode({ size_class: 'unresolved', vertex_count: 0 });
+    expect(subjectOf(build({ manifest: buildManifest([buildAsset({ nodes: [marker] })]) }).index, 'stn').geometry)
+      .toEqual({ state: 'marker_only', reason: 'This structure is too small to outline; only its location is marked.', reason_source: null });
   });
 
   it('carries a no_geometry record\'s reason and its source', () => {
@@ -94,7 +120,6 @@ describe('buildAnatomyBundle: technique links', () => {
     const staleLink = stale.techniques[0].links[0];
     expect(staleLink).toMatchObject({ quote_state: 'quote_missing', check_status: 'unchecked', lit: false });
     expect(stale.stale_evidence_keys).toContain(`${TECHNIQUE_ID}:stn`);
-    expect(linkOf('stn')).toMatchObject({ quote_state: 'quote_found', check_status: 'partial' });
     expect(PATHWAY_TEXT).toContain('stn');
   });
 
@@ -104,7 +129,7 @@ describe('buildAnatomyBundle: technique links', () => {
     expect(moved.addressing_version).toBe(2);
     expect(moved.techniques[0].links.map((link) => [link.valid_for_current_addressing, link.lit])).toEqual([[false, false], [false, false], [false, false]]);
     expect(subjectOf(moved, 'stn').geometry.state).toBe('predates_addressing');
-    expect(subjectOf(moved, 'cingulate').geometry.state).toBe('drawn');
+    expect(subjectOf(moved, 'cingulate').geometry.state).toBe('not_built');
   });
 });
 
@@ -142,6 +167,35 @@ describe('buildAnatomyBundle: review state', () => {
     expect(structureOf(build({ reviewLedger: ledger, manifest }).index, '7').owners[0].review_state).toEqual(UNREVIEWED_MARK);
   });
 
+  it('reads an unreviewed row or link as unchecked whatever its file claims, and shows the claim only once a review covers it', () => {
+    const first = build();
+    const linkKey = `${TECHNIQUE_ID}:stn`;
+    const linkStatus = (bundle: AnatomyBundle): string => bundle.index.techniques[0].links[0].check_status;
+    const evidenceStatus = (bundle: AnatomyBundle): string | undefined =>
+      (JSON.parse(bundle.evidenceJson) as AnatomyEvidence).technique_links.find((link) => link.key === linkKey)?.evidence.check_status;
+    expect([linkStatus(first), evidenceStatus(first)]).toEqual(['unchecked', 'unchecked']);
+    const reviewed = build({ reviewLedger: buildLedgerFile([reviewEntry(first, linkKey)]) });
+    expect([linkStatus(reviewed), evidenceStatus(reviewed)]).toEqual(['partial', 'partial']);
+    const crosswalk = buildRawFiles().crosswalk as { rows: Array<{ subject_id: string; evidence: object }> };
+    const claimingRows = crosswalk.rows.map((row) => (row.subject_id === 'stn' ? { ...row, evidence: { ...row.evidence, check_status: 'supports' } } : row));
+    expect(structureOf(build({ crosswalk: { ...crosswalk, rows: claimingRows } }).index, '7').check_status).toBe('unchecked');
+  });
+
+  it('un-reviews the rows of both subjects when a containment between them is added or removed', () => {
+    const first = build();
+    const thalamusKey = `region:thalamus:${FIXTURE_ATLAS_ID}:`;
+    const vimKey = `region:vim:${FIXTURE_ATLAS_ID}:`;
+    const ledger = buildLedgerFile([reviewEntry(first, thalamusKey), reviewEntry(first, vimKey), reviewEntry(first, STN_ROW_KEY)]);
+    const states = (index: AnatomyIndex): string[] => ['8', '9', '7'].map((labelId) => structureOf(index, labelId).owners[0].review_state.state);
+    expect(states(build({ reviewLedger: ledger }).index)).toEqual(['reviewed', 'reviewed', 'reviewed']);
+    const crosswalk = buildRawFiles().crosswalk as object;
+    const withoutContainment = build({ reviewLedger: ledger, crosswalk: { ...crosswalk, contains: [] } }).index;
+    expect(states(withoutContainment)).toEqual(['ai_drafted_unreviewed', 'ai_drafted_unreviewed', 'reviewed']);
+    const withNewContainment = build({ reviewLedger: ledger, crosswalk: { ...crosswalk, contains: [{ parent: 'thalamus', child: 'vim' }, { parent: 'thalamus', child: 'stn' }] } }).index;
+    expect(states(withNewContainment)).toEqual(['ai_drafted_unreviewed', 'reviewed', 'ai_drafted_unreviewed']);
+    expect(structureOf(withNewContainment, '7').review_state.state).toBe('ai_drafted_unreviewed');
+  });
+
   it('gives a structure the worst state among its owners', () => {
     const first = build();
     const ledger = buildLedgerFile([reviewEntry(first, `region:m1:${FIXTURE_ATLAS_ID}:`, 'neuroanatomist-1')]);
@@ -165,6 +219,39 @@ describe('buildAnatomyBundle: review state', () => {
     expect(build({ reviewLedger: buildLedgerFile([signOff]) }).index.assets[0].visual_check).toEqual({ state: 'signed', role: 'owner', reviewed_on: '2026-10-09' });
     const stale = { ...signOff, digest: 'd'.repeat(64) };
     expect(build({ reviewLedger: buildLedgerFile([stale]) }).index.assets[0].visual_check.state).toBe('not_done');
+  });
+});
+
+describe('manifest nodes against label tables', () => {
+  it('stops the build on a mesh node whose label is not in its atlas\'s label table', () => {
+    const stray = buildNode({ extras: { atlas: FIXTURE_ATLAS_ID, label_id: '999', hemisphere: 'both' } });
+    expect(() => build({ manifest: buildManifest([buildAsset({ nodes: [buildNode(), stray] })]) }))
+      .toThrow(/manifest\.json: assets\[0\]\.nodes\[1\]\.extras\.label_id: "999" is not a label of "fixture_atlas"/);
+  });
+
+  it('stops the build on a mesh node for an atlas that has no label table', () => {
+    const crosswalk = { ...(buildRawFiles().crosswalk as object), rows: [], contains: [] };
+    expect(() => build({ labelTablesByPath: {}, crosswalk })).toThrow(/nodes\[0\]\.extras\.atlas: "fixture_atlas" has no label table/);
+  });
+});
+
+describe('buildOwnerMap', () => {
+  const reviewed = (subjectKind: 'region' | 'pathway', subjectId: string): ReviewedRow => ({
+    row: buildRow({ subject_kind: subjectKind, subject_id: subjectId, extent_match: 'approximate' }),
+    key: `${subjectKind}:${subjectId}`, digest: FIXTURE_SHA256, review_state: { state: 'ai_drafted_unreviewed', mark: 'AI-drafted, unreviewed' }, check_status: 'unchecked',
+  });
+
+  it('keeps a region and a pathway that share an id as two owners', () => {
+    const owners = buildOwnerMap([reviewed('region', 'stn'), reviewed('pathway', 'stn')], []).get(`${FIXTURE_ATLAS_ID}:7`);
+    expect(owners?.map((owner) => `${owner.subject_kind}:${owner.subject_id}`)).toEqual(['region:stn', 'pathway:stn']);
+  });
+
+  it('adds containment relatives for region rows only, and names which way the containment runs', () => {
+    const contains = [{ parent: 'thalamus', child: 'stn' }];
+    const owners = buildOwnerMap([reviewed('pathway', 'stn')], contains).get(`${FIXTURE_ATLAS_ID}:7`);
+    expect(owners).toHaveLength(1);
+    const regionOwners = buildOwnerMap([reviewed('region', 'stn')], contains).get(`${FIXTURE_ATLAS_ID}:7`);
+    expect(regionOwners?.map((owner) => [owner.subject_id, owner.via, owner.extent_match])).toEqual([['stn', 'row', 'approximate'], ['thalamus', 'owner_contains_row_subject', null]]);
   });
 });
 
@@ -218,6 +305,15 @@ describe('buildAnatomyBundle: layers, sources and pins', () => {
       [FIXTURE_ATLAS_ID, true, [], false],
       [TRACTS_SOURCE_ID, false, ['not_cleared', 'grant_not_explicit'], false],
     ]);
+  });
+
+  it('marks a source the pipeline only computes with: never buildable, never shipped', () => {
+    const template = buildSource({ id: 'fixture_template', layers: [], redistribute: false, route: { kind: 'not_applicable', status: 'settled', note: 'Registration input only.' } });
+    const sources = buildSourcesFile([buildSource(), template]);
+    const verdicts = buildVerdictsFile([buildVerdict(), buildVerdict({ source_id: 'fixture_template' })]);
+    const entry = build({ sources, verdicts }).index.sources.find((source) => source.id === 'fixture_template');
+    expect(entry).toMatchObject({ pipeline_only: true, buildable: false, blockers: ['not_redistributable'] });
+    expect(index.sources.map((source) => source.pipeline_only)).toEqual([false, false]);
   });
 
   it('pins the evidence file by byte length and sha256, and the index by the same', () => {

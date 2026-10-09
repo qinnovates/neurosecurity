@@ -15,30 +15,32 @@ export type OutputFolder = 'open' | 'by-sa';
 export interface LicenceFacts {
   commercial_use: boolean;
   share_alike: boolean;
+  /** The licence binds whoever uses the material to obligations beyond attribution, so it needs a recorded acceptance. */
+  requires_agreement: boolean;
   output_folder: OutputFolder | null;
 }
 
-const OPEN_FACTS: LicenceFacts = { commercial_use: true, share_alike: false, output_folder: 'open' };
-const NO_GRANT_FACTS: LicenceFacts = { commercial_use: false, share_alike: false, output_folder: null };
+const OPEN_FACTS: LicenceFacts = { commercial_use: true, share_alike: false, requires_agreement: false, output_folder: 'open' };
+const NO_GRANT_FACTS: LicenceFacts = { commercial_use: false, share_alike: false, requires_agreement: false, output_folder: null };
 
 export const LICENCE_FACTS: Readonly<Record<LicenceId, LicenceFacts>> = {
   'cc-by-4.0': OPEN_FACTS,
   'cc0-1.0': OPEN_FACTS,
   'mit': OPEN_FACTS,
   'mni-icbm-notice': OPEN_FACTS,
-  'cc-by-sa-4.0': { commercial_use: true, share_alike: true, output_folder: 'by-sa' },
+  'cc-by-sa-4.0': { commercial_use: true, share_alike: true, requires_agreement: false, output_folder: 'by-sa' },
   /** Its text grants use "without restriction" but never names commercial use, so none is derived. */
   'melbourne-subcortex': NO_GRANT_FACTS,
-  /** Does not forbid commercial use; it binds by use, so it builds only behind a recorded acceptance. */
-  'freesurfer-sla-1.0': { commercial_use: true, share_alike: false, output_folder: null },
-  /** Silent on commercial use; redistribution only under the same terms. */
-  'hcp-data-use-terms': { commercial_use: false, share_alike: true, output_folder: null },
+  /** Does not forbid commercial use, but binds by use. It has no folder: nothing under it is written into the served assets. */
+  'freesurfer-sla-1.0': { commercial_use: true, share_alike: false, requires_agreement: true, output_folder: null },
+  /** Silent on commercial use; redistribution only under the same terms, behind an access agreement. */
+  'hcp-data-use-terms': { commercial_use: false, share_alike: true, requires_agreement: true, output_folder: null },
   'none-stated': NO_GRANT_FACTS,
 };
 
 export const UNBUILDABLE_REASONS = [
-  'not_cleared', 'verdict_not_ship', 'grant_not_explicit', 'licence_not_commercial',
-  'not_redistributable', 'agreement_not_accepted', 'route_not_settled',
+  'not_cleared', 'verdict_not_ship', 'grant_not_explicit', 'license_not_commercial',
+  'not_redistributable', 'agreement_not_accepted', 'no_output_folder', 'route_not_settled',
 ] as const;
 export type UnbuildableReason = typeof UNBUILDABLE_REASONS[number];
 
@@ -52,21 +54,25 @@ export interface AgreementState {
   agreementAccepted: boolean;
 }
 
-const SHIPPING_VERDICTS: readonly Verdict[] = ['SHIP', 'SHIP-SEPARATE-FILE'];
+const SHIPPING_VERDICTS: readonly Verdict[] = ['ship', 'ship_separate_file'];
 
 /** The licence a source is handled under: the verdict's stricter id when it sets one, else the stated id. */
 export function effectiveLicenceId(source: AnatomySource, verdict: LicenceVerdict): LicenceId {
-  return verdict.treat_as ?? source.licence_id;
+  return verdict.treat_as ?? source.license_id;
 }
 
-/** True when `candidate` permits nothing that `stated` withholds. */
-export function isAtLeastAsStrict(candidate: LicenceId, stated: LicenceId): boolean {
-  const candidateFacts = LICENCE_FACTS[candidate];
-  const statedFacts = LICENCE_FACTS[stated];
-  const gainsCommercialUse = candidateFacts.commercial_use && !statedFacts.commercial_use;
-  const dropsShareAlike = statedFacts.share_alike && !candidateFacts.share_alike;
-  const gainsOutputFolder = candidateFacts.output_folder !== null && statedFacts.output_folder === null;
-  return !gainsCommercialUse && !dropsShareAlike && !gainsOutputFolder;
+/**
+ * Every licence id, least strict first. A verdict's treat_as may only move a
+ * source later in this list. Nothing after cc-by-sa-4.0 can ship.
+ */
+export const LICENCE_STRICTNESS: readonly LicenceId[] = [
+  'cc0-1.0', 'mit', 'mni-icbm-notice', 'cc-by-4.0', 'cc-by-sa-4.0',
+  'freesurfer-sla-1.0', 'melbourne-subcortex', 'hcp-data-use-terms', 'none-stated',
+];
+
+/** True when `candidate` comes strictly later than `stated` in LICENCE_STRICTNESS. */
+export function isStricter(candidate: LicenceId, stated: LicenceId): boolean {
+  return LICENCE_STRICTNESS.indexOf(candidate) > LICENCE_STRICTNESS.indexOf(stated);
 }
 
 /**
@@ -74,13 +80,16 @@ export function isAtLeastAsStrict(candidate: LicenceId, stated: LicenceId): bool
  * source ships nothing; this is one generic rule, not a case per source.
  */
 export function assessBuildability(source: AnatomySource, verdict: LicenceVerdict, agreement: AgreementState): Buildability {
+  const facts = LICENCE_FACTS[effectiveLicenceId(source, verdict)];
+  const needsAgreement = facts.requires_agreement || verdict.access_agreement !== null;
   const checks: Array<[UnbuildableReason, boolean]> = [
     ['not_cleared', verdict.clearance.cleared],
     ['verdict_not_ship', SHIPPING_VERDICTS.includes(verdict.verdict)],
     ['grant_not_explicit', verdict.grant === 'explicit'],
-    ['licence_not_commercial', LICENCE_FACTS[effectiveLicenceId(source, verdict)].commercial_use],
+    ['license_not_commercial', facts.commercial_use],
     ['not_redistributable', source.redistribute],
-    ['agreement_not_accepted', verdict.access_agreement === null || agreement.agreementAccepted],
+    ['agreement_not_accepted', !needsAgreement || agreement.agreementAccepted],
+    ['no_output_folder', facts.output_folder !== null],
     ['route_not_settled', source.route.kind !== 'unknown' && source.route.status === 'settled'],
   ];
   const blockers = checks.filter(([, holds]) => !holds).map(([reason]) => reason);

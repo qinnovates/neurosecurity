@@ -57,6 +57,24 @@ function rejectSharedSame(crosswalk: Crosswalk, location: FieldLocation): void {
   }
 }
 
+/**
+ * A subject may name a label in one row only. Two rows of one subject on one
+ * label would carry two grades and two review states for the same shape.
+ */
+function rejectRepeatedLabels(rows: readonly CrosswalkRow[], location: FieldLocation): void {
+  const seen = new Set<string>();
+  for (const row of rows) {
+    for (const labelId of row.atlas_ids) {
+      const claim = `${subjectKey(row)}>${structureKey(row.atlas, labelId)}`;
+      if (seen.has(claim)) {
+        failAt(location, `${row.subject_kind} "${row.subject_id}" names label "${structureKey(row.atlas, labelId)}" in two rows`,
+          'Keep the label in one of the subject\'s rows; a part and its whole cannot both claim the same shape.');
+      }
+      seen.add(claim);
+    }
+  }
+}
+
 /** All of a subject's drawing rows must name one atlas, so parts are never mixed across atlases. */
 function rejectMixedDrawingAtlases(rows: readonly CrosswalkRow[], location: FieldLocation): void {
   const drawingAtlasBySubject = new Map<string, string>();
@@ -94,6 +112,7 @@ function rejectDrawnNoGeometry(crosswalk: Crosswalk, location: FieldLocation): v
 
 export function rejectCrossRowProblems(crosswalk: Crosswalk, root: FieldLocation): void {
   rejectContainmentLoops(crosswalk.contains, childOf(root, 'contains'));
+  rejectRepeatedLabels(crosswalk.rows, childOf(root, 'rows'));
   rejectSharedSame(crosswalk, childOf(root, 'rows'));
   rejectMixedDrawingAtlases(crosswalk.rows, childOf(root, 'rows'));
   rejectDrawnNoGeometry(crosswalk, childOf(root, 'no_geometry'));

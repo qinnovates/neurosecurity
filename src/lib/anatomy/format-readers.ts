@@ -1,6 +1,6 @@
 /** Readers for the string formats the anatomy files share: ids, dates, digests, URLs and the schema version. */
 
-import { childOf, failAt, itemOf, readString, readStringList, type FieldLocation } from './field-readers';
+import { childOf, failAt, itemOf, readString, readStringList, requireText, show, type FieldLocation } from './field-readers';
 
 const ID_PATTERN = /^[a-z0-9][a-z0-9_]*$/;
 const SHA256_PATTERN = /^[0-9a-f]{64}$/;
@@ -11,11 +11,13 @@ const MAX_ID_LENGTH = 80;
 const MAX_URL_LENGTH = 500;
 const SHA256_HEX_LENGTH = 64;
 const DATE_LENGTH = 10;
+/** One day, so a date written in a time zone ahead of the build machine is not refused. */
+const CLOCK_ALLOWANCE_MS = 24 * 60 * 60 * 1000;
 
 /** Rejects any schema version but the one this build was written for, so a newer file never half-parses. */
 export function readSchemaVersion(record: Record<string, unknown>, location: FieldLocation, expected: number): number {
   if (record.schema_version !== expected) {
-    failAt(childOf(location, 'schema_version'), `version ${String(record.schema_version)} is not one this build understands`,
+    failAt(childOf(location, 'schema_version'), `version ${show(record.schema_version)} is not one this build understands`,
       `Use schema_version ${expected}, or update the parser in the same change.`);
   }
   return expected;
@@ -28,19 +30,28 @@ export function readId(record: Record<string, unknown>, key: string, location: F
   return id;
 }
 
-export function readSha256(record: Record<string, unknown>, key: string, location: FieldLocation): string {
-  const digest = readString(record, key, location, SHA256_HEX_LENGTH);
-  if (!SHA256_PATTERN.test(digest)) failAt(childOf(location, key), 'expected a sha256 digest', 'Write 64 lower-case hexadecimal characters.');
+export function requireSha256(value: unknown, location: FieldLocation): string {
+  const digest = requireText(value, location, SHA256_HEX_LENGTH);
+  if (!SHA256_PATTERN.test(digest)) failAt(location, 'expected a sha256 digest', 'Write 64 lower-case hexadecimal characters.');
   return digest;
 }
 
-/** A calendar date written YYYY-MM-DD that names a real day. */
-export function readDate(record: Record<string, unknown>, key: string, location: FieldLocation): string {
-  const date = readString(record, key, location, DATE_LENGTH);
+export function readSha256(record: Record<string, unknown>, key: string, location: FieldLocation): string {
+  return requireSha256(record[key], childOf(location, key));
+}
+
+/** A calendar date written YYYY-MM-DD that names a real day, not after today. */
+export function requireDate(value: unknown, location: FieldLocation): string {
+  const date = requireText(value, location, DATE_LENGTH);
   const day = new Date(`${date}T00:00:00Z`);
   const isRealDay = DATE_PATTERN.test(date) && !Number.isNaN(day.getTime()) && day.toISOString().startsWith(date);
-  if (!isRealDay) failAt(childOf(location, key), `"${date}" is not a date`, 'Write the date as YYYY-MM-DD.');
+  if (!isRealDay) failAt(location, `"${date}" is not a date`, 'Write the date as YYYY-MM-DD.');
+  if (day.getTime() > Date.now() + CLOCK_ALLOWANCE_MS) failAt(location, `"${date}" is in the future`, 'A reading or a review cannot be dated after today.');
   return date;
+}
+
+export function readDate(record: Record<string, unknown>, key: string, location: FieldLocation): string {
+  return requireDate(record[key], childOf(location, key));
 }
 
 function parseUrl(text: string): URL | null {

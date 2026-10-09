@@ -35,7 +35,7 @@ describe('parseManifest', () => {
 
   it('rejects an asset in the wrong folder for its licence', () => {
     const context = buildManifestContext({ effectiveLicenceBySource: new Map([[FIXTURE_ATLAS_ID, 'cc-by-sa-4.0']]) });
-    expect(() => parseManifest(buildManifest([buildAsset({ licence_id: 'cc-by-sa-4.0' })]), context))
+    expect(() => parseManifest(buildManifest([buildAsset({ license_id: 'cc-by-sa-4.0' })]), context))
       .toThrow(/assets\[0\]\.path: an asset under "cc-by-sa-4\.0" belongs in "by-sa\/"/);
   });
 
@@ -51,8 +51,8 @@ describe('parseManifest', () => {
   });
 
   it('rejects a licence id that is not the one its source is handled under', () => {
-    expect(() => parseWith(buildAsset({ licence_id: 'cc0-1.0' }))).toThrow(/licence_id: "cc0-1\.0" is not the licence "cc-by-4\.0" that source "fixture_atlas" is handled under/);
-    expect(() => parseWith(buildAsset({ stated_licence_id: 'mit' }))).toThrow(/stated_licence_id/);
+    expect(() => parseWith(buildAsset({ license_id: 'cc0-1.0' }))).toThrow(/license_id: "cc0-1\.0" is not the licence "cc-by-4\.0" that source "fixture_atlas" is handled under/);
+    expect(() => parseWith(buildAsset({ stated_license_id: 'mit' }))).toThrow(/stated_license_id/);
   });
 
   it('rejects a template space other than the declared one', () => {
@@ -81,6 +81,53 @@ describe('parseManifest', () => {
     expect(() => parseManifest(buildManifest([buildAsset(), buildAsset()]), CONTEXT)).toThrow(/asset id "deep-fixture" appears twice/);
     expect(() => parseWith(buildAsset({ sha256: 'not-a-hash' }))).toThrow(/assets\[0\]\.sha256/);
     expect(() => parseWith({ ...buildAsset(), visual_check: { state: 'done' } })).toThrow(/unexpected key "visual_check"/);
+  });
+
+  describe('stage fingerprints', () => {
+    const stages = buildAsset().stage_fingerprints;
+    const withStages = (overrides: object): unknown => parseWith(buildAsset({ stage_fingerprints: { ...stages, ...overrides } as never }));
+    const register = {
+      archive_sha256: { 'fixture_warp.h5': OTHER_SHA256 }, setting: 'fixture-setting', tool: 'fixture-tool', tool_version: '1.0.0', seed: 7,
+      parameters: { metric: 'fixture', iterations: 100, verbose: false },
+    };
+
+    it('accepts fetched files that match the registry pins, with or without a registration record', () => {
+      expect(() => withStages({})).not.toThrow();
+      expect((withStages({ register }) as { assets: Array<{ stage_fingerprints: { register: unknown } }> }).assets[0].stage_fingerprints.register).toEqual(register);
+    });
+
+    it('rejects a fetched file whose sha256 differs from the registry pin', () => {
+      expect(() => withStages({ fetch: { 'labels.nii.gz': OTHER_SHA256 } })).toThrow(/stage_fingerprints\.fetch\.labels\.nii\.gz: the sha256 differs from the registry's pin/);
+    });
+
+    it('rejects a fetched file the registry does not list for the asset\'s sources, or has not pinned', () => {
+      expect(() => withStages({ fetch: { 'stray.nii.gz': OTHER_SHA256 } })).toThrow(/fetch\.stray\.nii\.gz: this file is not listed in the registry/);
+      const unpinned = buildManifestContext({ filePinsBySource: new Map([[FIXTURE_ATLAS_ID, new Map([['labels.nii.gz', null]])]]) });
+      expect(() => parseManifest(buildManifest(), unpinned)).toThrow(/fetch\.labels\.nii\.gz: the registry has no sha256 pin for this file/);
+    });
+
+    it('rejects an empty fetch stage, a digest where the fetch map belongs, and a malformed registration record', () => {
+      expect(() => withStages({ fetch: {} })).toThrow(/stage_fingerprints\.fetch: expected file names with their sha256 digests/);
+      expect(() => withStages({ fetch: OTHER_SHA256 })).toThrow(/stage_fingerprints\.fetch/);
+      expect(() => withStages({ register: OTHER_SHA256 })).toThrow(/stage_fingerprints\.register: expected an object/);
+      expect(() => withStages({ register: { ...register, seed: 1.5 } })).toThrow(/register\.seed/);
+      expect(() => withStages({ register: { ...register, parameters: { nested: { a: 1 } } } })).toThrow(/register\.parameters/);
+      expect(() => withStages({ register: { ...register, archive_sha256: {} } })).toThrow(/register\.archive_sha256/);
+      expect(() => withStages({ mesh: 'not-a-digest' })).toThrow(/stage_fingerprints\.mesh/);
+    });
+  });
+
+  it('rejects an asset with no modification note, an empty one, or one holding a line break or a hidden mark', () => {
+    const { modification_note: _omitted, ...withoutNote } = buildAsset();
+    expect(() => parseWith(withoutNote)).toThrow(/assets\[0\]: missing key "modification_note"/);
+    expect(() => parseWith(buildAsset({ modification_note: '   ' }))).toThrow(/assets\[0\]\.modification_note: expected a non-empty string/);
+    expect(() => parseWith(buildAsset({ modification_note: 'Thresholded.\nThen meshed.' }))).toThrow(/modification_note: the text holds a control character/);
+    expect(() => parseWith(buildAsset({ modification_note: 'x'.repeat(601) }))).toThrow(/modification_note/);
+    expect((parseWith(buildAsset()) as { assets: Array<{ modification_note: string }> }).assets[0].modification_note).toContain('Thresholded');
+  });
+
+  it('rejects a source listed both as material and as a pipeline-only input', () => {
+    expect(() => parseWith(buildAsset({ computed_with_source_ids: [FIXTURE_ATLAS_ID] }))).toThrow(/computed_with_source_ids: "fixture_atlas" is also in source_ids/);
   });
 
   it('throws the typed error', () => {

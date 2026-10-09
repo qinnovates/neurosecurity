@@ -1,5 +1,5 @@
 /**
- * Parser for datalake/qif-technique-regions.json: for each technique with a
+ * Parser for datalake/qif-anatomy-technique-regions.json: for each technique with a
  * neural band, the words the catalog itself uses for brain structures. A link
  * holds the catalog's term and the quoted text and nothing derived from them;
  * what a term resolves to is computed at build time by the one region resolver.
@@ -12,16 +12,17 @@ import {
   type TechniqueLink, type TechniqueRegionEntry, type TechniqueRegions,
 } from './anatomy-types';
 import { rejectBandKeys } from './band-key-scan';
-import { parseEvidence, readRationale } from './evidence';
+import { parseEvidence, readRationale, type ClaimBasis } from './evidence';
 import { childOf, failAt, itemOf, readEnum, readList, readRecord, readString, rejectDuplicates, rootOf, type FieldLocation } from './field-readers';
 import { readSchemaVersion } from './format-readers';
 import { TECHNIQUE_REGIONS_STATUS, readStatus } from './status-sentences';
 
-export const TECHNIQUE_REGIONS_FILE = 'datalake/qif-technique-regions.json';
+export const TECHNIQUE_REGIONS_FILE = 'datalake/qif-anatomy-technique-regions.json';
 export const REGISTRAR_FILE = 'datalake/qtara-registrar.json';
 const TECHNIQUE_REGIONS_SCHEMA_VERSION = 2;
 const MAX_TERM_LENGTH = 120;
 const REASON_SEPARATOR = ':';
+const LINK_CLAIM_BASIS: ClaimBasis = 'catalog_text';
 /** Derived at build time. A stored copy could disagree with the alias table, so none is allowed. */
 const DERIVED_LINK_KEYS = ['resolved_region_id', 'resolution', 'region_id'] as const;
 
@@ -33,15 +34,23 @@ function rejectStoredResolution(value: unknown, location: FieldLocation): void {
     'Remove the key; the build resolves the term through region_aliases and region_alias_relations.');
 }
 
-/** Catalog text must be quoted from the technique's own registrar entry, and the quote must contain the term. */
+/**
+ * A link may rest only on the catalog's own words: quoted from the technique's
+ * own registrar entry, with the term inside the quote. No inference, parameter
+ * or paper can make a link, so none can light a region.
+ */
 function rejectUnsupportedTerm(link: TechniqueLink, techniqueId: string, location: FieldLocation): void {
   const { source_ref: sourceRef, claim_basis: claimBasis } = link.evidence;
+  if (claimBasis !== LINK_CLAIM_BASIS) {
+    failAt(childOf(location, 'evidence.claim_basis'), 'a technique link may rest only on the catalog\'s own words',
+      `Set claim_basis to "${LINK_CLAIM_BASIS}" and quote the registrar text, or remove the link.`);
+  }
   const citesOwnEntry = sourceRef.file === REGISTRAR_FILE && sourceRef.pointer.startsWith(`/techniques/${techniqueId}/`);
-  if (claimBasis === 'catalog_text' && !citesOwnEntry) {
+  if (!citesOwnEntry) {
     failAt(childOf(location, 'evidence.source_ref'), 'catalog text must be cited from this technique\'s own registrar entry',
       `Point at ${REGISTRAR_FILE} with a pointer that starts /techniques/${techniqueId}/.`);
   }
-  if (claimBasis === 'catalog_text' && !sourceRef.quote.includes(link.term)) {
+  if (!sourceRef.quote.includes(link.term)) {
     failAt(childOf(location, 'term'), `the quoted words "${sourceRef.quote}" do not contain the term "${link.term}"`,
       'Write the term exactly as the catalog writes it, or quote the words that contain it.');
   }

@@ -55,7 +55,7 @@ paths:
 5. `datalake/qtara/src/qtara/models.py` — Python SDK Pydantic models
 6. `datalake/scripts/compute-impact-chains.mjs` — precompute pipeline
 
-**Technique region links are not part of the registrar.** `datalake/qif-technique-regions.json` records, per neural-band technique, the words the registrar text uses for brain structures. It is AI-drafted and unreviewed, is generated from `datalake/scripts/technique-region-curation.json`, and is never copied into the registrar, the Python SDK or the STIX export. A link may be promoted into a registrar field only after the repository owner's review of it is in `datalake/qif-anatomy-review-ledger.json`.
+**Technique region links are not part of the registrar.** `datalake/qif-anatomy-technique-regions.json` records, per neural-band technique, the words the registrar text uses for brain structures. It is AI-drafted and unreviewed, is generated from `datalake/scripts/technique-region-curation.json`, and is never copied into the registrar, the Python SDK or the STIX export. A link may be promoted into a registrar field only after the repository owner's review of it is in `datalake/qif-anatomy-review-ledger.json`.
 
 **Technique count references:** NEVER hardcode technique counts in .astro pages or docs.
 Use `import { TECHNIQUE_COUNT } from '@lib/threat-data'` in Astro/TS, or pull from registrar `statistics.total_techniques` in scripts.

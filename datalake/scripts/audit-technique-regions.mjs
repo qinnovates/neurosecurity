@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Audits datalake/qif-technique-regions.json against the registrar text it
+ * Audits datalake/qif-anatomy-technique-regions.json against the registrar text it
  * quotes. It answers four questions a reviewer would otherwise check by hand:
  *
  *   1. What does each drafted term resolve to, and does that region's band
