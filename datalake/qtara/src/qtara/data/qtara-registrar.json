@@ -772,6 +772,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -1041,6 +1042,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -1240,6 +1242,7 @@
         "basis": "4 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
         "neural_product_cve_count": 4,
         "adjacent_cve_count": 5,
+        "population": "neural_product",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -1416,6 +1419,7 @@
         "basis": "2 NVD-verified CVE(s) in a neural-data product; authoring status was DEMONSTRATED",
         "neural_product_cve_count": 2,
         "adjacent_cve_count": 14,
+        "population": "neural_product",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -1599,6 +1603,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -1782,6 +1787,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -1945,6 +1951,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 4,
+        "population": "adjacent_clinical",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -2222,6 +2229,7 @@
         "basis": "6 NVD-verified CVE(s) in a neural-data product; authoring status was THEORETICAL",
         "neural_product_cve_count": 6,
         "adjacent_cve_count": 2,
+        "population": "neural_product",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -2517,6 +2525,7 @@
         "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was EMERGING",
         "neural_product_cve_count": 1,
         "adjacent_cve_count": 0,
+        "population": "neural_product",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -2806,6 +2815,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -3077,6 +3087,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -3323,6 +3334,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -3593,6 +3605,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -3903,6 +3916,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -4075,6 +4089,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -4223,6 +4238,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -4371,6 +4387,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -4520,6 +4537,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -4671,6 +4689,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -4831,6 +4850,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -4990,6 +5010,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -5221,6 +5242,7 @@
         "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was EMERGING",
         "neural_product_cve_count": 1,
         "adjacent_cve_count": 1,
+        "population": "neural_product",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -5505,6 +5527,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -5657,6 +5680,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -5961,6 +5985,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -6254,6 +6279,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -6541,6 +6567,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -6717,6 +6744,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -7008,6 +7036,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 1,
+        "population": "adjacent_component",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -7297,6 +7326,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -7440,6 +7470,7 @@
         "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was THEORETICAL",
         "neural_product_cve_count": 1,
         "adjacent_cve_count": 0,
+        "population": "neural_product",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -7705,6 +7736,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 2,
+        "population": "adjacent_component",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -7960,6 +7992,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -8214,6 +8247,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -8439,6 +8473,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -8667,6 +8702,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -8941,6 +8977,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -9194,6 +9231,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -9448,6 +9486,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -9671,6 +9710,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -9929,6 +9969,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -10083,6 +10124,7 @@
         "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
         "neural_product_cve_count": 1,
         "adjacent_cve_count": 8,
+        "population": "neural_product",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -10243,6 +10285,7 @@
         "basis": "6 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
         "neural_product_cve_count": 6,
         "adjacent_cve_count": 10,
+        "population": "neural_product",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -10389,6 +10432,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 26,
+        "population": "adjacent_clinical",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -10534,6 +10578,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 1,
+        "population": "adjacent_domain",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -10698,6 +10743,7 @@
         "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was EMERGING",
         "neural_product_cve_count": 1,
         "adjacent_cve_count": 2,
+        "population": "neural_product",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -10849,6 +10895,7 @@
         "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was EMERGING",
         "neural_product_cve_count": 1,
         "adjacent_cve_count": 3,
+        "population": "neural_product",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -11007,6 +11054,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -11153,6 +11201,7 @@
         "basis": "8 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
         "neural_product_cve_count": 8,
         "adjacent_cve_count": 10,
+        "population": "neural_product",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -11304,6 +11353,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 4,
+        "population": "adjacent_component",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -11485,6 +11535,7 @@
         "basis": "9 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
         "neural_product_cve_count": 9,
         "adjacent_cve_count": 7,
+        "population": "neural_product",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -11742,6 +11793,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -11998,6 +12050,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -12251,6 +12304,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -12520,6 +12574,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -12774,6 +12829,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 2,
+        "population": "adjacent_clinical",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -12933,6 +12989,7 @@
         "basis": "2 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
         "neural_product_cve_count": 2,
         "adjacent_cve_count": 1,
+        "population": "neural_product",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -13101,6 +13158,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -13324,6 +13382,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -13576,6 +13635,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -13743,6 +13803,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -13966,6 +14027,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -14135,6 +14197,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -14358,6 +14421,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -14634,6 +14698,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -14955,6 +15020,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -15259,6 +15325,7 @@
         "basis": "1 NVD-verified CVE(s) in a neural-data product; authoring status was DEMONSTRATED",
         "neural_product_cve_count": 1,
         "adjacent_cve_count": 1,
+        "population": "neural_product",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -15547,6 +15614,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -15854,6 +15922,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -16125,6 +16194,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -16305,6 +16375,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -16474,6 +16545,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 1,
+        "population": "adjacent_domain",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -16751,6 +16823,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -17077,6 +17150,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -17265,6 +17339,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -17449,6 +17524,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -17643,6 +17719,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -17833,6 +17910,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -18028,6 +18106,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -18193,6 +18272,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -18360,6 +18440,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -18528,6 +18609,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -18694,6 +18776,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -18879,6 +18962,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -19145,6 +19229,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -19308,6 +19393,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -19477,6 +19563,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -19663,6 +19750,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -19925,6 +20013,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -20143,6 +20232,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -20313,6 +20403,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -20556,6 +20647,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -20743,6 +20835,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -20909,6 +21002,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -21181,6 +21275,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -21364,6 +21459,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -21610,6 +21706,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -21793,6 +21890,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -22080,6 +22178,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -22278,6 +22377,7 @@
         "basis": "status PLAUSIBLE",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "PLAUSIBLE",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -22471,6 +22571,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -22654,6 +22755,7 @@
         "basis": "status SPECULATIVE",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "SPECULATIVE",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -22863,6 +22965,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -23005,6 +23108,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -23145,6 +23249,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -23283,6 +23388,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -23425,6 +23531,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -23566,6 +23673,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -23704,6 +23812,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -23861,6 +23970,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -24048,6 +24158,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -24229,6 +24340,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -24403,6 +24515,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -24586,6 +24699,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -24771,6 +24885,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -24944,6 +25059,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -25126,6 +25242,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -25306,6 +25423,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -25477,6 +25595,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -25663,6 +25782,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -25850,6 +25970,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -26021,6 +26142,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -26200,6 +26322,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -26369,6 +26492,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -26525,6 +26649,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -26674,6 +26799,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -26845,6 +26971,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -27016,6 +27143,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -27185,6 +27313,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -27354,6 +27483,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -27530,6 +27660,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -27710,6 +27841,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -27888,6 +28020,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28068,6 +28201,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28254,6 +28388,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28316,6 +28451,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28378,6 +28514,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28438,6 +28575,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28495,6 +28633,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28553,6 +28692,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28612,6 +28752,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28670,6 +28811,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28729,6 +28871,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28788,6 +28931,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28847,6 +28991,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28904,6 +29049,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -28964,6 +29110,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29023,6 +29170,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29086,6 +29234,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29147,6 +29296,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29204,6 +29354,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29266,6 +29417,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29325,6 +29477,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29383,6 +29536,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29443,6 +29597,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29507,6 +29662,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29566,6 +29722,7 @@
         "basis": "status CONFIRMED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29625,6 +29782,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29685,6 +29843,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29746,6 +29905,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29808,6 +29968,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -29909,6 +30070,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 2,
+        "population": "adjacent_component",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -30010,6 +30172,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 11,
+        "population": "adjacent_component",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -30111,6 +30274,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 1,
+        "population": "adjacent_component",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -30213,6 +30377,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -30329,6 +30494,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -30449,6 +30615,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -30579,6 +30746,7 @@
         "basis": "status DEMONSTRATED",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "DEMONSTRATED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -30697,6 +30865,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -30813,6 +30982,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -30940,6 +31110,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -31060,6 +31231,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -31176,6 +31348,7 @@
         "basis": "status EMERGING",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "EMERGING",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -31298,6 +31471,7 @@
         "basis": "status THEORETICAL, modelled in the literature",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 0,
+        "population": "none",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -31400,6 +31574,7 @@
         "basis": "4 NVD-verified CVE(s) in a neural-data product; authoring status was CONFIRMED",
         "neural_product_cve_count": 4,
         "adjacent_cve_count": 7,
+        "population": "neural_product",
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
@@ -31502,6 +31677,7 @@
         "basis": "status THEORETICAL, proposed within this framework",
         "neural_product_cve_count": 0,
         "adjacent_cve_count": 1,
+        "population": "adjacent_clinical",
         "legacy_status": "THEORETICAL",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"

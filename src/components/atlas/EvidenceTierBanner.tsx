@@ -14,11 +14,18 @@ import {
   EVIDENCE_TIER_GROUP,
   EVIDENCE_TIER_LABELS,
   EVIDENCE_GROUP_COLORS,
+  EVIDENCE_POPULATION_LABELS,
   type EvidenceTierGroup,
+  type EvidencePopulation,
 } from '../../lib/evidence-tiers';
 
 interface Props {
   tier: EvidenceTierCode;
+  /** What the supporting records are about. Shown when they are not about a
+   *  neural-data product, so an adjacent-technology CVE cannot be mistaken for
+   *  evidence on a BCI. */
+  population?: EvidencePopulation;
+  adjacentCveCount?: number;
   status?: string;
   confidenceNote?: string;
   lastVerified?: string;
@@ -50,7 +57,7 @@ const ICONS: Record<EvidenceTierGroup, ReactNode> = {
   ),
 };
 
-export default function EvidenceTierBanner({ tier, status, confidenceNote, lastVerified }: Props) {
+export default function EvidenceTierBanner({ tier, population, adjacentCveCount, status, confidenceNote, lastVerified }: Props) {
   const group = EVIDENCE_TIER_GROUP[tier];
   const colors = EVIDENCE_GROUP_COLORS[group];
   const label = EVIDENCE_TIER_LABELS[tier];
@@ -78,6 +85,14 @@ export default function EvidenceTierBanner({ tier, status, confidenceNote, lastV
         <p className={`text-sm font-semibold leading-tight ${colors.textClass}`}>
           {label}
         </p>
+
+        {/* Population: only shown when the evidence is not about a neural-data product */}
+        {population && population !== 'neural_product' && population !== 'none' && (
+          <p className="mt-1 text-xs text-gray-700 dark:text-gray-300 leading-snug">
+            {EVIDENCE_POPULATION_LABELS[population]}
+            {adjacentCveCount ? ` — ${adjacentCveCount} NVD-verified CVE${adjacentCveCount === 1 ? '' : 's'}, none in a neural-data product.` : '.'}
+          </p>
+        )}
 
         {/* Confidence note */}
         {confidenceNote && (
