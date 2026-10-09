@@ -132,6 +132,10 @@ describe('which policy tags a browser would act on', () => {
     expect(findIsolationViolations(html)).toEqual([]);
   });
 
+  it('accepts the tag after a head element whose attribute value contains ">"', () => {
+    expect(findIsolationViolations(inHead(`<meta name="description" content="values > 5 are flagged">${goodTag}`))).toEqual([]);
+  });
+
   it('accepts an unquoted or differently cased http-equiv, as a browser does', () => {
     expect(findIsolationViolations(inHead(`<meta http-equiv=Content-Security-Policy content="${ISOLATED_POLICY}">`))).toEqual([]);
     expect(findIsolationViolations(inHead(`<META HTTP-EQUIV="content-security-policy" CONTENT="${ISOLATED_POLICY}">`))).toEqual([]);

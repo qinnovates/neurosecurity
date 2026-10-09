@@ -161,9 +161,9 @@ function collectTagEntries(html, pageUrlPath, entries) {
   for (const [, tagName, attributeText] of html.matchAll(TAG_PATTERN)) {
     const tag = tagName.toLowerCase();
     const attributes = parseAttributes(attributeText);
-    const relation = (attributes.get('rel') ?? '').toLowerCase();
-    if (tag === 'link' && relation === 'stylesheet') addEntry(entries, 'stylesheets', pageUrlPath, attributes.get('href'));
-    if (tag === 'link' && relation === 'modulepreload') addEntry(entries, 'scriptEntries', pageUrlPath, attributes.get('href'));
+    const relations = (attributes.get('rel') ?? '').toLowerCase().split(/\s+/);
+    if (tag === 'link' && relations.includes('stylesheet')) addEntry(entries, 'stylesheets', pageUrlPath, attributes.get('href'));
+    if (tag === 'link' && relations.includes('modulepreload')) addEntry(entries, 'scriptEntries', pageUrlPath, attributes.get('href'));
     if (tag === 'script') addEntry(entries, 'scriptEntries', pageUrlPath, attributes.get('src'));
     if (tag !== 'astro-island') continue;
     for (const name of ISLAND_ENTRY_ATTRIBUTES) addEntry(entries, 'scriptEntries', pageUrlPath, attributes.get(name));

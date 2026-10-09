@@ -11,7 +11,8 @@
  *
  * Not counted: fonts and images, and chunks behind an `import()` that is not declared as
  * running on start. Whether an undeclared `import()` runs on start cannot be read from the
- * build; only its reach to a lazy-only library is checked.
+ * build; only its reach to a lazy-only library is checked. Not followed at all: an
+ * `import()` whose target is computed at run time, and a worker started from a URL.
  *
  * Usage (after `npm run build`):
  *   node src/scripts/measure-lab-first-load.mjs      every page in tool-pages.mjs, against its budgets
@@ -33,7 +34,7 @@ import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES, ToolPageCheckError } from './tool-p
  * chunk that defines it contains. three.js registers itself under this global name; code
  * that merely uses or mentions three.js does not contain it.
  */
-const LAZY_ONLY_LIBRARIES = [{ library: 'three.js', definedBy: /\b__THREE__\b/ }];
+export const LAZY_ONLY_LIBRARIES = [{ library: 'three.js', definedBy: /\b__THREE__\b/ }];
 const PARTS = { document: 'document', staticCode: 'static', onMountCode: 'on-mount' };
 const BUDGET_FLAGS = { '--budget-code-gzip': 'codeGzipBudgetBytes', '--budget-document-gzip': 'documentGzipBudgetBytes' };
 const LIST_FLAGS = { '--on-mount': 'onMountLazyEntryNames', '--gate': 'interactionGatedEntryNames' };
@@ -91,7 +92,17 @@ function findUngatedLazyLibraries(distDirectory, reach) {
   return reached;
 }
 
+/** Declared names that match more than one chunk. A name must identify one chunk, or a gate would cover a chunk nobody named. */
+function findAmbiguousNames(names, knownChunks) {
+  return names
+    .map((name) => ({ name, matches: knownChunks.filter((urlPath) => chunkStem(urlPath) === name) }))
+    .filter(({ matches }) => matches.length > 1)
+    .map(({ name, matches }) => `"${name}" matches ${matches.length} chunks (${matches.join(', ')}); rename a module so the name identifies one chunk`);
+}
+
 function findStructureProblems(page, entries, reach) {
+  const onMountNames = page.onMountLazyEntryNames ?? [];
+  const gateNames = page.interactionGatedEntryNames ?? [];
   const problems = [];
   if (entries.scriptEntries.length === 0) problems.push('the page names no script entry, so nothing was measured');
   const islandNames = entries.islandComponents.map(chunkStem);
@@ -99,11 +110,11 @@ function findStructureProblems(page, entries, reach) {
     problems.push(`the page has no "${page.islandEntryName}" island (found: ${islandNames.join(', ') || 'none'}); the measurement would be empty`);
   }
   const gatesFound = reach.gatedEntries.map(chunkStem);
-  for (const name of page.interactionGatedEntryNames ?? []) {
-    if ((page.onMountLazyEntryNames ?? []).includes(name)) problems.push(`"${name}" is declared both as loading on mount and as interaction-gated; it cannot be both`);
+  for (const name of gateNames) {
+    if (onMountNames.includes(name)) problems.push(`"${name}" is declared both as loading on mount and as interaction-gated; it cannot be both`);
     if (!gatesFound.includes(name)) problems.push(`declared interaction gate "${name}" is not a dynamic import of this page; remove or correct it in tool-pages.mjs`);
   }
-  return problems;
+  return [...problems, ...findAmbiguousNames([...new Set([...onMountNames, ...gateNames])], [...reach.closure, ...reach.gatedEntries])];
 }
 
 /**

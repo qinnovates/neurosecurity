@@ -48,7 +48,7 @@ const WHITESPACE_PATTERN = /\s+/;
 const HEAD_START_PATTERN = /<head\b[^>]*>/i;
 const HEAD_END_PATTERN = /<\/head\s*>/i;
 const SCRIPT_TAG_PATTERN = /<script\b/i;
-const TAG_NAME_PATTERN = /<\/?([a-z][a-z0-9-]*)\b[^>]*>/gi;
+const TAG_NAME_PATTERN = new RegExp(String.raw`<\/?([a-z][a-z0-9-]*)\b${TAG_ATTRIBUTES_SOURCE}>`, 'gi');
 /** The only elements a head may hold. Any other element, or text, ends the head where it stands. */
 const HEAD_ELEMENTS = ['meta', 'title', 'link', 'style', 'script', 'base', 'noscript', 'template'];
 

@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -12,7 +14,7 @@ import {
   walkStaticImportClosure,
 } from '../first-load-closure.mjs';
 import { parseAttributes } from '../built-html.mjs';
-import { checkFirstLoadBudgets, findFirstLoadFailures, measureFirstLoad } from '../measure-lab-first-load.mjs';
+import { LAZY_ONLY_LIBRARIES, checkFirstLoadBudgets, findFirstLoadFailures, measureFirstLoad } from '../measure-lab-first-load.mjs';
 import {
   CODE_HEADROOM_GZIP_BYTES,
   DOCUMENT_HEADROOM_GZIP_BYTES,
@@ -145,6 +147,10 @@ describe('parseAttributes and extractPageEntries', () => {
     expect(attributes.get('defer')).toBe('');
   });
 
+  it('counts a stylesheet whose rel has more than one word', () => {
+    expect(extractPageEntries('<link rel="preload stylesheet" href="/_astro/a.css">', '/tool/').stylesheets).toEqual(['/_astro/a.css']);
+  });
+
   it('reads island entries, stylesheets, script tags and inline module imports', () => {
     const html = [
       '<link rel="stylesheet" href="/_astro/a.css"><link rel="modulepreload" href="/_astro/pre.js"><link rel="icon" href="/favicon.svg">',
@@ -262,6 +268,29 @@ describe('three.js must not load before the visitor asks', () => {
   it('recognises the library by the chunk that defines it, whatever the chunk is called', () => {
     const measurement = measureFirstLoad(FIXTURE_DIST, { urlPath: '/eager/' });
     expect(measurement.ungatedLazyLibraries.map(({ library, chunk }) => [library, chunk])).toEqual([['three.js', '/_astro/heavy-3d.js']]);
+  });
+});
+
+describe('how three.js is recognised', () => {
+  const threeEntryPath = createRequire(import.meta.url).resolve('three');
+  const threeBuildDirectory = path.dirname(threeEntryPath);
+  const { definedBy } = LAZY_ONLY_LIBRARIES.find(({ library }) => library === 'three.js');
+
+  it('matches the installed three.js core, so an upgrade that drops the marker fails here and not silently', () => {
+    expect(definedBy.test(readFileSync(path.join(threeBuildDirectory, 'three.core.js'), 'utf-8'))).toBe(true);
+  });
+
+  it('does not match the part of three.js that only uses the core', () => {
+    expect(definedBy.test(readFileSync(path.join(threeBuildDirectory, 'three.module.js'), 'utf-8'))).toBe(false);
+  });
+});
+
+describe('a declared name must identify one chunk', () => {
+  it('fails a gate name that two chunks share', () => {
+    const page = { urlPath: '/two-scenes/', interactionGatedEntryNames: ['Scene'] };
+    expect(findFirstLoadFailures(measureFirstLoad(FIXTURE_DIST, page))).toEqual([
+      '"Scene" matches 2 chunks (/_astro/Scene.aaaaaaaa.js, /_astro/Scene.bbbbbbbb.js); rename a module so the name identifies one chunk',
+    ]);
   });
 });
 
