@@ -300,7 +300,7 @@
       },
       "acquisition_voxel_mm": null,
       "size_rule_voxel_mm": null,
-      "position_note": "Position not independently checked: against CIT168 the transform is not distinguishable from none. Warped all the same, to stay coherent with adjacent gyri; atlases disagree by 1 to 2 mm here regardless."
+      "position_note": "Position not independently checked: against CIT168 the transform is not distinguishable from none. Warped anyway, to stay coherent with adjacent gyri; atlases differ by 1 to 2 mm here."
     }
   ],
   "expected_neighbours": {
