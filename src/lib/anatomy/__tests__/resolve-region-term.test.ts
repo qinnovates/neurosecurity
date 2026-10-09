@@ -23,6 +23,33 @@ describe('createTermResolver', () => {
     expect(lightsRegion(resolution)).toBe(lights);
   });
 
+  it.each([
+    ['PFC', 'pfc', 'id'],
+    ['Hippocampus', 'hippocampus', 'id'],
+    ['  prefrontal   cortex ', 'pfc', 'synonym'],
+    ['Prefrontal-Cortex', 'pfc', 'synonym'],
+    ['Basolateral Amygdala', 'bla', 'synonym'],
+    ['locus coeruleus', 'pons', 'part_to_whole'],
+    ['amygdalas', 'bla', 'whole_to_part'],
+  ] as const)('normalises "%s" (case, whitespace, hyphen or underscore, one plural s) and resolves it to %s as %s', (term, regionId, resolution) => {
+    expect(resolveTerm(term)).toEqual({ resolved_region_id: regionId, resolution });
+  });
+
+  it('keeps the kind of the alias a normalised term reaches, so a whole still lights nothing', () => {
+    expect(lightsRegion(resolveTerm('Amygdala').resolution)).toBe(false);
+    expect(lightsRegion(resolveTerm('Locus-Coeruleus').resolution)).toBe(false);
+  });
+
+  it.each(['hippocampal', 'prefrontal', 'PF', 'pon', 'anterior pons', 'pons nucleus', 'hippocampuses', 'basolateral'])(
+    'tries nothing looser than that: "%s" resolves to no region', (term) => {
+      expect(resolveTerm(term)).toEqual({ resolved_region_id: null, resolution: 'unclassified' });
+    });
+
+  it('refuses an atlas in which two keys normalise to the same text', () => {
+    const atlas = { ...FIXTURE_ATLAS, region_aliases: { ...FIXTURE_ATLAS.region_aliases, 'Prefrontal Cortex': 'bla' } };
+    expect(() => createTermResolver(atlas)).toThrow(/both normalise to "prefrontal_cortex"/);
+  });
+
   it('resolves a word the atlas does not know as unclassified, with no region', () => {
     expect(resolveTerm('claustrum')).toEqual({ resolved_region_id: null, resolution: 'unclassified' });
     expect(resolveTerm('_note')).toEqual({ resolved_region_id: null, resolution: 'unclassified' });

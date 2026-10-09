@@ -1,5 +1,2616 @@
 {
   "schema_version": 2,
   "status": "AI-drafted. Links are a reading of the catalog's own words, not new evidence.",
-  "techniques": {}
+  "techniques": {
+    "QIF-T0001": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes current delivered at the electrode-tissue interface and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0002": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes locking neural function through closed-loop stimulation settings; it names devices, not a structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0003": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes passive capture of emissions from BCI data paths and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0005": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes tunnelling at nanoscale electrode-tissue junctions and ion channels, not a structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0006": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes solitons in protein complexes at the electrode-tissue interface, not a structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0008": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes interception and substitution of BCI command signals in transit and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0009": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes RF injection into the acquisition stage and TMS-grade stimulation in general terms; no structure is named. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0010": {
+      "scope": "regions",
+      "rationale": "The notes name the cortex, as an adjective, as what is entrained. No finer structure is named.",
+      "links": [
+        {
+          "term": "cortical",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0010/notes",
+              "quote": "Direct gamma/alpha/theta cortical entrainment"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the cortex, named as what is entrained. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0011": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes carriers mixing in neural tissue; the clinical analog speaks of deep targets but no structure is named. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0012": {
+      "scope": "regions",
+      "rationale": "The notes name the cochlea as what the microwave pulse acts on.",
+      "links": [
+        {
+          "term": "cochlea",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0012/notes",
+              "quote": "Thermoelastic expansion causes cochlea to perceive as sound"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the structure the pulse acts on. Not one of the atlas regions, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0013": {
+      "scope": "band_level",
+      "rationale": "only_whole_structures_named: The text says only 'deep brain structures' and 'deep brain tissue'; a nucleus appears only in the clinical analog. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0014": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes tissue demodulating a modulated carrier and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0022": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes falsified neurofeedback in a closed loop and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0023": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes a perturbation amplified through a closed loop and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0025": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes overwhelming targeted neurons and signal acquisition; no structure is named. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0026": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes flooding neural tissue across all electrodes and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0027": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes probing neural tissue to map connectivity and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0029": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes stimulation exceeding tissue recovery capacity and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0030": {
+      "scope": "regions",
+      "rationale": "The mechanism names the motor cortex as the source of the hijacked output.",
+      "links": [
+        {
+          "term": "motor cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0030/tara/mechanism",
+              "quote": "Hijacking motor cortex output signals"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as where the hijacked signals come from. Wider than the atlas's M1 record, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0032": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes replicating a neural biometric signature and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0033": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes gradual change to personality-linked neural patterns and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0034": {
+      "scope": "regions",
+      "rationale": "The notes name two stimulation targets and the parameters name one more.",
+      "links": [
+        {
+          "term": "hippocampal",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0034/notes",
+              "quote": "via targeted hippocampal/PFC stimulation"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the hippocampus, named as a stimulation target. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "PFC",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0034/notes",
+              "quote": "via targeted hippocampal/PFC stimulation"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stimulation target."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "DLPFC",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0034/tara/engineering/parameters/target_region",
+              "quote": "DLPFC"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. A part of the prefrontal cortex; kept as written, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0035": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes eliciting P300 responses with stimuli and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0036": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes decoding inner speech from neural signals and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0037": {
+      "scope": "regions",
+      "rationale": "The notes name two targets.",
+      "links": [
+        {
+          "term": "basal ganglia",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0037/notes",
+              "quote": "Targets basal ganglia (motor selection) and PFC (executive control)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a target. A whole the atlas holds only in parts."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "PFC",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0037/notes",
+              "quote": "Targets basal ganglia (motor selection) and PFC (executive control)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a target."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0038": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes extracting a brainprint from BCI data and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0039": {
+      "scope": "regions",
+      "rationale": "The notes and the target field name four targets between them.",
+      "links": [
+        {
+          "term": "insula",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0039/notes",
+              "quote": "Targets insula, TPJ, mPFC"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a target."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "TPJ",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0039/notes",
+              "quote": "Targets insula, TPJ, mPFC"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a target. The atlas has no record for it."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "mPFC",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0039/notes",
+              "quote": "Targets insula, TPJ, mPFC"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a target. A part of the prefrontal cortex; kept as written, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "PFC",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0039/tara/engineering/parameters/target_regions",
+              "quote": "TPJ, insula, PFC"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0040": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes stimuli shown through BCI applications to elicit responses and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0041": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes inferring attributes from signal statistics and usage metadata and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0051": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes unauthorised access to recorded neural data and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0052": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes harvesting event-related potentials and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0053": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes capturing cognitive states from BCI signals and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0054": {
+      "scope": "regions",
+      "rationale": "The notes name the hippocampus, as an adjective, as what is read.",
+      "links": [
+        {
+          "term": "hippocampal",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0054/notes",
+              "quote": "Targets hippocampal activity"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the hippocampus, named as the recording target. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0055": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes coordinated manipulation across populations through BCI infrastructure and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0056": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes mass collection of neural data and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0059": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes persistence through learned pathways and stored calibration data and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0060": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes persistent change during memory consolidation in general terms and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0062": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes slow sub-threshold parameter changes and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0064": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes flooding the user with permission requests and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0065": {
+      "scope": "regions",
+      "rationale": "The notes list the sensory route the content travels; two of its stages are structures.",
+      "links": [
+        {
+          "term": "visual cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0065/notes",
+              "quote": "screen → eyes → visual cortex → limbic system → prefrontal cortex"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage the content is delivered through. Wider than the atlas's V1 record, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "prefrontal cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0065/notes",
+              "quote": "screen → eyes → visual cortex → limbic system → prefrontal cortex"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the last stage the content is delivered through."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0066": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes paths in neural phase space and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0067": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes replayed or synthesised neural signals and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0068": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes pushing neural parameters toward bifurcation points and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0069": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes probing dynamical transitions for a fingerprint and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0070": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes tonic current switching neurons between firing modes and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0073": {
+      "scope": "regions",
+      "rationale": "The mechanism names the temporal cortex as the recording site.",
+      "links": [
+        {
+          "term": "temporal cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0073/tara/mechanism",
+              "quote": "captures in-ear EEG from temporal cortex via ear canal proximity"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what the ear-canal electrode records from. The atlas has no record for it."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0074": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes machine-learning inference on in-ear EEG and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0085": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes gaze and pupil measures read by a headset and names no neural structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0089": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes tremor read from phone motion sensors and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0092": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes facial temperature read by a thermal camera; it names the autonomic nervous system, a system, and no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0095": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes an escalation chain across earbud techniques and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0097": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes correlating physiological data across devices and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0099": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes consumer-sensor reconnaissance before a BCI attack and names no structure. Its generated band summary is not counted.",
+      "links": []
+    },
+    "QIF-T0100": {
+      "scope": "regions",
+      "rationale": "The mechanism names where the carrier arrives; the notes name what shapes the evoked response that is read.",
+      "links": [
+        {
+          "term": "auditory nerve",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0100/tara/mechanism",
+              "quote": "propagating through consumer audio hardware to auditory nerve and cortex"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what the carrier is delivered to. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0100/tara/mechanism",
+              "quote": "propagating through consumer audio hardware to auditory nerve and cortex"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what the carrier is delivered to. The text says only 'cortex' here; a whole the atlas holds in parts."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "auditory cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0100/notes",
+              "quote": "unique to the individual's cochlear geometry and auditory cortex response"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the source of the evoked response that is read. Wider than the atlas's A1 record."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "cochlear",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0100/notes",
+              "quote": "unique to the individual's cochlear geometry and auditory cortex response"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the cochlea, named as shaping the evoked response that is read. Not an atlas region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0103": {
+      "scope": "regions",
+      "rationale": "The notes name the visual cortex as what the flicker drives; the technique's own pathway text names the route.",
+      "links": [
+        {
+          "term": "visual cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0103/notes",
+              "quote": "drives visual cortex responses without user awareness"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what the flicker drives. Wider than the atlas's V1 record, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "retina",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0103/tara/dsm5/pathway",
+              "quote": "I0 (retina/optic nerve) → N7 (visual cortex V1)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage the stimulus is delivered through. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "optic nerve",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0103/tara/dsm5/pathway",
+              "quote": "I0 (retina/optic nerve) → N7 (visual cortex V1)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage the stimulus is delivered through. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "V1",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0103/tara/dsm5/pathway",
+              "quote": "I0 (retina/optic nerve) → N7 (visual cortex V1)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the cortical stage of the pathway this technique's own text gives."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0104": {
+      "scope": "band_level",
+      "rationale": "text_contradicts_band_tags: The pathway text says 'S-domain only' and 'no direct neural pathway' and names no structure, while the tags carry N1.",
+      "links": []
+    },
+    "QIF-T0105": {
+      "scope": "band_level",
+      "rationale": "text_contradicts_band_tags: The pathway text says 'S-domain only' and names no structure, while the tags carry N1.",
+      "links": []
+    },
+    "QIF-T0106": {
+      "scope": "band_level",
+      "rationale": "text_contradicts_band_tags: The pathway text says 'S-domain only' and names no structure, while the tags carry N2.",
+      "links": []
+    },
+    "QIF-T0107": {
+      "scope": "band_level",
+      "rationale": "text_contradicts_band_tags: The pathway text says 'S-domain only' and names no structure, while the tags carry N1.",
+      "links": []
+    },
+    "QIF-T0111": {
+      "scope": "regions",
+      "rationale": "The technique's own pathway text names the route the stimulation takes.",
+      "links": [
+        {
+          "term": "vestibular nerve",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0111/tara/dsm5/pathway",
+              "quote": "N1 (vestibular nerve) → N3 (vestibular nuclei) → N4 (cortical integration)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage the current is delivered through. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "vestibular nuclei",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0111/tara/dsm5/pathway",
+              "quote": "N1 (vestibular nerve) → N3 (vestibular nuclei) → N4 (cortical integration)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the pathway. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "cortical",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0111/tara/dsm5/pathway",
+              "quote": "N1 (vestibular nerve) → N3 (vestibular nuclei) → N4 (cortical integration)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the cortex, named as the last stage of the pathway. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0112": {
+      "scope": "regions",
+      "rationale": "The technique's own pathway text names the reflex arc it disrupts.",
+      "links": [
+        {
+          "term": "vestibular organ",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0112/tara/dsm5/pathway",
+              "quote": "I0 (vestibular organ) → N1 (vestibular nerve) → N3 (vestibular nuclei) → N2 (oculomotor nuclei)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as where the stimulation enters. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "vestibular nerve",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0112/tara/dsm5/pathway",
+              "quote": "I0 (vestibular organ) → N1 (vestibular nerve) → N3 (vestibular nuclei) → N2 (oculomotor nuclei)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the arc. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "vestibular nuclei",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0112/tara/dsm5/pathway",
+              "quote": "I0 (vestibular organ) → N1 (vestibular nerve) → N3 (vestibular nuclei) → N2 (oculomotor nuclei)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the arc. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "oculomotor nuclei",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0112/tara/dsm5/pathway",
+              "quote": "I0 (vestibular organ) → N1 (vestibular nerve) → N3 (vestibular nuclei) → N2 (oculomotor nuclei)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the last stage of the arc. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0113": {
+      "scope": "regions",
+      "rationale": "The mechanism names the shared nerve; the technique's own pathway text names the organs and nuclei.",
+      "links": [
+        {
+          "term": "CN VIII",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0113/tara/mechanism",
+              "quote": "shared innervation of cochlear and vestibular branches of CN VIII"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the nerve whose shared innervation is exploited. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "cochlea",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0113/tara/dsm5/pathway",
+              "quote": "I0 (cochlea/vestibule) → N1 (CN VIII shared innervation) → N3 (vestibular/cochlear nuclei)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as where the stimulation enters. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "vestibule",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0113/tara/dsm5/pathway",
+              "quote": "I0 (cochlea/vestibule) → N1 (CN VIII shared innervation) → N3 (vestibular/cochlear nuclei)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as where the stimulation enters. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "vestibular/cochlear nuclei",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0113/tara/dsm5/pathway",
+              "quote": "I0 (cochlea/vestibule) → N1 (CN VIII shared innervation) → N3 (vestibular/cochlear nuclei)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the last stage of the pathway; kept as the one phrase the text writes. Not an atlas region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0114": {
+      "scope": "regions",
+      "rationale": "The technique's own pathway text names the route the overload takes.",
+      "links": [
+        {
+          "term": "vestibular organ",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0114/tara/dsm5/pathway",
+              "quote": "I0 (vestibular organ) → N1 (vestibular nerve) → N3 (vestibular nuclei) → N4-N5 (cortical integration)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as where the stimulation enters. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "vestibular nerve",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0114/tara/dsm5/pathway",
+              "quote": "I0 (vestibular organ) → N1 (vestibular nerve) → N3 (vestibular nuclei) → N4-N5 (cortical integration)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the pathway. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "vestibular nuclei",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0114/tara/dsm5/pathway",
+              "quote": "I0 (vestibular organ) → N1 (vestibular nerve) → N3 (vestibular nuclei) → N4-N5 (cortical integration)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the pathway. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "cortical",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0114/tara/dsm5/pathway",
+              "quote": "I0 (vestibular organ) → N1 (vestibular nerve) → N3 (vestibular nuclei) → N4-N5 (cortical integration)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the cortex, named as the last stage of the pathway. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0115": {
+      "scope": "regions",
+      "rationale": "The technique's own pathway text names cortical tissue as what the stimulation shifts.",
+      "links": [
+        {
+          "term": "cortical",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0115/tara/dsm5/pathway",
+              "quote": "I0 (electrodes) → N1-N2 (cortical tissue)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the cortex, named as the tissue whose excitability shifts. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0116": {
+      "scope": "regions",
+      "rationale": "The target field names two structures; the technique's own pathway text names one end of a circuit.",
+      "links": [
+        {
+          "term": "nucleus_accumbens",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0116/tara/engineering/parameters/target",
+              "quote": "nucleus_accumbens/VTA"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. A part of the atlas's striatum record."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "VTA",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0116/tara/engineering/parameters/target",
+              "quote": "nucleus_accumbens/VTA"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "prefrontal",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0116/tara/dsm5/pathway",
+              "quote": "N4 (VTA-prefrontal circuit)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the prefrontal cortex, named as one end of a pathway stage. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0117": {
+      "scope": "regions",
+      "rationale": "The technique's own pathway text names the hippocampus and, as an adjective, the cortex.",
+      "links": [
+        {
+          "term": "hippocampus",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0117/tara/dsm5/pathway",
+              "quote": "N3 (hippocampus SWR)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as where the disrupted ripples arise. The mechanism and target field say 'hippocampal'."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "cortical",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0117/tara/dsm5/pathway",
+              "quote": "N5 (hippocampal-cortical consolidation)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the cortex, named as one end of the consolidation stage. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0118": {
+      "scope": "regions",
+      "rationale": "The mechanism names the area disrupted; the target field and the technique's own pathway text name the route.",
+      "links": [
+        {
+          "term": "Broca's area",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0118/tara/mechanism",
+              "quote": "chronic low-level disruption of Broca's area or corticobulbar pathways"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what is disrupted. It is the atlas's display name for 'broca' but not an id or alias, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "corticobulbar_tract",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0118/tara/engineering/parameters/target",
+              "quote": "Broca_area/corticobulbar_tract"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. A tract; not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "cranial motor nuclei",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0118/tara/dsm5/pathway",
+              "quote": "N1 (cranial motor nuclei)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the last stage of the pathway. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0119": {
+      "scope": "regions",
+      "rationale": "The target field names both ends of the connection that is modulated.",
+      "links": [
+        {
+          "term": "amygdala",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0119/tara/engineering/parameters/target",
+              "quote": "amygdala-PFC_connectivity"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. A whole the atlas holds only in parts."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "PFC",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0119/tara/engineering/parameters/target",
+              "quote": "amygdala-PFC_connectivity"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0120": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes electrode micromotion and gliosis at the electrode-tissue interface and names no structure.",
+      "links": []
+    },
+    "QIF-T0121": {
+      "scope": "regions",
+      "rationale": "The technique's own pathway text names thalamic nuclei and, as an adjective, the cortex.",
+      "links": [
+        {
+          "term": "thalamic sleep nuclei",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0121/tara/dsm5/pathway",
+              "quote": "N3 (thalamic sleep nuclei) → N5 (cortical slow-wave generators)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the first stage of the pathway. A group of nuclei inside the thalamus; kept as written, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "cortical",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0121/tara/dsm5/pathway",
+              "quote": "N3 (thalamic sleep nuclei) → N5 (cortical slow-wave generators)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the cortex, named as the second stage of the pathway. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0122": {
+      "scope": "regions",
+      "rationale": "The technique's own pathway text names the two structures that are kindled.",
+      "links": [
+        {
+          "term": "amygdala",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0122/tara/dsm5/pathway",
+              "quote": "N3 (amygdala/hippocampus)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what the implanted electrodes stimulate. A whole the atlas holds only in parts."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "hippocampus",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0122/tara/dsm5/pathway",
+              "quote": "N3 (amygdala/hippocampus)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what the implanted electrodes stimulate."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0123": {
+      "scope": "regions",
+      "rationale": "The mechanism and target field name the cortex stimulated; the technique's own pathway text names the route.",
+      "links": [
+        {
+          "term": "motor cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0123/tara/mechanism",
+              "quote": "Chronic manipulation of motor cortex stimulation parameters"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what is stimulated. Wider than the atlas's M1 record, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "primary_motor_cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0123/tara/engineering/parameters/target",
+              "quote": "primary_motor_cortex"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "corticospinal tract",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0123/tara/dsm5/pathway",
+              "quote": "N2 (corticospinal tract) → N1 (motor neurons)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the pathway. A tract; not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "motor neurons",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0123/tara/dsm5/pathway",
+              "quote": "N2 (corticospinal tract) → N1 (motor neurons)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the last stage of the pathway. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0124": {
+      "scope": "regions",
+      "rationale": "The target field names both ends of the circuit that is disrupted.",
+      "links": [
+        {
+          "term": "hippocampal",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0124/tara/engineering/parameters/target",
+              "quote": "hippocampal-PFC_circuit"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the hippocampus in the catalog's own target field. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "PFC",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0124/tara/engineering/parameters/target",
+              "quote": "hippocampal-PFC_circuit"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0125": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes longitudinal collection of response patterns and names no structure.",
+      "links": []
+    },
+    "QIF-T0126": {
+      "scope": "regions",
+      "rationale": "The mechanism names the visual cortex as what is profiled.",
+      "links": [
+        {
+          "term": "visual cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0126/tara/mechanism",
+              "quote": "to profile visual cortex response characteristics"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what the evoked potentials are read from. Wider than the atlas's V1 record, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0127": {
+      "scope": "regions",
+      "rationale": "The target field names two stimulation targets; the technique's own pathway text names where the effect goes next.",
+      "links": [
+        {
+          "term": "amygdala",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0127/tara/engineering/parameters/target",
+              "quote": "amygdala/bed_nucleus_stria_terminalis"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. A whole the atlas holds only in parts."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "bed_nucleus_stria_terminalis",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0127/tara/engineering/parameters/target",
+              "quote": "amygdala/bed_nucleus_stria_terminalis"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "hypothalamus",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0127/tara/dsm5/pathway",
+              "quote": "N4 (hypothalamus/PAG)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the second stage of the pathway."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "PAG",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0127/tara/dsm5/pathway",
+              "quote": "N4 (hypothalamus/PAG)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the second stage of the pathway. A part of the atlas's midbrain record."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0128": {
+      "scope": "regions",
+      "rationale": "The mechanism names two structures suppressed and the target field names a third.",
+      "links": [
+        {
+          "term": "ventral striatum",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0128/tara/mechanism",
+              "quote": "Suppression of ventral striatum and orbitofrontal cortex reward-related activity"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what is suppressed. A part of the atlas's striatum record; kept as written, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "orbitofrontal cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0128/tara/mechanism",
+              "quote": "Suppression of ventral striatum and orbitofrontal cortex reward-related activity"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what is suppressed. A part of the prefrontal cortex; kept as written, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "subcallosal_cingulate",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0128/tara/engineering/parameters/target",
+              "quote": "ventral_striatum/OFC/subcallosal_cingulate"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. Not the atlas's 'cingulate' record, which is the posterior cingulate."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0129": {
+      "scope": "regions",
+      "rationale": "The targets field names three structures; the technique's own pathway text names where the effect goes next.",
+      "links": [
+        {
+          "term": "amygdala",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0129/tara/engineering/parameters/targets",
+              "quote": "amygdala/insula/ACC simultaneous"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. A whole the atlas holds only in parts."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "insula",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0129/tara/engineering/parameters/targets",
+              "quote": "amygdala/insula/ACC simultaneous"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "ACC",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0129/tara/engineering/parameters/targets",
+              "quote": "amygdala/insula/ACC simultaneous"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "prefrontal",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0129/tara/dsm5/pathway",
+              "quote": "N5 (prefrontal overwhelm)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the prefrontal cortex, named as the second stage of the pathway. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0130": {
+      "scope": "regions",
+      "rationale": "The target field names three targets.",
+      "links": [
+        {
+          "term": "anterior_insula",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0130/tara/engineering/parameters/target",
+              "quote": "anterior_insula/TPJ/mirror_neuron_system"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. A part of the atlas's insula record; kept as written, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "TPJ",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0130/tara/engineering/parameters/target",
+              "quote": "anterior_insula/TPJ/mirror_neuron_system"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. The atlas has no record for it."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "mirror_neuron_system",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0130/tara/engineering/parameters/target",
+              "quote": "anterior_insula/TPJ/mirror_neuron_system"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. A system spread over several regions; it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0131": {
+      "scope": "regions",
+      "rationale": "The mechanism and target field name the cortex stimulated; the technique's own pathway text names the route.",
+      "links": [
+        {
+          "term": "motor cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0131/tara/mechanism",
+              "quote": "via stimulation of motor cortex mouth/larynx areas"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what is stimulated. Wider than the atlas's M1 record, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "M1_larynx",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0131/tara/engineering/parameters/target",
+              "quote": "ventral_premotor/M1_larynx"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. A part of M1; kept as written so a part does not light the whole."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "ventral premotor cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0131/tara/dsm5/pathway",
+              "quote": "N4 (ventral premotor cortex) → N2 (corticobulbar tract) → N1 (laryngeal motor neurons)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the first stage of the pathway. A part of the premotor cortex; kept as written, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "corticobulbar tract",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0131/tara/dsm5/pathway",
+              "quote": "N4 (ventral premotor cortex) → N2 (corticobulbar tract) → N1 (laryngeal motor neurons)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the pathway. A tract; not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "laryngeal motor neurons",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0131/tara/dsm5/pathway",
+              "quote": "N4 (ventral premotor cortex) → N2 (corticobulbar tract) → N1 (laryngeal motor neurons)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the last stage of the pathway. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0132": {
+      "scope": "regions",
+      "rationale": "The mechanism names two areas disrupted and the target field names a third.",
+      "links": [
+        {
+          "term": "Wernicke's area",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0132/tara/mechanism",
+              "quote": "Disruption of Wernicke's area and auditory association cortex processing"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what is disrupted. It is the atlas's display name for 'wernicke' but not an id or alias, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "auditory association cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0132/tara/mechanism",
+              "quote": "Disruption of Wernicke's area and auditory association cortex processing"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what is disrupted. The atlas has no record for it."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "posterior_STG",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0132/tara/engineering/parameters/target",
+              "quote": "Wernicke_area/posterior_STG"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. The atlas has no record for it."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0133": {
+      "scope": "regions",
+      "rationale": "The mechanism and target field name the cortex stimulated; the technique's own pathway text names where the effect spreads.",
+      "links": [
+        {
+          "term": "primary visual cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0133/tara/mechanism",
+              "quote": "stimulation of primary visual cortex (V1)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what is stimulated. 'V1' in the same sentence is the same structure."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "visual_cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0133/tara/engineering/parameters/target",
+              "quote": "V1/visual_cortex"
+            },
+            "check_status": "unchecked",
+            "rationale": "The catalog's own target field. Wider than the atlas's V1 record, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "thalamic relay",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0133/tara/dsm5/pathway",
+              "quote": "N3 (thalamic relay)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as where the cascade spreads. Relay nuclei inside the thalamus; kept as written, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0134": {
+      "scope": "regions",
+      "rationale": "The technique's own pathway text names the nerve and nucleus the overstimulation reaches.",
+      "links": [
+        {
+          "term": "auditory nerve",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0134/tara/dsm5/pathway",
+              "quote": "N1 (auditory nerve) → N3 (cochlear nucleus)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what the electrode array stimulates. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "cochlear nucleus",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0134/tara/dsm5/pathway",
+              "quote": "N1 (auditory nerve) → N3 (cochlear nucleus)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the next stage of the pathway. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0135": {
+      "scope": "band_level",
+      "rationale": "only_whole_structures_named: The text names only 'white matter tracts' and 'cortical/subcortical regions' in general and calls the spread unpredictable.",
+      "links": []
+    },
+    "QIF-T0136": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes photons absorbed in dopaminergic neurons, a cell class, and names no structure.",
+      "links": []
+    },
+    "QIF-T0137": {
+      "scope": "regions",
+      "rationale": "The mechanism names where the nanoparticles are injected.",
+      "links": [
+        {
+          "term": "VTA",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0137/tara/mechanism",
+              "quote": "injected into VTA"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as where the light-converting particles are placed and act."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0138": {
+      "scope": "regions",
+      "rationale": "The mechanism names where the nanoparticles are injected.",
+      "links": [
+        {
+          "term": "VTA",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0138/tara/mechanism",
+              "quote": "injected into VTA"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as where the photovoltaic particles are placed and act."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0139": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes gold nanorods at the neuronal membrane. It names one structure only to say the effect was not demonstrated there.",
+      "links": []
+    },
+    "QIF-T0140": {
+      "scope": "regions",
+      "rationale": "The mechanism lists where infrared stimulation has been demonstrated.",
+      "links": [
+        {
+          "term": "cochlear",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0140/tara/mechanism",
+              "quote": "Demonstrated in cochlear, vestibular, spinal nerve, somatosensory cortex"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective in a list of sites where the stimulation was demonstrated. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "vestibular",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0140/tara/mechanism",
+              "quote": "Demonstrated in cochlear, vestibular, spinal nerve, somatosensory cortex"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective in a list of sites where the stimulation was demonstrated. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "spinal nerve",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0140/tara/mechanism",
+              "quote": "Demonstrated in cochlear, vestibular, spinal nerve, somatosensory cortex"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a site where the stimulation was demonstrated. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "somatosensory cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0140/tara/mechanism",
+              "quote": "Demonstrated in cochlear, vestibular, spinal nerve, somatosensory cortex"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a site where the stimulation was demonstrated. Wider than the atlas's S1 record, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0141": {
+      "scope": "regions",
+      "rationale": "The mechanism names where the nanoparticles sit.",
+      "links": [
+        {
+          "term": "VTA",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0141/tara/mechanism",
+              "quote": "iron-oxide NPs in VTA/SNc"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as where the heated particles are placed."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "SNc",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0141/tara/mechanism",
+              "quote": "iron-oxide NPs in VTA/SNc"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as where the heated particles are placed. A part of the substantia nigra; kept as written, so it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0142": {
+      "scope": "regions",
+      "rationale": "The technique's name says the inhibition is cortical. No finer structure is named.",
+      "links": [
+        {
+          "term": "cortical",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0142/attack",
+              "quote": "SICI-TMS GABA-A cortical inhibition"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the cortex, named as what is inhibited. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0143": {
+      "scope": "regions",
+      "rationale": "The technique's name says the inhibition is cortical. No finer structure is named.",
+      "links": [
+        {
+          "term": "cortical",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0143/attack",
+              "quote": "long-interval cortical inhibition"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the cortex, named as what is inhibited. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0144": {
+      "scope": "regions",
+      "rationale": "The mechanism names where the GABA increase was measured.",
+      "links": [
+        {
+          "term": "M1",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0144/tara/mechanism",
+              "quote": "MRS-confirmed GABA increase in M1"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as where the stimulation's effect was measured."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0145": {
+      "scope": "regions",
+      "rationale": "The mechanism names the stimulation site.",
+      "links": [
+        {
+          "term": "M1",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0145/tara/mechanism",
+              "quote": "Anodal tDCS (1-2mA, 10-20min, M1) reduces cortical GABA"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the stimulation site."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0146": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes current driving a class of interneurons and names no structure.",
+      "links": []
+    },
+    "QIF-T0147": {
+      "scope": "regions",
+      "rationale": "The mechanism names the ultrasound target.",
+      "links": [
+        {
+          "term": "thalamus",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0147/tara/mechanism",
+              "quote": "targeting thalamus reduces extracellular GABA"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the ultrasound target."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0148": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes flicker and click trains entraining a class of interneurons and names no structure.",
+      "links": []
+    },
+    "QIF-T0149": {
+      "scope": "regions",
+      "rationale": "The mechanism names the route the stimulation takes.",
+      "links": [
+        {
+          "term": "vagal afferents",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0149/tara/mechanism",
+              "quote": "activates vagal afferents -> NTS -> nucleus basalis of Meynert (NBM) -> cortical ACh release"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what the cuff electrode activates. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "NTS",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0149/tara/mechanism",
+              "quote": "activates vagal afferents -> NTS -> nucleus basalis of Meynert (NBM) -> cortical ACh release"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the route. A part of the atlas's medulla record, written as an abbreviation the atlas does not list as an alias."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "nucleus basalis of Meynert",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0149/tara/mechanism",
+              "quote": "activates vagal afferents -> NTS -> nucleus basalis of Meynert (NBM) -> cortical ACh release"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the route. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "cortical",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0149/tara/mechanism",
+              "quote": "activates vagal afferents -> NTS -> nucleus basalis of Meynert (NBM) -> cortical ACh release"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the cortex, named as where acetylcholine is released. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0150": {
+      "scope": "regions",
+      "rationale": "The mechanism names the nerve stimulated and the nucleus it activates.",
+      "links": [
+        {
+          "term": "auricular branch of vagus nerve",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0150/tara/mechanism",
+              "quote": "stimulation of auricular branch of vagus nerve (ABVN) at cymba conchae"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what is stimulated. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "NTS",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0150/tara/mechanism",
+              "quote": "Activates NTS -> cholinergic relay"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what the stimulation activates. A part of the atlas's medulla record, written as an abbreviation the atlas does not list as an alias."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0151": {
+      "scope": "regions",
+      "rationale": "The mechanism names the stimulation site.",
+      "links": [
+        {
+          "term": "SMA",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0151/tara/mechanism",
+              "quote": "Single-pulse TMS over SMA"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the stimulation site."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0152": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes chemical inhibition of an enzyme and its effect on recordings and names no structure.",
+      "links": []
+    },
+    "QIF-T0153": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes inference from EEG spectral signatures and names no structure.",
+      "links": []
+    },
+    "QIF-T0154": {
+      "scope": "regions",
+      "rationale": "The mechanism names the route the stimulation takes.",
+      "links": [
+        {
+          "term": "vagal afferents",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0154/tara/mechanism",
+              "quote": "VNS activates vagal afferents -> NTS -> locus coeruleus (NE, obligate intermediary) -> dorsal raphe nucleus (DRN, 5-HT)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what the stimulation activates. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "NTS",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0154/tara/mechanism",
+              "quote": "VNS activates vagal afferents -> NTS -> locus coeruleus (NE, obligate intermediary) -> dorsal raphe nucleus (DRN, 5-HT)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the route. A part of the atlas's medulla record, written as an abbreviation the atlas does not list as an alias."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "locus coeruleus",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0154/tara/mechanism",
+              "quote": "VNS activates vagal afferents -> NTS -> locus coeruleus (NE, obligate intermediary) -> dorsal raphe nucleus (DRN, 5-HT)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the route. A part of the atlas's pons record that the atlas does not list as an alias."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "dorsal raphe nucleus",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0154/tara/mechanism",
+              "quote": "VNS activates vagal afferents -> NTS -> locus coeruleus (NE, obligate intermediary) -> dorsal raphe nucleus (DRN, 5-HT)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the last stage of the route. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "brainstem",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0154/tara/mechanism",
+              "quote": "Disynaptic peripheral-to-brainstem cascade"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as where the cascade ends. A whole the atlas holds only in parts."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0155": {
+      "scope": "regions",
+      "rationale": "The mechanism names the ultrasound target.",
+      "links": [
+        {
+          "term": "dorsal raphe nucleus",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0155/tara/mechanism",
+              "quote": "targets dorsal raphe nucleus with mm spatial precision"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the ultrasound target. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0156": {
+      "scope": "regions",
+      "rationale": "The technique's name says what is driven; the mechanism names the route.",
+      "links": [
+        {
+          "term": "dorsal raphe",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0156/attack",
+              "quote": "electroacupuncture dorsal raphe serotonin drive"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what the stimulation drives. Not one of the atlas regions."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "spinal",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0156/tara/mechanism",
+              "quote": "Peripheral needle -> spinal -> brainstem pathway"
+            },
+            "check_status": "unchecked",
+            "rationale": "Adjective for the spinal cord, named as a stage of the route. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "brainstem",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0156/tara/mechanism",
+              "quote": "Peripheral needle -> spinal -> brainstem pathway"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the route. A whole the atlas holds only in parts."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0157": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes dietary depletion of a precursor at a blood-brain barrier transporter and names no structure.",
+      "links": []
+    },
+    "QIF-T0158": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes sub-threshold current shifting excitability. It names one structure only as another technique's target.",
+      "links": []
+    },
+    "QIF-T0159": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes ultrasound acting on astrocytes, a cell class, and names no structure.",
+      "links": []
+    },
+    "QIF-T0160": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes ultrasound opening the blood-brain barrier and names no structure.",
+      "links": []
+    },
+    "QIF-T0161": {
+      "scope": "regions",
+      "rationale": "The mechanism names the cortex as what the wave crosses.",
+      "links": [
+        {
+          "term": "cortex",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0161/tara/mechanism",
+              "quote": "wave at 2-5mm/min across cortex"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as what the depression wave spreads across. A whole the atlas holds only in parts."
+          },
+          "drafted_by": "ai"
+        }
+      ]
+    },
+    "QIF-T0168": {
+      "scope": "band_level",
+      "rationale": "no_structure_named: The text describes headset motion sensors capturing pupil-linked vibration and names no neural structure.",
+      "links": []
+    }
+  }
 }
