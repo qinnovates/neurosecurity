@@ -6,85 +6,71 @@ import {
   INFORMAL_REGION_NAMES,
   LEGACY_NAME_PATTERNS,
   REGION_TABLE_MARK,
-  buildRegionEntryPattern,
   compareWithRecorded,
   findLegacyMarks,
+  findPlacedRegions,
   listRepositoryFiles,
   scanFiles,
   scanLegacyGeometry,
-} from './legacy-geometry-scan';
+  type RegionVocabulary,
+} from '@/lib/legacy-geometry-scan';
+import {
+  RECORDED_LEGACY_FILES,
+  RECORDED_LEGACY_GEOMETRY,
+  RECORDED_NOT_GEOMETRY,
+  RECORDED_STALE_BUILD_FILES,
+} from './legacy-geometry-recorded';
 
 /**
- * A ratchet on the old, hand-placed brain geometry. The lists below record where it is
- * today. Nothing may be added. When a later change removes an entry from the code, this
- * test fails until the entry is deleted here too, so the lists only ever shrink; the
- * last removal leaves them empty.
+ * A ratchet on the old, hand-placed brain geometry. legacy-geometry-recorded.ts records
+ * where it is today. Nothing may be added. When a later change removes an entry from the
+ * code, this test fails until the entry is deleted from the record too, so the record only
+ * ever shrinks.
+ *
+ * What the scan finds: the old constant names; any spelling of the old model's file name;
+ * and a file in which three or more region names (ids and aliases from the atlas data, band
+ * ids, and a short list of informal names) each have a numeric position within 160
+ * characters. A name counts when it is a quoted string, a property key or a declared
+ * variable. A position is a two- or three-number array, a Vector2 or Vector3, a
+ * position.set call, or a named x, y, cx or cy.
+ *
+ * Known limits. The scan does NOT find:
+ *   - a table with fewer than three regions, or with a position further than 160 characters from its name;
+ *   - names or file names built at run time ('brain' + '.glb', a computed key, an id read from data);
+ *   - positions that are not in one of the shapes above: CSV columns, YAML block lists,
+ *     numbers kept as strings, separate arrays of names and positions joined by index;
+ *   - band ids written in another letter case, and region names that are in neither the atlas data nor the informal list;
+ *   - anything in a file listed in RECORDED_NOT_GEOMETRY, in a binary file, or in an extension the scan does not read;
+ *   - geometry outside src/.
+ * It also cannot tell a colour triple from a position, which is why RECORDED_NOT_GEOMETRY exists.
  */
 
 const REPO_ROOT = path.resolve(import.meta.dirname, '..', '..', '..');
 const FIXTURE_DIRECTORY = 'src/components/__tests__/fixtures/legacy-geometry';
 const STALE_BUILD_DIRECTORY = 'src/site/_astro';
 const ALIAS_NOTE_PREFIX = '_';
+/** The ratchet's own files name what they look for, so they are not scanned. */
+const RATCHET_FILES = [
+  'src/lib/legacy-geometry-scan.ts',
+  'src/components/__tests__/legacy-geometry-ratchet.test.ts',
+  'src/components/__tests__/legacy-geometry-recorded.ts',
+  FIXTURE_DIRECTORY,
+];
 
-/** Files under src/ (tests excluded) that hold old geometry or refer to the old model, and how. */
-const RECORDED_LEGACY_GEOMETRY: Record<string, readonly string[]> = {
-  'src/components/ThreatAtlasViz.tsx': [REGION_TABLE_MARK],
-  'src/components/atlas/brainmap/BrainSvg.tsx': ['BRAIN_REGION_COORDS', 'brain-regions module'],
-  'src/components/atlas/brainmap/brain-regions.ts': ['BRAIN_REGION_COORDS', REGION_TABLE_MARK],
-  'src/components/brain/BrainVisualization.tsx': ['REGION_HOTSPOTS', 'brain.glb', REGION_TABLE_MARK],
-  'src/components/neurosim/NeuroSIM.tsx': ['REGION_3D_POS', 'brain.glb', REGION_TABLE_MARK],
-  'src/components/threat-model/TargetRegionsPanel.tsx': ['BRAIN_REGION_COORDS', 'brain-regions module'],
-  'src/scripts/strip-glb-textures.mjs': ['brain.glb'],
-  'src/site/_astro/BrainVisualization.DCSk5yMy.js': ['brain.glb', REGION_TABLE_MARK],
-  'src/site/brain-capture.html': ['brain.glb'],
+const vocabulary: RegionVocabulary = {
+  regionNames: [
+    ...atlas.brain_regions.map((region) => region.id),
+    ...Object.keys(atlas.region_aliases).filter((alias) => !alias.startsWith(ALIAS_NOTE_PREFIX)),
+    ...INFORMAL_REGION_NAMES,
+  ],
+  bandIds: atlas.qif_bands.map((band) => band.id),
 };
 
-/** Old files that are to be deleted outright, whatever they contain. */
-const RECORDED_LEGACY_FILES: readonly string[] = [
-  'src/components/atlas/brainmap/brain-regions.ts',
-  'src/site/brain-capture.html',
-  'src/site/models/brain.glb',
-];
-
-/** A build committed by mistake long ago. It is copied into every new build; no file may join it. */
-const RECORDED_STALE_BUILD_FILES: readonly string[] = [
-  'src/site/_astro/AtlasDashboard.Boq6WiaI.js',
-  'src/site/_astro/BciDashboard.C_MLwdHu.js',
-  'src/site/_astro/BciExplorer.C5mjSt0M.js',
-  'src/site/_astro/BciKql.BznQ5HW6.js',
-  'src/site/_astro/BciLandscape.DID2-QvJ.js',
-  'src/site/_astro/BrainVisualization.BhQMtTjC.js',
-  'src/site/_astro/BrainVisualization.DAb2QKYQ.js',
-  'src/site/_astro/BrainVisualization.DCSk5yMy.js',
-  'src/site/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js',
-  'src/site/_astro/ClinicalDomainCards.eszQM-eb.js',
-  'src/site/_astro/HeroParticles.CepCdBQT.js',
-  'src/site/_astro/Hourglass3D.DmtWt39w.js',
-  'src/site/_astro/NeurorightCards.BvCM403E.js',
-  'src/site/_astro/OrbitControls.BDibDrBQ.js',
-  'src/site/_astro/Search.astro_astro_type_script_index_0_lang.mkdr79ir.js',
-  'src/site/_astro/SwimlaneTImeline.Dv4hm0ws.js',
-  'src/site/_astro/TaraVisualization.CH97vkN3.js',
-  'src/site/_astro/about.BooKFJOI.css',
-  'src/site/_astro/client.CQJou1yw.js',
-  'src/site/_astro/explorer.Ckb6QSlO.css',
-  'src/site/_astro/index.Bb8JjhAW.js',
-  'src/site/_astro/index.DeO6U63H.js',
-  'src/site/_astro/jsx-runtime.D_zvdyIk.js',
-  'src/site/_astro/preload-helper.BlTxHScW.js',
-  'src/site/_astro/react-three-fiber.esm.BeQ3Cg2x.js',
-  'src/site/_astro/vera-engine.BaibVlOG_ZoFGm7.webp',
-];
-
-const regionKeys: string[] = [
-  ...atlas.brain_regions.map((region) => region.id),
-  ...Object.keys(atlas.region_aliases).filter((alias) => !alias.startsWith(ALIAS_NOTE_PREFIX)),
-  ...atlas.qif_bands.map((band) => band.id),
-  ...INFORMAL_REGION_NAMES,
-];
-
 describe('legacy geometry ratchet', () => {
-  const comparison = compareWithRecorded(scanLegacyGeometry(REPO_ROOT, regionKeys), RECORDED_LEGACY_GEOMETRY);
+  const found = scanLegacyGeometry(REPO_ROOT, vocabulary, RATCHET_FILES);
+  const notGeometry = Object.keys(RECORDED_NOT_GEOMETRY);
+  const geometryFound = Object.fromEntries(Object.entries(found).filter(([repoPath]) => !notGeometry.includes(repoPath)));
+  const comparison = compareWithRecorded(geometryFound, RECORDED_LEGACY_GEOMETRY);
 
   it('finds no old geometry outside the recorded list (use the atlas data instead of adding a copy)', () => {
     expect(comparison.unrecorded).toEqual([]);
@@ -92,6 +78,10 @@ describe('legacy geometry ratchet', () => {
 
   it('has no recorded entry that is already gone (delete it from RECORDED_LEGACY_GEOMETRY)', () => {
     expect(comparison.resolved).toEqual([]);
+  });
+
+  it('exempts only files the scan really does mark, and only as a region table (delete an entry that is no longer needed)', () => {
+    expect(notGeometry.filter((repoPath) => JSON.stringify(found[repoPath]) !== JSON.stringify([REGION_TABLE_MARK]))).toEqual([]);
   });
 
   it('still has every recorded legacy file (delete a removed one from RECORDED_LEGACY_FILES)', () => {
@@ -103,51 +93,85 @@ describe('legacy geometry ratchet', () => {
   });
 
   it('reads region ids, aliases and bands from the atlas data', () => {
-    expect(regionKeys).toEqual(expect.arrayContaining(['pfc', 'thalamus', 'prefrontal_cortex', 'N7']));
+    expect(vocabulary.regionNames).toEqual(expect.arrayContaining(['pfc', 'thalamus', 'prefrontal_cortex']));
+    expect(vocabulary.bandIds).toEqual(expect.arrayContaining(['N7', 'N1']));
+  });
+
+  it('only records marks the scan can produce', () => {
+    const knownMarks = new Set([...Object.keys(LEGACY_NAME_PATTERNS), REGION_TABLE_MARK]);
+    expect(Object.values(RECORDED_LEGACY_GEOMETRY).flat().filter((mark) => !knownMarks.has(mark))).toEqual([]);
   });
 });
 
 describe('the scan the ratchet relies on', () => {
-  const regionEntryPattern = buildRegionEntryPattern(regionKeys);
-  const marksOf = (source: string): string[] => findLegacyMarks(source, regionEntryPattern);
+  const marksOf = (source: string): string[] => findLegacyMarks(source, vocabulary);
+  const TABLE = [REGION_TABLE_MARK];
 
-  it('catches a new region-to-coordinate table in a new file, under a name it has never seen', () => {
-    const found = scanFiles(REPO_ROOT, [`${FIXTURE_DIRECTORY}/new-region-table.ts`, `${FIXTURE_DIRECTORY}/camera-presets.ts`], regionKeys);
-    expect(found).toEqual({ [`${FIXTURE_DIRECTORY}/new-region-table.ts`]: [REGION_TABLE_MARK] });
+  it('catches a new region table in a new file, under a name it has never seen', () => {
+    const fixtures = [`${FIXTURE_DIRECTORY}/new-region-table.ts`, `${FIXTURE_DIRECTORY}/camera-presets.ts`];
+    const found = scanFiles(REPO_ROOT, fixtures, vocabulary);
+    expect(found).toEqual({ [`${FIXTURE_DIRECTORY}/new-region-table.ts`]: TABLE });
     expect(compareWithRecorded(found, RECORDED_LEGACY_GEOMETRY).unrecorded).toEqual([
       `${FIXTURE_DIRECTORY}/new-region-table.ts: ${REGION_TABLE_MARK}`,
     ]);
   });
 
-  it('catches the table when minified, quoted as JSON, keyed by band, or written as x and y', () => {
-    expect(marksOf('const a={N7:[0,8,10],N6:[0,2,5]};')).toEqual([REGION_TABLE_MARK]);
-    expect(marksOf('{"thalamus": [0, 0, 0], "amygdala": [-6.5, -6, 6]}')).toEqual([REGION_TABLE_MARK]);
-    expect(marksOf('const p = {\n  pfc: { cx: 95, cy: 95 },\n  m1: { cx: 210, cy: 42 },\n};')).toEqual([REGION_TABLE_MARK]);
-    expect(marksOf('const p = { visual: { x: 1, y: 2 }, motor: { x: -3, y: 1e-2 } };')).toEqual([REGION_TABLE_MARK]);
+  it.each([
+    ['properties, minified, keyed by band', 'const a={N7:[0,8,10],N6:[0,2,5],N5:[0,3,8]};'],
+    ['quoted keys as in JSON', '{"thalamus": [0, 0, 0], "amygdala": [-6.5, -6, 6], "pfc": [0, 8, 12]}'],
+    ['named cx and cy', 'const p = {\n  pfc: { cx: 95, cy: 95 },\n  m1: { cx: 210, cy: 42 },\n  v1: { cx: 345, cy: 165 },\n};'],
+    ['pairs for a Map', "new Map([['thalamus', [0, 0, 0]], ['amygdala', [-6, -6, 6]], ['pfc', [0, 8, 12]]])"],
+    ['Map.set calls', "m.set('thalamus', [0, 0, 0]); m.set('amygdala', [-6, -6, 6]); m.set('vta', [1, -2, 3]);"],
+    ['records with an id on one line', "[{ id: 'pfc', x: 95, y: 95 }, { id: 'm1', x: 210, y: 42 }, { id: 'v1', x: 3, y: 4 }]"],
+    ['records over several lines', "[\n  {\n    id: 'pfc',\n    label: 'Prefrontal',\n    at: [0, 8, 12],\n  },\n  {\n    id: 'm1',\n    label: 'Motor',\n    at: [-3, 10, 5],\n  },\n  {\n    id: 'v1',\n    label: 'Visual',\n    at: [0, 3, -13],\n  },\n]"],
+    ['position before the id', "[{ at: [0, 8, 12], id: 'pfc' }, { at: [-3, 10, 5], id: 'm1' }, { at: [0, 3, -13], id: 'v1' }]"],
+    ['a position under any property name', "[{ region: 'thalamus', anchor: [0, 0, 0] }, { region: 'vta', anchor: [1, -2, 3] }, { region: 'stn', anchor: [2, 2, 2] }]"],
+    ['a nested position object', "{ thalamus: { mesh: { position: [0, 0, 0] } }, vta: { mesh: { position: [1, -2, 3] } }, stn: { mesh: { position: [2, 2, 2] } } }"],
+    ['Vector3 values', 'const p = { thalamus: new THREE.Vector3(0, 0, 0), vta: new Vector3(1, -2, 3), stn: new Vector3(2, 2, 2) };'],
+    ['position.set beside a region name', "add('thalamus').position.set(0, 0, 0); add('vta').position.set(1, -2, 3); add('stn').position.set(2, 2, 2);"],
+    ['upper-case region keys', 'const P = { THALAMUS: [0, 0, 0], VTA: [1, -2, 3], PFC: [0, 8, 12] };'],
+    ['hemisphere-suffixed keys', 'const p = { thalamus_l: [-1, 0, 0], thalamus_r: [1, 0, 0], hippocampus_left: [-4, -4, 0], amygdalaR: [6, -6, 6] };'],
+    ['variables named after regions', 'const thalamus = [0, 0, 0];\nconst vta = new Vector3(1, -2, 3);\nlet pfc = [0, 8, 12];'],
+    ['flow-style YAML', 'thalamus: [0, 0, 0]\nvta: [1, -2, 3]\npfc: [0, 8, 12]\n'],
+    ['records keyed by band with a nested pos', "const hotspots = {\n  N7: { pos: [0, 10, 6], size: 4.2 },\n  N6: { pos: [0, 1, 3], size: 3.2 },\n  N5: { pos: [0, 2, 6], size: 2.6 },\n};"],
+  ])('catches a table written as %s', (_shape, source) => {
+    expect(marksOf(source)).toEqual(TABLE);
   });
 
-  it('catches the table written as pairs for a Map, or as records with an id', () => {
-    expect(marksOf("new Map([['thalamus', [0, 0, 0]], ['amygdala', [-6, -6, 6]]])")).toEqual([REGION_TABLE_MARK]);
-    expect(marksOf("[{ id: 'pfc', x: 95, y: 95 }, { id: 'm1', x: 210, y: 42 }]")).toEqual([REGION_TABLE_MARK]);
-    expect(marksOf('[{"region":"thalamus","position":[0,0,0]},{"region":"vta","position":[1,-2,3]}]')).toEqual([REGION_TABLE_MARK]);
+  it.each([
+    ['one or two regions', 'const centre = { thalamus: [0, 0, 0], vta: [1, 2, 3] };'],
+    ['tuples under other keys', 'const view = { position: [0, 3, 16], target: [0, 2, 0], up: [0, 1, 0] };'],
+    ['regions used as plain values', 'const labels = { thalamus: "Thalamus", amygdala: "Amygdala", pfc: "PFC" };'],
+    ['band sizes and an id list', 'const sizes = { N7: 3.0, N6: 2.2, N5: 1.8 }; const ids = ["pfc", "m1", "v1"];'],
+    ['names that only contain a region name', 'const o = { subthalamus: [1, 2], my_pfc: [3, 4], obj.motor: 1, thalamusTint: [1, 2, 3] };'],
+    ['identifiers that share a short region id', 'const f=(a1,v1,m1)=>a1?[1,2,3]:v1?[4,5,6]:m1?[7,8,9]:[0,0,0];'],
+    ['a list of names followed by a list of numbers far away', `const order = ['thalamus', 'amygdala', 'pfc'];${' '.repeat(200)}const weights = [0.5, 0.25];`],
+  ])('does not mark %s', (_shape, source) => {
+    expect(marksOf(source)).toEqual([]);
   });
 
-  it('does not mark one coincidental entry, tuples under other keys, or a region used as a plain value', () => {
-    expect(marksOf('const centre = { thalamus: [0, 0, 0] };')).toEqual([]);
-    expect(marksOf('const view = { position: [0, 3, 16], target: [0, 2, 0] };')).toEqual([]);
-    expect(marksOf('const labels = { thalamus: "Thalamus", amygdala: "Amygdala" };')).toEqual([]);
-    expect(marksOf('const sizes = { N7: 3.0, N6: 2.2 }; const ids = ["pfc", "m1"];')).toEqual([]);
-    expect(marksOf('const o = { subthalamus: [1, 2], my_pfc: [3, 4], obj.motor: 1 };')).toEqual([]);
-    expect(marksOf("const order = ['thalamus', 'amygdala', 'pfc']; const weights = [0.5, 0.25];")).toEqual([]);
-    expect(marksOf("const rows = [{ id: 'pfc', label: 'PFC' }, { id: 'm1', label: 'M1' }];")).toEqual([]);
-    expect(marksOf("const shells = [{ id: 'N7', r: 0.82, c: [0.8, 0.55, 0.75] }, { id: 'N4', r: 0.96, c: [0.4, 0.95, 0.6] }];")).toEqual([]);
+  it('marks a colour triple beside region names, which is why some files are exempted by name', () => {
+    expect(marksOf("const shells = [{ id: 'N7', c: [0.8, 0.55, 0.75] }, { id: 'N4', c: [0.4, 0.95, 0.6] }, { id: 'N1', c: [0.3, 0.9, 0.5] }];")).toEqual(TABLE);
   });
 
-  it('marks each old name and the old model file', () => {
+  it('does not find the shapes listed as known limits', () => {
+    expect(marksOf('region,x,y,z\nthalamus,0,0,0\nvta,1,-2,3\npfc,0,8,12\n')).toEqual([]);
+    expect(marksOf('thalamus:\n  - 0\n  - 0\n  - 0\nvta:\n  - 1\n  - -2\n  - 3\npfc:\n  - 0\n  - 8\n  - 12\n')).toEqual([]);
+    expect(marksOf("const names = ['thalamus', 'vta', 'pfc'].map((name, index) => ({ [name]: positions[index] }));")).toEqual([]);
+    expect(marksOf("load('/models/' + 'brain' + '.glb');")).toEqual([]);
+    expect(marksOf('const a = { n7: [0, 8, 10], n6: [0, 2, 5], n5: [0, 3, 8] };')).toEqual([]);
+  });
+
+  it('marks each old name and any letter case of the old model file', () => {
     expect(marksOf('import { BRAIN_REGION_COORDS } from "./brain-regions";')).toEqual(['BRAIN_REGION_COORDS', 'brain-regions module']);
     expect(marksOf('const p = REGION_HOTSPOTS[id] ?? REGION_3D_POS[id];')).toEqual(['REGION_3D_POS', 'REGION_HOTSPOTS']);
     expect(marksOf("useGLTF('/models/brain.glb');")).toEqual(['brain.glb']);
+    expect(marksOf("useGLTF('/models/Brain.GLB');")).toEqual(['brain.glb']);
     expect(marksOf('const MY_REGION_HOTSPOTS_V2 = 1; const brainXglb = 2;')).toEqual([]);
+  });
+
+  it('names the regions it found placed, for whoever has to judge a hit', () => {
+    expect(findPlacedRegions('const p = { THALAMUS: [0, 0, 0], vta_l: [1, -2, 3], N7: [0, 8, 12] };', vocabulary)).toEqual(['n7', 'thalamus', 'vta']);
   });
 
   it('reports a recorded entry that has gone, so the list must shrink with the code', () => {
@@ -161,12 +185,7 @@ describe('the scan the ratchet relies on', () => {
     expect(unrecorded).toEqual([`src/a.ts: ${REGION_TABLE_MARK}`]);
   });
 
-  it('refuses to build a pattern from no region keys', () => {
-    expect(() => buildRegionEntryPattern([])).toThrow(/No region keys/);
-  });
-
-  it('only records marks the scan can produce', () => {
-    const knownMarks = new Set([...Object.keys(LEGACY_NAME_PATTERNS), REGION_TABLE_MARK]);
-    expect(Object.values(RECORDED_LEGACY_GEOMETRY).flat().filter((mark) => !knownMarks.has(mark))).toEqual([]);
+  it('refuses to scan with no region names', () => {
+    expect(() => findPlacedRegions('x', { regionNames: [], bandIds: [] })).toThrow(/No region names/);
   });
 });

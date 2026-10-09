@@ -52,4 +52,4 @@ Known limits of that tool on a Mac: its headless browser has no WebGL, so it can
 
 | Page | Added by | Extra steps |
 |---|---|---|
-| `/atlas/model/` | TARA Lab | None. On load the default mode's chunk is requested by a dynamic import; that is expected and is not in the first-load budget. |
+| `/atlas/model/` | TARA Lab | None. On load the default mode's chunk is requested by a dynamic import; that is expected, and it is counted in the code budget as the on-mount part. |

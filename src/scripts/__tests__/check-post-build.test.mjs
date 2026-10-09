@@ -20,12 +20,12 @@ describe('runPostBuildChecks', () => {
     const results = runPostBuildChecks(FIXTURE_DIST, [{ urlPath: '/eager/', ...roomyBudgets }]);
     expect(results.map(({ failures }) => failures)).toEqual([
       ['/eager/: no Content-Security-Policy meta tag'],
-      ['/eager/: three.js is in the first load; it must load on demand'],
+      ['/eager/: three.js can load without the visitor asking for it, through /_astro/eager-3d.js -> /_astro/heavy-3d.js; it may sit only behind a chunk named in interactionGatedEntryNames'],
     ]);
   });
 
   it('fails the budget check alone when a page\'s code is one byte over', () => {
-    const measuredBytes = measureFirstLoad(FIXTURE_DIST, '/tool/').totals.codeGzipBytes;
+    const measuredBytes = measureFirstLoad(FIXTURE_DIST, passingPage).totals.codeGzipBytes;
     const results = runPostBuildChecks(FIXTURE_DIST, [{ ...passingPage, codeGzipBudgetBytes: measuredBytes - 1 }]);
     expect(results[0].failures).toEqual([]);
     expect(results[1].failures).toHaveLength(1);
@@ -37,6 +37,12 @@ describe('runPostBuildChecks', () => {
     for (const { failures } of results) {
       expect(failures).toHaveLength(1);
       expect(failures[0]).toMatch(/^could not run: .*\/absent\//);
+    }
+  });
+
+  it('fails every check when no page is listed', () => {
+    for (const { failures } of runPostBuildChecks(FIXTURE_DIST, [])) {
+      expect(failures).toEqual(['no tool pages are listed, so nothing was checked']);
     }
   });
 
