@@ -31,20 +31,20 @@ const STALE_PATHWAYS_TEXT = `{
 `;
 
 describe('derivePathwayBands', () => {
-  const resolver = createRegionResolver(FIXTURE_ATLAS);
+  const resolveRegion = createRegionResolver(FIXTURE_ATLAS);
 
   it('takes the origin band and the deduplicated target bands from the region table', () => {
     const pathway = { id: 'fixture', origin: ['prefrontal_cortex'], targets: ['hippocampus', 'amygdala', 'pons'] };
-    expect(derivePathwayBands(pathway, resolver)).toEqual({ origin_band: 'N7', target_bands: ['N6', 'N2'] });
+    expect(derivePathwayBands(pathway, resolveRegion)).toEqual({ origin_band: 'N7', target_bands: ['N6', 'N2'] });
   });
 
   it('refuses origins that span bands rather than choosing one', () => {
     const pathway = { id: 'fixture', origin: ['pfc', 'pons'], targets: ['bla'] };
-    expect(() => derivePathwayBands(pathway, resolver)).toThrow(MixedOriginBandError);
+    expect(() => derivePathwayBands(pathway, resolveRegion)).toThrow(MixedOriginBandError);
   });
 
   it('refuses a pathway with no origin', () => {
-    expect(() => derivePathwayBands({ id: 'fixture', origin: [], targets: ['bla'] }, resolver)).toThrow(/no origin listed/);
+    expect(() => derivePathwayBands({ id: 'fixture', origin: [], targets: ['bla'] }, resolveRegion)).toThrow(/no origin listed/);
   });
 });
 
@@ -55,6 +55,13 @@ describe('rewritePathwayBands', () => {
     expect(findPathwayBandDrift(JSON.parse(STALE_PATHWAYS_TEXT).pathways, FIXTURE_ATLAS)).toEqual([
       { pathway_id: 'fixture_descending', field: 'origin_band', stored: 'N2', derived: 'N7' },
       { pathway_id: 'fixture_descending', field: 'target_bands', stored: ['N7'], derived: ['N6', 'N2'] },
+    ]);
+  });
+
+  it('treats target_bands in a different order from the targets as stale', () => {
+    const pathway = { id: 'fixture', origin: ['pfc'], origin_band: 'N7', targets: ['bla', 'pons'], target_bands: ['N2', 'N6'] };
+    expect(findPathwayBandDrift([pathway], FIXTURE_ATLAS)).toEqual([
+      { pathway_id: 'fixture', field: 'target_bands', stored: ['N2', 'N6'], derived: ['N6', 'N2'] },
     ]);
   });
 

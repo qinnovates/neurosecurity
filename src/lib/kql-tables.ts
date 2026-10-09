@@ -915,7 +915,11 @@ export interface ImpactChainLink {
   band_name: string;
   region_id: string;
   region_name: string;
-  /** How the pathway reached the region: same id, synonym alias, or an alias that changes anatomical scope. */
+  /**
+   * How the pathway's region id was joined to the atlas: same id, synonym alias, or an alias that changes
+   * anatomical scope. It describes the join, not how exact the anatomy is. Values are REGION_MATCH in
+   * datalake/scripts/region-resolver.mjs.
+   */
   region_match: 'id' | 'synonym' | 'part_to_whole' | 'whole_to_part';
   pathway_id: string;
   pathway_name: string;

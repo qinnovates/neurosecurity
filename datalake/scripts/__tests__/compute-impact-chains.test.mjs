@@ -3,12 +3,16 @@ import { describe, it, expect } from 'vitest';
 import {
   IMPACT_CHAINS_PATH,
   computeImpactChains,
+  findTechniquesWithUnknownBands,
   indexPathwaysByRegion,
+  listChainWarnings,
   loadChainSources,
   serializeImpactChains,
 } from '../compute-impact-chains.mjs';
 import {
+  DanglingRegionAliasError,
   REGION_MATCH,
+  SCOPE_CHANGING_MATCHES,
   UnresolvedRegionError,
   createRegionResolver,
   listPathwayEndpoints,
@@ -27,8 +31,17 @@ function buildFixtureSources(pathways) {
     },
     atlas: FIXTURE_ATLAS,
     pathways: { pathways },
-    dsm: { diagnostic_clusters: { mood: { label: 'Mood', conditions: [{ code: 'F32.x', name: 'Major depression' }] } } },
-    neuro: { conditions: [{ code: 'G20', name: 'Parkinson disease', category: 'movement' }] },
+    dsm: {
+      diagnostic_clusters: {
+        mood: { label: 'Mood', conditions: [{ code: 'F32.x', name: 'Major depression' }, { code: 'G47.x', name: 'Sleep-wake disorder' }] },
+      },
+    },
+    neuro: {
+      conditions: [
+        { code: 'G20', name: 'Parkinson disease', category: 'movement' },
+        { code: 'G47.x', name: 'Sleep disorder', category: 'sleep' },
+      ],
+    },
   };
 }
 
@@ -66,6 +79,12 @@ describe('computeImpactChains on a fixture', () => {
     expect([unknown.dsm_name, unknown.dsm_cluster]).toEqual(['Z99', '']);
   });
 
+  it('prefers the DSM name and cluster when a code is in both condition tables', () => {
+    const pathway = { ...LIMBIC_PATHWAY, dsm_conditions: ['G47.x'] };
+    const [row] = computeImpactChains(buildFixtureSources([pathway]));
+    expect([row.dsm_name, row.dsm_cluster]).toEqual(['Sleep-wake disorder', 'Mood']);
+  });
+
   it('gives no rows to a technique with no neural band', () => {
     expect(chains.some((chain) => chain.technique_id === 'QIF-T9002')).toBe(false);
   });
@@ -87,52 +106,124 @@ describe('computeImpactChains on a fixture', () => {
   });
 
   it('does not treat the alias note or inherited object keys as aliases', () => {
-    const resolver = createRegionResolver(FIXTURE_ATLAS);
-    expect(resolver.canResolve(ALIAS_NOTE_KEY)).toBe(false);
-    expect(resolver.canResolve('constructor')).toBe(false);
+    const resolveRegion = createRegionResolver(FIXTURE_ATLAS);
+    expect(() => resolveRegion(ALIAS_NOTE_KEY, 'test')).toThrow(UnresolvedRegionError);
+    expect(() => resolveRegion('constructor', 'test')).toThrow(UnresolvedRegionError);
+  });
+
+  it('says so when an alias points at a region that does not exist', () => {
+    const atlas = { ...FIXTURE_ATLAS, region_aliases: { ...FIXTURE_ATLAS.region_aliases, claustrum: 'cla' } };
+    const resolveClaustrum = () => createRegionResolver(atlas)('claustrum', 'pathway "fixture"');
+    expect(resolveClaustrum).toThrow(DanglingRegionAliasError);
+    expect(resolveClaustrum).toThrow(/is a region_aliases key .* points at "cla", which is not a brain_regions id/);
   });
 
   it('reports a sub-structure alias as part_to_whole', () => {
-    const { region, match } = createRegionResolver(FIXTURE_ATLAS).resolve('locus_coeruleus', 'test');
+    const { region, match } = createRegionResolver(FIXTURE_ATLAS)('locus_coeruleus', 'test');
     expect([region.id, match]).toEqual(['pons', REGION_MATCH.PART_TO_WHOLE]);
   });
 });
 
+describe('chain warnings', () => {
+  const sources = buildFixtureSources([LIMBIC_PATHWAY]);
+
+  it('finds a technique whose band the atlas does not define', () => {
+    const registrar = { techniques: [...sources.registrar.techniques, { id: 'QIF-T9003', band_ids: ['N7', 'N9', 'X1'] }] };
+    expect(findTechniquesWithUnknownBands(registrar, FIXTURE_ATLAS)).toEqual([
+      { technique_id: 'QIF-T9002', unknown_band_ids: ['S2'] },
+      { technique_id: 'QIF-T9003', unknown_band_ids: ['N9', 'X1'] },
+    ]);
+  });
+
+  it('warns about unknown bands and about rows joined through a scope-changing alias', () => {
+    const warnings = listChainWarnings(computeImpactChains(sources), sources);
+    expect(warnings).toHaveLength(2);
+    expect(warnings[0]).toMatch(/^3 rows join through an alias that changes anatomical scope \(pathways: fixture_limbic\)/);
+    expect(warnings[1]).toMatch(/^QIF-T9002 names band\(s\) S2/);
+  });
+
+  it('stays silent when every band is known and every join keeps its scope', () => {
+    const pathway = { ...LIMBIC_PATHWAY, targets: ['hippocampus'] };
+    const registrar = { techniques: [sources.registrar.techniques[0]] };
+    const quietSources = { ...buildFixtureSources([pathway]), registrar };
+    expect(listChainWarnings(computeImpactChains(quietSources), quietSources)).toEqual([]);
+  });
+});
+
+describe('serializeImpactChains', () => {
+  const rows = computeImpactChains(buildFixtureSources([LIMBIC_PATHWAY]));
+  const BRACKET_LINE_COUNT = 2;
+
+  it('writes one row per line, a trailing newline, and JSON that parses back to the rows', () => {
+    const serialized = serializeImpactChains(rows);
+    expect(JSON.parse(serialized)).toEqual(rows);
+    expect(serialized.endsWith(']\n')).toBe(true);
+    expect(serialized.trimEnd().split('\n')).toHaveLength(rows.length + BRACKET_LINE_COUNT);
+  });
+
+  it('writes an empty table as valid JSON', () => {
+    expect(JSON.parse(serializeImpactChains([]))).toEqual([]);
+  });
+});
+
+/**
+ * Sources and chains are loaded inside the tests, not while the file is collected,
+ * so bad data fails the test that names the problem instead of the whole file.
+ */
 describe('impact chains against the datalake', () => {
-  const sources = loadChainSources();
-  const { atlas, registrar } = sources;
-  const pathways = sources.pathways.pathways;
-  const resolver = createRegionResolver(atlas);
-  const chains = computeImpactChains(sources);
-  const regionIds = new Set(atlas.brain_regions.map((region) => region.id));
-  const aliasKeys = Object.keys(atlas.region_aliases).filter((key) => key !== ALIAS_NOTE_KEY);
+  let cachedSources;
+  let cachedChains;
+  const getSources = () => (cachedSources ??= loadChainSources());
+  const getChains = () => (cachedChains ??= computeImpactChains(getSources()));
+  const listAliasKeys = (atlas) => Object.keys(atlas.region_aliases).filter((key) => key !== ALIAS_NOTE_KEY);
+
+  function describeResolutionFailure(resolveRegion, endpointId, context) {
+    try {
+      resolveRegion(endpointId, context);
+      return undefined;
+    } catch (error) {
+      return error.message;
+    }
+  }
 
   it('resolves every pathway origin and target to an atlas region', () => {
-    const unresolved = pathways.flatMap((pathway) =>
+    const { atlas, pathways } = getSources();
+    const resolveRegion = createRegionResolver(atlas);
+    const failures = pathways.pathways.flatMap((pathway) =>
       listPathwayEndpoints(pathway)
-        .filter((endpointId) => !resolver.canResolve(endpointId))
-        .map((endpointId) => `${pathway.id}: ${endpointId}`));
-    expect(unresolved).toEqual([]);
+        .map((endpointId) => describeResolutionFailure(resolveRegion, endpointId, `pathway "${pathway.id}"`))
+        .filter((failure) => failure !== undefined));
+    expect(failures).toEqual([]);
   });
 
   it('points every alias at a region that exists', () => {
-    expect(aliasKeys.filter((alias) => !regionIds.has(atlas.region_aliases[alias]))).toEqual([]);
+    const { atlas } = getSources();
+    const regionIds = new Set(atlas.brain_regions.map((region) => region.id));
+    expect(listAliasKeys(atlas).filter((alias) => !regionIds.has(atlas.region_aliases[alias]))).toEqual([]);
   });
 
   it('classifies only real aliases as scope-changing, and each one once', () => {
-    const { whole_to_part: wholeToPart, part_to_whole: partToWhole } = atlas.region_alias_relations;
-    const classified = [...wholeToPart, ...partToWhole];
+    const { atlas } = getSources();
+    const aliasKeys = listAliasKeys(atlas);
+    const classified = SCOPE_CHANGING_MATCHES.flatMap((relation) => atlas.region_alias_relations[relation]);
     expect(classified.filter((alias) => !aliasKeys.includes(alias))).toEqual([]);
     expect(new Set(classified).size).toBe(classified.length);
   });
 
+  it('names no band in the registrar that the atlas does not define', () => {
+    const { atlas, registrar } = getSources();
+    expect(findTechniquesWithUnknownBands(registrar, atlas)).toEqual([]);
+  });
+
   it('gives chain rows to every region that a pathway with conditions runs through', () => {
+    const { atlas, pathways, registrar } = getSources();
+    const resolveRegion = createRegionResolver(atlas);
     const targetedBands = new Set(registrar.techniques.flatMap((technique) => technique.band_ids ?? []));
-    const regionsWithRows = new Set(chains.map((chain) => chain.region_id));
+    const regionsWithRows = new Set(getChains().map((chain) => chain.region_id));
     const expectedRegionIds = new Set(
-      pathways
+      pathways.pathways
         .filter((pathway) => (pathway.dsm_conditions ?? []).length > 0)
-        .flatMap((pathway) => listPathwayEndpoints(pathway).map((endpointId) => resolver.resolve(endpointId, pathway.id).region))
+        .flatMap((pathway) => listPathwayEndpoints(pathway).map((endpointId) => resolveRegion(endpointId, pathway.id).region))
         .filter((region) => targetedBands.has(region.qif_band))
         .map((region) => region.id),
     );
@@ -141,17 +232,18 @@ describe('impact chains against the datalake', () => {
   });
 
   it('gives chain rows to every technique whose band holds a region with a pathway', () => {
+    const chains = getChains();
     const bandsWithRows = new Set(chains.map((chain) => chain.band_id));
     const techniquesWithRows = new Set(chains.map((chain) => chain.technique_id));
-    const missing = registrar.techniques
+    const missing = getSources().registrar.techniques
       .filter((technique) => (technique.band_ids ?? []).some((bandId) => bandsWithRows.has(bandId)))
       .filter((technique) => !techniquesWithRows.has(technique.id))
       .map((technique) => technique.id);
     expect(missing).toEqual([]);
   });
 
-  it('matches the committed impact-chains.json (regenerate with `npm run compute:chains`)', () => {
-    const isCommittedFileCurrent = readFileSync(IMPACT_CHAINS_PATH, 'utf-8') === serializeImpactChains(chains);
+  it('matches the committed impact-chains.json byte for byte (regenerate with `npm run compute:chains`)', () => {
+    const isCommittedFileCurrent = readFileSync(IMPACT_CHAINS_PATH, 'utf-8') === serializeImpactChains(getChains());
     expect(isCommittedFileCurrent).toBe(true);
   });
 });

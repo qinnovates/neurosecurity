@@ -13,6 +13,12 @@
  *   origin_band  = the single band shared by every origin region
  *   target_bands = the bands of the target regions, deduplicated, in target order
  *
+ * Order is part of the value: a stored target_bands list in any other order
+ * counts as stale, so the committed file is exactly what this script writes.
+ *
+ * This makes the two files agree. It does not judge whether a region's band in
+ * the atlas is right; change the band there and rerun this script.
+ *
  * The pathway file is hand-formatted, so only the two fields are rewritten in
  * place; nothing else in the file moves.
  *
@@ -23,10 +29,9 @@
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { DATALAKE_DIR, runAsCli } from './datalake-cli.mjs';
 import { createRegionResolver } from './region-resolver.mjs';
 
-const DATALAKE_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ATLAS_PATH = path.join(DATALAKE_DIR, 'qif-brain-bci-atlas.json');
 const PATHWAYS_PATH = path.join(DATALAKE_DIR, 'qif-neural-pathways.json');
 
@@ -55,18 +60,18 @@ export class PathwayRewriteError extends Error {
   }
 }
 
-function listDistinctBands(regionIds, resolver, pathwayId) {
-  const bands = regionIds.map((regionId) => resolver.resolve(regionId, `pathway "${pathwayId}"`).region.qif_band);
+function listDistinctBands(regionIds, resolveRegion, pathwayId) {
+  const bands = regionIds.map((regionId) => resolveRegion(regionId, `pathway "${pathwayId}"`).region.qif_band);
   return [...new Set(bands)];
 }
 
 /** The band fields one pathway should hold, given the atlas region table. */
-export function derivePathwayBands(pathway, resolver) {
-  const originBands = listDistinctBands(pathway.origin ?? [], resolver, pathway.id);
+export function derivePathwayBands(pathway, resolveRegion) {
+  const originBands = listDistinctBands(pathway.origin ?? [], resolveRegion, pathway.id);
   if (originBands.length !== 1) throw new MixedOriginBandError(pathway.id, originBands);
   return {
     origin_band: originBands[0],
-    target_bands: listDistinctBands(pathway.targets ?? [], resolver, pathway.id),
+    target_bands: listDistinctBands(pathway.targets ?? [], resolveRegion, pathway.id),
   };
 }
 
@@ -76,10 +81,10 @@ function isSameBandList(left, right) {
 
 /** Every stored band field that differs from the value derived from the atlas. */
 export function findPathwayBandDrift(pathways, atlas) {
-  const resolver = createRegionResolver(atlas);
+  const resolveRegion = createRegionResolver(atlas);
   const drift = [];
   for (const pathway of pathways) {
-    const derived = derivePathwayBands(pathway, resolver);
+    const derived = derivePathwayBands(pathway, resolveRegion);
     if (pathway.origin_band !== derived.origin_band) {
       drift.push({ pathway_id: pathway.id, field: 'origin_band', stored: pathway.origin_band, derived: derived.origin_band });
     }
@@ -103,9 +108,9 @@ function rewriteLine(line, derived) {
 
 /** Rewrites only the band-field lines of the pathway file text, then proves the result is drift-free. */
 export function rewritePathwayBands(pathwaysText, atlas) {
-  const resolver = createRegionResolver(atlas);
+  const resolveRegion = createRegionResolver(atlas);
   const derivedById = new Map(
-    JSON.parse(pathwaysText).pathways.map((pathway) => [pathway.id, derivePathwayBands(pathway, resolver)]),
+    JSON.parse(pathwaysText).pathways.map((pathway) => [pathway.id, derivePathwayBands(pathway, resolveRegion)]),
   );
   let currentDerived;
   const rewrittenText = pathwaysText.split('\n').map((line) => {
@@ -143,14 +148,4 @@ function runCli() {
   process.stdout.write('[derive-pathway-bands] rewrote datalake/qif-neural-pathways.json.\n');
 }
 
-const isRunDirectly = process.argv[1] !== undefined
-  && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
-
-if (isRunDirectly) {
-  try {
-    runCli();
-  } catch (error) {
-    process.stderr.write(`[derive-pathway-bands] ${error instanceof Error ? error.message : String(error)}\n`);
-    process.exit(1);
-  }
-}
+runAsCli(import.meta.url, 'derive-pathway-bands', runCli);

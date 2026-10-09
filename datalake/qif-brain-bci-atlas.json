@@ -2430,7 +2430,7 @@
     "PAG": "midbrain"
   },
   "region_alias_relations": {
-    "_note": "Classifies the entries of region_aliases that are not plain synonyms. An alias absent from both lists names the same structure as its atlas region. whole_to_part: the alias names a structure larger than, or spanning beyond, the single atlas region it maps to, so a join through it attributes the whole structure to that one part. part_to_whole: the alias names a sub-structure of the atlas region it maps to, so a join through it attributes the sub-structure to the whole region. Scripts that join through region_aliases carry this classification on their output (see region_match in impact-chains.json).",
+    "_note": "Classifies the entries of region_aliases that are not plain synonyms. An alias absent from both lists names the same structure as its atlas region. whole_to_part: the alias names a structure larger than, or spanning beyond, the single atlas region it maps to, so a join through it attributes the whole structure to that one part. part_to_whole: the alias names a sub-structure of the atlas region it maps to, so a join through it attributes the sub-structure to the whole region. Scripts that join through region_aliases carry this classification on their output (see region_match in impact-chains.json). The classification is a first pass that has not had expert anatomical review, and it covers aliases only: a file that writes an atlas id directly as a stand-in for a smaller or larger structure is not flagged by it.",
     "whole_to_part": [
       "cortex",
       "brainstem",
