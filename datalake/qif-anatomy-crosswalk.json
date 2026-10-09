@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "status": "AI-drafted. No neuroanatomist has checked these correspondences.",
+  "parts": [],
+  "contains": [],
+  "no_geometry": [
+    {
+      "subject_kind": "region",
+      "subject_id": "cervical_cord",
+      "reason": "The only spinal cord template found states no licence, and an issue asking for one is unanswered.",
+      "reason_source": "datalake/qif-anatomy-sources.json, considered_and_refused entry \"pam50\" (from section 3 of the licence verification)",
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "thoracic_cord",
+      "reason": "The only spinal cord template found states no licence, and an issue asking for one is unanswered.",
+      "reason_source": "datalake/qif-anatomy-sources.json, considered_and_refused entry \"pam50\" (from section 3 of the licence verification)",
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "lumbar_cord",
+      "reason": "The only spinal cord template found states no licence, and an issue asking for one is unanswered.",
+      "reason_source": "datalake/qif-anatomy-sources.json, considered_and_refused entry \"pam50\" (from section 3 of the licence verification)",
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "sacral_cord",
+      "reason": "The only spinal cord template found states no licence, and an issue asking for one is unanswered.",
+      "reason_source": "datalake/qif-anatomy-sources.json, considered_and_refused entry \"pam50\" (from section 3 of the licence verification)",
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "cauda_equina",
+      "reason": "No openly licensed source with geometry for this structure was found.",
+      "reason_source": "The licence verification lists it among the QIF regions still without clean geometry; the search behind that list was made by AI.",
+      "drafted_by": "ai"
+    }
+  ],
+  "rows": []
+}

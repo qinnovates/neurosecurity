@@ -20,7 +20,7 @@ paths:
 5.  Chains:      Update datalake/tara-chains.json if attack chains affected
 6.  TypeScript:  src/lib/threat-data.ts > kql-tables.ts > kql-engine.ts > neurogovernance-data.ts
 7.  Python:      datalake/qtara/src/qtara/models.py > scripts > SDK > stix.py > cli.py
-8.  Precompute:  Run all datalake/src/scripts/ pipelines (impact chains, DSM mappings)
+8.  Precompute:  Run all datalake/scripts/ pipelines (impact chains via npm run compute:chains, DSM mappings)
 8b. Statistics:  npm run registrar:stats  (regenerates the whole statistics block
                  from the techniques array; never hand-edit it. Only the fields
                  listed in statistics.editorial_fields are hand-maintained.)
@@ -47,7 +47,7 @@ paths:
 3. `src/lib/kql-tables.ts` — KQL table builder (flattens JSON > queryable columns)
 4. `src/lib/kql-engine.ts` — KQL engine (field aliases, indexes)
 5. `datalake/qtara/src/qtara/models.py` — Python SDK Pydantic models
-6. `datalake/src/scripts/compute-impact-chains.mjs` — precompute pipeline
+6. `datalake/scripts/compute-impact-chains.mjs` — precompute pipeline
 
 **Technique count references:** NEVER hardcode technique counts in .astro pages or docs.
 Use `import { TECHNIQUE_COUNT } from '@lib/threat-data'` in Astro/TS, or pull from registrar `statistics.total_techniques` in scripts.

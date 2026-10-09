@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "status": "AI-drafted licence readings, made by AI and not by a lawyer. No person has confirmed them. They are not legal advice.",
+  "verifiers": [
+    {
+      "id": "ai-licence-verification",
+      "kind": "ai"
+    },
+    {
+      "id": "ai-licence-recheck",
+      "kind": "ai"
+    }
+  ],
+  "verdicts": [
+    {
+      "source_id": "mni_icbm152_2009c_asym",
+      "verdict": "SHIP",
+      "grant": "explicit",
+      "treat_as": null,
+      "terms_url": "https://nist.mni.mcgill.ca/icbm-152-nonlinear-atlases-2009/",
+      "quoted_terms": [
+        "Copyright (C) 1993–2004 Louis Collins, McConnell Brain Imaging Centre, Montreal Neurological Institute, McGill University. Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies."
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification",
+        "ai-licence-recheck"
+      ],
+      "human_confirmed": false,
+      "access_agreement": null,
+      "clearance": {
+        "cleared": true,
+        "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it.",
+        "unlocks_when": [],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "allen_hra_3d_2020",
+      "verdict": "SHIP",
+      "grant": "explicit",
+      "treat_as": null,
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "quoted_terms": [
+        "These materials are now provided under the Attribution International 4.0 (CC BY 4.0) license as of Sept. 1, 2022"
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification",
+        "ai-licence-recheck"
+      ],
+      "human_confirmed": false,
+      "access_agreement": null,
+      "clearance": {
+        "cleared": true,
+        "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it. The grant covers the files in the download directory only; anything taken from the Allen API falls under non-commercial terms.",
+        "unlocks_when": [],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "cit168_rl",
+      "verdict": "SHIP",
+      "grant": "explicit",
+      "treat_as": "cc-by-sa-4.0",
+      "terms_url": "https://api.osf.io/v2/licenses/563c1cf88c5e4a3877f9e96a/",
+      "quoted_terms": [
+        "OSF licence record name: CC-By Attribution 4.0 International"
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification",
+        "ai-licence-recheck"
+      ],
+      "human_confirmed": false,
+      "access_agreement": null,
+      "clearance": {
+        "cleared": true,
+        "reason": "The only licence statement is a repository field (CC BY 4.0), and the same field is contradicted by the authors' own text on a sibling atlas. It is handled as share-alike, which satisfies both readings.",
+        "unlocks_when": [],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "harvard_aan_v2",
+      "verdict": "SHIP",
+      "grant": "explicit",
+      "treat_as": null,
+      "terms_url": "https://spdx.org/licenses/CC0-1.0.html",
+      "quoted_terms": [
+        "Licenses/restrictions placed on the data: CC0 1.0 Universal (CC0 1.0) Public Domain"
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification",
+        "ai-licence-recheck"
+      ],
+      "human_confirmed": false,
+      "access_agreement": null,
+      "clearance": {
+        "cleared": true,
+        "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it.",
+        "unlocks_when": [],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "neudorfer_hypothalamus",
+      "verdict": "SHIP",
+      "grant": "explicit",
+      "treat_as": null,
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "quoted_terms": [
+        "Zenodo API licence id: cc-by-4.0"
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification",
+        "ai-licence-recheck"
+      ],
+      "human_confirmed": false,
+      "access_agreement": null,
+      "clearance": {
+        "cleared": true,
+        "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it. The archives were not opened, so a licence file inside them is unread.",
+        "unlocks_when": [],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "ahead_structures",
+      "verdict": "SHIP",
+      "grant": "explicit",
+      "treat_as": null,
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "quoted_terms": [
+        "figshare API licence: CC BY 4.0"
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification",
+        "ai-licence-recheck"
+      ],
+      "human_confirmed": false,
+      "access_agreement": null,
+      "clearance": {
+        "cleared": true,
+        "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it. The archive was not opened, so a licence file inside it is unread.",
+        "unlocks_when": [],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "eeg_positions",
+      "verdict": "SHIP",
+      "grant": "explicit",
+      "treat_as": null,
+      "terms_url": "https://github.com/sappelhoff/eeg_positions/blob/main/LICENSE",
+      "quoted_terms": [
+        "Copyright 2018 eeg_positions developers"
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification",
+        "ai-licence-recheck"
+      ],
+      "human_confirmed": false,
+      "access_agreement": null,
+      "clearance": {
+        "cleared": true,
+        "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it. The licence names software; the position files are the package's own computed output.",
+        "unlocks_when": [],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "hcp1065_tracts",
+      "verdict": "SHIP-SEPARATE-FILE",
+      "grant": "interpretation",
+      "treat_as": null,
+      "terms_url": "http://creativecommons.org/licenses/by-sa/4.0/",
+      "quoted_terms": [
+        "License: Creative Commons Attribution-ShareAlike 4.0 International License. The data are derived from imaging data of the Human Connectome Project. Using them requires additional acknowledgment."
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification",
+        "ai-licence-recheck"
+      ],
+      "human_confirmed": false,
+      "access_agreement": null,
+      "clearance": {
+        "cleared": false,
+        "reason": "The publisher's page states CC BY-SA 4.0 but also says the data \"requires additional acknowledgment\" and links the full Human Connectome Project terms. The text cannot settle whether those terms pass through.",
+        "unlocks_when": [
+          "The atlas author confirms in writing that CC BY-SA 4.0 alone governs redistribution.",
+          "The owner accepts the Human Connectome Project terms himself."
+        ],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "yeo2011_cbig",
+      "verdict": "SHIP",
+      "grant": "interpretation",
+      "treat_as": null,
+      "terms_url": "https://github.com/ThomasYeoLab/CBIG/blob/master/LICENSE.md",
+      "quoted_terms": [
+        "Copyright (c) 2016 Computational Brain Imaging Group (CBIG)",
+        "to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software"
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification",
+        "ai-licence-recheck"
+      ],
+      "human_confirmed": false,
+      "access_agreement": null,
+      "clearance": {
+        "cleared": false,
+        "reason": "The grant rests on reading an MIT software licence as covering data files.",
+        "unlocks_when": [
+          "The CBIG authors confirm in writing that the licence covers the label files.",
+          "Another network source is cleared on its words."
+        ],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "schaefer2018_cbig",
+      "verdict": "SHIP",
+      "grant": "interpretation",
+      "treat_as": null,
+      "terms_url": "https://github.com/ThomasYeoLab/CBIG/blob/master/LICENSE.md",
+      "quoted_terms": [
+        "See our LICENSE file for license rights and limitations (MIT)."
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification",
+        "ai-licence-recheck"
+      ],
+      "human_confirmed": false,
+      "access_agreement": null,
+      "clearance": {
+        "cleared": false,
+        "reason": "The grant rests on reading an MIT software licence as covering data files.",
+        "unlocks_when": [
+          "The CBIG authors confirm in writing that the licence covers the label files.",
+          "Another network source is cleared on its words."
+        ],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "nextbrain",
+      "verdict": "SHIP",
+      "grant": "explicit",
+      "treat_as": null,
+      "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "quoted_terms": [
+        "figshare API licence: name CC0",
+        "The raw data used in this Article (MRI, histology, segmentations and so on) can be downloaded from 10.5522/04/24243835."
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification",
+        "ai-licence-recheck"
+      ],
+      "human_confirmed": false,
+      "access_agreement": null,
+      "clearance": {
+        "cleared": true,
+        "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it. Nothing is built from it: its template space is not stated.",
+        "unlocks_when": [],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "massp_2_0",
+      "verdict": "SHIP",
+      "grant": "explicit",
+      "treat_as": null,
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "quoted_terms": [
+        "figshare API licence: CC BY 4.0"
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification",
+        "ai-licence-recheck"
+      ],
+      "human_confirmed": false,
+      "access_agreement": null,
+      "clearance": {
+        "cleared": false,
+        "reason": "The licence is CC BY 4.0 in words, but the publisher says the included priors \"are not probabilistic maps that should be used as atlases\".",
+        "unlocks_when": [
+          "The owner decides the priors may be shown despite the publisher's caveat, and the template space is read."
+        ],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "hcp_s1200_mmp1",
+      "verdict": "NEEDS-KEVIN",
+      "grant": "explicit",
+      "treat_as": null,
+      "terms_url": "https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms",
+      "quoted_terms": [
+        "I may redistribute original WU-Minn HCP Open Access data and any derived data as long as the data are redistributed under these same Data Use Terms.",
+        "You have not yet agreed to all data access terms. Please read through the terms ... and register agreement in order to access data."
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification"
+      ],
+      "human_confirmed": false,
+      "access_agreement": {
+        "name": "WU-Minn HCP Consortium Open Access Data Use Terms",
+        "terms_url": "https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms",
+        "text_sha256": null
+      },
+      "clearance": {
+        "cleared": false,
+        "reason": "An access agreement: login and agreement are required at the publisher, and the terms are silent on commercial use.",
+        "unlocks_when": [
+          "The owner accepts the data use terms himself and the acceptance is recorded in the review ledger.",
+          "Public redistribution under those terms is answered."
+        ],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "freesurfer_fsaverage",
+      "verdict": "NEEDS-KEVIN",
+      "grant": "explicit",
+      "treat_as": null,
+      "terms_url": "https://raw.githubusercontent.com/freesurfer/freesurfer/dev/LICENSE.txt",
+      "quoted_terms": [
+        "downloading, copying, modifying, displaying, distributing or use of any software and/or data from FreeSurfer ... constitutes acceptance of all of the terms and conditions of this Agreement",
+        "a royalty-free, non-exclusive license to use, reproduce, make derivative works of, display and distribute the Software",
+        "Any commercialization of the Software is at the sole risk of the party or parties engaged in such commercialization."
+      ],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification",
+        "ai-licence-recheck"
+      ],
+      "human_confirmed": false,
+      "access_agreement": {
+        "name": "FreeSurfer Software License Agreement v1.0",
+        "terms_url": "https://raw.githubusercontent.com/freesurfer/freesurfer/dev/LICENSE.txt",
+        "text_sha256": null
+      },
+      "clearance": {
+        "cleared": false,
+        "reason": "A licence that binds by use and carries obligations beyond attribution.",
+        "unlocks_when": [
+          "The owner accepts the FreeSurfer Software License Agreement himself and the acceptance is recorded in the review ledger."
+        ],
+        "drafted_by": "ai"
+      }
+    },
+    {
+      "source_id": "templateflow_xfm",
+      "verdict": "DO-NOT-SHIP",
+      "grant": "none",
+      "treat_as": null,
+      "terms_url": null,
+      "quoted_terms": [],
+      "read_on": "2026-10-09",
+      "verified_by": [
+        "ai-licence-verification"
+      ],
+      "human_confirmed": false,
+      "access_agreement": null,
+      "clearance": {
+        "cleared": false,
+        "reason": "No licence is stated for the transform files. They are used in the offline pipeline only and never redistributed.",
+        "unlocks_when": [
+          "The publisher states a licence that permits redistribution."
+        ],
+        "drafted_by": "ai"
+      }
+    }
+  ]
+}
