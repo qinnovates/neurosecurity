@@ -2429,6 +2429,27 @@
     "spinal_dorsal_horn": "cervical_cord",
     "PAG": "midbrain"
   },
+  "region_alias_relations": {
+    "_note": "Classifies the entries of region_aliases that are not plain synonyms. An alias absent from both lists names the same structure as its atlas region. whole_to_part: the alias names a structure larger than, or spanning beyond, the single atlas region it maps to, so a join through it attributes the whole structure to that one part. part_to_whole: the alias names a sub-structure of the atlas region it maps to, so a join through it attributes the sub-structure to the whole region. Scripts that join through region_aliases carry this classification on their output (see region_match in impact-chains.json).",
+    "whole_to_part": [
+      "cortex",
+      "brainstem",
+      "cerebellum",
+      "amygdala",
+      "basal_ganglia",
+      "spinal_cord",
+      "spinal_dorsal_horn"
+    ],
+    "part_to_whole": [
+      "nucleus_accumbens",
+      "lateral_hypothalamus",
+      "PVN_hypothalamus",
+      "SON_hypothalamus",
+      "tuberomammillary_nucleus",
+      "C1-C3_medullary_neurons",
+      "PAG"
+    ]
+  },
   "bci_devices": "SEE docs/bci-hardware-inventory.json \u2014 24 devices with full hardware specs. This field cross-references device IDs for the mapping table below.",
   "device_region_mappings": [
     {
