@@ -37,8 +37,9 @@ const TARGET_BANDS_LINE = /^(\s*"target_bands": )\[[^\]]*\](,?\s*)$/;
 export class MixedOriginBandError extends Error {
   constructor(pathwayId, bands) {
     super(
-      `Pathway "${pathwayId}" has origins in more than one band (${bands.join(', ')}), but origin_band holds one. `
-      + 'Split the pathway or change the origin_band schema; do not pick a band by hand.',
+      `Pathway "${pathwayId}" must have origins in exactly one band, but its origins resolve to ${bands.length} `
+      + `(${bands.join(', ') || 'no origin listed'}). Give it an origin, split it, or change the origin_band schema; `
+      + 'do not pick a band by hand.',
     );
     this.name = 'MixedOriginBandError';
   }

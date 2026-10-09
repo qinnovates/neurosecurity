@@ -42,6 +42,10 @@ describe('derivePathwayBands', () => {
     const pathway = { id: 'fixture', origin: ['pfc', 'pons'], targets: ['bla'] };
     expect(() => derivePathwayBands(pathway, resolver)).toThrow(MixedOriginBandError);
   });
+
+  it('refuses a pathway with no origin', () => {
+    expect(() => derivePathwayBands({ id: 'fixture', origin: [], targets: ['bla'] }, resolver)).toThrow(/no origin listed/);
+  });
 });
 
 describe('rewritePathwayBands', () => {
