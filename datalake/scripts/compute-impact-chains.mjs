@@ -190,7 +190,7 @@ function countDistinct(chains, field) {
   return new Set(chains.map((chain) => chain[field])).size;
 }
 
-/** Warning lines for the CLI: rows that join through a scope-changing alias, and bands the atlas lacks. */
+/** Warnings for the CLI report: rows that join through a scope-changing alias, and bands the atlas lacks. */
 export function listChainWarnings(chains, sources) {
   const warnings = [];
   const scopeChangingRows = chains.filter((chain) => SCOPE_CHANGING_MATCHES.includes(chain.region_match));
@@ -210,19 +210,18 @@ export function listChainWarnings(chains, sources) {
   return warnings;
 }
 
-function reportChains(chains, sources) {
-  process.stdout.write(
-    `Impact chains computed: ${chains.length} rows, ${countDistinct(chains, 'technique_id')} of `
+/** The lines the CLI prints after computing: one summary line, then one line per warning. */
+export function formatChainReport(chains, sources) {
+  const summary = `Impact chains computed: ${chains.length} rows, ${countDistinct(chains, 'technique_id')} of `
     + `${sources.registrar.techniques.length} techniques, ${countDistinct(chains, 'region_id')} of `
-    + `${sources.atlas.brain_regions.length} regions\n`,
-  );
-  for (const warning of listChainWarnings(chains, sources)) process.stdout.write(`Warning: ${warning}\n`);
+    + `${sources.atlas.brain_regions.length} regions`;
+  return [summary, ...listChainWarnings(chains, sources).map((warning) => `Warning: ${warning}`)];
 }
 
 function runCli() {
   const sources = loadChainSources();
   const chains = computeImpactChains(sources);
-  reportChains(chains, sources);
+  process.stdout.write(`${formatChainReport(chains, sources).join('\n')}\n`);
 
   if (process.argv.includes('--dry-run')) {
     process.stdout.write('Dry run: no file written.\n');

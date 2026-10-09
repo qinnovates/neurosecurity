@@ -4,6 +4,7 @@ import {
   IMPACT_CHAINS_PATH,
   computeImpactChains,
   findTechniquesWithUnknownBands,
+  formatChainReport,
   indexPathwaysByRegion,
   listChainWarnings,
   loadChainSources,
@@ -140,6 +141,14 @@ describe('chain warnings', () => {
     expect(warnings).toHaveLength(2);
     expect(warnings[0]).toMatch(/^3 rows join through an alias that changes anatomical scope \(pathways: fixture_limbic\)/);
     expect(warnings[1]).toMatch(/^QIF-T9002 names band\(s\) S2/);
+  });
+
+  it('prints a summary line followed by every warning in the CLI report', () => {
+    const chains = computeImpactChains(sources);
+    const [summary, ...warningLines] = formatChainReport(chains, sources);
+    expect(summary).toBe('Impact chains computed: 9 rows, 1 of 2 techniques, 3 of 4 regions');
+    expect(warningLines).toEqual(listChainWarnings(chains, sources).map((warning) => `Warning: ${warning}`));
+    expect(warningLines).toHaveLength(2);
   });
 
   it('stays silent when every band is known and every join keeps its scope', () => {
