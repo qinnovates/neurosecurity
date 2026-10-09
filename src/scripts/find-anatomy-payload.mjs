@@ -19,20 +19,28 @@ const DEFAULT_BUILT_PAGES = ['dist/atlas/model/index.html'];
 
 /**
  * Strings that appear in the anatomy index or its evidence file and nowhere a
- * page has reason to hold them: field names of the index, the data file
- * prefix, and the opening of the index's status sentence. A test asserts each
- * one occurs in the real built files, so the list cannot go stale.
+ * page that must not carry them has reason to hold them. The likely accident is
+ * a partial projection (one section of the index, or a view model with renamed
+ * keys), so the list has three kinds of marker, and every section of the index
+ * carries at least one of each of the first two:
+ *   - field names that any slice of a section keeps;
+ *   - values that survive a renaming of every key;
+ *   - a key-and-value pair, which holds quote characters and so is only found
+ *     once the page's quote encodings are decoded.
+ * A test asserts each marker occurs in a built index or evidence file, and
+ * that each named projection is found, so the list cannot go stale.
  */
 export const ANATOMY_PAYLOAD_MARKERS = Object.freeze([
-  'stale_evidence_keys',
-  'declared_children',
-  'clearance_reason',
-  'technique_rationales',
-  'qif-anatomy-',
-  'AI-drafted and unreviewed unless an item says otherwise',
+  'review_state', 'check_status', 'extent_match', 'resolved_region_id', 'claim_basis', 'stated_license_id', 'clearance_reason',
+  'quoted_terms', 'unlocks_when', 'declared_children', 'stale_evidence_keys', 'technique_rationales', 'asset_ids',
+  'position_check', 'visual_check', 'modification_note',
+  'ai_drafted_unreviewed', 'AI-drafted, unreviewed', 'AI-drafted and unreviewed unless an item says otherwise', 'not independently checked',
+  'not_drafted', 'not_mapped', 'owner_contains_row_subject', 'row_subject_contains_owner', 'route_not_settled',
+  'No asset has been built for this layer yet', 'qif-anatomy-',
+  '"state":"ai_drafted_unreviewed"',
 ]);
 
-/** HTML attribute and script encodings a serialised payload can arrive in. */
+/** The quote and ampersand encodings a serialised payload can arrive in: HTML entities, and escapes inside a script string. */
 function decodeMarkup(html) {
   return html
     .replaceAll('&quot;', '"').replaceAll('&#34;', '"').replaceAll('&#x22;', '"')

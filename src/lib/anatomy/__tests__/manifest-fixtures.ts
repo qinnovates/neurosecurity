@@ -1,10 +1,14 @@
 /** A valid one-asset manifest for parser tests. Every number is invented. */
 
 import type { AssetManifest, ManifestAsset, ManifestContext, ManifestNode } from '../manifest-types';
-import { FIXTURE_ATLAS_ID, FIXTURE_FILE_NAME, FIXTURE_SHA256, FIXTURE_SPACE } from './anatomy-fixtures';
+import { FIXTURE_ATLAS_ID, FIXTURE_FILE_NAME, FIXTURE_SHA256, FIXTURE_SPACE, OTHER_SHA256 } from './anatomy-fixtures';
 
 const HASH_PREFIX_LENGTH = 12;
 export const FIXTURE_ASSET_ID = 'deep-fixture';
+export const FIXTURE_FETCH_KEY = `${FIXTURE_ATLAS_ID}/${FIXTURE_FILE_NAME}`;
+export const PIPELINE_ONLY_SOURCE_ID = 'fixture_template';
+export const UNCLEARED_SOURCE_ID = 'fixture_uncleared';
+export const TEMPLATE_FILE_NAME = 'template.nii.gz';
 export const FIXTURE_ASSET_PATH = `open/${FIXTURE_ASSET_ID}.${FIXTURE_SHA256.slice(0, HASH_PREFIX_LENGTH)}.glb`;
 
 export function buildNode(overrides: Partial<ManifestNode> = {}): ManifestNode {
@@ -42,7 +46,7 @@ export function buildAsset(overrides: Partial<ManifestAsset> = {}): ManifestAsse
     libraries: { 'scikit-image': '0.26.0' },
     nodes: [buildNode()],
     checks: [{ id: 'K6', status: 'not_run', reason: 'side assigned by construction', measured: null, threshold: null }],
-    stage_fingerprints: { fetch: { [FIXTURE_FILE_NAME]: FIXTURE_SHA256 }, register: null, resample: FIXTURE_SHA256, mesh: FIXTURE_SHA256, write: FIXTURE_SHA256 },
+    stage_fingerprints: { fetch: { [FIXTURE_FETCH_KEY]: FIXTURE_SHA256 }, register: null, resample: FIXTURE_SHA256, mesh: FIXTURE_SHA256, write: FIXTURE_SHA256 },
     position_check: 'not independently checked',
     modification_note: 'Thresholded at 0.5, meshed and smoothed. Fixture text.',
     ...overrides,
@@ -64,10 +68,14 @@ export function buildManifest(assets: ManifestAsset[] = [buildAsset()]): AssetMa
 export function buildManifestContext(overrides: Partial<ManifestContext> = {}): ManifestContext {
   return {
     declaredSpace: FIXTURE_SPACE,
-    statedLicenceBySource: new Map([[FIXTURE_ATLAS_ID, 'cc-by-4.0']]),
+    statedLicenceBySource: new Map([[FIXTURE_ATLAS_ID, 'cc-by-4.0'], [PIPELINE_ONLY_SOURCE_ID, 'mni-icbm-notice'], [UNCLEARED_SOURCE_ID, 'cc-by-sa-4.0']]),
     effectiveLicenceBySource: new Map([[FIXTURE_ATLAS_ID, 'cc-by-4.0']]),
     buildableSourceIds: new Set([FIXTURE_ATLAS_ID]),
-    filePinsBySource: new Map([[FIXTURE_ATLAS_ID, new Map([[FIXTURE_FILE_NAME, FIXTURE_SHA256]])]]),
+    pipelineUsableSourceIds: new Set([FIXTURE_ATLAS_ID, PIPELINE_ONLY_SOURCE_ID]),
+    filePinsBySource: new Map([
+      [FIXTURE_ATLAS_ID, new Map([[FIXTURE_FILE_NAME, FIXTURE_SHA256]])],
+      [PIPELINE_ONLY_SOURCE_ID, new Map([[TEMPLATE_FILE_NAME, FIXTURE_SHA256], [FIXTURE_FILE_NAME, OTHER_SHA256]])],
+    ]),
     ...overrides,
   };
 }

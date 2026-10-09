@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { LICENCE_FACTS, LICENCE_STRICTNESS, assessBuildability, effectiveLicenceId, isStricter } from '../licence-rules';
+import { LICENCE_FACTS, LICENCE_STRICTNESS, assessBuildability, effectiveLicenceId, isStricter, mayPipelineUse } from '../licence-rules';
 import { GRANTS, VERDICTS, type LicenceId } from '../source-types';
 import { LICENCE_IDS } from '../source-types';
 import { FIXTURE_SHA256, buildSource, buildVerdict } from './anatomy-fixtures';
@@ -105,6 +105,33 @@ describe('assessBuildability', () => {
       }
     expect(checked).toBeGreaterThan(50000);
     expect(wrong).toEqual([]);
+  });
+
+  describe('mayPipelineUse', () => {
+    const pipelineOnly = buildSource({ redistribute: false, route: { kind: 'not_applicable', status: 'settled', note: 'n' } });
+    const agreement = { name: 'Fixture terms', terms_url: 'https://example.org/terms', text_sha256: FIXTURE_SHA256 };
+
+    it('lets the pipeline compute with a buildable source, and with a pipeline-only source whose terms were read and permit use', () => {
+      expect(mayPipelineUse(buildSource(), buildVerdict(), NOT_ACCEPTED)).toBe(true);
+      expect(mayPipelineUse(pipelineOnly, buildVerdict(), NOT_ACCEPTED)).toBe(true);
+      expect(mayPipelineUse(buildSource({ redistribute: false, route: { kind: 'unknown', status: 'open', note: 'n' } }), buildVerdict(), NOT_ACCEPTED)).toBe(true);
+    });
+
+    it.each([
+      ['an uncleared source', buildVerdict({ clearance: { cleared: false, reason: 'r', unlocks_when: ['u'], drafted_by: 'ai' } })],
+      ['a do_not_ship verdict', buildVerdict({ verdict: 'do_not_ship' })],
+      ['a needs_owner verdict', buildVerdict({ verdict: 'needs_owner' })],
+      ['a grant that rests on interpretation', buildVerdict({ grant: 'interpretation' })],
+      ['an unaccepted agreement', buildVerdict({ access_agreement: agreement })],
+    ])('refuses a pipeline-only source with %s', (_label, verdict) => {
+      expect(mayPipelineUse(pipelineOnly, verdict, NOT_ACCEPTED)).toBe(false);
+    });
+
+    it('refuses a pipeline-only source under a licence that grants no commercial use, and a shippable source that is not buildable', () => {
+      expect(mayPipelineUse(buildSource({ redistribute: false, license_id: 'none-stated' }), buildVerdict(), NOT_ACCEPTED)).toBe(false);
+      expect(mayPipelineUse(buildSource({ route: { kind: 'unknown', status: 'open', note: 'n' } }), buildVerdict(), NOT_ACCEPTED)).toBe(false);
+      expect(mayPipelineUse(pipelineOnly, buildVerdict({ access_agreement: agreement }), { agreementAccepted: true })).toBe(true);
+    });
   });
 
   it('lists every blocker, not only the first', () => {
