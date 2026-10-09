@@ -1,0 +1,114 @@
+import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { ANATOMY_EVIDENCE_PATH } from '@/lib/anatomy/anatomy-index-types';
+import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
+import { announceLens, announceSelection } from '@/lib/atlas-explorer/announcements';
+import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
+import { LENS_LABELS, toColourMode, type LensKind } from '@/lib/atlas-explorer/lens-state';
+import { buildDeviceRail } from '@/lib/atlas-explorer/rail-stages';
+import { buildRegionDetail } from '@/lib/atlas-explorer/region-detail';
+import { buildBandGroups, filterBandGroups, tallyLens } from '@/lib/atlas-explorer/region-rows';
+import { INITIAL_EXPLORER_STATE, explorerReducer } from './atlas-state';
+import { loadAnatomyEvidence, loadRegionEvidence } from './explorer-data';
+import H01Card from './H01Card';
+import LayerPanel from './LayerPanel';
+import LensPanel from './LensPanel';
+import LimitsPanel from './LimitsPanel';
+import NetworkNames from './NetworkNames';
+import RegionInspector from './RegionInspector';
+import SignalChainRail from './SignalChainRail';
+import StructureList from './StructureList';
+import { useLoaded } from './use-loaded';
+
+interface Props {
+  model: ExplorerModel;
+}
+
+const TECHNIQUE_LENS = 'technique';
+
+/** Says a change out loud once it has happened. The first render announces nothing. */
+function useAnnouncement(message: string): string {
+  const [announcement, setAnnouncement] = useState('');
+  const isFirst = useRef(true);
+  useEffect(() => {
+    if (isFirst.current) {
+      isFirst.current = false;
+      return;
+    }
+    setAnnouncement(message);
+  }, [message]);
+  return announcement;
+}
+
+/**
+ * The explorer once its data has loaded: layers, lens, the region list and the
+ * inspector, then the device stages, network names and the notes on limits.
+ * Tab order follows that reading order. One reducer holds the state, and the
+ * selection survives every lens, layer and filter change.
+ */
+export default function ExplorerWorkspace({ model }: Props) {
+  const [state, dispatch] = useReducer(explorerReducer, INITIAL_EXPLORER_STATE);
+  const inspectorHeadingRef = useRef<HTMLHeadingElement>(null);
+  const mainRef = useRef<HTMLDivElement>(null);
+  const selectedRegionId = state.selection?.kind === 'region' ? state.selection.id : null;
+
+  const mode = useMemo(() => toColourMode(state.lens), [state.lens]);
+  const allGroups = useMemo(() => buildBandGroups(model, mode), [model, mode]);
+  const groups = useMemo(() => filterBandGroups(allGroups, state.filter), [allGroups, state.filter]);
+  const tally = useMemo(() => tallyLens(allGroups), [allGroups]);
+  const detail = useMemo(() => (selectedRegionId === null ? null : buildRegionDetail(model, selectedRegionId)), [model, selectedRegionId]);
+  const rail = useMemo(() => buildDeviceRail(model, state.railIncludesMixed), [model, state.railIncludesMixed]);
+
+  const loadQuotes = useCallback((signal: AbortSignal) => loadAnatomyEvidence(model, signal), [model]);
+  const loadStatements = useCallback((signal: AbortSignal) => loadRegionEvidence(model, signal), [model]);
+  const anatomyEvidence = useLoaded(loadQuotes, selectedRegionId !== null, ANATOMY_EVIDENCE_PATH);
+  const regionEvidence = useLoaded(loadStatements, selectedRegionId !== null, REGION_EVIDENCE_PATH);
+
+  const selectionAnnouncement = useAnnouncement(selectedRegionId === null ? '' : announceSelection(model, selectedRegionId));
+  const lensAnnouncement = useAnnouncement(announceLens(model, state.lens, tally));
+
+  const selectRegion = (regionId: string, moveFocus: boolean): void => {
+    dispatch({ type: 'target_selected', target: { kind: 'region', id: regionId } });
+    // The heading exists whether or not a region was selected before, so focus can move in the same turn.
+    if (moveFocus) requestAnimationFrame(() => inspectorHeadingRef.current?.focus());
+  };
+  const chooseSubject = (kind: LensKind, subjectId: string): void => dispatch({ type: 'lens_subject_chosen', kind, subjectId });
+  const focusSelectedRow = (): void => {
+    const rows = [...(mainRef.current?.querySelectorAll<HTMLButtonElement>('[data-region-id]') ?? [])];
+    (rows.find((row) => row.dataset.regionId === selectedRegionId) ?? rows[0])?.focus();
+  };
+
+  return (
+    <div className="atlas-root" data-lens={state.lens.kind}>
+      <LayerPanel layers={model.index.layers} requested={state.layers} onToggle={(layerId) => dispatch({ type: 'layer_toggled', layerId })} />
+      <LensPanel
+        model={model} lens={state.lens} tally={tally} onChooseKind={(kind) => dispatch({ type: 'lens_kind_chosen', kind })}
+        onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, true)}
+      />
+      <div className="atlas-main" ref={mainRef}>
+        <StructureList
+          groups={groups} regionCount={model.regions.length} filter={state.filter} lensLabel={LENS_LABELS[state.lens.kind]} selectedRegionId={selectedRegionId}
+          onFilter={(filter) => dispatch({ type: 'filter_changed', filter })} onClearFilter={() => dispatch({ type: 'filter_cleared' })} onSelect={selectRegion}
+        />
+        <RegionInspector
+          detail={detail} headingRef={inspectorHeadingRef} anatomyEvidence={anatomyEvidence.state} regionEvidence={regionEvidence.state}
+          onRetryAnatomyEvidence={anatomyEvidence.retry} onRetryRegionEvidence={regionEvidence.retry}
+          onChooseTechnique={(techniqueId) => chooseSubject(TECHNIQUE_LENS, techniqueId)} onChooseDevice={(deviceId) => chooseSubject('stated_targets', deviceId)}
+          onBackToList={focusSelectedRow}
+        />
+      </div>
+      <SignalChainRail
+        rail={rail} includesMixed={state.railIncludesMixed} activeStageId={state.railStageId}
+        chosenTechniqueId={state.lens.kind === 'technique' ? state.lens.techniqueId : null}
+        onToggleStage={(stageId) => dispatch({ type: 'rail_stage_toggled', stageId })} onToggleMixed={() => dispatch({ type: 'rail_mixed_toggled' })}
+        onChooseTechnique={(techniqueId) => chooseSubject(TECHNIQUE_LENS, techniqueId)}
+      />
+      <div className="atlas-footer-panels">
+        <NetworkNames networks={model.networks} />
+        <H01Card />
+        <LimitsPanel model={model} />
+      </div>
+      <p className="sr-only" role="status" aria-live="polite" data-announce="selection">{selectionAnnouncement}</p>
+      <p className="sr-only" role="status" aria-live="polite" data-announce="lens">{lensAnnouncement}</p>
+    </div>
+  );
+}

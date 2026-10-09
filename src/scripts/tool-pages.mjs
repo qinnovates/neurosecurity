@@ -33,6 +33,19 @@ export const LAB_DOCUMENT_BASELINE_GZIP_BYTES = 40_724;
 export const DOCUMENT_HEADROOM_GZIP_BYTES = 16_384;
 
 /**
+ * The atlas explorer page (/atlas/anatomy/), measured the same way on this branch's build.
+ * Code: the page's stylesheets and the explorer island with the parsers it runs on what it fetches.
+ */
+export const ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES = 0;
+
+/**
+ * Document: the explorer's HTML carries no data at all (it fetches everything when it starts),
+ * so it is only the layout. The headroom is small on purpose: growth here means something was inlined.
+ */
+export const ATLAS_EXPLORER_DOCUMENT_BASELINE_GZIP_BYTES = 0;
+export const ATLAS_EXPLORER_DOCUMENT_HEADROOM_GZIP_BYTES = 1_024;
+
+/**
  * @typedef {object} ToolPage
  * @property {string} urlPath site path of the page, ending in "/"
  * @property {string} islandEntryName chunk name of the island the page must hydrate; a page without it measured nothing
@@ -67,6 +80,16 @@ export const TOOL_PAGES = [
     onDemandLazyEntryNames: ['ThreatModelStudio', 'MonitorMode', 'QueryMode'],
     codeGzipBudgetBytes: LAB_CODE_BASELINE_GZIP_BYTES + CODE_HEADROOM_GZIP_BYTES,
     documentGzipBudgetBytes: LAB_DOCUMENT_BASELINE_GZIP_BYTES + DOCUMENT_HEADROOM_GZIP_BYTES,
+  },
+  {
+    urlPath: '/atlas/anatomy/',
+    islandEntryName: 'AtlasExplorer',
+    // The explorer has no `import()`: its data arrives by fetch, and the 3D view is not part of it yet.
+    onMountLazyEntryNames: [],
+    interactionGatedEntryNames: [],
+    onDemandLazyEntryNames: [],
+    codeGzipBudgetBytes: ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES + CODE_HEADROOM_GZIP_BYTES,
+    documentGzipBudgetBytes: ATLAS_EXPLORER_DOCUMENT_BASELINE_GZIP_BYTES + ATLAS_EXPLORER_DOCUMENT_HEADROOM_GZIP_BYTES,
   },
 ];
 

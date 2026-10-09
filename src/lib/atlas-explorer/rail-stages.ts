@@ -5,8 +5,9 @@
  * device, so the rail lights no region.
  */
 
+import type { IndexReviewState } from '@/lib/anatomy/anatomy-index-types';
 import { DEVICE_STAGE_BAND_IDS, type CatalogBand, type DeviceStageTechnique } from './explorer-catalog';
-import { isNeuralBand, type ExplorerModel } from './explorer-model';
+import { isNeuralBand, weakestReviewState, type ExplorerModel } from './explorer-model';
 
 export interface RailTechnique {
   id: string;
@@ -16,6 +17,8 @@ export interface RailTechnique {
   neuralBandIds: string[];
   /** AI-drafted region links the index holds for it. Zero for a device-only technique. */
   draftedLinkCount: number;
+  /** The review state of those links, for the mark beside the count. Null when there are none. */
+  reviewState: IndexReviewState | null;
 }
 
 export interface RailStage {
@@ -31,12 +34,14 @@ export interface DeviceRail {
 }
 
 function toRailTechnique(model: ExplorerModel, technique: DeviceStageTechnique): RailTechnique {
+  const links = model.techniquesById.get(technique.id)?.links ?? [];
   return {
     id: technique.id,
     name: technique.name,
     severity: technique.severity,
     neuralBandIds: technique.band_ids.filter(isNeuralBand),
-    draftedLinkCount: model.techniquesById.get(technique.id)?.links.length ?? 0,
+    draftedLinkCount: links.length,
+    reviewState: weakestReviewState(links.map((link) => link.review_state)),
   };
 }
 
