@@ -61,6 +61,7 @@ const PARENTHESISED_GLOSS = /^(.*?)\s*\(([^)]*)\)\s*$/;
 const REGEX_SPECIAL_CHARACTER = /[.*+?^${}()|[\]\\]/g;
 const WORD_CHARACTER = 'A-Za-z0-9';
 const SEPARATOR_PATTERN = '[\\s_-]+';
+const SEPARATOR_SPLIT = /[\s_-]+/;
 const POINTER_SEPARATOR = '/';
 const MINIMUM_TERM_LENGTH = 2;
 
@@ -125,12 +126,15 @@ function listRegionTerms(region) {
   return terms.filter((term) => typeof term.text === 'string').map((term) => ({ ...term, region_id: region.id }));
 }
 
-function buildTermPattern(text, kind) {
-  const tokens = normaliseRegionTerm(text).split('_').filter((token) => token.length > 0);
-  const writtenTokens = CASE_SENSITIVE_KINDS.includes(kind) ? text.trim().split(/[\s_-]+/) : tokens;
-  const body = writtenTokens.map((token) => token.replace(REGEX_SPECIAL_CHARACTER, '\\$&')).join(SEPARATOR_PATTERN);
-  const flags = CASE_SENSITIVE_KINDS.includes(kind) ? 'g' : 'gi';
-  return new RegExp(`(?<![${WORD_CHARACTER}])${body}s?(?![${WORD_CHARACTER}])`, flags);
+/**
+ * A pattern for every place `text` is written, whatever its letter case and
+ * whichever of space, hyphen or underscore joins its words, with or without a
+ * plural "s", and never as part of a longer word.
+ */
+export function buildMentionPattern(text, isCaseSensitive = false) {
+  const tokens = (isCaseSensitive ? text.trim() : normaliseRegionTerm(text)).split(SEPARATOR_SPLIT).filter((token) => token.length > 0);
+  const body = tokens.map((token) => token.replace(REGEX_SPECIAL_CHARACTER, '\\$&')).join(SEPARATOR_PATTERN);
+  return new RegExp(`(?<![${WORD_CHARACTER}])${body}s?(?![${WORD_CHARACTER}])`, isCaseSensitive ? 'g' : 'gi');
 }
 
 /**
@@ -148,7 +152,7 @@ export function buildRegionLexicon(atlas) {
       const key = `${term.kind}|${term.region_id}|${normaliseRegionTerm(term.text)}`;
       return seen.has(key) ? false : Boolean(seen.add(key));
     })
-    .map((term) => ({ ...term, pattern: buildTermPattern(term.text, term.kind) }));
+    .map((term) => ({ ...term, pattern: buildMentionPattern(term.text, CASE_SENSITIVE_KINDS.includes(term.kind)) }));
 }
 
 function findTermInField(term, field) {
