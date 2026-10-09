@@ -29,6 +29,9 @@ When a file changes, these downstream files must be updated. Run `npm run health
 | datalake/impact-chains.json | `npm run compute:chains` | Script (`npm test` fails if stale) |
 | datalake/qtara/src/qtara/data/ | Copy registrar to SDK data dir | Manual |
 | src/lib/threat-data.ts | Verify ThreatVector interface matches | Manual |
+| datalake/qif-technique-regions.json | When a technique's text or band tags change: re-read it, edit `datalake/scripts/technique-region-curation.json`, run `node datalake/scripts/draft-technique-regions.mjs`. Never hand-edit the data file | Script (`npm test` fails if stale, if a neural-band technique has no entry, or if a quote is gone) |
+
+Region links are AI-drafted and unreviewed. The registrar, the public API, the Python SDK and the STIX export carry no region links until a link has an owner's review in the ledger.
 
 ## When datalake/qif-brain-bci-atlas.json or datalake/qif-neural-pathways.json changes
 | Update | How | Automated? |

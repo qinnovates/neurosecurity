@@ -95,11 +95,11 @@ describe('anatomy index built from the seed files (guards)', () => {
     expect(index.structures).toHaveLength(EXPECTED_STRUCTURE_COUNT);
   });
 
-  it('lists every technique with a neural band, with no region link drafted yet and nothing lit', () => {
+  it('lists every technique with a neural band, each one drafted (the content is checked in technique-regions-content.test.ts)', () => {
     const neuralTechniques = data.engineData.techniques.filter((technique) => technique.bandIds.some((bandId) => bandId.startsWith('N')));
     expect(neuralTechniques.length).toBeGreaterThan(0);
     expect(index.techniques.map((technique) => technique.id)).toEqual(neuralTechniques.map((technique) => technique.id));
-    expect(index.techniques.filter((technique) => technique.scope !== 'not_drafted' || technique.links.some((link) => link.lit))).toEqual([]);
+    expect(index.techniques.filter((technique) => technique.scope === 'not_drafted')).toEqual([]);
   });
 
   it('marks every layer unavailable and says why', () => {
