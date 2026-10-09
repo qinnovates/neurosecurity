@@ -2,135 +2,243 @@
 /**
  * Precompute impact chains from source JSON files.
  *
- * Eliminates the O(n⁴) nested-loop computation from kql-tables.ts build time.
- * The output (shared/impact-chains.json) is imported directly as a flat table.
+ * One row per technique -> band -> brain region -> pathway -> condition. The
+ * output (datalake/impact-chains.json) is imported as a flat table by
+ * src/lib/kql-tables.ts and exported to Parquet, so the nested join never runs
+ * at site build time.
  *
  * Source data:
- *   - qtara-registrar.json    → techniques (with band_ids, severity, niss)
- *   - qif-brain-bci-atlas.json → qif_bands, brain_regions
- *   - qif-neural-pathways.json → pathways (with origin, targets, dsm_conditions)
- *   - qif-dsm-mappings.json   → diagnostic_clusters
- *   - qif-neurological-mappings.json → conditions
+ *   - qtara-registrar.json           -> techniques (band_ids, severity, niss)
+ *   - qif-brain-bci-atlas.json       -> qif_bands, brain_regions, region_aliases
+ *   - qif-neural-pathways.json       -> pathways (origin, targets, dsm_conditions)
+ *   - qif-dsm-mappings.json          -> diagnostic_clusters
+ *   - qif-neurological-mappings.json -> conditions
+ *
+ * Pathways name regions by long ids and the atlas by short ones; the join goes
+ * through region-resolver.mjs. Each row's `region_match` says how the pathway's
+ * region id was joined: `id` (same id), `synonym` (alias for the same
+ * structure), `part_to_whole` or `whole_to_part` (alias that changes anatomical
+ * scope; see region_alias_relations in the atlas). It describes the join, not
+ * the anatomy: a pathway file that writes `pons` for a nucleus inside the pons
+ * still joins by `id`.
+ *
+ * The join is at band level: a technique gets every region in each of its
+ * bands, and every pathway through those regions. Rows show which regions,
+ * pathways and condition categories share a band with a technique, not
+ * technique-specific anatomy.
+ *
+ * The file is written one row per line, so a regeneration shows up as changed
+ * rows instead of a reflowed file. Two branches that each change the rows still
+ * conflict; regenerate after merging.
  *
  * Usage:
- *   node shared/scripts/compute-impact-chains.mjs
- *   node shared/scripts/compute-impact-chains.mjs --dry-run   # print stats only
+ *   npm run compute:chains                 # write datalake/impact-chains.json
+ *   npm run compute:chains -- --dry-run    # print stats only
  */
 
-import { readFileSync, writeFileSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { readFileSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
+import { DATALAKE_DIR, runAsCli } from './datalake-cli.mjs';
+import {
+  REGION_MATCH_PRECEDENCE,
+  SCOPE_CHANGING_MATCHES,
+  createRegionResolver,
+  listPathwayEndpoints,
+} from './region-resolver.mjs';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const sharedDir = join(__dirname, '..');
+export const IMPACT_CHAINS_PATH = path.join(DATALAKE_DIR, 'impact-chains.json');
 
-function loadJSON(filename) {
-  return JSON.parse(readFileSync(join(sharedDir, filename), 'utf-8'));
+const SOURCE_FILES = Object.freeze({
+  registrar: 'qtara-registrar.json',
+  atlas: 'qif-brain-bci-atlas.json',
+  pathways: 'qif-neural-pathways.json',
+  dsm: 'qif-dsm-mappings.json',
+  neuro: 'qif-neurological-mappings.json',
+});
+
+const BYTES_PER_KILOBYTE = 1024;
+const DRY_RUN_SAMPLE_SIZE = 3;
+
+export function loadChainSources() {
+  return Object.fromEntries(
+    Object.entries(SOURCE_FILES).map(([key, filename]) => [
+      key,
+      JSON.parse(readFileSync(path.join(DATALAKE_DIR, filename), 'utf-8')),
+    ]),
+  );
 }
 
-// Load source data
-const registrar = loadJSON('qtara-registrar.json');
-const atlas = loadJSON('qif-brain-bci-atlas.json');
-const pathwaysData = loadJSON('qif-neural-pathways.json');
-const dsm = loadJSON('qif-dsm-mappings.json');
-const neuro = loadJSON('qif-neurological-mappings.json');
-
-const techniques = registrar.techniques || [];
-const bands = atlas.qif_bands || [];
-const regions = atlas.brain_regions || [];
-const allPathways = pathwaysData.pathways || [];
-const dsmClusters = dsm.diagnostic_clusters || {};
-
-// Build band lookup for O(1) access
-const bandMap = new Map(bands.map(b => [b.id, b]));
-
-// Build region-by-band lookup for O(1) access
-const regionsByBand = new Map();
-for (const r of regions) {
-  const key = r.qif_band;
-  if (!regionsByBand.has(key)) regionsByBand.set(key, []);
-  regionsByBand.get(key).push(r);
-}
-
-// Build pathway-by-region lookup for O(1) access
-const pathwaysByRegion = new Map();
-for (const pw of allPathways) {
-  const touchedRegions = new Set([...(pw.origin || []), ...(pw.targets || [])]);
-  for (const rid of touchedRegions) {
-    if (!pathwaysByRegion.has(rid)) pathwaysByRegion.set(rid, []);
-    pathwaysByRegion.get(rid).push(pw);
+function groupRegionsByBand(regions) {
+  const regionsByBand = new Map();
+  for (const region of regions) {
+    if (!regionsByBand.has(region.qif_band)) regionsByBand.set(region.qif_band, []);
+    regionsByBand.get(region.qif_band).push(region);
   }
+  return regionsByBand;
 }
 
-// Build DSM condition lookup for O(1) access
-const dsmLookup = new Map();
-for (const [cId, cluster] of Object.entries(dsmClusters)) {
-  for (const cond of cluster.conditions || []) {
-    dsmLookup.set(cond.code, { name: cond.name, cluster: cluster.label || cId });
+function isMoreExact(candidateMatch, currentMatch) {
+  return REGION_MATCH_PRECEDENCE.indexOf(candidateMatch) < REGION_MATCH_PRECEDENCE.indexOf(currentMatch);
+}
+
+/** The regions one pathway touches, each with the most exact match that reaches it. */
+function matchPathwayRegions(pathway, resolveRegion) {
+  const matchByRegionId = new Map();
+  for (const endpointId of listPathwayEndpoints(pathway)) {
+    const { region, match } = resolveRegion(endpointId, `pathway "${pathway.id}"`);
+    const currentMatch = matchByRegionId.get(region.id);
+    if (currentMatch === undefined || isMoreExact(match, currentMatch)) matchByRegionId.set(region.id, match);
   }
+  return matchByRegionId;
 }
 
-// Build neurological condition lookup
-const neuroLookup = new Map();
-for (const nc of neuro.conditions || []) {
-  neuroLookup.set(nc.code, { name: nc.name, cluster: `Neurological/${nc.category}` });
+/** Atlas region id -> [{ pathway, match }], in pathway file order. */
+export function indexPathwaysByRegion(pathways, atlas) {
+  const resolveRegion = createRegionResolver(atlas);
+  const pathwaysByRegion = new Map();
+  for (const pathway of pathways) {
+    for (const [regionId, match] of matchPathwayRegions(pathway, resolveRegion)) {
+      if (!pathwaysByRegion.has(regionId)) pathwaysByRegion.set(regionId, []);
+      pathwaysByRegion.get(regionId).push({ pathway, match });
+    }
+  }
+  return pathwaysByRegion;
 }
 
-// Compute impact chains with optimized lookups
-const chains = [];
+function indexConditions(dsm, neuro) {
+  const conditionByCode = new Map();
+  for (const condition of neuro.conditions ?? []) {
+    conditionByCode.set(condition.code, { name: condition.name, cluster: `Neurological/${condition.category}` });
+  }
+  for (const [clusterId, cluster] of Object.entries(dsm.diagnostic_clusters ?? {})) {
+    for (const condition of cluster.conditions ?? []) {
+      conditionByCode.set(condition.code, { name: condition.name, cluster: cluster.label || clusterId });
+    }
+  }
+  return conditionByCode;
+}
 
-for (const tech of techniques) {
-  for (const bandId of tech.band_ids || []) {
-    const band = bandMap.get(bandId);
-    const bandRegions = regionsByBand.get(bandId) || [];
+function buildChainRow({ technique, bandId, band, region, pathway, match, conditionCode, condition }) {
+  return {
+    technique_id: technique.id,
+    technique_name: technique.attack || technique.name,
+    severity: technique.severity,
+    niss_score: technique.niss?.score || 0,
+    band_id: bandId,
+    band_name: band?.name || bandId,
+    region_id: region.id,
+    region_name: region.name,
+    region_match: match,
+    pathway_id: pathway.id,
+    pathway_name: pathway.name,
+    neurotransmitter: pathway.neurotransmitter || '',
+    dsm_code: conditionCode,
+    dsm_name: condition?.name || conditionCode,
+    dsm_cluster: condition?.cluster || '',
+  };
+}
 
-    for (const region of bandRegions) {
-      const regionPws = pathwaysByRegion.get(region.id) || [];
-
-      for (const pw of regionPws) {
-        for (const condCode of pw.dsm_conditions || []) {
-          const dsmMatch = dsmLookup.get(condCode);
-          const neuroMatch = !dsmMatch ? neuroLookup.get(condCode) : null;
-
-          chains.push({
-            technique_id: tech.id,
-            technique_name: tech.attack || tech.name,
-            severity: tech.severity,
-            niss_score: tech.niss?.score || 0,
-            band_id: bandId,
-            band_name: band?.name || bandId,
-            region_id: region.id,
-            region_name: region.name,
-            pathway_id: pw.id,
-            pathway_name: pw.name,
-            neurotransmitter: pw.neurotransmitter || '',
-            dsm_code: condCode,
-            dsm_name: dsmMatch?.name || neuroMatch?.name || condCode,
-            dsm_cluster: dsmMatch?.cluster || neuroMatch?.cluster || '',
-          });
-        }
+/** One technique's band joined to every region in it, pathway through it and condition on that pathway. */
+function buildBandRows(technique, bandId, indexes) {
+  const band = indexes.bandById.get(bandId);
+  const rows = [];
+  for (const region of indexes.regionsByBand.get(bandId) ?? []) {
+    for (const { pathway, match } of indexes.pathwaysByRegion.get(region.id) ?? []) {
+      for (const conditionCode of pathway.dsm_conditions ?? []) {
+        const condition = indexes.conditionByCode.get(conditionCode);
+        rows.push(buildChainRow({ technique, bandId, band, region, pathway, match, conditionCode, condition }));
       }
     }
   }
+  return rows;
 }
 
-const dryRun = process.argv.includes('--dry-run');
+/**
+ * Pure computation: source JSON in, chain rows out.
+ * Throws UnresolvedRegionError or DanglingRegionAliasError if a pathway names a
+ * region the atlas cannot resolve. A band id the atlas does not define yields no
+ * rows; findTechniquesWithUnknownBands reports those.
+ */
+export function computeImpactChains({ registrar, atlas, pathways, dsm, neuro }) {
+  const indexes = {
+    bandById: new Map((atlas.qif_bands ?? []).map((band) => [band.id, band])),
+    regionsByBand: groupRegionsByBand(atlas.brain_regions ?? []),
+    pathwaysByRegion: indexPathwaysByRegion(pathways.pathways ?? [], atlas),
+    conditionByCode: indexConditions(dsm, neuro),
+  };
+  return (registrar.techniques ?? []).flatMap((technique) =>
+    (technique.band_ids ?? []).flatMap((bandId) => buildBandRows(technique, bandId, indexes)),
+  );
+}
 
-console.log(`Impact chains computed: ${chains.length} rows`);
-console.log(`Source: ${techniques.length} techniques × ${bands.length} bands × ${regions.length} regions × ${allPathways.length} pathways`);
+/** Techniques that name a band id missing from the atlas, with the missing ids. They get no rows for it. */
+export function findTechniquesWithUnknownBands(registrar, atlas) {
+  const knownBandIds = new Set((atlas.qif_bands ?? []).map((band) => band.id));
+  return (registrar.techniques ?? [])
+    .map((technique) => ({
+      technique_id: technique.id,
+      unknown_band_ids: (technique.band_ids ?? []).filter((bandId) => !knownBandIds.has(bandId)),
+    }))
+    .filter((entry) => entry.unknown_band_ids.length > 0);
+}
 
-if (dryRun) {
-  console.log('Dry run — no file written.');
-  // Show sample
-  if (chains.length > 0) {
-    console.log('\nSample (first 3):');
-    for (const c of chains.slice(0, 3)) {
-      console.log(`  ${c.technique_id} → ${c.band_name} → ${c.region_name} → ${c.pathway_name} → ${c.dsm_code}`);
-    }
+/** Valid JSON with one row per line and a trailing newline, so a regeneration diffs as changed rows. */
+export function serializeImpactChains(chains) {
+  if (chains.length === 0) return '[]\n';
+  return `[\n${chains.map((chain) => JSON.stringify(chain)).join(',\n')}\n]\n`;
+}
+
+function countDistinct(chains, field) {
+  return new Set(chains.map((chain) => chain[field])).size;
+}
+
+/** Warnings for the CLI report: rows that join through a scope-changing alias, and bands the atlas lacks. */
+export function listChainWarnings(chains, sources) {
+  const warnings = [];
+  const scopeChangingRows = chains.filter((chain) => SCOPE_CHANGING_MATCHES.includes(chain.region_match));
+  if (scopeChangingRows.length > 0) {
+    warnings.push(
+      `${scopeChangingRows.length} rows join through an alias that changes anatomical scope `
+      + `(pathways: ${[...new Set(scopeChangingRows.map((chain) => chain.pathway_id))].join(', ')}). `
+      + 'They are labelled in region_match.',
+    );
   }
-} else {
-  const outPath = join(sharedDir, 'impact-chains.json');
-  writeFileSync(outPath, JSON.stringify(chains, null, 2));
-  console.log(`Written to: ${outPath}`);
-  console.log(`File size: ${(JSON.stringify(chains).length / 1024).toFixed(0)} KB`);
+  for (const entry of findTechniquesWithUnknownBands(sources.registrar, sources.atlas)) {
+    warnings.push(
+      `${entry.technique_id} names band(s) ${entry.unknown_band_ids.join(', ')}, which qif_bands in the atlas `
+      + 'does not define. It gets no rows for them; fix the band id in the registrar.',
+    );
+  }
+  return warnings;
 }
+
+/** The lines the CLI prints after computing: one summary line, then one line per warning. */
+export function formatChainReport(chains, sources) {
+  const summary = `Impact chains computed: ${chains.length} rows, ${countDistinct(chains, 'technique_id')} of `
+    + `${sources.registrar.techniques.length} techniques, ${countDistinct(chains, 'region_id')} of `
+    + `${sources.atlas.brain_regions.length} regions`;
+  return [summary, ...listChainWarnings(chains, sources).map((warning) => `Warning: ${warning}`)];
+}
+
+function runCli() {
+  const sources = loadChainSources();
+  const chains = computeImpactChains(sources);
+  process.stdout.write(`${formatChainReport(chains, sources).join('\n')}\n`);
+
+  if (process.argv.includes('--dry-run')) {
+    process.stdout.write('Dry run: no file written.\n');
+    for (const chain of chains.slice(0, DRY_RUN_SAMPLE_SIZE)) {
+      process.stdout.write(
+        `  ${chain.technique_id} -> ${chain.band_name} -> ${chain.region_name} -> ${chain.pathway_name} -> ${chain.dsm_code}\n`,
+      );
+    }
+    return;
+  }
+  const serialized = serializeImpactChains(chains);
+  writeFileSync(IMPACT_CHAINS_PATH, serialized);
+  process.stdout.write(
+    `Written to datalake/impact-chains.json (${(Buffer.byteLength(serialized) / BYTES_PER_KILOBYTE).toFixed(0)} KB)\n`,
+  );
+}
+
+runAsCli(import.meta.url, 'compute-impact-chains', runCli);

@@ -26,9 +26,17 @@ When a file changes, these downstream files must be updated. Run `npm run health
 | All of the above, plus: | | |
 | datalake/qtara-registrar.json `statistics` | `npm run registrar:stats` (check with `npm run registrar:stats:check`) | Script |
 | README.md technique count | Verify technique count references | Manual (npm run health warns) |
-| datalake/impact-chains.json | `npm run compute:chains` | Manual |
+| datalake/impact-chains.json | `npm run compute:chains` | Script (`npm test` fails if stale) |
 | datalake/qtara/src/qtara/data/ | Copy registrar to SDK data dir | Manual |
 | src/lib/threat-data.ts | Verify ThreatVector interface matches | Manual |
+
+## When datalake/qif-brain-bci-atlas.json or datalake/qif-neural-pathways.json changes
+| Update | How | Automated? |
+|--------|-----|-----------|
+| All datalake/*.json propagation, plus: | | |
+| qif-neural-pathways.json `origin_band` / `target_bands` | `npm run derive:pathway-bands` (derived from `brain_regions[].qif_band`; never hand-edit) | Script (`npm test` fails if stale) |
+| datalake/impact-chains.json | `npm run compute:chains` | Script (`npm test` fails if stale) |
+| qif-brain-bci-atlas.json `region_alias_relations` | Classify any new alias that is not a plain synonym | Manual |
 
 ## When osi-of-mind/QIF-DERIVATION-LOG.md changes
 | Update | How | Automated? |
