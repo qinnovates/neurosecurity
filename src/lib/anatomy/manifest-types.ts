@@ -50,8 +50,9 @@ export interface RegisterFingerprint {
 
 /**
  * What each pipeline stage consumed or produced, so an unchanged stage is
- * skipped. `fetch` lists every source file by name with its sha256, which must
- * equal the registry's pin for that file. `register` is null for an asset that
+ * skipped. `fetch` lists every source file as `<source id>/<file name>` with its
+ * sha256, which must equal the registry's pin for that file; every material
+ * source of the asset has at least one file there. `register` is null for an asset that
  * went through no registration. The other stages are digests.
  */
 export interface StageFingerprints {
@@ -143,6 +144,8 @@ export interface ManifestContext {
   /** Source id -> the licence it is handled under. */
   effectiveLicenceBySource: ReadonlyMap<string, LicenceId>;
   buildableSourceIds: ReadonlySet<string>;
+  /** Sources the pipeline may compute with: buildable ones, and pipeline-only ones whose terms were read and permit use. */
+  pipelineUsableSourceIds: ReadonlySet<string>;
   /** Source id -> file name -> the registry's sha256 pin, or null while the file is unpinned. */
   filePinsBySource: ReadonlyMap<string, ReadonlyMap<string, string | null>>;
 }

@@ -194,7 +194,7 @@
         "reason": "The publisher's page states CC BY-SA 4.0 but also says the data \"requires additional acknowledgment\" and links the full Human Connectome Project terms. The text cannot settle whether those terms pass through.",
         "unlocks_when": [
           "The atlas author confirms in writing that CC BY-SA 4.0 alone governs redistribution.",
-          "The owner accepts the Human Connectome Project terms himself."
+          "The owner accepts the Human Connectome Project terms."
         ],
         "drafted_by": "ai"
       }
@@ -325,7 +325,7 @@
         "cleared": false,
         "reason": "An access agreement: login and agreement are required at the publisher, and the terms are silent on commercial use.",
         "unlocks_when": [
-          "The owner accepts the data use terms himself and the acceptance is recorded in the review ledger.",
+          "The owner accepts the data use terms and the acceptance is recorded in the review ledger.",
           "Public redistribution under those terms is answered."
         ],
         "drafted_by": "ai"
@@ -357,7 +357,7 @@
         "cleared": false,
         "reason": "A licence that binds by use and carries obligations beyond attribution.",
         "unlocks_when": [
-          "The owner accepts the FreeSurfer Software License Agreement himself and the acceptance is recorded in the review ledger."
+          "The owner accepts the FreeSurfer Software License Agreement and the acceptance is recorded in the review ledger."
         ],
         "drafted_by": "ai"
       }

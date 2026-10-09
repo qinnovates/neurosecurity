@@ -87,6 +87,31 @@ describe('parseAnatomyIndex', () => {
     expect(() => parseOwner({ ...buildOwner('vim', 'row_subject_contains_owner'), extent_match: 'same' })).toThrow(/owners\[0\]\.extent_match/);
   });
 
+  it('rejects an unreviewed owner or link that carries a check status other than unchecked', () => {
+    const owner = { ...buildOwner('stn', 'row', 'same'), check_status: 'supports' };
+    expect(() => parseAnatomyIndex({ ...FULL_INDEX, structures: [buildStructure('7', [owner as never])] }))
+      .toThrow(/owners\[0\]\.check_status: an entry no review covers can only read "unchecked"/);
+    const link = { ...buildIndexLink('stn', true), check_status: 'partial' };
+    expect(() => parseAnatomyIndex({ ...FULL_INDEX, techniques: [buildTechnique('QIF-T9001', { links: [link as never] })] }))
+      .toThrow(/links\[0\]\.check_status: an entry no review covers can only read "unchecked"/);
+    const reviewed = { state: 'reviewed', reviewer_role: 'owner', reviewed_on: '2026-10-09', mark: 'Reviewed by owner, 2026-10-09' };
+    const reviewedOwner = { ...owner, review_state: reviewed };
+    expect(() => parseAnatomyIndex({ ...FULL_INDEX, structures: [{ ...buildStructure('7', [reviewedOwner as never]), review_state: reviewed, check_status: 'supports' }] })).not.toThrow();
+  });
+
+  it('rejects a structure that reads reviewed over an unreviewed owner', () => {
+    const reviewed = { state: 'reviewed', reviewer_role: 'owner', reviewed_on: '2026-10-09', mark: 'Reviewed by owner, 2026-10-09' };
+    const structure = { ...buildStructure('7', [buildOwner('stn', 'row', 'same')]), review_state: reviewed };
+    expect(() => parseAnatomyIndex({ ...FULL_INDEX, structures: [structure] }))
+      .toThrow(/structures\[0\]\.review_state: a structure cannot read reviewed while one of its owners is unreviewed/);
+  });
+
+  it('rejects a lit link whose region is not a region in the index', () => {
+    const link = { ...buildIndexLink('claustrum', true) };
+    expect(() => parseAnatomyIndex({ ...FULL_INDEX, techniques: [buildTechnique('QIF-T9001', { links: [link] })] }))
+      .toThrow(/links\[0\]\.resolved_region_id: a lit link must resolve to a region in the index; "claustrum" is not one/);
+  });
+
   it('throws the typed error', () => {
     expect(() => parseAnatomyIndex(null)).toThrow(AnatomyDataError);
   });
