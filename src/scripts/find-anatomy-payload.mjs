@@ -36,7 +36,7 @@ export const ANATOMY_PAYLOAD_MARKERS = Object.freeze([
   'position_check', 'visual_check', 'modification_note',
   'ai_drafted_unreviewed', 'AI-drafted, unreviewed', 'AI-drafted and unreviewed unless an item says otherwise', 'not independently checked',
   'not_drafted', 'not_mapped', 'owner_contains_row_subject', 'row_subject_contains_owner', 'route_not_settled',
-  'No asset has been built for this layer yet', 'qif-anatomy-',
+  'No device geometry has been recorded for this build', 'qif-anatomy-',
   '"state":"ai_drafted_unreviewed"',
 ]);
 
