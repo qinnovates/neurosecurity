@@ -54,13 +54,26 @@ function escapeForPattern(text: string): string {
   return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-/** Matches one `regionKey: position` entry, quoted or not, spaced or minified. */
+const TUPLE_START = String.raw`\[\s*${NUMBER}\s*,\s*${NUMBER}`;
+/** Later in the same record: a tuple under a position-like name, or a named x, y, cx or cy. A bare tuple could be a colour. */
+const NAMED_POSITION = String.raw`(?:\b(?:position|pos|coords?|coordinates?|cent(?:er|re)|point|xyz)["']?\s*:\s*${TUPLE_START}|\bc?[xy]["']?\s*:\s*${NUMBER})`;
+/** How far past a quoted region name a position may start and still be the same record. */
+const SAME_RECORD_SPAN = 80;
+
+/**
+ * Matches one region-to-position entry in any of three shapes, spaced or minified:
+ * a property (`thalamus: [0, 1, 2]`), a pair (`['thalamus', [0, 1, 2]]`),
+ * or a record (`{ id: 'thalamus', x: 0, y: 1 }`).
+ */
 export function buildRegionEntryPattern(regionKeys: readonly string[]): RegExp {
   if (regionKeys.length === 0) {
     throw new LegacyScanError('No region keys were given, so no region table could ever be found. Pass the atlas region ids.');
   }
   const keys = [...regionKeys].sort((left, right) => right.length - left.length).map(escapeForPattern).join('|');
-  return new RegExp(String.raw`(?<![\w$.-])["']?(?:${keys})["']?\s*:\s*${POSITION_VALUE}`, 'g');
+  const property = String.raw`(?<![\w$.-])["']?(?:${keys})["']?\s*:\s*${POSITION_VALUE}`;
+  const pair = String.raw`["'](?:${keys})["']\s*,\s*${TUPLE_START}`;
+  const record = String.raw`["'](?:${keys})["']\s*,[^{}\n]{0,${SAME_RECORD_SPAN}}?${NAMED_POSITION}`;
+  return new RegExp(`${property}|${pair}|${record}`, 'g');
 }
 
 /** The sorted marks one file's text earns; empty when it holds no old geometry. */

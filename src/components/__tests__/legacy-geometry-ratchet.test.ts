@@ -28,6 +28,7 @@ const ALIAS_NOTE_PREFIX = '_';
 
 /** Files under src/ (tests excluded) that hold old geometry or refer to the old model, and how. */
 const RECORDED_LEGACY_GEOMETRY: Record<string, readonly string[]> = {
+  'src/components/ThreatAtlasViz.tsx': [REGION_TABLE_MARK],
   'src/components/atlas/brainmap/BrainSvg.tsx': ['BRAIN_REGION_COORDS', 'brain-regions module'],
   'src/components/atlas/brainmap/brain-regions.ts': ['BRAIN_REGION_COORDS', REGION_TABLE_MARK],
   'src/components/brain/BrainVisualization.tsx': ['REGION_HOTSPOTS', 'brain.glb', REGION_TABLE_MARK],
@@ -125,12 +126,21 @@ describe('the scan the ratchet relies on', () => {
     expect(marksOf('const p = { visual: { x: 1, y: 2 }, motor: { x: -3, y: 1e-2 } };')).toEqual([REGION_TABLE_MARK]);
   });
 
+  it('catches the table written as pairs for a Map, or as records with an id', () => {
+    expect(marksOf("new Map([['thalamus', [0, 0, 0]], ['amygdala', [-6, -6, 6]]])")).toEqual([REGION_TABLE_MARK]);
+    expect(marksOf("[{ id: 'pfc', x: 95, y: 95 }, { id: 'm1', x: 210, y: 42 }]")).toEqual([REGION_TABLE_MARK]);
+    expect(marksOf('[{"region":"thalamus","position":[0,0,0]},{"region":"vta","position":[1,-2,3]}]')).toEqual([REGION_TABLE_MARK]);
+  });
+
   it('does not mark one coincidental entry, tuples under other keys, or a region used as a plain value', () => {
     expect(marksOf('const centre = { thalamus: [0, 0, 0] };')).toEqual([]);
     expect(marksOf('const view = { position: [0, 3, 16], target: [0, 2, 0] };')).toEqual([]);
     expect(marksOf('const labels = { thalamus: "Thalamus", amygdala: "Amygdala" };')).toEqual([]);
     expect(marksOf('const sizes = { N7: 3.0, N6: 2.2 }; const ids = ["pfc", "m1"];')).toEqual([]);
     expect(marksOf('const o = { subthalamus: [1, 2], my_pfc: [3, 4], obj.motor: 1 };')).toEqual([]);
+    expect(marksOf("const order = ['thalamus', 'amygdala', 'pfc']; const weights = [0.5, 0.25];")).toEqual([]);
+    expect(marksOf("const rows = [{ id: 'pfc', label: 'PFC' }, { id: 'm1', label: 'M1' }];")).toEqual([]);
+    expect(marksOf("const shells = [{ id: 'N7', r: 0.82, c: [0.8, 0.55, 0.75] }, { id: 'N4', r: 0.96, c: [0.4, 0.95, 0.6] }];")).toEqual([]);
   });
 
   it('marks each old name and the old model file', () => {

@@ -72,6 +72,16 @@ describe('findIsolationViolations', () => {
     ]);
   });
 
+  it('flags a policy tag that a script precedes', () => {
+    const html = `<!DOCTYPE html><html><head><script src="/early.js"></script><meta http-equiv="Content-Security-Policy" content="${ISOLATED_POLICY}"></head><body></body></html>`;
+    expect(findIsolationViolations(html)).toEqual(['a script comes before the Content-Security-Policy meta tag, so the policy does not cover it']);
+  });
+
+  it('flags a policy tag outside the head', () => {
+    const html = `<!DOCTYPE html><html><head></head><body><meta http-equiv="Content-Security-Policy" content="${ISOLATED_POLICY}"></body></html>`;
+    expect(findIsolationViolations(html)).toEqual(['Content-Security-Policy meta tag is outside the head, where browsers ignore it']);
+  });
+
   it('holds a second policy tag on the same page to the same policy', () => {
     const html = buildPage({ head: '<meta http-equiv="Content-Security-Policy" content="default-src *">' });
     expect(findIsolationViolations(html)).toContain('Content-Security-Policy "default-src" allows *, which is not in the allowed policy');

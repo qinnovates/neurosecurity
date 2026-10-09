@@ -34,6 +34,8 @@ const EXIT_COULD_NOT_RUN = 2;
 const BROWSER_CHANNEL = 'chromium';
 const DISABLE_WEBGL_ARGUMENT = '--disable-3d-apis';
 const VIOLATION_BINDING = 'recordPolicyViolation';
+/** URLs the browser resolves in memory. They never reach a network, so they are not another origin. */
+const IN_MEMORY_URL_PATTERN = /^(data|blob|about):/i;
 
 class EvidenceRunError extends Error {
   constructor(message) {
@@ -166,7 +168,7 @@ async function collectEvidence(browser, origin, options) {
 function findFindings(evidence, origin, forbiddenRequests) {
   const requestUrls = evidence.requests.map((request) => request.url);
   return [
-    ...requestUrls.filter((url) => !url.startsWith(`${origin}/`)).map((url) => `request to another origin: ${url}`),
+    ...requestUrls.filter((url) => !url.startsWith(`${origin}/`) && !IN_MEMORY_URL_PATTERN.test(url)).map((url) => `request to another origin: ${url}`),
     ...evidence.policyViolations.map((violation) => `policy violation: ${violation.effectiveDirective} blocked ${violation.blockedURI || '(inline)'}`),
     ...evidence.pageErrors.map((error) => `page error: ${error}`),
     ...requestUrls.filter((url) => forbiddenRequests.some((pattern) => pattern.test(url))).map((url) => `forbidden request: ${url}`),

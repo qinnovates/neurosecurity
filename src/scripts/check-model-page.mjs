@@ -44,6 +44,8 @@ const CSS_OFF_ORIGIN_PATTERN = /(url\(\s*['"]?\s*(https?:)?\/\/|@import\s+['"]\s
 const CSP_META_PATTERN = /<meta\b[^>]*http-equiv\s*=\s*["']Content-Security-Policy["'][^>]*>/gi;
 const CONTENT_ATTRIBUTE_PATTERN = /\bcontent\s*=\s*"([^"]*)"/i;
 const WHITESPACE_PATTERN = /\s+/;
+const HEAD_END_PATTERN = /<\/head\s*>/i;
+const SCRIPT_TAG_PATTERN = /<script\b/i;
 
 const FORBIDDEN_MARKERS = [
   { marker: 'astro-view-transitions', reason: 'the soft-navigation router (ClientRouter) is present' },
@@ -112,12 +114,28 @@ export function findPolicyDifferences(policy, allowedSources = ALLOWED_CSP_SOURC
   ];
 }
 
+/**
+ * A browser applies a policy tag only inside the head, and only to what comes after it.
+ * Returns a violation when the first tag is placed where it would not cover the page's scripts.
+ */
+function findPolicyPlacementViolations(html, firstTagIndex) {
+  const headEnd = html.search(HEAD_END_PATTERN);
+  const firstScript = html.search(SCRIPT_TAG_PATTERN);
+  const violations = [];
+  if (headEnd === -1 || firstTagIndex > headEnd) violations.push('Content-Security-Policy meta tag is outside the head, where browsers ignore it');
+  if (firstScript !== -1 && firstScript < firstTagIndex) violations.push('a script comes before the Content-Security-Policy meta tag, so the policy does not cover it');
+  return violations;
+}
+
 function findPolicyViolations(html) {
-  const metaTags = [...html.matchAll(CSP_META_PATTERN)].map((match) => match[0]);
+  const metaTags = [...html.matchAll(CSP_META_PATTERN)];
   if (metaTags.length === 0) {
     return ['no Content-Security-Policy meta tag'];
   }
-  return metaTags.flatMap((metaTag) => findPolicyDifferences(metaTag.match(CONTENT_ATTRIBUTE_PATTERN)?.[1] ?? ''));
+  return [
+    ...findPolicyPlacementViolations(html, metaTags[0].index),
+    ...metaTags.flatMap(([metaTag]) => findPolicyDifferences(metaTag.match(CONTENT_ATTRIBUTE_PATTERN)?.[1] ?? '')),
+  ];
 }
 
 function findForbiddenMarkers(html) {
