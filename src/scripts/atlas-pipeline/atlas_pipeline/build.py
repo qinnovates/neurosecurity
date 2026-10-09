@@ -172,7 +172,7 @@ def build_asset(cache_dir: pathlib.Path, registry: Registry, plan: dict[str, Any
         listed = "; ".join(f"{row['label_id']} {row['hemisphere']}: {', '.join(row['sanity_problems'])}" for row in failing[:5])
         raise CheckError(f"asset {plan['id']}: {len(failing)} mesh(es) failed the sanity check K9 ({listed}); inspect the label volume before shipping")
     copyright_text = (source.get("attribution_text") or source["name"])[:600]
-    extras = {"source_id": plan["source"], "licence_id": verdict.get("treat_as") or source["licence_id"], "template_space": registry.declared_space,
+    extras = {"source_id": plan["source"], "license_id": verdict.get("treat_as") or source["license_id"], "template_space": registry.declared_space,
               "units": "mm", "axes": "RAS"}
     used_files = [plan[key] for key in ("file", "names_file") if key in plan] or [registry.inputs["template"]["mask"]]
     headers = [header_facts(source_file(cache_dir, plan["source"], name)) for name in used_files if name.endswith((".nii", ".nii.gz"))]

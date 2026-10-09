@@ -10,9 +10,9 @@ import json
 import pathlib
 from typing import Any
 
-from . import registration
+from . import notices, registration
 from .build import BuiltAsset
-from .sources import PIPELINE_DIR, Registry, effective_licence_id, output_folder, registry_file
+from .sources import PIPELINE_DIR, Registry, effective_license_id, output_folder, registry_file
 
 MANIFEST_SCHEMA_VERSION = 2
 LABEL_TABLE_SCHEMA_VERSION = 1
@@ -97,31 +97,39 @@ def asset_record(built: BuiltAsset, registry: Registry, evidence: dict[str, Any]
     plan, source_id = built.plan, built.plan["source"]
     source, verdict = registry.sources[source_id], registry.verdicts[source_id]
     sha256 = hashlib.sha256(built.glb).hexdigest()
-    used_names = [plan[key] for key in ("file", "names_file") if key in plan] or [row["name"] for row in source["files"] if row.get("sha256")]
-    source_pins = {name: registry_file(registry, source_id, name)["sha256"] for name in used_names}
+    transform = registry.inputs["transforms"].get(plan.get("transform", ""))
+    computed_with = [] if transform is None else sorted({transform["moving_source"], transform["fixed_source"]} - {source_id})
+    used_names = [plan[key] for key in ("file", "names_file") if key in plan]
+    fetched = {row["name"]: row["sha256"] for row in source["files"] if row.get("sha256") and (not used_names or row["name"] in used_names)}
+    for input_id in computed_with:
+        fetched.update({row["name"]: row["sha256"] for row in registry.sources[input_id]["files"] if row.get("sha256")})
     route_step: dict[str, Any] = {"kind": source["route"]["kind"]}
     if "publisher_registration" in source["route"]:
         route_step["publisher_registration"] = source["route"]["publisher_registration"]
-    transform = registry.inputs["transforms"].get(plan.get("transform", ""))
-    register_stage = None if transform is None else {"archive": transform["archive"], "setting": transform["setting"], "tool": transform["tool"],
-                                                     "random_seed": transform["random_seed"], "parameters": _plain(registration.SETTINGS[transform["setting"]])}
-    stages = {"fetch": digest(source_pins), "register": register_stage, "resample": digest([source_pins, register_stage, plan]),
+    register_stage = None if transform is None else {
+        "archive_sha256": {row["name"]: row["sha256"] for row in transform["archive"]}, "setting": transform["setting"],
+        "tool": transform["tool"], "tool_version": transform["tool_version"], "seed": transform["random_seed"],
+        "parameters": _flat(registration.SETTINGS[transform["setting"]]),
+    }
+    stages = {"fetch": fetched, "register": register_stage, "resample": digest([fetched, register_stage, plan]),
               "mesh": digest([plan, code_hash]), "write": sha256}
     checks, position = asset_checks(built, evidence)
     return {
         "id": plan["id"], "path": f"{output_folder(registry, source_id)}/{plan['id']}.{sha256[:HASH_PREFIX_LENGTH]}.glb", "kind": "mesh", "layer": plan["layer"],
-        "bytes": len(built.glb), "sha256": sha256, "input_fingerprint": digest([source_pins, register_stage, plan, code_hash]),
-        "source_ids": [source_id], "computed_with_source_ids": [] if transform is None else sorted({transform["moving_source"], transform["fixed_source"]}),
-        "licence_id": effective_licence_id(source, verdict), "stated_licence_id": source["licence_id"], "route": [route_step],
+        "bytes": len(built.glb), "sha256": sha256, "input_fingerprint": digest([fetched, register_stage, plan, code_hash]),
+        "source_ids": [source_id], "computed_with_source_ids": computed_with,
+        "license_id": effective_license_id(source, verdict), "stated_license_id": source["license_id"], "route": [route_step],
         "delineation": {"basis": source["delineation"]["basis"], "subjects": source["delineation"]["subjects"],
                         "hemispheres": plan["hemispheres"], "grid_voxel_mm": plan.get("grid_voxel_mm") or next((row["grid_voxel_mm"] for row in built.report if "grid_voxel_mm" in row), 1.0),
                         "acquisition_voxel_mm": plan.get("acquisition_voxel_mm"), "probability_meaning": plan["probability_meaning"]},
         "libraries": library_versions(), "nodes": built.nodes, "checks": checks, "stage_fingerprints": stages, "position_check": position,
+        "modification_note": notices.changes_for(plan),
     }
 
 
-def _plain(value: Any) -> Any:
-    return {key: (list(item) if isinstance(item, tuple) else item) for key, item in value.items()}
+def _flat(parameters: dict[str, Any]) -> dict[str, Any]:
+    """Registration parameters as text, numbers or booleans; a schedule such as (40, 20, 10) becomes "40x20x10"."""
+    return {key: ("x".join(str(item) for item in value) if isinstance(value, tuple) else value) for key, value in parameters.items()}
 
 
 def library_versions() -> dict[str, str]:

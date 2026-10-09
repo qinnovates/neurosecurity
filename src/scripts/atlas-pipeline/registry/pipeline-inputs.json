@@ -86,7 +86,7 @@
       "moving_file": "mni_icbm152_t1_tal_nlin_sym_09b_hires.nii",
       "fixed_source": "mni_icbm152_2009c_asym",
       "fixed_file": "mni_icbm152_t1_tal_nlin_asym_09c.nii",
-      "tool": "antspyx 0.5.4",
+      "tool": "antspyx",
       "setting": "B_syn_cc_fullres",
       "random_seed": 20261009,
       "archive": [
@@ -99,7 +99,8 @@
           "sha256": "1d4a11a4e443ffa19dc0112d8b897d50fb88889cd2fa6d54bed76e8ebafd0da9"
         }
       ],
-      "archive_note": "Archived outside git and reused when the hashes match. A recomputation with the same setting and seed is not promised to be byte-identical; if it is recomputed, these pins change in a reviewed diff. Where the archive is kept durably is an open question for the owner."
+      "archive_note": "Archived outside git and reused when the hashes match. A recomputation with the same setting and seed is not promised to be byte-identical; if it is recomputed, these pins change in a reviewed diff. Where the archive is kept durably is an open question for the owner.",
+      "tool_version": "0.5.4"
     }
   },
   "assets": [
@@ -298,7 +299,8 @@
         ]
       },
       "acquisition_voxel_mm": null,
-      "size_rule_voxel_mm": null
+      "size_rule_voxel_mm": null,
+      "position_note": "Position not independently checked: against CIT168 the transform is not distinguishable from none. Warped all the same, to stay coherent with adjacent gyri; atlases disagree by 1 to 2 mm here regardless."
     }
   ],
   "expected_neighbours": {

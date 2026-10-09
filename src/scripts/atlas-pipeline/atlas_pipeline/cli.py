@@ -24,11 +24,11 @@ def cache_dir() -> pathlib.Path:
 
 
 def planned_sources(registry: sources.Registry) -> list[str]:
-    """Sources the plan needs: each asset's source and both ends of each transform, buildable ones only."""
-    wanted = [plan["source"] for plan in registry.inputs["assets"]]
+    """Sources to fetch: every buildable asset source, and both ends of each transform when cleared as inputs."""
+    wanted = [plan["source"] for plan in registry.inputs["assets"] if sources.is_buildable(registry, plan["source"])]
     for transform in registry.inputs["transforms"].values():
-        wanted += [transform["moving_source"], transform["fixed_source"]]
-    return [source_id for source_id in dict.fromkeys(wanted) if sources.is_buildable(registry, source_id)]
+        wanted += [source_id for source_id in (transform["moving_source"], transform["fixed_source"]) if sources.is_usable_input(registry, source_id)]
+    return list(dict.fromkeys(wanted))
 
 
 def command_fetch(registry: sources.Registry) -> int:

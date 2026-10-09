@@ -22,12 +22,12 @@ LEDGER_PATH = REPO_ROOT / "datalake" / "qif-anatomy-review-ledger.json"
 INPUTS_PATH = PIPELINE_DIR / "registry" / "pipeline-inputs.json"
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 SAFE_NAME_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
-SHIPPING_VERDICTS = frozenset({"SHIP", "SHIP-SEPARATE-FILE"})
-# (commercial_use, output_folder) per licence id; mirrors LICENCE_FACTS in licence-rules.ts.
-LICENCE_FACTS: dict[str, tuple[bool, str | None]] = {
-    "cc-by-4.0": (True, "open"), "cc0-1.0": (True, "open"), "mit": (True, "open"), "mni-icbm-notice": (True, "open"),
-    "cc-by-sa-4.0": (True, "by-sa"), "melbourne-subcortex": (False, None), "freesurfer-sla-1.0": (True, None),
-    "hcp-data-use-terms": (False, None), "none-stated": (False, None),
+SHIPPING_VERDICTS = frozenset({"ship", "ship_separate_file"})
+# (commercial_use, requires_agreement, output_folder) per license id; mirrors LICENCE_FACTS in licence-rules.ts.
+LICENSE_FACTS: dict[str, tuple[bool, bool, str | None]] = {
+    "cc-by-4.0": (True, False, "open"), "cc0-1.0": (True, False, "open"), "mit": (True, False, "open"),
+    "mni-icbm-notice": (True, False, "open"), "cc-by-sa-4.0": (True, False, "by-sa"), "melbourne-subcortex": (False, False, None),
+    "freesurfer-sla-1.0": (True, True, None), "hcp-data-use-terms": (False, True, None), "none-stated": (False, False, None),
 }
 
 
@@ -70,8 +70,8 @@ def load_registry(sources_path: pathlib.Path = SOURCES_PATH, verdicts_path: path
     if len(sources) != len(raw_sources["sources"]):
         raise RegistryError("a source id appears twice in the registry; remove the duplicate")
     for source_id, row in sources.items():
-        if row["licence_id"] not in LICENCE_FACTS:
-            raise RegistryError(f"source {source_id}: licence id {row['licence_id']!r} is not in the closed list")
+        if row["license_id"] not in LICENSE_FACTS:
+            raise RegistryError(f"source {source_id}: license id {row['license_id']!r} is not in the closed list")
         for file_row in row["files"]:
             if not SAFE_NAME_PATTERN.match(str(file_row.get("name", ""))):
                 raise RegistryError(f"source {source_id}: file name {file_row.get('name')!r} is not a plain file name")
@@ -79,8 +79,8 @@ def load_registry(sources_path: pathlib.Path = SOURCES_PATH, verdicts_path: path
     return Registry(raw_sources["declared_space"], sources, verdicts, _accepted_agreements(ledger, verdicts), inputs)
 
 
-def effective_licence_id(source: dict[str, Any], verdict: dict[str, Any]) -> str:
-    return verdict.get("treat_as") or source["licence_id"]
+def effective_license_id(source: dict[str, Any], verdict: dict[str, Any]) -> str:
+    return verdict.get("treat_as") or source["license_id"]
 
 
 def buildability_blockers(source: dict[str, Any], verdict: dict[str, Any] | None, agreement_accepted: bool) -> list[str]:
@@ -88,13 +88,16 @@ def buildability_blockers(source: dict[str, Any], verdict: dict[str, Any] | None
     if verdict is None:
         return ["not_cleared"]
     route = source.get("route", {})
+    commercial_use, requires_agreement, folder = LICENSE_FACTS[effective_license_id(source, verdict)]
+    needs_agreement = requires_agreement or verdict["access_agreement"] is not None
     checks = [
         ("not_cleared", verdict["clearance"]["cleared"] is True),
         ("verdict_not_ship", verdict["verdict"] in SHIPPING_VERDICTS),
         ("grant_not_explicit", verdict["grant"] == "explicit"),
-        ("licence_not_commercial", LICENCE_FACTS[effective_licence_id(source, verdict)][0]),
+        ("license_not_commercial", commercial_use),
         ("not_redistributable", source["redistribute"] is True),
-        ("agreement_not_accepted", verdict["access_agreement"] is None or agreement_accepted),
+        ("agreement_not_accepted", not needs_agreement or agreement_accepted),
+        ("no_output_folder", folder is not None),
         ("route_not_settled", route.get("kind") != "unknown" and route.get("status") == "settled"),
     ]
     return [reason for reason, holds in checks if not holds]
@@ -109,12 +112,18 @@ def buildability_table(registry: Registry) -> dict[str, list[str]]:
             for source_id, source in sorted(registry.sources.items())}
 
 
+def is_usable_input(registry: Registry, source_id: str) -> bool:
+    """A pipeline-only input (never redistributed) may be read when it is cleared; it is never an asset's material."""
+    verdict = registry.verdicts.get(source_id)
+    return verdict is not None and verdict["clearance"]["cleared"] is True and verdict["verdict"] in SHIPPING_VERDICTS
+
+
 def output_folder(registry: Registry, source_id: str) -> str:
-    """Folder under atlas-assets/ for a source's outputs; derived from its effective licence, never typed."""
-    licence_id = effective_licence_id(registry.sources[source_id], registry.verdicts[source_id])
-    folder = LICENCE_FACTS[licence_id][1]
+    """Folder under atlas-assets/ for a source's outputs; derived from its effective license, never typed."""
+    license_id = effective_license_id(registry.sources[source_id], registry.verdicts[source_id])
+    folder = LICENSE_FACTS[license_id][2]
     if folder is None:
-        raise RegistryError(f"source {source_id}: licence {licence_id!r} has no output folder, so nothing may be written for it")
+        raise RegistryError(f"source {source_id}: license {license_id!r} has no output folder, so nothing may be written for it")
     return folder
 
 

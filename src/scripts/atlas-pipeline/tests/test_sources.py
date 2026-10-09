@@ -6,8 +6,8 @@ import pytest
 from atlas_pipeline import sources
 from atlas_pipeline.errors import RegistryError
 
-SOURCE = {"id": "fixture", "licence_id": "cc-by-4.0", "redistribute": True, "route": {"kind": "header_resample", "status": "settled"}, "files": []}
-VERDICT = {"source_id": "fixture", "verdict": "SHIP", "grant": "explicit", "treat_as": None, "access_agreement": None,
+SOURCE = {"id": "fixture", "license_id": "cc-by-4.0", "redistribute": True, "route": {"kind": "header_resample", "status": "settled"}, "files": []}
+VERDICT = {"source_id": "fixture", "verdict": "ship", "grant": "explicit", "treat_as": None, "access_agreement": None,
            "clearance": {"cleared": True, "reason": "fixture", "unlocks_when": [], "drafted_by": "ai"}}
 
 
@@ -26,9 +26,8 @@ def test_a_cleared_settled_source_builds() -> None:
 
 @pytest.mark.parametrize(("source", "verdict", "accepted", "blocker"), [
     (SOURCE, changed(VERDICT, ["clearance", "cleared"], False), False, "not_cleared"),
-    (SOURCE, changed(VERDICT, ["verdict"], "NEEDS-KEVIN"), False, "verdict_not_ship"),
+    (SOURCE, changed(VERDICT, ["verdict"], "needs_owner"), False, "verdict_not_ship"),
     (SOURCE, changed(VERDICT, ["grant"], "interpretation"), False, "grant_not_explicit"),
-    (SOURCE, changed(VERDICT, ["treat_as"], "hcp-data-use-terms"), False, "licence_not_commercial"),
     (changed(SOURCE, ["redistribute"], False), VERDICT, False, "not_redistributable"),
     (SOURCE, changed(VERDICT, ["access_agreement"], {"name": "terms", "terms_url": "https://example.org", "text_sha256": "a" * 64}), False, "agreement_not_accepted"),
     (changed(SOURCE, ["route", "status"], "open"), VERDICT, False, "route_not_settled"),
@@ -36,6 +35,24 @@ def test_a_cleared_settled_source_builds() -> None:
 ])
 def test_each_blocker_stops_a_build(source: dict, verdict: dict, accepted: bool, blocker: str) -> None:
     assert sources.buildability_blockers(source, verdict, accepted) == [blocker]
+
+
+def test_a_license_with_no_commercial_grant_blocks_and_has_no_folder() -> None:
+    uncommercial = changed(VERDICT, ["treat_as"], "melbourne-subcortex")
+    assert sources.buildability_blockers(SOURCE, uncommercial, False) == ["license_not_commercial", "no_output_folder"]
+
+
+def test_a_license_that_binds_by_use_needs_an_accepted_agreement_and_still_has_no_folder() -> None:
+    binding = changed(VERDICT, ["treat_as"], "freesurfer-sla-1.0")
+    assert sources.buildability_blockers(SOURCE, binding, False) == ["agreement_not_accepted", "no_output_folder"]
+    assert sources.buildability_blockers(SOURCE, binding, True) == ["no_output_folder"]
+
+
+def test_a_pipeline_only_input_is_usable_but_never_buildable() -> None:
+    registry = sources.load_registry()
+    assert sources.is_usable_input(registry, "mni_icbm152_2009b_sym") is True
+    assert sources.buildability_blockers(registry.sources["mni_icbm152_2009b_sym"], registry.verdicts["mni_icbm152_2009b_sym"], False) == ["not_redistributable"]
+    assert sources.is_usable_input(registry, "templateflow_xfm") is False
 
 
 def test_an_accepted_agreement_unblocks_and_a_missing_verdict_blocks() -> None:

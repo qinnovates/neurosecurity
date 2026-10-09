@@ -117,7 +117,7 @@ def registration_evidence(cache_dir: pathlib.Path, registry: Registry) -> dict[s
         settings[setting] = {"files": {pathlib.Path(p).name: sha256_of(pathlib.Path(p)) for p in forward}, "variants": row,
                              "displacement_in_brain_mask": registration.displacement_stats(source_file(cache_dir, template["source"], template["mask"]), forward)}
     scratch_path.unlink(missing_ok=True)
-    return {"transform_id": transform_id, "shipping_setting": transform_row["setting"], "tool": transform_row["tool"],
+    return {"transform_id": transform_id, "shipping_setting": transform_row["setting"], "tool": f"{transform_row['tool']} {transform_row['tool_version']}",
             "random_seed": transform_row["random_seed"], "identity": variants["identity"], "settings": settings,
             "outcomes": outcomes(variants["identity"], settings),
             "mirror_before_note": "Not run: the moving image is symmetric and its labels are a mirrored pair with shared ids, so a mirror before the transform changes nothing. Laterality rests on the header and on the atlas having no side ids."}

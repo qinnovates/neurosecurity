@@ -11,6 +11,7 @@
       "not_cleared",
       "verdict_not_ship",
       "agreement_not_accepted",
+      "no_output_folder",
       "route_not_settled"
     ],
     "harvard_aan_v2": [
@@ -24,15 +25,18 @@
     "hcp_s1200_mmp1": [
       "not_cleared",
       "verdict_not_ship",
-      "licence_not_commercial",
+      "license_not_commercial",
       "agreement_not_accepted",
+      "no_output_folder",
       "route_not_settled"
     ],
     "massp_2_0": [
       "not_cleared",
       "route_not_settled"
     ],
-    "mni_icbm152_2009b_sym": [],
+    "mni_icbm152_2009b_sym": [
+      "not_redistributable"
+    ],
     "mni_icbm152_2009c_asym": [],
     "neudorfer_hypothalamus": [],
     "nextbrain": [
@@ -47,8 +51,9 @@
       "not_cleared",
       "verdict_not_ship",
       "grant_not_explicit",
-      "licence_not_commercial",
-      "not_redistributable"
+      "license_not_commercial",
+      "not_redistributable",
+      "no_output_folder"
     ],
     "yeo2011_cbig": [
       "not_cleared",
