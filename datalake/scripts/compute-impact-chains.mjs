@@ -27,7 +27,9 @@
  * pathways and condition categories share a band with a technique, not
  * technique-specific anatomy.
  *
- * The file is written one row per line so a regeneration diffs and merges by row.
+ * The file is written one row per line, so a regeneration shows up as changed
+ * rows instead of a reflowed file. Two branches that each change the rows still
+ * conflict; regenerate after merging.
  *
  * Usage:
  *   npm run compute:chains                 # write datalake/impact-chains.json
@@ -180,7 +182,7 @@ export function findTechniquesWithUnknownBands(registrar, atlas) {
     .filter((entry) => entry.unknown_band_ids.length > 0);
 }
 
-/** Valid JSON with one row per line and a trailing newline, so regenerations diff and merge by row. */
+/** Valid JSON with one row per line and a trailing newline, so a regeneration diffs as changed rows. */
 export function serializeImpactChains(chains) {
   if (chains.length === 0) return '[]\n';
   return `[\n${chains.map((chain) => JSON.stringify(chain)).join(',\n')}\n]\n`;
