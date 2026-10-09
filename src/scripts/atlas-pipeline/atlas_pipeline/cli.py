@@ -52,7 +52,9 @@ def command_evidence(registry: sources.Registry) -> int:
 
 
 def pipeline_tree_is_dirty() -> bool:
-    result = subprocess.run(["git", "-C", str(sources.REPO_ROOT), "status", "--porcelain", "--", "src/scripts/atlas-pipeline", "datalake/qif-anatomy-sources.json",
+    """Uncommitted changes to the pipeline's code or inputs. Its own outputs under evidence/ do not count."""
+    result = subprocess.run(["git", "-C", str(sources.REPO_ROOT), "status", "--porcelain", "--", "src/scripts/atlas-pipeline",
+                             ":(exclude)src/scripts/atlas-pipeline/evidence", "datalake/qif-anatomy-sources.json",
                              "datalake/qif-anatomy-verdicts.json"], capture_output=True, text=True, check=True)
     return bool(result.stdout.strip())
 
