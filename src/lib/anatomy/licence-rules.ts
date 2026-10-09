@@ -54,6 +54,9 @@ export interface AgreementState {
   agreementAccepted: boolean;
 }
 
+/** What stops a source shipping but says nothing against computing with it: it ships nothing, so it needs no folder and no route. */
+const SHIPPING_ONLY_BLOCKERS: readonly UnbuildableReason[] = ['not_redistributable', 'no_output_folder', 'route_not_settled'];
+
 const SHIPPING_VERDICTS: readonly Verdict[] = ['ship', 'ship_separate_file'];
 
 /** The licence a source is handled under: the verdict's stricter id when it sets one, else the stated id. */
@@ -94,4 +97,22 @@ export function assessBuildability(source: AnatomySource, verdict: LicenceVerdic
   ];
   const blockers = checks.filter(([, holds]) => !holds).map(([reason]) => reason);
   return { buildable: blockers.length === 0, blockers };
+}
+
+/**
+ * Whether the offline pipeline may compute with a source (a registration
+ * template, a transform) without shipping any of its material.
+ *
+ * A source that ships must simply be buildable. A pipeline-only source
+ * (`redistribute: false`) must pass every buildability check except the three
+ * that concern shipping: it is cleared, its verdict is `ship` or
+ * `ship_separate_file`, its grant is explicit, its licence grants commercial
+ * use, and any agreement it sits behind is accepted. So a source that is
+ * uncleared, `do_not_ship`, `needs_owner` or behind an unaccepted agreement is
+ * never computed with.
+ */
+export function mayPipelineUse(source: AnatomySource, verdict: LicenceVerdict, agreement: AgreementState): boolean {
+  const { buildable, blockers } = assessBuildability(source, verdict, agreement);
+  if (source.redistribute) return buildable;
+  return blockers.every((blocker) => SHIPPING_ONLY_BLOCKERS.includes(blocker));
 }

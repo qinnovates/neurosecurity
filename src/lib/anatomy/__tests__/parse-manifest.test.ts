@@ -3,7 +3,9 @@ import { AnatomyDataError } from '../errors';
 import { parseLabelTable } from '../parse-label-table';
 import { parseManifest } from '../parse-manifest';
 import { FIXTURE_ATLAS_ID, OTHER_SHA256 } from './anatomy-fixtures';
-import { FIXTURE_ASSET_PATH, buildAsset, buildManifest, buildManifestContext, buildNode } from './manifest-fixtures';
+import {
+  FIXTURE_ASSET_PATH, FIXTURE_FETCH_KEY, PIPELINE_ONLY_SOURCE_ID, TEMPLATE_FILE_NAME, UNCLEARED_SOURCE_ID, buildAsset, buildManifest, buildManifestContext, buildNode,
+} from './manifest-fixtures';
 
 const CONTEXT = buildManifestContext();
 const parseWith = (asset: unknown): unknown => parseManifest(buildManifest([asset as never]), CONTEXT);
@@ -97,13 +99,32 @@ describe('parseManifest', () => {
     });
 
     it('rejects a fetched file whose sha256 differs from the registry pin', () => {
-      expect(() => withStages({ fetch: { 'labels.nii.gz': OTHER_SHA256 } })).toThrow(/stage_fingerprints\.fetch\.labels\.nii\.gz: the sha256 differs from the registry's pin/);
+      expect(() => withStages({ fetch: { [FIXTURE_FETCH_KEY]: OTHER_SHA256 } })).toThrow(/stage_fingerprints\.fetch\["fixture_atlas\/labels\.nii\.gz"\]: the sha256 differs from the registry's pin/);
     });
 
     it('rejects a fetched file the registry does not list for the asset\'s sources, or has not pinned', () => {
-      expect(() => withStages({ fetch: { 'stray.nii.gz': OTHER_SHA256 } })).toThrow(/fetch\.stray\.nii\.gz: this file is not listed in the registry/);
+      const stray = { ...stages.fetch, 'fixture_atlas/stray.nii.gz': OTHER_SHA256 };
+      expect(() => withStages({ fetch: stray })).toThrow(/fetch\["fixture_atlas\/stray\.nii\.gz"\]: the registry lists no such file for source "fixture_atlas"/);
       const unpinned = buildManifestContext({ filePinsBySource: new Map([[FIXTURE_ATLAS_ID, new Map([['labels.nii.gz', null]])]]) });
-      expect(() => parseManifest(buildManifest(), unpinned)).toThrow(/fetch\.labels\.nii\.gz: the registry has no sha256 pin for this file/);
+      expect(() => parseManifest(buildManifest(), unpinned)).toThrow(/the registry has no sha256 pin for this file/);
+    });
+
+    it('keys each fetched file by its source, so two sources may list a file of the same name', () => {
+      const asset = buildAsset({
+        computed_with_source_ids: [PIPELINE_ONLY_SOURCE_ID],
+        stage_fingerprints: { ...stages, fetch: { ...stages.fetch, [`${PIPELINE_ONLY_SOURCE_ID}/labels.nii.gz`]: OTHER_SHA256, [`${PIPELINE_ONLY_SOURCE_ID}/${TEMPLATE_FILE_NAME}`]: stages.resample as string } },
+      });
+      expect(() => parseWith(asset)).not.toThrow();
+      expect(() => withStages({ fetch: { 'labels.nii.gz': stages.resample } })).toThrow(/fetch\["labels\.nii\.gz"\]: a fetched file is written as <source id>\/<file name>/);
+      expect(() => withStages({ fetch: { ...stages.fetch, 'fixture_template/template.nii.gz': stages.resample } })).toThrow(/"fixture_template" is not one of this asset's sources or pipeline inputs/);
+    });
+
+    it('rejects an asset whose fetch stage names no file from one of its material sources', () => {
+      const asset = buildAsset({
+        computed_with_source_ids: [PIPELINE_ONLY_SOURCE_ID],
+        stage_fingerprints: { ...stages, fetch: { [`${PIPELINE_ONLY_SOURCE_ID}/${TEMPLATE_FILE_NAME}`]: stages.resample as string } },
+      });
+      expect(() => parseWith(asset)).toThrow(/stage_fingerprints\.fetch: no fetched file belongs to the material source "fixture_atlas"/);
     });
 
     it('rejects an empty fetch stage, a digest where the fetch map belongs, and a malformed registration record', () => {
@@ -124,6 +145,12 @@ describe('parseManifest', () => {
     expect(() => parseWith(buildAsset({ modification_note: 'Thresholded.\nThen meshed.' }))).toThrow(/modification_note: the text holds a control character/);
     expect(() => parseWith(buildAsset({ modification_note: 'x'.repeat(601) }))).toThrow(/modification_note/);
     expect((parseWith(buildAsset()) as { assets: Array<{ modification_note: string }> }).assets[0].modification_note).toContain('Thresholded');
+  });
+
+  it('rejects a computed-with source that is uncleared, refused, gated or behind an unaccepted agreement', () => {
+    expect(() => parseWith(buildAsset({ computed_with_source_ids: [UNCLEARED_SOURCE_ID] })))
+      .toThrow(/computed_with_source_ids: source "fixture_uncleared" may not be used by the pipeline/);
+    expect(() => parseWith(buildAsset({ computed_with_source_ids: [PIPELINE_ONLY_SOURCE_ID] }))).not.toThrow();
   });
 
   it('rejects a source listed both as material and as a pipeline-only input', () => {
