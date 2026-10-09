@@ -1,6 +1,7 @@
 /**
  * Every view TARA Lab offers, grouped under its mode. Each one is the mode's own screen
  * and shares the device in focus. Adding a view is one entry here and a branch in its mode.
+ * Ids are stable: links, saved places and tests name them. A label can change; an id does not.
  */
 
 import type { ModeId } from './mode-registry';
@@ -19,19 +20,20 @@ export interface LabViewGroup {
 export const MODE_VIEW_GROUPS: Record<ModeId, readonly LabViewGroup[]> = {
   explore: [
     { label: 'Explore', views: [
-      { id: 'device-classes', label: 'Device classes' },
-      { id: 'catalog', label: 'Catalog' },
-      { id: 'curated-chains', label: 'Curated chains' },
-      { id: 'specifications', label: 'Device specifications' },
+      { id: 'device-classes', label: 'Start' },
+      { id: 'catalog', label: 'Techniques' },
+      { id: 'curated-chains', label: 'Authored chains' },
+      { id: 'specifications', label: 'Published device specifications' },
     ] },
   ],
   model: [
     { label: 'This device', views: [
+      { id: 'overview', label: 'Overview' },
       { id: 'risks', label: 'Risks' },
-      { id: 'attack-map', label: 'Attack map' },
+      { id: 'attack-map', label: 'Techniques by part' },
       { id: 'chains', label: 'Chains' },
       { id: 'around', label: 'Around the device' },
-      { id: 'requirements', label: 'US requirements' },
+      { id: 'requirements', label: 'FDA premarket checklist' },
       { id: 'report', label: 'Report' },
     ] },
   ],

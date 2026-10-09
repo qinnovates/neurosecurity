@@ -62,8 +62,11 @@ interface ProviderProps {
   children: ReactNode;
 }
 
+/** Action types that put another device in focus, as opposed to editing or deciding on the one already there. */
+const DEVICE_REPLACEMENT_TYPES: readonly StudioAction['type'][] = ['preset-selected', 'blank-started', 'model-imported', 'state-restored'];
+
 function isDeviceReplacement(action: StudioAction): boolean {
-  return action.type === 'preset-selected' || action.type === 'model-imported' || action.type === 'state-restored';
+  return DEVICE_REPLACEMENT_TYPES.includes(action.type);
 }
 
 export function FocusProvider({ engineData, referenceData, curatedChains, onDeviceReplaced, children }: ProviderProps) {

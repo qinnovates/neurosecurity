@@ -48,8 +48,9 @@ function linksOperatorToInterface(link: ModelLink, componentById: ReadonlyMap<st
 }
 
 /**
- * Makes link payloads agree with the read/write answer, so a read-only device never
- * carries stimulation commands and a write-only device never carries recordings.
+ * Makes link payloads agree with the read/write answer when a preset is turned into a model,
+ * so a read-only preset never carries stimulation commands and a write-only preset never
+ * carries recordings. Later edits are not rewritten; a disagreement shows as a warning.
  */
 function alignLinkWithDirection(link: ModelLink, direction: InterfaceDirection, isOperatorLink: boolean): ModelLink {
   const canWrite = direction !== 'read';
@@ -89,19 +90,7 @@ export function buildModelFromIntake(answers: IntakeAnswers, archetype: DeviceAr
   };
 }
 
-/**
- * Recovers the questionnaire answers a model was built from, so a restored model can be
- * edited in the form again. A component the preset has and the model lacks was removed.
- */
-export function answersFromModel(model: DeviceModel, archetype: DeviceArchetype): IntakeAnswers {
-  const presentIds = new Set(model.components.map((component) => component.id));
-  return {
-    name: model.name,
-    invasiveness: model.invasiveness,
-    direction: model.direction,
-    targetRegionIds: [...model.targetRegionIds],
-    presentsStimuli: model.presentsStimuli,
-    removedComponentIds: archetype.components.filter((component) => !presentIds.has(component.id)).map((component) => component.id),
-    submissionType: model.submissionType,
-  };
+/** A device preset as a model of its own. From here on it is edited like any other model. */
+export function modelFromArchetype(archetype: DeviceArchetype, registrarVersion: string): DeviceModel {
+  return buildModelFromIntake(defaultAnswersFor(archetype), archetype, registrarVersion);
 }

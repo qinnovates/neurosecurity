@@ -1,45 +1,56 @@
-/* Monitor: a synthetic sample playing, with everything else computed at the playhead. */
+/* Monitor: a synthetic sample, still until played, with everything else computed at the playhead. */
 
-.monitor { display: grid; gap: 0.75rem; grid-template-columns: 15rem minmax(0, 1fr) 20rem; align-items: start; }
+.monitor { display: grid; gap: var(--lab-gap); align-items: start; }
 .monitor > * { min-width: 0; }
-.monitor-banner { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.75rem; padding: 0.5rem 0.75rem; border-left: 3px solid var(--lab-high); }
+.monitor-banner { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem var(--lab-gap); border-radius: var(--lab-radius-m); }
 .monitor-banner p { margin: 0; }
-.monitor-stamp { border: 1px solid var(--lab-ink); border-radius: var(--lab-radius); padding: 0 0.375rem; font-weight: 600; white-space: nowrap; }
-.monitor-middle, .monitor-side { display: grid; gap: 0.75rem; min-width: 0; }
+.monitor-stamp { border: 1px solid var(--lab-ink); border-radius: var(--lab-radius-s); padding: 0 0.375rem; font-weight: 600; white-space: nowrap; }
+.monitor-sample-menu { width: auto; }
+
+/* The sample's name: five figures computed from its signal. */
+.monitor-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); gap: var(--lab-gap); margin: 0; }
+.monitor-facts dd { margin: 0; font-size: var(--lab-text-title); }
+
+/* The plot is a still page. The playhead is the one element that moves, and only while playing. */
+.monitor-plot-frame { position: relative; }
 .monitor-plot { display: block; width: 100%; height: min(52vh, 30rem); }
-.monitor-transport { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem 0.75rem; }
-.monitor-transport input[type="range"] { flex: 1 1 10rem; accent-color: var(--lab-flow); }
+/* Top and bottom match the plot's gutters in signal-plot-draw.ts. */
+.monitor-playhead { position: absolute; top: 1.25rem; bottom: 1.25rem; width: 2px; margin-left: -1px; background: var(--lab-select); pointer-events: none; }
+.monitor-transport { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem var(--lab-gap); margin-top: 0.5rem; }
+.monitor-transport input[type="range"] { flex: 1 1 10rem; accent-color: var(--lab-select); }
 .monitor-values { margin-top: 0.375rem; }
 .monitor-values summary { cursor: pointer; color: var(--lab-ink-soft); }
 
-/* Spectrum: thin bars on a fixed 0 to 100% axis, with a faint grid behind them. */
-.monitor-spectrum-plot { position: relative; display: flex; align-items: flex-end; justify-content: space-around; gap: 0.5rem; height: 9rem; margin: 1.25rem 0 0 2rem; border-bottom: 1px solid var(--lab-ink-soft); }
-.monitor-spectrum-grid { position: absolute; left: 0; right: 0; height: 0; border-top: 1px solid var(--lab-line); pointer-events: none; }
-.monitor-spectrum-grid > span { position: absolute; left: -2rem; top: -0.5rem; font-size: 0.6875rem; color: var(--lab-ink-faint); }
-.monitor-band { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 0.125rem; flex: 1 1 0; height: 100%; padding: 0; font: inherit; color: var(--lab-ink); background: none; border: 0; cursor: pointer; }
-.monitor-band-bar { width: min(1.75rem, 60%); min-height: 1px; background: var(--lab-ink-soft); border-radius: 4px 4px 0 0; transition: height 120ms linear, background var(--motion-quick) var(--motion-ease); }
-.monitor-band[aria-pressed="true"] .monitor-band-bar { background: var(--lab-select); }
-.monitor-band:hover .monitor-band-bar { background: var(--lab-ink); }
-.monitor-band[aria-pressed="true"]:hover .monitor-band-bar { background: var(--lab-select); }
-.monitor-band-value { font-size: 0.75rem; }
-.monitor-spectrum-axis { display: flex; justify-content: space-around; gap: 0.5rem; margin: 0.25rem 0 0 2rem; }
-.monitor-spectrum-axis > span { flex: 1 1 0; display: grid; justify-items: center; font-size: 0.75rem; text-align: center; }
-@media (prefers-reduced-motion: reduce) { .monitor-band-bar { transition: none; } }
+.monitor-analysis { display: grid; gap: var(--lab-gap); grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr)); align-items: start; }
+.monitor-analysis > * { min-width: 0; }
+.monitor-analysis p { margin: 0 0 0.5rem; }
 
-.monitor-scalp svg { display: block; width: 100%; max-width: 17rem; margin: 0 auto; }
-.monitor-scalp-outline { fill: none; stroke: var(--lab-ink-soft); stroke-width: 0.025; }
-.monitor-scalp-dot { fill: var(--lab-ink); transition: r 120ms linear; }
-.monitor-scalp-label { fill: var(--lab-ink-soft); font-size: 0.13px; font-family: var(--lab-font); }
-.monitor-scalp p { margin: 0.375rem 0 0; }
+/* Band composition: one bar, five shares, a gap between each. The chosen band takes the selection colour. */
+.monitor-bands-track { display: flex; gap: 2px; height: 0.875rem; border-radius: var(--lab-radius-s); overflow: hidden; }
+.monitor-bands-share { flex: 0 1 0; min-width: 0; background: var(--lab-ink-soft); }
+.monitor-bands-share[data-selected="true"] { background: var(--lab-select); }
+.monitor-bands-keys { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.375rem; margin: 0.5rem 0; }
+.monitor-band { display: grid; gap: 0.125rem; justify-items: start; min-width: 0; padding: 0.375rem 0.5rem; font: inherit; color: var(--lab-ink); text-align: left; background: none; border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-s); cursor: pointer; }
+.monitor-band:hover { background: var(--lab-hover); }
+.monitor-band[aria-pressed="true"] { border-color: var(--lab-select); background: var(--lab-select-soft); box-shadow: inset 0 2px 0 var(--lab-select); }
+@media (max-width: 460px) { .monitor-bands-keys { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
-.monitor-rule { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; }
+/* Scalp cells: every cell the same size, placed on the schematic by its electrode's coordinates. */
+.monitor-scalp-field { --monitor-unit: 7rem; --monitor-cell-width: 2.125rem; --monitor-cell-height: 2.5rem; position: relative; width: calc(var(--monitor-unit) * 2 + var(--monitor-cell-width) + 0.5rem); max-width: 100%; height: calc(var(--monitor-unit) * 2 * var(--monitor-head-radius) + 1.75rem); margin: 0 auto; }
+.monitor-scalp-head { position: absolute; left: 50%; top: calc(50% + 0.625rem); width: calc(var(--monitor-unit) * 2 * var(--monitor-head-radius)); aspect-ratio: 1; transform: translate(-50%, -50%); border: 1px solid var(--lab-control-line); border-radius: 50%; }
+/* The sides are named outside the head, in the corners no electrode reaches. */
+.monitor-scalp-side { position: absolute; top: 0; font-size: var(--lab-text-meta); color: var(--lab-ink-soft); }
+.monitor-scalp-side[data-side="front"] { left: 50%; transform: translateX(-50%); }
+.monitor-scalp-side[data-side="left"] { left: 0; }
+.monitor-scalp-side[data-side="right"] { right: 0; }
+.monitor-cell { position: absolute; left: calc(50% + var(--cell-x) * var(--monitor-unit)); top: calc(50% + 0.625rem + var(--cell-y) * var(--monitor-unit)); display: grid; justify-items: center; align-content: center; width: var(--monitor-cell-width); height: var(--monitor-cell-height); transform: translate(-50%, -50%); line-height: 1.15; font-size: var(--lab-text-meta); background: var(--lab-panel); border: 1px solid var(--lab-line); border-radius: var(--lab-radius-s); }
+.monitor-cell-bar { display: block; width: calc(100% - 6px); height: 3px; background: var(--lab-line); }
+.monitor-cell-bar > span { display: block; height: 100%; background: var(--lab-ink); }
+.monitor-scalp p { margin: 0.5rem 0 0; }
+
 .monitor-events p { margin: 0.375rem 0 0; }
-.monitor-event-list { list-style: none; margin: 0.375rem 0 0; padding: 0; max-height: 11rem; overflow: auto; }
-.monitor-event-list li[data-ahead="true"] { opacity: 0.55; }
-.monitor-event { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr) auto; gap: 0.5rem; width: 100%; padding: 0.25rem 0.25rem; font: inherit; color: inherit; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--lab-line); cursor: pointer; }
-.monitor-event:hover { background: var(--lab-panel-raised); }
+/* The table's own wrap scrolls, so its head stays put above the rows. */
+.monitor-events-table .lab-table-wrap { max-height: 16rem; }
 
-@media (max-width: 1100px) {
-  .monitor { grid-template-columns: minmax(0, 1fr); }
-  .monitor-plot { height: 22rem; }
-}
+@media (max-width: 720px) { .monitor-plot { height: 22rem; } }
+@media print { .monitor-playhead { display: none; } }

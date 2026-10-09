@@ -1,57 +1,59 @@
-import AttackChainViz from '@/components/atlas/AttackChainViz';
-import type { ChainGenerationResult, GeneratedChain } from '@/lib/threat-model/chain-types';
+import { EvidenceGlyph } from '@/components/lab-kit/EvidenceMark';
+import type { ChainGenerationResult, GeneratedChain, GeneratedChainEdge, GeneratedChainStep } from '@/lib/threat-model/chain-types';
+import type { DeviceModel } from '@/lib/threat-model/device-model';
 import { describeEvidence } from '@/lib/threat-model/evidence-levels';
-import { EDGE_BASIS_LABELS } from './chain-labels';
+import { describeElement } from '@/lib/threat-model/stride';
+import { CHAIN_ROLE_LABELS, EDGE_BASIS_LABELS } from './chain-labels';
 
 interface Props {
+  model: DeviceModel;
   chainResult: ChainGenerationResult;
-  selectedChainId?: string | null;
-  /** Omit in the printed report, where chains cannot be selected. */
-  onSelectChain?: (chainId: string | null) => void;
 }
 
-function ChainCard({ chain, isSelected, onSelectChain }: { chain: GeneratedChain; isSelected: boolean; onSelectChain?: (chainId: string | null) => void }) {
+const HYPOTHESIS_LABEL = 'Generated hypothesis';
+const ABOUT_CHAINS = 'Chains are assembled along real paths in your device model, using only techniques with confirmed or demonstrated evidence. '
+  + 'Every chain is a hypothesis for review, whatever the evidence behind its individual steps: a path through the model exists, which is not evidence the attack has been carried out.';
+
+function ChainStepItem({ step, edge, model }: { step: GeneratedChainStep; edge: GeneratedChainEdge | undefined; model: DeviceModel }) {
   return (
-    <article className="tm-card">
-      <div className="tm-actions" style={{ alignItems: 'center', marginBottom: '0.5rem' }}>
-        <span className="tm-badge tm-badge--generated">Generated hypothesis</span>
-        <span className="tm-badge">Weakest step: {describeEvidence({ evidenceTier: chain.weakestEvidenceTier, evidenceStatus: chain.weakestEvidenceStatus }).label}</span>
-        {onSelectChain !== undefined && (
-          <button type="button" className="tm-button tm-no-print" aria-pressed={isSelected} onClick={() => onSelectChain(isSelected ? null : chain.chain_id)}>
-            {isSelected ? 'Hide on diagram' : 'Show on diagram'}
-          </button>
-        )}
+    <li>
+      <div className="lab-step">
+        <span className="lab-step-number">{step.position}</span>
+        <div>
+          <p><strong>{CHAIN_ROLE_LABELS[step.role]}</strong> on {describeElement(model, step.elementId)}</p>
+          <p>{step.action}</p>
+          <p className="report-step-meta"><span className="lab-id">{step.technique_id}</span> <EvidenceGlyph evidence={describeEvidence(step)} labelForm="short" /></p>
+        </div>
       </div>
-      <AttackChainViz chain={chain} isDetectionLaneShown={false} />
-      {/* Folded on screen to keep the list scannable; always open in the printed report. */}
-      <details className="tm-chain-basis" open={onSelectChain === undefined}>
-        <summary>Why each step follows the last</summary>
-      <ol className="tm-list">
-        {chain.edges.map((edge) => (
-          <li key={edge.fromPosition}>Step {edge.fromPosition} to {edge.toPosition}: {EDGE_BASIS_LABELS[edge.basis]}.</li>
-        ))}
+      {edge !== undefined && <p className="lab-step-reason" data-basis={edge.basis}>Step {edge.fromPosition} to {edge.toPosition}: {EDGE_BASIS_LABELS[edge.basis]}.</p>}
+    </li>
+  );
+}
+
+function ChainSteps({ chain, model }: { chain: GeneratedChain; model: DeviceModel }) {
+  const weakest = describeEvidence({ evidenceTier: chain.weakestEvidenceTier, evidenceStatus: chain.weakestEvidenceStatus });
+  return (
+    <article className="report-chain">
+      <h3 className="report-subheading">{chain.chain_name}</h3>
+      <p className="report-step-meta"><span className="report-tag">{HYPOTHESIS_LABEL}</span> Weakest step: <EvidenceGlyph evidence={weakest} /></p>
+      <ol className="lab-steps">
+        {chain.steps.map((step) => <ChainStepItem key={step.position} step={step} model={model} edge={chain.edges.find((candidate) => candidate.fromPosition === step.position)} />)}
       </ol>
-      <p className="tm-muted tm-small">
-        <span className="tm-mono">{chain.chain_id}</span>. Generator {chain.generatorVersion}, catalog version {chain.registrarVersion}.
-      </p>
-      </details>
+      <p className="lab-soft"><span className="lab-id">{chain.chain_id}</span>. Generator {chain.generatorVersion}, catalog version {chain.registrarVersion}.</p>
     </article>
   );
 }
 
-export default function ChainList({ chainResult, selectedChainId = null, onSelectChain }: Props) {
-  const { chains, wasTruncated, emptyReason } = chainResult;
+/** Generated chains as the report prints them: each a plain numbered list of steps, with why each step follows the last. */
+export default function ChainList({ model, chainResult }: Props) {
+  const { chains, wasTruncated, wasCapped, chainsFound, emptyReason } = chainResult;
   return (
     <div>
-      <p className="tm-muted" style={{ marginBottom: '0.75rem' }}>
-        Chains are assembled along real paths in your device model, using only techniques with confirmed or demonstrated evidence.
-        Every chain is a hypothesis for review, whatever the evidence behind its individual steps: a path through the model exists, which is not evidence the attack has been carried out.
-      </p>
-      {wasTruncated && <p className="tm-notice">The search stopped at its limit. Other chains may exist.</p>}
-      {chains.length === 0 && <p className="tm-notice">No chains to show. {emptyReason}</p>}
-      {chains.map((chain) => (
-        <ChainCard key={chain.chain_id} chain={chain} isSelected={chain.chain_id === selectedChainId} onSelectChain={onSelectChain} />
-      ))}
+      <p>{ABOUT_CHAINS}</p>
+      {wasTruncated && <p className="lab-notice">The search stopped at its limit. Other chains may exist.</p>}
+      {wasCapped && <p className="lab-notice">Showing the first {chains.length} of {chainsFound} chains found.</p>}
+      {chains.length === 0 && <p className="lab-notice">No chains to show. {emptyReason}</p>}
+      {chains.map((chain) => <ChainSteps key={chain.chain_id} chain={chain} model={model} />)}
     </div>
   );
 }

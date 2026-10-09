@@ -1,0 +1,36 @@
+/*
+ * The report on paper. It prints light whatever theme is on screen: the kit resets its tokens
+ * to their light values for print, and the colours that carry the text are also stated here as
+ * literals, so a heading can never inherit a light colour from the page around it.
+ */
+
+@media print {
+  @page { margin: 14mm; }
+
+  .report, .report-checklist { color: #1d1d1f; background: #ffffff; border: 0; padding: 0; color-scheme: light; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .report :is(h1, h2, h3, h4), .report-checklist :is(h1, h2, h3, h4) { color: #1d1d1f; }
+  .report :is(p, li, dd, td, caption), .report-checklist :is(p, li) { color: #1d1d1f; }
+  .report :is(.lab-soft, .lab-label, .lab-id, dt, th), .report-checklist :is(.lab-soft, .lab-label) { color: #515154; }
+
+  .report-no-print { display: none; }
+  .report-print-only { display: inline; overflow-wrap: anywhere; }
+  .report .lab-link { color: #1d1d1f; }
+
+  /* A section runs on across pages; a heading stays with what follows it. */
+  .report-section { break-inside: auto; }
+  .report :is(h2, h3, h4), .report-checklist :is(h2, h3, h4) { break-after: avoid; }
+  .report-title-block, .report-tiles, .report-chain .lab-steps > li, .report-item { break-inside: avoid; }
+
+  /* No table is clipped: nothing scrolls, every cell wraps, and the table is as wide as the page. */
+  .report-table-wrap, .report-diagram { overflow: visible; max-height: none; }
+  .report-table { width: 100%; table-layout: auto; }
+  .report-table :is(th, td) { white-space: normal; overflow-wrap: anywhere; }
+  .report-table :is(th, td)[data-figure="true"] { white-space: nowrap; }
+  /* The head is repeated on every page a table reaches, and a row is never split between two. */
+  .report-table thead { display: table-header-group; }
+  .report-table th { position: static; background: #ffffff; }
+  .report-table tr { break-inside: avoid; }
+  .report-table td { border-bottom: 1px solid #c7c7cc; }
+
+  .report-diagram svg { max-width: 100%; height: auto; }
+}

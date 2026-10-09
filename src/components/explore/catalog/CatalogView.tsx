@@ -1,158 +1,83 @@
-import { useMemo, useState } from 'react';
-import { DOMAIN_COLORS } from '@/components/atlas/chain-constants';
-import DataTable, { type DataTableColumn } from '@/components/lab-kit/DataTable';
-import EvidenceBar from '@/components/lab-kit/EvidenceBar';
-import EvidenceMark from '@/components/lab-kit/EvidenceMark';
-import SeverityMark from '@/components/lab-kit/SeverityMark';
-import { useMediaQuery } from '@/components/lab-kit/use-media-query';
-import { useFocus } from '@/components/workbench/FocusContext';
-import type { ModeId } from '@/components/workbench/mode-registry';
-import { BAND_ORDER, CATALOG_SEVERITIES, type CatalogTechnique } from '@/lib/threat-model/catalog-types';
-import {
-  EMPTY_CATALOG_FILTERS, buildCatalogFilterContext, countCatalogFacets, filterCatalog, type CatalogFilters,
-} from '@/lib/threat-model/catalog-filter';
-import { countByEvidence, describeEvidence } from '@/lib/threat-model/evidence-levels';
-import { SCOPE_TERM_LABELS } from '@/lib/threat-model/lab-terms';
-import CatalogFilterPanel from './CatalogFilterPanel';
-import MarkMatrix, { type MatrixAxisItem } from './MarkMatrix';
-import TechniquePanel, { MODE_LABELS } from './TechniquePanel';
+import { useEffect, useRef, type RefObject } from 'react';
+import type { DataTableHandle } from '@/components/lab-kit/DataTable';
+import { useCountTransition } from '@/components/lab-kit/motion/use-count-transition';
+import Segmented, { type SegmentedOption } from '@/components/lab-kit/Segmented';
+import { useShowTechniqueInModel } from '@/components/workbench/use-open-technique';
+import { EMPTY_CATALOG_FILTERS, isCatalogFiltered } from '@/lib/threat-model/catalog-filter';
+import { useOpenedTechniqueId } from '../explore-navigation';
+import { BAND_LEGEND_SENTENCE } from './band-groups';
+import CatalogFacetBar from './CatalogFacetBar';
+import CatalogMatrix, { MATRIX_LAYOUT_LABELS } from './CatalogMatrix';
+import { useCatalogViewState, type CatalogLayout } from './catalog-view-state';
+import ScopeCountsLine from './ScopeCountsLine';
+import TechniqueDrawer from './TechniqueDrawer';
+import TechniqueTable from './TechniqueTable';
+import { useCatalogData } from './use-catalog-data';
 
-type CatalogLayout = 'table' | 'tactic-band' | 'domain-mode';
-
-const LAYOUTS: readonly { id: CatalogLayout; label: string }[] = [
-  { id: 'table', label: 'Table' },
-  { id: 'tactic-band', label: 'Tactic by band' },
-  { id: 'domain-mode', label: 'Domain by mode' },
+const LAYOUT_OPTIONS: readonly SegmentedOption<CatalogLayout>[] = [
+  { value: 'table', label: 'Table' },
+  { value: 'family-band', label: MATRIX_LAYOUT_LABELS['family-band'] },
+  { value: 'domain-effect', label: MATRIX_LAYOUT_LABELS['domain-effect'] },
 ];
-const BAND_AXIS: readonly MatrixAxisItem[] = BAND_ORDER.map((bandId) => ({
-  id: bandId, label: bandId, title: `Band ${bandId}, ${bandId.startsWith('S') ? 'silicon side' : bandId.startsWith('I') ? 'the interface' : 'neural side'}`,
-}));
-/** Below this width the filters fold away, so the techniques are the first thing on screen. */
-const NARROW_SCREEN_QUERY = '(max-width: 1100px)';
-const MODE_AXIS: readonly MatrixAxisItem[] = (['R', 'M', 'D'] as const).map((mode) => ({ id: mode, label: MODE_LABELS[mode] }));
 
-function domainLabel(code: string): string {
-  return Object.hasOwn(DOMAIN_COLORS, code) ? DOMAIN_COLORS[code as keyof typeof DOMAIN_COLORS].label : code;
+/** Returns focus to the row of a technique when its drawer closes. */
+function useFocusReturn(openedId: string | null): RefObject<DataTableHandle | null> {
+  const tableRef = useRef<DataTableHandle>(null);
+  const lastOpenedId = useRef<string | null>(null);
+  useEffect(() => {
+    if (openedId !== null) { lastOpenedId.current = openedId; return; }
+    if (lastOpenedId.current !== null) tableRef.current?.focusRow(lastOpenedId.current);
+    lastOpenedId.current = null;
+  }, [openedId]);
+  return tableRef;
 }
 
 /**
- * The technique catalog: one set of filters, three layouts of the same rows, and one
- * panel for a technique. Evidence leads everywhere, and each technique says where it
- * stands against the device in focus.
+ * The technique catalog: one bar of filters, the techniques as a table, the same techniques
+ * counted on two axes, and one technique in the inspector. Filters, sort, layout and the
+ * opened technique are kept when the reader leaves and comes back.
  */
-export default function CatalogView({ onOpenMode }: { onOpenMode: (modeId: ModeId) => void }) {
-  const { engineData, referenceData, report, state, techniqueById } = useFocus();
-  const [filters, setFilters] = useState<CatalogFilters>(EMPTY_CATALOG_FILTERS);
-  const [layout, setLayout] = useState<CatalogLayout>('table');
-  const [openedId, setOpenedId] = useState<string | null>(null);
-  const { techniques, tactics } = engineData;
-  const deviceName = state.model.name;
-  const isNarrowScreen = useMediaQuery(NARROW_SCREEN_QUERY);
-
-  const filterContext = useMemo(() => {
-    const idsOnDevice = new Set(report.riskRows.flatMap((row) => (row.source === 'catalog' && row.techniqueId !== null ? [row.techniqueId] : [])));
-    return buildCatalogFilterContext(engineData, referenceData.placementRules, idsOnDevice);
-  }, [report.riskRows, engineData, referenceData.placementRules]);
-  const { placementOf } = filterContext;
-  const shown = useMemo(() => filterCatalog(techniques, filters, filterContext), [techniques, filters, filterContext]);
-  const facets = useMemo(() => countCatalogFacets(techniques, filters, filterContext), [techniques, filters, filterContext]);
-  const evidenceValues = useMemo(() => countByEvidence(techniques), [techniques]);
-  const shownEvidence = useMemo(() => {
-    const shownCounts = new Map(countByEvidence(shown).map((entry) => [entry.label, entry.count]));
-    // Every value keeps its place in the bar, so a segment shrinks to nothing instead of the others jumping.
-    return evidenceValues.map((entry) => ({ ...entry, count: shownCounts.get(entry.label) ?? 0 }));
-  }, [shown, evidenceValues]);
-  const tacticById = useMemo(() => new Map(tactics.map((tactic) => [tactic.id, tactic])), [tactics]);
-  const opened = openedId === null ? undefined : techniqueById.get(openedId);
-
-  const columns = useMemo((): readonly DataTableColumn<CatalogTechnique>[] => [
-    { id: 'evidence', header: 'Evidence', render: (technique) => <EvidenceMark tier={technique.evidenceTier} status={technique.evidenceStatus} />, sortValue: (technique) => describeEvidence(technique).rank },
-    { id: 'name', header: 'Technique', render: (technique) => technique.name, sortValue: (technique) => technique.name },
-    { id: 'id', header: 'ID', render: (technique) => <span className="lab-id">{technique.id}</span>, sortValue: (technique) => technique.id },
-    { id: 'tactic', header: 'Tactic', render: (technique) => tacticById.get(technique.tactic)?.name ?? technique.tactic, sortValue: (technique) => tacticById.get(technique.tactic)?.name ?? technique.tactic },
-    { id: 'bands', header: 'Bands', render: (technique) => <span className="lab-id">{technique.bandIds.join(' ')}</span> },
-    { id: 'severity', header: 'Severity', render: (technique) => <SeverityMark severity={technique.severity} />, sortValue: (technique) => CATALOG_SEVERITIES.indexOf(technique.severity) },
-    { id: 'mode', header: 'Does', render: (technique) => (technique.mode === null ? <span className="lab-soft">Not stated</span> : MODE_LABELS[technique.mode]), sortValue: (technique) => technique.mode ?? '' },
-    {
-      id: 'placement', header: `On ${deviceName}`, sortValue: (technique) => placementOf(technique.id),
-      render: (technique) => { const placement = placementOf(technique.id); return <span className={`catalog-state${placement === 'not_assessed' ? ' lab-hatch' : ''}`} data-state={placement}>{SCOPE_TERM_LABELS[placement]}</span>; },
-    },
-  ], [tacticById, placementOf, deviceName]);
-
-  /** A cell in a matrix narrows the table to that cell, so the reader lands on the techniques themselves. */
-  const pickCell = (cell: Partial<CatalogFilters>): void => {
-    setFilters({ ...filters, ...cell });
-    setLayout('table');
-  };
-  const domainAxis = useMemo((): MatrixAxisItem[] => [...new Set(shown.map((technique) => technique.domain ?? ''))]
-    .filter((code) => code !== '').sort().map((code) => ({ id: code, label: domainLabel(code), title: `${domainLabel(code)} (${code})` })), [shown]);
-  const tacticAxis = useMemo((): MatrixAxisItem[] => tactics.map((tactic) => ({ id: tactic.id, label: tactic.name, title: `${tactic.name} (${tactic.id})` })), [tactics]);
-
-  const filterPanel = (
-    <CatalogFilterPanel
-      filters={filters} facets={facets} evidenceValues={evidenceValues} tactics={tactics} deviceName={deviceName}
-      onChange={setFilters} onClear={() => setFilters(EMPTY_CATALOG_FILTERS)}
-    />
-  );
+export default function CatalogView() {
+  const { filters, setFilters, sort, setSort, layout, setLayout } = useCatalogViewState();
+  const [openedId, setOpenedId] = useOpenedTechniqueId();
+  const data = useCatalogData(filters);
+  const showInModel = useShowTechniqueInModel();
+  const opened = openedId === null ? undefined : data.techniqueOf(openedId);
+  const tableRef = useFocusReturn(opened?.id ?? null);
+  // The count swaps at once and is marked for a moment; it never runs through numbers that were not true.
+  const shownCount = useCountTransition(data.shown.length);
 
   return (
-    <div className="catalog" data-panel={opened !== undefined}>
-      {isNarrowScreen ? <details className="catalog-filter-fold"><summary>Filters</summary>{filterPanel}</details> : filterPanel}
-      <div className="catalog-main">
-        <section className="lab-panel catalog-head" aria-label="Catalog summary and layout">
-          <div className="catalog-head-row">
-            <p className="lab-panel-title" role="status">{shown.length} of {techniques.length} techniques</p>
-            <div className="catalog-layouts" role="group" aria-label="Layout">
-              {LAYOUTS.map((option) => <button key={option.id} type="button" className="lab-button" aria-pressed={layout === option.id} onClick={() => setLayout(option.id)}>{option.label}</button>)}
-            </div>
-          </div>
-          <EvidenceBar counts={shownEvidence} subject="techniques shown" />
-          <input
-            className="catalog-search" type="search" placeholder="Search by name or ID" aria-label="Search techniques by name or ID"
-            value={filters.text} onChange={(event) => setFilters({ ...filters, text: event.target.value })}
-          />
-        </section>
-        <section className="lab-panel" aria-label="Techniques">
-          {layout === 'table' && (
-            <div className="catalog-table">
-              <DataTable
-                caption="TARA is a proposed catalog and is not peer reviewed. Enter opens a technique."
-                columns={columns} rows={shown} rowKey={(technique) => technique.id} onOpenRow={(technique) => setOpenedId(technique.id)}
-                emptyMessage="No technique matches these filters together. Clear one to widen the search."
-              />
-            </div>
-          )}
-          {layout === 'tactic-band' && (
-            <div className="lab-panel-body">
-              <MarkMatrix
-                caption="One mark per technique, in each band it touches. A technique that spans bands appears in each. An empty cell means the catalog has no technique there; it does not mean the cell is safe."
-                rows={tacticAxis} columns={BAND_AXIS}
-                techniquesAt={(tacticId, bandId) => shown.filter((technique) => technique.tactic === tacticId && technique.bandIds.includes(bandId))}
-                onPickCell={(tacticId, bandId) => pickCell({ tacticId, bandIds: [bandId] })}
-              />
-            </div>
-          )}
-          {layout === 'domain-mode' && (
-            <div className="lab-panel-body">
-              <MarkMatrix
-                caption="One mark per technique, by the catalog's primary domain and by what the technique does. An empty cell means the catalog has no technique there."
-                rows={domainAxis} columns={MODE_AXIS}
-                techniquesAt={(domain, mode) => shown.filter((technique) => technique.domain === domain && technique.mode === mode)}
-                onPickCell={(domain, mode) => pickCell({ domain, modes: [mode as 'R' | 'M' | 'D'] })}
-              />
-            </div>
-          )}
-        </section>
+    <div className="explore-catalog" data-drawer={opened !== undefined}>
+      <section className="lab-panel explore-catalog-filters" aria-label="Filters">
+        <CatalogFacetBar filters={filters} facets={data.facets} evidenceValues={data.evidenceValues} tactics={data.tactics} domains={data.domains} onChange={setFilters} />
+        <p className="lab-soft explore-band-legend">{BAND_LEGEND_SENTENCE}</p>
+      </section>
+      <div className="explore-catalog-head lab-material">
+        <p className="lab-panel-title" role="status">
+          <span className="lab-figure" data-changed={shownCount.hasChanged}>{shownCount.value}</span> of <span className="lab-figure">{data.techniques.length}</span> techniques
+        </p>
+        {isCatalogFiltered(filters) && <button type="button" className="lab-button" onClick={() => setFilters(EMPTY_CATALOG_FILTERS)}>Clear filters</button>}
+        <Segmented label="Layout" options={LAYOUT_OPTIONS} value={layout} onChange={setLayout} />
       </div>
-      {opened !== undefined && (
-        <TechniquePanel
-          technique={opened} tactic={tacticById.get(opened.tactic)} deviceName={deviceName}
-          precedentCves={engineData.precedentCves.filter((cve) => cve.techniqueIds.includes(opened.id))} precedentCvesAsOf={engineData.precedentCvesAsOf}
-          placementState={placementOf(opened.id)} placementRules={referenceData.placementRules}
-          relatedTechniques={opened.relatedTechniqueIds.flatMap((relatedId) => { const related = techniqueById.get(relatedId); return related === undefined ? [] : [related]; })}
-          onOpenTechnique={setOpenedId} onShowInModel={() => onOpenMode('model')} onClose={() => setOpenedId(null)}
-        />
+      {filters.placement.length > 0 && <ScopeCountsLine counts={data.scopeCounts} pickedTerms={filters.placement} />}
+      {layout !== 'table' && (
+        <section className="lab-panel explore-catalog-matrix" aria-label={MATRIX_LAYOUT_LABELS[layout]}>
+          <CatalogMatrix layout={layout} techniques={data.techniques} tactics={data.tactics} filters={filters} filterContext={data.filterContext} onChange={setFilters} />
+        </section>
       )}
+      <section className="lab-panel" id="lab-results" aria-label="Techniques" tabIndex={-1}>
+        <TechniqueTable
+          ref={tableRef} techniques={data.shown} scopeOf={data.scopeOf} familyNameOf={data.familyNameOf}
+          sort={sort} onSortChange={setSort} openedId={opened?.id ?? null} onOpen={setOpenedId}
+        />
+      </section>
+      <TechniqueDrawer
+        technique={opened} tactic={opened === undefined ? undefined : data.tacticOf(opened.tactic)} scopeEntry={opened === undefined ? undefined : data.scopeOf(opened.id)}
+        deviceName={data.deviceName} elementLabelOf={data.elementLabelOf} cves={opened === undefined ? [] : data.cvesOf(opened.id)} cvesAsOf={data.cvesAsOf}
+        relatedTechniques={opened === undefined ? [] : data.relatedOf(opened)}
+        onOpenTechnique={setOpenedId} onShowInModel={() => { if (opened !== undefined) showInModel(opened.id); }} onClose={() => setOpenedId(null)}
+      />
     </div>
   );
 }

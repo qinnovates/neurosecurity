@@ -13,14 +13,14 @@ export default function ReplaceDeviceConfirm({ currentName, decisionCount, repla
     ? `its answers and ${decisionCount} recorded decision${decisionCount === 1 ? '' : 's'}`
     : 'the answers you changed';
   return (
-    <div className="tm-notice" role="alertdialog" aria-label={`Replace ${currentName}?`}>
+    <div className="lab-notice model-confirm" role="alertdialog" aria-label={`Replace ${currentName}?`}>
       <p>
         Replace <strong>{currentName}</strong> with {replacementLabel}? You will lose {lossDescription}.
-        Use "Save model file" first if you want to keep them.
+        Use "Save file" in the device menu first if you want to keep them.
       </p>
-      <div className="tm-actions" style={{ marginTop: '0.5rem' }}>
-        <button type="button" className="tm-button tm-button--primary" autoFocus onClick={onKeep}>Keep {currentName}</button>
-        <button type="button" className="tm-button" onClick={onReplace}>Replace it</button>
+      <div className="model-confirm-actions">
+        <button type="button" className="lab-button lab-button--primary" autoFocus onClick={onKeep}>Keep {currentName}</button>
+        <button type="button" className="lab-button" onClick={onReplace}>Replace it</button>
       </div>
     </div>
   );

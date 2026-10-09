@@ -1,53 +1,44 @@
+import DataTable, { type DataTableColumn } from '@/components/lab-kit/DataTable';
 import type { SampleMarker } from '@/lib/signal/sample-csv';
 import type { ThresholdEvent } from '@/lib/signal/threshold-events';
+import { formatMicrovolts, formatSeconds, formatTime } from './monitor-format';
 
 interface Props {
   events: readonly ThresholdEvent[];
   markers: readonly SampleMarker[];
-  thresholdMicrovolts: number;
-  thresholdOptions: readonly number[];
-  onThresholdChange: (thresholdMicrovolts: number) => void;
-  /** The playhead, so events still ahead are drawn quieter. */
-  time: number;
   onSeek: (time: number) => void;
-  formatTime: (seconds: number) => string;
 }
 
 /** How many events are listed before the rest are counted; a noisy sample can have hundreds. */
 const MAX_LISTED = 40;
+const EMPTY_MESSAGE = 'This rule did not fire anywhere in this sample. That is not a clean bill: only this one rule is checked, on a synthetic signal.';
+
+const COLUMNS: readonly DataTableColumn<ThresholdEvent>[] = [
+  { id: 'start', header: 'Start', render: (event) => <span className="lab-figure">{formatTime(event.time)}</span>, sortValue: (event) => event.time },
+  { id: 'duration', header: 'Duration', render: (event) => formatSeconds(event.endTime - event.time), sortValue: (event) => event.endTime - event.time },
+  { id: 'channels', header: 'Channels', render: (event) => event.channelNames.join(', '), sortValue: (event) => event.channelNames.length },
+  { id: 'peak', header: 'Peak', render: (event) => formatMicrovolts(event.peakMicrovolts), sortValue: (event) => event.peakMicrovolts },
+];
+
+function describeCount(count: number): string {
+  return `${count} crossing${count === 1 ? '' : 's'} in this sample. Demonstrations of the rule, not detections.`;
+}
 
 /**
- * Moments in the sample where one stated rule fired. They are demonstrations of a rule on
- * a synthetic signal, not detections, and an empty list says only that this rule did not fire.
+ * Stretches of the sample where one stated rule held. They are demonstrations of a rule on a
+ * synthetic signal, not detections, and an empty list says only that this rule did not fire.
+ * Opening a row moves the playhead to its start.
  */
-export default function EventList({ events, markers, thresholdMicrovolts, thresholdOptions, onThresholdChange, time, onSeek, formatTime }: Props) {
+export default function EventList({ events, markers, onSeek }: Props) {
   return (
     <div className="monitor-events">
-      <label className="monitor-rule">
-        <span>Rule: any channel beyond</span>
-        <select className="catalog-select" style={{ width: 'auto' }} value={thresholdMicrovolts} onChange={(event) => onThresholdChange(Number(event.target.value))}>
-          {thresholdOptions.map((option) => <option key={option} value={option}>{option} µV</option>)}
-        </select>
-      </label>
-      {events.length === 0 ? (
-        <p className="lab-soft">This rule did not fire anywhere in this sample. That is not a clean bill: only this one rule is checked, on a synthetic signal.</p>
-      ) : (
-        <>
-          <p className="lab-soft" role="status">{events.length} crossing{events.length === 1 ? '' : 's'} in this sample. Demonstrations of the rule, not detections.</p>
-          <ol className="monitor-event-list">
-            {events.slice(0, MAX_LISTED).map((event) => (
-              <li key={event.time} data-ahead={event.time > time}>
-                <button type="button" className="monitor-event" onClick={() => onSeek(event.time)}>
-                  <span className="lab-figure">{formatTime(event.time)}</span>
-                  <span>{event.channelNames.join(', ')}</span>
-                  <span className="lab-soft">peak {Math.round(event.peakMicrovolts)} µV</span>
-                </button>
-              </li>
-            ))}
-          </ol>
-          {events.length > MAX_LISTED && <p className="lab-soft">And {events.length - MAX_LISTED} more. Raise the threshold to see fewer.</p>}
-        </>
-      )}
+      <div className="monitor-events-table">
+        <DataTable
+          caption={events.length === 0 ? 'Crossings in this sample' : describeCount(events.length)} columns={COLUMNS} rows={events.slice(0, MAX_LISTED)}
+          rowKey={(event) => String(event.time)} emptyMessage={EMPTY_MESSAGE} onOpenRow={(event) => onSeek(event.time)}
+        />
+      </div>
+      {events.length > MAX_LISTED && <p className="lab-soft">And {events.length - MAX_LISTED} more. Raise the threshold to see fewer.</p>}
       {markers.length > 0 && <p className="lab-soft">The sample file also carries {markers.length} marker{markers.length === 1 ? '' : 's'} of its own, such as stimulus onsets. They are the dotted lines on the plot.</p>}
     </div>
   );

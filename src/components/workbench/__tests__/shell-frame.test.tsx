@@ -98,7 +98,7 @@ describe('address', () => {
 
   it('shows one line for an unknown address, corrects it, and drops the line on the next move', async () => {
     await openLab('#nonsense/anything');
-    expect(screen.getByRole('status').textContent).toBe('That address is not a screen in TARA Lab. Showing Explore, Device classes.');
+    expect(screen.getByRole('status').textContent).toBe('That address is not a screen in TARA Lab. Showing Explore, Start.');
     await waitFor(() => expect(window.location.hash).toBe('#explore'));
     pressMode('Model');
     await expectView(defaultViewId('model'));

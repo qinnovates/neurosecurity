@@ -1,0 +1,41 @@
+/* The device editor: a form, two editable tables, and what the last edit did. Kit tokens only. */
+
+.lab-editor { display: grid; gap: var(--lab-gap); min-width: 0; }
+.lab-editor-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: var(--lab-gap); margin-bottom: var(--lab-gap); }
+
+.lab-editor-group { min-width: 0; margin: var(--lab-gap) 0 0; padding: 0; border: 0; }
+.lab-editor-group > legend { padding: 0; margin-bottom: 0.25rem; }
+.lab-editor-checklist { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 0 var(--lab-gap); max-height: 14rem; overflow: auto; padding: 0.25rem 0.5rem; border: 1px solid var(--lab-line); border-radius: var(--lab-radius-s); }
+
+/* A tick or a radio with its words: the whole label is the target. */
+.lab-editor-tick { display: inline-flex; align-items: center; gap: 0.375rem; min-height: 1.75rem; cursor: pointer; }
+.lab-editor-tick input { flex: none; width: 1rem; height: 1rem; margin: 0; accent-color: var(--lab-select); }
+
+.lab-editor-table .lab-input { min-width: 7.5rem; }
+.lab-editor-table td { padding-block: 0.125rem; }
+.lab-editor-card { display: grid; gap: 0.5rem; }
+
+/* The row that adds a part or a connection. */
+.lab-editor-add { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.5rem var(--lab-gap); margin-top: var(--lab-gap); padding-top: var(--lab-gap); border-top: 1px solid var(--lab-line); }
+.lab-editor-add > .lab-field { flex: 1 1 9rem; }
+.lab-editor-add > .lab-editor-group { margin-top: 0; }
+.lab-editor-add-problem { flex-basis: 100%; margin: 0; color: var(--lab-ink); }
+
+.lab-editor-confirm { margin-top: var(--lab-gap); }
+.lab-editor-confirm p { margin: 0; }
+.lab-editor-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+.lab-editor-list { list-style: none; margin: 0.375rem 0 0; padding: 0; display: grid; gap: 0.375rem; }
+.lab-editor-starts { margin-top: 0; }
+
+/* What the last edit did stays in view under the form while the reader scrolls it. */
+.lab-editor-outcome { position: sticky; bottom: 0; max-height: 14rem; overflow: auto; padding: var(--lab-gap) var(--lab-pad); background: var(--lab-panel-raised); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-m); }
+.lab-editor-outcome p { margin: 0; }
+
+@media (pointer: coarse) {
+  .lab-editor-tick { min-width: 2.75rem; min-height: 2.75rem; }
+  .lab-editor-tick input { width: 1.25rem; height: 1.25rem; }
+}
+
+@media print {
+  .lab-editor-outcome { position: static; max-height: none; }
+}

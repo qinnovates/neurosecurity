@@ -19,11 +19,6 @@ export const FREQUENCY_BANDS: readonly FrequencyBand[] = [
   { id: 'gamma', label: 'Gamma', fromHz: 30, toHz: 45 },
 ];
 
-/** The largest power of two that fits in `length`; 0 when nothing fits. */
-export function largestPowerOfTwoAtMost(length: number): number {
-  return length < 1 ? 0 : 2 ** Math.floor(Math.log2(length));
-}
-
 /**
  * Power at each frequency bin of a real signal whose length is a power of two.
  * Bin `k` is the frequency `k * sampleRate / length`. Only the first half is returned.
@@ -65,18 +60,30 @@ export function powerSpectrum(signal: Float32Array): Float64Array {
   return power;
 }
 
-/**
- * The share of power in each band, as fractions that sum to 1 across the bands (or all
- * zero for a flat signal). Shares, not absolute power, so samples of different amplitude compare.
- */
-export function bandShares(signal: Float32Array, sampleRateHz: number, bands: readonly FrequencyBand[] = FREQUENCY_BANDS): number[] {
+/** The sum of the squared Hann window, which scales windowed power back to the signal's own units. */
+function hannEnergy(size: number): number {
+  let energy = 0;
+  for (let index = 0; index < size; index += 1) energy += (0.5 - 0.5 * Math.cos((2 * Math.PI * index) / (size - 1))) ** 2;
+  return energy;
+}
+
+/** Windowed power summed over each band's bins. */
+function bandPowerTotals(signal: Float32Array, sampleRateHz: number, bands: readonly FrequencyBand[]): number[] {
   const power = powerSpectrum(signal);
   const hertzPerBin = sampleRateHz / signal.length;
-  const totals = bands.map((band) => {
+  return bands.map((band) => {
     let total = 0;
     for (let bin = Math.ceil(band.fromHz / hertzPerBin); bin < power.length && bin * hertzPerBin < band.toHz; bin += 1) total += power[bin];
     return total;
   });
-  const sum = totals.reduce((accumulated, total) => accumulated + total, 0);
-  return totals.map((total) => (sum === 0 ? 0 : total / sum));
+}
+
+/**
+ * The mean square of the signal that falls in each band, in the square of the signal's unit.
+ * By Parseval's relation the windowed power of the one-sided bins, doubled and divided by the
+ * length and the window's energy, estimates it. Its square root is the band's RMS amplitude.
+ */
+export function bandMeanSquares(signal: Float32Array, sampleRateHz: number, bands: readonly FrequencyBand[] = FREQUENCY_BANDS): number[] {
+  const scale = 2 / (signal.length * hannEnergy(signal.length));
+  return bandPowerTotals(signal, sampleRateHz, bands).map((total) => total * scale);
 }

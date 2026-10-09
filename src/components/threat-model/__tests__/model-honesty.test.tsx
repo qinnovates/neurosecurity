@@ -1,24 +1,20 @@
 // @vitest-environment jsdom
-import { describe, it, expect, afterEach, beforeAll } from 'vitest';
+import { describe, it, expect, afterEach } from 'vitest';
 import { render, screen, cleanup, within } from '@testing-library/react';
-import AttackChainViz from '@/components/atlas/AttackChainViz';
 import { buildThreatModelReport } from '@/lib/threat-model/build-report';
 import { CHECKLIST_TITLE, NOT_DETERMINED_STATEMENT, NOT_EVALUATED_STATEMENT } from '@/lib/threat-model/compliance-us';
 import type { DeviceModel } from '@/lib/threat-model/device-model';
+import { describeEvidence } from '@/lib/threat-model/evidence-levels';
 import { buildModelFromIntake, defaultAnswersFor } from '@/lib/threat-model/intake-to-model';
+import { listOrphanDecisions } from '@/lib/threat-model/orphan-decisions';
 import type { ThreatModelReport } from '@/lib/threat-model/report-types';
 import { loadEngineBundle, loadReferenceData } from '@/lib/threat-model/__tests__/load-test-data';
 import ChainList from '../ChainList';
 import ComplianceChecklist from '../ComplianceChecklist';
-import ReportView from '../ReportView';
 import RiskRegister from '../RiskRegister';
+import { RISK_STATUS_LABELS } from '../risk-status-labels';
 
 afterEach(cleanup);
-
-beforeAll(() => {
-  // jsdom has no ResizeObserver; the chain diagram only uses it to choose its narrow layout.
-  globalThis.ResizeObserver ??= class { observe(): void {} unobserve(): void {} disconnect(): void {} };
-});
 
 const bundle = loadEngineBundle();
 const { engineData } = bundle;
@@ -38,17 +34,32 @@ describe('generated chains', () => {
     expect(chain).toBeDefined();
   });
 
-  it('are drawn in the Lab without the graded lane and without a defenses box', () => {
-    const { container } = render(<ChainList chainResult={report.chainResult} />);
-    expect(container.textContent).not.toMatch(/DETECTABILITY|EASY|MODERATE|HARD|Defenses/);
+  it('are plain numbered step lists, each labelled a hypothesis, with no graded lane and no defenses box', () => {
+    const { container } = render(<ChainList model={report.model} chainResult={report.chainResult} />);
+    expect(container.textContent).not.toMatch(/DETECTABILITY|EASY|MODERATE|HARD|Defenses|SILICON|BIOLOGICAL/);
     expect(screen.getAllByText('Generated hypothesis')).toHaveLength(report.chainResult.chains.length);
+    const lists = container.querySelectorAll('ol.lab-steps');
+    expect(lists).toHaveLength(report.chainResult.chains.length);
+    expect(lists[0].querySelectorAll(':scope > li')).toHaveLength(chain.steps.length);
+    expect([...lists[0].querySelectorAll('.lab-step-number')].map((number) => number.textContent)).toEqual(chain.steps.map((step) => String(step.position)));
+    expect(container.textContent).toContain('Every chain is a hypothesis for review');
   });
 
-  it('keep the graded lane on the public chain page, which passes no value', () => {
-    const { container } = render(<AttackChainViz chain={chain} />);
-    expect(container.textContent).toContain('DETECTABILITY');
-    cleanup();
-    expect(render(<AttackChainViz chain={chain} isDetectionLaneShown={false} />).container.textContent).not.toContain('DETECTABILITY');
+  it('use one ID scheme, say why each step follows the last, and word evidence by tier', () => {
+    const { container } = render(<ChainList model={report.model} chainResult={{ ...report.chainResult, chains: [chain] }} />);
+    for (const step of chain.steps) {
+      expect(container.textContent).toContain(step.technique_id);
+      if (step.tara_alias !== step.technique_id) expect(container.textContent).not.toContain(step.tara_alias);
+    }
+    expect(container.querySelectorAll('.lab-step-reason')).toHaveLength(chain.edges.length);
+    expect(container.textContent).not.toMatch(/\b(CONFIRMED|DEMONSTRATED|EMERGING|THEORETICAL)\b/);
+    expect(container.textContent).toContain(describeEvidence({ evidenceTier: chain.weakestEvidenceTier, evidenceStatus: chain.weakestEvidenceStatus }).label);
+    expect(container.textContent).not.toMatch(/\p{Extended_Pictographic}/u);
+  });
+
+  it('say when the list is the first few of those found', () => {
+    render(<ChainList model={report.model} chainResult={{ ...report.chainResult, wasCapped: true, chainsFound: report.chainResult.chains.length + 7 }} />);
+    expect(screen.getByText(`Showing the first ${report.chainResult.chains.length} of ${report.chainResult.chains.length + 7} chains found.`)).toBeTruthy();
   });
 });
 
@@ -92,26 +103,48 @@ describe('ComplianceChecklist', () => {
       cleanup();
     }
   });
+
+  it('links a source only by a secure address and always prints the address for paper', () => {
+    const { container } = renderChecklist(reportFor({ submissionType: '510k' }));
+    const links = [...container.querySelectorAll('a')];
+    expect(links.length).toBeGreaterThan(0);
+    for (const link of links) {
+      expect(link.getAttribute('href')).toMatch(/^https:\/\//);
+      expect(link.getAttribute('rel')).toBe('noopener noreferrer');
+    }
+    expect(container.querySelectorAll('.report-print-only')).toHaveLength(report.complianceItems.length);
+  });
 });
 
-describe('the printed register and report', () => {
-  it('heads the column as the catalog detection note and records no controls', () => {
-    render(<RiskRegister rows={report.riskRows} />);
-    expect(screen.getByRole('columnheader', { name: 'Detection note, from the catalog' })).toBeTruthy();
-    expect(screen.getAllByText('Controls: none recorded for this row.')).toHaveLength(report.riskRows.length);
-    expect(screen.queryByText(/Suggested controls|in place/)).toBeNull();
+describe('the printed register', () => {
+  it('prints one line per row under the seven columns, with evidence in the tier\'s words', () => {
+    const { container } = render(<RiskRegister rows={report.riskRows} />);
+    expect(screen.getAllByRole('columnheader').map((header) => header.textContent)).toEqual(['Threat', 'ID', 'Part', 'Catalog severity', 'Evidence', 'Decision', 'Note']);
+    expect(container.querySelectorAll('tbody tr')).toHaveLength(report.riskRows.length);
+    const catalogRow = report.riskRows.find((row) => row.source === 'catalog');
+    expect(catalogRow).toBeDefined();
+    expect(container.textContent).toContain(describeEvidence(catalogRow as NonNullable<typeof catalogRow>).shortLabel);
+    expect(container.textContent).not.toMatch(/\b(CONFIRMED|DEMONSTRATED|EMERGING|THEORETICAL)\b|Suggested controls|in place/);
+    expect(screen.getByText(`${report.riskRows.length} rows: ${report.riskRows.filter((row) => row.source === 'catalog').length} from the technique catalog, ${report.riskRows.filter((row) => row.source === 'stride').length} from the generic baseline`)).toBeTruthy();
   });
 
-  it('prints linked CVEs by id and product only, never their description', () => {
-    const { container } = render(<ReportView report={report} regionNames={[]} />);
-    expect(report.precedentCves.length).toBeGreaterThan(0);
-    expect(screen.getByRole('heading', { name: '5. CVEs in other products' })).toBeTruthy();
-    expect(screen.getByRole('heading', { name: `6. ${CHECKLIST_TITLE}` })).toBeTruthy();
-    for (const cve of report.precedentCves) {
-      expect(container.textContent).toContain(cve.cveId);
-      if (cve.description.length > 0) expect(container.textContent).not.toContain(cve.description);
-    }
-    expect(container.textContent).not.toMatch(/neuro-?surveillance|weaker evidence|Precedent vulnerabilities/i);
-    expect(container.textContent).toMatch(/have no placement decision and are not assessed here\./);
+  it('prints each decision and its note on the row it was recorded on', () => {
+    const [target] = report.riskRows;
+    const decided = reportFor({ riskDecisions: [{ riskId: target.riskId, status: 'accepted', note: 'Covered by the enclosure.' }] });
+    render(<RiskRegister rows={decided.riskRows} />);
+    const row = screen.getByText('Covered by the enclosure.').closest('tr') as HTMLElement;
+    expect(within(row).getByText(RISK_STATUS_LABELS.accepted)).toBeTruthy();
+    expect(screen.getAllByText(RISK_STATUS_LABELS.open)).toHaveLength(decided.riskRows.length - 1);
+  });
+
+  it('lists a decision that no longer has a row, with the reason, and keeps it out of the register rows', () => {
+    const orphanId = `no-such-part::${report.riskRows.find((row) => row.techniqueId !== null)?.techniqueId}`;
+    const decided = reportFor({ riskDecisions: [{ riskId: orphanId, status: 'mitigated', note: 'Old note.' }] });
+    const orphans = listOrphanDecisions(decided.model, decided);
+    expect(orphans).toHaveLength(1);
+    render(<RiskRegister rows={decided.riskRows} orphanDecisions={orphans} />);
+    expect(screen.getByRole('heading', { name: 'Decisions without a row: 1' })).toBeTruthy();
+    expect(screen.getByText(orphans[0].detail)).toBeTruthy();
+    expect(screen.getByText('Old note.')).toBeTruthy();
   });
 });
