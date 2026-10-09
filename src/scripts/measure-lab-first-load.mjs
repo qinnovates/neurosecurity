@@ -40,7 +40,7 @@ const STATIC_IMPORT_PATTERN = new RegExp(String.raw`(?<![\w$.])(?:import|export)
 const DYNAMIC_IMPORT_PATTERN = /(?<![\w$.])import\s*\(\s*["'`]([^"'`]+)["'`]\s*\)/g;
 
 const TAG_PATTERN = /<(link|script|astro-island)\b([^>]*)>/gi;
-const INLINE_MODULE_SCRIPT_PATTERN = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
+const INLINE_MODULE_SCRIPT_PATTERN = /<script\b([^>]*)>([\s\S]*?)<\/script\b[^>]*>/gi;
 const ISLAND_ENTRY_ATTRIBUTES = ['component-url', 'renderer-url', 'before-hydration-url'];
 const OFF_ORIGIN_URL_PATTERN = /^\s*([a-z][a-z0-9+.-]*:|\/\/)/i;
 

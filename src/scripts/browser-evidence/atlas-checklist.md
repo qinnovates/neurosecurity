@@ -20,7 +20,7 @@ node src/scripts/browser-evidence/run-browser-evidence.mjs --base-url http://127
 |---|---|
 | `--page <path>` | The page to open. Default `/atlas/model/`. A later page is the same command with another path. |
 | `--press <selector>` and `--wait-for <selector>` | Press one control, then wait for an element, and record what was requested only after the press. |
-| `--forbid-request <pattern>` | Fail if any request URL matches. Repeatable. Use it to show a lazy chunk or an asset folder is not fetched. |
+| `--forbid-request <text>` | Fail if any request URL contains this text. Repeatable. Use it to show a lazy chunk or an asset folder is not fetched. |
 | `--reduced-motion` | Emulate `prefers-reduced-motion: reduce`. |
 | `--disable-webgl` | Start the browser with WebGL off. |
 

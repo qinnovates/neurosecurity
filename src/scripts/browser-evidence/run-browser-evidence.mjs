@@ -11,7 +11,7 @@
  * Usage (serve the production build first: `npm run build && npm run preview`):
  *   node src/scripts/browser-evidence/run-browser-evidence.mjs \
  *     --base-url http://127.0.0.1:4321 --out <directory> [--page /atlas/model/] \
- *     [--press <css selector>] [--wait-for <css selector>] [--forbid-request <pattern>]... \
+ *     [--press <css selector>] [--wait-for <css selector>] [--forbid-request <text>]... \
  *     [--reduced-motion] [--disable-webgl] [--allow-remote]
  *
  * Writes evidence.json and screenshots into --out. Exits 1 when the page made a request to
@@ -59,7 +59,7 @@ function parseArguments(argumentList) {
     else if (flag === '--page') options.pageUrlPath = readValue(argumentList, ++index, flag);
     else if (flag === '--press') options.pressSelector = readValue(argumentList, ++index, flag);
     else if (flag === '--wait-for') options.waitForSelector = readValue(argumentList, ++index, flag);
-    else if (flag === '--forbid-request') options.forbiddenRequests.push(new RegExp(readValue(argumentList, ++index, flag)));
+    else if (flag === '--forbid-request') options.forbiddenRequests.push(readValue(argumentList, ++index, flag));
     else if (flag === '--reduced-motion') options.isMotionReduced = true;
     else if (flag === '--disable-webgl') options.isWebGLDisabled = true;
     else if (flag === '--allow-remote') options.isRemoteAllowed = true;
@@ -171,7 +171,7 @@ function findFindings(evidence, origin, forbiddenRequests) {
     ...requestUrls.filter((url) => !url.startsWith(`${origin}/`) && !IN_MEMORY_URL_PATTERN.test(url)).map((url) => `request to another origin: ${url}`),
     ...evidence.policyViolations.map((violation) => `policy violation: ${violation.effectiveDirective} blocked ${violation.blockedURI || '(inline)'}`),
     ...evidence.pageErrors.map((error) => `page error: ${error}`),
-    ...requestUrls.filter((url) => forbiddenRequests.some((pattern) => pattern.test(url))).map((url) => `forbidden request: ${url}`),
+    ...requestUrls.filter((url) => forbiddenRequests.some((text) => url.includes(text))).map((url) => `forbidden request: ${url}`),
   ];
 }
 

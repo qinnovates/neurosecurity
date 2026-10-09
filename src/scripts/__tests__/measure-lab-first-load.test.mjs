@@ -118,6 +118,11 @@ describe('extractPageEntries', () => {
     });
   });
 
+  it('reads an inline module script whose end tag has a space before the bracket', () => {
+    const html = '<script type="module">import"/_astro/spaced.js";</script ><p>after</p>';
+    expect(extractPageEntries(html, '/tool/').scriptEntries).toEqual(['/_astro/spaced.js']);
+  });
+
   it('separates references to other origins', () => {
     const html = '<script src="https://cdn.example/x.js"></script><link rel="stylesheet" href="//cdn.example/x.css">';
     expect(extractPageEntries(html, '/tool/').offOrigin).toEqual(['https://cdn.example/x.js', '//cdn.example/x.css']);
