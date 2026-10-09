@@ -34,6 +34,33 @@ function renderConnections(model: DeviceModel): OnEdit {
 
 afterEach(cleanup);
 
+describe('the editor\'s cards', () => {
+  it('draws each part and each connection as a card in a list, never as a table that scrolls sideways', () => {
+    const model = implantModel();
+    renderParts(model);
+    expect(screen.queryByRole('table')).toBeNull();
+    const parts = screen.getByRole('list', { name: `${model.components.length} of at most ${MODEL_LIMITS.maxComponents} parts` });
+    expect(within(parts).getAllByRole('listitem')).toHaveLength(model.components.length);
+    cleanup();
+    renderConnections(model);
+    expect(screen.queryByRole('table')).toBeNull();
+    const connections = screen.getByRole('list', { name: `${model.links.length} of at most ${MODEL_LIMITS.maxLinks} connections` });
+    expect(within(connections).getAllByRole('listitem')).toHaveLength(model.links.length);
+  });
+
+  it('gives every control on a card a name of its own, and prints the words of a tick beside it', () => {
+    const model = implantModel();
+    renderParts(model);
+    const names = screen.getAllByRole('checkbox').concat(screen.getAllByRole('radio')).map((control) => control.getAttribute('aria-label'));
+    expect(new Set(names).size).toBe(names.length);
+    const firstCard = within(screen.getAllByRole('listitem')[0]);
+    expect(firstCard.getByText('Shared across patients')).toBeTruthy();
+    expect(firstCard.getByText('Contacts tissue or scalp')).toBeTruthy();
+    const removes = screen.getAllByRole('button', { name: /^Remove / }).map((button) => button.getAttribute('aria-label'));
+    expect(new Set(removes).size).toBe(model.components.length);
+  });
+});
+
 describe('PartsTable', () => {
   it('shows one labelled line per part and how many the file can hold', () => {
     const model = implantModel();

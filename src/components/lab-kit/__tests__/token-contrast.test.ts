@@ -10,14 +10,23 @@ const THEMES = {
 type ThemeName = keyof typeof THEMES;
 const THEME_NAMES = Object.keys(THEMES) as ThemeName[];
 
-/** The colour names the build spec fixes, plus `--lab-hover`, which the kit adds for hovered and lit rows. */
+/**
+ * The colour names the build spec fixes, plus the kit's own: `--lab-hover` (a hovered row), `--lab-lit` (the linked
+ * highlight), `--lab-zone` (a lane behind the diagram), `--lab-material-float` (drawer and palette) and `--lab-scrim`.
+ */
 const COLOUR_TOKENS = [
-  '--lab-ground', '--lab-panel', '--lab-panel-raised', '--lab-material', '--lab-ink', '--lab-ink-soft', '--lab-ink-faint', '--lab-line',
-  '--lab-control-line', '--lab-hover', '--lab-select', '--lab-select-ink', '--lab-select-soft', '--lab-focus', '--lab-critical', '--lab-caution', '--lab-flow',
+  '--lab-ground', '--lab-panel', '--lab-panel-raised', '--lab-material', '--lab-material-float', '--lab-scrim', '--lab-ink', '--lab-ink-soft', '--lab-ink-faint', '--lab-line',
+  '--lab-control-line', '--lab-hover', '--lab-lit', '--lab-zone', '--lab-select', '--lab-select-ink', '--lab-select-soft', '--lab-focus', '--lab-critical', '--lab-caution', '--lab-flow',
 ] as const;
 const OPAQUE_SURFACES = ['--lab-ground', '--lab-panel', '--lab-panel-raised'] as const;
 /** Translucent fills that text and controls sit on, each laid over every opaque surface. */
-const OVERLAYS = ['--lab-hover', '--lab-select-soft', '--lab-material'] as const;
+const OVERLAYS = ['--lab-hover', '--lab-lit', '--lab-zone', '--lab-select-soft', '--lab-material'] as const;
+/**
+ * The floating material is laid over the page, not over a surface it chose: whatever is beneath shows through.
+ * It is measured over each surface and over the three strongest colours a page can put under it.
+ */
+const FLOAT_MATERIAL = '--lab-material-float';
+const BENEATH_A_FLOAT = [...OPAQUE_SURFACES, '--lab-ink', '--lab-select', '--lab-critical'] as const;
 const TEXT_TOKENS = ['--lab-ink', '--lab-ink-soft', '--lab-ink-faint', '--lab-select', '--lab-critical'] as const;
 const BOUNDARY_TOKENS = ['--lab-control-line', '--lab-select', '--lab-focus', '--lab-critical', '--lab-caution', '--lab-flow'] as const;
 
@@ -35,12 +44,27 @@ function token(theme: ThemeName, name: string): Rgba {
   return parseColour(value);
 }
 
-/** Every ground a foreground can sit on: each opaque surface, and each overlay laid over each surface. */
-function backgrounds(theme: ThemeName): { name: string; colour: Rgba }[] {
-  return OPAQUE_SURFACES.flatMap((surface) => {
+interface Ground {
+  name: string;
+  colour: Rgba;
+}
+
+/** The float material over everything it can cover, and a hovered, lit or selected row drawn on top of that. */
+function floatGrounds(theme: ThemeName): Ground[] {
+  return BENEATH_A_FLOAT.flatMap((beneath) => {
+    const base = compositeOver(token(theme, FLOAT_MATERIAL), token(theme, beneath));
+    const name = `${FLOAT_MATERIAL} over ${beneath}`;
+    return [{ name, colour: base }, ...(['--lab-hover', '--lab-select-soft'] as const).map((overlay) => ({ name: `${overlay} over ${name}`, colour: compositeOver(token(theme, overlay), base) }))];
+  });
+}
+
+/** Every ground a foreground can sit on: each opaque surface, each overlay laid over each surface, and the float material. */
+function backgrounds(theme: ThemeName): Ground[] {
+  const surfaces = OPAQUE_SURFACES.flatMap((surface) => {
     const base = token(theme, surface);
     return [{ name: surface, colour: base }, ...OVERLAYS.map((overlay) => ({ name: `${overlay} over ${surface}`, colour: compositeOver(token(theme, overlay), base) }))];
   });
+  return [...surfaces, ...floatGrounds(theme)];
 }
 
 function measure(theme: ThemeName): Measurement[] {
@@ -78,6 +102,19 @@ describe.each(THEME_NAMES)('colour tokens, %s theme', (theme) => {
 
   it('keeps the three surfaces opaque, so text contrast on them is what was measured', () => {
     for (const surface of OPAQUE_SURFACES) expect(token(theme, surface).alpha, surface).toBe(1);
+  });
+
+  it('keeps the float material translucent, and lit apart from hover', () => {
+    expect(token(theme, FLOAT_MATERIAL).alpha).toBeLessThan(1);
+    expect(THEMES[theme].get('--lab-lit')).not.toBe(THEMES[theme].get('--lab-hover'));
+    expect(THEMES[theme].get('--lab-zone')).not.toBe(THEMES[theme].get('--lab-hover'));
+  });
+
+  it('shows a lit row by more than its tint: the ink bar on its edge meets 3:1 on the lit fill', () => {
+    for (const surface of OPAQUE_SURFACES) {
+      const lit = compositeOver(token(theme, '--lab-lit'), token(theme, surface));
+      expect(contrastRatio(token(theme, '--lab-ink'), lit), surface).toBeGreaterThanOrEqual(BOUNDARY_CONTRAST_MINIMUM);
+    }
   });
 
   it.each(measure(theme))('$foreground on $background meets $minimum:1', ({ ratio, minimum }) => {

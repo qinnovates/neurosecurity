@@ -14,6 +14,8 @@ export interface ModelFileLoad {
   cancel: () => void;
   /** Why the last file was refused, in the parser's own words. They never echo file content. */
   error: string | null;
+  /** The name of the device the last file put in focus, until another file is picked. Null when none has. */
+  loadedDeviceName: string | null;
 }
 
 /** Loading a model file from the device menu: read, validate, ask before discarding work, then replace the device. */
@@ -21,13 +23,16 @@ export function useModelFileLoad(): ModelFileLoad {
   const { dispatch, hasWork, readModelFile } = useFocus();
   const [pendingModel, setPendingModel] = useState<DeviceModel | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loadedDeviceName, setLoadedDeviceName] = useState<string | null>(null);
 
   const replaceDevice = (model: DeviceModel): void => {
     setPendingModel(null);
     dispatch({ type: 'model-imported', model });
+    setLoadedDeviceName(model.name);
   };
 
   const loadFile = async (file: File): Promise<void> => {
+    setLoadedDeviceName(null);
     try {
       const model = await readModelFile(file);
       setError(null);
@@ -45,5 +50,6 @@ export function useModelFileLoad(): ModelFileLoad {
     confirm: () => { if (pendingModel !== null) replaceDevice(pendingModel); },
     cancel: () => setPendingModel(null),
     error,
+    loadedDeviceName,
   };
 }

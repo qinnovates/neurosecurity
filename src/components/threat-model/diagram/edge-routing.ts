@@ -7,6 +7,7 @@ import { laneY, type DiagramFrame } from './diagram-frame';
 import { boxAround, headingOf, roundedPath, type Box, type Heading, type Point } from './diagram-geometry';
 import { cardHeightFor, type DiagramMetrics } from './diagram-metrics';
 import type { EdgePlan, GridNode, LanePlan, RoutingPlan, StraightPlan } from './edge-plan';
+import { settleLabels } from './label-placement';
 
 export interface EdgeLine {
   id: string;
@@ -169,5 +170,5 @@ function routeOne(plan: EdgePlan, frame: DiagramFrame, metrics: DiagramMetrics, 
 
 export function routeEdges(plan: RoutingPlan, frame: DiagramFrame, metrics: DiagramMetrics): EdgeLine[] {
   const portX = placePorts(plan, frame, metrics);
-  return plan.plans.map((edge) => routeOne(edge, frame, metrics, portX));
+  return settleLabels(plan.plans.map((edge) => routeOne(edge, frame, metrics, portX)), metrics.cardStub);
 }

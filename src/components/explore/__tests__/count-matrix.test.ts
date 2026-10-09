@@ -50,3 +50,27 @@ describe('countMatrix on the real catalog', () => {
     expect(counted.total).toBe(1);
   });
 });
+
+describe('bars and folded rows', () => {
+  const rows = [{ id: 'a', label: 'A' }, { id: 'b', label: 'B' }, { id: 'c', label: 'C' }];
+  const columns = [{ id: 'x', label: 'X' }, { id: 'y', label: 'Y' }];
+  const data = { cells: new Map([[cellKey('a', 'x'), 4], [cellKey('b', 'x'), 1], [cellKey('a', 'y'), 2]]), rowTotals: new Map([['a', 5], ['b', 1]]), columnTotals: new Map([['x', 5], ['y', 2]]), total: 6 };
+
+  it('scales a bar to the largest cell of its own column, and gives a column with no cell no scale', async () => {
+    const { largestCellByColumn } = await import('../catalog/count-matrix');
+    expect([...largestCellByColumn(data, rows, columns)]).toEqual([['x', 4], ['y', 2]]);
+    expect([...largestCellByColumn({ ...data, cells: new Map() }, rows, columns)]).toEqual([]);
+  });
+
+  it('separates the rows with a technique in view from those with none, in axis order', async () => {
+    const { splitRowsByContent } = await import('../catalog/count-matrix');
+    const { filled, empty } = splitRowsByContent(data, rows);
+    expect(filled.map((row) => row.id)).toEqual(['a', 'b']);
+    expect(empty.map((row) => row.id)).toEqual(['c']);
+  });
+
+  it('counts the folded rows in words', async () => {
+    const { describeEmptyRows } = await import('../catalog/CountMatrix');
+    expect(describeEmptyRows(3, 'families')).toBe('3 families with none in view');
+  });
+});

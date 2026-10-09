@@ -34,6 +34,12 @@ export const MODEL_STATE_KEYS = {
   /** `string | null`: the risk whose detail drawer is open. */
   openedRiskId: `${MODEL_KEY_PREFIX}risks/opened-risk-id`,
   selectedChainId: `${MODEL_KEY_PREFIX}chains/selected-chain-id`,
+  /** `boolean | null`: the reader's fold of the diagram on the working views; null until they choose. */
+  isDiagramOpen: `${MODEL_KEY_PREFIX}diagram-open`,
+  /** The section of the device editor in front of the reader. */
+  editorSection: `${MODEL_KEY_PREFIX}editor/section`,
+  /** `string[]`: the panels opened on "Around the device". */
+  aroundOpenPanels: `${MODEL_KEY_PREFIX}around/open-panels`,
 } as const;
 
 /** A risk id joins an element id and a technique id or baseline category. */

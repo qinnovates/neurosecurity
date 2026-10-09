@@ -6,6 +6,12 @@ export interface DataTableColumn<Row> {
   render: (row: Row) => ReactNode;
   /** Makes the column sortable. Numbers sort numerically, strings by locale. */
   sortValue?: (row: Row) => string | number;
+  /**
+   * True when a smaller sort value means more of what the column names, as with a severity rank where 0 is
+   * Critical. The first press still lists the smallest value first; the header then says "descending", which is
+   * what the reader sees (Critical down to Low).
+   */
+  isSortValueReversed?: boolean;
 }
 
 export type SortDirection = 'ascending' | 'descending';
@@ -18,6 +24,13 @@ export interface DataTableSort {
 function compareValues(left: string | number, right: string | number): number {
   if (typeof left === 'number' && typeof right === 'number') return left - right;
   return String(left).localeCompare(String(right));
+}
+
+const OPPOSITE: Record<SortDirection, SortDirection> = { ascending: 'descending', descending: 'ascending' };
+
+/** The direction to tell the reader for a sorted column: the order of what is shown, not of the value sorted on. */
+export function shownDirection<Row>(column: DataTableColumn<Row>, direction: SortDirection): SortDirection {
+  return column.isSortValueReversed === true ? OPPOSITE[direction] : direction;
 }
 
 /** A first press sorts ascending; a second press on the same column reverses it. */

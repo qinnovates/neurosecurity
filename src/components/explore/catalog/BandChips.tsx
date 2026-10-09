@@ -1,6 +1,6 @@
 import FilterChip from '@/components/lab-kit/FilterChip';
 import type { BandFacetCount } from '@/lib/threat-model/catalog-filter';
-import { groupBandCounts } from './band-groups';
+import { BAND_LEGEND_SENTENCE, groupBandCounts } from './band-groups';
 
 interface Props {
   /** How many techniques each band would leave, with the other filters applied. */
@@ -9,7 +9,9 @@ interface Props {
   onToggleBand: (bandId: string) => void;
 }
 
-/** One chip per band, under silicon side, interface and neural side. A technique in two bands counts under each. */
+const BAND_HELP_SUMMARY = 'What a band is';
+
+/** One chip per band, under silicon side, interface and neural side, with the one sentence on what a band is a press away. A technique in two bands counts under each. */
 export default function BandChips({ bands, selectedBandIds, onToggleBand }: Props) {
   return (
     <div className="explore-bands">
@@ -21,6 +23,10 @@ export default function BandChips({ bands, selectedBandIds, onToggleBand }: Prop
           ))}
         </div>
       ))}
+      <details className="explore-band-help">
+        <summary className="lab-link">{BAND_HELP_SUMMARY}</summary>
+        <p className="lab-soft">{BAND_LEGEND_SENTENCE}</p>
+      </details>
     </div>
   );
 }

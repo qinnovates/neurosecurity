@@ -20,7 +20,7 @@ const EXPORT_DATE = '2026-10-09';
 function buildContext(overrides: Partial<RegisterCsvContext['header']> = {}): RegisterCsvContext {
   return {
     header: {
-      deviceName: 'Test device', exportDate: EXPORT_DATE, registrarVersion: 'R', placementTableVersion: 'P', placementTableStatus: 'Status text',
+      deviceName: 'Test device', exportDate: EXPORT_DATE, registrarVersion: 'R', placementTableVersion: 'P',
       checklistVersion: 'C', standingStatements: STANDING_STATEMENTS, ...overrides,
     },
     placementReasonByRiskId: new Map([['app::QIF-T0051', 'Acts on the patient app.']]),
@@ -75,17 +75,17 @@ describe('buildRegisterCsv', () => {
 });
 
 describe('the header block', () => {
-  it('states the device, the date, the three versions, the table status and every standing statement, before the table', () => {
+  it('states the device, the date, the three versions and every standing statement, before the table', () => {
     const lines = buildRegisterCsv([buildRow()], buildContext()).trimEnd().split('\r\n');
-    expect(lines.slice(0, 6)).toEqual([
+    expect(lines.slice(0, 5)).toEqual([
       '"Device","Test device"', `"Exported","${EXPORT_DATE}"`, '"Technique catalog version","R"',
-      '"Placement table version","P"', '"Placement table status","Status text"', '"Requirements checklist version","C"',
+      '"Placement table version","P"', '"Requirements checklist version","C"',
     ]);
     expect(STANDING_STATEMENTS).toHaveLength(4);
-    expect(lines.slice(6, 6 + STANDING_STATEMENTS.length)).toEqual(STANDING_STATEMENTS.map((statement) => `"Standing statement","${statement}"`));
-    expect(lines[6 + STANDING_STATEMENTS.length]).toBe('');
-    expect(lines[7 + STANDING_STATEMENTS.length]).toContain('"Risk id"');
-    expect(lines).toHaveLength(9 + STANDING_STATEMENTS.length);
+    expect(lines.slice(5, 5 + STANDING_STATEMENTS.length)).toEqual(STANDING_STATEMENTS.map((statement) => `"Standing statement","${statement}"`));
+    expect(lines[5 + STANDING_STATEMENTS.length]).toBe('');
+    expect(lines[6 + STANDING_STATEMENTS.length]).toContain('"Risk id"');
+    expect(lines).toHaveLength(8 + STANDING_STATEMENTS.length);
   });
 
   it('neutralises a formula typed as the device name', () => {
@@ -106,7 +106,11 @@ describe.each(PRESETS)('the export for the preset %s', (_id, { report }) => {
     expect(csv).toContain(escapeCsvCell(report.model.name));
     expect(csv).toContain(`"Technique catalog version","${report.registrarVersion}"`);
     expect(csv).toContain(`"Placement table version","${referenceData.placementTable.version}"`);
-    expect(csv).toContain(escapeCsvCell(referenceData.placementTable.status));
+    // The file's own status sentence carries retired wording; the export gives the version and not that sentence.
+    expect(referenceData.placementTable.status).toMatch(/confirmed|weaker evidence/);
+    expect(csv).not.toContain(referenceData.placementTable.status);
+    expect(csv).not.toContain('Placement table status');
+    expect(csv).not.toMatch(/\bconfirmed\b|weaker evidence/i);
     expect(csv).toContain(`"Requirements checklist version","${referenceData.compliance.version}"`);
     for (const statement of STANDING_STATEMENTS) expect(csv).toContain(escapeCsvCell(statement));
   });
@@ -119,10 +123,10 @@ describe.each(PRESETS)('the export for the preset %s', (_id, { report }) => {
       expect(reasons.get(row.riskId)?.length ?? 0, row.riskId).toBeGreaterThan(10);
       expect(csv).toContain(escapeCsvCell(reasons.get(row.riskId) ?? ''));
     }
-    expect(csv.trimEnd().split('\r\n')).toHaveLength(report.riskRows.length + 8 + STANDING_STATEMENTS.length);
+    expect(csv.trimEnd().split('\r\n')).toHaveLength(report.riskRows.length + 7 + STANDING_STATEMENTS.length);
   });
 
   it('never prints a legacy evidence word', () => {
-    expect(csv.split('\r\n').slice(7 + STANDING_STATEMENTS.length).join('\n')).not.toMatch(/\b(CONFIRMED|DEMONSTRATED|proven)\b/);
+    expect(csv.split('\r\n').slice(6 + STANDING_STATEMENTS.length).join('\n')).not.toMatch(/\b(CONFIRMED|DEMONSTRATED|proven)\b/);
   });
 });

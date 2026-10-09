@@ -18,9 +18,9 @@ export const TOP_OPEN_ROWS_TITLE = 'Top open rows';
 
 function buildColumns(onOpenTechnique: Props['onOpenTechnique']): readonly DataTableColumn<RiskRow>[] {
   return [
-    { id: 'threat', header: 'Threat', render: (row) => row.title },
+    { id: 'threat', header: 'Threat', render: (row) => <span className="model-one-line" title={row.title}>{row.title}</span> },
     { id: 'id', header: 'ID', render: (row) => (row.techniqueId === null ? null : <TechniqueLink techniqueId={row.techniqueId} techniqueName={row.title} onOpen={onOpenTechnique} />) },
-    { id: 'part', header: 'Part', render: (row) => row.elementLabel },
+    { id: 'part', header: 'Part', render: (row) => <span className="model-one-line" title={row.elementLabel}>{row.elementLabel}</span> },
     { id: 'severity', header: CATALOG_SEVERITY_HEADING, render: (row) => <SeverityCell row={row} /> },
     { id: 'evidence', header: 'Evidence', render: (row) => <EvidenceCell row={row} /> },
   ];

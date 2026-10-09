@@ -88,3 +88,66 @@ describe('without the strict option', () => {
     expect(rows).toEqual([{ compny: '', count: tables.devices.length }]);
   });
 });
+
+describe('where', () => {
+  it('refuses a column the table does not have, where it used to answer "no rows"', () => {
+    const { rows, error } = run('devices | where nonexistent_col == "x"');
+    expect(rows).toEqual([]);
+    expect(error).toMatch(/^Unknown column "nonexistent_col" in where\./);
+    expect(runByDefault('devices | where nonexistent_col == "x"')).toMatchObject({ rows: [], error: null });
+  });
+
+  it('names the nearest column for a misspelt one, on an indexed field too', () => {
+    expect(run('devices | where chanels > 100').error).toMatch(/^Unknown column "chanels" in where\. Did you mean "channels"\?/);
+    expect(run('devices | where typ == "invasive"').error).toMatch(/^Unknown column "typ" in where\. Did you mean "type"\?/);
+  });
+
+  it('refuses a second filter on an unknown column after a first that matched nothing', () => {
+    expect(run('devices | where channels > 99999 | where bogus == 1').error).toMatch(/^Unknown column "bogus" in where\./);
+  });
+
+  it('refuses an operator with nothing after it, where it used to return rows', () => {
+    const { rows, error } = run('devices | where type == ');
+    expect(rows).toEqual([]);
+    expect(error).toMatch(/^Missing value in where clause: "type ==". Expected: field == value\./);
+    expect(run('devices | where channels >').error).toMatch(/^Missing value in where clause/);
+  });
+
+  it('accepts an explicit empty string, a column only some rows carry, and every correct filter', () => {
+    expect(run('devices | where company == ""')).toMatchObject({ rows: [], error: null });
+    expect(run('devices | where note contains "only"').rows).toHaveLength(1);
+    expect(run('devices | where type == "invasive"').rows).toHaveLength(3);
+    expect(run('devices | where channels >= 64 | where company == "One"').rows).toHaveLength(2);
+  });
+});
+
+describe('sort by', () => {
+  it('refuses a column the rows do not have, where it used to return them unsorted', () => {
+    const { rows, error } = run('devices | sort by bogus desc');
+    expect(rows).toEqual([]);
+    expect(error).toMatch(/^Unknown column "bogus" in sort by\./);
+    expect(runByDefault('devices | sort by bogus desc').rows).toHaveLength(4);
+  });
+
+  it('refuses a column the projection before it dropped', () => {
+    expect(run('devices | project device | sort by channels').error).toMatch(/^Unknown column "channels" in sort by\./);
+  });
+
+  it('sorts on a real column', () => {
+    expect(run('devices | sort by channels desc').rows.map((row) => row.device)).toEqual(['A', 'B', 'C', 'D']);
+  });
+});
+
+describe('distinct', () => {
+  it('refuses a column the table does not have', () => {
+    expect(run('devices | distinct compny').error).toMatch(/^Unknown column "compny" in distinct\. Did you mean "company"\?/);
+    expect(run('devices | distinct company').rows).toEqual([{ company: 'One' }, { company: 'Two' }]);
+  });
+});
+
+describe('an empty query', () => {
+  it.each(['', '   ', '\n'])('is refused, not answered with "no rows": %j', (query) => {
+    expect(run(query)).toEqual({ rows: [], tableName: '', error: 'The query is empty. Start with a table name.' });
+    expect(runByDefault(query).error).toBeNull();
+  });
+});

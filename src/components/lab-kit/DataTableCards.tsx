@@ -1,5 +1,5 @@
 import { useId, type HTMLAttributes, type ReactNode } from 'react';
-import type { DataTableColumn, DataTableSort } from './data-table-sort';
+import { shownDirection, type DataTableColumn, type DataTableSort } from './data-table-sort';
 
 interface Props<Row> {
   caption: string;
@@ -29,7 +29,7 @@ export default function DataTableCards<Row>({ caption, columns, rows, keys, empt
             const isSorted = sort?.columnId === column.id;
             return (
               <button key={column.id} type="button" className="lab-chip" aria-pressed={isSorted} onClick={() => onSort(column.id)}>
-                {column.header}{isSorted && sort !== null && <span>{sort.direction}</span>}
+                {column.header}{isSorted && sort !== null && <span>{shownDirection(column, sort.direction)}</span>}
               </button>
             );
           })}

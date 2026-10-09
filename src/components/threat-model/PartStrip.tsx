@@ -21,9 +21,9 @@ interface Props {
 }
 
 /**
- * The device folded to one row, in the diagram's order: each part and connection with its
- * open risks. It stands in for the diagram when the diagram is out of view, filters the same
- * way, and lights with it.
+ * The device folded to a row of chips, in the diagram's order: each part and connection with
+ * its open risks. It stands in for the diagram when the diagram is folded away or out of
+ * view, filters the same way, and lights with it. The chips wrap; nothing scrolls sideways.
  */
 export default function PartStrip({ model, lens, openRiskCounts, onLensChange, elementCounts }: Props) {
   const { bind } = useModelHighlight();

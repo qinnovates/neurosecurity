@@ -62,7 +62,7 @@ function OwnView({ viewId, data, actions, diagram, openedRiskId, tableRef, selec
     case MODEL_VIEWS.overview:
       return (
         <OverviewView
-          model={model} rows={data.currentRows} scope={data.scope} severityCoverage={data.severityCoverage} goalCoverage={report.goalCoverage}
+          model={model} report={report} rows={data.currentRows} scope={data.scope} severityCoverage={data.severityCoverage} scopeByKind={data.scopeByKind}
           gaps={data.gaps} placementTable={referenceData.placementTable} diagram={diagram}
           onSelectElement={actions.onSelectElement} onOpenRisk={actions.onOpenRisk} onOpenTechnique={actions.onOpenTechnique}
           onOpenScopeLists={() => actions.onSelectView(MODEL_VIEWS.report)}
@@ -75,7 +75,10 @@ function OwnView({ viewId, data, actions, diagram, openedRiskId, tableRef, selec
             rows={data.rowsInView} elements={data.elements} openedRiskId={openedRiskId} tableRef={tableRef}
             onDecide={actions.onDecideOnRow} onOpenRisk={actions.onOpenRisk} onOpenTechnique={actions.onOpenTechnique}
           />
-          <OrphanDecisions orphans={data.orphans} onOpenTechnique={actions.onOpenTechnique} />
+          <OrphanDecisions
+            orphans={data.orphans} techniqueNameById={new Map([...techniqueById].map(([id, technique]) => [id, technique.name]))}
+            elementLabelById={new Map(data.elements.map((element) => [element.id, element.label]))} onOpenTechnique={actions.onOpenTechnique}
+          />
         </>
       );
     case MODEL_VIEWS.techniquesByPart:

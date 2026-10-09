@@ -1,7 +1,8 @@
 import type { DataTableColumn } from '@/components/lab-kit/DataTable';
+import SeverityMark from '@/components/lab-kit/SeverityMark';
 import TechniqueLink from '@/components/lab-kit/TechniqueLink';
 import type { Row } from '@/lib/kql-engine';
-import { CATALOG_SEVERITIES } from '@/lib/threat-model/catalog-types';
+import { CATALOG_SEVERITIES, type CatalogSeverity } from '@/lib/threat-model/catalog-types';
 
 export interface ResultRow {
   /** The row's position in the result, as text; a result has no other identity. */
@@ -43,7 +44,15 @@ interface ColumnInputs {
   onOpenTechnique: (techniqueId: string) => void;
 }
 
-function renderCell(value: unknown, { techniqueIds, onOpenTechnique }: ColumnInputs) {
+/** A catalog severity in a `severity` column, whatever its letter case; null for any other value, which is then printed as it is. */
+function asCatalogSeverity(column: string, value: unknown): CatalogSeverity | null {
+  if (column !== SEVERITY_COLUMN || typeof value !== 'string') return null;
+  return CATALOG_SEVERITIES.find((severity) => severity === value.toLowerCase()) ?? null;
+}
+
+function renderCell(column: string, value: unknown, { techniqueIds, onOpenTechnique }: ColumnInputs) {
+  const severity = asCatalogSeverity(column, value);
+  if (severity !== null) return <SeverityMark severity={severity} />;
   if (typeof value === 'string' && techniqueIds.has(value)) return <TechniqueLink techniqueId={value} onOpen={onOpenTechnique} />;
   return <span className={typeof value === 'number' ? 'lab-figure' : undefined}>{formatCell(value)}</span>;
 }
@@ -54,7 +63,7 @@ export function buildResultColumns(inputs: ColumnInputs): DataTableColumn<Result
   const dataColumns = columns.map((column): DataTableColumn<ResultRow> => ({
     id: column,
     header: column,
-    render: (row) => renderCell(row.cells[column], inputs),
+    render: (row) => renderCell(column, row.cells[column], inputs),
     sortValue: (row) => sortValueOf(column, row.cells[column]),
   }));
   if (largestCount === null) return dataColumns;

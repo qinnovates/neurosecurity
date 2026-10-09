@@ -5,6 +5,7 @@ import type { SequencePlayback } from '@/components/lab-kit/motion/use-sequence-
 import { summariseChainLanes } from '@/lib/threat-model/chain-lanes';
 import type { ChainGenerationResult } from '@/lib/threat-model/chain-types';
 import { listElementsInModelOrder } from '@/lib/threat-model/model-order';
+import { SCOPE_TERM_LABELS } from '@/lib/threat-model/lab-terms';
 import type { ElementOutcome, RiskRow } from '@/lib/threat-model/report-types';
 import { isRiskAddressed } from '@/lib/threat-model/risk-register';
 import { PRESETS, engineData } from '@/lib/threat-model/__tests__/preset-reports';
@@ -73,15 +74,22 @@ describe('Chains', () => {
   const lanes = summariseChainLanes(model, chainResult);
   const [chain] = chainResult.chains;
 
-  function renderChains(overrides: Partial<Parameters<typeof ChainsSection>[0]> = {}) {
-    const handlers = { onSelectChain: vi.fn(), onOpenTechnique: vi.fn() };
-    render(
+  type ChainsOverrides = Partial<Parameters<typeof ChainsSection>[0]>;
+  const quiet = { onSelectChain: (): void => undefined, onOpenTechnique: (): void => undefined };
+
+  function chainsElement(overrides: ChainsOverrides, handlers: Pick<Parameters<typeof ChainsSection>[0], 'onSelectChain' | 'onOpenTechnique'> = quiet) {
+    return (
       <ChainsSection
         model={model} chainResult={chainResult} deviceChainCount={chainResult.chains.length} techniqueById={techniqueById}
         selectedChain={null} playback={stillPlayback(0)} {...handlers} {...overrides}
-      />,
+      />
     );
-    return handlers;
+  }
+
+  function renderChains(overrides: ChainsOverrides = {}) {
+    const handlers = { onSelectChain: vi.fn(), onOpenTechnique: vi.fn() };
+    const view = render(chainsElement(overrides, handlers));
+    return { ...handlers, ...view };
   }
 
   it('has a chain to show on the preset', () => {
@@ -117,7 +125,26 @@ describe('Chains', () => {
     expect(screen.getByText(/Every chain is a hypothesis for review/)).toBeTruthy();
     expect(screen.getByText(HYPOTHESIS_LABEL)).toBeTruthy();
     expect(screen.getAllByRole('listitem')).toHaveLength(chain.steps.length);
-    expect(screen.getByRole('group', { name: 'Chain playback' })).toBeTruthy();
+    // The playback controls sit in the diagram's bar, which stays in view; the steps panel does not repeat them.
+    expect(screen.queryByRole('group', { name: 'Chain playback' })).toBeNull();
+  });
+
+  it('brings the step being played into view once per step, and scrolls nothing when a chain is only opened', () => {
+    const scrolled: (string | null)[] = [];
+    const original = Element.prototype.scrollIntoView;
+    Element.prototype.scrollIntoView = function scrollIntoView(this: Element) { scrolled.push(this.getAttribute('data-state')); };
+    try {
+      const view = renderChains({ selectedChain: chain, playback: stillPlayback(0) });
+      expect(scrolled).toEqual([]);
+      view.rerender(chainsElement({ selectedChain: chain, playback: stillPlayback(1) }));
+      expect(scrolled).toEqual(['now']);
+      view.rerender(chainsElement({ selectedChain: chain, playback: stillPlayback(1) }));
+      expect(scrolled).toEqual(['now']);
+      view.rerender(chainsElement({ selectedChain: chain, playback: stillPlayback(2) }));
+      expect(scrolled).toEqual(['now', 'now']);
+    } finally {
+      Element.prototype.scrollIntoView = original;
+    }
   });
 
   it('lights the steps playback has reached, in the lane and in the list alike', () => {
@@ -150,17 +177,47 @@ describe('Around the device', () => {
     const onOpenTechnique = vi.fn();
     render(<BeyondDevice ambientThreats={report.ambientThreats} themes={report.themes} onOpenTechnique={onOpenTechnique} />);
     expect(screen.getByText(/Nothing on this page is part of the device's threat model\./)).toBeTruthy();
-    const listed = report.ambientThreats.length + report.themes.reduce((sum, theme) => sum + theme.techniques.length, 0);
-    expect(screen.getAllByRole('listitem')).toHaveLength(listed);
+    // Every group starts folded to its title, its count and one line; nothing is listed until one is opened.
+    const groups = [...new Set(report.ambientThreats.map((threat) => threat.category))];
+    const toggles = screen.getAllByRole('button', { expanded: false });
+    expect(toggles).toHaveLength(groups.length + report.themes.length);
+    expect(screen.queryAllByRole('button', { name: /^Open technique / })).toHaveLength(0);
+    expect(screen.queryAllByRole('table')).toHaveLength(0);
+    const counts = toggles.map((toggle) => toggle.querySelector('.model-fold-count')?.textContent ?? null);
+    expect(counts.slice(0, groups.length).map(Number).reduce((sum, count) => sum + count, 0)).toBe(report.ambientThreats.length);
+    expect(counts.slice(groups.length)).toEqual(report.themes.map((theme) => (theme.techniques.length > 0 ? String(theme.techniques.length) : null)));
+
+    const firstGroup = report.ambientThreats.filter((threat) => threat.category === groups[0]);
+    fireEvent.click(toggles[0]);
+    expect(toggles[0].getAttribute('aria-expanded')).toBe('true');
+    const rows = within(screen.getByRole('table')).getAllByRole('row').slice(1);
+    expect(rows).toHaveLength(firstGroup.length);
+    expect(screen.getAllByRole('columnheader').map((header) => header.textContent)).toEqual(['Technique', 'ID', 'Evidence']);
     const links = screen.getAllByRole('button', { name: /^Open technique / });
-    expect(links).toHaveLength(listed);
+    expect(links).toHaveLength(firstGroup.length);
     fireEvent.click(links[0]);
-    expect(onOpenTechnique).toHaveBeenCalledTimes(1);
+    expect(onOpenTechnique).toHaveBeenCalledWith(firstGroup[0].techniqueId);
+    fireEvent.click(toggles[0]);
+    expect(screen.queryAllByRole('table')).toHaveLength(0);
   });
 
-  it('prints ids as plain text where nothing can be opened, as in the report', () => {
-    render(<BeyondDevice ambientThreats={report.ambientThreats} themes={report.themes} />);
-    expect(screen.queryAllByRole('button')).toHaveLength(0);
+  it('says where each technique of a theme stands against the device, and keeps a theme\'s gap notice in view while folded', () => {
+    render(<BeyondDevice ambientThreats={report.ambientThreats} themes={report.themes} onOpenTechnique={() => undefined} />);
+    for (const theme of report.themes) if (theme.catalogGap !== null) expect(screen.getByText(theme.catalogGap)).toBeTruthy();
+    const theme = report.themes.find((candidate) => candidate.techniques.length > 0);
+    if (theme === undefined) throw new Error('test setup: no theme names a technique');
+    fireEvent.click(screen.getByRole('button', { name: new RegExp(`^${theme.label}`) }));
+    expect(screen.getAllByRole('columnheader').map((header) => header.textContent)).toEqual(['Technique', 'ID', 'Evidence', 'On this device']);
+    const rows = within(screen.getByRole('table')).getAllByRole('row').slice(1);
+    theme.techniques.forEach((technique, index) => expect(rows[index].textContent).toContain(SCOPE_TERM_LABELS[technique.standing]));
+  });
+
+  it('keeps every folded panel\'s content in the page, so paper prints it', () => {
+    const { container } = render(<BeyondDevice ambientThreats={report.ambientThreats} themes={report.themes} />);
+    const listed = report.ambientThreats.length + report.themes.reduce((sum, theme) => sum + theme.techniques.length, 0);
+    expect(container.querySelectorAll('.model-fold-body[hidden] tbody tr')).toHaveLength(listed);
+    // With nothing to open, ids are plain text.
+    expect(container.querySelectorAll('.model-fold-body .lab-link')).toHaveLength(0);
   });
 });
 

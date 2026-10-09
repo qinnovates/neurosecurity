@@ -7,7 +7,7 @@
 import type { CatalogTechnique, EngineData } from './catalog-types';
 import type { DeviceModel } from './device-model';
 import { NOT_ASSESSED_REASON, type ScopeTerm } from './lab-terms';
-import { PAYLOAD_LABELS, findUnmetPrecondition, hasCorticalTarget, placeOnComponent, placeOnLink } from './match-techniques';
+import { PAYLOAD_LABELS, findUnmetPreconditions, hasCorticalTarget, placeOnComponent, placeOnLink } from './match-techniques';
 import type { PlacementRules, ReferenceData, TechniquePlacement } from './reference-data-types';
 
 export const NO_MATCHING_ELEMENT_RULE = 'placement.no-matching-element';
@@ -77,11 +77,8 @@ function listPlacedElementIds(placement: TechniquePlacement, model: DeviceModel)
 }
 
 function listUnmetConditions(placement: TechniquePlacement, model: DeviceModel, isCorticalDevice: boolean, hasElement: boolean): ScopeCondition[] {
-  const conditions: ScopeCondition[] = [];
-  const unmet = findUnmetPrecondition(placement, model, isCorticalDevice);
-  if (unmet !== null) {
-    conditions.push({ ...unmet, restoringAnswer: RESTORING_ANSWER_BY_RULE[unmet.ruleId]?.(placement) ?? unmet.detail });
-  }
+  const conditions: ScopeCondition[] = findUnmetPreconditions(placement, model, isCorticalDevice)
+    .map((unmet) => ({ ...unmet, restoringAnswer: RESTORING_ANSWER_BY_RULE[unmet.ruleId]?.(placement) ?? unmet.detail }));
   if (!hasElement) {
     const needed = describeNeededElements(placement);
     conditions.push({ ruleId: NO_MATCHING_ELEMENT_RULE, detail: `Needs ${needed}; this device has none.`, restoringAnswer: `The device has ${needed}.` });

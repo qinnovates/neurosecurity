@@ -7,6 +7,7 @@ interface Props {
   activeModeId: ModeId;
   onOpenMode: (modeId: ModeId) => void;
   onNavigate: (route: Route) => void;
+  onEditDevice: () => void;
   onPrintReport: () => void;
   onOpenPalette: () => void;
   /** On a narrow screen the modes sit along the bottom edge instead, and the site link moves to the standing statements. */
@@ -14,6 +15,8 @@ interface Props {
 }
 
 const SITE_PATH = '/atlas/';
+/** The mode whose own header states the device's facts, so the chip there is the glyph and the name. */
+const DEVICE_HEADER_MODE_ID: ModeId = 'model';
 
 /** "⌘K" on Apple keyboards, "Ctrl K" elsewhere. Both chords open the palette on every platform. */
 function describeShortcut(): string {
@@ -21,7 +24,7 @@ function describeShortcut(): string {
 }
 
 /** The one bar every screen shares: the product, the four modes, the way to anywhere, and the device in focus. */
-export default function TopBar({ activeModeId, onOpenMode, onNavigate, onPrintReport, onOpenPalette, isNarrow }: Props) {
+export default function TopBar({ activeModeId, onOpenMode, onNavigate, onEditDevice, onPrintReport, onOpenPalette, isNarrow }: Props) {
   return (
     <header className="lab-topbar">
       <h1 className="lab-brand">TARA Lab</h1>
@@ -30,7 +33,7 @@ export default function TopBar({ activeModeId, onOpenMode, onNavigate, onPrintRe
         <span>Go to</span>
         {!isNarrow && <kbd className="lab-goto-keys">{describeShortcut()}</kbd>}
       </button>
-      <DeviceChip onNavigate={onNavigate} onPrintReport={onPrintReport} />
+      <DeviceChip onNavigate={onNavigate} onEditDevice={onEditDevice} onPrintReport={onPrintReport} hasFacts={activeModeId !== DEVICE_HEADER_MODE_ID} />
       {!isNarrow && <a className="lab-site-link" href={SITE_PATH}>Back to the site</a>}
     </header>
   );

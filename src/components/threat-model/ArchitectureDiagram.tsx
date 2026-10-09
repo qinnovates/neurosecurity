@@ -1,10 +1,12 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import EmptyState from '@/components/lab-kit/EmptyState';
 import { useMediaQuery } from '@/components/lab-kit/use-media-query';
 import type { DeviceModel } from '@/lib/threat-model/device-model';
 import { derivePayloadFlows } from '@/lib/threat-model/payload-flow';
 import type { ElementRowCounts } from '@/lib/threat-model/register-counts';
 import { describeLink } from '@/lib/threat-model/stride';
+import { computeDiagramLayout } from './diagram-layout';
+import { metricsFor, type DiagramDensity } from './diagram/diagram-metrics';
 import { buildStepMarks, currentStepElementId, type ChainMarker, type DiagramHighlight } from './diagram/diagram-types';
 import DiagramCanvas from './diagram/DiagramCanvas';
 import DiagramLegend from './diagram/DiagramLegend';
@@ -12,6 +14,7 @@ import DiagramList from './diagram/DiagramList';
 import { buildBadges } from './diagram/element-badges';
 import { passDirectionOf, type PayloadFlows } from './diagram/payload-tags';
 import { useDiagramInteraction } from './diagram/use-diagram-interaction';
+import { useElementSize } from './diagram/use-element-size';
 import { useFlowPass, useFlowPassTriggers } from './diagram/use-flow-pass';
 import './threat-model.css';
 
@@ -44,6 +47,12 @@ interface Props {
   /** A picture only: nothing lights, nothing moves, nothing takes focus. For print and for cards. */
   isStatic?: boolean;
   isLegendHidden?: boolean;
+  /** The grid the drawing is laid out on. Type sizes are the same on both; the compact one takes less room. */
+  density?: DiagramDensity;
+  /** A sentence shown with the legend, above its items. */
+  legendNote?: string;
+  /** The id of the legend's region, for a control elsewhere that shows and hides it. */
+  legendId?: string;
 }
 
 function describeDrawing(model: DeviceModel): string {
@@ -53,19 +62,27 @@ function describeDrawing(model: DeviceModel): string {
 }
 
 /**
- * The device diagram: a drawing at fixed type sizes on a wide screen, a list of the same
- * parts and connections on a narrow one, and a legend for the marks in use. It is still at
+ * The device diagram: a drawing at fixed type sizes where it fits, a list of the same parts
+ * and connections where it does not (a narrow screen, or a device wider than the place it is
+ * shown in), and a legend for the marks in use. The drawing is never scaled. It is still at
  * rest; one pass of flow runs along a connection when the reader points at it, focuses it,
  * selects it or edits it, or when the chain step being played acts on it.
  */
 export default function ArchitectureDiagram({
   model, title, highlight = null, selectedElementId = null, onSelectElement, elementCounts, openRiskCounts, notAssessedElementIds,
-  chainSteps = [], reachedStepCount, payloadFlows, isStatic = false, isLegendHidden = false,
+  chainSteps = [], reachedStepCount, payloadFlows, isStatic = false, isLegendHidden = false, density = 'full', legendNote, legendId,
 }: Props) {
   const flows = useMemo<PayloadFlows>(() => payloadFlows ?? derivePayloadFlows(model), [payloadFlows, model]);
   const badges = useMemo(() => buildBadges({ elementCounts, openRiskCounts, notAssessedElementIds }), [elementCounts, openRiskCounts, notAssessedElementIds]);
   const stepMarks = buildStepMarks(chainSteps, reachedStepCount);
   const isNarrow = useMediaQuery(NARROW_SCREEN_QUERY);
+  const hasBadges = badges.size > 0;
+  const metrics = useMemo(() => metricsFor(density, hasBadges), [density, hasBadges]);
+  const layout = useMemo(() => computeDiagramLayout(model, metrics), [model, metrics]);
+  const [frame, setFrame] = useState<HTMLDivElement | null>(null);
+  const frameSize = useElementSize(frame);
+  // A picture for paper keeps its drawing and scrolls on screen; a working diagram that does not fit gives way to the list.
+  const isTooWide = !isStatic && frameSize !== null && layout.width > Math.ceil(frameSize.width);
   const flowPass = useFlowPass();
   const startPass = flowPass.start;
   // Flow is shown only where the model says something travels, and never in a picture.
@@ -80,15 +97,23 @@ export default function ArchitectureDiagram({
   }
   const shared = { model, title, flows, badges, stepMarks, highlight, selectedElementId, interaction };
   return (
-    <div className="lab-diagram">
-      {isNarrow
+    <div className="lab-diagram" ref={setFrame} data-form={isNarrow || isTooWide ? 'list' : 'drawing'}>
+      {isNarrow || isTooWide
         ? <DiagramList {...shared} />
         : (
           <div className="lab-diagram-scroll">
-            <DiagramCanvas {...shared} description={describeDrawing(model)} flowPass={flowPass} isSelectable={!isStatic && onSelectElement !== undefined} />
+            <DiagramCanvas
+              {...shared} layout={layout} metrics={metrics} description={describeDrawing(model)} flowPass={flowPass}
+              isSelectable={!isStatic && onSelectElement !== undefined}
+            />
           </div>
         )}
-      {!isLegendHidden && <DiagramLegend model={model} flows={flows} badges={badges} hasChainSteps={chainSteps.length > 0} />}
+      {(legendId !== undefined || !isLegendHidden) && (
+        <div id={legendId} className="lab-diagram-legend" hidden={isLegendHidden}>
+          {!isLegendHidden && legendNote !== undefined && <p className="lab-diagram-note">{legendNote}</p>}
+          {!isLegendHidden && <DiagramLegend model={model} flows={flows} badges={badges} hasChainSteps={chainSteps.length > 0} />}
+        </div>
+      )}
     </div>
   );
 }

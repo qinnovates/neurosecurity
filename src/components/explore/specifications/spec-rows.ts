@@ -54,6 +54,21 @@ export function readSpecText(row: SpecRow, key: string): string {
   return key === STATUS_KEY ? String(row[key]) : String(row[key]).replaceAll('_', ' ');
 }
 
+/** Columns whose values are codes the file writes in lower case with underscores, not names. */
+const CODE_COLUMNS: ReadonlySet<string> = new Set([TYPE_KEY, 'electrode_type', STATUS_KEY]);
+
+/**
+ * How a cell is displayed: a code column has its underscores shown as spaces and a capital
+ * first letter ("breakthrough_device" as "Breakthrough device"). Display only: search, sort
+ * and `readSpecText` keep the value as the file holds it, and names are never re-cased.
+ */
+export function formatSpecDisplay(row: SpecRow, key: string): string {
+  const text = readSpecText(row, key);
+  if (!CODE_COLUMNS.has(key) || text === NOT_RECORDED) return text;
+  const spaced = text.replaceAll('_', ' ');
+  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
+}
+
 /** Channels sort as numbers, with a count that is not recorded first; every other column sorts as its text. */
 export function specSortValue(row: SpecRow, key: string): string | number {
   return key === CHANNELS_KEY ? channelCountOf(row) ?? 0 : readSpecText(row, key);

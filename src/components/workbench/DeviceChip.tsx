@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState, type FocusEvent } from 'react';
 import DeviceMenu, { EXAMPLE_DEVICE_LABEL } from './DeviceMenu';
 import { describeDevice, summariseDevice } from './device-summary';
 import { useFocus } from './FocusContext';
@@ -28,15 +28,20 @@ function DeviceGlyph({ partsAreInterface }: { partsAreInterface: readonly boolea
 
 interface Props {
   onNavigate: (route: Route) => void;
+  onEditDevice: () => void;
   onPrintReport: () => void;
+  /** False where the screen itself states the device's facts (Model's header), so they are not printed twice. The menu always lists them. */
+  hasFacts?: boolean;
 }
+
+const UNSAVED_LABEL = 'Unsaved changes';
 
 /**
  * The device every mode is looking at, in the same place on every screen. Pressing it
  * opens the device menu: what can be done with the device, and where it is kept.
  */
-export default function DeviceChip({ onNavigate, onPrintReport }: Props) {
-  const { state, report, isExampleDevice, hasUnsavedDecisions, storageNotice } = useFocus();
+export default function DeviceChip({ onNavigate, onEditDevice, onPrintReport, hasFacts = true }: Props) {
+  const { state, report, isExampleDevice, hasUnsavedChanges, storageNotice } = useFocus();
   const summary = summariseDevice(state.model, report);
   const facts = describeDevice(summary);
   const [isOpen, setOpen] = useState(false);
@@ -63,8 +68,13 @@ export default function DeviceChip({ onNavigate, onPrintReport }: Props) {
     };
   }, [isOpen]);
 
+  /** Tabbing out of the menu closes it. Focus going nowhere (the file picker, another window) leaves it open. */
+  const closeOnFocusOut = (event: FocusEvent<HTMLDivElement>): void => {
+    if (event.relatedTarget instanceof Node && !event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+  };
+
   return (
-    <div className="lab-device-slot" ref={slotRef}>
+    <div className="lab-device-slot" ref={slotRef} onBlur={closeOnFocusOut}>
       <div className="lab-device">
         <button
           ref={buttonRef} type="button" className="lab-device-summary"
@@ -73,11 +83,11 @@ export default function DeviceChip({ onNavigate, onPrintReport }: Props) {
           <DeviceGlyph partsAreInterface={summary.partsAreInterface} />
           <span className="lab-visually-hidden">Device in focus: </span>
           <strong className="lab-device-name">{isExampleDevice ? EXAMPLE_DEVICE_LABEL : summary.name}</strong>
-          <span className="lab-device-facts lab-soft">{facts.join(' · ')}</span>
-          {hasUnsavedDecisions && <span className="lab-device-flag">Unsaved decisions</span>}
+          {hasFacts && <span className="lab-device-facts lab-soft">{facts.join(' · ')}</span>}
+          {hasUnsavedChanges && <span className="lab-device-flag">{UNSAVED_LABEL}</span>}
         </button>
         {isOpen && (
-          <DeviceMenu id={menuId} facts={facts} onNavigate={onNavigate} onPrintReport={onPrintReport} onClose={() => setOpen(false)} />
+          <DeviceMenu id={menuId} facts={facts} onNavigate={onNavigate} onEditDevice={onEditDevice} onPrintReport={onPrintReport} onClose={() => setOpen(false)} />
         )}
       </div>
       {storageNotice !== null && <p className="lab-device-alert" role="alert">{storageNotice}</p>}

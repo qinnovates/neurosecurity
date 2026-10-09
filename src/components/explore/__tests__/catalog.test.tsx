@@ -20,6 +20,11 @@ afterEach(() => {
   window.location.hash = '';
 });
 
+/** Band, family, effect, entry path and domain wait behind "More filters"; a test that uses one opens the row first, as a reader would. */
+function openMoreFilters(): void {
+  fireEvent.click(within(screen.getByRole('group', { name: 'Filter techniques' })).getByRole('button', { name: /^More filters/ }));
+}
+
 const { techniques, tactics } = engineData;
 const total = techniques.length;
 /** The device the Lab opens on. */
@@ -62,17 +67,34 @@ describe('Techniques: facets', () => {
     inLab(<CatalogView />);
     const bar = screen.getByRole('group', { name: 'Filter techniques' });
     expect(within(bar).getAllByRole('group', { hidden: true }).map((facet) => facet.querySelector('legend')?.textContent).filter((label) => label !== undefined && label !== null))
-      .toEqual(['Search', 'On this device', 'Band', 'Technique family', 'Evidence', 'Catalog severity', 'Effect', 'How it gets in', 'Domain']);
+      .toEqual(['Search', 'On this device', 'Evidence', 'Catalog severity', 'Band', 'Technique family', 'Effect', 'How it gets in', 'Domain']);
+    // One row is shown: the four facets before the button. The other five are one press away.
+    const rows = bar.querySelectorAll('.lab-facets-row');
+    expect(rows[0].querySelectorAll('fieldset')).toHaveLength(4);
+    expect(rows[1].hasAttribute('hidden')).toBe(true);
     fireEvent.click(within(bar).getByRole('button', { name: 'More filters' }));
-    fireEvent.click(within(bar).getByRole('button', { name: /^Critical \d+$/ }));
+    expect(rows[1].hasAttribute('hidden')).toBe(false);
+    const inBand = techniques.filter((technique) => technique.bandIds.includes('N3')).length;
+    fireEvent.click(within(bar).getByRole('button', { name: `N3 ${inBand}` }));
     expect(within(bar).getByRole('button', { name: 'More filters (1)' })).toBeTruthy();
-    expect(bodyRows()).toHaveLength(techniques.filter((technique) => technique.severity === 'critical').length);
+    expect(bodyRows()).toHaveLength(inBand);
+  });
+
+  it('labels the techniques with a decision that leaves them outside the device by the scope term, with the same count', () => {
+    inLab(<CatalogView />);
+    openMoreFilters();
+    const outside = Object.keys(referenceData.placementRules.notPlaced).length;
+    const group = screen.getByRole('group', { name: 'How it gets in' });
+    expect(within(group).getByRole('button', { name: `${SCOPE_TERM_LABELS.reviewed_outside} ${outside}` })).toBeTruthy();
+    expect(within(group).queryByRole('button', { name: /^Around the device/ })).toBeNull();
+    expect(within(screen.getByRole('group', { name: 'On this device' })).getByRole('button', { name: `${SCOPE_TERM_LABELS.reviewed_outside} ${outside}` })).toBeTruthy();
   });
 });
 
 describe('Techniques: bands', () => {
   it('groups the band chips silicon side, interface, neural side, each with its distinct-technique count', () => {
     inLab(<CatalogView />);
+    openMoreFilters();
     const expectedGroups = [
       { label: BAND_GROUP_LABELS.silicon, bands: [...SILICON_BANDS] },
       { label: BAND_GROUP_LABELS.interface, bands: [INTERFACE_BAND] },
@@ -91,6 +113,10 @@ describe('Techniques: bands', () => {
 
   it('filters to the techniques that list a pressed band, and prints the band legend sentence once', () => {
     const { container } = inLab(<CatalogView />);
+    openMoreFilters();
+    // The sentence is the body of a disclosure on the band facet, not a line of its own above the table.
+    expect(container.querySelector('.explore-band-help p')?.textContent).toBe(BAND_LEGEND_SENTENCE);
+    expect(container.querySelector('.explore-band-help')?.hasAttribute('open')).toBe(false);
     const expected = techniques.filter((technique) => technique.bandIds.includes('N3')).length;
     fireEvent.click(screen.getByRole('button', { name: `N3 ${expected}` }));
     expect(bodyRows()).toHaveLength(expected);
@@ -112,9 +138,24 @@ describe('Techniques: search', () => {
   it('says why the table is empty and offers to clear the filters', () => {
     inLab(<CatalogView />);
     fireEvent.change(screen.getByRole('searchbox', { name: 'Search techniques' }), { target: { value: 'no technique is called this' } });
-    expect(screen.getByText('No technique matches these filters together. Clear one to widen the search.')).toBeTruthy();
-    fireEvent.click(screen.getByRole('button', { name: 'Clear filters' }));
+    const empty = screen.getByRole('region', { name: 'Techniques' });
+    expect(empty.id).toBe('lab-results');
+    expect(within(empty).getByText('No technique matches these filters together.')).toBeTruthy();
+    expect(within(empty).getByText('Clear one to widen the search.')).toBeTruthy();
+    // One statement only: no table, no matrix, and no evidence legend printing a row of zeros.
+    expect(empty.querySelector('table')).toBeNull();
+    expect(document.querySelector('.explore-techniques-legend')).toBeNull();
+    fireEvent.click(within(empty).getByRole('button', { name: 'Clear filters' }));
     expect(bodyRows()).toHaveLength(total);
+  });
+
+  it('shows the one empty statement in a matrix layout too, with no blank matrix', () => {
+    inLab(<CatalogView />);
+    fireEvent.click(screen.getByRole('radio', { name: 'Technique family by band' }));
+    fireEvent.change(screen.getByRole('searchbox', { name: 'Search techniques' }), { target: { value: 'no technique is called this' } });
+    expect(screen.queryByRole('region', { name: 'Technique family by band' })).toBeNull();
+    expect(document.querySelector('.explore-matrix')).toBeNull();
+    expect(screen.getAllByText('No technique matches these filters together.')).toHaveLength(1);
   });
 });
 
@@ -159,6 +200,7 @@ describe('Techniques: the counts line', () => {
   it('appears only while the "On this device" facet is on, and counts the terms without that facet', () => {
     const { container } = inLab(<CatalogView />);
     expect(container.querySelector('.explore-scope-counts')).toBeNull();
+    openMoreFilters();
     const inBand = techniques.filter((technique) => technique.bandIds.includes('N3'));
     fireEvent.click(screen.getByRole('button', { name: `N3 ${inBand.length}` }));
     fireEvent.click(within(screen.getByRole('group', { name: 'On this device' })).getByRole('button', { name: new RegExp(`^${SCOPE_TERM_LABELS.applies} \\d+$`) }));
@@ -168,7 +210,8 @@ describe('Techniques: the counts line', () => {
     expect(line?.textContent).toContain(`Of ${inBand.length} matching the other filters:`);
     for (const term of SCOPE_TERMS) expect(line?.querySelector(`[data-term="${term}"]`)?.textContent?.trim()).toBe(`${countOf(term)} ${SCOPE_TERM_LABELS[term]}`);
     expect(line?.querySelector('[data-term="not_assessed"] .lab-hatch-swatch')).not.toBeNull();
-    expect(bodyRows()).toHaveLength(countOf('applies'));
+    // With none applying the table gives way to the one empty statement, and the line above still counts the not assessed.
+    expect(document.querySelectorAll('#lab-results tbody tr')).toHaveLength(countOf('applies'));
   });
 });
 
@@ -200,8 +243,10 @@ describe('Techniques: the count matrix', () => {
     fireEvent.click(cell);
     expect(cell.getAttribute('aria-pressed')).toBe('true');
     expect(bodyRows()).toHaveLength(expected);
-    expect((screen.getByRole('combobox', { name: 'Technique family' }) as HTMLSelectElement).value).toBe(tactic.id);
-    expect(screen.getByRole('button', { name: new RegExp(`^${bandId} \\d+$`) }).getAttribute('aria-pressed')).toBe('true');
+    expect((screen.getByRole('combobox', { name: 'Technique family', hidden: true }) as HTMLSelectElement).value).toBe(tactic.id);
+    expect(screen.getByRole('button', { name: new RegExp(`^${bandId} \\d+$`), hidden: true }).getAttribute('aria-pressed')).toBe('true');
+    // Both of the cell's filters are behind "More filters", and the button counts them.
+    expect(screen.getByRole('button', { name: 'More filters (2)' })).toBeTruthy();
     expect(matrix.querySelectorAll('.explore-matrix-cell')).toHaveLength(cellCount);
     fireEvent.click(cell);
     expect(bodyRows()).toHaveLength(total);

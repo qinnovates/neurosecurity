@@ -1,10 +1,9 @@
 import { useRef, type ChangeEvent } from 'react';
 import { useFocus } from './FocusContext';
 import type { Route } from './route';
-import { CHANGE_DEVICE_TARGET, EDIT_DEVICE_TARGET, VIEW_STATE_KEYS } from './shell-targets';
+import { CHANGE_DEVICE_TARGET, DEVICE_ACTION_LABELS } from './shell-targets';
 import type { FileStatus } from './use-device-files';
 import { useModelFileLoad } from './use-model-file-load';
-import { useViewStateStore } from './ViewStateContext';
 
 export const EXAMPLE_DEVICE_LABEL = 'Example device';
 
@@ -18,6 +17,8 @@ interface Props {
   id: string;
   facts: readonly string[];
   onNavigate: (route: Route) => void;
+  /** Opens the device editor on its screen. The shell owns this, so the editor closes again when the reader moves on. */
+  onEditDevice: () => void;
   onPrintReport: () => void;
   /** Called after an action that takes the reader to another screen. */
   onClose: () => void;
@@ -29,10 +30,9 @@ function describeLoss(decisionCount: number): string {
 }
 
 /** Everything that can be done with the device in focus, and where it is kept. */
-export default function DeviceMenu({ id, facts, onNavigate, onPrintReport, onClose }: Props) {
+export default function DeviceMenu({ id, facts, onNavigate, onEditDevice, onPrintReport, onClose }: Props) {
   const focus = useFocus();
   const { model } = focus.state;
-  const store = useViewStateStore();
   const fileLoad = useModelFileLoad();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -41,8 +41,8 @@ export default function DeviceMenu({ id, facts, onNavigate, onPrintReport, onClo
     onNavigate(route);
   };
   const editDevice = (): void => {
-    store?.write(VIEW_STATE_KEYS.modelEditorOpen, true);
-    leaveFor(EDIT_DEVICE_TARGET);
+    onClose();
+    onEditDevice();
   };
   const printReport = (): void => {
     onClose();
@@ -66,12 +66,12 @@ export default function DeviceMenu({ id, facts, onNavigate, onPrintReport, onClo
       </ul>
 
       <div className="lab-menu" role="group" aria-label="Device actions">
-        <button type="button" className="lab-menu-item" onClick={() => leaveFor(CHANGE_DEVICE_TARGET)}>Change device</button>
-        <button type="button" className="lab-menu-item" onClick={editDevice}>Edit device</button>
+        <button type="button" className="lab-menu-item" onClick={() => leaveFor(CHANGE_DEVICE_TARGET)}>{DEVICE_ACTION_LABELS['change-device']}</button>
+        <button type="button" className="lab-menu-item" onClick={editDevice}>{DEVICE_ACTION_LABELS['edit-device']}</button>
         <button type="button" className="lab-menu-item" onClick={focus.saveModelFile}>Save file</button>
         <button type="button" className="lab-menu-item" onClick={() => fileInputRef.current?.click()}>Load file</button>
         <button type="button" className="lab-menu-item" onClick={focus.exportRegister}>Export register</button>
-        <button type="button" className="lab-menu-item" onClick={printReport}>Print report</button>
+        <button type="button" className="lab-menu-item" onClick={printReport}>{DEVICE_ACTION_LABELS['print-report']}</button>
       </div>
       <input ref={fileInputRef} type="file" accept="application/json,.json" hidden aria-label="Model file to load" onChange={pickFile} />
 
@@ -85,6 +85,8 @@ export default function DeviceMenu({ id, facts, onNavigate, onPrintReport, onClo
         </div>
       )}
       {fileLoad.error !== null && <p className="lab-device-notice" role="alert">{fileLoad.error}</p>}
+      {/* Always in the document, so a screen reader hears the line when it is filled in. */}
+      <p className="lab-device-loaded" role="status">{fileLoad.loadedDeviceName !== null && `Loaded ${fileLoad.loadedDeviceName}.`}</p>
 
       <div className="lab-device-status">
         <p>Remembered in this browser: <strong>{focus.isStoredInBrowser ? 'yes' : 'no'}</strong></p>
@@ -93,8 +95,8 @@ export default function DeviceMenu({ id, facts, onNavigate, onPrintReport, onClo
           <input id="workbench-remember" type="checkbox" checked={focus.isRemembered} onChange={(event) => focus.setRemembered(event.target.checked)} />
           <span>Remember this device in this browser</span>
         </label>
-        {focus.hasUnsavedDecisions && (
-          <p className="lab-device-notice">Decisions on this device are not remembered in this browser and not in a saved file. Closing the page loses them.</p>
+        {focus.hasUnsavedChanges && (
+          <p className="lab-device-notice">Changes to this device are not remembered in this browser and not in a saved file. Closing the page loses them.</p>
         )}
         <p className="lab-soft">Files are created and read in your browser. Nothing is uploaded.</p>
       </div>

@@ -135,6 +135,8 @@ export interface ComplianceData {
   internetCapableMedia: LinkMedium[];
   /** The passage the media list was read from, in the source's words. */
   internetCapableMediaQuote: string;
+  /** The file's own note on how the link types were read onto FDA's list (`internetCapableMedia.note`), verbatim; null when the file has none. */
+  internetCapableMediaNote: string | null;
   requirements: ComplianceRequirement[];
 }
 

@@ -1,29 +1,40 @@
 /*
- * The device diagram, on the lab kit's tokens. The drawing is laid out in CSS pixels and
- * scrolls inside its container, so the sizes here are the sizes on screen. Nothing in this
- * file repeats: the only animation is one pass of flow along a connection, run once.
- *
- * The last section holds the two older `tm-` component rules a file outside the diagram still
- * uses. They are restyled onto the same tokens and go when that use goes.
+ * The device diagram, on the lab kit's tokens. The drawing is laid out in CSS pixels and is
+ * never scaled, so the sizes here are the sizes on screen; where it does not fit, the list
+ * form takes its place. Nothing in this file repeats: every animation runs once, in answer
+ * to the reader or to a change in the model.
  */
 
 /* Frame: the panel the diagram sits in, its controls, and the sentence above it. */
-.lab-diagram-panel { display: grid; gap: 0.5rem; padding: var(--lab-gap) var(--lab-pad); }
-.lab-diagram-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.375rem var(--lab-gap); }
-.lab-diagram-bar:empty { display: none; }
-.lab-diagram-note { margin: 0; color: var(--lab-ink-soft); }
+.lab-diagram-panel { display: grid; gap: 0.5rem; min-width: 0; padding: 0.5rem 0.75rem; }
+.lab-diagram-panel > * { min-width: 0; }
+.lab-diagram-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem var(--lab-gap); min-width: 0; min-height: 1.75rem; }
+.lab-diagram-bar .lab-segmented { max-width: 100%; }
+.lab-diagram-bar-end { margin-left: auto; }
+.lab-diagram-body[hidden] { display: none; }
+/* The controls that fold the drawing and show its legend: quiet text with a chevron that turns. */
+.lab-diagram-disclosure { display: inline-flex; align-items: center; gap: 0.375rem; min-height: 1.75rem; padding: 0 0.375rem; font: inherit; font-weight: 600; color: var(--lab-ink); background: none; border: 0; border-radius: var(--lab-radius-s); cursor: pointer; transition: background-color var(--lab-dur-1) var(--lab-ease); }
+.lab-diagram-disclosure:hover { background-color: var(--lab-hover); }
+.lab-diagram-disclosure:active { transform: scale(0.97); }
+/* A chain drawn on the diagram: its label, its name on one line, and the playback controls beside them. */
+.lab-diagram-chain { display: flex; flex: 1 1 auto; flex-wrap: wrap; align-items: center; gap: 0.375rem var(--lab-gap); min-width: 0; }
+.lab-diagram-chain-name { flex: 0 1 auto; min-width: 6rem; overflow: hidden; font-weight: 600; white-space: nowrap; text-overflow: ellipsis; }
+.lab-diagram-chain .lab-transport { margin: 0; }
+.lab-diagram-legend { display: grid; gap: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--lab-line); }
+.lab-diagram-legend[hidden] { display: none; }
+.lab-diagram-note { margin: 0; max-width: 72ch; color: var(--lab-ink-soft); }
 .lab-diagram-hypothesis { display: inline-block; padding: 0 0.4375rem; font-size: var(--lab-text-meta); font-weight: 600; color: var(--lab-ink); border: 1px solid var(--lab-ink); border-radius: 999px; white-space: nowrap; }
-.lab-diagram { display: grid; gap: var(--lab-gap); min-width: 0; }
-/* A device with more zones than fit is scrolled, never shrunk. */
+.lab-diagram { display: grid; gap: 0.5rem; min-width: 0; }
+/* The drawing sits in the middle of its panel. Only a picture for paper is ever wider than its place, and that one scrolls. */
 .lab-diagram-scroll { overflow-x: auto; overscroll-behavior-x: contain; }
 .lab-diagram-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .lab-diagram-defs { position: absolute; }
 
 /* The drawing. Text is 12px, a part's name 13px; neither scales with the device. */
-.lab-diagram-svg { display: block; flex: none; max-width: none; color: var(--lab-ink); font-family: var(--lab-font); }
+.lab-diagram-svg { display: block; flex: none; max-width: none; margin-inline: auto; color: var(--lab-ink); font-family: var(--lab-font); }
 .lab-diagram-svg text, .lab-diagram-row-badge text { fill: var(--lab-ink); font-size: 12px; font-weight: 400; }
 .lab-diagram-svg[role="group"] :is(.lab-diagram-part, .lab-diagram-link, .lab-diagram-wire) { cursor: pointer; }
-.lab-diagram-zone rect { fill: var(--lab-hover); }
+.lab-diagram-zone rect { fill: var(--lab-zone); }
 .lab-diagram-svg .lab-diagram-zone text { fill: var(--lab-ink-soft); }
 
 /* Connections: a line from the edge of one part to the edge of the other, and a wider unseen stroke to point at. */
@@ -43,7 +54,8 @@
 .lab-diagram-part .lab-diagram-tag { fill: var(--lab-ink-soft); }
 
 /* Badge: shares as tall as their severity, in ink; only Critical is red. The hatch means "not assessed". */
-.lab-diagram-badge-share { fill: var(--lab-ink); }
+/* When a filter changes the counts, each share moves from its old place and width to the new one once; the integer swaps at once. */
+.lab-diagram-badge-share { fill: var(--lab-ink); transition: x var(--lab-dur-2) var(--lab-ease), width var(--lab-dur-2) var(--lab-ease); }
 .lab-diagram-badge-share[data-severity="critical"] { fill: var(--lab-critical); }
 .lab-diagram-badge-base { stroke: var(--lab-ink-soft); stroke-width: 1px; }
 .lab-diagram-badge-hatch { stroke: currentColor; stroke-width: 1px; }
@@ -56,33 +68,44 @@
 .lab-diagram-step[data-step="ahead"] rect { fill: var(--lab-panel); stroke: var(--lab-ink-soft); stroke-width: 1.5px; }
 .lab-diagram-svg .lab-diagram-step[data-step="ahead"] text { fill: var(--lab-ink-soft); }
 .lab-diagram-step[data-step="now"] rect { stroke: var(--lab-flow); stroke-width: 3px; }
+/* The mark of the step just reached arrives once; a part an edit added does the same. */
+.lab-diagram-step[data-step="now"], .lab-diagram-part[data-entered="true"] { transform-box: fill-box; transform-origin: center; }
+.lab-diagram-step[data-step="now"] { animation: lab-diagram-step-in var(--lab-dur-1) var(--lab-spring, var(--lab-ease)) 1 backwards; }
+.lab-diagram-part[data-entered="true"] { animation: lab-diagram-part-in var(--lab-dur-2) var(--lab-spring, var(--lab-ease)) 1 backwards; }
+@keyframes lab-diagram-step-in { from { transform: scale(0.8); } }
+@keyframes lab-diagram-part-in { from { transform: scale(0.96); } }
 
 /* States, weakest first, all at one specificity so the later rule wins. Stepping back is a softer colour, never transparency. */
 :is(.lab-diagram-part, .lab-diagram-link)[data-dimmed="true"] > .lab-diagram-box { stroke: var(--lab-line); }
 .lab-diagram-part:where([data-tissue-contact="true"])[data-dimmed="true"] > :is(.lab-diagram-box, .lab-diagram-box-inner) { stroke: var(--lab-ink-faint); }
 .lab-diagram-svg [data-dimmed="true"] > text, .lab-diagram-svg [data-dimmed="true"] > .lab-diagram-payload text { fill: var(--lab-ink-faint); }
 .lab-diagram-wire[data-dimmed="true"] > .lab-diagram-line { stroke: var(--lab-line); }
-:is(.lab-diagram-part, .lab-diagram-link)[data-lit="true"] > .lab-diagram-box { stroke: var(--lab-ink); stroke-width: 2px; }
-.lab-diagram-wire[data-lit="true"] > .lab-diagram-line { stroke: var(--lab-ink); stroke-width: 2px; }
+:is(.lab-diagram-part, .lab-diagram-link)[data-lit="true"] > .lab-diagram-box { stroke: var(--lab-ink); stroke-width: 2.5px; }
+.lab-diagram-wire[data-lit="true"] > .lab-diagram-line { stroke: var(--lab-ink); stroke-width: 2.5px; }
 :is(.lab-diagram-part, .lab-diagram-link)[data-selected="true"] > .lab-diagram-box { stroke: var(--lab-select); stroke-width: 2.5px; }
 .lab-diagram-wire[data-selected="true"] > .lab-diagram-line { stroke: var(--lab-select); stroke-width: 2.5px; }
 .lab-diagram-svg :focus-visible > .lab-diagram-box { stroke: var(--lab-focus); stroke-width: 3px; }
 
 /* One pass of flow along a connection, in answer to the reader or to an edit. It runs once and is removed. */
-.lab-diagram-pass { fill: none; stroke: var(--lab-flow); stroke-width: 3px; stroke-linecap: round; pointer-events: none; stroke-dasharray: 14 100; stroke-dashoffset: 16; animation: lab-diagram-pass-forward calc(var(--lab-dur-3) * 2) ease-in-out 1 both; }
+.lab-diagram-pass { fill: none; stroke: var(--lab-flow); stroke-width: 3px; stroke-linecap: round; pointer-events: none; stroke-dasharray: 14 100; stroke-dashoffset: 16; animation: lab-diagram-pass-forward var(--lab-dur-flow) var(--lab-ease) 1 both; }
 .lab-diagram-pass[data-flow-pass="backward"] { animation-name: lab-diagram-pass-backward; }
 .lab-diagram-pass[data-flow-pass="both"] { stroke-dasharray: 14 0 14 200; stroke-dashoffset: -36; animation-name: lab-diagram-pass-both; }
 @keyframes lab-diagram-pass-forward { from { stroke-dashoffset: 16; } to { stroke-dashoffset: -102; } }
 @keyframes lab-diagram-pass-backward { from { stroke-dashoffset: -102; } to { stroke-dashoffset: 16; } }
 /* Two marks leave the middle for the two ends: payloads on this connection travel both ways, or the rule decides no direction. */
 @keyframes lab-diagram-pass-both { from { stroke-dasharray: 14 0 14 200; stroke-dashoffset: -36; } to { stroke-dasharray: 14 132 14 200; stroke-dashoffset: 30; } }
-@media (prefers-reduced-motion: reduce) { .lab-diagram-pass { animation: none; display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .lab-diagram-pass { animation: none; display: none; }
+  .lab-diagram-step[data-step="now"], .lab-diagram-part[data-entered="true"] { animation: none; }
+  .lab-diagram-badge-share, .lab-diagram-disclosure { transition: none; }
+  .lab-diagram-disclosure:active { transform: none; }
+}
 
 /* Legend marks, drawn with the same shapes as the diagram. */
 .lab-diagram-key { flex: none; color: var(--lab-ink); }
 .lab-diagram-key-border { fill: none; stroke: var(--lab-ink); stroke-width: 1.5px; }
 
-/* Under 720px: the same parts and connections as a list. */
+/* Where the drawing does not fit: the same parts and connections as a list. */
 .lab-diagram-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.375rem; }
 .lab-diagram-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 0.125rem var(--lab-gap); min-height: var(--lab-row); padding: 0.5rem 0.75rem; background: var(--lab-panel); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-m); transition: border-color var(--lab-dur-1) var(--lab-ease), background-color var(--lab-dur-1) var(--lab-ease); }
 .lab-diagram-row[role="button"] { cursor: pointer; }
@@ -99,21 +122,29 @@
 .lab-diagram-row[data-dimmed="true"] { border-color: var(--lab-line); }
 .lab-diagram-row[data-dimmed="true"] :is(.lab-diagram-row-name, .lab-diagram-row-tag) { color: var(--lab-ink-faint); }
 .lab-diagram-row[data-tissue-contact="true"][data-dimmed="true"] { border-color: var(--lab-ink-faint); }
-.lab-diagram-row[data-lit="true"] { border-color: var(--lab-ink); background: var(--lab-hover); }
+.lab-diagram-row[data-lit="true"] { border-color: var(--lab-ink); background: var(--lab-lit); }
 .lab-diagram-row[data-selected="true"] { background: var(--lab-select-soft); box-shadow: 0 0 0 2px var(--lab-select); }
 
-/* The miniature on a card: no text, so nothing in it can fall under 12px. */
+/*
+ * The miniature on a card: no text, so nothing in it can fall under 12px. It is drawn at one
+ * size wherever it is used, in a slot of one height, so cards side by side compare: a device
+ * with more parts takes more of the slot, not smaller parts.
+ */
+.lab-diagram-mini-slot { display: flex; align-items: center; height: 6rem; min-width: 0; overflow: hidden; }
+.lab-diagram-mini-slot > .lab-diagram-mini { flex: none; width: auto; height: auto; max-width: 100%; max-height: 100%; }
 .lab-diagram-mini { display: block; max-width: 100%; height: auto; }
-.lab-diagram-mini-zone { fill: var(--lab-hover); }
+.lab-diagram-mini-zone { fill: var(--lab-zone); }
 .lab-diagram-mini-line { fill: none; stroke: var(--lab-ink-soft); stroke-width: 1.25px; }
 .lab-diagram-mini-part rect { fill: var(--lab-panel); stroke: var(--lab-ink-soft); stroke-width: 1.25px; }
 .lab-diagram-mini-part[data-tissue-contact="true"] rect { stroke: var(--lab-ink); }
 .lab-diagram-mini-part rect + rect { fill: none; stroke-width: 1px; }
 
-/* The device folded to one row of chips, shown when the diagram is out of view. */
-.lab-diagram-strip { position: sticky; top: var(--lab-topbar-height); z-index: 10; display: flex; gap: 0.375rem; overflow-x: auto; padding: 0.375rem 0; background: var(--lab-ground); border-bottom: 1px solid var(--lab-line); }
-.lab-diagram-strip-item { flex: none; display: inline-flex; }
-.lab-diagram-strip-item[data-lit="true"] .lab-chip { border-color: var(--lab-ink); }
+/* The device folded to a row of chips, shown where the diagram is folded away or out of view. The chips wrap. */
+.lab-diagram-strip { display: flex; flex: 1 1 0; flex-wrap: wrap; gap: 0.375rem; min-width: 0; }
+.lab-diagram-strip-item { display: inline-flex; min-width: 0; max-width: 100%; }
+.lab-diagram-strip-item .lab-chip { max-width: 100%; }
+.lab-diagram-strip-item .lab-chip > span:first-child { overflow: hidden; text-overflow: ellipsis; }
+.lab-diagram-strip-item[data-lit="true"] .lab-chip:not([aria-pressed="true"]) { border-color: var(--lab-ink); background-color: var(--lab-lit); box-shadow: inset 3px 0 0 var(--lab-ink); }
 
 /* Regions selected for the neural interface: a description beside the diagram. Nothing on it moves. */
 .lab-regions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--lab-pad) 1.5rem; padding: var(--lab-gap) var(--lab-pad); }
@@ -134,24 +165,15 @@
   .lab-diagram-scroll { overflow: visible; }
   .lab-diagram-svg { max-width: 100%; height: auto; }
   .lab-diagram-pass, .lab-diagram-strip, .lab-diagram-bar { display: none; }
+  .lab-diagram-part[data-entered="true"], .lab-diagram-step[data-step="now"] { animation: none; }
 }
 
 @media (forced-colors: active) {
   /* The drawing keeps its own colours and takes them from the system palette. */
   .lab-diagram, .lab-diagram-mini, .lab-diagram-strip, .lab-regions {
-    --lab-ink: CanvasText; --lab-ink-soft: CanvasText; --lab-ink-faint: GrayText; --lab-panel: Canvas; --lab-hover: Canvas;
+    --lab-ink: CanvasText; --lab-ink-soft: CanvasText; --lab-ink-faint: GrayText; --lab-panel: Canvas; --lab-hover: Canvas; --lab-zone: Canvas; --lab-lit: Canvas;
     --lab-line: GrayText; --lab-control-line: CanvasText; --lab-select: Highlight; --lab-focus: Highlight; --lab-critical: CanvasText; --lab-flow: CanvasText;
   }
   .lab-diagram-svg, .lab-diagram-mini, .lab-diagram-key, .lab-diagram-row-badge, .lab-regions-map { forced-color-adjust: none; }
   .lab-diagram-zone rect, .lab-diagram-mini-zone { stroke: GrayText; stroke-width: 1px; }
 }
-
-/*
- * Older component rules still used outside the diagram: `tm-button` and `tm-notice`, both in
- * workbench/ModeErrorBoundary.tsx. Restyled onto the kit's tokens; they go when that file
- * moves to `lab-button` and `lab-notice`.
- */
-.tm-button { padding: 0.4375rem 0.75rem; font-size: var(--lab-text-body); font-weight: 600; color: var(--lab-ink); background: var(--lab-panel); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-m); cursor: pointer; }
-.tm-button:hover { border-color: var(--lab-ink); }
-.tm-button:focus-visible { outline: 2px solid var(--lab-focus); outline-offset: 2px; }
-.tm-notice { border-left: 3px solid var(--lab-caution); padding: 0.5rem 0.75rem; margin: 0.75rem 0; background: var(--lab-panel); color: var(--lab-ink); font-size: var(--lab-text-body); }

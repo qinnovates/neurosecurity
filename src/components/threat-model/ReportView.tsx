@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useFocus } from '@/components/workbench/FocusContext';
 import type { EngineData } from '@/lib/threat-model/catalog-types';
+import { summariseHeadlineFigures } from '@/lib/threat-model/headline-figures';
 import { listOrphanDecisions } from '@/lib/threat-model/orphan-decisions';
 import { summariseCoverageBySeverity } from '@/lib/threat-model/placement-coverage';
 import type { ReferenceData } from '@/lib/threat-model/reference-data-types';
@@ -39,11 +40,12 @@ export function ReportDocument({ report, engineData, referenceData, regionNames 
   const coverage = useMemo(() => summariseCoverageBySeverity(engineData.techniques, scope), [engineData, scope]);
   const elements = useMemo(() => countRowsByElement(model, report.riskRows), [model, report]);
   const units = useMemo(() => summariseRegisterUnits(model, report.riskRows), [model, report]);
+  const headlineFigures = useMemo(() => summariseHeadlineFigures(report, coverage), [report, coverage]);
   const orphanDecisions = useMemo(() => listOrphanDecisions(model, report), [model, report]);
   return (
     <article className="report" id="lab-results">
       <ReportTitleBlock report={report} referenceData={referenceData} regionNames={regionNames} />
-      <ReportOverview elements={elements} units={units} scope={scope} coverage={coverage} placementTable={referenceData.placementTable} />
+      <ReportOverview headlineFigures={headlineFigures} elements={elements} units={units} coverage={coverage} placementTable={referenceData.placementTable} />
       <ReportSystem model={model} />
       <ReportScope model={model} scope={scope} coverageGaps={report.coverageGaps} />
       <ReportSection id="register"><RiskRegister rows={report.riskRows} orphanDecisions={orphanDecisions} /></ReportSection>

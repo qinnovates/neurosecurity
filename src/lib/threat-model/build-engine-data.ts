@@ -64,7 +64,21 @@ function toEvidenceFields(raw: Record<string, unknown>): EvidenceFields {
   };
 }
 
-function toTechnique(raw: Record<string, unknown>, index: number): CatalogTechnique {
+/** Printed for a counted record the mapping gives no category. It matches no known category, so no category is claimed for it. */
+export const UNCATEGORISED_CVE_RECORD = 'Uncategorised';
+
+/** Per technique id: the category of each NVD-verified record linked to it, in file order. */
+function indexRecordCategories(cves: readonly PrecedentCve[]): Map<string, string[]> {
+  const index = new Map<string, string[]>();
+  for (const cve of cves.filter((candidate) => candidate.isNvdVerified)) {
+    for (const techniqueId of cve.techniqueIds) {
+      index.set(techniqueId, [...(index.get(techniqueId) ?? []), cve.category ?? UNCATEGORISED_CVE_RECORD]);
+    }
+  }
+  return index;
+}
+
+function toTechnique(raw: Record<string, unknown>, index: number, recordCategories: ReadonlyMap<string, string[]>): CatalogTechnique {
   const id = readString(raw, 'id');
   const tactic = readString(raw, 'tactic');
   if (id === null || tactic === null || !isStringArray(raw.band_ids) || !isOneOf(raw.severity, CATALOG_SEVERITIES)) {
@@ -83,6 +97,7 @@ function toTechnique(raw: Record<string, unknown>, index: number): CatalogTechni
     bandIds: raw.band_ids,
     evidenceStatus: readString(raw, 'status') ?? 'UNSPECIFIED',
     ...toEvidenceFields(raw),
+    cveRecordCategories: recordCategories.get(id) ?? [],
     sources: isStringArray(raw.sources) ? raw.sources : [],
     severity: raw.severity,
     mode: isOneOf(raw.tara_mode, TECHNIQUE_MODES) ? raw.tara_mode : null,
@@ -120,6 +135,8 @@ function toPrecedentCve(raw: Record<string, unknown>, index: number): PrecedentC
     description: readString(raw, 'description') ?? '',
     cvssScore: typeof cvssScore === 'number' ? cvssScore : null,
     techniqueIds: raw.tara_techniques,
+    category: readString(raw, 'category'),
+    isNvdVerified: readNested(raw, 'validation', 'nvd_verified') === true,
   };
 }
 
@@ -135,15 +152,17 @@ export function buildEngineData(sources: RawEngineSources): EngineDataBundle {
     return id === null ? [] : [{ id, name: readString(tactic, 'name') ?? id, description: readString(tactic, 'description') ?? '' }];
   });
   const tacticIds = tactics.map((tactic) => tactic.id);
+  const precedentCves = requireList(cveMapping, 'mappings', CVE_FILE).map(toPrecedentCve);
+  const recordCategories = indexRecordCategories(precedentCves);
 
   return {
     tacticIds: new Set(tacticIds),
     engineData: {
       registrarVersion,
       tactics,
-      techniques: requireList(registrar, 'techniques', REGISTRAR_FILE).map(toTechnique),
+      techniques: requireList(registrar, 'techniques', REGISTRAR_FILE).map((raw, index) => toTechnique(raw, index, recordCategories)),
       regions: requireList(atlas, 'brain_regions', ATLAS_FILE).map(toRegion),
-      precedentCves: requireList(cveMapping, 'mappings', CVE_FILE).map(toPrecedentCve),
+      precedentCves,
       precedentCvesAsOf: cveGenerated,
     },
   };

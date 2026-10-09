@@ -5,7 +5,7 @@ import FilterChip from '@/components/lab-kit/FilterChip';
 import { useSiteDatabase } from '@/components/query/use-site-database';
 import { useViewState } from '@/components/workbench/ViewStateContext';
 import {
-  DEVICES_TABLE, NOT_RECORDED, SPEC_COLUMNS, countDeviceTypes, filterSpecRows, isChannelCount, readSpecText, specRowKey, specSortValue, type SpecRow,
+  DEVICES_TABLE, NOT_RECORDED, SPEC_COLUMNS, countDeviceTypes, filterSpecRows, formatSpecDisplay, isChannelCount, readSpecText, specRowKey, specSortValue, type SpecRow,
 } from './specifications/spec-rows';
 
 /** The standing rule for named devices, and the one thing to do next. */
@@ -30,9 +30,12 @@ const COLUMNS: readonly DataTableColumn<SpecRow>[] = SPEC_COLUMNS.map((column) =
   id: column.key,
   header: column.header,
   render: (row) => {
-    const text = readSpecText(row, column.key);
+    const text = formatSpecDisplay(row, column.key);
     if (isChannelCount(row, column.key)) return <span className="lab-figure">{text}</span>;
-    return text === NOT_RECORDED ? <span className="lab-soft">{text}</span> : text;
+    if (text === NOT_RECORDED) return <span className="lab-soft">{text}</span>;
+    // Where the display differs from the file, the value as recorded is the cell's title.
+    const recorded = readSpecText(row, column.key);
+    return recorded === text ? text : <span title={recorded}>{text}</span>;
   },
   sortValue: (row) => specSortValue(row, column.key),
 }));

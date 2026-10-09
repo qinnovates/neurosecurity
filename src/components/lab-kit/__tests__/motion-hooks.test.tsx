@@ -63,11 +63,21 @@ describe('useViewTransition', () => {
   });
 
   it('runs the update inside one view transition where the browser has them', () => {
-    const startViewTransition = vi.fn((update: () => void) => { update(); });
+    const startViewTransition = vi.fn((update: () => void) => { update(); return { ready: Promise.resolve() }; });
     Object.defineProperty(document, 'startViewTransition', { value: startViewTransition, configurable: true });
     render(<ViewSwitch />);
     fireEvent.click(screen.getByRole('button', { name: 'risks' }));
     expect(startViewTransition).toHaveBeenCalledOnce();
+    expect(screen.getByRole('button').textContent).toBe('report');
+  });
+
+  it('still applies the update, and raises no error, when the browser skips the transition', async () => {
+    const ready = Promise.reject(new Error('Transition was skipped'));
+    const startViewTransition = vi.fn((update: () => void) => { update(); return { ready }; });
+    Object.defineProperty(document, 'startViewTransition', { value: startViewTransition, configurable: true });
+    render(<ViewSwitch />);
+    fireEvent.click(screen.getByRole('button', { name: 'risks' }));
+    await expect(ready).rejects.toThrow('skipped');
     expect(screen.getByRole('button').textContent).toBe('report');
   });
 

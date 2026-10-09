@@ -87,8 +87,8 @@ export function useLabRoute(store: ViewStateStore, scrollerRef: RefObject<HTMLEl
   useEffect(() => {
     store.write(lastViewKey(address.route.modeId), address.route.viewId);
     document.title = titleFor(address.route);
-    // An address that named no screen is corrected in place, so it is not kept in history or copied onward.
-    if (!address.isRecognised) window.history.replaceState(window.history.state, '', toHash(address.route));
+    // An address that named no screen, or carried something after the screen, is corrected in place, so it is not kept in history or copied onward.
+    if (!address.isRecognised || !address.isCanonical) window.history.replaceState(window.history.state, '', toHash(address.route));
   }, [address, store]);
 
   /** Changing the address adds a history entry, so the browser's Back button moves within the Lab. */

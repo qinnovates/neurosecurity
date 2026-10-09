@@ -1,7 +1,6 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useMemo, useState, type CSSProperties } from 'react';
 import Drawer from '@/components/lab-kit/Drawer';
 import { useSequencePlayback } from '@/components/lab-kit/motion/use-sequence-playback';
-import { useIsOffscreen } from '@/components/lab-kit/use-is-offscreen';
 import { useFocus } from '@/components/workbench/FocusContext';
 import type { ModeProps } from '@/components/workbench/mode-registry';
 import { VIEW_STATE_KEYS } from '@/components/workbench/shell-targets';
@@ -15,19 +14,23 @@ import { isNeuralInterfaceElement, listTargetRegions } from '@/lib/threat-model/
 import DeviceCanvas from '../DeviceCanvas';
 import DeviceEditor from '../editor/DeviceEditor';
 import ElementPanel from '../ElementPanel';
+import { useElementSize, useIsOutOfView } from '../diagram/use-element-size';
 import PartStrip from '../PartStrip';
 import TargetRegionsPanel from '../TargetRegionsPanel';
-import ModelFacets, { type ModelFacetId } from './ModelFacets';
+import ModelFacets, { MODEL_FACET_IDS, type ModelFacetId } from './ModelFacets';
 import ModelHeader from './ModelHeader';
 import ModelViews, { type ModelViewActions } from './ModelViews';
 import { DIAGRAM_VIEW_IDS, FACET_VIEW_IDS, MODEL_STATE_KEYS, MODEL_VIEWS, isNullableChainId } from './model-view-keys';
 import RiskDrawer from './RiskDrawer';
+import { useDiagramFold } from './use-diagram-fold';
 import { useModelData } from './use-model-data';
 import { useModelLens } from './use-model-lens';
 import { useRiskDrawer } from './use-risk-drawer';
 
 /** Chains are generated along parts, so only the part narrows them. */
 const CHAIN_FACET_IDS: readonly ModelFacetId[] = ['part'];
+/** Where the diagram or the row of parts is on screen it chooses the part, so the facet bar does not offer a second way. */
+const PART_FACET_ID: ModelFacetId = 'part';
 /** Views where a row's detail opens in place. From any other view the register is opened first. */
 const DRAWER_VIEW_IDS: readonly string[] = [MODEL_VIEWS.risks, MODEL_VIEWS.techniquesByPart];
 export const EDITOR_TITLE = 'Device editor';
@@ -47,8 +50,10 @@ export default function ModelFrame({ viewId, onSelectView }: ModeProps) {
   const data = useModelData(heldLens, isOpenOnly);
   const riskDrawer = useRiskDrawer(data.currentRows);
   const openTechnique = useOpenTechnique();
-  const canvasRef = useRef<HTMLDivElement>(null);
-  const isCanvasOffscreen = useIsOffscreen(canvasRef);
+  // The slot is drawn in a different place on the Overview, so it is followed as an element, not through one ref.
+  const [canvasSlot, setCanvasSlot] = useState<HTMLDivElement | null>(null);
+  const [pinnedStrip, setPinnedStrip] = useState<HTMLDivElement | null>(null);
+  const isCanvasOffscreen = useIsOutOfView(canvasSlot);
 
   const { lens } = data;
   const isOverview = viewId === MODEL_VIEWS.overview;
@@ -57,6 +62,8 @@ export default function ModelFrame({ viewId, onSelectView }: ModeProps) {
   // A chain belongs to the Chains view: it is drawn on the diagram only there, and is still chosen on return.
   const selectedChain = viewId === MODEL_VIEWS.chains ? report.chainResult.chains.find((chain) => chain.chain_id === selectedChainId) ?? null : null;
   const chainPlayback = useSequencePlayback(selectedChain?.steps.length ?? 0);
+  const fold = useDiagramFold(model, selectedChain !== null);
+  const registerCounts = useMemo(() => countRowsByElement(model, data.currentRows), [model, data.currentRows]);
   const selectedElementLabel = lens.elementId === null ? null : describeElement(model, lens.elementId);
   const selectedOutcome = report.elementOutcomes.find((outcome) => outcome.elementId === lens.elementId);
   const legacyControlsNotice = describeLegacyControls(model);
@@ -79,35 +86,46 @@ export default function ModelFrame({ viewId, onSelectView }: ModeProps) {
   };
 
   const shownRisk = !isEditorOpen && DRAWER_VIEW_IDS.includes(viewId) ? riskDrawer.openedRisk : null;
+  // The Overview shows the drawing wherever there is one. On the working views, and on a phone's list, it folds away.
+  const canFold = !isOverview || fold.isNarrow;
+  const isDiagramOpen = !canFold || fold.isOpen;
+  const strip = <PartStrip model={model} lens={lens} openRiskCounts={data.openRiskCounts} elementCounts={registerCounts} onLensChange={setLens} />;
+  // Once the diagram, open or folded, has scrolled away, the row of parts stays under the bars in its place.
+  const isStripPinned = hasFacets && !fold.isNarrow && isCanvasOffscreen && selectedChain === null;
+  // The table head stops under the row of parts, so it needs the row's height.
+  const pinnedSize = useElementSize(isStripPinned ? pinnedStrip?.firstElementChild ?? null : null);
+  const pinnedHeight = isStripPinned ? pinnedSize?.height ?? 0 : 0;
+  const frameStyle = { '--model-pinned-height': `${Math.round(pinnedHeight)}px` } as CSSProperties;
+  const viewFacetIds = viewId === MODEL_VIEWS.chains ? CHAIN_FACET_IDS : MODEL_FACET_IDS;
+  const facetIds = fold.isNarrow ? viewFacetIds : viewFacetIds.filter((facetId) => facetId !== PART_FACET_ID);
 
   const diagram = hasDiagram && (
-    <div ref={canvasRef} className="model-canvas-slot model-no-print" data-chain={selectedChain !== null}>
+    <div ref={setCanvasSlot} className="model-canvas-slot model-no-print lab-vt-diagram" data-chain={selectedChain !== null}>
       <DeviceCanvas
         report={report} lens={isOverview ? EMPTY_LENS : lens} onLensChange={isOverview ? changeLensFromOverview : setLens}
         selectedChain={selectedChain} chainPlayback={chainPlayback} onClearChain={() => setSelectedChainId(null)}
-        elementCounts={isOverview ? countRowsByElement(model, data.currentRows) : data.elementCounts}
+        elementCounts={isOverview ? registerCounts : data.elementCounts}
+        isOpen={isDiagramOpen} onToggleOpen={canFold ? fold.toggle : undefined} folded={fold.isNarrow ? undefined : strip}
       />
     </div>
   );
 
   return (
-    <div className="model-frame" data-view={viewId} data-drawer={shownRisk !== null}>
+    <div className="model-frame" data-view={viewId} data-drawer={shownRisk !== null} style={frameStyle}>
       <ModelHeader model={model} report={report} isExampleDevice={isExampleDevice} isEditorOpen={isEditorOpen} onEditDevice={() => setEditorOpen(true)} />
       {legacyControlsNotice !== null && <p className="lab-notice">{legacyControlsNotice}</p>}
       {!isOverview && diagram}
-      {hasFacets && isCanvasOffscreen && (
-        <PartStrip model={model} lens={lens} openRiskCounts={data.openRiskCounts} onLensChange={setLens} />
-      )}
+      {isStripPinned && <div ref={setPinnedStrip} className="model-pinned-strip model-no-print">{strip}</div>}
       {hasFacets && (
         <ModelFacets
-          lens={lens} onLensChange={setLens} isOpenOnly={isOpenOnly} onOpenOnlyChange={setOpenOnly} counts={data.facetCounts} gaps={data.gaps}
+          lens={lens} onLensChange={setLens} isOpenOnly={isOpenOnly} onOpenOnlyChange={setOpenOnly} counts={data.facetCounts} scopeByKind={data.scopeByKind}
           elements={data.elements} techniqueName={lens.techniqueId === null ? null : techniqueById.get(lens.techniqueId)?.name ?? null}
-          facetIds={viewId === MODEL_VIEWS.chains ? CHAIN_FACET_IDS : undefined}
+          facetIds={facetIds}
         />
       )}
       {hasFacets && selectedElementLabel !== null && isNeuralInterfaceElement(model, lens.elementId) && (
         <div className="model-no-print">
-          <TargetRegionsPanel summary={listTargetRegions(model, engineData.regions)} interfaceLabel={selectedElementLabel} />
+          <TargetRegionsPanel summary={listTargetRegions(model, engineData.regions)} interfaceLabel={selectedElementLabel} invasiveness={model.invasiveness} />
         </div>
       )}
       {hasFacets && selectedElementLabel !== null && selectedOutcome !== undefined && (

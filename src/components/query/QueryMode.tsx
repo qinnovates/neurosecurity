@@ -112,7 +112,7 @@ export default function QueryMode(_props: ModeProps) {
         )}
       </Panel>
       <div className="query-body">
-        <section className="lab-panel" id="lab-results" aria-label="Result" aria-live="polite">
+        <section className="lab-panel" id="lab-results" aria-label="Result" tabIndex={-1}>
           <div className="lab-panel-body"><QueryResultView result={result} tableNames={tableNames} techniqueIds={techniqueIds} onOpenTechnique={openTechnique} /></div>
         </section>
         <SchemaBrowser tables={tables} isSiteLoaded={siteTables !== null} siteError={siteError} openTable={openTable} onOpenTable={openAndLook} />

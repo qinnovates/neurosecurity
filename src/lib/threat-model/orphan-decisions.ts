@@ -35,8 +35,9 @@ function findCause(elementId: string, subjectId: string, model: DeviceModel, rep
   if (subjectId.startsWith(STRIDE_RISK_PREFIX)) return { cause: 'baseline_no_longer_applies', detail: BASELINE_DETAIL };
   const excluded = report.elementOutcomes
     .flatMap((outcome) => outcome.excluded)
-    .find((exclusion) => exclusion.elementId === elementId && exclusion.techniqueId === subjectId);
-  return { cause: 'technique_no_longer_applies', detail: `${NO_LONGER_APPLIES_DETAIL} ${excluded?.reason.detail ?? NOT_PLACED_HERE_CONDITION}` };
+    .filter((exclusion) => exclusion.elementId === elementId && exclusion.techniqueId === subjectId);
+  const conditions = excluded.length > 0 ? excluded.map((exclusion) => exclusion.reason.detail).join(' ') : NOT_PLACED_HERE_CONDITION;
+  return { cause: 'technique_no_longer_applies', detail: `${NO_LONGER_APPLIES_DETAIL} ${conditions}` };
 }
 
 /**

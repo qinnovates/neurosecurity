@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { getKqlTables } from '../../kql-tables';
-import { ALLOWED_SITE_TABLES, applyLabTablePolicy } from '../lab-table-policy';
+import { ALLOWED_SITE_TABLES, SITE_TABLE_DESCRIPTIONS, applyLabTablePolicy } from '../lab-table-policy';
 
 /** Every table the site builds, as the Lab receives them. */
 const siteTables = getKqlTables();
@@ -55,5 +55,42 @@ describe('lab table policy', () => {
     const before = columnsOf(siteTables.devices);
     applyLabTablePolicy(siteTables);
     expect(columnsOf(siteTables.devices)).toEqual(before);
+  });
+});
+
+describe('columns left out because of what they carry', () => {
+  const site = getKqlTables();
+  const shown = applyLabTablePolicy(site);
+  const columnsIn = (rows: readonly Record<string, unknown>[]): string[] => [...new Set(rows.flatMap((row) => Object.keys(row)))];
+
+  it('shows no authored-chain free text: the notes, rationale, extrapolation and device class stay out, the labels stay in', () => {
+    const columns = columnsIn(shown.attack_chains);
+    for (const column of ['chain_evidence_rationale', 'step_evidence_note', 'step_evidence_source', 'extrapolation', 'device_class']) {
+      expect(columnsIn(site.attack_chains), `the site table has ${column}`).toContain(column);
+      expect(columns, column).not.toContain(column);
+    }
+    expect(columns).toEqual(expect.arrayContaining(['chain_evidence_label', 'step_evidence_label']));
+  });
+
+  it('shows no retired status word in any authored-chain cell', () => {
+    const cells = shown.attack_chains.flatMap((row) => Object.values(row)).filter((value): value is string => typeof value === 'string');
+    expect(cells.length).toBeGreaterThan(0);
+    for (const cell of cells) expect(cell).not.toMatch(/\b(CONFIRMED|EMERGING|THEORETICAL)\b|\bconfirmed\b/);
+  });
+
+  it('shows no regulatory status the site table has cut short', () => {
+    const truncated = site.hardware_specs.filter((row) => String(row.fda_status ?? '').length === 40);
+    // The fault: the site table cuts the field at 40 characters, so some rows end mid-sentence.
+    expect(truncated.length).toBeGreaterThan(0);
+    expect(columnsIn(shown.hardware_specs)).not.toContain('fda_status');
+    expect(ALLOWED_SITE_TABLES.hardware_specs).not.toContain('fda_status');
+  });
+
+  it('holds one row per step of an authored chain, which is what its description says', () => {
+    const stepsByChain = new Map<string, number>();
+    for (const row of shown.attack_chains) stepsByChain.set(String(row.chain_id), Number(row.step_count));
+    expect(shown.attack_chains).toHaveLength([...stepsByChain.values()].reduce((sum, count) => sum + count, 0));
+    expect(stepsByChain.size).toBeLessThan(shown.attack_chains.length);
+    expect(SITE_TABLE_DESCRIPTIONS.attack_chains).toBe('One row per step of an authored chain.');
   });
 });

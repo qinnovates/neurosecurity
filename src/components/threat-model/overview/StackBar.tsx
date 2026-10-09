@@ -16,6 +16,8 @@ interface Props {
   /** What is being counted, for the accessible summary: "open rows". */
   subject: string;
   segments: readonly StackSegment[];
+  /** How many of the set the segments leave out, drawn as empty track after them. Leave out when the segments are the whole set. */
+  remainder?: number;
 }
 
 function describeStack(subject: string, segments: readonly StackSegment[]): string {
@@ -30,12 +32,13 @@ export function StackKey({ tone }: { tone: StackTone }) {
 }
 
 /** When the set changes each share moves from its old width to its new one once; the integers beside it swap at once. */
-export default function StackBar({ subject, segments }: Props) {
+export default function StackBar({ subject, segments, remainder = 0 }: Props) {
   return (
     <div className="model-stackbar" role="img" aria-label={describeStack(subject, segments)}>
       {segments.map((segment) => (
         <span key={segment.id} className="model-stackbar-segment" data-tone={segment.tone} data-empty={segment.count === 0} style={{ flexGrow: segment.count }} />
       ))}
+      <span className="model-stackbar-segment" data-tone="rest" data-empty={remainder === 0} style={{ flexGrow: remainder }} />
     </div>
   );
 }

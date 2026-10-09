@@ -4,8 +4,9 @@ import { describe, it, expect } from 'vitest';
 import { EVIDENCE_POPULATION_LABELS, EVIDENCE_TIER_GROUP, type EvidencePopulation } from '../../evidence-tiers';
 import { CATALOG_SEVERITIES } from '../catalog-types';
 import {
-  ADJACENT_POPULATION_PHRASES, EVIDENCE_SHORT_LABELS, NOT_STATED_LABEL, PLACEMENT_PROVENANCE_LINE, describeEvidence, evidenceRankOf, weakestEvidenceOf,
+  ADJACENT_POPULATION_BY_CVE_CATEGORY, ADJACENT_POPULATION_PHRASES, NEURAL_COUNT_CVE_CATEGORIES, EVIDENCE_SHORT_LABELS, NOT_STATED_LABEL, PLACEMENT_PROVENANCE_LINE, describeEvidence, evidenceRankOf, weakestEvidenceOf,
 } from '../evidence-levels';
+import { readDataFile } from './load-test-data';
 import { PRESETS, engineData } from './preset-reports';
 
 const LEGACY_WORDS = /confirmed|proven/i;
@@ -34,34 +35,18 @@ describe('describeEvidence over the whole catalog', () => {
     expect(describeEvidence({ evidenceTier: 'demonstrated_case' }).label).toBe('Demonstrated (Case Study / Observational)');
   });
 
-  it('words the CVE population from the two counts and the population code', () => {
-    for (const technique of engineData.techniques) {
-      const { cveLine } = describeEvidence(technique);
-      const neural = technique.neuralProductCveCount ?? 0;
-      const adjacent = technique.adjacentCveCount ?? 0;
-      expect(cveLine, technique.id).not.toBeNull();
-      expect(cveLine, technique.id).not.toContain('Shown on');
-      if (technique.evidencePopulation === 'none') expect(cveLine, technique.id).toBe('CVE records: none in any product.');
-      if (neural > 0) expect(cveLine, technique.id).toBe(`CVE records: ${neural} in neural-data products, ${adjacent} in adjacent technology.`);
-      if (neural === 0 && adjacent > 0) {
-        const where = ADJACENT_POPULATION_PHRASES[technique.evidencePopulation as EvidencePopulation];
-        expect(where, technique.id).toBeDefined();
-        expect(cveLine, technique.id).toBe(`CVE records: none in a neural-data product; ${adjacent} in ${where}.`);
-      }
-    }
-  });
-
   it('takes each adjacent-population phrase from the catalog\'s own label for that code', () => {
     for (const [population, phrase] of Object.entries(ADJACENT_POPULATION_PHRASES)) {
       expect(EVIDENCE_POPULATION_LABELS[population as EvidencePopulation], population).toContain(phrase);
     }
   });
 
-  it('says how the tier was set, with the date the catalog records, when a script is named', () => {
+  it('says only that a script set the tier and the date the catalog records', () => {
     for (const technique of engineData.techniques) {
       const { provenanceLine } = describeEvidence(technique);
       if (technique.evidenceDerivedBy === null) expect(provenanceLine, technique.id).toBeNull();
-      else expect(provenanceLine, technique.id).toBe(`Tier set by script on ${technique.evidenceDerivedOn} from the earlier status; not yet reviewed by the author.`);
+      else expect(provenanceLine, technique.id).toBe(`Tier set by script on ${technique.evidenceDerivedOn}.`);
+      expect(provenanceLine ?? '', technique.id).not.toMatch(/earlier status|reviewed/);
     }
     expect(describeEvidence({ evidenceTier: 'speculative' }).provenanceLine).toBeNull();
     expect(describeEvidence({ evidenceTier: 'speculative' }).cveLine).toBeNull();
@@ -85,6 +70,84 @@ describe('describeEvidence over the whole catalog', () => {
   it('words a record with no tier through the catalog\'s fallback tier, never through the legacy word', () => {
     expect(describeEvidence({ evidenceTier: null, evidenceStatus: 'CONFIRMED' })).toMatchObject({ level: 'demonstrated', label: 'Demonstrated (lab)', shortLabel: 'Lab' });
     expect(describeEvidence({ evidenceTier: null, evidenceStatus: null })).toMatchObject({ level: 'other', label: NOT_STATED_LABEL, shortLabel: NOT_STATED_LABEL });
+  });
+});
+
+interface RawCveRecord { tara_techniques: string[]; category?: string; validation?: { nvd_verified?: boolean } }
+
+describe('the CVE line against the per-record categories in datalake/cve-technique-mapping.json', () => {
+  const TIER_SCRIPT = fs.readFileSync('src/scripts/migrate-populate-evidence-tier.py', 'utf-8');
+  const counted = (readDataFile('cve-technique-mapping.json') as { mappings: RawCveRecord[] }).mappings.filter((record) => record.validation?.nvd_verified === true);
+  const neuralCategories = [...(/NEURAL_PRODUCT_CATEGORIES = \{([^}]*)\}/.exec(TIER_SCRIPT)?.[1] ?? '').matchAll(/"([^"]+)"/g)].map((match) => match[1]);
+  const populationByCategory = new Map([...(/POPULATION_BY_CATEGORY = \{([^}]*)\}/.exec(TIER_SCRIPT)?.[1] ?? '').matchAll(/"([^"]+)": "([^"]+)"/g)].map((match) => [match[1], match[2]]));
+
+  /** The category of each counted record of a technique, read from the file and from nothing else. */
+  function categoriesOf(techniqueId: string): string[] {
+    return counted.filter((record) => record.tara_techniques.includes(techniqueId)).map((record) => record.category ?? '');
+  }
+
+  it('holds the same category lists as the script that set the counts', () => {
+    expect(neuralCategories.length).toBeGreaterThan(0);
+    expect([...NEURAL_COUNT_CVE_CATEGORIES].sort()).toEqual([...neuralCategories].sort());
+    const adjacentInScript = [...populationByCategory].filter(([, population]) => population !== 'neural_product');
+    expect(Object.entries(ADJACENT_POPULATION_BY_CVE_CATEGORY).sort()).toEqual(adjacentInScript.sort());
+  });
+
+  it('reproduces both recorded counts of every technique from the record categories', () => {
+    for (const technique of engineData.techniques) {
+      const categories = categoriesOf(technique.id);
+      expect(technique.cveRecordCategories, technique.id).toEqual(categories);
+      expect(categories.filter((category) => neuralCategories.includes(category)).length, technique.id).toBe(technique.neuralProductCveCount);
+      expect(categories.filter((category) => !neuralCategories.includes(category)).length, technique.id).toBe(technique.adjacentCveCount);
+    }
+  });
+
+  it('names one adjacent population only when every adjacent record of the technique is in it', () => {
+    const adjacentOnly = engineData.techniques.filter((technique) => technique.neuralProductCveCount === 0 && (technique.adjacentCveCount ?? 0) > 0);
+    expect(adjacentOnly.length).toBeGreaterThan(0);
+    let mixedCount = 0;
+    for (const technique of adjacentOnly) {
+      const populations = new Set(categoriesOf(technique.id).map((category) => populationByCategory.get(category)));
+      const { cveLine } = describeEvidence(technique);
+      const namedPhrase = Object.entries(ADJACENT_POPULATION_PHRASES).find(([, phrase]) => cveLine?.endsWith(` in ${phrase}.`));
+      if (populations.size === 1) {
+        expect(namedPhrase?.[0], technique.id).toBe([...populations][0]);
+        expect(cveLine, technique.id).toBe(`CVE records: none in a neural-data product; ${technique.adjacentCveCount} in ${namedPhrase?.[1]}.`);
+      } else {
+        mixedCount += 1;
+        expect(namedPhrase, `${technique.id} has records in ${[...populations].join(' and ')}`).toBeUndefined();
+        expect(cveLine, technique.id).toBe(`CVE records: none in a neural-data product; ${technique.adjacentCveCount} in adjacent technology.`);
+      }
+    }
+    // The catalog holds techniques whose adjacent records span populations; the check above is not vacuous.
+    expect(mixedCount).toBeGreaterThan(0);
+  });
+
+  it('names the catalog categories of the counted records and never calls them neural-data products', () => {
+    const withNeuralCount = engineData.techniques.filter((technique) => (technique.neuralProductCveCount ?? 0) > 0);
+    expect(withNeuralCount.length).toBeGreaterThan(0);
+    for (const technique of withNeuralCount) {
+      const present = neuralCategories.filter((category) => categoriesOf(technique.id).includes(category));
+      const names = present.length === 1 ? present[0] : `${present.slice(0, -1).join(', ')} and ${present[present.length - 1]}`;
+      const adjacent = technique.adjacentCveCount === 0 ? 'none' : technique.adjacentCveCount;
+      const { cveLine } = describeEvidence(technique);
+      expect(cveLine, technique.id).toBe(`CVE records: ${technique.neuralProductCveCount} in the catalog's ${present.length === 1 ? 'category' : 'categories'} ${names}; ${adjacent} in other categories.`);
+      expect(cveLine, technique.id).not.toMatch(/neural-data product/);
+    }
+  });
+
+  it('says "none in any product" exactly when the technique has no counted record', () => {
+    for (const technique of engineData.techniques) {
+      const hasNone = categoriesOf(technique.id).length === 0;
+      expect(describeEvidence(technique).cveLine === 'CVE records: none in any product.', technique.id).toBe(hasNone);
+    }
+  });
+
+  it('names no single population when the caller holds no records', () => {
+    expect(describeEvidence({ evidenceTier: 'demonstrated_lab', neuralProductCveCount: 0, adjacentCveCount: 3, evidencePopulation: 'adjacent_clinical' }).cveLine)
+      .toBe('CVE records: none in a neural-data product; 3 in adjacent technology.');
+    expect(describeEvidence({ evidenceTier: 'demonstrated_lab', neuralProductCveCount: 2, adjacentCveCount: 0 }).cveLine)
+      .toBe('CVE records: 2 in the catalog\'s categories Neural/EEG Systems, Implant Telemetry or Implant Gateway/Hub; none in other categories.');
   });
 });
 

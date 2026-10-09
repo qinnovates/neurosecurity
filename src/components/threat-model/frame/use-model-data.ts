@@ -15,7 +15,8 @@ import { countRowsByElement, type ElementRowCounts } from '@/lib/threat-model/re
 import type { RiskRow } from '@/lib/threat-model/report-types';
 import { countOpenRisksByElement, isRiskAddressed } from '@/lib/threat-model/risk-register';
 import { summariseScope, type ScopeStatement } from '@/lib/threat-model/scope-statement';
-import { countFacets, findCoverageGaps, type CoverageGaps, type FacetCounts } from './facet-counts';
+import { countFacets, findCoverageGaps, type CoverageGaps, type FacetCounts, type ScopeByKind } from './facet-counts';
+import { buildScopeByKind } from './scope-by-kind';
 import { sanitiseLens } from './use-model-lens';
 
 export interface ModelData {
@@ -34,6 +35,7 @@ export interface ModelData {
   gaps: CoverageGaps;
   scope: ScopeStatement;
   severityCoverage: SeverityCoverage;
+  scopeByKind: ScopeByKind;
   orphans: OrphanDecision[];
   /** Generated chains with a step on the selected part or connection; all of them when none is selected. */
   chainsInView: ChainGenerationResult;
@@ -64,8 +66,13 @@ export function useModelData(heldLens: Lens, isOpenOnly: boolean): ModelData {
   const scope = useMemo(() => summariseScope(model, engineData, referenceData), [model, engineData, referenceData]);
   const severityCoverage = useMemo(() => summariseCoverageBySeverity(engineData.techniques, scope), [engineData.techniques, scope]);
 
+  const scopeByKind = useMemo<ScopeByKind>(
+    () => buildScopeByKind(scope, engineData.techniques, referenceData.placementRules.placements, severityCoverage),
+    [scope, engineData.techniques, referenceData.placementRules.placements, severityCoverage],
+  );
+
   return {
-    lens, currentRows, rowsInView, scope, severityCoverage,
+    lens, currentRows, rowsInView, scope, severityCoverage, scopeByKind,
     elements: useMemo(() => listElementsInModelOrder(model), [model]),
     elementCounts: useMemo(() => countRowsByElement(model, rowsOnAnyElement), [model, rowsOnAnyElement]),
     openRiskCounts: useMemo(() => countOpenRisksByElement(rowsOnAnyElement), [rowsOnAnyElement]),

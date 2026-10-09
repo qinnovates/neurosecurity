@@ -84,3 +84,10 @@ export interface ChainGenerationResult {
   /** Set when `chains` is empty, saying why. The filter is never relaxed to fill the list. */
   emptyReason: string | null;
 }
+
+/**
+ * What a generated chain is, said the same way wherever chains are shown. The Chains view
+ * (src/components/threat-model/ChainsSection.tsx) prints the same two sentences; a test holds them together.
+ */
+export const CHAIN_HYPOTHESIS_STATEMENT = 'Chains are assembled along real paths in your device model, using only techniques the engine admits on evidence. '
+  + 'Every chain is a hypothesis for review: a path through the model exists, which is not evidence the attack has been carried out.';

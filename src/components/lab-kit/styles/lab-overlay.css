@@ -1,27 +1,51 @@
 /*
  * Floating layers. The drawer is the inspector: it springs in beside the work on a wide
  * screen and rises as a sheet under 720px. It is the only place the float shadow is used.
+ * It sits between `--lab-drawer-top` and `--lab-drawer-bottom`, which the shell sets to the
+ * measured bars and standing statements, so it never covers either.
  */
 
-.lab-drawer { position: fixed; top: var(--lab-drawer-top, 0); bottom: 0; right: -1rem; z-index: 50; display: grid; grid-template-rows: auto minmax(0, 1fr); width: min(27rem, calc(100vw + 1rem)); padding-right: 1rem; color: var(--lab-ink); background: var(--lab-panel-raised); border-left: 1px solid var(--lab-line); border-radius: var(--lab-radius-l) 0 0 var(--lab-radius-l); box-shadow: var(--lab-shadow-float); animation: lab-drawer-in var(--lab-dur-3) var(--lab-spring) both; }
+.lab-drawer { position: fixed; top: var(--lab-drawer-top, 0px); bottom: var(--lab-drawer-bottom, 0px); right: -1rem; z-index: 50; display: grid; grid-template-rows: auto minmax(0, 1fr); width: min(27rem, calc(100vw + 1rem)); padding-right: 1rem; color: var(--lab-ink); background: var(--lab-panel-raised); border-left: 1px solid var(--lab-line); border-radius: var(--lab-radius-l) 0 0 var(--lab-radius-l); box-shadow: var(--lab-shadow-float); animation: lab-drawer-in var(--lab-dur-3) var(--lab-spring) both; }
+/* A floating sheet that is not a drawer (the command palette) shares the surface. */
+.lab-float { background: var(--lab-panel-raised); }
+/* The same depth as the bars where the browser can blur: a dense material, measured in the contrast test over the worst thing it can cover. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .lab-drawer, .lab-float { background: var(--lab-material-float); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); }
+}
+/* The panel takes focus when it opens. A keyboard reader sees where focus went; a pointer reader sees no ring. */
 .lab-drawer:focus { outline: none; }
+.lab-drawer:focus-visible { outline: 2px solid var(--lab-focus); outline-offset: -2px; }
 .lab-drawer-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--lab-gap); padding: var(--lab-pad) var(--lab-pad) var(--lab-gap); border-bottom: 1px solid var(--lab-line); }
-.lab-drawer-title { font-size: var(--lab-text-title); font-weight: 600; margin: 0; }
-.lab-drawer-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; }
+.lab .lab-drawer-title { font-size: var(--lab-text-title); font-weight: 600; line-height: 1.25rem; margin: 0; overflow-wrap: anywhere; }
+.lab-drawer-actions { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; }
 .lab-drawer-body { overflow: auto; padding: var(--lab-gap) var(--lab-pad) var(--lab-pad); overscroll-behavior: contain; }
+
+/* Leaving: one move out, then Drawer.tsx removes the panel when the animation ends. */
+.lab-drawer[data-closing="true"] { pointer-events: none; animation: lab-drawer-out var(--lab-dur-2) var(--lab-ease) both; }
 
 /* The extra rem off the edge hides the gap the spring's overshoot would open. */
 @keyframes lab-drawer-in { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes lab-drawer-out { from { transform: none; } to { transform: translateX(100%); } }
 @keyframes lab-sheet-in { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes lab-sheet-out { from { transform: none; } to { transform: translateY(100%); } }
 
+/*
+ * The sheet. It stands on the standing statements and stops half a rem under the bars, so its title and
+ * Close are on screen at every phone height. It rises without overshoot: there is nothing below it to hide one.
+ */
 @media (max-width: 719.98px) {
-  .lab-drawer { top: auto; left: 0; right: 0; bottom: -1rem; width: auto; max-height: calc(80dvh + 1rem); padding-right: 0; padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); border-left: 0; border-top: 1px solid var(--lab-line); border-radius: var(--lab-radius-l) var(--lab-radius-l) 0 0; animation-name: lab-sheet-in; }
+  .lab-drawer { top: auto; left: 0; right: 0; width: auto; max-height: calc(100dvh - var(--lab-drawer-top, 0px) - var(--lab-drawer-bottom, 0px) - 0.5rem); padding-right: 0; border-left: 0; border-top: 1px solid var(--lab-line); border-radius: var(--lab-radius-l) var(--lab-radius-l) 0 0; animation-name: lab-sheet-in; animation-timing-function: var(--lab-ease); }
+  .lab-drawer[data-closing="true"] { animation-name: lab-sheet-out; }
 }
 
+/* A floating sheet that is not a drawer (the command palette) leaves by fading, a little smaller. */
+.lab-float[data-closing="true"] { pointer-events: none; animation: lab-float-out var(--lab-dur-1) var(--lab-ease) both; }
+@keyframes lab-float-out { to { opacity: 0; transform: scale(0.98); } }
+
 @media (prefers-reduced-motion: reduce) {
-  .lab-drawer { animation: none; }
+  .lab-drawer, .lab-drawer[data-closing="true"], .lab-float[data-closing="true"] { animation: none; }
 }
 
 @media print {
-  .lab-drawer { position: static; width: auto; max-height: none; padding: 0; box-shadow: none; border: 1px solid var(--lab-line); border-radius: 0; animation: none; }
+  .lab-drawer { position: static; width: auto; max-height: none; padding: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; border: 1px solid var(--lab-line); border-radius: 0; animation: none; }
 }

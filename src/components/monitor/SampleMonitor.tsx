@@ -6,7 +6,7 @@ import { useViewState } from '@/components/workbench/ViewStateContext';
 import { ANALYSIS_WINDOW_SAMPLES, analyseWindow, analysisWindowSeconds } from '@/lib/signal/analysis-window';
 import { FREQUENCY_BANDS } from '@/lib/signal/band-power';
 import type { SignalSample } from '@/lib/signal/sample-csv';
-import { findChannelSpans, findThresholdEvents } from '@/lib/signal/threshold-events';
+import { findChannelSpans, findThresholdEvents, mergeSamplesFor } from '@/lib/signal/threshold-events';
 import BandComposition from './BandComposition';
 import EventList from './EventList';
 import { formatHertz, formatMicrovolts, formatPercent, formatSeconds, formatTime } from './monitor-format';
@@ -42,6 +42,14 @@ export function describeAnalysisWindow(sampleRateHz: number): string {
   return `Analysis window: ${ANALYSIS_WINDOW_SAMPLES} samples at ${formatHertz(sampleRateHz)}, ${formatSeconds(analysisWindowSeconds(sampleRateHz))}, ending at the playhead.`;
 }
 
+/** The rule as it is evaluated: the threshold, and how near two crossings must be to count as one. */
+export function describeThresholdRule(thresholdMicrovolts: number, sampleRateHz: number): string {
+  const mergeSamples = mergeSamplesFor(sampleRateHz);
+  return `Rule: any channel beyond ${formatMicrovolts(thresholdMicrovolts)}. Crossings no more than ${mergeSamples} sample${mergeSamples === 1 ? '' : 's'} apart (${formatSeconds(mergeSamples / sampleRateHz)} at ${formatHertz(sampleRateHz)}) are reported as one, so a bar or a duration can include samples under the threshold.`;
+}
+
+const PLOT_KEY = 'On the plot, a row has dashed threshold lines where its channel is beyond the threshold on the page shown, and under the pointer; the bar under a trace is where that channel is beyond it.';
+
 interface Props {
   sample: SignalSample;
   /** What the sample is called on screen, for example "Synthetic sample 3". */
@@ -62,8 +70,10 @@ export default function SampleMonitor({ sample, sampleLabel }: Props) {
 
   const events = useMemo(() => findThresholdEvents(sample.channelNames, sample.channels, sample.sampleRateHz, threshold), [sample, threshold]);
   const spans = useMemo(() => findChannelSpans(sample.channels, sample.sampleRateHz, threshold), [sample, threshold]);
-  const analysisTick = Math.floor(playhead.time * ANALYSIS_UPDATES_PER_SECOND + 1e-6);
-  const analysis = useMemo(() => analyseWindow(sample, analysisTick / ANALYSIS_UPDATES_PER_SECOND), [sample, analysisTick]);
+  const tickSeconds = Math.floor(playhead.time * ANALYSIS_UPDATES_PER_SECOND + 1e-6) / ANALYSIS_UPDATES_PER_SECOND;
+  // Stepping back to the last tick must not undo a window the playhead has already passed, or the opening picture is empty.
+  const analysisSeconds = tickSeconds < windowSeconds && playhead.time >= windowSeconds ? windowSeconds : tickSeconds;
+  const analysis = useMemo(() => analyseWindow(sample, analysisSeconds), [sample, analysisSeconds]);
   const bandIndex = Math.max(0, FREQUENCY_BANDS.findIndex((band) => band.id === bandId));
   const band = FREQUENCY_BANDS[bandIndex];
   const sampleIndex = Math.min(sample.channels[0].length - 1, Math.floor(playhead.time * sample.sampleRateHz));
@@ -71,55 +81,57 @@ export default function SampleMonitor({ sample, sampleLabel }: Props) {
   const notFull = <EmptyState reason="nothing-shown" title="The analysis window is not full yet" action={`Move the playhead past ${formatSeconds(windowSeconds)}.`} />;
 
   return (
-    <>
-      <Panel title="Signal" actions={<Segmented label="Row scale, plus and minus" options={SCALE_OPTIONS} value={String(scale)} onChange={setScaleText} />}>
-        <SignalPlot
-          sample={sample} time={playhead.time} pageSeconds={PLOT_PAGE_SECONDS} scaleMicrovolts={scale} thresholdMicrovolts={threshold} spans={spans}
-          label={`${sampleLabel}: ${sample.channelNames.length} channels, ${PLOT_PAGE_SECONDS} seconds at a time, playhead at ${formatTime(playhead.time)}. Not a recording from a person.`}
-        />
-        <div className="monitor-transport">
-          <button type="button" className="lab-button lab-button--primary" onClick={playhead.isPlaying ? playhead.pause : playhead.play}>{playhead.isPlaying ? 'Pause' : 'Play'}</button>
-          <span className="lab-figure" role="timer">{formatTime(playhead.time)} of {formatTime(sample.durationSeconds)}</span>
-          <input
-            type="range" min={0} max={sample.durationSeconds} step={SLIDER_STEP_SECONDS} value={playhead.time} aria-label="Playhead, in seconds"
-            aria-valuetext={formatTime(playhead.time)} onChange={(event) => seek(Number(event.target.value))}
+    <div className="monitor-body" id="lab-results">
+      <div className="monitor-stage">
+        <Panel title="Signal" actions={<Segmented label="Row scale, plus and minus" options={SCALE_OPTIONS} value={String(scale)} onChange={setScaleText} />}>
+          <SignalPlot
+            sample={sample} time={playhead.time} pageSeconds={PLOT_PAGE_SECONDS} scaleMicrovolts={scale} thresholdMicrovolts={threshold} spans={spans}
+            label={`${sampleLabel}: ${sample.channelNames.length} channels, ${PLOT_PAGE_SECONDS} seconds at a time, playhead at ${formatTime(playhead.time)}. Not a recording from a person.`}
           />
-        </div>
-        <details className="monitor-values">
-          <summary>Values at the playhead</summary>
-          <table className="lab-table">
-            <thead><tr><th scope="col"><span className="lab-table-head">Channel</span></th><th scope="col"><span className="lab-table-head">Microvolts</span></th></tr></thead>
-            <tbody>{sample.channelNames.map((name, index) => <tr key={name}><td>{name}</td><td className="lab-figure">{sample.channels[index][sampleIndex].toFixed(1)}</td></tr>)}</tbody>
-          </table>
-        </details>
-      </Panel>
-      <div className="monitor-analysis" id="lab-results">
-        <Panel title={`Band composition over the last ${formatSeconds(windowSeconds)}`}>
-          <p className="lab-soft">{describeAnalysisWindow(sample.sampleRateHz)}</p>
-          {analysis === null ? notFull : (
-            <>
-              <BandComposition composition={analysis.composition} selectedBandId={band.id} onSelectBand={setBandId} />
-              <p>All channels over the window: <span className="lab-figure">{formatMicrovolts(analysis.rmsMicrovolts)}</span> RMS.</p>
-            </>
-          )}
-        </Panel>
-        <Panel title={`Scalp cells: ${band.label}`} actions={<Segmented label="Figure in each cell" options={SCALP_QUANTITIES} value={quantity} onChange={setQuantity} />}>
-          {analysis === null ? notFull : (
-            <ScalpCells
-              channelNames={sample.channelNames} quantity={quantity === 'amplitude' ? `${band.label} amplitude in microvolts RMS` : `${band.label} share of its own band power`}
-              values={(quantity === 'amplitude' ? analysis.amplitudesByChannel : analysis.sharesByChannel).map((bands) => bands[bandIndex])}
-              formatValue={quantity === 'amplitude' ? (value) => value.toFixed(1) : formatPercent}
+          <div className="monitor-transport">
+            <button type="button" className="lab-button lab-button--primary" onClick={playhead.isPlaying ? playhead.pause : playhead.play}>{playhead.isPlaying ? 'Pause' : 'Play'}</button>
+            <span className="lab-figure" role="timer">{formatTime(playhead.time)} of {formatTime(sample.durationSeconds)}</span>
+            <input
+              type="range" min={0} max={sample.durationSeconds} step={SLIDER_STEP_SECONDS} value={playhead.time} aria-label="Playhead, in seconds"
+              aria-valuetext={formatTime(playhead.time)} onChange={(event) => seek(Number(event.target.value))}
             />
-          )}
+          </div>
+          <details className="monitor-values">
+            <summary>Values at the playhead</summary>
+            <table className="lab-table" aria-label={`Value of each channel at ${formatTime(playhead.time)}`}>
+              <thead><tr><th scope="col"><span className="lab-table-head">Channel</span></th><th scope="col"><span className="lab-table-head">Microvolts</span></th></tr></thead>
+              <tbody>{sample.channelNames.map((name, index) => <tr key={name}><th scope="row">{name}</th><td className="lab-figure">{sample.channels[index][sampleIndex].toFixed(1)}</td></tr>)}</tbody>
+            </table>
+          </details>
         </Panel>
-        <Panel title="Threshold rule" actions={<Segmented label="Rule: any channel beyond" options={THRESHOLD_OPTIONS} value={String(threshold)} onChange={setThresholdText} />}>
-          <p className="lab-soft">
-            Rule: any channel beyond {formatMicrovolts(threshold)}. On the plot, the dashed lines in each row are the threshold and the bar under a trace is where that channel is beyond it.
-            {!isThresholdDrawable(threshold, scale) && ` The threshold is outside the row scale of ${formatMicrovolts(scale)}, so its lines are not drawn.`}
-          </p>
-          <EventList events={events} markers={sample.markers} onSeek={seek} />
-        </Panel>
+        <div className="monitor-rail">
+          <Panel title={`Band composition over the last ${formatSeconds(windowSeconds)}`}>
+            <p className="lab-soft">{describeAnalysisWindow(sample.sampleRateHz)}</p>
+            {analysis === null ? notFull : (
+              <>
+                <BandComposition composition={analysis.composition} selectedBandId={band.id} onSelectBand={setBandId} />
+                <p>All channels over the window: <span className="lab-figure">{formatMicrovolts(analysis.rmsMicrovolts)}</span> RMS.</p>
+              </>
+            )}
+          </Panel>
+          <Panel title={`Scalp cells: ${band.label}`} actions={<Segmented label="Figure in each cell" options={SCALP_QUANTITIES} value={quantity} onChange={setQuantity} />}>
+            {analysis === null ? notFull : (
+              <ScalpCells
+                channelNames={sample.channelNames} quantity={quantity === 'amplitude' ? `${band.label} amplitude in microvolts RMS` : `${band.label} share of its own band power`}
+                values={(quantity === 'amplitude' ? analysis.amplitudesByChannel : analysis.sharesByChannel).map((bands) => bands[bandIndex])}
+                formatValue={quantity === 'amplitude' ? (value) => value.toFixed(1) : formatPercent}
+              />
+            )}
+          </Panel>
+        </div>
       </div>
-    </>
+      <Panel title="Threshold rule" actions={<Segmented label="Rule: any channel beyond" options={THRESHOLD_OPTIONS} value={String(threshold)} onChange={setThresholdText} />}>
+        <p className="lab-soft monitor-rule">
+          {describeThresholdRule(threshold, sample.sampleRateHz)} {PLOT_KEY}
+          {!isThresholdDrawable(threshold, scale) && ` The threshold is outside the row scale of ${formatMicrovolts(scale)}, so its lines are not drawn.`}
+        </p>
+        <EventList events={events} markers={sample.markers} onSeek={seek} />
+      </Panel>
+    </div>
   );
 }

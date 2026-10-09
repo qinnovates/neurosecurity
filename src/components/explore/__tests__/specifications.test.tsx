@@ -138,3 +138,27 @@ describe('Published device specifications', () => {
     expect(screen.getByText('No device matches. Clear the search or a type to see the rest.')).toBeTruthy();
   });
 });
+
+describe('display of code values', () => {
+  it('shows a code with spaces and a capital, and leaves the recorded value for search, sort and the title', async () => {
+    const { formatSpecDisplay } = await import('../specifications/spec-rows');
+    const row = { device: 'eCLIPSE probe', company: 'acme_labs', type: 'non_invasive', electrode_type: 'dry_eeg', fda_status: 'breakthrough_device', channels: 8 };
+    expect(formatSpecDisplay(row, 'fda_status')).toBe('Breakthrough device');
+    expect(formatSpecDisplay(row, 'type')).toBe('Non invasive');
+    expect(formatSpecDisplay(row, 'electrode_type')).toBe('Dry eeg');
+    // A name is never re-cased, and the recorded status is what search and sort read.
+    expect(formatSpecDisplay(row, 'device')).toBe('eCLIPSE probe');
+    expect(readSpecText(row, 'fda_status')).toBe('breakthrough_device');
+    expect(formatSpecDisplay({ fda_status: '' }, 'fda_status')).toBe('Not recorded');
+  });
+
+  it('prints no underscore in a status, type or electrode cell of the real table, and keeps the recorded value as the title', () => {
+    const { container } = inLab(<DeviceSpecifications onOpenStart={() => undefined} />);
+    const cells = [...container.querySelectorAll('tbody tr')].flatMap((row) => [2, 4, 5].map((index) => row.querySelectorAll('td')[index]));
+    expect(cells.length).toBeGreaterThan(0);
+    for (const cell of cells) expect(cell.textContent).not.toContain('_');
+    const reworded = [...container.querySelectorAll<HTMLElement>('tbody td span[title]')].filter((span) => span.title.includes('_'));
+    expect(reworded.length).toBeGreaterThan(0);
+    for (const span of reworded) expect(span.textContent?.toLowerCase()).toBe(span.title.replaceAll('_', ' ').toLowerCase());
+  });
+});

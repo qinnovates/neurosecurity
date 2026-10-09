@@ -9,7 +9,8 @@ function canTransition(): boolean {
 }
 
 /**
- * Runs a state update as one view transition: the old picture cross-fades to the new one.
+ * Runs a state update as one view transition: the old picture cross-fades to the new one, and
+ * anything carrying a view-transition name (`lab-vt-diagram`, `lab-vt-identity`, the bars) moves to its new place.
  * Where the browser has no view transitions, or the viewer asked for less motion, the
  * update is applied with no animation.
  */
@@ -21,6 +22,9 @@ export function useViewTransition(): (update: StateUpdate) => void {
       return;
     }
     // The browser pictures the page before and after this callback, so React must finish inside it.
-    document.startViewTransition(() => flushSync(update));
+    const transition = document.startViewTransition(() => flushSync(update));
+    // A transition the browser skips (the tab is hidden, or two elements share a transition name) still applies
+    // the update; only the animation is lost. That is the no-animation fallback, so the rejection is not an error.
+    transition.ready.catch(() => undefined);
   }, [isReduced]);
 }

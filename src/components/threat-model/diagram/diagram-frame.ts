@@ -5,7 +5,7 @@
  */
 
 import { cardHeightFor, type DiagramMetrics } from './diagram-metrics';
-import type { RoutingPlan } from './edge-plan';
+import type { GridNode, RoutingPlan } from './edge-plan';
 
 /** A horizontal strip a connection runs along; the line is drawn through its middle. */
 export interface LaneBand { top: number; height: number }
@@ -58,7 +58,41 @@ function stackedLabelHeight(plan: RoutingPlan, channel: number, metrics: Diagram
   return Math.max(0, ...cards);
 }
 
-interface ChannelBox { height: number; laneHeights: number[]; stackedHeight: number }
+interface ChannelBox {
+  height: number;
+  laneHeights: number[];
+  stackedHeight: number;
+  /** True when the strip of stacked labels lies above the lanes, next to the upper row. */
+  isStackedLabelFirst: boolean;
+}
+
+/** Lane connections that reach `node` through `channel`: each runs straight from the part's edge to its lane. */
+function countLaneEnds(plan: RoutingPlan, node: GridNode, channel: number): number {
+  return plan.plans.reduce((count, edge) => {
+    if (edge.kind !== 'lane') return count;
+    const leavesHere = edge.from.id === node.id && edge.fromChannel === channel;
+    const arrivesHere = edge.to.id === node.id && (edge.turn?.toChannel ?? edge.fromChannel) === channel;
+    return count + (leavesHere ? 1 : 0) + (arrivesHere ? 1 : 0);
+  }, 0);
+}
+
+/**
+ * Where the labels of stacked connections go in the channel between two rows. A lane
+ * connection that leaves the part on the strip's side would run through such a label, so the
+ * strip lies next to whichever row sends fewer of them: next to the lower row unless the
+ * upper one sends fewer.
+ */
+function isStackedLabelNearUpperRow(plan: RoutingPlan, channel: number): boolean {
+  let fromUpper = 0;
+  let fromLower = 0;
+  for (const edge of plan.plans) {
+    if (edge.kind !== 'column' || Math.max(edge.from.row, edge.to.row) !== channel) continue;
+    const [upper, lower] = edge.from.row < edge.to.row ? [edge.from, edge.to] : [edge.to, edge.from];
+    fromUpper += countLaneEnds(plan, upper, channel);
+    fromLower += countLaneEnds(plan, lower, channel);
+  }
+  return fromUpper < fromLower;
+}
 
 function measureChannels(plan: RoutingPlan, rowCount: number, metrics: DiagramMetrics): ChannelBox[] {
   return Array.from({ length: rowCount + 1 }, (_unused, channel) => {
@@ -66,14 +100,22 @@ function measureChannels(plan: RoutingPlan, rowCount: number, metrics: DiagramMe
     const stackedHeight = stackedLabelHeight(plan, channel, metrics);
     const isBetweenRows = channel > 0 && channel < rowCount;
     const minimum = isBetweenRows ? 2 * metrics.channelMin : metrics.channelMin;
-    return { height: Math.max(minimum, heights.reduce((sum, height) => sum + height, 0) + stackedHeight), laneHeights: heights, stackedHeight };
+    return {
+      height: Math.max(minimum, heights.reduce((sum, height) => sum + height, 0) + stackedHeight), laneHeights: heights, stackedHeight,
+      isStackedLabelFirst: isBetweenRows && stackedHeight > 0 && isStackedLabelNearUpperRow(plan, channel),
+    };
   });
 }
 
-/** Lanes stack away from the parts they serve: upward in the first channel, downward in every other. */
+function sumOf(heights: readonly number[]): number {
+  return heights.reduce((sum, height) => sum + height, 0);
+}
+
+/** Lanes stack away from the parts they serve: upward in the first channel, downward in every other, below the stacked labels when those come first. */
 function placeLanes(box: ChannelBox, channelTop: number, isFirstChannel: boolean): LaneBand[] {
   const bands: LaneBand[] = [];
-  let edge = isFirstChannel ? channelTop + box.height : channelTop;
+  const lanesTop = box.isStackedLabelFirst ? channelTop + box.height - sumOf(box.laneHeights) : channelTop;
+  let edge = isFirstChannel ? channelTop + box.height : lanesTop;
   for (const height of box.laneHeights) {
     bands.push({ top: isFirstChannel ? edge - height : edge, height });
     edge += isFirstChannel ? -height : height;
@@ -95,8 +137,10 @@ export function computeFrame(plan: RoutingPlan, columnCount: number, rowCount: n
   channels.forEach((box, channel) => {
     const bands = placeLanes(box, cursor, channel === 0);
     lanes.push(bands);
-    const lanesBottom = channel === 0 ? cursor + box.height : cursor + box.laneHeights.reduce((sum, height) => sum + height, 0);
-    stackedLabelY.push(lanesBottom + (cursor + box.height - lanesBottom) / 2);
+    // The stacked labels take the part of the channel the lanes leave: above them or below.
+    const lanesHeight = channel === 0 ? box.height : sumOf(box.laneHeights);
+    const stripTop = box.isStackedLabelFirst ? cursor : cursor + lanesHeight;
+    stackedLabelY.push(stripTop + (box.height - lanesHeight) / 2);
     cursor += box.height;
     if (channel < rowCount) {
       rowY.push(cursor);

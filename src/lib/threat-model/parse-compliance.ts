@@ -64,6 +64,8 @@ export function parseComplianceUs(raw: unknown): ComplianceData {
   if (!isBoundedString(mediaQuote, MAX_TEXT_LENGTH) || mediaQuote.length < MIN_QUOTE_LENGTH) {
     return fail(`"internetCapableMedia.quote" must quote its source in at least ${MIN_QUOTE_LENGTH} characters`);
   }
+  const mediaNote = raw.internetCapableMedia.note;
+  if (mediaNote !== undefined && !isBoundedString(mediaNote, MAX_TEXT_LENGTH)) return fail('"internetCapableMedia.note", when present, must be a string');
 
   const sources = parseList<ComplianceSource>(raw.sources, 'sources', findSourceProblem);
   const sourceIds = new Set(sources.map((source) => source.id));
@@ -81,6 +83,7 @@ export function parseComplianceUs(raw: unknown): ComplianceData {
     marketingSubmissionTypes: raw.marketingSubmissionTypes,
     internetCapableMedia: raw.internetCapableMedia.media,
     internetCapableMediaQuote: mediaQuote,
+    internetCapableMediaNote: mediaNote ?? null,
     requirements,
   };
 }

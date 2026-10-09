@@ -27,12 +27,17 @@ function carriesModelledPayload(link: ModelLink): boolean {
   return link.carriesNeuralData || link.carriesStimulationCommands || link.carriesSoftwareUpdates;
 }
 
-function describeConnectivity(carryingCount: number, emptyCount: number): string {
-  if (carryingCount > 0) return `${carryingCount} link(s) use a connection type FDA lists as able to connect to the internet.`;
+/**
+ * What the model shows, then the checklist file's own note on how link types were read onto
+ * FDA's list, word for word: the count rests on that reading, so the two are never printed apart.
+ */
+function describeConnectivity(carryingCount: number, emptyCount: number, readingNote: string | null): string {
+  const note = readingNote === null ? '' : ` ${readingNote}`;
+  if (carryingCount > 0) return `${carryingCount} link(s) use a connection type FDA lists as able to connect to the internet.${note}`;
   const found = emptyCount > 0
     ? `${emptyCount} link(s) use a connection type on FDA's list but carry no neural data, stimulation commands or software updates in this model.`
     : "No link in the model uses a connection type on FDA's list as this tool reads it.";
-  return `${found} ${NOT_DETERMINED_STATEMENT}`;
+  return `${found}${note} ${NOT_DETERMINED_STATEMENT}`;
 }
 
 /**
@@ -45,7 +50,7 @@ export function assessCyberDevice(model: DeviceModel, compliance: ComplianceData
   const listedLinks = model.links.filter((link) => compliance.internetCapableMedia.includes(link.medium));
   const internetCapableLinkIds = listedLinks.filter(carriesModelledPayload).map((link) => link.id);
   const connectivity: CyberDeviceConnectivity = internetCapableLinkIds.length > 0 ? 'meets' : 'not_determined';
-  const found = describeConnectivity(internetCapableLinkIds.length, listedLinks.length - internetCapableLinkIds.length);
+  const found = describeConnectivity(internetCapableLinkIds.length, listedLinks.length - internetCapableLinkIds.length, compliance.internetCapableMediaNote);
   return {
     connectivity,
     internetCapableLinkIds,

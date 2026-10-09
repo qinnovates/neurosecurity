@@ -1,12 +1,11 @@
 import { useMemo, useState } from 'react';
-import DataTable, { type DataTableColumn } from '@/components/lab-kit/DataTable';
 import Panel from '@/components/lab-kit/Panel';
 import { LINK_MEDIA, MODEL_LIMITS, type DeviceModel, type ModelComponent, type ModelLink } from '@/lib/threat-model/device-model';
 import type { ConnectionFields, ModelEdit } from '@/lib/threat-model/model-edit';
 import { describeLink } from '@/lib/threat-model/stride';
 import AddConnectionForm from './AddConnectionForm';
+import EditorCards, { type EditorField } from './EditorCards';
 import EditorConfirm from './EditorConfirm';
-import { renderEditorCard } from './editor-card';
 import { CARRIES_FIELDS, MEDIUM_LABELS } from './model-labels';
 import { describeRemovalImpact, measureConnectionRemoval } from './removal-impact';
 
@@ -29,11 +28,11 @@ interface ColumnContext {
 }
 
 /** One end of a connection. The part at the other end is left out, since a connection cannot join a part to itself. */
-function endColumn(field: EndField, header: string, { model, changeConnection }: ColumnContext): DataTableColumn<ModelLink> {
+function endField(field: EndField, header: string, { model, changeConnection }: ColumnContext): EditorField<ModelLink> {
   const otherField: EndField = field === 'fromComponentId' ? 'toComponentId' : 'fromComponentId';
   const optionsFor = (connection: ModelLink): ModelComponent[] => model.components.filter((part) => part.id !== connection[otherField]);
   return {
-    id: field, header,
+    id: field, header, form: 'control',
     render: (connection) => (
       <select
         className="lab-input" aria-label={`${header}, ${describeLink(model, connection.id)}`} value={connection[field]}
@@ -45,13 +44,13 @@ function endColumn(field: EndField, header: string, { model, changeConnection }:
   };
 }
 
-function buildColumns(context: ColumnContext): DataTableColumn<ModelLink>[] {
+function buildFields(context: ColumnContext): EditorField<ModelLink>[] {
   const { model, changeConnection, askToRemove } = context;
   return [
-    endColumn('fromComponentId', 'From', context),
-    endColumn('toComponentId', 'To', context),
+    endField('fromComponentId', 'From', context),
+    endField('toComponentId', 'To', context),
     {
-      id: 'medium', header: 'Medium',
+      id: 'medium', header: 'Medium', form: 'wide-control',
       render: (connection) => (
         <select
           className="lab-input" aria-label={`Medium, ${describeLink(model, connection.id)}`} value={connection.medium}
@@ -61,19 +60,20 @@ function buildColumns(context: ColumnContext): DataTableColumn<ModelLink>[] {
         </select>
       ),
     },
-    ...CARRIES_FIELDS.map(({ field, label }): DataTableColumn<ModelLink> => ({
-      id: field, header: `Carries ${label.toLowerCase()}`,
+    ...CARRIES_FIELDS.map(({ field, label }): EditorField<ModelLink> => ({
+      id: field, header: `Carries ${label.toLowerCase()}`, form: 'tick',
       render: (connection) => (
         <label className="lab-editor-tick">
           <input
             type="checkbox" aria-label={`${describeLink(model, connection.id)} carries ${label.toLowerCase()}`} checked={connection[field]}
             onChange={(event) => changeConnection(connection.id, { [field]: event.target.checked })}
           />
+          <span aria-hidden="true">Carries {label.toLowerCase()}</span>
         </label>
       ),
     })),
     {
-      id: 'remove', header: 'Remove',
+      id: 'remove', header: 'Remove', form: 'action',
       render: (connection) => (
         <button type="button" className="lab-button" aria-label={`Remove ${describeLink(model, connection.id)}`} onClick={() => askToRemove(connection)}>Remove</button>
       ),
@@ -81,13 +81,13 @@ function buildColumns(context: ColumnContext): DataTableColumn<ModelLink>[] {
   ];
 }
 
-/** The device's connections, one line each, edited in place. */
+/** The device's connections, one card each, edited in place. */
 export default function ConnectionsTable({ model, onEdit }: Props) {
   const [pendingRemovalId, setPendingRemovalId] = useState<string | null>(null);
   const pendingConnection = model.links.find((connection) => connection.id === pendingRemovalId) ?? null;
   const connectionCount = model.links.length;
 
-  const columns = useMemo(() => buildColumns({
+  const fields = useMemo(() => buildFields({
     model,
     changeConnection: (connectionId, changes) => onEdit({ type: 'connection-changed', connectionId, changes }),
     // A connection with no decision on it has nothing to lose, so it goes at once.
@@ -104,12 +104,10 @@ export default function ConnectionsTable({ model, onEdit }: Props) {
 
   return (
     <Panel title="Connections">
-      <div className="lab-editor-table">
-        <DataTable
-          caption={`${connectionCount} of at most ${MODEL_LIMITS.maxLinks} connections`} columns={columns} rows={model.links} rowKey={(connection) => connection.id}
-          emptyMessage="No connections. A part with no connection is listed under Warnings." renderCard={renderEditorCard(columns)}
-        />
-      </div>
+      <EditorCards
+        caption={`${connectionCount} of at most ${MODEL_LIMITS.maxLinks} connections`} fields={fields} rows={model.links} rowKey={(connection) => connection.id}
+        emptyMessage="No connections. A part with no connection is listed under Warnings."
+      />
       {pendingConnection !== null && (
         <EditorConfirm
           question={`Remove ${describeLink(model, pendingConnection.id)}?`} detail={describeRemovalImpact(measureConnectionRemoval(model, pendingConnection.id))}

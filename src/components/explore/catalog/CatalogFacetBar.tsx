@@ -30,8 +30,16 @@ export const ON_THIS_DEVICE_HEADING = 'On this device';
 export const SEARCH_LABEL = 'Search techniques';
 const MODES: readonly TechniqueMode[] = ['R', 'M', 'D'];
 const ENTRY_PATHS: readonly EntryPath[] = [...PLACED_ENTRY_PATHS, 'around_device'];
-/** Search, the device, band, family and evidence stay in the first row; the rest wait behind "More filters". */
-const VISIBLE_FACET_COUNT = 5;
+/** Search, the device, evidence and severity are the one row always shown; the rest wait behind "More filters". */
+const VISIBLE_FACET_COUNT = 4;
+
+/**
+ * The techniques with a recorded decision that leaves them outside the device are counted under
+ * the scope term, in its own words: they are not all "around" the device.
+ */
+function entryPathLabel(entryPath: EntryPath): string {
+  return entryPath === 'around_device' ? SCOPE_TERM_LABELS.reviewed_outside : ENTRY_PATH_LABELS[entryPath];
+}
 
 function toggle<Value>(values: readonly Value[], value: Value): Value[] {
   return values.includes(value) ? values.filter((existing) => existing !== value) : [...values, value];
@@ -97,15 +105,15 @@ export default function CatalogFacetBar({ filters, facets, evidenceValues, tacti
   const facetList: Facet[] = [
     searchFacet(filters.text, (text) => set({ text })),
     chipFacet({ id: 'placement', label: ON_THIS_DEVICE_HEADING, values: SCOPE_TERMS, selected: filters.placement, labelOf: (term) => SCOPE_TERM_LABELS[term], countOf: (term) => facets.placement.get(term) ?? 0, onChange: (placement) => set({ placement }) }),
+    chipFacet({ id: 'evidence', label: 'Evidence', values: evidenceValues.map((entry) => entry.label), selected: filters.evidence, labelOf: (label) => label, countOf: (label) => facets.evidence.get(label) ?? 0, onChange: (evidence) => set({ evidence }) }),
+    chipFacet({ id: 'severity', label: CATALOG_SEVERITY_HEADING, values: CATALOG_SEVERITIES, selected: filters.severities, labelOf: (severity) => CATALOG_SEVERITY_LABELS[severity], countOf: (severity) => facets.severities.get(severity) ?? 0, onChange: (severities) => set({ severities }) }),
     {
       id: 'band', label: 'Band', activeCount: filters.bandIds.length,
       control: <BandChips bands={facets.bands} selectedBandIds={filters.bandIds} onToggleBand={(bandId) => set({ bandIds: toggle(filters.bandIds, bandId) })} />,
     },
     selectFacet({ id: 'family', label: TECHNIQUE_FAMILY_HEADING, value: filters.tacticId, options: tactics.map((tactic) => ({ value: tactic.id, label: tactic.name })), onChange: (tacticId) => set({ tacticId }) }),
-    chipFacet({ id: 'evidence', label: 'Evidence', values: evidenceValues.map((entry) => entry.label), selected: filters.evidence, labelOf: (label) => label, countOf: (label) => facets.evidence.get(label) ?? 0, onChange: (evidence) => set({ evidence }) }),
-    chipFacet({ id: 'severity', label: CATALOG_SEVERITY_HEADING, values: CATALOG_SEVERITIES, selected: filters.severities, labelOf: (severity) => CATALOG_SEVERITY_LABELS[severity], countOf: (severity) => facets.severities.get(severity) ?? 0, onChange: (severities) => set({ severities }) }),
     chipFacet({ id: 'effect', label: EFFECT_HEADING, values: MODES, selected: filters.modes, labelOf: effectLabelForMode, countOf: (mode) => facets.modes.get(mode) ?? 0, onChange: (modes) => set({ modes }) }),
-    chipFacet({ id: 'entry-path', label: ENTRY_PATH_HEADING, values: ENTRY_PATHS, selected: filters.entryPaths, labelOf: (entryPath) => ENTRY_PATH_LABELS[entryPath], countOf: (entryPath) => facets.entryPaths.get(entryPath) ?? 0, onChange: (entryPaths) => set({ entryPaths }) }),
+    chipFacet({ id: 'entry-path', label: ENTRY_PATH_HEADING, values: ENTRY_PATHS, selected: filters.entryPaths, labelOf: entryPathLabel, countOf: (entryPath) => facets.entryPaths.get(entryPath) ?? 0, onChange: (entryPaths) => set({ entryPaths }) }),
     selectFacet({ id: 'domain', label: 'Domain', value: filters.domain, options: domains.map((domain) => ({ value: domain.code, label: domain.label })), onChange: (domain) => set({ domain }) }),
   ];
   return <FacetBar label="Filter techniques" facets={facetList} visibleCount={VISIBLE_FACET_COUNT} />;

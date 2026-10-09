@@ -31,10 +31,12 @@ export default function DeviceClassCard({ device, title = device.label, kicker, 
   return (
     <article className="lab-panel explore-class" data-in-focus={isInFocus} aria-label={title}>
       <div className="explore-class-diagram"><DeviceMiniDiagram model={model} /></div>
-      <div className="explore-class-facts">
+      <div className="explore-class-name">
         {kicker !== undefined && <p className="lab-label">{kicker}</p>}
         <h3 className="lab-panel-title">{title}</h3>
         {description !== undefined && <p className="lab-soft">{description}</p>}
+      </div>
+      <div className="explore-class-facts">
         <p>{DIRECTION_LABELS[model.direction]} · {plural(model.components.length, 'part', 'parts')} · {plural(model.links.length, 'connection', 'connections')}</p>
         <p className="explore-class-scope">
           <span><span className="lab-figure">{scope.applies.length}</span> of <span className="lab-figure">{scope.total}</span> catalog techniques apply</span>
@@ -43,7 +45,8 @@ export default function DeviceClassCard({ device, title = device.label, kicker, 
       </div>
       {confirm ?? (
         <div className="explore-class-actions">
-          <button type="button" className={`lab-button${isInFocus ? ' lab-button--primary' : ''}`} onClick={onAction}>{actionLabel}</button>
+          {/* The visible words, then the device, so three cards do not offer three buttons of one name. */}
+          <button type="button" className={`lab-button${isInFocus ? ' lab-button--primary' : ''}`} aria-label={`${actionLabel}: ${title}`} onClick={onAction}>{actionLabel}</button>
         </div>
       )}
     </article>

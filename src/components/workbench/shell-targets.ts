@@ -23,6 +23,15 @@ export const MODEL_TECHNIQUE_TARGET: Route = { modeId: 'model', viewId: 'risks' 
 /** The first screen of the Model mode: the device's threat model at a glance. */
 export const MODEL_OVERVIEW_TARGET: Route = { modeId: 'model', viewId: 'overview' };
 
+/** What the reader can do with the device from anywhere: each is named once here, for the device menu and the command palette. */
+export const DEVICE_ACTIONS = [
+  { id: 'change-device', label: 'Change device', target: CHANGE_DEVICE_TARGET },
+  { id: 'edit-device', label: 'Edit device', target: EDIT_DEVICE_TARGET },
+  { id: 'print-report', label: 'Print report', target: REPORT_TARGET },
+] as const;
+export type DeviceActionId = typeof DEVICE_ACTIONS[number]['id'];
+export const DEVICE_ACTION_LABELS = Object.fromEntries(DEVICE_ACTIONS.map((action) => [action.id, action.label])) as Record<DeviceActionId, string>;
+
 export const SHELL_TARGETS: readonly Route[] = [
   CHANGE_DEVICE_TARGET, EDIT_DEVICE_TARGET, REPORT_TARGET, TECHNIQUE_TARGET, DEVICE_PART_TARGET, MODEL_TECHNIQUE_TARGET, MODEL_OVERVIEW_TARGET,
 ];

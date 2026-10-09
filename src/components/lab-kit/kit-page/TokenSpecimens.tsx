@@ -17,12 +17,16 @@ const COLOUR_TOKENS: readonly ColourToken[] = [
   { name: '--lab-panel', use: 'Panels, fields' },
   { name: '--lab-panel-raised', use: 'Drawers, popovers' },
   { name: '--lab-material', use: 'Translucent bars' },
+  { name: '--lab-material-float', use: 'Drawer and palette' },
+  { name: '--lab-scrim', use: 'Dim behind the palette' },
   { name: '--lab-ink', use: 'Text, marks', measure: ON_PANEL_TEXT },
   { name: '--lab-ink-soft', use: 'Labels, quiet rows', measure: ON_PANEL_TEXT },
   { name: '--lab-ink-faint', use: 'Least text', measure: ON_PANEL_TEXT },
   { name: '--lab-line', use: 'Dividers' },
   { name: '--lab-control-line', use: 'Field and button edges', measure: ON_PANEL_EDGE },
-  { name: '--lab-hover', use: 'Hovered and lit rows' },
+  { name: '--lab-hover', use: 'Hovered rows' },
+  { name: '--lab-lit', use: 'Linked highlight' },
+  { name: '--lab-zone', use: 'Diagram lanes' },
   { name: '--lab-select', use: 'Selected, links', measure: ON_PANEL_TEXT },
   { name: '--lab-select-ink', use: 'Words on a selected fill', measure: { against: '--lab-select', minimum: TEXT_CONTRAST_MINIMUM } },
   { name: '--lab-select-soft', use: 'Selected row' },
@@ -34,7 +38,7 @@ const COLOUR_TOKENS: readonly ColourToken[] = [
 const TYPE_TOKENS = ['--lab-text-meta', '--lab-text-body', '--lab-text-title', '--lab-text-screen', '--lab-text-figure'] as const;
 const RADIUS_TOKENS = ['--lab-radius-s', '--lab-radius-m', '--lab-radius-l'] as const;
 const SPACE_TOKENS = ['--lab-gap', '--lab-pad', '--lab-row'] as const;
-const DURATION_TOKENS = ['--lab-dur-1', '--lab-dur-2', '--lab-dur-3'] as const;
+const DURATION_TOKENS = ['--lab-dur-1', '--lab-dur-2', '--lab-dur-3', '--lab-dur-flash', '--lab-dur-flow'] as const;
 const EASING_TOKENS = ['--lab-ease', '--lab-spring'] as const;
 const ALL_TOKEN_NAMES = [...COLOUR_TOKENS.map((entry) => entry.name), ...TYPE_TOKENS, ...RADIUS_TOKENS, ...SPACE_TOKENS, ...DURATION_TOKENS, ...EASING_TOKENS, '--lab-font', '--lab-mono', '--lab-measure'];
 

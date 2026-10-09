@@ -1,13 +1,6 @@
-/**
- * The statements that stay on screen in every mode. They live in one place so no screen
- * can drop or reword them. Every statement is shown whole at every screen size.
- */
-export const STANDING_STATEMENTS: readonly string[] = [
-  'A drafting aid, not a compliance determination.',
-  'TARA, NISS and QIF are proposed and not peer reviewed.',
-  'Placement decisions were drafted with an AI assistant and have not yet been reviewed by the author.',
-  'Runs in your browser. Nothing you enter is sent anywhere.',
-];
+import { STANDING_STATEMENTS } from './standing-statements';
+
+export { STANDING_STATEMENTS };
 
 const SITE_PATH = '/atlas/';
 
@@ -18,6 +11,7 @@ interface Props {
   hasSiteLink?: boolean;
 }
 
+/** The standing statements as shown on screen and on paper. Every statement is whole at every size. */
 export default function StandingLine({ catalogVersion, techniqueCount, hasSiteLink = false }: Props) {
   const catalogFact = `Catalog version ${catalogVersion}, ${techniqueCount} techniques.`;
   return (

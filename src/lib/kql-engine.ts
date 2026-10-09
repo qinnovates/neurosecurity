@@ -17,6 +17,7 @@
  * @module kql-engine
  */
 
+import { parseWhereClause, requireWhereOperands } from './kql-where';
 import { FORBIDDEN_KEYS, hasOwnColumn, requireColumns } from './kql-columns';
 import { aggregate, parseSummarize } from './kql-summarize';
 
@@ -34,9 +35,10 @@ export interface QueryResult {
 
 export interface QueryOptions {
   /**
-   * Refuse a `project` or `summarize` column that no row carries, naming the nearest real one.
+   * Refuse a column that no row carries in `where`, `sort by`, `distinct`, `project` or `summarize`,
+   * naming the nearest real one; refuse an empty query, and a `where` with nothing after its operator.
    * Off by default: a caller that does not ask for it gets the earlier behaviour, where such a
-   * column comes back missing or as one blank group.
+   * query comes back as no rows, unsorted rows, a missing column or one blank group.
    */
   strictColumns?: boolean;
 }
@@ -145,42 +147,8 @@ export function applyWhere(
   indexes?: Record<string, HashIndex>,
   allTableRows?: Row[],
 ): Row[] {
-  const ops = ['!=', '>=', '<=', '==', '>', '<', '!contains', 'contains', 'startswith', 'has'];
-  let matchedOp = '';
-  let opIdx = -1;
-
-  for (const op of ops) {
-    const isSymbol = /[><=!]/.test(op[0]);
-    if (isSymbol) {
-      const idx = clause.indexOf(` ${op} `);
-      if (idx >= 0) {
-        matchedOp = op;
-        opIdx = idx + 1;
-        break;
-      }
-      const tightIdx = clause.indexOf(op);
-      if (tightIdx > 0 && opIdx < 0) {
-        matchedOp = op;
-        opIdx = tightIdx;
-        break;
-      }
-    } else {
-      const idx = clause.indexOf(` ${op} `);
-      if (idx >= 0) {
-        matchedOp = op;
-        opIdx = idx + 1;
-        break;
-      }
-    }
-  }
-
-  if (!matchedOp || opIdx < 0) {
-    throw new Error(`Invalid where clause: "${clause}". Expected: field op value`);
-  }
-
-  const field = clause.slice(0, opIdx).trim();
-  const rawVal = clause.slice(opIdx + matchedOp.length).trim();
-  const val = parseValue(rawVal);
+  const { field, operator: matchedOp, rawValue } = parseWhereClause(clause);
+  const val = parseValue(rawValue);
 
   // Try hash index for equality lookups on full unfiltered table
   if (matchedOp === '==' && tableName && indexes && allTableRows && rows === allTableRows) {
@@ -208,6 +176,11 @@ export function applyWhere(
       default: return true;
     }
   });
+}
+
+/** The column a `sort by` clause names. */
+function sortFieldOf(clause: string): string {
+  return clause.trim().split(/\s+/)[0];
 }
 
 export function applySort(rows: Row[], clause: string): Row[] {
@@ -389,6 +362,8 @@ export function parseOperations(segments: string[]): ParsedOp[] {
 
 // --- Executor ---
 
+export const EMPTY_QUERY_ERROR = 'The query is empty. Start with a table name.';
+
 /**
  * Execute a KQL-style pipe query against a set of tables.
  *
@@ -415,7 +390,7 @@ export function executeQuery(
   options: QueryOptions = {},
 ): QueryResult {
   const trimmed = query.trim();
-  if (!trimmed) return { rows: [], tableName: '', error: null };
+  if (!trimmed) return { rows: [], tableName: '', error: options.strictColumns ? EMPTY_QUERY_ERROR : null };
 
   if (trimmed.length > MAX_QUERY_LENGTH) {
     return { rows: [], tableName: '', error: `Query too long (${trimmed.length} chars). Maximum: ${MAX_QUERY_LENGTH}.` };
@@ -450,6 +425,7 @@ export function executeQuery(
 
       switch (op.type) {
         case 'where':
+          if (options.strictColumns) requireWhereOperands(op.arg, rows.length > 0 ? rows : shapeRows);
           rows = applyWhere(rows, op.arg, tableName, indexes, allTableRows);
           break;
         case 'join':
@@ -460,6 +436,7 @@ export function executeQuery(
           shapeRows = rows;
           break;
         case 'sort':
+          if (options.strictColumns) requireColumns(rows.length > 0 ? rows : shapeRows, [sortFieldOf(op.arg)], 'sort by');
           rows = applySort(rows, op.arg);
           break;
         case 'take': {
@@ -477,6 +454,7 @@ export function executeQuery(
           shapeRows = rows;
           break;
         case 'distinct':
+          if (options.strictColumns) requireColumns(rows.length > 0 ? rows : shapeRows, [op.arg.trim()], 'distinct');
           rows = applyDistinct(rows, op.arg);
           shapeRows = rows;
           break;

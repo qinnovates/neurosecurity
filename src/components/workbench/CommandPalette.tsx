@@ -1,6 +1,7 @@
-import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react';
+import { useCallback, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { useExitEnd } from '@/components/lab-kit/motion/use-exit-end';
 import { useFocus } from './FocusContext';
-import { PALETTE_KIND_ORDER, listPaletteCommands, searchPaletteCommands, type PaletteCommand, type PaletteCommandKind } from './palette-commands';
+import { PALETTE_KIND_ORDER, findMatchRanges, listPaletteCommands, searchPaletteCommands, type PaletteCommand, type PaletteCommandKind } from './palette-commands';
 
 /** Rows shown at once. The line under the list says how many more match. */
 export const PALETTE_RESULT_LIMIT = 40;
@@ -8,11 +9,29 @@ export const PALETTE_RESULT_LIMIT = 40;
 interface Props {
   onRun: (command: PaletteCommand) => void;
   onClose: () => void;
+  /** True while the palette plays its one move out. It takes no input in this time. */
+  isClosing?: boolean;
+  /** Called when that move has ended. */
+  onExited?: () => void;
 }
 
 function headingFor(kind: PaletteCommandKind, deviceName: string): string {
   if (kind === 'view') return 'Screens';
+  if (kind === 'action') return 'Actions';
   return kind === 'part' ? `Parts of ${deviceName}` : 'Techniques';
+}
+
+/** The label with the stretches the query matched drawn heavier, so the reader sees why a row is listed. */
+function markLabel(label: string, query: string): ReactNode[] {
+  const pieces: ReactNode[] = [];
+  let position = 0;
+  for (const range of findMatchRanges(label, query)) {
+    if (range.start > position) pieces.push(label.slice(position, range.start));
+    pieces.push(<mark key={range.start} className="lab-palette-mark">{label.slice(range.start, range.end)}</mark>);
+    position = range.end;
+  }
+  if (position < label.length) pieces.push(label.slice(position));
+  return pieces;
 }
 
 function nextIndex(key: string, current: number, count: number): number | null {
@@ -24,11 +43,11 @@ function nextIndex(key: string, current: number, count: number): number | null {
 }
 
 /**
- * Jump to any screen, to a technique by name or ID, or to a part of the device in focus.
+ * Jump to any screen, to a technique by name or ID, or to a part of the device in focus, or run one of the device actions.
  * Worked entirely from the keyboard: type to narrow, arrows to move, Enter to go, Escape to close.
  * Rendered only while open; focus is held inside and handed back to where it came from on close.
  */
-export default function CommandPalette({ onRun, onClose }: Props) {
+export default function CommandPalette({ onRun, onClose, isClosing = false, onExited }: Props) {
   const { engineData, state } = useFocus();
   const [query, setQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
@@ -36,17 +55,28 @@ export default function CommandPalette({ onRun, onClose }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const didRunRef = useRef(false);
   const listId = useId();
+  useExitEnd(dialogRef, isClosing, onExited);
 
   const commands = useMemo(() => listPaletteCommands(engineData.techniques, state.model), [engineData.techniques, state.model]);
   const { matches, matchCount } = useMemo(() => searchPaletteCommands(commands, query, PALETTE_RESULT_LIMIT), [commands, query]);
   const activeCommand = matches[activeIndex];
 
-  useEffect(() => {
-    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    inputRef.current?.focus();
-    // After a jump the shell moves focus to the new screen; otherwise it goes back to where it was.
-    return () => { if (!didRunRef.current) opener?.focus(); };
+  const openerRef = useRef<HTMLElement | null>(null);
+
+  /** After a jump the shell moves focus to the new screen; otherwise it goes back to where it was, once. */
+  const returnFocus = useCallback((): void => {
+    const opener = openerRef.current;
+    openerRef.current = null;
+    if (!didRunRef.current && opener?.isConnected === true) opener.focus();
   }, []);
+  useEffect(() => {
+    openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    inputRef.current?.focus();
+    return returnFocus;
+  }, [returnFocus]);
+  useEffect(() => {
+    if (isClosing) returnFocus();
+  }, [isClosing, returnFocus]);
 
   useEffect(() => {
     const active = dialogRef.current?.querySelector<HTMLElement>('[aria-selected="true"]');
@@ -86,8 +116,11 @@ export default function CommandPalette({ onRun, onClose }: Props) {
   };
 
   return (
-    <div className="lab-palette-backdrop" onPointerDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
-      <div ref={dialogRef} className="lab-palette" role="dialog" aria-modal="true" aria-label="Go to" onKeyDown={handleKeyDown}>
+    <div className="lab-palette-backdrop" data-closing={isClosing ? 'true' : undefined} inert={isClosing} onPointerDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
+      <div
+        ref={dialogRef} className="lab-palette lab-float" role="dialog" aria-modal="true" aria-label="Go to" data-closing={isClosing ? 'true' : undefined}
+        onKeyDown={handleKeyDown}
+      >
         <div className="lab-palette-head">
           <label className="lab-visually-hidden" htmlFor={`${listId}-input`}>Go to a screen, a technique or a part of the device</label>
           <input
@@ -113,7 +146,7 @@ export default function CommandPalette({ onRun, onClose }: Props) {
                       key={command.key} id={`${listId}-${index}`} className="lab-palette-option" role="option" aria-selected={index === activeIndex}
                       onPointerMove={() => setActiveIndex(index)} onClick={() => run(command)}
                     >
-                      <span>{command.label}</span>
+                      <span>{markLabel(command.label, query)}</span>
                       <span className={command.kind === 'technique' ? 'lab-id' : 'lab-soft'}>{command.detail}</span>
                     </div>
                   );

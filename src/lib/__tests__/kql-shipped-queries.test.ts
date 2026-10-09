@@ -30,8 +30,9 @@ const FAILING_PUBLIC_PRESETS: Readonly<Record<string, RegExp>> = {
 };
 
 /**
- * Public presets that run on the public pages but project a column the table does not have,
- * so the column comes back silently missing. The Lab's strict option would refuse them. They
+ * Public presets that run on the public pages but project, filter on or sort by a column the
+ * table does not have, so the column comes back silently missing, the filter matches nothing,
+ * or the rows come back unsorted. The Lab's strict option would refuse them. They
  * live in files owned by the public pages and are recorded here as a fact, not changed: the
  * list is asserted exactly, so fixing one, or breaking another, fails this test until the
  * list is brought in line.
@@ -45,6 +46,9 @@ const PUBLIC_PRESETS_WITH_A_MISSING_COLUMN: Readonly<Record<string, RegExp>> = {
   'cranial_nerves | where bci_relevance == "HIGH" | project name, type, functions, bci_relevance': /^Unknown column "functions"/,
   'devices | where channels > 100 | project name, company, type, channels | sort by channels desc': /^Unknown column "name"/,
   'comms | where encryption contains "None" | project device, wireless_protocol, encryption, data_link_risk': /^Unknown column "encryption"/,
+  'receptor_families | where signaling contains "GPCR"': /^Unknown column "signaling" in where/,
+  'receptor_families | where signaling contains "ionotropic"': /^Unknown column "signaling" in where/,
+  'receptor_subunits | sort by family asc': /^Unknown column "family" in sort by/,
 };
 
 describe('the Lab starter queries', () => {

@@ -50,10 +50,19 @@ function ChoiceField<Value extends string>({ label, value, options, labels, note
   );
 }
 
+/** The regions whose name contains the words typed, in the atlas's order; all of them when nothing is typed. */
+export function filterRegions<Region extends Pick<BrainRegion, 'name'>>(regions: readonly Region[], typed: string): Region[] {
+  const wanted = typed.trim().toLowerCase();
+  return wanted === '' ? [...regions] : regions.filter((region) => region.name.toLowerCase().includes(wanted));
+}
+
 /** The answers about the device as a whole. Each change goes to the model at once and is checked there. */
 export default function DeviceFactsForm({ model, regions, onChange }: Props) {
   const regionNoticeId = useId();
   const [regionNotice, setRegionNotice] = useState<string | null>(null);
+  const [regionFilter, setRegionFilter] = useState('');
+  const tickedRegions = regions.filter((region) => model.targetRegionIds.includes(region.id));
+  const shownRegions = filterRegions(regions, regionFilter);
 
   const toggleRegion = (regionId: string): void => {
     const isTicked = model.targetRegionIds.includes(regionId);
@@ -89,8 +98,22 @@ export default function DeviceFactsForm({ model, regions, onChange }: Props) {
 
       <fieldset className="lab-editor-group" aria-describedby={regionNotice === null ? undefined : regionNoticeId}>
         <legend className="lab-label">Target brain regions ({model.targetRegionIds.length} of {regions.length} ticked)</legend>
+        {/* The ticked regions stay in sight as chips while the list is filtered; a chip unticks its region. */}
+        <ul className="lab-editor-chosen" aria-label="Ticked regions">
+          {tickedRegions.map((region) => (
+            <li key={region.id}>
+              <button type="button" className="lab-chip" aria-label={`Untick ${region.name}`} onClick={() => toggleRegion(region.id)}>
+                <span>{region.name}</span><span aria-hidden="true">×</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+        <label className="lab-field lab-editor-filter">
+          <span className="lab-label">Filter regions ({shownRegions.length} of {regions.length} shown)</span>
+          <input className="lab-input" type="search" value={regionFilter} maxLength={MODEL_LIMITS.maxLabelLength} onChange={(event) => setRegionFilter(event.target.value)} />
+        </label>
         <div className="lab-editor-checklist">
-          {regions.map((region) => (
+          {shownRegions.map((region) => (
             <label key={region.id} className="lab-editor-tick">
               <input type="checkbox" checked={model.targetRegionIds.includes(region.id)} onChange={() => toggleRegion(region.id)} />
               <span>{region.name} <span className="lab-soft">({region.depthClass})</span></span>

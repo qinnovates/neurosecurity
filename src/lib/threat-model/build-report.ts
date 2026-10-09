@@ -15,16 +15,27 @@ import type {
 import { buildRiskRegister, goalOf } from './risk-register';
 import { indexScopeTerms, summariseScope } from './scope-statement';
 
-/** Caveats printed with every report. They describe what the tool is and is not. */
+/** Caveats printed with every report, in order. They describe what the tool is and is not. One more, computed from the placement table, follows `CVES_LIMITATION`. */
+const CVES_LIMITATION = 'CVEs in other products are records about similar products. They are not findings about the modelled device.';
 export const REPORT_LIMITATIONS: readonly string[] = [
   'This is a drafting aid. It is not a compliance determination, legal advice, or a substitute for review by a qualified regulatory or security professional.',
   'TARA and NISS are proposed research frameworks. They are not peer reviewed and are not adopted by any standards body.',
   'The device presets, placement rules, entry paths, themes, STRIDE mapping, chain roles, and requirements checklist are this tool\'s own analysis. They were drafted with an AI assistant and have not yet been reviewed line by line by the author.',
   'Attack chains are generated hypotheses. A chain shows that a path exists in the model; it is not evidence that the attack has been carried out.',
-  'CVEs in other products are records about similar products. They are not findings about the modelled device.',
-  'Only catalog techniques with confirmed or demonstrated evidence have a placement decision. The rest of the catalog is not assessed.',
+  CVES_LIMITATION,
   'Techniques are placed from the answers given. Anything not described in the model is not assessed.',
 ];
+
+/** How much of the catalog the placement table decides on: techniques placed plus techniques reviewed and left outside, of the catalog's total. */
+export function describePlacementCoverage(coverage: CatalogCoverage): string {
+  const decided = coverage.totalTechniques - coverage.notReviewedTechniques;
+  return `${decided} of ${coverage.totalTechniques} catalog techniques have a placement decision. The rest of the catalog is not assessed.`;
+}
+
+/** The standing caveats with the computed coverage sentence in its place. */
+export function listLimitations(coverage: CatalogCoverage): string[] {
+  return REPORT_LIMITATIONS.flatMap((limitation) => (limitation === CVES_LIMITATION ? [limitation, describePlacementCoverage(coverage)] : [limitation]));
+}
 
 export interface ReportInputs {
   model: DeviceModel;
@@ -109,6 +120,8 @@ export function buildThreatModelReport(inputs: ReportInputs): ThreatModelReport 
   const matches = collectMatches(elementOutcomes);
   const matchedTechniqueIds = new Set(matches.map((match) => match.techniqueId));
 
+  const catalogCoverage = summariseCatalogCoverage(engineData, referenceData);
+
   return {
     generatedAt,
     registrarVersion: engineData.registrarVersion,
@@ -126,9 +139,9 @@ export function buildThreatModelReport(inputs: ReportInputs): ThreatModelReport 
     complianceItems: evaluateCompliance(model, referenceData.compliance),
     ambientThreats: listAmbientThreats(engineData, referenceData),
     themes: summariseThemes(engineData, referenceData, indexScopeTerms(summariseScope(model, engineData, referenceData))),
-    catalogCoverage: summariseCatalogCoverage(engineData, referenceData),
+    catalogCoverage,
     goalCoverage: summariseGoalCoverage(engineData, referenceData),
     coverageGaps: listCoverageGaps(elementOutcomes),
-    limitations: [...REPORT_LIMITATIONS],
+    limitations: listLimitations(catalogCoverage),
   };
 }

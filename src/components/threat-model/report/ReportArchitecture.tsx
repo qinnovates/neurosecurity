@@ -11,6 +11,8 @@ interface Props {
 }
 
 const NONE_IN_VIEW = 'None in this view.';
+/** Printed in place of the drawing: scaled to a page its labels fall under the smallest type size, so paper carries the tables. */
+export const PRINTED_DIAGRAM_NOTE = 'The diagram is not printed. See the parts and connections tables.';
 
 function ElementList({ label, model, elementIds }: { label: string; model: DeviceModel; elementIds: readonly string[] }) {
   return (
@@ -26,6 +28,7 @@ export default function ReportArchitecture({ model, views }: Props) {
   return (
     <ReportSection id="architecture">
       <div className="report-diagram"><ArchitectureDiagram model={model} title={`${VIEW_LABELS.global_system} of ${model.name}`} /></div>
+      <p className="report-print-block">{PRINTED_DIAGRAM_NOTE}</p>
       {views.map((selection) => (
         <div key={selection.view} className="report-view">
           <h3 className="report-subheading">{VIEW_LABELS[selection.view]}</h3>

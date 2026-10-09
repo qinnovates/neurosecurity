@@ -58,3 +58,18 @@ export function countMatrix(
   }
   return { cells, rowTotals, columnTotals, total };
 }
+
+/** The largest cell in each column, for scaling a bar within its own column. A column with no cell has no entry. */
+export function largestCellByColumn(data: CountMatrixData, rows: readonly MatrixAxisItem[], columns: readonly MatrixAxisItem[]): Map<string, number> {
+  const largest = new Map<string, number>();
+  for (const column of columns) {
+    const counts = rows.flatMap((row) => { const count = data.cells.get(cellKey(row.id, column.id)); return count === undefined ? [] : [count]; });
+    if (counts.length > 0) largest.set(column.id, Math.max(...counts));
+  }
+  return largest;
+}
+
+/** The rows with at least one technique in view, and the rest, each in axis order. */
+export function splitRowsByContent(data: CountMatrixData, rows: readonly MatrixAxisItem[]): { filled: MatrixAxisItem[]; empty: MatrixAxisItem[] } {
+  return { filled: rows.filter((row) => data.rowTotals.has(row.id)), empty: rows.filter((row) => !data.rowTotals.has(row.id)) };
+}

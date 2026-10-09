@@ -39,6 +39,11 @@ export interface CatalogTechnique {
   neuralProductCveCount: number | null;
   /** CVE records in adjacent technology (`evidence.adjacent_cve_count`); null when not recorded. */
   adjacentCveCount: number | null;
+  /**
+   * The `category` of each NVD-verified record the CVE mapping links to this technique, one entry per record, in file order.
+   * These are the records the two counts above were taken from.
+   */
+  cveRecordCategories: string[];
   /** The script that set the tier (`evidence.derived_by`), or null when none is named. */
   evidenceDerivedBy: string | null;
   /** The date the tier was set (`evidence.derived_on`). */
@@ -75,6 +80,10 @@ export interface PrecedentCve {
   description: string;
   cvssScore: number | null;
   techniqueIds: string[];
+  /** The mapping's own `category` for the record; null when the record has none. */
+  category: string | null;
+  /** The mapping's `validation.nvd_verified` flag. The catalog's CVE counts include only records where it is true. */
+  isNvdVerified: boolean;
 }
 
 /** A tactic as the catalog names it. */

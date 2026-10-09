@@ -6,11 +6,13 @@ import { listOrphanDecisions } from '@/lib/threat-model/orphan-decisions';
 import type { RiskRow } from '@/lib/threat-model/report-types';
 import { PRESETS, engineData, reportFor } from '@/lib/threat-model/__tests__/preset-reports';
 import { NOTE_REQUIRED_STATEMENT, NOT_RECORDED_STATEMENT } from '../frame/decision-rules';
-import OrphanDecisions, { ORPHAN_DECISIONS_TITLE } from '../frame/OrphanDecisions';
+import OrphanDecisions, { ORPHAN_DECISIONS_TITLE, describeOrphanPlace } from '../frame/OrphanDecisions';
+import { NOT_RECORDED_LABEL } from '../frame/register-columns';
 import { groupKeyOf } from '../frame/register-order';
 import { listPlacementReasons } from '../frame/RiskDrawer';
 import RiskDetail, { SOURCE_NOT_RECORDED_LABEL } from '../RiskDetail';
-import RisksSection from '../RisksSection';
+import { ModelHighlightProvider } from '../model-highlight';
+import RisksSection, { describeLitRows } from '../RisksSection';
 
 afterEach(cleanup);
 
@@ -27,8 +29,8 @@ function bodyRows(): HTMLElement[] {
 
 function renderRegister(rows: readonly RiskRow[] = currentRows) {
   const handlers = { onDecide: vi.fn(), onOpenRisk: vi.fn(), onOpenTechnique: vi.fn() };
-  render(<RisksSection rows={rows} elements={elements} openedRiskId={null} {...handlers} />);
-  return handlers;
+  const { container } = render(<RisksSection rows={rows} elements={elements} openedRiskId={null} {...handlers} />);
+  return { ...handlers, container };
 }
 
 describe('RisksSection', () => {
@@ -85,6 +87,7 @@ describe('RisksSection', () => {
     expect(all[all.length - 1].getAttribute('data-quiet')).toBe('true');
     expect(all.filter((row) => row.getAttribute('aria-current') === 'true')).toHaveLength(1);
     expect(screen.getByText(`${rows.filter((row) => row.status === 'open').length} open of ${rows.length}. A row closes only when a decision is recorded on that row. Enter opens a row.`)).toBeTruthy();
+    expect(screen.getByText('A row closes only when a decision is recorded on that row.')).toBeTruthy();
   });
 
   it('offers the way back to its own grouping once the reader sorts', () => {
@@ -96,10 +99,67 @@ describe('RisksSection', () => {
   });
 
   it('says why it is empty when the filters leave nothing', () => {
-    renderRegister([]);
-    expect(screen.getByRole('status').textContent).toContain('No risk of this kind matches the part and lenses chosen');
+    const { container } = renderRegister([]);
+    expect(container.querySelector('.lab-table-empty')?.textContent).toContain('No risk of this kind matches the part and lenses chosen');
+  });
+
+  it('carries the open count in a status line, so a decision or a filter is announced', () => {
+    const rows = catalogRows.map((row, index): RiskRow => (index === 0 ? { ...row, status: 'mitigated' } : row));
+    const { container, rerender } = render(<RisksSection rows={rows} elements={elements} openedRiskId={null} onDecide={() => undefined} onOpenRisk={() => undefined} onOpenTechnique={() => undefined} />);
+    const status = container.querySelector('.model-register-count');
+    expect(status?.getAttribute('role')).toBe('status');
+    expect(status?.textContent).toBe(`${rows.length - 1} open of ${rows.length}`);
+    rerender(<RisksSection rows={rows.slice(0, 5)} elements={elements} openedRiskId={null} onDecide={() => undefined} onOpenRisk={() => undefined} onOpenTechnique={() => undefined} />);
+    expect(status?.textContent).toBe(`4 open of 5`);
+  });
+
+  it('keeps every cell to one line: the threat and the part end in an ellipsis and carry their full text as a tooltip', () => {
+    renderRegister();
+    for (const row of bodyRows()) {
+      const [threat, part] = [row.querySelector('.model-threat'), row.querySelector('.model-part')];
+      expect(threat?.classList.contains('model-one-line')).toBe(true);
+      expect(part?.classList.contains('model-one-line')).toBe(true);
+      expect(threat?.getAttribute('title')).toBe(threat?.textContent);
+      expect(part?.getAttribute('title')).toBe(part?.textContent);
+      expect(elements.some((element) => element.label === part?.textContent)).toBe(true);
+    }
+  });
+
+  it('keeps the decision a select on every row, reachable by keyboard, named for its row', () => {
+    renderRegister();
+    for (const row of bodyRows()) {
+      const decision = within(row).getByRole('combobox');
+      expect(decision.tagName).toBe('SELECT');
+      expect(decision.getAttribute('tabindex')).toBeNull();
+      expect(decision.getAttribute('aria-label')).toMatch(/^Decision for .+ on .+$/);
+    }
+    const names = bodyRows().map((row) => within(row).getByRole('combobox').getAttribute('aria-label'));
+    expect(new Set(names).size).toBe(names.length);
+  });
+
+  it('counts the rows on the part being pointed at beside the table head, and nothing when no part is', () => {
+    const { container } = render(
+      <ModelHighlightProvider>
+        <RisksSection rows={currentRows} elements={elements} openedRiskId={null} onDecide={() => undefined} onOpenRisk={() => undefined} onOpenTechnique={() => undefined} />
+      </ModelHighlightProvider>,
+    );
+    const chip = container.querySelector('.model-lit-count');
+    expect(chip?.getAttribute('data-shown')).toBe('false');
+    expect(chip?.textContent).toBe('');
+    const row = bodyRows()[0];
+    fireEvent.pointerEnter(row);
+    const elementId = catalogRows.find((candidate) => candidate.riskId === row.getAttribute('data-reflow-key'))?.elementId;
+    const element = elements.find((candidate) => candidate.id === elementId);
+    const onElement = catalogRows.filter((candidate) => candidate.elementId === elementId).length;
+    expect(chip?.getAttribute('data-shown')).toBe('true');
+    expect(chip?.textContent).toBe(`${onElement} rows on ${element?.label}`);
+    expect(bodyRows().filter((candidate) => candidate.getAttribute('data-lit') === 'true')).toHaveLength(onElement);
+    fireEvent.pointerLeave(row);
+    expect(chip?.getAttribute('data-shown')).toBe('false');
+    expect(describeLitRows(1, 'Charger')).toBe('1 row on Charger');
   });
 });
+
 
 describe('RiskDetail', () => {
   const row = catalogRows.find((candidate) => candidate.precedentCveIds.length > 0 && candidate.detectionNote !== null) ?? catalogRows[0];
@@ -196,6 +256,15 @@ describe('RiskDetail', () => {
     expect(screen.getByText('None recorded.')).toBeTruthy();
   });
 
+  it('uses one label for a score the data does not hold: a CVE with no score reads "Not recorded"', () => {
+    const unscored = { cveId: 'CVE-0000-0001', product: 'Example product', description: '', cvssScore: null };
+    renderDetail({ precedentCves: [{ ...cves[0], ...unscored }] });
+    expect(NOT_RECORDED_LABEL).toBe('Not recorded');
+    const item = screen.getByText('CVE-0000-0001').closest('li');
+    expect(item?.textContent).toContain(NOT_RECORDED_LABEL);
+    expect(document.body.textContent).not.toContain('Not scored');
+  });
+
   it('shows a baseline row as the generic baseline, with no technique sections', () => {
     renderDetail({ row: strideRows[0], technique: undefined, placementReasons: [], precedentCves: [] });
     expect(screen.getByText('Generic baseline, not a catalog technique')).toBeTruthy();
@@ -217,8 +286,11 @@ describe('Decisions without a row', () => {
   };
   const orphans = listOrphanDecisions(orphanModel, reportFor(orphanModel));
 
+  const techniqueNameById = new Map([...techniqueById].map(([id, technique]) => [id, technique.name]));
+  const elementLabelById = new Map(elements.map((element) => [element.id, element.label]));
+
   it('lists each decision that lost its row with its status, note and cause, and none that still has one', () => {
-    render(<OrphanDecisions orphans={orphans} onOpenTechnique={() => undefined} />);
+    render(<OrphanDecisions orphans={orphans} techniqueNameById={techniqueNameById} elementLabelById={elementLabelById} onOpenTechnique={() => undefined} />);
     expect(orphans).toHaveLength(2);
     const panel = screen.getByRole('region', { name: ORPHAN_DECISIONS_TITLE });
     const items = within(panel).getAllByRole('listitem');
@@ -229,9 +301,20 @@ describe('Decisions without a row', () => {
     expect(items[1].textContent).toContain('No note');
   });
 
+  it('names the technique and says the part was removed, with the part\'s id; a part still in the model is named', () => {
+    render(<OrphanDecisions orphans={orphans} techniqueNameById={techniqueNameById} elementLabelById={elementLabelById} onOpenTechnique={() => undefined} />);
+    const [removed, uncatalogued] = within(screen.getByRole('region', { name: ORPHAN_DECISIONS_TITLE })).getAllByRole('listitem');
+    expect(orphans[0].cause).toBe('element_removed');
+    expect(removed.textContent).toContain(techniqueNameById.get(techniqueOnPart));
+    expect(removed.textContent).toContain('on a removed part (removed-part)');
+    expect(uncatalogued.textContent).toContain(`on ${elementLabelById.get(partId)}`);
+    expect(uncatalogued.textContent).not.toContain('removed part');
+    expect(describeOrphanPlace({ cause: 'technique_no_longer_applies', elementId: 'gone' }, elementLabelById)).toBe('on a removed part (gone)');
+  });
+
   it('links a technique the catalog still has, and prints one it no longer has as plain text', () => {
     const onOpenTechnique = vi.fn();
-    render(<OrphanDecisions orphans={orphans} onOpenTechnique={onOpenTechnique} />);
+    render(<OrphanDecisions orphans={orphans} techniqueNameById={techniqueNameById} elementLabelById={elementLabelById} onOpenTechnique={onOpenTechnique} />);
     const links = screen.getAllByRole('button', { name: /^Open technique / });
     expect(links).toHaveLength(orphans.filter((orphan) => orphan.cause !== 'technique_not_in_catalog' && orphan.techniqueId !== null).length);
     fireEvent.click(links[0]);
@@ -240,7 +323,7 @@ describe('Decisions without a row', () => {
   });
 
   it('draws nothing when every decision has its row', () => {
-    const { container } = render(<OrphanDecisions orphans={[]} onOpenTechnique={() => undefined} />);
+    const { container } = render(<OrphanDecisions orphans={[]} techniqueNameById={techniqueNameById} elementLabelById={elementLabelById} onOpenTechnique={() => undefined} />);
     expect(container.textContent).toBe('');
   });
 });

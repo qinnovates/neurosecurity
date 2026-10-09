@@ -3,15 +3,12 @@
  * statement or the per-element counts; none is written in a component.
  */
 
-import type { CatalogSeverity } from '@/lib/threat-model/catalog-types';
 import { RISK_STATUSES, type RiskStatus } from '@/lib/threat-model/device-model';
+import { SEVERE_RATINGS } from '@/lib/threat-model/headline-figures';
 import type { ElementRowCounts } from '@/lib/threat-model/register-counts';
 import type { RiskRow } from '@/lib/threat-model/report-types';
 import { isRiskAddressed } from '@/lib/threat-model/risk-register';
 import type { ScopeStatement } from '@/lib/threat-model/scope-statement';
-
-/** The two most severe catalog ratings: the rows a reader looks for first. */
-export const SEVERE_RATINGS: readonly CatalogSeverity[] = ['critical', 'high'];
 
 export interface OverviewFigures {
   catalogRows: number;

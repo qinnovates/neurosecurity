@@ -9,12 +9,12 @@ import { buildThreatModelReport } from '@/lib/threat-model/build-report';
 import type { CatalogTechnique, EngineData } from '@/lib/threat-model/catalog-types';
 import type { DeviceModel } from '@/lib/threat-model/device-model';
 import type { ReferenceData } from '@/lib/threat-model/reference-data-types';
-import { buildRegisterCsv } from '@/lib/threat-model/register-csv';
 import type { ThreatModelReport } from '@/lib/threat-model/report-types';
 import type { AttackChain } from '@/components/atlas/AttackChainViz';
 import { downloadModelFile, downloadRegisterCsv, readModelFile } from '@/components/threat-model/model-file-io';
 import { createInitialState, hasUserWork, studioReducer, type StudioAction, type StudioState } from '@/components/threat-model/studio-state';
 import { isRememberEnabled, restoreDevice, saveDevice, setRememberEnabled } from './device-persistence';
+import { buildRegisterExport } from './register-export';
 import { useFileStatus, useUnloadWarning, type FileStatus } from './use-device-files';
 
 const DISCARDED_NOTICE = 'A device saved in this browser could not be read and was removed.';
@@ -39,15 +39,15 @@ export interface Focus {
   /** True when the device as it is now was written to this browser's storage. */
   isStoredInBrowser: boolean;
   fileStatus: FileStatus;
-  /** True when decisions exist that are neither in this browser's storage nor in a file. */
-  hasUnsavedDecisions: boolean;
+  /** True when the reader's work on the device (edits to the model, or decisions) is neither in this browser's storage nor in a file. */
+  hasUnsavedChanges: boolean;
   /** Set when saving or restoring failed, in words safe to show. */
   storageNotice: string | null;
   /** Hands the device to the browser as a download. Nothing is uploaded. */
   saveModelFile: () => void;
   /** Reads and validates a file the reader picked. @throws DeviceModelFormatError with a message safe to show */
   readModelFile: (file: File) => Promise<DeviceModel>;
-  /** Hands the risk register to the browser as a CSV download. */
+  /** Hands the risk register to the browser as a CSV download: header block, standing statements, then the rows. */
   exportRegister: () => void;
 }
 
@@ -109,9 +109,8 @@ export function FocusProvider({ engineData, referenceData, curatedChains, onDevi
   const techniqueById = useMemo(() => new Map(engineData.techniques.map((technique) => [technique.id, technique])), [engineData]);
   const hasWork = useMemo(() => hasUserWork(state, archetypes), [state, archetypes]);
   const isExampleDevice = !hasPickedDevice && !hasWork && restored.state === null;
-  const hasDecisions = state.model.riskDecisions.length > 0 || state.model.controlsInPlace.length > 0;
-  const hasUnsavedDecisions = hasDecisions && !isStoredInBrowser && fileStatus !== 'saved';
-  useUnloadWarning(hasUnsavedDecisions);
+  const hasUnsavedChanges = hasWork && !isStoredInBrowser && fileStatus !== 'saved';
+  useUnloadWarning(hasUnsavedChanges);
 
   const focus = useMemo<Focus>(() => {
     const setRemembered = (isEnabled: boolean): void => {
@@ -125,13 +124,13 @@ export function FocusProvider({ engineData, referenceData, curatedChains, onDevi
     };
     return {
       state, dispatch, report, engineData, referenceData, curatedChains, techniqueById, hasWork, isExampleDevice,
-      isRemembered, setRemembered, isStoredInBrowser, fileStatus, hasUnsavedDecisions, storageNotice, saveModelFile,
+      isRemembered, setRemembered, isStoredInBrowser, fileStatus, hasUnsavedChanges, storageNotice, saveModelFile,
       readModelFile: (file) => readModelFile(file, knownRegionIds),
-      exportRegister: () => downloadRegisterCsv(state.model, buildRegisterCsv(report.riskRows)),
+      exportRegister: () => downloadRegisterCsv(state.model, buildRegisterExport(report, referenceData, new Date())),
     };
   }, [
     state, dispatch, report, engineData, referenceData, curatedChains, techniqueById, hasWork, isExampleDevice,
-    isRemembered, isStoredInBrowser, fileStatus, hasUnsavedDecisions, storageNotice, markInFile, knownRegionIds,
+    isRemembered, isStoredInBrowser, fileStatus, hasUnsavedChanges, storageNotice, markInFile, knownRegionIds,
   ]);
 
   return <FocusContext.Provider value={focus}>{children}</FocusContext.Provider>;

@@ -101,3 +101,31 @@ describe('parseComplianceUs', () => {
     expect(() => parseComplianceUs({ ...rawCompliance, internetCapableMedia: { ...media, quote: 'short' } })).toThrow(/internetCapableMedia\.quote/);
   });
 });
+
+describe('the reading note beside the connectivity count', () => {
+  const rawNote = (rawCompliance.internetCapableMedia as { note: string }).note;
+
+  it('is carried from the checklist file word for word', () => {
+    expect(rawNote.length).toBeGreaterThan(20);
+    expect(compliance.internetCapableMediaNote).toBe(rawNote);
+  });
+
+  it.each(archetypes.map((archetype) => archetype.id))('follows the count directly on the preset %s', (archetypeId) => {
+    const assessment = assessCyberDevice(presetModel(archetypeId), compliance);
+    const count = assessment.internetCapableLinkIds.length;
+    expect(count).toBeGreaterThan(0);
+    expect(assessment.explanation.startsWith(`${count} link(s) use a connection type FDA lists as able to connect to the internet. ${rawNote} `)).toBe(true);
+  });
+
+  it('is printed when no listed connection carries anything, where the reading decides the answer just the same', () => {
+    const model = presetModel('cortical-read-implant');
+    const assessment = assessCyberDevice({ ...model, links: model.links.map(withoutPayload) }, compliance);
+    expect(assessment.connectivity).toBe('not_determined');
+    expect(assessment.explanation).toContain(rawNote);
+  });
+
+  it('is left out, with nothing in its place, when the file has no note', () => {
+    const assessment = assessCyberDevice(presetModel('cortical-read-implant'), { ...compliance, internetCapableMediaNote: null });
+    expect(assessment.explanation).toMatch(/^\d+ link\(s\) use a connection type FDA lists as able to connect to the internet\. This tool assumes/);
+  });
+});

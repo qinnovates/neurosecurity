@@ -74,7 +74,7 @@ describe('ComplianceChecklist', () => {
     expect(CHECKLIST_TITLE).toBe('FDA premarket cybersecurity checklist');
     expect(screen.getByText(referenceData.compliance.status)).toBeTruthy();
     expect(screen.getByText(`Not covered here: anything outside the ${referenceData.compliance.sources.length} sources this list was built from.`)).toBeTruthy();
-    const listed = screen.getAllByRole('listitem').map((item) => item.textContent);
+    const listed = [...document.querySelectorAll('.checklist-intro .report-list li')].map((item) => item.textContent);
     expect(listed).toEqual(referenceData.compliance.sources.map((source) => `${source.title}. Read ${source.dateRead}.`));
   });
 

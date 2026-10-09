@@ -34,7 +34,27 @@ describe('Authored chains', () => {
     fireEvent.click(screen.getByRole('button', { name: new RegExp(chain.chain_name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) }));
     const detail = screen.getByRole('region', { name: 'Steps of the selected chain' });
     expect(within(detail).getAllByText(EVIDENCE_LABELS[chain.evidence.overall_label].label).length).toBeGreaterThan(0);
-    expect(within(detail).getByText(new RegExp(chain.evidence.rationale.slice(0, 30).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))).toBeTruthy();
+  });
+
+  it('prints each step\'s evidence label and none of the chain file\'s free-text notes, rationale or extrapolation', () => {
+    const { container } = inLab(<CuratedChains />);
+    const withNotes = curatedChains.filter((candidate) => candidate.evidence !== undefined);
+    expect(withNotes.length).toBeGreaterThan(0);
+    for (const chain of withNotes) {
+      fireEvent.click(screen.getByRole('button', { name: new RegExp(chain.chain_name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) }));
+      const text = container.textContent ?? '';
+      expect(text, chain.chain_id).not.toContain(chain.evidence?.rationale);
+      if (chain.evidence?.extrapolation !== undefined) expect(text, chain.chain_id).not.toContain(chain.evidence.extrapolation);
+      const steps = container.querySelectorAll('.lab-steps > li');
+      chain.steps.forEach((step, index) => {
+        if (step.evidence === undefined) return;
+        expect(text, `${chain.chain_id} step ${step.position}`).not.toContain(step.evidence.note);
+        expect(steps[index].textContent, `${chain.chain_id} step ${step.position}`).toContain(EVIDENCE_LABELS[step.evidence.label].label);
+      });
+      // The catalog's retired status words reached the screen only through those notes.
+      expect(text, chain.chain_id).not.toMatch(/\b(CONFIRMED|EMERGING|THEORETICAL|DEMONSTRATED)\b/);
+      expect(text, chain.chain_id).not.toMatch(/\bconfirmed\b/i);
+    }
   });
 
   it('draws no old chain card and uses no old class names', () => {

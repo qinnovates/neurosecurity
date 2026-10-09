@@ -30,9 +30,13 @@ function ChainEvidenceMark({ label }: { label: EvidenceLabel }) {
   return <EvidenceGlyph evidence={{ level: MARK_LEVEL_BY_LABEL[label], label: EVIDENCE_LABELS[label].label }} />;
 }
 
+/**
+ * The step's own evidence label. The chain file's free-text notes and rationale are not printed:
+ * they use the catalog's retired status words and name products beside a technique.
+ */
 function StepEvidence({ step, technique }: { step: ChainStep; technique: CatalogTechnique | undefined }) {
-  if (step.evidence !== undefined) return <><ChainEvidenceMark label={step.evidence.label} /> <span className="lab-soft">{step.evidence.note}</span></>;
-  return technique === undefined ? <span className="lab-soft">No evidence note for this step.</span> : <EvidenceMark tier={technique.evidenceTier} status={technique.evidenceStatus} />;
+  if (step.evidence !== undefined) return <ChainEvidenceMark label={step.evidence.label} />;
+  return technique === undefined ? <span className="lab-soft">No evidence label for this step.</span> : <EvidenceMark tier={technique.evidenceTier} status={technique.evidenceStatus} />;
 }
 
 interface StepProps {
@@ -80,7 +84,7 @@ function ChainDetail({ chain, techniqueById, onOpenTechnique }: DetailProps) {
         <p className="lab-soft">Authored chain <span className="lab-id">{chain.chain_id}</span></p>
         <p>{chain.objective}</p>
         {chain.evidence !== undefined && (
-          <p><ChainEvidenceMark label={chain.evidence.overall_label} /> <span className="lab-soft">{chain.evidence.rationale}{chain.evidence.extrapolation !== undefined && ` ${chain.evidence.extrapolation}`}</span></p>
+          <p><ChainEvidenceMark label={chain.evidence.overall_label} /></p>
         )}
         <PlaybackTransport playback={playback} stepCount={chain.steps.length} label="Chain playback" />
         <ol className="lab-steps">

@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useRef, type ReactNode } from 'react';
 import HatchSwatch from './HatchSwatch';
 import { useCountTransition } from './motion/use-count-transition';
 
@@ -21,9 +21,10 @@ const NOT_ASSESSED_LABEL = 'Not assessed';
 
 /** One large figure with its label. A changed figure swaps at once and is marked for a moment. */
 export default function StatTile({ label, figure, unit, isNotAssessed = false, note }: Props) {
-  const { value, hasChanged } = useCountTransition(figure);
+  const tileRef = useRef<HTMLDivElement>(null);
+  const { value, hasChanged } = useCountTransition(figure, tileRef);
   return (
-    <div className="lab-stat">
+    <div className="lab-stat" ref={tileRef}>
       {isNotAssessed ? (
         <span className="lab-stat-figure" data-not-assessed="true"><HatchSwatch /> {NOT_ASSESSED_LABEL}</span>
       ) : (

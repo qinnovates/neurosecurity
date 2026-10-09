@@ -1,5 +1,5 @@
 import { EvidenceGlyph } from '@/components/lab-kit/EvidenceMark';
-import type { ChainGenerationResult, GeneratedChain, GeneratedChainEdge, GeneratedChainStep } from '@/lib/threat-model/chain-types';
+import { CHAIN_HYPOTHESIS_STATEMENT, type ChainGenerationResult, type GeneratedChain, type GeneratedChainEdge, type GeneratedChainStep } from '@/lib/threat-model/chain-types';
 import type { DeviceModel } from '@/lib/threat-model/device-model';
 import { describeEvidence } from '@/lib/threat-model/evidence-levels';
 import { describeElement } from '@/lib/threat-model/stride';
@@ -11,9 +11,6 @@ interface Props {
 }
 
 const HYPOTHESIS_LABEL = 'Generated hypothesis';
-const ABOUT_CHAINS = 'Chains are assembled along real paths in your device model, using only techniques with confirmed or demonstrated evidence. '
-  + 'Every chain is a hypothesis for review, whatever the evidence behind its individual steps: a path through the model exists, which is not evidence the attack has been carried out.';
-
 function ChainStepItem({ step, edge, model }: { step: GeneratedChainStep; edge: GeneratedChainEdge | undefined; model: DeviceModel }) {
   return (
     <li>
@@ -49,7 +46,7 @@ export default function ChainList({ model, chainResult }: Props) {
   const { chains, wasTruncated, wasCapped, chainsFound, emptyReason } = chainResult;
   return (
     <div>
-      <p>{ABOUT_CHAINS}</p>
+      <p>{CHAIN_HYPOTHESIS_STATEMENT}</p>
       {wasTruncated && <p className="lab-notice">The search stopped at its limit. Other chains may exist.</p>}
       {wasCapped && <p className="lab-notice">Showing the first {chains.length} of {chainsFound} chains found.</p>}
       {chains.length === 0 && <p className="lab-notice">No chains to show. {emptyReason}</p>}

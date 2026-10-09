@@ -24,27 +24,42 @@ function collectStrings(value: unknown): string[] {
 
 describe('parseAddress', () => {
   it('recognises an empty address, a mode, and a mode with one of its views', () => {
-    expect(parseAddress('')).toEqual({ route: { modeId: 'explore', viewId: defaultViewId('explore') }, isRecognised: true });
-    expect(parseAddress('#')).toEqual({ route: { modeId: 'explore', viewId: defaultViewId('explore') }, isRecognised: true });
+    expect(parseAddress('')).toEqual({ route: { modeId: 'explore', viewId: defaultViewId('explore') }, isRecognised: true, isCanonical: true });
+    expect(parseAddress('#')).toEqual({ route: { modeId: 'explore', viewId: defaultViewId('explore') }, isRecognised: true, isCanonical: true });
     expect(parseAddress('#model').isRecognised).toBe(true);
-    for (const route of listEveryRoute()) expect(parseAddress(`#${route.modeId}/${route.viewId}`)).toEqual({ route, isRecognised: true });
+    for (const route of listEveryRoute()) expect(parseAddress(`#${route.modeId}/${route.viewId}`)).toEqual({ route, isRecognised: true, isCanonical: true });
   });
 
   it('falls back and says so for an unknown mode, an unknown view, or anything after the view', () => {
-    expect(parseAddress('#nonsense')).toEqual({ route: { modeId: 'explore', viewId: defaultViewId('explore') }, isRecognised: false });
-    expect(parseAddress('#model/not-a-view')).toEqual({ route: { modeId: 'model', viewId: defaultViewId('model') }, isRecognised: false });
+    expect(parseAddress('#nonsense')).toEqual({ route: { modeId: 'explore', viewId: defaultViewId('explore') }, isRecognised: false, isCanonical: true });
+    expect(parseAddress('#model/not-a-view')).toEqual({ route: { modeId: 'model', viewId: defaultViewId('model') }, isRecognised: false, isCanonical: true });
     expect(parseAddress(`#model/${defaultViewId('model')}/extra`).isRecognised).toBe(false);
     expect(parseAddress('#main-content').isRecognised).toBe(false);
   });
 
   it('survives hostile input without throwing or passing it through', () => {
-    const hostile = ['#<script>alert(1)</script>', `#model/${'a'.repeat(10_000)}`, '#model?name=Secret%20Device', '#__proto__/constructor', '#model/../../etc'];
+    const hostile = ['#<script>alert(1)</script>', `#model/${'a'.repeat(10_000)}`, '#__proto__/constructor', '#model/../../etc', `#model/risks?${'x'.repeat(10_000)}`];
     for (const hash of hostile) {
-      const { route, isRecognised } = parseAddress(hash);
-      expect(isRecognised).toBe(false);
+      const { route, isRecognised, isCanonical } = parseAddress(hash);
+      // Either it names no screen, or what follows the screen is marked to be dropped. It is never passed on as written.
+      expect(isRecognised && isCanonical).toBe(false);
       expect(findView(route.modeId, route.viewId)).not.toBeNull();
       expect(toHash(route)).toMatch(ADDRESS_PATTERN);
     }
+  });
+
+  it('opens the named screen when a query or a trailing slash follows it, and marks the address for correction', () => {
+    for (const suffix of ['?x=1', '/', '//', '/?x=1', '?a/b']) {
+      expect(parseAddress(`#model/risks${suffix}`), suffix).toEqual({ route: { modeId: 'model', viewId: 'risks' }, isRecognised: true, isCanonical: false });
+    }
+    expect(parseAddress('#query?x=1')).toEqual({ route: { modeId: 'query', viewId: defaultViewId('query') }, isRecognised: true, isCanonical: false });
+    expect(parseAddress('#?x=1')).toEqual({ route: { modeId: 'explore', viewId: defaultViewId('explore') }, isRecognised: true, isCanonical: false });
+    // What follows the screen is dropped, never read: a device detail in a query cannot reach the address the Lab writes.
+    const withSecret = parseAddress('#model?name=Secret%20Device');
+    expect(withSecret.isCanonical).toBe(false);
+    expect(toHash(withSecret.route)).toBe('#model');
+    // A query does not rescue an address that names no screen.
+    expect(parseAddress('#model/not-a-view?x=1').isRecognised).toBe(false);
   });
 });
 

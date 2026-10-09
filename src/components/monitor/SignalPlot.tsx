@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useRef } from 'react';
-import { LABEL_GUTTER, drawSignalPage, pageStartFor, type PlotPage } from './signal-plot-draw';
+import { useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
+import { LABEL_GUTTER, drawSignalPage, pageStartFor, rowAt, type PlotPage } from './signal-plot-draw';
 
-interface Props extends Omit<PlotPage, 'pageStart'> {
+interface Props extends Omit<PlotPage, 'pageStart' | 'hoveredChannelIndex'> {
   /** The playhead, in seconds from the start of the sample. */
   time: number;
   /** Accessible name; says what is plotted and that it is synthetic. */
@@ -14,10 +14,11 @@ interface Props extends Omit<PlotPage, 'pageStart'> {
  */
 export default function SignalPlot({ sample, time, pageSeconds, scaleMicrovolts, thresholdMicrovolts, spans, label }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [hoveredChannelIndex, setHoveredChannelIndex] = useState<number | null>(null);
   const pageStart = pageStartFor(time, pageSeconds, sample.durationSeconds);
   const page = useMemo<PlotPage>(
-    () => ({ sample, pageStart, pageSeconds, scaleMicrovolts, thresholdMicrovolts, spans }),
-    [sample, pageStart, pageSeconds, scaleMicrovolts, thresholdMicrovolts, spans],
+    () => ({ sample, pageStart, pageSeconds, scaleMicrovolts, thresholdMicrovolts, spans, hoveredChannelIndex }),
+    [sample, pageStart, pageSeconds, scaleMicrovolts, thresholdMicrovolts, spans, hoveredChannelIndex],
   );
   const latestPage = useRef(page);
   latestPage.current = page;
@@ -38,10 +39,15 @@ export default function SignalPlot({ sample, time, pageSeconds, scaleMicrovolts,
     return () => { sizeObserver?.disconnect(); themeObserver.disconnect(); };
   }, []);
 
+  const pointAt = (event: PointerEvent<HTMLCanvasElement>): void => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    setHoveredChannelIndex(rowAt(event.clientY - bounds.top, bounds.height, sample.channels.length));
+  };
+
   const fraction = Math.max(0, Math.min(1, (time - pageStart) / pageSeconds));
   return (
     <div className="monitor-plot-frame">
-      <canvas ref={canvasRef} className="monitor-plot" role="img" aria-label={label} />
+      <canvas ref={canvasRef} className="monitor-plot" role="img" aria-label={label} onPointerMove={pointAt} onPointerLeave={() => setHoveredChannelIndex(null)} />
       <span className="monitor-playhead" aria-hidden="true" style={{ left: `calc(${LABEL_GUTTER}px + (100% - ${LABEL_GUTTER}px) * ${fraction})` }} />
     </div>
   );

@@ -7,10 +7,12 @@ import { loadEngineBundle, loadReferenceData } from '@/lib/threat-model/__tests_
 import CommandPalette, { PALETTE_RESULT_LIMIT } from '../CommandPalette';
 import { FocusProvider } from '../FocusContext';
 import { MODE_IDS } from '../mode-registry';
-import { listPaletteCommands, searchPaletteCommands, type PaletteCommand } from '../palette-commands';
+import { findMatchRanges, listPaletteCommands, searchPaletteCommands, type PaletteCommand } from '../palette-commands';
+import { describeRoute } from '../route';
+import { DEVICE_ACTIONS } from '../shell-targets';
 import { MODE_VIEW_GROUPS } from '../view-registry';
 
-afterEach(cleanup);
+afterEach(() => { cleanup(); Reflect.deleteProperty(document, 'getAnimations'); });
 
 const bundle = loadEngineBundle();
 const { engineData } = bundle;
@@ -32,6 +34,13 @@ function renderPalette() {
     </FocusProvider>,
   );
   return { onRun, onClose, input: screen.getByRole('combobox') as HTMLInputElement };
+}
+
+function command(label: string, detail = 'Technique'): PaletteCommand {
+  return { kind: 'technique', key: `technique:${label}`, label, detail, techniqueId: label };
+}
+function labelsFor(list: readonly PaletteCommand[], query: string): string[] {
+  return searchPaletteCommands(list, query, PALETTE_RESULT_LIMIT).matches.map((match) => match.label);
 }
 
 describe('palette commands', () => {
@@ -60,6 +69,45 @@ describe('palette commands', () => {
     expect(result.matches).toHaveLength(Math.min(PALETTE_RESULT_LIMIT, commands.length));
     expect(result.matchCount).toBe(commands.length);
     expect(searchPaletteCommands(commands, 'zzzz-no-such-thing', PALETTE_RESULT_LIMIT)).toEqual({ matches: [], matchCount: 0 });
+  });
+
+  it('lists the shell\'s device actions, each saying where it leads in the registries\' own words', () => {
+    const actions = commands.filter((candidate) => candidate.kind === 'action');
+    expect(actions.map((action) => [action.label, action.detail])).toEqual(DEVICE_ACTIONS.map((action) => [action.label, describeRoute(action.target)]));
+    expect(searchPaletteCommands(commands, 'print', PALETTE_RESULT_LIMIT).matches).toContainEqual(expect.objectContaining({ kind: 'action', actionId: 'print-report' }));
+  });
+
+  it('ranks a match at the start of a word above one inside a word, and drops inside-word matches when a better one exists', () => {
+    const list = [command('Command hijacking'), command('Slow drift (phase space manipulation)'), command('Man-in-the-middle'), command('Manual override')];
+    // "man" begins "Man-in-the-middle", "Manual" and "manipulation"; in "Command" it sits inside the word.
+    expect(labelsFor(list, 'man')).toEqual(['Man-in-the-middle', 'Manual override', 'Slow drift (phase space manipulation)']);
+    expect(searchPaletteCommands(list, 'man', PALETTE_RESULT_LIMIT).matchCount).toBe(3);
+    // Both words must begin a word: only one name has "man" and "in" that way.
+    expect(labelsFor(list, 'man in')).toEqual(['Man-in-the-middle']);
+    // With nothing better, an inside-word match is still listed, so a fragment of an identifier finds its technique.
+    expect(labelsFor(list, 'jack')).toEqual(['Command hijacking']);
+    expect(labelsFor([command('Replay', 'QIF-T0004')], '0004')).toEqual(['Replay']);
+  });
+
+  it('puts an exact name first, then a leading match, then word starts, keeping the registry order within each', () => {
+    const list = [command('Signal replay attack'), command('Replay of stored signals'), command('Replay')];
+    expect(labelsFor(list, 'replay')).toEqual(['Replay', 'Replay of stored signals', 'Signal replay attack']);
+  });
+
+  it('finds on the real catalog what "man in" names, and nothing matched only inside words', () => {
+    const { matches } = searchPaletteCommands(commands, 'man in', PALETTE_RESULT_LIMIT);
+    expect(matches.length).toBeGreaterThan(0);
+    for (const match of matches) expect(`${match.label} ${match.detail}`.toLowerCase(), match.label).toMatch(/(^|[^a-z0-9])man.*|.*[^a-z0-9]man/);
+    expect(matches.map((match) => match.label)).not.toContain('Command hijacking');
+  });
+
+  it('reports the stretches of a label the query matched, merged and in order', () => {
+    expect(findMatchRanges('Man-in-the-middle', 'man in')).toEqual([{ start: 0, end: 3 }, { start: 4, end: 6 }]);
+    expect(findMatchRanges('Man-in-the-middle', 'IN man')).toEqual([{ start: 0, end: 3 }, { start: 4, end: 6 }]);
+    expect(findMatchRanges('Command hijacking', 'man')).toEqual([{ start: 3, end: 6 }]);
+    expect(findMatchRanges('Replay', 're repl')).toEqual([{ start: 0, end: 4 }]);
+    expect(findMatchRanges('Replay', 'QIF-T0004')).toEqual([]);
+    expect(findMatchRanges('Replay', '')).toEqual([]);
   });
 
   it('requires every word of the query', () => {
@@ -102,6 +150,50 @@ describe('CommandPalette', () => {
     expect(within(techniques).getAllByRole('option')[0].textContent).toContain(sampleTechnique.name);
     fireEvent.click(within(techniques).getAllByRole('option')[0]);
     expect(onRun).toHaveBeenCalledWith(expect.objectContaining({ kind: 'technique', techniqueId: sampleTechnique.id }));
+  });
+
+  it('draws what the query matched heavier, without changing the option\'s text', () => {
+    const { input } = renderPalette();
+    expect(document.querySelectorAll('.lab-palette-mark')).toHaveLength(0);
+    fireEvent.change(input, { target: { value: sampleTechnique.name.slice(0, 4) } });
+    const first = within(screen.getByRole('group', { name: 'Techniques' })).getAllByRole('option')[0];
+    const marks = [...first.querySelectorAll('mark.lab-palette-mark')].map((mark) => mark.textContent?.toLowerCase());
+    expect(marks).toContain(sampleTechnique.name.slice(0, 4).toLowerCase());
+    expect(first.textContent).toMatch(/QIF-T\d+$/);
+  });
+
+  it('groups the device actions under their own heading and runs one', () => {
+    const { onRun, input } = renderPalette();
+    fireEvent.change(input, { target: { value: 'edit device' } });
+    const actions = screen.getByRole('group', { name: 'Actions' });
+    fireEvent.click(within(actions).getByRole('option', { name: /Edit device/ }));
+    expect(onRun).toHaveBeenCalledWith(expect.objectContaining({ kind: 'action', actionId: 'edit-device' }));
+  });
+
+  it('leaves in one move: it takes no input, hands focus back at once, and reports when the move has ended', () => {
+    const onExited = vi.fn();
+    const opener = document.createElement('button');
+    document.body.append(opener);
+    opener.focus();
+    const tree = (isClosing: boolean) => (
+      <FocusProvider engineData={engineData} referenceData={referenceData} curatedChains={curatedChains}>
+        <CommandPalette onRun={() => undefined} onClose={() => undefined} isClosing={isClosing} onExited={onExited} />
+      </FocusProvider>
+    );
+    const view = render(tree(false));
+    const dialog = screen.getByRole('dialog', { name: 'Go to' });
+    expect(dialog.classList.contains('lab-float')).toBe(true);
+    fireEvent.animationEnd(dialog);
+    expect(onExited).not.toHaveBeenCalled();
+    view.rerender(tree(true));
+    expect(dialog.getAttribute('data-closing')).toBe('true');
+    expect(dialog.parentElement?.hasAttribute('inert')).toBe(true);
+    expect(document.activeElement).toBe(opener);
+    fireEvent.animationEnd(dialog.querySelector('input') as HTMLElement);
+    expect(onExited).not.toHaveBeenCalled();
+    fireEvent.animationEnd(dialog);
+    expect(onExited).toHaveBeenCalledTimes(1);
+    opener.remove();
   });
 
   it('groups the parts under the device\'s own name', () => {

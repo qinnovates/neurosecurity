@@ -18,6 +18,17 @@ export const SCOPE_TERM_LABELS: Readonly<Record<ScopeTerm, string>> = {
   not_assessed: 'Not assessed',
 };
 
+/**
+ * The same four terms for a narrow table column headed "On this device". Each is the opening
+ * words of the full label and nothing else, so the short form says nothing the full one does not.
+ */
+export const SCOPE_TERM_SHORT_LABELS: Readonly<Record<ScopeTerm, string>> = {
+  applies: 'Applies',
+  would_apply_if: 'Would apply if',
+  reviewed_outside: 'Reviewed, outside',
+  not_assessed: 'Not assessed',
+};
+
 /** The second term with its condition filled in, for one technique. */
 export function wouldApplyIfLabel(condition: string): string {
   return SCOPE_TERM_LABELS.would_apply_if.replace('(condition)', condition);

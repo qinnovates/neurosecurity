@@ -10,6 +10,17 @@ import { applyLens, countOpenRisks, type Lens, type LensContext, type LensCounts
 import type { SeverityCoverage } from '@/lib/threat-model/placement-coverage';
 import { THREAT_GOALS, type GoalCoverage, type RiskRow, type ThreatGoal } from '@/lib/threat-model/report-types';
 import { isRiskAddressed } from '@/lib/threat-model/risk-register';
+import type { PlacedEntryPath } from '@/lib/threat-model/reference-data-types';
+import type { TermCounts } from './scope-by-kind';
+
+/** The catalog's techniques of each kind a facet offers, under the four scope terms. */
+export interface ScopeByKind {
+  byGoal: Record<ThreatGoal, TermCounts>;
+  byEntryPath: Record<PlacedEntryPath, TermCounts>;
+  bySeverity: Record<CatalogSeverity, TermCounts>;
+  /** The whole catalog. */
+  all: TermCounts;
+}
 
 export interface EvidenceFacetCount {
   /** The tier's name as `describeEvidence` words it; this is the value the lens holds. */

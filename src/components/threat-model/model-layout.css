@@ -1,63 +1,108 @@
 /*
- * Model's screen. One column: identity, the diagram and the filters on the views they act
- * on, then the view. The device editor and the detail of one risk are drawers. Only kit
- * tokens are used; nothing here moves at rest.
+ * Model's screen. One column: the device's title, the diagram and the filters on the views
+ * they act on, then the view. The device editor and the detail of one risk are drawers. Only
+ * kit tokens are used; nothing here moves at rest, and no layout property is animated.
  */
 
-.model-frame { display: grid; gap: var(--lab-gap); min-width: 0; transition: padding-right var(--lab-dur-3) var(--lab-ease); }
-/* A grid child is as wide as its content unless told otherwise; wide tables scroll inside themselves instead. */
-.model-frame > *, .model-results > *, .model-stack > *, .model-overview > * { min-width: 0; }
-.model-results, .model-stack, .model-overview { display: grid; gap: var(--lab-gap); }
+/* A column of blocks, not a grid: a block that stays under the bars must be free to travel the whole column. */
+.model-frame { display: flex; flex-direction: column; gap: var(--lab-gap); min-width: 0; }
+/* A child is as wide as its content unless told otherwise; wide tables scroll inside themselves instead. */
+.model-frame > *, .model-results > *, .model-stack > *, .model-overview > *, .model-overview-top > * { min-width: 0; }
+.model-results, .model-stack, .model-overview { display: grid; gap: var(--lab-gap); align-content: start; }
 .model-results:focus { outline: none; }
 .model-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
-/* Identity: one slim line. */
+/* Identity: the screen's title, the device's facts on its baseline, and the way into the editor. */
 .model-header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem var(--lab-pad); }
-.model-header-name { margin: 0; font-size: var(--lab-text-title); font-weight: 600; }
+.model-header-name { line-height: 1.75rem; }
+.model-header-name .lab-soft { font-weight: 400; }
 .model-header-facts { display: flex; flex-wrap: wrap; gap: 0 var(--lab-gap); margin: 0 auto 0 0; padding: 0; list-style: none; }
 .model-header-facts li + li::before { content: "·"; margin-right: var(--lab-gap); }
 
-/* While a chain is chosen, the diagram it is drawn on stays in view above the lanes. The diagram styles itself. */
-@media (min-width: 721px) and (min-height: 700px) {
-  .model-canvas-slot[data-chain="true"] { position: sticky; top: var(--lab-topbar-height); z-index: 9; background: var(--lab-ground); padding-bottom: 0.25rem; }
+/* What stays under the bars while the rows scroll: the diagram a chain is drawn on, or the row of parts once the diagram has scrolled away. */
+@media (min-width: 720px) {
+  .model-pinned-strip { position: sticky; top: var(--lab-topbar-height); z-index: 9; }
+  /* The row of parts takes no room of its own, so the rows do not jump when it arrives. */
+  .model-pinned-strip { height: 0; margin-top: calc(-1 * var(--lab-gap)); }
+  .model-pinned-strip > .lab-diagram-strip { position: absolute; inset: 0 0 auto; padding: 0.375rem 0.75rem; background: var(--lab-panel-raised); border: 1px solid var(--lab-line); border-radius: 0 0 var(--lab-radius-m) var(--lab-radius-m); box-shadow: var(--lab-shadow-float); animation: model-strip-in var(--lab-dur-2) var(--lab-ease) 1 backwards; }
+}
+@media (min-width: 720px) and (min-height: 700px) {
+  .model-canvas-slot[data-chain="true"] { position: sticky; top: var(--lab-topbar-height); z-index: 9; }
+  .model-canvas-slot[data-chain="true"]::before { content: ""; position: absolute; inset: calc(-1 * var(--lab-gap)) 0 0; z-index: -1; background: var(--lab-ground); }
+}
+@keyframes model-strip-in { from { transform: translateY(-100%); } }
+@media (max-width: 719.98px) {
+  /* On a phone the folded bar carries the chain's playback controls, so it stays under the bars while the steps scroll. */
+  .model-canvas-slot[data-chain="true"]:has(.lab-diagram-panel[data-open="false"]) { position: sticky; top: var(--lab-topbar-height); z-index: 9; }
 }
 
 /* Filters: one bar, and the way back to everything. */
 .model-facets { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.5rem var(--lab-pad); }
 .model-facets > .lab-facets { flex: 1 1 auto; min-width: 0; }
 .model-part-select { width: auto; max-width: 13rem; }
+.model-chip-zero { color: var(--lab-ink-soft); }
+.lab-chip[aria-pressed="true"] .model-chip-zero { color: inherit; }
 
-/* The register. */
-.model-register-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; padding: var(--lab-gap) var(--lab-gap) 0.5rem; }
-.model-register .lab-table-wrap { max-height: 70vh; }
-.model-register-legend { padding: 0.5rem var(--lab-gap) var(--lab-gap); border-top: 1px solid var(--lab-line); }
-.model-decision { width: auto; min-height: 1.5rem; padding-block: 0; }
+/* The register: one bar, then rows of one height under a head that stays below the bars. */
+.model-register-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem var(--lab-gap); min-height: 2.75rem; padding: 0.5rem var(--lab-gap); }
+.model-register-count { margin: 0; }
+.model-lit-count { margin-left: auto; padding: 0.125rem 0.5rem; font-size: var(--lab-text-meta); font-weight: 600; color: var(--lab-ink); background: var(--lab-lit); border-radius: var(--lab-radius-s); box-shadow: inset 3px 0 0 var(--lab-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 50%; }
+.model-lit-count[data-shown="false"] { visibility: hidden; }
+.model-register-legend { display: grid; gap: 0.25rem; padding: 0.5rem var(--lab-gap) var(--lab-gap); }
+.model-register-legend p { margin: 0; }
+@media (min-width: 720px) {
+  /* The page scrolls the table; the count line above already says what the caption says. */
+  .model-register .lab-table-wrap { overflow: visible; }
+  .model-register .lab-table { table-layout: fixed; }
+  .model-register .lab-table caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .model-register .lab-table th { top: calc(var(--lab-topbar-height) + var(--model-pinned-height, 0px)); z-index: 2; }
+  .model-register .lab-table th:nth-child(1) { width: auto; }
+  .model-register .lab-table th:nth-child(2) { width: 6.5rem; }
+  .model-register .lab-table th:nth-child(3) { width: 22ch; }
+  .model-register .lab-table th:nth-child(4) { width: 8rem; }
+  .model-register .lab-table th:nth-child(5) { width: 8rem; }
+  .model-register .lab-table th:nth-child(6) { width: 11rem; }
+  .model-register .lab-table th:nth-child(7) { width: 9rem; }
+  .model-register .lab-table td { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+}
+@media (min-width: 720px) {
+  .model-top-rows .lab-table { table-layout: fixed; }
+  .model-top-rows .lab-table th:nth-child(2) { width: 6.5rem; }
+  .model-top-rows .lab-table th:nth-child(n + 4) { width: 7.5rem; }
+}
+.model-one-line { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 /* The first line of a technique carries its name in ink; the lines for its other parts repeat it quieter. */
 .model-threat[data-lead="true"] { font-weight: 600; }
 .model-threat[data-lead="false"] { color: var(--lab-ink-soft); }
+/* The decision reads as text until the row is pointed at or the control holds focus. */
+.model-decision { width: 100%; min-height: 1.5rem; padding-block: 0; background-color: transparent; border-color: transparent; transition: border-color var(--lab-dur-1) var(--lab-ease), background-color var(--lab-dur-1) var(--lab-ease); }
+tr:hover .model-decision, .lab-card .model-decision, .model-decision:focus-visible, .model-decision:hover { background-color: var(--lab-panel); border-color: var(--lab-control-line); }
+/* The opened row's mark grows once from nothing. */
+.model-register .lab-table tbody tr[aria-current="true"] td:first-child { animation: model-opened-row var(--lab-dur-1) var(--lab-ease) 1 backwards; }
+@keyframes model-opened-row { from { border-left-color: transparent; } }
 .model-risk-card { display: grid; gap: 0.25rem; justify-items: start; }
 .model-risk-card p { margin: 0; }
 .model-orphans { display: grid; gap: var(--lab-gap); margin: 0; padding: 0; list-style: none; }
 .model-orphans p { margin: 0; }
 
-/* The detail of one risk: the decision stays pinned while the rest scrolls under it. */
-.model-risk-body { display: grid; gap: 0.25rem; }
+/* The detail of one risk: the decision stays pinned while the rest scrolls under it. Nothing in it is wider than the drawer. */
+.model-risk-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.25rem; }
+.model-risk-body > * { min-width: 0; }
 .model-risk-body > h3 { margin: 0.625rem 0 0; }
 .model-risk-body p { margin: 0; }
-.model-risk-decision { position: sticky; top: calc(-1 * var(--lab-gap)); z-index: 1; display: grid; gap: 0.5rem; margin: calc(-1 * var(--lab-gap)) calc(-1 * var(--lab-pad)) 0.25rem; padding: var(--lab-gap) var(--lab-pad); background: var(--lab-panel-raised); border-bottom: 1px solid var(--lab-line); }
+.model-risk-decision { position: sticky; top: calc(-1 * var(--lab-gap)); z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.5rem; margin: calc(-1 * var(--lab-gap)) calc(-1 * var(--lab-pad)) 0.25rem; padding: var(--lab-gap) var(--lab-pad); background: var(--lab-panel-raised); border-bottom: 1px solid var(--lab-line); }
 .model-risk-decision textarea { resize: vertical; }
-.model-risk-facts { display: flex; flex-wrap: wrap; gap: 0.25rem var(--lab-pad); }
-.model-risk-vector { white-space: normal; word-break: break-all; }
+.model-risk-facts { display: flex; flex-wrap: wrap; gap: 0.25rem var(--lab-pad); overflow-wrap: anywhere; }
+.lab-id.model-risk-vector { white-space: normal; overflow-wrap: anywhere; }
 .model-risk-list { margin: 0.25rem 0 0; padding-left: 1.125rem; list-style: disc; }
-/* A drawer stops above the standing statements; the shell says where that is. */
-.model-frame .lab-drawer { bottom: var(--lab-drawer-bottom, 0px); }
-@media (max-width: 719.98px) {
-  /* The sheet's spare rem below the edge would lie over the statements, so it goes without. */
-  .model-frame .lab-drawer { padding-bottom: 0; }
-}
-/* Beside the register on a wide screen, the table gives the drawer its width so no column is covered. */
-@media (min-width: 1100px) {
+.model-risk-list li { overflow-wrap: anywhere; }
+/* Beside the register on a wide screen the table gives the drawer its width, at once; on a narrower one the drawer lies over it. */
+@media (min-width: 1600px) {
   .model-frame[data-drawer="true"] { padding-right: 27rem; }
+}
+/* The editor holds cards of several fields, so beside the work its drawer is wider than an inspector's. */
+@media (min-width: 720px) {
+  .model-frame .lab-drawer:has(.lab-editor) { width: min(36rem, calc(100vw + 1rem)); }
 }
 
 /* Techniques by part, and chain lanes: a first column that stays, one narrow column per part or connection. */
@@ -68,12 +113,14 @@
 /* A cell that stays put loses a collapsed border, so its rule is drawn inside it. */
 .model-matrix-wrap .lab-table thead th { border-bottom: 0; box-shadow: inset 0 -1px 0 var(--lab-control-line); }
 .model-matrix-wrap .lab-table tfoot :is(th, td) { font-weight: 600; border-bottom: 0; box-shadow: inset 0 1px 0 var(--lab-control-line); }
-.model-matrix-wrap > .lab-legend, .model-matrix-wrap > div { padding: 0.5rem var(--lab-gap); }
+.model-matrix-wrap > .lab-legend { padding: 0.5rem var(--lab-gap); }
+.model-matrix-wrap .lab-table caption { padding-top: 0.5rem; }
 .model-matrix-technique { display: inline-flex; align-items: center; gap: 0.5rem; }
 .model-matrix-title { overflow: hidden; max-width: 22rem; text-overflow: ellipsis; }
 .model-matrix-slot, .model-lane-slot { text-align: center; white-space: nowrap; }
 .model-matrix-cell { display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; padding: 0; color: inherit; background: none; border: 0; border-radius: var(--lab-radius-s); cursor: pointer; transition: background-color var(--lab-dur-1) var(--lab-ease); }
 .model-matrix-cell:hover { background-color: var(--lab-hover); }
+.model-matrix-cell:active { transform: scale(0.94); }
 .model-matrix-mark { display: block; }
 
 .model-lanes .model-lane-name { white-space: normal; }
@@ -85,24 +132,46 @@
 /* A step not yet reached is quieter by colour, never by opacity. */
 .model-lane-step[data-state="ahead"] { color: var(--lab-ink-soft); }
 .model-tag { padding: 0.0625rem 0.5rem; font-size: var(--lab-text-meta); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-s); white-space: nowrap; }
+/* The step being played: its edge grows once from the top, and it stops clear of the diagram that stays above it. */
+.model-chain-steps li { scroll-margin-top: calc(var(--lab-topbar-height) + 16rem); scroll-margin-bottom: var(--lab-pad); }
+.model-chain-steps li[data-state="now"] .lab-step { position: relative; border-left-color: transparent; }
+.model-chain-steps li[data-state="now"] .lab-step::before { content: ""; position: absolute; inset: 0 auto 0 -3px; width: 3px; background: var(--lab-flow); border-radius: 2px; transform-origin: top; animation: model-step-grow var(--lab-dur-2) var(--lab-ease) 1 backwards; }
+@keyframes model-step-grow { from { transform: scaleY(0); } }
 
-/* Overview. */
-.model-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--lab-gap); }
-.model-tiles > .lab-stat { padding: var(--lab-gap) var(--lab-pad); background: var(--lab-panel); border: 1px solid var(--lab-line); border-radius: var(--lab-radius-m); }
+/* Overview: the headline figures as one strip, then the diagram with the bars that share its highlight beside the coverage. */
+.model-summary { display: grid; }
+.model-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.model-tiles > .lab-stat { grid-template-columns: auto minmax(0, 1fr); align-content: center; align-items: baseline; column-gap: 0.75rem; row-gap: 0; min-height: 3.5rem; padding: 0.5rem var(--lab-pad); }
+.model-tiles > .lab-stat + .lab-stat { border-left: 1px solid var(--lab-line); }
+.model-tiles .lab-stat-figure { grid-row: 1 / span 2; font-size: var(--lab-text-screen); line-height: 1.75rem; }
+.model-tiles .lab-stat-figure[data-not-assessed="true"] { font-size: var(--lab-text-title); line-height: 1.75rem; }
+.model-tiles .lab-stat-label { grid-column: 2; color: var(--lab-ink); }
+.model-tiles .lab-stat-note { grid-column: 2; }
+.model-summary-notes { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.125rem var(--lab-pad); padding: 0.375rem var(--lab-pad); border-top: 1px solid var(--lab-line); }
 .model-units, .model-placement-line { margin: 0; }
+.model-placement-line { flex: 1 1 24rem; text-align: right; }
+/* Wide enough: the diagram and its bars in one column, the coverage beside both. Otherwise the diagram first, the two charts under it. */
+.model-overview-top { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "diagram diagram" "rows coverage"; gap: var(--lab-gap); align-items: start; }
+.model-overview-top[data-side="true"] { grid-template-columns: max-content minmax(0, 1fr); grid-template-rows: auto 1fr; grid-template-areas: "diagram coverage" "rows coverage"; }
+.model-overview-top > .model-canvas-slot { grid-area: diagram; }
+.model-overview-top > .model-overview-rows { grid-area: rows; }
+.model-overview-top > .model-overview-coverage { grid-area: coverage; }
 .model-overview-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--lab-gap); align-items: start; }
-.model-overview-grid .lab-panel-body { display: grid; gap: var(--lab-gap); overflow-x: auto; }
-.model-overview-grid .lab-panel-body p { margin: 0; }
+:is(.model-overview-grid, .model-overview-top) .lab-panel-body { display: grid; gap: var(--lab-gap); }
+:is(.model-overview-grid, .model-overview-top) .lab-panel-body p { margin: 0; }
 
 .model-coverage { width: 100%; border-collapse: collapse; }
 .model-coverage :is(th, td) { height: var(--lab-row); padding: 0 0.5rem 0 0; text-align: left; font-weight: 400; border-bottom: 1px solid var(--lab-line); }
 .model-coverage thead th { height: auto; padding-bottom: 0.375rem; font-size: var(--lab-text-meta); color: var(--lab-ink-soft); vertical-align: bottom; border-bottom-color: var(--lab-control-line); }
 .model-coverage tfoot :is(th, td) { font-weight: 600; border-bottom: 0; }
-.model-coverage .model-coverage-figure { text-align: right; padding-left: 0.5rem; }
-.model-coverage-bar { width: 38%; min-width: 6rem; }
+.model-coverage .model-coverage-figure { width: 3.75rem; text-align: right; padding-left: 0.25rem; }
+.model-coverage thead .model-coverage-figure .lab-splitbar-key, .model-coverage thead .model-coverage-figure .model-stackbar-key { display: block; margin: 0 0 0.25rem auto; }
+.model-coverage-bar { min-width: 6rem; }
 .model-coverage-bar .lab-splitbar { margin: 0; }
+/* Each bar is as long as its row's share of the largest row; it reaches its new length in one move. */
+.model-coverage-scale, .model-element-scale { display: block; min-width: 0.75rem; transition: width var(--lab-dur-2) var(--lab-ease); }
 
-.model-stackbar { display: flex; gap: 2px; height: 0.625rem; min-width: 3rem; border-radius: 3px; box-shadow: inset 0 0 0 1px var(--lab-line); overflow: hidden; }
+.model-stackbar { display: flex; gap: 2px; height: 0.75rem; border-radius: 3px; box-shadow: inset 0 0 0 1px var(--lab-control-line); overflow: hidden; }
 .model-stackbar-segment { flex: 0 0 0; min-width: 0; transition: flex-grow var(--lab-dur-2) var(--lab-ease); }
 .model-stackbar-segment[data-empty="true"] { display: none; }
 .model-stackbar-key { display: inline-block; width: 0.625rem; height: 0.625rem; border-radius: 2px; vertical-align: baseline; }
@@ -111,47 +180,89 @@
 :is(.model-stackbar-segment, .model-stackbar-key)[data-tone="medium"] { background: var(--lab-ink-soft); }
 :is(.model-stackbar-segment, .model-stackbar-key)[data-tone="light"] { background: var(--lab-control-line); }
 :is(.model-stackbar-segment, .model-stackbar-key)[data-tone="open"] { background: transparent; box-shadow: inset 0 0 0 1.5px var(--lab-control-line); }
+/* Rows with a decision: the empty rest of the track. */
+.model-stackbar-segment[data-tone="rest"] { background: transparent; }
 
 .model-element-lines { display: grid; margin: 0; padding: 0; list-style: none; }
-.model-element-line { display: grid; grid-template-columns: minmax(8rem, 2fr) minmax(4rem, 3fr) auto; align-items: center; gap: var(--lab-gap); width: 100%; min-height: var(--lab-row); padding: 0.125rem 0.5rem; font: inherit; color: inherit; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--lab-line); border-radius: var(--lab-radius-s); cursor: pointer; transition: background-color var(--lab-dur-1) var(--lab-ease); }
+.model-element-line { display: grid; grid-template-columns: minmax(7rem, 14rem) minmax(4rem, 1fr) 6.5rem; align-items: center; gap: var(--lab-gap); width: 100%; height: var(--lab-row); padding: 0 0.5rem; font: inherit; color: inherit; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--lab-line); cursor: pointer; transition: background-color var(--lab-dur-1) var(--lab-ease), box-shadow var(--lab-dur-1) var(--lab-ease); }
 .model-element-line:hover { background-color: var(--lab-hover); }
+.model-element-line[data-lit="true"] { background-color: var(--lab-lit); box-shadow: inset 3px 0 0 var(--lab-ink); }
+.model-element-label { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 /* A connection sits under the part it follows, set in a little. */
 .model-element-line[data-kind="connection"] .model-element-label { padding-left: var(--lab-gap); color: var(--lab-ink-soft); }
-.model-element-bar { display: inline-flex; align-items: center; gap: 0.375rem; }
-.model-element-bar .model-stackbar { flex: 1; }
-.model-element-figure { white-space: nowrap; }
+.model-element-bar { display: flex; align-items: center; gap: 0.375rem; min-width: 0; }
+.model-element-figure { text-align: right; white-space: nowrap; }
 
-/* Around the device. */
-.model-technique-list { display: grid; margin: 0.5rem 0 0; padding: 0; list-style: none; }
-.model-technique-list li { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem var(--lab-gap); min-height: var(--lab-row); border-bottom: 1px solid var(--lab-line); }
+/* Around the device: panels that fold to a title, a count and one line. */
+.model-fold-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--lab-gap); align-items: start; }
+.model-fold { display: grid; gap: 0.25rem; padding: var(--lab-gap) var(--lab-pad); }
+.model-fold > * { min-width: 0; }
+.model-fold-head, .model-fold-summary, .model-fold .lab-notice { margin: 0; }
+.model-fold-toggle { display: flex; align-items: center; gap: 0.5rem; width: 100%; padding: 0; font: inherit; color: inherit; text-align: left; background: none; border: 0; cursor: pointer; }
+.model-fold-count { margin-left: auto; }
+.model-fold-chevron, .lab-diagram-chevron { flex: none; fill: none; stroke: currentColor; stroke-width: 1.5px; stroke-linecap: round; stroke-linejoin: round; transition: transform var(--lab-dur-1) var(--lab-ease); }
+[aria-expanded="true"] > :is(.model-fold-chevron, .lab-diagram-chevron) { transform: rotate(90deg); }
+.model-fold[data-open="false"] .model-fold-summary { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.model-fold-body { margin: 0.25rem calc(-1 * var(--lab-pad)) calc(-1 * var(--lab-gap)); border-top: 1px solid var(--lab-line); }
+.model-fold-body .lab-table caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 .model-confirm p { margin: 0; }
 .model-confirm-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
 
+@media (min-width: 1200px) {
+  .model-fold-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 1100px) {
-  .model-tiles, .model-overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .model-overview-grid { grid-template-columns: minmax(0, 1fr); }
+  .model-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .model-tiles > .lab-stat:nth-child(odd) { border-left: 0; }
+  .model-tiles > .lab-stat:nth-child(n + 3) { border-top: 1px solid var(--lab-line); }
+  .model-overview-grid, .model-overview-top { grid-template-columns: minmax(0, 1fr); }
+  .model-overview-top { grid-template-areas: "diagram" "rows" "coverage"; }
 }
 @media (max-width: 719.98px) {
   /* A first column that stayed put would cover the cells on a narrow screen, so it scrolls with them. */
   .model-matrix-wrap .lab-table :is(tbody, tfoot) th { position: static; white-space: normal; }
   .model-matrix-title { max-width: 9rem; }
-  .model-tiles { grid-template-columns: minmax(0, 1fr); }
-  .model-element-line { grid-template-columns: minmax(0, 1fr) auto; }
+  .model-element-line { grid-template-columns: minmax(0, 1fr) auto; height: auto; min-height: var(--lab-row); padding-block: 0.25rem; }
   .model-element-line .model-element-label { grid-column: 1 / -1; }
+  .model-lit-count { display: none; }
+  /* The cards' own caption prints the count; the status line stays for a screen reader. */
+  .model-register-count { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .model-register-bar { min-height: 0; }
+  /* A figure over its label: two tiles abreast with room for the words. */
+  .model-tiles > .lab-stat { grid-template-columns: minmax(0, 1fr); padding: 0.5rem var(--lab-gap); }
+  .model-tiles .lab-stat-figure { grid-row: auto; }
+  .model-tiles .lab-stat-label, .model-tiles .lab-stat-note { grid-column: 1; }
+  .model-placement-line { text-align: left; }
+  /* The coverage tables keep every integer and give the bar what is left; if that is still too wide they scroll inside their panel. */
+  :is(.model-overview-grid, .model-overview-top) .lab-panel-body { overflow-x: auto; }
+  .model-coverage .model-coverage-figure { width: auto; }
+  .model-coverage-bar { min-width: 2.5rem; }
+}
+@media (pointer: coarse) {
+  /* A finger needs 44px; the mark inside stays its size. */
+  .model-matrix-cell { width: 2.75rem; height: 2.75rem; }
+  .model-lane-pick, .model-fold-toggle, .model-element-line { min-height: 2.75rem; }
+  .model-decision { min-height: 2.75rem; }
 }
 
 @media (forced-colors: active) {
   .model-stackbar-segment, .model-stackbar-key { forced-color-adjust: none; }
   .model-lane-step:is([data-state="reached"], [data-state="now"]) { background: CanvasText; color: Canvas; border-color: CanvasText; forced-color-adjust: none; }
+  .model-element-line[data-lit="true"], .model-lit-count { outline: 2px solid Highlight; outline-offset: -2px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .model-frame, .model-stackbar-segment, .model-lane-step, .model-matrix-cell, .model-element-line { transition: none; }
+  .model-stackbar-segment, .model-lane-step, .model-matrix-cell, .model-element-line, .model-decision, .model-coverage-scale, .model-element-scale, .model-fold-chevron, .lab-diagram-chevron { transition: none; }
+  .model-register .lab-table tbody tr[aria-current="true"] td:first-child, .model-chain-steps li[data-state="now"] .lab-step::before, .model-pinned-strip > .lab-diagram-strip { animation: none; }
+  .model-matrix-cell:active { transform: none; }
 }
 
 @media print {
   .model-no-print { display: none !important; }
   .model-frame { padding-right: 0 !important; }
-  .model-matrix-wrap, .model-register .lab-table-wrap { max-height: none; overflow: visible; }
+  .model-matrix-wrap { max-height: none; overflow: visible; }
+  /* Paper has no fold: every panel prints its content. */
+  .model-fold-body[hidden] { display: block !important; }
+  .model-fold[data-open="false"] .model-fold-summary { white-space: normal; }
 }

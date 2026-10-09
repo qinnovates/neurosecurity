@@ -8,7 +8,8 @@ import { countRowsByElement } from '@/lib/threat-model/register-counts';
 import { countOpenRisksByElement } from '@/lib/threat-model/risk-register';
 import { listTargetRegions } from '@/lib/threat-model/target-regions';
 import { PRESETS, engineData } from '@/lib/threat-model/__tests__/preset-reports';
-import DeviceCanvas from '../DeviceCanvas';
+import DeviceCanvas, { DIAGRAM_TOGGLE_LABEL, LEGEND_TOGGLE_LABEL } from '../DeviceCanvas';
+import { COMPACT_METRICS } from '../diagram/diagram-metrics';
 import DeviceMiniDiagram from '../diagram/DeviceMiniDiagram';
 import { ModelHighlightProvider, useModelHighlight } from '../model-highlight';
 import PartStrip from '../PartStrip';
@@ -24,8 +25,8 @@ const [, cortical] = PRESETS[1];
 describe('DeviceCanvas', () => {
   const baseProps = { lens: EMPTY_LENS, onLensChange: noop, selectedChain: null, chainPlayback: STILL, onClearChain: noop };
 
-  it.each(PRESETS)('with the props it took before, badges every part and connection of %s from the report', (_presetId, { model, report }) => {
-    const { container } = render(<DeviceCanvas report={report} {...baseProps} isEditorOpen={false} onToggleEditor={noop} />);
+  it.each(PRESETS)('badges every part and connection of %s from the report', (_presetId, { model, report }) => {
+    const { container } = render(<DeviceCanvas report={report} {...baseProps} />);
     const expected = countRowsByElement(model, report.riskRows);
     for (const given of expected) {
       const badge = container.querySelector(`:is(.lab-diagram-part, .lab-diagram-link)[data-element-id="${given.id}"] [data-badge]`);
@@ -33,7 +34,51 @@ describe('DeviceCanvas', () => {
       if (given.catalogRows > 0) expect(badge?.getAttribute('data-open')).toBe(String(given.openCatalogRows));
     }
     expect(container.querySelectorAll('[data-selected="true"], [aria-pressed="true"]')).toHaveLength(0);
-    expect(screen.getByRole('button', { name: 'Edit device' })).toBeTruthy();
+  });
+
+  it.each(PRESETS)('draws %s on the compact grid at the same type sizes: every part is the compact size and nothing is scaled', (_presetId, { report }) => {
+    const { container } = render(<DeviceCanvas report={report} {...baseProps} />);
+    const svg = container.querySelector('.lab-diagram-svg');
+    expect(svg?.getAttribute('viewBox')).toBe(`0 0 ${svg?.getAttribute('width')} ${svg?.getAttribute('height')}`);
+    const boxes = [...container.querySelectorAll('.lab-diagram-part > .lab-diagram-box')];
+    expect(boxes.length).toBe(report.model.components.length);
+    for (const box of boxes) {
+      expect(box.getAttribute('width')).toBe(String(COMPACT_METRICS.nodeWidth));
+      expect(box.getAttribute('height')).toBe(String(COMPACT_METRICS.nodeHeight));
+    }
+  });
+
+  it('keeps the legend and the sentence about the view behind "Legend", and remembers that it was opened', () => {
+    const { container } = render(<DeviceCanvas report={eeg.report} {...baseProps} />);
+    const legendToggle = screen.getByRole('button', { name: LEGEND_TOGGLE_LABEL });
+    expect(legendToggle.getAttribute('aria-expanded')).toBe('false');
+    expect(container.querySelector('.lab-diagram-legend')?.hasAttribute('hidden')).toBe(true);
+    expect(container.textContent).not.toContain('Select a part or a connection');
+    fireEvent.click(legendToggle);
+    expect(legendToggle.getAttribute('aria-expanded')).toBe('true');
+    expect(container.querySelector('.lab-diagram-legend')?.hasAttribute('hidden')).toBe(false);
+    expect(container.textContent).toContain('Select a part or a connection to narrow the rows to it');
+    expect(screen.getByRole('list', { name: 'Diagram legend' })).toBeTruthy();
+    expect(legendToggle.getAttribute('aria-controls')).toBe(container.querySelector('.lab-diagram-legend')?.id);
+  });
+
+  it('cannot be folded where no fold is offered, and where one is, folds to what stands in for the drawing', () => {
+    const onToggleOpen = vi.fn();
+    const { container, rerender } = render(<DeviceCanvas report={eeg.report} {...baseProps} />);
+    expect(screen.queryByRole('button', { name: DIAGRAM_TOGGLE_LABEL })).toBeNull();
+    rerender(<DeviceCanvas report={eeg.report} {...baseProps} isOpen onToggleOpen={onToggleOpen} folded={<span data-testid="stand-in" />} />);
+    const toggle = screen.getByRole('button', { name: DIAGRAM_TOGGLE_LABEL });
+    expect(toggle.getAttribute('aria-expanded')).toBe('true');
+    expect(screen.queryByTestId('stand-in')).toBeNull();
+    fireEvent.click(toggle);
+    expect(onToggleOpen).toHaveBeenCalledOnce();
+    rerender(<DeviceCanvas report={eeg.report} {...baseProps} isOpen={false} onToggleOpen={onToggleOpen} folded={<span data-testid="stand-in" />} />);
+    expect(screen.getByRole('button', { name: DIAGRAM_TOGGLE_LABEL }).getAttribute('aria-expanded')).toBe('false');
+    expect(container.querySelector('.lab-diagram-svg')).toBeNull();
+    expect(screen.getByTestId('stand-in')).toBeTruthy();
+    // Folded, there is no drawing to choose a view of or to explain.
+    expect(screen.queryByRole('radiogroup', { name: 'Architecture view' })).toBeNull();
+    expect(screen.queryByRole('button', { name: LEGEND_TOGGLE_LABEL })).toBeNull();
   });
 
   it('draws the counts it is given through elementCounts, and keeps "not assessed" from the whole register', () => {
@@ -44,7 +89,6 @@ describe('DeviceCanvas', () => {
     const unplaced = countRowsByElement(model, report.riskRows).filter((counts) => counts.catalogRows === 0).length;
     expect(kinds.filter((kind) => kind === 'not-assessed')).toHaveLength(unplaced);
     expect(kinds.filter((kind) => kind === 'split')).toHaveLength(given.length - unplaced);
-    expect(screen.queryByRole('button', { name: 'Edit device' })).toBeNull();
   });
 
   it('selects a part into the lens, and selecting it again shows the whole device', () => {
@@ -80,8 +124,27 @@ describe('DeviceCanvas', () => {
     const chain = report.chainResult.chains[0];
     const { container } = render(<DeviceCanvas report={report} {...baseProps} selectedChain={chain} chainPlayback={{ ...STILL, reached: chain.steps.length }} />);
     expect(screen.getByText('Generated hypothesis')).toBeTruthy();
-    expect(container.textContent).toContain('that is not evidence the attack has been carried out');
     expect(new Set([...container.querySelectorAll('[data-step]')].map((mark) => mark.getAttribute('data-step')))).toEqual(new Set(['reached']));
+    fireEvent.click(screen.getByRole('button', { name: LEGEND_TOGGLE_LABEL }));
+    expect(container.textContent).toContain('that is not evidence the attack has been carried out');
+  });
+
+  it('carries the chain\'s playback controls in its own bar, beside the label and the chain\'s name, in place of the view control', () => {
+    const { report } = cortical;
+    const chain = report.chainResult.chains[0];
+    const play = vi.fn();
+    const onClearChain = vi.fn();
+    const { container } = render(<DeviceCanvas report={report} {...baseProps} selectedChain={chain} chainPlayback={{ ...STILL, play }} onClearChain={onClearChain} />);
+    const bar = container.querySelector('.lab-diagram-bar');
+    if (!(bar instanceof HTMLElement)) throw new Error('test setup: the diagram has no bar');
+    const transport = within(bar).getByRole('group', { name: 'Chain playback' });
+    fireEvent.click(within(transport).getByRole('button', { name: 'Play' }));
+    expect(play).toHaveBeenCalledOnce();
+    expect(within(transport).getByRole('status').textContent).toBe(`Step 0 of ${chain.steps.length}`);
+    expect(within(bar).getByText(chain.chain_name)).toBeTruthy();
+    expect(within(bar).queryByRole('radiogroup', { name: 'Architecture view' })).toBeNull();
+    fireEvent.click(within(bar).getByRole('button', { name: 'Clear' }));
+    expect(onClearChain).toHaveBeenCalledOnce();
   });
 });
 
@@ -96,6 +159,21 @@ describe('DeviceMiniDiagram', () => {
     expect(container.querySelectorAll('text')).toHaveLength(0);
     expect(container.querySelectorAll('[tabindex], [role="button"]')).toHaveLength(0);
     expect(container.querySelectorAll('.lab-diagram-mini-part[data-tissue-contact="true"]')).toHaveLength(1);
+  });
+
+  it('draws a part at one size on every card, in a slot of one height, so two devices compare', () => {
+    const sizes = PRESETS.map(([, { model }]) => {
+      const { container } = render(<DeviceMiniDiagram model={model} />);
+      const slot = container.querySelector('.lab-diagram-mini-slot');
+      expect(slot?.querySelector('svg.lab-diagram-mini')).not.toBeNull();
+      const svg = container.querySelector('svg');
+      // One CSS pixel per unit: the picture is as wide as its own layout, not as wide as the card.
+      expect(svg?.getAttribute('viewBox')).toBe(`0 0 ${svg?.getAttribute('width')} ${svg?.getAttribute('height')}`);
+      const partSizes = [...container.querySelectorAll('.lab-diagram-mini-part > rect:first-child')].map((rect) => `${rect.getAttribute('width')}x${rect.getAttribute('height')}`);
+      cleanup();
+      return new Set(partSizes);
+    });
+    expect(new Set(sizes.flatMap((set) => [...set])).size).toBe(1);
   });
 });
 

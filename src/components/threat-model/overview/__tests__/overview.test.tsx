@@ -3,25 +3,39 @@ import { describe, it, expect, afterEach, vi } from 'vitest';
 import { render, screen, cleanup, fireEvent, within } from '@testing-library/react';
 import { CATALOG_SEVERITIES } from '@/lib/threat-model/catalog-types';
 import { RISK_STATUSES, type DeviceModel } from '@/lib/threat-model/device-model';
-import { SCOPE_TERMS, SCOPE_TERM_LABELS } from '@/lib/threat-model/lab-terms';
+import { describePlacementDrafting, summariseHeadlineFigures } from '@/lib/threat-model/headline-figures';
+import { GOAL_BY_MODE, SCOPE_TERMS, SCOPE_TERM_LABELS } from '@/lib/threat-model/lab-terms';
 import { summariseCoverageBySeverity } from '@/lib/threat-model/placement-coverage';
 import { countRowsByElement, describeRegisterUnits, summariseRegisterUnits } from '@/lib/threat-model/register-counts';
-import { THREAT_GOALS, type RiskRow } from '@/lib/threat-model/report-types';
+import { THREAT_GOALS, type RiskRow, type ThreatGoal } from '@/lib/threat-model/report-types';
 import { isRiskAddressed } from '@/lib/threat-model/risk-register';
-import { summariseScope } from '@/lib/threat-model/scope-statement';
+import { summariseScope, type ScopeStatement } from '@/lib/threat-model/scope-statement';
 import { PRESETS, engineData, referenceData, reportFor, type Preset } from '@/lib/threat-model/__tests__/preset-reports';
 import { findCoverageGaps } from '../../frame/facet-counts';
+import { buildScopeByKind } from '../../frame/scope-by-kind';
 import { ModelHighlightProvider } from '../../model-highlight';
 import { RISK_STATUS_LABELS } from '../../risk-status-labels';
+import CoverageBySeverity, { shareOfLongest } from '../CoverageBySeverity';
 import OpenRowsByElement from '../OpenRowsByElement';
 import { listTopOpenRows, sumDecisions, summariseOverview } from '../overview-figures';
-import OverviewView, { TOP_ROW_LIMIT } from '../OverviewView';
+import OverviewView, { TOP_ROW_LIMIT, fitsSideBySide } from '../OverviewView';
 import StackBar from '../StackBar';
 
 afterEach(cleanup);
 
 function currentRowsOf(preset: Preset): RiskRow[] {
   return preset.report.riskRows.filter((row) => row.catalogState === 'current');
+}
+
+/** Counted here from the scope lists alone: how many techniques of one effect stand under each term. */
+function countGoal(scope: ScopeStatement, goal: ThreatGoal): { decided: number; all: number; wouldApply: number; outside: number; notAssessed: number } {
+  const goalOf = (techniqueId: string): ThreatGoal | null => {
+    const mode = engineData.techniques.find((technique) => technique.id === techniqueId)?.mode ?? null;
+    return mode === null ? null : GOAL_BY_MODE[mode];
+  };
+  const count = (entries: readonly { techniqueId: string }[]): number => entries.filter((entry) => goalOf(entry.techniqueId) === goal).length;
+  const [applies, wouldApply, outside, notAssessed] = [count(scope.applies), count(scope.wouldApplyIf), count(scope.reviewedOutside), count(scope.notAssessed)];
+  return { decided: applies + wouldApply + outside, all: applies + wouldApply + outside + notAssessed, wouldApply, outside, notAssessed };
 }
 
 function renderOverview(preset: Preset, rows: readonly RiskRow[] = currentRowsOf(preset)) {
@@ -31,7 +45,8 @@ function renderOverview(preset: Preset, rows: readonly RiskRow[] = currentRowsOf
   const view = render(
     <ModelHighlightProvider>
       <OverviewView
-        model={preset.model} rows={rows} scope={scope} severityCoverage={severityCoverage} goalCoverage={preset.report.goalCoverage}
+        model={preset.model} report={preset.report} rows={rows} scope={scope} severityCoverage={severityCoverage}
+        scopeByKind={buildScopeByKind(scope, engineData.techniques, referenceData.placementRules.placements, severityCoverage)}
         gaps={findCoverageGaps(preset.report.goalCoverage, severityCoverage)} placementTable={referenceData.placementTable}
         diagram={<div data-testid="diagram" />} {...handlers}
       />
@@ -88,6 +103,9 @@ describe('OverviewView', () => {
     expect(tiles.getByText('Open rows')).toBeTruthy();
     expect(screen.getByText(describeRegisterUnits(summariseRegisterUnits(preset.model, rows)))).toBeTruthy();
     expect(screen.getByTestId('diagram')).toBeTruthy();
+    // The tiles are the figures the Report prints too: one function, one set of labels.
+    const shared = summariseHeadlineFigures(preset.report, summariseCoverageBySeverity(engineData.techniques, scope));
+    shared.forEach((figure, index) => expect(tileText[index]).toContain(`${figure.figure}${figure.unit}${figure.label}`));
   });
 
   it('prints every integer of coverage by catalog severity, with a hatch for "Not assessed"', () => {
@@ -102,24 +120,56 @@ describe('OverviewView', () => {
     });
     const totals = within(bodyRows[CATALOG_SEVERITIES.length]).getAllByRole('cell').slice(1).map((cell) => Number(cell.textContent));
     expect(totals).toEqual([...SCOPE_TERMS.map((term) => severityCoverage.totalsByTerm[term]), engineData.techniques.length]);
-    expect(within(table).getAllByRole('columnheader').map((header) => header.textContent?.trim())).toEqual(
-      ['Catalog severity', 'Share', ...SCOPE_TERMS.map((term) => SCOPE_TERM_LABELS[term]), 'Total'],
-    );
-    expect(table.querySelectorAll('.lab-splitbar-segment[data-kind="hatch"]')).toHaveLength(CATALOG_SEVERITIES.length + 1);
+    // Each head shows the term's short form and carries its full name for a screen reader and as a tooltip.
+    const heads = within(table).getAllByRole('columnheader');
+    SCOPE_TERMS.forEach((term, index) => {
+      expect(heads[index + 2].textContent).toContain(SCOPE_TERM_LABELS[term]);
+      expect(heads[index + 2].getAttribute('title')).toBe(SCOPE_TERM_LABELS[term]);
+    });
+    expect(table.querySelectorAll('.lab-splitbar-segment[data-kind="hatch"]')).toHaveLength(CATALOG_SEVERITIES.length);
+  });
+
+  it('draws the coverage bars on one scale: each as long as its row\'s share of the largest row, and no bar for the total', () => {
+    const [, preset] = PRESETS[0];
+    const scope = summariseScope(preset.model, engineData, referenceData);
+    const coverage = summariseCoverageBySeverity(engineData.techniques, scope);
+    const { container } = render(<CoverageBySeverity coverage={coverage} />);
+    const longest = Math.max(...coverage.rows.map((row) => row.total));
+    const scales = Array.from(container.querySelectorAll<HTMLElement>('.model-coverage-scale'));
+    expect(scales).toHaveLength(coverage.rows.length);
+    scales.forEach((scale, index) => expect(parseFloat(scale.style.width)).toBeCloseTo((coverage.rows[index].total / longest) * 100, 6));
+    expect(scales.filter((scale) => scale.style.width === '100%')).toHaveLength(coverage.rows.filter((row) => row.total === longest).length);
+    expect(container.querySelector('tfoot .lab-splitbar')).toBeNull();
+    expect(shareOfLongest(0, 0)).toBe('0%');
   });
 
   it('says how far placement has got for each effect that is incomplete, and that no row is not the same as no risk', () => {
     const [, preset] = PRESETS[0];
     renderOverview(preset);
     const rows = currentRowsOf(preset);
+    const scope = summariseScope(preset.model, engineData, referenceData);
+    let zeroRowNotes = 0;
     for (const goal of THREAT_GOALS) {
-      const coverage = preset.report.goalCoverage[goal];
-      const sentence = new RegExp(`${coverage.placedTechniques} of the catalog.s ${coverage.catalogTechniques} techniques of this kind`);
-      expect(screen.queryAllByText(sentence).length > 0).toBe(coverage.isIncomplete);
+      const counted = countGoal(scope, goal);
       const hasRow = rows.some((row) => row.source === 'catalog' && row.goal === goal);
       const label = { read: 'Read', change: 'Change', deny: 'Deny' }[goal];
-      expect(screen.queryByText(`${label} is not assessed, which is not the same as no risk.`) !== null).toBe(coverage.isIncomplete && !hasRow);
+      const isIncomplete = counted.notAssessed > 0;
+      // A decision is a placement or a reviewed exclusion: both are counted, so the sentence agrees with the scope lists.
+      const sentence = new RegExp(`${counted.decided} of the catalog.s ${counted.all} techniques of this kind`);
+      const hasNoRowWithDecisions = isIncomplete && !hasRow && counted.decided > 0;
+      expect(screen.queryAllByText(sentence).length > 0).toBe(isIncomplete && !hasNoRowWithDecisions);
+      expect(screen.queryByText(`${label} is not assessed, which is not the same as no risk.`) !== null).toBe(isIncomplete && !hasRow && counted.decided === 0);
+      if (hasNoRowWithDecisions) {
+        zeroRowNotes += 1;
+        const terms = [
+          ...(counted.wouldApply > 0 ? [`${counted.wouldApply} would apply if (condition)`] : []),
+          ...(counted.outside > 0 ? [`${counted.outside} reviewed, outside the device`] : []),
+          `${counted.notAssessed} not assessed`,
+        ].join('; ');
+        expect(screen.getByText((_text, node) => node?.tagName === 'P' && node.textContent === `${label}: none on this device. ${terms}.`)).toBeTruthy();
+      }
     }
+    expect(zeroRowNotes, 'test setup: the example device has an effect with decisions and no row').toBeGreaterThan(0);
   });
 
   it('opens the rows of a part from its bar, a row from the top list, and the scope lists from their link', () => {
@@ -156,21 +206,45 @@ describe('OverviewView', () => {
     );
   });
 
-  it('counts the placements drafted with an AI assistant and how many the author has reviewed', () => {
+  it('counts every placement decision, placed and left outside, and says the file records no review while it records none', () => {
     const [, preset] = PRESETS[0];
     renderOverview(preset);
-    const { placementCount, reviewedPlacementCount } = referenceData.placementTable;
-    expect(screen.getByText((_text, node) => node?.textContent === `${placementCount} placements drafted with an AI assistant; ${reviewedPlacementCount} reviewed by the author.`)).toBeTruthy();
+    const { placementCount, notPlacedCount, reviewedPlacementCount } = referenceData.placementTable;
+    const { placements, notPlaced } = referenceData.placementRules;
+    expect(placementCount).toBe(Object.keys(placements).length);
+    expect(notPlacedCount).toBe(Object.keys(notPlaced).length);
+    expect(reviewedPlacementCount).toBe(0);
+    expect(screen.getByText(
+      `${placementCount + notPlacedCount} placement decisions (${placementCount} placed, ${notPlacedCount} reviewed, outside the device) drafted with an AI assistant; the placement file records no review yet.`,
+    )).toBeTruthy();
+    expect(document.body.textContent).not.toContain('reviewed by the author');
   });
 
-  it('never looks clean for a device with no catalog row: the tiles and the bars say "Not assessed"', () => {
+  it('prints the count of reviews in place of the last clause only once it is above zero', () => {
+    const table = { placementCount: 28, notPlacedCount: 44, reviewedPlacementCount: 3 };
+    expect(describePlacementDrafting(table)).toBe('72 placement decisions (28 placed, 44 reviewed, outside the device) drafted with an AI assistant; 3 reviewed.');
+    expect(describePlacementDrafting({ ...table, reviewedPlacementCount: 0 })).toMatch(/the placement file records no review yet\.$/);
+  });
+
+  it('puts the diagram and the coverage side by side only when both fit, and stacks them before the screen is measured', () => {
+    expect(fitsSideBySide(null, 800)).toBe(false);
+    expect(fitsSideBySide(1408, 832)).toBe(true);
+    expect(fitsSideBySide(1248, 832)).toBe(false);
+    expect(fitsSideBySide(1408, 1300)).toBe(false);
+  });
+
+  it('never looks clean for a device with no catalog row: where placement decisions exist the tiles say "none on this device", never a bare zero and never "Not assessed"', () => {
     const [, preset] = PRESETS[0];
     const bare: DeviceModel = { ...preset.model, components: [], links: [] };
     const bareReport = reportFor(bare);
-    renderOverview({ model: bare, report: bareReport }, bareReport.riskRows);
+    const { scope } = renderOverview({ model: bare, report: bareReport }, bareReport.riskRows);
+    expect(scope.applies).toHaveLength(0);
+    expect(scope.wouldApplyIf.length + scope.reviewedOutside.length).toBeGreaterThan(0);
     const tiles = screen.getByRole('region', { name: 'This device at a glance' });
-    expect(within(tiles).getAllByText('Not assessed').length).toBeGreaterThanOrEqual(2);
-    expect(tiles.textContent).not.toMatch(/(^|\D)0of 0/);
+    // Open rows, critical and high, and techniques that apply: each has nothing to count on this device.
+    expect(within(tiles).getAllByText('none on this device')).toHaveLength(3);
+    expect(within(tiles).queryByText('Not assessed')).toBeNull();
+    expect(tiles.textContent).not.toMatch(/(^|\D)0of \d/);
     expect(within(screen.getByRole('region', { name: 'Top open rows' })).getByRole('status').textContent).toContain('No techniques are placed on this model.');
   });
 });
@@ -188,6 +262,22 @@ describe('OpenRowsByElement', () => {
     counts.forEach((element, index) => {
       if (element.catalogRows === 0) expect(lines[index].textContent).toBe(`${element.label} Not assessed`);
       else expect(lines[index].textContent).toBe(`${element.label}${element.openCatalogRows} open of ${element.catalogRows}`);
+    });
+  });
+
+  it('draws every bar on one scale, so the lines rank by length, and leaves the rows with a decision as empty track', () => {
+    const [, preset] = PRESETS[0];
+    const rows = currentRowsOf(preset).map((row, index): RiskRow => (index % 4 === 0 ? { ...row, status: 'mitigated' } : row));
+    const counts = countRowsByElement(preset.model, rows).filter((element) => element.catalogRows > 0);
+    const { container } = render(<ModelHighlightProvider><OpenRowsByElement elementCounts={counts} isCoverageIncomplete onSelectElement={() => undefined} /></ModelHighlightProvider>);
+    const mostRows = Math.max(...counts.map((element) => element.catalogRows));
+    const scales = Array.from(container.querySelectorAll<HTMLElement>('.model-element-scale'));
+    expect(scales).toHaveLength(counts.length);
+    expect(new Set(counts.map((element) => element.catalogRows)).size).toBeGreaterThan(1);
+    scales.forEach((scale, index) => {
+      expect(parseFloat(scale.style.width)).toBeCloseTo((counts[index].catalogRows / mostRows) * 100, 6);
+      const rest = scale.querySelector<HTMLElement>('.model-stackbar-segment[data-tone="rest"]');
+      expect(rest?.style.flexGrow).toBe(String(counts[index].catalogRows - counts[index].openCatalogRows));
     });
   });
 });

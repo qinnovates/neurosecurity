@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import DataTable from '@/components/lab-kit/DataTable';
+import DataTable, { type DataTableColumn } from '@/components/lab-kit/DataTable';
 import EmptyState from '@/components/lab-kit/EmptyState';
 import type { QueryResult } from '@/lib/kql-engine';
 import { nearestNames } from '@/lib/threat-model/nearest-names';
@@ -16,6 +16,8 @@ interface Props {
 const MAX_ROWS_SHOWN = 200;
 const UNKNOWN_TABLE_PATTERN = /^Unknown table "([^"]+)"/;
 const ERROR_TITLE = 'The query did not run';
+/** The count is printed once, in the status line above the table. */
+const RESULT_CAPTION = 'Result rows';
 
 /** For an unknown table, the nearest real names; for anything else, nothing beyond the engine's own words. */
 function suggestTables(error: string, tableNames: readonly string[]): string | null {
@@ -38,6 +40,23 @@ export default function QueryResultView({ result, tableNames, techniqueIds, onOp
     [columnNames, result, techniqueIds, onOpenTechnique],
   );
 
+  return (
+    <>
+      {/* The one live region: it stays mounted and holds the row count alone, so a run announces the count and not the table. */}
+      <p className="query-count lab-label" role="status">{result.error === null ? describeRowCount(result.rows.length, shown.length) : ''}</p>
+      <ResultBody result={result} tableNames={tableNames} shown={shown} columns={columns} />
+    </>
+  );
+}
+
+interface BodyProps {
+  result: QueryResult;
+  tableNames: readonly string[];
+  shown: readonly ResultRow[];
+  columns: readonly DataTableColumn<ResultRow>[];
+}
+
+function ResultBody({ result, tableNames, shown, columns }: BodyProps) {
   if (result.error !== null) {
     const suggestion = suggestTables(result.error, tableNames);
     return (
@@ -53,10 +72,7 @@ export default function QueryResultView({ result, tableNames, techniqueIds, onOp
   }
   return (
     <div className="query-result">
-      <DataTable
-        caption={describeRowCount(result.rows.length, shown.length)} columns={columns} rows={shown} rowKey={(row) => row.key}
-        emptyMessage="The query ran and no row matches it."
-      />
+      <DataTable caption={RESULT_CAPTION} columns={columns} rows={shown} rowKey={(row) => row.key} emptyMessage="The query ran and no row matches it." />
     </div>
   );
 }

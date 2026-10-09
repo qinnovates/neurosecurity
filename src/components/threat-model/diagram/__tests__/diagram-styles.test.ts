@@ -38,9 +38,30 @@ describe('the diagram stylesheet', () => {
     for (const { rule, value } of declarationsOf('animation-iteration-count')) expect(value, rule.selector).toMatch(/^\d+$/);
   });
 
-  it('animates nothing but the one flow pass', () => {
+  const ANIMATED = ['.lab-diagram-step[data-step="now"]', '.lab-diagram-part[data-entered="true"]', '.lab-diagram-pass'];
+
+  it('animates three things, each once and each in answer to the reader or an edit: the step just reached, a part an edit added, and the flow pass', () => {
     const animated = rules.filter((rule) => rule.declarations.some((declaration) => declaration.property === 'animation' && declaration.value !== 'none'));
-    expect(animated.map((rule) => rule.selector)).toEqual(['.lab-diagram-pass']);
+    expect(animated.map((rule) => rule.selector)).toEqual(ANIMATED);
+  });
+
+  it('stops every one of them for a reader who asked for less motion', () => {
+    const calmed = rules
+      .filter((rule) => rule.context.includes('@media (prefers-reduced-motion: reduce)') && rule.declarations.some((declaration) => declaration.property === 'animation' && declaration.value === 'none'))
+      .flatMap((rule) => splitSelectors(rule.selector));
+    for (const selector of ANIMATED) expect(calmed, selector).toContain(selector);
+  });
+
+  it('never scales the drawing: the fit to a narrow place is the list form, so no rule shrinks the svg', () => {
+    const svgRules = rules.filter((rule) => !rule.context.includes('@media print') && splitSelectors(rule.selector).includes('.lab-diagram-svg'));
+    for (const rule of svgRules) expect(rule.declarations.some((declaration) => declaration.property === 'max-width' && declaration.value !== 'none'), rule.selector).toBe(false);
+  });
+
+  it('lights a part with the lit token and tints a zone with the zone token, each apart from plain hover', () => {
+    const valuesOf = (selectorPart: string): string => rules.filter((rule) => rule.selector.includes(selectorPart)).flatMap((rule) => rule.declarations.map((declaration) => declaration.value)).join(' ');
+    expect(valuesOf('.lab-diagram-zone rect')).toContain('var(--lab-zone)');
+    expect(valuesOf('.lab-diagram-row[data-lit="true"]')).toContain('var(--lab-lit)');
+    expect(valuesOf('.lab-diagram-zone rect')).not.toContain('var(--lab-hover)');
   });
 
   it('removes the flow pass for a reader who asked for less motion, and on paper', () => {

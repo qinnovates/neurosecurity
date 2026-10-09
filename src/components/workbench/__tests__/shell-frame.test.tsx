@@ -4,9 +4,12 @@
  * shell itself breaks: routing, the reader's place, the standing statements, the keyboard path.
  */
 import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest';
-import { render, screen, cleanup, fireEvent, waitFor, within } from '@testing-library/react';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { act, render, screen, cleanup, fireEvent, waitFor, within } from '@testing-library/react';
 import { loadTaraChains } from '@/components/atlas/load-tara-chains';
 import { loadEngineBundle, loadReferenceData } from '@/lib/threat-model/__tests__/load-test-data';
+import { EDIT_DEVICE_TARGET } from '../shell-targets';
 import { STANDING_STATEMENTS } from '../StandingLine';
 import { installMemoryLocalStorage } from './memory-storage';
 import { titleFor } from '../route';
@@ -129,6 +132,117 @@ describe('address', () => {
   });
 });
 
+describe('focus after the screen changes', () => {
+  it('moves focus to the results when the control that changed the view is gone with the old screen', async () => {
+    await openLab('#model');
+    const link = screen.getByRole('button', { name: 'Open the risks from the screen' });
+    link.focus();
+    fireEvent.click(link);
+    await expectView('risks');
+    expect(screen.queryByRole('button', { name: 'Open the risks from the screen' })).toBeNull();
+    expect(document.activeElement?.id).toBe('lab-results');
+  });
+
+  it('leaves focus on a view tab or mode button, which is still on the page', async () => {
+    await openLab('#model');
+    const tab = screen.getByRole('button', { name: 'Risks' });
+    tab.focus();
+    fireEvent.click(tab);
+    await expectView('risks');
+    expect(document.activeElement).toBe(tab);
+  });
+
+  it('does not take focus on the first screen of a visit, so "Skip to results" stays the first stop', async () => {
+    await openLab('#model/risks');
+    expect(document.activeElement).toBe(document.body);
+  });
+});
+
+describe('the device editor and navigation', () => {
+  it('closes the editor when the reader moves to another screen by any route', async () => {
+    await openLab('#model');
+    fireEvent.click(screen.getByRole('button', { name: 'Open the editor here' }));
+    expect(screen.getByTestId('stub-editor').textContent).toBe('editor open');
+    window.location.hash = '#model/risks';
+    await expectView('risks');
+    expect(screen.getByTestId('stub-editor').textContent).toBe('editor closed');
+    fireEvent.click(screen.getByRole('button', { name: 'Open the editor here' }));
+    pressMode('Explore');
+    await expectView(defaultViewId('explore'));
+    expect(screen.getByTestId('stub-editor').textContent).toBe('editor closed');
+  });
+
+  it('keeps the editor open through the one change of screen made to open it, from the device menu', async () => {
+    await openLab('#explore');
+    fireEvent.click(screen.getByRole('button', { name: /Device in focus/ }));
+    fireEvent.click(screen.getByRole('button', { name: 'Edit device' }));
+    await expectView(EDIT_DEVICE_TARGET.viewId);
+    expect(screen.getByTestId('stub-editor').textContent).toBe('editor open');
+    pressMode('Query');
+    await expectView(defaultViewId('query'));
+    expect(screen.getByTestId('stub-editor').textContent).toBe('editor closed');
+  });
+
+  it('opens the editor in place when the reader is already on its screen, and still closes it on the next move', async () => {
+    await openLab(`#${EDIT_DEVICE_TARGET.modeId}/${EDIT_DEVICE_TARGET.viewId}`);
+    fireEvent.click(screen.getByRole('button', { name: /Device in focus/ }));
+    fireEvent.click(screen.getByRole('button', { name: 'Edit device' }));
+    expect(screen.getByTestId('stub-editor').textContent).toBe('editor open');
+    fireEvent.click(screen.getByRole('button', { name: 'Chains' }));
+    await expectView('chains');
+    expect(screen.getByTestId('stub-editor').textContent).toBe('editor closed');
+  });
+});
+
+describe('the device chip by mode', () => {
+  it('shows the glyph and name only in Model, where the screen states the facts, and the facts elsewhere', async () => {
+    const container = await openLab('#model');
+    expect(container.querySelector('.lab-device-summary .lab-device-name')).not.toBeNull();
+    expect(container.querySelector('.lab-device-summary .lab-device-facts')).toBeNull();
+    pressMode('Explore');
+    await expectView(defaultViewId('explore'));
+    expect(container.querySelector('.lab-device-summary .lab-device-facts')?.textContent).toMatch(/part/);
+  });
+});
+
+describe('the standing statements on paper', () => {
+  const SHELL_CSS = readFileSync(path.resolve(import.meta.dirname, '../lab-shell.css'), 'utf8');
+  const PRINT_CSS = SHELL_CSS.slice(SHELL_CSS.lastIndexOf('@media print'));
+
+  it('moves the statements to the top of the page while the browser prints, whole, on a view that is not the report', async () => {
+    const container = await openLab('#model/requirements');
+    act(() => { window.dispatchEvent(new Event('beforeprint')); });
+    const inline = container.querySelector('.lab-shell-scroll .lab-standing-inline') as HTMLElement;
+    for (const statement of STANDING_STATEMENTS) expect(within(inline).getByText(statement)).toBeTruthy();
+    expect(inline.compareDocumentPosition(container.querySelector('#lab-screen') as HTMLElement) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(container.querySelector('.lab-shell')?.getAttribute('data-prints-own-statements')).toBe('false');
+    act(() => { window.dispatchEvent(new Event('afterprint')); });
+    expect(container.querySelector('.lab-standing-inline')).toBeNull();
+    for (const statement of STANDING_STATEMENTS) expect(within(container.querySelector('.lab-foot') as HTMLElement).getByText(statement)).toBeTruthy();
+  });
+
+  it('marks the report, which prints the statements in its own title block, so they are not printed twice', async () => {
+    const container = await openLab('#model/report');
+    expect(container.querySelector('.lab-shell')?.getAttribute('data-prints-own-statements')).toBe('true');
+  });
+
+  it('never hides the statements in the print stylesheet, except on the view that prints its own', () => {
+    const hidden = [...PRINT_CSS.matchAll(/([^{}]+)\{[^}]*display:\s*none[^}]*\}/g)].map((rule) => rule[1].trim());
+    expect(hidden).toHaveLength(2);
+    expect(hidden[0]).not.toMatch(/\.lab-foot(?! \.lab-modes)|\.lab-standing(?!-site)/);
+    expect(hidden[1]).toBe('.lab-shell[data-prints-own-statements="true"] :is(.lab-foot, .lab-standing-inline)');
+  });
+});
+
+describe('an address with something after the screen', () => {
+  it('opens the screen named, drops the rest from the address, and shows no notice', async () => {
+    await openLab('#model/risks?x=1');
+    await expectView('risks');
+    await waitFor(() => expect(window.location.hash).toBe('#model/risks'));
+    expect(screen.queryByText(/That address is not a screen/)).toBeNull();
+  });
+});
+
 describe('the reader\'s place', () => {
   it('keeps a view\'s state through a change of mode and back', async () => {
     await openLab('#explore');
@@ -209,7 +323,17 @@ describe('command palette and printing', () => {
     fireEvent.keyDown(input, { key: 'Enter' });
     await expectView('report');
     expect(screen.queryByRole('dialog')).toBeNull();
-    expect(document.activeElement?.id).toBe('lab-screen');
+    expect(document.activeElement?.id).toBe('lab-results');
+  });
+
+  it('runs a device action chosen in the palette: Edit device opens the editor on its screen', async () => {
+    await openLab('#explore');
+    fireEvent.keyDown(window, { key: 'k', ctrlKey: true });
+    const input = screen.getByRole('combobox');
+    fireEvent.change(input, { target: { value: 'edit device' } });
+    fireEvent.click(within(screen.getByRole('group', { name: 'Actions' })).getByRole('option', { name: /Edit device/ }));
+    await expectView(EDIT_DEVICE_TARGET.viewId);
+    expect(screen.getByTestId('stub-editor').textContent).toBe('editor open');
   });
 
   it('prints the report from the device menu: opens the report, then prints once', async () => {

@@ -1,12 +1,11 @@
 import { useId, useMemo, useState } from 'react';
-import DataTable, { type DataTableColumn } from '@/components/lab-kit/DataTable';
 import Panel from '@/components/lab-kit/Panel';
 import { COMPONENT_KINDS, MODEL_LIMITS, TRUST_ZONES, type DeviceModel, type ModelComponent } from '@/lib/threat-model/device-model';
 import type { ModelEdit, PartFields } from '@/lib/threat-model/model-edit';
 import AddPartForm from './AddPartForm';
 import CommittedTextField from './CommittedTextField';
+import EditorCards, { type EditorField } from './EditorCards';
 import EditorConfirm from './EditorConfirm';
-import { renderEditorCard } from './editor-card';
 import { KIND_LABELS, ZONE_LABELS } from './model-labels';
 import { describeRemovalImpact, measurePartRemoval } from './removal-impact';
 
@@ -18,12 +17,15 @@ interface Props {
 const TISSUE_PART_NOTICE = 'The part that contacts tissue or the scalp cannot be removed: a model has exactly one. Mark another part first.';
 const PART_LIMIT_NOTICE = `The model file holds at most ${MODEL_LIMITS.maxComponents} parts. Remove one to add another.`;
 
+const SHARED_HEADING = 'Shared across patients';
+const TISSUE_HEADING = 'Contacts tissue or scalp';
+
 type ChangePart = (partId: string, changes: Partial<PartFields>) => void;
 
-function buildColumns(tissueGroupName: string, changePart: ChangePart, askToRemove: (part: ModelComponent) => void): DataTableColumn<ModelComponent>[] {
+function buildFields(tissueGroupName: string, changePart: ChangePart, askToRemove: (part: ModelComponent) => void): EditorField<ModelComponent>[] {
   return [
     {
-      id: 'label', header: 'Part',
+      id: 'label', header: 'Part', form: 'wide-control',
       render: (part) => (
         <CommittedTextField
           label={`Label of ${part.label}`} isLabelHidden value={part.label} maxLength={MODEL_LIMITS.maxLabelLength}
@@ -32,7 +34,7 @@ function buildColumns(tissueGroupName: string, changePart: ChangePart, askToRemo
       ),
     },
     {
-      id: 'kind', header: 'Kind',
+      id: 'kind', header: 'Kind', form: 'control',
       render: (part) => (
         <select
           className="lab-input" aria-label={`Kind of ${part.label}`} value={part.kind}
@@ -43,7 +45,7 @@ function buildColumns(tissueGroupName: string, changePart: ChangePart, askToRemo
       ),
     },
     {
-      id: 'zone', header: 'Zone',
+      id: 'zone', header: 'Zone', form: 'control',
       render: (part) => (
         <select
           className="lab-input" aria-label={`Zone of ${part.label}`} value={part.trustZone}
@@ -54,35 +56,37 @@ function buildColumns(tissueGroupName: string, changePart: ChangePart, askToRemo
       ),
     },
     {
-      id: 'shared', header: 'Shared across patients',
+      id: 'shared', header: SHARED_HEADING, form: 'tick',
       render: (part) => (
         <label className="lab-editor-tick">
           <input
             type="checkbox" aria-label={`${part.label} is shared across patients`} checked={part.isSharedAcrossPatients}
             onChange={(event) => changePart(part.id, { isSharedAcrossPatients: event.target.checked })}
           />
+          <span aria-hidden="true">{SHARED_HEADING}</span>
         </label>
       ),
     },
     {
-      id: 'tissue', header: 'Contacts tissue or scalp',
+      id: 'tissue', header: TISSUE_HEADING, form: 'tick',
       render: (part) => (
         <label className="lab-editor-tick">
           <input
             type="radio" name={tissueGroupName} aria-label={`${part.label} contacts tissue or the scalp`} checked={part.isNeuralInterface}
             onChange={() => changePart(part.id, { isNeuralInterface: true })}
           />
+          <span aria-hidden="true">{TISSUE_HEADING}</span>
         </label>
       ),
     },
     {
-      id: 'remove', header: 'Remove',
+      id: 'remove', header: 'Remove', form: 'action',
       render: (part) => <button type="button" className="lab-button" aria-label={`Remove ${part.label}`} onClick={() => askToRemove(part)}>Remove</button>,
     },
   ];
 }
 
-/** The device's parts, one line each, edited in place. Ids are never shown as editable: they do not change. */
+/** The device's parts, one card each, edited in place. Ids are never shown as editable: they do not change. */
 export default function PartsTable({ model, onEdit }: Props) {
   const tissueGroupName = useId();
   const [pendingRemovalId, setPendingRemovalId] = useState<string | null>(null);
@@ -90,13 +94,13 @@ export default function PartsTable({ model, onEdit }: Props) {
   const pendingPart = model.components.find((part) => part.id === pendingRemovalId) ?? null;
   const partCount = model.components.length;
 
-  const columns = useMemo(() => {
+  const fields = useMemo(() => {
     const changePart: ChangePart = (partId, changes) => onEdit({ type: 'part-changed', partId, changes });
     const askToRemove = (part: ModelComponent): void => {
       setNotice(part.isNeuralInterface ? TISSUE_PART_NOTICE : null);
       setPendingRemovalId(part.isNeuralInterface ? null : part.id);
     };
-    return buildColumns(tissueGroupName, changePart, askToRemove);
+    return buildFields(tissueGroupName, changePart, askToRemove);
   }, [tissueGroupName, onEdit]);
 
   const removePending = (): void => {
@@ -106,12 +110,10 @@ export default function PartsTable({ model, onEdit }: Props) {
 
   return (
     <Panel title="Parts">
-      <div className="lab-editor-table">
-        <DataTable
-          caption={`${partCount} of at most ${MODEL_LIMITS.maxComponents} parts`} columns={columns} rows={model.components} rowKey={(part) => part.id}
-          emptyMessage="No parts. Add the part that contacts tissue or the scalp first." renderCard={renderEditorCard(columns)}
-        />
-      </div>
+      <EditorCards
+        caption={`${partCount} of at most ${MODEL_LIMITS.maxComponents} parts`} fields={fields} rows={model.components} rowKey={(part) => part.id}
+        emptyMessage="No parts. Add the part that contacts tissue or the scalp first."
+      />
       {notice !== null && <p role="alert" className="lab-notice">{notice}</p>}
       {pendingPart !== null && (
         <EditorConfirm

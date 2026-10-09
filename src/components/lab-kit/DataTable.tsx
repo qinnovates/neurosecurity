@@ -1,6 +1,6 @@
 import { useCallback, useImperativeHandle, useMemo, useRef, useState, type HTMLAttributes, type KeyboardEvent, type MouseEvent, type ReactNode, type Ref } from 'react';
 import DataTableCards from './DataTableCards';
-import { nextSort, sortRows, type DataTableColumn, type DataTableSort } from './data-table-sort';
+import { nextSort, shownDirection, sortRows, type DataTableColumn, type DataTableSort, type SortDirection } from './data-table-sort';
 import { useListReflow } from './motion/use-list-reflow';
 import { useMediaQuery } from './use-media-query';
 import { useRowFocus } from './use-row-focus';
@@ -43,6 +43,7 @@ interface Props<Row> {
 /** Controls inside a row keep their own clicks and keys; only the row itself opens. */
 const ROW_CONTROL_SELECTOR = 'select, input, button, a, label, textarea';
 const NARROW_SCREEN_QUERY = '(max-width: 719.98px)';
+const SORT_ARROWS: Record<SortDirection, string> = { ascending: '↑', descending: '↓' };
 
 /**
  * The Lab's table: a header that stays put, sortable columns, and rows that can be walked
@@ -103,16 +104,19 @@ export default function DataTable<Row>({ caption, columns, rows, rowKey, emptyMe
         <caption className="lab-label">{caption}</caption>
         <thead>
           <tr>
-            {columns.map((column) => (
-              <th key={column.id} scope="col" aria-sort={sort?.columnId === column.id ? sort.direction : undefined}>
-                {column.sortValue === undefined ? <span className="lab-table-head">{column.header}</span> : (
-                  <button type="button" className="lab-table-sort" onClick={() => changeSort(column.id)}>
-                    {column.header}
-                    {sort?.columnId === column.id && <span aria-hidden="true">{sort.direction === 'ascending' ? '↑' : '↓'}</span>}
-                  </button>
-                )}
-              </th>
-            ))}
+            {columns.map((column) => {
+              const direction = sort?.columnId === column.id ? shownDirection(column, sort.direction) : undefined;
+              return (
+                <th key={column.id} scope="col" aria-sort={direction}>
+                  {column.sortValue === undefined ? <span className="lab-table-head">{column.header}</span> : (
+                    <button type="button" className="lab-table-sort" onClick={() => changeSort(column.id)}>
+                      {column.header}
+                      {direction !== undefined && <span aria-hidden="true">{SORT_ARROWS[direction]}</span>}
+                    </button>
+                  )}
+                </th>
+              );
+            })}
           </tr>
         </thead>
         <tbody ref={attachContainer}>

@@ -47,7 +47,9 @@ describe('Start', () => {
       expect(within(card).getByText(new RegExp(`${model.components.length} parts? · ${model.links.length} connections?$`))).toBeTruthy();
       expect(card.querySelector('.explore-class-scope')?.textContent).toBe(`${scope.applies.length} of ${scope.total} catalog techniques apply ${scope.notAssessed.length} not assessed`);
       expect(card.querySelector('.explore-class-scope .lab-hatch-swatch')).not.toBeNull();
-      expect(within(card).getByRole('button', { name: 'Start from this class' })).toBeTruthy();
+      const start = within(card).getByRole('button', { name: `Start from this class: ${archetypes[index].label}` });
+      // The words on the button open its accessible name, and the class closes it, so no two cards offer a button of one name.
+      expect(start.textContent).toBe('Start from this class');
     });
     expect(screen.getByRole('region', { name: 'Device classes' }).id).toBe('lab-results');
   });
@@ -84,13 +86,13 @@ describe('Start', () => {
     window.location.hash = '#explore';
     inLab(<DeviceClasses />);
     const second = screen.getAllByRole('article')[1];
-    fireEvent.click(within(second).getByRole('button', { name: 'Start from this class' }));
+    fireEvent.click(within(second).getByRole('button', { name: /^Start from this class: / }));
     expect(window.location.hash).toBe(toHash(MODEL_OVERVIEW_TARGET));
     const cards = screen.getAllByRole('article');
     expect(cards).toHaveLength(archetypes.length);
     expect(cards[1].getAttribute('data-in-focus')).toBe('true');
-    expect(within(cards[1]).getByRole('button', { name: 'Continue in Model' })).toBeTruthy();
-    expect(within(cards[0]).getByRole('button', { name: 'Start from this class' })).toBeTruthy();
+    expect(within(cards[1]).getByRole('button', { name: /^Continue in Model: / })).toBeTruthy();
+    expect(within(cards[0]).getByRole('button', { name: /^Start from this class: / })).toBeTruthy();
     expect(screen.queryByRole('button', { name: 'See an example threat model' })).toBeNull();
   });
 
@@ -101,11 +103,11 @@ describe('Start', () => {
     const cards = screen.getAllByRole('article');
     expect(cards).toHaveLength(archetypes.length + 1);
     expect(within(cards[0]).getByText('Your device')).toBeTruthy();
-    expect(within(cards[0]).getByRole('button', { name: 'Continue in Model' })).toBeTruthy();
+    expect(within(cards[0]).getByRole('button', { name: /^Continue in Model: / })).toBeTruthy();
     expect(screen.queryByRole('button', { name: 'See an example threat model' })).toBeNull();
     const table = within(screen.getByRole('region', { name: 'Differences between the classes' }));
     expect(table.getAllByRole('columnheader')).toHaveLength(archetypes.length + 3);
-    fireEvent.click(within(cards[2]).getByRole('button', { name: 'Start from this class' }));
+    fireEvent.click(within(cards[2]).getByRole('button', { name: /^Start from this class: / }));
     expect(screen.getByRole('alertdialog')).toBeTruthy();
     expect(window.location.hash).toBe('#explore');
   });

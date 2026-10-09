@@ -14,13 +14,19 @@
 .query-editor { display: block; width: 100%; padding: 0.5rem 0.625rem; font-family: var(--lab-mono); font-size: var(--lab-text-body); color: var(--lab-ink); background: var(--lab-panel-raised); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-s); resize: vertical; }
 .query-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem var(--lab-gap); margin-top: 0.5rem; }
 .query-starters { display: flex; flex-wrap: wrap; gap: 0.3125rem; }
+/* A long question wraps inside its chip, so no chip is wider than the screen. */
+.query-starters .lab-chip, .query-history .lab-chip { max-width: 100%; }
+.query-starters .lab-chip { white-space: normal; text-align: left; height: auto; min-height: 1.75rem; }
 .query-history { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3125rem; margin-top: 0.5rem; }
 .query-history .lab-chip { font-family: var(--lab-mono); font-size: var(--lab-text-meta); max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+/* The row count is the status line above the table; the caption names the table for assistive technology only. */
+.query-count { margin: 0 0 0.375rem; min-height: 1rem; }
+.query-result :is(.lab-table caption, .lab-cards-caption) { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 /* The table's own wrap scrolls, so its head stays put above the rows. */
 .query-result .lab-table-wrap { max-height: 64vh; }
 
 /* An error is the loudest thing on the screen: a heavy edge, a title, and the engine's own words in full ink. */
-.query-error { border-left-width: 6px; border-radius: var(--lab-radius-m); }
+.query-error { border-left-width: 6px; }
 .query-error p { margin: 0 0 0.25rem; }
 .query-error-title { font-size: var(--lab-text-title); font-weight: 600; }
 .query-error-message { font-weight: 600; overflow-wrap: anywhere; }
@@ -30,4 +36,5 @@
 .query-bar { display: block; height: 0.625rem; background: var(--lab-ink-soft); border-radius: 0 var(--lab-radius-s) var(--lab-radius-s) 0; }
 
 @media (max-width: 900px) { .query-body { grid-template-columns: minmax(0, 1fr); } }
+@media (pointer: coarse) { .query-table { min-height: 44px; align-items: center; } }
 @media print { .query-result .lab-table-wrap { max-height: none; } }

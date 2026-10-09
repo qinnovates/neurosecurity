@@ -16,10 +16,10 @@
 .lab-hatch::before { content: ""; display: inline-block; width: 0.75rem; height: 0.75rem; margin-right: 0.375rem; vertical-align: -0.125em; border: 1px solid currentColor; background-image: repeating-linear-gradient(135deg, currentColor 0 1px, transparent 1px 5px); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
 
 /* Legends: mark, short name, optional integer. */
-.lab-legend { display: flex; flex-wrap: wrap; gap: 0.25rem var(--lab-pad); margin: 0; padding: 0; list-style: none; font-size: var(--lab-text-meta); color: var(--lab-ink-soft); }
+.lab-legend { display: flex; flex-wrap: wrap; gap: 0.25rem var(--lab-pad); margin: 0; padding: 0; list-style: none; font-size: var(--lab-text-meta); line-height: 1rem; color: var(--lab-ink-soft); }
 .lab-legend li { display: inline-flex; align-items: center; gap: 0.375rem; }
 .lab-legend-name { color: var(--lab-ink); }
-.lab-legend-note { margin: 0.375rem 0 0; font-size: var(--lab-text-meta); color: var(--lab-ink-soft); }
+.lab-legend-note { margin: 0.5rem 0 0; font-size: var(--lab-text-meta); line-height: 1rem; color: var(--lab-ink-soft); }
 .lab-legend--stacked { display: grid; gap: 0.25rem; }
 
 /* A set split into parts, with the integers printed. Segments re-size in one move when the set changes. */
@@ -42,11 +42,11 @@
 
 /* A figure with its label and unit. */
 .lab-stat { display: grid; gap: 0.125rem; min-width: 0; }
-.lab-stat-figure { display: inline-flex; align-items: baseline; gap: 0.375rem; font-size: var(--lab-text-figure); font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
-.lab-stat-figure[data-not-assessed="true"] { align-items: center; font-size: var(--lab-text-title); line-height: calc(var(--lab-text-figure) * 1.1); }
-.lab-stat-unit { font-size: var(--lab-text-meta); font-weight: 400; color: var(--lab-ink-soft); }
+.lab-stat-figure { display: inline-flex; align-items: baseline; gap: 0.375rem; font-size: var(--lab-text-figure); font-weight: 600; line-height: 2rem; font-variant-numeric: tabular-nums; }
+.lab-stat-figure[data-not-assessed="true"] { align-items: center; font-size: var(--lab-text-title); line-height: 2rem; }
+.lab-stat-unit { font-size: var(--lab-text-meta); line-height: 1rem; font-weight: 400; color: var(--lab-ink-soft); }
 .lab-stat-label { color: var(--lab-ink-soft); }
-.lab-stat-note { font-size: var(--lab-text-meta); color: var(--lab-ink-soft); }
+.lab-stat-note { font-size: var(--lab-text-meta); line-height: 1rem; color: var(--lab-ink-soft); }
 
 /* A tally of a set by evidence: integer, mark, name. */
 .lab-evidence-legend { display: flex; flex-wrap: wrap; gap: 0.125rem var(--lab-pad); margin: 0; padding: 0; list-style: none; color: var(--lab-ink-soft); }

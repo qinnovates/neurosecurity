@@ -3,6 +3,7 @@ import { SCOPE_TERMS } from '../lab-terms';
 import { collectExclusions } from '../match-techniques';
 import { NO_MATCHING_ELEMENT_RULE, SCOPE_LIST_BY_TERM, diffScope, listScopeEntries, summariseScope } from '../scope-statement';
 import { PRESETS, engineData, modelFor, referenceData, reportFor } from './preset-reports';
+import { applyRestoringAnswers } from './restoring-answers';
 
 const { placements, notPlaced } = referenceData.placementRules;
 const SENSES_TECHNIQUE_IDS = Object.keys(placements).filter((techniqueId) => placements[techniqueId].entryPath === 'senses');
@@ -50,6 +51,48 @@ describe.each(PRESETS)('scope of the preset %s', (_id, { model, report }) => {
     const withElement = new Set(scope.wouldApplyIf.filter((entry) => !entry.conditions.some((condition) => condition.ruleId === NO_MATCHING_ELEMENT_RULE)).map((entry) => entry.techniqueId));
     expect(new Set(exclusions.map((exclusion) => exclusion.techniqueId))).toEqual(new Set([...unmetIds].filter((techniqueId) => withElement.has(techniqueId))));
     for (const exclusion of exclusions) expect(exclusion.reason.ruleId).toMatch(/^precondition\./);
+  });
+});
+
+describe.each(PRESETS)('restoring answers on the preset %s', (_id, { model }) => {
+  const scope = summariseScope(model, engineData, referenceData);
+
+  it('has at least one conditional technique to check', () => {
+    expect(scope.wouldApplyIf.length).toBeGreaterThan(0);
+  });
+
+  it.each(scope.wouldApplyIf.map((entry) => [entry.techniqueId, entry] as const))('%s applies once every listed restoring answer is true of the device', (techniqueId, entry) => {
+    const restored = applyRestoringAnswers(model, entry.conditions, placements[techniqueId], engineData);
+    const after = summariseScope(restored, engineData, referenceData);
+    const afterEntry = listScopeEntries(after).find((candidate) => candidate.techniqueId === techniqueId);
+    expect(afterEntry?.conditions.map((condition) => condition.detail), `still unmet for ${techniqueId}`).toEqual([]);
+    expect(afterEntry?.term).toBe('applies');
+    expect(reportFor(restored).riskRows.some((row) => row.techniqueId === techniqueId), `${techniqueId} has a register row`).toBe(true);
+  });
+
+  it('no single listed answer is enough when more than one condition is unmet', () => {
+    for (const entry of scope.wouldApplyIf.filter((candidate) => candidate.conditions.length > 1)) {
+      for (const condition of entry.conditions) {
+        const partly = applyRestoringAnswers(model, [condition], placements[entry.techniqueId], engineData);
+        const term = listScopeEntries(summariseScope(partly, engineData, referenceData)).find((candidate) => candidate.techniqueId === entry.techniqueId)?.term;
+        expect(term, `${entry.techniqueId} after only "${condition.restoringAnswer}"`).toBe('would_apply_if');
+      }
+    }
+  });
+});
+
+describe('unmet conditions on the subcortical stimulator', () => {
+  const scope = summariseScope(modelFor('subcortical-stimulator'), engineData, referenceData);
+
+  it('lists all three unmet conditions of a sensory technique that also needs recording and a cortical target', () => {
+    const sensory = scope.wouldApplyIf.filter((entry) => {
+      const placement = placements[entry.techniqueId];
+      return placement.entryPath === 'senses' && placement.requiresCorticalTarget && placement.requiresDirection !== null && !placement.requiresDirection.includes('write');
+    });
+    expect(sensory.length).toBeGreaterThan(0);
+    for (const entry of sensory) {
+      expect(entry.conditions.map((condition) => condition.ruleId), entry.techniqueId).toEqual(['precondition.direction', 'precondition.stimuli', 'precondition.cortical-target']);
+    }
   });
 });
 

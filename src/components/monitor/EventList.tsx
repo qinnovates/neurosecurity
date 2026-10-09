@@ -39,7 +39,7 @@ export default function EventList({ events, markers, onSeek }: Props) {
         />
       </div>
       {events.length > MAX_LISTED && <p className="lab-soft">And {events.length - MAX_LISTED} more. Raise the threshold to see fewer.</p>}
-      {markers.length > 0 && <p className="lab-soft">The sample file also carries {markers.length} marker{markers.length === 1 ? '' : 's'} of its own, such as stimulus onsets. They are the dotted lines on the plot.</p>}
+      {markers.length > 0 && <p className="lab-soft">The sample file also carries {markers.length} marker{markers.length === 1 ? '' : 's'} of its own. They are the dotted lines on the plot.</p>}
     </div>
   );
 }

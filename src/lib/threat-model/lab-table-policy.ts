@@ -19,17 +19,28 @@ export const ALLOWED_SITE_TABLES: Readonly<Record<string, readonly string[]>> = 
   tactics: ['id', 'name', 'domain', 'domain_code', 'action_code'],
   /** Public record identifiers and scores. The mapping file holds no description column here. */
   cves: ['cve_id', 'product', 'cvss', 'cwe', 'category', 'technique_ids'],
-  /** Authored chains, without `drift_profile` and `clinical_parallel`. */
+  /**
+   * Authored chains, one row per step. Without `drift_profile` and `clinical_parallel`, and without the
+   * chain file's free-text evidence notes (`chain_evidence_rationale`, `extrapolation`, `device_class`,
+   * `step_evidence_note`, `step_evidence_source`): those carry the catalog's retired status words and
+   * name products beside techniques. The evidence labels stay.
+   */
   attack_chains: [
-    'chain_id', 'chain_name', 'chain_objective', 'chain_evidence_label', 'chain_evidence_rationale', 'device_class', 'extrapolation',
+    'chain_id', 'chain_name', 'chain_objective', 'chain_evidence_label',
     'step_count', 'position', 'technique_id', 'tara_alias', 'role', 'action', 'detection_window',
-    'step_evidence_label', 'step_evidence_note', 'step_evidence_source',
+    'step_evidence_label',
   ],
   /** The eight published specifications the specifications view reads. */
   devices: ['device', 'company', 'type', 'channels', 'electrode_type', 'fda_status', 'first_human', 'target_use'],
-  hardware_specs: ['id', 'manufacturer', 'device_name', 'device_type', 'fda_status', 'channels', 'power_mw', 'directionality'],
+  /** Without `fda_status`: the site table cuts that field short, and a cut-off regulatory status is not a published specification. */
+  hardware_specs: ['id', 'manufacturer', 'device_name', 'device_type', 'channels', 'power_mw', 'directionality'],
   /** Without the risk rating of a named device's radio link. */
   comms: ['device', 'manufacturer', 'wireless_protocol', 'rf_band'],
+};
+
+/** What one row of a site table is, where its name and its row count alone would mislead: seven authored chains are 35 rows. */
+export const SITE_TABLE_DESCRIPTIONS: Readonly<Record<string, string>> = {
+  attack_chains: 'One row per step of an authored chain.',
 };
 
 /** Shown beside the console, so the reader knows what is here and that the rest was left out on purpose. */

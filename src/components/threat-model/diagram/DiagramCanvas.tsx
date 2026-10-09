@@ -1,9 +1,9 @@
-import { useId, useMemo } from 'react';
+import { useId } from 'react';
 import type { DeviceModel } from '@/lib/threat-model/device-model';
 import { listElementsInModelOrder } from '@/lib/threat-model/model-order';
 import { describeLink } from '@/lib/threat-model/stride';
-import { ZONE_LABELS, computeDiagramLayout, type EdgeLine, type NodeBox } from '../diagram-layout';
-import { FULL_METRICS, UNBADGED_METRICS } from './diagram-metrics';
+import { ZONE_LABELS, type DiagramLayout, type EdgeLine, type NodeBox } from '../diagram-layout';
+import type { DiagramMetrics } from './diagram-metrics';
 import type { DiagramHighlight, ElementState, StepMark } from './diagram-types';
 import { ConnectionCard, ConnectionWire } from './DiagramConnection';
 import { HatchDefs } from './DiagramMarks';
@@ -12,6 +12,7 @@ import { describeBadge, type ElementBadge } from './element-badges';
 import FlowPassMark from './FlowPassMark';
 import { buildPayloadTags, describePayloadTags, passDirectionOf, type PayloadFlows } from './payload-tags';
 import type { DiagramInteraction } from './use-diagram-interaction';
+import { useEnteredIds } from './use-entered-ids';
 import type { FlowPass } from './use-flow-pass';
 
 const ZONE_RADIUS = 14;
@@ -20,6 +21,9 @@ const ZONE_LABEL_BASELINE = 19;
 
 interface Props {
   model: DeviceModel;
+  /** Where everything sits, and the metrics it was laid out with. */
+  layout: DiagramLayout;
+  metrics: DiagramMetrics;
   title: string;
   /** What the drawing shows, in a sentence, for readers who cannot see it. */
   description: string;
@@ -39,9 +43,10 @@ interface Props {
  * outward, parts in them, and every connection drawn from the edge of one part to the edge
  * of the other with its label set on the line.
  */
-export default function DiagramCanvas({ model, title, description, flows, badges, stepMarks, highlight, selectedElementId, interaction, flowPass, isSelectable }: Props) {
-  const hasBadges = badges.size > 0;
-  const layout = useMemo(() => computeDiagramLayout(model, hasBadges ? FULL_METRICS : UNBADGED_METRICS), [model, hasBadges]);
+export default function DiagramCanvas({
+  model, layout, metrics, title, description, flows, badges, stepMarks, highlight, selectedElementId, interaction, flowPass, isSelectable,
+}: Props) {
+  const enteredIds = useEnteredIds(layout.nodes.map((node) => node.id));
   const hatchId = useId();
   const descriptionId = useId();
   const nodeById = new Map(layout.nodes.map((node) => [node.id, node]));
@@ -59,7 +64,7 @@ export default function DiagramCanvas({ model, title, description, flows, badges
     const name = `${node.label}, part${node.isTissueContact ? `, ${TISSUE_CONTACT_TAG}` : ''}. ${describeBadge(badge)}`.trim();
     return (
       <DiagramPart
-        key={node.id} node={node} badge={badge} stepMark={stepMarks.get(node.id)} hatchId={hatchId}
+        key={node.id} node={node} badge={badge} stepMark={stepMarks.get(node.id)} hatchId={hatchId} metrics={metrics} hasEntered={isSelectable && enteredIds.has(node.id)}
         state={stateOf(node.id, highlight?.componentIds.includes(node.id) ?? true)} elementProps={interaction.controlProps(node.id, name)}
       />
     );

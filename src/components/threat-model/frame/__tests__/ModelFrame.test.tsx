@@ -5,7 +5,7 @@
  */
 import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest';
 import { screen, cleanup, fireEvent, within, act } from '@testing-library/react';
-import { useEffect } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { useFocus } from '@/components/workbench/FocusContext';
 import { VIEW_STATE_KEYS } from '@/components/workbench/shell-targets';
 import { MODE_VIEW_GROUPS } from '@/components/workbench/view-registry';
@@ -14,17 +14,37 @@ import type { DeviceModel } from '@/lib/threat-model/device-model';
 import { listElementsInModelOrder } from '@/lib/threat-model/model-order';
 import { PRESETS } from '@/lib/threat-model/__tests__/preset-reports';
 import ThreatModelStudio from '../../ThreatModelStudio';
+import { stubMatchMedia } from '../../diagram/__tests__/match-media';
 import { MODEL_STATE_KEYS, MODEL_VIEWS } from '../model-view-keys';
+import { NARROW_SCREEN_QUERY, OPEN_DRAWING_MAX_HEIGHT, SHORT_SCREEN_QUERY, isDiagramOpenByDefault } from '../use-diagram-fold';
 import { renderInLab } from './render-in-lab';
 
+interface CanvasStandInProps {
+  lens: { elementId: string | null };
+  selectedChain: { chain_id: string } | null;
+  elementCounts?: unknown[];
+  isOpen?: boolean;
+  onToggleOpen?: () => void;
+  folded?: ReactNode;
+}
 vi.mock('../../DeviceCanvas', () => ({
-  default: ({ lens, selectedChain, elementCounts }: { lens: { elementId: string | null }; selectedChain: { chain_id: string } | null; elementCounts?: unknown[] }) => (
-    <div data-testid="diagram" data-element={lens.elementId ?? ''} data-chain={selectedChain?.chain_id ?? ''} data-counts={elementCounts?.length ?? -1} />
+  default: ({ lens, selectedChain, elementCounts, isOpen = true, onToggleOpen, folded }: CanvasStandInProps) => (
+    <div
+      data-testid="diagram" data-element={lens.elementId ?? ''} data-chain={selectedChain?.chain_id ?? ''} data-counts={elementCounts?.length ?? -1}
+      data-open={isOpen} data-foldable={onToggleOpen !== undefined}
+    >
+      {onToggleOpen !== undefined && <button type="button" onClick={onToggleOpen}>Fold stand-in</button>}
+      {!isOpen && folded}
+    </div>
   ),
 }));
 vi.mock('../../editor/DeviceEditor', () => ({ default: () => <button type="button">Editor stand-in</button> }));
-vi.mock('../../PartStrip', () => ({ default: () => <div data-testid="part-strip" /> }));
-vi.mock('../../TargetRegionsPanel', () => ({ default: () => <div data-testid="target-regions" /> }));
+vi.mock('../../PartStrip', () => ({
+  default: ({ elementCounts }: { elementCounts?: unknown[] }) => <div data-testid="part-strip" data-counts={elementCounts?.length ?? -1} />,
+}));
+vi.mock('../../TargetRegionsPanel', () => ({
+  default: ({ invasiveness }: { invasiveness?: string }) => <div data-testid="target-regions" data-invasiveness={invasiveness ?? ''} />,
+}));
 vi.mock('../../ReportView', () => ({ default: () => <div data-testid="report" /> }));
 vi.mock('../../ComplianceChecklist', () => ({ default: () => <div data-testid="checklist" /> }));
 
@@ -33,10 +53,15 @@ const modelViewIds = MODE_VIEW_GROUPS.model.flatMap((group) => group.views.map((
 const catalogRows = headset.report.riskRows.filter((row) => row.source === 'catalog');
 const FACET_BAR = 'Filter this device\'s rows';
 
+let restoreMatchMedia: (() => void) | null = null;
 beforeEach(() => {
   window.location.hash = '';
 });
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  restoreMatchMedia?.();
+  restoreMatchMedia = null;
+});
 
 function renderModel(viewId: string, store = createViewStateStore(null)) {
   const onSelectView = vi.fn();
@@ -69,14 +94,40 @@ describe('Model frame', () => {
     }
   });
 
-  it('shows the facet bar only on Risks, Techniques by part and Chains, and on Chains only the part', () => {
+  it('shows the facet bar only on Risks and Techniques by part, with no second way to choose a part where the diagram is', () => {
     for (const viewId of modelViewIds) {
       renderModel(viewId);
       const bars = screen.queryAllByRole('group', { name: FACET_BAR });
-      expect(bars).toHaveLength(['risks', 'attack-map', 'chains'].includes(viewId) ? 1 : 0);
-      if (viewId === 'chains') expect(within(bars[0]).getAllByRole('group').map((group) => group.querySelector('legend')?.textContent)).toEqual(['Part']);
+      // Chains are narrowed by the part alone, and beside a diagram the diagram chooses it.
+      expect(bars).toHaveLength(['risks', 'attack-map'].includes(viewId) ? 1 : 0);
+      expect(screen.queryByRole('combobox', { name: 'Part or connection' })).toBeNull();
       cleanup();
     }
+  });
+
+  it('offers the Part select on a phone, where the drawing gives way to a folded list: on Chains it is the only facet', () => {
+    restoreMatchMedia = stubMatchMedia([NARROW_SCREEN_QUERY]);
+    for (const viewId of ['risks', 'attack-map', 'chains']) {
+      renderModel(viewId);
+      const bar = screen.getByRole('group', { name: FACET_BAR });
+      expect(within(bar).getByRole('combobox', { name: 'Part or connection' })).toBeTruthy();
+      if (viewId === 'chains') expect(within(bar).getAllByRole('group').map((group) => group.querySelector('legend')?.textContent)).toEqual(['Part']);
+      expect(screen.getByTestId('diagram').getAttribute('data-open')).toBe('false');
+      expect(screen.queryByTestId('part-strip')).toBeNull();
+      cleanup();
+    }
+  });
+
+  it('gives the device\'s name the screen title, and the names the kit moves across a change of view', () => {
+    const { container } = renderModel('risks');
+    const title = screen.getByRole('heading', { name: new RegExp(headset.model.name) });
+    expect(title.classList.contains('lab-title')).toBe(true);
+    expect(container.querySelectorAll('.lab-vt-identity')).toHaveLength(1);
+    expect(container.querySelectorAll('.lab-vt-diagram')).toHaveLength(1);
+    expect(container.querySelector('.lab-vt-diagram')?.contains(screen.getByTestId('diagram'))).toBe(true);
+    cleanup();
+    const overview = renderModel('overview');
+    expect(overview.container.querySelectorAll('.lab-vt-diagram')).toHaveLength(1);
   });
 
   it('has no Save, Load or Export button of its own: those live in the device menu', () => {
@@ -99,6 +150,7 @@ describe('view state under "model/"', () => {
     const store = createViewStateStore(null);
     const [first, second] = listElementsInModelOrder(headset.model);
     store.write(VIEW_STATE_KEYS.modelSelectedElementId, first.id);
+    restoreMatchMedia = stubMatchMedia([NARROW_SCREEN_QUERY]);
     renderModel('risks', store);
     const select = screen.getByRole('combobox', { name: 'Part or connection' }) as HTMLSelectElement;
     expect(select.value).toBe(first.id);
@@ -124,7 +176,7 @@ describe('view state under "model/"', () => {
     store.write(VIEW_STATE_KEYS.modelLensTechniqueId, 'QIF-T9999');
     store.write(MODEL_STATE_KEYS.lensFacets, { goals: ['<script>'] });
     renderModel('risks', store);
-    expect((screen.getByRole('combobox', { name: 'Part or connection' }) as HTMLSelectElement).value).toBe('');
+    expect(screen.getByTestId('diagram').getAttribute('data-element')).toBe('');
     expect(registerRows()).toHaveLength(catalogRows.length);
     expect(screen.queryByRole('button', { name: 'Show everything' })).toBeNull();
   });
@@ -149,6 +201,80 @@ describe('view state under "model/"', () => {
     cleanup();
     renderModel('chains', store);
     expect(screen.getByTestId('diagram').getAttribute('data-chain')).toBe(chainId);
+  });
+});
+
+describe('the fold of the diagram', () => {
+  const [, cortical] = PRESETS[1];
+
+  it('opens by itself only for a drawing one row of parts tall on a screen tall enough, and never on a phone', () => {
+    const fits = { isNarrow: false, isShort: false, drawingHeight: OPEN_DRAWING_MAX_HEIGHT, hasChain: false };
+    expect(isDiagramOpenByDefault(fits)).toBe(true);
+    expect(isDiagramOpenByDefault({ ...fits, drawingHeight: OPEN_DRAWING_MAX_HEIGHT + 1 })).toBe(false);
+    expect(isDiagramOpenByDefault({ ...fits, isShort: true })).toBe(false);
+    expect(isDiagramOpenByDefault({ ...fits, isShort: true, hasChain: true })).toBe(true);
+    expect(isDiagramOpenByDefault({ ...fits, isNarrow: true, hasChain: true })).toBe(false);
+  });
+
+  it('is open for the headset and can be folded; the choice is kept and holds on every working view', () => {
+    const store = createViewStateStore(null);
+    renderModel('risks', store);
+    expect(screen.getByTestId('diagram').getAttribute('data-open')).toBe('true');
+    expect(store.read(MODEL_STATE_KEYS.isDiagramOpen) ?? null).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Fold stand-in' }));
+    expect(store.read(MODEL_STATE_KEYS.isDiagramOpen)).toBe(false);
+    expect(screen.getByTestId('diagram').getAttribute('data-open')).toBe('false');
+    // Folded, the row of parts stands in for the drawing, with a count for every part and connection.
+    expect(screen.getByTestId('part-strip').getAttribute('data-counts')).toBe(String(listElementsInModelOrder(headset.model).length));
+    cleanup();
+    for (const viewId of ['attack-map', 'chains']) {
+      renderModel(viewId, store);
+      expect(screen.getByTestId('diagram').getAttribute('data-open')).toBe('false');
+      cleanup();
+    }
+    renderModel('overview', store);
+    // The Overview always shows the drawing where there is one, and offers no fold.
+    expect(screen.getByTestId('diagram').getAttribute('data-open')).toBe('true');
+    expect(screen.getByTestId('diagram').getAttribute('data-foldable')).toBe('false');
+  });
+
+  it('starts folded on a short screen, and for a device whose drawing is taller than one row of parts', () => {
+    restoreMatchMedia = stubMatchMedia([SHORT_SCREEN_QUERY]);
+    renderModel('risks');
+    expect(screen.getByTestId('diagram').getAttribute('data-open')).toBe('false');
+    cleanup();
+    restoreMatchMedia();
+    restoreMatchMedia = null;
+    renderInLab(<><LoadModel model={cortical.model} /><ThreatModelStudio viewId="risks" onSelectView={() => undefined} onOpenMode={() => undefined} /></>);
+    act(() => undefined);
+    expect(screen.getByTestId('diagram').getAttribute('data-open')).toBe('false');
+    fireEvent.click(screen.getByRole('button', { name: 'Fold stand-in' }));
+    expect(screen.getByTestId('diagram').getAttribute('data-open')).toBe('true');
+  });
+
+  it('unfolds for a chain drawn on it unless the reader folded it, and folds the phone\'s list on the Overview too', () => {
+    const store = createViewStateStore(null);
+    store.write(MODEL_STATE_KEYS.selectedChainId, headset.report.chainResult.chains[0].chain_id);
+    restoreMatchMedia = stubMatchMedia([SHORT_SCREEN_QUERY]);
+    renderModel('chains', store);
+    expect(screen.getByTestId('diagram').getAttribute('data-open')).toBe('true');
+    fireEvent.click(screen.getByRole('button', { name: 'Fold stand-in' }));
+    expect(screen.getByTestId('diagram').getAttribute('data-open')).toBe('false');
+    cleanup();
+    restoreMatchMedia();
+    restoreMatchMedia = stubMatchMedia([NARROW_SCREEN_QUERY]);
+    renderModel('overview');
+    expect(screen.getByTestId('diagram').getAttribute('data-open')).toBe('false');
+    expect(screen.getByTestId('diagram').getAttribute('data-foldable')).toBe('true');
+  });
+
+  it('tells the regions panel how the device contacts the body', () => {
+    const store = createViewStateStore(null);
+    const tissuePart = headset.model.components.find((component) => component.isNeuralInterface);
+    if (tissuePart === undefined) throw new Error('test setup: the preset has no tissue-contact part');
+    store.write(VIEW_STATE_KEYS.modelSelectedElementId, tissuePart.id);
+    renderModel('risks', store);
+    expect(screen.getByTestId('target-regions').getAttribute('data-invasiveness')).toBe(headset.model.invasiveness);
   });
 });
 

@@ -23,6 +23,13 @@ const SCOPE_OPTIONS: readonly SegmentedOption<RegisterScope>[] = [
 const SORT_DIRECTIONS: readonly string[] = ['ascending', 'descending'];
 const MAX_COLUMN_ID_LENGTH = 40;
 
+const ROW_CLOSES_STATEMENT = 'A row closes only when a decision is recorded on that row.';
+
+/** The rows in view on the part or connection being pointed at: "11 rows on Phone app". */
+export function describeLitRows(rowCount: number, elementLabel: string): string {
+  return `${rowCount} ${rowCount === 1 ? 'row' : 'rows'} on ${elementLabel}`;
+}
+
 function isRegisterScope(value: unknown): value is RegisterScope {
   return typeof value === 'string' && (REGISTER_SCOPES as readonly string[]).includes(value);
 }
@@ -75,18 +82,25 @@ export default function RisksSection({ rows, elements, openedRiskId, onDecide, o
     [sort, grouped.leadRiskIds, onDecide, onOpenTechnique],
   );
   const openCount = scopedRows.filter((row) => !isRiskAddressed(row)).length;
+  const litElement = highlight.litKey === null ? undefined : elements.find((element) => element.id === highlight.litKey);
+  const litRowCount = litElement === undefined ? 0 : scopedRows.filter((row) => row.elementId === litElement.id).length;
   const emptyMessage = 'No risk of this kind matches the part and lenses chosen. Nothing is hidden beyond them; choose "Show everything" to see the rest.';
 
   return (
     <section className="lab-panel model-register" aria-label="Risk register">
       <div className="model-register-bar">
         <Segmented label="Register scope" options={SCOPE_OPTIONS} value={scope} onChange={setScope} />
+        <p className="model-register-count" role="status"><span className="lab-figure">{openCount}</span> open of <span className="lab-figure">{scopedRows.length}</span></p>
         {sort !== null && <button type="button" className="lab-button" onClick={() => setSort(null)}>Group by technique</button>}
+        {/* The slot is always there, so pointing at a part never moves the bar. */}
+        <span className="model-lit-count" data-shown={litElement !== undefined} aria-hidden="true">
+          {litElement !== undefined && <>{describeLitRows(litRowCount, litElement.label)}</>}
+        </span>
       </div>
       <div>
         <DataTable
           ref={tableRef}
-          caption={`${openCount} open of ${scopedRows.length}. A row closes only when a decision is recorded on that row. Enter opens a row.`}
+          caption={`${openCount} open of ${scopedRows.length}. ${ROW_CLOSES_STATEMENT} Enter opens a row.`}
           columns={columns} rows={grouped.rows} rowKey={(row) => row.riskId} emptyMessage={emptyMessage}
           sort={sort} onSortChange={setSort} openedKey={openedRiskId}
           onOpenRow={(row) => onOpenRisk(row.riskId)} isRowQuiet={isRiskAddressed}
@@ -95,6 +109,7 @@ export default function RisksSection({ rows, elements, openedRiskId, onDecide, o
         />
       </div>
       <div className="model-register-legend">
+        <p className="lab-label">{ROW_CLOSES_STATEMENT}</p>
         <EvidenceLegend isCompact />
       </div>
     </section>

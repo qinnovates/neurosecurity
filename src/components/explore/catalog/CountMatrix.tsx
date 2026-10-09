@@ -1,10 +1,12 @@
-import { useRef, type KeyboardEvent } from 'react';
-import { cellKey, type CountMatrixData, type MatrixAxisItem } from './count-matrix';
+import { useRef, useState, type CSSProperties, type KeyboardEvent } from 'react';
+import { cellKey, largestCellByColumn, splitRowsByContent, type CountMatrixData, type MatrixAxisItem } from './count-matrix';
 
 interface Props {
   caption: string;
   /** What the rows are: "Technique family". */
   rowHeading: string;
+  /** What several rows are called, in lower case: "families". */
+  rowNoun: string;
   rows: readonly MatrixAxisItem[];
   columns: readonly MatrixAxisItem[];
   data: CountMatrixData;
@@ -29,12 +31,23 @@ function Total({ count }: { count: number | undefined }) {
   return <td className="explore-matrix-total">{count !== undefined && count > 0 && <span className="lab-figure">{count}</span>}</td>;
 }
 
+/** "3 families with none in view", the label of the control that shows or hides the rows with no technique. */
+export function describeEmptyRows(count: number, rowNoun: string): string {
+  return `${count} ${rowNoun} with none in view`;
+}
+
 /**
  * The catalog as integers on two axes, with totals of distinct techniques. A cell is a
- * button: pressing it narrows the catalog to that cell. An empty cell is left blank.
+ * button: pressing it narrows the catalog to that cell. Under each integer an ink bar runs
+ * from zero to the largest cell of its column. An empty cell is left blank, and rows with no
+ * technique in view are folded behind one line that counts them.
  */
-export default function CountMatrix({ caption, rowHeading, rows, columns, data, isCellPicked, onPickCell }: Props) {
+export default function CountMatrix({ caption, rowHeading, rowNoun, rows: allRows, columns, data, isCellPicked, onPickCell }: Props) {
   const tableRef = useRef<HTMLTableElement>(null);
+  const [areEmptyRowsShown, setEmptyRowsShown] = useState(false);
+  const { filled, empty } = splitRowsByContent(data, allRows);
+  const rows = areEmptyRowsShown ? allRows : filled;
+  const largestByColumn = largestCellByColumn(data, allRows, columns);
 
   /** Arrow keys walk the grid, skipping empty cells in the direction of travel. */
   const moveFocus = (event: KeyboardEvent<HTMLButtonElement>, rowIndex: number, columnIndex: number): void => {
@@ -79,6 +92,7 @@ export default function CountMatrix({ caption, rowHeading, rows, columns, data, 
                       onClick={() => onPickCell(row.id, column.id)} onKeyDown={(event) => moveFocus(event, rowIndex, columnIndex)}
                     >
                       {count}
+                      <span className="explore-matrix-bar" aria-hidden="true" style={{ '--explore-share': count / (largestByColumn.get(column.id) ?? count) } as CSSProperties} />
                     </button>
                   </td>
                 );
@@ -86,6 +100,15 @@ export default function CountMatrix({ caption, rowHeading, rows, columns, data, 
               <Total count={data.rowTotals.get(row.id)} />
             </tr>
           ))}
+          {empty.length > 0 && (
+            <tr className="explore-matrix-fold">
+              <td colSpan={columns.length + 2}>
+                <button type="button" className="lab-link" aria-expanded={areEmptyRowsShown} onClick={() => setEmptyRowsShown((current) => !current)}>
+                  {describeEmptyRows(empty.length, rowNoun)}
+                </button>
+              </td>
+            </tr>
+          )}
         </tbody>
         <tfoot>
           <tr>

@@ -5,10 +5,9 @@ import TechniqueLink from '@/components/lab-kit/TechniqueLink';
 import type { CatalogTechnique } from '@/lib/threat-model/catalog-types';
 import { MODEL_LIMITS, RISK_STATUSES, type RiskStatus } from '@/lib/threat-model/device-model';
 import { describeEvidence } from '@/lib/threat-model/evidence-levels';
-import { NOT_SCORED_LABEL } from '@/lib/threat-model/register-csv';
 import type { PrecedentCveEntry, RiskRow } from '@/lib/threat-model/report-types';
 import { NOTE_REQUIRED_STATEMENT, NOT_RECORDED_STATEMENT, isNoteRequired } from './frame/decision-rules';
-import { CVE_HEADING } from './frame/register-columns';
+import { CVE_HEADING, NOT_RECORDED_LABEL } from './frame/register-columns';
 import { useDecisionDraft } from './frame/use-decision-draft';
 import { RISK_STATUS_LABELS } from './risk-status-labels';
 
@@ -83,7 +82,7 @@ function CveList({ precedentCves, precedentCvesAsOf }: Pick<Props, 'precedentCve
         {precedentCves.map((cve) => (
           <li key={cve.cveId}>
             <span className="lab-id">{cve.cveId}</span> {cve.product}{' '}
-            <span className="lab-soft">{cve.cvssScore === null ? NOT_SCORED_LABEL : <>CVSS <span className="lab-figure">{cve.cvssScore}</span></>}</span>
+            <span className="lab-soft">{cve.cvssScore === null ? NOT_RECORDED_LABEL : <>CVSS <span className="lab-figure">{cve.cvssScore}</span></>}</span>
           </li>
         ))}
       </ul>
@@ -134,7 +133,7 @@ export default function RiskDetail({ row, technique, placementReasons, precedent
           <CveList precedentCves={precedentCves} precedentCvesAsOf={precedentCvesAsOf} />
 
           <h3 className="lab-label">Scores</h3>
-          {row.cvssBaseVector === null ? <p className="lab-soft">{NOT_SCORED_LABEL}</p> : <p className="lab-id model-risk-vector">{row.cvssBaseVector}</p>}
+          {row.cvssBaseVector === null ? <p className="lab-soft">{NOT_RECORDED_LABEL}</p> : <p className="lab-id model-risk-vector">{row.cvssBaseVector}</p>}
           {row.nissScore !== null && <p className="lab-soft">NISS {row.nissScore}. NISS is a proposed score and is not peer reviewed.</p>}
         </>
       )}

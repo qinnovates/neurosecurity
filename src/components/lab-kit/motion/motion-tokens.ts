@@ -11,5 +11,5 @@ export const DURATION_MOVE_MS = 280;
 export const DURATION_VIEW_MS = 420;
 /** `--lab-ease`. */
 export const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
-/** How long a changed value stays marked: twice the view duration, as the stylesheet's highlight runs. */
-export const CHANGED_FLAG_MS = DURATION_VIEW_MS * 2;
+/** How long a changed value stays marked: the view duration, as the stylesheet's highlight runs (`--lab-dur-flash`). */
+export const CHANGED_FLAG_MS = DURATION_VIEW_MS;

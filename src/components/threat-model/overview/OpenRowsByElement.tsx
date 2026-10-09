@@ -5,6 +5,7 @@ import { CATALOG_SEVERITY_LABELS } from '@/lib/threat-model/lab-terms';
 import type { ElementRowCounts } from '@/lib/threat-model/register-counts';
 import { isZeroNotAssessed } from '../frame/facet-counts';
 import { useModelHighlight } from '../model-highlight';
+import { shareOfLongest } from './CoverageBySeverity';
 import StackBar, { StackKey, type StackTone } from './StackBar';
 
 interface Props {
@@ -21,7 +22,18 @@ const NOT_ASSESSED_LABEL = 'Not assessed';
 /** Severity by fill: only Critical is red; the rest step down in ink. */
 const TONE_BY_SEVERITY: Readonly<Record<CatalogSeverity, StackTone>> = { critical: 'critical', high: 'strong', medium: 'medium', low: 'light' };
 
-function ElementLine({ counts, isCoverageIncomplete, onSelectElement }: { counts: ElementRowCounts } & Omit<Props, 'elementCounts'>) {
+interface LineProps extends Omit<Props, 'elementCounts'> {
+  counts: ElementRowCounts;
+  /** The most catalog rows on any one part or connection: the length every bar is measured against. */
+  mostRows: number;
+}
+
+/**
+ * One part or connection. Its track is as long as its rows are of the largest count, so the
+ * lines rank by length; the filled part is the rows still open, and the empty rest of the
+ * track is the rows with a decision.
+ */
+function ElementLine({ counts, mostRows, isCoverageIncomplete, onSelectElement }: LineProps) {
   const highlight = useModelHighlight();
   const isNotAssessed = isZeroNotAssessed(counts.catalogRows, isCoverageIncomplete);
   const segments = CATALOG_SEVERITIES.map((severity) => ({
@@ -30,10 +42,14 @@ function ElementLine({ counts, isCoverageIncomplete, onSelectElement }: { counts
   return (
     <li>
       <button type="button" className="model-element-line" data-kind={counts.kind} onClick={() => onSelectElement(counts.id)} {...highlight.bind(counts.id)}>
-        <span className="model-element-label">{counts.label}</span>
+        <span className="model-element-label" title={counts.label}>{counts.label}</span>
         {isNotAssessed ? <span className="model-element-bar lab-soft"><HatchSwatch /> {NOT_ASSESSED_LABEL}</span> : (
           <>
-            <span className="model-element-bar"><StackBar subject={`open rows on ${counts.label}`} segments={segments} /></span>
+            <span className="model-element-bar">
+              <span className="model-element-scale" style={{ width: shareOfLongest(counts.catalogRows, mostRows) }}>
+                <StackBar subject={`open rows on ${counts.label}`} segments={segments} remainder={counts.catalogRows - counts.openCatalogRows} />
+              </span>
+            </span>
             <span className="model-element-figure"><span className="lab-figure">{counts.openCatalogRows}</span> open of <span className="lab-figure">{counts.catalogRows}</span></span>
           </>
         )}
@@ -42,13 +58,14 @@ function ElementLine({ counts, isCoverageIncomplete, onSelectElement }: { counts
   );
 }
 
-/** Where the open rows sit: one bar per part and connection in model order, split by catalog severity. */
+/** Where the open rows sit: one bar per part and connection in model order, on one scale, split by catalog severity. */
 export default function OpenRowsByElement({ elementCounts, isCoverageIncomplete, onSelectElement }: Props) {
+  const mostRows = Math.max(0, ...elementCounts.map((counts) => counts.catalogRows));
   return (
     <>
       <ul className="model-element-lines">
         {elementCounts.map((counts) => (
-          <ElementLine key={counts.id} counts={counts} isCoverageIncomplete={isCoverageIncomplete} onSelectElement={onSelectElement} />
+          <ElementLine key={counts.id} counts={counts} mostRows={mostRows} isCoverageIncomplete={isCoverageIncomplete} onSelectElement={onSelectElement} />
         ))}
       </ul>
       <Legend

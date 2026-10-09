@@ -3,18 +3,19 @@ import SeverityMark from '@/components/lab-kit/SeverityMark';
 import SplitBar, { type SplitBarKind } from '@/components/lab-kit/SplitBar';
 import StatTile from '@/components/lab-kit/StatTile';
 import { RISK_STATUSES, type RiskStatus } from '@/lib/threat-model/device-model';
+import { describePlacementDrafting, type HeadlineFigure } from '@/lib/threat-model/headline-figures';
 import { SCOPE_TERMS, SCOPE_TERM_LABELS, CATALOG_SEVERITY_HEADING, type ScopeTerm } from '@/lib/threat-model/lab-terms';
 import type { SeverityCoverage, SeverityCoverageRow } from '@/lib/threat-model/placement-coverage';
 import type { PlacementTableInfo } from '@/lib/threat-model/reference-data-types';
 import { describeRegisterUnits, type ElementRowCounts, type RegisterUnits } from '@/lib/threat-model/register-counts';
-import type { ScopeStatement } from '@/lib/threat-model/scope-statement';
 import { RISK_STATUS_LABELS } from '../risk-status-labels';
 import { ReportSection, ReportTable, type ReportColumn } from './ReportSection';
 
 interface Props {
+  /** The four figures the Overview heads with, under the same labels. */
+  headlineFigures: readonly HeadlineFigure[];
   elements: readonly ElementRowCounts[];
   units: RegisterUnits;
-  scope: ScopeStatement;
   coverage: SeverityCoverage;
   placementTable: PlacementTableInfo;
 }
@@ -51,9 +52,7 @@ const DECISION_COLUMNS: readonly ReportColumn<StatusCount>[] = [
 ];
 
 /** The register and the catalog in figures, each computed from the rows and the scope lists that follow. */
-export default function ReportOverview({ elements, units, scope, coverage, placementTable }: Props) {
-  const openRows = sumOver(elements, (element) => element.catalogByStatus.open + element.baselineByStatus.open);
-  const criticalAndHighOpen = sumOver(elements, (element) => element.openBySeverity.critical + element.openBySeverity.high);
+export default function ReportOverview({ headlineFigures, elements, units, coverage, placementTable }: Props) {
   const decisions = RISK_STATUSES.map((status): StatusCount => ({
     status, catalogRows: sumOver(elements, (element) => element.catalogByStatus[status]), baselineRows: sumOver(elements, (element) => element.baselineByStatus[status]),
   }));
@@ -61,13 +60,10 @@ export default function ReportOverview({ elements, units, scope, coverage, place
     <ReportSection id="overview">
       <p>{METHOD_STATEMENT}</p>
       <div className="report-tiles">
-        <StatTile label="Open rows" figure={openRows} unit={`of ${units.catalogRows + units.baselineRows}`} />
-        <StatTile label="Critical and high still open" figure={criticalAndHighOpen} unit="catalog rows" />
-        <StatTile label="Techniques that apply" figure={scope.applies.length} unit={`of ${scope.total}`} />
-        <StatTile label="Catalog techniques not assessed" figure={scope.notAssessed.length} unit={`of ${scope.total}`} />
+        {headlineFigures.map((tile) => <StatTile key={tile.id} label={tile.label} figure={tile.figure} unit={tile.unit} note={tile.note ?? undefined} isNotAssessed={tile.isNotAssessed} />)}
       </div>
       <p>{describeRegisterUnits(units)}</p>
-      <p>{placementTable.placementCount} placements drafted with an AI assistant; {placementTable.reviewedPlacementCount} reviewed by the author.</p>
+      <p>{describePlacementDrafting(placementTable)}</p>
       <h3 className="report-subheading">Coverage by catalog severity</h3>
       <ReportTable caption={`${coverage.total} catalog techniques, by severity and by where each stands against this device`} columns={COVERAGE_COLUMNS} rows={coverage.rows} rowKey={(row) => row.severity} emptyMessage="The catalog holds no technique." />
       <h3 className="report-subheading">Decision progress</h3>

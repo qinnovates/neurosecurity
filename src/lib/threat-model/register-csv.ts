@@ -21,7 +21,8 @@ const CSV_HEADERS = [
 /** Characters that make a spreadsheet treat a cell as a formula. */
 const FORMULA_TRIGGER_PATTERN = /^[=+\-@\t\r]/;
 /** Shown wherever a technique has no CVSS vector, so a blank can never read as a low score. */
-export const NOT_SCORED_LABEL = 'Not scored';
+/** The one label for a score the catalog does not hold, the same word the screens use. */
+export const NOT_SCORED_LABEL = 'Not recorded';
 
 /** What the header block states. Every value comes from the report, the data files or the caller; none is typed in here. */
 export interface RegisterCsvHeader {
@@ -29,8 +30,8 @@ export interface RegisterCsvHeader {
   /** Supplied by the caller; this module never reads the clock. */
   exportDate: string;
   registrarVersion: string;
+  /** The version only. The placement file's own status sentence uses wording the Lab has retired, so it is not exported. */
   placementTableVersion: string;
-  placementTableStatus: string;
   checklistVersion: string;
   /** The Lab's standing statements, passed whole from where they are defined. */
   standingStatements: readonly string[];
@@ -85,7 +86,6 @@ function toHeaderLines(header: RegisterCsvHeader): string[] {
     toLine(['Exported', header.exportDate]),
     toLine(['Technique catalog version', header.registrarVersion]),
     toLine(['Placement table version', header.placementTableVersion]),
-    toLine(['Placement table status', header.placementTableStatus]),
     toLine(['Requirements checklist version', header.checklistVersion]),
     ...header.standingStatements.map((statement) => toLine(['Standing statement', statement])),
     '',
@@ -124,7 +124,6 @@ export function buildRegisterExportCsv({ report, referenceData, exportDate, stan
       exportDate,
       registrarVersion: report.registrarVersion,
       placementTableVersion: referenceData.placementTable.version,
-      placementTableStatus: referenceData.placementTable.status,
       checklistVersion: referenceData.compliance.version,
       standingStatements,
     },

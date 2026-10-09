@@ -28,19 +28,20 @@ export function hasCorticalTarget(model: DeviceModel, data: EngineData): boolean
   return model.targetRegionIds.some((regionId) => depthByRegion.get(regionId) === CORTICAL_DEPTH_CLASS);
 }
 
-/** Null when the device meets the technique's preconditions; otherwise the reason it does not. */
-export function findUnmetPrecondition(placement: TechniquePlacement, model: DeviceModel, isCorticalDevice: boolean): MatchReason | null {
+/** Every precondition of the placement the device does not meet, in a fixed order. Empty when it meets them all. */
+export function findUnmetPreconditions(placement: TechniquePlacement, model: DeviceModel, isCorticalDevice: boolean): MatchReason[] {
+  const unmet: MatchReason[] = [];
   if (placement.requiresDirection !== null && !placement.requiresDirection.includes(model.direction)) {
     const needed = placement.requiresDirection.includes('write') ? 'stimulate' : 'record';
-    return { ruleId: 'precondition.direction', detail: `Needs a device that can ${needed}; this device is ${model.direction}-only.` };
+    unmet.push({ ruleId: 'precondition.direction', detail: `Needs a device that can ${needed}; this device is ${model.direction}-only.` });
   }
   if (placement.entryPath === 'senses' && !model.presentsStimuli) {
-    return { ruleId: 'precondition.stimuli', detail: 'Needs the system to show images or play sounds to the patient; this one does not.' };
+    unmet.push({ ruleId: 'precondition.stimuli', detail: 'Needs the system to show images or play sounds to the patient; this one does not.' });
   }
   if (placement.requiresCorticalTarget && !isCorticalDevice) {
-    return { ruleId: 'precondition.cortical-target', detail: 'Needs a cortical target; none of this device\'s target regions is cortical.' };
+    unmet.push({ ruleId: 'precondition.cortical-target', detail: 'Needs a cortical target; none of this device\'s target regions is cortical.' });
   }
-  return null;
+  return unmet;
 }
 
 function linkCarries(link: ModelLink, payload: LinkPayload): boolean {
@@ -80,13 +81,15 @@ function summariseElement(elementId: string, tally: ElementTally, elementKindLab
   return { elementId, kind: 'not_modelled', detail: `No placement decision covers ${elementKindLabel}.`, excluded };
 }
 
-function record(tally: ElementTally, technique: CatalogTechnique, elementId: string, placed: MatchReason | null, unmet: MatchReason | null): void {
+function record(tally: ElementTally, technique: CatalogTechnique, elementId: string, placed: MatchReason | null, unmet: readonly MatchReason[]): void {
   if (placed === null) return;
-  if (unmet === null) {
+  if (unmet.length === 0) {
     tally.matches.push({ techniqueId: technique.id, elementId, reasons: [placed] });
-  } else {
-    tally.exclusions.push({ ruleId: unmet.ruleId, detail: `${technique.name}: ${unmet.detail}` });
-    tally.excluded.push({ techniqueId: technique.id, elementId, reason: unmet });
+    return;
+  }
+  for (const reason of unmet) {
+    tally.exclusions.push({ ruleId: reason.ruleId, detail: `${technique.name}: ${reason.detail}` });
+    tally.excluded.push({ techniqueId: technique.id, elementId, reason });
   }
 }
 
@@ -102,7 +105,7 @@ export function matchTechniques(model: DeviceModel, data: EngineData, rules: Pla
   for (const technique of data.techniques) {
     const placement = rules.placements[technique.id];
     if (placement === undefined) continue;
-    const unmet = findUnmetPrecondition(placement, model, isCorticalDevice);
+    const unmet = findUnmetPreconditions(placement, model, isCorticalDevice);
     model.components.forEach((component, index) => {
       record(componentTallies[index], technique, component.id, placeOnComponent(component, placement), unmet);
     });

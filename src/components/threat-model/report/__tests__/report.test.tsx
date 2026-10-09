@@ -82,22 +82,27 @@ describe('the report', () => {
     expect(container.textContent).not.toMatch(/\bAuthor\b|Prepared by/);
   });
 
-  it('computes every overview figure from the rows and the scope lists', () => {
+  it('computes every overview figure from the rows and the scope lists, under the Overview\'s own definitions', () => {
     const { container } = renderDocument();
     const scope = summariseScope(report.model, engineData, referenceData);
     const current = report.riskRows.filter((row) => row.catalogState === 'current');
-    const open = current.filter((row) => row.status === 'open');
-    const criticalAndHigh = open.filter((row) => row.source === 'catalog' && (row.catalogSeverity === 'critical' || row.catalogSeverity === 'high'));
+    const catalog = current.filter((row) => row.source === 'catalog');
+    const baseline = current.filter((row) => row.source === 'stride');
+    const severe = catalog.filter((row) => row.catalogSeverity === 'critical' || row.catalogSeverity === 'high');
+    const openOf = (rows: typeof current): number => rows.filter((row) => row.status === 'open').length;
     const tiles = Object.fromEntries([...container.querySelectorAll('.report-tiles .lab-stat')].map((tile) => [tile.querySelector('.lab-stat-label')?.textContent, tile.querySelector('.lab-stat-figure')?.textContent]));
     expect(tiles).toEqual({
-      'Open rows': `${open.length}of ${current.length}`,
-      'Critical and high still open': `${criticalAndHigh.length}catalog rows`,
+      'Open rows': `${openOf(catalog)}of ${catalog.length}`,
+      'Critical and high still open': `${openOf(severe)}of ${severe.length}`,
       'Techniques that apply': `${scope.applies.length}of ${scope.total}`,
       'Catalog techniques not assessed': `${scope.notAssessed.length}of ${scope.total}`,
     });
+    // The baseline rows are counted apart, in the note under the first tile, as on the Overview.
+    expect(container.querySelector('.report-tiles .lab-stat-note')?.textContent).toBe(`${openOf(baseline)} of ${baseline.length} baseline rows open`);
     expect(screen.getByText(describeRegisterUnits(summariseRegisterUnits(report.model, report.riskRows)))).toBeTruthy();
-    const { placementCount, reviewedPlacementCount } = referenceData.placementTable;
-    expect(screen.getByText(`${placementCount} placements drafted with an AI assistant; ${reviewedPlacementCount} reviewed by the author.`)).toBeTruthy();
+    const { placementCount, notPlacedCount, reviewedPlacementCount } = referenceData.placementTable;
+    expect(reviewedPlacementCount).toBe(0);
+    expect(screen.getByText(`${placementCount + notPlacedCount} placement decisions (${placementCount} placed, ${notPlacedCount} reviewed, outside the device) drafted with an AI assistant; the placement file records no review yet.`)).toBeTruthy();
   });
 
   it('lists every catalog technique under exactly one scope term, with its reason', () => {
@@ -195,11 +200,11 @@ describe('the print stylesheet', () => {
   });
 
   it('never clips a table, repeats the head on every page and keeps a row together', () => {
-    expect(declarations(/\.report-table-wrap, \.report-diagram \{([^}]*)\}/)).toContain('overflow: visible');
+    expect(declarations(/\.report-table-wrap \{([^}]*)\}/)).toContain('overflow: visible');
     expect(declarations(/\.report-table thead \{([^}]*)\}/)).toContain('display: table-header-group');
     expect(declarations(/\.report-table tr \{([^}]*)\}/)).toContain('break-inside: avoid');
     expect(declarations(/\.report-table :is\(th, td\) \{([^}]*)\}/)).toContain('white-space: normal');
-    expect(declarations(/\.report-no-print \{([^}]*)\}/)).toContain('display: none');
+    expect(declarations(/\.report-no-print, \.checklist-nav \{([^}]*)\}/)).toContain('display: none');
   });
 });
 
@@ -241,5 +246,35 @@ describe('the old chain card', () => {
     });
     const importers = list('src/components/threat-model').filter((file) => /from ['"][^'"]*AttackChainViz['"]/.test(fs.readFileSync(file, 'utf-8')));
     expect(importers).toEqual([]);
+  });
+});
+
+describe('the print layout', () => {
+  const css = fs.readFileSync('src/components/threat-model/report/report-print.css', 'utf-8');
+  const printBlock = css.slice(css.indexOf('@media print'));
+  const declarations = (selectorPattern: RegExp): string => printBlock.match(selectorPattern)?.[1] ?? '';
+
+  it('lays the report, its sections, the checklist and the frame around them out as blocks, so no text is painted over other text at a page break', () => {
+    const blockRule = printBlock.replace(/\/\*[\s\S]*?\*\//g, '').match(/([^{}]*)\{\s*display:\s*block;\s*\}/)?.[1] ?? '';
+    const selectors = blockRule.split(',').map((selector) => selector.trim());
+    for (const selector of ['.report', '.report-section', '.report-checklist', '.model-frame', '.model-results']) expect(selectors, selector).toContain(selector);
+    // Nothing in the print block turns one of them back into a grid or a flex row.
+    expect(printBlock).not.toMatch(/display:\s*(grid|flex|inline-grid|inline-flex)/);
+    const screenCss = fs.readFileSync('src/components/threat-model/report/report.css', 'utf-8');
+    for (const selector of ['.report', '.report-section', '.report-checklist']) {
+      // The fault this guards: each of these is a grid on screen, so print must say otherwise.
+      expect(screenCss, selector).toMatch(new RegExp(`\\${selector} \\{ display: grid;`));
+    }
+  });
+
+  it('leaves the drawing off paper, where its labels would fall under the smallest type size, and says where to look', () => {
+    expect(declarations(/\.report-diagram \{([^}]*)\}/)).toContain('display: none');
+    expect(declarations(/\.report-print-block \{([^}]*)\}/)).toContain('display: block');
+    expect(printBlock).not.toMatch(/\.report-diagram svg/);
+    const { container } = renderDocument();
+    const note = container.querySelector('.report-diagram + .report-print-block');
+    expect(note?.textContent).toBe('The diagram is not printed. See the parts and connections tables.');
+    // The tables the note points at are in the document, with every part and connection.
+    expect(container.querySelectorAll('#report-system ~ * table, [aria-labelledby="report-system"] table').length).toBeGreaterThanOrEqual(2);
   });
 });

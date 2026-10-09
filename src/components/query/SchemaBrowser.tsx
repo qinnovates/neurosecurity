@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Panel from '@/components/lab-kit/Panel';
 import type { TableData } from '@/lib/kql-engine';
-import { LAB_TABLE_POLICY_STATEMENT } from '@/lib/threat-model/lab-table-policy';
+import { LAB_TABLE_POLICY_STATEMENT, SITE_TABLE_DESCRIPTIONS } from '@/lib/threat-model/lab-table-policy';
 import { QUERY_TABLE_DESCRIPTIONS } from '@/lib/threat-model/query-tables';
 import { groupTables } from './schema-groups';
 
@@ -16,10 +16,15 @@ interface Props {
   onOpenTable: (tableName: string) => void;
 }
 
+/** What a table holds, in one sentence, when the Lab has one for it. */
+function describeTable(name: string): string | undefined {
+  return QUERY_TABLE_DESCRIPTIONS[name] ?? SITE_TABLE_DESCRIPTIONS[name];
+}
+
 function TableButton({ name, rowCount, isOpen, onOpen }: { name: string; rowCount: number; isOpen: boolean; onOpen: () => void }) {
   return (
     <li>
-      <button type="button" className="query-table" aria-pressed={isOpen} title={QUERY_TABLE_DESCRIPTIONS[name]} onClick={onOpen}>
+      <button type="button" className="query-table" aria-pressed={isOpen} title={describeTable(name)} onClick={onOpen}>
         <span className="lab-id">{name}</span>
         <span className="lab-figure">{rowCount.toLocaleString('en-US')}</span>
       </button>
@@ -56,6 +61,7 @@ export default function SchemaBrowser({ tables, isSiteLoaded, siteError, openTab
       {openTable !== null && (
         <>
           <p className="lab-label query-group">Columns of <span className="lab-id">{openTable}</span></p>
+          {describeTable(openTable) !== undefined && <p className="lab-soft">{describeTable(openTable)}</p>}
           <p className="lab-id query-columns">{openColumns.length === 0 ? 'This table has no rows, so its columns are not known.' : openColumns.join(' · ')}</p>
         </>
       )}

@@ -46,6 +46,25 @@ export const ADJACENT_POPULATION_PHRASES: Readonly<Partial<Record<EvidencePopula
 };
 const UNSPECIFIED_ADJACENT_PHRASE = 'adjacent technology';
 
+/**
+ * The CVE mapping categories the catalog's tier script counts under `neural_product_cve_count`
+ * (NEURAL_PRODUCT_CATEGORIES in src/scripts/migrate-populate-evidence-tier.py). The Lab prints
+ * the category names and does not put its own word on what the products are.
+ */
+export const NEURAL_COUNT_CVE_CATEGORIES: readonly string[] = ['Neural/EEG Systems', 'Implant Telemetry', 'Implant Gateway/Hub'];
+
+/** The population code the same script gives each other category (POPULATION_BY_CATEGORY). A test compares both with the script. */
+export const ADJACENT_POPULATION_BY_CVE_CATEGORY: Readonly<Record<string, EvidencePopulation>> = {
+  'Medical Data Protocols': 'adjacent_clinical',
+  'Backend/Data Systems': 'adjacent_clinical',
+  'Bluetooth Protocol': 'adjacent_component',
+  'RTOS': 'adjacent_component',
+  'IoT Mesh': 'adjacent_component',
+  'RF/SDR': 'adjacent_domain',
+  'Audio/Acoustic': 'adjacent_domain',
+  'EM Fault Injection / Crypto': 'adjacent_domain',
+};
+
 /** Printed on a device row: the tier grades the technique, and putting it on this part is the tool's own step. */
 export const PLACEMENT_PROVENANCE_LINE =
   'Applying it to this part is this tool\'s placement, drafted with an AI assistant and not yet reviewed by the author.';
@@ -58,6 +77,8 @@ export interface EvidenceSource {
   evidencePopulation?: string | null;
   neuralProductCveCount?: number | null;
   adjacentCveCount?: number | null;
+  /** The mapping category of each counted CVE record, one entry per record. Absent when the caller holds no records. */
+  cveRecordCategories?: readonly string[] | null;
   evidenceDerivedBy?: string | null;
   evidenceDerivedOn?: string | null;
 }
@@ -102,17 +123,40 @@ function tierLabel(tier: EvidenceTierCode): string {
 function describeProvenance(source: EvidenceSource): string | null {
   if (source.evidenceDerivedBy === null || source.evidenceDerivedBy === undefined) return null;
   const when = source.evidenceDerivedOn === null || source.evidenceDerivedOn === undefined ? '' : ` on ${source.evidenceDerivedOn}`;
-  return `Tier set by script${when} from the earlier status; not yet reviewed by the author.`;
+  return `Tier set by script${when}.`;
+}
+
+/** "A", "A and B", "A, B and C" for names that are joined, or with "or" when any of them may hold. */
+function joinNames(names: readonly string[], lastWord: 'and' | 'or'): string {
+  if (names.length <= 1) return names.join('');
+  return `${names.slice(0, -1).join(', ')} ${lastWord} ${names[names.length - 1]}`;
+}
+
+/** The catalog categories the neural count was taken from: the ones this technique's records are in, or all of them when no records are held. */
+function describeNeuralCategories(recordCategories: readonly string[] | null): string {
+  const present = recordCategories === null ? [] : NEURAL_COUNT_CVE_CATEGORIES.filter((category) => recordCategories.includes(category));
+  if (present.length === 0) return `categories ${joinNames(NEURAL_COUNT_CVE_CATEGORIES, 'or')}`;
+  return `${present.length === 1 ? 'category' : 'categories'} ${joinNames(present, 'and')}`;
+}
+
+/** One population phrase only when every adjacent record of the technique is in a category of that population. */
+function describeAdjacentPopulation(recordCategories: readonly string[] | null): string {
+  if (recordCategories === null) return UNSPECIFIED_ADJACENT_PHRASE;
+  const adjacent = recordCategories.filter((category) => !NEURAL_COUNT_CVE_CATEGORIES.includes(category));
+  const populations = new Set(adjacent.map((category) => ADJACENT_POPULATION_BY_CVE_CATEGORY[category] ?? null));
+  const [only] = populations;
+  if (populations.size !== 1 || only === null) return UNSPECIFIED_ADJACENT_PHRASE;
+  return ADJACENT_POPULATION_PHRASES[only] ?? UNSPECIFIED_ADJACENT_PHRASE;
 }
 
 function describeCveRecords(source: EvidenceSource): string | null {
   const neural = source.neuralProductCveCount;
   const adjacent = source.adjacentCveCount;
   if (neural === null || neural === undefined || adjacent === null || adjacent === undefined) return null;
-  if (neural > 0) return `CVE records: ${neural} in neural-data products, ${adjacent} in adjacent technology.`;
+  const recordCategories = source.cveRecordCategories ?? null;
+  if (neural > 0) return `CVE records: ${neural} in the catalog's ${describeNeuralCategories(recordCategories)}; ${adjacent === 0 ? 'none' : adjacent} in other categories.`;
   if (adjacent === 0) return 'CVE records: none in any product.';
-  const where = ADJACENT_POPULATION_PHRASES[source.evidencePopulation as EvidencePopulation] ?? UNSPECIFIED_ADJACENT_PHRASE;
-  return `CVE records: none in a neural-data product; ${adjacent} in ${where}.`;
+  return `CVE records: none in a neural-data product; ${adjacent} in ${describeAdjacentPopulation(recordCategories)}.`;
 }
 
 type Grade = Pick<Evidence, 'level' | 'label' | 'shortLabel' | 'rank'>;

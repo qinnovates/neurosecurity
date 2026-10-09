@@ -51,6 +51,7 @@ export default function DeviceClasses() {
 
   return (
     <div className="explore-start">
+      <div className="explore-start-top">
       <div className="explore-intro">
         <p className="explore-lead">{PRODUCES_SENTENCE}</p>
         <p className="lab-soft">{REVIEW_SENTENCE}</p>
@@ -83,6 +84,7 @@ export default function DeviceClasses() {
         </div>
         {identicalSets.map((set) => <p key={set.labels.join('|')} className="explore-identical">{describeIdenticalSet(set)}</p>)}
       </section>
+      </div>
       <section className="lab-panel" aria-label="Differences between the classes">
         <ClassDifferenceTable devices={devices} differences={differences} onOpenTechnique={openTechnique} />
       </section>

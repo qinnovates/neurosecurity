@@ -16,3 +16,6 @@ export const CHAIN_ROLE_LABELS: Record<ChainRole, string> = {
   persistence: 'Persistence',
   exfiltration: 'Exfiltration',
 };
+
+/** Every generated chain carries this label wherever it is shown. */
+export const HYPOTHESIS_LABEL = 'Generated hypothesis';

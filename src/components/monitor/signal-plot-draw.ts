@@ -1,6 +1,7 @@
 /**
- * Draws one page of a sample on a canvas: every channel's trace, the threshold as two faint
- * lines in each row, and under each trace the stretches where that channel is beyond it.
+ * Draws one page of a sample on a canvas: every channel's trace on a plain baseline, the
+ * threshold as two faint lines only in a row whose channel is beyond it on the page (and in
+ * the row under the pointer), and under each trace the stretches where that channel is beyond it.
  * The page is still. The playhead is a separate element laid over it.
  */
 
@@ -17,12 +18,14 @@ export interface PlotPage {
   scaleMicrovolts: number;
   thresholdMicrovolts: number;
   spans: readonly ChannelSpan[];
+  /** The row under the pointer, which shows its threshold lines whether or not it has a crossing. */
+  hoveredChannelIndex: number | null;
 }
 
 /** The left margin that holds the channel names, in CSS pixels. The playhead is laid out against it. */
 export const LABEL_GUTTER = 48;
-const TOP_GUTTER = 20;
-const BOTTOM_GUTTER = 20;
+export const TOP_GUTTER = 20;
+export const BOTTOM_GUTTER = 20;
 const SPAN_HEIGHT = 3;
 const STAMP = 'Synthetic sample';
 const FONT = '12px Inter, system-ui, sans-serif';
@@ -44,6 +47,19 @@ export function pageStartFor(time: number, pageSeconds: number, durationSeconds:
 /** Whether the threshold lines fit inside a row at this scale. */
 export function isThresholdDrawable(thresholdMicrovolts: number, scaleMicrovolts: number): boolean {
   return thresholdMicrovolts <= scaleMicrovolts;
+}
+
+/** The channels that are beyond the threshold somewhere on the page. */
+export function listChannelsCrossingOnPage(page: Pick<PlotPage, 'spans' | 'pageStart' | 'pageSeconds'>): Set<number> {
+  const pageEnd = page.pageStart + page.pageSeconds;
+  return new Set(page.spans.filter((span) => span.to >= page.pageStart && span.from <= pageEnd).map((span) => span.channelIndex));
+}
+
+/** The row a vertical position falls in, or null in the gutters. */
+export function rowAt(y: number, plotHeight: number, channelCount: number): number | null {
+  const rowHeight = (plotHeight - TOP_GUTTER - BOTTOM_GUTTER) / channelCount;
+  const row = Math.floor((y - TOP_GUTTER) / rowHeight);
+  return row >= 0 && row < channelCount ? row : null;
 }
 
 interface Frame { context: CanvasRenderingContext2D; width: number; height: number; rowHeight: number; toX: (seconds: number) => number; palette: Palette }
@@ -82,6 +98,15 @@ function drawThreshold({ context, width, rowHeight, palette }: Frame, page: Plot
   for (const y of [middle - offset, middle + offset]) { context.moveTo(LABEL_GUTTER, Math.round(y) + 0.5); context.lineTo(width, Math.round(y) + 0.5); }
   context.stroke();
   context.setLineDash([]);
+}
+
+function drawBaseline({ context, width, palette }: Frame, middle: number): void {
+  context.strokeStyle = palette.line;
+  context.lineWidth = 1;
+  context.beginPath();
+  context.moveTo(LABEL_GUTTER, Math.round(middle) + 0.5);
+  context.lineTo(width, Math.round(middle) + 0.5);
+  context.stroke();
 }
 
 function drawTrace({ context, rowHeight, toX, palette }: Frame, page: PlotPage, channel: Float32Array, middle: number): void {
@@ -128,13 +153,15 @@ export function drawSignalPage(canvas: HTMLCanvasElement, page: PlotPage): void 
   const toX = (seconds: number): number => LABEL_GUTTER + ((seconds - page.pageStart) / page.pageSeconds) * (width - LABEL_GUTTER);
   const frame: Frame = { context, width, height, rowHeight: (height - TOP_GUTTER - BOTTOM_GUTTER) / page.sample.channels.length, toX, palette: readPalette(canvas) };
 
+  const crossing = listChannelsCrossingOnPage(page);
   drawTimeGrid(frame, page);
   page.sample.channels.forEach((channel, row) => {
     const middle = TOP_GUTTER + frame.rowHeight * (row + 0.5);
     context.textAlign = 'left';
     context.fillStyle = frame.palette.soft;
     context.fillText(page.sample.channelNames[row], 4, middle);
-    drawThreshold(frame, page, middle);
+    if (crossing.has(row) || row === page.hoveredChannelIndex) drawThreshold(frame, page, middle);
+    else drawBaseline(frame, middle);
     drawTrace(frame, page, channel, middle);
   });
   drawSpans(frame, page);

@@ -26,7 +26,8 @@ export interface ChannelSpan {
 /** Crossings closer together than this are reported as one event, and drawn as one span. */
 export const EVENT_MERGE_SECONDS = 0.25;
 
-function mergeSamplesFor(sampleRateHz: number): number {
+/** The merge distance in whole samples at a sample rate: two crossings this far apart or closer are one event. */
+export function mergeSamplesFor(sampleRateHz: number): number {
   return Math.max(1, Math.round(EVENT_MERGE_SECONDS * sampleRateHz));
 }
 

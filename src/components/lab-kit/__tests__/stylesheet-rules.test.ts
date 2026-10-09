@@ -52,8 +52,11 @@ describe('type, shape, space and motion tokens', () => {
     expect(ROOT_TOKENS.get('--lab-dur-2')).toBe(`${DURATION_MOVE_MS}ms`);
     expect(ROOT_TOKENS.get('--lab-dur-3')).toBe(`${DURATION_VIEW_MS}ms`);
     expect(ROOT_TOKENS.get('--lab-ease')).toBe(EASE);
-    expect(CHANGED_FLAG_MS).toBe(DURATION_VIEW_MS * 2);
-    expect(ALL_STYLES).toContain('animation: lab-changed calc(var(--lab-dur-3) * 2)');
+    // A changed figure is marked for one view duration; one pass of flow takes one and a half. Both follow --lab-dur-3, so less motion zeroes them.
+    expect(CHANGED_FLAG_MS).toBe(DURATION_VIEW_MS);
+    expect(ROOT_TOKENS.get('--lab-dur-flash')).toBe('var(--lab-dur-3)');
+    expect(ROOT_TOKENS.get('--lab-dur-flow')).toBe('calc(var(--lab-dur-3) * 1.5)');
+    expect(ALL_STYLES).toContain('animation: lab-changed var(--lab-dur-flash) var(--lab-ease) 1 both');
   });
 
   it('has retired the per-severity colours and keeps old names only as aliases', () => {
@@ -93,7 +96,8 @@ describe('base rules', () => {
   });
 
   it('draws a quiet row or a step ahead by colour, never by opacity', () => {
-    const fades = ALL_RULES.filter((rule) => rule.declarations.has('opacity') && !rule.selector.includes('::placeholder'));
+    // Opacity is for a layer on its way out (a keyframe), never for a resting state.
+    const fades = ALL_RULES.filter((rule) => rule.declarations.has('opacity') && !rule.selector.includes('::placeholder') && !rule.context.includes('@keyframes'));
     expect(fades.map((rule) => rule.selector)).toEqual([]);
   });
 
@@ -115,6 +119,11 @@ describe('base rules', () => {
   });
 });
 
+/** Every selector whose animation the less-motion path switches off, joined. */
+function stilledSelectors(): string {
+  return rulesIn('prefers-reduced-motion: reduce').filter((rule) => rule.declarations.get('animation') === 'none').map((rule) => rule.selector).join(', ');
+}
+
 describe('motion rule in the stylesheet', () => {
   it('has nothing that repeats', () => {
     expect(ALL_STYLES).not.toMatch(/\binfinite\b/);
@@ -126,10 +135,30 @@ describe('motion rule in the stylesheet', () => {
     const durations = reduced.find((rule) => rule.selector === ':root')?.declarations;
     for (const name of ['--lab-dur-1', '--lab-dur-2', '--lab-dur-3']) expect(durations?.get(name), name).toBe('0ms');
     const stilled = reduced.filter((rule) => rule.declarations.get('animation') === 'none').map((rule) => rule.selector);
-    expect(stilled).toEqual(expect.arrayContaining(['.lab-drawer', '[data-changed="true"]']));
-    // Every keyframe animation in the kit is switched off in that path.
+    // Every keyframe animation in the kit is switched off in that path, the exits included.
     const animated = ALL_RULES.filter((rule) => rule.context === '' && (rule.declarations.get('animation') ?? 'none') !== 'none').map((rule) => rule.selector);
-    expect(animated.sort()).toEqual(['.lab-drawer', '[data-changed="true"]']);
+    expect(animated.sort()).toEqual(['.lab-drawer', '.lab-drawer[data-closing="true"]', '.lab-float[data-closing="true"]', '[data-changed="true"]']);
+    for (const selector of animated) expect(stilled.join(', '), selector).toContain(selector);
+    // The thumb's slide is switched off as well as running on a 0ms token.
+    expect(reduced.filter((rule) => rule.declarations.get('transition') === 'none').map((rule) => rule.selector)).toContain('.lab-segmented-thumb');
+    const pressed = ALL_RULES.filter((rule) => rule.context === '' && rule.selector.endsWith(':active') && rule.declarations.has('transform')).map((rule) => rule.selector);
+    expect(pressed.sort()).toEqual(['.lab-button:active', '.lab-chip:active', '.lab-segment:active']);
+    const unpressed = reduced.filter((rule) => rule.declarations.get('transform') === 'none').map((rule) => rule.selector).join(', ');
+    for (const selector of pressed) expect(unpressed, selector).toContain(selector);
+  });
+
+  it('plays each exit once, forwards, with the move and colour durations', () => {
+    expect(declarationsOf(ALL_RULES, '.lab-drawer[data-closing="true"]').get('animation')).toBe('lab-drawer-out var(--lab-dur-2) var(--lab-ease) both');
+    expect(declarationsOf(ALL_RULES, '.lab-float[data-closing="true"]').get('animation')).toBe('lab-float-out var(--lab-dur-1) var(--lab-ease) both');
+    const sheet = ALL_RULES.find((rule) => rule.context.includes('max-width: 719.98px') && rule.selector === '.lab-drawer[data-closing="true"]');
+    expect(sheet?.declarations.get('animation-name')).toBe('lab-sheet-out');
+  });
+
+  it('names what persists through a change of view, and cross-fades the rest for the move duration', () => {
+    expect(declarationsOf(ALL_RULES, '.lab-vt-diagram').get('view-transition-name')).toBe('lab-diagram');
+    expect(declarationsOf(ALL_RULES, '.lab-vt-identity').get('view-transition-name')).toBe('lab-identity');
+    expect(declarationsOf(ALL_RULES, ':root:has(.lab)::view-transition-old(root), :root:has(.lab)::view-transition-new(root)').get('animation-duration')).toBe('var(--lab-dur-2)');
+    expect(stilledSelectors()).toContain('::view-transition-group(*)');
   });
 });
 
@@ -158,5 +187,99 @@ describe('paper, forced colours and coarse pointers', () => {
     expect(coarse.find((rule) => rule.selector === ':root')?.declarations.get('--lab-row')).toBe('2.75rem');
     const tall = coarse.filter((rule) => rule.declarations.get('min-height') === '2.75rem').map((rule) => rule.selector).join(', ');
     for (const control of ['.lab-button', '.lab-chip', '.lab-segment', '.lab-input', '.lab-link', '.lab-table-sort', '.lab summary']) expect(tall, control).toContain(control);
+    // The floor also reaches controls the kit does not name, and outranks a screen's single-class rule.
+    const floor = coarse.find((rule) => rule.selector.startsWith('.lab :is(button, select, summary, textarea'));
+    expect(floor?.declarations.get('min-height')).toBe('2.75rem');
+    const wide = coarse.filter((rule) => rule.declarations.get('min-width') === '2.75rem').map((rule) => rule.selector).join(', ');
+    for (const control of ['.lab-button', '.lab-chip', '.lab-segment', '.lab :is(button']) expect(wide, control).toContain(control);
+  });
+
+  it('sets field text to 16px on a coarse pointer, so a phone does not zoom the page on focus', () => {
+    const fields = rulesIn('pointer: coarse').find((rule) => rule.declarations.get('font-size') === '1rem');
+    for (const field of ['input', 'select', 'textarea']) expect(fields?.selector, field).toContain(field);
+  });
+
+  it('keeps the 2px focus ring in forced colours, on a lit row too', () => {
+    const forced = rulesIn('forced-colors: active');
+    expect(forced.find((rule) => rule.selector === '.lab :focus-visible')?.declarations.get('outline')).toBe('2px solid Highlight');
+    const lit = forced.find((rule) => rule.selector.includes('[data-lit="true"]'));
+    expect(lit?.selector).toBe('.lab [data-lit="true"]:not(:focus-visible)');
+  });
+});
+
+const GRID_PX = 4;
+function toPx(value: string | undefined): number {
+  const match = /^(-?[\d.]+)(rem|px)$/.exec(value ?? '');
+  if (match === null) throw new Error(`"${value}" is not a length in rem or px.`);
+  return Number(match[1]) * (match[2] === 'rem' ? ROOT_FONT_PX : 1);
+}
+
+describe('the 4px grid', () => {
+  it('sets 13px text on a 20px line, 12px text on a 16px line and the screen title on 28px', () => {
+    expect(declarationsOf(ALL_RULES, '.lab').get('line-height')).toBe('1.25rem');
+    expect(declarationsOf(ALL_RULES, '.lab .lab-title').get('line-height')).toBe('1.75rem');
+    expect(declarationsOf(ALL_RULES, '.lab .lab-title').get('font-size')).toBe('var(--lab-text-screen)');
+    expect(declarationsOf(ALL_RULES, '.lab .lab-panel-title').get('line-height')).toBe('1.25rem');
+    // Every rule that sets the 12px size sets its 16px line with it.
+    const meta = ALL_RULES.filter((rule) => rule.declarations.get('font-size') === 'var(--lab-text-meta)' && !rule.selector.includes('.lab-hatch'));
+    expect(meta.length).toBeGreaterThan(8);
+    for (const rule of meta) expect(rule.declarations.get('line-height'), rule.selector).toBe('1rem');
+  });
+
+  it('uses no unitless or off-grid line-height anywhere in the kit', () => {
+    const lineHeights = ALL_RULES.filter((rule) => rule.declarations.has('line-height') && rule.declarations.get('line-height') !== 'inherit');
+    for (const rule of lineHeights) expect(toPx(rule.declarations.get('line-height')) % GRID_PX, rule.selector).toBe(0);
+  });
+
+  it('makes a button and a field 28px: a 20px line, 3px of padding and a 1px edge each side', () => {
+    for (const selector of ['.lab-button', '.lab-input']) {
+      const control = [...ALL_RULES].find((rule) => rule.context === '' && rule.selector === selector)?.declarations;
+      const [paddingBlock] = (control?.get('padding') ?? '').split(' ');
+      expect(toPx('1.25rem') + 2 * toPx(paddingBlock) + 2 * toPx('1px'), selector).toBe(28);
+      expect(toPx(control?.get('min-height')), selector).toBe(28);
+    }
+  });
+
+  it('draws the segmented track edge inside it, so the control is 28px, and keeps radii on the 6, 10, 14 set', () => {
+    const track = declarationsOf(ALL_RULES, '.lab-segmented');
+    expect(track.has('border')).toBe(false);
+    expect(track.get('box-shadow')).toBe('inset 0 0 0 1px var(--lab-control-line)');
+    expect(toPx(declarationsOf(ALL_RULES, '.lab-segment').get('min-height')) + 2 * toPx(track.get('padding'))).toBe(28);
+    expect(declarationsOf(ALL_RULES, '.lab-segment').get('border-radius')).toBe('var(--lab-radius-s)');
+    expect(declarationsOf(ALL_RULES, '.lab-notice').get('border-radius')).toBe('0 var(--lab-radius-s) var(--lab-radius-s) 0');
+  });
+
+  it('wraps a segmented control and a chip inside their own width instead of widening the page', () => {
+    const track = declarationsOf(ALL_RULES, '.lab-segmented');
+    expect([track.get('flex-wrap'), track.get('max-width')]).toEqual(['wrap', '100%']);
+    expect(declarationsOf(ALL_RULES, '.lab-chip').get('max-width')).toBe('100%');
+    expect(ALL_RULES.find((rule) => rule.context.includes('max-width: 719.98px') && rule.selector === '.lab-chip')?.declarations.get('white-space')).toBe('normal');
+  });
+});
+
+describe('the drawer and the sheet', () => {
+  it('stands between the bars and the standing statements at every width', () => {
+    const drawer = declarationsOf(ALL_RULES, '.lab-drawer');
+    expect(drawer.get('top')).toBe('var(--lab-drawer-top, 0px)');
+    expect(drawer.get('bottom')).toBe('var(--lab-drawer-bottom, 0px)');
+  });
+
+  it('caps the sheet so its title and Close stay under the bars on a phone', () => {
+    const sheet = ALL_RULES.find((rule) => rule.context.includes('max-width: 719.98px') && rule.selector === '.lab-drawer')?.declarations;
+    expect(sheet?.get('max-height')).toBe('calc(100dvh - var(--lab-drawer-top, 0px) - var(--lab-drawer-bottom, 0px) - 0.5rem)');
+    expect(sheet?.has('bottom')).toBe(false);
+  });
+
+  it('has a solid surface where the browser cannot blur, and the measured float material where it can', () => {
+    expect(declarationsOf(ALL_RULES, '.lab-drawer').get('background')).toBe('var(--lab-panel-raised)');
+    expect(declarationsOf(ALL_RULES, '.lab-float').get('background')).toBe('var(--lab-panel-raised)');
+    const material = ALL_RULES.find((rule) => rule.context.startsWith('@supports') && rule.selector === '.lab-drawer, .lab-float')?.declarations;
+    expect(material?.get('background')).toBe('var(--lab-material-float)');
+    expect(material?.get('backdrop-filter')).toBe('saturate(180%) blur(20px)');
+  });
+
+  it('shows the linked item with its own fill and an ink bar, not the hover tint', () => {
+    expect(declarationsOf(ALL_RULES, '.lab [data-lit="true"]').get('background-color')).toBe('var(--lab-lit)');
+    expect(declarationsOf(ALL_RULES, '.lab-table tbody tr[data-lit="true"] td:first-child, .lab-card[data-lit="true"]').get('box-shadow')).toBe('inset 3px 0 0 var(--lab-ink)');
   });
 });
