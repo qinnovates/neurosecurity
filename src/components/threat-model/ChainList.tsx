@@ -1,5 +1,6 @@
 import AttackChainViz from '@/components/atlas/AttackChainViz';
 import type { ChainGenerationResult, GeneratedChain } from '@/lib/threat-model/chain-types';
+import { describeEvidence } from '@/lib/threat-model/evidence-levels';
 import { EDGE_BASIS_LABELS } from './chain-labels';
 
 interface Props {
@@ -14,14 +15,14 @@ function ChainCard({ chain, isSelected, onSelectChain }: { chain: GeneratedChain
     <article className="tm-card">
       <div className="tm-actions" style={{ alignItems: 'center', marginBottom: '0.5rem' }}>
         <span className="tm-badge tm-badge--generated">Generated hypothesis</span>
-        <span className="tm-badge">Weakest step: {chain.weakestEvidenceStatus}</span>
+        <span className="tm-badge">Weakest step: {describeEvidence({ evidenceTier: chain.weakestEvidenceTier, evidenceStatus: chain.weakestEvidenceStatus }).label}</span>
         {onSelectChain !== undefined && (
           <button type="button" className="tm-button tm-no-print" aria-pressed={isSelected} onClick={() => onSelectChain(isSelected ? null : chain.chain_id)}>
             {isSelected ? 'Hide on diagram' : 'Show on diagram'}
           </button>
         )}
       </div>
-      <AttackChainViz chain={chain} />
+      <AttackChainViz chain={chain} isDetectionLaneShown={false} />
       {/* Folded on screen to keep the list scannable; always open in the printed report. */}
       <details className="tm-chain-basis" open={onSelectChain === undefined}>
         <summary>Why each step follows the last</summary>

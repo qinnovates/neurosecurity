@@ -1,47 +1,47 @@
 import { describe, it, expect } from 'vitest';
-import { EMPTY_CATALOG_FILTERS, countCatalogFacets, filterCatalog, isCatalogFiltered, placementStateOf, type PlacementState } from '../catalog-filter';
+import { BAND_ORDER } from '../catalog-types';
+import {
+  EMPTY_CATALOG_FILTERS, buildCatalogFilterContext, countCatalogFacets, countScopeTermsShown, entryPathOf, filterCatalog, isCatalogFiltered,
+} from '../catalog-filter';
 import { describeEvidence } from '../evidence-levels';
-import { HIDDEN_COLUMNS, HIDDEN_TABLES, applyLabTablePolicy } from '../lab-table-policy';
 import { nearestNames } from '../nearest-names';
+import { PLACED_ENTRY_PATHS } from '../reference-data-types';
 import { loadEngineBundle, loadReferenceData } from './load-test-data';
 
 const bundle = loadEngineBundle();
-const { techniques } = bundle.engineData;
+const { techniques, precedentCves } = bundle.engineData;
 const { placementRules } = loadReferenceData(bundle);
 const onDevice = new Set(Object.keys(placementRules.placements).slice(0, 5));
-const placementOf = (techniqueId: string): PlacementState => placementStateOf(techniqueId, placementRules, onDevice);
+const context = buildCatalogFilterContext(bundle.engineData, placementRules, onDevice);
+const shownFor = (text: string) => filterCatalog(techniques, { ...EMPTY_CATALOG_FILTERS, text }, context);
 
 describe('catalog filters', () => {
   it('lets everything through when empty', () => {
-    expect(filterCatalog(techniques, EMPTY_CATALOG_FILTERS, placementOf)).toHaveLength(techniques.length);
+    expect(filterCatalog(techniques, EMPTY_CATALOG_FILTERS, context)).toHaveLength(techniques.length);
     expect(isCatalogFiltered(EMPTY_CATALOG_FILTERS)).toBe(false);
+    expect(isCatalogFiltered({ ...EMPTY_CATALOG_FILTERS, bandIds: ['N3'] })).toBe(true);
   });
 
   it('combines filters, and each one narrows the result', () => {
     const label = describeEvidence(techniques[0]).label;
-    const byEvidence = filterCatalog(techniques, { ...EMPTY_CATALOG_FILTERS, evidence: [label] }, placementOf);
+    const byEvidence = filterCatalog(techniques, { ...EMPTY_CATALOG_FILTERS, evidence: [label] }, context);
     expect(byEvidence.every((technique) => describeEvidence(technique).label === label)).toBe(true);
-    const narrower = filterCatalog(techniques, { ...EMPTY_CATALOG_FILTERS, evidence: [label], severities: ['critical'] }, placementOf);
+    const narrower = filterCatalog(techniques, { ...EMPTY_CATALOG_FILTERS, evidence: [label], severities: ['critical'] }, context);
     expect(narrower.length).toBeLessThanOrEqual(byEvidence.length);
     expect(narrower.every((technique) => technique.severity === 'critical')).toBe(true);
   });
 
-  it('finds a technique by id, name or alias, ignoring case', () => {
-    const target = techniques[3];
-    expect(filterCatalog(techniques, { ...EMPTY_CATALOG_FILTERS, text: target.id.toLowerCase() }, placementOf)).toContain(target);
-    expect(filterCatalog(techniques, { ...EMPTY_CATALOG_FILTERS, text: 'zzz-no-such-technique' }, placementOf)).toEqual([]);
-  });
-
-  it('sorts every technique into exactly one placement state', () => {
-    const counts = countCatalogFacets(techniques, EMPTY_CATALOG_FILTERS, placementOf).placement;
+  it('sorts every technique into exactly one scope term', () => {
+    const counts = countCatalogFacets(techniques, EMPTY_CATALOG_FILTERS, context).placement;
     expect([...counts.values()].reduce((sum, count) => sum + count, 0)).toBe(techniques.length);
-    expect(counts.get('placed-here')).toBe(onDevice.size);
-    expect(counts.get('not-placed')).toBe(Object.keys(placementRules.notPlaced).length);
+    expect(counts.get('applies')).toBe(onDevice.size);
+    expect(counts.get('would_apply_if')).toBe(Object.keys(placementRules.placements).length - onDevice.size);
+    expect(counts.get('reviewed_outside')).toBe(Object.keys(placementRules.notPlaced).length);
   });
 
   it('counts a facet with the other filters applied and its own cleared', () => {
     const filters = { ...EMPTY_CATALOG_FILTERS, severities: ['critical' as const], modes: ['R' as const] };
-    const counts = countCatalogFacets(techniques, filters, placementOf);
+    const counts = countCatalogFacets(techniques, filters, context);
     const criticalOfAnyMode = techniques.filter((technique) => technique.severity === 'critical');
     expect(counts.modes.get('M') ?? 0).toBe(criticalOfAnyMode.filter((technique) => technique.mode === 'M').length);
     const readOfAnySeverity = techniques.filter((technique) => technique.mode === 'R');
@@ -49,32 +49,81 @@ describe('catalog filters', () => {
   });
 });
 
-describe('lab table policy', () => {
-  const tables = {
-    risk_profile: [{ company: 'Example Co', security_score: '0/4', risk_index: 13.4 }],
-    companies: [{ name: 'Example Co', founded: '2016', security_posture: 'none_published', security_notes: 'text' }],
-    devices: [{ device: 'Example Device', channels: 1024, cve_count: 0, security_posture: 'none_published' }],
-    comms: [{ device: 'Example Device', wireless_protocol: 'Bluetooth Low Energy', data_link_risk: 'HIGH' }],
-    techniques: [{ id: 'QIF-T0001', severity: 'high' }],
-  };
-
-  it('leaves out tables that score named companies', () => {
-    const allowed = applyLabTablePolicy(tables);
-    for (const hidden of HIDDEN_TABLES) expect(allowed[hidden]).toBeUndefined();
+describe('text search', () => {
+  it('finds a technique by id, name or alias, ignoring case', () => {
+    const target = techniques[3];
+    expect(shownFor(target.id.toLowerCase())).toContain(target);
+    expect(shownFor(target.name.toUpperCase())).toContain(target);
+    expect(shownFor('zzz-no-such-technique')).toEqual([]);
   });
 
-  it('keeps specifications and drops posture, scores and counts', () => {
-    const allowed = applyLabTablePolicy(tables);
-    expect(allowed.companies).toEqual([{ name: 'Example Co', founded: '2016' }]);
-    expect(allowed.devices).toEqual([{ device: 'Example Device', channels: 1024 }]);
-    expect(allowed.comms).toEqual([{ device: 'Example Device', wireless_protocol: 'Bluetooth Low Energy' }]);
-    for (const [table, columns] of Object.entries(HIDDEN_COLUMNS)) {
-      for (const row of allowed[table] ?? []) for (const column of columns) expect(row).not.toHaveProperty(column);
+  it('returns more than zero for "bluetooth"', () => {
+    expect(shownFor('bluetooth').length).toBeGreaterThan(0);
+  });
+
+  it('reads the detection note and the sources', () => {
+    const withNote = techniques.find((technique) => technique.detection !== null);
+    const withSource = techniques.find((technique) => technique.sources.length > 0);
+    if (withNote === undefined || withNote.detection === null || withSource === undefined) throw new Error('test setup: the catalog has no detection note or no source');
+    expect(shownFor(withNote.detection)).toContain(withNote);
+    expect(shownFor(withSource.sources[0])).toContain(withSource);
+  });
+
+  it('finds every technique a CVE is linked to by the CVE id and by its product name', () => {
+    const [cve] = precedentCves;
+    const linked = techniques.filter((technique) => cve.techniqueIds.includes(technique.id));
+    expect(linked.length).toBeGreaterThan(0);
+    expect(shownFor(cve.cveId)).toEqual(linked);
+    for (const technique of linked) expect(shownFor(cve.product)).toContain(technique);
+  });
+});
+
+describe('band and entry-path facets', () => {
+  const facets = countCatalogFacets(techniques, EMPTY_CATALOG_FILTERS, context);
+
+  it('counts distinct techniques per band, in band order', () => {
+    expect(facets.bands.slice(0, BAND_ORDER.length).map((entry) => entry.bandId)).toEqual([...BAND_ORDER]);
+    for (const { bandId, count } of facets.bands) expect(count, bandId).toBe(techniques.filter((technique) => technique.bandIds.includes(bandId)).length);
+    expect(facets.bands.find((entry) => entry.bandId === 'N3')?.count).toBe(techniques.filter((technique) => technique.bandIds.includes('N3')).length);
+  });
+
+  it('selects several bands at once, and a technique in two of them is shown once', () => {
+    const shown = filterCatalog(techniques, { ...EMPTY_CATALOG_FILTERS, bandIds: ['N3', 'N4'] }, context);
+    expect(shown).toEqual(techniques.filter((technique) => technique.bandIds.includes('N3') || technique.bandIds.includes('N4')));
+    expect(new Set(shown).size).toBe(shown.length);
+  });
+
+  it('takes the entry path from the placement table', () => {
+    for (const entryPath of PLACED_ENTRY_PATHS) {
+      const expected = Object.values(placementRules.placements).filter((placement) => placement.entryPath === entryPath).length;
+      expect(facets.entryPaths.get(entryPath) ?? 0, entryPath).toBe(expected);
     }
+    expect(facets.entryPaths.get('around_device')).toBe(Object.keys(placementRules.notPlaced).length);
+    const senses = filterCatalog(techniques, { ...EMPTY_CATALOG_FILTERS, entryPaths: ['senses'] }, context);
+    expect(senses.every((technique) => entryPathOf(technique.id, placementRules) === 'senses')).toBe(true);
+    expect(senses.length).toBeGreaterThan(0);
   });
+});
 
-  it('passes every other table through untouched', () => {
-    expect(applyLabTablePolicy(tables).techniques).toEqual(tables.techniques);
+describe('the counts line', () => {
+  it('counts the techniques shown under each scope term, and says whether the placement facet is on', () => {
+    const off = countScopeTermsShown(techniques, EMPTY_CATALOG_FILTERS, context);
+    expect(off.isPlacementFacetOn).toBe(false);
+    expect(off.shown).toBe(techniques.length);
+    expect(off.byTerm.applies + off.byTerm.would_apply_if + off.byTerm.reviewed_outside + off.byTerm.not_assessed).toBe(techniques.length);
+    const filters = { ...EMPTY_CATALOG_FILTERS, placement: ['applies' as const, 'not_assessed' as const], severities: ['critical' as const] };
+    const on = countScopeTermsShown(techniques, filters, context);
+    const critical = techniques.filter((technique) => technique.severity === 'critical');
+    expect(on).toEqual({
+      isPlacementFacetOn: true,
+      shown: critical.filter((technique) => ['applies', 'not_assessed'].includes(context.placementOf(technique.id))).length,
+      byTerm: {
+        applies: critical.filter((technique) => context.placementOf(technique.id) === 'applies').length,
+        would_apply_if: 0,
+        reviewed_outside: 0,
+        not_assessed: critical.filter((technique) => context.placementOf(technique.id) === 'not_assessed').length,
+      },
+    });
   });
 });
 

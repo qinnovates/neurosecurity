@@ -9,10 +9,11 @@ import { useFocus } from '@/components/workbench/FocusContext';
 import type { ModeId } from '@/components/workbench/mode-registry';
 import { BAND_ORDER, CATALOG_SEVERITIES, type CatalogTechnique } from '@/lib/threat-model/catalog-types';
 import {
-  EMPTY_CATALOG_FILTERS, countCatalogFacets, filterCatalog, placementStateOf, type CatalogFilters, type PlacementState,
+  EMPTY_CATALOG_FILTERS, buildCatalogFilterContext, countCatalogFacets, filterCatalog, type CatalogFilters,
 } from '@/lib/threat-model/catalog-filter';
 import { countByEvidence, describeEvidence } from '@/lib/threat-model/evidence-levels';
-import CatalogFilterPanel, { PLACEMENT_LABELS } from './CatalogFilterPanel';
+import { SCOPE_TERM_LABELS } from '@/lib/threat-model/lab-terms';
+import CatalogFilterPanel from './CatalogFilterPanel';
 import MarkMatrix, { type MatrixAxisItem } from './MarkMatrix';
 import TechniquePanel, { MODE_LABELS } from './TechniquePanel';
 
@@ -48,12 +49,13 @@ export default function CatalogView({ onOpenMode }: { onOpenMode: (modeId: ModeI
   const deviceName = state.model.name;
   const isNarrowScreen = useMediaQuery(NARROW_SCREEN_QUERY);
 
-  const placementOf = useMemo(() => {
+  const filterContext = useMemo(() => {
     const idsOnDevice = new Set(report.riskRows.flatMap((row) => (row.source === 'catalog' && row.techniqueId !== null ? [row.techniqueId] : [])));
-    return (techniqueId: string): PlacementState => placementStateOf(techniqueId, referenceData.placementRules, idsOnDevice);
-  }, [report.riskRows, referenceData.placementRules]);
-  const shown = useMemo(() => filterCatalog(techniques, filters, placementOf), [techniques, filters, placementOf]);
-  const facets = useMemo(() => countCatalogFacets(techniques, filters, placementOf), [techniques, filters, placementOf]);
+    return buildCatalogFilterContext(engineData, referenceData.placementRules, idsOnDevice);
+  }, [report.riskRows, engineData, referenceData.placementRules]);
+  const { placementOf } = filterContext;
+  const shown = useMemo(() => filterCatalog(techniques, filters, filterContext), [techniques, filters, filterContext]);
+  const facets = useMemo(() => countCatalogFacets(techniques, filters, filterContext), [techniques, filters, filterContext]);
   const evidenceValues = useMemo(() => countByEvidence(techniques), [techniques]);
   const shownEvidence = useMemo(() => {
     const shownCounts = new Map(countByEvidence(shown).map((entry) => [entry.label, entry.count]));
@@ -73,7 +75,7 @@ export default function CatalogView({ onOpenMode }: { onOpenMode: (modeId: ModeI
     { id: 'mode', header: 'Does', render: (technique) => (technique.mode === null ? <span className="lab-soft">Not stated</span> : MODE_LABELS[technique.mode]), sortValue: (technique) => technique.mode ?? '' },
     {
       id: 'placement', header: `On ${deviceName}`, sortValue: (technique) => placementOf(technique.id),
-      render: (technique) => { const placement = placementOf(technique.id); return <span className={`catalog-state${placement === 'not-assessed' ? ' lab-hatch' : ''}`} data-state={placement}>{PLACEMENT_LABELS[placement]}</span>; },
+      render: (technique) => { const placement = placementOf(technique.id); return <span className={`catalog-state${placement === 'not_assessed' ? ' lab-hatch' : ''}`} data-state={placement}>{SCOPE_TERM_LABELS[placement]}</span>; },
     },
   ], [tacticById, placementOf, deviceName]);
 
@@ -126,7 +128,7 @@ export default function CatalogView({ onOpenMode }: { onOpenMode: (modeId: ModeI
                 caption="One mark per technique, in each band it touches. A technique that spans bands appears in each. An empty cell means the catalog has no technique there; it does not mean the cell is safe."
                 rows={tacticAxis} columns={BAND_AXIS}
                 techniquesAt={(tacticId, bandId) => shown.filter((technique) => technique.tactic === tacticId && technique.bandIds.includes(bandId))}
-                onPickCell={(tacticId, bandId) => pickCell({ tacticId, bandId })}
+                onPickCell={(tacticId, bandId) => pickCell({ tacticId, bandIds: [bandId] })}
               />
             </div>
           )}

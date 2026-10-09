@@ -1,3 +1,4 @@
+import { CHECKLIST_TITLE } from '@/lib/threat-model/compliance-us';
 import type { ArchitectureView, CatalogCoverage, ThreatModelReport } from '@/lib/threat-model/report-types';
 import ArchitectureDiagram from './ArchitectureDiagram';
 import BeyondDevice from './BeyondDevice';
@@ -31,7 +32,7 @@ function CoverageStatement({ coverage, gaps }: { coverage: CatalogCoverage; gaps
     <>
       <p>
         The catalog holds {coverage.totalTechniques} techniques. {coverage.placedTechniques} have a placement decision and can appear in this report.
-        {' '}{coverage.notReviewedTechniques} have weaker evidence and have not been reviewed for device applicability, so they are not assessed here.
+        {' '}{coverage.notReviewedTechniques} have no placement decision and are not assessed here.
       </p>
       <ul className="tm-list">
         {Object.entries(coverage.notPlacedByCategory).map(([category, count]) => (
@@ -88,11 +89,11 @@ export default function ReportView({ report, regionNames }: Props) {
           Scores are the catalog's CVSS base vectors where one exists. NISS is a proposed, unadopted score shown as an annex.
           Rows from the STRIDE baseline are generic and carry no score.
         </p>
-        <RiskRegister rows={report.riskRows} controlsInPlace={model.controlsInPlace} />
+        <RiskRegister rows={report.riskRows} />
       </section>
 
       <section className="tm-card tm-section">
-        <h2 className="tm-heading">5. Precedent vulnerabilities in similar products</h2>
+        <h2 className="tm-heading">5. CVEs in other products</h2>
         <p className="tm-muted">
           Mapping dated {report.precedentCvesAsOf}. These CVEs were found in other products and are linked to the techniques above by the catalog.
           They are not findings about this device, and this tool has not scanned it.
@@ -106,7 +107,7 @@ export default function ReportView({ report, regionNames }: Props) {
                 {report.precedentCves.map((cve) => (
                   <tr key={cve.cveId}>
                     <td className="tm-mono">{cve.cveId}</td>
-                    <td>{cve.product}<div className="tm-muted tm-small">{cve.description}</div></td>
+                    <td>{cve.product}</td>
                     <td>{cve.cvssScore ?? 'Not recorded'}</td>
                     <td className="tm-mono">{cve.viaTechniqueIds.join(', ')}</td>
                   </tr>
@@ -118,8 +119,8 @@ export default function ReportView({ report, regionNames }: Props) {
       </section>
 
       <section className="tm-card tm-section">
-        <h2 className="tm-heading">6. US requirements checklist</h2>
-        <ComplianceChecklist assessment={report.cyberDeviceAssessment} items={report.complianceItems} />
+        <h2 className="tm-heading">6. {CHECKLIST_TITLE}</h2>
+        <ComplianceChecklist assessment={report.cyberDeviceAssessment} items={report.complianceItems} isTitleShown={false} />
       </section>
 
       <section className="tm-card tm-section">

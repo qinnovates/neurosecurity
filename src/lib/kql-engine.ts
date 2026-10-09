@@ -17,6 +17,9 @@
  * @module kql-engine
  */
 
+import { FORBIDDEN_KEYS, hasOwnColumn, requireColumns } from './kql-columns';
+import { aggregate, parseSummarize } from './kql-summarize';
+
 // --- Types ---
 
 export type Row = Record<string, unknown>;
@@ -27,6 +30,15 @@ export interface QueryResult {
   rows: Row[];
   tableName: string;
   error: string | null;
+}
+
+export interface QueryOptions {
+  /**
+   * Refuse a `project` or `summarize` column that no row carries, naming the nearest real one.
+   * Off by default: a caller that does not ask for it gets the earlier behaviour, where such a
+   * column comes back missing or as one blank group.
+   */
+  strictColumns?: boolean;
 }
 
 export interface ParsedOp {
@@ -211,15 +223,17 @@ export function applySort(rows: Row[], clause: string): Row[] {
   return dir === 'desc' ? sorted.reverse() : sorted;
 }
 
-// Dangerous keys that could pollute prototypes if used as object keys
-const FORBIDDEN_KEYS = new Set(['__proto__', 'constructor', 'prototype', 'toString', 'valueOf', 'hasOwnProperty']);
-
-export function applyProject(rows: Row[], clause: string): Row[] {
+/**
+ * `shapeRows` are the rows the columns are read from when `rows` is empty, so a misspelt
+ * column is still reported after a filter that matched nothing.
+ */
+export function applyProject(rows: Row[], clause: string, shapeRows: Row[] = rows, options: QueryOptions = {}): Row[] {
   const fields = clause.split(',').map(f => f.trim()).filter(f => f && !FORBIDDEN_KEYS.has(f));
+  if (options.strictColumns) requireColumns(rows.length > 0 ? rows : shapeRows, fields, 'project');
   return rows.map(row => {
     const out: Row = Object.create(null); // null prototype — immune to pollution
     for (const f of fields) {
-      if (Object.prototype.hasOwnProperty.call(row, f)) {
+      if (hasOwnColumn(row, f)) {
         out[f] = row[f];
       }
     }
@@ -227,46 +241,31 @@ export function applyProject(rows: Row[], clause: string): Row[] {
   });
 }
 
-export function applySummarize(rows: Row[], clause: string): Row[] {
-  const countMatch = clause.match(/count\(\)\s+by\s+(.+)/i);
-  if (countMatch) {
-    const field = countMatch[1].trim();
-    const groups = new Map<string, number>();
-    for (const row of rows) {
-      const key = toStr(getField(row, field));
-      groups.set(key, (groups.get(key) || 0) + 1);
+/** Groups on one column or on several; each group is one distinct combination of their values. */
+export function applySummarize(rows: Row[], clause: string, shapeRows: Row[] = rows, options: QueryOptions = {}): Row[] {
+  const { fn, valueField, groupFields } = parseSummarize(clause);
+  const readFields = fn === 'count' ? groupFields : [...groupFields, valueField];
+  if (options.strictColumns) requireColumns(rows.length > 0 ? rows : shapeRows, readFields, 'summarize');
+
+  const groups = new Map<string, { keys: string[]; values: number[] }>();
+  for (const row of rows) {
+    const keys = groupFields.map(field => toStr(getField(row, field)));
+    const groupId = JSON.stringify(keys);
+    let group = groups.get(groupId);
+    if (!group) {
+      group = { keys, values: [] };
+      groups.set(groupId, group);
     }
-    return Array.from(groups.entries())
-      .sort((a, b) => b[1] - a[1])
-      .map(([key, count]) => ({ [field]: key, count }));
+    group.values.push(fn === 'count' ? 1 : toNum(getField(row, valueField)));
   }
 
-  const aggMatch = clause.match(/(sum|avg|min|max)\((\w+)\)\s+by\s+(.+)/i);
-  if (aggMatch) {
-    const [, fn, numField, groupField] = aggMatch;
-    const gf = groupField.trim();
-    const groups = new Map<string, number[]>();
-    for (const row of rows) {
-      const key = toStr(getField(row, gf));
-      if (!groups.has(key)) groups.set(key, []);
-      groups.get(key)!.push(toNum(getField(row, numField)));
-    }
-    return Array.from(groups.entries())
-      .map(([key, vals]) => {
-        let result: number;
-        switch (fn.toLowerCase()) {
-          case 'sum': result = vals.reduce((a, b) => a + b, 0); break;
-          case 'avg': result = vals.reduce((a, b) => a + b, 0) / vals.length; break;
-          case 'min': result = Math.min(...vals); break;
-          case 'max': result = Math.max(...vals); break;
-          default: result = 0;
-        }
-        return { [gf]: key, [fn.toLowerCase()]: Number(result.toFixed(2)), count: vals.length };
-      })
-      .sort((a, b) => (b[fn.toLowerCase()] as number) - (a[fn.toLowerCase()] as number));
-  }
-
-  throw new Error(`Invalid summarize: "${clause}". Expected: count() by field, or sum/avg/min/max(field) by field`);
+  const summarized = Array.from(groups.values()).map(({ keys, values }): Row => {
+    const out: Row = Object.fromEntries(groupFields.map((field, index) => [field, keys[index]]));
+    if (fn !== 'count') out[fn] = Number(aggregate(fn, values).toFixed(2));
+    out.count = values.length;
+    return out;
+  });
+  return summarized.sort((a, b) => (b[fn] as number) - (a[fn] as number));
 }
 
 export function applyDistinct(rows: Row[], clause: string): Row[] {
@@ -308,7 +307,7 @@ function parseJoinKeys(onClause: string): JoinKey[] {
 }
 
 function requireJoinColumn(rows: Row[], field: string, sideLabel: string): void {
-  if (rows.length > 0 && !rows.some(row => Object.prototype.hasOwnProperty.call(row, field))) {
+  if (rows.length > 0 && !rows.some(row => hasOwnColumn(row, field))) {
     throw new Error(`Join field "${field}" is not a column of ${sideLabel}.`);
   }
 }
@@ -400,8 +399,8 @@ export function parseOperations(segments: string[]): ParsedOp[] {
  *   sort by field [asc|desc] - Sort results
  *   take N / limit N         - Return first N rows
  *   project f1, f2, ...      - Select columns
- *   summarize count() by f   - Group and count
- *   summarize sum(f) by g    - Group and aggregate (sum/avg/min/max)
+ *   summarize count() by f, g - Group on one or more columns and count
+ *   summarize sum(f) by g     - Group and aggregate (sum/avg/min/max)
  *   distinct field            - Unique values
  *   count                     - Total row count
  *   join table on field       - Hash join with another table
@@ -413,6 +412,7 @@ export function executeQuery(
   query: string,
   tables: TableData,
   indexes: Record<string, HashIndex>,
+  options: QueryOptions = {},
 ): QueryResult {
   const trimmed = query.trim();
   if (!trimmed) return { rows: [], tableName: '', error: null };
@@ -440,6 +440,8 @@ export function executeQuery(
 
     const allTableRows = tables[tableName];
     let rows = [...allTableRows];
+    // Where the columns are read from when a filter leaves no rows; unknown once the shape has changed.
+    let shapeRows: Row[] = allTableRows;
 
     for (const op of ops) {
       if (performance.now() - startTime > MAX_EXECUTION_MS) {
@@ -455,6 +457,7 @@ export function executeQuery(
           if (rows.length > MAX_RESULT_ROWS) {
             rows = rows.slice(0, MAX_RESULT_ROWS);
           }
+          shapeRows = rows;
           break;
         case 'sort':
           rows = applySort(rows, op.arg);
@@ -466,13 +469,16 @@ export function executeQuery(
           break;
         }
         case 'project':
-          rows = applyProject(rows, op.arg);
+          rows = applyProject(rows, op.arg, shapeRows, options);
+          shapeRows = rows;
           break;
         case 'summarize':
-          rows = applySummarize(rows, op.arg);
+          rows = applySummarize(rows, op.arg, shapeRows, options);
+          shapeRows = rows;
           break;
         case 'distinct':
           rows = applyDistinct(rows, op.arg);
+          shapeRows = rows;
           break;
         case 'count':
           rows = [{ count: rows.length }];

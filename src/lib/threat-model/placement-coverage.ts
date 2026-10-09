@@ -3,8 +3,10 @@
  * it shows risks, so an absence reads as "not assessed" and never as "clean".
  */
 
-import type { CatalogTechnique } from './catalog-types';
+import { CATALOG_SEVERITIES, type CatalogSeverity, type CatalogTechnique } from './catalog-types';
+import type { ScopeTerm } from './lab-terms';
 import type { PlacementRules } from './reference-data-types';
+import { indexScopeTerms, type ScopeStatement } from './scope-statement';
 
 export interface PlacementCoverage {
   /** Placed, and on the device being looked at. Equals `placed` when no device is given. */
@@ -44,4 +46,39 @@ export function summarisePlacementCoverage(
     notAssessed: techniques.length - placed - notPlaced,
     total: techniques.length,
   };
+}
+
+/** One catalog severity, split by the Lab's four scope terms. */
+export interface SeverityCoverageRow {
+  severity: CatalogSeverity;
+  byTerm: Record<ScopeTerm, number>;
+  total: number;
+}
+
+export interface SeverityCoverage {
+  /** One row per severity, most severe first, including severities with no technique. */
+  rows: SeverityCoverageRow[];
+  totalsByTerm: Record<ScopeTerm, number>;
+  /** The catalog's size; every row total and every term total sums to it. */
+  total: number;
+}
+
+function zeroByTerm(): Record<ScopeTerm, number> {
+  return { applies: 0, would_apply_if: 0, reviewed_outside: 0, not_assessed: 0 };
+}
+
+/** Catalog techniques by severity and by where each stands against the device in focus. */
+export function summariseCoverageBySeverity(techniques: readonly CatalogTechnique[], scope: ScopeStatement): SeverityCoverage {
+  const termById = indexScopeTerms(scope);
+  const rows = CATALOG_SEVERITIES.map((severity): SeverityCoverageRow => ({ severity, byTerm: zeroByTerm(), total: 0 }));
+  const totalsByTerm = zeroByTerm();
+  for (const technique of techniques) {
+    const term = termById.get(technique.id);
+    const row = rows[CATALOG_SEVERITIES.indexOf(technique.severity)];
+    if (term === undefined) continue;
+    row.byTerm[term] += 1;
+    row.total += 1;
+    totalsByTerm[term] += 1;
+  }
+  return { rows, totalsByTerm, total: rows.reduce((sum, row) => sum + row.total, 0) };
 }

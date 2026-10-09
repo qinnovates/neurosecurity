@@ -1,0 +1,29 @@
+/* What must hold on paper and in forced colours: state and marks stay visible without colour. */
+
+@media print {
+  .lab { color: var(--lab-ink); }
+  .lab-chip[aria-pressed="true"], .lab-button[aria-pressed="true"] { background: none; color: var(--lab-ink); border: 2px solid var(--lab-ink); }
+  .lab-table th { position: static; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .lab-table-wrap { overflow: visible; }
+  .lab-material { background: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .lab-panel, .lab-card { break-inside: avoid; }
+  [data-changed="true"] { animation: none; }
+}
+
+@media (forced-colors: active) {
+  /* Pressed, checked, current and selected keep a filled state. */
+  :is(.lab-chip, .lab-button, .lab-pick)[aria-pressed="true"],
+  .lab-segment[aria-checked="true"],
+  .lab :is([aria-current="page"], [aria-current="true"]),
+  .lab-table tbody tr[aria-current="true"],
+  .lab-card[aria-current="true"] { background-color: Highlight; color: HighlightText; border-color: Highlight; forced-color-adjust: none; }
+  .lab-table tbody tr[aria-current="true"] td { border-color: HighlightText; }
+  /* Inside a filled state the marks take its text colour; elsewhere the system's. */
+  .lab-evidence-mark, .lab-hatch-swatch, .lab-severity-stripe, .lab-severity[data-severity="critical"] .lab-severity-stripe { color: inherit; }
+  .lab [data-lit="true"] { outline: 1px dashed CanvasText; outline-offset: -1px; }
+  .lab-steps li[data-state="reached"] .lab-step-number, .lab-steps li[data-state="now"] .lab-step-number { background: CanvasText; color: Canvas; border-color: CanvasText; forced-color-adjust: none; }
+  .lab-steps li[data-state="now"] .lab-step { border-left-color: Highlight; }
+  .lab-notice { border-left-color: CanvasText; }
+  .lab-drawer { border: 1px solid CanvasText; }
+  .lab :focus-visible { outline-color: Highlight; }
+}

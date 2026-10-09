@@ -2,6 +2,8 @@ import FilterChip from '@/components/lab-kit/FilterChip';
 import type { Lens, LensCounts } from '@/lib/threat-model/lens';
 import { PLACED_ENTRY_PATHS, type PlacedEntryPath } from '@/lib/threat-model/reference-data-types';
 import { THREAT_GOALS, type GoalCoverage, type ThreatGoal } from '@/lib/threat-model/report-types';
+import { EFFECT_HEADING, EFFECT_LABELS, ENTRY_PATH_HEADING, ENTRY_PATH_LABELS as ENTRY_PATH_TERMS } from '@/lib/threat-model/lab-terms';
+import { EMPTY_LENS } from '@/lib/threat-model/lens';
 
 interface Props {
   lens: Lens;
@@ -12,17 +14,9 @@ interface Props {
   onChange: (lens: Lens) => void;
 }
 
-export const ENTRY_PATH_LABELS: Record<PlacedEntryPath, string> = {
-  device_systems: 'Through its systems',
-  neural_interface: 'At the neural interface',
-  senses: 'Through the senses',
-};
+export const ENTRY_PATH_LABELS: Readonly<Record<PlacedEntryPath, string>> = ENTRY_PATH_TERMS;
 
-export const GOAL_LABELS: Record<ThreatGoal, string> = {
-  read: 'Read',
-  change: 'Change',
-  deny: 'Deny',
-};
+export const GOAL_LABELS: Readonly<Record<ThreatGoal, string>> = EFFECT_LABELS;
 
 function toggle<Value>(values: readonly Value[], value: Value): Value[] {
   return values.includes(value) ? values.filter((existing) => existing !== value) : [...values, value];
@@ -45,8 +39,8 @@ export default function LensBar({ lens, counts, goalCoverage, selectedElementLab
   const isNarrowed = lens.elementId !== null || lens.entryPaths.length > 0 || lens.goals.length > 0;
   return (
     <section className="model-lenses tm-no-print" aria-label="Lenses on this device's open risks from the technique catalog">
-      <div className="model-lens-group" role="group" aria-label="How it gets in">
-        <span className="lab-label">How it gets in</span>
+      <div className="model-lens-group" role="group" aria-label={ENTRY_PATH_HEADING}>
+        <span className="lab-label">{ENTRY_PATH_HEADING}</span>
         {PLACED_ENTRY_PATHS.map((entryPath) => (
           <FilterChip
             key={entryPath} label={ENTRY_PATH_LABELS[entryPath]} count={counts.byEntryPath[entryPath]}
@@ -54,8 +48,8 @@ export default function LensBar({ lens, counts, goalCoverage, selectedElementLab
           />
         ))}
       </div>
-      <div className="model-lens-group" role="group" aria-label="What it does">
-        <span className="lab-label">What it does</span>
+      <div className="model-lens-group" role="group" aria-label={EFFECT_HEADING}>
+        <span className="lab-label">{EFFECT_HEADING}</span>
         {THREAT_GOALS.map((goal) => (
           <FilterChip
             key={goal} label={GOAL_LABELS[goal]} count={counts.byGoal[goal]} isNotAssessed={isGoalNotAssessed(goal, lens, counts, goalCoverage)}
@@ -72,7 +66,7 @@ export default function LensBar({ lens, counts, goalCoverage, selectedElementLab
         </div>
       )}
       {isNarrowed && (
-        <button type="button" className="tm-button" onClick={() => onChange({ elementId: null, entryPaths: [], goals: [] })}>Show everything</button>
+        <button type="button" className="tm-button" onClick={() => onChange(EMPTY_LENS)}>Show everything</button>
       )}
     </section>
   );

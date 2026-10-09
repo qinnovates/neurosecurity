@@ -19,7 +19,6 @@ export type StudioAction =
   | { type: 'preset-selected'; archetype: DeviceArchetype; registrarVersion: string }
   | { type: 'answers-changed'; archetype: DeviceArchetype; answers: IntakeAnswers; registrarVersion: string }
   | { type: 'risk-decided'; riskId: string; status: RiskStatus; note: string }
-  | { type: 'control-toggled'; control: string }
   | { type: 'model-imported'; model: DeviceModel }
   | { type: 'state-restored'; state: StudioState };
 
@@ -43,16 +42,6 @@ function decideRisk(model: DeviceModel, riskId: string, status: RiskStatus, note
   return { ...model, riskDecisions: isDefault ? otherDecisions : [...otherDecisions, { riskId, status, note }] };
 }
 
-function toggleControl(model: DeviceModel, control: string): DeviceModel {
-  const isInPlace = model.controlsInPlace.includes(control);
-  return {
-    ...model,
-    controlsInPlace: isInPlace
-      ? model.controlsInPlace.filter((existing) => existing !== control)
-      : [...model.controlsInPlace, control],
-  };
-}
-
 export function studioReducer(state: StudioState, action: StudioAction): StudioState {
   switch (action.type) {
     case 'preset-selected':
@@ -65,8 +54,6 @@ export function studioReducer(state: StudioState, action: StudioAction): StudioS
       };
     case 'risk-decided':
       return { ...state, model: decideRisk(state.model, action.riskId, action.status, action.note) };
-    case 'control-toggled':
-      return { ...state, model: toggleControl(state.model, action.control) };
     case 'model-imported':
       return { archetypeId: null, answers: null, model: action.model };
     case 'state-restored':
@@ -76,7 +63,8 @@ export function studioReducer(state: StudioState, action: StudioAction): StudioS
 
 /**
  * True when replacing the device would throw away something the user did: recorded
- * decisions, controls marked in place, changed answers, or an imported model.
+ * decisions, changed answers, or an imported model. A file's older list of controls in place
+ * counts too, since it is only kept while the file's model is.
  */
 export function hasUserWork(state: StudioState, archetypes: readonly DeviceArchetype[]): boolean {
   const { model, answers, archetypeId } = state;

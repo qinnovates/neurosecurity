@@ -1,3 +1,4 @@
+import { describeEvidence } from '@/lib/threat-model/evidence-levels';
 import { NOT_SCORED_LABEL } from '@/lib/threat-model/register-csv';
 import type { RiskRow } from '@/lib/threat-model/report-types';
 import { isRiskAddressed } from '@/lib/threat-model/risk-register';
@@ -5,15 +6,14 @@ import { RISK_STATUS_LABELS } from './risk-status-labels';
 
 interface Props {
   rows: readonly RiskRow[];
-  controlsInPlace: readonly string[];
 }
 
-function ControlList({ row, controlsInPlace }: { row: RiskRow; controlsInPlace: readonly string[] }) {
-  if (row.controls.length === 0) return <span className="tm-muted tm-small">None suggested</span>;
+function DetectionNoteCell({ row }: { row: RiskRow }) {
   return (
-    <ul className="tm-list">
-      {row.controls.map((control) => <li key={control}>{control}{controlsInPlace.includes(control) ? ' (in place)' : ''}</li>)}
-    </ul>
+    <>
+      {row.detectionNote === null ? <span className="tm-muted tm-small">None recorded</span> : row.detectionNote}
+      <div className="tm-muted tm-small">Controls: none recorded for this row.</div>
+    </>
   );
 }
 
@@ -26,7 +26,7 @@ function ThreatCell({ row }: { row: RiskRow }) {
         {row.techniqueId !== null && <> · <span className="tm-mono">{row.techniqueId}</span></>}
       </div>
       {row.catalogState === 'missing' && <span className="tm-badge tm-badge--warning">No longer in the catalog</span>}
-      {row.precedentCveIds.length > 0 && <div className="tm-muted tm-small">Precedent CVEs in similar products: {row.precedentCveIds.length}</div>}
+      {row.precedentCveIds.length > 0 && <div className="tm-muted tm-small">CVEs in other products: {row.precedentCveIds.length}</div>}
     </>
   );
 }
@@ -42,21 +42,21 @@ function ScoreCell({ row }: { row: RiskRow }) {
 }
 
 /** The whole register as it is printed in the report: every row, every column, nothing to operate. */
-export default function RiskRegister({ rows, controlsInPlace }: Props) {
+export default function RiskRegister({ rows }: Props) {
   if (rows.length === 0) return <p className="tm-muted">No rows to show here.</p>;
   return (
     <div className="tm-table-wrap">
       <table className="tm-table">
         <thead>
-          <tr><th>Threat</th><th>Evidence</th><th>Score</th><th>Suggested controls</th><th>Status</th></tr>
+          <tr><th>Threat</th><th>Evidence</th><th>Score</th><th>Detection note, from the catalog</th><th>Status</th></tr>
         </thead>
         <tbody>
           {rows.map((row) => (
-            <tr key={row.riskId} className={isRiskAddressed(row, controlsInPlace) ? 'tm-row--addressed' : undefined}>
+            <tr key={row.riskId} className={isRiskAddressed(row) ? 'tm-row--addressed' : undefined}>
               <td><ThreatCell row={row} /></td>
-              <td>{row.evidenceStatus ?? <span className="tm-muted tm-small">Generic baseline</span>}</td>
+              <td>{row.source === 'catalog' ? describeEvidence(row).label : <span className="tm-muted tm-small">Generic baseline</span>}</td>
               <td><ScoreCell row={row} /></td>
-              <td><ControlList row={row} controlsInPlace={controlsInPlace} /></td>
+              <td><DetectionNoteCell row={row} /></td>
               <td>
                 {RISK_STATUS_LABELS[row.status]}
                 {row.note !== '' && <div className="tm-muted tm-small">{row.note}</div>}

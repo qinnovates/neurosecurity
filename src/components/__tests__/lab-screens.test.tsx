@@ -69,7 +69,7 @@ describe('CatalogView', () => {
     const panel = screen.getByRole('region', { name: engineData.techniques[0].name });
     expect(within(panel).getByText('Precedents in other products')).toBeTruthy();
     expect(within(panel).getByText(/The catalog ties techniques to bands, not to brain regions\./)).toBeTruthy();
-    expect(within(panel).getAllByText(/Placed on|Reviewed and not placed|Not assessed\./).length).toBeGreaterThan(0);
+    expect(within(panel).getAllByText(/Applies to this device|Would apply if|Reviewed, outside the device|Not assessed\./).length).toBeGreaterThan(0);
   });
 });
 

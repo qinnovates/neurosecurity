@@ -1,8 +1,9 @@
 import FilterChip from '@/components/lab-kit/FilterChip';
 import Panel from '@/components/lab-kit/Panel';
-import { CATALOG_SEVERITIES, type CatalogSeverity, type CatalogTactic, type TechniqueMode } from '@/lib/threat-model/catalog-types';
-import { PLACEMENT_STATES, isCatalogFiltered, type CatalogFacetCounts, type CatalogFilters, type PlacementState } from '@/lib/threat-model/catalog-filter';
+import { CATALOG_SEVERITIES, type CatalogTactic, type TechniqueMode } from '@/lib/threat-model/catalog-types';
+import { isCatalogFiltered, type CatalogFacetCounts, type CatalogFilters } from '@/lib/threat-model/catalog-filter';
 import type { EvidenceCount } from '@/lib/threat-model/evidence-levels';
+import { CATALOG_SEVERITY_LABELS, EFFECT_HEADING, SCOPE_TERMS, SCOPE_TERM_LABELS } from '@/lib/threat-model/lab-terms';
 import { MODE_LABELS } from './TechniquePanel';
 
 interface Props {
@@ -17,13 +18,6 @@ interface Props {
 }
 
 const MODES: readonly TechniqueMode[] = ['R', 'M', 'D'];
-const SEVERITY_LABELS: Record<CatalogSeverity, string> = { critical: 'Critical', high: 'High', medium: 'Medium', low: 'Low' };
-export const PLACEMENT_LABELS: Record<PlacementState, string> = {
-  'placed-here': 'Placed here',
-  'placed-elsewhere': 'Placed elsewhere',
-  'not-placed': 'Not placed',
-  'not-assessed': 'Not assessed',
-};
 
 function toggle<Value>(values: readonly Value[], value: Value): Value[] {
   return values.includes(value) ? values.filter((existing) => existing !== value) : [...values, value];
@@ -43,8 +37,8 @@ export default function CatalogFilterPanel({ filters, facets, evidenceValues, ta
             />
           ))}
         </div>
-        <div className="catalog-filter-group" role="group" aria-label="What it does">
-          <span className="lab-label">What it does</span>
+        <div className="catalog-filter-group" role="group" aria-label={EFFECT_HEADING}>
+          <span className="lab-label">{EFFECT_HEADING}</span>
           {MODES.map((mode) => (
             <FilterChip
               key={mode} label={MODE_LABELS[mode]} count={facets.modes.get(mode) ?? 0}
@@ -56,16 +50,16 @@ export default function CatalogFilterPanel({ filters, facets, evidenceValues, ta
           <span className="lab-label">Severity</span>
           {CATALOG_SEVERITIES.map((severity) => (
             <FilterChip
-              key={severity} label={SEVERITY_LABELS[severity]} count={facets.severities.get(severity) ?? 0}
+              key={severity} label={CATALOG_SEVERITY_LABELS[severity]} count={facets.severities.get(severity) ?? 0}
               isPressed={filters.severities.includes(severity)} onToggle={() => onChange({ ...filters, severities: toggle(filters.severities, severity) })}
             />
           ))}
         </div>
         <div className="catalog-filter-group" role="group" aria-label={`On ${deviceName}`}>
           <span className="lab-label">On {deviceName}</span>
-          {PLACEMENT_STATES.map((state) => (
+          {SCOPE_TERMS.map((state) => (
             <FilterChip
-              key={state} label={PLACEMENT_LABELS[state]} count={facets.placement.get(state) ?? 0}
+              key={state} label={SCOPE_TERM_LABELS[state]} count={facets.placement.get(state) ?? 0}
               isPressed={filters.placement.includes(state)} onToggle={() => onChange({ ...filters, placement: toggle(filters.placement, state) })}
             />
           ))}
@@ -77,10 +71,10 @@ export default function CatalogFilterPanel({ filters, facets, evidenceValues, ta
             {tactics.map((tactic) => <option key={tactic.id} value={tactic.id}>{tactic.name}</option>)}
           </select>
         </label>
-        {(filters.bandId !== null || filters.domain !== null) && (
+        {(filters.bandIds.length > 0 || filters.domain !== null) && (
           <div className="catalog-filter-group" role="group" aria-label="From the matrix">
             <span className="lab-label">From the matrix</span>
-            {filters.bandId !== null && <button type="button" className="lab-chip" aria-pressed="true" onClick={() => onChange({ ...filters, bandId: null })}>Band {filters.bandId} <span aria-hidden="true">×</span></button>}
+            {filters.bandIds.map((bandId) => <button key={bandId} type="button" className="lab-chip" aria-pressed="true" onClick={() => onChange({ ...filters, bandIds: filters.bandIds.filter((existing) => existing !== bandId) })}>Band {bandId} <span aria-hidden="true">×</span></button>)}
             {filters.domain !== null && <button type="button" className="lab-chip" aria-pressed="true" onClick={() => onChange({ ...filters, domain: null })}>Domain {filters.domain} <span aria-hidden="true">×</span></button>}
           </div>
         )}

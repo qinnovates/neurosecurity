@@ -68,6 +68,17 @@ export interface PlacementRules {
   notPlaced: Record<string, NotPlacedDecision>;
 }
 
+/** What the placement table says about itself, and how much of it a person has reviewed. */
+export interface PlacementTableInfo {
+  version: string;
+  /** The file's own statement of its review status, verbatim. */
+  status: string;
+  placementCount: number;
+  /** Placements whose record carries a review field. The file defines none today, so this is 0 until it does. */
+  reviewedPlacementCount: number;
+  notPlacedCount: number;
+}
+
 /** A subject area beyond one device's architecture, mapped onto existing catalog techniques. */
 export interface ThreatTheme {
   id: string;
@@ -115,15 +126,22 @@ export interface ComplianceRequirement {
 
 export interface ComplianceData {
   jurisdiction: 'US';
+  /** The checklist file's version. */
+  version: string;
+  /** The file's own statement of how far it has been reviewed. */
+  status: string;
   sources: ComplianceSource[];
   marketingSubmissionTypes: SubmissionType[];
   internetCapableMedia: LinkMedium[];
+  /** The passage the media list was read from, in the source's words. */
+  internetCapableMediaQuote: string;
   requirements: ComplianceRequirement[];
 }
 
 export interface ReferenceData {
   archetypes: DeviceArchetype[];
   placementRules: PlacementRules;
+  placementTable: PlacementTableInfo;
   strideMap: StrideMap;
   themes: ThreatTheme[];
   compliance: ComplianceData;

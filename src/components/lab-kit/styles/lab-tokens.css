@@ -1,0 +1,141 @@
+/*
+ * Tokens. Every colour is a literal so the contrast test can read it; the measured pairs are
+ * asserted in __tests__/token-contrast.test.ts. A subtree can be pinned to one theme with
+ * data-lab-theme, which the kit page uses to show both side by side.
+ */
+
+/* Light colours. The print block at the end of this file must repeat this block exactly. */
+:root, [data-lab-theme="light"] {
+  --lab-ground: #f5f5f7;
+  --lab-panel: #ffffff;
+  --lab-panel-raised: #fbfbfd;
+  --lab-material: rgba(251, 251, 253, 0.8);
+  --lab-ink: #1d1d1f;
+  --lab-ink-soft: #515154;
+  --lab-ink-faint: #636366;
+  --lab-line: rgba(0, 0, 0, 0.1);
+  --lab-control-line: rgba(0, 0, 0, 0.48);
+  --lab-hover: rgba(0, 0, 0, 0.04);
+  --lab-select: #0060c0;
+  --lab-select-ink: #ffffff;
+  --lab-select-soft: rgba(0, 96, 192, 0.08);
+  --lab-focus: #0060c0;
+  --lab-critical: #c80014;
+  --lab-caution: #b25a00;
+  --lab-flow: #0b766c;
+  --lab-shadow-float: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.14);
+}
+
+:root[data-theme="dark"], [data-lab-theme="dark"] {
+  --lab-ground: #000000;
+  --lab-panel: #1c1c1e;
+  --lab-panel-raised: #2c2c2e;
+  --lab-material: rgba(28, 28, 30, 0.8);
+  --lab-ink: #f5f5f7;
+  --lab-ink-soft: #b4b4b9;
+  --lab-ink-faint: #a1a1a6;
+  --lab-line: rgba(255, 255, 255, 0.12);
+  --lab-control-line: rgba(255, 255, 255, 0.42);
+  --lab-hover: rgba(255, 255, 255, 0.06);
+  --lab-select: #5aa9ff;
+  --lab-select-ink: #000000;
+  --lab-select-soft: rgba(90, 169, 255, 0.1);
+  --lab-focus: #5aa9ff;
+  --lab-critical: #ff7a72;
+  --lab-caution: #f59e0b;
+  --lab-flow: #45cdbd;
+  --lab-shadow-float: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+:root {
+  /* Type: one family, five sizes, weights 400 and 600. Monospace is for identifiers and code only. */
+  --lab-font: "Inter", system-ui, sans-serif;
+  --lab-mono: var(--font-mono, ui-monospace, monospace);
+  --lab-text-meta: 0.75rem;
+  --lab-text-body: 0.8125rem;
+  --lab-text-title: 0.9375rem;
+  --lab-text-screen: 1.375rem;
+  --lab-text-figure: 1.75rem;
+  --lab-measure: 72ch;
+  /* Shape. */
+  --lab-radius-s: 6px;
+  --lab-radius-m: 10px;
+  --lab-radius-l: 14px;
+  /* Space: a 4px grid. */
+  --lab-gap: 0.75rem;
+  --lab-pad: 1rem;
+  --lab-row: 2rem;
+  /* Motion. Durations in motion/motion-tokens.ts must match; a test checks it. */
+  --lab-dur-1: 160ms;
+  --lab-dur-2: 280ms;
+  --lab-dur-3: 420ms;
+  --lab-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --lab-spring: cubic-bezier(0.3, 1.2, 0.5, 1);
+}
+
+/* A damped spring (damping ratio 0.8, about 1.5% overshoot) where the browser can draw it. */
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    --lab-spring: linear(0, 0.053, 0.175, 0.324, 0.474, 0.609, 0.723, 0.814, 0.884, 0.934, 0.969, 0.991, 1.005, 1.012, 1.015, 1.015, 1.014, 1.012, 1.009, 1.007, 1.005, 1.004, 1.002, 1.001, 1);
+  }
+}
+
+/*
+ * Temporary aliases: old names still used outside the kit. Each screen team removes its
+ * uses, then the alias goes. Declared per theme scope so they follow a pinned subtree.
+ */
+:root, [data-lab-theme] {
+  --lab-line-strong: var(--lab-control-line);
+  --lab-high: var(--lab-caution);
+}
+:root {
+  --lab-radius: var(--lab-radius-s);
+  --motion-quick: var(--lab-dur-1);
+  --motion-move: var(--lab-dur-2);
+  --motion-ease: var(--lab-ease);
+  --motion-flow: 2.4s;
+  --motion-trace-step: 700ms;
+}
+
+/* Less motion: every move is instant, every state change still happens. */
+@media (prefers-reduced-motion: reduce) {
+  :root { --lab-dur-1: 0ms; --lab-dur-2: 0ms; --lab-dur-3: 0ms; --motion-flow: 0s; --motion-trace-step: 0ms; }
+}
+
+@media (pointer: coarse) {
+  :root { --lab-row: 2.75rem; }
+}
+
+/* Paper is light whatever the theme on screen: every colour token goes back to its light value. */
+@media print {
+  :root, :root[data-theme="dark"], [data-lab-theme="light"], [data-lab-theme="dark"] {
+    --lab-ground: #f5f5f7;
+    --lab-panel: #ffffff;
+    --lab-panel-raised: #fbfbfd;
+    --lab-material: rgba(251, 251, 253, 0.8);
+    --lab-ink: #1d1d1f;
+    --lab-ink-soft: #515154;
+    --lab-ink-faint: #636366;
+    --lab-line: rgba(0, 0, 0, 0.1);
+    --lab-control-line: rgba(0, 0, 0, 0.48);
+    --lab-hover: rgba(0, 0, 0, 0.04);
+    --lab-select: #0060c0;
+    --lab-select-ink: #ffffff;
+    --lab-select-soft: rgba(0, 96, 192, 0.08);
+    --lab-focus: #0060c0;
+    --lab-critical: #c80014;
+    --lab-caution: #b25a00;
+    --lab-flow: #0b766c;
+    --lab-shadow-float: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.14);
+    color-scheme: light;
+  }
+  /* The site's own text and surface colours follow, so nothing inherited prints light on white. */
+  :root:has(.lab) {
+    --color-bg-deep: var(--lab-ground);
+    --color-bg-surface: var(--lab-panel);
+    --color-bg-elevated: var(--lab-panel-raised);
+    --color-text-primary: var(--lab-ink);
+    --color-text-muted: var(--lab-ink-soft);
+    --color-text-faint: var(--lab-ink-faint);
+  }
+}

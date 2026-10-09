@@ -26,7 +26,7 @@ describe('isGoalNotAssessed', () => {
   it('is true only for a zero across the whole device where the placement table is incomplete', () => {
     for (let index = 0; index < referenceData.archetypes.length; index += 1) {
       const report = reportFor(index);
-      const counts = countOpenRisks(report.riskRows, EMPTY_LENS, report.model.controlsInPlace);
+      const counts = countOpenRisks(report.riskRows, EMPTY_LENS);
       for (const goal of THREAT_GOALS) {
         const coverage = report.goalCoverage[goal];
         const expected = counts.byGoal[goal] === 0 && coverage.placedTechniques < coverage.catalogTechniques;
@@ -38,7 +38,7 @@ describe('isGoalNotAssessed', () => {
   it('treats a zero as a real count once the view is narrowed to a part', () => {
     const report = reportFor(0);
     const lens: Lens = { ...EMPTY_LENS, elementId: report.model.components[0].id };
-    const counts = countOpenRisks(report.riskRows, lens, report.model.controlsInPlace);
+    const counts = countOpenRisks(report.riskRows, lens);
     for (const goal of THREAT_GOALS) expect(isGoalNotAssessed(goal, lens, counts, report.goalCoverage)).toBe(false);
   });
 });
@@ -46,7 +46,7 @@ describe('isGoalNotAssessed', () => {
 describe('LensBar', () => {
   it('shows a count on every lens, or says "not assessed", and never a bare zero for an unassessed goal', () => {
     const report = reportFor(0);
-    const counts = countOpenRisks(report.riskRows, EMPTY_LENS, report.model.controlsInPlace);
+    const counts = countOpenRisks(report.riskRows, EMPTY_LENS);
     render(<LensBar lens={EMPTY_LENS} counts={counts} goalCoverage={report.goalCoverage} selectedElementLabel={null} onChange={() => undefined} />);
     for (const goal of THREAT_GOALS) {
       const label = { read: 'Read', change: 'Change', deny: 'Deny' }[goal];
@@ -58,11 +58,11 @@ describe('LensBar', () => {
 
   it('adds a goal to the lens when its chip is pressed', () => {
     const report = reportFor(0);
-    const counts = countOpenRisks(report.riskRows, EMPTY_LENS, report.model.controlsInPlace);
+    const counts = countOpenRisks(report.riskRows, EMPTY_LENS);
     const onChange = vi.fn();
     render(<LensBar lens={EMPTY_LENS} counts={counts} goalCoverage={report.goalCoverage} selectedElementLabel={null} onChange={onChange} />);
     fireEvent.click(screen.getByRole('button', { name: `Read ${counts.byGoal.read}` }));
-    expect(onChange).toHaveBeenCalledWith({ elementId: null, entryPaths: [], goals: ['read'] });
+    expect(onChange).toHaveBeenCalledWith({ ...EMPTY_LENS, goals: ['read'] });
   });
 });
 
@@ -70,7 +70,7 @@ describe('PartStrip', () => {
   it('lists every part with its open risks and selects one on press', () => {
     const report = reportFor(1);
     const { model } = report;
-    const counts = countOpenRisksByElement(report.riskRows, model.controlsInPlace);
+    const counts = countOpenRisksByElement(report.riskRows);
     const onLensChange = vi.fn();
     render(<PartStrip model={model} lens={EMPTY_LENS} openRiskCounts={counts} onLensChange={onLensChange} />);
     for (const component of model.components) {

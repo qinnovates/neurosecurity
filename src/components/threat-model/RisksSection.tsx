@@ -15,7 +15,6 @@ type SourceFilter = 'catalog' | 'stride' | 'all';
 interface Props {
   /** Rows the current part and lenses let through. */
   rows: readonly RiskRow[];
-  controlsInPlace: readonly string[];
   /** Looks up the catalog entry behind a row, for its evidence tier. */
   techniqueById: ReadonlyMap<string, CatalogTechnique>;
   onDecide: (riskId: string, status: RiskStatus, note: string) => void;
@@ -56,7 +55,7 @@ function buildColumns(onDecide: Props['onDecide'], techniqueById: Props['techniq
       render: (row) => (row.catalogSeverity === null ? <span className="lab-soft">Not scored</span> : <SeverityMark severity={row.catalogSeverity} />),
       sortValue: (row) => (row.catalogSeverity === null ? SORTS_LAST : CATALOG_SEVERITIES.indexOf(row.catalogSeverity)),
     },
-    { id: 'cves', header: 'Precedent CVEs', render: (row) => <span className="lab-figure">{row.precedentCveIds.length}</span>, sortValue: (row) => -row.precedentCveIds.length },
+    { id: 'cves', header: 'CVEs in other products', render: (row) => <span className="lab-figure">{row.precedentCveIds.length}</span>, sortValue: (row) => -row.precedentCveIds.length },
     {
       id: 'decision', header: 'Decision',
       render: (row) => (
@@ -69,17 +68,17 @@ function buildColumns(onDecide: Props['onDecide'], techniqueById: Props['techniq
 }
 
 /** The register for triage: one line per risk, evidence first, open rows on top. A row opens its detail beside the table. */
-export default function RisksSection({ rows, controlsInPlace, techniqueById, onDecide, onOpenRisk }: Props) {
+export default function RisksSection({ rows, techniqueById, onDecide, onOpenRisk }: Props) {
   const [sourceFilter, setSourceFilter] = useState<SourceFilter>('catalog');
   const [isOpenOnly, setOpenOnly] = useState(false);
 
   const sourceRows = rows.filter((row) => matchesSource(row, sourceFilter));
-  const openRows = sourceRows.filter((row) => !isRiskAddressed(row, controlsInPlace));
+  const openRows = sourceRows.filter((row) => !isRiskAddressed(row));
   // Open rows first, so triage starts at the top; the order within each group is kept.
-  const visibleRows = isOpenOnly ? openRows : [...openRows, ...sourceRows.filter((row) => isRiskAddressed(row, controlsInPlace))];
+  const visibleRows = isOpenOnly ? openRows : [...openRows, ...sourceRows.filter((row) => isRiskAddressed(row))];
   const emptyMessage = sourceRows.length === 0
     ? 'No risk of this kind matches the part and lenses chosen. Nothing is hidden beyond them; choose "Show everything" to see the rest.'
-    : 'Every row here has a decision or a control in place.';
+    : 'Every row here has a decision recorded.';
 
   return (
     <section className="lab-panel model-register" aria-label="Risk register">
@@ -93,9 +92,9 @@ export default function RisksSection({ rows, controlsInPlace, techniqueById, onD
         <FilterChip label="Open only" count={openRows.length} isPressed={isOpenOnly} onToggle={() => setOpenOnly(!isOpenOnly)} />
       </div>
       <DataTable
-        caption={`${openRows.length} open of ${sourceRows.length}. A row is addressed once it has a decision or one of its controls is marked in place. Enter opens a row.`}
+        caption={`${openRows.length} open of ${sourceRows.length}. A row closes only when a decision is recorded on that row. Enter opens a row.`}
         columns={buildColumns(onDecide, techniqueById)} rows={visibleRows} rowKey={(row) => row.riskId} emptyMessage={emptyMessage}
-        onOpenRow={(row) => onOpenRisk(row.riskId)} isRowQuiet={(row) => isRiskAddressed(row, controlsInPlace)}
+        onOpenRow={(row) => onOpenRisk(row.riskId)} isRowQuiet={isRiskAddressed}
       />
     </section>
   );

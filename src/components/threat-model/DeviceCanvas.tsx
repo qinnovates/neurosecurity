@@ -45,7 +45,7 @@ export default function DeviceCanvas({ report, lens, onLensChange, selectedChain
       ? { componentIds: viewSelection.highlightedComponentIds, linkIds: viewSelection.highlightedLinkIds }
       : null;
   // Counts follow the other lenses, so the diagram shows where the selected kind of risk sits.
-  const rowsUnderLens = applyLens(report.riskRows, { ...lens, elementId: null });
+  const rowsUnderLens = applyLens(report.riskRows, { ...lens, elementId: null }, { model, techniques: [] });
   const zoneCount = new Set(model.components.map((component) => component.trustZone)).size;
   const selectElement = (elementId: string): void => onLensChange({ ...lens, elementId: lens.elementId === elementId ? null : elementId });
 
@@ -77,7 +77,7 @@ export default function DeviceCanvas({ report, lens, onLensChange, selectedChain
             highlight={highlight}
             selectedElementId={lens.elementId}
             onSelectElement={selectElement}
-            openRiskCounts={countOpenRisksByElement(rowsUnderLens, model.controlsInPlace)}
+            openRiskCounts={countOpenRisksByElement(rowsUnderLens)}
             chainSteps={chainMarkers}
             reachedStepCount={selectedChain !== null && (chainPlayback.isPlaying || chainPlayback.reached < chainMarkers.length) ? chainPlayback.reached : undefined}
             payloadFlows={payloadFlows}

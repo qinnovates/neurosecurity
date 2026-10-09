@@ -1,14 +1,26 @@
-import type { ComplianceItem, CyberDeviceAssessment, RequirementApplicability, RequirementEvidence } from '@/lib/threat-model/report-types';
+import { CHECKLIST_TITLE } from '@/lib/threat-model/compliance-us';
+import type {
+  ComplianceItem, CyberDeviceAssessment, CyberDeviceConnectivity, RequirementApplicability, RequirementEvidence,
+} from '@/lib/threat-model/report-types';
 
 interface Props {
   assessment: CyberDeviceAssessment;
   items: readonly ComplianceItem[];
+  /** False where the surrounding page already heads the section with the title. */
+  isTitleShown?: boolean;
 }
 
 const APPLICABILITY_LABELS: Record<RequirementApplicability, string> = {
   required: 'Required by statute',
   recommended: 'Recommended by FDA guidance',
   not_required: 'Not required here',
+  not_evaluated: 'Not evaluated',
+  not_determined: 'Not determined by this tool',
+};
+
+const CONNECTIVITY_LABELS: Record<CyberDeviceConnectivity, string> = {
+  meets: 'As modelled, it meets the connectivity part of the definition.',
+  not_determined: 'Not determined by this tool.',
 };
 
 const EVIDENCE_LABELS: Record<RequirementEvidence, string> = {
@@ -16,17 +28,27 @@ const EVIDENCE_LABELS: Record<RequirementEvidence, string> = {
   user_must_supply: 'You must supply this',
 };
 
-export default function ComplianceChecklist({ assessment, items }: Props) {
+export default function ComplianceChecklist({ assessment, items, isTitleShown = true }: Props) {
+  const sourceCount = assessment.checklistSources.length;
   return (
     <div>
+      {isTitleShown && <h2 className="tm-heading">{CHECKLIST_TITLE}</h2>}
       <p className="tm-notice">
         This is a checklist of US requirements with their sources. It is not a compliance determination and not legal advice.
         Have a qualified regulatory professional review anything you file.
       </p>
+      <p>{assessment.checklistStatus}</p>
+      <p className="tm-muted">
+        Not covered here: anything outside the {sourceCount} source{sourceCount === 1 ? '' : 's'} this list was built from.
+      </p>
+      <ul className="tm-list tm-muted">
+        {assessment.checklistSources.map((source) => <li key={source.id}>{source.title}. Read {source.dateRead}.</li>)}
+      </ul>
       <section className="tm-card">
         <h3 className="tm-heading">Is this a cyber device?</h3>
-        <p>{assessment.isCyberDevice ? 'As modelled, it meets the connectivity part of the definition.' : 'As modelled, it does not meet the connectivity part of the definition.'}</p>
+        <p>{CONNECTIVITY_LABELS[assessment.connectivity]}</p>
         <p className="tm-muted">{assessment.explanation}</p>
+        <blockquote className="tm-quote">{assessment.connectivityQuote}</blockquote>
       </section>
       {items.map((item) => (
         <section key={item.requirementId} className="tm-card">

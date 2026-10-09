@@ -100,7 +100,7 @@ export default function IntakeForm({ archetypes, regions, archetype, answers, on
       </label>
 
       <label className="tm-field">
-        <span className="tm-label">What it does</span>
+        <span className="tm-label">Records or stimulates</span>
         <select className="tm-select" value={answers.direction} onChange={(event) => update({ direction: event.target.value as InterfaceDirection })}>
           {INTERFACE_DIRECTIONS.map((direction) => <option key={direction} value={direction}>{DIRECTION_LABELS[direction]}</option>)}
         </select>

@@ -1,0 +1,27 @@
+/*
+ * Floating layers. The drawer is the inspector: it springs in beside the work on a wide
+ * screen and rises as a sheet under 720px. It is the only place the float shadow is used.
+ */
+
+.lab-drawer { position: fixed; top: var(--lab-drawer-top, 0); bottom: 0; right: -1rem; z-index: 50; display: grid; grid-template-rows: auto minmax(0, 1fr); width: min(27rem, calc(100vw + 1rem)); padding-right: 1rem; color: var(--lab-ink); background: var(--lab-panel-raised); border-left: 1px solid var(--lab-line); border-radius: var(--lab-radius-l) 0 0 var(--lab-radius-l); box-shadow: var(--lab-shadow-float); animation: lab-drawer-in var(--lab-dur-3) var(--lab-spring) both; }
+.lab-drawer:focus { outline: none; }
+.lab-drawer-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--lab-gap); padding: var(--lab-pad) var(--lab-pad) var(--lab-gap); border-bottom: 1px solid var(--lab-line); }
+.lab-drawer-title { font-size: var(--lab-text-title); font-weight: 600; margin: 0; }
+.lab-drawer-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; }
+.lab-drawer-body { overflow: auto; padding: var(--lab-gap) var(--lab-pad) var(--lab-pad); overscroll-behavior: contain; }
+
+/* The extra rem off the edge hides the gap the spring's overshoot would open. */
+@keyframes lab-drawer-in { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes lab-sheet-in { from { transform: translateY(100%); } to { transform: none; } }
+
+@media (max-width: 719.98px) {
+  .lab-drawer { top: auto; left: 0; right: 0; bottom: -1rem; width: auto; max-height: calc(80dvh + 1rem); padding-right: 0; padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); border-left: 0; border-top: 1px solid var(--lab-line); border-radius: var(--lab-radius-l) var(--lab-radius-l) 0 0; animation-name: lab-sheet-in; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-drawer { animation: none; }
+}
+
+@media print {
+  .lab-drawer { position: static; width: auto; max-height: none; padding: 0; box-shadow: none; border: 1px solid var(--lab-line); border-radius: 0; animation: none; }
+}

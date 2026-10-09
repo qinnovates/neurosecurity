@@ -16,8 +16,8 @@ describe('evidence', () => {
     expect(describeEvidence({ evidenceTier: 'speculative', evidenceStatus: 'PLAUSIBLE' }).level).toBe('speculative');
   });
 
-  it('falls back to the legacy status when a record has no tier, and never calls it validated', () => {
-    expect(describeEvidence({ evidenceTier: null, evidenceStatus: 'CONFIRMED' })).toMatchObject({ level: 'demonstrated', label: 'Confirmed' });
+  it('falls back to the catalog\'s tier for the legacy status when a record has no tier, and never calls it validated', () => {
+    expect(describeEvidence({ evidenceTier: null, evidenceStatus: 'CONFIRMED' })).toMatchObject({ level: 'demonstrated', label: 'Demonstrated (lab)' });
     expect(describeEvidence({ evidenceTier: null, evidenceStatus: 'emerging' }).level).toBe('theoretical');
   });
 

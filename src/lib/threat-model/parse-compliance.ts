@@ -55,8 +55,14 @@ export function parseComplianceUs(raw: unknown): ComplianceData {
   const fail = (message: string): never => { throw new ThreatModelDataError(DATA_FILE, message); };
   if (!isRecord(raw) || raw.jurisdiction !== 'US') return fail('the top level must be an object with jurisdiction "US"');
   if (!isArrayOf(raw.marketingSubmissionTypes, SUBMISSION_TYPES)) return fail('"marketingSubmissionTypes" must list known submission types');
+  if (!isBoundedString(raw.version, MAX_TEXT_LENGTH)) return fail('"version" must be a string');
+  if (!isBoundedString(raw.status, MAX_TEXT_LENGTH)) return fail('"status" must say how far the list has been reviewed');
   if (!isRecord(raw.internetCapableMedia) || !isArrayOf(raw.internetCapableMedia.media, LINK_MEDIA)) {
     return fail('"internetCapableMedia.media" must list known link types');
+  }
+  const mediaQuote = raw.internetCapableMedia.quote;
+  if (!isBoundedString(mediaQuote, MAX_TEXT_LENGTH) || mediaQuote.length < MIN_QUOTE_LENGTH) {
+    return fail(`"internetCapableMedia.quote" must quote its source in at least ${MIN_QUOTE_LENGTH} characters`);
   }
 
   const sources = parseList<ComplianceSource>(raw.sources, 'sources', findSourceProblem);
@@ -69,9 +75,12 @@ export function parseComplianceUs(raw: unknown): ComplianceData {
 
   return {
     jurisdiction: 'US',
+    version: raw.version,
+    status: raw.status,
     sources,
     marketingSubmissionTypes: raw.marketingSubmissionTypes,
     internetCapableMedia: raw.internetCapableMedia.media,
+    internetCapableMediaQuote: mediaQuote,
     requirements,
   };
 }

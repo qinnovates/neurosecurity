@@ -15,14 +15,12 @@ interface Props {
   placementReasons: readonly string[];
   precedentCves: readonly PrecedentCveEntry[];
   precedentCvesAsOf: string;
-  controlsInPlace: readonly string[];
   onDecide: (riskId: string, status: RiskStatus, note: string) => void;
-  onToggleControl: (control: string) => void;
   onClose: () => void;
 }
 
 /** Everything about one risk in one place: what it is, why it is here, what was seen elsewhere, and what you decided. */
-export default function RiskDetail({ row, technique, placementReasons, precedentCves, precedentCvesAsOf, controlsInPlace, onDecide, onToggleControl, onClose }: Props) {
+export default function RiskDetail({ row, technique, placementReasons, precedentCves, precedentCvesAsOf, onDecide, onClose }: Props) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   // The panel opens in answer to a row, so reading continues here.
   useEffect(() => { headingRef.current?.focus(); }, [row.riskId]);
@@ -51,14 +49,8 @@ export default function RiskDetail({ row, technique, placementReasons, precedent
         <h3 className="lab-label">Scores</h3>
         <p className="lab-id model-risk-vector">{row.cvssBaseVector ?? NOT_SCORED_LABEL}</p>
         {row.nissScore !== null && <p className="lab-soft">NISS {row.nissScore}. NISS is a proposed score and is not peer reviewed.</p>}
-        {technique?.detection != null && (
-          <>
-            <h3 className="lab-label">Detection, from the catalog</h3>
-            <p>{technique.detection}</p>
-          </>
-        )}
 
-        <h3 className="lab-label">Precedents in other products</h3>
+        <h3 className="lab-label">CVEs in other products</h3>
         {precedentCves.length === 0 ? <p className="lab-soft">No CVE is linked to this technique in the mapping dated {precedentCvesAsOf}. That is not a finding about this device.</p> : (
           <>
             <p className="lab-soft">Found in other products and linked to this technique by the catalog, as of {precedentCvesAsOf}. Not findings about this device.</p>
@@ -68,13 +60,9 @@ export default function RiskDetail({ row, technique, placementReasons, precedent
           </>
         )}
 
-        <h3 className="lab-label">Suggested controls</h3>
-        {row.controls.length === 0 ? <p className="lab-soft">None suggested.</p> : row.controls.map((control) => (
-          <label key={control} className="tm-check">
-            <input type="checkbox" checked={controlsInPlace.includes(control)} onChange={() => onToggleControl(control)} />
-            <span>{control}</span>
-          </label>
-        ))}
+        <h3 className="lab-label">Detection note, from the catalog</h3>
+        {row.detectionNote === null ? <p className="lab-soft">None recorded.</p> : <p>{row.detectionNote}</p>}
+        <p className="lab-soft">Controls: none recorded for this row.</p>
 
         <h3 className="lab-label">Your decision</h3>
         <select className="tm-select" aria-label="Decision" value={row.status} onChange={(event) => onDecide(row.riskId, event.target.value as RiskStatus, row.note)}>

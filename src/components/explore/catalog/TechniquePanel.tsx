@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import EvidenceMark from '@/components/lab-kit/EvidenceMark';
 import SeverityMark from '@/components/lab-kit/SeverityMark';
 import type { CatalogTactic, CatalogTechnique, PrecedentCve } from '@/lib/threat-model/catalog-types';
-import type { PlacementState } from '@/lib/threat-model/catalog-filter';
+import { EFFECT_LABELS, GOAL_BY_MODE, SCOPE_TERM_LABELS, type ScopeTerm } from '@/lib/threat-model/lab-terms';
 import type { PlacementRules } from '@/lib/threat-model/reference-data-types';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   tactic: CatalogTactic | undefined;
   precedentCves: readonly PrecedentCve[];
   precedentCvesAsOf: string;
-  placementState: PlacementState;
+  placementState: ScopeTerm;
   placementRules: PlacementRules;
   deviceName: string;
   /** Names of related techniques that exist in the catalog, by id. */
@@ -20,12 +20,12 @@ interface Props {
   onClose: () => void;
 }
 
-export const MODE_LABELS = { R: 'Read', M: 'Change', D: 'Deny' } as const;
+export const MODE_LABELS = { R: EFFECT_LABELS[GOAL_BY_MODE.R], M: EFFECT_LABELS[GOAL_BY_MODE.M], D: EFFECT_LABELS[GOAL_BY_MODE.D] } as const;
 
-function describePlacement(state: PlacementState, technique: CatalogTechnique, rules: PlacementRules, deviceName: string): string {
-  if (state === 'placed-here') return `Placed on ${deviceName}. ${rules.placements[technique.id]?.basis ?? ''}`;
-  if (state === 'placed-elsewhere') return `Placed on other kinds of device, not on ${deviceName}: this device does not meet its conditions. ${rules.placements[technique.id]?.basis ?? ''}`;
-  if (state === 'not-placed') return `Reviewed and not placed on a device. ${rules.notPlaced[technique.id]?.reason ?? ''}`;
+function describePlacement(state: ScopeTerm, technique: CatalogTechnique, rules: PlacementRules, deviceName: string): string {
+  if (state === 'applies') return `${SCOPE_TERM_LABELS.applies}. ${rules.placements[technique.id]?.basis ?? ''}`;
+  if (state === 'would_apply_if') return `Would apply if ${deviceName} met the technique's conditions; it does not. ${rules.placements[technique.id]?.basis ?? ''}`;
+  if (state === 'reviewed_outside') return `${SCOPE_TERM_LABELS.reviewed_outside}. ${rules.notPlaced[technique.id]?.reason ?? ''}`;
   return 'Not assessed. No placement decision has been recorded for this technique. That is not the same as it not applying.';
 }
 
@@ -59,8 +59,8 @@ export default function TechniquePanel({
         <p className="lab-soft">Bands are layers in QIF, a proposed framework that is not peer reviewed. The catalog ties techniques to bands, not to brain regions.</p>
 
         <h3 className="lab-label">On {deviceName}</h3>
-        <p className={placementState === 'not-assessed' ? 'lab-hatch' : undefined}>{describePlacement(placementState, technique, placementRules, deviceName)}</p>
-        {placementState === 'placed-here' && <button type="button" className="lab-button" onClick={onShowInModel}>Show in Model</button>}
+        <p className={placementState === 'not_assessed' ? 'lab-hatch' : undefined}>{describePlacement(placementState, technique, placementRules, deviceName)}</p>
+        {placementState === 'applies' && <button type="button" className="lab-button" onClick={onShowInModel}>Show in Model</button>}
 
         <h3 className="lab-label">Scores</h3>
         <p className="lab-id catalog-vector">{technique.cvssBaseVector ?? 'No CVSS vector recorded'}</p>

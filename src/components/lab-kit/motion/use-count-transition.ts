@@ -1,37 +1,28 @@
 import { useEffect, useRef, useState } from 'react';
-import { useReducedMotion } from './use-reduced-motion';
+import { CHANGED_FLAG_MS } from './motion-tokens';
 
-const COUNT_TRANSITION_MS = 240;
+export interface CountTransition {
+  /** The value to print. Always the true one: it swaps at once and never counts through others. */
+  value: number;
+  /** True for a moment after the value changes, so the element can be highlighted. False when first shown. */
+  hasChanged: boolean;
+}
 
 /**
- * A number that runs from its previous value to its new one, so a change the reader caused
- * is seen as well as read. It never counts up from zero when first shown: the first value
- * appears as it is.
+ * A number that changed is swapped at once and flagged for a moment. It does not run from
+ * the old value to the new one, because every figure in between would be one that was never true.
  */
-export function useCountTransition(value: number): number {
-  const [shown, setShown] = useState(value);
-  const shownRef = useRef(value);
-  const isReduced = useReducedMotion();
+export function useCountTransition(value: number): CountTransition {
+  const previousValue = useRef(value);
+  const [hasChanged, setChanged] = useState(false);
 
   useEffect(() => {
-    const from = shownRef.current;
-    if (from === value) return undefined;
-    if (isReduced) {
-      shownRef.current = value;
-      setShown(value);
-      return undefined;
-    }
-    const startedAt = performance.now();
-    let frame = 0;
-    const step = (now: number): void => {
-      const progress = Math.min(1, (now - startedAt) / COUNT_TRANSITION_MS);
-      shownRef.current = Math.round(from + (value - from) * progress);
-      setShown(shownRef.current);
-      if (progress < 1) frame = requestAnimationFrame(step);
-    };
-    frame = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(frame);
-  }, [value, isReduced]);
+    if (previousValue.current === value) return undefined;
+    previousValue.current = value;
+    setChanged(true);
+    const timer = window.setTimeout(() => setChanged(false), CHANGED_FLAG_MS);
+    return () => window.clearTimeout(timer);
+  }, [value]);
 
-  return shown;
+  return { value, hasChanged };
 }

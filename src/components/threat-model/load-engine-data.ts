@@ -7,7 +7,6 @@
 import registrar from '@shared/qtara-registrar.json';
 import atlas from '@shared/qif-brain-bci-atlas.json';
 import cveMapping from '@shared/cve-technique-mapping.json';
-import securityControls from '@shared/qif-security-controls.json';
 import archetypes from '@shared/threat-model/archetypes.json';
 import complianceUs from '@shared/threat-model/compliance-us.json';
 import strideMap from '@shared/threat-model/stride-map.json';
@@ -17,7 +16,7 @@ import { buildEngineData } from '@/lib/threat-model/build-engine-data';
 import type { EngineData } from '@/lib/threat-model/catalog-types';
 import { parseArchetypes } from '@/lib/threat-model/parse-archetypes';
 import { parseComplianceUs } from '@/lib/threat-model/parse-compliance';
-import { parsePlacementRules, parseStrideMap, parseThreatThemes } from '@/lib/threat-model/parse-mappings';
+import { parsePlacementRules, parseStrideMap, parseThreatThemes, readPlacementTableInfo } from '@/lib/threat-model/parse-mappings';
 import type { ReferenceData } from '@/lib/threat-model/reference-data-types';
 
 export interface ThreatModelData {
@@ -26,13 +25,14 @@ export interface ThreatModelData {
 }
 
 export function loadThreatModelData(): ThreatModelData {
-  const { engineData, tacticIds } = buildEngineData({ registrar, atlas, cveMapping, securityControls });
+  const { engineData, tacticIds } = buildEngineData({ registrar, atlas, cveMapping });
   const regionIds = new Set(engineData.regions.map((region) => region.id));
   return {
     engineData,
     referenceData: {
       archetypes: parseArchetypes(archetypes, regionIds),
       placementRules: parsePlacementRules(techniquePlacement, engineData.techniques),
+      placementTable: readPlacementTableInfo(techniquePlacement),
       strideMap: parseStrideMap(strideMap, tacticIds),
       themes: parseThreatThemes(threatThemes, engineData.techniques),
       compliance: parseComplianceUs(complianceUs),

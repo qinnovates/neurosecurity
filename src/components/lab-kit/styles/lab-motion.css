@@ -1,0 +1,33 @@
+/*
+ * Motion. Nothing moves until the reader does something or the data changes. It then moves
+ * once, quickly, never shows a value that is not true, and the still picture already says
+ * the same thing. No rule here repeats.
+ */
+
+/* A value that just changed is shown at once and marked for a moment. It never counts. */
+[data-changed="true"] { border-radius: 3px; animation: lab-changed calc(var(--lab-dur-3) * 2) var(--lab-ease) 1 both; }
+[aria-pressed="true"] [data-changed="true"] { animation: none; }
+@keyframes lab-changed { from { background-color: var(--lab-select-soft); box-shadow: 0 0 0 3px var(--lab-select-soft); } to { background-color: transparent; box-shadow: 0 0 0 3px transparent; } }
+
+/* A change of view or mode cross-fades once where the browser supports view transitions. */
+:root:has(.lab)::view-transition-old(root), :root:has(.lab)::view-transition-new(root) { animation-duration: var(--lab-dur-3); animation-timing-function: var(--lab-ease); }
+
+/* Anything that plays as steps in order: the transport, and the steps with the reason between them. */
+.lab-transport { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin: 0.5rem 0; }
+.lab-steps { list-style: none; margin: 0.5rem 0; padding: 0; }
+.lab-steps p { margin: 0; }
+.lab-step { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr); gap: 0.5rem; padding: 0.375rem 0.5rem; border-left: 3px solid transparent; border-radius: var(--lab-radius-s); transition: background-color var(--lab-dur-1) var(--lab-ease), color var(--lab-dur-1) var(--lab-ease); }
+.lab-step-number { display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; border: 1.5px solid currentColor; font-variant-numeric: tabular-nums; }
+.lab-steps li[data-state="reached"] .lab-step-number, .lab-steps li[data-state="now"] .lab-step-number { background: var(--lab-ink); border-color: var(--lab-ink); color: var(--lab-panel); }
+.lab-steps li[data-state="now"] .lab-step { border-left-color: var(--lab-flow); background: var(--lab-hover); }
+/* A step not yet reached is quieter by colour, never by opacity. */
+.lab-steps li[data-state="ahead"] .lab-step { color: var(--lab-ink-soft); }
+/* The line between two steps is solid when the catalog relates them and dashed when only the device's structure does. */
+.lab-step-reason { margin: 0 0 0 0.75rem; padding: 0.25rem 0 0.25rem 1.375rem; border-left: 2px dashed var(--lab-control-line); font-size: var(--lab-text-meta); }
+.lab-step-reason[data-basis="documented-relation"] { border-left-style: solid; border-left-color: var(--lab-ink-soft); }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-changed="true"] { animation: none; }
+  .lab-button:active { transform: none; }
+  :root:has(.lab)::view-transition-group(*), :root:has(.lab)::view-transition-old(*), :root:has(.lab)::view-transition-new(*) { animation: none; }
+}

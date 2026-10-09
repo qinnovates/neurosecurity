@@ -1,5 +1,7 @@
 import type { NotPlacedCategory } from '@/lib/threat-model/reference-data-types';
-import type { AmbientThreat, ThemeSummary, ThemeTechnique } from '@/lib/threat-model/report-types';
+import { describeEvidence } from '@/lib/threat-model/evidence-levels';
+import { SCOPE_TERM_LABELS } from '@/lib/threat-model/lab-terms';
+import type { AmbientThreat, ThemeSummary } from '@/lib/threat-model/report-types';
 
 interface Props {
   ambientThreats: readonly AmbientThreat[];
@@ -13,13 +15,6 @@ const CATEGORY_HEADINGS: Partial<Record<NotPlacedCategory, string>> = {
   nanoparticle: 'Nanoparticles introduced into tissue',
 };
 
-const STANDING_LABELS: Record<ThemeTechnique['standing'], string> = {
-  in_this_model: 'In this threat model',
-  placed_elsewhere: 'Applies to other device kinds',
-  around_device: 'Around the device',
-  not_reviewed: 'Not yet reviewed for devices',
-};
-
 function AmbientGroup({ category, threats }: { category: NotPlacedCategory; threats: readonly AmbientThreat[] }) {
   if (threats.length === 0) return null;
   return (
@@ -29,7 +24,7 @@ function AmbientGroup({ category, threats }: { category: NotPlacedCategory; thre
       <ul className="tm-list">
         {threats.map((threat) => (
           <li key={threat.techniqueId}>
-            {threat.name} <span className="tm-mono tm-muted">{threat.techniqueId}</span> <span className="tm-badge">{threat.evidenceStatus}</span>
+            {threat.name} <span className="tm-mono tm-muted">{threat.techniqueId}</span> <span className="tm-badge">{describeEvidence(threat).label}</span>
           </li>
         ))}
       </ul>
@@ -68,7 +63,7 @@ export default function BeyondDevice({ ambientThreats, themes }: Props) {
               {theme.techniques.map((technique) => (
                 <li key={technique.techniqueId}>
                   {technique.name} <span className="tm-mono tm-muted">{technique.techniqueId}</span>{' '}
-                  <span className="tm-badge">{technique.evidenceStatus}</span> <span className="tm-badge">{STANDING_LABELS[technique.standing]}</span>
+                  <span className="tm-badge">{describeEvidence(technique).label}</span> <span className="tm-badge">{SCOPE_TERM_LABELS[technique.standing]}</span>
                 </li>
               ))}
             </ul>

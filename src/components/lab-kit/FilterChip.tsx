@@ -1,3 +1,4 @@
+import HatchSwatch from './HatchSwatch';
 import { useCountTransition } from './motion/use-count-transition';
 
 interface Props {
@@ -17,15 +18,14 @@ const NOT_ASSESSED_LABEL = 'not assessed';
 
 /** A filter that always shows what choosing it would leave. */
 export default function FilterChip({ label, count, isPressed, isNotAssessed = false, onToggle }: Props) {
-  const shownCount = useCountTransition(count);
+  const { value, hasChanged } = useCountTransition(count);
   return (
-    <button
-      type="button" className={`lab-chip${isNotAssessed ? ' lab-hatch' : ''}`}
-      aria-pressed={isPressed} data-not-assessed={isNotAssessed} onClick={onToggle}
-    >
-      {/* The space keeps the accessible name as two words; the flex gap sets the visual spacing. */}
+    <button type="button" className="lab-chip" aria-pressed={isPressed} data-not-assessed={isNotAssessed} onClick={onToggle}>
+      {/* The space keeps the accessible name as separate words; the flex gap sets the visual spacing. */}
       <span>{label}</span>{' '}
-      {isNotAssessed ? <span>{NOT_ASSESSED_LABEL}</span> : <span className="lab-figure">{shownCount}</span>}
+      {isNotAssessed
+        ? <><HatchSwatch /><span>{NOT_ASSESSED_LABEL}</span></>
+        : <span className="lab-figure" data-changed={hasChanged}>{value}</span>}
     </button>
   );
 }

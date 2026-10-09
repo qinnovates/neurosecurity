@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Panel from '@/components/lab-kit/Panel';
 import type { TableData } from '@/lib/kql-engine';
+import { LAB_TABLE_POLICY_STATEMENT } from '@/lib/threat-model/lab-table-policy';
 import { QUERY_TABLE_DESCRIPTIONS } from '@/lib/threat-model/query-tables';
 
 interface Props {
@@ -59,7 +60,7 @@ export default function SchemaBrowser({ deviceTables, siteTables, siteError, ope
           <p className="lab-id query-columns">{openColumns.length === 0 ? 'This table has no rows, so its columns are not known.' : openColumns.join(' · ')}</p>
         </>
       )}
-      <p className="lab-soft query-group">Named companies and devices carry published specifications only here. Tables and columns that score them are left out of the Lab.</p>
+      <p className="lab-soft query-group">{LAB_TABLE_POLICY_STATEMENT}</p>
     </Panel>
   );
 }

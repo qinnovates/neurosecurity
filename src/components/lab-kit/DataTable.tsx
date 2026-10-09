@@ -1,12 +1,16 @@
-import { useMemo, useRef, useState, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react';
+import { useCallback, useImperativeHandle, useMemo, useRef, useState, type HTMLAttributes, type KeyboardEvent, type MouseEvent, type ReactNode, type Ref } from 'react';
+import DataTableCards from './DataTableCards';
+import { nextSort, sortRows, type DataTableColumn, type DataTableSort } from './data-table-sort';
 import { useListReflow } from './motion/use-list-reflow';
+import { useMediaQuery } from './use-media-query';
+import { useRowFocus } from './use-row-focus';
 
-export interface DataTableColumn<Row> {
-  id: string;
-  header: string;
-  render: (row: Row) => ReactNode;
-  /** Makes the column sortable. Numbers sort numerically, strings by locale. */
-  sortValue?: (row: Row) => string | number;
+export type { DataTableColumn, DataTableSort, SortDirection } from './data-table-sort';
+
+/** What a parent can ask of the table through its ref. */
+export interface DataTableHandle {
+  /** Moves focus to the row with this key, for example when the drawer it opened closes. False when the row is not shown. */
+  focusRow: (key: string) => boolean;
 }
 
 interface Props<Row> {
@@ -21,68 +25,77 @@ interface Props<Row> {
   onOpenRow?: (row: Row) => void;
   /** Rows this returns true for are drawn quieter, for example risks already dealt with. */
   isRowQuiet?: (row: Row) => boolean;
-}
-
-type SortDirection = 'ascending' | 'descending';
-
-interface SortState {
-  columnId: string;
-  direction: SortDirection;
+  /** The sort, when the parent keeps it so it survives a change of view. Leave out and the table keeps its own. */
+  sort?: DataTableSort | null;
+  /** Told of every sort the reader asks for, whether or not the parent keeps it. */
+  onSortChange?: (sort: DataTableSort) => void;
+  /** The key of the row the reader has open, drawn as selected. */
+  openedKey?: string | null;
+  /** Rows this returns true for are lit, because the same item is pointed at in another view. */
+  isRowLit?: (row: Row) => boolean;
+  /** Told which row is under the pointer or holds focus, and null when none is, so another view can light its partner. */
+  onRowPoint?: (row: Row | null) => void;
+  /** Under 720px each row is drawn with this in place of table cells. Leave out and the table scrolls sideways. */
+  renderCard?: (row: Row) => ReactNode;
+  ref?: Ref<DataTableHandle>;
 }
 
 /** Controls inside a row keep their own clicks and keys; only the row itself opens. */
 const ROW_CONTROL_SELECTOR = 'select, input, button, a, label, textarea';
-
-function compareValues(left: string | number, right: string | number): number {
-  if (typeof left === 'number' && typeof right === 'number') return left - right;
-  return String(left).localeCompare(String(right));
-}
+const NARROW_SCREEN_QUERY = '(max-width: 719.98px)';
 
 /**
  * The Lab's table: a header that stays put, sortable columns, and rows that can be walked
- * with the arrow keys. Rows slide to their new place when the set of rows changes.
+ * with the arrow keys. Rows slide to their new place when the set or the order changes.
  */
-export default function DataTable<Row>({ caption, columns, rows, rowKey, emptyMessage, onOpenRow, isRowQuiet }: Props<Row>) {
-  const [sort, setSort] = useState<SortState | null>(null);
-  const [focusedKey, setFocusedKey] = useState<string | null>(null);
-  const bodyRef = useRef<HTMLTableSectionElement>(null);
+export default function DataTable<Row>({ caption, columns, rows, rowKey, emptyMessage, onOpenRow, isRowQuiet, sort: givenSort, onSortChange, openedKey = null, isRowLit, onRowPoint, renderCard, ref }: Props<Row>) {
+  const [ownSort, setOwnSort] = useState<DataTableSort | null>(null);
+  const sort = givenSort === undefined ? ownSort : givenSort;
+  const isNarrow = useMediaQuery(NARROW_SCREEN_QUERY);
+  const containerRef = useRef<HTMLElement | null>(null);
+  const attachContainer = useCallback((node: HTMLElement | null): void => { containerRef.current = node; }, []);
 
-  const sortedRows = useMemo(() => {
-    const column = columns.find((candidate) => candidate.id === sort?.columnId);
-    if (sort === null || column?.sortValue === undefined) return rows;
-    const { sortValue } = column;
-    const sign = sort.direction === 'ascending' ? 1 : -1;
-    return [...rows].sort((left, right) => sign * compareValues(sortValue(left), sortValue(right)));
-  }, [rows, columns, sort]);
-
+  const sortedRows = useMemo(() => sortRows(rows, columns, sort), [rows, columns, sort]);
   const keys = sortedRows.map(rowKey);
-  useListReflow(bodyRef, keys.join('\n'));
-  // The row that takes the tab stop: the last one focused if it is still shown, otherwise the first.
-  const tabStopKey = focusedKey !== null && keys.includes(focusedKey) ? focusedKey : keys[0];
+  useListReflow(containerRef, keys.join('\n'));
+  const { tabStopKey, rememberFocus, focusRow, moveFocus } = useRowFocus(containerRef, keys);
+  useImperativeHandle(ref, () => ({ focusRow }), [focusRow]);
 
-  const toggleSort = (columnId: string): void => {
-    setSort((current) => (current?.columnId === columnId && current.direction === 'ascending'
-      ? { columnId, direction: 'descending' }
-      : { columnId, direction: 'ascending' }));
+  const changeSort = (columnId: string): void => {
+    const requested = nextSort(sort, columnId);
+    setOwnSort(requested);
+    onSortChange?.(requested);
   };
-
-  const moveFocus = (event: KeyboardEvent<HTMLTableRowElement>, index: number): void => {
-    const targets: Record<string, number> = { ArrowDown: index + 1, ArrowUp: index - 1, Home: 0, End: keys.length - 1 };
-    const target = targets[event.key];
-    if (target === undefined || target < 0 || target >= keys.length) return;
-    event.preventDefault();
-    bodyRef.current?.querySelectorAll<HTMLTableRowElement>('tr')[target]?.focus();
-  };
-
-  const handleRowKey = (event: KeyboardEvent<HTMLTableRowElement>, row: Row, index: number): void => {
+  const handleRowKey = (event: KeyboardEvent<HTMLElement>, row: Row, index: number): void => {
     if (event.target !== event.currentTarget) return;
     if (event.key === 'Enter' && onOpenRow !== undefined) onOpenRow(row);
     else moveFocus(event, index);
   };
-  const handleRowClick = (event: MouseEvent<HTMLTableRowElement>, row: Row): void => {
+  const handleRowClick = (event: MouseEvent<HTMLElement>, row: Row): void => {
     if (event.target instanceof Element && event.target.closest(ROW_CONTROL_SELECTOR) !== null) return;
     onOpenRow?.(row);
   };
+  /** Everything a row needs to be walked, opened and re-flowed, whether it is drawn as a table row or a card. */
+  const rowProps = (row: Row, index: number): HTMLAttributes<HTMLElement> & Record<`data-${string}`, string | boolean> => {
+    const key = keys[index];
+    return {
+      'data-reflow-key': key, 'data-openable': onOpenRow !== undefined, 'data-quiet': isRowQuiet?.(row) === true,
+      'data-lit': isRowLit?.(row) === true, 'aria-current': key === openedKey ? 'true' : undefined, tabIndex: key === tabStopKey ? 0 : -1,
+      onFocus: () => { rememberFocus(key); onRowPoint?.(row); }, onBlur: () => onRowPoint?.(null),
+      onPointerEnter: () => onRowPoint?.(row), onPointerLeave: () => onRowPoint?.(null),
+      onKeyDown: (event) => handleRowKey(event, row, index),
+      onClick: onOpenRow === undefined ? undefined : (event) => handleRowClick(event, row),
+    };
+  };
+
+  if (isNarrow && renderCard !== undefined) {
+    return (
+      <DataTableCards
+        caption={caption} columns={columns} rows={sortedRows} keys={keys} emptyMessage={emptyMessage} sort={sort} onSort={changeSort}
+        renderCard={renderCard} rowProps={rowProps} attachContainer={attachContainer}
+      />
+    );
+  }
 
   return (
     <div className="lab-table-wrap">
@@ -93,7 +106,7 @@ export default function DataTable<Row>({ caption, columns, rows, rowKey, emptyMe
             {columns.map((column) => (
               <th key={column.id} scope="col" aria-sort={sort?.columnId === column.id ? sort.direction : undefined}>
                 {column.sortValue === undefined ? <span className="lab-table-head">{column.header}</span> : (
-                  <button type="button" className="lab-table-sort" onClick={() => toggleSort(column.id)}>
+                  <button type="button" className="lab-table-sort" onClick={() => changeSort(column.id)}>
                     {column.header}
                     {sort?.columnId === column.id && <span aria-hidden="true">{sort.direction === 'ascending' ? '↑' : '↓'}</span>}
                   </button>
@@ -102,19 +115,12 @@ export default function DataTable<Row>({ caption, columns, rows, rowKey, emptyMe
             ))}
           </tr>
         </thead>
-        <tbody ref={bodyRef}>
-          {sortedRows.map((row, index) => {
-            const key = keys[index];
-            return (
-              <tr
-                key={key} data-reflow-key={key} data-openable={onOpenRow !== undefined} data-quiet={isRowQuiet?.(row) === true} tabIndex={key === tabStopKey ? 0 : -1}
-                onFocus={() => setFocusedKey(key)} onKeyDown={(event) => handleRowKey(event, row, index)}
-                onClick={onOpenRow === undefined ? undefined : (event) => handleRowClick(event, row)}
-              >
-                {columns.map((column) => <td key={column.id}>{column.render(row)}</td>)}
-              </tr>
-            );
-          })}
+        <tbody ref={attachContainer}>
+          {sortedRows.map((row, index) => (
+            <tr key={keys[index]} {...rowProps(row, index)}>
+              {columns.map((column) => <td key={column.id}>{column.render(row)}</td>)}
+            </tr>
+          ))}
         </tbody>
       </table>
       {sortedRows.length === 0 && <p className="lab-table-empty" role="status">{emptyMessage}</p>}

@@ -28,7 +28,8 @@ export function defaultAnswersFor(archetype: DeviceArchetype): IntakeAnswers {
     targetRegionIds: [...archetype.defaultRegionIds],
     presentsStimuli: archetype.presentsStimuli,
     removedComponentIds: [],
-    submissionType: '510k',
+    // Nothing is assumed about the regulatory route; the checklist stays unevaluated until one is chosen.
+    submissionType: 'none',
   };
 }
 

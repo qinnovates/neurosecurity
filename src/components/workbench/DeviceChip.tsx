@@ -1,6 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
+import DeviceMenu, { EXAMPLE_DEVICE_LABEL } from './DeviceMenu';
 import { describeDevice, summariseDevice } from './device-summary';
 import { useFocus } from './FocusContext';
+import type { Route } from './route';
 
 const DOT_SPACING = 12;
 const DOT_RADIUS = 3;
@@ -24,54 +26,60 @@ function DeviceGlyph({ partsAreInterface }: { partsAreInterface: readonly boolea
   );
 }
 
+interface Props {
+  onNavigate: (route: Route) => void;
+  onPrintReport: () => void;
+}
+
 /**
- * The device every mode is looking at, in the same place on every screen. Opening it
- * shows the full facts and where the device is saved.
+ * The device every mode is looking at, in the same place on every screen. Pressing it
+ * opens the device menu: what can be done with the device, and where it is kept.
  */
-export default function DeviceChip() {
-  const { state, report, isRemembered, setRemembered, storageNotice } = useFocus();
+export default function DeviceChip({ onNavigate, onPrintReport }: Props) {
+  const { state, report, isExampleDevice, hasUnsavedDecisions, storageNotice } = useFocus();
   const summary = summariseDevice(state.model, report);
   const facts = describeDevice(summary);
-  const detailsRef = useRef<HTMLDetailsElement>(null);
+  const [isOpen, setOpen] = useState(false);
+  const slotRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const menuId = useId();
 
-  // The panel floats over the screen, so it closes when the reader presses Escape or acts anywhere else.
+  // The menu floats over the screen, so it closes when the reader presses Escape or acts anywhere else.
   useEffect(() => {
-    const close = (): void => { if (detailsRef.current !== null) detailsRef.current.open = false; };
+    if (!isOpen) return undefined;
     const closeOnOutsidePress = (event: PointerEvent): void => {
-      if (event.target instanceof Node && detailsRef.current?.contains(event.target) === false) close();
+      if (event.target instanceof Node && slotRef.current?.contains(event.target) === false) setOpen(false);
     };
-    const closeOnEscape = (event: KeyboardEvent): void => { if (event.key === 'Escape') close(); };
+    const closeOnEscape = (event: KeyboardEvent): void => {
+      if (event.key !== 'Escape') return;
+      setOpen(false);
+      buttonRef.current?.focus();
+    };
     document.addEventListener('pointerdown', closeOnOutsidePress);
     document.addEventListener('keydown', closeOnEscape);
     return () => {
       document.removeEventListener('pointerdown', closeOnOutsidePress);
       document.removeEventListener('keydown', closeOnEscape);
     };
-  }, []);
+  }, [isOpen]);
 
   return (
-    <div className="lab-device-slot">
-      <details className="lab-device" ref={detailsRef}>
-        <summary className="lab-device-summary">
+    <div className="lab-device-slot" ref={slotRef}>
+      <div className="lab-device">
+        <button
+          ref={buttonRef} type="button" className="lab-device-summary"
+          aria-expanded={isOpen} aria-controls={isOpen ? menuId : undefined} onClick={() => setOpen((wasOpen) => !wasOpen)}
+        >
           <DeviceGlyph partsAreInterface={summary.partsAreInterface} />
-          <span className="sr-only">Device in focus: </span>
-          <strong className="lab-device-name">{summary.name}</strong>
-          <span className="lab-device-facts lab-soft" aria-live="polite">{facts.join(' · ')}</span>
-          {!isRemembered && <span className="lab-device-unsaved">Not saved</span>}
-        </summary>
-        <div className="lab-device-panel">
-          <p className="lab-label">Device in focus</p>
-          <p><strong>{summary.name}</strong></p>
-          <ul className="lab-device-list">
-            {facts.map((fact) => <li key={fact}>{fact}</li>)}
-          </ul>
-          <label className="lab-remember">
-            <input id="workbench-remember" type="checkbox" checked={isRemembered} onChange={(event) => setRemembered(event.target.checked)} />
-            <span>{isRemembered ? 'Saved in this browser' : 'Remember in this browser'}</span>
-          </label>
-          {!isRemembered && <p className="lab-device-unsaved">Not saved. A reload starts over.</p>}
-        </div>
-      </details>
+          <span className="lab-visually-hidden">Device in focus: </span>
+          <strong className="lab-device-name">{isExampleDevice ? EXAMPLE_DEVICE_LABEL : summary.name}</strong>
+          <span className="lab-device-facts lab-soft">{facts.join(' · ')}</span>
+          {hasUnsavedDecisions && <span className="lab-device-flag">Unsaved decisions</span>}
+        </button>
+        {isOpen && (
+          <DeviceMenu id={menuId} facts={facts} onNavigate={onNavigate} onPrintReport={onPrintReport} onClose={() => setOpen(false)} />
+        )}
+      </div>
       {storageNotice !== null && <p className="lab-device-alert" role="alert">{storageNotice}</p>}
     </div>
   );

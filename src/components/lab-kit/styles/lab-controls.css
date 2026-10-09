@@ -1,0 +1,44 @@
+/* Controls: buttons, fields, chips, the one-of-n control, the facet bar and links. */
+
+/* Buttons. One quiet style and one primary. */
+.lab-button { display: inline-flex; align-items: center; justify-content: center; gap: 0.375rem; min-height: 1.75rem; padding: 0.25rem 0.75rem; font: inherit; font-weight: 600; color: var(--lab-ink); background: var(--lab-panel); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-m); cursor: pointer; transition: border-color var(--lab-dur-1) var(--lab-ease), background-color var(--lab-dur-1) var(--lab-ease), transform var(--lab-dur-1) var(--lab-ease); }
+.lab-button:hover { border-color: var(--lab-ink); }
+.lab-button:active { transform: scale(0.97); }
+.lab-button--primary { background: var(--lab-ink); color: var(--lab-panel); border-color: var(--lab-ink); }
+.lab-button[aria-pressed="true"] { background: var(--lab-select); color: var(--lab-select-ink); border-color: var(--lab-select); }
+.lab-button:disabled { color: var(--lab-ink-soft); border-style: dashed; cursor: not-allowed; transform: none; }
+
+/* Fields: a visible label above, an edge that meets 3:1. */
+.lab-field { display: grid; gap: 0.25rem; min-width: 0; }
+.lab-input { width: 100%; min-height: 1.75rem; padding: 0.25rem 0.5rem; font: inherit; color: var(--lab-ink); background: var(--lab-panel); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-s); transition: border-color var(--lab-dur-1) var(--lab-ease); }
+.lab-input:hover { border-color: var(--lab-ink); }
+
+/* A link, or a button that goes somewhere: the selection colour and an underline, so it is not colour alone. */
+.lab-link { padding: 0; font: inherit; color: var(--lab-select); background: none; border: 0; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; cursor: pointer; }
+.lab-link:hover { text-decoration-thickness: 2px; }
+.lab-link.lab-id { color: var(--lab-select); }
+
+/* Chips: a filter that shows what choosing it would leave. Only a pressed chip is filled. */
+.lab-chip { display: inline-flex; align-items: center; gap: 0.3125rem; min-height: 1.5rem; padding: 0.0625rem 0.5rem; font: inherit; color: var(--lab-ink); background-color: transparent; border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-s); white-space: nowrap; cursor: pointer; transition: background-color var(--lab-dur-1) var(--lab-ease), border-color var(--lab-dur-1) var(--lab-ease), color var(--lab-dur-1) var(--lab-ease); }
+.lab-chip:hover { border-color: var(--lab-ink); }
+.lab-chip[aria-pressed="true"] { background-color: var(--lab-select); border-color: var(--lab-select); color: var(--lab-select-ink); }
+.lab-chip[data-not-assessed="true"]:not([aria-pressed="true"]) { color: var(--lab-ink-soft); }
+
+/* One of n: a quiet track with the chosen option raised. */
+.lab-segmented { display: inline-flex; gap: 2px; padding: 2px; background: var(--lab-hover); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-m); }
+.lab-segment { min-height: 1.5rem; padding: 0.0625rem 0.625rem; font: inherit; color: var(--lab-ink-soft); background-color: transparent; border: 1px solid transparent; border-radius: calc(var(--lab-radius-m) - 3px); white-space: nowrap; cursor: pointer; transition: background-color var(--lab-dur-1) var(--lab-ease), color var(--lab-dur-1) var(--lab-ease), border-color var(--lab-dur-1) var(--lab-ease); }
+.lab-segment:hover { color: var(--lab-ink); }
+.lab-segment[aria-checked="true"] { color: var(--lab-ink); font-weight: 600; background-color: var(--lab-panel); border-color: var(--lab-control-line); }
+
+/* Facets: one row; the rest wait behind "More filters". */
+.lab-facets { display: grid; gap: 0.5rem; }
+.lab-facets-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.5rem var(--lab-pad); }
+.lab-facet { display: grid; gap: 0.25rem; min-width: 0; margin: 0; padding: 0; border: 0; }
+.lab-facet > legend { padding: 0; }
+.lab-facet-control { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; }
+.lab-facets-more { align-self: flex-end; }
+
+@media (pointer: coarse) {
+  .lab-button, .lab-chip, .lab-segment, .lab-input, .lab-pick, .lab summary { min-height: 2.75rem; }
+  .lab-link { display: inline-flex; align-items: center; min-height: 2.75rem; min-width: 2.75rem; }
+}

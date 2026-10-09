@@ -1,6 +1,6 @@
 /**
  * The statements that stay on screen in every mode. They live in one place so no screen
- * can drop or reword them.
+ * can drop or reword them. Every statement is shown whole at every screen size.
  */
 export const STANDING_STATEMENTS: readonly string[] = [
   'A drafting aid, not a compliance determination.',
@@ -9,28 +9,24 @@ export const STANDING_STATEMENTS: readonly string[] = [
   'Runs in your browser. Nothing you enter is sent anywhere.',
 ];
 
-/** What a narrow screen shows before the reader opens the rest. */
-const BRIEF_STATEMENT = 'Proposed, not peer reviewed. Placement decisions not yet reviewed.';
 const SITE_PATH = '/atlas/';
 
 interface Props {
   catalogVersion: string;
   techniqueCount: number;
+  /** On a narrow screen the top bar has no room for the way back to the site, so it is listed here. */
+  hasSiteLink?: boolean;
 }
 
-export default function StandingLine({ catalogVersion, techniqueCount }: Props) {
+export default function StandingLine({ catalogVersion, techniqueCount, hasSiteLink = false }: Props) {
   const catalogFact = `Catalog version ${catalogVersion}, ${techniqueCount} techniques.`;
   return (
     <div className="lab-standing">
-      <p className="lab-standing-full">{STANDING_STATEMENTS.join(' ')} {catalogFact}</p>
-      <details className="lab-standing-brief">
-        <summary>{BRIEF_STATEMENT} <span className="lab-standing-more">More</span></summary>
-        <ul>
-          {STANDING_STATEMENTS.map((statement) => <li key={statement}>{statement}</li>)}
-          <li>{catalogFact}</li>
-          <li><a href={SITE_PATH}>Back to the site</a></li>
-        </ul>
-      </details>
+      <ul className="lab-standing-full" aria-label="What TARA Lab is and is not">
+        {STANDING_STATEMENTS.map((statement) => <li key={statement}>{statement}</li>)}
+        <li>{catalogFact}</li>
+      </ul>
+      {hasSiteLink && <a className="lab-standing-site" href={SITE_PATH}>Back to the site</a>}
     </div>
   );
 }

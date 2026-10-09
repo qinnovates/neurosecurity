@@ -7,7 +7,7 @@
  * are joined. A chain is always a hypothesis, whatever the evidence behind its steps.
  */
 
-import { CATALOG_SEVERITIES, DEFAULT_EVIDENCE_STATUSES, type CatalogTechnique, type EngineData } from './catalog-types';
+import { CATALOG_SEVERITIES, DEFAULT_EVIDENCE_STATUSES, EVIDENCE_STATUS_RANK, type CatalogTechnique, type EngineData } from './catalog-types';
 import { areDirectlyConnected, buildElementGraph, findShortestPath, type ElementGraph } from './chain-graph';
 import {
   CHAIN_GENERATOR_VERSION, GENERATED_CHAIN_ID_PREFIX, GENERATED_CHAIN_ORIGIN,
@@ -15,9 +15,9 @@ import {
   type GeneratedChain, type GeneratedChainEdge, type GeneratedChainStep,
 } from './chain-types';
 import type { DeviceModel } from './device-model';
+import { weakestEvidenceOf } from './evidence-levels';
 import type { PlacementRules } from './reference-data-types';
 import type { TechniqueMatch } from './report-types';
-import { evidenceRank } from './risk-register';
 import { describeElement } from './stride';
 
 export const DEFAULT_CHAIN_OPTIONS: ChainGenerationOptions = {
@@ -28,7 +28,6 @@ export const DEFAULT_CHAIN_OPTIONS: ChainGenerationOptions = {
 };
 
 const TERMINAL_ROLES: readonly ChainRole[] = ['objective', 'exfiltration'];
-const MAX_DEFENSES = 6;
 const TECHNIQUE_ID_PREFIX = 'QIF-';
 
 export interface ChainInputs {
@@ -38,6 +37,18 @@ export interface ChainInputs {
   placementRules: PlacementRules;
 }
 
+const UNRANKED = 99;
+
+/**
+ * The order the search prefers candidates and chains in. Like the eligibility gate, it reads
+ * the legacy status: it decides which chains are generated, so it stays as it was until the
+ * owner decides otherwise. What a reader sees of a step's evidence is worded from the tier.
+ */
+function selectionRank(evidenceStatus: string): number {
+  const rank = (EVIDENCE_STATUS_RANK as readonly string[]).indexOf(evidenceStatus);
+  return rank === -1 ? UNRANKED : rank;
+}
+
 interface Candidate {
   technique: CatalogTechnique;
   elementId: string;
@@ -45,7 +56,7 @@ interface Candidate {
 }
 
 function compareCandidates(left: Candidate, right: Candidate): number {
-  return evidenceRank(left.technique.evidenceStatus) - evidenceRank(right.technique.evidenceStatus)
+  return selectionRank(left.technique.evidenceStatus) - selectionRank(right.technique.evidenceStatus)
     || CATALOG_SEVERITIES.indexOf(left.technique.severity) - CATALOG_SEVERITIES.indexOf(right.technique.severity)
     || left.technique.id.localeCompare(right.technique.id)
     || left.elementId.localeCompare(right.elementId);
@@ -97,19 +108,10 @@ function assembleSteps(entry: Candidate, terminal: Candidate, path: readonly str
   return [...reconnaissance, entry, ...pivots, terminal, ...persistence];
 }
 
-function collectDefenses(steps: readonly Candidate[], data: EngineData): string[] {
-  const defenses = steps.flatMap((step, index) => {
-    const control = step.technique.bandIds
-      .map((bandId) => data.controlsByBand[bandId]?.prevention[0])
-      .find((prevention) => prevention !== undefined);
-    return control === undefined ? [] : [`${control} (addresses step ${index + 1})`];
-  });
-  return [...new Set(defenses)].slice(0, MAX_DEFENSES);
-}
-
-function weakestEvidence(steps: readonly Candidate[]): string {
+/** The weakest legacy status among the steps; orders the chain list. */
+function weakestStatus(steps: readonly Candidate[]): string {
   return steps.reduce((weakest, step) =>
-    (evidenceRank(step.technique.evidenceStatus) > evidenceRank(weakest) ? step.technique.evidenceStatus : weakest),
+    (selectionRank(step.technique.evidenceStatus) > selectionRank(weakest) ? step.technique.evidenceStatus : weakest),
   steps[0].technique.evidenceStatus);
 }
 
@@ -123,6 +125,7 @@ function toChainSteps(steps: readonly Candidate[], model: DeviceModel): Generate
     detection_window: step.technique.detection ?? 'No detection approach is recorded in the catalog.',
     elementId: step.elementId,
     evidenceStatus: step.technique.evidenceStatus,
+    evidenceTier: step.technique.evidenceTier,
   }));
 }
 
@@ -137,6 +140,7 @@ function toChain(steps: readonly Candidate[], inputs: ChainInputs, graph: Elemen
   const terminal = steps.find((step) => TERMINAL_ROLES.includes(step.role)) ?? steps[steps.length - 1];
   const entry = steps.find((step) => step.role === 'initial_access') ?? steps[0];
   const verb = terminal.role === 'exfiltration' ? 'take data through' : 'reach';
+  const weakestByTier = weakestEvidenceOf(steps.map((step) => step.technique)) ?? terminal.technique;
   return {
     origin: GENERATED_CHAIN_ORIGIN,
     chain_id: `${GENERATED_CHAIN_ID_PREFIX}${steps.map((step) => step.technique.id.replace(TECHNIQUE_ID_PREFIX, '')).join('-')}`,
@@ -144,9 +148,11 @@ function toChain(steps: readonly Candidate[], inputs: ChainInputs, graph: Elemen
     objective: `Hypothesis: ${verb} "${terminal.technique.name}" at ${describeElement(model, terminal.elementId)}.`,
     drift_profile: 'Not assessed for generated chains.',
     steps: toChainSteps(steps, model),
-    defenses: collectDefenses(steps, data),
+    // The catalog holds no defense for a technique or a chain, so a generated chain names none.
+    defenses: [],
     edges: toChainEdges(steps, graph),
-    weakestEvidenceStatus: weakestEvidence(steps),
+    weakestEvidenceStatus: weakestStatus(steps),
+    weakestEvidenceTier: weakestByTier.evidenceTier,
     generatorVersion: CHAIN_GENERATOR_VERSION,
     registrarVersion: data.registrarVersion,
   };
@@ -156,9 +162,9 @@ function countEdges(chain: GeneratedChain, basis: EdgeBasis): number {
   return chain.edges.filter((edge) => edge.basis === basis).length;
 }
 
-/** Best evidenced first; then chains that never jump across elements with no step; then catalog-linked ones. */
+/** Strongest legacy status first (see `selectionRank`); then chains that never jump across elements with no step; then catalog-linked ones. */
 function compareChains(left: GeneratedChain, right: GeneratedChain): number {
-  return evidenceRank(left.weakestEvidenceStatus) - evidenceRank(right.weakestEvidenceStatus)
+  return selectionRank(left.weakestEvidenceStatus) - selectionRank(right.weakestEvidenceStatus)
     || countEdges(left, 'reachable-elements') - countEdges(right, 'reachable-elements')
     || countEdges(right, 'documented-relation') - countEdges(left, 'documented-relation')
     || left.steps.length - right.steps.length
@@ -237,6 +243,8 @@ export function generateChains(inputs: ChainInputs, options: ChainGenerationOpti
   return {
     chains,
     wasTruncated: remainingBudget < 0,
+    chainsFound: chainById.size,
+    wasCapped: chainById.size > chains.length,
     emptyReason: chains.length > 0 ? null : explainEmptyResult(candidates, entries.length > 0, terminals.length > 0, options.allowedEvidenceStatuses),
   };
 }

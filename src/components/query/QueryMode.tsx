@@ -33,6 +33,9 @@ function downloadCsv(csv: string): void {
   URL.revokeObjectURL(url);
 }
 
+/** The Lab refuses a column no row carries; the public query pages keep the engine's default. */
+const LAB_QUERY_OPTIONS = { strictColumns: true } as const;
+
 /** The Query mode: ask precise questions of the device in focus and of the catalog. Runs in the browser; nothing is sent anywhere. */
 export default function QueryMode(_props: ModeProps) {
   const { report, engineData, referenceData } = useFocus();
@@ -47,7 +50,7 @@ export default function QueryMode(_props: ModeProps) {
   const [submitted, setSubmitted] = useState(STARTER_QUERIES[0].query);
   const [openTable, setOpenTable] = useState<string | null>(null);
   // Recomputed when the device changes, so results always describe the device in focus.
-  const result = useMemo(() => executeQuery(submitted, tables, indexes), [submitted, tables, indexes]);
+  const result = useMemo(() => executeQuery(submitted, tables, indexes, LAB_QUERY_OPTIONS), [submitted, tables, indexes]);
 
   // Kept in memory for this visit only; a reload clears it.
   const [history, setHistory] = useState<string[]>([]);

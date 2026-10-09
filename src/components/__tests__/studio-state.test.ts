@@ -19,15 +19,13 @@ describe('hasUserWork', () => {
     expect(hasUserWork(freshState(), archetypes)).toBe(false);
   });
 
-  it('is true once a risk is decided, a control is marked, or an answer changes', () => {
+  it('is true once a risk is decided or an answer changes', () => {
     const decided = studioReducer(freshState(), { type: 'risk-decided', riskId: 'implant::QIF-T0001', status: 'mitigated', note: '' });
-    const controlled = studioReducer(freshState(), { type: 'control-toggled', control: 'Firmware signing' });
     const state = freshState();
     const renamed = studioReducer(state, {
       type: 'answers-changed', archetype: stimulator, registrarVersion, answers: { ...state.answers!, name: 'Our stimulator' },
     });
     expect(hasUserWork(decided, archetypes)).toBe(true);
-    expect(hasUserWork(controlled, archetypes)).toBe(true);
     expect(hasUserWork(renamed, archetypes)).toBe(true);
   });
 

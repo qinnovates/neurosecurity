@@ -1,3 +1,4 @@
+import { SCOPE_TERM_LABELS } from '@/lib/threat-model/lab-terms';
 import type { RiskRow } from '@/lib/threat-model/report-types';
 
 interface Props {
@@ -45,7 +46,7 @@ export default function ThreatMatrix({ rows }: Props) {
                 const isPlaced = placedPairs.has(`${technique.techniqueId}|${column.elementId}`);
                 return (
                   <td key={column.elementId} style={{ textAlign: 'center' }}>
-                    {isPlaced ? <span aria-label="Placed here">●</span> : <span aria-hidden="true" className="tm-muted">·</span>}
+                    {isPlaced ? <span aria-label={SCOPE_TERM_LABELS.applies}>●</span> : <span aria-hidden="true" className="tm-muted">·</span>}
                   </td>
                 );
               })}

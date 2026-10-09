@@ -12,7 +12,7 @@ import { summarisePlacementCoverage } from '@/lib/threat-model/placement-coverag
 import type { DeviceArchetype } from '@/lib/threat-model/reference-data-types';
 import { THREAT_GOALS } from '@/lib/threat-model/report-types';
 import { buildRegisterCsv } from '@/lib/threat-model/register-csv';
-import { countOpenRisksByElement } from '@/lib/threat-model/risk-register';
+import { countOpenRisksByElement, describeLegacyControls } from '@/lib/threat-model/risk-register';
 import { describeElement } from '@/lib/threat-model/stride';
 import { isNeuralInterfaceElement, listTargetRegions } from '@/lib/threat-model/target-regions';
 import BeyondDevice from './BeyondDevice';
@@ -70,8 +70,9 @@ export default function ThreatModelStudio({ viewId }: ModeProps) {
     && (model.components.some((component) => component.id === lens.elementId) || model.links.some((link) => link.id === lens.elementId));
   const activeLens = useMemo<Lens>(() => (hasSelectedElement ? lens : { ...lens, elementId: null }), [lens, hasSelectedElement]);
 
-  const rowsInView = useMemo(() => applyLens(report.riskRows, activeLens), [report.riskRows, activeLens]);
-  const lensCounts = useMemo(() => countOpenRisks(report.riskRows, activeLens, model.controlsInPlace), [report.riskRows, activeLens, model.controlsInPlace]);
+  const lensContext = useMemo(() => ({ model, techniques: engineData.techniques }), [model, engineData.techniques]);
+  const rowsInView = useMemo(() => applyLens(report.riskRows, activeLens, lensContext), [report.riskRows, activeLens, lensContext]);
+  const lensCounts = useMemo(() => countOpenRisks(report.riskRows, activeLens, lensContext), [report.riskRows, activeLens, lensContext]);
   const chainsInView = useMemo(() => {
     const { elementId } = activeLens;
     if (elementId === null) return report.chainResult;
@@ -88,8 +89,8 @@ export default function ThreatModelStudio({ viewId }: ModeProps) {
   const regionNames = model.targetRegionIds.map((regionId) => regionById.get(regionId)?.name ?? regionId);
   // Counts per part follow the other lenses, on the diagram and on the row of parts alike.
   const openRiskCounts = useMemo(
-    () => countOpenRisksByElement(applyLens(report.riskRows, { ...activeLens, elementId: null }), model.controlsInPlace),
-    [report.riskRows, activeLens, model.controlsInPlace],
+    () => countOpenRisksByElement(applyLens(report.riskRows, { ...activeLens, elementId: null }, lensContext)),
+    [report.riskRows, activeLens, lensContext],
   );
   const coverage = useMemo(() => {
     const techniqueIdsOnDevice = new Set(report.riskRows.flatMap((row) => (row.source === 'catalog' && row.techniqueId !== null ? [row.techniqueId] : [])));
@@ -128,7 +129,7 @@ export default function ThreatModelStudio({ viewId }: ModeProps) {
     if (archetype !== null) dispatch({ type: 'answers-changed', archetype, answers, registrarVersion });
   };
   const decideRisk = (riskId: string, status: RiskStatus, note: string): void => dispatch({ type: 'risk-decided', riskId, status, note });
-  const toggleControl = (control: string): void => dispatch({ type: 'control-toggled', control });
+  const legacyControlsNotice = describeLegacyControls(model);
 
   const importModel = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
     const file = event.target.files?.[0];
@@ -182,6 +183,7 @@ export default function ThreatModelStudio({ viewId }: ModeProps) {
       )}
 
       <div className="model-main">
+        {legacyControlsNotice !== null && <p className="tm-notice">{legacyControlsNotice}</p>}
         {!isWideScreen && (
           <div className="tm-actions tm-no-print">
             <button type="button" className="tm-button" aria-expanded={isEditorOpen} onClick={toggleEditor}>
@@ -212,7 +214,7 @@ export default function ThreatModelStudio({ viewId }: ModeProps) {
         )}
         <div>
           {viewId === 'risks' && (
-            <RisksSection rows={rowsInView} controlsInPlace={model.controlsInPlace} techniqueById={techniqueById} onDecide={decideRisk} onOpenRisk={setOpenedRiskId} />
+            <RisksSection rows={rowsInView} techniqueById={techniqueById} onDecide={decideRisk} onOpenRisk={setOpenedRiskId} />
           )}
           {viewId === 'attack-map' && <section className="lab-panel model-plain-panel"><ThreatMatrix rows={rowsInView} /></section>}
           {viewId === CHAINS_VIEW_ID && (
@@ -244,7 +246,7 @@ export default function ThreatModelStudio({ viewId }: ModeProps) {
               row={openedRisk} technique={openedRisk.techniqueId === null ? undefined : techniqueById.get(openedRisk.techniqueId)}
               placementReasons={openedRiskReasons} precedentCvesAsOf={report.precedentCvesAsOf}
               precedentCves={report.precedentCves.filter((cve) => openedRisk.precedentCveIds.includes(cve.cveId))}
-              controlsInPlace={model.controlsInPlace} onDecide={decideRisk} onToggleControl={toggleControl} onClose={closeRisk}
+              onDecide={decideRisk} onClose={closeRisk}
             />
           )}
         </ModelInspector>

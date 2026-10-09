@@ -1,35 +1,50 @@
 /**
- * What the Lab shows about named companies and devices: published specifications only.
- * The site's query database also holds security scores and counts per company. The Lab has
- * no findings about any named product, so those tables and columns are left out here, in
- * one place, for every screen that reads the database.
+ * What the Lab shows of the site's query database: only the tables and columns named here.
+ * Everything else is left out, so a table or column added to the site never appears in the
+ * Lab until someone reads it and adds it to this list.
+ *
+ * The rules behind the list are the Lab's standing ones: named companies and devices carry
+ * published specifications only, no brain region carries a finding, and no clinical claim is
+ * repeated beside a technique.
  */
 
 type Row = Record<string, unknown>;
 export type LabTables = Record<string, Row[]>;
 
-/** Tables that exist only to score or rank named companies. */
-export const HIDDEN_TABLES: readonly string[] = ['risk_profile'];
-
-/** Columns that state a security posture, score or count against a named company or device. */
-export const HIDDEN_COLUMNS: Readonly<Record<string, readonly string[]>> = {
-  companies: ['security_posture', 'security_notes'],
-  devices: ['cve_count', 'security_posture'],
-  /** A risk rating for a named device's radio link. */
-  comms: ['data_link_risk'],
+/** Site table name to the columns the Lab may show from it. */
+export const ALLOWED_SITE_TABLES: Readonly<Record<string, readonly string[]>> = {
+  /** The catalog's own fields. Evidence and bands are read from the Lab's `placements` table instead. */
+  techniques: ['id', 'name', 'tactic', 'parent_id', 'severity', 'niss_score', 'niss_vector', 'tara_alias', 'tara_mode'],
+  /** Without `description`. */
+  tactics: ['id', 'name', 'domain', 'domain_code', 'action_code'],
+  /** Public record identifiers and scores. The mapping file holds no description column here. */
+  cves: ['cve_id', 'product', 'cvss', 'cwe', 'category', 'technique_ids'],
+  /** Authored chains, without `drift_profile` and `clinical_parallel`. */
+  attack_chains: [
+    'chain_id', 'chain_name', 'chain_objective', 'chain_evidence_label', 'chain_evidence_rationale', 'device_class', 'extrapolation',
+    'step_count', 'position', 'technique_id', 'tara_alias', 'role', 'action', 'detection_window',
+    'step_evidence_label', 'step_evidence_note', 'step_evidence_source',
+  ],
+  /** The eight published specifications the specifications view reads. */
+  devices: ['device', 'company', 'type', 'channels', 'electrode_type', 'fda_status', 'first_human', 'target_use'],
+  hardware_specs: ['id', 'manufacturer', 'device_name', 'device_type', 'fda_status', 'channels', 'power_mw', 'directionality'],
+  /** Without the risk rating of a named device's radio link. */
+  comms: ['device', 'manufacturer', 'wireless_protocol', 'rf_band'],
 };
 
-function withoutColumns(rows: readonly Row[], hidden: readonly string[]): Row[] {
-  return rows.map((row) => Object.fromEntries(Object.entries(row).filter(([column]) => !hidden.includes(column))));
+/** Shown beside the console, so the reader knows what is here and that the rest was left out on purpose. */
+export const LAB_TABLE_POLICY_STATEMENT =
+  "This console holds the technique catalog, public CVE records, authored chains and published device specifications. The site's other datasets are on the main site.";
+
+function keepColumns(rows: readonly Row[], columns: readonly string[]): Row[] {
+  return rows.map((row) => Object.fromEntries(columns.filter((column) => Object.hasOwn(row, column)).map((column) => [column, row[column]])));
 }
 
-/** The database as the Lab may show it. Tables and columns not named above pass through untouched. */
+/** The database as the Lab may show it: allowed tables only, each cut down to its allowed columns. */
 export function applyLabTablePolicy(tables: Readonly<Record<string, readonly Row[]>>): LabTables {
   const allowed: LabTables = {};
-  for (const [name, rows] of Object.entries(tables)) {
-    if (HIDDEN_TABLES.includes(name)) continue;
-    const hiddenColumns = HIDDEN_COLUMNS[name];
-    allowed[name] = hiddenColumns === undefined ? [...rows] : withoutColumns(rows, hiddenColumns);
+  for (const [name, columns] of Object.entries(ALLOWED_SITE_TABLES)) {
+    if (Object.hasOwn(tables, name)) allowed[name] = keepColumns(tables[name], columns);
   }
   return allowed;
 }
