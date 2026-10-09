@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "status": "Review ledger. Only the repository owner adds entries. An entry counts only while its digest matches what was reviewed.",
+  "reviewers": [
+    {
+      "id": "owner-1",
+      "role": "owner"
+    }
+  ],
+  "entries": []
+}
