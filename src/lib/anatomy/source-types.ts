@@ -84,6 +84,12 @@ export interface AnatomySource {
   urls: string[];
   /** The licence the publisher states. A verdict may treat the source as something stricter. */
   license_id: LicenceId;
+  /**
+   * False for a pipeline-only source: the offline pipeline may use it to compute
+   * (a registration template, a transform), and nothing made of its own material
+   * is ever written into the served assets. Such a source is never buildable and
+   * may appear in a manifest only under `computed_with_source_ids`.
+   */
   redistribute: boolean;
   layers: LayerId[];
   delineated_in: string;

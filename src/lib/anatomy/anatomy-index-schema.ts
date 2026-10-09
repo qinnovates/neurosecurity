@@ -8,7 +8,7 @@ import { ANATOMY_INDEX_SCHEMA_VERSION, GEOMETRY_STATES, INDEX_TECHNIQUE_SCOPES, 
 import { EXTENT_MATCHES, HEMISPHERES, SUBJECT_KINDS } from './anatomy-types';
 import { CHECK_STATUSES, CLAIM_BASES } from './evidence';
 import { UNBUILDABLE_REASONS } from './licence-rules';
-import { ASSET_KINDS, POSITION_CHECKS, SIZE_CLASSES } from './manifest-types';
+import { ASSET_KINDS, HEMISPHERE_RECORDS, POSITION_CHECKS, SIZE_CLASSES } from './manifest-types';
 import { FIDUCIAL_IDS, SPACING_MEASURES } from './parse-device-geometry';
 import { REVIEWER_ROLES } from './parse-review-ledger';
 import { RESOLUTIONS } from './resolve-region-term';
@@ -36,13 +36,13 @@ const layer = shapes.record({ id: shapes.word(LAYER_IDS), available: shapes.bool
 
 const source = shapes.record({
   id, name: text, license_id: shapes.word(LICENCE_IDS), stated_license_id: shapes.word(LICENCE_IDS), verdict: shapes.word(VERDICTS),
-  grant: shapes.word(GRANTS), route_kind: shapes.word(ROUTE_KINDS), route_status: shapes.word(ROUTE_STATUSES), buildable: shapes.boolean,
+  grant: shapes.word(GRANTS), route_kind: shapes.word(ROUTE_KINDS), route_status: shapes.word(ROUTE_STATUSES), buildable: shapes.boolean, pipeline_only: shapes.boolean,
   blockers: shapes.list(shapes.word(UNBUILDABLE_REASONS)), clearance_reason: text, human_confirmed: shapes.alwaysFalse,
 });
 
 const asset = shapes.record({
   ...pinFields, id, kind: shapes.word(ASSET_KINDS), layer: shapes.word(LAYER_IDS), license_id: shapes.word(LICENCE_IDS), source_ids: ids,
-  position_check: shapes.word(POSITION_CHECKS),
+  position_check: shapes.word(POSITION_CHECKS), modification_note: text,
   visual_check: shapes.record({ state: shapes.word(VISUAL_CHECK_STATES), role: shapes.nullable(shapes.word(REVIEWER_ROLES)), reviewed_on: shapes.nullable(shapes.date) }),
 });
 
@@ -52,7 +52,7 @@ const owner = shapes.record({
 });
 
 const node = shapes.record({
-  asset_id: id, hemisphere: shapes.word(HEMISPHERES), size_class: shapes.word(SIZE_CLASSES), centroid_mm: shapes.point, vertex_count: shapes.integer(0),
+  asset_id: id, hemisphere: shapes.word(HEMISPHERES), hemispheres_drawn: shapes.word(HEMISPHERE_RECORDS), size_class: shapes.word(SIZE_CLASSES), centroid_mm: shapes.point, vertex_count: shapes.integer(0),
 });
 
 const structure = shapes.record({

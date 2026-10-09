@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { gzipSync } from 'node:zlib';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { AnatomyIndex, IndexReviewState } from '@/lib/anatomy/anatomy-index-types';
@@ -9,12 +10,31 @@ import { sha256Hex } from '@/lib/anatomy/row-digest';
 import { ANATOMY_INDEX_STATUS } from '@/lib/anatomy/status-sentences';
 import { loadAnatomyBundle, loadAnatomyData } from '../load-anatomy-data';
 
-/** Sources that may build today. Clearing or settling a source changes this list in the same reviewed diff. */
-const EXPECTED_BUILDABLE_SOURCE_IDS = ['mni_icbm152_2009c_asym', 'eeg_positions'];
-const EXPECTED_NO_GEOMETRY_REGION_IDS = ['cervical_cord', 'thoracic_cord', 'lumbar_cord', 'sacral_cord', 'cauda_equina'];
-/** No crosswalk row can land before a label table does, so the seed index holds no structure. Later work raises this. */
-const EXPECTED_STRUCTURE_COUNT = 0;
-const INDEX_BUDGET_BYTES = 150_000;
+/**
+ * PINNED STATE OF THE COMMITTED ANATOMY DATA.
+ *
+ * These four values describe what the committed data files let the site do
+ * today. Each changes only when the data changes, in the same reviewed diff;
+ * code owner review of exactly these lines is the control. Change one only for
+ * the reason given beside it.
+ */
+const PINNED_ANATOMY_STATE = {
+  /** Changes when a source is CLEARED, or its route SETTLED, in the verdict or registry file. Every id here may ship assets. */
+  buildableSourceIds: ['mni_icbm152_2009c_asym', 'eeg_positions'],
+  /** Changes when GEOMETRY IS ADDED: crosswalk rows land, or the pipeline ships shapes no record maps to. */
+  structureCount: 0,
+  /** Changes when a region GAINS GEOMETRY (its no_geometry record is removed) or a new one is recorded as having none. */
+  noGeometryRegionIds: ['cervical_cord', 'thoracic_cord', 'lumbar_cord', 'sacral_cord', 'cauda_equina'],
+  /** Changes when REGIONS ARE MAPPED: every region not listed above reads not_mapped until a row is drafted for it. */
+  regionGeometryStates: ['no_geometry', 'not_mapped'],
+} as const;
+
+/**
+ * The most the anatomy index may weigh, uncompressed. It protects the atlas
+ * view's load on a slow connection, not the Lab's first load: the index is
+ * fetched only when the atlas view opens, and is never part of the Lab page.
+ */
+const INDEX_BUDGET_BYTES = 300_000;
 /** An import (static or dynamic) of one of the anatomy data files. Parsers name the files in messages; that is not an import. */
 const ANATOMY_DATA_FILE_PATTERN = /(from|import\()\s*['"][^'"]*qif-anatomy-[a-z-]+\.json['"]/;
 const LOADER_IMPORT_PATTERN = /(from|import\()\s*['"][^'"]*load-anatomy-data['"]/;
@@ -66,12 +86,12 @@ describe('anatomy index built from the seed files (guards)', () => {
     expect(count('network')).toBeGreaterThan(0);
   });
 
-  it('gives the regions with no geometry a reason and its source, and claims geometry for no region yet', () => {
+  it('adding or removing geometry for a region changes PINNED_ANATOMY_STATE: regions with none keep a reason and its source', () => {
     const regions = index.subjects.filter((subject) => subject.kind === 'region');
     const withoutGeometry = regions.filter((subject) => subject.geometry.state === 'no_geometry');
-    expect(withoutGeometry.map((subject) => subject.id).sort()).toEqual([...EXPECTED_NO_GEOMETRY_REGION_IDS].sort());
+    expect(withoutGeometry.map((subject) => subject.id).sort()).toEqual([...PINNED_ANATOMY_STATE.noGeometryRegionIds].sort());
     expect(withoutGeometry.filter((subject) => !subject.geometry.reason || !subject.geometry.reason_source)).toEqual([]);
-    expect(regions.filter((subject) => !['no_geometry', 'not_mapped'].includes(subject.geometry.state))).toEqual([]);
+    expect([...new Set(regions.map((subject) => subject.geometry.state))].sort()).toEqual([...PINNED_ANATOMY_STATE.regionGeometryStates].sort());
   });
 
   it('holds no row that predates the current addressing', () => {
@@ -92,7 +112,10 @@ describe('anatomy index built from the seed files (guards)', () => {
       .filter((mode) => structure.owners.length > 1 && style(structure.key, mode).mark === 'solid' && structure.owners.some((owner) => owner.extent_match === 'contained'))
       .map((mode) => `${structure.key} in ${mode.kind}`));
     expect(wronglyFilled).toEqual([]);
-    expect(index.structures).toHaveLength(EXPECTED_STRUCTURE_COUNT);
+  });
+
+  it('adding geometry changes PINNED_ANATOMY_STATE.structureCount', () => {
+    expect(index.structures).toHaveLength(PINNED_ANATOMY_STATE.structureCount);
   });
 
   it('lists every technique with a neural band, with no region link drafted yet and nothing lit', () => {
@@ -109,17 +132,20 @@ describe('anatomy index built from the seed files (guards)', () => {
     expect(index.layers.find((layer) => layer.id === 'networks')?.reason).toContain('MIT software licence');
   });
 
-  it('pins the evidence file and stays inside the index byte budget', () => {
+  it('pins the evidence file, stays inside the index byte budget and reports the compressed size', () => {
     expect(index.evidence).toEqual({ path: '/atlas/anatomy-evidence.json', bytes: Buffer.byteLength(bundle.evidenceJson), sha256: sha256Hex(bundle.evidenceJson) });
     expect(bundle.indexPin.bytes).toBeGreaterThan(0);
     expect(bundle.indexPin.bytes).toBeLessThan(INDEX_BUDGET_BYTES);
+    const gzipBytes = gzipSync(bundle.indexJson).length;
+    process.stdout.write(`[anatomy index] ${bundle.indexPin.bytes} bytes raw, ${gzipBytes} bytes gzip (budget ${INDEX_BUDGET_BYTES} raw)\n`);
+    expect(gzipBytes).toBeLessThan(bundle.indexPin.bytes);
   });
 });
 
 describe('licence clearance against the committed verdict file (guards)', () => {
-  it('lets exactly the pinned sources build', () => {
+  it('clearing a source or settling its route changes PINNED_ANATOMY_STATE.buildableSourceIds: exactly the pinned sources may build', () => {
     expect(index.sources.length).toBeGreaterThan(0);
-    expect(index.sources.filter((source) => source.buildable).map((source) => source.id).sort()).toEqual([...EXPECTED_BUILDABLE_SOURCE_IDS].sort());
+    expect(index.sources.filter((source) => source.buildable).map((source) => source.id).sort()).toEqual([...PINNED_ANATOMY_STATE.buildableSourceIds].sort());
   });
 
   it('has a verdict for every source, none confirmed by a person, every clearance marked AI-drafted', () => {

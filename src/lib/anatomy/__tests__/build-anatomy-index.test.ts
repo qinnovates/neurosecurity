@@ -7,9 +7,9 @@ import type { AnatomyEvidence } from '../build-anatomy-evidence';
 import { parseReviewLedger, type LedgerEntry } from '../parse-review-ledger';
 import { sha256Hex } from '../row-digest';
 import { ANATOMY_INDEX_STATUS } from '../status-sentences';
-import { FIXTURE_ATLAS_ID, FIXTURE_SHA256, buildVerdict } from './anatomy-fixtures';
+import { FIXTURE_ATLAS_ID, FIXTURE_SHA256, buildSource, buildSourcesFile, buildVerdict, buildVerdictsFile } from './anatomy-fixtures';
 import { buildRow } from './crosswalk-fixtures';
-import { FIXTURE_ASSET_ID, buildAsset, buildManifest } from './manifest-fixtures';
+import { FIXTURE_ASSET_ID, buildAsset, buildManifest, buildNode } from './manifest-fixtures';
 import { PATHWAY_TEXT, TECHNIQUE_ID, TRACTS_SOURCE_ID, buildLedgerFile, buildRawFiles } from './raw-files-fixture';
 
 const build = (overrides: Partial<RawAnatomyFiles> = {}): AnatomyBundle => buildAnatomyBundle(parseAnatomyFiles(buildRawFiles(overrides)));
@@ -39,6 +39,16 @@ describe('buildAnatomyBundle: owners', () => {
     expect(structureOf(index, '12')).toMatchObject({ owners: [], nodes: [{ asset_id: FIXTURE_ASSET_ID, hemisphere: 'left', centroid_mm: [1, 2, 3] }] });
   });
 
+  it('carries through whether a shape\'s sides were drawn separately or one mirrors the other', () => {
+    expect(structureOf(index, '7').nodes[0].hemispheres_drawn).toBe('unknown');
+    const delineation = { ...buildAsset().delineation, hemispheres: 'mirrored' as const };
+    expect(structureOf(build({ manifest: buildManifest([buildAsset({ delineation })]) }).index, '7').nodes[0].hemispheres_drawn).toBe('mirrored');
+  });
+
+  it('carries each asset\'s modification note', () => {
+    expect(index.assets[0].modification_note).toBe('Thresholded at 0.5, meshed and smoothed. Fixture text.');
+  });
+
   it('names structures from the atlas label table and links them to their mesh node', () => {
     expect(structureOf(index, '7')).toMatchObject({ name: 'Fixture Nucleus', nodes: [{ asset_id: FIXTURE_ASSET_ID, size_class: 'resolved' }] });
   });
@@ -49,9 +59,23 @@ describe('buildAnatomyBundle: subjects', () => {
 
   it('derives each subject\'s band set and geometry state', () => {
     expect(subjectOf(index, 'stn')).toMatchObject({ band_ids: ['N5'], geometry: { state: 'drawn' }, structure_keys: [`${FIXTURE_ATLAS_ID}:7`] });
-    expect(subjectOf(index, 'vim').geometry.state).toBe('contained');
     expect(subjectOf(index, 'thalamus').declared_children).toEqual(['vim']);
     expect(subjectOf(index, 'insula').geometry).toEqual({ state: 'not_mapped', reason: 'No correspondence to an atlas has been drafted for this record yet.', reason_source: null });
+  });
+
+  it('reads a subject as drawn only when a shipped mesh exists for one of its labels', () => {
+    expect(subjectOf(index, 'stn').geometry.state).toBe('drawn');
+    expect(subjectOf(index, 'thalamus').geometry).toEqual({ state: 'not_built', reason: 'A correspondence is drafted, but no shape has been built for it yet.', reason_source: null });
+    expect(subjectOf(index, 'vim').geometry.state).toBe('not_built');
+    const withFold = buildManifest([buildAsset({ nodes: [buildNode(), buildNode({ extras: { atlas: FIXTURE_ATLAS_ID, label_id: '9', hemisphere: 'both' } })] })]);
+    expect(subjectOf(build({ manifest: withFold }).index, 'vim').geometry.state).toBe('contained');
+    expect(subjectOf(build({ manifest: null }).index, 'stn').geometry.state).toBe('not_built');
+  });
+
+  it('reads a subject whose only shipped node is too small to outline as a marker, not as drawn', () => {
+    const marker = buildNode({ size_class: 'unresolved', vertex_count: 0 });
+    expect(subjectOf(build({ manifest: buildManifest([buildAsset({ nodes: [marker] })]) }).index, 'stn').geometry)
+      .toEqual({ state: 'marker_only', reason: 'This structure is too small to outline; only its location is marked.', reason_source: null });
   });
 
   it('carries a no_geometry record\'s reason and its source', () => {
@@ -105,7 +129,7 @@ describe('buildAnatomyBundle: technique links', () => {
     expect(moved.addressing_version).toBe(2);
     expect(moved.techniques[0].links.map((link) => [link.valid_for_current_addressing, link.lit])).toEqual([[false, false], [false, false], [false, false]]);
     expect(subjectOf(moved, 'stn').geometry.state).toBe('predates_addressing');
-    expect(subjectOf(moved, 'cingulate').geometry.state).toBe('drawn');
+    expect(subjectOf(moved, 'cingulate').geometry.state).toBe('not_built');
   });
 });
 
@@ -198,6 +222,19 @@ describe('buildAnatomyBundle: review state', () => {
   });
 });
 
+describe('manifest nodes against label tables', () => {
+  it('stops the build on a mesh node whose label is not in its atlas\'s label table', () => {
+    const stray = buildNode({ extras: { atlas: FIXTURE_ATLAS_ID, label_id: '999', hemisphere: 'both' } });
+    expect(() => build({ manifest: buildManifest([buildAsset({ nodes: [buildNode(), stray] })]) }))
+      .toThrow(/manifest\.json: assets\[0\]\.nodes\[1\]\.extras\.label_id: "999" is not a label of "fixture_atlas"/);
+  });
+
+  it('stops the build on a mesh node for an atlas that has no label table', () => {
+    const crosswalk = { ...(buildRawFiles().crosswalk as object), rows: [], contains: [] };
+    expect(() => build({ labelTablesByPath: {}, crosswalk })).toThrow(/nodes\[0\]\.extras\.atlas: "fixture_atlas" has no label table/);
+  });
+});
+
 describe('buildOwnerMap', () => {
   const reviewed = (subjectKind: 'region' | 'pathway', subjectId: string): ReviewedRow => ({
     row: buildRow({ subject_kind: subjectKind, subject_id: subjectId, extent_match: 'approximate' }),
@@ -268,6 +305,15 @@ describe('buildAnatomyBundle: layers, sources and pins', () => {
       [FIXTURE_ATLAS_ID, true, [], false],
       [TRACTS_SOURCE_ID, false, ['not_cleared', 'grant_not_explicit'], false],
     ]);
+  });
+
+  it('marks a source the pipeline only computes with: never buildable, never shipped', () => {
+    const template = buildSource({ id: 'fixture_template', layers: [], redistribute: false, route: { kind: 'not_applicable', status: 'settled', note: 'Registration input only.' } });
+    const sources = buildSourcesFile([buildSource(), template]);
+    const verdicts = buildVerdictsFile([buildVerdict(), buildVerdict({ source_id: 'fixture_template' })]);
+    const entry = build({ sources, verdicts }).index.sources.find((source) => source.id === 'fixture_template');
+    expect(entry).toMatchObject({ pipeline_only: true, buildable: false, blockers: ['not_redistributable'] });
+    expect(index.sources.map((source) => source.pipeline_only)).toEqual([false, false]);
   });
 
   it('pins the evidence file by byte length and sha256, and the index by the same', () => {

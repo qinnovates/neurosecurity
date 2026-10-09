@@ -1,7 +1,7 @@
 /** A valid one-asset manifest for parser tests. Every number is invented. */
 
 import type { AssetManifest, ManifestAsset, ManifestContext, ManifestNode } from '../manifest-types';
-import { FIXTURE_ATLAS_ID, FIXTURE_SHA256, FIXTURE_SPACE } from './anatomy-fixtures';
+import { FIXTURE_ATLAS_ID, FIXTURE_FILE_NAME, FIXTURE_SHA256, FIXTURE_SPACE } from './anatomy-fixtures';
 
 const HASH_PREFIX_LENGTH = 12;
 export const FIXTURE_ASSET_ID = 'deep-fixture';
@@ -42,8 +42,9 @@ export function buildAsset(overrides: Partial<ManifestAsset> = {}): ManifestAsse
     libraries: { 'scikit-image': '0.26.0' },
     nodes: [buildNode()],
     checks: [{ id: 'K6', status: 'not_run', reason: 'side assigned by construction', measured: null, threshold: null }],
-    stage_fingerprints: { fetch: FIXTURE_SHA256, register: null, resample: FIXTURE_SHA256, mesh: FIXTURE_SHA256, write: FIXTURE_SHA256 },
+    stage_fingerprints: { fetch: { [FIXTURE_FILE_NAME]: FIXTURE_SHA256 }, register: null, resample: FIXTURE_SHA256, mesh: FIXTURE_SHA256, write: FIXTURE_SHA256 },
     position_check: 'not independently checked',
+    modification_note: 'Thresholded at 0.5, meshed and smoothed. Fixture text.',
     ...overrides,
   };
 }
@@ -66,6 +67,7 @@ export function buildManifestContext(overrides: Partial<ManifestContext> = {}): 
     statedLicenceBySource: new Map([[FIXTURE_ATLAS_ID, 'cc-by-4.0']]),
     effectiveLicenceBySource: new Map([[FIXTURE_ATLAS_ID, 'cc-by-4.0']]),
     buildableSourceIds: new Set([FIXTURE_ATLAS_ID]),
+    filePinsBySource: new Map([[FIXTURE_ATLAS_ID, new Map([[FIXTURE_FILE_NAME, FIXTURE_SHA256]])]]),
     ...overrides,
   };
 }

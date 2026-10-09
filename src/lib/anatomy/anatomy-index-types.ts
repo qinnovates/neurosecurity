@@ -10,7 +10,7 @@
 import type { ExtentMatch, Hemisphere, SubjectKind, TechniqueScope } from './anatomy-types';
 import type { CheckStatus, ClaimBasis } from './evidence';
 import type { UnbuildableReason } from './licence-rules';
-import type { AssetKind, Point3, PositionCheck, SizeClass } from './manifest-types';
+import type { AssetKind, HemisphereRecord, Point3, PositionCheck, SizeClass } from './manifest-types';
 import type { FiducialId, SpacingMeasure } from './parse-device-geometry';
 import type { ReviewerRole } from './parse-review-ledger';
 import type { Resolution } from './resolve-region-term';
@@ -52,6 +52,8 @@ export interface IndexSource {
   route_kind: RouteKind;
   route_status: RouteStatus;
   buildable: boolean;
+  /** True for a source the pipeline only computes with. Attribution lists it as used to compute, not redistributed. */
+  pipeline_only: boolean;
   blockers: UnbuildableReason[];
   /** The clearance record's reason, AI-drafted. */
   clearance_reason: string;
@@ -75,6 +77,8 @@ export interface IndexAsset extends PinnedFile {
   license_id: LicenceId;
   source_ids: string[];
   position_check: PositionCheck;
+  /** What was done to the source to make this asset, in the pipeline's own words. */
+  modification_note: string;
   visual_check: IndexVisualCheck;
 }
 
@@ -100,6 +104,12 @@ export interface IndexOwner {
 export interface IndexStructureNode {
   asset_id: string;
   hemisphere: Hemisphere;
+  /**
+   * Whether the source drew each side itself. `mirrored`: one side is a mirror
+   * image of the other's drawing, so a left-right difference in this shape means
+   * nothing. Carried from the manifest so the scene states it and never guesses.
+   */
+  hemispheres_drawn: HemisphereRecord;
   size_class: SizeClass;
   centroid_mm: Point3;
   vertex_count: number;
@@ -118,7 +128,17 @@ export interface IndexStructure {
   check_status: CheckStatus;
 }
 
-export const GEOMETRY_STATES = ['drawn', 'contained', 'no_geometry', 'predates_addressing', 'not_mapped'] as const;
+/**
+ * What stands for a subject in this build.
+ * - `drawn`: a shipped mesh exists for a label one of its drawing rows names.
+ * - `contained`: it lies somewhere inside a shipped mesh that has no boundary for it.
+ * - `marker_only`: its only shipped node is too small to outline; a location marker, no mesh.
+ * - `not_built`: a drawing row is drafted, but no shape ships for it.
+ * - `no_geometry`: a record says no buildable atlas has geometry, with the reason.
+ * - `predates_addressing`: its rows are not valid for the current addressing.
+ * - `not_mapped`: nothing has been drafted.
+ */
+export const GEOMETRY_STATES = ['drawn', 'contained', 'marker_only', 'not_built', 'no_geometry', 'predates_addressing', 'not_mapped'] as const;
 export type GeometryState = typeof GEOMETRY_STATES[number];
 
 export interface IndexSubject {

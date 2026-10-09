@@ -5,7 +5,7 @@ import { AnatomyDataError } from '../errors';
 import { parseAnatomyIndex } from '../parse-anatomy-index';
 import { parseManifest } from '../parse-manifest';
 import { DEVICE_GEOMETRY_STATUS } from '../status-sentences';
-import { FIXTURE_SPACE } from './anatomy-fixtures';
+import { FIXTURE_SHA256, FIXTURE_SPACE } from './anatomy-fixtures';
 import { buildAsset, buildManifest, buildManifestContext } from './manifest-fixtures';
 import { buildRawFiles } from './raw-files-fixture';
 
@@ -106,9 +106,10 @@ describe('parseAnatomyIndex: wrong types', () => {
 });
 
 describe('parseManifest: wrong types', () => {
-  const manifest = buildManifest([buildAsset()]);
+  const register = { archive_sha256: { 'fixture_warp.h5': FIXTURE_SHA256 }, setting: 'fixture-setting', tool: 'fixture-tool', tool_version: '1.0.0', seed: 7, parameters: {} };
+  const manifest = buildManifest([buildAsset({ stage_fingerprints: { ...buildAsset().stage_fingerprints, register } })]);
   const context = buildManifestContext();
-  const NULLABLE = /(subjects|acquisition_voxel_mm|measured|threshold|stage_fingerprints\.[a-z]+)$/;
+  const NULLABLE = /(subjects|acquisition_voxel_mm|measured|threshold|stage_fingerprints\.(register|resample|mesh|write))$/;
 
   it('rejects every leaf replaced by a value of another type, always with the typed error', () => {
     const { escapes, tried } = listEscapes(manifest, (candidate) => parseManifest(candidate, context), NULLABLE);
@@ -116,8 +117,8 @@ describe('parseManifest: wrong types', () => {
     expect(escapes).toEqual([]);
   });
 
-  it('rejects a stage fingerprint that is not a digest', () => {
+  it('rejects a registration record of any shape but the declared one', () => {
     const asset = buildAsset({ stage_fingerprints: { ...buildAsset().stage_fingerprints, register: { anything: 'goes' } as never } });
-    expect(() => parseManifest(buildManifest([asset]), context)).toThrow(/stage_fingerprints\.register/);
+    expect(() => parseManifest(buildManifest([asset]), context)).toThrow(/stage_fingerprints\.register: unexpected key "anything"/);
   });
 });

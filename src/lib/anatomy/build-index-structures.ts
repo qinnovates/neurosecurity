@@ -4,7 +4,7 @@ import type { AnatomyData } from './anatomy-inputs';
 import type {
   GeometryState, IndexAsset, IndexOwner, IndexStructure, IndexStructureNode, IndexSubject, IndexVisualCheck,
 } from './anatomy-index-types';
-import type { SubjectKind } from './anatomy-types';
+import type { CrosswalkRow, SubjectKind } from './anatomy-types';
 import { buildOwnerMap } from './build-owner-map';
 import { structureKey, subjectKey } from './crosswalk-rules';
 import type { ReviewedCrosswalk, ReviewedNoGeometry } from './review-rows';
@@ -12,12 +12,14 @@ import { findReview, toIndexReviewState, worstCheckStatus, worstReviewState } fr
 
 const PREDATES_ADDRESSING_REASON = 'This correspondence predates the current addressing.';
 const NOT_MAPPED_REASON = 'No correspondence to an atlas has been drafted for this record yet.';
+const NOT_BUILT_REASON = 'A correspondence is drafted, but no shape has been built for it yet.';
+const MARKER_ONLY_REASON = 'This structure is too small to outline; only its location is marked.';
 const KEY_SEPARATOR = ':';
 
 function listNodes(data: AnatomyData, key: string): IndexStructureNode[] {
   return (data.manifest?.assets ?? []).flatMap((asset) => asset.nodes
     .filter((node) => structureKey(node.extras.atlas, node.extras.label_id) === key)
-    .map((node) => ({ asset_id: asset.id, hemisphere: node.extras.hemisphere, size_class: node.size_class, centroid_mm: node.centroid_mm, vertex_count: node.vertex_count })));
+    .map((node) => ({ asset_id: asset.id, hemisphere: node.extras.hemisphere, hemispheres_drawn: asset.delineation.hemispheres, size_class: node.size_class, centroid_mm: node.centroid_mm, vertex_count: node.vertex_count })));
 }
 
 function toStructure(data: AnatomyData, key: string, owners: IndexOwner[]): IndexStructure {
@@ -46,6 +48,20 @@ interface SubjectFacts {
   crosswalk: ReviewedCrosswalk;
   noGeometry: readonly ReviewedNoGeometry[];
   bandsByRegion: ReadonlyMap<string, string>;
+  /** Structure key -> the largest vertex count among its shipped nodes. Zero means a marker with no mesh. */
+  shippedNodes: ReadonlyMap<string, number>;
+}
+
+/**
+ * What the build actually ships for a subject's drawing rows, or null when it
+ * ships nothing. A row alone never makes a subject read as drawn.
+ */
+function describeShippedGeometry(rows: readonly CrosswalkRow[], shippedNodes: ReadonlyMap<string, number>): GeometryState | null {
+  const withNodes = rows.filter((row) => row.atlas_ids.some((labelId) => shippedNodes.has(structureKey(row.atlas, labelId))));
+  const withMeshes = withNodes.filter((row) => row.atlas_ids.some((labelId) => (shippedNodes.get(structureKey(row.atlas, labelId)) ?? 0) > 0));
+  if (withMeshes.some((row) => row.extent_match !== 'contained')) return 'drawn';
+  if (withMeshes.length > 0) return 'contained';
+  return withNodes.length > 0 ? 'marker_only' : null;
 }
 
 function describeGeometry(kind: SubjectKind, id: string, facts: SubjectFacts): IndexSubject['geometry'] {
@@ -53,8 +69,9 @@ function describeGeometry(kind: SubjectKind, id: string, facts: SubjectFacts): I
   const state = (geometryState: GeometryState, reason: string | null = null, reasonSource: string | null = null): IndexSubject['geometry'] =>
     ({ state: geometryState, reason, reason_source: reasonSource });
   const drawing = facts.crosswalk.current.filter((reviewed) => subjectKey(reviewed.row) === key && reviewed.row.draws);
-  if (drawing.some((reviewed) => reviewed.row.extent_match !== 'contained')) return state('drawn');
-  if (drawing.length > 0) return state('contained');
+  const shipped = describeShippedGeometry(drawing.map((reviewed) => reviewed.row), facts.shippedNodes);
+  if (shipped !== null) return shipped === 'marker_only' ? state(shipped, MARKER_ONLY_REASON) : state(shipped);
+  if (drawing.length > 0) return state('not_built', NOT_BUILT_REASON);
   const record = facts.noGeometry.find((reviewed) => subjectKey(reviewed.record) === key)?.record;
   if (record !== undefined) return state('no_geometry', record.reason, record.reason_source);
   const hasOnlyOutdatedRows = facts.crosswalk.outdated.some((row) => subjectKey(row) === key)
@@ -83,7 +100,12 @@ function toSubject(data: AnatomyData, kind: SubjectKind, id: string, name: strin
 
 /** Every region, pathway and network, each with its derived band set and what, if anything, stands for it. */
 export function buildSubjects(data: AnatomyData, crosswalk: ReviewedCrosswalk, noGeometry: readonly ReviewedNoGeometry[]): IndexSubject[] {
-  const facts: SubjectFacts = { crosswalk, noGeometry, bandsByRegion: new Map(data.engineData.regions.map((region) => [region.id, region.bandId])) };
+  const shippedNodes = new Map<string, number>();
+  for (const node of (data.manifest?.assets ?? []).flatMap((asset) => asset.nodes)) {
+    const key = structureKey(node.extras.atlas, node.extras.label_id);
+    shippedNodes.set(key, Math.max(shippedNodes.get(key) ?? 0, node.vertex_count));
+  }
+  const facts: SubjectFacts = { crosswalk, noGeometry, shippedNodes, bandsByRegion: new Map(data.engineData.regions.map((region) => [region.id, region.bandId])) };
   const kinds: SubjectKind[] = ['region', 'pathway', 'network'];
   return kinds.flatMap((kind) => [...data.subjectNames[kind]].map(([id, name]) => toSubject(data, kind, id, name, facts)));
 }
@@ -106,6 +128,7 @@ export function buildAssets(data: AnatomyData): IndexAsset[] {
     license_id: asset.license_id,
     source_ids: asset.source_ids,
     position_check: asset.position_check,
+    modification_note: asset.modification_note,
     visual_check: describeVisualCheck(data, asset.id, asset.sha256),
   }));
 }

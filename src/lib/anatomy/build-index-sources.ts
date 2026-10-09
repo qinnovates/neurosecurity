@@ -51,6 +51,7 @@ export function buildSources(data: AnatomyData): IndexSource[] {
     route_kind: source.route.kind,
     route_status: source.route.status,
     buildable: buildability.buildable,
+    pipeline_only: !source.redistribute,
     blockers: buildability.blockers,
     clearance_reason: verdict.clearance.reason,
     human_confirmed: verdict.human_confirmed,

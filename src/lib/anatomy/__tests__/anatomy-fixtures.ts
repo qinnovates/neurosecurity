@@ -11,6 +11,7 @@ export const FIXTURE_ATLAS_ID = 'fixture_atlas';
 export const FIXTURE_DRAWN_ATLAS_ID = 'fixture_drawn_atlas';
 export const FIXTURE_SPACE = 'FixtureSpace';
 export const FIXTURE_SHA256 = 'a'.repeat(64);
+export const FIXTURE_FILE_NAME = 'labels.nii.gz';
 export const OTHER_SHA256 = 'b'.repeat(64);
 
 export function buildSource(overrides: Partial<AnatomySource> = {}): AnatomySource {
@@ -27,7 +28,7 @@ export function buildSource(overrides: Partial<AnatomySource> = {}): AnatomySour
     route: { kind: 'publisher_registered', status: 'settled', note: 'Fixture.', publisher_registration: { target: FIXTURE_SPACE, method: 'not stated' } },
     delineation: { basis: 'manual_mri', subjects: 10 },
     required_text: [],
-    files: [{ name: 'labels.nii.gz', url: 'https://example.org/labels.nii.gz', sha256: null, bytes: null, digest_origin: null }],
+    files: [{ name: FIXTURE_FILE_NAME, url: 'https://example.org/labels.nii.gz', sha256: FIXTURE_SHA256, bytes: 1024, digest_origin: 'first_download' }],
     ...overrides,
   };
 }
