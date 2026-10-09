@@ -39,7 +39,10 @@ const INDEX_BUDGET_BYTES = 300_000;
 const ANATOMY_DATA_FILE_PATTERN = /(from|import\()\s*['"][^'"]*qif-anatomy-[a-z-]+\.json['"]/;
 const LOADER_IMPORT_PATTERN = /(from|import\()\s*['"][^'"]*load-anatomy-data['"]/;
 const LOADER_PATH = 'src/components/atlas-scene/load-anatomy-data.ts';
-const ENDPOINT_PATHS = ['src/pages/atlas/anatomy-evidence.json.ts', 'src/pages/atlas/anatomy-index.json.ts'];
+const ENDPOINT_PATHS = [
+  'src/pages/atlas/anatomy-catalog.json.ts', 'src/pages/atlas/anatomy-evidence.json.ts', 'src/pages/atlas/anatomy-h01-card.json.ts',
+  'src/pages/atlas/anatomy-index.json.ts', 'src/pages/atlas/anatomy-region-evidence.json.ts',
+];
 const SOURCE_EXTENSIONS = ['.ts', '.tsx', '.astro', '.mjs'];
 const SKIPPED_DIRECTORIES = ['__tests__', 'site', 'node_modules'];
 
@@ -185,7 +188,7 @@ describe('where anatomy data may be imported (guards)', () => {
     expect(listFilesMatching(ANATOMY_DATA_FILE_PATTERN)).toEqual([LOADER_PATH]);
   });
 
-  it('lets only the two static endpoints import the loader, so nothing is serialised into a page', () => {
+  it('lets only the static endpoints import the loader, so nothing is serialised into a page', () => {
     expect(listFilesMatching(LOADER_IMPORT_PATTERN).filter((filePath) => filePath !== LOADER_PATH)).toEqual(ENDPOINT_PATHS);
   });
 });

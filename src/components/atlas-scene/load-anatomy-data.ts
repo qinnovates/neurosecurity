@@ -17,9 +17,15 @@ import reviewLedger from '@shared/qif-anatomy-review-ledger.json';
 import crosswalk from '@shared/qif-anatomy-crosswalk.json';
 import techniqueRegions from '@shared/qif-anatomy-technique-regions.json';
 import deviceGeometry from '@shared/qif-anatomy-device-geometry.json';
+import regionEvidence from '@shared/qif-anatomy-region-evidence.json';
+import h01Card from '@shared/qif-anatomy-h01-card.json';
 import { parseAnatomyFiles, type AnatomyData } from '@/lib/anatomy/anatomy-inputs';
 import { buildAnatomyBundle, type AnatomyBundle } from '@/lib/anatomy/build-anatomy-index';
+import { parseH01Card, type H01Card } from '@/lib/anatomy/parse-h01-card';
+import { parseRegionEvidence } from '@/lib/anatomy/parse-region-evidence';
+import type { RegionEvidence } from '@/lib/anatomy/region-evidence-types';
 import { assertLedgerRatchet } from '@/lib/anatomy/review-state';
+import { buildExplorerCatalog, type ExplorerCatalog } from '@/lib/atlas-explorer/explorer-catalog';
 import { buildEngineData } from '@/lib/threat-model/build-engine-data';
 
 const ROOT_PREFIX = '/';
@@ -60,4 +66,23 @@ export function loadAnatomyData(): AnatomyData {
 
 export function loadAnatomyBundle(): AnatomyBundle {
   return buildAnatomyBundle(loadAnatomyData());
+}
+
+function loadEngineData(): ReturnType<typeof buildEngineData>['engineData'] {
+  return buildEngineData({ registrar, atlas, cveMapping, securityControls }).engineData;
+}
+
+/** The literature statements filed under each region, parsed. Throws AnatomyDataError on the first problem. */
+export function loadRegionEvidence(): RegionEvidence {
+  return parseRegionEvidence(regionEvidence, new Set(loadEngineData().regions.map((region) => region.id)));
+}
+
+/** The H01 card and the sourced facts behind it, parsed. Throws AnatomyDataError on the first problem. */
+export function loadH01Card(): H01Card {
+  return parseH01Card(h01Card);
+}
+
+/** Band names, region descriptions and device-stage techniques for the explorer. Throws AnatomyDataError on the first problem. */
+export function loadExplorerCatalog(): ExplorerCatalog {
+  return buildExplorerCatalog(loadEngineData(), atlas);
 }
