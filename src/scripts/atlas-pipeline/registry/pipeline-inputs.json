@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "note": "Technical inputs the pipeline needs beyond the source registry (datalake/qif-anatomy-sources.json): download hosts, which members to read from an archive, the archived registration and what to build. Licences, pins of downloads, routes and clearances live in the registry and the verdict file, not here.",
+  "fetch": {
+    "mni_icbm152_2009c_asym": {
+      "allowed_hosts": [
+        "www.bic.mni.mcgill.ca"
+      ],
+      "members": {
+        "mni_icbm152_nlin_asym_09c_nifti.zip": [
+          {
+            "path": "mni_icbm152_nlin_asym_09c/mni_icbm152_t1_tal_nlin_asym_09c.nii",
+            "save_as": "mni_icbm152_t1_tal_nlin_asym_09c.nii",
+            "sha256": "67fe8b2e8fed7fa318d293e79a31416f5b31d70f0330312f58125fcd3dde43a1"
+          },
+          {
+            "path": "mni_icbm152_nlin_asym_09c/mni_icbm152_t1_tal_nlin_asym_09c_mask.nii",
+            "save_as": "mni_icbm152_t1_tal_nlin_asym_09c_mask.nii",
+            "sha256": "7d80b651fc5f11bae015f28577b9e9b4211d11910b4d215f6a8fb47fc2ab2b40"
+          },
+          {
+            "path": "mni_icbm152_nlin_asym_09c/mni_icbm152_gm_tal_nlin_asym_09c.nii",
+            "save_as": "mni_icbm152_gm_tal_nlin_asym_09c.nii",
+            "sha256": "781550eec4b7f0e33abfba267b96887a32cf57f9482c958c700f9e35199cc666"
+          },
+          {
+            "path": "mni_icbm152_nlin_asym_09c/mni_icbm152_wm_tal_nlin_asym_09c.nii",
+            "save_as": "mni_icbm152_wm_tal_nlin_asym_09c.nii",
+            "sha256": "337525d68780df3eef82539cf1ff3f44efeb4d988379407cf7a678303bd913d4"
+          },
+          {
+            "path": "mni_icbm152_nlin_asym_09c/mni_icbm152_csf_tal_nlin_asym_09c.nii",
+            "save_as": "mni_icbm152_csf_tal_nlin_asym_09c.nii",
+            "sha256": "6baf048a874ebabb252e028229cbfd19ddfc835fa7d89efe18ceab86926c87b3"
+          }
+        ]
+      }
+    },
+    "mni_icbm152_2009b_sym": {
+      "allowed_hosts": [
+        "www.bic.mni.mcgill.ca"
+      ],
+      "members": {
+        "mni_icbm152_nlin_sym_09b_nifti.zip": [
+          {
+            "path": "mni_icbm152_nlin_sym_09b/mni_icbm152_t1_tal_nlin_sym_09b_hires.nii",
+            "save_as": "mni_icbm152_t1_tal_nlin_sym_09b_hires.nii",
+            "sha256": "b2ca5ca7c94471f0ca77b64485c0d9655737b9029ec19ef7486ab89f1ce4bf79"
+          }
+        ]
+      }
+    },
+    "cit168_rl": {
+      "allowed_hosts": [
+        "osf.io",
+        "files.osf.io",
+        "files.de-1.osf.io",
+        "files.us.osf.io"
+      ],
+      "members": {}
+    },
+    "neudorfer_hypothalamus": {
+      "allowed_hosts": [
+        "zenodo.org"
+      ],
+      "members": {}
+    },
+    "allen_hra_3d_2020": {
+      "allowed_hosts": [
+        "download.alleninstitute.org"
+      ],
+      "members": {}
+    }
+  },
+  "template": {
+    "source": "mni_icbm152_2009c_asym",
+    "t1": "mni_icbm152_t1_tal_nlin_asym_09c.nii",
+    "mask": "mni_icbm152_t1_tal_nlin_asym_09c_mask.nii",
+    "gm": "mni_icbm152_gm_tal_nlin_asym_09c.nii",
+    "wm": "mni_icbm152_wm_tal_nlin_asym_09c.nii",
+    "csf": "mni_icbm152_csf_tal_nlin_asym_09c.nii"
+  },
+  "transforms": {
+    "allen_2009bsym_to_2009casym": {
+      "moving_source": "mni_icbm152_2009b_sym",
+      "moving_file": "mni_icbm152_t1_tal_nlin_sym_09b_hires.nii",
+      "fixed_source": "mni_icbm152_2009c_asym",
+      "fixed_file": "mni_icbm152_t1_tal_nlin_asym_09c.nii",
+      "tool": "antspyx 0.5.4",
+      "setting": "B_syn_cc_fullres",
+      "random_seed": 20261009,
+      "archive": [
+        {
+          "name": "xfm_1Warp.nii.gz",
+          "sha256": "a46a7737e56ef8858478578a1f12a940ab8c8e944728c0ce0d6af45b84f02f64"
+        },
+        {
+          "name": "xfm_0GenericAffine.mat",
+          "sha256": "1d4a11a4e443ffa19dc0112d8b897d50fb88889cd2fa6d54bed76e8ebafd0da9"
+        }
+      ],
+      "archive_note": "Archived outside git and reused when the hashes match. A recomputation with the same setting and seed is not promised to be byte-identical; if it is recomputed, these pins change in a reviewed diff. Where the archive is kept durably is an open question for the owner."
+    }
+  },
+  "assets": [
+    {
+      "id": "outline",
+      "layer": "outline",
+      "source": "mni_icbm152_2009c_asym",
+      "kind": "template_mask",
+      "label": {
+        "id": "brain_mask",
+        "name": "Brain outline (average template)"
+      },
+      "hemispheres": "separate",
+      "probability_meaning": "not applicable: binary brain mask of the template",
+      "acquisition_voxel_mm": null,
+      "size_rule_voxel_mm": null
+    },
+    {
+      "id": "deep-cit168",
+      "layer": "deep",
+      "source": "cit168_rl",
+      "kind": "probability_maps",
+      "file": "CIT168toMNI152-2009c_prob.nii.gz",
+      "threshold": 0.5,
+      "hemispheres": "unknown",
+      "probability_meaning": "not stated by the publisher",
+      "name_source": "Acronyms from the publisher's labels.txt; names from the publisher's OSF wiki.",
+      "labels": [
+        {
+          "id": "0",
+          "acronym": "Pu",
+          "name": "Putamen"
+        },
+        {
+          "id": "1",
+          "acronym": "Ca",
+          "name": "Caudate Nucleus"
+        },
+        {
+          "id": "2",
+          "acronym": "NAC",
+          "name": "Nucleus Accumbens"
+        },
+        {
+          "id": "4",
+          "acronym": "GPe",
+          "name": "Globus Pallidus External"
+        },
+        {
+          "id": "5",
+          "acronym": "GPi",
+          "name": "Globus Pallidus Internal"
+        },
+        {
+          "id": "6",
+          "acronym": "SNc",
+          "name": "Substantia Nigra Pars Compacta"
+        },
+        {
+          "id": "7",
+          "acronym": "RN",
+          "name": "Red Nucleus"
+        },
+        {
+          "id": "8",
+          "acronym": "SNr",
+          "name": "Substantia Nigra Pars Reticulata"
+        },
+        {
+          "id": "10",
+          "acronym": "VTA",
+          "name": "Ventral Tegmental Area"
+        },
+        {
+          "id": "15",
+          "acronym": "STH",
+          "name": "Subthalamic Nucleus"
+        }
+      ],
+      "acquisition_voxel_mm": 0.7,
+      "size_rule_voxel_mm": 1.0,
+      "mesh_upsample": 2,
+      "grid_voxel_mm": 1.0,
+      "mesh_note": "The 1 mm probability field is resampled linearly to 0.5 mm before the 0.5 cut, so that the mesh and the mask it is checked against describe the same surface. Size class is judged in the publisher's 1 mm voxels."
+    },
+    {
+      "id": "hypothalamus-neudorfer",
+      "layer": "deep",
+      "source": "neudorfer_hypothalamus",
+      "kind": "discrete_lateralised",
+      "file": "MNI152b_atlas_labels_0.5mm.nii.gz",
+      "names_file": "Volumes_names-labels.csv",
+      "hemispheres": "separate",
+      "probability_meaning": "not applicable: discrete labels",
+      "label_ids": [
+        9,
+        10,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        37,
+        38,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54
+      ],
+      "acquisition_voxel_mm": 0.7,
+      "size_rule_voxel_mm": 0.7
+    },
+    {
+      "id": "cortex-allen",
+      "layer": "cortical",
+      "source": "allen_hra_3d_2020",
+      "kind": "discrete_mirrored",
+      "file": "annotation_full.nii.gz",
+      "names_file": "voxel_count.csv",
+      "transform": "allen_2009bsym_to_2009casym",
+      "hemispheres": "mirrored",
+      "probability_meaning": "not applicable: discrete labels",
+      "select": {
+        "descendants_of_acronym": "CeG",
+        "acronyms": [
+          "LI"
+        ]
+      },
+      "acquisition_voxel_mm": null,
+      "size_rule_voxel_mm": null
+    },
+    {
+      "id": "deep-allen",
+      "layer": "deep",
+      "source": "allen_hra_3d_2020",
+      "kind": "discrete_mirrored",
+      "file": "annotation_full.nii.gz",
+      "names_file": "voxel_count.csv",
+      "transform": "allen_2009bsym_to_2009casym",
+      "hemispheres": "mirrored",
+      "probability_meaning": "not applicable: discrete labels",
+      "select": {
+        "acronyms": [
+          "THM",
+          "ANC",
+          "LD",
+          "MD",
+          "Re",
+          "LP",
+          "Pul",
+          "VA",
+          "VL",
+          "VPL",
+          "VPM",
+          "DLG",
+          "MG",
+          "CM",
+          "Pf",
+          "MiN",
+          "HiH",
+          "HiB",
+          "HiT",
+          "La",
+          "BL",
+          "BM",
+          "CEN",
+          "CBV",
+          "CBPV",
+          "CBL",
+          "CbDN",
+          "MoPy",
+          "MoTg",
+          "IO",
+          "PnBa",
+          "PnTg",
+          "MTg",
+          "PTR",
+          "SC",
+          "IC",
+          "cpd"
+        ]
+      },
+      "acquisition_voxel_mm": null,
+      "size_rule_voxel_mm": null
+    }
+  ],
+  "expected_neighbours": {
+    "note": "Pairs of drawn shapes from different atlases that are known to abut. Overlap between them is recorded; a pair above the duplicate threshold fails the build.",
+    "pairs": [
+      [
+        "allen_hra_3d_2020",
+        "cit168_rl"
+      ],
+      [
+        "allen_hra_3d_2020",
+        "neudorfer_hypothalamus"
+      ],
+      [
+        "cit168_rl",
+        "neudorfer_hypothalamus"
+      ]
+    ]
+  },
+  "shift_scan_images": {
+    "cit168_rl": "CIT168toMNI152-2009c_T1w.nii.gz",
+    "neudorfer_hypothalamus": "MDA_990HCP_t1_MNI152b_0.5.nii.gz"
+  }
+}

@@ -23,8 +23,8 @@
         "note": "This template defines the declared space."
       },
       "delineation": {
-        "basis": null,
-        "subjects": null
+        "basis": "template_average",
+        "subjects": 152
       },
       "required_text": [
         "Copyright (C) 1993–2004 Louis Collins, McConnell Brain Imaging Centre, Montreal Neurological Institute, McGill University. Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies."
@@ -33,9 +33,43 @@
         {
           "name": "mni_icbm152_nlin_asym_09c_nifti.zip",
           "url": "https://www.bic.mni.mcgill.ca/~vfonov/icbm/2009/mni_icbm152_nlin_asym_09c_nifti.zip",
-          "sha256": null,
-          "bytes": null,
-          "digest_origin": null
+          "sha256": "804382e5d68a42ff8096ee845a7600b6658434da762fa67840a149eb25d48bd4",
+          "bytes": 58602393,
+          "digest_origin": "first_download"
+        }
+      ]
+    },
+    {
+      "id": "mni_icbm152_2009b_sym",
+      "name": "MNI ICBM152 2009b nonlinear symmetric template",
+      "attribution_text": "Copyright (C) 1993–2004 Louis Collins, McConnell Brain Imaging Centre, Montreal Neurological Institute, McGill University. Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies. Cite Fonov et al. 2011, https://doi.org/10.1016/j.neuroimage.2010.07.033.",
+      "urls": [
+        "https://nist.mni.mcgill.ca/icbm-152-nonlinear-atlases-2009/"
+      ],
+      "licence_id": "mni-icbm-notice",
+      "redistribute": true,
+      "layers": [],
+      "delineated_in": "itself",
+      "arrives_in": "MNI152NLin2009bSym",
+      "route": {
+        "kind": "not_applicable",
+        "status": "settled",
+        "note": "A pipeline input only: the moving image of the computed registration that carries the Allen atlas to the declared space. No shape is made from its voxels."
+      },
+      "delineation": {
+        "basis": "template_average",
+        "subjects": 152
+      },
+      "required_text": [
+        "Copyright (C) 1993–2004 Louis Collins, McConnell Brain Imaging Centre, Montreal Neurological Institute, McGill University. Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies."
+      ],
+      "files": [
+        {
+          "name": "mni_icbm152_nlin_sym_09b_nifti.zip",
+          "url": "https://www.bic.mni.mcgill.ca/~vfonov/icbm/2009/mni_icbm152_nlin_sym_09b_nifti.zip",
+          "sha256": "acce3b85039176aaf7de2c3169272551ddfcae5d9a4e5ce642025b795f9f1d20",
+          "bytes": 364272316,
+          "digest_origin": "first_download"
         }
       ]
     },
@@ -56,21 +90,21 @@
       "arrives_in": "MNI152NLin2009bSym",
       "route": {
         "kind": "computed_registration",
-        "status": "open",
-        "note": "A registration from its own symmetric template to the declared space, to be computed and proven (spike c). The structure table must come from voxel_count.csv in the CC BY download directory, never from the Allen API."
+        "status": "settled",
+        "note": "The annotation grid equals the 2009b symmetric template's header, and the gyral labels sit in grey matter on the symmetric tissue map (0.860) but not on the asymmetric one (0.79). Registered with ANTs SyN from the 2009b symmetric T1 to the declared template; the transform is archived by hash. Evidence independent of what the registration optimises: grey-matter share of gyral labels rises to 0.85 with a spread of 0.004 across three settings, and every seeded fault scores lower. For deep structures the gain is not distinguishable from the spread, so their position reads 'not independently checked'. One hemisphere was drawn; the right side is its mirror. The structure table comes from voxel_count.csv in the CC BY download directory, never from the Allen API."
       },
       "delineation": {
         "basis": "expert_drawing_on_template",
-        "subjects": null
+        "subjects": 1
       },
       "required_text": [],
       "files": [
         {
           "name": "annotation_full.nii.gz",
           "url": "https://download.alleninstitute.org/informatics-archive/allen_human_reference_atlas_3d_2020/version_1/annotation_full.nii.gz",
-          "sha256": null,
-          "bytes": null,
-          "digest_origin": null
+          "sha256": "2b05581e39c44f2623d9b0a69f64e3df0823c20d054abef92973812313335dc3",
+          "bytes": 1815762,
+          "digest_origin": "first_download"
         },
         {
           "name": "annotation.nii.gz",
@@ -82,9 +116,9 @@
         {
           "name": "voxel_count.csv",
           "url": "https://download.alleninstitute.org/informatics-archive/allen_human_reference_atlas_3d_2020/version_1/examples/voxel_count/voxel_count.csv",
-          "sha256": null,
-          "bytes": null,
-          "digest_origin": null
+          "sha256": "7348be087e6c2b6cb1fde1d604761cdd2d70e0e33ded6e1f322db334959d162f",
+          "bytes": 479643,
+          "digest_origin": "first_download"
         },
         {
           "name": "README.pdf",
@@ -113,15 +147,15 @@
       "arrives_in": "MNI152NLin2009cAsym",
       "route": {
         "kind": "publisher_registered",
-        "status": "open",
-        "note": "The publisher ships a file named for the declared space. Open until the publisher's label table and volume header are read (spike a).",
+        "status": "settled",
+        "note": "The publisher's file is on the declared template's 193 x 229 x 193 grid at 1 mm, and the publisher's log names the fixed image as mni_icbm152_t1_tal_nlin_asym_09c.nii. Shift scan K5 of the publisher's own T1 against the declared template is recorded in the pipeline's evidence file. Both sides share one probability map with no side ids; the pipeline assigns sides at x = 0.",
         "publisher_registration": {
           "target": "MNI152NLin2009cAsym",
-          "method": "not stated"
+          "method": "ANTs rigid, affine and BSplineSyN on T1w and T2w images, per the publisher's log cit2mni_Warp.log"
         }
       },
       "delineation": {
-        "basis": null,
+        "basis": "manual_mri",
         "subjects": null
       },
       "required_text": [
@@ -131,16 +165,23 @@
         {
           "name": "CIT168toMNI152-2009c_prob.nii.gz",
           "url": "https://osf.io/download/w8zq2/",
-          "sha256": null,
-          "bytes": null,
-          "digest_origin": null
+          "sha256": "7a91c36701f36d9d908479b862e65a879d15f54badcec6878e61d857ab570f66",
+          "bytes": 857744,
+          "digest_origin": "first_download"
         },
         {
           "name": "labels.txt",
           "url": "https://osf.io/download/6qrcb/",
-          "sha256": null,
-          "bytes": null,
-          "digest_origin": null
+          "sha256": "5e00265a7bbbdf242356345e0f6615d84791ada54aa9739539096aab3c1e1b41",
+          "bytes": 123,
+          "digest_origin": "first_download"
+        },
+        {
+          "name": "CIT168toMNI152-2009c_T1w.nii.gz",
+          "url": "https://osf.io/download/j9gqh/",
+          "sha256": "d6f18f858867ca46f982b6b88e0333957ef7cdbcaadf0372cf2f2826cbf34a93",
+          "bytes": 18158937,
+          "digest_origin": "first_download"
         }
       ]
     },
@@ -161,9 +202,9 @@
       "delineated_in": "one ex vivo specimen plus a reference atlas",
       "arrives_in": "MNI152 1 mm (variant not stated; the FSL grid is inferred from file size)",
       "route": {
-        "kind": "distributed_transform",
+        "kind": "unknown",
         "status": "open",
-        "note": "Through the TemplateFlow NLin6Asym-to-2009cAsym transform, if the file is on the FSL grid (spike a) and the direction test passes (spike c)."
+        "note": "Space not established, so nothing ships. The file has the FSL 182 x 218 x 182 grid and its left and right labels are exact mirrors about x = +0.5 mm, but no anatomical test separated the FSL template from the declared one: agreement with CIT168's ventral tegmental area is equally poor in both (Dice 0.16), and the share of label voxels in template CSF is not lower after an FSL-to-2009c transform (0.022) than before it (0.013)."
       },
       "delineation": {
         "basis": "expert_drawing_on_template",
@@ -209,15 +250,15 @@
         "deep"
       ],
       "delineated_in": "its own 990-subject template",
-      "arrives_in": "MNI152 2009b (symmetric or asymmetric not stated)",
+      "arrives_in": "MNI152NLin2009bAsym grid at 0.5 mm (asymmetric by measurement; the publisher does not state it)",
       "route": {
-        "kind": "unknown",
-        "status": "open",
-        "note": "Header resample if the file is on the asymmetric template, the computed registration if symmetric. Open until the publisher's label table and volume header are read (spike a)."
+        "kind": "header_resample",
+        "status": "settled",
+        "note": "The publisher's own T1 correlates 0.931 with the declared asymmetric template and 0.857 with the symmetric one, 0.754 when mirrored, and zero shift scores highest (shift scan K5, recorded in the pipeline's evidence file). Shapes are meshed on the source's 0.5 mm grid and placed through its affine. How the publisher moved the atlas from its own 990-subject template to this grid is not stated."
       },
       "delineation": {
-        "basis": null,
-        "subjects": null
+        "basis": "manual_mri",
+        "subjects": 990
       },
       "required_text": [
         "Data were provided [in part] by the Human Connectome Project, WU-Minn Consortium (Principal Investigators: David Van Essen and Kamil Ugurbil; 1U54MH091657) funded by the 16 NIH Institutes and Centers that support the NIH Blueprint for Neuroscience Research; and by the McDonnell Center for Systems Neuroscience at Washington University."
@@ -226,16 +267,23 @@
         {
           "name": "MNI152b_atlas_labels_0.5mm.nii.gz",
           "url": "https://zenodo.org/api/records/3942115/files/MNI152b_atlas_labels_0.5mm.nii.gz/content",
-          "sha256": null,
-          "bytes": null,
-          "digest_origin": null
+          "sha256": "128ff46e2a996345c249456de7536eab03171a147c0a97d0bfe74f3d1953e5df",
+          "bytes": 563185,
+          "digest_origin": "first_download"
         },
         {
           "name": "Volumes_names-labels.csv",
           "url": "https://zenodo.org/api/records/3942115/files/Volumes_names-labels.csv/content",
-          "sha256": null,
-          "bytes": null,
-          "digest_origin": null
+          "sha256": "31ce37c47edb7aafc0c69661289f2b6e7c12a7c3b6c36c063432333b9ac8a201",
+          "bytes": 2068,
+          "digest_origin": "first_download"
+        },
+        {
+          "name": "MDA_990HCP_t1_MNI152b_0.5.nii.gz",
+          "url": "https://zenodo.org/api/records/3942115/files/MDA_990HCP_t1_MNI152b_0.5.nii.gz/content",
+          "sha256": "20e35d3dcb39f798afc3c2340adfcb6b1a571e29f1892942585ef95f07125c14",
+          "bytes": 58882009,
+          "digest_origin": "first_download"
         }
       ]
     },
@@ -257,7 +305,7 @@
       "route": {
         "kind": "unknown",
         "status": "open",
-        "note": "As for the hypothalamus atlas. The archive has not been opened. Open until the publisher's label table and volume header are read (spike a)."
+        "note": "Builds nothing: it adds no region that CIT168 and the hypothalamus atlas do not already give. A one-off measurement found its files on the asymmetric 2009b grid with the y axis stored reversed, but that is not reproduced by the pipeline, so the route stays open."
       },
       "delineation": {
         "basis": null,

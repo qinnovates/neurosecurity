@@ -21,7 +21,8 @@ export type NameMatch = typeof NAME_MATCHES[number];
 export const EXTENT_MATCHES = ['same', 'atlas_covers_part', 'contained', 'approximate', 'none'] as const;
 export type ExtentMatch = typeof EXTENT_MATCHES[number];
 
-export const DELINEATION_BASES = ['histology', 'manual_mri', 'fmri_gradient', 'tractography', 'expert_drawing_on_template'] as const;
+/** `template_average` is a template's own average image or mask (the brain outline): nobody delineated a structure. */
+export const DELINEATION_BASES = ['histology', 'manual_mri', 'fmri_gradient', 'tractography', 'expert_drawing_on_template', 'template_average'] as const;
 export type DelineationBasis = typeof DELINEATION_BASES[number];
 
 /** A shape an expert drew onto a template is never the structure itself, so no row on it may be graded `same`. */
