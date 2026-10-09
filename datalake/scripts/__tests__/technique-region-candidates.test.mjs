@@ -3,7 +3,7 @@ import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { DATALAKE_DIR } from '../datalake-cli.mjs';
 import {
-  TEMPLATED_PATHWAY_CLAUSES, buildMentionPattern, buildRegionLexicon, findCandidates, findStrongMentions,
+  TEMPLATED_PATHWAY_CLAUSES, buildMentionPattern, buildRegionLexicon, findCandidates,
   hasNeuralBand, isTemplatedField, isTemplatedPathway, listTextFields,
 } from '../technique-region-candidates.mjs';
 import { FIXTURE_ATLAS } from './atlas-fixture.mjs';
@@ -81,13 +81,8 @@ describe('findCandidates', () => {
 
   it('finds nothing in text that names no structure, apart from the generated band summary', () => {
     expect(findCandidates(EAVESDROPPING, lexicon).filter((candidate) => !candidate.templated)).toEqual([]);
-    expect(findStrongMentions(EAVESDROPPING, lexicon)).toEqual([]);
   });
 
-  it('reports a region name in a technique that claims none, wherever it is written', () => {
-    const hidden = { ...EAVESDROPPING, tara: { ...EAVESDROPPING.tara, mechanism: 'Capture of emissions near the Hippocampus' } };
-    expect(findStrongMentions(hidden, lexicon).map((candidate) => candidate.matched)).toEqual(['Hippocampus', 'Hippocampus']);
-  });
 });
 
 describe('the real registrar (guards)', () => {

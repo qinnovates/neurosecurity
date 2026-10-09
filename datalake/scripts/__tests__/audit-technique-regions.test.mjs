@@ -44,6 +44,15 @@ describe('auditMentions', () => {
     expect(audit(FIXTURE_CURATION, naming).map((mention) => mention.matched)).toEqual(['Hippocampus', 'Hippocampus']);
   });
 
+  it('does not let a link to a region excuse a bare word for the whole that region belongs to', () => {
+    const [stimulation] = FIXTURE_REGISTRAR.techniques;
+    const naming = withTechnique({ ...stimulation, tara: { ...stimulation.tara, mechanism: 'Stimulation of the basolateral amygdala and the amygdala' } });
+    const curation = withStimulation({ links: [{ term: 'basolateral amygdala', field: '/tara/mechanism', quote: 'the basolateral amygdala', rationale: 'Target.' }] });
+    expect(audit(curation, naming).map((mention) => `${mention.field}:${mention.matched}:${mention.kind}`)).toEqual([
+      '/notes:prefrontal cortex:name', '/notes:prefrontal cortex:synonym', '/tara/mechanism:amygdala:whole_to_part',
+    ]);
+  });
+
   it('refuses a skip that names an unknown category or words the field no longer holds', () => {
     const skip = FIXTURE_CURATION.techniques[STIMULATION_ID].skipped[0];
     expect(() => audit(withStimulation({ skipped: [{ ...skip, category: 'unimportant' }] }))).toThrow(/skip category "unimportant" is not one of/);

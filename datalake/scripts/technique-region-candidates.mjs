@@ -38,22 +38,16 @@ export const TEMPLATED_PATHWAY_CLAUSES = Object.freeze([
   'I0 (electrode-tissue boundary) → measurement',
 ]);
 
-/** How a lexicon entry relates to its region. `STRONG_KINDS` are the ones a no-structure claim is tested against. */
+/** How a lexicon entry relates to its region. An alias takes its stated kind from region_alias_relations instead. */
 export const TERM_KIND = Object.freeze({
   ID: 'id',
   NAME: 'name',
   NAME_HEAD: 'name_head',
-  SYNONYM: 'synonym',
-  WHOLE_TO_PART: 'whole_to_part',
-  PART_TO_WHOLE: 'part_to_whole',
-  UNCLASSIFIED_ALIAS: 'unclassified',
   PARENT_STRUCTURE: 'parent_structure',
   SUB_STRUCTURE: 'sub_structure',
   ABBREVIATION: 'abbreviation',
 });
 
-/** A region's own id or name, or a word the atlas states is a synonym for it. */
-export const STRONG_KINDS = Object.freeze([TERM_KIND.ID, TERM_KIND.NAME, TERM_KIND.NAME_HEAD, TERM_KIND.SYNONYM]);
 /** Short forms are matched in their written case only: "RF" is not "rf", and "AM" is not "am". */
 const CASE_SENSITIVE_KINDS = Object.freeze([TERM_KIND.ABBREVIATION]);
 
@@ -174,9 +168,4 @@ export function findCandidates(technique, lexicon) {
   return listTextFields(technique).flatMap((field) => lexicon
     .flatMap((term) => findTermInField(term, field))
     .sort((left, right) => left.start - right.start || right.end - left.end));
-}
-
-/** The occurrences that would contradict a claim that the text names no structure. */
-export function findStrongMentions(technique, lexicon) {
-  return findCandidates(technique, lexicon).filter((candidate) => STRONG_KINDS.includes(candidate.kind) && !candidate.templated);
 }

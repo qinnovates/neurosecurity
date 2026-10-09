@@ -25,7 +25,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { DATALAKE_DIR, runAsCli } from './datalake-cli.mjs';
 import { CURATION_PATH, CurationError, REGISTRAR_PATH, TECHNIQUE_REGIONS_PATH, readTechniqueField } from './draft-technique-regions.mjs';
-import { LIGHTING_MATCHES } from './region-resolver.mjs';
+import { LIGHTING_MATCHES, REGION_MATCH, SCOPE_CHANGING_MATCHES } from './region-resolver.mjs';
 import { createCatalogTermResolver } from './region-term.mjs';
 import {
   NEURAL_BAND_PREFIX, TEMPLATED_POINTER_SUFFIX, TERM_KIND,
@@ -45,10 +45,11 @@ export const SKIP_CATEGORIES = Object.freeze([
   'same_structure_other_wording', 'functional_system', 'cell_class', 'organ_or_site', 'explanatory_context',
 ]);
 
-/** A word the resolver would resolve: a region's id or name, or an alias of any stated kind. */
-export const ACCOUNTED_KINDS = Object.freeze([
-  TERM_KIND.ID, TERM_KIND.NAME, TERM_KIND.NAME_HEAD, TERM_KIND.SYNONYM, TERM_KIND.WHOLE_TO_PART, TERM_KIND.PART_TO_WHOLE,
-]);
+/** A word for exactly one region: its id, its name, or an alias the atlas states is a synonym. */
+export const SAME_REGION_KINDS = Object.freeze([TERM_KIND.ID, TERM_KIND.NAME, TERM_KIND.NAME_HEAD, REGION_MATCH.SYNONYM]);
+
+/** Every word that must be linked or skipped: the above, and an alias for a whole or a part. */
+export const ACCOUNTED_KINDS = Object.freeze([...SAME_REGION_KINDS, ...SCOPE_CHANGING_MATCHES]);
 
 export const TECHNIQUE_OUTCOME = Object.freeze({
   LIT: 'at_least_one_lighting_link',
@@ -139,8 +140,10 @@ function rejectStaleSkips(technique, skips) {
 /**
  * The mentions of an atlas word in a technique's text that are neither linked
  * nor recorded as skipped. A mention is accounted for when it lies inside an
- * occurrence of a linked term, when it is another word for a region that an
- * id or synonym link already resolves to, or when a skip covers it.
+ * occurrence of a linked term, when it is another word for exactly the region
+ * an id or synonym link already resolves to, or when a skip covers it. A word
+ * for a whole or a part ("cortex", "amygdala") is never excused by a link to
+ * the one region its alias points at.
  */
 export function findUnaccountedMentions(technique, entry, skips, context) {
   rejectStaleSkips(technique, skips);
@@ -155,7 +158,8 @@ export function findUnaccountedMentions(technique, entry, skips, context) {
       const { text } = readTechniqueField(technique, field);
       const linkSpans = entry.links.flatMap((link) => listSpans(text, link.term));
       const skipSpans = skips.filter((skip) => skip.field === field).flatMap((skip) => listSpans(text, skip.text));
-      return !isInsideAny(candidate, linkSpans) && !isInsideAny(candidate, skipSpans) && !linkedRegionIds.has(candidate.region_id);
+      const isOtherWordForLinkedRegion = SAME_REGION_KINDS.includes(candidate.kind) && linkedRegionIds.has(candidate.region_id);
+      return !isInsideAny(candidate, linkSpans) && !isInsideAny(candidate, skipSpans) && !isOtherWordForLinkedRegion;
     });
 }
 
