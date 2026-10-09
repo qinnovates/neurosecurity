@@ -125,8 +125,25 @@ describe('parseCrosswalk: atlas labels', () => {
       .toThrow(/delineation_basis: "histology" is not the basis "manual_mri" the registry records for "fixture_atlas"/);
   });
 
-  it('rejects a drawing row whose extent is "none"', () => {
-    expect(() => parseParts({ rows: [buildRow({ extent_match: 'none' })] })).toThrow(/draws: a row whose extent_match is "none" has nothing to draw/);
+  it('rejects a row graded "none" that still names labels: the shape is not the structure, so the row owns nothing', () => {
+    expect(() => parseParts({ rows: [buildRow({ extent_match: 'none', draws: false })] }))
+      .toThrow(/atlas_ids: a row graded "none" says no shape stands for the subject, so it must list no label/);
+  });
+
+  it('accepts a "none" row with no labels, even before the atlas has a label table, and never lets it draw', () => {
+    const context = buildCrosswalkContext({ labelTables: new Map() });
+    const noneRow = buildRow({ extent_match: 'none', atlas_ids: [], draws: false, name_match: 'none' });
+    expect(parseCrosswalk(buildCrosswalkFile({ rows: [noneRow] }), context).rows[0].atlas_ids).toEqual([]);
+    expect(() => parseParts({ rows: [{ ...noneRow, draws: true }] })).toThrow(/draws: a row whose extent_match is "none" has nothing to draw/);
+  });
+
+  it('rejects one subject naming the same label in two rows, in either order', () => {
+    const cingulate = { subject_id: 'cingulate', subject_name_at_draft: 'Cingulate Gyrus (Posterior)' } as const;
+    const whole = buildRow({ ...cingulate, extent_match: 'approximate' });
+    const part = buildRow({ ...cingulate, part: 'posterior_cingulate', extent_match: 'contained' });
+    for (const rows of [[whole, part], [part, whole]]) {
+      expect(() => parseParts({ rows })).toThrow(/region "cingulate" names label "fixture_atlas:7" in two rows/);
+    }
   });
 
   it('rejects a drawing row on an atlas that is not buildable', () => {

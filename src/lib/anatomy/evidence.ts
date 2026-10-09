@@ -53,9 +53,10 @@ function rejectMisplacedMethod(value: unknown, location: FieldLocation): void {
 
 /** One line of at most MAX_RATIONALE_LENGTH characters saying why the drafter made the claim. */
 export function readRationale(record: Record<string, unknown>, location: FieldLocation): string {
-  const rationale = readString(record, 'rationale', location, MAX_RATIONALE_LENGTH);
-  if (/[\r\n]/.test(rationale)) failAt(childOf(location, 'rationale'), 'must be one line', 'Remove the line break.');
-  return rationale;
+  if (typeof record.rationale === 'string' && /[\r\n]/.test(record.rationale)) {
+    failAt(childOf(location, 'rationale'), 'must be one line', 'Remove the line break.');
+  }
+  return readString(record, 'rationale', location, MAX_RATIONALE_LENGTH);
 }
 
 export function parseEvidence(value: unknown, location: FieldLocation): EvidenceBlock {

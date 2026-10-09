@@ -5,7 +5,7 @@
  */
 
 import { HEMISPHERES, type AtlasLabel, type LabelTable } from './anatomy-types';
-import { childOf, failAt, itemOf, readEnum, readList, readRecord, readString, rejectDuplicates, rootOf, type FieldLocation } from './field-readers';
+import { childOf, failAt, itemOf, readEnum, readList, readRecord, readString, rejectDuplicates, rootOf, show, type FieldLocation } from './field-readers';
 import { readId, readSchemaVersion } from './format-readers';
 
 const LABEL_TABLE_SCHEMA_VERSION = 1;
@@ -33,7 +33,7 @@ export function parseLabelTable(raw: unknown, filePath: string, sourceIds: Reado
   if (!sourceIds.has(atlas)) failAt(childOf(root, 'atlas'), `"${atlas}" is not a source in the registry`, 'Add the source to qif-anatomy-sources.json first.');
   const atlasInFileName = LABEL_FILE_PATTERN.exec(filePath)?.[1];
   if (atlasInFileName !== atlas) {
-    failAt(childOf(root, 'atlas'), `the file name says "${String(atlasInFileName)}" but the table says "${atlas}"`, 'Name the file labels-<atlas>.json for the atlas it holds.');
+    failAt(childOf(root, 'atlas'), `the file name says "${show(atlasInFileName)}" but the table says "${atlas}"`, 'Name the file labels-<atlas>.json for the atlas it holds.');
   }
   const labels = readList(record, 'labels', root).map((label, index) => parseLabel(label, itemOf(root, 'labels', index)));
   if (labels.length === 0) failAt(childOf(root, 'labels'), 'a label table must list at least one label', 'Regenerate the table with the pipeline.');

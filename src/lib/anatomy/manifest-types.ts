@@ -36,6 +36,32 @@ export type PipelineStage = typeof PIPELINE_STAGES[number];
 
 export type Point3 = [number, number, number];
 
+/** The archived registration an asset went through. It is reused, not recomputed, while its hashes match. */
+export interface RegisterFingerprint {
+  /** Archive file name -> sha256 of the archived transform files. */
+  archive_sha256: Record<string, string>;
+  /** The parameter setting's name, as the registration record calls it. */
+  setting: string;
+  tool: string;
+  tool_version: string;
+  seed: number;
+  parameters: Record<string, string | number | boolean>;
+}
+
+/**
+ * What each pipeline stage consumed or produced, so an unchanged stage is
+ * skipped. `fetch` lists every source file by name with its sha256, which must
+ * equal the registry's pin for that file. `register` is null for an asset that
+ * went through no registration. The other stages are digests.
+ */
+export interface StageFingerprints {
+  fetch: Record<string, string>;
+  register: RegisterFingerprint | null;
+  resample: string | null;
+  mesh: string | null;
+  write: string | null;
+}
+
 export interface ManifestNode {
   /** The ids a mesh node carries. Node names are cosmetic; these are what the page reads. */
   extras: { atlas: string; label_id: string; hemisphere: Hemisphere };
@@ -86,15 +112,17 @@ export interface ManifestAsset {
   source_ids: string[];
   /** Pipeline-only inputs: used to compute the file, never copied into it. */
   computed_with_source_ids: string[];
-  licence_id: LicenceId;
-  stated_licence_id: LicenceId;
+  license_id: LicenceId;
+  stated_license_id: LicenceId;
   route: ManifestRouteStep[];
   delineation: ManifestDelineation;
   libraries: Record<string, string>;
   nodes: ManifestNode[];
   checks: ManifestCheck[];
-  stage_fingerprints: Record<PipelineStage, unknown>;
+  stage_fingerprints: StageFingerprints;
   position_check: PositionCheck;
+  /** One or two plain sentences saying what was done to the source to make this asset. Required by the sources' licences. */
+  modification_note: string;
 }
 
 export interface AssetManifest {
@@ -115,4 +143,6 @@ export interface ManifestContext {
   /** Source id -> the licence it is handled under. */
   effectiveLicenceBySource: ReadonlyMap<string, LicenceId>;
   buildableSourceIds: ReadonlySet<string>;
+  /** Source id -> file name -> the registry's sha256 pin, or null while the file is unpinned. */
+  filePinsBySource: ReadonlyMap<string, ReadonlyMap<string, string | null>>;
 }

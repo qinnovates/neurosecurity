@@ -13,7 +13,7 @@ export const LICENCE_IDS = [
 ] as const;
 export type LicenceId = typeof LICENCE_IDS[number];
 
-export const VERDICTS = ['SHIP', 'SHIP-SEPARATE-FILE', 'NEEDS-KEVIN', 'DO-NOT-SHIP'] as const;
+export const VERDICTS = ['ship', 'ship_separate_file', 'needs_owner', 'do_not_ship'] as const;
 export type Verdict = typeof VERDICTS[number];
 
 /** `explicit`: the grant is in the publisher's words. `interpretation`: it rests on a reading. `none`: no grant was found. */
@@ -42,7 +42,12 @@ export type LayerId = typeof LAYER_IDS[number];
 export const DIGEST_ORIGINS = ['publisher', 'first_download'] as const;
 export type DigestOrigin = typeof DIGEST_ORIGINS[number];
 
-export const VERIFIER_KINDS = ['ai', 'human'] as const;
+/**
+ * Who read a licence. Only `ai` today: no person has read any, and a file edit
+ * alone must not be able to claim otherwise. Recording a person's reading needs
+ * a review-ledger entry kind first, added with this value in one reviewed change.
+ */
+export const VERIFIER_KINDS = ['ai'] as const;
 export type VerifierKind = typeof VERIFIER_KINDS[number];
 
 export interface SourceFile {
@@ -78,7 +83,13 @@ export interface AnatomySource {
   attribution_text: string | null;
   urls: string[];
   /** The licence the publisher states. A verdict may treat the source as something stricter. */
-  licence_id: LicenceId;
+  license_id: LicenceId;
+  /**
+   * False for a pipeline-only source: the offline pipeline may use it to compute
+   * (a registration template, a transform), and nothing made of its own material
+   * is ever written into the served assets. Such a source is never buildable and
+   * may appear in a manifest only under `computed_with_source_ids`.
+   */
   redistribute: boolean;
   layers: LayerId[];
   delineated_in: string;

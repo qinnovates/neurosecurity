@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { OwnerVia } from '../anatomy-index-types';
 import type { ExtentMatch } from '../anatomy-types';
-import { createStructureStyler, decideOwnershipMark, type OwnerInMode } from '../colour-modes';
+import { UnknownStructureError, createStructureStyler, decideOwnershipMark, type OwnerInMode } from '../colour-modes';
 import { buildIndex, buildIndexLink, buildOwner, buildStructure, buildSubject, buildTechnique } from './index-fixtures';
 
 function inMode(lit: boolean, values: string[], via: OwnerVia = 'row', extentMatch: ExtentMatch | null = 'approximate'): OwnerInMode {
@@ -28,7 +28,17 @@ describe('decideOwnershipMark: the ownership table', () => {
 
   it('marks "somewhere inside this shape" when lit only through a contained owner or a declared child', () => {
     expect(decideOwnershipMark([inMode(true, ['N7'], 'row', 'contained')])).toEqual({ mark: 'inside_or_mixed', step: null, reason: 'inside_only' });
-    expect(decideOwnershipMark([inMode(true, ['N4'], 'declared_child')])).toEqual({ mark: 'inside_or_mixed', step: null, reason: 'inside_only' });
+    expect(decideOwnershipMark([inMode(true, ['N4'], 'row_subject_contains_owner')])).toEqual({ mark: 'inside_or_mixed', step: null, reason: 'inside_only' });
+  });
+
+  it('marks "somewhere inside this shape", not "one of the records here", when the only lit owner is inside the shape', () => {
+    expect(decideOwnershipMark([inMode(false, []), inMode(true, ['N4'], 'row_subject_contains_owner')])).toEqual({ mark: 'inside_or_mixed', step: null, reason: 'inside_only' });
+    expect(decideOwnershipMark([inMode(true, ['N7'], 'row', 'contained'), inMode(false, [], 'row', 'contained')])).toEqual({ mark: 'inside_or_mixed', step: null, reason: 'inside_only' });
+  });
+
+  it('never fills from an owner graded "none", which says the shape is not the structure', () => {
+    expect(decideOwnershipMark([inMode(true, ['N5'], 'row', 'none')]).mark).not.toBe('solid');
+    expect(decideOwnershipMark([inMode(true, ['N5']), inMode(true, ['N5'], 'row', 'none')]).mark).not.toBe('solid');
   });
 
   it('never fills a structure that holds a contained owner, even when every owner is lit and agrees', () => {
@@ -46,8 +56,8 @@ describe('decideOwnershipMark: the ownership table', () => {
 });
 
 describe('decideOwnershipMark: property over every small owner set', () => {
-  const VIAS: OwnerVia[] = ['row', 'declared_parent', 'declared_child'];
-  const EXTENTS: ExtentMatch[] = ['same', 'atlas_covers_part', 'approximate', 'contained'];
+  const VIAS: OwnerVia[] = ['row', 'owner_contains_row_subject', 'row_subject_contains_owner'];
+  const EXTENTS: ExtentMatch[] = ['same', 'atlas_covers_part', 'approximate', 'contained', 'none'];
   const LIGHTINGS: Array<[boolean, string[]]> = [[false, []], [true, ['A']], [true, ['B']], [true, ['A', 'B']]];
   const MAX_OWNERS = 3;
 
@@ -63,14 +73,14 @@ describe('decideOwnershipMark: property over every small owner set', () => {
   const ownerSets = Array.from({ length: MAX_OWNERS }, (_unused, index) => listOwnerSets(index + 1)).flat();
 
   it('enumerates a non-trivial number of owner sets', () => {
-    expect(ownerSets.length).toBeGreaterThan(10000);
+    expect(ownerSets.length).toBeGreaterThan(20000);
   });
 
   it('never gives one owner\'s solid colour to a structure whose owners disagree, are contained or are only partly lit', () => {
     const wronglyFilled = ownerSets.filter((owners) => {
       const litValues = new Set(owners.filter((owner) => owner.lit).flatMap((owner) => owner.values));
       const isPartlyLit = owners.some((owner) => owner.lit) && owners.some((owner) => !owner.lit);
-      const holdsContained = owners.some((owner) => owner.extent_match === 'contained');
+      const holdsContained = owners.some((owner) => owner.extent_match === 'contained' || owner.extent_match === 'none');
       return (litValues.size > 1 || isPartlyLit || holdsContained) && decideOwnershipMark(owners).mark === 'solid';
     });
     expect(wronglyFilled).toEqual([]);
@@ -80,7 +90,8 @@ describe('decideOwnershipMark: property over every small owner set', () => {
     const filled = ownerSets.map((owners) => ({ owners, style: decideOwnershipMark(owners) })).filter(({ style }) => style.mark === 'solid');
     expect(filled.length).toBeGreaterThan(0);
     expect(filled.filter(({ owners, style }) => !owners.every((owner) => owner.lit && owner.values.length === 1 && owner.values[0] === style.step))).toEqual([]);
-    expect(filled.filter(({ owners }) => !owners.some((owner) => owner.via !== 'declared_child'))).toEqual([]);
+    expect(filled.filter(({ owners }) => !owners.some((owner) => owner.via !== 'row_subject_contains_owner'))).toEqual([]);
+    expect(filled.filter(({ owners }) => owners.some((owner) => owner.extent_match === 'none'))).toEqual([]);
   });
 
   it('never fills from multi-owner sets with a mark other than the three allowed ones', () => {
@@ -90,14 +101,15 @@ describe('decideOwnershipMark: property over every small owner set', () => {
 });
 
 describe('createStructureStyler', () => {
-  const thalamus = buildStructure('1', [buildOwner('thalamus'), buildOwner('vim', 'declared_child')]);
+  const thalamus = buildStructure('1', [buildOwner('thalamus'), buildOwner('vim', 'row_subject_contains_owner')]);
   const sharedFold = buildStructure('2', [buildOwner('m1', 'row', 'contained'), buildOwner('pmc', 'row', 'contained')]);
   const mixedBands = buildStructure('3', [buildOwner('wernicke'), buildOwner('insula')]);
   const nucleus = buildStructure('4', [buildOwner('stn', 'row', 'same')]);
   const unknownBand = buildStructure('5', [buildOwner('periphery')]);
   const contextShape = buildStructure('6', []);
+  const namesake = buildStructure('8', [{ ...buildOwner('stn'), subject_kind: 'pathway' }]);
   const index = buildIndex({
-    structures: [thalamus, sharedFold, mixedBands, nucleus, unknownBand, contextShape],
+    structures: [thalamus, sharedFold, mixedBands, nucleus, unknownBand, contextShape, namesake],
     subjects: [
       buildSubject('thalamus', ['N4']), buildSubject('vim', ['N4']), buildSubject('m1', ['N7']), buildSubject('pmc', ['N7']),
       buildSubject('wernicke', ['N7']), buildSubject('insula', ['N6']), buildSubject('stn', ['N5']), buildSubject('periphery', ['PER']),
@@ -113,63 +125,75 @@ describe('createStructureStyler', () => {
   const style = createStructureStyler(index);
 
   it('fills by band when every owner shares one band, and marks mixed when bands differ', () => {
-    expect(style(thalamus, thalamus.owners, { kind: 'band' })).toMatchObject({ mark: 'solid', step: 'N4', step_known: true });
-    expect(style(mixedBands, mixedBands.owners, { kind: 'band' })).toMatchObject({ mark: 'inside_or_mixed', words: 'holds records that differ' });
-    expect(style(sharedFold, sharedFold.owners, { kind: 'band' })).toMatchObject({ mark: 'inside_or_mixed', words: 'somewhere inside this shape' });
+    expect(style(thalamus.key, { kind: 'band' })).toMatchObject({ mark: 'solid', step: 'N4', step_known: true });
+    expect(style(mixedBands.key, { kind: 'band' })).toMatchObject({ mark: 'inside_or_mixed', words: 'holds records that differ' });
+    expect(style(sharedFold.key, { kind: 'band' })).toMatchObject({ mark: 'inside_or_mixed', words: 'somewhere inside this shape' });
   });
 
   it('accepts a band code it does not know and says so', () => {
-    expect(style(unknownBand, unknownBand.owners, { kind: 'band' })).toMatchObject({ mark: 'solid', step: 'PER', step_known: false });
+    expect(style(unknownBand.key, { kind: 'band' })).toMatchObject({ mark: 'solid', step: 'PER', step_known: false });
   });
 
   it('lights only regions a technique reaches through a lit link', () => {
     const mode = { kind: 'technique', techniqueId: 'QIF-T9001' } as const;
-    expect(style(nucleus, nucleus.owners, mode)).toMatchObject({ mark: 'solid', step: 'QIF-T9001' });
-    expect(style(thalamus, thalamus.owners, mode)).toMatchObject({ mark: 'no_data', words: 'no data' });
+    expect(style(nucleus.key, mode)).toMatchObject({ mark: 'solid', step: 'QIF-T9001' });
+    expect(style(thalamus.key, mode)).toMatchObject({ mark: 'no_data', words: 'no data' });
   });
 
-  it('marks a fold "somewhere inside" when a technique lights a region contained in it, and "one of the records here" beside an unlit one', () => {
+  it('marks a fold "somewhere inside this shape" when a technique lights a region contained in it', () => {
     const mode = { kind: 'technique', techniqueId: 'QIF-T9002' } as const;
-    expect(style(sharedFold, sharedFold.owners, mode)).toMatchObject({ mark: 'inside_or_mixed', reason: 'partly_lit', words: 'one of the records here' });
+    expect(style(sharedFold.key, mode)).toMatchObject({ mark: 'inside_or_mixed', reason: 'inside_only', words: 'somewhere inside this shape' });
+  });
+
+  it('looks the owners up itself, so a caller cannot style a structure from a subset of its owners', () => {
+    expect(style.length).toBe(2);
+    expect(style(mixedBands.key, { kind: 'band' }).mark).toBe('inside_or_mixed');
+    expect(() => style('fixture_atlas:999', { kind: 'band' })).toThrow(UnknownStructureError);
+  });
+
+  it('lights only region owners in technique, NISS, DSM and stated-target modes, even when another kind of subject shares the id', () => {
+    const modes = [{ kind: 'technique', techniqueId: 'QIF-T9001' }, { kind: 'niss' }, { kind: 'dsm', cluster: 'mood_trauma' }, { kind: 'stated_targets', deviceId: 'fixture-device' }] as const;
+    expect(modes.map((mode) => style(namesake.key, mode).mark)).toEqual(['no_data', 'no_data', 'no_data', 'no_data']);
+    expect(modes.map((mode) => style(nucleus.key, mode).mark)).toEqual(['solid', 'solid', 'solid', 'solid']);
   });
 
   it('lights nothing for a band-level technique and says which band it is tagged to', () => {
-    const result = style(nucleus, nucleus.owners, { kind: 'technique', techniqueId: 'QIF-T9003' });
+    const result = style(nucleus.key, { kind: 'technique', techniqueId: 'QIF-T9003' });
     expect(result).toEqual({ mark: 'no_data', step: null, step_known: true, reason: 'band_level_only', words: 'tagged to band N6 only; no region assessed' });
   });
 
   it('lights nothing for a technique with no drafted entry, or one the index does not hold', () => {
-    expect(style(nucleus, nucleus.owners, { kind: 'technique', techniqueId: 'QIF-T9004' })).toMatchObject({ mark: 'no_data', reason: 'technique_not_drafted' });
-    expect(style(nucleus, nucleus.owners, { kind: 'technique', techniqueId: 'QIF-T0000' })).toMatchObject({ mark: 'no_data', reason: 'technique_not_drafted' });
+    expect(style(nucleus.key, { kind: 'technique', techniqueId: 'QIF-T9004' })).toMatchObject({ mark: 'no_data', reason: 'technique_not_drafted' });
+    expect(style(nucleus.key, { kind: 'technique', techniqueId: 'QIF-T0000' })).toMatchObject({ mark: 'no_data', reason: 'technique_not_drafted' });
   });
 
   it('steps NISS severity by the highest linked technique and never reads no link as low', () => {
-    expect(style(nucleus, nucleus.owners, { kind: 'niss' })).toMatchObject({ mark: 'solid', step: 'high', step_known: true });
-    expect(style(mixedBands, mixedBands.owners, { kind: 'niss' })).toMatchObject({ mark: 'no_data', step: null });
+    expect(style(nucleus.key, { kind: 'niss' })).toMatchObject({ mark: 'solid', step: 'high', step_known: true });
+    expect(style(mixedBands.key, { kind: 'niss' })).toMatchObject({ mark: 'no_data', step: null });
   });
 
   it('lights a DSM cluster only through a lit link from a technique that carries it', () => {
-    expect(style(nucleus, nucleus.owners, { kind: 'dsm', cluster: 'mood_trauma' })).toMatchObject({ mark: 'solid', step: 'mood_trauma' });
-    expect(style(nucleus, nucleus.owners, { kind: 'dsm', cluster: 'persistent_personality' })).toMatchObject({ mark: 'no_data' });
+    expect(style(nucleus.key, { kind: 'dsm', cluster: 'mood_trauma' })).toMatchObject({ mark: 'solid', step: 'mood_trauma' });
+    expect(style(nucleus.key, { kind: 'dsm', cluster: 'persistent_personality' })).toMatchObject({ mark: 'no_data' });
   });
 
   it('shows a device\'s stated target regions under the owner rules like any other mode', () => {
     const mode = { kind: 'stated_targets', deviceId: 'fixture-device' } as const;
-    expect(style(nucleus, nucleus.owners, mode)).toMatchObject({ mark: 'solid', step: 'stated_target' });
-    expect(style(sharedFold, sharedFold.owners, mode)).toMatchObject({ mark: 'inside_or_mixed', reason: 'partly_lit' });
-    expect(style(nucleus, nucleus.owners, { kind: 'stated_targets', deviceId: 'unknown-device' })).toMatchObject({ mark: 'no_data' });
+    expect(style(nucleus.key, mode)).toMatchObject({ mark: 'solid', step: 'stated_target' });
+    expect(style(sharedFold.key, mode)).toMatchObject({ mark: 'inside_or_mixed', reason: 'inside_only' });
+    expect(style(nucleus.key, { kind: 'stated_targets', deviceId: 'unknown-device' })).toMatchObject({ mark: 'no_data' });
   });
 
   it('never colours a context shape in any mode', () => {
     const modes = [{ kind: 'band' }, { kind: 'niss' }, { kind: 'technique', techniqueId: 'QIF-T9001' }, { kind: 'dsm', cluster: 'mood_trauma' }, { kind: 'stated_targets', deviceId: 'fixture-device' }] as const;
-    expect(modes.map((mode) => style(contextShape, contextShape.owners, mode))).toEqual(
+    expect(modes.map((mode) => style(contextShape.key, mode))).toEqual(
       modes.map(() => ({ mark: 'context', step: null, step_known: true, reason: 'no_owner', words: 'No QIF record maps here' })),
     );
   });
 
   it('gives every style its reason in words', () => {
     const structures = [thalamus, sharedFold, mixedBands, nucleus, unknownBand, contextShape];
-    const allWords = structures.map((structure) => style(structure, structure.owners, { kind: 'band' }).words);
+    const allWords = structures.map((structure) => style(structure.key, { kind: 'band' }).words);
     expect(allWords.length).toBeGreaterThan(0);
     expect(allWords.filter((words) => words.trim() === '')).toEqual([]);
   });

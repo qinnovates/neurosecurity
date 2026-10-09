@@ -36,7 +36,8 @@ function reviewLink(technique: CatalogTechnique, link: TechniqueLink, context: L
   const resolution = context.resolveTerm(link.term);
   const key = techniqueLinkKey(technique.id, link.term);
   const digest = digestTechniqueLink(technique.id, link, resolution);
-  const checked = checkEvidence(link.evidence, context.data);
+  const reviewState = reviewOf(context.data, key, digest);
+  const checked = checkEvidence(link.evidence, reviewState, context.data);
   const regionBand = resolution.resolved_region_id === null ? undefined : context.bandsByRegion.get(resolution.resolved_region_id);
   const bandAgrees = regionBand !== undefined && technique.bandIds.includes(regionBand);
   const isCurrent = isValidForAddressing(link, context.data.addressingVersion);
@@ -48,7 +49,7 @@ function reviewLink(technique: CatalogTechnique, link: TechniqueLink, context: L
     quote_state: checked.quote_state,
     lit: lightsRegion(resolution.resolution) && bandAgrees && isCurrent && checked.quote_state === SOURCE_REF_STATES.QUOTE_FOUND,
     claim_basis: link.evidence.claim_basis,
-    review_state: reviewOf(context.data, key, digest),
+    review_state: reviewState,
     check_status: checked.check_status,
   };
   return { technique_id: technique.id, link, key, digest, resolution, entry, ...checked };

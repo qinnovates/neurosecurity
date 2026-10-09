@@ -1,14 +1,16 @@
 /**
  * Decides how an atlas structure may be styled. The drawable unit is the atlas
  * structure, and its mark is a function of its full owner set: no function here
- * takes a region and returns a fill. A structure whose owners disagree, are
- * only inside it, or are only partly lit is never filled with one owner's colour.
+ * takes a region and returns a fill, and the style function looks the owners up
+ * itself, so no caller can style a structure from a subset of them. A structure
+ * whose owners disagree, are only inside it, or are only partly lit is never
+ * filled with one owner's colour.
  *
  * Pure and safe to run in the browser: it reads the index and nothing else.
  */
 
 import { BAND_ORDER } from '@/lib/threat-model/catalog-types';
-import type { AnatomyIndex, IndexOwner, IndexStructure, IndexTechnique } from './anatomy-index-types';
+import type { AnatomyIndex, IndexOwner, IndexTechnique } from './anatomy-index-types';
 
 export const OWNERSHIP_MARKS = ['solid', 'inside_or_mixed', 'no_data', 'context'] as const;
 /**
@@ -69,13 +71,26 @@ const REASON_WORDS: Readonly<Record<MarkReason, string>> = {
   no_owner: 'No QIF record maps here',
 };
 
-function isContained(owner: OwnerInMode): boolean {
-  return owner.via === 'row' && owner.extent_match === 'contained';
+/** The style function was asked about a structure the index does not hold. */
+export class UnknownStructureError extends Error {
+  constructor(structureKey: string) {
+    super(`No structure "${structureKey}" is in the anatomy index. Pass a key from index.structures; do not build one by hand.`);
+    this.name = 'UnknownStructureError';
+  }
 }
 
-/** Lit from inside only: through a row graded `contained`, or through a declared child. */
+/**
+ * A row owner whose grade says the shape is not simply the subject:
+ * `contained` (the subject is somewhere inside) or `none` (the shape is not the
+ * structure; the parser lets no such row own a label, and this refuses it again).
+ */
+function blocksSolidFill(owner: OwnerInMode): boolean {
+  return owner.via === 'row' && (owner.extent_match === 'contained' || owner.extent_match === 'none');
+}
+
+/** Lit from inside only: through such a row, or through a subject that the row's subject contains. */
 function isInside(owner: OwnerInMode): boolean {
-  return isContained(owner) || owner.via === 'declared_child';
+  return blocksSolidFill(owner) || owner.via === 'row_subject_contains_owner';
 }
 
 /** The ownership table. Every branch but the last refuses a solid fill. */
@@ -86,9 +101,9 @@ export function decideOwnershipMark(owners: readonly OwnerInMode[]): OwnershipDe
   if (litOwners.length === 0) return unfilled('no_data', 'no_lit_link');
   const litValues = [...new Set(litOwners.flatMap((owner) => owner.values))];
   if (litValues.length > 1) return unfilled('inside_or_mixed', 'owners_differ');
-  if (litOwners.length < owners.length) return unfilled('inside_or_mixed', 'partly_lit');
   if (litOwners.every(isInside)) return unfilled('inside_or_mixed', 'inside_only');
-  if (owners.some(isContained)) return unfilled('inside_or_mixed', 'holds_contained_owner');
+  if (litOwners.length < owners.length) return unfilled('inside_or_mixed', 'partly_lit');
+  if (owners.some(blocksSolidFill)) return unfilled('inside_or_mixed', 'holds_contained_owner');
   return { mark: 'solid', step: litValues[0], reason: owners.length === 1 ? 'single_owner' : 'owners_agree' };
 }
 
@@ -154,10 +169,14 @@ function refineNoData(decision: OwnershipDecision, mode: ColourMode, index: Anat
 }
 
 /**
- * @returns the style function `(structure, owners, mode) => Style`. `owners` is the structure's full owner set.
+ * @returns the style function `(structureKey, mode) => Style`. It reads the structure's full owner set from the
+ *   index and throws UnknownStructureError for a key the index does not hold.
  */
-export function createStructureStyler(index: AnatomyIndex): (structure: IndexStructure, owners: readonly IndexOwner[], mode: ColourMode) => Style {
-  return function styleStructure(_structure, owners, mode) {
+export function createStructureStyler(index: AnatomyIndex): (structureKey: string, mode: ColourMode) => Style {
+  const ownersByStructure = new Map(index.structures.map((structure) => [structure.key, structure.owners]));
+  return function styleStructure(structureKey, mode) {
+    const owners = ownersByStructure.get(structureKey);
+    if (owners === undefined) throw new UnknownStructureError(structureKey);
     const lightOwner = createLighter(index, mode);
     const decision = decideOwnershipMark(owners.map((owner) => ({ via: owner.via, extent_match: owner.extent_match, ...lightOwner(owner) })));
     return { ...decision, ...refineNoData(decision, mode, index), step_known: isKnownStep(mode, decision.step) };

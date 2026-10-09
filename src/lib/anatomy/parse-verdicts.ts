@@ -7,10 +7,10 @@
 import { rejectBandKeys } from './band-key-scan';
 import {
   childOf, failAt, itemOf, readBoolean, readEnum, readList, readNullable, readRecord, readString, readStringList,
-  rejectDuplicates, rootOf, type FieldLocation,
+  rejectDuplicates, rootOf, show, type FieldLocation,
 } from './field-readers';
 import { readDate, readId, readSchemaVersion, readSha256, readWebUrl } from './format-readers';
-import { isAtLeastAsStrict } from './licence-rules';
+import { LICENCE_FACTS, isStricter } from './licence-rules';
 import {
   GRANTS, LICENCE_IDS, VERDICTS, VERIFIER_KINDS,
   type AccessAgreement, type AnatomySources, type Clearance, type LicenceVerdict, type LicenceVerdicts, type Verifier,
@@ -64,7 +64,7 @@ function parseVerdict(value: unknown, location: FieldLocation, verifierIds: Read
   const verifiedBy = readStringList(record, 'verified_by', location, MAX_NAME_LENGTH);
   const unlistedVerifier = verifiedBy.find((verifierId) => !verifierIds.has(verifierId));
   if (verifiedBy.length === 0 || unlistedVerifier !== undefined) {
-    failAt(childOf(location, 'verified_by'), `"${String(unlistedVerifier)}" is not in this file's verifiers list`,
+    failAt(childOf(location, 'verified_by'), `"${show(unlistedVerifier)}" is not in this file's verifiers list`,
       'Name at least one verifier, each by an id from the top-level verifiers list.');
   }
   return {
@@ -87,19 +87,24 @@ function parseVerifier(value: unknown, location: FieldLocation): Verifier {
   return { id: readString(record, 'id', location, MAX_NAME_LENGTH), kind: readEnum(record, 'kind', location, VERIFIER_KINDS) };
 }
 
-/** One verdict per registry source, no more and no fewer, and no treat_as looser than the stated licence. */
+/** One verdict per registry source, no treat_as that loosens the stated licence, and an agreement record wherever the licence binds by one. */
 function rejectRegistryMismatch(verdicts: readonly LicenceVerdict[], sources: AnatomySources, root: FieldLocation): void {
   const location = childOf(root, 'verdicts');
-  const licenceBySource = new Map(sources.sources.map((source) => [source.id, source.licence_id]));
+  const licenceBySource = new Map(sources.sources.map((source) => [source.id, source.license_id]));
   rejectDuplicates(verdicts.map((verdict) => verdict.source_id), location, 'verdict for source');
   for (const verdict of verdicts) {
     const statedLicence = licenceBySource.get(verdict.source_id);
     if (statedLicence === undefined) {
       return failAt(location, `"${verdict.source_id}" is not a source in the registry`, 'Add the source to qif-anatomy-sources.json or remove this verdict.');
     }
-    if (verdict.treat_as !== null && (verdict.treat_as === statedLicence || !isAtLeastAsStrict(verdict.treat_as, statedLicence))) {
+    if (verdict.treat_as !== null && !isStricter(verdict.treat_as, statedLicence)) {
       return failAt(childOf(location, `${verdict.source_id}.treat_as`), `"${verdict.treat_as}" is not stricter than the stated licence "${statedLicence}"`,
         'treat_as may only tighten a licence. Set it to null or to a stricter id.');
+    }
+    const handledUnder = verdict.treat_as ?? statedLicence;
+    if (LICENCE_FACTS[handledUnder].requires_agreement && verdict.access_agreement === null) {
+      return failAt(childOf(location, `${verdict.source_id}.access_agreement`), `the licence "${handledUnder}" binds by agreement, so the verdict must record the agreement`,
+        'Set access_agreement with the agreement\'s name and terms address; it cannot be accepted until its text is pinned.');
     }
   }
   const verdictIds = new Set(verdicts.map((verdict) => verdict.source_id));

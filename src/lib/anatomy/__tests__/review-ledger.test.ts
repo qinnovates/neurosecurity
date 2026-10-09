@@ -15,7 +15,8 @@ const ROW: CrosswalkRow = {
   delineation_basis: 'manual_mri', evidence: buildEvidence(), drafted_by: 'ai',
 };
 const LABELS = [{ id: '7', name: 'Fixture Nucleus', hemisphere: 'both' as const }];
-const ROW_DIGEST = digestCrosswalkRow(ROW, LABELS, [FIXTURE_SHA256]);
+const DEPENDENCIES = { labels: LABELS, meshSha256s: [FIXTURE_SHA256], containment: [] };
+const ROW_DIGEST = digestCrosswalkRow(ROW, DEPENDENCIES);
 
 function buildEntry(overrides: Partial<LedgerEntry> = {}): LedgerEntry {
   return { kind: 'row_review', key: crosswalkRowKey(ROW), digest: ROW_DIGEST, reviewer_id: 'owner-1', reviewed_on: '2026-10-09', ...overrides };
@@ -42,10 +43,11 @@ describe('canonicalJson and digests', () => {
   });
 
   it.each([
-    ['one field of the row', digestCrosswalkRow({ ...ROW, extent_match: 'approximate' }, LABELS, [FIXTURE_SHA256])],
-    ['the rationale', digestCrosswalkRow({ ...ROW, evidence: buildEvidence({ rationale: 'Changed.' }) }, LABELS, [FIXTURE_SHA256])],
-    ['the label it points at', digestCrosswalkRow(ROW, [{ ...LABELS[0], name: 'Another Nucleus' }], [FIXTURE_SHA256])],
-    ['the mesh that draws it', digestCrosswalkRow(ROW, LABELS, [OTHER_SHA256])],
+    ['one field of the row', digestCrosswalkRow({ ...ROW, extent_match: 'approximate' }, DEPENDENCIES)],
+    ['the rationale', digestCrosswalkRow({ ...ROW, evidence: buildEvidence({ rationale: 'Changed.' }) }, DEPENDENCIES)],
+    ['the label it points at', digestCrosswalkRow(ROW, { ...DEPENDENCIES, labels: [{ ...LABELS[0], name: 'Another Nucleus' }] })],
+    ['the mesh that draws it', digestCrosswalkRow(ROW, { ...DEPENDENCIES, meshSha256s: [OTHER_SHA256] })],
+    ['a containment its subject takes part in', digestCrosswalkRow(ROW, { ...DEPENDENCIES, containment: [{ parent: 'thalamus', child: 'stn' }] })],
   ])('changes the row digest when %s changes', (_what, changedDigest) => {
     expect(changedDigest).not.toBe(ROW_DIGEST);
   });
@@ -104,7 +106,7 @@ describe('review state', () => {
   });
 
   it('reads a row as unreviewed, with no error, when its digest no longer matches the entry', () => {
-    const editedDigest = digestCrosswalkRow({ ...ROW, atlas_ids: ['8'] }, LABELS, [FIXTURE_SHA256]);
+    const editedDigest = digestCrosswalkRow({ ...ROW, atlas_ids: ['8'] }, DEPENDENCIES);
     expect(findReview(ledger, 'row_review', crosswalkRowKey(ROW), editedDigest)).toEqual(UNREVIEWED);
   });
 

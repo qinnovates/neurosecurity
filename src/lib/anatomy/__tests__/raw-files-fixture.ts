@@ -72,7 +72,7 @@ export function buildLedgerFile(entries: LedgerEntry[] = []): Record<string, unk
 }
 
 export function buildRawFiles(overrides: Partial<RawAnatomyFiles> = {}): RawAnatomyFiles {
-  const tractsSource = buildSource({ id: TRACTS_SOURCE_ID, name: 'Fixture tracts', layers: ['tracts'], licence_id: 'cc-by-sa-4.0' });
+  const tractsSource = buildSource({ id: TRACTS_SOURCE_ID, name: 'Fixture tracts', layers: ['tracts'], license_id: 'cc-by-sa-4.0' });
   return {
     engineData: ENGINE_DATA,
     registrar: { techniques: [{ id: TECHNIQUE_ID, niss: { severity: 'high' }, tara: { dsm5: { cluster: 'mood_trauma', pathway: PATHWAY_TEXT } } }] },

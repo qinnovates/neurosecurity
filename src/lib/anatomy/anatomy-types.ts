@@ -21,7 +21,7 @@ export type NameMatch = typeof NAME_MATCHES[number];
 export const EXTENT_MATCHES = ['same', 'atlas_covers_part', 'contained', 'approximate', 'none'] as const;
 export type ExtentMatch = typeof EXTENT_MATCHES[number];
 
-/** `template_average` is a template's own average image or mask (the brain outline): nobody delineated a structure. */
+/** `template_average`: the source is an average template (the brain outline), not a delineation of any structure. */
 export const DELINEATION_BASES = ['histology', 'manual_mri', 'fmri_gradient', 'tractography', 'expert_drawing_on_template', 'template_average'] as const;
 export type DelineationBasis = typeof DELINEATION_BASES[number];
 
@@ -34,6 +34,9 @@ export type Drafter = typeof DRAFTERS[number];
 
 export const HEMISPHERES = ['left', 'right', 'both'] as const;
 export type Hemisphere = typeof HEMISPHERES[number];
+
+/** Stands in for the atlas in the ledger key of a no_geometry record. No source may take it as an id. */
+export const NO_GEOMETRY_TOKEN = 'no_geometry';
 
 /** The value a part's `expected_v2_id` holds until someone decides what the part becomes. */
 export const UNDECIDED_PART = 'undecided';
