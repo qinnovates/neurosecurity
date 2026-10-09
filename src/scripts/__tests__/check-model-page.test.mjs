@@ -88,6 +88,70 @@ describe('findIsolationViolations', () => {
   });
 });
 
+describe('which policy tags a browser would act on', () => {
+  const NO_TAG = ['no Content-Security-Policy meta tag'];
+  const goodTag = `<meta http-equiv="Content-Security-Policy" content="${ISOLATED_POLICY}">`;
+  const inHead = (headContent) => `<!DOCTYPE html><html><head>${headContent}</head><body></body></html>`;
+
+  it('reads the content attribute itself, not one whose name ends the same way', () => {
+    const html = inHead(`<meta http-equiv="Content-Security-Policy" data-content="${ISOLATED_POLICY}" content="default-src *">`);
+    const violations = findIsolationViolations(html);
+    expect(violations).toContain('Content-Security-Policy "default-src" allows *, which is not in the allowed policy');
+    expect(violations).toContain('Content-Security-Policy is missing "connect-src"');
+  });
+
+  it('does not take data-http-equiv for http-equiv', () => {
+    expect(findIsolationViolations(inHead(`<meta data-http-equiv="Content-Security-Policy" content="${ISOLATED_POLICY}">`))).toEqual(NO_TAG);
+  });
+
+  it.each([
+    ['an HTML comment', `<!-- ${goodTag} -->`],
+    ['noscript', `<noscript>${goodTag}</noscript>`],
+    ['template', `<template>${goodTag}</template>`],
+    ['a style comment', `<style>/* ${goodTag} */</style>`],
+    ['a script string', `<script>var decoy = '${goodTag}';</script>`],
+    ['the title', `<title>${goodTag}</title>`],
+  ])('ignores a policy tag written inside %s', (_label, headContent) => {
+    expect(findIsolationViolations(inHead(headContent))).toEqual(NO_TAG);
+  });
+
+  it('flags a policy tag that follows an element a head cannot hold', () => {
+    expect(findIsolationViolations(inHead(`<div></div>${goodTag}`))).toEqual([
+      '<div> before the Content-Security-Policy meta tag ends the head early, so browsers ignore the tag',
+    ]);
+  });
+
+  it('flags a policy tag that follows text in the head', () => {
+    expect(findIsolationViolations(inHead(`stray words${goodTag}`))).toEqual([
+      'text before the Content-Security-Policy meta tag ends the head early, so browsers ignore the tag',
+    ]);
+  });
+
+  it('accepts the tag after the elements a head may hold, and after a comment', () => {
+    const html = inHead(`<meta charset="UTF-8"><title>Tool</title><link rel="icon" href="/favicon.svg"><!-- note --><style>body{margin:0}</style>${goodTag}`);
+    expect(findIsolationViolations(html)).toEqual([]);
+  });
+
+  it('accepts the tag after a head element whose attribute value contains ">"', () => {
+    expect(findIsolationViolations(inHead(`<meta name="description" content="values > 5 are flagged">${goodTag}`))).toEqual([]);
+  });
+
+  it('accepts an unquoted or differently cased http-equiv, as a browser does', () => {
+    expect(findIsolationViolations(inHead(`<meta http-equiv=Content-Security-Policy content="${ISOLATED_POLICY}">`))).toEqual([]);
+    expect(findIsolationViolations(inHead(`<META HTTP-EQUIV="content-security-policy" CONTENT="${ISOLATED_POLICY}">`))).toEqual([]);
+  });
+
+  it('is not fooled by a lax decoy in a comment beside the real tag', () => {
+    const html = inHead(`${goodTag}<!-- <meta http-equiv="Content-Security-Policy" content="default-src *"> -->`);
+    expect(findIsolationViolations(html)).toEqual([]);
+  });
+
+  it('reads a policy tag whose earlier attribute value contains ">"', () => {
+    const html = inHead(`<meta name="note" content="x"><meta title="a > b" http-equiv="Content-Security-Policy" content="default-src *">`);
+    expect(findIsolationViolations(html)).toContain('Content-Security-Policy "default-src" allows *, which is not in the allowed policy');
+  });
+});
+
 describe('findPolicyDifferences', () => {
   it('accepts the policy of the page as built today', () => {
     expect(findPolicyDifferences(ISOLATED_POLICY)).toEqual([]);
@@ -186,6 +250,10 @@ describe('findToolPageFailures', () => {
     expect(findToolPageFailures(FIXTURE_DIST, [{ urlPath: '/tool/' }, { urlPath: '/eager/' }])).toEqual([
       '/eager/: no Content-Security-Policy meta tag',
     ]);
+  });
+
+  it('fails an empty page list instead of passing with nothing checked', () => {
+    expect(findToolPageFailures(FIXTURE_DIST, [])).toEqual(['no tool pages are listed, so nothing was checked']);
   });
 
   it('throws with the next step when a listed page was not built', () => {

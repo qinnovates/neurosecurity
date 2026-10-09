@@ -17,7 +17,8 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES, resolveBuiltFile } from './tool-pages.mjs';
+import { TAG_ATTRIBUTES_SOURCE, blankInertContent, parseAttributes } from './built-html.mjs';
+import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES, ToolPageCheckError, resolveBuiltFile } from './tool-pages.mjs';
 
 /**
  * The whole policy of a tool page: every directive, and every source each may name.
@@ -41,11 +42,15 @@ const RESOURCE_TAG_PATTERN = /<(script|link|img|iframe|source|video|audio|object
 const RESOURCE_ATTRIBUTE_PATTERN = /\b(src|href|data|action|srcset|poster)\s*=\s*("([^"]*)"|'([^']*)')/gi;
 const OFF_ORIGIN_URL_PATTERN = /^\s*(https?:)?\/\//i;
 const CSS_OFF_ORIGIN_PATTERN = /(url\(\s*['"]?\s*(https?:)?\/\/|@import\s+['"]\s*(https?:)?\/\/)/i;
-const CSP_META_PATTERN = /<meta\b[^>]*http-equiv\s*=\s*["']Content-Security-Policy["'][^>]*>/gi;
-const CONTENT_ATTRIBUTE_PATTERN = /\bcontent\s*=\s*"([^"]*)"/i;
+const META_TAG_PATTERN = new RegExp(String.raw`<meta\b${TAG_ATTRIBUTES_SOURCE}>`, 'gi');
+const POLICY_HEADER_NAME = 'content-security-policy';
 const WHITESPACE_PATTERN = /\s+/;
+const HEAD_START_PATTERN = /<head\b[^>]*>/i;
 const HEAD_END_PATTERN = /<\/head\s*>/i;
 const SCRIPT_TAG_PATTERN = /<script\b/i;
+const TAG_NAME_PATTERN = new RegExp(String.raw`<\/?([a-z][a-z0-9-]*)\b${TAG_ATTRIBUTES_SOURCE}>`, 'gi');
+/** The only elements a head may hold. Any other element, or text, ends the head where it stands. */
+const HEAD_ELEMENTS = ['meta', 'title', 'link', 'style', 'script', 'base', 'noscript', 'template'];
 
 const FORBIDDEN_MARKERS = [
   { marker: 'astro-view-transitions', reason: 'the soft-navigation router (ClientRouter) is present' },
@@ -114,27 +119,51 @@ export function findPolicyDifferences(policy, allowedSources = ALLOWED_CSP_SOURC
   ];
 }
 
+/** What ends the head before `index`, if anything: an element a head cannot hold, or text. */
+function findHeadEnders(liveHtml, headContentStart, index) {
+  const beforeTag = liveHtml.slice(headContentStart, index);
+  const strayElements = [...beforeTag.matchAll(TAG_NAME_PATTERN)].map((match) => match[1].toLowerCase())
+    .filter((name) => !HEAD_ELEMENTS.includes(name));
+  const hasStrayText = beforeTag.replace(TAG_NAME_PATTERN, '').trim() !== '';
+  return [...new Set(strayElements.map((name) => `<${name}>`)), ...(hasStrayText ? ['text'] : [])];
+}
+
 /**
- * A browser applies a policy tag only inside the head, and only to what comes after it.
- * Returns a violation when the first tag is placed where it would not cover the page's scripts.
+ * A browser applies a policy tag only when it is in the head, and only to what comes after it.
+ * Returns a violation for each way the first tag is placed where it would not cover the page.
  */
-function findPolicyPlacementViolations(html, firstTagIndex) {
-  const headEnd = html.search(HEAD_END_PATTERN);
-  const firstScript = html.search(SCRIPT_TAG_PATTERN);
+function findPolicyPlacementViolations(liveHtml, tagIndex) {
+  const headStart = liveHtml.match(HEAD_START_PATTERN);
+  const headEnd = liveHtml.search(HEAD_END_PATTERN);
+  if (headStart === null || headEnd === -1 || tagIndex < headStart.index || tagIndex > headEnd) {
+    return ['Content-Security-Policy meta tag is outside the head, where browsers ignore it'];
+  }
   const violations = [];
-  if (headEnd === -1 || firstTagIndex > headEnd) violations.push('Content-Security-Policy meta tag is outside the head, where browsers ignore it');
-  if (firstScript !== -1 && firstScript < firstTagIndex) violations.push('a script comes before the Content-Security-Policy meta tag, so the policy does not cover it');
+  const headEnders = findHeadEnders(liveHtml, headStart.index + headStart[0].length, tagIndex);
+  if (headEnders.length > 0) {
+    violations.push(`${headEnders.join(', ')} before the Content-Security-Policy meta tag ends the head early, so browsers ignore the tag`);
+  }
+  const firstScript = liveHtml.search(SCRIPT_TAG_PATTERN);
+  if (firstScript !== -1 && firstScript < tagIndex) violations.push('a script comes before the Content-Security-Policy meta tag, so the policy does not cover it');
   return violations;
 }
 
+/** Policy tags a browser would act on: real meta elements whose `http-equiv` attribute names the policy header. */
+function findPolicyTags(liveHtml) {
+  return [...liveHtml.matchAll(META_TAG_PATTERN)]
+    .map((match) => ({ index: match.index, attributes: parseAttributes(match[1]) }))
+    .filter(({ attributes }) => (attributes.get('http-equiv') ?? '').trim().toLowerCase() === POLICY_HEADER_NAME);
+}
+
 function findPolicyViolations(html) {
-  const metaTags = [...html.matchAll(CSP_META_PATTERN)];
-  if (metaTags.length === 0) {
+  const liveHtml = blankInertContent(html);
+  const policyTags = findPolicyTags(liveHtml);
+  if (policyTags.length === 0) {
     return ['no Content-Security-Policy meta tag'];
   }
   return [
-    ...findPolicyPlacementViolations(html, metaTags[0].index),
-    ...metaTags.flatMap(([metaTag]) => findPolicyDifferences(metaTag.match(CONTENT_ATTRIBUTE_PATTERN)?.[1] ?? '')),
+    ...findPolicyPlacementViolations(liveHtml, policyTags[0].index),
+    ...policyTags.flatMap(({ attributes }) => findPolicyDifferences(attributes.get('content') ?? '')),
   ];
 }
 
@@ -159,16 +188,17 @@ function readBuiltPage(distDirectory, urlPath) {
     return readFileSync(filePath, 'utf-8');
   } catch (error) {
     const detail = error instanceof Error ? error.message : String(error);
-    throw new Error(`Could not read the built page for ${urlPath} (${detail}). Run "npm run build" first.`);
+    throw new ToolPageCheckError('page-not-built', `Could not read the built page for ${urlPath} (${detail}). Run "npm run build" first.`);
   }
 }
 
 /**
  * Checks every listed page in a build directory.
  * Returns one human-readable failure per violation, each naming its page; empty means all pass.
- * Throws when a listed page was not built.
+ * An empty list is a failure. Throws ToolPageCheckError when a listed page was not built.
  */
 export function findToolPageFailures(distDirectory = DEFAULT_DIST_DIRECTORY, pages = TOOL_PAGES) {
+  if (pages.length === 0) return ['no tool pages are listed, so nothing was checked'];
   return pages.flatMap(({ urlPath }) => findIsolationViolations(readBuiltPage(distDirectory, urlPath))
     .map((violation) => `${urlPath}: ${violation}`));
 }

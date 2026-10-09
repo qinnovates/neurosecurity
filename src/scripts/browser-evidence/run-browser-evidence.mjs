@@ -34,6 +34,7 @@ const EXIT_COULD_NOT_RUN = 2;
 const BROWSER_CHANNEL = 'chromium';
 const DISABLE_WEBGL_ARGUMENT = '--disable-3d-apis';
 const VIOLATION_BINDING = 'recordPolicyViolation';
+const CHECKLIST_PATH = 'src/scripts/browser-evidence/atlas-checklist.md';
 /** URLs the browser resolves in memory. They never reach a network, so they are not another origin. */
 const IN_MEMORY_URL_PATTERN = /^(data|blob|about):/i;
 
@@ -93,10 +94,12 @@ async function loadPlaywright() {
     if (modulePath !== undefined && modulePath !== '') return createRequire(import.meta.url)(path.resolve(modulePath));
     return await import('playwright');
   } catch (loadError) {
+    // The loader's own message names absolute paths on this machine; only its error code is repeated.
+    const errorCode = typeof loadError?.code === 'string' ? loadError.code : 'unknown error';
     throw new EvidenceRunError(
       'Playwright is not installed, and it is deliberately not a dependency of this repository. '
       + 'Set PLAYWRIGHT_MODULE to the directory of an installed "playwright" package, or follow '
-      + `src/scripts/browser-evidence/atlas-checklist.md by hand. (${loadError instanceof Error ? loadError.message : String(loadError)})`,
+      + `${CHECKLIST_PATH} by hand. (${errorCode})`,
     );
   }
 }
