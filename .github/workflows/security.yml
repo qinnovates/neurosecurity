@@ -18,5 +18,7 @@ jobs:
         run: npm test
       - name: Build
         run: npm run build
-      - name: Check threat model page isolation
-        run: npm run check:model-page
+      - name: Check tool page isolation and first-load budget
+        run: npm run check:post-build
+      - name: Type check
+        run: npm run type-check

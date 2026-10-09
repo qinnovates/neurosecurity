@@ -1,10 +1,14 @@
 #!/usr/bin/env node
 /**
- * Fails when the built threat model page could send a visitor's data anywhere.
+ * Fails when a built tool page could send a visitor's data anywhere.
  *
- * The page promises that device details stay in the browser. This check holds the
+ * Each page promises that what is entered stays in the browser. This check holds the
  * built HTML to that: no off-origin resources, no soft-navigation router, no
- * analytics, and a content security policy that allows connections to this site only.
+ * analytics, and a content security policy equal to the one recorded below, so a
+ * loosened policy fails here instead of shipping.
+ *
+ * It reads the built HTML only. It cannot see what the scripts do when they run, or
+ * anything the host adds to a response after the build.
  *
  * Usage (after `npm run build`):
  *   node src/scripts/check-model-page.mjs
@@ -13,24 +17,33 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES, resolveBuiltFile } from './tool-pages.mjs';
 
-const BUILT_PAGE_PATH = 'dist/atlas/model/index.html';
-
-const REQUIRED_CSP_DIRECTIVES = [
-  "default-src 'self'",
-  "connect-src 'self'",
-  "form-action 'none'",
-  "base-uri 'none'",
-  "object-src 'none'",
-];
+/**
+ * The whole policy of a tool page: every directive, and every source each may name.
+ * It mirrors TOOL_PAGE_CSP in src/layouts/ToolLayout.astro. A change there fails this
+ * check until the same change is made here, which is the review point for the policy.
+ */
+export const ALLOWED_CSP_SOURCES = {
+  'default-src': ["'self'"],
+  'script-src': ["'self'", "'unsafe-inline'"],
+  'style-src': ["'self'", "'unsafe-inline'"],
+  'img-src': ["'self'", 'data:'],
+  'font-src': ["'self'", 'data:'],
+  'connect-src': ["'self'"],
+  'form-action': ["'none'"],
+  'base-uri': ["'none'"],
+  'object-src': ["'none'"],
+};
 
 /** Tags whose attributes make the browser fetch something without a click. */
 const RESOURCE_TAG_PATTERN = /<(script|link|img|iframe|source|video|audio|object|embed|form|track)\b[^>]*>/gi;
 const RESOURCE_ATTRIBUTE_PATTERN = /\b(src|href|data|action|srcset|poster)\s*=\s*("([^"]*)"|'([^']*)')/gi;
 const OFF_ORIGIN_URL_PATTERN = /^\s*(https?:)?\/\//i;
 const CSS_OFF_ORIGIN_PATTERN = /(url\(\s*['"]?\s*(https?:)?\/\/|@import\s+['"]\s*(https?:)?\/\/)/i;
-const CSP_META_PATTERN = /<meta\b[^>]*http-equiv\s*=\s*["']Content-Security-Policy["'][^>]*>/i;
+const CSP_META_PATTERN = /<meta\b[^>]*http-equiv\s*=\s*["']Content-Security-Policy["'][^>]*>/gi;
 const CONTENT_ATTRIBUTE_PATTERN = /\bcontent\s*=\s*"([^"]*)"/i;
+const WHITESPACE_PATTERN = /\s+/;
 
 const FORBIDDEN_MARKERS = [
   { marker: 'astro-view-transitions', reason: 'the soft-navigation router (ClientRouter) is present' },
@@ -55,16 +68,56 @@ function findOffOriginResources(html) {
   return violations;
 }
 
+/** Splits a policy into [directive name, sources] pairs, in the order written. */
+function parsePolicy(policy) {
+  return policy
+    .split(';')
+    .map((directive) => directive.trim().split(WHITESPACE_PATTERN).filter((token) => token !== ''))
+    .filter((tokens) => tokens.length > 0)
+    .map(([name, ...sources]) => [name.toLowerCase(), sources]);
+}
+
+function findDirectiveSetViolations(directiveNames, allowedSources) {
+  const seen = new Set();
+  const violations = [];
+  for (const name of directiveNames) {
+    if (seen.has(name)) violations.push(`Content-Security-Policy repeats "${name}"`);
+    else if (!Object.hasOwn(allowedSources, name)) violations.push(`Content-Security-Policy has "${name}", which is not in the allowed policy`);
+    seen.add(name);
+  }
+  const missing = Object.keys(allowedSources).filter((name) => !seen.has(name));
+  return [...violations, ...missing.map((name) => `Content-Security-Policy is missing "${name}"`)];
+}
+
+function findSourceViolations(name, sources, allowedSources) {
+  if (!Object.hasOwn(allowedSources, name)) return [];
+  const allowed = allowedSources[name];
+  return [
+    ...sources.filter((source) => !allowed.includes(source))
+      .map((source) => `Content-Security-Policy "${name}" allows ${source}, which is not in the allowed policy`),
+    ...allowed.filter((source) => !sources.includes(source))
+      .map((source) => `Content-Security-Policy "${name}" no longer has ${source}`),
+  ];
+}
+
+/**
+ * Returns every way one policy string differs from an allowed policy; empty means equal.
+ * A page with a policy of its own passes its own map of directive names to sources.
+ */
+export function findPolicyDifferences(policy, allowedSources = ALLOWED_CSP_SOURCES) {
+  const directives = parsePolicy(policy);
+  return [
+    ...findDirectiveSetViolations(directives.map(([name]) => name), allowedSources),
+    ...directives.flatMap(([name, sources]) => findSourceViolations(name, sources, allowedSources)),
+  ];
+}
+
 function findPolicyViolations(html) {
-  const metaTag = html.match(CSP_META_PATTERN)?.[0];
-  if (!metaTag) {
+  const metaTags = [...html.matchAll(CSP_META_PATTERN)].map((match) => match[0]);
+  if (metaTags.length === 0) {
     return ['no Content-Security-Policy meta tag'];
   }
-  const policy = metaTag.match(CONTENT_ATTRIBUTE_PATTERN)?.[1] ?? '';
-  const directives = policy.split(';').map((directive) => directive.trim());
-  return REQUIRED_CSP_DIRECTIVES
-    .filter((required) => !directives.includes(required))
-    .map((missing) => `Content-Security-Policy is missing "${missing}"`);
+  return metaTags.flatMap((metaTag) => findPolicyDifferences(metaTag.match(CONTENT_ATTRIBUTE_PATTERN)?.[1] ?? ''));
 }
 
 function findForbiddenMarkers(html) {
@@ -82,23 +135,35 @@ export function findIsolationViolations(html) {
   ];
 }
 
-function readBuiltPage() {
+function readBuiltPage(distDirectory, urlPath) {
+  const filePath = resolveBuiltFile(distDirectory, urlPath);
   try {
-    return readFileSync(path.resolve(BUILT_PAGE_PATH), 'utf-8');
+    return readFileSync(filePath, 'utf-8');
   } catch (error) {
     const detail = error instanceof Error ? error.message : String(error);
-    throw new Error(`Could not read ${BUILT_PAGE_PATH} (${detail}). Run "npm run build" first.`);
+    throw new Error(`Could not read the built page for ${urlPath} (${detail}). Run "npm run build" first.`);
   }
 }
 
+/**
+ * Checks every listed page in a build directory.
+ * Returns one human-readable failure per violation, each naming its page; empty means all pass.
+ * Throws when a listed page was not built.
+ */
+export function findToolPageFailures(distDirectory = DEFAULT_DIST_DIRECTORY, pages = TOOL_PAGES) {
+  return pages.flatMap(({ urlPath }) => findIsolationViolations(readBuiltPage(distDirectory, urlPath))
+    .map((violation) => `${urlPath}: ${violation}`));
+}
+
 function runCheck() {
-  const violations = findIsolationViolations(readBuiltPage());
-  if (violations.length > 0) {
-    process.stderr.write(`[check-model-page] ${BUILT_PAGE_PATH} is not isolated:\n`);
-    for (const violation of violations) process.stderr.write(`  - ${violation}\n`);
+  const failures = findToolPageFailures();
+  if (failures.length > 0) {
+    process.stderr.write('[check-model-page] not isolated:\n');
+    for (const failure of failures) process.stderr.write(`  - ${failure}\n`);
     process.exit(1);
   }
-  process.stdout.write(`[check-model-page] ${BUILT_PAGE_PATH}: no off-origin resources, router, or analytics; policy allows connections to this site only.\n`);
+  const pageList = TOOL_PAGES.map(({ urlPath }) => urlPath).join(', ');
+  process.stdout.write(`[check-model-page] ${pageList}: no off-origin resources, router, or analytics; policy equals the allowed policy.\n`);
 }
 
 const isRunDirectly = process.argv[1] !== undefined

@@ -8,6 +8,9 @@
 - `update-automation-registry.mjs` -- Syncs automation registry
 - `timeline-check.mjs` -- Validates timeline stats (`--fix` to auto-update)
 - `compute-impact-chains.mjs` -- Precomputes attack chain relationships
+- `tool-pages.mjs` -- The built pages held to the tool-page promise, with each page's first-load budget
+- `check-post-build.mjs` -- Runs every check that needs `dist/` (`npm run check:post-build`): `check-model-page.mjs` (isolation, policy by equality) and `measure-lab-first-load.mjs` (first-load budget, no three.js up front)
+- `browser-evidence/` -- Real-browser evidence run for a pull request: a Playwright driver (Playwright is not a dependency) and the manual checklist
 - `version.sh` -- Semantic versioning manager (`major|minor|patch|show`, supports `--dry-run` and `--no-tag`)
 
 ## Conventions
