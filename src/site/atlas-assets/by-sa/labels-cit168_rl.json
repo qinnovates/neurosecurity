@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "atlas": "cit168_rl",
+  "labels": [
+    {
+      "id": "0",
+      "name": "Putamen",
+      "hemisphere": "both"
+    },
+    {
+      "id": "1",
+      "name": "Caudate Nucleus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "2",
+      "name": "Nucleus Accumbens",
+      "hemisphere": "both"
+    },
+    {
+      "id": "4",
+      "name": "Globus Pallidus External",
+      "hemisphere": "both"
+    },
+    {
+      "id": "5",
+      "name": "Globus Pallidus Internal",
+      "hemisphere": "both"
+    },
+    {
+      "id": "6",
+      "name": "Substantia Nigra Pars Compacta",
+      "hemisphere": "both"
+    },
+    {
+      "id": "7",
+      "name": "Red Nucleus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "8",
+      "name": "Substantia Nigra Pars Reticulata",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10",
+      "name": "Ventral Tegmental Area",
+      "hemisphere": "both"
+    },
+    {
+      "id": "15",
+      "name": "Subthalamic Nucleus",
+      "hemisphere": "both"
+    }
+  ]
+}
