@@ -2,7 +2,16 @@
   "schema_version": 2,
   "status": "AI-drafted. No neuroanatomist has checked these correspondences.",
   "parts": [],
-  "contains": [],
+  "contains": [
+    {
+      "parent": "thalamus",
+      "child": "ant"
+    },
+    {
+      "parent": "thalamus",
+      "child": "vim"
+    }
+  ],
   "no_geometry": [
     {
       "subject_kind": "region",
@@ -38,7 +47,1019 @@
       "reason": "No openly licensed source with geometry for this structure was found.",
       "reason_source": "The licence verification lists it among the QIF regions still without clean geometry; the search behind that list was made by AI.",
       "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "reticular_formation",
+      "reason": "The only cleared source with reticular nuclei is the Harvard arousal atlas, whose template space could not be established, and it covers the midbrain and rostral pons only.",
+      "reason_source": "datalake/qif-anatomy-sources.json, source \"harvard_aan_v2\", route note",
+      "drafted_by": "ai"
     }
   ],
-  "rows": []
+  "rows": [
+    {
+      "subject_kind": "region",
+      "subject_id": "pfc",
+      "subject_name_at_draft": "Prefrontal Cortex",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12115",
+        "12116",
+        "146034888",
+        "146034884",
+        "146034876",
+        "12121",
+        "12122",
+        "12123",
+        "12124",
+        "12125"
+      ],
+      "name_match": "none",
+      "extent_match": "contained",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12115/name",
+          "quote": "superior frontal gyrus"
+        },
+        "check_status": "unchecked",
+        "rationale": "No prefrontal label; these frontal gyri also hold premotor, supplementary motor and eye-field cortex with no boundary."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "m1",
+      "subject_name_at_draft": "Primary Motor Cortex",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12114"
+      ],
+      "name_match": "synonym",
+      "extent_match": "contained",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12114/name",
+          "quote": "precentral gyrus"
+        },
+        "check_status": "unchecked",
+        "rationale": "Primary motor cortex lies in the precentral gyrus, which the atlas does not divide from premotor cortex."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "v1",
+      "subject_name_at_draft": "Primary Visual Cortex",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12150",
+        "12151",
+        "12149"
+      ],
+      "name_match": "none",
+      "extent_match": "contained",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12150/name",
+          "quote": "cuneus"
+        },
+        "check_status": "unchecked",
+        "rationale": "No striate or calcarine label; primary visual cortex lies somewhere inside these three occipital labels."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "a1",
+      "subject_name_at_draft": "Primary Auditory Cortex",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12144"
+      ],
+      "name_match": "synonym",
+      "extent_match": "contained",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12144/name",
+          "quote": "transverse temporal gyrus (Heschl's gyrus)"
+        },
+        "check_status": "unchecked",
+        "rationale": "Primary auditory cortex is part of Heschl's gyrus; the atlas labels the whole gyrus."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "broca",
+      "subject_name_at_draft": "Broca's Area",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12119",
+        "12118"
+      ],
+      "name_match": "synonym",
+      "extent_match": "approximate",
+      "definition_contested": true,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12119/name",
+          "quote": "inferior frontal gyrus, opercular part"
+        },
+        "check_status": "unchecked",
+        "rationale": "QIF lists pars opercularis and pars triangularis; the labels are those two gyral parts, not a functional area, and one mirrored hemisphere."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "wernicke",
+      "subject_name_at_draft": "Wernicke's Area",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12140",
+        "12135",
+        "12136"
+      ],
+      "name_match": "none",
+      "extent_match": "contained",
+      "definition_contested": true,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12140/name",
+          "quote": "superior temporal gyrus"
+        },
+        "check_status": "unchecked",
+        "rationale": "Supramarginal and angular gyri match two QIF parts by name, but the superior temporal gyrus label is the whole gyrus with no posterior part."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "pmc",
+      "subject_name_at_draft": "Premotor Cortex",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12114",
+        "12115",
+        "12116"
+      ],
+      "name_match": "none",
+      "extent_match": "contained",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12114/name",
+          "quote": "precentral gyrus"
+        },
+        "check_status": "unchecked",
+        "rationale": "No premotor label; it lies inside these three frontal gyri with no boundary in the atlas."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "sma",
+      "subject_name_at_draft": "Supplementary Motor Area",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12115",
+        "12126"
+      ],
+      "name_match": "none",
+      "extent_match": "contained",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12115/name",
+          "quote": "superior frontal gyrus"
+        },
+        "check_status": "unchecked",
+        "rationale": "No supplementary motor label; it lies on the medial superior frontal gyrus and rostral paracentral lobule."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "ppc",
+      "subject_name_at_draft": "Posterior Parietal Cortex",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12133",
+        "12135",
+        "12136"
+      ],
+      "name_match": "none",
+      "extent_match": "approximate",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12133/name",
+          "quote": "supraparietal lobule"
+        },
+        "check_status": "unchecked",
+        "rationale": "QIF lists the superior and inferior parietal lobules; these three labels are those lobules' gyri. Intraparietal areas are unlabelled."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "s1_cortex",
+      "subject_name_at_draft": "Primary Somatosensory Cortex",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12132"
+      ],
+      "name_match": "synonym",
+      "extent_match": "contained",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12132/name",
+          "quote": "postcentral gyrus"
+        },
+        "check_status": "unchecked",
+        "rationale": "Primary somatosensory cortex lies in the postcentral gyrus; areas 3a, 3b, 1 and 2 are not delimited."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "hippocampus",
+      "subject_name_at_draft": "Hippocampus",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12171",
+        "12173",
+        "12174"
+      ],
+      "name_match": "same",
+      "extent_match": "atlas_covers_part",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12171/name",
+          "quote": "head of hippocampus"
+        },
+        "check_status": "unchecked",
+        "rationale": "Head, body and tail of hippocampus. Entorhinal cortex, which QIF lists, is inside the parahippocampal labels."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "bla",
+      "subject_name_at_draft": "Basolateral Amygdala",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "10367",
+        "10368",
+        "10369"
+      ],
+      "name_match": "synonym",
+      "extent_match": "approximate",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/10367/name",
+          "quote": "lateral nucleus"
+        },
+        "check_status": "unchecked",
+        "rationale": "The three labels carry the names of the three QIF sub-structures: lateral, basal and accessory basal nuclei."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "insula",
+      "subject_name_at_draft": "Insular Cortex",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12178",
+        "12177",
+        "12179"
+      ],
+      "name_match": "same",
+      "extent_match": "approximate",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12178/name",
+          "quote": "short insular gyri"
+        },
+        "check_status": "unchecked",
+        "rationale": "Short and long insular gyri and limen insula. The agranular insular areas are separate labels, not included."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "acc",
+      "subject_name_at_draft": "Anterior Cingulate Cortex",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12157"
+      ],
+      "name_match": "synonym",
+      "extent_match": "atlas_covers_part",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12157/name",
+          "quote": "cingulate gyrus, rostral (anterior) part"
+        },
+        "check_status": "unchecked",
+        "rationale": "The label is the rostral (anterior) cingulate gyrus; subgenual and paracingulate cortex are separate labels."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "cingulate",
+      "subject_name_at_draft": "Cingulate Gyrus (Posterior)",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12158"
+      ],
+      "name_match": "synonym",
+      "extent_match": "atlas_covers_part",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12158/name",
+          "quote": "cingulate gyrus, caudal (posterior) part"
+        },
+        "check_status": "unchecked",
+        "rationale": "The label is the caudal (posterior) cingulate gyrus; retrosplenial cortex is unlabelled and precuneus is a separate label."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "striatum",
+      "subject_name_at_draft": "Striatum (Caudate + Putamen)",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "cit168_rl",
+      "atlas_ids": [
+        "0",
+        "1",
+        "2"
+      ],
+      "name_match": "same",
+      "extent_match": "same",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "manual_mri",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
+          "pointer": "/labels/0/name",
+          "quote": "Putamen"
+        },
+        "check_status": "unchecked",
+        "rationale": "Putamen, caudate nucleus and nucleus accumbens are the three QIF sub-structures."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "gpi",
+      "subject_name_at_draft": "Globus Pallidus Internus",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "cit168_rl",
+      "atlas_ids": [
+        "5"
+      ],
+      "name_match": "same",
+      "extent_match": "same",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "manual_mri",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
+          "pointer": "/labels/5/name",
+          "quote": "Globus Pallidus Internal"
+        },
+        "check_status": "unchecked",
+        "rationale": "The label is the internal segment of the globus pallidus."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "gpe",
+      "subject_name_at_draft": "Globus Pallidus Externus",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "cit168_rl",
+      "atlas_ids": [
+        "4"
+      ],
+      "name_match": "same",
+      "extent_match": "same",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "manual_mri",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
+          "pointer": "/labels/4/name",
+          "quote": "Globus Pallidus External"
+        },
+        "check_status": "unchecked",
+        "rationale": "The label is the external segment of the globus pallidus."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "stn",
+      "subject_name_at_draft": "Subthalamic Nucleus",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "cit168_rl",
+      "atlas_ids": [
+        "15"
+      ],
+      "name_match": "same",
+      "extent_match": "same",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "manual_mri",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
+          "pointer": "/labels/15/name",
+          "quote": "Subthalamic Nucleus"
+        },
+        "check_status": "unchecked",
+        "rationale": "The label is the subthalamic nucleus."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "substantia_nigra",
+      "subject_name_at_draft": "Substantia Nigra",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "cit168_rl",
+      "atlas_ids": [
+        "6",
+        "8"
+      ],
+      "name_match": "same",
+      "extent_match": "same",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "manual_mri",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
+          "pointer": "/labels/6/name",
+          "quote": "Substantia Nigra Pars Compacta"
+        },
+        "check_status": "unchecked",
+        "rationale": "Pars compacta and pars reticulata, the two QIF sub-structures, are separate maps."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "vta",
+      "subject_name_at_draft": "Ventral Tegmental Area",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "cit168_rl",
+      "atlas_ids": [
+        "10"
+      ],
+      "name_match": "same",
+      "extent_match": "same",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "manual_mri",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
+          "pointer": "/labels/10/name",
+          "quote": "Ventral Tegmental Area"
+        },
+        "check_status": "unchecked",
+        "rationale": "The label is the ventral tegmental area. Too small on the 1 mm grid to outline; it ships as a marker."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "thalamus",
+      "subject_name_at_draft": "Thalamus",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "10390",
+        "10396",
+        "10398",
+        "10403",
+        "10408",
+        "10409",
+        "10417",
+        "10424",
+        "10425",
+        "10430",
+        "10434",
+        "10449",
+        "10450",
+        "13045"
+      ],
+      "name_match": "same",
+      "extent_match": "approximate",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/10390/name",
+          "quote": "thalamus"
+        },
+        "check_status": "unchecked",
+        "rationale": "The thalamus label and thirteen nuclear labels. The anterior complex and ventral lateral nucleus belong to the contained regions ant and vim."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "hypothalamus",
+      "subject_name_at_draft": "Hypothalamus",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "neudorfer_hypothalamus",
+      "atlas_ids": [
+        "9",
+        "10",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "37",
+        "38",
+        "45",
+        "46",
+        "47",
+        "48",
+        "49",
+        "50",
+        "51",
+        "52",
+        "53",
+        "54"
+      ],
+      "name_match": "none",
+      "extent_match": "approximate",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "manual_mri",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-neudorfer_hypothalamus.json",
+          "pointer": "/labels/9/name",
+          "quote": "mammillary bodies"
+        },
+        "check_status": "unchecked",
+        "rationale": "Union of the atlas's hypothalamic nuclei and mammillary bodies, left and right; several match QIF sub-structures by name."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "vim",
+      "subject_name_at_draft": "Ventral Intermediate Nucleus (Thalamus)",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "10420"
+      ],
+      "name_match": "none",
+      "extent_match": "contained",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/10420/name",
+          "quote": "ventral lateral nucleus of thalamus"
+        },
+        "check_status": "unchecked",
+        "rationale": "No ventral intermediate label in any cleared source; it is conventionally part of the ventral lateral nucleus."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "ant",
+      "subject_name_at_draft": "Anterior Nucleus of Thalamus",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "10392"
+      ],
+      "name_match": "synonym",
+      "extent_match": "approximate",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/10392/name",
+          "quote": "anterior nuclear complex of thalamus"
+        },
+        "check_status": "unchecked",
+        "rationale": "The label is the anterior nuclear complex of the thalamus, not divided into its three nuclei."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "cerebellum_cortex",
+      "subject_name_at_draft": "Cerebellar Cortex",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12390",
+        "12384"
+      ],
+      "name_match": "synonym",
+      "extent_match": "contained",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12390/name",
+          "quote": "lateral hemisphere of cerebellum"
+        },
+        "check_status": "unchecked",
+        "rationale": "Labels are the lateral hemisphere and paravermis, not cortex; whether folial white matter is inside them is not known."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "cerebellum_nuclei",
+      "subject_name_at_draft": "Deep Cerebellar Nuclei",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "10660"
+      ],
+      "name_match": "same",
+      "extent_match": "approximate",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/10660/name",
+          "quote": "cerebellar deep nuclei"
+        },
+        "check_status": "unchecked",
+        "rationale": "One label for the deep cerebellar nuclei; dentate, interposed and fastigial are not divided."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "vermis",
+      "subject_name_at_draft": "Cerebellar Vermis",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "10658"
+      ],
+      "name_match": "same",
+      "extent_match": "approximate",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/10658/name",
+          "quote": "cerebellar vermis"
+        },
+        "check_status": "unchecked",
+        "rationale": "The label is the cerebellar vermis; lobules are not divided."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "medulla",
+      "subject_name_at_draft": "Medulla Oblongata",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12535",
+        "12538",
+        "12600"
+      ],
+      "name_match": "none",
+      "extent_match": "atlas_covers_part",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12535/name",
+          "quote": "pyramidal part of medulla oblongata"
+        },
+        "check_status": "unchecked",
+        "rationale": "Union of pyramidal part, tegmentum and inferior olive; hindbrain white matter is a separate shared label."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "pons",
+      "subject_name_at_draft": "Pons",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12405",
+        "12416"
+      ],
+      "name_match": "none",
+      "extent_match": "approximate",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12405/name",
+          "quote": "basilar part of pons"
+        },
+        "check_status": "unchecked",
+        "rationale": "Union of the basilar part of the pons and the pontine tegmentum."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "midbrain",
+      "subject_name_at_draft": "Midbrain (Mesencephalon)",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12195",
+        "12181",
+        "12292",
+        "12305",
+        "12330"
+      ],
+      "name_match": "none",
+      "extent_match": "atlas_covers_part",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12195/name",
+          "quote": "midbrain tegmentum"
+        },
+        "check_status": "unchecked",
+        "rationale": "Union of tegmentum, pretectal region, colliculi and cerebral peduncle. Red nucleus and nigra are drawn from another atlas."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "cea",
+      "subject_name_at_draft": "Central Amygdala",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "10363"
+      ],
+      "name_match": "synonym",
+      "extent_match": "approximate",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/10363/name",
+          "quote": "central nuclear group"
+        },
+        "check_status": "unchecked",
+        "rationale": "The label is the central nuclear group of the amygdala."
+      },
+      "drafted_by": "ai"
+    }
+  ]
 }
