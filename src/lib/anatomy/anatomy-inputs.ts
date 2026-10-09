@@ -10,7 +10,7 @@ import { currentAddressingVersion } from './addressing-version';
 import type { Crosswalk, CrosswalkContext, LabelTable, SubjectKind, TechniqueRegions } from './anatomy-types';
 import { AnatomyDataError } from './errors';
 import { show } from './field-readers';
-import { LICENCE_FACTS, assessBuildability, effectiveLicenceId, type Buildability } from './licence-rules';
+import { LICENCE_FACTS, assessBuildability, effectiveLicenceId, mayPipelineUse, type Buildability } from './licence-rules';
 import type { AssetManifest } from './manifest-types';
 import { parseCrosswalk } from './parse-crosswalk';
 import { parseDeviceGeometry, type DeviceGeometry } from './parse-device-geometry';
@@ -176,6 +176,7 @@ export function parseAnatomyFiles(raw: RawAnatomyFiles): AnatomyData {
     statedLicenceBySource: readManifestInputs(sources),
     effectiveLicenceBySource,
     buildableSourceIds: crosswalkContext.buildableAtlasIds,
+    pipelineUsableSourceIds: new Set(judged.filter(({ source, verdict }) => mayPipelineUse(source, verdict, { agreementAccepted: isAgreementAccepted(verdict, ledger) })).map(({ source }) => source.id)),
     filePinsBySource: new Map(sources.sources.map((source) => [source.id, new Map(source.files.map((file) => [file.name, file.sha256]))])),
   });
   if (manifest !== null) rejectUnlabelledNodes(manifest, labelTables);

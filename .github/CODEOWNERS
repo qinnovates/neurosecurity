@@ -33,3 +33,8 @@ SECURITY.md @qikevinl
 /src/components/atlas-scene/__tests__/load-anatomy-data.test.ts @qikevinl
 /datalake/scripts/region-resolver.mjs @qikevinl
 /datalake/scripts/__tests__/region-resolver.test.mjs @qikevinl
+/datalake/qif-brain-bci-atlas.json @qikevinl
+/src/pages/atlas/anatomy-index.json.ts @qikevinl
+/src/pages/atlas/anatomy-evidence.json.ts @qikevinl
+/src/scripts/find-anatomy-payload.mjs @qikevinl
+/src/components/atlas-scene/__tests__/find-anatomy-payload.test.ts @qikevinl

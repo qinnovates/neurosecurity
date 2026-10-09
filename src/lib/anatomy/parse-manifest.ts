@@ -107,11 +107,6 @@ function readLibraries(record: Record<string, unknown>, location: FieldLocation)
   return libraries as Record<string, string>;
 }
 
-/** File name -> registry pin, over every source the asset was made from or computed with. */
-function listInputPins(sourceIds: readonly string[], context: ManifestContext): Map<string, string | null> {
-  return new Map(sourceIds.flatMap((sourceId) => [...(context.filePinsBySource.get(sourceId) ?? [])]));
-}
-
 function parseAsset(value: unknown, location: FieldLocation, context: ManifestContext): ManifestAsset {
   const record = readRecord(value, location, { required: ASSET_KEYS });
   const id = readString(record, 'id', location, MAX_TEXT_LENGTH);
@@ -122,6 +117,11 @@ function parseAsset(value: unknown, location: FieldLocation, context: ManifestCo
   const computedWith = readStringList(record, 'computed_with_source_ids', location, MAX_TEXT_LENGTH);
   const strayInput = computedWith.find((sourceId) => !context.statedLicenceBySource.has(sourceId));
   if (strayInput !== undefined) failAt(childOf(location, 'computed_with_source_ids'), `"${strayInput}" is not a source in the registry`, 'Add the source or correct the id.');
+  const unusable = computedWith.find((sourceId) => !context.pipelineUsableSourceIds.has(sourceId));
+  if (unusable !== undefined) {
+    failAt(childOf(location, 'computed_with_source_ids'), `source "${unusable}" may not be used by the pipeline`,
+      'A computed-with source must be buildable, or pipeline-only with a cleared, explicit, shipping verdict and any agreement accepted.');
+  }
   const listedTwice = computedWith.find((sourceId) => sourceIds.includes(sourceId));
   if (listedTwice !== undefined) failAt(childOf(location, 'computed_with_source_ids'), `"${listedTwice}" is also in source_ids`, 'A source either supplies material to the file or is only computed with; list it once.');
   const nodes = readList(record, 'nodes', location).map((node, index) => parseNode(node, itemOf(location, 'nodes', index), sourceIds));
@@ -142,7 +142,7 @@ function parseAsset(value: unknown, location: FieldLocation, context: ManifestCo
     libraries: readLibraries(record, location),
     nodes,
     checks: readList(record, 'checks', location).map((check, index) => parseCheck(check, itemOf(location, 'checks', index))),
-    stage_fingerprints: parseStageFingerprints(record.stage_fingerprints, childOf(location, 'stage_fingerprints'), listInputPins([...sourceIds, ...computedWith], context)),
+    stage_fingerprints: parseStageFingerprints(record.stage_fingerprints, childOf(location, 'stage_fingerprints'), { materialSourceIds: sourceIds, pipelineInputIds: computedWith, filePinsBySource: context.filePinsBySource }),
     position_check: readEnum(record, 'position_check', location, POSITION_CHECKS),
     modification_note: readString(record, 'modification_note', location, MAX_NOTE_LENGTH),
   };
