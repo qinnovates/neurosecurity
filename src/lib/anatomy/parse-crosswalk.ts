@@ -14,7 +14,7 @@ import { rejectCrossRowProblems, subjectKey } from './crosswalk-rules';
 import { parseEvidence } from './evidence';
 import {
   childOf, failAt, itemOf, readBoolean, readEnum, readList, readNullable, readRecord, readString, readStringList,
-  rejectDuplicates, rootOf, type FieldLocation,
+  rejectDuplicates, rootOf, show, type FieldLocation,
 } from './field-readers';
 import { readId, readSchemaVersion } from './format-readers';
 import { crosswalkRowKey } from './row-digest';
@@ -44,7 +44,7 @@ function rejectNameDrift(record: Record<string, unknown>, kind: SubjectKind, sub
   const nameAtDraft = readString(record, 'subject_name_at_draft', location, MAX_NAME_LENGTH);
   const currentName = context.subjectNames[kind].get(subjectId);
   if (nameAtDraft !== currentName) {
-    failAt(childOf(location, 'subject_name_at_draft'), `the row was drafted for "${nameAtDraft}" but ${kind} "${subjectId}" is now named "${String(currentName)}"`,
+    failAt(childOf(location, 'subject_name_at_draft'), `the row was drafted for "${nameAtDraft}" but ${kind} "${subjectId}" is now named "${show(currentName)}"`,
       'The record may mean something else now. Re-draft the row against the current record; do not just copy the new name.');
   }
   return nameAtDraft;
@@ -53,12 +53,18 @@ function rejectNameDrift(record: Record<string, unknown>, kind: SubjectKind, sub
 function readAtlasLabels(record: Record<string, unknown>, location: FieldLocation, context: CrosswalkContext): Pick<CrosswalkRow, 'atlas' | 'atlas_ids'> {
   const atlas = readId(record, 'atlas', location);
   if (!context.delineationBasisByAtlas.has(atlas)) failAt(childOf(location, 'atlas'), `"${atlas}" is not a source in the registry`, 'Add the source to qif-anatomy-sources.json first.');
+  const atlasIds = readStringList(record, 'atlas_ids', location, MAX_LABEL_ID_LENGTH);
+  const isNoneRow = record.extent_match === 'none';
+  if (isNoneRow && atlasIds.length > 0) {
+    return failAt(childOf(location, 'atlas_ids'), 'a row graded "none" says no shape stands for the subject, so it must list no label',
+      'Empty atlas_ids, or grade the row for what the shape is. A row with labels owns them.');
+  }
+  if (isNoneRow) return { atlas, atlas_ids: [] };
   const labelTable = context.labelTables.get(atlas);
   if (labelTable === undefined) {
     return failAt(childOf(location, 'atlas'), `"${atlas}" has no label table yet`, 'A row may only name label ids read from the atlas\'s own table; add the row once the pipeline has written it.');
   }
-  const atlasIds = readStringList(record, 'atlas_ids', location, MAX_LABEL_ID_LENGTH);
-  if (atlasIds.length === 0) return failAt(childOf(location, 'atlas_ids'), 'a row must name at least one label', 'List the label ids, or write a no_geometry record instead.');
+  if (atlasIds.length === 0) return failAt(childOf(location, 'atlas_ids'), 'a row must name at least one label', 'List the label ids, grade the row "none", or write a no_geometry record instead.');
   const unknownLabel = atlasIds.find((labelId) => !labelTable.labels.some((label) => label.id === labelId));
   if (unknownLabel !== undefined) failAt(childOf(location, 'atlas_ids'), `"${unknownLabel}" is not a label of "${atlas}"`, 'Use an id from the atlas\'s label table.');
   rejectDuplicates(atlasIds, childOf(location, 'atlas_ids'), 'label id');

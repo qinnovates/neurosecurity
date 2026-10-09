@@ -10,7 +10,7 @@
       "urls": [
         "https://nist.mni.mcgill.ca/icbm-152-nonlinear-atlases-2009/"
       ],
-      "licence_id": "mni-icbm-notice",
+      "license_id": "mni-icbm-notice",
       "redistribute": true,
       "layers": [
         "outline"
@@ -46,7 +46,7 @@
       "urls": [
         "https://download.alleninstitute.org/informatics-archive/allen_human_reference_atlas_3d_2020/version_1/"
       ],
-      "licence_id": "cc-by-4.0",
+      "license_id": "cc-by-4.0",
       "redistribute": true,
       "layers": [
         "cortical",
@@ -104,7 +104,7 @@
         "https://osf.io/jkzwp/",
         "https://doi.org/10.1038/sdata.2018.63"
       ],
-      "licence_id": "cc-by-4.0",
+      "license_id": "cc-by-4.0",
       "redistribute": true,
       "layers": [
         "deep"
@@ -153,7 +153,7 @@
         "https://doi.org/10.5061/dryad.zw3r228d2",
         "https://zenodo.org/api/records/8161638"
       ],
-      "licence_id": "cc0-1.0",
+      "license_id": "cc0-1.0",
       "redistribute": true,
       "layers": [
         "deep"
@@ -203,7 +203,7 @@
         "https://doi.org/10.5281/zenodo.3942115",
         "https://doi.org/10.1038/s41597-020-00644-6"
       ],
-      "licence_id": "cc-by-4.0",
+      "license_id": "cc-by-4.0",
       "redistribute": true,
       "layers": [
         "deep"
@@ -247,7 +247,7 @@
         "https://doi.org/10.21942/uva.10007840",
         "https://api.figshare.com/v2/articles/10007840"
       ],
-      "licence_id": "cc-by-4.0",
+      "license_id": "cc-by-4.0",
       "redistribute": true,
       "layers": [
         "deep"
@@ -288,7 +288,7 @@
       "urls": [
         "https://github.com/sappelhoff/eeg_positions"
       ],
-      "licence_id": "mit",
+      "license_id": "mit",
       "redistribute": true,
       "layers": [],
       "delineated_in": "unit sphere",
@@ -331,7 +331,7 @@
         "https://github.com/data-others/atlas/releases/tag/hcp1065",
         "https://doi.org/10.1038/s41467-022-32595-4"
       ],
-      "licence_id": "cc-by-sa-4.0",
+      "license_id": "cc-by-sa-4.0",
       "redistribute": true,
       "layers": [
         "tracts"
@@ -368,7 +368,7 @@
         "https://github.com/ThomasYeoLab/CBIG/tree/master/stable_projects/brain_parcellation/Yeo2011_fcMRI_clustering",
         "https://doi.org/10.1152/jn.00338.2011"
       ],
-      "licence_id": "mit",
+      "license_id": "mit",
       "redistribute": true,
       "layers": [
         "networks"
@@ -410,7 +410,7 @@
         "https://github.com/ThomasYeoLab/CBIG/tree/master/stable_projects/brain_parcellation/Schaefer2018_LocalGlobal",
         "https://doi.org/10.1093/cercor/bhx179"
       ],
-      "licence_id": "mit",
+      "license_id": "mit",
       "redistribute": true,
       "layers": [
         "networks"
@@ -453,7 +453,7 @@
         "https://api.figshare.com/v2/articles/24243835",
         "https://doi.org/10.1038/s41586-025-09708-2"
       ],
-      "licence_id": "cc0-1.0",
+      "license_id": "cc0-1.0",
       "redistribute": true,
       "layers": [],
       "delineated_in": "not read",
@@ -493,7 +493,7 @@
         "https://doi.org/10.21942/uva.27291714",
         "https://api.figshare.com/v2/articles/27291714"
       ],
-      "licence_id": "cc-by-4.0",
+      "license_id": "cc-by-4.0",
       "redistribute": true,
       "layers": [],
       "delineated_in": "not read",
@@ -534,7 +534,7 @@
         "https://balsa.wustl.edu/reference/pkXDZ",
         "https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms"
       ],
-      "licence_id": "hcp-data-use-terms",
+      "license_id": "hcp-data-use-terms",
       "redistribute": true,
       "layers": [],
       "delineated_in": "HCP subjects",
@@ -573,7 +573,7 @@
       "urls": [
         "https://github.com/freesurfer/freesurfer/blob/dev/LICENSE.txt"
       ],
-      "licence_id": "freesurfer-sla-1.0",
+      "license_id": "freesurfer-sla-1.0",
       "redistribute": true,
       "layers": [],
       "delineated_in": "FreeSurfer average subject",
@@ -598,7 +598,7 @@
         "https://github.com/templateflow/tpl-MNI152NLin2009cAsym",
         "https://github.com/templateflow/tpl-MNI152NLin6Asym"
       ],
-      "licence_id": "none-stated",
+      "license_id": "none-stated",
       "redistribute": false,
       "layers": [],
       "delineated_in": "not applicable: transform files",

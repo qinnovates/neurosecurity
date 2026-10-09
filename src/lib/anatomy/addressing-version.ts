@@ -6,7 +6,7 @@
 
 import { isRecord } from '@/lib/threat-model/guards';
 import { AnatomyDataError } from './errors';
-import { childOf, failAt, readList, type FieldLocation } from './field-readers';
+import { childOf, failAt, readList, show, type FieldLocation } from './field-readers';
 
 /**
  * The addressing version of qif-brain-bci-atlas.json while the file declares
@@ -25,7 +25,7 @@ export function readDeclaredAddressingVersion(atlas: unknown): number | undefine
   if (!Object.hasOwn(metadata, VERSION_KEY)) return undefined;
   const declared = metadata[VERSION_KEY];
   if (typeof declared !== 'number' || !Number.isInteger(declared) || declared < FIRST_VERSION) {
-    throw new AnatomyDataError(ATLAS_FILE, `_metadata.${VERSION_KEY}`, `"${String(declared)}" is not an addressing version`, 'Write a whole number of at least 1.');
+    throw new AnatomyDataError(ATLAS_FILE, `_metadata.${VERSION_KEY}`, `"${show(declared)}" is not an addressing version`, 'Write a whole number of at least 1.');
   }
   return declared;
 }
@@ -42,9 +42,9 @@ export function readValidForAddressing(record: Record<string, unknown>, location
     return failAt(fieldLocation, 'a row must be valid for at least one addressing version', 'List the versions it holds for, for example [1].');
   }
   const badVersion = versions.find((version) => typeof version !== 'number' || !Number.isInteger(version) || version < FIRST_VERSION);
-  if (badVersion !== undefined) return failAt(fieldLocation, `"${String(badVersion)}" is not an addressing version`, 'Write whole numbers of at least 1.');
+  if (badVersion !== undefined) return failAt(fieldLocation, `"${show(badVersion)}" is not an addressing version`, 'Write whole numbers of at least 1.');
   const repeated = versions.find((version, index) => versions.indexOf(version) !== index);
-  if (repeated !== undefined) return failAt(fieldLocation, `version ${String(repeated)} appears twice`, 'List each version once.');
+  if (repeated !== undefined) return failAt(fieldLocation, `version ${show(repeated)} appears twice`, 'List each version once.');
   return versions as number[];
 }
 

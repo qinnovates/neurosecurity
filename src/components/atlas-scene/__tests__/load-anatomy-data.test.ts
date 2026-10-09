@@ -16,7 +16,7 @@ const EXPECTED_NO_GEOMETRY_REGION_IDS = ['cervical_cord', 'thoracic_cord', 'lumb
 const EXPECTED_STRUCTURE_COUNT = 0;
 const INDEX_BUDGET_BYTES = 150_000;
 /** An import (static or dynamic) of one of the anatomy data files. Parsers name the files in messages; that is not an import. */
-const ANATOMY_DATA_FILE_PATTERN = /(from|import\()\s*['"][^'"]*(qif-anatomy-[a-z-]+|qif-technique-regions|qif-device-geometry)\.json['"]/;
+const ANATOMY_DATA_FILE_PATTERN = /(from|import\()\s*['"][^'"]*qif-anatomy-[a-z-]+\.json['"]/;
 const LOADER_IMPORT_PATTERN = /(from|import\()\s*['"][^'"]*load-anatomy-data['"]/;
 const LOADER_PATH = 'src/components/atlas-scene/load-anatomy-data.ts';
 const ENDPOINT_PATHS = ['src/pages/atlas/anatomy-evidence.json.ts', 'src/pages/atlas/anatomy-index.json.ts'];
@@ -89,7 +89,7 @@ describe('anatomy index built from the seed files (guards)', () => {
     ];
     expect(modes.length).toBeGreaterThan(2);
     const wronglyFilled = index.structures.flatMap((structure) => modes
-      .filter((mode) => structure.owners.length > 1 && style(structure, structure.owners, mode).mark === 'solid' && structure.owners.some((owner) => owner.extent_match === 'contained'))
+      .filter((mode) => structure.owners.length > 1 && style(structure.key, mode).mark === 'solid' && structure.owners.some((owner) => owner.extent_match === 'contained'))
       .map((mode) => `${structure.key} in ${mode.kind}`));
     expect(wronglyFilled).toEqual([]);
     expect(index.structures).toHaveLength(EXPECTED_STRUCTURE_COUNT);

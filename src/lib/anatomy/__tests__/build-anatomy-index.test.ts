@@ -2,11 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { isAgreementAccepted, parseAnatomyFiles, type RawAnatomyFiles } from '../anatomy-inputs';
 import type { AnatomyIndex, IndexStructure, IndexSubject } from '../anatomy-index-types';
 import { buildAnatomyBundle, type AnatomyBundle } from '../build-anatomy-index';
+import { buildOwnerMap, type ReviewedRow } from '../build-owner-map';
 import type { AnatomyEvidence } from '../build-anatomy-evidence';
 import { parseReviewLedger, type LedgerEntry } from '../parse-review-ledger';
 import { sha256Hex } from '../row-digest';
 import { ANATOMY_INDEX_STATUS } from '../status-sentences';
 import { FIXTURE_ATLAS_ID, FIXTURE_SHA256, buildVerdict } from './anatomy-fixtures';
+import { buildRow } from './crosswalk-fixtures';
 import { FIXTURE_ASSET_ID, buildAsset, buildManifest } from './manifest-fixtures';
 import { PATHWAY_TEXT, TECHNIQUE_ID, TRACTS_SOURCE_ID, buildLedgerFile, buildRawFiles } from './raw-files-fixture';
 
@@ -28,8 +30,8 @@ describe('buildAnatomyBundle: owners', () => {
 
   it('gives each structure its full owner set, including subjects that reach it through a declared containment', () => {
     expect(ownerIds(structureOf(index, '7'))).toEqual(['stn:row']);
-    expect(ownerIds(structureOf(index, '8'))).toEqual(['thalamus:row', 'vim:declared_child']);
-    expect(ownerIds(structureOf(index, '9'))).toEqual(['vim:row', 'thalamus:declared_parent']);
+    expect(ownerIds(structureOf(index, '8'))).toEqual(['thalamus:row', 'vim:row_subject_contains_owner']);
+    expect(ownerIds(structureOf(index, '9'))).toEqual(['vim:row', 'thalamus:owner_contains_row_subject']);
     expect(ownerIds(structureOf(index, '10'))).toEqual(['m1:row', 'pmc:row']);
   });
 
@@ -94,7 +96,6 @@ describe('buildAnatomyBundle: technique links', () => {
     const staleLink = stale.techniques[0].links[0];
     expect(staleLink).toMatchObject({ quote_state: 'quote_missing', check_status: 'unchecked', lit: false });
     expect(stale.stale_evidence_keys).toContain(`${TECHNIQUE_ID}:stn`);
-    expect(linkOf('stn')).toMatchObject({ quote_state: 'quote_found', check_status: 'partial' });
     expect(PATHWAY_TEXT).toContain('stn');
   });
 
@@ -142,6 +143,35 @@ describe('buildAnatomyBundle: review state', () => {
     expect(structureOf(build({ reviewLedger: ledger, manifest }).index, '7').owners[0].review_state).toEqual(UNREVIEWED_MARK);
   });
 
+  it('reads an unreviewed row or link as unchecked whatever its file claims, and shows the claim only once a review covers it', () => {
+    const first = build();
+    const linkKey = `${TECHNIQUE_ID}:stn`;
+    const linkStatus = (bundle: AnatomyBundle): string => bundle.index.techniques[0].links[0].check_status;
+    const evidenceStatus = (bundle: AnatomyBundle): string | undefined =>
+      (JSON.parse(bundle.evidenceJson) as AnatomyEvidence).technique_links.find((link) => link.key === linkKey)?.evidence.check_status;
+    expect([linkStatus(first), evidenceStatus(first)]).toEqual(['unchecked', 'unchecked']);
+    const reviewed = build({ reviewLedger: buildLedgerFile([reviewEntry(first, linkKey)]) });
+    expect([linkStatus(reviewed), evidenceStatus(reviewed)]).toEqual(['partial', 'partial']);
+    const crosswalk = buildRawFiles().crosswalk as { rows: Array<{ subject_id: string; evidence: object }> };
+    const claimingRows = crosswalk.rows.map((row) => (row.subject_id === 'stn' ? { ...row, evidence: { ...row.evidence, check_status: 'supports' } } : row));
+    expect(structureOf(build({ crosswalk: { ...crosswalk, rows: claimingRows } }).index, '7').check_status).toBe('unchecked');
+  });
+
+  it('un-reviews the rows of both subjects when a containment between them is added or removed', () => {
+    const first = build();
+    const thalamusKey = `region:thalamus:${FIXTURE_ATLAS_ID}:`;
+    const vimKey = `region:vim:${FIXTURE_ATLAS_ID}:`;
+    const ledger = buildLedgerFile([reviewEntry(first, thalamusKey), reviewEntry(first, vimKey), reviewEntry(first, STN_ROW_KEY)]);
+    const states = (index: AnatomyIndex): string[] => ['8', '9', '7'].map((labelId) => structureOf(index, labelId).owners[0].review_state.state);
+    expect(states(build({ reviewLedger: ledger }).index)).toEqual(['reviewed', 'reviewed', 'reviewed']);
+    const crosswalk = buildRawFiles().crosswalk as object;
+    const withoutContainment = build({ reviewLedger: ledger, crosswalk: { ...crosswalk, contains: [] } }).index;
+    expect(states(withoutContainment)).toEqual(['ai_drafted_unreviewed', 'ai_drafted_unreviewed', 'reviewed']);
+    const withNewContainment = build({ reviewLedger: ledger, crosswalk: { ...crosswalk, contains: [{ parent: 'thalamus', child: 'vim' }, { parent: 'thalamus', child: 'stn' }] } }).index;
+    expect(states(withNewContainment)).toEqual(['ai_drafted_unreviewed', 'reviewed', 'ai_drafted_unreviewed']);
+    expect(structureOf(withNewContainment, '7').review_state.state).toBe('ai_drafted_unreviewed');
+  });
+
   it('gives a structure the worst state among its owners', () => {
     const first = build();
     const ledger = buildLedgerFile([reviewEntry(first, `region:m1:${FIXTURE_ATLAS_ID}:`, 'neuroanatomist-1')]);
@@ -165,6 +195,26 @@ describe('buildAnatomyBundle: review state', () => {
     expect(build({ reviewLedger: buildLedgerFile([signOff]) }).index.assets[0].visual_check).toEqual({ state: 'signed', role: 'owner', reviewed_on: '2026-10-09' });
     const stale = { ...signOff, digest: 'd'.repeat(64) };
     expect(build({ reviewLedger: buildLedgerFile([stale]) }).index.assets[0].visual_check.state).toBe('not_done');
+  });
+});
+
+describe('buildOwnerMap', () => {
+  const reviewed = (subjectKind: 'region' | 'pathway', subjectId: string): ReviewedRow => ({
+    row: buildRow({ subject_kind: subjectKind, subject_id: subjectId, extent_match: 'approximate' }),
+    key: `${subjectKind}:${subjectId}`, digest: FIXTURE_SHA256, review_state: { state: 'ai_drafted_unreviewed', mark: 'AI-drafted, unreviewed' }, check_status: 'unchecked',
+  });
+
+  it('keeps a region and a pathway that share an id as two owners', () => {
+    const owners = buildOwnerMap([reviewed('region', 'stn'), reviewed('pathway', 'stn')], []).get(`${FIXTURE_ATLAS_ID}:7`);
+    expect(owners?.map((owner) => `${owner.subject_kind}:${owner.subject_id}`)).toEqual(['region:stn', 'pathway:stn']);
+  });
+
+  it('adds containment relatives for region rows only, and names which way the containment runs', () => {
+    const contains = [{ parent: 'thalamus', child: 'stn' }];
+    const owners = buildOwnerMap([reviewed('pathway', 'stn')], contains).get(`${FIXTURE_ATLAS_ID}:7`);
+    expect(owners).toHaveLength(1);
+    const regionOwners = buildOwnerMap([reviewed('region', 'stn')], contains).get(`${FIXTURE_ATLAS_ID}:7`);
+    expect(regionOwners?.map((owner) => [owner.subject_id, owner.via, owner.extent_match])).toEqual([['stn', 'row', 'approximate'], ['thalamus', 'owner_contains_row_subject', null]]);
   });
 });
 

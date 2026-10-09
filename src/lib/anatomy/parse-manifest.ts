@@ -7,8 +7,8 @@
 
 import { isRecord } from '@/lib/threat-model/guards';
 import {
-  childOf, failAt, itemOf, readEnum, readInteger, readList, readRecord, readString, readStringList, rejectDuplicates, rootOf,
-  type FieldLocation,
+  childOf, failAt, itemOf, readEnum, readInteger, readList, readNullable, readRecord, readString, readStringList, rejectDuplicates, rootOf,
+  show, type FieldLocation,
 } from './field-readers';
 import { readSchemaVersion, readSha256 } from './format-readers';
 import { LICENCE_FACTS } from './licence-rules';
@@ -28,8 +28,8 @@ const HASH_PREFIX_LENGTH = 12;
 const MAX_TEXT_LENGTH = 300;
 const ASSET_ID_PATTERN = /^[a-z0-9][a-z0-9_-]*$/;
 const ASSET_KEYS = [
-  'id', 'path', 'kind', 'layer', 'bytes', 'sha256', 'input_fingerprint', 'source_ids', 'computed_with_source_ids', 'licence_id',
-  'stated_licence_id', 'route', 'delineation', 'libraries', 'nodes', 'checks', 'stage_fingerprints', 'position_check',
+  'id', 'path', 'kind', 'layer', 'bytes', 'sha256', 'input_fingerprint', 'source_ids', 'computed_with_source_ids', 'license_id',
+  'stated_license_id', 'route', 'delineation', 'libraries', 'nodes', 'checks', 'stage_fingerprints', 'position_check',
 ] as const;
 
 function readAssetPath(record: Record<string, unknown>, location: FieldLocation, sha256: string, licenceId: LicenceId): string {
@@ -44,7 +44,7 @@ function readAssetPath(record: Record<string, unknown>, location: FieldLocation,
   }
   const requiredFolder = LICENCE_FACTS[licenceId].output_folder;
   if (requiredFolder === null || !path.startsWith(`${requiredFolder}/`)) {
-    return failAt(pathLocation, `an asset under "${licenceId}" belongs in "${String(requiredFolder)}/"`, 'Move the file, or correct the licence; share-alike material is kept apart.');
+    return failAt(pathLocation, `an asset under "${licenceId}" belongs in "${show(requiredFolder)}/"`, 'Move the file, or correct the licence; share-alike material is kept apart.');
   }
   return path;
 }
@@ -66,20 +66,20 @@ function readSourceIds(record: Record<string, unknown>, location: FieldLocation,
 
 function readLicenceIds(
   record: Record<string, unknown>, location: FieldLocation, sourceIds: readonly string[], context: ManifestContext,
-): Pick<ManifestAsset, 'licence_id' | 'stated_licence_id'> {
-  const licenceId = readEnum(record, 'licence_id', location, LICENCE_IDS);
-  const statedLicenceId = readEnum(record, 'stated_licence_id', location, LICENCE_IDS);
+): Pick<ManifestAsset, 'license_id' | 'stated_license_id'> {
+  const licenceId = readEnum(record, 'license_id', location, LICENCE_IDS);
+  const statedLicenceId = readEnum(record, 'stated_license_id', location, LICENCE_IDS);
   for (const sourceId of sourceIds) {
     const effective = context.effectiveLicenceBySource.get(sourceId);
     if (effective !== licenceId) {
-      return failAt(childOf(location, 'licence_id'), `"${licenceId}" is not the licence "${String(effective)}" that source "${sourceId}" is handled under`,
+      return failAt(childOf(location, 'license_id'), `"${licenceId}" is not the licence "${show(effective)}" that source "${sourceId}" is handled under`,
         'The licence is derived from the registry and the verdict; rebuild the manifest. One asset holds material under one licence only.');
     }
     if (context.statedLicenceBySource.get(sourceId) !== statedLicenceId) {
-      return failAt(childOf(location, 'stated_licence_id'), `"${statedLicenceId}" is not the licence source "${sourceId}" states`, 'Rebuild the manifest from the registry.');
+      return failAt(childOf(location, 'stated_license_id'), `"${statedLicenceId}" is not the licence source "${sourceId}" states`, 'Rebuild the manifest from the registry.');
     }
   }
-  return { licence_id: licenceId, stated_licence_id: statedLicenceId };
+  return { license_id: licenceId, stated_license_id: statedLicenceId };
 }
 
 function parseRouteStep(value: unknown, location: FieldLocation): ManifestRouteStep {
@@ -105,9 +105,12 @@ function readLibraries(record: Record<string, unknown>, location: FieldLocation)
   return libraries as Record<string, string>;
 }
 
-function readStageFingerprints(record: Record<string, unknown>, location: FieldLocation): Record<PipelineStage, unknown> {
-  const fingerprints = readRecord(record.stage_fingerprints, childOf(location, 'stage_fingerprints'), { required: PIPELINE_STAGES });
-  return fingerprints as Record<PipelineStage, unknown>;
+/** One fingerprint per pipeline stage: a digest, or null for a stage the asset did not go through. */
+function readStageFingerprints(record: Record<string, unknown>, location: FieldLocation): Record<PipelineStage, string | null> {
+  const fingerprintsLocation = childOf(location, 'stage_fingerprints');
+  const fingerprints = readRecord(record.stage_fingerprints, fingerprintsLocation, { required: PIPELINE_STAGES });
+  const readStage = (stage: PipelineStage): string | null => readNullable(fingerprints, stage, () => readSha256(fingerprints, stage, fingerprintsLocation));
+  return { fetch: readStage('fetch'), register: readStage('register'), resample: readStage('resample'), mesh: readStage('mesh'), write: readStage('write') };
 }
 
 function parseAsset(value: unknown, location: FieldLocation, context: ManifestContext): ManifestAsset {
@@ -124,7 +127,7 @@ function parseAsset(value: unknown, location: FieldLocation, context: ManifestCo
   rejectDuplicates(nodes.map((node) => `${node.extras.atlas}:${node.extras.label_id}:${node.extras.hemisphere}`), childOf(location, 'nodes'), 'node');
   return {
     id,
-    path: readAssetPath(record, location, sha256, licenceIds.licence_id),
+    path: readAssetPath(record, location, sha256, licenceIds.license_id),
     kind: readEnum(record, 'kind', location, ASSET_KINDS),
     layer: readEnum(record, 'layer', location, LAYER_IDS),
     bytes: readInteger(record, 'bytes', location, 1),
@@ -150,7 +153,7 @@ export function parseManifest(raw: unknown, context: ManifestContext): AssetMani
   });
   const schemaVersion = readSchemaVersion(record, root, MANIFEST_SCHEMA_VERSION);
   if (record.template_space !== context.declaredSpace) {
-    failAt(childOf(root, 'template_space'), `"${String(record.template_space)}" is not the declared space "${context.declaredSpace}"`, 'Rebuild the assets in the declared space.');
+    failAt(childOf(root, 'template_space'), `"${show(record.template_space)}" is not the declared space "${context.declaredSpace}"`, 'Rebuild the assets in the declared space.');
   }
   const assets = readList(record, 'assets', root).map((asset, index) => parseAsset(asset, itemOf(root, 'assets', index), context));
   rejectDuplicates(assets.map((asset) => asset.id), childOf(root, 'assets'), 'asset id');

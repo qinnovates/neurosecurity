@@ -19,6 +19,18 @@ export interface RecordKeys {
 }
 
 const ROOT_PATH = '(top level)';
+const MAX_SHOWN_LENGTH = 60;
+/** The largest magnitude any number in an anatomy file may have. Nothing measured in a brain atlas comes near it. */
+export const MAX_NUMBER = 1e9;
+/** Control characters and the Unicode marks that reorder or hide text. None belongs in a one-line data field. */
+const UNSAFE_CHARACTER_PATTERN = /[\u0000-\u001F\u007F-\u009F\u200B-\u200F\u2028-\u202E\u2060-\u2069\uFEFF]/;
+
+/** A short, safe rendering of any JSON value for an error message. Never throws, whatever the value holds. */
+export function show(value: unknown): string {
+  const text = typeof value === 'string' ? value : JSON.stringify(value) ?? typeof value;
+  const visible = text.replace(new RegExp(UNSAFE_CHARACTER_PATTERN, 'g'), '?');
+  return visible.length > MAX_SHOWN_LENGTH ? `${visible.slice(0, MAX_SHOWN_LENGTH)}...` : visible;
+}
 
 export function rootOf(dataFile: string): FieldLocation {
   return { dataFile, path: ROOT_PATH };
@@ -49,59 +61,77 @@ export function readRecord(value: unknown, location: FieldLocation, keys: Record
   return value;
 }
 
-export function readString(record: Record<string, unknown>, key: string, location: FieldLocation, maxLength: number): string {
-  const value = record[key];
+/** Non-empty text of at most `maxLength` characters with no control character or hidden direction mark. */
+export function requireText(value: unknown, location: FieldLocation, maxLength: number): string {
   if (typeof value !== 'string' || value.trim().length === 0 || value.length > maxLength) {
-    return failAt(childOf(location, key), 'expected a non-empty string', `Write text of at most ${maxLength} characters.`);
+    return failAt(location, 'expected a non-empty string', `Write text of at most ${maxLength} characters.`);
+  }
+  if (UNSAFE_CHARACTER_PATTERN.test(value)) {
+    return failAt(location, 'the text holds a control character or a hidden direction mark', 'Remove it; write the text on one line in plain characters.');
   }
   return value;
+}
+
+export function readString(record: Record<string, unknown>, key: string, location: FieldLocation, maxLength: number): string {
+  return requireText(record[key], childOf(location, key), maxLength);
+}
+
+export function requireEnum<T extends string>(value: unknown, location: FieldLocation, allowed: readonly T[]): T {
+  if (typeof value !== 'string' || !(allowed as readonly string[]).includes(value)) {
+    return failAt(location, `"${show(value)}" is not an allowed value`, `Use one of: ${allowed.join(', ')}.`);
+  }
+  return value as T;
 }
 
 export function readEnum<T extends string>(
   record: Record<string, unknown>, key: string, location: FieldLocation, allowed: readonly T[],
 ): T {
-  const value = record[key];
-  if (typeof value !== 'string' || !(allowed as readonly string[]).includes(value)) {
-    return failAt(childOf(location, key), `"${String(value)}" is not an allowed value`, `Use one of: ${allowed.join(', ')}.`);
-  }
-  return value as T;
+  return requireEnum(record[key], childOf(location, key), allowed);
+}
+
+export function requireBoolean(value: unknown, location: FieldLocation): boolean {
+  if (typeof value !== 'boolean') return failAt(location, 'expected true or false', 'Write a JSON boolean.');
+  return value;
 }
 
 export function readBoolean(record: Record<string, unknown>, key: string, location: FieldLocation): boolean {
-  const value = record[key];
-  if (typeof value !== 'boolean') return failAt(childOf(location, key), 'expected true or false', 'Write a JSON boolean.');
+  return requireBoolean(record[key], childOf(location, key));
+}
+
+export function requireNumber(value: unknown, location: FieldLocation, minimum: number): number {
+  if (typeof value !== 'number' || !Number.isFinite(value) || value < minimum || Math.abs(value) > MAX_NUMBER) {
+    return failAt(location, 'expected a finite number in range', `Write a number of at least ${minimum} and at most ${MAX_NUMBER}.`);
+  }
   return value;
 }
 
 export function readNumber(record: Record<string, unknown>, key: string, location: FieldLocation, minimum: number): number {
-  const value = record[key];
-  if (typeof value !== 'number' || !Number.isFinite(value) || value < minimum) {
-    return failAt(childOf(location, key), 'expected a finite number', `Write a number of at least ${minimum}.`);
-  }
-  return value;
+  return requireNumber(record[key], childOf(location, key), minimum);
+}
+
+export function requireInteger(value: unknown, location: FieldLocation, minimum: number): number {
+  const number = requireNumber(value, location, minimum);
+  if (!Number.isInteger(number)) return failAt(location, 'expected a whole number', 'Remove the fraction.');
+  return number;
 }
 
 export function readInteger(record: Record<string, unknown>, key: string, location: FieldLocation, minimum: number): number {
-  const value = readNumber(record, key, location, minimum);
-  if (!Number.isInteger(value)) return failAt(childOf(location, key), 'expected a whole number', 'Remove the fraction.');
+  return requireInteger(record[key], childOf(location, key), minimum);
+}
+
+export function requireList(value: unknown, location: FieldLocation): unknown[] {
+  if (!Array.isArray(value)) return failAt(location, 'expected a list', 'Write a JSON array.');
   return value;
 }
 
 export function readList(record: Record<string, unknown>, key: string, location: FieldLocation): unknown[] {
-  const value = record[key];
-  if (!Array.isArray(value)) return failAt(childOf(location, key), 'expected a list', 'Write a JSON array.');
-  return value;
+  return requireList(record[key], childOf(location, key));
 }
 
 export function readStringList(
   record: Record<string, unknown>, key: string, location: FieldLocation, maxLength: number,
 ): string[] {
-  const list = readList(record, key, location);
-  const badIndex = list.findIndex((item) => typeof item !== 'string' || item.trim().length === 0 || item.length > maxLength);
-  if (badIndex !== -1) {
-    return failAt(itemOf(location, key, badIndex), 'expected a non-empty string', `Write text of at most ${maxLength} characters.`);
-  }
-  return list as string[];
+  return readList(record, key, location).map((item, index) => requireText(item, itemOf(location, key, index), maxLength));
 }
 
 /** Reads `key` with `read` unless it is null. A missing key is not null: the caller's readRecord lists it as required. */

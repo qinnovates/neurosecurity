@@ -19,9 +19,10 @@ const BLOCKER_SENTENCES: Readonly<Record<UnbuildableReason, string>> = {
   not_cleared: 'The source is not cleared.',
   verdict_not_ship: 'The licence verdict does not allow shipping.',
   grant_not_explicit: 'The licence grant rests on interpretation, not on the publisher\'s words.',
-  licence_not_commercial: 'The licence does not grant commercial use.',
+  license_not_commercial: 'The licence does not grant commercial use.',
   not_redistributable: 'The source may be used to compute but not be redistributed.',
   agreement_not_accepted: 'The source is behind an access agreement the owner has not accepted.',
+  no_output_folder: 'Nothing under this licence is written into the served assets.',
   route_not_settled: 'How the source reaches the template space is not settled.',
 };
 
@@ -43,8 +44,8 @@ export function buildSources(data: AnatomyData): IndexSource[] {
   return listJudgedSources(data).map(({ source, verdict, buildability }) => ({
     id: source.id,
     name: source.name,
-    licence_id: data.effectiveLicenceBySource.get(source.id) ?? source.licence_id,
-    stated_licence_id: source.licence_id,
+    license_id: data.effectiveLicenceBySource.get(source.id) ?? source.license_id,
+    stated_license_id: source.license_id,
     verdict: verdict.verdict,
     grant: verdict.grant,
     route_kind: source.route.kind,

@@ -21,8 +21,8 @@ describe('parseSources', () => {
   });
 
   it('rejects a licence id outside the closed list', () => {
-    const source = { ...buildSource(), licence_id: 'cc-by-nc-4.0' };
-    expect(() => parseSources(buildSourcesFile([source as never]))).toThrow(/sources\[0\]\.licence_id: "cc-by-nc-4\.0" is not an allowed value/);
+    const source = { ...buildSource(), license_id: 'cc-by-nc-4.0' };
+    expect(() => parseSources(buildSourcesFile([source as never]))).toThrow(/sources\[0\]\.license_id: "cc-by-nc-4\.0" is not an allowed value/);
   });
 
   it('rejects a hand-typed licence fact', () => {
@@ -57,6 +57,22 @@ describe('parseSources', () => {
     expect(() => parseSources(buildSourcesFile([buildSource({ files: [badPin] })]))).toThrow(/files\[0\]\.sha256/);
     const pinWithoutOrigin = { ...badPin, sha256: FIXTURE_SHA256, bytes: 10 };
     expect(() => parseSources(buildSourcesFile([buildSource({ files: [pinWithoutOrigin] })]))).toThrow(/files\[0\]\.digest_origin: a pinned file must say where its digest came from/);
+  });
+
+  it('rejects the reserved id "no_geometry" as a source id', () => {
+    expect(() => parseSources(buildSourcesFile([buildSource({ id: 'no_geometry' })]))).toThrow(/"no_geometry" cannot be a source id/);
+  });
+
+  it('rejects control characters, hidden direction marks and absurd numbers', () => {
+    expect(() => parseSources(buildSourcesFile([buildSource({ name: 'Fixture\u202Eatlas' })]))).toThrow(/sources\[0\]\.name: the text holds a control character or a hidden direction mark/);
+    expect(() => parseSources(buildSourcesFile([buildSource({ required_text: ['line one\nline two'] })]))).toThrow(/required_text\[0\]: the text holds a control character/);
+    expect(() => parseSources(buildSourcesFile([buildSource({ delineation: { basis: 'manual_mri', subjects: 1e15 } })]))).toThrow(/delineation\.subjects: expected a finite number in range/);
+  });
+
+  it('reports an object where a word is expected with the typed error, whatever the object holds', () => {
+    const source = { ...buildSource(), license_id: { toString: 1 } };
+    expect(() => parseSources(buildSourcesFile([source as never]))).toThrow(AnatomyDataError);
+    expect(() => parseSources(buildSourcesFile([source as never]))).toThrow(/license_id: "\{"toString":1\}" is not an allowed value/);
   });
 
   it('rejects a band key anywhere in the file', () => {
@@ -99,8 +115,24 @@ describe('parseVerdicts', () => {
       .toThrow(/clearance\.unlocks_when: an uncleared source must say what would clear it/);
   });
 
+  it('rejects a verifier recorded as a person: no file edit may claim a human read a licence', () => {
+    const file = { ...buildVerdictsFile(), verifiers: [{ id: 'ai-pass-1', kind: 'human' }] };
+    expect(() => parseVerdicts(file, parseSources(buildSourcesFile()))).toThrow(/verifiers\[0\]\.kind: "human" is not an allowed value/);
+  });
+
+  it('rejects a verdict under an agreement-bound licence that records no agreement', () => {
+    const sources = parseSources(buildSourcesFile([buildSource({ license_id: 'hcp-data-use-terms' })]));
+    expect(() => parseVerdicts(buildVerdictsFile(), sources))
+      .toThrow(/access_agreement: the licence "hcp-data-use-terms" binds by agreement, so the verdict must record the agreement/);
+    expect(() => parseVerdicts(buildVerdictsFile([buildVerdict({ treat_as: 'freesurfer-sla-1.0' })]), parseSources(buildSourcesFile()))).toThrow(/binds by agreement/);
+  });
+
+  it('rejects a read date in the future', () => {
+    expect(() => parseVerdicts(buildVerdictsFile([buildVerdict({ read_on: '2999-01-01' })]), parseSources(buildSourcesFile()))).toThrow(/read_on: "2999-01-01" is in the future/);
+  });
+
   it('rejects treat_as that is looser than the stated licence', () => {
-    const sources = parseSources(buildSourcesFile([buildSource({ licence_id: 'cc-by-sa-4.0' })]));
+    const sources = parseSources(buildSourcesFile([buildSource({ license_id: 'cc-by-sa-4.0' })]));
     expect(() => parseVerdicts(buildVerdictsFile([buildVerdict({ treat_as: 'cc-by-4.0' })]), sources))
       .toThrow(/treat_as: "cc-by-4\.0" is not stricter than the stated licence "cc-by-sa-4\.0"/);
   });

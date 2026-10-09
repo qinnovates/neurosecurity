@@ -19,7 +19,7 @@ export function buildSource(overrides: Partial<AnatomySource> = {}): AnatomySour
     name: 'Fixture atlas',
     attribution_text: 'Fixture authors (2020).',
     urls: ['https://example.org/fixture'],
-    licence_id: 'cc-by-4.0',
+    license_id: 'cc-by-4.0',
     redistribute: true,
     layers: ['deep'],
     delineated_in: 'its own template',
@@ -39,7 +39,7 @@ export function buildSourcesFile(sources: AnatomySource[] = [buildSource()]): Re
 export function buildVerdict(overrides: Partial<LicenceVerdict> = {}): LicenceVerdict {
   return {
     source_id: FIXTURE_ATLAS_ID,
-    verdict: 'SHIP',
+    verdict: 'ship',
     grant: 'explicit',
     treat_as: null,
     terms_url: 'https://example.org/licence',

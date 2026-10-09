@@ -103,7 +103,7 @@ export function buildAssets(data: AnatomyData): IndexAsset[] {
     sha256: asset.sha256,
     kind: asset.kind,
     layer: asset.layer,
-    licence_id: asset.licence_id,
+    license_id: asset.license_id,
     source_ids: asset.source_ids,
     position_check: asset.position_check,
     visual_check: describeVisualCheck(data, asset.id, asset.sha256),

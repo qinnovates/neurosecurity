@@ -30,6 +30,6 @@ All anatomy content here is AI-drafted and unreviewed, and licence readings were
 - `qif-anatomy-sources.json` -- upstream atlas registry: stated licence, files, route to the template space
 - `qif-anatomy-verdicts.json` -- licence verdict and clearance record per source. A source builds only if `assessBuildability` in `src/lib/anatomy/licence-rules.ts` says so
 - `qif-anatomy-crosswalk.json` -- QIF region, pathway and network ids to atlas label ids, and `no_geometry` records. Rows store no band and no review field
-- `qif-technique-regions.json` -- per technique, the catalog's own words for brain structures. Never store what a term resolves to
+- `qif-anatomy-technique-regions.json` -- per technique, the catalog's own words for brain structures. Never store what a term resolves to
 - `qif-anatomy-review-ledger.json` -- the only record of a review. **Only the repository owner edits it; an agent never writes this file.** An entry counts only while its digest matches; adding one also needs `REVIEWED_ENTRY_COUNTS` in `src/lib/anatomy/review-state.ts` changed
-- `qif-device-geometry.json` -- scalp fiducials and lead dimensions with their sources
+- `qif-anatomy-device-geometry.json` -- scalp fiducials and lead dimensions with their sources

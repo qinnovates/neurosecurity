@@ -34,6 +34,9 @@ export type Drafter = typeof DRAFTERS[number];
 export const HEMISPHERES = ['left', 'right', 'both'] as const;
 export type Hemisphere = typeof HEMISPHERES[number];
 
+/** Stands in for the atlas in the ledger key of a no_geometry record. No source may take it as an id. */
+export const NO_GEOMETRY_TOKEN = 'no_geometry';
+
 /** The value a part's `expected_v2_id` holds until someone decides what the part becomes. */
 export const UNDECIDED_PART = 'undecided';
 

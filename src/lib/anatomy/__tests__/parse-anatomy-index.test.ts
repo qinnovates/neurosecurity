@@ -68,6 +68,25 @@ describe('parseAnatomyIndex', () => {
     expect(() => parseAnatomyIndex({ ...FULL_INDEX, evidence: { ...FULL_INDEX.evidence, sha256: 'abc' } })).toThrow(/evidence\.sha256/);
   });
 
+  it('rejects a link marked lit that its own fields say may not light a region', () => {
+    const litLink = buildIndexLink('stn', true);
+    const parseLink = (link: object): unknown => parseAnatomyIndex({ ...FULL_INDEX, techniques: [buildTechnique('QIF-T9001', { links: [link as never] })] });
+    expect(() => parseLink(litLink)).not.toThrow();
+    for (const override of [
+      { resolution: 'whole_to_part' }, { resolution: 'part_to_whole' }, { resolution: 'unclassified' }, { band_agrees: false },
+      { valid_for_current_addressing: false }, { quote_state: 'quote_missing' }, { resolved_region_id: null },
+    ]) {
+      expect(() => parseLink({ ...litLink, ...override })).toThrow(/links\[0\]\.lit: a link may be lit only when/);
+    }
+  });
+
+  it('rejects an owner graded "none", a row owner with no grade and a containment owner that carries one', () => {
+    const parseOwner = (owner: object): unknown => parseAnatomyIndex({ ...FULL_INDEX, structures: [buildStructure('7', [owner as never])] });
+    expect(() => parseOwner({ ...buildOwner('stn'), extent_match: 'none' })).toThrow(/owners\[0\]\.extent_match: an owner graded "none" owns nothing/);
+    expect(() => parseOwner({ ...buildOwner('stn'), extent_match: null })).toThrow(/owners\[0\]\.extent_match/);
+    expect(() => parseOwner({ ...buildOwner('vim', 'row_subject_contains_owner'), extent_match: 'same' })).toThrow(/owners\[0\]\.extent_match/);
+  });
+
   it('throws the typed error', () => {
     expect(() => parseAnatomyIndex(null)).toThrow(AnatomyDataError);
   });

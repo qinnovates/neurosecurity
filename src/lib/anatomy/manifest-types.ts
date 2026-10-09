@@ -86,14 +86,14 @@ export interface ManifestAsset {
   source_ids: string[];
   /** Pipeline-only inputs: used to compute the file, never copied into it. */
   computed_with_source_ids: string[];
-  licence_id: LicenceId;
-  stated_licence_id: LicenceId;
+  license_id: LicenceId;
+  stated_license_id: LicenceId;
   route: ManifestRouteStep[];
   delineation: ManifestDelineation;
   libraries: Record<string, string>;
   nodes: ManifestNode[];
   checks: ManifestCheck[];
-  stage_fingerprints: Record<PipelineStage, unknown>;
+  stage_fingerprints: Record<PipelineStage, string | null>;
   position_check: PositionCheck;
 }
 

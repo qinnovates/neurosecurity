@@ -9,6 +9,7 @@ import type { EngineData } from '@/lib/threat-model/catalog-types';
 import { currentAddressingVersion } from './addressing-version';
 import type { Crosswalk, CrosswalkContext, LabelTable, SubjectKind, TechniqueRegions } from './anatomy-types';
 import { AnatomyDataError } from './errors';
+import { show } from './field-readers';
 import { LICENCE_FACTS, assessBuildability, effectiveLicenceId, type Buildability } from './licence-rules';
 import type { AssetManifest } from './manifest-types';
 import { parseCrosswalk } from './parse-crosswalk';
@@ -108,7 +109,7 @@ function parseLabelTables(
     const requiredFolder = LICENCE_FACTS[effectiveLicence.get(table.atlas) as LicenceId].output_folder;
     if (buildability.get(table.atlas)?.buildable !== true || folder === undefined || folder !== requiredFolder) {
       throw new AnatomyDataError(filePath, 'atlas', `a label table for "${table.atlas}" may not ship from this folder`,
-        `Label tables ship only for buildable sources, from the folder their licence requires ("${String(requiredFolder)}/").`);
+        `Label tables ship only for buildable sources, from the folder their licence requires ("${show(requiredFolder)}/").`);
     }
     tables.set(table.atlas, table);
   }
@@ -120,7 +121,7 @@ function listNeuralTechniqueIds(engineData: EngineData): Set<string> {
 }
 
 function readManifestInputs(sources: AnatomySources): Map<string, LicenceId> {
-  return new Map(sources.sources.map((source) => [source.id, source.licence_id]));
+  return new Map(sources.sources.map((source) => [source.id, source.license_id]));
 }
 
 function buildCrosswalkContext(

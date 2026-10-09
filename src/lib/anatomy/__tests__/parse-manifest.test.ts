@@ -35,7 +35,7 @@ describe('parseManifest', () => {
 
   it('rejects an asset in the wrong folder for its licence', () => {
     const context = buildManifestContext({ effectiveLicenceBySource: new Map([[FIXTURE_ATLAS_ID, 'cc-by-sa-4.0']]) });
-    expect(() => parseManifest(buildManifest([buildAsset({ licence_id: 'cc-by-sa-4.0' })]), context))
+    expect(() => parseManifest(buildManifest([buildAsset({ license_id: 'cc-by-sa-4.0' })]), context))
       .toThrow(/assets\[0\]\.path: an asset under "cc-by-sa-4\.0" belongs in "by-sa\/"/);
   });
 
@@ -51,8 +51,8 @@ describe('parseManifest', () => {
   });
 
   it('rejects a licence id that is not the one its source is handled under', () => {
-    expect(() => parseWith(buildAsset({ licence_id: 'cc0-1.0' }))).toThrow(/licence_id: "cc0-1\.0" is not the licence "cc-by-4\.0" that source "fixture_atlas" is handled under/);
-    expect(() => parseWith(buildAsset({ stated_licence_id: 'mit' }))).toThrow(/stated_licence_id/);
+    expect(() => parseWith(buildAsset({ license_id: 'cc0-1.0' }))).toThrow(/license_id: "cc0-1\.0" is not the licence "cc-by-4\.0" that source "fixture_atlas" is handled under/);
+    expect(() => parseWith(buildAsset({ stated_license_id: 'mit' }))).toThrow(/stated_license_id/);
   });
 
   it('rejects a template space other than the declared one', () => {
