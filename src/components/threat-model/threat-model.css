@@ -3,8 +3,8 @@
  * scrolls inside its container, so the sizes here are the sizes on screen. Nothing in this
  * file repeats: the only animation is one pass of flow along a connection, run once.
  *
- * The last section holds older `tm-` component rules that screens outside the diagram still
- * use. They are restyled onto the same tokens and go when their last use goes.
+ * The last section holds the two older `tm-` component rules a file outside the diagram still
+ * uses. They are restyled onto the same tokens and go when that use goes.
  */
 
 /* Frame: the panel the diagram sits in, its controls, and the sentence above it. */
@@ -147,55 +147,11 @@
 }
 
 /*
- * Older component rules, still used by screens outside the diagram. Restyled onto the kit's
- * tokens so nothing looks broken; each goes when its last use goes.
+ * Older component rules still used outside the diagram: `tm-button` and `tm-notice`, both in
+ * workbench/ModeErrorBoundary.tsx. Restyled onto the kit's tokens; they go when that file
+ * moves to `lab-button` and `lab-notice`.
  */
-.tm-root { color: var(--lab-ink); font-family: var(--lab-font); }
-.tm-card { background: var(--lab-panel); border: 1px solid var(--lab-line); border-radius: var(--lab-radius-m); padding: var(--lab-pad) 1.125rem; }
-.tm-card + .tm-card { margin-top: var(--lab-pad); }
-.tm-heading { font-size: var(--lab-text-title); font-weight: 600; margin: 0 0 0.75rem; }
-.tm-subheading { font-size: var(--lab-text-body); font-weight: 600; margin: 1rem 0 0.375rem; }
-.tm-muted { color: var(--lab-ink-soft); font-size: var(--lab-text-body); line-height: 1.45; }
-.tm-small { font-size: var(--lab-text-meta); }
-.tm-field { display: block; margin-bottom: 0.875rem; }
-.tm-label { display: block; font-size: var(--lab-text-meta); font-weight: 600; color: var(--lab-ink-soft); margin-bottom: 0.3125rem; }
-.tm-input, .tm-select { width: 100%; padding: 0.5rem 0.625rem; font-size: var(--lab-text-body); color: inherit; background: var(--lab-panel); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-s); }
-textarea.tm-input { resize: vertical; }
-.tm-input:focus-visible, .tm-select:focus-visible, .tm-button:focus-visible, .tm-tab:focus-visible { outline: 2px solid var(--lab-focus); outline-offset: 2px; }
-.tm-checklist { max-height: 11rem; overflow-y: auto; border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-s); padding: 0.375rem 0.5rem; }
-.tm-check { display: flex; align-items: center; gap: 0.5rem; font-size: var(--lab-text-body); padding: 0.1875rem 0; }
 .tm-button { padding: 0.4375rem 0.75rem; font-size: var(--lab-text-body); font-weight: 600; color: var(--lab-ink); background: var(--lab-panel); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-m); cursor: pointer; }
 .tm-button:hover { border-color: var(--lab-ink); }
-.tm-button--primary { background: var(--lab-ink); border-color: var(--lab-ink); color: var(--lab-panel); }
-.tm-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.tm-tabs { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-bottom: 1rem; }
-.tm-tab { padding: 0.375rem 0.75rem; font-size: var(--lab-text-body); font-weight: 600; color: var(--lab-ink-soft); background: var(--lab-panel); border: 1px solid var(--lab-control-line); border-radius: 999px; cursor: pointer; }
-.tm-tab[aria-selected="true"], .tm-tab[aria-pressed="true"] { background: var(--lab-select); border-color: var(--lab-select); color: var(--lab-select-ink); }
-.tm-root [role="tabpanel"]:focus-visible { outline: 2px solid var(--lab-focus); outline-offset: 4px; border-radius: var(--lab-radius-s); }
-/* Severity and status badges are ink; only Critical is red, and caution colours a border, never words. */
-.tm-badge { display: inline-block; padding: 0.0625rem 0.4375rem; font-size: var(--lab-text-meta); font-weight: 600; color: var(--lab-ink); border: 1px solid var(--lab-control-line); border-radius: 999px; white-space: nowrap; }
-.tm-badge--critical { color: var(--lab-critical); border-color: var(--lab-critical); }
-.tm-badge--generated { border-color: var(--lab-ink); }
-.tm-badge--warning { border-color: var(--lab-caution); }
-.tm-table-wrap { overflow-x: auto; }
-.tm-table { width: 100%; border-collapse: collapse; font-size: var(--lab-text-body); }
-.tm-table th { text-align: left; font-size: var(--lab-text-meta); font-weight: 600; color: var(--lab-ink-soft); padding: 0.375rem 0.5rem; border-bottom: 1px solid var(--lab-line); white-space: nowrap; }
-.tm-table td { padding: 0.4375rem 0.5rem; border-bottom: 1px solid var(--lab-line); vertical-align: top; }
-.tm-mono { font-family: var(--lab-mono); font-size: var(--lab-text-meta); word-break: break-all; }
-.tm-row--addressed { color: var(--lab-ink-soft); }
+.tm-button:focus-visible { outline: 2px solid var(--lab-focus); outline-offset: 2px; }
 .tm-notice { border-left: 3px solid var(--lab-caution); padding: 0.5rem 0.75rem; margin: 0.75rem 0; background: var(--lab-panel); color: var(--lab-ink); font-size: var(--lab-text-body); }
-.tm-quote { border-left: 3px solid var(--lab-line); padding-left: 0.625rem; margin: 0.375rem 0; font-size: var(--lab-text-body); color: var(--lab-ink-soft); }
-.tm-list { margin: 0.25rem 0 0; padding-left: 1.125rem; font-size: var(--lab-text-body); line-height: 1.5; list-style: disc; }
-.tm-error { color: var(--lab-ink); border-left: 3px solid var(--lab-critical); padding-left: 0.5rem; font-size: var(--lab-text-body); margin-top: 0.5rem; }
-.tm-chain-basis { margin-top: 0.5rem; font-size: var(--lab-text-body); }
-.tm-chain-basis > summary { cursor: pointer; font-weight: 600; }
-.tm-print-only { display: none; }
-@media print {
-  .tm-no-print { display: none !important; }
-  .tm-print-only { display: block; }
-  /* Whole sections are cards: keeping each on one page left pages half empty. Rows and headings stay together instead. */
-  .tm-table tr, .tm-heading, .tm-subheading { break-inside: avoid; }
-  .tm-heading, .tm-subheading { break-after: avoid; }
-  .tool-header, .tool-intro { display: none !important; }
-  .tm-section { break-before: auto; margin-top: 1rem; }
-}

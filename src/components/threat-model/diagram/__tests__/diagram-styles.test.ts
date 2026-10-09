@@ -52,7 +52,7 @@ describe('the diagram stylesheet', () => {
 
   it('sets no type under 12px, and the drawing\'s type in CSS pixels', () => {
     const sizes = declarationsOf('font-size');
-    expect(sizes.length).toBeGreaterThan(10);
+    expect(sizes.length).toBeGreaterThan(5);
     for (const { rule, value } of sizes) {
       if (/^var\(--lab-text-(meta|body|title|screen|figure)\)$/.test(value)) continue;
       const pixels = toPixels(value);
