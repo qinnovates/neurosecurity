@@ -6,7 +6,8 @@ import { measureFirstLoad } from '../measure-lab-first-load.mjs';
 
 const FIXTURE_DIST = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures', 'lab-first-load');
 const GENEROUS_BUDGET_BYTES = 1_000_000;
-const passingPage = { urlPath: '/tool/', firstLoadGzipBudgetBytes: GENEROUS_BUDGET_BYTES };
+const roomyBudgets = { codeGzipBudgetBytes: GENEROUS_BUDGET_BYTES, documentGzipBudgetBytes: GENEROUS_BUDGET_BYTES };
+const passingPage = { urlPath: '/tool/', ...roomyBudgets };
 
 describe('runPostBuildChecks', () => {
   it('passes every check on an isolated page within its budget', () => {
@@ -16,22 +17,22 @@ describe('runPostBuildChecks', () => {
   });
 
   it('reports the isolation failure and the budget failure of the same run together', () => {
-    const results = runPostBuildChecks(FIXTURE_DIST, [{ urlPath: '/eager/', firstLoadGzipBudgetBytes: GENEROUS_BUDGET_BYTES }]);
+    const results = runPostBuildChecks(FIXTURE_DIST, [{ urlPath: '/eager/', ...roomyBudgets }]);
     expect(results.map(({ failures }) => failures)).toEqual([
       ['/eager/: no Content-Security-Policy meta tag'],
       ['/eager/: three.js is in the first load; it must load on demand'],
     ]);
   });
 
-  it('fails the budget check alone when a page is one byte over', () => {
-    const measuredBytes = measureFirstLoad(FIXTURE_DIST, '/tool/').totals.gzipBytes;
-    const results = runPostBuildChecks(FIXTURE_DIST, [{ urlPath: '/tool/', firstLoadGzipBudgetBytes: measuredBytes - 1 }]);
+  it('fails the budget check alone when a page\'s code is one byte over', () => {
+    const measuredBytes = measureFirstLoad(FIXTURE_DIST, '/tool/').totals.codeGzipBytes;
+    const results = runPostBuildChecks(FIXTURE_DIST, [{ ...passingPage, codeGzipBudgetBytes: measuredBytes - 1 }]);
     expect(results[0].failures).toEqual([]);
     expect(results[1].failures).toHaveLength(1);
   });
 
   it('turns a page that was not built into a failure of each check, without throwing', () => {
-    const results = runPostBuildChecks(FIXTURE_DIST, [{ urlPath: '/absent/', firstLoadGzipBudgetBytes: GENEROUS_BUDGET_BYTES }]);
+    const results = runPostBuildChecks(FIXTURE_DIST, [{ urlPath: '/absent/', ...roomyBudgets }]);
     expect(results).toHaveLength(POST_BUILD_CHECKS.length);
     for (const { failures } of results) {
       expect(failures).toHaveLength(1);

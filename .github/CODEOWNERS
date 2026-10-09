@@ -17,7 +17,7 @@ SECURITY.md @qikevinl
 /governance/ @qikevinl
 
 # Scripts (data pipelines, CI utilities)
-/scripts/ @qikevinl
+/src/scripts/ @qikevinl
 
 # Shared data & QTARA SDK
 /shared/qtara/ @qikevinl

@@ -2,18 +2,18 @@ import { describe, it, expect } from 'vitest';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  checkFirstLoadBudgets,
   extractDynamicImportSpecifiers,
   extractPageEntries,
   extractStaticImportSpecifiers,
-  findFirstLoadFailures,
-  measureFirstLoad,
   resolveSiteUrlPath,
   walkStaticImportClosure,
-} from '../measure-lab-first-load.mjs';
+} from '../first-load-closure.mjs';
+import { checkFirstLoadBudgets, findFirstLoadFailures, measureFirstLoad } from '../measure-lab-first-load.mjs';
 import {
-  FIRST_LOAD_HEADROOM_GZIP_BYTES,
-  LAB_FIRST_LOAD_BASELINE_GZIP_BYTES,
+  CODE_HEADROOM_GZIP_BYTES,
+  DOCUMENT_HEADROOM_GZIP_BYTES,
+  LAB_CODE_BASELINE_GZIP_BYTES,
+  LAB_DOCUMENT_BASELINE_GZIP_BYTES,
   TOOL_PAGES,
   resolveBuiltFile,
 } from '../tool-pages.mjs';
@@ -142,6 +142,10 @@ describe('measureFirstLoad', () => {
       ['script', '/_astro/reexport.js'],
     ]);
     expect(measurement.totals.rawBytes).toBe(measurement.files.reduce((sum, file) => sum + file.rawBytes, 0));
+    const [documentFile, ...codeFiles] = measurement.files;
+    expect(measurement.totals.documentGzipBytes).toBe(documentFile.gzipBytes);
+    expect(measurement.totals.codeGzipBytes).toBe(codeFiles.reduce((sum, file) => sum + file.gzipBytes, 0));
+    expect(measurement.totals.gzipBytes).toBe(measurement.totals.codeGzipBytes + measurement.totals.documentGzipBytes);
     expect(measurement.files.every((file) => file.gzipBytes > 0)).toBe(true);
     expect(measurement.lazyTargets).toEqual(['/_astro/lazy.js']);
     expect(measurement.lazyOnlyLibrariesInFirstLoad).toEqual([]);
@@ -154,11 +158,32 @@ describe('measureFirstLoad', () => {
 });
 
 describe('findFirstLoadFailures', () => {
-  const passing = { missing: [], offOrigin: [], lazyOnlyLibrariesInFirstLoad: [], totals: { rawBytes: 10, gzipBytes: 1000 } };
+  const totals = { rawBytes: 10, gzipBytes: 1500, codeGzipBytes: 1000, documentGzipBytes: 500 };
+  const passing = { missing: [], offOrigin: [], lazyOnlyLibrariesInFirstLoad: [], totals };
 
-  it('passes at the budget and fails one byte over it', () => {
-    expect(findFirstLoadFailures(passing, 1000)).toEqual([]);
-    expect(findFirstLoadFailures(passing, 999)).toEqual(['first load is 1000 bytes gzip, over the budget of 999']);
+  it('passes the code part at its budget and fails it one byte over', () => {
+    expect(findFirstLoadFailures(passing, { codeGzipBudgetBytes: 1000, documentGzipBudgetBytes: null })).toEqual([]);
+    expect(findFirstLoadFailures(passing, { codeGzipBudgetBytes: 999, documentGzipBudgetBytes: null })).toEqual([
+      'code (stylesheets and scripts) is 1000 bytes gzip, over its budget of 999',
+    ]);
+  });
+
+  it('passes the document part at its budget and fails it one byte over', () => {
+    expect(findFirstLoadFailures(passing, { codeGzipBudgetBytes: null, documentGzipBudgetBytes: 500 })).toEqual([]);
+    expect(findFirstLoadFailures(passing, { codeGzipBudgetBytes: null, documentGzipBudgetBytes: 499 })).toEqual([
+      'document (HTML with its catalog data) is 500 bytes gzip, over its budget of 499',
+    ]);
+  });
+
+  it('does not let room in one part pay for the other', () => {
+    const roomyDocument = { codeGzipBudgetBytes: 999, documentGzipBudgetBytes: 1_000_000 };
+    expect(findFirstLoadFailures(passing, roomyDocument)).toHaveLength(1);
+    const roomyCode = { codeGzipBudgetBytes: 1_000_000, documentGzipBudgetBytes: 499 };
+    expect(findFirstLoadFailures(passing, roomyCode)).toHaveLength(1);
+  });
+
+  it('enforces no budget when none is given', () => {
+    expect(findFirstLoadFailures(passing)).toEqual([]);
   });
 
   it('fails when a lazy-only library is in the first load', () => {
@@ -177,39 +202,53 @@ describe('findFirstLoadFailures', () => {
 });
 
 describe('checkFirstLoadBudgets', () => {
-  const fixtureFirstLoadGzipBytes = measureFirstLoad(FIXTURE_DIST, FIXTURE_PAGE).totals.gzipBytes;
+  const fixtureTotals = measureFirstLoad(FIXTURE_DIST, FIXTURE_PAGE).totals;
+  const atBudget = { urlPath: FIXTURE_PAGE, codeGzipBudgetBytes: fixtureTotals.codeGzipBytes, documentGzipBudgetBytes: fixtureTotals.documentGzipBytes };
 
-  it('passes a page at its budget and names the page that is one byte over', () => {
-    const atBudget = checkFirstLoadBudgets(FIXTURE_DIST, [{ urlPath: FIXTURE_PAGE, firstLoadGzipBudgetBytes: fixtureFirstLoadGzipBytes }]);
-    expect(atBudget.failures).toEqual([]);
-    expect(atBudget.measurements).toHaveLength(1);
-    const overBudget = checkFirstLoadBudgets(FIXTURE_DIST, [{ urlPath: FIXTURE_PAGE, firstLoadGzipBudgetBytes: fixtureFirstLoadGzipBytes - 1 }]);
-    expect(overBudget.failures).toEqual([
-      `/tool/: first load is ${fixtureFirstLoadGzipBytes} bytes gzip, over the budget of ${fixtureFirstLoadGzipBytes - 1}`,
+  it('passes a page whose two parts are each exactly at budget', () => {
+    const { measurements, failures } = checkFirstLoadBudgets(FIXTURE_DIST, [atBudget]);
+    expect(failures).toEqual([]);
+    expect(measurements).toHaveLength(1);
+  });
+
+  it('names the page and the code part when the code is one byte over', () => {
+    const { failures } = checkFirstLoadBudgets(FIXTURE_DIST, [{ ...atBudget, codeGzipBudgetBytes: fixtureTotals.codeGzipBytes - 1 }]);
+    expect(failures).toEqual([
+      `/tool/: code (stylesheets and scripts) is ${fixtureTotals.codeGzipBytes} bytes gzip, over its budget of ${fixtureTotals.codeGzipBytes - 1}`,
     ]);
   });
 
-  it('fails a page that carries three.js in its first load, whatever its budget', () => {
-    const { failures } = checkFirstLoadBudgets(FIXTURE_DIST, [{ urlPath: '/eager/', firstLoadGzipBudgetBytes: Number.MAX_SAFE_INTEGER }]);
-    expect(failures).toEqual(['/eager/: three.js is in the first load; it must load on demand']);
+  it('names the page and the document part when the document is one byte over', () => {
+    const { failures } = checkFirstLoadBudgets(FIXTURE_DIST, [{ ...atBudget, documentGzipBudgetBytes: fixtureTotals.documentGzipBytes - 1 }]);
+    expect(failures).toEqual([
+      `/tool/: document (HTML with its catalog data) is ${fixtureTotals.documentGzipBytes} bytes gzip, over its budget of ${fixtureTotals.documentGzipBytes - 1}`,
+    ]);
+  });
+
+  it('fails a page that carries three.js in its first load, whatever its budgets', () => {
+    const roomy = { urlPath: '/eager/', codeGzipBudgetBytes: Number.MAX_SAFE_INTEGER, documentGzipBudgetBytes: Number.MAX_SAFE_INTEGER };
+    expect(checkFirstLoadBudgets(FIXTURE_DIST, [roomy]).failures).toEqual(['/eager/: three.js is in the first load; it must load on demand']);
   });
 
   it('throws when a listed page was not built', () => {
-    expect(() => checkFirstLoadBudgets(FIXTURE_DIST, [{ urlPath: '/absent/', firstLoadGzipBudgetBytes: 1 }])).toThrow(/No built page/);
+    expect(() => checkFirstLoadBudgets(FIXTURE_DIST, [{ ...atBudget, urlPath: '/absent/' }])).toThrow(/No built page/);
   });
 });
 
 describe('the recorded tool pages', () => {
-  it('holds the Lab to its recorded baseline plus the headroom', () => {
+  it('holds the Lab code and the Lab document each to its own baseline plus its own headroom', () => {
     const lab = TOOL_PAGES.find((page) => page.urlPath === '/atlas/model/');
-    expect(lab?.firstLoadGzipBudgetBytes).toBe(LAB_FIRST_LOAD_BASELINE_GZIP_BYTES + FIRST_LOAD_HEADROOM_GZIP_BYTES);
+    expect(lab?.codeGzipBudgetBytes).toBe(LAB_CODE_BASELINE_GZIP_BYTES + CODE_HEADROOM_GZIP_BYTES);
+    expect(lab?.documentGzipBudgetBytes).toBe(LAB_DOCUMENT_BASELINE_GZIP_BYTES + DOCUMENT_HEADROOM_GZIP_BYTES);
   });
 
-  it('gives every page a site path ending in "/" and a positive whole-number budget', () => {
+  it('gives every page a site path ending in "/" and two positive whole-number budgets', () => {
     expect(TOOL_PAGES.length).toBeGreaterThan(0);
     for (const page of TOOL_PAGES) {
       expect(page.urlPath).toMatch(/^\/.*\/$/);
-      expect(Number.isInteger(page.firstLoadGzipBudgetBytes) && page.firstLoadGzipBudgetBytes > 0).toBe(true);
+      for (const budget of [page.codeGzipBudgetBytes, page.documentGzipBudgetBytes]) {
+        expect(Number.isInteger(budget) && budget > 0).toBe(true);
+      }
     }
   });
 });
