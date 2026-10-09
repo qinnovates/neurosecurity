@@ -45,6 +45,21 @@ const POINTER_SEPARATOR = '/';
 const LIST_INDEX = /^\d+$/;
 const JSON_INDENT = 2;
 
+/** How a link's rationale must open: the role the text gives the structure. */
+export const LINK_RATIONALE_OPENINGS = Object.freeze(['Named as ', 'Adjective for ', 'The catalog\'s own target field.']);
+/** Words by which a rationale would claim a check nobody made. A review exists only as an owner's ledger entry. */
+const REVIEW_CLAIM = /\b(review(ed|s)?|confirm(ed|s)?|verif(y|ied|ies)|validat(ed|es)|approv(ed|al)|certif(y|ied)|endors(ed|es)|peer|neuroscientist|neuroanatomist|anatomist|clinician|physician|doctor|expert)\b/i;
+
+/** What is wrong with a rationale or note, or null. Free text may describe the registrar's words and nothing else. */
+export function findRationaleProblem(text, isLinkRationale) {
+  const claim = REVIEW_CLAIM.exec(text);
+  if (claim !== null) return `"${claim[0]}" claims a check or an authority; a drafted rationale may not`;
+  if (isLinkRationale && !LINK_RATIONALE_OPENINGS.some((opening) => text.startsWith(opening))) {
+    return `a link's rationale must open with one of: ${LINK_RATIONALE_OPENINGS.join(' | ')}`;
+  }
+  return null;
+}
+
 export class CurationError extends Error {
   constructor(techniqueId, problem, remedy) {
     super(`technique-region-curation.json: ${techniqueId}: ${problem}. ${remedy}`);
@@ -91,7 +106,13 @@ function readQuotedField(technique, curatedLink) {
   return text;
 }
 
+function rejectRationale(technique, text, isLinkRationale) {
+  const problem = findRationaleProblem(text, isLinkRationale);
+  if (problem !== null) throw new CurationError(technique.id, `rationale "${text}": ${problem}`, 'Say what the registrar text says and the role it gives the structure.');
+}
+
 function buildLink(technique, curatedLink) {
+  rejectRationale(technique, curatedLink.rationale, true);
   const fieldText = readQuotedField(technique, curatedLink);
   if (!fieldText.includes(curatedLink.quote)) {
     throw new CurationError(technique.id, `the quote "${curatedLink.quote}" is not in ${curatedLink.field}`,
@@ -115,6 +136,7 @@ function buildLink(technique, curatedLink) {
 }
 
 function buildEntry(technique, curated) {
+  [curated.rationale, ...(curated.skipped ?? []).map((skip) => skip.note)].forEach((text) => rejectRationale(technique, text, false));
   const hasLinks = Array.isArray(curated.links) && curated.links.length > 0;
   if (hasLinks === (curated.band_level !== undefined)) {
     throw new CurationError(technique.id, 'an entry needs either links or a band_level reason, and not both',

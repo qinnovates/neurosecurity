@@ -42,7 +42,7 @@ const JSON_INDENT = 2;
 /** Why a mention was read and not linked. Closed, so a new kind of exclusion is a reviewed change. */
 export const SKIP_CATEGORIES = Object.freeze([
   'negation', 'other_technique', 'clinical_analog', 'citation', 'not_a_structure',
-  'same_structure_other_wording', 'functional_system', 'cell_class', 'organ_or_site', 'explanatory_context',
+  'same_structure_other_wording', 'functional_system', 'cell_class', 'organ_or_site', 'device', 'prior_demonstration', 'explanatory_context',
 ]);
 
 /** A word for exactly one region: its id, its name, or an alias the atlas states is a synonym. */

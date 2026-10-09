@@ -34,7 +34,7 @@
     },
     "QIF-T0009": {
       "scope": "band_level",
-      "rationale": "no_structure_named: The text describes RF injection into the acquisition stage and TMS-grade stimulation in general terms; no structure is named. Its generated band summary is not counted.",
+      "rationale": "structure_named_only_as_context: The technique's own prose names no structure. One citation, in a list that cannot be quoted, names two. Its generated band summary is not counted.",
       "links": []
     },
     "QIF-T0010": {
@@ -110,7 +110,7 @@
     },
     "QIF-T0025": {
       "scope": "band_level",
-      "rationale": "no_structure_named: The text describes overwhelming targeted neurons and signal acquisition; no structure is named. Its generated band summary is not counted.",
+      "rationale": "structure_named_only_as_context: The technique's own prose names no structure. The cortex is named only in the clinical analog. Its generated band summary is not counted.",
       "links": []
     },
     "QIF-T0026": {
@@ -120,7 +120,7 @@
     },
     "QIF-T0027": {
       "scope": "band_level",
-      "rationale": "no_structure_named: The text describes probing neural tissue to map connectivity and names no structure. Its generated band summary is not counted.",
+      "rationale": "structure_named_only_as_context: The technique's own prose names no structure. The cortex is named only in the clinical analog's safe parameters. Its generated band summary is not counted.",
       "links": []
     },
     "QIF-T0029": {
@@ -472,7 +472,7 @@
     },
     "QIF-T0067": {
       "scope": "band_level",
-      "rationale": "no_structure_named: The text describes replayed or synthesised neural signals and names no structure. Its generated band summary is not counted.",
+      "rationale": "no_structure_named: The text describes replayed or synthesised neural signals and names no structure; the clinical analog names devices. Its generated band summary is not counted.",
       "links": []
     },
     "QIF-T0068": {
@@ -487,7 +487,7 @@
     },
     "QIF-T0070": {
       "scope": "band_level",
-      "rationale": "no_structure_named: The text describes tonic current switching neurons between firing modes and names no structure. Its generated band summary is not counted.",
+      "rationale": "structure_named_only_as_context: The technique's own prose names no structure. The cortex is named only in a condition of the clinical analog. Its generated band summary is not counted.",
       "links": []
     },
     "QIF-T0073": {
@@ -1072,6 +1072,23 @@
             "rationale": "Adjective for the prefrontal cortex, named as one end of a pathway stage. Stored as written; it resolves to no region."
           },
           "drafted_by": "ai"
+        },
+        {
+          "term": "reward network",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0116/tara/dsm5/pathway",
+              "quote": "N5 (reward network)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the technique's own pathway text. A functional network, not a structure; it resolves to nothing."
+          },
+          "drafted_by": "ai"
         }
       ]
     },
@@ -1110,6 +1127,23 @@
             },
             "check_status": "unchecked",
             "rationale": "Adjective for the cortex, named as one end of the consolidation stage. Stored as written; it resolves to no region."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "declarative memory systems",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0117/tara/dsm5/pathway",
+              "quote": "declarative memory systems"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the last stage of the technique's own pathway text. A functional system, not a structure; it resolves to nothing."
           },
           "drafted_by": "ai"
         }
@@ -1207,6 +1241,23 @@
             },
             "check_status": "unchecked",
             "rationale": "The catalog's own target field."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "default mode network",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0119/tara/dsm5/pathway",
+              "quote": "N6 (default mode network)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the technique's own pathway text. A functional network, not a structure; it resolves to nothing."
           },
           "drafted_by": "ai"
         }
@@ -1408,6 +1459,23 @@
             "rationale": "The catalog's own target field."
           },
           "drafted_by": "ai"
+        },
+        {
+          "term": "default mode network",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0124/tara/dsm5/pathway",
+              "quote": "N6 (default mode network)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the technique's own pathway text. A functional network, not a structure; it resolves to nothing."
+          },
+          "drafted_by": "ai"
         }
       ]
     },
@@ -1510,6 +1578,23 @@
             "rationale": "Named as the second stage of the pathway. A part of the atlas's midbrain record."
           },
           "drafted_by": "ai"
+        },
+        {
+          "term": "autonomic nervous system",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0127/tara/dsm5/pathway",
+              "quote": "N1 (autonomic nervous system)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as the last stage of the technique's own pathway text. A division of the nervous system, not a structure; it resolves to nothing."
+          },
+          "drafted_by": "ai"
         }
       ]
     },
@@ -1565,6 +1650,23 @@
             },
             "check_status": "unchecked",
             "rationale": "The catalog's own target field. Not the atlas's 'cingulate' record, which is the posterior cingulate."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "reward network",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0128/tara/dsm5/pathway",
+              "quote": "N5 (reward network)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the technique's own pathway text. A functional network, not a structure; it resolves to nothing."
           },
           "drafted_by": "ai"
         }
@@ -1696,6 +1798,23 @@
             },
             "check_status": "unchecked",
             "rationale": "The catalog's own target field. A system spread over several regions; it resolves to nothing."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "social cognition network",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0130/tara/dsm5/pathway",
+              "quote": "N6 (social cognition network)"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the technique's own pathway text. A functional network, not a structure; it resolves to nothing."
           },
           "drafted_by": "ai"
         }
@@ -1844,6 +1963,23 @@
             },
             "check_status": "unchecked",
             "rationale": "The catalog's own target field. The atlas has no record for it."
+          },
+          "drafted_by": "ai"
+        },
+        {
+          "term": "language comprehension network",
+          "valid_for_addressing": [
+            1
+          ],
+          "evidence": {
+            "claim_basis": "catalog_text",
+            "source_ref": {
+              "file": "datalake/qtara-registrar.json",
+              "pointer": "/techniques/QIF-T0132/tara/dsm5/pathway",
+              "quote": "language comprehension network"
+            },
+            "check_status": "unchecked",
+            "rationale": "Named as a stage of the technique's own pathway text. A functional network, not a structure; it resolves to nothing."
           },
           "drafted_by": "ai"
         }
@@ -2004,82 +2140,13 @@
     },
     "QIF-T0139": {
       "scope": "band_level",
-      "rationale": "no_structure_named: The text describes gold nanorods at the neuronal membrane. It names one structure only to say the effect was not demonstrated there.",
+      "rationale": "structure_named_only_as_context: The text describes gold nanorods at the neuronal membrane. It names one structure only to say the effect was not shown there.",
       "links": []
     },
     "QIF-T0140": {
-      "scope": "regions",
-      "rationale": "The mechanism lists where infrared stimulation has been demonstrated.",
-      "links": [
-        {
-          "term": "cochlear",
-          "valid_for_addressing": [
-            1
-          ],
-          "evidence": {
-            "claim_basis": "catalog_text",
-            "source_ref": {
-              "file": "datalake/qtara-registrar.json",
-              "pointer": "/techniques/QIF-T0140/tara/mechanism",
-              "quote": "Demonstrated in cochlear, vestibular, spinal nerve, somatosensory cortex"
-            },
-            "check_status": "unchecked",
-            "rationale": "Adjective in a list of sites where the stimulation was demonstrated. Stored as written; it resolves to no region."
-          },
-          "drafted_by": "ai"
-        },
-        {
-          "term": "vestibular",
-          "valid_for_addressing": [
-            1
-          ],
-          "evidence": {
-            "claim_basis": "catalog_text",
-            "source_ref": {
-              "file": "datalake/qtara-registrar.json",
-              "pointer": "/techniques/QIF-T0140/tara/mechanism",
-              "quote": "Demonstrated in cochlear, vestibular, spinal nerve, somatosensory cortex"
-            },
-            "check_status": "unchecked",
-            "rationale": "Adjective in a list of sites where the stimulation was demonstrated. Stored as written; it resolves to no region."
-          },
-          "drafted_by": "ai"
-        },
-        {
-          "term": "spinal nerve",
-          "valid_for_addressing": [
-            1
-          ],
-          "evidence": {
-            "claim_basis": "catalog_text",
-            "source_ref": {
-              "file": "datalake/qtara-registrar.json",
-              "pointer": "/techniques/QIF-T0140/tara/mechanism",
-              "quote": "Demonstrated in cochlear, vestibular, spinal nerve, somatosensory cortex"
-            },
-            "check_status": "unchecked",
-            "rationale": "Named as a site where the stimulation was demonstrated. Not one of the atlas regions."
-          },
-          "drafted_by": "ai"
-        },
-        {
-          "term": "somatosensory cortex",
-          "valid_for_addressing": [
-            1
-          ],
-          "evidence": {
-            "claim_basis": "catalog_text",
-            "source_ref": {
-              "file": "datalake/qtara-registrar.json",
-              "pointer": "/techniques/QIF-T0140/tara/mechanism",
-              "quote": "Demonstrated in cochlear, vestibular, spinal nerve, somatosensory cortex"
-            },
-            "check_status": "unchecked",
-            "rationale": "Named as a site where the stimulation was demonstrated. Wider than the atlas's S1 record, so it resolves to nothing."
-          },
-          "drafted_by": "ai"
-        }
-      ]
+      "scope": "band_level",
+      "rationale": "structure_named_only_as_context: The text describes heat from an infrared fibre acting on membrane channels. Structures appear only as sites of earlier demonstrations.",
+      "links": []
     },
     "QIF-T0141": {
       "scope": "regions",
@@ -2571,7 +2638,7 @@
     },
     "QIF-T0158": {
       "scope": "band_level",
-      "rationale": "no_structure_named: The text describes sub-threshold current shifting excitability. It names one structure only as another technique's target.",
+      "rationale": "structure_named_only_as_context: The text describes sub-threshold current shifting excitability. It names one structure only as another technique's target.",
       "links": []
     },
     "QIF-T0159": {

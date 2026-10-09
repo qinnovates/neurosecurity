@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
   CURATION_PATH, CurationError, REGISTRAR_PATH, TECHNIQUE_REGIONS_PATH,
-  buildTechniqueRegions, readTechniqueField, serialiseTechniqueRegions,
+  buildTechniqueRegions, findRationaleProblem, readTechniqueField, serialiseTechniqueRegions,
 } from '../draft-technique-regions.mjs';
 import { FIXTURE_CURATION, FIXTURE_REGISTRAR } from './technique-region-fixture.mjs';
 
@@ -61,6 +61,23 @@ describe('buildTechniqueRegions', () => {
     const both = { ...FIXTURE_CURATION.techniques[STIMULATION_ID], band_level: 'no_structure_named' };
     expect(() => build(withEntry(STIMULATION_ID, both))).toThrow(/either links or a band_level reason, and not both/);
     expect(() => build(withEntry(STIMULATION_ID, { rationale: 'Fixture.', links: [] }))).toThrow(CurationError);
+  });
+
+  it.each([
+    'Named as the target. Reviewed and confirmed by a neuroscientist.',
+    'Named as the target; verified against the literature.',
+    'Named as the target (expert reading).',
+  ])('refuses a link rationale that claims a check or an authority: "%s"', (rationale) => {
+    expect(() => build(withLink({ rationale }))).toThrow(/claims a check or an authority/);
+  });
+
+  it('refuses a link rationale that does not open with the structure\'s role, and the same claims in an entry rationale or a skip note', () => {
+    expect(() => build(withLink({ rationale: 'Plausibly affected by the stimulation.' }))).toThrow(/must open with one of: Named as/);
+    const entry = FIXTURE_CURATION.techniques[STIMULATION_ID];
+    expect(() => build(withEntry(STIMULATION_ID, { ...entry, rationale: 'Validated by a clinician.' }))).toThrow(/claims a check or an authority/);
+    expect(() => build(withEntry(STIMULATION_ID, { ...entry, skipped: [{ ...entry.skipped[0], note: 'Peer reviewed.' }] }))).toThrow(/claims a check or an authority/);
+    expect(findRationaleProblem('Named as the stimulation target.', true)).toBeNull();
+    expect(findRationaleProblem('The text is unchecked prose about a demonstrated method.', false)).toBeNull();
   });
 
   it('refuses a neural-band technique with no entry and an entry for a technique with no neural band', () => {

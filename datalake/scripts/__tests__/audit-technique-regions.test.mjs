@@ -47,7 +47,7 @@ describe('auditMentions', () => {
   it('does not let a link to a region excuse a bare word for the whole that region belongs to', () => {
     const [stimulation] = FIXTURE_REGISTRAR.techniques;
     const naming = withTechnique({ ...stimulation, tara: { ...stimulation.tara, mechanism: 'Stimulation of the basolateral amygdala and the amygdala' } });
-    const curation = withStimulation({ links: [{ term: 'basolateral amygdala', field: '/tara/mechanism', quote: 'the basolateral amygdala', rationale: 'Target.' }] });
+    const curation = withStimulation({ links: [{ term: 'basolateral amygdala', field: '/tara/mechanism', quote: 'the basolateral amygdala', rationale: 'Named as the target.' }] });
     expect(audit(curation, naming).map((mention) => `${mention.field}:${mention.matched}:${mention.kind}`)).toEqual([
       '/notes:prefrontal cortex:name', '/notes:prefrontal cortex:synonym', '/tara/mechanism:amygdala:whole_to_part',
     ]);
@@ -66,9 +66,9 @@ describe('describeLinks and summariseDistribution', () => {
       [STIMULATION_ID]: {
         rationale: 'Fixture.',
         links: [
-          { term: 'prefrontal cortex', field: '/notes', quote: 'Targets the prefrontal cortex', rationale: 'Target.' },
-          { term: 'pons', field: '/notes', quote: 'Does not reach the pons', rationale: 'Fixture link outside the band tags.' },
-          { term: 'Prefrontal-Cortex circuits', field: '/tara/mechanism', quote: 'Stimulation of Prefrontal-Cortex circuits', rationale: 'Fixture unresolved term.' },
+          { term: 'prefrontal cortex', field: '/notes', quote: 'Targets the prefrontal cortex', rationale: 'Named as the target.' },
+          { term: 'pons', field: '/notes', quote: 'Does not reach the pons', rationale: 'Named as a fixture link outside the band tags.' },
+          { term: 'Prefrontal-Cortex circuits', field: '/tara/mechanism', quote: 'Stimulation of Prefrontal-Cortex circuits', rationale: 'Named as a fixture unresolved term.' },
         ],
       },
       [EAVESDROPPING_ID]: FIXTURE_CURATION.techniques[EAVESDROPPING_ID],
