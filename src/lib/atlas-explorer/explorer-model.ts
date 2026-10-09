@@ -4,7 +4,7 @@
  * the catalog cheap to ask questions of.
  */
 
-import type { AnatomyIndex, IndexStructure, IndexSubject, IndexTechnique, IndexTechniqueLink } from '@/lib/anatomy/anatomy-index-types';
+import type { AnatomyIndex, IndexReviewState, IndexStructure, IndexSubject, IndexTechnique, IndexTechniqueLink } from '@/lib/anatomy/anatomy-index-types';
 import { createStructureStyler, type ColourMode, type Style } from '@/lib/anatomy/colour-modes';
 import { BAND_ORDER } from '@/lib/threat-model/catalog-types';
 import type { CatalogBand, DeviceStageTechnique, ExplorerCatalog } from './explorer-catalog';
@@ -76,4 +76,12 @@ export function createExplorerModel(index: AnatomyIndex, catalog: ExplorerCatalo
 /** The lit links of a region: the ones an id or synonym resolution, agreeing band tags and a standing quote allow to count. */
 export function listLitLinks(model: ExplorerModel, regionId: string): RegionLink[] {
   return (model.linksByRegion.get(regionId) ?? []).filter((regionLink) => regionLink.link.lit);
+}
+
+/**
+ * The state to show for several drafted items shown as one: unreviewed if any of them is, so one reviewed link can never
+ * vouch for the rest. Null when there is nothing drafted to mark.
+ */
+export function weakestReviewState(states: readonly IndexReviewState[]): IndexReviewState | null {
+  return states.find((state) => state.state === 'ai_drafted_unreviewed') ?? states[0] ?? null;
 }
