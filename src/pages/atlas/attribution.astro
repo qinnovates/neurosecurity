@@ -1,0 +1,65 @@
+---
+/**
+ * Attribution for the brain atlas shapes. Everything on this page is built
+ * from the source registry and the asset manifest, as text; nothing here is
+ * raw HTML from a data file.
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import { loadAnatomyData } from '@/components/atlas-scene/load-anatomy-data';
+import { ATTRIBUTION_STATEMENTS, buildAttributionEntries } from '@/lib/anatomy/build-attribution';
+
+const data = loadAnatomyData();
+const entries = buildAttributionEntries(data.sources, data.effectiveLicenceBySource, data.manifest);
+const shipped = entries.filter((entry) => entry.redistributed);
+const inputsOnly = entries.filter((entry) => !entry.redistributed);
+const templateSpace = data.manifest?.template_space ?? data.sources.declared_space;
+---
+<PageLayout
+  title="Brain atlas attribution | Qinnovate"
+  description="Sources, licenses and changes for the brain atlas shapes on this site"
+  breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'Attribution' }]}
+>
+  <div class="max-w-3xl mx-auto px-4 py-12" style="color: var(--color-text-primary)">
+    <h1 class="text-3xl font-bold mb-4">Brain atlas attribution</h1>
+    <p class="mb-3">The brain shapes on this site are made from atlases that other people published. This page names each source, its license, and what was changed. All shapes are in the template space {templateSpace}, in millimetres.</p>
+    <ul class="list-disc pl-6 mb-8 space-y-2">
+      <li>{ATTRIBUTION_STATEMENTS.licenseReading}</li>
+      <li>{ATTRIBUTION_STATEMENTS.anatomy}</li>
+      <li>{ATTRIBUTION_STATEMENTS.changes}</li>
+      <li>{ATTRIBUTION_STATEMENTS.integrity}</li>
+    </ul>
+
+    <h2 class="text-2xl font-semibold mb-4">Sources whose material is in the files</h2>
+    {shipped.length === 0 && <p class="mb-8">No atlas shape is shipped yet.</p>}
+    {shipped.map((entry) => (
+      <section class="mb-10" data-source-id={entry.source_id}>
+        <h3 class="text-xl font-semibold mb-2">{entry.name}</h3>
+        <p class="mb-2">{entry.attribution_text}</p>
+        <p class="mb-2">
+          License: {entry.license.url ? <a href={entry.license.url} rel="noopener noreferrer">{entry.license.name}</a> : entry.license.name}.
+          {entry.stated_license && <span> The publisher states {entry.stated_license.name}; the files are handled here under the stricter license.</span>}
+        </p>
+        {entry.required_text.map((wording) => <p class="mb-2">{wording}</p>)}
+        <p class="mb-2">Source pages: {entry.urls.map((url, index) => <span>{index > 0 && ', '}<a href={url} rel="noopener noreferrer">{url}</a></span>)}</p>
+        <p class="mb-2">How it reaches the template space: {entry.route_note}</p>
+        <ul class="list-disc pl-6 space-y-2">
+          {entry.assets.map((asset) => (
+            <li>
+              <span>File {asset.path}. Changes made: {asset.modification_note} Position: {asset.position_check}.</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    {inputsOnly.length > 0 && <h2 class="text-2xl font-semibold mb-4">Used to compute, not redistributed</h2>}
+    {inputsOnly.map((entry) => (
+      <section class="mb-8" data-source-id={entry.source_id}>
+        <h3 class="text-xl font-semibold mb-2">{entry.name}</h3>
+        <p class="mb-2">{entry.attribution_text}</p>
+        {entry.required_text.map((wording) => <p class="mb-2">{wording}</p>)}
+        <p class="mb-2">{entry.route_note}</p>
+      </section>
+    ))}
+  </div>
+</PageLayout>
