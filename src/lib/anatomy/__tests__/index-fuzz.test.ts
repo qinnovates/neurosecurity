@@ -117,7 +117,7 @@ describe('parseManifest: wrong types', () => {
   });
 
   it('rejects a stage fingerprint that is not a digest', () => {
-    const asset = buildAsset({ stage_fingerprints: { ...buildAsset().stage_fingerprints, register: { anything: 'goes' } } });
+    const asset = buildAsset({ stage_fingerprints: { ...buildAsset().stage_fingerprints, register: { anything: 'goes' } as never } });
     expect(() => parseManifest(buildManifest([asset]), context)).toThrow(/stage_fingerprints\.register/);
   });
 });
