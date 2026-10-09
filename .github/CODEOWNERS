@@ -35,6 +35,8 @@ SECURITY.md @qikevinl
 # Only the owner records a review, clears a source or changes what the build expects of either.
 /datalake/qif-anatomy-*.json @qikevinl
 /src/lib/anatomy/ @qikevinl
+/src/site/atlas-assets/ @qikevinl
+/src/scripts/atlas-pipeline/ @qikevinl
 /src/components/atlas-scene/load-anatomy-data.ts @qikevinl
 /src/components/atlas-scene/__tests__/load-anatomy-data.test.ts @qikevinl
 /datalake/scripts/region-resolver.mjs @qikevinl

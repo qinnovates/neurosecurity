@@ -10,11 +10,14 @@
  * list and returns a list of failure messages, then add one entry to POST_BUILD_CHECKS.
  */
 
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { findAssetCoherenceFailures, findAttributionFailures } from './check-atlas-assets.mjs';
 import { findToolPageFailures } from './check-model-page.mjs';
+import { findAnatomyPayload } from './find-anatomy-payload.mjs';
 import { checkFirstLoadBudgets } from './measure-lab-first-load.mjs';
-import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES } from './tool-pages.mjs';
+import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES, resolveBuiltFile } from './tool-pages.mjs';
 
 /**
  * @typedef {object} PostBuildCheck
@@ -22,11 +25,38 @@ import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES } from './tool-pages.mjs';
  * @property {(distDirectory: string, pages: readonly object[]) => string[]} findFailures
  */
 
-/** @type {readonly PostBuildCheck[]} */
-export const POST_BUILD_CHECKS = [
+const NO_PAGES_FAILURE = 'no tool pages are listed, so nothing was checked';
+
+/**
+ * A tool page receives the anatomy index's path, length and digest, never its content.
+ *
+ * @param {string} distDirectory
+ * @param {readonly { urlPath: string }[]} pages
+ * @returns {string[]} failure messages
+ */
+export function findAnatomyPayloadFailures(distDirectory, pages) {
+  if (pages.length === 0) return [NO_PAGES_FAILURE];
+  return pages.flatMap(({ urlPath }) => {
+    const markers = findAnatomyPayload(fs.readFileSync(resolveBuiltFile(distDirectory, urlPath), 'utf-8'));
+    return markers.length === 0 ? [] : [`${urlPath}: the page carries anatomy data (found: ${markers.join(', ')})`];
+  });
+}
+
+/** Checks of the tool pages themselves. They need nothing but the built pages. */
+export const TOOL_PAGE_CHECKS = [
   { name: 'tool pages are isolated', findFailures: (distDirectory, pages) => findToolPageFailures(distDirectory, pages) },
   { name: 'tool pages are within their first-load budgets', findFailures: (distDirectory, pages) => checkFirstLoadBudgets(distDirectory, pages).failures },
+  { name: 'tool pages carry no anatomy data', findFailures: (distDirectory, pages) => findAnatomyPayloadFailures(distDirectory, pages) },
 ];
+
+/** Checks of the brain atlas assets. They compare the built site with the committed manifest and source registry. */
+export const ATLAS_ASSET_CHECKS = [
+  { name: 'atlas assets are served unchanged', findFailures: (distDirectory) => findAssetCoherenceFailures(distDirectory) },
+  { name: 'attribution page shows every required wording', findFailures: (distDirectory) => findAttributionFailures(distDirectory) },
+];
+
+/** @type {readonly PostBuildCheck[]} */
+export const POST_BUILD_CHECKS = [...TOOL_PAGE_CHECKS, ...ATLAS_ASSET_CHECKS];
 
 /**
  * Runs each check and collects its failures. A check that cannot run (for example because

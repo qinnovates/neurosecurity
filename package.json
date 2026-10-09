@@ -16,6 +16,7 @@
     "check:model-page": "node src/scripts/check-model-page.mjs",
     "check:lab-budget": "node src/scripts/measure-lab-first-load.mjs",
     "check:post-build": "node src/scripts/check-post-build.mjs",
+    "check:anatomy-payload": "node src/scripts/find-anatomy-payload.mjs",
     "atlas:fetch": "bash src/scripts/atlas-pipeline/atlas.sh fetch",
     "atlas:build": "bash src/scripts/atlas-pipeline/atlas.sh build",
     "atlas:test": "bash src/scripts/atlas-pipeline/atlas.sh test",

@@ -20,13 +20,15 @@ import { loadAnatomyBundle, loadAnatomyData } from '../load-anatomy-data';
  */
 const PINNED_ANATOMY_STATE = {
   /** Changes when a source is CLEARED, or its route SETTLED, in the verdict or registry file. Every id here may ship assets. */
-  buildableSourceIds: ['mni_icbm152_2009c_asym', 'eeg_positions'],
+  buildableSourceIds: ['mni_icbm152_2009c_asym', 'allen_hra_3d_2020', 'cit168_rl', 'neudorfer_hypothalamus', 'eeg_positions'],
   /** Changes when GEOMETRY IS ADDED: crosswalk rows land, or the pipeline ships shapes no record maps to. */
-  structureCount: 0,
+  structureCount: 125,
   /** Changes when a region GAINS GEOMETRY (its no_geometry record is removed) or a new one is recorded as having none. */
-  noGeometryRegionIds: ['cervical_cord', 'thoracic_cord', 'lumbar_cord', 'sacral_cord', 'cauda_equina'],
+  noGeometryRegionIds: ['cervical_cord', 'thoracic_cord', 'lumbar_cord', 'sacral_cord', 'cauda_equina', 'reticular_formation'],
   /** Changes when REGIONS ARE MAPPED: every region not listed above reads not_mapped until a row is drafted for it. */
-  regionGeometryStates: ['no_geometry', 'not_mapped'],
+  regionGeometryStates: ['contained', 'drawn', 'marker_only', 'no_geometry'],
+  /** Changes when a LAYER GAINS ITS FIRST SHIPPED ASSET. Every other layer stays unavailable and says why. */
+  availableLayerIds: ['outline', 'cortical', 'deep'],
 } as const;
 
 /**
@@ -39,7 +41,8 @@ const INDEX_BUDGET_BYTES = 300_000;
 const ANATOMY_DATA_FILE_PATTERN = /(from|import\()\s*['"][^'"]*qif-anatomy-[a-z-]+\.json['"]/;
 const LOADER_IMPORT_PATTERN = /(from|import\()\s*['"][^'"]*load-anatomy-data['"]/;
 const LOADER_PATH = 'src/components/atlas-scene/load-anatomy-data.ts';
-const ENDPOINT_PATHS = ['src/pages/atlas/anatomy-evidence.json.ts', 'src/pages/atlas/anatomy-index.json.ts'];
+/** The attribution page reads the loader at build time and renders text only: source names, licenses and required wording. */
+const ENDPOINT_PATHS = ['src/pages/atlas/anatomy-evidence.json.ts', 'src/pages/atlas/anatomy-index.json.ts', 'src/pages/atlas/attribution.astro'];
 const SOURCE_EXTENSIONS = ['.ts', '.tsx', '.astro', '.mjs'];
 const SKIPPED_DIRECTORIES = ['__tests__', 'site', 'node_modules'];
 
@@ -125,9 +128,11 @@ describe('anatomy index built from the seed files (guards)', () => {
     expect(index.techniques.filter((technique) => technique.scope !== 'not_drafted' || technique.links.some((link) => link.lit))).toEqual([]);
   });
 
-  it('marks every layer unavailable and says why', () => {
+  it('shipping a layer\'s first asset changes PINNED_ANATOMY_STATE.availableLayerIds: every other layer is unavailable and says why', () => {
     expect(index.layers.map((layer) => layer.id)).toEqual(['outline', 'cortical', 'deep', 'tracts', 'networks', 'devices']);
-    expect(index.layers.filter((layer) => layer.available || !layer.reason)).toEqual([]);
+    expect(index.layers.filter((layer) => layer.available).map((layer) => layer.id)).toEqual([...PINNED_ANATOMY_STATE.availableLayerIds]);
+    expect(index.layers.filter((layer) => layer.available && layer.asset_ids.length === 0)).toEqual([]);
+    expect(index.layers.filter((layer) => !layer.available && !layer.reason)).toEqual([]);
     expect(index.layers.find((layer) => layer.id === 'tracts')?.reason).toContain('requires additional acknowledgment');
     expect(index.layers.find((layer) => layer.id === 'networks')?.reason).toContain('MIT software licence');
   });
@@ -185,7 +190,7 @@ describe('where anatomy data may be imported (guards)', () => {
     expect(listFilesMatching(ANATOMY_DATA_FILE_PATTERN)).toEqual([LOADER_PATH]);
   });
 
-  it('lets only the two static endpoints import the loader, so nothing is serialised into a page', () => {
+  it('lets only the two static endpoints and the attribution page import the loader, so nothing is serialised into a tool page', () => {
     expect(listFilesMatching(LOADER_IMPORT_PATTERN).filter((filePath) => filePath !== LOADER_PATH)).toEqual(ENDPOINT_PATHS);
   });
 });
