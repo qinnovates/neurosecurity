@@ -3,7 +3,7 @@
   "template_space": "MNI152NLin2009cAsym",
   "units": "mm",
   "axes": "RAS",
-  "pipeline_code_hash": "8a5503c25cd97ac6af528802df057a127e313bca7ae075101eb3e5d2df6292eb",
+  "pipeline_code_hash": "c711236a3c38dab41e0b1333bd86c22943098aa213337e29fca56c02e79eaff0",
   "integrity_note": "Hashes show the files were delivered unchanged. They do not prove where a file came from.",
   "assets": [
     {
@@ -13,7 +13,7 @@
       "layer": "outline",
       "bytes": 25156,
       "sha256": "a62b2c9d6d885e2a4dcfa4bcdaf2c705c1a38605bfcd5f33532efd12636bd37d",
-      "input_fingerprint": "45a66d53ca4ab06b8d35e0ed09e6fbc62416938cbc98d96f59732f37127b26c1",
+      "input_fingerprint": "8bab231f691a6aafefad599e60fd2966d601daf343c763d228b805af525cabf7",
       "source_ids": [
         "mni_icbm152_2009c_asym"
       ],
@@ -100,11 +100,11 @@
       ],
       "stage_fingerprints": {
         "fetch": {
-          "mni_icbm152_nlin_asym_09c_nifti.zip": "804382e5d68a42ff8096ee845a7600b6658434da762fa67840a149eb25d48bd4"
+          "mni_icbm152_2009c_asym/mni_icbm152_nlin_asym_09c_nifti.zip": "804382e5d68a42ff8096ee845a7600b6658434da762fa67840a149eb25d48bd4"
         },
         "register": null,
-        "resample": "506c5e5984f12a78fafbc4b921f2ea6f0c28d401717ee7f9de357e3046066d14",
-        "mesh": "c98f8451a2e93fa05156e3408d70bc53d94de1454d28dc272cb43084a72b9ad5",
+        "resample": "3ac2c389cb636bab64573e5a25811a801024b9db827e4c110a3ac0ebe59ab7f6",
+        "mesh": "3f734af9a36187cce44ef6e77c2303784e196ad4a8799daeda96988e8dc60ac0",
         "write": "a62b2c9d6d885e2a4dcfa4bcdaf2c705c1a38605bfcd5f33532efd12636bd37d"
       },
       "position_check": "not independently checked",
@@ -117,7 +117,7 @@
       "layer": "deep",
       "bytes": 62296,
       "sha256": "ae8a0364aa522802e915cb7c921b6fa8104f7ee5f4b8110a4dc99a61d5bf44a3",
-      "input_fingerprint": "03efddce0e51548c296df0ff8cf8e88f989c997f4831ced90aa54fb7b170bfbe",
+      "input_fingerprint": "8a6f2cc35b866fe1babbb7eca3e8ba3b5ea7f9daf1cc61c4084c4cc5ac52b3c0",
       "source_ids": [
         "cit168_rl"
       ],
@@ -963,11 +963,11 @@
       ],
       "stage_fingerprints": {
         "fetch": {
-          "CIT168toMNI152-2009c_prob.nii.gz": "7a91c36701f36d9d908479b862e65a879d15f54badcec6878e61d857ab570f66"
+          "cit168_rl/CIT168toMNI152-2009c_prob.nii.gz": "7a91c36701f36d9d908479b862e65a879d15f54badcec6878e61d857ab570f66"
         },
         "register": null,
-        "resample": "010dedba49cc98a28475f72dea57e611fe7d3fc13e2d04ff603b36b9ee206635",
-        "mesh": "5e5ecc13897fdbd55d73d6c9a12f7b2bcb53327242e22baae4e59b3ca7df9731",
+        "resample": "1bc513b89aa3bad8e4c02c03ab31b21653a8cd948e03c126c129585aa26d4a1a",
+        "mesh": "46f1c72a3489abc7aa147bfc3a6b39c0bd6eecd45804dd1e075067c20e36a9ff",
         "write": "ae8a0364aa522802e915cb7c921b6fa8104f7ee5f4b8110a4dc99a61d5bf44a3"
       },
       "position_check": "not independently checked",
@@ -980,7 +980,7 @@
       "layer": "deep",
       "bytes": 101592,
       "sha256": "f677d3c1bcb0a1fc93d82a0bec5a0f2669391456f398bebf7057178dc6d5f508",
-      "input_fingerprint": "9c032b32bef62e0b56b941fab2c12a35f1a55543f34eb4fc548b9a7b02fce7a9",
+      "input_fingerprint": "2c61c0387b7bee402c7f2627d11eac34661e0cc6a5d488e392937974207d9dd2",
       "source_ids": [
         "neudorfer_hypothalamus"
       ],
@@ -2134,12 +2134,12 @@
       ],
       "stage_fingerprints": {
         "fetch": {
-          "MNI152b_atlas_labels_0.5mm.nii.gz": "128ff46e2a996345c249456de7536eab03171a147c0a97d0bfe74f3d1953e5df",
-          "Volumes_names-labels.csv": "31ce37c47edb7aafc0c69661289f2b6e7c12a7c3b6c36c063432333b9ac8a201"
+          "neudorfer_hypothalamus/MNI152b_atlas_labels_0.5mm.nii.gz": "128ff46e2a996345c249456de7536eab03171a147c0a97d0bfe74f3d1953e5df",
+          "neudorfer_hypothalamus/Volumes_names-labels.csv": "31ce37c47edb7aafc0c69661289f2b6e7c12a7c3b6c36c063432333b9ac8a201"
         },
         "register": null,
-        "resample": "db9cec8642a2e241be951a3607a8cf04c565674f269b0f80441873dcbb1b6c75",
-        "mesh": "14d0c9d8f54cc4cd30aba460e235ef23ca9efa7656b8a35d25a44a43291cbe7b",
+        "resample": "0b3bf184928ce21693822640a6e117fd42be38a5cc9061aaab1b06fe4c53d09d",
+        "mesh": "0fc823884310bc4e041c101ded210b2870fa862008c6ba3e1509cd058bd2407e",
         "write": "f677d3c1bcb0a1fc93d82a0bec5a0f2669391456f398bebf7057178dc6d5f508"
       },
       "position_check": "not independently checked",
@@ -2152,7 +2152,7 @@
       "layer": "cortical",
       "bytes": 1264680,
       "sha256": "c1005d0251946186d01d6f51fb7651d8f779dade878a0d183d0135b743e3e9d6",
-      "input_fingerprint": "25f51ce5c33343e54f370f151cf802f017f4c7c9781df476c42d3f2419c7b96f",
+      "input_fingerprint": "1b0bb4884d5b9571a3e405571d2bba30ed2ec4fa2ba3548065ab2af0688c950f",
       "source_ids": [
         "allen_hra_3d_2020"
       ],
@@ -6280,10 +6280,10 @@
       ],
       "stage_fingerprints": {
         "fetch": {
-          "annotation_full.nii.gz": "2b05581e39c44f2623d9b0a69f64e3df0823c20d054abef92973812313335dc3",
-          "voxel_count.csv": "7348be087e6c2b6cb1fde1d604761cdd2d70e0e33ded6e1f322db334959d162f",
-          "mni_icbm152_nlin_sym_09b_nifti.zip": "acce3b85039176aaf7de2c3169272551ddfcae5d9a4e5ce642025b795f9f1d20",
-          "mni_icbm152_nlin_asym_09c_nifti.zip": "804382e5d68a42ff8096ee845a7600b6658434da762fa67840a149eb25d48bd4"
+          "allen_hra_3d_2020/annotation_full.nii.gz": "2b05581e39c44f2623d9b0a69f64e3df0823c20d054abef92973812313335dc3",
+          "allen_hra_3d_2020/voxel_count.csv": "7348be087e6c2b6cb1fde1d604761cdd2d70e0e33ded6e1f322db334959d162f",
+          "mni_icbm152_2009b_sym/mni_icbm152_nlin_sym_09b_nifti.zip": "acce3b85039176aaf7de2c3169272551ddfcae5d9a4e5ce642025b795f9f1d20",
+          "mni_icbm152_2009c_asym/mni_icbm152_nlin_asym_09c_nifti.zip": "804382e5d68a42ff8096ee845a7600b6658434da762fa67840a149eb25d48bd4"
         },
         "register": {
           "archive_sha256": {
@@ -6303,8 +6303,8 @@
             "grad_step": 0.2
           }
         },
-        "resample": "84171456b58c9c7a99abc5689ac56c411e534ef329325a29bbfbc96a616c831c",
-        "mesh": "5a4f02d269279811ac68fa450f3b68d2bcd3b31db2a0b86607c24ceaaa3ded40",
+        "resample": "48f0b8b327134c9ba53cf4471f55fb1895a2748ac6d06737779a8ff352774c89",
+        "mesh": "5b78860917494f9d59d8d5e52277b3244073fc51a9c2efd2850f1a865fc76b21",
         "write": "c1005d0251946186d01d6f51fb7651d8f779dade878a0d183d0135b743e3e9d6"
       },
       "position_check": "independently checked",
@@ -6317,7 +6317,7 @@
       "layer": "deep",
       "bytes": 1557844,
       "sha256": "c8405b0c299d3419a19cdbe3d808143581626cad598e995f02cfd60524efb949",
-      "input_fingerprint": "36b486c08fdbf30cbf6381952e870a129d18329e2b9a2b2bcf5e5e25b15ce42b",
+      "input_fingerprint": "5c44c4a4c55c2a3c9800afb69c6008ac74a68f11d8ffe7d68406a7e06b2d8966",
       "source_ids": [
         "allen_hra_3d_2020"
       ],
@@ -9275,10 +9275,10 @@
       ],
       "stage_fingerprints": {
         "fetch": {
-          "annotation_full.nii.gz": "2b05581e39c44f2623d9b0a69f64e3df0823c20d054abef92973812313335dc3",
-          "voxel_count.csv": "7348be087e6c2b6cb1fde1d604761cdd2d70e0e33ded6e1f322db334959d162f",
-          "mni_icbm152_nlin_sym_09b_nifti.zip": "acce3b85039176aaf7de2c3169272551ddfcae5d9a4e5ce642025b795f9f1d20",
-          "mni_icbm152_nlin_asym_09c_nifti.zip": "804382e5d68a42ff8096ee845a7600b6658434da762fa67840a149eb25d48bd4"
+          "allen_hra_3d_2020/annotation_full.nii.gz": "2b05581e39c44f2623d9b0a69f64e3df0823c20d054abef92973812313335dc3",
+          "allen_hra_3d_2020/voxel_count.csv": "7348be087e6c2b6cb1fde1d604761cdd2d70e0e33ded6e1f322db334959d162f",
+          "mni_icbm152_2009b_sym/mni_icbm152_nlin_sym_09b_nifti.zip": "acce3b85039176aaf7de2c3169272551ddfcae5d9a4e5ce642025b795f9f1d20",
+          "mni_icbm152_2009c_asym/mni_icbm152_nlin_asym_09c_nifti.zip": "804382e5d68a42ff8096ee845a7600b6658434da762fa67840a149eb25d48bd4"
         },
         "register": {
           "archive_sha256": {
@@ -9298,8 +9298,8 @@
             "grad_step": 0.2
           }
         },
-        "resample": "1ef4abf610252b6e5a03d4ea1869408c47607e434255c97adaa4fe28bf011b6f",
-        "mesh": "c85fee28f71f0d90c9d3b016f3a199e7ff77734b5ed52c4a8c93588008fa5f85",
+        "resample": "5472fed2560b8d807c0f6ed83007d82bbe5368e84ed237632b971f6a24636e20",
+        "mesh": "e78a17c9158d5bf802d4670c104444f38eafe3758e540887d8930b29ec7022c6",
         "write": "c8405b0c299d3419a19cdbe3d808143581626cad598e995f02cfd60524efb949"
       },
       "position_check": "not independently checked",
