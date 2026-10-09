@@ -1,0 +1,686 @@
+{
+  "schema_version": 1,
+  "status": "AI-drafted source registry. Routes and delineation records are unconfirmed until they are read from the publishers' own files.",
+  "declared_space": "MNI152NLin2009cAsym",
+  "sources": [
+    {
+      "id": "mni_icbm152_2009c_asym",
+      "name": "MNI ICBM152 2009c nonlinear asymmetric template",
+      "attribution_text": "Copyright (C) 1993–2004 Louis Collins, McConnell Brain Imaging Centre, Montreal Neurological Institute, McGill University. Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies. Cite Fonov et al. 2011, https://doi.org/10.1016/j.neuroimage.2010.07.033.",
+      "urls": [
+        "https://nist.mni.mcgill.ca/icbm-152-nonlinear-atlases-2009/"
+      ],
+      "license_id": "mni-icbm-notice",
+      "redistribute": true,
+      "layers": [
+        "outline"
+      ],
+      "delineated_in": "itself",
+      "arrives_in": "MNI152NLin2009cAsym",
+      "route": {
+        "kind": "declared_space",
+        "status": "settled",
+        "note": "This template defines the declared space."
+      },
+      "delineation": {
+        "basis": null,
+        "subjects": null
+      },
+      "required_text": [
+        "Copyright (C) 1993–2004 Louis Collins, McConnell Brain Imaging Centre, Montreal Neurological Institute, McGill University. Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies."
+      ],
+      "files": [
+        {
+          "name": "mni_icbm152_nlin_asym_09c_nifti.zip",
+          "url": "https://www.bic.mni.mcgill.ca/~vfonov/icbm/2009/mni_icbm152_nlin_asym_09c_nifti.zip",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    },
+    {
+      "id": "allen_hra_3d_2020",
+      "name": "Allen Human Reference Atlas - 3D, 2020",
+      "attribution_text": "Song-Lin Ding, Joshua J. Royall, Susan M. Sunkin, Benjamin A.C. Facer, Phil Lesnar, Amy Bernard, Lydia Ng, Ed S. Lein (2020). \"Allen Human Reference Atlas – 3D, 2020,\" RRID:SCR_017764, version 1.0.0. © 2019 Allen Institute for Brain Science. Ontology: Ding et al. 2016, https://doi.org/10.1002/cne.24080.",
+      "urls": [
+        "https://download.alleninstitute.org/informatics-archive/allen_human_reference_atlas_3d_2020/version_1/"
+      ],
+      "license_id": "cc-by-4.0",
+      "redistribute": true,
+      "layers": [
+        "cortical",
+        "deep"
+      ],
+      "delineated_in": "one brain's atlas drawn on the ICBM 2009b nonlinear symmetric template",
+      "arrives_in": "MNI152NLin2009bSym",
+      "route": {
+        "kind": "computed_registration",
+        "status": "open",
+        "note": "A registration from its own symmetric template to the declared space, to be computed and proven (spike c). The structure table must come from voxel_count.csv in the CC BY download directory, never from the Allen API."
+      },
+      "delineation": {
+        "basis": "expert_drawing_on_template",
+        "subjects": null
+      },
+      "required_text": [],
+      "files": [
+        {
+          "name": "annotation_full.nii.gz",
+          "url": "https://download.alleninstitute.org/informatics-archive/allen_human_reference_atlas_3d_2020/version_1/annotation_full.nii.gz",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "annotation.nii.gz",
+          "url": "https://download.alleninstitute.org/informatics-archive/allen_human_reference_atlas_3d_2020/version_1/annotation.nii.gz",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "voxel_count.csv",
+          "url": "https://download.alleninstitute.org/informatics-archive/allen_human_reference_atlas_3d_2020/version_1/examples/voxel_count/voxel_count.csv",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "README.pdf",
+          "url": "https://download.alleninstitute.org/informatics-archive/allen_human_reference_atlas_3d_2020/version_1/README.pdf",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    },
+    {
+      "id": "cit168_rl",
+      "name": "CIT168 Reinforcement Learning atlas v1.1.0 (Pauli 2018)",
+      "attribution_text": "Pauli WM, Nili AN, Tyszka JM. A high-resolution probabilistic in vivo atlas of human subcortical brain nuclei. Sci Data 2018. https://doi.org/10.1038/sdata.2018.63. CC BY 4.0. State changes.",
+      "urls": [
+        "https://api.osf.io/v2/nodes/jkzwp/",
+        "https://osf.io/jkzwp/",
+        "https://doi.org/10.1038/sdata.2018.63"
+      ],
+      "license_id": "cc-by-4.0",
+      "redistribute": true,
+      "layers": [
+        "deep"
+      ],
+      "delineated_in": "CIT168 template, 700 micrometres",
+      "arrives_in": "MNI152NLin2009cAsym",
+      "route": {
+        "kind": "publisher_registered",
+        "status": "open",
+        "note": "The publisher ships a file named for the declared space. Open until the publisher's label table and volume header are read (spike a).",
+        "publisher_registration": {
+          "target": "MNI152NLin2009cAsym",
+          "method": "not stated"
+        }
+      },
+      "delineation": {
+        "basis": null,
+        "subjects": null
+      },
+      "required_text": [
+        "Data were provided [in part] by the Human Connectome Project, WU-Minn Consortium (Principal Investigators: David Van Essen and Kamil Ugurbil; 1U54MH091657) funded by the 16 NIH Institutes and Centers that support the NIH Blueprint for Neuroscience Research; and by the McDonnell Center for Systems Neuroscience at Washington University."
+      ],
+      "files": [
+        {
+          "name": "CIT168toMNI152-2009c_prob.nii.gz",
+          "url": "https://osf.io/download/w8zq2/",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "labels.txt",
+          "url": "https://osf.io/download/6qrcb/",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    },
+    {
+      "id": "harvard_aan_v2",
+      "name": "Harvard Ascending Arousal Network Atlas v2.0",
+      "attribution_text": "Edlow, BL; Kinney, HC (2023), Harvard Ascending Arousal Network Atlas – Version 2.0, Dryad Digital Repository, https://doi.org/10.5061/dryad.zw3r228d2",
+      "urls": [
+        "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.zw3r228d2",
+        "https://doi.org/10.5061/dryad.zw3r228d2",
+        "https://zenodo.org/api/records/8161638"
+      ],
+      "license_id": "cc0-1.0",
+      "redistribute": true,
+      "layers": [
+        "deep"
+      ],
+      "delineated_in": "one ex vivo specimen plus a reference atlas",
+      "arrives_in": "MNI152 1 mm (variant not stated; the FSL grid is inferred from file size)",
+      "route": {
+        "kind": "distributed_transform",
+        "status": "open",
+        "note": "Through the TemplateFlow NLin6Asym-to-2009cAsym transform, if the file is on the FSL grid (spike a) and the direction test passes (spike c)."
+      },
+      "delineation": {
+        "basis": "expert_drawing_on_template",
+        "subjects": null
+      },
+      "required_text": [],
+      "files": [
+        {
+          "name": "AAN_Brainstem_MNI152_1mm_v2p0.nii",
+          "url": "https://zenodo.org/api/records/8161638/files/AAN_Brainstem_MNI152_1mm_v2p0.nii/content",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "AAN_Brainstem_v2p0_Color_LUT_FreeSurfer.txt",
+          "url": "https://zenodo.org/api/records/8161638/files/AAN_Brainstem_v2p0_Color_LUT_FreeSurfer.txt/content",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "README.md",
+          "url": "https://zenodo.org/api/records/8161638/files/README.md/content",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    },
+    {
+      "id": "neudorfer_hypothalamus",
+      "name": "Neudorfer 2020 atlas of the hypothalamic region",
+      "attribution_text": "Neudorfer C, Germann J, Elias GJB, Gramer R, Boutet A, Lozano AM. A high-resolution in vivo magnetic resonance imaging atlas of the human hypothalamic region. Sci Data (2020). https://doi.org/10.1038/s41597-020-00644-6; data https://doi.org/10.5281/zenodo.3942115. CC BY 4.0.",
+      "urls": [
+        "https://zenodo.org/records/3942115",
+        "https://doi.org/10.5281/zenodo.3942115",
+        "https://doi.org/10.1038/s41597-020-00644-6"
+      ],
+      "license_id": "cc-by-4.0",
+      "redistribute": true,
+      "layers": [
+        "deep"
+      ],
+      "delineated_in": "its own 990-subject template",
+      "arrives_in": "MNI152 2009b (symmetric or asymmetric not stated)",
+      "route": {
+        "kind": "unknown",
+        "status": "open",
+        "note": "Header resample if the file is on the asymmetric template, the computed registration if symmetric. Open until the publisher's label table and volume header are read (spike a)."
+      },
+      "delineation": {
+        "basis": null,
+        "subjects": null
+      },
+      "required_text": [
+        "Data were provided [in part] by the Human Connectome Project, WU-Minn Consortium (Principal Investigators: David Van Essen and Kamil Ugurbil; 1U54MH091657) funded by the 16 NIH Institutes and Centers that support the NIH Blueprint for Neuroscience Research; and by the McDonnell Center for Systems Neuroscience at Washington University."
+      ],
+      "files": [
+        {
+          "name": "MNI152b_atlas_labels_0.5mm.nii.gz",
+          "url": "https://zenodo.org/api/records/3942115/files/MNI152b_atlas_labels_0.5mm.nii.gz/content",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "Volumes_names-labels.csv",
+          "url": "https://zenodo.org/api/records/3942115/files/Volumes_names-labels.csv/content",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    },
+    {
+      "id": "ahead_structures",
+      "name": "AHEAD structure probability maps in MNI 2009b (Alkemade et al.)",
+      "attribution_text": "Alkemade A, et al. The Amsterdam Ultra-high field adult lifespan database (AHEAD). https://doi.org/10.21942/uva.10007840. CC BY 4.0.",
+      "urls": [
+        "https://doi.org/10.21942/uva.10007840",
+        "https://api.figshare.com/v2/articles/10007840"
+      ],
+      "license_id": "cc-by-4.0",
+      "redistribute": true,
+      "layers": [
+        "deep"
+      ],
+      "delineated_in": "its own 7 T data",
+      "arrives_in": "mni09b (symmetry not stated)",
+      "route": {
+        "kind": "unknown",
+        "status": "open",
+        "note": "As for the hypothalamus atlas. The archive has not been opened. Open until the publisher's label table and volume header are read (spike a)."
+      },
+      "delineation": {
+        "basis": null,
+        "subjects": null
+      },
+      "required_text": [],
+      "files": [
+        {
+          "name": "structures_mni09b.tar.gz",
+          "url": "https://ndownloader.figshare.com/files/21209229",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "Readme.txt",
+          "url": "https://ndownloader.figshare.com/files/21209274",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    },
+    {
+      "id": "eeg_positions",
+      "name": "eeg_positions (sappelhoff)",
+      "attribution_text": "Keep the MIT notice: Copyright 2018 eeg_positions developers.",
+      "urls": [
+        "https://github.com/sappelhoff/eeg_positions"
+      ],
+      "license_id": "mit",
+      "redistribute": true,
+      "layers": [],
+      "delineated_in": "unit sphere",
+      "arrives_in": "unit sphere",
+      "route": {
+        "kind": "not_applicable",
+        "status": "settled",
+        "note": "Used only to cross-check the electrode layout. No asset derives from it."
+      },
+      "delineation": {
+        "basis": null,
+        "subjects": null
+      },
+      "required_text": [
+        "Copyright 2018 eeg_positions developers"
+      ],
+      "files": [
+        {
+          "name": "standard_1020_3D.tsv",
+          "url": "https://raw.githubusercontent.com/sappelhoff/eeg_positions/main/data/Nz-T10-Iz-T9/standard_1020_3D.tsv",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "standard_1005_3D.tsv",
+          "url": "https://raw.githubusercontent.com/sappelhoff/eeg_positions/main/data/Nz-T10-Iz-T9/standard_1005_3D.tsv",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    },
+    {
+      "id": "hcp1065_tracts",
+      "name": "HCP1065 population-averaged tractography atlas (Yeh 2022)",
+      "attribution_text": "Yeh, FC. Population-based tract-to-region connectome of the human brain and its hierarchical topology. Nat Commun 13, 4933 (2022). https://doi.org/10.1038/s41467-022-32595-4. CC BY-SA 4.0. Data were provided [in part] by the Human Connectome Project, WU-Minn Consortium (Principal Investigators: David Van Essen and Kamil Ugurbil; 1U54MH091657) funded by the 16 NIH Institutes and Centers that support the NIH Blueprint for Neuroscience Research; and by the McDonnell Center for Systems Neuroscience at Washington University.",
+      "urls": [
+        "https://brain.labsolver.org/hcp_trk_atlas.html",
+        "https://github.com/data-others/atlas/releases/tag/hcp1065",
+        "https://doi.org/10.1038/s41467-022-32595-4"
+      ],
+      "license_id": "cc-by-sa-4.0",
+      "redistribute": true,
+      "layers": [
+        "tracts"
+      ],
+      "delineated_in": "subjects normalised by the tract tool",
+      "arrives_in": "MNI152NLin2009aAsym",
+      "route": {
+        "kind": "header_resample",
+        "status": "open",
+        "note": "File frame to world from the .trk header, then a header resample. Not read until the source is cleared (spike d). Never take the fibre templates or per-subject files from the same release."
+      },
+      "delineation": {
+        "basis": "tractography",
+        "subjects": null
+      },
+      "required_text": [
+        "Data were provided [in part] by the Human Connectome Project, WU-Minn Consortium (Principal Investigators: David Van Essen and Kamil Ugurbil; 1U54MH091657) funded by the 16 NIH Institutes and Centers that support the NIH Blueprint for Neuroscience Research; and by the McDonnell Center for Systems Neuroscience at Washington University."
+      ],
+      "files": [
+        {
+          "name": "hcp1065_avg_tracts_trk.zip",
+          "url": "https://github.com/data-others/atlas/releases/download/hcp1065/hcp1065_avg_tracts_trk.zip",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    },
+    {
+      "id": "yeo2011_cbig",
+      "name": "Yeo 2011 7/17 networks (CBIG repository)",
+      "attribution_text": "Keep the MIT notice. Cite Yeo et al., J Neurophysiol 2011, https://doi.org/10.1152/jn.00338.2011.",
+      "urls": [
+        "https://github.com/ThomasYeoLab/CBIG/tree/master/stable_projects/brain_parcellation/Yeo2011_fcMRI_clustering",
+        "https://doi.org/10.1152/jn.00338.2011"
+      ],
+      "license_id": "mit",
+      "redistribute": true,
+      "layers": [
+        "networks"
+      ],
+      "delineated_in": "surfaces and FSL MNI152 volumes",
+      "arrives_in": "FSL MNI152 (MNI152NLin6Asym)",
+      "route": {
+        "kind": "distributed_transform",
+        "status": "open",
+        "note": "Not built while the source is uncleared."
+      },
+      "delineation": {
+        "basis": null,
+        "subjects": null
+      },
+      "required_text": [],
+      "files": [
+        {
+          "name": "Yeo2011_7Networks_N1000.split_components.FSL_MNI152_1mm.nii.gz",
+          "url": "https://raw.githubusercontent.com/ThomasYeoLab/CBIG/master/stable_projects/brain_parcellation/Yeo2011_fcMRI_clustering/1000subjects_reference/Yeo_JNeurophysiol11_SplitLabels/MNI152/Yeo2011_7Networks_N1000.split_components.FSL_MNI152_1mm.nii.gz",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "Yeo2011_17Networks_N1000.split_components.FSL_MNI152_1mm.nii.gz",
+          "url": "https://raw.githubusercontent.com/ThomasYeoLab/CBIG/master/stable_projects/brain_parcellation/Yeo2011_fcMRI_clustering/1000subjects_reference/Yeo_JNeurophysiol11_SplitLabels/MNI152/Yeo2011_17Networks_N1000.split_components.FSL_MNI152_1mm.nii.gz",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    },
+    {
+      "id": "schaefer2018_cbig",
+      "name": "Schaefer 2018 parcellation (CBIG repository)",
+      "attribution_text": "Keep the MIT notice. Cite Schaefer et al., Cerebral Cortex, https://doi.org/10.1093/cercor/bhx179.",
+      "urls": [
+        "https://github.com/ThomasYeoLab/CBIG/tree/master/stable_projects/brain_parcellation/Schaefer2018_LocalGlobal",
+        "https://doi.org/10.1093/cercor/bhx179"
+      ],
+      "license_id": "mit",
+      "redistribute": true,
+      "layers": [
+        "networks"
+      ],
+      "delineated_in": "surfaces and FSL MNI152 volumes",
+      "arrives_in": "FSL MNI152",
+      "route": {
+        "kind": "distributed_transform",
+        "status": "open",
+        "note": "Not built while the source is uncleared."
+      },
+      "delineation": {
+        "basis": null,
+        "subjects": null
+      },
+      "required_text": [],
+      "files": [
+        {
+          "name": "Schaefer2018_400Parcels_17Networks_order_FSLMNI152_1mm.nii.gz",
+          "url": "https://raw.githubusercontent.com/ThomasYeoLab/CBIG/master/stable_projects/brain_parcellation/Schaefer2018_LocalGlobal/Parcellations/MNI/Schaefer2018_400Parcels_17Networks_order_FSLMNI152_1mm.nii.gz",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "Schaefer2018_400Parcels_17Networks_order.txt",
+          "url": "https://raw.githubusercontent.com/ThomasYeoLab/CBIG/master/stable_projects/brain_parcellation/Schaefer2018_LocalGlobal/Parcellations/MNI/freeview_lut/Schaefer2018_400Parcels_17Networks_order.txt",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    },
+    {
+      "id": "nextbrain",
+      "name": "NextBrain histological atlas data (UCL RDR)",
+      "attribution_text": "Casamitjana A, Mancini M, et al. A probabilistic histological atlas of the human brain for MRI segmentation. Nature (2025). https://doi.org/10.1038/s41586-025-09708-2; data https://doi.org/10.5522/04/24243835 (CC0).",
+      "urls": [
+        "https://doi.org/10.5522/04/24243835",
+        "https://api.figshare.com/v2/articles/24243835",
+        "https://doi.org/10.1038/s41586-025-09708-2"
+      ],
+      "license_id": "cc0-1.0",
+      "redistribute": true,
+      "layers": [],
+      "delineated_in": "not read",
+      "arrives_in": "not read",
+      "route": {
+        "kind": "unknown",
+        "status": "open",
+        "note": "The in-zip readme names no template space. Optional follow-up; nothing is built."
+      },
+      "delineation": {
+        "basis": null,
+        "subjects": null
+      },
+      "required_text": [],
+      "files": [
+        {
+          "name": "3dAtlas.zip",
+          "url": "https://ndownloader.figshare.com/files/42561616",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "readme.txt",
+          "url": "https://ndownloader.figshare.com/files/42561607",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    },
+    {
+      "id": "massp_2_0",
+      "name": "MASSP 2.0 parcellation priors",
+      "attribution_text": "MASSP 2.0 Parcellation Priors, https://doi.org/10.21942/uva.27291714. CC BY 4.0.",
+      "urls": [
+        "https://doi.org/10.21942/uva.27291714",
+        "https://api.figshare.com/v2/articles/27291714"
+      ],
+      "license_id": "cc-by-4.0",
+      "redistribute": true,
+      "layers": [],
+      "delineated_in": "not read",
+      "arrives_in": "not read",
+      "route": {
+        "kind": "unknown",
+        "status": "open",
+        "note": "Template space not stated in the record. Optional follow-up; nothing is built."
+      },
+      "delineation": {
+        "basis": null,
+        "subjects": null
+      },
+      "required_text": [],
+      "files": [
+        {
+          "name": "massp_2p0_shape-labels.nii.gz",
+          "url": "https://uvaauas.figshare.com/articles/dataset/MASSP_2_0_Parcellation_Priors/27291714",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "massp_2p0-label-list.txt",
+          "url": "https://ndownloader.figshare.com/files/58258636",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    },
+    {
+      "id": "hcp_s1200_mmp1",
+      "name": "HCP S1200 group-average surface and HCP-MMP1",
+      "attribution_text": "Data were provided [in part] by the Human Connectome Project, WU-Minn Consortium (Principal Investigators: David Van Essen and Kamil Ugurbil; 1U54MH091657) funded by the 16 NIH Institutes and Centers that support the NIH Blueprint for Neuroscience Research; and by the McDonnell Center for Systems Neuroscience at Washington University.",
+      "urls": [
+        "https://balsa.wustl.edu/study/RVVG",
+        "https://balsa.wustl.edu/reference/pkXDZ",
+        "https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms"
+      ],
+      "license_id": "hcp-data-use-terms",
+      "redistribute": true,
+      "layers": [],
+      "delineated_in": "HCP subjects",
+      "arrives_in": "fs_LR 32k surface",
+      "route": {
+        "kind": "unknown",
+        "status": "open",
+        "note": "Gated on the owner. No pipeline code is written for it."
+      },
+      "delineation": {
+        "basis": null,
+        "subjects": null
+      },
+      "required_text": [],
+      "files": [
+        {
+          "name": "S1200.L.midthickness_MSMAll.32k_fs_LR.surf.gii",
+          "url": "https://balsa.wustl.edu/reference/pkXDZ",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "Q1-Q6_RelatedValidation210.CorticalAreas_dil_Final_Final_Areas_Group_Colors.32k_fs_LR.dlabel.nii",
+          "url": "https://balsa.wustl.edu/reference/pkXDZ",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    },
+    {
+      "id": "freesurfer_fsaverage",
+      "name": "fsaverage, Desikan, Destrieux and other FreeSurfer data",
+      "attribution_text": "Part B of the agreement must accompany every copy, prefaced: \"All or portions of this licensed product (such portions are the \"Software\") have been obtained under license from The General Hospital Corporation \"MGH\" and are subject to the following terms and conditions:\"",
+      "urls": [
+        "https://github.com/freesurfer/freesurfer/blob/dev/LICENSE.txt"
+      ],
+      "license_id": "freesurfer-sla-1.0",
+      "redistribute": true,
+      "layers": [],
+      "delineated_in": "FreeSurfer average subject",
+      "arrives_in": "fsaverage surface",
+      "route": {
+        "kind": "unknown",
+        "status": "open",
+        "note": "Gated on the owner. No pipeline code is written for it."
+      },
+      "delineation": {
+        "basis": null,
+        "subjects": null
+      },
+      "required_text": [],
+      "files": []
+    },
+    {
+      "id": "templateflow_xfm",
+      "name": "TemplateFlow between-template transforms",
+      "attribution_text": null,
+      "urls": [
+        "https://github.com/templateflow/tpl-MNI152NLin2009cAsym",
+        "https://github.com/templateflow/tpl-MNI152NLin6Asym"
+      ],
+      "license_id": "none-stated",
+      "redistribute": false,
+      "layers": [],
+      "delineated_in": "not applicable: transform files",
+      "arrives_in": "MNI152NLin6Asym to and from MNI152NLin2009cAsym",
+      "route": {
+        "kind": "not_applicable",
+        "status": "settled",
+        "note": "A pipeline input only. Its files are hashed as inputs and never copied into the served assets."
+      },
+      "delineation": {
+        "basis": null,
+        "subjects": null
+      },
+      "required_text": [],
+      "files": [
+        {
+          "name": "tpl-MNI152NLin2009cAsym_from-MNI152NLin6Asym_mode-image_xfm.h5",
+          "url": "https://github.com/templateflow/tpl-MNI152NLin2009cAsym",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        },
+        {
+          "name": "tpl-MNI152NLin6Asym_from-MNI152NLin2009cAsym_mode-image_xfm.h5",
+          "url": "https://github.com/templateflow/tpl-MNI152NLin6Asym",
+          "sha256": null,
+          "bytes": null,
+          "digest_origin": null
+        }
+      ]
+    }
+  ],
+  "considered_and_refused": [
+    {
+      "id": "mindboggle_dkt31",
+      "name": "Mindboggle-101 DKT31 joint-fusion atlas",
+      "reason": "The atlases component's own wiki links the atlas licence to CC BY-NC-ND 3.0, while its licence field says CC BY 4.0; the record contradicts itself."
+    },
+    {
+      "id": "tian_subcortex",
+      "name": "Melbourne Subcortex Atlas (Tian 2020)",
+      "reason": "Commercial use is not named in the licence text; the grant rests on interpretation, and the atlas is not needed."
+    },
+    {
+      "id": "diedrichsen_anatom",
+      "name": "Diedrichsen cerebellar atlas (atl-Anatom: lobules and deep nuclei)",
+      "reason": "Conflicting statements: a README says CC BY, the only LICENSE file in the repository says CC BY-NC 3.0."
+    },
+    {
+      "id": "pam50",
+      "name": "PAM50 spinal cord template",
+      "reason": "No licence is stated, and an issue asking for one is open with no reply."
+    },
+    {
+      "id": "cerebra",
+      "name": "CerebrA (Manera 2020)",
+      "reason": "Licence not stated and not verified; derived from labels part of which are CC BY-NC-ND."
+    },
+    {
+      "id": "najdenovska_thalamus",
+      "name": "Najdenovska 2018 thalamic nuclei atlas",
+      "reason": "Conflicting statements: the record says CC BY-SA 4.0, the README says all rights reserved."
+    },
+    {
+      "id": "thomas_mni",
+      "name": "THOMAS thalamic atlas in MNI (Saranathan 2021)",
+      "reason": "Access to the record is restricted and it states no licence."
+    },
+    {
+      "id": "mne_colin27_montages",
+      "name": "MNE-Python colin27_1020.elc and colin27_1005.elc (formerly standard_1020/1005.elc)",
+      "reason": "Provenance conflict: the files come from a GPL-3.0 repository and no statement gives them to the BSD-licensed project."
+    },
+    {
+      "id": "cit168_amygdala",
+      "name": "CIT168 Amygdala atlas v1.0.3 (Tyszka 2016)",
+      "reason": "Not used by this build. By the authors' own text it is share-alike (CC BY-SA 4.0), while its repository licence field says CC BY 4.0."
+    },
+    {
+      "id": "harvard_oxford",
+      "name": "Harvard-Oxford cortical and subcortical atlases",
+      "reason": "Dropped by a supervisor ruling in favour of the Allen atlas. Its licence was not assessed in the licence verification."
+    }
+  ]
+}
