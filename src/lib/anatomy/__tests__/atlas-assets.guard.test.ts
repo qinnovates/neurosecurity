@@ -2,7 +2,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { Box3, type BufferGeometry, type Mesh, type Object3D } from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { describe, expect, it } from 'vitest';
 import { loadAnatomyData } from '@/components/atlas-scene/load-anatomy-data';
 import {
@@ -34,10 +33,32 @@ const readAsset = (assetPath: string): Uint8Array | null => {
   return fs.existsSync(filePath) ? new Uint8Array(fs.readFileSync(filePath)) : null;
 };
 
+/**
+ * The loader the page uses, loaded by a specifier the type checker does not follow. Its type
+ * declarations pull in the WebGPU ambient types, which add an overload to every canvas's
+ * `getContext` across the whole program and break unrelated canvas mocks. Only the one method
+ * this test calls is typed here.
+ */
+const GLTF_LOADER_SPECIFIER: string = 'three/examples/jsm/loaders/GLTFLoader.js';
+interface GeometryLoader {
+  parseAsync(data: ArrayBuffer, path: string): Promise<{ scene: Object3D }>;
+}
+interface GeometryLoaderModule {
+  GLTFLoader: new () => GeometryLoader;
+}
+
+async function createLoader(): Promise<GeometryLoader> {
+  const loaderModule: unknown = await import(/* @vite-ignore */ GLTF_LOADER_SPECIFIER);
+  if (typeof loaderModule !== 'object' || loaderModule === null || !('GLTFLoader' in loaderModule) || typeof loaderModule.GLTFLoader !== 'function') {
+    throw new Error('three\'s GLTFLoader module did not export GLTFLoader');
+  }
+  return new (loaderModule as GeometryLoaderModule).GLTFLoader();
+}
+
 /** Parses bytes with the loader the page uses and lists each mesh node's ids, vertex count and world bounds. */
 async function loadNodes(bytes: Uint8Array): Promise<LoadedNode[]> {
   const buffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer;
-  const gltf = await new GLTFLoader().parseAsync(buffer, '');
+  const gltf = await (await createLoader()).parseAsync(buffer, '');
   gltf.scene.updateMatrixWorld(true);
   const nodes: LoadedNode[] = [];
   gltf.scene.traverse((object: Object3D) => {
