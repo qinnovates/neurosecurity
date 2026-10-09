@@ -30,6 +30,15 @@ const EXPECTED_BAND_DISAGREEMENTS = [
   'QIF-T0144:M1', 'QIF-T0145:M1', 'QIF-T0147:thalamus', 'QIF-T0151:SMA', 'QIF-T0161:cortex',
 ];
 const NEURAL_BAND_PREFIX = 'N';
+
+/** What the audit script says of one link. The script is plain JavaScript, so its result is typed here. */
+interface DescribedLink {
+  technique_id: string;
+  term: string;
+  region_id: string | null;
+  band_agrees: boolean;
+  lights: boolean;
+}
 const UNREVIEWED_STATE = 'ai_drafted_unreviewed';
 
 function listNeuralIds(data: AnatomyData): string[] {
@@ -103,7 +112,7 @@ describe('drafted technique region links (guards on the committed file)', () => 
   const entries = data.techniqueRegions.techniques;
   const indexLinks = index.techniques.flatMap((technique) => technique.links.map((link) => ({ technique, link })));
   const registrar: unknown = JSON.parse(readFileSync(REGISTRAR_FILE, 'utf-8'));
-  const described = describeLinks(data.techniqueRegions, registrar, data.atlas);
+  const described: DescribedLink[] = describeLinks(data.techniqueRegions, registrar, data.atlas);
 
   it('has exactly one entry for every neural-band technique and none for any other, with nothing wrong in any entry', () => {
     expect(listNeuralIds(data).length).toBeGreaterThan(0);
@@ -142,7 +151,7 @@ describe('drafted technique region links (guards on the committed file)', () => 
   });
 
   it('reports, without enforcing, the links to a region outside the technique\'s band tags', () => {
-    const disagreements = listBandDisagreements(described).map((link) => `${link.technique_id}:${link.term}`);
+    const disagreements = (listBandDisagreements(described) as DescribedLink[]).map((link) => `${link.technique_id}:${link.term}`);
     expect(disagreements).toEqual(EXPECTED_BAND_DISAGREEMENTS);
     expect(indexLinks.filter(({ link }) => link.resolved_region_id !== null && !link.band_agrees && link.lit)).toEqual([]);
   });
