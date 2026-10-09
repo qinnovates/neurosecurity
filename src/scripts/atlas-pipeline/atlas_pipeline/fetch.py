@@ -62,6 +62,9 @@ def download_https(url: str, destination: pathlib.Path, max_bytes: int, allowed_
     except OSError as error:
         destination.unlink(missing_ok=True)
         raise FetchError(f"download of {url!r} failed: {error}; retry, or check the publisher's page") from error
+    except FetchError:
+        destination.unlink(missing_ok=True)
+        raise
 
 
 def _verify(path: pathlib.Path, expected: str, what: str) -> None:
@@ -91,10 +94,15 @@ def extract_member(archive_path: pathlib.Path, member: dict[str, Any], directory
         if info.is_dir() or (info.external_attr >> 16) & 0o170000 == 0o120000:
             raise FetchError(f"archive member {member_path!r} is a directory or a link; refusing it")
         target = directory / member["save_as"]
-        with archive.open(info) as source, target.open("wb") as out:
+        unverified = directory / (member["save_as"] + ".unverified")
+        with archive.open(info) as source, unverified.open("wb") as out:
             for chunk in iter(lambda: source.read(CHUNK_BYTES), b""):
                 out.write(chunk)
-    _verify(target, pinned_sha256(member), f"member {member_path} of {archive_path.name}")
+    try:
+        _verify(unverified, pinned_sha256(member), f"member {member_path} of {archive_path.name}")
+        unverified.replace(target)
+    finally:
+        unverified.unlink(missing_ok=True)
 
 
 def fetch_file(file_row: dict[str, Any], members: list[dict[str, Any]], directory: pathlib.Path, allowed_hosts: frozenset[str],

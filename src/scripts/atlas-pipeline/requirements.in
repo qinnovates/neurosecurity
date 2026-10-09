@@ -7,3 +7,4 @@ scikit-image==0.24.0        # marching cubes on a continuous field
 antspyx==0.5.4              # the one registration stack: computes and applies the symmetric-to-asymmetric transform
 fast-simplification==0.2.0  # quadric decimation; meshing on a coarser grid shrinks thin shapes, decimation does not
 pillow==12.3.0              # review sheets (PNG)
+pandas==3.0.6               # point tables for antspyx's point transform (displacement statistics)

@@ -81,3 +81,29 @@ def test_extracts_only_the_named_member_and_checks_its_own_pin(tmp_path: pathlib
     bad = {**good, "sha256": "0" * 64}
     with pytest.raises(FetchError, match="pin is"):
         fetch.fetch_file(row(archive_bytes, name="source.zip"), [bad], tmp_path / "out2", HOSTS, serve(archive_bytes))
+    assert list((tmp_path / "out2").iterdir()) == [], "a member that failed its pin must not be left under any name"
+
+
+def test_an_oversized_download_is_refused_and_removed(tmp_path: pathlib.Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    class Response:
+        def __init__(self) -> None:
+            self.chunks = [b"x" * 600, b"x" * 600, b""]
+
+        def read(self, _: int) -> bytes:
+            return self.chunks.pop(0)
+
+        def __enter__(self) -> "Response":
+            return self
+
+        def __exit__(self, *_: object) -> None:
+            return None
+
+    class Opener:
+        def open(self, url: str, timeout: int) -> Response:
+            return Response()
+
+    monkeypatch.setattr(fetch.urllib.request, "build_opener", lambda *_: Opener())
+    destination = tmp_path / "big.part"
+    with pytest.raises(FetchError, match="size cap"):
+        fetch.download_https("https://example.org/big", destination, 1000, HOSTS)
+    assert not destination.exists()
