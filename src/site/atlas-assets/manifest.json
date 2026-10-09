@@ -3,23 +3,23 @@
   "template_space": "MNI152NLin2009cAsym",
   "units": "mm",
   "axes": "RAS",
-  "pipeline_code_hash": "f008a970baa179c2cadb865570f947c131241ced337c606f3d82034e740d5390",
+  "pipeline_code_hash": "8a5503c25cd97ac6af528802df057a127e313bca7ae075101eb3e5d2df6292eb",
   "integrity_note": "Hashes show the files were delivered unchanged. They do not prove where a file came from.",
   "assets": [
     {
       "id": "outline",
-      "path": "open/outline.fdea0edf2ed6.glb",
+      "path": "open/outline.a62b2c9d6d88.glb",
       "kind": "mesh",
       "layer": "outline",
       "bytes": 25156,
-      "sha256": "fdea0edf2ed6049126e3b2366e94f5fce1ec36de5636c8e5263b393b58f44d53",
-      "input_fingerprint": "04cfc9b7f43a5d856edf98471c2a1ca2daa682070596ff575a3348f25996bf88",
+      "sha256": "a62b2c9d6d885e2a4dcfa4bcdaf2c705c1a38605bfcd5f33532efd12636bd37d",
+      "input_fingerprint": "45a66d53ca4ab06b8d35e0ed09e6fbc62416938cbc98d96f59732f37127b26c1",
       "source_ids": [
         "mni_icbm152_2009c_asym"
       ],
       "computed_with_source_ids": [],
-      "licence_id": "mni-icbm-notice",
-      "stated_licence_id": "mni-icbm-notice",
+      "license_id": "mni-icbm-notice",
+      "stated_license_id": "mni-icbm-notice",
       "route": [
         {
           "kind": "declared_space"
@@ -99,28 +99,31 @@
         }
       ],
       "stage_fingerprints": {
-        "fetch": "5ea8818d8213ce43bfd945c60b6a714e41b24fa1238fd7d4d9c6aaf94322747f",
+        "fetch": {
+          "mni_icbm152_nlin_asym_09c_nifti.zip": "804382e5d68a42ff8096ee845a7600b6658434da762fa67840a149eb25d48bd4"
+        },
         "register": null,
         "resample": "506c5e5984f12a78fafbc4b921f2ea6f0c28d401717ee7f9de357e3046066d14",
-        "mesh": "868fafc12d61f483ada9b7b55d2ae33d8396592247706165c2b3d4393f804e6c",
-        "write": "fdea0edf2ed6049126e3b2366e94f5fce1ec36de5636c8e5263b393b58f44d53"
+        "mesh": "c98f8451a2e93fa05156e3408d70bc53d94de1454d28dc272cb43084a72b9ad5",
+        "write": "a62b2c9d6d885e2a4dcfa4bcdaf2c705c1a38605bfcd5f33532efd12636bd37d"
       },
-      "position_check": "not independently checked"
+      "position_check": "not independently checked",
+      "modification_note": "The template's 1 mm brain mask was meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric). It is an outline of the average template, not a cortical surface."
     },
     {
       "id": "deep-cit168",
-      "path": "by-sa/deep-cit168.eb73764072b3.glb",
+      "path": "by-sa/deep-cit168.ae8a0364aa52.glb",
       "kind": "mesh",
       "layer": "deep",
       "bytes": 62296,
-      "sha256": "eb73764072b33870939dcc5128f74e54d4a9c9c41ea947ea4d8ec7cfa48f309c",
-      "input_fingerprint": "f865399925afedd3ef1bbcf49cc8875ee5df75fe1e5254c602eed05d72750ffd",
+      "sha256": "ae8a0364aa522802e915cb7c921b6fa8104f7ee5f4b8110a4dc99a61d5bf44a3",
+      "input_fingerprint": "03efddce0e51548c296df0ff8cf8e88f989c997f4831ced90aa54fb7b170bfbe",
       "source_ids": [
         "cit168_rl"
       ],
       "computed_with_source_ids": [],
-      "licence_id": "cc-by-sa-4.0",
-      "stated_licence_id": "cc-by-4.0",
+      "license_id": "cc-by-sa-4.0",
+      "stated_license_id": "cc-by-4.0",
       "route": [
         {
           "kind": "publisher_registered",
@@ -959,28 +962,31 @@
         }
       ],
       "stage_fingerprints": {
-        "fetch": "adef1369f0fab46867fef9e7326097bf7012610aeb26a68ebd3c80771d1a6708",
+        "fetch": {
+          "CIT168toMNI152-2009c_prob.nii.gz": "7a91c36701f36d9d908479b862e65a879d15f54badcec6878e61d857ab570f66"
+        },
         "register": null,
         "resample": "010dedba49cc98a28475f72dea57e611fe7d3fc13e2d04ff603b36b9ee206635",
-        "mesh": "3c7b11c9d2c4cdcc815091fdb7f5656e6331c1cfeffb486a7531d950f4b1ba34",
-        "write": "eb73764072b33870939dcc5128f74e54d4a9c9c41ea947ea4d8ec7cfa48f309c"
+        "mesh": "5e5ecc13897fdbd55d73d6c9a12f7b2bcb53327242e22baae4e59b3ca7df9731",
+        "write": "ae8a0364aa522802e915cb7c921b6fa8104f7ee5f4b8110a4dc99a61d5bf44a3"
       },
-      "position_check": "not independently checked"
+      "position_check": "not independently checked",
+      "modification_note": "Each probability map was split into left and right at x = 0, resampled linearly from 1 mm to 0.5 mm, cut at probability 0.5, then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric). Structures too small to outline are markers with no shape."
     },
     {
       "id": "hypothalamus-neudorfer",
-      "path": "open/hypothalamus-neudorfer.998fb8c21c1e.glb",
+      "path": "open/hypothalamus-neudorfer.f677d3c1bcb0.glb",
       "kind": "mesh",
       "layer": "deep",
       "bytes": 101592,
-      "sha256": "998fb8c21c1e4382d867521997a99995a54b4f7f6d5bb54de733d5eced0e9478",
-      "input_fingerprint": "beb0e833226479b11e01894f44aa9b049d4c4986f42cb2e545c06fab75f92b6d",
+      "sha256": "f677d3c1bcb0a1fc93d82a0bec5a0f2669391456f398bebf7057178dc6d5f508",
+      "input_fingerprint": "9c032b32bef62e0b56b941fab2c12a35f1a55543f34eb4fc548b9a7b02fce7a9",
       "source_ids": [
         "neudorfer_hypothalamus"
       ],
       "computed_with_source_ids": [],
-      "licence_id": "cc-by-4.0",
-      "stated_licence_id": "cc-by-4.0",
+      "license_id": "cc-by-4.0",
+      "stated_license_id": "cc-by-4.0",
       "route": [
         {
           "kind": "header_resample"
@@ -2127,22 +2133,26 @@
         }
       ],
       "stage_fingerprints": {
-        "fetch": "41f0840784b0af3fe57bb80634f7c20bf202efb6afd94bc880b775b26b5f22b4",
+        "fetch": {
+          "MNI152b_atlas_labels_0.5mm.nii.gz": "128ff46e2a996345c249456de7536eab03171a147c0a97d0bfe74f3d1953e5df",
+          "Volumes_names-labels.csv": "31ce37c47edb7aafc0c69661289f2b6e7c12a7c3b6c36c063432333b9ac8a201"
+        },
         "register": null,
         "resample": "db9cec8642a2e241be951a3607a8cf04c565674f269b0f80441873dcbb1b6c75",
-        "mesh": "d27836e22f35a924006feb2c6f9ef4320add351a4bf5f61d29f3c76096770ae9",
-        "write": "998fb8c21c1e4382d867521997a99995a54b4f7f6d5bb54de733d5eced0e9478"
+        "mesh": "14d0c9d8f54cc4cd30aba460e235ef23ca9efa7656b8a35d25a44a43291cbe7b",
+        "write": "f677d3c1bcb0a1fc93d82a0bec5a0f2669391456f398bebf7057178dc6d5f508"
       },
-      "position_check": "not independently checked"
+      "position_check": "not independently checked",
+      "modification_note": "Each label was meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric) on the publisher's 0.5 mm grid and placed through the file's affine with no other transform. Specks too small to outline were dropped. Structures too small to outline are markers with no shape."
     },
     {
       "id": "cortex-allen",
-      "path": "open/cortex-allen.510a410aa433.glb",
+      "path": "open/cortex-allen.c1005d025194.glb",
       "kind": "mesh",
       "layer": "cortical",
       "bytes": 1264680,
-      "sha256": "510a410aa4333694b494bc3f66dff21dc180cd902061e87f3c129452fb6ee5f0",
-      "input_fingerprint": "b98ce5e9015ff4c021043f2e9beb8446c2bb4ea44c0143ada43a09f973cc14cc",
+      "sha256": "c1005d0251946186d01d6f51fb7651d8f779dade878a0d183d0135b743e3e9d6",
+      "input_fingerprint": "25f51ce5c33343e54f370f151cf802f017f4c7c9781df476c42d3f2419c7b96f",
       "source_ids": [
         "allen_hra_3d_2020"
       ],
@@ -2150,8 +2160,8 @@
         "mni_icbm152_2009b_sym",
         "mni_icbm152_2009c_asym"
       ],
-      "licence_id": "cc-by-4.0",
-      "stated_licence_id": "cc-by-4.0",
+      "license_id": "cc-by-4.0",
+      "stated_license_id": "cc-by-4.0",
       "route": [
         {
           "kind": "computed_registration"
@@ -6269,48 +6279,45 @@
         }
       ],
       "stage_fingerprints": {
-        "fetch": "9c85c121f82d6608953ce2b9b49c79549eab04257769a21a4c2b005ac0b932be",
+        "fetch": {
+          "annotation_full.nii.gz": "2b05581e39c44f2623d9b0a69f64e3df0823c20d054abef92973812313335dc3",
+          "voxel_count.csv": "7348be087e6c2b6cb1fde1d604761cdd2d70e0e33ded6e1f322db334959d162f",
+          "mni_icbm152_nlin_sym_09b_nifti.zip": "acce3b85039176aaf7de2c3169272551ddfcae5d9a4e5ce642025b795f9f1d20",
+          "mni_icbm152_nlin_asym_09c_nifti.zip": "804382e5d68a42ff8096ee845a7600b6658434da762fa67840a149eb25d48bd4"
+        },
         "register": {
-          "archive": [
-            {
-              "name": "xfm_1Warp.nii.gz",
-              "sha256": "a46a7737e56ef8858478578a1f12a940ab8c8e944728c0ce0d6af45b84f02f64"
-            },
-            {
-              "name": "xfm_0GenericAffine.mat",
-              "sha256": "1d4a11a4e443ffa19dc0112d8b897d50fb88889cd2fa6d54bed76e8ebafd0da9"
-            }
-          ],
+          "archive_sha256": {
+            "xfm_1Warp.nii.gz": "a46a7737e56ef8858478578a1f12a940ab8c8e944728c0ce0d6af45b84f02f64",
+            "xfm_0GenericAffine.mat": "1d4a11a4e443ffa19dc0112d8b897d50fb88889cd2fa6d54bed76e8ebafd0da9"
+          },
           "setting": "B_syn_cc_fullres",
-          "tool": "antspyx 0.5.4",
-          "random_seed": 20261009,
+          "tool": "antspyx",
+          "tool_version": "0.5.4",
+          "seed": 20261009,
           "parameters": {
             "type_of_transform": "SyN",
             "syn_metric": "CC",
             "syn_sampling": 2,
-            "reg_iterations": [
-              40,
-              20,
-              10
-            ],
+            "reg_iterations": "40x20x10",
             "flow_sigma": 3,
             "grad_step": 0.2
           }
         },
-        "resample": "add986847de2a209f28aae4ac2824d27cfc4856a056f5f780d423057d1784ea9",
-        "mesh": "91e7b48acd9147a8827ff73014bcc45cf695f68bc7a08b74cf4ffd59ffd9eb15",
-        "write": "510a410aa4333694b494bc3f66dff21dc180cd902061e87f3c129452fb6ee5f0"
+        "resample": "84171456b58c9c7a99abc5689ac56c411e534ef329325a29bbfbc96a616c831c",
+        "mesh": "5a4f02d269279811ac68fa450f3b68d2bcd3b31db2a0b86607c24ceaaa3ded40",
+        "write": "c1005d0251946186d01d6f51fb7651d8f779dade878a0d183d0135b743e3e9d6"
       },
-      "position_check": "independently checked"
+      "position_check": "independently checked",
+      "modification_note": "The label volume was moved from the 2009b symmetric template to MNI152NLin2009cAsym by a computed nonlinear registration (ANTs SyN; labels nearest-neighbour, 0.5 mm grid). Each label was then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric); small specks were dropped. One hemisphere was drawn; the right side is its mirror."
     },
     {
       "id": "deep-allen",
-      "path": "open/deep-allen.5e09cb290bde.glb",
+      "path": "open/deep-allen.c8405b0c299d.glb",
       "kind": "mesh",
       "layer": "deep",
       "bytes": 1557844,
-      "sha256": "5e09cb290bdeedc18dc8a625c19959c3c74bbee0e5ca781e5288dae448364e85",
-      "input_fingerprint": "334dbef8f4109b7cedf5921babafc6d199133856639dc0c13af29f400ce9ee37",
+      "sha256": "c8405b0c299d3419a19cdbe3d808143581626cad598e995f02cfd60524efb949",
+      "input_fingerprint": "36b486c08fdbf30cbf6381952e870a129d18329e2b9a2b2bcf5e5e25b15ce42b",
       "source_ids": [
         "allen_hra_3d_2020"
       ],
@@ -6318,8 +6325,8 @@
         "mni_icbm152_2009b_sym",
         "mni_icbm152_2009c_asym"
       ],
-      "licence_id": "cc-by-4.0",
-      "stated_licence_id": "cc-by-4.0",
+      "license_id": "cc-by-4.0",
+      "stated_license_id": "cc-by-4.0",
       "route": [
         {
           "kind": "computed_registration"
@@ -9267,39 +9274,36 @@
         }
       ],
       "stage_fingerprints": {
-        "fetch": "9c85c121f82d6608953ce2b9b49c79549eab04257769a21a4c2b005ac0b932be",
+        "fetch": {
+          "annotation_full.nii.gz": "2b05581e39c44f2623d9b0a69f64e3df0823c20d054abef92973812313335dc3",
+          "voxel_count.csv": "7348be087e6c2b6cb1fde1d604761cdd2d70e0e33ded6e1f322db334959d162f",
+          "mni_icbm152_nlin_sym_09b_nifti.zip": "acce3b85039176aaf7de2c3169272551ddfcae5d9a4e5ce642025b795f9f1d20",
+          "mni_icbm152_nlin_asym_09c_nifti.zip": "804382e5d68a42ff8096ee845a7600b6658434da762fa67840a149eb25d48bd4"
+        },
         "register": {
-          "archive": [
-            {
-              "name": "xfm_1Warp.nii.gz",
-              "sha256": "a46a7737e56ef8858478578a1f12a940ab8c8e944728c0ce0d6af45b84f02f64"
-            },
-            {
-              "name": "xfm_0GenericAffine.mat",
-              "sha256": "1d4a11a4e443ffa19dc0112d8b897d50fb88889cd2fa6d54bed76e8ebafd0da9"
-            }
-          ],
+          "archive_sha256": {
+            "xfm_1Warp.nii.gz": "a46a7737e56ef8858478578a1f12a940ab8c8e944728c0ce0d6af45b84f02f64",
+            "xfm_0GenericAffine.mat": "1d4a11a4e443ffa19dc0112d8b897d50fb88889cd2fa6d54bed76e8ebafd0da9"
+          },
           "setting": "B_syn_cc_fullres",
-          "tool": "antspyx 0.5.4",
-          "random_seed": 20261009,
+          "tool": "antspyx",
+          "tool_version": "0.5.4",
+          "seed": 20261009,
           "parameters": {
             "type_of_transform": "SyN",
             "syn_metric": "CC",
             "syn_sampling": 2,
-            "reg_iterations": [
-              40,
-              20,
-              10
-            ],
+            "reg_iterations": "40x20x10",
             "flow_sigma": 3,
             "grad_step": 0.2
           }
         },
-        "resample": "4b78ebef035d5d7d94129e95ae09dcee8b6b5ef6f89cd4bb7cdf42f73c63e923",
-        "mesh": "ae1adfd67f61cf7a4a79f31364396608589b48612c30e86e42965c4b3b30f23b",
-        "write": "5e09cb290bdeedc18dc8a625c19959c3c74bbee0e5ca781e5288dae448364e85"
+        "resample": "1ef4abf610252b6e5a03d4ea1869408c47607e434255c97adaa4fe28bf011b6f",
+        "mesh": "c85fee28f71f0d90c9d3b016f3a199e7ff77734b5ed52c4a8c93588008fa5f85",
+        "write": "c8405b0c299d3419a19cdbe3d808143581626cad598e995f02cfd60524efb949"
       },
-      "position_check": "not independently checked"
+      "position_check": "not independently checked",
+      "modification_note": "The label volume was moved from the 2009b symmetric template to MNI152NLin2009cAsym by a computed nonlinear registration (ANTs SyN; labels nearest-neighbour, 0.5 mm grid). Each label was then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric); small specks were dropped. One hemisphere was drawn; the right side is its mirror. Position not independently checked: against CIT168 the transform is not distinguishable from none. Warped anyway, to stay coherent with adjacent gyri."
     }
   ]
 }
