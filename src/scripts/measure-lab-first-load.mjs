@@ -89,15 +89,20 @@ export function measureFirstLoad(distDirectory, pageUrlPath) {
   };
 }
 
+/** One part against its budget. A budget of null is not enforced; anything else must be a whole number of bytes. */
+function findPartFailures(label, gzipBytes, budgetBytes) {
+  if (budgetBytes === null) return [];
+  if (!Number.isInteger(budgetBytes) || budgetBytes <= 0) {
+    return [`${label} has no usable budget (${String(budgetBytes)}); give it a whole number of bytes in tool-pages.mjs`];
+  }
+  return gzipBytes > budgetBytes ? [`${label} is ${gzipBytes} bytes gzip, over its budget of ${budgetBytes}`] : [];
+}
+
 function findBudgetFailures(totals, { codeGzipBudgetBytes, documentGzipBudgetBytes }) {
-  const failures = [];
-  if (codeGzipBudgetBytes !== null && totals.codeGzipBytes > codeGzipBudgetBytes) {
-    failures.push(`code (stylesheets and scripts) is ${totals.codeGzipBytes} bytes gzip, over its budget of ${codeGzipBudgetBytes}`);
-  }
-  if (documentGzipBudgetBytes !== null && totals.documentGzipBytes > documentGzipBudgetBytes) {
-    failures.push(`document (HTML with its catalog data) is ${totals.documentGzipBytes} bytes gzip, over its budget of ${documentGzipBudgetBytes}`);
-  }
-  return failures;
+  return [
+    ...findPartFailures('code (stylesheets and scripts)', totals.codeGzipBytes, codeGzipBudgetBytes),
+    ...findPartFailures('document (HTML with its catalog data)', totals.documentGzipBytes, documentGzipBudgetBytes),
+  ];
 }
 
 /**

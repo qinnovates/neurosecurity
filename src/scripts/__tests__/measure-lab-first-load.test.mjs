@@ -230,6 +230,13 @@ describe('checkFirstLoadBudgets', () => {
     expect(checkFirstLoadBudgets(FIXTURE_DIST, [roomy]).failures).toEqual(['/eager/: three.js is in the first load; it must load on demand']);
   });
 
+  it('fails a page whose budget is missing or misspelt, instead of skipping it', () => {
+    const { failures } = checkFirstLoadBudgets(FIXTURE_DIST, [{ urlPath: FIXTURE_PAGE, codeGzipBudgetBytes: fixtureTotals.codeGzipBytes, documentBudget: 1 }]);
+    expect(failures).toEqual([
+      '/tool/: document (HTML with its catalog data) has no usable budget (undefined); give it a whole number of bytes in tool-pages.mjs',
+    ]);
+  });
+
   it('throws when a listed page was not built', () => {
     expect(() => checkFirstLoadBudgets(FIXTURE_DIST, [{ ...atBudget, urlPath: '/absent/' }])).toThrow(/No built page/);
   });

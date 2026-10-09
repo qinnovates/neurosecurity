@@ -25,7 +25,7 @@ import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES } from './tool-pages.mjs';
 /** @type {readonly PostBuildCheck[]} */
 export const POST_BUILD_CHECKS = [
   { name: 'tool pages are isolated', findFailures: (distDirectory, pages) => findToolPageFailures(distDirectory, pages) },
-  { name: 'tool pages are within their first-load budget', findFailures: (distDirectory, pages) => checkFirstLoadBudgets(distDirectory, pages).failures },
+  { name: 'tool pages are within their first-load budgets', findFailures: (distDirectory, pages) => checkFirstLoadBudgets(distDirectory, pages).failures },
 ];
 
 /**
