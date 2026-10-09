@@ -2,7 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { buildThreatModelReport } from '../build-report';
 import { ThreatModelDataError } from '../errors';
 import { buildModelFromIntake, defaultAnswersFor, type IntakeAnswers } from '../intake-to-model';
-import { EMPTY_LENS, applyLens, countOpenRisks, isLensActive } from '../lens';
+import { describeEvidence } from '../evidence-levels';
+import { EMPTY_LENS, applyLens, countOpenRisks, isLensActive, lensGoalOf, listLensElementIds, type LensContext } from '../lens';
 import { parsePlacementRules, parseThreatThemes } from '../parse-mappings';
 import type { ThreatModelReport } from '../report-types';
 import { loadEngineBundle, loadReferenceData, readDataFile } from './load-test-data';
@@ -21,6 +22,8 @@ function reportFor(archetypeId: string, overrides: Partial<IntakeAnswers> = {}):
 
 const stimulator = reportFor('subcortical-stimulator');
 const catalogRows = stimulator.riskRows.filter((row) => row.source === 'catalog');
+const contextFor = (report: ThreatModelReport): LensContext => ({ model: report.model, techniques: engineData.techniques });
+const stimulatorContext = contextFor(stimulator);
 
 describe('risk rows carry the lens fields', () => {
   it('gives every catalog row an entry path and a goal, and leaves baseline rows without', () => {
@@ -29,7 +32,7 @@ describe('risk rows carry the lens fields', () => {
         expect(row.entryPath, row.riskId).not.toBeNull();
         expect(row.goal, row.riskId).not.toBeNull();
       }
-      if (row.source === 'stride') expect([row.entryPath, row.goal]).toEqual([null, null]);
+      if (row.source === 'stride') expect([row.entryPath, row.goal, row.evidenceTier]).toEqual([null, null, null]);
     }
   });
 });
@@ -37,17 +40,17 @@ describe('risk rows carry the lens fields', () => {
 describe('applyLens', () => {
   it('lets everything through when empty', () => {
     expect(isLensActive(EMPTY_LENS)).toBe(false);
-    expect(applyLens(stimulator.riskRows, EMPTY_LENS)).toHaveLength(stimulator.riskRows.length);
+    expect(applyLens(stimulator.riskRows, EMPTY_LENS, stimulatorContext)).toHaveLength(stimulator.riskRows.length);
   });
 
-  it('narrows to one part of the device', () => {
-    const rows = applyLens(stimulator.riskRows, { ...EMPTY_LENS, elementId: 'implant' });
+  it('narrows to one part alone when the lens says so', () => {
+    const rows = applyLens(stimulator.riskRows, { ...EMPTY_LENS, elementId: 'implant', isElementOnly: true }, stimulatorContext);
     expect(rows.length).toBeGreaterThan(0);
     expect(rows.every((row) => row.elementId === 'implant')).toBe(true);
   });
 
   it('narrows by how a technique gets in and by what it does, together', () => {
-    const rows = applyLens(stimulator.riskRows, { elementId: null, entryPaths: ['neural_interface'], goals: ['change'] });
+    const rows = applyLens(stimulator.riskRows, { ...EMPTY_LENS, entryPaths: ['neural_interface'], goals: ['change'] }, stimulatorContext);
     expect(rows.length).toBeGreaterThan(0);
     expect(rows.every((row) => row.entryPath === 'neural_interface' && row.goal === 'change')).toBe(true);
   });
@@ -55,26 +58,24 @@ describe('applyLens', () => {
 
 describe('countOpenRisks', () => {
   it('counts every open catalog risk once per lens when nothing is selected', () => {
-    const counts = countOpenRisks(stimulator.riskRows, EMPTY_LENS, []);
+    const counts = countOpenRisks(stimulator.riskRows, EMPTY_LENS);
     const sum = (record: Record<string, number>): number => Object.values(record).reduce((total, count) => total + count, 0);
     expect(sum(counts.byEntryPath)).toBe(catalogRows.length);
-    expect(sum(counts.byGoal)).toBe(catalogRows.length);
+    expect(sum(counts.byGoal) - sum(counts.baselineByGoal)).toBe(catalogRows.length);
   });
 
   it('shows what choosing a value would display, given the other lens', () => {
-    const lens = { elementId: null, entryPaths: [], goals: ['deny' as const] };
-    const counts = countOpenRisks(stimulator.riskRows, lens, []);
-    const shown = applyLens(stimulator.riskRows, { ...lens, entryPaths: ['neural_interface'] });
+    const lens = { ...EMPTY_LENS, goals: ['deny' as const] };
+    const counts = countOpenRisks(stimulator.riskRows, lens, stimulatorContext);
+    const shown = applyLens(stimulator.riskRows, { ...lens, entryPaths: ['neural_interface'] }, stimulatorContext);
     expect(counts.byEntryPath.neural_interface).toBe(shown.length);
   });
 
-  it('drops a risk from the counts once one of its controls is in place', () => {
-    const row = catalogRows.find((candidate) => candidate.controls.length > 0);
-    if (row === undefined) throw new Error('test setup: no catalog row with a control');
-    const before = countOpenRisks(stimulator.riskRows, EMPTY_LENS, []);
-    const after = countOpenRisks(stimulator.riskRows, EMPTY_LENS, [row.controls[0]]);
-    const total = (counts: typeof before): number => Object.values(counts.byGoal).reduce((sum, count) => sum + count, 0);
-    expect(total(after)).toBeLessThan(total(before));
+  it('drops exactly one risk from the counts once a decision is recorded on its row', () => {
+    const [decided] = catalogRows;
+    const rows = stimulator.riskRows.map((row) => (row.riskId === decided.riskId ? { ...row, status: 'mitigated' as const } : row));
+    const total = (counts: ReturnType<typeof countOpenRisks>): number => Object.values(counts.byGoal).reduce((sum, count) => sum + count, 0);
+    expect(total(countOpenRisks(rows, EMPTY_LENS))).toBe(total(countOpenRisks(stimulator.riskRows, EMPTY_LENS)) - 1);
   });
 });
 
@@ -139,8 +140,82 @@ describe('goal coverage', () => {
 
   it('shows that deny-type techniques are mostly not placed, which is why a recording device counts none', () => {
     const headset = reportFor('noninvasive-eeg-headset');
-    const openDeny = countOpenRisks(headset.riskRows, EMPTY_LENS, headset.model.controlsInPlace).byGoal.deny;
-    expect(openDeny).toBe(0);
+    const counts = countOpenRisks(headset.riskRows, EMPTY_LENS);
+    expect(counts.byGoal.deny - counts.baselineByGoal.deny).toBe(0);
     expect(headset.goalCoverage.deny.placedTechniques).toBeLessThan(headset.goalCoverage.deny.catalogTechniques);
+  });
+});
+
+describe('a selected part brings its connections', () => {
+  const cortical = reportFor('cortical-read-implant');
+  const context = contextFor(cortical);
+  const app = cortical.model.components.find((component) => component.kind === 'patient_app');
+  if (app === undefined) throw new Error('test setup: the cortical preset has no patient app');
+  const appLinks = cortical.model.links.filter((link) => link.fromComponentId === app.id || link.toComponentId === app.id);
+
+  it('includes the patient app\'s Bluetooth and internet links by default', () => {
+    expect(appLinks.map((link) => link.medium).sort()).toEqual(['bluetooth_le', 'internet']);
+    const lens = { ...EMPTY_LENS, elementId: app.id };
+    expect(listLensElementIds(lens, cortical.model)).toEqual([app.id, ...appLinks.map((link) => link.id)]);
+    const rows = applyLens(cortical.riskRows, lens, context);
+    const expectedIds = new Set([app.id, ...appLinks.map((link) => link.id)]);
+    expect(rows).toEqual(cortical.riskRows.filter((row) => expectedIds.has(row.elementId)));
+    for (const link of appLinks) expect(rows.some((row) => row.elementId === link.id), link.id).toBe(true);
+  });
+
+  it('shows the part alone when restricted, and a selected connection never brings its parts', () => {
+    const alone = applyLens(cortical.riskRows, { ...EMPTY_LENS, elementId: app.id, isElementOnly: true }, context);
+    expect(alone).toEqual(cortical.riskRows.filter((row) => row.elementId === app.id));
+    const [link] = appLinks;
+    expect(applyLens(cortical.riskRows, { ...EMPTY_LENS, elementId: link.id }, context)).toEqual(cortical.riskRows.filter((row) => row.elementId === link.id));
+  });
+});
+
+describe('the catalog facets of the lens', () => {
+  const context = stimulatorContext;
+  const techniqueById = new Map(engineData.techniques.map((technique) => [technique.id, technique]));
+
+  it('narrows to one technique', () => {
+    const { techniqueId } = catalogRows[0];
+    const rows = applyLens(stimulator.riskRows, { ...EMPTY_LENS, techniqueId }, context);
+    expect(rows).toEqual(stimulator.riskRows.filter((row) => row.techniqueId === techniqueId));
+    expect(isLensActive({ ...EMPTY_LENS, techniqueId })).toBe(true);
+  });
+
+  it('narrows by catalog severity and by evidence label, and hides baseline rows under either', () => {
+    const critical = applyLens(stimulator.riskRows, { ...EMPTY_LENS, severities: ['critical'] }, context);
+    expect(critical).toEqual(stimulator.riskRows.filter((row) => row.catalogSeverity === 'critical'));
+    const label = describeEvidence(catalogRows[0]).label;
+    const byEvidence = applyLens(stimulator.riskRows, { ...EMPTY_LENS, evidenceLevels: [label] }, context);
+    expect(byEvidence).toEqual(catalogRows.filter((row) => describeEvidence(row).label === label));
+    expect(byEvidence.length).toBeGreaterThan(0);
+  });
+
+  it('narrows by band through the technique behind each row', () => {
+    const bandId = techniqueById.get(catalogRows[0].techniqueId ?? '')?.bandIds[0];
+    if (bandId === undefined) throw new Error('test setup: the first technique lists no band');
+    const rows = applyLens(stimulator.riskRows, { ...EMPTY_LENS, bandIds: [bandId] }, context);
+    expect(rows).toEqual(catalogRows.filter((row) => techniqueById.get(row.techniqueId ?? '')?.bandIds.includes(bandId)));
+    expect(rows.length).toBeGreaterThan(0);
+  });
+});
+
+describe('baseline denial-of-service rows', () => {
+  const baselineDeny = stimulator.riskRows.filter((row) => row.source === 'stride' && row.strideCategories.includes('denial_of_service'));
+
+  it('count under the Deny goal, in the rows shown and in the count', () => {
+    expect(baselineDeny.length).toBeGreaterThan(0);
+    for (const row of baselineDeny) expect(lensGoalOf(row)).toBe('deny');
+    const shown = applyLens(stimulator.riskRows, { ...EMPTY_LENS, goals: ['deny'] }, stimulatorContext);
+    expect(shown.filter((row) => row.source === 'stride')).toEqual(baselineDeny);
+    const counts = countOpenRisks(stimulator.riskRows, EMPTY_LENS, stimulatorContext);
+    expect(counts.baselineByGoal).toEqual({ read: 0, change: 0, deny: baselineDeny.length });
+    expect(counts.byGoal.deny).toBe(shown.length);
+  });
+
+  it('leave every other baseline row without a goal', () => {
+    for (const row of stimulator.riskRows.filter((candidate) => candidate.source === 'stride' && !candidate.strideCategories.includes('denial_of_service'))) {
+      expect(lensGoalOf(row)).toBeNull();
+    }
   });
 });

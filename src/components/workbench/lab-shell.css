@@ -1,66 +1,183 @@
-/* The shell every Lab screen sits in. Colour, type and motion tokens come from lab-kit/lab-kit.css. */
+/* The shell every Lab screen sits in. Colour, type, shape and motion tokens come from lab-kit/lab-kit.css. */
 
-:root { --lab-topbar-height: 2.75rem; }
+/* --lab-topbar-height is the measured height of the sticky bars (set on .lab-shell by ShellFrame).
+   A screen that pins something under the bars uses it as `top`. The value here is the one-row fallback. */
+:root { --lab-bar-row: 2.75rem; --lab-topbar-height: var(--lab-bar-row); --lab-foot-height: 0px; }
 
-.lab-shell { display: flex; flex-direction: column; min-height: 100dvh; background: var(--lab-ground); }
+/* A drawer opens between the bars and the statements, never over either. The change of screen itself is the
+   kit's cross-fade (lab-kit/styles/lab-motion.css), run by use-lab-route through the kit's useViewTransition. */
+.lab-shell { --lab-drawer-top: var(--lab-topbar-height); --lab-drawer-bottom: var(--lab-foot-height); }
 
-.lab-topbar { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: 0 0.875rem; min-height: var(--lab-topbar-height); padding: 0 0.75rem; background: var(--lab-panel); border-bottom: 1px solid var(--lab-line); }
-.lab-brand { margin: 0; font-family: var(--lab-font); font-size: 0.9375rem; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap; }
-.lab-site-link { font-size: 0.75rem; color: var(--lab-ink-soft); white-space: nowrap; }
+/* The marketing site's dotted grid overlay does not belong inside the tool. */
+html:root[data-theme] body:has(.lab-shell)::before { display: none; }
+
+@media screen {
+  body:has(.lab-shell) { overflow: hidden; }
+  /* The app fills the viewport. Only .lab-shell-scroll scrolls, so the statements below it never cover anything. */
+  .lab-shell { display: flex; flex-direction: column; height: 100vh; height: 100dvh; background: var(--lab-ground); }
+  /* The screen scrolls down only. Anything wide (a table, a diagram, a row of segments) scrolls or wraps inside itself. */
+  .lab-shell-scroll { flex: 1 1 0; min-height: 0; overflow-x: clip; overflow-y: auto; overscroll-behavior: contain; scroll-padding: calc(var(--lab-topbar-height) + 0.5rem) 0 0.5rem; }
+  .lab-shell-body { overflow-x: clip; }
+  /* The bars and the statements keep their own picture through a change of screen: they do not cross-fade with it. */
+  .lab-bars { view-transition-name: lab-bars; }
+  .lab-foot { view-transition-name: lab-foot; }
+}
+:root:has(.lab-shell)::view-transition-old(lab-bars), :root:has(.lab-shell)::view-transition-old(lab-foot) { display: none; }
+:root:has(.lab-shell)::view-transition-new(lab-bars), :root:has(.lab-shell)::view-transition-new(lab-foot) { animation: none; }
+
+/* Thin chrome: content scrolls beneath the bars and shows through the material. */
+/* Hairlines here are drawn as shadows, so the bars are 44px, or 80px with the view row: whole steps of the 4px grid. */
+.lab-bars { position: sticky; top: 0; left: 0; z-index: 20; background: var(--lab-panel); box-shadow: 0 1px 0 var(--lab-line); }
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .lab-bars { background: var(--lab-material); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); }
+}
+
+.lab-visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.lab-skip { position: absolute; left: 0.5rem; top: -4rem; z-index: 40; padding: 0.5rem 0.75rem; font-weight: 600; color: var(--lab-ink); background: var(--lab-panel-raised); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-m); box-shadow: var(--lab-shadow-float); }
+.lab-skip:focus { top: 0.5rem; }
+
+.lab-topbar { display: flex; align-items: center; gap: 0 var(--lab-gap); min-height: var(--lab-bar-row); padding: 0 var(--lab-gap); }
+.lab-brand { margin: 0; font-family: var(--lab-font); font-size: var(--lab-text-title); font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; }
+.lab-site-link { flex: none; font-size: var(--lab-text-meta); color: var(--lab-ink-soft); white-space: nowrap; }
 
 .lab-modes { display: flex; }
-.lab-mode { padding: 0 0.6875rem; min-height: var(--lab-topbar-height); font: inherit; font-weight: 500; color: var(--lab-ink-soft); background: none; border: 0; cursor: pointer; transition: color var(--motion-quick) var(--motion-ease); }
+.lab-modes { position: relative; }
+.lab-mode { padding: 0 0.75rem; min-height: var(--lab-bar-row); font: inherit; color: var(--lab-ink-soft); background: none; border: 0; cursor: pointer; transition: color var(--lab-dur-1) var(--lab-ease), transform var(--lab-dur-1) var(--lab-ease); }
 .lab-mode:hover { color: var(--lab-ink); }
-.lab-mode[aria-current="page"] { color: var(--lab-ink); font-weight: 600; box-shadow: inset 0 -2px 0 var(--lab-select); }
-.lab-modes--bottom { display: none; }
+.lab-mode[aria-current="page"] { color: var(--lab-ink); font-weight: 600; }
+.lab-modes--bottom .lab-mode { flex: 1; padding: 0; }
+/*
+ * The line under the current mode or view is one element that slides to the one chosen (ModeNav, ViewTabs).
+ * Until it has been measured the current item draws the line itself, so the still picture is the same.
+ */
+.lab-tab-line { position: absolute; left: 0; bottom: 0; height: 2px; background: var(--lab-ink); pointer-events: none; transition: transform var(--lab-dur-2) var(--lab-spring), width var(--lab-dur-2) var(--lab-spring); }
+.lab-modes .lab-tab-line { background: var(--lab-select); }
+.lab-modes--bottom .lab-tab-line { bottom: auto; top: 0; }
+.lab-modes:not([data-line="true"]) .lab-mode[aria-current="page"] { box-shadow: inset 0 -2px 0 var(--lab-select); }
+.lab-modes--bottom:not([data-line="true"]) .lab-mode[aria-current="page"] { box-shadow: inset 0 2px 0 var(--lab-select); }
+.lab-mode:active, .lab-viewtab:active { transform: scale(0.97); }
+
+/* The focus ring sits inside controls that touch the edge of a bar, so the bar never clips it. */
+.lab-mode:focus-visible, .lab-viewtab:focus-visible, .lab-view-select:focus-visible, .lab-goto:focus-visible, .lab-device-summary:focus-visible, .lab-menu-item:focus-visible, .lab-palette-input:focus-visible { outline: 2px solid var(--lab-focus); outline-offset: -2px; }
+.lab-shell-body:focus { outline: none; }
+
+.lab-goto { display: inline-flex; align-items: center; gap: 0.5rem; margin-left: auto; padding: 0.1875rem 0.625rem; font: inherit; color: var(--lab-ink-soft); background: none; border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-m); white-space: nowrap; cursor: pointer; transition: color var(--lab-dur-1) var(--lab-ease); }
+.lab-goto:hover { color: var(--lab-ink); }
+.lab-goto-keys { font-family: var(--lab-font); font-size: var(--lab-text-meta); }
 
 /* The device in focus sits at the right of the bar on every screen. */
-.lab-device-slot { margin-left: auto; min-width: 0; flex: 0 1 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.25rem 0.75rem; }
+.lab-device-slot { min-width: 0; flex: 0 1 auto; display: flex; align-items: center; justify-content: flex-end; gap: 0.25rem var(--lab-gap); }
 .lab-device { position: relative; min-width: 0; max-width: 100%; }
-.lab-device-summary { display: flex; align-items: center; min-width: 0; gap: 0.5rem; padding: 0.25rem 0.625rem; border: 1px solid var(--lab-line-strong); border-radius: var(--lab-radius); cursor: pointer; list-style: none; white-space: nowrap; }
-.lab-device-summary::-webkit-details-marker { display: none; }
+.lab-device-summary { display: flex; align-items: center; min-width: 0; max-width: 100%; gap: 0.5rem; padding: 0.1875rem 0.625rem; font: inherit; color: var(--lab-ink); background: none; border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-m); white-space: nowrap; cursor: pointer; }
+.lab-device-summary[aria-expanded="true"] { background: var(--lab-select-soft); }
 .lab-device-name { min-width: 0; font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
-.lab-device-unsaved { flex: none; }
+.lab-device-facts { overflow: hidden; text-overflow: ellipsis; }
+.lab-device-flag { flex: none; font-weight: 600; }
 .lab-device-glyph { flex: none; }
 .lab-device-glyph path { stroke: var(--lab-ink-soft); stroke-width: 1.5; }
 .lab-device-glyph circle { fill: var(--lab-panel); stroke: var(--lab-ink); stroke-width: 1.25; }
 .lab-device-glyph circle[data-interface="true"] { fill: var(--lab-ink); }
-.lab-device-unsaved { color: var(--lab-high); font-weight: 500; }
-.lab-device-alert { margin: 0; color: var(--lab-high); font-weight: 500; }
-.lab-device-panel { position: absolute; right: 0; top: calc(100% + 0.375rem); z-index: 30; width: min(22rem, calc(100vw - 1.5rem)); padding: 0.75rem; background: var(--lab-panel); border: 1px solid var(--lab-line-strong); border-radius: var(--lab-radius); }
-.lab-device-panel p { margin: 0 0 0.375rem; }
-.lab-device-list { margin: 0 0 0.625rem; padding-left: 1.125rem; list-style: disc; color: var(--lab-ink-soft); }
-.lab-remember { display: flex; align-items: center; gap: 0.375rem; margin-bottom: 0.375rem; font-weight: 500; cursor: pointer; }
+.lab-device-alert { margin: 0; max-width: 20rem; font-size: var(--lab-text-meta); font-weight: 600; white-space: normal; }
 
-.lab-viewtabs { display: flex; align-items: center; gap: 0 1rem; padding: 0 0.5rem; overflow-x: auto; background: var(--lab-panel); border-bottom: 1px solid var(--lab-line); }
+/* The device menu floats: one soft shadow, a solid surface. */
+.lab-device-panel { position: absolute; right: 0; top: calc(100% + 0.375rem); z-index: 30; width: min(22rem, calc(100vw - 1.5rem)); max-height: calc(100dvh - var(--lab-topbar-height) - 1rem); overflow: auto; padding: var(--lab-gap); background: var(--lab-panel-raised); border: 1px solid var(--lab-line); border-radius: var(--lab-radius-l); box-shadow: var(--lab-shadow-float); animation: lab-float-in var(--lab-dur-2) var(--lab-spring, var(--lab-ease)); transform-origin: top right; }
+.lab-device-panel p { margin: 0 0 0.375rem; }
+.lab-device-panel .lab-device-loaded:empty { margin: 0; }
+.lab-device-list { margin: 0 0 0.625rem; padding-left: 1.125rem; list-style: disc; color: var(--lab-ink-soft); }
+.lab-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem; margin-bottom: 0.625rem; padding: 0.375rem 0; border-top: 1px solid var(--lab-line); border-bottom: 1px solid var(--lab-line); }
+.lab-menu-item { min-height: 2rem; padding: 0.25rem 0.5rem; font: inherit; color: var(--lab-ink); text-align: left; background: none; border: 0; border-radius: var(--lab-radius-s); cursor: pointer; transition: background var(--lab-dur-1) var(--lab-ease); }
+.lab-menu-item:hover { background: var(--lab-select-soft); }
+.lab-menu-confirm { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.lab-device-status { display: grid; gap: 0.25rem; color: var(--lab-ink-soft); }
+.lab-device-status p { margin: 0; }
+.lab-device-status strong { color: var(--lab-ink); font-weight: 600; }
+.lab-device-notice { margin: 0 0 0.625rem; padding: 0.5rem 0.625rem; color: var(--lab-ink); border: 1px solid var(--lab-caution); border-radius: var(--lab-radius-s); }
+.lab-device-status .lab-device-notice { margin: 0.25rem 0; }
+.lab-remember { display: flex; align-items: center; gap: 0.375rem; color: var(--lab-ink); cursor: pointer; }
+
+.lab-viewtabs { position: relative; display: flex; align-items: center; gap: 0 1rem; padding: 0 0.5rem; overflow-x: auto; box-shadow: inset 0 1px 0 var(--lab-line); }
 .lab-viewtab-group { display: flex; align-items: center; gap: 0.125rem; }
 .lab-viewtab-group > .lab-label { padding-left: 0.25rem; white-space: nowrap; }
-.lab-viewtab { padding: 0.5rem 0.625rem; font: inherit; color: var(--lab-ink-soft); background: none; border: 0; white-space: nowrap; cursor: pointer; transition: color var(--motion-quick) var(--motion-ease); }
+.lab-viewtab { padding: 0.5rem 0.625rem; font: inherit; color: var(--lab-ink-soft); background: none; border: 0; white-space: nowrap; cursor: pointer; transition: color var(--lab-dur-1) var(--lab-ease), transform var(--lab-dur-1) var(--lab-ease); }
 .lab-viewtab:hover { color: var(--lab-ink); }
-.lab-viewtab[aria-current="page"] { color: var(--lab-ink); font-weight: 600; box-shadow: inset 0 -2px 0 var(--lab-ink); }
+.lab-viewtab[aria-current="page"] { color: var(--lab-ink); font-weight: 600; }
+.lab-viewtabs:not([data-line="true"]) .lab-viewtab[aria-current="page"] { box-shadow: inset 0 -2px 0 var(--lab-ink); }
+.lab-viewselect { display: flex; align-items: center; gap: 0.5rem; width: 100%; padding: 0.375rem 0.25rem; }
+.lab-view-select { flex: 1; min-width: 0; min-height: 2rem; padding: 0.25rem 0.5rem; font: inherit; color: var(--lab-ink); background: var(--lab-panel); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-s); }
 
-.lab-shell-body { flex: 1; min-width: 0; padding: 0.875rem 1rem 1.5rem; }
+.lab-shell-body { min-width: 0; padding: 0.875rem var(--lab-pad) 1.5rem; }
+.lab-address-notice { margin: var(--lab-gap) var(--lab-pad) 0; padding: 0.5rem 0.75rem; border: 1px solid var(--lab-caution); border-radius: var(--lab-radius-s); }
 
-/* The statements stay at the bottom edge while the screen scrolls. */
-.lab-foot { position: sticky; bottom: 0; z-index: 15; background: var(--lab-panel); border-top: 1px solid var(--lab-line); padding-bottom: env(safe-area-inset-bottom, 0px); }
-.lab-standing { padding: 0.4375rem 0.75rem; color: var(--lab-ink-soft); }
-.lab-standing p { margin: 0; }
-.lab-standing-brief { display: none; }
-.lab-standing-brief summary { cursor: pointer; }
-.lab-standing-more { color: var(--lab-ink); font-weight: 600; text-decoration: underline; }
-.lab-standing-brief ul { margin: 0.375rem 0 0; padding-left: 1.125rem; list-style: disc; }
+/*
+ * The statements sit under the scrolling screen, outside it. Each is a whole sentence at every width.
+ * The bar is above a drawer or sheet in the stack, so a sheet rises from behind it and never covers a statement.
+ */
+.lab-foot { position: relative; z-index: 55; flex: none; background: var(--lab-panel); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.lab-foot > * { box-shadow: inset 0 1px 0 var(--lab-line); }
+.lab-standing { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 1.25rem; padding: 0.5rem var(--lab-gap); font-size: var(--lab-text-meta); line-height: 1rem; color: var(--lab-ink-soft); }
+.lab-standing-full { display: flex; flex-wrap: wrap; gap: 0 1.25rem; margin: 0; padding: 0; list-style: none; }
+.lab-standing-full li { max-width: 72ch; }
+.lab-standing-site { color: var(--lab-ink); text-decoration: underline; }
+.lab-standing-inline { margin: var(--lab-gap) var(--lab-pad) 0; background: var(--lab-panel); border: 1px solid var(--lab-line); border-radius: var(--lab-radius-m); }
+@media (min-width: 1200px) {
+  /* Five short columns, the long statement given the room it needs, so the bar is two lines high. */
+  .lab-standing-full { display: grid; grid-template-columns: 1fr 1.15fr 1.9fr 1.2fr 1fr; gap: 0 1.5rem; flex: 1; }
+}
+
+/* The command palette: a floating sheet over a dimmed screen. */
+.lab-palette-backdrop { position: fixed; inset: 0; z-index: 60; display: grid; justify-items: center; align-items: start; padding: min(14vh, 6rem) 0.75rem 0.75rem; background: var(--lab-scrim); animation: lab-scrim-in var(--lab-dur-1) var(--lab-ease); }
+.lab-palette-backdrop[data-closing="true"] { pointer-events: none; animation: lab-scrim-out var(--lab-dur-1) var(--lab-ease) both; }
+/* The palette's fill is the kit's `.lab-float`: the floating material where the browser can blur, a solid surface elsewhere. */
+.lab-palette { display: flex; flex-direction: column; width: min(36rem, 100%); max-height: min(32rem, 100%); border: 1px solid var(--lab-line); border-radius: var(--lab-radius-l); box-shadow: var(--lab-shadow-float); overflow: hidden; animation: lab-float-in var(--lab-dur-2) var(--lab-spring, var(--lab-ease)); transform-origin: top center; }
+.lab-palette-head { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-bottom: 1px solid var(--lab-line); }
+.lab-palette-input { flex: 1; min-width: 0; min-height: 2.25rem; padding: 0.25rem 0.625rem; font: inherit; font-size: var(--lab-text-title); color: var(--lab-ink); background: transparent; border: 0; border-radius: var(--lab-radius-s); }
+.lab-palette-input::placeholder { color: var(--lab-ink-soft); }
+.lab-palette-list { flex: 1; min-height: 0; overflow: auto; padding: 0.25rem 0.375rem; }
+.lab-palette-heading { margin: 0; padding: 0.5rem 0.5rem 0.25rem; }
+.lab-palette-option { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2rem; padding: 0.25rem 0.5rem; border-radius: var(--lab-radius-s); cursor: pointer; }
+.lab-palette-option[aria-selected="true"] { color: var(--lab-select-ink); background: var(--lab-select); }
+.lab-palette-option[aria-selected="true"] > * { color: inherit; }
+/* What the query matched is heavier, not coloured. */
+.lab-palette-mark { font-weight: 600; color: inherit; background: none; }
+.lab-palette-foot { margin: 0; padding: 0.375rem 0.75rem; font-size: var(--lab-text-meta); border-top: 1px solid var(--lab-line); }
+
+@keyframes lab-float-in { from { opacity: 0; transform: translateY(-0.375rem) scale(0.98); } }
+@keyframes lab-scrim-in { from { opacity: 0; } }
+@keyframes lab-scrim-out { to { opacity: 0; } }
 
 @media (max-width: 720px) {
-  .lab-modes--top, .lab-device-facts, .lab-site-link, .lab-standing-full { display: none; }
-  .lab-modes--bottom { display: flex; border-top: 1px solid var(--lab-line); }
-  .lab-modes--bottom .lab-mode { flex: 1; padding: 0; }
-  .lab-modes--bottom .lab-mode[aria-current="page"] { box-shadow: inset 0 2px 0 var(--lab-select); }
-  .lab-standing-brief { display: block; }
-  .lab-shell-body { padding: 0.75rem 0.75rem 1.25rem; }
-  .lab-topbar { flex-wrap: nowrap; }
+  .lab-device-facts { display: none; }
+  .lab-shell-body { padding: var(--lab-gap) var(--lab-gap) 1.25rem; }
+  .lab-goto { padding: 0.1875rem 0.5rem; }
+  .lab-standing-inline, .lab-address-notice { margin: var(--lab-gap) var(--lab-gap) 0; }
+}
+
+@media (pointer: coarse) {
+  .lab-mode, .lab-viewtab, .lab-goto, .lab-device-summary, .lab-menu-item, .lab-view-select, .lab-palette-option, .lab-palette-input, .lab-remember, .lab-palette-head .lab-button, .lab-menu-confirm .lab-button, .lab-standing-site { min-height: 2.75rem; }
+  .lab-goto { min-width: 2.75rem; justify-content: center; }
+  .lab-standing-site { display: inline-flex; align-items: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-device-panel, .lab-palette, .lab-palette-backdrop, .lab-palette-backdrop[data-closing="true"] { animation: none; }
+  .lab-mode, .lab-viewtab, .lab-goto, .lab-menu-item, .lab-tab-line { transition: none; }
+  .lab-mode:active, .lab-viewtab:active { transform: none; }
 }
 
 @media print {
-  .lab-shell { display: block; min-height: 0; background: none; }
+  /* The frame goes back to normal flow: no fixed height, no inner scroller, no chrome. */
+  .lab-shell { display: block; height: auto; background: none; }
+  .lab-shell-scroll, .lab-shell-body { overflow: visible; }
+  .lab-bars, .lab-skip, .lab-address-notice, .lab-palette-backdrop, .lab-foot .lab-modes, .lab-standing-site { display: none; }
   .lab-shell-body { padding: 0; }
+  /*
+   * The standing statements are on paper with every view. The shell moves them to the top of the page when the
+   * browser says it is printing; where it does not say, they print where they are, after the view. The one view
+   * left out is the report, which prints them in its own title block.
+   */
+  .lab-foot, .lab-standing-inline { position: static; margin: 0 0 var(--lab-gap); padding: 0; background: none; border: 0; border-radius: 0; }
+  .lab-foot > * { box-shadow: none; }
+  .lab-standing { padding: 0 0 0.5rem; color: var(--lab-ink); border-bottom: 1px solid var(--lab-control-line); }
+  .lab-standing-full { display: block; }
+  .lab-shell[data-prints-own-statements="true"] :is(.lab-foot, .lab-standing-inline) { display: none; }
 }

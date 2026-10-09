@@ -1,22 +1,30 @@
 import { useState } from 'react';
 import Panel from '@/components/lab-kit/Panel';
 import type { TableData } from '@/lib/kql-engine';
+import { LAB_TABLE_POLICY_STATEMENT, SITE_TABLE_DESCRIPTIONS } from '@/lib/threat-model/lab-table-policy';
 import { QUERY_TABLE_DESCRIPTIONS } from '@/lib/threat-model/query-tables';
+import { groupTables } from './schema-groups';
 
 interface Props {
-  deviceTables: TableData;
-  /** The site's tables as the Lab may show them; null while loading. */
-  siteTables: TableData | null;
+  /** Every table the console can run on: the device's own and the site's. */
+  tables: TableData;
+  /** False while the site's tables are still loading. */
+  isSiteLoaded: boolean;
   siteError: string | null;
   /** The table whose columns are shown, or null. */
   openTable: string | null;
   onOpenTable: (tableName: string) => void;
 }
 
-function TableButton({ name, rowCount, isOpen, note, onOpen }: { name: string; rowCount: number; isOpen: boolean; note?: string; onOpen: () => void }) {
+/** What a table holds, in one sentence, when the Lab has one for it. */
+function describeTable(name: string): string | undefined {
+  return QUERY_TABLE_DESCRIPTIONS[name] ?? SITE_TABLE_DESCRIPTIONS[name];
+}
+
+function TableButton({ name, rowCount, isOpen, onOpen }: { name: string; rowCount: number; isOpen: boolean; onOpen: () => void }) {
   return (
     <li>
-      <button type="button" className="query-table" aria-pressed={isOpen} title={note} onClick={onOpen}>
+      <button type="button" className="query-table" aria-pressed={isOpen} title={describeTable(name)} onClick={onOpen}>
         <span className="lab-id">{name}</span>
         <span className="lab-figure">{rowCount.toLocaleString('en-US')}</span>
       </button>
@@ -25,41 +33,39 @@ function TableButton({ name, rowCount, isOpen, note, onOpen }: { name: string; r
 }
 
 /**
- * Every table that can be queried, with its size, read from the same data the console
- * runs on, so the list and the results cannot disagree. Choosing a table shows its
- * columns and runs a first look at it.
+ * Every table that can be queried, with its size, under three groups. The list is read from
+ * the same data the console runs on, so it and the results cannot disagree. Choosing a table
+ * shows its columns and runs a first look at it.
  */
-export default function SchemaBrowser({ deviceTables, siteTables, siteError, openTable, onOpenTable }: Props) {
+export default function SchemaBrowser({ tables, isSiteLoaded, siteError, openTable, onOpenTable }: Props) {
   const [filter, setFilter] = useState('');
   const needle = filter.trim().toLowerCase();
-  const siteNames = Object.keys(siteTables ?? {}).sort().filter((name) => name.includes(needle));
-  const deviceNames = Object.keys(QUERY_TABLE_DESCRIPTIONS).filter((name) => name.includes(needle));
-  const openRows = openTable === null ? undefined : (deviceTables[openTable] ?? siteTables?.[openTable]);
-  const openColumns = Object.keys(openRows?.[0] ?? {});
+  const groups = groupTables(Object.keys(tables).filter((name) => name.toLowerCase().includes(needle)));
+  const openColumns = Object.keys((openTable === null ? undefined : tables[openTable])?.[0] ?? {});
+  const hasMatch = groups.some((group) => group.tables.length > 0);
 
   return (
     <Panel title="Tables">
-      <input className="catalog-search" type="search" placeholder="Find a table" aria-label="Find a table by name" value={filter} onChange={(event) => setFilter(event.target.value)} />
-      <p className="lab-label query-group">This device</p>
-      <ul className="query-table-list">
-        {deviceNames.map((name) => (
-          <TableButton key={name} name={name} rowCount={deviceTables[name]?.length ?? 0} isOpen={name === openTable} note={QUERY_TABLE_DESCRIPTIONS[name as keyof typeof QUERY_TABLE_DESCRIPTIONS]} onOpen={() => onOpenTable(name)} />
-        ))}
-      </ul>
-      <p className="lab-label query-group">TARA database{siteTables !== null && `, ${Object.keys(siteTables).length} tables`}</p>
-      {siteError !== null && <p className="tm-error" role="alert">{siteError}</p>}
-      {siteTables === null && siteError === null && <p className="lab-soft" role="status">Loading the database…</p>}
-      <ul className="query-table-list query-table-list--long">
-        {siteNames.map((name) => <TableButton key={name} name={name} rowCount={siteTables?.[name]?.length ?? 0} isOpen={name === openTable} onOpen={() => onOpenTable(name)} />)}
-      </ul>
-      {needle !== '' && deviceNames.length + siteNames.length === 0 && <p className="lab-soft">No table name contains “{filter.trim()}”.</p>}
+      <input className="lab-input" type="search" placeholder="Find a table" aria-label="Find a table by name" value={filter} onChange={(event) => setFilter(event.target.value)} />
+      {siteError !== null && <p className="lab-notice query-group" role="alert">{siteError}</p>}
+      {!isSiteLoaded && siteError === null && <p className="lab-soft query-group" role="status">Loading the database…</p>}
+      {groups.filter((group) => group.tables.length > 0).map((group) => (
+        <section key={group.id} aria-label={group.label}>
+          <h3 className="lab-label query-group">{group.label}</h3>
+          <ul className="query-table-list">
+            {group.tables.map((name) => <TableButton key={name} name={name} rowCount={tables[name]?.length ?? 0} isOpen={name === openTable} onOpen={() => onOpenTable(name)} />)}
+          </ul>
+        </section>
+      ))}
+      {needle !== '' && !hasMatch && <p className="lab-soft query-group">No table name contains “{filter.trim()}”.</p>}
       {openTable !== null && (
         <>
           <p className="lab-label query-group">Columns of <span className="lab-id">{openTable}</span></p>
+          {describeTable(openTable) !== undefined && <p className="lab-soft">{describeTable(openTable)}</p>}
           <p className="lab-id query-columns">{openColumns.length === 0 ? 'This table has no rows, so its columns are not known.' : openColumns.join(' · ')}</p>
         </>
       )}
-      <p className="lab-soft query-group">Named companies and devices carry published specifications only here. Tables and columns that score them are left out of the Lab.</p>
+      <p className="lab-soft query-group">{LAB_TABLE_POLICY_STATEMENT}</p>
     </Panel>
   );
 }

@@ -1,144 +1,179 @@
-/* Styles for the threat model page. Colours come from the site's theme variables. */
+/*
+ * The device diagram, on the lab kit's tokens. The drawing is laid out in CSS pixels and is
+ * never scaled, so the sizes here are the sizes on screen; where it does not fit, the list
+ * form takes its place. Nothing in this file repeats: every animation runs once, in answer
+ * to the reader or to a change in the model.
+ */
 
-.tm-root { color: var(--color-text-primary); font-family: var(--font-sans, system-ui, sans-serif); }
+/* Frame: the panel the diagram sits in, its controls, and the sentence above it. */
+.lab-diagram-panel { display: grid; gap: 0.5rem; min-width: 0; padding: 0.5rem 0.75rem; }
+.lab-diagram-panel > * { min-width: 0; }
+.lab-diagram-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem var(--lab-gap); min-width: 0; min-height: 1.75rem; }
+.lab-diagram-bar .lab-segmented { max-width: 100%; }
+.lab-diagram-bar-end { margin-left: auto; }
+.lab-diagram-body[hidden] { display: none; }
+/* The controls that fold the drawing and show its legend: quiet text with a chevron that turns. */
+.lab-diagram-disclosure { display: inline-flex; align-items: center; gap: 0.375rem; min-height: 1.75rem; padding: 0 0.375rem; font: inherit; font-weight: 600; color: var(--lab-ink); background: none; border: 0; border-radius: var(--lab-radius-s); cursor: pointer; transition: background-color var(--lab-dur-1) var(--lab-ease); }
+.lab-diagram-disclosure:hover { background-color: var(--lab-hover); }
+.lab-diagram-disclosure:active { transform: scale(0.97); }
+/* A chain drawn on the diagram: its label, its name on one line, and the playback controls beside them. */
+.lab-diagram-chain { display: flex; flex: 1 1 auto; flex-wrap: wrap; align-items: center; gap: 0.375rem var(--lab-gap); min-width: 0; }
+.lab-diagram-chain-name { flex: 0 1 auto; min-width: 6rem; overflow: hidden; font-weight: 600; white-space: nowrap; text-overflow: ellipsis; }
+.lab-diagram-chain .lab-transport { margin: 0; }
+.lab-diagram-legend { display: grid; gap: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--lab-line); }
+.lab-diagram-legend[hidden] { display: none; }
+.lab-diagram-note { margin: 0; max-width: 72ch; color: var(--lab-ink-soft); }
+.lab-diagram-hypothesis { display: inline-block; padding: 0 0.4375rem; font-size: var(--lab-text-meta); font-weight: 600; color: var(--lab-ink); border: 1px solid var(--lab-ink); border-radius: 999px; white-space: nowrap; }
+.lab-diagram { display: grid; gap: 0.5rem; min-width: 0; }
+/* The drawing sits in the middle of its panel. Only a picture for paper is ever wider than its place, and that one scrolls. */
+.lab-diagram-scroll { overflow-x: auto; overscroll-behavior-x: contain; }
+.lab-diagram-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.lab-diagram-defs { position: absolute; }
 
-.tm-card { background: var(--color-glass-bg); border: 1px solid var(--color-glass-border); border-radius: 0.75rem; padding: 1rem 1.125rem; }
-.tm-card + .tm-card { margin-top: 1rem; }
-.tm-heading { font-size: 1rem; font-weight: 700; margin: 0 0 0.75rem; }
-.tm-subheading { font-size: 0.875rem; font-weight: 700; margin: 1rem 0 0.375rem; }
-.tm-muted { color: var(--color-text-muted); font-size: 0.8125rem; line-height: 1.45; }
-.tm-small { font-size: 0.75rem; }
+/* The drawing. Text is 12px, a part's name 13px; neither scales with the device. */
+.lab-diagram-svg { display: block; flex: none; max-width: none; margin-inline: auto; color: var(--lab-ink); font-family: var(--lab-font); }
+.lab-diagram-svg text, .lab-diagram-row-badge text { fill: var(--lab-ink); font-size: 12px; font-weight: 400; }
+.lab-diagram-svg[role="group"] :is(.lab-diagram-part, .lab-diagram-link, .lab-diagram-wire) { cursor: pointer; }
+.lab-diagram-zone rect { fill: var(--lab-zone); }
+.lab-diagram-svg .lab-diagram-zone text { fill: var(--lab-ink-soft); }
 
-.tm-field { display: block; margin-bottom: 0.875rem; }
-.tm-label { display: block; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 0.3125rem; }
-.tm-input, .tm-select { width: 100%; padding: 0.5rem 0.625rem; font-size: 0.875rem; color: inherit; background: var(--color-bg-surface); border: 1px solid var(--color-border); border-radius: 0.5rem; }
-.tm-input:focus-visible, .tm-select:focus-visible, .tm-button:focus-visible, .tm-tab:focus-visible, .tm-node:focus-visible, .tm-edge:focus-visible { outline: 2px solid var(--color-accent-primary); outline-offset: 2px; }
-.tm-checklist { max-height: 11rem; overflow-y: auto; border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.375rem 0.5rem; }
-.tm-check { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; padding: 0.1875rem 0; }
+/* Connections: a line from the edge of one part to the edge of the other, and a wider unseen stroke to point at. */
+.lab-diagram-line { fill: none; stroke: var(--lab-ink-soft); stroke-width: 1.5px; transition: stroke var(--lab-dur-1) var(--lab-ease), stroke-width var(--lab-dur-1) var(--lab-ease); }
+.lab-diagram-hit { fill: none; stroke: transparent; stroke-width: 14px; pointer-events: stroke; }
 
-.tm-button { padding: 0.4375rem 0.75rem; font-size: 0.8125rem; font-weight: 600; color: inherit; background: var(--color-bg-surface); border: 1px solid var(--color-border); border-radius: 0.5rem; cursor: pointer; }
-.tm-button:hover { border-color: var(--color-accent-primary); }
-.tm-button--primary { background: var(--color-accent-primary); border-color: var(--color-accent-primary); color: #fff; }
-.tm-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+/* Parts and connection labels share one box style. A control's edge meets 3:1. */
+.lab-diagram-box { fill: var(--lab-panel); stroke: var(--lab-control-line); stroke-width: 1.5px; transition: stroke var(--lab-dur-1) var(--lab-ease), stroke-width var(--lab-dur-1) var(--lab-ease); }
+.lab-diagram-part .lab-diagram-part-label { font-size: 13px; font-weight: 600; }
+.lab-diagram-link .lab-diagram-link-label { font-weight: 600; }
+.lab-diagram-svg .lab-diagram-payload text { fill: var(--lab-ink-soft); }
+.lab-diagram-arrow { fill: none; stroke: var(--lab-flow); stroke-width: 1.75px; stroke-linecap: round; stroke-linejoin: round; }
 
-.tm-tabs { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-bottom: 1rem; }
-.tm-tab { padding: 0.375rem 0.75rem; font-size: 0.8125rem; font-weight: 600; color: var(--color-text-muted); background: var(--color-glass-bg); border: 1px solid var(--color-glass-border); border-radius: 999px; cursor: pointer; }
-.tm-tab[aria-selected="true"], .tm-tab[aria-pressed="true"] { background: var(--color-accent-primary); border-color: var(--color-accent-primary); color: #fff; }
-[role="tabpanel"]:focus-visible { outline: 2px solid var(--color-accent-primary); outline-offset: 4px; border-radius: 0.5rem; }
+/* The part in contact with tissue: a double ink border and a text tag. Never the selection colour. */
+.lab-diagram-part:where([data-tissue-contact="true"]) > .lab-diagram-box { stroke: var(--lab-ink); }
+.lab-diagram-box-inner { fill: none; stroke: var(--lab-ink); stroke-width: 1.5px; pointer-events: none; }
+.lab-diagram-part .lab-diagram-tag { fill: var(--lab-ink-soft); }
 
-.tm-badge { display: inline-block; padding: 0.0625rem 0.4375rem; font-size: 0.6875rem; font-weight: 700; border-radius: 999px; border: 1px solid var(--color-border); white-space: nowrap; }
-.tm-badge--critical { color: var(--color-severity-critical); border-color: var(--color-severity-critical); }
-.tm-badge--high { color: var(--color-severity-high); border-color: var(--color-severity-high); }
-.tm-badge--medium { color: var(--color-severity-medium); border-color: var(--color-severity-medium); }
-.tm-badge--low { color: var(--color-severity-low); border-color: var(--color-severity-low); }
-.tm-badge--generated { color: var(--color-accent-primary); border-color: var(--color-accent-primary); }
-.tm-badge--warning { color: var(--color-severity-high); border-color: var(--color-severity-high); }
+/* Badge: shares as tall as their severity, in ink; only Critical is red. The hatch means "not assessed". */
+/* When a filter changes the counts, each share moves from its old place and width to the new one once; the integer swaps at once. */
+.lab-diagram-badge-share { fill: var(--lab-ink); transition: x var(--lab-dur-2) var(--lab-ease), width var(--lab-dur-2) var(--lab-ease); }
+.lab-diagram-badge-share[data-severity="critical"] { fill: var(--lab-critical); }
+.lab-diagram-badge-base { stroke: var(--lab-ink-soft); stroke-width: 1px; }
+.lab-diagram-badge-hatch { stroke: currentColor; stroke-width: 1px; }
+.lab-diagram-badge .lab-diagram-badge-count { font-weight: 600; font-variant-numeric: tabular-nums; }
+.lab-diagram-badge-share, .lab-diagram-badge-hatch, .lab-diagram-arrow { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
 
-.tm-table-wrap { overflow-x: auto; }
-.tm-table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
-.tm-table th { text-align: left; font-size: 0.6875rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text-muted); padding: 0.375rem 0.5rem; border-bottom: 1px solid var(--color-border); white-space: nowrap; }
-.tm-table td { padding: 0.4375rem 0.5rem; border-bottom: 1px solid var(--color-border); vertical-align: top; }
-.tm-mono { font-family: var(--font-mono, ui-monospace, monospace); font-size: 0.75rem; word-break: break-all; }
-.tm-row--addressed { opacity: 0.55; }
+/* Chain steps: ink marks; the step being played has a ring in the flow colour. */
+.lab-diagram-step rect { fill: var(--lab-ink); stroke: var(--lab-panel); stroke-width: 2px; }
+.lab-diagram-svg .lab-diagram-step text { fill: var(--lab-panel); font-weight: 600; font-variant-numeric: tabular-nums; }
+.lab-diagram-step[data-step="ahead"] rect { fill: var(--lab-panel); stroke: var(--lab-ink-soft); stroke-width: 1.5px; }
+.lab-diagram-svg .lab-diagram-step[data-step="ahead"] text { fill: var(--lab-ink-soft); }
+.lab-diagram-step[data-step="now"] rect { stroke: var(--lab-flow); stroke-width: 3px; }
+/* The mark of the step just reached arrives once; a part an edit added does the same. */
+.lab-diagram-step[data-step="now"], .lab-diagram-part[data-entered="true"] { transform-box: fill-box; transform-origin: center; }
+.lab-diagram-step[data-step="now"] { animation: lab-diagram-step-in var(--lab-dur-1) var(--lab-spring, var(--lab-ease)) 1 backwards; }
+.lab-diagram-part[data-entered="true"] { animation: lab-diagram-part-in var(--lab-dur-2) var(--lab-spring, var(--lab-ease)) 1 backwards; }
+@keyframes lab-diagram-step-in { from { transform: scale(0.8); } }
+@keyframes lab-diagram-part-in { from { transform: scale(0.96); } }
 
-.tm-diagram { width: 100%; height: auto; max-height: 30rem; }
-.tm-zone { fill: var(--color-bg-surface); stroke: var(--color-border); stroke-dasharray: 5 4; }
-.tm-zone-label { fill: var(--color-text-muted); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
-.tm-node { cursor: pointer; }
-.tm-node rect { fill: var(--color-bg-elevated, var(--color-bg-surface)); stroke: var(--color-border-hover, var(--color-border)); stroke-width: 1.5; }
-.tm-node text { fill: var(--color-text-primary); font-size: 13px; font-weight: 600; }
-.tm-node--interface rect { stroke: var(--color-accent-primary); stroke-width: 2.5; }
-.tm-node--selected rect { stroke: var(--color-accent-primary); stroke-width: 3; }
-.tm-edge { cursor: pointer; }
-.tm-edge path { stroke: var(--color-text-muted); stroke-width: 2; fill: none; }
-.tm-edge--selected path { stroke: var(--color-accent-primary); stroke-width: 3.5; }
-.tm-edge text { fill: var(--color-text-muted); font-size: 12px; paint-order: stroke; stroke: var(--color-bg-surface); stroke-width: 4px; }
-/* Parts off the highlighted path step back but stay readable. */
-.tm-dimmed { opacity: 0.55; }
-/* How many open risks sit on a part: a count in ink, not a severity colour, and it does not pulse. */
-.tm-heat circle { fill: var(--lab-ink, var(--color-text-primary)); }
-.tm-heat text { fill: var(--lab-ground, var(--color-bg-deep)); font-size: 10px; font-weight: 700; }
-.tm-step text { fill: #fff; font-size: 10px; font-weight: 700; }
-.tm-step circle { fill: var(--color-accent-primary); }
-@media (prefers-reduced-motion: no-preference) {
-  .tm-node, .tm-edge { transition: opacity 180ms ease; }
+/* States, weakest first, all at one specificity so the later rule wins. Stepping back is a softer colour, never transparency. */
+:is(.lab-diagram-part, .lab-diagram-link)[data-dimmed="true"] > .lab-diagram-box { stroke: var(--lab-line); }
+.lab-diagram-part:where([data-tissue-contact="true"])[data-dimmed="true"] > :is(.lab-diagram-box, .lab-diagram-box-inner) { stroke: var(--lab-ink-faint); }
+.lab-diagram-svg [data-dimmed="true"] > text, .lab-diagram-svg [data-dimmed="true"] > .lab-diagram-payload text { fill: var(--lab-ink-faint); }
+.lab-diagram-wire[data-dimmed="true"] > .lab-diagram-line { stroke: var(--lab-line); }
+:is(.lab-diagram-part, .lab-diagram-link)[data-lit="true"] > .lab-diagram-box { stroke: var(--lab-ink); stroke-width: 2.5px; }
+.lab-diagram-wire[data-lit="true"] > .lab-diagram-line { stroke: var(--lab-ink); stroke-width: 2.5px; }
+:is(.lab-diagram-part, .lab-diagram-link)[data-selected="true"] > .lab-diagram-box { stroke: var(--lab-select); stroke-width: 2.5px; }
+.lab-diagram-wire[data-selected="true"] > .lab-diagram-line { stroke: var(--lab-select); stroke-width: 2.5px; }
+.lab-diagram-svg :focus-visible > .lab-diagram-box { stroke: var(--lab-focus); stroke-width: 3px; }
+
+/* One pass of flow along a connection, in answer to the reader or to an edit. It runs once and is removed. */
+.lab-diagram-pass { fill: none; stroke: var(--lab-flow); stroke-width: 3px; stroke-linecap: round; pointer-events: none; stroke-dasharray: 14 100; stroke-dashoffset: 16; animation: lab-diagram-pass-forward var(--lab-dur-flow) var(--lab-ease) 1 both; }
+.lab-diagram-pass[data-flow-pass="backward"] { animation-name: lab-diagram-pass-backward; }
+.lab-diagram-pass[data-flow-pass="both"] { stroke-dasharray: 14 0 14 200; stroke-dashoffset: -36; animation-name: lab-diagram-pass-both; }
+@keyframes lab-diagram-pass-forward { from { stroke-dashoffset: 16; } to { stroke-dashoffset: -102; } }
+@keyframes lab-diagram-pass-backward { from { stroke-dashoffset: -102; } to { stroke-dashoffset: 16; } }
+/* Two marks leave the middle for the two ends: payloads on this connection travel both ways, or the rule decides no direction. */
+@keyframes lab-diagram-pass-both { from { stroke-dasharray: 14 0 14 200; stroke-dashoffset: -36; } to { stroke-dasharray: 14 132 14 200; stroke-dashoffset: 30; } }
+@media (prefers-reduced-motion: reduce) {
+  .lab-diagram-pass { animation: none; display: none; }
+  .lab-diagram-step[data-step="now"], .lab-diagram-part[data-entered="true"] { animation: none; }
+  .lab-diagram-badge-share, .lab-diagram-disclosure { transition: none; }
+  .lab-diagram-disclosure:active { transform: none; }
 }
 
-.tm-notice { border-left: 3px solid var(--color-severity-high); padding: 0.5rem 0.75rem; margin: 0.75rem 0; background: var(--color-bg-surface); font-size: 0.8125rem; }
-.tm-quote { border-left: 3px solid var(--color-border); padding-left: 0.625rem; margin: 0.375rem 0; font-size: 0.8125rem; color: var(--color-text-muted); }
-.tm-list { margin: 0.25rem 0 0; padding-left: 1.125rem; font-size: 0.8125rem; line-height: 1.5; list-style: disc; }
-.tm-error { color: var(--color-severity-critical); font-size: 0.8125rem; margin-top: 0.5rem; }
-.tm-print-only { display: none; }
+/* Legend marks, drawn with the same shapes as the diagram. */
+.lab-diagram-key { flex: none; color: var(--lab-ink); }
+.lab-diagram-key-border { fill: none; stroke: var(--lab-ink); stroke-width: 1.5px; }
+
+/* Where the drawing does not fit: the same parts and connections as a list. */
+.lab-diagram-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.375rem; }
+.lab-diagram-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 0.125rem var(--lab-gap); min-height: var(--lab-row); padding: 0.5rem 0.75rem; background: var(--lab-panel); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-m); transition: border-color var(--lab-dur-1) var(--lab-ease), background-color var(--lab-dur-1) var(--lab-ease); }
+.lab-diagram-row[role="button"] { cursor: pointer; }
+.lab-diagram-row[data-kind="connection"] { margin-left: var(--lab-pad); border-radius: var(--lab-radius-s); }
+.lab-diagram-row[data-tissue-contact="true"] { border: 3px double var(--lab-ink); }
+.lab-diagram-row-kind { grid-column: 1; font-size: var(--lab-text-meta); color: var(--lab-ink-soft); }
+.lab-diagram-row-name { grid-column: 1; font-weight: 600; overflow-wrap: anywhere; }
+.lab-diagram-row-facts { grid-column: 1; display: flex; flex-wrap: wrap; gap: 0.125rem var(--lab-gap); font-size: var(--lab-text-meta); color: var(--lab-ink-soft); }
+.lab-diagram-row-tag { color: var(--lab-ink); font-weight: 600; }
+.lab-diagram-row-step { color: var(--lab-ink); font-weight: 600; }
+.lab-diagram-row-step[data-step="ahead"] { color: var(--lab-ink-soft); font-weight: 400; }
+.lab-diagram-row-step[data-step="now"] { border-bottom: 2px solid var(--lab-flow); }
+.lab-diagram-row-badge { grid-column: 2; grid-row: 1 / span 3; color: var(--lab-ink); }
+.lab-diagram-row[data-dimmed="true"] { border-color: var(--lab-line); }
+.lab-diagram-row[data-dimmed="true"] :is(.lab-diagram-row-name, .lab-diagram-row-tag) { color: var(--lab-ink-faint); }
+.lab-diagram-row[data-tissue-contact="true"][data-dimmed="true"] { border-color: var(--lab-ink-faint); }
+.lab-diagram-row[data-lit="true"] { border-color: var(--lab-ink); background: var(--lab-lit); }
+.lab-diagram-row[data-selected="true"] { background: var(--lab-select-soft); box-shadow: 0 0 0 2px var(--lab-select); }
+
+/*
+ * The miniature on a card: no text, so nothing in it can fall under 12px. It is drawn at one
+ * size wherever it is used, in a slot of one height, so cards side by side compare: a device
+ * with more parts takes more of the slot, not smaller parts.
+ */
+.lab-diagram-mini-slot { display: flex; align-items: center; height: 6rem; min-width: 0; overflow: hidden; }
+.lab-diagram-mini-slot > .lab-diagram-mini { flex: none; width: auto; height: auto; max-width: 100%; max-height: 100%; }
+.lab-diagram-mini { display: block; max-width: 100%; height: auto; }
+.lab-diagram-mini-zone { fill: var(--lab-zone); }
+.lab-diagram-mini-line { fill: none; stroke: var(--lab-ink-soft); stroke-width: 1.25px; }
+.lab-diagram-mini-part rect { fill: var(--lab-panel); stroke: var(--lab-ink-soft); stroke-width: 1.25px; }
+.lab-diagram-mini-part[data-tissue-contact="true"] rect { stroke: var(--lab-ink); }
+.lab-diagram-mini-part rect + rect { fill: none; stroke-width: 1px; }
+
+/* The device folded to a row of chips, shown where the diagram is folded away or out of view. The chips wrap. */
+.lab-diagram-strip { display: flex; flex: 1 1 0; flex-wrap: wrap; gap: 0.375rem; min-width: 0; }
+.lab-diagram-strip-item { display: inline-flex; min-width: 0; max-width: 100%; }
+.lab-diagram-strip-item .lab-chip { max-width: 100%; }
+.lab-diagram-strip-item .lab-chip > span:first-child { overflow: hidden; text-overflow: ellipsis; }
+.lab-diagram-strip-item[data-lit="true"] .lab-chip:not([aria-pressed="true"]) { border-color: var(--lab-ink); background-color: var(--lab-lit); box-shadow: inset 3px 0 0 var(--lab-ink); }
+
+/* Regions selected for the neural interface: a description beside the diagram. Nothing on it moves. */
+.lab-regions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--lab-pad) 1.5rem; padding: var(--lab-gap) var(--lab-pad); }
+.lab-regions-text { flex: 1 1 18rem; min-width: 0; }
+.lab-regions-text p { margin: 0.25rem 0 0; }
+.lab-regions-map { flex: 0 1 18rem; width: 18rem; max-width: 100%; height: auto; }
+.lab-regions-list { list-style: none; margin: 0.625rem 0; padding: 0; display: grid; gap: 0.375rem; }
+.lab-regions-list li { display: flex; align-items: baseline; gap: 0.5rem; }
+.lab-regions-number { flex: none; display: inline-grid; place-items: center; width: 1.375rem; height: 1.375rem; border-radius: 999px; background: var(--lab-ink); color: var(--lab-panel); font-size: var(--lab-text-meta); font-weight: 600; font-variant-numeric: tabular-nums; }
+.lab-regions-error { color: var(--lab-ink); border-left: 3px solid var(--lab-critical); padding-left: 0.5rem; }
+.lab-regions-outline { fill: none; stroke: var(--lab-control-line); stroke-width: 2px; }
+.lab-regions-other { fill: var(--lab-line); }
+.lab-regions-target circle { fill: var(--lab-ink); }
+.lab-regions-target text { fill: var(--lab-panel); font-size: 15px; font-weight: 600; }
 
 @media print {
-  .tm-no-print { display: none !important; }
-  .tm-print-only { display: block; }
-  .tm-card { border: 1px solid #999; background: #fff; color: #000; }
-  /* Whole sections are cards: keeping each on one page left pages half empty. Rows and headings stay together instead. */
-  .tm-table tr, .tm-heading, .tm-subheading { break-inside: avoid; }
-  .tm-heading, .tm-subheading { break-after: avoid; }
-  .tool-header, .tool-intro { display: none !important; }
-  .tm-root, .tm-muted, .tm-table th { color: #000; }
-  .tm-diagram { max-height: none; }
-  .tm-row--addressed { opacity: 1; }
-  .tm-section { break-before: auto; margin-top: 1rem; }
+  /* Paper cannot scroll: the drawing shrinks to the page, and what only answers the pointer is left out. */
+  .lab-diagram-scroll { overflow: visible; }
+  .lab-diagram-svg { max-width: 100%; height: auto; }
+  .lab-diagram-pass, .lab-diagram-strip, .lab-diagram-bar { display: none; }
+  .lab-diagram-part[data-entered="true"], .lab-diagram-step[data-step="now"] { animation: none; }
 }
 
-textarea.tm-input { resize: vertical; }
-
-/* Motion. Each effect carries one meaning: flow = something travels this connection,
-   the travelling ring = the order of steps in a chain. */
-.tm-flow { stroke: var(--color-accent-primary) !important; stroke-width: 2.5 !important; stroke-dasharray: 3 13; stroke-linecap: round; animation: tm-flow var(--motion-flow, 2.4s) linear infinite; pointer-events: none; }
-@keyframes tm-flow { to { stroke-dashoffset: -64; } }
-.tm-step--ahead circle { fill: var(--color-bg-surface); stroke: var(--color-accent-primary); stroke-width: 1.5; }
-.tm-step--ahead text { fill: var(--color-accent-primary); }
-/* The ring that marks the newest step reached; it glides from the last one, which is the order of the chain. */
-.tm-chain-traveller { fill: none; stroke: var(--lab-flow, var(--color-accent-secondary)); stroke-width: 3; pointer-events: none; transition: transform var(--motion-trace-step, 700ms) var(--motion-ease, ease); }
-@media (prefers-reduced-motion: reduce) {
-  .tm-flow { animation: none; }
-  .tm-chain-traveller { transition: none; }
+@media (forced-colors: active) {
+  /* The drawing keeps its own colours and takes them from the system palette. */
+  .lab-diagram, .lab-diagram-mini, .lab-diagram-strip, .lab-regions {
+    --lab-ink: CanvasText; --lab-ink-soft: CanvasText; --lab-ink-faint: GrayText; --lab-panel: Canvas; --lab-hover: Canvas; --lab-zone: Canvas; --lab-lit: Canvas;
+    --lab-line: GrayText; --lab-control-line: CanvasText; --lab-select: Highlight; --lab-focus: Highlight; --lab-critical: CanvasText; --lab-flow: CanvasText;
+  }
+  .lab-diagram-svg, .lab-diagram-mini, .lab-diagram-key, .lab-diagram-row-badge, .lab-regions-map { forced-color-adjust: none; }
+  .lab-diagram-zone rect, .lab-diagram-mini-zone { stroke: GrayText; stroke-width: 1px; }
 }
-@media print { .tm-flow, .tm-chain-traveller { display: none; } }
-
-/* One moving track per payload a connection carries. The arrowhead beside the label gives the same direction without motion. */
-.tm-track { fill: none; stroke: var(--lab-flow, var(--color-accent-secondary)); stroke-linecap: round; pointer-events: none; animation: tm-track var(--motion-flow, 2.4s) linear infinite; }
-.tm-track[data-payload="neuralData"] { stroke-width: 3; stroke-dasharray: 1 13; }
-.tm-track[data-payload="stimulationCommands"] { stroke-width: 3; stroke-dasharray: 5 9; stroke-linecap: butt; }
-.tm-track[data-payload="softwareUpdates"] { stroke-width: 2; stroke-dasharray: 9 19; opacity: 0.8; }
-.tm-track[data-direction="backward"] { animation-direction: reverse; }
-.tm-track[data-direction="none"] { animation: none; }
-@keyframes tm-track { to { stroke-dashoffset: -56; } }
-.tm-payload-arrow { fill: var(--lab-flow, var(--color-accent-secondary)); stroke: var(--lab-flow, var(--color-accent-secondary)); stroke-width: 1.25; stroke-linejoin: round; pointer-events: none; }
-.tm-payload-arrow[data-payload="softwareUpdates"] { fill: var(--color-bg-surface); }
-.tm-payload-arrow[data-payload="stimulationCommands"] { stroke-width: 2.5; }
-@media (prefers-reduced-motion: reduce) { .tm-track { animation: none; } }
-@media print { .tm-track { display: none; } }
-
-
-
-
-/* Rows settle into place when a lens changes what is shown. */
-.tm-table tbody tr { animation: tm-row-in 260ms var(--motion-ease, ease) both; }
-@keyframes tm-row-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .tm-table tbody tr { animation: none; } }
-@media print { .tm-table tbody tr { animation: none; } }
-
-/* Target regions: the neural interface's own detail, shown while that part is selected. */
-.tm-regions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1rem 1.5rem; animation: tm-row-in 320ms var(--motion-ease, ease) both; }
-.tm-regions-text { flex: 1 1 18rem; min-width: 0; }
-.tm-regions-map { flex: 0 1 18rem; width: 18rem; max-width: 100%; height: auto; }
-.tm-regions-list { list-style: none; margin: 0.625rem 0; padding: 0; display: grid; gap: 0.375rem; }
-.tm-regions-list li { display: flex; align-items: baseline; gap: 0.5rem; }
-.tm-regions-list strong { font-size: 0.9375rem; font-weight: 600; }
-.tm-regions-number { flex: none; display: inline-grid; place-items: center; width: 1.375rem; height: 1.375rem; border-radius: 999px; background: var(--color-accent-primary); color: #fff; font-size: 0.75rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-.tm-regions-outline { fill: none; stroke: var(--color-border-hover, var(--color-border)); stroke-width: 2; }
-.tm-regions-other { fill: var(--color-text-muted); opacity: 0.14; }
-.tm-regions-target circle { fill: var(--color-accent-primary); }
-.tm-regions-target text { fill: #fff; font-size: 15px; font-weight: 700; }
-.tm-regions-halo { fill: var(--color-accent-primary); opacity: 0.22; transform-box: fill-box; transform-origin: center; animation: tm-region-halo 2.4s var(--motion-ease, ease) infinite; }
-@keyframes tm-region-halo { 0%, 100% { transform: scale(0.9); opacity: 0.28; } 50% { transform: scale(1.25); opacity: 0.08; } }
-@media (prefers-reduced-motion: reduce) { .tm-regions, .tm-regions-halo { animation: none; } }
-
-
-.tm-chain-basis { margin-top: 0.5rem; font-size: 0.8125rem; }
-.tm-chain-basis > summary { cursor: pointer; font-weight: 600; }

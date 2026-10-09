@@ -1,69 +1,78 @@
+import { useMemo } from 'react';
+import DataTable, { type DataTableColumn } from '@/components/lab-kit/DataTable';
+import EmptyState from '@/components/lab-kit/EmptyState';
 import type { QueryResult } from '@/lib/kql-engine';
 import { nearestNames } from '@/lib/threat-model/nearest-names';
+import { buildResultColumns, findLargestCount, type ResultRow } from './query-result-columns';
 
 interface Props {
   result: QueryResult;
   tableNames: readonly string[];
+  /** Every technique id in the catalog; a cell holding one becomes a link to it. */
+  techniqueIds: ReadonlySet<string>;
+  onOpenTechnique: (techniqueId: string) => void;
 }
 
 const MAX_ROWS_SHOWN = 200;
-const COUNT_COLUMN = 'count';
 const UNKNOWN_TABLE_PATTERN = /^Unknown table "([^"]+)"/;
+const ERROR_TITLE = 'The query did not run';
+/** The count is printed once, in the status line above the table. */
+const RESULT_CAPTION = 'Result rows';
 
-export function formatCell(value: unknown): string {
-  if (value === null || value === undefined) return '';
-  return typeof value === 'object' ? JSON.stringify(value) : String(value);
-}
-
-/** An unknown table gets the nearest real names, not the whole list in one sentence. */
-function describeError(error: string, tableNames: readonly string[]): string {
+/** For an unknown table, the nearest real names; for anything else, nothing beyond the engine's own words. */
+function suggestTables(error: string, tableNames: readonly string[]): string | null {
   const unknownTable = error.match(UNKNOWN_TABLE_PATTERN)?.[1];
-  if (unknownTable === undefined) return error;
+  if (unknownTable === undefined) return null;
   const suggestions = nearestNames(unknownTable, tableNames);
-  return suggestions.length === 0
-    ? `There is no table named "${unknownTable}". The tables are listed on the left.`
-    : `There is no table named "${unknownTable}". Did you mean ${suggestions.join(', ')}? The full list is on the left.`;
+  return suggestions.length === 0 ? 'The tables are listed beside the result.' : `Did you mean ${suggestions.join(', ')}? The full list is beside the result.`;
 }
 
-/** A result of one label column and one count gets a bar beside each number, drawn to the same scale. */
-function countScale(result: QueryResult, columns: readonly string[]): number | null {
-  if (columns.length !== 2 || !columns.includes(COUNT_COLUMN)) return null;
-  const counts = result.rows.map((row) => row[COUNT_COLUMN]);
-  if (!counts.every((count): count is number => typeof count === 'number' && count >= 0)) return null;
-  return Math.max(...counts, 0);
+function describeRowCount(total: number, shown: number): string {
+  return `${total.toLocaleString('en-US')} row${total === 1 ? '' : 's'}${total > shown ? `, first ${shown} shown` : ''}`;
 }
 
-export default function QueryResultView({ result, tableNames }: Props) {
-  if (result.error !== null) return <p className="tm-error" role="alert">{describeError(result.error, tableNames)}</p>;
-  if (result.rows.length === 0) return <p className="lab-soft">The query ran and no row matches it.</p>;
-  const columns = Object.keys(result.rows[0]);
-  const shown = result.rows.slice(0, MAX_ROWS_SHOWN);
-  const largestCount = countScale(result, columns);
+/** What a query returned: the engine's error in its own words, an empty result said as such, or the rows. */
+export default function QueryResultView({ result, tableNames, techniqueIds, onOpenTechnique }: Props) {
+  const columnNames = useMemo(() => Object.keys(result.rows[0] ?? {}), [result]);
+  const shown = useMemo(() => result.rows.slice(0, MAX_ROWS_SHOWN).map((cells, index): ResultRow => ({ key: String(index), cells })), [result]);
+  const columns = useMemo(
+    () => buildResultColumns({ columns: columnNames, largestCount: findLargestCount(result.rows, columnNames), techniqueIds, onOpenTechnique }),
+    [columnNames, result, techniqueIds, onOpenTechnique],
+  );
+
   return (
     <>
-      <p className="lab-soft" role="status">{result.rows.length.toLocaleString('en-US')} row{result.rows.length === 1 ? '' : 's'}{result.rows.length > shown.length ? `, first ${shown.length} shown` : ''}.</p>
-      <div className="lab-table-wrap query-result">
-        <table className="lab-table">
-          <thead>
-            <tr>
-              {columns.map((column) => <th key={column} scope="col"><span className="lab-table-head">{column}</span></th>)}
-              {largestCount !== null && <th scope="col"><span className="lab-table-head sr-only">Share of the largest count</span></th>}
-            </tr>
-          </thead>
-          <tbody>
-            {shown.map((row, index) => (
-              <tr key={index}>
-                {columns.map((column) => <td key={column} className={typeof row[column] === 'number' ? 'lab-figure' : undefined}>{formatCell(row[column])}</td>)}
-                {largestCount !== null && (
-                  <td className="query-bar-cell" aria-hidden="true">
-                    <span className="query-bar" style={{ width: `${largestCount === 0 ? 0 : ((row[COUNT_COLUMN] as number) / largestCount) * 100}%` }} title={`${formatCell(row[columns.find((column) => column !== COUNT_COLUMN) ?? COUNT_COLUMN])}: ${formatCell(row[COUNT_COLUMN])}`} />
-                  </td>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {/* The one live region: it stays mounted and holds the row count alone, so a run announces the count and not the table. */}
+      <p className="query-count lab-label" role="status">{result.error === null ? describeRowCount(result.rows.length, shown.length) : ''}</p>
+      <ResultBody result={result} tableNames={tableNames} shown={shown} columns={columns} />
     </>
+  );
+}
+
+interface BodyProps {
+  result: QueryResult;
+  tableNames: readonly string[];
+  shown: readonly ResultRow[];
+  columns: readonly DataTableColumn<ResultRow>[];
+}
+
+function ResultBody({ result, tableNames, shown, columns }: BodyProps) {
+  if (result.error !== null) {
+    const suggestion = suggestTables(result.error, tableNames);
+    return (
+      <div className="lab-notice query-error" role="alert">
+        <p className="query-error-title">{ERROR_TITLE}</p>
+        <p className="query-error-message">{result.error}</p>
+        {suggestion !== null && <p>{suggestion}</p>}
+      </div>
+    );
+  }
+  if (result.rows.length === 0) {
+    return <EmptyState reason="nothing-shown" title="The query ran and no row matches it" action="Change the query, or choose a table to see what it holds." />;
+  }
+  return (
+    <div className="query-result">
+      <DataTable caption={RESULT_CAPTION} columns={columns} rows={shown} rowKey={(row) => row.key} emptyMessage="The query ran and no row matches it." />
+    </div>
   );
 }

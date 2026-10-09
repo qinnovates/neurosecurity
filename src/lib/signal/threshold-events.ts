@@ -7,20 +7,35 @@
 export interface ThresholdEvent {
   /** Seconds from the start of the sample, at the first crossing of the group. */
   time: number;
+  /** Seconds from the start of the sample, just after the last crossing of the group. */
+  endTime: number;
   /** Channels that crossed within the group, in channel order. */
   channelNames: string[];
   /** The largest absolute amplitude reached in the group, in microvolts. */
   peakMicrovolts: number;
 }
 
-/** Crossings closer together than this are reported as one event. */
+/** One channel's own stretch beyond the threshold, from its first crossing to just after its last. */
+export interface ChannelSpan {
+  channelIndex: number;
+  /** Seconds from the start of the sample. */
+  from: number;
+  to: number;
+}
+
+/** Crossings closer together than this are reported as one event, and drawn as one span. */
 export const EVENT_MERGE_SECONDS = 0.25;
+
+/** The merge distance in whole samples at a sample rate: two crossings this far apart or closer are one event. */
+export function mergeSamplesFor(sampleRateHz: number): number {
+  return Math.max(1, Math.round(EVENT_MERGE_SECONDS * sampleRateHz));
+}
 
 export function findThresholdEvents(
   channelNames: readonly string[], channels: readonly Float32Array[], sampleRateHz: number, thresholdMicrovolts: number,
 ): ThresholdEvent[] {
   const length = channels[0]?.length ?? 0;
-  const mergeSamples = Math.max(1, Math.round(EVENT_MERGE_SECONDS * sampleRateHz));
+  const mergeSamples = mergeSamplesFor(sampleRateHz);
   const events: ThresholdEvent[] = [];
   let open: { start: number; last: number; channelIndexes: Set<number>; peak: number } | null = null;
 
@@ -28,6 +43,7 @@ export function findThresholdEvents(
     if (open === null) return;
     events.push({
       time: open.start / sampleRateHz,
+      endTime: (open.last + 1) / sampleRateHz,
       channelNames: [...open.channelIndexes].sort((left, right) => left - right).map((index) => channelNames[index]),
       peakMicrovolts: open.peak,
     });
@@ -47,4 +63,28 @@ export function findThresholdEvents(
   }
   close();
   return events;
+}
+
+function findSpansOnChannel(channel: Float32Array, channelIndex: number, sampleRateHz: number, thresholdMicrovolts: number): ChannelSpan[] {
+  const mergeSamples = mergeSamplesFor(sampleRateHz);
+  const spans: ChannelSpan[] = [];
+  let start = -1;
+  let last = -1;
+  const close = (): void => {
+    if (start !== -1) spans.push({ channelIndex, from: start / sampleRateHz, to: (last + 1) / sampleRateHz });
+    start = -1;
+  };
+  for (let sample = 0; sample < channel.length; sample += 1) {
+    if (Math.abs(channel[sample]) <= thresholdMicrovolts) continue;
+    if (start !== -1 && sample - last > mergeSamples) close();
+    if (start === -1) start = sample;
+    last = sample;
+  }
+  close();
+  return spans;
+}
+
+/** Where the rule holds on each channel, by that channel's own crossings. In channel order, then in time. */
+export function findChannelSpans(channels: readonly Float32Array[], sampleRateHz: number, thresholdMicrovolts: number): ChannelSpan[] {
+  return channels.flatMap((channel, channelIndex) => findSpansOnChannel(channel, channelIndex, sampleRateHz, thresholdMicrovolts));
 }

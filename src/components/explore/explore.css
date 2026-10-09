@@ -1,61 +1,143 @@
-/* Explore: device classes, the catalog, curated chains and device specifications. */
+/* Explore: Start, Techniques, Authored chains and Published device specifications. Kit tokens only. */
 
-.explore-classes { display: grid; gap: 0.75rem; }
-.explore-intro p { margin: 0 0 0.25rem; max-width: 56rem; }
-.explore-class { display: grid; grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem); gap: 0.75rem 1.25rem; padding: 0.75rem 0.875rem; align-items: center; }
-.explore-class[data-in-focus="true"] { border-color: var(--lab-select); box-shadow: inset 3px 0 0 var(--lab-select); }
-.explore-class-diagram { min-width: 0; overflow-x: auto; }
-.explore-class-diagram .tm-diagram { min-width: 30rem; max-height: 15rem; }
-.explore-class-chain { margin: 0.25rem 0 0; }
-.explore-class-facts { display: grid; gap: 0.375rem; align-content: start; }
-.explore-class-facts p { margin: 0; }
-.explore-class-actions { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-top: 0.375rem; }
-@media (max-width: 860px) { .explore-class { grid-template-columns: minmax(0, 1fr); } }
+/* Start. On a wide screen the introduction sits beside the cards, so the difference table is on the first screen. */
+.explore-start, .explore-start-top { display: grid; gap: var(--lab-pad); }
+.explore-start-top > * { min-width: 0; }
+.explore-intro { display: grid; gap: 0.5rem; align-content: start; }
+.explore-intro p { margin: 0; }
+.explore-lead { font-size: var(--lab-text-title); line-height: 1.25rem; }
+.explore-classes { display: grid; gap: 0.5rem; align-content: start; }
+.explore-classes > p { margin: 0; }
+.explore-class-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: var(--lab-gap); align-items: stretch; }
+/* Every card has the same four rows: a drawing slot of one height, the name, the facts, the action. The facts and the action sit at the foot, so they line up across cards. */
+.explore-class { display: grid; grid-template-rows: 6rem 1fr auto auto; gap: var(--lab-gap); padding: var(--lab-pad); border-radius: var(--lab-radius-l); transition: border-color var(--lab-dur-1) var(--lab-ease); }
+.explore-class[data-in-focus="true"] { border-color: var(--lab-select); }
+.explore-class-diagram { min-width: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+/* Drawn at its own size, so a part is the same size on every card; only a drawing wider than its card is scaled down. */
+.explore-class-diagram svg { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; }
+.explore-class-name, .explore-class-facts { display: grid; gap: 0.25rem; align-content: start; }
+.explore-class-name p, .explore-class-facts p { margin: 0; }
+.explore-class-scope { display: flex; flex-wrap: wrap; gap: 0.125rem var(--lab-gap); }
+.explore-class-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.explore-identical { font-weight: 600; }
+@media (min-width: 1200px) { .explore-start-top { grid-template-columns: minmax(16rem, 3fr) minmax(0, 9fr); align-items: start; } }
 
-/* Catalog: filters, the working area, and one technique beside it. */
-.catalog { display: grid; gap: 0.75rem; grid-template-columns: 17rem minmax(0, 1fr); align-items: start; }
-.catalog[data-panel="true"] { grid-template-columns: 17rem minmax(0, 1fr) 22rem; }
-.catalog-main { min-width: 0; display: grid; gap: 0.625rem; }
-.catalog-main > * { min-width: 0; }
-.catalog-filters { display: grid; gap: 0.625rem; }
-.catalog-filter-group { display: flex; flex-wrap: wrap; gap: 0.3125rem; align-items: center; }
-.catalog-filter-group > .lab-label { flex-basis: 100%; }
-/* Evidence tiers have long names; inside the narrow filter column a chip wraps instead of running off the panel. */
-.catalog-filters .lab-chip { white-space: normal; text-align: left; max-width: 100%; }
-.catalog-select, .catalog-search { width: 100%; padding: 0.3125rem 0.5rem; font: inherit; color: var(--lab-ink); background: var(--lab-panel); border: 1px solid var(--lab-line-strong); border-radius: var(--lab-radius); }
-.catalog-head { display: grid; gap: 0.5rem; padding: 0.625rem 0.75rem; }
-.catalog-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.375rem 0.75rem; }
-.catalog-layouts { display: flex; gap: 0.25rem; }
-.catalog-table { max-height: 68vh; overflow: auto; }
-.catalog-state[data-state="not-assessed"] { padding: 0 0.375rem; }
-.catalog-panel { position: sticky; top: calc(var(--lab-topbar-height) + 3rem); max-height: calc(100dvh - var(--lab-topbar-height) - 8rem); overflow: auto; }
-.catalog-panel h3 { margin: 0.75rem 0 0.125rem; }
-.catalog-panel p { margin: 0 0 0.25rem; }
-.catalog-panel-list { margin: 0.25rem 0 0; padding-left: 1.125rem; list-style: disc; }
-.catalog-vector { white-space: normal; word-break: break-all; }
-.catalog-related { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+/* Techniques: filters, the count and layout row, then the work. The inspector sits beside it on a wide screen. */
+.explore-catalog { display: grid; gap: var(--lab-gap); min-width: 0; transition: margin-right var(--lab-dur-3) var(--lab-ease); }
+.explore-catalog > * { min-width: 0; }
+.explore-catalog-filters, .explore-specs-filters { padding: var(--lab-gap) var(--lab-pad); display: grid; gap: 0.5rem; }
+.explore-bands { display: flex; flex-wrap: wrap; gap: 0.375rem var(--lab-gap); }
+.explore-band-group { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem; }
+.explore-band-help { flex-basis: 100%; }
+.explore-band-help summary { display: inline-block; cursor: pointer; }
+.explore-band-help p { margin: 0.25rem 0 0; }
+.explore-select { width: auto; max-width: 16rem; }
+.explore-search { width: 16rem; max-width: 100%; }
+.explore-catalog-head { position: sticky; top: var(--lab-topbar-height); z-index: 3; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem var(--lab-gap); padding: 0.5rem var(--lab-pad); border: 1px solid var(--lab-line); border-radius: var(--lab-radius-m); }
+.explore-catalog-head > p { margin: 0 auto 0 0; }
+.explore-scope-counts { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem var(--lab-pad); margin: 0; padding: 0 var(--lab-pad); max-width: none; }
+.explore-scope-count { display: inline-flex; align-items: center; gap: 0.375rem; color: var(--lab-ink-soft); }
+.explore-scope-count[data-picked="true"] { color: var(--lab-ink); font-weight: 600; }
 
-/* A matrix of marks: one mark per technique, drawn with its evidence. */
-.mark-matrix-wrap { overflow: auto; max-height: 72vh; }
-.mark-matrix { border-collapse: collapse; width: 100%; }
-.mark-matrix caption { text-align: left; padding: 0 0 0.375rem; }
-.mark-matrix th { font-size: 0.75rem; font-weight: 500; color: var(--lab-ink-soft); padding: 0.25rem 0.375rem; white-space: nowrap; text-align: left; }
-.mark-matrix thead th { position: sticky; top: 0; background: var(--lab-panel); text-align: center; z-index: 1; }
-.mark-matrix tbody th { position: sticky; left: 0; background: var(--lab-panel); color: var(--lab-ink); }
-.mark-matrix td { border: 1px solid var(--lab-line); padding: 0; vertical-align: top; min-width: 2.75rem; }
-.mark-matrix-cell { display: flex; flex-wrap: wrap; gap: 3px; align-content: flex-start; width: 100%; min-height: 1.875rem; padding: 0.3125rem; font: inherit; color: var(--lab-ink-soft); background: none; border: 0; cursor: pointer; }
-.mark-matrix-cell:hover { background: var(--lab-panel-raised); }
-.mark-matrix-cell .lab-evidence-mark { width: 0.5625rem; height: 0.5625rem; }
-.mark-matrix-more { font-size: 0.6875rem; line-height: 0.5625rem; }
+/* The table scrolls inside its own region so its head stays in view; evidence and the device column stay pinned.
+   Every column but the name has a set width and the name takes the rest, so at 1280px and wider nothing is off to the side. */
+.explore-techniques { --explore-evidence-column: 7.5rem; --explore-device-column: 11rem; }
+.explore-techniques .lab-table-wrap { max-height: max(18rem, calc(100dvh - var(--lab-topbar-height) - var(--lab-foot-height, 0px) - 9rem)); }
+.explore-techniques .lab-table { table-layout: fixed; width: 100%; min-width: 72rem; }
+.explore-techniques .lab-table caption { padding-top: var(--lab-gap); }
+.explore-techniques .lab-table :is(th, td):nth-child(1) { position: sticky; left: 0; width: var(--explore-evidence-column); }
+.explore-techniques .lab-table :is(th, td):nth-child(2) { position: sticky; left: var(--explore-evidence-column); width: var(--explore-device-column); }
+.explore-techniques .lab-table th:nth-child(4) { width: 6.5rem; }
+.explore-techniques .lab-table th:nth-child(5) { width: 13rem; }
+.explore-techniques .lab-table th:nth-child(6) { width: 10rem; }
+.explore-techniques .lab-table th:nth-child(7) { width: 9rem; }
+.explore-techniques .lab-table th:nth-child(8) { width: 5.5rem; }
+.explore-techniques .lab-table th:nth-child(-n+2) { z-index: 2; }
+.explore-techniques .lab-table td:nth-child(-n+2) { z-index: 1; background-color: var(--lab-panel); }
+.explore-techniques .lab-table td:nth-child(2) { border-right: 1px solid var(--lab-line); }
+.explore-techniques .lab-table tbody tr[data-openable="true"]:hover td:nth-child(-n+2) { background-image: linear-gradient(var(--lab-hover), var(--lab-hover)); }
+.explore-techniques .lab-table tbody tr[aria-current="true"] td:nth-child(-n+2) { background-image: linear-gradient(var(--lab-select-soft), var(--lab-select-soft)); }
+/* A long name, family or band list is cut with an ellipsis; the full text is the cell's title and is in the inspector. */
+.explore-techniques .lab-table td { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.explore-techniques .lab-table td > span { overflow: hidden; text-overflow: ellipsis; }
+.explore-techniques .lab-table td > .lab-id { display: block; }
+/* Beside the inspector the family and bands give way: both are printed in the inspector. */
+.explore-catalog[data-drawer="true"] .explore-techniques .lab-table { min-width: 46rem; }
+.explore-catalog[data-drawer="true"] .explore-techniques .lab-table :is(th, td):is(:nth-child(5), :nth-child(6)) { display: none; }
+.explore-scope-cell { display: flex; align-items: center; gap: 0.375rem; min-width: 0; }
+.explore-scope-cell > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.explore-scope-cell[data-term="not_assessed"], .explore-scope-cell[data-term="reviewed_outside"] { color: var(--lab-ink-soft); }
+.explore-scope-mark { flex: none; color: var(--lab-ink); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+.explore-catalog-empty { padding: var(--lab-pad); }
+.explore-techniques-legend { padding: var(--lab-gap) var(--lab-pad); border-top: 1px solid var(--lab-line); }
+.explore-technique-card { display: grid; gap: 0.25rem; }
 
-/* Device specifications. */
-.specs-bar { display: flex; flex-wrap: wrap; gap: 0.375rem 0.75rem; align-items: center; padding: 0.625rem 0.75rem; }
-.specs-bar .catalog-search { width: auto; flex: 1 1 14rem; }
-.specs-table { max-height: 70vh; overflow: auto; }
+/* The count matrix: integers on two axes, totals of distinct techniques. */
+.explore-catalog-matrix { padding: var(--lab-gap) var(--lab-pad) var(--lab-pad); }
+.explore-matrix-wrap { overflow: auto; max-height: 70dvh; }
+.explore-matrix { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+.explore-matrix caption { text-align: left; padding: 0 0 0.5rem; }
+.explore-matrix th { padding: 0.25rem 0.5rem; font-size: var(--lab-text-meta); font-weight: 600; color: var(--lab-ink-soft); white-space: nowrap; text-align: right; }
+.explore-matrix thead th { position: sticky; top: 0; z-index: 2; background: var(--lab-panel); }
+.explore-matrix :is(thead, tbody, tfoot) th:first-child { position: sticky; left: 0; z-index: 1; background: var(--lab-panel); color: var(--lab-ink); font-weight: 400; text-align: left; }
+.explore-matrix thead th:first-child { z-index: 3; color: var(--lab-ink-soft); font-weight: 600; }
+.explore-matrix td { height: var(--lab-row); min-width: 2.5rem; padding: 0; border-bottom: 1px solid var(--lab-line); text-align: right; }
+.explore-matrix-cell { position: relative; display: block; width: 100%; height: var(--lab-row); padding: 0 0.5rem 0.25rem; font: inherit; font-weight: 600; text-align: right; color: var(--lab-ink); background: none; border: 0; border-radius: var(--lab-radius-s); cursor: pointer; transition: background-color var(--lab-dur-1) var(--lab-ease), color var(--lab-dur-1) var(--lab-ease); }
+/* The bar under an integer: ink, from zero at the right edge to the largest cell of its column. */
+.explore-matrix-bar { position: absolute; right: 0.5rem; bottom: 0.25rem; width: calc((100% - 1rem) * var(--explore-share)); min-width: 1px; height: 2px; background: currentColor; }
+.explore-matrix-fold td { height: var(--lab-row); padding: 0 0.5rem; text-align: left; }
+.explore-matrix-fold button { font: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+.explore-matrix-cell:hover { background-color: var(--lab-hover); }
+.explore-matrix-cell[aria-pressed="true"] { background-color: var(--lab-select); color: var(--lab-select-ink); }
+.explore-matrix-total { padding: 0 0.5rem; color: var(--lab-ink-soft); border-left: 1px solid var(--lab-line); }
+.explore-matrix td.explore-matrix-total { padding: 0 0.5rem; }
+.explore-matrix tfoot :is(th, td) { border-top: 1px solid var(--lab-control-line); border-bottom: 0; }
 
-@media (max-width: 1100px) {
-  .catalog, .catalog[data-panel="true"] { grid-template-columns: minmax(0, 1fr); }
-  .catalog-panel { position: fixed; left: 0; right: 0; bottom: 0; top: auto; z-index: 40; max-height: 72dvh; border-width: 1px 0 0; border-color: var(--lab-line-strong); padding-bottom: env(safe-area-inset-bottom, 0px); }
+/* One technique in the inspector. It stops above the standing statements; the shell sets where they start. */
+.explore-catalog .lab-drawer { bottom: var(--lab-drawer-bottom, 0px); }
+.explore-drawer { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--lab-gap); }
+.explore-drawer > * { min-width: 0; }
+.explore-drawer p { margin: 0; }
+.explore-drawer-marks { display: flex; flex-wrap: wrap; gap: 0.25rem var(--lab-pad); }
+.explore-drawer-section { display: grid; gap: 0.25rem; padding-top: var(--lab-gap); border-top: 1px solid var(--lab-line); }
+.explore-drawer-section > h3 { margin: 0; }
+.explore-drawer-section .lab-button { justify-self: start; margin-top: 0.25rem; }
+.explore-list { margin: 0; padding-left: 1.125rem; list-style: disc; display: grid; gap: 0.125rem; }
+.explore-list--plain { padding-left: 0; list-style: none; }
+.lab-id.explore-vector { white-space: normal; overflow-wrap: anywhere; word-break: break-all; }
+.explore-conditions { display: grid; gap: 0.5rem; margin: 0.25rem 0 0; }
+.explore-conditions dd { margin: 0 0 0.25rem; }
+.explore-cves { width: 100%; border-collapse: collapse; }
+.explore-cves th { padding: 0.25rem 0.5rem 0.25rem 0; font-size: var(--lab-text-meta); font-weight: 600; color: var(--lab-ink-soft); text-align: left; }
+.explore-cves td { padding: 0.25rem 0.5rem 0.25rem 0; border-top: 1px solid var(--lab-line); vertical-align: top; }
+
+/* Authored chains. */
+.explore-chain { display: grid; gap: 0.5rem; }
+.explore-chain > p, .explore-chain > h3 { margin: 0; }
+
+/* Published device specifications. */
+.explore-specs { display: grid; gap: var(--lab-gap); }
+.explore-specs-statement { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem var(--lab-pad); }
+.explore-specs-statement p { margin: 0; }
+.explore-specs-table .lab-table-wrap { max-height: max(18rem, calc(100dvh - var(--lab-topbar-height) - var(--lab-foot-height, 0px) - 9rem)); }
+.explore-specs-table .lab-table caption, .explore-differences .lab-table caption { padding-top: var(--lab-gap); }
+
+@media (min-width: 1100px) {
+  /* The table gives way to the inspector, so no column is under it. */
+  .explore-catalog[data-drawer="true"] { margin-right: 26rem; }
 }
-
-.catalog-filter-fold > summary { cursor: pointer; font-weight: 600; padding: 0.375rem 0; }
+@media (max-width: 719.98px) {
+  .explore-catalog .lab-drawer { bottom: calc(var(--lab-drawer-bottom, 0px) - 1rem); }
+  .explore-catalog-head { position: static; }
+  .explore-techniques, .explore-specs-table, .explore-differences { padding: 0 var(--lab-gap) var(--lab-gap); }
+  .explore-search, .explore-select { width: 100%; max-width: none; }
+}
+@media print {
+  .explore-catalog-head { position: static; }
+  .explore-catalog[data-drawer="true"] { margin-right: 0; }
+  .explore-catalog .lab-drawer { bottom: auto; }
+  .explore-techniques .lab-table-wrap, .explore-specs-table .lab-table-wrap, .explore-matrix-wrap { max-height: none; overflow: visible; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .explore-catalog, .explore-class, .explore-matrix-cell { transition: none; }
+}

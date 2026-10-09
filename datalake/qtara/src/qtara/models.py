@@ -79,6 +79,7 @@ class TechniqueEvidence(BaseModel):
     basis: str
     neural_product_cve_count: int = 0
     adjacent_cve_count: int = 0
+    population: Optional[str] = None
     legacy_status: Optional[str] = None
     derived_by: Optional[str] = None
     derived_on: Optional[str] = None

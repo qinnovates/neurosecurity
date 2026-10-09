@@ -8,7 +8,7 @@
  */
 
 import { HOURGLASS_BANDS } from './qif-constants';
-import type { EvidenceTierCode } from './evidence-tiers';
+import type { EvidencePopulation, EvidenceTierCode } from './evidence-tiers';
 import registry from '@shared/qtara-registrar.json';
 
 /** Attack categories (columns in the threat map) */
@@ -40,7 +40,10 @@ export type CategoryId = typeof THREAT_CATEGORIES[number]['id'];
 export type BandId = typeof HOURGLASS_BANDS[number]['id'];
 export type Severity = 'critical' | 'high' | 'medium' | 'low';
 export type NissSeverity = 'critical' | 'high' | 'medium' | 'low' | 'none';
-export type Status = 'CONFIRMED' | 'DEMONSTRATED' | 'THEORETICAL' | 'EMERGING';
+/** Registrar `status` values. PLAUSIBLE and SPECULATIVE have been in the data
+ *  since 2026-02-13 and were absent from this union, so getStatusStats()
+ *  incremented an undefined key and returned NaN for them. */
+export type Status = 'CONFIRMED' | 'DEMONSTRATED' | 'THEORETICAL' | 'EMERGING' | 'PLAUSIBLE' | 'SPECULATIVE';
 export type AccessLevel = 'PUBLIC' | 'LICENSED' | 'RESTRICTED' | 'CLASSIFIED' | null;
 export type DualUse = 'confirmed' | 'probable' | 'possible' | 'silicon_only';
 export type ConsentTier = 'standard' | 'enhanced' | 'IRB' | 'prohibited';
@@ -56,6 +59,9 @@ export interface TechniqueEvidence {
   neural_product_cve_count: number;
   adjacent_cve_count: number;
   legacy_status: string | null;
+  /** What the supporting records are about. Non-ordinal: it does not raise or
+   *  lower `tier`, which is derived from neural-product evidence only. */
+  population?: EvidencePopulation;
   derived_by: string;
   derived_on: string;
 }
@@ -262,7 +268,11 @@ export const STATUS_COLORS = {
   DEMONSTRATED: { bg: 'rgba(245, 158, 11, 0.12)', text: '#f59e0b' },
   THEORETICAL: { bg: 'rgba(148, 163, 184, 0.12)', text: '#94a3b8' },
   EMERGING: { bg: 'rgba(139, 92, 246, 0.12)', text: '#8b5cf6' },
-} as const;
+  // Both have been in the registrar since 2026-02-13 and were missing here,
+  // so their chips rendered with no background or text colour.
+  PLAUSIBLE: { bg: 'rgba(148, 163, 184, 0.12)', text: '#94a3b8' },
+  SPECULATIVE: { bg: 'rgba(100, 116, 139, 0.12)', text: '#64748b' },
+} as const satisfies Record<Status, { bg: string; text: string }>;
 
 /** Zone color map (matches hourglass bands) */
 export const ZONE_COLORS = {
@@ -298,7 +308,7 @@ export function getThreatStats() {
 
 /** Helper: count threats per status */
 export function getStatusStats() {
-  const stats: Record<Status, number> = { CONFIRMED: 0, DEMONSTRATED: 0, THEORETICAL: 0, EMERGING: 0 };
+  const stats: Record<Status, number> = { CONFIRMED: 0, DEMONSTRATED: 0, THEORETICAL: 0, EMERGING: 0, PLAUSIBLE: 0, SPECULATIVE: 0 };
   for (const t of THREAT_VECTORS) {
     stats[t.status]++;
   }

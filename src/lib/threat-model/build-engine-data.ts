@@ -3,21 +3,19 @@
  * The raw files are passed in already parsed; nothing here reads from disk.
  */
 
-import { CATALOG_SEVERITIES, type BandControls, type BrainRegion, type CatalogTactic, type CatalogTechnique, type EngineData, type PrecedentCve, type TechniqueMode } from './catalog-types';
+import { CATALOG_SEVERITIES, type BrainRegion, type CatalogTactic, type CatalogTechnique, type EngineData, type PrecedentCve, type TechniqueMode } from './catalog-types';
 import { ThreatModelDataError } from './errors';
 import { isOneOf, isRecord, isStringArray } from './guards';
 
 const REGISTRAR_FILE = 'datalake/qtara-registrar.json';
 const ATLAS_FILE = 'datalake/qif-brain-bci-atlas.json';
 const CVE_FILE = 'datalake/cve-technique-mapping.json';
-const CONTROLS_FILE = 'datalake/qif-security-controls.json';
 const TECHNIQUE_MODES: readonly TechniqueMode[] = ['R', 'M', 'D'];
 
 export interface RawEngineSources {
   registrar: unknown;
   atlas: unknown;
   cveMapping: unknown;
-  securityControls: unknown;
 }
 
 export interface EngineDataBundle {
@@ -33,16 +31,54 @@ function requireList(container: unknown, key: string, dataFile: string): Record<
   return list;
 }
 
-function readString(record: Record<string, unknown>, key: string): string | null {
-  const value = record[key];
+function asText(value: unknown): string | null {
   return typeof value === 'string' && value.length > 0 ? value : null;
+}
+
+function readString(record: Record<string, unknown>, key: string): string | null {
+  return asText(record[key]);
 }
 
 function readNested(record: Record<string, unknown>, ...path: string[]): unknown {
   return path.reduce<unknown>((current, key) => (isRecord(current) ? current[key] : undefined), record);
 }
 
-function toTechnique(raw: Record<string, unknown>, index: number): CatalogTechnique {
+function asCount(value: unknown): number | null {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 0 ? value : null;
+}
+
+type EvidenceFields = Pick<CatalogTechnique,
+  'evidenceTier' | 'evidenceBasis' | 'evidencePopulation' | 'neuralProductCveCount' | 'adjacentCveCount' | 'evidenceDerivedBy' | 'evidenceDerivedOn'>;
+
+/** The catalog's `evidence` record, field for field. Nothing is filled in when a field is absent. */
+function toEvidenceFields(raw: Record<string, unknown>): EvidenceFields {
+  const evidence = isRecord(raw.evidence) ? raw.evidence : {};
+  return {
+    evidenceTier: asText(evidence.tier),
+    evidenceBasis: asText(evidence.basis),
+    evidencePopulation: asText(evidence.population),
+    neuralProductCveCount: asCount(evidence.neural_product_cve_count),
+    adjacentCveCount: asCount(evidence.adjacent_cve_count),
+    evidenceDerivedBy: asText(evidence.derived_by),
+    evidenceDerivedOn: asText(evidence.derived_on),
+  };
+}
+
+/** Printed for a counted record the mapping gives no category. It matches no known category, so no category is claimed for it. */
+export const UNCATEGORISED_CVE_RECORD = 'Uncategorised';
+
+/** Per technique id: the category of each NVD-verified record linked to it, in file order. */
+function indexRecordCategories(cves: readonly PrecedentCve[]): Map<string, string[]> {
+  const index = new Map<string, string[]>();
+  for (const cve of cves.filter((candidate) => candidate.isNvdVerified)) {
+    for (const techniqueId of cve.techniqueIds) {
+      index.set(techniqueId, [...(index.get(techniqueId) ?? []), cve.category ?? UNCATEGORISED_CVE_RECORD]);
+    }
+  }
+  return index;
+}
+
+function toTechnique(raw: Record<string, unknown>, index: number, recordCategories: ReadonlyMap<string, string[]>): CatalogTechnique {
   const id = readString(raw, 'id');
   const tactic = readString(raw, 'tactic');
   if (id === null || tactic === null || !isStringArray(raw.band_ids) || !isOneOf(raw.severity, CATALOG_SEVERITIES)) {
@@ -54,24 +90,25 @@ function toTechnique(raw: Record<string, unknown>, index: number): CatalogTechni
   const detection = readNested(raw, 'tara', 'engineering', 'detection');
   const cvssVector = readNested(raw, 'cvss', 'base_vector');
   const nissVector = readNested(raw, 'niss', 'vector');
-  const evidenceTier = readNested(raw, 'evidence', 'tier');
   return {
     id,
     name: readString(raw, 'attack') ?? id,
     tactic,
     bandIds: raw.band_ids,
     evidenceStatus: readString(raw, 'status') ?? 'UNSPECIFIED',
-    evidenceTier: typeof evidenceTier === 'string' && evidenceTier.length > 0 ? evidenceTier : null,
+    ...toEvidenceFields(raw),
+    cveRecordCategories: recordCategories.get(id) ?? [],
+    sources: isStringArray(raw.sources) ? raw.sources : [],
     severity: raw.severity,
     mode: isOneOf(raw.tara_mode, TECHNIQUE_MODES) ? raw.tara_mode : null,
     domain: readString(raw, 'tara_domain_primary'),
     coupling: readString(raw, 'coupling'),
-    cvssBaseVector: typeof cvssVector === 'string' && cvssVector.length > 0 ? cvssVector : null,
+    cvssBaseVector: asText(cvssVector),
     nissScore: typeof nissScore === 'number' ? nissScore : null,
-    nissVector: typeof nissVector === 'string' && nissVector.length > 0 ? nissVector : null,
+    nissVector: asText(nissVector),
     alias: readString(raw, 'tara_alias'),
     relatedTechniqueIds: isStringArray(relatedIds) ? relatedIds : [],
-    detection: typeof detection === 'string' && detection.length > 0 ? detection : null,
+    detection: asText(detection),
     fdaRequirementCodes: isStringArray(requirementCodes) ? requirementCodes : [],
   };
 }
@@ -98,25 +135,13 @@ function toPrecedentCve(raw: Record<string, unknown>, index: number): PrecedentC
     description: readString(raw, 'description') ?? '',
     cvssScore: typeof cvssScore === 'number' ? cvssScore : null,
     techniqueIds: raw.tara_techniques,
+    category: readString(raw, 'category'),
+    isNvdVerified: readNested(raw, 'validation', 'nvd_verified') === true,
   };
 }
 
-function toControlsByBand(securityControls: unknown): Record<string, BandControls> {
-  const byBand = isRecord(securityControls) ? securityControls.controls_by_band : undefined;
-  if (!isRecord(byBand)) throw new ThreatModelDataError(CONTROLS_FILE, 'expected a "controls_by_band" object');
-  const entries = Object.entries(byBand).map(([bandId, controls]): [string, BandControls] => {
-    const record = isRecord(controls) ? controls : {};
-    return [bandId, {
-      detection: isStringArray(record.detection) ? record.detection : [],
-      prevention: isStringArray(record.prevention) ? record.prevention : [],
-      response: isStringArray(record.response) ? record.response : [],
-    }];
-  });
-  return Object.fromEntries(entries);
-}
-
 export function buildEngineData(sources: RawEngineSources): EngineDataBundle {
-  const { registrar, atlas, cveMapping, securityControls } = sources;
+  const { registrar, atlas, cveMapping } = sources;
   const registrarVersion = isRecord(registrar) ? readString(registrar, 'version') : null;
   const cveGenerated = isRecord(cveMapping) ? readString(cveMapping, 'generated') : null;
   if (registrarVersion === null) throw new ThreatModelDataError(REGISTRAR_FILE, 'expected a "version" string');
@@ -127,17 +152,18 @@ export function buildEngineData(sources: RawEngineSources): EngineDataBundle {
     return id === null ? [] : [{ id, name: readString(tactic, 'name') ?? id, description: readString(tactic, 'description') ?? '' }];
   });
   const tacticIds = tactics.map((tactic) => tactic.id);
+  const precedentCves = requireList(cveMapping, 'mappings', CVE_FILE).map(toPrecedentCve);
+  const recordCategories = indexRecordCategories(precedentCves);
 
   return {
     tacticIds: new Set(tacticIds),
     engineData: {
       registrarVersion,
       tactics,
-      techniques: requireList(registrar, 'techniques', REGISTRAR_FILE).map(toTechnique),
+      techniques: requireList(registrar, 'techniques', REGISTRAR_FILE).map((raw, index) => toTechnique(raw, index, recordCategories)),
       regions: requireList(atlas, 'brain_regions', ATLAS_FILE).map(toRegion),
-      precedentCves: requireList(cveMapping, 'mappings', CVE_FILE).map(toPrecedentCve),
+      precedentCves,
       precedentCvesAsOf: cveGenerated,
-      controlsByBand: toControlsByBand(securityControls),
     },
   };
 }

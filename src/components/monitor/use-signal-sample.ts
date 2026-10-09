@@ -1,73 +1,53 @@
 import { useEffect, useState } from 'react';
-import { SampleFormatError, parseSampleCsv, type SignalSample } from '@/lib/signal/sample-csv';
+import { SampleFormatError, type SignalSample } from '@/lib/signal/sample-csv';
+import { SampleLoadError, fetchSample, fetchSampleFiles } from './sample-source';
 
-/** The synthetic samples are static files on this site; nothing about the device in focus is sent to fetch them. */
-const SAMPLE_DIRECTORY = '/brain-siem/data/';
-const MANIFEST_FILE = 'manifest.json';
-/** A sample's file name may only be a plain name in the sample folder, never a path. */
-const SAFE_FILE_NAME = /^[a-z0-9_]+\.csv$/;
-const MANIFEST_ERROR = 'The list of samples could not be loaded. Reload the page to try again.';
-const SAMPLE_ERROR = 'That sample could not be loaded. Choose another, or reload the page.';
+const UNEXPECTED_LIST_ERROR = 'The list of samples could not be loaded. Reload the page to try again.';
+const UNEXPECTED_SAMPLE_ERROR = 'That sample could not be loaded. Choose another, or reload the page.';
 
-export interface SampleListing {
-  file: string;
-  name: string;
-  description: string;
+function toMessage(error: unknown, fallback: string): string {
+  return error instanceof SampleLoadError || error instanceof SampleFormatError ? error.message : fallback;
 }
 
-function isListing(value: unknown): value is SampleListing {
-  if (typeof value !== 'object' || value === null) return false;
-  const record = value as Record<string, unknown>;
-  return typeof record.file === 'string' && SAFE_FILE_NAME.test(record.file) && typeof record.name === 'string' && typeof record.description === 'string';
-}
-
-async function fetchText(file: string, signal: AbortSignal): Promise<string> {
-  const response = await fetch(SAMPLE_DIRECTORY + file, { signal, credentials: 'omit' });
-  if (!response.ok) throw new Error(`status ${response.status}`);
-  return response.text();
-}
-
-export interface SampleListState {
-  listings: SampleListing[] | null;
+export interface SampleFilesState {
+  files: string[] | null;
   error: string | null;
 }
 
-/** The samples the manifest lists. Entries that are not a plain file name in the sample folder are dropped. */
-export function useSampleList(): SampleListState {
-  const [state, setState] = useState<SampleListState>({ listings: null, error: null });
+/** The sample files this site serves, read once when the Monitor opens. */
+export function useSampleFiles(): SampleFilesState {
+  const [state, setState] = useState<SampleFilesState>({ files: null, error: null });
   useEffect(() => {
     const controller = new AbortController();
-    fetchText(MANIFEST_FILE, controller.signal)
-      .then((text) => {
-        const parsed: unknown = JSON.parse(text);
-        const datasets = typeof parsed === 'object' && parsed !== null ? (parsed as Record<string, unknown>).datasets : undefined;
-        if (!Array.isArray(datasets)) throw new Error('unexpected format');
-        setState({ listings: datasets.filter(isListing), error: null });
-      })
-      .catch(() => { if (!controller.signal.aborted) setState({ listings: null, error: MANIFEST_ERROR }); });
+    fetchSampleFiles(controller.signal).then(
+      (files) => setState({ files, error: null }),
+      (error: unknown) => { if (!controller.signal.aborted) setState({ files: null, error: toMessage(error, UNEXPECTED_LIST_ERROR) }); },
+    );
     return () => controller.abort();
   }, []);
   return state;
 }
 
 export interface SampleState {
+  /** The file the sample was read from; null while nothing is loaded. */
+  file: string | null;
   sample: SignalSample | null;
   error: string | null;
 }
 
+const NOTHING_LOADED: SampleState = { file: null, sample: null, error: null };
+
 /** One sample, fetched and validated when its file name changes. */
 export function useSignalSample(file: string | null): SampleState {
-  const [state, setState] = useState<SampleState>({ sample: null, error: null });
+  const [state, setState] = useState<SampleState>(NOTHING_LOADED);
   useEffect(() => {
-    setState({ sample: null, error: null });
+    setState(NOTHING_LOADED);
     if (file === null) return undefined;
     const controller = new AbortController();
-    fetchText(file, controller.signal)
-      .then((text) => setState({ sample: parseSampleCsv(text), error: null }))
-      .catch((error: unknown) => {
-        if (controller.signal.aborted) return;
-        setState({ sample: null, error: error instanceof SampleFormatError ? error.message : SAMPLE_ERROR });
-      });
+    fetchSample(file, controller.signal).then(
+      (sample) => setState({ file, sample, error: null }),
+      (error: unknown) => { if (!controller.signal.aborted) setState({ file, sample: null, error: toMessage(error, UNEXPECTED_SAMPLE_ERROR) }); },
+    );
     return () => controller.abort();
   }, [file]);
   return state;

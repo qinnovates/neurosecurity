@@ -1,102 +1,117 @@
-import { useState } from 'react';
-import DataTable, { type DataTableColumn } from '@/components/lab-kit/DataTable';
-import EvidenceMark from '@/components/lab-kit/EvidenceMark';
-import FilterChip from '@/components/lab-kit/FilterChip';
-import SeverityMark from '@/components/lab-kit/SeverityMark';
-import { CATALOG_SEVERITIES, type CatalogTechnique } from '@/lib/threat-model/catalog-types';
-import { RISK_STATUSES, type RiskStatus } from '@/lib/threat-model/device-model';
-import { describeEvidence } from '@/lib/threat-model/evidence-levels';
+import { useMemo, type Ref } from 'react';
+import DataTable, { type DataTableHandle, type DataTableSort } from '@/components/lab-kit/DataTable';
+import EvidenceLegend from '@/components/lab-kit/EvidenceLegend';
+import Segmented, { type SegmentedOption } from '@/components/lab-kit/Segmented';
+import { useViewState } from '@/components/workbench/ViewStateContext';
+import type { RiskStatus } from '@/lib/threat-model/device-model';
+import type { ModelElement } from '@/lib/threat-model/model-order';
 import type { RiskRow } from '@/lib/threat-model/report-types';
 import { isRiskAddressed } from '@/lib/threat-model/risk-register';
-import { RISK_STATUS_LABELS } from './risk-status-labels';
+import { MODEL_STATE_KEYS } from './frame/model-view-keys';
+import { DecisionSelect, EvidenceCell, SeverityCell, buildRegisterColumns } from './frame/register-columns';
+import { groupRegisterRows } from './frame/register-order';
+import { useModelHighlight } from './model-highlight';
 
-type SourceFilter = 'catalog' | 'stride' | 'all';
+export const REGISTER_SCOPES = ['catalog', 'stride', 'all'] as const;
+export type RegisterScope = typeof REGISTER_SCOPES[number];
+
+const SCOPE_OPTIONS: readonly SegmentedOption<RegisterScope>[] = [
+  { value: 'catalog', label: 'Neural techniques' },
+  { value: 'stride', label: 'STRIDE baseline' },
+  { value: 'all', label: 'All' },
+];
+const SORT_DIRECTIONS: readonly string[] = ['ascending', 'descending'];
+const MAX_COLUMN_ID_LENGTH = 40;
+
+const ROW_CLOSES_STATEMENT = 'A row closes only when a decision is recorded on that row.';
+
+/** The rows in view on the part or connection being pointed at: "11 rows on Phone app". */
+export function describeLitRows(rowCount: number, elementLabel: string): string {
+  return `${rowCount} ${rowCount === 1 ? 'row' : 'rows'} on ${elementLabel}`;
+}
+
+function isRegisterScope(value: unknown): value is RegisterScope {
+  return typeof value === 'string' && (REGISTER_SCOPES as readonly string[]).includes(value);
+}
+
+function isRegisterSort(value: unknown): value is DataTableSort | null {
+  if (value === null) return true;
+  if (typeof value !== 'object' || Array.isArray(value)) return false;
+  const { columnId, direction } = value as Record<string, unknown>;
+  return typeof columnId === 'string' && columnId.length <= MAX_COLUMN_ID_LENGTH && typeof direction === 'string' && SORT_DIRECTIONS.includes(direction);
+}
 
 interface Props {
-  /** Rows the current part and lenses let through. */
+  /** Current rows the facets let through. */
   rows: readonly RiskRow[];
-  controlsInPlace: readonly string[];
-  /** Looks up the catalog entry behind a row, for its evidence tier. */
-  techniqueById: ReadonlyMap<string, CatalogTechnique>;
-  onDecide: (riskId: string, status: RiskStatus, note: string) => void;
+  /** Every part and connection in model order; it orders the lines inside a technique. */
+  elements: readonly ModelElement[];
+  openedRiskId: string | null;
+  /** A decision chosen on the row. The caller records it, or asks for the note it needs. */
+  onDecide: (row: RiskRow, status: RiskStatus) => void;
   onOpenRisk: (riskId: string) => void;
+  onOpenTechnique: (techniqueId: string) => void;
+  tableRef?: Ref<DataTableHandle>;
 }
 
-const SOURCE_FILTERS: readonly { id: SourceFilter; label: string }[] = [
-  { id: 'catalog', label: 'Neural techniques' },
-  { id: 'stride', label: 'STRIDE baseline' },
-  { id: 'all', label: 'All' },
-];
-/** Sorts after every known value, so a row with nothing to compare never ranks as the best or the least severe. */
-const SORTS_LAST = 99;
-
-function matchesSource(row: RiskRow, filter: SourceFilter): boolean {
-  return filter === 'all' || row.source === filter;
+function RiskCard({ row, onDecide }: { row: RiskRow; onDecide: Props['onDecide'] }) {
+  return (
+    <div className="model-risk-card">
+      <p><strong>{row.title}</strong></p>
+      <p className="lab-soft">{row.elementLabel}{row.techniqueId !== null && <> <span className="lab-id">{row.techniqueId}</span></>}</p>
+      <p className="model-risk-facts"><SeverityCell row={row} /><EvidenceCell row={row} /></p>
+      <DecisionSelect row={row} onDecide={onDecide} />
+    </div>
+  );
 }
 
-function buildColumns(onDecide: Props['onDecide'], techniqueById: Props['techniqueById']): readonly DataTableColumn<RiskRow>[] {
-  const tierOf = (row: RiskRow): string | null => (row.techniqueId === null ? null : techniqueById.get(row.techniqueId)?.evidenceTier ?? null);
-  return [
-    {
-      id: 'evidence', header: 'Evidence',
-      render: (row) => (row.evidenceStatus === null ? <span className="lab-soft">Baseline</span> : <EvidenceMark tier={tierOf(row)} status={row.evidenceStatus} />),
-      sortValue: (row) => (row.evidenceStatus === null ? SORTS_LAST : describeEvidence({ evidenceTier: tierOf(row), evidenceStatus: row.evidenceStatus }).rank),
-    },
-    {
-      id: 'threat', header: 'Threat', sortValue: (row) => row.title,
-      render: (row) => <>{row.title}{row.catalogState === 'missing' && <> <span className="tm-badge tm-badge--warning">No longer in the catalog</span></>}</>,
-    },
-    {
-      id: 'id', header: 'ID', sortValue: (row) => row.techniqueId ?? '',
-      render: (row) => (row.techniqueId === null ? <span className="lab-soft">{row.strideCategories.join(', ')}</span> : <span className="lab-id">{row.techniqueId}</span>),
-    },
-    { id: 'part', header: 'Part', render: (row) => row.elementLabel, sortValue: (row) => row.elementLabel },
-    {
-      id: 'severity', header: 'Severity',
-      render: (row) => (row.catalogSeverity === null ? <span className="lab-soft">Not scored</span> : <SeverityMark severity={row.catalogSeverity} />),
-      sortValue: (row) => (row.catalogSeverity === null ? SORTS_LAST : CATALOG_SEVERITIES.indexOf(row.catalogSeverity)),
-    },
-    { id: 'cves', header: 'Precedent CVEs', render: (row) => <span className="lab-figure">{row.precedentCveIds.length}</span>, sortValue: (row) => -row.precedentCveIds.length },
-    {
-      id: 'decision', header: 'Decision',
-      render: (row) => (
-        <select className="model-decision" aria-label={`Decision for ${row.title} on ${row.elementLabel}`} value={row.status} onChange={(event) => onDecide(row.riskId, event.target.value as RiskStatus, row.note)}>
-          {RISK_STATUSES.map((status) => <option key={status} value={status}>{RISK_STATUS_LABELS[status]}</option>)}
-        </select>
-      ),
-    },
-  ];
-}
+/**
+ * The register: one line per technique per part, grouped by technique, open groups first.
+ * Each line keeps its own decision. A row opens its detail in the drawer beside the table,
+ * and rows slide to their new place when a filter or a decision changes the set.
+ */
+export default function RisksSection({ rows, elements, openedRiskId, onDecide, onOpenRisk, onOpenTechnique, tableRef }: Props) {
+  const [scope, setScope] = useViewState<RegisterScope>(MODEL_STATE_KEYS.registerScope, 'catalog', isRegisterScope);
+  const [sort, setSort] = useViewState<DataTableSort | null>(MODEL_STATE_KEYS.registerSort, null, isRegisterSort);
+  const highlight = useModelHighlight();
 
-/** The register for triage: one line per risk, evidence first, open rows on top. A row opens its detail beside the table. */
-export default function RisksSection({ rows, controlsInPlace, techniqueById, onDecide, onOpenRisk }: Props) {
-  const [sourceFilter, setSourceFilter] = useState<SourceFilter>('catalog');
-  const [isOpenOnly, setOpenOnly] = useState(false);
-
-  const sourceRows = rows.filter((row) => matchesSource(row, sourceFilter));
-  const openRows = sourceRows.filter((row) => !isRiskAddressed(row, controlsInPlace));
-  // Open rows first, so triage starts at the top; the order within each group is kept.
-  const visibleRows = isOpenOnly ? openRows : [...openRows, ...sourceRows.filter((row) => isRiskAddressed(row, controlsInPlace))];
-  const emptyMessage = sourceRows.length === 0
-    ? 'No risk of this kind matches the part and lenses chosen. Nothing is hidden beyond them; choose "Show everything" to see the rest.'
-    : 'Every row here has a decision or a control in place.';
+  const scopedRows = useMemo(() => rows.filter((row) => scope === 'all' || row.source === scope), [rows, scope]);
+  const grouped = useMemo(() => groupRegisterRows(scopedRows, elements), [scopedRows, elements]);
+  const columns = useMemo(
+    () => buildRegisterColumns({ leadRiskIds: sort === null ? grouped.leadRiskIds : null, onDecide, onOpenTechnique }),
+    [sort, grouped.leadRiskIds, onDecide, onOpenTechnique],
+  );
+  const openCount = scopedRows.filter((row) => !isRiskAddressed(row)).length;
+  const litElement = highlight.litKey === null ? undefined : elements.find((element) => element.id === highlight.litKey);
+  const litRowCount = litElement === undefined ? 0 : scopedRows.filter((row) => row.elementId === litElement.id).length;
+  const emptyMessage = 'No risk of this kind matches the part and lenses chosen. Nothing is hidden beyond them; choose "Show everything" to see the rest.';
 
   return (
     <section className="lab-panel model-register" aria-label="Risk register">
-      <div className="model-register-bar" role="group" aria-label="Register rows to show">
-        {SOURCE_FILTERS.map((filter) => (
-          <FilterChip
-            key={filter.id} label={filter.label} count={rows.filter((row) => matchesSource(row, filter.id)).length}
-            isPressed={sourceFilter === filter.id} onToggle={() => setSourceFilter(filter.id)}
-          />
-        ))}
-        <FilterChip label="Open only" count={openRows.length} isPressed={isOpenOnly} onToggle={() => setOpenOnly(!isOpenOnly)} />
+      <div className="model-register-bar">
+        <Segmented label="Register scope" options={SCOPE_OPTIONS} value={scope} onChange={setScope} />
+        <p className="model-register-count" role="status"><span className="lab-figure">{openCount}</span> open of <span className="lab-figure">{scopedRows.length}</span></p>
+        {sort !== null && <button type="button" className="lab-button" onClick={() => setSort(null)}>Group by technique</button>}
+        {/* The slot is always there, so pointing at a part never moves the bar. */}
+        <span className="model-lit-count" data-shown={litElement !== undefined} aria-hidden="true">
+          {litElement !== undefined && <>{describeLitRows(litRowCount, litElement.label)}</>}
+        </span>
       </div>
-      <DataTable
-        caption={`${openRows.length} open of ${sourceRows.length}. A row is addressed once it has a decision or one of its controls is marked in place. Enter opens a row.`}
-        columns={buildColumns(onDecide, techniqueById)} rows={visibleRows} rowKey={(row) => row.riskId} emptyMessage={emptyMessage}
-        onOpenRow={(row) => onOpenRisk(row.riskId)} isRowQuiet={(row) => isRiskAddressed(row, controlsInPlace)}
-      />
+      <div>
+        <DataTable
+          ref={tableRef}
+          caption={`${openCount} open of ${scopedRows.length}. ${ROW_CLOSES_STATEMENT} Enter opens a row.`}
+          columns={columns} rows={grouped.rows} rowKey={(row) => row.riskId} emptyMessage={emptyMessage}
+          sort={sort} onSortChange={setSort} openedKey={openedRiskId}
+          onOpenRow={(row) => onOpenRisk(row.riskId)} isRowQuiet={isRiskAddressed}
+          isRowLit={(row) => highlight.isLit(row.elementId)} onRowPoint={(row) => highlight.setLitKey(row?.elementId ?? null)}
+          renderCard={(row) => <RiskCard row={row} onDecide={onDecide} />}
+        />
+      </div>
+      <div className="model-register-legend">
+        <p className="lab-label">{ROW_CLOSES_STATEMENT}</p>
+        <EvidenceLegend isCompact />
+      </div>
     </section>
   );
 }

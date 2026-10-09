@@ -1,22 +1,40 @@
-/* Query: the tables on the left, the editor and its result on the right. */
+/* Query: the editor first, then the result beside the tables it can be asked of. */
 
-.query { display: grid; gap: 0.75rem; grid-template-columns: 18rem minmax(0, 1fr); align-items: start; }
-.query-main { min-width: 0; display: grid; gap: 0.75rem; }
-.query-group { margin: 0.75rem 0 0.25rem; }
+.query { display: grid; gap: var(--lab-gap); }
+.query > * { min-width: 0; }
+.query-body { display: grid; gap: var(--lab-gap); grid-template-columns: minmax(0, 1fr) 18rem; align-items: start; }
+.query-body > * { min-width: 0; }
+.query-group { margin: var(--lab-gap) 0 0.25rem; font-weight: 400; }
 .query-table-list { list-style: none; margin: 0; padding: 0; }
-.query-table-list--long { max-height: 18rem; overflow: auto; }
-.query-table { display: flex; justify-content: space-between; gap: 0.5rem; width: 100%; padding: 0.1875rem 0.375rem; font: inherit; color: inherit; background: none; border: 0; border-radius: var(--lab-radius); cursor: pointer; }
-.query-table:hover { background: var(--lab-panel-raised); }
-.query-table[aria-pressed="true"] { box-shadow: inset 3px 0 0 var(--lab-select); background: var(--lab-panel-raised); }
+.query-table { display: flex; justify-content: space-between; gap: 0.5rem; width: 100%; padding: 0.1875rem 0.375rem; font: inherit; color: inherit; background: none; border: 0; border-radius: var(--lab-radius-s); cursor: pointer; }
+.query-table:hover { background: var(--lab-hover); }
+.query-table[aria-pressed="true"] { box-shadow: inset 3px 0 0 var(--lab-select); background: var(--lab-select-soft); }
 .query-table .lab-id { color: var(--lab-ink); }
 .query-columns { white-space: normal; word-break: break-word; }
-.query-editor { width: 100%; padding: 0.5rem 0.625rem; font-family: var(--lab-mono); font-size: 0.8125rem; color: var(--lab-ink); background: var(--lab-panel-raised); border: 1px solid var(--lab-line-strong); border-radius: var(--lab-radius); resize: vertical; }
-.query-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem 0.75rem; margin-top: 0.5rem; }
+.query-editor { display: block; width: 100%; padding: 0.5rem 0.625rem; font-family: var(--lab-mono); font-size: var(--lab-text-body); color: var(--lab-ink); background: var(--lab-panel-raised); border: 1px solid var(--lab-control-line); border-radius: var(--lab-radius-s); resize: vertical; }
+.query-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem var(--lab-gap); margin-top: 0.5rem; }
 .query-starters { display: flex; flex-wrap: wrap; gap: 0.3125rem; }
+/* A long question wraps inside its chip, so no chip is wider than the screen. */
+.query-starters .lab-chip, .query-history .lab-chip { max-width: 100%; }
+.query-starters .lab-chip { white-space: normal; text-align: left; height: auto; min-height: 1.75rem; }
 .query-history { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3125rem; margin-top: 0.5rem; }
-.query-history .lab-chip { font-family: var(--lab-mono); font-size: 0.75rem; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
-.query-result { max-height: 64vh; }
-/* A bar beside each count: thin, drawn to the largest count, rounded at the data end. */
-.query-bar-cell { width: 40%; min-width: 6rem; }
-.query-bar { display: block; height: 0.625rem; min-width: 1px; background: var(--lab-ink-soft); border-radius: 0 4px 4px 0; transition: width var(--motion-move) var(--motion-ease); }
-@media (max-width: 900px) { .query { grid-template-columns: minmax(0, 1fr); } }
+.query-history .lab-chip { font-family: var(--lab-mono); font-size: var(--lab-text-meta); max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+/* The row count is the status line above the table; the caption names the table for assistive technology only. */
+.query-count { margin: 0 0 0.375rem; min-height: 1rem; }
+.query-result :is(.lab-table caption, .lab-cards-caption) { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* The table's own wrap scrolls, so its head stays put above the rows. */
+.query-result .lab-table-wrap { max-height: 64vh; }
+
+/* An error is the loudest thing on the screen: a heavy edge, a title, and the engine's own words in full ink. */
+.query-error { border-left-width: 6px; }
+.query-error p { margin: 0 0 0.25rem; }
+.query-error-title { font-size: var(--lab-text-title); font-weight: 600; }
+.query-error-message { font-weight: 600; overflow-wrap: anywhere; }
+
+/* A bar beside each count: it starts at zero and the largest count fills the track. */
+.query-bar-track { display: block; width: 100%; min-width: 6rem; }
+.query-bar { display: block; height: 0.625rem; background: var(--lab-ink-soft); border-radius: 0 var(--lab-radius-s) var(--lab-radius-s) 0; }
+
+@media (max-width: 900px) { .query-body { grid-template-columns: minmax(0, 1fr); } }
+@media (pointer: coarse) { .query-table { min-height: 44px; align-items: center; } }
+@media print { .query-result .lab-table-wrap { max-height: none; } }

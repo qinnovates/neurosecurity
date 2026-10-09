@@ -1,0 +1,49 @@
+/*
+ * Base: one family, headings inherit, nothing under 12px, prose capped at 72 characters.
+ * Lines sit on the 4px grid: 13px text on a 20px line, 12px text on a 16px line, the 22px title on 28px.
+ * A screen does not set its own line-heights.
+ */
+
+.lab { color: var(--lab-ink); font-family: var(--lab-font); font-size: var(--lab-text-body); font-weight: 400; line-height: 1.25rem; }
+.lab :is(h1, h2, h3, h4, h5, h6) { font-family: inherit; font-size: inherit; font-weight: 600; line-height: inherit; letter-spacing: 0; color: inherit; }
+.lab :is(small, sub, sup) { font-size: var(--lab-text-meta); line-height: 1rem; }
+.lab :is(b, strong, th) { font-weight: 600; }
+.lab p, .lab-prose { max-width: var(--lab-measure); }
+.lab :is(code, kbd, samp, pre) { font-family: var(--lab-mono); font-size: var(--lab-text-meta); line-height: 1rem; }
+.lab :focus-visible { outline: 2px solid var(--lab-focus); outline-offset: 2px; }
+.lab ::placeholder { color: var(--lab-ink-soft); opacity: 1; }
+
+/* Type roles. Sentence case everywhere; no upper-case tracked labels. */
+/* Specificity matches the heading reset above, so the roles hold on an h1 to h6 as well as on a p. */
+.lab .lab-title { font-size: var(--lab-text-screen); font-weight: 600; line-height: 1.75rem; letter-spacing: -0.01em; margin: 0; }
+.lab .lab-panel-title { font-size: var(--lab-text-title); font-weight: 600; line-height: 1.25rem; margin: 0; }
+.lab-label { font-size: var(--lab-text-meta); line-height: 1rem; font-weight: 400; color: var(--lab-ink-soft); }
+.lab-soft { color: var(--lab-ink-soft); }
+.lab-figure { font-weight: 600; font-variant-numeric: tabular-nums; }
+.lab-id { font-family: var(--lab-mono); font-size: var(--lab-text-meta); line-height: 1rem; color: var(--lab-ink-soft); white-space: nowrap; }
+
+/* Translucent fill for bars that stay put while content scrolls beneath them. */
+.lab-material { background: var(--lab-material); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); }
+
+/* Panel: flat, one hairline. Only floating layers carry a shadow. */
+.lab-panel { background: var(--lab-panel); border: 1px solid var(--lab-line); border-radius: var(--lab-radius-m); min-width: 0; }
+.lab-panel-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.25rem var(--lab-gap); padding: var(--lab-gap) var(--lab-pad) 0; }
+.lab-panel-body { padding: var(--lab-gap) var(--lab-pad) var(--lab-pad); }
+
+/* A caution is a border beside ink text. The caution colour is never used for words. */
+.lab-notice { padding: 0.5rem var(--lab-gap); border-left: 3px solid var(--lab-caution); border-radius: 0 var(--lab-radius-s) var(--lab-radius-s) 0; background: var(--lab-panel); color: var(--lab-ink); }
+
+/* An empty place says why it is empty or what to do next. It never reads as clean. */
+.lab-empty { display: grid; gap: 0.25rem; justify-items: start; padding: var(--lab-pad); color: var(--lab-ink-soft); }
+.lab-empty-title { display: inline-flex; align-items: center; gap: 0.375rem; margin: 0; font-weight: 600; color: var(--lab-ink); }
+.lab-empty p { margin: 0; }
+
+/* A list to pick from on the left and the chosen item on the right; they stack on a narrow screen. */
+.lab-split { display: grid; gap: var(--lab-gap); grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); align-items: start; }
+.lab-pick-list { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.375rem; }
+.lab-pick { display: grid; gap: 0.25rem; width: 100%; padding: 0.5rem 0.625rem; font: inherit; color: inherit; text-align: left; background: none; border: 1px solid var(--lab-control-line); border-left-width: 3px; border-radius: var(--lab-radius-m); cursor: pointer; transition: border-color var(--lab-dur-1) var(--lab-ease), background-color var(--lab-dur-1) var(--lab-ease); }
+.lab-pick:hover { background: var(--lab-hover); }
+.lab-pick[aria-pressed="true"] { border-color: var(--lab-select); background: var(--lab-select-soft); }
+.lab-pick-sub { display: block; font-size: var(--lab-text-meta); line-height: 1rem; }
+.lab-pick-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; }
+@media (max-width: 900px) { .lab-split { grid-template-columns: minmax(0, 1fr); } }

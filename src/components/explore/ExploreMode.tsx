@@ -3,13 +3,13 @@ import CatalogView from './catalog/CatalogView';
 import CuratedChains from './CuratedChains';
 import DeviceClasses from './DeviceClasses';
 import DeviceSpecifications from './DeviceSpecifications';
-import '@/components/threat-model/threat-model.css';
+import { AUTHORED_CHAINS_VIEW_ID, CATALOG_VIEW_ID, SPECIFICATIONS_VIEW_ID, START_VIEW_ID } from './explore-navigation';
 import './explore.css';
 
-/** The Explore mode: which kind of device, what the catalog holds, and what is published about real devices. */
-export default function ExploreMode({ viewId, onOpenMode }: ModeProps) {
-  if (viewId === 'catalog') return <CatalogView onOpenMode={onOpenMode} />;
-  if (viewId === 'curated-chains') return <CuratedChains />;
-  if (viewId === 'specifications') return <DeviceSpecifications />;
-  return <DeviceClasses onOpenMode={onOpenMode} />;
+/** The Explore mode: where to start, what the catalog holds, the authored chains, and what is published about named devices. */
+export default function ExploreMode({ viewId, onSelectView }: ModeProps) {
+  if (viewId === CATALOG_VIEW_ID) return <CatalogView />;
+  if (viewId === AUTHORED_CHAINS_VIEW_ID) return <CuratedChains />;
+  if (viewId === SPECIFICATIONS_VIEW_ID) return <DeviceSpecifications onOpenStart={() => onSelectView(START_VIEW_ID)} />;
+  return <DeviceClasses />;
 }

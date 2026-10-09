@@ -10,3 +10,6 @@ export const ELECTRODE_POSITIONS: Readonly<Record<string, readonly [number, numb
   T5: [-0.81, 0.59], P3: [-0.4, 0.45], Pz: [0, 0.48], P4: [0.4, 0.45], T6: [0.81, 0.59],
   O1: [-0.31, 0.81], Oz: [0, 0.9], O2: [0.31, 0.81],
 };
+
+/** The radius of the head outline on the same unit circle. */
+export const HEAD_RADIUS = 1.08;

@@ -22,7 +22,7 @@ function loadOnce(): Promise<LabTables> {
   return sharedLoad;
 }
 
-/** The site's query database, filtered to what the Lab may show about named companies and devices. */
+/** The site's query database, cut down to the tables and columns the Lab's allow-list names. */
 export function useSiteDatabase(): SiteDatabaseState {
   const [state, setState] = useState<SiteDatabaseState>({ tables: null, error: null });
 
