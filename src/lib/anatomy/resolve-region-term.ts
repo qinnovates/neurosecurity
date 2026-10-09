@@ -2,9 +2,17 @@
  * Resolves a word the catalog uses for a brain structure to a QIF region, and
  * says how. This is the datalake's own resolver (region-resolver.mjs), so a
  * technique link and an impact-chain row can never resolve one alias two ways.
+ *
+ * Catalog prose is not written in atlas ids, so a term is first normalised by
+ * region-term.mjs (letter case, whitespace, hyphen or underscore, one plural
+ * "s") and then looked up among the region ids and alias keys. Nothing looser
+ * is tried: no stemming, no abbreviation the atlas does not list, no part of a
+ * longer name. A region's display name resolves only where it is also an id or
+ * an alias.
  */
 
-import { LIGHTING_MATCHES, REGION_MATCH, UnresolvedRegionError, createRegionResolver } from '@shared/scripts/region-resolver.mjs';
+import { LIGHTING_MATCHES, REGION_MATCH } from '@shared/scripts/region-resolver.mjs';
+import { createCatalogTermResolver } from '@shared/scripts/region-term.mjs';
 import { isOneOf, isRecord } from '@/lib/threat-model/guards';
 import { AnatomyDataError } from './errors';
 
@@ -18,6 +26,7 @@ export interface TermResolution {
 }
 
 const ATLAS_FILE = 'datalake/qif-brain-bci-atlas.json';
+const LINK_CONTEXT = 'technique link';
 const UNRESOLVED_TERM: TermResolution = { resolved_region_id: null, resolution: REGION_MATCH.UNCLASSIFIED };
 
 /** Only an id or a synonym lights a region. Every other resolution is listed in the catalog's own word and lights nothing. */
@@ -39,13 +48,9 @@ function toTermResolution(resolved: { region: unknown; match: unknown }, term: s
  * @returns a resolver that never throws for an unknown word: that word is `unclassified` and lights nothing
  */
 export function createTermResolver(atlas: unknown): (term: string) => TermResolution {
-  const resolveRegion = createRegionResolver(atlas);
+  const resolveCatalogTerm = createCatalogTermResolver(atlas);
   return function resolveTerm(term: string): TermResolution {
-    try {
-      return toTermResolution(resolveRegion(term, 'technique link'), term);
-    } catch (error) {
-      if (error instanceof UnresolvedRegionError) return UNRESOLVED_TERM;
-      throw error;
-    }
+    const resolved = resolveCatalogTerm(term, LINK_CONTEXT);
+    return resolved === null ? UNRESOLVED_TERM : toTermResolution(resolved, term);
   };
 }
