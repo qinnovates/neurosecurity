@@ -36,7 +36,7 @@ When a file changes, these downstream files must be updated. Run `npm run health
 | All datalake/*.json propagation, plus: | | |
 | qif-neural-pathways.json `origin_band` / `target_bands` | `npm run derive:pathway-bands` (derived from `brain_regions[].qif_band`; never hand-edit) | Script (`npm test` fails if stale) |
 | datalake/impact-chains.json | `npm run compute:chains` | Script (`npm test` fails if stale) |
-| qif-brain-bci-atlas.json `region_alias_relations` | Classify any new alias that is not a plain synonym | Manual |
+| qif-brain-bci-atlas.json `region_alias_relations` | Give every new alias exactly one kind (`synonym`, `whole_to_part` or `part_to_whole`) and add it to the pinned table in `datalake/scripts/__tests__/region-resolver.test.mjs`. An alias with no kind stops `compute:chains` and `derive:pathway-bands` and lights no region | Manual (`npm test` fails if missing) |
 
 ## When osi-of-mind/QIF-DERIVATION-LOG.md changes
 | Update | How | Automated? |

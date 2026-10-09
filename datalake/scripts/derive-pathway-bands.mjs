@@ -30,7 +30,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { DATALAKE_DIR, runAsCli } from './datalake-cli.mjs';
-import { createRegionResolver } from './region-resolver.mjs';
+import { createClassifiedRegionResolver } from './region-resolver.mjs';
 
 const ATLAS_PATH = path.join(DATALAKE_DIR, 'qif-brain-bci-atlas.json');
 const PATHWAYS_PATH = path.join(DATALAKE_DIR, 'qif-neural-pathways.json');
@@ -81,7 +81,7 @@ function isSameBandList(left, right) {
 
 /** Every stored band field that differs from the value derived from the atlas. */
 export function findPathwayBandDrift(pathways, atlas) {
-  const resolveRegion = createRegionResolver(atlas);
+  const resolveRegion = createClassifiedRegionResolver(atlas);
   const drift = [];
   for (const pathway of pathways) {
     const derived = derivePathwayBands(pathway, resolveRegion);
@@ -108,7 +108,7 @@ function rewriteLine(line, derived) {
 
 /** Rewrites only the band-field lines of the pathway file text, then proves the result is drift-free. */
 export function rewritePathwayBands(pathwaysText, atlas) {
-  const resolveRegion = createRegionResolver(atlas);
+  const resolveRegion = createClassifiedRegionResolver(atlas);
   const derivedById = new Map(
     JSON.parse(pathwaysText).pathways.map((pathway) => [pathway.id, derivePathwayBands(pathway, resolveRegion)]),
   );

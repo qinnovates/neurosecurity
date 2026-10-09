@@ -19,6 +19,7 @@ export const FIXTURE_ATLAS = Object.freeze({
     locus_coeruleus: 'pons',
   },
   region_alias_relations: {
+    synonym: ['prefrontal_cortex', 'basolateral_amygdala'],
     whole_to_part: ['amygdala'],
     part_to_whole: ['locus_coeruleus'],
   },

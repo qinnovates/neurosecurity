@@ -2430,7 +2430,12 @@
     "PAG": "midbrain"
   },
   "region_alias_relations": {
-    "_note": "Classifies the entries of region_aliases that are not plain synonyms. An alias absent from both lists names the same structure as its atlas region. whole_to_part: the alias names a structure larger than, or spanning beyond, the single atlas region it maps to, so a join through it attributes the whole structure to that one part. part_to_whole: the alias names a sub-structure of the atlas region it maps to, so a join through it attributes the sub-structure to the whole region. Scripts that join through region_aliases carry this classification on their output (see region_match in impact-chains.json). The classification is a first pass that has not had expert anatomical review, and it covers aliases only: a file that writes an atlas id directly as a stand-in for a smaller or larger structure is not flagged by it.",
+    "_note": "States the kind of every entry of region_aliases. Every alias is listed under exactly one of synonym, whole_to_part and part_to_whole. An alias listed under none is unclassified: it is never assumed to be a synonym, a join through it stops the datalake scripts, and it lights no region. synonym: the alias names the same structure as its atlas region. whole_to_part: the alias names a structure larger than, or spanning beyond, the single atlas region it maps to, so a join through it attributes the whole structure to that one part. part_to_whole: the alias names a sub-structure of the atlas region it maps to, so a join through it attributes the sub-structure to the whole region. Scripts that join through region_aliases carry this classification on their output (see region_match in impact-chains.json). The classification is an AI-drafted first pass that has not had expert anatomical review (see _classification), and it covers aliases only: a file that writes an atlas id directly as a stand-in for a smaller or larger structure is not flagged by it.",
+    "_classification": {
+      "drafted_by": "ai",
+      "human_reviewed": false,
+      "basis": "An AI judgment from the region and alias names in this file. No anatomist has reviewed it."
+    },
     "whole_to_part": [
       "cortex",
       "brainstem",
@@ -2448,6 +2453,32 @@
       "tuberomammillary_nucleus",
       "C1-C3_medullary_neurons",
       "PAG"
+    ],
+    "synonym": [
+      "prefrontal_cortex",
+      "primary_motor_cortex",
+      "primary_visual_cortex",
+      "primary_auditory_cortex",
+      "primary_somatosensory_cortex",
+      "premotor_cortex",
+      "supplementary_motor_area",
+      "posterior_parietal_cortex",
+      "anterior_cingulate_cortex",
+      "insular_cortex",
+      "basolateral_amygdala",
+      "central_amygdala",
+      "ventral_tegmental_area",
+      "subthalamic_nucleus",
+      "globus_pallidus_internus",
+      "ventral_intermediate_nucleus",
+      "cerebellar_cortex",
+      "deep_cerebellar_nuclei",
+      "cerebellar_vermis",
+      "medulla_oblongata",
+      "cervical_spinal_cord",
+      "thoracic_spinal_cord",
+      "lumbar_spinal_cord",
+      "sacral_spinal_cord"
     ]
   },
   "bci_devices": "SEE docs/bci-hardware-inventory.json \u2014 24 devices with full hardware specs. This field cross-references device IDs for the mapping table below.",

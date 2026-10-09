@@ -40,7 +40,7 @@ import { DATALAKE_DIR, runAsCli } from './datalake-cli.mjs';
 import {
   REGION_MATCH_PRECEDENCE,
   SCOPE_CHANGING_MATCHES,
-  createRegionResolver,
+  createClassifiedRegionResolver,
   listPathwayEndpoints,
 } from './region-resolver.mjs';
 
@@ -92,7 +92,7 @@ function matchPathwayRegions(pathway, resolveRegion) {
 
 /** Atlas region id -> [{ pathway, match }], in pathway file order. */
 export function indexPathwaysByRegion(pathways, atlas) {
-  const resolveRegion = createRegionResolver(atlas);
+  const resolveRegion = createClassifiedRegionResolver(atlas);
   const pathwaysByRegion = new Map();
   for (const pathway of pathways) {
     for (const [regionId, match] of matchPathwayRegions(pathway, resolveRegion)) {
@@ -153,7 +153,7 @@ function buildBandRows(technique, bandId, indexes) {
 
 /**
  * Pure computation: source JSON in, chain rows out.
- * Throws UnresolvedRegionError or DanglingRegionAliasError if a pathway names a
+ * Throws UnresolvedRegionError, DanglingRegionAliasError or UnclassifiedRegionAliasError if a pathway names a
  * region the atlas cannot resolve. A band id the atlas does not define yields no
  * rows; findTechniquesWithUnknownBands reports those.
  */
