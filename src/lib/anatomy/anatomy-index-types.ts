@@ -145,7 +145,6 @@ export interface IndexTechniqueLink {
 }
 
 /** `not_drafted`: the technique has a neural band but no entry in the technique-regions file yet. */
-export const INDEX_TECHNIQUE_SCOPES = ['regions', 'band_level', 'not_drafted'] as const;
 export type IndexTechniqueScope = TechniqueScope | 'not_drafted';
 
 export interface IndexTechnique {

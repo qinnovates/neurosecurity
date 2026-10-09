@@ -1,14 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { parseAnatomyFiles, type RawAnatomyFiles } from '../anatomy-inputs';
+import { isAgreementAccepted, parseAnatomyFiles, type RawAnatomyFiles } from '../anatomy-inputs';
 import type { AnatomyIndex, IndexStructure, IndexSubject } from '../anatomy-index-types';
 import { buildAnatomyBundle, type AnatomyBundle } from '../build-anatomy-index';
 import type { AnatomyEvidence } from '../build-anatomy-evidence';
-import type { LedgerEntry } from '../parse-review-ledger';
+import { parseReviewLedger, type LedgerEntry } from '../parse-review-ledger';
 import { sha256Hex } from '../row-digest';
 import { ANATOMY_INDEX_STATUS } from '../status-sentences';
-import { FIXTURE_ATLAS_ID, FIXTURE_SHA256 } from './anatomy-fixtures';
-import { buildAsset, buildManifest } from './manifest-fixtures';
-import { FIXTURE_ASSET_ID } from './manifest-fixtures';
+import { FIXTURE_ATLAS_ID, FIXTURE_SHA256, buildVerdict } from './anatomy-fixtures';
+import { FIXTURE_ASSET_ID, buildAsset, buildManifest } from './manifest-fixtures';
 import { PATHWAY_TEXT, TECHNIQUE_ID, TRACTS_SOURCE_ID, buildLedgerFile, buildRawFiles } from './raw-files-fixture';
 
 const build = (overrides: Partial<RawAnatomyFiles> = {}): AnatomyBundle => buildAnatomyBundle(parseAnatomyFiles(buildRawFiles(overrides)));
@@ -166,6 +165,26 @@ describe('buildAnatomyBundle: review state', () => {
     expect(build({ reviewLedger: buildLedgerFile([signOff]) }).index.assets[0].visual_check).toEqual({ state: 'signed', role: 'owner', reviewed_on: '2026-10-09' });
     const stale = { ...signOff, digest: 'd'.repeat(64) };
     expect(build({ reviewLedger: buildLedgerFile([stale]) }).index.assets[0].visual_check.state).toBe('not_done');
+  });
+});
+
+describe('access agreements', () => {
+  const textDigest = 'e'.repeat(64);
+  const verdict = buildVerdict({ access_agreement: { name: 'Fixture terms', terms_url: 'https://example.org/terms', text_sha256: textDigest } });
+  const acceptance = (overrides: Partial<LedgerEntry>): ReturnType<typeof parseReviewLedger> => parseReviewLedger(buildLedgerFile([
+    { kind: 'agreement', key: FIXTURE_ATLAS_ID, digest: textDigest, reviewer_id: 'owner-1', reviewed_on: '2026-10-09', ...overrides },
+  ]));
+
+  it('counts an agreement as accepted only for the exact text, and only in the owner\'s role', () => {
+    expect(isAgreementAccepted(verdict, acceptance({}))).toBe(true);
+    expect(isAgreementAccepted(verdict, acceptance({ digest: 'f'.repeat(64) }))).toBe(false);
+    expect(isAgreementAccepted(verdict, acceptance({ reviewer_id: 'neuroanatomist-1' }))).toBe(false);
+    expect(isAgreementAccepted(verdict, parseReviewLedger(buildLedgerFile()))).toBe(false);
+  });
+
+  it('never accepts an agreement whose text nobody has pinned', () => {
+    const unpinned = buildVerdict({ access_agreement: { name: 'Fixture terms', terms_url: 'https://example.org/terms', text_sha256: null } });
+    expect(isAgreementAccepted(unpinned, acceptance({}))).toBe(false);
   });
 });
 

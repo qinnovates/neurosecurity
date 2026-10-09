@@ -15,15 +15,17 @@ import { parseCrosswalk } from './parse-crosswalk';
 import { parseDeviceGeometry, type DeviceGeometry } from './parse-device-geometry';
 import { parseLabelTable } from './parse-label-table';
 import { parseManifest } from './parse-manifest';
-import { parseReviewLedger, type ReviewLedger } from './parse-review-ledger';
+import { parseReviewLedger, type ReviewLedger, type ReviewerRole } from './parse-review-ledger';
 import { parseSources } from './parse-sources';
 import { REGISTRAR_FILE, parseTechniqueRegions } from './parse-technique-regions';
+import { findReview } from './review-state';
 import { parseVerdicts } from './parse-verdicts';
 import type { AnatomySources, LicenceId, LicenceVerdict, LicenceVerdicts } from './source-types';
 
 export const ATLAS_FILE = 'datalake/qif-brain-bci-atlas.json';
 export const PATHWAYS_FILE = 'datalake/qif-neural-pathways.json';
 const NETWORK_PATHWAY_TYPE = 'cortical_network';
+const AGREEMENT_ACCEPTING_ROLE: ReviewerRole = 'owner';
 const NEURAL_BAND_PREFIX = 'N';
 const LABEL_TABLE_FOLDER_PATTERN = /^src\/site\/atlas-assets\/(open|by-sa)\/labels-[a-z0-9_]+\.json$/;
 
@@ -83,11 +85,16 @@ function readRegionAliases(atlas: unknown): Set<string> {
   return new Set(Object.keys(aliases));
 }
 
-/** A source behind an access agreement counts as accepted only when the ledger holds the owner's entry for that exact text. */
-function isAgreementAccepted(verdict: LicenceVerdict, ledger: ReviewLedger): boolean {
+/**
+ * A source behind an access agreement counts as accepted only when the ledger
+ * holds an entry for that exact text made in the owner's role. Nobody else can
+ * accept an agreement on the owner's behalf.
+ */
+export function isAgreementAccepted(verdict: LicenceVerdict, ledger: ReviewLedger): boolean {
   const textDigest = verdict.access_agreement?.text_sha256 ?? null;
-  return textDigest !== null
-    && ledger.entries.some((entry) => entry.kind === 'agreement' && entry.key === verdict.source_id && entry.digest === textDigest);
+  if (textDigest === null) return false;
+  const acceptance = findReview(ledger, 'agreement', verdict.source_id, textDigest);
+  return acceptance.state === 'reviewed' && acceptance.reviewer_role === AGREEMENT_ACCEPTING_ROLE;
 }
 
 function parseLabelTables(

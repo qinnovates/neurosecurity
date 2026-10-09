@@ -37,7 +37,8 @@ export function readSha256(record: Record<string, unknown>, key: string, locatio
 /** A calendar date written YYYY-MM-DD that names a real day. */
 export function readDate(record: Record<string, unknown>, key: string, location: FieldLocation): string {
   const date = readString(record, key, location, DATE_LENGTH);
-  const isRealDay = DATE_PATTERN.test(date) && new Date(`${date}T00:00:00Z`).toISOString().startsWith(date);
+  const day = new Date(`${date}T00:00:00Z`);
+  const isRealDay = DATE_PATTERN.test(date) && !Number.isNaN(day.getTime()) && day.toISOString().startsWith(date);
   if (!isRealDay) failAt(childOf(location, key), `"${date}" is not a date`, 'Write the date as YYYY-MM-DD.');
   return date;
 }

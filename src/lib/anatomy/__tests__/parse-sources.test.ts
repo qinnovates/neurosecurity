@@ -114,6 +114,10 @@ describe('parseVerdicts', () => {
     const typed = { ...buildVerdict(), commercial_use: true };
     expect(() => parseVerdicts(buildVerdictsFile([typed as never]), parseSources(buildSourcesFile()))).toThrow(/unexpected key "commercial_use"/);
     expect(() => parseVerdicts(buildVerdictsFile([buildVerdict({ read_on: 'last week' })]), parseSources(buildSourcesFile()))).toThrow(/read_on/);
+    for (const impossibleDate of ['2026-13-01', '2026-02-30', '2026-00-10']) {
+      expect(() => parseVerdicts(buildVerdictsFile([buildVerdict({ read_on: impossibleDate })]), parseSources(buildSourcesFile())))
+        .toThrow(new RegExp(`read_on: "${impossibleDate}" is not a date`));
+    }
   });
 
   it('keeps the source id set it was checked against', () => {
