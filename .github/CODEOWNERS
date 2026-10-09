@@ -22,6 +22,8 @@ SECURITY.md @qikevinl
 # TARA Lab page policy, and the record of legacy brain geometry that may only shrink
 /src/layouts/ToolLayout.astro @qikevinl
 /src/components/__tests__/legacy-geometry-recorded.ts @qikevinl
+/src/components/__tests__/legacy-geometry-ratchet.test.ts @qikevinl
+/src/lib/legacy-geometry-scan.ts @qikevinl
 
 # Shared data & QTARA SDK
 /shared/qtara/ @qikevinl

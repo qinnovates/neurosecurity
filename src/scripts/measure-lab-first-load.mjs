@@ -5,19 +5,20 @@
  *   code      stylesheets, the static import closure of the page's scripts, and the chunks
  *             the page imports as it starts (declared per page in tool-pages.mjs)
  *   document  the HTML, which carries the catalog data the page needs
- * It also follows every `import()` and fails when a library that must stay lazy (three.js)
- * can be reached any way except through a chunk the page names as interaction-gated.
- * How files are found is described in first-load-closure.mjs.
+ * It also follows every `import()`. Each one the page can reach must be declared in
+ * tool-pages.mjs as on-mount (counted), interaction-gated or on-demand; an undeclared one
+ * fails. A library that must stay lazy (three.js) may be reached only through a chunk
+ * declared interaction-gated. How files are found is described in first-load-closure.mjs.
  *
- * Not counted: fonts and images, and chunks behind an `import()` that is not declared as
- * running on start. Whether an undeclared `import()` runs on start cannot be read from the
- * build; only its reach to a lazy-only library is checked. Not followed at all: an
+ * Not counted: fonts and images, and chunks declared on-demand or interaction-gated. That
+ * a declaration is true (an on-demand chunk really does wait for the visitor) cannot be
+ * read from the build; the browser evidence run shows it. Not followed at all: an
  * `import()` whose target is computed at run time, and a worker started from a URL.
  *
  * Usage (after `npm run build`):
  *   node src/scripts/measure-lab-first-load.mjs      every page in tool-pages.mjs, against its budgets
  *   node src/scripts/measure-lab-first-load.mjs --page /some/page/ [--island <name>] [--on-mount <name>]...
- *        [--gate <name>]... [--budget-code-gzip <bytes>] [--budget-document-gzip <bytes>]
+ *        [--gate <name>]... [--on-demand <name>]... [--budget-code-gzip <bytes>] [--budget-document-gzip <bytes>]
  *   Both forms accept --dist <directory> and --json.
  *
  * Exits 1 on any failure it reports, and when it cannot run.
@@ -27,7 +28,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 import { chunkStem, extractPageEntries, readBuiltFile, traceImportChain, walkImportGraph } from './first-load-closure.mjs';
-import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES, ToolPageCheckError } from './tool-pages.mjs';
+import { DEFAULT_DIST_DIRECTORY, LAZY_ENTRY_LISTS, TOOL_PAGES, ToolPageCheckError } from './tool-pages.mjs';
 
 /**
  * Libraries that must never load before the visitor asks, each recognised by text only the
@@ -37,7 +38,7 @@ import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES, ToolPageCheckError } from './tool-p
 export const LAZY_ONLY_LIBRARIES = [{ library: 'three.js', definedBy: /\b__THREE__\b/ }];
 const PARTS = { document: 'document', staticCode: 'static', onMountCode: 'on-mount' };
 const BUDGET_FLAGS = { '--budget-code-gzip': 'codeGzipBudgetBytes', '--budget-document-gzip': 'documentGzipBudgetBytes' };
-const LIST_FLAGS = { '--on-mount': 'onMountLazyEntryNames', '--gate': 'interactionGatedEntryNames' };
+const LIST_FLAGS = { '--on-mount': 'onMountLazyEntryNames', '--gate': 'interactionGatedEntryNames', '--on-demand': 'onDemandLazyEntryNames' };
 
 function measureFile(distDirectory, urlPath, kind, part) {
   const contents = readBuiltFile(distDirectory, urlPath);
@@ -67,17 +68,11 @@ function totalBytes(files) {
   return { ...totals, codeRawBytes: totals.staticCodeRawBytes + totals.onMountCodeRawBytes, codeGzipBytes: totals.staticCodeGzipBytes + totals.onMountCodeGzipBytes };
 }
 
-/** The chunks the page imports as it starts: each declared name, looked up among the dynamic imports of the first-load scripts. */
-function walkOnMountEntries(distDirectory, staticWalk, onMountNames) {
-  const entries = staticWalk.lazyTargets.filter((target) => onMountNames.includes(chunkStem(target)));
-  const foundNames = entries.map(chunkStem);
+/** The chunks the page imports as it starts: each declared name, with what it imports, less what the static closure already holds. */
+function walkOnMountEntries(distDirectory, staticWalk, reach, onMountNames) {
+  const entries = reach.dynamicTargets.filter((target) => onMountNames.includes(chunkStem(target)));
   const walk = walkImportGraph(distDirectory, entries);
-  return {
-    chunks: walk.closure.filter((urlPath) => !staticWalk.closure.includes(urlPath)),
-    missing: walk.missing,
-    problems: onMountNames.filter((name) => !foundNames.includes(name))
-      .map((name) => `declared on-mount entry "${name}" is not a dynamic import of the page's first-load scripts; correct its name in tool-pages.mjs`),
-  };
+  return { chunks: walk.closure.filter((urlPath) => !staticWalk.closure.includes(urlPath)), missing: walk.missing };
 }
 
 /** Every lazy-only library reachable from the page without passing a named gate, with the chain that reaches it. */
@@ -100,28 +95,41 @@ function findAmbiguousNames(names, knownChunks) {
     .map(({ name, matches }) => `"${name}" matches ${matches.length} chunks (${matches.join(', ')}); rename a module so the name identifies one chunk`);
 }
 
-function findStructureProblems(page, entries, reach) {
-  const onMountNames = page.onMountLazyEntryNames ?? [];
-  const gateNames = page.interactionGatedEntryNames ?? [];
+/**
+ * Holds the page to its declaration: every `import()` it can reach is named in exactly one
+ * list, and every name in a list is an `import()` the page really makes.
+ */
+function findLazyDeclarationProblems(page, staticWalk, reach) {
+  const declared = LAZY_ENTRY_LISTS.flatMap((list) => (page[list] ?? []).map((name) => ({ name, list })));
+  const names = [...new Set(declared.map(({ name }) => name))];
+  const importedNames = reach.dynamicTargets.map(chunkStem);
+  const undeclared = reach.dynamicTargets.filter((target) => !names.includes(chunkStem(target)) && !staticWalk.closure.includes(target));
+  return [
+    ...undeclared.map((target) => `dynamic import of ${target} is not declared; add "${chunkStem(target)}" in tool-pages.mjs to exactly one of `
+      + 'onMountLazyEntryNames (counted in the code budget), interactionGatedEntryNames (may lead to three.js) or onDemandLazyEntryNames (not counted, must not lead to three.js)'),
+    ...names.filter((name) => declared.filter((entry) => entry.name === name).length > 1)
+      .map((name) => `"${name}" is declared in more than one list (${declared.filter((entry) => entry.name === name).map(({ list }) => list).join(', ')}); it must be in exactly one`),
+    ...declared.filter(({ name }) => !importedNames.includes(name))
+      .map(({ name, list }) => `"${name}" in ${list} is not a dynamic import of this page; remove or correct it in tool-pages.mjs`),
+    ...findAmbiguousNames(names, [...new Set([...reach.closure, ...reach.dynamicTargets])]),
+  ];
+}
+
+function findStructureProblems(page, entries) {
   const problems = [];
   if (entries.scriptEntries.length === 0) problems.push('the page names no script entry, so nothing was measured');
   const islandNames = entries.islandComponents.map(chunkStem);
   if (page.islandEntryName != null && !islandNames.includes(page.islandEntryName)) {
     problems.push(`the page has no "${page.islandEntryName}" island (found: ${islandNames.join(', ') || 'none'}); the measurement would be empty`);
   }
-  const gatesFound = reach.gatedEntries.map(chunkStem);
-  for (const name of gateNames) {
-    if (onMountNames.includes(name)) problems.push(`"${name}" is declared both as loading on mount and as interaction-gated; it cannot be both`);
-    if (!gatesFound.includes(name)) problems.push(`declared interaction gate "${name}" is not a dynamic import of this page; remove or correct it in tool-pages.mjs`);
-  }
-  return [...problems, ...findAmbiguousNames([...new Set([...onMountNames, ...gateNames])], [...reach.closure, ...reach.gatedEntries])];
+  return problems;
 }
 
 /**
  * Measures the first load of one built page.
  * @param {string} distDirectory build output directory
  * @param {{ urlPath: string, islandEntryName?: string | null, onMountLazyEntryNames?: readonly string[],
- *   interactionGatedEntryNames?: readonly string[] }} page
+ *   interactionGatedEntryNames?: readonly string[], onDemandLazyEntryNames?: readonly string[] }} page
  */
 export function measureFirstLoad(distDirectory, page) {
   const html = readBuiltFile(distDirectory, page.urlPath);
@@ -130,8 +138,8 @@ export function measureFirstLoad(distDirectory, page) {
   }
   const entries = extractPageEntries(html.toString('utf-8'), page.urlPath);
   const staticWalk = walkImportGraph(distDirectory, entries.scriptEntries);
-  const onMount = walkOnMountEntries(distDirectory, staticWalk, page.onMountLazyEntryNames ?? []);
   const reach = walkImportGraph(distDirectory, entries.scriptEntries, { followDynamicImports: true, gatedEntryStems: page.interactionGatedEntryNames ?? [] });
+  const onMount = walkOnMountEntries(distDirectory, staticWalk, reach, page.onMountLazyEntryNames ?? []);
   const { files, absentFiles } = measureFiles(distDirectory, [
     [page.urlPath, 'html', PARTS.document],
     ...entries.stylesheets.map((urlPath) => [urlPath, 'stylesheet', PARTS.staticCode]),
@@ -142,12 +150,12 @@ export function measureFirstLoad(distDirectory, page) {
     pageUrlPath: page.urlPath,
     files,
     totals: totalBytes(files),
-    lazyTargets: staticWalk.lazyTargets.filter((target) => !onMount.chunks.includes(target) && !reach.gatedEntries.includes(target)),
+    onDemandEntries: reach.dynamicTargets.filter((target) => (page.onDemandLazyEntryNames ?? []).includes(chunkStem(target))),
     gatedEntries: reach.gatedEntries,
     missing: [...new Set([...staticWalk.missing, ...onMount.missing, ...reach.missing, ...absentFiles])],
     unresolved: staticWalk.unresolved,
     offOrigin: entries.offOrigin,
-    structureProblems: [...findStructureProblems(page, entries, reach), ...onMount.problems],
+    structureProblems: [...findStructureProblems(page, entries), ...findLazyDeclarationProblems(page, staticWalk, reach)],
     ungatedLazyLibraries: findUngatedLazyLibraries(distDirectory, reach),
   };
 }
@@ -177,6 +185,17 @@ export function findFirstLoadFailures(measurement, budgets = { codeGzipBudgetByt
   ];
 }
 
+/** What a listed page must state outright, so that leaving something out cannot pass as "nothing to check". */
+function findMissingDeclarations(page) {
+  const problems = [];
+  if (typeof page.islandEntryName !== 'string' || page.islandEntryName.trim() === '') problems.push('islandEntryName is not set; name the island the page hydrates in tool-pages.mjs');
+  for (const list of LAZY_ENTRY_LISTS) {
+    const isListOfNames = Array.isArray(page[list]) && page[list].every((name) => typeof name === 'string' && name !== '');
+    if (!isListOfNames) problems.push(`${list} is not a list of chunk names; every listed page declares it in tool-pages.mjs, empty if it has none`);
+  }
+  return problems;
+}
+
 function findMissingBudgets(budgets) {
   return Object.entries(budgets).filter(([, budget]) => budget === null)
     .map(([name]) => `${name} is not set; every listed page needs both budgets in tool-pages.mjs`);
@@ -185,16 +204,17 @@ function findMissingBudgets(budgets) {
 /**
  * Measures every listed page against its own budgets.
  * Returns the measurements and one failure per problem, each naming its page; no failures means all pass.
- * An empty list is a failure, and so is a page without a budget unless `allowUnbudgeted` is set.
+ * An empty list is a failure. So is a listed page that leaves out a budget, its island name or one of its
+ * lazy-entry lists; `isAdHoc` lifts that for a one-off measurement from the command line.
  * Throws ToolPageCheckError when a listed page was not built.
  */
-export function checkFirstLoadBudgets(distDirectory = DEFAULT_DIST_DIRECTORY, pages = TOOL_PAGES, { allowUnbudgeted = false } = {}) {
+export function checkFirstLoadBudgets(distDirectory = DEFAULT_DIST_DIRECTORY, pages = TOOL_PAGES, { isAdHoc = false } = {}) {
   if (pages.length === 0) return { measurements: [], failures: ['no tool pages are listed, so nothing was checked'] };
   const measurements = pages.map((page) => (
     { ...measureFirstLoad(distDirectory, page), budgets: { codeGzipBudgetBytes: page.codeGzipBudgetBytes ?? null, documentGzipBudgetBytes: page.documentGzipBudgetBytes ?? null } }
   ));
-  const failures = measurements.flatMap((measurement) => [
-    ...(allowUnbudgeted ? [] : findMissingBudgets(measurement.budgets)),
+  const failures = measurements.flatMap((measurement, index) => [
+    ...(isAdHoc ? [] : [...findMissingDeclarations(pages[index]), ...findMissingBudgets(measurement.budgets)]),
     ...findFirstLoadFailures(measurement, measurement.budgets),
   ].map((failure) => `${measurement.pageUrlPath}: ${failure}`));
   return { measurements, failures };
@@ -207,7 +227,7 @@ function readByteCount(flag, value) {
 }
 
 function parseArguments(argumentList) {
-  const page = { urlPath: null, islandEntryName: null, onMountLazyEntryNames: [], interactionGatedEntryNames: [], codeGzipBudgetBytes: null, documentGzipBudgetBytes: null };
+  const page = { urlPath: null, islandEntryName: null, onMountLazyEntryNames: [], interactionGatedEntryNames: [], onDemandLazyEntryNames: [], codeGzipBudgetBytes: null, documentGzipBudgetBytes: null };
   const options = { distDirectory: DEFAULT_DIST_DIRECTORY, page, isJson: false };
   for (let index = 0; index < argumentList.length; index += 1) {
     const flag = argumentList[index];
@@ -235,7 +255,7 @@ function describeBudget(gzipBytes, budgetBytes) {
   return Number.isInteger(budgetBytes) ? `budget ${budgetBytes}, ${budgetBytes - gzipBytes} left` : 'no budget';
 }
 
-function formatReport({ pageUrlPath, files, totals, budgets, ungatedLazyLibraries, gatedEntries, lazyTargets, unresolved }) {
+function formatReport({ pageUrlPath, files, totals, budgets, ungatedLazyLibraries, gatedEntries, onDemandEntries, unresolved }) {
   const lines = [`[measure-lab-first-load] ${pageUrlPath}`, '       raw      gzip  part      kind        file'];
   for (const file of files) lines.push(formatLine(file.rawBytes, file.gzipBytes, `${file.part.padEnd(8)}  ${file.kind.padEnd(10)}  ${file.urlPath}`));
   lines.push(formatLine(totals.staticCodeRawBytes, totals.staticCodeGzipBytes, 'static code: stylesheets and the static import closure'));
@@ -245,7 +265,7 @@ function formatReport({ pageUrlPath, files, totals, budgets, ungatedLazyLibrarie
   lines.push(formatLine(totals.rawBytes, totals.gzipBytes, `total (${files.length} files)`));
   lines.push(`three.js reachable without the visitor asking: ${ungatedLazyLibraries.some(({ library }) => library === 'three.js') ? 'YES' : 'no'}`);
   lines.push(`behind a named interaction gate (${gatedEntries.length}): ${gatedEntries.join(', ') || 'none'}`);
-  lines.push(`other chunks loaded on demand, not counted (${lazyTargets.length}): ${lazyTargets.join(', ') || 'none'}`);
+  lines.push(`declared on-demand, not counted (${onDemandEntries.length}): ${onDemandEntries.join(', ') || 'none'}`);
   if (unresolved.length > 0) lines.push(`specifiers that name no file on this site: ${unresolved.join(', ')}`);
   return lines.join('\n');
 }
@@ -254,7 +274,7 @@ function runMeasurement(argumentList) {
   const { distDirectory, page, isJson } = parseArguments(argumentList);
   const { measurements, failures } = page.urlPath === null
     ? checkFirstLoadBudgets(distDirectory)
-    : checkFirstLoadBudgets(distDirectory, [page], { allowUnbudgeted: true });
+    : checkFirstLoadBudgets(distDirectory, [page], { isAdHoc: true });
   process.stdout.write(`${isJson ? JSON.stringify({ measurements, failures }, null, 2) : measurements.map(formatReport).join('\n\n')}\n`);
   for (const failure of failures) process.stderr.write(`[measure-lab-first-load] FAIL: ${failure}\n`);
   if (failures.length > 0) process.exit(1);

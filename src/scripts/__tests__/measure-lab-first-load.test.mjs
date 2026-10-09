@@ -29,7 +29,8 @@ const FIXTURE_DIST = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fi
 const FIXTURE_PAGE = '/tool/';
 const ROOMY_BYTES = 1_000_000;
 const roomyBudgets = { codeGzipBudgetBytes: ROOMY_BYTES, documentGzipBudgetBytes: ROOMY_BYTES };
-const toolPage = { urlPath: FIXTURE_PAGE, islandEntryName: 'entry', onMountLazyEntryNames: [], interactionGatedEntryNames: [] };
+const noLazyEntries = { onMountLazyEntryNames: [], interactionGatedEntryNames: [], onDemandLazyEntryNames: [] };
+const toolPage = { urlPath: FIXTURE_PAGE, islandEntryName: 'entry', ...noLazyEntries, onDemandLazyEntryNames: ['lazy'] };
 
 describe('extractStaticImportSpecifiers', () => {
   it('finds named, side-effect and re-export imports in minified output', () => {
@@ -205,17 +206,18 @@ describe('measureFirstLoad', () => {
     expect(measurement.totals.codeGzipBytes).toBe(codeFiles.reduce((sum, file) => sum + file.gzipBytes, 0));
     expect(measurement.totals.onMountCodeGzipBytes).toBe(0);
     expect(measurement.totals.gzipBytes).toBe(measurement.totals.codeGzipBytes + measurement.totals.documentGzipBytes);
-    expect(measurement.lazyTargets).toEqual(['/_astro/lazy.js']);
+    expect(measurement.onDemandEntries).toEqual(['/_astro/lazy.js']);
     expect(findFirstLoadFailures(measurement)).toEqual([]);
   });
 
   it('counts a declared on-mount chunk and its imports as code, apart from the static closure', () => {
-    const measurement = measureFirstLoad(FIXTURE_DIST, { ...toolPage, onMountLazyEntryNames: ['lazy'] });
+    const measurement = measureFirstLoad(FIXTURE_DIST, { ...toolPage, onMountLazyEntryNames: ['lazy'], onDemandLazyEntryNames: [] });
     const onMountFiles = measurement.files.filter((file) => file.part === 'on-mount');
     expect(onMountFiles.map((file) => file.urlPath)).toEqual(['/_astro/lazy.js']);
     expect(measurement.totals.onMountCodeGzipBytes).toBe(onMountFiles[0].gzipBytes);
     expect(measurement.totals.codeGzipBytes).toBe(measurement.totals.staticCodeGzipBytes + measurement.totals.onMountCodeGzipBytes);
-    expect(measurement.lazyTargets).toEqual([]);
+    expect(measurement.onDemandEntries).toEqual([]);
+    expect(findFirstLoadFailures(measurement)).toEqual([]);
   });
 
   it('fails with a typed error and the next step when the page was not built', () => {
@@ -225,7 +227,7 @@ describe('measureFirstLoad', () => {
 });
 
 describe('three.js must not load before the visitor asks', () => {
-  const failuresFor = (page) => findFirstLoadFailures(measureFirstLoad(FIXTURE_DIST, { onMountLazyEntryNames: [], interactionGatedEntryNames: [], ...page }));
+  const failuresFor = (page) => findFirstLoadFailures(measureFirstLoad(FIXTURE_DIST, { ...noLazyEntries, ...page }));
 
   it('fails when the island imports it statically', () => {
     expect(failuresFor({ urlPath: '/eager/' })).toEqual([
@@ -239,12 +241,15 @@ describe('three.js must not load before the visitor asks', () => {
     expect(failures[0]).toContain('/_astro/shell-default-mode.js -> /_astro/default-mode.js -> /_astro/heavy-3d.js');
   });
 
-  it('fails the same way when the on-mount import is not even declared', () => {
-    expect(failuresFor({ urlPath: '/mount-static-three/' })).toHaveLength(1);
+  it('fails twice over when that import is not declared at all', () => {
+    const failures = failuresFor({ urlPath: '/mount-static-three/' });
+    expect(failures).toHaveLength(2);
+    expect(failures[0]).toMatch(/^dynamic import of \/_astro\/default-mode\.js is not declared/);
+    expect(failures[1]).toMatch(/^three\.js can load without the visitor asking/);
   });
 
-  it('fails when a chunk that leads to it is imported at module start', () => {
-    const failures = failuresFor({ urlPath: '/module-start-import/' });
+  it('fails when a chunk declared on-demand leads to it, as one imported at module start would', () => {
+    const failures = failuresFor({ urlPath: '/module-start-import/', onDemandLazyEntryNames: ['lazy-scene'] });
     expect(failures).toHaveLength(1);
     expect(failures[0]).toContain('/_astro/shell-module-start.js -> /_astro/lazy-scene.js -> /_astro/heavy-3d.js');
   });
@@ -255,8 +260,10 @@ describe('three.js must not load before the visitor asks', () => {
     expect(measurement.gatedEntries).toEqual(['/_astro/scene-gate.js']);
   });
 
-  it('fails the same page when the gate is not named', () => {
-    expect(failuresFor({ urlPath: '/gated/' })).toHaveLength(1);
+  it('fails the same page when that chunk is declared on-demand instead of gated', () => {
+    const failures = failuresFor({ urlPath: '/gated/', onDemandLazyEntryNames: ['scene-gate'] });
+    expect(failures).toHaveLength(1);
+    expect(failures[0]).toMatch(/^three\.js can load without the visitor asking/);
   });
 
   it('does not mistake a chunk that mentions or awaits the renderer for the library itself', () => {
@@ -311,18 +318,44 @@ describe('a measurement that would be empty is a failure', () => {
   it('fails a declared on-mount entry or gate that the page does not import', () => {
     const failures = findFirstLoadFailures(measureFirstLoad(FIXTURE_DIST, { ...toolPage, onMountLazyEntryNames: ['renamed-mode'], interactionGatedEntryNames: ['renamed-gate'] }));
     expect(failures).toEqual([
-      'declared interaction gate "renamed-gate" is not a dynamic import of this page; remove or correct it in tool-pages.mjs',
-      'declared on-mount entry "renamed-mode" is not a dynamic import of the page\'s first-load scripts; correct its name in tool-pages.mjs',
+      '"renamed-mode" in onMountLazyEntryNames is not a dynamic import of this page; remove or correct it in tool-pages.mjs',
+      '"renamed-gate" in interactionGatedEntryNames is not a dynamic import of this page; remove or correct it in tool-pages.mjs',
     ]);
   });
 });
 
-describe('a chunk cannot be both on-mount and interaction-gated', () => {
-  it('fails a page that names the same chunk in both lists, which would hide what sits behind it', () => {
-    const page = { urlPath: '/mount-static-three/', onMountLazyEntryNames: ['default-mode'], interactionGatedEntryNames: ['default-mode'] };
-    expect(findFirstLoadFailures(measureFirstLoad(FIXTURE_DIST, page))).toContain(
-      '"default-mode" is declared both as loading on mount and as interaction-gated; it cannot be both',
-    );
+describe('every dynamic import is declared in exactly one class', () => {
+  const undeclaredMessage = 'dynamic import of /_astro/lazy.js is not declared; add "lazy" in tool-pages.mjs to exactly one of '
+    + 'onMountLazyEntryNames (counted in the code budget), interactionGatedEntryNames (may lead to three.js) or onDemandLazyEntryNames (not counted, must not lead to three.js)';
+  const failuresWith = (lists) => findFirstLoadFailures(measureFirstLoad(FIXTURE_DIST, { ...toolPage, ...noLazyEntries, ...lists }));
+
+  it('fails an import nobody declared, naming the chunk and the three choices', () => {
+    expect(failuresWith({})).toEqual([undeclaredMessage]);
+  });
+
+  it('fails an undeclared import at module start whose chunk would otherwise load unseen', () => {
+    const failures = findFirstLoadFailures(measureFirstLoad(FIXTURE_DIST, { urlPath: '/module-start-import/', ...noLazyEntries }));
+    expect(failures[0]).toMatch(/^dynamic import of \/_astro\/lazy-scene\.js is not declared; add "lazy-scene"/);
+  });
+
+  it.each([
+    ['on-mount', { onMountLazyEntryNames: ['lazy'] }],
+    ['interaction-gated', { interactionGatedEntryNames: ['lazy'] }],
+    ['on-demand', { onDemandLazyEntryNames: ['lazy'] }],
+  ])('passes the same import once it is declared %s', (_class, lists) => {
+    expect(failuresWith(lists)).toEqual([]);
+  });
+
+  it('counts only the on-mount class against the code budget', () => {
+    const codeBytes = (lists) => measureFirstLoad(FIXTURE_DIST, { ...toolPage, ...noLazyEntries, ...lists }).totals.codeGzipBytes;
+    expect(codeBytes({ onDemandLazyEntryNames: ['lazy'] })).toBe(codeBytes({ interactionGatedEntryNames: ['lazy'] }));
+    expect(codeBytes({ onMountLazyEntryNames: ['lazy'] })).toBeGreaterThan(codeBytes({ onDemandLazyEntryNames: ['lazy'] }));
+  });
+
+  it('fails a chunk named in two lists, which would hide what sits behind it', () => {
+    expect(failuresWith({ onMountLazyEntryNames: ['lazy'], interactionGatedEntryNames: ['lazy'] })).toEqual([
+      '"lazy" is declared in more than one list (onMountLazyEntryNames, interactionGatedEntryNames); it must be in exactly one',
+    ]);
   });
 });
 
@@ -376,7 +409,7 @@ describe('checkFirstLoadBudgets', () => {
   });
 
   it('counts the on-mount chunk against the code budget', () => {
-    const withOnMount = { ...atBudget, onMountLazyEntryNames: ['lazy'] };
+    const withOnMount = { ...atBudget, onMountLazyEntryNames: ['lazy'], onDemandLazyEntryNames: [] };
     expect(checkFirstLoadBudgets(FIXTURE_DIST, [withOnMount]).failures).toHaveLength(1);
   });
 
@@ -401,12 +434,28 @@ describe('checkFirstLoadBudgets', () => {
     ]);
   });
 
+  it('fails a listed page that leaves out its island name or any of its lazy lists', () => {
+    const bare = { urlPath: '/eager/', ...roomyBudgets };
+    const failures = checkFirstLoadBudgets(FIXTURE_DIST, [bare]).failures.filter((failure) => !failure.includes('three.js'));
+    expect(failures).toEqual([
+      '/eager/: islandEntryName is not set; name the island the page hydrates in tool-pages.mjs',
+      '/eager/: onMountLazyEntryNames is not a list of chunk names; every listed page declares it in tool-pages.mjs, empty if it has none',
+      '/eager/: interactionGatedEntryNames is not a list of chunk names; every listed page declares it in tool-pages.mjs, empty if it has none',
+      '/eager/: onDemandLazyEntryNames is not a list of chunk names; every listed page declares it in tool-pages.mjs, empty if it has none',
+    ]);
+  });
+
+  it('does not ask a one-off command-line measurement for budgets or declarations', () => {
+    const { failures } = checkFirstLoadBudgets(FIXTURE_DIST, [{ urlPath: '/no-island/' }], { isAdHoc: true });
+    expect(failures).toEqual(['/no-island/: the page names no script entry, so nothing was measured']);
+  });
+
   it('fails an empty page list instead of passing with nothing checked', () => {
     expect(checkFirstLoadBudgets(FIXTURE_DIST, [])).toEqual({ measurements: [], failures: ['no tool pages are listed, so nothing was checked'] });
   });
 
   it('fails a page that reaches three.js, whatever its budgets', () => {
-    const { failures } = checkFirstLoadBudgets(FIXTURE_DIST, [{ urlPath: '/eager/', ...roomyBudgets }]);
+    const { failures } = checkFirstLoadBudgets(FIXTURE_DIST, [{ urlPath: '/eager/', islandEntryName: 'eager-3d', ...noLazyEntries, ...roomyBudgets }]);
     expect(failures).toHaveLength(1);
     expect(failures[0]).toMatch(/^\/eager\/: three\.js can load without the visitor asking/);
   });
@@ -425,6 +474,12 @@ describe('the recorded tool pages', () => {
 
   it('names no interaction gate yet, so three.js may sit behind nothing on the Lab page', () => {
     expect(TOOL_PAGES.flatMap((page) => page.interactionGatedEntryNames)).toEqual([]);
+  });
+
+  it('declares the Lab default mode as on-mount and its other modes as on-demand', () => {
+    const lab = TOOL_PAGES.find((page) => page.urlPath === '/atlas/model/');
+    expect(lab?.onMountLazyEntryNames).toEqual(['ExploreMode']);
+    expect(lab?.onDemandLazyEntryNames).toEqual(['ThreatModelStudio', 'MonitorMode', 'QueryMode']);
   });
 
   it('gives every page a site path ending in "/", an island name and two positive whole-number budgets', () => {

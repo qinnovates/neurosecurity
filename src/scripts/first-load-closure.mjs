@@ -93,14 +93,15 @@ function resolveTargets(urlPath, specifiers, unresolved) {
  * @param {{ followDynamicImports?: boolean, gatedEntryStems?: readonly string[] }} [options]
  *   followDynamicImports: also walk into `import()` targets;
  *   gatedEntryStems: chunk names a dynamic import may name without the walk entering them.
- * @returns {{ closure: string[], lazyTargets: string[], gatedEntries: string[], missing: string[],
- *   unresolved: string[], importedBy: Map<string, string> }}
+ * @returns {{ closure: string[], lazyTargets: string[], gatedEntries: string[], dynamicTargets: string[],
+ *   missing: string[], unresolved: string[], importedBy: Map<string, string> }}
  *   closure: every chunk reached, in discovery order; lazyTargets: dynamic targets not reached;
- *   gatedEntries: dynamic targets the walk stopped at; importedBy: the chunk that first led to each chunk.
+ *   gatedEntries: dynamic targets the walk stopped at; dynamicTargets: every `import()` target seen,
+ *   reached or not; importedBy: the chunk that first led to each chunk.
  */
 export function walkImportGraph(distDirectory, entryUrlPaths, { followDynamicImports = false, gatedEntryStems = [] } = {}) {
   const closure = new Set();
-  const found = { lazyTargets: new Set(), gatedEntries: new Set(), missing: new Set(), unresolved: new Set() };
+  const found = { lazyTargets: new Set(), gatedEntries: new Set(), dynamicTargets: new Set(), missing: new Set(), unresolved: new Set() };
   const importedBy = new Map();
   const pending = entryUrlPaths.map((urlPath) => [urlPath, null]);
 
@@ -118,6 +119,7 @@ export function walkImportGraph(distDirectory, entryUrlPaths, { followDynamicImp
     const source = contents.toString('utf-8');
     for (const target of resolveTargets(urlPath, extractStaticImportSpecifiers(source), found.unresolved)) pending.push([target, urlPath]);
     for (const target of resolveTargets(urlPath, extractDynamicImportSpecifiers(source), null)) {
+      found.dynamicTargets.add(target);
       if (gatedEntryStems.includes(chunkStem(target))) found.gatedEntries.add(target);
       else if (followDynamicImports) pending.push([target, urlPath]);
       else found.lazyTargets.add(target);
@@ -132,6 +134,7 @@ function summariseWalk(closure, found, importedBy) {
     closure: [...closure],
     lazyTargets: notReached(found.lazyTargets),
     gatedEntries: notReached(found.gatedEntries),
+    dynamicTargets: [...found.dynamicTargets].sort(),
     missing: [...found.missing].sort(),
     unresolved: [...found.unresolved].sort(),
     importedBy,

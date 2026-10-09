@@ -7,7 +7,8 @@ import { measureFirstLoad } from '../measure-lab-first-load.mjs';
 const FIXTURE_DIST = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures', 'lab-first-load');
 const GENEROUS_BUDGET_BYTES = 1_000_000;
 const roomyBudgets = { codeGzipBudgetBytes: GENEROUS_BUDGET_BYTES, documentGzipBudgetBytes: GENEROUS_BUDGET_BYTES };
-const passingPage = { urlPath: '/tool/', ...roomyBudgets };
+const noLazyEntries = { onMountLazyEntryNames: [], interactionGatedEntryNames: [], onDemandLazyEntryNames: [] };
+const passingPage = { urlPath: '/tool/', islandEntryName: 'entry', ...noLazyEntries, onDemandLazyEntryNames: ['lazy'], ...roomyBudgets };
 
 describe('runPostBuildChecks', () => {
   it('passes every check on an isolated page within its budget', () => {
@@ -17,7 +18,7 @@ describe('runPostBuildChecks', () => {
   });
 
   it('reports the isolation failure and the budget failure of the same run together', () => {
-    const results = runPostBuildChecks(FIXTURE_DIST, [{ urlPath: '/eager/', ...roomyBudgets }]);
+    const results = runPostBuildChecks(FIXTURE_DIST, [{ urlPath: '/eager/', islandEntryName: 'eager-3d', ...noLazyEntries, ...roomyBudgets }]);
     expect(results.map(({ failures }) => failures)).toEqual([
       ['/eager/: no Content-Security-Policy meta tag'],
       ['/eager/: three.js can load without the visitor asking for it, through /_astro/eager-3d.js -> /_astro/heavy-3d.js; it may sit only behind a chunk named in interactionGatedEntryNames'],
@@ -32,7 +33,7 @@ describe('runPostBuildChecks', () => {
   });
 
   it('turns a page that was not built into a failure of each check, without throwing', () => {
-    const results = runPostBuildChecks(FIXTURE_DIST, [{ urlPath: '/absent/', ...roomyBudgets }]);
+    const results = runPostBuildChecks(FIXTURE_DIST, [{ ...passingPage, urlPath: '/absent/' }]);
     expect(results).toHaveLength(POST_BUILD_CHECKS.length);
     for (const { failures } of results) {
       expect(failures).toHaveLength(1);

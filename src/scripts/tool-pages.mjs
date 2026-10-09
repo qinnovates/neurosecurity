@@ -36,23 +36,35 @@ export const DOCUMENT_HEADROOM_GZIP_BYTES = 16_384;
  * @typedef {object} ToolPage
  * @property {string} urlPath site path of the page, ending in "/"
  * @property {string} islandEntryName chunk name of the island the page must hydrate; a page without it measured nothing
- * @property {readonly string[]} onMountLazyEntryNames chunk names the page imports by `import()` as it starts; they count as first load
- * @property {readonly string[]} interactionGatedEntryNames chunk names fetched only after the visitor asks; the only
- *   `import()` targets behind which a library that must stay lazy (three.js) may sit
+ * @property {readonly string[]} onMountLazyEntryNames chunks the page imports by `import()` as it starts.
+ *   They and what they import count against the code budget.
+ * @property {readonly string[]} interactionGatedEntryNames chunks fetched only after the visitor asks for the
+ *   heavy thing behind them. Only these may lead to a library that must stay lazy (three.js). A browser run
+ *   (src/scripts/browser-evidence, with --forbid-request) confirms each is not requested before the interaction.
+ * @property {readonly string[]} onDemandLazyEntryNames chunks fetched when the visitor goes somewhere else in
+ *   the page. Not counted, and they must not lead to three.js.
  * @property {number} codeGzipBudgetBytes most gzip bytes of stylesheets and scripts a first visit may download
  * @property {number} documentGzipBudgetBytes most gzip bytes the page's HTML may be
  *
+ * Every `import()` the page's scripts can reach must be named in exactly one of the three lists;
+ * an unnamed one fails the check, because its bytes would otherwise load unseen.
  * A chunk name is the built file's name without its hash and extension: `ExploreMode` for
  * `/_astro/ExploreMode.4yAgh4jt.js`. The bundler names a chunk after the module that is imported.
  */
+
+/** The three lists that between them must name every `import()` a page can reach. */
+export const LAZY_ENTRY_LISTS = ['onMountLazyEntryNames', 'interactionGatedEntryNames', 'onDemandLazyEntryNames'];
 
 /** @type {readonly ToolPage[]} */
 export const TOOL_PAGES = [
   {
     urlPath: '/atlas/model/',
     islandEntryName: 'WorkbenchShell',
+    // The shell renders one mode at a time (mode-registry.ts). Explore is the default mode, so it loads on every plain visit.
     onMountLazyEntryNames: ['ExploreMode'],
     interactionGatedEntryNames: [],
+    // The other modes load when the visitor picks one, by its button or by an address such as "#model".
+    onDemandLazyEntryNames: ['ThreatModelStudio', 'MonitorMode', 'QueryMode'],
     codeGzipBudgetBytes: LAB_CODE_BASELINE_GZIP_BYTES + CODE_HEADROOM_GZIP_BYTES,
     documentGzipBudgetBytes: LAB_DOCUMENT_BASELINE_GZIP_BYTES + DOCUMENT_HEADROOM_GZIP_BYTES,
   },

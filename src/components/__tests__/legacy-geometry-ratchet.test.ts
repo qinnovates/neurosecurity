@@ -36,13 +36,25 @@ import {
  *
  * Known limits. The scan does NOT find:
  *   - a table with fewer than three regions, or with a position further than 160 characters from its name;
- *   - names or file names built at run time ('brain' + '.glb', a computed key, an id read from data);
- *   - positions that are not in one of the shapes above: CSV columns, YAML block lists,
- *     numbers kept as strings, separate arrays of names and positions joined by index;
+ *   - names or file names built at run time ('brain' + '.glb', a computed key, an id read from data),
+ *     and model files under any other name;
+ *   - positions that are not in one of the shapes above:
+ *       four-number tuples, and tuples that hold an expression ([0, 8 * SCALE, 12]);
+ *       signed numbers written with a space or a plus ([- 4, +6]);
+ *       helper calls (at(0, 8, 12), vec3(0, 8, 12)) and translate(...);
+ *       coordinates under other names (px/py/pz, left/top, lat/lon);
+ *       percent or other strings ('40%'), numbers kept as strings;
+ *       CSV columns, YAML block lists, separate arrays of names and positions joined by index;
  *   - band ids written in another letter case, and region names that are in neither the atlas data nor the informal list;
  *   - anything in a file listed in RECORDED_NOT_GEOMETRY, in a binary file, or in an extension the scan does not read;
  *   - geometry outside src/.
- * It also cannot tell a colour triple from a position, which is why RECORDED_NOT_GEOMETRY exists.
+ *
+ * Known false positives. The scan cannot tell a position from any other pair or triple of
+ * numbers beside a region name, so it also marks:
+ *   - region-to-colour triples ({ id: 'N7', c: [0.8, 0.55, 0.75] });
+ *   - region-to-numeric-range pairs ({ thalamus: [100, 300] }).
+ * New atlas code should key colours as hex strings ('#3b82f6'), which the scan ignores. A file
+ * that cannot avoid these shapes goes in RECORDED_NOT_GEOMETRY with its reason.
  */
 
 const REPO_ROOT = path.resolve(import.meta.dirname, '..', '..', '..');
@@ -154,7 +166,25 @@ describe('the scan the ratchet relies on', () => {
     expect(marksOf("const shells = [{ id: 'N7', c: [0.8, 0.55, 0.75] }, { id: 'N4', c: [0.4, 0.95, 0.6] }, { id: 'N1', c: [0.3, 0.9, 0.5] }];")).toEqual(TABLE);
   });
 
-  it('does not find the shapes listed as known limits', () => {
+  it('marks a numeric range beside region names, and ignores colours written as hex strings', () => {
+    expect(marksOf('const latencyMs = { thalamus: [100, 300], pfc: [150, 400], m1: [20, 60] };')).toEqual(TABLE);
+    expect(marksOf("const tint = { thalamus: '#3b82f6', pfc: '#ef4444', m1: '#f59e0b' };")).toEqual([]);
+  });
+
+  it('does not find the position shapes listed as known limits', () => {
+    expect(marksOf('const p = { thalamus: [0, 0, 0, 1], vta: [1, -2, 3, 1], pfc: [0, 8, 12, 1] };')).toEqual([]);
+    expect(marksOf('const p = { thalamus: [0, 8 * SCALE, 12], vta: [1, -2 * SCALE, 3], pfc: [0, 9 * SCALE, 12] };')).toEqual([]);
+    expect(marksOf('const p = { thalamus: [- 4, +6], vta: [- 1, +2], pfc: [- 3, +8] };')).toEqual([]);
+    expect(marksOf('const p = { thalamus: at(0, 0, 0), vta: vec3(1, -2, 3), pfc: at(0, 8, 12) };')).toEqual([]);
+    expect(marksOf('const p = { thalamus: { px: 0, py: 0, pz: 0 }, vta: { px: 1, py: -2, pz: 3 }, pfc: { px: 0, py: 8, pz: 12 } };')).toEqual([]);
+    expect(marksOf('const p = { thalamus: { left: 40, top: 55 }, vta: { left: 42, top: 61 }, pfc: { left: 20, top: 30 } };')).toEqual([]);
+    expect(marksOf('const p = { thalamus: { lat: 4.1, lon: 5.2 }, vta: { lat: 4.2, lon: 6.1 }, pfc: { lat: 2.0, lon: 3.0 } };')).toEqual([]);
+    expect(marksOf("const p = { thalamus: 'translate(40 55)', vta: 'translate(42 61)', pfc: 'translate(20 30)' };")).toEqual([]);
+    expect(marksOf("const p = { thalamus: ['40%', '55%'], vta: ['42%', '61%'], pfc: ['20%', '30%'] };")).toEqual([]);
+    expect(marksOf("load('/models/cortex-v2.glb');")).toEqual([]);
+  });
+
+  it('does not find the other shapes listed as known limits', () => {
     expect(marksOf('region,x,y,z\nthalamus,0,0,0\nvta,1,-2,3\npfc,0,8,12\n')).toEqual([]);
     expect(marksOf('thalamus:\n  - 0\n  - 0\n  - 0\nvta:\n  - 1\n  - -2\n  - 3\npfc:\n  - 0\n  - 8\n  - 12\n')).toEqual([]);
     expect(marksOf("const names = ['thalamus', 'vta', 'pfc'].map((name, index) => ({ [name]: positions[index] }));")).toEqual([]);
