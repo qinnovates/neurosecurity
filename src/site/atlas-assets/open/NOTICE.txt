@@ -1,0 +1,39 @@
+NOTICE for atlas-assets/open/
+
+This folder holds third-party material, changed as described below. Each file keeps its source's licence.
+The licence readings behind this notice were made by AI and not by a lawyer. No person has confirmed them. They are not legal advice.
+No neuroanatomist has checked these shapes or what they are said to show.
+
+File: cortex-allen.c1005d025194.glb
+  Source: Allen Human Reference Atlas - 3D, 2020
+  Attribution: Song-Lin Ding, Joshua J. Royall, Susan M. Sunkin, Benjamin A.C. Facer, Phil Lesnar, Amy Bernard, Lydia Ng, Ed S. Lein (2020). "Allen Human Reference Atlas – 3D, 2020," RRID:SCR_017764, version 1.0.0. © 2019 Allen Institute for Brain Science. Ontology: Ding et al. 2016, https://doi.org/10.1002/cne.24080.
+  Source pages: https://download.alleninstitute.org/informatics-archive/allen_human_reference_atlas_3d_2020/version_1/
+  Licence: Creative Commons Attribution 4.0 International (https://creativecommons.org/licenses/by/4.0/)
+  Changes made: The label volume was moved from the 2009b symmetric template to MNI152NLin2009cAsym by a computed nonlinear registration (ANTs SyN; labels nearest-neighbour, 0.5 mm grid). Each label was then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric); small specks were dropped. One hemisphere was drawn; the right side is its mirror.
+  Used to compute, not redistributed: MNI ICBM152 2009b nonlinear symmetric template
+  Used to compute, not redistributed: MNI ICBM152 2009c nonlinear asymmetric template
+
+File: deep-allen.c8405b0c299d.glb
+  Source: Allen Human Reference Atlas - 3D, 2020
+  Attribution: Song-Lin Ding, Joshua J. Royall, Susan M. Sunkin, Benjamin A.C. Facer, Phil Lesnar, Amy Bernard, Lydia Ng, Ed S. Lein (2020). "Allen Human Reference Atlas – 3D, 2020," RRID:SCR_017764, version 1.0.0. © 2019 Allen Institute for Brain Science. Ontology: Ding et al. 2016, https://doi.org/10.1002/cne.24080.
+  Source pages: https://download.alleninstitute.org/informatics-archive/allen_human_reference_atlas_3d_2020/version_1/
+  Licence: Creative Commons Attribution 4.0 International (https://creativecommons.org/licenses/by/4.0/)
+  Changes made: The label volume was moved from the 2009b symmetric template to MNI152NLin2009cAsym by a computed nonlinear registration (ANTs SyN; labels nearest-neighbour, 0.5 mm grid). Each label was then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric); small specks were dropped. One hemisphere was drawn; the right side is its mirror. Position not independently checked: against CIT168 the transform is not distinguishable from none. Warped anyway, to stay coherent with adjacent gyri.
+  Used to compute, not redistributed: MNI ICBM152 2009b nonlinear symmetric template
+  Used to compute, not redistributed: MNI ICBM152 2009c nonlinear asymmetric template
+
+File: hypothalamus-neudorfer.f677d3c1bcb0.glb
+  Source: Neudorfer 2020 atlas of the hypothalamic region
+  Attribution: Neudorfer C, Germann J, Elias GJB, Gramer R, Boutet A, Lozano AM. A high-resolution in vivo magnetic resonance imaging atlas of the human hypothalamic region. Sci Data (2020). https://doi.org/10.1038/s41597-020-00644-6; data https://doi.org/10.5281/zenodo.3942115. CC BY 4.0.
+  Source pages: https://zenodo.org/records/3942115, https://doi.org/10.5281/zenodo.3942115, https://doi.org/10.1038/s41597-020-00644-6
+  Licence: Creative Commons Attribution 4.0 International (https://creativecommons.org/licenses/by/4.0/)
+  Required wording: Data were provided [in part] by the Human Connectome Project, WU-Minn Consortium (Principal Investigators: David Van Essen and Kamil Ugurbil; 1U54MH091657) funded by the 16 NIH Institutes and Centers that support the NIH Blueprint for Neuroscience Research; and by the McDonnell Center for Systems Neuroscience at Washington University.
+  Changes made: Each label was meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric) on the publisher's 0.5 mm grid and placed through the file's affine with no other transform. Specks too small to outline were dropped. Structures too small to outline are markers with no shape.
+
+File: outline.a62b2c9d6d88.glb
+  Source: MNI ICBM152 2009c nonlinear asymmetric template
+  Attribution: Copyright (C) 1993–2004 Louis Collins, McConnell Brain Imaging Centre, Montreal Neurological Institute, McGill University. Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies. Cite Fonov et al. 2011, https://doi.org/10.1016/j.neuroimage.2010.07.033.
+  Source pages: https://nist.mni.mcgill.ca/icbm-152-nonlinear-atlases-2009/
+  Licence: MNI ICBM152 permission notice (https://nist.mni.mcgill.ca/icbm-152-nonlinear-atlases-2009/)
+  Required wording: Copyright (C) 1993–2004 Louis Collins, McConnell Brain Imaging Centre, Montreal Neurological Institute, McGill University. Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies.
+  Changes made: The template's 1 mm brain mask was meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric). It is an outline of the average template, not a cortical surface.

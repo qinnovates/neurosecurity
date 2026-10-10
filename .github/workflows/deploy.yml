@@ -43,8 +43,9 @@ jobs:
         run: npm test
 
       # The TARA Lab page promises nothing leaves the browser; a build that breaks that must not deploy.
-      - name: Check threat model page isolation
-        run: npm run check:model-page
+      # The same step holds its first load to the budgets in src/scripts/tool-pages.mjs.
+      - name: Check tool page isolation and first-load budgets
+        run: npm run check:post-build
 
       - name: Setup Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5

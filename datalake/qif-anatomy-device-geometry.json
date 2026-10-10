@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "status": "AI-drafted. No fiducial or lead dimension is drawn until a review ledger entry covers it.",
+  "fiducial_space": null,
+  "fiducials": [],
+  "leads": []
+}

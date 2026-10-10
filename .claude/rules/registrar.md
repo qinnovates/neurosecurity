@@ -20,10 +20,18 @@ paths:
 5.  Chains:      Update datalake/tara-chains.json if attack chains affected
 6.  TypeScript:  src/lib/threat-data.ts > kql-tables.ts > kql-engine.ts > neurogovernance-data.ts
 7.  Python:      datalake/qtara/src/qtara/models.py > scripts > SDK > stix.py > cli.py
-8.  Precompute:  Run all datalake/src/scripts/ pipelines (impact chains, DSM mappings)
+8.  Precompute:  Run all datalake/scripts/ pipelines (impact chains via npm run compute:chains, DSM mappings)
 8b. Statistics:  npm run registrar:stats  (regenerates the whole statistics block
                  from the techniques array; never hand-edit it. Only the fields
                  listed in statistics.editorial_fields are hand-maintained.)
+8c. Regions:     If a technique with a neural band was added, or any technique's
+                 text or band tags changed, re-read it and update its entry in
+                 datalake/scripts/technique-region-curation.json, then run
+                 node datalake/scripts/draft-technique-regions.mjs
+                 (`npm test` fails on a missing entry, a stale quote, or an
+                 atlas word in the text that is neither linked nor skipped.)
+                 Then npm run prebuild and commit datalake/parquet/anatomy_*.parquet
+                 and catalog.json (`npm test` fails if they are stale).
 9.  SDK sync:    Copy registrar to datalake/qtara/src/qtara/data/qtara-registrar.json
 10. Pages:       Update Astro pages (atlas/tara/[id].astro, guardrails), API endpoints
 11. Components:  Update React dashboard components if new fields need UI
@@ -47,7 +55,9 @@ paths:
 3. `src/lib/kql-tables.ts` — KQL table builder (flattens JSON > queryable columns)
 4. `src/lib/kql-engine.ts` — KQL engine (field aliases, indexes)
 5. `datalake/qtara/src/qtara/models.py` — Python SDK Pydantic models
-6. `datalake/src/scripts/compute-impact-chains.mjs` — precompute pipeline
+6. `datalake/scripts/compute-impact-chains.mjs` — precompute pipeline
+
+**Technique region links are not part of the registrar.** `datalake/qif-anatomy-technique-regions.json` records, per neural-band technique, the words the registrar text uses for brain structures. It is AI-drafted and unreviewed, is generated from `datalake/scripts/technique-region-curation.json`, and is never copied into the registrar, the Python SDK or the STIX export. Its only exports are the `anatomy_technique_terms` and `anatomy_technique_scopes` query tables and parquet files (see `.claude/rules/propagation.md`); the `techniques` table gains no region column. A link may be promoted into a registrar field only after the repository owner's review of it is in `datalake/qif-anatomy-review-ledger.json`.
 
 **Technique count references:** NEVER hardcode technique counts in .astro pages or docs.
 Use `import { TECHNIQUE_COUNT } from '@lib/threat-data'` in Astro/TS, or pull from registrar `statistics.total_techniques` in scripts.

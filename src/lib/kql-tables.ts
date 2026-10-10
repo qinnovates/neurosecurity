@@ -65,6 +65,9 @@ import intakeLedgerRaw from '@shared/intake/ledger.json';
 import impactChainsRaw from '@shared/impact-chains.json';
 import taraChainsRaw from '@shared/tara-chains.json';
 
+// TARA Brain Atlas anatomy tables (AI-drafted, unreviewed; every row carries its review state)
+import { loadAnatomyTables } from './anatomy/load-anatomy-tables';
+
 // ═══ Types ═══
 
 export type Row = Record<string, unknown>;
@@ -915,6 +918,12 @@ export interface ImpactChainLink {
   band_name: string;
   region_id: string;
   region_name: string;
+  /**
+   * How the pathway's region id was joined to the atlas: same id, synonym alias, or an alias that changes
+   * anatomical scope. It describes the join, not how exact the anatomy is. Values are REGION_MATCH in
+   * datalake/scripts/region-resolver.mjs.
+   */
+  region_match: 'id' | 'synonym' | 'part_to_whole' | 'whole_to_part';
   pathway_id: string;
   pathway_name: string;
   neurotransmitter: string;
@@ -924,9 +933,9 @@ export interface ImpactChainLink {
 }
 
 /**
- * Impact chains are precomputed by shared/scripts/compute-impact-chains.mjs
+ * Impact chains are precomputed by datalake/scripts/compute-impact-chains.mjs
  * to eliminate the O(n⁴) nested-loop computation at build time.
- * Regenerate with: node shared/scripts/compute-impact-chains.mjs
+ * Regenerate with: npm run compute:chains
  */
 function buildImpactChains(): Row[] {
   return (impactChainsRaw as any) as Row[];
@@ -1327,6 +1336,10 @@ export function getKqlTables(): KqlTables {
 
     // Research intake ledger (proposals, not published data)
     intake_ledger: buildIntakeLedger(),
+
+    // Atlas sources, structures, crosswalk and technique terms. Built by src/lib/anatomy/
+    // from the same reviewed rows as the anatomy index; never flattened a second time here.
+    ...loadAnatomyTables(),
   };
 
   // Filter out empty tables — dynamic discovery

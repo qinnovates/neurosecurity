@@ -20,15 +20,36 @@ When a file changes, these downstream files must be updated. Run `npm run health
 | src/lib/kql-tables.ts imports | Add import if new file; update builder function | Manual |
 | DataStudioBrowser.tsx DESCRIPTIONS | Add description if new dataset | Manual |
 
+## When datalake/qif-anatomy-*.json, src/site/atlas-assets/manifest.json or a label table changes (TARA Brain Atlas)
+| Update | How | Automated? |
+|--------|-----|-----------|
+| The five `anatomy_*` query tables | `npm run prebuild`. Built by `src/lib/anatomy/anatomy-tables.ts` from the same reviewed rows as the anatomy index; never add a second flattener | Yes (prebuild) |
+| datalake/parquet/anatomy_*.parquet and catalog.json | `npm run prebuild` with pyarrow installed, then commit them. `generate-parquet.py` copies the rows the TypeScript builder wrote | Script (`npm test` fails if a committed file differs from a fresh build; `npm run health` fails if a table is missing from the catalog) |
+| src/lib/anatomy/load-anatomy-tables.ts | Add the import when the pipeline ships a new label table | Manual (`npm test` fails if it is missing) |
+| src/components/data-studio/anatomy-dataset-descriptions.ts | Correct any count the change moved | Manual (`npm test` fails if a count is stale) |
+
+Every anatomy table row carries `drafted_by`, `review_state`, `review_mark` and `status_sentence`. A new anatomy table or column must not state a reading as a fact: `named_term` and `resolved_region_id`, never `target_region`.
+
 ## When datalake/qtara-registrar.json changes (TARA techniques)
 | Update | How | Automated? |
 |--------|-----|-----------|
 | All of the above, plus: | | |
 | datalake/qtara-registrar.json `statistics` | `npm run registrar:stats` (check with `npm run registrar:stats:check`) | Script |
 | README.md technique count | Verify technique count references | Manual (npm run health warns) |
-| datalake/impact-chains.json | `npm run compute:chains` | Manual |
+| datalake/impact-chains.json | `npm run compute:chains` | Script (`npm test` fails if stale) |
 | datalake/qtara/src/qtara/data/ | Copy registrar to SDK data dir | Manual |
 | src/lib/threat-data.ts | Verify ThreatVector interface matches | Manual |
+| datalake/qif-anatomy-technique-regions.json | When a technique's text or band tags change: re-read it, edit `datalake/scripts/technique-region-curation.json`, run `node datalake/scripts/draft-technique-regions.mjs`. Never hand-edit the data file | Script (`npm test` fails if stale, if a neural-band technique has no entry, or if a quote is gone) |
+
+Region links are AI-drafted and unreviewed. The registrar, the public API, the Python SDK and the STIX export carry no region links until a link has an owner's review in the ledger. They are published only as the `anatomy_technique_terms` and `anatomy_technique_scopes` tables, where every row carries its review state and the quoted catalog text.
+
+## When datalake/qif-brain-bci-atlas.json or datalake/qif-neural-pathways.json changes
+| Update | How | Automated? |
+|--------|-----|-----------|
+| All datalake/*.json propagation, plus: | | |
+| qif-neural-pathways.json `origin_band` / `target_bands` | `npm run derive:pathway-bands` (derived from `brain_regions[].qif_band`; never hand-edit) | Script (`npm test` fails if stale) |
+| datalake/impact-chains.json | `npm run compute:chains` | Script (`npm test` fails if stale) |
+| qif-brain-bci-atlas.json `region_alias_relations` | Give every new alias exactly one kind (`synonym`, `whole_to_part` or `part_to_whole`) and add it to the pinned table in `datalake/scripts/__tests__/region-resolver.test.mjs`. An alias with no kind stops `compute:chains` and `derive:pathway-bands` and lights no region | Manual (`npm test` fails if missing) |
 
 ## When osi-of-mind/QIF-DERIVATION-LOG.md changes
 | Update | How | Automated? |

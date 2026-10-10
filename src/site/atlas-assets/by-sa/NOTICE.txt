@@ -1,0 +1,14 @@
+NOTICE for atlas-assets/by-sa/
+
+This folder holds third-party material, changed as described below. Each file keeps its source's licence.
+The licence readings behind this notice were made by AI and not by a lawyer. No person has confirmed them. They are not legal advice.
+No neuroanatomist has checked these shapes or what they are said to show.
+
+File: deep-cit168.ae8a0364aa52.glb
+  Source: CIT168 Reinforcement Learning atlas v1.1.0 (Pauli 2018)
+  Attribution: Pauli WM, Nili AN, Tyszka JM. A high-resolution probabilistic in vivo atlas of human subcortical brain nuclei. Sci Data 2018. https://doi.org/10.1038/sdata.2018.63. CC BY 4.0. State changes.
+  Source pages: https://api.osf.io/v2/nodes/jkzwp/, https://osf.io/jkzwp/, https://doi.org/10.1038/sdata.2018.63
+  Licence: Creative Commons Attribution-ShareAlike 4.0 International (https://creativecommons.org/licenses/by-sa/4.0/)
+  Licence stated by the publisher: Creative Commons Attribution 4.0 International (https://creativecommons.org/licenses/by/4.0/); handled here under the stricter licence above.
+  Required wording: Data were provided [in part] by the Human Connectome Project, WU-Minn Consortium (Principal Investigators: David Van Essen and Kamil Ugurbil; 1U54MH091657) funded by the 16 NIH Institutes and Centers that support the NIH Blueprint for Neuroscience Research; and by the McDonnell Center for Systems Neuroscience at Washington University.
+  Changes made: Each probability map was split into left and right at x = 0, resampled linearly from 1 mm to 0.5 mm, cut at probability 0.5, then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric). Structures too small to outline are markers with no shape.

@@ -4,7 +4,7 @@
  *
  * Splits the data into:
  *   src/site/data/kql-tables.json         — all tables EXCEPT impact_chains (~800KB)
- *   src/site/data/kql-impact-chains.json  — impact_chains only (~2.1MB, lazy-loaded)
+ *   src/site/data/kql-impact-chains.json  — impact_chains only (~8.8MB, lazy-loaded)
  *
  * This eliminates the 2-3MB prop serialization overhead where Astro embedded
  * the entire KQL table set as inline JSON in every BciKql page.
