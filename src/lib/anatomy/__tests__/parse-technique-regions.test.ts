@@ -58,7 +58,7 @@ describe('parseTechniqueRegions', () => {
 
   it('rejects a band_level rationale that does not start with a listed reason', () => {
     expect(() => parseEntry({ ...BAND_LEVEL_ENTRY, rationale: 'Nothing obvious was named.' }))
-      .toThrow(/rationale: a band_level rationale must start with one of: no_structure_named, only_whole_structures_named, text_contradicts_band_tags/);
+      .toThrow(/rationale: a band_level rationale must start with one of: no_structure_named, structure_named_only_as_context, only_whole_structures_named, text_contradicts_band_tags/);
   });
 
   it('rejects a regions entry with no links', () => {

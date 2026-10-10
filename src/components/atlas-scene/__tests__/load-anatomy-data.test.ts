@@ -29,6 +29,8 @@ const PINNED_ANATOMY_STATE = {
   regionGeometryStates: ['contained', 'drawn', 'marker_only', 'no_geometry'],
   /** Changes when a LAYER GAINS ITS FIRST SHIPPED ASSET. Every other layer stays unavailable and says why. */
   availableLayerIds: ['outline', 'cortical', 'deep'],
+  /** Changes when TECHNIQUE LINKS ARE RE-DRAFTED: how many neural-band techniques hold links and how many stay at band level. */
+  techniqueScopes: { regions: 48, band_level: 63, not_drafted: 0 },
 } as const;
 
 /**
@@ -121,11 +123,12 @@ describe('anatomy index built from the seed files (guards)', () => {
     expect(index.structures).toHaveLength(PINNED_ANATOMY_STATE.structureCount);
   });
 
-  it('lists every technique with a neural band, with no region link drafted yet and nothing lit', () => {
+  it('re-drafting technique links changes PINNED_ANATOMY_STATE.techniqueScopes: every neural-band technique is listed and drafted (content: technique-regions-content.test.ts)', () => {
     const neuralTechniques = data.engineData.techniques.filter((technique) => technique.bandIds.some((bandId) => bandId.startsWith('N')));
     expect(neuralTechniques.length).toBeGreaterThan(0);
     expect(index.techniques.map((technique) => technique.id)).toEqual(neuralTechniques.map((technique) => technique.id));
-    expect(index.techniques.filter((technique) => technique.scope !== 'not_drafted' || technique.links.some((link) => link.lit))).toEqual([]);
+    const countScope = (scope: string): number => index.techniques.filter((technique) => technique.scope === scope).length;
+    expect({ regions: countScope('regions'), band_level: countScope('band_level'), not_drafted: countScope('not_drafted') }).toEqual(PINNED_ANATOMY_STATE.techniqueScopes);
   });
 
   it('shipping a layer\'s first asset changes PINNED_ANATOMY_STATE.availableLayerIds: every other layer is unavailable and says why', () => {
