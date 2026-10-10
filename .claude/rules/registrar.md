@@ -25,7 +25,7 @@ paths:
                  from the techniques array; never hand-edit it. Only the fields
                  listed in statistics.editorial_fields are hand-maintained.)
 8c. Regions:     If a technique with a neural band was added, or any technique's
-                 text changed, re-read it and update its entry in
+                 text or band tags changed, re-read it and update its entry in
                  datalake/scripts/technique-region-curation.json, then run
                  node datalake/scripts/draft-technique-regions.mjs
                  (`npm test` fails on a missing entry, a stale quote, or an

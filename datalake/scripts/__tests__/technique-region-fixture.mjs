@@ -25,13 +25,12 @@ export const FIXTURE_REGISTRAR = Object.freeze({
 export const FIXTURE_CURATION = Object.freeze({
   techniques: {
     'QIF-T9001': {
-      rationale: 'The notes name one target.',
-      links: [{ term: 'prefrontal cortex', field: '/notes', quote: 'Targets the prefrontal cortex', rationale: 'Named as the target.' }],
+      links: [{ term: 'prefrontal cortex', field: '/notes', quote: 'Targets the prefrontal cortex', role: 'action_target' }],
       skipped: [
-        { field: '/notes', text: 'pons', category: 'negation', note: 'The text says the technique does not reach it.' },
-        { field: '/sources/0', text: 'Hippocampus', category: 'citation', note: 'Journal title.' },
+        { field: '/notes', text: 'pons', category: 'negation' },
+        { field: '/sources/0', text: 'Hippocampus', category: 'citation' },
       ],
     },
-    'QIF-T9002': { band_level: 'no_structure_named', rationale: 'The text describes passive capture and names no structure.' },
+    'QIF-T9002': { band_level: 'no_structure_named' },
   },
 });

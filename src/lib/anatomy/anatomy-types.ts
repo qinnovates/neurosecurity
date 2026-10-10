@@ -90,8 +90,12 @@ export interface Crosswalk {
 export const TECHNIQUE_SCOPES = ['regions', 'band_level'] as const;
 export type TechniqueScope = typeof TECHNIQUE_SCOPES[number];
 
-/** The reason a `band_level` entry's rationale must start with. */
-export const BAND_LEVEL_REASONS = ['no_structure_named', 'only_whole_structures_named', 'text_contradicts_band_tags'] as const;
+/**
+ * The reason a `band_level` entry's rationale must start with.
+ * `structure_named_only_as_context`: the text does name a structure, but only where it cannot be linked: in a negation,
+ * as another technique's target, in the clinical analog, in a citation, or in a list field a source reference cannot quote.
+ */
+export const BAND_LEVEL_REASONS = ['no_structure_named', 'structure_named_only_as_context', 'only_whole_structures_named', 'text_contradicts_band_tags'] as const;
 export type BandLevelReason = typeof BAND_LEVEL_REASONS[number];
 
 /** A link holds the catalog's own word and the quoted text, and nothing derived from them. */

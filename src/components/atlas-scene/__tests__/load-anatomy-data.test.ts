@@ -28,7 +28,7 @@ const PINNED_ANATOMY_STATE = {
   /** Changes when REGIONS ARE MAPPED: every region not listed above reads not_mapped until a row is drafted for it. */
   regionGeometryStates: ['no_geometry', 'not_mapped'],
   /** Changes when TECHNIQUE LINKS ARE RE-DRAFTED: how many neural-band techniques hold links and how many stay at band level. */
-  techniqueScopes: { regions: 49, band_level: 62, not_drafted: 0 },
+  techniqueScopes: { regions: 48, band_level: 63, not_drafted: 0 },
 } as const;
 
 /**
