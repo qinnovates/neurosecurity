@@ -1,12 +1,9 @@
-import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import { ANATOMY_EVIDENCE_PATH } from '@/lib/anatomy/anatomy-index-types';
 import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
 import { announceLens, announceSelection } from '@/lib/atlas-explorer/announcements';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
-import { LENS_LABELS, toColourMode, type LensKind } from '@/lib/atlas-explorer/lens-state';
-import { buildDeviceRail } from '@/lib/atlas-explorer/rail-stages';
-import { buildRegionDetail } from '@/lib/atlas-explorer/region-detail';
-import { buildBandGroups, filterBandGroups, tallyLens } from '@/lib/atlas-explorer/region-rows';
+import { LENS_LABELS, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE, explorerReducer } from './atlas-state';
 import { loadAnatomyEvidence, loadRegionEvidence } from './explorer-data';
 import H01Card from './H01Card';
@@ -17,6 +14,7 @@ import NetworkNames from './NetworkNames';
 import RegionInspector from './RegionInspector';
 import SignalChainRail from './SignalChainRail';
 import StructureList from './StructureList';
+import { useExplorerViews } from './use-explorer-views';
 import { useLoaded } from './use-loaded';
 
 interface Props {
@@ -51,12 +49,7 @@ export default function ExplorerWorkspace({ model }: Props) {
   const mainRef = useRef<HTMLDivElement>(null);
   const selectedRegionId = state.selection?.kind === 'region' ? state.selection.id : null;
 
-  const mode = useMemo(() => toColourMode(state.lens), [state.lens]);
-  const allGroups = useMemo(() => buildBandGroups(model, mode), [model, mode]);
-  const groups = useMemo(() => filterBandGroups(allGroups, state.filter), [allGroups, state.filter]);
-  const tally = useMemo(() => tallyLens(allGroups), [allGroups]);
-  const detail = useMemo(() => (selectedRegionId === null ? null : buildRegionDetail(model, selectedRegionId)), [model, selectedRegionId]);
-  const rail = useMemo(() => buildDeviceRail(model, state.railIncludesMixed), [model, state.railIncludesMixed]);
+  const { groups, tally, detail, rail } = useExplorerViews(model, state);
 
   const loadQuotes = useCallback((signal: AbortSignal) => loadAnatomyEvidence(model, signal), [model]);
   const loadStatements = useCallback((signal: AbortSignal) => loadRegionEvidence(model, signal), [model]);

@@ -2,10 +2,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import registrar from '@shared/qtara-registrar.json';
-import { ANATOMY_EVIDENCE_PATH, ANATOMY_INDEX_PATH } from '@/lib/anatomy/anatomy-index-types';
+import { ANATOMY_INDEX_PATH } from '@/lib/anatomy/anatomy-index-types';
 import { isLimitId, matchesLimitTemplate } from '@/lib/anatomy/limits-copy';
-import { H01_CARD_PATH } from '@/lib/anatomy/parse-h01-card';
-import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
 import AtlasExplorer from '../AtlasExplorer';
 import { buildServedFiles, requestedPaths, serveFiles, type ServedFile } from './explorer-test-server';
 

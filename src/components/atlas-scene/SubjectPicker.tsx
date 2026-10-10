@@ -33,10 +33,25 @@ function PickerOption({ option, elementId, isActive, isChosen, onChoose }: Optio
   );
 }
 
-function nextActiveIndex(key: string, activeIndex: number, count: number): number | null {
-  if (count === 0) return null;
-  const targets: Record<string, number> = { ArrowDown: Math.min(activeIndex + 1, count - 1), ArrowUp: Math.max(activeIndex - 1, 0), Home: 0, End: count - 1 };
-  return targets[key] ?? null;
+export type PickerKeyAction = { type: 'choose' } | { type: 'clear' } | { type: 'move'; index: number };
+
+interface PickerKeyContext {
+  query: string;
+  activeIndex: number;
+  matchCount: number;
+}
+
+/**
+ * What a key does in the picker's text field, or null when the key is left to the field itself.
+ * Home and End keep their meaning inside the text while there is text to move through.
+ */
+export function pickerKeyAction(key: string, { query, activeIndex, matchCount }: PickerKeyContext): PickerKeyAction | null {
+  if (key === 'Enter') return matchCount > 0 ? { type: 'choose' } : null;
+  if (key === 'Escape') return query === '' ? null : { type: 'clear' };
+  if (matchCount === 0 || ((key === 'Home' || key === 'End') && query !== '')) return null;
+  const targets: Record<string, number> = { ArrowDown: Math.min(activeIndex + 1, matchCount - 1), ArrowUp: Math.max(activeIndex - 1, 0), Home: 0, End: matchCount - 1 };
+  const index = targets[key];
+  return index === undefined ? null : { type: 'move', index };
 }
 
 /**
@@ -58,23 +73,12 @@ export default function SubjectPicker({ noun, options, chosenId, onChoose }: Pro
   }, [active]);
 
   const handleKey = (event: KeyboardEvent<HTMLInputElement>): void => {
-    if (event.key === 'Enter' && active !== undefined) {
-      event.preventDefault();
-      onChoose(active.id);
-      return;
-    }
-    if (event.key === 'Escape' && query !== '') {
-      event.preventDefault();
-      setQuery('');
-      setActiveIndex(0);
-      return;
-    }
-    // Home and End keep their meaning inside the text while there is text to move through.
-    if ((event.key === 'Home' || event.key === 'End') && query !== '') return;
-    const next = nextActiveIndex(event.key, Math.min(activeIndex, matches.length - 1), matches.length);
-    if (next === null) return;
+    const action = pickerKeyAction(event.key, { query, activeIndex: Math.min(activeIndex, matches.length - 1), matchCount: matches.length });
+    if (action === null) return;
     event.preventDefault();
-    setActiveIndex(next);
+    if (action.type === 'choose' && active !== undefined) onChoose(active.id);
+    if (action.type === 'clear') setQuery('');
+    if (action.type !== 'choose') setActiveIndex(action.type === 'move' ? action.index : 0);
   };
 
   return (

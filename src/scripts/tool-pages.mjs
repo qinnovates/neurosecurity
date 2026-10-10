@@ -35,14 +35,16 @@ export const DOCUMENT_HEADROOM_GZIP_BYTES = 16_384;
 /**
  * The atlas explorer page (/atlas/anatomy/), measured the same way on this branch's build.
  * Code: the page's stylesheets and the explorer island with the parsers it runs on what it fetches.
+ * Of the figure, about 30 kB is the explorer itself; the rest is the site stylesheet and React, which
+ * every island on the site shares.
  */
-export const ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES = 0;
+export const ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES = 126_619;
 
 /**
  * Document: the explorer's HTML carries no data at all (it fetches everything when it starts),
  * so it is only the layout. The headroom is small on purpose: growth here means something was inlined.
  */
-export const ATLAS_EXPLORER_DOCUMENT_BASELINE_GZIP_BYTES = 0;
+export const ATLAS_EXPLORER_DOCUMENT_BASELINE_GZIP_BYTES = 3_390;
 export const ATLAS_EXPLORER_DOCUMENT_HEADROOM_GZIP_BYTES = 1_024;
 
 /**
