@@ -12,6 +12,7 @@
 
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { findAnatomyPayloadFailures } from './check-anatomy-payload.mjs';
 import { findToolPageFailures } from './check-model-page.mjs';
 import { checkFirstLoadBudgets } from './measure-lab-first-load.mjs';
 import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES } from './tool-pages.mjs';
@@ -26,6 +27,7 @@ import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES } from './tool-pages.mjs';
 export const POST_BUILD_CHECKS = [
   { name: 'tool pages are isolated', findFailures: (distDirectory, pages) => findToolPageFailures(distDirectory, pages) },
   { name: 'tool pages are within their first-load budgets', findFailures: (distDirectory, pages) => checkFirstLoadBudgets(distDirectory, pages).failures },
+  { name: 'tool pages carry no anatomy data in their HTML', findFailures: (distDirectory, pages) => findAnatomyPayloadFailures(distDirectory, pages) },
 ];
 
 /**

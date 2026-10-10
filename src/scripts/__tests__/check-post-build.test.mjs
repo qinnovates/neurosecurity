@@ -22,6 +22,7 @@ describe('runPostBuildChecks', () => {
     expect(results.map(({ failures }) => failures)).toEqual([
       ['/eager/: no Content-Security-Policy meta tag'],
       ['/eager/: three.js can load without the visitor asking for it, through /_astro/eager-3d.js -> /_astro/heavy-3d.js; it may sit only behind a chunk named in interactionGatedEntryNames'],
+      [],
     ]);
   });
 
@@ -30,6 +31,14 @@ describe('runPostBuildChecks', () => {
     const results = runPostBuildChecks(FIXTURE_DIST, [{ ...passingPage, codeGzipBudgetBytes: measuredBytes - 1 }]);
     expect(results[0].failures).toEqual([]);
     expect(results[1].failures).toHaveLength(1);
+  });
+
+  it('fails the anatomy check alone when a page inlines a slice of the anatomy index', () => {
+    const results = runPostBuildChecks(FIXTURE_DIST, [{ ...passingPage, urlPath: '/inlined-anatomy/' }]);
+    expect(results.map(({ name, failures }) => [name, failures.length])).toEqual([
+      ['tool pages are isolated', 0], ['tool pages are within their first-load budgets', 0], ['tool pages carry no anatomy data in their HTML', 1],
+    ]);
+    expect(results[2].failures[0]).toMatch(/^\/inlined-anatomy\/: the page carries anatomy data \(found: .*resolved_region_id.*\); it must fetch the index when it runs/);
   });
 
   it('turns a page that was not built into a failure of each check, without throwing', () => {
