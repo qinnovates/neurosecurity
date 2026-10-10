@@ -7,7 +7,7 @@
  * added, dropped or re-graded without the header saying so.
  */
 
-import { childOf, failAt, itemOf, readInteger, readList, readRecord, readString, rootOf, type FieldLocation } from './field-readers';
+import { childOf, failAt, itemOf, readInteger, readList, readRecord, readString, rejectDuplicates, rootOf, type FieldLocation } from './field-readers';
 import { readDate, readId } from './format-readers';
 import { readRegionEvidenceRow } from './parse-region-evidence-row';
 import {
@@ -94,6 +94,8 @@ export function parseRegionEvidence(raw: unknown, regionIds: ReadonlySet<string>
     rows: readList(record, 'rows', root).map((row, index) => readRegionEvidenceRow(row, itemOf(root, 'rows', index))),
     empty_regions: readList(record, 'empty_regions', root).map((region, index) => readEmptyRegion(region, itemOf(root, 'empty_regions', index))),
   };
+  // One paper may back two statements under a region, each with its own quote. The same quote twice is a duplicate row.
+  rejectDuplicates(evidence.rows.map((row) => `${row.region_id}:${row.pmid}:${row.quote}`), childOf(root, 'rows'), 'statement (region, paper and quote)');
   checkTallies(evidence, root);
   checkRegionCoverage(evidence, regionIds, root);
   return evidence;

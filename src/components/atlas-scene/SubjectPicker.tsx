@@ -50,8 +50,7 @@ export function pickerKeyAction(key: string, { query, activeIndex, matchCount }:
   if (key === 'Escape') return query === '' ? null : { type: 'clear' };
   if (matchCount === 0 || ((key === 'Home' || key === 'End') && query !== '')) return null;
   const targets: Record<string, number> = { ArrowDown: Math.min(activeIndex + 1, matchCount - 1), ArrowUp: Math.max(activeIndex - 1, 0), Home: 0, End: matchCount - 1 };
-  const index = targets[key];
-  return index === undefined ? null : { type: 'move', index };
+  return Object.hasOwn(targets, key) ? { type: 'move', index: targets[key] } : null;
 }
 
 /**

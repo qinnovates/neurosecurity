@@ -20,11 +20,6 @@ export function announceSelection(model: ExplorerModel, regionId: string): strin
   return `${region.name} selected. Band ${band}. ${GEOMETRY_LABELS[region.geometry.state]}. ${region.review_state.mark}.`;
 }
 
-export function announceTechniqueSelection(model: ExplorerModel, techniqueId: string): string {
-  const name = model.techniquesById.get(techniqueId)?.name ?? model.deviceOnlyTechniquesById.get(techniqueId)?.name ?? techniqueId;
-  return `${name} selected.`;
-}
-
 function describeSubject(model: ExplorerModel, lens: Lens): string {
   const subjectId = lensSubjectId(lens);
   if (subjectId === null) return '';

@@ -86,6 +86,12 @@ describe('parseRegionEvidence on bad files', () => {
       .toThrow(/requires_citations: PubMed id 99999 must be shown with this row/);
   });
 
+  it('refuses the same quote from the same paper filed twice under one region', () => {
+    const doubled = clone();
+    doubled.rows.push(structuredClone(doubled.rows[0]));
+    expect(() => parse(doubled)).toThrow(/rows: statement \(region, paper and quote\) "pfc:22789779:.+" appears twice/);
+  });
+
   it('refuses tallies that disagree with the rows, and a region with neither rows nor a reason', () => {
     expect(() => parse({ ...clone(), rows_surviving: 57 })).toThrow(/rows_surviving: the file says 57 but its contents count 58/);
     expect(() => parse(withRow((row) => { row.kind = 'stimulation_association'; }))).toThrow(/rows_by_kind/);

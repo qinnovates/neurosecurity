@@ -32,7 +32,7 @@ function Holdings({ model }: Props) {
       </li>
       <li className="atlas-fact">
         {techniques.length} techniques carry a brain band: {linkedCount} linked to at least one region, {countScope('regions') - linkedCount} whose text names
-        structures that cannot be linked, {countScope('band_level')} tagged to a band only, {countScope('not_drafted')} with no links drafted.
+        structures but where no link is counted, {countScope('band_level')} tagged to a band only, {countScope('not_drafted')} with no links drafted.
       </li>
       <li className="atlas-fact">{model.deviceOnlyTechniquesById.size} techniques carry no brain band and sit on the device stages.</li>
     </ul>

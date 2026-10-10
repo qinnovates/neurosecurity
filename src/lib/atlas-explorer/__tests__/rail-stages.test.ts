@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import registrar from '@shared/qtara-registrar.json';
-import { buildDeviceRail, listRailTechniqueIds } from '../rail-stages';
+import { buildDeviceRail, type DeviceRail } from '../rail-stages';
 import { FIXTURE_IDS, buildFixtureModel, loadRealModel } from './explorer-fixtures';
 
+/** The ids the rail lists, each once. */
+const listRailTechniqueIds = (rail: DeviceRail): string[] => [...new Set(rail.stages.flatMap((stage) => stage.techniques.map((technique) => technique.id)))].sort();
 const isNeural = (bandId: string): boolean => bandId.startsWith('N');
 const deviceOnlyIds = registrar.techniques.filter((technique) => !technique.band_ids.some(isNeural)).map((technique) => technique.id).sort();
 const anyDeviceBandIds = registrar.techniques.filter((technique) => technique.band_ids.some((bandId) => !isNeural(bandId))).map((technique) => technique.id).sort();

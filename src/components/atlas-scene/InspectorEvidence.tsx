@@ -25,7 +25,7 @@ function Citation({ view }: { view: CitationView }) {
 
 function Statement({ statement }: { statement: EvidenceStatement }) {
   return (
-    <li className="atlas-statement" data-contested={statement.contestedLimit !== null}>
+    <li className="atlas-statement" data-contested={statement.contestedLimit !== null} data-about-region={statement.isAboutRegionItself}>
       <p className="atlas-filed" data-anatomy-line="true">{statement.filedUnderLine} <ReviewMark state={UNREVIEWED_MARK} /></p>
       {statement.anatomyLimits.map((limit) => <LimitNote key={limit.id} limit={limit} />)}
       {statement.contestedLimit !== null && <><p className="atlas-flag">Contested</p><LimitNote limit={statement.contestedLimit} /></>}

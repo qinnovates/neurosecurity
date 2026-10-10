@@ -6,7 +6,7 @@
 
 import type { PinnedFile } from '@/lib/anatomy/anatomy-index-types';
 
-export const ATLAS_FETCH_FAILURES = ['network', 'http_status', 'not_json', 'pin_mismatch'] as const;
+export const ATLAS_FETCH_FAILURES = ['bad_address', 'network', 'timeout', 'http_status', 'not_json', 'pin_mismatch'] as const;
 export type AtlasFetchFailure = typeof ATLAS_FETCH_FAILURES[number];
 
 /** A static atlas file could not be fetched, or what arrived is not the file the index pinned. */
@@ -26,18 +26,26 @@ const SITE_PATH_PATTERN = /^\/atlas\/[a-z0-9-]+\.json$/;
 const SHA256_ALGORITHM = 'SHA-256';
 const HEX_RADIX = 16;
 const HEX_BYTE_WIDTH = 2;
+/** Long enough for a slow phone connection, short enough that a stalled request ends in a notice and not an endless wait. */
+export const FETCH_TIMEOUT_MS = 30_000;
 
 async function fetchBytes(path: string, cache: RequestCache, signal: AbortSignal): Promise<Uint8Array> {
-  if (!SITE_PATH_PATTERN.test(path)) throw new AtlasFetchError(path, 'network', 'the address is not one of this site\'s atlas files');
-  let response: Response;
+  if (!SITE_PATH_PATTERN.test(path)) throw new AtlasFetchError(path, 'bad_address', 'the address is not one of this site\'s atlas files');
+  const timeout = new AbortController();
+  const stopOnCallerAbort = (): void => timeout.abort();
+  signal.addEventListener('abort', stopOnCallerAbort);
+  const timer = setTimeout(() => timeout.abort(), FETCH_TIMEOUT_MS);
   try {
-    response = await fetch(path, { cache, signal, credentials: 'omit', redirect: 'error' });
+    const response = await fetch(path, { cache, signal: timeout.signal, credentials: 'omit', redirect: 'error' });
+    if (!response.ok) throw new AtlasFetchError(path, 'http_status', `the server answered ${response.status}`);
+    return new Uint8Array(await response.arrayBuffer());
   } catch (error) {
-    if (signal.aborted) throw error;
-    throw new AtlasFetchError(path, 'network', 'the request did not complete');
+    if (signal.aborted || error instanceof AtlasFetchError) throw error;
+    throw new AtlasFetchError(path, timeout.signal.aborted ? 'timeout' : 'network', timeout.signal.aborted ? 'the server took too long to answer' : 'the request did not complete');
+  } finally {
+    clearTimeout(timer);
+    signal.removeEventListener('abort', stopOnCallerAbort);
   }
-  if (!response.ok) throw new AtlasFetchError(path, 'http_status', `the server answered ${response.status}`);
-  return new Uint8Array(await response.arrayBuffer());
 }
 
 function parseJsonBytes(path: string, bytes: Uint8Array): unknown {

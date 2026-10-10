@@ -7,7 +7,7 @@
 
 import { limitSentence, type LimitSentence } from '@/lib/anatomy/limits-copy';
 import { doiAddress, pubmedAddress } from '@/lib/anatomy/literature-readers';
-import type { PubmedNotice, RegionEvidence, RegionEvidenceRow } from '@/lib/anatomy/region-evidence-types';
+import { isAboutRegionItself, type PubmedNotice, type RegionEvidence, type RegionEvidenceRow } from '@/lib/anatomy/region-evidence-types';
 import { limitsForEvidenceAnatomy } from './limit-selection';
 
 export interface CitationView {
@@ -29,6 +29,8 @@ export interface EvidenceStatement {
   /** "Filed under <region name>; the paper says <its own anatomy>." Shown on every statement. */
   filedUnderLine: string;
   anatomyLimits: LimitSentence[];
+  /** False when the paper is about a part, a larger structure, somewhere else, or the link is the drafter's reading. */
+  isAboutRegionItself: boolean;
   claim: string;
   quote: string;
   citation: CitationView;
@@ -63,12 +65,14 @@ function listNotices(row: RegionEvidenceRow): string[] {
   return [...row.pubmed_notices.map((notice) => PUBMED_NOTICE_WORDS[notice]), ...(row.crossref_notices.length > 0 ? [CROSSREF_NOTICE_WORDS] : [])];
 }
 
-export function toEvidenceStatement(row: RegionEvidenceRow, regionName: string): EvidenceStatement {
+/** @param ordinal the row's place among the region's statements; one paper can back two of them, so it is part of the key */
+export function toEvidenceStatement(row: RegionEvidenceRow, regionName: string, ordinal: number): EvidenceStatement {
   const requiredPmids = new Set(row.requires_citations.map((citation) => citation.pmid).filter((pmid) => pmid !== row.pmid));
   return {
-    key: `${row.region_id}:${row.pmid}`,
+    key: `${row.region_id}:${row.pmid}:${ordinal}`,
     filedUnderLine: `Filed under ${regionName}; the paper says "${row.anatomy_as_stated}".`,
     anatomyLimits: limitsForEvidenceAnatomy(row),
+    isAboutRegionItself: isAboutRegionItself(row),
     claim: row.claim,
     quote: row.quote,
     citation: toCitation(row),
@@ -83,7 +87,7 @@ export function toEvidenceStatement(row: RegionEvidenceRow, regionName: string):
 }
 
 export function buildRegionEvidenceView(evidence: RegionEvidence, regionId: string, regionName: string): RegionEvidenceView {
-  const statements = evidence.rows.filter((row) => row.filed_under === regionId).map((row) => toEvidenceStatement(row, regionName));
+  const statements = evidence.rows.filter((row) => row.filed_under === regionId).map((row, ordinal) => toEvidenceStatement(row, regionName, ordinal));
   const reason = evidence.empty_regions.find((region) => region.region_id === regionId)?.reason ?? NO_REASON_RECORDED;
   return { intro: limitSentence('evidence_intro'), statements, emptyLimit: statements.length === 0 ? limitSentence('evidence_none', { reason }) : null };
 }

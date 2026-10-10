@@ -58,8 +58,3 @@ export function buildDeviceRail(model: ExplorerModel, includeMixed: boolean): De
   const deviceOnlyCount = all.filter(isDeviceOnly).length;
   return { stages, deviceOnlyCount, mixedCount: all.length - deviceOnlyCount };
 }
-
-/** The ids the rail lists, each once. */
-export function listRailTechniqueIds(rail: DeviceRail): string[] {
-  return [...new Set(rail.stages.flatMap((stage) => stage.techniques.map((technique) => technique.id)))].sort();
-}

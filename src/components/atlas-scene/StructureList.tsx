@@ -24,7 +24,7 @@ function isGeometryFilter(value: string): value is GeometryFilter {
 
 function targetIndex(key: string, index: number, count: number): number | null {
   const targets: Record<string, number> = { ArrowDown: Math.min(index + 1, count - 1), ArrowUp: Math.max(index - 1, 0), Home: 0, End: count - 1 };
-  return targets[key] ?? null;
+  return Object.hasOwn(targets, key) ? targets[key] : null;
 }
 
 function FilterBar({ filter, onFilter }: Pick<Props, 'filter' | 'onFilter'>) {
@@ -75,8 +75,8 @@ export default function StructureList({ groups, regionCount, filter, lensLabel, 
       <p className="atlas-list-count" role="status">
         {visibleIds.length === regionCount ? `${regionCount} regions.` : `Showing ${visibleIds.length} of ${regionCount} regions.`}
         {visibleIds.length === 0 && ' No region matches these filters.'}
-        {visibleIds.length !== regionCount && <button type="button" className="atlas-link-button" onClick={onClearFilter}>Show all regions</button>}
       </p>
+      {visibleIds.length !== regionCount && <button type="button" className="atlas-link-button" onClick={onClearFilter}>Show all regions</button>}
       <div className="atlas-columns" aria-hidden="true">
         <span>Region</span><span>What stands for it</span><span>{lensLabel}</span>
       </div>

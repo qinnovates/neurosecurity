@@ -56,7 +56,9 @@ describe('evidence statements', () => {
   });
 
   it('qualify every real row that is not about the region itself, and carry the filed-under line on all 58 (guard)', () => {
-    const statements = evidence.rows.map((row) => ({ row, statement: buildRegionEvidenceView(evidence, row.region_id, 'Region').statements.find((candidate) => candidate.key === `${row.region_id}:${row.pmid}`) }));
+    const statements = evidence.rows.map((row) => ({ row, statement: buildRegionEvidenceView(evidence, row.region_id, 'Region').statements.find((candidate) => candidate.quote === row.quote) }));
+    const keys = [...new Set(evidence.rows.map((row) => row.region_id))].flatMap((regionId) => buildRegionEvidenceView(evidence, regionId, 'Region').statements.map((statement) => statement.key));
+    expect(new Set(keys).size).toBe(58);
     expect(statements).toHaveLength(58);
     expect(statements.filter(({ statement }) => statement === undefined || !statement.filedUnderLine.startsWith('Filed under Region; the paper says "'))).toEqual([]);
     const qualified = statements.filter(({ row }) => !isAboutRegionItself(row));

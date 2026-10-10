@@ -52,7 +52,7 @@ describe('filterSubjectOptions', () => {
 describe('cluster and device options', () => {
   it('list the cluster tags the techniques carry and the devices the atlas file records', () => {
     expect(listClusterOptions(model).map((option) => [option.id, option.label, option.detail])).toEqual([
-      ['cognitive_psychotic', 'cognitive psychotic', '1 catalog entries'], ['mood_trauma', 'mood trauma', '2 catalog entries'],
+      ['cognitive_psychotic', 'cognitive psychotic', '1 catalog entry'], ['mood_trauma', 'mood trauma', '2 catalog entries'],
     ]);
     expect(listDeviceOptions(model)).toEqual([{ id: FIXTURE_IDS.device, label: FIXTURE_IDS.device, detail: '1 region named', reviewState: null }]);
     expect(listSubjectOptions(model, 'band')).toEqual([]);

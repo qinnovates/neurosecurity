@@ -4,7 +4,7 @@
  * that needs them. Nothing is used before its parser has accepted it.
  */
 
-import { ANATOMY_INDEX_PATH, type AnatomyIndex } from '@/lib/anatomy/anatomy-index-types';
+import { ANATOMY_INDEX_PATH } from '@/lib/anatomy/anatomy-index-types';
 import { AnatomyDataError } from '@/lib/anatomy/errors';
 import { parseAnatomyEvidence, type ShownAnatomyEvidence } from '@/lib/anatomy/parse-anatomy-evidence';
 import { parseAnatomyIndex } from '@/lib/anatomy/parse-anatomy-index';
@@ -48,14 +48,26 @@ export function toLoadFailure(error: unknown, file: string): LoadFailure {
   return { kind: 'unavailable', file, detail: error instanceof Error ? error.message : String(error) };
 }
 
-function requireRegions(index: AnatomyIndex): AnatomyIndex {
-  if (index.subjects.some((subject) => subject.kind === 'region')) return index;
-  throw new AnatomyDataError(ANATOMY_INDEX_PATH, 'subjects', 'the index lists no region', 'Rebuild the site; an index without regions cannot be explored.');
+/**
+ * The list groups regions by band. A region whose band the catalog does not name would be left out of every group,
+ * so a model that cannot place each of its regions is refused whole: nothing is ever dropped from the list in silence.
+ */
+function requireListableRegions(model: ExplorerModel): ExplorerModel {
+  if (model.regions.length === 0) {
+    throw new AnatomyDataError(ANATOMY_INDEX_PATH, 'subjects', 'the index lists no region', 'Rebuild the site; an index without regions cannot be explored.');
+  }
+  const listedBandIds = new Set(model.neuralBands.map((band) => band.id));
+  const unplaced = model.regions.find((region) => !region.band_ids.some((bandId) => listedBandIds.has(bandId)));
+  if (unplaced !== undefined) {
+    throw new AnatomyDataError(ANATOMY_INDEX_PATH, `subjects (region "${unplaced.id}")`, 'the region has no band the catalog names, so the list could not show it',
+      'Rebuild the site so the index and the catalog come from the same data.');
+  }
+  return model;
 }
 
 export async function loadExplorerModel(signal: AbortSignal): Promise<ExplorerModel> {
   const [rawIndex, rawCatalog] = await Promise.all([fetchAtlasJson(ANATOMY_INDEX_PATH, signal), fetchAtlasJson(EXPLORER_CATALOG_PATH, signal)]);
-  return createExplorerModel(requireRegions(parseAnatomyIndex(rawIndex)), parseExplorerCatalog(rawCatalog));
+  return requireListableRegions(createExplorerModel(parseAnatomyIndex(rawIndex), parseExplorerCatalog(rawCatalog)));
 }
 
 /** The quotes and rationales behind the index's drafted rows, checked against the index's own pin. */

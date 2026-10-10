@@ -52,7 +52,7 @@ export function listClusterOptions(model: ExplorerModel): SubjectOption[] {
   return clusters.map((cluster) => {
     const tagged = model.index.techniques.filter((technique) => technique.dsm_cluster === cluster);
     const reviewState = weakestReviewState(tagged.flatMap((technique) => technique.links.map((link) => link.review_state)));
-    return { id: cluster, label: cluster.replaceAll('_', ' '), detail: `${tagged.length} catalog entries`, reviewState };
+    return { id: cluster, label: cluster.replaceAll('_', ' '), detail: tagged.length === 1 ? '1 catalog entry' : `${tagged.length} catalog entries`, reviewState };
   });
 }
 

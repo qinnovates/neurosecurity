@@ -12,8 +12,19 @@ const UNREVIEWED = 'AI-drafted, unreviewed';
 
 let fetchMock: ReturnType<typeof vi.fn>;
 
-beforeEach(() => { fetchMock = serveFiles(REAL_FILES); });
-afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
+let reactWarnings: ReturnType<typeof vi.spyOn>;
+
+beforeEach(() => {
+  fetchMock = serveFiles(REAL_FILES);
+  reactWarnings = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+});
+afterEach(() => {
+  cleanup();
+  vi.unstubAllGlobals();
+  const warnings = reactWarnings.mock.calls.map((call) => String(call[0]));
+  reactWarnings.mockRestore();
+  expect(warnings).toEqual([]);
+});
 
 async function renderExplorer(files: Record<string, ServedFile> = REAL_FILES): Promise<HTMLElement> {
   fetchMock = serveFiles(files);

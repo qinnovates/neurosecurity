@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import registrar from '@shared/qtara-registrar.json';
 import type { AnatomyIndex } from '@/lib/anatomy/anatomy-index-types';
@@ -7,6 +7,7 @@ import { ANATOMY_EVIDENCE_PATH, ANATOMY_INDEX_PATH } from '@/lib/anatomy/anatomy
 import { H01_CARD_PATH } from '@/lib/anatomy/parse-h01-card';
 import { REGION_EVIDENCE_PATH, type RegionEvidence } from '@/lib/anatomy/region-evidence-types';
 import AtlasExplorer from '../AtlasExplorer';
+import { FETCH_TIMEOUT_MS } from '../fetch-atlas-json';
 import { buildServedFiles, requestedPaths, serveFiles, type ServedFile } from './explorer-test-server';
 
 const REAL_FILES = buildServedFiles();
@@ -15,7 +16,17 @@ const REAL_EVIDENCE = JSON.parse(REAL_FILES[REGION_EVIDENCE_PATH] as string) as 
 const UNREVIEWED = 'AI-drafted, unreviewed';
 const SERVER_ERROR = { status: 500 };
 
-afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
+/** React reports a duplicated list key, and every other misuse, through console.error. None is expected in any test here. */
+let reactWarnings: ReturnType<typeof vi.spyOn>;
+beforeEach(() => { reactWarnings = vi.spyOn(console, 'error').mockImplementation(() => undefined); });
+afterEach(() => {
+  cleanup();
+  vi.useRealTimers();
+  vi.unstubAllGlobals();
+  const warnings = reactWarnings.mock.calls.map((call) => String(call[0]));
+  reactWarnings.mockRestore();
+  expect(warnings).toEqual([]);
+});
 
 async function openRegion(regionId: string, files: Record<string, ServedFile> = REAL_FILES): Promise<{ container: HTMLElement; inspector: HTMLElement; fetchMock: ReturnType<typeof vi.fn> }> {
   const fetchMock = serveFiles(files);
@@ -97,6 +108,9 @@ describe('AtlasExplorer: literature statements', () => {
       expect(statement.querySelector('a[href^="https://pubmed.ncbi.nlm.nih.gov/"]')?.getAttribute('rel')).toBe('noopener noreferrer');
       expect(statement.querySelector('.atlas-scope')?.textContent).toMatch(/^Scope\. .+/);
     }
+    const aboutRegion = REAL_EVIDENCE.rows.filter((row) => row.region_id === 'ppc').map((row) => String(row.anatomy_match === 'equal' && !row.anatomy_inferred));
+    expect(statements.map((statement) => statement.dataset.aboutRegion)).toEqual(aboutRegion);
+    expect(aboutRegion).toContain('false');
     expect(inspector.querySelector('[data-limit-id="evidence_intro"]')).not.toBeNull();
   });
 
@@ -155,6 +169,7 @@ describe('AtlasExplorer: failures', () => {
     ['has lost a review state', { ...REAL_INDEX, subjects: REAL_INDEX.subjects.map(({ review_state: _dropped, ...subject }) => subject) }],
     ['carries a softened status', { ...REAL_INDEX, status: 'Reviewed by experts.' }],
     ['lists no region', { ...REAL_INDEX, subjects: [] }],
+    ['holds a region with no band the list can place it under', { ...REAL_INDEX, subjects: REAL_INDEX.subjects.map((subject) => (subject.id === 'pfc' ? { ...subject, band_ids: [] } : subject)) }],
     ['is not an index at all', { hello: 'world' }],
   ])('shows nothing and says the data failed its checks when the index %s', async (_case, badIndex) => {
     serveFiles({ ...REAL_FILES, [ANATOMY_INDEX_PATH]: JSON.stringify(badIndex) });
@@ -163,6 +178,20 @@ describe('AtlasExplorer: failures', () => {
     expect(alert.dataset.failure).toBe('invalid');
     expect(alert.textContent).toContain('arrived but failed its checks, so none of it is shown');
     expect(container.querySelector('button[data-region-id]')).toBeNull();
+  });
+
+  it('ends a request the server never answers with a notice, not an endless wait', async () => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    vi.stubGlobal('fetch', vi.fn((_input: RequestInfo | URL, init?: RequestInit) => new Promise<Response>((_resolve, reject) => {
+      init?.signal?.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')));
+    })));
+    render(<AtlasExplorer />);
+    expect(screen.getByRole('status').textContent).toBe('Loading the atlas data…');
+    await vi.advanceTimersByTimeAsync(FETCH_TIMEOUT_MS + 1);
+    vi.useRealTimers();
+    const alert = await screen.findByRole('alert');
+    expect(alert.dataset.failure).toBe('unavailable');
+    expect(screen.queryByRole('status')).toBeNull();
   });
 
   it('treats a file that is not JSON as not loaded', async () => {
