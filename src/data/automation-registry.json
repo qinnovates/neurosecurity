@@ -1,7 +1,7 @@
 {
   "$schema": "automation-registry",
   "description": "Central registry of all automation, workflows, triggers, and scheduled tasks in the qinnovate project.",
-  "last_updated": "2026-10-09T04:07:55.461Z",
+  "last_updated": "2026-10-10T03:53:15.075Z",
   "entries": [
     {
       "id": "gh-deploy",
@@ -52,7 +52,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/security-audit.yml",
       "status": "active",
-      "last_triggered": "2026-10-07T08:02:30Z",
+      "last_triggered": "2026-10-10T02:46:40Z",
       "last_status": "success",
       "dependencies": [
         ".github/security-audit/scripts/audit.py",
@@ -73,7 +73,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-news.yml",
       "status": "active",
-      "last_triggered": "2026-10-08T21:36:13Z",
+      "last_triggered": "2026-10-09T21:22:15Z",
       "last_status": "success",
       "dependencies": [
         "scripts/fetch-news.mjs"
@@ -91,8 +91,8 @@
       "type": "github_action",
       "source_file": ".github/workflows/verify-citations.yml",
       "status": "active",
-      "last_triggered": "2026-10-07T08:24:35Z",
-      "last_status": "success",
+      "last_triggered": "2026-10-09T15:16:09Z",
+      "last_status": "failure",
       "dependencies": [
         "scripts/verify/run_all.py",
         "paper/",
@@ -154,7 +154,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/dependabot-auto-merge.yml",
       "status": "active",
-      "last_triggered": "2026-10-07T08:22:55Z",
+      "last_triggered": "2026-10-10T02:46:15Z",
       "last_status": "unknown",
       "dependencies": [
         "Dependabot PRs"
@@ -580,7 +580,7 @@
       "type": "github_action",
       "source_file": ".github/workflows/update-registry.yml",
       "status": "active",
-      "last_triggered": "2026-10-09T04:07:42Z",
+      "last_triggered": "2026-10-10T03:53:01Z",
       "last_status": "unknown",
       "dependencies": [
         "scripts/update-automation-registry.mjs",
