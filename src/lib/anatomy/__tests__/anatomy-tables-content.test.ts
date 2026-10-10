@@ -155,13 +155,14 @@ describe('Data Studio descriptions and presets', () => {
 
   it('states counts that match the data', () => {
     const correspondences = crosswalk.filter((row) => row.row_kind === 'atlas_correspondence');
-    expect(descriptionOf('anatomy_sources')).toContain(`The ${tables.anatomy_sources.length} upstream brain atlases`);
-    expect(descriptionOf('anatomy_structures')).toContain(`The ${distinct(tables.anatomy_structures, 'structure_key').length} atlas labels`);
+    expect(descriptionOf('anatomy_sources')).toContain(`The ${tables.anatomy_sources.length} upstream sources registered`);
+    expect(descriptionOf('anatomy_structures')).toContain(`The ${distinct(tables.anatomy_structures, 'structure_key').length} atlas labels shipped`);
+    expect(descriptionOf('anatomy_structures')).toContain(`(${countWhere(tables.anatomy_structures, (row) => row.has_mesh === false)} rows are location markers with no mesh)`);
     expect(descriptionOf('anatomy_crosswalk')).toContain(`the ${distinct(crosswalk, 'subject_id').length} QIF brain regions`);
     expect(descriptionOf('anatomy_crosswalk')).toContain(`${distinct(correspondences, 'subject_id').length} regions have a row and ${crosswalk.length - correspondences.length} have a record`);
     expect(descriptionOf('anatomy_crosswalk')).toContain(`only ${countWhere(correspondences, (row) => row.extent_match === 'same')} of ${correspondences.length} rows`);
     expect(descriptionOf('anatomy_technique_terms')).toContain(`only ${countWhere(terms, (row) => row.lights_region === true)} of ${terms.length} terms`);
-    expect(descriptionOf('anatomy_technique_scopes')).toContain(`${countWhere(scopes, (row) => Number(row.lit_region_count) > 0)} of ${scopes.length} techniques`);
+    expect(descriptionOf('anatomy_technique_scopes')).toContain(`only ${countWhere(scopes, (row) => Number(row.lit_region_count) > 0)} of ${scopes.length} techniques have a term that resolves to one region in agreement with their band tags`);
     expect(descriptionOf('anatomy_technique_scopes')).toContain(`${countWhere(scopes, (row) => row.scope === 'band_level')} stay at band level`);
   });
 

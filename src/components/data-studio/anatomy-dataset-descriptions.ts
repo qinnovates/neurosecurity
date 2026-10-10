@@ -18,19 +18,19 @@ const CATEGORY = 'Anatomy';
 export const ANATOMY_DATASET_DESCRIPTIONS: Readonly<Record<AnatomyTableName, DatasetDescription>> = {
   anatomy_sources: {
     label: 'Atlas Sources',
-    description: 'The 16 upstream brain atlases considered for the TARA Brain Atlas, each with its stated licence, the publisher\'s quoted terms and whether it may ship. '
+    description: 'The 16 upstream sources registered for the TARA Brain Atlas (atlases, templates and position sets), each with its stated licence, the publisher\'s quoted terms and whether it may ship. '
       + 'AI-drafted and unreviewed: the licence readings were made by AI, not by a lawyer, no person has confirmed them, and they are not legal advice or a clearance for your own use.',
     category: CATEGORY,
   },
   anatomy_structures: {
     label: 'Atlas Structures',
-    description: 'The 125 atlas labels that have a shape in the TARA Brain Atlas, one row per drawn side, with the publisher\'s label name, size class, position check and mesh file digest. '
+    description: 'The 125 atlas labels shipped in the TARA Brain Atlas, one row per drawn side (4 rows are location markers with no mesh), with the publisher\'s label name, size class, position check and mesh file digest. '
       + 'AI-drafted and unreviewed: the shapes come from an AI-written pipeline and the QIF records listed as owners are an unchecked reading, so a row is not a statement of where a QIF region is.',
     category: CATEGORY,
   },
   anatomy_crosswalk: {
     label: 'Region-to-Atlas Crosswalk',
-    description: 'Correspondences between the 38 QIF brain regions and atlas labels: 32 regions have a row and 6 have a record saying no usable atlas has geometry for them. '
+    description: 'Correspondences between the 38 QIF brain regions and atlas labels: 32 regions have a row and 6 have a record saying no buildable atlas has geometry for them. '
       + 'AI-drafted and unreviewed; no neuroanatomist has checked them. Read extent_match before treating a label as the region: only 6 of 32 rows grade the shape as the same structure.',
     category: CATEGORY,
   },
@@ -43,7 +43,7 @@ export const ANATOMY_DATASET_DESCRIPTIONS: Readonly<Record<AnatomyTableName, Dat
   anatomy_technique_scopes: {
     label: 'Technique Region Coverage',
     description: 'One row per technique with a neural band, saying whether any region term could be drafted from its catalog text and, if none, the stated reason. '
-      + 'AI-drafted and unreviewed: 12 of 111 techniques have a term that resolves to a single region, and 63 stay at band level, so a missing region is not evidence that a technique spares it.',
+      + 'AI-drafted and unreviewed: only 12 of 111 techniques have a term that resolves to one region in agreement with their band tags, and 63 stay at band level, so a missing region is not evidence that a technique spares it.',
     category: CATEGORY,
   },
 };
