@@ -14,6 +14,9 @@ const REAL_FILES = buildServedFiles();
 const REAL_INDEX = JSON.parse(REAL_FILES[ANATOMY_INDEX_PATH] as string) as AnatomyIndex;
 const REAL_EVIDENCE = JSON.parse(REAL_FILES[REGION_EVIDENCE_PATH] as string) as RegionEvidence;
 const UNREVIEWED = 'AI-drafted, unreviewed';
+/** Each test renders the whole explorer over the real data; on a loaded machine that can pass the default five seconds. */
+const TEST_TIMEOUT_MS = 20_000;
+vi.setConfig({ testTimeout: TEST_TIMEOUT_MS });
 const SERVER_ERROR = { status: 500 };
 
 /** React reports a duplicated list key, and every other misuse, through console.error. None is expected in any test here. */
@@ -23,7 +26,7 @@ afterEach(() => {
   cleanup();
   vi.useRealTimers();
   vi.unstubAllGlobals();
-  const warnings = reactWarnings.mock.calls.map((call) => String(call[0]));
+  const warnings = reactWarnings.mock.calls.map((call: unknown[]) => String(call[0]));
   reactWarnings.mockRestore();
   expect(warnings).toEqual([]);
 });

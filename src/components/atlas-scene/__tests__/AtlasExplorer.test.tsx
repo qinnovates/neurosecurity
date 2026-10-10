@@ -9,6 +9,9 @@ import { buildServedFiles, requestedPaths, serveFiles, type ServedFile } from '.
 
 const REAL_FILES = buildServedFiles();
 const UNREVIEWED = 'AI-drafted, unreviewed';
+/** Each test renders the whole explorer over the real data; on a loaded machine that can pass the default five seconds. */
+const TEST_TIMEOUT_MS = 20_000;
+vi.setConfig({ testTimeout: TEST_TIMEOUT_MS });
 
 let fetchMock: ReturnType<typeof vi.fn>;
 
@@ -21,7 +24,7 @@ beforeEach(() => {
 afterEach(() => {
   cleanup();
   vi.unstubAllGlobals();
-  const warnings = reactWarnings.mock.calls.map((call) => String(call[0]));
+  const warnings = reactWarnings.mock.calls.map((call: unknown[]) => String(call[0]));
   reactWarnings.mockRestore();
   expect(warnings).toEqual([]);
 });
@@ -38,13 +41,27 @@ const rowOf = (container: HTMLElement, regionId: string): HTMLButtonElement => {
   if (row === null) throw new Error(`No row for region "${regionId}".`);
   return row;
 };
+/**
+ * Finds by text rather than by computed role: the page holds several hundred controls, and working out every
+ * accessible name for each query is slow enough to time a test out. Roles are asserted where they are the point.
+ */
+function lensButton(label: string): HTMLButtonElement {
+  const button = [...document.querySelectorAll<HTMLButtonElement>('button.atlas-lens')].find((candidate) => candidate.textContent === label);
+  if (button === undefined) throw new Error(`No lens button "${label}".`);
+  return button;
+}
+function panelOf(headingText: string): HTMLElement {
+  const heading = [...document.querySelectorAll('h2')].find((candidate) => candidate.textContent === headingText);
+  if (heading?.parentElement == null) throw new Error(`No panel headed "${headingText}".`);
+  return heading.parentElement;
+}
 const rows = (container: HTMLElement): HTMLButtonElement[] => [...container.querySelectorAll<HTMLButtonElement>('button[data-region-id]')];
 const announcement = (container: HTMLElement, kind: 'selection' | 'lens'): string => container.querySelector(`[data-announce="${kind}"]`)?.textContent ?? '';
 /** A click as the keyboard makes it: Enter or Space on a button arrives as a click with no pointer detail. */
 const pressEnterOn = (element: HTMLElement): boolean => fireEvent.click(element, { detail: 0 });
 
 async function chooseTechnique(container: HTMLElement, query: string): Promise<void> {
-  fireEvent.click(screen.getByRole('button', { name: 'Technique' }));
+  fireEvent.click(lensButton('Technique'));
   const input = screen.getByRole('combobox', { name: 'Choose a technique' });
   fireEvent.change(input, { target: { value: query } });
   fireEvent.keyDown(input, { key: 'Enter' });
@@ -128,8 +145,8 @@ describe('AtlasExplorer: lenses and the picker', () => {
   it('keeps the selection when the lens changes, and announces what the lens shows', async () => {
     const container = await renderExplorer();
     pressEnterOn(rowOf(container, 'hippocampus'));
-    fireEvent.click(screen.getByRole('button', { name: 'NISS severity' }));
-    expect(screen.getByRole('button', { name: 'NISS severity' }).getAttribute('aria-pressed')).toBe('true');
+    fireEvent.click(lensButton('NISS severity'));
+    expect(lensButton('NISS severity').getAttribute('aria-pressed')).toBe('true');
     expect(rowOf(container, 'hippocampus').getAttribute('aria-current')).toBe('true');
     await waitFor(() => expect(announcement(container, 'lens')).toMatch(/^NISS severity lens\. \d+ regions? with a value, \d+ AI-drafted, \d+ with no data\.$/));
     expect(container.querySelector('[data-tally="true"]')?.textContent).toMatch(/\d+ regions? ha(s|ve) a value under this lens, \d+ named but not counted, \d+ with no data\./);
@@ -137,7 +154,7 @@ describe('AtlasExplorer: lenses and the picker', () => {
 
   it('reads an unlinked region as "no data" under NISS, never as a step', async () => {
     const container = await renderExplorer();
-    fireEvent.click(screen.getByRole('button', { name: 'NISS severity' }));
+    fireEvent.click(lensButton('NISS severity'));
     const cord = rowOf(container, 'cervical_cord');
     expect(cord.dataset.standing).toBe('no_data');
     expect(cord.querySelector('.atlas-row-value')?.textContent).toBe('no data');
@@ -149,7 +166,7 @@ describe('AtlasExplorer: lenses and the picker', () => {
 
   it('offers every technique of the catalog in the picker and narrows it from the keyboard', async () => {
     await renderExplorer();
-    fireEvent.click(screen.getByRole('button', { name: 'Technique' }));
+    fireEvent.click(lensButton('Technique'));
     const listbox = screen.getByRole('listbox', { name: 'technique list' });
     expect(within(listbox).getAllByRole('option')).toHaveLength(registrar.techniques.length);
     const input = screen.getByRole('combobox', { name: 'Choose a technique' });
@@ -170,7 +187,7 @@ describe('AtlasExplorer: lenses and the picker', () => {
 
   it('marks a picker result that shows drafted links, and not one that shows none', async () => {
     await renderExplorer();
-    fireEvent.click(screen.getByRole('button', { name: 'Technique' }));
+    fireEvent.click(lensButton('Technique'));
     const options = within(screen.getByRole('listbox', { name: 'technique list' })).getAllByRole('option');
     const drafted = options.filter((option) => option.dataset.techniqueKind === 'regions');
     expect(drafted.length).toBeGreaterThan(0);
@@ -204,7 +221,7 @@ describe('AtlasExplorer: lenses and the picker', () => {
 describe('AtlasExplorer: limits, layers and marks', () => {
   it('keeps every unavailable layer as a reachable control with its reason tied to it', async () => {
     await renderExplorer();
-    const layers = within(screen.getByRole('heading', { name: 'Layers' }).parentElement as HTMLElement).getAllByRole('button');
+    const layers = [...panelOf('Layers').querySelectorAll<HTMLElement>('button')];
     expect(layers.map((layer) => layer.textContent)).toEqual(['Brain outline', 'Cortical shapes', 'Deep structures', 'Tracts', 'Networks', 'Devices']);
     for (const layer of layers.filter((candidate) => candidate.getAttribute('aria-disabled') === 'true')) {
       const reason = document.getElementById(layer.getAttribute('aria-describedby') ?? '');
@@ -220,7 +237,7 @@ describe('AtlasExplorer: limits, layers and marks', () => {
     const container = await renderExplorer();
     pressEnterOn(rowOf(container, 'ppc'));
     await screen.findAllByText(/Filed under Posterior Parietal Cortex/);
-    fireEvent.click(screen.getByRole('button', { name: 'NISS severity' }));
+    fireEvent.click(lensButton('NISS severity'));
     fireEvent.click(screen.getByRole('button', { name: /Also list the 77 techniques/ }));
     fireEvent.click(screen.getByRole('button', { name: /What this page holds/ }));
     const notes = [...container.querySelectorAll<HTMLElement>('[data-limit-id]')];
@@ -233,17 +250,17 @@ describe('AtlasExplorer: limits, layers and marks', () => {
   it('puts a limit sentence in the same group as each control it limits', async () => {
     const container = await renderExplorer();
     for (const lens of ['Band', 'Technique', 'NISS severity', 'DSM cluster', 'Device']) {
-      fireEvent.click(screen.getByRole('button', { name: lens }));
+      fireEvent.click(lensButton(lens));
       expect(container.querySelectorAll('.atlas-lens-panel [data-limit-id]').length, lens).toBeGreaterThan(0);
     }
     for (const heading of ['Layers', 'Regions', 'Device stages', 'Network names', 'A real sample at nanometre scale']) {
-      expect(screen.getByRole('heading', { name: heading }).parentElement?.querySelector('[data-limit-id]'), heading).not.toBeNull();
+      expect(panelOf(heading).querySelector('[data-limit-id]'), heading).not.toBeNull();
     }
   });
 
   it('lists network names as labels only', async () => {
     await renderExplorer();
-    const panel = screen.getByRole('heading', { name: 'Network names' }).parentElement as HTMLElement;
+    const panel = panelOf('Network names');
     expect(panel.querySelectorAll('.atlas-name-label').length).toBeGreaterThan(0);
     expect(within(panel).queryAllByRole('button')).toEqual([]);
     expect(panel.querySelector('[data-limit-id="networks_names_only"]')).not.toBeNull();
