@@ -14,7 +14,7 @@ const GROUP = 'neuro';
 
 export const ANATOMY_PRESETS: readonly PresetQuery[] = [
   {
-    label: 'Terms resolving to one region',
+    label: 'Terms that light a region',
     query: 'anatomy_technique_terms | where lights_region == true | join brain_regions on resolved_region_id == id | project technique_id, named_term, quoted_text, resolved_region_id, name, review_state',
     group: GROUP,
   },
