@@ -33,3 +33,5 @@ All anatomy content here is AI-drafted and unreviewed, and licence readings were
 - `qif-anatomy-technique-regions.json` -- per technique, the catalog's own words for brain structures. Never store what a term resolves to. Generated from `scripts/technique-region-curation.json` by `scripts/draft-technique-regions.mjs`; edit the curation record, not this file. `scripts/audit-technique-regions.mjs` prints what each term resolves to and every mention read and not linked
 - `qif-anatomy-review-ledger.json` -- the only record of a review. **Only the repository owner edits it; an agent never writes this file.** An entry counts only while its digest matches; adding one also needs `REVIEWED_ENTRY_COUNTS` in `src/lib/anatomy/review-state.ts` changed
 - `qif-anatomy-device-geometry.json` -- scalp fiducials and lead dimensions with their sources
+
+The sources, structures, crosswalk and technique terms are also published as the `anatomy_*` query tables and `parquet/anatomy_*.parquet`, built by `src/lib/anatomy/anatomy-tables.ts`. Every row carries its review state and status sentence. Device geometry and the review ledger are not exported.

@@ -157,7 +157,10 @@ function checkDataConsistency() {
     }
   }
 
-  // 5. Technique count in registrar
+  // 5. Anatomy tables: every one in the KQL JSON is in the parquet catalog with the same rows and columns
+  checkAnatomyTables(kqlPath, catalogPath);
+
+  // 6. Technique count in registrar
   const registrarPath = 'datalake/qtara-registrar.json';
   if (fileExists(registrarPath)) {
     try {
@@ -169,6 +172,41 @@ function checkDataConsistency() {
     }
   } else {
     fail('datalake/qtara-registrar.json missing');
+  }
+}
+
+/** Must equal ANATOMY_TABLE_PREFIX in src/lib/anatomy/anatomy-tables.ts. */
+const ANATOMY_TABLE_PREFIX = 'anatomy_';
+/** No anatomy table may reach the query console or a parquet file without these. */
+const ANATOMY_REQUIRED_COLUMNS = ['drafted_by', 'review_state', 'review_mark', 'status_sentence'];
+
+/** The first way an anatomy table and its parquet catalog entry disagree, or null. */
+function findAnatomyTableProblem(name, rows, dataset) {
+  const columns = Object.keys(rows[0] ?? {});
+  const missingColumn = ANATOMY_REQUIRED_COLUMNS.find((column) => !columns.includes(column));
+  if (missingColumn !== undefined) return `${name} has no ${missingColumn} column`;
+  if (dataset === undefined) return `${name} is not in the parquet catalog`;
+  if (dataset.rows !== rows.length) return `${name} has ${rows.length} rows but its parquet file has ${dataset.rows}`;
+  if (JSON.stringify(dataset.column_names) !== JSON.stringify(columns)) return `${name} and its parquet file have different columns`;
+  return null;
+}
+
+function checkAnatomyTables(kqlPath, catalogPath) {
+  if (!fileExists(kqlPath) || !fileExists(catalogPath)) return;
+  const tables = readJSON(kqlPath);
+  const datasets = readJSON(catalogPath).datasets ?? {};
+  const names = Object.keys(tables).filter((name) => name.startsWith(ANATOMY_TABLE_PREFIX));
+  const strayDataset = Object.keys(datasets).find((name) => name.startsWith(ANATOMY_TABLE_PREFIX) && !names.includes(name));
+  if (names.length === 0) {
+    fail('No anatomy tables in src/site/data/kql-tables.json (datalake/qif-anatomy-*.json must reach the query tables; run: npm run prebuild)');
+    return;
+  }
+  const problems = names.map((name) => findAnatomyTableProblem(name, tables[name], datasets[name])).filter((problem) => problem !== null);
+  if (strayDataset !== undefined) problems.push(`${strayDataset} is in the parquet catalog but not in the query tables`);
+  if (problems.length === 0) {
+    pass(`Anatomy tables: ${names.length} in the query tables and the parquet catalog, each with its review state`);
+  } else {
+    fail(`Anatomy tables out of sync (run: npm run prebuild, with pyarrow installed): ${problems.join('; ')}`);
   }
 }
 

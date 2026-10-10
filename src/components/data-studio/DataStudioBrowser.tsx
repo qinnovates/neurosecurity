@@ -12,6 +12,7 @@
 
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import type { TableData, Row } from '../../lib/kql-engine';
+import { ANATOMY_DATASET_DESCRIPTIONS, type DatasetDescription } from './anatomy-dataset-descriptions';
 
 interface DatasetMeta {
   id: string;
@@ -27,7 +28,7 @@ interface Props {
 }
 
 // Dataset descriptions for known tables
-const DESCRIPTIONS: Record<string, { label: string; description: string; category: string }> = {
+const DESCRIPTIONS: Record<string, DatasetDescription> = {
   techniques: { label: 'TARA Techniques', description: 'BCI threat techniques with NISS scores, severity, and dual-use classification', category: 'Threats' },
   technique_dsm: { label: 'Technique-DSM Bridge', description: 'Maps techniques to DSM-5-TR diagnostic categories (for threat modeling)', category: 'Threats' },
   technique_neurorights: { label: 'Technique-Neurorights', description: 'Maps techniques to the 5 neurorights they affect', category: 'Threats' },
@@ -52,6 +53,7 @@ const DESCRIPTIONS: Record<string, { label: string; description: string; categor
   glial_cells: { label: 'Glial Cell Types', description: 'Astrocytes, oligodendrocytes, microglia', category: 'Anatomy' },
   guardrails: { label: 'QIF Guardrails', description: 'Neuroethics constraints governing QIF output', category: 'Governance' },
   intake_ledger: { label: 'Research Intake Ledger', description: 'Proposed dataset changes from each data refresh, with source URL and independent-review verdict. Proposals, not published data — see /research/provenance/', category: 'Governance' },
+  ...ANATOMY_DATASET_DESCRIPTIONS,
 };
 
 const CATEGORY_COLORS: Record<string, string> = {

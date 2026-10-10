@@ -43,6 +43,11 @@ const INDEX_BUDGET_BYTES = 300_000;
 const ANATOMY_DATA_FILE_PATTERN = /(from|import\()\s*['"][^'"]*qif-anatomy-[a-z-]+\.json['"]/;
 const LOADER_IMPORT_PATTERN = /(from|import\()\s*['"][^'"]*load-anatomy-data['"]/;
 const LOADER_PATH = 'src/components/atlas-scene/load-anatomy-data.ts';
+/** Loads the same files for the query tables, which are also built outside Vite. anatomy-tables-content.test.ts holds the two loaders equal. */
+const TABLE_LOADER_PATH = 'src/lib/anatomy/load-anatomy-tables.ts';
+const TABLE_LOADER_IMPORT_PATTERN = /(from|import\()\s*['"][^'"]*load-anatomy-tables['"]/;
+/** The one consumer of the table loader. It publishes the tables as /data/kql-tables.json; no page is given them as props. */
+const TABLE_BUILDER_PATH = 'src/lib/kql-tables.ts';
 /** The attribution page reads the loader at build time and renders text only: source names, licenses and required wording. */
 const ENDPOINT_PATHS = ['src/pages/atlas/anatomy-evidence.json.ts', 'src/pages/atlas/anatomy-index.json.ts', 'src/pages/atlas/attribution.astro'];
 const SOURCE_EXTENSIONS = ['.ts', '.tsx', '.astro', '.mjs'];
@@ -189,8 +194,12 @@ describe('review ledger and addressing tripwires (guards)', () => {
 });
 
 describe('where anatomy data may be imported (guards)', () => {
-  it('lets only the loader import the anatomy data files', () => {
-    expect(listFilesMatching(ANATOMY_DATA_FILE_PATTERN)).toEqual([LOADER_PATH]);
+  it('lets only the loader and the query-table loader import the anatomy data files', () => {
+    expect(listFilesMatching(ANATOMY_DATA_FILE_PATTERN)).toEqual([LOADER_PATH, TABLE_LOADER_PATH].sort());
+  });
+
+  it('lets only the query-table builder import the query-table loader', () => {
+    expect(listFilesMatching(TABLE_LOADER_IMPORT_PATTERN)).toEqual([TABLE_BUILDER_PATH]);
   });
 
   it('lets only the two static endpoints and the attribution page import the loader, so nothing is serialised into a tool page', () => {

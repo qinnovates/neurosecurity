@@ -30,6 +30,8 @@ paths:
                  node datalake/scripts/draft-technique-regions.mjs
                  (`npm test` fails on a missing entry, a stale quote, or an
                  atlas word in the text that is neither linked nor skipped.)
+                 Then npm run prebuild and commit datalake/parquet/anatomy_*.parquet
+                 and catalog.json (`npm test` fails if they are stale).
 9.  SDK sync:    Copy registrar to datalake/qtara/src/qtara/data/qtara-registrar.json
 10. Pages:       Update Astro pages (atlas/tara/[id].astro, guardrails), API endpoints
 11. Components:  Update React dashboard components if new fields need UI
@@ -55,7 +57,7 @@ paths:
 5. `datalake/qtara/src/qtara/models.py` — Python SDK Pydantic models
 6. `datalake/scripts/compute-impact-chains.mjs` — precompute pipeline
 
-**Technique region links are not part of the registrar.** `datalake/qif-anatomy-technique-regions.json` records, per neural-band technique, the words the registrar text uses for brain structures. It is AI-drafted and unreviewed, is generated from `datalake/scripts/technique-region-curation.json`, and is never copied into the registrar, the Python SDK or the STIX export. A link may be promoted into a registrar field only after the repository owner's review of it is in `datalake/qif-anatomy-review-ledger.json`.
+**Technique region links are not part of the registrar.** `datalake/qif-anatomy-technique-regions.json` records, per neural-band technique, the words the registrar text uses for brain structures. It is AI-drafted and unreviewed, is generated from `datalake/scripts/technique-region-curation.json`, and is never copied into the registrar, the Python SDK or the STIX export. Its only exports are the `anatomy_technique_terms` and `anatomy_technique_scopes` query tables and parquet files (see `.claude/rules/propagation.md`); the `techniques` table gains no region column. A link may be promoted into a registrar field only after the repository owner's review of it is in `datalake/qif-anatomy-review-ledger.json`.
 
 **Technique count references:** NEVER hardcode technique counts in .astro pages or docs.
 Use `import { TECHNIQUE_COUNT } from '@lib/threat-data'` in Astro/TS, or pull from registrar `statistics.total_techniques` in scripts.
