@@ -9,7 +9,7 @@ import { isRecord } from '@/lib/threat-model/guards';
 import { readValidForAddressing } from './addressing-version';
 import {
   BAND_LEVEL_REASONS, DRAFTERS, TECHNIQUE_SCOPES,
-  type TechniqueLink, type TechniqueRegionEntry, type TechniqueRegions,
+  type BandLevelReason, type TechniqueLink, type TechniqueRegionEntry, type TechniqueRegions,
 } from './anatomy-types';
 import { rejectBandKeys } from './band-key-scan';
 import { parseEvidence, readRationale, type ClaimBasis } from './evidence';
@@ -69,6 +69,13 @@ function parseLink(value: unknown, location: FieldLocation, techniqueId: string)
   return link;
 }
 
+/** The reason a band_level entry opens its rationale with, or null for any other entry or an unlisted reason. */
+export function readBandLevelReason(entry: Pick<TechniqueRegionEntry, 'scope' | 'rationale'>): BandLevelReason | null {
+  if (entry.scope !== 'band_level') return null;
+  const statedReason = entry.rationale.split(REASON_SEPARATOR)[0];
+  return BAND_LEVEL_REASONS.find((reason) => reason === statedReason) ?? null;
+}
+
 /** A band_level entry cannot hold links, and must open its rationale with a reason from the closed list. */
 function rejectScopeMismatch(entry: TechniqueRegionEntry, location: FieldLocation): void {
   const linksLocation = childOf(location, 'links');
@@ -79,8 +86,7 @@ function rejectScopeMismatch(entry: TechniqueRegionEntry, location: FieldLocatio
   if (entry.links.length > 0) {
     failAt(linksLocation, 'a band_level entry says no region could be drafted, so it cannot hold links', 'Remove the links, or change scope to "regions".');
   }
-  const statedReason = entry.rationale.split(REASON_SEPARATOR)[0];
-  if (!(BAND_LEVEL_REASONS as readonly string[]).includes(statedReason)) {
+  if (readBandLevelReason(entry) === null) {
     failAt(childOf(location, 'rationale'), `a band_level rationale must start with one of: ${BAND_LEVEL_REASONS.join(', ')}`,
       'Write the reason, a colon, then the explanation.');
   }

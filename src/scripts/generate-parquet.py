@@ -10,6 +10,12 @@ Architecture:
   datalake/*.json → PyArrow → datalake/parquet/*.parquet
   Prebuild copies to src/site/data/parquet/ for serving on the live site.
 
+  The anatomy tables (anatomy_*) are the exception: they are AI-drafted and
+  carry derived review state, so they are not flattened here a second time.
+  Their rows are read from src/site/data/kql-tables.json, which
+  src/scripts/generate-kql-json.mjs writes from src/lib/anatomy/. Run that
+  script first (npm run prebuild does).
+
 Usage:
   python3 scripts/generate-parquet.py
   python3 scripts/generate-parquet.py --dry-run
@@ -27,6 +33,9 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 SHARED = ROOT / "datalake"
 SRC_DATA = ROOT / "src" / "data"
 OUT = ROOT / "datalake" / "parquet"
+KQL_TABLES = ROOT / "src" / "site" / "data" / "kql-tables.json"
+# Must equal ANATOMY_TABLE_PREFIX in src/lib/anatomy/anatomy-tables.ts
+ANATOMY_TABLE_PREFIX = "anatomy_"
 
 # Zstd level 3: 30-50% better compression than Snappy, sub-ms decompression at these sizes
 COMPRESSION = "zstd"
@@ -160,6 +169,37 @@ def flatten_attack_chains(doc) -> list:
                 "step_evidence_source": step_evidence.get("source_url", ""),
             })
     return rows
+
+
+class AnatomyTablesError(RuntimeError):
+    """The anatomy tables could not be read from the generated query-table file."""
+
+    def __init__(self, problem: str) -> None:
+        super().__init__(
+            f"{KQL_TABLES.relative_to(ROOT)}: {problem}. "
+            "Run `node src/scripts/generate-kql-json.mjs` (or `npm run prebuild`) and try again. "
+            "No anatomy parquet file was written."
+        )
+
+
+def load_anatomy_tables(path: Path) -> dict[str, list[dict[str, object]]]:
+    """Read the anatomy tables exactly as src/lib/anatomy/ built them.
+
+    Nothing is derived or renamed here: the review state, the status sentence and
+    the evidence columns of each row are whatever the TypeScript builder wrote.
+    """
+    if not path.exists():
+        raise AnatomyTablesError("the file does not exist")
+    tables = load_json(path)
+    if not isinstance(tables, dict):
+        raise AnatomyTablesError("expected an object of tables")
+    anatomy = {name: rows for name, rows in tables.items() if name.startswith(ANATOMY_TABLE_PREFIX)}
+    if not anatomy:
+        raise AnatomyTablesError(f"it holds no table named {ANATOMY_TABLE_PREFIX}*")
+    for name, rows in anatomy.items():
+        if not isinstance(rows, list) or not rows or not all(isinstance(row, dict) for row in rows):
+            raise AnatomyTablesError(f"table {name} is not a non-empty list of rows")
+    return anatomy
 
 
 def write_parquet(name: str, rows: list, catalog: dict):
@@ -358,6 +398,10 @@ def main():
             write_parquet(name, flat_rows, catalog)
         except Exception as e:
             print(f"  [error] {name}: {e}")
+
+    # === TARA Brain Atlas anatomy (AI-drafted; rows come from the TypeScript builder, see module docstring) ===
+    for name, rows in load_anatomy_tables(KQL_TABLES).items():
+        write_parquet(name, rows, catalog)
 
     # === Write catalog manifest ===
     manifest = {

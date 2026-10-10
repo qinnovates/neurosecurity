@@ -11,6 +11,7 @@ import type { CheckStatus } from './evidence';
 import {
   LEDGER_ENTRY_KINDS, REVIEW_LEDGER_FILE, type LedgerEntryKind, type ReviewLedger, type ReviewerRole,
 } from './parse-review-ledger';
+import type { LicenceVerdict } from './source-types';
 
 export type ReviewState =
   | { state: 'ai_drafted_unreviewed' }
@@ -37,6 +38,18 @@ export function findReview(ledger: ReviewLedger, kind: LedgerEntryKind, key: str
   const reviewer = ledger.reviewers.find((candidate) => candidate.id === entry?.reviewer_id);
   if (entry === undefined || reviewer === undefined) return UNREVIEWED;
   return { state: 'reviewed', reviewer_role: reviewer.role, reviewed_on: entry.reviewed_on };
+}
+
+/**
+ * A licence reading has no ledger entry kind, and `human_confirmed` can only be
+ * false, so every reading is unreviewed. The table is keyed by the field's own
+ * type: the day a reading can be confirmed, this stops compiling until someone
+ * decides what a confirmed reading's state and mark are.
+ */
+const LICENCE_READING_STATES: Readonly<Record<`${LicenceVerdict['human_confirmed']}`, ReviewState>> = { false: UNREVIEWED };
+
+export function reviewStateOfLicenceReading(verdict: Pick<LicenceVerdict, 'human_confirmed'>): ReviewState {
+  return LICENCE_READING_STATES[`${verdict.human_confirmed}`];
 }
 
 function rankOf(state: ReviewState): number {
