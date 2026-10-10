@@ -21,6 +21,8 @@ Usage:
   python3 scripts/generate-parquet.py --dry-run
 """
 
+from __future__ import annotations
+
 import json
 import sys
 from pathlib import Path
@@ -178,8 +180,20 @@ class AnatomyTablesError(RuntimeError):
         super().__init__(
             f"{KQL_TABLES.relative_to(ROOT)}: {problem}. "
             "Run `node src/scripts/generate-kql-json.mjs` (or `npm run prebuild`) and try again. "
-            "No anatomy parquet file was written."
+            "No parquet file was written."
         )
+
+
+def list_anatomy_inputs() -> list[Path]:
+    """Every file the anatomy tables are built from: the datalake JSON, the curation record and the pipeline's outputs."""
+    assets = ROOT / "src" / "site" / "atlas-assets"
+    return [*SHARED.glob("*.json"), SHARED / "scripts" / "technique-region-curation.json", *assets.rglob("*.json")]
+
+
+def find_newer_input(path: Path) -> Path | None:
+    """An input changed after the query-table file was written, or None when the file is current."""
+    written = path.stat().st_mtime
+    return next((source for source in list_anatomy_inputs() if source.exists() and source.stat().st_mtime > written), None)
 
 
 def load_anatomy_tables(path: Path) -> dict[str, list[dict[str, object]]]:
@@ -190,6 +204,9 @@ def load_anatomy_tables(path: Path) -> dict[str, list[dict[str, object]]]:
     """
     if not path.exists():
         raise AnatomyTablesError("the file does not exist")
+    newer_input = find_newer_input(path)
+    if newer_input is not None:
+        raise AnatomyTablesError(f"it is older than {newer_input.relative_to(ROOT)}, so its anatomy rows may be stale")
     tables = load_json(path)
     if not isinstance(tables, dict):
         raise AnatomyTablesError("expected an object of tables")
@@ -268,6 +285,8 @@ def build_flat_table(data, key=None, flatten_fn=None):
 
 
 def main():
+    # Read first: a missing or malformed query-table file must stop the run before any file is written.
+    anatomy_tables = load_anatomy_tables(KQL_TABLES)
     OUT.mkdir(parents=True, exist_ok=True)
     catalog = {}
 
@@ -400,7 +419,7 @@ def main():
             print(f"  [error] {name}: {e}")
 
     # === TARA Brain Atlas anatomy (AI-drafted; rows come from the TypeScript builder, see module docstring) ===
-    for name, rows in load_anatomy_tables(KQL_TABLES).items():
+    for name, rows in anatomy_tables.items():
         write_parquet(name, rows, catalog)
 
     # === Write catalog manifest ===
