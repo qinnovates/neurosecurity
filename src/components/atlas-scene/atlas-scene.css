@@ -18,12 +18,10 @@
   --atlas-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --atlas-row: 2.75rem;
   --atlas-spine: 3.5rem;
-  display: grid; gap: 1rem; grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); align-items: start;
+  display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); align-items: start;
   color: var(--atlas-ink); font-family: var(--font-body, system-ui, sans-serif); font-size: 0.8125rem; line-height: 1.45;
 }
-.atlas-root > * { grid-column: 1 / -1; min-width: 0; }
-.atlas-root > .atlas-layers { grid-column: 1; }
-.atlas-root > .atlas-lens-panel { grid-column: 2; }
+.atlas-root > * { min-width: 0; }
 
 .atlas-panel { background: var(--atlas-panel); border: 1px solid var(--color-glass-border); border-radius: 0.75rem; padding: 1rem 1.125rem; }
 .atlas-heading { margin: 0 0 0.5rem; font-family: var(--font-heading, inherit); font-size: 1rem; font-weight: 700; letter-spacing: -0.005em; }
@@ -65,11 +63,11 @@
 .atlas-name-label { padding: 0.25rem 0.625rem; border: 1px solid var(--atlas-line); border-radius: 999px; }
 
 /* Layers: a short list, each unavailable one with its reason beside it. */
-.atlas-layer-list { display: grid; gap: 0.5rem; margin-top: 0.5rem; }
+.atlas-layer-list { display: grid; gap: 0.5rem 1.25rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); align-items: start; margin-top: 0.5rem; }
 .atlas-layer .atlas-limit { margin-left: 0.25rem; overflow-wrap: anywhere; }
 
 /* The lens bar. The thumb slides to the active lens; it marks a choice and carries no other meaning. */
-.atlas-lenses { position: relative; display: grid; grid-template-columns: repeat(var(--atlas-lens-count), minmax(0, 1fr)); padding: 0.1875rem; background: var(--atlas-ground); border: 1px solid var(--atlas-line-strong); border-radius: 0.625rem; }
+.atlas-lenses { position: relative; display: grid; max-width: 44rem; grid-template-columns: repeat(var(--atlas-lens-count), minmax(0, 1fr)); padding: 0.1875rem; background: var(--atlas-ground); border: 1px solid var(--atlas-line-strong); border-radius: 0.625rem; }
 .atlas-lens-thumb { position: absolute; top: 0.1875rem; bottom: 0.1875rem; left: 0.1875rem; width: calc((100% - 0.375rem) / var(--atlas-lens-count)); border-radius: 0.4375rem; background: var(--atlas-accent-fill); transform: translateX(calc(var(--atlas-lens-index) * 100%)); transition: transform var(--atlas-move) var(--atlas-ease); }
 .atlas-lens { position: relative; padding: 0 0.25rem; font-weight: 600; background: transparent; border-color: transparent; overflow-wrap: anywhere; }
 .atlas-lens[aria-pressed="true"] { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
@@ -179,8 +177,6 @@
 }
 
 @media (max-width: 960px) {
-  .atlas-root { grid-template-columns: minmax(0, 1fr); }
-  .atlas-root > .atlas-layers, .atlas-root > .atlas-lens-panel { grid-column: 1; }
   .atlas-main { grid-template-columns: minmax(0, 1fr); }
   .atlas-inspector { position: static; max-height: none; }
   .atlas-stages { flex-direction: column; align-items: stretch; }
