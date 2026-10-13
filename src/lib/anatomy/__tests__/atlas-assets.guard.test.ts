@@ -1,7 +1,7 @@
 // @vitest-environment node
 import fs from 'node:fs';
 import path from 'node:path';
-import { Box3, type BufferGeometry, type Mesh, type Object3D } from 'three';
+import { Box3, Vector3, type BufferGeometry, type Mesh, type Object3D } from 'three';
 import { describe, expect, it } from 'vitest';
 import { loadAnatomyData } from '@/components/atlas-scene/load-anatomy-data';
 import {
@@ -56,6 +56,17 @@ async function createLoader(): Promise<GeometryLoader> {
   return new (loaderModule as GeometryLoaderModule).GLTFLoader();
 }
 
+/** The volume a loaded mesh encloses in world space, signed by its winding: sum over triangles of a . (b x c) / 6. */
+function measureSignedVolume(mesh: Mesh<BufferGeometry>): number {
+  const positions = mesh.geometry.getAttribute('position');
+  const order = mesh.geometry.getIndex();
+  if (order === null) throw new Error('a shipped mesh has no index; the guard cannot read its winding');
+  const corner = (index: number): Vector3 => new Vector3().fromBufferAttribute(positions, order.getX(index)).applyMatrix4(mesh.matrixWorld);
+  let total = 0;
+  for (let index = 0; index < order.count; index += 3) total += corner(index).dot(corner(index + 1).cross(corner(index + 2)));
+  return total / 6;
+}
+
 /** Parses bytes with the loader the page uses and lists each mesh node's ids, vertex count and world bounds. */
 async function loadNodes(bytes: Uint8Array): Promise<LoadedNode[]> {
   const buffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer;
@@ -66,7 +77,10 @@ async function loadNodes(bytes: Uint8Array): Promise<LoadedNode[]> {
     if (!(object as Mesh).isMesh) return;
     const mesh = object as Mesh<BufferGeometry>;
     const box = new Box3().setFromObject(mesh);
-    nodes.push({ extras: mesh.userData, vertexCount: mesh.geometry.getAttribute('position').count, boundsMm: [box.min.toArray(), box.max.toArray()] });
+    nodes.push({
+      extras: mesh.userData, vertexCount: mesh.geometry.getAttribute('position').count, boundsMm: [box.min.toArray(), box.max.toArray()],
+      signedVolumeMm3: measureSignedVolume(mesh),
+    });
   });
   return nodes;
 }
@@ -167,6 +181,9 @@ describe('asset guards on bad fixtures', () => {
     const shifted: LoadedNode = { ...first, boundsMm: [first.boundsMm[0], [first.boundsMm[1][0] + 40, first.boundsMm[1][1], first.boundsMm[1][2]]] };
     expect(findNodeProblems(asset, [shifted], data.labelTables).join(' ')).toContain('outside the bounds');
     expect(findNodeProblems(asset, [], data.labelTables).join(' ')).toContain('but the file has none');
+    expect(first.signedVolumeMm3).toBeGreaterThan(0);
+    expect(findNodeProblems(asset, [{ ...first, signedVolumeMm3: -first.signedVolumeMm3 }], data.labelTables).join(' ')).toContain('is wound inward');
+    expect(findNodeProblems(asset, [{ ...first, signedVolumeMm3: 0 }], data.labelTables).join(' ')).toContain('is wound inward');
   });
 
   it('fails a manifest node, mesh or marker, whose label is not in its atlas\'s table', () => {
