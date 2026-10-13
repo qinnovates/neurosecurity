@@ -48,9 +48,13 @@ export function isAnatomyDataModule(filePath) {
   return ANATOMY_DATA_MODULES.includes(filePath) || ANATOMY_DATA_FILE_PATTERNS.some((pattern) => pattern.test(filePath));
 }
 
-/** `/src/site/x/*.json` as a pattern over repository paths: `**` crosses folders, `*` does not. */
-function globToPattern(glob) {
-  const body = glob.replace(/^\//, '').replace(GLOB_SPECIAL_PATTERN, '\\$&').replaceAll('**', '\u0000').replaceAll('*', '[^/]*').replaceAll('\u0000', '.*');
+/**
+ * A glob as a pattern over repository paths: `**` crosses folders, `*` does not.
+ * `/src/x/*.json` is anchored at the repository root; `./x/*.json` and `../x/*.json` at the importing file's folder.
+ */
+function globToPattern(glob, fromFile) {
+  const anchored = glob.startsWith('/') ? glob.slice(1) : path.posix.normalize(path.posix.join(path.posix.dirname(fromFile), glob));
+  const body = anchored.replace(GLOB_SPECIAL_PATTERN, '\\$&').replaceAll('**', '\u0000').replaceAll('*', '[^/]*').replaceAll('\u0000', '.*');
   return new RegExp(`^${body}$`);
 }
 
@@ -91,7 +95,7 @@ export function resolveImport(specifier, fromFile, exists) {
 function listReached(filePath, tree) {
   const { specifiers, globs } = listImports(tree.read(filePath));
   const imported = specifiers.map((specifier) => resolveImport(specifier, filePath, tree.exists)).filter((resolved) => resolved !== null);
-  const globbed = globs.flatMap((glob) => tree.listFiles().filter((candidate) => globToPattern(glob).test(candidate)));
+  const globbed = globs.flatMap((glob) => tree.listFiles().filter((candidate) => globToPattern(glob, filePath).test(candidate)));
   return [...imported, ...globbed];
 }
 

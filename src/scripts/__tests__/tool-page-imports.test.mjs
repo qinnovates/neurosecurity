@@ -94,9 +94,15 @@ describe('findForbiddenImportChain on the cases an independent verifier built', 
     expect(findForbiddenImportChain(PAGE, importing('../../site/atlas-assets/manifest.json'))?.at(-1)).toBe('src/site/atlas-assets/manifest.json');
   });
 
-  it('fails a Lab component that globs the label tables', () => {
-    const globbing = buildLabTree({ [QUERY_MODE]: "const tables = import.meta.glob('/src/site/atlas-assets/*/labels-*.json', { eager: true });\nexport default tables;" });
-    expect(findForbiddenImportChain(PAGE, globbing)?.at(-1)).toBe('src/site/atlas-assets/open/labels-fixture.json');
+  it.each(['/src/site/atlas-assets/*/labels-*.json', '../../site/atlas-assets/*/labels-*.json', '../../site/**/*.json'])('fails a Lab component that globs the label tables with %s', (glob) => {
+    const globbing = buildLabTree({ [QUERY_MODE]: `const tables = import.meta.glob('${glob}', { eager: true });\nexport default tables;` });
+    expect(findForbiddenImportChain(PAGE, globbing)?.at(-2)).toBe(QUERY_MODE);
+    expect(isAnatomyDataModule(findForbiddenImportChain(PAGE, globbing)?.at(-1))).toBe(true);
+  });
+
+  it('passes a Lab component whose glob matches no anatomy file', () => {
+    const globbing = buildLabTree({ [QUERY_MODE]: "const modes = import.meta.glob('./*.tsx');\nexport default modes;" });
+    expect(findForbiddenImportChain(PAGE, globbing)).toBeNull();
   });
 });
 

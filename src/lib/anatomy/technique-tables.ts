@@ -101,10 +101,10 @@ function countColumns(links: readonly IndexTechniqueLink[]): AnatomyRow {
  * unreviewed whatever its terms' states are. `reviewed_term_count` says how
  * many of its terms a review covers.
  */
-function toSummaryRow(technique: IndexTechnique, drafters: readonly ReviewedLink[], data: AnatomyData): AnatomyRow {
+function toSummaryRow(technique: IndexTechnique, reviewedLinks: readonly ReviewedLink[], data: AnatomyData): AnatomyRow {
   const entry = data.techniqueRegions.techniques[technique.id];
   return {
-    ...draftColumns(SUMMARY_TABLE, drafters.map((reviewed) => reviewed.link.drafted_by), toIndexReviewState(UNREVIEWED), data.techniqueRegions.status),
+    ...draftColumns(SUMMARY_TABLE, reviewedLinks.map((reviewed) => reviewed.link.drafted_by), toIndexReviewState(UNREVIEWED), data.techniqueRegions.status),
     ...techniqueColumns(technique),
     scope: technique.scope,
     band_level_reason: (entry === undefined ? null : readBandLevelReason(entry)) ?? NO_REASON,
