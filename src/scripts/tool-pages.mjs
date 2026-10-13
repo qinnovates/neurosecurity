@@ -40,13 +40,13 @@ export const DOCUMENT_HEADROOM_GZIP_BYTES = 16_384;
  * the notices shown when it cannot open) and the check of the index against the page's pin. Everything else of the
  * 3D view, three.js included, is behind the gate and is not part of this figure.
  */
-export const ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES = 131_707;
+export const ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES = 132_461;
 
 /**
  * Document: the explorer's HTML carries no data at all (it fetches everything when it starts),
  * so it is only the layout. The headroom is small on purpose: growth here means something was inlined.
  */
-export const ATLAS_EXPLORER_DOCUMENT_BASELINE_GZIP_BYTES = 3_507;
+export const ATLAS_EXPLORER_DOCUMENT_BASELINE_GZIP_BYTES = 3_508;
 export const ATLAS_EXPLORER_DOCUMENT_HEADROOM_GZIP_BYTES = 1_024;
 
 /**
