@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-10-13T13:09:40.500114+00:00",
+    "generated": "2026-10-13T17:03:28.310053+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
@@ -839,8 +839,8 @@
         "check_status",
         "addressing_version"
       ],
-      "size_bytes": 17088,
-      "sha256": "01e85f2e29c72e5901ca4cdade33232c9ef56692b34bb8ae8d69353eb016295f",
+      "size_bytes": 17094,
+      "sha256": "a246c5c680f815913928148812787659ff7fd60eaf330520d1fcd29dc486d828",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_crosswalk.parquet"
     },
