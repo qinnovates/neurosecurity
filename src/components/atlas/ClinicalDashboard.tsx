@@ -1822,10 +1822,6 @@ function DsmView({ data }: { data: ClinicalData }) {
 
   return (
     <div>
-      <p className="text-[10px] mb-4 italic" style={{ color: 'var(--color-text-faint)' }}>
-        {DSM_QUALIFIER}
-      </p>
-
       {clusters.map(([cluster, conditions]) => (
         <div key={cluster} className="mb-4">
           <div className="flex items-center gap-2 mb-2">
