@@ -52,9 +52,10 @@ CONFIDENCE_NOTES = {
               "where the neck muscles attach but is not the bone bump itself. Putting it {inion_shift_mm} mm higher or lower moves {back_electrode} "
               "by up to {inion_effect_mm} mm, and {inion_far_shift_mm} mm by up to {inion_far_effect_mm} mm. " + WEAK_LANDMARK_SENTENCE),
     "left_preauricular": ("Weak. The rule finds a hollow {hollow_depth_mm} mm deep in front of the ear's ridge. That may be the notch beside the "
-                          "outer ear and not the point in front of the tragus that the definition names. The average image blurs the ear. "
-                          + WEAK_LANDMARK_SENTENCE + " Moving it {ear_shift_mm} mm forward, back, up or down moves {near_electrode} by {near_low_mm} to {near_high_mm} mm "
-                          "and {vertex} by {vertex_low_mm} to {vertex_high_mm} mm."),
+                          "ear, not the point in front of the tragus the definition names. "
+                          + WEAK_LANDMARK_SENTENCE + " Shifting it {ear_shift_mm:g} mm in the side view (5 to 7 mm over the skin) moves {near_electrode} by "
+                          "{near_low_mm:.1f} to {near_high_mm:.1f} mm; {vertex} moves about {vertex_updown_mm:.1f} mm for up or down, "
+                          "{vertex_flat_mm:.1f} mm for forward or back."),
 }
 CONFIDENCE_NOTES["right_preauricular"] = CONFIDENCE_NOTES["left_preauricular"]
 HEAD_QUOTE = "It is the skin of an average head, not of a person."
@@ -85,7 +86,7 @@ def confidence_note(name: str, document: dict[str, Any]) -> str:
         back_electrode=moved["inion"]["electrode"], inion_far_effect_mm=max(moved["inion"]["higher_mm"], moved["inion"]["lower_mm"]),
         ear_shift_mm=ear.get("shift_mm"), near_electrode=ear.get("near_electrode"), vertex=VERTEX,
         near_low_mm=min(ear.get("near_moved_mm", [None])), near_high_mm=max(ear.get("near_moved_mm", [None])),
-        vertex_low_mm=min(ear.get("vertex_moved_mm", [None])), vertex_high_mm=max(ear.get("vertex_moved_mm", [None])))
+        vertex_updown_mm=max(ear.get("vertex_moved_mm", [0.0] * 4)[2:]), vertex_flat_mm=max(ear.get("vertex_moved_mm", [0.0] * 4)[:2]))
 
 
 def _rounded(point: Any) -> list[float]:

@@ -136,7 +136,7 @@ describe('the committed device geometry (guard)', () => {
   it('keeps the variability figure as words with its source and how much of it was read', () => {
     expect(index.devices.facts).toHaveLength(1);
     expect(index.devices.facts[0]).toMatchObject({ id: 'electrode_to_cortex_variability', read_depth: 'abstract_only' });
-    expect(index.devices.facts[0].statement).toMatch(/16 adults.*not this template/);
+    expect(index.devices.facts[0].statement).toMatch(/^In one study, the brain.*not this template/);
     expect(Object.keys(index.devices.facts[0]).sort()).toEqual(['citation', 'id', 'read_depth', 'statement', 'url']);
   });
 });
