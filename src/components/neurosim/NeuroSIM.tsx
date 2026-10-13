@@ -1,16 +1,18 @@
 /**
- * NeuroSIM — Interactive 3D neuron simulation visualization.
+ * NeuroSIM — Interactive neuron simulation visualization.
  *
- * Three.js (react-three-fiber) with brain.glb model for immersive 3D
- * from brain networks down to molecular machinery.
+ * The network level is a list of regions (NetworkRegionList); the brain itself is on the
+ * atlas explorer page. The levels below it are Three.js (react-three-fiber) scenes,
+ * from the cortical column down to molecular machinery.
  * All parameters from published neuroscience literature (see qif-neurosim.json).
  */
 
 import { useState, useCallback, useRef, useEffect, useMemo, Suspense } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { useWebGLSupport, WebGLFallback } from '../WebGLCheck';
+import NetworkRegionList from './NetworkRegionList';
 import SWCNeuron from './SWCNeuron';
 import PDBMolecule from './PDBMolecule';
 
@@ -133,6 +135,8 @@ interface SimData {
 }
 
 type ZoomLevel = 'network' | 'region' | 'neuron' | 'synapse' | 'molecular';
+/** The levels drawn as a 3D scene. The network level is a list. */
+type SceneZoomLevel = Exclude<ZoomLevel, 'network'>;
 
 // ═══ Constants ═══
 
@@ -144,26 +148,11 @@ const ZOOM_LEVELS: { id: ZoomLevel; label: string; icon: string; color: string; 
   { id: 'molecular', label: 'Molecular', icon: '\u269b', color: '#ef4444', description: 'Ion channels, spines & receptors', scale: '~10 nm' },
 ];
 
-const CAMERA_CONFIGS: Record<ZoomLevel, { position: [number, number, number]; target: [number, number, number]; fov: number }> = {
-  network:   { position: [0, 5, 50],  target: [0, 0, 0],   fov: 50 },
+const CAMERA_CONFIGS: Record<SceneZoomLevel, { position: [number, number, number]; target: [number, number, number]; fov: number }> = {
   region:    { position: [0, 2, 12],  target: [0, 0, 0],   fov: 40 },
   neuron:    { position: [0, 3, 16],  target: [0, 2, 0],   fov: 42 },
   synapse:   { position: [0, 0, 12],  target: [0, 0, 0],   fov: 38 },
   molecular: { position: [0, 0, 10],  target: [0, -1, 0],  fov: 35 },
-};
-
-const REGION_3D_POS: Record<string, [number, number, number]> = {
-  prefrontal:     [0, 8, 12],
-  motor:          [-3, 10, 5],
-  somatosensory:  [-4, 9, -2],
-  visual:         [0, 3, -13],
-  auditory:       [-11, 1, 3],
-  temporal:       [-9, -3, 6],
-  parietal:       [-1, 11, -5],
-  hippocampus:    [-4, -4, 0],
-  amygdala:       [-6, -6, 6],
-  thalamus:       [0, 0, 0],
-  basal_ganglia:  [3, -2, 3],
 };
 
 // ═══ Shared UI Components ═══
@@ -292,11 +281,9 @@ function DepthGauge({ zoom, onZoom }: { zoom: ZoomLevel; onZoom: (z: ZoomLevel) 
 //  THREE.JS SCENE COMPONENTS
 // ═══════════════════════════════════════════════════
 
-useGLTF.preload('/models/brain.glb');
-
 // --- Scene Controls (camera + orbit) ---
 
-function SceneControls({ zoom }: { zoom: ZoomLevel }) {
+function SceneControls({ zoom }: { zoom: SceneZoomLevel }) {
   const controlsRef = useRef<any>(null);
   const { camera } = useThree();
   const config = CAMERA_CONFIGS[zoom];
@@ -323,206 +310,6 @@ function SceneControls({ zoom }: { zoom: ZoomLevel }) {
       minDistance={3}
       maxDistance={80}
     />
-  );
-}
-
-// --- Brain Model ---
-
-function BrainWireframe({ color }: { color: string }) {
-  const { scene } = useGLTF('/models/brain.glb');
-
-  useEffect(() => {
-    scene.traverse((child) => {
-      if ((child as THREE.Mesh).isMesh) {
-        (child as THREE.Mesh).material = new THREE.MeshBasicMaterial({
-          color: new THREE.Color(color),
-          wireframe: true,
-          transparent: true,
-          opacity: 0.35,
-        });
-      }
-    });
-  }, [scene, color]);
-
-  return <primitive object={scene} scale={18} />;
-}
-
-function BrainGhost({ color }: { color: string }) {
-  const { scene } = useGLTF('/models/brain.glb');
-  const [ghostScene, setGhostScene] = useState<THREE.Group | null>(null);
-
-  useEffect(() => {
-    const cloned = scene.clone(true);
-    cloned.traverse((child) => {
-      if ((child as THREE.Mesh).isMesh) {
-        (child as THREE.Mesh).material = new THREE.MeshBasicMaterial({
-          color: new THREE.Color(color),
-          transparent: true,
-          opacity: 0.12,
-          side: THREE.DoubleSide,
-        });
-      }
-    });
-    setGhostScene(cloned);
-  }, [scene, color]);
-
-  if (!ghostScene) return null;
-  return <primitive object={ghostScene} scale={18} />;
-}
-
-// --- Region Hotspot ---
-
-function RegionHotspot3D({ position, color, size, isActive, onHover, onClick }: {
-  position: [number, number, number];
-  color: string;
-  size: number;
-  isActive: boolean;
-  onHover: (active: boolean) => void;
-  onClick: () => void;
-}) {
-  const ref = useRef<THREE.Mesh>(null);
-  const glowRef = useRef<THREE.Mesh>(null);
-  const ringRef = useRef<THREE.Mesh>(null);
-
-  useFrame((state) => {
-    const t = state.clock.elapsedTime;
-    if (ref.current) {
-      const s = isActive ? 1.0 + Math.sin(t * 3) * 0.25 : 1.0 + Math.sin(t * 2 + position[0]) * 0.1;
-      ref.current.scale.setScalar(s);
-    }
-    if (glowRef.current) {
-      const gs = isActive ? 1.3 + Math.sin(t * 2.5) * 0.15 : 1.0 + Math.sin(t * 1.5 + position[1]) * 0.08;
-      glowRef.current.scale.setScalar(gs);
-      (glowRef.current.material as THREE.MeshBasicMaterial).opacity = isActive ? 0.25 + Math.sin(t * 3) * 0.1 : 0.12;
-    }
-    if (ringRef.current) {
-      ringRef.current.rotation.z = t * 0.8;
-    }
-  });
-
-  return (
-    <group position={position} renderOrder={10}>
-      <mesh ref={glowRef} renderOrder={10}>
-        <sphereGeometry args={[size * 1.0, 12, 12]} />
-        <meshBasicMaterial color={color} transparent opacity={0.12} depthWrite={false} depthTest={false} />
-      </mesh>
-      <mesh
-        ref={ref}
-        renderOrder={11}
-        onPointerOver={(e) => { e.stopPropagation(); onHover(true); }}
-        onPointerOut={() => onHover(false)}
-        onClick={(e) => { e.stopPropagation(); onClick(); }}
-      >
-        <sphereGeometry args={[size * 0.5, 12, 12]} />
-        <meshBasicMaterial color={color} transparent opacity={isActive ? 0.85 : 0.55} depthWrite={false} depthTest={false} />
-      </mesh>
-      <mesh ref={ringRef} renderOrder={10}>
-        <ringGeometry args={[size * 0.65, size * 0.75, 24]} />
-        <meshBasicMaterial color={color} transparent opacity={isActive ? 0.5 : 0.2} side={THREE.DoubleSide} depthWrite={false} depthTest={false} />
-      </mesh>
-    </group>
-  );
-}
-
-// --- Signal Pulses ---
-
-function SignalPulses({ data }: { data: SimData }) {
-  const poolSize = 20;
-  const meshRefs = useRef<(THREE.Mesh | null)[]>(new Array(poolSize).fill(null));
-  const pulseState = useRef(
-    Array.from({ length: poolSize }).map(() => ({
-      from: new THREE.Vector3(), to: new THREE.Vector3(), t: 0, speed: 0, active: false, color: '#60a5fa',
-    }))
-  );
-
-  useFrame((_, delta) => {
-    pulseState.current.forEach((pulse, i) => {
-      if (!pulse.active) {
-        if (Math.random() < delta * 1.5 && data.networks.length > 0) {
-          const net = data.networks[Math.floor(Math.random() * data.networks.length)];
-          if (net.regions.length >= 2) {
-            const fi = Math.floor(Math.random() * net.regions.length);
-            let ti = Math.floor(Math.random() * (net.regions.length - 1));
-            if (ti >= fi) ti++;
-            const fp = REGION_3D_POS[net.regions[fi]];
-            const tp = REGION_3D_POS[net.regions[ti]];
-            if (fp && tp) {
-              pulse.from.set(...fp);
-              pulse.to.set(...tp);
-              pulse.t = 0;
-              pulse.speed = 0.4 + Math.random() * 0.4;
-              pulse.active = true;
-              pulse.color = net.color;
-            }
-          }
-        }
-      } else {
-        pulse.t += delta * pulse.speed;
-        if (pulse.t >= 1) pulse.active = false;
-      }
-
-      const mesh = meshRefs.current[i];
-      if (mesh) {
-        if (pulse.active) {
-          mesh.visible = true;
-          mesh.position.lerpVectors(pulse.from, pulse.to, pulse.t);
-          const opacity = Math.sin(pulse.t * Math.PI);
-          (mesh.material as THREE.MeshBasicMaterial).opacity = opacity * 0.8;
-          (mesh.material as THREE.MeshBasicMaterial).color.set(pulse.color);
-          mesh.scale.setScalar(0.3 + opacity * 0.4);
-        } else {
-          mesh.visible = false;
-        }
-      }
-    });
-  });
-
-  return (
-    <>
-      {Array.from({ length: poolSize }).map((_, i) => (
-        <mesh key={i} ref={el => { meshRefs.current[i] = el; }} visible={false}>
-          <sphereGeometry args={[1, 6, 6]} />
-          <meshBasicMaterial color="#60a5fa" transparent opacity={0} />
-        </mesh>
-      ))}
-    </>
-  );
-}
-
-// --- Network Scene (3D Brain) ---
-
-function NetworkScene3D({ data, hoveredRegion, activeNetwork, onHoverRegion, onClickRegion }: {
-  data: SimData;
-  hoveredRegion: string | null;
-  activeNetwork: string | null;
-  onHoverRegion: (id: string | null) => void;
-  onClickRegion: (id: string) => void;
-}) {
-  return (
-    <group>
-      <BrainGhost color="#dbeafe" />
-      <BrainWireframe color="#3b82f6" />
-      {data.brainRegions.map(region => {
-        const pos = REGION_3D_POS[region.id];
-        if (!pos) return null;
-        const neuronType = data.neuronTypes.find(n => n.id === region.dominantNeurons[0]);
-        const color = neuronType?.morphology.color || '#64748b';
-        const inActive = activeNetwork ? data.networks.find(n => n.id === activeNetwork)?.regions.includes(region.id) : true;
-        if (!inActive) return null;
-        return (
-          <RegionHotspot3D
-            key={region.id}
-            position={pos}
-            color={color}
-            size={2.0 + region.firingRate_Hz * 0.04}
-            isActive={hoveredRegion === region.id}
-            onHover={(active) => onHoverRegion(active ? region.id : null)}
-            onClick={() => onClickRegion(region.id)}
-          />
-        );
-      })}
-      <SignalPulses data={data} />
-    </group>
   );
 }
 
@@ -755,7 +542,7 @@ function NetworkInfoPanel({ data, hoveredRegion, activeNetwork }: {
       ) : (
         <GlassCard className="p-3">
           <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>
-            Hover over a glowing region to see details. Click to zoom into its cortical layers.
+            Point at or focus a region in the list to see details. Select it to zoom into its cortical layers.
           </p>
         </GlassCard>
       )}
@@ -1106,6 +893,18 @@ export default function NeuroSIM({ simData }: NeuroSIMProps) {
         <div className="flex gap-4">
           {/* Three.js Canvas */}
           <div className="flex-1 min-w-0">
+            {zoom === 'network' ? (
+              <GlassCard style={{ minHeight: 550 }} className="p-4">
+                <NetworkRegionList
+                  regions={simData.brainRegions}
+                  networks={simData.networks}
+                  activeNetworkId={activeNetwork}
+                  hoveredRegionId={hoveredRegion}
+                  onHoverRegion={setHoveredRegion}
+                  onSelectRegion={handleSelectRegion}
+                />
+              </GlassCard>
+            ) : (
             <GlassCard style={{ height: 550 }} className="overflow-hidden cursor-grab active:cursor-grabbing">
               {!webglSupported ? <WebGLFallback feature="neural simulation" /> : <Canvas
                 gl={{ alpha: true, antialias: true }}
@@ -1116,15 +915,6 @@ export default function NeuroSIM({ simData }: NeuroSIMProps) {
                   <directionalLight position={[10, 10, 5]} intensity={0.8} />
                   <directionalLight position={[-5, -5, 10]} intensity={0.3} color="#93c5fd" />
 
-                  {zoom === 'network' && (
-                    <NetworkScene3D
-                      data={simData}
-                      hoveredRegion={hoveredRegion}
-                      activeNetwork={activeNetwork}
-                      onHoverRegion={setHoveredRegion}
-                      onClickRegion={handleSelectRegion}
-                    />
-                  )}
                   {zoom === 'region' && <CorticalColumn3D layers={simData.corticalLayers} />}
                   {zoom === 'neuron' && <Neuron3D neuron={neuron} isAnimating={isAnimatingAP} phaseColor={currentPhase.color} />}
                   {zoom === 'synapse' && <Synapse3D synapse={simData.synapse} receptors={simData.receptors} isReleasing={isReleasing} />}
@@ -1134,6 +924,7 @@ export default function NeuroSIM({ simData }: NeuroSIMProps) {
                 </Suspense>
               </Canvas>}
             </GlassCard>
+            )}
 
             {/* Controls bar */}
             <div className="mt-3 flex flex-wrap items-center gap-3">

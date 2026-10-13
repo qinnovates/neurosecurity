@@ -9,11 +9,7 @@ import { REGION_TABLE_MARK } from '@/lib/legacy-geometry-scan';
 /** Files under src/ that hold old geometry or refer to the old model, and how. Tests are included. */
 export const RECORDED_LEGACY_GEOMETRY: Record<string, readonly string[]> = {
   'src/components/ThreatAtlasViz.tsx': [REGION_TABLE_MARK],
-  'src/components/__tests__/brain-model-asset.test.ts': ['brain.glb'],
-  'src/components/neurosim/NeuroSIM.tsx': ['REGION_3D_POS', 'brain.glb', REGION_TABLE_MARK],
-  'src/scripts/strip-glb-textures.mjs': ['brain.glb'],
   'src/site/_astro/BrainVisualization.DCSk5yMy.js': ['brain.glb', REGION_TABLE_MARK],
-  'src/site/brain-capture.html': ['brain.glb', REGION_TABLE_MARK],
   // A prebuilt bundle: scalp electrode positions, each tagged with a region name.
   'src/site/brain-siem/assets/BrainSiemModule-Ck2DlkJb.js': [REGION_TABLE_MARK],
 };
@@ -29,8 +25,6 @@ export const RECORDED_NOT_GEOMETRY: Record<string, string> = {
 
 /** Old files that are to be deleted outright, whatever they contain. */
 export const RECORDED_LEGACY_FILES: readonly string[] = [
-  'src/site/brain-capture.html',
-  'src/site/models/brain.glb',
 ];
 
 /** A build committed by mistake long ago. It is copied into every new build; no file may join it. */

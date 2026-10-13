@@ -4,9 +4,8 @@
 - `data/` -- Prebuild-copied JSON from datalake (KQL source)
 - `images/` -- Site images (OG images, screenshots, archives)
 - `charts/` -- Business and data visualizations
-- `models/` -- 3D molecular models (`.glb`, `.pdb`, `.swc`)
+- `models/` -- 3D molecular and neuron models (`.pdb`, `.swc`)
 - `learn/` -- Interactive learning pages (calculus, autodidactive curriculum)
-- `brain-capture.html` -- Standalone brain capture page
 - `robots.txt` -- Search engine crawl rules
 
 ## Conventions
