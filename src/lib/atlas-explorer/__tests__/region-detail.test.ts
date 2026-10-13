@@ -26,12 +26,21 @@ describe('buildRegionDetail', () => {
   it('says what a region is drawn through, what else that shape holds, and which devices name it', () => {
     const m1 = buildRegionDetail(model, 'm1');
     expect(m1?.shapes).toHaveLength(1);
-    expect(m1?.shapes[0]).toMatchObject({ label: 'Label 20', sharedWith: ['sma'], shipped: false, mirrored: false });
+    expect(m1?.shapes[0]).toMatchObject({ label: 'Label 20', sharedWith: ['sma'], shipped: 'nothing', mirrored: false });
     expect(m1?.geometryLimit.id).toBe('geometry_contained');
     expect(m1?.deviceIds).toEqual([FIXTURE_IDS.device]);
     expect(buildRegionDetail(model, 'cord')).toMatchObject({ shapes: [], deviceIds: [], description: null });
     expect(buildRegionDetail(model, 'cord')?.geometryLimit.text).toContain('No cleared atlas draws the cord.');
     expect(buildRegionDetail(model, 'pfc')?.description).toBe('Fixture description of the prefrontal cortex.');
+  });
+
+  it('never calls a location marker a shape on the real data (guard)', () => {
+    const real = loadRealModel();
+    const vta = buildRegionDetail(real, 'vta');
+    expect(vta?.region.geometry.state).toBe('marker_only');
+    expect(vta?.shapes.map((shape) => shape.shipped)).toEqual(vta?.shapes.map(() => 'marker'));
+    expect(vta?.shapes.length).toBeGreaterThan(0);
+    expect(buildRegionDetail(real, 'hippocampus')?.shapes.some((shape) => shape.shipped === 'shape')).toBe(true);
   });
 
   it('returns null for an id the index does not hold', () => {

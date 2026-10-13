@@ -27,8 +27,8 @@ export interface DetailShape {
   label: string;
   sourceName: string;
   sourceLimit: LimitSentence;
-  /** Whether a mesh or marker ships for it in this build. */
-  shipped: boolean;
+  /** What ships for it in this build: a drawn shape, a location marker with no shape, or nothing yet. */
+  shipped: 'shape' | 'marker' | 'nothing';
   mirrored: boolean;
   /** Other QIF regions whose records point at the same shape. */
   sharedWith: string[];
@@ -67,6 +67,11 @@ export interface RegionDetail {
   deviceIds: string[];
 }
 
+function describeShipped(structure: IndexStructure): DetailShape['shipped'] {
+  if (structure.nodes.some((node) => node.vertex_count > 0)) return 'shape';
+  return structure.nodes.length > 0 ? 'marker' : 'nothing';
+}
+
 function toDetailShape(model: ExplorerModel, region: IndexSubject, structure: IndexStructure): DetailShape {
   const sourceName = model.index.sources.find((source) => source.id === structure.atlas)?.name ?? structure.atlas;
   const sharedWith = structure.owners
@@ -77,7 +82,7 @@ function toDetailShape(model: ExplorerModel, region: IndexSubject, structure: In
     label: structure.name ?? structure.label_id,
     sourceName,
     sourceLimit: limitForSource(structure.atlas, sourceName),
-    shipped: structure.nodes.length > 0,
+    shipped: describeShipped(structure),
     mirrored: structure.nodes.some((node) => node.hemispheres_drawn === MIRRORED),
     sharedWith: [...new Set(sharedWith)],
     reviewState: structure.review_state,

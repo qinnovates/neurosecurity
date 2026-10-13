@@ -4,6 +4,9 @@ import { GEOMETRY_LABELS } from '@/lib/atlas-explorer/region-rows';
 import LimitNote from './LimitNote';
 import ReviewMark from './ReviewMark';
 
+/** What ships for a structure, in words. A marker is a point: it is never called a shape. */
+const SHIPPED_WORDS = { shape: 'A shape ships in this build.', marker: 'Only a location marker ships in this build, not a shape.', nothing: 'No shape ships in this build yet.' } as const;
+
 interface Props {
   detail: RegionDetail;
 }
@@ -22,7 +25,7 @@ export default function InspectorShapes({ detail }: Props) {
           {shapes.map((shape) => (
             <li key={shape.structureKey} className="atlas-shape">
               <p className="atlas-fact">
-                Drawn through <strong>{shape.label}</strong>, from {shape.sourceName}. {shape.shipped ? 'A shape ships in this build.' : 'No shape ships in this build yet.'}{' '}
+                Drawn through <strong>{shape.label}</strong>, from {shape.sourceName}. {SHIPPED_WORDS[shape.shipped]}{' '}
                 <ReviewMark state={shape.reviewState} />
               </p>
               <LimitNote limit={shape.sourceLimit} />
