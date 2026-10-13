@@ -72,7 +72,7 @@ export function loadAnatomyBundle(): AnatomyBundle {
   const data = loadAnatomyData();
   const regionIds = new Set(data.engineData.regions.map((region) => region.id));
   return buildAnatomyBundle(data, [
-    { path: EXPLORER_CATALOG_PATH, json: JSON.stringify(buildExplorerCatalog(data.engineData, atlas)) },
+    { path: EXPLORER_CATALOG_PATH, json: JSON.stringify(buildExplorerCatalog(data.engineData, atlas, { registrar, pathways })) },
     { path: REGION_EVIDENCE_PATH, json: JSON.stringify(parseRegionEvidence(regionEvidence, regionIds)) },
     { path: H01_CARD_PATH, json: JSON.stringify(parseH01Card(h01Card)) },
     { path: ATLAS_CHAINS_PATH, json: JSON.stringify(buildAtlasChains(taraChains, new Set(data.engineData.techniques.map((technique) => technique.id)))) },

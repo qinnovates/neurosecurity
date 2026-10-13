@@ -77,6 +77,8 @@ export function buildFixtureCatalog(): ExplorerCatalog {
       { id: FIXTURE_IDS.linkedTechnique, name: 'Fixture injection', band_ids: ['S1', 'N7'], severity: 'high' },
       { id: FIXTURE_IDS.deviceOnlyTechnique, name: 'Fixture firmware attack', band_ids: ['S2', 'S3'], severity: 'medium' },
     ],
+    technique_dsm: [{ id: FIXTURE_IDS.secondLinkedTechnique, references: [{ code: 'F00.0', name: 'Fixture category', tier: 'primary', confidence: 'probable' }] }],
+    pathways: [{ id: 'fixture_pathway', name: 'Fixture Pathway', region_ids: ['m1', 'pfc'], dsm_references: [{ code: 'F00.x', name: 'Fixture category (pathway wording)' }] }],
   };
 }
 

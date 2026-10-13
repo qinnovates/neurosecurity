@@ -1,8 +1,10 @@
 /**
  * What the explorer needs from the catalog beyond the anatomy index: the name
  * of each QIF band, each region's description in the atlas file's own words,
- * and the techniques that carry a device-side band. Built once at build time,
- * served as its own static file, and parsed again by the page that fetches it.
+ * the techniques that carry a device-side band, and the DSM-5-TR category
+ * references the registrar files with techniques and the pathway file files
+ * with pathways. Built once at build time, served as its own static file, and
+ * parsed again by the page that fetches it.
  *
  * None of this is new anatomy: every word is copied from a datalake file.
  */
@@ -13,6 +15,7 @@ import { readSchemaVersion } from '@/lib/anatomy/format-readers';
 import { checkShape, shapes } from '@/lib/anatomy/shape-check';
 import { BAND_ORDER, CATALOG_SEVERITIES, INTERFACE_BAND, SILICON_BANDS, type CatalogSeverity, type EngineData } from '@/lib/threat-model/catalog-types';
 import { isRecord } from '@/lib/threat-model/guards';
+import { DSM_TIERS, readPathways, readTechniqueDsm, type CatalogPathway, type CatalogTechniqueDsm } from './catalog-dsm';
 
 export const EXPLORER_CATALOG_PATH = '/atlas/anatomy-catalog.json';
 export const EXPLORER_CATALOG_SCHEMA_VERSION = 1;
@@ -50,6 +53,16 @@ export interface ExplorerCatalog {
   regions: CatalogRegionText[];
   /** Every technique that carries a device-side band, whether or not it also carries a neural one. */
   device_stage_techniques: DeviceStageTechnique[];
+  /** The references the registrar files with each technique that has a brain band. A technique with none is absent. */
+  technique_dsm: CatalogTechniqueDsm[];
+  /** Every pathway of the pathway file, with the regions it lists as a start or end and the references it files. */
+  pathways: CatalogPathway[];
+}
+
+/** The datalake files the catalog copies its DSM-5-TR references from, as parsed JSON. */
+export interface CatalogDsmSources {
+  registrar: unknown;
+  pathways: unknown;
 }
 
 const id = shapes.text(MAX_ID_LENGTH);
@@ -60,6 +73,8 @@ const EXPLORER_CATALOG_SHAPE = shapes.record({
   bands: shapes.list(shapes.record({ id: shapes.word(BAND_ORDER), name: text, description: text })),
   regions: shapes.list(shapes.record({ id, function: text })),
   device_stage_techniques: shapes.list(shapes.record({ id, name: text, band_ids: shapes.list(shapes.word(BAND_ORDER)), severity: shapes.word(CATALOG_SEVERITIES) })),
+  technique_dsm: shapes.list(shapes.record({ id, references: shapes.list(shapes.record({ code: id, name: text, tier: shapes.word(DSM_TIERS), confidence: id })) })),
+  pathways: shapes.list(shapes.record({ id, name: text, region_ids: shapes.list(id), dsm_references: shapes.list(shapes.record({ code: id, name: text })) })),
 });
 
 function readAtlasList(atlas: unknown, key: string): Record<string, unknown>[] {
@@ -74,8 +89,10 @@ function readAtlasText(record: Record<string, unknown>, key: string, location: s
   return value;
 }
 
-/** @throws AnatomyDataError when the atlas file lacks a band's name or a region's description, or the result does not hold its shape */
-export function buildExplorerCatalog(engineData: EngineData, atlas: unknown): ExplorerCatalog {
+const NEURAL_BAND_PREFIX = 'N';
+
+/** @throws AnatomyDataError when the atlas file lacks a band's name or a region's description, a filed reference is incomplete, or the result does not hold its shape */
+export function buildExplorerCatalog(engineData: EngineData, atlas: unknown, dsmSources: CatalogDsmSources): ExplorerCatalog {
   const catalog: ExplorerCatalog = {
     schema_version: EXPLORER_CATALOG_SCHEMA_VERSION,
     registrar_version: engineData.registrarVersion,
@@ -88,6 +105,8 @@ export function buildExplorerCatalog(engineData: EngineData, atlas: unknown): Ex
     device_stage_techniques: engineData.techniques
       .filter((technique) => technique.bandIds.some((bandId) => DEVICE_STAGE_BAND_IDS.includes(bandId)))
       .map((technique) => ({ id: technique.id, name: technique.name, band_ids: technique.bandIds, severity: technique.severity })),
+    technique_dsm: readTechniqueDsm(dsmSources.registrar, engineData.techniques.filter((technique) => technique.bandIds.some((bandId) => bandId.startsWith(NEURAL_BAND_PREFIX))).map((technique) => technique.id)),
+    pathways: readPathways(dsmSources.pathways, atlas),
   };
   return parseExplorerCatalog(JSON.parse(JSON.stringify(catalog)));
 }

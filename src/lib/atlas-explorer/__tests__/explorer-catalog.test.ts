@@ -7,6 +7,7 @@ import { buildBandGroups, tallyLens } from '../region-rows';
 import { FIXTURE_IDS, buildFixtureModel, loadRealCatalog } from './explorer-fixtures';
 
 const ENGINE_DATA = { registrarVersion: '1', techniques: [], regions: [], precedentCves: [], precedentCvesAsOf: '2026-01-01', controlsByBand: {} };
+const NO_DSM = { registrar: { techniques: [] }, pathways: { pathways: [] } };
 
 describe('explorer catalog', () => {
   it('copies band names and region descriptions from the atlas file, and lists every technique with a device band (guard)', () => {
@@ -18,9 +19,9 @@ describe('explorer catalog', () => {
   });
 
   it('stops the build when the atlas file lacks a band name or a description', () => {
-    expect(() => buildExplorerCatalog(ENGINE_DATA, { qif_bands: [{ id: 'N7' }], brain_regions: [] })).toThrow(AnatomyDataError);
-    expect(() => buildExplorerCatalog(ENGINE_DATA, { qif_bands: [], brain_regions: [{ id: 'pfc', function: ' ' }] })).toThrow(/brain_regions\[0\]\.function: expected text/);
-    expect(() => buildExplorerCatalog(ENGINE_DATA, { qif_bands: 'none', brain_regions: [] })).toThrow(/qif_bands: expected a list/);
+    expect(() => buildExplorerCatalog(ENGINE_DATA, { qif_bands: [{ id: 'N7' }], brain_regions: [] }, NO_DSM)).toThrow(AnatomyDataError);
+    expect(() => buildExplorerCatalog(ENGINE_DATA, { qif_bands: [], brain_regions: [{ id: 'pfc', function: ' ' }] }, NO_DSM)).toThrow(/brain_regions\[0\]\.function: expected text/);
+    expect(() => buildExplorerCatalog(ENGINE_DATA, { qif_bands: 'none', brain_regions: [] }, NO_DSM)).toThrow(/qif_bands: expected a list/);
   });
 
   it('refuses a fetched catalog that is not the catalog', () => {

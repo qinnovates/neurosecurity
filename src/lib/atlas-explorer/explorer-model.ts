@@ -7,6 +7,7 @@
 import type { AnatomyIndex, IndexReviewState, IndexStructure, IndexSubject, IndexTechnique, IndexTechniqueLink } from '@/lib/anatomy/anatomy-index-types';
 import { createStructureStyler, type ColourMode, type Style } from '@/lib/anatomy/colour-modes';
 import { BAND_ORDER } from '@/lib/threat-model/catalog-types';
+import type { CatalogDsmReference, CatalogPathway } from './catalog-dsm';
 import type { CatalogBand, DeviceStageTechnique, ExplorerCatalog } from './explorer-catalog';
 
 const NEURAL_BAND_PREFIX = 'N';
@@ -34,6 +35,10 @@ export interface ExplorerModel {
   descriptionsByRegion: ReadonlyMap<string, string>;
   /** Every drafted link that resolves to the region, lit or not. */
   linksByRegion: ReadonlyMap<string, RegionLink[]>;
+  /** The DSM-5-TR category references the registrar files with a technique. A technique with none is absent. */
+  dsmByTechnique: ReadonlyMap<string, CatalogDsmReference[]>;
+  /** The pathways whose record in the pathway file lists the region as a start or end, in file order. */
+  pathwaysByRegion: ReadonlyMap<string, CatalogPathway[]>;
   styleStructure: (structureKey: string, mode: ColourMode) => Style;
 }
 
@@ -52,6 +57,14 @@ function groupLinksByRegion(techniques: readonly IndexTechnique[]): Map<string, 
   return linksByRegion;
 }
 
+function groupPathwaysByRegion(pathways: readonly CatalogPathway[]): Map<string, CatalogPathway[]> {
+  const pathwaysByRegion = new Map<string, CatalogPathway[]>();
+  for (const pathway of pathways) {
+    for (const regionId of pathway.region_ids) pathwaysByRegion.set(regionId, [...(pathwaysByRegion.get(regionId) ?? []), pathway]);
+  }
+  return pathwaysByRegion;
+}
+
 export function createExplorerModel(index: AnatomyIndex, catalog: ExplorerCatalog): ExplorerModel {
   const bandsById = new Map(catalog.bands.map((band) => [band.id, band]));
   const regions = index.subjects.filter((subject) => subject.kind === 'region');
@@ -68,6 +81,8 @@ export function createExplorerModel(index: AnatomyIndex, catalog: ExplorerCatalo
     deviceOnlyTechniquesById: new Map(catalog.device_stage_techniques.filter((technique) => !technique.band_ids.some(isNeuralBand)).map((technique) => [technique.id, technique])),
     descriptionsByRegion: new Map(catalog.regions.map((region) => [region.id, region.function])),
     linksByRegion: groupLinksByRegion(index.techniques),
+    dsmByTechnique: new Map(catalog.technique_dsm.map((entry) => [entry.id, entry.references])),
+    pathwaysByRegion: groupPathwaysByRegion(catalog.pathways),
     styleStructure: createStructureStyler(index),
   };
 }

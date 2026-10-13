@@ -2,14 +2,17 @@ import type { RefObject } from 'react';
 import { limitSentence } from '@/lib/anatomy/limits-copy';
 import type { ShownAnatomyEvidence } from '@/lib/anatomy/parse-anatomy-evidence';
 import type { RegionEvidence } from '@/lib/anatomy/region-evidence-types';
+import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import type { RegionDetail } from '@/lib/atlas-explorer/region-detail';
 import type { Loaded } from './explorer-data';
+import InspectorDsm from './InspectorDsm';
 import InspectorEvidence from './InspectorEvidence';
 import InspectorShapes from './InspectorShapes';
 import InspectorTechniques, { InspectorBandOnly } from './InspectorTechniques';
 import LimitNote from './LimitNote';
 
 interface Props {
+  model: ExplorerModel;
   /** Null while nothing is selected. */
   detail: RegionDetail | null;
   headingRef: RefObject<HTMLHeadingElement | null>;
@@ -72,6 +75,7 @@ export default function RegionInspector(props: Props) {
       <Devices detail={detail} onChooseDevice={props.onChooseDevice} />
       <InspectorTechniques detail={detail} evidence={props.anatomyEvidence} onRetryEvidence={props.onRetryAnatomyEvidence} onChooseTechnique={props.onChooseTechnique} />
       <InspectorBandOnly detail={detail} onChooseTechnique={props.onChooseTechnique} />
+      <InspectorDsm model={props.model} regionId={region.id} />
     </section>
   );
 }

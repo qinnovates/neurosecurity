@@ -128,7 +128,7 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
           />
         </div>
         <RegionInspector
-          detail={detail} headingRef={inspectorHeadingRef} anatomyEvidence={anatomyEvidence.state} regionEvidence={regionEvidence.state}
+          model={model} detail={detail} headingRef={inspectorHeadingRef} anatomyEvidence={anatomyEvidence.state} regionEvidence={regionEvidence.state}
           onRetryAnatomyEvidence={anatomyEvidence.retry} onRetryRegionEvidence={regionEvidence.retry}
           onChooseTechnique={(techniqueId) => chooseSubject(TECHNIQUE_LENS, techniqueId)} onChooseDevice={(deviceId) => chooseSubject('stated_targets', deviceId)}
           onBackToList={focusSelectedRow}
