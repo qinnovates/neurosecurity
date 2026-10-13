@@ -127,7 +127,7 @@ function StatsBanner({ stats }: { stats: ClinicalData['stats'] }) {
 // ═══ Tab Bar ═══
 
 const TABS: { id: ViewTab; label: string; icon: string }[] = [
-  { id: 'brainmap', label: 'Brain Map', icon: '◎' },
+  { id: 'brainmap', label: 'Regions', icon: '◎' },
   { id: 'zoom', label: 'Drill-Down', icon: '⊕' },
   { id: 'chain', label: 'Impact Chain', icon: '⟶' },
   { id: 'pathways', label: 'Pathways', icon: '◈' },
