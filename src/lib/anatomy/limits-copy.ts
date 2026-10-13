@@ -28,7 +28,7 @@ export const LIMIT_TEMPLATES = {
   region_description: 'This description is copied from QIF\'s own atlas file. It has not been checked against the papers listed under Evidence.',
 
   // Layers.
-  layers_text_only: 'Layers change the 3D view, which this page does not have yet. The list always shows every region.',
+  layers_text_only: 'Layers choose what the 3D view draws. The list always shows every region.',
   layer_unavailable: 'Not available in this build. {reason}',
   networks_names_only: 'These are names researchers give to groups of brain areas whose activity tends to rise and fall together. No shapes are shown, because no network map has been cleared for this site in explicit terms.',
 
@@ -62,6 +62,22 @@ export const LIMIT_TEMPLATES = {
   evidence_contested: 'Researchers disagree about this. Read it beside the other statements here.',
   evidence_required_citation: 'This statement must be read together with the other paper cited with it.',
   stated_devices_none: 'No device record in the QIF atlas file names this region.',
+
+  // The 3D view.
+  whole_scene: 'The layers come from different studies and were lined up to one average brain by computer. Do not read meaning into shapes that only just touch or miss.',
+  outline_shape: 'This is the outer shape of an average made from many people\'s brain scans, not anyone\'s real brain. Much of the brain\'s surface lies inside folds that averaging smooths away, so only the outside is shown.',
+  mirrored_scene: 'Some shapes here were drawn on one side of the brain and mirrored to make the other. A difference between left and right in them means nothing.',
+  marker_ring: 'A ring alone marks a structure too small for MRI to outline. It shows roughly where the structure is, not its size or shape.',
+  coarse_ring: 'A shape with a ring on it is only a few scan pixels wide, so its size and edges are rough.',
+  unfilled_shape: 'A shape drawn as lines with no fill has no data under this lens. That is not the same as a low value.',
+  inside_shape: 'A pale shape holds what the lens shows somewhere inside it, or holds records that differ. It is not filled, because the shape is not any one of them.',
+  slice_view: 'The cut shows the average template and the atlas shapes. It is not a scan of anyone.',
+  position_checked: 'The position of the {layer} was checked as a whole against an independent measure, not shape by shape.',
+  position_not_checked: 'The position of the {layer} has not been independently checked.',
+  position_failed: 'A position check failed for the {layer}. Treat that position as unreliable.',
+  deep_disagreement: 'Different atlases place the same deep structure about 1 to 2 mm apart, so small gaps and overlaps between deep shapes mean nothing.',
+  picked_shape_shared: 'This shape holds more than one QIF region. Picking it selects the shape, not any one of them.',
+  picked_shape_unowned: 'No QIF record maps to this shape. It is drawn for context and no lens colours it.',
 
   // The rail, networks and the H01 card.
   device_stages: 'These techniques act on the device\'s electronics and software, not on a brain region, so no region is linked.',
