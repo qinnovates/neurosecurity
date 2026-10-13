@@ -11,7 +11,7 @@ from typing import Any
 
 import numpy as np
 
-from . import arc_checks, fiducials as fiducial_rules, head_surface, layout_checks, scalp_arcs
+from . import arc_checks, fiducials as fiducial_rules, glb_triangles, head_surface, layout_checks, scalp_arcs
 from .electrodes import place_layout
 from .errors import CheckError
 from .fetch import source_file
@@ -23,7 +23,7 @@ from .placement_digest import placement_digest
 from .scalp_arcs import Scalp, surface_points
 from .sources import Registry
 
-SCALP_LABEL_ID = "head_surface"
+SCALP_MESH_KEY = "head_surface:both"
 FIDUCIAL_SET_ID = "template_rules_1"
 INION_SHIFT_MM = 5.0
 SET_METHOD = ("Placed by written rules on the average template head, by code and not by a person feeling a skull. "
@@ -108,7 +108,7 @@ def placement_document(cache_dir: pathlib.Path, registry: Registry, scalp_glb: b
     found = find_fiducials(head)
     fiducials = {name: np.array(found[name]["position_mm"]) for name in FIDUCIAL_IDS}
     placed, arcs = place_layout(head.scalp, fiducials)
-    triangles = arc_checks.read_glb_triangles(scalp_glb)[SCALP_LABEL_ID]
+    triangles = glb_triangles.read_glb_triangles(scalp_glb)[SCALP_MESH_KEY]
     fiducial_points = {name: tuple(_rounded(point)) for name, point in fiducials.items()}
     electrode_points = {name: tuple(_rounded(point)) for name, point in placed.items()}
     problems = layout_checks.layout_problems(triangles, fiducial_points, electrode_points)

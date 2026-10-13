@@ -5,14 +5,9 @@ voxel image with numpy; this measures them again on the decimated mesh that ship
 """
 from __future__ import annotations
 
-import json
 import math
-import struct
 
-Vec = tuple[float, float, float]
-Triangle = tuple[Vec, Vec, Vec]
-INT16_MAX = 32767
-COMPONENT_UNSIGNED_INT = 5125
+from .glb_triangles import Triangle, Vec
 
 
 def sub(a: Vec, b: Vec) -> Vec:
@@ -40,23 +35,6 @@ def unit(a: Vec) -> Vec:
 
 def distance(a: Vec, b: Vec) -> float:
     return math.dist(a, b)
-
-
-def read_glb_triangles(payload: bytes) -> dict[str, list[Triangle]]:
-    """The triangles of each node of a GLB written by this pipeline, in millimetres, keyed by the node's label id."""
-    json_length = struct.unpack_from("<I", payload, 12)[0]
-    document = json.loads(payload[20:20 + json_length].decode("utf-8"))
-    binary = payload[20 + json_length + 8:]
-    meshes: dict[str, list[Triangle]] = {}
-    for node in document["nodes"]:
-        primitive = document["meshes"][node["mesh"]]["primitives"][0]
-        positions, indices = document["accessors"][primitive["attributes"]["POSITION"]], document["accessors"][primitive["indices"]]
-        raw = struct.unpack_from(f"<{positions['count'] * 3}h", binary, document["bufferViews"][positions["bufferView"]]["byteOffset"])
-        code = "I" if indices["componentType"] == COMPONENT_UNSIGNED_INT else "H"
-        order = struct.unpack_from(f"<{indices['count']}{code}", binary, document["bufferViews"][indices["bufferView"]]["byteOffset"])
-        vertices = [tuple(max(raw[3 * i + k] / INT16_MAX, -1.0) * node["scale"][k] + node["translation"][k] for k in range(3)) for i in range(positions["count"])]
-        meshes[node["extras"]["label_id"]] = [(vertices[order[i]], vertices[order[i + 1]], vertices[order[i + 2]]) for i in range(0, len(order), 3)]
-    return meshes
 
 
 def section_polyline(triangles: list[Triangle], start: Vec, end: Vec, toward: Vec) -> list[Vec]:

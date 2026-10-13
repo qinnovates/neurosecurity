@@ -79,7 +79,7 @@ def write_device_sheets(review_dir: pathlib.Path, cache_dir: pathlib.Path, regis
     """One sheet per landmark on the template image and one of the layout on the head mesh. Returns how many were written."""
     import numpy as np
 
-    from . import arc_checks, device_sheets
+    from . import device_sheets, devices, glb_triangles
 
     template = registry.inputs["template"]
     t1, affine = load_canonical(source_file(cache_dir, template["source"], template["t1"]))
@@ -87,5 +87,5 @@ def write_device_sheets(review_dir: pathlib.Path, cache_dir: pathlib.Path, regis
     for name, row in placement["fiducials"].items():
         device_sheets.write_fiducial_sheet(review_dir / f"fiducial-{name}.png", np.array(row["position_mm"]), t1, affine, (window[0], window[1]))
     points = {**{name: row["position_mm"] for name, row in placement["fiducials"].items()}, **placement["electrodes"]}
-    device_sheets.write_layout_sheet(review_dir / "layout-10-20.png", arc_checks.read_glb_triangles(scalp_glb)["head_surface"], points)
+    device_sheets.write_layout_sheet(review_dir / "layout-10-20.png", glb_triangles.read_glb_triangles(scalp_glb)[devices.SCALP_MESH_KEY], points)
     return len(placement["fiducials"]) + 1

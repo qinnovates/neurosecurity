@@ -5,8 +5,8 @@
   "fiducial_set": {
     "id": "template_rules_1",
     "scalp_asset_id": "scalp",
-    "scalp_asset_sha256": "ea21cc63bb4b9b5db996fac3634e59cb9deb700cfa441ef1b255842bff810bc3",
-    "placement_digest": "c65e8cfc42d638b5b025717a1673fc590b69d0f60e5efbe4777e912638a13011",
+    "scalp_asset_sha256": "01f3f0aeb73d033870f6c7f194d1940aa6230ba9228d1579c51a575ca0d42d7e",
+    "placement_digest": "17835497299b9ad64635012a7e65571c302ec414ba521fbd57d04314ea47b142",
     "method": "Placed by written rules on the average template head, by code and not by a person feeling a skull. The average blurs skin landmarks and the skin does not show the inion, so these are estimates for a person to review.",
     "drafted_by": "ai",
     "evidence": {

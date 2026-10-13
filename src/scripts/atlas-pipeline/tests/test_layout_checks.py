@@ -10,7 +10,7 @@ import math
 import pytest
 from solids import ellipsoid_mesh, landmarks
 
-from atlas_pipeline import arc_checks, layout_checks, sources
+from atlas_pipeline import arc_checks, glb_triangles, layout_checks, sources
 from atlas_pipeline.layout_1020 import ARCS, ELECTRODE_ORDER, FIDUCIAL_IDS, MIRROR_PAIRS
 from atlas_pipeline.placement_digest import placement_digest
 
@@ -19,7 +19,7 @@ MANIFEST = json.loads((ASSET_DIR / "manifest.json").read_text(encoding="utf-8"))
 GEOMETRY = json.loads((sources.REPO_ROOT / "datalake" / "qif-anatomy-device-geometry.json").read_text(encoding="utf-8"))
 PLACEMENT = json.loads((sources.PIPELINE_DIR / "evidence" / "device-placement.json").read_text(encoding="utf-8"))
 SCALP = next(asset for asset in MANIFEST["assets"] if asset["layer"] == "devices")
-HEAD = arc_checks.read_glb_triangles((ASSET_DIR / SCALP["path"]).read_bytes())["head_surface"]
+HEAD = glb_triangles.read_glb_triangles((ASSET_DIR / SCALP["path"]).read_bytes())["head_surface:both"]
 LAYOUT = GEOMETRY["electrode_layouts"][0]
 FIDUCIALS = {row["id"]: tuple(row["position_mm"]) for row in GEOMETRY["fiducials"]}
 ELECTRODES = {row["id"]: tuple(row["position_mm"]) for row in LAYOUT["electrodes"]}
