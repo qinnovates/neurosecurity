@@ -32,6 +32,8 @@ export interface LoadedNode {
   extras: { atlas?: unknown; label_id?: unknown; hemisphere?: unknown };
   vertexCount: number;
   boundsMm: [[number, number, number], [number, number, number]];
+  /** The volume the mesh encloses, positive when its triangles run counter-clockwise seen from outside (glTF's front face). */
+  signedVolumeMm3: number;
 }
 
 /** An asset whose bytes are missing, the wrong length, or do not hash to what the manifest says. */
@@ -140,6 +142,7 @@ export function findNodeProblems(asset: ManifestAsset, loadedNodes: readonly Loa
     if (loaded.vertexCount !== node.vertex_count) problems.push(`${asset.path}: node ${key} has ${loaded.vertexCount} vertices, the manifest says ${node.vertex_count}`);
     const outside = [0, 1, 2].some((axis) => loaded.boundsMm[0][axis] < node.bbox_mm[0][axis] - boundsSlack(node, axis) || loaded.boundsMm[1][axis] > node.bbox_mm[1][axis] + boundsSlack(node, axis));
     if (outside) problems.push(`${asset.path}: node ${key} reaches outside the bounds the manifest records for its structure`);
+    if (!(loaded.signedVolumeMm3 > 0)) problems.push(`${asset.path}: node ${key} is wound inward (signed volume ${loaded.signedVolumeMm3}); a viewer would draw its inner wall`);
   }
   for (const key of expected.keys()) {
     if (!seen.has(key)) problems.push(`${asset.path}: the manifest lists a mesh for ${key} but the file has none`);

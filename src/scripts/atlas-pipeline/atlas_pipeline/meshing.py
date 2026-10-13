@@ -32,6 +32,7 @@ MAX_P95_DISTANCE_VOXELS = 2.0
 MAX_CENTROID_SHIFT_SOURCE_VOXELS = 0.5
 SURFACE_SAMPLE_SPACING_VOXELS = 0.5
 PAD_VOXELS = 3
+INWARD_PROBLEM = "wound inward: signed volume is not positive"
 
 
 @dataclass(frozen=True)
@@ -53,6 +54,24 @@ def taubin_smooth(vertices: np.ndarray, triangles: np.ndarray) -> np.ndarray:
             np.add.at(total, edges[:, 1], out[edges[:, 0]])
             out += factor * (total / np.maximum(degree, 1.0) - out)
     return out
+
+
+def signed_volume(vertices: np.ndarray, triangles: np.ndarray) -> float:
+    """Volume enclosed by a closed mesh: positive when its triangles run counter-clockwise seen from outside, as glTF requires."""
+    a, b, c = vertices[triangles[:, 0]], vertices[triangles[:, 1]], vertices[triangles[:, 2]]
+    return float(np.einsum("ij,ij->i", a, np.cross(b, c)).sum() / 6.0)
+
+
+def wind_outward(vertices_mm: np.ndarray, triangles: np.ndarray) -> np.ndarray:
+    """The same triangles, each with its corner order reversed if the mesh is wound inward. Vertices are untouched.
+
+    Marching cubes winds its triangles by the left-hand rule, clockwise seen from outside, when the
+    object is brighter than its surroundings, and an affine with a negative determinant would flip
+    them again. A viewer treats counter-clockwise as the front face, so an inward-wound mesh shows
+    its far inner wall. The order is reversed here, after decimation, so that decimation sees the
+    same input as before and the shipped vertices do not change.
+    """
+    return triangles[:, ::-1].copy() if signed_volume(vertices_mm, triangles) < 0.0 else triangles
 
 
 def mesh_volume_and_centroid(vertices: np.ndarray, triangles: np.ndarray) -> tuple[float, np.ndarray]:
@@ -173,6 +192,8 @@ def mesh_from_field(field: np.ndarray, affine: np.ndarray, from_mask: bool, sour
             break
     final_v, final_t, measured, reduction = chosen
     placed = crop_affine(affine, start)
+    vertices_mm = world_coords(placed, final_v)
+    outward = wind_outward(vertices_mm, final_t.astype(np.int64))
     facts = {
         "triangles_before_decimation": int(base_triangles),
         "decimation": reduction,
@@ -185,10 +206,11 @@ def mesh_from_field(field: np.ndarray, affine: np.ndarray, from_mask: bool, sour
         "volume_rescale": round(rescale, 4),
         "irregular_edge_share": round(measured["irregular_edges"], 5),
         "within_rules": _within_rules(measured, centroid_limit),
+        "signed_volume_mm3": round(signed_volume(vertices_mm, outward), 2),
         "smoothing": {"taubin_lambda": TAUBIN_LAMBDA, "taubin_mu": TAUBIN_MU, "iterations": TAUBIN_ITERATIONS,
                       "pre_smoothing_sigma_voxels": MASK_SMOOTHING_SIGMA_VOXELS if from_mask else 0.0},
     }
-    return Mesh(world_coords(placed, final_v), final_t.astype(np.int64), facts)
+    return Mesh(vertices_mm, outward, facts)
 
 
 def mesh_sanity(mesh: Mesh, box_min: np.ndarray, box_max: np.ndarray) -> list[str]:
@@ -200,6 +222,8 @@ def mesh_sanity(mesh: Mesh, box_min: np.ndarray, box_max: np.ndarray) -> list[st
         problems.append("surface is not closed")
     if (mesh.vertices_mm < box_min).any() or (mesh.vertices_mm > box_max).any():
         problems.append("vertex outside the template box")
+    if signed_volume(mesh.vertices_mm, mesh.triangles) <= 0.0:
+        problems.append(INWARD_PROBLEM)
     if not mesh.facts["within_rules"]:
         problems.append("volume, centroid or surface distance outside the rules even without decimation")
     return problems
