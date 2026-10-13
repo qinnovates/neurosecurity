@@ -19,7 +19,9 @@ export const RECORDED_LEGACY_GEOMETRY: Record<string, readonly string[]> = {
   // (src/components/monitor/MonitorMode.tsx) shows. The open Lab redesign replaces that mode with a monitor
   // built from source; once it merges the Lab no longer shows /brain-siem/ and the directory can be deleted,
   // and this entry with it. The explorer's own electrode layout is built from the atlas data files and shares
-  // nothing with this.
+  // nothing with this. The kept src/site/brain-siem/ bundle also contains BrainMapModule-*.js, which draws a 2D
+  // head outline with electrodes and lobe labels, and BrainSiemModule draws a sphere head; the scanner does not
+  // mark the first. Both go when src/site/brain-siem/ is replaced.
   'src/site/brain-siem/assets/BrainSiemModule-Ck2DlkJb.js': [REGION_TABLE_MARK],
 };
 
