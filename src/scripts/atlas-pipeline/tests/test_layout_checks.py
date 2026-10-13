@@ -62,6 +62,28 @@ def test_cz_is_at_the_middle_of_both_arcs_and_every_position_at_its_share() -> N
     assert sum(len(row["shares"]) for row in measured.values()) == 21
 
 
+def cz_crossing_problems(triangles: list, fiducials: dict, electrodes: dict) -> list:
+    return [problem for problem in layout_checks.layout_problems(triangles, fiducials, electrodes) if "ear_to_ear arc; it should be at its middle" in problem]
+
+
+def test_arcs_that_cross_at_cz_pass_the_crossing_rule_within_its_tolerance() -> None:
+    head, marks = ellipsoid_mesh(LONG_HEAD), landmarks(LONG_HEAD)
+    good = placed_by(head, marks, at_length_share)
+    assert cz_crossing_problems(head, marks, good) == []
+    ear_arc = arc_checks.section_polyline(head, marks["left_preauricular"], marks["right_preauricular"], good["Cz"])
+    inside = {**good, "Cz": at_length_share(ear_arc, 0.5 + 0.5 * layout_checks.SHARE_TOLERANCE)}
+    assert cz_crossing_problems(head, marks, inside) == []
+
+
+def test_arcs_that_do_not_cross_at_cz_are_refused() -> None:
+    head, marks = ellipsoid_mesh(LONG_HEAD), landmarks(LONG_HEAD)
+    good = placed_by(head, marks, at_length_share)
+    ear_arc = arc_checks.section_polyline(head, marks["left_preauricular"], marks["right_preauricular"], good["Cz"])
+    off_share = 0.5 + 3.0 * layout_checks.SHARE_TOLERANCE
+    crossed_elsewhere = {**good, "Cz": at_length_share(ear_arc, off_share)}
+    assert cz_crossing_problems(head, marks, crossed_elsewhere) == [f"Cz sits at {off_share:.3f} of the ear_to_ear arc; it should be at its middle"]
+
+
 def test_equal_angle_layout_on_the_shipped_head_is_refused() -> None:
     wrong = placed_by(HEAD, FIDUCIALS, arc_checks.point_at_angle_share)
     problems = layout_checks.layout_problems(HEAD, FIDUCIALS, wrong)
@@ -159,7 +181,29 @@ def test_every_landmark_says_how_far_it_can_be_trusted_with_the_figures_the_run_
     for name in ("nasion", "left_preauricular", "right_preauricular"):
         assert f"{PLACEMENT['fiducials'][name]['hollow_depth_mm']} mm deep" in notes[name]
     worst = max(PLACEMENT["inion_sensitivity"]["higher"], PLACEMENT["inion_sensitivity"]["lower"])
-    assert f"up to {worst} mm" in notes["inion"]
+    assert f"moves Oz by up to {worst} mm" in notes["inion"]
+    assert {PLACEMENT["inion_sensitivity"]["higher_most_moved"], PLACEMENT["inion_sensitivity"]["lower_most_moved"]} == {"Oz"}
+    assert all(len(note) <= 400 for note in notes.values()), "the data library reads a confidence note of at most 400 characters"
+
+
+def test_every_weak_landmark_says_it_may_be_a_centimetre_off_and_carries_the_moves_the_run_measured() -> None:
+    notes = {row["id"]: row["confidence_note"] for row in GEOMETRY["fiducials"]}
+    weak_sentence = "It may be a centimetre or more off, and is more likely too low than too high."
+    assert weak_sentence not in notes["nasion"] and all(weak_sentence in notes[name] for name in FIDUCIAL_IDS[1:])
+    moved = PLACEMENT["landmark_sensitivity"]
+    inion = moved["inion"]
+    assert inion["electrode"] == "Oz" and f", and {inion['shift_mm']} mm by up to {max(inion['higher_mm'], inion['lower_mm'])} mm." in notes["inion"]
+    for name, near in (("left_preauricular", "T7"), ("right_preauricular", "T8")):
+        row = moved[name]
+        assert row["near_electrode"] == near and len(row["near_moved_mm"]) == len(row["vertex_moved_mm"]) == len(row["directions"]) == 4
+        assert (f"Moving it {row['shift_mm']} mm forward, back, up or down moves {near} by {min(row['near_moved_mm'])} to {max(row['near_moved_mm'])} mm and Cz by "
+                f"{min(row['vertex_moved_mm'])} to {max(row['vertex_moved_mm'])} mm") in notes[name]
+
+
+def test_the_layout_is_off_by_default_and_keeps_its_unreviewed_marks() -> None:
+    assert LAYOUT["shown_by_default"] is False
+    assert LAYOUT["drafted_by"] == "ai" and LAYOUT["evidence"]["check_status"] == "unchecked"
+    assert "it is not tied to the placement digest" in LAYOUT["evidence"]["rationale"]
 
 
 def test_head_note_names_the_faces_where_the_image_cuts_the_head() -> None:

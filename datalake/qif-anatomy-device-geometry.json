@@ -39,7 +39,7 @@
         -29.0
       ],
       "method": "highest back midline point, below the rearmost point, where skin-to-skull thickness reaches 1.5 times the scalp's",
-      "confidence_note": "Weak. The skin does not show the inion. This is where the tissue over the skull thickens in the average image, which is near where the neck muscles attach but is not the bone bump itself. Putting it 5.0 mm higher or lower moves the nearest electrode by up to 4.6 mm."
+      "confidence_note": "Weak. The skin does not show the inion. This is where the tissue over the skull thickens in the average image, which is near where the neck muscles attach but is not the bone bump itself. Putting it 5.0 mm higher or lower moves Oz by up to 4.6 mm, and 15.0 mm by up to 13.7 mm. It may be a centimetre or more off, and is more likely too low than too high."
     },
     {
       "id": "left_preauricular",
@@ -49,7 +49,7 @@
         -55.6
       ],
       "method": "centre of the hollow in front of the ear's ridge, on the head's side surface",
-      "confidence_note": "Weak. The rule finds a hollow 8.8 mm deep in front of the ear's ridge. That may be the notch beside the outer ear and not the point in front of the tragus that the definition names. The average image blurs the ear."
+      "confidence_note": "Weak. The rule finds a hollow 8.8 mm deep in front of the ear's ridge. That may be the notch beside the outer ear and not the point in front of the tragus that the definition names. The average image blurs the ear. It may be a centimetre or more off, and is more likely too low than too high. Moving it 5.0 mm forward, back, up or down moves T7 by 4.6 to 5.4 mm and Cz by 0.4 to 4.5 mm."
     },
     {
       "id": "right_preauricular",
@@ -59,7 +59,7 @@
         -55.1
       ],
       "method": "centre of the hollow in front of the ear's ridge, on the head's side surface",
-      "confidence_note": "Weak. The rule finds a hollow 10.1 mm deep in front of the ear's ridge. That may be the notch beside the outer ear and not the point in front of the tragus that the definition names. The average image blurs the ear."
+      "confidence_note": "Weak. The rule finds a hollow 10.1 mm deep in front of the ear's ridge. That may be the notch beside the outer ear and not the point in front of the tragus that the definition names. The average image blurs the ear. It may be a centimetre or more off, and is more likely too low than too high. Moving it 5.0 mm forward, back, up or down moves T8 by 4.9 to 5.4 mm and Cz by 0.4 to 4.6 mm."
     }
   ],
   "electrode_layouts": [
@@ -69,7 +69,7 @@
       "scalp_asset_id": "scalp",
       "fiducial_set_id": "template_rules_1",
       "construction": "Each position sits at a share of the measured length of an arc over the scalp between landmarks, in the order the system defines.",
-      "shown_by_default": true,
+      "shown_by_default": false,
       "electrodes": [
         {
           "id": "Fpz",
@@ -290,7 +290,7 @@
       "evidence": {
         "claim_basis": "analyst_inference",
         "check_status": "unchecked",
-        "rationale": "Positions are shares of arcs measured on the template head surface, not on a person.",
+        "rationale": "Positions are shares of arcs measured on the template head surface, not on a person. The index's drawable flag checks the head surface's sha256 only; it is not tied to the placement digest.",
         "source_ref": {
           "file": "src/site/atlas-assets/manifest.json",
           "pointer": "/assets/scalp/modification_note",

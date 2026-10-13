@@ -15,7 +15,7 @@ from . import arc_checks, fiducials as fiducial_rules, glb_triangles, head_surfa
 from .electrodes import place_layout
 from .errors import CheckError
 from .fetch import source_file
-from .fiducials import BACK, Head, find_fiducials
+from .fiducials import BACK, SIDES, Head, find_fiducials
 from .head_surface import head_mask
 from .headers import load_canonical
 from .layout_1020 import ARCS, ELECTRODE_ORDER, FIDUCIAL_IDS, LAYOUT_ID, OLDER_NAMES
@@ -26,20 +26,35 @@ from .sources import Registry
 SCALP_MESH_KEY = "head_surface:both"
 FIDUCIAL_SET_ID = "template_rules_1"
 INION_SHIFT_MM = 5.0
+INION_FAR_SHIFT_MM = 15.0
+EAR_SHIFT_MM = 5.0
+# Each ear point is moved this far in the head's side view (y forward, z up), then set back on the skin.
+EAR_SHIFT_DIRECTIONS = {"forward": (1.0, 0.0), "back": (-1.0, 0.0), "up": (0.0, 1.0), "down": (0.0, -1.0)}
+NEAR_ELECTRODE = {"left": "T7", "right": "T8"}
+VERTEX = "Cz"
+BACK_MIDLINE_ELECTRODE = "Oz"
 SET_METHOD = ("Placed by written rules on the average template head, by code and not by a person feeling a skull. "
               "The average blurs skin landmarks and the skin does not show the inion, so these are estimates for a person to review.")
 LAYOUT_NAME = "International 10-20 system: 19 scalp positions, Fpz and Oz"
 LAYOUT_CONSTRUCTION = "Each position sits at a share of the measured length of an arc over the scalp between landmarks, in the order the system defines."
+# The PM ruling of round two: the layout is off until a reader turns it on. It stays drawable while unreviewed.
+LAYOUT_SHOWN_BY_DEFAULT = False
+# The data library reads a rationale of at most 200 characters.
+LAYOUT_RATIONALE = ("Positions are shares of arcs measured on the template head surface, not on a person. The index's drawable flag checks "
+                    "the head surface's sha256 only; it is not tied to the placement digest.")
 PARAMETER_MODULES = {"head_surface": head_surface, "fiducials": fiducial_rules, "scalp_arcs": scalp_arcs}
 # What each landmark's rule can and cannot be trusted for, in plain words. Figures are filled from the run.
+WEAK_LANDMARK_SENTENCE = "It may be a centimetre or more off, and is more likely too low than too high."
 CONFIDENCE_NOTES = {
     "nasion": ("Moderate. The hollow between brow and nose is {hollow_depth_mm} mm deep on this head, so the rule has something to find. "
                "It is the hollow in the skin, not the bone suture the definition names."),
     "inion": ("Weak. The skin does not show the inion. This is where the tissue over the skull thickens in the average image, which is near "
-              "where the neck muscles attach but is not the bone bump itself. Putting it {inion_shift_mm} mm higher or lower moves the nearest "
-              "electrode by up to {inion_effect_mm} mm."),
+              "where the neck muscles attach but is not the bone bump itself. Putting it {inion_shift_mm} mm higher or lower moves {back_electrode} "
+              "by up to {inion_effect_mm} mm, and {inion_far_shift_mm} mm by up to {inion_far_effect_mm} mm. " + WEAK_LANDMARK_SENTENCE),
     "left_preauricular": ("Weak. The rule finds a hollow {hollow_depth_mm} mm deep in front of the ear's ridge. That may be the notch beside the "
-                          "outer ear and not the point in front of the tragus that the definition names. The average image blurs the ear."),
+                          "outer ear and not the point in front of the tragus that the definition names. The average image blurs the ear. "
+                          + WEAK_LANDMARK_SENTENCE + " Moving it {ear_shift_mm} mm forward, back, up or down moves {near_electrode} by {near_low_mm} to {near_high_mm} mm "
+                          "and {vertex} by {vertex_low_mm} to {vertex_high_mm} mm."),
 }
 CONFIDENCE_NOTES["right_preauricular"] = CONFIDENCE_NOTES["left_preauricular"]
 HEAD_QUOTE = "It is the skin of an average head, not of a person."
@@ -62,9 +77,15 @@ def method_parameters() -> dict[str, Any]:
 
 
 def confidence_note(name: str, document: dict[str, Any]) -> str:
-    sensitivity = document["inion_sensitivity"]
-    return CONFIDENCE_NOTES[name].format(hollow_depth_mm=document["fiducials"][name].get("hollow_depth_mm"), inion_shift_mm=sensitivity["inion_shift_mm"],
-                                         inion_effect_mm=max(sensitivity["higher"], sensitivity["lower"]))
+    sensitivity, moved = document["inion_sensitivity"], document["landmark_sensitivity"]
+    ear = moved.get(name, {})
+    return CONFIDENCE_NOTES[name].format(
+        hollow_depth_mm=document["fiducials"][name].get("hollow_depth_mm"), inion_shift_mm=sensitivity["inion_shift_mm"],
+        inion_effect_mm=max(sensitivity["higher"], sensitivity["lower"]), inion_far_shift_mm=moved["inion"]["shift_mm"],
+        back_electrode=moved["inion"]["electrode"], inion_far_effect_mm=max(moved["inion"]["higher_mm"], moved["inion"]["lower_mm"]),
+        ear_shift_mm=ear.get("shift_mm"), near_electrode=ear.get("near_electrode"), vertex=VERTEX,
+        near_low_mm=min(ear.get("near_moved_mm", [None])), near_high_mm=max(ear.get("near_moved_mm", [None])),
+        vertex_low_mm=min(ear.get("vertex_moved_mm", [None])), vertex_high_mm=max(ear.get("vertex_moved_mm", [None])))
 
 
 def _rounded(point: Any) -> list[float]:
@@ -102,6 +123,35 @@ def _inion_sensitivity(head: Head, fiducials: dict[str, np.ndarray], electrodes:
     return {"inion_shift_mm": INION_SHIFT_MM, **moved}
 
 
+def _moved_mm(head: Head, shifted: dict[str, np.ndarray], electrodes: dict[str, np.ndarray], name: str) -> float:
+    placed, _ = place_layout(head.scalp, shifted)
+    return round(float(np.linalg.norm(placed[name] - electrodes[name])), 1)
+
+
+def _ear_sensitivity(head: Head, fiducials: dict[str, np.ndarray], electrodes: dict[str, np.ndarray], side: str) -> dict[str, Any]:
+    """How far the temporal position on that side and the vertex move when one ear point is moved 5 mm each way and set back on the skin."""
+    name, near = f"{side}_preauricular", NEAR_ELECTRODE[side]
+    row: dict[str, Any] = {"shift_mm": EAR_SHIFT_MM, "directions": list(EAR_SHIFT_DIRECTIONS), "near_electrode": near,
+                           "landmark_moved_mm": [], "near_moved_mm": [], "vertex_moved_mm": []}
+    for forward, upward in EAR_SHIFT_DIRECTIONS.values():
+        origin = np.array([0.0, fiducials[name][1] + forward * EAR_SHIFT_MM, fiducials[name][2] + upward * EAR_SHIFT_MM])
+        shifted = {**fiducials, name: surface_points(head.scalp, origin, SIDES[side][None, :])[0]}
+        row["landmark_moved_mm"].append(round(float(np.linalg.norm(shifted[name] - fiducials[name])), 1))
+        row["near_moved_mm"].append(_moved_mm(head, shifted, electrodes, near))
+        row["vertex_moved_mm"].append(_moved_mm(head, shifted, electrodes, VERTEX))
+    return row
+
+
+def _landmark_sensitivity(head: Head, fiducials: dict[str, np.ndarray], electrodes: dict[str, np.ndarray]) -> dict[str, Any]:
+    """Measured on this head surface: what moving a weak landmark does to the positions that hang on it."""
+    inion: dict[str, Any] = {"shift_mm": INION_FAR_SHIFT_MM, "electrode": BACK_MIDLINE_ELECTRODE}
+    for label, shift in (("higher_mm", INION_FAR_SHIFT_MM), ("lower_mm", -INION_FAR_SHIFT_MM)):
+        origin = np.array([0.0, head.depth_centre(), fiducials["inion"][2] + shift])
+        shifted = {**fiducials, "inion": surface_points(head.scalp, origin, BACK[None, :])[0]}
+        inion[label] = _moved_mm(head, shifted, electrodes, BACK_MIDLINE_ELECTRODE)
+    return {"inion": inion, **{f"{side}_preauricular": _ear_sensitivity(head, fiducials, electrodes, side) for side in NEAR_ELECTRODE}}
+
+
 def placement_document(cache_dir: pathlib.Path, registry: Registry, scalp_glb: bytes, scalp_sha256: str) -> dict[str, Any]:
     """Everything the device stage measured. Raises when the layout does not pass its checks on the shipped mesh."""
     head, cut_faces = load_head(cache_dir, registry)
@@ -129,6 +179,7 @@ def placement_document(cache_dir: pathlib.Path, registry: Registry, scalp_glb: b
         },
         "equal_angle_construction_offset_mm": _equal_angle_offsets(triangles, fiducial_points, electrode_points),
         "inion_sensitivity": _inion_sensitivity(head, fiducials, placed),
+        "landmark_sensitivity": _landmark_sensitivity(head, fiducials, placed),
     }
 
 
@@ -150,8 +201,8 @@ def geometry_rows(document: dict[str, Any], scalp_asset_id: str) -> dict[str, An
                          "evidence": _evidence(scalp_asset_id, "Landmarks were found by rule on the template head surface; no person located them.")},
         "fiducials": fiducials,
         "electrode_layouts": [{"id": LAYOUT_ID, "name": LAYOUT_NAME, "scalp_asset_id": scalp_asset_id, "fiducial_set_id": FIDUCIAL_SET_ID,
-                               "construction": LAYOUT_CONSTRUCTION, "shown_by_default": True, "electrodes": electrodes, "drafted_by": "ai",
-                               "evidence": _evidence(scalp_asset_id, "Positions are shares of arcs measured on the template head surface, not on a person.")}],
+                               "construction": LAYOUT_CONSTRUCTION, "shown_by_default": LAYOUT_SHOWN_BY_DEFAULT, "electrodes": electrodes, "drafted_by": "ai",
+                               "evidence": _evidence(scalp_asset_id, LAYOUT_RATIONALE)}],
     }
 
 

@@ -441,5 +441,69 @@
     "higher_most_moved": "Oz",
     "lower": 4.6,
     "lower_most_moved": "Oz"
+  },
+  "landmark_sensitivity": {
+    "inion": {
+      "shift_mm": 15.0,
+      "electrode": "Oz",
+      "higher_mm": 13.5,
+      "lower_mm": 13.7
+    },
+    "left_preauricular": {
+      "shift_mm": 5.0,
+      "directions": [
+        "forward",
+        "back",
+        "up",
+        "down"
+      ],
+      "near_electrode": "T7",
+      "landmark_moved_mm": [
+        6.4,
+        6.7,
+        6.0,
+        5.1
+      ],
+      "near_moved_mm": [
+        5.0,
+        4.6,
+        5.3,
+        5.4
+      ],
+      "vertex_moved_mm": [
+        0.4,
+        0.4,
+        4.4,
+        4.5
+      ]
+    },
+    "right_preauricular": {
+      "shift_mm": 5.0,
+      "directions": [
+        "forward",
+        "back",
+        "up",
+        "down"
+      ],
+      "near_electrode": "T8",
+      "landmark_moved_mm": [
+        5.9,
+        5.6,
+        5.6,
+        5.8
+      ],
+      "near_moved_mm": [
+        5.0,
+        4.9,
+        5.0,
+        5.4
+      ],
+      "vertex_moved_mm": [
+        0.4,
+        0.4,
+        4.4,
+        4.6
+      ]
+    }
   }
 }
