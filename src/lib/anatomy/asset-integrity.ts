@@ -3,7 +3,7 @@
  * order: the bytes are the file the index pins (length, then sha256); the file
  * decodes as one of the atlas's own geometry files; and what it holds is what
  * the index says it holds (the same shapes, the same vertex counts, each one
- * around the centre the index records). A file that fails any of them is not
+ * around the centre the index records and wound to face outward). A file that fails any of them is not
  * drawn, and nothing falls back to unchecked data.
  */
 
@@ -68,7 +68,7 @@ function isNear(node: DecodedNode, centroidMm: readonly [number, number, number]
   return centroidMm.every((value, axis) => value >= node.boundsMm.min[axis] - CENTROID_TOLERANCE_MM && value <= node.boundsMm.max[axis] + CENTROID_TOLERANCE_MM);
 }
 
-/** Whether a decoded file holds exactly the shapes the index expects, each with its vertex count and around its recorded centre. */
+/** Whether a decoded file holds exactly the shapes the index expects, each with its vertex count, around its recorded centre and wound outward. */
 export function compareWithIndex(decoded: readonly DecodedNode[], expected: readonly ExpectedNode[]): AssetVerdict {
   const decodedByKey = new Map(decoded.map((node) => [nodeKey(node), node]));
   if (decodedByKey.size !== decoded.length) return refuse('contents_differ', 'the file draws one shape twice');
@@ -79,6 +79,7 @@ export function compareWithIndex(decoded: readonly DecodedNode[], expected: read
     if (found.positionsMm.length / 3 !== node.vertexCount) return refuse('contents_differ', `${nodeKey(node)} has a different number of vertices than the index records`);
     if (!isNear(found, node.centroidMm)) return refuse('contents_differ', `${nodeKey(node)} is not where the index records it`);
     if (!found.positionsMm.every(Number.isFinite)) return refuse('contents_differ', `${nodeKey(node)} holds a position that is not a number`);
+    if (!(signedVolumeTimesSix(found) > 0)) return refuse('contents_differ', `${nodeKey(node)} is wound inward, so it would be drawn inside out. The file needs rebuilding; the viewer does not correct it`);
   }
   return { ok: true, nodes: [...decoded] };
 }
