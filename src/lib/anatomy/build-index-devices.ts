@@ -76,6 +76,7 @@ function buildLeads(data: AnatomyData): IndexDevices['leads'] {
       spacing_measure: lead.spacing_measure,
       diameter_mm: lead.diameter_mm,
       drawable: true,
+      sources: lead.sources.map((source) => ({ citation: source.citation, url: source.url, kind: source.kind, supports: source.supports })),
       review_state: reviewState,
     };
   });

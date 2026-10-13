@@ -11,7 +11,7 @@ import type { ExtentMatch, Hemisphere, SubjectKind, TechniqueScope } from './ana
 import type { CheckStatus, ClaimBasis } from './evidence';
 import type { UnbuildableReason } from './licence-rules';
 import type { AssetKind, HemisphereRecord, Point3, PositionCheck, SizeClass } from './manifest-types';
-import type { FiducialId, SpacingMeasure } from './parse-device-geometry';
+import type { DimensionSourceKind, FiducialId, LeadDimensionField, SpacingMeasure } from './parse-device-geometry';
 import type { ReadDepth } from './parse-electrode-layouts';
 import type { ReviewerRole } from './parse-review-ledger';
 import type { Resolution } from './resolve-region-term';
@@ -198,6 +198,9 @@ export interface IndexFiducial {
   review_state: IndexReviewState;
 }
 
+/** Where a lead's numbers were read (a regulator's document or a review paper) and which fields the source states. Words only: never drawn. */
+export interface IndexLeadSource { citation: string; url: string; kind: DimensionSourceKind; supports: LeadDimensionField[] }
+
 export interface IndexLead {
   id: string;
   name: string;
@@ -208,6 +211,8 @@ export interface IndexLead {
   diameter_mm: number;
   /** True for every lead whose row parsed: each dimension has a quoted source. Draw it only together with `review_state`. */
   drawable: boolean;
+  /** One entry per quoted source in the lead's row. Every dimension above is named by at least one. */
+  sources: IndexLeadSource[];
   review_state: IndexReviewState;
 }
 

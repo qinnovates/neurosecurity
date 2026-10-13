@@ -9,7 +9,7 @@ import { EXTENT_MATCHES, HEMISPHERES, SUBJECT_KINDS } from './anatomy-types';
 import { CHECK_STATUSES, CLAIM_BASES } from './evidence';
 import { UNBUILDABLE_REASONS } from './licence-rules';
 import { ASSET_KINDS, HEMISPHERE_RECORDS, POSITION_CHECKS, SIZE_CLASSES } from './manifest-types';
-import { FIDUCIAL_IDS, SPACING_MEASURES } from './parse-device-geometry';
+import { DIMENSION_SOURCE_KINDS, FIDUCIAL_IDS, LEAD_DIMENSION_FIELDS, SPACING_MEASURES } from './parse-device-geometry';
 import { READ_DEPTHS } from './parse-electrode-layouts';
 import { REVIEWER_ROLES } from './parse-review-ledger';
 import { RESOLUTIONS } from './resolve-region-term';
@@ -90,7 +90,9 @@ const devices = shapes.record({
   facts: shapes.list(shapes.record({ id, statement: text, citation: text, url: text, read_depth: shapes.word(READ_DEPTHS) })),
   leads: shapes.list(shapes.record({
     id, name: text, contacts: shapes.integer(1), contact_length_mm: shapes.number(0), contact_spacing_mm: shapes.number(0),
-    spacing_measure: shapes.word(SPACING_MEASURES), diameter_mm: shapes.number(0), drawable: shapes.boolean, review_state: reviewState,
+    spacing_measure: shapes.word(SPACING_MEASURES), diameter_mm: shapes.number(0), drawable: shapes.boolean,
+    sources: shapes.list(shapes.record({ citation: text, url: text, kind: shapes.word(DIMENSION_SOURCE_KINDS), supports: shapes.list(shapes.word(LEAD_DIMENSION_FIELDS)) })),
+    review_state: reviewState,
   })),
   stated_targets: shapes.list(shapes.record({ device_id: id, region_ids: ids })),
 });
