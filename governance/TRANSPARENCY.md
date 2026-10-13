@@ -11,14 +11,14 @@ audit:
 ---
 
 <!-- AUTO-GENERATED from QIF-DERIVATION-LOG.md — do not edit directly -->
-<!-- Regenerate: npm run transparency | Last generated: 2026-10-13 -->
+<!-- Regenerate: npm run transparency | Last generated: 2026-10-07 -->
 
 # Transparency Statement: Human-AI Collaboration in QIF Framework
 
 > This document is auto-generated from the [QIF Derivation Log](../osi-of-mind/QIF-DERIVATION-LOG.md),
 > which is the single source of truth for all framework decisions and AI collaboration records.
 
-**Last generated:** 2026-10-13 at 13:45:30
+**Last generated:** 2026-10-07 at 04:01:09
 
 ## Table of Contents
 
