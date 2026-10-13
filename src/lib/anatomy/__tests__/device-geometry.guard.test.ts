@@ -69,10 +69,25 @@ describe('the committed device geometry (guard)', () => {
     }
   });
 
+  it('keeps the electrode layout off until a reader turns it on, still drawable and still marked unreviewed', () => {
+    expect(data.deviceGeometry.electrode_layouts.map((layout) => layout.shown_by_default)).toEqual([false]);
+    expect(index.devices.electrode_layouts.map((layout) => ({ shown: layout.shown_by_default, drawable: layout.drawable, review: layout.review_state })))
+      .toEqual([{ shown: false, drawable: true, review: { state: 'ai_drafted_unreviewed', mark: 'AI-drafted, unreviewed' } }]);
+    const unset = structuredClone(index) as unknown as { devices: { electrode_layouts: Array<Record<string, unknown>> } };
+    delete unset.devices.electrode_layouts[0].shown_by_default;
+    expect(() => parseAnatomyIndex(unset)).toThrow(/missing key "shown_by_default"/);
+  });
+
   it('stops drawing the layout when the shipped head surface is not the file it was placed on', () => {
     expect(data.deviceGeometry.fiducial_set?.scalp_asset_sha256).toBe(data.manifest?.assets.find((asset) => asset.id === 'scalp')?.sha256);
     const moved = { ...data, deviceGeometry: { ...data.deviceGeometry, fiducial_set: { ...data.deviceGeometry.fiducial_set, scalp_asset_sha256: 'f'.repeat(64) } } } as typeof data;
     expect(buildAnatomyBundle(moved).index.devices.electrode_layouts.map((layout) => layout.drawable)).toEqual([false]);
+  });
+
+  it('does not tie drawable to the placement digest, and the layout row says so', () => {
+    const edited = { ...data, deviceGeometry: { ...data.deviceGeometry, fiducial_set: { ...data.deviceGeometry.fiducial_set, placement_digest: '0'.repeat(64) } } } as typeof data;
+    expect(buildAnatomyBundle(edited).index.devices.electrode_layouts.map((layout) => layout.drawable)).toEqual([true]);
+    expect(data.deviceGeometry.electrode_layouts[0].evidence.rationale).toContain('it is not tied to the placement digest');
   });
 
   it('says in plain words how far each landmark can be trusted, and calls the weak ones weak', () => {
@@ -81,6 +96,12 @@ describe('the committed device geometry (guard)', () => {
     for (const id of ['inion', 'left_preauricular', 'right_preauricular']) expect(notes[id], id).toMatch(/^Weak\./);
     expect(notes.left_preauricular).toMatch(/may be the notch beside the outer ear/);
     expect(notes.inion).toMatch(/skin does not show the inion/);
+    const weakSentence = 'It may be a centimetre or more off, and is more likely too low than too high.';
+    expect(notes.nasion).not.toContain(weakSentence);
+    for (const id of ['inion', 'left_preauricular', 'right_preauricular']) expect(notes[id], id).toContain(weakSentence);
+    expect(notes.inion).toMatch(/higher or lower moves Oz by up to \d+\.\d mm, and 15\.0 mm by up to \d+\.\d mm\./);
+    expect(notes.left_preauricular).toMatch(/moves T7 by \d+\.\d to \d+\.\d mm and Cz by \d+\.\d to \d+\.\d mm/);
+    expect(notes.right_preauricular).toMatch(/moves T8 by \d+\.\d to \d+\.\d mm and Cz by \d+\.\d to \d+\.\d mm/);
   });
 
   it('gives no electrode or lead a brain region, and adds no device-to-region link of its own', () => {

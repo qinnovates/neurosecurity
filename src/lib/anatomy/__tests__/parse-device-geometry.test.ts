@@ -100,6 +100,13 @@ describe('electrode layouts, sourced facts and lead sources', () => {
     expect(parse(buildFile())).toMatchObject({ fiducial_set: null, electrode_layouts: [], facts: [] });
   });
 
+  it('carries a layout that is off by default as it is written, and refuses one that does not say', () => {
+    expect(parse(withScalp({ electrode_layouts: [{ ...LAYOUT, shown_by_default: false }] })).electrode_layouts[0].shown_by_default).toBe(false);
+    expect(() => parse(withScalp({ electrode_layouts: [{ ...LAYOUT, shown_by_default: 'no' }] }))).toThrow(/shown_by_default/);
+    const { shown_by_default: _shown, ...silent } = LAYOUT;
+    expect(() => parse(withScalp({ electrode_layouts: [silent] }))).toThrow(/shown_by_default/);
+  });
+
   it('rejects a layout that does not name the landmarks and head surface it was placed on', () => {
     expect(() => parse(withScalp({ electrode_layouts: [{ ...LAYOUT, fiducial_set_id: 'another_set' }] }))).toThrow(/fiducial_set_id: "another_set" is not the landmark record of this file/);
     expect(() => parse(withScalp({ electrode_layouts: [{ ...LAYOUT, scalp_asset_id: 'outline' }] }))).toThrow(/scalp_asset_id: "outline" is not the head surface the landmarks were found on/);
