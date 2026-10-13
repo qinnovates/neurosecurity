@@ -11,6 +11,7 @@ import type { Crosswalk, CrosswalkContext, LabelTable, SubjectKind, TechniqueReg
 import { AnatomyDataError } from './errors';
 import { show } from './field-readers';
 import { LICENCE_FACTS, assessBuildability, effectiveLicenceId, mayPipelineUse, type Buildability } from './licence-rules';
+import { ATLAS_FILE, PATHWAYS_FILE } from './datalake-files';
 import type { AssetManifest } from './manifest-types';
 import { parseCrosswalk } from './parse-crosswalk';
 import { parseDeviceGeometry, type DeviceGeometry } from './parse-device-geometry';
@@ -23,8 +24,7 @@ import { findReview } from './review-state';
 import { parseVerdicts } from './parse-verdicts';
 import type { AnatomySources, LicenceId, LicenceVerdict, LicenceVerdicts } from './source-types';
 
-export const ATLAS_FILE = 'datalake/qif-brain-bci-atlas.json';
-export const PATHWAYS_FILE = 'datalake/qif-neural-pathways.json';
+export { ATLAS_FILE, PATHWAYS_FILE };
 const NETWORK_PATHWAY_TYPE = 'cortical_network';
 const AGREEMENT_ACCEPTING_ROLE: ReviewerRole = 'owner';
 const NEURAL_BAND_PREFIX = 'N';

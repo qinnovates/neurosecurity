@@ -12,13 +12,14 @@ import {
   type BandLevelReason, type TechniqueLink, type TechniqueRegionEntry, type TechniqueRegions,
 } from './anatomy-types';
 import { rejectBandKeys } from './band-key-scan';
+import { REGISTRAR_FILE } from './datalake-files';
 import { parseEvidence, readRationale, type ClaimBasis } from './evidence';
 import { childOf, failAt, itemOf, readEnum, readList, readRecord, readString, rejectDuplicates, rootOf, type FieldLocation } from './field-readers';
 import { readSchemaVersion } from './format-readers';
 import { TECHNIQUE_REGIONS_STATUS, readStatus } from './status-sentences';
 
 export const TECHNIQUE_REGIONS_FILE = 'datalake/qif-anatomy-technique-regions.json';
-export const REGISTRAR_FILE = 'datalake/qtara-registrar.json';
+export { REGISTRAR_FILE };
 const TECHNIQUE_REGIONS_SCHEMA_VERSION = 2;
 const MAX_TERM_LENGTH = 120;
 const REASON_SEPARATOR = ':';

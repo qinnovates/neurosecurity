@@ -5,6 +5,7 @@
  */
 
 import { isRecord } from '@/lib/threat-model/guards';
+import { ATLAS_FILE } from './datalake-files';
 import { AnatomyDataError } from './errors';
 import { childOf, failAt, readList, show, type FieldLocation } from './field-readers';
 
@@ -15,7 +16,6 @@ import { childOf, failAt, readList, show, type FieldLocation } from './field-rea
  */
 export const UNDECLARED_ADDRESSING_VERSION = 1;
 
-const ATLAS_FILE = 'datalake/qif-brain-bci-atlas.json';
 const VERSION_KEY = 'addressing_version';
 const FIRST_VERSION = 1;
 

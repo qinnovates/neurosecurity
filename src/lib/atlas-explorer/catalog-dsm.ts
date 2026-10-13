@@ -9,12 +9,11 @@
  * reaches one only through a technique linked to it or a pathway listing it.
  */
 
+import { PATHWAYS_FILE as PATHWAY_FILE, REGISTRAR_FILE } from '@/lib/anatomy/datalake-files';
 import { AnatomyDataError } from '@/lib/anatomy/errors';
 import { createTermResolver, lightsRegion } from '@/lib/anatomy/resolve-region-term';
 import { isRecord } from '@/lib/threat-model/guards';
 
-const REGISTRAR_FILE = 'datalake/qtara-registrar.json';
-const PATHWAY_FILE = 'datalake/qif-neural-pathways.json';
 
 export const DSM_TIERS = ['primary', 'secondary'] as const;
 export type DsmTier = typeof DSM_TIERS[number];

@@ -9,6 +9,7 @@
  * None of this is new anatomy: every word is copied from a datalake file.
  */
 
+import { ATLAS_FILE } from '@/lib/anatomy/datalake-files';
 import { AnatomyDataError } from '@/lib/anatomy/errors';
 import { rootOf } from '@/lib/anatomy/field-readers';
 import { readSchemaVersion } from '@/lib/anatomy/format-readers';
@@ -19,7 +20,6 @@ import { DSM_TIERS, readPathways, readTechniqueDsm, type CatalogPathway, type Ca
 
 export const EXPLORER_CATALOG_PATH = '/atlas/anatomy-catalog.json';
 export const EXPLORER_CATALOG_SCHEMA_VERSION = 1;
-const ATLAS_FILE = 'datalake/qif-brain-bci-atlas.json';
 
 /** The device side of the hourglass, application first, as the rail shows it. */
 export const DEVICE_STAGE_BAND_IDS: readonly string[] = [...SILICON_BANDS, INTERFACE_BAND];

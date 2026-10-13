@@ -14,6 +14,7 @@
 import { LIGHTING_MATCHES, REGION_MATCH } from '@shared/scripts/region-resolver.mjs';
 import { createCatalogTermResolver } from '@shared/scripts/region-term.mjs';
 import { isOneOf, isRecord } from '@/lib/threat-model/guards';
+import { ATLAS_FILE } from './datalake-files';
 import { AnatomyDataError } from './errors';
 
 export const RESOLUTIONS = ['id', 'synonym', 'part_to_whole', 'whole_to_part', 'unclassified'] as const;
@@ -25,7 +26,6 @@ export interface TermResolution {
   resolution: Resolution;
 }
 
-const ATLAS_FILE = 'datalake/qif-brain-bci-atlas.json';
 const LINK_CONTEXT = 'technique link';
 const UNRESOLVED_TERM: TermResolution = { resolved_region_id: null, resolution: REGION_MATCH.UNCLASSIFIED };
 
