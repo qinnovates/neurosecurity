@@ -49,7 +49,7 @@
         -55.6
       ],
       "method": "centre of the hollow in front of the ear's ridge, on the head's side surface",
-      "confidence_note": "Weak. The rule finds a hollow 8.8 mm deep in front of the ear's ridge. That may be the notch beside the outer ear and not the point in front of the tragus that the definition names. The average image blurs the ear. It may be a centimetre or more off, and is more likely too low than too high. Moving it 5.0 mm forward, back, up or down moves T7 by 4.6 to 5.4 mm and Cz by 0.4 to 4.5 mm."
+      "confidence_note": "Weak. The rule finds a hollow 8.8 mm deep in front of the ear's ridge. That may be the notch beside the ear, not the point in front of the tragus the definition names. It may be a centimetre or more off, and is more likely too low than too high. Shifting it 5 mm in the side view (5 to 7 mm over the skin) moves T7 by 4.6 to 5.4 mm; Cz moves about 4.5 mm for up or down, 0.4 mm for forward or back."
     },
     {
       "id": "right_preauricular",
@@ -59,7 +59,7 @@
         -55.1
       ],
       "method": "centre of the hollow in front of the ear's ridge, on the head's side surface",
-      "confidence_note": "Weak. The rule finds a hollow 10.1 mm deep in front of the ear's ridge. That may be the notch beside the outer ear and not the point in front of the tragus that the definition names. The average image blurs the ear. It may be a centimetre or more off, and is more likely too low than too high. Moving it 5.0 mm forward, back, up or down moves T8 by 4.9 to 5.4 mm and Cz by 0.4 to 4.6 mm."
+      "confidence_note": "Weak. The rule finds a hollow 10.1 mm deep in front of the ear's ridge. That may be the notch beside the ear, not the point in front of the tragus the definition names. It may be a centimetre or more off, and is more likely too low than too high. Shifting it 5 mm in the side view (5 to 7 mm over the skin) moves T8 by 4.9 to 5.4 mm; Cz moves about 4.6 mm for up or down, 0.4 mm for forward or back."
     }
   ],
   "electrode_layouts": [
@@ -451,7 +451,7 @@
   "facts": [
     {
       "id": "electrode_to_cortex_variability",
-      "statement": "In one study of 16 adults, the brain location under a given scalp electrode varied between people with a standard deviation of 4.6, 7.1 and 7.8 mm in x, y and z. The study used the 10-10 system and Talairach coordinates, not this template.",
+      "statement": "In one study, the brain location under a given scalp electrode varied between people with a standard deviation of 4.6, 7.1 and 7.8 mm in x, y and z. The study used the 10-10 system and Talairach coordinates, not this template.",
       "citation": "Koessler L, Maillard L, Benhadid A, Vignal JP, Felblinger J, Vespignani H, Braun M. Automated cortical projection of EEG sensors: anatomical correlation via the international 10-10 system. NeuroImage 2009;46:64-72. doi:10.1016/j.neuroimage.2009.02.006",
       "url": "https://doi.org/10.1016/j.neuroimage.2009.02.006",
       "quote": "a grand standard deviation of 4.6 mm in x, 7.1 mm in y and 7.8 mm in z",

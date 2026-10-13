@@ -94,14 +94,14 @@ describe('the committed device geometry (guard)', () => {
     const notes = Object.fromEntries(index.devices.fiducials.map((fiducial) => [fiducial.id, fiducial.confidence_note ?? '']));
     expect(notes.nasion).toMatch(/^Moderate\./);
     for (const id of ['inion', 'left_preauricular', 'right_preauricular']) expect(notes[id], id).toMatch(/^Weak\./);
-    expect(notes.left_preauricular).toMatch(/may be the notch beside the outer ear/);
+    expect(notes.left_preauricular).toMatch(/may be the notch beside the ear/);
     expect(notes.inion).toMatch(/skin does not show the inion/);
     const weakSentence = 'It may be a centimetre or more off, and is more likely too low than too high.';
     expect(notes.nasion).not.toContain(weakSentence);
     for (const id of ['inion', 'left_preauricular', 'right_preauricular']) expect(notes[id], id).toContain(weakSentence);
     expect(notes.inion).toMatch(/higher or lower moves Oz by up to \d+\.\d mm, and 15\.0 mm by up to \d+\.\d mm\./);
-    expect(notes.left_preauricular).toMatch(/moves T7 by \d+\.\d to \d+\.\d mm and Cz by \d+\.\d to \d+\.\d mm/);
-    expect(notes.right_preauricular).toMatch(/moves T8 by \d+\.\d to \d+\.\d mm and Cz by \d+\.\d to \d+\.\d mm/);
+    expect(notes.left_preauricular).toMatch(/in the side view \(5 to 7 mm over the skin\) moves T7 by \d+\.\d to \d+\.\d mm; Cz moves about \d+\.\d mm for up or down, \d+\.\d mm for forward or back\./);
+    expect(notes.right_preauricular).toMatch(/in the side view \(5 to 7 mm over the skin\) moves T8 by \d+\.\d to \d+\.\d mm; Cz moves about \d+\.\d mm for up or down, \d+\.\d mm for forward or back\./);
   });
 
   it('gives no electrode or lead a brain region, and adds no device-to-region link of its own', () => {
@@ -136,7 +136,7 @@ describe('the committed device geometry (guard)', () => {
   it('keeps the variability figure as words with its source and how much of it was read', () => {
     expect(index.devices.facts).toHaveLength(1);
     expect(index.devices.facts[0]).toMatchObject({ id: 'electrode_to_cortex_variability', read_depth: 'abstract_only' });
-    expect(index.devices.facts[0].statement).toMatch(/16 adults.*not this template/);
+    expect(index.devices.facts[0].statement).toMatch(/^In one study, the brain.*not this template/);
     expect(Object.keys(index.devices.facts[0]).sort()).toEqual(['citation', 'id', 'read_depth', 'statement', 'url']);
   });
 });

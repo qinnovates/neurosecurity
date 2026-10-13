@@ -114,7 +114,9 @@ export const LIMIT_TEMPLATES = {
   chain_order: 'The steps follow the order of this threat model, one after another. Nothing here shows a signal moving through the brain.',
   chain_not_incident: 'Each threat model here is a sequence of catalog techniques put together for this site. None is a report of something that happened.',
   chain_step_tally: '{lit} of this threat model\'s {total} steps light a region. A step that lights none has no single region linked to its technique; that does not mean it leaves the brain alone.',
-  chain_overall_tally: '{lit} of the {total} steps in these {chains} threat models light a region. For the others the picture of the brain does not change; the device stages their techniques are tagged with are marked under Device stages.',
+  chain_overall_tally: '{lit} of the {total} steps in these {chains} threat models light a region. For the others the picture of the brain does not change. Where a step\'s technique is tagged with a device stage, that stage is marked under Device stages; {neither} steps have neither.',
+  chain_no_evidence_step: 'The data file gives this step no evidence label.',
+  chain_no_evidence_chain: 'The data file gives this chain no evidence label.',
   chain_all_at_once: 'Your device asks for less motion, so every step is shown at once, numbered in the threat model\'s order.',
 
   // The electrode layout, the head surface and the lead drawings.
