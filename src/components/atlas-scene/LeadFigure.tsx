@@ -1,5 +1,5 @@
 import { limitSentence } from '@/lib/anatomy/limits-copy';
-import { NOT_TO_SCALE_END_MM, SCALE_BAR_MM, SOURCE_KIND_WORDS, type LeadFigure as LeadFigureData } from '@/lib/atlas-explorer/lead-figure';
+import { NOT_TO_SCALE_END_MM, SCALE_BAR_MM, SOURCE_KIND_WORDS, isLinkable, type LeadFigure as LeadFigureData } from '@/lib/atlas-explorer/lead-figure';
 import LimitNote from './LimitNote';
 import ReviewMark from './ReviewMark';
 
@@ -44,6 +44,11 @@ function LeadDrawing({ figure, widestSpanMm }: Props) {
   );
 }
 
+/** A citation, linked to its source when the address is an https one, and as plain words otherwise. */
+export function Citation({ citation, url }: { citation: string; url: string }) {
+  return isLinkable(url) ? <a href={url} rel="noopener noreferrer">{citation}</a> : <>{citation}</>;
+}
+
 /** Each number with where it was read and what kind of source that is. */
 function DimensionTable({ figure }: Pick<Props, 'figure'>) {
   return (
@@ -58,7 +63,7 @@ function DimensionTable({ figure }: Pick<Props, 'figure'>) {
               <td>{row.value}</td>
               <td>
                 {row.sources.length === 0 && 'No source is recorded for this number.'}
-                {row.sources.map((source) => <p key={`${source.url}:${source.citation}`} className="atlas-source"><a href={source.url} rel="noopener noreferrer">{source.citation}</a></p>)}
+                {row.sources.map((source) => <p key={`${source.url}:${source.citation}`} className="atlas-source"><Citation citation={source.citation} url={source.url} /></p>)}
               </td>
               <td>{[...new Set(row.sources.map((source) => SOURCE_KIND_WORDS[source.kind]))].join(', ')}</td>
             </tr>

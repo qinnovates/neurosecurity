@@ -7,7 +7,7 @@ import { rasToScene } from '@/lib/anatomy/ras-to-scene';
 import {
   ELECTRODE_LAYER_NAME, buildDeviceCaption, buildDeviceDrawing, describeElectrode, isDevicesLayerShown, layersAtStart, listLandmarkNotes,
 } from '../device-drawing';
-import { SCALE_BAR_MM, SOURCE_KIND_WORDS, buildLeadFigures, longestContactSpanMm } from '../lead-figure';
+import { SCALE_BAR_MM, SOURCE_KIND_WORDS, buildLeadFigures, isLinkable, longestContactSpanMm } from '../lead-figure';
 import { choosePickTarget, isPickable, materialParamsFor, unionBoxes, type PickHit } from '../scene-drawing';
 import { loadRealModel } from './explorer-fixtures';
 
@@ -123,6 +123,12 @@ describe('the lead figures', () => {
     expect([...kinds].sort()).toEqual(['FDA document', 'review paper']);
     // The panel's limit sentence quotes the words the table uses for a journal article.
     expect(LIMIT_TEMPLATES.device_lead_panel).toContain(`'${SOURCE_KIND_WORDS.review_paper}'`);
+  });
+
+  it('links a citation only to an https address, whatever an index it could not match to its build might hold', () => {
+    expect(figures.flatMap((figure) => figure.rows.flatMap((row) => row.sources)).every((source) => isLinkable(source.url))).toBe(true);
+    expect(index.devices.facts.every((fact) => isLinkable(fact.url))).toBe(true);
+    for (const url of ['javascript:alert(1)', 'http://example.org/', 'data:text/html,x', '//example.org', ' https://example.org']) expect(isLinkable(url), url).toBe(false);
   });
 
   it('holds a size and no place: no position, target, angle or region anywhere in a figure', () => {

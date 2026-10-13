@@ -1,8 +1,8 @@
-import type { AnatomyIndex } from '@/lib/anatomy/anatomy-index-types';
+import type { AnatomyIndex, IndexDeviceFact, IndexElectrodeLayout } from '@/lib/anatomy/anatomy-index-types';
 import { limitSentence } from '@/lib/anatomy/limits-copy';
 import { ELECTRODE_LAYER_NAME, describeElectrode, listDrawableLayouts, listLandmarkNotes, type ElectrodeDetail, type LandmarkNote } from '@/lib/atlas-explorer/device-drawing';
 import { buildLeadFigures, longestContactSpanMm } from '@/lib/atlas-explorer/lead-figure';
-import LeadFigure, { LeadLimits } from './LeadFigure';
+import LeadFigure, { Citation, LeadLimits } from './LeadFigure';
 import LimitNote from './LimitNote';
 import ReviewMark from './ReviewMark';
 
@@ -39,6 +39,45 @@ function PickedElectrode({ detail, onClear }: { detail: ElectrodeDetail; onClear
   );
 }
 
+type LayoutProps = Pick<Props, 'electrodeId' | 'onPickElectrode'> & { layout: IndexElectrodeLayout };
+
+/** One layout: its name and review state, how it was made, its limits, and every electrode as a button. */
+function ElectrodeLayout({ layout, electrodeId, onPickElectrode }: LayoutProps) {
+  return (
+    <div data-layout-id={layout.id}>
+      <p className="atlas-fact"><strong>{layout.name}</strong> <ReviewMark state={layout.review_state} /></p>
+      <p className="atlas-fact">{layout.construction}</p>
+      <LimitNote limit={limitSentence('device_electrodes')} />
+      <LimitNote limit={limitSentence('device_head_surface')} />
+      <LimitNote limit={limitSentence('device_electrode_pick')} />
+      <ul className="atlas-chips" aria-label={`The ${layout.electrodes.length} electrode positions, by name`}>
+        {layout.electrodes.map((electrode) => (
+          <li key={electrode.id}>
+            <button type="button" className="atlas-chip" data-electrode-id={electrode.id} aria-pressed={electrode.id === electrodeId} onClick={() => onPickElectrode(electrode.id === electrodeId ? null : electrode.id)}>
+              {electrode.id}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/** Sourced statements about the layout, in words with their citation and how each was read. Never drawn. */
+function DeviceFacts({ facts }: { facts: readonly IndexDeviceFact[] }) {
+  return (
+    <>
+      {facts.map((fact) => (
+        <div key={fact.id} data-device-fact={fact.id}>
+          <p className="atlas-fact">{fact.statement}</p>
+          <p className="atlas-source"><Citation citation={fact.citation} url={fact.url} /></p>
+          <LimitNote limit={limitSentence(fact.read_depth === 'abstract_only' ? 'device_fact_abstract_only' : 'device_fact_full_text')} />
+        </div>
+      ))}
+    </>
+  );
+}
+
 /**
  * The devices layer in words and drawings, shown whenever the layer is on,
  * whether or not the 3D view is open: the electrode layout's dots by name, the
@@ -56,24 +95,7 @@ export default function DeviceGeometry({ index, electrodeId, onPickElectrode }: 
     <section className="atlas-panel atlas-devices" aria-labelledby="atlas-devices-heading">
       <h2 className="atlas-heading" id="atlas-devices-heading">{ELECTRODE_LAYER_NAME}</h2>
       {layouts.length === 0 && <p className="atlas-fact">This build holds no electrode layout that can be drawn.</p>}
-      {layouts.map((layout) => (
-        <div key={layout.id} data-layout-id={layout.id}>
-          <p className="atlas-fact"><strong>{layout.name}</strong> <ReviewMark state={layout.review_state} /></p>
-          <p className="atlas-fact">{layout.construction}</p>
-          <LimitNote limit={limitSentence('device_electrodes')} />
-          <LimitNote limit={limitSentence('device_head_surface')} />
-          <LimitNote limit={limitSentence('device_electrode_pick')} />
-          <ul className="atlas-chips" aria-label={`The ${layout.electrodes.length} electrode positions, by name`}>
-            {layout.electrodes.map((electrode) => (
-              <li key={electrode.id}>
-                <button type="button" className="atlas-chip" data-electrode-id={electrode.id} aria-pressed={electrode.id === electrodeId} onClick={() => onPickElectrode(electrode.id === electrodeId ? null : electrode.id)}>
-                  {electrode.id}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      {layouts.map((layout) => <ElectrodeLayout key={layout.id} layout={layout} electrodeId={electrodeId} onPickElectrode={onPickElectrode} />)}
       {detail !== null && <PickedElectrode detail={detail} onClear={() => onPickElectrode(null)} />}
       {layouts.length > 0 && detail === null && (
         <>
@@ -83,13 +105,7 @@ export default function DeviceGeometry({ index, electrodeId, onPickElectrode }: 
           <Landmarks landmarks={listLandmarkNotes(index)} />
         </>
       )}
-      {index.devices.facts.map((fact) => (
-        <div key={fact.id} data-device-fact={fact.id}>
-          <p className="atlas-fact">{fact.statement}</p>
-          <p className="atlas-source"><a href={fact.url} rel="noopener noreferrer">{fact.citation}</a></p>
-          <LimitNote limit={limitSentence(fact.read_depth === 'abstract_only' ? 'device_fact_abstract_only' : 'device_fact_full_text')} />
-        </div>
-      ))}
+      <DeviceFacts facts={index.devices.facts} />
       {leads.length > 0 && (
         <div className="atlas-leads" data-leads="beside-the-brain">
           <h3 className="atlas-subheading">Deep brain stimulation leads, beside the brain</h3>

@@ -90,6 +90,7 @@ export default function ChainView({ model, view }: Props) {
       )}
       {chains.status === 'ready' && chain !== null && (
         <>
+          {chain.evidence_label !== null && <p className="atlas-fact" data-chain-label={chain.evidence_label}>The datalake file labels this threat model as a whole: <strong>{EVIDENCE_LABEL_WORDS[chain.evidence_label].toLowerCase()}</strong>.</p>}
           <LimitNote limit={limitSentence('chain_step_tally', { lit: String(tally.lit), total: String(tally.total) })} />
           {isWhole ? <LimitNote limit={limitSentence('chain_all_at_once')} /> : <Controls view={view} />}
           <ol className="atlas-chain-steps">

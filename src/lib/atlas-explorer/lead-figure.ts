@@ -57,6 +57,16 @@ export function buildLeadFigures(index: AnatomyIndex): LeadFigure[] {
   return index.devices.leads.filter((lead) => lead.drawable).map((lead) => ({ id: lead.id, name: lead.name, reviewState: lead.review_state, shape: buildLeadShape(lead), rows: rowsOf(lead) }));
 }
 
+const HTTPS_PREFIX = 'https://';
+
+/**
+ * Whether a source's address may be made a link. The data files hold only https addresses and the build checks it;
+ * a page reading an index it could not match to its own build checks again, and shows the citation as words otherwise.
+ */
+export function isLinkable(url: string): boolean {
+  return url.startsWith(HTTPS_PREFIX);
+}
+
 /** The length of the scale bar, in millimetres. */
 export const SCALE_BAR_MM = 5;
 /** Drawn before the first contact and after the last. Not to scale: the sources give no tip length, and the lead runs on far beyond the picture. */
