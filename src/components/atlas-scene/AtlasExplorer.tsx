@@ -23,7 +23,19 @@ export default function AtlasExplorer({ indexPin }: Props) {
   const pin = indexPin ?? null;
   const load = useCallback((signal: AbortSignal) => loadExplorerModel(signal, pin), [pin?.sha256, pin?.bytes, pin?.path]);
   const { state, retry } = useLoaded(load, true, ANATOMY_INDEX_PATH);
-  if (state.status === 'ready') return <ExplorerWorkspace model={state.data} isIndexPinned={pin !== null} />;
+  if (state.status === 'ready') {
+    return (
+      <>
+        {state.data.indexPinState === 'mismatched' && (
+          <p className="atlas-failure" role="alert" data-index-pin="mismatched">
+            <strong>The 3D view is not available.</strong> This page and the data files the site now serves are out of step with each other, so no shape can be matched to this page.
+            The list below is read from the data now served. Reload the page to get a matching copy.
+          </p>
+        )}
+        <ExplorerWorkspace model={state.data.model} isIndexPinned={state.data.indexPinState === 'pinned'} />
+      </>
+    );
+  }
   return (
     <div className="atlas-root" data-status={state.status}>
       <LoadNotice what="the atlas data" state={state.status === 'idle' ? { status: 'loading' } : state} onRetry={retry} />

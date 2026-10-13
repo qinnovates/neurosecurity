@@ -12,6 +12,7 @@
 import {
   DirectionalLight, HemisphereLight, type Mesh, PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer, type BufferGeometry,
 } from 'three';
+import { axisDirectionsFor, choosePick, idleTurnSpeed, pointerToNdc, type AxisDirections, type PickHit } from '@/lib/atlas-explorer/scene-drawing';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import { rasToScene } from '@/lib/anatomy/ras-to-scene';
 import {
@@ -19,10 +20,9 @@ import {
 } from '@/lib/atlas-explorer/camera-views';
 import type { SceneShape } from '@/lib/atlas-explorer/scene-shapes';
 import { slicePlane, type SliceState } from '@/lib/atlas-explorer/slice-plane';
-import { buildGeometry, buildShapeObjects, disposeShapeObjects, type ShapeObjects } from './scene-objects';
+import { buildGeometry, buildShapeObjects, listDisposables, type ShapeObjects } from './scene-objects';
 
-/** Where each anatomical direction points on screen: x to the right, y up, z towards the viewer, each from -1 to 1. */
-export type AxisDirections = Readonly<Record<'left' | 'right' | 'front' | 'back' | 'top' | 'bottom', readonly [number, number, number]>>;
+export type { AxisDirections };
 
 export interface SceneCallbacks {
   /** A click that was not a drag. Null when it landed on nothing. */
@@ -39,6 +39,7 @@ export interface SceneRenderer {
   focusOn: (centreScene: readonly [number, number, number]) => void;
   zoomTo: (distance: number) => void;
   turnBy: (azimuth: number) => void;
+  tiltBy: (polar: number) => void;
   distance: () => number;
   resize: (width: number, height: number) => void;
   dispose: () => void;
@@ -52,11 +53,6 @@ const DRAG_RADIANS_PER_PIXEL = 0.006;
 const WHEEL_ZOOM_PER_PIXEL = 0.0015;
 /** A pointer that moved less than this between press and release was a click, not a drag. */
 const CLICK_SLOP_PX = 4;
-/** One slow turn takes about two minutes: enough to show depth, too slow to suggest activity. */
-const IDLE_RADIANS_PER_MS = (Math.PI * 2) / 120_000;
-const SCENE_AXES: Readonly<Record<keyof AxisDirections, readonly [number, number, number]>> = {
-  left: [-1, 0, 0], right: [1, 0, 0], front: [0, 0, -1], back: [0, 0, 1], top: [0, 1, 0], bottom: [0, -1, 0],
-};
 
 function easeOut(progress: number): number {
   return 1 - (1 - progress) ** 3;
@@ -78,7 +74,8 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
   /** The middle of the brain outline: what every named view looks at. */
   let home: readonly [number, number, number] = [0, 0, 0];
   let move: { from: OrbitPose; to: OrbitPose; startedAt: number; durationMs: number } | null = null;
-  let isIdleTurning = !prefersLessMotion;
+  const idleSpeed = idleTurnSpeed(prefersLessMotion);
+  let isIdleTurning = idleSpeed > 0;
   let lastFrameAt = 0;
   let frame = 0;
   let hoverPoint: { x: number; y: number } | null = null;
@@ -96,20 +93,17 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
     const [x, y, z] = positionOfPose(pose);
     camera.position.set(x, y, z);
     camera.lookAt(pose.target[0], pose.target[1], pose.target[2]);
-    const inverse = camera.quaternion.clone().invert();
-    const project = (axis: readonly [number, number, number]): [number, number, number] => new Vector3(axis[0], axis[1], axis[2]).applyQuaternion(inverse).toArray();
-    callbacks.onCameraTurn({
-      left: project(SCENE_AXES.left), right: project(SCENE_AXES.right), front: project(SCENE_AXES.front),
-      back: project(SCENE_AXES.back), top: project(SCENE_AXES.top), bottom: project(SCENE_AXES.bottom),
-    });
+    callbacks.onCameraTurn(axisDirectionsFor(pose));
   };
 
   const pickAt = (clientX: number, clientY: number): string | null => {
-    const bounds = canvas.getBoundingClientRect();
-    raycaster.setFromCamera(new Vector2(((clientX - bounds.left) / bounds.width) * 2 - 1, -((clientY - bounds.top) / bounds.height) * 2 + 1), camera);
-    const targets = objects.flatMap((entry) => entry.pickTargets);
-    const hit = raycaster.intersectObjects<Mesh>(targets, false).find((candidate) => clip === null || clip.distanceToPoint(candidate.point) >= 0);
-    return typeof hit?.object.userData.structureKey === 'string' ? hit.object.userData.structureKey : null;
+    const [x, y] = pointerToNdc(clientX, clientY, canvas.getBoundingClientRect());
+    raycaster.setFromCamera(new Vector2(x, y), camera);
+    const hits = raycaster.intersectObjects<Mesh>(objects.flatMap((entry) => entry.pickTargets), false);
+    return choosePick(hits.map((hit): PickHit => ({
+      structureKey: String(hit.object.userData.structureKey), distance: hit.distance, fill: hit.object.userData.fill, isSelected: hit.object.userData.isSelected === true,
+      isHiddenByCut: clip !== null && clip.distanceToPoint(hit.point) < 0,
+    })));
   };
 
   /** Advances the camera. Returns whether another frame is needed. */
@@ -121,7 +115,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       return move !== null;
     }
     if (!isIdleTurning) return false;
-    pose = turnPose(pose, IDLE_RADIANS_PER_MS * (lastFrameAt === 0 ? 0 : now - lastFrameAt), 0);
+    pose = turnPose(pose, idleSpeed * (lastFrameAt === 0 ? 0 : now - lastFrameAt), 0);
     return true;
   };
 
@@ -167,18 +161,24 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
     if (press !== null && Math.hypot(event.clientX - press.x, event.clientY - press.y) < CLICK_SLOP_PX) callbacks.onPick(pickAt(event.clientX, event.clientY));
     press = null;
   };
+  /** The wheel zooms only with Ctrl or Command held, so an ordinary scroll over the picture still scrolls the page. */
   const onWheel = (event: WheelEvent): void => {
+    if (!event.ctrlKey && !event.metaKey) return;
+    const distance = clampDistance(pose.distance * (1 + event.deltaY * WHEEL_ZOOM_PER_PIXEL));
+    // At either end of the zoom range the wheel is left alone, so the page can take it.
+    if (distance === pose.distance) return;
     event.preventDefault();
     isIdleTurning = false;
-    pose = { ...pose, distance: clampDistance(pose.distance * (1 + event.deltaY * WHEEL_ZOOM_PER_PIXEL)) };
+    pose = { ...pose, distance };
     invalidate();
   };
+  const onPointerCancel = (): void => { press = null; };
   const onContextLost = (event: Event): void => {
     event.preventDefault();
     callbacks.onContextLost();
   };
   const listeners: Array<[string, EventListener, AddEventListenerOptions?]> = [
-    ['pointerdown', onPointerDown as EventListener], ['pointermove', onPointerMove as EventListener], ['pointerup', onPointerUp as EventListener],
+    ['pointerdown', onPointerDown as EventListener], ['pointermove', onPointerMove as EventListener], ['pointerup', onPointerUp as EventListener], ['pointercancel', onPointerCancel],
     ['wheel', onWheel as EventListener, { passive: false }], ['webglcontextlost', onContextLost],
   ];
   for (const [type, listener, options] of listeners) canvas.addEventListener(type, listener, options);
@@ -186,7 +186,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
   const clearObjects = (): void => {
     for (const entry of objects) {
       scene.remove(entry.group);
-      disposeShapeObjects(entry, geometries.get(entry.shape.id) ?? null);
+      for (const owned of listDisposables(entry, geometries.get(entry.shape.id) ?? null)) owned.dispose();
     }
     objects = [];
   };
@@ -225,6 +225,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
     focusOn: (centreScene) => moveTo({ ...pose, target: centreScene }),
     zoomTo: (distance) => moveTo({ ...pose, distance: clampDistance(distance) }),
     turnBy: (azimuth) => moveTo(turnPose(pose, azimuth, 0)),
+    tiltBy: (polar) => moveTo(turnPose(pose, 0, polar)),
     distance: () => (move?.to ?? pose).distance,
     resize(width, height) {
       renderer.setSize(width, height, false);
@@ -238,6 +239,8 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       clearObjects();
       for (const geometry of geometries.values()) geometry.dispose();
       renderer.dispose();
+      // Hands the WebGL context back at once: browsers allow only a handful, and a view opened and hidden many times would run out.
+      renderer.forceContextLoss();
     },
   };
 }

@@ -61,7 +61,7 @@ function PickedPanel({ picked, onSelectRegion, onClearPick }: Pick<Props, 'onSel
     <div className="atlas-picked" data-picked-key={picked.structureKey}>
       <p className="atlas-fact">Picked shape: <strong>{picked.label}</strong>, from {picked.sourceName}.</p>
       {picked.regions.length === 0 && <LimitNote limit={limitSentence('picked_shape_unowned')} />}
-      {picked.regions.length > 0 && picked.selectedRegionId === null && <LimitNote limit={limitSentence('picked_shape_shared')} />}
+      {picked.regions.length > 0 && picked.selectedRegionId === null && <LimitNote limit={limitSentence(picked.regions.length === 1 ? 'picked_shape_larger' : 'picked_shape_shared')} />}
       {picked.regions.length > 0 && (
         <ul className="atlas-chips" aria-label="QIF regions with a record on this shape">
           {picked.regions.map((region) => <li key={region.id}><button type="button" className="atlas-chip" onClick={() => onSelectRegion(region.id)}>{region.name}</button></li>)}
@@ -84,7 +84,7 @@ export default function ViewportLegend({ caption, drawnShapes, assets, assetStat
         <li><MarkGlyph mark="inside_or_mixed" /> pale: somewhere inside, or records differ</li>
         <li><MarkGlyph mark="no_data" /> lines only: no data</li>
         <li><span className="atlas-ring-swatch" aria-hidden="true" /> ring: too small to outline, or only roughly outlined</li>
-        <li><span className="atlas-selection-swatch" aria-hidden="true" /> orange rim: selected</li>
+        <li><span className="atlas-selection-swatch" aria-hidden="true" /> orange corner marks: selected</li>
         {steps.map((entry) => <li key={entry.step}><span className="atlas-step-swatch" style={{ background: entry.colour }} aria-hidden="true" /> {entry.step.replaceAll('_', ' ')}</li>)}
       </ul>
       {caption.markLimits.map((limit) => <LimitNote key={limit.id} limit={limit} />)}

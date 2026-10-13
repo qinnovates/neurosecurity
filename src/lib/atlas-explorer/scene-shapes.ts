@@ -94,5 +94,8 @@ export function buildSceneShapes(model: ExplorerModel, mode: ColourMode | null, 
 /** The steps and colours on screen, for the legend. Empty when no shape is filled. */
 export function listLegendSteps(shapes: readonly SceneShape[]): Array<{ step: string; colour: string }> {
   const steps = new Map(shapes.filter((shape) => shape.fill === 'solid' && shape.step !== null).map((shape) => [shape.step as string, shape.colour]));
-  return [...steps].map(([step, colour]) => ({ step, colour })).sort((first, second) => first.step.localeCompare(second.step));
+  // NISS steps in order of severity, bands from the neocortex down; anything else by name.
+  const order = [...Object.keys(NISS_COLOURS), ...Object.keys(BAND_COLOURS)];
+  const rank = (step: string): number => (order.includes(step) ? order.indexOf(step) : order.length);
+  return [...steps].map(([step, colour]) => ({ step, colour })).sort((first, second) => rank(first.step) - rank(second.step) || first.step.localeCompare(second.step));
 }

@@ -51,6 +51,8 @@ const INT16_SCALE = 32767;
 const TRIANGLES = 4;
 const VERTEX_COMPONENTS = 3;
 const TRIANGLE_CORNERS = 3;
+/** Far above any atlas file here (the largest holds about a hundred shapes), and low enough to stop a file built to exhaust memory. */
+const MAX_NODES = 2000;
 const ALLOWED_TOP_LEVEL_KEYS = ['accessors', 'asset', 'bufferViews', 'buffers', 'extensionsRequired', 'extensionsUsed', 'meshes', 'nodes', 'scene', 'scenes'];
 const ALLOWED_EXTENSIONS = ['KHR_mesh_quantization'];
 const ALLOWED_NODE_KEYS = ['extras', 'mesh', 'name', 'scale', 'translation'];
@@ -103,10 +105,15 @@ function readChunks(bytes: Uint8Array): Chunks {
 function rejectUnsupported(document: Record<string, unknown>): void {
   const strayKey = Object.keys(document).find((key) => !ALLOWED_TOP_LEVEL_KEYS.includes(key));
   if (strayKey !== undefined) fail('unsupported', `it carries "${strayKey}", and only geometry is accepted`);
+  for (const key of ['extensionsUsed', 'extensionsRequired']) {
+    if (document[key] !== undefined && !Array.isArray(document[key])) fail('malformed', `${key} is not a list`);
+  }
   const extensions = [document.extensionsUsed, document.extensionsRequired].flatMap((list) => (Array.isArray(list) ? list : []));
   const strayExtension = extensions.find((extension) => !ALLOWED_EXTENSIONS.includes(String(extension)));
   if (strayExtension !== undefined) fail('unsupported', `it needs the extension "${String(strayExtension)}"`);
-  if (requireList(document.buffers, 'buffers').length !== 1) fail('unsupported', 'it has more than one buffer');
+  const buffers = requireList(document.buffers, 'buffers');
+  if (buffers.length !== 1) fail('unsupported', 'it has more than one buffer');
+  if (buffers[0].uri !== undefined) fail('unsupported', 'its buffer points at another file');
 }
 
 interface Tables {
@@ -120,7 +127,10 @@ interface Tables {
 function sliceAccessor(tables: Tables, accessorIndex: unknown, bytesPerItem: number, what: string): { view: DataView; count: number } {
   const accessor = tables.accessors[requireIndex(accessorIndex, tables.accessors.length, what)];
   const bufferView = tables.bufferViews[requireIndex(accessor.bufferView, tables.bufferViews.length, `${what} buffer view`)];
+  if (accessor.sparse !== undefined) fail('unsupported', `${what} is stored sparsely`);
   const count = requireIndex(accessor.count, Number.MAX_SAFE_INTEGER, `${what} count`);
+  const viewLength = requireIndex(bufferView.byteLength, tables.binary.byteLength + 1, `${what} buffer view length`);
+  if (requireIndex(accessor.byteOffset ?? 0, tables.binary.byteLength + 1, `${what} offset`) + count * bytesPerItem > viewLength) fail('out_of_bounds', `${what} reaches past its buffer view`);
   const offset = requireIndex(bufferView.byteOffset ?? 0, tables.binary.byteLength + 1, `${what} offset`) + requireIndex(accessor.byteOffset ?? 0, tables.binary.byteLength + 1, `${what} offset`);
   if (bufferView.byteStride !== undefined || offset + count * bytesPerItem > tables.binary.byteLength) fail('out_of_bounds', `${what} reaches past the end of the file`);
   return { view: new DataView(tables.binary.buffer, tables.binary.byteOffset + offset, count * bytesPerItem), count };
@@ -182,7 +192,9 @@ function decodeNode(node: Record<string, unknown>, tables: Tables): DecodedNode 
   const attributes = primitive !== undefined && isRecord(primitive.attributes) ? primitive.attributes : {};
   const hasOnlyPositions = Object.keys(attributes).length === 1 && Object.keys(primitive ?? {}).every((key) => ['attributes', 'indices', 'mode'].includes(key));
   if (primitives.length !== 1 || primitive.mode !== TRIANGLES || !hasOnlyPositions) fail('unsupported', 'a mesh is not one plain set of triangles');
-  const positionsMm = readPositions(tables, attributes.POSITION, requireTriple(node.scale ?? [1, 1, 1], 'a scale'), requireTriple(node.translation ?? [0, 0, 0], 'a translation'));
+  const scale = requireTriple(node.scale ?? [1, 1, 1], 'a scale');
+  if (scale.some((factor) => factor <= 0)) fail('unsupported', 'a shape is scaled by zero or mirrored by a negative scale');
+  const positionsMm = readPositions(tables, attributes.POSITION, scale, requireTriple(node.translation ?? [0, 0, 0], 'a translation'));
   return { ...readIdentity(node), positionsMm, indices: readIndices(tables, primitive.indices, positionsMm.length / VERTEX_COMPONENTS), boundsMm: measureBounds(positionsMm) };
 }
 
@@ -195,5 +207,7 @@ export function decodeGlb(bytes: Uint8Array): DecodedNode[] {
   rejectUnsupported(document);
   const tables: Tables = { accessors: requireList(document.accessors, 'accessors'), bufferViews: requireList(document.bufferViews, 'bufferViews'), meshes: requireList(document.meshes, 'meshes'), binary };
   if (tables.bufferViews.some((bufferView) => bufferView.buffer !== 0)) fail('unsupported', 'a buffer view names a second buffer');
-  return requireList(document.nodes, 'nodes').map((node) => decodeNode(node, tables));
+  const nodes = requireList(document.nodes, 'nodes');
+  if (nodes.length > MAX_NODES) fail('unsupported', `it holds more than ${MAX_NODES} shapes`);
+  return nodes.map((node) => decodeNode(node, tables));
 }

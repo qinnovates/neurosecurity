@@ -28,7 +28,7 @@ export interface OpenViewportProps {
   loadCanvas?: () => Promise<CanvasModule>;
 }
 
-const NO_COMMANDS: CanvasCommands = { setView: () => undefined, zoom: () => undefined, turn: () => undefined };
+const NO_COMMANDS: CanvasCommands = { setView: () => undefined, zoom: () => undefined, turn: () => undefined, tilt: () => undefined };
 const loadRealCanvas = (): Promise<CanvasModule> => import('./AtlasCanvas');
 
 function meanOf(points: ReadonlyArray<readonly [number, number, number]>): [number, number, number] | null {
@@ -66,7 +66,7 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, on
     if (regionId !== null) onSelectRegion(regionId);
   };
   const turnView = (viewId: CameraViewId): void => { commands.current.setView(viewId); setActiveView(viewId); };
-  const byHand: CanvasCommands = { setView: turnView, zoom: (direction) => commands.current.zoom(direction), turn: (direction) => { commands.current.turn(direction); setActiveView(null); } };
+  const byHand: CanvasCommands = { setView: turnView, zoom: (direction) => commands.current.zoom(direction), turn: (direction) => { commands.current.turn(direction); setActiveView(null); }, tilt: (direction) => { commands.current.tilt(direction); setActiveView(null); } };
   const cutNames = slice === null ? [] : [...new Set(listShapesCutAt(slice, [...scene.nodesByShapeId.values()]).map((node) => resolvePick(model, `${node.atlas}:${node.labelId}`)?.label ?? node.labelId))];
   const description = `3D picture of an average brain outline with ${scene.drawnShapes.length} atlas shapes drawn inside it, ${scene.caption.lensLabel} lens, ${activeView === null ? 'turned by hand' : CAMERA_VIEW_LABELS[activeView].toLowerCase()}. Every fact it shows is in the region list.`;
 
@@ -79,7 +79,7 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, on
       <button type="button" className="atlas-link-button" onClick={onClose}>Hide the 3D view</button>
       <div className="atlas-viewport-body">
         <ViewportStage
-          Canvas={Canvas} canvasProps={canvasProps} commands={commands} caption={scene.caption} directions={directions}
+          Canvas={Canvas} canvasProps={canvasProps} commands={commands} caption={scene.caption} directions={directions} slice={slice}
           hoverLabel={hoveredKey === null ? null : resolvePick(model, hoveredKey)?.label ?? null}
         />
         <div className="atlas-viewport-side">

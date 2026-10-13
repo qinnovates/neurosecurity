@@ -64,6 +64,8 @@ export default function ViewportControls(props: Props) {
         <button type="button" className="atlas-button" onClick={() => commands.zoom('out')}>Zoom out</button>
         <button type="button" className="atlas-button" onClick={() => commands.turn('left')}>Turn left</button>
         <button type="button" className="atlas-button" onClick={() => commands.turn('right')}>Turn right</button>
+        <button type="button" className="atlas-button" onClick={() => commands.tilt('up')}>Tilt up</button>
+        <button type="button" className="atlas-button" onClick={() => commands.tilt('down')}>Tilt down</button>
       </div>
       <div className="atlas-control-group">
         <button type="button" className="atlas-toggle" aria-pressed={slice !== null} aria-disabled={bounds === null} onClick={() => { if (bounds !== null) props.onToggleSlice(); }}>
@@ -71,9 +73,9 @@ export default function ViewportControls(props: Props) {
           Cut through the brain
         </button>
       </div>
+      <LimitNote limit={limitSentence('view_hint')} />
       {slice !== null && bounds !== null && (
         <>
-          <LimitNote limit={limitSentence('slice_view')} />
           <SliceControls slice={slice} bounds={bounds} cutShapeNames={props.cutShapeNames} onSliceAxis={props.onSliceAxis} onSlicePosition={props.onSlicePosition} onSliceStep={props.onSliceStep} />
         </>
       )}

@@ -29,8 +29,8 @@ export interface ExpectedNode {
   centroidMm: readonly [number, number, number];
 }
 
-/** How far outside a shape's own box its recorded centre may lie. A curved shape's centre of volume can sit just outside it. */
-export const CENTROID_TOLERANCE_MM = 15;
+/** How far outside a shape's own box its recorded centre may lie: rounding only. Every real shape's centre lies inside its box. */
+export const CENTROID_TOLERANCE_MM = 0.5;
 const HEX_RADIX = 16;
 const HEX_BYTE_WIDTH = 2;
 const KEY_SEPARATOR = ':';
@@ -50,6 +50,20 @@ export function listExpectedNodes(index: AnatomyIndex, assetId: string): Expecte
     .map((node) => ({ atlas: structure.atlas, labelId: structure.label_id, hemisphere: node.hemisphere, vertexCount: node.vertex_count, centroidMm: node.centroid_mm })));
 }
 
+/**
+ * Six times the volume a mesh encloses, signed: positive when its triangles are wound to face outward, negative when
+ * they face inward. A mesh wound inward is lit and outlined inside out, so it is refused, not corrected here.
+ */
+export function signedVolumeTimesSix(node: Pick<DecodedNode, 'positionsMm' | 'indices'>): number {
+  const { positionsMm: p, indices } = node;
+  let total = 0;
+  for (let corner = 0; corner < indices.length; corner += 3) {
+    const [a, b, c] = [indices[corner] * 3, indices[corner + 1] * 3, indices[corner + 2] * 3];
+    total += p[a] * (p[b + 1] * p[c + 2] - p[b + 2] * p[c + 1]) - p[a + 1] * (p[b] * p[c + 2] - p[b + 2] * p[c]) + p[a + 2] * (p[b] * p[c + 1] - p[b + 1] * p[c]);
+  }
+  return total;
+}
+
 function isNear(node: DecodedNode, centroidMm: readonly [number, number, number]): boolean {
   return centroidMm.every((value, axis) => value >= node.boundsMm.min[axis] - CENTROID_TOLERANCE_MM && value <= node.boundsMm.max[axis] + CENTROID_TOLERANCE_MM);
 }
@@ -64,6 +78,7 @@ export function compareWithIndex(decoded: readonly DecodedNode[], expected: read
     if (found === undefined) return refuse('contents_differ', `the file has no shape for ${nodeKey(node)}`);
     if (found.positionsMm.length / 3 !== node.vertexCount) return refuse('contents_differ', `${nodeKey(node)} has a different number of vertices than the index records`);
     if (!isNear(found, node.centroidMm)) return refuse('contents_differ', `${nodeKey(node)} is not where the index records it`);
+    if (!found.positionsMm.every(Number.isFinite)) return refuse('contents_differ', `${nodeKey(node)} holds a position that is not a number`);
   }
   return { ok: true, nodes: [...decoded] };
 }

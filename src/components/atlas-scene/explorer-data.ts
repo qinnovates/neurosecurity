@@ -107,15 +107,40 @@ function companionPin(index: AnatomyIndex, path: string): PinnedFile {
 }
 
 /**
+ * `pinned`: the index is the one the page was built with. `unpinned`: the page gave no pin. `mismatched`: the page's
+ * pin and the index the site now serves differ, so the page and its data are out of step.
+ */
+export type IndexPinState = 'pinned' | 'unpinned' | 'mismatched';
+
+export interface LoadedExplorer {
+  model: ExplorerModel;
+  indexPinState: IndexPinState;
+}
+
+/**
+ * The index as the page pins it. When the served index is not that file, the list can still be read from it, so it is
+ * fetched without the pin and the mismatch is reported: the 3D view then draws nothing, and the page says why.
+ */
+async function fetchIndex(signal: AbortSignal, indexPin: PinnedFile | null): Promise<{ raw: unknown; indexPinState: IndexPinState }> {
+  if (indexPin === null) return { raw: await fetchAtlasJson(ANATOMY_INDEX_PATH, signal), indexPinState: 'unpinned' };
+  try {
+    return { raw: await fetchPinnedJson(indexPin, signal), indexPinState: 'pinned' };
+  } catch (error) {
+    if (!(error instanceof AtlasFetchError) || error.failure !== 'pin_mismatch') throw error;
+    return { raw: await fetchAtlasJson(ANATOMY_INDEX_PATH, signal), indexPinState: 'mismatched' };
+  }
+}
+
+/**
  * The index first; then the catalog, which must be the exact file that index pins.
  *
- * @param indexPin the index's length and digest as the page was built with them. With it, an index from any other
- *   build is refused; without it, the index is only held to its shape, and the 3D view draws nothing.
+ * @param indexPin the index's length and digest as the page was built with them, or null when the page gave none
  */
-export async function loadExplorerModel(signal: AbortSignal, indexPin: PinnedFile | null): Promise<ExplorerModel> {
-  const index = parseAnatomyIndex(indexPin === null ? await fetchAtlasJson(ANATOMY_INDEX_PATH, signal) : await fetchPinnedJson(indexPin, signal));
+export async function loadExplorerModel(signal: AbortSignal, indexPin: PinnedFile | null): Promise<LoadedExplorer> {
+  const { raw, indexPinState } = await fetchIndex(signal, indexPin);
+  const index = parseAnatomyIndex(raw);
   const rawCatalog = await fetchPinnedJson(companionPin(index, EXPLORER_CATALOG_PATH), signal);
-  return requireAgreement(requireListableRegions(createExplorerModel(index, parseExplorerCatalog(rawCatalog))));
+  return { model: requireAgreement(requireListableRegions(createExplorerModel(index, parseExplorerCatalog(rawCatalog)))), indexPinState };
 }
 
 /** The quotes and rationales behind the index's drafted rows, checked against the index's own pin. */

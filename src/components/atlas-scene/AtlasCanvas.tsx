@@ -11,6 +11,7 @@ export interface CanvasCommands {
   setView: (viewId: CameraViewId) => void;
   zoom: (direction: 'in' | 'out') => void;
   turn: (direction: 'left' | 'right') => void;
+  tilt: (direction: 'up' | 'down') => void;
 }
 
 export interface AtlasCanvasProps extends SceneCallbacks {
@@ -74,6 +75,7 @@ export default function AtlasCanvas(props: AtlasCanvasProps) {
     setView: (viewId) => rendererRef.current?.setView(viewId),
     zoom: (direction) => { const renderer = rendererRef.current; if (renderer !== null) renderer.zoomTo(zoomDistance(renderer.distance(), direction)); },
     turn: (direction) => rendererRef.current?.turnBy(direction === 'left' ? -ORBIT_STEP_RADIANS : ORBIT_STEP_RADIANS),
+    tilt: (direction) => rendererRef.current?.tiltBy(direction === 'up' ? -ORBIT_STEP_RADIANS : ORBIT_STEP_RADIANS),
   }), []);
 
   return <canvas ref={canvasRef} className="atlas-canvas" role="img" aria-label={description} />;

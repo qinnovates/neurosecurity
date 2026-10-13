@@ -6,7 +6,7 @@
 
 import type { Point3 } from '@/lib/anatomy/ras-to-scene';
 
-export const CAMERA_VIEW_IDS = ['behind_above', 'left', 'right', 'front', 'back', 'top'] as const;
+export const CAMERA_VIEW_IDS = ['behind_above', 'left', 'right', 'front', 'back', 'top', 'bottom'] as const;
 export type CameraViewId = typeof CAMERA_VIEW_IDS[number];
 
 export const DEFAULT_CAMERA_VIEW: CameraViewId = 'behind_above';
@@ -18,6 +18,7 @@ export const CAMERA_VIEW_LABELS: Readonly<Record<CameraViewId, string>> = {
   front: 'Front',
   back: 'Back',
   top: 'Top',
+  bottom: 'Bottom',
 };
 
 /** Where the camera sits, as a direction from the brain's centre. The top view tilts a hair back so "up" stays defined. */
@@ -28,6 +29,7 @@ const VIEW_DIRECTIONS: Readonly<Record<CameraViewId, Point3>> = {
   front: [0, 0, -1],
   back: [0, 0, 1],
   top: [0, 1, 0.001],
+  bottom: [0, -1, 0.001],
 };
 
 export const CAMERA_MOVE_MS = 450;
