@@ -2,15 +2,24 @@
  * The recorded state of the old, hand-placed brain geometry, read by
  * legacy-geometry-ratchet.test.ts. Nothing may be added here. Each later change that
  * removes an entry from the code deletes it here too; the last removal leaves every list empty.
+ *
+ * The site's own brain pictures are gone: every page that drew one now lists its data and links
+ * to the atlas explorer (/atlas/anatomy/). What is still listed below is listed with the reason
+ * it stays and what removes it.
  */
 
 import { REGION_TABLE_MARK } from '@/lib/legacy-geometry-scan';
 
 /** Files under src/ that hold old geometry or refer to the old model, and how. Tests are included. */
 export const RECORDED_LEGACY_GEOMETRY: Record<string, readonly string[]> = {
-  'src/components/ThreatAtlasViz.tsx': [REGION_TABLE_MARK],
-  'src/site/_astro/BrainVisualization.DCSk5yMy.js': ['brain.glb', REGION_TABLE_MARK],
-  // A prebuilt bundle: scalp electrode positions, each tagged with a region name.
+  // STAYS, with this reason. A prebuilt bundle of a separate application (the signal monitor demonstration),
+  // committed without its source. It holds scalp electrode positions in that application's own scene units,
+  // each tagged with a lobe name: a hand-made electrode layout, not positions of brain regions. It cannot be
+  // edited here, and deleting it means deleting the whole application, which the Lab's Monitor mode
+  // (src/components/monitor/MonitorMode.tsx) shows. The open Lab redesign replaces that mode with a monitor
+  // built from source; once it merges the Lab no longer shows /brain-siem/ and the directory can be deleted,
+  // and this entry with it. The explorer's own electrode layout is built from the atlas data files and shares
+  // nothing with this.
   'src/site/brain-siem/assets/BrainSiemModule-Ck2DlkJb.js': [REGION_TABLE_MARK],
 };
 
@@ -24,35 +33,19 @@ export const RECORDED_NOT_GEOMETRY: Record<string, string> = {
 };
 
 /** Old files that are to be deleted outright, whatever they contain. */
-export const RECORDED_LEGACY_FILES: readonly string[] = [
-];
+export const RECORDED_LEGACY_FILES: readonly string[] = [];
 
-/** A build committed by mistake long ago. It is copied into every new build; no file may join it. */
+/**
+ * What is left of a build committed by mistake long ago, which is copied into every new build. No file may join it.
+ * None of the five holds brain geometry or leads to any: the 21 chunks that did, or that nothing loaded, are deleted.
+ * These stay because 17 pages that exist only as committed HTML (under src/site/governance/, src/site/lab/ and
+ * src/site/research/) still load them: their stylesheet, the page router, the search script with its one import,
+ * and one image. They go when those pages are rebuilt from source or retired, which is a decision about the pages.
+ */
 export const RECORDED_STALE_BUILD_FILES: readonly string[] = [
-  'src/site/_astro/AtlasDashboard.Boq6WiaI.js',
-  'src/site/_astro/BciDashboard.C_MLwdHu.js',
-  'src/site/_astro/BciExplorer.C5mjSt0M.js',
-  'src/site/_astro/BciKql.BznQ5HW6.js',
-  'src/site/_astro/BciLandscape.DID2-QvJ.js',
-  'src/site/_astro/BrainVisualization.BhQMtTjC.js',
-  'src/site/_astro/BrainVisualization.DAb2QKYQ.js',
-  'src/site/_astro/BrainVisualization.DCSk5yMy.js',
   'src/site/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js',
-  'src/site/_astro/ClinicalDomainCards.eszQM-eb.js',
-  'src/site/_astro/HeroParticles.CepCdBQT.js',
-  'src/site/_astro/Hourglass3D.DmtWt39w.js',
-  'src/site/_astro/NeurorightCards.BvCM403E.js',
-  'src/site/_astro/OrbitControls.BDibDrBQ.js',
   'src/site/_astro/Search.astro_astro_type_script_index_0_lang.mkdr79ir.js',
-  'src/site/_astro/SwimlaneTImeline.Dv4hm0ws.js',
-  'src/site/_astro/TaraVisualization.CH97vkN3.js',
   'src/site/_astro/about.BooKFJOI.css',
-  'src/site/_astro/client.CQJou1yw.js',
-  'src/site/_astro/explorer.Ckb6QSlO.css',
-  'src/site/_astro/index.Bb8JjhAW.js',
-  'src/site/_astro/index.DeO6U63H.js',
-  'src/site/_astro/jsx-runtime.D_zvdyIk.js',
   'src/site/_astro/preload-helper.BlTxHScW.js',
-  'src/site/_astro/react-three-fiber.esm.BeQ3Cg2x.js',
   'src/site/_astro/vera-engine.BaibVlOG_ZoFGm7.webp',
 ];
