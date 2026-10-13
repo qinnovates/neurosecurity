@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { BrainView, BrainViewRegion } from '../../lib/brain-view-data';
+import { QIF_BANDS_FRAMEWORK_NOTE, type BrainView, type BrainViewRegion } from '../../lib/brain-view-data';
 import AtlasExplorerLink from './AtlasExplorerLink';
 
 export interface BandViewPanelProps {
@@ -144,7 +144,7 @@ export default function BandViewPanel({ views, defaultView, selectedBandId, onBa
         </div>
       </div>
       <p className="text-xs mt-5" style={{ color: 'var(--color-text-faint)' }}>
-        Bands are layers in QIF, a proposed and unreviewed framework. This list draws no anatomy and counts by band, not by brain region.{' '}
+        {QIF_BANDS_FRAMEWORK_NOTE} This list draws no anatomy and counts by band, not by brain region.{' '}
         <AtlasExplorerLink className="underline">See the brain itself in the TARA Brain Atlas</AtlasExplorerLink>.
       </p>
     </div>

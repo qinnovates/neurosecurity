@@ -196,7 +196,7 @@ export default function BrainMapView({ data }: Props) {
             background: 'var(--color-bg-secondary)',
             border: '1px solid var(--color-border)',
           }}>
-          <div className="text-[10px] font-mono uppercase tracking-wider mb-1 text-center"
+          <div className="text-[10px] uppercase tracking-wider mb-1 text-center"
             style={{ color: 'var(--color-text-faint)' }}>
             Brain regions by band
           </div>

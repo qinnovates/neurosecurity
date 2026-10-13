@@ -12,6 +12,9 @@ import { getNeurogovernanceData } from './neurogovernance-data';
 
 // ═══ Shared Types ═══
 
+/** Said wherever bands are shown: the band scheme belongs to QIF, which has not been reviewed. */
+export const QIF_BANDS_FRAMEWORK_NOTE = 'Bands are layers in QIF, a proposed and unreviewed framework.';
+
 export interface BrainViewRegion {
   id: string;
   name: string;
