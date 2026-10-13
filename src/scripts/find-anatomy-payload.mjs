@@ -124,6 +124,6 @@ async function runAsCommand(pagePaths) {
 if (isInvokedDirectly()) {
   runAsCommand(process.argv.slice(2)).catch((error) => {
     process.stderr.write(`[find-anatomy-payload] ${error instanceof Error ? error.message : String(error)}\n`);
-    process.exit(1);
+    process.exitCode = 1;
   });
 }

@@ -115,5 +115,6 @@ const isRunDirectly = process.argv[1] !== undefined
 if (isRunDirectly) {
   const results = runPostBuildChecks();
   reportResults(results);
-  if (results.some(({ failures }) => failures.length > 0)) process.exit(1);
+  // Not process.exit: after reading a large script chunk, exiting while V8 is still compiling in the background has been seen to hang.
+  if (results.some(({ failures }) => failures.length > 0)) process.exitCode = 1;
 }
