@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { ANATOMY_EVIDENCE_PATH } from '@/lib/anatomy/anatomy-index-types';
 import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
 import { announceLens, announceSelection } from '@/lib/atlas-explorer/announcements';
@@ -9,7 +9,6 @@ import { LENS_LABELS, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE, explorerReducer } from './atlas-state';
 import AtlasViewport from './AtlasViewport';
 import ChainView from './ChainView';
-import DeviceGeometry from './DeviceGeometry';
 import { loadAnatomyEvidence, loadRegionEvidence } from './explorer-data';
 import H01Card from './H01Card';
 import LayerPanel from './LayerPanel';
@@ -33,6 +32,8 @@ interface Props {
 }
 
 const TECHNIQUE_LENS = 'technique';
+/** The electrode layout panel and the lead drawings: fetched when the visitor turns the layer on, so they add nothing to the first load. */
+const DeviceGeometry = lazy(() => import('./DeviceGeometry'));
 /** The width at which the list and the inspector stop sitting side by side. Matches atlas-scene.css. */
 const STACKED_LAYOUT_QUERY = '(max-width: 960px)';
 
@@ -110,7 +111,11 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
         model={model} lens={state.lens} layers={state.layers} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep}
         chain={chainView.frame} electrodeId={electrodeId} onPickElectrode={setElectrodeId} onSelectRegion={(regionId) => selectRegion(regionId, false)}
       />
-      {isDevicesLayerShown(model.index, state.layers) && <DeviceGeometry index={model.index} electrodeId={electrodeId} onPickElectrode={setElectrodeId} />}
+      {isDevicesLayerShown(model.index, state.layers) && (
+        <Suspense fallback={<p className="atlas-loading" role="status">Loading the electrode layout…</p>}>
+          <DeviceGeometry index={model.index} electrodeId={electrodeId} onPickElectrode={setElectrodeId} />
+        </Suspense>
+      )}
       <div className="atlas-main" ref={mainRef}>
         <div className="atlas-main-list">
           <LensPanel

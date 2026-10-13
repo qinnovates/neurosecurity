@@ -93,7 +93,8 @@ export const TOOL_PAGES = [
     // checked that it is pinned to its index, that files can be verified, and that the browser gives a WebGL context.
     onMountLazyEntryNames: [],
     interactionGatedEntryNames: ['OpenViewport'],
-    onDemandLazyEntryNames: [],
+    // The electrode layout panel and the lead drawings, in words and SVG: fetched when the visitor turns that layer on.
+    onDemandLazyEntryNames: ['DeviceGeometry'],
     codeGzipBudgetBytes: ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES + CODE_HEADROOM_GZIP_BYTES,
     documentGzipBudgetBytes: ATLAS_EXPLORER_DOCUMENT_BASELINE_GZIP_BYTES + ATLAS_EXPLORER_DOCUMENT_HEADROOM_GZIP_BYTES,
   },

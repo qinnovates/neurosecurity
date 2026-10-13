@@ -131,6 +131,12 @@ describe('AtlasExplorer: threat model steps', () => {
 });
 
 describe('AtlasExplorer: the electrode layout and the leads', () => {
+  /** Turns the layer on and waits for its panel, which is fetched only then. */
+  const turnOnLayout = async (container: HTMLElement): Promise<HTMLElement> => {
+    fireEvent.click(within(openLayers()).getByRole('button', { name: 'EEG electrode layout' }));
+    await screen.findByRole('heading', { name: 'EEG electrode layout' });
+    return container.querySelector('.atlas-devices') as HTMLElement;
+  };
   const openLayers = (): HTMLElement => {
     const layers = screen.getByRole('heading', { name: 'Layers' }).closest('section') as HTMLElement;
     fireEvent.click(within(layers).getByRole('button', { name: /^Show the 6 layers/ }));
@@ -150,13 +156,13 @@ describe('AtlasExplorer: the electrode layout and the leads', () => {
     expect(tracts.getAttribute('aria-pressed')).toBe('false');
     fireEvent.click(toggle);
     expect(toggle.getAttribute('aria-pressed')).toBe('true');
-    expect(within(container.querySelector('.atlas-devices') as HTMLElement).getByRole('heading', { name: 'EEG electrode layout' })).not.toBeNull();
+    expect(await screen.findByRole('heading', { name: 'EEG electrode layout' })).not.toBeNull();
+    expect(container.querySelector('.atlas-devices')).not.toBeNull();
   });
 
   it('names the 21 electrodes, and a picked one shows its name, the limits and the landmark notes and selects no region', async () => {
     const container = await renderExplorer();
-    fireEvent.click(within(openLayers()).getByRole('button', { name: 'EEG electrode layout' }));
-    const panel = container.querySelector('.atlas-devices') as HTMLElement;
+    const panel = await turnOnLayout(container);
     expect(panel.querySelectorAll('[data-electrode-id]')).toHaveLength(21);
     fireEvent.click(within(panel).getByRole('button', { name: 'Cz' }));
     const picked = panel.querySelector('[data-picked-electrode="Cz"]') as HTMLElement;
@@ -175,7 +181,7 @@ describe('AtlasExplorer: the electrode layout and the leads', () => {
 
   it('draws each lead beside the brain with a scale bar, its review state, and a table giving every number its source and kind', async () => {
     const container = await renderExplorer();
-    fireEvent.click(within(openLayers()).getByRole('button', { name: 'EEG electrode layout' }));
+    await turnOnLayout(container);
     const leads = [...container.querySelectorAll<HTMLElement>('.atlas-devices [data-lead-id]')];
     expect(leads.length).toBeGreaterThan(0);
     expect(container.querySelector('.atlas-viewport [data-lead-id]')).toBeNull();
@@ -196,8 +202,7 @@ describe('AtlasExplorer: the electrode layout and the leads', () => {
 
   it('claims nothing the data does not hold: no reach, coverage, nearest region or distance, and every device drawing is marked unreviewed', async () => {
     const container = await renderExplorer();
-    fireEvent.click(within(openLayers()).getByRole('button', { name: 'EEG electrode layout' }));
-    const panel = container.querySelector('.atlas-devices') as HTMLElement;
+    const panel = await turnOnLayout(container);
     fireEvent.click(within(panel).getByRole('button', { name: 'Oz' }));
     const ownWords = [...panel.querySelectorAll('h2, h3, button, th, figcaption strong, [data-limit-id]')].map((node) => node.textContent ?? '').join(' ');
     expect(ownWords).not.toMatch(/\breach|coverage|nearest|closest|distance to|picks up activity/i);
