@@ -111,13 +111,13 @@ function inspectFile(filePath, tree) {
   const imports = readSourceImports(filePath, tree.read(filePath));
   const resolved = imports.specifiers.map((specifier) => ({ specifier, ...resolveImport(specifier, filePath, tree.exists) }));
   const globbed = imports.globs.flatMap((glob) => tree.listFiles().filter((candidate) => globToPattern(glob, filePath).test(candidate)));
-  const dataPath = imports.readsFiles ? imports.literals.find((literal) => DATA_PATH_PATTERN.test(literal)) : undefined;
   return {
+    readsFiles: imports.readsFiles,
+    dataPath: imports.literals.find((literal) => DATA_PATH_PATTERN.test(literal)),
     reached: [...resolved.filter((target) => target.kind === 'file').map((target) => target.filePath), ...globbed],
     problems: [
       ...imports.unfollowable,
       ...resolved.filter((target) => target.kind === 'unresolved').map((target) => `an import of "${target.specifier}", which resolves to no file (tried ${target.tried})`),
-      ...(dataPath === undefined ? [] : [`a file-system module beside the data path "${dataPath}"; a tool page may not read data files at build time`]),
     ],
   };
 }
@@ -138,6 +138,8 @@ export function findImportProblems(entryFile, tree, isForbidden = isAnatomyDataM
   const cameFrom = new Map([[entryFile, null]]);
   const queue = [entryFile];
   const problems = [];
+  const fileReaders = [];
+  const dataPaths = [];
   while (queue.length > 0) {
     const current = queue.shift();
     if (isForbidden(current)) {
@@ -145,14 +147,25 @@ export function findImportProblems(entryFile, tree, isForbidden = isAnatomyDataM
       continue;
     }
     if (!CODE_FILE_PATTERN.test(current)) continue;
-    const { reached, problems: fileProblems } = inspectFile(current, tree);
+    const { reached, problems: fileProblems, readsFiles, dataPath } = inspectFile(current, tree);
     problems.push(...fileProblems.map((problem) => `${current} has ${problem}`));
+    if (readsFiles) fileReaders.push(current);
+    if (dataPath !== undefined) dataPaths.push({ filePath: current, dataPath });
     for (const next of reached.filter((filePath) => !cameFrom.has(filePath))) {
       cameFrom.set(next, current);
       queue.push(next);
     }
   }
-  return problems;
+  return [...problems, ...findFileReadProblems(fileReaders, dataPaths)];
+}
+
+/**
+ * A data path and a file-system module anywhere in one page's imports are reported together: the
+ * path may be written in the page and read by a helper it calls, so the two need not share a file.
+ */
+function findFileReadProblems(fileReaders, dataPaths) {
+  if (fileReaders.length === 0) return [];
+  return dataPaths.map(({ filePath, dataPath }) => `${filePath} names the data path "${dataPath}" and ${fileReaders[0]} reads files; a tool page may not read data files at build time`);
 }
 
 /** The source file of a built page: `/atlas/model/` is `src/pages/atlas/model.astro` or `src/pages/atlas/model/index.astro`. */

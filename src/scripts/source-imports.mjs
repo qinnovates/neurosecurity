@@ -8,7 +8,8 @@
  * string literals it holds, so a caller can tell a build-time read of a data
  * file from a read of anything else.
  *
- * An `.astro` file is read as its frontmatter and its `<script>` blocks. An
+ * An `.astro` file is read as its frontmatter, its `<script>` blocks and the
+ * files its script tags name. An
  * `import()` written inside an `.astro` template expression is not seen; the
  * built-page check is what covers that.
  */
@@ -16,7 +17,9 @@
 import ts from 'typescript';
 
 const FRONTMATTER_PATTERN = /^﻿?---\r?\n([\s\S]*?)\r?\n---/;
-const SCRIPT_BLOCK_PATTERN = /<script\b[^>]*>([\s\S]*?)<\/script\s*>/gi;
+const SCRIPT_BLOCK_PATTERN = /<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi;
+/** `<script src="./x.ts">` in an `.astro` file: the file named is bundled into the page like any import. */
+const SCRIPT_SOURCE_PATTERN = /\bsrc\s*=\s*(?:"([^"]+)"|'([^']+)')/i;
 const ASTRO_EXTENSION = '.astro';
 const JSX_EXTENSION_PATTERN = /\.[cm]?[jt]sx$/;
 const GLOB_FUNCTION_NAMES = ['glob', 'globEager'];
@@ -34,11 +37,13 @@ const MODULE_LOADER_MODULES = ['module', 'node:module'];
  * @property {string[]} literals the text of every string and template literal in the file
  */
 
-/** The parts of a file that hold code: the whole file, or an `.astro` file's frontmatter and script blocks. */
+/** The parts of a file that hold code, and the files its script tags name: the whole file, or an `.astro` file's frontmatter and script blocks. */
 function listCodeBlocks(filePath, sourceText) {
-  if (!filePath.endsWith(ASTRO_EXTENSION)) return [sourceText];
+  if (!filePath.endsWith(ASTRO_EXTENSION)) return { blocks: [sourceText], scriptSources: [] };
   const frontmatter = FRONTMATTER_PATTERN.exec(sourceText)?.[1] ?? '';
-  return [frontmatter, ...[...sourceText.matchAll(SCRIPT_BLOCK_PATTERN)].map((match) => match[1])];
+  const scripts = [...sourceText.matchAll(SCRIPT_BLOCK_PATTERN)];
+  const scriptSources = scripts.map((match) => SCRIPT_SOURCE_PATTERN.exec(match[1])).filter((source) => source !== null).map((source) => source[1] ?? source[2]);
+  return { blocks: [frontmatter, ...scripts.map((match) => match[2])], scriptSources };
 }
 
 function isLiteralText(node) {
@@ -90,9 +95,10 @@ function visit(node, found) {
  * @returns {SourceImports}
  */
 export function readSourceImports(filePath, sourceText) {
-  const found = { specifiers: [], globs: [], unfollowable: [], literals: [] };
+  const { blocks, scriptSources } = listCodeBlocks(filePath, sourceText);
+  const found = { specifiers: [...scriptSources], globs: [], unfollowable: [], literals: [] };
   const scriptKind = JSX_EXTENSION_PATTERN.test(filePath) ? ts.ScriptKind.TSX : ts.ScriptKind.TS;
-  for (const block of listCodeBlocks(filePath, sourceText)) {
+  for (const block of blocks) {
     visit(ts.createSourceFile(filePath, block, ts.ScriptTarget.Latest, false, scriptKind), found);
   }
   if (found.specifiers.some((specifier) => MODULE_LOADER_MODULES.includes(specifier))) found.unfollowable.push('a module loader (node:module), whose createRequire loads files by a computed path');

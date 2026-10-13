@@ -76,8 +76,8 @@ describe('readSourceImports', () => {
   });
 
   it('reads an .astro file as its frontmatter and its script blocks, and nothing from its markup', () => {
-    const source = "---\nimport Layout from './Layout.astro';\n---\n<p>import x from './prose';</p>\n<script>import './inline';</script>\n<script is:inline>import('./late');</script>";
-    expect(readSourceImports('page.astro', source).specifiers).toEqual(['./Layout.astro', './inline', './late']);
+    const source = "---\nimport Layout from './Layout.astro';\n---\n<p>import x from './prose';</p>\n<script>import './inline';</script>\n<script is:inline>import('./late');</script>\n<script src='./named.ts'></script>";
+    expect(readSourceImports('page.astro', source).specifiers).toEqual(['./named.ts', './Layout.astro', './inline', './late']);
   });
 
   it('reports what it cannot follow instead of passing over it', () => {
@@ -142,6 +142,10 @@ describe('findImportProblems on the leaks two independent verifications built', 
     ['E13b a glob in backticks', inFrontmatter('const files = import.meta.glob(`/datalake/qif-anatomy-*.json`, { eager: true });'), 'datalake/qif-anatomy-crosswalk.json'],
     ['E13c a relative glob over the label tables', inQueryMode("const tables = import.meta.glob('../../site/atlas-assets/*/labels-*.json');"), 'src/site/atlas-assets/open/labels-fixture.json'],
     ['E14 an inline script imports the generated file', inPageScript("import siteTables from '../../site/data/kql-tables.json'; window.leak = siteTables;"), GENERATED_TABLES],
+    ['a script tag that names a file which imports the query tables', {
+      'src/scripts/lab-start.ts': "import { getKqlTables } from '@/lib/kql-tables';\nwindow.leak = getKqlTables();",
+      [PAGE]: `---\n${PAGE_IMPORTS}\n---\n<WorkbenchShell client:load />\n<script src="../../scripts/lab-start.ts"></script>`,
+    }, TABLES],
     ['E15 an inline script imports the query tables', inPageScript("import { getKqlTables } from '@/lib/kql-tables'; window.leak = getKqlTables();"), TABLES],
     ['E17 a component imports a parquet file by URL', inQueryMode("import parquetUrl from '@shared/parquet/anatomy_technique_terms.parquet?url';"), 'datalake/parquet/anatomy_technique_terms.parquet'],
     ['E18 the page imports the index builder', inFrontmatter("import { buildAnatomyBundle } from '@/lib/anatomy/build-anatomy-index';"), 'src/lib/anatomy/build-anatomy-index.ts'],
@@ -158,9 +162,13 @@ describe('findImportProblems on the leaks two independent verifications built', 
     ['E04 createRequire', inFrontmatter("import { createRequire } from 'node:module';\nconst regions = createRequire(`${process.cwd()}/`)('./datalake/qif-anatomy-technique-regions.json');"),
       `${PAGE} has a module loader (node:module), whose createRequire loads files by a computed path`],
     ['E05a a build-time read of an anatomy data file', inFrontmatter("import fs from 'node:fs';\nconst regions = JSON.parse(fs.readFileSync('datalake/qif-anatomy-technique-regions.json', 'utf-8'));"),
-      `${PAGE} has a file-system module beside the data path "datalake/qif-anatomy-technique-regions.json"; a tool page may not read data files at build time`],
+      `${PAGE} names the data path "datalake/qif-anatomy-technique-regions.json" and ${PAGE} reads files; a tool page may not read data files at build time`],
     ['E05b a build-time read of the generated query-table file', inFrontmatter("import fs from 'node:fs';\nconst tables = JSON.parse(fs.readFileSync('src/site/data/kql-tables.json', 'utf-8'));"),
-      `${PAGE} has a file-system module beside the data path "src/site/data/kql-tables.json"; a tool page may not read data files at build time`],
+      `${PAGE} names the data path "src/site/data/kql-tables.json" and ${PAGE} reads files; a tool page may not read data files at build time`],
+    ['a data path written in the page and read by a helper module', {
+      'src/lib/read-json.ts': "import fs from 'node:fs';\nexport const readJson = (filePath) => JSON.parse(fs.readFileSync(filePath, 'utf-8'));",
+      ...inFrontmatter("import { readJson } from '@/lib/read-json';\nconst regions = readJson('datalake/qif-anatomy-technique-regions.json');"),
+    }, `${PAGE} names the data path "datalake/qif-anatomy-technique-regions.json" and src/lib/read-json.ts reads files; a tool page may not read data files at build time`],
     ['an import that resolves to no file', inQueryMode("import gone from './not-there';"), `${QUERY_MODE} has an import of "./not-there", which resolves to no file (tried src/components/query/not-there)`],
   ];
 
