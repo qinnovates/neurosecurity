@@ -11,6 +11,7 @@ import type { IndexReviewState, IndexSubject, IndexTechniqueLink } from '@/lib/a
 import { NISS_STEPS, type ColourMode, type OwnershipMark } from '@/lib/anatomy/colour-modes';
 import type { ClaimBasis } from '@/lib/anatomy/evidence';
 import { listLitLinks, weakestReviewState, type ExplorerModel, type RegionLink } from './explorer-model';
+import { describeBands } from './limit-selection';
 
 export const LENS_STANDINGS = ['value', 'named_not_counted', 'no_data', 'awaiting_subject'] as const;
 /**
@@ -77,19 +78,19 @@ function describeBand(model: ExplorerModel, region: IndexSubject): Fact {
   const [bandId] = region.band_ids;
   const band = bandId === undefined ? undefined : model.bandsById.get(bandId);
   if (bandId === undefined) return noData('the atlas file gives this region no band');
-  return { standing: 'value', value: band === undefined ? bandId : `${bandId} ${band.name}`, reason: 'QIF\'s own grouping', reviewState: null, entryCount: 0 };
+  return { standing: 'value', value: band === undefined ? bandId : `${bandId} ${band.name}`, reason: 'QIF\'s own grouping, from its atlas file; not reviewed by an expert', reviewState: null, entryCount: 0 };
 }
 
 function describeTechnique(model: ExplorerModel, region: IndexSubject, techniqueId: string): Fact {
   const technique = model.techniquesById.get(techniqueId);
-  if (technique === undefined) return noData('this technique acts on the device, not on a brain region');
+  if (technique === undefined) return noData(model.deviceOnlyTechniquesById.has(techniqueId) ? 'tagged with device stages only' : 'no data for this technique in this build');
   const links = technique.links.filter((link) => link.resolved_region_id === region.id);
   const litLink = links.find((link) => link.lit);
   if (litLink !== undefined) return { standing: 'value', value: LINKED_VALUE, reason: BASIS_REASONS[litLink.claim_basis], reviewState: litLink.review_state, entryCount: 1 };
   if (links.length > 0) return { standing: 'named_not_counted', value: NAMED_NOT_COUNTED_VALUE, reason: describeUncountedLink(links[0]), reviewState: links[0].review_state, entryCount: 1 };
   if (technique.scope === 'not_drafted') return noData('no region link has been drafted for this technique');
   const sharedBands = technique.band_ids.filter((bandId) => region.band_ids.includes(bandId));
-  if (technique.scope === 'band_level' && sharedBands.length > 0) return noData(`tagged to band ${sharedBands.join(', ')} only; no region assessed`);
+  if (technique.scope === 'band_level' && sharedBands.length > 0) return noData(`tagged to ${describeBands(sharedBands)} only; no region assessed`);
   return noData('the catalog\'s text does not name this region');
 }
 
@@ -118,8 +119,8 @@ function describeCluster(model: ExplorerModel, region: IndexSubject, cluster: st
 
 function describeDevice(model: ExplorerModel, region: IndexSubject, deviceId: string): Fact {
   const isNamed = model.index.devices.stated_targets.some((device) => device.device_id === deviceId && device.region_ids.includes(region.id));
-  if (!isNamed) return noData('the device\'s record does not name this region');
-  return { standing: 'value', value: 'named', reason: 'the device\'s record in the atlas file names this region', reviewState: null, entryCount: 0 };
+  if (!isNamed) return noData('QIF\'s atlas file does not list this region for the device');
+  return { standing: 'value', value: 'listed', reason: 'QIF\'s atlas file lists this region for the device; no expert has reviewed the list', reviewState: null, entryCount: 0 };
 }
 
 function describeFact(model: ExplorerModel, region: IndexSubject, mode: ColourMode): Fact {

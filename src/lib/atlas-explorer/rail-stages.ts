@@ -12,7 +12,6 @@ import { isNeuralBand, weakestReviewState, type ExplorerModel } from './explorer
 export interface RailTechnique {
   id: string;
   name: string;
-  severity: DeviceStageTechnique['severity'];
   /** The brain bands the technique also carries. Empty for a device-only technique. */
   neuralBandIds: string[];
   /** AI-drafted region links the index holds for it. Zero for a device-only technique. */
@@ -38,7 +37,6 @@ function toRailTechnique(model: ExplorerModel, technique: DeviceStageTechnique):
   return {
     id: technique.id,
     name: technique.name,
-    severity: technique.severity,
     neuralBandIds: technique.band_ids.filter(isNeuralBand),
     draftedLinkCount: links.length,
     reviewState: weakestReviewState(links.map((link) => link.review_state)),

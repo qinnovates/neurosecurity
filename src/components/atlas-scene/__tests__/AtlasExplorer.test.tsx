@@ -72,6 +72,7 @@ describe('AtlasExplorer: the list', () => {
   it('fetches the index and the catalog only, and nothing lazy, before the visitor asks', async () => {
     await renderExplorer();
     expect(requestedPaths(fetchMock).sort()).toEqual(['/atlas/anatomy-catalog.json', ANATOMY_INDEX_PATH]);
+    expect(panelOf('Layers').querySelectorAll('.atlas-layer button')).toHaveLength(0);
   });
 
   it('lists all 38 regions by band, each row carrying its mark as an attribute and its facts as text', async () => {
@@ -117,6 +118,10 @@ describe('AtlasExplorer: the list', () => {
     expect(rowOf(container, 'hippocampus').getAttribute('aria-current')).toBe('true');
     expect(rowOf(container, 'hippocampus').tabIndex).toBe(0);
     await waitFor(() => expect(announcement(container, 'selection')).toMatch(/^Hippocampus selected\. Band N6\. .+\. AI-drafted, unreviewed\.$/));
+    for (const kind of ['selection', 'lens']) {
+      const region = container.querySelector(`[data-announce="${kind}"]`);
+      expect([region?.getAttribute('role'), region?.getAttribute('aria-live')]).toEqual(['status', 'polite']);
+    }
     fireEvent.click(screen.getByRole('button', { name: 'Back to the list' }));
     expect(document.activeElement).toBe(rowOf(container, 'hippocampus'));
   });
@@ -221,7 +226,8 @@ describe('AtlasExplorer: lenses and the picker', () => {
 describe('AtlasExplorer: limits, layers and marks', () => {
   it('keeps every unavailable layer as a reachable control with its reason tied to it', async () => {
     await renderExplorer();
-    const layers = [...panelOf('Layers').querySelectorAll<HTMLElement>('button')];
+    fireEvent.click(within(panelOf('Layers')).getByRole('button', { name: /^Show the 6 layers \(\d available in this build\)$/ }));
+    const layers = [...panelOf('Layers').querySelectorAll<HTMLElement>('.atlas-layer button')];
     expect(layers.map((layer) => layer.textContent)).toEqual(['Brain outline', 'Cortical shapes', 'Deep structures', 'Tracts', 'Networks', 'Devices']);
     for (const layer of layers.filter((candidate) => candidate.getAttribute('aria-disabled') === 'true')) {
       const reason = document.getElementById(layer.getAttribute('aria-describedby') ?? '');

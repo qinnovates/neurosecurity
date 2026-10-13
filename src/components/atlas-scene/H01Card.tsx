@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { limitSentence } from '@/lib/anatomy/limits-copy';
 import { doiAddress } from '@/lib/anatomy/literature-readers';
+import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import type { H01Card as H01CardData, H01Fact } from '@/lib/anatomy/parse-h01-card';
 import { H01_CARD_PATH } from '@/lib/anatomy/parse-h01-card';
 import Disclosure from './Disclosure';
@@ -52,9 +53,13 @@ function CardBody({ card }: { card: H01CardData }) {
 }
 
 /** A card about the H01 sample of human cortex. Its file is fetched only when the card is opened. */
-export default function H01Card() {
+interface Props {
+  model: ExplorerModel;
+}
+
+export default function H01Card({ model }: Props) {
   const [isWanted, setWanted] = useState(false);
-  const load = useCallback((signal: AbortSignal) => loadH01Card(signal), []);
+  const load = useCallback((signal: AbortSignal) => loadH01Card(model, signal), [model]);
   const { state, retry } = useLoaded(load, isWanted, H01_CARD_PATH);
   return (
     <section className="atlas-panel" aria-labelledby="atlas-h01-heading">

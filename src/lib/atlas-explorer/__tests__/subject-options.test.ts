@@ -13,7 +13,7 @@ describe('listTechniqueOptions', () => {
       [FIXTURE_IDS.secondLinkedTechnique, 'regions'], [FIXTURE_IDS.deviceOnlyTechnique, 'device_only'],
     ]);
     expect(options[0].detail).toBe('1 region linked; S1, N7');
-    expect(options[4].detail).toBe('acts on the device; S2, S3');
+    expect(options[4].detail).toBe('device stages only; S2, S3');
   });
 
   it('carries the review mark exactly where a drafted link stands behind the option', () => {
@@ -54,7 +54,7 @@ describe('cluster and device options', () => {
     expect(listClusterOptions(model).map((option) => [option.id, option.label, option.detail])).toEqual([
       ['cognitive_psychotic', 'cognitive psychotic', '1 catalog entry'], ['mood_trauma', 'mood trauma', '2 catalog entries'],
     ]);
-    expect(listDeviceOptions(model)).toEqual([{ id: FIXTURE_IDS.device, label: FIXTURE_IDS.device, detail: '1 region named', reviewState: null }]);
+    expect(listDeviceOptions(model)).toEqual([{ id: FIXTURE_IDS.device, label: FIXTURE_IDS.device, detail: '1 region listed', reviewState: null }]);
     expect(listSubjectOptions(model, 'band')).toEqual([]);
     expect(listSubjectOptions(model, 'stated_targets')).toHaveLength(1);
     expect(listDeviceOptions(loadRealModel()).length).toBeGreaterThan(10);

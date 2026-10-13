@@ -38,6 +38,8 @@ export const ANATOMY_PAYLOAD_MARKERS = Object.freeze([
   'not_drafted', 'not_mapped', 'owner_contains_row_subject', 'row_subject_contains_owner', 'route_not_settled',
   'No device geometry has been recorded for this build', 'qif-anatomy-',
   '"state":"ai_drafted_unreviewed"',
+  // The files served beside the index: the explorer's catalog, the literature statements and the H01 card.
+  'device_stage_techniques', 'registrar_version', 'anatomy_as_stated', 'verifier_verdict', 'must_not_imply', 'numbers_that_differ_by_source',
 ]);
 
 /** The quote and ampersand encodings a serialised payload can arrive in: HTML entities, and escapes inside a script string. */

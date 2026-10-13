@@ -29,13 +29,22 @@ export interface AnatomyBundle {
   indexPin: PinnedFile;
   /** The exact bytes served at ANATOMY_EVIDENCE_PATH. */
   evidenceJson: string;
+  /** The exact bytes served at each companion file's path. */
+  companionJsonByPath: Readonly<Record<string, string>>;
+}
+
+/** A static file served beside the index, which the index pins. */
+export interface CompanionFile {
+  path: string;
+  json: string;
 }
 
 function pin(path: string, content: string): PinnedFile {
   return { path, bytes: Buffer.byteLength(content, 'utf-8'), sha256: sha256Hex(content) };
 }
 
-export function buildAnatomyBundle(data: AnatomyData): AnatomyBundle {
+/** @param companions files served beside the index; the index records each one's length and digest */
+export function buildAnatomyBundle(data: AnatomyData, companions: readonly CompanionFile[] = []): AnatomyBundle {
   const crosswalk = reviewCrosswalkRows(data);
   const noGeometry = reviewNoGeometry(data);
   const links = reviewTechniqueLinks(data);
@@ -48,6 +57,7 @@ export function buildAnatomyBundle(data: AnatomyData): AnatomyBundle {
     addressing_version: data.addressingVersion,
     template_space: data.sources.declared_space,
     evidence: pin(ANATOMY_EVIDENCE_PATH, evidenceJson),
+    companions: companions.map((companion) => pin(companion.path, companion.json)),
     layers: buildLayers(data, assets),
     sources: buildSources(data),
     assets,
@@ -60,5 +70,6 @@ export function buildAnatomyBundle(data: AnatomyData): AnatomyBundle {
   };
   const indexJson = JSON.stringify(index);
   parseAnatomyIndex(JSON.parse(indexJson));
-  return { index, indexJson, indexPin: pin(ANATOMY_INDEX_PATH, indexJson), evidenceJson };
+  const companionJsonByPath = Object.fromEntries(companions.map((companion) => [companion.path, companion.json]));
+  return { index, indexJson, indexPin: pin(ANATOMY_INDEX_PATH, indexJson), evidenceJson, companionJsonByPath };
 }

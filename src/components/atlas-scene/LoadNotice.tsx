@@ -8,9 +8,9 @@ interface Props {
 }
 
 const FAILURE_SENTENCES: Readonly<Record<LoadFailure['kind'], string>> = {
-  unavailable: 'could not be loaded. Check your connection and try again.',
-  invalid: 'arrived but failed its checks, so none of it is shown. Reloading the page may fetch a newer copy.',
-  stale: 'does not match this page: a newer version of the page has been published. Reload the page.',
+  unavailable: 'Loading failed. Check your connection and try again.',
+  invalid: 'The file arrived but failed its checks, so none of it is shown. Reloading the page may fetch a newer copy.',
+  out_of_step: 'The page\'s data files are out of step with each other, so none of it is shown. Reload the page.',
 };
 
 /**
@@ -22,9 +22,8 @@ export default function LoadNotice({ what, state, onRetry }: Props) {
   if (state.status === 'loading') return <p className="atlas-loading" role="status">Loading {what}…</p>;
   if (state.status !== 'failed') return null;
   return (
-    <div className="atlas-failure" role="alert" data-failure={state.failure.kind}>
-      <p><strong>{what.charAt(0).toUpperCase()}{what.slice(1)}</strong> {FAILURE_SENTENCES[state.failure.kind]}</p>
-      <p className="atlas-failure-file">File: {state.failure.file}</p>
+    <div className="atlas-failure" role="alert" data-failure={state.failure.kind} data-failure-file={state.failure.file}>
+      <p><strong>Not shown: {what}.</strong> {FAILURE_SENTENCES[state.failure.kind]}</p>
       <button type="button" className="atlas-button" onClick={onRetry}>Try again</button>
     </div>
   );

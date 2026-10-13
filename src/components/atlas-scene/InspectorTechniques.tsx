@@ -3,6 +3,7 @@ import { limitSentence } from '@/lib/anatomy/limits-copy';
 import type { ShownAnatomyEvidence } from '@/lib/anatomy/parse-anatomy-evidence';
 import type { DetailTechnique, RegionDetail } from '@/lib/atlas-explorer/region-detail';
 import type { Loaded } from './explorer-data';
+import Disclosure from './Disclosure';
 import LimitNote from './LimitNote';
 import LoadNotice from './LoadNotice';
 import ReviewMark from './ReviewMark';
@@ -30,6 +31,8 @@ function TechniqueItem({ technique, item, onChooseTechnique }: TechniqueItemProp
       </p>
       <p className="atlas-row-why">
         The catalog&rsquo;s word: &ldquo;{technique.term}&rdquo;. Bands {technique.bandIds.join(', ')}.
+        {technique.nissSeverity !== null && ` NISS severity: ${technique.nissSeverity}.`}
+        {technique.dsmCluster !== null && ` DSM cluster tag: ${technique.dsmCluster.replaceAll('_', ' ')}.`}
         {technique.uncountedReason !== null && ` Not counted: ${technique.uncountedReason}.`}
       </p>
       {item !== undefined && (
@@ -70,12 +73,11 @@ function ScoreFacts({ detail }: Pick<Props, 'detail'>) {
 }
 
 /**
- * The techniques tied to the region, in three groups that are never merged:
- * counted links with the catalog's own quoted words, links the catalog names
- * but that may not count, and techniques that only share the region's band.
+ * The techniques tied to the region: counted links with the catalog's own
+ * quoted words, and links the catalog names but that may not count. Techniques
+ * that only share the region's band are not links and have their own section.
  */
 export default function InspectorTechniques({ detail, evidence, onRetryEvidence, onChooseTechnique }: Props) {
-  const band = detail.region.band_ids[0];
   return (
     <section className="atlas-section" aria-labelledby="atlas-inspector-techniques">
       <h3 className="atlas-subheading" id="atlas-inspector-techniques">Techniques linked to this region</h3>
@@ -91,17 +93,28 @@ export default function InspectorTechniques({ detail, evidence, onRetryEvidence,
         </>
       )}
       <ScoreFacts detail={detail} />
-      {detail.bandLevel.length > 0 && band !== undefined && (
-        <>
-          <h4 className="atlas-minor-heading">Tagged with this band only ({detail.bandLevel.length})</h4>
-          <LimitNote limit={limitSentence('techniques_band_level', { band })} />
-          <ul className="atlas-chips">
-            {detail.bandLevel.map((technique) => (
-              <li key={technique.id}><button type="button" className="atlas-chip" onClick={() => onChooseTechnique(technique.id)}>{technique.name}</button></li>
-            ))}
-          </ul>
-        </>
-      )}
+    </section>
+  );
+}
+
+/**
+ * Techniques tagged with the region's band whose text names no structure. They are not links to the region, so they
+ * sit outside "techniques linked to this region", and stay folded away until asked for: there can be dozens.
+ */
+export function InspectorBandOnly({ detail, onChooseTechnique }: Pick<Props, 'detail' | 'onChooseTechnique'>) {
+  const band = detail.region.band_ids[0];
+  if (detail.bandLevel.length === 0 || band === undefined) return null;
+  return (
+    <section className="atlas-section" aria-labelledby="atlas-inspector-band-only">
+      <h3 className="atlas-subheading" id="atlas-inspector-band-only">Tagged with this band only ({detail.bandLevel.length})</h3>
+      <LimitNote limit={limitSentence('techniques_band_level', { band })} />
+      <Disclosure label={`Show the ${detail.bandLevel.length} techniques`}>
+        <ul className="atlas-chips">
+          {detail.bandLevel.map((technique) => (
+            <li key={technique.id}><button type="button" className="atlas-chip" onClick={() => onChooseTechnique(technique.id)}>{technique.name}</button></li>
+          ))}
+        </ul>
+      </Disclosure>
     </section>
   );
 }

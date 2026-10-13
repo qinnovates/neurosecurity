@@ -26,7 +26,7 @@ const KIND_DETAILS: Readonly<Record<TechniqueOptionKind, string>> = {
   regions: 'names brain structures',
   band_level: 'band tag only',
   not_drafted: 'no links drafted',
-  device_only: 'acts on the device',
+  device_only: 'device stages only',
 };
 
 function countRegions(count: number): string {
@@ -58,7 +58,7 @@ export function listClusterOptions(model: ExplorerModel): SubjectOption[] {
 
 export function listDeviceOptions(model: ExplorerModel): SubjectOption[] {
   return model.index.devices.stated_targets.map((device) => (
-    { id: device.device_id, label: device.device_id, detail: device.region_ids.length === 1 ? '1 region named' : `${device.region_ids.length} regions named`, reviewState: null }
+    { id: device.device_id, label: device.device_id, detail: device.region_ids.length === 1 ? '1 region listed' : `${device.region_ids.length} regions listed`, reviewState: null }
   ));
 }
 

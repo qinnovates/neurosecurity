@@ -42,6 +42,7 @@ export function buildIndex(overrides: Partial<AnatomyIndex> = {}): AnatomyIndex 
     addressing_version: 1,
     template_space: FIXTURE_SPACE,
     evidence: { path: '/atlas/anatomy-evidence.json', bytes: 2, sha256: FIXTURE_SHA256 },
+    companions: [],
     layers: [{ id: 'deep', available: false, reason: 'No asset has been built for this layer yet.', source_ids: [FIXTURE_ATLAS_ID], asset_ids: [] }],
     sources: [],
     assets: [],

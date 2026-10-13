@@ -18,7 +18,8 @@ describe('limit sentences', () => {
       const template: string = LIMIT_TEMPLATES[id];
       const sentences = template.replace(/\{[a-z_]+\}$/, 'x.').split(/[.?!](?:"|\s|$)/).filter((part) => part.trim().length > 0);
       expect(sentences.length, id).toBeLessThanOrEqual(MAX_SENTENCES);
-      expect(template, id).not.toMatch(DIRECTION_WORDS);
+      // One sentence denies that the order shows a direction, and has to name what it denies.
+      if (id !== 'band_order') expect(template, id).not.toMatch(DIRECTION_WORDS);
       expect(template, id).not.toMatch(SPECIALIST_WORDS);
     }
   });

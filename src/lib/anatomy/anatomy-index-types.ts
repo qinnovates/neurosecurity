@@ -233,6 +233,11 @@ export interface AnatomyIndex {
   addressing_version: number;
   template_space: string;
   evidence: PinnedFile;
+  /**
+   * Other static files a page reads beside the index (the explorer's catalog, the literature statements, the H01
+   * card), each pinned so a page can refuse a set of files that did not come from one build.
+   */
+  companions: PinnedFile[];
   layers: IndexLayer[];
   sources: IndexSource[];
   assets: IndexAsset[];

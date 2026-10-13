@@ -7,9 +7,9 @@ const EXPLORER_FILES = ['src/lib/anatomy/limits-copy.ts', 'src/pages/atlas/anato
 const PAGE_PATH = 'src/pages/atlas/anatomy.astro';
 const SOURCE_EXTENSIONS = ['.ts', '.tsx', '.css', '.astro'];
 /** three.js and its React bindings. Only the files of the gated canvas chunk may import them. */
-const THREE_IMPORT_PATTERN = /(from|import\()\s*['"](three|three\/[^'"]*|@react-three\/[^'"]*)['"]/;
+const THREE_IMPORT_PATTERN = /(from|import\(|import)\s*['"](three|three\/[^'"]*|@react-three\/[^'"]*)['"]/;
 /** Labels are set in the sans face: no monospace utility, variable or family. */
-const MONOSPACE_PATTERN = /\bfont-mono\b|--font-mono|--lab-mono|\bmonospace\b|\btm-mono\b|\bui-monospace\b/;
+const MONOSPACE_PATTERN = /\bfont-mono\b|--font-mono|--lab-mono|\bmonospace\b|\btm-mono\b|\bui-monospace\b|\b(Menlo|Monaco|Consolas|Courier|SFMono|JetBrains Mono|Fira Code|Source Code Pro)\b/i;
 /** The modules that import three.js, and the canvas that is their only way in. */
 const THREE_FILES = ['scene-renderer.ts', 'scene-objects.ts'];
 const CANVAS_CHUNK_FILES = ['AtlasCanvas.tsx', ...THREE_FILES];
@@ -36,6 +36,9 @@ describe('explorer source rules', () => {
     expect(MONOSPACE_PATTERN.test('.label { font-family: var(--font-mono); }')).toBe(true);
     expect(MONOSPACE_PATTERN.test('<span className="font-mono text-xs">')).toBe(true);
     expect(MONOSPACE_PATTERN.test('font-family: ui-monospace, monospace;')).toBe(true);
+    for (const family of ['Menlo', 'Consolas', '"Courier New"', 'SFMono-Regular']) expect(MONOSPACE_PATTERN.test(`font-family: ${family};`), family).toBe(true);
+    expect(THREE_IMPORT_PATTERN.test("import 'three';")).toBe(true);
+    expect(THREE_IMPORT_PATTERN.test("import '@react-three/fiber';")).toBe(true);
   });
 
   it('imports three.js only in the two modules that draw for the canvas', () => {
@@ -64,5 +67,15 @@ describe('explorer source rules', () => {
     expect(page.match(/loadAnatomyBundle\(\)/g)).toHaveLength(1);
     expect(page).not.toMatch(/@shared\/|\.json['"]|\.index\b|indexJson|evidenceJson/);
     expect(ISLAND_PATTERN.exec('<AtlasExplorer client:only="react" indexPin={indexPin} index={index} />')?.[1].trim()).not.toBe('client:only="react" indexPin={indexPin}');
+  });
+
+  it('stops moving under reduced motion, in the stylesheet and in the script that slides rows', () => {
+    const css = fs.readFileSync('src/components/atlas-scene/atlas-scene.css', 'utf-8');
+    const reduced = /@media \(prefers-reduced-motion: reduce\) \{([\s\S]*?)\n\}/.exec(css)?.[1] ?? '';
+    expect(reduced).toMatch(/\.atlas-lens-thumb, \.atlas-stage, \.atlas-chevron \{ transition: none; \}/);
+    expect(reduced).toMatch(/\.atlas-cell-lens, \.atlas-inspector \{ animation-name: atlas-fade;/);
+    const flip = fs.readFileSync('src/components/atlas-scene/use-row-flip.ts', 'utf-8');
+    expect(flip).toContain("'(prefers-reduced-motion: reduce)'");
+    expect(flip).toMatch(/\|\| prefersLessMotion\(\)\) continue;/);
   });
 });

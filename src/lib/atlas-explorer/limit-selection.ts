@@ -7,7 +7,7 @@
 import type { GeometryState, IndexLayer, IndexSubject } from '@/lib/anatomy/anatomy-index-types';
 import { limitSentence, type LimitSentence } from '@/lib/anatomy/limits-copy';
 import type { AnatomyMatch, RegionEvidenceRow } from '@/lib/anatomy/region-evidence-types';
-import type { ExplorerModel } from './explorer-model';
+import { isNeuralBand, type ExplorerModel } from './explorer-model';
 import type { Lens } from './lens-state';
 
 const ALLEN_SOURCE_IDS: readonly string[] = ['allen_hra_3d_2020'];
@@ -36,11 +36,17 @@ export function limitForLayer(layer: IndexLayer): LimitSentence | null {
   return limitSentence('layer_unavailable', { reason: layer.reason ?? UNRECORDED_REASON });
 }
 
+/** "band N6", or "bands N5 and N6": brain bands only, since only they hold regions. */
+export function describeBands(bandIds: readonly string[]): string {
+  if (bandIds.length <= 1) return `band ${bandIds[0] ?? 'unknown'}`;
+  return `bands ${bandIds.slice(0, -1).join(', ')} and ${bandIds[bandIds.length - 1]}`;
+}
+
 function limitsForTechnique(model: ExplorerModel, techniqueId: string): LimitSentence[] {
   const technique = model.techniquesById.get(techniqueId);
-  if (technique === undefined) return [limitSentence('lens_technique_device_only')];
+  if (technique === undefined) return [limitSentence(model.deviceOnlyTechniquesById.has(techniqueId) ? 'lens_technique_device_only' : 'lens_technique_unknown')];
   if (technique.scope === 'not_drafted') return [limitSentence('lens_technique_not_drafted')];
-  if (technique.scope === 'band_level') return [limitSentence('lens_technique_band_only', { bands: `band ${technique.band_ids.join(', ')}` })];
+  if (technique.scope === 'band_level') return [limitSentence('lens_technique_band_only', { bands: describeBands(technique.band_ids.filter(isNeuralBand)) })];
   return [limitSentence('lens_technique')];
 }
 
