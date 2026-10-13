@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { AnatomyIndex } from '@/lib/anatomy/anatomy-index-types';
 import { isAbort } from './explorer-data';
 import { loadSceneAsset, type SceneAssetState } from './scene-assets';
@@ -40,9 +40,12 @@ export function useSceneAssets(index: AnatomyIndex, wantedAssetIds: readonly str
     return () => controller.abort();
   }, [index, wantedKey, attempt]);
 
-  const retry = (): void => {
-    for (const [assetId, state] of Object.entries(states)) if (state.status === 'failed') started.current.delete(assetId);
+  const latest = useRef(states);
+  latest.current = states;
+  // Stable between renders, so what is derived from the states is rebuilt only when a file's state changes.
+  const retry = useCallback((): void => {
+    for (const [assetId, state] of Object.entries(latest.current)) if (state.status === 'failed') started.current.delete(assetId);
     setAttempt((count) => count + 1);
-  };
+  }, []);
   return { states, retry };
 }

@@ -10,6 +10,7 @@ interface Props {
 const FAILURE_SENTENCES: Readonly<Record<LoadFailure['kind'], string>> = {
   unavailable: 'could not be loaded. Check your connection and try again.',
   invalid: 'arrived but failed its checks, so none of it is shown. Reloading the page may fetch a newer copy.',
+  stale: 'does not match this page: a newer version of the page has been published. Reload the page.',
 };
 
 /**

@@ -43,10 +43,14 @@ const INDEX_BUDGET_BYTES = 300_000;
 const ANATOMY_DATA_FILE_PATTERN = /(from|import\()\s*['"][^'"]*qif-anatomy-[a-z-]+\.json['"]/;
 const LOADER_IMPORT_PATTERN = /(from|import\()\s*['"][^'"]*load-anatomy-data['"]/;
 const LOADER_PATH = 'src/components/atlas-scene/load-anatomy-data.ts';
-/** The attribution page reads the loader at build time and renders text only: source names, licenses and required wording. */
+/**
+ * The attribution page reads the loader at build time and renders text only: source names, licenses and required wording.
+ * The explorer page reads it for the index's path, length and digest alone; the built-page check holds it to that.
+ */
 const ENDPOINT_PATHS = [
   'src/pages/atlas/anatomy-catalog.json.ts', 'src/pages/atlas/anatomy-evidence.json.ts', 'src/pages/atlas/anatomy-h01-card.json.ts',
-  'src/pages/atlas/anatomy-index.json.ts', 'src/pages/atlas/anatomy-region-evidence.json.ts', 'src/pages/atlas/attribution.astro',
+  'src/pages/atlas/anatomy-index.json.ts', 'src/pages/atlas/anatomy-region-evidence.json.ts', 'src/pages/atlas/anatomy.astro',
+  'src/pages/atlas/attribution.astro',
 ];
 const SOURCE_EXTENSIONS = ['.ts', '.tsx', '.astro', '.mjs'];
 const SKIPPED_DIRECTORIES = ['__tests__', 'site', 'node_modules'];
@@ -196,7 +200,7 @@ describe('where anatomy data may be imported (guards)', () => {
     expect(listFilesMatching(ANATOMY_DATA_FILE_PATTERN)).toEqual([LOADER_PATH]);
   });
 
-  it('lets only the static endpoints and the attribution page import the loader, so nothing is serialised into a tool page', () => {
+  it('lets only the static endpoints, the attribution page and the explorer page (for the index pin) import the loader, so nothing is serialised into a tool page', () => {
     expect(listFilesMatching(LOADER_IMPORT_PATTERN).filter((filePath) => filePath !== LOADER_PATH)).toEqual(ENDPOINT_PATHS);
   });
 });

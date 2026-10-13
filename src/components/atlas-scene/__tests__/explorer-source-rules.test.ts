@@ -43,11 +43,13 @@ describe('explorer source rules', () => {
     expect(matching(MONOSPACE_PATTERN)).toEqual([]);
   });
 
-  it('builds the page with no anatomy: the island takes no props and the page imports no data', () => {
+  it('builds the page with no anatomy: the island takes the index pin alone and the page imports no data file', () => {
     const page = fs.readFileSync(PAGE_PATH, 'utf-8');
     const island = ISLAND_PATTERN.exec(page);
-    expect(island?.[1].trim()).toBe('client:only="react"');
-    expect(page).not.toMatch(/load-anatomy-data|@shared\/|\.json['"]/);
-    expect(ISLAND_PATTERN.exec('<AtlasExplorer client:only="react" index={index} />')?.[1].trim()).not.toBe('client:only="react"');
+    expect(island?.[1].trim()).toBe('client:only="react" indexPin={indexPin}');
+    expect(page).toContain('const { indexPin } = loadAnatomyBundle();');
+    expect(page.match(/loadAnatomyBundle\(\)/g)).toHaveLength(1);
+    expect(page).not.toMatch(/@shared\/|\.json['"]|\.index\b|indexJson|evidenceJson/);
+    expect(ISLAND_PATTERN.exec('<AtlasExplorer client:only="react" indexPin={indexPin} index={index} />')?.[1].trim()).not.toBe('client:only="react" indexPin={indexPin}');
   });
 });

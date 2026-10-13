@@ -5,6 +5,7 @@ import { announceLens, announceSelection } from '@/lib/atlas-explorer/announceme
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { LENS_LABELS, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE, explorerReducer } from './atlas-state';
+import AtlasViewport from './AtlasViewport';
 import { loadAnatomyEvidence, loadRegionEvidence } from './explorer-data';
 import H01Card from './H01Card';
 import LayerPanel from './LayerPanel';
@@ -19,6 +20,8 @@ import { useLoaded } from './use-loaded';
 
 interface Props {
   model: ExplorerModel;
+  /** Whether the index was checked against the digest the page was built with. The 3D view draws only then. */
+  isIndexPinned: boolean;
 }
 
 const TECHNIQUE_LENS = 'technique';
@@ -38,12 +41,13 @@ function useAnnouncement(message: string): string {
 }
 
 /**
- * The explorer once its data has loaded: layers, lens, the region list and the
- * inspector, then the device stages, network names and the notes on limits.
+ * The explorer once its data has loaded: layers, lens, the 3D view (one button
+ * until it is asked for), the region list and the inspector, then the device
+ * stages, network names and the notes on limits.
  * Tab order follows that reading order. One reducer holds the state, and the
  * selection survives every lens, layer and filter change.
  */
-export default function ExplorerWorkspace({ model }: Props) {
+export default function ExplorerWorkspace({ model, isIndexPinned }: Props) {
   const [state, dispatch] = useReducer(explorerReducer, INITIAL_EXPLORER_STATE);
   const inspectorHeadingRef = useRef<HTMLHeadingElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
@@ -76,6 +80,10 @@ export default function ExplorerWorkspace({ model }: Props) {
       <LensPanel
         model={model} lens={state.lens} tally={tally} onChooseKind={(kind) => dispatch({ type: 'lens_kind_chosen', kind })}
         onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, true)}
+      />
+      <AtlasViewport
+        model={model} lens={state.lens} layers={state.layers} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned}
+        onSelectRegion={(regionId) => selectRegion(regionId, false)}
       />
       <div className="atlas-main" ref={mainRef}>
         <StructureList

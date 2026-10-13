@@ -4,7 +4,7 @@
  * that needs them. Nothing is used before its parser has accepted it.
  */
 
-import { ANATOMY_INDEX_PATH } from '@/lib/anatomy/anatomy-index-types';
+import { ANATOMY_INDEX_PATH, type PinnedFile } from '@/lib/anatomy/anatomy-index-types';
 import { AnatomyDataError } from '@/lib/anatomy/errors';
 import { parseAnatomyEvidence, type ShownAnatomyEvidence } from '@/lib/anatomy/parse-anatomy-evidence';
 import { parseAnatomyIndex } from '@/lib/anatomy/parse-anatomy-index';
@@ -15,8 +15,11 @@ import { EXPLORER_CATALOG_PATH, parseExplorerCatalog } from '@/lib/atlas-explore
 import { createExplorerModel, type ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { AtlasFetchError, fetchAtlasJson, fetchPinnedJson } from './fetch-atlas-json';
 
-/** `unavailable`: the file could not be fetched. `invalid`: it arrived and failed its checks, so none of it is shown. */
-export type LoadFailureKind = 'unavailable' | 'invalid';
+/**
+ * `unavailable`: the file could not be fetched. `invalid`: it arrived and failed its checks, so none of it is shown.
+ * `stale`: it is not the file this page was built with, which means a newer page has been published.
+ */
+export type LoadFailureKind = 'unavailable' | 'invalid' | 'stale';
 
 export interface LoadFailure {
   kind: LoadFailureKind;
@@ -44,7 +47,7 @@ export function isAbort(error: unknown): boolean {
  */
 export function toLoadFailure(error: unknown, file: string): LoadFailure {
   if (error instanceof AnatomyDataError) return { kind: 'invalid', file: error.dataFile, detail: error.message };
-  if (error instanceof AtlasFetchError) return { kind: 'unavailable', file: error.path, detail: error.message };
+  if (error instanceof AtlasFetchError) return { kind: error.failure === 'pin_mismatch' ? 'stale' : 'unavailable', file: error.path, detail: error.message };
   return { kind: 'unavailable', file, detail: error instanceof Error ? error.message : String(error) };
 }
 
@@ -65,8 +68,13 @@ function requireListableRegions(model: ExplorerModel): ExplorerModel {
   return model;
 }
 
-export async function loadExplorerModel(signal: AbortSignal): Promise<ExplorerModel> {
-  const [rawIndex, rawCatalog] = await Promise.all([fetchAtlasJson(ANATOMY_INDEX_PATH, signal), fetchAtlasJson(EXPLORER_CATALOG_PATH, signal)]);
+/**
+ * @param indexPin the index's length and digest as the page was built with them. With it, an index from any other
+ *   build is refused; without it, the index is only held to its shape, and the 3D view draws nothing.
+ */
+export async function loadExplorerModel(signal: AbortSignal, indexPin: PinnedFile | null): Promise<ExplorerModel> {
+  const fetchIndex = indexPin === null ? fetchAtlasJson(ANATOMY_INDEX_PATH, signal) : fetchPinnedJson(indexPin, signal);
+  const [rawIndex, rawCatalog] = await Promise.all([fetchIndex, fetchAtlasJson(EXPLORER_CATALOG_PATH, signal)]);
   return requireListableRegions(createExplorerModel(parseAnatomyIndex(rawIndex), parseExplorerCatalog(rawCatalog)));
 }
 

@@ -1,9 +1,12 @@
 ---
 import ToolLayout from '@/layouts/ToolLayout.astro';
 import AtlasExplorer from '@/components/atlas-scene/AtlasExplorer';
+import { loadAnatomyBundle } from '@/components/atlas-scene/load-anatomy-data';
 
-// The page is built with no anatomy in it. The explorer fetches this site's own
-// static files when it starts and parses each one before showing any of it.
+// The page is built with no anatomy in it: only the index's path, length and digest, so the
+// explorer can refuse an index from any other build. It fetches this site's own static files
+// when it starts and parses each one before showing any of it.
+const { indexPin } = loadAnatomyBundle();
 ---
 <ToolLayout
   title="TARA Brain Atlas"
@@ -17,6 +20,6 @@ import AtlasExplorer from '@/components/atlas-scene/AtlasExplorer';
     </p>
   </div>
   <!-- Rendered in the browser only: the page carries no anatomy, so there is nothing to render at build time. -->
-  <AtlasExplorer client:only="react" />
+  <AtlasExplorer client:only="react" indexPin={indexPin} />
   <noscript><p>This explorer needs JavaScript. It runs entirely in your browser and reads only this site's own data files.</p></noscript>
 </ToolLayout>
