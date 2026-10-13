@@ -13,6 +13,8 @@ const UNREVIEWED = 'AI-drafted, unreviewed';
 /** The one curated threat model with a step that lights a region today (step 4), and one with none. */
 const LIT_CHAIN_ID = 'CHAIN-VIS-002';
 const UNLIT_CHAIN_ID = 'CHAIN-EEG-001';
+/** The one threat model whose data carries no evidence object, on the chain or on any step. */
+const NO_EVIDENCE_CHAIN_ID = 'CHAIN-VIS-001';
 const TEST_TIMEOUT_MS = 20_000;
 vi.setConfig({ testTimeout: TEST_TIMEOUT_MS });
 
@@ -54,7 +56,7 @@ describe('AtlasExplorer: threat model steps', () => {
   it('says how few steps light a region, counted from the data: across every threat model and for the one chosen', async () => {
     const container = await renderExplorer();
     await openChain(container, UNLIT_CHAIN_ID);
-    expect(chainPanel(container).querySelector('[data-limit-id="chain_overall_tally"]')?.textContent).toMatch(/^1 of the 35 steps in these 7 threat models light a region\./);
+    expect(chainPanel(container).querySelector('[data-limit-id="chain_overall_tally"]')?.textContent).toMatch(/^1 of the 35 steps in these 7 threat models light a region\. For the others the picture of the brain does not change\. Where a step's technique is tagged with a device stage, that stage is marked under Device stages; 4 steps have neither\.$/);
     expect(chainPanel(container).querySelector('[data-limit-id="chain_step_tally"]')?.textContent).toMatch(/^0 of this threat model's 5 steps light a region\./);
     expect([...chainPanel(container).querySelectorAll('[data-step-regions]')].map((line) => line.textContent)).toEqual(Array.from({ length: 5 }, () => 'Lights no region.'));
     fireEvent.change(within(chainPanel(container)).getByLabelText('Threat model'), { target: { value: LIT_CHAIN_ID } });
@@ -120,11 +122,35 @@ describe('AtlasExplorer: threat model steps', () => {
     expect(container.querySelector('.atlas-root')?.getAttribute('data-lens')).toBe('band');
   });
 
+  it('puts the review mark and the technique lens limit on every step that lights a region', async () => {
+    const container = await renderExplorer();
+    await openChain(container, LIT_CHAIN_ID);
+    const litSteps = [...chainPanel(container).querySelectorAll<HTMLElement>('[data-chain-step]')].filter((step) => (step.querySelector('[data-step-regions]')?.getAttribute('data-step-regions') ?? '') !== '');
+    expect(litSteps).toHaveLength(1);
+    const [litStep] = litSteps;
+    expect(litStep.querySelector('[data-step-regions] [data-review-state][data-ai-drafted="true"]')?.textContent).toBe(UNREVIEWED);
+    expect(litStep.querySelector('[data-limit-id="lens_technique"]')?.textContent).toBe(LIMIT_TEMPLATES.lens_technique);
+    for (const unlit of [...chainPanel(container).querySelectorAll<HTMLElement>('[data-chain-step]')].filter((step) => step !== litStep)) expect(unlit.querySelector('[data-step-regions] [data-review-state]')).toBeNull();
+  });
+
+  it('says so, on the chain and on every step, when the data file gives no evidence label, and only then', async () => {
+    const container = await renderExplorer();
+    await openChain(container, NO_EVIDENCE_CHAIN_ID);
+    const panel = chainPanel(container);
+    expect(panel.querySelector('[data-limit-id="chain_no_evidence_chain"]')?.textContent).toBe('The data file gives this chain no evidence label.');
+    const stepSentences = [...panel.querySelectorAll('[data-chain-step] [data-limit-id="chain_no_evidence_step"]')];
+    expect(stepSentences.length).toBeGreaterThan(0);
+    for (const sentence of stepSentences) expect(sentence.textContent).toBe('The data file gives this step no evidence label.');
+    fireEvent.change(within(panel).getByLabelText('Threat model'), { target: { value: UNLIT_CHAIN_ID } });
+    expect(panel.querySelector('[data-limit-id="chain_no_evidence_chain"]')).toBeNull();
+    expect(panel.querySelector('[data-limit-id="chain_no_evidence_step"]')).toBeNull();
+  });
+
   it('writes nothing that points from one step to the next: no arrow, and no words for travelling, in the panel or its code', async () => {
     const container = await renderExplorer();
     await openChain(container, LIT_CHAIN_ID);
     expect(chainPanel(container).textContent).not.toMatch(/[→⟶➔➜►▶]|->|flows? (to|into)|travels|propagat|spreads to/);
-    expect(chainPanel(container).querySelector('svg, canvas, line, path')).toBeNull();
+    expect([...chainPanel(container).querySelectorAll('svg, canvas, line, path')].filter((drawn) => drawn.closest('.atlas-mark') === null)).toEqual([]);
     for (const file of ['ChainView.tsx', 'use-chain-view.ts']) expect(fs.readFileSync(`src/components/atlas-scene/${file}`, 'utf-8'), file).not.toMatch(/from 'three'|<svg|<line|<path|marker-end|arrow/i);
     expect(fs.readFileSync('src/lib/atlas-explorer/chain-steps.ts', 'utf-8')).not.toMatch(/from 'three'|centroid|lerp|interpolat/i);
   });
@@ -168,6 +194,7 @@ describe('AtlasExplorer: the electrode layout and the leads', () => {
     const picked = panel.querySelector('[data-picked-electrode="Cz"]') as HTMLElement;
     expect(picked.textContent).toContain('Picked electrode: Cz');
     expect(picked.querySelector('[data-review-state]')?.textContent).toBe(UNREVIEWED);
+    expect(picked.querySelector(':scope > p > [data-review-state][data-ai-drafted="true"]')?.textContent).toBe(UNREVIEWED);
     expect([...picked.querySelectorAll('[data-limit-id]')].map((note) => note.textContent)).toEqual([LIMIT_TEMPLATES.device_electrodes, LIMIT_TEMPLATES.device_electrode_pick, LIMIT_TEMPLATES.device_landmarks]);
     expect([...picked.querySelectorAll('[data-landmark]')].map((landmark) => landmark.getAttribute('data-landmark'))).toEqual(['nasion', 'inion', 'left_preauricular', 'right_preauricular']);
     expect(picked.querySelectorAll('[data-landmark] [data-review-state]')).toHaveLength(4);

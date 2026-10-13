@@ -196,8 +196,10 @@ def test_every_weak_landmark_says_it_may_be_a_centimetre_off_and_carries_the_mov
     for name, near in (("left_preauricular", "T7"), ("right_preauricular", "T8")):
         row = moved[name]
         assert row["near_electrode"] == near and len(row["near_moved_mm"]) == len(row["vertex_moved_mm"]) == len(row["directions"]) == 4
-        assert (f"Moving it {row['shift_mm']} mm forward, back, up or down moves {near} by {min(row['near_moved_mm'])} to {max(row['near_moved_mm'])} mm and Cz by "
-                f"{min(row['vertex_moved_mm'])} to {max(row['vertex_moved_mm'])} mm") in notes[name]
+        flat, vertical = row["vertex_moved_mm"][:2], row["vertex_moved_mm"][2:]
+        assert (f"Shifting it {row['shift_mm']:g} mm in the side view (5 to 7 mm over the skin) moves {near} by "
+                f"{min(row['near_moved_mm']):.1f} to {max(row['near_moved_mm']):.1f} mm; Cz moves about {max(vertical):.1f} mm for up or down, "
+                f"{max(flat):.1f} mm for forward or back.") in notes[name]
 
 
 def test_the_layout_is_off_by_default_and_keeps_its_unreviewed_marks() -> None:

@@ -6,6 +6,7 @@ import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { nameBands } from '@/lib/atlas-explorer/explorer-model';
 import LimitNote from './LimitNote';
 import LoadNotice from './LoadNotice';
+import ReviewMark from './ReviewMark';
 import type { ChainView as ChainViewState } from './use-chain-view';
 
 interface Props {
@@ -16,10 +17,10 @@ interface Props {
 const NO_CHAIN = '';
 
 /** Counted over every threat model in the file, so the page says up front how little of this reaches the picture of the brain. */
-function tallyAll(model: ExplorerModel, chains: AtlasChains): { lit: string; total: string; chains: string } {
+function tallyAll(model: ExplorerModel, chains: AtlasChains): { lit: string; total: string; chains: string; neither: string } {
   const tallies = chains.chains.map((chain) => tallyChainSteps(buildChainSteps(model, chain)));
-  const sum = (key: 'lit' | 'total'): string => String(tallies.reduce((total, tally) => total + tally[key], 0));
-  return { lit: sum('lit'), total: sum('total'), chains: String(chains.chains.length) };
+  const sum = (key: 'lit' | 'total' | 'neither'): string => String(tallies.reduce((total, tally) => total + tally[key], 0));
+  return { lit: sum('lit'), total: sum('total'), neither: sum('neither'), chains: String(chains.chains.length) };
 }
 
 function StepLine({ model, step, isCurrent, rules }: { model: ExplorerModel; step: ChainStepView; isCurrent: boolean; rules: AtlasChains['label_rules'] }) {
@@ -29,13 +30,19 @@ function StepLine({ model, step, isCurrent, rules }: { model: ExplorerModel; ste
       <div>
         <p className="atlas-fact"><span className="sr-only">Step {step.position}: </span><strong>{step.techniqueName}</strong> <span className="atlas-id">{step.techniqueId}</span></p>
         <p className="atlas-fact">{step.action}</p>
-        {step.evidenceLabel !== null && <p className="atlas-row-why"><strong>{EVIDENCE_LABEL_WORDS[step.evidenceLabel]}.</strong> {rules[step.evidenceLabel]}</p>}
+        {step.evidenceLabel === null
+          ? <LimitNote limit={limitSentence('chain_no_evidence_step')} />
+          : <p className="atlas-row-why"><strong>{EVIDENCE_LABEL_WORDS[step.evidenceLabel]}.</strong> {rules[step.evidenceLabel]}</p>}
         <p className="atlas-row-why" data-step-stages={step.stageIds.join(' ')}>
           {step.stageIds.length === 0 ? 'The catalog tags this technique with no device stage.' : `Device ${step.stageIds.length === 1 ? 'stage' : 'stages'}: ${nameBands(model, step.stageIds)}.`}
         </p>
         <p className="atlas-row-why" data-step-regions={step.litRegions.map((region) => region.id).join(' ')}>
-          {step.litRegions.length === 0 ? 'Lights no region.' : `Lights: ${step.litRegions.map((region) => region.name).join(', ')}.`}
+          {step.litRegions.length === 0 ? 'Lights no region.' : 'Lights: '}
+          {step.litRegions.map((region, index) => (
+            <span key={region.id}>{index > 0 && ', '}{region.name} <ReviewMark state={region.reviewState} /></span>
+          ))}
         </p>
+        {step.litRegions.length > 0 && <LimitNote limit={limitSentence('lens_technique')} />}
       </div>
     </li>
   );
@@ -90,7 +97,9 @@ export default function ChainView({ model, view }: Props) {
       )}
       {chains.status === 'ready' && chain !== null && (
         <>
-          {chain.evidence_label !== null && <p className="atlas-fact" data-chain-label={chain.evidence_label}>The datalake file labels this threat model as a whole: <strong>{EVIDENCE_LABEL_WORDS[chain.evidence_label].toLowerCase()}</strong>.</p>}
+          {chain.evidence_label === null
+            ? <LimitNote limit={limitSentence('chain_no_evidence_chain')} />
+            : <p className="atlas-fact" data-chain-label={chain.evidence_label}>The datalake file labels this threat model as a whole: <strong>{EVIDENCE_LABEL_WORDS[chain.evidence_label].toLowerCase()}</strong>.</p>}
           <LimitNote limit={limitSentence('chain_step_tally', { lit: String(tally.lit), total: String(tally.total) })} />
           {isWhole ? <LimitNote limit={limitSentence('chain_all_at_once')} /> : <Controls view={view} />}
           <ol className="atlas-chain-steps">

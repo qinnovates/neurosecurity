@@ -50,4 +50,4 @@ def test_the_variability_figure_is_a_fact_in_words_never_a_shape() -> None:
     fact = next(row for row in GEOMETRY["facts"] if row["id"] == "electrode_to_cortex_variability")
     assert fact["drawable"] is False and fact["read_depth"] == "abstract_only"
     assert fact["quote"] in "a grand standard deviation of 4.6 mm in x, 7.1 mm in y and 7.8 mm in z"
-    assert "16 adults" in fact["statement"] and "not this template" in fact["statement"]
+    assert "In one study, the brain" in fact["statement"] and "not this template" in fact["statement"]
