@@ -51,7 +51,7 @@
 .atlas-button { padding: 0 0.875rem; font-weight: 600; }
 .atlas-button:hover, .atlas-chip:hover, .atlas-toggle:hover, .atlas-stage-button:hover, .atlas-rail-technique:hover { border-color: var(--atlas-accent); }
 .atlas-link-button { min-height: 1.5rem; padding: 0; font: inherit; font-weight: 600; color: var(--atlas-accent); background: none; border: 0; border-radius: 0.25rem; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; text-align: left; }
-.atlas-root a { color: var(--atlas-accent); font-weight: 600; text-underline-offset: 2px; }
+.atlas-root a { display: inline-block; min-height: 1.5rem; padding: 0.125rem 0.375rem; color: var(--atlas-accent); font-weight: 600; text-underline-offset: 2px; }
 .atlas-input { width: 100%; min-height: var(--atlas-row); padding: 0 0.625rem; font: inherit; color: inherit; background: var(--atlas-ground); border: 1px solid var(--atlas-line-strong); border-radius: 0.5rem; }
 .atlas-toggle { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0 0.75rem; font-weight: 600; text-align: left; }
 .atlas-toggle-box { flex: none; width: 1rem; height: 1rem; border: 1.5px solid currentColor; border-radius: 0.25rem; background: transparent; transition: background-color var(--atlas-quick) var(--atlas-ease), box-shadow var(--atlas-quick) var(--atlas-ease); }
@@ -70,7 +70,7 @@
 /* The lens bar. The thumb slides to the active lens; it marks a choice and carries no other meaning. */
 .atlas-lenses { position: relative; display: grid; grid-template-columns: repeat(var(--atlas-lens-count), minmax(0, 1fr)); padding: 0.1875rem; background: var(--atlas-ground); border: 1px solid var(--atlas-line-strong); border-radius: 0.625rem; }
 .atlas-lens-thumb { position: absolute; top: 0.1875rem; bottom: 0.1875rem; left: 0.1875rem; width: calc((100% - 0.375rem) / var(--atlas-lens-count)); border-radius: 0.4375rem; background: var(--atlas-accent-fill); transform: translateX(calc(var(--atlas-lens-index) * 100%)); transition: transform var(--atlas-move) var(--atlas-ease); }
-.atlas-lens { position: relative; padding: 0 0.25rem; font-weight: 600; background: transparent; border-color: transparent; overflow-wrap: anywhere; }
+.atlas-lens { position: relative; padding: 0 0.125rem; font-weight: 600; background: transparent; border-color: transparent; overflow-wrap: normal; hyphens: none; }
 .atlas-lens[aria-pressed="true"] { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 .atlas-lens-body { display: grid; gap: 0.75rem 1.25rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-top: 0.75rem; animation: atlas-fade var(--atlas-quick) linear both; }
 .atlas-subject { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--atlas-line); }
@@ -188,6 +188,9 @@
 }
 @media (max-width: 640px) {
   .atlas-root { --atlas-spine: 2.75rem; }
+  .atlas-lens { font-size: 0.6875rem; }
+  .atlas-filterbar { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .atlas-filterbar .atlas-toggle { grid-column: 1 / -1; min-height: 2.75rem; }
   .atlas-columns { display: none; }
   .atlas-row { grid-template-columns: minmax(0, 1fr); gap: 0.375rem; }
   .atlas-band-code { font-size: 1rem; }

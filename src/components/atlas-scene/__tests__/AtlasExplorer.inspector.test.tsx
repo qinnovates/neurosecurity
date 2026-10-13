@@ -149,7 +149,8 @@ describe('AtlasExplorer: literature statements', () => {
 
   it('gives a region with no statement its recorded reason and no statement', async () => {
     const { inspector } = await openRegion('cea');
-    expect(inspector.querySelector('[data-limit-id="evidence_none"]')?.textContent).toContain('Only animal evidence found');
+    expect(inspector.querySelector('[data-limit-id="evidence_none_animal_evidence_only"]')?.textContent).toContain('only animal studies were found');
+    expect(inspector.textContent).not.toMatch(/this session|filed under bla/);
     expect(inspector.querySelector('.atlas-statement')).toBeNull();
   });
 });
@@ -352,7 +353,10 @@ describe('AtlasExplorer: device stages and the H01 card', () => {
     expect(panel.querySelectorAll('.atlas-h01-sentences > li')).toHaveLength(5);
     expect(within(panel).getAllByRole('button', { name: /^Sources for this sentence \(\d\)$/ })).toHaveLength(5);
     expect(panel.querySelector('[data-ai-drafted="true"]')?.textContent).toBe(UNREVIEWED);
-    expect(panel.textContent).toContain('Not a whole brain');
+    const caveats = [...panel.querySelectorAll('[data-caveats="true"] li')].map((item) => item.textContent ?? '');
+    expect(caveats).toHaveLength(10);
+    expect(caveats[0]).toBe('This sample is not a whole brain: it is about one cubic millimetre.');
+    expect(panel.textContent).not.toMatch(/must not|Do not state|the card must/);
     fireEvent.click(within(panel).getAllByRole('button', { name: /^Sources for this sentence/ })[0]);
     expect(panel.querySelectorAll('.atlas-h01-sentences blockquote').length).toBeGreaterThan(0);
   });

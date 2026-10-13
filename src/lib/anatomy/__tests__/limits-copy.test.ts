@@ -31,20 +31,20 @@ describe('limit sentences', () => {
   });
 
   it('fill their values from what they are given', () => {
-    expect(limitSentence('layer_unavailable', { reason: 'No asset has been built.' })).toEqual({ id: 'layer_unavailable', text: 'Not available in this build. No asset has been built.' });
+    expect(limitSentence('techniques_band_level', { band: 'N6' })).toEqual({ id: 'techniques_band_level', text: 'Tagged with band N6; the catalog\'s text names no structure. This is not a link to this region.' });
     expect(limitSentence('lens_band').text).toBe(LIMIT_TEMPLATES.lens_band);
   });
 
   it('refuse to leave a hole where a value is missing or blank', () => {
-    expect(() => limitSentence('layer_unavailable', { reason: ' ' })).toThrow(LimitValueError);
-    expect(() => limitSentence('layer_unavailable', {} as { reason: string })).toThrow(/needs a non-empty value for \{reason\}/);
+    expect(() => limitSentence('techniques_band_level', { band: ' ' })).toThrow(LimitValueError);
+    expect(() => limitSentence('techniques_band_level', {} as { band: string })).toThrow(/needs a non-empty value for \{band\}/);
   });
 
   it('recognise their own output and nothing else', () => {
     for (const id of LIMIT_IDS) expect(matchesLimitTemplate(id, LIMIT_TEMPLATES[id].replace(/\{[a-z_]+\}/g, 'a (value).')), id).toBe(true);
     expect(matchesLimitTemplate('lens_niss', `${LIMIT_TEMPLATES.lens_niss} Trust it.`)).toBe(false);
     expect(matchesLimitTemplate('lens_niss', LIMIT_TEMPLATES.lens_niss.replace('unreviewed', 'validated'))).toBe(false);
-    expect(matchesLimitTemplate('layer_unavailable', 'Available in this build. Reason.')).toBe(false);
+    expect(matchesLimitTemplate('techniques_band_level', 'Linked to band N6; the catalog names it.')).toBe(false);
     expect(isLimitId('lens_niss')).toBe(true);
     expect(isLimitId('made_up')).toBe(false);
   });

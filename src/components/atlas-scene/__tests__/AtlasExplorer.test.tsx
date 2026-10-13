@@ -231,7 +231,8 @@ describe('AtlasExplorer: limits, layers and marks', () => {
     expect(layers.map((layer) => layer.textContent)).toEqual(['Brain outline', 'Cortical shapes', 'Deep structures', 'Tracts', 'Networks', 'Devices']);
     for (const layer of layers.filter((candidate) => candidate.getAttribute('aria-disabled') === 'true')) {
       const reason = document.getElementById(layer.getAttribute('aria-describedby') ?? '');
-      expect(reason?.textContent, layer.textContent ?? '').toMatch(/^Not available in this build\. .+/);
+      expect(reason?.textContent, layer.textContent ?? '').toMatch(/^(Not available in this build\. .+|This layer is not available in this build\.)$/);
+      expect(reason?.textContent).not.toMatch(/MIT software|template space|requires additional acknowledgment/);
       expect((layer as HTMLButtonElement).disabled).toBe(false);
       fireEvent.click(layer);
       expect(layer.getAttribute('aria-pressed')).toBe('false');

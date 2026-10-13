@@ -5,14 +5,15 @@
  */
 
 import type { IndexReviewState } from '@/lib/anatomy/anatomy-index-types';
-import { weakestReviewState, type ExplorerModel } from './explorer-model';
+import { nameBands, weakestReviewState, type ExplorerModel } from './explorer-model';
 import { describeUncountedLink } from './region-lens';
 import type { TechniqueOptionKind } from './subject-options';
 
 export interface TechniqueSummary {
   id: string;
   name: string;
-  bandIds: string[];
+  /** The technique's bands with their names, as shown. */
+  bandNames: string;
   kind: TechniqueOptionKind;
   linkedRegions: Array<{ id: string; name: string }>;
   namedNotCounted: Array<{ id: string; name: string; term: string; reason: string }>;
@@ -25,7 +26,7 @@ export interface TechniqueSummary {
 export function summariseTechnique(model: ExplorerModel, techniqueId: string): TechniqueSummary | null {
   const deviceOnly = model.deviceOnlyTechniquesById.get(techniqueId);
   if (deviceOnly !== undefined) {
-    return { id: deviceOnly.id, name: deviceOnly.name, bandIds: deviceOnly.band_ids, kind: 'device_only', linkedRegions: [], namedNotCounted: [], unresolvedTerms: [], reviewState: null };
+    return { id: deviceOnly.id, name: deviceOnly.name, bandNames: nameBands(model, deviceOnly.band_ids), kind: 'device_only', linkedRegions: [], namedNotCounted: [], unresolvedTerms: [], reviewState: null };
   }
   const technique = model.techniquesById.get(techniqueId);
   if (technique === undefined) return null;
@@ -35,7 +36,7 @@ export function summariseTechnique(model: ExplorerModel, techniqueId: string): T
   return {
     id: technique.id,
     name: technique.name,
-    bandIds: technique.band_ids,
+    bandNames: nameBands(model, technique.band_ids),
     kind: technique.scope,
     linkedRegions: litIds.map((regionId) => ({ id: regionId, name: nameOf(regionId) })),
     namedNotCounted: resolved.filter(({ link }) => !link.lit).map(({ link, regionId }) => ({ id: regionId, name: nameOf(regionId), term: link.term, reason: describeUncountedLink(link) })),

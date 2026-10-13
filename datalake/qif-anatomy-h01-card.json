@@ -377,6 +377,58 @@
     "No claim about consent or ethics approval wording: not read this session.",
     "Do not say the whole dataset was made 'not by hand' or 'by computers alone': the manuscript says the cell census was manual."
   ],
+  "visitor_caveats": [
+    {
+      "text": "This sample is not a whole brain: it is about one cubic millimetre.",
+      "must_not_imply_index": 0,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "It does not show how any person's brain is wired: it is one fragment, reconstructed by automated methods.",
+      "must_not_imply_index": 1,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "It comes from one person, so it says nothing about people in general.",
+      "must_not_imply_index": 2,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "The tissue was removed during surgery for epilepsy, not taken from a healthy volunteer. The paper says it looked normal under a light microscope and that subtle effects cannot be ruled out.",
+      "must_not_imply_index": 3,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "The sources read do not give the donor's age or sex.",
+      "must_not_imply_index": 4,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "The sources read do not say which side of the brain the sample came from.",
+      "must_not_imply_index": 5,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "The synapse counts are not exact, and they differ between sources.",
+      "must_not_imply_index": 6,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "It says nothing about what any QIF region does.",
+      "must_not_imply_index": 7,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "The wording of the consent and ethics approval was not read.",
+      "must_not_imply_index": 8,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "Not all of it was made by computer: the paper says the cells were counted by hand.",
+      "must_not_imply_index": 9,
+      "drafted_by": "ai"
+    }
+  ],
   "card": {
     "title": "One cubic millimetre, one patient",
     "sentences": [

@@ -9,7 +9,7 @@ import type { IndexReviewState, IndexStructure, IndexSubject } from '@/lib/anato
 import { NISS_STEPS } from '@/lib/anatomy/colour-modes';
 import type { LimitSentence } from '@/lib/anatomy/limits-copy';
 import type { CatalogBand } from './explorer-catalog';
-import { listLitLinks, type ExplorerModel, type RegionLink } from './explorer-model';
+import { listLitLinks, nameBands, type ExplorerModel, type RegionLink } from './explorer-model';
 import { limitForGeometry, limitForSource } from './limit-selection';
 import { describeUncountedLink } from './region-lens';
 
@@ -38,7 +38,8 @@ export interface DetailShape {
 export interface DetailTechnique {
   id: string;
   name: string;
-  bandIds: string[];
+  /** The technique's bands with their names, as shown. */
+  bandNames: string;
   nissSeverity: string | null;
   dsmCluster: string | null;
   /** The catalog's own word for the structure. */
@@ -83,11 +84,11 @@ function toDetailShape(model: ExplorerModel, region: IndexSubject, structure: In
   };
 }
 
-function toDetailTechnique({ technique, link }: RegionLink): DetailTechnique {
+function toDetailTechnique(model: ExplorerModel, { technique, link }: RegionLink): DetailTechnique {
   return {
     id: technique.id,
     name: technique.name,
-    bandIds: technique.band_ids,
+    bandNames: nameBands(model, technique.band_ids),
     nissSeverity: technique.niss_severity,
     dsmCluster: technique.dsm_cluster,
     term: link.term,
@@ -119,8 +120,8 @@ export function buildRegionDetail(model: ExplorerModel, regionId: string): Regio
     description: model.descriptionsByRegion.get(regionId) ?? null,
     geometryLimit: limitForGeometry(region),
     shapes: region.structure_keys.flatMap((key) => model.structuresByKey.get(key) ?? []).map((structure) => toDetailShape(model, region, structure)),
-    linked: litLinks.map(toDetailTechnique),
-    namedNotCounted: links.filter((regionLink) => !regionLink.link.lit).map(toDetailTechnique),
+    linked: litLinks.map((regionLink) => toDetailTechnique(model, regionLink)),
+    namedNotCounted: links.filter((regionLink) => !regionLink.link.lit).map((regionLink) => toDetailTechnique(model, regionLink)),
     bandLevel: model.index.techniques
       .filter((technique) => technique.scope === 'band_level' && technique.band_ids.some((bandId) => region.band_ids.includes(bandId)))
       .map((technique) => ({ id: technique.id, name: technique.name })),

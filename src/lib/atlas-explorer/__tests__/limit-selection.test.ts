@@ -6,7 +6,7 @@ import { parseRegionEvidence } from '@/lib/anatomy/parse-region-evidence';
 import { isAboutRegionItself } from '@/lib/anatomy/region-evidence-types';
 import { describeBands, limitForGeometry, limitForLayer, limitForSource, limitsForEvidenceAnatomy, limitsForLens } from '../limit-selection';
 import { buildRegionEvidenceView } from '../region-evidence-view';
-import { FIXTURE_IDS, buildFixtureModel } from './explorer-fixtures';
+import { FIXTURE_IDS, buildFixtureModel, loadRealModel } from './explorer-fixtures';
 
 const model = buildFixtureModel();
 const evidence = parseRegionEvidence(regionEvidenceFile, new Set(atlas.brain_regions.map((region) => region.id)));
@@ -28,13 +28,24 @@ describe('limit selection', () => {
 
   it('gives an unavailable layer its reason and an available one nothing', () => {
     const [cortical, tracts] = model.index.layers;
-    expect(limitForLayer(cortical)).toBeNull();
-    expect(limitForLayer(tracts)?.text).toBe('Not available in this build. The publisher has not confirmed the terms.');
+    const source = (blockers: string[]) => [{ id: 'fixture_tracts', blockers }] as unknown as Parameters<typeof limitForLayer>[1];
+    const blockedTracts = { ...tracts, source_ids: ['fixture_tracts'] };
+    expect(limitForLayer(cortical, [])).toBeNull();
+    expect(limitForLayer(tracts, [])?.text).toBe('This layer is not available in this build.');
+    expect(limitForLayer(blockedTracts, source(['route_not_settled']))?.text).toBe('Not available in this build. The shapes cannot yet be placed reliably in the brain model this site uses.');
+    expect(limitForLayer(blockedTracts, source(['route_not_settled', 'not_cleared']))?.id).toBe('layer_blocked_not_cleared');
+    expect(limitForLayer(blockedTracts, source(['no_output_folder']))?.id).toBe('layer_unavailable');
+    // The registry's own prose never reaches a visitor, whatever the layer's reason field holds.
+    expect(limitForLayer({ ...blockedTracts, reason: 'The grant rests on reading an MIT software licence.' }, source(['grant_not_explicit']))?.text).not.toContain('MIT');
+    const real = loadRealModel();
+    const shown = real.index.layers.flatMap((layer) => limitForLayer(layer, real.index.sources)?.text ?? []);
+    expect(shown.length).toBeGreaterThan(0);
+    expect(shown.filter((text) => real.index.layers.some((layer) => layer.reason !== null && text.includes(layer.reason)))).toEqual([]);
   });
 
   it('always puts at least one sentence beside the lens, chosen by what the lens is on', () => {
     expect(ids(limitsForLens(model, { kind: 'band' }))).toEqual(['lens_band']);
-    expect(ids(limitsForLens(model, { kind: 'niss' }))).toEqual(['lens_niss', 'counts_are_entries']);
+    expect(ids(limitsForLens(model, { kind: 'niss' }))).toEqual(['niss_meaning', 'lens_niss', 'counts_are_entries']);
     expect(ids(limitsForLens(model, { kind: 'technique', techniqueId: null }))).toEqual(['lens_technique', 'lens_needs_subject']);
     expect(ids(limitsForLens(model, { kind: 'technique', techniqueId: FIXTURE_IDS.linkedTechnique }))).toEqual(['lens_technique']);
     expect(limitsForLens(model, { kind: 'technique', techniqueId: FIXTURE_IDS.bandLevelTechnique })[0].text).toContain('ties this technique to band N6 and names no region');
@@ -82,7 +93,9 @@ describe('evidence statements', () => {
   it('give a region with no statement its recorded reason', () => {
     const cea = buildRegionEvidenceView(evidence, 'cea', 'Central Amygdala');
     expect(cea.statements).toEqual([]);
-    expect(cea.emptyLimit?.text).toContain('Only animal evidence found');
+    expect(cea.emptyLimit?.id).toBe('evidence_none_animal_evidence_only');
+    expect(cea.emptyLimit?.text).not.toMatch(/this session|filed under bla/);
+    expect(buildRegionEvidenceView(evidence, 'sacral_cord', 'Sacral').emptyLimit?.id).toBe('evidence_none_no_abstract_found');
     expect(buildRegionEvidenceView(evidence, 'ppc', 'PPC').emptyLimit).toBeNull();
   });
 });

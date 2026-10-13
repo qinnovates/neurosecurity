@@ -4,7 +4,7 @@
  * them read from data.
  */
 
-import type { GeometryState, IndexLayer, IndexSubject } from '@/lib/anatomy/anatomy-index-types';
+import type { GeometryState, IndexLayer, IndexSource, IndexSubject } from '@/lib/anatomy/anatomy-index-types';
 import { limitSentence, type LimitSentence } from '@/lib/anatomy/limits-copy';
 import type { AnatomyMatch, RegionEvidenceRow } from '@/lib/anatomy/region-evidence-types';
 import { isNeuralBand, type ExplorerModel } from './explorer-model';
@@ -30,10 +30,18 @@ export function limitForSource(sourceId: string, sourceName: string): LimitSente
   return limitSentence('source_other', { source_name: sourceName });
 }
 
-/** The reason shown beside a disabled layer control, or null for a layer that is available. */
-export function limitForLayer(layer: IndexLayer): LimitSentence | null {
+/** Blockers that have a visitor sentence, most basic first. A layer blocked for several reasons shows the first. */
+const LAYER_BLOCKER_ORDER = ['not_cleared', 'agreement_not_accepted', 'verdict_not_ship', 'grant_not_explicit', 'license_not_commercial', 'not_redistributable', 'route_not_settled'] as const;
+
+/**
+ * The sentence shown beside a layer this build cannot show, or null for a layer that is available. It is chosen by
+ * the blocker code the index records for the layer's sources; the registry's own prose is never shown to a visitor.
+ */
+export function limitForLayer(layer: IndexLayer, sources: readonly IndexSource[]): LimitSentence | null {
   if (layer.available) return null;
-  return limitSentence('layer_unavailable', { reason: layer.reason ?? UNRECORDED_REASON });
+  const blockers = new Set(sources.filter((source) => layer.source_ids.includes(source.id)).flatMap((source) => source.blockers));
+  const blocker = LAYER_BLOCKER_ORDER.find((code) => blockers.has(code));
+  return blocker === undefined ? limitSentence('layer_unavailable') : limitSentence(`layer_blocked_${blocker}`);
 }
 
 /** "band N6", or "bands N5 and N6": brain bands only, since only they hold regions. */
@@ -54,7 +62,7 @@ function limitsForTechnique(model: ExplorerModel, techniqueId: string): LimitSen
 export function limitsForLens(model: ExplorerModel, lens: Lens): LimitSentence[] {
   switch (lens.kind) {
     case 'band': return [limitSentence('lens_band')];
-    case 'niss': return [limitSentence('lens_niss'), limitSentence('counts_are_entries')];
+    case 'niss': return [limitSentence('niss_meaning'), limitSentence('lens_niss'), limitSentence('counts_are_entries')];
     case 'technique': return lens.techniqueId === null ? [limitSentence('lens_technique'), limitSentence('lens_needs_subject')] : limitsForTechnique(model, lens.techniqueId);
     case 'dsm': return lens.cluster === null ? [limitSentence('lens_dsm'), limitSentence('lens_needs_subject')] : [limitSentence('lens_dsm'), limitSentence('counts_are_entries')];
     case 'stated_targets': return lens.deviceId === null ? [limitSentence('lens_stated_targets'), limitSentence('lens_needs_subject')] : [limitSentence('lens_stated_targets')];

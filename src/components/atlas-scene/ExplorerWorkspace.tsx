@@ -103,7 +103,7 @@ export default function ExplorerWorkspace({ model }: Props) {
           onBackToList={focusSelectedRow}
         />
       </div>
-      <LayerPanel layers={model.index.layers} requested={state.layers} onToggle={(layerId) => dispatch({ type: 'layer_toggled', layerId })} />
+      <LayerPanel layers={model.index.layers} sources={model.index.sources} requested={state.layers} onToggle={(layerId) => dispatch({ type: 'layer_toggled', layerId })} />
       <SignalChainRail
         rail={rail} includesMixed={state.railIncludesMixed} activeStageId={state.railStageId}
         chosenTechniqueId={state.lens.kind === 'technique' ? state.lens.techniqueId : null}

@@ -12,8 +12,8 @@ describe('listTechniqueOptions', () => {
       [FIXTURE_IDS.linkedTechnique, 'regions'], [FIXTURE_IDS.bandLevelTechnique, 'band_level'], [FIXTURE_IDS.notDraftedTechnique, 'not_drafted'],
       [FIXTURE_IDS.secondLinkedTechnique, 'regions'], [FIXTURE_IDS.deviceOnlyTechnique, 'device_only'],
     ]);
-    expect(options[0].detail).toBe('1 region linked; S1, N7');
-    expect(options[4].detail).toBe('device stages only; S2, S3');
+    expect(options[0].detail).toBe('1 region linked; S1 Band S1, N7 Band N7');
+    expect(options[4].detail).toBe('device stages only; S2 Band S2, S3 Band S3');
   });
 
   it('carries the review mark exactly where a drafted link stands behind the option', () => {
@@ -38,8 +38,8 @@ describe('filterSubjectOptions', () => {
 
   it('matches every word against id, name and detail, whatever the case', () => {
     expect(filterSubjectOptions(options, 'FIXTURE firmware').map((option) => option.id)).toEqual([FIXTURE_IDS.deviceOnlyTechnique]);
-    expect(filterSubjectOptions(options, 'band tag').map((option) => option.id)).toEqual([FIXTURE_IDS.bandLevelTechnique]);
-    expect(filterSubjectOptions(options, 'n7').map((option) => option.id)).toEqual([FIXTURE_IDS.linkedTechnique, FIXTURE_IDS.notDraftedTechnique, FIXTURE_IDS.secondLinkedTechnique]);
+    expect(filterSubjectOptions(options, 'tag only').map((option) => option.id)).toEqual([FIXTURE_IDS.bandLevelTechnique]);
+    expect(filterSubjectOptions(options, 'band n7').map((option) => option.id)).toEqual([FIXTURE_IDS.linkedTechnique, FIXTURE_IDS.notDraftedTechnique, FIXTURE_IDS.secondLinkedTechnique]);
   });
 
   it('puts an exact id first', () => {

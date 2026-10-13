@@ -34,7 +34,7 @@ function TechniqueFacts({ summary, onSelectRegion }: { summary: TechniqueSummary
   return (
     <div className="atlas-subject" data-technique-kind={summary.kind}>
       <p className="atlas-fact">
-        <strong>{summary.name}</strong> <span className="atlas-id">{summary.id}</span>. Bands {summary.bandIds.join(', ')}.{' '}
+        <strong>{summary.name}</strong> <span className="atlas-id">{summary.id}</span>. Bands: {summary.bandNames}.{' '}
         {summary.reviewState !== null && <ReviewMark state={summary.reviewState} />}
       </p>
       {summary.linkedRegions.length > 0 && <><p className="atlas-label">Linked regions</p><RegionButtons regions={summary.linkedRegions} onSelectRegion={onSelectRegion} /></>}

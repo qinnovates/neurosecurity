@@ -41,8 +41,8 @@ function CardBody({ card }: { card: H01CardData }) {
           <li key={number.quantity} className="atlas-fact"><strong>{number.quantity}:</strong> {number.values.map((entry) => entry.value).join('; ')}. {number.note}</li>
         ))}
       </ul>
-      <h4 className="atlas-minor-heading">What this card does not say</h4>
-      <ul className="atlas-plain-list">{card.must_not_imply.map((item) => <li key={item} className="atlas-row-why">{item}</li>)}</ul>
+      <h4 className="atlas-minor-heading">What this sample does not show</h4>
+      <ul className="atlas-plain-list" data-caveats="true">{card.visitor_caveats.map((caveat) => <li key={caveat.must_not_imply_index} className="atlas-row-why">{caveat.text}</li>)}</ul>
       <p className="atlas-citation">
         {card.card.attribution_line}{' '}
         <a href={doiAddress(card.paper.doi)} target="_blank" rel="noopener noreferrer">Paper</a>{' '}

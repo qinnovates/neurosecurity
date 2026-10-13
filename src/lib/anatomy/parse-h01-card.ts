@@ -25,7 +25,7 @@ const SOURCE_HOSTS = ['api.crossref.org', 'eutils.ncbi.nlm.nih.gov', 'h01-releas
 const RELEASE_HOSTS = ['h01-release.storage.googleapis.com'];
 const FILE_KEYS = [
   'status', 'date_checked', 'paper', 'release_page', 'data_page', 'source_version_note', 'facts_by_source_version', 'facts',
-  'numbers_that_differ_by_source', 'must_not_imply', 'card',
+  'numbers_that_differ_by_source', 'must_not_imply', 'visitor_caveats', 'card',
 ] as const;
 const PAPER_KEYS = ['doi', 'url', 'title', 'journal', 'volume', 'issue', 'first_author', 'year', 'author_count', 'doi_matches', 'first_author_matches', 'year_matches'] as const;
 const FACT_KEYS = ['id', 'fact', 'quote', 'quote_location', 'source_url', 'source_description', 'source_version', 'drafted_by', 'human_review', 'date_checked'] as const;
@@ -69,6 +69,13 @@ export interface H01DifferingNumber {
   note: string;
 }
 
+export interface H01VisitorCaveat {
+  text: string;
+  /** The position of the drafting note in `must_not_imply` that this sentence is derived from. */
+  must_not_imply_index: number;
+  drafted_by: typeof DRAFTED_BY_AI;
+}
+
 export interface H01CardSentence {
   text: string;
   fact_ids: string[];
@@ -84,7 +91,10 @@ export interface H01Card {
   facts_by_source_version: Record<H01SourceVersion, number>;
   facts: H01Fact[];
   numbers_that_differ_by_source: H01DifferingNumber[];
+  /** Notes to whoever drafts the card. Never shown to a visitor. */
   must_not_imply: string[];
+  /** What a visitor is told the sample does not show: one plain sentence for each drafting note, AI-drafted like the rest. */
+  visitor_caveats: H01VisitorCaveat[];
   card: { title: string; sentences: H01CardSentence[]; attribution_line: string; drafting_notes: string };
 }
 
@@ -150,6 +160,15 @@ function readCard(value: unknown, location: FieldLocation): H01Card['card'] {
   };
 }
 
+function readCaveat(value: unknown, location: FieldLocation): H01VisitorCaveat {
+  const record = readRecord(value, location, { required: ['text', 'must_not_imply_index', 'drafted_by'] });
+  return {
+    text: readString(record, 'text', location, MAX_TEXT_LENGTH),
+    must_not_imply_index: readInteger(record, 'must_not_imply_index', location, 0),
+    drafted_by: readEnum(record, 'drafted_by', location, [DRAFTED_BY_AI]),
+  };
+}
+
 function readVersionTally(value: unknown, location: FieldLocation): Record<H01SourceVersion, number> {
   const record = readRecord(value, location, { required: H01_SOURCE_VERSIONS });
   return Object.fromEntries(H01_SOURCE_VERSIONS.map((version) => [version, readInteger(record, version, location, 0)])) as Record<H01SourceVersion, number>;
@@ -167,6 +186,9 @@ function checkReferences(card: H01Card, root: FieldLocation): void {
   const mistallied = H01_SOURCE_VERSIONS.find((version) => card.facts.filter((fact) => fact.source_version === version).length !== card.facts_by_source_version[version]);
   if (mistallied !== undefined) failAt(childOf(root, `facts_by_source_version.${mistallied}`), 'the tally differs from the facts', 'Regenerate the file so its tallies match its facts.');
   if (card.must_not_imply.length === 0) failAt(childOf(root, 'must_not_imply'), 'the card must say what it must not imply', 'Restore the list.');
+  const covered = card.visitor_caveats.map((caveat) => caveat.must_not_imply_index).sort((first, second) => first - second);
+  const isOneEach = covered.length === card.must_not_imply.length && covered.every((position, index) => position === index);
+  if (!isOneEach) failAt(childOf(root, 'visitor_caveats'), 'each drafting note needs exactly one visitor sentence derived from it', 'Add or remove a caveat so every must_not_imply item has one.');
 }
 
 /** @throws AnatomyDataError naming the first field that is wrong */
@@ -185,6 +207,7 @@ export function parseH01Card(raw: unknown): H01Card {
     facts: readList(record, 'facts', root).map((fact, index) => readFact(fact, itemOf(root, 'facts', index))),
     numbers_that_differ_by_source: readList(record, 'numbers_that_differ_by_source', root).map((number, index) => readDifferingNumber(number, itemOf(root, 'numbers_that_differ_by_source', index))),
     must_not_imply: readStringList(record, 'must_not_imply', root, MAX_TEXT_LENGTH),
+    visitor_caveats: readList(record, 'visitor_caveats', root).map((caveat, index) => readCaveat(caveat, itemOf(root, 'visitor_caveats', index))),
     card: readCard(record.card, childOf(root, 'card')),
   };
   checkReferences(card, root);
