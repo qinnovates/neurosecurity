@@ -208,7 +208,8 @@ function runCheck() {
   if (failures.length > 0) {
     process.stderr.write('[check-model-page] not isolated:\n');
     for (const failure of failures) process.stderr.write(`  - ${failure}\n`);
-    process.exit(1);
+    process.exitCode = 1;
+    return;
   }
   const pageList = TOOL_PAGES.map(({ urlPath }) => urlPath).join(', ');
   process.stdout.write(`[check-model-page] ${pageList}: no off-origin resources, router, or analytics; policy equals the allowed policy.\n`);
@@ -222,6 +223,6 @@ if (isRunDirectly) {
     runCheck();
   } catch (error) {
     process.stderr.write(`[check-model-page] ${error instanceof Error ? error.message : String(error)}\n`);
-    process.exit(1);
+    process.exitCode = 1;
   }
 }

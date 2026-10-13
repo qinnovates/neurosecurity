@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-09T10:01:35.569560+00:00",
+    "generated": "2026-10-13T17:43:46.048415+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
-    "total_datasets": 33,
-    "total_rows": 23736
+    "total_datasets": 38,
+    "total_rows": 24245
   },
   "datasets": {
     "techniques": {
@@ -42,6 +42,7 @@
         "notes"
       ],
       "size_bytes": 44080,
+      "sha256": "f9bb2a65ad888c0f4c93853c17ee5b9b7c6904932890ec69818e14ae7fe4d5c0",
       "compression": "zstd",
       "source": "datalake/parquet/techniques.parquet"
     },
@@ -56,6 +57,7 @@
         "dsm_type"
       ],
       "size_bytes": 4063,
+      "sha256": "ec784db0c076963f890498218cd0e310ba8ef02034e0345ab0fa58b62701522e",
       "compression": "zstd",
       "source": "datalake/parquet/technique_dsm.parquet"
     },
@@ -67,6 +69,7 @@
         "right_code"
       ],
       "size_bytes": 1410,
+      "sha256": "ef0ea95c8cceb791c6a01e323103e42b26359c8b219195949dfa6960042112b1",
       "compression": "zstd",
       "source": "datalake/parquet/technique_neurorights.parquet"
     },
@@ -91,6 +94,7 @@
         "dsm_cluster"
       ],
       "size_bytes": 22923,
+      "sha256": "08539092e197dccae6e32dcabeb2717f94f22aa9309869311721120694580c19",
       "compression": "zstd",
       "source": "datalake/parquet/impact_chains.parquet"
     },
@@ -119,6 +123,7 @@
         "step_evidence_source"
       ],
       "size_bytes": 18318,
+      "sha256": "87f2a77ba23597b0e161752fce00c9d0ae8bfeb63d8af71388c7bed3177be73f",
       "compression": "zstd",
       "source": "datalake/parquet/attack_chains.parquet"
     },
@@ -147,6 +152,7 @@
         "clinical_notes"
       ],
       "size_bytes": 63615,
+      "sha256": "6b45a22c741c0db0b68476737c494520c360001bc7c9d5157fac1ffe95162538",
       "compression": "zstd",
       "source": "datalake/parquet/brain_regions.parquet"
     },
@@ -163,6 +169,7 @@
         "description"
       ],
       "size_bytes": 3921,
+      "sha256": "b2328b97305f5c393a5ecbbbb5343c6cc0007a614d487f684520fb70a96637b4",
       "compression": "zstd",
       "source": "datalake/parquet/hourglass_bands.parquet"
     },
@@ -187,6 +194,7 @@
         "device_count"
       ],
       "size_bytes": 16219,
+      "sha256": "834416cb0d95987f4789f48b0214ddec1254dc4b3b0a212e9f00d11cecd5266d",
       "compression": "zstd",
       "source": "datalake/parquet/companies.parquet"
     },
@@ -206,6 +214,7 @@
         "company"
       ],
       "size_bytes": 6653,
+      "sha256": "18f8b13bdefa7a6472f86642d940bd9babd3ff2bd28edebba19b502bb2012fd2",
       "compression": "zstd",
       "source": "datalake/parquet/devices.parquet"
     },
@@ -230,6 +239,7 @@
         "confidence"
       ],
       "size_bytes": 18097,
+      "sha256": "bbd6906afe09079af86204dc51a580ac09c1242994300a0373226030c7ef9b8e",
       "compression": "zstd",
       "source": "datalake/parquet/neural_pathways.parquet"
     },
@@ -254,6 +264,7 @@
         "confidence"
       ],
       "size_bytes": 36533,
+      "sha256": "0ebd644a9acc90ee154d0cd7d233d3cb77060af77247bceba4522b433a54c82f",
       "compression": "zstd",
       "source": "datalake/parquet/neurotransmitters.parquet"
     },
@@ -271,6 +282,7 @@
         "non_diagnostic"
       ],
       "size_bytes": 22861,
+      "sha256": "077e83ff934fcf8eafa021a4635bdf7314dfa50d00d19b9dd88d92080cc8d1e4",
       "compression": "zstd",
       "source": "datalake/parquet/dsm_clusters.parquet"
     },
@@ -292,6 +304,7 @@
         "confidence"
       ],
       "size_bytes": 12556,
+      "sha256": "1dff2b8301edb9388538215cf1bcecb311b0f17ef6f82e141a056a85fb101084",
       "compression": "zstd",
       "source": "datalake/parquet/neurological_conditions.parquet"
     },
@@ -320,6 +333,7 @@
         "clinical_notes"
       ],
       "size_bytes": 25266,
+      "sha256": "afe19181c6985735560846a70bc3afde808a5482bc1a0e777a1b0ef558bc03e2",
       "compression": "zstd",
       "source": "datalake/parquet/cranial_nerves.parquet"
     },
@@ -349,6 +363,7 @@
         "confidence"
       ],
       "size_bytes": 33728,
+      "sha256": "7afcf8c7edd61c34529c996f7d7c186080f40a90c751b58a5887125b503efa3f",
       "compression": "zstd",
       "source": "datalake/parquet/neuroendocrine.parquet"
     },
@@ -370,6 +385,7 @@
         "security_implications"
       ],
       "size_bytes": 23056,
+      "sha256": "5e96bd944d3bc4ad01968ad5438a13b25e23ac1f6d7d187bf99ec3ad03e6394e",
       "compression": "zstd",
       "source": "datalake/parquet/glial_cells.parquet"
     },
@@ -390,6 +406,7 @@
         "research_gaps"
       ],
       "size_bytes": 79244,
+      "sha256": "15ccd32baff7fa1c99082b85aad1ca6bcd842b2b2cfa3742f1c2233ae2f02306",
       "compression": "zstd",
       "source": "datalake/parquet/neurovascular.parquet"
     },
@@ -418,6 +435,7 @@
         "confidence"
       ],
       "size_bytes": 43341,
+      "sha256": "e67baecafe9b8ed0cb6ba76ab7256e87c29905dbc53b4b17fffd2aeebd47b6dc",
       "compression": "zstd",
       "source": "datalake/parquet/receptors.parquet"
     },
@@ -439,6 +457,7 @@
         "note"
       ],
       "size_bytes": 24208,
+      "sha256": "27abcc93fbb547afbf0419043a77a54b2d2179148fb700a8ac013d8dc740525c",
       "compression": "zstd",
       "source": "datalake/parquet/cve_mappings.parquet"
     },
@@ -451,6 +470,7 @@
         "nsp_layers"
       ],
       "size_bytes": 18500,
+      "sha256": "d54c46c5cc10dfb699f97c6415079fe95bff09a081c0c2aa8fb28ad3680dbf2b",
       "compression": "zstd",
       "source": "datalake/parquet/security_controls.parquet"
     },
@@ -464,6 +484,7 @@
         "PC"
       ],
       "size_bytes": 6742,
+      "sha256": "2474ba63d34db14b532aa2aa2a8e82e36785fd9069852107bea531018e3f185a",
       "compression": "zstd",
       "source": "datalake/parquet/ethics_controls.parquet"
     },
@@ -479,6 +500,7 @@
         "neurosecurity"
       ],
       "size_bytes": 7070,
+      "sha256": "85b269972ed69ecf3a31b53261838aefdc516ff75f29dcc910c690908179e29c",
       "compression": "zstd",
       "source": "datalake/parquet/guardrails.parquet"
     },
@@ -497,6 +519,7 @@
         "vector"
       ],
       "size_bytes": 6235,
+      "sha256": "2e670cfe0e2a69af2e2c92b23ac0c2e0dfc9088ae49e6678084fb88be4b1c976",
       "compression": "zstd",
       "source": "datalake/parquet/neurosecurity_scores.parquet"
     },
@@ -512,6 +535,7 @@
         "category"
       ],
       "size_bytes": 8244,
+      "sha256": "c3e89e76681d0c6d409f50810fcd0dfc34c73f533c51eb51ba6e86875490c89d",
       "compression": "zstd",
       "source": "datalake/parquet/research_explorer.parquet"
     },
@@ -530,6 +554,7 @@
         "tags"
       ],
       "size_bytes": 6386,
+      "sha256": "1820f5a56af21b75381d4af53257f5d9f39092c90182c6473708f80c500ce731",
       "compression": "zstd",
       "source": "datalake/parquet/research_institutions.parquet"
     },
@@ -548,6 +573,7 @@
         "tags"
       ],
       "size_bytes": 5489,
+      "sha256": "213f957a1c04dc5886250c3fe64e211dd7282906c9874ba3b4325b541954bc7f",
       "compression": "zstd",
       "source": "datalake/parquet/research_standards.parquet"
     },
@@ -565,6 +591,7 @@
         "tags"
       ],
       "size_bytes": 3703,
+      "sha256": "cd38b681684f2f64d63a595b563698a5bfcbb3b7f835c9f6bd623db37fc14720",
       "compression": "zstd",
       "source": "datalake/parquet/research_legislation.parquet"
     },
@@ -586,6 +613,7 @@
         "date"
       ],
       "size_bytes": 10787,
+      "sha256": "ccb3311b33d8207f411b5e04ec267e4ce78c8ae3bfbf1ca316c46ab6dbfbc1b2",
       "compression": "zstd",
       "source": "datalake/parquet/validation_registry.parquet"
     },
@@ -614,6 +642,7 @@
         "notes"
       ],
       "size_bytes": 14857,
+      "sha256": "9ffb2dae8efb0b18b5efb3fc731ea2f729f3f407e6f97e586e88d409af7f6fc8",
       "compression": "zstd",
       "source": "datalake/parquet/eeg_samples.parquet"
     },
@@ -635,6 +664,7 @@
         "disposition"
       ],
       "size_bytes": 33190,
+      "sha256": "40654b4c60fe2e871015c143bd37d6ca4fd5e31330babdd40c89a6d68df98d4e",
       "compression": "zstd",
       "source": "datalake/parquet/intake_ledger.parquet"
     },
@@ -654,6 +684,7 @@
         "fetched"
       ],
       "size_bytes": 188739,
+      "sha256": "1c1500e63e8db79eec9e13f32638b0826b04a102234d30a159c992d6a93494c6",
       "compression": "zstd",
       "source": "datalake/parquet/intel_feed.parquet"
     },
@@ -671,6 +702,7 @@
         "intel_feed"
       ],
       "size_bytes": 14339,
+      "sha256": "c982fe1d3f434c932e6bf91b2e9a33a5bc50b3dab8f857f5389ae03c5a7aa723",
       "compression": "zstd",
       "source": "datalake/parquet/intel_sources.parquet"
     },
@@ -683,8 +715,199 @@
         "milestones"
       ],
       "size_bytes": 13248,
+      "sha256": "3ec5e560e5f4651bb46daa0466f6870cd0c1d12881eefec0eb58b6a765ac5e4b",
       "compression": "zstd",
       "source": "datalake/parquet/timeline.parquet"
+    },
+    "anatomy_sources": {
+      "rows": 16,
+      "columns": 32,
+      "column_names": [
+        "review_mark",
+        "review_state",
+        "reviewed_by_role",
+        "reviewed_on",
+        "drafted_by",
+        "status_sentence",
+        "source_id",
+        "name",
+        "stated_license_id",
+        "handled_as_license_id",
+        "ai_verdict",
+        "grant",
+        "quoted_terms",
+        "terms_url",
+        "license_read_on",
+        "license_read_by",
+        "human_confirmed",
+        "ai_reading_permits_shipping",
+        "clearance_reason",
+        "unlocks_when",
+        "buildable",
+        "pipeline_only",
+        "blockers",
+        "template_space",
+        "delineated_in",
+        "arrives_in",
+        "route_kind",
+        "route_status",
+        "route_note",
+        "delineation_basis",
+        "layers",
+        "urls"
+      ],
+      "size_bytes": 18682,
+      "sha256": "2defae6fe95a9761b95bf4095ec9fc3a5d9e7c03a6926127a4aec40ec1b2d681",
+      "compression": "zstd",
+      "source": "datalake/parquet/anatomy_sources.parquet"
+    },
+    "anatomy_structures": {
+      "rows": 221,
+      "columns": 28,
+      "column_names": [
+        "mapping_review_mark",
+        "mapping_review_state",
+        "mapping_reviewed_by_role",
+        "mapping_reviewed_on",
+        "mapping_drafted_by",
+        "status_sentence",
+        "visual_check_state",
+        "position_check",
+        "structure_key",
+        "atlas",
+        "label_id",
+        "label_name",
+        "template_space",
+        "mapped_qif_record_keys",
+        "mapped_qif_record_count",
+        "check_status",
+        "hemisphere",
+        "hemispheres_drawn",
+        "size_class",
+        "has_drawn_shape",
+        "vertex_count",
+        "centroid_x_mm",
+        "centroid_y_mm",
+        "centroid_z_mm",
+        "asset_id",
+        "asset_path",
+        "asset_sha256",
+        "asset_license_id"
+      ],
+      "size_bytes": 17125,
+      "sha256": "d5cdc6b5449940d6f80e5eca0854ea4d077a91e67d156054dc3261afab9a76d8",
+      "compression": "zstd",
+      "source": "datalake/parquet/anatomy_structures.parquet"
+    },
+    "anatomy_crosswalk": {
+      "rows": 38,
+      "columns": 35,
+      "column_names": [
+        "review_mark",
+        "review_state",
+        "reviewed_by_role",
+        "reviewed_on",
+        "drafted_by",
+        "status_sentence",
+        "row_kind",
+        "review_key",
+        "subject_kind",
+        "subject_id",
+        "subject_name",
+        "subject_geometry_state",
+        "subject_geometry_reason",
+        "subject_geometry_reason_source",
+        "subject_name_at_draft",
+        "part",
+        "atlas",
+        "atlas_label_ids",
+        "atlas_label_names",
+        "atlas_label_count",
+        "name_match",
+        "extent_match",
+        "contained_kind",
+        "definition_contested",
+        "drafted_to_draw",
+        "has_drawn_shape",
+        "delineation_basis",
+        "claim_basis",
+        "quoted_text",
+        "quoted_file",
+        "quoted_pointer",
+        "quote_state",
+        "rationale",
+        "check_status",
+        "addressing_version"
+      ],
+      "size_bytes": 17094,
+      "sha256": "a246c5c680f815913928148812787659ff7fd60eaf330520d1fcd29dc486d828",
+      "compression": "zstd",
+      "source": "datalake/parquet/anatomy_crosswalk.parquet"
+    },
+    "anatomy_technique_terms": {
+      "rows": 123,
+      "columns": 26,
+      "column_names": [
+        "review_mark",
+        "review_state",
+        "reviewed_by_role",
+        "reviewed_on",
+        "drafted_by",
+        "status_sentence",
+        "technique_id",
+        "technique_name",
+        "technique_band_ids",
+        "named_term",
+        "ai_assigned_term_role",
+        "quoted_field",
+        "claim_basis",
+        "quoted_text",
+        "quoted_file",
+        "quoted_pointer",
+        "quote_state",
+        "rationale",
+        "check_status",
+        "match_kind",
+        "single_region_match",
+        "single_region_id",
+        "other_match_region_id",
+        "region_band_in_technique_bands",
+        "valid_for_current_addressing",
+        "review_key"
+      ],
+      "size_bytes": 16154,
+      "sha256": "96c553275bbf3762e6cd71cac8d2e6d70b8445520fdd98901ecf32803db1716e",
+      "compression": "zstd",
+      "source": "datalake/parquet/anatomy_technique_terms.parquet"
+    },
+    "anatomy_technique_term_summary": {
+      "rows": 111,
+      "columns": 19,
+      "column_names": [
+        "review_mark",
+        "review_state",
+        "reviewed_by_role",
+        "reviewed_on",
+        "terms_drafted_by",
+        "status_sentence",
+        "technique_id",
+        "technique_name",
+        "technique_band_ids",
+        "scope",
+        "band_level_reason",
+        "rationale",
+        "named_term_count",
+        "single_region_term_count",
+        "region_in_other_band_term_count",
+        "stale_region_term_count",
+        "broader_or_narrower_term_count",
+        "no_region_term_count",
+        "reviewed_term_count"
+      ],
+      "size_bytes": 11207,
+      "sha256": "145d0783858e4468d00ee02631b24ccdce53521f6ceee69c737f073a755ea63c",
+      "compression": "zstd",
+      "source": "datalake/parquet/anatomy_technique_term_summary.parquet"
     }
   }
 }

@@ -12,6 +12,7 @@
 
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import type { TableData, Row } from '../../lib/kql-engine';
+import type { DatasetDescription } from '../../lib/anatomy/describe-tables';
 
 interface DatasetMeta {
   id: string;
@@ -24,10 +25,12 @@ interface DatasetMeta {
 
 interface Props {
   datasets: DatasetMeta[];
+  /** Descriptions computed at build time from the rows they describe (the anatomy tables). They take precedence over the fixed ones. */
+  computedDescriptions: Readonly<Record<string, DatasetDescription>>;
 }
 
 // Dataset descriptions for known tables
-const DESCRIPTIONS: Record<string, { label: string; description: string; category: string }> = {
+const FIXED_DESCRIPTIONS: Record<string, DatasetDescription> = {
   techniques: { label: 'TARA Techniques', description: 'BCI threat techniques with NISS scores, severity, and dual-use classification', category: 'Threats' },
   technique_dsm: { label: 'Technique-DSM Bridge', description: 'Maps techniques to DSM-5-TR diagnostic categories (for threat modeling)', category: 'Threats' },
   technique_neurorights: { label: 'Technique-Neurorights', description: 'Maps techniques to the 5 neurorights they affect', category: 'Threats' },
@@ -72,7 +75,8 @@ function formatSize(bytes: number): string {
   return `${(bytes / 1024).toFixed(0)}KB`;
 }
 
-export default function DataStudioBrowser({ datasets }: Props) {
+export default function DataStudioBrowser({ datasets, computedDescriptions }: Props) {
+  const descriptions = useMemo<Record<string, DatasetDescription>>(() => ({ ...FIXED_DESCRIPTIONS, ...computedDescriptions }), [computedDescriptions]);
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [activeDataset, setActiveDataset] = useState<string | null>(null);
@@ -88,15 +92,15 @@ export default function DataStudioBrowser({ datasets }: Props) {
   const categories = useMemo(() => {
     const cats = new Set<string>();
     for (const d of datasets) {
-      const meta = DESCRIPTIONS[d.id];
+      const meta = descriptions[d.id];
       cats.add(meta?.category || 'Other');
     }
     return [...cats].sort();
-  }, [datasets]);
+  }, [datasets, descriptions]);
 
   const filtered = useMemo(() => {
     return sorted.filter(d => {
-      const meta = DESCRIPTIONS[d.id];
+      const meta = descriptions[d.id];
       const label = meta?.label || d.id;
       const desc = meta?.description || '';
       const cat = meta?.category || 'Other';
@@ -110,7 +114,7 @@ export default function DataStudioBrowser({ datasets }: Props) {
       }
       return true;
     });
-  }, [sorted, search, selectedCategory]);
+  }, [sorted, search, selectedCategory, descriptions]);
 
   // Cache fetched KQL tables to avoid re-downloading 558KB on every preview click
   const tablesCache = useRef<Record<string, TableData>>({});
@@ -216,7 +220,7 @@ export default function DataStudioBrowser({ datasets }: Props) {
       {/* Dataset Cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '1rem' }}>
         {filtered.map(d => {
-          const meta = DESCRIPTIONS[d.id] || { label: d.id.replace(/_/g, ' '), description: '', category: 'Other' };
+          const meta = descriptions[d.id] || { label: d.id.replace(/_/g, ' '), description: '', category: 'Other' };
           const catColor = CATEGORY_COLORS[meta.category] || '#64748b';
           const isActive = activeDataset === d.id;
 
@@ -346,7 +350,7 @@ export default function DataStudioBrowser({ datasets }: Props) {
           }}>
             <div>
               <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700 }}>
-                {DESCRIPTIONS[activeDataset]?.label || activeDataset}
+                {descriptions[activeDataset]?.label || activeDataset}
               </h3>
               <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
                 {previewLoading ? 'Loading...' : `${previewData?.length || 0} rows (preview from KQL layer)`}

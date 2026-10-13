@@ -65,6 +65,9 @@ import intakeLedgerRaw from '@shared/intake/ledger.json';
 import impactChainsRaw from '@shared/impact-chains.json';
 import taraChainsRaw from '@shared/tara-chains.json';
 
+// TARA Brain Atlas anatomy tables (AI-drafted, unreviewed; every row carries its review state)
+import { loadAnatomyTables } from './anatomy/load-anatomy-tables';
+
 // ═══ Types ═══
 
 export type Row = Record<string, unknown>;
@@ -1333,6 +1336,10 @@ export function getKqlTables(): KqlTables {
 
     // Research intake ledger (proposals, not published data)
     intake_ledger: buildIntakeLedger(),
+
+    // Atlas sources, structures, crosswalk and technique terms. Built by src/lib/anatomy/
+    // from the same reviewed rows as the anatomy index; never flattened a second time here.
+    ...loadAnatomyTables(),
   };
 
   // Filter out empty tables — dynamic discovery

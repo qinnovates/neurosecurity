@@ -14,6 +14,7 @@ import {
   getField,
   toStr,
 } from '../../lib/kql-engine';
+import { ANATOMY_PRESETS, type PresetQuery } from './anatomy-presets';
 
 interface BciKqlProps {
   tables: TableData;
@@ -21,7 +22,7 @@ interface BciKqlProps {
 
 // --- Preset Queries ---
 
-const PRESETS: Array<{ label: string; query: string; group?: string }> = [
+const PRESETS: PresetQuery[] = [
   // Companies & Devices
   { label: 'All companies', query: 'companies', group: 'industry' },
   { label: 'No security', query: 'companies | where security_posture == "none_published"', group: 'industry' },
@@ -40,6 +41,7 @@ const PRESETS: Array<{ label: string; query: string; group?: string }> = [
   { label: 'Hourglass bands', query: 'hourglass_bands', group: 'neuro' },
   { label: 'DSM-5', query: 'dsm5 | sort by cluster asc', group: 'neuro' },
   { label: 'Neurorights', query: 'neurorights', group: 'neuro' },
+  ...ANATOMY_PRESETS,
   // Governance & Security
   { label: 'Frameworks', query: 'frameworks', group: 'governance' },
   { label: 'Consent tiers', query: 'consent_tiers', group: 'governance' },

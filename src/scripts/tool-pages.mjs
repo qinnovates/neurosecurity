@@ -60,6 +60,11 @@ export const ATLAS_EXPLORER_DOCUMENT_HEADROOM_GZIP_BYTES = 1_024;
  *   (src/scripts/browser-evidence, with --forbid-request) confirms each is not requested before the interaction.
  * @property {readonly string[]} onDemandLazyEntryNames chunks fetched when the visitor goes somewhere else in
  *   the page. Not counted, and they must not lead to three.js.
+ * @property {boolean} scriptsMayCarryAnatomy whether the page's scripts are meant to hold anatomy code and data: true for a page
+ *   that exists to show the anatomy (the atlas explorer), false for every other page. Where it is false, the built-page check scans
+ *   every script the page can load for the anatomy tables and data files, and the source walk (tool-page-imports.mjs) forbids the
+ *   anatomy loaders and builders. The page's HTML is scanned for inlined anatomy rows either way, and no page may import the
+ *   generated table files: rows are fetched at run time and validated, never built in.
  * @property {number} codeGzipBudgetBytes most gzip bytes of stylesheets and scripts a first visit may download
  * @property {number} documentGzipBudgetBytes most gzip bytes the page's HTML may be
  *
@@ -82,6 +87,8 @@ export const TOOL_PAGES = [
     interactionGatedEntryNames: [],
     // The other modes load when the visitor picks one, by its button or by an address such as "#model".
     onDemandLazyEntryNames: ['ThreatModelStudio', 'MonitorMode', 'QueryMode'],
+    // The Lab models a device. It fetches the anatomy index when its atlas view opens and is built with none of it.
+    scriptsMayCarryAnatomy: false,
     codeGzipBudgetBytes: LAB_CODE_BASELINE_GZIP_BYTES + CODE_HEADROOM_GZIP_BYTES,
     documentGzipBudgetBytes: LAB_DOCUMENT_BASELINE_GZIP_BYTES + DOCUMENT_HEADROOM_GZIP_BYTES,
   },
