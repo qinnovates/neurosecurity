@@ -17,7 +17,7 @@
 import ts from 'typescript';
 
 const FRONTMATTER_PATTERN = /^﻿?---\r?\n([\s\S]*?)\r?\n---/;
-const SCRIPT_BLOCK_PATTERN = /<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi;
+const SCRIPT_BLOCK_PATTERN = /<script\b([^>]*)>([\s\S]*?)<\/script\b[^>]*>/gi;
 /** `<script src="./x.ts">` in an `.astro` file: the file named is bundled into the page like any import. */
 const SCRIPT_SOURCE_PATTERN = /\bsrc\s*=\s*(?:"([^"]+)"|'([^']+)')/i;
 const ASTRO_EXTENSION = '.astro';
