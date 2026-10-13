@@ -5,6 +5,7 @@
  */
 
 import type { ClinicalRegion } from '../../../lib/clinical-data';
+import { QIF_BANDS_FRAMEWORK_NOTE } from '../../../lib/brain-view-data';
 import AtlasExplorerLink from '../../brain/AtlasExplorerLink';
 
 /** Neural bands from the outer surface inward, the order the hourglass beside this list uses. */
@@ -78,7 +79,7 @@ export default function RegionPicker({ regions, selectedRegionId, highlightedReg
       })}
       {selectedRegion !== null && <SelectedRegionNote region={selectedRegion} />}
       <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>
-        A list, not a drawing. The catalog files techniques under bands, so no technique count is shown against a region.{' '}
+        {QIF_BANDS_FRAMEWORK_NOTE} A list, not a drawing. The catalog files techniques under bands, so no technique count is shown against a region.{' '}
         <AtlasExplorerLink className="underline">Look these regions up in the TARA Brain Atlas, which draws the ones it has geometry for</AtlasExplorerLink>.
       </p>
     </div>
