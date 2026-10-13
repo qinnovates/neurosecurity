@@ -25,7 +25,7 @@ export const MESHLESS_SIZE_CLASSES: readonly SizeClass[] = ['unresolved', 'not_d
 export const POSITION_CHECKS = ['independently checked', 'checked in aggregate', 'not independently checked', 'failed'] as const;
 export type PositionCheck = typeof POSITION_CHECKS[number];
 
-export const CHECK_IDS = ['K0', 'K1', 'K2', 'K4', 'K5', 'K6', 'K7', 'K8', 'K9', 'V1', 'V2'] as const;
+export const CHECK_IDS = ['K0', 'K1', 'K2', 'K4', 'K5', 'K6', 'K7', 'K8', 'K9', 'K10', 'V1', 'V2'] as const;
 export type CheckId = typeof CHECK_IDS[number];
 
 /** `not_distinguishable`: the check ran and could not tell the result from doing nothing. It is neither a pass nor a failure, and must say why. */

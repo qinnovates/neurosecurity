@@ -77,3 +77,29 @@ def test_volume_rescale_is_capped() -> None:
     triangles = np.array([[0, 2, 1], [0, 1, 3], [0, 3, 2], [1, 2, 3]])
     _, factor = meshing.restore_volume(vertices, triangles, target_volume=100.0)
     assert factor == meshing.MAX_VOLUME_RESCALE
+
+
+def test_mesh_is_wound_outward_whatever_the_handedness_of_the_grid() -> None:
+    upright = meshing.mesh_from_field(ball_mask(), grid_affine(), from_mask=True)
+    flipped_affine = grid_affine()
+    flipped_affine[0, 0], flipped_affine[0, 3] = -flipped_affine[0, 0], 20.0
+    flipped = meshing.mesh_from_field(ball_mask(), flipped_affine, from_mask=True)
+    for mesh in (upright, flipped):
+        volume = meshing.signed_volume(mesh.vertices_mm, mesh.triangles)
+        assert volume > 0.0 and volume == pytest.approx(mesh.facts["mask_volume_mm3"], rel=0.1)
+        assert mesh.facts["signed_volume_mm3"] == pytest.approx(volume, abs=0.01)
+        centre = mesh.vertices_mm.mean(axis=0)
+        corners = mesh.vertices_mm[mesh.triangles]
+        normals = np.cross(corners[:, 1] - corners[:, 0], corners[:, 2] - corners[:, 0])
+        assert (np.einsum("ij,ij->i", normals, corners.mean(axis=1) - centre) > 0).all()
+
+
+def test_an_inward_wound_mesh_fails_the_sanity_check_and_winding_reverses_only_corner_order() -> None:
+    mesh = meshing.mesh_from_field(ball_mask(), grid_affine(), from_mask=True)
+    box = (np.full(3, -100.0), np.full(3, 100.0))
+    assert meshing.mesh_sanity(mesh, *box) == []
+    inward = meshing.Mesh(mesh.vertices_mm, mesh.triangles[:, ::-1], mesh.facts)
+    assert meshing.mesh_sanity(inward, *box) == [meshing.INWARD_PROBLEM]
+    restored = meshing.wind_outward(inward.vertices_mm, inward.triangles)
+    assert np.array_equal(restored, mesh.triangles) and meshing.wind_outward(mesh.vertices_mm, mesh.triangles) is mesh.triangles
+
