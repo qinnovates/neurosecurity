@@ -830,7 +830,7 @@ export default function NeuroSIM({ simData }: NeuroSIMProps) {
   const currentPhase = phases[apPhase];
 
   return (
-    <div className="flex gap-6" style={{ minHeight: 700 }}>
+    <div className="flex flex-col lg:flex-row gap-6" style={{ minHeight: 700 }}>
       {/* Left: Depth Gauge */}
       <div className="hidden lg:block flex-shrink-0" style={{ width: 220 }}>
         <div className="sticky top-24">
@@ -984,9 +984,11 @@ export default function NeuroSIM({ simData }: NeuroSIMProps) {
                   onChange={setSelectedMolecule}
                 />
               )}
-              <span className="text-[10px] ml-auto" style={{ color: 'var(--color-text-faint)' }}>
-                Drag to rotate {'\u00b7'} Scroll to zoom
-              </span>
+              {zoom !== 'network' && (
+                <span className="text-[10px] ml-auto" style={{ color: 'var(--color-text-faint)' }}>
+                  Drag to rotate {'\u00b7'} Scroll to zoom
+                </span>
+              )}
             </div>
           </div>
 

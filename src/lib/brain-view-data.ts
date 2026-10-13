@@ -252,7 +252,7 @@ function buildGovernanceView(): BrainView {
       description: staticRegion?.description ?? region.description,
       color,
       intensity: Math.min(1, count / 80),
-      stat: { label: 'techniques target this region', value: String(count) },
+      stat: { label: 'techniques filed under this band', value: String(count) },
       badges,
       details,
     };

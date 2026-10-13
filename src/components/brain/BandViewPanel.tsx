@@ -55,7 +55,7 @@ function BandList({ bands, selectedBandId, onToggle }: { bands: BrainViewRegion[
           <li key={band.id}>
             <button
               type="button" onClick={() => onToggle(band.id)} aria-pressed={isSelected}
-              className="w-full flex items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors"
+              className="w-full flex flex-wrap items-center gap-x-3 gap-y-0.5 rounded-lg px-3 py-2 text-left transition-colors"
               style={{
                 background: isSelected ? 'var(--color-bg-secondary)' : 'transparent',
                 border: `1px solid ${isSelected ? band.color : 'var(--color-border)'}`,
@@ -63,8 +63,8 @@ function BandList({ bands, selectedBandId, onToggle }: { bands: BrainViewRegion[
             >
               <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: band.color }} aria-hidden="true" />
               <span className="text-xs font-bold shrink-0" style={{ color: 'var(--color-text-faint)' }}>{band.id}</span>
-              <span className="text-sm font-medium flex-1 min-w-0" style={{ color: 'var(--color-text-primary)' }}>{band.name}</span>
-              <span className="text-xs shrink-0" style={{ color: 'var(--color-text-muted)' }}>{band.stat.value} {band.stat.label}</span>
+              <span className="text-sm font-medium flex-1 whitespace-nowrap" style={{ color: 'var(--color-text-primary)' }}>{band.name}</span>
+              <span className="text-xs ml-auto" style={{ color: 'var(--color-text-muted)' }}>{band.stat.value} {band.stat.label}</span>
             </button>
           </li>
         );
