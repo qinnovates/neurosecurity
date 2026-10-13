@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import type { AssetManifest } from '../manifest-types';
 import { AnatomyDataError } from '../errors';
 import { parseLabelTable } from '../parse-label-table';
 import { parseManifest } from '../parse-manifest';
@@ -77,6 +78,29 @@ describe('parseManifest', () => {
   it('rejects a check that did not run and gives no reason', () => {
     const checks = [{ id: 'K6', status: 'not_run', measured: null, threshold: null }];
     expect(() => parseWith(buildAsset({ checks: checks as never }))).toThrow(/checks\[0\]\.reason: a check that did not run must say why/);
+  });
+
+  it('reads "checked in aggregate" as a position check, and lets only the outline have no sides', () => {
+    expect(parseManifest(buildManifest([buildAsset({ position_check: 'checked in aggregate' })]), CONTEXT).assets[0].position_check).toBe('checked in aggregate');
+    expect(() => parseWith({ ...buildAsset(), position_check: 'checked' })).toThrow(/position_check/);
+    const delineation = buildAsset().delineation;
+    const outline = buildAsset({ layer: 'outline', delineation: { ...delineation, hemispheres: 'not_applicable' } });
+    expect(parseManifest(buildManifest([outline]), CONTEXT).assets[0].delineation.hemispheres).toBe('not_applicable');
+    for (const hemispheres of ['separate', 'mirrored', 'unknown'] as const) {
+      expect(() => parseWith(buildAsset({ layer: 'outline', delineation: { ...delineation, hemispheres } }))).toThrow(new RegExp(`delineation\\.hemispheres: "${hemispheres}" does not fit the "outline" layer`));
+    }
+    expect(() => parseWith(buildAsset({ delineation: { ...delineation, hemispheres: 'not_applicable' } }))).toThrow(/"not_applicable" does not fit the "deep" layer/);
+  });
+
+  it('accepts a check that could not tell the result from doing nothing only with its reason, and files listed beside the assets only by known paths', () => {
+    const undecided = { id: 'V2', status: 'not_distinguishable', measured: -0.1, threshold: 0.4 };
+    expect(() => parseWith(buildAsset({ checks: [undecided] as never }))).toThrow(/checks\[0\]\.reason: a check that reads "not_distinguishable" must say why/);
+    const explained = buildAsset({ checks: [{ ...undecided, reason: 'gain inside the spread across settings' }] as never });
+    expect(parseManifest(buildManifest([explained]), CONTEXT).assets[0].checks[0].status).toBe('not_distinguishable');
+    const withFiles = (files: Record<string, string>): AssetManifest => ({ ...buildManifest([buildAsset()]), support_files: files });
+    expect(parseManifest(withFiles({ 'open/NOTICE.txt': 'a'.repeat(64) }), CONTEXT).support_files).toEqual({ 'open/NOTICE.txt': 'a'.repeat(64) });
+    expect(() => parseManifest(withFiles({ 'open/../secrets.txt': 'a'.repeat(64) }), CONTEXT)).toThrow(/not a notice, licence text or label table path/);
+    expect(() => parseManifest(withFiles({ 'by-sa/LICENSE.txt': 'short' }), CONTEXT)).toThrow(/support_files/);
   });
 
   it('rejects two assets with one id or one path, a malformed hash and an unknown key', () => {

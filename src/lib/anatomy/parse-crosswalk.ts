@@ -6,7 +6,7 @@
 
 import { readValidForAddressing } from './addressing-version';
 import {
-  DELINEATION_BASES, DRAFTERS, EXPERT_DRAWN_BASIS, EXTENT_MATCHES, NAME_MATCHES, SUBJECT_KINDS, UNDECIDED_PART,
+  CONTAINED_KINDS, DELINEATION_BASES, DRAFTERS, EXPERT_DRAWN_BASIS, EXTENT_MATCHES, NAME_MATCHES, SUBJECT_KINDS, UNDECIDED_PART,
   type ContainsRelation, type Crosswalk, type CrosswalkContext, type CrosswalkPart, type CrosswalkRow, type NoGeometryRecord, type SubjectKind,
 } from './anatomy-types';
 import { rejectBandKeys } from './band-key-scan';
@@ -95,7 +95,7 @@ function rejectDrawingProblems(row: CrosswalkRow, parts: readonly CrosswalkPart[
 }
 
 function parseRow(value: unknown, location: FieldLocation, parts: readonly CrosswalkPart[], context: CrosswalkContext): CrosswalkRow {
-  const record = readRecord(value, location, { required: ROW_KEYS });
+  const record = readRecord(value, location, { required: ROW_KEYS, optional: ['contained_kind'] });
   const subjectKind = readEnum(record, 'subject_kind', location, SUBJECT_KINDS);
   const subjectId = readSubjectId(record, 'subject_id', subjectKind, location, context);
   const part = readNullable(record, 'part', () => readString(record, 'part', location, MAX_NAME_LENGTH));
@@ -119,7 +119,11 @@ function parseRow(value: unknown, location: FieldLocation, parts: readonly Cross
   };
   rejectGradeProblems(row, location, context);
   rejectDrawingProblems(row, parts, location, context);
-  return row;
+  if (record.contained_kind === undefined) return row;
+  if (row.extent_match !== 'contained') {
+    failAt(childOf(location, 'contained_kind'), 'only a row graded "contained" says why it has no shape of its own', 'Remove contained_kind, or grade the row "contained".');
+  }
+  return { ...row, contained_kind: readEnum(record, 'contained_kind', location, CONTAINED_KINDS) };
 }
 
 function parsePart(value: unknown, location: FieldLocation): CrosswalkPart {

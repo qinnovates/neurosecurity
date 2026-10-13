@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "atlas": "neudorfer_hypothalamus",
+  "labels": [
+    {
+      "id": "9",
+      "name": "mammillary bodies",
+      "hemisphere": "right"
+    },
+    {
+      "id": "10",
+      "name": "mammillary bodies",
+      "hemisphere": "left"
+    },
+    {
+      "id": "19",
+      "name": "medial preoptic nucleus",
+      "hemisphere": "right"
+    },
+    {
+      "id": "20",
+      "name": "medial preoptic nucleus",
+      "hemisphere": "left"
+    },
+    {
+      "id": "21",
+      "name": "paraventricular nucleus",
+      "hemisphere": "right"
+    },
+    {
+      "id": "22",
+      "name": "paraventricular nucleus",
+      "hemisphere": "left"
+    },
+    {
+      "id": "23",
+      "name": "dorsal periventricular hypothalamic nucleus",
+      "hemisphere": "right"
+    },
+    {
+      "id": "24",
+      "name": "dorsal periventricular hypothalamic nucleus",
+      "hemisphere": "left"
+    },
+    {
+      "id": "25",
+      "name": "lateral hypothalamus",
+      "hemisphere": "right"
+    },
+    {
+      "id": "26",
+      "name": "lateral hypothalamus",
+      "hemisphere": "left"
+    },
+    {
+      "id": "27",
+      "name": "ventromedial hypothalamus",
+      "hemisphere": "right"
+    },
+    {
+      "id": "28",
+      "name": "ventromedial hypothalamus",
+      "hemisphere": "left"
+    },
+    {
+      "id": "29",
+      "name": "arcuate hypothalamic nucleus",
+      "hemisphere": "right"
+    },
+    {
+      "id": "30",
+      "name": "arcuate hypothalamic nucleus",
+      "hemisphere": "left"
+    },
+    {
+      "id": "31",
+      "name": "periventricular hypothalamic nucleus",
+      "hemisphere": "right"
+    },
+    {
+      "id": "32",
+      "name": "periventricular hypothalamic nucleus",
+      "hemisphere": "left"
+    },
+    {
+      "id": "37",
+      "name": "dorsomedial hypothalamic nucleus",
+      "hemisphere": "right"
+    },
+    {
+      "id": "38",
+      "name": "dorsomedial hypothalamic nucleus",
+      "hemisphere": "left"
+    },
+    {
+      "id": "45",
+      "name": "supraoptic hypothalamic nucleus",
+      "hemisphere": "right"
+    },
+    {
+      "id": "46",
+      "name": "supraoptic hypothalamic nucleus",
+      "hemisphere": "left"
+    },
+    {
+      "id": "47",
+      "name": "suprachiasmatic hypothalamic nucleus",
+      "hemisphere": "right"
+    },
+    {
+      "id": "48",
+      "name": "suprachiasmatic hypothalamic nucleus",
+      "hemisphere": "left"
+    },
+    {
+      "id": "49",
+      "name": "tuberomammillary hypothalamic nucleus",
+      "hemisphere": "right"
+    },
+    {
+      "id": "50",
+      "name": "tuberomammillary hypothalamic nucleus",
+      "hemisphere": "left"
+    },
+    {
+      "id": "51",
+      "name": "posterior hypotahalamic nucleus",
+      "hemisphere": "right"
+    },
+    {
+      "id": "52",
+      "name": "posterior hypotahalamic nucleus",
+      "hemisphere": "left"
+    },
+    {
+      "id": "53",
+      "name": "anterior hypothalamic area",
+      "hemisphere": "right"
+    },
+    {
+      "id": "54",
+      "name": "anterior hypothalamic area",
+      "hemisphere": "left"
+    }
+  ]
+}
