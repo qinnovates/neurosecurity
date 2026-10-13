@@ -39,7 +39,6 @@ export const HEMISPHERE_RECORDS = ['separate', 'mirrored', 'unknown', 'not_appli
 export type HemisphereRecord = typeof HEMISPHERE_RECORDS[number];
 
 export const PIPELINE_STAGES = ['fetch', 'register', 'resample', 'mesh', 'write'] as const;
-export type PipelineStage = typeof PIPELINE_STAGES[number];
 
 export type Point3 = [number, number, number];
 
