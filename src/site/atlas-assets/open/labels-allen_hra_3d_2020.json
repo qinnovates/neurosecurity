@@ -1,0 +1,436 @@
+{
+  "schema_version": 1,
+  "atlas": "allen_hra_3d_2020",
+  "labels": [
+    {
+      "id": "12114",
+      "name": "precentral gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12115",
+      "name": "superior frontal gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12116",
+      "name": "middle frontal gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12118",
+      "name": "inferior frontal gyrus, triangular part",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12119",
+      "name": "inferior frontal gyrus, opercular part",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12121",
+      "name": "gyrus rectus (straight gyrus)",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12122",
+      "name": "medial orbital gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12123",
+      "name": "anterior intermediate orbital gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12124",
+      "name": "posterior intermediate orbital gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12125",
+      "name": "lateral orbital gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12126",
+      "name": "paracentral lobule, rostral part",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12127",
+      "name": "frontal operculum",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12132",
+      "name": "postcentral gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12133",
+      "name": "supraparietal lobule",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12135",
+      "name": "supramarginal gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12136",
+      "name": "angular gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12137",
+      "name": "precuneus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12138",
+      "name": "paracentral lobule, caudal part",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12140",
+      "name": "superior temporal gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12141",
+      "name": "middle temporal gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12142",
+      "name": "inferior temporal gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12143",
+      "name": "occipitotemporal (fusiform) gyrus, temporal part",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12144",
+      "name": "transverse temporal gyrus (Heschl's gyrus)",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12145",
+      "name": "planum temporale",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12146",
+      "name": "temporal pole",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12147",
+      "name": "planum polare",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12149",
+      "name": "occipital pole",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12150",
+      "name": "cuneus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12151",
+      "name": "lingual gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12152",
+      "name": "occipitotemporal (fusiform) gyrus, occipital part",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12153",
+      "name": "inferior occipital gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12154",
+      "name": "superior occipital gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12157",
+      "name": "cingulate gyrus, rostral (anterior) part",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12158",
+      "name": "cingulate gyrus, caudal (posterior) part",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12159",
+      "name": "cingulo-parahippocampal isthmus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12160",
+      "name": "subcallosal gyrus (parolfactory gyrus)",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12163",
+      "name": "anterior parahippocampal gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12164",
+      "name": "posterior parahippocampal gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12166",
+      "name": "ambiens gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12171",
+      "name": "head of hippocampus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12173",
+      "name": "body of hippocampus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12174",
+      "name": "tail of hippocampus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12177",
+      "name": "long insular gyri",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12178",
+      "name": "short insular gyri",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12179",
+      "name": "limen insula",
+      "hemisphere": "both"
+    },
+    {
+      "id": "13229",
+      "name": "lateral olfactory gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "13230",
+      "name": "parietal operculum",
+      "hemisphere": "both"
+    },
+    {
+      "id": "146034872",
+      "name": "paracingulate gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "146034876",
+      "name": "rostral gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "146034884",
+      "name": "frontomarginal gyrus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "146034888",
+      "name": "frontal pole",
+      "hemisphere": "both"
+    },
+    {
+      "id": "146034892",
+      "name": "perirhinal gyrus ( rostral part of FuGt)",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10363",
+      "name": "central nuclear group",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10367",
+      "name": "lateral nucleus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10368",
+      "name": "basolateral nucleus (basal nucleus)",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10369",
+      "name": "basomedial nucleus (accessory basal nucleus)",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10390",
+      "name": "thalamus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10392",
+      "name": "anterior nuclear complex of thalamus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10396",
+      "name": "lateral dorsal nucleus of thalamus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10398",
+      "name": "mediodorsal nucleus of thalamus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10403",
+      "name": "reuniens nucleus (medioventral nucleus) of thalamus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10408",
+      "name": "lateral posterior nucleus of thalamus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10409",
+      "name": "pulvinar of thalamus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10417",
+      "name": "ventral anterior nucleus of thalamus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10420",
+      "name": "ventral lateral nucleus of thalamus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10424",
+      "name": "ventral posterior lateral nucleus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10425",
+      "name": "ventral posterior medial nucleus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10430",
+      "name": "dorsal lateral geniculate nucleus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10434",
+      "name": "medial geniculate nuclei",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10449",
+      "name": "centromedian nucleus of thalamus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10450",
+      "name": "parafascicular nucleus of thalamus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10658",
+      "name": "cerebellar vermis",
+      "hemisphere": "both"
+    },
+    {
+      "id": "10660",
+      "name": "cerebellar deep nuclei",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12181",
+      "name": "pretectal region",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12195",
+      "name": "midbrain tegmentum",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12292",
+      "name": "superior colliculus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12305",
+      "name": "inferior colliculus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12330",
+      "name": "cerebral peduncle (crus cerebri)",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12384",
+      "name": "paravermis of cerebellum",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12390",
+      "name": "lateral hemisphere of cerebellum",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12405",
+      "name": "basilar part of pons",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12416",
+      "name": "pontine tegmentum",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12535",
+      "name": "pyramidal part of medulla oblongata",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12538",
+      "name": "tegmentum of medulla oblongata",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12600",
+      "name": "inferior olive",
+      "hemisphere": "both"
+    },
+    {
+      "id": "13045",
+      "name": "midline nuclear complex",
+      "hemisphere": "both"
+    }
+  ]
+}

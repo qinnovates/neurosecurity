@@ -87,3 +87,10 @@ drafts/
 # core.ignorecase matches "drafts/" against "IR Playbooks/Drafts/" too — carve it back out.
 !IR Playbooks/Drafts/
 .gstack/
+
+# Atlas pipeline: raw imaging and Python caches stay out of git (downloads live in $ATLAS_CACHE_DIR)
+*.nii
+*.nii.gz
+*.trk
+*.tt.gz
+src/scripts/atlas-pipeline/**/__pycache__/
