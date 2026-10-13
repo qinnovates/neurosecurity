@@ -72,10 +72,10 @@ export const LIMIT_TEMPLATES = {
   unfilled_shape: 'A shape drawn as lines with no fill has no data under this lens. That is not the same as a low value.',
   inside_shape: 'A pale shape holds what the lens shows somewhere inside it, or holds records that differ. It is not filled, because the shape is not any one of them.',
   slice_view: 'The cut shows the average template and the atlas shapes. It is not a scan of anyone.',
-  position_checked: 'The position of the {layer} was checked as a whole against an independent measure, not shape by shape.',
+  position_checked: 'The position of the {layer} was independently checked.',
+  position_checked_in_aggregate: 'The position of the {layer} was checked as a whole against an independent measure, not shape by shape.',
   position_not_checked: 'The position of the {layer} has not been independently checked.',
   position_failed: 'A position check failed for the {layer}. Treat that position as unreliable.',
-  deep_disagreement: 'Different atlases place the same deep structure about 1 to 2 mm apart, so small gaps and overlaps between deep shapes mean nothing.',
   picked_shape_shared: 'This shape holds more than one QIF region. Picking it selects the shape, not any one of them.',
   picked_shape_unowned: 'No QIF record maps to this shape. It is drawn for context and no lens colours it.',
 

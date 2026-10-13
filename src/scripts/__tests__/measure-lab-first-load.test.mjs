@@ -472,8 +472,11 @@ describe('the recorded tool pages', () => {
     expect(lab?.documentGzipBudgetBytes).toBe(LAB_DOCUMENT_BASELINE_GZIP_BYTES + DOCUMENT_HEADROOM_GZIP_BYTES);
   });
 
-  it('names no interaction gate yet, so three.js may sit behind nothing on the Lab page', () => {
-    expect(TOOL_PAGES.flatMap((page) => page.interactionGatedEntryNames)).toEqual([]);
+  it('names an interaction gate only on the atlas explorer: the view opened by its "Show the 3D view" button, and the canvas inside it', () => {
+    expect(TOOL_PAGES.map((page) => [page.urlPath, page.interactionGatedEntryNames])).toEqual([
+      ['/atlas/model/', []],
+      ['/atlas/anatomy/', ['OpenViewport', 'AtlasCanvas']],
+    ]);
   });
 
   it('declares the Lab default mode as on-mount and its other modes as on-demand', () => {

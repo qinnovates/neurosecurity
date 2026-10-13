@@ -86,10 +86,11 @@ export const TOOL_PAGES = [
   {
     urlPath: '/atlas/anatomy/',
     islandEntryName: 'AtlasExplorer',
-    // The explorer's data arrives by fetch. Its one `import()` is the canvas, fetched when the visitor presses
-    // "Show the 3D view" and only after the browser has shown it can give a WebGL context.
+    // The explorer's data arrives by fetch. Its only `import()`s are the open 3D view and, inside it, the canvas:
+    // both are fetched when the visitor presses "Show the 3D view", and only after the page has checked that it is
+    // pinned to its index, that files can be verified, and that the browser gives a WebGL context.
     onMountLazyEntryNames: [],
-    interactionGatedEntryNames: ['AtlasCanvas'],
+    interactionGatedEntryNames: ['OpenViewport', 'AtlasCanvas'],
     onDemandLazyEntryNames: [],
     codeGzipBudgetBytes: ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES + CODE_HEADROOM_GZIP_BYTES,
     documentGzipBudgetBytes: ATLAS_EXPLORER_DOCUMENT_BASELINE_GZIP_BYTES + ATLAS_EXPLORER_DOCUMENT_HEADROOM_GZIP_BYTES,

@@ -33,8 +33,10 @@ export const LAYER_NOUNS: Readonly<Record<LayerId, string>> = {
 };
 
 /** Worst first: one failed asset makes its layer read as failed. */
-const POSITION_RANK: readonly PositionCheck[] = ['failed', 'not independently checked', 'independently checked'];
-const POSITION_LIMIT_IDS = { failed: 'position_failed', 'not independently checked': 'position_not_checked', 'independently checked': 'position_checked' } as const;
+const POSITION_RANK: readonly PositionCheck[] = ['failed', 'not independently checked', 'checked in aggregate', 'independently checked'];
+const POSITION_LIMIT_IDS = {
+  failed: 'position_failed', 'not independently checked': 'position_not_checked', 'checked in aggregate': 'position_checked_in_aggregate', 'independently checked': 'position_checked',
+} as const;
 
 function positionLimitFor(model: ExplorerModel, layer: LayerId, assetIds: ReadonlySet<string>): LimitSentence {
   const checks = model.index.assets.filter((asset) => assetIds.has(asset.id) && asset.layer === layer).map((asset) => asset.position_check);
@@ -51,7 +53,6 @@ function markLimitsFor(shapes: readonly SceneShape[]): LimitSentence[] {
     ...(has((shape) => shape.sizeMark === 'ring_only') ? [limitSentence('marker_ring')] : []),
     ...(has((shape) => shape.sizeMark === 'mesh_and_ring') ? [limitSentence('coarse_ring')] : []),
     ...(has((shape) => shape.mirrored) ? [limitSentence('mirrored_scene')] : []),
-    ...(has((shape) => shape.layer === 'deep') ? [limitSentence('deep_disagreement')] : []),
   ];
 }
 

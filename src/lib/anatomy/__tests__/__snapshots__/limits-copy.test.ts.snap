@@ -2,6 +2,7 @@
 
 exports[`limit sentences > are held word for word, so any change of wording is a visible diff 1`] = `
 {
+  "coarse_ring": "A shape with a ring on it is only a few scan pixels wide, so its size and edges are rough.",
   "counts_are_entries": "Counts are catalog entries, not measurements, and nothing is ranked by them.",
   "device_stages": "These techniques act on the device's electronics and software, not on a brain region, so no region is linked.",
   "device_stages_mixed": "Some techniques carry a brain band as well as a device band. Their region links, where an AI has drafted any, are in the region list.",
@@ -24,8 +25,9 @@ exports[`limit sentences > are held word for word, so any change of wording is a
   "geometry_not_mapped": "Nobody has drafted a matching between this region and an atlas shape yet.",
   "geometry_predates_addressing": "The drafted matching was made for an older version of QIF's region list and is not used.",
   "h01_sample": "This is one small sample from one person. It is not linked to any region here and says nothing about what any part of the brain does.",
+  "inside_shape": "A pale shape holds what the lens shows somewhere inside it, or holds records that differ. It is not filled, because the shape is not any one of them.",
   "layer_unavailable": "Not available in this build. {reason}",
-  "layers_text_only": "Layers change the 3D view, which this page does not have yet. The list always shows every region.",
+  "layers_text_only": "Layers choose what the 3D view draws. The list always shows every region.",
   "lens_band": "Bands are QIF's own way of grouping brain regions; QIF is a proposed framework that has not been peer reviewed.",
   "lens_dsm": "These are category names from a psychiatric manual that the catalog attaches to techniques for threat modelling; the links are unreviewed. They are not diagnoses and say nothing about any person.",
   "lens_needs_subject": "Choose one from the list to see which regions it is linked to.",
@@ -37,11 +39,21 @@ exports[`limit sentences > are held word for word, so any change of wording is a
   "lens_technique_device_only": "This technique acts on the device's electronics and software, not on a brain region, so no region is linked.",
   "lens_technique_not_drafted": "No region links have been drafted for this technique yet, so every region reads "no data".",
   "licence_readings": "Licence readings were made by an AI, not by a lawyer, and no person has confirmed them.",
+  "marker_ring": "A ring alone marks a structure too small for MRI to outline. It shows roughly where the structure is, not its size or shape.",
+  "mirrored_scene": "Some shapes here were drawn on one side of the brain and mirrored to make the other. A difference between left and right in them means nothing.",
   "mirrored_shape": "The atlas drew one side of the brain and the other side is its mirror image. A difference between left and right in this shape means nothing.",
   "networks_names_only": "These are names researchers give to groups of brain areas whose activity tends to rise and fall together. No shapes are shown, because no network map has been cleared for this site in explicit terms.",
+  "outline_shape": "This is the outer shape of an average made from many people's brain scans, not anyone's real brain. Much of the brain's surface lies inside folds that averaging smooths away, so only the outside is shown.",
+  "picked_shape_shared": "This shape holds more than one QIF region. Picking it selects the shape, not any one of them.",
+  "picked_shape_unowned": "No QIF record maps to this shape. It is drawn for context and no lens colours it.",
+  "position_checked": "The position of the {layer} was independently checked.",
+  "position_checked_in_aggregate": "The position of the {layer} was checked as a whole against an independent measure, not shape by shape.",
+  "position_failed": "A position check failed for the {layer}. Treat that position as unreliable.",
+  "position_not_checked": "The position of the {layer} has not been independently checked.",
   "region_description": "This description is copied from QIF's own atlas file. It has not been checked against the papers listed under Evidence.",
   "region_matching": "The shapes only roughly mark the QIF regions: an AI drafted the matching and no expert has checked it, and real borders differ from person to person.",
   "shared_shape": "This atlas draws one shape here and does not divide it. The QIF regions listed sit somewhere inside it; the shape is not any one of them.",
+  "slice_view": "The cut shows the average template and the atlas shapes. It is not a scan of anyone.",
   "source_allen": "An anatomist drew these shapes onto an average brain, guided by an atlas of one donated brain. They are not measured from a group of people.",
   "source_arousal_nuclei": "Experts drew these nuclei onto the average brain using one donated brainstem and a reference atlas. They are not measured from a group of people, so treat each as an approximate location.",
   "source_deep_average": "These shapes are averages from many people's MRI scans, placed in the average brain. The smallest are only a few scan pixels wide, so their size and edges here are rough.",
@@ -51,5 +63,7 @@ exports[`limit sentences > are held word for word, so any change of wording is a
   "techniques_band_level": "Tagged with band {band}; the catalog's text names no structure. This is not a link to this region.",
   "techniques_named_not_counted": "The catalog's text names this region for these techniques, but the link is not counted, for the reason beside each.",
   "techniques_none": "No technique is linked to this region. That means nothing has been linked; it does not mean the region is safe.",
+  "unfilled_shape": "A shape drawn as lines with no fill has no data under this lens. That is not the same as a low value.",
+  "whole_scene": "The layers come from different studies and were lined up to one average brain by computer. Do not read meaning into shapes that only just touch or miss.",
 }
 `;

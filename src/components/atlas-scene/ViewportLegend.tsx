@@ -4,6 +4,7 @@ import { listLegendSteps, type SceneShape } from '@/lib/atlas-explorer/scene-sha
 import type { ViewportCaption } from '@/lib/atlas-explorer/viewport-caption';
 import { LAYER_NOUNS } from '@/lib/atlas-explorer/viewport-caption';
 import type { IndexAsset } from '@/lib/anatomy/anatomy-index-types';
+import Disclosure from './Disclosure';
 import LimitNote from './LimitNote';
 import MarkGlyph from './MarkGlyph';
 import { ASSET_FAILURE_SENTENCES } from './scene-assets';
@@ -42,6 +43,15 @@ function AssetStatuses({ assets, assetStates, onRetryAssets }: Pick<Props, 'asse
         ))}
       </ul>
       {hasFailure && <button type="button" className="atlas-button" onClick={onRetryAssets}>Try the files again</button>}
+      <Disclosure label="How each file was made and checked">
+        <ul className="atlas-plain-list">
+          {assets.map((asset) => (
+            <li key={asset.id} className="atlas-fact" data-asset-note={asset.id}>
+              <strong>{LAYER_NOUNS[asset.layer]}</strong> ({asset.id}). Position: {asset.position_check}. {asset.modification_note}
+            </li>
+          ))}
+        </ul>
+      </Disclosure>
     </div>
   );
 }

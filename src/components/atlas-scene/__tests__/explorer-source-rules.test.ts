@@ -6,10 +6,13 @@ const EXPLORER_DIRECTORIES = ['src/components/atlas-scene', 'src/lib/atlas-explo
 const EXPLORER_FILES = ['src/lib/anatomy/limits-copy.ts', 'src/pages/atlas/anatomy.astro'];
 const PAGE_PATH = 'src/pages/atlas/anatomy.astro';
 const SOURCE_EXTENSIONS = ['.ts', '.tsx', '.css', '.astro'];
-/** three.js and its React bindings. The explorer has no 3D view and must not pull them into its page. */
+/** three.js and its React bindings. Only the files of the gated canvas chunk may import them. */
 const THREE_IMPORT_PATTERN = /(from|import\()\s*['"](three|three\/[^'"]*|@react-three\/[^'"]*)['"]/;
 /** Labels are set in the sans face: no monospace utility, variable or family. */
 const MONOSPACE_PATTERN = /\bfont-mono\b|--font-mono|--lab-mono|\bmonospace\b|\btm-mono\b|\bui-monospace\b/;
+/** The modules that import three.js, and the canvas that is their only way in. */
+const THREE_FILES = ['scene-renderer.ts', 'scene-objects.ts'];
+const CANVAS_CHUNK_FILES = ['AtlasCanvas.tsx', ...THREE_FILES];
 const ISLAND_PATTERN = /<AtlasExplorer\b([^>]*)\/>/;
 
 function listSourceFiles(directory: string): string[] {
@@ -35,8 +38,18 @@ describe('explorer source rules', () => {
     expect(MONOSPACE_PATTERN.test('font-family: ui-monospace, monospace;')).toBe(true);
   });
 
-  it('imports no three.js anywhere in the explorer', () => {
-    expect(matching(THREE_IMPORT_PATTERN)).toEqual([]);
+  it('imports three.js only in the two modules that draw for the canvas', () => {
+    expect(matching(THREE_IMPORT_PATTERN).map((filePath) => path.basename(filePath)).sort()).toEqual([...THREE_FILES].sort());
+  });
+
+  it('reaches those files only through import(), or for their types: no static import pulls three.js into the first load', () => {
+    const staticValueImport = new RegExp(String.raw`^import (?!type )[^;]*from '\./(${CANVAS_CHUNK_FILES.map((name) => name.replace(/\.tsx?$/, '')).join('|')})';`, 'm');
+    const importers = files.filter((filePath) => !CANVAS_CHUNK_FILES.includes(path.basename(filePath)) && staticValueImport.test(fs.readFileSync(filePath, 'utf-8')));
+    expect(importers).toEqual([]);
+    expect(staticValueImport.test("import { createSceneRenderer } from './scene-renderer';")).toBe(true);
+    expect(staticValueImport.test("import type { AxisDirections } from './scene-renderer';")).toBe(false);
+    expect(fs.readFileSync('src/components/atlas-scene/OpenViewport.tsx', 'utf-8')).toContain("import('./AtlasCanvas')");
+    expect(fs.readFileSync('src/components/atlas-scene/AtlasViewport.tsx', 'utf-8')).toContain("import('./OpenViewport')");
   });
 
   it('sets no label in a monospace face', () => {

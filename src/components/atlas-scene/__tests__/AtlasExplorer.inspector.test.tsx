@@ -218,7 +218,8 @@ describe('AtlasExplorer: failures', () => {
     const softened = JSON.stringify({ ...REAL_EVIDENCE, status: 'Peer reviewed.' });
     const { inspector } = await openRegion(litRegionId, { ...REAL_FILES, [ANATOMY_EVIDENCE_PATH]: tampered, [REGION_EVIDENCE_PATH]: softened });
     const alerts = within(inspector).getAllByRole('alert');
-    expect(alerts.map((alert) => alert.dataset.failure)).toEqual(['unavailable', 'invalid']);
+    expect(alerts.map((alert) => alert.dataset.failure)).toEqual(['stale', 'invalid']);
+    expect(alerts[0].textContent).toContain('a newer version of the page has been published. Reload the page.');
     expect(inspector.querySelector('.atlas-statement')).toBeNull();
     expect(inspector.querySelector('.atlas-technique blockquote')).toBeNull();
   });
