@@ -41,12 +41,6 @@ function normalise([x, y, z]: Point3): [number, number, number] {
   return [x / length, y / length, z / length];
 }
 
-/** The camera's position for a view: `distance` millimetres from `centre` along the view's direction. */
-export function cameraPositionFor(viewId: CameraViewId, centre: Point3, distance: number): [number, number, number] {
-  const direction = normalise(VIEW_DIRECTIONS[viewId]);
-  return [centre[0] + direction[0] * distance, centre[1] + direction[1] * distance, centre[2] + direction[2] * distance];
-}
-
 /** How long a camera move takes. With reduced motion the view changes at once. */
 export function planCameraMove(prefersLessMotion: boolean): { durationMs: number } {
   return { durationMs: prefersLessMotion ? 0 : CAMERA_MOVE_MS };
@@ -59,4 +53,44 @@ export function clampDistance(distance: number): number {
 /** One zoom step in or out, kept inside the range where the brain is neither a dot nor behind the camera. */
 export function zoomDistance(distance: number, direction: 'in' | 'out'): number {
   return clampDistance(direction === 'in' ? distance / ZOOM_STEP : distance * ZOOM_STEP);
+}
+
+/** Where the camera is, as angles around a point: turning left or right is `azimuth`, tilting is `polar` (0 is straight above). */
+export interface OrbitPose {
+  azimuth: number;
+  polar: number;
+  distance: number;
+  target: Point3;
+}
+
+/** The camera never reaches straight above or below, where "up" would flip. */
+const MIN_POLAR = 0.05;
+const MAX_POLAR = Math.PI - MIN_POLAR;
+const FULL_TURN = Math.PI * 2;
+export const ORBIT_STEP_RADIANS = Math.PI / 12;
+
+export function poseForView(viewId: CameraViewId, target: Point3, distance: number): OrbitPose {
+  const [x, y, z] = normalise(VIEW_DIRECTIONS[viewId]);
+  return { azimuth: Math.atan2(x, z), polar: Math.min(MAX_POLAR, Math.max(MIN_POLAR, Math.acos(y))), distance: clampDistance(distance), target };
+}
+
+export function positionOfPose(pose: OrbitPose): [number, number, number] {
+  const ring = Math.sin(pose.polar) * pose.distance;
+  return [pose.target[0] + ring * Math.sin(pose.azimuth), pose.target[1] + Math.cos(pose.polar) * pose.distance, pose.target[2] + ring * Math.cos(pose.azimuth)];
+}
+
+export function turnPose(pose: OrbitPose, azimuthBy: number, polarBy: number): OrbitPose {
+  return { ...pose, azimuth: pose.azimuth + azimuthBy, polar: Math.min(MAX_POLAR, Math.max(MIN_POLAR, pose.polar + polarBy)) };
+}
+
+/** The pose a share `progress` (0 to 1) of the way from one to another, turning the shorter way round. */
+export function blendPoses(from: OrbitPose, to: OrbitPose, progress: number): OrbitPose {
+  const turn = ((to.azimuth - from.azimuth + Math.PI) % FULL_TURN + FULL_TURN) % FULL_TURN - Math.PI;
+  const mix = (start: number, end: number): number => start + (end - start) * progress;
+  return {
+    azimuth: from.azimuth + turn * progress,
+    polar: mix(from.polar, to.polar),
+    distance: mix(from.distance, to.distance),
+    target: [mix(from.target[0], to.target[0]), mix(from.target[1], to.target[1]), mix(from.target[2], to.target[2])],
+  };
 }

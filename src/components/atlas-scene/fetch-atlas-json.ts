@@ -22,14 +22,16 @@ export class AtlasFetchError extends Error {
   }
 }
 
-const SITE_PATH_PATTERN = /^\/atlas\/[a-z0-9-]+\.json$/;
+/** The atlas's own JSON files, and its geometry files in the two folders their licences require. */
+const SITE_PATH_PATTERN = /^\/atlas\/[a-z0-9-]+\.json$|^\/atlas-assets\/(open|by-sa)\/[a-z0-9][a-z0-9.-]*\.glb$/;
 const SHA256_ALGORITHM = 'SHA-256';
 const HEX_RADIX = 16;
 const HEX_BYTE_WIDTH = 2;
 /** Long enough for a slow phone connection, short enough that a stalled request ends in a notice and not an endless wait. */
 export const FETCH_TIMEOUT_MS = 30_000;
 
-async function fetchBytes(path: string, cache: RequestCache, signal: AbortSignal): Promise<Uint8Array> {
+/** Fetches one of this site's atlas files as bytes. What it returns is untrusted until it has been verified. */
+export async function fetchAtlasBytes(path: string, cache: RequestCache, signal: AbortSignal): Promise<Uint8Array> {
   if (!SITE_PATH_PATTERN.test(path)) throw new AtlasFetchError(path, 'bad_address', 'the address is not one of this site\'s atlas files');
   const timeout = new AbortController();
   const stopOnCallerAbort = (): void => timeout.abort();
@@ -58,7 +60,7 @@ function parseJsonBytes(path: string, bytes: Uint8Array): unknown {
 
 /** Fetches a site JSON file. What it returns is untrusted until a parser has read it. */
 export async function fetchAtlasJson(path: string, signal: AbortSignal): Promise<unknown> {
-  return parseJsonBytes(path, await fetchBytes(path, 'default', signal));
+  return parseJsonBytes(path, await fetchAtlasBytes(path, 'default', signal));
 }
 
 async function sha256Hex(bytes: Uint8Array): Promise<string> {
@@ -82,9 +84,9 @@ async function matchesPin(bytes: Uint8Array, pin: PinnedFile): Promise<boolean> 
  * retried once past the cache, then reported; it is never used unchecked.
  */
 export async function fetchPinnedJson(pin: PinnedFile, signal: AbortSignal): Promise<unknown> {
-  const cached = await fetchBytes(pin.path, 'default', signal);
+  const cached = await fetchAtlasBytes(pin.path, 'default', signal);
   if (await matchesPin(cached, pin)) return parseJsonBytes(pin.path, cached);
-  const fresh = await fetchBytes(pin.path, 'reload', signal);
+  const fresh = await fetchAtlasBytes(pin.path, 'reload', signal);
   if (await matchesPin(fresh, pin)) return parseJsonBytes(pin.path, fresh);
   throw new AtlasFetchError(pin.path, 'pin_mismatch', 'the file differs from the one this page\'s index was built with');
 }
