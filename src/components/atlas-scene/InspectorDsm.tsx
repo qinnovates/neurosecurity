@@ -3,11 +3,17 @@ import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { buildRegionDsm, type RegionDsmReference } from '@/lib/atlas-explorer/region-dsm';
 import Disclosure from './Disclosure';
 import LimitNote from './LimitNote';
-import ReviewMark from './ReviewMark';
+import ReviewMark, { UNREVIEWED_MARK } from './ReviewMark';
 
 interface Props {
   model: ExplorerModel;
   regionId: string;
+}
+
+/** What a heading counts: entries (one per code and wording) and the distinct codes among them. */
+export function describeReferenceCount(references: readonly RegionDsmReference[]): string {
+  const codeCount = new Set(references.map((reference) => reference.code)).size;
+  return `${references.length} ${references.length === 1 ? 'reference' : 'references'} to ${codeCount} ${codeCount === 1 ? 'code' : 'codes'}`;
 }
 
 /** Each reference with what it is filed with: technique ids under the first heading, pathway names under the second. */
@@ -35,7 +41,7 @@ export default function InspectorDsm({ model, regionId }: Props) {
       <h3 className="atlas-subheading" id="atlas-inspector-dsm">DSM-5-TR category references</h3>
       <LimitNote limit={limitSentence('dsm_references')} />
       <h4 className="atlas-minor-heading">
-        Through linked techniques ({dsm.viaTechniques.length}){' '}
+        Through linked techniques ({describeReferenceCount(dsm.viaTechniques)}){' '}
         {dsm.linkReviewState !== null && <ReviewMark state={dsm.linkReviewState} />}
       </h4>
       {dsm.viaTechniques.length === 0 ? <LimitNote limit={limitSentence('dsm_none')} /> : (
@@ -44,7 +50,10 @@ export default function InspectorDsm({ model, regionId }: Props) {
           <Disclosure label="Show them"><ReferenceList references={dsm.viaTechniques} /></Disclosure>
         </>
       )}
-      <h4 className="atlas-minor-heading">Through pathways ({dsm.viaPathways.length})</h4>
+      <h4 className="atlas-minor-heading" data-dsm-group="pathways">
+        Through pathways ({describeReferenceCount(dsm.viaPathways)}){' '}
+        {dsm.pathwayNames.length > 0 && <ReviewMark state={UNREVIEWED_MARK} />}
+      </h4>
       {dsm.pathwayNames.length === 0 ? <LimitNote limit={limitSentence('dsm_none')} /> : (
         <>
           <LimitNote limit={limitSentence('dsm_via_pathways', { pathways: dsm.pathwayNames.join(', ') })} />

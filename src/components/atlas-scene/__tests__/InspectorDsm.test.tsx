@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import { LIMIT_TEMPLATES, matchesLimitTemplate } from '@/lib/anatomy/limits-copy';
 import { buildFixtureModel, loadRealModel } from '@/lib/atlas-explorer/__tests__/explorer-fixtures';
-import InspectorDsm from '../InspectorDsm';
+import InspectorDsm, { describeReferenceCount } from '../InspectorDsm';
 
 afterEach(cleanup);
 
@@ -33,6 +33,25 @@ describe('the inspector\'s DSM-5-TR references', () => {
       'F00.0 Fixture categoryFiled with: QIF-T9004.', 'F00.x Fixture category (pathway wording)Filed with: Fixture Pathway.',
     ]);
     expect(matchesLimitTemplate('dsm_via_pathways', section.querySelector('[data-limit-id="dsm_via_pathways"]')?.textContent ?? '')).toBe(true);
+  });
+
+  it('marks the pathway group as AI-drafted and unreviewed wherever a pathway reaches the region, with or without a linked technique', () => {
+    for (const regionId of ['pfc', 'm1']) {
+      const heading = renderFor(regionId).querySelector('[data-dsm-group="pathways"]');
+      expect(heading?.querySelector('[data-ai-drafted="true"]')?.textContent).toBe('AI-drafted, unreviewed');
+      cleanup();
+    }
+    const real = renderFor('cervical_cord', loadRealModel());
+    expect(real.querySelector('[data-dsm-group="pathways"] [data-ai-drafted="true"]')?.textContent).toBe('AI-drafted, unreviewed');
+    expect(real.querySelector('[data-limit-id="dsm_via_pathways"]')?.textContent).toContain('No person has reviewed the pathway file\'s references, and an AI matched the pathway\'s region names to this region.');
+  });
+
+  it('says in each heading what its number counts: entries and the distinct codes among them', () => {
+    const reference = (code: string, name: string) => ({ code, name, carriers: ['carrier'] });
+    expect(describeReferenceCount([])).toBe('0 references to 0 codes');
+    expect(describeReferenceCount([reference('F00.0', 'First wording')])).toBe('1 reference to 1 code');
+    expect(describeReferenceCount([reference('F00.0', 'First wording'), reference('F00.0', 'Second wording'), reference('F01.0', 'Other')])).toBe('3 references to 2 codes');
+    expect(renderFor('pfc').querySelector('[data-dsm-group="pathways"]')?.textContent).toContain('Through pathways (1 reference to 1 code)');
   });
 
   it('says so in words when nothing arrives, and shows no mark', () => {

@@ -53,7 +53,7 @@ export const LIMIT_TEMPLATES = {
   dsm_references: 'These are diagnostic category references from DSM-5-TR that QIF files with techniques and pathways for threat modelling, not diagnostic claims. They need clinical validation and say nothing about any person.',
   dsm_via_techniques: 'The catalog files these with techniques, not with this region. An AI linked those techniques to the region.',
   dsm_none: 'No reference arrives this way. That is a gap in the data, not a finding about the region.',
-  dsm_via_pathways: 'QIF\'s pathway file lists this region as a start or an end of: {pathways}. It files its references with each pathway as a whole, not with this region.',
+  dsm_via_pathways: 'QIF\'s pathway file lists this region as a start or an end of: {pathways}. It files its references with each pathway as a whole, not with this region. No person has reviewed the pathway file\'s references, and an AI matched the pathway\'s region names to this region.',
   lens_stated_targets: 'These are the regions QIF\'s own atlas file lists for this device; no expert has reviewed the list, and QIF is a proposed framework. Where a device sits and what it affects is different in every person and is not shown here.',
   lens_needs_subject: 'Choose one from the list to see which regions it is linked to.',
   lens_no_data: 'No region has data under this lens. "No data" means nothing has been linked; it does not mean low.',
