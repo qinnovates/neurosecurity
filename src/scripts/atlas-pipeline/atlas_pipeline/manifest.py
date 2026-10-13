@@ -118,7 +118,7 @@ def asset_record(built: "BuiltAsset", registry: Registry, evidence: dict[str, An
                         "hemispheres": plan["hemispheres"], "grid_voxel_mm": plan.get("grid_voxel_mm") or next((row["grid_voxel_mm"] for row in built.report if "grid_voxel_mm" in row), 1.0),
                         "acquisition_voxel_mm": plan.get("acquisition_voxel_mm"), "probability_meaning": plan["probability_meaning"]},
         "libraries": library_versions(), "nodes": built.nodes, "checks": checks, "stage_fingerprints": stages, "position_check": position,
-        "modification_note": notices.changes_for(plan),
+        "modification_note": notices.changes_for(plan, notices.measured_facts(evidence)),
     }
 
 

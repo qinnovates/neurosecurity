@@ -53,3 +53,36 @@ export function summariseRegionOutcome(regionIds: readonly string[], crosswalk: 
   }
   return outcome;
 }
+
+const SAME = 'same';
+const NO_NAME_MATCH = 'none';
+
+/** Atlases whose shipped shapes are a probability map cut at a threshold: their volume depends on the cut. */
+function listProbabilityCutAtlases(manifest: AssetManifest | null): Set<string> {
+  const atlases = new Set<string>();
+  for (const node of (manifest?.assets ?? []).flatMap((asset) => asset.nodes)) {
+    if (node.volume_mm3_at['0.25'] !== node.volume_mm3_at['0.75']) atlases.add(node.extras.atlas);
+  }
+  return atlases;
+}
+
+/**
+ * Grades that say more than the data supports:
+ * - a contained row whose larger named structure stands in for the subject cannot claim that structure's
+ *   name is the subject's name (a gyrus is not a synonym for a cortical area);
+ * - a row on a probability map cut at a threshold cannot be graded `same`: the shape is where a share of a
+ *   population's structures overlap, not the structure.
+ */
+export function findGradeRuleProblems(crosswalk: Crosswalk, manifest: AssetManifest | null): string[] {
+  const probabilityCut = listProbabilityCutAtlases(manifest);
+  return crosswalk.rows.flatMap((row) => {
+    const problems: string[] = [];
+    if (row.extent_match === CONTAINED && row.contained_kind === 'named_stand_in' && row.name_match !== NO_NAME_MATCH) {
+      problems.push(`${row.subject_id}: a larger structure standing in for the subject is graded name_match "${row.name_match}"; it must be "none"`);
+    }
+    if (row.extent_match === SAME && probabilityCut.has(row.atlas)) {
+      problems.push(`${row.subject_id}: graded extent "same" on "${row.atlas}", whose shapes are a probability map cut at a threshold`);
+    }
+    return problems;
+  });
+}

@@ -311,7 +311,7 @@
       },
       "acquisition_voxel_mm": null,
       "size_rule_voxel_mm": null,
-      "position_note": "The registration was not shown to improve these deep shapes' placement; atlases disagree by 1 to 2 mm here."
+      "position_note": "The registration was not shown to improve these deep shapes' placement; those CIT168 also has differ from it by {deep_disagreement_mm} mm (95th-percentile surface distance)."
     }
   ],
   "shift_scan_images": {

@@ -124,13 +124,19 @@ function parseAsset(value: unknown, location: FieldLocation, context: ManifestCo
   }
   const listedTwice = computedWith.find((sourceId) => sourceIds.includes(sourceId));
   if (listedTwice !== undefined) failAt(childOf(location, 'computed_with_source_ids'), `"${listedTwice}" is also in source_ids`, 'A source either supplies material to the file or is only computed with; list it once.');
+  const delineation = parseDelineation(record.delineation, childOf(location, 'delineation'));
+  const layer = readEnum(record, 'layer', location, LAYER_IDS);
+  if ((layer === OUTLINE_LAYER) !== (delineation.hemispheres === NO_SIDES)) {
+    failAt(childOf(childOf(location, 'delineation'), 'hemispheres'), `"${delineation.hemispheres}" does not fit the "${layer}" layer`,
+      'Only the brain outline reads "not_applicable": it is not a structure with sides, and every delineated structure says how its sides were drawn.');
+  }
   const nodes = readList(record, 'nodes', location).map((node, index) => parseNode(node, itemOf(location, 'nodes', index), sourceIds));
   rejectDuplicates(nodes.map((node) => `${node.extras.atlas}:${node.extras.label_id}:${node.extras.hemisphere}`), childOf(location, 'nodes'), 'node');
   return {
     id,
     path: readAssetPath(record, location, sha256, licenceIds.license_id),
     kind: readEnum(record, 'kind', location, ASSET_KINDS),
-    layer: readEnum(record, 'layer', location, LAYER_IDS),
+    layer,
     bytes: readInteger(record, 'bytes', location, 1),
     sha256,
     input_fingerprint: readSha256(record, 'input_fingerprint', location),
@@ -138,7 +144,7 @@ function parseAsset(value: unknown, location: FieldLocation, context: ManifestCo
     computed_with_source_ids: computedWith,
     ...licenceIds,
     route: readList(record, 'route', location).map((step, index) => parseRouteStep(step, itemOf(location, 'route', index))),
-    delineation: parseDelineation(record.delineation, childOf(location, 'delineation')),
+    delineation,
     libraries: readLibraries(record, location),
     nodes,
     checks: readList(record, 'checks', location).map((check, index) => parseCheck(check, itemOf(location, 'checks', index))),
@@ -148,6 +154,8 @@ function parseAsset(value: unknown, location: FieldLocation, context: ManifestCo
   };
 }
 
+const OUTLINE_LAYER = 'outline';
+const NO_SIDES = 'not_applicable';
 const SUPPORT_FILE_PATTERN = /^(open|by-sa)\/(NOTICE\.txt|LICENSE\.txt|labels-[a-z0-9_]+\.json)$/;
 
 /** Notices, licence text and label tables written beside the assets, each with the sha256 the pipeline wrote. */

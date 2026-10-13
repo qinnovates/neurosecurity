@@ -16,6 +16,7 @@ ASSET_DIR = sources.REPO_ROOT / "src" / "site" / "atlas-assets"
 REGISTRY = sources.load_registry()
 MANIFEST = json.loads((ASSET_DIR / "manifest.json").read_text(encoding="utf-8"))
 PLANS = {plan["id"]: plan for plan in REGISTRY.inputs["assets"]}
+EVIDENCE = json.loads((sources.PIPELINE_DIR / "evidence" / "registration-evidence.json").read_text(encoding="utf-8"))
 
 
 def outcome(name: str, gain: float = 0.1, spread: float = 0.01) -> dict:
@@ -44,7 +45,7 @@ def test_code_hash_changes_with_any_source_file(tmp_path) -> None:
 
 def test_each_modification_note_is_the_one_the_plan_generates() -> None:
     for asset in MANIFEST["assets"]:
-        assert asset["modification_note"] == notices.changes_for(PLANS[asset["id"]]), asset["id"]
+        assert asset["modification_note"] == notices.changes_for(PLANS[asset["id"]], notices.measured_facts(EVIDENCE)), asset["id"]
 
 
 def test_fetch_pins_are_the_registry_pins_and_the_transform_record_is_the_pinned_archive() -> None:
@@ -82,14 +83,14 @@ def test_support_files_hash_to_the_manifest_and_nothing_else_is_served() -> None
 
 def test_notices_and_license_text_regenerate_to_the_committed_files() -> None:
     for folder in ("open", "by-sa"):
-        assert notices.folder_notice(folder, REGISTRY, MANIFEST["assets"], PLANS) == (ASSET_DIR / folder / "NOTICE.txt").read_text(encoding="utf-8")
+        assert notices.folder_notice(folder, REGISTRY, MANIFEST["assets"]) == (ASSET_DIR / folder / "NOTICE.txt").read_text(encoding="utf-8")
     assert notices.share_alike_licence_text() == (ASSET_DIR / "by-sa" / "LICENSE.txt").read_text(encoding="utf-8")
 
 
 def test_notice_generation_would_show_a_removed_wording() -> None:
     committed = (ASSET_DIR / "by-sa" / "NOTICE.txt").read_text(encoding="utf-8")
     assert "Human Connectome Project" in committed and "not legal advice" in committed
-    assert notices.folder_notice("by-sa", REGISTRY, MANIFEST["assets"], PLANS) != committed.replace("They are not legal advice.", "A lawyer confirmed them.")
+    assert notices.folder_notice("by-sa", REGISTRY, MANIFEST["assets"]) != committed.replace("They are not legal advice.", "A lawyer confirmed them.")
 
 
 @pytest.mark.parametrize(("outcomes", "status"), [
@@ -138,3 +139,38 @@ def test_committed_manifest_says_what_was_shown() -> None:
     assert by_id["cortex-allen"]["position_check"] == "checked in aggregate"
     assert {asset["position_check"] for asset_id, asset in by_id.items() if asset_id != "cortex-allen"} == {"not independently checked"}
     assert next(check for check in by_id["deep-allen"]["checks"] if check["id"] == "V2")["status"] == "not_distinguishable"
+
+
+REGISTRATION_CHECK_IDS = ("K4", "K5", "V1", "V2")
+
+
+def recomputed(asset: dict, evidence_document: dict | None) -> tuple[list[dict], str]:
+    """The registration and placement check rows, and the position check, that the evidence gives this asset."""
+    built = types.SimpleNamespace(plan=PLANS[asset["id"]], header_records=[], nodes=asset["nodes"])
+    rows, position = manifest.asset_checks(built, evidence_document)
+    return [row for row in rows if row["id"] in REGISTRATION_CHECK_IDS], position
+
+
+def test_manifest_check_rows_and_position_checks_are_what_the_committed_evidence_gives() -> None:
+    compared = 0
+    for asset in MANIFEST["assets"]:
+        rows, position = recomputed(asset, EVIDENCE)
+        assert [row for row in asset["checks"] if row["id"] in REGISTRATION_CHECK_IDS] == rows, asset["id"]
+        assert asset["position_check"] == position, asset["id"]
+        compared += len(rows)
+    assert compared >= 6
+
+
+def test_evidence_edited_to_a_different_outcome_no_longer_matches_the_manifest() -> None:
+    edited = json.loads(json.dumps(EVIDENCE))
+    for side in edited["registration"]["outcomes"]["v1_grey_matter_share"].values():
+        side["outcome"] = "not_distinguishable"
+    cortex = next(asset for asset in MANIFEST["assets"] if asset["id"] == "cortex-allen")
+    rows, position = recomputed(cortex, edited)
+    assert position == "not independently checked" != cortex["position_check"]
+    assert rows != [row for row in cortex["checks"] if row["id"] in REGISTRATION_CHECK_IDS]
+    scan_edited = json.loads(json.dumps(EVIDENCE))
+    scan_edited["shift_scans"]["cit168_rl"]["margin"] = -0.5
+    scan_edited["shift_scans"]["cit168_rl"]["passed"] = False
+    cit = next(asset for asset in MANIFEST["assets"] if asset["id"] == "deep-cit168")
+    assert recomputed(cit, scan_edited)[0] != [row for row in cit["checks"] if row["id"] in REGISTRATION_CHECK_IDS]

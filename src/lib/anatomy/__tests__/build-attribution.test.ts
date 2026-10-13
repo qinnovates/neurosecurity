@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { loadAnatomyData } from '@/components/atlas-scene/load-anatomy-data';
-import { SHARE_ALIKE_STATEMENT as CHECKED_SHARE_ALIKE_STATEMENT, LICENSE_READING_STATEMENT, SHIPPING_LICENSE_NAMES } from '../../../scripts/check-atlas-assets.mjs';
+import {
+  POSITION_CHECK_SENTENCES as CHECKED_POSITION_SENTENCES, SHARE_ALIKE_STATEMENT as CHECKED_SHARE_ALIKE_STATEMENT, LICENSE_READING_STATEMENT, SHIPPING_LICENSE_NAMES,
+} from '../../../scripts/check-atlas-assets.mjs';
 import { ATTRIBUTION_STATEMENTS, LICENSE_LINKS, POSITION_CHECK_SENTENCES, SHARE_ALIKE_STATEMENT, buildAttributionEntries, listRequiredWordings } from '../build-attribution';
 
 const data = loadAnatomyData();
@@ -72,6 +74,7 @@ describe('attribution for the committed assets (guard)', () => {
   it('keeps the post-build check\'s wording equal to the page\'s', () => {
     expect(LICENSE_READING_STATEMENT).toBe(ATTRIBUTION_STATEMENTS.licenseReading);
     expect(CHECKED_SHARE_ALIKE_STATEMENT).toBe(SHARE_ALIKE_STATEMENT);
+    expect(CHECKED_POSITION_SENTENCES).toEqual(POSITION_CHECK_SENTENCES);
     for (const [licenseId, name] of Object.entries(SHIPPING_LICENSE_NAMES)) {
       expect(LICENSE_LINKS[licenseId as keyof typeof LICENSE_LINKS].name).toBe(name);
     }
