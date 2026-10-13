@@ -126,6 +126,31 @@ describe('AtlasExplorer: the list', () => {
     expect(document.activeElement).toBe(rowOf(container, 'hippocampus'));
   });
 
+  it('moves focus and the view to the details when a row is tapped on a narrow, stacked screen', async () => {
+    vi.stubGlobal('matchMedia', (query: string) => ({ matches: query === '(max-width: 960px)', addEventListener: () => undefined, removeEventListener: () => undefined }));
+    const scrolled = vi.fn();
+    window.HTMLElement.prototype.scrollIntoView = scrolled;
+    const container = await renderExplorer();
+    fireEvent.click(rowOf(container, 'pfc'), { detail: 1 });
+    await waitFor(() => expect(document.activeElement?.id).toBe('atlas-inspector-heading'));
+    expect(document.activeElement?.textContent).toBe('Prefrontal Cortex');
+    expect(scrolled).toHaveBeenCalledWith({ block: 'start' });
+  });
+
+  it('announces the Device lens without any count of AI-drafted links, and keeps the provenance words in each row', async () => {
+    const container = await renderExplorer();
+    fireEvent.click(lensButton('Device'));
+    const input = screen.getByRole('combobox', { name: 'Choose a device' });
+    fireEvent.change(input, { target: { value: 'neuralink-n1' } });
+    fireEvent.keyDown(input, { key: 'Enter' });
+    await waitFor(() => expect(announcement(container, 'lens')).toMatch(/^Device lens: neuralink-n1\. \d+ regions? listed in the device's QIF record, \d+ not listed\.$/));
+    expect(announcement(container, 'lens')).not.toContain('AI-drafted');
+    const listed = rows(container).filter((row) => row.dataset.standing === 'value');
+    expect(listed.length).toBeGreaterThan(0);
+    for (const row of listed) expect(row.querySelector('.atlas-cell-lens')?.textContent).toContain('QIF\'s atlas file lists this region for the device; no expert has reviewed the list');
+    expect(listed.filter((row) => row.querySelector('.atlas-cell-lens [data-ai-drafted]') !== null)).toEqual([]);
+  });
+
   it('leaves focus where it is when a row is chosen with a pointer', async () => {
     const container = await renderExplorer();
     fireEvent.click(rowOf(container, 'pfc'), { detail: 1 });

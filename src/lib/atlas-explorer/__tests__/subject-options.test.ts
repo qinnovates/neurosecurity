@@ -38,7 +38,7 @@ describe('filterSubjectOptions', () => {
 
   it('matches every word against id, name and detail, whatever the case', () => {
     expect(filterSubjectOptions(options, 'FIXTURE firmware').map((option) => option.id)).toEqual([FIXTURE_IDS.deviceOnlyTechnique]);
-    expect(filterSubjectOptions(options, 'tag only').map((option) => option.id)).toEqual([FIXTURE_IDS.bandLevelTechnique]);
+    expect(filterSubjectOptions(options, 'tag only n6').map((option) => option.id)).toEqual([FIXTURE_IDS.bandLevelTechnique]);
     expect(filterSubjectOptions(options, 'band n7').map((option) => option.id)).toEqual([FIXTURE_IDS.linkedTechnique, FIXTURE_IDS.notDraftedTechnique, FIXTURE_IDS.secondLinkedTechnique]);
   });
 

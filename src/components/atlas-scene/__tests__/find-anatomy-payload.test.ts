@@ -65,6 +65,14 @@ describe('findAnatomyPayload', () => {
     expect(ANATOMY_PAYLOAD_MARKERS.filter((marker: string) => !served.includes(marker))).toEqual([]);
   });
 
+  it('finds the H01 card, the catalog or the literature file inlined in a page, whole or in part', () => {
+    const [catalogJson, literatureJson, cardJson] = ['/atlas/anatomy-catalog.json', '/atlas/anatomy-region-evidence.json', '/atlas/anatomy-h01-card.json'].map((path) => seed.companionJsonByPath[path]);
+    expect(findAnatomyPayload(asScript(JSON.parse(cardJson)))).toEqual(expect.arrayContaining(['must_not_imply', 'numbers_that_differ_by_source']));
+    expect(findAnatomyPayload(asIslandProp({ caveats: JSON.parse(cardJson).must_not_imply, numbers_that_differ_by_source: [] })).length).toBeGreaterThan(0);
+    expect(findAnatomyPayload(asScript(JSON.parse(catalogJson)))).toEqual(expect.arrayContaining(['device_stage_techniques']));
+    expect(findAnatomyPayload(asScript(JSON.parse(literatureJson).rows.slice(0, 1)))).toEqual(expect.arrayContaining(['anatomy_as_stated', 'verifier_verdict']));
+  });
+
   it('finds nothing in a page that carries only the index pin', () => {
     expect(findAnatomyPayload(asIslandProp(seed.indexPin))).toEqual([]);
     expect(findAnatomyPayload(asScript(populated.indexPin))).toEqual([]);
