@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { loadAnatomyBundle } from '@/components/atlas-scene/load-anatomy-data';
+import { loadAnatomyBundle, respondWithAtlasJson } from '@/components/atlas-scene/load-anatomy-data';
 
 /**
  * The quotes, rationales and licence readings behind the anatomy index. The
@@ -7,4 +7,4 @@ import { loadAnatomyBundle } from '@/components/atlas-scene/load-anatomy-data';
  * by AI, not by a lawyer.
  */
 export const GET: APIRoute = () =>
-  new Response(loadAnatomyBundle().evidenceJson, { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
+  respondWithAtlasJson(loadAnatomyBundle().evidenceJson);

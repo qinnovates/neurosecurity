@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { loadCompanionJson } from '@/components/atlas-scene/load-anatomy-data';
+import { loadCompanionJson, respondWithAtlasJson } from '@/components/atlas-scene/load-anatomy-data';
 import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
 
 /**
@@ -9,4 +9,4 @@ import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
  * The anatomy index pins this file by length and sha256.
  */
 export const GET: APIRoute = () =>
-  new Response(loadCompanionJson(REGION_EVIDENCE_PATH), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
+  respondWithAtlasJson(loadCompanionJson(REGION_EVIDENCE_PATH));

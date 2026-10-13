@@ -24,6 +24,7 @@ import { parseAnatomyFiles, type AnatomyData } from '@/lib/anatomy/anatomy-input
 import { buildAnatomyBundle, type AnatomyBundle } from '@/lib/anatomy/build-anatomy-index';
 import { AnatomyDataError } from '@/lib/anatomy/errors';
 import { H01_CARD_PATH, parseH01Card } from '@/lib/anatomy/parse-h01-card';
+import { MANIFEST_FILE } from '@/lib/anatomy/parse-manifest';
 import { parseRegionEvidence } from '@/lib/anatomy/parse-region-evidence';
 import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
 import { assertLedgerRatchet } from '@/lib/anatomy/review-state';
@@ -32,7 +33,8 @@ import { EXPLORER_CATALOG_PATH, buildExplorerCatalog } from '@/lib/atlas-explore
 import { buildEngineData } from '@/lib/threat-model/build-engine-data';
 
 const ROOT_PREFIX = '/';
-const MANIFEST_PATH = '/src/site/atlas-assets/manifest.json';
+const MANIFEST_PATH = `${ROOT_PREFIX}${MANIFEST_FILE}`;
+const JSON_HEADERS = { 'Content-Type': 'application/json; charset=utf-8' };
 
 /**
  * The offline pipeline's outputs. They do not exist until the pipeline has run,
@@ -88,4 +90,9 @@ export function loadCompanionJson(path: string): string {
   const json = loadAnatomyBundle().companionJsonByPath[path];
   if (json === undefined) throw new AnatomyDataError(path, '(top level)', 'the anatomy bundle holds no such file', 'Add it to the companions in loadAnatomyBundle.');
   return json;
+}
+
+/** What every static atlas JSON endpoint under src/pages/atlas/ answers with: the bytes the index pins, served as JSON. */
+export function respondWithAtlasJson(json: string): Response {
+  return new Response(json, { headers: JSON_HEADERS });
 }
