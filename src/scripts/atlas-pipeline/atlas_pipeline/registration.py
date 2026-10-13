@@ -14,27 +14,16 @@ import numpy as np
 
 from .errors import TransformError
 from .fetch import sha256_of, source_file
+from .registration_settings import FORWARD_FILES, INVERSE_FILES, SETTINGS
 
 DECLARED_GRID_VOXEL_MM = 0.5
-SETTINGS: dict[str, dict[str, Any]] = {
-    "A_syn_mattes_default": {"type_of_transform": "SyN", "syn_metric": "mattes", "syn_sampling": 32,
-                             "reg_iterations": (40, 20, 0), "flow_sigma": 3, "grad_step": 0.2},
-    "B_syn_cc_fullres": {"type_of_transform": "SyN", "syn_metric": "CC", "syn_sampling": 2,
-                         "reg_iterations": (40, 20, 10), "flow_sigma": 3, "grad_step": 0.2},
-    "C_synonly_mattes_sharper": {"type_of_transform": "SyNOnly", "initial_transform": "identity", "syn_metric": "mattes",
-                                 "syn_sampling": 32, "reg_iterations": (60, 30, 10), "flow_sigma": 2, "grad_step": 0.15},
-}
-FORWARD_FILES = ("xfm_1Warp.nii.gz", "xfm_0GenericAffine.mat")
-INVERSE_FILES = ("xfm_0GenericAffine.mat", "xfm_1InverseWarp.nii.gz")
-
-
-def declared_grid(template_shape: tuple[int, ...], template_affine: np.ndarray) -> tuple[tuple[int, int, int], np.ndarray]:
+def declared_grid(template_shape: tuple[int, ...], template_affine: np.ndarray) -> tuple[tuple[int, ...], np.ndarray]:
     """A 0.5 mm grid covering the declared template's own grid."""
     factor = float(template_affine[0, 0]) / DECLARED_GRID_VOXEL_MM
     shape = tuple(int(round(n * factor)) for n in template_shape[:3])
     affine = np.diag([DECLARED_GRID_VOXEL_MM] * 3 + [1.0])
     affine[:3, 3] = template_affine[:3, 3] - (float(template_affine[0, 0]) - DECLARED_GRID_VOXEL_MM) / 2.0
-    return shape, affine  # type: ignore[return-value]
+    return shape, affine
 
 
 def transform_dir(cache_dir: pathlib.Path, transform_id: str, setting: str | None = None) -> pathlib.Path:

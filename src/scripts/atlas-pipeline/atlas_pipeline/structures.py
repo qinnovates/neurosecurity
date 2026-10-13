@@ -20,6 +20,7 @@ from .volumes import crop_affine, resample_like, side_selectors, voxel_volume_mm
 
 PROBABILITY_LEVELS = (0.25, 0.5, 0.75)
 CROP_PAD_VOXELS = 2
+MAX_NAMED_CHILDREN = 2
 SIDES = ("left", "right")
 
 
@@ -139,7 +140,22 @@ def select_allen_rows(rows: list[dict[str, str]], all_rows_path: pathlib.Path, s
         if len(parent_ids) != 1:
             raise RegistryError(f"Allen acronym {parent_acronym!r} does not name exactly one structure; fix the build plan")
         chosen += [row for row in rows if f"/{parent_ids[0]}/" in row["structure_id_path"] and row not in chosen]
-    return sorted(chosen, key=lambda row: int(row["id"]))
+    excluded = set(select.get("exclude_acronyms", []))
+    return sorted((row for row in chosen if row["acronym"] not in excluded), key=lambda row: int(row["id"]))
+
+
+def allen_label_name(row: dict[str, str], annotated_rows: list[dict[str, str]]) -> str:
+    """The label's name, saying so when the label is only what is left of a structure after its annotated parts.
+
+    In the annotation volume a parent that has annotated children holds only the voxels not given to a
+    child, so "thalamus" there is the thalamus minus its listed nuclei. The name must not claim the whole.
+    """
+    children = [other for other in annotated_rows if other["id"] != row["id"] and f"/{row['id']}/" in other["structure_id_path"]]
+    if not children:
+        return row["name"]
+    if len(children) <= MAX_NAMED_CHILDREN:
+        return f"{row['name']} (remainder, excluding {' and '.join(child['name'] for child in children)})"
+    return f"{row['name']} (remainder not assigned to one of its {len(children)} annotated parts)"
 
 
 def compact_allen_ids(annotation: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
@@ -168,5 +184,5 @@ def mirrored_structures(atlas: str, compact: np.ndarray, affine: np.ndarray, ids
             padded = tuple(slice(max(s.start - CROP_PAD_VOXELS, 0), min(s.stop + CROP_PAD_VOXELS, n)) for s, n in zip(box, compact.shape))
             mask = on_side[padded] == compact_id
             volume = round(float(mask.sum()) * voxel_volume_mm3(affine), 2)
-            yield Structure(atlas, row["id"], row["name"], hemisphere, mask, crop_affine(affine, np.array([s.start for s in padded])),
+            yield Structure(atlas, row["id"], row.get("label_name", row["name"]), hemisphere, mask, crop_affine(affine, np.array([s.start for s in padded])),
                             True, 0.5, 1.0, {str(level): volume for level in PROBABILITY_LEVELS})

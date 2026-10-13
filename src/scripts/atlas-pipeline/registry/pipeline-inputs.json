@@ -113,7 +113,7 @@
         "id": "brain_mask",
         "name": "Brain outline (average template)"
       },
-      "hemispheres": "separate",
+      "hemispheres": "not_applicable",
       "probability_meaning": "not applicable: binary brain mask of the template",
       "acquisition_voxel_mm": null,
       "size_rule_voxel_mm": null
@@ -184,7 +184,11 @@
       "size_rule_voxel_mm": 1.0,
       "mesh_upsample": 2,
       "grid_voxel_mm": 1.0,
-      "mesh_note": "The 1 mm probability field is resampled linearly to 0.5 mm before the 0.5 cut, so that the mesh and the mask it is checked against describe the same surface. Size class is judged in the publisher's 1 mm voxels."
+      "mesh_note": "The 1 mm probability field is resampled linearly to 0.5 mm before the 0.5 cut, so that the mesh and the mask it is checked against describe the same surface. Size class is judged in the publisher's 1 mm voxels.",
+      "context_label_ids": [
+        "7"
+      ],
+      "context_note": "The red nucleus is drawn as context: no QIF region maps to it."
     },
     {
       "id": "hypothalamus-neudorfer",
@@ -242,10 +246,17 @@
         "descendants_of_acronym": "CeG",
         "acronyms": [
           "LI"
+        ],
+        "exclude_acronyms": [
+          "HiH",
+          "HiB",
+          "HiT"
         ]
       },
       "acquisition_voxel_mm": null,
-      "size_rule_voxel_mm": null
+      "size_rule_voxel_mm": null,
+      "select_note": "The hippocampal labels sit under the cerebral gyri in the ontology but ship in deep-allen only: no label ships in two assets.",
+      "position_note": "Position checked for the cortex as a whole (gyral voxels in template grey matter), not for each fold; some folds score lower after the registration."
     },
     {
       "id": "deep-allen",
@@ -300,26 +311,9 @@
       },
       "acquisition_voxel_mm": null,
       "size_rule_voxel_mm": null,
-      "position_note": "Position not independently checked: against CIT168 the transform is not distinguishable from none. Warped anyway, to stay coherent with adjacent gyri."
+      "position_note": "The registration was not shown to improve these deep shapes' placement; atlases disagree by 1 to 2 mm here."
     }
   ],
-  "expected_neighbours": {
-    "note": "Pairs of drawn shapes from different atlases that are known to abut. Overlap between them is recorded; a pair above the duplicate threshold fails the build.",
-    "pairs": [
-      [
-        "allen_hra_3d_2020",
-        "cit168_rl"
-      ],
-      [
-        "allen_hra_3d_2020",
-        "neudorfer_hypothalamus"
-      ],
-      [
-        "cit168_rl",
-        "neudorfer_hypothalamus"
-      ]
-    ]
-  },
   "shift_scan_images": {
     "cit168_rl": "CIT168toMNI152-2009c_T1w.nii.gz",
     "neudorfer_hypothalamus": "MDA_990HCP_t1_MNI152b_0.5.nii.gz"

@@ -9,7 +9,7 @@ All anatomy mappings and licence readings behind these assets were drafted by AI
 ```
 npm run atlas:fetch      # download and verify every pinned input into the cache
 npm run atlas:build      # build every buildable asset, the manifest, label tables and notices
-npm run atlas:test       # the pipeline's own tests (pytest, synthetic fixtures only)
+npm run atlas:test       # the pipeline's own tests (pytest)
 ```
 
 `src/scripts/atlas-pipeline/atlas.sh <command>` is what those scripts call. Other commands: `evidence` (recompute `evidence/registration-evidence.json`), `buildability` (rewrite `registry/buildability.json`), `register <setting>` (compute the registration under one setting into the cache).
@@ -21,6 +21,8 @@ npm run atlas:test       # the pipeline's own tests (pytest, synthetic fixtures 
 
 The build refuses to run when the pipeline or the registry has uncommitted changes, so the code hash in the manifest names a real state. `atlas.sh build --allow-dirty` is for development only.
 
+The pull-request workflow runs the tests that need only the standard library and pytest: the buildability rule against the registry (`test_sources.py`), the fetch rules (`test_fetch.py`), the notices (`test_notices.py`), and the committed manifest against the registry, the build plan and the pipeline's code hash (`test_manifest_records.py`). The meshing, registration, GLB and overlay tests need the imaging stack and skip themselves there; run them locally.
+
 ## What it reads
 
 - `datalake/qif-anatomy-sources.json` and `datalake/qif-anatomy-verdicts.json`: sources, pins of downloads, routes, licences, clearances. A source builds only when the rule in `atlas_pipeline/sources.py` says so; that rule is a second implementation of `assessBuildability` in `src/lib/anatomy/licence-rules.ts`, and `registry/buildability.json` holds its answers so a vitest test can compare the two.
@@ -29,7 +31,7 @@ The build refuses to run when the pipeline or the registry has uncommitted chang
 ## What it writes
 
 - `src/site/atlas-assets/open/` and `by-sa/`: content-hashed `.glb` files, one label table per atlas, `NOTICE.txt` per folder, `LICENSE.txt` in `by-sa/`.
-- `src/site/atlas-assets/manifest.json`.
+- `src/site/atlas-assets/manifest.json`, which also lists the sha256 of every notice, license text and label table, so none can be edited by hand unnoticed.
 - `evidence/build-report.json`: per-structure measurements the manifest has no field for (triangle counts, decimation, volume drift, surface distance, markers, overlaps between atlases).
 - `$ATLAS_CACHE_DIR/review/`: one sheet per shape, its outline on the template T1 in three planes. Not committed. A person should look at each before an asset merges.
 
@@ -49,10 +51,13 @@ Evidence is independent of what the registration optimises (`evidence/registrati
 
 - **V1.** Share of Allen gyral-label voxels in the declared template's grey matter, per hemisphere: the intended transform under three parameter settings, the header-only placement, and seeded faults applied in output space (2 mm shift on each axis, mirror after the transform, the inverse applied the wrong way).
 - **V2.** 95th-percentile surface distance between warped Allen deep structures and the same structures from CIT168, per side, for the same variants.
-- **Noise** is the spread across the three settings. The transform counts as better only when its gain over the header-only placement exceeds that spread.
+- **Spread** is the range of each measure across the three parameter settings. It measures how sensitive the result is to those settings; it is not sampling noise. The transform counts as better only when its gain over the header-only placement exceeds that spread.
+- The grey-matter map used by V1 is the declared template's own, the same template the registration targets. V1 is pooled over all gyral labels per hemisphere; the evidence file also records it per label and side, and lists the label-sides that score lower after the registration.
 - A mirror applied before the transform is not run: the moving image is symmetric and its labels are a mirrored pair with shared ids, so it changes nothing.
 
-Result on the committed evidence: V1 is better beyond noise on both hemispheres; V2 is not distinguishable from the header-only placement. So cortical shapes carry `position_check: "independently checked"` and deep Allen shapes carry `"not independently checked"`; about 1 mm of placement uncertainty should be stated for them.
+Result on the committed evidence: V1 is better beyond the spread on both hemispheres, pooled; V2 is not distinguishable from the header-only placement. So the cortex asset carries `position_check: "checked in aggregate"` (shown for the cortex as a whole, not for each fold) and deep Allen shapes carry `"not independently checked"`, with the V2 check recorded as `not_distinguishable`. The deep shapes are warped all the same, so that one transform keeps them coherent with the adjacent gyri; atlases disagree by 1 to 2 mm there whatever is done. A check that reads `fail` stops the build; none is exempt.
+
+Labels are resampled nearest-neighbour through the transform, not by argmax over one-hot maps.
 
 ## Size classes
 
@@ -87,6 +92,7 @@ atlas_pipeline/
   registration.py        compute, archive check, apply (volumes only)
   meshing.py  glb.py
   checks.py  evidence.py  overlap.py
+  codehash.py  registration_settings.py   standard library only
   build.py  manifest.py  notices.py  outputs.py  overlays.py  cli.py
 tests/                   pytest, synthetic fixtures only
 ```
