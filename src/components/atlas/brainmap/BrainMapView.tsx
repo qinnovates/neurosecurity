@@ -1,7 +1,7 @@
 /**
  * BrainMapView — SIEM-style Brain Security Dashboard.
  *
- * Layout: Hourglass Spine (left) | Brain SVG (center) | Cascade Panels (right)
+ * Layout: Hourglass Spine (left) | Region list (center) | Cascade Panels (right)
  * Below: Technique x Band heatmap | Technique x DSM heatmap
  * Bottom: Selection breadcrumb bar
  *
@@ -13,7 +13,7 @@ import { useState, useMemo, useCallback } from 'react';
 import type { ClinicalData } from '../../../lib/clinical-data';
 import { THREAT_VECTORS } from '../../../lib/threat-data';
 import HourglassSpine from './HourglassSpine';
-import BrainSvg from './BrainSvg';
+import RegionPicker from './RegionPicker';
 import CascadePanelStack from './CascadePanelStack';
 import HeatmapMatrix from './HeatmapMatrix';
 import BreadcrumbBar from './BreadcrumbBar';
@@ -189,7 +189,7 @@ export default function BrainMapView({ data }: Props) {
           />
         </div>
 
-        {/* Center: Brain SVG */}
+        {/* Center: region list */}
         <div className="rounded-xl p-3"
           style={{
             background: 'var(--color-bg-secondary)',
@@ -197,9 +197,9 @@ export default function BrainMapView({ data }: Props) {
           }}>
           <div className="text-[10px] font-mono uppercase tracking-wider mb-1 text-center"
             style={{ color: 'var(--color-text-faint)' }}>
-            Neural Topology (Medial View)
+            Brain regions by band
           </div>
-          <BrainSvg
+          <RegionPicker
             regions={data.regions}
             selectedRegionId={selectedRegionId}
             highlightedRegionIds={highlightedRegionIds}
@@ -254,7 +254,7 @@ export default function BrainMapView({ data }: Props) {
 
       <div className="text-[9px] font-mono text-center"
         style={{ color: 'var(--color-text-faint)' }}>
-        Heatmap hover highlights corresponding brain regions above. Top {topTechniqueIds.length} techniques by NISS score.
+        Heatmap hover outlines regions in the technique&rsquo;s bands above; the data ties a technique to bands, not to single regions. Top {topTechniqueIds.length} techniques by NISS score.
       </div>
     </div>
   );

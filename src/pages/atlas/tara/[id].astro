@@ -1,7 +1,7 @@
 ---
 import { statusToEvidenceTier } from '../../../lib/evidence-tiers';
 import PageLayout from '@/layouts/PageLayout.astro';
-import BrainVisualization from '@/components/brain/BrainVisualization.tsx';
+import BandViewPanel from '@/components/brain/BandViewPanel';
 import EvidenceTierBanner from '../../../components/atlas/EvidenceTierBanner';
 import NissVectorChips from '../../../components/niss/NissVectorChips';
 import NissScoreBadge from '../../../components/niss/NissScoreBadge';
@@ -27,7 +27,7 @@ const validation = getValidationForTechnique(threat.id);
 const parent = threat.parentId ? THREAT_VECTORS.find(t => t.id === threat.parentId) ?? null : null;
 const children = getChildTechniques(threat.id);
 
-// --- Build technique-specific brain view highlighting affected bands ---
+// --- Build the band list for this technique: which bands the catalog lists for it ---
 const BRAIN_REGIONS = [
   { id: 'N7', name: 'Neocortex', description: 'PFC, M1, V1, Broca, Wernicke — executive function, language, movement, perception' },
   { id: 'N6', name: 'Limbic System', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception' },
@@ -49,19 +49,13 @@ const techniqueRegions: BrainViewRegion[] = BRAIN_REGIONS.map(region => {
   return {
     id: region.id,
     name: region.name,
-    description: isAffected
-      ? `${region.description} — targeted by ${threat.id}`
-      : region.description,
+    // The catalog lists bands for a technique, not the regions inside a band, so the description claims nothing about them.
+    description: region.description,
     color: isAffected ? accentColor : '#334155',
     intensity: isAffected ? 0.9 : 0.15,
-    stat: { label: isAffected ? 'affected' : 'not targeted', value: region.id },
+    stat: { label: isAffected ? 'listed for this technique' : 'not listed for this technique', value: '' },
     badges: isAffected ? [{ label: threat.severity, color: accentColor }] : [],
-    details: isAffected ? [{
-      id: threat.id,
-      label: threat.name,
-      href: '#',
-      color: accentColor,
-    }] : [],
+    details: [],
   };
 });
 
@@ -282,7 +276,7 @@ const hasGovernance = nr || reg;
               </span>
             ))}
           </div>
-          <BrainVisualization
+          <BandViewPanel
             client:load
             views={techniqueBrainView}
             defaultView="security"

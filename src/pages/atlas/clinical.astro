@@ -6,7 +6,7 @@ import BciKql from '@/components/bci/BciKql';
 import { getClinicalData } from '@/lib/clinical-data';
 import { getKqlTables } from '@/lib/kql-tables';
 import neurotransmitterRaw from '@shared/qif-neurotransmitters.json';
-import BrainVisualization from '@/components/brain/BrainVisualization';
+import BandViewPanel from '@/components/brain/BandViewPanel';
 import {
   getClinicalTechniques,
   getTechniquesByFdaStatus,
@@ -965,9 +965,9 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
       </div>
     </div>
 
-    <!-- Brain visualization -->
+    <!-- The seven neural bands, per view, as a list -->
     <div class="glass rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto mb-12">
-      <BrainVisualization client:only="react" views={brainViews} defaultView="clinical" />
+      <BandViewPanel client:visible views={brainViews} defaultView="clinical" />
     </div>
 
     <!-- Validation status -->

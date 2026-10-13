@@ -10,12 +10,7 @@ import { REGION_TABLE_MARK } from '@/lib/legacy-geometry-scan';
 export const RECORDED_LEGACY_GEOMETRY: Record<string, readonly string[]> = {
   'src/components/ThreatAtlasViz.tsx': [REGION_TABLE_MARK],
   'src/components/__tests__/brain-model-asset.test.ts': ['brain.glb'],
-  'src/components/atlas/brainmap/BrainSvg.tsx': ['BRAIN_REGION_COORDS', 'brain-regions module'],
-  'src/components/atlas/brainmap/brain-regions.ts': ['BRAIN_REGION_COORDS', REGION_TABLE_MARK],
-  'src/components/brain/BrainVisualization.tsx': ['REGION_HOTSPOTS', 'brain.glb', REGION_TABLE_MARK],
   'src/components/neurosim/NeuroSIM.tsx': ['REGION_3D_POS', 'brain.glb', REGION_TABLE_MARK],
-  'src/components/threat-model/TargetRegionsPanel.tsx': ['BRAIN_REGION_COORDS', 'brain-regions module'],
-  'src/lib/threat-model/__tests__/target-regions.test.ts': ['BRAIN_REGION_COORDS', 'brain-regions module'],
   'src/scripts/strip-glb-textures.mjs': ['brain.glb'],
   'src/site/_astro/BrainVisualization.DCSk5yMy.js': ['brain.glb', REGION_TABLE_MARK],
   'src/site/brain-capture.html': ['brain.glb', REGION_TABLE_MARK],
@@ -34,7 +29,6 @@ export const RECORDED_NOT_GEOMETRY: Record<string, string> = {
 
 /** Old files that are to be deleted outright, whatever they contain. */
 export const RECORDED_LEGACY_FILES: readonly string[] = [
-  'src/components/atlas/brainmap/brain-regions.ts',
   'src/site/brain-capture.html',
   'src/site/models/brain.glb',
 ];

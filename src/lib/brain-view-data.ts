@@ -1,6 +1,6 @@
 /**
  * Brain View Data — prepares all 3 views (Security, Clinical, Governance)
- * for the unified BrainVisualization component.
+ * for the BandViewPanel component, which lists them band by band.
  *
  * All computation happens at build time (Astro frontmatter).
  * The component receives pre-computed view data as props.

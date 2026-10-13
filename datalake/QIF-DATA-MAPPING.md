@@ -235,10 +235,10 @@ brain_regions
 | Component | What It Shows | Data Sources |
 |-----------|-------------|-------------|
 | `HourglassVisualization.tsx` | 11-band stack with technique counts per band | qtara-registrar, brain-bci-atlas |
-| `BrainVisualization.tsx` | 3D brain with region hotspots, security/clinical/governance views | brain-bci-atlas, neural-pathways |
+| `BandViewPanel.tsx` | The seven neural bands as a list, in security/clinical/governance views; draws no anatomy and links to the atlas explorer | built by `src/lib/brain-view-data.ts` |
+| `atlas-scene/AtlasExplorer.tsx` | The one brain scene, from licensed atlas meshes (`/atlas/anatomy/`) | qif-anatomy-* files, fetched at run time |
 | `TaraVisualization.tsx` | Full threat atlas with filtering, sorting, NISS scores | qtara-registrar |
 | `ClinicalDashboard.tsx` | DSM-5-TR diagnostic mapping | dsm-mappings, qtara-registrar |
-| `BciDashboard.tsx` | 6-panel device explorer (specs, threats, brain, hourglass, risk, clinical) | All files |
 | `BciKql.tsx` | In-browser KQL query engine over all datasets | All files |
 | **TBD: NeurotransmitterPathwayViz** | Synthesis chains, cofactors, receptors, disruption effects | neural-pathways, neurotransmitters |
 | **TBD: SensoryModalityMap** | Non-DSM neurological outcomes by sensory modality | ICD-11 mappings (v2.0) |
