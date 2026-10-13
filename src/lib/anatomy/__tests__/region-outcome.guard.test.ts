@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { loadAnatomyBundle, loadAnatomyData } from '@/components/atlas-scene/load-anatomy-data';
 import { summariseRegionOutcome } from '../region-outcome';
+import { SOURCE_REF_STATES, checkSourceRef } from '../source-ref';
 
 /**
  * The outcome over the 38 QIF regions. These lists change only in a reviewed
@@ -10,6 +11,10 @@ import { summariseRegionOutcome } from '../region-outcome';
 const REGION_COUNT = 38;
 const OWN_SHAPE_COUNT = 22;
 const CONTAINED_REGION_IDS = ['a1', 'cerebellum_cortex', 'm1', 'pfc', 'pmc', 's1_cortex', 'sma', 'v1', 'vim', 'wernicke'];
+/** Of the contained: a larger named structure stands in for the region. */
+const NAMED_STAND_IN_REGION_IDS = ['a1', 'cerebellum_cortex', 'm1', 'pfc', 's1_cortex', 'wernicke'];
+/** Of the contained: no boundary for the region inside any shape. */
+const NO_BOUNDARY_REGION_IDS = ['pmc', 'sma', 'v1', 'vim'];
 const NO_GEOMETRY_REGION_IDS = ['cauda_equina', 'cervical_cord', 'lumbar_cord', 'reticular_formation', 'sacral_cord', 'thoracic_cord'];
 /** Has a row of its own but is too small on its source grid to outline, so it ships as a marker. */
 const MARKER_ONLY_REGION_IDS = ['vta'];
@@ -50,6 +55,23 @@ describe('the region outcome (guard)', () => {
     expect(outcome.own).toHaveLength(OWN_SHAPE_COUNT);
     expect([...outcome.contained].sort()).toEqual(CONTAINED_REGION_IDS);
     expect([...outcome.none].sort()).toEqual(NO_GEOMETRY_REGION_IDS);
+  });
+
+  it('says for every contained region whether a named structure stands in or there is no boundary at all: 6 and 4', () => {
+    expect([...outcome.containedWithNamedStandIn].sort()).toEqual(NAMED_STAND_IN_REGION_IDS);
+    expect([...outcome.containedWithNoBoundary].sort()).toEqual(NO_BOUNDARY_REGION_IDS);
+    expect(outcome.containedUnexplained).toEqual([]);
+    const unexplained = { ...data.crosswalk, rows: data.crosswalk.rows.map(({ contained_kind: _dropped, ...row }) => row) };
+    expect(summariseRegionOutcome(regionIds, unexplained, data.manifest).containedUnexplained.sort()).toEqual(CONTAINED_REGION_IDS);
+  });
+
+  it('quotes, in every row, words that are still at the place the row points to', () => {
+    const states = data.crosswalk.rows.map((row) => checkSourceRef(row.evidence.source_ref, data.documentsByFile));
+    expect(states.length).toBeGreaterThanOrEqual(OWN_SHAPE_COUNT + CONTAINED_REGION_IDS.length);
+    expect(states.filter((state) => state !== SOURCE_REF_STATES.QUOTE_FOUND)).toEqual([]);
+    const [row] = data.crosswalk.rows;
+    expect(checkSourceRef({ ...row.evidence.source_ref, quote: 'words that are not there' }, data.documentsByFile)).toBe(SOURCE_REF_STATES.QUOTE_MISSING);
+    expect(checkSourceRef({ ...row.evidence.source_ref, pointer: '/labels/0/name' }, data.documentsByFile)).toBe(SOURCE_REF_STATES.POINTER_UNRESOLVED);
   });
 
   it('draws every row from a buildable atlas, and gives every region without geometry a reason and its source', () => {

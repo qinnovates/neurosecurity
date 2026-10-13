@@ -18,6 +18,15 @@ describe('parseCrosswalk: file shape', () => {
     expect(parseCrosswalk(buildCrosswalkFile(), CONTEXT).rows).toHaveLength(1);
   });
 
+  it('lets only a contained row say why it has no shape of its own', () => {
+    const contained = { ...buildRow(), extent_match: 'contained' };
+    const parseRows = (rows: unknown[]) => parseCrosswalk(buildCrosswalkFile({ rows: rows as never }), CONTEXT).rows;
+    expect(parseRows([{ ...contained, contained_kind: 'named_stand_in' }])[0].contained_kind).toBe('named_stand_in');
+    expect(parseRows([contained])[0].contained_kind).toBeUndefined();
+    expect(() => parseRows([{ ...buildRow(), extent_match: 'approximate', contained_kind: 'no_boundary' }])).toThrow(/contained_kind: only a row graded "contained"/);
+    expect(() => parseRows([{ ...contained, contained_kind: 'somewhere' }])).toThrow(/contained_kind/);
+  });
+
   it('accepts a file with no rows', () => {
     expect(parseCrosswalk(buildCrosswalkFile({ rows: [], no_geometry: [NO_GEOMETRY_RECORD] }), CONTEXT).no_geometry).toHaveLength(1);
   });

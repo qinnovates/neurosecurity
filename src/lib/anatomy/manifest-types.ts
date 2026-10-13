@@ -18,17 +18,24 @@ export const SIZE_CLASSES = ['resolved', 'coarse', 'unresolved', 'not_drawn'] as
 export type SizeClass = typeof SIZE_CLASSES[number];
 export const MESHLESS_SIZE_CLASSES: readonly SizeClass[] = ['unresolved', 'not_drawn'];
 
-/** Set only from checks that are independent of what a registration optimises. */
-export const POSITION_CHECKS = ['independently checked', 'not independently checked', 'failed'] as const;
+/**
+ * Set only from checks that are independent of what a registration optimises.
+ * `checked in aggregate`: an independent measure pooled over the whole asset passed; it was not shown for each shape.
+ */
+export const POSITION_CHECKS = ['independently checked', 'checked in aggregate', 'not independently checked', 'failed'] as const;
 export type PositionCheck = typeof POSITION_CHECKS[number];
 
 export const CHECK_IDS = ['K0', 'K1', 'K2', 'K4', 'K5', 'K6', 'K7', 'K8', 'K9', 'V1', 'V2'] as const;
 export type CheckId = typeof CHECK_IDS[number];
 
-export const CHECK_RESULTS = ['pass', 'fail', 'not_run'] as const;
+/** `not_distinguishable`: the check ran and could not tell the result from doing nothing. It is neither a pass nor a failure, and must say why. */
+export const CHECK_RESULTS = ['pass', 'fail', 'not_run', 'not_distinguishable'] as const;
+/** Outcomes that must carry a reason. */
+export const CHECK_RESULTS_NEEDING_REASON: readonly CheckResult[] = ['not_run', 'not_distinguishable'];
 export type CheckResult = typeof CHECK_RESULTS[number];
 
-export const HEMISPHERE_RECORDS = ['separate', 'mirrored', 'unknown'] as const;
+/** `not_applicable`: the shape is not a delineated structure with sides (a whole-brain outline). */
+export const HEMISPHERE_RECORDS = ['separate', 'mirrored', 'unknown', 'not_applicable'] as const;
 export type HemisphereRecord = typeof HEMISPHERE_RECORDS[number];
 
 export const PIPELINE_STAGES = ['fetch', 'register', 'resample', 'mesh', 'write'] as const;
@@ -134,6 +141,8 @@ export interface AssetManifest {
   pipeline_code_hash: string;
   integrity_note: string;
   assets: ManifestAsset[];
+  /** Files written beside the assets (notices, licence text, label tables): path under atlas-assets/ -> sha256. */
+  support_files?: Record<string, string>;
 }
 
 /** What the manifest is checked against: the registry, and what each source may do today. */

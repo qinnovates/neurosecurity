@@ -1,7 +1,10 @@
+import pytest
+
+pytest.importorskip("numpy", reason="needs the imaging stack; skipped where only the standard library is installed")
+
 import json
 
 import numpy as np
-import pytest
 
 from atlas_pipeline.glb import GlbNode, read_glb, write_glb
 

@@ -10,7 +10,7 @@ import {
   childOf, failAt, itemOf, readEnum, readInteger, readList, readRecord, readString, readStringList, rejectDuplicates, rootOf,
   show, type FieldLocation,
 } from './field-readers';
-import { readSchemaVersion, readSha256 } from './format-readers';
+import { readSchemaVersion, readSha256, requireSha256 } from './format-readers';
 import { LICENCE_FACTS } from './licence-rules';
 import {
   ASSET_KINDS, POSITION_CHECKS,
@@ -148,10 +148,22 @@ function parseAsset(value: unknown, location: FieldLocation, context: ManifestCo
   };
 }
 
+const SUPPORT_FILE_PATTERN = /^(open|by-sa)\/(NOTICE\.txt|LICENSE\.txt|labels-[a-z0-9_]+\.json)$/;
+
+/** Notices, licence text and label tables written beside the assets, each with the sha256 the pipeline wrote. */
+function readSupportFiles(value: unknown, location: FieldLocation): Record<string, string> {
+  if (!isRecord(value)) return failAt(location, 'expected file paths with their sha256 digests', 'Rebuild the manifest with the pipeline.');
+  return Object.fromEntries(Object.entries(value).map(([path, digest]) => {
+    if (!SUPPORT_FILE_PATTERN.test(path)) failAt(childOf(location, path), 'not a notice, licence text or label table path', 'Only open/ and by-sa/ NOTICE.txt, LICENSE.txt and labels-<atlas>.json are listed here.');
+    return [path, requireSha256(digest, childOf(location, path))];
+  }));
+}
+
 export function parseManifest(raw: unknown, context: ManifestContext): AssetManifest {
   const root = rootOf(MANIFEST_FILE);
   const record = readRecord(raw, root, {
     required: ['schema_version', 'template_space', 'units', 'axes', 'pipeline_code_hash', 'integrity_note', 'assets'],
+    optional: ['support_files'],
   });
   const schemaVersion = readSchemaVersion(record, root, MANIFEST_SCHEMA_VERSION);
   if (record.template_space !== context.declaredSpace) {
@@ -168,5 +180,6 @@ export function parseManifest(raw: unknown, context: ManifestContext): AssetMani
     pipeline_code_hash: readSha256(record, 'pipeline_code_hash', root),
     integrity_note: readString(record, 'integrity_note', root, MAX_TEXT_LENGTH),
     assets,
+    ...(record.support_files === undefined ? {} : { support_files: readSupportFiles(record.support_files, childOf(root, 'support_files')) }),
   };
 }

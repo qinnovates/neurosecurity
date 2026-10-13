@@ -5,37 +5,26 @@ changes nothing.
 """
 from __future__ import annotations
 
-import hashlib
 import json
 import pathlib
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from . import notices, registration
-from .build import BuiltAsset
-from .sources import PIPELINE_DIR, Registry, effective_license_id, output_folder, registry_file
+from . import notices
+from .codehash import digest, sha256_of_bytes
+from .registration_settings import flat_parameters
+from .sources import Registry, effective_license_id, output_folder
+
+if TYPE_CHECKING:
+    from .build import BuiltAsset
 
 MANIFEST_SCHEMA_VERSION = 2
 LABEL_TABLE_SCHEMA_VERSION = 1
 HASH_PREFIX_LENGTH = 12
 INTEGRITY_NOTE = "Hashes show the files were delivered unchanged. They do not prove where a file came from."
-CODE_HASH_FILES = ("atlas_build.py", "requirements.txt", "registry/pipeline-inputs.json")
 NOT_INDEPENDENTLY_CHECKED = "not independently checked"
-INDEPENDENTLY_CHECKED = "independently checked"
+CHECKED_IN_AGGREGATE = "checked in aggregate"
 MIRROR_REASON = "one hemisphere was drawn and the right side is its mirror, so side is assigned by construction"
 SPLIT_REASON = "both sides share one map with no side ids, so side is assigned by construction at x = 0"
-
-
-def digest(value: Any) -> str:
-    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
-
-
-def pipeline_code_hash() -> str:
-    paths = sorted((PIPELINE_DIR / "atlas_pipeline").glob("*.py")) + [PIPELINE_DIR / name for name in CODE_HASH_FILES]
-    hasher = hashlib.sha256()
-    for path in paths:
-        hasher.update(path.relative_to(PIPELINE_DIR).as_posix().encode("utf-8"))
-        hasher.update(path.read_bytes())
-    return hasher.hexdigest()
 
 
 def _check(check_id: str, status: str, measured: float | None, threshold: float | None, reason: str | None = None) -> dict[str, Any]:
@@ -46,16 +35,20 @@ def _check(check_id: str, status: str, measured: float | None, threshold: float 
 
 
 def _differential(check_id: str, outcomes: list[dict[str, Any]], what: str) -> dict[str, Any]:
-    """A V1 or V2 row: the smallest gain over header-only placement against the largest spread across settings."""
+    """A V1 or V2 row: the smallest gain over header-only placement against the largest spread across settings.
+
+    Pass only when every comparison is better beyond the spread; fail when any is worse beyond it; otherwise
+    the check could not tell the registration from none, which is its own outcome and not a failure.
+    """
     measured, threshold = min(row["gain_min"] for row in outcomes), max(row["spread"] for row in outcomes)
-    better = all(row["outcome"] == "better" for row in outcomes)
     counts = {name: sum(row["outcome"] == name for row in outcomes) for name in ("better", "not_distinguishable", "worse")}
-    return _check(check_id, "pass" if better else "fail", measured, threshold,
-                  f"{what}: {counts['better']} better, {counts['not_distinguishable']} not distinguishable, {counts['worse']} worse than the "
-                  "header-only placement, judged against the spread across three registration settings")
+    status = "fail" if counts["worse"] else "pass" if counts["better"] == len(outcomes) else "not_distinguishable"
+    return _check(check_id, status, measured, threshold,
+                  f"{what}: {counts['better']} better, {counts['not_distinguishable']} not distinguishable, {counts['worse']} worse than "
+                  "header-only placement, judged against the spread across three registration parameter settings")
 
 
-def asset_checks(built: BuiltAsset, evidence: dict[str, Any] | None) -> tuple[list[dict[str, Any]], str]:
+def asset_checks(built: "BuiltAsset", evidence: dict[str, Any] | None) -> tuple[list[dict[str, Any]], str]:
     """The manifest's check rows for one asset, and the position check they support."""
     plan, kind, source_id = built.plan, built.plan["kind"], built.plan["source"]
     rows = [_check("K0", "pass", None, None, "; ".join(f"{h['file']}: axes {h['axis_codes']}, determinant sign {h['determinant_sign']}, "
@@ -83,20 +76,21 @@ def asset_checks(built: BuiltAsset, evidence: dict[str, Any] | None) -> tuple[li
             folding = evidence["folding"]
             rows.append(_check("K4", "pass" if folding["non_positive_voxels_in_mask"] == 0 else "fail", float(folding["non_positive_voxels_in_mask"]), 0.0,
                                "voxels in the brain mask where the warp's Jacobian determinant is not positive"))
-            v1 = _differential("V1", list(registration_evidence["outcomes"]["v1_grey_matter_share"].values()), "grey-matter share of gyral labels per hemisphere")
+            v1 = _differential("V1", list(registration_evidence["outcomes"]["v1_grey_matter_share"].values()),
+                               "grey-matter share of gyral labels, pooled per hemisphere")
             v2 = _differential("V2", list(registration_evidence["outcomes"]["v2_hd95_mm"].values()), "95th-percentile surface distance to CIT168 shapes per side")
             if plan["layer"] == "cortical":
                 rows.append(v1)
-                position = INDEPENDENTLY_CHECKED if v1["status"] == "pass" else NOT_INDEPENDENTLY_CHECKED
+                position = CHECKED_IN_AGGREGATE if v1["status"] == "pass" else NOT_INDEPENDENTLY_CHECKED
             else:
                 rows.append(v2)
     return rows, position
 
 
-def asset_record(built: BuiltAsset, registry: Registry, evidence: dict[str, Any] | None, code_hash: str) -> dict[str, Any]:
+def asset_record(built: "BuiltAsset", registry: Registry, evidence: dict[str, Any] | None, code_hash: str) -> dict[str, Any]:
     plan, source_id = built.plan, built.plan["source"]
     source, verdict = registry.sources[source_id], registry.verdicts[source_id]
-    sha256 = hashlib.sha256(built.glb).hexdigest()
+    sha256 = sha256_of_bytes(built.glb)
     transform = registry.inputs["transforms"].get(plan.get("transform", ""))
     computed_with = [] if transform is None else sorted({transform["moving_source"], transform["fixed_source"]} - {source_id})
     used_names = [plan[key] for key in ("file", "names_file") if key in plan]
@@ -110,7 +104,7 @@ def asset_record(built: BuiltAsset, registry: Registry, evidence: dict[str, Any]
     register_stage = None if transform is None else {
         "archive_sha256": {row["name"]: row["sha256"] for row in transform["archive"]}, "setting": transform["setting"],
         "tool": transform["tool"], "tool_version": transform["tool_version"], "seed": transform["random_seed"],
-        "parameters": _flat(registration.SETTINGS[transform["setting"]]),
+        "parameters": flat_parameters(transform["setting"]),
     }
     stages = {"fetch": fetched, "register": register_stage, "resample": digest([fetched, register_stage, plan]),
               "mesh": digest([plan, code_hash]), "write": sha256}
@@ -128,15 +122,15 @@ def asset_record(built: BuiltAsset, registry: Registry, evidence: dict[str, Any]
     }
 
 
-def _flat(parameters: dict[str, Any]) -> dict[str, Any]:
-    """Registration parameters as text, numbers or booleans; a schedule such as (40, 20, 10) becomes "40x20x10"."""
-    return {key: ("x".join(str(item) for item in value) if isinstance(value, tuple) else value) for key, value in parameters.items()}
-
-
 def library_versions() -> dict[str, str]:
     from importlib import metadata
 
     return {name: metadata.version(name) for name in ("nibabel", "numpy", "scipy", "scikit-image", "fast-simplification", "antspyx")}
+
+
+def failed_checks(records: list[dict[str, Any]]) -> list[str]:
+    """Every check that reads `fail`, on any asset. None is exempt: a failed check stops the build."""
+    return [f"{record['id']} {check['id']}" for record in records for check in record["checks"] if check["status"] == "fail"]
 
 
 def label_table(atlas: str, labels: list[Any]) -> dict[str, Any]:
@@ -145,9 +139,11 @@ def label_table(atlas: str, labels: list[Any]) -> dict[str, Any]:
             "labels": [{"id": label.label_id, "name": label.name, "hemisphere": label.hemisphere} for label in unique.values()]}
 
 
-def manifest_document(registry: Registry, assets: list[dict[str, Any]], code_hash: str) -> dict[str, Any]:
+def manifest_document(registry: Registry, assets: list[dict[str, Any]], code_hash: str, support_files: dict[str, str]) -> dict[str, Any]:
+    """`support_files` maps each notice, license text and label table written beside the assets to its sha256."""
     return {"schema_version": MANIFEST_SCHEMA_VERSION, "template_space": registry.declared_space, "units": "mm", "axes": "RAS",
-            "pipeline_code_hash": code_hash, "integrity_note": INTEGRITY_NOTE, "assets": assets}
+            "pipeline_code_hash": code_hash, "integrity_note": INTEGRITY_NOTE, "assets": assets,
+            "support_files": dict(sorted(support_files.items()))}
 
 
 def write_json(path: pathlib.Path, value: Any) -> None:
