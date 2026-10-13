@@ -2,7 +2,7 @@
  * Parser for datalake/qif-anatomy-device-geometry.json: the scalp fiducials the EEG
  * layout is built from, and deep-brain-stimulation lead dimensions with the
  * sources they were read in. Dimensions are facts; no table or figure from a
- * paper is reproduced. A row is drawn only while a ledger entry covers it.
+ * paper is reproduced. A row may be drawn before review, always with its review state.
  *
  * A lead is an object with a size and no place: its row may not carry a position,
  * a target or anything else that would put it in the brain.
@@ -36,6 +36,8 @@ export interface Fiducial {
   position_mm: Point3;
   /** The rule that placed this landmark on the template head. */
   method?: string;
+  /** How far the rule can be trusted, in plain words. Shown wherever the layout is. Required once the file holds an electrode layout. */
+  confidence_note?: string;
 }
 
 /** Whether a number was read in a regulator's document or only in a review paper. */
@@ -50,9 +52,9 @@ export interface DimensionSource {
   citation: string;
   url: string;
   quote: string;
-  kind?: DimensionSourceKind;
+  kind: DimensionSourceKind;
   /** The fields of the lead row this quote states. */
-  supports?: LeadDimensionField[];
+  supports: LeadDimensionField[];
 }
 
 export interface DeviceLead {
@@ -89,26 +91,27 @@ const LEAD_KEYS = ['id', 'name', 'contacts', 'contact_length_mm', 'contact_spaci
 const PLACEMENT_KEY_PATTERN = /position|coordinate|target|trajectory|entry|tip_mm|transform|orientation|region|structure|space/i;
 
 function parseFiducial(value: unknown, location: FieldLocation): Fiducial {
-  const record = readRecord(value, location, { required: ['id', 'position_mm'], optional: ['method'] });
+  const record = readRecord(value, location, { required: ['id', 'position_mm'], optional: ['method', 'confidence_note'] });
   const fiducial: Fiducial = { id: readEnum(record, 'id', location, FIDUCIAL_IDS), position_mm: readPoint(record, location) };
-  return Object.hasOwn(record, 'method') ? { ...fiducial, method: readString(record, 'method', location, MAX_TEXT_LENGTH) } : fiducial;
+  if (Object.hasOwn(record, 'method')) fiducial.method = readString(record, 'method', location, MAX_TEXT_LENGTH);
+  if (Object.hasOwn(record, 'confidence_note')) fiducial.confidence_note = readString(record, 'confidence_note', location, MAX_TEXT_LENGTH);
+  return fiducial;
 }
 
 function parseDimensionSource(value: unknown, location: FieldLocation): DimensionSource {
-  const record = readRecord(value, location, { required: ['citation', 'url', 'quote'], optional: ['kind', 'supports'] });
-  const source: DimensionSource = {
+  const record = readRecord(value, location, { required: ['citation', 'url', 'quote', 'kind', 'supports'] });
+  const supports = readStringList(record, 'supports', location, MAX_TEXT_LENGTH).map((field, index) =>
+    (LEAD_DIMENSION_FIELDS as readonly string[]).includes(field)
+      ? field as LeadDimensionField
+      : failAt(itemOf(location, 'supports', index), `"${field}" is not a dimension of a lead`, `Use one of ${LEAD_DIMENSION_FIELDS.join(', ')}.`));
+  if (supports.length === 0) failAt(childOf(location, 'supports'), 'a source that supports nothing', 'Name the fields of the lead this quote states.');
+  return {
     citation: readString(record, 'citation', location, MAX_TEXT_LENGTH),
     url: readHttpsUrl(record, 'url', location),
     quote: readString(record, 'quote', location, MAX_TEXT_LENGTH),
+    kind: readEnum(record, 'kind', location, DIMENSION_SOURCE_KINDS),
+    supports,
   };
-  if (Object.hasOwn(record, 'kind')) source.kind = readEnum(record, 'kind', location, DIMENSION_SOURCE_KINDS);
-  if (Object.hasOwn(record, 'supports')) {
-    source.supports = readStringList(record, 'supports', location, MAX_TEXT_LENGTH).map((field, index) =>
-      (LEAD_DIMENSION_FIELDS as readonly string[]).includes(field)
-        ? field as LeadDimensionField
-        : failAt(itemOf(location, 'supports', index), `"${field}" is not a dimension of a lead`, `Use one of ${LEAD_DIMENSION_FIELDS.join(', ')}.`));
-  }
-  return source;
 }
 
 function rejectPlacement(value: unknown, location: FieldLocation): void {
@@ -119,12 +122,9 @@ function rejectPlacement(value: unknown, location: FieldLocation): void {
     'A lead here is an object with a size, drawn beside the brain. Where a lead sits is chosen for each patient from that patient\'s scans; remove the key.');
 }
 
-/** Once any source says what it supports, every dimension of the lead must be vouched for, and each source must say what kind of document it is. */
+/** Every dimension of a lead must be stated by a quoted source. */
 function rejectUnsourcedDimensions(sources: readonly DimensionSource[], location: FieldLocation): void {
-  if (!sources.some((source) => source.supports !== undefined || source.kind !== undefined)) return;
-  const unlabelled = sources.findIndex((source) => source.supports === undefined || source.kind === undefined);
-  if (unlabelled >= 0) failAt(itemOf(location, 'sources', unlabelled), 'this source does not say what it supports or what kind of document it is', 'Add "kind" and "supports" to every source of the lead.');
-  const unsourced = LEAD_DIMENSION_FIELDS.find((field) => !sources.some((source) => source.supports?.includes(field)));
+  const unsourced = LEAD_DIMENSION_FIELDS.find((field) => !sources.some((source) => source.supports.includes(field)));
   if (unsourced !== undefined) failAt(childOf(location, 'sources'), `no source states "${unsourced}"`, 'Quote the document that states it, or remove the lead.');
 }
 
@@ -170,6 +170,10 @@ export function parseDeviceGeometry(raw: unknown, declaredSpace: string): Device
   }
   if (layouts.length > 0 && fiducials.length !== FIDUCIAL_IDS.length) {
     failAt(childOf(root, 'fiducials'), 'an electrode layout needs all four landmarks', `List ${FIDUCIAL_IDS.join(', ')}.`);
+  }
+  const unqualified = layouts.length > 0 ? fiducials.findIndex((fiducial) => fiducial.confidence_note === undefined) : -1;
+  if (unqualified >= 0) {
+    failAt(itemOf(root, 'fiducials', unqualified), 'a landmark under an electrode layout must say how far its placement can be trusted', 'Add a confidence_note in plain words.');
   }
   return {
     schema_version: readSchemaVersion(record, root, DEVICE_GEOMETRY_SCHEMA_VERSION),

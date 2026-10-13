@@ -1,10 +1,12 @@
 {
   "schema_version": 1,
-  "status": "AI-drafted. No fiducial or lead dimension is drawn until a review ledger entry covers it.",
+  "status": "AI-drafted. Fiducials, electrode positions and lead dimensions are shown marked unreviewed until a review ledger entry covers them.",
   "fiducial_space": "MNI152NLin2009cAsym",
   "fiducial_set": {
     "id": "template_rules_1",
     "scalp_asset_id": "scalp",
+    "scalp_asset_sha256": "ea21cc63bb4b9b5db996fac3634e59cb9deb700cfa441ef1b255842bff810bc3",
+    "placement_digest": "c65e8cfc42d638b5b025717a1673fc590b69d0f60e5efbe4777e912638a13011",
     "method": "Placed by written rules on the average template head, by code and not by a person feeling a skull. The average blurs skin landmarks and the skin does not show the inion, so these are estimates for a person to review.",
     "drafted_by": "ai",
     "evidence": {
@@ -26,7 +28,8 @@
         85.5,
         -46.0
       ],
-      "method": "front midline point of deepest hollow between brow and nose"
+      "method": "front midline point of deepest hollow between brow and nose",
+      "confidence_note": "Moderate. The hollow between brow and nose is 4.88 mm deep on this head, so the rule has something to find. It is the hollow in the skin, not the bone suture the definition names."
     },
     {
       "id": "inion",
@@ -35,7 +38,8 @@
         -120.5,
         -29.0
       ],
-      "method": "highest back midline point, below the rearmost point, where skin-to-skull thickness reaches 1.5 times the scalp's"
+      "method": "highest back midline point, below the rearmost point, where skin-to-skull thickness reaches 1.5 times the scalp's",
+      "confidence_note": "Weak. The skin does not show the inion. This is where the tissue over the skull thickens in the average image, which is near where the neck muscles attach but is not the bone bump itself. Putting it 5.0 mm higher or lower moves the nearest electrode by up to 4.6 mm."
     },
     {
       "id": "left_preauricular",
@@ -44,7 +48,8 @@
         -28.4,
         -55.6
       ],
-      "method": "centre of the hollow in front of the ear's ridge, on the head's side surface"
+      "method": "centre of the hollow in front of the ear's ridge, on the head's side surface",
+      "confidence_note": "Weak. The rule finds a hollow 8.8 mm deep in front of the ear's ridge. That may be the notch beside the outer ear and not the point in front of the tragus that the definition names. The average image blurs the ear."
     },
     {
       "id": "right_preauricular",
@@ -53,7 +58,8 @@
         -28.6,
         -55.1
       ],
-      "method": "centre of the hollow in front of the ear's ridge, on the head's side surface"
+      "method": "centre of the hollow in front of the ear's ridge, on the head's side surface",
+      "confidence_note": "Weak. The rule finds a hollow 10.1 mm deep in front of the ear's ridge. That may be the notch beside the outer ear and not the point in front of the tragus that the definition names. The average image blurs the ear."
     }
   ],
   "electrode_layouts": [

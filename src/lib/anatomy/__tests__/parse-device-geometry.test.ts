@@ -15,7 +15,7 @@ const LEAD: DeviceLead = {
   contact_spacing_mm: 0.5,
   spacing_measure: 'edge_to_edge',
   diameter_mm: 1.27,
-  sources: [{ citation: 'Fixture summary of safety data, Table 2', url: 'https://example.org/ssed.pdf', quote: 'the electrodes are spaced 0.5 mm apart' }],
+  sources: [{ citation: 'Fixture summary of safety data, Table 2', url: 'https://example.org/ssed.pdf', quote: 'the electrodes are spaced 0.5 mm apart' , kind: 'fda_document', supports: ['contacts', 'contact_length_mm', 'contact_spacing_mm', 'spacing_measure', 'diameter_mm'] }],
   drafted_by: 'ai',
 };
 const FIDUCIAL = { id: 'nasion', position_mm: [0, 85, -40] };
@@ -66,10 +66,11 @@ const EVIDENCE = {
   claim_basis: 'analyst_inference', check_status: 'unchecked', rationale: 'Placed on the fixture head surface.',
   source_ref: { file: 'src/site/atlas-assets/manifest.json', pointer: '/assets/scalp/modification_note', quote: 'average head' },
 };
-const SET = { id: 'fixture_rules', scalp_asset_id: 'scalp', method: 'Placed by rule on the fixture head.', drafted_by: 'ai', evidence: EVIDENCE };
+const SET = { id: 'fixture_rules', scalp_asset_id: 'scalp', method: 'Placed by rule on the fixture head.', drafted_by: 'ai', evidence: EVIDENCE, scalp_asset_sha256: 'b'.repeat(64), placement_digest: 'c'.repeat(64) };
+const NOTE = 'Weak. The average blurs this landmark.';
 const FOUR_FIDUCIALS = [
-  { id: 'nasion', position_mm: [0, 85, -40], method: 'front midline hollow' }, { id: 'inion', position_mm: [0, -120, -30] },
-  { id: 'left_preauricular', position_mm: [-78, -28, -55] }, { id: 'right_preauricular', position_mm: [78, -28, -55] },
+  { id: 'nasion', position_mm: [0, 85, -40], method: 'front midline hollow', confidence_note: NOTE }, { id: 'inion', position_mm: [0, -120, -30], confidence_note: NOTE },
+  { id: 'left_preauricular', position_mm: [-78, -28, -55], confidence_note: NOTE }, { id: 'right_preauricular', position_mm: [78, -28, -55], confidence_note: NOTE },
 ];
 const LAYOUT = {
   id: '10-20', name: 'Fixture layout', scalp_asset_id: 'scalp', fiducial_set_id: 'fixture_rules', construction: 'Shares of measured arc length.', shown_by_default: true,
@@ -80,7 +81,9 @@ const FACT = {
   id: 'fixture_fact', statement: 'In one study the place varied.', citation: 'Fixture A. A study. 2009.', url: 'https://doi.org/10.1000/fixture', quote: 'a grand standard deviation',
   read_depth: 'abstract_only', drawable: false, drafted_by: 'ai',
 };
-const SOURCED = { ...LEAD.sources[0], kind: 'fda_document', supports: ['contacts', 'contact_length_mm', 'contact_spacing_mm', 'spacing_measure', 'diameter_mm'] };
+const SOURCED = LEAD.sources[0];
+const { kind: _kind, supports: _supports, ...PLAIN_SOURCE } = SOURCED;
+const SHA = 'a'.repeat(64);
 
 describe('electrode layouts, sourced facts and lead sources', () => {
   const withScalp = (overrides: Record<string, unknown> = {}): Record<string, unknown> =>
@@ -109,6 +112,13 @@ describe('electrode layouts, sourced facts and lead sources', () => {
     expect(() => parse(withScalp({ electrode_layouts: [bare] }))).toThrow(/missing key "evidence"/);
     const { evidence: _setEvidence, ...bareSet } = SET;
     expect(() => parse(withScalp({ fiducial_set: bareSet }))).toThrow(/the landmark record carries no evidence block/);
+    const { placement_digest: _digest, ...unpinned } = SET;
+    expect(() => parse(withScalp({ fiducial_set: unpinned }))).toThrow(/the landmark record does not pin the head surface it was placed on/);
+    expect(() => parse(withScalp({ fiducial_set: { ...SET, scalp_asset_sha256: 'not-a-hash' } }))).toThrow(/scalp_asset_sha256/);
+    const { confidence_note: _note, ...unqualified } = FOUR_FIDUCIALS[1];
+    expect(() => parse(withScalp({ fiducials: [FOUR_FIDUCIALS[0], unqualified, ...FOUR_FIDUCIALS.slice(2)] })))
+      .toThrow(/fiducials\[1\]: a landmark under an electrode layout must say how far its placement can be trusted/);
+    expect(parse(withScalp()).fiducials[1].confidence_note).toBe(NOTE);
     expect(() => parse(withScalp({ electrode_layouts: [{ ...LAYOUT, evidence: { ...EVIDENCE, check_status: 'verified' } }] }))).toThrow(/check_status/);
   });
 
@@ -131,11 +141,14 @@ describe('electrode layouts, sourced facts and lead sources', () => {
     expect(() => parse(buildFile({ leads: [{ ...LEAD, sources: [{ ...SOURCED, position_mm: [0, 0, 0] }] }] }))).toThrow(/unexpected key "position_mm"/);
   });
 
-  it('holds a lead whose sources say what they support to a source for every dimension, each of a stated kind', () => {
-    expect(parse(buildFile({ leads: [{ ...LEAD, sources: [SOURCED] }] })).leads[0].sources[0].kind).toBe('fda_document');
+  it('refuses a lead unless every dimension has a quoted source that says what kind of document it is', () => {
+    expect(parse(buildFile({ leads: [LEAD] })).leads[0].sources[0].kind).toBe('fda_document');
+    expect(() => parse(buildFile({ leads: [{ ...LEAD, sources: [PLAIN_SOURCE] }] }))).toThrow(/sources\[0\]: missing key "kind"/);
+    expect(() => parse(buildFile({ leads: [{ ...LEAD, sources: [{ ...PLAIN_SOURCE, kind: 'fda_document' }] }] }))).toThrow(/sources\[0\]: missing key "supports"/);
+    expect(() => parse(buildFile({ leads: [{ ...LEAD, sources: [{ ...SOURCED, supports: [] }] }] }))).toThrow(/supports: a source that supports nothing/);
+    expect(SHA).toHaveLength(64);
     const partial = { ...SOURCED, supports: ['contacts', 'contact_length_mm'] };
     expect(() => parse(buildFile({ leads: [{ ...LEAD, sources: [partial] }] }))).toThrow(/sources: no source states "contact_spacing_mm"/);
-    expect(() => parse(buildFile({ leads: [{ ...LEAD, sources: [SOURCED, LEAD.sources[0]] }] }))).toThrow(/sources\[1\]: this source does not say what it supports/);
     expect(() => parse(buildFile({ leads: [{ ...LEAD, sources: [{ ...SOURCED, kind: 'brochure' }] }] }))).toThrow(/kind/);
     expect(() => parse(buildFile({ leads: [{ ...LEAD, sources: [{ ...SOURCED, supports: ['length_to_target'] }] }] }))).toThrow(/supports\[0\]: "length_to_target" is not a dimension of a lead/);
   });

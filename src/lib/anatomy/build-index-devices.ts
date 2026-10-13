@@ -3,7 +3,7 @@
 import { readStatedTargets, type AnatomyData } from './anatomy-inputs';
 import type { IndexAsset, IndexDevices, IndexTracts } from './anatomy-index-types';
 import { AnatomyDataError } from './errors';
-import type { AssetKind } from './manifest-types';
+import type { AssetKind, ManifestAsset } from './manifest-types';
 import { DEVICE_GEOMETRY_FILE } from './parse-device-geometry';
 import { reviewOf } from './review-rows';
 import { deviceRowKey, digestDeviceRow } from './row-digest';
@@ -22,29 +22,34 @@ export function listDeviceRows(data: AnatomyData): ReviewedDeviceRow[] {
   ];
 }
 
-const REVIEWED = 'reviewed';
 const DEVICES_LAYER = 'devices';
 
 /** An electrode layout sits on a head surface. The build stops when that asset is not one the manifest ships on the devices layer. */
-function requireScalpAsset(data: AnatomyData, assetId: string, where: string): void {
+function requireScalpAsset(data: AnatomyData, assetId: string, where: string): ManifestAsset {
   const asset = data.manifest?.assets.find((candidate) => candidate.id === assetId);
   if (asset === undefined || asset.layer !== DEVICES_LAYER) {
     throw new AnatomyDataError(DEVICE_GEOMETRY_FILE, where, `"${assetId}" is not a head surface asset in the manifest`,
       'Build the head surface first, or name the asset on the devices layer that the positions were placed on.');
   }
+  return asset;
 }
 
 function buildFiducials(data: AnatomyData): IndexDevices['fiducials'] {
   return data.deviceGeometry.fiducials.map((fiducial) => ({
     id: fiducial.id,
     position_mm: fiducial.position_mm,
+    confidence_note: fiducial.confidence_note ?? null,
     review_state: reviewOf(data, deviceRowKey('fiducial', fiducial.id), digestDeviceRow(fiducial)),
   }));
 }
 
-function buildLayouts(data: AnatomyData, areFiducialsReviewed: boolean): IndexDevices['electrode_layouts'] {
+/**
+ * A layout may be drawn before review, with its review state. What it may not be is drawn on another head:
+ * it is drawable only while the shipped head surface is the file its positions were placed on.
+ */
+function buildLayouts(data: AnatomyData): IndexDevices['electrode_layouts'] {
   return data.deviceGeometry.electrode_layouts.map((layout, index) => {
-    requireScalpAsset(data, layout.scalp_asset_id, `electrode_layouts[${index}].scalp_asset_id`);
+    const scalp = requireScalpAsset(data, layout.scalp_asset_id, `electrode_layouts[${index}].scalp_asset_id`);
     const reviewState = reviewOf(data, deviceRowKey('electrode_layout', layout.id), digestDeviceRow(layout));
     return {
       id: layout.id,
@@ -53,7 +58,7 @@ function buildLayouts(data: AnatomyData, areFiducialsReviewed: boolean): IndexDe
       construction: layout.construction,
       shown_by_default: layout.shown_by_default,
       electrodes: layout.electrodes.map((electrode) => ({ id: electrode.id, position_mm: electrode.position_mm, also_called: electrode.also_called ?? null })),
-      drawable: areFiducialsReviewed && reviewState.state === REVIEWED,
+      drawable: scalp.sha256 === data.deviceGeometry.fiducial_set?.scalp_asset_sha256,
       review_state: reviewState,
     };
   });
@@ -70,7 +75,7 @@ function buildLeads(data: AnatomyData): IndexDevices['leads'] {
       contact_spacing_mm: lead.contact_spacing_mm,
       spacing_measure: lead.spacing_measure,
       diameter_mm: lead.diameter_mm,
-      drawable: reviewState.state === REVIEWED,
+      drawable: true,
       review_state: reviewState,
     };
   });
@@ -83,7 +88,7 @@ export function buildDevices(data: AnatomyData): IndexDevices {
     fiducial_space: data.deviceGeometry.fiducial_space,
     fiducial_method: data.deviceGeometry.fiducial_set?.method ?? null,
     fiducials,
-    electrode_layouts: buildLayouts(data, fiducials.length > 0 && fiducials.every((fiducial) => fiducial.review_state.state === REVIEWED)),
+    electrode_layouts: buildLayouts(data),
     leads: buildLeads(data),
     facts: data.deviceGeometry.facts.map((fact) => ({ id: fact.id, statement: fact.statement, citation: fact.citation, url: fact.url, read_depth: fact.read_depth })),
     stated_targets: readStatedTargets(data.atlas, regionIds),

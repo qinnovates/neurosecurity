@@ -11,7 +11,7 @@ export const VERDICTS_STATUS = 'AI-drafted licence readings, made by AI and not 
 export const CROSSWALK_STATUS = 'AI-drafted. No neuroanatomist has checked these correspondences.';
 export const TECHNIQUE_REGIONS_STATUS = 'AI-drafted. Links are a reading of the catalog\'s own words, not new evidence.';
 export const REVIEW_LEDGER_STATUS = 'Review ledger. Only the repository owner adds entries. An entry counts only while its digest matches what was reviewed.';
-export const DEVICE_GEOMETRY_STATUS = 'AI-drafted. No fiducial or lead dimension is drawn until a review ledger entry covers it.';
+export const DEVICE_GEOMETRY_STATUS = 'AI-drafted. Fiducials, electrode positions and lead dimensions are shown marked unreviewed until a review ledger entry covers them.';
 export const ANATOMY_INDEX_STATUS = 'AI-drafted and unreviewed unless an item says otherwise. No neuroanatomist has checked the anatomy. Licence readings were made by AI, not by a lawyer.';
 
 export function readStatus(record: Record<string, unknown>, location: FieldLocation, expected: string): string {

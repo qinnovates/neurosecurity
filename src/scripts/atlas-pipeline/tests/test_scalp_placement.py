@@ -6,7 +6,9 @@ pytest.importorskip("scipy")
 
 from solids import ellipsoid_mesh, landmarks  # noqa: E402
 
-from atlas_pipeline import arc_checks, fiducials, layout_checks  # noqa: E402
+import json  # noqa: E402
+
+from atlas_pipeline import arc_checks, devices, fiducials, layout_checks, sources  # noqa: E402
 from atlas_pipeline.electrodes import place_layout  # noqa: E402
 from atlas_pipeline.head_surface import head_mask  # noqa: E402
 from atlas_pipeline.scalp_arcs import Scalp, arc_length, fraction_of, point_at_fraction, snap_to_surface, trace_arc  # noqa: E402
@@ -112,3 +114,10 @@ def test_layout_placed_on_voxels_passes_the_separate_checker_on_a_mesh_of_the_sa
     assert {row["id"]: row["measured_crossing"]["share"] for row in arcs if "measured_crossing" in row}["ear_to_ear"] == pytest.approx(0.5, abs=0.005)
     lifted = {**electrodes, "Fz": arc_checks.add_scaled(electrodes["Fz"], (0.0, 0.0, 1.0), 5.0)}
     assert layout_checks.layout_problems(ellipsoid_mesh(radii), marks, lifted) != []
+
+
+def test_recorded_method_parameters_are_the_ones_in_the_code() -> None:
+    recorded = json.loads((sources.PIPELINE_DIR / "evidence" / "device-placement.json").read_text(encoding="utf-8"))["method_parameters"]
+    assert recorded == json.loads(json.dumps(devices.method_parameters()))
+    assert recorded["fiducials"]["THICKENING_FACTOR"] == fiducials.THICKENING_FACTOR == 1.5
+    assert recorded["head_surface"]["OTSU_SHARE"] == 0.5

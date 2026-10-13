@@ -7,6 +7,58 @@
       "bottom"
     ]
   },
+  "scalp_asset_sha256": "ea21cc63bb4b9b5db996fac3634e59cb9deb700cfa441ef1b255842bff810bc3",
+  "method_parameters": {
+    "head_surface": {
+      "CLOSING_ITERATIONS": 3,
+      "CLOSING_PAD_VOXELS": 6,
+      "FACE_NAMES": [
+        [
+          "left",
+          "right"
+        ],
+        [
+          "back",
+          "front"
+        ],
+        [
+          "bottom",
+          "top"
+        ]
+      ],
+      "OTSU_SHARE": 0.5
+    },
+    "fiducials": {
+      "BASELINE_SPAN_MM": 40,
+      "BONE_SHARE_OF_PEAK": 0.5,
+      "CONCAVITY_REACH_MM": 40,
+      "EAR_BASELINE_FILTER_MM": 41,
+      "EAR_MAP_MARGIN_MM": 25,
+      "EAR_SMOOTHING_MM": 5,
+      "EAR_WINDOW_AROUND_NASION_MM": [
+        -30,
+        30
+      ],
+      "EAR_WINDOW_BEHIND_NASION_MM": [
+        60,
+        165
+      ],
+      "MIDLINE_HALF_WIDTH_MM": 3,
+      "PIT_SHARE_OF_DEPTH": 0.5,
+      "REARMOST_BAND_MM": 0.5,
+      "SCALP_PEAK_SEARCH_MM": 14,
+      "SURFACE_LEVEL": 0.5,
+      "THICKENING_FACTOR": 1.5,
+      "TISSUE_PROBE_MM": 45
+    },
+    "scalp_arcs": {
+      "ANGLE_STEPS": 3600,
+      "RAY_LENGTH_MM": 260.0,
+      "RAY_STEP_MM": 0.25,
+      "SMOOTHING_SIGMA_VOXELS": 1.0,
+      "SURFACE_LEVEL": 0.5
+    }
+  },
   "fiducials": {
     "nasion": {
       "position_mm": [

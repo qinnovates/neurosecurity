@@ -193,6 +193,8 @@ export interface IndexTechnique {
 export interface IndexFiducial {
   id: FiducialId;
   position_mm: Point3;
+  /** How far the placement can be trusted, in plain words, AI-drafted. Shown with any layout built on the landmark. */
+  confidence_note: string | null;
   review_state: IndexReviewState;
 }
 
@@ -204,7 +206,7 @@ export interface IndexLead {
   contact_spacing_mm: number;
   spacing_measure: SpacingMeasure;
   diameter_mm: number;
-  /** A lead is drawn only while a ledger entry covers its row. */
+  /** True for every lead whose row parsed: each dimension has a quoted source. Draw it only together with `review_state`. */
   drawable: boolean;
   review_state: IndexReviewState;
 }
@@ -232,7 +234,10 @@ export interface IndexElectrodeLayout {
   construction: string;
   shown_by_default: boolean;
   electrodes: IndexElectrode[];
-  /** Drawn only while ledger entries cover the layout row and all four landmarks it was built from. */
+  /**
+   * True when the head surface the manifest ships is the file the positions were placed on, by sha256.
+   * Reviewed or not, a layout is drawn only together with `review_state` and the landmarks' confidence notes.
+   */
   drawable: boolean;
   review_state: IndexReviewState;
 }

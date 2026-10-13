@@ -105,7 +105,7 @@ def command_devices(registry: sources.Registry, sheets: bool) -> int:
     if scalp is None:
         raise PipelineError("the manifest has no head surface asset; run the build command first")
     scalp_glb = (ASSET_DIR / scalp["path"]).read_bytes()
-    document = devices.placement_document(cache_dir(), registry, scalp_glb)
+    document = devices.placement_document(cache_dir(), registry, scalp_glb, scalp["sha256"])
     manifest.write_json(PLACEMENT_PATH, document)
     devices.merge_into_geometry_file(DEVICE_GEOMETRY_PATH, devices.geometry_rows(document, SCALP_ASSET_ID))
     if sheets:

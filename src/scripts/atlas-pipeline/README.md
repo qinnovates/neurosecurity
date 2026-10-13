@@ -69,6 +69,8 @@ Labels are resampled nearest-neighbour through the transform, not by argmax over
 
 It writes `evidence/device-placement.json` (what each rule measured, the arcs, the checks on the shipped mesh, and how far the positions move when the inion is put 5 mm higher or lower) and the landmark and electrode rows of `datalake/qif-anatomy-device-geometry.json`. Lead rows and sourced facts in that file are written by hand and are kept. Review sheets go to `review/devices/` in the cache: one per landmark on the template image, and one of the layout on the mesh from five sides.
 
+The landmark record in the data file also carries the head surface's sha256 and a **placement digest** over that hash, the method's parameters and every coordinate. A standard-library test recomputes it from the committed files, so a coordinate edited by hand fails in CI. A match shows the coordinates are the ones a pipeline run wrote for this head surface. It does not show that the rules find the right anatomy; each landmark row says in its `confidence_note` how far its rule can be trusted, and three of the four read "Weak".
+
 Nothing here says what brain tissue lies under an electrode. No nearest region is computed, and a lead has sizes and sources but no position.
 
 ## Size classes

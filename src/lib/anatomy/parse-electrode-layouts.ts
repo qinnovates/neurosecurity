@@ -13,7 +13,7 @@ import {
   childOf, failAt, itemOf, readBoolean, readEnum, readList, readNumber, readRecord, readString, rejectDuplicates,
   type FieldLocation,
 } from './field-readers';
-import { readHttpsUrl, readId } from './format-readers';
+import { readHttpsUrl, readId, readSha256 } from './format-readers';
 import type { Point3 } from './manifest-types';
 
 export interface FiducialSet {
@@ -24,6 +24,10 @@ export interface FiducialSet {
   drafted_by: Drafter;
   /** What the placement rests on. Required once the file holds an electrode layout. */
   evidence?: EvidenceBlock;
+  /** The sha256 of the head surface file the placement was made on. Required once the file holds an electrode layout. */
+  scalp_asset_sha256?: string;
+  /** The pipeline's digest over that hash, the method's parameters and every coordinate. Checked by the pipeline's own tests. */
+  placement_digest?: string;
 }
 
 export interface LayoutElectrode {
@@ -78,14 +82,17 @@ export function readPoint(record: Record<string, unknown>, location: FieldLocati
 }
 
 export function parseFiducialSet(value: unknown, location: FieldLocation): FiducialSet {
-  const record = readRecord(value, location, { required: ['id', 'scalp_asset_id', 'method', 'drafted_by'], optional: ['evidence'] });
+  const record = readRecord(value, location, { required: ['id', 'scalp_asset_id', 'method', 'drafted_by'], optional: ['evidence', 'scalp_asset_sha256', 'placement_digest'] });
   const fiducialSet: FiducialSet = {
     id: readId(record, 'id', location),
     scalp_asset_id: readId(record, 'scalp_asset_id', location),
     method: readString(record, 'method', location, MAX_TEXT_LENGTH),
     drafted_by: readEnum(record, 'drafted_by', location, DRAFTERS),
   };
-  return Object.hasOwn(record, 'evidence') ? { ...fiducialSet, evidence: parseEvidence(record.evidence, childOf(location, 'evidence')) } : fiducialSet;
+  if (Object.hasOwn(record, 'evidence')) fiducialSet.evidence = parseEvidence(record.evidence, childOf(location, 'evidence'));
+  if (Object.hasOwn(record, 'scalp_asset_sha256')) fiducialSet.scalp_asset_sha256 = readSha256(record, 'scalp_asset_sha256', location);
+  if (Object.hasOwn(record, 'placement_digest')) fiducialSet.placement_digest = readSha256(record, 'placement_digest', location);
+  return fiducialSet;
 }
 
 function parseElectrode(value: unknown, location: FieldLocation): LayoutElectrode {
@@ -123,6 +130,10 @@ export function parseElectrodeLayout(value: unknown, location: FieldLocation, fi
   }
   if (fiducialSet.evidence === undefined) {
     failAt(childOf(location, 'fiducial_set_id'), 'the landmark record carries no evidence block', 'Say what the landmarks rest on in fiducial_set.evidence.');
+  }
+  if (fiducialSet.scalp_asset_sha256 === undefined || fiducialSet.placement_digest === undefined) {
+    failAt(childOf(location, 'fiducial_set_id'), 'the landmark record does not pin the head surface it was placed on',
+      'Run the pipeline\'s devices command; it writes scalp_asset_sha256 and placement_digest.');
   }
   if (layout.scalp_asset_id !== fiducialSet.scalp_asset_id) {
     failAt(childOf(location, 'scalp_asset_id'), `"${layout.scalp_asset_id}" is not the head surface the landmarks were found on ("${fiducialSet.scalp_asset_id}")`,

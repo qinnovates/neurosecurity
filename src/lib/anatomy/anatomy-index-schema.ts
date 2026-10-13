@@ -80,7 +80,7 @@ const technique = shapes.record({
 
 const devices = shapes.record({
   fiducial_space: shapes.nullable(id),
-  fiducials: shapes.list(shapes.record({ id: shapes.word(FIDUCIAL_IDS), position_mm: shapes.point, review_state: reviewState })),
+  fiducials: shapes.list(shapes.record({ id: shapes.word(FIDUCIAL_IDS), position_mm: shapes.point, confidence_note: shapes.nullable(text), review_state: reviewState })),
   fiducial_method: shapes.nullable(text),
   electrode_layouts: shapes.list(shapes.record({
     id: text, name: text, scalp_asset_id: id, construction: text, shown_by_default: shapes.boolean,

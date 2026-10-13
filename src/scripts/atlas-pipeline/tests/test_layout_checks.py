@@ -3,6 +3,7 @@
 These run in the pull-request workflow. The checker measures arcs on the mesh with code that shares
 nothing with the placement, so a layout built another way, or edited by hand, does not pass.
 """
+import copy
 import json
 import math
 
@@ -11,6 +12,7 @@ from solids import ellipsoid_mesh, landmarks
 
 from atlas_pipeline import arc_checks, layout_checks, sources
 from atlas_pipeline.layout_1020 import ARCS, ELECTRODE_ORDER, FIDUCIAL_IDS, MIRROR_PAIRS
+from atlas_pipeline.placement_digest import placement_digest
 
 ASSET_DIR = sources.REPO_ROOT / "src" / "site" / "atlas-assets"
 MANIFEST = json.loads((ASSET_DIR / "manifest.json").read_text(encoding="utf-8"))
@@ -122,6 +124,42 @@ def test_data_file_rows_are_the_placement_record_and_name_the_shipped_head() -> 
     assert LAYOUT["scalp_asset_id"] == GEOMETRY["fiducial_set"]["scalp_asset_id"] == SCALP["id"]
     assert LAYOUT["fiducial_set_id"] == GEOMETRY["fiducial_set"]["id"]
     assert all(row["drafted_by"] == "ai" for row in (GEOMETRY["fiducial_set"], LAYOUT, *GEOMETRY["leads"], *GEOMETRY["facts"]))
+
+
+def recomputed_digest(geometry: dict, scalp_sha256: str, parameters: dict) -> str:
+    return placement_digest(scalp_sha256, parameters, geometry["fiducials"], geometry["electrode_layouts"][0]["electrodes"])
+
+
+def test_committed_coordinates_are_the_ones_a_pipeline_run_bound_to_this_head_surface() -> None:
+    record = GEOMETRY["fiducial_set"]
+    assert record["scalp_asset_sha256"] == SCALP["sha256"] == PLACEMENT["scalp_asset_sha256"]
+    assert recomputed_digest(GEOMETRY, SCALP["sha256"], PLACEMENT["method_parameters"]) == record["placement_digest"]
+    assert len(PLACEMENT["method_parameters"]["fiducials"]) >= 10 and "ANGLE_STEPS" in PLACEMENT["method_parameters"]["scalp_arcs"]
+
+
+@pytest.mark.parametrize("edit", ["landmark", "electrode", "share", "head_surface", "parameter"])
+def test_any_hand_edit_breaks_the_recorded_digest(edit: str) -> None:
+    geometry, parameters, scalp_sha256 = copy.deepcopy(GEOMETRY), copy.deepcopy(PLACEMENT["method_parameters"]), SCALP["sha256"]
+    if edit == "landmark":
+        geometry["fiducials"][1]["position_mm"][2] += 0.1
+    elif edit == "electrode":
+        geometry["electrode_layouts"][0]["electrodes"][10]["position_mm"][0] += 0.1
+    elif edit == "share":
+        geometry["electrode_layouts"][0]["electrodes"][0]["share"] = 0.11
+    elif edit == "head_surface":
+        scalp_sha256 = "0" * 64
+    else:
+        parameters["fiducials"]["THICKENING_FACTOR"] = 2.0
+    assert recomputed_digest(geometry, scalp_sha256, parameters) != GEOMETRY["fiducial_set"]["placement_digest"]
+
+
+def test_every_landmark_says_how_far_it_can_be_trusted_with_the_figures_the_run_measured() -> None:
+    notes = {row["id"]: row["confidence_note"] for row in GEOMETRY["fiducials"]}
+    assert notes["nasion"].startswith("Moderate.") and all(notes[name].startswith("Weak.") for name in FIDUCIAL_IDS[1:])
+    for name in ("nasion", "left_preauricular", "right_preauricular"):
+        assert f"{PLACEMENT['fiducials'][name]['hollow_depth_mm']} mm deep" in notes[name]
+    worst = max(PLACEMENT["inion_sensitivity"]["higher"], PLACEMENT["inion_sensitivity"]["lower"])
+    assert f"up to {worst} mm" in notes["inion"]
 
 
 def test_head_note_names_the_faces_where_the_image_cuts_the_head() -> None:

@@ -5,6 +5,7 @@ import { parseAnatomyFiles } from '../anatomy-inputs';
 import { buildAnatomyBundle } from '../build-anatomy-index';
 import type { EvidenceBlock } from '../evidence';
 import { buildLeadShape } from '../lead-spans';
+import { parseAnatomyIndex } from '../parse-anatomy-index';
 import { LEAD_DIMENSION_FIELDS } from '../parse-device-geometry';
 import { SOURCE_REF_STATES, checkSourceRef } from '../source-ref';
 import { DEVICE_GEOMETRY_STATUS } from '../status-sentences';
@@ -50,13 +51,36 @@ describe('the committed device geometry (guard)', () => {
     expect(layout.electrodes.filter((electrode) => electrode.also_called !== null).map((electrode) => `${electrode.id}=${electrode.also_called}`)).toEqual(['T7=T3', 'T8=T4', 'P7=T5', 'P8=T6']);
   });
 
-  it('draws nothing until a person has reviewed it: no ledger entry covers a landmark, the layout or a lead', () => {
+  it('may draw every row before review, and never hands out a drawable row without its unreviewed state', () => {
     expect(data.deviceGeometry.status).toBe(DEVICE_GEOMETRY_STATUS);
-    expect(index.devices.electrode_layouts.map((layout) => layout.drawable)).toEqual([false]);
-    expect(index.devices.leads.map((lead) => lead.drawable)).toEqual([false, false, false]);
-    const states = [...index.devices.fiducials, ...index.devices.electrode_layouts, ...index.devices.leads].map((row) => row.review_state.state);
-    expect(new Set(states)).toEqual(new Set(['ai_drafted_unreviewed']));
-    expect(states).toHaveLength(4 + 1 + 3);
+    expect(index.devices.electrode_layouts.map((layout) => layout.drawable)).toEqual([true]);
+    expect(index.devices.leads.map((lead) => lead.drawable)).toEqual([true, true, true]);
+    const rows = [...index.devices.fiducials, ...index.devices.electrode_layouts, ...index.devices.leads];
+    expect(rows.map((row) => row.review_state)).toEqual(Array.from({ length: 4 + 1 + 3 }, () => ({ state: 'ai_drafted_unreviewed', mark: 'AI-drafted, unreviewed' })));
+    for (const section of ['fiducials', 'electrode_layouts', 'leads'] as const) {
+      for (const position of index.devices[section].keys()) {
+        const stripped = structuredClone(index) as unknown as { devices: Record<string, Array<Record<string, unknown>>> };
+        delete stripped.devices[section][position].review_state;
+        expect(() => parseAnatomyIndex(stripped), `${section}[${position}]`).toThrow(/missing key "review_state"/);
+        const unmarked = structuredClone(index) as unknown as { devices: Record<string, Array<{ review_state: { mark: string } }>> };
+        unmarked.devices[section][position].review_state.mark = 'Reviewed';
+        expect(() => parseAnatomyIndex(unmarked), `${section}[${position}]`).toThrow(/review_state\.mark/);
+      }
+    }
+  });
+
+  it('stops drawing the layout when the shipped head surface is not the file it was placed on', () => {
+    expect(data.deviceGeometry.fiducial_set?.scalp_asset_sha256).toBe(data.manifest?.assets.find((asset) => asset.id === 'scalp')?.sha256);
+    const moved = { ...data, deviceGeometry: { ...data.deviceGeometry, fiducial_set: { ...data.deviceGeometry.fiducial_set, scalp_asset_sha256: 'f'.repeat(64) } } } as typeof data;
+    expect(buildAnatomyBundle(moved).index.devices.electrode_layouts.map((layout) => layout.drawable)).toEqual([false]);
+  });
+
+  it('says in plain words how far each landmark can be trusted, and calls the weak ones weak', () => {
+    const notes = Object.fromEntries(index.devices.fiducials.map((fiducial) => [fiducial.id, fiducial.confidence_note ?? '']));
+    expect(notes.nasion).toMatch(/^Moderate\./);
+    for (const id of ['inion', 'left_preauricular', 'right_preauricular']) expect(notes[id], id).toMatch(/^Weak\./);
+    expect(notes.left_preauricular).toMatch(/may be the notch beside the outer ear/);
+    expect(notes.inion).toMatch(/skin does not show the inion/);
   });
 
   it('gives no electrode or lead a brain region, and adds no device-to-region link of its own', () => {
@@ -71,8 +95,7 @@ describe('the committed device geometry (guard)', () => {
   it('carries each lead as sizes with a source for every one of them, and nothing that places it', () => {
     expect(data.deviceGeometry.leads.map((lead) => lead.id)).toEqual(Object.keys(LEAD_CONTACT_SPANS_MM));
     for (const lead of data.deviceGeometry.leads) {
-      for (const field of LEAD_DIMENSION_FIELDS) expect(lead.sources.some((source) => source.supports?.includes(field)), `${lead.id} ${field}`).toBe(true);
-      expect(lead.sources.every((source) => source.kind !== undefined)).toBe(true);
+      for (const field of LEAD_DIMENSION_FIELDS) expect(lead.sources.some((source) => source.supports.includes(field)), `${lead.id} ${field}`).toBe(true);
       expect(buildLeadShape(lead).contact_span_mm).toBe(LEAD_CONTACT_SPANS_MM[lead.id as keyof typeof LEAD_CONTACT_SPANS_MM]);
     }
     expect(listKeys(index.devices.leads).filter((key) => /position|mm$/.test(key) && !/^(contact_length_mm|contact_spacing_mm|diameter_mm)$/.test(key))).toEqual([]);
