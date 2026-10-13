@@ -33,9 +33,9 @@ describe('explorerReducer', () => {
     expect(apply([{ type: 'lens_subject_chosen', kind: 'stated_targets', subjectId: 'device-a' }]).lens).toEqual({ kind: 'stated_targets', deviceId: 'device-a' });
   });
 
-  it('clears the selection and the filter only when asked, and closes a rail stage toggled twice', () => {
+  it('clears the filter only when asked, and closes a rail stage toggled twice', () => {
     const state = apply([{ type: 'target_selected', target: REGION }, { type: 'filter_changed', filter: { onlyWithData: true } }, { type: 'rail_stage_toggled', stageId: 'I0' }]);
-    expect(explorerReducer(state, { type: 'selection_cleared' }).selection).toBeNull();
+    expect(explorerReducer(state, { type: 'filter_cleared' }).selection).toEqual(REGION);
     expect(explorerReducer(state, { type: 'filter_cleared' }).filter).toEqual(INITIAL_EXPLORER_STATE.filter);
     expect(explorerReducer(state, { type: 'rail_stage_toggled', stageId: 'I0' }).railStageId).toBeNull();
   });

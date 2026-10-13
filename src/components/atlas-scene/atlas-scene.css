@@ -68,7 +68,7 @@
 .atlas-layer .atlas-limit { margin-left: 0.25rem; overflow-wrap: anywhere; }
 
 /* The lens bar. The thumb slides to the active lens; it marks a choice and carries no other meaning. */
-.atlas-lenses { position: relative; display: grid; max-width: 44rem; grid-template-columns: repeat(var(--atlas-lens-count), minmax(0, 1fr)); padding: 0.1875rem; background: var(--atlas-ground); border: 1px solid var(--atlas-line-strong); border-radius: 0.625rem; }
+.atlas-lenses { position: relative; display: grid; grid-template-columns: repeat(var(--atlas-lens-count), minmax(0, 1fr)); padding: 0.1875rem; background: var(--atlas-ground); border: 1px solid var(--atlas-line-strong); border-radius: 0.625rem; }
 .atlas-lens-thumb { position: absolute; top: 0.1875rem; bottom: 0.1875rem; left: 0.1875rem; width: calc((100% - 0.375rem) / var(--atlas-lens-count)); border-radius: 0.4375rem; background: var(--atlas-accent-fill); transform: translateX(calc(var(--atlas-lens-index) * 100%)); transition: transform var(--atlas-move) var(--atlas-ease); }
 .atlas-lens { position: relative; padding: 0 0.25rem; font-weight: 600; background: transparent; border-color: transparent; overflow-wrap: anywhere; }
 .atlas-lens[aria-pressed="true"] { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
@@ -86,6 +86,7 @@
 
 /* The list beside the inspector. On a wide screen the inspector stays in view while the list scrolls. */
 .atlas-main { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: start; }
+.atlas-main-list { display: grid; gap: 1rem; min-width: 0; }
 .atlas-filterbar { display: grid; gap: 0.5rem 0.75rem; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); align-items: end; margin: 0.75rem 0 0.5rem; }
 .atlas-list-count { display: inline; margin: 0.25rem 0.75rem 0.5rem 0; color: var(--atlas-ink-soft); }
 .atlas-columns, .atlas-row { display: grid; grid-template-columns: minmax(7rem, 0.9fr) minmax(8rem, 1.3fr) minmax(8rem, 1.3fr); gap: 0 0.875rem; }

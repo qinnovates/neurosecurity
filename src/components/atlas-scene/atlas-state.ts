@@ -9,12 +9,12 @@ import { LAYER_IDS, type LayerId } from '@/lib/anatomy/source-types';
 import { DEFAULT_LENS, emptyLens, withLensSubject, type Lens, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { EMPTY_LIST_FILTER, type ListFilter } from '@/lib/atlas-explorer/region-rows';
 
-export const TARGET_KINDS = ['region', 'structure', 'bundle', 'technique', 'device', 'stage', 'electrode'] as const;
-export type TargetKind = typeof TARGET_KINDS[number];
-
-/** Something a visitor can select. The list selects regions; the 3D view will select the other kinds. */
+/**
+ * What a visitor has selected. Today that is always a region. The kind is kept in the shape so that a view which can
+ * select something else (an atlas shape, a device) adds a kind here without changing how the selection is stored.
+ */
 export interface Target {
-  kind: TargetKind;
+  kind: 'region';
   id: string;
 }
 
@@ -32,7 +32,6 @@ export interface ExplorerState {
 
 export type ExplorerAction =
   | { type: 'target_selected'; target: Target }
-  | { type: 'selection_cleared' }
   | { type: 'lens_kind_chosen'; kind: LensKind }
   | { type: 'lens_subject_chosen'; kind: LensKind; subjectId: string }
   | { type: 'layer_toggled'; layerId: LayerId }
@@ -56,7 +55,6 @@ export const INITIAL_EXPLORER_STATE: ExplorerState = {
 export function explorerReducer(state: ExplorerState, action: ExplorerAction): ExplorerState {
   switch (action.type) {
     case 'target_selected': return { ...state, selection: action.target };
-    case 'selection_cleared': return { ...state, selection: null };
     case 'lens_kind_chosen': return state.lens.kind === action.kind ? state : { ...state, lens: emptyLens(action.kind) };
     case 'lens_subject_chosen': return { ...state, lens: withLensSubject(action.kind, action.subjectId) };
     case 'layer_toggled': return { ...state, layers: { ...state.layers, [action.layerId]: !state.layers[action.layerId] } };

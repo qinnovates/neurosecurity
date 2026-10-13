@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+import { createHash } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import registrar from '@shared/qtara-registrar.json';
@@ -91,7 +92,7 @@ describe('AtlasExplorer: the inspector', () => {
   it('names the devices whose record states the region as a target, or says there are none', async () => {
     const named = await openRegion('m1');
     expect(within(named.inspector).getByRole('button', { name: 'neuralink-n1' })).toBeTruthy();
-    expect(named.inspector.querySelector('[data-limit-id="lens_stated_targets"]')).not.toBeNull();
+    expect(named.inspector.querySelector('[data-limit-id="qif_file_fact"]')?.textContent).toContain('which no expert has reviewed');
     cleanup();
     const targeted = new Set(REAL_INDEX.devices.stated_targets.flatMap((device) => device.region_ids));
     const untargeted = REAL_INDEX.subjects.find((subject) => subject.kind === 'region' && !targeted.has(subject.id))?.id ?? '';
@@ -160,7 +161,8 @@ describe('AtlasExplorer: failures', () => {
     const alert = await screen.findByRole('alert');
     expect(alert.dataset.failure).toBe('unavailable');
     expect(alert.textContent).toContain('The atlas data could not be loaded. Check your connection and try again.');
-    expect(alert.textContent).toContain(ANATOMY_INDEX_PATH);
+    expect(alert.textContent).not.toContain(ANATOMY_INDEX_PATH);
+    expect(alert.dataset.failureFile).toBe(ANATOMY_INDEX_PATH);
     expect(container.querySelector('button[data-region-id]')).toBeNull();
     serveFiles(REAL_FILES);
     fireEvent.click(screen.getByRole('button', { name: 'Try again' }));
@@ -206,7 +208,7 @@ describe('AtlasExplorer: failures', () => {
   it('keeps the inspector working when the evidence files cannot be fetched, and says which part is missing', async () => {
     const { inspector } = await openRegion(litRegionId, { ...REAL_FILES, [ANATOMY_EVIDENCE_PATH]: SERVER_ERROR, [REGION_EVIDENCE_PATH]: SERVER_ERROR });
     const alerts = within(inspector).getAllByRole('alert');
-    expect(alerts.map((alert) => alert.textContent?.split('.')[0])).toEqual(['The quoted catalog text could not be loaded', 'The literature statements could not be loaded']);
+    expect(alerts.map((alert) => alert.textContent?.split('.')[0])).toEqual(['The literature statements could not be loaded', 'The quoted catalog text could not be loaded']);
     expect(inspector.querySelectorAll('.atlas-technique').length).toBeGreaterThan(0);
     expect(inspector.querySelector('.atlas-technique blockquote')).toBeNull();
     expect(inspector.querySelector('.atlas-statement')).toBeNull();
@@ -216,11 +218,84 @@ describe('AtlasExplorer: failures', () => {
   it('refuses evidence that differs from the file the index pinned, and literature that fails its checks', async () => {
     const tampered = (REAL_FILES[ANATOMY_EVIDENCE_PATH] as string).replace('"schema_version":1', '"schema_version":1 ');
     const softened = JSON.stringify({ ...REAL_EVIDENCE, status: 'Peer reviewed.' });
-    const { inspector } = await openRegion(litRegionId, { ...REAL_FILES, [ANATOMY_EVIDENCE_PATH]: tampered, [REGION_EVIDENCE_PATH]: softened });
+    const softenedIndex = JSON.stringify({ ...REAL_INDEX, companions: REAL_INDEX.companions.map((pin) => (pin.path === REGION_EVIDENCE_PATH ? { ...pin, bytes: new TextEncoder().encode(softened).length, sha256: createHash('sha256').update(softened).digest('hex') } : pin)) });
+    const { inspector } = await openRegion(litRegionId, { ...REAL_FILES, [ANATOMY_INDEX_PATH]: softenedIndex, [ANATOMY_EVIDENCE_PATH]: tampered, [REGION_EVIDENCE_PATH]: softened });
     const alerts = within(inspector).getAllByRole('alert');
-    expect(alerts.map((alert) => alert.dataset.failure)).toEqual(['unavailable', 'invalid']);
+    expect(alerts.map((alert) => alert.dataset.failure)).toEqual(['invalid', 'out_of_step']);
+    expect(alerts[1].textContent).toContain('the page\'s files are out of step with each other');
+    expect(alerts[1].textContent).not.toContain('connection');
     expect(inspector.querySelector('.atlas-statement')).toBeNull();
     expect(inspector.querySelector('.atlas-technique blockquote')).toBeNull();
+  });
+});
+
+describe('AtlasExplorer: files that are out of step', () => {
+  const flipped = JSON.stringify({ ...REAL_EVIDENCE, rows: REAL_EVIDENCE.rows.map((row) => ({ ...row, anatomy_match: 'equal', anatomy_inferred: false })) });
+
+  it('refuses a literature file that is valid but is not the one the index pins: a flipped anatomy match never reaches the screen', async () => {
+    const { inspector } = await openRegion('ppc', { ...REAL_FILES, [REGION_EVIDENCE_PATH]: flipped });
+    expect(within(inspector).getAllByRole('alert').map((alert) => alert.dataset.failure)).toEqual(['out_of_step']);
+    expect(inspector.querySelector('.atlas-statement')).toBeNull();
+  });
+
+  it('refuses a catalog from another build whole, and a replaced H01 card', async () => {
+    const catalog = JSON.parse(REAL_FILES['/atlas/anatomy-catalog.json'] as string) as { device_stage_techniques: unknown[] };
+    serveFiles({ ...REAL_FILES, '/atlas/anatomy-catalog.json': JSON.stringify({ ...catalog, device_stage_techniques: catalog.device_stage_techniques.slice(1) }) });
+    const first = render(<AtlasExplorer />);
+    expect((await screen.findByRole('alert')).dataset.failure).toBe('out_of_step');
+    expect(first.container.querySelector('button[data-region-id]')).toBeNull();
+    cleanup();
+    const card = JSON.parse(REAL_FILES[H01_CARD_PATH] as string) as { card: { sentences: Array<{ text: string }> } };
+    card.card.sentences[0].text = 'H01 is a map of the whole human brain.';
+    serveFiles({ ...REAL_FILES, [H01_CARD_PATH]: JSON.stringify(card) });
+    render(<AtlasExplorer />);
+    const panel = (await screen.findByRole('heading', { name: 'A real sample at nanometre scale' })).parentElement as HTMLElement;
+    fireEvent.click(within(panel).getByRole('button', { name: 'About the H01 sample' }));
+    expect((await within(panel).findByRole('alert')).dataset.failure).toBe('out_of_step');
+    expect(panel.textContent).not.toContain('whole human brain');
+  });
+
+  it('refuses an index that pins no catalog', async () => {
+    serveFiles({ ...REAL_FILES, [ANATOMY_INDEX_PATH]: JSON.stringify({ ...REAL_INDEX, companions: [] }) });
+    render(<AtlasExplorer />);
+    expect((await screen.findByRole('alert')).dataset.failure).toBe('invalid');
+  });
+});
+
+describe('AtlasExplorer: what each statement and section says', () => {
+  it('renders every quote of a region word for word, with its check state, its kind and the paper\'s own term', async () => {
+    const { inspector } = await openRegion('ppc');
+    const expected = REAL_EVIDENCE.rows.filter((row) => row.region_id === 'ppc');
+    const statements = [...inspector.querySelectorAll<HTMLElement>('.atlas-statement')];
+    expected.forEach((row, index) => {
+      expect(statements[index].querySelector(':scope > blockquote')?.textContent).toBe(`\u201c${row.quote}\u201d`);
+      expect(statements[index].querySelector(`[data-limit-id="evidence_check_${row.verifier_verdict}"]`), row.pmid).not.toBeNull();
+      expect(statements[index].querySelector('[data-kind="true"]')?.textContent).toMatch(/^Finding from /);
+      expect(statements[index].querySelector('[data-anatomy-line="true"]')?.textContent).toContain(row.anatomy_as_stated);
+      expect(statements[index].querySelector('[data-limit-id="evidence_rival_view"]') !== null).toBe(row.rival_view_row);
+    });
+    expect(expected.map((row) => row.verifier_verdict)).toContain('added_in_round_2_not_seen_by_verifier');
+    expect(expected.some((row) => row.rival_view_row)).toBe(true);
+    expect(inspector.querySelector('[data-limit-id="evidence_intro"]')?.textContent).toContain('A second AI checked most quotes');
+  });
+
+  it('keeps the NISS and DSM limits beside their facts, and band-only techniques in a section of their own, folded away', async () => {
+    const { inspector } = await openRegion(litRegionId);
+    expect(inspector.querySelector('[data-fact="niss"] + [data-limit-id="lens_niss"]')).not.toBeNull();
+    expect(inspector.querySelector('[data-fact="dsm"] + [data-limit-id="lens_dsm"]')).not.toBeNull();
+    const linkedSection = within(inspector).getByRole('heading', { name: 'Techniques linked to this region' }).parentElement as HTMLElement;
+    expect(linkedSection.textContent).not.toContain('Tagged with this band only');
+    const bandOnly = within(inspector).getByRole('heading', { name: /^Tagged with this band only/ }).parentElement as HTMLElement;
+    expect(bandOnly.querySelectorAll('.atlas-chip')).toHaveLength(0);
+    fireEvent.click(within(bandOnly).getByRole('button', { name: /^Show the \d+ techniques$/ }));
+    expect(bandOnly.querySelectorAll('.atlas-chip').length).toBeGreaterThan(0);
+  });
+
+  it('puts the evidence before the technique lists in the inspector', async () => {
+    const { inspector } = await openRegion(litRegionId);
+    const headings = [...inspector.querySelectorAll('h3')].map((heading) => heading.textContent ?? '');
+    expect(headings.indexOf('Evidence from the literature')).toBeLessThan(headings.indexOf('Techniques linked to this region'));
+    expect(headings.indexOf('Evidence from the literature')).toBeGreaterThan(-1);
   });
 });
 
@@ -245,10 +320,14 @@ describe('AtlasExplorer: device stages and the H01 card', () => {
   it('lists exactly the techniques with no brain band across its four stages', async () => {
     const rail = await renderRail();
     expect([...rail.querySelectorAll<HTMLElement>('[data-stage-id]')].map((stage) => stage.dataset.stageId)).toEqual(['S3', 'S2', 'S1', 'I0']);
-    expect(rail.textContent).toContain('65 techniques carry no brain band');
+    expect(rail.textContent).toContain('65 techniques carry no brain band.');
+    expect(rail.textContent).not.toMatch(/not on a brain region|act on the device/);
+    expect(['device_stages', 'stage_tags', 'band_order'].filter((id) => rail.querySelector(`[data-limit-id="${id}"]`) === null)).toEqual([]);
     expect(openEveryStage(rail)).toEqual(deviceOnlyIds);
     expect(deviceOnlyIds).toHaveLength(65);
     expect(rail.querySelector('[data-ai-drafted]')).toBeNull();
+    expect(rail.querySelectorAll('[data-mixed="true"]')).toHaveLength(0);
+    expect(rail.textContent).not.toContain('Also carries');
   });
 
   it('opens one stage at a time and marks every drafted link it shows once mixed techniques are listed', async () => {

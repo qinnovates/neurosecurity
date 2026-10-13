@@ -27,7 +27,9 @@ describe('describeRegionUnderLens', () => {
     expect(under('hippocampus', { kind: 'technique', techniqueId: FIXTURE_IDS.bandLevelTechnique })).toMatchObject({ standing: 'no_data', value: NO_DATA_VALUE, reason: 'tagged to band N6 only; no region assessed' });
     expect(under('pfc', { kind: 'technique', techniqueId: FIXTURE_IDS.notDraftedTechnique }).reason).toBe('no region link has been drafted for this technique');
     expect(under('cord', { kind: 'technique', techniqueId: FIXTURE_IDS.linkedTechnique }).reason).toBe('the catalog\'s text does not name this region');
-    expect(under('pfc', { kind: 'technique', techniqueId: FIXTURE_IDS.deviceOnlyTechnique })).toMatchObject({ standing: 'no_data', reason: 'this technique acts on the device, not on a brain region', reviewState: null });
+    expect(under('pfc', { kind: 'technique', techniqueId: FIXTURE_IDS.deviceOnlyTechnique })).toMatchObject({ standing: 'no_data', reason: 'tagged with device stages only', reviewState: null });
+    // A technique neither file holds is not called device-only: nothing is concluded from a file's silence.
+    expect(under('pfc', { kind: 'technique', techniqueId: 'QIF-T0000' })).toMatchObject({ standing: 'no_data', reason: 'no data for this technique in this build' });
   });
 
   it('takes the highest NISS step among linked techniques and never reads an unlinked region as low', () => {
@@ -41,7 +43,7 @@ describe('describeRegionUnderLens', () => {
   it('reads a DSM cluster and a device\'s stated targets from their own records', () => {
     expect(under('pfc', { kind: 'dsm', cluster: 'cognitive_psychotic' })).toMatchObject({ standing: 'value', value: 'linked', entryCount: 1 });
     expect(under('pfc', { kind: 'dsm', cluster: 'motor_neurocognitive' }).standing).toBe('no_data');
-    expect(under('m1', { kind: 'stated_targets', deviceId: FIXTURE_IDS.device })).toMatchObject({ standing: 'value', value: 'named', reviewState: null });
+    expect(under('m1', { kind: 'stated_targets', deviceId: FIXTURE_IDS.device })).toMatchObject({ standing: 'value', value: 'listed', reviewState: null });
     expect(under('pfc', { kind: 'stated_targets', deviceId: FIXTURE_IDS.device }).standing).toBe('no_data');
   });
 

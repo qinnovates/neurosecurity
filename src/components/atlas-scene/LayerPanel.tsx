@@ -3,6 +3,7 @@ import type { IndexLayer } from '@/lib/anatomy/anatomy-index-types';
 import { limitSentence } from '@/lib/anatomy/limits-copy';
 import type { LayerId } from '@/lib/anatomy/source-types';
 import { limitForLayer } from '@/lib/atlas-explorer/limit-selection';
+import Disclosure from './Disclosure';
 import LimitNote from './LimitNote';
 
 export const LAYER_LABELS: Readonly<Record<LayerId, string>> = {
@@ -48,15 +49,21 @@ function LayerRow({ layer, isRequested, onToggle }: RowProps) {
   );
 }
 
-/** The layers of the 3D view. Present on this page so the controls and their reasons can be read without it. */
+/**
+ * The layers of the 3D view, behind one button so that controls for a view this page does not draw are not the first
+ * thing a visitor meets. Opened, every layer is there with its reason, including the ones this build cannot show.
+ */
 export default function LayerPanel({ layers, requested, onToggle }: Props) {
+  const availableCount = layers.filter((layer) => layer.available).length;
   return (
     <section className="atlas-panel atlas-layers" aria-labelledby="atlas-layers-heading">
       <h2 className="atlas-heading" id="atlas-layers-heading">Layers</h2>
       <LimitNote limit={limitSentence('layers_text_only')} />
-      <ul className="atlas-layer-list">
-        {layers.map((layer) => <LayerRow key={layer.id} layer={layer} isRequested={requested[layer.id]} onToggle={onToggle} />)}
-      </ul>
+      <Disclosure label={`Show the ${layers.length} layers (${availableCount} available in this build)`}>
+        <ul className="atlas-layer-list">
+          {layers.map((layer) => <LayerRow key={layer.id} layer={layer} isRequested={requested[layer.id]} onToggle={onToggle} />)}
+        </ul>
+      </Disclosure>
     </section>
   );
 }

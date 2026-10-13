@@ -6,7 +6,7 @@ import type { RegionDetail } from '@/lib/atlas-explorer/region-detail';
 import type { Loaded } from './explorer-data';
 import InspectorEvidence from './InspectorEvidence';
 import InspectorShapes from './InspectorShapes';
-import InspectorTechniques from './InspectorTechniques';
+import InspectorTechniques, { InspectorBandOnly } from './InspectorTechniques';
 import LimitNote from './LimitNote';
 
 interface Props {
@@ -33,7 +33,7 @@ function Devices({ detail, onChooseDevice }: { detail: RegionDetail; onChooseDev
               <li key={deviceId}><button type="button" className="atlas-chip" onClick={() => onChooseDevice(deviceId)}>{deviceId}</button></li>
             ))}
           </ul>
-          <LimitNote limit={limitSentence('lens_stated_targets')} />
+          <LimitNote limit={limitSentence('qif_file_fact')} />
         </>
       )}
     </section>
@@ -57,7 +57,7 @@ export default function RegionInspector(props: Props) {
   const { region, band } = detail;
   return (
     <section className="atlas-panel atlas-inspector" aria-labelledby="atlas-inspector-heading" key={region.id}>
-      <p className="atlas-kicker">{band === null ? 'No band' : `${band.id} ${band.name}`}</p>
+      <p className="atlas-kicker">{band === null ? 'No band' : `QIF band ${band.id}, ${band.name}`}</p>
       <h2 className="atlas-heading atlas-inspector-title" id="atlas-inspector-heading" ref={headingRef} tabIndex={-1}>{region.name}</h2>
       <button type="button" className="atlas-link-button" onClick={props.onBackToList}>Back to the list</button>
       {detail.description !== null && (
@@ -68,9 +68,10 @@ export default function RegionInspector(props: Props) {
         </section>
       )}
       <InspectorShapes detail={detail} />
-      <InspectorTechniques detail={detail} evidence={props.anatomyEvidence} onRetryEvidence={props.onRetryAnatomyEvidence} onChooseTechnique={props.onChooseTechnique} />
       <InspectorEvidence regionId={region.id} regionName={region.name} evidence={props.regionEvidence} onRetry={props.onRetryRegionEvidence} />
       <Devices detail={detail} onChooseDevice={props.onChooseDevice} />
+      <InspectorTechniques detail={detail} evidence={props.anatomyEvidence} onRetryEvidence={props.onRetryAnatomyEvidence} onChooseTechnique={props.onChooseTechnique} />
+      <InspectorBandOnly detail={detail} onChooseTechnique={props.onChooseTechnique} />
     </section>
   );
 }

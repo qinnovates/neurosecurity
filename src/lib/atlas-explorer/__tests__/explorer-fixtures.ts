@@ -58,7 +58,7 @@ export function buildFixtureIndex(overrides: Partial<AnatomyIndex> = {}): Anatom
     ],
     techniques: [
       buildTechnique(FIXTURE_IDS.linkedTechnique, { name: 'Fixture injection', band_ids: ['S1', 'N7'], niss_severity: 'low', links: [buildIndexLink('pfc', true), unlitLink, unresolvedLink] }),
-      buildTechnique(FIXTURE_IDS.bandLevelTechnique, { name: 'Fixture band-level', band_ids: ['N6'], scope: 'band_level', dsm_cluster: null }),
+      buildTechnique(FIXTURE_IDS.bandLevelTechnique, { name: 'Fixture band-level', band_ids: ['I0', 'N6'], scope: 'band_level', dsm_cluster: null }),
       buildTechnique(FIXTURE_IDS.notDraftedTechnique, { name: 'Fixture undrafted', band_ids: ['N7'], scope: 'not_drafted' }),
       buildTechnique(FIXTURE_IDS.secondLinkedTechnique, { name: 'Fixture entrainment', band_ids: ['N7'], niss_severity: 'high', dsm_cluster: 'cognitive_psychotic', links: [buildIndexLink('pfc', true)] }),
     ],

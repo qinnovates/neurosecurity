@@ -58,7 +58,9 @@ const PROJECTIONS: Array<[string, unknown]> = [
 
 describe('findAnatomyPayload', () => {
   it('uses only markers that occur in a built index or evidence file', () => {
-    const served = seed.indexJson + seed.evidenceJson + populated.indexJson + populated.evidenceJson + 'datalake/qif-anatomy-sources.json';
+    const companions = Object.values(seed.companionJsonByPath).join('');
+    expect(Object.keys(seed.companionJsonByPath)).toHaveLength(3);
+    const served = seed.indexJson + seed.evidenceJson + companions + populated.indexJson + populated.evidenceJson + 'datalake/qif-anatomy-sources.json';
     expect(ANATOMY_PAYLOAD_MARKERS.length).toBeGreaterThan(10);
     expect(ANATOMY_PAYLOAD_MARKERS.filter((marker: string) => !served.includes(marker))).toEqual([]);
   });

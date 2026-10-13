@@ -22,6 +22,8 @@ interface Props {
 }
 
 const TECHNIQUE_LENS = 'technique';
+/** The width at which the list and the inspector stop sitting side by side. Matches atlas-scene.css. */
+const STACKED_LAYOUT_QUERY = '(max-width: 960px)';
 
 /** Says a change out loud once it has happened. The first render announces nothing. */
 function useAnnouncement(message: string): string {
@@ -38,9 +40,10 @@ function useAnnouncement(message: string): string {
 }
 
 /**
- * The explorer once its data has loaded: layers, lens, the region list and the
- * inspector, then the device stages, network names and the notes on limits.
- * Tab order follows that reading order. One reducer holds the state, and the
+ * The explorer once its data has loaded. What people come for is first: the
+ * lens and the region list, with the selected region's details beside them.
+ * Then the layers of the 3D view, the device stages, network names and the
+ * notes on limits. Tab order follows that reading order. One reducer holds the state, and the
  * selection survives every lens, layer and filter change.
  */
 export default function ExplorerWorkspace({ model }: Props) {
@@ -59,10 +62,15 @@ export default function ExplorerWorkspace({ model }: Props) {
   const selectionAnnouncement = useAnnouncement(selectedRegionId === null ? '' : announceSelection(model, selectedRegionId));
   const lensAnnouncement = useAnnouncement(announceLens(model, state.lens, tally));
 
-  const selectRegion = (regionId: string, moveFocus: boolean): void => {
+  /**
+   * Focus moves to the inspector when a region is chosen from the keyboard, and also on a narrow screen, where the
+   * inspector lies below the whole list and a tap would otherwise change nothing the visitor can see.
+   */
+  const selectRegion = (regionId: string, byKeyboard: boolean): void => {
     dispatch({ type: 'target_selected', target: { kind: 'region', id: regionId } });
+    const isStacked = typeof window.matchMedia === 'function' && window.matchMedia(STACKED_LAYOUT_QUERY).matches;
     // The heading exists whether or not a region was selected before, so focus can move in the same turn.
-    if (moveFocus) requestAnimationFrame(() => inspectorHeadingRef.current?.focus());
+    if (byKeyboard || isStacked) requestAnimationFrame(() => inspectorHeadingRef.current?.focus());
   };
   const chooseSubject = (kind: LensKind, subjectId: string): void => dispatch({ type: 'lens_subject_chosen', kind, subjectId });
   const focusSelectedRow = (): void => {
@@ -72,16 +80,17 @@ export default function ExplorerWorkspace({ model }: Props) {
 
   return (
     <div className="atlas-root" data-lens={state.lens.kind}>
-      <LayerPanel layers={model.index.layers} requested={state.layers} onToggle={(layerId) => dispatch({ type: 'layer_toggled', layerId })} />
-      <LensPanel
-        model={model} lens={state.lens} tally={tally} onChooseKind={(kind) => dispatch({ type: 'lens_kind_chosen', kind })}
-        onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, true)}
-      />
       <div className="atlas-main" ref={mainRef}>
-        <StructureList
-          groups={groups} regionCount={model.regions.length} filter={state.filter} lensLabel={LENS_LABELS[state.lens.kind]} selectedRegionId={selectedRegionId}
-          onFilter={(filter) => dispatch({ type: 'filter_changed', filter })} onClearFilter={() => dispatch({ type: 'filter_cleared' })} onSelect={selectRegion}
-        />
+        <div className="atlas-main-list">
+          <LensPanel
+            model={model} lens={state.lens} tally={tally} onChooseKind={(kind) => dispatch({ type: 'lens_kind_chosen', kind })}
+            onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, true)}
+          />
+          <StructureList
+            groups={groups} regionCount={model.regions.length} filter={state.filter} lensLabel={LENS_LABELS[state.lens.kind]} selectedRegionId={selectedRegionId}
+            onFilter={(filter) => dispatch({ type: 'filter_changed', filter })} onClearFilter={() => dispatch({ type: 'filter_cleared' })} onSelect={selectRegion}
+          />
+        </div>
         <RegionInspector
           detail={detail} headingRef={inspectorHeadingRef} anatomyEvidence={anatomyEvidence.state} regionEvidence={regionEvidence.state}
           onRetryAnatomyEvidence={anatomyEvidence.retry} onRetryRegionEvidence={regionEvidence.retry}
@@ -89,6 +98,7 @@ export default function ExplorerWorkspace({ model }: Props) {
           onBackToList={focusSelectedRow}
         />
       </div>
+      <LayerPanel layers={model.index.layers} requested={state.layers} onToggle={(layerId) => dispatch({ type: 'layer_toggled', layerId })} />
       <SignalChainRail
         rail={rail} includesMixed={state.railIncludesMixed} activeStageId={state.railStageId}
         chosenTechniqueId={state.lens.kind === 'technique' ? state.lens.techniqueId : null}

@@ -4,7 +4,7 @@ import atlas from '@shared/qif-brain-bci-atlas.json';
 import { GEOMETRY_STATES } from '@/lib/anatomy/anatomy-index-types';
 import { parseRegionEvidence } from '@/lib/anatomy/parse-region-evidence';
 import { isAboutRegionItself } from '@/lib/anatomy/region-evidence-types';
-import { limitForGeometry, limitForLayer, limitForSource, limitsForEvidenceAnatomy, limitsForLens } from '../limit-selection';
+import { describeBands, limitForGeometry, limitForLayer, limitForSource, limitsForEvidenceAnatomy, limitsForLens } from '../limit-selection';
 import { buildRegionEvidenceView } from '../region-evidence-view';
 import { FIXTURE_IDS, buildFixtureModel } from './explorer-fixtures';
 
@@ -38,6 +38,9 @@ describe('limit selection', () => {
     expect(ids(limitsForLens(model, { kind: 'technique', techniqueId: null }))).toEqual(['lens_technique', 'lens_needs_subject']);
     expect(ids(limitsForLens(model, { kind: 'technique', techniqueId: FIXTURE_IDS.linkedTechnique }))).toEqual(['lens_technique']);
     expect(limitsForLens(model, { kind: 'technique', techniqueId: FIXTURE_IDS.bandLevelTechnique })[0].text).toContain('ties this technique to band N6 and names no region');
+    expect(describeBands(['N5', 'N6'])).toBe('bands N5 and N6');
+    expect(describeBands(['N4', 'N5', 'N6'])).toBe('bands N4, N5 and N6');
+    expect(ids(limitsForLens(model, { kind: 'technique', techniqueId: 'QIF-T0000' }))).toEqual(['lens_technique_unknown']);
     expect(ids(limitsForLens(model, { kind: 'technique', techniqueId: FIXTURE_IDS.notDraftedTechnique }))).toEqual(['lens_technique_not_drafted']);
     expect(ids(limitsForLens(model, { kind: 'technique', techniqueId: FIXTURE_IDS.deviceOnlyTechnique }))).toEqual(['lens_technique_device_only']);
     expect(ids(limitsForLens(model, { kind: 'dsm', cluster: null }))).toEqual(['lens_dsm', 'lens_needs_subject']);
