@@ -70,7 +70,12 @@ export default function ExplorerWorkspace({ model }: Props) {
     dispatch({ type: 'target_selected', target: { kind: 'region', id: regionId } });
     const isStacked = typeof window.matchMedia === 'function' && window.matchMedia(STACKED_LAYOUT_QUERY).matches;
     // The heading exists whether or not a region was selected before, so focus can move in the same turn.
-    if (byKeyboard || isStacked) requestAnimationFrame(() => inspectorHeadingRef.current?.focus());
+    if (!byKeyboard && !isStacked) return;
+    requestAnimationFrame(() => {
+      inspectorHeadingRef.current?.focus({ preventScroll: isStacked });
+      // Stacked, the inspector is brought to the top of the screen, so the tap visibly lands on the region's details.
+      if (isStacked) inspectorHeadingRef.current?.scrollIntoView?.({ block: 'start' });
+    });
   };
   const chooseSubject = (kind: LensKind, subjectId: string): void => dispatch({ type: 'lens_subject_chosen', kind, subjectId });
   const focusSelectedRow = (): void => {

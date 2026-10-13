@@ -160,7 +160,7 @@ describe('AtlasExplorer: failures', () => {
     const { container } = render(<AtlasExplorer />);
     const alert = await screen.findByRole('alert');
     expect(alert.dataset.failure).toBe('unavailable');
-    expect(alert.textContent).toContain('The atlas data could not be loaded. Check your connection and try again.');
+    expect(alert.textContent).toContain('Not shown: the atlas data. Loading failed. Check your connection and try again.');
     expect(alert.textContent).not.toContain(ANATOMY_INDEX_PATH);
     expect(alert.dataset.failureFile).toBe(ANATOMY_INDEX_PATH);
     expect(container.querySelector('button[data-region-id]')).toBeNull();
@@ -181,7 +181,7 @@ describe('AtlasExplorer: failures', () => {
     const { container } = render(<AtlasExplorer />);
     const alert = await screen.findByRole('alert');
     expect(alert.dataset.failure).toBe('invalid');
-    expect(alert.textContent).toContain('arrived but failed its checks, so none of it is shown');
+    expect(alert.textContent).toContain('The file arrived but failed its checks, so none of it is shown');
     expect(container.querySelector('button[data-region-id]')).toBeNull();
   });
 
@@ -208,7 +208,7 @@ describe('AtlasExplorer: failures', () => {
   it('keeps the inspector working when the evidence files cannot be fetched, and says which part is missing', async () => {
     const { inspector } = await openRegion(litRegionId, { ...REAL_FILES, [ANATOMY_EVIDENCE_PATH]: SERVER_ERROR, [REGION_EVIDENCE_PATH]: SERVER_ERROR });
     const alerts = within(inspector).getAllByRole('alert');
-    expect(alerts.map((alert) => alert.textContent?.split('.')[0])).toEqual(['The literature statements could not be loaded', 'The quoted catalog text could not be loaded']);
+    expect(alerts.map((alert) => alert.textContent?.split('.')[0])).toEqual(['Not shown: the literature statements', 'Not shown: the quoted catalog text']);
     expect(inspector.querySelectorAll('.atlas-technique').length).toBeGreaterThan(0);
     expect(inspector.querySelector('.atlas-technique blockquote')).toBeNull();
     expect(inspector.querySelector('.atlas-statement')).toBeNull();
@@ -222,7 +222,7 @@ describe('AtlasExplorer: failures', () => {
     const { inspector } = await openRegion(litRegionId, { ...REAL_FILES, [ANATOMY_INDEX_PATH]: softenedIndex, [ANATOMY_EVIDENCE_PATH]: tampered, [REGION_EVIDENCE_PATH]: softened });
     const alerts = within(inspector).getAllByRole('alert');
     expect(alerts.map((alert) => alert.dataset.failure)).toEqual(['invalid', 'out_of_step']);
-    expect(alerts[1].textContent).toContain('the page\'s files are out of step with each other');
+    expect(alerts[1].textContent).toContain('The page\'s data files are out of step with each other');
     expect(alerts[1].textContent).not.toContain('connection');
     expect(inspector.querySelector('.atlas-statement')).toBeNull();
     expect(inspector.querySelector('.atlas-technique blockquote')).toBeNull();
@@ -362,7 +362,7 @@ describe('AtlasExplorer: device stages and the H01 card', () => {
     const { container } = render(<AtlasExplorer />);
     const panel = (await screen.findByRole('heading', { name: 'A real sample at nanometre scale' })).parentElement as HTMLElement;
     fireEvent.click(within(panel).getByRole('button', { name: 'About the H01 sample' }));
-    expect((await within(panel).findByRole('alert')).textContent).toContain('The H01 card could not be loaded');
+    expect((await within(panel).findByRole('alert')).textContent).toContain('Not shown: the H01 card. Loading failed.');
     expect(container.querySelectorAll('button[data-region-id]')).toHaveLength(38);
   });
 });
