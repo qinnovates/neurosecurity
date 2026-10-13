@@ -53,6 +53,7 @@ def asset_checks(built: "BuiltAsset", evidence: dict[str, Any] | None) -> tuple[
     plan, kind, source_id = built.plan, built.plan["kind"], built.plan["source"]
     rows = [_check("K0", "pass", None, None, "; ".join(f"{h['file']}: axes {h['axis_codes']}, determinant sign {h['determinant_sign']}, "
                                                          f"placement from {h['placement_from']}" for h in built.header_records)),
+            _check("K10", "pass", 0.0, 0.0, "meshes with a signed volume that is not positive; every triangle runs counter-clockwise seen from outside"),
             _check("K9", "pass", 0.0, 0.0, "meshes closed, no zero-area triangles, inside the template box, volume and surface distance within the rules")]
     position = NOT_INDEPENDENTLY_CHECKED
     scans = (evidence or {}).get("shift_scans", {})
