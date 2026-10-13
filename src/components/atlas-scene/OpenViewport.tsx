@@ -51,7 +51,7 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, on
   const [directions, setDirections] = useState<AxisDirections | null>(null);
   const [activeView, setActiveView] = useState<CameraViewId | null>(DEFAULT_CAMERA_VIEW);
   const commands = useRef<CanvasCommands>(NO_COMMANDS);
-  const scene = useViewportScene(model, lens, layers, true);
+  const scene = useViewportScene(model, lens, layers);
   const Canvas = useMemo(() => lazy(loadCanvas), [loadCanvas]);
   const prefersLessMotion = useMemo(() => readPrefersLessMotion(), []);
 

@@ -31,13 +31,13 @@ function unionBounds(nodes: readonly DecodedNode[]): BoundsMm | null {
 }
 
 /**
- * Everything the 3D view shows, derived from the shared model, lens and layers.
- * While the view is closed it asks for no file at all.
+ * Everything the open 3D view shows, derived from the shared model, lens and
+ * layers. It exists only while the view is open, so a closed view asks for no file.
  */
-export function useViewportScene(model: ExplorerModel, lens: Lens, layers: Readonly<Record<LayerId, boolean>>, isOpen: boolean): ViewportScene {
+export function useViewportScene(model: ExplorerModel, lens: Lens, layers: Readonly<Record<LayerId, boolean>>): ViewportScene {
   const shapes = useMemo(() => buildSceneShapes(model, toColourMode(lens), layers), [model, lens, layers]);
   const assets = useMemo(() => model.index.assets.filter((asset) => shapes.some((shape) => shape.assetId === asset.id)), [model, shapes]);
-  const { states, retry } = useSceneAssets(model.index, isOpen ? assets.map((asset) => asset.id) : []);
+  const { states, retry } = useSceneAssets(model.index, assets.map((asset) => asset.id));
 
   return useMemo(() => {
     const drawnShapes = shapes.filter((shape) => states[shape.assetId]?.status === 'ready');
