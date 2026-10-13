@@ -13,6 +13,12 @@ export interface RegionOutcome {
   own: string[];
   /** Only a larger shape with no boundary for the region. */
   contained: string[];
+  /** Of the contained: a larger structure with its own name stands in (a gyrus for a cortical area). */
+  containedWithNamedStandIn: string[];
+  /** Of the contained: somewhere inside shapes that have no boundary for it at all. */
+  containedWithNoBoundary: string[];
+  /** Of the contained: a row that does not say which of the two it is. */
+  containedUnexplained: string[];
   /** A record says no buildable atlas has geometry for it. */
   none: string[];
   /** Neither a drawing row nor a no-geometry record: a hole in the crosswalk. */
@@ -25,7 +31,9 @@ const CONTAINED = 'contained';
 
 export function summariseRegionOutcome(regionIds: readonly string[], crosswalk: Crosswalk, manifest: AssetManifest | null): RegionOutcome {
   const shippedNodes = new Set((manifest?.assets ?? []).flatMap((asset) => asset.nodes.map((node) => `${node.extras.atlas}:${node.extras.label_id}`)));
-  const outcome: RegionOutcome = { own: [], contained: [], none: [], unaccounted: [], withoutShippedNode: [] };
+  const outcome: RegionOutcome = {
+    own: [], contained: [], containedWithNamedStandIn: [], containedWithNoBoundary: [], containedUnexplained: [], none: [], unaccounted: [], withoutShippedNode: [],
+  };
   for (const regionId of regionIds) {
     const rows = crosswalk.rows.filter((row) => row.subject_kind === 'region' && row.subject_id === regionId && row.draws);
     const hasRecord = crosswalk.no_geometry.some((record) => record.subject_kind === 'region' && record.subject_id === regionId);
@@ -34,7 +42,14 @@ export function summariseRegionOutcome(regionIds: readonly string[], crosswalk: 
       continue;
     }
     if (!rows.some((row) => row.atlas_ids.some((labelId) => shippedNodes.has(`${row.atlas}:${labelId}`)))) outcome.withoutShippedNode.push(regionId);
-    (rows.every((row) => row.extent_match === CONTAINED) ? outcome.contained : outcome.own).push(regionId);
+    if (!rows.every((row) => row.extent_match === CONTAINED)) {
+      outcome.own.push(regionId);
+      continue;
+    }
+    outcome.contained.push(regionId);
+    const kinds = new Set(rows.map((row) => row.contained_kind));
+    if (kinds.size !== 1 || kinds.has(undefined)) outcome.containedUnexplained.push(regionId);
+    else (kinds.has('named_stand_in') ? outcome.containedWithNamedStandIn : outcome.containedWithNoBoundary).push(regionId);
   }
   return outcome;
 }

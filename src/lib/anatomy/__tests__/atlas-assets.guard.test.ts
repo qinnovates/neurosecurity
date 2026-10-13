@@ -5,7 +5,8 @@ import { Box3, type BufferGeometry, type Mesh, type Object3D } from 'three';
 import { describe, expect, it } from 'vitest';
 import { loadAnatomyData } from '@/components/atlas-scene/load-anatomy-data';
 import {
-  BANNED_GLTF_KEYS, MANIFEST_NAME, findGeometryOnlyProblems, findHashProblems, findListingProblems, findNodeProblems, findUnknownLabelProblems, readGlbJson,
+  BANNED_GLTF_KEYS, MANIFEST_NAME, findGeometryOnlyProblems, findHashProblems, findListingProblems, findNodeProblems, findRepeatedNodeProblems,
+  findSupportFileProblems, findUnknownLabelProblems, readGlbJson,
   type LoadedNode,
 } from '../asset-guards';
 import type { LabelTable } from '../anatomy-types';
@@ -91,12 +92,47 @@ describe('asset guards on bad fixtures', () => {
     expect(findHashProblems(only, () => null)).toEqual([`${asset.path}: listed in the manifest but not on disk`]);
   });
 
-  it('fails an orphan file and a missing asset in the served folder', () => {
-    const complete = [MANIFEST_NAME, ...manifest.assets.map((item) => item.path), 'open/NOTICE.txt', 'by-sa/LICENSE.txt', 'open/labels-fixture_atlas.json'];
+  it('fails an orphan file and a missing asset, notice or label table in the served folder', () => {
+    const complete = [MANIFEST_NAME, ...manifest.assets.map((item) => item.path), ...Object.keys(manifest.support_files ?? {})];
     expect(findListingProblems(manifest, complete)).toEqual([]);
     expect(findListingProblems(manifest, [...complete, 'open/stray.glb'])).toEqual(['open/stray.glb: on disk but not in the manifest']);
     expect(findListingProblems(manifest, [...complete, 'open/volume.nii.gz'])).toEqual(['open/volume.nii.gz: on disk but not in the manifest']);
+    expect(findListingProblems(manifest, [...complete, 'open/labels-some_other_atlas.json'])).toEqual(['open/labels-some_other_atlas.json: on disk but not in the manifest']);
     expect(findListingProblems(manifest, complete.filter((item) => item !== asset.path))).toEqual([`${asset.path}: in the manifest but not on disk`]);
+    expect(findListingProblems(manifest, complete.filter((item) => item !== 'by-sa/NOTICE.txt'))).toEqual(['by-sa/NOTICE.txt: in the manifest but not on disk']);
+  });
+
+  it('fails a notice, licence text or label table that was edited by hand, removed, or never listed', () => {
+    const edited = (target: string, from: string, to: string) => (filePath: string): Uint8Array | null => {
+      const original = readAsset(filePath);
+      if (original === null || filePath !== target) return original;
+      const text = new TextDecoder().decode(original);
+      expect(text).toContain(from);
+      return new TextEncoder().encode(text.replace(from, to));
+    };
+    expect(findSupportFileProblems(manifest, readAsset)).toEqual([]);
+    for (const [target, from, to] of [
+      ['by-sa/NOTICE.txt', 'They are not legal advice.', 'A lawyer confirmed them.'],
+      ['by-sa/NOTICE.txt', 'Data were provided [in part] by the Human Connectome Project', ''],
+      ['by-sa/LICENSE.txt', 'under the same licence', 'under any licence'],
+      ['open/labels-allen_hra_3d_2020.json', 'precentral gyrus', 'postcentral gyrus'],
+      ['open/labels-neudorfer_hypothalamus.json', '"hemisphere": "left"', '"hemisphere": "right"'],
+    ]) {
+      expect(findSupportFileProblems(manifest, edited(target, from, to))).toEqual([`${target}: differs from what the pipeline wrote; regenerate it with the pipeline, do not edit it`]);
+    }
+    expect(findSupportFileProblems(manifest, (filePath) => (filePath === 'open/NOTICE.txt' ? null : readAsset(filePath)))).toEqual(['open/NOTICE.txt: listed in the manifest but not on disk']);
+    const unlisted = { ...manifest, support_files: Object.fromEntries(Object.entries(manifest.support_files ?? {}).filter(([filePath]) => filePath !== 'by-sa/NOTICE.txt' && filePath !== 'by-sa/labels-cit168_rl.json')) };
+    expect(findSupportFileProblems(unlisted, readAsset).sort()).toEqual([
+      'by-sa/NOTICE.txt: not listed in the manifest although deep-cit168 ships from that folder',
+      'by-sa/labels-cit168_rl.json: not listed in the manifest although deep-cit168 carries its labels',
+    ]);
+  });
+
+  it('fails a label that ships in two assets', () => {
+    const [first, second] = manifest.assets.filter((item) => item.nodes.length > 0);
+    const repeated = { ...manifest, assets: [first, { ...second, nodes: [...second.nodes, first.nodes[0]] }] };
+    const { atlas, label_id: labelId, hemisphere } = first.nodes[0].extras;
+    expect(findRepeatedNodeProblems(repeated)).toEqual([`${atlas}:${labelId}:${hemisphere} ships in ${first.id} and ${second.id}`]);
   });
 
   it('fails a GLB that holds more than geometry, or is not a GLB', () => {
@@ -153,6 +189,9 @@ describe('the committed atlas assets (guards)', () => {
     const listing = listServedFiles(ASSET_DIRECTORY);
     expect(listing.length).toBeGreaterThan(manifest.assets.length);
     expect(findHashProblems(manifest, readAsset)).toEqual([]);
+    expect(Object.keys(manifest.support_files ?? {}).length).toBeGreaterThanOrEqual(7);
+    expect(findSupportFileProblems(manifest, readAsset)).toEqual([]);
+    expect(findRepeatedNodeProblems(manifest)).toEqual([]);
     expect(findListingProblems(manifest, listing)).toEqual([]);
     expect(listing.filter((file) => !SERVED_EXTENSIONS.includes(path.extname(file)))).toEqual([]);
   });
@@ -188,14 +227,25 @@ describe('the committed atlas assets (guards)', () => {
     expect(nodes.filter((node) => node.size_class !== 'unresolved' && node.size_class !== 'not_drawn' && node.vertex_count === 0)).toEqual([]);
   });
 
-  it('record a mirrored hemisphere for every Allen asset and an independent position check only where one passed', () => {
+  it('record a mirrored hemisphere for every Allen asset, and say exactly what each position check showed', () => {
     const allen = manifest.assets.filter((asset) => asset.source_ids.includes('allen_hra_3d_2020'));
     expect(allen.length).toBe(2);
     expect(allen.filter((asset) => asset.delineation.hemispheres !== 'mirrored')).toEqual([]);
-    const checked = manifest.assets.filter((asset) => asset.position_check === 'independently checked');
-    expect(checked.map((asset) => asset.id)).toEqual(['cortex-allen']);
-    expect(checked.every((asset) => asset.checks.some((check) => check.id === 'V1' && check.status === 'pass'))).toBe(true);
-    expect(manifest.assets.find((asset) => asset.id === 'deep-allen')?.checks.find((check) => check.id === 'V2')?.status).toBe('fail');
+    expect(manifest.assets.filter((asset) => asset.position_check === 'independently checked')).toEqual([]);
+    const aggregate = manifest.assets.filter((asset) => asset.position_check === 'checked in aggregate');
+    expect(aggregate.map((asset) => asset.id)).toEqual(['cortex-allen']);
+    expect(aggregate.every((asset) => asset.checks.some((check) => check.id === 'V1' && check.status === 'pass'))).toBe(true);
+    expect(aggregate[0].modification_note).toContain('not for each fold');
+    const deep = manifest.assets.find((asset) => asset.id === 'deep-allen');
+    expect(deep?.checks.find((check) => check.id === 'V2')?.status).toBe('not_distinguishable');
+    expect(deep?.modification_note).toContain('was not shown to improve');
+    expect(manifest.assets.flatMap((asset) => asset.checks).filter((check) => check.status === 'fail')).toEqual([]);
+  });
+
+  it('ship the hippocampus once, in the deep asset', () => {
+    const hippocampalIds = ['12171', '12173', '12174'];
+    const holders = manifest.assets.filter((asset) => asset.nodes.some((node) => hippocampalIds.includes(node.extras.label_id))).map((asset) => asset.id);
+    expect(holders).toEqual(['deep-allen']);
   });
 });
 

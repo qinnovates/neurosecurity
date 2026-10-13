@@ -13,7 +13,6 @@ import { sha256Hex } from './row-digest';
 export const MANIFEST_NAME = 'manifest.json';
 /** Files a served folder may hold beside the manifest's assets and the per-atlas label tables. */
 export const NOTICE_FILE_NAMES = ['NOTICE.txt', 'LICENSE.txt'] as const;
-const LABEL_TABLE_PATTERN = /^(open|by-sa)\/labels-[a-z0-9_]+\.json$/;
 const GLB_MAGIC = 0x46546c67;
 const GLB_JSON_CHUNK = 0x4e4f534a;
 const GLB_HEADER_BYTES = 12;
@@ -24,6 +23,10 @@ export const BANNED_GLTF_KEYS = ['images', 'textures', 'materials', 'samplers', 
 const BOUNDS_TOLERANCE_MM = 0.05;
 const MAX_VOXEL_MM = 1.5;
 const RESCALE_SHARE = 0.08;
+
+function nodeKey(atlas: unknown, labelId: unknown, hemisphere: unknown): string {
+  return `${String(atlas)}:${String(labelId)}:${String(hemisphere)}`;
+}
 
 export interface LoadedNode {
   extras: { atlas?: unknown; label_id?: unknown; hemisphere?: unknown };
@@ -42,14 +45,45 @@ export function findHashProblems(manifest: AssetManifest, readAsset: (path: stri
   });
 }
 
-/** Files in the served folder that nothing accounts for, and manifest paths with no file. */
+/** Files in the served folder that the manifest does not list, and listed files (assets, notices, label tables) with no file. */
 export function findListingProblems(manifest: AssetManifest, listing: readonly string[]): string[] {
-  const assetPaths = new Set(manifest.assets.map((asset) => asset.path));
-  const isExpected = (path: string): boolean => path === MANIFEST_NAME || assetPaths.has(path) || LABEL_TABLE_PATTERN.test(path)
-    || NOTICE_FILE_NAMES.some((name) => path === `open/${name}` || path === `by-sa/${name}`);
-  const orphans = listing.filter((path) => !isExpected(path)).map((path) => `${path}: on disk but not in the manifest`);
-  const missing = [...assetPaths].filter((path) => !listing.includes(path)).map((path) => `${path}: in the manifest but not on disk`);
+  const expected = new Set([MANIFEST_NAME, ...manifest.assets.map((asset) => asset.path), ...Object.keys(manifest.support_files ?? {})]);
+  const orphans = listing.filter((path) => !expected.has(path)).map((path) => `${path}: on disk but not in the manifest`);
+  const missing = [...expected].filter((path) => !listing.includes(path)).map((path) => `${path}: in the manifest but not on disk`);
   return [...orphans, ...missing];
+}
+
+/**
+ * A notice, licence text or label table that is missing, was edited after the build, or is not listed at all.
+ * Every folder that holds an asset must list its notice, and every atlas with a node must list its label table.
+ */
+export function findSupportFileProblems(manifest: AssetManifest, readFile: (path: string) => Uint8Array | null): string[] {
+  const listed = manifest.support_files ?? {};
+  const problems = Object.entries(listed).flatMap(([path, digest]) => {
+    const bytes = readFile(path);
+    if (bytes === null) return [`${path}: listed in the manifest but not on disk`];
+    return sha256Hex(bytes) === digest ? [] : [`${path}: differs from what the pipeline wrote; regenerate it with the pipeline, do not edit it`];
+  });
+  for (const asset of manifest.assets) {
+    const folder = asset.path.split('/')[0];
+    if (!(`${folder}/${NOTICE_FILE_NAMES[0]}` in listed)) problems.push(`${folder}/${NOTICE_FILE_NAMES[0]}: not listed in the manifest although ${asset.id} ships from that folder`);
+    for (const atlas of new Set(asset.nodes.map((node) => node.extras.atlas))) {
+      if (!(`${folder}/labels-${atlas}.json` in listed)) problems.push(`${folder}/labels-${atlas}.json: not listed in the manifest although ${asset.id} carries its labels`);
+    }
+  }
+  return [...new Set(problems)];
+}
+
+/** An (atlas, label, hemisphere) that is a node of more than one asset: the same shape shipped twice. */
+export function findRepeatedNodeProblems(manifest: AssetManifest): string[] {
+  const owners = new Map<string, string[]>();
+  for (const asset of manifest.assets) {
+    for (const node of asset.nodes) {
+      const key = nodeKey(node.extras.atlas, node.extras.label_id, node.extras.hemisphere);
+      owners.set(key, [...(owners.get(key) ?? []), asset.id]);
+    }
+  }
+  return [...owners].filter(([, assetIds]) => assetIds.length > 1).map(([key, assetIds]) => `${key} ships in ${assetIds.join(' and ')}`);
 }
 
 /** The JSON chunk of a GLB file, or a problem saying why it could not be read. */
@@ -81,7 +115,6 @@ export function findGeometryOnlyProblems(assetPath: string, bytes: Uint8Array): 
   return problems;
 }
 
-const nodeKey = (atlas: unknown, labelId: unknown, hemisphere: unknown): string => `${String(atlas)}:${String(labelId)}:${String(hemisphere)}`;
 
 /**
  * Holds a loaded file to its manifest entry and to the label tables: the mesh

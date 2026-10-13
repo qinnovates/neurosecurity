@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { loadAnatomyData } from '@/components/atlas-scene/load-anatomy-data';
-import { ATTRIBUTION_STATEMENTS, buildAttributionEntries, listRequiredWordings } from '../build-attribution';
+import { SHARE_ALIKE_STATEMENT as CHECKED_SHARE_ALIKE_STATEMENT, LICENSE_READING_STATEMENT, SHIPPING_LICENSE_NAMES } from '../../../scripts/check-atlas-assets.mjs';
+import { ATTRIBUTION_STATEMENTS, LICENSE_LINKS, POSITION_CHECK_SENTENCES, SHARE_ALIKE_STATEMENT, buildAttributionEntries, listRequiredWordings } from '../build-attribution';
 
 const data = loadAnatomyData();
 const entries = buildAttributionEntries(data.sources, data.effectiveLicenceBySource, data.manifest);
@@ -57,5 +58,22 @@ describe('attribution for the committed assets (guard)', () => {
     expect(cit168?.license.id).toBe('cc-by-sa-4.0');
     expect(cit168?.stated_license?.id).toBe('cc-by-4.0');
     expect(entries.filter((entry) => entry.source_id !== 'cit168_rl' && entry.stated_license !== null)).toEqual([]);
+  });
+
+  it('says what each position check showed, and gives share-alike files their sentence', () => {
+    const assets = entries.flatMap((entry) => entry.assets);
+    expect(assets.find((asset) => asset.path.includes('cortex-allen'))?.position_sentence).toBe(POSITION_CHECK_SENTENCES['checked in aggregate']);
+    expect(assets.filter((asset) => !asset.path.includes('cortex-allen')).every((asset) => asset.position_sentence === POSITION_CHECK_SENTENCES['not independently checked'])).toBe(true);
+    expect(entries.filter((entry) => entry.share_alike_statement !== null).map((entry) => entry.source_id)).toEqual(['cit168_rl']);
+    expect(entries.find((entry) => entry.source_id === 'cit168_rl')?.attribution_text.endsWith('https://doi.org/10.1038/sdata.2018.63')).toBe(true);
+    expect(entries.find((entry) => entry.source_id === 'mni_icbm152_2009c_asym')?.attribution_text).toContain('10.1016/S1053-8119(09)70884-5');
+  });
+
+  it('keeps the post-build check\'s wording equal to the page\'s', () => {
+    expect(LICENSE_READING_STATEMENT).toBe(ATTRIBUTION_STATEMENTS.licenseReading);
+    expect(CHECKED_SHARE_ALIKE_STATEMENT).toBe(SHARE_ALIKE_STATEMENT);
+    for (const [licenseId, name] of Object.entries(SHIPPING_LICENSE_NAMES)) {
+      expect(LICENSE_LINKS[licenseId as keyof typeof LICENSE_LINKS].name).toBe(name);
+    }
   });
 });

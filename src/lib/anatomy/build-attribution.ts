@@ -4,7 +4,8 @@
  * notices beside the files and the tests read the same record.
  */
 
-import type { AssetManifest } from './manifest-types';
+import { LICENCE_FACTS } from './licence-rules';
+import type { AssetManifest, PositionCheck } from './manifest-types';
 import type { AnatomySource, AnatomySources, LicenceId } from './source-types';
 
 export interface LicenseLink {
@@ -16,7 +17,9 @@ export interface LicenseLink {
 export interface AttributionAsset {
   path: string;
   modification_note: string;
-  position_check: string;
+  position_check: PositionCheck;
+  /** What the position check does and does not show, in a sentence. */
+  position_sentence: string;
 }
 
 export interface AttributionEntry {
@@ -29,13 +32,26 @@ export interface AttributionEntry {
   /** What the publisher states, when it differs from the license above. */
   stated_license: LicenseLink | null;
   required_text: string[];
+  /** Present when the files are share-alike adapted material: what a reuser must do. */
+  share_alike_statement: string | null;
   /** False for an input used only to compute a file: none of its material is in what ships. */
   redistributed: boolean;
   route_note: string;
   assets: AttributionAsset[];
 }
 
-const LICENSE_LINKS: Readonly<Record<LicenceId, { name: string; url: string | null }>> = {
+/** What each position check value means for a reader. */
+export const POSITION_CHECK_SENTENCES: Readonly<Record<PositionCheck, string>> = {
+  'independently checked': 'Placement was checked by a measure independent of how the shape was moved, for each shape.',
+  'checked in aggregate': 'Placement was checked for the cortex as a whole by an independent measure, not for each fold.',
+  'not independently checked': 'Placement was not independently checked.',
+  failed: 'Placement failed an independent check.',
+};
+
+/** Shown beside share-alike files; the same sentence is in by-sa/LICENSE.txt. */
+export const SHARE_ALIKE_STATEMENT = 'You may share and adapt these files, including commercially, provided you give credit, indicate changes, and distribute your contributions under the same licence, with no further restrictions.';
+
+export const LICENSE_LINKS: Readonly<Record<LicenceId, { name: string; url: string | null }>> = {
   'cc-by-4.0': { name: 'Creative Commons Attribution 4.0 International', url: 'https://creativecommons.org/licenses/by/4.0/' },
   'cc0-1.0': { name: 'CC0 1.0 Universal', url: 'https://creativecommons.org/publicdomain/zero/1.0/' },
   'cc-by-sa-4.0': { name: 'Creative Commons Attribution-ShareAlike 4.0 International', url: 'https://creativecommons.org/licenses/by-sa/4.0/' },
@@ -62,7 +78,10 @@ function linkFor(licenseId: LicenceId): LicenseLink {
 function entryFor(source: AnatomySource, effectiveLicense: LicenceId, redistributed: boolean, manifest: AssetManifest): AttributionEntry {
   const assets = manifest.assets
     .filter((asset) => asset.source_ids.includes(source.id))
-    .map((asset) => ({ path: asset.path, modification_note: asset.modification_note, position_check: asset.position_check }));
+    .map((asset) => ({
+      path: asset.path, modification_note: asset.modification_note, position_check: asset.position_check,
+      position_sentence: POSITION_CHECK_SENTENCES[asset.position_check],
+    }));
   return {
     source_id: source.id,
     name: source.name,
@@ -71,6 +90,7 @@ function entryFor(source: AnatomySource, effectiveLicense: LicenceId, redistribu
     license: linkFor(effectiveLicense),
     stated_license: effectiveLicense === source.license_id ? null : linkFor(source.license_id),
     required_text: source.required_text,
+    share_alike_statement: redistributed && LICENCE_FACTS[effectiveLicense].share_alike ? SHARE_ALIKE_STATEMENT : null,
     redistributed,
     route_note: source.route.note,
     assets,
@@ -97,5 +117,9 @@ export function buildAttributionEntries(
 
 /** Every sentence the page must show for these entries: each source's attribution and required wording, and the fixed statements. */
 export function listRequiredWordings(entries: readonly AttributionEntry[]): string[] {
-  return [...Object.values(ATTRIBUTION_STATEMENTS), ...entries.flatMap((entry) => [entry.attribution_text, ...entry.required_text])];
+  return [...Object.values(ATTRIBUTION_STATEMENTS), ...entries.flatMap((entry) => [
+    entry.attribution_text, ...entry.required_text, entry.license.name,
+    ...(entry.share_alike_statement === null ? [] : [entry.share_alike_statement]),
+    ...entry.assets.flatMap((asset) => [asset.modification_note, asset.position_sentence]),
+  ])];
 }
