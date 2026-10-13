@@ -37,11 +37,17 @@ function describeStructures(rows: readonly Row[]): string {
     + 'AI-drafted and unreviewed: the shapes come from an AI-written pipeline and the QIF records each label is mapped to are an unchecked reading, so a row is not a statement of where a QIF region is.';
 }
 
+function describeSameExtent(sameExtent: number, rowCount: number): string {
+  return sameExtent === 0
+    ? `none of the ${rowCount} rows grades the shape as the same structure`
+    : `only ${sameExtent} of ${rowCount} rows grade the shape as the same structure`;
+}
+
 function describeCrosswalk(rows: readonly Row[]): string {
   const correspondences = rows.filter((row) => row.row_kind === 'atlas_correspondence');
   const sameExtent = countWhere(correspondences, (row) => row.extent_match === 'same');
   return `Correspondences between the ${countDistinct(rows, 'subject_id')} QIF brain regions and atlas labels: ${countDistinct(correspondences, 'subject_id')} regions have a row and ${rows.length - correspondences.length} have a record saying no buildable atlas has geometry for them. `
-    + `AI-drafted and unreviewed; no neuroanatomist has checked them. Read extent_match before treating a label as the region: only ${sameExtent} of ${correspondences.length} rows grade the shape as the same structure.`;
+    + `AI-drafted and unreviewed; no neuroanatomist has checked them. Read extent_match before treating a label as the region: ${describeSameExtent(sameExtent, correspondences.length)}.`;
 }
 
 function describeTerms(rows: readonly Row[]): string {

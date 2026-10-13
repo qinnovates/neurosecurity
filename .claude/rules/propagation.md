@@ -26,9 +26,9 @@ When a file changes, these downstream files must be updated. Run `npm run health
 | The five `anatomy_*` query tables | `npm run prebuild`. Built by `src/lib/anatomy/anatomy-tables.ts` from the same reviewed rows as the anatomy index; never add a second flattener | Yes (prebuild) |
 | datalake/parquet/anatomy_*.parquet and catalog.json | `npm run prebuild` with pyarrow installed, then commit them. `generate-parquet.py` copies the rows the TypeScript builder wrote | Script (`npm test` fails if a committed file differs from a fresh build; `npm run health` fails if a table is missing from the catalog) |
 | src/lib/anatomy/load-anatomy-tables.ts | Add the import when the pipeline ships a new label table | Manual (`npm test` fails if it is missing) |
-| src/components/data-studio/anatomy-dataset-descriptions.ts | Correct any count the change moved | Manual (`npm test` fails if a count is stale) |
+| Data Studio descriptions | None: `src/lib/anatomy/describe-tables.ts` computes every count from the rows | Yes (build) |
 
-Every anatomy table row carries `drafted_by`, `review_state`, `review_mark` and `status_sentence`. A new anatomy table or column must not state a reading as a fact: `named_term` and `resolved_region_id`, never `target_region`.
+Every anatomy table row opens with `review_mark`, `review_state`, `reviewed_by_role`, `reviewed_on`, a drafter column and `status_sentence`. A new anatomy table or column must not state a reading as a fact: a region id goes in `single_region_id` only on a single-region match and in `alias_match_region_id` otherwise, and no column name or vocabulary value may hold `target`, `affect`, `attack`, `hits` or `cause` (`npm test` enforces both). No tool page may import `kql-tables` or any anatomy data module, and the Lab's query database leaves the `anatomy_*` tables out (`npm test` walks the import graph).
 
 ## When datalake/qtara-registrar.json changes (TARA techniques)
 | Update | How | Automated? |
@@ -41,7 +41,7 @@ Every anatomy table row carries `drafted_by`, `review_state`, `review_mark` and 
 | src/lib/threat-data.ts | Verify ThreatVector interface matches | Manual |
 | datalake/qif-anatomy-technique-regions.json | When a technique's text or band tags change: re-read it, edit `datalake/scripts/technique-region-curation.json`, run `node datalake/scripts/draft-technique-regions.mjs`. Never hand-edit the data file | Script (`npm test` fails if stale, if a neural-band technique has no entry, or if a quote is gone) |
 
-Region links are AI-drafted and unreviewed. The registrar, the public API, the Python SDK and the STIX export carry no region links until a link has an owner's review in the ledger. They are published only as the `anatomy_technique_terms` and `anatomy_technique_scopes` tables, where every row carries its review state and the quoted catalog text.
+Region links are AI-drafted and unreviewed. The registrar, the public API, the Python SDK and the STIX export carry no region links until a link has an owner's review in the ledger. They are published only as the `anatomy_technique_terms` table, where every row carries its review state and the quoted catalog text, and as counts in `anatomy_technique_term_summary`, which names no region.
 
 ## When datalake/qif-brain-bci-atlas.json or datalake/qif-neural-pathways.json changes
 | Update | How | Automated? |

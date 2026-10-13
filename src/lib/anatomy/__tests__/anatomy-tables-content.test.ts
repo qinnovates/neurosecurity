@@ -169,6 +169,13 @@ describe('every derived column equals the built index', () => {
     expect(distinct(tables.anatomy_crosswalk, 'subject_geometry_state').length).toBeGreaterThan(1);
   });
 
+  it('says how a contained row is contained on exactly the contained rows, as the crosswalk file does', () => {
+    const fileKinds = data.crosswalk.rows.map((row) => [row.subject_id, row.extent_match, row.contained_kind ?? '']);
+    const correspondences = tables.anatomy_crosswalk.filter((row) => row.row_kind === 'atlas_correspondence');
+    expect(correspondences.map((row) => [row.subject_id, row.extent_match, row.contained_kind])).toEqual(fileKinds);
+    expect(correspondences.filter((row) => (row.extent_match === 'contained') !== (row.contained_kind !== ''))).toEqual([]);
+  });
+
   it('names every crosswalk row\'s labels as the index names those structures, and says a shape is drawn only where a mesh ships', () => {
     const correspondences = tables.anatomy_crosswalk.filter((row) => row.row_kind === 'atlas_correspondence');
     const keysOf = (row: AnatomyRow): string[] => String(row.atlas_label_ids).split(', ').map((labelId) => `${row.atlas}:${labelId}`);
@@ -267,7 +274,8 @@ describe('Data Studio descriptions and presets', () => {
     expect(descriptionOf('anatomy_structures')).toContain(`(${countWhere(tables.anatomy_structures, (row) => row.has_drawn_shape === false)} rows are location markers with no drawn shape)`);
     expect(descriptionOf('anatomy_crosswalk')).toContain(`the ${distinct(crosswalk, 'subject_id').length} QIF brain regions`);
     expect(descriptionOf('anatomy_crosswalk')).toContain(`${distinct(correspondences, 'subject_id').length} regions have a row and ${crosswalk.length - correspondences.length} have a record`);
-    expect(descriptionOf('anatomy_crosswalk')).toContain(`only ${countWhere(correspondences, (row) => row.extent_match === 'same')} of ${correspondences.length} rows`);
+    const sameExtent = countWhere(correspondences, (row) => row.extent_match === 'same');
+    expect(descriptionOf('anatomy_crosswalk')).toContain(sameExtent === 0 ? `none of the ${correspondences.length} rows grades the shape` : `only ${sameExtent} of ${correspondences.length} rows grade the shape`);
     expect(descriptionOf('anatomy_technique_terms')).toContain(
       `Only ${single} of ${terms.length} words match exactly one listed region whose band the technique also carries; ${otherBand} match a region in a band the technique does not carry, `
       + `${terms.length - single - otherBand - none} match only a broader or narrower region, and ${none} match none.`);

@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-13T12:32:28.482337+00:00",
+    "generated": "2026-10-13T12:35:03.064154+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
     "total_datasets": 38,
-    "total_rows": 24251
+    "total_rows": 24245
   },
   "datasets": {
     "techniques": {
@@ -756,13 +756,13 @@
         "layers",
         "urls"
       ],
-      "size_bytes": 18665,
-      "sha256": "7c6a98062a51a393fcbd66e97ecdf975dadbdf103dc85bf602671da272df4957",
+      "size_bytes": 18682,
+      "sha256": "2defae6fe95a9761b95bf4095ec9fc3a5d9e7c03a6926127a4aec40ec1b2d681",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_sources.parquet"
     },
     "anatomy_structures": {
-      "rows": 227,
+      "rows": 221,
       "columns": 28,
       "column_names": [
         "review_mark",
@@ -794,14 +794,14 @@
         "position_check",
         "visual_check_state"
       ],
-      "size_bytes": 16969,
-      "sha256": "315336a0c06a3f8a80af8a14e11dd63da7f1c64ef125bf0391ef6d6f66a91608",
+      "size_bytes": 17019,
+      "sha256": "d634e592c929d6e6ef129a012e17f5ffba90f430d3cf8bfe6e0590004d35d29d",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_structures.parquet"
     },
     "anatomy_crosswalk": {
       "rows": 38,
-      "columns": 34,
+      "columns": 35,
       "column_names": [
         "review_mark",
         "review_state",
@@ -825,6 +825,7 @@
         "atlas_label_count",
         "name_match",
         "extent_match",
+        "contained_kind",
         "definition_contested",
         "drafted_to_draw",
         "has_drawn_shape",
@@ -838,8 +839,8 @@
         "check_status",
         "addressing_version"
       ],
-      "size_bytes": 16389,
-      "sha256": "adeec793c584ebfd35bab28611f7feadfe179c7c5a0c5143332ebc779696fe1a",
+      "size_bytes": 17088,
+      "sha256": "01e85f2e29c72e5901ca4cdade33232c9ef56692b34bb8ae8d69353eb016295f",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_crosswalk.parquet"
     },

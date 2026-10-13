@@ -30,7 +30,7 @@ const NO_EVIDENCE_COLUMNS: EvidenceColumns = {
 /** A no-geometry record points at no atlas. Null says the column does not apply; false would read as a finding. */
 const NO_ATLAS_COLUMNS: AnatomyRow = {
   part: NOT_APPLICABLE, atlas: NOT_APPLICABLE, atlas_label_ids: NOT_APPLICABLE, atlas_label_names: NOT_APPLICABLE, atlas_label_count: 0,
-  name_match: NOT_APPLICABLE, extent_match: NOT_APPLICABLE, definition_contested: null, drafted_to_draw: false, has_drawn_shape: false, delineation_basis: NOT_APPLICABLE,
+  name_match: NOT_APPLICABLE, extent_match: NOT_APPLICABLE, contained_kind: NOT_APPLICABLE, definition_contested: null, drafted_to_draw: false, has_drawn_shape: false, delineation_basis: NOT_APPLICABLE,
 };
 
 interface CrosswalkTableContext {
@@ -72,6 +72,7 @@ function atlasColumns(row: CrosswalkRow, context: CrosswalkTableContext): Anatom
     atlas_label_count: row.atlas_ids.length,
     name_match: row.name_match,
     extent_match: row.extent_match,
+    contained_kind: row.contained_kind ?? NOT_APPLICABLE,
     definition_contested: row.definition_contested,
     drafted_to_draw: row.draws,
     has_drawn_shape: hasDrawnShape(row, context.structuresByKey),
