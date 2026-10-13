@@ -68,7 +68,7 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, on
   const turnView = (viewId: CameraViewId): void => { commands.current.setView(viewId); setActiveView(viewId); };
   const byHand: CanvasCommands = { setView: turnView, zoom: (direction) => commands.current.zoom(direction), turn: (direction) => { commands.current.turn(direction); setActiveView(null); }, tilt: (direction) => { commands.current.tilt(direction); setActiveView(null); } };
   const cutNames = slice === null ? [] : [...new Set(listShapesCutAt(slice, [...scene.nodesByShapeId.values()]).map((node) => resolvePick(model, `${node.atlas}:${node.labelId}`)?.label ?? node.labelId))];
-  const description = `3D picture of an average brain outline with ${scene.drawnShapes.length} atlas shapes drawn inside it, ${scene.caption.lensLabel} lens, ${activeView === null ? 'turned by hand' : CAMERA_VIEW_LABELS[activeView].toLowerCase()}. Every fact it shows is in the region list.`;
+  const description = `3D picture of an average brain outline with ${scene.drawnShapes.length} atlas shapes drawn inside it. ${scene.caption.lensLabel} View: ${activeView === null ? 'turned by hand' : CAMERA_VIEW_LABELS[activeView].toLowerCase()}. Every fact it shows is in the region list.`;
 
   const canvasProps: Omit<AtlasCanvasProps, 'commands'> = {
     shapes: scene.drawnShapes, nodesByShapeId: scene.nodesByShapeId, selectedKeys, focusMm, slice, prefersLessMotion, description,

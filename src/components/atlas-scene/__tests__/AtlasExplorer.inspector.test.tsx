@@ -9,6 +9,7 @@ import { H01_CARD_PATH } from '@/lib/anatomy/parse-h01-card';
 import { REGION_EVIDENCE_PATH, type RegionEvidence } from '@/lib/anatomy/region-evidence-types';
 import AtlasExplorer from '../AtlasExplorer';
 import { FETCH_TIMEOUT_MS } from '../fetch-atlas-json';
+import { loadAnatomyBundle } from '../load-anatomy-data';
 import { buildServedFiles, requestedPaths, serveFiles, type ServedFile } from './explorer-test-server';
 
 const REAL_FILES = buildServedFiles();
@@ -282,6 +283,37 @@ describe('AtlasExplorer: files that are out of step', () => {
     serveFiles({ ...REAL_FILES, [ANATOMY_INDEX_PATH]: JSON.stringify({ ...REAL_INDEX, companions: [] }) });
     render(<AtlasExplorer />);
     expect((await screen.findByRole('alert')).dataset.failure).toBe('invalid');
+  });
+});
+
+describe('AtlasExplorer: the page\'s pin of the index', () => {
+  const indexPin = loadAnatomyBundle().indexPin;
+
+  it('accepts the index the page was built with and shows no notice', async () => {
+    serveFiles(REAL_FILES);
+    const { container } = render(<AtlasExplorer indexPin={indexPin} />);
+    await screen.findByRole('heading', { name: 'Regions' });
+    expect(container.querySelector('[data-index-pin]')).toBeNull();
+  });
+
+  it('keeps the list when the served index is not the pinned one, says the 3D view is unavailable, and draws nothing', async () => {
+    const otherBuild = (REAL_FILES[ANATOMY_INDEX_PATH] as string).replace('"schema_version":1', '"schema_version": 1');
+    const fetchMock = serveFiles({ ...REAL_FILES, [ANATOMY_INDEX_PATH]: otherBuild });
+    const { container } = render(<AtlasExplorer indexPin={indexPin} />);
+    await screen.findByRole('heading', { name: 'Regions' });
+    expect(container.querySelectorAll('button[data-region-id]')).toHaveLength(38);
+    expect(container.querySelector('[data-index-pin="mismatched"]')?.textContent).toContain('The 3D view is not available.');
+    fireEvent.click(screen.getByRole('button', { name: 'Show the 3D view' }));
+    expect(container.querySelector('.atlas-viewport')?.getAttribute('data-gate')).toBe('unpinned');
+    expect(requestedPaths(fetchMock).filter((path) => path.includes('atlas-assets') || path.includes('OpenViewport'))).toEqual([]);
+    expect(requestedPaths(fetchMock).filter((path) => path === ANATOMY_INDEX_PATH).length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('still refuses an index that fails its checks, pinned or not', async () => {
+    serveFiles({ ...REAL_FILES, [ANATOMY_INDEX_PATH]: JSON.stringify({ ...REAL_INDEX, status: 'Reviewed.' }) });
+    const { container } = render(<AtlasExplorer indexPin={indexPin} />);
+    expect((await screen.findByRole('alert')).dataset.failure).toBe('invalid');
+    expect(container.querySelector('button[data-region-id]')).toBeNull();
   });
 });
 

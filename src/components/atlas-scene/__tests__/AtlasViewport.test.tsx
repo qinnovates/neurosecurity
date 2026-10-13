@@ -39,6 +39,7 @@ function CanvasStandIn(props: AtlasCanvasProps) {
     setView: (viewId) => { commandLog.push(`view:${viewId}`); },
     zoom: (direction) => { commandLog.push(`zoom:${direction}`); },
     turn: (direction) => { commandLog.push(`turn:${direction}`); },
+    tilt: (direction) => { commandLog.push(`tilt:${direction}`); },
   }), []);
   return <div data-canvas="stand-in" role="img" aria-label={props.description} />;
 }
@@ -128,7 +129,7 @@ describe('AtlasViewport: open', () => {
     expect([...container.querySelectorAll('[data-asset-status]')].map((item) => item.getAttribute('data-asset-status'))).toEqual(model.index.assets.map(() => 'ready'));
     expect(canvasProps?.shapes.length).toBeGreaterThan(150);
     expect(canvasProps?.shapes.every((shape) => shape.sizeMark === 'ring_only' || canvasProps?.nodesByShapeId.has(shape.id))).toBe(true);
-    expect(screen.getByRole('img').getAttribute('aria-label')).toMatch(/^3D picture of an average brain outline with \d+ atlas shapes drawn inside it, Band lens, from behind and above\. Every fact it shows is in the region list\.$/);
+    expect(screen.getByRole('img').getAttribute('aria-label')).toMatch(/^3D picture of an average brain outline with \d+ atlas shapes drawn inside it\. Band lens\. View: from behind and above\. Every fact it shows is in the region list\.$/);
   });
 
   it('keeps the caption inside the picture, with the mark, the lens limit and a position sentence per layer', async () => {
@@ -138,7 +139,9 @@ describe('AtlasViewport: open', () => {
     expect(caption.textContent).toContain('NISS severity lens.');
     const captionLimitIds = [...caption.querySelectorAll('[data-limit-id]')].map((note) => note.getAttribute('data-limit-id'));
     expect(captionLimitIds.slice(0, 2)).toEqual(['lens_niss', 'whole_scene']);
-    expect(captionLimitIds.slice(2).sort()).toEqual(['position_checked_in_aggregate', 'position_not_checked', 'position_not_checked']);
+    expect(captionLimitIds.slice(2).filter((id) => id?.startsWith('position_')).length).toBe(3);
+    expect(captionLimitIds).toContain('mirrored_scene');
+    expect(caption.querySelector('[data-limit-id="mirrored_scene"]')?.textContent).toMatch(/^The Allen .+ shapes were drawn on one side of the brain and mirrored/);
     expect(caption.querySelector('a')?.getAttribute('href')).toBe('/atlas/attribution/');
     const notes = [...container.querySelectorAll<HTMLElement>('[data-limit-id]')];
     expect(notes.length).toBeGreaterThan(6);
@@ -166,6 +169,7 @@ describe('AtlasViewport: open', () => {
     const container = await openViewport();
     canvasProps?.onPick(sharedShapeKey);
     await waitFor(() => expect(container.querySelector('[data-limit-id="picked_shape_shared"]')).not.toBeNull());
+    expect(container.querySelector('[data-limit-id="picked_shape_larger"]')).toBeNull();
     expect(onSelectRegion).not.toHaveBeenCalled();
     const regionButtons = within(container.querySelector('[data-picked-key]') as HTMLElement).getAllByRole('button').filter((button) => button.className === 'atlas-chip');
     expect(regionButtons.length).toBeGreaterThan(1);
@@ -189,9 +193,13 @@ describe('AtlasViewport: open', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Left side' }));
     fireEvent.click(screen.getByRole('button', { name: 'Zoom in' }));
     fireEvent.click(screen.getByRole('button', { name: 'Turn right' }));
-    expect(commandLog).toEqual(['view:left', 'zoom:in', 'turn:right']);
+    fireEvent.click(screen.getByRole('button', { name: 'Tilt up' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Bottom' }));
+    expect(commandLog).toEqual(['view:left', 'zoom:in', 'turn:right', 'tilt:up', 'view:bottom']);
+    fireEvent.click(screen.getByRole('button', { name: 'Turn right' }));
     expect(screen.getByRole('button', { name: 'Left side' }).getAttribute('aria-pressed')).toBe('false');
     expect(screen.getByRole('img').getAttribute('aria-label')).toContain('turned by hand');
+    expect(screen.getByRole('button', { name: 'Bottom' }).getAttribute('aria-pressed')).toBe('false');
     expect(screen.getByRole('img').hasAttribute('tabindex')).toBe(false);
   });
 
@@ -199,7 +207,9 @@ describe('AtlasViewport: open', () => {
     const container = await openViewport();
     expect(canvasProps?.slice).toBeNull();
     fireEvent.click(screen.getByRole('button', { name: 'Cut through the brain' }));
-    expect(container.querySelector('[data-limit-id="slice_view"]')?.textContent).toBe('The cut shows the average template and the atlas shapes. It is not a scan of anyone.');
+    const cutCaption = container.querySelector('[data-viewport-caption]') as HTMLElement;
+    expect(cutCaption.querySelector('[data-limit-id="slice_view"]')?.textContent).toBe('The cut shows the average template and the atlas shapes, not a scan of anyone.');
+    expect(cutCaption.querySelector('[data-limit-id="slice_position"]')?.textContent).toMatch(/^Cut at -?\d+ mm, back to front\. Everything beyond the cut is hidden\.$/);
     expect(canvasProps?.slice).toMatchObject({ axis: 'back_front' });
     const start = canvasProps?.slice?.positionMm ?? 0;
     fireEvent.click(screen.getByRole('button', { name: 'Move the cut forward' }));

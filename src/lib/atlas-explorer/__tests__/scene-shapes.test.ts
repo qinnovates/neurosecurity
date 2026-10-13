@@ -4,7 +4,7 @@ import { OWNERSHIP_MARKS, type ColourMode } from '@/lib/anatomy/colour-modes';
 import { matchesLimitTemplate } from '@/lib/anatomy/limits-copy';
 import { resolvePick } from '../resolve-pick';
 import { BAND_COLOURS, NEUTRAL_COLOUR, NISS_COLOURS, buildSceneShapes, describeFill, listLegendSteps } from '../scene-shapes';
-import { buildViewportCaption } from '../viewport-caption';
+import { buildViewportCaption, readDisagreementRange } from '../viewport-caption';
 import { FIXTURE_IDS, buildFixtureModel, loadRealModel } from './explorer-fixtures';
 
 const real = loadRealModel();
@@ -114,9 +114,13 @@ describe('buildViewportCaption', () => {
 
   it('carries the review mark, the lens with its own limit, and a position sentence for every layer drawn', () => {
     expect(caption.reviewState?.mark).toBe('AI-drafted, unreviewed');
-    expect(caption.lensLabel).toBe('NISS severity');
+    expect(caption.lensLabel).toBe('NISS severity lens.');
+    const technique = real.index.techniques[0];
+    expect(buildViewportCaption(real, { kind: 'technique', techniqueId: technique.id }, shapes).lensLabel).toBe(`Technique lens: ${technique.id}, ${technique.name}.`);
+    expect(buildViewportCaption(real, { kind: 'dsm', cluster: 'mood_trauma' }, shapes).lensLabel).toBe('DSM cluster lens: mood trauma.');
     expect(caption.lensLimits.map((limit) => limit.id)).toEqual(['lens_niss', 'whole_scene']);
-    expect(caption.positionLimits).toHaveLength(3);
+    expect(caption.positionLimits.filter((limit) => limit.id.startsWith('position_'))).toHaveLength(3);
+    expect(caption.positionLimits.find((limit) => limit.id === 'mirrored_scene')?.text).toMatch(/^The Allen .+ shapes were drawn on one side/);
     expect(caption.templateSpace).toBe(real.index.template_space);
   });
 
@@ -124,17 +128,27 @@ describe('buildViewportCaption', () => {
     const byLayer = (layer: string): string => caption.positionLimits.find((limit) => limit.text.includes(layer))?.id ?? '';
     const worstOf = (layer: string): string[] => real.index.assets.filter((asset) => asset.layer === layer).map((asset) => asset.position_check);
     expect(worstOf('deep')).toContain('not independently checked');
-    expect(byLayer('deep structures')).toBe('position_not_checked');
+    const deepLimit = caption.positionLimits.find((limit) => limit.text.includes('deep structures'));
+    const noteRange = readDisagreementRange(real.index.assets.filter((asset) => asset.layer === 'deep').map((asset) => asset.modification_note));
+    expect(deepLimit?.id).toBe(noteRange === null ? 'position_not_checked' : 'position_not_checked_with_range');
+    // The figure is the one the files' own notes carry, never one typed in the code.
+    if (noteRange !== null) expect(deepLimit?.text).toContain(`differ by about ${noteRange} mm`);
+    expect(byLayer('brain outline')).toBe('position_not_checked');
     expect(worstOf('cortical')).toEqual(['checked in aggregate']);
     expect(byLayer('cortical shapes')).toBe('position_checked_in_aggregate');
     expect(caption.positionLimits.every((limit) => matchesLimitTemplate(limit.id, limit.text))).toBe(true);
   });
 
   it('explains only the marks that are on screen, and nothing for a layer that is off', () => {
-    expect(caption.markLimits.map((limit) => limit.id)).toEqual(expect.arrayContaining(['outline_shape', 'unfilled_shape', 'marker_ring', 'coarse_ring', 'mirrored_scene']));
+    expect(caption.markLimits.map((limit) => limit.id)).toEqual(expect.arrayContaining(['outline_shape', 'unfilled_shape', 'marker_ring', 'coarse_ring']));
     const outlineOnly = buildViewportCaption(real, { kind: 'band' }, shapes.filter((shape) => shape.layer === 'outline'));
     expect(outlineOnly.markLimits.map((limit) => limit.id)).toEqual(['outline_shape']);
     expect(outlineOnly.positionLimits).toHaveLength(1);
+    expect(readDisagreementRange(['Atlases differ: surfaces 0.7 to 2.5 mm apart.'])).toBe('0.7 to 2.5');
+    expect(readDisagreementRange(['No figure here.', 'Position not checked.'])).toBeNull();
+    const fillsNothing = buildViewportCaption(real, { kind: 'band' }, shapes.filter((shape) => shape.fill === 'translucent'));
+    expect(fillsNothing.markLimits.map((limit) => limit.id)).toContain('lens_fills_nothing');
+    expect(caption.markLimits.map((limit) => limit.id).includes('lens_fills_nothing')).toBe(!shapes.some((shape) => shape.fill === 'solid'));
     expect(buildViewportCaption(real, { kind: 'band' }, [])).toMatchObject({ reviewState: null, positionLimits: [], markLimits: [] });
   });
 });

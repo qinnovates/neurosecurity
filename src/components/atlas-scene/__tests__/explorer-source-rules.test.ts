@@ -86,4 +86,22 @@ describe('explorer source rules', () => {
     expect(declared.filter(({ family }) => !ALLOWED_FAMILIES.some((allowed) => allowed.test(family)))).toEqual([]);
     for (const family of ['Menlo', '"Comic Mono", sans-serif', 'var(--font-mono)', 'system-ui']) expect(ALLOWED_FAMILIES.some((allowed) => allowed.test(family)), family).toBe(false);
   });
+
+  it('keeps the 3D view\'s class names to the 3D view: none is used by another explorer component, and none restyles an earlier class', () => {
+    const css = fs.readFileSync('src/components/atlas-scene/atlas-scene.css', 'utf-8');
+    const [before, viewport] = css.split('/* The 3D view.');
+    const classesIn = (text: string): Set<string> => new Set([...text.matchAll(/\.(atlas-[a-z0-9-]+)/g)].map((match) => match[1]));
+    const earlier = classesIn(before);
+    /** Classes the 3D view may share on purpose: buttons, toggles, notes and lists that look the same everywhere. */
+    const SHARED = ['atlas-button', 'atlas-root', 'atlas-toggle', 'atlas-limit'];
+    const viewportOnly = [...classesIn(viewport)].filter((name) => !earlier.has(name));
+    expect(viewportOnly.length).toBeGreaterThan(15);
+    expect([...classesIn(viewport)].filter((name) => earlier.has(name) && !SHARED.includes(name))).toEqual([]);
+    const VIEWPORT_FILES = ['AtlasViewport.tsx', 'OpenViewport.tsx', 'ViewportStage.tsx', 'ViewportControls.tsx', 'ViewportLegend.tsx', 'AtlasCanvas.tsx', 'AtlasRegionView.tsx'];
+    const others = files.filter((filePath) => filePath.endsWith('.tsx') && !VIEWPORT_FILES.includes(path.basename(filePath)));
+    const collisions = others.flatMap((filePath) => viewportOnly.filter((name) => new RegExp(`["' ]${name}["' ]`).test(fs.readFileSync(filePath, 'utf-8'))).map((name) => `${path.basename(filePath)}: ${name}`));
+    expect(collisions).toEqual([]);
+    expect(fs.readFileSync('src/components/atlas-scene/SignalChainRail.tsx', 'utf-8')).toContain('"atlas-stage"');
+    expect(viewportOnly).not.toContain('atlas-stage');
+  });
 });

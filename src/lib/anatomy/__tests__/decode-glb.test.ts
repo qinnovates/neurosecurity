@@ -3,7 +3,7 @@ import path from 'node:path';
 import { webcrypto } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { loadAnatomyBundle } from '@/components/atlas-scene/load-anatomy-data';
-import { compareWithIndex, listExpectedNodes, verifyAsset } from '../asset-integrity';
+import { compareWithIndex, listExpectedNodes, signedVolumeTimesSix, verifyAsset } from '../asset-integrity';
 import { GlbDecodeError, decodeGlb } from '../decode-glb';
 import { RAS_TO_SCENE_MATRIX, determinantOf, positionsToScene, rasToScene } from '../ras-to-scene';
 
@@ -70,9 +70,19 @@ describe('decodeGlb on files that are not ours', () => {
   });
 
   it('refuses a file that names bytes or vertices it does not hold', () => {
-    expect(() => decodeGlb(withDocument(firstBytes, (document) => { (document.accessors as Array<Record<string, unknown>>)[0].count = 10_000_000; }))).toThrow(/reaches past the end of the file/);
+    expect(() => decodeGlb(withDocument(firstBytes, (document) => { (document.accessors as Array<Record<string, unknown>>)[0].count = 10_000_000; }))).toThrow(/reaches past/);
     expect(() => decodeGlb(withDocument(firstBytes, (document) => { (document.accessors as Array<Record<string, unknown>>)[0].count = 3; }))).toThrow(/names a vertex the mesh does not have/);
     expect(() => decodeGlb(withDocument(firstBytes, (document) => { firstNode(document).mesh = 9; }))).toThrow(/points at nothing/);
+  });
+
+  it('refuses a buffer that points at another file, sparse storage, a mirroring or zero scale, and a malformed extension list', () => {
+    expect(() => decodeGlb(withDocument(firstBytes, (document) => { (document.buffers as Array<Record<string, unknown>>)[0].uri = 'https://example.org/other.bin'; }))).toThrow(/points at another file/);
+    expect(() => decodeGlb(withDocument(firstBytes, (document) => { (document.accessors as Array<Record<string, unknown>>)[0].sparse = { count: 1 }; }))).toThrow(/stored sparsely/);
+    expect(() => decodeGlb(withDocument(firstBytes, (document) => { firstNode(document).scale = [-1, 1, 1]; }))).toThrow(/scaled by zero or mirrored/);
+    expect(() => decodeGlb(withDocument(firstBytes, (document) => { firstNode(document).scale = [0, 1, 1]; }))).toThrow(/scaled by zero or mirrored/);
+    expect(() => decodeGlb(withDocument(firstBytes, (document) => { document.extensionsUsed = 'KHR_mesh_quantization'; }))).toThrow(/extensionsUsed is not a list/);
+    expect(() => decodeGlb(withDocument(firstBytes, (document) => { document.nodes = Array.from({ length: 2001 }, () => firstNode(document)); }))).toThrow(/more than 2000 shapes/);
+    expect(() => decodeGlb(withDocument(firstBytes, (document) => { (document.bufferViews as Array<Record<string, unknown>>)[0].byteLength = 6; }))).toThrow(/reaches past its buffer view/);
   });
 
   it('refuses a shape that does not say what it draws', () => {
@@ -100,6 +110,17 @@ describe('verifyAsset', () => {
     expect(compareWithIndex(decoded, expected.map((node) => ({ ...node, labelId: 'other' })))).toMatchObject({ ok: false, detail: expect.stringContaining('has no shape for') });
     expect(compareWithIndex(decoded, expected.map((node) => ({ ...node, centroidMm: [400, 0, 0] as const })))).toMatchObject({ ok: false, detail: expect.stringContaining('not where the index records it') });
     expect(compareWithIndex([...decoded, ...decoded], expected)).toMatchObject({ ok: false, detail: 'the file draws one shape twice' });
+  });
+
+  it('tells a mesh wound to face outward from one wound inward, and refuses a position that is not a number', () => {
+    const tetrahedron = { positionsMm: new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1]), indices: new Uint32Array([0, 2, 1, 0, 1, 3, 0, 3, 2, 1, 2, 3]) };
+    const insideOut = { positionsMm: tetrahedron.positionsMm, indices: new Uint32Array([0, 1, 2, 0, 3, 1, 0, 2, 3, 1, 3, 2]) };
+    expect(signedVolumeTimesSix(tetrahedron)).toBeCloseTo(1);
+    expect(signedVolumeTimesSix(insideOut)).toBeCloseTo(-1);
+    const decoded = decodeGlb(firstBytes);
+    const broken = decoded.map((node) => ({ ...node, positionsMm: node.positionsMm.map((value, position) => (position === 0 ? Number.NaN : value)) }));
+    expect(compareWithIndex(broken, expected)).toMatchObject({ ok: false, detail: expect.stringContaining('not a number') });
+    expect(compareWithIndex(decoded, expected.map((node) => ({ ...node, centroidMm: [node.centroidMm[0], node.centroidMm[1] + 200, node.centroidMm[2]] as const })))).toMatchObject({ ok: false });
   });
 
   it('expects no mesh for a marker-only structure', () => {
