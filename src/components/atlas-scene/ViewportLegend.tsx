@@ -38,7 +38,7 @@ function AssetStatuses({ assets, assetStates, onRetryAssets }: Pick<Props, 'asse
       <ul className="atlas-plain-list">
         {assets.map((asset) => (
           <li key={asset.id} className="atlas-fact" data-asset-id={asset.id} data-asset-status={assetStates[asset.id]?.status ?? 'loading'}>
-            <strong>{LAYER_NOUNS[asset.layer]}</strong>, {Math.round(asset.bytes / KILOBYTE)} kB: {describeAsset(asset, assetStates)}
+            <strong>{LAYER_NOUNS[asset.layer]}</strong> ({asset.id}), {Math.round(asset.bytes / KILOBYTE)} kB: {describeAsset(asset, assetStates)}
           </li>
         ))}
       </ul>

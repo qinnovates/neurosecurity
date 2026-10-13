@@ -472,10 +472,10 @@ describe('the recorded tool pages', () => {
     expect(lab?.documentGzipBudgetBytes).toBe(LAB_DOCUMENT_BASELINE_GZIP_BYTES + DOCUMENT_HEADROOM_GZIP_BYTES);
   });
 
-  it('names an interaction gate only on the atlas explorer: the view opened by its "Show the 3D view" button, and the canvas inside it', () => {
+  it('names an interaction gate only on the atlas explorer: the view opened by its "Show the 3D view" button', () => {
     expect(TOOL_PAGES.map((page) => [page.urlPath, page.interactionGatedEntryNames])).toEqual([
       ['/atlas/model/', []],
-      ['/atlas/anatomy/', ['OpenViewport', 'AtlasCanvas']],
+      ['/atlas/anatomy/', ['OpenViewport']],
     ]);
   });
 
