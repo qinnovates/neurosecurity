@@ -102,6 +102,8 @@ export const TOOL_PAGES = [
     interactionGatedEntryNames: ['OpenViewport'],
     // The electrode layout panel and the lead drawings, in words and SVG: fetched when the visitor turns that layer on.
     onDemandLazyEntryNames: ['DeviceGeometry'],
+    // This page exists to show the anatomy: its scripts are meant to hold the anatomy code. Its data still arrives by fetch.
+    scriptsMayCarryAnatomy: true,
     codeGzipBudgetBytes: ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES + CODE_HEADROOM_GZIP_BYTES,
     documentGzipBudgetBytes: ATLAS_EXPLORER_DOCUMENT_BASELINE_GZIP_BYTES + ATLAS_EXPLORER_DOCUMENT_HEADROOM_GZIP_BYTES,
   },
