@@ -19,6 +19,7 @@ import type {
 } from '../../lib/clinical-data';
 import BrainMapView from './brainmap/BrainMapView';
 import { THREAT_VECTORS, type ThreatVector, type BandId } from '../../lib/threat-data';
+import { DSM_QUALIFIER } from './dsm-qualifier';
 
 // ═══ Types ═══
 
@@ -1062,7 +1063,7 @@ function ImpactChainView({ data }: { data: ClinicalData }) {
         <div className="text-[10px] font-semibold uppercase tracking-wider">Technique</div>
         <div className="text-[10px] font-semibold uppercase tracking-wider">Band</div>
         <div className="text-[10px] font-semibold uppercase tracking-wider">Pathway</div>
-        <div className="text-[10px] font-semibold uppercase tracking-wider">DSM Outcome</div>
+        <div className="text-[10px] font-semibold uppercase tracking-wider">DSM-5-TR reference</div>
       </div>
 
       {/* Chain rows */}
@@ -1822,7 +1823,7 @@ function DsmView({ data }: { data: ClinicalData }) {
   return (
     <div>
       <p className="text-[10px] mb-4 italic" style={{ color: 'var(--color-text-faint)' }}>
-        DSM-5-TR diagnostic category references for threat modeling purposes. Not clinical diagnosis. Requires clinical validation.
+        {DSM_QUALIFIER}
       </p>
 
       {clusters.map(([cluster, conditions]) => (
@@ -1952,6 +1953,7 @@ export default function ClinicalDashboard({ data }: Props) {
     <div>
       <StatsBanner stats={data.stats} />
       <TabBar active={activeTab} onChange={setActiveTab} />
+      <p className="text-xs text-center mb-4" data-dsm-qualifier style={{ color: 'var(--color-text-faint)' }}>{DSM_QUALIFIER}</p>
 
       {activeTab === 'brainmap' && <BrainMapView data={data} />}
       {activeTab === 'zoom' && <SemanticZoomView data={data} />}

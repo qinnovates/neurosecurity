@@ -106,7 +106,7 @@ export default function CascadePanelStack({ data, selectedRegionId, onPathwaySel
             Select a region
           </div>
           <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>
-            Click a brain region or hourglass band to see pathways, neurotransmitters, and DSM outcomes.
+            Click a brain region or hourglass band to see pathways, neurotransmitters, and DSM-5-TR category references.
           </p>
         </div>
       </div>
@@ -226,7 +226,7 @@ export default function CascadePanelStack({ data, selectedRegionId, onPathwaySel
 
       {/* DSM Outcomes Panel */}
       <CascadePanel
-        title="DSM Outcomes"
+        title="DSM-5-TR references"
         icon="Dx"
         count={filtered.dsmConditions.length}
         color="#f59e0b"

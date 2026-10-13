@@ -34,8 +34,8 @@ const totalTechniques = THREAT_VECTORS.length;
 const dsm5Techniques = THREAT_VECTORS.filter(t => t.tara?.dsm5?.primary?.length > 0);
 
 const riskClassGroups: { key: Dsm5RiskClass; label: string; description: string; count: number }[] = [
-  { key: 'direct', label: 'Direct Risk', description: 'The attack mechanism directly causes the psychiatric outcome through a documented neural pathway.', count: dsm5Stats.riskClass.direct },
-  { key: 'indirect', label: 'Indirect Risk', description: 'The psychiatric outcome arises secondary to the primary neurological disruption.', count: dsm5Stats.riskClass.indirect },
+  { key: 'direct', label: 'Direct Risk', description: 'The catalog ties the technique\'s mechanism to the diagnostic category through a neural pathway it names. A threat-modeling association, not a demonstrated cause.', count: dsm5Stats.riskClass.direct },
+  { key: 'indirect', label: 'Indirect Risk', description: 'The catalog references the diagnostic category as secondary to the neurological disruption it lists first. A threat-modeling association, not a demonstrated cause.', count: dsm5Stats.riskClass.indirect },
 ];
 
 const clusterGroups: { key: DiagnosticCluster; label: string; count: number }[] = (
@@ -361,7 +361,7 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
         <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-cyan-500">
           {uniqueDiagnoses}
         </p>
-        <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">DSM-5-TR<br/><span class="text-[var(--color-text-faint)]">diagnoses linked</span></p>
+        <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">DSM-5-TR<br/><span class="text-[var(--color-text-faint)]">diagnostic categories referenced</span></p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
         <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-green-500">
@@ -577,8 +577,8 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
     </div>
 
     <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-6">
-      Each technique-to-diagnosis link is classified by the strength of the underlying neuroscience
-      evidence connecting the attack mechanism to the clinical outcome.
+      Each reference from a technique to a diagnostic category is classified by how the catalog
+      relates the attack mechanism to that category. These are threat-modeling references, not diagnostic claims.
     </p>
 
     <div class="max-w-3xl mx-auto">
@@ -620,14 +620,14 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
     <div class="flex items-center gap-4 mb-8">
       <div class="h-px flex-1 bg-[var(--color-border)]"></div>
       <h2 class="text-lg sm:text-xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] whitespace-nowrap">
-        Diagnosis Explorer
+        Diagnostic Category Explorer
       </h2>
       <div class="h-px flex-1 bg-[var(--color-border)]"></div>
     </div>
 
     <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto text-center mb-8">
-      {uniqueDiagnoses} DSM-5-TR diagnoses linked to {dsm5Stats.withDsm5} attack techniques.
-      Expand any diagnosis to see the techniques that can produce it, with their neural pathways and NISS severity scores.
+      {uniqueDiagnoses} DSM-5-TR diagnostic categories referenced by {dsm5Stats.withDsm5} attack techniques, for threat modeling.
+      Expand any category to see the techniques that reference it, with the neural pathways the catalog names and their NISS severity scores. These are not diagnostic claims.
     </p>
 
     <div class="max-w-4xl mx-auto space-y-2">
@@ -717,8 +717,8 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
 
     <div class="glass rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto">
       <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-6 text-center">
-        Every technique-to-diagnosis mapping follows a six-stage chain. Understanding this chain
-        helps clinicians trace a presenting symptom back to a potential technical cause.
+        Every reference from a technique to a diagnostic category follows a six-stage chain. The chain is a
+        threat-modeling aid that shows how the catalog relates a technique to a category; it does not establish a cause and is not a diagnostic tool.
       </p>
 
       <div class="space-y-0 max-w-md mx-auto">
@@ -728,7 +728,7 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
           { step: '3', label: 'Neural Structure', desc: 'The brain region or pathway disrupted', color: '#06b6d4' },
           { step: '4', label: 'Functional System', desc: 'The cognitive, emotional, or motor system impaired', color: '#0ea5e9' },
           { step: '5', label: 'NISS Score', desc: 'Severity of the neural impact (0-10 scale)', color: '#6366f1' },
-          { step: '6', label: 'DSM-5-TR Diagnosis', desc: 'The resulting clinical presentation', color: '#8b5cf6' },
+          { step: '6', label: 'DSM-5-TR Category Reference', desc: 'The diagnostic category the catalog references, for threat modeling', color: '#8b5cf6' },
         ].map((s, i) => (
           <div class="flex items-start gap-4">
             <div class="flex flex-col items-center">
@@ -940,7 +940,7 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
       </h2>
       <p class="text-base text-[var(--color-text-muted)] max-w-2xl mx-auto leading-relaxed">
         {clinical.length} of {totalTechniques} BCI attack techniques share their core mechanism with an FDA-recognized
-        therapeutic application. The same signal that treats depression can, in adversarial hands, induce it.
+        therapeutic application. The mechanism is shared; the boundary is consent, dosage, and oversight.
         This is a separate data set from the {dsm5Stats.withDsm5} DSM-5 psychiatric mappings above — a technique may appear in one, both, or neither.
       </p>
     </div>
@@ -1001,9 +1001,9 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
     </div>
     <div class="glass rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto">
       <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
-        Deep brain stimulation treats Parkinson's. The same electrode, misconfigured, can induce involuntary movement.
-        Transcranial direct current stimulation alleviates depression. The same current, weaponized, can suppress cognition.
-        EEG monitoring diagnoses epilepsy. The same signals, intercepted, reveal your emotional state to an attacker.
+        Deep brain stimulation is an approved therapy for Parkinson's disease; the catalog lists a misconfigured electrode as an attack technique that shares its mechanism.
+        Transcranial direct current stimulation is studied as a therapy for depression; the catalog lists the same kind of current, misused, as a technique that disrupts cognition.
+        EEG monitoring is used in epilepsy care; the catalog lists interception of the same signals as a technique for inferring a person's state.
       </p>
       <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
         This is the dual-use problem in neurotechnology: <strong class="text-[var(--color-text-primary)]">the therapeutic mechanism IS the attack vector.</strong>

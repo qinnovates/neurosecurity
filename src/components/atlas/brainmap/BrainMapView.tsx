@@ -25,6 +25,7 @@ import {
   getUniqueDsmCodes,
   getHighlightedRegionsFromCell,
 } from './brainmap-utils';
+import { DSM_QUALIFIER } from '../dsm-qualifier';
 
 const BAND_IDS = ['N7', 'N6', 'N5', 'N4', 'N3', 'N2', 'N1', 'I0', 'S1', 'S2', 'S3'];
 
@@ -254,7 +255,8 @@ export default function BrainMapView({ data }: Props) {
 
       <div className="text-[9px] font-mono text-center"
         style={{ color: 'var(--color-text-faint)' }}>
-        Heatmap hover outlines regions in the technique&rsquo;s bands above; the data ties a technique to bands, not to single regions. Top {topTechniqueIds.length} techniques by NISS score.
+        Heatmap hover outlines regions in the technique&rsquo;s bands above; the data ties a technique to bands, not to single regions. Top {topTechniqueIds.length} techniques by NISS score.{' '}
+        {DSM_QUALIFIER}
       </div>
     </div>
   );
