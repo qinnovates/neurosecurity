@@ -13,7 +13,7 @@ import { FIXTURE_IDS, buildFixtureModel, loadRealModel } from './explorer-fixtur
  * What the curated threat models light on the brain today, counted from the data. It changes when a threat model is
  * added or a technique's region links are re-drafted. The page states the same counts, from the same functions.
  */
-const PINNED_CHAIN_STATE = { chains: 7, steps: 35, stepsLightingARegion: 1, stepsWithADeviceStage: 31 } as const;
+const PINNED_CHAIN_STATE = { chains: 7, steps: 35, stepsLightingARegion: 1, stepsWithADeviceStage: 31, stepsWithNeither: 4 } as const;
 /** Words that would mean something passes from one step's place to the next. No key of anything a step or a frame holds may contain one. */
 const TRAVEL_KEY_PATTERN = /path|route|line|arrow|edge|from|to[A-Z_]|direction|flow|segment|trajectory/;
 
@@ -65,7 +65,7 @@ describe('buildChainSteps', () => {
   it('counts what the curated threat models light, from the data, and it is very little', () => {
     const steps = served.chains.flatMap((chain) => buildChainSteps(realModel, chain));
     expect({
-      chains: served.chains.length, steps: steps.length, stepsLightingARegion: tallyChainSteps(steps).lit, stepsWithADeviceStage: steps.filter((step) => step.stageIds.length > 0).length,
+      chains: served.chains.length, steps: steps.length, stepsLightingARegion: tallyChainSteps(steps).lit, stepsWithADeviceStage: tallyChainSteps(steps).staged, stepsWithNeither: tallyChainSteps(steps).neither,
     }).toEqual(PINNED_CHAIN_STATE);
   });
 
@@ -75,7 +75,7 @@ describe('buildChainSteps', () => {
       [2, FIXTURE_IDS.linkedTechnique, ['S1'], ['pfc']],
       [3, FIXTURE_IDS.bandLevelTechnique, ['I0'], []],
     ]);
-    expect(tallyChainSteps(fixtureSteps)).toEqual({ total: 3, lit: 1 });
+    expect(tallyChainSteps(fixtureSteps)).toEqual({ total: 3, lit: 1, staged: 3, neither: 0 });
   });
 
   it('holds nothing that could join one step to the next: no path, line, arrow or direction in a step or a frame', () => {

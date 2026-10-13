@@ -9,6 +9,7 @@
  * regions to the next step's.
  */
 
+import type { IndexReviewState } from '@/lib/anatomy/anatomy-index-types';
 import type { LayerId } from '@/lib/anatomy/source-types';
 import type { AtlasChain, StepEvidenceLabel } from './chain-file';
 import { DEVICE_STAGE_BAND_IDS } from './explorer-catalog';
@@ -25,7 +26,7 @@ export interface ChainStepView {
   /** The device stages the catalog tags the technique with, application first. Empty when it carries none. */
   stageIds: string[];
   /** The regions whose link to the technique counts under the technique lens. Empty when none does. */
-  litRegions: Array<{ id: string; name: string }>;
+  litRegions: Array<{ id: string; name: string; reviewState: IndexReviewState }>;
 }
 
 /** What the viewport and the rail show of a threat model at one moment: one step, or every step at once. */
@@ -44,9 +45,12 @@ export const EVIDENCE_LABEL_WORDS: Readonly<Record<StepEvidenceLabel, string>> =
 };
 
 function litRegionsOf(model: ExplorerModel, techniqueId: string): ChainStepView['litRegions'] {
-  const links = model.techniquesById.get(techniqueId)?.links ?? [];
-  const regionIds = [...new Set(links.filter((link) => link.lit).flatMap((link) => link.resolved_region_id ?? []))];
-  return regionIds.map((regionId) => ({ id: regionId, name: model.regionsById.get(regionId)?.name ?? regionId }));
+  const byRegion = new Map<string, ChainStepView['litRegions'][number]>();
+  for (const link of model.techniquesById.get(techniqueId)?.links ?? []) {
+    if (!link.lit || link.resolved_region_id === null || byRegion.has(link.resolved_region_id)) continue;
+    byRegion.set(link.resolved_region_id, { id: link.resolved_region_id, name: model.regionsById.get(link.resolved_region_id)?.name ?? link.resolved_region_id, reviewState: link.review_state });
+  }
+  return [...byRegion.values()];
 }
 
 function bandIdsOf(model: ExplorerModel, techniqueId: string): readonly string[] {
@@ -68,9 +72,14 @@ export function buildChainSteps(model: ExplorerModel, chain: AtlasChain): ChainS
   });
 }
 
-/** How many of the steps light at least one region, counted and never typed. */
-export function tallyChainSteps(steps: readonly ChainStepView[]): { total: number; lit: number } {
-  return { total: steps.length, lit: steps.filter((step) => step.litRegions.length > 0).length };
+/** How many of the steps light a region, carry a device stage, or have neither, counted and never typed. */
+export function tallyChainSteps(steps: readonly ChainStepView[]): { total: number; lit: number; staged: number; neither: number } {
+  return {
+    total: steps.length,
+    lit: steps.filter((step) => step.litRegions.length > 0).length,
+    staged: steps.filter((step) => step.stageIds.length > 0).length,
+    neither: steps.filter((step) => step.litRegions.length === 0 && step.stageIds.length === 0).length,
+  };
 }
 
 /**
