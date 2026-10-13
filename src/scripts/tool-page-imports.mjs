@@ -1,39 +1,49 @@
 /**
- * Walks the source import graph of a tool page and says whether it can reach a
- * module that holds anatomy data or the anatomy tables.
+ * Walks the source import graph of a tool page and says whether it can reach
+ * anatomy data, the anatomy tables, or anything generated from them.
  *
- * A tool page is built with the anatomy index's path, length and digest and
- * nothing else. A scan for import names can be routed around with a relay
- * module, so this follows every import, re-export, `import()` and literal
- * `import.meta.glob` from the page's own source file to wherever it leads.
+ * This is the early warning. It reads source with the TypeScript parser
+ * (source-imports.mjs) and follows every import, re-export, `import()`,
+ * `require()` and literal glob from the page's own file to wherever it leads.
+ * What it cannot follow it reports as a problem instead of passing over it: an
+ * import with a computed argument, a specifier it cannot resolve to a file, a
+ * module loader, a build-time read of a data file.
  *
- * It reads source text only. It cannot follow an `import()` or a glob whose
- * argument is computed, or a file read at build time; the built-page check
- * (find-anatomy-payload.mjs) is the second line for those.
+ * What it cannot see at all: a path assembled at run time and fetched, and an
+ * `import()` inside an `.astro` template expression. The post-build check
+ * (check-post-build.mjs) reads the built page and every script chunk it can
+ * load, and is what catches anatomy data however it got there.
  */
 
 import path from 'node:path';
+import { readSourceImports } from './source-imports.mjs';
 
 const SOURCE_ALIASES = [['@shared/', 'datalake/'], ['@/', 'src/']];
-const RESOLVED_EXTENSIONS = ['', '.ts', '.tsx', '.astro', '.mjs', '.js', '.json'];
-const INDEX_FILES = ['/index.ts', '/index.tsx'];
-/** A static import or re-export, with or without a clause. Group 1 is `type` for a type-only statement, group 2 the specifier. */
-const STATIC_IMPORT_PATTERN = /(?:^|[\n;{}])\s*(?:import|export)\s+(type\s+)?(?:[^'";]*?\sfrom\s*)?['"]([^'"\n]+)['"]/g;
-const DYNAMIC_IMPORT_PATTERN = /\bimport\(\s*['"]([^'"\n]+)['"]\s*\)/g;
-const GLOB_CALL_PATTERN = /import\.meta\.glob(?:<[^>]*>)?\(\s*(\[[^\]]*\]|['"][^'"\n]+['"])/g;
-const QUOTED_PATTERN = /['"]([^'"\n]+)['"]/g;
-/** Files whose imports are followed. A data file is a leaf. */
-const CODE_FILE_PATTERN = /\.(ts|tsx|astro|mjs|js)$/;
+const ROOT_PREFIX = '/';
+/** Vite import queries such as `?raw` and `?url`: the file is imported whatever follows the `?`. */
+const IMPORT_QUERY_PATTERN = /[?#].*$/;
+const ADDED_EXTENSIONS = ['', '.ts', '.tsx', '.mts', '.cts', '.astro', '.mjs', '.cjs', '.js', '.jsx', '.json'];
+const INDEX_STEMS = ['/index.ts', '/index.tsx', '/index.mts', '/index.mjs', '/index.js', '/index.astro'];
+/** A specifier may name the file a TypeScript source compiles to: `./relay.js` for `relay.ts`. */
+const COMPILED_EXTENSIONS = [['.js', ['.ts', '.tsx']], ['.jsx', ['.tsx']], ['.mjs', ['.mts']], ['.cjs', ['.cts']]];
+/** Files whose imports are followed. Anything else (a data file, a stylesheet, an image) is a leaf. */
+const CODE_FILE_PATTERN = /\.([cm]?[jt]sx?|astro)$/;
 const GLOB_SPECIAL_PATTERN = /[.+^${}()|[\]\\]/g;
+/** A build-time file read may not name anything under these. */
+const DATA_PATH_PATTERN = /(^|\/)(datalake|src\/site\/data|docs\/data|atlas-assets)(\/|$)/;
 
 /**
- * What no tool page's import graph may reach: every module that returns the
- * anatomy tables or loads the anatomy data, and the data files themselves.
+ * What no tool page's import graph may reach: every module that loads the
+ * anatomy data, builds the index or the tables from it, or describes them.
  */
 export const ANATOMY_DATA_MODULES = Object.freeze([
   'src/lib/kql-tables.ts',
   'src/lib/anatomy/load-anatomy-tables.ts',
   'src/lib/anatomy/anatomy-tables.ts',
+  'src/lib/anatomy/anatomy-inputs.ts',
+  'src/lib/anatomy/build-anatomy-index.ts',
+  'src/lib/anatomy/build-anatomy-evidence.ts',
+  'src/lib/anatomy/describe-tables.ts',
   'src/lib/anatomy/source-table.ts',
   'src/lib/anatomy/structure-table.ts',
   'src/lib/anatomy/crosswalk-table.ts',
@@ -42,47 +52,51 @@ export const ANATOMY_DATA_MODULES = Object.freeze([
   'src/components/atlas-scene/load-anatomy-data.ts',
   'datalake/scripts/technique-region-curation.json',
 ]);
-export const ANATOMY_DATA_FILE_PATTERNS = Object.freeze([/^datalake\/qif-anatomy-[a-z-]+\.json$/, /^src\/site\/atlas-assets\/.+\.json$/]);
+/** The data files themselves, and everything generated from the tables: the query-table JSON and the parquet files. */
+export const ANATOMY_DATA_FILE_PATTERNS = Object.freeze([
+  /^datalake\/qif-anatomy-[a-z-]+\.json$/, /^src\/site\/atlas-assets\/.+\.json$/, /^src\/site\/data\//, /^docs\/data\//, /^datalake\/parquet\//,
+]);
 
 export function isAnatomyDataModule(filePath) {
   return ANATOMY_DATA_MODULES.includes(filePath) || ANATOMY_DATA_FILE_PATTERNS.some((pattern) => pattern.test(filePath));
 }
 
-/**
- * A glob as a pattern over repository paths: `**` crosses folders, `*` does not.
- * `/src/x/*.json` is anchored at the repository root; `./x/*.json` and `../x/*.json` at the importing file's folder.
- */
-function globToPattern(glob, fromFile) {
-  const anchored = glob.startsWith('/') ? glob.slice(1) : path.posix.normalize(path.posix.join(path.posix.dirname(fromFile), glob));
-  const body = anchored.replace(GLOB_SPECIAL_PATTERN, '\\$&').replaceAll('**', '\u0000').replaceAll('*', '[^/]*').replaceAll('\u0000', '.*');
-  return new RegExp(`^${body}$`);
+/** The repository path a specifier points at before any extension is tried, or null for a package. */
+function toRepositoryPath(specifier, fromFile) {
+  const bare = specifier.replace(IMPORT_QUERY_PATTERN, '');
+  const alias = SOURCE_ALIASES.find(([prefix]) => bare.startsWith(prefix));
+  if (alias !== undefined) return path.posix.normalize(`${alias[1]}${bare.slice(alias[0].length)}`);
+  if (bare.startsWith(ROOT_PREFIX)) return path.posix.normalize(bare.slice(ROOT_PREFIX.length));
+  if (bare.startsWith('.')) return path.posix.normalize(path.posix.join(path.posix.dirname(fromFile), bare));
+  return null;
 }
 
-/**
- * @param {string} sourceText
- * @returns {{ specifiers: string[], globs: string[] }} what the file imports at run or build time; type-only statements are left out
- */
-export function listImports(sourceText) {
-  const specifiers = [...sourceText.matchAll(STATIC_IMPORT_PATTERN)].filter((match) => match[1] === undefined).map((match) => match[2]);
-  const dynamic = [...sourceText.matchAll(DYNAMIC_IMPORT_PATTERN)].map((match) => match[1]);
-  const globs = [...sourceText.matchAll(GLOB_CALL_PATTERN)].flatMap((match) => [...match[1].matchAll(QUOTED_PATTERN)].map((quoted) => quoted[1]));
-  return { specifiers: [...specifiers, ...dynamic], globs };
+function listCandidates(base) {
+  const compiled = COMPILED_EXTENSIONS.flatMap(([extension, sources]) => (base.endsWith(extension) ? sources.map((source) => `${base.slice(0, -extension.length)}${source}`) : []));
+  return [...ADDED_EXTENSIONS.map((extension) => `${base}${extension}`), ...compiled, ...INDEX_STEMS.map((stem) => `${base}${stem}`)];
 }
 
 /**
  * @param {string} specifier as written in the importing file
  * @param {string} fromFile repository path of the importing file
  * @param {(filePath: string) => boolean} exists
- * @returns {string | null} the repository path imported, or null for a package or a file that is not there
+ * @returns {{ kind: 'package' } | { kind: 'file', filePath: string } | { kind: 'unresolved', tried: string }}
  */
 export function resolveImport(specifier, fromFile, exists) {
-  const alias = SOURCE_ALIASES.find(([prefix]) => specifier.startsWith(prefix));
-  const isRelative = specifier.startsWith('.');
-  if (alias === undefined && !isRelative) return null;
-  const base = alias === undefined
-    ? path.posix.normalize(path.posix.join(path.posix.dirname(fromFile), specifier))
-    : `${alias[1]}${specifier.slice(alias[0].length)}`;
-  return [...RESOLVED_EXTENSIONS, ...INDEX_FILES].map((suffix) => `${base}${suffix}`).find((candidate) => exists(candidate)) ?? null;
+  const base = toRepositoryPath(specifier, fromFile);
+  if (base === null) return { kind: 'package' };
+  const filePath = listCandidates(base).find((candidate) => exists(candidate));
+  return filePath === undefined ? { kind: 'unresolved', tried: base } : { kind: 'file', filePath };
+}
+
+/**
+ * A glob as a pattern over repository paths: `**` crosses folders, `*` does not.
+ * `/src/x/*.json` and an aliased pattern are anchored at the repository root; `./x/*.json` at the importing file's folder.
+ */
+function globToPattern(glob, fromFile) {
+  const anchored = toRepositoryPath(glob, fromFile) ?? glob;
+  const body = anchored.replace(GLOB_SPECIAL_PATTERN, '\\$&').replaceAll('**', '\u0000').replaceAll('*', '[^/]*').replaceAll('\u0000', '.*');
+  return new RegExp(`^${body}$`);
 }
 
 /**
@@ -92,39 +106,53 @@ export function resolveImport(specifier, fromFile, exists) {
  * @property {() => string[]} listFiles every repository path a glob could match
  */
 
-function listReached(filePath, tree) {
-  const { specifiers, globs } = listImports(tree.read(filePath));
-  const imported = specifiers.map((specifier) => resolveImport(specifier, filePath, tree.exists)).filter((resolved) => resolved !== null);
-  const globbed = globs.flatMap((glob) => tree.listFiles().filter((candidate) => globToPattern(glob, filePath).test(candidate)));
-  return [...imported, ...globbed];
-}
-
-/**
- * @param {string} entryFile repository path of a page's source file
- * @param {SourceTree} tree
- * @param {(filePath: string) => boolean} isForbidden
- * @returns {string[] | null} the import chain from the entry to the first forbidden module found, or null when none is reachable
- */
-export function findForbiddenImportChain(entryFile, tree, isForbidden = isAnatomyDataModule) {
-  const cameFrom = new Map([[entryFile, null]]);
-  const queue = [entryFile];
-  while (queue.length > 0) {
-    const current = queue.shift();
-    if (isForbidden(current)) return traceChain(current, cameFrom);
-    if (!CODE_FILE_PATTERN.test(current)) continue;
-    for (const next of listReached(current, tree)) {
-      if (cameFrom.has(next)) continue;
-      cameFrom.set(next, current);
-      queue.push(next);
-    }
-  }
-  return null;
+/** Everything one file leads to, and everything about it that cannot be followed or may not be done. */
+function inspectFile(filePath, tree) {
+  const imports = readSourceImports(filePath, tree.read(filePath));
+  const resolved = imports.specifiers.map((specifier) => ({ specifier, ...resolveImport(specifier, filePath, tree.exists) }));
+  const globbed = imports.globs.flatMap((glob) => tree.listFiles().filter((candidate) => globToPattern(glob, filePath).test(candidate)));
+  const dataPath = imports.readsFiles ? imports.literals.find((literal) => DATA_PATH_PATTERN.test(literal)) : undefined;
+  return {
+    reached: [...resolved.filter((target) => target.kind === 'file').map((target) => target.filePath), ...globbed],
+    problems: [
+      ...imports.unfollowable,
+      ...resolved.filter((target) => target.kind === 'unresolved').map((target) => `an import of "${target.specifier}", which resolves to no file (tried ${target.tried})`),
+      ...(dataPath === undefined ? [] : [`a file-system module beside the data path "${dataPath}"; a tool page may not read data files at build time`]),
+    ],
+  };
 }
 
 function traceChain(filePath, cameFrom) {
   const chain = [];
   for (let current = filePath; current !== null; current = cameFrom.get(current) ?? null) chain.unshift(current);
   return chain;
+}
+
+/**
+ * @param {string} entryFile repository path of a page's source file
+ * @param {SourceTree} tree
+ * @param {(filePath: string) => boolean} isForbidden
+ * @returns {string[]} one message per forbidden module reached and per import that cannot be followed; empty when the page is clean
+ */
+export function findImportProblems(entryFile, tree, isForbidden = isAnatomyDataModule) {
+  const cameFrom = new Map([[entryFile, null]]);
+  const queue = [entryFile];
+  const problems = [];
+  while (queue.length > 0) {
+    const current = queue.shift();
+    if (isForbidden(current)) {
+      problems.push(`reaches ${current} through ${traceChain(current, cameFrom).join(' -> ')}`);
+      continue;
+    }
+    if (!CODE_FILE_PATTERN.test(current)) continue;
+    const { reached, problems: fileProblems } = inspectFile(current, tree);
+    problems.push(...fileProblems.map((problem) => `${current} has ${problem}`));
+    for (const next of reached.filter((filePath) => !cameFrom.has(filePath))) {
+      cameFrom.set(next, current);
+      queue.push(next);
+    }
+  }
+  return problems;
 }
 
 /** The source file of a built page: `/atlas/model/` is `src/pages/atlas/model.astro` or `src/pages/atlas/model/index.astro`. */

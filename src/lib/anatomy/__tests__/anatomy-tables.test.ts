@@ -9,7 +9,7 @@ import { readBandLevelReason } from '../parse-technique-regions';
 import { reviewStateOfLicenceReading } from '../review-state';
 import { CROSSWALK_STATUS, SOURCES_STATUS, TECHNIQUE_REGIONS_STATUS, VERDICTS_STATUS } from '../status-sentences';
 import { EVIDENCE_COLUMNS, type AnatomyRow } from '../table-columns';
-import { ANATOMY_TABLE_NAMES, ANATOMY_TABLE_PREFIX, DRAFTER_COLUMN_BY_TABLE, MATCH_KINDS, listDraftColumns } from '../table-names';
+import { ANATOMY_TABLE_NAMES, ANATOMY_TABLE_PREFIX, MATCH_KINDS, drafterColumn, listDraftColumns, reviewColumn } from '../table-names';
 import { toQuotedField } from '../technique-tables';
 import { CURATION_FILE, EXPORTED_TERM_ROLES, readTermRoles } from '../term-roles';
 import { FIXTURE_ASSET_ID, buildAsset, buildManifest, buildNode } from './manifest-fixtures';
@@ -47,19 +47,21 @@ describe('buildAnatomyTables: every table carries the draft state', () => {
   it('opens every row of every table with the six draft-state columns, in order', () => {
     const misopened = ANATOMY_TABLE_NAMES.filter((name) => tables[name].some((row) => Object.keys(row).slice(0, listDraftColumns(name).length).join() !== listDraftColumns(name).join()));
     expect(misopened).toEqual([]);
-    expect(listDraftColumns('anatomy_structures')).toEqual(['review_mark', 'review_state', 'reviewed_by_role', 'reviewed_on', 'mapping_drafted_by', 'status_sentence']);
+    expect(listDraftColumns('anatomy_structures')).toEqual(['mapping_review_mark', 'mapping_review_state', 'mapping_reviewed_by_role', 'mapping_reviewed_on', 'mapping_drafted_by', 'status_sentence']);
+    expect(listDraftColumns('anatomy_technique_terms')).toEqual(['review_mark', 'review_state', 'reviewed_by_role', 'reviewed_on', 'drafted_by', 'status_sentence']);
   });
 
   it('leaves no review mark, review state or status sentence empty on any row', () => {
-    const rows = ANATOMY_TABLE_NAMES.flatMap((name) => tables[name]);
-    expect(rows.filter((row) => ['review_mark', 'review_state', 'status_sentence'].some((column) => typeof row[column] !== 'string' || row[column] === ''))).toEqual([]);
+    const mustBeFilled = (name: typeof ANATOMY_TABLE_NAMES[number]): string[] => [reviewColumn(name, 'review_mark'), reviewColumn(name, 'review_state'), 'status_sentence'];
+    const unfilled = ANATOMY_TABLE_NAMES.flatMap((name) => tables[name].filter((row) => mustBeFilled(name).some((column) => typeof row[column] !== 'string' || row[column] === '')).map(() => name));
+    expect(unfilled).toEqual([]);
     expect(tables.anatomy_crosswalk[0]).toMatchObject({ ...UNREVIEWED, drafted_by: 'ai', status_sentence: CROSSWALK_STATUS });
     expect(tables.anatomy_technique_terms[0]).toMatchObject({ ...UNREVIEWED, drafted_by: 'ai', status_sentence: TECHNIQUE_REGIONS_STATUS });
     expect(tables.anatomy_sources[0]).toMatchObject({ ...UNREVIEWED, drafted_by: 'ai', status_sentence: `${SOURCES_STATUS} ${VERDICTS_STATUS}` });
   });
 
   it('names the drafter from the drafted rows themselves, and names none where nothing was drafted', () => {
-    expect(Object.keys(DRAFTER_COLUMN_BY_TABLE)).toEqual([...ANATOMY_TABLE_NAMES]);
+    expect(ANATOMY_TABLE_NAMES.map(drafterColumn)).toEqual(['drafted_by', 'mapping_drafted_by', 'drafted_by', 'drafted_by', 'terms_drafted_by']);
     expect(rowWhere(tables.anatomy_structures, 'label_id', '7').mapping_drafted_by).toBe('ai');
     expect(rowWhere(tables.anatomy_structures, 'label_id', '12').mapping_drafted_by).toBe('');
     expect(rowWhere(tables.anatomy_technique_term_summary, 'technique_id', TECHNIQUE_ID).terms_drafted_by).toBe('ai');
@@ -120,7 +122,15 @@ describe('buildAnatomyTables: structures', () => {
   });
 
   it('keeps a shipped shape that no record maps to, still marked unreviewed', () => {
-    expect(rowWhere(structures, 'label_id', '12')).toMatchObject({ mapped_qif_record_count: 0, mapped_qif_record_keys: '', ...UNREVIEWED });
+    expect(rowWhere(structures, 'label_id', '12')).toMatchObject({ mapped_qif_record_count: 0, mapped_qif_record_keys: '', mapping_review_state: 'ai_drafted_unreviewed', mapping_review_mark: 'AI-drafted, unreviewed' });
+  });
+
+  it('says the mapping is reviewed, never the shape: the shape\'s own checks follow and stay as they were', () => {
+    const reviewed = build({ reviewLedger: buildLedgerFile([reviewEntry(STN_ROW_KEY)]) }).anatomy_structures;
+    const stn = rowWhere(reviewed, 'label_id', '7');
+    expect(stn).toMatchObject({ mapping_review_state: 'reviewed', mapping_review_mark: 'Reviewed by owner, 2026-10-09', mapping_reviewed_by_role: 'owner', visual_check_state: 'not_done' });
+    expect(Object.keys(stn).slice(0, 8)).toEqual([...listDraftColumns('anatomy_structures'), 'visual_check_state', 'position_check']);
+    expect(Object.keys(stn).filter((column) => /^review|^drafted_by$/.test(column))).toEqual([]);
   });
 
   it('writes one row per side when a label is drawn on both', () => {
@@ -182,7 +192,7 @@ describe('buildAnatomyTables: technique terms and their summary', () => {
   });
 
   it('fills single_region_id only on a single-region match, and puts every other alias hit in its own column', () => {
-    expect(terms.map((row) => [row.named_term, row.match_kind, row.single_region_match, row.single_region_id, row.alias_match_region_id])).toEqual([
+    expect(terms.map((row) => [row.named_term, row.match_kind, row.single_region_match, row.single_region_id, row.other_match_region_id])).toEqual([
       ['stn', 'region_id', true, 'stn', ''],
       ['thalamus', 'region_id', false, '', 'thalamus'],
       ['motor_strip', 'term_is_broader_than_region', false, '', 'm1'],
@@ -193,7 +203,7 @@ describe('buildAnatomyTables: technique terms and their summary', () => {
   it('empties single_region_id when the quoted words are gone, and says the quote is missing', () => {
     const registrar = { techniques: [{ id: TECHNIQUE_ID, tara: { dsm5: { pathway: 'The text was rewritten.' } } }] };
     const stale = build({ registrar });
-    expect(rowWhere(stale.anatomy_technique_terms, 'named_term', 'stn')).toMatchObject({ quote_state: 'quote_missing', single_region_match: false, single_region_id: '', alias_match_region_id: 'stn', check_status: 'unchecked' });
+    expect(rowWhere(stale.anatomy_technique_terms, 'named_term', 'stn')).toMatchObject({ quote_state: 'quote_missing', single_region_match: false, single_region_id: '', other_match_region_id: 'stn', check_status: 'unchecked' });
     expect(rowWhere(stale.anatomy_technique_term_summary, 'technique_id', TECHNIQUE_ID)).toMatchObject({ single_region_term_count: 0, stale_region_term_count: 1 });
   });
 

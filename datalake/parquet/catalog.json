@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-10-13T12:35:03.064154+00:00",
+    "generated": "2026-10-13T13:09:40.500114+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
@@ -765,12 +765,14 @@
       "rows": 221,
       "columns": 28,
       "column_names": [
-        "review_mark",
-        "review_state",
-        "reviewed_by_role",
-        "reviewed_on",
+        "mapping_review_mark",
+        "mapping_review_state",
+        "mapping_reviewed_by_role",
+        "mapping_reviewed_on",
         "mapping_drafted_by",
         "status_sentence",
+        "visual_check_state",
+        "position_check",
         "structure_key",
         "atlas",
         "label_id",
@@ -790,12 +792,10 @@
         "asset_id",
         "asset_path",
         "asset_sha256",
-        "asset_license_id",
-        "position_check",
-        "visual_check_state"
+        "asset_license_id"
       ],
-      "size_bytes": 17019,
-      "sha256": "d634e592c929d6e6ef129a012e17f5ffba90f430d3cf8bfe6e0590004d35d29d",
+      "size_bytes": 17124,
+      "sha256": "19f9061ebbedae6d83953d86c9893b32191f322c571129c0aac87d0ccd327d28",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_structures.parquet"
     },
@@ -870,13 +870,13 @@
         "match_kind",
         "single_region_match",
         "single_region_id",
-        "alias_match_region_id",
+        "other_match_region_id",
         "region_band_in_technique_bands",
         "valid_for_current_addressing",
         "review_key"
       ],
       "size_bytes": 16154,
-      "sha256": "d25b7ac9ee08d253481a85e9ef45c83ce737f0038b3b62d7261be6336ddcaeb2",
+      "sha256": "96c553275bbf3762e6cd71cac8d2e6d70b8445520fdd98901ecf32803db1716e",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_technique_terms.parquet"
     },

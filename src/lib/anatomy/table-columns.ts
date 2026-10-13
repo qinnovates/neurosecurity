@@ -10,7 +10,7 @@ import type { IndexReviewState } from './anatomy-index-types';
 import type { Drafter } from './anatomy-types';
 import type { EvidenceBlock } from './evidence';
 import type { CheckedEvidence } from './review-rows';
-import { DRAFTER_COLUMN_BY_TABLE, type AnatomyTableName } from './table-names';
+import { STATUS_COLUMN, drafterColumn, reviewColumn, type AnatomyTableName } from './table-names';
 
 /** Null only where a column does not apply to the row. A row's review state is never null. */
 export type AnatomyCell = string | number | boolean | null;
@@ -50,12 +50,12 @@ export function joinDrafters(drafters: readonly Drafter[]): string {
 export function draftColumns(table: AnatomyTableName, drafters: readonly Drafter[], reviewState: IndexReviewState, statusSentence: string): AnatomyRow {
   const isReviewed = reviewState.state === 'reviewed';
   return {
-    review_mark: reviewState.mark,
-    review_state: reviewState.state,
-    reviewed_by_role: isReviewed ? reviewState.reviewer_role : NOT_REVIEWED,
-    reviewed_on: isReviewed ? reviewState.reviewed_on : NOT_REVIEWED,
-    [DRAFTER_COLUMN_BY_TABLE[table]]: joinDrafters(drafters),
-    status_sentence: statusSentence,
+    [reviewColumn(table, 'review_mark')]: reviewState.mark,
+    [reviewColumn(table, 'review_state')]: reviewState.state,
+    [reviewColumn(table, 'reviewed_by_role')]: isReviewed ? reviewState.reviewer_role : NOT_REVIEWED,
+    [reviewColumn(table, 'reviewed_on')]: isReviewed ? reviewState.reviewed_on : NOT_REVIEWED,
+    [drafterColumn(table)]: joinDrafters(drafters),
+    [STATUS_COLUMN]: statusSentence,
   };
 }
 

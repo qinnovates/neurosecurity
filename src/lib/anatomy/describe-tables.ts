@@ -34,7 +34,7 @@ function describeSources(rows: readonly Row[]): string {
 function describeStructures(rows: readonly Row[]): string {
   const markers = countWhere(rows, (row) => row.has_drawn_shape === false);
   return `The ${countDistinct(rows, 'structure_key')} atlas labels shipped in the TARA Brain Atlas, one row per drawn side (${markers} rows are location markers with no drawn shape), with the publisher's label name, size class, position check and mesh file digest. `
-    + 'AI-drafted and unreviewed: the shapes come from an AI-written pipeline and the QIF records each label is mapped to are an unchecked reading, so a row is not a statement of where a QIF region is.';
+    + 'AI-drafted and unreviewed: the shapes come from an AI-written pipeline and the QIF records each label is mapped to are an unchecked reading, so a row is not a statement of where a QIF region is. The mapping_ columns describe that mapping only; visual_check_state and position_check describe the shape.';
 }
 
 function describeSameExtent(sameExtent: number, rowCount: number): string {
@@ -61,7 +61,8 @@ function describeTerms(rows: readonly Row[]): string {
   return 'The words each technique\'s own catalog text uses for a brain structure, with the quoted text and how each word matches the QIF region table. '
     + 'AI-drafted and unreviewed, and not a list of targets: a row says the text uses the word, not that the technique acts on a region. '
     + `Only ${single} of ${rows.length} words match exactly one listed region whose band the technique also carries; ${otherBand} match a region in a band the technique does not carry, `
-    + `${broaderOrNarrower} match only a broader or narrower region${staleClause}, and ${none} match none.`;
+    + `${broaderOrNarrower} match only a broader or narrower region${staleClause}, and ${none} match none.`
+    + ' other_match_region_id is never a single-region match: it says only that the word matches a region id or alias that does not count, for the reason in match_kind and region_band_in_technique_bands.';
 }
 
 function describeSummary(rows: readonly Row[]): string {

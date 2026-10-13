@@ -5,7 +5,7 @@ import { buildRawFiles } from '@/lib/anatomy/__tests__/raw-files-fixture';
 import { buildAnatomyTables } from '@/lib/anatomy/anatomy-tables';
 import { getKqlTables } from '@/lib/kql-tables';
 import { ANATOMY_TABLE_NAMES } from '@/lib/anatomy/table-names';
-import { ANATOMY_PAYLOAD_MARKERS, findAnatomyPayload } from '../../../scripts/find-anatomy-payload.mjs';
+import { ANATOMY_PAYLOAD_MARKERS, ANATOMY_TABLE_COLUMN_MARKERS, UNMARKED_ANATOMY_COLUMN_NAMES, findAnatomyPayload } from '../../../scripts/find-anatomy-payload.mjs';
 import { loadAnatomyBundle } from '../load-anatomy-data';
 
 /** The committed seed data, and a fixture build that has rows, links and assets, so every section is populated. */
@@ -19,7 +19,7 @@ const seedTables = Object.fromEntries(ANATOMY_TABLE_NAMES.map((name) => [name, g
 const FIXTURE_CURATION = { techniques: { 'QIF-T9001': { links: [{ term: 'stn', role: 'pathway_stage' }, { term: 'thalamus', role: 'delivery_route' }, { term: 'motor_strip', role: 'action_target' }] } } };
 const populatedTables = buildAnatomyTables(parseAnatomyFiles(buildRawFiles()), FIXTURE_CURATION);
 /** The projection an independent verifier embedded in the Lab page with every gate green: four renamed keys per term. */
-const renamedTerms = seedTables.anatomy_technique_terms.map((row) => ({ technique: row.technique_id, word: row.named_term, role: row.ai_assigned_term_role, region: row.single_region_id || row.alias_match_region_id }));
+const renamedTerms = seedTables.anatomy_technique_terms.map((row) => ({ technique: row.technique_id, word: row.named_term, role: row.ai_assigned_term_role, region: row.single_region_id || row.other_match_region_id }));
 
 const pageWith = (body: string): string => `<!doctype html><html><head><title>TARA Lab</title></head><body>${body}</body></html>`;
 const escapeAttribute = (text: string): string => text.replaceAll('&', '&amp;').replaceAll('"', '&quot;');
@@ -74,6 +74,13 @@ describe('findAnatomyPayload', () => {
     const served = seed.indexJson + seed.evidenceJson + populated.indexJson + populated.evidenceJson + JSON.stringify(seedTables) + 'datalake/qif-anatomy-sources.json';
     expect(ANATOMY_PAYLOAD_MARKERS.length).toBeGreaterThan(10);
     expect(ANATOMY_PAYLOAD_MARKERS.filter((marker: string) => !served.includes(marker))).toEqual([]);
+  });
+
+  it('marks every column of the exported tables, bar the few names too common to mark: removing a marker fails here', () => {
+    const columns = [...new Set(ANATOMY_TABLE_NAMES.flatMap((name) => Object.keys(seedTables[name][0])))].sort();
+    expect([...ANATOMY_TABLE_COLUMN_MARKERS, ...UNMARKED_ANATOMY_COLUMN_NAMES].sort()).toEqual(columns);
+    expect(ANATOMY_TABLE_COLUMN_MARKERS.filter((marker: string) => !ANATOMY_PAYLOAD_MARKERS.includes(marker))).toEqual([]);
+    expect(UNMARKED_ANATOMY_COLUMN_NAMES.length).toBeLessThan(columns.length / 10);
   });
 
   it('finds nothing in a page that carries only the index pin', () => {

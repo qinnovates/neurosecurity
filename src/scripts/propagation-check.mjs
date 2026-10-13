@@ -176,21 +176,26 @@ function checkDataConsistency() {
   }
 }
 
-/** Must equal ANATOMY_TABLE_PREFIX in src/lib/anatomy/table-names.ts (a test compares them). */
+/** Must equal ANATOMY_TABLE_PREFIX in src/lib/anatomy/table-prefix.ts (a test compares them). */
 const ANATOMY_TABLE_PREFIX = 'anatomy_';
-/** Every anatomy table opens with these, then one column saying who drafted the row, then the status sentence. */
+/**
+ * Every anatomy table opens with these four, then one column saying who drafted the row, then the status
+ * sentence. A table whose review is of something narrower than the row puts one prefix on all four
+ * (`mapping_` on the structures table).
+ */
 const ANATOMY_REVIEW_COLUMNS = ['review_mark', 'review_state', 'reviewed_by_role', 'reviewed_on'];
+const ANATOMY_REVIEW_PREFIX_PATTERN = /^([a-z]+_)?review_mark$/;
 const ANATOMY_DRAFTER_COLUMN_PATTERN = /(^|_)drafted_by$/;
 const ANATOMY_STATUS_COLUMN = 'status_sentence';
-const ANATOMY_REMEDY = 'run: npm run prebuild, with pyarrow installed, and commit datalake/parquet/';
+const ANATOMY_REMEDY = 'run: npm run prebuild (with pyarrow installed if the parquet files need rebuilding, then commit datalake/parquet/)';
 
 /** The first way a table's opening columns differ from the six draft-state columns, or null. */
 function findDraftColumnProblem(name, columns) {
-  const opening = columns.slice(0, ANATOMY_REVIEW_COLUMNS.length + 2);
-  const missing = ANATOMY_REVIEW_COLUMNS.find((column, position) => opening[position] !== column);
-  if (missing !== undefined) return `${name} does not open with ${missing} in its place`;
-  if (!ANATOMY_DRAFTER_COLUMN_PATTERN.test(opening[ANATOMY_REVIEW_COLUMNS.length] ?? '')) return `${name} has no drafter column after its review columns`;
-  if (opening[ANATOMY_REVIEW_COLUMNS.length + 1] !== ANATOMY_STATUS_COLUMN) return `${name} has no ${ANATOMY_STATUS_COLUMN} column after its drafter`;
+  const prefix = ANATOMY_REVIEW_PREFIX_PATTERN.exec(columns[0] ?? '')?.[1] ?? '';
+  const missing = ANATOMY_REVIEW_COLUMNS.find((column, position) => columns[position] !== `${prefix}${column}`);
+  if (missing !== undefined) return `${name} does not open with ${prefix}${missing} in its place`;
+  if (!ANATOMY_DRAFTER_COLUMN_PATTERN.test(columns[ANATOMY_REVIEW_COLUMNS.length] ?? '')) return `${name} has no drafter column after its review columns`;
+  if (columns[ANATOMY_REVIEW_COLUMNS.length + 1] !== ANATOMY_STATUS_COLUMN) return `${name} has no ${ANATOMY_STATUS_COLUMN} column after its drafter`;
   return null;
 }
 
@@ -215,7 +220,7 @@ function findAnatomyTableProblem(name, rows, dataset) {
 
 function checkAnatomyTables(kqlPath, catalogPath) {
   if (!fileExists(kqlPath) || !fileExists(catalogPath)) {
-    fail(`Anatomy tables cannot be checked: ${fileExists(kqlPath) ? catalogPath : kqlPath} is missing (${ANATOMY_REMEDY})`);
+    fail(`Anatomy tables cannot be checked: ${fileExists(kqlPath) ? catalogPath : kqlPath} is missing. On a fresh clone, run: npm run prebuild`);
     return;
   }
   const tables = readJSON(kqlPath);

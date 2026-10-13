@@ -21,7 +21,7 @@ export const ANATOMY_PRESETS: readonly PresetQuery[] = [
   },
   {
     label: 'Words by match kind',
-    query: 'anatomy_technique_terms | project review_state, technique_id, named_term, match_kind, quoted_text, single_region_id, alias_match_region_id | sort by match_kind asc',
+    query: 'anatomy_technique_terms | project review_state, technique_id, named_term, match_kind, quoted_text, single_region_id, other_match_region_id | sort by match_kind asc',
     group: GROUP,
   },
   {

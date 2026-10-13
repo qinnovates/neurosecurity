@@ -70,6 +70,15 @@ export const TOOL_PAGES = [
   },
 ];
 
+/**
+ * Pages that are meant to carry anatomy data, by site path. The built-page anatomy check skips a tool
+ * page named here; every other tool page, and every script it can load, must carry none.
+ *   /data-studio/  lists the anatomy tables with their descriptions and column names. It is not a
+ *                  tool page today; it is named so that making it one does not start failing it.
+ * The atlas explorer page, when it lands, belongs here too: it exists to show the anatomy index.
+ */
+export const ANATOMY_DATA_PAGES = Object.freeze(['/data-studio/']);
+
 export const DEFAULT_DIST_DIRECTORY = 'dist';
 const DIRECTORY_INDEX_FILE = 'index.html';
 

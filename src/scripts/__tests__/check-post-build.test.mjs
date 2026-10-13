@@ -71,3 +71,75 @@ describe('runPostBuildChecks', () => {
     fs.rmSync(withPayload, { recursive: true });
   });
 });
+
+/**
+ * The two leaks a second verification built by importing the generated query-table file
+ * (src/site/data/kql-tables.json), as they come out of a build: rows in the page's HTML
+ * when the page's frontmatter imports it, and a script chunk holding the tables when a
+ * lazily loaded mode imports it. No source scan saw either.
+ */
+describe('findAnatomyPayloadFailures on what a build produces', () => {
+  const TERM_ROW = { technique_id: 'QIF-T0100', named_term: 'cortex', ai_assigned_term_role: 'named_as_delivery_route', match_kind: 'term_is_broader_than_region', other_match_region_id: 'pfc' };
+  const island = (props) => `<astro-island component-url="/_astro/Shell.js" renderer-url="/_astro/client.js" props="${props}" client="load"></astro-island>`;
+  const page = (body) => `<!DOCTYPE html><html><head></head><body>${body}</body></html>`;
+  const toolPage = { urlPath: '/tool/' };
+
+  /** A built site in a temporary folder: path under the build -> contents. */
+  function buildDist(files) {
+    const distDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'post-build-'));
+    for (const [filePath, contents] of Object.entries(files)) {
+      fs.mkdirSync(path.dirname(path.join(distDirectory, filePath)), { recursive: true });
+      fs.writeFileSync(path.join(distDirectory, filePath), contents);
+    }
+    return distDirectory;
+  }
+
+  const CLEAN_SCRIPTS = {
+    '_astro/client.js': 'export default function hydrate(){}',
+    '_astro/Shell.js': 'const modes={query:()=>import("./QueryMode.js")};export{modes as default};',
+    '_astro/QueryMode.js': 'import{run}from"./engine.js";export{run as default};',
+    '_astro/engine.js': 'const run=()=>fetch("/data/kql-tables.json");export{run};',
+  };
+
+  it('passes a page whose HTML and scripts hold no anatomy data', () => {
+    const distDirectory = buildDist({ 'tool/index.html': page(island('{}')), ...CLEAN_SCRIPTS });
+    expect(findAnatomyPayloadFailures(distDirectory, [toolPage])).toEqual([]);
+    fs.rmSync(distDirectory, { recursive: true });
+  });
+
+  it('fails the page whose frontmatter imported the generated tables and passed rows to its island', () => {
+    const props = JSON.stringify({ terms: [0, [TERM_ROW]] }).replaceAll('"', '&quot;');
+    const distDirectory = buildDist({ 'tool/index.html': page(island(props)), ...CLEAN_SCRIPTS });
+    const failures = findAnatomyPayloadFailures(distDirectory, [toolPage]);
+    expect(failures).toHaveLength(1);
+    expect(failures[0]).toContain('/tool/: the page carries anatomy data (found: ');
+    expect(failures[0]).toContain('term_is_broader_than_region');
+    fs.rmSync(distDirectory, { recursive: true });
+  });
+
+  it('fails the page whose lazily loaded mode bundled the generated tables, naming the chunk and how it is reached', () => {
+    const bundled = `const tables=${JSON.stringify({ anatomy_technique_terms: [TERM_ROW] })};export{tables as default};`;
+    const distDirectory = buildDist({ 'tool/index.html': page(island('{}')), ...CLEAN_SCRIPTS, '_astro/QueryMode.js': bundled });
+    const failures = findAnatomyPayloadFailures(distDirectory, [toolPage]);
+    expect(failures).toHaveLength(1);
+    expect(failures[0]).toContain('/tool/: the script /_astro/Shell.js -> /_astro/QueryMode.js carries anatomy data (found: ');
+    expect(failures[0]).toContain('named_as_delivery_route');
+    fs.rmSync(distDirectory, { recursive: true });
+  });
+
+  it('fails a chunk two imports behind a lazy one, and one behind an interaction gate', () => {
+    const deep = { ...CLEAN_SCRIPTS, '_astro/engine.js': 'const row={"status_sentence":"AI-drafted. Links are a reading of the catalog\'s own words, not new evidence."};export{row as run};' };
+    const distDirectory = buildDist({ 'tool/index.html': page(island('{}')), ...deep });
+    expect(findAnatomyPayloadFailures(distDirectory, [{ ...toolPage, interactionGatedEntryNames: ['QueryMode'] }])).toEqual([
+      expect.stringContaining('/tool/: the script /_astro/Shell.js -> /_astro/QueryMode.js -> /_astro/engine.js carries anatomy data'),
+    ]);
+    fs.rmSync(distDirectory, { recursive: true });
+  });
+
+  it('skips a page declared as meant to carry anatomy data, and only that page', () => {
+    const props = JSON.stringify({ terms: [0, [TERM_ROW]] }).replaceAll('"', '&quot;');
+    const distDirectory = buildDist({ 'tool/index.html': page(island(props)), 'studio/index.html': page(island(props)), ...CLEAN_SCRIPTS });
+    expect(findAnatomyPayloadFailures(distDirectory, [toolPage, { urlPath: '/studio/' }], ['/studio/'])).toEqual([expect.stringContaining('/tool/: the page carries anatomy data')]);
+    fs.rmSync(distDirectory, { recursive: true });
+  });
+});

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import curation from '@shared/scripts/technique-region-curation.json';
-import { LINK_ROLES, renderLinkRationale } from '@shared/scripts/draft-technique-regions.mjs';
+import { ENTRY_RATIONALES, LINK_ROLES, renderLinkRationale } from '@shared/scripts/draft-technique-regions.mjs';
 import { ANATOMY_PRESETS } from '@/components/bci/anatomy-presets';
 import { loadAnatomyBundle, loadAnatomyData } from '@/components/atlas-scene/load-anatomy-data';
 import { buildIndexes, executeQuery } from '@/lib/kql-engine';
@@ -13,7 +13,7 @@ import { describeAnatomyTables } from '../describe-tables';
 import { LABEL_TABLES_BY_PATH, loadAnatomyTables } from '../load-anatomy-tables';
 import { ANATOMY_INDEX_STATUS, CROSSWALK_STATUS, SOURCES_STATUS, TECHNIQUE_REGIONS_STATUS, VERDICTS_STATUS } from '../status-sentences';
 import type { AnatomyRow } from '../table-columns';
-import { ANATOMY_TABLE_NAMES, ANATOMY_TABLE_PREFIX, DRAFTER_COLUMN_BY_TABLE, MATCH_KINDS, isAnatomyTableName, listDraftColumns, type AnatomyTableName } from '../table-names';
+import { ANATOMY_TABLE_NAMES, ANATOMY_TABLE_PREFIX, MATCH_KINDS, drafterColumn, isAnatomyTableName, listDraftColumns, reviewColumn, type AnatomyTableName } from '../table-names';
 import { EXPORTED_TERM_ROLES, type CurationRole } from '../term-roles';
 
 const ASSET_DIRECTORY = 'src/site/atlas-assets';
@@ -21,19 +21,24 @@ const LABEL_TABLE_PATTERN = /^labels-[a-z0-9_]+\.json$/;
 const SDK_DIRECTORY = 'datalake/qtara/src/qtara';
 const API_DIRECTORY = 'src/pages/api';
 const ANATOMY_REFERENCE_PATTERN = /qif-anatomy-|anatomy_technique|anatomy-tables|technique-region/;
-/** Words that state a drafted reading as an effect on the brain. No column name and no vocabulary value may hold one. */
-const OVERCLAIMING_WORD_PATTERN = /target|affect|attack|hits|cause/i;
+/** Words that state a drafted reading as an effect on the brain. No column name and no cell outside the exempt columns may hold one. */
+const OVERCLAIMING_WORD_PATTERN = /target|affect|effect|impact|attack|acts_on|hits|hit_|cause|reach|coverage/i;
 /** The registrar's own field is called `target`; the role says the word sits in that field and nothing about what the technique does. */
 const ALLOWED_OVERCLAIMING_VALUES = ['named_in_catalog_target_field'];
 /**
- * Columns that carry someone else's words verbatim: the registrar's text, field names and technique names, the
- * publishers' label names and licence terms, and the drafter's stated reasons. They are evidence, not vocabulary.
+ * Columns whose cells are someone else's words, copied and never composed here, so the word rule does not apply to them:
+ *   the registrar's own text and names   quoted_text, quoted_field, quoted_pointer, named_term, technique_name, review_key (it holds the term)
+ *   a publisher's own words              quoted_terms, terms_url, urls, name, label_name, atlas_label_names
+ * Every AI-drafted sentence is held to the rule: clearance_reason, unlocks_when, route_note, subject_geometry_reason
+ * and the crosswalk's rationale. On the two technique tables `rationale` is one of a closed set of sentences the
+ * generator writes, and is exempt there by that set (tested below), not as free text.
  */
 const VERBATIM_COLUMNS = [
-  'quoted_text', 'quoted_field', 'quoted_pointer', 'quoted_terms', 'rationale', 'technique_name', 'named_term', 'name', 'label_name', 'atlas_label_names',
-  'subject_name', 'subject_name_at_draft', 'subject_geometry_reason', 'subject_geometry_reason_source', 'clearance_reason', 'unlocks_when', 'route_note',
-  'delineated_in', 'urls', 'terms_url', 'review_key',
+  'quoted_text', 'quoted_field', 'quoted_pointer', 'named_term', 'technique_name', 'review_key',
+  'quoted_terms', 'terms_url', 'urls', 'name', 'label_name', 'atlas_label_names',
 ];
+/** Tables whose `rationale` is a sentence from the generator's closed lists (LINK_ROLES and ENTRY_RATIONALES in draft-technique-regions.mjs). */
+const FIXED_RATIONALE_TABLES: readonly AnatomyTableName[] = ['anatomy_technique_terms', 'anatomy_technique_term_summary'];
 const PREFIX_COPIES: Array<[file: string, pattern: RegExp]> = [
   ['src/scripts/generate-parquet.py', /^ANATOMY_TABLE_PREFIX = "([^"]+)"$/m],
   ['src/scripts/propagation-check.mjs', /^const ANATOMY_TABLE_PREFIX = '([^']+)';$/m],
@@ -88,15 +93,16 @@ describe('no anatomy table lacks its review state', () => {
 
   it('marks every row AI-drafted and unreviewed in a cell short enough for a preview, with one of the status sentences the files must carry', () => {
     const previewWidth = 60;
-    expect(everyRow.length).toBeGreaterThan(0);
-    expect(countWhere(everyRow, (row) => row.review_state !== 'ai_drafted_unreviewed' || row.review_mark !== 'AI-drafted, unreviewed')).toBe(0);
+    const marked = ANATOMY_TABLE_NAMES.flatMap((name) => tables[name].map((row) => [row[reviewColumn(name, 'review_state')], row[reviewColumn(name, 'review_mark')]].join()));
+    expect(marked.length).toBe(everyRow.length);
+    expect([...new Set(marked)]).toEqual(['ai_drafted_unreviewed,AI-drafted, unreviewed']);
     expect('AI-drafted, unreviewed'.length).toBeLessThan(previewWidth);
     expect(countWhere(everyRow, (row) => !statusSentences.includes(String(row.status_sentence)))).toBe(0);
     expect(distinct(everyRow, 'status_sentence').sort()).toEqual([...statusSentences].sort());
   });
 
   it('names the drafter from each row\'s own source: every drafted row says ai, and only a row with nothing drafted is blank', () => {
-    const drafterOf = (name: AnatomyTableName, row: AnatomyRow): unknown => row[DRAFTER_COLUMN_BY_TABLE[name]];
+    const drafterOf = (name: AnatomyTableName, row: AnatomyRow): unknown => row[drafterColumn(name)];
     const blank = ANATOMY_TABLE_NAMES.flatMap((name) => tables[name].filter((row) => drafterOf(name, row) !== 'ai').map((row) => [name, drafterOf(name, row), row.mapped_qif_record_count ?? row.named_term_count]));
     expect(blank.filter(([, drafter, draftedCount]) => drafter !== '' || draftedCount !== 0)).toEqual([]);
     expect(blank.filter(([name]) => name !== 'anatomy_structures' && name !== 'anatomy_technique_term_summary')).toEqual([]);
@@ -104,18 +110,28 @@ describe('no anatomy table lacks its review state', () => {
 });
 
 describe('no column or vocabulary value states a drafted reading as an effect', () => {
-  it('has no column name holding target, affect, attack, hits or cause', () => {
+  it('has no column name holding a word that reads as an effect', () => {
     expect(ANATOMY_TABLE_NAMES.flatMap((name) => Object.keys(tables[name][0]).filter((column) => OVERCLAIMING_WORD_PATTERN.test(column)).map((column) => `${name}.${column}`))).toEqual([]);
-    expect(['target_region_id', 'affected_regions', 'attacks', 'hits_region', 'causes'].filter((column) => !OVERCLAIMING_WORD_PATTERN.test(column))).toEqual([]);
+    const refused = ['target_region_id', 'affected_regions', 'side_effects', 'impacted_region_id', 'attacks', 'acts_on_region', 'hits_region', 'hit_count', 'causes', 'reach', 'region_coverage'];
+    expect(refused.filter((column) => !OVERCLAIMING_WORD_PATTERN.test(column))).toEqual([]);
   });
 
-  it('has no such word in any cell outside the columns that quote someone else\'s words, bar the one allowed role', () => {
+  it('has no such word in any cell outside the columns that copy someone else\'s words, bar the one allowed role', () => {
+    const isExempt = (name: AnatomyTableName, column: string): boolean => VERBATIM_COLUMNS.includes(column) || (column === 'rationale' && FIXED_RATIONALE_TABLES.includes(name));
     const offending = ANATOMY_TABLE_NAMES.flatMap((name) => tables[name].flatMap((row) => Object.entries(row)
-      .filter(([column, cell]) => !VERBATIM_COLUMNS.includes(column) && typeof cell === 'string' && OVERCLAIMING_WORD_PATTERN.test(cell) && !ALLOWED_OVERCLAIMING_VALUES.includes(cell))
+      .filter(([column, cell]) => !isExempt(name, column) && typeof cell === 'string' && OVERCLAIMING_WORD_PATTERN.test(cell) && !ALLOWED_OVERCLAIMING_VALUES.includes(cell))
       .map(([column, cell]) => `${name}.${column}: ${cell}`)));
     expect([...new Set(offending)]).toEqual([]);
     expect(Object.values(EXPORTED_TERM_ROLES).filter((role) => OVERCLAIMING_WORD_PATTERN.test(role))).toEqual(ALLOWED_OVERCLAIMING_VALUES);
     expect(Object.values(MATCH_KINDS).filter((kind) => OVERCLAIMING_WORD_PATTERN.test(kind))).toEqual([]);
+  });
+
+  it('exempts a technique rationale only because it is one of the generator\'s fixed sentences', () => {
+    const entrySentences = Object.entries(ENTRY_RATIONALES).map(([reason, sentence]) => (reason === 'regions' ? String(sentence) : `${reason}: ${sentence}`));
+    const summaryRationales = distinct(tables.anatomy_technique_term_summary, 'rationale');
+    expect(summaryRationales.length).toBeGreaterThan(1);
+    expect(summaryRationales.filter((rationale) => !entrySentences.some((sentence) => rationale === sentence || rationale.startsWith(`${sentence} `)))).toEqual([]);
+    expect(VERBATIM_COLUMNS).not.toContain('rationale');
   });
 });
 
@@ -189,17 +205,17 @@ describe('every derived column equals the built index', () => {
     const expected = index.structures.flatMap((structure) => structure.nodes.map((node) => {
       const asset = assetsById.get(node.asset_id);
       return [structure.key, structure.name, node.hemisphere, node.hemispheres_drawn, node.size_class, asset?.path, asset?.sha256, asset?.license_id, asset?.position_check, asset?.visual_check.state,
-        structure.owners.map((owner) => `${owner.subject_kind}:${owner.subject_id}`).join(', '), structure.review_state.state, structure.check_status];
+        structure.owners.map((owner) => `${owner.subject_kind}:${owner.subject_id}`).join(', '), structure.review_state.state, structure.review_state.mark, structure.check_status];
     }));
     expect(expected.length).toBeGreaterThan(0);
     expect(tables.anatomy_structures.map((row) => [row.structure_key, row.label_name, row.hemisphere, row.hemispheres_drawn, row.size_class, row.asset_path, row.asset_sha256, row.asset_license_id,
-      row.position_check, row.visual_check_state, row.mapped_qif_record_keys, row.review_state, row.check_status])).toEqual(expected);
+      row.position_check, row.visual_check_state, row.mapped_qif_record_keys, row.mapping_review_state, row.mapping_review_mark, row.check_status])).toEqual(expected);
   });
 
   it('carries the index\'s own match and single-region flag for every link', () => {
     const indexed = index.techniques.flatMap((technique) => technique.links.map((link) =>
       [technique.id, link.term, MATCH_KINDS[link.resolution], link.lit ? link.resolved_region_id : '', link.lit ? '' : link.resolved_region_id ?? '', link.band_agrees, link.lit]));
-    expect(tables.anatomy_technique_terms.map((row) => [row.technique_id, row.named_term, row.match_kind, row.single_region_id, row.alias_match_region_id, row.region_band_in_technique_bands, row.single_region_match])).toEqual(indexed);
+    expect(tables.anatomy_technique_terms.map((row) => [row.technique_id, row.named_term, row.match_kind, row.single_region_id, row.other_match_region_id, row.region_band_in_technique_bands, row.single_region_match])).toEqual(indexed);
   });
 
   it('counts each technique\'s terms as the index holds them', () => {
@@ -228,8 +244,8 @@ describe('a term row never reads as a statement about a region', () => {
   });
 
   it('never holds a region id in both columns, and holds none for a word the table does not list', () => {
-    expect(countWhere(terms, (row) => row.single_region_id !== '' && row.alias_match_region_id !== '')).toBe(0);
-    expect(countWhere(terms, (row) => (row.match_kind === 'no_region_in_table') !== (row.single_region_id === '' && row.alias_match_region_id === ''))).toBe(0);
+    expect(countWhere(terms, (row) => row.single_region_id !== '' && row.other_match_region_id !== '')).toBe(0);
+    expect(countWhere(terms, (row) => (row.match_kind === 'no_region_in_table') !== (row.single_region_id === '' && row.other_match_region_id === ''))).toBe(0);
     expect(countWhere(terms, (row) => row.single_region_match === false)).toBeGreaterThan(countWhere(terms, (row) => row.single_region_match === true));
   });
 
@@ -278,6 +294,7 @@ describe('Data Studio descriptions and presets', () => {
     expect(descriptionOf('anatomy_technique_terms')).toContain(
       `Only ${single} of ${terms.length} words match exactly one listed region whose band the technique also carries; ${otherBand} match a region in a band the technique does not carry, `
       + `${terms.length - single - otherBand - none} match only a broader or narrower region, and ${none} match none.`);
+    expect(descriptionOf('anatomy_technique_terms')).toContain('other_match_region_id is never a single-region match');
     expect(descriptionOf('anatomy_technique_term_summary')).toContain(`only ${countWhere(summary, (row) => Number(row.single_region_term_count) > 0)} of ${summary.length} techniques have a word`);
     expect(descriptionOf('anatomy_technique_term_summary')).toContain(`and ${countWhere(summary, (row) => row.named_term_count === 0)} have no word drafted`);
   });
@@ -296,6 +313,7 @@ describe('Data Studio descriptions and presets', () => {
       expect(error).toBeNull();
       expect(rows.length).toBeGreaterThan(0);
       expect(rows.filter((row) => row.review_state !== 'ai_drafted_unreviewed' || typeof row.quoted_text !== 'string' || row.quoted_text === '')).toEqual([]);
+      expect(preset.query).not.toContain('anatomy_structures');
       expect(rows.filter((row) => typeof (row.match_kind ?? row.extent_match) !== 'string')).toEqual([]);
     }
   });

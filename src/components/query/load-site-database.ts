@@ -3,7 +3,7 @@
  * It is a same-origin GET of a static file and carries nothing about the device in focus.
  */
 
-import { isAnatomyTableName } from '@/lib/anatomy/table-names';
+import { isAnatomyTableName } from '@/lib/anatomy/table-prefix';
 import type { TableData } from '@/lib/kql-engine';
 
 const SITE_DATABASE_PATH = '/data/kql-tables.json';

@@ -37,7 +37,7 @@ SHARED = ROOT / "datalake"
 SRC_DATA = ROOT / "src" / "data"
 OUT = ROOT / "datalake" / "parquet"
 KQL_TABLES = ROOT / "src" / "site" / "data" / "kql-tables.json"
-# Must equal ANATOMY_TABLE_PREFIX in src/lib/anatomy/table-names.ts (a test compares them)
+# Must equal ANATOMY_TABLE_PREFIX in src/lib/anatomy/table-prefix.ts (a test compares them)
 ANATOMY_TABLE_PREFIX = "anatomy_"
 
 # Zstd level 3: 30-50% better compression than Snappy, sub-ms decompression at these sizes

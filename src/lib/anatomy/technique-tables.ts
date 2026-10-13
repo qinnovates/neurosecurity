@@ -9,9 +9,10 @@
  * `single_region_id` is filled only on a single-region match: the word is a
  * region's id or a listed synonym, that region's band is among the technique's
  * band tags, the row is valid for the current addressing and its quote still
- * stands (the index's `lit`). Whatever else the alias table returns for the
- * word goes in `alias_match_region_id`, with `match_kind` saying why it is not
- * a single-region match.
+ * stands (the index's `lit`). Any other region the word matches goes in
+ * `other_match_region_id`: an exact region id in a band the technique does not
+ * carry, or an alias for a broader or narrower region. `match_kind` and
+ * `region_band_in_technique_bands` say which.
  *
  * `anatomy_technique_term_summary`: one row per registrar technique that has
  * an entry in the technique-regions file, with counts only. It names no region:
@@ -57,7 +58,7 @@ function matchColumns(entry: IndexTechniqueLink): AnatomyRow {
     match_kind: MATCH_KINDS[entry.resolution],
     single_region_match: entry.lit,
     single_region_id: entry.lit ? resolverHit : NO_REGION,
-    alias_match_region_id: entry.lit ? NO_REGION : resolverHit,
+    other_match_region_id: entry.lit ? NO_REGION : resolverHit,
     region_band_in_technique_bands: entry.band_agrees,
     valid_for_current_addressing: entry.valid_for_current_addressing,
   };

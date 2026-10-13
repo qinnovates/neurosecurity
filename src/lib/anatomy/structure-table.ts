@@ -36,9 +36,14 @@ const UNSHIPPED_NODE_COLUMNS: AnatomyRow = {
   asset_path: NOT_SHIPPED,
   asset_sha256: NOT_SHIPPED,
   asset_license_id: NOT_SHIPPED,
-  position_check: NOT_SHIPPED,
-  visual_check_state: NOT_SHIPPED,
 };
+
+/** The shape's own checks. They follow the mapping's review columns, so a reviewed mapping is never read as a checked shape. */
+const UNSHIPPED_CHECK_COLUMNS: AnatomyRow = { visual_check_state: NOT_SHIPPED, position_check: NOT_SHIPPED };
+
+function shapeCheckColumns(asset: IndexAsset): AnatomyRow {
+  return { visual_check_state: asset.visual_check.state, position_check: asset.position_check };
+}
 
 function nodeColumns(node: IndexStructureNode, asset: IndexAsset): AnatomyRow {
   const [x, y, z] = node.centroid_mm;
@@ -55,8 +60,6 @@ function nodeColumns(node: IndexStructureNode, asset: IndexAsset): AnatomyRow {
     asset_path: asset.path,
     asset_sha256: asset.sha256,
     asset_license_id: asset.license_id,
-    position_check: asset.position_check,
-    visual_check_state: asset.visual_check.state,
   };
 }
 
@@ -98,9 +101,11 @@ interface StructureTableContext {
 function toRows(structure: IndexStructure, context: StructureTableContext): AnatomyRow[] {
   const draft = draftColumns(TABLE, listMappingDrafters(structure, context.crosswalk), structure.review_state, ANATOMY_INDEX_STATUS);
   const shared = structureColumns(structure, context.templateSpace);
-  const shippedNodes = structure.nodes.map((node) => nodeColumns(node, findAsset(context.assetsById, node.asset_id, structure.key)));
-  const nodeRows = shippedNodes.length > 0 ? shippedNodes : [UNSHIPPED_NODE_COLUMNS];
-  return nodeRows.map((columns) => ({ ...draft, ...shared, ...columns }));
+  const shipped = structure.nodes.map((node) => {
+    const asset = findAsset(context.assetsById, node.asset_id, structure.key);
+    return { ...draft, ...shapeCheckColumns(asset), ...shared, ...nodeColumns(node, asset) };
+  });
+  return shipped.length > 0 ? shipped : [{ ...draft, ...UNSHIPPED_CHECK_COLUMNS, ...shared, ...UNSHIPPED_NODE_COLUMNS }];
 }
 
 /**
