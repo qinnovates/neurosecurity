@@ -2,17 +2,25 @@
  * Walks the source import graph of a tool page and says whether it can reach
  * anatomy data, the anatomy tables, or anything generated from them.
  *
- * This is the early warning. It reads source with the TypeScript parser
- * (source-imports.mjs) and follows every import, re-export, `import()`,
- * `require()` and literal glob from the page's own file to wherever it leads.
- * What it cannot follow it reports as a problem instead of passing over it: an
- * import with a computed argument, a specifier it cannot resolve to a file, a
- * module loader, a build-time read of a data file.
+ * The aim is to catch an accident: an import, somewhere in a page's closure,
+ * that would build the anatomy tables or data files into the page. It is not
+ * meant to stop an author who sets out to get round it.
  *
- * What it cannot see at all: a path assembled at run time and fetched, and an
- * `import()` inside an `.astro` template expression. The post-build check
- * (check-post-build.mjs) reads the built page and every script chunk it can
- * load, and is what catches anatomy data however it got there.
+ * It reads source with the TypeScript parser (source-imports.mjs) and follows
+ * every import, re-export, `import()`, `require()`, `new URL(..., import.meta.url)`
+ * and literal glob from the page's own file to wherever it leads. What it
+ * cannot follow it reports instead of passing over: an import with a computed
+ * argument, a relative or aliased specifier that resolves to no file, a module
+ * loader, and a file that reads files or runs commands at build time.
+ *
+ * Two rules, by what the page is for (`scriptsMayCarryAnatomy` in tool-pages.mjs):
+ *   every page          may not import a file generated from the tables;
+ *   a page that is not  may not reach the anatomy loaders, builders or data
+ *   an anatomy page     files either.
+ *
+ * What it cannot see: a path fetched at run time, an `import()` inside an
+ * `.astro` template expression, `eval`, and `process.getBuiltinModule`. The
+ * post-build check reads what was built and covers the first two.
  */
 
 import path from 'node:path';
@@ -29,8 +37,11 @@ const COMPILED_EXTENSIONS = [['.js', ['.ts', '.tsx']], ['.jsx', ['.tsx']], ['.mj
 /** Files whose imports are followed. Anything else (a data file, a stylesheet, an image) is a leaf. */
 const CODE_FILE_PATTERN = /\.([cm]?[jt]sx?|astro)$/;
 const GLOB_SPECIAL_PATTERN = /[.+^${}()|[\]\\]/g;
-/** A build-time file read may not name anything under these. */
-const DATA_PATH_PATTERN = /(^|\/)(datalake|src\/site\/data|docs\/data|atlas-assets)(\/|$)/;
+/**
+ * Files in a tool page's imports that may read files or run commands at build time, each with the reason.
+ * None today: no file the Lab page reaches imports a file-system or child-process module.
+ */
+export const BUILD_TIME_FILE_ACCESS_ALLOWED = Object.freeze([]);
 
 /**
  * What no tool page's import graph may reach: every module that loads the
@@ -52,16 +63,21 @@ export const ANATOMY_DATA_MODULES = Object.freeze([
   'src/components/atlas-scene/load-anatomy-data.ts',
   'datalake/scripts/technique-region-curation.json',
 ]);
-/** The data files themselves, and everything generated from the tables: the query-table JSON and the parquet files. */
-export const ANATOMY_DATA_FILE_PATTERNS = Object.freeze([
-  /^datalake\/qif-anatomy-[a-z-]+\.json$/, /^src\/site\/atlas-assets\/.+\.json$/, /^src\/site\/data\//, /^docs\/data\//, /^datalake\/parquet\//,
-]);
+/** The data files themselves: every `qif-anatomy-*.json` and the pipeline's manifest and label tables. */
+export const ANATOMY_DATA_FILE_PATTERNS = Object.freeze([/^datalake\/qif-anatomy-[a-z0-9-]+\.json$/, /^src\/site\/atlas-assets\/.+\.json$/]);
+/** Everything generated from the tables: the query-table JSON and the parquet files. No page may import these. */
+export const GENERATED_TABLE_FILE_PATTERNS = Object.freeze([/^src\/site\/data\//, /^docs\/data\//, /^datalake\/parquet\//]);
 
-export function isAnatomyDataModule(filePath) {
-  return ANATOMY_DATA_MODULES.includes(filePath) || ANATOMY_DATA_FILE_PATTERNS.some((pattern) => pattern.test(filePath));
+export function isGeneratedTableFile(filePath) {
+  return GENERATED_TABLE_FILE_PATTERNS.some((pattern) => pattern.test(filePath));
 }
 
-/** The repository path a specifier points at before any extension is tried, or null for a package. */
+/** What a page that is not an anatomy page may not reach. */
+export function isAnatomyDataModule(filePath) {
+  return ANATOMY_DATA_MODULES.includes(filePath) || ANATOMY_DATA_FILE_PATTERNS.some((pattern) => pattern.test(filePath)) || isGeneratedTableFile(filePath);
+}
+
+/** The repository path a relative, aliased or root-absolute specifier points at before any extension is tried, or null for a bare one. */
 function toRepositoryPath(specifier, fromFile) {
   const bare = specifier.replace(IMPORT_QUERY_PATTERN, '');
   const alias = SOURCE_ALIASES.find(([prefix]) => bare.startsWith(prefix));
@@ -69,6 +85,11 @@ function toRepositoryPath(specifier, fromFile) {
   if (bare.startsWith(ROOT_PREFIX)) return path.posix.normalize(bare.slice(ROOT_PREFIX.length));
   if (bare.startsWith('.')) return path.posix.normalize(path.posix.join(path.posix.dirname(fromFile), bare));
   return null;
+}
+
+/** A bare specifier read from the repository root, which is how `src/lib/x` resolves under the project's `baseUrl`. */
+function toRootPath(specifier) {
+  return path.posix.normalize(specifier.replace(IMPORT_QUERY_PATTERN, ''));
 }
 
 function listCandidates(base) {
@@ -84,9 +105,9 @@ function listCandidates(base) {
  */
 export function resolveImport(specifier, fromFile, exists) {
   const base = toRepositoryPath(specifier, fromFile);
-  if (base === null) return { kind: 'package' };
-  const filePath = listCandidates(base).find((candidate) => exists(candidate));
-  return filePath === undefined ? { kind: 'unresolved', tried: base } : { kind: 'file', filePath };
+  const filePath = listCandidates(base ?? toRootPath(specifier)).find((candidate) => exists(candidate));
+  if (filePath !== undefined) return { kind: 'file', filePath };
+  return base === null ? { kind: 'package' } : { kind: 'unresolved', tried: base };
 }
 
 /**
@@ -111,13 +132,13 @@ function inspectFile(filePath, tree) {
   const imports = readSourceImports(filePath, tree.read(filePath));
   const resolved = imports.specifiers.map((specifier) => ({ specifier, ...resolveImport(specifier, filePath, tree.exists) }));
   const globbed = imports.globs.flatMap((glob) => tree.listFiles().filter((candidate) => globToPattern(glob, filePath).test(candidate)));
+  const fileAccess = BUILD_TIME_FILE_ACCESS_ALLOWED.includes(filePath) ? [] : imports.fileAccessModules;
   return {
-    readsFiles: imports.readsFiles,
-    dataPath: imports.literals.find((literal) => DATA_PATH_PATTERN.test(literal)),
     reached: [...resolved.filter((target) => target.kind === 'file').map((target) => target.filePath), ...globbed],
     problems: [
-      ...imports.unfollowable,
-      ...resolved.filter((target) => target.kind === 'unresolved').map((target) => `an import of "${target.specifier}", which resolves to no file (tried ${target.tried})`),
+      ...imports.unfollowable.map((what) => `has ${what}`),
+      ...resolved.filter((target) => target.kind === 'unresolved').map((target) => `has an import of "${target.specifier}", which resolves to no file (tried ${target.tried})`),
+      ...fileAccess.map((moduleName) => `imports ${moduleName}; a file in a tool page's imports may not read files or run commands at build time unless it is listed in BUILD_TIME_FILE_ACCESS_ALLOWED with the reason`),
     ],
   };
 }
@@ -131,15 +152,14 @@ function traceChain(filePath, cameFrom) {
 /**
  * @param {string} entryFile repository path of a page's source file
  * @param {SourceTree} tree
- * @param {(filePath: string) => boolean} isForbidden
- * @returns {string[]} one message per forbidden module reached and per import that cannot be followed; empty when the page is clean
+ * @param {{ scriptsMayCarryAnatomy?: boolean }} page the page's entry in tool-pages.mjs
+ * @returns {string[]} one message per forbidden file reached and per import that cannot be followed; empty when the page is clean
  */
-export function findImportProblems(entryFile, tree, isForbidden = isAnatomyDataModule) {
+export function findImportProblems(entryFile, tree, { scriptsMayCarryAnatomy = false } = {}) {
+  const isForbidden = scriptsMayCarryAnatomy ? isGeneratedTableFile : isAnatomyDataModule;
   const cameFrom = new Map([[entryFile, null]]);
   const queue = [entryFile];
   const problems = [];
-  const fileReaders = [];
-  const dataPaths = [];
   while (queue.length > 0) {
     const current = queue.shift();
     if (isForbidden(current)) {
@@ -147,25 +167,14 @@ export function findImportProblems(entryFile, tree, isForbidden = isAnatomyDataM
       continue;
     }
     if (!CODE_FILE_PATTERN.test(current)) continue;
-    const { reached, problems: fileProblems, readsFiles, dataPath } = inspectFile(current, tree);
-    problems.push(...fileProblems.map((problem) => `${current} has ${problem}`));
-    if (readsFiles) fileReaders.push(current);
-    if (dataPath !== undefined) dataPaths.push({ filePath: current, dataPath });
+    const { reached, problems: fileProblems } = inspectFile(current, tree);
+    problems.push(...fileProblems.map((problem) => `${current} ${problem}`));
     for (const next of reached.filter((filePath) => !cameFrom.has(filePath))) {
       cameFrom.set(next, current);
       queue.push(next);
     }
   }
-  return [...problems, ...findFileReadProblems(fileReaders, dataPaths)];
-}
-
-/**
- * A data path and a file-system module anywhere in one page's imports are reported together: the
- * path may be written in the page and read by a helper it calls, so the two need not share a file.
- */
-function findFileReadProblems(fileReaders, dataPaths) {
-  if (fileReaders.length === 0) return [];
-  return dataPaths.map(({ filePath, dataPath }) => `${filePath} names the data path "${dataPath}" and ${fileReaders[0]} reads files; a tool page may not read data files at build time`);
+  return problems;
 }
 
 /** The source file of a built page: `/atlas/model/` is `src/pages/atlas/model.astro` or `src/pages/atlas/model/index.astro`. */

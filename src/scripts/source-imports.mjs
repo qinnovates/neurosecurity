@@ -2,11 +2,11 @@
  * Reads what one source file imports, with the TypeScript parser, so that
  * spacing, comments, quote style and line breaks cannot hide an import.
  *
- * It reports four things: the specifiers the file imports, the literal globs
- * it expands, every import it cannot follow (a computed `import()`, a computed
- * glob, `createRequire`), and whether the file reads files itself, with the
- * string literals it holds, so a caller can tell a build-time read of a data
- * file from a read of anything else.
+ * It reports four things: the specifiers the file imports (including a file
+ * named by `new URL('./x', import.meta.url)`, which is how a worker or an asset
+ * is reached), the literal globs it expands, every import it cannot follow (a
+ * computed `import()`, a computed glob, `createRequire`), and the modules it
+ * imports that read files or run commands at build time.
  *
  * An `.astro` file is read as its frontmatter, its `<script>` blocks and the
  * files its script tags name. An
@@ -24,8 +24,9 @@ const ASTRO_EXTENSION = '.astro';
 const JSX_EXTENSION_PATTERN = /\.[cm]?[jt]sx$/;
 const GLOB_FUNCTION_NAMES = ['glob', 'globEager'];
 const REQUIRE_FUNCTION_NAME = 'require';
-/** Modules that read files or load modules by a path the parser cannot see. */
-const FILE_SYSTEM_MODULES = ['fs', 'node:fs', 'fs/promises', 'node:fs/promises'];
+/** Modules that read files or run commands, by a path or a command the parser cannot see. */
+const FILE_ACCESS_MODULES = ['fs', 'node:fs', 'fs/promises', 'node:fs/promises', 'child_process', 'node:child_process'];
+const URL_CLASS_NAME = 'URL';
 const MODULE_LOADER_MODULES = ['module', 'node:module'];
 
 /**
@@ -33,8 +34,7 @@ const MODULE_LOADER_MODULES = ['module', 'node:module'];
  * @property {string[]} specifiers every module specifier imported at run or build time; type-only statements are left out
  * @property {string[]} globs every literal glob pattern expanded
  * @property {string[]} unfollowable what the file imports in a way that cannot be followed, in words
- * @property {boolean} readsFiles whether the file imports a file-system module
- * @property {string[]} literals the text of every string and template literal in the file
+ * @property {string[]} fileAccessModules the file-system and child-process modules the file imports
  */
 
 /** The parts of a file that hold code, and the files its script tags name: the whole file, or an `.astro` file's frontmatter and script blocks. */
@@ -74,6 +74,17 @@ function readCall(node, found) {
   }
 }
 
+/** `import.meta.url`, the second argument that makes a `new URL(...)` name a file beside the source. */
+function isImportMetaUrl(node) {
+  return node !== undefined && ts.isPropertyAccessExpression(node) && node.name.text === 'url' && ts.isMetaProperty(node.expression);
+}
+
+/** `new URL('./worker.ts', import.meta.url)`: the bundler emits the file named, so it is an edge like an import. */
+function readNewUrl(node, found) {
+  const [target, base] = node.arguments ?? [];
+  if (ts.isIdentifier(node.expression) && node.expression.text === URL_CLASS_NAME && isImportMetaUrl(base) && isLiteralText(target)) found.specifiers.push(target.text);
+}
+
 function readStatement(node, found) {
   if (ts.isImportDeclaration(node) && node.importClause?.isTypeOnly !== true) found.specifiers.push(node.moduleSpecifier.text);
   if (ts.isExportDeclaration(node) && node.moduleSpecifier !== undefined && !node.isTypeOnly) found.specifiers.push(node.moduleSpecifier.text);
@@ -85,7 +96,7 @@ function readStatement(node, found) {
 function visit(node, found) {
   readStatement(node, found);
   if (ts.isCallExpression(node)) readCall(node, found);
-  if (isLiteralText(node) || ts.isTemplateHead(node) || ts.isTemplateMiddle(node) || ts.isTemplateTail(node)) found.literals.push(node.text);
+  if (ts.isNewExpression(node)) readNewUrl(node, found);
   ts.forEachChild(node, (child) => visit(child, found));
 }
 
@@ -96,11 +107,11 @@ function visit(node, found) {
  */
 export function readSourceImports(filePath, sourceText) {
   const { blocks, scriptSources } = listCodeBlocks(filePath, sourceText);
-  const found = { specifiers: [...scriptSources], globs: [], unfollowable: [], literals: [] };
+  const found = { specifiers: [...scriptSources], globs: [], unfollowable: [] };
   const scriptKind = JSX_EXTENSION_PATTERN.test(filePath) ? ts.ScriptKind.TSX : ts.ScriptKind.TS;
   for (const block of blocks) {
     visit(ts.createSourceFile(filePath, block, ts.ScriptTarget.Latest, false, scriptKind), found);
   }
   if (found.specifiers.some((specifier) => MODULE_LOADER_MODULES.includes(specifier))) found.unfollowable.push('a module loader (node:module), whose createRequire loads files by a computed path');
-  return { ...found, readsFiles: found.specifiers.some((specifier) => FILE_SYSTEM_MODULES.includes(specifier)) };
+  return { ...found, fileAccessModules: found.specifiers.filter((specifier) => FILE_ACCESS_MODULES.includes(specifier)) };
 }

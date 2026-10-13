@@ -3,7 +3,9 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { readSourceImports } from '../source-imports.mjs';
 import { TOOL_PAGES } from '../tool-pages.mjs';
-import { ANATOMY_DATA_MODULES, findImportProblems, findPageSource, isAnatomyDataModule, resolveImport } from '../tool-page-imports.mjs';
+import {
+  ANATOMY_DATA_MODULES, BUILD_TIME_FILE_ACCESS_ALLOWED, findImportProblems, findPageSource, isAnatomyDataModule, isGeneratedTableFile, resolveImport,
+} from '../tool-page-imports.mjs';
 
 const SOURCE_ROOTS = ['src', 'datalake'];
 const SKIPPED_DIRECTORIES = ['node_modules', 'eeg'];
@@ -58,7 +60,7 @@ const LAB_FILES = {
 const inFrontmatter = (line) => ({ [PAGE]: `---\n${PAGE_IMPORTS}\n${line}\n---\n<WorkbenchShell client:load />` });
 const inPageScript = (line) => ({ [PAGE]: `---\n${PAGE_IMPORTS}\n---\n<WorkbenchShell client:load />\n<script>${line}</script>` });
 const inQueryMode = (line) => ({ [QUERY_MODE]: `${QUERY_MODE_SOURCE}\n${line}` });
-const problemsWith = (extraFiles) => findImportProblems(PAGE, buildTree({ ...LAB_FILES, ...extraFiles }));
+const problemsWith = (extraFiles, page = { scriptsMayCarryAnatomy: false }) => findImportProblems(PAGE, buildTree({ ...LAB_FILES, ...extraFiles }), page);
 
 describe('readSourceImports', () => {
   it('reads imports however they are spaced, commented or quoted, and leaves type-only statements out', () => {
@@ -85,6 +87,7 @@ describe('readSourceImports', () => {
     expect(readSourceImports('x.ts', source).unfollowable).toEqual([
       'import() whose argument is computed', 'a glob whose pattern is computed', 'a module loader (node:module), whose createRequire loads files by a computed path',
     ]);
+    expect(readSourceImports('x.ts', "import fs from 'node:fs';\nimport { exec } from 'child_process';\nimport path from 'node:path';").fileAccessModules).toEqual(['node:fs', 'child_process']);
   });
 });
 
@@ -108,6 +111,7 @@ describe('resolveImport', () => {
 
   it('tells a package from a path that resolves to nothing', () => {
     expect(resolve('react')).toEqual({ kind: 'package' });
+    expect(resolve('src/lib/kql-tables')).toEqual({ kind: 'file', filePath: TABLES });
     expect(resolve('node:fs')).toEqual({ kind: 'package' });
     expect(resolve('./missing')).toEqual({ kind: 'unresolved', tried: 'src/pages/atlas/missing' });
   });
@@ -148,6 +152,14 @@ describe('findImportProblems on the leaks two independent verifications built', 
     }, TABLES],
     ['E15 an inline script imports the query tables', inPageScript("import { getKqlTables } from '@/lib/kql-tables'; window.leak = getKqlTables();"), TABLES],
     ['E17 a component imports a parquet file by URL', inQueryMode("import parquetUrl from '@shared/parquet/anatomy_technique_terms.parquet?url';"), 'datalake/parquet/anatomy_technique_terms.parquet'],
+    ['F01 a bare specifier that the project baseUrl resolves', inFrontmatter("import { getKqlTables } from 'src/lib/kql-tables';"), TABLES],
+    ['F02 a bare specifier for the generated file', inQueryMode("import siteTables from 'src/site/data/kql-tables.json';"), GENERATED_TABLES],
+    ['F07 a file named by new URL beside the source', inQueryMode("const tablesUrl = new URL('../../site/data/kql-tables.json', import.meta.url);"), GENERATED_TABLES],
+    ['F08 a worker that imports the query tables', {
+      'src/components/query/tables.worker.ts': "import { getKqlTables } from '@/lib/kql-tables';\npostMessage(getKqlTables());",
+      ...inQueryMode("const worker = new Worker(new URL('./tables.worker.ts', import.meta.url), { type: 'module' });"),
+    }, TABLES],
+    ['a data file whose name holds digits', { 'datalake/qif-anatomy-h01-card.json': '{}', ...inQueryMode("import card from '@shared/qif-anatomy-h01-card.json';") }, 'datalake/qif-anatomy-h01-card.json'],
     ['E18 the page imports the index builder', inFrontmatter("import { buildAnatomyBundle } from '@/lib/anatomy/build-anatomy-index';"), 'src/lib/anatomy/build-anatomy-index.ts'],
   ];
 
@@ -161,14 +173,14 @@ describe('findImportProblems on the leaks two independent verifications built', 
     ['E03b import() with a computed argument', inFrontmatter("const part = ['kql', 'tables'].join('-');\nconst tables = await import(`../../lib/${part}.ts`);"), `${PAGE} has import() whose argument is computed`],
     ['E04 createRequire', inFrontmatter("import { createRequire } from 'node:module';\nconst regions = createRequire(`${process.cwd()}/`)('./datalake/qif-anatomy-technique-regions.json');"),
       `${PAGE} has a module loader (node:module), whose createRequire loads files by a computed path`],
-    ['E05a a build-time read of an anatomy data file', inFrontmatter("import fs from 'node:fs';\nconst regions = JSON.parse(fs.readFileSync('datalake/qif-anatomy-technique-regions.json', 'utf-8'));"),
-      `${PAGE} names the data path "datalake/qif-anatomy-technique-regions.json" and ${PAGE} reads files; a tool page may not read data files at build time`],
-    ['E05b a build-time read of the generated query-table file', inFrontmatter("import fs from 'node:fs';\nconst tables = JSON.parse(fs.readFileSync('src/site/data/kql-tables.json', 'utf-8'));"),
-      `${PAGE} names the data path "src/site/data/kql-tables.json" and ${PAGE} reads files; a tool page may not read data files at build time`],
-    ['a data path written in the page and read by a helper module', {
-      'src/lib/read-json.ts': "import fs from 'node:fs';\nexport const readJson = (filePath) => JSON.parse(fs.readFileSync(filePath, 'utf-8'));",
+    ['E05 a page that reads files at build time', inFrontmatter("import fs from 'node:fs';\nconst regions = JSON.parse(fs.readFileSync('datalake/qif-anatomy-technique-regions.json', 'utf-8'));"),
+      `${PAGE} imports node:fs; a file in a tool page's imports may not read files or run commands at build time unless it is listed in BUILD_TIME_FILE_ACCESS_ALLOWED with the reason`],
+    ['a helper module that reads files, named as the file at fault', {
+      'src/lib/read-json.ts': "import { readFileSync } from 'fs';\nexport const readJson = (filePath) => JSON.parse(readFileSync(filePath, 'utf-8'));",
       ...inFrontmatter("import { readJson } from '@/lib/read-json';\nconst regions = readJson('datalake/qif-anatomy-technique-regions.json');"),
-    }, `${PAGE} names the data path "datalake/qif-anatomy-technique-regions.json" and src/lib/read-json.ts reads files; a tool page may not read data files at build time`],
+    }, "src/lib/read-json.ts imports fs; a file in a tool page's imports may not read files or run commands at build time unless it is listed in BUILD_TIME_FILE_ACCESS_ALLOWED with the reason"],
+    ['F05 a page that runs a command at build time', inFrontmatter("import { execFileSync } from 'node:child_process';\nconst tables = execFileSync('cat', ['src/site/data/kql-tables.json']);"),
+      `${PAGE} imports node:child_process; a file in a tool page's imports may not read files or run commands at build time unless it is listed in BUILD_TIME_FILE_ACCESS_ALLOWED with the reason`],
     ['an import that resolves to no file', inQueryMode("import gone from './not-there';"), `${QUERY_MODE} has an import of "./not-there", which resolves to no file (tried src/components/query/not-there)`],
   ];
 
@@ -180,29 +192,58 @@ describe('findImportProblems on the leaks two independent verifications built', 
     expect(problemsWith(inQueryMode("export const loadLeak = () => fetch('/data/kql-tables.json').then((response) => response.json());"))).toEqual([]);
   });
 
-  it('passes a file-system read of something that is not data, and a glob that matches no anatomy file', () => {
-    expect(problemsWith(inFrontmatter("import fs from 'node:fs';\nconst notes = fs.readFileSync('src/content/notes.md', 'utf-8');"))).toEqual([]);
+  it('passes code that only names a data file, as an error message does, and a glob that matches no anatomy file', () => {
+    expect(problemsWith(inQueryMode("export const SOURCES_FILE = 'datalake/qif-anatomy-sources.json';\nexport const hint = `Restore ${SOURCES_FILE}.`;"))).toEqual([]);
     expect(problemsWith(inQueryMode("const modes = import.meta.glob('./*.tsx');"))).toEqual([]);
+    expect(problemsWith(inQueryMode("const base = new URL(location.href);\nconst icon = new URL('./icon.svg', import.meta.url);"), { scriptsMayCarryAnatomy: false }))
+      .toEqual([`${QUERY_MODE} has an import of "./icon.svg", which resolves to no file (tried src/components/query/icon.svg)`]);
+  });
+});
+
+describe('findImportProblems on a page whose scripts may carry anatomy code', () => {
+  const anatomyPage = { scriptsMayCarryAnatomy: true };
+
+  it('lets it reach the anatomy loaders, builders and data files', () => {
+    const reaching = inFrontmatter("import { getKqlTables } from '@/lib/kql-tables';\nimport { buildAnatomyBundle } from '@/lib/anatomy/build-anatomy-index';\nimport manifest from '../../site/atlas-assets/manifest.json';");
+    expect(problemsWith(reaching)).toHaveLength(3);
+    expect(problemsWith(reaching, anatomyPage)).toEqual([]);
+  });
+
+  it('still forbids the generated table file and the parquet files', () => {
+    expect(problemsWith(inQueryMode("import siteTables from '../../site/data/kql-tables.json';"), anatomyPage))
+      .toEqual([`reaches ${GENERATED_TABLES} through ${PAGE} -> ${SHELL} -> ${QUERY_MODE} -> ${GENERATED_TABLES}`]);
+    expect(problemsWith(inQueryMode("import parquetUrl from '@shared/parquet/anatomy_technique_terms.parquet?url';"), anatomyPage)).toHaveLength(1);
+  });
+
+  it('still reports what cannot be followed and a build-time file read', () => {
+    expect(problemsWith(inFrontmatter("import fs from 'node:fs';\nconst lazy = await import(`./${name}.ts`);"), anatomyPage)).toHaveLength(2);
   });
 });
 
 describe('the tool pages in this repository', () => {
   it('names only modules that exist as anatomy data modules, and counts every anatomy data and generated file', () => {
     expect(ANATOMY_DATA_MODULES.filter((filePath) => !repositoryTree.exists(filePath))).toEqual([]);
-    const dataFiles = repositoryFiles.filter((filePath) => /qif-anatomy-|atlas-assets\/.*\.json$|^datalake\/parquet\/|^src\/site\/data\//.test(filePath));
-    expect(dataFiles.filter((filePath) => filePath.startsWith('datalake/parquet/')).length).toBeGreaterThan(0);
-    expect(dataFiles.filter((filePath) => !isAnatomyDataModule(filePath))).toEqual([]);
+    expect(BUILD_TIME_FILE_ACCESS_ALLOWED.filter((filePath) => !repositoryTree.exists(filePath))).toEqual([]);
+    const dataFiles = repositoryFiles.filter((filePath) => /^datalake\/qif-anatomy-|atlas-assets\/.*\.json$/.test(filePath));
+    const generatedFiles = repositoryFiles.filter((filePath) => /^datalake\/parquet\/|^src\/site\/data\//.test(filePath));
+    expect(dataFiles.length).toBeGreaterThan(0);
+    expect(generatedFiles.filter((filePath) => filePath.startsWith('datalake/parquet/')).length).toBeGreaterThan(0);
+    expect([...dataFiles, ...generatedFiles].filter((filePath) => !isAnatomyDataModule(filePath))).toEqual([]);
+    expect(generatedFiles.filter((filePath) => !isGeneratedTableFile(filePath))).toEqual([]);
+    expect(dataFiles.filter(isGeneratedTableFile)).toEqual([]);
   });
 
   it('reaches the query tables from a page that is allowed to, so the walk is known to follow real imports', () => {
     const problems = findImportProblems('src/pages/data-studio/index.astro', repositoryTree);
     expect(problems).toContain(`reaches ${TABLES} through src/pages/data-studio/index.astro -> ${TABLES}`);
+    expect(findImportProblems('src/pages/data-studio/index.astro', repositoryTree, { scriptsMayCarryAnatomy: true }).filter((problem) => problem.startsWith('reaches'))).toEqual([]);
   });
 
-  it.each(TOOL_PAGES.map((page) => page.urlPath))('%s reaches no anatomy data, table or generated file, and holds no import that cannot be followed', (urlPath) => {
-    const pageSource = findPageSource(urlPath, repositoryTree.exists);
+  it.each(TOOL_PAGES)('$urlPath meets the rule its own setting gives it, and holds no import that cannot be followed', (page) => {
+    const pageSource = findPageSource(page.urlPath, repositoryTree.exists);
     expect(pageSource).not.toBeNull();
+    expect(typeof page.scriptsMayCarryAnatomy).toBe('boolean');
     expect(readSourceImports(pageSource, repositoryTree.read(pageSource)).specifiers.length).toBeGreaterThan(0);
-    expect(findImportProblems(pageSource, repositoryTree)).toEqual([]);
+    expect(findImportProblems(pageSource, repositoryTree, page)).toEqual([]);
   });
 });

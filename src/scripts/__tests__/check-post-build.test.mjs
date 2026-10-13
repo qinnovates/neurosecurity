@@ -82,7 +82,7 @@ describe('findAnatomyPayloadFailures on what a build produces', () => {
   const TERM_ROW = { technique_id: 'QIF-T0100', named_term: 'cortex', ai_assigned_term_role: 'named_as_delivery_route', match_kind: 'term_is_broader_than_region', other_match_region_id: 'pfc' };
   const island = (props) => `<astro-island component-url="/_astro/Shell.js" renderer-url="/_astro/client.js" props="${props}" client="load"></astro-island>`;
   const page = (body) => `<!DOCTYPE html><html><head></head><body>${body}</body></html>`;
-  const toolPage = { urlPath: '/tool/' };
+  const toolPage = { urlPath: '/tool/', scriptsMayCarryAnatomy: false };
 
   /** A built site in a temporary folder: path under the build -> contents. */
   function buildDist(files) {
@@ -122,24 +122,37 @@ describe('findAnatomyPayloadFailures on what a build produces', () => {
     const distDirectory = buildDist({ 'tool/index.html': page(island('{}')), ...CLEAN_SCRIPTS, '_astro/QueryMode.js': bundled });
     const failures = findAnatomyPayloadFailures(distDirectory, [toolPage]);
     expect(failures).toHaveLength(1);
-    expect(failures[0]).toContain('/tool/: the script /_astro/Shell.js -> /_astro/QueryMode.js carries anatomy data (found: ');
+    expect(failures[0]).toContain('/tool/: the script /_astro/Shell.js -> /_astro/QueryMode.js carries the anatomy tables or a data file (found: ');
     expect(failures[0]).toContain('named_as_delivery_route');
     fs.rmSync(distDirectory, { recursive: true });
   });
 
   it('fails a chunk two imports behind a lazy one, and one behind an interaction gate', () => {
-    const deep = { ...CLEAN_SCRIPTS, '_astro/engine.js': 'const row={"status_sentence":"AI-drafted. Links are a reading of the catalog\'s own words, not new evidence."};export{row as run};' };
+    const deep = { ...CLEAN_SCRIPTS, '_astro/engine.js': 'const row={single_region_match:!1,other_match_region_id:"pfc"};export{row as run};' };
     const distDirectory = buildDist({ 'tool/index.html': page(island('{}')), ...deep });
     expect(findAnatomyPayloadFailures(distDirectory, [{ ...toolPage, interactionGatedEntryNames: ['QueryMode'] }])).toEqual([
-      expect.stringContaining('/tool/: the script /_astro/Shell.js -> /_astro/QueryMode.js -> /_astro/engine.js carries anatomy data'),
+      expect.stringContaining('/tool/: the script /_astro/Shell.js -> /_astro/QueryMode.js -> /_astro/engine.js carries the anatomy tables or a data file'),
     ]);
     fs.rmSync(distDirectory, { recursive: true });
   });
 
-  it('skips a page declared as meant to carry anatomy data, and only that page', () => {
+  it('does not scan the scripts of a page whose scripts may carry anatomy code, and still scans its HTML', () => {
+    const anatomyPage = { urlPath: '/tool/', scriptsMayCarryAnatomy: true };
+    const bundled = `const tables=${JSON.stringify({ anatomy_technique_terms: [TERM_ROW] })};export{tables as default};`;
+    const scriptsOnly = buildDist({ 'tool/index.html': page(island('{}')), ...CLEAN_SCRIPTS, '_astro/QueryMode.js': bundled });
+    expect(findAnatomyPayloadFailures(scriptsOnly, [toolPage])).toHaveLength(1);
+    expect(findAnatomyPayloadFailures(scriptsOnly, [anatomyPage])).toEqual([]);
     const props = JSON.stringify({ terms: [0, [TERM_ROW]] }).replaceAll('"', '&quot;');
-    const distDirectory = buildDist({ 'tool/index.html': page(island(props)), 'studio/index.html': page(island(props)), ...CLEAN_SCRIPTS });
-    expect(findAnatomyPayloadFailures(distDirectory, [toolPage, { urlPath: '/studio/' }], ['/studio/'])).toEqual([expect.stringContaining('/tool/: the page carries anatomy data')]);
+    const inlined = buildDist({ 'tool/index.html': page(island(props)), ...CLEAN_SCRIPTS });
+    expect(findAnatomyPayloadFailures(inlined, [anatomyPage])).toEqual([expect.stringContaining('/tool/: the page carries anatomy data')]);
+    fs.rmSync(scriptsOnly, { recursive: true });
+    fs.rmSync(inlined, { recursive: true });
+  });
+
+  it('is not tripped by a script that holds only ordinary words the tables also use', () => {
+    const ordinary = 'class HemisphereLight{}const cve={urls:[],source_id:"nvd",grant:"granted"};const row={review_state:"x",hemisphere:"left",name:"n"};export{HemisphereLight,cve,row};';
+    const distDirectory = buildDist({ 'tool/index.html': page(island('{}')), ...CLEAN_SCRIPTS, '_astro/engine.js': ordinary });
+    expect(findAnatomyPayloadFailures(distDirectory, [toolPage])).toEqual([]);
     fs.rmSync(distDirectory, { recursive: true });
   });
 });

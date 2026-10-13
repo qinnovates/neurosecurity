@@ -277,7 +277,7 @@ function runMeasurement(argumentList) {
     : checkFirstLoadBudgets(distDirectory, [page], { isAdHoc: true });
   process.stdout.write(`${isJson ? JSON.stringify({ measurements, failures }, null, 2) : measurements.map(formatReport).join('\n\n')}\n`);
   for (const failure of failures) process.stderr.write(`[measure-lab-first-load] FAIL: ${failure}\n`);
-  if (failures.length > 0) process.exit(1);
+  if (failures.length > 0) process.exitCode = 1;
 }
 
 const isRunDirectly = process.argv[1] !== undefined
@@ -288,6 +288,6 @@ if (isRunDirectly) {
     runMeasurement(process.argv.slice(2));
   } catch (error) {
     process.stderr.write(`[measure-lab-first-load] ${error instanceof Error ? error.message : String(error)}\n`);
-    process.exit(1);
+    process.exitCode = 1;
   }
 }
