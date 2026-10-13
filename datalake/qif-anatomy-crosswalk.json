@@ -45,7 +45,7 @@
       "subject_kind": "region",
       "subject_id": "cauda_equina",
       "reason": "No openly licensed source with geometry for this structure was found.",
-      "reason_source": "The licence verification lists it among the QIF regions still without clean geometry; the search behind that list was made by AI.",
+      "reason_source": "datalake/qif-anatomy-sources.json: no source in its sources or considered_and_refused lists has spinal nerve root geometry; the search behind those lists was made by AI.",
       "drafted_by": "ai"
     },
     {
@@ -80,6 +80,7 @@
       ],
       "name_match": "none",
       "extent_match": "contained",
+      "contained_kind": "named_stand_in",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "expert_drawing_on_template",
@@ -107,8 +108,9 @@
       "atlas_ids": [
         "12114"
       ],
-      "name_match": "synonym",
+      "name_match": "none",
       "extent_match": "contained",
+      "contained_kind": "named_stand_in",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "expert_drawing_on_template",
@@ -140,6 +142,7 @@
       ],
       "name_match": "none",
       "extent_match": "contained",
+      "contained_kind": "no_boundary",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "expert_drawing_on_template",
@@ -167,8 +170,9 @@
       "atlas_ids": [
         "12144"
       ],
-      "name_match": "synonym",
+      "name_match": "none",
       "extent_match": "contained",
+      "contained_kind": "named_stand_in",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "expert_drawing_on_template",
@@ -210,7 +214,7 @@
           "quote": "inferior frontal gyrus, opercular part"
         },
         "check_status": "unchecked",
-        "rationale": "QIF lists pars opercularis and pars triangularis; the labels are those two gyral parts, not a functional area, and one mirrored hemisphere."
+        "rationale": "The labels are the two gyral parts QIF lists, not a functional area. The atlas is one mirrored hemisphere, so a right-side copy is drawn too."
       },
       "drafted_by": "ai"
     },
@@ -230,6 +234,7 @@
       ],
       "name_match": "none",
       "extent_match": "contained",
+      "contained_kind": "named_stand_in",
       "definition_contested": true,
       "draws": true,
       "delineation_basis": "expert_drawing_on_template",
@@ -261,6 +266,7 @@
       ],
       "name_match": "none",
       "extent_match": "contained",
+      "contained_kind": "no_boundary",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "expert_drawing_on_template",
@@ -291,6 +297,7 @@
       ],
       "name_match": "none",
       "extent_match": "contained",
+      "contained_kind": "no_boundary",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "expert_drawing_on_template",
@@ -349,8 +356,9 @@
       "atlas_ids": [
         "12132"
       ],
-      "name_match": "synonym",
+      "name_match": "none",
       "extent_match": "contained",
+      "contained_kind": "named_stand_in",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "expert_drawing_on_template",
@@ -532,7 +540,7 @@
         "2"
       ],
       "name_match": "same",
-      "extent_match": "same",
+      "extent_match": "approximate",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "manual_mri",
@@ -544,7 +552,7 @@
           "quote": "Putamen"
         },
         "check_status": "unchecked",
-        "rationale": "Putamen, caudate nucleus and nucleus accumbens are the three QIF sub-structures."
+        "rationale": "Putamen, caudate nucleus and nucleus accumbens, each a population probability map cut at 0.5."
       },
       "drafted_by": "ai"
     },
@@ -561,7 +569,7 @@
         "5"
       ],
       "name_match": "same",
-      "extent_match": "same",
+      "extent_match": "approximate",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "manual_mri",
@@ -573,7 +581,7 @@
           "quote": "Globus Pallidus Internal"
         },
         "check_status": "unchecked",
-        "rationale": "The label is the internal segment of the globus pallidus."
+        "rationale": "The label is the internal segment of the globus pallidus, a population probability map cut at 0.5."
       },
       "drafted_by": "ai"
     },
@@ -590,7 +598,7 @@
         "4"
       ],
       "name_match": "same",
-      "extent_match": "same",
+      "extent_match": "approximate",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "manual_mri",
@@ -602,7 +610,7 @@
           "quote": "Globus Pallidus External"
         },
         "check_status": "unchecked",
-        "rationale": "The label is the external segment of the globus pallidus."
+        "rationale": "The label is the external segment of the globus pallidus, a population probability map cut at 0.5."
       },
       "drafted_by": "ai"
     },
@@ -619,7 +627,7 @@
         "15"
       ],
       "name_match": "same",
-      "extent_match": "same",
+      "extent_match": "approximate",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "manual_mri",
@@ -631,7 +639,7 @@
           "quote": "Subthalamic Nucleus"
         },
         "check_status": "unchecked",
-        "rationale": "The label is the subthalamic nucleus."
+        "rationale": "The label is the subthalamic nucleus, a population probability map cut at 0.5."
       },
       "drafted_by": "ai"
     },
@@ -649,7 +657,7 @@
         "8"
       ],
       "name_match": "same",
-      "extent_match": "same",
+      "extent_match": "approximate",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "manual_mri",
@@ -678,7 +686,7 @@
         "10"
       ],
       "name_match": "same",
-      "extent_match": "same",
+      "extent_match": "approximate",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "manual_mri",
@@ -729,10 +737,10 @@
         "source_ref": {
           "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
           "pointer": "/labels/10390/name",
-          "quote": "thalamus"
+          "quote": "thalamus (remainder not assigned to one of its 18 annotated parts)"
         },
         "check_status": "unchecked",
-        "rationale": "The thalamus label and thirteen nuclear labels. The anterior complex and ventral lateral nucleus belong to the contained regions ant and vim."
+        "rationale": "The remainder label and thirteen nuclear labels. The anterior complex and ventral lateral nucleus are drawn under ant and vim, which thalamus contains."
       },
       "drafted_by": "ai"
     },
@@ -806,6 +814,7 @@
       ],
       "name_match": "none",
       "extent_match": "contained",
+      "contained_kind": "no_boundary",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "expert_drawing_on_template",
@@ -843,7 +852,7 @@
         "source_ref": {
           "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
           "pointer": "/labels/10392/name",
-          "quote": "anterior nuclear complex of thalamus"
+          "quote": "anterior nuclear complex of thalamus (remainder, excluding lateral dorsal nucleus of thalamus)"
         },
         "check_status": "unchecked",
         "rationale": "The label is the anterior nuclear complex of the thalamus, not divided into its three nuclei."
@@ -863,8 +872,9 @@
         "12390",
         "12384"
       ],
-      "name_match": "synonym",
+      "name_match": "none",
       "extent_match": "contained",
+      "contained_kind": "named_stand_in",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "expert_drawing_on_template",
@@ -1025,7 +1035,7 @@
         "source_ref": {
           "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
           "pointer": "/labels/12195/name",
-          "quote": "midbrain tegmentum"
+          "quote": "midbrain tegmentum (remainder, excluding red nucleus and substantia nigra)"
         },
         "check_status": "unchecked",
         "rationale": "Union of tegmentum, pretectal region, colliculi and cerebral peduncle. Red nucleus and nigra are drawn from another atlas."
