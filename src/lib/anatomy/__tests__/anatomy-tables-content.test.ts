@@ -13,8 +13,7 @@ import { describeAnatomyTables } from '../describe-tables';
 import { LABEL_TABLES_BY_PATH, loadAnatomyTables } from '../load-anatomy-tables';
 import { ANATOMY_INDEX_STATUS, CROSSWALK_STATUS, SOURCES_STATUS, TECHNIQUE_REGIONS_STATUS, VERDICTS_STATUS } from '../status-sentences';
 import type { AnatomyRow } from '../table-columns';
-import { ANATOMY_TABLE_NAMES, ANATOMY_TABLE_PREFIX, DRAFTER_COLUMN_BY_TABLE, isAnatomyTableName, listDraftColumns, type AnatomyTableName } from '../table-names';
-import { MATCH_KINDS } from '../technique-tables';
+import { ANATOMY_TABLE_NAMES, ANATOMY_TABLE_PREFIX, DRAFTER_COLUMN_BY_TABLE, MATCH_KINDS, isAnatomyTableName, listDraftColumns, type AnatomyTableName } from '../table-names';
 import { EXPORTED_TERM_ROLES, type CurationRole } from '../term-roles';
 
 const ASSET_DIRECTORY = 'src/site/atlas-assets';

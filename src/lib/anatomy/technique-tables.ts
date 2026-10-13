@@ -22,22 +22,14 @@ import type { AnatomyData } from './anatomy-inputs';
 import type { IndexTechnique, IndexTechniqueLink } from './anatomy-index-types';
 import { buildTechniques, type ReviewedLink } from './build-index-techniques';
 import { REGISTRAR_FILE, readBandLevelReason } from './parse-technique-regions';
-import { lightsRegion, type Resolution } from './resolve-region-term';
+import { lightsRegion } from './resolve-region-term';
 import { UNREVIEWED, toIndexReviewState } from './review-state';
 import { draftColumns, evidenceColumns, joinIds, type AnatomyRow } from './table-columns';
+import { MATCH_KINDS } from './table-names';
 import { findTermRole, type ExportedTermRole } from './term-roles';
 
 const TERMS_TABLE = 'anatomy_technique_terms';
 const SUMMARY_TABLE = 'anatomy_technique_term_summary';
-
-/** The resolver's match, named for what it says about the word. The resolver decides; this only renames. */
-export const MATCH_KINDS = {
-  id: 'region_id',
-  synonym: 'synonym',
-  whole_to_part: 'term_is_broader_than_region',
-  part_to_whole: 'term_is_narrower_than_region',
-  unclassified: 'no_region_in_table',
-} as const satisfies Record<Resolution, string>;
 
 /** A technique with no entry in the file has nothing drafted, so it has no row. */
 const NOT_DRAFTED: IndexTechnique['scope'] = 'not_drafted';

@@ -16,9 +16,9 @@ import { buildSubjects } from './build-index-structures';
 import { structureKey, subjectKey } from './crosswalk-rules';
 import type { CheckedEvidence, ReviewedCrosswalk, ReviewedNoGeometry } from './review-rows';
 import { draftColumns, evidenceColumns, joinIds, joinText, type AnatomyRow, type EvidenceColumns } from './table-columns';
+import { CROSSWALK_ROW_KINDS } from './table-names';
 
 const TABLE = 'anatomy_crosswalk';
-export const CROSSWALK_ROW_KINDS = { CORRESPONDENCE: 'atlas_correspondence', NO_GEOMETRY: 'no_geometry' } as const;
 
 const NOT_APPLICABLE = '';
 const UNKNOWN_SUBJECT_NAME = '';

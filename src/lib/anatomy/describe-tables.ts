@@ -8,7 +8,7 @@
  */
 
 import { AnatomyDataError } from './errors';
-import type { AnatomyTableName } from './table-names';
+import { CROSSWALK_ROW_KINDS, MATCH_KINDS, ONE_REGION_MATCH_KINDS, type AnatomyTableName } from './table-names';
 
 export interface DatasetDescription {
   label: string;
@@ -20,8 +20,8 @@ type Row = Readonly<Record<string, unknown>>;
 
 const CATEGORY = 'Anatomy';
 const QUERY_TABLES_FILE = 'src/lib/kql-tables.ts';
-const SINGLE_REGION_MATCH_KINDS: readonly unknown[] = ['region_id', 'synonym'];
-const NO_REGION_MATCH_KIND = 'no_region_in_table';
+const ONE_REGION_KINDS: readonly unknown[] = ONE_REGION_MATCH_KINDS;
+const NO_REGION_MATCH_KIND = MATCH_KINDS.unclassified;
 
 const countWhere = (rows: readonly Row[], test: (row: Row) => boolean): number => rows.filter(test).length;
 const countDistinct = (rows: readonly Row[], column: string): number => new Set(rows.map((row) => row[column])).size;
@@ -44,14 +44,14 @@ function describeSameExtent(sameExtent: number, rowCount: number): string {
 }
 
 function describeCrosswalk(rows: readonly Row[]): string {
-  const correspondences = rows.filter((row) => row.row_kind === 'atlas_correspondence');
+  const correspondences = rows.filter((row) => row.row_kind === CROSSWALK_ROW_KINDS.CORRESPONDENCE);
   const sameExtent = countWhere(correspondences, (row) => row.extent_match === 'same');
   return `Correspondences between the ${countDistinct(rows, 'subject_id')} QIF brain regions and atlas labels: ${countDistinct(correspondences, 'subject_id')} regions have a row and ${rows.length - correspondences.length} have a record saying no buildable atlas has geometry for them. `
     + `AI-drafted and unreviewed; no neuroanatomist has checked them. Read extent_match before treating a label as the region: ${describeSameExtent(sameExtent, correspondences.length)}.`;
 }
 
 function describeTerms(rows: readonly Row[]): string {
-  const namesOneRegion = (row: Row): boolean => SINGLE_REGION_MATCH_KINDS.includes(row.match_kind);
+  const namesOneRegion = (row: Row): boolean => ONE_REGION_KINDS.includes(row.match_kind);
   const single = countWhere(rows, (row) => row.single_region_match === true);
   const otherBand = countWhere(rows, (row) => namesOneRegion(row) && row.region_band_in_technique_bands === false);
   const none = countWhere(rows, (row) => row.match_kind === NO_REGION_MATCH_KIND);

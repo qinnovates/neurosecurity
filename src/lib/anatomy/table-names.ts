@@ -1,8 +1,11 @@
 /**
  * The names of the exported anatomy tables and of the columns every one of
- * them carries. This module imports nothing, so code that runs in a page may
- * read a table name from it without reaching the tables themselves.
+ * them carries, with the two vocabularies a description has to count by. This
+ * module imports no code, so code that runs in a page may read a name from it
+ * without reaching the tables themselves.
  */
+
+import type { Resolution } from './resolve-region-term';
 
 /**
  * Every anatomy table shares this prefix. src/scripts/generate-parquet.py and
@@ -40,3 +43,18 @@ export function listDraftColumns(table: AnatomyTableName): string[] {
 export function isAnatomyTableName(name: string): boolean {
   return name.startsWith(ANATOMY_TABLE_PREFIX);
 }
+
+/** The resolver's match, named for what it says about the word. The resolver decides; this only renames. */
+export const MATCH_KINDS = {
+  id: 'region_id',
+  synonym: 'synonym',
+  whole_to_part: 'term_is_broader_than_region',
+  part_to_whole: 'term_is_narrower_than_region',
+  unclassified: 'no_region_in_table',
+} as const satisfies Record<Resolution, string>;
+export type MatchKind = typeof MATCH_KINDS[Resolution];
+
+/** The match kinds under which a word names exactly one listed region. */
+export const ONE_REGION_MATCH_KINDS: readonly MatchKind[] = [MATCH_KINDS.id, MATCH_KINDS.synonym];
+
+export const CROSSWALK_ROW_KINDS = { CORRESPONDENCE: 'atlas_correspondence', NO_GEOMETRY: 'no_geometry' } as const;
