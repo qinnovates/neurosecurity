@@ -1,23 +1,20 @@
 /**
  * The cells and columns every exported anatomy table shares. A table is a flat
  * copy of AI-drafted data that leaves the page that explains it, so each row
- * carries who drafted it, its review state with the mark's words, and the
- * status sentence of what it was drafted in. No builder writes those columns
- * by hand: they come from `draftColumns`, which has no way to leave one out.
+ * opens with its review state, the mark's words, who drafted it and the status
+ * sentence of what it was drafted in. No builder writes those columns by hand:
+ * they come from `draftColumns`, which has no way to leave one out.
  */
 
 import type { IndexReviewState } from './anatomy-index-types';
 import type { Drafter } from './anatomy-types';
 import type { EvidenceBlock } from './evidence';
 import type { CheckedEvidence } from './review-rows';
+import { DRAFTER_COLUMN_BY_TABLE, type AnatomyTableName } from './table-names';
 
-/** Null only where a column does not apply to the row. A drafted row's state is never null. */
+/** Null only where a column does not apply to the row. A row's review state is never null. */
 export type AnatomyCell = string | number | boolean | null;
 export type AnatomyRow = Record<string, AnatomyCell>;
-
-/** The columns no anatomy table may lack. A test holds every table to this list. */
-export const DRAFT_COLUMNS = ['drafted_by', 'review_state', 'review_mark', 'reviewed_by_role', 'reviewed_on', 'status_sentence'] as const;
-export type DraftColumns = Record<typeof DRAFT_COLUMNS[number], string>;
 
 /** The columns of a row that rests on quoted words. */
 export const EVIDENCE_COLUMNS = ['claim_basis', 'quoted_text', 'quoted_file', 'quoted_pointer', 'quote_state', 'rationale', 'check_status'] as const;
@@ -37,19 +34,27 @@ export function joinText(parts: readonly string[]): string {
   return parts.join(TEXT_SEPARATOR);
 }
 
+/** Who drafted what a row holds. Empty only where the row holds nothing drafted. */
+export function joinDrafters(drafters: readonly Drafter[]): string {
+  return joinIds([...new Set<string>(drafters)]);
+}
+
 /**
- * @param draftedBy who drafted the row, from the row itself or from its file
- * @param reviewState the state the index derived for the row; it has no empty value
+ * The columns that open a row. Spread them first.
+ *
+ * @param table the table the row belongs to, which names its drafter column
+ * @param drafters who drafted what the row holds, read from the drafted rows themselves
+ * @param reviewState the state derived for the row; it has no empty value
  * @param statusSentence the status sentence of the file or index the row comes from
  */
-export function draftColumns(draftedBy: Drafter, reviewState: IndexReviewState, statusSentence: string): DraftColumns {
+export function draftColumns(table: AnatomyTableName, drafters: readonly Drafter[], reviewState: IndexReviewState, statusSentence: string): AnatomyRow {
   const isReviewed = reviewState.state === 'reviewed';
   return {
-    drafted_by: draftedBy,
-    review_state: reviewState.state,
     review_mark: reviewState.mark,
+    review_state: reviewState.state,
     reviewed_by_role: isReviewed ? reviewState.reviewer_role : NOT_REVIEWED,
     reviewed_on: isReviewed ? reviewState.reviewed_on : NOT_REVIEWED,
+    [DRAFTER_COLUMN_BY_TABLE[table]]: joinDrafters(drafters),
     status_sentence: statusSentence,
   };
 }

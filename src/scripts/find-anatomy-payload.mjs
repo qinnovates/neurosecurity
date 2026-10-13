@@ -18,6 +18,22 @@ import { fileURLToPath } from 'node:url';
 const DEFAULT_BUILT_PAGES = ['dist/atlas/model/index.html'];
 
 /**
+ * The same three kinds of marker for the exported anatomy tables (src/lib/anatomy/anatomy-tables.ts),
+ * which a page could be handed through the query tables: column names, the role and match-kind
+ * values that survive a renaming of every key, and the status sentences of the drafted files.
+ * A projection that keeps only a technique id, a word and a region id carries none of these;
+ * the import-graph test (tool-page-imports.mjs) is what stops that one.
+ */
+const ANATOMY_TABLE_MARKERS = [
+  'review_mark', 'status_sentence', 'named_term', 'ai_assigned_term_role', 'match_kind', 'single_region_match', 'single_region_id', 'alias_match_region_id',
+  'region_band_in_technique_bands', 'single_region_term_count', 'mapped_qif_record_keys', 'subject_geometry_state', 'atlas_label_names',
+  'ai_verdict', 'ai_reading_permits_shipping', 'handled_as_license_id',
+  'named_as_acted_on', 'named_as_recorded_from', 'named_as_delivery_route', 'named_as_pathway_stage', 'named_in_catalog_target_field', 'adjective_for_named_structure',
+  'term_is_broader_than_region', 'term_is_narrower_than_region', 'no_region_in_table', 'atlas_correspondence',
+  'Links are a reading of the catalog', 'No neuroanatomist has checked these correspondences', 'AI-drafted source registry', 'made by AI and not by a lawyer',
+];
+
+/**
  * Strings that appear in the anatomy index or its evidence file and nowhere a
  * page that must not carry them has reason to hold them. The likely accident is
  * a partial projection (one section of the index, or a view model with renamed
@@ -38,6 +54,7 @@ export const ANATOMY_PAYLOAD_MARKERS = Object.freeze([
   'not_drafted', 'not_mapped', 'owner_contains_row_subject', 'row_subject_contains_owner', 'route_not_settled',
   'No device geometry has been recorded for this build', 'qif-anatomy-',
   '"state":"ai_drafted_unreviewed"',
+  ...ANATOMY_TABLE_MARKERS,
 ]);
 
 /** The quote and ampersand encodings a serialised payload can arrive in: HTML entities, and escapes inside a script string. */

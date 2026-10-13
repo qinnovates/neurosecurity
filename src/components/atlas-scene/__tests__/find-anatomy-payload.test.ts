@@ -2,6 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { parseAnatomyFiles } from '@/lib/anatomy/anatomy-inputs';
 import { buildAnatomyBundle } from '@/lib/anatomy/build-anatomy-index';
 import { buildRawFiles } from '@/lib/anatomy/__tests__/raw-files-fixture';
+import { buildAnatomyTables } from '@/lib/anatomy/anatomy-tables';
+import { getKqlTables } from '@/lib/kql-tables';
+import { ANATOMY_TABLE_NAMES } from '@/lib/anatomy/table-names';
 import { ANATOMY_PAYLOAD_MARKERS, findAnatomyPayload } from '../../../scripts/find-anatomy-payload.mjs';
 import { loadAnatomyBundle } from '../load-anatomy-data';
 
@@ -11,6 +14,12 @@ const populated = buildAnatomyBundle(parseAnatomyFiles(buildRawFiles()));
 const index = JSON.parse(populated.indexJson) as Record<string, unknown[]>;
 const evidence = JSON.parse(populated.evidenceJson) as Record<string, unknown[]>;
 const seedIndex = JSON.parse(seed.indexJson) as Record<string, unknown[]>;
+/** The exported tables: the committed ones, and a fixture build whose roles cover the ones the fixture's links use. */
+const seedTables = Object.fromEntries(ANATOMY_TABLE_NAMES.map((name) => [name, getKqlTables()[name]]));
+const FIXTURE_CURATION = { techniques: { 'QIF-T9001': { links: [{ term: 'stn', role: 'pathway_stage' }, { term: 'thalamus', role: 'delivery_route' }, { term: 'motor_strip', role: 'action_target' }] } } };
+const populatedTables = buildAnatomyTables(parseAnatomyFiles(buildRawFiles()), FIXTURE_CURATION);
+/** The projection an independent verifier embedded in the Lab page with every gate green: four renamed keys per term. */
+const renamedTerms = seedTables.anatomy_technique_terms.map((row) => ({ technique: row.technique_id, word: row.named_term, role: row.ai_assigned_term_role, region: row.single_region_id || row.alias_match_region_id }));
 
 const pageWith = (body: string): string => `<!doctype html><html><head><title>TARA Lab</title></head><body>${body}</body></html>`;
 const escapeAttribute = (text: string): string => text.replaceAll('&', '&amp;').replaceAll('"', '&quot;');
@@ -54,11 +63,15 @@ const PROJECTIONS: Array<[string, unknown]> = [
   ['a view model of the seed subjects with every key shortened', shortenKeys(seedIndex.subjects)],
   ['a view model of the seed sources with every key shortened', shortenKeys(seedIndex.sources)],
   ['a view model of the seed layers with every key shortened', shortenKeys(seedIndex.layers)],
+  ...ANATOMY_TABLE_NAMES.map((name): [string, unknown] => [`the ${name} table`, seedTables[name]]),
+  ...ANATOMY_TABLE_NAMES.map((name): [string, unknown] => [`the ${name} table of a fixture build with every key shortened`, shortenKeys(populatedTables[name])]),
+  ['the term table projected to four renamed keys (technique, word, role, region)', renamedTerms],
+  ['one such projected term', renamedTerms.slice(0, 1)],
 ];
 
 describe('findAnatomyPayload', () => {
-  it('uses only markers that occur in a built index or evidence file', () => {
-    const served = seed.indexJson + seed.evidenceJson + populated.indexJson + populated.evidenceJson + 'datalake/qif-anatomy-sources.json';
+  it('uses only markers that occur in a built index, evidence file or exported table', () => {
+    const served = seed.indexJson + seed.evidenceJson + populated.indexJson + populated.evidenceJson + JSON.stringify(seedTables) + 'datalake/qif-anatomy-sources.json';
     expect(ANATOMY_PAYLOAD_MARKERS.length).toBeGreaterThan(10);
     expect(ANATOMY_PAYLOAD_MARKERS.filter((marker: string) => !served.includes(marker))).toEqual([]);
   });

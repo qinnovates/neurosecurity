@@ -23,6 +23,7 @@ Usage:
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -36,7 +37,7 @@ SHARED = ROOT / "datalake"
 SRC_DATA = ROOT / "src" / "data"
 OUT = ROOT / "datalake" / "parquet"
 KQL_TABLES = ROOT / "src" / "site" / "data" / "kql-tables.json"
-# Must equal ANATOMY_TABLE_PREFIX in src/lib/anatomy/anatomy-tables.ts
+# Must equal ANATOMY_TABLE_PREFIX in src/lib/anatomy/table-names.ts (a test compares them)
 ANATOMY_TABLE_PREFIX = "anatomy_"
 
 # Zstd level 3: 30-50% better compression than Snappy, sub-ms decompression at these sizes
@@ -258,6 +259,8 @@ def write_parquet(name: str, rows: list, catalog: dict):
         "columns": table.num_columns,
         "column_names": table.column_names,
         "size_bytes": size_parquet,
+        # Lets `npm run health` tell a deleted or hand-edited file from the one this run wrote
+        "sha256": hashlib.sha256(out_path.read_bytes()).hexdigest(),
         "compression": COMPRESSION,
         "source": str(out_path.relative_to(ROOT)),
     }

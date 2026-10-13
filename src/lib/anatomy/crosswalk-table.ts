@@ -9,14 +9,15 @@
  */
 
 import type { AnatomyData } from './anatomy-inputs';
-import type { IndexSubject } from './anatomy-index-types';
+import type { IndexStructure, IndexSubject } from './anatomy-index-types';
 import type { AtlasLabel, CrosswalkRow } from './anatomy-types';
 import type { ReviewedRow } from './build-owner-map';
 import { buildSubjects } from './build-index-structures';
-import { subjectKey } from './crosswalk-rules';
+import { structureKey, subjectKey } from './crosswalk-rules';
 import type { CheckedEvidence, ReviewedCrosswalk, ReviewedNoGeometry } from './review-rows';
 import { draftColumns, evidenceColumns, joinIds, joinText, type AnatomyRow, type EvidenceColumns } from './table-columns';
 
+const TABLE = 'anatomy_crosswalk';
 export const CROSSWALK_ROW_KINDS = { CORRESPONDENCE: 'atlas_correspondence', NO_GEOMETRY: 'no_geometry' } as const;
 
 const NOT_APPLICABLE = '';
@@ -29,12 +30,13 @@ const NO_EVIDENCE_COLUMNS: EvidenceColumns = {
 /** A no-geometry record points at no atlas. Null says the column does not apply; false would read as a finding. */
 const NO_ATLAS_COLUMNS: AnatomyRow = {
   part: NOT_APPLICABLE, atlas: NOT_APPLICABLE, atlas_label_ids: NOT_APPLICABLE, atlas_label_names: NOT_APPLICABLE, atlas_label_count: 0,
-  name_match: NOT_APPLICABLE, extent_match: NOT_APPLICABLE, definition_contested: null, draws: false, delineation_basis: NOT_APPLICABLE,
+  name_match: NOT_APPLICABLE, extent_match: NOT_APPLICABLE, definition_contested: null, drafted_to_draw: false, has_drawn_shape: false, delineation_basis: NOT_APPLICABLE,
 };
 
 interface CrosswalkTableContext {
   data: AnatomyData;
   subjectsByKey: ReadonlyMap<string, IndexSubject>;
+  structuresByKey: ReadonlyMap<string, IndexStructure>;
 }
 
 /** The subject's current name and what the index says stands for it. Repeated on each of the subject's rows. */
@@ -55,7 +57,13 @@ function listLabels(row: CrosswalkRow, data: AnatomyData): AtlasLabel[] {
   return row.atlas_ids.flatMap((labelId) => labels.filter((label) => label.id === labelId));
 }
 
-function atlasColumns(row: CrosswalkRow, data: AnatomyData): AnatomyRow {
+/** Whether a mesh ships for any label the row names. A row drafted to draw has none until the pipeline builds one. */
+function hasDrawnShape(row: CrosswalkRow, structuresByKey: ReadonlyMap<string, IndexStructure>): boolean {
+  return row.atlas_ids.some((labelId) => (structuresByKey.get(structureKey(row.atlas, labelId))?.nodes ?? []).some((node) => node.vertex_count > 0));
+}
+
+function atlasColumns(row: CrosswalkRow, context: CrosswalkTableContext): AnatomyRow {
+  const { data } = context;
   return {
     part: row.part ?? NOT_APPLICABLE,
     atlas: row.atlas,
@@ -65,7 +73,8 @@ function atlasColumns(row: CrosswalkRow, data: AnatomyData): AnatomyRow {
     name_match: row.name_match,
     extent_match: row.extent_match,
     definition_contested: row.definition_contested,
-    draws: row.draws,
+    drafted_to_draw: row.draws,
+    has_drawn_shape: hasDrawnShape(row, context.structuresByKey),
     delineation_basis: row.delineation_basis,
   };
 }
@@ -73,20 +82,21 @@ function atlasColumns(row: CrosswalkRow, data: AnatomyData): AnatomyRow {
 function toCorrespondenceRow(reviewed: ReviewedRow & CheckedEvidence, context: CrosswalkTableContext): AnatomyRow {
   const { row } = reviewed;
   return {
+    ...draftColumns(TABLE, [row.drafted_by], reviewed.review_state, context.data.crosswalk.status),
     row_kind: CROSSWALK_ROW_KINDS.CORRESPONDENCE,
     review_key: reviewed.key,
     ...subjectColumns(row, context),
     subject_name_at_draft: row.subject_name_at_draft,
-    ...atlasColumns(row, context.data),
+    ...atlasColumns(row, context),
     ...evidenceColumns(row.evidence, reviewed),
     addressing_version: context.data.addressingVersion,
-    ...draftColumns(row.drafted_by, reviewed.review_state, context.data.crosswalk.status),
   };
 }
 
 function toNoGeometryRow(reviewed: ReviewedNoGeometry, context: CrosswalkTableContext): AnatomyRow {
   const { record } = reviewed;
   return {
+    ...draftColumns(TABLE, [record.drafted_by], reviewed.review_state, context.data.crosswalk.status),
     row_kind: CROSSWALK_ROW_KINDS.NO_GEOMETRY,
     review_key: reviewed.key,
     ...subjectColumns(record, context),
@@ -94,17 +104,23 @@ function toNoGeometryRow(reviewed: ReviewedNoGeometry, context: CrosswalkTableCo
     ...NO_ATLAS_COLUMNS,
     ...NO_EVIDENCE_COLUMNS,
     addressing_version: context.data.addressingVersion,
-    ...draftColumns(record.drafted_by, reviewed.review_state, context.data.crosswalk.status),
   };
 }
 
 /**
  * @param crosswalk the reviewed rows the index is built from
  * @param noGeometry the reviewed no-geometry records the index is built from
+ * @param structures the index's own structures, built from that crosswalk
  */
-export function buildCrosswalkTable(data: AnatomyData, crosswalk: ReviewedCrosswalk, noGeometry: readonly ReviewedNoGeometry[]): AnatomyRow[] {
+export function buildCrosswalkTable(
+  data: AnatomyData, crosswalk: ReviewedCrosswalk, noGeometry: readonly ReviewedNoGeometry[], structures: readonly IndexStructure[],
+): AnatomyRow[] {
   const subjects = buildSubjects(data, crosswalk, noGeometry);
-  const context: CrosswalkTableContext = { data, subjectsByKey: new Map(subjects.map((subject) => [subjectKey({ subject_kind: subject.kind, subject_id: subject.id }), subject])) };
+  const context: CrosswalkTableContext = {
+    data,
+    subjectsByKey: new Map(subjects.map((subject) => [subjectKey({ subject_kind: subject.kind, subject_id: subject.id }), subject])),
+    structuresByKey: new Map(structures.map((structure) => [structure.key, structure])),
+  };
   return [
     ...crosswalk.current.map((reviewed) => toCorrespondenceRow(reviewed, context)),
     ...noGeometry.map((reviewed) => toNoGeometryRow(reviewed, context)),

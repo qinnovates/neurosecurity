@@ -3,27 +3,43 @@
  *
  * `anatomy_technique_terms`: one row per drafted link. A row says the
  * technique's own registrar text uses a word for a brain structure, quotes
- * that text, and says what the word resolves to in the region table. It does
- * not say the technique targets the region: most terms resolve to a broader
- * or narrower structure, or to nothing, and `lights_region` is false for them.
+ * that text, and says how the word matches the QIF region table. It does not
+ * say the technique acts on a region.
  *
- * `anatomy_technique_scopes`: one row per registrar technique with a neural
- * band that has an entry in the technique-regions file, saying whether any
- * link was drafted and, if none, the stated reason.
+ * `single_region_id` is filled only on a single-region match: the word is a
+ * region's id or a listed synonym, that region's band is among the technique's
+ * band tags, the row is valid for the current addressing and its quote still
+ * stands (the index's `lit`). Whatever else the alias table returns for the
+ * word goes in `alias_match_region_id`, with `match_kind` saying why it is not
+ * a single-region match.
+ *
+ * `anatomy_technique_term_summary`: one row per registrar technique that has
+ * an entry in the technique-regions file, with counts only. It names no region:
+ * a region without its quote and match kind would be a bare claim.
  */
 
 import type { AnatomyData } from './anatomy-inputs';
 import type { IndexTechnique, IndexTechniqueLink } from './anatomy-index-types';
-import { DRAFTERS } from './anatomy-types';
 import { buildTechniques, type ReviewedLink } from './build-index-techniques';
 import { REGISTRAR_FILE, readBandLevelReason } from './parse-technique-regions';
-import { toIndexReviewState, worstReviewState } from './review-state';
+import { lightsRegion, type Resolution } from './resolve-region-term';
+import { UNREVIEWED, toIndexReviewState } from './review-state';
 import { draftColumns, evidenceColumns, joinIds, type AnatomyRow } from './table-columns';
-import { findTermRole } from './term-roles';
+import { findTermRole, type ExportedTermRole } from './term-roles';
 
-/** The technique-regions file drafts every entry by AI and stores the drafter on links only, so an entry's is stated here. */
-const ENTRY_DRAFTER = DRAFTERS[0];
-/** A technique with no entry in the file has nothing drafted, so it has no row: a row would have to name a drafter. */
+const TERMS_TABLE = 'anatomy_technique_terms';
+const SUMMARY_TABLE = 'anatomy_technique_term_summary';
+
+/** The resolver's match, named for what it says about the word. The resolver decides; this only renames. */
+export const MATCH_KINDS = {
+  id: 'region_id',
+  synonym: 'synonym',
+  whole_to_part: 'term_is_broader_than_region',
+  part_to_whole: 'term_is_narrower_than_region',
+  unclassified: 'no_region_in_table',
+} as const satisfies Record<Resolution, string>;
+
+/** A technique with no entry in the file has nothing drafted, so it has no row. */
 const NOT_DRAFTED: IndexTechnique['scope'] = 'not_drafted';
 const NO_REGION = '';
 const NO_REASON = '';
@@ -42,67 +58,85 @@ function techniqueColumns(technique: IndexTechnique): AnatomyRow {
   return { technique_id: technique.id, technique_name: technique.name, technique_band_ids: joinIds(technique.band_ids) };
 }
 
-function resolutionColumns(entry: IndexTechniqueLink): AnatomyRow {
+/** The region id goes in exactly one of two columns, so a filter on `single_region_id` can only return single-region matches. */
+function matchColumns(entry: IndexTechniqueLink): AnatomyRow {
+  const resolverHit = entry.resolved_region_id ?? NO_REGION;
   return {
-    resolution: entry.resolution,
-    resolved_region_id: entry.resolved_region_id ?? NO_REGION,
-    band_agrees: entry.band_agrees,
+    match_kind: MATCH_KINDS[entry.resolution],
+    single_region_match: entry.lit,
+    single_region_id: entry.lit ? resolverHit : NO_REGION,
+    alias_match_region_id: entry.lit ? NO_REGION : resolverHit,
+    region_band_in_technique_bands: entry.band_agrees,
     valid_for_current_addressing: entry.valid_for_current_addressing,
-    lights_region: entry.lit,
   };
 }
 
-function toTermRow(reviewed: ReviewedLink, technique: IndexTechnique, roles: ReadonlyMap<string, string>, statusSentence: string): AnatomyRow {
+function toTermRow(reviewed: ReviewedLink, technique: IndexTechnique, roles: ReadonlyMap<string, ExportedTermRole>, statusSentence: string): AnatomyRow {
   const { link, entry } = reviewed;
   return {
+    ...draftColumns(TERMS_TABLE, [link.drafted_by], entry.review_state, statusSentence),
     ...techniqueColumns(technique),
     named_term: link.term,
-    term_role: findTermRole(roles, technique.id, link.term),
+    ai_assigned_term_role: findTermRole(roles, technique.id, link.term),
     quoted_field: toQuotedField(link.evidence.source_ref.pointer),
     ...evidenceColumns(link.evidence, reviewed),
-    ...resolutionColumns(entry),
+    ...matchColumns(entry),
     review_key: reviewed.key,
-    ...draftColumns(link.drafted_by, entry.review_state, statusSentence),
   };
 }
 
-/** The distinct regions a technique's lit links resolve to. Empty for most techniques. */
-function listLitRegionIds(technique: IndexTechnique): string[] {
-  const litIds = technique.links.flatMap((link) => (link.lit && link.resolved_region_id !== null ? [link.resolved_region_id] : []));
-  return [...new Set(litIds)];
+/**
+ * How a technique's terms fall out, as counts that add up to `named_term_count`.
+ * A term that names one listed region is a single-region match, or sits in a
+ * band the technique does not carry, or is stale (out of date for the
+ * addressing, or its quote is gone).
+ */
+function countColumns(links: readonly IndexTechniqueLink[]): AnatomyRow {
+  const count = (test: (link: IndexTechniqueLink) => boolean): number => links.filter(test).length;
+  const namesOneRegion = (link: IndexTechniqueLink): boolean => lightsRegion(link.resolution);
+  return {
+    named_term_count: links.length,
+    single_region_term_count: count((link) => link.lit),
+    region_in_other_band_term_count: count((link) => namesOneRegion(link) && !link.band_agrees),
+    stale_region_term_count: count((link) => namesOneRegion(link) && link.band_agrees && !link.lit),
+    broader_or_narrower_term_count: count((link) => !namesOneRegion(link) && link.resolved_region_id !== null),
+    no_region_term_count: count((link) => link.resolved_region_id === null),
+  };
 }
 
-function toScopeRow(technique: IndexTechnique, data: AnatomyData): AnatomyRow {
+/**
+ * A summary row has no ledger key, so nothing can review it: it reads
+ * unreviewed whatever its terms' states are. `reviewed_term_count` says how
+ * many of its terms a review covers.
+ */
+function toSummaryRow(technique: IndexTechnique, drafters: readonly ReviewedLink[], data: AnatomyData): AnatomyRow {
   const entry = data.techniqueRegions.techniques[technique.id];
-  const litRegionIds = listLitRegionIds(technique);
-  const reviewState = toIndexReviewState(worstReviewState(technique.links.map((link) => link.review_state)));
   return {
+    ...draftColumns(SUMMARY_TABLE, drafters.map((reviewed) => reviewed.link.drafted_by), toIndexReviewState(UNREVIEWED), data.techniqueRegions.status),
     ...techniqueColumns(technique),
     scope: technique.scope,
     band_level_reason: (entry === undefined ? null : readBandLevelReason(entry)) ?? NO_REASON,
     rationale: entry?.rationale ?? NO_RATIONALE,
-    named_term_count: technique.links.length,
-    lighting_term_count: technique.links.filter((link) => link.lit).length,
-    lit_region_ids: joinIds(litRegionIds),
-    lit_region_count: litRegionIds.length,
-    ...draftColumns(ENTRY_DRAFTER, reviewState, data.techniqueRegions.status),
+    ...countColumns(technique.links),
+    reviewed_term_count: technique.links.filter((link) => link.review_state.state === 'reviewed').length,
   };
 }
 
 export interface TechniqueTables {
   terms: AnatomyRow[];
-  scopes: AnatomyRow[];
+  summary: AnatomyRow[];
 }
 
 /**
  * @param links the reviewed links the index is built from
- * @param roles each curated link's role, by ledger key
+ * @param roles each curated link's exported role, by ledger key
  */
-export function buildTechniqueTables(data: AnatomyData, links: readonly ReviewedLink[], roles: ReadonlyMap<string, string>): TechniqueTables {
+export function buildTechniqueTables(data: AnatomyData, links: readonly ReviewedLink[], roles: ReadonlyMap<string, ExportedTermRole>): TechniqueTables {
   const techniques = buildTechniques(data, links, data.documentsByFile.get(REGISTRAR_FILE)).filter((technique) => technique.scope !== NOT_DRAFTED);
   const statusSentence = data.techniqueRegions.status;
-  const terms = techniques.flatMap((technique) => links
-    .filter((reviewed) => reviewed.technique_id === technique.id)
-    .map((reviewed) => toTermRow(reviewed, technique, roles, statusSentence)));
-  return { terms, scopes: techniques.map((technique) => toScopeRow(technique, data)) };
+  const linksOf = (technique: IndexTechnique): ReviewedLink[] => links.filter((reviewed) => reviewed.technique_id === technique.id);
+  return {
+    terms: techniques.flatMap((technique) => linksOf(technique).map((reviewed) => toTermRow(reviewed, technique, roles, statusSentence))),
+    summary: techniques.map((technique) => toSummaryRow(technique, linksOf(technique), data)),
+  };
 }

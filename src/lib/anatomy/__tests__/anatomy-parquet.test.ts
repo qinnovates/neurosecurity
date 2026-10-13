@@ -6,14 +6,15 @@
  * of the table, so a data change that was not followed by `npm run prebuild`
  * (with pyarrow) fails here.
  */
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { NODE_RUNTIME, VoidLogger, createDuckDB, type DuckDBBindings } from '@duckdb/duckdb-wasm/blocking';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { ANATOMY_TABLE_NAMES, ANATOMY_TABLE_PREFIX, type AnatomyTableName } from '../anatomy-tables';
 import { loadAnatomyTables } from '../load-anatomy-tables';
 import type { AnatomyCell, AnatomyRow } from '../table-columns';
+import { ANATOMY_TABLE_NAMES, ANATOMY_TABLE_PREFIX, type AnatomyTableName } from '../table-names';
 
 const PARQUET_DIRECTORY = 'datalake/parquet';
 const CATALOG_PATH = path.join(PARQUET_DIRECTORY, 'catalog.json');
@@ -24,6 +25,7 @@ interface CatalogDataset {
   rows: number;
   columns: number;
   column_names: string[];
+  sha256: string;
 }
 
 const tables = loadAnatomyTables();
@@ -69,6 +71,11 @@ describe('committed anatomy parquet files match a fresh build', () => {
     const columnNames = Object.keys(tables[name][0]);
     expect(tables[name].length).toBeGreaterThan(0);
     expect(catalog.datasets[name], STALE_REMEDY).toMatchObject({ rows: tables[name].length, columns: columnNames.length, column_names: columnNames });
+  });
+
+  it.each(ANATOMY_TABLE_NAMES)('%s: the catalog records the digest of the committed file', (name) => {
+    const committed = fs.readFileSync(path.join(PARQUET_DIRECTORY, `${name}${PARQUET_EXTENSION}`));
+    expect(catalog.datasets[name].sha256, STALE_REMEDY).toBe(createHash('sha256').update(committed).digest('hex'));
   });
 
   it.each(ANATOMY_TABLE_NAMES)('%s: the committed file holds the fresh build\'s rows, cell for cell', (name) => {
