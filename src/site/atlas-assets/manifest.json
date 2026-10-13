@@ -3,7 +3,7 @@
   "template_space": "MNI152NLin2009cAsym",
   "units": "mm",
   "axes": "RAS",
-  "pipeline_code_hash": "886b184988d7a6dfcfe2f67a28258a5fc7ac36ff75c9c23b79f160b11cfb5d2c",
+  "pipeline_code_hash": "361a1c397888b6fe78afcedbae8c3a402aaebdc4c1af0d5b46ce09b7a522b175",
   "integrity_note": "Hashes show the files were delivered unchanged. They do not prove where a file came from.",
   "assets": [
     {
@@ -13,7 +13,7 @@
       "layer": "outline",
       "bytes": 25580,
       "sha256": "13ae877f9743440b4702c462fffd72315b6783a6602c5e4bc3217fcb194f1fce",
-      "input_fingerprint": "c8fdd182837dd900d2262053326945c9866414095cd7caae0d43cf9d18a3f9b4",
+      "input_fingerprint": "f6496aa5f17ffe53b600fd5b1b5eb6b92473b5fc0b7db9a543a27f77247412f2",
       "source_ids": [
         "mni_icbm152_2009c_asym"
       ],
@@ -104,7 +104,7 @@
         },
         "register": null,
         "resample": "92ec28c83f15b31b9134bd2b79f4841e91a94e74bc60f715aeb67c524ad37a08",
-        "mesh": "4b9e38be5be9d8a2edc4edc4151e6c906b3435e74e13306230f42a6bf1b224b1",
+        "mesh": "3e309d97ee6acd3db3ed1664361af6e27674903c5e6a5ef95b16310c33f8d641",
         "write": "13ae877f9743440b4702c462fffd72315b6783a6602c5e4bc3217fcb194f1fce"
       },
       "position_check": "not independently checked",
@@ -117,7 +117,7 @@
       "layer": "deep",
       "bytes": 62268,
       "sha256": "cb90f8bb70d36348d99e5a9a5780916f9c607be37c26ad7d1e4cc6b76bed2a28",
-      "input_fingerprint": "6d8fa851d2f90f2c1c10b7c2cd5b51eb7dfe28957ba7e29c2b50c094b7e8d2dd",
+      "input_fingerprint": "72d5ca782af79ff8445fa62d7c0972c2a234cbda88d401ab56491effd54e6478",
       "source_ids": [
         "cit168_rl"
       ],
@@ -967,7 +967,7 @@
         },
         "register": null,
         "resample": "c0a8885a8cd8ee177f624b33d29c242da463b8af92b46add6580ca144a6e0fa4",
-        "mesh": "1be9eb264c028eeba3e9791236c285622abd7788126bb5d2ca777aa47674d184",
+        "mesh": "a2c0e2d774ebfdb0a87afe4931787dea4c2b4a93c409d6384f96c5781261114e",
         "write": "cb90f8bb70d36348d99e5a9a5780916f9c607be37c26ad7d1e4cc6b76bed2a28"
       },
       "position_check": "not independently checked",
@@ -980,7 +980,7 @@
       "layer": "deep",
       "bytes": 101592,
       "sha256": "f677d3c1bcb0a1fc93d82a0bec5a0f2669391456f398bebf7057178dc6d5f508",
-      "input_fingerprint": "ae7b3eb694e5c7748faa1dbeb5f171f708e9c1ef96eea9ed6779e233bf4d0ed9",
+      "input_fingerprint": "083e3e2721bc29aef7d6573411a224bf1deb382dc1b2bfc3cb91b7a029471e83",
       "source_ids": [
         "neudorfer_hypothalamus"
       ],
@@ -2139,7 +2139,7 @@
         },
         "register": null,
         "resample": "0b3bf184928ce21693822640a6e117fd42be38a5cc9061aaab1b06fe4c53d09d",
-        "mesh": "ef4e61a2cc9914379cf01f5a57d99958179fc53c7da8870935df0909c9f26b93",
+        "mesh": "2b5bd776e28312d532a456164c450a70f9550cf1c09c84073557e12f23350aa7",
         "write": "f677d3c1bcb0a1fc93d82a0bec5a0f2669391456f398bebf7057178dc6d5f508"
       },
       "position_check": "not independently checked",
@@ -2152,7 +2152,7 @@
       "layer": "cortical",
       "bytes": 1243308,
       "sha256": "2909f17492b2edeb1daded0b56096b6a866face01ccd9333a7e9457d2c0009da",
-      "input_fingerprint": "4185704197508a8bcf9320beffcffe65cf557f73876e0d78a9b973b04f86302a",
+      "input_fingerprint": "a74d1300261e1ec990a6b78285e3911607286c76ac25c0cb5ee0fcad0ffe1c0b",
       "source_ids": [
         "allen_hra_3d_2020"
       ],
@@ -6070,7 +6070,7 @@
           }
         },
         "resample": "2532c02cd58f7664b358004162d9552cbeef54a7b2ef9592b1dfff38228fe735",
-        "mesh": "96ae363b5a01364abe75bc76a9363f6af3875b67cbc263d34524352e277c161a",
+        "mesh": "50d98c5bcad626ddca9f2b741cccf054b1bebada9da38acf0e1224e4d5ef5f92",
         "write": "2909f17492b2edeb1daded0b56096b6a866face01ccd9333a7e9457d2c0009da"
       },
       "position_check": "checked in aggregate",
@@ -6083,7 +6083,7 @@
       "layer": "deep",
       "bytes": 1557844,
       "sha256": "c8405b0c299d3419a19cdbe3d808143581626cad598e995f02cfd60524efb949",
-      "input_fingerprint": "3bb487c3df43e4e3f43bbc378189d6309cd531b6f4b8ef7ab8ed643bd06f6daf",
+      "input_fingerprint": "e7cb39dfd8d1729a887dcad7d16f21a4a886d19a7264cbc74546bf70f4ed5cbe",
       "source_ids": [
         "allen_hra_3d_2020"
       ],
@@ -9064,19 +9064,19 @@
             "grad_step": 0.2
           }
         },
-        "resample": "32c6964dd7c0e3cd873afceb72850eee76c9a6f6a2fcd4105a574273350ede8d",
-        "mesh": "c70b2d2a4a0e2ec4891ae796b5f6b4a057758b6c01d06e506df6115e48b3ac40",
+        "resample": "f6637cedfc0e35297acc95b3e2029ddc1b9a583de7a719c491788c197ce140e2",
+        "mesh": "89567b44d217d019e7417ef99a61f0f8bd262c5aaa61b622ec77f666ed5930da",
         "write": "c8405b0c299d3419a19cdbe3d808143581626cad598e995f02cfd60524efb949"
       },
       "position_check": "not independently checked",
-      "modification_note": "The label volume was moved from the 2009b symmetric template to MNI152NLin2009cAsym by a computed nonlinear registration (ANTs SyN; labels nearest-neighbour, 0.5 mm grid). Each label was then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric); small specks were dropped. One hemisphere was drawn; the right side is its mirror. The registration was not shown to improve these deep shapes' placement; atlases disagree by 1 to 2 mm here."
+      "modification_note": "The label volume was moved from the 2009b symmetric template to MNI152NLin2009cAsym by a computed nonlinear registration (ANTs SyN; labels nearest-neighbour, 0.5 mm grid). Each label was then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric); small specks were dropped. One hemisphere was drawn; the right side is its mirror. The registration was not shown to improve these deep shapes' placement; those CIT168 also has differ from it by 0.7 to 2.5 mm (95th-percentile surface distance)."
     }
   ],
   "support_files": {
     "by-sa/LICENSE.txt": "5eab858d34e8f4c5bebb0f8bc5fb95887622aa588f9c22bdbfd682722347b695",
     "by-sa/NOTICE.txt": "375773944c8c127b2e218fbb6e2b7d9040bfda01db694616d49508cf768d087a",
     "by-sa/labels-cit168_rl.json": "781e2a362064ced805dd019f62bbc0f0933e3b514839791372295c37d9ee01ae",
-    "open/NOTICE.txt": "bd8e2c6dafb8a1f2e7571113e832d5c5d0a4876300a329d646ab21c52f92ec5e",
+    "open/NOTICE.txt": "2dd6f9176904778c648882950bd51e41b3fd19f6e3ecb87b02e96dc3cff379d1",
     "open/labels-allen_hra_3d_2020.json": "852f34abffb4b8a339790ba9a929229ff26f4650a9f34b8c988d8932cbb8f605",
     "open/labels-mni_icbm152_2009c_asym.json": "5960244fafe08d27cb5e07c743e4df9c8f8061a00721b5d015f1370b69244f5f",
     "open/labels-neudorfer_hypothalamus.json": "6f074f14e64fd427920ff647590995e8e87196c4024de162f5bbd34c55e9e9a1"

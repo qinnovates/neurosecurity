@@ -24,6 +24,13 @@ export const SHIPPING_LICENSE_NAMES = {
   'mni-icbm-notice': 'MNI ICBM152 permission notice',
 };
 export const SHARE_ALIKE_LICENSE_ID = 'cc-by-sa-4.0';
+/** What the page says for each position check value; a test holds this to the page's own table. */
+export const POSITION_CHECK_SENTENCES = {
+  'independently checked': 'Placement was checked by a measure independent of how the shape was moved, for each shape.',
+  'checked in aggregate': 'Placement was checked for the cortex as a whole by an independent measure, not for each fold.',
+  'not independently checked': 'Placement was not independently checked.',
+  failed: 'Placement failed an independent check.',
+};
 export const SHARE_ALIKE_STATEMENT = 'You may share and adapt these files, including commercially, provided you give credit, indicate changes, and distribute your contributions under the same licence, with no further restrictions.';
 
 const NAMED_ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
@@ -133,6 +140,11 @@ export function findAttributionFailures(distDirectory, { manifestFile = DEFAULT_
     const licenseName = SHIPPING_LICENSE_NAMES[asset.license_id];
     if (licenseName === undefined || !pageText.includes(licenseName)) failures.push(`${ATTRIBUTION_URL_PATH}: missing the license name for ${asset.id} (${asset.license_id})`);
     if (!pageText.includes(collapse(String(asset.modification_note)))) failures.push(`${ATTRIBUTION_URL_PATH}: missing the changes made to ${asset.id}`);
+    const positionSentence = POSITION_CHECK_SENTENCES[asset.position_check];
+    const fileStatement = collapse(`File ${asset.path}. Changes made: ${asset.modification_note} ${positionSentence}`);
+    if (positionSentence === undefined || !pageText.includes(fileStatement)) {
+      failures.push(`${ATTRIBUTION_URL_PATH}: the entry for ${asset.id} does not say "${positionSentence ?? asset.position_check}" right after its changes`);
+    }
     if (asset.license_id === SHARE_ALIKE_LICENSE_ID && !pageText.includes(SHARE_ALIKE_STATEMENT)) failures.push(`${ATTRIBUTION_URL_PATH}: missing the share-alike statement for ${asset.id}`);
   }
   for (const source of sources) {

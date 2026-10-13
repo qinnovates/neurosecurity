@@ -29,15 +29,38 @@ CHANGES = {
 MAX_NOTE_LENGTH = 600
 
 
-def changes_for(plan: dict[str, Any]) -> str:
-    """What was done to make one asset, in words: the manifest's modification note and the notice's 'changes made'."""
-    note = " ".join(part for part in (CHANGES[plan["kind"]], plan.get("position_note")) if part)
+def measured_facts(evidence: dict[str, Any] | None) -> dict[str, str]:
+    """Figures a note may quote, computed from the evidence file so that none is typed by hand.
+
+    `deep_disagreement_mm`: the range, over structures and sides, of the 95th-percentile surface distance
+    between the shipped Allen deep shapes and the same structures from CIT168.
+    """
+    registration = (evidence or {}).get("registration")
+    if registration is None:
+        return {}
+    pairs = registration["settings"][registration["shipping_setting"]]["variants"]["intended"]["v2"]
+    distances = [row["hd95_mm"] for row in pairs.values()]
+    return {"deep_disagreement_mm": f"{min(distances):.1f} to {max(distances):.1f}"}
+
+
+def changes_for(plan: dict[str, Any], facts: dict[str, str] | None = None) -> str:
+    """What was done to make one asset, in words: the manifest's modification note and the notice's 'changes made'.
+
+    A plan's position note may hold a figure as a placeholder such as {deep_disagreement_mm}; it is filled
+    from `facts`, and a note that needs a figure nobody measured is refused.
+    """
+    try:
+        position_note = (plan.get("position_note") or "").format_map(facts or {})
+    except KeyError as error:
+        raise ValueError(f"modification note for {plan['id']} needs the measured figure {error}; run the evidence command first") from error
+    note = " ".join(part for part in (CHANGES[plan["kind"]], position_note) if part)
     if len(note) > MAX_NOTE_LENGTH:
         raise ValueError(f"modification note for {plan['id']} is {len(note)} characters; the manifest allows {MAX_NOTE_LENGTH}")
     return note
 
 
-def folder_notice(folder: str, registry: Registry, assets: list[dict[str, Any]], plans: dict[str, dict[str, Any]]) -> str:
+def folder_notice(folder: str, registry: Registry, assets: list[dict[str, Any]]) -> str:
+    """The notice for one served folder, from the registry and the manifest's asset records alone."""
     lines = [f"NOTICE for atlas-assets/{folder}/", "", "This folder holds third-party material, changed as described below. Each file keeps its source's licence.",
              AI_READING, ANATOMY_NOTE, ""]
     for asset in sorted((a for a in assets if a["path"].startswith(folder + "/")), key=lambda a: a["path"]):
@@ -51,7 +74,7 @@ def folder_notice(folder: str, registry: Registry, assets: list[dict[str, Any]],
             stated_name, stated_url = LICENCE_NAMES[source["license_id"]]
             lines.append(f"  Licence stated by the publisher: {stated_name} ({stated_url}); handled here under the stricter licence above.")
         lines += [f"  Required wording: {text}" for text in source["required_text"]]
-        lines.append(f"  Changes made: {changes_for(plans[asset['id']])}")
+        lines.append(f"  Changes made: {asset['modification_note']}")
         for input_id in asset["computed_with_source_ids"]:
             if input_id != source_id:
                 lines.append(f"  Used to compute, not redistributed: {registry.sources[input_id]['name']}")

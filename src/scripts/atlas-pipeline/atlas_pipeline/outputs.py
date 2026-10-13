@@ -20,7 +20,6 @@ T1_WINDOW_PERCENTILES = (1.0, 99.5)
 
 def _write_support_files(out_dir: pathlib.Path, registry: Registry, built_assets: list[BuiltAsset], records: list[dict[str, Any]]) -> dict[str, str]:
     """Label tables, notices and the share-alike license text. Returns each file's path under the asset folder and its sha256."""
-    plans = {built.plan["id"]: built.plan for built in built_assets}
     tables: dict[tuple[str, str], list[Any]] = {}
     for built in built_assets:
         tables.setdefault((output_folder(registry, built.plan["source"]), built.plan["source"]), []).extend(built.labels)
@@ -28,7 +27,7 @@ def _write_support_files(out_dir: pathlib.Path, registry: Registry, built_assets
              for (folder, atlas), labels in tables.items()}
     for folder in FOLDERS:
         if any(record["path"].startswith(folder + "/") for record in records):
-            texts[f"{folder}/{NOTICE_NAME}"] = notices.folder_notice(folder, registry, records, plans)
+            texts[f"{folder}/{NOTICE_NAME}"] = notices.folder_notice(folder, registry, records)
     if f"by-sa/{NOTICE_NAME}" in texts:
         texts[f"by-sa/{LICENCE_NAME}"] = notices.share_alike_licence_text()
     for relative, text in texts.items():

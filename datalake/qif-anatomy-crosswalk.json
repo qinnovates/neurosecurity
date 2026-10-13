@@ -855,7 +855,7 @@
           "quote": "anterior nuclear complex of thalamus (remainder, excluding lateral dorsal nucleus of thalamus)"
         },
         "check_status": "unchecked",
-        "rationale": "The label is the anterior nuclear complex of the thalamus, not divided into its three nuclei."
+        "rationale": "The label is the anterior nuclear complex without the lateral dorsal nucleus, which the atlas labels apart; its three nuclei are not divided."
       },
       "drafted_by": "ai"
     },
