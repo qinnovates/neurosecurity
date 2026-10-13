@@ -85,6 +85,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
   let hoveredKey: string | null = null;
   let press: { x: number; y: number; pointerId: number } | null = null;
   let clip: Plane | null = null;
+  let drawn: { shapes: readonly SceneShape[]; nodesByShapeId: ReadonlyMap<string, DecodedNode>; selectedKeys: ReadonlySet<string> } | null = null;
   const raycaster = new Raycaster();
 
   const invalidate = (): void => {
@@ -192,6 +193,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
 
   return {
     setShapes(shapes, nodesByShapeId, selectedKeys) {
+      drawn = { shapes, nodesByShapeId, selectedKeys };
       clearObjects();
       const brainOutline = shapes.find((shape) => shape.layer === 'outline');
       if (brainOutline !== undefined && home.every((value) => value === 0)) {
@@ -204,7 +206,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
         const geometry = geometries.get(shape.id) ?? null;
         // A shape whose file has not arrived is not drawn at all; a marker needs no file.
         if (geometry === null && shape.sizeMark !== 'ring_only') continue;
-        const entry = buildShapeObjects(shape, geometry, selectedKeys.has(shape.structureKey));
+        const entry = buildShapeObjects(shape, geometry, selectedKeys.has(shape.structureKey), clip !== null);
         scene.add(entry.group);
         objects.push(entry);
       }
@@ -212,8 +214,11 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
     },
     setSlice(slice) {
       const plane = slice === null ? null : slicePlane(slice);
+      const wasCut = clip !== null;
       clip = plane === null ? null : new Plane(new Vector3(plane.normal[0], plane.normal[1], plane.normal[2]), plane.constant);
       renderer.clippingPlanes = clip === null ? [] : [clip];
+      // Opening or closing the cut changes how filled shapes and the selection are drawn; moving it does not.
+      if (wasCut !== (clip !== null) && drawn !== null) this.setShapes(drawn.shapes, drawn.nodesByShapeId, drawn.selectedKeys);
       invalidate();
     },
     setView: (viewId) => moveTo(poseForView(viewId, home, viewId === DEFAULT_CAMERA_VIEW ? DEFAULT_DISTANCE_MM : pose.distance)),

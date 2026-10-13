@@ -7,7 +7,7 @@
  */
 
 import {
-  BackSide, BufferAttribute, BufferGeometry, CircleGeometry, DoubleSide, Group, Mesh, MeshBasicMaterial, MeshLambertMaterial, RingGeometry, SphereGeometry,
+  BackSide, BufferAttribute, BufferGeometry, CircleGeometry, DoubleSide, FrontSide, Group, Mesh, MeshBasicMaterial, MeshLambertMaterial, RingGeometry, SphereGeometry,
   type Material,
 } from 'three';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
@@ -20,8 +20,9 @@ const OUTLINE_LAYER = 'outline';
 const TRANSLUCENT_OPACITY = 0.24;
 const NEUTRAL_OPACITY = 0.14;
 const BRAIN_OUTLINE_OPACITY = 0.1;
-const LINES_OPACITY = 0.45;
-const SHELL_SCALE = 1.045;
+const LINES_OPACITY = 0.2;
+/** How far the selection rim stands off the surface, in millimetres. */
+const SHELL_OFFSET_MM = 1.1;
 /** Nominal sizes in millimetres. A ring marks a place; its size says nothing about the structure's. */
 const RING_INNER_MM = 2.4;
 const RING_OUTER_MM = 3.2;
@@ -50,9 +51,10 @@ export function buildGeometry(node: DecodedNode): BufferGeometry {
   return geometry;
 }
 
-function fillMaterial(shape: SceneShape): Material {
+/** @param isCut with a cut through the scene, a filled shape shows its own inside in its own colour, not what lies behind it */
+function fillMaterial(shape: SceneShape, isCut: boolean): Material {
   if (shape.layer === OUTLINE_LAYER) return new MeshLambertMaterial({ color: NEUTRAL_COLOUR, transparent: true, opacity: BRAIN_OUTLINE_OPACITY, depthWrite: false, side: DoubleSide });
-  if (shape.fill === 'solid') return new MeshLambertMaterial({ color: shape.colour });
+  if (shape.fill === 'solid') return new MeshLambertMaterial({ color: shape.colour, side: isCut ? DoubleSide : FrontSide });
   if (shape.fill === 'lines') return new MeshBasicMaterial({ color: NEUTRAL_COLOUR, wireframe: true, transparent: true, opacity: LINES_OPACITY });
   const opacity = shape.fill === 'translucent' ? TRANSLUCENT_OPACITY : NEUTRAL_OPACITY;
   return new MeshLambertMaterial({ color: NEUTRAL_COLOUR, transparent: true, opacity, depthWrite: false });
@@ -70,27 +72,39 @@ function flatMark(geometry: BufferGeometry, colour: string, opacity: number, cen
   return mark;
 }
 
-/** A selected mesh gets a slightly larger copy drawn inside out behind it: a rim, with no lines across the surface. */
+/**
+ * A selected mesh gets a copy pushed out along its own surface normals and drawn inside out behind it. Only its
+ * edge shows past the mesh: a rim, with no lines across the surface and no fill over it, whatever the shape's folds.
+ */
 function buildShell(geometry: BufferGeometry): Mesh {
-  const shell = new Mesh(geometry, new MeshBasicMaterial({ color: SELECTION_COLOUR, side: BackSide }));
-  const centre = geometry.boundingBox?.getCenter(shell.position.clone());
-  if (centre !== undefined) shell.position.copy(centre.multiplyScalar(1 - SHELL_SCALE));
-  shell.scale.setScalar(SHELL_SCALE);
+  const positions = geometry.getAttribute('position');
+  const normals = geometry.getAttribute('normal');
+  const inflated = new Float32Array(positions.count * 3);
+  for (let vertex = 0; vertex < positions.count; vertex += 1) {
+    inflated[vertex * 3] = positions.getX(vertex) + normals.getX(vertex) * SHELL_OFFSET_MM;
+    inflated[vertex * 3 + 1] = positions.getY(vertex) + normals.getY(vertex) * SHELL_OFFSET_MM;
+    inflated[vertex * 3 + 2] = positions.getZ(vertex) + normals.getZ(vertex) * SHELL_OFFSET_MM;
+  }
+  const shellGeometry = new BufferGeometry();
+  shellGeometry.setAttribute('position', new BufferAttribute(inflated, 3));
+  shellGeometry.setIndex(geometry.getIndex());
+  const shell = new Mesh(shellGeometry, new MeshBasicMaterial({ color: SELECTION_COLOUR, side: BackSide }));
   shell.renderOrder = ORDER.shell;
   return shell;
 }
 
 /** @param geometry the shape's mesh, or null for a structure the atlas marks with a ring alone */
-export function buildShapeObjects(shape: SceneShape, geometry: BufferGeometry | null, isSelected: boolean): ShapeObjects {
+export function buildShapeObjects(shape: SceneShape, geometry: BufferGeometry | null, isSelected: boolean, isCut: boolean): ShapeObjects {
   const group = new Group();
   const centre = rasToScene(shape.centroidMm);
   const objects: ShapeObjects = { shape, group, pickTargets: [], billboards: [] };
   if (geometry !== null) {
-    const mesh = new Mesh(geometry, fillMaterial(shape));
+    const mesh = new Mesh(geometry, fillMaterial(shape, isCut));
     mesh.renderOrder = renderOrderOf(shape);
     group.add(mesh);
     if (shape.layer !== OUTLINE_LAYER) objects.pickTargets.push(mesh);
-    if (isSelected) group.add(buildShell(geometry));
+    // Under a cut the rim would show its orange inside through the opening and read as a fill, so the cut view has none.
+    if (isSelected && !isCut) group.add(buildShell(geometry));
   }
   if (shape.sizeMark !== 'mesh') {
     const ring = flatMark(new RingGeometry(RING_INNER_MM, RING_OUTER_MM, RING_SEGMENTS), shape.fill === 'solid' ? shape.colour : NEUTRAL_COLOUR, 1, centre);

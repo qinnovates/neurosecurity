@@ -12,6 +12,9 @@ interface Props {
   onKeyDown: (event: KeyboardEvent<HTMLButtonElement>, regionId: string) => void;
 }
 
+/** A structure marked by a ring alone has no shape to fill, whatever the lens holds for it. */
+const MARKER_WORDS = 'location marker, no shape to fill';
+
 /** A click from the keyboard carries no pointer detail. */
 function isKeyboardClick(event: MouseEvent<HTMLButtonElement>): boolean {
   return event.detail === 0;
@@ -43,7 +46,7 @@ export default function RegionRowButton({ row, isSelected, isTabStop, onSelect, 
         <span className="atlas-cell atlas-cell-lens" key={`${row.lens.standing}:${row.lens.value}`}>
           <span className="sr-only">Under this lens: </span>
           <span className="atlas-row-value"><MarkGlyph mark={row.lens.mark} />{row.lens.value}</span>
-          <span className="atlas-row-why">{row.lens.reason}; {MARK_WORDS[row.lens.mark]}</span>
+          <span className="atlas-row-why">{row.lens.reason}; {row.geometryState === 'marker_only' ? MARKER_WORDS : MARK_WORDS[row.lens.mark]}</span>
           {row.lens.reviewState !== null && <ReviewMark state={row.lens.reviewState} />}
         </span>
       </button>
