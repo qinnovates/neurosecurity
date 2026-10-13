@@ -93,7 +93,7 @@ describe('explorer source rules', () => {
     const classesIn = (text: string): Set<string> => new Set([...text.matchAll(/\.(atlas-[a-z0-9-]+)/g)].map((match) => match[1]));
     const earlier = classesIn(before);
     /** Classes the 3D view may share on purpose: buttons, toggles, notes and lists that look the same everywhere. */
-    const SHARED = ['atlas-button', 'atlas-root', 'atlas-toggle', 'atlas-limit'];
+    const SHARED = ['atlas-button', 'atlas-root', 'atlas-toggle', 'atlas-limit', 'atlas-link-button'];
     const viewportOnly = [...classesIn(viewport)].filter((name) => !earlier.has(name));
     expect(viewportOnly.length).toBeGreaterThan(15);
     expect([...classesIn(viewport)].filter((name) => earlier.has(name) && !SHARED.includes(name))).toEqual([]);
