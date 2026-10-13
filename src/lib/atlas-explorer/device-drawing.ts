@@ -9,15 +9,15 @@
  * area under an electrode anywhere in this module.
  */
 
-import type { AnatomyIndex, IndexElectrodeLayout, IndexReviewState } from '@/lib/anatomy/anatomy-index-types';
+import type { AnatomyIndex, IndexReviewState } from '@/lib/anatomy/anatomy-index-types';
 import { limitSentence, type LimitSentence } from '@/lib/anatomy/limits-copy';
 import type { FiducialId } from '@/lib/anatomy/parse-device-geometry';
 import { rasToScene, type Point3 } from '@/lib/anatomy/ras-to-scene';
 import type { LayerId } from '@/lib/anatomy/source-types';
+import { ELECTRODE_LAYER_NAME, isDevicesLayerShown, listDrawableLayouts } from './devices-layer';
 
-export const DEVICES_LAYER: LayerId = 'devices';
-/** The layer's name wherever it is shown. It says what is drawn, and nothing about what an electrode picks up. */
-export const ELECTRODE_LAYER_NAME = 'EEG electrode layout';
+export { DEVICES_LAYER, ELECTRODE_LAYER_NAME, isDevicesLayerShown, layersAtStart, listDrawableLayouts } from './devices-layer';
+
 /** How much further back the camera stands once the head surface is drawn, so the whole head is in the picture. */
 export const HEAD_VIEW_SCALE = 1.35;
 
@@ -33,24 +33,6 @@ export interface DeviceDrawing {
   /** Shown with the drawing wherever it appears; a layout is never drawn without it. */
   reviewState: IndexReviewState;
   electrodes: ElectrodeDot[];
-}
-
-/** Whether the index lets the devices layer be shown and the visitor has asked for it. */
-export function isDevicesLayerShown(index: AnatomyIndex, requested: Readonly<Record<LayerId, boolean>>): boolean {
-  return requested[DEVICES_LAYER] && index.layers.some((layer) => layer.id === DEVICES_LAYER && layer.available);
-}
-
-/** The layouts the index says may be drawn: each sits on the head surface it was placed on. */
-export function listDrawableLayouts(index: AnatomyIndex): IndexElectrodeLayout[] {
-  return index.devices.electrode_layouts.filter((layout) => layout.drawable);
-}
-
-/**
- * The layers that are on when the explorer starts. The devices layer follows
- * the data: it starts on only if a drawable layout says it is shown by default.
- */
-export function layersAtStart(index: AnatomyIndex, base: Readonly<Record<LayerId, boolean>>): Record<LayerId, boolean> {
-  return { ...base, [DEVICES_LAYER]: listDrawableLayouts(index).some((layout) => layout.shown_by_default) };
 }
 
 /** The dots to draw, or null while the layer is off, unavailable or holds no drawable layout. */

@@ -3,7 +3,7 @@ import { ANATOMY_EVIDENCE_PATH } from '@/lib/anatomy/anatomy-index-types';
 import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
 import { announceLens, announceSelection } from '@/lib/atlas-explorer/announcements';
 import { stageStepNumbers } from '@/lib/atlas-explorer/chain-steps';
-import { isDevicesLayerShown, layersAtStart } from '@/lib/atlas-explorer/device-drawing';
+import { isDevicesLayerShown, layersAtStart } from '@/lib/atlas-explorer/devices-layer';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { LENS_LABELS, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE, explorerReducer } from './atlas-state';

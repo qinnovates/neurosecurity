@@ -2,7 +2,7 @@ import { useId } from 'react';
 import type { IndexLayer, IndexSource } from '@/lib/anatomy/anatomy-index-types';
 import { limitSentence } from '@/lib/anatomy/limits-copy';
 import type { LayerId } from '@/lib/anatomy/source-types';
-import { ELECTRODE_LAYER_NAME } from '@/lib/atlas-explorer/device-drawing';
+import { ELECTRODE_LAYER_NAME } from '@/lib/atlas-explorer/devices-layer';
 import { limitForLayer } from '@/lib/atlas-explorer/limit-selection';
 import Disclosure from './Disclosure';
 import LimitNote from './LimitNote';
