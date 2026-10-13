@@ -109,6 +109,24 @@ export const LIMIT_TEMPLATES = {
   device_stages_mixed: 'Some techniques carry a brain band as well as a device band. Their region links, where an AI has drafted any, are in the region list.',
   h01_sample: 'This is one small sample from one person. It is not linked to any region here and says nothing about what any part of the brain does.',
   licence_readings: 'Licence readings were made by an AI, not by a lawyer, and no person has confirmed them.',
+
+  // Threat-model steps on the brain.
+  chain_order: 'The steps follow the order of this threat model, one after another. Nothing here shows a signal moving through the brain.',
+  chain_not_incident: 'Each threat model here is a sequence of catalog techniques put together for this site. None is a report of something that happened.',
+  chain_step_tally: '{lit} of this threat model\'s {total} steps light a region. A step that lights none has no single region linked to its technique; that does not mean it leaves the brain alone.',
+  chain_overall_tally: '{lit} of the {total} steps in these {chains} threat models light a region. For the others the picture of the brain does not change; the device stages their techniques are tagged with are marked under Device stages.',
+  chain_all_at_once: 'Your device asks for less motion, so every step is shown at once, numbered in the threat model\'s order.',
+
+  // The electrode layout, the head surface and the lead drawings.
+  device_electrodes: 'These dots show the standard 10-20 electrode layout fitted to an average head by a computer program. The four points it is measured from are rough guesses, so a dot may be a centimetre or so from where a technician would put it. On a real head the positions shift, and the brain area under each one differs between people.',
+  device_landmarks: 'The layout is measured from four points: the dip above the nose, the bump at the back of the skull, and a point in front of each ear. A program guessed them on an average head. No person has checked them, and three of the four are weak guesses.',
+  device_lead: 'The contacts and the lead\'s thickness are drawn to scale from published figures; the tip and the rest are not. It is shown beside the brain, not in it: surgeons choose the position and angle for each patient from that patient\'s own scans.',
+  device_lead_panel: 'Numbers marked \'review paper\' come from a journal article, not from an FDA document.',
+  device_head_surface: 'The head shape is the outer surface of an average of 152 people\'s MRI scans, so it is smooth and is no one\'s real head. The scan stops just below the nose and before its tip, so the shape is cut flat there.',
+  device_electrode_pick: 'Picking a dot shows the electrode\'s name. It selects no brain region: this atlas does not say what lies under an electrode.',
+  device_lead_scale: 'Every lead here is drawn at one scale. The bar is {length} mm long at that scale.',
+  device_fact_abstract_only: 'An AI wrote this sentence from the paper\'s abstract alone. The full paper was not read, and no person has checked it.',
+  device_fact_full_text: 'An AI wrote this sentence from the paper. No person has checked it.',
 } as const;
 
 export type LimitId = keyof typeof LIMIT_TEMPLATES;
