@@ -60,12 +60,15 @@ export function buildViewportCaption(model: ExplorerModel, lens: Lens, shapes: r
   const layers = [...new Set(shapes.map((shape) => shape.layer))];
   const assetIds = new Set(shapes.map((shape) => shape.assetId));
   const drawnKeys = new Set(shapes.map((shape) => shape.structureKey));
+  // The lens's own limit: the first of its sentences that limits the lens, not one that only explains a term.
+  const lensLimits = limitsForLens(model, lens);
+  const lensLimit = lensLimits.find((limit) => limit.id.startsWith('lens_')) ?? lensLimits[0];
   const states = [...drawnKeys].flatMap((key) => model.structuresByKey.get(key)?.review_state ?? []);
   return {
     reviewState: weakestReviewState(states),
     lensLabel: LENS_LABELS[lens.kind],
     templateSpace: model.index.template_space,
-    lensLimits: [limitsForLens(model, lens)[0], limitSentence('whole_scene')],
+    lensLimits: [lensLimit, limitSentence('whole_scene')],
     positionLimits: layers.map((layer) => positionLimitFor(model, layer, assetIds)),
     markLimits: markLimitsFor(shapes),
   };

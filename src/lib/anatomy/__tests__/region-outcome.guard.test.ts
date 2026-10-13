@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { loadAnatomyBundle, loadAnatomyData } from '@/components/atlas-scene/load-anatomy-data';
-import { summariseRegionOutcome } from '../region-outcome';
+import { findGradeRuleProblems, summariseRegionOutcome } from '../region-outcome';
 import { SOURCE_REF_STATES, checkSourceRef } from '../source-ref';
 
 /**
@@ -89,5 +89,24 @@ describe('the region outcome (guard)', () => {
     expect(idsIn('drawn')).toHaveLength(OWN_SHAPE_COUNT - MARKER_ONLY_REGION_IDS.length);
     expect(idsIn('contained')).toEqual(CONTAINED_REGION_IDS);
     expect(idsIn('no_geometry')).toEqual(NO_GEOMETRY_REGION_IDS);
+  });
+
+  it('holds every grade to the two rules: a stand-in is not a synonym, and a probability-map shape is not the structure', () => {
+    expect(findGradeRuleProblems(data.crosswalk, data.manifest)).toEqual([]);
+    const standIns = data.crosswalk.rows.filter((row) => row.contained_kind === 'named_stand_in');
+    const onProbabilityMaps = data.crosswalk.rows.filter((row) => row.atlas === 'cit168_rl');
+    expect(standIns.length).toBeGreaterThan(0);
+    expect(onProbabilityMaps.length).toBeGreaterThan(0);
+    const regraded = (subjectId: string, change: Record<string, string>) => ({ ...data.crosswalk, rows: data.crosswalk.rows.map((row) => (row.subject_id === subjectId ? { ...row, ...change } : row)) });
+    for (const row of standIns) {
+      expect(findGradeRuleProblems(regraded(row.subject_id, { name_match: 'synonym' }) as never, data.manifest)).toHaveLength(1);
+    }
+    for (const row of onProbabilityMaps) {
+      expect(findGradeRuleProblems(regraded(row.subject_id, { extent_match: 'same' }) as never, data.manifest)).toHaveLength(1);
+    }
+    const onDiscreteAtlas = data.crosswalk.rows.find((row) => row.atlas === 'neudorfer_hypothalamus');
+    expect(onDiscreteAtlas).toBeDefined();
+    expect(findGradeRuleProblems(regraded(String(onDiscreteAtlas?.subject_id), { extent_match: 'same' }) as never, data.manifest)).toEqual([]);
+    expect(findGradeRuleProblems(regraded('pmc', { name_match: 'synonym' }) as never, data.manifest)).toEqual([]);
   });
 });

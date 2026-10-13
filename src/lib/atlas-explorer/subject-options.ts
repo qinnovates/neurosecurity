@@ -5,7 +5,7 @@
  */
 
 import type { IndexReviewState, IndexTechniqueScope } from '@/lib/anatomy/anatomy-index-types';
-import { weakestReviewState, type ExplorerModel } from './explorer-model';
+import { nameBands, weakestReviewState, type ExplorerModel } from './explorer-model';
 import type { LensKind } from './lens-state';
 
 /** `device_only`: the technique has no neural band, so it can be linked to no region. */
@@ -37,11 +37,11 @@ function countRegions(count: number): string {
 export function listTechniqueOptions(model: ExplorerModel): SubjectOption[] {
   const neural = model.index.techniques.map((technique): SubjectOption => {
     const litCount = new Set(technique.links.filter((link) => link.lit).map((link) => link.resolved_region_id)).size;
-    const detail = technique.scope === 'regions' ? `${countRegions(litCount)}; ${technique.band_ids.join(', ')}` : `${KIND_DETAILS[technique.scope]}; ${technique.band_ids.join(', ')}`;
+    const detail = `${technique.scope === 'regions' ? countRegions(litCount) : KIND_DETAILS[technique.scope]}; ${nameBands(model, technique.band_ids)}`;
     return { id: technique.id, label: technique.name, detail, reviewState: weakestReviewState(technique.links.map((link) => link.review_state)), techniqueKind: technique.scope };
   });
   const deviceOnly = [...model.deviceOnlyTechniquesById.values()].map((technique): SubjectOption => (
-    { id: technique.id, label: technique.name, detail: `${KIND_DETAILS.device_only}; ${technique.band_ids.join(', ')}`, reviewState: null, techniqueKind: 'device_only' }
+    { id: technique.id, label: technique.name, detail: `${KIND_DETAILS.device_only}; ${nameBands(model, technique.band_ids)}`, reviewState: null, techniqueKind: 'device_only' }
   ));
   return [...neural, ...deviceOnly].sort((first, second) => first.id.localeCompare(second.id));
 }

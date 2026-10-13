@@ -48,4 +48,19 @@ describe('parseH01Card on bad files', () => {
     expect(() => parseH01Card(reviewed)).toThrow(/facts\[0\]\.human_review/);
     expect(() => parseH01Card({ ...clone(), donor: 'unknown' })).toThrow(/unexpected key "donor"/);
   });
+
+  it('requires one visitor sentence for each drafting note, AI-drafted, and none of the drafting voice', () => {
+    const card = parseH01Card(h01File);
+    expect(card.visitor_caveats.map((caveat) => caveat.must_not_imply_index)).toEqual(card.must_not_imply.map((_note, index) => index));
+    expect(card.visitor_caveats.filter((caveat) => caveat.drafted_by !== 'ai' || /\bmust not\b|(^|\. )Do not\b|\bthe card\b/.test(caveat.text))).toEqual([]);
+    const missing = clone();
+    missing.visitor_caveats = missing.visitor_caveats.slice(1);
+    expect(() => parseH01Card(missing)).toThrow(/visitor_caveats: each drafting note needs exactly one visitor sentence/);
+    const doubled = clone();
+    doubled.visitor_caveats[1].must_not_imply_index = 0;
+    expect(() => parseH01Card(doubled)).toThrow(/visitor_caveats/);
+    const without = clone() as unknown as Record<string, unknown>;
+    delete without.visitor_caveats;
+    expect(() => parseH01Card(without)).toThrow(/missing key "visitor_caveats"/);
+  });
 });

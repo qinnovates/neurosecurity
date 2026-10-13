@@ -11,7 +11,8 @@
 
 export const LIMIT_TEMPLATES = {
   // What stands for a region.
-  region_matching: 'The shapes only roughly mark the QIF regions: an AI drafted the matching and no expert has checked it, and real borders differ from person to person.',
+  region_matching: 'Where a shape is shown it only roughly marks the QIF region: an AI drafted the matching, no expert has checked it, and real borders differ from person to person.',
+  list_terms: 'A catalog entry is one attack technique in the TARA catalog. "Filed under" means an AI placed a paper\'s finding beside a region; each statement says what the paper itself is about.',
   geometry_drawn: 'The atlas draws a shape for this region.',
   geometry_contained: 'The atlas has no shape for this area alone. It lies somewhere inside the shape shown, which holds other areas too.',
   geometry_marker_only: 'The source gives only a point for this structure, not an outline. The marker shows roughly where it is, not its size or shape.',
@@ -29,7 +30,14 @@ export const LIMIT_TEMPLATES = {
 
   // Layers.
   layers_text_only: 'Layers choose what the 3D view draws. The list always shows every region.',
-  layer_unavailable: 'Not available in this build. {reason}',
+  layer_unavailable: 'This layer is not available in this build.',
+  layer_blocked_route_not_settled: 'Not available in this build. The shapes cannot yet be placed reliably in the brain model this site uses.',
+  layer_blocked_grant_not_explicit: 'Not available in this build. It is unclear whether the source\'s licence allows this site to show it.',
+  layer_blocked_not_cleared: 'Not available in this build. The terms for showing this source on this site are not yet settled.',
+  layer_blocked_verdict_not_ship: 'Not available in this build. As its licence was read, this source may not be shown on this site.',
+  layer_blocked_license_not_commercial: 'Not available in this build. The source\'s licence does not allow commercial use.',
+  layer_blocked_not_redistributable: 'Not available in this build. The source may be used for calculation but not shown or passed on.',
+  layer_blocked_agreement_not_accepted: 'Not available in this build. The source is behind an access agreement that has not been accepted for this site.',
   networks_names_only: 'These are names researchers give to groups of brain areas whose activity tends to rise and fall together. No shapes are shown, because no network map\'s licence clearly allows this site to show it.',
 
   // Lenses.
@@ -40,6 +48,7 @@ export const LIMIT_TEMPLATES = {
   lens_technique_device_only: 'The catalog tags this technique with device stages only and no brain band, so no region link was drafted. This describes the tags, not what the technique could affect in the body.',
   lens_technique_unknown: 'This build holds no data for this technique, so every region reads "no data".',
   lens_niss: 'The steps show the highest score that NISS, a proposed and unreviewed scale, gives to any technique an AI has linked to this region. Regions with no linked technique are marked "no data", not "low". It is not a measurement of risk to this part of the brain.',
+  niss_meaning: 'NISS is a proposed, unreviewed severity score for attack techniques, in steps from none to critical. A region shows the highest step among the techniques an AI has linked to it.',
   lens_dsm: 'These are category names from a psychiatric manual that the catalog attaches to techniques for threat modelling; the links are unreviewed. They are not diagnoses and say nothing about any person.',
   lens_stated_targets: 'These are the regions QIF\'s own atlas file lists for this device; no expert has reviewed the list, and QIF is a proposed framework. Where a device sits and what it affects is different in every person and is not shown here.',
   lens_needs_subject: 'Choose one from the list to see which regions it is linked to.',
@@ -52,7 +61,9 @@ export const LIMIT_TEMPLATES = {
   techniques_band_level: 'Tagged with band {band}; the catalog\'s text names no structure. This is not a link to this region.',
   techniques_none: 'No technique is linked to this region. That means nothing has been linked; it does not mean the region is safe.',
   evidence_intro: 'Each statement is one finding from one published paper, chosen and summarised by an AI; no scientist has reviewed it, and it is not medical advice. A second AI checked most quotes against the paper\'s abstract; a statement says so where it did not.',
-  evidence_none: 'No statement is filed under this region. The recorded reason: {reason}',
+  evidence_none_no_abstract_found: 'No statement is filed under this region: the search found no paper whose abstract ties a finding to this structure itself. That does not mean no such paper exists.',
+  evidence_none_animal_evidence_only: 'No statement is filed under this region: only animal studies were found for it, and the statements here come from studies in people.',
+  evidence_none_unrecorded: 'No statement is filed under this region, and no reason is recorded.',
   evidence_match_equal: 'The drafter judged the paper\'s wording to mean this same region.',
   evidence_match_part: 'The paper is about {anatomy}, a part of this region. It may not hold for the rest of it.',
   evidence_match_larger_structure: 'The paper is about {anatomy}, a larger structure that contains this region. It is not a finding about this region alone.',
@@ -64,7 +75,7 @@ export const LIMIT_TEMPLATES = {
   evidence_required_citation: 'This statement must be read together with the other paper cited with it.',
   evidence_check_keep: 'The second AI checked this quote against the paper\'s abstract.',
   evidence_check_keep_with_corrected_claim: 'The second AI checked this quote and corrected the summary.',
-  evidence_check_downgrade: 'The second AI checked this quote and moved it under a larger or different structure than first drafted.',
+  evidence_check_downgrade: 'The second AI checked this quote and judged that it supports less than first drafted; the statement was narrowed or qualified.',
   evidence_check_added_in_round_2_not_seen_by_verifier: 'Not seen by the second AI: this statement was added after its check.',
   evidence_rival_view: 'Shown as a rival view: it argues against another statement filed here.',
   stated_devices_none: 'No device record in QIF\'s atlas file lists this region.',
@@ -88,7 +99,7 @@ export const LIMIT_TEMPLATES = {
 
   // The rail, networks and the H01 card.
   device_stages: 'The catalog tags these techniques with device stages only and no brain band, so no region link was drafted. This describes the tags, not what a technique could affect in the body.',
-  stage_tags: 'The stage tags were entered by hand in the TARA catalog, a proposed catalog that no expert has reviewed.',
+  stage_tags: 'The stage tags come from the TARA catalog as written, a proposed catalog that no expert has reviewed.',
   band_order: 'The order is the catalog\'s band order. It does not show which way a signal travels.',
   device_stages_mixed: 'Some techniques carry a brain band as well as a device band. Their region links, where an AI has drafted any, are in the region list.',
   h01_sample: 'This is one small sample from one person. It is not linked to any region here and says nothing about what any part of the brain does.',

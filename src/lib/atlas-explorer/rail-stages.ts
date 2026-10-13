@@ -7,13 +7,15 @@
 
 import type { IndexReviewState } from '@/lib/anatomy/anatomy-index-types';
 import { DEVICE_STAGE_BAND_IDS, type CatalogBand, type DeviceStageTechnique } from './explorer-catalog';
-import { isNeuralBand, weakestReviewState, type ExplorerModel } from './explorer-model';
+import { isNeuralBand, nameBands, weakestReviewState, type ExplorerModel } from './explorer-model';
 
 export interface RailTechnique {
   id: string;
   name: string;
   /** The brain bands the technique also carries. Empty for a device-only technique. */
   neuralBandIds: string[];
+  /** Those bands with their names, as shown. */
+  neuralBandNames: string;
   /** AI-drafted region links the index holds for it. Zero for a device-only technique. */
   draftedLinkCount: number;
   /** The review state of those links, for the mark beside the count. Null when there are none. */
@@ -38,6 +40,7 @@ function toRailTechnique(model: ExplorerModel, technique: DeviceStageTechnique):
     id: technique.id,
     name: technique.name,
     neuralBandIds: technique.band_ids.filter(isNeuralBand),
+    neuralBandNames: nameBands(model, technique.band_ids.filter(isNeuralBand)),
     draftedLinkCount: links.length,
     reviewState: weakestReviewState(links.map((link) => link.review_state)),
   };

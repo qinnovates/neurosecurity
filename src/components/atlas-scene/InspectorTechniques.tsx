@@ -30,7 +30,7 @@ function TechniqueItem({ technique, item, onChooseTechnique }: TechniqueItemProp
         <span className="atlas-id">{technique.id}</span> <ReviewMark state={technique.reviewState} />
       </p>
       <p className="atlas-row-why">
-        The catalog&rsquo;s word: &ldquo;{technique.term}&rdquo;. Bands {technique.bandIds.join(', ')}.
+        The catalog&rsquo;s word: &ldquo;{technique.term}&rdquo;. Bands: {technique.bandNames}.
         {technique.nissSeverity !== null && ` NISS severity: ${technique.nissSeverity}.`}
         {technique.dsmCluster !== null && ` DSM cluster tag: ${technique.dsmCluster.replaceAll('_', ' ')}.`}
         {technique.uncountedReason !== null && ` Not counted: ${technique.uncountedReason}.`}

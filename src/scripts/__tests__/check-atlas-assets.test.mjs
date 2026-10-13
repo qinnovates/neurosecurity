@@ -4,7 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import {
-  DEFAULT_MANIFEST_FILE, LICENSE_READING_STATEMENT, SHARE_ALIKE_STATEMENT, SHIPPING_LICENSE_NAMES, findAssetCoherenceFailures, findAttributionFailures, visibleText,
+  DEFAULT_MANIFEST_FILE, LICENSE_READING_STATEMENT, POSITION_CHECK_SENTENCES, SHARE_ALIKE_STATEMENT, SHIPPING_LICENSE_NAMES, findAssetCoherenceFailures, findAttributionFailures, visibleText,
 } from '../check-atlas-assets.mjs';
 
 const ASSET_BYTES = Buffer.from('fixture mesh bytes');
@@ -20,11 +20,12 @@ const NOTICE_TEXT = Buffer.from('NOTICE for the fixture folder');
 const MODIFICATION_NOTE = 'Each label was meshed, smoothed and decimated.';
 const LICENSE_ID = 'cc-by-sa-4.0';
 const FULL_PAGE_BODY = `<p>${LICENSE_READING_STATEMENT}</p><p>Fixture A, Fixture B (2020).\n   An atlas.</p><p>Copyright (C) Fixture &amp; Sons. Keep this &quot;notice&quot; in <b>all</b> copies.</p>`
-  + `<p>License: <a href="#">${SHIPPING_LICENSE_NAMES[LICENSE_ID]}</a>.</p><p>${SHARE_ALIKE_STATEMENT}</p><p>Changes made: ${MODIFICATION_NOTE}</p>`;
+  + `<p>License: <a href="#">${SHIPPING_LICENSE_NAMES[LICENSE_ID]}</a>.</p><p>${SHARE_ALIKE_STATEMENT}</p>`
+  + `<li><span>File ${ASSET_PATH}. Changes made: ${MODIFICATION_NOTE} ${POSITION_CHECK_SENTENCES['not independently checked']}</span></li>`;
 
 function writeFixture({ assetBytes = ASSET_BYTES, noticeBytes = NOTICE_TEXT, pageBody } = {}) {
   const manifest = {
-    assets: [{ id: 'fixture', path: ASSET_PATH, bytes: ASSET_BYTES.length, sha256: sha256(ASSET_BYTES), source_ids: ['fixture_atlas'], computed_with_source_ids: [], license_id: LICENSE_ID, modification_note: MODIFICATION_NOTE }],
+    assets: [{ id: 'fixture', path: ASSET_PATH, bytes: ASSET_BYTES.length, sha256: sha256(ASSET_BYTES), source_ids: ['fixture_atlas'], computed_with_source_ids: [], license_id: LICENSE_ID, modification_note: MODIFICATION_NOTE, position_check: 'not independently checked' }],
     support_files: { 'open/NOTICE.txt': sha256(NOTICE_TEXT) },
   };
   const sources = { sources: [{ id: 'fixture_atlas', name: 'Fixture atlas', attribution_text: ATTRIBUTION_TEXT, required_text: [REQUIRED_WORDING] }] };
@@ -98,7 +99,7 @@ describe('findAttributionFailures', () => {
   });
 
   it('fails a page that lacks a required wording, the attribution, or the AI statement', () => {
-    const REST = `<p>${SHIPPING_LICENSE_NAMES[LICENSE_ID]}</p><p>${SHARE_ALIKE_STATEMENT}</p><p>${MODIFICATION_NOTE}</p>`;
+    const REST = `<p>${SHIPPING_LICENSE_NAMES[LICENSE_ID]}</p><p>${SHARE_ALIKE_STATEMENT}</p><p>File ${ASSET_PATH}. Changes made: ${MODIFICATION_NOTE} ${POSITION_CHECK_SENTENCES['not independently checked']}</p>`;
     const withoutWording = writeFixture({ pageBody: `<p>${LICENSE_READING_STATEMENT}</p><p>${ATTRIBUTION_TEXT}</p>${REST}` });
     expect(findAttributionFailures(withoutWording, files)).toEqual(['/atlas/attribution/: missing wording for "fixture_atlas": Copyright (C) Fixture & Sons. Keep this "notice" in all copies.']);
     const onlyInScript = writeFixture({ pageBody: `<p>${LICENSE_READING_STATEMENT}</p><p>${ATTRIBUTION_TEXT}</p>${REST}<script>${JSON.stringify(REQUIRED_WORDING)}</script>` });
@@ -108,13 +109,24 @@ describe('findAttributionFailures', () => {
   });
 
   it('fails a page that lacks the license name, the changes made, or the share-alike statement', () => {
-    for (const [missing, message] of [
-      [SHIPPING_LICENSE_NAMES[LICENSE_ID], '/atlas/attribution/: missing the license name for fixture (cc-by-sa-4.0)'],
-      [MODIFICATION_NOTE, '/atlas/attribution/: missing the changes made to fixture'],
-      [SHARE_ALIKE_STATEMENT, '/atlas/attribution/: missing the share-alike statement for fixture'],
+    const positionFailure = '/atlas/attribution/: the entry for fixture does not say "Placement was not independently checked." right after its changes';
+    for (const [missing, messages] of [
+      [SHIPPING_LICENSE_NAMES[LICENSE_ID], ['/atlas/attribution/: missing the license name for fixture (cc-by-sa-4.0)']],
+      [MODIFICATION_NOTE, ['/atlas/attribution/: missing the changes made to fixture', positionFailure]],
+      [SHARE_ALIKE_STATEMENT, ['/atlas/attribution/: missing the share-alike statement for fixture']],
     ]) {
-      expect(findAttributionFailures(writeFixture({ pageBody: FULL_PAGE_BODY.replace(missing, '') }), files)).toEqual([message]);
+      expect(findAttributionFailures(writeFixture({ pageBody: FULL_PAGE_BODY.replace(missing, '') }), files)).toEqual(messages);
     }
+  });
+
+  it('fails a page whose position sentence for a file claims more than the manifest records, or sits beside another file', () => {
+    const honest = POSITION_CHECK_SENTENCES['not independently checked'];
+    const positionFailure = `/atlas/attribution/: the entry for fixture does not say "${honest}" right after its changes`;
+    for (const claimed of [POSITION_CHECK_SENTENCES['independently checked'], POSITION_CHECK_SENTENCES['checked in aggregate'], 'Placement was independently checked.']) {
+      expect(findAttributionFailures(writeFixture({ pageBody: FULL_PAGE_BODY.replace(honest, claimed) }), files)).toEqual([positionFailure]);
+    }
+    const elsewhere = FULL_PAGE_BODY.replace(` ${honest}`, '') + `<p>File open/other.glb. Changes made: none. ${honest}</p>`;
+    expect(findAttributionFailures(writeFixture({ pageBody: elsewhere }), files)).toEqual([positionFailure]);
   });
 
   it('fails when the page was not built, and when the manifest names a source the registry lacks', () => {

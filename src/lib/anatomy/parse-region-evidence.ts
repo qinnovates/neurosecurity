@@ -7,11 +7,11 @@
  * added, dropped or re-graded without the header saying so.
  */
 
-import { childOf, failAt, itemOf, readInteger, readList, readRecord, readString, rejectDuplicates, rootOf, type FieldLocation } from './field-readers';
+import { childOf, failAt, itemOf, readEnum, readInteger, readList, readRecord, readString, rejectDuplicates, rootOf, type FieldLocation } from './field-readers';
 import { readDate, readId } from './format-readers';
 import { readRegionEvidenceRow } from './parse-region-evidence-row';
 import {
-  EVIDENCE_KINDS, REGION_EVIDENCE_DISPLAY_RULE, REGION_EVIDENCE_FILE, REGION_EVIDENCE_STATUS, VERIFIER_VERDICTS,
+  EMPTY_REGION_REASONS, EVIDENCE_KINDS, REGION_EVIDENCE_DISPLAY_RULE, REGION_EVIDENCE_FILE, REGION_EVIDENCE_STATUS, VERIFIER_VERDICTS,
   type EmptyRegion, type RegionEvidence, type RegionEvidenceRow,
 } from './region-evidence-types';
 
@@ -34,8 +34,11 @@ function readTally<Key extends string>(value: unknown, location: FieldLocation, 
 }
 
 function readEmptyRegion(value: unknown, location: FieldLocation): EmptyRegion {
-  const record = readRecord(value, location, { required: ['region_id', 'reason', 'name'] });
-  return { region_id: readId(record, 'region_id', location), reason: readString(record, 'reason', location, MAX_NOTE_LENGTH), name: readString(record, 'name', location, MAX_NAME_LENGTH) };
+  const record = readRecord(value, location, { required: ['region_id', 'reason', 'name', 'reason_code'] });
+  return {
+    region_id: readId(record, 'region_id', location), reason: readString(record, 'reason', location, MAX_NOTE_LENGTH), name: readString(record, 'name', location, MAX_NAME_LENGTH),
+    reason_code: readEnum(record, 'reason_code', location, EMPTY_REGION_REASONS),
+  };
 }
 
 function countBy<Key extends string>(rows: readonly RegionEvidenceRow[], keys: readonly Key[], keyOf: (row: RegionEvidenceRow) => Key): Record<Key, number> {

@@ -11,8 +11,8 @@ import { parseAnatomyIndex } from '@/lib/anatomy/parse-anatomy-index';
 import { H01_CARD_PATH, parseH01Card, type H01Card } from '@/lib/anatomy/parse-h01-card';
 import { parseRegionEvidence } from '@/lib/anatomy/parse-region-evidence';
 import { REGION_EVIDENCE_PATH, type RegionEvidence } from '@/lib/anatomy/region-evidence-types';
-import { EXPLORER_CATALOG_PATH, parseExplorerCatalog } from '@/lib/atlas-explorer/explorer-catalog';
-import { createExplorerModel, type ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
+import { DEVICE_STAGE_BAND_IDS, EXPLORER_CATALOG_PATH, parseExplorerCatalog } from '@/lib/atlas-explorer/explorer-catalog';
+import { createExplorerModel, isNeuralBand, type ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { AtlasFetchError, fetchAtlasJson, fetchPinnedJson } from './fetch-atlas-json';
 
 /**
@@ -48,6 +48,7 @@ export function isAbort(error: unknown): boolean {
 export function toLoadFailure(error: unknown, file: string): LoadFailure {
   if (error instanceof AnatomyDataError) return { kind: 'invalid', file: error.dataFile, detail: error.message };
   if (error instanceof AtlasFetchError) return { kind: error.failure === 'pin_mismatch' ? 'out_of_step' : 'unavailable', file: error.path, detail: error.message };
+  if (error instanceof OutOfStepError) return { kind: 'out_of_step', file, detail: error.message };
   return { kind: 'unavailable', file, detail: error instanceof Error ? error.message : String(error) };
 }
 
@@ -68,6 +69,36 @@ function requireListableRegions(model: ExplorerModel): ExplorerModel {
   return model;
 }
 
+/** The index and the catalog each hold something the other contradicts, so they cannot be from one build. */
+export class OutOfStepError extends Error {
+  constructor(detail: string) {
+    super(`The index and the catalog disagree: ${detail}. Rebuild the site so both come from one build.`);
+    this.name = 'OutOfStepError';
+  }
+}
+
+const sameBands = (first: readonly string[], second: readonly string[]): boolean => first.length === second.length && first.every((bandId, position) => bandId === second[position]);
+
+/**
+ * The two files overlap: a technique with both a brain band and a device band is in each, and every region is. Where
+ * they overlap they must agree, or a statement drawn from one could contradict the other.
+ */
+function requireAgreement(model: ExplorerModel): ExplorerModel {
+  const { index, catalog } = model;
+  const catalogTechniques = new Map(catalog.device_stage_techniques.map((technique) => [technique.id, technique]));
+  if (catalogTechniques.size !== catalog.device_stage_techniques.length) throw new OutOfStepError('the catalog lists a technique twice');
+  for (const technique of index.techniques) {
+    const listed = catalogTechniques.get(technique.id);
+    const hasDeviceBand = technique.band_ids.some((bandId) => DEVICE_STAGE_BAND_IDS.includes(bandId));
+    if (hasDeviceBand !== (listed !== undefined) || (listed !== undefined && !sameBands(listed.band_ids, technique.band_ids))) throw new OutOfStepError(`technique ${technique.id} differs between them`);
+  }
+  const strayTechnique = catalog.device_stage_techniques.find((technique) => technique.band_ids.some(isNeuralBand) && !model.techniquesById.has(technique.id));
+  if (strayTechnique !== undefined) throw new OutOfStepError(`technique ${strayTechnique.id} carries a brain band in the catalog and is missing from the index`);
+  const regionIds = new Set(catalog.regions.map((region) => region.id));
+  if (regionIds.size !== model.regions.length || model.regions.some((region) => !regionIds.has(region.id))) throw new OutOfStepError('the two list different regions');
+  return model;
+}
+
 /** The pin the index holds for a file served beside it. An index without one cannot vouch for that file, so it is refused. */
 function companionPin(index: AnatomyIndex, path: string): PinnedFile {
   const pin = index.companions.find((companion) => companion.path === path);
@@ -84,7 +115,7 @@ function companionPin(index: AnatomyIndex, path: string): PinnedFile {
 export async function loadExplorerModel(signal: AbortSignal, indexPin: PinnedFile | null): Promise<ExplorerModel> {
   const index = parseAnatomyIndex(indexPin === null ? await fetchAtlasJson(ANATOMY_INDEX_PATH, signal) : await fetchPinnedJson(indexPin, signal));
   const rawCatalog = await fetchPinnedJson(companionPin(index, EXPLORER_CATALOG_PATH), signal);
-  return requireListableRegions(createExplorerModel(index, parseExplorerCatalog(rawCatalog)));
+  return requireAgreement(requireListableRegions(createExplorerModel(index, parseExplorerCatalog(rawCatalog))));
 }
 
 /** The quotes and rationales behind the index's drafted rows, checked against the index's own pin. */

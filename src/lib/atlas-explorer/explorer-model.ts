@@ -84,3 +84,8 @@ export function listLitLinks(model: ExplorerModel, regionId: string): RegionLink
 export function weakestReviewState(states: readonly IndexReviewState[]): IndexReviewState | null {
   return states.find((state) => state.state === 'ai_drafted_unreviewed') ?? states[0] ?? null;
 }
+
+/** Band codes with their names from the catalog, as a visitor reads them: "I0 Neural Interface, N1 Spinal Cord". */
+export function nameBands(model: Pick<ExplorerModel, 'bandsById'>, bandIds: readonly string[]): string {
+  return bandIds.map((bandId) => { const band = model.bandsById.get(bandId); return band === undefined ? bandId : `${bandId} ${band.name}`; }).join(', ');
+}

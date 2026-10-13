@@ -78,4 +78,12 @@ describe('explorer source rules', () => {
     expect(flip).toContain("'(prefers-reduced-motion: reduce)'");
     expect(flip).toMatch(/\|\| prefersLessMotion\(\)\) continue;/);
   });
+
+  it('sets every font family from the Lab\'s two families or by inheritance, in the stylesheet and in inline styles', () => {
+    const ALLOWED_FAMILIES = [/^var\(--font-body(, [a-z-]+(, [a-z-]+)*)?\)$/, /^var\(--font-heading(, [a-z-]+)?\)$/, /^inherit$/];
+    const declared = files.flatMap((filePath) => [...fs.readFileSync(filePath, 'utf-8').matchAll(/font-family:\s*([^;}]+)[;}]|fontFamily:\s*['"`]([^'"`]+)['"`]/g)].map((match) => ({ filePath, family: (match[1] ?? match[2]).trim() })));
+    expect(declared.length).toBeGreaterThan(3);
+    expect(declared.filter(({ family }) => !ALLOWED_FAMILIES.some((allowed) => allowed.test(family)))).toEqual([]);
+    for (const family of ['Menlo', '"Comic Mono", sans-serif', 'var(--font-mono)', 'system-ui']) expect(ALLOWED_FAMILIES.some((allowed) => allowed.test(family)), family).toBe(false);
+  });
 });

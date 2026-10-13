@@ -92,6 +92,15 @@ describe('parseRegionEvidence on bad files', () => {
     expect(() => parse(doubled)).toThrow(/rows: statement \(region, paper and quote\) "pfc:22789779:.+" appears twice/);
   });
 
+  it('requires a closed reason code on every region with no statement', () => {
+    const coded = clone();
+    (coded.empty_regions[0] as unknown as Record<string, unknown>).reason_code = 'drafter_gave_up';
+    expect(() => parse(coded)).toThrow(/empty_regions\[0\]\.reason_code: "drafter_gave_up" is not an allowed value/);
+    const uncoded = clone();
+    delete (uncoded.empty_regions[0] as unknown as Record<string, unknown>).reason_code;
+    expect(() => parse(uncoded)).toThrow(/missing key "reason_code"/);
+  });
+
   it('refuses tallies that disagree with the rows, and a region with neither rows nor a reason', () => {
     expect(() => parse({ ...clone(), rows_surviving: 57 })).toThrow(/rows_surviving: the file says 57 but its contents count 58/);
     expect(() => parse(withRow((row) => { row.kind = 'stimulation_association'; }))).toThrow(/rows_by_kind/);

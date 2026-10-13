@@ -68,19 +68,21 @@ export default function ExplorerWorkspace({ model, isIndexPinned }: Props) {
 
   /**
    * Focus moves to the inspector when a region is chosen from the keyboard, and also on a narrow screen, where the
-   * inspector lies below the whole list and a tap would otherwise change nothing the visitor can see.
+   * inspector lies below the whole list and a tap would otherwise change nothing the visitor can see. The move waits
+   * for the inspector to show the chosen region, so it lands on that region's heading and not on the one it replaces.
    */
+  const [focusRequest, setFocusRequest] = useState<{ isStacked: boolean } | null>(null);
   const selectRegion = (regionId: string, byKeyboard: boolean): void => {
     dispatch({ type: 'target_selected', target: { kind: 'region', id: regionId } });
     const isStacked = typeof window.matchMedia === 'function' && window.matchMedia(STACKED_LAYOUT_QUERY).matches;
-    // The heading exists whether or not a region was selected before, so focus can move in the same turn.
-    if (!byKeyboard && !isStacked) return;
-    requestAnimationFrame(() => {
-      inspectorHeadingRef.current?.focus({ preventScroll: isStacked });
-      // Stacked, the inspector is brought to the top of the screen, so the tap visibly lands on the region's details.
-      if (isStacked) inspectorHeadingRef.current?.scrollIntoView?.({ block: 'start' });
-    });
+    if (byKeyboard || isStacked) setFocusRequest({ isStacked });
   };
+  useEffect(() => {
+    if (focusRequest === null) return;
+    inspectorHeadingRef.current?.focus({ preventScroll: focusRequest.isStacked });
+    // Stacked, the inspector is brought to the top of the screen, so the tap visibly lands on the region's details.
+    if (focusRequest.isStacked) inspectorHeadingRef.current?.scrollIntoView?.({ block: 'start' });
+  }, [focusRequest]);
   const chooseSubject = (kind: LensKind, subjectId: string): void => dispatch({ type: 'lens_subject_chosen', kind, subjectId });
   const focusSelectedRow = (): void => {
     const rows = [...(mainRef.current?.querySelectorAll<HTMLButtonElement>('[data-region-id]') ?? [])];
@@ -111,7 +113,7 @@ export default function ExplorerWorkspace({ model, isIndexPinned }: Props) {
           onBackToList={focusSelectedRow}
         />
       </div>
-      <LayerPanel layers={model.index.layers} requested={state.layers} onToggle={(layerId) => dispatch({ type: 'layer_toggled', layerId })} />
+      <LayerPanel layers={model.index.layers} sources={model.index.sources} requested={state.layers} onToggle={(layerId) => dispatch({ type: 'layer_toggled', layerId })} />
       <SignalChainRail
         rail={rail} includesMixed={state.railIncludesMixed} activeStageId={state.railStageId}
         chosenTechniqueId={state.lens.kind === 'technique' ? state.lens.techniqueId : null}

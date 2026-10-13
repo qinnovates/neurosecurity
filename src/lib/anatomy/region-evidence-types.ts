@@ -99,9 +99,15 @@ export interface RegionEvidenceRow {
   date_checked: string;
 }
 
+/** Why a region has no statement, as a closed code a visitor sentence is chosen by. */
+export const EMPTY_REGION_REASONS = ['no_abstract_found', 'animal_evidence_only'] as const;
+export type EmptyRegionReason = typeof EMPTY_REGION_REASONS[number];
+
 export interface EmptyRegion {
   region_id: string;
+  /** The drafter's own note. Never shown to a visitor. */
   reason: string;
+  reason_code: EmptyRegionReason;
   name: string;
 }
 

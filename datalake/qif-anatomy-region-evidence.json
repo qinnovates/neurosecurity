@@ -2279,17 +2279,20 @@
     {
       "region_id": "thoracic_cord",
       "reason": "No human lesion or stimulation study found whose abstract ties a deficit to the thoracic cord itself. The one lead read (Lee et al. 2017, PMID 29226126, 28 patients) concerns injuries 'above T6', which includes cervical injuries, so it was not used.",
-      "name": "Thoracic Spinal Cord"
+      "name": "Thoracic Spinal Cord",
+      "reason_code": "no_abstract_found"
     },
     {
       "region_id": "sacral_cord",
       "reason": "No human lesion or stimulation study found whose abstract names the sacral cord and a deficit. A systematic review of conus medullaris and cauda equina definitions (Brouwers et al. 2017, PMID 28534496) defines the syndromes by level but reports no deficit data in its abstract. One of the searches for this region returned nothing.",
-      "name": "Sacral Spinal Cord"
+      "name": "Sacral Spinal Cord",
+      "reason_code": "no_abstract_found"
     },
     {
       "region_id": "cea",
       "reason": "Only animal evidence found for the central nucleus specifically. Human amygdala lesion studies read this session concern the whole amygdala or the basolateral part and are filed under bla.",
-      "name": "Central Amygdala"
+      "name": "Central Amygdala",
+      "reason_code": "animal_evidence_only"
     }
   ]
 }

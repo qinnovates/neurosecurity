@@ -67,7 +67,6 @@ export const EVIDENCE_KIND_LABELS: Readonly<Record<EvidenceKind, string>> = {
   stimulation_association: 'Finding from stimulating the brain',
 };
 const CROSSREF_NOTICE_WORDS = 'Crossref lists a published correction to this paper; it was not read.';
-const NO_REASON_RECORDED = 'none is recorded.';
 
 function toCitation(source: { citation: string; doi: string | null; pmid: string }): CitationView {
   return { citation: source.citation, doiAddress: source.doi === null ? null : doiAddress(source.doi), pubmedAddress: pubmedAddress(source.pmid) };
@@ -103,6 +102,7 @@ export function toEvidenceStatement(row: RegionEvidenceRow, regionName: string, 
 
 export function buildRegionEvidenceView(evidence: RegionEvidence, regionId: string, regionName: string): RegionEvidenceView {
   const statements = evidence.rows.filter((row) => row.filed_under === regionId).map((row, ordinal) => toEvidenceStatement(row, regionName, ordinal));
-  const reason = evidence.empty_regions.find((region) => region.region_id === regionId)?.reason ?? NO_REASON_RECORDED;
-  return { intro: limitSentence('evidence_intro'), statements, emptyLimit: statements.length === 0 ? limitSentence('evidence_none', { reason }) : null };
+  const reasonCode = evidence.empty_regions.find((region) => region.region_id === regionId)?.reason_code;
+  const emptyLimit = limitSentence(reasonCode === undefined ? 'evidence_none_unrecorded' : `evidence_none_${reasonCode}`);
+  return { intro: limitSentence('evidence_intro'), statements, emptyLimit: statements.length === 0 ? emptyLimit : null };
 }

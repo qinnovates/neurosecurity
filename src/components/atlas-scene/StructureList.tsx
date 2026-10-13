@@ -96,6 +96,7 @@ export default function StructureList({ groups, regionCount, filter, lensLabel, 
           </section>
         ))}
       </div>
+      <LimitNote limit={limitSentence('list_terms')} />
     </section>
   );
 }

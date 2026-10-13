@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import type { IndexLayer } from '@/lib/anatomy/anatomy-index-types';
+import type { IndexLayer, IndexSource } from '@/lib/anatomy/anatomy-index-types';
 import { limitSentence } from '@/lib/anatomy/limits-copy';
 import type { LayerId } from '@/lib/anatomy/source-types';
 import { limitForLayer } from '@/lib/atlas-explorer/limit-selection';
@@ -17,12 +17,15 @@ export const LAYER_LABELS: Readonly<Record<LayerId, string>> = {
 
 interface Props {
   layers: readonly IndexLayer[];
+  /** The index's sources, whose blocker codes choose the sentence beside an unavailable layer. */
+  sources: readonly IndexSource[];
   requested: Readonly<Record<LayerId, boolean>>;
   onToggle: (layerId: LayerId) => void;
 }
 
 interface RowProps {
   layer: IndexLayer;
+  sources: readonly IndexSource[];
   isRequested: boolean;
   onToggle: (layerId: LayerId) => void;
 }
@@ -31,9 +34,9 @@ interface RowProps {
  * One layer. A layer this build cannot show keeps its control, marked
  * unavailable but still reachable by keyboard, with the reason beside it.
  */
-function LayerRow({ layer, isRequested, onToggle }: RowProps) {
+function LayerRow({ layer, sources, isRequested, onToggle }: RowProps) {
   const reasonId = useId();
-  const unavailable = limitForLayer(layer);
+  const unavailable = limitForLayer(layer, sources);
   return (
     <li className="atlas-layer" data-available={layer.available}>
       <button
@@ -53,7 +56,7 @@ function LayerRow({ layer, isRequested, onToggle }: RowProps) {
  * The layers of the 3D view, behind one button so that controls for a view this page does not draw are not the first
  * thing a visitor meets. Opened, every layer is there with its reason, including the ones this build cannot show.
  */
-export default function LayerPanel({ layers, requested, onToggle }: Props) {
+export default function LayerPanel({ layers, sources, requested, onToggle }: Props) {
   const availableCount = layers.filter((layer) => layer.available).length;
   return (
     <section className="atlas-panel atlas-layers" aria-labelledby="atlas-layers-heading">
@@ -61,7 +64,7 @@ export default function LayerPanel({ layers, requested, onToggle }: Props) {
       <LimitNote limit={limitSentence('layers_text_only')} />
       <Disclosure label={`Show the ${layers.length} layers (${availableCount} available in this build)`}>
         <ul className="atlas-layer-list">
-          {layers.map((layer) => <LayerRow key={layer.id} layer={layer} isRequested={requested[layer.id]} onToggle={onToggle} />)}
+          {layers.map((layer) => <LayerRow key={layer.id} layer={layer} sources={sources} isRequested={requested[layer.id]} onToggle={onToggle} />)}
         </ul>
       </Disclosure>
     </section>

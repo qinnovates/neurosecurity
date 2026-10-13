@@ -149,7 +149,8 @@ describe('AtlasExplorer: literature statements', () => {
 
   it('gives a region with no statement its recorded reason and no statement', async () => {
     const { inspector } = await openRegion('cea');
-    expect(inspector.querySelector('[data-limit-id="evidence_none"]')?.textContent).toContain('Only animal evidence found');
+    expect(inspector.querySelector('[data-limit-id="evidence_none_animal_evidence_only"]')?.textContent).toContain('only animal studies were found');
+    expect(inspector.textContent).not.toMatch(/this session|filed under bla/);
     expect(inspector.querySelector('.atlas-statement')).toBeNull();
   });
 });
@@ -255,6 +256,28 @@ describe('AtlasExplorer: files that are out of step', () => {
     expect(panel.textContent).not.toContain('whole human brain');
   });
 
+  it('refuses an index that has lost a technique the catalog still gives a brain band, and never calls that technique device-only', async () => {
+    const dropped = REAL_INDEX.techniques.find((technique) => technique.band_ids.some((bandId) => !bandId.startsWith('N')));
+    const staleIndex = JSON.stringify({ ...REAL_INDEX, techniques: REAL_INDEX.techniques.filter((technique) => technique.id !== dropped?.id) });
+    serveFiles({ ...REAL_FILES, [ANATOMY_INDEX_PATH]: staleIndex });
+    const { container } = render(<AtlasExplorer />);
+    expect((await screen.findByRole('alert')).dataset.failure).toBe('out_of_step');
+    expect(container.textContent).not.toContain('device stages only');
+    expect(container.querySelector('button[data-region-id]')).toBeNull();
+  });
+
+  it('refuses a catalog whose band tags for a technique differ from the index\'s, even when its pin matches', async () => {
+    const catalog = JSON.parse(REAL_FILES['/atlas/anatomy-catalog.json'] as string) as { device_stage_techniques: Array<{ id: string; band_ids: string[] }> };
+    const mixed = catalog.device_stage_techniques.find((technique) => technique.band_ids.some((bandId) => bandId.startsWith('N')));
+    if (mixed !== undefined) mixed.band_ids = mixed.band_ids.filter((bandId) => !bandId.startsWith('N'));
+    const changed = JSON.stringify(catalog);
+    const repinned = { ...REAL_INDEX, companions: REAL_INDEX.companions.map((pin) => (pin.path === '/atlas/anatomy-catalog.json' ? { ...pin, bytes: new TextEncoder().encode(changed).length, sha256: createHash('sha256').update(changed).digest('hex') } : pin)) };
+    serveFiles({ ...REAL_FILES, [ANATOMY_INDEX_PATH]: JSON.stringify(repinned), '/atlas/anatomy-catalog.json': changed });
+    render(<AtlasExplorer />);
+    expect(mixed).toBeDefined();
+    expect((await screen.findByRole('alert')).dataset.failure).toBe('out_of_step');
+  });
+
   it('refuses an index that pins no catalog', async () => {
     serveFiles({ ...REAL_FILES, [ANATOMY_INDEX_PATH]: JSON.stringify({ ...REAL_INDEX, companions: [] }) });
     render(<AtlasExplorer />);
@@ -352,7 +375,10 @@ describe('AtlasExplorer: device stages and the H01 card', () => {
     expect(panel.querySelectorAll('.atlas-h01-sentences > li')).toHaveLength(5);
     expect(within(panel).getAllByRole('button', { name: /^Sources for this sentence \(\d\)$/ })).toHaveLength(5);
     expect(panel.querySelector('[data-ai-drafted="true"]')?.textContent).toBe(UNREVIEWED);
-    expect(panel.textContent).toContain('Not a whole brain');
+    const caveats = [...panel.querySelectorAll('[data-caveats="true"] li')].map((item) => item.textContent ?? '');
+    expect(caveats).toHaveLength(10);
+    expect(caveats[0]).toBe('This sample is not a whole brain: it is about one cubic millimetre.');
+    expect(panel.textContent).not.toMatch(/must not|Do not state|the card must/);
     fireEvent.click(within(panel).getAllByRole('button', { name: /^Sources for this sentence/ })[0]);
     expect(panel.querySelectorAll('.atlas-h01-sentences blockquote').length).toBeGreaterThan(0);
   });

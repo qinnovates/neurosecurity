@@ -31,7 +31,7 @@ function RailTechniqueItem({ technique, isChosen, onChooseTechnique }: Technique
       </button>
       {isMixed && (
         <p className="atlas-row-why">
-          Also carries {technique.neuralBandIds.join(', ')}.{' '}
+          Also carries {technique.neuralBandNames}.{' '}
           {technique.draftedLinkCount === 0 ? 'No region link drafted.' : `${technique.draftedLinkCount} region ${technique.draftedLinkCount === 1 ? 'link' : 'links'} drafted.`}{' '}
           {technique.reviewState !== null && <ReviewMark state={technique.reviewState} />}
         </p>
