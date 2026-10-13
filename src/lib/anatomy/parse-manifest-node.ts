@@ -5,7 +5,7 @@ import {
   childOf, failAt, readEnum, readInteger, readList, readNullable, readNumber, readRecord, readString, type FieldLocation,
 } from './field-readers';
 import {
-  CHECK_IDS, CHECK_RESULTS, HEMISPHERE_RECORDS, MESHLESS_SIZE_CLASSES, SIZE_CLASSES,
+  CHECK_IDS, CHECK_RESULTS, CHECK_RESULTS_NEEDING_REASON, HEMISPHERE_RECORDS, MESHLESS_SIZE_CLASSES, SIZE_CLASSES,
   type ManifestCheck, type ManifestDelineation, type ManifestNode, type Point3,
 } from './manifest-types';
 
@@ -86,6 +86,9 @@ export function parseCheck(value: unknown, location: FieldLocation): ManifestChe
   };
   if (status === 'not_run' && record.reason === undefined) {
     failAt(childOf(location, 'reason'), 'a check that did not run must say why', 'Add the reason, for example "side assigned by construction".');
+  }
+  if (CHECK_RESULTS_NEEDING_REASON.includes(status) && record.reason === undefined) {
+    failAt(childOf(location, 'reason'), `a check that reads "${status}" must say why`, 'Add the reason: what was compared, and what the comparison could not show.');
   }
   return record.reason === undefined ? check : { ...check, reason: readString(record, 'reason', location, MAX_TEXT_LENGTH) };
 }

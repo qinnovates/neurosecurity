@@ -17,8 +17,8 @@ def test_mirroring_and_the_warp_are_said_in_words_for_the_allen_assets() -> None
     notes = {plan["id"]: notices.changes_for(plan) for plan in registry.inputs["assets"]}
     for asset_id in ("cortex-allen", "deep-allen"):
         assert "mirror" in notes[asset_id] and "registration" in notes[asset_id]
-    assert "not independently checked" in notes["deep-allen"]
-    assert "not independently checked" not in notes["cortex-allen"]
+    assert "was not shown to improve" in notes["deep-allen"] and "1 to 2 mm" in notes["deep-allen"]
+    assert "as a whole" in notes["cortex-allen"] and "not for each fold" in notes["cortex-allen"]
 
 
 def test_a_note_longer_than_the_manifest_allows_is_refused() -> None:

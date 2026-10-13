@@ -39,13 +39,14 @@ const templateSpace = data.manifest?.template_space ?? data.sources.declared_spa
           License: {entry.license.url ? <a href={entry.license.url} rel="noopener noreferrer">{entry.license.name}</a> : entry.license.name}.
           {entry.stated_license && <span> The publisher states {entry.stated_license.name}; the files are handled here under the stricter license.</span>}
         </p>
+        {entry.share_alike_statement && <p class="mb-2">{entry.share_alike_statement}</p>}
         {entry.required_text.map((wording) => <p class="mb-2">{wording}</p>)}
         <p class="mb-2">Source pages: {entry.urls.map((url, index) => <span>{index > 0 && ', '}<a href={url} rel="noopener noreferrer">{url}</a></span>)}</p>
         <p class="mb-2">How it reaches the template space: {entry.route_note}</p>
         <ul class="list-disc pl-6 space-y-2">
           {entry.assets.map((asset) => (
             <li>
-              <span>File {asset.path}. Changes made: {asset.modification_note} Position: {asset.position_check}.</span>
+              <span>File {asset.path}. Changes made: {asset.modification_note} {asset.position_sentence}</span>
             </li>
           ))}
         </ul>

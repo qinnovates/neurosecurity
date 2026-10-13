@@ -60,6 +60,19 @@ def tissue_share(labels: np.ndarray, label_ids: np.ndarray, tissue: dict[str, np
     return out
 
 
+def tissue_share_per_label(labels: np.ndarray, label_ids: np.ndarray, tissue_mask: np.ndarray, sides: dict[str, np.ndarray]) -> dict[int, dict[str, float]]:
+    """V1 per label and hemisphere: the share of each label's voxels inside one tissue mask."""
+    size = int(labels.max()) + 1
+    out: dict[int, dict[str, float]] = {int(label_id): {} for label_id in label_ids}
+    for side, selector in sides.items():
+        on_side = np.where(selector, labels, 0)
+        totals = np.bincount(on_side.ravel(), minlength=size)
+        inside = np.bincount(on_side[tissue_mask].ravel(), minlength=size)
+        for label_id in label_ids:
+            out[int(label_id)][side] = round(float(inside[label_id]) / max(int(totals[label_id]), 1), 4)
+    return out
+
+
 def surface_voxels(mask: np.ndarray) -> np.ndarray:
     return mask & ~ndimage.binary_erosion(mask)
 

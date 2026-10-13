@@ -5,17 +5,68 @@
     "shipping_setting": "B_syn_cc_fullres",
     "tool": "antspyx 0.5.4",
     "random_seed": 20261009,
+    "gyral_labels": [
+      "PrCG",
+      "SFG",
+      "MFG",
+      "IFGtr",
+      "IFGop",
+      "ReG",
+      "MOrG",
+      "AOrG",
+      "POrG",
+      "LOrG",
+      "PCLr",
+      "FrO",
+      "PoCG",
+      "SPL",
+      "SMG",
+      "AnG",
+      "PrCun",
+      "PCLc",
+      "STG",
+      "MTG",
+      "ITG",
+      "FuGt",
+      "TTG",
+      "PLT",
+      "TP",
+      "PLP",
+      "OP",
+      "Cun",
+      "LiG",
+      "FuGo",
+      "IOG",
+      "SOG",
+      "CgGr",
+      "CgGc",
+      "IsCPH",
+      "SCG",
+      "APH",
+      "PPH",
+      "AG",
+      "LIG",
+      "SIG",
+      "LI",
+      "LOG",
+      "PaO",
+      "PaCG",
+      "RoG",
+      "FMG",
+      "FP",
+      "PRG"
+    ],
     "identity": {
       "v1": {
         "left": {
-          "voxels": 3565983,
-          "gm": 0.7984,
-          "csf": 0.0115
+          "voxels": 3533440,
+          "gm": 0.7968,
+          "csf": 0.0116
         },
         "right": {
-          "voxels": 3565983,
-          "gm": 0.7835,
-          "csf": 0.0139
+          "voxels": 3533440,
+          "gm": 0.7828,
+          "csf": 0.014
         }
       },
       "v2": {
@@ -147,6 +198,204 @@
           "mean_surface_distance_mm": 0.721,
           "hd95_mm": 2.121
         }
+      },
+      "v1_per_label": {
+        "PrCG": {
+          "left": 0.701,
+          "right": 0.6636
+        },
+        "SFG": {
+          "left": 0.7906,
+          "right": 0.8208
+        },
+        "MFG": {
+          "left": 0.7705,
+          "right": 0.8208
+        },
+        "IFGtr": {
+          "left": 0.8115,
+          "right": 0.8244
+        },
+        "IFGop": {
+          "left": 0.882,
+          "right": 0.867
+        },
+        "ReG": {
+          "left": 0.9221,
+          "right": 0.9493
+        },
+        "MOrG": {
+          "left": 0.906,
+          "right": 0.9121
+        },
+        "AOrG": {
+          "left": 0.8874,
+          "right": 0.8868
+        },
+        "POrG": {
+          "left": 0.9078,
+          "right": 0.8192
+        },
+        "LOrG": {
+          "left": 0.852,
+          "right": 0.8303
+        },
+        "PCLr": {
+          "left": 0.7724,
+          "right": 0.7753
+        },
+        "FrO": {
+          "left": 0.9165,
+          "right": 0.9188
+        },
+        "PoCG": {
+          "left": 0.6027,
+          "right": 0.5634
+        },
+        "SPL": {
+          "left": 0.6272,
+          "right": 0.5963
+        },
+        "SMG": {
+          "left": 0.7616,
+          "right": 0.6868
+        },
+        "AnG": {
+          "left": 0.8229,
+          "right": 0.7203
+        },
+        "PrCun": {
+          "left": 0.8167,
+          "right": 0.8617
+        },
+        "PCLc": {
+          "left": 0.7581,
+          "right": 0.6784
+        },
+        "STG": {
+          "left": 0.7515,
+          "right": 0.9033
+        },
+        "MTG": {
+          "left": 0.8319,
+          "right": 0.799
+        },
+        "ITG": {
+          "left": 0.878,
+          "right": 0.8291
+        },
+        "FuGt": {
+          "left": 0.9198,
+          "right": 0.8618
+        },
+        "TTG": {
+          "left": 0.8322,
+          "right": 0.7442
+        },
+        "PLT": {
+          "left": 0.9211,
+          "right": 0.3387
+        },
+        "TP": {
+          "left": 0.8067,
+          "right": 0.8968
+        },
+        "PLP": {
+          "left": 0.9052,
+          "right": 0.7803
+        },
+        "OP": {
+          "left": 0.3594,
+          "right": 0.2741
+        },
+        "Cun": {
+          "left": 0.7736,
+          "right": 0.7398
+        },
+        "LiG": {
+          "left": 0.8127,
+          "right": 0.7837
+        },
+        "FuGo": {
+          "left": 0.8438,
+          "right": 0.8093
+        },
+        "IOG": {
+          "left": 0.7013,
+          "right": 0.6199
+        },
+        "SOG": {
+          "left": 0.7287,
+          "right": 0.6625
+        },
+        "CgGr": {
+          "left": 0.9239,
+          "right": 0.9178
+        },
+        "CgGc": {
+          "left": 0.8997,
+          "right": 0.9363
+        },
+        "IsCPH": {
+          "left": 0.816,
+          "right": 0.9198
+        },
+        "SCG": {
+          "left": 0.8094,
+          "right": 0.8228
+        },
+        "APH": {
+          "left": 0.9202,
+          "right": 0.9447
+        },
+        "PPH": {
+          "left": 0.901,
+          "right": 0.9923
+        },
+        "AG": {
+          "left": 0.8892,
+          "right": 0.9495
+        },
+        "LIG": {
+          "left": 0.9633,
+          "right": 0.926
+        },
+        "SIG": {
+          "left": 0.9555,
+          "right": 0.9295
+        },
+        "LI": {
+          "left": 0.7386,
+          "right": 0.8378
+        },
+        "LOG": {
+          "left": 1.0,
+          "right": 0.5814
+        },
+        "PaO": {
+          "left": 0.8667,
+          "right": 0.8878
+        },
+        "PaCG": {
+          "left": 0.8627,
+          "right": 0.8991
+        },
+        "RoG": {
+          "left": 0.931,
+          "right": 0.844
+        },
+        "FMG": {
+          "left": 0.8104,
+          "right": 0.88
+        },
+        "FP": {
+          "left": 0.8405,
+          "right": 0.9051
+        },
+        "PRG": {
+          "left": 0.8492,
+          "right": 0.8739
+        }
       }
     },
     "settings": {
@@ -159,13 +408,13 @@
           "intended": {
             "v1": {
               "left": {
-                "voxels": 3537893,
-                "gm": 0.8481,
+                "voxels": 3505744,
+                "gm": 0.8469,
                 "csf": 0.0103
               },
               "right": {
-                "voxels": 3530740,
-                "gm": 0.8422,
+                "voxels": 3499308,
+                "gm": 0.841,
                 "csf": 0.007
               }
             },
@@ -298,19 +547,217 @@
                 "mean_surface_distance_mm": 0.757,
                 "hd95_mm": 2.062
               }
+            },
+            "v1_per_label": {
+              "PrCG": {
+                "left": 0.7549,
+                "right": 0.726
+              },
+              "SFG": {
+                "left": 0.8305,
+                "right": 0.8348
+              },
+              "MFG": {
+                "left": 0.8415,
+                "right": 0.8422
+              },
+              "IFGtr": {
+                "left": 0.9062,
+                "right": 0.8864
+              },
+              "IFGop": {
+                "left": 0.929,
+                "right": 0.9195
+              },
+              "ReG": {
+                "left": 0.9438,
+                "right": 0.9635
+              },
+              "MOrG": {
+                "left": 0.9282,
+                "right": 0.9429
+              },
+              "AOrG": {
+                "left": 0.9266,
+                "right": 0.8965
+              },
+              "POrG": {
+                "left": 0.9285,
+                "right": 0.9276
+              },
+              "LOrG": {
+                "left": 0.9041,
+                "right": 0.8637
+              },
+              "PCLr": {
+                "left": 0.7882,
+                "right": 0.7958
+              },
+              "FrO": {
+                "left": 0.9671,
+                "right": 0.9461
+              },
+              "PoCG": {
+                "left": 0.6469,
+                "right": 0.6305
+              },
+              "SPL": {
+                "left": 0.6839,
+                "right": 0.6807
+              },
+              "SMG": {
+                "left": 0.8468,
+                "right": 0.8228
+              },
+              "AnG": {
+                "left": 0.85,
+                "right": 0.7919
+              },
+              "PrCun": {
+                "left": 0.895,
+                "right": 0.9013
+              },
+              "PCLc": {
+                "left": 0.7374,
+                "right": 0.7305
+              },
+              "STG": {
+                "left": 0.9019,
+                "right": 0.912
+              },
+              "MTG": {
+                "left": 0.8913,
+                "right": 0.8819
+              },
+              "ITG": {
+                "left": 0.9141,
+                "right": 0.8891
+              },
+              "FuGt": {
+                "left": 0.9491,
+                "right": 0.9177
+              },
+              "TTG": {
+                "left": 0.8895,
+                "right": 0.9126
+              },
+              "PLT": {
+                "left": 0.9055,
+                "right": 0.8429
+              },
+              "TP": {
+                "left": 0.8559,
+                "right": 0.8495
+              },
+              "PLP": {
+                "left": 0.9262,
+                "right": 0.9285
+              },
+              "OP": {
+                "left": 0.3349,
+                "right": 0.416
+              },
+              "Cun": {
+                "left": 0.8656,
+                "right": 0.8527
+              },
+              "LiG": {
+                "left": 0.8529,
+                "right": 0.8571
+              },
+              "FuGo": {
+                "left": 0.8982,
+                "right": 0.8471
+              },
+              "IOG": {
+                "left": 0.7416,
+                "right": 0.719
+              },
+              "SOG": {
+                "left": 0.7899,
+                "right": 0.7832
+              },
+              "CgGr": {
+                "left": 0.9308,
+                "right": 0.9557
+              },
+              "CgGc": {
+                "left": 0.9572,
+                "right": 0.974
+              },
+              "IsCPH": {
+                "left": 0.9193,
+                "right": 0.9162
+              },
+              "SCG": {
+                "left": 0.8144,
+                "right": 0.8299
+              },
+              "APH": {
+                "left": 0.8855,
+                "right": 0.9348
+              },
+              "PPH": {
+                "left": 0.9674,
+                "right": 0.9544
+              },
+              "AG": {
+                "left": 0.6638,
+                "right": 0.847
+              },
+              "LIG": {
+                "left": 0.9742,
+                "right": 0.9752
+              },
+              "SIG": {
+                "left": 0.9752,
+                "right": 0.9661
+              },
+              "LI": {
+                "left": 0.7894,
+                "right": 0.802
+              },
+              "LOG": {
+                "left": 0.9102,
+                "right": 0.8143
+              },
+              "PaO": {
+                "left": 0.9362,
+                "right": 0.9522
+              },
+              "PaCG": {
+                "left": 0.8993,
+                "right": 0.9007
+              },
+              "RoG": {
+                "left": 0.9525,
+                "right": 0.9123
+              },
+              "FMG": {
+                "left": 0.8785,
+                "right": 0.8553
+              },
+              "FP": {
+                "left": 0.8853,
+                "right": 0.8836
+              },
+              "PRG": {
+                "left": 0.8761,
+                "right": 0.9121
+              }
             }
           },
           "shift_2mm_x": {
             "v1": {
               "left": {
-                "voxels": 3456474,
-                "gm": 0.7676,
-                "csf": 0.0282
+                "voxels": 3424325,
+                "gm": 0.7664,
+                "csf": 0.0278
               },
               "right": {
-                "voxels": 3612159,
-                "gm": 0.7291,
-                "csf": 0.0172
+                "voxels": 3580727,
+                "gm": 0.727,
+                "csf": 0.0174
               }
             },
             "v2": {
@@ -447,14 +894,14 @@
           "shift_2mm_y": {
             "v1": {
               "left": {
-                "voxels": 3537893,
-                "gm": 0.773,
-                "csf": 0.0174
+                "voxels": 3505744,
+                "gm": 0.7714,
+                "csf": 0.0173
               },
               "right": {
-                "voxels": 3530740,
-                "gm": 0.7681,
-                "csf": 0.0147
+                "voxels": 3499308,
+                "gm": 0.7665,
+                "csf": 0.0145
               }
             },
             "v2": {
@@ -591,14 +1038,14 @@
           "shift_2mm_z": {
             "v1": {
               "left": {
-                "voxels": 3537893,
-                "gm": 0.7652,
-                "csf": 0.0182
+                "voxels": 3505744,
+                "gm": 0.7637,
+                "csf": 0.0181
               },
               "right": {
-                "voxels": 3530740,
-                "gm": 0.7621,
-                "csf": 0.0135
+                "voxels": 3499308,
+                "gm": 0.7607,
+                "csf": 0.0133
               }
             },
             "v2": {
@@ -735,14 +1182,14 @@
           "mirror_after": {
             "v1": {
               "left": {
-                "voxels": 3530740,
-                "gm": 0.746,
+                "voxels": 3499308,
+                "gm": 0.7439,
                 "csf": 0.0193
               },
               "right": {
-                "voxels": 3537893,
-                "gm": 0.7431,
-                "csf": 0.0167
+                "voxels": 3505744,
+                "gm": 0.742,
+                "csf": 0.0168
               }
             },
             "v2": {
@@ -879,14 +1326,14 @@
           "inverse_wrong_way": {
             "v1": {
               "left": {
-                "voxels": 3585578,
-                "gm": 0.7283,
-                "csf": 0.0176
+                "voxels": 3552580,
+                "gm": 0.7261,
+                "csf": 0.0177
               },
               "right": {
-                "voxels": 3585776,
-                "gm": 0.7204,
-                "csf": 0.0147
+                "voxels": 3552926,
+                "gm": 0.7195,
+                "csf": 0.0148
               }
             },
             "v2": {
@@ -1037,13 +1484,13 @@
           "intended": {
             "v1": {
               "left": {
-                "voxels": 3597713,
-                "gm": 0.8477,
+                "voxels": 3565645,
+                "gm": 0.8466,
                 "csf": 0.006
               },
               "right": {
-                "voxels": 3591524,
-                "gm": 0.8385,
+                "voxels": 3559351,
+                "gm": 0.8373,
                 "csf": 0.0042
               }
             },
@@ -1176,19 +1623,217 @@
                 "mean_surface_distance_mm": 0.888,
                 "hd95_mm": 2.5
               }
+            },
+            "v1_per_label": {
+              "PrCG": {
+                "left": 0.7322,
+                "right": 0.7139
+              },
+              "SFG": {
+                "left": 0.8365,
+                "right": 0.8409
+              },
+              "MFG": {
+                "left": 0.8506,
+                "right": 0.8399
+              },
+              "IFGtr": {
+                "left": 0.9011,
+                "right": 0.8647
+              },
+              "IFGop": {
+                "left": 0.9205,
+                "right": 0.8917
+              },
+              "ReG": {
+                "left": 0.9635,
+                "right": 0.968
+              },
+              "MOrG": {
+                "left": 0.9239,
+                "right": 0.9396
+              },
+              "AOrG": {
+                "left": 0.9119,
+                "right": 0.9057
+              },
+              "POrG": {
+                "left": 0.9362,
+                "right": 0.9272
+              },
+              "LOrG": {
+                "left": 0.906,
+                "right": 0.8538
+              },
+              "PCLr": {
+                "left": 0.7803,
+                "right": 0.7833
+              },
+              "FrO": {
+                "left": 0.9317,
+                "right": 0.9253
+              },
+              "PoCG": {
+                "left": 0.6392,
+                "right": 0.6233
+              },
+              "SPL": {
+                "left": 0.6851,
+                "right": 0.6767
+              },
+              "SMG": {
+                "left": 0.8696,
+                "right": 0.8332
+              },
+              "AnG": {
+                "left": 0.87,
+                "right": 0.8258
+              },
+              "PrCun": {
+                "left": 0.9004,
+                "right": 0.8874
+              },
+              "PCLc": {
+                "left": 0.7319,
+                "right": 0.7299
+              },
+              "STG": {
+                "left": 0.8909,
+                "right": 0.8912
+              },
+              "MTG": {
+                "left": 0.8942,
+                "right": 0.8726
+              },
+              "ITG": {
+                "left": 0.8951,
+                "right": 0.8729
+              },
+              "FuGt": {
+                "left": 0.9208,
+                "right": 0.8875
+              },
+              "TTG": {
+                "left": 0.8592,
+                "right": 0.8884
+              },
+              "PLT": {
+                "left": 0.8857,
+                "right": 0.8205
+              },
+              "TP": {
+                "left": 0.8986,
+                "right": 0.908
+              },
+              "PLP": {
+                "left": 0.9052,
+                "right": 0.912
+              },
+              "OP": {
+                "left": 0.3527,
+                "right": 0.4358
+              },
+              "Cun": {
+                "left": 0.8467,
+                "right": 0.8327
+              },
+              "LiG": {
+                "left": 0.8314,
+                "right": 0.8272
+              },
+              "FuGo": {
+                "left": 0.8707,
+                "right": 0.8365
+              },
+              "IOG": {
+                "left": 0.725,
+                "right": 0.7117
+              },
+              "SOG": {
+                "left": 0.793,
+                "right": 0.7761
+              },
+              "CgGr": {
+                "left": 0.9514,
+                "right": 0.9622
+              },
+              "CgGc": {
+                "left": 0.9484,
+                "right": 0.9446
+              },
+              "IsCPH": {
+                "left": 0.9328,
+                "right": 0.935
+              },
+              "SCG": {
+                "left": 0.8454,
+                "right": 0.8541
+              },
+              "APH": {
+                "left": 0.9509,
+                "right": 0.9555
+              },
+              "PPH": {
+                "left": 0.9459,
+                "right": 0.9371
+              },
+              "AG": {
+                "left": 0.8956,
+                "right": 0.9813
+              },
+              "LIG": {
+                "left": 0.9799,
+                "right": 0.9734
+              },
+              "SIG": {
+                "left": 0.9814,
+                "right": 0.9779
+              },
+              "LI": {
+                "left": 0.9817,
+                "right": 0.9536
+              },
+              "LOG": {
+                "left": 0.9824,
+                "right": 0.967
+              },
+              "PaO": {
+                "left": 0.9145,
+                "right": 0.9383
+              },
+              "PaCG": {
+                "left": 0.9033,
+                "right": 0.9257
+              },
+              "RoG": {
+                "left": 0.9387,
+                "right": 0.9396
+              },
+              "FMG": {
+                "left": 0.8944,
+                "right": 0.8717
+              },
+              "FP": {
+                "left": 0.902,
+                "right": 0.898
+              },
+              "PRG": {
+                "left": 0.9014,
+                "right": 0.9271
+              }
             }
           },
           "shift_2mm_x": {
             "v1": {
               "left": {
-                "voxels": 3523127,
-                "gm": 0.766,
-                "csf": 0.0255
+                "voxels": 3491059,
+                "gm": 0.7649,
+                "csf": 0.0253
               },
               "right": {
-                "voxels": 3666110,
-                "gm": 0.7232,
-                "csf": 0.0153
+                "voxels": 3633937,
+                "gm": 0.7211,
+                "csf": 0.0155
               }
             },
             "v2": {
@@ -1325,14 +1970,14 @@
           "shift_2mm_y": {
             "v1": {
               "left": {
-                "voxels": 3597713,
-                "gm": 0.772,
-                "csf": 0.015
+                "voxels": 3565645,
+                "gm": 0.7703,
+                "csf": 0.0148
               },
               "right": {
-                "voxels": 3591524,
-                "gm": 0.7624,
-                "csf": 0.013
+                "voxels": 3559351,
+                "gm": 0.7607,
+                "csf": 0.0128
               }
             },
             "v2": {
@@ -1469,14 +2114,14 @@
           "shift_2mm_z": {
             "v1": {
               "left": {
-                "voxels": 3597713,
-                "gm": 0.7594,
-                "csf": 0.0151
+                "voxels": 3565645,
+                "gm": 0.7578,
+                "csf": 0.015
               },
               "right": {
-                "voxels": 3591524,
-                "gm": 0.7535,
-                "csf": 0.0117
+                "voxels": 3559351,
+                "gm": 0.7518,
+                "csf": 0.0115
               }
             },
             "v2": {
@@ -1613,14 +2258,14 @@
           "mirror_after": {
             "v1": {
               "left": {
-                "voxels": 3591524,
-                "gm": 0.7334,
-                "csf": 0.0187
+                "voxels": 3559351,
+                "gm": 0.7312,
+                "csf": 0.0188
               },
               "right": {
-                "voxels": 3597713,
-                "gm": 0.7294,
-                "csf": 0.0159
+                "voxels": 3565645,
+                "gm": 0.7284,
+                "csf": 0.016
               }
             },
             "v2": {
@@ -1757,14 +2402,14 @@
           "inverse_wrong_way": {
             "v1": {
               "left": {
-                "voxels": 3552909,
-                "gm": 0.729,
-                "csf": 0.0199
+                "voxels": 3519732,
+                "gm": 0.7268,
+                "csf": 0.02
               },
               "right": {
-                "voxels": 3552216,
-                "gm": 0.7245,
-                "csf": 0.0165
+                "voxels": 3519202,
+                "gm": 0.7235,
+                "csf": 0.0166
               }
             },
             "v2": {
@@ -1915,13 +2560,13 @@
           "intended": {
             "v1": {
               "left": {
-                "voxels": 3563559,
-                "gm": 0.8507,
+                "voxels": 3531049,
+                "gm": 0.8495,
                 "csf": 0.0075
               },
               "right": {
-                "voxels": 3561070,
-                "gm": 0.8424,
+                "voxels": 3529224,
+                "gm": 0.8411,
                 "csf": 0.0056
               }
             },
@@ -2054,19 +2699,217 @@
                 "mean_surface_distance_mm": 0.742,
                 "hd95_mm": 2.121
               }
+            },
+            "v1_per_label": {
+              "PrCG": {
+                "left": 0.7499,
+                "right": 0.7247
+              },
+              "SFG": {
+                "left": 0.8367,
+                "right": 0.8361
+              },
+              "MFG": {
+                "left": 0.8391,
+                "right": 0.8356
+              },
+              "IFGtr": {
+                "left": 0.8952,
+                "right": 0.8784
+              },
+              "IFGop": {
+                "left": 0.9201,
+                "right": 0.9114
+              },
+              "ReG": {
+                "left": 0.9578,
+                "right": 0.9605
+              },
+              "MOrG": {
+                "left": 0.9336,
+                "right": 0.9467
+              },
+              "AOrG": {
+                "left": 0.925,
+                "right": 0.9014
+              },
+              "POrG": {
+                "left": 0.9291,
+                "right": 0.935
+              },
+              "LOrG": {
+                "left": 0.9021,
+                "right": 0.867
+              },
+              "PCLr": {
+                "left": 0.7819,
+                "right": 0.8084
+              },
+              "FrO": {
+                "left": 0.9567,
+                "right": 0.947
+              },
+              "PoCG": {
+                "left": 0.6412,
+                "right": 0.6234
+              },
+              "SPL": {
+                "left": 0.6774,
+                "right": 0.6733
+              },
+              "SMG": {
+                "left": 0.8478,
+                "right": 0.8107
+              },
+              "AnG": {
+                "left": 0.8562,
+                "right": 0.8107
+              },
+              "PrCun": {
+                "left": 0.8907,
+                "right": 0.8996
+              },
+              "PCLc": {
+                "left": 0.7262,
+                "right": 0.7346
+              },
+              "STG": {
+                "left": 0.8996,
+                "right": 0.898
+              },
+              "MTG": {
+                "left": 0.9006,
+                "right": 0.878
+              },
+              "ITG": {
+                "left": 0.9249,
+                "right": 0.8958
+              },
+              "FuGt": {
+                "left": 0.9464,
+                "right": 0.9207
+              },
+              "TTG": {
+                "left": 0.8897,
+                "right": 0.9122
+              },
+              "PLT": {
+                "left": 0.9081,
+                "right": 0.8319
+              },
+              "TP": {
+                "left": 0.8815,
+                "right": 0.8693
+              },
+              "PLP": {
+                "left": 0.9468,
+                "right": 0.9285
+              },
+              "OP": {
+                "left": 0.3532,
+                "right": 0.4264
+              },
+              "Cun": {
+                "left": 0.8573,
+                "right": 0.858
+              },
+              "LiG": {
+                "left": 0.8565,
+                "right": 0.8652
+              },
+              "FuGo": {
+                "left": 0.901,
+                "right": 0.8665
+              },
+              "IOG": {
+                "left": 0.759,
+                "right": 0.7159
+              },
+              "SOG": {
+                "left": 0.797,
+                "right": 0.7847
+              },
+              "CgGr": {
+                "left": 0.9394,
+                "right": 0.9539
+              },
+              "CgGc": {
+                "left": 0.9598,
+                "right": 0.971
+              },
+              "IsCPH": {
+                "left": 0.9343,
+                "right": 0.9563
+              },
+              "SCG": {
+                "left": 0.8168,
+                "right": 0.8387
+              },
+              "APH": {
+                "left": 0.9358,
+                "right": 0.9569
+              },
+              "PPH": {
+                "left": 0.9616,
+                "right": 0.9519
+              },
+              "AG": {
+                "left": 0.7085,
+                "right": 0.8503
+              },
+              "LIG": {
+                "left": 0.9793,
+                "right": 0.9726
+              },
+              "SIG": {
+                "left": 0.974,
+                "right": 0.968
+              },
+              "LI": {
+                "left": 0.8636,
+                "right": 0.8944
+              },
+              "LOG": {
+                "left": 0.8952,
+                "right": 0.859
+              },
+              "PaO": {
+                "left": 0.9373,
+                "right": 0.9513
+              },
+              "PaCG": {
+                "left": 0.9036,
+                "right": 0.9061
+              },
+              "RoG": {
+                "left": 0.9485,
+                "right": 0.9143
+              },
+              "FMG": {
+                "left": 0.8774,
+                "right": 0.8541
+              },
+              "FP": {
+                "left": 0.8854,
+                "right": 0.8782
+              },
+              "PRG": {
+                "left": 0.9001,
+                "right": 0.9314
+              }
             }
           },
           "shift_2mm_x": {
             "v1": {
               "left": {
-                "voxels": 3484291,
-                "gm": 0.7682,
-                "csf": 0.0272
+                "voxels": 3451781,
+                "gm": 0.7671,
+                "csf": 0.0268
               },
               "right": {
-                "voxels": 3640338,
-                "gm": 0.7264,
-                "csf": 0.0167
+                "voxels": 3608492,
+                "gm": 0.7243,
+                "csf": 0.0169
               }
             },
             "v2": {
@@ -2203,14 +3046,14 @@
           "shift_2mm_y": {
             "v1": {
               "left": {
-                "voxels": 3563559,
-                "gm": 0.7718,
-                "csf": 0.0163
+                "voxels": 3531049,
+                "gm": 0.7702,
+                "csf": 0.0161
               },
               "right": {
-                "voxels": 3561070,
-                "gm": 0.7687,
-                "csf": 0.014
+                "voxels": 3529224,
+                "gm": 0.7671,
+                "csf": 0.0137
               }
             },
             "v2": {
@@ -2347,14 +3190,14 @@
           "shift_2mm_z": {
             "v1": {
               "left": {
-                "voxels": 3563559,
-                "gm": 0.7649,
-                "csf": 0.0164
+                "voxels": 3531049,
+                "gm": 0.7634,
+                "csf": 0.0162
               },
               "right": {
-                "voxels": 3561070,
-                "gm": 0.76,
-                "csf": 0.0129
+                "voxels": 3529224,
+                "gm": 0.7585,
+                "csf": 0.0127
               }
             },
             "v2": {
@@ -2491,14 +3334,14 @@
           "mirror_after": {
             "v1": {
               "left": {
-                "voxels": 3561070,
-                "gm": 0.7433,
+                "voxels": 3529224,
+                "gm": 0.7412,
                 "csf": 0.0195
               },
               "right": {
-                "voxels": 3563559,
-                "gm": 0.7405,
-                "csf": 0.0168
+                "voxels": 3531049,
+                "gm": 0.7393,
+                "csf": 0.0169
               }
             },
             "v2": {
@@ -2635,14 +3478,14 @@
           "inverse_wrong_way": {
             "v1": {
               "left": {
-                "voxels": 3563801,
-                "gm": 0.7273,
-                "csf": 0.0189
+                "voxels": 3531279,
+                "gm": 0.7251,
+                "csf": 0.019
               },
               "right": {
-                "voxels": 3563728,
-                "gm": 0.7212,
-                "csf": 0.0156
+                "voxels": 3531374,
+                "gm": 0.7203,
+                "csf": 0.0157
               }
             },
             "v2": {
@@ -2788,28 +3631,28 @@
     "outcomes": {
       "v1_grey_matter_share": {
         "left": {
-          "header_only": 0.7984,
+          "header_only": 0.7968,
           "intended": [
-            0.8481,
-            0.8477,
-            0.8507
+            0.8469,
+            0.8466,
+            0.8495
           ],
           "outcome": "better",
-          "spread": 0.003,
-          "gain_min": 0.0493,
-          "gain_max": 0.0523
+          "spread": 0.0029,
+          "gain_min": 0.0498,
+          "gain_max": 0.0527
         },
         "right": {
-          "header_only": 0.7835,
+          "header_only": 0.7828,
           "intended": [
-            0.8422,
-            0.8385,
-            0.8424
+            0.841,
+            0.8373,
+            0.8411
           ],
           "outcome": "better",
-          "spread": 0.0039,
-          "gain_min": 0.055,
-          "gain_max": 0.0589
+          "spread": 0.0038,
+          "gain_min": 0.0545,
+          "gain_max": 0.0583
         }
       },
       "v2_hd95_mm": {
@@ -3007,6 +3850,58 @@
         }
       }
     },
+    "v1_label_sides_worse": [
+      {
+        "label": "PPH",
+        "side": "right",
+        "header_only": 0.9923,
+        "intended": 0.9371
+      },
+      {
+        "label": "PLT",
+        "side": "left",
+        "header_only": 0.9211,
+        "intended": 0.8857
+      },
+      {
+        "label": "PCLc",
+        "side": "left",
+        "header_only": 0.7581,
+        "intended": 0.7319
+      },
+      {
+        "label": "LOG",
+        "side": "left",
+        "header_only": 1.0,
+        "intended": 0.9824
+      },
+      {
+        "label": "STG",
+        "side": "right",
+        "header_only": 0.9033,
+        "intended": 0.8912
+      },
+      {
+        "label": "FMG",
+        "side": "right",
+        "header_only": 0.88,
+        "intended": 0.8717
+      },
+      {
+        "label": "FP",
+        "side": "right",
+        "header_only": 0.9051,
+        "intended": 0.898
+      },
+      {
+        "label": "OP",
+        "side": "left",
+        "header_only": 0.3594,
+        "intended": 0.3527
+      }
+    ],
+    "noise_note": "The spread is across three registration parameter settings: it measures how sensitive the result is to those settings, not sampling noise. The grey-matter map is the declared template's own, the same template the registration targets.",
+    "pooled_note": "V1 is pooled over all gyral labels per hemisphere. Per label and side it is recorded under v1_per_label; some label-sides score lower after the registration and are listed under v1_label_sides_worse.",
     "mirror_before_note": "Not run: the moving image is symmetric and its labels are a mirrored pair with shared ids, so a mirror before the transform changes nothing. Laterality rests on the header and on the atlas having no side ids."
   },
   "folding": {

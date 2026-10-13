@@ -1,12 +1,15 @@
+import pytest
+
+pytest.importorskip("numpy", reason="needs the imaging stack; skipped where only the standard library is installed")
+
 """Every check must fail on the seeded fault it claims to catch, and pass on the correct input."""
 import numpy as np
-import pytest
 from scipy import ndimage
 
 from atlas_pipeline import checks
 from atlas_pipeline.volumes import side_selectors
 
-from conftest import ball
+from shapes import ball
 
 AFFINE = np.diag([1.0, 1.0, 1.0, 1.0])
 AFFINE[:3, 3] = [-32.0, -32.0, -32.0]
@@ -94,3 +97,12 @@ def test_a_nucleus_inside_a_larger_parent_region_is_not_a_duplicate() -> None:
     nucleus = ball((60, 60, 60), (34.0, 30.0, 30.0), 5.0)
     assert checks.overlap_share(parent, nucleus) == 1.0
     assert checks.is_duplicate_shape(parent, nucleus) is False
+
+
+def test_tissue_share_per_label_separates_a_good_label_from_a_bad_one() -> None:
+    labels, tissue, sides = gyral_fixture()
+    labels = labels.copy()
+    labels[:, :, :2] = 5
+    shares = checks.tissue_share_per_label(labels, np.array([3, 5]), tissue["gm"], sides)
+    assert shares[3]["left"] == 1.0 and shares[3]["right"] == 1.0
+    assert shares[5]["left"] == 0.0

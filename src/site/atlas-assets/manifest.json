@@ -3,17 +3,17 @@
   "template_space": "MNI152NLin2009cAsym",
   "units": "mm",
   "axes": "RAS",
-  "pipeline_code_hash": "7a8b735959277e0eaa555fb0ee6e7996fd77ae8e0871b331b9bd1779b713a544",
+  "pipeline_code_hash": "886b184988d7a6dfcfe2f67a28258a5fc7ac36ff75c9c23b79f160b11cfb5d2c",
   "integrity_note": "Hashes show the files were delivered unchanged. They do not prove where a file came from.",
   "assets": [
     {
       "id": "outline",
-      "path": "open/outline.a62b2c9d6d88.glb",
+      "path": "open/outline.13ae877f9743.glb",
       "kind": "mesh",
       "layer": "outline",
-      "bytes": 25156,
-      "sha256": "a62b2c9d6d885e2a4dcfa4bcdaf2c705c1a38605bfcd5f33532efd12636bd37d",
-      "input_fingerprint": "b59e9e6c78656621ce6a601907746eb8b4e398cb1c922616fde9d145e7044297",
+      "bytes": 25580,
+      "sha256": "13ae877f9743440b4702c462fffd72315b6783a6602c5e4bc3217fcb194f1fce",
+      "input_fingerprint": "c8fdd182837dd900d2262053326945c9866414095cd7caae0d43cf9d18a3f9b4",
       "source_ids": [
         "mni_icbm152_2009c_asym"
       ],
@@ -28,7 +28,7 @@
       "delineation": {
         "basis": "template_average",
         "subjects": 152,
-        "hemispheres": "separate",
+        "hemispheres": "not_applicable",
         "grid_voxel_mm": 1.0,
         "acquisition_voxel_mm": null,
         "probability_meaning": "not applicable: binary brain mask of the template"
@@ -103,21 +103,21 @@
           "mni_icbm152_2009c_asym/mni_icbm152_nlin_asym_09c_nifti.zip": "804382e5d68a42ff8096ee845a7600b6658434da762fa67840a149eb25d48bd4"
         },
         "register": null,
-        "resample": "3ac2c389cb636bab64573e5a25811a801024b9db827e4c110a3ac0ebe59ab7f6",
-        "mesh": "a053456b6df444fd7790003318d3c863b6cafef1f9a9e587847366e497488f5a",
-        "write": "a62b2c9d6d885e2a4dcfa4bcdaf2c705c1a38605bfcd5f33532efd12636bd37d"
+        "resample": "92ec28c83f15b31b9134bd2b79f4841e91a94e74bc60f715aeb67c524ad37a08",
+        "mesh": "4b9e38be5be9d8a2edc4edc4151e6c906b3435e74e13306230f42a6bf1b224b1",
+        "write": "13ae877f9743440b4702c462fffd72315b6783a6602c5e4bc3217fcb194f1fce"
       },
       "position_check": "not independently checked",
       "modification_note": "The template's 1 mm brain mask was meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric). It is an outline of the average template, not a cortical surface."
     },
     {
       "id": "deep-cit168",
-      "path": "by-sa/deep-cit168.ae8a0364aa52.glb",
+      "path": "by-sa/deep-cit168.cb90f8bb70d3.glb",
       "kind": "mesh",
       "layer": "deep",
-      "bytes": 62296,
-      "sha256": "ae8a0364aa522802e915cb7c921b6fa8104f7ee5f4b8110a4dc99a61d5bf44a3",
-      "input_fingerprint": "14eaf8f41f21187d8821eab5fad5c33212636b132551fcd0fe0de248776c3009",
+      "bytes": 62268,
+      "sha256": "cb90f8bb70d36348d99e5a9a5780916f9c607be37c26ad7d1e4cc6b76bed2a28",
+      "input_fingerprint": "6d8fa851d2f90f2c1c10b7c2cd5b51eb7dfe28957ba7e29c2b50c094b7e8d2dd",
       "source_ids": [
         "cit168_rl"
       ],
@@ -966,9 +966,9 @@
           "cit168_rl/CIT168toMNI152-2009c_prob.nii.gz": "7a91c36701f36d9d908479b862e65a879d15f54badcec6878e61d857ab570f66"
         },
         "register": null,
-        "resample": "1bc513b89aa3bad8e4c02c03ab31b21653a8cd948e03c126c129585aa26d4a1a",
-        "mesh": "af5f20131d65b077fb53e2d0925dea045c7e0b9ce0b7e350a76756bf39f2b0ab",
-        "write": "ae8a0364aa522802e915cb7c921b6fa8104f7ee5f4b8110a4dc99a61d5bf44a3"
+        "resample": "c0a8885a8cd8ee177f624b33d29c242da463b8af92b46add6580ca144a6e0fa4",
+        "mesh": "1be9eb264c028eeba3e9791236c285622abd7788126bb5d2ca777aa47674d184",
+        "write": "cb90f8bb70d36348d99e5a9a5780916f9c607be37c26ad7d1e4cc6b76bed2a28"
       },
       "position_check": "not independently checked",
       "modification_note": "Each probability map was split into left and right at x = 0, resampled linearly from 1 mm to 0.5 mm, cut at probability 0.5, then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric). Structures too small to outline are markers with no shape."
@@ -980,7 +980,7 @@
       "layer": "deep",
       "bytes": 101592,
       "sha256": "f677d3c1bcb0a1fc93d82a0bec5a0f2669391456f398bebf7057178dc6d5f508",
-      "input_fingerprint": "7781308e5a665c31aa4eb2e87c3eed238f79a443d3f02162d149566c5464bd8e",
+      "input_fingerprint": "ae7b3eb694e5c7748faa1dbeb5f171f708e9c1ef96eea9ed6779e233bf4d0ed9",
       "source_ids": [
         "neudorfer_hypothalamus"
       ],
@@ -2139,7 +2139,7 @@
         },
         "register": null,
         "resample": "0b3bf184928ce21693822640a6e117fd42be38a5cc9061aaab1b06fe4c53d09d",
-        "mesh": "31adb175b9167549973ca72b45a1961939b35952cc51173cb71d8e9f6995c92c",
+        "mesh": "ef4e61a2cc9914379cf01f5a57d99958179fc53c7da8870935df0909c9f26b93",
         "write": "f677d3c1bcb0a1fc93d82a0bec5a0f2669391456f398bebf7057178dc6d5f508"
       },
       "position_check": "not independently checked",
@@ -2147,12 +2147,12 @@
     },
     {
       "id": "cortex-allen",
-      "path": "open/cortex-allen.c1005d025194.glb",
+      "path": "open/cortex-allen.2909f17492b2.glb",
       "kind": "mesh",
       "layer": "cortical",
-      "bytes": 1264680,
-      "sha256": "c1005d0251946186d01d6f51fb7651d8f779dade878a0d183d0135b743e3e9d6",
-      "input_fingerprint": "16cf3b60a423897c34b3f6ee8b52d09cf827f212d9178ef55e3b1cb9b0ec7d63",
+      "bytes": 1243308,
+      "sha256": "2909f17492b2edeb1daded0b56096b6a866face01ccd9333a7e9457d2c0009da",
+      "input_fingerprint": "4185704197508a8bcf9320beffcffe65cf557f73876e0d78a9b973b04f86302a",
       "source_ids": [
         "allen_hra_3d_2020"
       ],
@@ -2169,7 +2169,7 @@
       ],
       "delineation": {
         "basis": "expert_drawing_on_template",
-        "subjects": 1,
+        "subjects": null,
         "hemispheres": "mirrored",
         "grid_voxel_mm": 0.5,
         "acquisition_voxel_mm": null,
@@ -3703,123 +3703,6 @@
           "mesh_to_mask_mm": {
             "mean": 0.263,
             "max": 0.512
-          }
-        },
-        {
-          "extras": {
-            "atlas": "allen_hra_3d_2020",
-            "label_id": "12171",
-            "hemisphere": "left"
-          },
-          "threshold": 0.5,
-          "max_probability": 1.0,
-          "volume_mm3_at": {
-            "0.25": 1758.88,
-            "0.5": 1758.88,
-            "0.75": 1758.88
-          },
-          "voxels": 14071,
-          "shortest_extent_voxels": 24.66,
-          "size_class": "resolved",
-          "centroid_mm": [
-            -24.76,
-            -14.29,
-            -21.27
-          ],
-          "bbox_mm": [
-            [
-              -36.25,
-              -20.75,
-              -29.25
-            ],
-            [
-              -11.75,
-              -7.25,
-              -13.25
-            ]
-          ],
-          "vertex_count": 155,
-          "mesh_to_mask_mm": {
-            "mean": 0.26,
-            "max": 0.88
-          }
-        },
-        {
-          "extras": {
-            "atlas": "allen_hra_3d_2020",
-            "label_id": "12173",
-            "hemisphere": "left"
-          },
-          "threshold": 0.5,
-          "max_probability": 1.0,
-          "volume_mm3_at": {
-            "0.25": 1144.0,
-            "0.5": 1144.0,
-            "0.75": 1144.0
-          },
-          "voxels": 9151,
-          "shortest_extent_voxels": 17.06,
-          "size_class": "resolved",
-          "centroid_mm": [
-            -27.29,
-            -25.7,
-            -14.41
-          ],
-          "bbox_mm": [
-            [
-              -36.25,
-              -31.25,
-              -22.75
-            ],
-            [
-              -16.25,
-              -19.75,
-              -7.25
-            ]
-          ],
-          "vertex_count": 255,
-          "mesh_to_mask_mm": {
-            "mean": 0.262,
-            "max": 0.574
-          }
-        },
-        {
-          "extras": {
-            "atlas": "allen_hra_3d_2020",
-            "label_id": "12174",
-            "hemisphere": "left"
-          },
-          "threshold": 0.5,
-          "max_probability": 1.0,
-          "volume_mm3_at": {
-            "0.25": 1180.63,
-            "0.5": 1180.63,
-            "0.75": 1180.63
-          },
-          "voxels": 9445,
-          "shortest_extent_voxels": 16.66,
-          "size_class": "resolved",
-          "centroid_mm": [
-            -23.45,
-            -36.94,
-            -3.63
-          ],
-          "bbox_mm": [
-            [
-              -35.25,
-              -44.25,
-              -13.25
-            ],
-            [
-              -9.75,
-              -31.75,
-              6.25
-            ]
-          ],
-          "vertex_count": 135,
-          "mesh_to_mask_mm": {
-            "mean": 0.266,
-            "max": 0.802
           }
         },
         {
@@ -5736,123 +5619,6 @@
         {
           "extras": {
             "atlas": "allen_hra_3d_2020",
-            "label_id": "12171",
-            "hemisphere": "right"
-          },
-          "threshold": 0.5,
-          "max_probability": 1.0,
-          "volume_mm3_at": {
-            "0.25": 1881.0,
-            "0.5": 1881.0,
-            "0.75": 1881.0
-          },
-          "voxels": 15047,
-          "shortest_extent_voxels": 26.43,
-          "size_class": "resolved",
-          "centroid_mm": [
-            24.63,
-            -13.31,
-            -21.55
-          ],
-          "bbox_mm": [
-            [
-              11.25,
-              -20.25,
-              -29.75
-            ],
-            [
-              36.25,
-              -6.25,
-              -12.75
-            ]
-          ],
-          "vertex_count": 160,
-          "mesh_to_mask_mm": {
-            "mean": 0.263,
-            "max": 0.842
-          }
-        },
-        {
-          "extras": {
-            "atlas": "allen_hra_3d_2020",
-            "label_id": "12173",
-            "hemisphere": "right"
-          },
-          "threshold": 0.5,
-          "max_probability": 1.0,
-          "volume_mm3_at": {
-            "0.25": 1084.38,
-            "0.5": 1084.38,
-            "0.75": 1084.38
-          },
-          "voxels": 8674,
-          "shortest_extent_voxels": 17.12,
-          "size_class": "resolved",
-          "centroid_mm": [
-            27.88,
-            -24.5,
-            -14.49
-          ],
-          "bbox_mm": [
-            [
-              16.75,
-              -29.75,
-              -22.75
-            ],
-            [
-              36.25,
-              -19.25,
-              -6.75
-            ]
-          ],
-          "vertex_count": 126,
-          "mesh_to_mask_mm": {
-            "mean": 0.263,
-            "max": 0.887
-          }
-        },
-        {
-          "extras": {
-            "atlas": "allen_hra_3d_2020",
-            "label_id": "12174",
-            "hemisphere": "right"
-          },
-          "threshold": 0.5,
-          "max_probability": 1.0,
-          "volume_mm3_at": {
-            "0.25": 1142.38,
-            "0.5": 1142.38,
-            "0.75": 1142.38
-          },
-          "voxels": 9139,
-          "shortest_extent_voxels": 16.18,
-          "size_class": "resolved",
-          "centroid_mm": [
-            24.27,
-            -35.1,
-            -3.73
-          ],
-          "bbox_mm": [
-            [
-              9.75,
-              -41.75,
-              -13.75
-            ],
-            [
-              35.25,
-              -29.75,
-              6.75
-            ]
-          ],
-          "vertex_count": 136,
-          "mesh_to_mask_mm": {
-            "mean": 0.259,
-            "max": 0.712
-          }
-        },
-        {
-          "extras": {
-            "atlas": "allen_hra_3d_2020",
             "label_id": "12177",
             "hemisphere": "right"
           },
@@ -6273,9 +6039,9 @@
         {
           "id": "V1",
           "status": "pass",
-          "measured": 0.0493,
-          "threshold": 0.0039,
-          "reason": "grey-matter share of gyral labels per hemisphere: 2 better, 0 not distinguishable, 0 worse than the header-only placement, judged against the spread across three registration settings"
+          "measured": 0.0498,
+          "threshold": 0.0038,
+          "reason": "grey-matter share of gyral labels, pooled per hemisphere: 2 better, 0 not distinguishable, 0 worse than header-only placement, judged against the spread across three registration parameter settings"
         }
       ],
       "stage_fingerprints": {
@@ -6303,12 +6069,12 @@
             "grad_step": 0.2
           }
         },
-        "resample": "48f0b8b327134c9ba53cf4471f55fb1895a2748ac6d06737779a8ff352774c89",
-        "mesh": "c13c535a04a86f0a5215a2e39c244d9ce9a60e79734d7f9436c387bdf25c4f52",
-        "write": "c1005d0251946186d01d6f51fb7651d8f779dade878a0d183d0135b743e3e9d6"
+        "resample": "2532c02cd58f7664b358004162d9552cbeef54a7b2ef9592b1dfff38228fe735",
+        "mesh": "96ae363b5a01364abe75bc76a9363f6af3875b67cbc263d34524352e277c161a",
+        "write": "2909f17492b2edeb1daded0b56096b6a866face01ccd9333a7e9457d2c0009da"
       },
-      "position_check": "independently checked",
-      "modification_note": "The label volume was moved from the 2009b symmetric template to MNI152NLin2009cAsym by a computed nonlinear registration (ANTs SyN; labels nearest-neighbour, 0.5 mm grid). Each label was then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric); small specks were dropped. One hemisphere was drawn; the right side is its mirror."
+      "position_check": "checked in aggregate",
+      "modification_note": "The label volume was moved from the 2009b symmetric template to MNI152NLin2009cAsym by a computed nonlinear registration (ANTs SyN; labels nearest-neighbour, 0.5 mm grid). Each label was then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric); small specks were dropped. One hemisphere was drawn; the right side is its mirror. Position checked for the cortex as a whole (gyral voxels in template grey matter), not for each fold; some folds score lower after the registration."
     },
     {
       "id": "deep-allen",
@@ -6317,7 +6083,7 @@
       "layer": "deep",
       "bytes": 1557844,
       "sha256": "c8405b0c299d3419a19cdbe3d808143581626cad598e995f02cfd60524efb949",
-      "input_fingerprint": "4f64fd1aa5ca776ea4469d97e61cb8684e287a789574053272ae3aeba5b03b64",
+      "input_fingerprint": "3bb487c3df43e4e3f43bbc378189d6309cd531b6f4b8ef7ab8ed643bd06f6daf",
       "source_ids": [
         "allen_hra_3d_2020"
       ],
@@ -6334,7 +6100,7 @@
       ],
       "delineation": {
         "basis": "expert_drawing_on_template",
-        "subjects": 1,
+        "subjects": null,
         "hemispheres": "mirrored",
         "grid_voxel_mm": 0.5,
         "acquisition_voxel_mm": null,
@@ -9267,10 +9033,10 @@
         },
         {
           "id": "V2",
-          "status": "fail",
+          "status": "not_distinguishable",
           "measured": -0.679,
           "threshold": 0.634,
-          "reason": "95th-percentile surface distance to CIT168 shapes per side: 1 better, 15 not distinguishable, 0 worse than the header-only placement, judged against the spread across three registration settings"
+          "reason": "95th-percentile surface distance to CIT168 shapes per side: 1 better, 15 not distinguishable, 0 worse than header-only placement, judged against the spread across three registration parameter settings"
         }
       ],
       "stage_fingerprints": {
@@ -9298,12 +9064,21 @@
             "grad_step": 0.2
           }
         },
-        "resample": "5472fed2560b8d807c0f6ed83007d82bbe5368e84ed237632b971f6a24636e20",
-        "mesh": "06db3c31af979cdb0ee33c8be4a6cee2be436dc3ca783c71ca72f5139a27b8c1",
+        "resample": "32c6964dd7c0e3cd873afceb72850eee76c9a6f6a2fcd4105a574273350ede8d",
+        "mesh": "c70b2d2a4a0e2ec4891ae796b5f6b4a057758b6c01d06e506df6115e48b3ac40",
         "write": "c8405b0c299d3419a19cdbe3d808143581626cad598e995f02cfd60524efb949"
       },
       "position_check": "not independently checked",
-      "modification_note": "The label volume was moved from the 2009b symmetric template to MNI152NLin2009cAsym by a computed nonlinear registration (ANTs SyN; labels nearest-neighbour, 0.5 mm grid). Each label was then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric); small specks were dropped. One hemisphere was drawn; the right side is its mirror. Position not independently checked: against CIT168 the transform is not distinguishable from none. Warped anyway, to stay coherent with adjacent gyri."
+      "modification_note": "The label volume was moved from the 2009b symmetric template to MNI152NLin2009cAsym by a computed nonlinear registration (ANTs SyN; labels nearest-neighbour, 0.5 mm grid). Each label was then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric); small specks were dropped. One hemisphere was drawn; the right side is its mirror. The registration was not shown to improve these deep shapes' placement; atlases disagree by 1 to 2 mm here."
     }
-  ]
+  ],
+  "support_files": {
+    "by-sa/LICENSE.txt": "5eab858d34e8f4c5bebb0f8bc5fb95887622aa588f9c22bdbfd682722347b695",
+    "by-sa/NOTICE.txt": "375773944c8c127b2e218fbb6e2b7d9040bfda01db694616d49508cf768d087a",
+    "by-sa/labels-cit168_rl.json": "781e2a362064ced805dd019f62bbc0f0933e3b514839791372295c37d9ee01ae",
+    "open/NOTICE.txt": "bd8e2c6dafb8a1f2e7571113e832d5c5d0a4876300a329d646ab21c52f92ec5e",
+    "open/labels-allen_hra_3d_2020.json": "852f34abffb4b8a339790ba9a929229ff26f4650a9f34b8c988d8932cbb8f605",
+    "open/labels-mni_icbm152_2009c_asym.json": "5960244fafe08d27cb5e07c743e4df9c8f8061a00721b5d015f1370b69244f5f",
+    "open/labels-neudorfer_hypothalamus.json": "6f074f14e64fd427920ff647590995e8e87196c4024de162f5bbd34c55e9e9a1"
+  }
 }

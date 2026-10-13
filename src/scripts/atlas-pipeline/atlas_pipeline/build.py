@@ -90,8 +90,11 @@ def structures_for(cache_dir: pathlib.Path, registry: Registry, plan: dict[str, 
             allen_cache["volume"] = warped_allen_volume(cache_dir, registry, plan)
         compact, affine, ids = allen_cache["volume"]
         csv_path = source_file(cache_dir, source_id, plan["names_file"])
-        rows = structures.select_allen_rows(structures.read_allen_table(csv_path), csv_path, plan["select"])
-        return structures.mirrored_structures(source_id, compact, affine, ids, rows), [structures.LabelName(row["id"], row["name"], "both") for row in rows]
+        annotated = structures.read_allen_table(csv_path)
+        rows = [{**row, "label_name": structures.allen_label_name(row, annotated)}
+                for row in structures.select_allen_rows(annotated, csv_path, plan["select"])]
+        return (structures.mirrored_structures(source_id, compact, affine, ids, rows),
+                [structures.LabelName(row["id"], row["label_name"], "both") for row in rows])
     raise CheckError(f"asset {plan['id']}: unknown kind {kind!r} in the build plan; fix pipeline-inputs.json")
 
 
@@ -171,7 +174,7 @@ def build_asset(cache_dir: pathlib.Path, registry: Registry, plan: dict[str, Any
     if failing:
         listed = "; ".join(f"{row['label_id']} {row['hemisphere']}: {', '.join(row['sanity_problems'])}" for row in failing[:5])
         raise CheckError(f"asset {plan['id']}: {len(failing)} mesh(es) failed the sanity check K9 ({listed}); inspect the label volume before shipping")
-    copyright_text = (source.get("attribution_text") or source["name"])[:600]
+    copyright_text = source.get("attribution_text") or source["name"]
     extras = {"source_id": plan["source"], "license_id": verdict.get("treat_as") or source["license_id"], "template_space": registry.declared_space,
               "units": "mm", "axes": "RAS"}
     used_files = [plan[key] for key in ("file", "names_file") if key in plan] or [registry.inputs["template"]["mask"]]

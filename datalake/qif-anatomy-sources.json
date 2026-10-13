@@ -6,7 +6,7 @@
     {
       "id": "mni_icbm152_2009c_asym",
       "name": "MNI ICBM152 2009c nonlinear asymmetric template",
-      "attribution_text": "Copyright (C) 1993–2004 Louis Collins, McConnell Brain Imaging Centre, Montreal Neurological Institute, McGill University. Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies. Cite Fonov et al. 2011, https://doi.org/10.1016/j.neuroimage.2010.07.033.",
+      "attribution_text": "Copyright (C) 1993–2004 Louis Collins, McConnell Brain Imaging Centre, Montreal Neurological Institute, McGill University. Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies. Cite: VS Fonov, AC Evans, K Botteron, CR Almli, RC McKinstry, DL Collins and BDCG, Unbiased average age-appropriate atlases for pediatric studies, NeuroImage, Volume 54, Issue 1, January 2011, https://doi.org/10.1016/j.neuroimage.2010.07.033; and VS Fonov, AC Evans, RC McKinstry, CR Almli and DL Collins, Unbiased nonlinear average age-appropriate brain templates from birth to adulthood, NeuroImage, Volume 47, Supplement 1, July 2009, Page S102, https://doi.org/10.1016/S1053-8119(09)70884-5.",
       "urls": [
         "https://nist.mni.mcgill.ca/icbm-152-nonlinear-atlases-2009/"
       ],
@@ -42,7 +42,7 @@
     {
       "id": "mni_icbm152_2009b_sym",
       "name": "MNI ICBM152 2009b nonlinear symmetric template",
-      "attribution_text": "Copyright (C) 1993–2004 Louis Collins, McConnell Brain Imaging Centre, Montreal Neurological Institute, McGill University. Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies. Cite Fonov et al. 2011, https://doi.org/10.1016/j.neuroimage.2010.07.033.",
+      "attribution_text": "Copyright (C) 1993–2004 Louis Collins, McConnell Brain Imaging Centre, Montreal Neurological Institute, McGill University. Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies. Cite: VS Fonov, AC Evans, K Botteron, CR Almli, RC McKinstry, DL Collins and BDCG, Unbiased average age-appropriate atlases for pediatric studies, NeuroImage, Volume 54, Issue 1, January 2011, https://doi.org/10.1016/j.neuroimage.2010.07.033; and VS Fonov, AC Evans, RC McKinstry, CR Almli and DL Collins, Unbiased nonlinear average age-appropriate brain templates from birth to adulthood, NeuroImage, Volume 47, Supplement 1, July 2009, Page S102, https://doi.org/10.1016/S1053-8119(09)70884-5.",
       "urls": [
         "https://nist.mni.mcgill.ca/icbm-152-nonlinear-atlases-2009/"
       ],
@@ -86,7 +86,7 @@
         "cortical",
         "deep"
       ],
-      "delineated_in": "one brain's atlas drawn on the ICBM 2009b nonlinear symmetric template",
+      "delineated_in": "one donor's atlas, redrawn onto the ICBM 2009b nonlinear symmetric template (an average of 152 subjects)",
       "arrives_in": "MNI152NLin2009bSym",
       "route": {
         "kind": "computed_registration",
@@ -95,7 +95,7 @@
       },
       "delineation": {
         "basis": "expert_drawing_on_template",
-        "subjects": 1
+        "subjects": null
       },
       "required_text": [],
       "files": [
@@ -132,7 +132,7 @@
     {
       "id": "cit168_rl",
       "name": "CIT168 Reinforcement Learning atlas v1.1.0 (Pauli 2018)",
-      "attribution_text": "Pauli WM, Nili AN, Tyszka JM. A high-resolution probabilistic in vivo atlas of human subcortical brain nuclei. Sci Data 2018. https://doi.org/10.1038/sdata.2018.63. CC BY 4.0. State changes.",
+      "attribution_text": "Pauli WM, Nili AN, Tyszka JM. A high-resolution probabilistic in vivo atlas of human subcortical brain nuclei. Sci Data 2018. https://doi.org/10.1038/sdata.2018.63",
       "urls": [
         "https://api.osf.io/v2/nodes/jkzwp/",
         "https://osf.io/jkzwp/",

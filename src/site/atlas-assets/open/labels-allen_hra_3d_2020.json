@@ -109,7 +109,7 @@
     },
     {
       "id": "12143",
-      "name": "occipitotemporal (fusiform) gyrus, temporal part",
+      "name": "occipitotemporal (fusiform) gyrus, temporal part (remainder, excluding perirhinal gyrus ( rostral part of FuGt))",
       "hemisphere": "both"
     },
     {
@@ -198,21 +198,6 @@
       "hemisphere": "both"
     },
     {
-      "id": "12171",
-      "name": "head of hippocampus",
-      "hemisphere": "both"
-    },
-    {
-      "id": "12173",
-      "name": "body of hippocampus",
-      "hemisphere": "both"
-    },
-    {
-      "id": "12174",
-      "name": "tail of hippocampus",
-      "hemisphere": "both"
-    },
-    {
       "id": "12177",
       "name": "long insular gyri",
       "hemisphere": "both"
@@ -284,12 +269,12 @@
     },
     {
       "id": "10390",
-      "name": "thalamus",
+      "name": "thalamus (remainder not assigned to one of its 18 annotated parts)",
       "hemisphere": "both"
     },
     {
       "id": "10392",
-      "name": "anterior nuclear complex of thalamus",
+      "name": "anterior nuclear complex of thalamus (remainder, excluding lateral dorsal nucleus of thalamus)",
       "hemisphere": "both"
     },
     {
@@ -368,13 +353,28 @@
       "hemisphere": "both"
     },
     {
+      "id": "12171",
+      "name": "head of hippocampus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12173",
+      "name": "body of hippocampus",
+      "hemisphere": "both"
+    },
+    {
+      "id": "12174",
+      "name": "tail of hippocampus",
+      "hemisphere": "both"
+    },
+    {
       "id": "12181",
       "name": "pretectal region",
       "hemisphere": "both"
     },
     {
       "id": "12195",
-      "name": "midbrain tegmentum",
+      "name": "midbrain tegmentum (remainder, excluding red nucleus and substantia nigra)",
       "hemisphere": "both"
     },
     {
@@ -419,7 +419,7 @@
     },
     {
       "id": "12538",
-      "name": "tegmentum of medulla oblongata",
+      "name": "tegmentum of medulla oblongata (remainder, excluding inferior olive)",
       "hemisphere": "both"
     },
     {

@@ -1,14 +1,17 @@
+import pytest
+
+pytest.importorskip("numpy", reason="needs the imaging stack; skipped where only the standard library is installed")
+
 import pathlib
 
 import nibabel as nib
 import numpy as np
-import pytest
 
 from atlas_pipeline import build, structures
 from atlas_pipeline.errors import HeaderError, RegistryError
 from atlas_pipeline.headers import header_facts, load_canonical
 
-from conftest import ball
+from shapes import ball
 
 BOX = build.TemplateBox(np.full(3, -100.0), np.full(3, 100.0))
 
@@ -133,3 +136,67 @@ def test_the_largest_piece_is_never_dropped_even_when_it_is_small() -> None:
     affine = symmetric_affine(1.0, (20, 20, 20))
     field, dropped = build.drop_fragments(ball((20, 20, 20), (10.0, 10.0, 10.0), 1.5), 0.5, 1.0)
     assert dropped == 0 and field.sum() > 0
+
+
+def test_a_label_that_is_only_a_remainder_says_so() -> None:
+    rows = [{"id": "1", "name": "thalamus", "structure_id_path": "/1/"},
+            {"id": "2", "name": "pulvinar", "structure_id_path": "/1/2/"}, {"id": "3", "name": "red nucleus", "structure_id_path": "/9/3/"},
+            {"id": "4", "name": "a", "structure_id_path": "/1/4/"}, {"id": "5", "name": "b", "structure_id_path": "/1/5/"}]
+    assert structures.allen_label_name(rows[1], rows) == "pulvinar"
+    assert structures.allen_label_name(rows[0], rows) == "thalamus (remainder not assigned to one of its 3 annotated parts)"
+    assert structures.allen_label_name(rows[0], rows[:2]) == "thalamus (remainder, excluding pulvinar)"
+
+
+def test_excluded_acronyms_leave_the_selection(tmp_path: pathlib.Path) -> None:
+    csv_path = tmp_path / "voxel_count.csv"
+    csv_path.write_text("id,acronym,name,structure_id_path,annotated\n9,CeG,gyri,/9/,False\n1,A,alpha,/9/1/,True\n2,HiH,head,/9/2/,True\n", encoding="utf-8")
+    rows = structures.read_allen_table(csv_path)
+    chosen = structures.select_allen_rows(rows, csv_path, {"descendants_of_acronym": "CeG", "exclude_acronyms": ["HiH"]})
+    assert [row["acronym"] for row in chosen] == ["A"]
+    assert len(structures.select_allen_rows(rows, csv_path, {"descendants_of_acronym": "CeG"})) == 2
+
+
+def fake_asset(asset_id: str, source: str, keys: list[str], masks: dict | None = None) -> build.BuiltAsset:
+    nodes = [{"extras": dict(zip(("atlas", "label_id", "hemisphere"), key.split(":")))} for key in keys]
+    return build.BuiltAsset({"id": asset_id, "source": source}, b"", nodes, [], [], [], {}, masks or {})
+
+
+def test_a_label_in_two_assets_is_reported_and_one_in_one_asset_is_not() -> None:
+    from atlas_pipeline import overlap
+
+    cortex = fake_asset("cortex", "allen", ["allen:12171:left", "allen:12114:left"])
+    deep = fake_asset("deep", "allen", ["allen:12171:left", "allen:10390:left"])
+    assert overlap.duplicate_node_keys([cortex, deep]) == ["allen:12171:left in cortex and deep"]
+    assert overlap.duplicate_node_keys([cortex]) == []
+
+
+def test_overlap_is_checked_between_assets_of_the_same_atlas_too() -> None:
+    from atlas_pipeline import overlap
+
+    affine = symmetric_affine(0.5, (40, 40, 40))
+    shape = ball((40, 40, 40), (20.0, 20.0, 20.0), 8.0)
+    first = fake_asset("cortex", "allen", [], {"1:left": (shape, affine)})
+    second = fake_asset("deep", "allen", [], {"1:left": (shape, affine)})
+    rows = overlap.cross_atlas_overlaps([first, second])
+    assert len(rows) == 1 and rows[0]["duplicate"] is True
+    assert overlap.cross_atlas_overlaps([fake_asset("one", "allen", [], {"1:left": (shape, affine), "2:left": (shape, affine)})]) == []
+
+
+def test_label_sides_that_score_lower_after_the_registration_are_listed_worst_first() -> None:
+    from atlas_pipeline import evidence
+
+    before = {"PPH": {"left": 0.90, "right": 0.992}, "PrCG": {"left": 0.70, "right": 0.71}}
+    after = {"PPH": {"left": 0.95, "right": 0.937}, "PrCG": {"left": 0.69, "right": 0.80}}
+    assert [(row["label"], row["side"]) for row in evidence.label_sides_worse(before, after)] == [("PPH", "right"), ("PrCG", "left")]
+
+
+def test_outcomes_apply_the_three_outcome_rule_to_both_measures() -> None:
+    from atlas_pipeline import evidence
+
+    def setting(gm: float, hd95: float) -> dict:
+        return {"variants": {"intended": {"v1": {"left": {"gm": gm}, "right": {"gm": gm}}, "v2": {"STN|left": {"hd95_mm": hd95}}}}}
+
+    identity = {"v1": {"left": {"gm": 0.79}, "right": {"gm": 0.79}}, "v2": {"STN|left": {"hd95_mm": 1.5}}}
+    result = evidence.outcomes(identity, {"A": setting(0.848, 2.17), "B": setting(0.848, 1.64), "C": setting(0.851, 2.18)})
+    assert result["v1_grey_matter_share"]["left"]["outcome"] == "better"
+    assert result["v2_hd95_mm"]["STN|left"]["outcome"] == "not_distinguishable"

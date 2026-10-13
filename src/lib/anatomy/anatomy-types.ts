@@ -22,6 +22,13 @@ export const EXTENT_MATCHES = ['same', 'atlas_covers_part', 'contained', 'approx
 export type ExtentMatch = typeof EXTENT_MATCHES[number];
 
 /** `template_average`: the source is an average template (the brain outline), not a delineation of any structure. */
+/**
+ * Why a `contained` subject has no shape of its own. `named_stand_in`: a larger structure with its own name stands in
+ * for it (a gyrus for a cortical area). `no_boundary`: it lies somewhere inside shapes that have no boundary for it.
+ */
+export const CONTAINED_KINDS = ['named_stand_in', 'no_boundary'] as const;
+export type ContainedKind = typeof CONTAINED_KINDS[number];
+
 export const DELINEATION_BASES = ['histology', 'manual_mri', 'fmri_gradient', 'tractography', 'expert_drawing_on_template', 'template_average'] as const;
 export type DelineationBasis = typeof DELINEATION_BASES[number];
 
@@ -71,6 +78,8 @@ export interface CrosswalkRow {
   atlas_ids: string[];
   name_match: NameMatch;
   extent_match: ExtentMatch;
+  /** Present only on a `contained` row. */
+  contained_kind?: ContainedKind;
   definition_contested: boolean;
   draws: boolean;
   delineation_basis: DelineationBasis;

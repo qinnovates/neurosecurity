@@ -24,14 +24,24 @@ def _on_common_grid(mask: np.ndarray, affine: np.ndarray, low: np.ndarray, shape
     return resample_like(mask.astype(np.float32), affine, shape, grid, 1) >= 0.5
 
 
+def duplicate_node_keys(assets: list[BuiltAsset]) -> list[str]:
+    """Every (atlas, label, hemisphere) that is a node of more than one asset. One label ships in one place."""
+    owners: dict[str, list[str]] = {}
+    for built in assets:
+        for node in built.nodes:
+            key = f"{node['extras']['atlas']}:{node['extras']['label_id']}:{node['extras']['hemisphere']}"
+            owners.setdefault(key, []).append(built.plan["id"])
+    return sorted(f"{key} in {' and '.join(ids)}" for key, ids in owners.items() if len(ids) > 1)
+
+
 def cross_atlas_overlaps(assets: list[BuiltAsset]) -> list[dict[str, Any]]:
-    """Every pair of deep shapes from different atlases whose volumes overlap by more than a trace."""
-    shapes = [(built.plan["source"], key, mask, affine, *_world_box(mask, affine))
+    """Every pair of deep shapes from different assets, of one atlas or two, whose volumes overlap by more than a trace."""
+    shapes = [(built.plan["id"], built.plan["source"], key, mask, affine, *_world_box(mask, affine))
               for built in assets for key, (mask, affine) in built.masks.items()]
     rows = []
-    for index, (atlas_a, key_a, mask_a, affine_a, low_a, high_a) in enumerate(shapes):
-        for atlas_b, key_b, mask_b, affine_b, low_b, high_b in shapes[index + 1:]:
-            if atlas_a == atlas_b or (high_a < low_b).any() or (high_b < low_a).any():
+    for index, (asset_a, atlas_a, key_a, mask_a, affine_a, low_a, high_a) in enumerate(shapes):
+        for asset_b, atlas_b, key_b, mask_b, affine_b, low_b, high_b in shapes[index + 1:]:
+            if asset_a == asset_b or (high_a < low_b).any() or (high_b < low_a).any():
                 continue
             low = np.minimum(low_a, low_b) - 1.0
             shape = tuple(int(n) for n in np.ceil((np.maximum(high_a, high_b) + 1.0 - low) / COMMON_GRID_MM))

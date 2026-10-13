@@ -4,7 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import {
-  DEFAULT_MANIFEST_FILE, LICENSE_READING_STATEMENT, findAssetCoherenceFailures, findAttributionFailures, visibleText,
+  DEFAULT_MANIFEST_FILE, LICENSE_READING_STATEMENT, SHARE_ALIKE_STATEMENT, SHIPPING_LICENSE_NAMES, findAssetCoherenceFailures, findAttributionFailures, visibleText,
 } from '../check-atlas-assets.mjs';
 
 const ASSET_BYTES = Buffer.from('fixture mesh bytes');
@@ -16,8 +16,17 @@ const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
 let root;
 let files;
 
-function writeFixture({ assetBytes = ASSET_BYTES, pageBody } = {}) {
-  const manifest = { assets: [{ path: ASSET_PATH, bytes: ASSET_BYTES.length, sha256: sha256(ASSET_BYTES), source_ids: ['fixture_atlas'], computed_with_source_ids: [] }] };
+const NOTICE_TEXT = Buffer.from('NOTICE for the fixture folder');
+const MODIFICATION_NOTE = 'Each label was meshed, smoothed and decimated.';
+const LICENSE_ID = 'cc-by-sa-4.0';
+const FULL_PAGE_BODY = `<p>${LICENSE_READING_STATEMENT}</p><p>Fixture A, Fixture B (2020).\n   An atlas.</p><p>Copyright (C) Fixture &amp; Sons. Keep this &quot;notice&quot; in <b>all</b> copies.</p>`
+  + `<p>License: <a href="#">${SHIPPING_LICENSE_NAMES[LICENSE_ID]}</a>.</p><p>${SHARE_ALIKE_STATEMENT}</p><p>Changes made: ${MODIFICATION_NOTE}</p>`;
+
+function writeFixture({ assetBytes = ASSET_BYTES, noticeBytes = NOTICE_TEXT, pageBody } = {}) {
+  const manifest = {
+    assets: [{ id: 'fixture', path: ASSET_PATH, bytes: ASSET_BYTES.length, sha256: sha256(ASSET_BYTES), source_ids: ['fixture_atlas'], computed_with_source_ids: [], license_id: LICENSE_ID, modification_note: MODIFICATION_NOTE }],
+    support_files: { 'open/NOTICE.txt': sha256(NOTICE_TEXT) },
+  };
   const sources = { sources: [{ id: 'fixture_atlas', name: 'Fixture atlas', attribution_text: ATTRIBUTION_TEXT, required_text: [REQUIRED_WORDING] }] };
   const dist = path.join(root, 'dist');
   fs.mkdirSync(path.join(dist, 'atlas-assets', 'open'), { recursive: true });
@@ -26,7 +35,8 @@ function writeFixture({ assetBytes = ASSET_BYTES, pageBody } = {}) {
   fs.writeFileSync(files.sourcesFile, JSON.stringify(sources));
   fs.writeFileSync(path.join(dist, 'atlas-assets', 'manifest.json'), JSON.stringify(manifest));
   fs.writeFileSync(path.join(dist, 'atlas-assets', ASSET_PATH), assetBytes);
-  const body = pageBody ?? `<p>${LICENSE_READING_STATEMENT}</p><p>Fixture A, Fixture B (2020).\n   An atlas.</p><p>Copyright (C) Fixture &amp; Sons. Keep this &quot;notice&quot; in <b>all</b> copies.</p>`;
+  fs.writeFileSync(path.join(dist, 'atlas-assets', 'open', 'NOTICE.txt'), noticeBytes);
+  const body = pageBody ?? FULL_PAGE_BODY;
   fs.writeFileSync(path.join(dist, 'atlas', 'attribution', 'index.html'), `<html><head><style>p{}</style></head><body>${body}</body></html>`);
   return dist;
 }
@@ -64,9 +74,20 @@ describe('findAssetCoherenceFailures', () => {
     expect(findAssetCoherenceFailures(dist, path.join(root, 'absent.json'))[0]).toContain('is missing');
   });
 
+  it('fails a served notice that differs from what the pipeline wrote, a missing one, and a stray file in the served folder', () => {
+    expect(findAssetCoherenceFailures(writeFixture({ noticeBytes: Buffer.from('NOTICE with the wording removed') }), files.manifestFile))
+      .toEqual(['open/NOTICE.txt: the served file differs from what the pipeline wrote']);
+    const dist = writeFixture();
+    fs.writeFileSync(path.join(dist, 'atlas-assets', 'open', 'stray.glb'), 'x');
+    expect(findAssetCoherenceFailures(dist, files.manifestFile)).toEqual(['open/stray.glb: served but not in the manifest']);
+    fs.rmSync(path.join(dist, 'atlas-assets', 'open', 'stray.glb'));
+    fs.rmSync(path.join(dist, 'atlas-assets', 'open', 'NOTICE.txt'));
+    expect(findAssetCoherenceFailures(dist, files.manifestFile)).toEqual(['open/NOTICE.txt: listed in the manifest but not in the built site']);
+  });
+
   it('refuses a manifest path that climbs out of the asset folder', () => {
     const dist = writeFixture();
-    fs.writeFileSync(files.manifestFile, JSON.stringify({ assets: [{ path: '../../outside.glb', bytes: 1, sha256: 'x', source_ids: [], computed_with_source_ids: [] }] }));
+    fs.writeFileSync(files.manifestFile, JSON.stringify({ assets: [{ path: '../../outside.glb', bytes: 1, sha256: 'x', source_ids: [], computed_with_source_ids: [] }], support_files: { 'open/NOTICE.txt': sha256(NOTICE_TEXT) } }));
     expect(findAssetCoherenceFailures(dist, files.manifestFile)).toContain('../../outside.glb: resolves outside the asset folder');
   });
 });
@@ -77,12 +98,23 @@ describe('findAttributionFailures', () => {
   });
 
   it('fails a page that lacks a required wording, the attribution, or the AI statement', () => {
-    const withoutWording = writeFixture({ pageBody: `<p>${LICENSE_READING_STATEMENT}</p><p>${ATTRIBUTION_TEXT}</p>` });
+    const REST = `<p>${SHIPPING_LICENSE_NAMES[LICENSE_ID]}</p><p>${SHARE_ALIKE_STATEMENT}</p><p>${MODIFICATION_NOTE}</p>`;
+    const withoutWording = writeFixture({ pageBody: `<p>${LICENSE_READING_STATEMENT}</p><p>${ATTRIBUTION_TEXT}</p>${REST}` });
     expect(findAttributionFailures(withoutWording, files)).toEqual(['/atlas/attribution/: missing wording for "fixture_atlas": Copyright (C) Fixture & Sons. Keep this "notice" in all copies.']);
-    const onlyInScript = writeFixture({ pageBody: `<p>${LICENSE_READING_STATEMENT}</p><p>${ATTRIBUTION_TEXT}</p><script>${JSON.stringify(REQUIRED_WORDING)}</script>` });
+    const onlyInScript = writeFixture({ pageBody: `<p>${LICENSE_READING_STATEMENT}</p><p>${ATTRIBUTION_TEXT}</p>${REST}<script>${JSON.stringify(REQUIRED_WORDING)}</script>` });
     expect(findAttributionFailures(onlyInScript, files)).toHaveLength(1);
-    const withoutStatement = writeFixture({ pageBody: `<p>${ATTRIBUTION_TEXT}</p><p>Copyright (C) Fixture &amp; Sons. Keep this &quot;notice&quot; in all copies.</p>` });
+    const withoutStatement = writeFixture({ pageBody: `<p>${ATTRIBUTION_TEXT}</p><p>Copyright (C) Fixture &amp; Sons. Keep this &quot;notice&quot; in all copies.</p>${REST}` });
     expect(findAttributionFailures(withoutStatement, files)).toEqual(['/atlas/attribution/: the statement that license readings were made by AI is missing']);
+  });
+
+  it('fails a page that lacks the license name, the changes made, or the share-alike statement', () => {
+    for (const [missing, message] of [
+      [SHIPPING_LICENSE_NAMES[LICENSE_ID], '/atlas/attribution/: missing the license name for fixture (cc-by-sa-4.0)'],
+      [MODIFICATION_NOTE, '/atlas/attribution/: missing the changes made to fixture'],
+      [SHARE_ALIKE_STATEMENT, '/atlas/attribution/: missing the share-alike statement for fixture'],
+    ]) {
+      expect(findAttributionFailures(writeFixture({ pageBody: FULL_PAGE_BODY.replace(missing, '') }), files)).toEqual([message]);
+    }
   });
 
   it('fails when the page was not built, and when the manifest names a source the registry lacks', () => {

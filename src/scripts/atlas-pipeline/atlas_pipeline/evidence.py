@@ -9,6 +9,7 @@ that needed no transform from this pipeline.
 from __future__ import annotations
 
 import pathlib
+from collections.abc import Callable
 from typing import Any
 
 import nibabel as nib
@@ -26,7 +27,6 @@ ALLEN_VS_CIT168 = {"STN": (["STH"], [15]), "RN": (["RN"], [7]), "SN": (["SN"], [
                    "Putamen": (["Pu", "PuPV"], [0]), "Caudate": (["CaH", "CaB", "CaT"], [1]), "Accumbens": (["NAC"], [2])}
 CIT168_VS_NEUDORFER = {"STN": ([15], {"left": 14, "right": 13}), "SN": ([6, 8], {"left": 16, "right": 15}),
                        "RN": ([7], {"left": 18, "right": 17}), "Mammillary": ([14], {"left": 10, "right": 9})}
-GYRI_PARENT_ACRONYM = "CeG"
 
 
 def _box(shape: tuple[int, ...], affine: np.ndarray) -> tuple[slice, ...]:
@@ -62,28 +62,31 @@ def _faults(intended: np.ndarray) -> dict[str, np.ndarray]:
     return faults
 
 
-def registration_evidence(cache_dir: pathlib.Path, registry: Registry) -> dict[str, Any]:
-    transform_id = next(plan["transform"] for plan in registry.inputs["assets"] if "transform" in plan)
-    transform_row = registry.inputs["transforms"][transform_id]
-    template = registry.inputs["template"]
-    t1_path = source_file(cache_dir, template["source"], template["t1"])
-    template_image = nib.load(str(t1_path))
-    shape, affine = registration.declared_grid(template_image.shape, template_image.affine)
-    work = cache_dir / "work"
-    work.mkdir(parents=True, exist_ok=True)
-    reference_path, compact_path, scratch_path = work / "declared-grid.nii.gz", work / "allen-compact-evidence.nii.gz", work / "evidence-scratch.nii.gz"
-    registration.write_volume(reference_path, np.zeros(shape, dtype=np.uint8), affine)
+NOISE_NOTE = ("The spread is across three registration parameter settings: it measures how sensitive the result is to those settings, "
+              "not sampling noise. The grey-matter map is the declared template's own, the same template the registration targets.")
+MIRROR_BEFORE_NOTE = ("Not run: the moving image is symmetric and its labels are a mirrored pair with shared ids, so a mirror before the "
+                      "transform changes nothing. Laterality rests on the header and on the atlas having no side ids.")
+POOLED_NOTE = ("V1 is pooled over all gyral labels per hemisphere. Per label and side it is recorded under v1_per_label; some label-sides "
+               "score lower after the registration and are listed under v1_label_sides_worse.")
 
-    allen_plan = next(plan for plan in registry.inputs["assets"] if plan.get("transform") == transform_id)
-    annotation, annotation_affine = load_canonical(source_file(cache_dir, allen_plan["source"], allen_plan["file"]), dtype=np.int64)
+
+def _allen_inputs(cache_dir: pathlib.Path, registry: Registry, transform_id: str) -> dict[str, Any]:
+    """The Allen annotation as compact ids, which compact id each acronym has, and the gyral labels the cortex asset ships."""
+    plans = [plan for plan in registry.inputs["assets"] if plan.get("transform") == transform_id]
+    cortex_plan = next(plan for plan in plans if plan["layer"] == "cortical")
+    annotation, affine = load_canonical(source_file(cache_dir, cortex_plan["source"], cortex_plan["file"]), dtype=np.int64)
     compact, ids = structures.compact_allen_ids(annotation)
-    registration.write_volume(compact_path, compact, annotation_affine)
-    csv_path = source_file(cache_dir, allen_plan["source"], allen_plan["names_file"])
+    csv_path = source_file(cache_dir, cortex_plan["source"], cortex_plan["names_file"])
     rows = structures.read_allen_table(csv_path)
     compact_of = {row["acronym"]: int(np.searchsorted(ids, int(row["id"]))) + 1 for row in rows}
-    gyri = structures.select_allen_rows(rows, csv_path, {"descendants_of_acronym": GYRI_PARENT_ACRONYM})
-    gyri_ids = np.array([compact_of[row["acronym"]] for row in gyri])
+    gyri = [row["acronym"] for row in structures.select_allen_rows(rows, csv_path, cortex_plan["select"])]
+    return {"compact": compact, "affine": affine, "compact_of": compact_of, "gyri": gyri}
 
+
+def _measurer(cache_dir: pathlib.Path, registry: Registry, shape: tuple[int, ...], affine: np.ndarray,
+              allen: dict[str, Any]) -> Callable[..., dict[str, Any]]:
+    """A function that scores one label volume on the declared grid: V1 pooled and per label, V2 per structure and side."""
+    template = registry.inputs["template"]
     tissue = {}
     for kind in ("gm", "csf"):
         data, tissue_affine = load_canonical(source_file(cache_dir, template["source"], template[kind]))
@@ -93,23 +96,46 @@ def registration_evidence(cache_dir: pathlib.Path, registry: Registry) -> dict[s
     box_sides = side_selectors(tuple(s.stop - s.start for s in box), crop_affine(affine, np.array([s.start for s in box])))
     cit_plan = next(plan for plan in registry.inputs["assets"] if plan["source"] == "cit168_rl")
     cit, cit_affine = load_canonical(source_file(cache_dir, "cit168_rl", cit_plan["file"]))
-    cit_full = {name: sum(resample_like(cit[..., k], cit_affine, shape, affine, 1) for k in indices)[box] >= cit_plan["threshold"]
-                for name, (_, indices) in ALLEN_VS_CIT168.items()}
+    cit_masks = {name: sum(resample_like(cit[..., k], cit_affine, shape, affine, 1) for k in indices)[box] >= cit_plan["threshold"]
+                 for name, (_, indices) in ALLEN_VS_CIT168.items()}
+    compact_of, gyri = allen["compact_of"], allen["gyri"]
+    gyri_ids = np.array([compact_of[acronym] for acronym in gyri])
 
-    def measure(labels: np.ndarray) -> dict[str, Any]:
+    def measure(labels: np.ndarray, per_label: bool = False) -> dict[str, Any]:
         v2 = {}
         for name, (acronyms, _) in ALLEN_VS_CIT168.items():
             allen_mask = np.isin(labels[box], [compact_of[a] for a in acronyms])
             for side in ("left", "right"):
-                v2[f"{name}|{side}"] = checks.compare_masks(allen_mask & box_sides[side], cit_full[name] & box_sides[side], registration.DECLARED_GRID_VOXEL_MM)
-        return {"v1": checks.tissue_share(labels, gyri_ids, tissue, sides), "v2": v2}
+                v2[f"{name}|{side}"] = checks.compare_masks(allen_mask & box_sides[side], cit_masks[name] & box_sides[side], registration.DECLARED_GRID_VOXEL_MM)
+        row = {"v1": checks.tissue_share(labels, gyri_ids, tissue, sides), "v2": v2}
+        if per_label:
+            shares = checks.tissue_share_per_label(labels, gyri_ids, tissue["gm"], sides)
+            row["v1_per_label"] = {acronym: shares[compact_of[acronym]] for acronym in gyri}
+        return row
 
-    variants: dict[str, dict[str, Any]] = {"identity": measure(_apply_labels(compact_path, reference_path, [], scratch_path))}
+    return measure
+
+
+def registration_evidence(cache_dir: pathlib.Path, registry: Registry) -> dict[str, Any]:
+    transform_id = next(plan["transform"] for plan in registry.inputs["assets"] if "transform" in plan)
+    transform_row = registry.inputs["transforms"][transform_id]
+    template = registry.inputs["template"]
+    template_image = nib.load(str(source_file(cache_dir, template["source"], template["t1"])))
+    shape, affine = registration.declared_grid(template_image.shape, template_image.affine)
+    work = cache_dir / "work"
+    work.mkdir(parents=True, exist_ok=True)
+    reference_path, compact_path, scratch_path = work / "declared-grid.nii.gz", work / "allen-compact-evidence.nii.gz", work / "evidence-scratch.nii.gz"
+    registration.write_volume(reference_path, np.zeros(shape, dtype=np.uint8), affine)
+    allen = _allen_inputs(cache_dir, registry, transform_id)
+    registration.write_volume(compact_path, allen["compact"], allen["affine"])
+    measure = _measurer(cache_dir, registry, shape, affine, allen)
+
+    identity = measure(_apply_labels(compact_path, reference_path, [], scratch_path), per_label=True)
     settings: dict[str, Any] = {}
     for setting in registration.SETTINGS:
         forward, inverse = _setting_files(cache_dir, transform_id, transform_row, setting)
         intended = _apply_labels(compact_path, reference_path, forward, scratch_path)
-        row = {"intended": measure(intended)}
+        row = {"intended": measure(intended, per_label=True)}
         row.update({name: measure(volume) for name, volume in _faults(intended).items()})
         if inverse is not None:
             flags = [pathlib.Path(p).suffix == ".mat" for p in inverse]
@@ -117,10 +143,12 @@ def registration_evidence(cache_dir: pathlib.Path, registry: Registry) -> dict[s
         settings[setting] = {"files": {pathlib.Path(p).name: sha256_of(pathlib.Path(p)) for p in forward}, "variants": row,
                              "displacement_in_brain_mask": registration.displacement_stats(source_file(cache_dir, template["source"], template["mask"]), forward)}
     scratch_path.unlink(missing_ok=True)
-    return {"transform_id": transform_id, "shipping_setting": transform_row["setting"], "tool": f"{transform_row['tool']} {transform_row['tool_version']}",
-            "random_seed": transform_row["random_seed"], "identity": variants["identity"], "settings": settings,
-            "outcomes": outcomes(variants["identity"], settings),
-            "mirror_before_note": "Not run: the moving image is symmetric and its labels are a mirrored pair with shared ids, so a mirror before the transform changes nothing. Laterality rests on the header and on the atlas having no side ids."}
+    shipping = transform_row["setting"]
+    return {"transform_id": transform_id, "shipping_setting": shipping, "tool": f"{transform_row['tool']} {transform_row['tool_version']}",
+            "random_seed": transform_row["random_seed"], "gyral_labels": allen["gyri"], "identity": identity, "settings": settings,
+            "outcomes": outcomes(identity, settings),
+            "v1_label_sides_worse": label_sides_worse(identity["v1_per_label"], settings[shipping]["variants"]["intended"]["v1_per_label"]),
+            "noise_note": NOISE_NOTE, "pooled_note": POOLED_NOTE, "mirror_before_note": MIRROR_BEFORE_NOTE}
 
 
 def outcomes(identity: dict[str, Any], settings: dict[str, Any]) -> dict[str, Any]:
@@ -135,6 +163,13 @@ def outcomes(identity: dict[str, Any], settings: dict[str, Any]) -> dict[str, An
         out["v2_hd95_mm"][pair] = {"header_only": baseline["hd95_mm"], "intended": intended,
                                    **checks.gain_beyond_noise(intended, baseline["hd95_mm"], higher_is_better=False)}
     return out
+
+
+def label_sides_worse(header_only: dict[str, dict[str, float]], intended: dict[str, dict[str, float]]) -> list[dict[str, Any]]:
+    """Gyral label-sides whose grey-matter share is lower after the shipped registration than with no transform."""
+    rows = [{"label": acronym, "side": side, "header_only": header_only[acronym][side], "intended": intended[acronym][side]}
+            for acronym in header_only for side in ("left", "right") if intended[acronym][side] < header_only[acronym][side]]
+    return sorted(rows, key=lambda row: row["intended"] - row["header_only"])
 
 
 def shift_scan_evidence(cache_dir: pathlib.Path, registry: Registry, pairs: dict[str, str]) -> dict[str, Any]:
