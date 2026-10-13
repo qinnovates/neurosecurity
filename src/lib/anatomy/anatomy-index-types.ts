@@ -12,6 +12,7 @@ import type { CheckStatus, ClaimBasis } from './evidence';
 import type { UnbuildableReason } from './licence-rules';
 import type { AssetKind, HemisphereRecord, Point3, PositionCheck, SizeClass } from './manifest-types';
 import type { FiducialId, SpacingMeasure } from './parse-device-geometry';
+import type { ReadDepth } from './parse-electrode-layouts';
 import type { ReviewerRole } from './parse-review-ledger';
 import type { Resolution } from './resolve-region-term';
 import type { ReviewState } from './review-state';
@@ -213,10 +214,46 @@ export interface IndexStatedTargets {
   region_ids: string[];
 }
 
+export interface IndexElectrode {
+  id: string;
+  position_mm: Point3;
+  also_called: string | null;
+}
+
+/**
+ * Electrode positions on the head surface asset, ready to draw as they are. A layout names no brain
+ * region: what lies under an electrode differs between people and is not computed here.
+ */
+export interface IndexElectrodeLayout {
+  id: string;
+  name: string;
+  /** The head surface asset the positions lie on. */
+  scalp_asset_id: string;
+  construction: string;
+  shown_by_default: boolean;
+  electrodes: IndexElectrode[];
+  /** Drawn only while ledger entries cover the layout row and all four landmarks it was built from. */
+  drawable: boolean;
+  review_state: IndexReviewState;
+}
+
+export interface IndexDeviceFact {
+  id: string;
+  statement: string;
+  citation: string;
+  url: string;
+  read_depth: ReadDepth;
+}
+
 export interface IndexDevices {
   fiducial_space: string | null;
+  /** How the landmarks were placed, in words. Null while there are none. */
+  fiducial_method: string | null;
   fiducials: IndexFiducial[];
+  electrode_layouts: IndexElectrodeLayout[];
   leads: IndexLead[];
+  /** Sourced statements to show in words beside the layout. Never drawn. */
+  facts: IndexDeviceFact[];
   /** The regions each device's own record names. Published by the maker's material as the atlas file records it. */
   stated_targets: IndexStatedTargets[];
 }

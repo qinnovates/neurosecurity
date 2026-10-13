@@ -10,6 +10,7 @@ import { CHECK_STATUSES, CLAIM_BASES } from './evidence';
 import { UNBUILDABLE_REASONS } from './licence-rules';
 import { ASSET_KINDS, HEMISPHERE_RECORDS, POSITION_CHECKS, SIZE_CLASSES } from './manifest-types';
 import { FIDUCIAL_IDS, SPACING_MEASURES } from './parse-device-geometry';
+import { READ_DEPTHS } from './parse-electrode-layouts';
 import { REVIEWER_ROLES } from './parse-review-ledger';
 import { RESOLUTIONS } from './resolve-region-term';
 import { shapes, type Shape } from './shape-check';
@@ -80,6 +81,13 @@ const technique = shapes.record({
 const devices = shapes.record({
   fiducial_space: shapes.nullable(id),
   fiducials: shapes.list(shapes.record({ id: shapes.word(FIDUCIAL_IDS), position_mm: shapes.point, review_state: reviewState })),
+  fiducial_method: shapes.nullable(text),
+  electrode_layouts: shapes.list(shapes.record({
+    id: text, name: text, scalp_asset_id: id, construction: text, shown_by_default: shapes.boolean,
+    electrodes: shapes.list(shapes.record({ id: text, position_mm: shapes.point, also_called: shapes.nullable(text) })),
+    drawable: shapes.boolean, review_state: reviewState,
+  })),
+  facts: shapes.list(shapes.record({ id, statement: text, citation: text, url: text, read_depth: shapes.word(READ_DEPTHS) })),
   leads: shapes.list(shapes.record({
     id, name: text, contacts: shapes.integer(1), contact_length_mm: shapes.number(0), contact_spacing_mm: shapes.number(0),
     spacing_measure: shapes.word(SPACING_MEASURES), diameter_mm: shapes.number(0), drawable: shapes.boolean, review_state: reviewState,

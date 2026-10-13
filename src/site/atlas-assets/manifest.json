@@ -3,7 +3,7 @@
   "template_space": "MNI152NLin2009cAsym",
   "units": "mm",
   "axes": "RAS",
-  "pipeline_code_hash": "361a1c397888b6fe78afcedbae8c3a402aaebdc4c1af0d5b46ce09b7a522b175",
+  "pipeline_code_hash": "b91ccf0d6f6dd5ce63d2f5e2fed9b5512836482e28a84f45934643f0ec4042d5",
   "integrity_note": "Hashes show the files were delivered unchanged. They do not prove where a file came from.",
   "assets": [
     {
@@ -13,7 +13,7 @@
       "layer": "outline",
       "bytes": 25580,
       "sha256": "13ae877f9743440b4702c462fffd72315b6783a6602c5e4bc3217fcb194f1fce",
-      "input_fingerprint": "f6496aa5f17ffe53b600fd5b1b5eb6b92473b5fc0b7db9a543a27f77247412f2",
+      "input_fingerprint": "c89a38c025cce468c306766ff04ccc2445593e6b49c91c272da9b4eb706a3a77",
       "source_ids": [
         "mni_icbm152_2009c_asym"
       ],
@@ -104,7 +104,7 @@
         },
         "register": null,
         "resample": "92ec28c83f15b31b9134bd2b79f4841e91a94e74bc60f715aeb67c524ad37a08",
-        "mesh": "3e309d97ee6acd3db3ed1664361af6e27674903c5e6a5ef95b16310c33f8d641",
+        "mesh": "1399e0dd9700e29c4666afb6cb75ed0a414f0562bea2658cd40008b2d8283d4b",
         "write": "13ae877f9743440b4702c462fffd72315b6783a6602c5e4bc3217fcb194f1fce"
       },
       "position_check": "not independently checked",
@@ -117,7 +117,7 @@
       "layer": "deep",
       "bytes": 62268,
       "sha256": "cb90f8bb70d36348d99e5a9a5780916f9c607be37c26ad7d1e4cc6b76bed2a28",
-      "input_fingerprint": "72d5ca782af79ff8445fa62d7c0972c2a234cbda88d401ab56491effd54e6478",
+      "input_fingerprint": "568352785a3896d4baba8b3503c6fdab48ec348ea969dc39cd1f5ad0fda1041f",
       "source_ids": [
         "cit168_rl"
       ],
@@ -967,7 +967,7 @@
         },
         "register": null,
         "resample": "c0a8885a8cd8ee177f624b33d29c242da463b8af92b46add6580ca144a6e0fa4",
-        "mesh": "a2c0e2d774ebfdb0a87afe4931787dea4c2b4a93c409d6384f96c5781261114e",
+        "mesh": "08f3db3a50a0bb0b20468cc08e8005dc0a73a9cf3a7c8a7264bbcd25fdfaf0b7",
         "write": "cb90f8bb70d36348d99e5a9a5780916f9c607be37c26ad7d1e4cc6b76bed2a28"
       },
       "position_check": "not independently checked",
@@ -980,7 +980,7 @@
       "layer": "deep",
       "bytes": 101592,
       "sha256": "f677d3c1bcb0a1fc93d82a0bec5a0f2669391456f398bebf7057178dc6d5f508",
-      "input_fingerprint": "083e3e2721bc29aef7d6573411a224bf1deb382dc1b2bfc3cb91b7a029471e83",
+      "input_fingerprint": "b906a402c8f1700b3356079b3a99c63a7871b24fe997503246457afb0f6f46ca",
       "source_ids": [
         "neudorfer_hypothalamus"
       ],
@@ -2139,7 +2139,7 @@
         },
         "register": null,
         "resample": "0b3bf184928ce21693822640a6e117fd42be38a5cc9061aaab1b06fe4c53d09d",
-        "mesh": "2b5bd776e28312d532a456164c450a70f9550cf1c09c84073557e12f23350aa7",
+        "mesh": "828ebeabcd1ccaff2a4179ab8ec98195204ab2b14f7583b9c359d5e3ff983248",
         "write": "f677d3c1bcb0a1fc93d82a0bec5a0f2669391456f398bebf7057178dc6d5f508"
       },
       "position_check": "not independently checked",
@@ -2152,7 +2152,7 @@
       "layer": "cortical",
       "bytes": 1243308,
       "sha256": "2909f17492b2edeb1daded0b56096b6a866face01ccd9333a7e9457d2c0009da",
-      "input_fingerprint": "a74d1300261e1ec990a6b78285e3911607286c76ac25c0cb5ee0fcad0ffe1c0b",
+      "input_fingerprint": "3e2804d462fd0dd4fc2b01c710f6d771a9566b43e9dc2d4f964982b4473be8d3",
       "source_ids": [
         "allen_hra_3d_2020"
       ],
@@ -6070,7 +6070,7 @@
           }
         },
         "resample": "2532c02cd58f7664b358004162d9552cbeef54a7b2ef9592b1dfff38228fe735",
-        "mesh": "50d98c5bcad626ddca9f2b741cccf054b1bebada9da38acf0e1224e4d5ef5f92",
+        "mesh": "0fe125a2a40fd1af148c4d7b4dbcf2faac53a8d19871272aa81a99c52c3c3f7f",
         "write": "2909f17492b2edeb1daded0b56096b6a866face01ccd9333a7e9457d2c0009da"
       },
       "position_check": "checked in aggregate",
@@ -6083,7 +6083,7 @@
       "layer": "deep",
       "bytes": 1557844,
       "sha256": "c8405b0c299d3419a19cdbe3d808143581626cad598e995f02cfd60524efb949",
-      "input_fingerprint": "e7cb39dfd8d1729a887dcad7d16f21a4a886d19a7264cbc74546bf70f4ed5cbe",
+      "input_fingerprint": "023d1e92fc822838e56c24ce8787506fdd0c6ea3e89ac777f13e859f343b2a0a",
       "source_ids": [
         "allen_hra_3d_2020"
       ],
@@ -9065,20 +9065,124 @@
           }
         },
         "resample": "f6637cedfc0e35297acc95b3e2029ddc1b9a583de7a719c491788c197ce140e2",
-        "mesh": "89567b44d217d019e7417ef99a61f0f8bd262c5aaa61b622ec77f666ed5930da",
+        "mesh": "38e36527326361c3799ed6689e813d93efa7494c1716f50666e824de75af152d",
         "write": "c8405b0c299d3419a19cdbe3d808143581626cad598e995f02cfd60524efb949"
       },
       "position_check": "not independently checked",
       "modification_note": "The label volume was moved from the 2009b symmetric template to MNI152NLin2009cAsym by a computed nonlinear registration (ANTs SyN; labels nearest-neighbour, 0.5 mm grid). Each label was then meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric); small specks were dropped. One hemisphere was drawn; the right side is its mirror. The registration was not shown to improve these deep shapes' placement; those CIT168 also has differ from it by 0.7 to 2.5 mm (95th-percentile surface distance)."
+    },
+    {
+      "id": "scalp",
+      "path": "open/scalp.ea21cc63bb4b.glb",
+      "kind": "mesh",
+      "layer": "devices",
+      "bytes": 36152,
+      "sha256": "ea21cc63bb4b9b5db996fac3634e59cb9deb700cfa441ef1b255842bff810bc3",
+      "input_fingerprint": "acb5e2141b697abc272b7d4cce2215bcb33bb0101f8e510fa9fecfa3d91d90d1",
+      "source_ids": [
+        "mni_icbm152_2009c_asym"
+      ],
+      "computed_with_source_ids": [],
+      "license_id": "mni-icbm-notice",
+      "stated_license_id": "mni-icbm-notice",
+      "route": [
+        {
+          "kind": "declared_space"
+        }
+      ],
+      "delineation": {
+        "basis": "template_average",
+        "subjects": 152,
+        "hemispheres": "not_applicable",
+        "grid_voxel_mm": 1.0,
+        "acquisition_voxel_mm": null,
+        "probability_meaning": "not applicable: binary head mask made from the template's T1-weighted image"
+      },
+      "libraries": {
+        "nibabel": "5.3.2",
+        "numpy": "2.0.1",
+        "scipy": "1.14.1",
+        "scikit-image": "0.24.0",
+        "fast-simplification": "0.2.0",
+        "antspyx": "0.5.4"
+      },
+      "nodes": [
+        {
+          "extras": {
+            "atlas": "mni_icbm152_2009c_asym",
+            "label_id": "head_surface",
+            "hemisphere": "both"
+          },
+          "threshold": 0.5,
+          "max_probability": 1.0,
+          "volume_mm3_at": {
+            "0.25": 4179338.0,
+            "0.5": 4179338.0,
+            "0.75": 4179338.0
+          },
+          "voxels": 4179338,
+          "shortest_extent_voxels": 186.5,
+          "size_class": "resolved",
+          "centroid_mm": [
+            -0.2,
+            -18.38,
+            -0.84
+          ],
+          "bbox_mm": [
+            [
+              -93.0,
+              -121.0,
+              -77.0
+            ],
+            [
+              92.0,
+              95.0,
+              104.0
+            ]
+          ],
+          "vertex_count": 1900,
+          "mesh_to_mask_mm": {
+            "mean": 0.689,
+            "max": 11.295
+          }
+        }
+      ],
+      "checks": [
+        {
+          "id": "K0",
+          "status": "pass",
+          "measured": null,
+          "threshold": null,
+          "reason": "mni_icbm152_t1_tal_nlin_asym_09c.nii: axes RAS, determinant sign 1, placement from sform"
+        },
+        {
+          "id": "K9",
+          "status": "pass",
+          "measured": 0.0,
+          "threshold": 0.0,
+          "reason": "meshes closed, no zero-area triangles, inside the template box, volume and surface distance within the rules"
+        }
+      ],
+      "stage_fingerprints": {
+        "fetch": {
+          "mni_icbm152_2009c_asym/mni_icbm152_nlin_asym_09c_nifti.zip": "804382e5d68a42ff8096ee845a7600b6658434da762fa67840a149eb25d48bd4"
+        },
+        "register": null,
+        "resample": "1c2977966c2390c1a8faf7414c8eb0516d66e2b2f46dfe932e2e19553b0d0dad",
+        "mesh": "a2307ab3a346c02c1e0a86d679bf8e77cbae85484b78df140afedb8c47b9fe47",
+        "write": "ea21cc63bb4b9b5db996fac3634e59cb9deb700cfa441ef1b255842bff810bc3"
+      },
+      "position_check": "not independently checked",
+      "modification_note": "The template's 1 mm T1-weighted image was cut at half of Otsu's threshold, its largest connected piece kept and its inside filled, giving the head as one solid. That solid was meshed (marching cubes), smoothed (Taubin, 10 iterations), rescaled about its centroid to restore its volume (factor at most 1.15) and decimated (quadric). The image ends below the nose and short of its tip, so the head is cut flat at the bottom and at the front. It is the skin of an average head, not of a person."
     }
   ],
   "support_files": {
     "by-sa/LICENSE.txt": "5eab858d34e8f4c5bebb0f8bc5fb95887622aa588f9c22bdbfd682722347b695",
     "by-sa/NOTICE.txt": "375773944c8c127b2e218fbb6e2b7d9040bfda01db694616d49508cf768d087a",
     "by-sa/labels-cit168_rl.json": "781e2a362064ced805dd019f62bbc0f0933e3b514839791372295c37d9ee01ae",
-    "open/NOTICE.txt": "2dd6f9176904778c648882950bd51e41b3fd19f6e3ecb87b02e96dc3cff379d1",
+    "open/NOTICE.txt": "20bf723c93bf9540f76bc1af2011a95e48b75291ee0ca225bfd182761ea76b10",
     "open/labels-allen_hra_3d_2020.json": "852f34abffb4b8a339790ba9a929229ff26f4650a9f34b8c988d8932cbb8f605",
-    "open/labels-mni_icbm152_2009c_asym.json": "5960244fafe08d27cb5e07c743e4df9c8f8061a00721b5d015f1370b69244f5f",
+    "open/labels-mni_icbm152_2009c_asym.json": "206f83cc2790aae1f593764626c55591b1ab4d383f7993e448d8f7bbdcf4e9fe",
     "open/labels-neudorfer_hypothalamus.json": "6f074f14e64fd427920ff647590995e8e87196c4024de162f5bbd34c55e9e9a1"
   }
 }

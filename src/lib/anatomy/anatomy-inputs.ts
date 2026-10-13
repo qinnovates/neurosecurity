@@ -156,6 +156,7 @@ function buildCrosswalkContext(
 function listDocuments(raw: RawAnatomyFiles): Map<string, unknown> {
   return new Map<string, unknown>([
     [REGISTRAR_FILE, raw.registrar], [ATLAS_FILE, raw.atlas], [PATHWAYS_FILE, raw.pathways], ...Object.entries(raw.labelTablesByPath),
+    ...(raw.manifest === null ? [] : [[MANIFEST_FILE, raw.manifest] as [string, unknown]]),
   ]);
 }
 

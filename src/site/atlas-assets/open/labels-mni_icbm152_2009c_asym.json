@@ -6,6 +6,11 @@
       "id": "brain_mask",
       "name": "Brain outline (average template)",
       "hemisphere": "both"
+    },
+    {
+      "id": "head_surface",
+      "name": "Head surface (average template)",
+      "hemisphere": "both"
     }
   ]
 }

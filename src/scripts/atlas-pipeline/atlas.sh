@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Run one atlas pipeline command inside its own virtual environment.
-# Usage: atlas.sh <fetch|evidence|build|buildability|register|test> [arguments]
+# Usage: atlas.sh <fetch|evidence|build|devices|buildability|register|test> [arguments]
 # ATLAS_CACHE_DIR: downloads, the archived transform and review sheets (default ~/.cache/qinnovate-atlas).
 # ATLAS_VENV_DIR:  the virtual environment (default $ATLAS_CACHE_DIR/venv).
 set -euo pipefail
@@ -22,7 +22,7 @@ if [[ ! -f "$stamp" || "$(cat "$stamp")" != "$wanted" ]]; then
   printf '%s' "$wanted" > "$stamp"
 fi
 
-command="${1:?usage: atlas.sh <fetch|evidence|build|buildability|register|test> [arguments]}"
+command="${1:?usage: atlas.sh <fetch|evidence|build|devices|buildability|register|test> [arguments]}"
 shift
 if [[ "$command" == "test" ]]; then
   exec "$python_bin" -I -m pytest -p no:cacheprovider "$pipeline_dir/tests" "$@"

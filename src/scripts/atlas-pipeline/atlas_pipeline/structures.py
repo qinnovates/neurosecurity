@@ -15,6 +15,7 @@ import numpy as np
 from scipy import ndimage
 
 from .errors import RegistryError
+from .head_surface import head_mask
 from .headers import load_canonical
 from .volumes import crop_affine, resample_like, side_selectors, voxel_volume_mm3
 
@@ -65,6 +66,14 @@ def _mask_structure(atlas: str, label: LabelName, hemisphere: str, mask: np.ndar
 def template_mask_structure(atlas: str, mask_path: pathlib.Path, label: dict[str, str]) -> Iterator[Structure]:
     data, affine = load_canonical(mask_path)
     structure = _mask_structure(atlas, LabelName(label["id"], label["name"], "both"), "both", data > 0.5, affine)
+    if structure is not None:
+        yield structure
+
+
+def template_head_structure(atlas: str, t1_path: pathlib.Path, label: dict[str, str]) -> Iterator[Structure]:
+    """The whole head of the template as one solid, from its T1-weighted image."""
+    data, affine = load_canonical(t1_path)
+    structure = _mask_structure(atlas, LabelName(label["id"], label["name"], "both"), "both", head_mask(data).mask, affine)
     if structure is not None:
         yield structure
 

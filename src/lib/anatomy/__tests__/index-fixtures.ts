@@ -49,7 +49,7 @@ export function buildIndex(overrides: Partial<AnatomyIndex> = {}): AnatomyIndex 
     subjects: [],
     techniques: [],
     tracts: { index_asset_id: null, proximity_asset_id: null, group_asset_ids: [] },
-    devices: { fiducial_space: null, fiducials: [], leads: [], stated_targets: [] },
+    devices: { fiducial_space: null, fiducial_method: null, fiducials: [], electrode_layouts: [], leads: [], facts: [], stated_targets: [] },
     stale_evidence_keys: [],
     ...overrides,
   };

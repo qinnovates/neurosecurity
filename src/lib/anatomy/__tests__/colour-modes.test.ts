@@ -120,7 +120,7 @@ describe('createStructureStyler', () => {
       buildTechnique('QIF-T9003', { scope: 'band_level', band_ids: ['N6'] }),
       buildTechnique('QIF-T9004', { scope: 'not_drafted' }),
     ],
-    devices: { fiducial_space: null, fiducials: [], leads: [], stated_targets: [{ device_id: 'fixture-device', region_ids: ['m1', 'stn'] }] },
+    devices: { fiducial_space: null, fiducial_method: null, fiducials: [], electrode_layouts: [], leads: [], facts: [], stated_targets: [{ device_id: 'fixture-device', region_ids: ['m1', 'stn'] }] },
   });
   const style = createStructureStyler(index);
 
