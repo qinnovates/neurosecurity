@@ -18,6 +18,9 @@ MESH_STEPS = ("meshed (marching cubes), smoothed (Taubin, 10 iterations), rescal
               "(factor at most 1.15) and decimated (quadric)")
 CHANGES = {
     "template_mask": f"The template's 1 mm brain mask was {MESH_STEPS}. It is an outline of the average template, not a cortical surface.",
+    "template_head": ("The template's 1 mm T1-weighted image was cut at half of Otsu's threshold, its largest connected piece kept and its "
+                      f"inside filled, giving the head as one solid. That solid was {MESH_STEPS}. The image ends below the nose and short "
+                      "of its tip, so the head is cut flat at the bottom and at the front. It is the skin of an average head, not of a person."),
     "probability_maps": ("Each probability map was split into left and right at x = 0, resampled linearly from 1 mm to 0.5 mm, cut at "
                          f"probability 0.5, then {MESH_STEPS}. Structures too small to outline are markers with no shape."),
     "discrete_lateralised": (f"Each label was {MESH_STEPS} on the publisher's 0.5 mm grid and placed through the file's affine with no other "

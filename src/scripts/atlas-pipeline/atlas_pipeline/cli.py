@@ -1,4 +1,4 @@
-"""Command line: fetch, evidence, build, buildability, register. Run through atlas_build.py."""
+"""Command line: fetch, evidence, build, devices, buildability, register. Run through atlas_build.py."""
 from __future__ import annotations
 
 import argparse
@@ -9,7 +9,7 @@ import subprocess
 import sys
 from typing import Any
 
-from . import build, evidence, fetch, manifest, outputs, overlap, registration, sources
+from . import build, devices, evidence, fetch, manifest, outputs, overlap, registration, sources
 from .errors import PipelineError
 
 DEFAULT_CACHE = pathlib.Path.home() / ".cache" / "qinnovate-atlas"
@@ -17,6 +17,9 @@ ASSET_DIR = sources.REPO_ROOT / "src" / "site" / "atlas-assets"
 EVIDENCE_PATH = sources.PIPELINE_DIR / "evidence" / "registration-evidence.json"
 REPORT_PATH = sources.PIPELINE_DIR / "evidence" / "build-report.json"
 BUILDABILITY_PATH = sources.PIPELINE_DIR / "registry" / "buildability.json"
+PLACEMENT_PATH = sources.PIPELINE_DIR / "evidence" / "device-placement.json"
+DEVICE_GEOMETRY_PATH = sources.REPO_ROOT / "datalake" / "qif-anatomy-device-geometry.json"
+SCALP_ASSET_ID = "scalp"
 
 
 def cache_dir() -> pathlib.Path:
@@ -94,6 +97,23 @@ def command_build(registry: sources.Registry, allow_dirty: bool, sheets: bool) -
     return 0
 
 
+def command_devices(registry: sources.Registry, sheets: bool) -> int:
+    """Place the landmarks and the electrode layout, check them on the shipped head mesh, and write the device rows."""
+    command_fetch(registry)
+    shipped = json.loads((ASSET_DIR / "manifest.json").read_text(encoding="utf-8"))
+    scalp = next((asset for asset in shipped["assets"] if asset["id"] == SCALP_ASSET_ID), None)
+    if scalp is None:
+        raise PipelineError("the manifest has no head surface asset; run the build command first")
+    scalp_glb = (ASSET_DIR / scalp["path"]).read_bytes()
+    document = devices.placement_document(cache_dir(), registry, scalp_glb, scalp["sha256"])
+    manifest.write_json(PLACEMENT_PATH, document)
+    devices.merge_into_geometry_file(DEVICE_GEOMETRY_PATH, devices.geometry_rows(document, SCALP_ASSET_ID))
+    if sheets:
+        print("review sheets:", outputs.write_device_sheets(cache_dir() / "review" / "devices", cache_dir(), registry, document, scalp_glb))
+    print("wrote", PLACEMENT_PATH.relative_to(sources.REPO_ROOT), "and", DEVICE_GEOMETRY_PATH.relative_to(sources.REPO_ROOT))
+    return 0
+
+
 def command_buildability(registry: sources.Registry) -> int:
     manifest.write_json(BUILDABILITY_PATH, {"note": "Blockers per source from the pipeline's buildability rule; an empty list means buildable. "
                                                     "A vitest test compares this with the site's rule.", "sources": sources.buildability_table(registry)})
@@ -118,6 +138,8 @@ def main(argv: list[str]) -> int:
     build_parser = commands.add_parser("build", help="build every buildable asset, the manifest, label tables and notices")
     build_parser.add_argument("--allow-dirty", action="store_true", help="build with uncommitted pipeline changes (development only)")
     build_parser.add_argument("--no-sheets", action="store_true", help="skip the review sheets")
+    devices_parser = commands.add_parser("devices", help="place the scalp landmarks and the 10-20 layout on the built head surface")
+    devices_parser.add_argument("--no-sheets", action="store_true", help="skip the review sheets")
     register_parser = commands.add_parser("register", help="compute the registration under one setting into the cache")
     register_parser.add_argument("setting", choices=sorted(registration.SETTINGS))
     arguments = parser.parse_args(argv)
@@ -129,6 +151,8 @@ def main(argv: list[str]) -> int:
             return command_evidence(registry)
         if arguments.command == "buildability":
             return command_buildability(registry)
+        if arguments.command == "devices":
+            return command_devices(registry, not arguments.no_sheets)
         if arguments.command == "register":
             return command_register(registry, arguments.setting)
         return command_build(registry, arguments.allow_dirty, not arguments.no_sheets)

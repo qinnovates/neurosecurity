@@ -19,6 +19,7 @@
     "check:anatomy-payload": "node src/scripts/find-anatomy-payload.mjs",
     "atlas:fetch": "bash src/scripts/atlas-pipeline/atlas.sh fetch",
     "atlas:build": "bash src/scripts/atlas-pipeline/atlas.sh build",
+    "atlas:devices": "bash src/scripts/atlas-pipeline/atlas.sh devices",
     "atlas:test": "bash src/scripts/atlas-pipeline/atlas.sh test",
     "evidence:browser": "node src/scripts/browser-evidence/run-browser-evidence.mjs",
     "sync": "node src/scripts/sync-agents.mjs",

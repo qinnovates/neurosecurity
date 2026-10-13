@@ -80,7 +80,7 @@ describe('parseManifest', () => {
     expect(() => parseWith(buildAsset({ checks: checks as never }))).toThrow(/checks\[0\]\.reason: a check that did not run must say why/);
   });
 
-  it('reads "checked in aggregate" as a position check, and lets only the outline have no sides', () => {
+  it('reads "checked in aggregate" as a position check, and lets only the outline and the head surface have no sides', () => {
     expect(parseManifest(buildManifest([buildAsset({ position_check: 'checked in aggregate' })]), CONTEXT).assets[0].position_check).toBe('checked in aggregate');
     expect(() => parseWith({ ...buildAsset(), position_check: 'checked' })).toThrow(/position_check/);
     const delineation = buildAsset().delineation;
@@ -90,6 +90,9 @@ describe('parseManifest', () => {
       expect(() => parseWith(buildAsset({ layer: 'outline', delineation: { ...delineation, hemispheres } }))).toThrow(new RegExp(`delineation\\.hemispheres: "${hemispheres}" does not fit the "outline" layer`));
     }
     expect(() => parseWith(buildAsset({ delineation: { ...delineation, hemispheres: 'not_applicable' } }))).toThrow(/"not_applicable" does not fit the "deep" layer/);
+    const headSurface = buildAsset({ layer: 'devices', delineation: { ...delineation, hemispheres: 'not_applicable' } });
+    expect(parseManifest(buildManifest([headSurface]), CONTEXT).assets[0].layer).toBe('devices');
+    expect(() => parseWith(buildAsset({ layer: 'devices', delineation: { ...delineation, hemispheres: 'separate' } }))).toThrow(/"separate" does not fit the "devices" layer/);
   });
 
   it('accepts a check that could not tell the result from doing nothing only with its reason, and files listed beside the assets only by known paths', () => {

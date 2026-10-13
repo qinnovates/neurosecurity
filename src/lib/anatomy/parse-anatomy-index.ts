@@ -89,6 +89,7 @@ function checkDraftedThings(index: AnatomyIndex, root: FieldLocation): void {
   checkEach(index.techniques, root, 'techniques', (technique, location) =>
     checkEach(technique.links, location, 'links', (link, linkLocation) => checkLink(link, linkLocation, regionIds)));
   checkEach(index.devices.fiducials, childOf(root, 'devices'), 'fiducials', (fiducial, location) => checkReviewState(fiducial.review_state, childOf(location, 'review_state')));
+  checkEach(index.devices.electrode_layouts, childOf(root, 'devices'), 'electrode_layouts', (layout, location) => checkReviewState(layout.review_state, childOf(location, 'review_state')));
   checkEach(index.devices.leads, childOf(root, 'devices'), 'leads', (lead, location) => checkReviewState(lead.review_state, childOf(location, 'review_state')));
 }
 

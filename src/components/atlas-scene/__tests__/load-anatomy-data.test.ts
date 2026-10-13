@@ -22,7 +22,7 @@ const PINNED_ANATOMY_STATE = {
   /** Changes when a source is CLEARED, or its route SETTLED, in the verdict or registry file. Every id here may ship assets. */
   buildableSourceIds: ['mni_icbm152_2009c_asym', 'allen_hra_3d_2020', 'cit168_rl', 'neudorfer_hypothalamus', 'eeg_positions'],
   /** Changes when GEOMETRY IS ADDED: crosswalk rows land, or the pipeline ships shapes no record maps to. */
-  structureCount: 125,
+  structureCount: 126,
   /** Changes when a region GAINS GEOMETRY (its no_geometry record is removed) or a new one is recorded as having none. */
   noGeometryRegionIds: ['cervical_cord', 'thoracic_cord', 'lumbar_cord', 'sacral_cord', 'cauda_equina', 'reticular_formation'],
   /** Changes when REGIONS ARE MAPPED: every region not listed above reads not_mapped until a row is drafted for it. */
@@ -30,7 +30,7 @@ const PINNED_ANATOMY_STATE = {
   /** Changes when TECHNIQUE LINKS ARE RE-DRAFTED: how many neural-band techniques hold links and how many stay at band level. */
   techniqueScopes: { regions: 48, band_level: 63, not_drafted: 0 },
   /** Changes when a LAYER GAINS ITS FIRST SHIPPED ASSET. Every other layer stays unavailable and says why. */
-  availableLayerIds: ['outline', 'cortical', 'deep'],
+  availableLayerIds: ['outline', 'cortical', 'deep', 'devices'],
 } as const;
 
 /**
@@ -77,6 +77,7 @@ function listReviewStates(anatomyIndex: AnatomyIndex): IndexReviewState[] {
     ...anatomyIndex.structures.flatMap((structure) => [structure.review_state, ...structure.owners.map((owner) => owner.review_state)]),
     ...anatomyIndex.techniques.flatMap((technique) => technique.links.map((link) => link.review_state)),
     ...anatomyIndex.devices.fiducials.map((fiducial) => fiducial.review_state),
+    ...anatomyIndex.devices.electrode_layouts.map((layout) => layout.review_state),
     ...anatomyIndex.devices.leads.map((lead) => lead.review_state),
   ];
 }

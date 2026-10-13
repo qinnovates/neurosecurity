@@ -20,6 +20,7 @@ from .sources import Registry
 from .volumes import UNRESOLVED_MAX_VOXELS, mask_facts, size_class
 
 MESHLESS_CLASSES = frozenset({"unresolved", "not_drawn"})
+TEMPLATE_FILE_OF_KIND = {"template_mask": "mask", "template_head": "t1"}
 
 
 @dataclass
@@ -78,6 +79,10 @@ def structures_for(cache_dir: pathlib.Path, registry: Registry, plan: dict[str, 
         label = plan["label"]
         path = source_file(cache_dir, source_id, registry.inputs["template"]["mask"])
         return structures.template_mask_structure(source_id, path, label), [structures.LabelName(label["id"], label["name"], "both")]
+    if kind == "template_head":
+        label = plan["label"]
+        path = source_file(cache_dir, source_id, registry.inputs["template"]["t1"])
+        return structures.template_head_structure(source_id, path, label), [structures.LabelName(label["id"], label["name"], "both")]
     if kind == "probability_maps":
         names = [structures.LabelName(row["id"], row["name"], "both") for row in plan["labels"]]
         return structures.probability_structures(source_id, source_file(cache_dir, source_id, plan["file"]), plan["labels"], plan["threshold"], int(plan.get("mesh_upsample", 1))), names
@@ -177,6 +182,6 @@ def build_asset(cache_dir: pathlib.Path, registry: Registry, plan: dict[str, Any
     copyright_text = source.get("attribution_text") or source["name"]
     extras = {"source_id": plan["source"], "license_id": verdict.get("treat_as") or source["license_id"], "template_space": registry.declared_space,
               "units": "mm", "axes": "RAS"}
-    used_files = [plan[key] for key in ("file", "names_file") if key in plan] or [registry.inputs["template"]["mask"]]
+    used_files = [plan[key] for key in ("file", "names_file") if key in plan] or [registry.inputs["template"][TEMPLATE_FILE_OF_KIND[plan["kind"]]]]
     headers = [header_facts(source_file(cache_dir, plan["source"], name)) for name in used_files if name.endswith((".nii", ".nii.gz"))]
     return BuiltAsset(plan, write_glb(glb_nodes, copyright_text, extras), nodes, labels, report, headers, meshes, masks)

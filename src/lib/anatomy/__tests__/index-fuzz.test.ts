@@ -18,7 +18,7 @@ const DEVICE_GEOMETRY = {
   fiducials: [{ id: 'nasion', position_mm: [0, 85, -40] }],
   leads: [{
     id: 'fixture_lead', name: 'Fixture lead', contacts: 4, contact_length_mm: 1.5, contact_spacing_mm: 0.5, spacing_measure: 'edge_to_edge', diameter_mm: 1.27,
-    sources: [{ citation: 'Fixture summary', url: 'https://example.org/ssed.pdf', quote: 'spaced 0.5 mm apart' }], drafted_by: 'ai',
+    sources: [{ citation: 'Fixture summary', url: 'https://example.org/ssed.pdf', quote: 'spaced 0.5 mm apart', kind: 'fda_document', supports: ['contacts', 'contact_length_mm', 'contact_spacing_mm', 'spacing_measure', 'diameter_mm'] }], drafted_by: 'ai',
   }],
 };
 

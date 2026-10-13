@@ -12,7 +12,7 @@ npm run atlas:build      # build every buildable asset, the manifest, label tabl
 npm run atlas:test       # the pipeline's own tests (pytest)
 ```
 
-`src/scripts/atlas-pipeline/atlas.sh <command>` is what those scripts call. Other commands: `evidence` (recompute `evidence/registration-evidence.json`), `buildability` (rewrite `registry/buildability.json`), `register <setting>` (compute the registration under one setting into the cache).
+`src/scripts/atlas-pipeline/atlas.sh <command>` is what those scripts call. Other commands: `devices` (landmarks and the electrode layout, see Devices below), `evidence` (recompute `evidence/registration-evidence.json`), `buildability` (rewrite `registry/buildability.json`), `register <setting>` (compute the registration under one setting into the cache).
 
 | Variable | Meaning | Default |
 |---|---|---|
@@ -58,6 +58,20 @@ Evidence is independent of what the registration optimises (`evidence/registrati
 Result on the committed evidence: V1 is better beyond the spread on both hemispheres, pooled; V2 is not distinguishable from the header-only placement. So the cortex asset carries `position_check: "checked in aggregate"` (shown for the cortex as a whole, not for each fold) and deep Allen shapes carry `"not independently checked"`, with the V2 check recorded as `not_distinguishable`. The deep shapes are warped all the same, so that one transform keeps them coherent with the adjacent gyri; against CIT168 they differ by the range the evidence file records (the 95th-percentile surface distance of each shared structure and side; 0.7 to 2.5 mm on the committed evidence). That range is computed from the evidence file into the modification note, never typed. A check that reads `fail` stops the build; none is exempt.
 
 Labels are resampled nearest-neighbour through the transform, not by argmax over one-hot maps.
+
+## Devices
+
+`atlas.sh devices` runs after a build. It does three things on the head surface asset (`scalp`, on the `devices` layer, made from the template's T1-weighted image):
+
+1. **Finds four landmarks by written rules** (`atlas_pipeline/fiducials.py`): the nasion as the deepest hollow between brow and nose on the front midline; the inion as the highest back midline point where the soft tissue over the skull reaches 1.5 times the scalp's thickness; each preauricular point as the centre of the hollow in front of the ear's ridge. These are placements on an average head, made by code. The average blurs skin landmarks and the skin does not show the inion. Nobody has checked them.
+2. **Places the 21 positions of the 10-20 layout** (`electrodes.py`, `scalp_arcs.py`) at shares of the measured length of arcs over the scalp, in the order the system defines: midline, ear to ear through Cz, the two half-circumferences, then the frontal and parietal arcs. The earlobe positions A1 and A2 are not placed: the average head has no usable earlobe.
+3. **Checks the layout on the shipped mesh with separate code** (`arc_checks.py`, `layout_checks.py`, standard library only): every position within 1 percent of its share of its arc, Cz at the middle of the ear-to-ear arc, left names on the left, mirror pairs as close as the head's own measured asymmetry allows, every point within 2 mm of the surface. A layout made at equal angles about each arc's centre fails these checks; the record lists how far each position would move.
+
+It writes `evidence/device-placement.json` (what each rule measured, the arcs, the checks on the shipped mesh, how far the positions move when the inion is put 5 mm higher or lower, and under `landmark_sensitivity` how far Oz moves when the inion is put 15 mm higher or lower and how far the near temporal position and Cz move when one ear point is moved 5 mm forward, back, up or down and set back on the skin) and the landmark and electrode rows of `datalake/qif-anatomy-device-geometry.json`. The layout is written with `shown_by_default: false`: it is drawable, with its unreviewed state, but off until a reader turns it on. Lead rows and sourced facts in that file are written by hand and are kept. Review sheets go to `review/devices/` in the cache: one per landmark on the template image, and one of the layout on the mesh from five sides.
+
+The landmark record in the data file also carries the head surface's sha256 and a **placement digest** over that hash, the method's parameters and every coordinate. A standard-library test recomputes it from the committed files, so a coordinate edited by hand fails in CI. A match shows the coordinates are the ones a pipeline run wrote for this head surface. The site's index does not recompute this digest: its `drawable` flag for a layout checks the head surface's sha256 only, and the layout's evidence row says so. It does not show that the rules find the right anatomy; each landmark row says in its `confidence_note` how far its rule can be trusted, and three of the four read "Weak".
+
+Nothing here says what brain tissue lies under an electrode. No nearest region is computed, and a lead has sizes and sources but no position.
 
 ## Size classes
 

@@ -56,9 +56,9 @@ export function digestTechniqueLink(techniqueId: string, link: TechniqueLink, re
   return sha256Hex(canonicalJson({ technique_id: techniqueId, link, resolution }));
 }
 
-export type DeviceRowKind = 'fiducial' | 'lead';
+export type DeviceRowKind = 'fiducial' | 'lead' | 'electrode_layout';
 
-/** The ledger key of a device geometry row: `fiducial:<id>` or `lead:<id>`. */
+/** The ledger key of a device geometry row: `fiducial:<id>`, `lead:<id>` or `electrode_layout:<id>`. */
 export function deviceRowKey(kind: DeviceRowKind, id: string): string {
   return `${kind}${KEY_SEPARATOR}${id}`;
 }
