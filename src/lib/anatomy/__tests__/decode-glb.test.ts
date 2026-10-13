@@ -127,14 +127,17 @@ describe('verifyAsset', () => {
     for (const asset of index.assets) {
       for (const node of decodeGlb(readAsset(asset.path))) expect(signedVolumeTimesSix(node), `${asset.id} ${node.labelId} ${node.hemisphere}`).toBeGreaterThan(0);
     }
-    const lastAsset = index.assets[index.assets.length - 1];
-    const decoded = decodeGlb(readAsset(lastAsset.path));
-    const wanted = listExpectedNodes(index, lastAsset.id);
-    expect(decoded.length).toBeGreaterThan(1);
-    expect(compareWithIndex(decoded, wanted)).toMatchObject({ ok: true });
     const reverseCorners = (indices: Uint32Array): Uint32Array => Uint32Array.from(indices, (_value, at) => indices[at - (at % 3) + 2 - (at % 3)]);
-    const oneReversed = decoded.map((node, at) => (at === decoded.length - 1 ? { ...node, indices: reverseCorners(node.indices) } : node));
-    expect(compareWithIndex(oneReversed, wanted)).toMatchObject({ ok: false, refusal: 'contents_differ', detail: expect.stringContaining('wound inward') });
+    // Every file, whether it holds many shapes or one (the head surface holds one).
+    for (const asset of index.assets) {
+      const decoded = decodeGlb(readAsset(asset.path));
+      const wanted = listExpectedNodes(index, asset.id);
+      expect(decoded.length, asset.id).toBeGreaterThanOrEqual(1);
+      expect(compareWithIndex(decoded, wanted), asset.id).toMatchObject({ ok: true });
+      const oneReversed = decoded.map((node, at) => (at === decoded.length - 1 ? { ...node, indices: reverseCorners(node.indices) } : node));
+      expect(compareWithIndex(oneReversed, wanted), asset.id).toMatchObject({ ok: false, refusal: 'contents_differ', detail: expect.stringContaining('wound inward') });
+    }
+    expect(index.assets.some((asset) => decodeGlb(readAsset(asset.path)).length > 1)).toBe(true);
   });
 
   it('expects no mesh for a marker-only structure', () => {

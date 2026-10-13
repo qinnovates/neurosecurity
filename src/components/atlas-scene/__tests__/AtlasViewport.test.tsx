@@ -20,6 +20,8 @@ vi.setConfig({ testTimeout: TEST_TIMEOUT_MS });
 
 const model = loadRealModel();
 const ASSET_ROOT = 'src/site/atlas-assets';
+/** The geometry files the view fetches when opened with the layers that are on at the start. */
+const DEFAULT_FILE_COUNT = 5;
 const assetUrl = (assetPath: string): string => `/atlas-assets/${assetPath}`;
 const realBytes = new Map(model.index.assets.map((asset) => [assetUrl(asset.path), new Uint8Array(fs.readFileSync(path.join(ASSET_ROOT, asset.path)))]));
 const assetOf = (layer: string) => model.index.assets.find((asset) => asset.layer === layer) ?? model.index.assets[0];
@@ -125,8 +127,11 @@ describe('AtlasViewport: the gate', () => {
 describe('AtlasViewport: open', () => {
   it('fetches each file once, draws only checked shapes, and describes the picture in words', async () => {
     const container = await openViewport();
-    expect(fetchLog.sort()).toEqual([...realBytes.keys()].sort());
-    expect([...container.querySelectorAll('[data-asset-status]')].map((item) => item.getAttribute('data-asset-status'))).toEqual(model.index.assets.map(() => 'ready'));
+    // The head surface belongs to the devices layer, which is off until asked for: its file is not fetched.
+    const defaultAssets = model.index.assets.filter((asset) => asset.layer !== 'devices');
+    expect(defaultAssets).toHaveLength(DEFAULT_FILE_COUNT);
+    expect(fetchLog.sort()).toEqual(defaultAssets.map((asset) => assetUrl(asset.path)).sort());
+    expect([...container.querySelectorAll('[data-asset-status]')].map((item) => item.getAttribute('data-asset-status'))).toEqual(defaultAssets.map(() => 'ready'));
     expect(canvasProps?.shapes.length).toBeGreaterThan(150);
     expect(canvasProps?.shapes.every((shape) => shape.sizeMark === 'ring_only' || canvasProps?.nodesByShapeId.has(shape.id))).toBe(true);
     expect(screen.getByRole('img').getAttribute('aria-label')).toMatch(/^3D picture of an average brain outline with \d+ atlas shapes drawn inside it\. Band lens\. View: from behind and above\. Every fact it shows is in the region list\.$/);

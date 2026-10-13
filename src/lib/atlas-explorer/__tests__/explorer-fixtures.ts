@@ -62,7 +62,7 @@ export function buildFixtureIndex(overrides: Partial<AnatomyIndex> = {}): Anatom
       buildTechnique(FIXTURE_IDS.notDraftedTechnique, { name: 'Fixture undrafted', band_ids: ['N7'], scope: 'not_drafted' }),
       buildTechnique(FIXTURE_IDS.secondLinkedTechnique, { name: 'Fixture entrainment', band_ids: ['N7'], niss_severity: 'high', dsm_cluster: 'cognitive_psychotic', links: [buildIndexLink('pfc', true)] }),
     ],
-    devices: { fiducial_space: null, fiducials: [], leads: [], stated_targets: [{ device_id: FIXTURE_IDS.device, region_ids: ['m1'] }] },
+    devices: { fiducial_space: null, fiducial_method: null, fiducials: [], electrode_layouts: [], leads: [], facts: [], stated_targets: [{ device_id: FIXTURE_IDS.device, region_ids: ['m1'] }] },
     ...overrides,
   }))));
 }
