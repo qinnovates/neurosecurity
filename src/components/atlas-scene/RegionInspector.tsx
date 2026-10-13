@@ -25,7 +25,7 @@ interface Props {
 function Devices({ detail, onChooseDevice }: { detail: RegionDetail; onChooseDevice: (deviceId: string) => void }) {
   return (
     <section className="atlas-section" aria-labelledby="atlas-inspector-devices">
-      <h3 className="atlas-subheading" id="atlas-inspector-devices">Devices that state it as a target</h3>
+      <h3 className="atlas-subheading" id="atlas-inspector-devices">Devices whose QIF record lists this region</h3>
       {detail.deviceIds.length === 0 ? <LimitNote limit={limitSentence('stated_devices_none')} /> : (
         <>
           <ul className="atlas-chips">

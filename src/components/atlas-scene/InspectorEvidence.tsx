@@ -29,11 +29,13 @@ function Statement({ statement }: { statement: EvidenceStatement }) {
       <p className="atlas-filed" data-anatomy-line="true">{statement.filedUnderLine} <ReviewMark state={UNREVIEWED_MARK} /></p>
       {statement.anatomyLimits.map((limit) => <LimitNote key={limit.id} limit={limit} />)}
       {statement.contestedLimit !== null && <><p className="atlas-flag">Contested</p><LimitNote limit={statement.contestedLimit} /></>}
+      {statement.rivalLimit !== null && <LimitNote limit={statement.rivalLimit} />}
+      <LimitNote limit={statement.checkLimit} />
       <p className="atlas-fact">{statement.claim}</p>
       <blockquote className="atlas-quote"><p>&ldquo;{statement.quote}&rdquo;</p></blockquote>
       <Citation view={statement.citation} />
-      <p className="atlas-row-why">
-        {statement.studyDesign}{statement.sampleSize !== null && `; ${statement.sampleSize} people`}. Only the abstract was read.
+      <p className="atlas-row-why" data-kind="true">
+        {statement.kindLabel}. {statement.studyDesign}{statement.sampleSize !== null && `; ${statement.sampleSize} people`}. Only the abstract was read.
       </p>
       <p className="atlas-scope"><strong>Scope.</strong> {statement.scopeNote}</p>
       {statement.notices.map((notice) => <p key={notice} className="atlas-row-why">{notice}</p>)}

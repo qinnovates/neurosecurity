@@ -66,18 +66,19 @@ function Stage({ stage, isActive, chosenTechniqueId, onToggleStage, onChooseTech
 
 /**
  * The device side of the hourglass: four stages, application first, each with
- * the techniques the catalog tags to it. These act on the device, so they sit
- * here and light no region. Opening a stage shows its techniques; the order of
+ * the techniques the catalog tags to it. Techniques tagged with device stages
+ * alone have no drafted region link, so they sit here; that says what the tags
+ * are, not what a technique could affect. Opening a stage shows its techniques; the order of
  * the stages is the catalog's band order and says nothing about a signal.
  */
 export default function SignalChainRail({ rail, includesMixed, activeStageId, chosenTechniqueId, onToggleStage, onToggleMixed, onChooseTechnique }: Props) {
   return (
     <section className="atlas-panel atlas-rail" aria-labelledby="atlas-rail-heading">
       <h2 className="atlas-heading" id="atlas-rail-heading">Device stages</h2>
-      <p className="atlas-fact">
-        {rail.deviceOnlyCount} techniques carry no brain band and belong to the device alone. The stage tags are the catalog&rsquo;s own.
-      </p>
+      <p className="atlas-fact">{rail.deviceOnlyCount} techniques carry no brain band.</p>
       <LimitNote limit={limitSentence('device_stages')} />
+      <LimitNote limit={limitSentence('stage_tags')} />
+      <LimitNote limit={limitSentence('band_order')} />
       <button type="button" className="atlas-toggle" aria-pressed={includesMixed} onClick={onToggleMixed}>
         <span className="atlas-toggle-box" aria-hidden="true" />
         Also list the {rail.mixedCount} techniques that carry a brain band too

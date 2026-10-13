@@ -31,8 +31,8 @@ function Holdings({ model }: Props) {
         {model.regions.length} regions: {GEOMETRY_STATES.filter((state) => countRegions(model, state) > 0).map((state) => `${countRegions(model, state)} ${GEOMETRY_LABELS[state]}`).join(', ')}.
       </li>
       <li className="atlas-fact">
-        {techniques.length} techniques carry a brain band: {linkedCount} linked to at least one region, {countScope('regions') - linkedCount} whose text names
-        structures but where no link is counted, {countScope('band_level')} tagged to a band only, {countScope('not_drafted')} with no links drafted.
+        {techniques.length} techniques carry a brain band: {linkedCount} linked to at least one region, {countScope('regions') - linkedCount} name a structure in
+        their text, but none of those names counts as a link (each technique shows why), {countScope('band_level')} tagged to a band only, {countScope('not_drafted')} with no links drafted.
       </li>
       <li className="atlas-fact">{model.deviceOnlyTechniquesById.size} techniques carry no brain band and sit on the device stages.</li>
     </ul>

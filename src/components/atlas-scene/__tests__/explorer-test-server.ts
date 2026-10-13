@@ -6,10 +6,7 @@
 
 import { vi } from 'vitest';
 import { ANATOMY_EVIDENCE_PATH, ANATOMY_INDEX_PATH } from '@/lib/anatomy/anatomy-index-types';
-import { H01_CARD_PATH } from '@/lib/anatomy/parse-h01-card';
-import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
-import { EXPLORER_CATALOG_PATH } from '@/lib/atlas-explorer/explorer-catalog';
-import { loadAnatomyBundle, loadExplorerCatalog, loadH01Card, loadRegionEvidence } from '../load-anatomy-data';
+import { loadAnatomyBundle } from '../load-anatomy-data';
 
 const NOT_FOUND = 404;
 
@@ -18,13 +15,7 @@ export type ServedFile = string | { status: number };
 
 export function buildServedFiles(): Record<string, ServedFile> {
   const bundle = loadAnatomyBundle();
-  return {
-    [ANATOMY_INDEX_PATH]: bundle.indexJson,
-    [ANATOMY_EVIDENCE_PATH]: bundle.evidenceJson,
-    [EXPLORER_CATALOG_PATH]: JSON.stringify(loadExplorerCatalog()),
-    [REGION_EVIDENCE_PATH]: JSON.stringify(loadRegionEvidence()),
-    [H01_CARD_PATH]: JSON.stringify(loadH01Card()),
-  };
+  return { [ANATOMY_INDEX_PATH]: bundle.indexJson, [ANATOMY_EVIDENCE_PATH]: bundle.evidenceJson, ...bundle.companionJsonByPath };
 }
 
 /** Replaces `fetch` with one that serves `files`. Returns the mock, so a test can read which paths were asked for. */

@@ -21,11 +21,12 @@ import regionEvidence from '@shared/qif-anatomy-region-evidence.json';
 import h01Card from '@shared/qif-anatomy-h01-card.json';
 import { parseAnatomyFiles, type AnatomyData } from '@/lib/anatomy/anatomy-inputs';
 import { buildAnatomyBundle, type AnatomyBundle } from '@/lib/anatomy/build-anatomy-index';
-import { parseH01Card, type H01Card } from '@/lib/anatomy/parse-h01-card';
+import { AnatomyDataError } from '@/lib/anatomy/errors';
+import { H01_CARD_PATH, parseH01Card } from '@/lib/anatomy/parse-h01-card';
 import { parseRegionEvidence } from '@/lib/anatomy/parse-region-evidence';
-import type { RegionEvidence } from '@/lib/anatomy/region-evidence-types';
+import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
 import { assertLedgerRatchet } from '@/lib/anatomy/review-state';
-import { buildExplorerCatalog, type ExplorerCatalog } from '@/lib/atlas-explorer/explorer-catalog';
+import { EXPLORER_CATALOG_PATH, buildExplorerCatalog } from '@/lib/atlas-explorer/explorer-catalog';
 import { buildEngineData } from '@/lib/threat-model/build-engine-data';
 
 const ROOT_PREFIX = '/';
@@ -64,25 +65,24 @@ export function loadAnatomyData(): AnatomyData {
   return data;
 }
 
+/** The index, its evidence file and the three files the explorer reads beside them, each pinned by the index. */
 export function loadAnatomyBundle(): AnatomyBundle {
-  return buildAnatomyBundle(loadAnatomyData());
+  const data = loadAnatomyData();
+  const regionIds = new Set(data.engineData.regions.map((region) => region.id));
+  return buildAnatomyBundle(data, [
+    { path: EXPLORER_CATALOG_PATH, json: JSON.stringify(buildExplorerCatalog(data.engineData, atlas)) },
+    { path: REGION_EVIDENCE_PATH, json: JSON.stringify(parseRegionEvidence(regionEvidence, regionIds)) },
+    { path: H01_CARD_PATH, json: JSON.stringify(parseH01Card(h01Card)) },
+  ]);
 }
 
-function loadEngineData(): ReturnType<typeof buildEngineData>['engineData'] {
-  return buildEngineData({ registrar, atlas, cveMapping, securityControls }).engineData;
-}
-
-/** The literature statements filed under each region, parsed. Throws AnatomyDataError on the first problem. */
-export function loadRegionEvidence(): RegionEvidence {
-  return parseRegionEvidence(regionEvidence, new Set(loadEngineData().regions.map((region) => region.id)));
-}
-
-/** The H01 card and the sourced facts behind it, parsed. Throws AnatomyDataError on the first problem. */
-export function loadH01Card(): H01Card {
-  return parseH01Card(h01Card);
-}
-
-/** Band names, region descriptions and device-stage techniques for the explorer. Throws AnatomyDataError on the first problem. */
-export function loadExplorerCatalog(): ExplorerCatalog {
-  return buildExplorerCatalog(loadEngineData(), atlas);
+/**
+ * The exact bytes of a file served beside the index, as the index pins them.
+ *
+ * @throws AnatomyDataError when the bundle holds no file for the path
+ */
+export function loadCompanionJson(path: string): string {
+  const json = loadAnatomyBundle().companionJsonByPath[path];
+  if (json === undefined) throw new AnatomyDataError(path, '(top level)', 'the anatomy bundle holds no such file', 'Add it to the companions in loadAnatomyBundle.');
+  return json;
 }

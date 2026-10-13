@@ -1,17 +1,16 @@
 import { describe, expect, it } from 'vitest';
 import atlas from '@shared/qif-brain-bci-atlas.json';
-import { loadExplorerCatalog } from '@/components/atlas-scene/load-anatomy-data';
 import { AnatomyDataError } from '@/lib/anatomy/errors';
 import { announceLens, announceSelection } from '../announcements';
 import { buildExplorerCatalog, parseExplorerCatalog } from '../explorer-catalog';
 import { buildBandGroups, tallyLens } from '../region-rows';
-import { FIXTURE_IDS, buildFixtureModel } from './explorer-fixtures';
+import { FIXTURE_IDS, buildFixtureModel, loadRealCatalog } from './explorer-fixtures';
 
 const ENGINE_DATA = { registrarVersion: '1', techniques: [], regions: [], precedentCves: [], precedentCvesAsOf: '2026-01-01', controlsByBand: {} };
 
 describe('explorer catalog', () => {
   it('copies band names and region descriptions from the atlas file, and lists every technique with a device band (guard)', () => {
-    const catalog = loadExplorerCatalog();
+    const catalog = loadRealCatalog();
     expect(catalog.bands.map((band) => band.id).sort()).toEqual(['I0', 'N1', 'N2', 'N3', 'N4', 'N5', 'N6', 'N7', 'S1', 'S2', 'S3']);
     expect(catalog.regions).toHaveLength(38);
     expect(catalog.regions[0].function).toBe(atlas.brain_regions[0].function);
@@ -25,8 +24,8 @@ describe('explorer catalog', () => {
   });
 
   it('refuses a fetched catalog that is not the catalog', () => {
-    const served = JSON.parse(JSON.stringify(loadExplorerCatalog())) as Record<string, unknown>;
-    expect(parseExplorerCatalog(served)).toEqual(loadExplorerCatalog());
+    const served = JSON.parse(JSON.stringify(loadRealCatalog())) as Record<string, unknown>;
+    expect(parseExplorerCatalog(served)).toEqual(loadRealCatalog());
     expect(() => parseExplorerCatalog({ ...served, extra: 1 })).toThrow(/unexpected key "extra"/);
     expect(() => parseExplorerCatalog({ ...served, schema_version: 2 })).toThrow(/schema_version/);
     expect(() => parseExplorerCatalog({ ...served, bands: [{ id: 'N9', name: 'x', description: 'y' }] })).toThrow(/bands\[0\]\.id/);

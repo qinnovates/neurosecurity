@@ -32,6 +32,8 @@ export function announceLens(model: ExplorerModel, lens: Lens, tally: LensTally)
   const label = `${LENS_LABELS[lens.kind]} lens${describeSubject(model, lens)}.`;
   if (lens.kind !== 'band' && lens.kind !== 'niss' && lensSubjectId(lens) === null) return `${label} Choose a subject to see regions.`;
   if (lens.kind === 'band') return `${label} ${plural(tally.withValue, 'region', 'regions')} grouped by band.`;
+  // A device's regions come from QIF's atlas file, not from drafted links, so no count of drafted links is given.
+  if (lens.kind === 'stated_targets') return `${label} ${plural(tally.withValue, 'region', 'regions')} listed in the device's QIF record, ${tally.noData} not listed.`;
   const parts = [
     `${plural(tally.withValue, 'region', 'regions')} with a value`,
     `${tally.drafted} AI-drafted`,

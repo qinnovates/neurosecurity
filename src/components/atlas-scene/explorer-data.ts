@@ -4,7 +4,7 @@
  * that needs them. Nothing is used before its parser has accepted it.
  */
 
-import { ANATOMY_INDEX_PATH } from '@/lib/anatomy/anatomy-index-types';
+import { ANATOMY_INDEX_PATH, type AnatomyIndex, type PinnedFile } from '@/lib/anatomy/anatomy-index-types';
 import { AnatomyDataError } from '@/lib/anatomy/errors';
 import { parseAnatomyEvidence, type ShownAnatomyEvidence } from '@/lib/anatomy/parse-anatomy-evidence';
 import { parseAnatomyIndex } from '@/lib/anatomy/parse-anatomy-index';
@@ -15,8 +15,11 @@ import { EXPLORER_CATALOG_PATH, parseExplorerCatalog } from '@/lib/atlas-explore
 import { createExplorerModel, type ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { AtlasFetchError, fetchAtlasJson, fetchPinnedJson } from './fetch-atlas-json';
 
-/** `unavailable`: the file could not be fetched. `invalid`: it arrived and failed its checks, so none of it is shown. */
-export type LoadFailureKind = 'unavailable' | 'invalid';
+/**
+ * `unavailable`: the file could not be fetched. `invalid`: it arrived and failed its checks, so none of it is shown.
+ * `out_of_step`: it is not the file the index pins, so the page's data files do not come from one build.
+ */
+export type LoadFailureKind = 'unavailable' | 'invalid' | 'out_of_step';
 
 export interface LoadFailure {
   kind: LoadFailureKind;
@@ -44,7 +47,7 @@ export function isAbort(error: unknown): boolean {
  */
 export function toLoadFailure(error: unknown, file: string): LoadFailure {
   if (error instanceof AnatomyDataError) return { kind: 'invalid', file: error.dataFile, detail: error.message };
-  if (error instanceof AtlasFetchError) return { kind: 'unavailable', file: error.path, detail: error.message };
+  if (error instanceof AtlasFetchError) return { kind: error.failure === 'pin_mismatch' ? 'out_of_step' : 'unavailable', file: error.path, detail: error.message };
   return { kind: 'unavailable', file, detail: error instanceof Error ? error.message : String(error) };
 }
 
@@ -65,9 +68,18 @@ function requireListableRegions(model: ExplorerModel): ExplorerModel {
   return model;
 }
 
+/** The pin the index holds for a file served beside it. An index without one cannot vouch for that file, so it is refused. */
+function companionPin(index: AnatomyIndex, path: string): PinnedFile {
+  const pin = index.companions.find((companion) => companion.path === path);
+  if (pin === undefined) throw new AnatomyDataError(ANATOMY_INDEX_PATH, 'companions', `the index does not pin ${path}`, 'Rebuild the site so the index and its companion files come from one build.');
+  return pin;
+}
+
+/** The index first; then the catalog, which must be the exact file that index pins. */
 export async function loadExplorerModel(signal: AbortSignal): Promise<ExplorerModel> {
-  const [rawIndex, rawCatalog] = await Promise.all([fetchAtlasJson(ANATOMY_INDEX_PATH, signal), fetchAtlasJson(EXPLORER_CATALOG_PATH, signal)]);
-  return requireListableRegions(createExplorerModel(parseAnatomyIndex(rawIndex), parseExplorerCatalog(rawCatalog)));
+  const index = parseAnatomyIndex(await fetchAtlasJson(ANATOMY_INDEX_PATH, signal));
+  const rawCatalog = await fetchPinnedJson(companionPin(index, EXPLORER_CATALOG_PATH), signal);
+  return requireListableRegions(createExplorerModel(index, parseExplorerCatalog(rawCatalog)));
 }
 
 /** The quotes and rationales behind the index's drafted rows, checked against the index's own pin. */
@@ -76,9 +88,9 @@ export async function loadAnatomyEvidence(model: ExplorerModel, signal: AbortSig
 }
 
 export async function loadRegionEvidence(model: ExplorerModel, signal: AbortSignal): Promise<RegionEvidence> {
-  return parseRegionEvidence(await fetchAtlasJson(REGION_EVIDENCE_PATH, signal), new Set(model.regions.map((region) => region.id)));
+  return parseRegionEvidence(await fetchPinnedJson(companionPin(model.index, REGION_EVIDENCE_PATH), signal), new Set(model.regions.map((region) => region.id)));
 }
 
-export async function loadH01Card(signal: AbortSignal): Promise<H01Card> {
-  return parseH01Card(await fetchAtlasJson(H01_CARD_PATH, signal));
+export async function loadH01Card(model: ExplorerModel, signal: AbortSignal): Promise<H01Card> {
+  return parseH01Card(await fetchPinnedJson(companionPin(model.index, H01_CARD_PATH), signal));
 }

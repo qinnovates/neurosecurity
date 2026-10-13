@@ -4,16 +4,20 @@
  * model has to tell apart; its atlas and label ids are invented.
  */
 
-import { loadAnatomyBundle, loadExplorerCatalog } from '@/components/atlas-scene/load-anatomy-data';
+import { loadAnatomyBundle, loadCompanionJson } from '@/components/atlas-scene/load-anatomy-data';
 import type { AnatomyIndex, IndexSubject } from '@/lib/anatomy/anatomy-index-types';
 import { parseAnatomyIndex } from '@/lib/anatomy/parse-anatomy-index';
 import { buildIndex, buildIndexLink, buildOwner, buildStructure, buildSubject, buildTechnique } from '@/lib/anatomy/__tests__/index-fixtures';
 import { BAND_ORDER } from '@/lib/threat-model/catalog-types';
-import type { ExplorerCatalog } from '../explorer-catalog';
+import { EXPLORER_CATALOG_PATH, parseExplorerCatalog, type ExplorerCatalog } from '../explorer-catalog';
 import { createExplorerModel, type ExplorerModel } from '../explorer-model';
 
+export function loadRealCatalog(): ExplorerCatalog {
+  return parseExplorerCatalog(JSON.parse(loadCompanionJson(EXPLORER_CATALOG_PATH)));
+}
+
 export function loadRealModel(): ExplorerModel {
-  return createExplorerModel(loadAnatomyBundle().index, loadExplorerCatalog());
+  return createExplorerModel(loadAnatomyBundle().index, loadRealCatalog());
 }
 
 export const FIXTURE_IDS = {

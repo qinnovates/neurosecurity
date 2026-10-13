@@ -7,7 +7,7 @@
 
 import { limitSentence, type LimitSentence } from '@/lib/anatomy/limits-copy';
 import { doiAddress, pubmedAddress } from '@/lib/anatomy/literature-readers';
-import { isAboutRegionItself, type PubmedNotice, type RegionEvidence, type RegionEvidenceRow } from '@/lib/anatomy/region-evidence-types';
+import { isAboutRegionItself, type EvidenceKind, type PubmedNotice, type RegionEvidence, type RegionEvidenceRow } from '@/lib/anatomy/region-evidence-types';
 import { limitsForEvidenceAnatomy } from './limit-selection';
 
 export interface CitationView {
@@ -31,6 +31,12 @@ export interface EvidenceStatement {
   anatomyLimits: LimitSentence[];
   /** False when the paper is about a part, a larger structure, somewhere else, or the link is the drafter's reading. */
   isAboutRegionItself: boolean;
+  /** What the second AI's check of this statement came to, in a sentence. */
+  checkLimit: LimitSentence;
+  /** Set when the statement is filed as arguing against another one here. */
+  rivalLimit: LimitSentence | null;
+  /** The kind of finding, in plain words. */
+  kindLabel: string;
   claim: string;
   quote: string;
   citation: CitationView;
@@ -54,6 +60,12 @@ const PUBMED_NOTICE_WORDS: Readonly<Record<PubmedNotice, string>> = {
   CommentIn: 'PubMed lists a published comment on this paper.',
   ErratumIn: 'PubMed lists a published correction to this paper.',
 };
+export const EVIDENCE_KIND_LABELS: Readonly<Record<EvidenceKind, string>> = {
+  function_association: 'Finding from measuring activity',
+  lesion_association: 'Finding from damage to the brain (a lesion study)',
+  postmortem_association: 'Finding from examining tissue after death',
+  stimulation_association: 'Finding from stimulating the brain',
+};
 const CROSSREF_NOTICE_WORDS = 'Crossref lists a published correction to this paper; it was not read.';
 const NO_REASON_RECORDED = 'none is recorded.';
 
@@ -73,6 +85,9 @@ export function toEvidenceStatement(row: RegionEvidenceRow, regionName: string, 
     filedUnderLine: `Filed under ${regionName}; the paper says "${row.anatomy_as_stated}".`,
     anatomyLimits: limitsForEvidenceAnatomy(row),
     isAboutRegionItself: isAboutRegionItself(row),
+    checkLimit: limitSentence(`evidence_check_${row.verifier_verdict}`),
+    rivalLimit: row.rival_view_row ? limitSentence('evidence_rival_view') : null,
+    kindLabel: EVIDENCE_KIND_LABELS[row.kind],
     claim: row.claim,
     quote: row.quote,
     citation: toCitation(row),

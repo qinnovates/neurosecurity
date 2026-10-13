@@ -93,6 +93,7 @@ export const ANATOMY_INDEX_SHAPE: Shape = shapes.record({
   addressing_version: shapes.integer(1),
   template_space: id,
   evidence: shapes.record(pinFields),
+  companions: shapes.list(shapes.record(pinFields)),
   layers: shapes.list(layer),
   sources: shapes.list(source),
   assets: shapes.list(asset),

@@ -29,7 +29,7 @@ export interface ExplorerModel {
   networks: IndexSubject[];
   structuresByKey: ReadonlyMap<string, IndexStructure>;
   techniquesById: ReadonlyMap<string, IndexTechnique>;
-  /** Techniques with no neural band: they act on the device and are in no region's links. */
+  /** Techniques the catalog tags with device stages only and no brain band. Decided from their own tags, never from a file's silence. */
   deviceOnlyTechniquesById: ReadonlyMap<string, DeviceStageTechnique>;
   descriptionsByRegion: ReadonlyMap<string, string>;
   /** Every drafted link that resolves to the region, lit or not. */
@@ -55,7 +55,6 @@ function groupLinksByRegion(techniques: readonly IndexTechnique[]): Map<string, 
 export function createExplorerModel(index: AnatomyIndex, catalog: ExplorerCatalog): ExplorerModel {
   const bandsById = new Map(catalog.bands.map((band) => [band.id, band]));
   const regions = index.subjects.filter((subject) => subject.kind === 'region');
-  const neuralTechniqueIds = new Set(index.techniques.map((technique) => technique.id));
   return {
     index,
     catalog,
@@ -66,7 +65,7 @@ export function createExplorerModel(index: AnatomyIndex, catalog: ExplorerCatalo
     networks: index.subjects.filter((subject) => subject.kind === 'network'),
     structuresByKey: new Map(index.structures.map((structure) => [structure.key, structure])),
     techniquesById: new Map(index.techniques.map((technique) => [technique.id, technique])),
-    deviceOnlyTechniquesById: new Map(catalog.device_stage_techniques.filter((technique) => !neuralTechniqueIds.has(technique.id)).map((technique) => [technique.id, technique])),
+    deviceOnlyTechniquesById: new Map(catalog.device_stage_techniques.filter((technique) => !technique.band_ids.some(isNeuralBand)).map((technique) => [technique.id, technique])),
     descriptionsByRegion: new Map(catalog.regions.map((region) => [region.id, region.function])),
     linksByRegion: groupLinksByRegion(index.techniques),
     styleStructure: createStructureStyler(index),

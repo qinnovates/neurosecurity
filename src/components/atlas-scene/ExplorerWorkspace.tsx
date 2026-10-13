@@ -97,7 +97,7 @@ export default function ExplorerWorkspace({ model }: Props) {
       />
       <div className="atlas-footer-panels">
         <NetworkNames networks={model.networks} />
-        <H01Card />
+        <H01Card model={model} />
         <LimitsPanel model={model} />
       </div>
       <p className="sr-only" role="status" aria-live="polite" data-announce="selection">{selectionAnnouncement}</p>
