@@ -1,11 +1,15 @@
-import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { ANATOMY_EVIDENCE_PATH } from '@/lib/anatomy/anatomy-index-types';
 import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
 import { announceLens, announceSelection } from '@/lib/atlas-explorer/announcements';
+import { stageStepNumbers } from '@/lib/atlas-explorer/chain-steps';
+import { isDevicesLayerShown, layersAtStart } from '@/lib/atlas-explorer/device-drawing';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { LENS_LABELS, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE, explorerReducer } from './atlas-state';
 import AtlasViewport from './AtlasViewport';
+import ChainView from './ChainView';
+import DeviceGeometry from './DeviceGeometry';
 import { loadAnatomyEvidence, loadRegionEvidence } from './explorer-data';
 import H01Card from './H01Card';
 import LayerPanel from './LayerPanel';
@@ -15,13 +19,17 @@ import NetworkNames from './NetworkNames';
 import RegionInspector from './RegionInspector';
 import SignalChainRail from './SignalChainRail';
 import StructureList from './StructureList';
+import { useChainView } from './use-chain-view';
 import { useExplorerViews } from './use-explorer-views';
 import { useLoaded } from './use-loaded';
+import { readPrefersLessMotion } from './viewport-gate';
 
 interface Props {
   model: ExplorerModel;
   /** Whether the index was checked against the digest the page was built with. The 3D view draws only then. */
   isIndexPinned: boolean;
+  /** The page is pinned to an index the site no longer serves. */
+  isOutOfStep?: boolean;
 }
 
 const TECHNIQUE_LENS = 'technique';
@@ -50,8 +58,15 @@ function useAnnouncement(message: string): string {
  * notes on limits. Tab order follows that reading order. One reducer holds the state, and the
  * selection survives every lens, layer and filter change.
  */
-export default function ExplorerWorkspace({ model, isIndexPinned }: Props) {
-  const [state, dispatch] = useReducer(explorerReducer, INITIAL_EXPLORER_STATE);
+export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = false }: Props) {
+  // The layers that start on follow the data: the electrode layout is off unless the index says it is shown by default.
+  const [state, dispatch] = useReducer(explorerReducer, model.index, (index) => ({ ...INITIAL_EXPLORER_STATE, layers: layersAtStart(index, INITIAL_EXPLORER_STATE.layers) }));
+  const [electrodeId, setElectrodeId] = useState<string | null>(null);
+  const chainView = useChainView(model, useMemo(() => readPrefersLessMotion(), []));
+  const stepNumbersByStage = useMemo(() => stageStepNumbers(chainView.frame), [chainView.frame]);
+  // Stepping through a threat model puts the technique lens on the step's technique, so the list shows the same marks as the picture.
+  const stepTechniqueId = chainView.frame === null || chainView.frame.isWhole ? null : chainView.frame.steps[0]?.techniqueId ?? null;
+  useEffect(() => { if (stepTechniqueId !== null) dispatch({ type: 'lens_subject_chosen', kind: TECHNIQUE_LENS, subjectId: stepTechniqueId }); }, [stepTechniqueId, chainView.frame?.chainId]);
   const inspectorHeadingRef = useRef<HTMLHeadingElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
   const selectedRegionId = state.selection?.kind === 'region' ? state.selection.id : null;
@@ -92,9 +107,10 @@ export default function ExplorerWorkspace({ model, isIndexPinned }: Props) {
   return (
     <div className="atlas-root" data-lens={state.lens.kind}>
       <AtlasViewport
-        model={model} lens={state.lens} layers={state.layers} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned}
-        onSelectRegion={(regionId) => selectRegion(regionId, false)}
+        model={model} lens={state.lens} layers={state.layers} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep}
+        chain={chainView.frame} electrodeId={electrodeId} onPickElectrode={setElectrodeId} onSelectRegion={(regionId) => selectRegion(regionId, false)}
       />
+      {isDevicesLayerShown(model.index, state.layers) && <DeviceGeometry index={model.index} electrodeId={electrodeId} onPickElectrode={setElectrodeId} />}
       <div className="atlas-main" ref={mainRef}>
         <div className="atlas-main-list">
           <LensPanel
@@ -114,8 +130,9 @@ export default function ExplorerWorkspace({ model, isIndexPinned }: Props) {
         />
       </div>
       <LayerPanel layers={model.index.layers} sources={model.index.sources} requested={state.layers} onToggle={(layerId) => dispatch({ type: 'layer_toggled', layerId })} />
+      <ChainView model={model} view={chainView} />
       <SignalChainRail
-        rail={rail} includesMixed={state.railIncludesMixed} activeStageId={state.railStageId}
+        rail={rail} includesMixed={state.railIncludesMixed} activeStageId={state.railStageId} stepNumbersByStage={stepNumbersByStage}
         chosenTechniqueId={state.lens.kind === 'technique' ? state.lens.techniqueId : null}
         onToggleStage={(stageId) => dispatch({ type: 'rail_stage_toggled', stageId })} onToggleMixed={() => dispatch({ type: 'rail_mixed_toggled' })}
         onChooseTechnique={(techniqueId) => chooseSubject(TECHNIQUE_LENS, techniqueId)}

@@ -18,6 +18,8 @@ export const SELECTION_COLOUR = '#ff9f1c';
 /** Pale shapes are darker and denser than context shapes, so "somewhere inside this shape" is legible across the whole brain. */
 export const INSIDE_COLOUR = '#5b6170';
 const OUTLINE_LAYER = 'outline';
+/** The head surface the electrode layout sits on. Context, like the brain outline, and fainter. */
+const DEVICES_LAYER = 'devices';
 
 export interface MaterialParams {
   /** `lit`: shaded by the scene's lights. `flat`: one colour, unshaded. */
@@ -35,11 +37,15 @@ export interface MaterialParams {
 export const DRAW_ORDER = { fill: 0, seeThrough: 1, brainOutline: 2, mark: 3 } as const;
 export const FILL_OPACITY: Readonly<Record<FillKind, number>> = { solid: 1, translucent: 0.4, lines: 0.2, neutral: 0.14 };
 export const BRAIN_OUTLINE_OPACITY = 0.1;
+export const HEAD_SURFACE_OPACITY = 0.07;
 
 /** @param isCut with a cut open, a filled shape shows its own inside in its own colour, not what lies behind it */
 export function materialParamsFor(shape: Pick<SceneShape, 'layer' | 'fill' | 'colour'>, isCut: boolean): MaterialParams {
   if (shape.layer === OUTLINE_LAYER) {
     return { shading: 'lit', colour: NEUTRAL_COLOUR, opacity: BRAIN_OUTLINE_OPACITY, isWireframe: false, isDoubleSided: true, writesDepth: false, drawOrder: DRAW_ORDER.brainOutline };
+  }
+  if (shape.layer === DEVICES_LAYER) {
+    return { shading: 'lit', colour: NEUTRAL_COLOUR, opacity: HEAD_SURFACE_OPACITY, isWireframe: false, isDoubleSided: false, writesDepth: false, drawOrder: DRAW_ORDER.brainOutline };
   }
   if (shape.fill === 'solid') return { shading: 'lit', colour: shape.colour, opacity: FILL_OPACITY.solid, isWireframe: false, isDoubleSided: isCut, writesDepth: true, drawOrder: DRAW_ORDER.fill };
   if (shape.fill === 'lines') return { shading: 'flat', colour: NEUTRAL_COLOUR, opacity: FILL_OPACITY.lines, isWireframe: true, isDoubleSided: false, writesDepth: false, drawOrder: DRAW_ORDER.seeThrough };
@@ -47,9 +53,9 @@ export function materialParamsFor(shape: Pick<SceneShape, 'layer' | 'fill' | 'co
   return { shading: 'lit', colour, opacity: FILL_OPACITY[shape.fill], isWireframe: false, isDoubleSided: false, writesDepth: false, drawOrder: DRAW_ORDER.seeThrough };
 }
 
-/** The brain outline is context: it is never picked, so it never stands between the pointer and a shape inside it. */
+/** The brain outline and the head surface are context: they are never picked, so neither stands between the pointer and a shape inside it. */
 export function isPickable(shape: Pick<SceneShape, 'layer'>): boolean {
-  return shape.layer !== OUTLINE_LAYER;
+  return shape.layer !== OUTLINE_LAYER && shape.layer !== DEVICES_LAYER;
 }
 
 /** Where the pointer is on the canvas, from -1 to 1 on each axis, with up positive. */
@@ -65,7 +71,12 @@ export interface PickHit {
   isSelected: boolean;
   /** The hit lies on the hidden side of an open cut. */
   isHiddenByCut: boolean;
+  /** Set when the hit is an electrode dot and not an atlas shape. */
+  electrodeId?: string;
 }
+
+/** What a click landed on: an atlas shape, or an electrode dot, which is not a shape and selects no region. */
+export type PickTarget = { kind: 'structure'; structureKey: string } | { kind: 'electrode'; electrodeId: string };
 
 /**
  * Which shape a click means. A filled or selected shape under the pointer wins
@@ -77,6 +88,28 @@ export function choosePick(hits: readonly PickHit[]): string | null {
   const visible = hits.filter((hit) => !hit.isHiddenByCut).sort((first, second) => first.distance - second.distance);
   const opaque = visible.find((hit) => hit.fill === 'solid' || hit.isSelected);
   return (opaque ?? visible[0])?.structureKey ?? null;
+}
+
+/**
+ * What a click means once electrode dots are drawn. A dot is picked only when
+ * it is the nearest thing under the pointer, so a dot on the far side of the
+ * head is never picked through the brain. Otherwise the shapes decide, as before.
+ */
+export function choosePickTarget(hits: readonly PickHit[]): PickTarget | null {
+  const visible = hits.filter((hit) => !hit.isHiddenByCut).sort((first, second) => first.distance - second.distance);
+  const nearest = visible[0];
+  if (nearest?.electrodeId !== undefined) return { kind: 'electrode', electrodeId: nearest.electrodeId };
+  const structureKey = choosePick(hits.filter((hit) => hit.electrodeId === undefined));
+  return structureKey === null ? null : { kind: 'structure', structureKey };
+}
+
+export interface Box { min: Point3; max: Point3 }
+
+/** The one box around several boxes, or null for none: a region made of many shapes gets one selection mark around all of them. */
+export function unionBoxes(boxes: readonly Box[]): Box | null {
+  if (boxes.length === 0) return null;
+  const pick = (side: 'min' | 'max', axis: number): number => Math[side](...boxes.map((box) => box[side][axis]));
+  return { min: [pick('min', 0), pick('min', 1), pick('min', 2)], max: [pick('max', 0), pick('max', 1), pick('max', 2)] };
 }
 
 const subtract = (a: Point3, b: Point3): [number, number, number] => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
@@ -124,6 +157,12 @@ export function selectionBrackets(min: Point3, max: Point3): number[] {
     }
   }
   return segments;
+}
+
+/** How long a threat-model step's own marks take to appear, in place. Nothing moves, and under reduced motion nothing fades. */
+export const STEP_EASE_MS = 450;
+export function stepEaseDuration(prefersLessMotion: boolean): number {
+  return prefersLessMotion ? 0 : STEP_EASE_MS;
 }
 
 /** The speed of the idle turn, in radians per millisecond: nothing under reduced motion. */

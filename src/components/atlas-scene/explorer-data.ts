@@ -11,6 +11,7 @@ import { parseAnatomyIndex } from '@/lib/anatomy/parse-anatomy-index';
 import { H01_CARD_PATH, parseH01Card, type H01Card } from '@/lib/anatomy/parse-h01-card';
 import { parseRegionEvidence } from '@/lib/anatomy/parse-region-evidence';
 import { REGION_EVIDENCE_PATH, type RegionEvidence } from '@/lib/anatomy/region-evidence-types';
+import { ATLAS_CHAINS_PATH, parseAtlasChains, type AtlasChains } from '@/lib/atlas-explorer/chain-file';
 import { DEVICE_STAGE_BAND_IDS, EXPLORER_CATALOG_PATH, parseExplorerCatalog } from '@/lib/atlas-explorer/explorer-catalog';
 import { createExplorerModel, isNeuralBand, type ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { AtlasFetchError, fetchAtlasJson, fetchPinnedJson } from './fetch-atlas-json';
@@ -154,4 +155,13 @@ export async function loadRegionEvidence(model: ExplorerModel, signal: AbortSign
 
 export async function loadH01Card(model: ExplorerModel, signal: AbortSignal): Promise<H01Card> {
   return parseH01Card(await fetchPinnedJson(companionPin(model.index, H01_CARD_PATH), signal));
+}
+
+/** The curated threat models, fetched when a visitor asks for the steps. A step naming a technique this build does not hold is refused. */
+export async function loadAtlasChains(model: ExplorerModel, signal: AbortSignal): Promise<AtlasChains> {
+  const chains = parseAtlasChains(await fetchPinnedJson(companionPin(model.index, ATLAS_CHAINS_PATH), signal));
+  const isKnown = (techniqueId: string): boolean => model.techniquesById.has(techniqueId) || model.deviceOnlyTechniquesById.has(techniqueId);
+  const stray = chains.chains.flatMap((chain) => chain.steps).find((step) => !isKnown(step.technique_id));
+  if (stray !== undefined) throw new OutOfStepError(`a threat model names technique ${stray.technique_id}, which the index and the catalog do not hold`);
+  return chains;
 }

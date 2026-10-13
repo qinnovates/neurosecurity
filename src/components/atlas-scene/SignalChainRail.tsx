@@ -10,6 +10,8 @@ interface Props {
   activeStageId: string | null;
   /** The technique the lens is on, so its entry reads as current. */
   chosenTechniqueId: string | null;
+  /** While a threat model's steps are shown: the numbers of the steps on screen whose technique carries each stage. */
+  stepNumbersByStage?: ReadonlyMap<string, readonly number[]>;
   onToggleStage: (stageId: string) => void;
   onToggleMixed: () => void;
   onChooseTechnique: (techniqueId: string) => void;
@@ -43,12 +45,17 @@ function RailTechniqueItem({ technique, isChosen, onChooseTechnique }: Technique
 interface StageProps extends Pick<Props, 'chosenTechniqueId' | 'onToggleStage' | 'onChooseTechnique'> {
   stage: RailStage;
   isActive: boolean;
+  /** The threat-model steps on screen that are tagged with this stage. Empty when none is. */
+  stepNumbers: readonly number[];
 }
 
-function Stage({ stage, isActive, chosenTechniqueId, onToggleStage, onChooseTechnique }: StageProps) {
+function Stage({ stage, isActive, stepNumbers, chosenTechniqueId, onToggleStage, onChooseTechnique }: StageProps) {
   const listId = `atlas-stage-${stage.band.id}`;
   return (
-    <li className="atlas-stage" data-active={isActive} data-stage-id={stage.band.id}>
+    <li className="atlas-stage" data-active={isActive} data-stage-id={stage.band.id} data-chain-steps={stepNumbers.length === 0 ? undefined : stepNumbers.join(' ')}>
+      {stepNumbers.length > 0 && (
+        <p className="atlas-step-badge" key={stepNumbers.join(' ')}>Threat model {stepNumbers.length === 1 ? 'step' : 'steps'} {stepNumbers.join(', ')}</p>
+      )}
       <button type="button" className="atlas-stage-button" aria-expanded={isActive} aria-controls={listId} onClick={() => onToggleStage(stage.band.id)}>
         <span className="atlas-band-code">{stage.band.id}</span>
         <span className="atlas-stage-name">{stage.band.name}</span>
@@ -71,7 +78,7 @@ function Stage({ stage, isActive, chosenTechniqueId, onToggleStage, onChooseTech
  * are, not what a technique could affect. Opening a stage shows its techniques; the order of
  * the stages is the catalog's band order and says nothing about a signal.
  */
-export default function SignalChainRail({ rail, includesMixed, activeStageId, chosenTechniqueId, onToggleStage, onToggleMixed, onChooseTechnique }: Props) {
+export default function SignalChainRail({ rail, includesMixed, activeStageId, chosenTechniqueId, stepNumbersByStage, onToggleStage, onToggleMixed, onChooseTechnique }: Props) {
   return (
     <section className="atlas-panel atlas-rail" aria-labelledby="atlas-rail-heading">
       <h2 className="atlas-heading" id="atlas-rail-heading">Device stages</h2>
@@ -87,7 +94,7 @@ export default function SignalChainRail({ rail, includesMixed, activeStageId, ch
       <ol className="atlas-stages">
         {rail.stages.map((stage) => (
           <Stage
-            key={stage.band.id} stage={stage} isActive={stage.band.id === activeStageId} chosenTechniqueId={chosenTechniqueId}
+            key={stage.band.id} stage={stage} isActive={stage.band.id === activeStageId} chosenTechniqueId={chosenTechniqueId} stepNumbers={stepNumbersByStage?.get(stage.band.id) ?? []}
             onToggleStage={onToggleStage} onChooseTechnique={onChooseTechnique}
           />
         ))}

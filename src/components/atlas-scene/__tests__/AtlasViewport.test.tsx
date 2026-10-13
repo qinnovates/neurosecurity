@@ -4,7 +4,7 @@ import path from 'node:path';
 import { webcrypto } from 'node:crypto';
 import { useImperativeHandle } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { isLimitId, matchesLimitTemplate, type LimitId } from '@/lib/anatomy/limits-copy';
 import { loadRealModel } from '@/lib/atlas-explorer/__tests__/explorer-fixtures';
 import { resolvePick } from '@/lib/atlas-explorer/resolve-pick';
@@ -135,6 +135,48 @@ describe('AtlasViewport: open', () => {
     expect(canvasProps?.shapes.length).toBeGreaterThan(150);
     expect(canvasProps?.shapes.every((shape) => shape.sizeMark === 'ring_only' || canvasProps?.nodesByShapeId.has(shape.id))).toBe(true);
     expect(screen.getByRole('img').getAttribute('aria-label')).toMatch(/^3D picture of an average brain outline with \d+ atlas shapes drawn inside it\. Band lens\. View: from behind and above\. Every fact it shows is in the region list\.$/);
+  });
+
+  it('fetches the head surface only when the electrode layout is turned on, and then draws the dots with their review state in the caption', async () => {
+    const container = await openViewport({ layers: { ...INITIAL_EXPLORER_STATE.layers, devices: true } });
+    const headSurface = assetOf('devices');
+    expect(fetchLog.filter((url) => url === assetUrl(headSurface.path))).toHaveLength(1);
+    expect(fetchLog).toHaveLength(DEFAULT_FILE_COUNT + 1);
+    expect(canvasProps?.devices?.electrodes).toHaveLength(21);
+    expect(canvasProps?.shapes.filter((shape) => shape.layer === 'devices')).toHaveLength(1);
+    const deviceCaption = container.querySelector('[data-viewport-caption] [data-device-caption]') as HTMLElement;
+    expect(deviceCaption.textContent).toContain('EEG electrode layout: 21 positions.');
+    expect(deviceCaption.querySelector('[data-ai-drafted="true"]')?.textContent).toBe('AI-drafted, unreviewed');
+    expect([...deviceCaption.querySelectorAll('[data-limit-id]')].map((note) => note.getAttribute('data-limit-id'))).toEqual(['device_electrodes', 'device_head_surface']);
+    expect(screen.getByRole('img').getAttribute('aria-label')).toContain('EEG electrode layout: 21 positions. Each dot is named in the electrode layout panel below the picture.');
+  });
+
+  it('draws no dot while the head surface they sit on is missing, and none with the layer off', async () => {
+    await openViewport();
+    expect(canvasProps?.devices).toBeNull();
+    cleanup();
+    serveAssets({ [assetUrl(assetOf('devices').path)]: 404 });
+    const container = await openViewport({ layers: { ...INITIAL_EXPLORER_STATE.layers, devices: true } });
+    expect(canvasProps?.devices).toBeNull();
+    expect(container.querySelector('[data-device-caption]')).toBeNull();
+  });
+
+  it('passes an electrode pick on as an electrode and selects no region', async () => {
+    const onPickElectrode = vi.fn();
+    await openViewport({ layers: { ...INITIAL_EXPLORER_STATE.layers, devices: true }, onPickElectrode });
+    act(() => canvasProps?.onPickElectrode('Cz'));
+    expect(onPickElectrode).toHaveBeenCalledWith('Cz');
+    expect(onSelectRegion).not.toHaveBeenCalled();
+  });
+
+  it('says what the order of a threat model\'s steps means inside the picture, and names the step, while steps are shown', async () => {
+    const [technique] = model.index.techniques;
+    const step = { position: 2, techniqueId: technique.id, techniqueName: technique.name, action: 'Fixture action', evidenceLabel: null, stageIds: [], litRegions: [] };
+    const container = await openViewport({ chain: { chainId: 'CHAIN-FIX-001', chainName: 'Fixture chain', stepCount: 5, steps: [step], isWhole: false } });
+    const caption = container.querySelector('[data-viewport-caption]') as HTMLElement;
+    expect(caption.querySelector('[data-limit-id="chain_order"]')?.textContent).toBe('The steps follow the order of this threat model, one after another. Nothing here shows a signal moving through the brain.');
+    expect(caption.textContent).toContain(`Threat model CHAIN-FIX-001, Fixture chain: step 2 of 5, ${technique.id}, ${technique.name}.`);
+    expect(canvasProps?.shapes.every((shape) => Array.isArray(shape.stepNumbers))).toBe(true);
   });
 
   it('keeps the caption inside the picture, with the mark, the lens limit and a position sentence per layer', async () => {

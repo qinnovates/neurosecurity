@@ -2,6 +2,7 @@ import { useId } from 'react';
 import type { IndexLayer, IndexSource } from '@/lib/anatomy/anatomy-index-types';
 import { limitSentence } from '@/lib/anatomy/limits-copy';
 import type { LayerId } from '@/lib/anatomy/source-types';
+import { ELECTRODE_LAYER_NAME } from '@/lib/atlas-explorer/device-drawing';
 import { limitForLayer } from '@/lib/atlas-explorer/limit-selection';
 import Disclosure from './Disclosure';
 import LimitNote from './LimitNote';
@@ -12,7 +13,7 @@ export const LAYER_LABELS: Readonly<Record<LayerId, string>> = {
   deep: 'Deep structures',
   tracts: 'Tracts',
   networks: 'Networks',
-  devices: 'Devices',
+  devices: ELECTRODE_LAYER_NAME,
 };
 
 interface Props {

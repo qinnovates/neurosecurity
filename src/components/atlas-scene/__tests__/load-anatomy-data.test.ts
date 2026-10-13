@@ -48,7 +48,7 @@ const LOADER_PATH = 'src/components/atlas-scene/load-anatomy-data.ts';
  * The explorer page reads it for the index's path, length and digest alone; the built-page check holds it to that.
  */
 const ENDPOINT_PATHS = [
-  'src/pages/atlas/anatomy-catalog.json.ts', 'src/pages/atlas/anatomy-evidence.json.ts', 'src/pages/atlas/anatomy-h01-card.json.ts',
+  'src/pages/atlas/anatomy-catalog.json.ts', 'src/pages/atlas/anatomy-chains.json.ts', 'src/pages/atlas/anatomy-evidence.json.ts', 'src/pages/atlas/anatomy-h01-card.json.ts',
   'src/pages/atlas/anatomy-index.json.ts', 'src/pages/atlas/anatomy-region-evidence.json.ts', 'src/pages/atlas/anatomy.astro',
   'src/pages/atlas/attribution.astro',
 ];

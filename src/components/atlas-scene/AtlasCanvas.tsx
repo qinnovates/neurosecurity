@@ -2,6 +2,7 @@ import { useEffect, useImperativeHandle, useRef, type Ref } from 'react';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import { rasToScene } from '@/lib/anatomy/ras-to-scene';
 import { ORBIT_STEP_RADIANS, zoomDistance, type CameraViewId } from '@/lib/atlas-explorer/camera-views';
+import type { DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
 import type { SceneShape } from '@/lib/atlas-explorer/scene-shapes';
 import type { SliceState } from '@/lib/atlas-explorer/slice-plane';
 import { createSceneRenderer, type SceneCallbacks, type SceneRenderer } from './scene-renderer';
@@ -18,6 +19,11 @@ export interface AtlasCanvasProps extends SceneCallbacks {
   shapes: readonly SceneShape[];
   nodesByShapeId: ReadonlyMap<string, DecodedNode>;
   selectedKeys: ReadonlySet<string>;
+  /** The structure keys selected together. Each group gets one bracket set around all its shapes. */
+  bracketGroups: ReadonlyArray<readonly string[]>;
+  /** The electrode dots to draw, or null while the devices layer is off. */
+  devices: DeviceDrawing | null;
+  selectedElectrodeId: string | null;
   /** Where the selection is, in the atlas's millimetres, or null. The camera settles on it when it changes. */
   focusMm: readonly [number, number, number] | null;
   slice: SliceState | null;
@@ -35,7 +41,7 @@ export interface AtlasCanvasProps extends SceneCallbacks {
  * a button outside it, so nothing here needs a pointer.
  */
 export default function AtlasCanvas(props: AtlasCanvasProps) {
-  const { shapes, nodesByShapeId, selectedKeys, focusMm, slice, prefersLessMotion, description, commands } = props;
+  const { shapes, nodesByShapeId, selectedKeys, bracketGroups, devices, selectedElectrodeId, focusMm, slice, prefersLessMotion, description, commands } = props;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<SceneRenderer | null>(null);
   const callbacksRef = useRef(props);
@@ -48,6 +54,7 @@ export default function AtlasCanvas(props: AtlasCanvasProps) {
     try {
       renderer = createSceneRenderer(canvas, {
         onPick: (key) => callbacksRef.current.onPick(key),
+        onPickElectrode: (electrodeId) => callbacksRef.current.onPickElectrode(electrodeId),
         onHover: (key) => callbacksRef.current.onHover(key),
         onCameraTurn: (directions) => callbacksRef.current.onCameraTurn(directions),
         onContextLost: () => callbacksRef.current.onContextLost(),
@@ -67,7 +74,8 @@ export default function AtlasCanvas(props: AtlasCanvasProps) {
     };
   }, [prefersLessMotion]);
 
-  useEffect(() => rendererRef.current?.setShapes(shapes, nodesByShapeId, selectedKeys), [shapes, nodesByShapeId, selectedKeys]);
+  useEffect(() => rendererRef.current?.setShapes(shapes, nodesByShapeId, selectedKeys, bracketGroups), [shapes, nodesByShapeId, selectedKeys, bracketGroups]);
+  useEffect(() => rendererRef.current?.setDevices(devices, selectedElectrodeId), [devices, selectedElectrodeId]);
   useEffect(() => rendererRef.current?.setSlice(slice), [slice]);
   useEffect(() => { if (focusMm !== null) rendererRef.current?.focusOn(rasToScene(focusMm)); }, [focusMm]);
 

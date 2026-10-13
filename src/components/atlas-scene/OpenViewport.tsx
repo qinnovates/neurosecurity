@@ -1,6 +1,7 @@
 import { lazy, useEffect, useMemo, useRef, useState, type ComponentType } from 'react';
 import type { LayerId } from '@/lib/anatomy/source-types';
 import { CAMERA_VIEW_LABELS, DEFAULT_CAMERA_VIEW, type CameraViewId } from '@/lib/atlas-explorer/camera-views';
+import type { ChainFrame } from '@/lib/atlas-explorer/chain-steps';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import type { Lens } from '@/lib/atlas-explorer/lens-state';
 import { resolvePick } from '@/lib/atlas-explorer/resolve-pick';
@@ -20,6 +21,11 @@ export interface OpenViewportProps {
   lens: Lens;
   layers: Readonly<Record<LayerId, boolean>>;
   selectedRegionId: string | null;
+  /** The threat-model steps on screen, or null. */
+  chain: ChainFrame | null;
+  /** The picked electrode, or null. Picking one selects no region. */
+  electrodeId: string | null;
+  onPickElectrode: (electrodeId: string) => void;
   onSelectRegion: (regionId: string) => void;
   onClose: () => void;
   /** Called when the picture cannot go on: the browser took the context away, or gave none after all. */
@@ -44,19 +50,21 @@ function meanOf(points: ReadonlyArray<readonly [number, number, number]>): [numb
  * the list both ways. This module and the canvas are fetched only after the
  * visitor asks for the view and the browser has shown it can draw one.
  */
-export default function OpenViewport({ model, lens, layers, selectedRegionId, onSelectRegion, onClose, onStopped, loadCanvas = loadRealCanvas }: OpenViewportProps) {
+export default function OpenViewport({ model, lens, layers, selectedRegionId, chain, electrodeId, onPickElectrode, onSelectRegion, onClose, onStopped, loadCanvas = loadRealCanvas }: OpenViewportProps) {
   const [slice, setSlice] = useState<SliceState | null>(null);
   const [pickedKey, setPickedKey] = useState<string | null>(null);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const [directions, setDirections] = useState<AxisDirections | null>(null);
   const [activeView, setActiveView] = useState<CameraViewId | null>(DEFAULT_CAMERA_VIEW);
   const commands = useRef<CanvasCommands>(NO_COMMANDS);
-  const scene = useViewportScene(model, lens, layers);
+  const scene = useViewportScene(model, lens, layers, chain);
   const Canvas = useMemo(() => lazy(loadCanvas), [loadCanvas]);
   const prefersLessMotion = useMemo(() => readPrefersLessMotion(), []);
 
   const regionKeys = selectedRegionId === null ? [] : model.regionsById.get(selectedRegionId)?.structure_keys ?? [];
   const selectedKeys = useMemo(() => new Set([...regionKeys, ...(pickedKey === null ? [] : [pickedKey])]), [regionKeys.join(' '), pickedKey]);
+  // One bracket set around the whole selected region, however many shapes draw it, and one around a picked shape outside it.
+  const bracketGroups = useMemo(() => [regionKeys, pickedKey === null || regionKeys.includes(pickedKey) ? [] : [pickedKey]].filter((keys) => keys.length > 0), [regionKeys.join(' '), pickedKey]);
   const focusMm = useMemo(() => meanOf(scene.drawnShapes.filter((shape) => regionKeys.includes(shape.structureKey)).map((shape) => shape.centroidMm)), [selectedRegionId, scene.drawnShapes.length]);
   useEffect(() => { if (scene.bounds !== null && slice !== null) setSlice({ axis: slice.axis, positionMm: clampSlice(slice.axis, slice.positionMm, scene.bounds) }); }, [scene.bounds]);
 
@@ -68,11 +76,13 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, on
   const turnView = (viewId: CameraViewId): void => { commands.current.setView(viewId); setActiveView(viewId); };
   const byHand: CanvasCommands = { setView: turnView, zoom: (direction) => commands.current.zoom(direction), turn: (direction) => { commands.current.turn(direction); setActiveView(null); }, tilt: (direction) => { commands.current.tilt(direction); setActiveView(null); } };
   const cutNames = slice === null ? [] : [...new Set(listShapesCutAt(slice, [...scene.nodesByShapeId.values()]).map((node) => resolvePick(model, `${node.atlas}:${node.labelId}`)?.label ?? node.labelId))];
-  const description = `3D picture of an average brain outline with ${scene.drawnShapes.length} atlas shapes drawn inside it. ${scene.caption.lensLabel} View: ${activeView === null ? 'turned by hand' : CAMERA_VIEW_LABELS[activeView].toLowerCase()}. Every fact it shows is in the region list.`;
+  const atlasShapeCount = scene.drawnShapes.filter((shape) => shape.layer !== 'devices').length;
+  const deviceWords = scene.deviceCaption === null ? '' : ` ${scene.deviceCaption.label} Each dot is named in the electrode layout panel below the picture.`;
+  const description = `3D picture of an average brain outline with ${atlasShapeCount} atlas shapes drawn inside it. ${scene.caption.lensLabel} View: ${activeView === null ? 'turned by hand' : CAMERA_VIEW_LABELS[activeView].toLowerCase()}. Every fact it shows is in the region list.${deviceWords}`;
 
   const canvasProps: Omit<AtlasCanvasProps, 'commands'> = {
-    shapes: scene.drawnShapes, nodesByShapeId: scene.nodesByShapeId, selectedKeys, focusMm, slice, prefersLessMotion, description,
-    onPick: pick, onHover: setHoveredKey, onCameraTurn: setDirections, onContextLost: () => onStopped('context_lost'), onUnavailable: () => onStopped('no_webgl'),
+    shapes: scene.drawnShapes, nodesByShapeId: scene.nodesByShapeId, selectedKeys, bracketGroups, devices: scene.devices, selectedElectrodeId: electrodeId, focusMm, slice, prefersLessMotion, description,
+    onPick: pick, onPickElectrode, onHover: setHoveredKey, onCameraTurn: setDirections, onContextLost: () => onStopped('context_lost'), onUnavailable: () => onStopped('no_webgl'),
   };
   return (
     <>
@@ -80,6 +90,7 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, on
       <div className="atlas-viewport-body">
         <ViewportStage
           Canvas={Canvas} canvasProps={canvasProps} commands={commands} caption={scene.caption} directions={directions} slice={slice}
+          deviceCaption={scene.deviceCaption} isChainShown={chain !== null}
           hoverLabel={hoveredKey === null ? null : resolvePick(model, hoveredKey)?.label ?? null}
         />
         <div className="atlas-viewport-side">

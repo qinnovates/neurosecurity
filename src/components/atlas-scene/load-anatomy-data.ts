@@ -19,6 +19,7 @@ import techniqueRegions from '@shared/qif-anatomy-technique-regions.json';
 import deviceGeometry from '@shared/qif-anatomy-device-geometry.json';
 import regionEvidence from '@shared/qif-anatomy-region-evidence.json';
 import h01Card from '@shared/qif-anatomy-h01-card.json';
+import taraChains from '@shared/tara-chains.json';
 import { parseAnatomyFiles, type AnatomyData } from '@/lib/anatomy/anatomy-inputs';
 import { buildAnatomyBundle, type AnatomyBundle } from '@/lib/anatomy/build-anatomy-index';
 import { AnatomyDataError } from '@/lib/anatomy/errors';
@@ -26,6 +27,7 @@ import { H01_CARD_PATH, parseH01Card } from '@/lib/anatomy/parse-h01-card';
 import { parseRegionEvidence } from '@/lib/anatomy/parse-region-evidence';
 import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
 import { assertLedgerRatchet } from '@/lib/anatomy/review-state';
+import { ATLAS_CHAINS_PATH, buildAtlasChains } from '@/lib/atlas-explorer/chain-file';
 import { EXPLORER_CATALOG_PATH, buildExplorerCatalog } from '@/lib/atlas-explorer/explorer-catalog';
 import { buildEngineData } from '@/lib/threat-model/build-engine-data';
 
@@ -65,7 +67,7 @@ export function loadAnatomyData(): AnatomyData {
   return data;
 }
 
-/** The index, its evidence file and the three files the explorer reads beside them, each pinned by the index. */
+/** The index, its evidence file and the four files the explorer reads beside them, each pinned by the index. */
 export function loadAnatomyBundle(): AnatomyBundle {
   const data = loadAnatomyData();
   const regionIds = new Set(data.engineData.regions.map((region) => region.id));
@@ -73,6 +75,7 @@ export function loadAnatomyBundle(): AnatomyBundle {
     { path: EXPLORER_CATALOG_PATH, json: JSON.stringify(buildExplorerCatalog(data.engineData, atlas)) },
     { path: REGION_EVIDENCE_PATH, json: JSON.stringify(parseRegionEvidence(regionEvidence, regionIds)) },
     { path: H01_CARD_PATH, json: JSON.stringify(parseH01Card(h01Card)) },
+    { path: ATLAS_CHAINS_PATH, json: JSON.stringify(buildAtlasChains(taraChains, new Set(data.engineData.techniques.map((technique) => technique.id)))) },
   ]);
 }
 

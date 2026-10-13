@@ -55,7 +55,8 @@ vi.mock('three', () => {
   class Plane { distanceToPoint(point: { hidden?: boolean }): number { return point.hidden === true ? -1 : 1; } }
   class Vector { constructor(public x = 0, public y = 0, public z = 0) {} }
   return {
-    BufferAttribute: class {}, Float32BufferAttribute: class {}, BufferGeometry, RingGeometry: BufferGeometry, SphereGeometry: BufferGeometry, DoubleSide: 2, FrontSide: 0,
+    BufferAttribute: class {}, Float32BufferAttribute: class {}, BufferGeometry, RingGeometry: BufferGeometry, SphereGeometry: BufferGeometry, DoubleSide: 2, FrontSide: 0, BackSide: 1,
+    Sprite: Object3D, SpriteMaterial: Material, CanvasTexture: class {},
     Group: Object3D, Scene: Object3D, DirectionalLight: Object3D, HemisphereLight: Object3D, PerspectiveCamera, Mesh, LineSegments,
     MeshBasicMaterial: Material, MeshLambertMaterial: Material, LineBasicMaterial: Material, WebGLRenderer, Raycaster, Plane, Vector2: Vector, Vector3: Vector,
   };
@@ -74,7 +75,7 @@ const NODES = new Map(SHAPES.map((entry) => [entry.id, node(entry.id)]));
 let frames: FrameRequestCallback[] = [];
 let canvas: HTMLCanvasElement;
 let listeners: Array<[string, EventListenerOrEventListenerObject]>;
-const callbacks = { onPick: vi.fn(), onHover: vi.fn(), onCameraTurn: vi.fn(), onContextLost: vi.fn() };
+const callbacks = { onPick: vi.fn(), onPickElectrode: vi.fn(), onHover: vi.fn(), onCameraTurn: vi.fn(), onContextLost: vi.fn() };
 const runFrames = (count: number): void => { for (let frame = 0; frame < count; frame += 1) frames.shift()?.(1000 + frame * 16); };
 const click = (x: number, y: number): void => { canvas.dispatchEvent(new MouseEvent('pointerdown', { clientX: x, clientY: y })); canvas.dispatchEvent(new MouseEvent('pointerup', { clientX: x, clientY: y })); };
 
@@ -174,13 +175,22 @@ describe('createSceneRenderer', () => {
 
   it('marks a selected shape with line brackets and adds no second surface to it', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true);
-    renderer.setShapes(SHAPES, NODES, new Set([SHAPES[1].structureKey]));
+    renderer.setShapes(SHAPES, NODES, new Set([SHAPES[1].structureKey]), [[SHAPES[1].structureKey]]);
     three.hits = [];
     click(5, 5);
     const drawn = three.pickTargets as Array<{ kind: string }>;
     expect(drawn.every((target) => target.kind === 'mesh')).toBe(true);
     renderer.dispose();
     // Three shapes, one of them selected: its brackets add one line geometry and one line material, and no mesh.
+    expect(three.disposed.filter((kind) => kind === 'material')).toHaveLength(SHAPES.length + 1);
+  });
+
+  it('draws one bracket set around a region made of many shapes, not one per shape', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const regionKeys = [SHAPES[1].structureKey, SHAPES[2].structureKey];
+    renderer.setShapes(SHAPES, NODES, new Set(regionKeys), [regionKeys]);
+    renderer.dispose();
+    // Two selected shapes in one region: one line material for the one bracket set, beside the three fills.
     expect(three.disposed.filter((kind) => kind === 'material')).toHaveLength(SHAPES.length + 1);
   });
 

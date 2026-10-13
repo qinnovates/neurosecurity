@@ -304,7 +304,12 @@ describe('AtlasExplorer: the page\'s pin of the index', () => {
     expect(container.querySelectorAll('button[data-region-id]')).toHaveLength(38);
     expect(container.querySelector('[data-index-pin="mismatched"]')?.textContent).toContain('The 3D view is not available.');
     fireEvent.click(screen.getByRole('button', { name: 'Show the 3D view' }));
-    expect(container.querySelector('.atlas-viewport')?.getAttribute('data-gate')).toBe('unpinned');
+    // The page does carry a pin, so the view says the files are out of step, and never that the page records no data.
+    expect(container.querySelector('.atlas-viewport')?.getAttribute('data-gate')).toBe('out_of_step');
+    const notices = [...container.querySelectorAll('[role="alert"]')].map((notice) => notice.textContent ?? '');
+    expect(notices).toHaveLength(2);
+    expect(notices.every((notice) => notice.includes('out of step'))).toBe(true);
+    expect(container.textContent).not.toContain('does not record which data it was built with');
     expect(requestedPaths(fetchMock).filter((path) => path.includes('atlas-assets') || path.includes('OpenViewport'))).toEqual([]);
     expect(requestedPaths(fetchMock).filter((path) => path === ANATOMY_INDEX_PATH).length).toBeGreaterThanOrEqual(3);
   });

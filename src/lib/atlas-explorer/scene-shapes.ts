@@ -38,6 +38,8 @@ export interface SceneShape {
   centroidMm: readonly [number, number, number];
   /** One side was drawn and the other is its mirror image. */
   mirrored: boolean;
+  /** Set only while a threat model's steps are shown: the steps whose technique marks this shape. See chain-steps.ts. */
+  stepNumbers?: readonly number[];
 }
 
 /** Colours for the bands, neocortex to spinal cord. Categories, not a scale. */

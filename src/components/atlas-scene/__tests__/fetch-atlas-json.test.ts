@@ -25,8 +25,8 @@ describe('fetchAtlasJson', () => {
 describe('the index\'s pins for the files served beside it', () => {
   const bundle = loadAnatomyBundle();
 
-  it('pins the catalog, the literature statements and the H01 card by the exact bytes served (guard)', () => {
-    expect(bundle.index.companions.map((pin) => pin.path).sort()).toEqual(['/atlas/anatomy-catalog.json', '/atlas/anatomy-h01-card.json', '/atlas/anatomy-region-evidence.json']);
+  it('pins the catalog, the threat models, the literature statements and the H01 card by the exact bytes served (guard)', () => {
+    expect(bundle.index.companions.map((pin) => pin.path).sort()).toEqual(['/atlas/anatomy-catalog.json', '/atlas/anatomy-chains.json', '/atlas/anatomy-h01-card.json', '/atlas/anatomy-region-evidence.json']);
     for (const pin of bundle.index.companions) expect(new TextEncoder().encode(bundle.companionJsonByPath[pin.path]).length, pin.path).toBe(pin.bytes);
   });
 

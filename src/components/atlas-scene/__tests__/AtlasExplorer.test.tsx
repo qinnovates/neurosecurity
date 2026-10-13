@@ -253,7 +253,7 @@ describe('AtlasExplorer: limits, layers and marks', () => {
     await renderExplorer();
     fireEvent.click(within(panelOf('Layers')).getByRole('button', { name: /^Show the 6 layers \(\d available in this build\)$/ }));
     const layers = [...panelOf('Layers').querySelectorAll<HTMLElement>('.atlas-layer button')];
-    expect(layers.map((layer) => layer.textContent)).toEqual(['Brain outline', 'Cortical shapes', 'Deep structures', 'Tracts', 'Networks', 'Devices']);
+    expect(layers.map((layer) => layer.textContent)).toEqual(['Brain outline', 'Cortical shapes', 'Deep structures', 'Tracts', 'Networks', 'EEG electrode layout']);
     for (const layer of layers.filter((candidate) => candidate.getAttribute('aria-disabled') === 'true')) {
       const reason = document.getElementById(layer.getAttribute('aria-describedby') ?? '');
       expect(reason?.textContent, layer.textContent ?? '').toMatch(/^(Not available in this build\. .+|This layer is not available in this build\.)$/);

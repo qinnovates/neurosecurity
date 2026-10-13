@@ -5,14 +5,16 @@
  * how each is filled and what is selected all arrive from outside.
  *
  * Nothing here moves in proportion to a score and nothing travels along a
- * path. The only motion is the camera's: a move to a view, and a slow idle
- * turn that ends at the first touch and never starts under reduced motion.
+ * path. The camera moves: to a view, and in a slow idle turn that ends at the
+ * first touch and never starts under reduced motion. A threat-model step's own
+ * marks may fade in where they stand; they never change place.
  */
 
 import {
-  DirectionalLight, HemisphereLight, type Mesh, PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer, type BufferGeometry,
+  DirectionalLight, HemisphereLight, type Mesh, type Object3D, PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer, type BufferGeometry,
 } from 'three';
-import { axisDirectionsFor, choosePick, idleTurnSpeed, pointerToNdc, type AxisDirections, type PickHit } from '@/lib/atlas-explorer/scene-drawing';
+import { HEAD_VIEW_SCALE, type DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
+import { axisDirectionsFor, choosePickTarget, idleTurnSpeed, pointerToNdc, stepEaseDuration, type AxisDirections, type PickHit, type PickTarget } from '@/lib/atlas-explorer/scene-drawing';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import { rasToScene } from '@/lib/anatomy/ras-to-scene';
 import {
@@ -20,6 +22,8 @@ import {
 } from '@/lib/atlas-explorer/camera-views';
 import type { SceneShape } from '@/lib/atlas-explorer/scene-shapes';
 import { slicePlane, type SliceState } from '@/lib/atlas-explorer/slice-plane';
+import { buildDeviceObjects, type DeviceObjects } from './device-objects';
+import { buildSelectionMarks, buildStepLabels, createEaser, disposeTree, easeKeyOf, listMaterials, readLabelFont } from './scene-marks';
 import { buildGeometry, buildShapeObjects, listDisposables, type ShapeObjects } from './scene-objects';
 
 export type { AxisDirections };
@@ -27,13 +31,18 @@ export type { AxisDirections };
 export interface SceneCallbacks {
   /** A click that was not a drag. Null when it landed on nothing. */
   onPick: (structureKey: string | null) => void;
+  /** A click on an electrode dot. It is not a shape and selects no region. */
+  onPickElectrode: (electrodeId: string) => void;
   onHover: (structureKey: string | null) => void;
   onCameraTurn: (directions: AxisDirections) => void;
   onContextLost: () => void;
 }
 
 export interface SceneRenderer {
-  setShapes: (shapes: readonly SceneShape[], nodesByShapeId: ReadonlyMap<string, DecodedNode>, selectedKeys: ReadonlySet<string>) => void;
+  /** @param bracketGroups the structure keys selected together; each group gets one bracket set around all its shapes */
+  setShapes: (shapes: readonly SceneShape[], nodesByShapeId: ReadonlyMap<string, DecodedNode>, selectedKeys: ReadonlySet<string>, bracketGroups?: ReadonlyArray<readonly string[]>) => void;
+  /** The electrode dots to draw, or null for none. */
+  setDevices: (drawing: DeviceDrawing | null, selectedElectrodeId: string | null) => void;
   setSlice: (slice: SliceState | null) => void;
   setView: (viewId: CameraViewId) => void;
   focusOn: (centreScene: readonly [number, number, number]) => void;
@@ -70,6 +79,12 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
 
   const geometries = new Map<string, BufferGeometry>();
   let objects: ShapeObjects[] = [];
+  /** Selection brackets and step labels: drawn over the shapes and rebuilt with them. */
+  let marks: Object3D[] = [];
+  let devices: DeviceObjects | null = null;
+  const labelFont = readLabelFont(canvas);
+  const easer = createEaser(stepEaseDuration(prefersLessMotion));
+  let easedKey = '';
   let pose: OrbitPose = poseForView(DEFAULT_CAMERA_VIEW, [0, 0, 0], DEFAULT_DISTANCE_MM);
   /** The middle of the brain outline: what every named view looks at. */
   let home: readonly [number, number, number] = [0, 0, 0];
@@ -82,7 +97,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
   let hoveredKey: string | null = null;
   let press: { x: number; y: number; pointerId: number } | null = null;
   let clip: Plane | null = null;
-  let drawn: { shapes: readonly SceneShape[]; nodesByShapeId: ReadonlyMap<string, DecodedNode>; selectedKeys: ReadonlySet<string> } | null = null;
+  let drawn: { shapes: readonly SceneShape[]; nodesByShapeId: ReadonlyMap<string, DecodedNode>; selectedKeys: ReadonlySet<string>; bracketGroups: ReadonlyArray<readonly string[]> } | null = null;
   const raycaster = new Raycaster();
 
   const invalidate = (): void => {
@@ -96,13 +111,13 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
     callbacks.onCameraTurn(axisDirectionsFor(pose));
   };
 
-  const pickAt = (clientX: number, clientY: number): string | null => {
+  const pickAt = (clientX: number, clientY: number): PickTarget | null => {
     const [x, y] = pointerToNdc(clientX, clientY, canvas.getBoundingClientRect());
     raycaster.setFromCamera(new Vector2(x, y), camera);
-    const hits = raycaster.intersectObjects<Mesh>(objects.flatMap((entry) => entry.pickTargets), false);
-    return choosePick(hits.map((hit): PickHit => ({
+    const hits = raycaster.intersectObjects<Mesh>([...objects.flatMap((entry) => entry.pickTargets), ...(devices?.pickTargets ?? [])], false);
+    return choosePickTarget(hits.map((hit): PickHit => ({
       structureKey: String(hit.object.userData.structureKey), distance: hit.distance, fill: hit.object.userData.fill, isSelected: hit.object.userData.isSelected === true,
-      isHiddenByCut: clip !== null && clip.distanceToPoint(hit.point) < 0,
+      isHiddenByCut: clip !== null && clip.distanceToPoint(hit.point) < 0, electrodeId: hit.object.userData.electrodeId,
     })));
   };
 
@@ -121,12 +136,14 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
 
   function draw(now: number): void {
     frame = 0;
-    const needsAnother = stepCamera(now);
-    lastFrameAt = needsAnother ? now : 0;
+    const isCameraMoving = stepCamera(now);
+    lastFrameAt = isCameraMoving ? now : 0;
+    const needsAnother = easer.step(now) || isCameraMoving;
     applyPose();
     for (const mark of objects.flatMap((entry) => entry.billboards)) mark.quaternion.copy(camera.quaternion);
     if (hoverPoint !== null) {
-      const key = pickAt(hoverPoint.x, hoverPoint.y);
+      const target = pickAt(hoverPoint.x, hoverPoint.y);
+      const key = target?.kind === 'structure' ? target.structureKey : null;
       hoverPoint = null;
       if (key !== hoveredKey) {
         hoveredKey = key;
@@ -137,6 +154,8 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
     if (needsAnother) invalidate();
   }
 
+  /** How far back the default view stands: further once the head surface is drawn, so the whole head is in the picture. */
+  const homeDistance = (): number => clampDistance(DEFAULT_DISTANCE_MM * (devices === null ? 1 : HEAD_VIEW_SCALE));
   const moveTo = (to: OrbitPose): void => {
     isIdleTurning = false;
     move = { from: pose, to, startedAt: performance.now(), durationMs: planCameraMove(prefersLessMotion).durationMs };
@@ -158,8 +177,12 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
     invalidate();
   };
   const onPointerUp = (event: PointerEvent): void => {
-    if (press !== null && Math.hypot(event.clientX - press.x, event.clientY - press.y) < CLICK_SLOP_PX) callbacks.onPick(pickAt(event.clientX, event.clientY));
+    const isClick = press !== null && Math.hypot(event.clientX - press.x, event.clientY - press.y) < CLICK_SLOP_PX;
     press = null;
+    if (!isClick) return;
+    const target = pickAt(event.clientX, event.clientY);
+    if (target?.kind === 'electrode') callbacks.onPickElectrode(target.electrodeId);
+    else callbacks.onPick(target?.structureKey ?? null);
   };
   /** The wheel zooms only with Ctrl or Command held, so an ordinary scroll over the picture still scrolls the page. */
   const onWheel = (event: WheelEvent): void => {
@@ -189,11 +212,16 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       for (const owned of listDisposables(entry, geometries.get(entry.shape.id) ?? null)) owned.dispose();
     }
     objects = [];
+    for (const mark of marks) {
+      scene.remove(mark);
+      disposeTree(mark);
+    }
+    marks = [];
   };
 
   return {
-    setShapes(shapes, nodesByShapeId, selectedKeys) {
-      drawn = { shapes, nodesByShapeId, selectedKeys };
+    setShapes(shapes, nodesByShapeId, selectedKeys, bracketGroups = []) {
+      drawn = { shapes, nodesByShapeId, selectedKeys, bracketGroups };
       clearObjects();
       const brainOutline = shapes.find((shape) => shape.layer === 'outline');
       if (brainOutline !== undefined && home.every((value) => value === 0)) {
@@ -210,6 +238,25 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
         scene.add(entry.group);
         objects.push(entry);
       }
+      marks = [...buildSelectionMarks(bracketGroups, objects), ...buildStepLabels(objects, labelFont)];
+      for (const mark of marks) scene.add(mark);
+      // A step's marks fade in once, when the step arrives; a redraw for any other reason leaves them as they are.
+      const easeKey = easeKeyOf(objects);
+      const stepMarked = objects.filter((entry) => (entry.shape.stepNumbers ?? []).length > 0).map((entry) => entry.group);
+      if (easeKey !== easedKey) easer.begin([...stepMarked, ...marks.filter((mark) => mark.userData.labelText !== undefined)].flatMap(listMaterials), performance.now());
+      else easer.begin([], 0);
+      easedKey = easeKey;
+      invalidate();
+    },
+    setDevices(drawing, selectedElectrodeId) {
+      if (devices !== null) {
+        scene.remove(devices.group);
+        disposeTree(devices.group);
+      }
+      const isFirstDrawing = devices === null && drawing !== null;
+      devices = drawing === null ? null : buildDeviceObjects(drawing, selectedElectrodeId, labelFont);
+      if (isFirstDrawing) pose = { ...pose, distance: Math.max(pose.distance, homeDistance()) };
+      if (devices !== null) scene.add(devices.group);
       invalidate();
     },
     setSlice(slice) {
@@ -218,10 +265,10 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       clip = plane === null ? null : new Plane(new Vector3(plane.normal[0], plane.normal[1], plane.normal[2]), plane.constant);
       renderer.clippingPlanes = clip === null ? [] : [clip];
       // Opening or closing the cut changes how filled shapes and the selection are drawn; moving it does not.
-      if (wasCut !== (clip !== null) && drawn !== null) this.setShapes(drawn.shapes, drawn.nodesByShapeId, drawn.selectedKeys);
+      if (wasCut !== (clip !== null) && drawn !== null) this.setShapes(drawn.shapes, drawn.nodesByShapeId, drawn.selectedKeys, drawn.bracketGroups);
       invalidate();
     },
-    setView: (viewId) => moveTo(poseForView(viewId, home, viewId === DEFAULT_CAMERA_VIEW ? DEFAULT_DISTANCE_MM : pose.distance)),
+    setView: (viewId) => moveTo(poseForView(viewId, home, viewId === DEFAULT_CAMERA_VIEW ? homeDistance() : pose.distance)),
     focusOn: (centreScene) => moveTo({ ...pose, target: centreScene }),
     zoomTo: (distance) => moveTo({ ...pose, distance: clampDistance(distance) }),
     turnBy: (azimuth) => moveTo(turnPose(pose, azimuth, 0)),
@@ -237,6 +284,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       cancelAnimationFrame(frame);
       for (const [type, listener, options] of listeners) canvas.removeEventListener(type, listener, options);
       clearObjects();
+      if (devices !== null) disposeTree(devices.group);
       for (const geometry of geometries.values()) geometry.dispose();
       renderer.dispose();
       // Hands the WebGL context back at once: browsers allow only a handful, and a view opened and hidden many times would run out.

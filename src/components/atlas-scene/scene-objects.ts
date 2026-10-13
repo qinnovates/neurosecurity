@@ -3,7 +3,8 @@
  * nothing: fill, colour, size mark, what is pickable and the selection mark all
  * arrive already chosen (scene-drawing.ts), and this turns them into objects.
  * The three marks stay on three channels: the fill is the mesh's material, the
- * size mark is a ring, the selection is corner brackets around the shape.
+ * size mark is a ring, the selection is corner brackets (scene-marks.ts draws
+ * one set around everything selected together, from each shape's box here).
  */
 
 import {
@@ -12,7 +13,7 @@ import {
 } from 'three';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import { positionsToScene, rasToScene } from '@/lib/anatomy/ras-to-scene';
-import { DRAW_ORDER, SELECTION_COLOUR, isPickable, materialParamsFor, selectionBrackets } from '@/lib/atlas-explorer/scene-drawing';
+import { DRAW_ORDER, SELECTION_COLOUR, isPickable, materialParamsFor, selectionBrackets, type Box } from '@/lib/atlas-explorer/scene-drawing';
 import { NEUTRAL_COLOUR, type SceneShape } from '@/lib/atlas-explorer/scene-shapes';
 
 /** Nominal sizes in millimetres. A ring marks a place; its size says nothing about the structure's. */
@@ -29,6 +30,8 @@ export interface ShapeObjects {
   pickTargets: Mesh[];
   /** Rings, turned to face the camera before each frame. */
   billboards: Mesh[];
+  /** The box around what is drawn for the shape, in scene axes: its mesh, or its marker ring. Null when neither is drawn. */
+  box: Box | null;
 }
 
 export function buildGeometry(node: DecodedNode): BufferGeometry {
@@ -47,7 +50,7 @@ function fillMaterial(shape: SceneShape, isCut: boolean): Material {
 }
 
 /** Corner brackets around a box given in scene axes: lines only, drawn over everything so the mark is never hidden. */
-function buildBrackets(min: readonly [number, number, number], max: readonly [number, number, number]): LineSegments {
+export function buildBrackets({ min, max }: Box): LineSegments {
   const geometry = new BufferGeometry();
   geometry.setAttribute('position', new Float32BufferAttribute(selectionBrackets(min, max), 3));
   const brackets = new LineSegments(geometry, new LineBasicMaterial({ color: SELECTION_COLOUR, depthTest: false, transparent: true }));
@@ -71,7 +74,7 @@ function buildMarkerTarget(centre: readonly [number, number, number]): Mesh {
 
 /** @param geometry the shape's mesh, or null for a structure the atlas marks with a ring alone */
 export function buildShapeObjects(shape: SceneShape, geometry: BufferGeometry | null, isSelected: boolean, isCut: boolean): ShapeObjects {
-  const objects: ShapeObjects = { shape, group: new Group(), pickTargets: [], billboards: [] };
+  const objects: ShapeObjects = { shape, group: new Group(), pickTargets: [], billboards: [], box: null };
   const centre = rasToScene(shape.centroidMm);
   if (geometry !== null) {
     const mesh = new Mesh(geometry, fillMaterial(shape, isCut));
@@ -79,7 +82,7 @@ export function buildShapeObjects(shape: SceneShape, geometry: BufferGeometry | 
     objects.group.add(mesh);
     if (isPickable(shape)) objects.pickTargets.push(mesh);
     const box = geometry.boundingBox;
-    if (isSelected && box !== null) objects.group.add(buildBrackets(box.min.toArray(), box.max.toArray()));
+    if (box !== null) objects.box = { min: box.min.toArray(), max: box.max.toArray() };
   }
   if (shape.sizeMark !== 'mesh') {
     const ring = buildRing(shape, centre);
@@ -91,7 +94,7 @@ export function buildShapeObjects(shape: SceneShape, geometry: BufferGeometry | 
     objects.group.add(target);
     objects.pickTargets.push(target);
     const reach = RING_OUTER_MM;
-    if (isSelected) objects.group.add(buildBrackets([centre[0] - reach, centre[1] - reach, centre[2] - reach], [centre[0] + reach, centre[1] + reach, centre[2] + reach]));
+    objects.box = { min: [centre[0] - reach, centre[1] - reach, centre[2] - reach], max: [centre[0] + reach, centre[1] + reach, centre[2] + reach] };
   }
   for (const target of objects.pickTargets) target.userData = { structureKey: shape.structureKey, fill: shape.fill, isSelected };
   return objects;

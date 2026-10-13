@@ -1,5 +1,6 @@
 import { Suspense, type ComponentType, type ReactNode, type Ref } from 'react';
 import { limitSentence } from '@/lib/anatomy/limits-copy';
+import type { DeviceCaption } from '@/lib/atlas-explorer/device-drawing';
 import { SLICE_AXIS_LABELS, type SliceState } from '@/lib/atlas-explorer/slice-plane';
 import type { ViewportCaption } from '@/lib/atlas-explorer/viewport-caption';
 import type { AtlasCanvasProps, CanvasCommands } from './AtlasCanvas';
@@ -15,6 +16,10 @@ interface Props {
   directions: AxisDirections | null;
   /** The open cut, or null. The caption says where it is and that it is not a scan. */
   slice: SliceState | null;
+  /** The electrode layout's line, review state and limits, while its dots are drawn. Null otherwise. */
+  deviceCaption: DeviceCaption | null;
+  /** A threat model's steps are on screen, so the caption says what their order does and does not mean. */
+  isChainShown: boolean;
   /** The name of the shape under the pointer, or null. */
   hoverLabel: string | null;
   /** Shown over the picture when nothing can be drawn yet. */
@@ -44,7 +49,7 @@ function OrientationMarker({ directions }: { directions: AxisDirections }) {
  * the review mark, the lens and its limit, and how far each layer's position
  * can be trusted. The caption lies inside the picture's own bounds.
  */
-export default function ViewportStage({ Canvas, canvasProps, commands, caption, directions, slice, hoverLabel, children }: Props) {
+export default function ViewportStage({ Canvas, canvasProps, commands, caption, directions, slice, deviceCaption, isChainShown, hoverLabel, children }: Props) {
   const sliceLimits = slice === null ? [] : [limitSentence('slice_position', { position: String(slice.positionMm), axis: SLICE_AXIS_LABELS[slice.axis].toLowerCase() }), limitSentence('slice_view')];
   return (
     <figure className="atlas-picture" data-viewport-stage="true">
@@ -59,7 +64,14 @@ export default function ViewportStage({ Canvas, canvasProps, commands, caption, 
           {caption.reviewState !== null && <ReviewMark state={caption.reviewState} />} <strong>{caption.lensLabel}</strong>{' '}
           Average template {caption.templateSpace}, not anyone&rsquo;s brain. <a href={ATTRIBUTION_PATH}>Sources and licences</a>
         </p>
+        {isChainShown && <LimitNote limit={limitSentence('chain_order')} />}
         {[...caption.lensLimits, ...caption.positionLimits, ...sliceLimits].map((limit) => <LimitNote key={`${limit.id}:${limit.text}`} limit={limit} />)}
+        {deviceCaption !== null && (
+          <div className="atlas-caption-device" data-device-caption="true">
+            <p className="atlas-caption-line"><ReviewMark state={deviceCaption.reviewState} /> <strong>{deviceCaption.label}</strong></p>
+            {deviceCaption.limits.map((limit) => <LimitNote key={limit.id} limit={limit} />)}
+          </div>
+        )}
       </figcaption>
     </figure>
   );

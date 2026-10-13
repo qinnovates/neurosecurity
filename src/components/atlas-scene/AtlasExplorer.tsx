@@ -5,6 +5,7 @@ import { loadExplorerModel } from './explorer-data';
 import LoadNotice from './LoadNotice';
 import { useLoaded } from './use-loaded';
 import './atlas-scene.css';
+import './atlas-chain-devices.css';
 
 /**
  * The atlas explorer. It is built with no anatomy at all: everything it shows
@@ -32,7 +33,7 @@ export default function AtlasExplorer({ indexPin }: Props) {
             The list below is read from the data now served. Reload the page to get a matching copy.
           </p>
         )}
-        <ExplorerWorkspace model={state.data.model} isIndexPinned={state.data.indexPinState === 'pinned'} />
+        <ExplorerWorkspace model={state.data.model} isIndexPinned={state.data.indexPinState === 'pinned'} isOutOfStep={state.data.indexPinState === 'mismatched'} />
       </>
     );
   }

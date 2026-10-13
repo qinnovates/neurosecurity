@@ -30,7 +30,7 @@ export interface ViewportCaption {
 
 /** How each layer is named inside a sentence. */
 export const LAYER_NOUNS: Readonly<Record<LayerId, string>> = {
-  outline: 'brain outline', cortical: 'cortical shapes', deep: 'deep structures', tracts: 'tracts', networks: 'networks', devices: 'devices',
+  outline: 'brain outline', cortical: 'cortical shapes', deep: 'deep structures', tracts: 'tracts', networks: 'networks', devices: 'head surface',
 };
 
 /** Worst first: one failed asset makes its layer read as failed. */
@@ -70,6 +70,7 @@ function markLimitsFor(shapes: readonly SceneShape[]): LimitSentence[] {
   const has = (predicate: (shape: SceneShape) => boolean): boolean => shapes.some(predicate);
   return [
     ...(has((shape) => shape.layer === 'outline') ? [limitSentence('outline_shape')] : []),
+    ...(has((shape) => shape.layer === 'devices') ? [limitSentence('device_head_surface')] : []),
     ...(has((shape) => shape.fill === 'lines') ? [limitSentence('unfilled_shape')] : []),
     ...(has((shape) => shape.fill === 'translucent') ? [limitSentence('inside_shape')] : []),
     ...(has((shape) => shape.fill === 'translucent') && !has((shape) => shape.fill === 'solid') ? [limitSentence('lens_fills_nothing')] : []),
