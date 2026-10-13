@@ -78,7 +78,21 @@ function resolveIndependently(term: string): { regionId: string; counts: boolean
 }
 
 const draftedLinks = Object.entries((techniqueRegions as unknown as { techniques: Record<string, { scope: string; links: Array<{ term: string }> }> }).techniques);
-const litTechniquesOf = (regionId: string): string[] => detailOf(regionId).linked.map((technique) => technique.id);
+const rawBandsByTechnique = new Map(rawTechniques.map((technique) => [technique.id, technique.band_ids]));
+const rawBandByRegion = new Map(rawRegions.map((region) => [region.id, region.band]));
+/**
+ * The techniques whose link to a region counts, worked out here from the data files and not read from the model: the
+ * drafted word is the region's id or an alias the atlas file classes as a synonym, and the registrar puts the technique
+ * in the region's band. The builder also asks that the link's quote was found and that it is valid for the current
+ * addressing; the test below fails if a link ever falls short on those, which is the moment to restate them here.
+ */
+const litPairs = new Set(draftedLinks.flatMap(([techniqueId, entry]) => entry.links.flatMap((link) => {
+  const resolved = resolveIndependently(link.term);
+  const regionBand = resolved === null ? undefined : rawBandByRegion.get(resolved.regionId);
+  const bandAgrees = regionBand !== undefined && (rawBandsByTechnique.get(techniqueId) ?? []).includes(regionBand);
+  return resolved !== null && resolved.counts && bandAgrees ? [join(resolved.regionId, techniqueId)] : [];
+})));
+const litTechniquesOf = (regionId: string): string[] => rawTechniques.map((technique) => technique.id).filter((techniqueId) => litPairs.has(join(regionId, techniqueId)));
 const dsmEntriesOf = (technique: RawTechnique): RawDsm[] => [...(technique.tara?.dsm5?.primary ?? []), ...(technique.tara?.dsm5?.secondary ?? [])];
 const rawTechniqueById = new Map(rawTechniques.map((technique) => [technique.id, technique]));
 
@@ -98,6 +112,11 @@ describe('mapping completeness: what the datalake maps to a region, the explorer
     expect(expected.length).toBeGreaterThan(20);
     expect(shown).toEqual(expected);
     expect(exposed((detail, regionId) => detail.linked.map((technique) => join(regionId, technique.id))).length).toBeGreaterThan(0);
+  });
+
+  it('techniques linked to a region: the model\'s linked set is the one the data files give', () => {
+    expect(litPairs.size).toBeGreaterThan(0);
+    expect(exposed((detail, regionId) => detail.linked.map((technique) => join(regionId, technique.id)))).toEqual(sorted(litPairs));
   });
 
   it('techniques reaching a region through its band only: every band-level technique of the region\'s band', () => {
