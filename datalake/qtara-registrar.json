@@ -388,13 +388,13 @@
       "version": "1.10",
       "date": "2026-10-14",
       "title": "Descriptive technique notes and three renames",
-      "summary": "Renamed for descriptive clarity; no technique removed. 26 technique notes that opened as instructions now describe the technique ('An adversary may...' or 'If feasible, an adversary could...', by evidence status) and end with the entry's detection guidance. Three techniques renamed; earlier names kept in the new legacy_names field. Basis: 2026-10 framing decision (AI panel recommendation, pending owner acceptance).",
+      "summary": "Renamed for descriptive clarity; no technique removed. 31 technique notes that opened as instructions now describe the technique ('An adversary may...' or 'If feasible, an adversary could...', by evidence status) and end with the entry's detection guidance. Three techniques renamed; earlier names kept in the new legacy_names field. Basis: 2026-10 framing decision (AI panel recommendation, pending owner acceptance).",
       "added": [],
       "changed": [
         "QIF-T0011 renamed: 'Intermodulation (BCI signal weaponized)' -> 'Intermodulation via BCI telemetry signal'",
         "QIF-T0046 renamed: 'OTA firmware weaponization' -> 'Malicious over-the-air firmware update'",
         "QIF-T0099 renamed: 'Consumer-sensor-to-BCI kill chain escalation (pre-implant reconnaissance and cognitive priming via consumer devices)' -> 'Consumer-sensor-to-BCI escalation path (projected)'",
-        "notes rewritten descriptively for 26 techniques: QIF-T0001, QIF-T0004, QIF-T0005, QIF-T0007, QIF-T0008, QIF-T0009, QIF-T0018, QIF-T0022, QIF-T0026, QIF-T0034, QIF-T0037, QIF-T0044, QIF-T0045, QIF-T0046, QIF-T0049, QIF-T0053, QIF-T0059, QIF-T0061, QIF-T0064, QIF-T0066, QIF-T0067, QIF-T0071, QIF-T0103, QIF-T0107, QIF-T0109, QIF-T0171",
+        "notes rewritten descriptively for 31 techniques: QIF-T0001, QIF-T0004, QIF-T0005, QIF-T0007, QIF-T0008, QIF-T0009, QIF-T0018, QIF-T0022, QIF-T0026, QIF-T0034, QIF-T0037, QIF-T0044, QIF-T0045, QIF-T0046, QIF-T0049, QIF-T0053, QIF-T0059, QIF-T0061, QIF-T0064, QIF-T0066, QIF-T0067, QIF-T0071, QIF-T0103, QIF-T0107, QIF-T0109, QIF-T0038, QIF-T0042, QIF-T0052, QIF-T0054, QIF-T0069, QIF-T0171",
         "schema: techniques[].legacy_names and techniques[].rename_note added",
         "QIF-T0171 detection text: US spelling (artifact, behavioral)"
       ]
@@ -9021,7 +9021,7 @@
       "status": "EMERGING",
       "severity": "high",
       "ui_category": "EX",
-      "notes": "Extract the user's unique brainprint (ERP template, spectral fingerprint) for later replay/spoofing. Unlike passwords, neural biometrics cannot be changed. Permanent compromise if extracted.",
+      "notes": "An adversary may extract a user's individual brainprint (ERP template, spectral fingerprint) for later replay or spoofing. Unlike passwords, neural biometrics cannot be changed. Permanent compromise if extracted. Detection: Template access logging, cross-session consistency checks, theft detection via usage patterns.",
       "legacy_ids": [],
       "legacy_technique_id": "T2407",
       "niss": {
@@ -10014,7 +10014,7 @@
       "status": "CONFIRMED",
       "severity": "medium",
       "ui_category": "SE",
-      "notes": "Extract neural data from BLE/RF emissions via timing, power, or EM side-channels. All wireless BCIs vulnerable. Consumer devices (Muse, EMOTIV) transmit unencrypted.",
+      "notes": "An adversary may extract neural data from BLE/RF emissions via timing, power or EM side channels. Wireless BCIs without link-layer protection are exposed. Consumer devices (Muse, EMOTIV) transmit unencrypted. Detection: RF emission monitoring, protocol compliance testing, traffic analysis detection.",
       "legacy_ids": [
         "ONI-T002",
         "ONI-T005"
@@ -11584,7 +11584,7 @@
       "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "EX",
-      "notes": "Extract event-related potentials (P300, N170, N400) that reveal cognitive states, recognition, and decision-making processes. BCI apps can embed covert stimulus-response protocols.",
+      "notes": "An adversary may extract event-related potentials (P300, N170, N400) associated with recognition, attention and decision-making. BCI apps can embed covert stimulus-response protocols. Detection: Stimulus audit logging, unauthorized ERP extraction detection, data access monitoring.",
       "legacy_ids": [
         "ONI-T016"
       ],
@@ -12098,7 +12098,7 @@
       "status": "THEORETICAL",
       "severity": "critical",
       "ui_category": "EX",
-      "notes": "Extract memory-related neural patterns revealing personal experiences, knowledge, or intentions. Targets hippocampal activity. High-density implants (Neuralink, Utah Array) approach memory-trace resolution.",
+      "notes": "If feasible, an adversary could extract memory-related neural patterns associated with personal experiences, knowledge or intentions. Targets hippocampal activity. High-density implants (Neuralink, Utah Array) approach memory-trace resolution. Detection: Memory protocol audit logging, unauthorized access detection, hippocampal activity monitoring.",
       "legacy_ids": [
         "ONI-T018"
       ],
@@ -15667,7 +15667,7 @@
       "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "EX",
-      "notes": "Extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain has unique separatrix geometry — the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker extracts a dynamical fingerprint without requiring enrollment or stored biometrics. This is a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45.",
+      "notes": "If feasible, an adversary could extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain is hypothesized to have unique separatrix geometry — the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker could extract a dynamical fingerprint without requiring enrollment or stored biometrics. This would be a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45. Detection: Transition rate monitoring, probe pattern detection, unauthorized phase space analysis detection.",
       "legacy_ids": [],
       "legacy_technique_id": "T2064",
       "niss": {

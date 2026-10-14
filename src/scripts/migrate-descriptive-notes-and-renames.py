@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Rewrite 26 imperative technique descriptions and rename 3 techniques.
+"""Rewrite 31 imperative technique descriptions and rename 3 techniques.
 
 Basis: the 2026-10 framing decision (items M2 and M3), an AI panel's
 recommendation pending Kevin's acceptance.
 
 Descriptions (M2)
 -----------------
-26 `notes` fields opened with a second-person imperative ("Inject crafted
+26 `notes` fields named by the decision, plus 5 found in verification that open
+with "Extract...", opened with a second-person imperative ("Inject crafted
 signals..."), which reads as instructions. Each opening is rewritten
 descriptively: "An adversary may..." for CONFIRMED, DEMONSTRATED and EMERGING
 entries, "If feasible, an adversary could..." for THEORETICAL, PLAUSIBLE and
@@ -107,6 +108,25 @@ NOTE_REWRITES: dict[str, list[tuple[str, str]]] = {
                    "If feasible, an adversary could replay previously valid neural signal nonces to bypass freshness/replay protections.")],
     "QIF-T0109": [("Target the data alignment step used by adversarial defenses (ABAT, A3E).",
                    "If feasible, an adversary could target the data alignment step used by adversarial defenses (ABAT, A3E).")],
+    # The next five open with "Extract..."; found in verification, same rule applied.
+    "QIF-T0038": [("Extract the user's unique brainprint (ERP template, spectral fingerprint) for later replay/spoofing.",
+                   "An adversary may extract a user's individual brainprint (ERP template, spectral fingerprint) for later replay or spoofing.")],
+    # "All wireless BCIs vulnerable" was a universal claim (neuromodesty check 5).
+    "QIF-T0042": [("Extract neural data from BLE/RF emissions via timing, power, or EM side-channels. All wireless BCIs vulnerable.",
+                   "An adversary may extract neural data from BLE/RF emissions via timing, power or EM side channels. Wireless BCIs without link-layer protection are exposed.")],
+    # "reveal" overstated what ERPs show (guardrail G2, reverse inference).
+    "QIF-T0052": [("Extract event-related potentials (P300, N170, N400) that reveal cognitive states, recognition, and decision-making processes.",
+                   "An adversary may extract event-related potentials (P300, N170, N400) associated with recognition, attention and decision-making.")],
+    "QIF-T0054": [("Extract memory-related neural patterns revealing personal experiences, knowledge, or intentions.",
+                   "If feasible, an adversary could extract memory-related neural patterns associated with personal experiences, knowledge or intentions.")],
+    # Separatrix uniqueness is QIF's own unvalidated hypothesis, not an established fact.
+    "QIF-T0069": [
+        ("Extract individual identity information by observing neural dynamical transitions",
+         "If feasible, an adversary could extract individual identity information by observing neural dynamical transitions"),
+        ("Each person's brain has unique separatrix geometry", "Each person's brain is hypothesized to have unique separatrix geometry"),
+        ("an attacker extracts a dynamical fingerprint", "an attacker could extract a dynamical fingerprint"),
+        ("This is a side-channel attack on the brain's dynamical structure.", "This would be a side-channel attack on the brain's dynamical structure."),
+    ],
     "QIF-T0171": [
         ("Compromise of the infrastructure that stores, retrains, serves or configures a deployed BCI decoder,",
          "If feasible, an adversary could compromise the infrastructure that stores, retrains, serves or configures a deployed BCI decoder,"),
@@ -200,7 +220,8 @@ def changelog_entry() -> dict:
         "version": CHANGELOG_VERSION,
         "date": CHANGE_DATE,
         "title": "Descriptive technique notes and three renames",
-        "summary": ("Renamed for descriptive clarity; no technique removed. 26 technique notes that opened as "
+        "summary": ("Renamed for descriptive clarity; no technique removed. "
+                    f"{len(NOTE_REWRITES)} technique notes that opened as "
                     "instructions now describe the technique ('An adversary may...' or 'If feasible, an adversary "
                     "could...', by evidence status) and end with the entry's detection guidance. Three techniques "
                     "renamed; earlier names kept in the new legacy_names field. Basis: 2026-10 framing decision "

@@ -12,7 +12,7 @@ order: 5
 Rolling record of framework decisions extracted from the [QIF Derivation Log](../osi-of-mind/QIF-DERIVATION-LOG.md).
 Each entry links back to the full derivation context.
 
-**Last generated:** 2026-10-14 at 00:21:09
+**Last generated:** 2026-10-14 at 00:35:11
 
 **RACI Key:** R (Responsible) | A (Accountable) | C (Consulted) | I (Informed)
 
@@ -41,7 +41,7 @@ Each entry links back to the full derivation context.
 
 | Status | # | Date | Decision | Classification | RACI | AI Level |
 |--------|---|------|----------|---------------|------|----------|
-| 🔴 | [113](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-113-describing-techniques-instead-of-instruc) | 2026-10-14 | Describing Techniques Instead of Instructing Them | CORRECTION | R: Claude Opus 5.5 | A: KQ (pending: this entry is a proposal until the PR is merged) | C: AI review panel | I: none | AI-generated; Kevin's merge is the acceptance |
+| 🔴 | [113](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-113-describing-techniques-not-instructing) | 2026-10-14 | Describing Techniques, Not Instructing | CORRECTION | R: Claude Opus 5.5 | A: KQ (pending: this entry is a proposal until the PR is merged) | C: AI review panel | I: none | AI-generated; Kevin's merge is the acceptance |
 | ✅ | [108](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-108-integration-pass-taxonomy-gains-a-second) | 2026-10-06 | Integration Pass — Taxonomy Gains a Second Level, and Three Generated Blocks Rep | PROCESS | R: Claude Opus 5 and subagents | A: KQ | C: decision panel (Quorum, 6 panelists + 2 adversaries) | I: none | AI-generated; every figure recorded here recomputed from the data by the orchestrator |
 | 🔴 | [107](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-107-cve-evidence-pass-a-real-vulnerability-m) | 2026-10-06 | CVE Evidence Pass — A Real Vulnerability Misclassified as Fabricated, and the Fi | CORRECTION | R: Claude Opus 5 and research subagents | A: KQ | C: none | I: none | AI-generated, each correction below independently verified against NVD by the orchestrator |
 | 🔴 | [106](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-106-october-2026-data-refresh-landscape-craw) | 2026-10-06 | October 2026 Data Refresh — Landscape Crawl, Citation Audit, Homepage Correction | CORRECTION | R: Claude Opus 5.5 and research subagents | A: KQ | C: none | I: none | AI-generated, pending Quorum review |
