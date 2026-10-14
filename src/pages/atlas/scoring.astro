@@ -82,7 +82,6 @@ const severityLevels = [
 
 // PINS-flagged count
 const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
-import { TARA_TECHNIQUES } from '../../lib/qif-constants';
 ---
 
 <PageLayout
@@ -702,7 +701,7 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
             NSv2.1:6.02/CL:6.31/MI:6.32/MP:5.88/PC:4.59/EA:7.37
           </p>
           <p class="text-xs text-[var(--color-text-muted)]">
-            Device-level risk score (0-10) broken down by neurorights dimension. This example scores a high-severity invasive BCI across all five rights.
+            Device-level risk score (0-10) broken down by neurorights dimension. This example scores a high-severity invasive BCI across its four neurorights dimensions.
           </p>
         </div>
 
@@ -733,7 +732,7 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
         <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-secondary)]">
           <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-2">Validation Note</h3>
           <p class="text-sm text-[var(--color-text-muted)]">
-            NISS scoring behavior has been validated in simulation (<a href="/research/validation/#val-004" class="text-[var(--color-accent-primary)] hover:underline">VAL-004</a>): all {TARA_TECHNIQUES} techniques scored correctly, PINS flags trigger as specified, and context profiles shift weights as designed. However, the clinical appropriateness of NISS score magnitudes has <strong>not</strong> been validated by clinicians or tested against real BCI incident data. The scoring engine works as specified; whether the specification itself produces clinically meaningful severity levels is an open question requiring empirical validation.
+            NISS scoring behavior has been checked in simulation (<a href="/research/validation/#val-004" class="text-[var(--color-accent-primary)] hover:underline">VAL-004</a>): all {scoringGaps.unscored_techniques.summary.scored} scored techniques scored as specified, PINS flags trigger as specified, and context profiles shift weights as designed. However, the clinical appropriateness of NISS score magnitudes has <strong>not</strong> been validated by clinicians or tested against real BCI incident data. The scoring engine works as specified; whether the specification itself produces clinically meaningful severity levels is an open question requiring empirical validation.
           </p>
           <a href="/research/validation/" class="text-xs text-[var(--color-accent-primary)] hover:underline mt-2 inline-block">
             View full validation status

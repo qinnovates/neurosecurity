@@ -261,7 +261,7 @@ techniques.forEach((t: any) => {
           </div>
           <div class="glass rounded-lg p-4">
             <p class="font-semibold text-[var(--color-text-primary)] mb-1">CISA</p>
-            <p>Created a <a href="https://www.cisa.gov/resources-tools/resources/matrix-game-brain-computer-interfaces" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">tabletop foresight game</a> for BCI futures planning. A board game for brainstorming, not a security framework.</p>
+            <p>Created a <a href="https://www.cisa.gov/resources-tools/resources/matrix-game-brain-computer-interfaces" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">tabletop foresight game</a> for BCI futures planning.</p>
           </div>
           <div class="glass rounded-lg p-4">
             <p class="font-semibold text-[var(--color-text-primary)] mb-1">BCI Manufacturers</p>
@@ -281,10 +281,10 @@ techniques.forEach((t: any) => {
     <div class="max-w-3xl mx-auto text-center mb-8">
       <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--color-accent-primary)] mb-3">What TARA Is Built On</p>
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-4">
-        Every technique maps to the QIF hourglass and a NISS score.
+        {coverage.total} techniques map to the QIF hourglass; {coverage.scored} carry draft NISS scores.
       </h2>
       <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto">
-        QIF is a proposed 11-band architecture — biology above, silicon below, with the physical neural interface at the bottleneck where security either holds or fails. NISS scores each technique on {nissExampleMetrics.length} metrics; the example below shows them for one catalogued technique.
+        QIF is a proposed 11-band architecture — biology above, silicon below, with the physical neural interface at the bottleneck where security either holds or fails. NISS scores a technique on {nissExampleMetrics.length} metrics; the example below shows them for one catalogued technique.
       </p>
     </div>
 
