@@ -8,7 +8,7 @@ version = "0.3.0"
 authors = [
   { name="Qinnovate" },
 ]
-description = "Threat Analysis & Risk Assessment (TARA) Framework for Neural Security"
+description = "TARA: proposed, unvalidated threat catalog for neural-device threat modeling and severity scoring"
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE"]

@@ -1,6 +1,7 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import registry from '@shared/qtara-registrar.json';
+import PurposeAndLimits from '@/components/PurposeAndLimits.astro';
 
 const techniques = (registry as any).techniques ?? [];
 const totalThreats = techniques.length;
@@ -62,6 +63,11 @@ const neurorightsCount = neurorightsSet.size;
         </p>
       </div>
     </section>
+
+    <!-- Purpose and limits (canonical statement, also in governance/README.md) -->
+    <div class="mb-16">
+      <PurposeAndLimits />
+    </div>
 
     <!-- The Researcher -->
     <section class="mb-16">

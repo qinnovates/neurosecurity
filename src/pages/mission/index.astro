@@ -1,11 +1,11 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
-import { TARA_TECHNIQUES, QIF_VERSION } from '@/lib/qif-constants';
+import { TARA_TECHNIQUES, QIF_VERSION, HOURGLASS_BANDS } from '@/lib/qif-constants';
 ---
 
 <PageLayout
   title="Mission — Qinnovate"
-  description="Creating a unified model for BCI risk identification, threat modeling, and informed consent to protect neurotechnology patients."
+  description="Bringing established threat-modeling and severity-scoring practice to neural devices, for builders, reviewers and the public."
   breadcrumbs={[{ label: 'Mission' }]}
 >
   <div class="max-w-3xl mx-auto">
@@ -16,7 +16,7 @@ import { TARA_TECHNIQUES, QIF_VERSION } from '@/lib/qif-constants';
       </h1>
       <div class="space-y-6 text-lg text-[var(--color-text-muted)] leading-relaxed">
         <p>
-          No unified model existed for identifying risks at the boundary between silicon and neuron. QIF maps every surface between neuron and silicon across 11 bands. The Threat Atlas (TARA) catalogs {TARA_TECHNIQUES}+ attack techniques and scores each for neural impact. Together, they create the foundation for informed consent — because informed consent requires informed security.
+          Security engineering has mature methods for threat modeling and severity scoring; they have not been worked through for the boundary between silicon and neuron. QIF proposes a model of that boundary across {HOURGLASS_BANDS.length} bands. TARA catalogs {TARA_TECHNIQUES} techniques for threat modeling, and NISS proposes a way to score their severity. The aim is to give people who build and review these devices specific threats to discuss. All of it is proposed and unvalidated.
         </p>
         <p>
           This framework is open source. Not because it's finished — because it can't be finished by one person.

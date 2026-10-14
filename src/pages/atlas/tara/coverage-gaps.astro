@@ -1,0 +1,53 @@
+---
+// Published gap list: catalog entries that carry no detection guidance yet. Computed
+// from the registrar at build time; the purpose and limits statement links here.
+import PageLayout from '@/layouts/PageLayout.astro';
+import { getCatalogCoverage, STATEMENT_LINKS } from '@/lib/purpose-and-limits';
+
+const coverage = getCatalogCoverage();
+---
+
+<PageLayout
+  title="TARA Coverage Gaps — Entries Without Detection Guidance"
+  description={`${coverage.withoutDetection.length} of ${coverage.total} entries in the proposed TARA catalog carry no detection guidance yet. Listed so readers know where the defensive side is incomplete.`}
+  breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'TARA', href: '/atlas/tara/' }, { label: 'Coverage gaps' }]}
+>
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">Entries without detection guidance</h1>
+    <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
+      {coverage.detected} of {coverage.total} techniques in the TARA catalog include detection guidance. The {coverage.withoutDetection.length} below do not yet. Guidance for them has not been drafted; until it is, treat these entries as descriptions only.
+    </p>
+    <p class="text-sm text-[var(--color-text-faint)] mb-10">
+      TARA is a proposed, unvalidated research catalog. <a href={STATEMENT_LINKS.purposeAndLimits} class="underline hover:text-[var(--color-text-muted)]">Purpose and limits &rarr;</a>
+    </p>
+
+    {coverage.withoutDetection.length === 0 ? (
+      <p class="text-sm text-[var(--color-text-muted)]">Every technique currently includes detection guidance.</p>
+    ) : (
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-[var(--color-border)]">
+              <th class="text-left py-2 pr-4 text-[var(--color-text-faint)] font-medium text-xs uppercase">ID</th>
+              <th class="text-left py-2 pr-4 text-[var(--color-text-faint)] font-medium text-xs uppercase">Technique</th>
+              <th class="text-left py-2 text-[var(--color-text-faint)] font-medium text-xs uppercase">Evidence status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {coverage.withoutDetection.map((technique) => (
+              <tr class="border-b border-[var(--color-border)]/50">
+                <td class="py-2 pr-4 font-mono text-xs"><a href={`/atlas/tara/${technique.id}/`} class="text-[var(--color-accent-primary)] hover:underline">{technique.id}</a></td>
+                <td class="py-2 pr-4 text-[var(--color-text-muted)]">{technique.name}</td>
+                <td class="py-2 font-mono text-xs text-[var(--color-text-muted)]">{technique.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+
+    <p class="text-sm text-[var(--color-text-muted)] mt-10">
+      Spotted an error or want to contribute guidance? <a href={STATEMENT_LINKS.issues} class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">Open an issue</a>.
+    </p>
+  </div>
+</PageLayout>

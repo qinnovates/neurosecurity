@@ -313,7 +313,7 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
 
 <PageLayout
   title="Clinical View — QIF Atlas"
-  description={`${dsm5Stats.withDsm5} of ${totalTechniques} BCI attack techniques reference DSM-5-TR diagnostic criteria, and ${clinical.length} have therapeutic analogs. Clinical outcome mappings for threat modeling purposes.`}
+  description={`${dsm5Stats.withDsm5} of ${totalTechniques} techniques carry DSM-5-TR diagnostic category references for threat modeling (not diagnostic claims); ${clinical.length} have therapeutic analogs.`}
   breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'Clinical View' }]}
   wide={true}
 >
@@ -336,8 +336,8 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
         </span>
       </h1>
       <p class="text-base sm:text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto leading-relaxed">
-        {dsm5Stats.withDsm5} of {totalTechniques} catalogued BCI attack techniques reference symptoms
-        matching DSM-5-TR diagnostic criteria. Separately, {clinical.length} of {totalTechniques} share their core mechanism with
+        {dsm5Stats.withDsm5} of {totalTechniques} catalogued techniques carry DSM-5-TR diagnostic category
+        references for threat modeling (not diagnostic claims). Separately, {clinical.length} of {totalTechniques} share their core mechanism with
         FDA-recognized therapeutic applications. These are distinct data sets: a technique may have a psychiatric
         outcome mapping, a therapeutic analog, both, or neither. All mappings require clinical validation.
       </p>
@@ -361,7 +361,7 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
         <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-cyan-500">
           {uniqueDiagnoses}
         </p>
-        <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">DSM-5-TR<br/><span class="text-[var(--color-text-faint)]">diagnoses linked</span></p>
+        <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">DSM-5-TR<br/><span class="text-[var(--color-text-faint)]">category references</span></p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
         <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-green-500">

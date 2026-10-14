@@ -13,6 +13,7 @@ BCI security research: website (Astro 5 + React 19 + TailwindCSS 4), QIF model (
 
 ## Key Commands
 `npm run dev` | `npm run build` | `npm run health` (validate sync) | `npm run governance` (regen from derivation log) | `npm test` (unit tests) | `npm run check:model-page` (after build: fails if the TARA Lab page loads anything off-origin)
+`npm run purpose:sync` (rewrite the purpose and limits statement in README.md, SECURITY.md, governance/README.md, governance/SECURITY.md and the qtara README from `src/data/purpose-and-limits.json`; `npm run purpose:check` is part of `generated:check`)
 `npm run cve:coverage` (recompute derived counters in `datalake/cve-technique-mapping.json`) | `npm run cve:gaps` (regenerate `datalake/cve-coverage-gaps.json`) -- run both after editing the CVE mappings or the registrar
 
 ## Conventions

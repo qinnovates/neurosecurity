@@ -6,9 +6,9 @@ interface Props {
 }
 
 const APPLICABILITY_LABELS: Record<RequirementApplicability, string> = {
-  required: 'Required by statute',
+  required: 'Statutory if the device is a cyber device (connectivity prong only checked)',
   recommended: 'Recommended by FDA guidance',
-  not_required: 'Not required here',
+  not_required: 'Not triggered by connectivity; FDA guidance may still apply',
 };
 
 const EVIDENCE_LABELS: Record<RequirementEvidence, string> = {

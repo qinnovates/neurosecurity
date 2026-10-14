@@ -47,7 +47,7 @@ Every neuroethics constraint maps to a neurosecurity scope limit. They are diffe
 | **Neuroethics constraint** | Don't assume new rights are needed without showing the gap. |
 | **Violation** | "We need 15 new neurorights for BCI security" |
 | **Correct form** | "We extend Mental Privacy and Mental Integrity with technical depth, not new rights" |
-| **QIF scope limit** | We extend Mental Privacy and Mental Integrity with technical depth, not new rights. Five rights, not fifteen. |
+| **QIF scope limit** | We extend Mental Privacy and Mental Integrity with technical depth, not new rights. Four rights (Ienca & Andorno, 2017), not fifteen. |
 | **Components bound** | QIF (framework level) |
 
 ---
