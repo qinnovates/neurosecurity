@@ -36,7 +36,7 @@ describe('runPostBuildChecks', () => {
     ]);
   });
 
-  it('requires the review mark inside the rendered links-review note, not merely in the page's props', () => {
+  it('requires the review mark inside the rendered links-review note, not merely in the props', () => {
     const dist = fs.mkdtempSync(path.join(os.tmpdir(), 'region-view-mark-'));
     const writePage = (urlPath, body) => { fs.mkdirSync(path.join(dist, urlPath), { recursive: true }); fs.writeFileSync(path.join(dist, urlPath, 'index.html'), body); };
     const props = '<astro-island props="{&quot;regionViewLinksReview&quot;:{&quot;mark&quot;:&quot;AI-drafted, unreviewed&quot;}}"></astro-island>';
