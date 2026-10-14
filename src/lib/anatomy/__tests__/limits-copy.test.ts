@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { MOUNT_COPY } from '../mount-copy';
 import { LIMIT_TEMPLATES, LimitValueError, isLimitId, limitSentence, matchesLimitTemplate, type LimitId } from '../limits-copy';
 
 const LIMIT_IDS = Object.keys(LIMIT_TEMPLATES) as LimitId[];
@@ -10,6 +11,11 @@ const SPECIALIST_WORDS = /\b(parcellation|tractography|delineation|ontology|homo
 describe('limit sentences', () => {
   it('are held word for word, so any change of wording is a visible diff', () => {
     expect(LIMIT_TEMPLATES).toMatchSnapshot();
+  });
+
+  it('hold the sentences beside the 3D view\'s button word for word too', () => {
+    expect(MOUNT_COPY).toMatchSnapshot();
+    expect(MOUNT_COPY.failed).toBe('The 3D view could not be loaded. The list on this page is unchanged.');
   });
 
   it('are short, end as sentences and use plain words', () => {

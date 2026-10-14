@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { matchesLimitTemplate } from '@/lib/anatomy/limits-copy';
 import { INITIAL_EXPLORER_STATE } from '@/components/atlas-scene/atlas-state';
 import { toColourMode } from '../lens-state';
-import { buildRegionViewNotes, noteRegionById } from '../region-view-notes';
+import { NAMED_REGIONS_HEADING, buildRegionViewNotes, noteRegionById, withoutCaptionCopies } from '../region-view-notes';
+import { buildViewportCaption } from '../viewport-caption';
 import { buildSceneShapes } from '../scene-shapes';
 import { summariseTechnique } from '../technique-summary';
 import { loadRealModel } from './explorer-fixtures';
@@ -80,9 +81,11 @@ describe('buildRegionViewNotes: a band the visitor chose', () => {
 });
 
 describe('buildRegionViewNotes: a technique', () => {
-  it('lists exactly the regions the technique\'s drafted links light, and says its band tags as band tags', () => {
+  it('lists exactly the regions the technique\'s drafted links name, under a heading that says "name", and says its band tags as band tags', () => {
     const techniqueId = linked?.id ?? '';
     const notes = buildRegionViewNotes(model, { kind: 'technique', techniqueId });
+    expect(NAMED_REGIONS_HEADING).toBe('Regions this technique\'s drafted links name');
+    expect(notes.lists[0].heading).toBe(NAMED_REGIONS_HEADING);
     expect(notes.lists[0].regions.map((region) => region.id)).toEqual(summariseTechnique(model, techniqueId)?.linkedRegions.map((region) => region.id));
     expect(notes.bracketGroups).toEqual([]);
     expect(limitIds(notes)).toContain('lens_technique');
@@ -112,5 +115,32 @@ describe('the selection and the fill are separate channels', () => {
     expect(shapes.length).toBeGreaterThan(0);
     const notes = buildRegionViewNotes(model, BAND_LENS, { regionIds: model.regions.map((region) => region.id), bandId: null });
     expect(Object.keys(notes)).toEqual(['lists', 'bracketGroups', 'limits', 'reviewState']);
+  });
+});
+
+describe('withoutCaptionCopies: what the open picture already says is not said again beside it', () => {
+  const lens = { kind: 'technique', techniqueId: 'QIF-T0034' } as const;
+  const notes = buildRegionViewNotes(model, lens);
+  const shapes = buildSceneShapes(model, toColourMode(lens), INITIAL_EXPLORER_STATE.layers);
+  const caption = buildViewportCaption(model, lens, shapes);
+
+  it('takes nothing out while no picture is open, so no sentence loses its last copy', () => {
+    expect(withoutCaptionCopies(notes, null)).toBe(notes);
+    expect(limitIds(notes)).toEqual(['lens_technique', 'view_nothing_coloured_no_own_shape', 'view_technique_band_reach', 'view_regions_without_shape', 'region_matching', 'outline_shape']);
+  });
+
+  it('leaves each sentence and the review mark standing once between the caption and the notes', () => {
+    const beside = withoutCaptionCopies(notes, caption);
+    const captioned = [...caption.lensLimits, ...caption.positionLimits, ...caption.markLimits].map((limit) => limit.text);
+    expect(limitIds(beside)).toEqual(['view_technique_band_reach', 'view_regions_without_shape', 'region_matching']);
+    for (const limit of notes.limits) expect([...captioned, ...beside.limits.map((kept) => kept.text)].filter((text) => text === limit.text), limit.id).toHaveLength(1);
+    expect(caption.reviewState?.mark).toBe('AI-drafted, unreviewed');
+    expect(beside.reviewState).toBeNull();
+    expect(beside.lists).toBe(notes.lists);
+  });
+
+  it('keeps the notes\' mark when the caption carries none or a different one', () => {
+    expect(withoutCaptionCopies(notes, { ...caption, reviewState: null }).reviewState).toBe(notes.reviewState);
+    expect(withoutCaptionCopies(notes, { ...caption, reviewState: { state: 'reviewed', reviewer_role: 'neuroanatomist', reviewed_on: '2026-01-01', mark: 'Reviewed' } }).reviewState).toBe(notes.reviewState);
   });
 });

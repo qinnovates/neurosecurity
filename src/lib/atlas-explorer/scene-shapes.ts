@@ -69,7 +69,7 @@ function sizeMarkOf(sizeClass: SizeClass, vertexCount: number): SizeMark {
 }
 
 /** The fill and colour of one structure under a lens. With no lens subject chosen, nothing is coloured. */
-export function describeFill(model: ExplorerModel, structureKey: string, mode: ColourMode | null): Pick<SceneShape, 'fill' | 'colour' | 'step' | 'words'> {
+export function describeFill(model: Pick<ExplorerModel, 'styleStructure'>, structureKey: string, mode: ColourMode | null): Pick<SceneShape, 'fill' | 'colour' | 'step' | 'words'> {
   if (mode === null) return { fill: 'neutral', colour: NEUTRAL_COLOUR, step: null, words: 'no lens subject chosen' };
   const style = model.styleStructure(structureKey, mode);
   const fill = FILL_BY_MARK[style.mark];
@@ -77,7 +77,7 @@ export function describeFill(model: ExplorerModel, structureKey: string, mode: C
 }
 
 /** Every shipped shape and marker, with its three marks, for the layers the visitor has asked to see. */
-export function buildSceneShapes(model: ExplorerModel, mode: ColourMode | null, requested: Readonly<Record<LayerId, boolean>>): SceneShape[] {
+export function buildSceneShapes(model: Pick<ExplorerModel, 'index' | 'styleStructure'>, mode: ColourMode | null, requested: Readonly<Record<LayerId, boolean>>): SceneShape[] {
   const assetsById = new Map(model.index.assets.map((asset) => [asset.id, asset]));
   const availableLayers = new Set(model.index.layers.filter((layer) => layer.available && requested[layer.id]).map((layer) => layer.id));
   return model.index.structures.flatMap((structure) => {

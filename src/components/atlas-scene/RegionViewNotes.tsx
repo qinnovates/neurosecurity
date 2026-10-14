@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import AtlasExplorerLink from '@/components/brain/AtlasExplorerLink';
+import { MOUNT_COPY } from '@/lib/anatomy/mount-copy';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { noteRegionById, type NotedRegion, type RegionViewNotes as Notes } from '@/lib/atlas-explorer/region-view-notes';
 import LimitNote from './LimitNote';
@@ -8,6 +9,8 @@ import ReviewMark from './ReviewMark';
 interface Props {
   model: ExplorerModel;
   notes: Notes;
+  /** Whether the page has a list of its own to choose in. Only then is the visitor sent there when the view lists no region to pick. */
+  canChooseInList: boolean;
   pickedRegionId: string | null;
   onPickRegion: (regionId: string) => void;
 }
@@ -32,7 +35,7 @@ function PickedRegion({ region }: { region: NotedRegion }) {
  * the regions it marks or fills (each a button, so a region can be picked
  * without a pointer), and every sentence that limits what the picture says.
  */
-export default function RegionViewNotes({ model, notes, pickedRegionId, onPickRegion }: Props) {
+export default function RegionViewNotes({ model, notes, canChooseInList, pickedRegionId, onPickRegion }: Props) {
   const picked = pickedRegionId === null ? null : noteRegionById(model, pickedRegionId);
   return (
     <div className="atlas-panel atlas-view-notes" data-view-notes="true">
@@ -50,6 +53,7 @@ export default function RegionViewNotes({ model, notes, pickedRegionId, onPickRe
           </ul>
         </div>
       ))}
+      {canChooseInList && notes.lists.length === 0 && <p className="atlas-fact" data-view-hint="choose-in-list">{MOUNT_COPY.choose_in_list}</p>}
       {picked !== null && <PickedRegion region={picked} />}
       {notes.limits.map((limit) => <LimitNote key={`${limit.id}:${limit.text}`} limit={limit} />)}
     </div>

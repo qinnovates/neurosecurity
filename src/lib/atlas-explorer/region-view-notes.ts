@@ -1,6 +1,6 @@
 /**
  * What stands in words beside the 3D view when it is shown on another page:
- * the regions the visitor chose there, the regions the lens fills, which of
+ * the regions the visitor chose there, the regions a technique's links name, which of
  * them have no shape of their own, and the sentences that limit all of it.
  *
  * Two things are kept apart here, as they are in the picture. The lens decides
@@ -15,6 +15,8 @@ import { isNeuralBand, nameBands, weakestReviewState, type ExplorerModel } from 
 import type { Lens } from './lens-state';
 import { describeBands, limitForGeometry, limitsForLens } from './limit-selection';
 import { GEOMETRY_LABELS } from './region-rows';
+import { limitsForUncolouredTechnique, listNamedRegionIds } from './technique-colouring';
+import type { ViewportCaption } from './viewport-caption';
 
 /** What the visitor chose on the page. Never a claim of the data's. */
 export interface VisitorSelection {
@@ -41,7 +43,7 @@ export interface NotedRegion {
 }
 
 export interface NotedList {
-  /** "Regions you chose", "Regions in band N7", "Regions this technique's links light". */
+  /** "Regions you chose", "Regions QIF places in band N7 Neocortex", "Regions this technique's drafted links name". */
   heading: string;
   regions: NotedRegion[];
 }
@@ -72,11 +74,12 @@ export function noteRegionById(model: ExplorerModel, regionId: string): NotedReg
   return region === undefined ? null : noteRegion(model, region);
 }
 
-/** The regions a technique's drafted links light, in the order the links name them. Empty for a band-level or unknown technique. */
-function listLitRegions(model: ExplorerModel, techniqueId: string): IndexSubject[] {
-  const links = model.techniquesById.get(techniqueId)?.links ?? [];
-  const litIds = [...new Set(links.filter((link) => link.lit && link.resolved_region_id !== null).map((link) => link.resolved_region_id as string))];
-  return litIds.flatMap((regionId) => model.regionsById.get(regionId) ?? []);
+/** The heading over the regions a technique's drafted links name. "Name", not "light": a named region may have no shape of its own to colour. */
+export const NAMED_REGIONS_HEADING = 'Regions this technique\'s drafted links name';
+
+/** The regions a technique's drafted links name, in the order the links name them. Empty for a band-level or unknown technique. */
+function listNamedRegions(model: ExplorerModel, techniqueId: string): IndexSubject[] {
+  return listNamedRegionIds(model.techniquesById.get(techniqueId)).flatMap((regionId) => model.regionsById.get(regionId) ?? []);
 }
 
 /** A technique that has lit links also carries band tags. They are said as band tags, apart from the links. */
@@ -104,12 +107,12 @@ export function buildRegionViewNotes(model: ExplorerModel, lens: Lens, selection
   const unknownIds = chosenIds.filter((regionId) => !model.regionsById.has(regionId));
   const band = selection.bandId === null ? undefined : model.bandsById.get(selection.bandId);
   const bandRegions = band === undefined ? [] : model.regions.filter((region) => region.band_ids.includes(band.id));
-  const lit = lens.kind === 'technique' && lens.techniqueId !== null ? listLitRegions(model, lens.techniqueId) : [];
+  const named = lens.kind === 'technique' && lens.techniqueId !== null ? listNamedRegions(model, lens.techniqueId) : [];
   const toList = (heading: string, regions: readonly IndexSubject[]): NotedList[] => (regions.length === 0 ? [] : [{ heading, regions: regions.map((region) => noteRegion(model, region)) }]);
   const lists = [
     ...toList('Regions you chose', chosen),
     ...(band === undefined ? [] : toList(`Regions QIF places in band ${nameBands(model, [band.id])}`, bandRegions)),
-    ...toList('Regions this technique\'s drafted links light', lit),
+    ...toList(NAMED_REGIONS_HEADING, named),
   ];
   const linkStates = lens.kind === 'technique' && lens.techniqueId !== null ? (model.techniquesById.get(lens.techniqueId)?.links ?? []).map((link) => link.review_state) : [];
   const shown = lists.flatMap((list) => list.regions.map((region) => region.reviewState));
@@ -121,6 +124,7 @@ export function buildRegionViewNotes(model: ExplorerModel, lens: Lens, selection
       ...(band === undefined ? [] : [limitSentence('view_chosen_band', { band: nameBands(model, [band.id]) })]),
       ...(unknownIds.length === 0 ? [] : [limitSentence('view_region_unknown', { regions: unknownIds.join(', ') })]),
       ...limitsForLens(model, lens),
+      ...limitsForUncolouredTechnique(model, lens),
       ...bandReachLimit(model, lens),
       ...withoutShapeLimit(lists),
       limitSentence('region_matching'),
@@ -129,4 +133,18 @@ export function buildRegionViewNotes(model: ExplorerModel, lens: Lens, selection
     // Every shape stands for a region through a drafted matching, so with nothing listed the mark is the regions' own.
     reviewState: weakestReviewState([...linkStates, ...shown, ...model.regions.map((region) => region.review_state)]),
   };
+}
+
+const keyOf = (limit: LimitSentence): string => `${limit.id}:${limit.text}`;
+
+/**
+ * The notes without what the open picture's caption is already showing: the same sentence, word for word, or the same
+ * review mark. Each then stands once, in the caption, which no crop of the picture can lose. With no caption on
+ * screen (the view is hidden, still loading, or could not open) nothing is taken out, so no sentence loses its last copy.
+ */
+export function withoutCaptionCopies(notes: RegionViewNotes, caption: ViewportCaption | null): RegionViewNotes {
+  if (caption === null) return notes;
+  const captioned = new Set([...caption.lensLimits, ...caption.positionLimits, ...caption.markLimits].map(keyOf));
+  const isMarkCaptioned = notes.reviewState !== null && caption.reviewState?.state === notes.reviewState.state && caption.reviewState.mark === notes.reviewState.mark;
+  return { ...notes, limits: notes.limits.filter((limit) => !captioned.has(keyOf(limit))), reviewState: isMarkCaptioned ? null : notes.reviewState };
 }

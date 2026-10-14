@@ -40,6 +40,7 @@ export interface RegionViewPanelProps {
   lens: Lens;
   selectedRegionIds?: readonly string[];
   selectedBandId?: string | null;
+  /** Given by a page that keeps the visitor's choice in its own list. With nothing chosen, the view then says to choose there. */
   onRegionPick?: (pick: RegionPick) => void;
 }
 
@@ -74,7 +75,7 @@ export default function RegionViewPanel({ lens: givenLens, selectedRegionIds, se
       {state.status === 'ready' ? (
         <AtlasRegionView
           model={state.data.model} lens={lens} selectedRegionId={pickedRegionId} selectedRegionIds={selectedRegionIds} selectedBandId={selectedBandId}
-          isIndexPinned={state.data.indexPinState === 'pinned'} isOutOfStep={state.data.indexPinState === 'mismatched'} isAsked onRegionSelect={pick}
+          isIndexPinned={state.data.indexPinState === 'pinned'} isOutOfStep={state.data.indexPinState === 'mismatched'} isAsked canChooseInList={onRegionPick !== undefined} onRegionSelect={pick}
         />
       ) : (
         <LoadNotice what="the atlas data for the 3D view; the list on this page is unchanged" state={state.status === 'idle' ? { status: 'loading' } : state} onRetry={retry} />

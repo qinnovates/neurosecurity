@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState, type ComponentType } from 'react';
+import type { LimitId, LimitSentence } from '@/lib/anatomy/limits-copy';
+import { MOUNT_COPY } from '@/lib/anatomy/mount-copy';
 import type { Lens } from '@/lib/atlas-explorer/lens-state';
 import type { RegionViewPanelProps } from './RegionViewPanel';
 import './region-view-mount.css';
@@ -7,6 +9,12 @@ type PanelModule = { default: ComponentType<RegionViewPanelProps> };
 type PanelState = { status: 'closed' } | { status: 'loading' } | { status: 'failed' } | { status: 'ready'; Panel: ComponentType<RegionViewPanelProps> };
 
 export interface RegionViewMountProps extends RegionViewPanelProps {
+  /**
+   * For a technique lens whose links colour no shape: the sentence saying so, as the page was built with it
+   * (build-technique-colouring.ts). It is shown beside the button and nothing more: the view works out its own fills
+   * and its own caption from the data, and is not handed this.
+   */
+  nothingColoured?: LimitSentence | null;
   /** Replaceable in tests. In a page it is the real panel, fetched only when the visitor asks. */
   loadPanel?: () => Promise<PanelModule>;
 }
@@ -15,6 +23,9 @@ export interface RegionViewMountProps extends RegionViewPanelProps {
 export const BAND_LENS: Lens = { kind: 'band' };
 
 const loadRealPanel = (): Promise<PanelModule> => import('./RegionViewPanel');
+
+/** The sentence for a technique whose links name no region at all. Only then does a technique's view list no region to pick. */
+const NONE_NAMED_LIMIT_ID: LimitId = 'view_nothing_coloured_none_named';
 
 /**
  * The way in to the 3D view from any page that lists regions or bands. Until
@@ -25,9 +36,15 @@ const loadRealPanel = (): Promise<PanelModule> => import('./RegionViewPanel');
  *
  * `lens` decides every fill, from the data. `selectedRegionIds` and
  * `selectedBandId` are the visitor's own choice on the page: marked, never filled.
+ * A page that passes `onRegionPick` keeps that choice in its own list, so with
+ * nothing chosen yet the visitor is told to choose there.
  */
-export default function RegionViewMount({ loadPanel = loadRealPanel, ...panelProps }: RegionViewMountProps) {
+export default function RegionViewMount({ loadPanel = loadRealPanel, nothingColoured = null, ...panelProps }: RegionViewMountProps) {
   const [panel, setPanel] = useState<PanelState>({ status: 'closed' });
+  // The view lists a region to pick only for a selection or for a technique whose links name one.
+  const listsNamedRegions = panelProps.lens.kind === 'technique' && nothingColoured?.id !== NONE_NAMED_LIMIT_ID;
+  const isNothingListed = (panelProps.selectedRegionIds ?? []).length === 0 && (panelProps.selectedBandId ?? null) === null && !listsNamedRegions;
+  const showsChooseHint = isNothingListed && panelProps.onRegionPick !== undefined;
   const isMounted = useRef(true);
   useEffect(() => () => { isMounted.current = false; }, []);
 
@@ -45,9 +62,11 @@ export default function RegionViewMount({ loadPanel = loadRealPanel, ...panelPro
       <button type="button" className="region-view-ask-button" onClick={ask} disabled={panel.status === 'loading'}>
         {panel.status === 'failed' ? 'Try the 3D view again' : 'Show the 3D view'}
       </button>
-      {panel.status === 'closed' && <span>Draws this on an average brain, with what the picture cannot tell you beside it. Nothing is fetched until you ask.</span>}
-      {panel.status === 'loading' && <span role="status">Loading the 3D view…</span>}
-      {panel.status === 'failed' && <span role="alert">The 3D view could not be loaded. The list on this page is unchanged and has everything the view would show.</span>}
+      {nothingColoured !== null && <span data-mount-note="nothing-coloured" data-limit-id={nothingColoured.id}>{nothingColoured.text}</span>}
+      {panel.status === 'closed' && <span>{MOUNT_COPY.ask}</span>}
+      {panel.status === 'closed' && showsChooseHint && <span data-mount-note="choose-in-list">{MOUNT_COPY.choose_in_list}</span>}
+      {panel.status === 'loading' && <span role="status">{MOUNT_COPY.loading}</span>}
+      {panel.status === 'failed' && <span role="alert">{MOUNT_COPY.failed}</span>}
     </div>
   );
 }

@@ -1,8 +1,9 @@
-import { Suspense, lazy, useMemo, useState, type ComponentType } from 'react';
+import { Suspense, lazy, useMemo, useRef, useState, type ComponentType } from 'react';
 import type { LayerId } from '@/lib/anatomy/source-types';
 import type { ChainFrame } from '@/lib/atlas-explorer/chain-steps';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import type { Lens } from '@/lib/atlas-explorer/lens-state';
+import type { ViewportCaption } from '@/lib/atlas-explorer/viewport-caption';
 import type { OpenViewportProps } from './OpenViewport';
 import { GATE_NOTICES, decideGate, probeWebGL, type GateState } from './viewport-gate';
 
@@ -27,6 +28,8 @@ export interface AtlasViewportProps {
   selectedRegionGroups?: ReadonlyArray<readonly string[]>;
   /** The visitor already asked for the view with the embedding page's own control, so it starts decided, not closed. */
   isAsked?: boolean;
+  /** Told the caption the open picture is showing, and null once the picture is gone, so words beside it need not be said twice. */
+  onCaptionChange?: (caption: ViewportCaption | null) => void;
   /** Replaceable in tests. In the page they are the real probe and the real view, fetched only once the gate opens. */
   probe?: () => boolean;
   loadOpenView?: () => Promise<OpenViewModule>;
@@ -52,13 +55,21 @@ function sumRequestedBytes(model: ExplorerModel, layers: Readonly<Record<LayerId
  * facts are.
  */
 export default function AtlasViewport(props: AtlasViewportProps) {
-  const { model, lens, layers, selectedRegionId, isIndexPinned, isOutOfStep = false, chain = null, electrodeId = null, onPickElectrode = IGNORE_ELECTRODE, onSelectRegion, selectedRegionGroups = NO_GROUPS, isAsked = false, probe = probeWebGL, loadOpenView = loadRealOpenView } = props;
+  const { model, lens, layers, selectedRegionId, isIndexPinned, isOutOfStep = false, chain = null, electrodeId = null, onPickElectrode = IGNORE_ELECTRODE, onSelectRegion, selectedRegionGroups = NO_GROUPS, isAsked = false, onCaptionChange, probe = probeWebGL, loadOpenView = loadRealOpenView } = props;
   const decide = (): GateState => decideGate(isIndexPinned, globalThis.crypto?.subtle !== undefined, probe, isOutOfStep);
   const [gate, setGate] = useState<GateState>(() => (isAsked ? decide() : 'closed'));
   const [run, setRun] = useState(0);
   // One lazy component per start of the view, so "start again" builds a fresh canvas.
   const OpenView = useMemo(() => lazy(loadOpenView), [loadOpenView, run]);
   const megabytes = (sumRequestedBytes(model, layers) / BYTES_PER_MEGABYTE).toFixed(1);
+  // "Hide the 3D view" removes the button that was pressed, so focus goes to the one that takes its place.
+  const isJustHidden = useRef(false);
+  const hide = (): void => { isJustHidden.current = true; setGate('closed'); };
+  const focusAfterHide = (button: HTMLButtonElement | null): void => {
+    if (button === null || !isJustHidden.current) return;
+    isJustHidden.current = false;
+    button.focus();
+  };
 
   const open = (): void => {
     setGate(decide());
@@ -72,7 +83,7 @@ export default function AtlasViewport(props: AtlasViewportProps) {
       {(gate === 'closed' || gate === 'context_lost') && (
         <>
           <p className="atlas-fact">Turn an average brain and pick the shapes inside it. It fetches about {megabytes} MB of shapes, and nothing until you ask.</p>
-          <button type="button" className="atlas-button atlas-button-primary" onClick={open}>{gate === 'closed' ? 'Show the 3D view' : 'Start the 3D view again'}</button>
+          <button type="button" className="atlas-button atlas-button-primary" ref={focusAfterHide} onClick={open}>{gate === 'closed' ? 'Show the 3D view' : 'Start the 3D view again'}</button>
         </>
       )}
       {gate === 'open' && (
@@ -80,7 +91,7 @@ export default function AtlasViewport(props: AtlasViewportProps) {
           <OpenView
             key={run} model={model} lens={lens} layers={layers} selectedRegionId={selectedRegionId} onSelectRegion={onSelectRegion}
             chain={chain} electrodeId={electrodeId} onPickElectrode={onPickElectrode} selectedRegionGroups={selectedRegionGroups}
-            onClose={() => setGate('closed')} onStopped={setGate}
+            onClose={hide} onStopped={setGate} onCaption={onCaptionChange}
           />
         </Suspense>
       )}

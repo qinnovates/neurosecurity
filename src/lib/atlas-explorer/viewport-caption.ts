@@ -13,6 +13,7 @@ import { weakestReviewState, type ExplorerModel } from './explorer-model';
 import { LENS_LABELS, lensSubjectId, type Lens } from './lens-state';
 import { limitsForLens } from './limit-selection';
 import type { SceneShape } from './scene-shapes';
+import { limitsForUncolouredTechnique } from './technique-colouring';
 
 export interface ViewportCaption {
   /** The weakest review state among the shapes drawn. Null only when nothing is drawn. */
@@ -20,7 +21,7 @@ export interface ViewportCaption {
   /** The lens and what it is on: "Technique lens: QIF-T0103, SSVEP Frequency Hijack." */
   lensLabel: string;
   templateSpace: string;
-  /** The lens's own limit first, then the whole-scene limit. */
+  /** The lens's own limit first, then, for a technique that colours nothing, the sentence saying so, then the whole-scene limit. */
   lensLimits: LimitSentence[];
   /** One sentence per layer drawn, about its position. */
   positionLimits: LimitSentence[];
@@ -98,7 +99,7 @@ export function buildViewportCaption(model: ExplorerModel, lens: Lens, shapes: r
     reviewState: weakestReviewState(states),
     lensLabel: describeLens(model, lens),
     templateSpace: model.index.template_space,
-    lensLimits: [lensLimit, limitSentence('whole_scene')],
+    lensLimits: [lensLimit, ...limitsForUncolouredTechnique(model, lens), limitSentence('whole_scene')],
     positionLimits: [...layers.map((layer) => positionLimitFor(model, layer, assetIds)), ...mirroredLimitFor(model, shapes)],
     markLimits: markLimitsFor(shapes),
   };

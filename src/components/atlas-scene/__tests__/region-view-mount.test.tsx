@@ -1,22 +1,18 @@
 // @vitest-environment jsdom
-import fs from 'node:fs';
-import path from 'node:path';
 import { webcrypto } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { ANATOMY_INDEX_PATH } from '@/lib/anatomy/anatomy-index-types';
-import { isLimitId } from '@/lib/anatomy/limits-copy';
-import { loadRealModel } from '@/lib/atlas-explorer/__tests__/explorer-fixtures';
+import { LIMIT_TEMPLATES, isLimitId, limitSentence } from '@/lib/anatomy/limits-copy';
+import { MOUNT_COPY } from '@/lib/anatomy/mount-copy';
 import type { AtlasCanvasProps } from '../AtlasCanvas';
 import { INITIAL_EXPLORER_STATE } from '../atlas-state';
 import AtlasViewport, { type AtlasViewportProps } from '../AtlasViewport';
-import { loadAnatomyBundle } from '../load-anatomy-data';
 import OpenViewport, { type OpenViewportProps } from '../OpenViewport';
-import { INDEX_PIN_ATTRIBUTE } from '../read-index-pin';
-import RegionViewMount from '../RegionViewMount';
+import RegionViewMount, { type RegionViewMountProps } from '../RegionViewMount';
 import RegionViewPanel, { type RegionViewPanelProps } from '../RegionViewPanel';
 import { GATE_NOTICES } from '../viewport-gate';
-import { buildServedFiles, type ServedFile } from './explorer-test-server';
+import { model, serveSite, writePin } from './region-view-test-kit';
 
 // The test runner does not build stylesheets, so the two addresses the build would give are stood in for.
 vi.mock('../atlas-scene.css?url', () => ({ default: '/_astro/atlas-scene.css' }));
@@ -25,10 +21,6 @@ vi.mock('../atlas-region-mount.css?url', () => ({ default: '/_astro/atlas-region
 const TEST_TIMEOUT_MS = 20_000;
 vi.setConfig({ testTimeout: TEST_TIMEOUT_MS });
 
-const model = loadRealModel();
-const bundle = loadAnatomyBundle();
-const ASSET_ROOT = 'src/site/atlas-assets';
-const assetBytes = new Map(model.index.assets.map((asset) => [`/atlas-assets/${asset.path}`, new Uint8Array(fs.readFileSync(path.join(ASSET_ROOT, asset.path)))]));
 const drawn = model.regions.filter((region) => region.geometry.state === 'drawn');
 const shapeless = model.regions.find((region) => region.geometry.state === 'no_geometry');
 const BAND_LENS = { kind: 'band' } as const;
@@ -41,25 +33,6 @@ function CanvasStandIn(props: AtlasCanvasProps) {
 }
 const loadCanvas = vi.fn(async () => ({ default: CanvasStandIn }));
 const loadOpenView = vi.fn(async () => ({ default: (props: OpenViewportProps) => <OpenViewport {...props} loadCanvas={loadCanvas} /> }));
-
-/** Serves the site's data files and geometry, or whatever a test puts in their place. */
-function serve(overrides: Record<string, ServedFile> = {}): void {
-  const files = { ...buildServedFiles(), ...overrides };
-  vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL): Promise<Response> => {
-    fetchLog.push(String(input));
-    const bytes = assetBytes.get(String(input));
-    if (bytes !== undefined) return new Response(bytes as BodyInit);
-    const served = files[String(input)] ?? { status: 404 };
-    return typeof served === 'string' ? new Response(served) : new Response('', { status: served.status });
-  }));
-}
-
-function writePin(): void {
-  const holder = document.createElement('div');
-  holder.hidden = true;
-  holder.setAttribute(INDEX_PIN_ATTRIBUTE, JSON.stringify(bundle.indexPin));
-  document.body.append(holder);
-}
 
 async function openViewport(props: Partial<AtlasViewportProps> = {}): Promise<AtlasCanvasProps> {
   const { container } = render(
@@ -82,7 +55,7 @@ beforeEach(() => {
   loadCanvas.mockClear();
   loadOpenView.mockClear();
   vi.stubGlobal('crypto', webcrypto);
-  serve();
+  fetchLog = serveSite();
 });
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); document.body.replaceChildren(); document.head.querySelectorAll('link').forEach((link) => link.remove()); });
 
@@ -102,6 +75,21 @@ describe('the viewport once the page\'s own control has asked for it', () => {
     expect(screen.getByRole('alert').textContent).toBe(GATE_NOTICES[gate]);
     expect(loadOpenView).not.toHaveBeenCalled();
     expect(fetchLog).toEqual([]);
+  });
+
+  it('returns focus to "Show the 3D view" when the visitor hides the view, and opens again from there', async () => {
+    await openViewport();
+    fireEvent.click(screen.getByRole('button', { name: 'Hide the 3D view' }));
+    const show = screen.getByRole('button', { name: 'Show the 3D view' });
+    expect(document.activeElement).toBe(show);
+    expect(screen.queryByRole('button', { name: 'Hide the 3D view' })).toBeNull();
+    fireEvent.click(show);
+    expect(await screen.findByRole('button', { name: 'Hide the 3D view' })).toBeTruthy();
+  });
+
+  it('does not take focus for a view the visitor has not opened and hidden', () => {
+    render(<AtlasViewport model={model} lens={BAND_LENS} layers={INITIAL_EXPLORER_STATE.layers} selectedRegionId={null} isIndexPinned onSelectRegion={() => undefined} probe={() => true} loadOpenView={loadOpenView} />);
+    expect(document.activeElement).toBe(document.body);
   });
 
   it('draws without animation when the visitor prefers less motion', async () => {
@@ -157,11 +145,50 @@ describe('RegionViewMount: the button a page ships with', () => {
     expect(JSON.parse(container.querySelector('[data-panel]')?.getAttribute('data-panel') ?? '{}')).toEqual({ lens: { kind: 'technique', techniqueId: 'QIF-T0001' }, selectedRegionIds: ['pfc'], selectedBandId: 'N7' });
   });
 
+  it('keeps the page\'s sentence about colouring to itself: the panel is handed the lens and the selection only', async () => {
+    const { container } = render(<RegionViewMount lens={{ kind: 'technique', techniqueId: 'QIF-T0001' }} nothingColoured={limitSentence('view_nothing_coloured_none_named')} loadPanel={async () => ({ default: Panel })} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Show the 3D view' }));
+    await waitFor(() => expect(container.querySelector('[data-panel]')).not.toBeNull());
+    expect(JSON.parse(container.querySelector('[data-panel]')?.getAttribute('data-panel') ?? '{}')).toEqual({ lens: { kind: 'technique', techniqueId: 'QIF-T0001' } });
+  });
+
+  it.each([
+    ['colour a shape', null, null],
+    ['name only regions with no shape of their own', limitSentence('view_nothing_coloured_no_own_shape'), 'No region is coloured for this technique: its drafted links name no region that has a shape of its own in this atlas.'],
+    ['name no region', limitSentence('view_nothing_coloured_none_named'), 'No region is coloured for this technique: its drafted links name no single region.'],
+  ] as const)('for a technique whose links %s, keeps the button and says beside it what the picture will not show', (_case, nothingColoured, sentence) => {
+    const { container } = render(<RegionViewMount lens={{ kind: 'technique', techniqueId: 'QIF-T0001' }} nothingColoured={nothingColoured} loadPanel={async () => ({ default: Panel })} />);
+    expect(screen.getByRole('button', { name: 'Show the 3D view' })).toBeTruthy();
+    expect(container.querySelector('[data-mount-note="nothing-coloured"]')?.textContent ?? null).toBe(sentence);
+    expect(sentence === null || [LIMIT_TEMPLATES.view_nothing_coloured_no_own_shape, LIMIT_TEMPLATES.view_nothing_coloured_none_named].includes(sentence)).toBe(true);
+    expect(container.textContent).toContain(MOUNT_COPY.ask);
+  });
+
+  it('sends the visitor to the page\'s list only when nothing is chosen there and the page has a list that chooses', () => {
+    const hint = (props: Partial<RegionViewMountProps>): string | null => {
+      const { container } = render(<RegionViewMount lens={BAND_LENS} loadPanel={async () => ({ default: Panel })} {...props} />);
+      const text = container.querySelector('[data-mount-note="choose-in-list"]')?.textContent ?? null;
+      cleanup();
+      return text;
+    };
+    const onRegionPick = (): void => undefined;
+    expect(hint({ onRegionPick })).toBe('Choose a band or region in the list on this page to mark it in the picture.');
+    const technique = { kind: 'technique', techniqueId: 'QIF-T0001' } as const;
+    expect(hint({ onRegionPick, selectedRegionIds: [], selectedBandId: null, lens: technique, nothingColoured: limitSentence('view_nothing_coloured_none_named') })).toBe(MOUNT_COPY.choose_in_list);
+    expect(hint({ onRegionPick, selectedBandId: 'N7' })).toBeNull();
+    expect(hint({ onRegionPick, selectedRegionIds: ['pfc'] })).toBeNull();
+    // The view lists the regions a technique's links name, so there is something to pick inside it.
+    expect(hint({ onRegionPick, lens: technique, nothingColoured: limitSentence('view_nothing_coloured_no_own_shape') })).toBeNull();
+    expect(hint({ onRegionPick, lens: technique, nothingColoured: null })).toBeNull();
+    // The Lab's panel restates a choice made elsewhere on the page and has no list to choose in.
+    expect(hint({})).toBeNull();
+  });
+
   it('says so and keeps the page when the view\'s script does not arrive, and can be tried again', async () => {
     const loadPanel = vi.fn<() => Promise<{ default: typeof Panel }>>().mockRejectedValueOnce(new Error('chunk failed')).mockResolvedValue({ default: Panel });
     const { container } = render(<RegionViewMount lens={BAND_LENS} loadPanel={loadPanel} />);
     fireEvent.click(screen.getByRole('button', { name: 'Show the 3D view' }));
-    expect((await screen.findByRole('alert')).textContent).toBe('The 3D view could not be loaded. The list on this page is unchanged and has everything the view would show.');
+    expect((await screen.findByRole('alert')).textContent).toBe('The 3D view could not be loaded. The list on this page is unchanged.');
     fireEvent.click(screen.getByRole('button', { name: 'Try the 3D view again' }));
     await waitFor(() => expect(container.querySelector('[data-panel]')).not.toBeNull());
   });
@@ -210,7 +237,7 @@ describe('RegionViewPanel: the view with its words, on a page', () => {
     ['cannot be fetched', { [ANATOMY_INDEX_PATH]: { status: 503 } }, 'unavailable'],
     ['fails its checks', { [ANATOMY_INDEX_PATH]: '{"schema_version":"0"}' }, 'invalid'],
   ] as const)('says the list is unchanged and shows no view when the atlas data %s', async (_case, overrides, kind) => {
-    serve(overrides);
+    fetchLog = serveSite(overrides);
     const { container } = render(<RegionViewPanel lens={BAND_LENS} />);
     const alert = await screen.findByRole('alert');
     expect(alert.getAttribute('data-failure')).toBe(kind);

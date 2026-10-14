@@ -140,6 +140,8 @@ export const LIMIT_TEMPLATES = {
   view_regions_without_shape: 'No shape of its own is drawn for {count} of these, so no mark here stands for it alone: {regions}.',
   view_technique_band_reach: 'The catalog also tags this technique with {bands}. A band tag is about the band as a whole: it names none of the regions there, and no region is filled because of it.',
   view_region_unknown: 'Not in this build of the atlas, so not shown in the picture: {regions}.',
+  view_nothing_coloured_no_own_shape: 'No region is coloured for this technique: its drafted links name no region that has a shape of its own in this atlas.',
+  view_nothing_coloured_none_named: 'No region is coloured for this technique: its drafted links name no single region.',
 } as const;
 
 export type LimitId = keyof typeof LIMIT_TEMPLATES;

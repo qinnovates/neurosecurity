@@ -4,6 +4,7 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import RegionPicker from '@/components/atlas/brainmap/RegionPicker';
 import BandViewPanel from '@/components/brain/BandViewPanel';
 import TargetRegionsPanel from '@/components/threat-model/TargetRegionsPanel';
+import { limitSentence } from '@/lib/anatomy/limits-copy';
 import type { BrainView } from '@/lib/brain-view-data';
 import type { ClinicalRegion } from '@/lib/clinical-data';
 import type { RegionViewMountProps } from '../RegionViewMount';
@@ -97,6 +98,17 @@ describe('the band list', () => {
     fireEvent.click(screen.getByRole('button', { name: /Band N7/ }));
     expect(lastMount().selectedBandId).toBe('N7');
     expect(lastMount().selectedRegionIds).toBeUndefined();
+  });
+
+  it('passes on the sentence a technique page was built with, and passes none where the page gives none', () => {
+    const sentence = limitSentence('view_nothing_coloured_no_own_shape');
+    render(<BandViewPanel views={VIEWS} regionViewLens={{ kind: 'technique', techniqueId: 'QIF-T0034' }} regionViewNothingColoured={sentence} />);
+    expect(lastMount().nothingColoured).toBe(sentence);
+    cleanup();
+    render(<BandViewPanel views={VIEWS} regionViewLens={{ kind: 'band' }} />);
+    expect(lastMount().nothingColoured).toBeUndefined();
+    // A page that lists bands keeps the choice in its list, which is what lets the mount send a visitor there.
+    expect(typeof lastMount().onRegionPick).toBe('function');
   });
 
   it('selects in the list the band of a region picked in the view', () => {

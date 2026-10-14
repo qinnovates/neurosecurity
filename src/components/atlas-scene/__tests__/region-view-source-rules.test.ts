@@ -50,9 +50,11 @@ describe('the 3D view on other pages: what may import what', () => {
     const mount = read(path.join(SCENE_DIRECTORY, 'RegionViewMount.tsx'));
     expect(mount).toContain("import('./RegionViewPanel')");
     expect(STATIC_HEAVY_IMPORT.test(mount)).toBe(false);
-    // What ships with a page is the button: no limit table, no parser, no data loader.
+    // What ships with a page is the button and its own few sentences: no limit table, no parser, no data loader.
     expect(mount.match(/^import .*$/gm)).toEqual([
       "import { useEffect, useRef, useState, type ComponentType } from 'react';",
+      "import type { LimitId, LimitSentence } from '@/lib/anatomy/limits-copy';",
+      "import { MOUNT_COPY } from '@/lib/anatomy/mount-copy';",
       "import type { Lens } from '@/lib/atlas-explorer/lens-state';",
       "import type { RegionViewPanelProps } from './RegionViewPanel';",
       "import './region-view-mount.css';",
@@ -82,9 +84,31 @@ describe('the 3D view on other pages: what may import what', () => {
     expect(pinElement).not.toMatch(/loadAnatomyBundle|\.index\b|indexJson|@shared\//);
   });
 
+  it('builds a technique page with the sentence for a picture with nothing coloured, from the module that chooses it as the view does', () => {
+    const page = read('src/pages/atlas/tara/[id].astro');
+    expect(page).toContain("import { readUncolouredLimit } from '@/components/atlas-scene/build-technique-colouring';");
+    expect(page.match(/regionViewNothingColoured=\{readUncolouredLimit\(threat\.id\)\}/g)).toHaveLength(1);
+    const buildModule = read(path.join(SCENE_DIRECTORY, 'build-technique-colouring.ts'));
+    expect(buildModule.match(/^export .*$/gm)).toEqual(['export function readUncolouredLimit(techniqueId: string): LimitSentence | null {']);
+    expect(buildModule).toContain("limitsForUncolouredTechnique(COLOURING_SOURCE, { kind: 'technique', techniqueId })");
+    // No client file may import a build-time module: each leads to the anatomy loader.
+    const clientFiles = [...listSourceFiles('src/components'), ...listSourceFiles('src/lib')].filter((filePath) => !filePath.includes('__tests__') && !filePath.endsWith('.astro'));
+    expect(clientFiles.filter((filePath) => /from ['"][^'"]*\/build-(technique-colouring|index-pin)['"]/.test(read(filePath)))).toEqual([]);
+  });
+
   it('embeds nothing in a frame', () => {
     const files = [...listSourceFiles(SCENE_DIRECTORY).filter((filePath) => !filePath.includes('__tests__')), ...MOUNTS.flatMap(({ page, host }) => [page, host])];
     expect(files.filter((filePath) => /<iframe|<frame\b|<embed\b|<object\b/i.test(read(filePath)))).toEqual([]);
+  });
+
+  it('keeps the button\'s sentences in a module that imports nothing, and writes none in the button itself', () => {
+    expect(read('src/lib/anatomy/mount-copy.ts')).not.toMatch(/^import /m);
+    const mount = read(path.join(SCENE_DIRECTORY, 'RegionViewMount.tsx'));
+    // Text between tags, apart from the two button labels: every sentence comes from MOUNT_COPY.
+    expect(mount.match(/<span[^>]*>[^<{]+<\/span>/g)).toBeNull();
+    expect([...new Set(mount.match(/MOUNT_COPY\.[a-z_]+/g))].sort()).toEqual(['MOUNT_COPY.ask', 'MOUNT_COPY.choose_in_list', 'MOUNT_COPY.failed', 'MOUNT_COPY.loading']);
+    // The one sentence about the atlas that the button shows is a limit sentence the page was built with.
+    expect(mount).toContain('{nothingColoured.text}');
   });
 
   it('writes no limit sentence of its own: the notes show only what limits-copy.ts made', () => {

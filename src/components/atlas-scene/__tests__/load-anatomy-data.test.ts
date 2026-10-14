@@ -55,6 +55,8 @@ const TABLE_BUILDER_PATH = 'src/lib/kql-tables.ts';
 const ENDPOINT_PATHS = [
   // Build time only: it exports the index's path, length and digest and nothing else, for the pages that mount the 3D view.
   'src/components/atlas-scene/build-index-pin.ts',
+  // Build time only: the sentence for a technique whose links colour no shape, for a technique page's button, and nothing else.
+  'src/components/atlas-scene/build-technique-colouring.ts',
   'src/pages/atlas/anatomy-catalog.json.ts', 'src/pages/atlas/anatomy-chains.json.ts', 'src/pages/atlas/anatomy-evidence.json.ts', 'src/pages/atlas/anatomy-h01-card.json.ts',
   'src/pages/atlas/anatomy-index.json.ts', 'src/pages/atlas/anatomy-region-evidence.json.ts', 'src/pages/atlas/anatomy.astro',
   'src/pages/atlas/attribution.astro',
@@ -212,7 +214,7 @@ describe('where anatomy data may be imported (guards)', () => {
     expect(listFilesMatching(TABLE_LOADER_IMPORT_PATTERN)).toEqual([TABLE_BUILDER_PATH]);
   });
 
-  it('lets only the static endpoints, the attribution page, the explorer page and the pin module (both for the index pin alone) import the loader, so nothing is serialised into a tool page', () => {
+  it('lets only the static endpoints, the attribution page, the explorer page, the pin module (both for the index pin alone) and the technique-colouring module (one limit sentence or none per technique) import the loader, so nothing is serialised into a tool page', () => {
     expect(listFilesMatching(LOADER_IMPORT_PATTERN).filter((filePath) => filePath !== LOADER_PATH)).toEqual(ENDPOINT_PATHS);
   });
 });

@@ -1,7 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import type { Lens } from '@/lib/atlas-explorer/lens-state';
-import { buildRegionViewNotes } from '@/lib/atlas-explorer/region-view-notes';
+import { buildRegionViewNotes, withoutCaptionCopies } from '@/lib/atlas-explorer/region-view-notes';
+import type { ViewportCaption } from '@/lib/atlas-explorer/viewport-caption';
 import { INITIAL_EXPLORER_STATE } from './atlas-state';
 import AtlasViewport from './AtlasViewport';
 import RegionViewNotes from './RegionViewNotes';
@@ -20,6 +21,8 @@ export interface AtlasRegionViewProps {
   isOutOfStep?: boolean;
   /** The visitor already asked for the view with the page's own control, so it opens without a second button. */
   isAsked?: boolean;
+  /** The page keeps the visitor's choice in a list of its own, so with nothing chosen the notes say to choose there. */
+  canChooseInList?: boolean;
   onRegionSelect: (regionId: string) => void;
 }
 
@@ -37,15 +40,18 @@ const NO_REGIONS: readonly string[] = [];
  * marks around a shape, no fill, and a sentence saying whose choice it is.
  */
 export default function AtlasRegionView(props: AtlasRegionViewProps) {
-  const { model, lens, selectedRegionId, selectedRegionIds = NO_REGIONS, selectedBandId = null, isIndexPinned, isOutOfStep = false, isAsked = false, onRegionSelect } = props;
+  const { model, lens, selectedRegionId, selectedRegionIds = NO_REGIONS, selectedBandId = null, isIndexPinned, isOutOfStep = false, isAsked = false, canChooseInList = false, onRegionSelect } = props;
   const notes = useMemo(() => buildRegionViewNotes(model, lens, { regionIds: selectedRegionIds, bandId: selectedBandId }), [model, lens, selectedRegionIds.join(' '), selectedBandId]);
+  // What the open picture's caption says is not said again beside it; while no picture is open the notes say all of it.
+  const [caption, setCaption] = useState<ViewportCaption | null>(null);
+  const shownNotes = useMemo(() => withoutCaptionCopies(notes, caption), [notes, caption]);
   return (
     <div className="atlas-region-view" role="group" aria-label="3D view and what it shows">
       <AtlasViewport
         model={model} lens={lens} layers={INITIAL_EXPLORER_STATE.layers} selectedRegionId={selectedRegionId} selectedRegionGroups={notes.bracketGroups}
-        isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep} isAsked={isAsked} onSelectRegion={onRegionSelect}
+        isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep} isAsked={isAsked} onCaptionChange={setCaption} onSelectRegion={onRegionSelect}
       />
-      <RegionViewNotes model={model} notes={notes} pickedRegionId={selectedRegionId} onPickRegion={onRegionSelect} />
+      <RegionViewNotes model={model} notes={shownNotes} canChooseInList={canChooseInList} pickedRegionId={selectedRegionId} onPickRegion={onRegionSelect} />
     </div>
   );
 }
