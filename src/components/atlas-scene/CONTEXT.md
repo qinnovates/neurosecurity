@@ -12,12 +12,15 @@ The island on `/atlas/anatomy/`, its gated 3D view, and the build-time loader of
 - `AtlasViewport.tsx`, `viewport-gate.ts`, `OpenViewport.tsx`, `ViewportStage.tsx`, `use-viewport-scene.ts` -- the gate: the 3D view opens only on request, and says why when it cannot
 - `AtlasCanvas.tsx`, `scene-renderer.ts`, `scene-objects.ts`, `scene-marks.ts`, `device-objects.ts`, `TractLines.tsx` -- the canvas chunk, the only files that may import three.js
 - `DeviceGeometry.tsx`, `LeadFigure.tsx` -- electrode layout controls and the lead figure
-- `AtlasRegionView.tsx` -- the viewport for one region, for embedding; no page uses it yet
+- `AtlasRegionView.tsx`, `RegionViewNotes.tsx` -- the one 3D view other pages mount, with its words. A lens decides every fill; a page may add only the visitor's own selection (`selectedRegionIds`, `selectedBandId`), which is marked and never filled
+- `RegionViewMount.tsx`, `region-view-mount.css` -- all that ships with a mounting page: the button. `RegionViewPanel.tsx`, `atlas-region-mount.css` -- the lazy chunk behind it: reads the page's pin, loads the model, links the styles by address
+- `AtlasIndexPin.astro`, `build-index-pin.ts`, `read-index-pin.ts` -- the index pin a mounting page is built with, and how the panel reads it
+- `explorer-companions.ts` -- the files beside the index that load only when opened (quotes, statements, H01 card, threat models); kept out of `explorer-data.ts` so a mount never reaches their parsers
 - `atlas-scene.css`, `atlas-chain-devices.css` -- all explorer styles
 
 ## Imports
-- May import: `src/lib/atlas-explorer/`, `src/lib/anatomy/`, React; three.js in the canvas chunk only. Only `load-anatomy-data.ts` imports data files.
-- Imported by: `src/pages/atlas/anatomy.astro`, `src/pages/atlas/attribution.astro` and the six `src/pages/atlas/anatomy-*.json.ts` endpoints. No Lab page may reach `load-anatomy-data.ts`.
+- May import: `src/lib/atlas-explorer/`, `src/lib/anatomy/`, `src/components/brain/AtlasExplorerLink.tsx`, React; three.js in the canvas chunk only. Only `load-anatomy-data.ts` imports data files.
+- Imported by: `src/pages/atlas/anatomy.astro`, `src/pages/atlas/attribution.astro` and the six `src/pages/atlas/anatomy-*.json.ts` endpoints. The mounts import `RegionViewMount.tsx` alone: `src/components/threat-model/TargetRegionsPanel.tsx`, `src/components/brain/BandViewPanel.tsx`, `src/components/atlas/brainmap/RegionPicker.tsx`, `src/components/atlas/AtlasDashboard.tsx`. No Lab page may reach `load-anatomy-data.ts` except through `build-index-pin.ts`, for the pin alone.
 - Visitor-facing limit sentences belong in `src/lib/anatomy/limits-copy.ts`, not in a component.
 
 ## Derived files
@@ -25,6 +28,7 @@ None are committed. `npm run build` writes the six `/atlas/anatomy-*.json` files
 
 ## Checks
 - `__tests__/explorer-source-rules.test.ts` -- three.js stays in the canvas chunk, no monospace, reduced motion is honoured, the page passes only the pin
+- `__tests__/region-view-source-rules.test.ts`, `__tests__/region-view-mount.test.tsx`, `__tests__/region-view-hosts.test.tsx` -- the mounts: no static way to three.js, the selection changes no fill, each page hands over its own list, every fallback
 - `__tests__/load-anatomy-data.test.ts` -- `PINNED_ANATOMY_STATE` and the index budget; `__tests__/technique-regions-content.test.ts` -- the technique links' pins
 - `__tests__/shared-constants.guard.test.ts` -- facts written in more than one runtime (paths, schema versions, the licence table)
 - `__tests__/find-anatomy-payload.test.ts` with `npm run check:anatomy-payload` -- no anatomy data in a built Lab page

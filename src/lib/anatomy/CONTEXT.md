@@ -15,7 +15,8 @@ datalake/qif-anatomy-*.json + src/site/atlas-assets/   data (untrusted input, pa
   -> src/lib/anatomy/            parse, cross-check, build the index and the query tables
   -> src/lib/atlas-explorer/     what the explorer shows, as pure functions of the index
   -> src/components/atlas-scene/ React, three.js, and the page's loader of the data files
-  -> src/pages/atlas/anatomy.astro, src/pages/atlas/attribution.astro, six JSON endpoints
+  -> src/pages/atlas/anatomy.astro, src/pages/atlas/attribution.astro, six JSON endpoints,
+     and the pages that mount the 3D view under a list (recipe 8)
 src/scripts/atlas-pipeline/      offline Python: writes src/site/atlas-assets/, never runs in CI
 ```
 Imports point down this list only. Known exceptions, all harmless: tests in the two `lib` directories import `src/components/atlas-scene/load-anatomy-data.ts` (the loader is the composition root), `src/components/atlas-scene/atlas-state.ts` (`INITIAL_EXPLORER_STATE`), `src/components/atlas-scene/LayerPanel.tsx` (`LAYER_LABELS`) and, in `__tests__/anatomy-tables-content.test.ts`, `src/components/bci/anatomy-presets.ts`; `review-state.ts` and `anatomy-index-types.ts` import each other's types.
@@ -57,7 +58,7 @@ Imports point down this list only. Known exceptions, all harmless: tests in the 
 - `npm test` -- parsers, cross-checks and the guards over committed files: `__tests__/atlas-assets.guard.test.ts`, `__tests__/device-geometry.guard.test.ts`, `__tests__/region-outcome.guard.test.ts`, `__tests__/anatomy-tables-content.test.ts`
 - `src/components/atlas-scene/__tests__/shared-constants.guard.test.ts` -- every fact written in more than one language or runtime, with each place it is written
 - `__tests__/context-maps.guard.test.ts` -- every path and npm script named in an atlas `CONTEXT.md` exists
-- `npm run check:post-build` -- built site serves exactly the manifest's files; attribution wording; no anatomy data in a Lab page; first-load budgets
+- `npm run check:post-build` -- built site serves exactly the manifest's files; attribution wording; no anatomy data in a Lab page; first-load budgets; three.js behind the button on every page that mounts the 3D view
 - `npm run type-check`; the pipeline's pytest (see `src/scripts/atlas-pipeline/CONTEXT.md`)
 
 ## Recipes
@@ -143,7 +144,17 @@ Pins that a refresh can move. Nothing else in the atlas stack is a typed count o
 | `HEAD_SURFACE_BUDGET_BYTES`, `LEAD_CONTACT_SPANS_MM` | `__tests__/device-geometry.guard.test.ts` |
 | `REVIEWED_ENTRY_COUNTS` (owner only, with a ledger entry) | `review-state.ts` |
 | `PINNED_ALIAS_KINDS` | `datalake/scripts/__tests__/region-resolver.test.mjs` |
-| `ATLAS_EXPLORER_*_GZIP_BYTES` | `src/scripts/tool-pages.mjs` |
+| `ATLAS_EXPLORER_*_GZIP_BYTES`, `REGION_VIEW_PAGES` | `src/scripts/tool-pages.mjs` |
 | asset sha256 values, `pipeline_code_hash` (written by the pipeline only) | `src/site/atlas-assets/manifest.json` |
 
 To print the new values: `npx vitest run src/components/atlas-scene/__tests__ src/lib/anatomy/__tests__ src/lib/atlas-explorer/__tests__ datalake/scripts/__tests__` shows expected against received for each pin that moved, and, after a build, `npm run check:lab-budget` prints each tool page's measured first-load bytes beside its budget.
+
+### 8. Mount the region view on a page
+One component, `src/components/atlas-scene/RegionViewMount.tsx`, configured by props. Never copy the camera, colours, sentences or fetching into a page.
+1. In the page's `.astro` file: import `src/components/atlas-scene/AtlasIndexPin.astro` and place `<AtlasIndexPin />` once. Without it the view says the page is unpinned and draws nothing.
+2. In the React component that holds the page's list: `<RegionViewMount lens={...} />`. `lens` (a `Lens` from `src/lib/atlas-explorer/lens-state.ts`, or `BAND_LENS`) decides every fill, from the data. The visitor's own choice goes in `selectedRegionIds` or `selectedBandId`: it is marked with corner brackets, never filled, and worded as the visitor's choice. `onRegionPick` tells the page which region was picked. There is no prop for a list of regions to fill; need something else, add a prop to `src/components/atlas-scene/AtlasRegionView.tsx`, do not fork it.
+3. Import nothing else from `src/components/atlas-scene/` in the page or the list: the button is all that ships with the page. The data, `src/components/atlas-scene/RegionViewPanel.tsx`, the open view and three.js load after the button is pressed.
+4. Declare the chunk in `src/scripts/tool-pages.mjs`: for a tool page add `'RegionViewPanel'` to its `interactionGatedEntryNames`; for any other page add an entry to `REGION_VIEW_PAGES`. Add the page to `MOUNTS` in `src/components/atlas-scene/__tests__/region-view-source-rules.test.ts`.
+5. A new sentence goes in `limits-copy.ts` and is chosen in `src/lib/atlas-explorer/region-view-notes.ts`; then update the snapshot as in recipe 3. Every sentence added there also loads on the explorer's first visit.
+6. Budget: after a build, `npm run check:lab-budget` for the tool pages and `node src/scripts/measure-lab-first-load.mjs --page /your/page/ --gate RegionViewPanel` for another page. It must print "three.js reachable without the visitor asking: no".
+Checks: `src/components/atlas-scene/__tests__/region-view-source-rules.test.ts`, `src/components/atlas-scene/__tests__/region-view-mount.test.tsx`, `src/components/atlas-scene/__tests__/region-view-hosts.test.tsx`, `src/lib/atlas-explorer/__tests__/region-view-notes.test.ts`, `src/scripts/__tests__/tool-page-imports.test.mjs`, and in `npm run check:post-build` the budgets, "no tool page is built with anatomy data in it" and "pages that mount the 3D view keep three.js behind its button". Look at the page in a browser, with WebGL on and off.

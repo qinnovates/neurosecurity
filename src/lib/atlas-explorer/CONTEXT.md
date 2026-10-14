@@ -8,6 +8,7 @@ Pure functions from the anatomy index and the explorer catalog to what a visitor
 - `lens-state.ts`, `region-lens.ts`, `subject-options.ts`, `technique-summary.ts` -- lenses: the kinds, their subjects, each region's value under one
 - `region-rows.ts`, `region-detail.ts`, `region-dsm.ts`, `region-evidence-view.ts`, `rail-stages.ts` -- the list, the inspector and the signal-chain rail
 - `chain-steps.ts`, `chain-playback.ts` -- a curated threat model as steps over regions and device stages
+- `region-view-notes.ts` -- the words beside a 3D view mounted on another page: the visitor's selection, the regions the lens lights, what has no shape, the limits
 - `limit-selection.ts`, `viewport-caption.ts`, `announcements.ts` -- which limit sentence, caption and screen-reader text show; the sentences themselves live in `src/lib/anatomy/limits-copy.ts`
 - `scene-shapes.ts`, `scene-drawing.ts`, `camera-views.ts`, `slice-plane.ts`, `resolve-pick.ts` -- what the 3D view draws, as plain data: colours, opacities, camera, slice, picking
 - `device-drawing.ts`, `devices-layer.ts`, `lead-figure.ts` -- electrode layouts and the lead figure
