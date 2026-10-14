@@ -18,16 +18,23 @@ import { buildSceneShapes } from './scene-shapes';
 
 /**
  * `coloured`: at least one shape is filled. `named_none_coloured`: the links name regions, and none of them has a
- * shape of its own to fill. `none_named`: the links name no region at all (a band-level, undrafted or unknown technique).
+ * shape of its own to fill. `none_named`: the technique is in the index and its links name no region at all (a band-level
+ * or undrafted technique). `not_in_index`: the index does not hold the technique at all; it holds exactly the catalog's
+ * techniques with a neural band, so for every catalog technique this means it has none (checked over all of them in
+ * technique-colouring.test.ts), and nothing was drafted for it.
  */
-export const TECHNIQUE_COLOURINGS = ['coloured', 'named_none_coloured', 'none_named'] as const;
+export const TECHNIQUE_COLOURINGS = ['coloured', 'named_none_coloured', 'none_named', 'not_in_index'] as const;
 export type TechniqueColouring = typeof TECHNIQUE_COLOURINGS[number];
 
 /** What the classification reads: the index, and the function that fills its shapes. */
 export type ColouringSource = Pick<ExplorerModel, 'index' | 'styleStructure'>;
 
 const EVERY_LAYER = Object.fromEntries(LAYER_IDS.map((layerId) => [layerId, true])) as Record<LayerId, boolean>;
-const NOTHING_COLOURED_LIMITS = { named_none_coloured: 'view_nothing_coloured_no_own_shape', none_named: 'view_nothing_coloured_none_named' } as const;
+const NOTHING_COLOURED_LIMITS = {
+  named_none_coloured: 'view_nothing_coloured_no_own_shape',
+  none_named: 'view_nothing_coloured_none_named',
+  not_in_index: 'view_nothing_coloured_no_neural_band',
+} as const;
 
 /** The regions a technique's drafted links name and count, in the order the links name them. Empty for a band-level or unknown technique. */
 export function listNamedRegionIds(technique: Pick<IndexTechnique, 'links'> | undefined): string[] {
@@ -35,8 +42,10 @@ export function listNamedRegionIds(technique: Pick<IndexTechnique, 'links'> | un
 }
 
 export function classifyTechniqueColouring(source: ColouringSource, techniqueId: string): TechniqueColouring {
+  const technique = source.index.techniques.find((candidate) => candidate.id === techniqueId);
+  if (technique === undefined) return 'not_in_index';
   const regionIds = new Set(source.index.subjects.filter((subject) => subject.kind === 'region').map((subject) => subject.id));
-  const named = listNamedRegionIds(source.index.techniques.find((technique) => technique.id === techniqueId)).filter((regionId) => regionIds.has(regionId));
+  const named = listNamedRegionIds(technique).filter((regionId) => regionIds.has(regionId));
   if (named.length === 0) return 'none_named';
   const isFilled = buildSceneShapes(source, { kind: 'technique', techniqueId }, EVERY_LAYER).some((shape) => shape.fill === 'solid');
   return isFilled ? 'coloured' : 'named_none_coloured';

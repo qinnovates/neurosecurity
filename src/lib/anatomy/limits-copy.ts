@@ -142,6 +142,7 @@ export const LIMIT_TEMPLATES = {
   view_region_unknown: 'Not in this build of the atlas, so not shown in the picture: {regions}.',
   view_nothing_coloured_no_own_shape: 'No region is coloured for this technique: its drafted links name no region that has a shape of its own in this atlas.',
   view_nothing_coloured_none_named: 'No region is coloured for this technique: its drafted links name no single region.',
+  view_nothing_coloured_no_neural_band: 'No region links were drafted for this technique: the catalog gives it no neural band.',
 } as const;
 
 export type LimitId = keyof typeof LIMIT_TEMPLATES;

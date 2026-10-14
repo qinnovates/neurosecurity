@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { THREAT_VECTORS } from '@/lib/threat-data';
 import { LIMIT_TEMPLATES } from '@/lib/anatomy/limits-copy';
 import { INITIAL_EXPLORER_STATE } from '@/components/atlas-scene/atlas-state';
 import { buildSceneShapes } from '../scene-shapes';
@@ -18,8 +19,8 @@ const namedStates = (techniqueId: string): string[] => listNamedRegionIds(model.
 const fillsInMountedView = (techniqueId: string): boolean => buildSceneShapes(model, lensOf(techniqueId), INITIAL_EXPLORER_STATE.layers).some((shape) => shape.fill === 'solid');
 
 describe('classifyTechniqueColouring, on the data the site serves', () => {
-  it('finds techniques of all three kinds, and puts every technique in exactly one', () => {
-    for (const colouring of TECHNIQUE_COLOURINGS) expect(idsOf(colouring).length, colouring).toBeGreaterThan(0);
+  it('finds techniques of all three kinds the index holds, and puts every one of them in exactly one', () => {
+    for (const colouring of TECHNIQUE_COLOURINGS.filter((kind) => kind !== 'not_in_index')) expect(idsOf(colouring).length, colouring).toBeGreaterThan(0);
     expect(TECHNIQUE_COLOURINGS.flatMap(idsOf).sort()).toEqual([...techniqueIds].sort());
   });
 
@@ -45,12 +46,31 @@ describe('classifyTechniqueColouring, on the data the site serves', () => {
     expect(buildViewportCaption(model, lensOf(CONTAINED_ONLY_TECHNIQUE), []).lensLimits.map((limit) => limit.id)).toEqual(['lens_technique', 'view_nothing_coloured_no_own_shape', 'whole_scene']);
   });
 
-  it('none: a technique whose links name no region says so, and so does one this build does not hold', () => {
+  it('none: a technique whose links name no region says so', () => {
     for (const techniqueId of idsOf('none_named')) expect(namedStates(techniqueId), techniqueId).toEqual([]);
     const [techniqueId] = idsOf('none_named');
     expect(limitsForUncolouredTechnique(model, lensOf(techniqueId))).toEqual([{ id: 'view_nothing_coloured_none_named', text: LIMIT_TEMPLATES.view_nothing_coloured_none_named }]);
     expect(buildViewportCaption(model, lensOf(techniqueId), []).lensLimits.map((limit) => limit.id)).toContain('view_nothing_coloured_none_named');
-    expect(classifyTechniqueColouring(model, 'QIF-T-none')).toBe('none_named');
+  });
+
+  it('not in the index: exactly the catalog techniques with no neural band, 65 of them, and the sentence says that', () => {
+    const outside = THREAT_VECTORS.filter((threat) => !model.techniquesById.has(threat.id));
+    expect(outside.length).toBe(65);
+    for (const threat of outside) {
+      expect(threat.bands.some((band: string) => band.startsWith('N')), threat.id).toBe(false);
+      expect(classifyTechniqueColouring(model, threat.id), threat.id).toBe('not_in_index');
+    }
+    // and the other way round: every catalog technique with a neural band is in the index
+    for (const threat of THREAT_VECTORS.filter((candidate) => candidate.bands.some((band: string) => band.startsWith('N')))) expect(model.techniquesById.has(threat.id), threat.id).toBe(true);
+    expect(limitsForUncolouredTechnique(model, lensOf(outside[0].id))).toEqual([{ id: 'view_nothing_coloured_no_neural_band', text: 'No region links were drafted for this technique: the catalog gives it no neural band.' }]);
+  });
+
+  it('chooses between the three sentences from the data alone', () => {
+    const sentenceId = (techniqueId: string): string | undefined => limitsForUncolouredTechnique(model, lensOf(techniqueId))[0]?.id;
+    expect(sentenceId(idsOf('coloured')[0])).toBeUndefined();
+    expect(sentenceId(CONTAINED_ONLY_TECHNIQUE)).toBe('view_nothing_coloured_no_own_shape');
+    expect(sentenceId(idsOf('none_named')[0])).toBe('view_nothing_coloured_none_named');
+    expect(sentenceId('QIF-T0004')).toBe('view_nothing_coloured_no_neural_band');
   });
 
   it('says nothing under any other lens, or before a technique is chosen', () => {
