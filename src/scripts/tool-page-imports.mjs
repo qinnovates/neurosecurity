@@ -73,9 +73,11 @@ export const GENERATED_TABLE_FILE_PATTERNS = Object.freeze([/^src\/site\/data\//
  * It exports the anatomy index's path, length and digest and nothing else, so that the 3D view a page mounts can refuse
  * an index from another build (a page without the pin draws nothing).
  *
- * The walk does not follow it, on two conditions, both checked here:
+ * The walk does not follow it, on three conditions, all checked here:
  * - the file importing it is one of INDEX_PIN_IMPORTERS, the server-side element that writes the pin into the page. Any
  *   other importer (a client component above all) is walked into the module like any import, and so reaches the loader;
+ * - that importer holds no `<script>`: an import written in an `.astro` file's script block is bundled for the browser,
+ *   and would take the loader with it;
  * - the module is, statement for statement, what INDEX_PIN_STATEMENTS says. One more import or export, a different
  *   value, or any other statement, however it is laid out, is a problem.
  * What a page was actually built with is checked on the built files all the same (find-anatomy-payload.mjs): its HTML
@@ -92,6 +94,18 @@ export const INDEX_PIN_STATEMENTS = Object.freeze([
   `import { loadAnatomyBundle } from '${LOADER_SPECIFIER}'`,
   'export const INDEX_PIN = loadAnatomyBundle().indexPin',
 ]);
+
+const SCRIPT_TAG_PATTERN = /<script\b/i;
+
+/**
+ * @param {string} filePath a file whose import of a pin module is not followed
+ * @param {string} sourceText
+ * @returns {string[]} empty when the file ships no script
+ */
+export function findPinImporterProblems(filePath, sourceText) {
+  if (!SCRIPT_TAG_PATTERN.test(sourceText)) return [];
+  return [`${filePath} holds a <script>, and the import walk does not follow its import of the index pin module: a script there could bundle the anatomy loader for the browser. Keep the file to its frontmatter and its one element.`];
+}
 
 /**
  * @param {string} filePath a pin module
@@ -211,7 +225,9 @@ export function findImportProblems(entryFile, tree, { scriptsMayCarryAnatomy = f
     const { reached, problems: fileProblems } = inspectFile(current, tree);
     problems.push(...fileProblems.map((problem) => `${current} ${problem}`));
     // Not followed, so held to its exact statements instead. Any other importer of the same module falls through to the walk below.
-    for (const pinModule of new Set(reached.filter((filePath) => isPinEdge(current, filePath)))) problems.push(...findIndexPinProblems(pinModule, tree.read(pinModule)));
+    const pinModules = [...new Set(reached.filter((filePath) => isPinEdge(current, filePath)))];
+    if (pinModules.length > 0) problems.push(...findPinImporterProblems(current, tree.read(current)));
+    for (const pinModule of pinModules) problems.push(...findIndexPinProblems(pinModule, tree.read(pinModule)));
     for (const next of reached.filter((filePath) => !cameFrom.has(filePath) && !isPinEdge(current, filePath))) {
       cameFrom.set(next, current);
       queue.push(next);

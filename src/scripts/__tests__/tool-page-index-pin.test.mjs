@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
 import { readModuleStatements } from '../source-imports.mjs';
-import { INDEX_PIN_IMPORTERS, INDEX_PIN_MODULES, INDEX_PIN_STATEMENTS, findImportProblems, findIndexPinProblems } from '../tool-page-imports.mjs';
+import { INDEX_PIN_IMPORTERS, INDEX_PIN_MODULES, INDEX_PIN_STATEMENTS, findImportProblems, findIndexPinProblems, findPinImporterProblems } from '../tool-page-imports.mjs';
 
 /**
  * The one edge the Lab's import walk does not follow, and what holds it shut. Every leak below is a source held in
@@ -96,6 +96,14 @@ describe('findImportProblems and the index pin', () => {
     expect(problemsWith({ ...pinFiles, ...inFrontmatter(WITH_PIN), [SHELL]: shell, [CLIENT_PANEL]: panel })).toEqual([`reaches ${LOADER} through ${PAGE} -> ${SHELL} -> ${CLIENT_PANEL} -> ${PIN_MODULE} -> ${LOADER}`]);
     // The page itself is not the pin element either.
     expect(problemsWith({ ...pinFiles, ...inFrontmatter("import { INDEX_PIN } from '@/components/atlas-scene/build-index-pin';") })).toEqual([`reaches ${LOADER} through ${PAGE} -> ${PIN_MODULE} -> ${LOADER}`]);
+  });
+
+  it('refuses a script in the pin element, where an import of the pin module would be bundled for the browser', () => {
+    const scripted = "---\nimport { INDEX_PIN } from './build-index-pin';\n---\n<div hidden></div>\n<script>\n  import { INDEX_PIN } from './build-index-pin';\n  document.title = INDEX_PIN.sha256;\n</script>";
+    const problems = problemsWith({ ...pinFiles, [PIN_ELEMENT]: scripted, ...inFrontmatter(WITH_PIN) });
+    expect(problems).toHaveLength(1);
+    expect(problems[0]).toContain(`${PIN_ELEMENT} holds a <script>`);
+    expect(findPinImporterProblems(PIN_ELEMENT, repositoryTree.read(PIN_ELEMENT))).toEqual([]);
   });
 
   it('follows the pin module on an anatomy page, where only the generated tables are forbidden', () => {
