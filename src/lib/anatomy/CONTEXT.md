@@ -18,7 +18,7 @@ datalake/qif-anatomy-*.json + src/site/atlas-assets/   data (untrusted input, pa
   -> src/pages/atlas/anatomy.astro, src/pages/atlas/attribution.astro, six JSON endpoints
 src/scripts/atlas-pipeline/      offline Python: writes src/site/atlas-assets/, never runs in CI
 ```
-Imports point down this list only. Known exceptions, all harmless: tests in the two `lib` directories import `src/components/atlas-scene/load-anatomy-data.ts` (the loader is the composition root) and two state fixtures; `review-state.ts` and `anatomy-index-types.ts` import each other's types.
+Imports point down this list only. Known exceptions, all harmless: tests in the two `lib` directories import `src/components/atlas-scene/load-anatomy-data.ts` (the loader is the composition root), `src/components/atlas-scene/atlas-state.ts` (`INITIAL_EXPLORER_STATE`), `src/components/atlas-scene/LayerPanel.tsx` (`LAYER_LABELS`) and, in `__tests__/anatomy-tables-content.test.ts`, `src/components/bci/anatomy-presets.ts`; `review-state.ts` and `anatomy-index-types.ts` import each other's types.
 
 ## What lives here
 - `errors.ts`, `field-readers.ts`, `format-readers.ts`, `literature-readers.ts`, `shape-check.ts`, `source-ref.ts` -- the readers every parser is built from; each failure names file, location and fix
@@ -61,12 +61,13 @@ Imports point down this list only. Known exceptions, all harmless: tests in the 
 - `npm run type-check`; the pipeline's pytest (see `src/scripts/atlas-pipeline/CONTEXT.md`)
 
 ## Recipes
-Each ends with the same gate: `npm test`, `npm run build`, `git checkout --` on the five files of rule 5, `npm run check:post-build`, `npm run type-check`. A pinned number that moves is re-pinned on purpose, in the same commit, for the reason written beside it.
+The guard on these maps checks that every path exists, including those after `npx vitest run`; it does not check symbol names.
+Each ends with the same gate: `npm test`, `npm run build`, `git checkout --` on the five files of rule 5, `npm run check:post-build`, `npm run type-check` (in a fresh checkout run `npm run build` once first: the type checker needs the generated types). A pinned number that moves is re-pinned on purpose, in the same commit, for the reason written beside it.
 
 ### 1. Add or replace an atlas source
 1. Read the publisher's licence yourself and quote it. `datalake/qif-anatomy-sources.json`: add the source row (stated licence, files with sha256 pins, route to the template space).
 2. `datalake/qif-anatomy-verdicts.json`: add the verdict and clearance record. It is an AI reading; say so. A source with no verdict does not build.
-3. Only for a licence id not yet known: add it to `LICENCE_IDS` in `source-types.ts`, `LICENCE_FACTS` in `licence-rules.ts`, `LICENSE_LINKS` in `build-attribution.ts`, `LICENSE_FACTS` in `src/scripts/atlas-pipeline/atlas_pipeline/sources.py`, and, if it can ship, `LICENCE_NAMES` in `src/scripts/atlas-pipeline/atlas_pipeline/notices.py` and `SHIPPING_LICENSE_NAMES` in `src/scripts/check-atlas-assets.mjs`. The shared-constants guard fails until they agree.
+3. Only for a licence id not yet known: add it to `LICENCE_IDS` in `source-types.ts`, `LICENCE_FACTS` in `licence-rules.ts`, `LICENSE_LINKS` in `build-attribution.ts`, `LICENSE_FACTS` in `src/scripts/atlas-pipeline/atlas_pipeline/sources.py`, and, if it can ship, `LICENCE_NAMES` in `src/scripts/atlas-pipeline/atlas_pipeline/notices.py` and `SHIPPING_LICENSE_NAMES` in `src/scripts/check-atlas-assets.mjs`. `src/components/atlas-scene/__tests__/shared-constants.guard.test.ts` fails when `LICENSE_FACTS` in `src/scripts/atlas-pipeline/atlas_pipeline/sources.py` differs from the TypeScript table, or when a licence with a served folder is missing from `LICENCE_NAMES` (the one named exception is `mit`) or from `SHIPPING_LICENSE_NAMES`; `__tests__/build-attribution.test.ts` fails when a name in `SHIPPING_LICENSE_NAMES` differs from the attribution page's.
 4. `src/scripts/atlas-pipeline/registry/pipeline-inputs.json`: download host, archive members, build plan. A new kind of input needs a stage in `src/scripts/atlas-pipeline/atlas_pipeline/structures.py`.
 5. Run recipe 6. It writes the meshes, the label table, the notices and the manifest.
 6. `load-anatomy-tables.ts`: import the new label table and add it to `LABEL_TABLES_BY_PATH` (a test fails until it is there). The page's loader finds it by pattern.
@@ -88,11 +89,13 @@ Edit in this order. The type checker names every exhaustive switch (`src/lib/atl
 2. `colour-modes.ts` -- the `ColourMode` it maps to and how a shape reads under it
 3. `src/lib/atlas-explorer/region-lens.ts` -- each region's value and standing under the lens
 4. `src/lib/atlas-explorer/subject-options.ts` -- its subjects, if it has a picker
-5. `limits-copy.ts` then `src/lib/atlas-explorer/limit-selection.ts` -- the sentence saying what the lens cannot tell you, and when it shows
+5. `limits-copy.ts` then `src/lib/atlas-explorer/limit-selection.ts` -- the sentence saying what the lens cannot tell you, and when it shows. Then `npx vitest run src/lib/anatomy/__tests__/limits-copy.test.ts -u` and read the snapshot diff.
 6. `src/lib/atlas-explorer/viewport-caption.ts`, `src/lib/atlas-explorer/announcements.ts` -- caption and screen-reader text
 7. `src/lib/atlas-explorer/scene-shapes.ts` -- colours, only if it needs new ones
 8. `src/components/atlas-scene/atlas-state.ts`, `src/components/atlas-scene/LensPanel.tsx`, `src/components/atlas-scene/ExplorerWorkspace.tsx` -- state and controls. `src/components/atlas-scene/ColourModePicker.tsx` and `src/components/atlas-scene/ViewportLegend.tsx` read the lists and usually need nothing
-Checks: `__tests__/colour-modes.test.ts`, `src/lib/atlas-explorer/__tests__/region-lens.test.ts`, `src/lib/atlas-explorer/__tests__/limit-selection.test.ts`, `src/components/atlas-scene/__tests__/explorer-source-rules.test.ts` (no three.js outside the canvas chunk, no monospace), code budget in `src/scripts/tool-pages.mjs`.
+Checks: `__tests__/limits-copy.test.ts`, `__tests__/colour-modes.test.ts`, `src/lib/atlas-explorer/__tests__/region-lens.test.ts`, `src/lib/atlas-explorer/__tests__/limit-selection.test.ts`, `src/components/atlas-scene/__tests__/explorer-source-rules.test.ts` (no three.js outside the canvas chunk, no monospace), code budget in `src/scripts/tool-pages.mjs`.
+
+The explorer's first-load code budget (`src/scripts/tool-pages.mjs`) has under 350 bytes of gzip headroom. A real new lens will probably need code moved behind the interaction-gated chunks or a deliberate, stated re-pin of the budget. Never shorten a limit sentence, qualifier or review mark to fit.
 
 ### 4. Add a device (lead or electrode layout)
 - A lead: add the row and its sourced facts by hand to `datalake/qif-anatomy-device-geometry.json`. Every dimension cites a source and a verbatim quote; a lead has sizes and no position. Add its contact span to `LEAD_CONTACT_SPANS_MM` in `__tests__/device-geometry.guard.test.ts`. If the row has a new field: `parse-device-geometry.ts`, `lead-spans.ts`, `src/lib/atlas-explorer/lead-figure.ts`.

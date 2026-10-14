@@ -15,12 +15,12 @@ Pure functions from the anatomy index and the explorer catalog to what a visitor
 ## Imports
 - May import: `src/lib/anatomy/` (types, readers, `src/lib/anatomy/colour-modes.ts`, `src/lib/anatomy/limits-copy.ts`), and from the Lab's library only `src/lib/threat-model/guards.ts`, `src/lib/threat-model/catalog-types.ts` and `src/lib/threat-model/chain-types.ts`.
 - Imported by: `src/components/atlas-scene/` and the atlas pages. `src/lib/anatomy/` never imports from here.
-- Tests here import the loader and two fixtures from `src/components/atlas-scene/`; nothing else does.
+- Tests here import `src/components/atlas-scene/load-anatomy-data.ts` (the loader), `src/components/atlas-scene/atlas-state.ts` (`INITIAL_EXPLORER_STATE`) and `src/components/atlas-scene/LayerPanel.tsx` (`LAYER_LABELS`); nothing else does.
 
 ## Derived files
 None are committed. The two published files above are built by `npm run build` through `src/components/atlas-scene/load-anatomy-data.ts`.
 
 ## Checks
-- `npm test` -- `__tests__/mapping-coverage.test.ts` (every catalog link is accounted for), `__tests__/chain-steps.test.ts` (pins the curated models), one test file per module
+- `npm test` -- `__tests__/mapping-coverage.test.ts` (every catalog link is accounted for), `__tests__/chain-steps.test.ts` (pins the curated models), most modules have a test file of the same name
 - `src/components/atlas-scene/__tests__/explorer-source-rules.test.ts` -- no three.js import and no monospace face in this directory
 - `npm run check:post-build` -- the explorer's first-load budget in `src/scripts/tool-pages.mjs`

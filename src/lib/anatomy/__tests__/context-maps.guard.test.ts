@@ -6,7 +6,8 @@
  * A back-ticked token is read as a path when it ends in a known extension or a
  * slash. One that starts with a top-level directory is taken from the
  * repository root; any other is taken from the map's own directory. A token
- * with `*` must match at least one file.
+ * with `*` must match at least one file. Paths inside `npx vitest run ...`
+ * command lines are held to the same rule. Symbol names are not checked.
  */
 
 import fs from 'node:fs';
@@ -31,6 +32,9 @@ const BACK_TICKED = /`([^`\n]+)`/g;
 const NPM_SCRIPT = /^npm run ([a-z:-]+)/;
 /** A command that runs a file: the file is held to the same rule as a bare path. */
 const RUN_COMMAND = /^(?:node|bash) (\S+)/;
+/** `npx vitest run <paths>`: every argument that is not a flag is held to the same rule as a bare path. */
+const VITEST_COMMAND = /^npx vitest run (.+)$/;
+const FLAG_PREFIX = '-';
 const WILDCARD = '*';
 /** All the maps together stay short enough to read in one sitting. */
 const MAX_TOTAL_LINES = 420;
@@ -54,10 +58,17 @@ function existsInRepository(resolved: string): boolean {
   return fs.readdirSync(directory).some((name) => pattern.test(name));
 }
 
+/** The paths a back-ticked token asks the reader to open. */
+function pathsInToken(token: string): string[] {
+  const vitestArguments = VITEST_COMMAND.exec(token)?.[1];
+  if (vitestArguments !== undefined) return vitestArguments.split(/\s+/).filter((argument) => !argument.startsWith(FLAG_PREFIX));
+  const candidate = RUN_COMMAND.exec(token)?.[1] ?? token;
+  return PATH_PATTERN.test(candidate) && !URL_PATH_PATTERN.test(candidate) ? [candidate] : [];
+}
+
 function findMissingPaths(text: string, mapFile: string): string[] {
   return listTokens(text)
-    .map((token) => RUN_COMMAND.exec(token)?.[1] ?? token)
-    .filter((token) => PATH_PATTERN.test(token) && !URL_PATH_PATTERN.test(token))
+    .flatMap(pathsInToken)
     .filter((token) => !existsInRepository(resolveToken(token, mapFile)))
     .map((token) => `${mapFile}: \`${token}\` does not exist`);
 }
@@ -83,11 +94,13 @@ const maps: Array<[file: string, text: string]> = [...ATLAS_MAPS.map((file): [st
 describe('the atlas maintainer\'s maps', () => {
   it('catches a path that leads nowhere, a pattern that matches nothing and a script that does not exist', () => {
     const sample = 'See `src/lib/anatomy/no-such-file.ts`, `parse-nothing-*.ts`, `licence-rules.ts`, `parse-*.ts`, `/atlas/anatomy-index.json`, '
-      + '`node datalake/scripts/no-such-script.mjs --check`, `node datalake/scripts/draft-technique-regions.mjs --check` and `npm run no-such-script`.';
+      + '`node datalake/scripts/no-such-script.mjs --check`, `node datalake/scripts/draft-technique-regions.mjs --check`, `npx vitest run src/lib/anatomy/__tests__/no-such.test.ts src/lib/anatomy/__tests__ -u` '
+      + 'and `npm run no-such-script`.';
     expect(findMissingPaths(sample, MAIN_MAP)).toEqual([
       `${MAIN_MAP}: \`src/lib/anatomy/no-such-file.ts\` does not exist`,
       `${MAIN_MAP}: \`parse-nothing-*.ts\` does not exist`,
       `${MAIN_MAP}: \`datalake/scripts/no-such-script.mjs\` does not exist`,
+      `${MAIN_MAP}: \`src/lib/anatomy/__tests__/no-such.test.ts\` does not exist`,
     ]);
     expect(findMissingScripts(sample, MAIN_MAP, readScripts())).toEqual([`${MAIN_MAP}: package.json has no script "no-such-script"`]);
   });

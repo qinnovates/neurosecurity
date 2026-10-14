@@ -20,6 +20,7 @@ import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
 import { LICENCE_IDS } from '@/lib/anatomy/source-types';
 import { ATLAS_CHAINS_PATH } from '@/lib/atlas-explorer/chain-file';
 import { EXPLORER_CATALOG_PATH } from '@/lib/atlas-explorer/explorer-catalog';
+import { SHIPPING_LICENSE_NAMES } from '../../../scripts/check-atlas-assets.mjs';
 
 const PIPELINE = 'src/scripts/atlas-pipeline/atlas_pipeline';
 const ANATOMY = 'src/lib/anatomy';
@@ -136,6 +137,10 @@ const PIPELINE_LICENCE_NAMES_BLOCK = /^LICENCE_NAMES = \{\n([\s\S]*?)\n\}$/m;
 const PIPELINE_LICENCE_NAME = /"([a-z0-9.-]+)": \("([^"]+)", "([^"]+)"\)/g;
 const PIPELINE_POSITION_CHECK = /^(?:NOT_INDEPENDENTLY_CHECKED|CHECKED_IN_AGGREGATE) = "([^"]+)"$/gm;
 /** The files the page fetches, each named by the constant its endpoint serves. */
+/** Licences with a served folder that notices.py does not name. Reason is written beside each id. */
+const LICENCES_WITH_FOLDER_BUT_NO_NOTICE_NAME: readonly string[] = [
+  'mit', // no shipped asset carries it today (manifest: cc-by-4.0, cc-by-sa-4.0, mni-icbm-notice); notices.py would KeyError on the first one
+];
 const PUBLISHED_PATHS = [ANATOMY_INDEX_PATH, ANATOMY_EVIDENCE_PATH, EXPLORER_CATALOG_PATH, ATLAS_CHAINS_PATH, H01_CARD_PATH, REGION_EVIDENCE_PATH];
 
 const readSource = (file: string): string => fs.readFileSync(file, 'utf-8');
@@ -186,6 +191,18 @@ describe('facts the atlas writes in more than one runtime', () => {
       expect(LICENCE_IDS, id).toContain(id);
       expect({ name, url }, id).toEqual(LICENSE_LINKS[id as keyof typeof LICENSE_LINKS]);
     }
+  });
+
+  it('names in the pipeline\'s notices every licence the table can ship, bar the listed exceptions', () => {
+    const named = new Set([...readCopy([`${PIPELINE}/notices.py`, PIPELINE_LICENCE_NAMES_BLOCK]).matchAll(PIPELINE_LICENCE_NAME)].map(([, id]) => id));
+    const shippable = LICENCE_IDS.filter((id) => LICENCE_FACTS[id].output_folder !== null);
+    expect(sorted(shippable.filter((id) => !named.has(id)))).toEqual(sorted(LICENCES_WITH_FOLDER_BUT_NO_NOTICE_NAME));
+    for (const id of LICENCES_WITH_FOLDER_BUT_NO_NOTICE_NAME) expect(shippable, id).toContain(id);
+  });
+
+  it('lists in the post-build check the name of every licence the table can ship', () => {
+    const shippable = LICENCE_IDS.filter((id) => LICENCE_FACTS[id].output_folder !== null);
+    expect(sorted(Object.keys(SHIPPING_LICENSE_NAMES))).toEqual(sorted(shippable));
   });
 
   it('serves the folders the licence table writes to, in the pipeline and in every path pattern', () => {
