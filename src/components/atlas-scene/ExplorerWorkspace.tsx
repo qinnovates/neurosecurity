@@ -9,7 +9,7 @@ import { LENS_LABELS, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE, explorerReducer } from './atlas-state';
 import AtlasViewport from './AtlasViewport';
 import ChainView from './ChainView';
-import { loadAnatomyEvidence, loadRegionEvidence } from './explorer-data';
+import { loadAnatomyEvidence, loadRegionEvidence } from './explorer-companions';
 import H01Card from './H01Card';
 import LayerPanel from './LayerPanel';
 import LensPanel from './LensPanel';

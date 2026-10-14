@@ -133,6 +133,13 @@ export const LIMIT_TEMPLATES = {
   device_lead_scale: 'Every lead here is drawn at one scale. The bar is {length} mm long at that scale.',
   device_fact_abstract_only: 'An AI wrote this sentence from the paper\'s abstract alone. The full paper was not read, and no person has checked it.',
   device_fact_full_text: 'An AI wrote this sentence from the paper. No person has checked it.',
+
+  // The 3D view on another page: what its marks mean there.
+  view_chosen_regions: 'The orange corner marks stand around the regions you chose. They show your choice and nothing the data says about those regions; the fill colours come from the lens alone.',
+  view_chosen_band: 'The orange corner marks stand around every shape drawn for a region that QIF places in band {band}, the band you chose. They show your choice; the fill colours come from the lens alone.',
+  view_regions_without_shape: 'No shape of its own is drawn for {count} of these, so no mark here stands for it alone: {regions}.',
+  view_technique_band_reach: 'The catalog also tags this technique with {bands}. A band tag is about the band as a whole: it names none of the regions there, and no region is filled because of it.',
+  view_region_unknown: 'Not in this build of the atlas, so not shown in the picture: {regions}.',
 } as const;
 
 export type LimitId = keyof typeof LIMIT_TEMPLATES;

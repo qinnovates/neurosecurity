@@ -23,6 +23,10 @@ export interface AtlasViewportProps {
   electrodeId?: string | null;
   onPickElectrode?: (electrodeId: string) => void;
   onSelectRegion: (regionId: string) => void;
+  /** Regions the visitor chose on an embedding page, in groups bracketed as one. Marked, never filled. */
+  selectedRegionGroups?: ReadonlyArray<readonly string[]>;
+  /** The visitor already asked for the view with the embedding page's own control, so it starts decided, not closed. */
+  isAsked?: boolean;
   /** Replaceable in tests. In the page they are the real probe and the real view, fetched only once the gate opens. */
   probe?: () => boolean;
   loadOpenView?: () => Promise<OpenViewModule>;
@@ -30,6 +34,7 @@ export interface AtlasViewportProps {
 
 const BYTES_PER_MEGABYTE = 1_000_000;
 const IGNORE_ELECTRODE = (): void => undefined;
+const NO_GROUPS: ReadonlyArray<readonly string[]> = [];
 const loadRealOpenView = (): Promise<OpenViewModule> => import('./OpenViewport');
 
 /** The bytes of geometry the requested layers would fetch, from the index's own figures. */
@@ -47,15 +52,16 @@ function sumRequestedBytes(model: ExplorerModel, layers: Readonly<Record<LayerId
  * facts are.
  */
 export default function AtlasViewport(props: AtlasViewportProps) {
-  const { model, lens, layers, selectedRegionId, isIndexPinned, isOutOfStep = false, chain = null, electrodeId = null, onPickElectrode = IGNORE_ELECTRODE, onSelectRegion, probe = probeWebGL, loadOpenView = loadRealOpenView } = props;
-  const [gate, setGate] = useState<GateState>('closed');
+  const { model, lens, layers, selectedRegionId, isIndexPinned, isOutOfStep = false, chain = null, electrodeId = null, onPickElectrode = IGNORE_ELECTRODE, onSelectRegion, selectedRegionGroups = NO_GROUPS, isAsked = false, probe = probeWebGL, loadOpenView = loadRealOpenView } = props;
+  const decide = (): GateState => decideGate(isIndexPinned, globalThis.crypto?.subtle !== undefined, probe, isOutOfStep);
+  const [gate, setGate] = useState<GateState>(() => (isAsked ? decide() : 'closed'));
   const [run, setRun] = useState(0);
   // One lazy component per start of the view, so "start again" builds a fresh canvas.
   const OpenView = useMemo(() => lazy(loadOpenView), [loadOpenView, run]);
   const megabytes = (sumRequestedBytes(model, layers) / BYTES_PER_MEGABYTE).toFixed(1);
 
   const open = (): void => {
-    setGate(decideGate(isIndexPinned, globalThis.crypto?.subtle !== undefined, probe, isOutOfStep));
+    setGate(decide());
     setRun((count) => count + 1);
   };
 
@@ -73,7 +79,7 @@ export default function AtlasViewport(props: AtlasViewportProps) {
         <Suspense fallback={<p className="atlas-loading" role="status">Loading the 3D view…</p>}>
           <OpenView
             key={run} model={model} lens={lens} layers={layers} selectedRegionId={selectedRegionId} onSelectRegion={onSelectRegion}
-            chain={chain} electrodeId={electrodeId} onPickElectrode={onPickElectrode}
+            chain={chain} electrodeId={electrodeId} onPickElectrode={onPickElectrode} selectedRegionGroups={selectedRegionGroups}
             onClose={() => setGate('closed')} onStopped={setGate}
           />
         </Suspense>

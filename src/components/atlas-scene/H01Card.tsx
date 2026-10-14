@@ -5,7 +5,7 @@ import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import type { H01Card as H01CardData, H01Fact } from '@/lib/anatomy/parse-h01-card';
 import { H01_CARD_PATH } from '@/lib/anatomy/parse-h01-card';
 import Disclosure from './Disclosure';
-import { loadH01Card } from './explorer-data';
+import { loadH01Card } from './explorer-companions';
 import LimitNote from './LimitNote';
 import LoadNotice from './LoadNotice';
 import ReviewMark, { UNREVIEWED_MARK } from './ReviewMark';

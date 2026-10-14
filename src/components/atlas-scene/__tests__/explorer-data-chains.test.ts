@@ -1,7 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { loadRealModel } from '@/lib/atlas-explorer/__tests__/explorer-fixtures';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
-import { OutOfStepError, loadAtlasChains } from '../explorer-data';
+import { loadAtlasChains } from '../explorer-companions';
+import { OutOfStepError } from '../explorer-data';
 import { buildServedFiles, serveFiles } from './explorer-test-server';
 
 const signal = new AbortController().signal;

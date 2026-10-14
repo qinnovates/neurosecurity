@@ -1,17 +1,14 @@
 /**
- * Loads and validates what the explorer reads. The index and the catalog load
- * first, together; the evidence files load only when a visitor opens something
- * that needs them. Nothing is used before its parser has accepted it.
+ * Loads and validates the model every atlas view reads: the index, then the
+ * catalog that index pins. Nothing is used before its parser has accepted it.
+ * The files a visitor opens later (quotes, statements, the H01 card, the
+ * threat models) load from explorer-companions.ts, so a page that only draws
+ * the model never reaches their parsers.
  */
 
 import { ANATOMY_INDEX_PATH, type AnatomyIndex, type PinnedFile } from '@/lib/anatomy/anatomy-index-types';
 import { AnatomyDataError } from '@/lib/anatomy/errors';
-import { parseAnatomyEvidence, type ShownAnatomyEvidence } from '@/lib/anatomy/parse-anatomy-evidence';
 import { parseAnatomyIndex } from '@/lib/anatomy/parse-anatomy-index';
-import { H01_CARD_PATH, parseH01Card, type H01Card } from '@/lib/anatomy/parse-h01-card';
-import { parseRegionEvidence } from '@/lib/anatomy/parse-region-evidence';
-import { REGION_EVIDENCE_PATH, type RegionEvidence } from '@/lib/anatomy/region-evidence-types';
-import { ATLAS_CHAINS_PATH, parseAtlasChains, type AtlasChains } from '@/lib/atlas-explorer/chain-file';
 import { DEVICE_STAGE_BAND_IDS, EXPLORER_CATALOG_PATH, parseExplorerCatalog } from '@/lib/atlas-explorer/explorer-catalog';
 import { createExplorerModel, isNeuralBand, type ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { AtlasFetchError, fetchAtlasJson, fetchPinnedJson } from './fetch-atlas-json';
@@ -101,7 +98,7 @@ function requireAgreement(model: ExplorerModel): ExplorerModel {
 }
 
 /** The pin the index holds for a file served beside it. An index without one cannot vouch for that file, so it is refused. */
-function companionPin(index: AnatomyIndex, path: string): PinnedFile {
+export function companionPin(index: AnatomyIndex, path: string): PinnedFile {
   const pin = index.companions.find((companion) => companion.path === path);
   if (pin === undefined) throw new AnatomyDataError(ANATOMY_INDEX_PATH, 'companions', `the index does not pin ${path}`, 'Rebuild the site so the index and its companion files come from one build.');
   return pin;
@@ -142,26 +139,4 @@ export async function loadExplorerModel(signal: AbortSignal, indexPin: PinnedFil
   const index = parseAnatomyIndex(raw);
   const rawCatalog = await fetchPinnedJson(companionPin(index, EXPLORER_CATALOG_PATH), signal);
   return { model: requireAgreement(requireListableRegions(createExplorerModel(index, parseExplorerCatalog(rawCatalog)))), indexPinState };
-}
-
-/** The quotes and rationales behind the index's drafted rows, checked against the index's own pin. */
-export async function loadAnatomyEvidence(model: ExplorerModel, signal: AbortSignal): Promise<ShownAnatomyEvidence> {
-  return parseAnatomyEvidence(await fetchPinnedJson(model.index.evidence, signal));
-}
-
-export async function loadRegionEvidence(model: ExplorerModel, signal: AbortSignal): Promise<RegionEvidence> {
-  return parseRegionEvidence(await fetchPinnedJson(companionPin(model.index, REGION_EVIDENCE_PATH), signal), new Set(model.regions.map((region) => region.id)));
-}
-
-export async function loadH01Card(model: ExplorerModel, signal: AbortSignal): Promise<H01Card> {
-  return parseH01Card(await fetchPinnedJson(companionPin(model.index, H01_CARD_PATH), signal));
-}
-
-/** The curated threat models, fetched when a visitor asks for the steps. A step naming a technique this build does not hold is refused. */
-export async function loadAtlasChains(model: ExplorerModel, signal: AbortSignal): Promise<AtlasChains> {
-  const chains = parseAtlasChains(await fetchPinnedJson(companionPin(model.index, ATLAS_CHAINS_PATH), signal));
-  const isKnown = (techniqueId: string): boolean => model.techniquesById.has(techniqueId) || model.deviceOnlyTechniquesById.has(techniqueId);
-  const stray = chains.chains.flatMap((chain) => chain.steps).find((step) => !isKnown(step.technique_id));
-  if (stray !== undefined) throw new OutOfStepError(`a threat model names technique ${stray.technique_id}, which the index and the catalog do not hold`);
-  return chains;
 }

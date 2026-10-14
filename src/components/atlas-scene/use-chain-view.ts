@@ -3,7 +3,8 @@ import { ATLAS_CHAINS_PATH, type AtlasChain, type AtlasChains } from '@/lib/atla
 import { INITIAL_PLAYBACK, STEP_DWELL_MS, playbackReducer, type Playback, type PlaybackAction } from '@/lib/atlas-explorer/chain-playback';
 import { buildChainFrame, buildChainSteps, type ChainFrame, type ChainStepView } from '@/lib/atlas-explorer/chain-steps';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
-import { loadAtlasChains, type Loaded } from './explorer-data';
+import { loadAtlasChains } from './explorer-companions';
+import type { Loaded } from './explorer-data';
 import { useLoaded } from './use-loaded';
 
 export interface ChainView {

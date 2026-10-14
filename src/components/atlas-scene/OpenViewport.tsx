@@ -27,6 +27,8 @@ export interface OpenViewportProps {
   electrodeId: string | null;
   onPickElectrode: (electrodeId: string) => void;
   onSelectRegion: (regionId: string) => void;
+  /** Regions the visitor chose on an embedding page, in groups bracketed as one. They get the selection mark and no fill. */
+  selectedRegionGroups?: ReadonlyArray<readonly string[]>;
   onClose: () => void;
   /** Called when the picture cannot go on: the browser took the context away, or gave none after all. */
   onStopped: (state: Extract<GateState, 'context_lost' | 'no_webgl'>) => void;
@@ -34,6 +36,7 @@ export interface OpenViewportProps {
   loadCanvas?: () => Promise<CanvasModule>;
 }
 
+const NO_GROUPS: ReadonlyArray<readonly string[]> = [];
 const NO_COMMANDS: CanvasCommands = { setView: () => undefined, zoom: () => undefined, turn: () => undefined, tilt: () => undefined };
 const loadRealCanvas = (): Promise<CanvasModule> => import('./AtlasCanvas');
 
@@ -50,7 +53,7 @@ function meanOf(points: ReadonlyArray<readonly [number, number, number]>): [numb
  * the list both ways. This module and the canvas are fetched only after the
  * visitor asks for the view and the browser has shown it can draw one.
  */
-export default function OpenViewport({ model, lens, layers, selectedRegionId, chain, electrodeId, onPickElectrode, onSelectRegion, onClose, onStopped, loadCanvas = loadRealCanvas }: OpenViewportProps) {
+export default function OpenViewport({ model, lens, layers, selectedRegionId, chain, electrodeId, onPickElectrode, onSelectRegion, selectedRegionGroups = NO_GROUPS, onClose, onStopped, loadCanvas = loadRealCanvas }: OpenViewportProps) {
   const [slice, setSlice] = useState<SliceState | null>(null);
   const [pickedKey, setPickedKey] = useState<string | null>(null);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
@@ -62,9 +65,11 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
   const prefersLessMotion = useMemo(() => readPrefersLessMotion(), []);
 
   const regionKeys = selectedRegionId === null ? [] : model.regionsById.get(selectedRegionId)?.structure_keys ?? [];
-  const selectedKeys = useMemo(() => new Set([...regionKeys, ...(pickedKey === null ? [] : [pickedKey])]), [regionKeys.join(' '), pickedKey]);
-  // One bracket set around the whole selected region, however many shapes draw it, and one around a picked shape outside it.
-  const bracketGroups = useMemo(() => [regionKeys, pickedKey === null || regionKeys.includes(pickedKey) ? [] : [pickedKey]].filter((keys) => keys.length > 0), [regionKeys.join(' '), pickedKey]);
+  // The page's own selection, as shapes: each group of regions becomes one group of the shapes that draw them.
+  const groupKeys = useMemo(() => selectedRegionGroups.map((regionIds) => [...new Set(regionIds.flatMap((regionId) => model.regionsById.get(regionId)?.structure_keys ?? []))]), [model, selectedRegionGroups]);
+  const selectedKeys = useMemo(() => new Set([...regionKeys, ...groupKeys.flat(), ...(pickedKey === null ? [] : [pickedKey])]), [regionKeys.join(' '), groupKeys, pickedKey]);
+  // One bracket set around the whole selected region, however many shapes draw it, one around a picked shape outside it, and one around each group the page selected.
+  const bracketGroups = useMemo(() => [regionKeys, pickedKey === null || regionKeys.includes(pickedKey) ? [] : [pickedKey], ...groupKeys].filter((keys) => keys.length > 0), [regionKeys.join(' '), groupKeys, pickedKey]);
   const focusMm = useMemo(() => meanOf(scene.drawnShapes.filter((shape) => regionKeys.includes(shape.structureKey)).map((shape) => shape.centroidMm)), [selectedRegionId, scene.drawnShapes.length]);
   useEffect(() => { if (scene.bounds !== null && slice !== null) setSlice({ axis: slice.axis, positionMm: clampSlice(slice.axis, slice.positionMm, scene.bounds) }); }, [scene.bounds]);
 
