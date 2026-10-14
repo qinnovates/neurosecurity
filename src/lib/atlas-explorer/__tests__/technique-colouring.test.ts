@@ -20,7 +20,7 @@ const fillsInMountedView = (techniqueId: string): boolean => buildSceneShapes(mo
 
 describe('classifyTechniqueColouring, on the data the site serves', () => {
   it('finds techniques of all three kinds the index holds, and puts every one of them in exactly one', () => {
-    for (const colouring of TECHNIQUE_COLOURINGS.filter((kind) => kind !== 'not_in_index')) expect(idsOf(colouring).length, colouring).toBeGreaterThan(0);
+    for (const colouring of TECHNIQUE_COLOURINGS.filter((kind) => kind !== 'not_in_index' && kind !== 'not_in_catalog')) expect(idsOf(colouring).length, colouring).toBeGreaterThan(0);
     expect(TECHNIQUE_COLOURINGS.flatMap(idsOf).sort()).toEqual([...techniqueIds].sort());
   });
 
@@ -65,12 +65,19 @@ describe('classifyTechniqueColouring, on the data the site serves', () => {
     expect(limitsForUncolouredTechnique(model, lensOf(outside[0].id))).toEqual([{ id: 'view_nothing_coloured_no_neural_band', text: 'No region links were drafted for this technique: the catalog gives it no neural band.' }]);
   });
 
+  it('not in the catalog: an id the catalog does not have gets no sentence, and the catalog\'s ids are exactly the model\'s', () => {
+    expect([...model.catalogTechniqueIds].sort()).toEqual(THREAT_VECTORS.map((threat) => threat.id).sort());
+    expect(classifyTechniqueColouring(model, 'QIF-T9999')).toBe('not_in_catalog');
+    expect(limitsForUncolouredTechnique(model, lensOf('QIF-T9999'))).toEqual([]);
+  });
+
   it('chooses between the three sentences from the data alone', () => {
     const sentenceId = (techniqueId: string): string | undefined => limitsForUncolouredTechnique(model, lensOf(techniqueId))[0]?.id;
     expect(sentenceId(idsOf('coloured')[0])).toBeUndefined();
     expect(sentenceId(CONTAINED_ONLY_TECHNIQUE)).toBe('view_nothing_coloured_no_own_shape');
     expect(sentenceId(idsOf('none_named')[0])).toBe('view_nothing_coloured_none_named');
     expect(sentenceId('QIF-T0004')).toBe('view_nothing_coloured_no_neural_band');
+    expect(sentenceId('QIF-T9999')).toBeUndefined();
   });
 
   it('says nothing under any other lens, or before a technique is chosen', () => {

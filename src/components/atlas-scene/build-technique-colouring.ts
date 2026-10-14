@@ -4,11 +4,12 @@ import { limitsForUncolouredTechnique, type ColouringSource } from '@/lib/atlas-
 import type { IndexReviewState } from '@/lib/anatomy/anatomy-index-types';
 import { weakestReviewState } from '@/lib/atlas-explorer/explorer-model';
 import { UNREVIEWED_MARK } from './unreviewed-mark';
+import { THREAT_VECTORS } from '@/lib/threat-data';
 import { loadAnatomyBundle } from './load-anatomy-data';
 
 function loadColouringSource(): ColouringSource {
   const { index } = loadAnatomyBundle();
-  return { index, styleStructure: createStructureStyler(index) };
+  return { index, styleStructure: createStructureStyler(index), catalogTechniqueIds: new Set(THREAT_VECTORS.map((threat) => threat.id)) };
 }
 
 /** Loaded once for the whole build, however many technique pages ask. */
@@ -19,7 +20,8 @@ const COLOURING_SOURCE = loadColouringSource();
  * that colours a shape; nothing else of the anatomy leaves this module. A technique page is built with its sentence so
  * the button that asks for the view can say, before anything is fetched, that the picture will have nothing coloured.
  * It is chosen by the same function, from the same index, as the view's own caption (technique-colouring.ts). A
- * technique the index does not hold has no neural band, and the sentence says that.
+ * technique the index does not hold but the catalog does has no neural band, and the sentence says that; an id the
+ * catalog does not have gets no sentence.
  */
 export function readUncolouredLimit(techniqueId: string): LimitSentence | null {
   return limitsForUncolouredTechnique(COLOURING_SOURCE, { kind: 'technique', techniqueId })[0] ?? null;

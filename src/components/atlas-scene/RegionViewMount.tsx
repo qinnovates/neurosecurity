@@ -50,7 +50,7 @@ const NONE_NAMED_LIMIT_IDS: readonly LimitId[] = ['view_nothing_coloured_none_na
 export default function RegionViewMount({ loadPanel = loadRealPanel, nothingColoured = null, linksReview = null, ...panelProps }: RegionViewMountProps) {
   const [panel, setPanel] = useState<PanelState>({ status: 'closed' });
   // The view lists a region to pick only for a selection or for a technique whose links name one.
-  const listsNamedRegions = panelProps.lens.kind === 'technique' && !NONE_NAMED_LIMIT_IDS.includes(nothingColoured?.id as LimitId);
+  const listsNamedRegions = panelProps.lens.kind === 'technique' && !(nothingColoured !== null && NONE_NAMED_LIMIT_IDS.includes(nothingColoured.id));
   const isNothingListed = (panelProps.selectedRegionIds ?? []).length === 0 && (panelProps.selectedBandId ?? null) === null && !listsNamedRegions;
   const showsChooseHint = isNothingListed && panelProps.onRegionPick !== undefined;
   const isMounted = useRef(true);

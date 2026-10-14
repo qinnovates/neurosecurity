@@ -33,6 +33,8 @@ export interface ExplorerModel {
   /** Techniques the catalog tags with device stages only and no brain band. Decided from their own tags, never from a file's silence. */
   deviceOnlyTechniquesById: ReadonlyMap<string, DeviceStageTechnique>;
   descriptionsByRegion: ReadonlyMap<string, string>;
+  /** Every technique id the catalog has: the index's techniques (those with a neural band) and the device-stage ones. Checked equal to the full technique list in technique-colouring.test.ts. */
+  catalogTechniqueIds: ReadonlySet<string>;
   /** Every drafted link that resolves to the region, lit or not. */
   linksByRegion: ReadonlyMap<string, RegionLink[]>;
   /** The DSM-5-TR category references the registrar files with a technique. A technique with none is absent. */
@@ -80,6 +82,7 @@ export function createExplorerModel(index: AnatomyIndex, catalog: ExplorerCatalo
     techniquesById: new Map(index.techniques.map((technique) => [technique.id, technique])),
     deviceOnlyTechniquesById: new Map(catalog.device_stage_techniques.filter((technique) => !technique.band_ids.some(isNeuralBand)).map((technique) => [technique.id, technique])),
     descriptionsByRegion: new Map(catalog.regions.map((region) => [region.id, region.function])),
+    catalogTechniqueIds: new Set([...index.techniques.map((technique) => technique.id), ...catalog.device_stage_techniques.map((technique) => technique.id)]),
     linksByRegion: groupLinksByRegion(index.techniques),
     dsmByTechnique: new Map(catalog.technique_dsm.map((entry) => [entry.id, entry.references])),
     pathwaysByRegion: groupPathwaysByRegion(catalog.pathways),

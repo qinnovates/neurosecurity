@@ -242,8 +242,8 @@ export function findImportProblems(entryFile, tree, { scriptsMayCarryAnatomy = f
     if (!CODE_FILE_PATTERN.test(current)) continue;
     const { reached, problems: fileProblems } = inspectFile(current, tree);
     problems.push(...fileProblems.map((problem) => `${current} ${problem}`));
-    // Not followed, so held to its exact statements instead. Any other importer of the same module falls through to the walk below.
     if (reached.some((filePath) => INDEX_PIN_IMPORTERS.includes(filePath))) problems.push(...findPinElementImportProblems(current, tree));
+    // Not followed, so held to its exact statements instead. Any other importer of the same module falls through to the walk below.
     const pinModules = [...new Set(reached.filter((filePath) => isPinEdge(current, filePath)))];
     if (pinModules.length > 0) problems.push(...findPinImporterProblems(current, tree.read(current)));
     for (const pinModule of pinModules) problems.push(...findIndexPinProblems(pinModule, tree.read(pinModule)));

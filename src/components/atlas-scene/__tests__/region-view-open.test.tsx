@@ -108,6 +108,8 @@ describe('a technique page: what the links name, and whether anything is coloure
     const named = listNamedRegionIds(model.techniquesById.get(LIT_TECHNIQUE));
     const shown = await openMount(asTechniquePage(LIT_TECHNIQUE));
     expect(readUncolouredLimit(LIT_TECHNIQUE)).toBeNull();
+    // An id the catalog does not have is given no sentence either; the page only ever builds for catalog ids.
+    expect(readUncolouredLimit('QIF-T9999')).toBeNull();
     expect(shown.shapes.some((shape) => shape.fill === 'solid')).toBe(true);
     expect(screen.getByRole('heading', { name: `${NAMED_REGIONS_HEADING} (${named.length})` })).toBeTruthy();
     expect(everyLimitText().filter((text) => text.startsWith('No region is coloured'))).toEqual([]);
