@@ -1,6 +1,7 @@
 # lib/anatomy/ -- TARA Brain Atlas: data layer and maintainer's map
 
 This is the main map of the atlas stack. The other atlas directories link here for the recipes.
+Quickest lookup: `npm run atlas:where -- <words>` reads the feature map `src/scripts/atlas-map/atlas-map.json` (see `src/scripts/atlas-map/CONTEXT.md`) and prints the recipe, files, commands and checks for a request.
 
 ## Rules that never bend
 1. Nothing ships whose licence is non-commercial, bars redistribution or is unverified. `licence-rules.ts` decides, never a data file.

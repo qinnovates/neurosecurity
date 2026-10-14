@@ -83,6 +83,10 @@ model/qif-lab/data/
 *.key
 credentials.*
 docs/
+# The atlas index, follow-ups and provenance are versioned; every other docs/ directory stays ignored.
+!/docs/
+/docs/*
+!/docs/atlas/
 drafts/
 # core.ignorecase matches "drafts/" against "IR Playbooks/Drafts/" too — carve it back out.
 !IR Playbooks/Drafts/

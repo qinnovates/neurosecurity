@@ -2,6 +2,8 @@
 
 BCI security research: website (Astro 5 + React 19 + TailwindCSS 4), QIF model (specs, TARA, NISS, NSP), research data, governance, tools.
 
+Anything TARA Brain Atlas, anatomy, brain view, DSM wording or purpose-and-limits: run `npm run atlas:where -- <words>` first. Source of truth: `src/scripts/atlas-map/atlas-map.json`; readable view and open follow-ups: `docs/atlas/INDEX.md`, `docs/atlas/FOLLOW-UPS.md`.
+
 ## Structure
 - `src/` -- Astro website (TypeScript, KQL-first data via `kql-tables.ts`)
 - `osi-of-mind/` -- QIF specs, whitepapers, derivation logs, NSP + Runemate (Rust), tools (neurowall, neurosim, macshield)

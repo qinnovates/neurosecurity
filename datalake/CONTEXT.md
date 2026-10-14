@@ -27,6 +27,7 @@ The `qtara/` directory is a standalone Python package. Run `pytest` from `datala
 
 ## Anatomy files (TARA Brain Atlas)
 Maintainer's map, with step-by-step recipes for adding a source, a region, a device, refreshing technique links and a full data refresh: `src/lib/anatomy/CONTEXT.md`.
+Entry point for anything atlas: `npm run atlas:where -- <words>`, backed by `src/scripts/atlas-map/atlas-map.json`.
 
 All anatomy content here is AI-drafted and unreviewed, and licence readings were made by AI, not by a lawyer. The files are parsed at build time by `src/lib/anatomy/` through `src/components/atlas-scene/load-anatomy-data.ts`; a malformed file stops the build.
 - `qif-anatomy-sources.json` -- upstream atlas registry: stated licence, files, route to the template space
