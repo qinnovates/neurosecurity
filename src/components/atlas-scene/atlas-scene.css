@@ -37,11 +37,6 @@
 /* A limit sentence: quiet, but set apart by a rule on its leading edge so it reads as a note on its neighbour. */
 .atlas-limit { margin: 0.375rem 0; padding-left: 0.625rem; max-width: 72ch; border-left: 2px solid var(--atlas-line-strong); color: var(--atlas-ink-soft); }
 
-/* The review mark: a warning triangle while unreviewed, a tick once reviewed, always with its words. */
-.atlas-mark { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0 0.375rem; font-size: 0.6875rem; font-weight: 600; line-height: 1.5; white-space: nowrap; color: var(--atlas-ink); border: 1px dashed var(--atlas-line-strong); border-radius: 999px; }
-.atlas-mark[data-review-state="reviewed"] { border-style: solid; }
-.atlas-mark-glyph { width: 0.625rem; height: 0.625rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
-
 /* Controls. Every one is at least 44px tall for touch and shows a ring when focused from the keyboard. */
 .atlas-button, .atlas-toggle, .atlas-lens, .atlas-chip, .atlas-disclosure-button, .atlas-stage-button, .atlas-rail-technique {
   min-height: var(--atlas-row); font: inherit; color: inherit; background: var(--atlas-ground); border: 1px solid var(--atlas-line-strong); border-radius: 0.5rem; cursor: pointer;

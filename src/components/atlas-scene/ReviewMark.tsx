@@ -1,4 +1,5 @@
 import type { IndexReviewState } from '@/lib/anatomy/anatomy-index-types';
+import './review-mark.css';
 
 interface Props {
   state: IndexReviewState;
@@ -12,7 +13,7 @@ export default function ReviewMark({ state }: Props) {
   const isReviewed = state.state === 'reviewed';
   return (
     <span className="atlas-mark" data-review-state={state.state} data-ai-drafted={isReviewed ? undefined : 'true'}>
-      <svg className="atlas-mark-glyph" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+      <svg className="atlas-mark-glyph" width="10" height="10" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
         {isReviewed ? <path d="M2 6.5 5 9.5 10 3" /> : <path d="M6 1 11 10H1Z" />}
       </svg>
       {state.mark}

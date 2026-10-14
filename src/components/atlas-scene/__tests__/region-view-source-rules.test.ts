@@ -63,7 +63,8 @@ describe('the 3D view on other pages: what may import what', () => {
     ]);
     // The mark the button shows must not pull the limit table, the review ledger parser or three.js into a first load: type imports only.
     const reviewMark = read(path.join(SCENE_DIRECTORY, 'ReviewMark.tsx'));
-    expect(reviewMark.match(/^import .*$/gm)).toEqual(["import type { IndexReviewState } from '@/lib/anatomy/anatomy-index-types';"]);
+    // Its own small stylesheet comes with it, so the mark is styled wherever it renders, before the view's stylesheets load.
+    expect(reviewMark.match(/^import .*$/gm)).toEqual(["import type { IndexReviewState } from '@/lib/anatomy/anatomy-index-types';", "import './review-mark.css';"]);
   });
 
   it('adds the view\'s stylesheets by address, so no page links them on its first load', () => {
