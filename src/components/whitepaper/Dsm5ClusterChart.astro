@@ -1,4 +1,5 @@
 ---
+import { DSM5_QUALIFIER } from '../../lib/purpose-and-limits';
 const maxCount = 28;
 
 const clusters = [
@@ -12,10 +13,10 @@ const clusters = [
 
 <div class="glass rounded-xl p-6">
   <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1 text-[var(--color-text-primary)]">
-    DSM-5-TR Diagnostic Clusters
+    DSM-5-TR Category Clusters
   </h3>
   <p class="text-xs text-[var(--color-text-faint)] mb-4">
-    Neural Impact Chain mapping: attack technique &rarr; psychiatric outcome
+    Neural Impact Chain mapping: attack technique &rarr; {DSM5_QUALIFIER}
   </p>
 
   <div class="flex flex-col gap-3">

@@ -50,7 +50,7 @@ techniques.forEach((t: any) => {
 });
 
 // Compute neurorights counts from registrar (build-time)
-const neurorightsCounts: Record<string, number> = { MI: 0, MP: 0, CL: 0, PC: 0, EA: 0 };
+const neurorightsCounts: Record<string, number> = { MI: 0, MP: 0, CL: 0, PC: 0 };
 techniques.forEach((t: any) => {
   (t?.neurorights?.affected ?? []).forEach((r: string) => {
     if (neurorightsCounts[r] !== undefined) neurorightsCounts[r]++;
@@ -362,10 +362,10 @@ techniques.forEach((t: any) => {
     <div class="max-w-4xl mx-auto text-center mb-10">
       <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[#8b5cf6] mb-3">Governance & Neurorights</p>
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-4">
-        Five rights, quantified. Governance spanning all 11 bands.
+        Four proposed neurorights, mapped. Governance spanning all {HOURGLASS_BANDS.length} bands.
       </h2>
       <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto">
-        Neuroethics scholarship defined the rights; TARA operationalizes them against every catalogued technique. The policy bridge connects those findings to accelerating regulation.
+        Neuroethics scholarship proposed these rights (Ienca &amp; Andorno, 2017); TARA maps cataloged techniques to them for threat modeling. Equal access is treated as a governance commitment, not a separate right. The policy bridge connects those findings to accelerating regulation.
       </p>
     </div>
 
@@ -376,7 +376,6 @@ techniques.forEach((t: any) => {
         { code: 'MP', name: 'Mental Privacy', count: neurorightsCounts.MP, color: '#f59e0b' },
         { code: 'CL', name: 'Cognitive Liberty', count: neurorightsCounts.CL, color: '#3b82f6' },
         { code: 'PC', name: 'Psychological Continuity', count: neurorightsCounts.PC, color: '#8b5cf6' },
-        { code: 'EA', name: 'Equal Access', count: neurorightsCounts.EA, color: '#10b981' },
       ]}
     />
 

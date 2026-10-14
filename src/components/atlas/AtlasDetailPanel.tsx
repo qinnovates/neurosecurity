@@ -6,6 +6,8 @@
  */
 
 import type { AtlasBand, AtlasDevice, AtlasNeuroright, AtlasDsmCluster } from '../../lib/atlas-data';
+// Named JSON import: only the qualifier string reaches the client bundle, not the registrar.
+import { dsm5Qualifier } from '../../data/purpose-and-limits.json';
 import type { DetailTab } from './AtlasContext';
 
 interface Props {
@@ -362,7 +364,7 @@ function DsmTab({ clusters, band }: { clusters: AtlasDsmCluster[]; band: AtlasBa
     return (
       <div className="text-center py-8">
         <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>
-          No DSM-5-TR diagnostic mappings for {band.id} ({band.name})
+          No DSM-5-TR category references for {band.id} ({band.name})
         </p>
       </div>
     );
@@ -371,7 +373,7 @@ function DsmTab({ clusters, band }: { clusters: AtlasDsmCluster[]; band: AtlasBa
   return (
     <div className="space-y-3">
       <p className="text-[10px] uppercase tracking-wider" style={{ color: 'var(--color-text-faint)' }}>
-        {band.dsmConditions.length} diagnostic codes mapped to {band.id}
+        {band.dsmConditions.length} {dsm5Qualifier} &middot; {band.id}
       </p>
       {clusters.map(cluster => (
         <div

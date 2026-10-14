@@ -19,6 +19,8 @@ export interface StatementSection {
 }
 
 export const PURPOSE_SUMMARY: string = statement.summary;
+/** Qualifier required wherever DSM-5-TR names appear (guardrail; decision A3). */
+export const DSM5_QUALIFIER: string = statement.dsm5Qualifier;
 export const FRAMEWORK_STATUS = statement.status;
 export const STATEMENT_LINKS = statement.links;
 export const PURPOSE_AND_LIMITS = statement.purposeAndLimits as {

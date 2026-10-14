@@ -1,5 +1,6 @@
 ---
 import { THREAT_VECTORS } from '../../lib/threat-data';
+import { DSM5_QUALIFIER } from '../../lib/purpose-and-limits';
 
 const total = THREAT_VECTORS.length;
 
@@ -9,7 +10,7 @@ const steps = [
   { label: 'Neural Structure', detail: 'Targeted anatomy', color: '#22c55e' },
   { label: 'Function Impact', detail: 'Cognitive/Motor/Affective', color: '#06b6d4' },
   { label: 'NISS Score', detail: '5 neural metrics', color: '#8b5cf6' },
-  { label: 'DSM-5-TR', detail: 'Diagnostic mapping', color: '#ec4899' },
+  { label: 'DSM-5-TR', detail: 'Category references (threat modeling)', color: '#ec4899' },
 ];
 ---
 
@@ -18,7 +19,7 @@ const steps = [
     The Neural Impact Chain
   </h3>
   <p class="text-xs text-[var(--color-text-faint)] mb-5">
-    Research mapping from security severity to psychiatric diagnostic categories
+    Research mapping from security severity to {DSM5_QUALIFIER}
   </p>
 
   {/* Chain flow */}

@@ -10,20 +10,10 @@ See [Purpose and limits](https://github.com/qinnovates/neurosecurity/blob/main/g
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in the QIF specification, TARA registrar, or any component of this framework, please report it through **GitHub Issues**:
+Report vulnerabilities privately, through the channels in the repository's root [Security Policy](../SECURITY.md). That file is the single source of truth for how to report, what to include and response timelines.
 
-1. Open an issue 
-2. Label it `security`
-3. Include: description, steps to reproduce (if applicable), potential impact, suggested fix (if any)
-
-For vulnerabilities that should not be disclosed publicly before a fix is available, use [GitHub's private vulnerability reporting](https://github.com/qinnovates/neurosecurity/security/advisories/new).
-
-## Disclosure Policy
-
-- **Private disclosure period:** 90 days for critical issues
-- **Public disclosure:** After patch or mitigation is available
-- **Credit:** Reporters will be credited unless they prefer anonymity
+**Do not open a public GitHub issue for a security vulnerability.** Public issues are for errors and gaps in the catalog's defensive guidance that carry no exploitable detail.
 
 ---
 
-*Last updated: 2026-03-15*
+*Last updated: 2026-10-14*

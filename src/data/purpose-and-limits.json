@@ -47,5 +47,6 @@
       }
     ]
   },
+  "dsm5Qualifier": "DSM-5-TR category references for threat modeling, not diagnostic claims",
   "securityPreamble": "The TARA catalog exists to inform defense. Do not test cataloged techniques on people, or on devices you are not authorized to test. Research involving human participants needs ethics approval and informed consent. Report gaps in the catalog's defensive guidance here too."
 }
