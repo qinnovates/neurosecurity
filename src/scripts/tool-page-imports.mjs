@@ -24,7 +24,7 @@
  */
 
 import path from 'node:path';
-import { readSourceImports } from './source-imports.mjs';
+import { readModuleStatements, readSourceImports } from './source-imports.mjs';
 
 const SOURCE_ALIASES = [['@shared/', 'datalake/'], ['@/', 'src/']];
 const ROOT_PREFIX = '/';
@@ -69,13 +69,43 @@ export const ANATOMY_DATA_FILE_PATTERNS = Object.freeze([/^datalake\/qif-anatomy
 export const GENERATED_TABLE_FILE_PATTERNS = Object.freeze([/^src\/site\/data\//, /^docs\/data\//, /^datalake\/parquet\//]);
 
 /**
- * The one build-time module a page that is not an anatomy page may import although it leads to the anatomy loader.
+ * The one build-time module a page that is not an anatomy page may reach although it leads to the anatomy loader.
  * It exports the anatomy index's path, length and digest and nothing else, so that the 3D view a page mounts can refuse
- * an index from another build (a page without the pin draws nothing). The walk stops at it and does not follow it.
- * A test holds the module to that one export. What a page was actually built with is checked on the built files all
- * the same (find-anatomy-payload.mjs): its HTML for anatomy rows, and every script it can load for the tables and data files.
+ * an index from another build (a page without the pin draws nothing).
+ *
+ * The walk does not follow it, on two conditions, both checked here:
+ * - the file importing it is one of INDEX_PIN_IMPORTERS, the server-side element that writes the pin into the page. Any
+ *   other importer (a client component above all) is walked into the module like any import, and so reaches the loader;
+ * - the module is, statement for statement, what INDEX_PIN_STATEMENTS says. One more import or export, a different
+ *   value, or any other statement, however it is laid out, is a problem.
+ * What a page was actually built with is checked on the built files all the same (find-anatomy-payload.mjs): its HTML
+ * for anatomy rows, and every script it can load for the tables and data files.
  */
 export const INDEX_PIN_MODULES = Object.freeze(['src/components/atlas-scene/build-index-pin.ts']);
+/** The only files whose import of a pin module is not followed. Each renders on the server and ships no script. */
+export const INDEX_PIN_IMPORTERS = Object.freeze(['src/components/atlas-scene/AtlasIndexPin.astro']);
+/** The pin module's one way to the loader. Named apart so that this file does not itself read as an importer of the loader. */
+const LOADER_SPECIFIER = './load-anatomy-data';
+/** Every top-level statement a pin module holds, as readModuleStatements spells them. */
+export const INDEX_PIN_STATEMENTS = Object.freeze([
+  "import type { PinnedFile } from '@/lib/anatomy/anatomy-index-types'",
+  `import { loadAnatomyBundle } from '${LOADER_SPECIFIER}'`,
+  'export const INDEX_PIN = loadAnatomyBundle().indexPin',
+]);
+
+/**
+ * @param {string} filePath a pin module
+ * @param {string} sourceText
+ * @returns {string[]} empty when the module is exactly the pin; otherwise one message naming what it holds instead
+ */
+export function findIndexPinProblems(filePath, sourceText) {
+  const found = readModuleStatements(filePath, sourceText);
+  if (found.length === INDEX_PIN_STATEMENTS.length && found.every((statement, position) => statement === INDEX_PIN_STATEMENTS[position])) return [];
+  const added = found.filter((statement) => !INDEX_PIN_STATEMENTS.includes(statement));
+  const missing = INDEX_PIN_STATEMENTS.filter((statement) => !found.includes(statement));
+  const difference = [...added.map((statement) => `it also holds "${statement}"`), ...missing.map((statement) => `it lacks "${statement}"`)].join('; ') || 'its statements are repeated or out of order';
+  return [`${filePath} must stay a bare pin (two imports and the one export of the index's path, length and digest), because the import walk does not follow it: ${difference}. Put anything else in another module.`];
+}
 
 export function isGeneratedTableFile(filePath) {
   return GENERATED_TABLE_FILE_PATTERNS.some((pattern) => pattern.test(filePath));
@@ -166,6 +196,8 @@ function traceChain(filePath, cameFrom) {
  */
 export function findImportProblems(entryFile, tree, { scriptsMayCarryAnatomy = false } = {}) {
   const isForbidden = scriptsMayCarryAnatomy ? isGeneratedTableFile : isAnatomyDataModule;
+  /** The one edge the walk does not follow: the pin element's import of the pin module, on a page that may hold no anatomy. */
+  const isPinEdge = (importer, imported) => !scriptsMayCarryAnatomy && INDEX_PIN_MODULES.includes(imported) && INDEX_PIN_IMPORTERS.includes(importer);
   const cameFrom = new Map([[entryFile, null]]);
   const queue = [entryFile];
   const problems = [];
@@ -175,10 +207,12 @@ export function findImportProblems(entryFile, tree, { scriptsMayCarryAnatomy = f
       problems.push(`reaches ${current} through ${traceChain(current, cameFrom).join(' -> ')}`);
       continue;
     }
-    if (!CODE_FILE_PATTERN.test(current) || (!scriptsMayCarryAnatomy && INDEX_PIN_MODULES.includes(current))) continue;
+    if (!CODE_FILE_PATTERN.test(current)) continue;
     const { reached, problems: fileProblems } = inspectFile(current, tree);
     problems.push(...fileProblems.map((problem) => `${current} ${problem}`));
-    for (const next of reached.filter((filePath) => !cameFrom.has(filePath))) {
+    // Not followed, so held to its exact statements instead. Any other importer of the same module falls through to the walk below.
+    for (const pinModule of new Set(reached.filter((filePath) => isPinEdge(current, filePath)))) problems.push(...findIndexPinProblems(pinModule, tree.read(pinModule)));
+    for (const next of reached.filter((filePath) => !cameFrom.has(filePath) && !isPinEdge(current, filePath))) {
       cameFrom.set(next, current);
       queue.push(next);
     }

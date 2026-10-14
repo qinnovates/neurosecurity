@@ -12,6 +12,9 @@
  * files its script tags name. An
  * `import()` written inside an `.astro` template expression is not seen; the
  * built-page check is what covers that.
+ *
+ * `readModuleStatements` reads the other thing a guard may need to hold still:
+ * every top-level statement of a module, in one spelling whatever its layout.
  */
 
 import ts from 'typescript';
@@ -114,4 +117,51 @@ export function readSourceImports(filePath, sourceText) {
   }
   if (found.specifiers.some((specifier) => MODULE_LOADER_MODULES.includes(specifier))) found.unfollowable.push('a module loader (node:module), whose createRequire loads files by a computed path');
   return { ...found, fileAccessModules: found.specifiers.filter((specifier) => FILE_ACCESS_MODULES.includes(specifier)) };
+}
+
+const WHITESPACE_PATTERN = /\s+/g;
+const DECLARATION_WORDS = [[ts.NodeFlags.Const, 'const'], [ts.NodeFlags.Let, 'let']];
+const FALLBACK_DECLARATION_WORD = 'var';
+
+function describeImport(node) {
+  const clause = node.importClause;
+  if (clause === undefined) return `import '${node.moduleSpecifier.text}'`;
+  const bindings = clause.namedBindings;
+  const named = bindings === undefined ? [] : ts.isNamespaceImport(bindings)
+    ? [`* as ${bindings.name.text}`]
+    : [`{ ${bindings.elements.map((element) => `${element.isTypeOnly ? 'type ' : ''}${element.propertyName === undefined ? '' : `${element.propertyName.text} as `}${element.name.text}`).join(', ')} }`];
+  const names = [...(clause.name === undefined ? [] : [clause.name.text]), ...named].join(', ');
+  return `import ${clause.isTypeOnly ? 'type ' : ''}${names} from '${node.moduleSpecifier.text}'`;
+}
+
+function isExported(node) {
+  return ts.canHaveModifiers(node) && (ts.getModifiers(node) ?? []).some((modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword);
+}
+
+/** `export const NAME = <value>` for each name declared; the value's text with its white space taken out, the type annotation left out. */
+function describeExportedVariables(node, sourceFile) {
+  const word = DECLARATION_WORDS.find(([flag]) => (node.declarationList.flags & flag) !== 0)?.[1] ?? FALLBACK_DECLARATION_WORD;
+  return node.declarationList.declarations.map((declaration) => {
+    const value = declaration.initializer === undefined ? '' : ` = ${declaration.initializer.getText(sourceFile).replace(WHITESPACE_PATTERN, '')}`;
+    return `export ${word} ${declaration.name.getText(sourceFile).replace(WHITESPACE_PATTERN, '')}${value}`;
+  });
+}
+
+/**
+ * Every top-level statement of a TypeScript module, each in one spelling whatever its line breaks, spacing or comments:
+ * `import type { A } from 'x'`, `import { a, b as c } from './y'`, `export const NAME = value()`. Any other statement
+ * (a re-export, a function, a bare call) is given as its kind and its whole text, so nothing a module does is left out.
+ *
+ * @param {string} filePath repository path, used for its extension
+ * @param {string} sourceText
+ * @returns {string[]} in source order
+ */
+export function readModuleStatements(filePath, sourceText) {
+  const scriptKind = JSX_EXTENSION_PATTERN.test(filePath) ? ts.ScriptKind.TSX : ts.ScriptKind.TS;
+  const sourceFile = ts.createSourceFile(filePath, sourceText, ts.ScriptTarget.Latest, false, scriptKind);
+  return sourceFile.statements.flatMap((node) => {
+    if (ts.isImportDeclaration(node)) return [describeImport(node)];
+    if (ts.isVariableStatement(node) && isExported(node)) return describeExportedVariables(node, sourceFile);
+    return [`${ts.SyntaxKind[node.kind]}: ${node.getText(sourceFile).replace(WHITESPACE_PATTERN, ' ')}`];
+  });
 }

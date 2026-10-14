@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { readModuleStatements } from '../../../scripts/source-imports.mjs';
+import { findIndexPinProblems } from '../../../scripts/tool-page-imports.mjs';
 import { REGION_VIEW_PAGES, TOOL_PAGES } from '../../../scripts/tool-pages.mjs';
 
 const SCENE_DIRECTORY = 'src/components/atlas-scene';
@@ -67,8 +69,14 @@ describe('the 3D view on other pages: what may import what', () => {
       expect(read(page), page).toContain("import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';");
       expect(read(page).match(/<AtlasIndexPin \/>/g), page).toHaveLength(1);
     }
-    const pinModule = read(path.join(SCENE_DIRECTORY, 'build-index-pin.ts'));
-    expect(pinModule.match(/^export .*$/gm)).toEqual(['export const INDEX_PIN: PinnedFile = loadAnatomyBundle().indexPin;']);
+    // Parsed, not matched by line: every statement of the pin module, however it is laid out. The walk's own check is findIndexPinProblems.
+    const pinModulePath = path.join(SCENE_DIRECTORY, 'build-index-pin.ts');
+    expect(readModuleStatements(pinModulePath, read(pinModulePath)), 'build-index-pin.ts must stay a bare pin: two imports and the one export').toEqual([
+      "import type { PinnedFile } from '@/lib/anatomy/anatomy-index-types'",
+      "import { loadAnatomyBundle } from './load-anatomy-data'",
+      'export const INDEX_PIN = loadAnatomyBundle().indexPin',
+    ]);
+    expect(findIndexPinProblems(pinModulePath, read(pinModulePath))).toEqual([]);
     const pinElement = read(path.join(SCENE_DIRECTORY, 'AtlasIndexPin.astro'));
     expect(pinElement).toContain('JSON.stringify(INDEX_PIN)');
     expect(pinElement).not.toMatch(/loadAnatomyBundle|\.index\b|indexJson|@shared\//);
