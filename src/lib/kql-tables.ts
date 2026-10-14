@@ -172,6 +172,7 @@ function buildTechniques(): Row[] {
       name: t.attack || t.name,
       tactic: t.tactic,
       parent_id: t.parent_id || '',
+      legacy_names: (t.legacy_names || []).join('; '),
       severity: t.severity,
       status: t.status,
       niss_score: t.niss?.score || 0,

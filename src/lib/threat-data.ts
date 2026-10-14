@@ -204,6 +204,10 @@ export interface ThreatVector {
    * status as its parent's.
    */
   parentId: string | null;
+  /** Earlier display names, kept as aliases after a rename (registrar `legacy_names`). */
+  legacyNames: string[];
+  /** Public note explaining a rename (registrar `rename_note`), or null. */
+  renameNote: string | null;
 }
 
 /** Transform registry techniques → ThreatVector[] */
@@ -238,6 +242,8 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
   taraDomainSecondary: t.tara_domain_secondary ?? [],
   taraMode: t.tara_mode ?? null,
   parentId: t.parent_id ?? null,
+  legacyNames: Array.isArray(t.legacy_names) ? t.legacy_names : [],
+  renameNote: t.rename_note ?? null,
 }));
 
 /** Sub-techniques of a given technique, by parent QIF-Txxxx ID */

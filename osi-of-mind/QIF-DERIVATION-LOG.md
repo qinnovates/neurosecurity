@@ -15,6 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit
 | Entry | Topic | Link |
 |-------|-------|------|
+| 113 | Descriptive technique notes and four renames (framing decision M2/M3, pending owner acceptance): 26 notes no longer read as instructions and end with the entry's detection text; T0011, T0046, T0065, T0099 renamed with `legacy_names` aliases; no technique removed | [Entry 113](#entry-113-descriptive-notes-and-renames) |
 | 112 | `evidence.population` added as a non-ordinal dimension (GRADE precedent) so 12 adjacent-only techniques stop reading as theoretical; no tier changed, proving orthogonality; `PLAUSIBLE`/`SPECULATIVE` cases added, which exposed NaN in `getStatusStats()` and two colourless filter chips | [Entry 112](#entry-112-evidence-population) |
 | 111 | `evidence.tier` populated across all 176 techniques by deterministic rubric, replacing a legacy `status` word nothing re-derived; the seven-tier scheme had 0 adoption and its one consumer passed null; 6 techniques promoted; validated tiers and adjacent-CVE promotion both refused; 26 incomplete physics blocks found, and the Python SDK had never parsed its own registrar | [Entry 111](#entry-111-evidence-tier) |
 | 110 | Privilege-boundary split of QIF-T0163/T0164: QIF-T0175 (CONFIRMED on four Natus Xltek clinical EEG RCEs) and QIF-T0176 take the application-layer parsing boundary; 22 CVEs divided 11/11; no technique now exceeds the evidence-concentration threshold; three of my own recollections of the task were wrong and re-read from the record | [Entry 110](#entry-110-privilege-split) |
@@ -358,6 +359,40 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 113: Describing Techniques Instead of Instructing Them {#entry-113-descriptive-notes-and-renames}
+
+**Date:** 2026-10-14, ~00:30
+**Classification:** CORRECTION
+**AI Systems:** Claude Opus 5.5 (implementation); framing decision produced earlier by an AI review panel (Quorum)
+**Connected entries:** Entry 108 (parent_id and the 2026-10 techniques, including QIF-T0171), Entry 106 (data refresh)
+**RACI:** R: Claude Opus 5.5 | A: KQ (pending: this entry is a proposal until the PR is merged) | C: AI review panel | I: none
+**AI Contribution Level:** AI-generated; Kevin's merge is the acceptance
+
+### Context
+
+The 2026-10 framing decision asked that QIF, TARA and NISS read as threat modeling, severity scoring and impact assessment, never as an attack toolkit. Its inventory found 26 technique notes that opened with a second-person imperative ("Inject crafted signals...", "Exploit weak or absent authentication..."). These notes render as the description and meta description of each technique page, so they read as instructions (guardrail G7).
+
+### What changed
+
+| Change | Detail |
+|---|---|
+| 26 notes rewritten | Openings now say "An adversary may..." for CONFIRMED, DEMONSTRATED and EMERGING entries and "If feasible, an adversary could..." for THEORETICAL, PLAUSIBLE and SPECULATIVE ones, following ATT&CK's descriptive convention. Each note ends with the entry's own `tara.engineering.detection` text. All 26 already had detection text, so none needed "Mitigation guidance not yet drafted." |
+| In-sentence fixes | QIF-T0053 "patterns that reveal ... cognitive states" became "signal patterns associated with" (G2, reverse inference). QIF-T0071 no longer says Biological TLS "eliminates" the attack surface (it is proposed and unvalidated). QIF-T0103's numbered "Attack scenarios" are now noun phrases, not commands. QIF-T0171 uses US spelling. |
+| Four renames | QIF-T0011, T0046, T0065 and T0099. Old names are kept in the new `legacy_names` field; `rename_note` shows on the technique page. QIF-T0065's note says the earlier name implied a demonstrated clinical effect that no cited source shows. |
+| Deviation from the decision | QIF-T0011: the decision text says "via BCI stimulation signal", but the entry's notes describe the BCI's telemetry signal (MICS 402 MHz), so the name says "telemetry". Flagged for Kevin. |
+
+No detection or mitigation guidance was written. The 26 techniques without detection guidance (QIF-T0136 to T0161) are a separate set and remain for Kevin to commission. They are listed on the coverage gap page proposed in the companion PR.
+
+### Human decisions
+
+None yet. Kevin accepts or rejects this by merging or closing the PR.
+
+### AI Collaboration
+
+Claude Opus 5.5 wrote the migration script (`src/scripts/migrate-descriptive-notes-and-renames.py`), ran it after a dry run, and regenerated the derived copies. No sources were added.
 
 ---
 
