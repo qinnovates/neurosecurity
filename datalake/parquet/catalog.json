@@ -794,8 +794,8 @@
         "asset_sha256",
         "asset_license_id"
       ],
-      "size_bytes": 17304,
-      "sha256": "03088d310ac14eb8d435539eaf9e1e16e1d716de14d7bb8ac30940a4721142cf",
+      "size_bytes": 17267,
+      "sha256": "d8f9170ed9e49fe0a08b2d0970eb90a9a5b0c1645a388b9897c164e55a77d323",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_structures.parquet"
     },
@@ -839,8 +839,8 @@
         "check_status",
         "addressing_version"
       ],
-      "size_bytes": 17973,
-      "sha256": "b9e18ec1bb94160ddb145397d133c0e43afd7652521e91f66c9e6df438c9cd88",
+      "size_bytes": 18066,
+      "sha256": "7ea792c1edb1122cbbbb24e751abdad7e2e4cde54f6ba5affbb9517825df2df8",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_crosswalk.parquet"
     },

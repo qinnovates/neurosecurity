@@ -10,18 +10,6 @@
     {
       "parent": "thalamus",
       "child": "vim"
-    },
-    {
-      "parent": "midbrain",
-      "child": "substantia_nigra"
-    },
-    {
-      "parent": "midbrain",
-      "child": "vta"
-    },
-    {
-      "parent": "cerebellum_cortex",
-      "child": "vermis"
     }
   ],
   "no_geometry": [
@@ -128,7 +116,7 @@
           "quote": "precentral gyrus"
         },
         "check_status": "unchecked",
-        "rationale": "Area 4 is in the precentral gyrus and, for the leg, the anterior paracentral lobule (PMID 34268163); the atlas divides neither from premotor cortex. Shares 12114 with pmc."
+        "rationale": "Area 4: precentral gyrus and, for the leg, the anterior paracentral lobule (PMID 34268163), which the publisher files as frontal. Neither label separates premotor cortex. Shares 12114 with pmc."
       },
       "drafted_by": "ai"
     },
@@ -191,7 +179,7 @@
           "quote": "transverse temporal gyrus (Heschl's gyrus)"
         },
         "check_status": "unchecked",
-        "rationale": "Area 41 is on Heschl's gyrus (PMID 11305897); the planum temporale is part of area 42 (PMID 2346228). QIF's belt and parabelt were not located and may lie outside both labels."
+        "rationale": "Area 41 is on Heschl's gyrus (PMID 11305897); the planum temporale is part of area 42 (PMID 2346228), the publisher's belt area. The parabelt was not located and may lie outside both labels."
       },
       "drafted_by": "ai"
     },
@@ -315,7 +303,7 @@
           "quote": "superior frontal gyrus"
         },
         "check_status": "unchecked",
-        "rationale": "No such label; on the medial superior frontal gyrus, bordering area 4 behind (PMID 30187192). Whether m1's rostral paracentral lobule holds any is unknown. Shares 12115 with pfc and pmc."
+        "rationale": "No such label; on the medial superior frontal gyrus, bordering area 4 behind (PMID 30187192). Leaving out m1's rostral paracentral lobule is inferred from that border. Shares 12115 with pfc and pmc."
       },
       "drafted_by": "ai"
     },
@@ -377,7 +365,7 @@
           "quote": "postcentral gyrus"
         },
         "check_status": "unchecked",
-        "rationale": "Areas 3, 1 and 2 are in the postcentral gyrus and, for leg and foot, the posterior paracentral lobule (PMID 34268163); the atlas does not delimit them."
+        "rationale": "Areas 3, 1 and 2: postcentral gyrus and, for leg and foot, the posterior paracentral lobule (PMID 34268163), which the publisher files as parietal. The atlas does not delimit them."
       },
       "drafted_by": "ai"
     },
@@ -500,7 +488,7 @@
           "quote": "cingulate gyrus, rostral (anterior) part"
         },
         "check_status": "unchecked",
-        "rationale": "Rostral cingulate gyrus plus the subcallosal gyrus, given as area 25 in PMID 18368034. The paracingulate gyrus (area 32 there) is left out: the atlas files it under the frontal lobe."
+        "rationale": "Rostral cingulate plus subcallosal gyrus: area 25 in PMID 18368034 and in the publisher's subgenual area 25 node. Paracingulate gyrus (area 32 there) left out: filed under the frontal lobe."
       },
       "drafted_by": "ai"
     },
@@ -677,7 +665,7 @@
           "quote": "Substantia Nigra Pars Compacta"
         },
         "check_status": "unchecked",
-        "rationale": "Pars compacta and pars reticulata, the two QIF sub-structures, are separate maps."
+        "rationale": "Pars compacta and pars reticulata, the two QIF sub-structures, are separate maps. Both lie inside the midbrain, which draws from another atlas."
       },
       "drafted_by": "ai"
     },
@@ -706,7 +694,7 @@
           "quote": "Ventral Tegmental Area"
         },
         "check_status": "unchecked",
-        "rationale": "CIT168 maps the parabrachial pigmented nucleus apart (label 9, not shipped); the usual area includes it (PMID 33580320). Too small on the 1 mm grid to outline; it ships as a marker."
+        "rationale": "Lies inside the midbrain. CIT168 maps the parabrachial pigmented nucleus apart (label 9, not shipped); the usual area includes it (PMID 33580320). Too small to outline; ships as a marker."
       },
       "drafted_by": "ai"
     },
@@ -893,7 +881,7 @@
           "quote": "lateral hemisphere of cerebellum"
         },
         "check_status": "unchecked",
-        "rationale": "Lateral hemisphere and paravermis: two of the atlas's three cerebellar cortical zones (PMID 27418273). The third is drawn under vermis, which this region contains. Folial white matter unchecked."
+        "rationale": "Lateral hemisphere and paravermis: two of the atlas's three cerebellar cortical zones (PMID 27418273). The third, the vermis, is drawn as region vermis. Folial white matter unchecked."
       },
       "drafted_by": "ai"
     },
@@ -951,7 +939,7 @@
           "quote": "cerebellar vermis"
         },
         "check_status": "unchecked",
-        "rationale": "The label is the cerebellar vermis; lobules are not divided."
+        "rationale": "The label is the cerebellar vermis; lobules are not divided. It is the third cortical zone beside cerebellum_cortex's two labels."
       },
       "drafted_by": "ai"
     },
@@ -1045,7 +1033,7 @@
           "quote": "midbrain tegmentum (remainder, excluding red nucleus and substantia nigra)"
         },
         "check_status": "unchecked",
-        "rationale": "Union of tegmentum, pretectal region, colliculi and cerebral peduncle. The red nucleus is a second row on CIT168; nigra and vta are contained regions on it. Shares 12195 with reticular_formation."
+        "rationale": "Union of tegmentum, pretectal region, colliculi and cerebral peduncle. Red nucleus (second row), nigra and vta lie inside the midbrain as CIT168 shapes. Shares 12195 with reticular_formation."
       },
       "drafted_by": "ai"
     },
@@ -1074,7 +1062,7 @@
           "quote": "Red Nucleus"
         },
         "check_status": "unchecked",
-        "rationale": "QIF lists the red nucleus as a midbrain part; this label is CIT168's, a population probability map cut at 0.5. Not drawn from this row: the region draws from the Allen atlas."
+        "rationale": "QIF lists the red nucleus as a midbrain part. Midbrain owns this CIT168 shape (a probability map cut at 0.5) and lends it its colour; its drawing rows are on the Allen atlas."
       },
       "drafted_by": "ai"
     },
