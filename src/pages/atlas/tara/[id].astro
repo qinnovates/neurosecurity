@@ -2,6 +2,7 @@
 import { statusToEvidenceTier } from '../../../lib/evidence-tiers';
 import PageLayout from '@/layouts/PageLayout.astro';
 import BandViewPanel from '@/components/brain/BandViewPanel';
+import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';
 import EvidenceTierBanner from '../../../components/atlas/EvidenceTierBanner';
 import NissVectorChips from '../../../components/niss/NissVectorChips';
 import NissScoreBadge from '../../../components/niss/NissScoreBadge';
@@ -281,7 +282,10 @@ const hasGovernance = nr || reg;
             views={techniqueBrainView}
             defaultView="security"
             hideViewToggle={true}
+            regionViewLens={{ kind: 'technique', techniqueId: threat.id }}
           />
+          <!-- Which anatomy index this page was built with. The 3D view reads it when a visitor asks for the view. -->
+          <AtlasIndexPin />
         </div>
       </div>
 

@@ -472,9 +472,10 @@ describe('the recorded tool pages', () => {
     expect(lab?.documentGzipBudgetBytes).toBe(LAB_DOCUMENT_BASELINE_GZIP_BYTES + DOCUMENT_HEADROOM_GZIP_BYTES);
   });
 
-  it('names an interaction gate only on the atlas explorer: the view opened by its "Show the 3D view" button', () => {
+  it('names one interaction gate on each page: the chunk its "Show the 3D view" button fetches', () => {
     expect(TOOL_PAGES.map((page) => [page.urlPath, page.interactionGatedEntryNames])).toEqual([
-      ['/atlas/model/', []],
+      // The Target regions panel's view: the panel that fetches and checks the atlas data, which leads to the open view and the canvas.
+      ['/atlas/model/', ['RegionViewPanel']],
       ['/atlas/anatomy/', ['OpenViewport']],
     ]);
   });

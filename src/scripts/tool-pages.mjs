@@ -39,8 +39,14 @@ export const DOCUMENT_HEADROOM_GZIP_BYTES = 16_384;
  * every island on the site shares. The 3D view added about 5 kB here: its gate (the button, the WebGL probe and
  * the notices shown when it cannot open) and the check of the index against the page's pin. Everything else of the
  * 3D view, three.js included, is behind the gate and is not part of this figure.
+ *
+ * Re-pinned from 134_263 by 2_209 when the 3D view was mounted on four other pages. Measured first-load code of this
+ * page: 142_136 before, 144_345 after; the room left under the budget is the same 319 bytes as before. What grew:
+ * the modules this page shares with those mounts (the gate, the model loader, the limit sentences) are now chunks of
+ * their own, and several small files compress worse than one; the limit table gained five sentences for the mounts,
+ * and it loads here whole; the gate gained two props. Nothing was moved off this page and no sentence was shortened.
  */
-export const ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES = 134_263;
+export const ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES = 136_472;
 
 /**
  * Document: the explorer's HTML carries no data at all (it fetches everything when it starts),
@@ -84,7 +90,9 @@ export const TOOL_PAGES = [
     islandEntryName: 'WorkbenchShell',
     // The shell renders one mode at a time (mode-registry.ts). Explore is the default mode, so it loads on every plain visit.
     onMountLazyEntryNames: ['ExploreMode'],
-    interactionGatedEntryNames: [],
+    // The Target regions panel's 3D view. Nothing of it loads until the visitor presses "Show the 3D view" there:
+    // then the panel that fetches and checks the atlas data, then the open view, then the canvas with three.js.
+    interactionGatedEntryNames: ['RegionViewPanel'],
     // The other modes load when the visitor picks one, by its button or by an address such as "#model".
     onDemandLazyEntryNames: ['ThreatModelStudio', 'MonitorMode', 'QueryMode'],
     // The Lab models a device. It fetches the anatomy index when its atlas view opens and is built with none of it.
@@ -107,6 +115,20 @@ export const TOOL_PAGES = [
     codeGzipBudgetBytes: ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES + CODE_HEADROOM_GZIP_BYTES,
     documentGzipBudgetBytes: ATLAS_EXPLORER_DOCUMENT_BASELINE_GZIP_BYTES + ATLAS_EXPLORER_DOCUMENT_HEADROOM_GZIP_BYTES,
   },
+];
+
+/**
+ * Pages outside the tool list that mount the 3D region view (RegionViewMount) under one of their lists. They are
+ * ordinary site pages and carry no byte budget. The post-build check holds each to one thing: three.js, and every
+ * `import()` that leads to it, can be reached only through the chunk the visitor's button fetches. One technique
+ * page stands for all of them, since they are built from one template.
+ *
+ * @type {readonly { urlPath: string, interactionGatedEntryNames: readonly string[] }[]}
+ */
+export const REGION_VIEW_PAGES = [
+  { urlPath: '/atlas/', interactionGatedEntryNames: ['RegionViewPanel'] },
+  { urlPath: '/atlas/clinical/', interactionGatedEntryNames: ['RegionViewPanel'] },
+  { urlPath: '/atlas/tara/QIF-T0001/', interactionGatedEntryNames: ['RegionViewPanel'] },
 ];
 
 export const DEFAULT_DIST_DIRECTORY = 'dist';

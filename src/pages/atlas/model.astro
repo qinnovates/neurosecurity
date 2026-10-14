@@ -1,6 +1,7 @@
 ---
 import ToolLayout from '@/layouts/ToolLayout.astro';
 import WorkbenchShell from '@/components/workbench/WorkbenchShell';
+import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';
 import { loadThreatModelData } from '@/components/threat-model/load-engine-data';
 
 // Validates every data file at build time; malformed data stops the build here.
@@ -19,5 +20,7 @@ const { engineData, referenceData } = loadThreatModelData();
   </div>
   <!-- Rendered in the browser only: the report carries the time the page was opened. -->
   <WorkbenchShell client:only="react" engineData={engineData} referenceData={referenceData} />
+  <!-- The anatomy index's path, length and digest, and nothing else of it. The Target regions panel's 3D view reads it when asked for. -->
+  <AtlasIndexPin />
   <noscript><p>This tool needs JavaScript. It runs entirely in your browser.</p></noscript>
 </ToolLayout>

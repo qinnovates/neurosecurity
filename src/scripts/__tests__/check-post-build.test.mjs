@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ATLAS_ASSET_CHECKS, POST_BUILD_CHECKS, TOOL_PAGE_CHECKS, findAnatomyPayloadFailures, runPostBuildChecks } from '../check-post-build.mjs';
+import { ATLAS_ASSET_CHECKS, POST_BUILD_CHECKS, REGION_VIEW_CHECKS, TOOL_PAGE_CHECKS, findAnatomyPayloadFailures, findRegionViewFailures, runPostBuildChecks } from '../check-post-build.mjs';
 import { measureFirstLoad } from '../measure-lab-first-load.mjs';
 
 const FIXTURE_DIST = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures', 'lab-first-load');
@@ -16,7 +16,7 @@ describe('runPostBuildChecks', () => {
   it('passes every check on an isolated page within its budget', () => {
     const results = runPostBuildChecks(FIXTURE_DIST, [passingPage], TOOL_PAGE_CHECKS);
     expect(results.map(({ name }) => name)).toEqual(TOOL_PAGE_CHECKS.map(({ name }) => name));
-    expect(POST_BUILD_CHECKS).toEqual([...TOOL_PAGE_CHECKS, ...ATLAS_ASSET_CHECKS]);
+    expect(POST_BUILD_CHECKS).toEqual([...TOOL_PAGE_CHECKS, ...ATLAS_ASSET_CHECKS, ...REGION_VIEW_CHECKS]);
     expect(results.every(({ failures }) => failures.length === 0)).toBe(true);
   });
 
@@ -26,6 +26,13 @@ describe('runPostBuildChecks', () => {
       ['/eager/: no Content-Security-Policy meta tag'],
       ['/eager/: three.js can load without the visitor asking for it, through /_astro/eager-3d.js -> /_astro/heavy-3d.js; it may sit only behind a chunk named in interactionGatedEntryNames'],
       [],
+    ]);
+  });
+
+  it('holds a page that mounts the 3D view to its gate without asking it for a budget', () => {
+    expect(findRegionViewFailures(FIXTURE_DIST, [{ urlPath: '/tool/', onDemandLazyEntryNames: ['lazy'] }])).toEqual([]);
+    expect(findRegionViewFailures(FIXTURE_DIST, [{ urlPath: '/eager/' }])).toEqual([
+      '/eager/: three.js can load without the visitor asking for it, through /_astro/eager-3d.js -> /_astro/heavy-3d.js; it may sit only behind a chunk named in interactionGatedEntryNames',
     ]);
   });
 

@@ -18,7 +18,7 @@ import { findToolPageFailures } from './check-model-page.mjs';
 import { findAnatomyPayload, findAnatomyPayloadInScript } from './find-anatomy-payload.mjs';
 import { extractPageEntries, readBuiltFile, traceImportChain, walkImportGraph } from './first-load-closure.mjs';
 import { checkFirstLoadBudgets } from './measure-lab-first-load.mjs';
-import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES, resolveBuiltFile } from './tool-pages.mjs';
+import { DEFAULT_DIST_DIRECTORY, REGION_VIEW_PAGES, TOOL_PAGES, resolveBuiltFile } from './tool-pages.mjs';
 
 /**
  * @typedef {object} PostBuildCheck
@@ -82,8 +82,21 @@ export const ATLAS_ASSET_CHECKS = [
   { name: 'attribution page shows every required wording', findFailures: (distDirectory) => findAttributionFailures(distDirectory) },
 ];
 
+/**
+ * The ordinary pages that mount the 3D view under a list (REGION_VIEW_PAGES). They have no byte budget; what is
+ * checked is that every `import()` they can reach is declared and that three.js sits only behind the declared gate.
+ */
+export function findRegionViewFailures(distDirectory, pages = REGION_VIEW_PAGES) {
+  return checkFirstLoadBudgets(distDirectory, pages, { isAdHoc: true }).failures;
+}
+
+/** Checks of the pages listed in REGION_VIEW_PAGES. They take their own page list, not the tool pages'. */
+export const REGION_VIEW_CHECKS = [
+  { name: 'pages that mount the 3D view keep three.js behind its button', findFailures: (distDirectory) => findRegionViewFailures(distDirectory) },
+];
+
 /** @type {readonly PostBuildCheck[]} */
-export const POST_BUILD_CHECKS = [...TOOL_PAGE_CHECKS, ...ATLAS_ASSET_CHECKS];
+export const POST_BUILD_CHECKS = [...TOOL_PAGE_CHECKS, ...ATLAS_ASSET_CHECKS, ...REGION_VIEW_CHECKS];
 
 /**
  * Runs each check and collects its failures. A check that cannot run (for example because

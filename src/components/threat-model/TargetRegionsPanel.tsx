@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import RegionViewMount, { BAND_LENS } from '@/components/atlas-scene/RegionViewMount';
 import AtlasExplorerLink from '@/components/brain/AtlasExplorerLink';
 import type { TargetRegionSummary } from '@/lib/threat-model/target-regions';
 
@@ -11,7 +12,8 @@ interface Props {
 /**
  * Where the device's neural interface sits: the regions chosen at intake, as a list.
  * It restates the user's own selection and shows no technique, count, or score against
- * a region. It draws nothing; the brain itself is on the atlas explorer page, which it links to.
+ * a region. The list is the whole of it until the visitor asks for the 3D view, which then marks these
+ * same regions as the visitor's selection: corner marks, no fill, and coloured by band alone.
  */
 export default function TargetRegionsPanel({ summary, interfaceLabel }: Props) {
   const { regions, unknownRegionIds } = summary;
@@ -48,6 +50,7 @@ export default function TargetRegionsPanel({ summary, interfaceLabel }: Props) {
         <p className="tm-muted tm-small">
           No risk is attached to a region here: the catalog ties techniques to bands, which are layers in QIF, a proposed and unreviewed framework.
         </p>
+        <RegionViewMount lens={BAND_LENS} selectedRegionIds={regions.map((region) => region.id)} />
         <p className="tm-small">
           <AtlasExplorerLink>Look these regions up in the TARA Brain Atlas, which draws the ones it has geometry for</AtlasExplorerLink>
         </p>

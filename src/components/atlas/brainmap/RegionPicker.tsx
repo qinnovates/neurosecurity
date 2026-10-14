@@ -1,11 +1,13 @@
 /**
  * RegionPicker — the brain regions of the clinical data as a list, grouped by QIF band.
  * It takes the place of the hand-drawn medial brain: it selects a region for the panels
- * beside it and places nothing at a position. The brain itself is on the atlas explorer page.
+ * beside it and places nothing at a position. Under the list a visitor may ask for the 3D view,
+ * which marks the selected region as the visitor's selection and colours by band alone.
  */
 
 import type { ClinicalRegion } from '../../../lib/clinical-data';
 import { QIF_BANDS_FRAMEWORK_NOTE } from '../../../lib/brain-view-data';
+import RegionViewMount, { BAND_LENS } from '../../atlas-scene/RegionViewMount';
 import AtlasExplorerLink from '../../brain/AtlasExplorerLink';
 
 /** Neural bands from the outer surface inward, the order the hourglass beside this list uses. */
@@ -78,6 +80,10 @@ export default function RegionPicker({ regions, selectedRegionId, highlightedReg
         );
       })}
       {selectedRegion !== null && <SelectedRegionNote region={selectedRegion} />}
+      <RegionViewMount
+        lens={BAND_LENS} selectedRegionIds={selectedRegionId === null ? [] : [selectedRegionId]}
+        onRegionPick={(pick) => { if (pick.regionId !== selectedRegionId && regions.some((region) => region.id === pick.regionId)) onRegionSelect(pick.regionId); }}
+      />
       <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>
         {QIF_BANDS_FRAMEWORK_NOTE} A list, not a drawing. The catalog files techniques under bands, so no technique count is shown against a region.{' '}
         <AtlasExplorerLink className="underline">Look these regions up in the TARA Brain Atlas, which draws the ones it has geometry for</AtlasExplorerLink>.

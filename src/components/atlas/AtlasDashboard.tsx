@@ -12,6 +12,7 @@ import AtlasDetailPanel from './AtlasDetailPanel';
 import ThreatMap from './ThreatMap';
 import { THREAT_VECTORS, THREAT_TACTICS } from '../../lib/threat-data';
 import { HOURGLASS_BANDS } from '../../lib/qif-constants';
+import { BAND_LENS } from '../atlas-scene/RegionViewMount';
 import type { AtlasData } from '../../lib/atlas-data';
 import type { BrainView } from '../../lib/brain-view-data';
 
@@ -176,6 +177,7 @@ function DashboardInner({ atlasData, brainViews, threatDetails }: Props) {
                 onBandSelect={selectBand}
                 viewId={brainViewId}
                 hideViewToggle
+                regionViewLens={BAND_LENS}
               />
             </div>
           </div>

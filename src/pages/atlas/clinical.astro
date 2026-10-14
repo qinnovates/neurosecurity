@@ -1,6 +1,7 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
+import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';
 import ClinicalDashboard from '@/components/atlas/ClinicalDashboard';
 import BciKql from '@/components/bci/BciKql';
 import { getClinicalData } from '@/lib/clinical-data';
@@ -328,6 +329,8 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
 >
 
   <AtlasViewSwitcher current="/atlas/clinical/" />
+  <!-- Which anatomy index this page was built with. The region list's 3D view reads it when a visitor asks for the view. -->
+  <AtlasIndexPin />
 
   <!-- ═══════════════════════════════════════════════════════ -->
   <!-- HERO                                                   -->
