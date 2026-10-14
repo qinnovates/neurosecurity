@@ -7,7 +7,7 @@ This is the main map of the atlas stack. The other atlas directories link here f
 2. "AI-drafted, unreviewed" is never removed without a human review. A review exists only as the owner's entry in `datalake/qif-anatomy-review-ledger.json`; an agent never writes that file.
 3. No invented anatomy, numbers or citations. Every row quotes its source; an unknown stays unknown.
 4. No workstation usernames or absolute home paths in committed files, commit messages or pull-request text.
-5. Five files the build rewrites are never committed: `datalake/parquet/catalog.json`, `datalake/parquet/intel_feed.parquet`, `governance/DECISION-LOG.md`, `governance/TRANSPARENCY.md`, `src/data/external-news-cache.json`. Restore them with `git checkout --` after every build.
+5. Five files the build rewrites are restored with `git checkout --` after every build: `datalake/parquet/catalog.json`, `datalake/parquet/intel_feed.parquet`, `governance/DECISION-LOG.md`, `governance/TRANSPARENCY.md`, `src/data/external-news-cache.json`. One exception, for which the propagation rule file (propagation.md under .claude/rules, the authority on what is committed after a data change) governs: when an `anatomy_*` parquet file changes, `datalake/parquet/catalog.json` is committed with only that table's entry and `_meta.total_rows` changed (its timestamp and every other entry stay as committed). `__tests__/anatomy-parquet.test.ts` fails unless the committed catalog holds each committed anatomy file's digest, row count and columns.
 
 ## The stack
 ```
@@ -80,9 +80,13 @@ Checks: `__tests__/atlas-assets.guard.test.ts`, `__tests__/build-attribution.tes
 ### 2. Add a region or change a region's mapping
 1. A new region is a catalog change first: `datalake/qif-brain-bci-atlas.json`, under the registrar update protocol. The atlas does not own that file.
 2. `datalake/qif-anatomy-crosswalk.json`: add or edit the row (region, pathway or network id to atlas label ids), or a `no_geometry` record. Quote the label table. A row stores no band and no review field.
+   - `rationale` is one line of at most 200 characters. `source_ref` may cite only a JSON file in this repository (under `datalake/` or `src/site/atlas-assets/`), so a paper is cited in the rationale as a bare PMID, resolved and read first (rule 3).
+   - A subject draws from one atlas only. A row for it on a second atlas sets `draws` to false; it still makes the subject an owner of that shape. A subject has drawing rows or a `no_geometry` record, never both.
+   - When two subjects name one label, say so in both rationales.
+   - `contains` (parent, child) has effects beyond the file: every shape of the parent lists the child as lying somewhere inside it, every shape of the child lists the parent, and picking the child's shape then selects the shape, not the region. The existing example is thalamus over ant and vim.
 3. Nothing else is edited by hand: owners, geometry state, review state and the index are computed. An edited row gets a new digest and loses any review it had.
-4. Re-pin what moved: `REGION_COUNT` and `OWN_SHAPE_COUNT` in `__tests__/region-outcome.guard.test.ts`; `structureCount`, `noGeometryRegionIds`, `regionGeometryStates` in `src/components/atlas-scene/__tests__/load-anatomy-data.test.ts`.
-5. `npm run prebuild` rewrites `datalake/parquet/anatomy_crosswalk.parquet` and `datalake/parquet/anatomy_structures.parquet`; commit them.
+4. Re-pin what moved. In `__tests__/region-outcome.guard.test.ts`: `REGION_COUNT`, `OWN_SHAPE_COUNT`, `CONTAINED_REGION_IDS`, `NAMED_STAND_IN_REGION_IDS`, `NO_BOUNDARY_REGION_IDS`, `NO_GEOMETRY_REGION_IDS`, `MARKER_ONLY_REGION_IDS`, and the counts written in two test titles ("is N with a shape of their own, N contained and N with none"; "... or there is no boundary at all: N and N"). In `src/components/atlas-scene/__tests__/load-anatomy-data.test.ts`: `structureCount`, `noGeometryRegionIds`, `regionGeometryStates`.
+5. `npm run prebuild` rewrites `datalake/parquet/anatomy_crosswalk.parquet` and `datalake/parquet/anatomy_structures.parquet`; commit them with their two entries in `datalake/parquet/catalog.json` (rule 5).
 Checks: `__tests__/parse-crosswalk.test.ts`, `__tests__/region-outcome.guard.test.ts`, `__tests__/anatomy-tables-content.test.ts`, `src/lib/atlas-explorer/__tests__/mapping-coverage.test.ts`.
 
 ### 3. Add a lens (colour mode)
@@ -131,7 +135,7 @@ Regenerate in this order; each step reads what the one before wrote.
 2. `npm run compute:chains` -- `datalake/impact-chains.json`.
 3. Recipe 5 -- technique links. Recipe 2 for any new region. Recipe 6 only if sources, the build plan or pipeline code changed.
 4. `npm run prebuild` -- query tables, then parquet from them. `npm run health` reports what is out of sync.
-5. `npm run build` -- index, evidence, catalog, chains, region evidence and H01 card, each pinned by the index; then `git checkout --` the five files of rule 5.
+5. `npm run build` -- index, evidence, catalog, chains, region evidence and H01 card, each pinned by the index; then `git checkout --` the five files of rule 5 (keeping the catalog's anatomy entries if step 4 changed an anatomy parquet file).
 6. `npm run check:post-build`.
 
 Pins that a refresh can move. Nothing else in the atlas stack is a typed count or hash.
@@ -140,7 +144,7 @@ Pins that a refresh can move. Nothing else in the atlas stack is a typed count o
 | `PINNED_ANATOMY_STATE`, `INDEX_BUDGET_BYTES` | `src/components/atlas-scene/__tests__/load-anatomy-data.test.ts` |
 | every `EXPECTED_*` | `src/components/atlas-scene/__tests__/technique-regions-content.test.ts` |
 | `PINNED_CHAIN_STATE` | `src/lib/atlas-explorer/__tests__/chain-steps.test.ts` |
-| `REGION_COUNT`, `OWN_SHAPE_COUNT` | `__tests__/region-outcome.guard.test.ts` |
+| `REGION_COUNT`, `OWN_SHAPE_COUNT`, the five `*_REGION_IDS` lists, two test titles | `__tests__/region-outcome.guard.test.ts` |
 | `TOTAL_ASSET_BUDGET_BYTES` | `__tests__/atlas-assets.guard.test.ts` |
 | `HEAD_SURFACE_BUDGET_BYTES`, `LEAD_CONTACT_SPANS_MM` | `__tests__/device-geometry.guard.test.ts` |
 | `REVIEWED_ENTRY_COUNTS` (owner only, with a ledger entry) | `review-state.ts` |
