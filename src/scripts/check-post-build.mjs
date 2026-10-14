@@ -90,9 +90,27 @@ export function findRegionViewFailures(distDirectory, pages = REGION_VIEW_PAGES)
   return checkFirstLoadBudgets(distDirectory, pages, { isAdHoc: true }).failures;
 }
 
+/** Technique pages that mention a technique's drafted region links before the view is asked for. QIF-T0034 names a region. */
+export const REGION_VIEW_MARK_PAGES = ['/atlas/tara/QIF-T0034/'];
+const DRAFTED_LINKS_WORDS = 'drafted links';
+const REVIEW_MARK_WORDS = 'AI-drafted, unreviewed';
+
+/**
+ * A built technique page that mentions drafted region links must carry the "AI-drafted, unreviewed" mark in the same
+ * built HTML, before any button is pressed. A page that no longer mentions them would leave this check holding nothing, so that fails too.
+ */
+export function findRegionViewMarkFailures(distDirectory, urlPaths = REGION_VIEW_MARK_PAGES) {
+  return urlPaths.flatMap((urlPath) => {
+    const html = fs.readFileSync(resolveBuiltFile(distDirectory, urlPath), 'utf-8');
+    if (!html.includes(DRAFTED_LINKS_WORDS)) return [`${urlPath}: the page no longer mentions "${DRAFTED_LINKS_WORDS}", so this check holds nothing; point it at a page that does`];
+    return html.includes(REVIEW_MARK_WORDS) ? [] : [`${urlPath}: the page mentions "${DRAFTED_LINKS_WORDS}" with no "${REVIEW_MARK_WORDS}" mark in its built HTML`];
+  });
+}
+
 /** Checks of the pages listed in REGION_VIEW_PAGES. They take their own page list, not the tool pages'. */
 export const REGION_VIEW_CHECKS = [
   { name: 'pages that mount the 3D view keep three.js behind its button', findFailures: (distDirectory) => findRegionViewFailures(distDirectory) },
+  { name: 'technique pages that mention drafted links carry the review mark', findFailures: (distDirectory) => findRegionViewMarkFailures(distDirectory) },
 ];
 
 /** @type {readonly PostBuildCheck[]} */

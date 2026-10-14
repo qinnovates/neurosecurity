@@ -3,7 +3,8 @@ import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { buildRegionDsm, type RegionDsmReference } from '@/lib/atlas-explorer/region-dsm';
 import Disclosure from './Disclosure';
 import LimitNote from './LimitNote';
-import ReviewMark, { UNREVIEWED_MARK } from './ReviewMark';
+import ReviewMark from './ReviewMark';
+import { UNREVIEWED_MARK } from './unreviewed-mark';
 
 interface Props {
   model: ExplorerModel;

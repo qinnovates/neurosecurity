@@ -12,5 +12,6 @@ export const MOUNT_COPY = {
   ask: 'Draws this on an average brain, with what the picture cannot tell you beside it. Nothing is fetched until you ask.',
   loading: 'Loading the 3D view…',
   failed: 'The 3D view could not be loaded. The list on this page is unchanged.',
+  links_review: 'The region links drafted for this technique:',
   choose_in_list: 'Choose a band or region in the list on this page to mark it in the picture.',
 } as const;

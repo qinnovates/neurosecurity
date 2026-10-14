@@ -3,7 +3,8 @@ import { buildRegionEvidenceView, type CitationView, type EvidenceStatement } fr
 import type { Loaded } from './explorer-data';
 import LimitNote from './LimitNote';
 import LoadNotice from './LoadNotice';
-import ReviewMark, { UNREVIEWED_MARK } from './ReviewMark';
+import ReviewMark from './ReviewMark';
+import { UNREVIEWED_MARK } from './unreviewed-mark';
 
 interface Props {
   regionId: string;

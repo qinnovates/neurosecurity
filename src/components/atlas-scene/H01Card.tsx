@@ -8,7 +8,8 @@ import Disclosure from './Disclosure';
 import { loadH01Card } from './explorer-companions';
 import LimitNote from './LimitNote';
 import LoadNotice from './LoadNotice';
-import ReviewMark, { UNREVIEWED_MARK } from './ReviewMark';
+import ReviewMark from './ReviewMark';
+import { UNREVIEWED_MARK } from './unreviewed-mark';
 import { useLoaded } from './use-loaded';
 
 function Fact({ fact }: { fact: H01Fact }) {

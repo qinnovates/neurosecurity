@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ATLAS_ASSET_CHECKS, POST_BUILD_CHECKS, REGION_VIEW_CHECKS, TOOL_PAGE_CHECKS, findAnatomyPayloadFailures, findRegionViewFailures, runPostBuildChecks } from '../check-post-build.mjs';
+import { ATLAS_ASSET_CHECKS, POST_BUILD_CHECKS, REGION_VIEW_CHECKS, TOOL_PAGE_CHECKS, findAnatomyPayloadFailures, findRegionViewFailures, findRegionViewMarkFailures, runPostBuildChecks } from '../check-post-build.mjs';
 import { measureFirstLoad } from '../measure-lab-first-load.mjs';
 
 const FIXTURE_DIST = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures', 'lab-first-load');
@@ -34,6 +34,21 @@ describe('runPostBuildChecks', () => {
     expect(findRegionViewFailures(FIXTURE_DIST, [{ urlPath: '/eager/' }])).toEqual([
       '/eager/: three.js can load without the visitor asking for it, through /_astro/eager-3d.js -> /_astro/heavy-3d.js; it may sit only behind a chunk named in interactionGatedEntryNames',
     ]);
+  });
+
+  it('requires the review mark on a built technique page that mentions drafted links', () => {
+    const dist = fs.mkdtempSync(path.join(os.tmpdir(), 'region-view-mark-'));
+    const writePage = (urlPath, body) => { fs.mkdirSync(path.join(dist, urlPath), { recursive: true }); fs.writeFileSync(path.join(dist, urlPath, 'index.html'), body); };
+    writePage('with-mark', '<span>its drafted links name no single region.</span><span data-ai-drafted="true">AI-drafted, unreviewed</span>');
+    writePage('no-mark', '<span>its drafted links name no single region.</span>');
+    writePage('no-links', '<span>No region links were drafted for this technique.</span>');
+    try {
+      expect(findRegionViewMarkFailures(dist, ['/with-mark/'])).toEqual([]);
+      expect(findRegionViewMarkFailures(dist, ['/no-mark/'])).toEqual(['/no-mark/: the page mentions "drafted links" with no "AI-drafted, unreviewed" mark in its built HTML']);
+      expect(findRegionViewMarkFailures(dist, ['/no-links/'])[0]).toContain('no longer mentions "drafted links"');
+    } finally {
+      fs.rmSync(dist, { recursive: true, force: true });
+    }
   });
 
   it('fails the budget check alone when a page\'s code is one byte over', () => {

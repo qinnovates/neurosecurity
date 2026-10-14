@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState, type ComponentType } from 'react';
 import type { LimitId, LimitSentence } from '@/lib/anatomy/limits-copy';
 import { MOUNT_COPY } from '@/lib/anatomy/mount-copy';
+import type { IndexReviewState } from '@/lib/anatomy/anatomy-index-types';
 import type { Lens } from '@/lib/atlas-explorer/lens-state';
 import type { RegionViewPanelProps } from './RegionViewPanel';
+import ReviewMark from './ReviewMark';
 import './region-view-mount.css';
 
 type PanelModule = { default: ComponentType<RegionViewPanelProps> };
@@ -15,6 +17,12 @@ export interface RegionViewMountProps extends RegionViewPanelProps {
    * and its own caption from the data, and is not handed this.
    */
   nothingColoured?: LimitSentence | null;
+  /**
+   * For a technique lens the index holds: the review state of its drafted region links, as the page was built with it.
+   * Shown with the technique's links in every state of this button (closed, loading, failed), so the links are never
+   * mentioned here without their mark. Null for a technique with no drafted links to mark.
+   */
+  linksReview?: IndexReviewState | null;
   /** Replaceable in tests. In a page it is the real panel, fetched only when the visitor asks. */
   loadPanel?: () => Promise<PanelModule>;
 }
@@ -24,8 +32,8 @@ export const BAND_LENS: Lens = { kind: 'band' };
 
 const loadRealPanel = (): Promise<PanelModule> => import('./RegionViewPanel');
 
-/** The sentence for a technique whose links name no region at all. Only then does a technique's view list no region to pick. */
-const NONE_NAMED_LIMIT_ID: LimitId = 'view_nothing_coloured_none_named';
+/** The sentences for a technique that names no region at all. Only then does a technique's view list no region to pick. */
+const NONE_NAMED_LIMIT_IDS: readonly LimitId[] = ['view_nothing_coloured_none_named', 'view_nothing_coloured_no_neural_band'];
 
 /**
  * The way in to the 3D view from any page that lists regions or bands. Until
@@ -39,10 +47,10 @@ const NONE_NAMED_LIMIT_ID: LimitId = 'view_nothing_coloured_none_named';
  * A page that passes `onRegionPick` keeps that choice in its own list, so with
  * nothing chosen yet the visitor is told to choose there.
  */
-export default function RegionViewMount({ loadPanel = loadRealPanel, nothingColoured = null, ...panelProps }: RegionViewMountProps) {
+export default function RegionViewMount({ loadPanel = loadRealPanel, nothingColoured = null, linksReview = null, ...panelProps }: RegionViewMountProps) {
   const [panel, setPanel] = useState<PanelState>({ status: 'closed' });
   // The view lists a region to pick only for a selection or for a technique whose links name one.
-  const listsNamedRegions = panelProps.lens.kind === 'technique' && nothingColoured?.id !== NONE_NAMED_LIMIT_ID;
+  const listsNamedRegions = panelProps.lens.kind === 'technique' && !NONE_NAMED_LIMIT_IDS.includes(nothingColoured?.id as LimitId);
   const isNothingListed = (panelProps.selectedRegionIds ?? []).length === 0 && (panelProps.selectedBandId ?? null) === null && !listsNamedRegions;
   const showsChooseHint = isNothingListed && panelProps.onRegionPick !== undefined;
   const isMounted = useRef(true);
@@ -63,6 +71,7 @@ export default function RegionViewMount({ loadPanel = loadRealPanel, nothingColo
         {panel.status === 'failed' ? 'Try the 3D view again' : 'Show the 3D view'}
       </button>
       {nothingColoured !== null && <span data-mount-note="nothing-coloured" data-limit-id={nothingColoured.id}>{nothingColoured.text}</span>}
+      {linksReview !== null && <span data-mount-note="links-review">{MOUNT_COPY.links_review} <ReviewMark state={linksReview} /></span>}
       {panel.status === 'closed' && <span>{MOUNT_COPY.ask}</span>}
       {panel.status === 'closed' && showsChooseHint && <span data-mount-note="choose-in-list">{MOUNT_COPY.choose_in_list}</span>}
       {panel.status === 'loading' && <span role="status">{MOUNT_COPY.loading}</span>}
