@@ -106,7 +106,8 @@
       "part": null,
       "atlas": "allen_hra_3d_2020",
       "atlas_ids": [
-        "12114"
+        "12114",
+        "12126"
       ],
       "name_match": "none",
       "extent_match": "contained",
@@ -122,7 +123,7 @@
           "quote": "precentral gyrus"
         },
         "check_status": "unchecked",
-        "rationale": "Primary motor cortex lies in the precentral gyrus, which the atlas does not divide from premotor cortex."
+        "rationale": "Area 4 is in the precentral gyrus and, for the leg, the anterior paracentral lobule (PMID 34268163); the atlas divides neither from premotor cortex. Shares 12114 with pmc."
       },
       "drafted_by": "ai"
     },
@@ -292,8 +293,7 @@
       "part": null,
       "atlas": "allen_hra_3d_2020",
       "atlas_ids": [
-        "12115",
-        "12126"
+        "12115"
       ],
       "name_match": "none",
       "extent_match": "contained",
@@ -309,7 +309,7 @@
           "quote": "superior frontal gyrus"
         },
         "check_status": "unchecked",
-        "rationale": "No supplementary motor label; it lies on the medial superior frontal gyrus and rostral paracentral lobule."
+        "rationale": "No such label; on the medial superior frontal gyrus, bordering area 4 behind (PMID 30187192). Whether m1's rostral paracentral lobule holds any is unknown. Shares 12115 with pfc and pmc."
       },
       "drafted_by": "ai"
     },
@@ -354,7 +354,8 @@
       "part": null,
       "atlas": "allen_hra_3d_2020",
       "atlas_ids": [
-        "12132"
+        "12132",
+        "12138"
       ],
       "name_match": "none",
       "extent_match": "contained",
@@ -370,7 +371,7 @@
           "quote": "postcentral gyrus"
         },
         "check_status": "unchecked",
-        "rationale": "Primary somatosensory cortex lies in the postcentral gyrus; areas 3a, 3b, 1 and 2 are not delimited."
+        "rationale": "Areas 3, 1 and 2 are in the postcentral gyrus and, for leg and foot, the posterior paracentral lobule (PMID 34268163); the atlas does not delimit them."
       },
       "drafted_by": "ai"
     },
