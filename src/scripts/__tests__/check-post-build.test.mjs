@@ -36,16 +36,18 @@ describe('runPostBuildChecks', () => {
     ]);
   });
 
-  it('requires the review mark on a built technique page that mentions drafted links', () => {
+  it('requires the review mark inside the rendered links-review note, not merely in the page's props', () => {
     const dist = fs.mkdtempSync(path.join(os.tmpdir(), 'region-view-mark-'));
     const writePage = (urlPath, body) => { fs.mkdirSync(path.join(dist, urlPath), { recursive: true }); fs.writeFileSync(path.join(dist, urlPath, 'index.html'), body); };
-    writePage('with-mark', '<span>its drafted links name no single region.</span><span data-ai-drafted="true">AI-drafted, unreviewed</span>');
-    writePage('no-mark', '<span>its drafted links name no single region.</span>');
-    writePage('no-links', '<span>No region links were drafted for this technique.</span>');
+    const props = '<astro-island props="{&quot;regionViewLinksReview&quot;:{&quot;mark&quot;:&quot;AI-drafted, unreviewed&quot;}}"></astro-island>';
+    writePage('with-mark', `<span data-mount-note="links-review">Drafted: <span class="atlas-mark" data-ai-drafted="true">AI-drafted, unreviewed</span></span><span data-mount-note="choose-in-list">x</span>`);
+    writePage('no-mark', `${props}<span data-mount-note="links-review">Drafted: </span><span data-mount-note="choose-in-list"><span data-ai-drafted="true">AI-drafted, unreviewed</span></span>`);
+    writePage('props-only', `${props}<span data-mount-note="nothing-coloured">drafted links name no region</span>`);
     try {
       expect(findRegionViewMarkFailures(dist, ['/with-mark/'])).toEqual([]);
-      expect(findRegionViewMarkFailures(dist, ['/no-mark/'])).toEqual(['/no-mark/: the page mentions "drafted links" with no "AI-drafted, unreviewed" mark in its built HTML']);
-      expect(findRegionViewMarkFailures(dist, ['/no-links/'])[0]).toContain('no longer mentions "drafted links"');
+      // The mark's words in the serialized props, or in another note, do not count: it must sit inside the links-review note.
+      expect(findRegionViewMarkFailures(dist, ['/no-mark/'])).toEqual(['/no-mark/: the rendered links-review note has no data-ai-drafted="true" element reading "AI-drafted, unreviewed"']);
+      expect(findRegionViewMarkFailures(dist, ['/props-only/'])[0]).toContain('no rendered <span data-mount-note="links-review"> element');
     } finally {
       fs.rmSync(dist, { recursive: true, force: true });
     }

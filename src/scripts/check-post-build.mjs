@@ -90,20 +90,33 @@ export function findRegionViewFailures(distDirectory, pages = REGION_VIEW_PAGES)
   return checkFirstLoadBudgets(distDirectory, pages, { isAdHoc: true }).failures;
 }
 
-/** Technique pages that mention a technique's drafted region links before the view is asked for. QIF-T0034 names a region. */
-export const REGION_VIEW_MARK_PAGES = ['/atlas/tara/QIF-T0034/'];
-const DRAFTED_LINKS_WORDS = 'drafted links';
+/**
+ * Technique pages whose mount shows the drafted-links note before the view is asked for. QIF-T0034 names a region;
+ * QIF-T0001's links name no single region, so its mount takes the "none named" branch.
+ */
+export const REGION_VIEW_MARK_PAGES = ['/atlas/tara/QIF-T0034/', '/atlas/tara/QIF-T0001/'];
+const LINKS_REVIEW_NOTE_OPEN = '<span data-mount-note="links-review">';
+const NEXT_MOUNT_NOTE_OPEN = '<span data-mount-note=';
+const MARK_ELEMENT_ATTRIBUTE = 'data-ai-drafted="true"';
 const REVIEW_MARK_WORDS = 'AI-drafted, unreviewed';
 
 /**
- * A built technique page that mentions drafted region links must carry the "AI-drafted, unreviewed" mark in the same
- * built HTML, before any button is pressed. A page that no longer mentions them would leave this check holding nothing, so that fails too.
+ * The island is server-rendered, so its elements are in the built HTML; this check reads those elements, not the
+ * serialized island props (which carry the same words as data and would pass whether or not the mark rendered). On each
+ * listed page the links-review note must exist and hold, inside its own element, the mark's attribute and its words.
+ * It shows the mark is in the HTML the visitor receives; that the mark is styled and visible is covered by the
+ * component test and by looking at the page, not by this check.
  */
 export function findRegionViewMarkFailures(distDirectory, urlPaths = REGION_VIEW_MARK_PAGES) {
   return urlPaths.flatMap((urlPath) => {
     const html = fs.readFileSync(resolveBuiltFile(distDirectory, urlPath), 'utf-8');
-    if (!html.includes(DRAFTED_LINKS_WORDS)) return [`${urlPath}: the page no longer mentions "${DRAFTED_LINKS_WORDS}", so this check holds nothing; point it at a page that does`];
-    return html.includes(REVIEW_MARK_WORDS) ? [] : [`${urlPath}: the page mentions "${DRAFTED_LINKS_WORDS}" with no "${REVIEW_MARK_WORDS}" mark in its built HTML`];
+    const noteStart = html.indexOf(LINKS_REVIEW_NOTE_OPEN);
+    if (noteStart === -1) return [`${urlPath}: no rendered ${LINKS_REVIEW_NOTE_OPEN} element in the built HTML, so this check holds nothing; point it at a page whose mount shows it`];
+    const afterNote = html.slice(noteStart + LINKS_REVIEW_NOTE_OPEN.length);
+    const nextNote = afterNote.indexOf(NEXT_MOUNT_NOTE_OPEN);
+    const noteHtml = nextNote === -1 ? afterNote : afterNote.slice(0, nextNote);
+    const hasMark = noteHtml.includes(MARK_ELEMENT_ATTRIBUTE) && noteHtml.includes(REVIEW_MARK_WORDS);
+    return hasMark ? [] : [`${urlPath}: the rendered links-review note has no ${MARK_ELEMENT_ATTRIBUTE} element reading "${REVIEW_MARK_WORDS}"`];
   });
 }
 
