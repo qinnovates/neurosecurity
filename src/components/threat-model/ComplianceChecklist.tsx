@@ -11,6 +11,15 @@ const APPLICABILITY_LABELS: Record<RequirementApplicability, string> = {
   not_required: 'Not triggered by connectivity; FDA guidance may still apply',
 };
 
+// not_required also covers "no submission type" and investigational submissions, where
+// connectivity may be met; the connectivity wording would be false there.
+const NOT_TRIGGERED_BY_SUBMISSION_LABEL = 'Not triggered for this submission type; FDA guidance may still apply';
+
+function labelApplicability(applicability: RequirementApplicability, isCyberDevice: boolean): string {
+  if (applicability === 'not_required' && isCyberDevice) return NOT_TRIGGERED_BY_SUBMISSION_LABEL;
+  return APPLICABILITY_LABELS[applicability];
+}
+
 const EVIDENCE_LABELS: Record<RequirementEvidence, string> = {
   draft_in_this_report: 'A first draft is in this report',
   user_must_supply: 'You must supply this',
@@ -32,7 +41,7 @@ export default function ComplianceChecklist({ assessment, items }: Props) {
         <section key={item.requirementId} className="tm-card">
           <h3 className="tm-heading">{item.title}</h3>
           <div className="tm-actions" style={{ marginBottom: '0.5rem' }}>
-            <span className={`tm-badge ${item.applicability === 'required' ? 'tm-badge--warning' : ''}`}>{APPLICABILITY_LABELS[item.applicability]}</span>
+            <span className={`tm-badge ${item.applicability === 'required' ? 'tm-badge--warning' : ''}`}>{labelApplicability(item.applicability, assessment.isCyberDevice)}</span>
             <span className="tm-badge">{EVIDENCE_LABELS[item.evidence]}</span>
           </div>
           <p className="tm-muted">{item.applicabilityReason}</p>

@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import registrar from '@shared/qtara-registrar.json';
+import statement from '@/data/purpose-and-limits.json';
 import {
   getCatalogCoverage,
   PURPOSE_AND_LIMITS,
   STATEMENT_LINKS,
-  PURPOSE_ONE_SENTENCE,
   PURPOSE_SUMMARY,
 } from '@/lib/purpose-and-limits';
 
@@ -42,7 +42,7 @@ describe('purpose and limits statement', () => {
   });
 
   it('keeps the status qualifiers in the short forms', () => {
-    expect(PURPOSE_ONE_SENTENCE).toMatch(/proposed, unvalidated/);
+    expect(statement.oneSentence).toMatch(/proposed, unvalidated/);
     expect(PURPOSE_SUMMARY).toMatch(/unvalidated/);
     expect(PURPOSE_SUMMARY).toMatch(/not .*compliance tool/);
   });

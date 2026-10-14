@@ -18,7 +18,6 @@ export interface StatementSection {
   segments: StatementSegment[];
 }
 
-export const PURPOSE_ONE_SENTENCE: string = statement.oneSentence;
 export const PURPOSE_SUMMARY: string = statement.summary;
 export const FRAMEWORK_STATUS = statement.status;
 export const STATEMENT_LINKS = statement.links;
@@ -27,7 +26,6 @@ export const PURPOSE_AND_LIMITS = statement.purposeAndLimits as {
   anchor: string;
   sections: StatementSection[];
 };
-export const SECURITY_PREAMBLE: string = statement.securityPreamble;
 
 /** Detection guidance lives in the registrar at `tara.engineering.detection`. */
 export function hasDetectionGuidance(technique: ThreatVector): boolean {
