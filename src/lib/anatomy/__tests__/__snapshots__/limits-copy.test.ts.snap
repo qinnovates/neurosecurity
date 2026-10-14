@@ -111,9 +111,9 @@ exports[`limit sentences > are held word for word, so any change of wording is a
   "view_chosen_band": "The orange corner marks stand around every shape drawn for a region that QIF places in band {band}, the band you chose. They show your choice; the fill colours come from the lens alone.",
   "view_chosen_regions": "The orange corner marks stand around the regions you chose. They show your choice and nothing the data says about those regions; the fill colours come from the lens alone.",
   "view_hint": "Drag to turn. Hold Ctrl or Command and scroll to zoom. A click picks the filled or selected shape under the pointer, even through pale shapes in front of it.",
+  "view_nothing_coloured_no_neural_band": "No region links were drafted for this technique: the catalog gives it no neural band.",
   "view_nothing_coloured_no_own_shape": "No region is coloured for this technique: its drafted links name no region that has a shape of its own in this atlas.",
   "view_nothing_coloured_none_named": "No region is coloured for this technique: its drafted links name no single region.",
-  "view_nothing_coloured_no_neural_band": "No region links were drafted for this technique: the catalog gives it no neural band.",
   "view_region_unknown": "Not in this build of the atlas, so not shown in the picture: {regions}.",
   "view_regions_without_shape": "No shape of its own is drawn for {count} of these, so no mark here stands for it alone: {regions}.",
   "view_technique_band_reach": "The catalog also tags this technique with {bands}. A band tag is about the band as a whole: it names none of the regions there, and no region is filled because of it.",
@@ -126,6 +126,7 @@ exports[`limit sentences > hold the sentences beside the 3D view's button word f
   "ask": "Draws this on an average brain, with what the picture cannot tell you beside it. Nothing is fetched until you ask.",
   "choose_in_list": "Choose a band or region in the list on this page to mark it in the picture.",
   "failed": "The 3D view could not be loaded. The list on this page is unchanged.",
+  "links_review": "The region links drafted for this technique:",
   "loading": "Loading the 3D view…",
 }
 `;
