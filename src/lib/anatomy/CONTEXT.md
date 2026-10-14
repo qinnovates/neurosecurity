@@ -83,7 +83,7 @@ Checks: `__tests__/atlas-assets.guard.test.ts`, `__tests__/build-attribution.tes
 Checks: `__tests__/parse-crosswalk.test.ts`, `__tests__/region-outcome.guard.test.ts`, `__tests__/anatomy-tables-content.test.ts`, `src/lib/atlas-explorer/__tests__/mapping-coverage.test.ts`.
 
 ### 3. Add a lens (colour mode)
-Edit in this order; the type checker names each place the new kind is not handled.
+Edit in this order. The type checker names every exhaustive switch (`src/lib/atlas-explorer/lens-state.ts`, including `lensNeedsSubject`, `colour-modes.ts`, `src/lib/atlas-explorer/region-lens.ts`, `src/lib/atlas-explorer/limit-selection.ts`).
 1. `src/lib/atlas-explorer/lens-state.ts` -- `LENS_KINDS`, the `Lens` union, `LENS_LABELS`
 2. `colour-modes.ts` -- the `ColourMode` it maps to and how a shape reads under it
 3. `src/lib/atlas-explorer/region-lens.ts` -- each region's value and standing under the lens

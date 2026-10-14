@@ -1,5 +1,5 @@
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
-import { LENS_LABELS, lensSubjectId, type Lens, type LensKind } from '@/lib/atlas-explorer/lens-state';
+import { LENS_LABELS, lensNeedsSubject, lensSubjectId, type Lens, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { limitSentence } from '@/lib/anatomy/limits-copy';
 import { limitsForLens } from '@/lib/atlas-explorer/limit-selection';
 import type { LensTally } from '@/lib/atlas-explorer/region-rows';
@@ -58,7 +58,7 @@ function TechniqueFacts({ summary, onSelectRegion }: { summary: TechniqueSummary
 }
 
 function LensSummary({ lens, tally }: Pick<Props, 'lens' | 'tally'>) {
-  if (lens.kind === 'band' || (lens.kind !== 'niss' && lensSubjectId(lens) === null)) return null;
+  if (lens.kind === 'band' || (lensNeedsSubject(lens.kind) && lensSubjectId(lens) === null)) return null;
   return (
     <>
       <p className="atlas-fact atlas-tally" data-tally="true">

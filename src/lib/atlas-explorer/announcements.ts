@@ -5,7 +5,7 @@
  */
 
 import type { ExplorerModel } from './explorer-model';
-import { LENS_LABELS, lensSubjectId, type Lens } from './lens-state';
+import { LENS_LABELS, lensNeedsSubject, lensSubjectId, type Lens } from './lens-state';
 import { GEOMETRY_LABELS, type LensTally } from './region-rows';
 
 function plural(count: number, singular: string, pluralForm: string): string {
@@ -30,7 +30,7 @@ function describeSubject(model: ExplorerModel, lens: Lens): string {
 /** Names the lens and counts what it shows. "No data" is counted on its own and is never folded into a low value. */
 export function announceLens(model: ExplorerModel, lens: Lens, tally: LensTally): string {
   const label = `${LENS_LABELS[lens.kind]} lens${describeSubject(model, lens)}.`;
-  if (lens.kind !== 'band' && lens.kind !== 'niss' && lensSubjectId(lens) === null) return `${label} Choose a subject to see regions.`;
+  if (lensNeedsSubject(lens.kind) && lensSubjectId(lens) === null) return `${label} Choose a subject to see regions.`;
   if (lens.kind === 'band') return `${label} ${plural(tally.withValue, 'region', 'regions')} grouped by band.`;
   // A device's regions come from QIF's atlas file, not from drafted links, so no count of drafted links is given.
   if (lens.kind === 'stated_targets') return `${label} ${plural(tally.withValue, 'region', 'regions')} listed in the device's QIF record, ${tally.noData} not listed.`;

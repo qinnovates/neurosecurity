@@ -37,6 +37,17 @@ export function emptyLens(kind: LensKind): Lens {
   }
 }
 
+/** Whether a lens of this kind waits for a subject. No default: adding a kind makes the type checker name this switch. */
+export function lensNeedsSubject(kind: LensKind): boolean {
+  switch (kind) {
+    case 'band': return false;
+    case 'niss': return false;
+    case 'technique': return true;
+    case 'dsm': return true;
+    case 'stated_targets': return true;
+  }
+}
+
 /** The lens's subject id, or null when it has none or none is chosen. */
 export function lensSubjectId(lens: Lens): string | null {
   switch (lens.kind) {
