@@ -143,4 +143,4 @@ Pins that a refresh can move. Nothing else in the atlas stack is a typed count o
 | `ATLAS_EXPLORER_*_GZIP_BYTES` | `src/scripts/tool-pages.mjs` |
 | asset sha256 values, `pipeline_code_hash` (written by the pipeline only) | `src/site/atlas-assets/manifest.json` |
 
-To print the new values: `npx vitest run src/components/atlas-scene/__tests__ src/lib/anatomy/__tests__ src/lib/atlas-explorer/__tests__ datalake/scripts/__tests__` shows expected against received for each pin that moved, and `npm run check:post-build` prints the measured first-load bytes.
+To print the new values: `npx vitest run src/components/atlas-scene/__tests__ src/lib/anatomy/__tests__ src/lib/atlas-explorer/__tests__ datalake/scripts/__tests__` shows expected against received for each pin that moved, and, after a build, `npm run check:lab-budget` prints each tool page's measured first-load bytes beside its budget.
