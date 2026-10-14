@@ -14,7 +14,6 @@ export const TARA_FDA_STATUS =
 
 /** Banner shown on archived whitepaper versions that carried the retracted claims. */
 export const WHITEPAPER_524B_CORRECTION = {
-  date: '2026-10',
   heading: 'Correction (October 2026)',
   retracted:
     'This archived version says that every BCI is a cyber device, that TARA provides the threat catalog section 524B submissions require, that section 524B requires five categories of documentation, and that section 524B mandates a neural threat catalog and impact scoring. Those statements were incorrect.',
