@@ -387,16 +387,16 @@
     {
       "version": "1.10",
       "date": "2026-10-14",
-      "title": "Descriptive technique notes and four renames",
-      "summary": "Renamed for descriptive clarity; no technique removed. 26 technique notes that opened as instructions now describe the technique ('An adversary may...' or 'If feasible, an adversary could...', by evidence status) and end with the entry's detection guidance. Four techniques renamed; earlier names kept in the new legacy_names field. Basis: 2026-10 framing decision (AI panel recommendation, pending owner acceptance).",
+      "title": "Descriptive technique notes and three renames",
+      "summary": "Renamed for descriptive clarity; no technique removed. 26 technique notes that opened as instructions now describe the technique ('An adversary may...' or 'If feasible, an adversary could...', by evidence status) and end with the entry's detection guidance. Three techniques renamed; earlier names kept in the new legacy_names field. Basis: 2026-10 framing decision (AI panel recommendation, pending owner acceptance).",
       "added": [],
       "changed": [
         "QIF-T0011 renamed: 'Intermodulation (BCI signal weaponized)' -> 'Intermodulation via BCI telemetry signal'",
         "QIF-T0046 renamed: 'OTA firmware weaponization' -> 'Malicious over-the-air firmware update'",
-        "QIF-T0065 renamed: 'Algorithmic psychosis induction (recommendation weaponization)' -> 'BCI-linked recommendation-loop amplification of destabilizing content for users at psychosis risk (projected)'",
         "QIF-T0099 renamed: 'Consumer-sensor-to-BCI kill chain escalation (pre-implant reconnaissance and cognitive priming via consumer devices)' -> 'Consumer-sensor-to-BCI escalation path (projected)'",
         "notes rewritten descriptively for 26 techniques: QIF-T0001, QIF-T0004, QIF-T0005, QIF-T0007, QIF-T0008, QIF-T0009, QIF-T0018, QIF-T0022, QIF-T0026, QIF-T0034, QIF-T0037, QIF-T0044, QIF-T0045, QIF-T0046, QIF-T0049, QIF-T0053, QIF-T0059, QIF-T0061, QIF-T0064, QIF-T0066, QIF-T0067, QIF-T0071, QIF-T0103, QIF-T0107, QIF-T0109, QIF-T0171",
-        "schema: techniques[].legacy_names and techniques[].rename_note added"
+        "schema: techniques[].legacy_names and techniques[].rename_note added",
+        "QIF-T0171 detection text: US spelling (artifact, behavioral)"
       ]
     }
   ],
@@ -10475,7 +10475,7 @@
       "status": "CONFIRMED",
       "severity": "critical",
       "ui_category": "EX",
-      "notes": "An adversary may record encrypted BCI traffic now and decrypt it when quantum computers arrive (2030-2035). Neural data is permanently sensitive -- can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival. Detection: Encrypted traffic volume monitoring, data exfiltration detection, PQC migration tracking.",
+      "notes": "An adversary may record encrypted BCI traffic now and decrypt it if a cryptographically relevant quantum computer becomes available (projected 2030-2035). Neural data is permanently sensitive -- can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival. Detection: Encrypted traffic volume monitoring, data exfiltration detection, PQC migration tracking.",
       "legacy_ids": [],
       "legacy_technique_id": "T2504",
       "niss": {
@@ -14452,7 +14452,7 @@
     },
     {
       "id": "QIF-T0065",
-      "attack": "BCI-linked recommendation-loop amplification of destabilizing content for users at psychosis risk (projected)",
+      "attack": "Algorithmic psychosis induction (recommendation weaponization)",
       "tactic": "QIF-C.EX",
       "bands": "S3→S2→N5–N7",
       "band_ids": [
@@ -14705,7 +14705,7 @@
         ],
         "qif_contribution": "threat_recontextualization"
       },
-      "technique": "BCI-linked recommendation-loop amplification of destabilizing content for users at psychosis risk (projected)",
+      "technique": "Algorithmic psychosis induction (recommendation weaponization)",
       "tara_alias": "TARA-COG-D-004",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
@@ -14725,11 +14725,7 @@
         "legacy_status": "CONFIRMED",
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
-      },
-      "legacy_names": [
-        "Algorithmic psychosis induction (recommendation weaponization)"
-      ],
-      "rename_note": "Renamed 2026-10; the earlier name implied a demonstrated clinical effect that no cited source shows."
+      }
     },
     {
       "id": "QIF-T0066",
@@ -31038,7 +31034,7 @@
       "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "PE",
-      "notes": "If feasible, an adversary could compromise the infrastructure that stores, retrains, serves or configures a deployed BCI decoder, as opposed to its training data or its inputs. Sub-types named by Bagley et al. 2026 (section 2.4.4 and Figure 2; review, preprint): model registry or repository substitution, retraining-loop hijack, monitoring evasion, deployment-configuration tampering and compiler or runtime attacks. A malicious federated aggregator distributing a manipulated global model is the same mechanism. PROJECTED: no BCI-specific incident or demonstration was found. Differs from QIF-T0043 and QIF-T0046, which concern hardware and firmware: a substituted or slowly degraded model can change device behavior with firmware attestation intact. Keep distinct from QIF-T0058 and QIF-T0071 (poisoning of calibration or re-enrollment data), QIF-T0024 (training-data poisoning) and QIF-T0017 (poisoned upstream pre-trained model). NISS vector revised from the originally proposed NISS:1.1/BI:L/CR:N/CD:H/CV:P/RV:T/NP:N (2.7) to NISS:1.1/BI:L/CR:N/CD:H/CV:I/RV:P/NP:N (4.7) on owner instruction: CV:I because substitution of a deployed decoder happens without the subject's knowledge and with no consent step they could refuse, and RV:P because restoring a known-good model does not undo decisions already acted on, nor user adaptation to the substituted behavior. BI:L, CR:N, CD:H and NP:N are unchanged from the proposal. Evidence basis: review only. The sole source for this entry is the Bagley et al. 2026 review preprint (arXiv:2607.10451v1), which is not peer reviewed; no demonstration against a neural decoder or BCI pipeline was found. Status is capped at THEORETICAL on that basis. Recorded as a sub-technique of QIF-T0043 via parent_id: its status, NISS vector and sources are its own and do not restate the parent's. Detection: Model artefact attestation, registry provenance tracking, configuration-change auditing, behavioural drift monitoring against a pinned reference model.",
+      "notes": "If feasible, an adversary could compromise the infrastructure that stores, retrains, serves or configures a deployed BCI decoder, as opposed to its training data or its inputs. Sub-types named by Bagley et al. 2026 (section 2.4.4 and Figure 2; review, preprint): model registry or repository substitution, retraining-loop hijack, monitoring evasion, deployment-configuration tampering and compiler or runtime attacks. A malicious federated aggregator distributing a manipulated global model is the same mechanism. PROJECTED: no BCI-specific incident or demonstration was found. Differs from QIF-T0043 and QIF-T0046, which concern hardware and firmware: a substituted or slowly degraded model can change device behavior with firmware attestation intact. Keep distinct from QIF-T0058 and QIF-T0071 (poisoning of calibration or re-enrollment data), QIF-T0024 (training-data poisoning) and QIF-T0017 (poisoned upstream pre-trained model). NISS vector revised from the originally proposed NISS:1.1/BI:L/CR:N/CD:H/CV:P/RV:T/NP:N (2.7) to NISS:1.1/BI:L/CR:N/CD:H/CV:I/RV:P/NP:N (4.7) on owner instruction: CV:I because substitution of a deployed decoder happens without the subject's knowledge and with no consent step they could refuse, and RV:P because restoring a known-good model does not undo decisions already acted on, nor user adaptation to the substituted behavior. BI:L, CR:N, CD:H and NP:N are unchanged from the proposal. Evidence basis: review only. The sole source for this entry is the Bagley et al. 2026 review preprint (arXiv:2607.10451v1), which is not peer reviewed; no demonstration against a neural decoder or BCI pipeline was found. Status is capped at THEORETICAL on that basis. Recorded as a sub-technique of QIF-T0043 via parent_id: its status, NISS vector and sources are its own and do not restate the parent's. Detection: Model artifact attestation, registry provenance tracking, configuration-change auditing, behavioral drift monitoring against a pinned reference model.",
       "legacy_ids": [],
       "legacy_technique_id": null,
       "niss": {
@@ -31095,7 +31091,7 @@
             "retraining_pipeline",
             "model_serving_infrastructure"
           ],
-          "detection": "Model artefact attestation, registry provenance tracking, configuration-change auditing, behavioural drift monitoring against a pinned reference model"
+          "detection": "Model artifact attestation, registry provenance tracking, configuration-change auditing, behavioral drift monitoring against a pinned reference model"
         },
         "dsm5": {
           "primary": [],

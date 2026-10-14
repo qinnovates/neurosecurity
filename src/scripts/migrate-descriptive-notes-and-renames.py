@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rewrite 26 imperative technique descriptions and rename 4 techniques.
+"""Rewrite 26 imperative technique descriptions and rename 3 techniques.
 
 Basis: the 2026-10 framing decision (items M2 and M3), an AI panel's
 recommendation pending Kevin's acceptance.
@@ -69,7 +69,7 @@ NOTE_REWRITES: dict[str, list[tuple[str, str]]] = {
     "QIF-T0044": [("Compromise cloud services processing neural data",
                    "An adversary may compromise cloud services that process neural data")],
     "QIF-T0045": [("Record encrypted BCI traffic now, decrypt when quantum computers arrive (2030-2035).",
-                   "An adversary may record encrypted BCI traffic now and decrypt it when quantum computers arrive (2030-2035).")],
+                   "An adversary may record encrypted BCI traffic now and decrypt it if a cryptographically relevant quantum computer becomes available (projected 2030-2035).")],
     "QIF-T0046": [("Compromise OTA firmware update mechanism to push malicious updates to implanted BCIs.",
                    "An adversary may compromise the OTA firmware update mechanism to push malicious updates to implanted BCIs.")],
     "QIF-T0049": [("Exploit weak or absent authentication on BCI wireless interfaces.",
@@ -116,11 +116,11 @@ NOTE_REWRITES: dict[str, list[tuple[str, str]]] = {
     ],
 }
 
-T0065_NOTE = ("Renamed 2026-10; the earlier name implied a demonstrated clinical effect "
-              "that no cited source shows.")
 DESCRIPTIVE_NOTE = "Renamed 2026-10 for descriptive clarity; no technique removed."
 
-# id -> (exact current name, new name, rename_note)
+# id -> (exact current name, new name, rename_note). The decided QIF-T0065 rename is
+# held: its note asserts what no cited source shows, which is owner check 12, and the
+# decided name says "BCI-linked" while the entry's notes say no BCI is required.
 RENAMES: dict[str, tuple[str, str, str]] = {
     # Decision text says "stimulation signal"; this entry's own notes describe the
     # BCI's telemetry signal (MICS 402 MHz), so "telemetry" is used. Flagged for Kevin.
@@ -128,9 +128,6 @@ RENAMES: dict[str, tuple[str, str, str]] = {
                   "Intermodulation via BCI telemetry signal", DESCRIPTIVE_NOTE),
     "QIF-T0046": ("OTA firmware weaponization",
                   "Malicious over-the-air firmware update", DESCRIPTIVE_NOTE),
-    "QIF-T0065": ("Algorithmic psychosis induction (recommendation weaponization)",
-                  "BCI-linked recommendation-loop amplification of destabilizing content for users at psychosis risk (projected)",
-                  T0065_NOTE),
     "QIF-T0099": ("Consumer-sensor-to-BCI kill chain escalation (pre-implant reconnaissance and cognitive priming via consumer devices)",
                   "Consumer-sensor-to-BCI escalation path (projected)", DESCRIPTIVE_NOTE),
 }
@@ -155,6 +152,18 @@ def stem_for(status: str) -> str:
     if status in COULD_STATUSES:
         return "If feasible, an adversary could "
     raise ValueError(f"unknown status {status!r}")
+
+
+DETECTION_SPELLING = {"QIF-T0171": [("Model artefact attestation", "Model artifact attestation"),
+                                     ("behavioural drift monitoring", "behavioral drift monitoring")]}
+
+
+def americanize_detection(technique: dict) -> None:
+    engineering = (technique.get("tara") or {}).get("engineering") or {}
+    for old, new in DETECTION_SPELLING.get(technique["id"], []):
+        if engineering.get("detection", "").count(old) != 1:
+            raise ValueError(f"{technique['id']}: detection text lacks {old!r}")
+        engineering["detection"] = engineering["detection"].replace(old, new)
 
 
 def closing_sentence(technique: dict) -> str:
@@ -190,10 +199,10 @@ def changelog_entry() -> dict:
     return {
         "version": CHANGELOG_VERSION,
         "date": CHANGE_DATE,
-        "title": "Descriptive technique notes and four renames",
+        "title": "Descriptive technique notes and three renames",
         "summary": ("Renamed for descriptive clarity; no technique removed. 26 technique notes that opened as "
                     "instructions now describe the technique ('An adversary may...' or 'If feasible, an adversary "
-                    "could...', by evidence status) and end with the entry's detection guidance. Four techniques "
+                    "could...', by evidence status) and end with the entry's detection guidance. Three techniques "
                     "renamed; earlier names kept in the new legacy_names field. Basis: 2026-10 framing decision "
                     "(AI panel recommendation, pending owner acceptance)."),
         "added": [],
@@ -201,6 +210,7 @@ def changelog_entry() -> dict:
             *(f"{tid} renamed: '{old}' -> '{new}'" for tid, (old, new, _) in RENAMES.items()),
             f"notes rewritten descriptively for {len(NOTE_REWRITES)} techniques: {', '.join(NOTE_REWRITES)}",
             "schema: techniques[].legacy_names and techniques[].rename_note added",
+            "QIF-T0171 detection text: US spelling (artifact, behavioral)",
         ],
     }
 
@@ -220,6 +230,7 @@ def main() -> int:
 
     try:
         for tid in NOTE_REWRITES:
+            americanize_detection(by_id[tid])
             by_id[tid]["notes"] = rewrite_notes(by_id[tid])
             print(f"  notes {tid} [{by_id[tid]['status']}] {by_id[tid]['notes'][:90]}")
         for tid in RENAMES:
