@@ -106,6 +106,20 @@ describe('findImportProblems and the index pin', () => {
     expect(findPinImporterProblems(PIN_ELEMENT, repositoryTree.read(PIN_ELEMENT))).toEqual([]);
   });
 
+  it('refuses the pin element imported by a client component or by a page <script>, and takes only a frontmatter import', () => {
+    const clientShell = "import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';\nexport default function WorkbenchShell() { return AtlasIndexPin; }";
+    const fromClient = problemsWith({ ...pinFiles, ...inFrontmatter(''), [SHELL]: clientShell });
+    expect(fromClient).toHaveLength(1);
+    expect(fromClient[0]).toContain(`${SHELL} imports ${PIN_ELEMENT} other than from the frontmatter of an .astro file`);
+    const scriptedPage = { [PAGE]: `---\n${PAGE_IMPORTS}\n---\n<WorkbenchShell client:load />\n<script>\n  ${WITH_PIN}\n</script>` };
+    const fromScript = problemsWith({ ...pinFiles, ...scriptedPage });
+    expect(fromScript).toHaveLength(1);
+    expect(fromScript[0]).toContain(`${PAGE} imports ${PIN_ELEMENT} other than from the frontmatter of an .astro file`);
+    // one import in the frontmatter does not excuse a second one in a script
+    expect(problemsWith({ ...pinFiles, [PAGE]: `---\n${PAGE_IMPORTS}\n${WITH_PIN}\n---\n<script>\n  ${WITH_PIN}\n</script>` })).toHaveLength(1);
+    expect(problemsWith({ ...pinFiles, ...inFrontmatter(WITH_PIN) })).toEqual([]);
+  });
+
   it('follows the pin module on an anatomy page, where only the generated tables are forbidden', () => {
     const leaking = `${BARE_PIN}export { default as tables } from '@/site/data/kql-tables.json';\n`;
     expect(problemsWith({ ...pinFiles, [PIN_MODULE]: leaking, [GENERATED_TABLES]: '{}', ...inFrontmatter(WITH_PIN) }, { scriptsMayCarryAnatomy: true })).toEqual([`reaches ${GENERATED_TABLES} through ${PAGE} -> ${PIN_ELEMENT} -> ${PIN_MODULE} -> ${GENERATED_TABLES}`]);

@@ -24,7 +24,7 @@
  */
 
 import path from 'node:path';
-import { readModuleStatements, readSourceImports } from './source-imports.mjs';
+import { readFrontmatterImports, readModuleStatements, readSourceImports } from './source-imports.mjs';
 
 const SOURCE_ALIASES = [['@shared/', 'datalake/'], ['@/', 'src/']];
 const ROOT_PREFIX = '/';
@@ -105,6 +105,24 @@ const SCRIPT_TAG_PATTERN = /<script\b/i;
 export function findPinImporterProblems(filePath, sourceText) {
   if (!SCRIPT_TAG_PATTERN.test(sourceText)) return [];
   return [`${filePath} holds a <script>, and the import walk does not follow its import of the index pin module: a script there could bundle the anatomy loader for the browser. Keep the file to its frontmatter and its one element.`];
+}
+
+/**
+ * The pin element is trusted to import the pin module because it is server-side only. That holds only while every
+ * import of the element is made by the frontmatter of an `.astro` file: a client component or a page `<script>` that
+ * imports it would put the element's import of the pin module (and so the walk's blind spot) into the browser bundle.
+ *
+ * @param {string} importer a file that leads to a file in INDEX_PIN_IMPORTERS
+ * @param {SourceTree} tree
+ * @returns {string[]} one message per pin element the importer imports other than from the frontmatter of an `.astro` file
+ */
+function findPinElementImportProblems(importer, tree) {
+  const sourceText = tree.read(importer);
+  const resolveElements = (specifiers) => specifiers.map((specifier) => resolveImport(specifier, importer, tree.exists)).filter((target) => target.kind === 'file' && INDEX_PIN_IMPORTERS.includes(target.filePath)).map((target) => target.filePath);
+  const allImports = resolveElements(readSourceImports(importer, sourceText).specifiers);
+  const frontmatterImports = resolveElements(readFrontmatterImports(importer, sourceText));
+  return INDEX_PIN_IMPORTERS.filter((element) => allImports.filter((reached) => reached === element).length > frontmatterImports.filter((reached) => reached === element).length)
+    .map((element) => `${importer} imports ${element} other than from the frontmatter of an .astro file (a client component or a page <script>), which would bundle the element's import of the index pin module for the browser. Import the element in a page's frontmatter only.`);
 }
 
 /**
@@ -225,6 +243,7 @@ export function findImportProblems(entryFile, tree, { scriptsMayCarryAnatomy = f
     const { reached, problems: fileProblems } = inspectFile(current, tree);
     problems.push(...fileProblems.map((problem) => `${current} ${problem}`));
     // Not followed, so held to its exact statements instead. Any other importer of the same module falls through to the walk below.
+    if (reached.some((filePath) => INDEX_PIN_IMPORTERS.includes(filePath))) problems.push(...findPinElementImportProblems(current, tree));
     const pinModules = [...new Set(reached.filter((filePath) => isPinEdge(current, filePath)))];
     if (pinModules.length > 0) problems.push(...findPinImporterProblems(current, tree.read(current)));
     for (const pinModule of pinModules) problems.push(...findIndexPinProblems(pinModule, tree.read(pinModule)));

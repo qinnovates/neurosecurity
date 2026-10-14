@@ -119,6 +119,17 @@ export function readSourceImports(filePath, sourceText) {
   return { ...found, fileAccessModules: found.specifiers.filter((specifier) => FILE_ACCESS_MODULES.includes(specifier)) };
 }
 
+/**
+ * @param {string} filePath repository path
+ * @param {string} sourceText
+ * @returns {string[]} the specifiers imported by the frontmatter of an `.astro` file alone; empty for any other file
+ */
+export function readFrontmatterImports(filePath, sourceText) {
+  if (!filePath.endsWith(ASTRO_EXTENSION)) return [];
+  const frontmatter = FRONTMATTER_PATTERN.exec(sourceText)?.[1] ?? '';
+  return readSourceImports(filePath, `---\n${frontmatter}\n---\n`).specifiers;
+}
+
 const WHITESPACE_PATTERN = /\s+/g;
 const DECLARATION_WORDS = [[ts.NodeFlags.Const, 'const'], [ts.NodeFlags.Let, 'let']];
 const FALLBACK_DECLARATION_WORD = 'var';
