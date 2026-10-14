@@ -104,7 +104,7 @@
           "quote": "superior frontal gyrus"
         },
         "check_status": "unchecked",
-        "rationale": "No prefrontal label; these frontal gyri also hold premotor, supplementary motor and eye-field cortex with no boundary."
+        "rationale": "No prefrontal label; these gyri also hold premotor, supplementary motor and eye-field cortex with no boundary. Shares 12115 with pmc and sma, 12116 with pmc."
       },
       "drafted_by": "ai"
     },
@@ -259,7 +259,7 @@
           "quote": "superior temporal gyrus"
         },
         "check_status": "unchecked",
-        "rationale": "Supramarginal and angular gyri match two QIF parts by name, but the superior temporal gyrus label is the whole gyrus with no posterior part."
+        "rationale": "Two gyri match QIF parts by name; the superior temporal label is the whole gyrus. QIF calls it left-dominant, yet both sides are drawn. Shares 12135 and 12136 with ppc."
       },
       "drafted_by": "ai"
     },
@@ -291,7 +291,7 @@
           "quote": "precentral gyrus"
         },
         "check_status": "unchecked",
-        "rationale": "No premotor label; it lies inside these three frontal gyri with no boundary in the atlas."
+        "rationale": "No premotor label; it lies inside these three frontal gyri with no boundary in the atlas. Shares 12114 with m1, 12115 with pfc and sma, 12116 with pfc."
       },
       "drafted_by": "ai"
     },
@@ -352,7 +352,7 @@
           "quote": "supraparietal lobule"
         },
         "check_status": "unchecked",
-        "rationale": "QIF lists the superior and inferior parietal lobules; these three labels are those lobules' gyri. Intraparietal areas are unlabelled."
+        "rationale": "These labels are the gyri of the two parietal lobules QIF lists. Intraparietal areas are unlabelled; the precuneus (12137) is left out. Shares 12135 and 12136 with wernicke."
       },
       "drafted_by": "ai"
     },
