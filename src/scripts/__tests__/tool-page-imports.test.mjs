@@ -4,7 +4,7 @@ import path from 'node:path';
 import { readSourceImports } from '../source-imports.mjs';
 import { TOOL_PAGES } from '../tool-pages.mjs';
 import {
-  ANATOMY_DATA_MODULES, BUILD_TIME_FILE_ACCESS_ALLOWED, findImportProblems, findPageSource, isAnatomyDataModule, isGeneratedTableFile, resolveImport,
+  ANATOMY_DATA_MODULES, BUILD_TIME_FILE_ACCESS_ALLOWED, INDEX_PIN_MODULES, findImportProblems, findPageSource, isAnatomyDataModule, isGeneratedTableFile, resolveImport,
 } from '../tool-page-imports.mjs';
 
 const SOURCE_ROOTS = ['src', 'datalake'];
@@ -217,6 +217,33 @@ describe('findImportProblems on a page whose scripts may carry anatomy code', ()
 
   it('still reports what cannot be followed and a build-time file read', () => {
     expect(problemsWith(inFrontmatter("import fs from 'node:fs';\nconst lazy = await import(`./${name}.ts`);"), anatomyPage)).toHaveLength(2);
+  });
+});
+
+describe('findImportProblems and the index pin', () => {
+  const LOADER = 'src/components/atlas-scene/load-anatomy-data.ts';
+  const PIN_MODULE = 'src/components/atlas-scene/build-index-pin.ts';
+  const PIN_ELEMENT = 'src/components/atlas-scene/AtlasIndexPin.astro';
+  const pinFiles = {
+    [LOADER]: "import crosswalk from '@shared/qif-anatomy-crosswalk.json';\nexport const loadAnatomyBundle = () => crosswalk;",
+    [PIN_MODULE]: "import { loadAnatomyBundle } from './load-anatomy-data';\nexport const INDEX_PIN = loadAnatomyBundle().indexPin;",
+    [PIN_ELEMENT]: "---\nimport { INDEX_PIN } from './build-index-pin';\n---\n<div hidden></div>",
+  };
+
+  it('names one module, which exists', () => {
+    expect(INDEX_PIN_MODULES).toEqual([PIN_MODULE]);
+    expect(repositoryTree.exists(PIN_MODULE)).toBe(true);
+  });
+
+  it('lets the Lab page carry the pin: the walk stops at the pin module and does not follow it to the loader', () => {
+    expect(problemsWith({ ...pinFiles, ...inFrontmatter("import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';") })).toEqual([]);
+  });
+
+  it('still refuses the loader reached any other way, the pin module beside it or not', () => {
+    const direct = inFrontmatter("import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';\nimport { loadAnatomyBundle } from '@/components/atlas-scene/load-anatomy-data';");
+    expect(problemsWith({ ...pinFiles, ...direct })).toEqual([`reaches ${LOADER} through ${PAGE} -> ${LOADER}`]);
+    const relayed = { ...pinFiles, [PIN_ELEMENT]: "---\nimport { loadAnatomyBundle } from './load-anatomy-data';\n---\n<div hidden></div>" };
+    expect(problemsWith({ ...relayed, ...inFrontmatter("import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';") })).toEqual([`reaches ${LOADER} through ${PAGE} -> ${PIN_ELEMENT} -> ${LOADER}`]);
   });
 });
 

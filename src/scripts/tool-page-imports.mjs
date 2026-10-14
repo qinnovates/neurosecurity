@@ -68,6 +68,15 @@ export const ANATOMY_DATA_FILE_PATTERNS = Object.freeze([/^datalake\/qif-anatomy
 /** Everything generated from the tables: the query-table JSON and the parquet files. No page may import these. */
 export const GENERATED_TABLE_FILE_PATTERNS = Object.freeze([/^src\/site\/data\//, /^docs\/data\//, /^datalake\/parquet\//]);
 
+/**
+ * The one build-time module a page that is not an anatomy page may import although it leads to the anatomy loader.
+ * It exports the anatomy index's path, length and digest and nothing else, so that the 3D view a page mounts can refuse
+ * an index from another build (a page without the pin draws nothing). The walk stops at it and does not follow it.
+ * A test holds the module to that one export. What a page was actually built with is checked on the built files all
+ * the same (find-anatomy-payload.mjs): its HTML for anatomy rows, and every script it can load for the tables and data files.
+ */
+export const INDEX_PIN_MODULES = Object.freeze(['src/components/atlas-scene/build-index-pin.ts']);
+
 export function isGeneratedTableFile(filePath) {
   return GENERATED_TABLE_FILE_PATTERNS.some((pattern) => pattern.test(filePath));
 }
@@ -166,7 +175,7 @@ export function findImportProblems(entryFile, tree, { scriptsMayCarryAnatomy = f
       problems.push(`reaches ${current} through ${traceChain(current, cameFrom).join(' -> ')}`);
       continue;
     }
-    if (!CODE_FILE_PATTERN.test(current)) continue;
+    if (!CODE_FILE_PATTERN.test(current) || (!scriptsMayCarryAnatomy && INDEX_PIN_MODULES.includes(current))) continue;
     const { reached, problems: fileProblems } = inspectFile(current, tree);
     problems.push(...fileProblems.map((problem) => `${current} ${problem}`));
     for (const next of reached.filter((filePath) => !cameFrom.has(filePath))) {
