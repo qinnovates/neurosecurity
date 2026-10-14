@@ -59,13 +59,6 @@
       "reason": "No openly licensed source with geometry for this structure was found.",
       "reason_source": "datalake/qif-anatomy-sources.json: no source in its sources or considered_and_refused lists has spinal nerve root geometry; the search behind those lists was made by AI.",
       "drafted_by": "ai"
-    },
-    {
-      "subject_kind": "region",
-      "subject_id": "reticular_formation",
-      "reason": "The only cleared source with reticular nuclei is the Harvard arousal atlas, whose template space could not be established, and it covers the midbrain and rostral pons only.",
-      "reason_source": "datalake/qif-anatomy-sources.json, source \"harvard_aan_v2\", route note",
-      "drafted_by": "ai"
     }
   ],
   "rows": [
@@ -181,7 +174,8 @@
       "part": null,
       "atlas": "allen_hra_3d_2020",
       "atlas_ids": [
-        "12144"
+        "12144",
+        "12145"
       ],
       "name_match": "none",
       "extent_match": "contained",
@@ -197,7 +191,7 @@
           "quote": "transverse temporal gyrus (Heschl's gyrus)"
         },
         "check_status": "unchecked",
-        "rationale": "Primary auditory cortex is part of Heschl's gyrus; the atlas labels the whole gyrus."
+        "rationale": "Area 41 is on Heschl's gyrus (PMID 11305897); the planum temporale is part of area 42 (PMID 2346228). QIF's belt and parabelt were not located and may lie outside both labels."
       },
       "drafted_by": "ai"
     },
@@ -490,7 +484,8 @@
       "part": null,
       "atlas": "allen_hra_3d_2020",
       "atlas_ids": [
-        "12157"
+        "12157",
+        "12160"
       ],
       "name_match": "synonym",
       "extent_match": "atlas_covers_part",
@@ -505,7 +500,7 @@
           "quote": "cingulate gyrus, rostral (anterior) part"
         },
         "check_status": "unchecked",
-        "rationale": "The label is the rostral (anterior) cingulate gyrus; subgenual and paracingulate cortex are separate labels."
+        "rationale": "Rostral cingulate gyrus plus the subcallosal gyrus, given as area 25 in PMID 18368034. The paracingulate gyrus (area 32 there) is left out: the atlas files it under the frontal lobe."
       },
       "drafted_by": "ai"
     },
@@ -534,7 +529,7 @@
           "quote": "cingulate gyrus, caudal (posterior) part"
         },
         "check_status": "unchecked",
-        "rationale": "The label is the caudal (posterior) cingulate gyrus; retrosplenial cortex is unlabelled and precuneus is a separate label."
+        "rationale": "The caudal (posterior) cingulate gyrus. Precuneus (12137), which QIF lists, is left out: the atlas files it under the parietal lobe. Where areas 29 and 30 fall was not established."
       },
       "drafted_by": "ai"
     },
@@ -987,7 +982,7 @@
           "quote": "pyramidal part of medulla oblongata"
         },
         "check_status": "unchecked",
-        "rationale": "Union of pyramidal part, tegmentum and inferior olive; the inferior cerebellar peduncle and hindbrain white matter are separate labels."
+        "rationale": "Union of pyramidal part, tegmentum and inferior olive; the inferior cerebellar peduncle and hindbrain white matter are separate labels. Shares 12538 with reticular_formation."
       },
       "drafted_by": "ai"
     },
@@ -1017,7 +1012,7 @@
           "quote": "basilar part of pons"
         },
         "check_status": "unchecked",
-        "rationale": "Union of the basilar part of the pons and the pontine tegmentum; the middle cerebellar peduncle and hindbrain white matter are separate labels."
+        "rationale": "Union of the basilar part of the pons and the pontine tegmentum; the middle cerebellar peduncle and hindbrain white matter are separate labels. Shares 12416 with reticular_formation."
       },
       "drafted_by": "ai"
     },
@@ -1050,7 +1045,7 @@
           "quote": "midbrain tegmentum (remainder, excluding red nucleus and substantia nigra)"
         },
         "check_status": "unchecked",
-        "rationale": "Union of tegmentum, pretectal region, colliculi and cerebral peduncle. The red nucleus is a second row on CIT168; nigra and vta are contained regions on it."
+        "rationale": "Union of tegmentum, pretectal region, colliculi and cerebral peduncle. The red nucleus is a second row on CIT168; nigra and vta are contained regions on it. Shares 12195 with reticular_formation."
       },
       "drafted_by": "ai"
     },
@@ -1109,6 +1104,38 @@
         },
         "check_status": "unchecked",
         "rationale": "The label is the central nuclear group of the amygdala."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "reticular_formation",
+      "subject_name_at_draft": "Reticular Formation",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "allen_hra_3d_2020",
+      "atlas_ids": [
+        "12195",
+        "12416",
+        "12538"
+      ],
+      "name_match": "none",
+      "extent_match": "contained",
+      "contained_kind": "no_boundary",
+      "definition_contested": false,
+      "draws": true,
+      "delineation_basis": "expert_drawing_on_template",
+      "evidence": {
+        "claim_basis": "analyst_inference",
+        "source_ref": {
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12416/name",
+          "quote": "pontine tegmentum"
+        },
+        "check_status": "unchecked",
+        "rationale": "The brainstem tegmentum includes the reticular formation (PMID 12805123); the publisher's table files its three parts, unannotated, under these labels. Shared with midbrain, pons and medulla."
       },
       "drafted_by": "ai"
     }

@@ -24,7 +24,7 @@ const PINNED_ANATOMY_STATE = {
   /** Changes when GEOMETRY IS ADDED: crosswalk rows land, or the pipeline ships shapes no record maps to. */
   structureCount: 126,
   /** Changes when a region GAINS GEOMETRY (its no_geometry record is removed) or a new one is recorded as having none. */
-  noGeometryRegionIds: ['cervical_cord', 'thoracic_cord', 'lumbar_cord', 'sacral_cord', 'cauda_equina', 'reticular_formation'],
+  noGeometryRegionIds: ['cervical_cord', 'thoracic_cord', 'lumbar_cord', 'sacral_cord', 'cauda_equina'],
   /** Changes when REGIONS ARE MAPPED: every region not listed above reads not_mapped until a row is drafted for it. */
   regionGeometryStates: ['contained', 'drawn', 'marker_only', 'no_geometry'],
   /** Changes when TECHNIQUE LINKS ARE RE-DRAFTED: how many neural-band techniques hold links and how many stay at band level. */
