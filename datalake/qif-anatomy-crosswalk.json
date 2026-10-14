@@ -10,6 +10,18 @@
     {
       "parent": "thalamus",
       "child": "vim"
+    },
+    {
+      "parent": "midbrain",
+      "child": "substantia_nigra"
+    },
+    {
+      "parent": "midbrain",
+      "child": "vta"
+    },
+    {
+      "parent": "cerebellum_cortex",
+      "child": "vermis"
     }
   ],
   "no_geometry": [
@@ -451,8 +463,8 @@
         "12177",
         "12179"
       ],
-      "name_match": "same",
-      "extent_match": "approximate",
+      "name_match": "synonym",
+      "extent_match": "atlas_covers_part",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "expert_drawing_on_template",
@@ -464,7 +476,7 @@
           "quote": "short insular gyri"
         },
         "check_status": "unchecked",
-        "rationale": "Short and long insular gyri and limen insula. The agranular insular areas are separate labels, not included."
+        "rationale": "Short and long insular gyri and limen insula. The publisher also annotates two agranular insular areas (10329, 10330); they are not shipped, so the row leaves them out."
       },
       "drafted_by": "ai"
     },
@@ -687,7 +699,7 @@
         "10"
       ],
       "name_match": "same",
-      "extent_match": "approximate",
+      "extent_match": "atlas_covers_part",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "manual_mri",
@@ -699,7 +711,7 @@
           "quote": "Ventral Tegmental Area"
         },
         "check_status": "unchecked",
-        "rationale": "The label is the ventral tegmental area. Too small on the 1 mm grid to outline; it ships as a marker."
+        "rationale": "CIT168 maps the parabrachial pigmented nucleus apart (label 9, not shipped); the usual area includes it (PMID 33580320). Too small on the 1 mm grid to outline; it ships as a marker."
       },
       "drafted_by": "ai"
     },
@@ -874,8 +886,7 @@
         "12384"
       ],
       "name_match": "none",
-      "extent_match": "contained",
-      "contained_kind": "named_stand_in",
+      "extent_match": "atlas_covers_part",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "expert_drawing_on_template",
@@ -887,7 +898,7 @@
           "quote": "lateral hemisphere of cerebellum"
         },
         "check_status": "unchecked",
-        "rationale": "Labels are the lateral hemisphere and paravermis, not cortex; whether folial white matter is inside them is not known."
+        "rationale": "Lateral hemisphere and paravermis: two of the atlas's three cerebellar cortical zones (PMID 27418273). The third is drawn under vermis, which this region contains. Folial white matter unchecked."
       },
       "drafted_by": "ai"
     },
@@ -976,7 +987,7 @@
           "quote": "pyramidal part of medulla oblongata"
         },
         "check_status": "unchecked",
-        "rationale": "Union of pyramidal part, tegmentum and inferior olive; hindbrain white matter is a separate shared label."
+        "rationale": "Union of pyramidal part, tegmentum and inferior olive; the inferior cerebellar peduncle and hindbrain white matter are separate labels."
       },
       "drafted_by": "ai"
     },
@@ -994,7 +1005,7 @@
         "12416"
       ],
       "name_match": "none",
-      "extent_match": "approximate",
+      "extent_match": "atlas_covers_part",
       "definition_contested": false,
       "draws": true,
       "delineation_basis": "expert_drawing_on_template",
@@ -1006,7 +1017,7 @@
           "quote": "basilar part of pons"
         },
         "check_status": "unchecked",
-        "rationale": "Union of the basilar part of the pons and the pontine tegmentum."
+        "rationale": "Union of the basilar part of the pons and the pontine tegmentum; the middle cerebellar peduncle and hindbrain white matter are separate labels."
       },
       "drafted_by": "ai"
     },
@@ -1039,7 +1050,36 @@
           "quote": "midbrain tegmentum (remainder, excluding red nucleus and substantia nigra)"
         },
         "check_status": "unchecked",
-        "rationale": "Union of tegmentum, pretectal region, colliculi and cerebral peduncle. Red nucleus and nigra are drawn from another atlas."
+        "rationale": "Union of tegmentum, pretectal region, colliculi and cerebral peduncle. The red nucleus is a second row on CIT168; nigra and vta are contained regions on it."
+      },
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "midbrain",
+      "subject_name_at_draft": "Midbrain (Mesencephalon)",
+      "valid_for_addressing": [
+        1
+      ],
+      "part": null,
+      "atlas": "cit168_rl",
+      "atlas_ids": [
+        "7"
+      ],
+      "name_match": "none",
+      "extent_match": "atlas_covers_part",
+      "definition_contested": false,
+      "draws": false,
+      "delineation_basis": "manual_mri",
+      "evidence": {
+        "claim_basis": "atlas_label",
+        "source_ref": {
+          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
+          "pointer": "/labels/7/name",
+          "quote": "Red Nucleus"
+        },
+        "check_status": "unchecked",
+        "rationale": "QIF lists the red nucleus as a midbrain part; this label is CIT168's, a population probability map cut at 0.5. Not drawn from this row: the region draws from the Allen atlas."
       },
       "drafted_by": "ai"
     },

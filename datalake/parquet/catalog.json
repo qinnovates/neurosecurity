@@ -5,7 +5,7 @@
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
     "total_datasets": 38,
-    "total_rows": 24246
+    "total_rows": 24247
   },
   "datasets": {
     "techniques": {
@@ -794,13 +794,13 @@
         "asset_sha256",
         "asset_license_id"
       ],
-      "size_bytes": 17267,
-      "sha256": "f3f7cf82e264962fa57b38e62f87225f7a91761f225cbb7f474389b29cba2700",
+      "size_bytes": 17298,
+      "sha256": "f00c672d6940e44adef1e7744c892ecb4cb7655a1dce65fbffe99930139695d5",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_structures.parquet"
     },
     "anatomy_crosswalk": {
-      "rows": 38,
+      "rows": 39,
       "columns": 35,
       "column_names": [
         "review_mark",
@@ -839,8 +839,8 @@
         "check_status",
         "addressing_version"
       ],
-      "size_bytes": 17209,
-      "sha256": "777c984ccf19703694563b91c8d4d843164452412812c85be1ea92fbb6ad92a3",
+      "size_bytes": 17631,
+      "sha256": "b7c0e401eb4364d0b48ad86fc38a4691aef47627fcf390f9d87313876f5f64ae",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_crosswalk.parquet"
     },
