@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-07T08:16:54.046561+00:00",
+    "generated": "2026-10-16T23:58:40.792371+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
     "total_datasets": 34,
-    "total_rows": 9029
+    "total_rows": 9030
   },
   "datasets": {
     "techniques": {
@@ -480,7 +480,7 @@
         "neuroethics",
         "neurosecurity"
       ],
-      "size_bytes": 7070,
+      "size_bytes": 7088,
       "compression": "zstd",
       "source": "datalake/parquet/guardrails.parquet"
     },
@@ -518,7 +518,7 @@
       "source": "datalake/parquet/research_explorer.parquet"
     },
     "research_institutions": {
-      "rows": 27,
+      "rows": 28,
       "columns": 9,
       "column_names": [
         "id",
@@ -531,7 +531,7 @@
         "layer",
         "tags"
       ],
-      "size_bytes": 6386,
+      "size_bytes": 6508,
       "compression": "zstd",
       "source": "datalake/parquet/research_institutions.parquet"
     },
@@ -701,7 +701,7 @@
         "current_stats",
         "milestones"
       ],
-      "size_bytes": 13375,
+      "size_bytes": 13470,
       "compression": "zstd",
       "source": "datalake/parquet/timeline.parquet"
     }

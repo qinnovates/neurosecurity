@@ -5,14 +5,14 @@ order: 5
 ---
 
 <!-- AUTO-GENERATED from QIF-DERIVATION-LOG.md — do not edit directly -->
-<!-- Regenerate: npm run decisions | Last generated: 2026-10-06 -->
+<!-- Regenerate: npm run decisions | Last generated: 2026-10-16 -->
 
 # Decision Log
 
 Rolling record of framework decisions extracted from the [QIF Derivation Log](../osi-of-mind/QIF-DERIVATION-LOG.md).
 Each entry links back to the full derivation context.
 
-**Last generated:** 2026-10-06 at 03:27:21
+**Last generated:** 2026-10-16 at 19:58:40
 
 **RACI Key:** R (Responsible) | A (Accountable) | C (Consulted) | I (Informed)
 
