@@ -2,7 +2,7 @@
 
 **Status:** Active
 **Last Updated:** 2026-10-16
-**Data Source:** `shared/qif-guardrails.json` (single source of truth)
+**Data Source:** `datalake/qif-guardrails.json` (single source of truth)
 **Enforcement:** `rules/epistemic-integrity.md`
 
 ---
@@ -139,7 +139,7 @@ Every neuroethics constraint maps to a neurosecurity scope limit. They are diffe
 **Does:** Scores the impact of a threat technique on six metrics (NISS v1.1): Biological Impact (BI), Cognitive Reconnaissance (CR), Cognitive/Functional Disruption (CD), Consent Violation (CV), Reversibility (RV) and Neuroplasticity (NP), each on a fixed ordinal scale from 0 to 10, combined as a weighted mean (BI, CV, RV and NP weight 1.0; CR and CD weight 0.5).
 
 **Does NOT:**
-- Predict psychiatric diagnoses or diagnostic clusters (DSM-5-TR names are category references for threat modeling, not NISS outputs)
+- Predict psychiatric diagnoses or diagnostic clusters (coded condition labels are ICD-10-CM category references for threat modeling, not NISS outputs)
 - Measure "thought harm" or mental states (G1)
 - Claim clinical diagnostic validity (G8)
 
@@ -188,7 +188,7 @@ Every neuroethics constraint maps to a neurosecurity scope limit. They are diffe
 
 | Document | Role |
 |----------|------|
-| `shared/qif-guardrails.json` | Structured data (single source of truth) |
+| `datalake/qif-guardrails.json` | Structured data (single source of truth) |
 | `rules/epistemic-integrity.md` | Enforcement rules for all AI output |
 | `qif-sec-guardrails.md` | Physics-derived security architecture (4 layers) |
 | `/bci/guardrails` page | Site visualization of security layers |

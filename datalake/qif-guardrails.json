@@ -182,7 +182,7 @@
       "fullName": "Neural Impact Scoring System",
       "does": "Scores the impact of a threat technique on six metrics (NISS v1.1): Biological Impact (BI), Cognitive Reconnaissance (CR), Cognitive/Functional Disruption (CD), Consent Violation (CV), Reversibility (RV) and Neuroplasticity (NP), each on a fixed ordinal scale from 0 to 10, combined as a weighted mean (BI, CV, RV and NP weight 1.0; CR and CD weight 0.5)",
       "doesNot": [
-        "Predict psychiatric diagnoses or diagnostic clusters (DSM-5-TR names are category references for threat modeling, not NISS outputs)",
+        "Predict psychiatric diagnoses or diagnostic clusters (coded condition labels are ICD-10-CM category references for threat modeling, not NISS outputs)",
         "Measure 'thought harm' or mental states",
         "Claim clinical diagnostic validity"
       ],

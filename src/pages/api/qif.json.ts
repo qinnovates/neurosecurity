@@ -8,8 +8,22 @@ import timeline from '@/data/qif-timeline.json';
 
 export const GET: APIRoute = async () => {
     const data = {
-        version: '1.0',
+        version: '1.1',
         generated: new Date().toISOString(),
+
+        // This endpoint is served with Access-Control-Allow-Origin: *, so a
+        // field that disappears breaks consumers we cannot enumerate. Removals
+        // are announced here and in CHANGELOG.md, and the envelope version is
+        // bumped in the same change.
+        _deprecated: {
+            'specs.dsm5.niss_dsm_bridge': {
+                removed_in: '1.1',
+                removed_on: '2026-10-16',
+                reason:
+                    'A per-metric NISS-to-DSM-chapter table whose wording stated that NISS metrics predict diagnostic clusters. NISS scores the signal-level impact of a threat technique; it does not predict diagnoses. Retired in registrar changelog 1.10.',
+                replacement: null,
+            },
+        },
         description: 'Unified QIF dataset: threat techniques, BCI devices, brain atlas, physics constraints, and scoring systems. All cross-referenced by QIF hourglass band IDs.',
 
         // ── QIF Model ──
