@@ -18,9 +18,9 @@ export const TARA_TECHNIQUES = (registrar as { techniques: unknown[] }).techniqu
 /** Hourglass bands (7-1-3 asymmetric) */
 export const HOURGLASS_BANDS = [
   { id: 'N7', name: 'Neocortex', zone: 'neural', color: '#166534', description: 'PFC, M1, V1, Broca, Wernicke — executive function, language, movement, perception' },
-  { id: 'N6', name: 'Limbic System', zone: 'neural', color: '#3a7d44', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception' },
-  { id: 'N5', name: 'Basal Ganglia', zone: 'neural', color: '#5c7a38', description: 'Striatum, STN, substantia nigra — motor selection, reward, habit' },
-  { id: 'N4', name: 'Diencephalon', zone: 'neural', color: '#72772f', description: 'Thalamus, hypothalamus — sensory gating, consciousness relay' },
+  { id: 'N6', name: 'Allocortex', zone: 'neural', color: '#3a7d44', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception' },
+  { id: 'N5', name: 'Cerebral nuclei', zone: 'neural', color: '#5c7a38', description: 'Striatum, pallidum, basal forebrain — motor selection, reward, habit' },
+  { id: 'N4', name: 'Diencephalon', zone: 'neural', color: '#72772f', description: 'Thalamus, hypothalamus, subthalamic nucleus — relay to neocortex, homeostasis' },
   { id: 'N3', name: 'Cerebellum', zone: 'neural', color: '#877226', description: 'Cerebellar cortex, deep nuclei — motor coordination, timing' },
   { id: 'N2', name: 'Brainstem', zone: 'neural', color: '#9b6c1e', description: 'Medulla, pons, midbrain — vital functions, arousal, reflexes' },
   { id: 'N1', name: 'Spinal Cord', zone: 'neural', color: '#ae6616', description: 'Cervical through sacral — reflexes, peripheral relay' },
@@ -29,6 +29,11 @@ export const HOURGLASS_BANDS = [
   { id: 'S2', name: 'Guided-Wave / Host-Local', zone: 'synthetic', color: '#60a5fa', description: 'Firmware, drivers, host compute, USB, decoding, BLE/WiFi baseband (10 kHz - 1 GHz, device-local)' },
   { id: 'S3', name: 'Far-Field / Wide-Area', zone: 'synthetic', color: '#3b82f6', description: 'RF transmission, directed energy, application layer (1 GHz+, off-device)' },
 ] as const;
+
+/** Neural bands (N7–N1) as id, name and description. Derived from HOURGLASS_BANDS; do not redeclare elsewhere. */
+export const NEURAL_BAND_REGIONS = HOURGLASS_BANDS
+  .filter((band) => band.zone === 'neural')
+  .map(({ id, name, description }) => ({ id, name, description }));
 
 /** Hourglass band radii for 3D visualization (maps 1:1 to HOURGLASS_BANDS) */
 export const HOURGLASS_RADII = [1.4, 1.3, 1.15, 1.0, 0.85, 0.7, 0.55, 0.45, 0.7, 0.9, 1.2] as const;
@@ -93,7 +98,7 @@ export const PILLARS = [
     name: 'TARA',
     fullName: 'Therapeutic Applications & Risk Assessment',
     tagline: 'The TARA Atlas',
-    description: `${TARA_TECHNIQUES} BCI techniques mapped across four projections — modality, clinical, diagnostic (DSM-5-TR), and governance — each scored with NISS and traced through the Neural Impact Chain from attack to clinical outcome.`,
+    description: `${TARA_TECHNIQUES} BCI techniques mapped across four projections — modality, clinical, diagnostic (DSM-5-TR), and governance — each scored with NISS and associated with clinical outcomes through the Neural Impact Chain (by shared band, not a demonstrated neural path).`,
     href: '/atlas/tara/',
     icon: '\u25B2',
     color: '#f59e0b',

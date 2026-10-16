@@ -1,9 +1,14 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import { HOURGLASS_BANDS } from '@/lib/qif-constants';
-import { THREAT_CATEGORIES, THREAT_VECTORS, getTacticsWithCounts } from '@/lib/threat-data';
+import { THREAT_CATEGORIES, THREAT_VECTORS, TECHNIQUE_VARIANTS, VARIANT_DIMENSIONS, getTacticsWithCounts } from '@/lib/threat-data';
 
 const tactics = getTacticsWithCounts();
+
+// Variant example and the closed differs_in vocabulary, both read from the registrar
+const exampleVariant = TECHNIQUE_VARIANTS[0];
+const exampleVariantParent = THREAT_VECTORS.find(t => t.id === exampleVariant?.parent);
+const variantDimensions = Object.entries(VARIANT_DIMENSIONS);
 
 // Example techniques for each pattern
 const exampleTechnique = THREAT_VECTORS[0];
@@ -67,6 +72,7 @@ const syntheticBands = HOURGLASS_BANDS.filter(b => b.id.startsWith('S'));
       <p class="text-xs text-[var(--color-text-faint)]">
         Range: QIF-T0001 through QIF-T{String(THREAT_VECTORS.length).padStart(4, '0')}+ (currently {THREAT_VECTORS.length} techniques).
         IDs are stable — once assigned, a technique ID never changes or gets reassigned.
+        Variants are counted separately (currently {TECHNIQUE_VARIANTS.length}); see <a href="#variants" class="text-[var(--color-accent-primary)] hover:underline">Variant IDs</a>.
       </p>
     </div>
 
@@ -159,6 +165,81 @@ const syntheticBands = HOURGLASS_BANDS.filter(b => b.id.startsWith('S'));
 
       <div class="p-4 rounded-lg text-xs" style="background: rgba(30, 41, 59, 0.3); color: var(--color-text-muted);">
         <strong>Design precedent:</strong> MITRE ATT&CK, CAPEC, and CWE all use flat opaque IDs with taxonomy in metadata. The TARA alias follows the same pattern as the CVSS vector string alongside CVE IDs — a human-readable encoding that travels alongside the stable canonical identifier.
+      </div>
+    </div>
+
+    <!-- Variant IDs -->
+    <div class="mb-16" id="variants">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading);">Variant IDs</h2>
+      <p class="text-sm mb-6" style="color: var(--color-text-muted);">
+        A <strong>variant</strong> has the same signal-level mechanism, tactic and harm as one technique and differs from it in exactly one named dimension. Anything that differs in more than that is a technique. A variant has one parent only; other relationships are listed as related IDs. Variants are filed in their own list and are <strong>not counted as techniques</strong>: the catalogue reports techniques and variants as two numbers.
+      </p>
+      <div class="rounded-xl p-6 border mb-6" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+        <p class="text-xs font-mono text-[var(--color-text-faint)] mb-2">Format</p>
+        <div class="flex items-center gap-1 text-2xl font-mono font-bold mb-4">
+          <span style="color: var(--color-accent-primary);">QIF-T0001</span>
+          <span style="color: var(--color-text-faint);">-</span>
+          <span style="color: var(--color-accent-secondary);">V</span>
+          <span style="color: var(--color-accent-tertiary);">01</span>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-4 text-sm">
+          <div>
+            <span class="font-mono font-bold" style="color: var(--color-accent-primary);">QIF-T0001</span>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">The parent technique's canonical ID, unchanged.</p>
+          </div>
+          <div>
+            <span class="font-mono font-bold" style="color: var(--color-accent-secondary);">V</span>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">Marks a variant. A variant is not an entity type of its own; it always hangs off one technique.</p>
+          </div>
+          <div>
+            <span class="font-mono font-bold" style="color: var(--color-accent-tertiary);">01</span>
+            <p class="text-xs text-[var(--color-text-muted)] mt-1">Sequential number within the parent. Opaque and permanent, like the technique number.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <h3 class="text-lg font-semibold mb-3">Variant Alias</h3>
+        <div class="p-4 rounded-lg" style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(148, 163, 184, 0.1);">
+          <code class="text-base" style="color: var(--color-accent-primary);">{'{PARENT ALIAS}'}-{'{DIMENSION}'}{'{N}'}</code>
+          <p class="text-xs mt-2" style="color: var(--color-text-muted);">
+            The parent's TARA alias, a two-letter code for the dimension the variant differs in, and a one-digit sequence.
+            {exampleVariant && (
+              <span>Example: <code>{exampleVariant.alias}</code> = variant <code>{exampleVariant.id}</code> of <code>{exampleVariantParent?.taraAlias}</code>, differing in {exampleVariant.differsIn.replace(/_/g, ' ')}.</span>
+            )}
+          </p>
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <h3 class="text-lg font-semibold mb-3">{variantDimensions.length} Dimensions a Variant Can Differ In</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm" style="border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.15);">
+                <th class="text-left py-2 px-3 font-semibold" style="color: var(--color-text-muted);">Code</th>
+                <th class="text-left py-2 px-3 font-semibold" style="color: var(--color-text-muted);">Dimension</th>
+                <th class="text-left py-2 px-3 font-semibold" style="color: var(--color-text-muted);">What It Covers</th>
+              </tr>
+            </thead>
+            <tbody>
+              {variantDimensions.map(([name, spec]) => (
+                <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.06);">
+                  <td class="py-2 px-3"><code style="color: var(--color-accent-primary);">{spec.code}</code></td>
+                  <td class="py-2 px-3 font-medium">{name.replace(/_/g, ' ')}</td>
+                  <td class="py-2 px-3" style="color: var(--color-text-muted);">{spec.description}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs mt-3" style="color: var(--color-text-muted);">
+          The list is closed and a variant names exactly one entry; there is no "other". A variant's scoring state is always its own. It may reuse its parent's NISS vector only when it holds a peer-reviewed source itself and the dimension it differs in does not change impact; otherwise it is unscored and the reason is recorded.
+        </p>
+      </div>
+
+      <div class="p-4 rounded-lg text-xs" style="background: rgba(30, 41, 59, 0.3); color: var(--color-text-muted);">
+        <strong>Design precedent:</strong> modelled on MITRE ATT&CK sub-techniques, which are also counted apart from techniques. The format is deliberately different from ATT&CK's <code>Txxxx.yyy</code>: technique cross-references here already hold ATT&CK IDs such as <code>T1565.001</code>, and a dotted suffix on a QIF ID would be read as one of those.
       </div>
     </div>
 

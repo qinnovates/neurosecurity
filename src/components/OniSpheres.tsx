@@ -8,8 +8,8 @@ const LAYERS = [
   { id: 'S3', r: 1.72, c: [0.20, 0.55, 0.60], fp: 2.0, label: 'Radio / Wireless' },
   { id: 'S2', r: 1.52, c: [0.20, 0.87, 0.87], fp: 2.8, label: 'Telemetry' },
   { id: 'S1', r: 1.38, c: [0.50, 0.93, 0.93], fp: 2.6, label: 'Analog / Near-Field' },
-  { id: 'I0', r: 1.24, c: [1.00, 0.85, 0.30], fp: 2.4, label: 'Neural Gateway' },
-  { id: 'N1', r: 1.10, c: [0.30, 0.90, 0.50], fp: 2.3, label: 'Peripheral Nerve' },
+  { id: 'I0', r: 1.24, c: [1.00, 0.85, 0.30], fp: 2.4, label: 'Neural Interface' },
+  { id: 'N1', r: 1.10, c: [0.30, 0.90, 0.50], fp: 2.3, label: 'Spinal Cord' },
   { id: 'N4', r: 0.96, c: [0.40, 0.95, 0.60], fp: 2.2, label: 'Thalamic Relay' },
   { id: 'N7', r: 0.82, c: [0.80, 0.55, 0.75], fp: 2.0, label: 'Cortical Target' },
 ];

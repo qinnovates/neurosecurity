@@ -68,7 +68,7 @@ From silicon to synapse, from security to ethics, these connections run through 
 
 ## 1. Abstract
 
-Brain-computer interfaces are advancing from experimental medical devices toward consumer technology, yet no security framework addresses the unique physics of the neural-synthetic boundary. This paper presents the Quantified Interconnection Framework (QIF), an 11-band hourglass security architecture spanning from neural tissue to synthetic systems. QIF provides: a coherence metric (Cs) for real-time signal integrity monitoring grounded in spectral decomposition via the Short-Time Fourier Transform (STFT); TARA, a 109-technique dual-use threat taxonomy with four-dimensional projections across security, clinical, diagnostic, and governance domains; NISS v2.0, a proposed BCI-native severity scoring system extending CVSS with six neural impact dimensions, 42 ICD-10-CM neurological conditions, and five neurological weighting factors designed to address CVSS limitations for neural-specific impact assessment; and the Neural Sensory Protocol (NSP), a five-layer post-quantum communication protocol integrating coherence scoring with ML-KEM key exchange, ML-DSA authentication, and AES-256-GCM encryption.
+Brain-computer interfaces are advancing from experimental medical devices toward consumer technology, yet we are unaware of a security framework that addresses the unique physics of the neural-synthetic boundary. This paper presents the Quantified Interconnection Framework (QIF), an 11-band hourglass security architecture spanning from neural tissue to synthetic systems. QIF provides: a coherence metric (Cs) for real-time signal integrity monitoring grounded in spectral decomposition via the Short-Time Fourier Transform (STFT); TARA, a 109-technique dual-use threat taxonomy with four-dimensional projections across security, clinical, diagnostic, and governance domains; NISS v2.0, a proposed BCI-native severity scoring system extending CVSS with six neural impact dimensions, 42 ICD-10-CM neurological conditions, and five neurological weighting factors designed to address CVSS limitations for neural-specific impact assessment; and the Neural Sensory Protocol (NSP), a five-layer post-quantum communication protocol integrating coherence scoring with ML-KEM key exchange, ML-DSA authentication, and AES-256-GCM encryption.
 
 We identify five cross-domain attack coupling mechanisms by which synthetic-domain signals reach neural tissue, with intermodulation attacks representing the most dangerous class because they are undetectable from signal data alone. A CVE coverage analysis maps 55 NVD-verified CVEs to 21 of 109 TARA techniques, revealing an 81.25% clinical blind spot: attacks that are physically feasible and clinically harmful but have zero CVE tracking. Physics feasibility tiering classifies all 109 techniques by hardware gate, enabling timeline projections for when specific attacks become feasible.
 
@@ -98,7 +98,7 @@ The brain already has containment architecture, and it is layered. The BBB's end
 
 BCI electrode implantation *physically breaches* both layers, creating localized BBB disruption, immune cascades, glial scarring, and chronic neuronal loss [82]. The classical physics of what this containment protects was formalized by Hodgkin and Huxley (1952) [73], whose conductance model treats ion channels as deterministic gates --- effective, but incomplete at the nanoscale where quantum tunneling permits ion current through classically "closed" channels. Any containment architecture for BCIs must account for both classical and quantum-scale signal propagation.
 
-QIF is, at its foundation, containment architecture for the electrode-tissue interface --- the first proposed engineered boundary designed to attenuate harmful signals below a neural damage threshold while preserving the functional signaling the interface exists to measure. The 11-band hourglass is the architecture of that boundary. The coherence metric is its measurement. NSP is the protocol that enforces it.
+QIF is, at its foundation, containment architecture for the electrode-tissue interface --- a proposed engineered boundary designed to attenuate harmful signals below a neural damage threshold while preserving the functional signaling the interface exists to measure. The 11-band hourglass is the architecture of that boundary. The coherence metric is its measurement. NSP is the protocol that enforces it.
 
 That boundary is no longer theoretical. The devices that need it are already inside human skulls.
 
@@ -179,12 +179,12 @@ The investment data is compiled in a structured database (Section 7.8) and is qu
 
 ### 2.4 Statement of Novelty
 
-The core novelty of the Quantified Interconnection Framework is the **synthesis of BCI security, post-quantum cryptography, and neurosecurity governance into a single, integrated, and empirically falsifiable architecture.** While prior work exists in each domain individually, QIF is the first framework to formally connect them.
+The core novelty of the Quantified Interconnection Framework is the **synthesis of BCI security, post-quantum cryptography, and neurosecurity governance into a single, integrated, and empirically falsifiable architecture.** While prior work exists in each domain individually, QIF proposes to connect them formally; we are unaware of an earlier framework that does.
 
 Specifically, the contributions are not the individual components, but their integration:
 
-- **From Physics to Protocol.** QIF provides a continuous architectural path from signal integrity monitoring at the electrode-tissue boundary to a post-quantum cryptographic wire protocol (NSP). No other framework bridges this physical-to-digital gap.
-- **Mechanism-First Taxonomy.** The Locus Taxonomy and TARA registry are the first threat classification systems designed for the unique dual-use nature of neural interfaces, where attack vectors and therapeutic mechanisms share the same physics. 109 techniques across 7 domains and 11 tactics, each scored with a neural-native impact system (NISS).
+- **From Physics to Protocol.** QIF provides a continuous architectural path from signal integrity monitoring at the electrode-tissue boundary to a post-quantum cryptographic wire protocol (NSP). We are unaware of another framework that bridges this physical-to-digital gap.
+- **Mechanism-First Taxonomy.** The Locus Taxonomy and TARA registry are threat classification systems designed for the unique dual-use nature of neural interfaces, where attack vectors and therapeutic mechanisms share the same physics. 109 techniques across 7 domains and 11 tactics, each scored with a neural-native impact system (NISS).
 - **From Taxonomy to Policy.** QIF maps abstract neurorights (cognitive liberty, mental privacy, mental integrity, psychological continuity) to measurable technical controls, bridges the gap between medical device regulation and cybersecurity governance, and proposes concrete asks for six international standards bodies.
 - **Validated Reference Implementation.** Neurowall demonstrates that the coherence metric and policy engine can detect simulated neural attacks at 100% TPR / 0% FPR, moving the framework from theory to testable prototype.
 
@@ -213,7 +213,7 @@ This paper presents twenty contributions:
 17. An **investment gap analysis** quantifying $4.8B cumulative BCI venture capital deployment against $0 documented security spending, with TAM/SAM/SOM projections, automotive cybersecurity convergence timeline, and per-company risk profiling (Section 2.3.1).
 18. A **market trajectory analysis** applying five economic frameworks (institutional capital indexes, cross-sector capital flow, security spending lag model, technology adoption S-curve, Elliott Wave analysis) to position BCI in its pre-inflection window and project a $150M-1B+ neurosecurity TAM (Section 13).
 19. An **attack primitive decomposition** identifying six irreducible attack primitives from physics first principles (charge, field, signal, protocol, pattern, behavior), validated against all 109 TARA techniques and 12 BCI Limits Equation constraints, establishing why neuroethics and neurosecurity are operationally inseparable (Section 2.2.1).
-20. A **determinism gradient and neurorights decomposition** reframing the hourglass bands as a physics-grounded spectrum from deterministic (S-bands) through stochastic and chaotic (N1-N5) to quantum-indeterminate (N6-N7), and mapping four neurorights to four measurable dynamical system operations: input control, state preservation, trajectory preservation, and measurement protection (Section 9).
+20. A **determinism gradient and neurorights decomposition** proposing, as an untested hypothesis with no estimator defined, that the hourglass bands form a spectrum from deterministic (S-bands) through stochastic and chaotic (N1-N5) to quantum-indeterminate (N6-N7), and mapping four neurorights to four measurable dynamical system operations: input control, state preservation, trajectory preservation, and measurement protection (Section 9).
 
 ---
 
@@ -247,7 +247,7 @@ NIST finalized three post-quantum cryptography standards in 2024: ML-KEM (FIPS 2
 
 ### 3.5 The Gap QIF Addresses
 
-Despite advances in BCI security and post-quantum cryptography, no prior work synthesizes threat taxonomy, severity scoring, signal integrity monitoring, post-quantum protocols, and governance into a unified framework. The following table maps what each predecessor contributed and what remains unaddressed:
+Despite advances in BCI security and post-quantum cryptography, we are unaware of prior work that synthesizes threat taxonomy, severity scoring, signal integrity monitoring, post-quantum protocols, and governance into a unified framework. The following table maps what each predecessor contributed and what remains unaddressed:
 
 | Source | What They Did | What They Didn't Do |
 |--------|--------------|---------------------|
@@ -276,24 +276,26 @@ The complexity of an 11-band neural-synthetic stack requires more than a 2D diag
 
 ### 4.2 Impact Chain Visualization
 
-Aggregated threats are visualized using a **Neural Impact Chain (Network Graph)**. This creates a directed acyclic graph (DAG) where nodes represent hourglass bands and edges represent exploit paths (Mechanism A--E). This allow security operators to see not just *what* is targeted, but the **propagation path** through the neural hierarchy.
+Aggregated threats are visualized using a **Neural Impact Chain (Network Graph)**. This creates a directed acyclic graph (DAG) where nodes represent hourglass bands and edges represent associations by shared band (Mechanism A--E). This allow security operators to see not just *what* is targeted, but which other bands a technique is associated with. These are associations for threat modeling, not demonstrated neural paths.
 
 ### 4.1 Design Principles
 
-Three principles govern the design. **Width represents state space**: how many possible states exist at each band. The architecture is widest at the extremes and narrowest at the center. The **7-1-3 asymmetry** (7 neural bands, 1 interface band, 3 synthetic bands) reflects the real structure: two domains converging on a single bottleneck. The neural domain is wider because the brain has 500 million years of evolutionary complexity; the synthetic domain is human-designed with bounded complexity. **Bands are severity-stratified**: higher neural bands represent higher clinical severity if compromised.
+Three principles govern the design. **Width represents state space**: how many possible states exist at each band. The architecture is widest at the extremes and narrowest at the center. The **7-1-3 asymmetry** (7 neural bands, 1 interface band, 3 synthetic bands) reflects the real structure: two domains converging on a single bottleneck. The neural domain is wider because the brain has 500 million years of evolutionary complexity; the synthetic domain is human-designed with bounded complexity. **Band codes are addresses, not an order** (addressing version 2, 2026-10-06): the number carries no severity, processing or traversal meaning. Earlier versions described the bands as severity-stratified; that is withdrawn.
 
 ### 4.2 The 11-Band Stack
 
-**Neural Domain (Upper Hourglass) --- 7 bands, severity-stratified**
+**Neural Domain (Upper Hourglass) --- 7 bands (addressing version 2)**
+
+> Determinacy and Cs Range per band are **hypotheses**: untested, with no estimator defined. Circuits such as the basal ganglia and the limbic system are functional tags, not bands. Source of truth for membership: `datalake/qif-brain-bci-atlas.json`.
 
 | Band | Name | Key Structures | Determinacy | Cs Range |
 |------|------|---------------|-------------|----------|
 | N7 | Neocortex | PFC, M1, V1, A1, Broca, Wernicke, PMC, SMA, PPC | Quantum Uncertain | 0.3--0.5 |
-| N6 | Limbic System | Hippocampus, BLA, insula, ACC, cingulate | Chaotic to QU | 0.2--0.4 |
-| N5 | Basal Ganglia | Striatum, GPi/GPe, STN, substantia nigra | Chaotic | 0.15--0.35 |
-| N4 | Diencephalon | Thalamus, hypothalamus, VIM, ANT | Stochastic to Chaotic | 0.1--0.3 |
+| N6 | Allocortex | Hippocampus, BLA, insula, ACC, cingulate | Chaotic to QU | 0.2--0.4 |
+| N5 | Cerebral nuclei | Striatum, GPi/GPe, central amygdala | Chaotic | 0.15--0.35 |
+| N4 | Diencephalon | Thalamus, hypothalamus, STN, VIM, ANT | Stochastic to Chaotic | 0.1--0.3 |
 | N3 | Cerebellum | Cerebellar cortex, deep nuclei, vermis | Stochastic | 0.1--0.25 |
-| N2 | Brainstem | Medulla, pons, midbrain, reticular formation | Stochastic | 0.05--0.15 |
+| N2 | Brainstem | Medulla, pons, midbrain, substantia nigra, VTA, reticular formation | Stochastic | 0.05--0.15 |
 | N1 | Spinal Cord | Cervical, thoracic, lumbar, sacral, cauda equina | Stochastic | 0.01--0.1 |
 
 **Interface Zone (Bottleneck)**
@@ -310,7 +312,7 @@ Three principles govern the design. **Width represents state space**: how many p
 | S2 | Digital Processing | Decoding, algorithms, classification | Deterministic | ~0 |
 | S3 | Application | Clinical software, UI, data storage | Deterministic | 0 |
 
-The N4 band (Diencephalon) warrants special attention. The thalamic reticular nucleus (TRN) implements a biological analog of default-deny gating: all sensory input except olfaction must pass through the thalamus before reaching cortex, and the TRN actively suppresses relay neurons unless specific excitation criteria are met. This is not an analogy imposed from IT; it is a 500-million-year-old containment architecture that QIF's design mirrors at the I0 boundary. The thalamic gate is the brain's own firewall, and its failure modes (thalamic stroke causing sensory flooding, absence seizures caused by thalamocortical loop oscillation) map directly to denial-of-service attack patterns in the TARA registry.
+The N4 band (Diencephalon) warrants special attention (corrected 2026-10-06). The thalamus is the principal route by which sensory input (except the first cortical stage of olfaction), cerebellar output and basal ganglia output reach neocortex, and transmission through it is state-dependent, shaped in part by inhibition from the thalamic reticular nucleus (TRN). It is not a firewall, a default-deny gate or a security control: motor output, cortico-cortical traffic and neuromodulatory projections do not relay there. **Under review:** the earlier conclusions that the thalamus is a containment architecture QIF's design mirrors at the I0 boundary, and that its failure modes map directly to denial-of-service attack patterns in the TARA registry, rested on the gating analogy and need a new justification or withdrawal.
 
 ### 4.3 I0: The Bottleneck
 
@@ -320,11 +322,11 @@ The bottleneck geometry means all information must pass through the narrowest po
 
 ### 4.4 The Classical Ceiling
 
-The boundary between N6 (chaotic to quantum uncertain) and N7 (quantum uncertain) is the classical ceiling. Below it, all unpredictability is in principle resolvable with better measurement. Above it, the unpredictability is ontic, as established by Bell's theorem [64]. Classical security tools operate below the ceiling. QIF operates across the full spectrum.
+Under the determinacy hypothesis (untested, with no estimator defined), the boundary between N6 (chaotic to quantum uncertain) and N7 (quantum uncertain) would be the classical ceiling. Below it, all unpredictability is in principle resolvable with better measurement. Above it, the unpredictability is ontic, as established by Bell's theorem [64]. Classical security tools operate below the ceiling. QIF operates across the full spectrum.
 
 ### 4.5 Severity Stratification
 
-The 7-band neural decomposition enables severity-aware threat assessment. An attack targeting N7 (neocortex: cognition, language, executive function) has categorically higher clinical severity than one targeting N1 (spinal cord: reflex arcs). This maps directly to medical device risk classification. The threat taxonomy (Section 6.3--6.4) assigns band-level targeting to each attack, enabling severity-scored risk assessment via the NISS framework (Section 6.5).
+**Superseded (2026-10-06).** Earlier versions ordered the seven neural bands by clinical severity, with an attack targeting N7 (neocortex) ranked categorically above one targeting N1 (spinal cord). Under addressing version 2 the band number carries no severity meaning. The threat taxonomy (Section 6.3--6.4) still assigns band-level targeting to each attack; severity is scored per technique by the NISS framework (Section 6.5), not read from the band code.
 
 ### 4.6 Why Three Synthetic Bands: Frequency-Regime Security
 
@@ -541,7 +543,7 @@ QIF maintains a registry of **109 attack techniques** organized into **11 tactic
 
 Existing threat taxonomies (MITRE ATT&CK, CAPEC, CWE) were designed for traditional IT systems. They classify attacks by what happens to *software and networks*. Brain-computer interfaces require a taxonomy that classifies attacks by what happens to *neural tissue, cognition, and human identity*. This is a fundamentally different attack surface.
 
-The QIF Locus Taxonomy, developed by Qinnovate, addresses this gap. "Locus" refers to the anatomical or functional *location* where the attack operates --- neural, cognitive, physiological, data, device, model, or energy domain. The taxonomy was derived from an analysis of all known BCI attack techniques, grouping them by the primary system they target rather than the IT tactic they employ. It is the first threat classification system purpose-built for neural interfaces.
+The QIF Locus Taxonomy, developed by Qinnovate, addresses this gap. "Locus" refers to the anatomical or functional *location* where the attack operates --- neural, cognitive, physiological, data, device, model, or energy domain. The taxonomy was derived from an analysis of all known BCI attack techniques, grouping them by the primary system they target rather than the IT tactic they employ. It is a threat classification system purpose-built for neural interfaces; we are unaware of an earlier one.
 
 ### 6.4.2 Nomenclature
 
@@ -603,7 +605,7 @@ Each domain contains one or more tactics, each describing an adversary's operati
 
 Each of the 109 techniques is a structured record with 22+ fields spanning security, clinical, diagnostic, governance, and provenance dimensions. The core security fields include: Locus tactic, hourglass bands targeted, physical coupling mechanism, detection capability, evidence sources, evidence status, NISS severity score, and legacy cross-references. Beyond these, each technique carries:
 
-- **DSM-5 diagnostic mapping** (Section 6.10): Primary and secondary psychiatric diagnoses reachable through the technique's Neural Impact Chain, with confidence level and diagnostic cluster assignment.
+- **DSM-5 diagnostic mapping** (Section 6.10): Primary and secondary psychiatric diagnostic categories associated with the technique through its Neural Impact Chain, with confidence level and diagnostic cluster assignment.
 - **Neurorights impact**: Which of the four Ienca-Andorno neurorights (CL, MI, MP, PC) the technique threatens, plus a Consent Complexity Index (CCI) score (Section 12.1).
 - **FDORA/524B regulatory classification**: Whether the technique targets a "cyber device" under Section 524B, which of the five FDORA requirements apply (threat modeling, vulnerability assessment, security architecture, SBOM, patch management), a coverage score (0.0-1.0), and identified regulatory gaps.
 - **Physics feasibility tier**: Hardware gate classification (Tier 0-3 or software-only) with timeline projection and constraint system reference (Section 6.9).
@@ -795,11 +797,11 @@ NISS v1.x mapped outcomes exclusively to DSM-5-TR psychiatric categories. Neural
 | Band | Region | Neurological Conditions |
 |------|--------|------------------------|
 | N7 | Neocortex | Cortical blindness, expressive/receptive aphasia, alexia, central pain |
-| N6 | Limbic | Altered sensorium, emotional dysregulation, autonomic conditions |
-| N5 | Basal Ganglia | Tremor, dystonia, bradykinesia, dyskinesia, chorea |
+| N6 | Allocortex | Altered sensorium, emotional dysregulation, autonomic conditions |
+| N5 | Cerebral nuclei | Tremor, dystonia, bradykinesia, dyskinesia, chorea |
 | N4 | Thalamus | Tinnitus, paresthesia, central pain syndrome |
-| N3 | Brainstem | Vertigo, nystagmus, dysarthria, cardiac arrhythmia, syncope |
-| N2 | Cerebellum | Ataxia, intention tremor, dysmetria |
+| N3 | Cerebellum | Ataxia, intention tremor, dysmetria |
+| N2 | Brainstem | Vertigo, nystagmus, dysarthria, cardiac arrhythmia, syncope |
 | N1 | Spinal Cord | Spasticity, hyperreflexia, areflexia, neurogenic bladder |
 | I0 | Interface | All conditions (hardware-biology boundary) |
 
@@ -913,7 +915,7 @@ Repeated exposure to curated triggering content rewrites cognitive patterns over
 
 **Stage 4: Cognitive Exploitation** (`QIF-C.EX`, Band N6 -> N7)
 
-The brain's pattern-matching and threat-detection systems are exploited until they malfunction. Paranoia, hypervigilance, and conspiratorial thinking emerge as the limbic system (N6) receives persistent false-threat signals, and the prefrontal cortex (N7) cannot override them fast enough.
+The brain's pattern-matching and threat-detection systems are exploited until they malfunction. Paranoia, hypervigilance, and conspiratorial thinking emerge as limbic circuits (allocortex, N6) receive persistent false-threat signals, and the prefrontal cortex (N7) cannot override them fast enough.
 
 **Stage 5: Physiological Disruption** (`QIF-P.DS`, Band N5 -> N7)
 
@@ -1058,11 +1060,11 @@ The 7 Tier 0 techniques that also score NISS >= 7.0 (High) represent the highest
 
 ## 6.10 DSM-5 Diagnostic Mapping
 
-TARA's clinical dimension includes a systematic mapping of attack techniques to DSM-5-TR psychiatric diagnoses via the **Neural Impact Chain (NIC)**. The NIC traces the path from attack mechanism through targeted neural structures to observable clinical outcomes, using the hourglass band topology to determine which brain regions are affected and the NISS dimensions to predict which diagnostic clusters emerge.
+TARA's clinical dimension includes a systematic mapping of attack techniques to DSM-5-TR psychiatric diagnoses via the **Neural Impact Chain (NIC)**. The NIC associates an attack mechanism with neural structures and clinical outcome categories by shared hourglass band, with the NISS dimensions used to suggest which diagnostic clusters are associated. It is an association by shared band, not a traced neural path.
 
 **The NISS-DSM Bridge:**
 
-Each NISS impact dimension predicts a diagnostic cluster:
+Each NISS impact dimension is associated with a diagnostic cluster:
 
 | NISS Dimension | What It Measures | Predicted DSM Cluster |
 |---------------|------------------|-----------------------|
@@ -1085,11 +1087,11 @@ Each NISS impact dimension predicts a diagnostic cluster:
 
 **Band-to-Diagnosis Mapping:**
 
-The hourglass bands determine which diagnoses are reachable. An attack targeting N7 (neocortex) threatens schizophrenia-spectrum and executive function disorders. An attack targeting N6 (limbic) threatens mood and trauma disorders. An attack targeting N5 (basal ganglia) threatens movement and substance use disorders. Attacks confined to S1-S3 (synthetic bands) carry no direct diagnostic mapping because they do not reach neural tissue.
+The hourglass bands are used to associate techniques with diagnostic categories (for threat modeling purposes, not as diagnostic claims). An attack targeting N7 (neocortex) is associated with schizophrenia-spectrum and executive function disorder categories. An attack targeting N6 (allocortex) is associated with mood and trauma disorder categories. An attack targeting N5 (cerebral nuclei) is associated with movement and substance use disorder categories. Attacks confined to S1-S3 (synthetic bands) carry no direct diagnostic mapping because they do not reach neural tissue.
 
 Of 109 techniques, 102 carry DSM-5 mappings (7 are software-only with no neural pathway). 51 carry a "direct" risk class (the attack mechanism directly produces the diagnostic outcome), 9 carry "indirect" (the attack enables conditions for the outcome), and 42 carry "none" (silicon-only). 15 unique DSM-5 codes are represented across the registry.
 
-This mapping is, to our knowledge, the first systematic taxonomy linking BCI attack techniques to psychiatric diagnoses. It enables a new form of risk assessment: rather than asking "what system is compromised?" (the CVSS question), clinicians and regulators can ask "what diagnosis could result?" (the NISS question). The diagnostic mapping is not speculative; it follows from established neuroscience linking brain region disruption to clinical outcomes. What is new is formalizing these pathways in a machine-readable, per-technique registry.
+This mapping is a systematic taxonomy linking BCI attack techniques to psychiatric diagnostic categories; we are unaware of an earlier one. It enables a new form of risk assessment: rather than asking "what system is compromised?" (the CVSS question), clinicians and regulators can ask "what diagnostic category is associated?" (the NISS question). The mapping is a proposal and has not been validated: it draws on established neuroscience linking brain region disruption to clinical outcomes, but the per-technique associations are untested. What it adds is formalizing these associations in a machine-readable, per-technique registry.
 
 ## 7. Neural Sensory Protocol (NSP)
 
@@ -1141,7 +1143,7 @@ QIF mappings to STIX 2.1 objects:
 - **Clinical Modalities** -> `identity` (targeting sector: medical)
 - **NISS Scores** -> `external_references` (custom metadata)
 
-This enables existing Security Information and Event Management (SIEM) systems to ingest BCI threat data alongside traditional network indicators, the first such integration in the neurosecurity domain.
+This enables existing Security Information and Event Management (SIEM) systems to ingest BCI threat data alongside traditional network indicators.
 
 ### 7.5 Reference Implementation: `qtara` Python Package
 
@@ -1248,13 +1250,13 @@ If terahertz radiation cannot generate Davydov solitons in SNARE protein complex
 
 ## 9. The Determinism Gradient and Neurorights as Dynamical Operations
 
-The hourglass architecture (Section 4) was derived from neuroanatomy. But the 11 bands also encode a physics property that was not part of the original design: a gradient of determinism that runs from the synthetic base to the neural apex.
+The hourglass architecture (Section 4) was derived from neuroanatomy. We hypothesise that the 11 bands also reflect a physics property that was not part of the original design: a gradient of determinism that runs from the synthetic base to the neural apex. This is untested, no estimator is defined, and it was proposed for the version 1 band memberships; band codes themselves are addresses and carry no order.
 
 ### 9.1 The Hourglass as a Determinism Gradient
 
 **Hypothesis:** The QIF hourglass bands map onto a spectrum of dynamical system behavior, from fully deterministic at the synthetic end to quantum-indeterminate at the deepest neural layers.
 
-| Band Range | Behavior Class | Entropy Type | Example |
+| Band Range | Behavior Class (hypothesised, untested) | Entropy Type | Example |
 |-----------|---------------|-------------|---------|
 | S1-S3 (Synthetic) | Deterministic | Zero (designed systems) | AES encryption, protocol state machines |
 | I0 (Interface) | Boundary transition | Mixed | Electrode-tissue impedance, ADC quantization |
@@ -1262,7 +1264,7 @@ The hourglass architecture (Section 4) was derived from neuroanatomy. But the 11
 | N4-N5 (Neural, mid) | Chaotic | Kolmogorov-Sinai entropy | Recurrent cortical dynamics, sensitive dependence on initial conditions |
 | N6-N7 (Neural, deep) | Quantum-indeterminate | Von Neumann entropy | Ion channel gating at selectivity filter scale (~0.1 nm) |
 
-This gradient has operational consequences. Deterministic bands (S1-S3) are fully controllable: we designed them, we can verify them, we can patch them. Stochastic bands (N1-N3) are statistically characterizable: we cannot predict individual neural spikes, but we can bound their distributions and detect anomalies (this is what the coherence metric does). Chaotic bands (N4-N5) are deterministic in principle but unpredictable in practice: small perturbations grow exponentially, making long-horizon prediction impossible. Quantum-boundary bands (N6-N7) introduce irreducible randomness: per Bell's theorem, the outcomes at ion channel scale are not merely unknown but ontically undetermined.
+If the hypothesis holds, the gradient has operational consequences. Deterministic bands (S1-S3) are fully controllable: we designed them, we can verify them, we can patch them. Stochastic bands (N1-N3) are statistically characterizable: we cannot predict individual neural spikes, but we can bound their distributions and detect anomalies (this is what the coherence metric does). Chaotic bands (N4-N5) are deterministic in principle but unpredictable in practice: small perturbations grow exponentially, making long-horizon prediction impossible. Quantum-boundary bands (N6-N7) would introduce irreducible randomness: per Bell's theorem, the outcomes at ion channel scale are not merely unknown but ontically undetermined.
 
 The coherence metric $C_s$ operates in the classical regime (stochastic and chaotic bands). It measures statistical deviations from a calibrated baseline. It does not and cannot measure quantum-level disturbances, which is why the framework's original name (Quantum Indeterminacy) referenced a boundary condition, not a measurement target.
 
@@ -1316,7 +1318,7 @@ This paper delivered the twenty contributions outlined in Section 2.5:
 17. An **investment gap analysis** quantifying $4.8B cumulative VC deployment against $0 documented security spending, with market projections and convergence timeline (Section 2.3.1).
 18. A **market trajectory analysis** applying five economic frameworks to position BCI in its pre-inflection window and project a neurosecurity TAM of $150M-1B+ (Section 13).
 19. An **attack primitive decomposition** from physics first principles, identifying six irreducible primitives validated against all 109 TARA techniques and 12 BCI Limits Equation constraints (Section 2.2.1).
-20. A **determinism gradient and neurorights decomposition** reframing the hourglass as a physics-grounded spectrum from deterministic to quantum-indeterminate, and mapping four neurorights to four measurable dynamical system operations (Section 9).
+20. A **determinism gradient and neurorights decomposition** proposing, as an untested hypothesis, that the hourglass forms a spectrum from deterministic to quantum-indeterminate, and mapping four neurorights to four measurable dynamical system operations (Section 9).
 
 ### 10.2 What QIF Is Not
 
@@ -1665,7 +1667,7 @@ The constraint system extends Marblestone et al. (2013), which addressed thermal
 12. **Unified QI Equation.** The current coherence metric ($C_s = e^{-S_c}$) captures classical signal integrity. A theoretical extension incorporating quantum terms (ion channel tunneling, entanglement gated by decoherence, indeterminacy) remains a research direction: $QI(b,t) = e^{-(S_c + S_q)}$. This extension requires experimental measurement of the decoherence time $\tau_D$ at the electrode-tissue boundary, which is currently an unresolved question in quantum biology (estimates range from $10^{-13}$ seconds [15] to $10^{-3}$ seconds [55]). If $\tau_D$ proves to be very short, the quantum terms are negligible and $C_s$ is the complete metric. If longer coherence times are confirmed, the quantum terms provide additional attack detection capabilities. The framework is designed so this question is empirically resolvable rather than assumed.
 13. **Quantum State Tomography at the BCI Interface.** Measure the actual $\tau_D$ at a BCI electrode-tissue junction.
 14. **Tunneling Biometric Feasibility.** Single-channel patch clamp studies to determine individual variability in tunneling coefficients.
-15. **v4.0 Architecture Validation.** Map historical BCI adverse events to specific bands to test severity stratification.
+15. **v4.0 Architecture Validation.** Map historical BCI adverse events to specific bands to test whether band membership is associated with adverse-event type (severity stratification by band number was withdrawn in addressing version 2).
 16. **$H_{\text{interface}}$ Formulation.** Write down the total Hamiltonian $H_{\text{total}} = H_{\text{neuron}} + H_{\text{electrode}} + H_{\text{interface}} + H_{\text{environment}}$ for a specific BCI system.
 17. **Cardiac Intrinsic Nervous System as Independent Coherence Monitor.** The heart contains an intrinsic cardiac nervous system (ICNS) of approximately 40,000 neurons (Armour 1991, 2007; Shivkumar et al. 2016, *Journal of Clinical Investigation*) that sense, process, and retain information independently of central nervous system input. The vagus nerve, the primary conduit between heart and brain, is approximately 80% afferent (heart-to-brain) and 20% efferent (brain-to-heart) (Berthoud & Neuhuber 2000, *Autonomic Neuroscience*). The heart sends substantially more information to the brain than the brain sends to the heart --- not because the heart "thinks," but because the vagus nerve's fiber composition is asymmetrically weighted toward sensory transmission. Note: the afferent fibers carry all visceral signals (gut, lungs, heart), not cardiac signals exclusively; the 80/20 ratio describes the vagus nerve as a whole, not a dedicated cardiac-to-brain channel.
 

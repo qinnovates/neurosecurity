@@ -42,7 +42,7 @@ Risk increases with depth through the neural pathway:
 | Depth | Structure | Mechanism | DSM-5-TR | NISS NP |
 |-------|-----------|-----------|----------|---------|
 | 1 | Visual Cortex V1-V5 | SSVEP entrainment | G40.4, F44 | Transient |
-| 2 | Thalamic Gate (LGN/Pulvinar/TRN) | Gating, weakest during low arousal | (enables below) | N/A |
+| 2 | Thalamic relay (LGN/Pulvinar/TRN) | State-dependent relay; transmission varies with arousal | (under review: "enables below" rested on the gating analogy and needs a new justification or withdrawal) | N/A |
 | 3 | Amygdala (low road) | Emotional valence modification | F41.1, F41.0, F43.1 | Lasting |
 | 4 | Hypothalamus | HPA axis, cortisol, circadian | F51, F32 | Lasting-Permanent |
 | 5 | Prefrontal Cortex | Decision-making bias | F06.8 (sustained) | Cumulative |
@@ -60,7 +60,7 @@ When chained with T0040 (SAIL Lab sensory priming): escalates to ~7.8 (Critical 
 ```
 Technique: SSVEP Frequency Hijack
     ↓
-Hourglass Band: S3 (Display) → I0 (Retina) → N4 (Thalamus) → N7 (Visual Cortex V1)
+Associated bands (by shared band, not a traced path): S3 (Display), I0 (Retina), N4 (Thalamus), N7 (Visual Cortex V1)
     ↓
 Brain Structures: V1, V2-V5, LGN, Pulvinar, Amygdala (via low road)
     ↓

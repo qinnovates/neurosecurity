@@ -33,6 +33,16 @@ PUBMED_API = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
 # Rate limit: Crossref asks for max 50 req/sec; we'll be conservative
 RATE_LIMIT_SEC = 0.5
 
+# A technique id is QIF-Tnnnn. A variant id (QIF-Tnnnn-Vnn) is not a technique and has no number of its own.
+TECHNIQUE_ID_PATTERN = re.compile(r"^QIF-T(\d{4})$")
+FIRST_NEW_TECHNIQUE_NUMBER = 136
+
+
+def technique_number(technique_id: str) -> int | None:
+    """Sequence number of a technique id, or None when the id is not of the form QIF-Tnnnn."""
+    match = TECHNIQUE_ID_PATTERN.match(technique_id)
+    return int(match.group(1)) if match else None
+
 
 def resolve_doi(doi: str) -> dict | None:
     """Resolve a DOI via Crossref API. Returns metadata or None."""
@@ -145,7 +155,7 @@ def main():
 
     if new_only:
         # Only check T0136+ (new techniques from this session)
-        techniques = [t for t in techniques if int(t["id"].replace("QIF-T", "")) >= 136]
+        techniques = [t for t in techniques if (technique_number(t["id"]) or 0) >= FIRST_NEW_TECHNIQUE_NUMBER]
         print(f"Verifying citations for {len(techniques)} new techniques (T0136+)")
     else:
         print(f"Verifying citations for {len(techniques)} techniques")

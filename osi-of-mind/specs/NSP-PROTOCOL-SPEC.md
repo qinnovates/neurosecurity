@@ -1056,14 +1056,14 @@ The QI score is computed BEFORE encryption. The QI fields in the header are encr
 
 ### 6.4 Band-Specific Parameters
 
-QI computation parameters vary by QIF band. The following table defines expected ranges for each band.
+QI computation parameters vary by QIF band. The following table defines expected ranges for each band. These ranges are hypotheses: untested, with no estimator defined (`datalake/qif-hypotheses.json`).
 
 | Band | Expected QI Range | Dominant Terms | Notes |
 |------|------------------|----------------|-------|
 | N7 | 0.3 - 0.5 | sigma2_phi, H_tau | Neocortex. High natural variability. Widest acceptance window. |
-| N6 | 0.2 - 0.4 | sigma2_phi, H_tau | Limbic system. Emotion/memory introduces variability. |
-| N5 | 0.15 - 0.35 | sigma2_phi, sigma2_gamma | Basal ganglia. Pathological beta oscillations (Parkinson's). |
-| N4 | 0.1 - 0.3 | sigma2_phi, sigma2_gamma | Diencephalon/thalamus. Sensory gating variability. |
+| N6 | 0.2 - 0.4 | sigma2_phi, H_tau | Allocortex. Emotion/memory introduces variability. |
+| N5 | 0.15 - 0.35 | sigma2_phi, sigma2_gamma | Cerebral nuclei. Pathological beta oscillations in the basal ganglia circuit (Parkinson's). |
+| N4 | 0.1 - 0.3 | sigma2_phi, sigma2_gamma | Diencephalon/thalamus. State-dependent relay variability. |
 | N3 | 0.1 - 0.25 | sigma2_gamma | Cerebellum. Complex spike timing. |
 | N2 | 0.05 - 0.15 | H_tau, sigma2_gamma | Brainstem. Low variability, vital function monitoring. |
 | N1 | 0.01 - 0.1 | sigma2_gamma | Spinal cord. Reflex arcs, low natural variability. |
@@ -1072,7 +1072,7 @@ QI computation parameters vary by QIF band. The following table defines expected
 | S2 | ~0 | All terms ~0 | Digital processing. Deterministic. Any anomaly is suspect. |
 | S3 | 0 | N/A | Application layer. QI not computed here. |
 
-Implementations MUST calibrate QI thresholds per band. A QI score of 0.2 in band N3 is normal. A QI score of 0.2 in band S1 indicates a severe anomaly.
+Implementations MUST calibrate QI thresholds per band. Under the hypothesised ranges above, a QI score of 0.2 in band N3 would be normal and a QI score of 0.2 in band S1 would indicate a severe anomaly.
 
 ### 6.5 QI Limitations
 

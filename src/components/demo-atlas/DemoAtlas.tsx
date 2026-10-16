@@ -11,7 +11,7 @@
  * repository-wide Apache 2.0 license. Commercial use requires written permission.
  */
 
-import { useState, useMemo, useCallback, useEffect, type CSSProperties } from 'react';
+import { useState, useMemo, useCallback, useEffect, type CSSProperties, type JSX } from 'react';
 import NTSSGauge, { computeNTSS } from './NTSSGauge';
 
 // ── Types ──────────────────────────────────────────────────────────────

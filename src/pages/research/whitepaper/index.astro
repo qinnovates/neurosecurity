@@ -132,7 +132,7 @@ const tacticColors: Record<string, string> = {
           <h2 class="text-xl font-bold font-[family-name:var(--font-heading)] mb-4">Executive Summary</h2>
           <div class="space-y-3 text-sm text-[var(--color-text-muted)]">
             <p>
-              Brain-computer interfaces are shipping in human skulls with no security standard protecting them. The same techniques used therapeutically to treat depression, Parkinson's, and blindness can be weaponized through the same physical mechanisms. The difference between therapy and attack is consent, dosage, and oversight. No existing framework addresses this.
+              Brain-computer interfaces are shipping in human skulls without a BCI-specific security standard protecting them. The same techniques used therapeutically to treat depression, Parkinson's, and blindness can be weaponized through the same physical mechanisms. The difference between therapy and attack is consent, dosage, and oversight. We found no existing framework that addresses this.
             </p>
             <p>
               QIF is a proposed open security framework for neural devices. It provides three things: <strong>TARA</strong>, a catalog of {stats.totalTechniques} attack techniques mapped to their therapeutic analogs across 11 biological domains; <strong>NISS</strong>, a 6-dimensional severity scoring system that captures what CVSS cannot (biological impact, consent violation, reversibility, neuroplasticity); and <strong>NSP</strong>, a post-quantum wire protocol designed for the 50+ year lifespan of implanted devices.
@@ -169,7 +169,7 @@ const tacticColors: Record<string, string> = {
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Author's Note</h2>
         <div class="prose">
           <p>
-            I built this framework because no one else had. To my knowledge, there was no threat model for the human mind. So I wrote one.
+            I built this framework because I could not find one. To my knowledge, there was no threat model for the human mind. So I wrote one.
           </p>
           <p>
             It started with a question: what would threat modeling for the human mind look like? That question led me into the world of brain-computer interfaces, and quickly made clear that you cannot build for the brain the way you build for a screen. The technical architecture alone is not enough. To do this right from the design phase, I applied two decades of security instincts and went deep into the disciplines that should inform every decision at this layer: neuroethics, AI ethics, and the emerging fields of neurorights and neuroprivacy.
@@ -706,7 +706,7 @@ const tacticColors: Record<string, string> = {
         <div class="glass rounded-xl p-6 mt-8 border-l-4 border-[#ef4444]">
           <p class="font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-2">The gap in numbers</p>
           <p class="text-sm text-[var(--color-text-muted)]">
-            CVSS v4.0 cannot score {stats.nissGapPercentage}% of the catalogued techniques. Their neural-specific impacts have no CVSS equivalent. Before NISS, no scoring framework could quantify biological impact, cognitive disruption, consent violation, reversibility, or neuroplastic change.
+            CVSS v4.0 cannot score {stats.nissGapPercentage}% of the catalogued techniques. Their neural-specific impacts have no CVSS equivalent. We are not aware of a scoring framework before NISS that quantifies biological impact, cognitive disruption, consent violation, reversibility, or neuroplastic change.
           </p>
         </div>
 
@@ -813,11 +813,11 @@ const tacticColors: Record<string, string> = {
           </p>
           <ol>
             <li><strong>The OSI model</strong> (<a href="https://www.iso.org/standard/20269.html" class="text-[var(--color-accent-primary)]">ISO/IEC 7498</a>) &mdash; 7 layers that decompose a network into physical, data link, network, transport, session, presentation, and application. Every security framework for digital systems uses some variant of this decomposition. But the OSI model stops at the wire. It has no concept of the biological system connected to the other end.</li>
-            <li><strong>Neural systems anatomy</strong> (<a href="https://neurology.mhmedical.com/book.aspx?bookid=3024" class="text-[var(--color-accent-primary)]">Kandel et al., <em>Principles of Neural Science</em>, 6th ed., 2021</a>) &mdash; The brain is not a single structure. It is a hierarchy of functionally distinct regions: spinal cord, brainstem, cerebellum, diencephalon (thalamus/hypothalamus), basal ganglia, limbic system, and neocortex. Each has different cellular architecture, different oscillatory regimes, and different clinical consequences if compromised. The 7 neural bands (N7&ndash;N1) map directly to this established neuroanatomical hierarchy, with thalamic relay logic (<a href="https://mitpress.mit.edu/9780262513449/exploring-the-thalamus-and-its-role-in-cortical-function/" class="text-[var(--color-accent-primary)]">Sherman &amp; Guillery, 2006</a>) providing the gating mechanism between cortical and subcortical layers. An architecture that treats &ldquo;the brain&rdquo; as one layer misses this entirely.</li>
+            <li><strong>Neural systems anatomy</strong> (<a href="https://neurology.mhmedical.com/book.aspx?bookid=3024" class="text-[var(--color-accent-primary)]">Kandel et al., <em>Principles of Neural Science</em>, 6th ed., 2021</a>) &mdash; The brain is not a single structure. It is a set of anatomically distinct territories: spinal cord, brainstem, cerebellum, diencephalon (thalamus/hypothalamus), cerebral nuclei, allocortex, and neocortex. Each has different cellular architecture, different oscillatory regimes, and different clinical consequences if compromised. The 7 neural bands (N7&ndash;N1) are addresses for these territories, not an order: the number carries no severity, processing or traversal meaning. The thalamus (<a href="https://mitpress.mit.edu/9780262513449/exploring-the-thalamus-and-its-role-in-cortical-function/" class="text-[var(--color-accent-primary)]">Sherman &amp; Guillery, 2006</a>) is the principal route by which sensory input (except the first cortical stage of olfaction), cerebellar output and basal ganglia output reach neocortex; transmission through it is state-dependent. An architecture that treats &ldquo;the brain&rdquo; as one layer misses this entirely.</li>
             <li><strong>The bio-digital boundary</strong> (<a href="https://www.ietf.org/proceedings/51/slides/plenary-1/" class="text-[var(--color-accent-primary)]">Deering, 2001</a>; the Internet hourglass principle) &mdash; Where electrodes touch tissue, signals transition from ionic to electronic. This is not a clean handoff. It is a physical interface with its own impedance characteristics, its own failure modes, and its own threat profile. The I0 band applies Deering&rsquo;s hourglass insight &mdash; that all traffic must pass through a narrow waist &mdash; to the electrode-tissue boundary, where every neural signal crosses from biology to silicon. Neither the OSI model nor neuroanatomy alone accounts for this zone.</li>
           </ol>
           <p>
-            QIF maps all three onto a single stack. The 7 neural bands (N7&ndash;N1) come from neuroanatomy, ordered by clinical severity. The 3 synthetic bands (S1&ndash;S3) come from the electronic processing chain, analogous to OSI's lower layers. The interface band (I0) is the bridge &mdash; the electrode-tissue boundary where biology becomes data. The result is an 11-band, <strong>7-1-3 asymmetric hourglass</strong>: wide at the top (neural complexity), narrow at the center (physical bottleneck), and wider at the bottom (synthetic processing).
+            QIF maps all three onto a single stack. The 7 neural bands (N7&ndash;N1) come from neuroanatomy; the codes are addresses, not an order of severity. The 3 synthetic bands (S1&ndash;S3) come from the electronic processing chain, analogous to OSI's lower layers. The interface band (I0) is the bridge &mdash; the electrode-tissue boundary where biology becomes data. The result is an 11-band, <strong>7-1-3 asymmetric hourglass</strong>: wide at the top (neural complexity), narrow at the center (physical bottleneck), and wider at the bottom (synthetic processing).
           </p>
         </div>
 
@@ -855,7 +855,7 @@ const tacticColors: Record<string, string> = {
           <h4 class="font-semibold font-[family-name:var(--font-heading)] mb-3 text-sm">How to read the hourglass</h4>
           <div class="space-y-2 text-sm text-[var(--color-text-muted)]">
             <p>
-              <strong class="text-[var(--color-text-primary)]">Y-axis (vertical):</strong> Bands ordered by anatomical hierarchy, from neocortex (N7) at the top through the electrode-tissue interface (I0) at the waist to radio/wireless (S3) at the bottom.
+              <strong class="text-[var(--color-text-primary)]">Y-axis (vertical):</strong> Bands listed by address (the order carries no severity, processing or traversal meaning), from neocortex (N7) at the top through the electrode-tissue interface (I0) at the waist to radio/wireless (S3) at the bottom.
             </p>
             <p>
               <strong class="text-[var(--color-text-primary)]">X-axis (bar width):</strong> Number of catalogued techniques targeting that band. Wider bars mean a larger attack surface. I0 is the widest because every technique that crosses the bio-digital boundary converges at this single point.
@@ -967,7 +967,7 @@ const tacticColors: Record<string, string> = {
           {latestChange && (
             <div class="glass-subtle rounded-lg p-4 mt-4" style="border-left: 3px solid var(--color-status-safe);">
               <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-status-safe)] mb-1">Latest &middot; v{latestChange.version}</p>
-              <p class="text-sm text-[var(--color-text-muted)] mb-2">{latestChange.title}: {latestChange.added?.length ?? 0} new techniques, all with confirmed clinical applications.</p>
+              <p class="text-sm text-[var(--color-text-muted)] mb-2">{latestChange.title}. New techniques: {latestChange.added?.length ?? 0}. New variants: {latestChange.added_variants?.length ?? 0}.</p>
               <ul class="text-xs text-[var(--color-text-muted)] space-y-0.5 mb-2">
                 {latestChange.therapeutic_highlights.map((h: string) => (
                   <li class="flex items-start gap-1.5">
@@ -1279,16 +1279,16 @@ const tacticColors: Record<string, string> = {
         <div class="glass rounded-xl p-6 mb-8" style="border-left: 4px solid var(--color-accent-secondary);">
           <p class="text-sm font-semibold text-[var(--color-accent-secondary)] mb-2">Why this matters</p>
           <p class="text-sm text-[var(--color-text-muted)]">
-            When a BCI attack disrupts your amygdala, what are the potential clinical consequences? The Neural Impact Chain traces this question for every technique in the atlas — as threat modeling references, not diagnostic claims. Neuroscience does not yet fully understand how the brain produces cognition and emotion (Morse, 2006); these mappings reflect current knowledge and will evolve as the science matures.
+            When a BCI attack disrupts your amygdala, what are the potential clinical consequences? The Neural Impact Chain addresses this question for every technique in the atlas — as threat modeling references, not diagnostic claims. Neuroscience does not yet fully understand how the brain produces cognition and emotion (Morse, 2006); these mappings reflect current knowledge and will evolve as the science matures.
           </p>
         </div>
 
         <div class="prose mb-8">
           <p>
-            The Neural Impact Chain (NIC) is a six-stage mapping that traces every technique from its physical mechanism to its potential clinical outcome for threat modeling purposes. For each entry in TARA, the chain identifies the targeted hourglass band, the affected neural structure, the disrupted cognitive or motor function, the resulting NISS severity score, and the corresponding DSM-5-TR diagnostic reference. These references illustrate the potential severity of sustained attack patterns; they are not diagnostic predictions.
+            The Neural Impact Chain (NIC) is a six-stage mapping that associates every technique, from its physical mechanism, with a potential clinical outcome for threat modeling purposes. For each entry in TARA, the chain identifies the targeted hourglass band, the affected neural structure, the disrupted cognitive or motor function, the resulting NISS severity score, and the corresponding DSM-5-TR diagnostic reference. These references illustrate the potential severity of sustained attack patterns; they are not diagnostic predictions. The chain links a technique to an outcome by shared band; it is an association, not a demonstrated neural path.
           </p>
           <p>
-            To our knowledge, this represents a <strong>systematic mapping from cybersecurity severity to clinical outcome references</strong>. It traces a structured pathway: specific techniques, applied to specific neural bands, produce functional impacts that correspond to recognized clinical conditions. A security engineer can see that a technique targeting the limbic system (N6) with high cognitive integrity impact references mood and trauma-related disorders. A clinician can see that the same attack vector shares its mechanism with an FDA-approved therapy. These references must be interpreted with caution — neural correlates do not prove causation, and the brain's complexity means that identical stimulation can produce different outcomes across individuals.
+            To our knowledge, this represents a <strong>systematic mapping from cybersecurity severity to clinical outcome references</strong>. It records a structured association: specific techniques, applied to specific neural bands, are associated with functional impacts that correspond to recognized clinical condition categories. A security engineer can see that a technique targeting the allocortex (N6) with high cognitive integrity impact references mood and trauma-related disorders. A clinician can see that the same attack vector shares its mechanism with an FDA-approved therapy. These references must be interpreted with caution — neural correlates do not prove causation, and the brain's complexity means that identical stimulation can produce different outcomes across individuals.
           </p>
           <p>
             This is the bridge between cybersecurity and clinical neuroscience that we found missing from existing frameworks.
@@ -1352,7 +1352,7 @@ const tacticColors: Record<string, string> = {
         <div class="glass rounded-xl p-6 mb-8" style="border-left: 4px solid var(--color-accent-tertiary);">
           <p class="text-sm font-semibold text-[var(--color-accent-tertiary)] mb-2">From diagnosis to rights</p>
           <p class="text-sm text-[var(--color-text-muted)]">
-            The Neural Impact Chain tells us what psychiatric harm a technique can cause. The neurorights mapping asks the next question: <strong>which fundamental rights does it violate?</strong>
+            The Neural Impact Chain tells us which psychiatric categories a technique is associated with. The neurorights mapping asks the next question: <strong>which fundamental rights does it violate?</strong>
           </p>
         </div>
 
@@ -1648,7 +1648,7 @@ const tacticColors: Record<string, string> = {
             The device market confirms the urgency. To our knowledge, no BCI manufacturer, Neuralink, Synchron, Blackrock Neurotech, OpenBCI, or Emotiv, has published an independent security audit or a full wireless security specification. Emotiv&rsquo;s AES-128-ECB encryption was <a href="https://www.cryptofails.com/post/70333773685/broadcast-your-brain-fixed-key-ecb-mode" class="text-[var(--color-accent-primary)]">disclosed as using broken ECB mode in 2013</a>. OpenBCI&rsquo;s protocol documentation contains zero mentions of encryption. A 2021 ACM&nbsp;Computing&nbsp;Surveys review concluded that &ldquo;from the security perspective, BCIs are in an early and immature stage&rdquo; (<a href="https://dl.acm.org/doi/10.1145/3427376" class="text-[var(--color-accent-primary)]">Bernal&nbsp;et&nbsp;al.</a>).
           </p>
           <p class="text-sm text-[var(--color-text-muted)] mb-3">
-            Meanwhile, NIST&rsquo;s IR&nbsp;8547 transition timeline mandates deprecation by 2030 and disallowance by 2035 &mdash; but provides <strong>no device-specific migration guidance</strong> for BLE, IoT, or medical devices. No existing standard tells a BCI manufacturer how to migrate from ECDH to ML-KEM on a 40&nbsp;mW power budget.
+            Meanwhile, NIST&rsquo;s IR&nbsp;8547 transition timeline mandates deprecation by 2030 and disallowance by 2035 &mdash; but provides <strong>no device-specific migration guidance</strong> for BLE, IoT, or medical devices. We found no existing standard that tells a BCI manufacturer how to migrate from ECDH to ML-KEM on a 40&nbsp;mW power budget.
           </p>
           <p class="text-sm text-[var(--color-text-muted)]">
             Beyond cryptography, no existing protocol performs <strong>physics-based signal validation</strong> (verifying neural signals match expected brain activity patterns) or <strong>per-user adaptive anomaly detection</strong> (learning each patient&rsquo;s unique neural baseline to catch slow-drift attacks). Both remain research-stage concepts with no deployed implementations. NSP addresses all three gaps &mdash; PQC at I0, signal integrity, and adaptive detection &mdash; as a single protocol designed for constrained neural hardware.

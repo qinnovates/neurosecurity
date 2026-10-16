@@ -6,7 +6,7 @@ function buildCatalog(ids: readonly string[]) {
     id,
     name: `Technique ${position}`,
     status: 'THEORETICAL' as const,
-    niss: { version: '1.1', vector: '', score: position + 0.5, severity: 'medium' as const, pins: false },
+    niss: { version: '1.1', vector: '', score: position + 0.5, severity: 'medium' as const, pins: false, scoring_state: 'scored' as const },
   }));
 }
 

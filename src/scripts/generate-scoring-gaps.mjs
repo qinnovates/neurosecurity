@@ -70,8 +70,11 @@ const METRIC_REQUIREMENTS = [
 
 const registrar = JSON.parse(readFileSync(REGISTRAR_PATH, 'utf8'));
 const techniques = registrar.techniques;
-const unscored = techniques.filter((technique) => !technique.niss?.vector);
-const scored = techniques.filter((technique) => technique.niss?.vector);
+const scored = techniques.filter((technique) => technique.niss?.scoring_state === 'scored');
+const provisional = techniques.filter((technique) => technique.niss?.scoring_state === 'provisional');
+const unscored = techniques.filter((technique) => technique.niss?.scoring_state === 'unscored');
+const notScored = techniques.filter((technique) => technique.niss?.scoring_state !== 'scored');
+const UNKNOWN_METRIC = 'unknown';
 
 function countBy(items, key) {
   return items.reduce((totals, item) => {
@@ -81,12 +84,23 @@ function countBy(items, key) {
   }, {});
 }
 
-const unscoredRecords = unscored.map((technique) => {
+function supportedMetrics(technique) {
+  return Object.entries(technique.niss?.metrics ?? {})
+    .filter(([, value]) => value !== UNKNOWN_METRIC)
+    .map(([metric, value]) => `${metric}:${value}`);
+}
+
+const unscoredRecords = notScored.map((technique) => {
   const missing = METRIC_REQUIREMENTS.filter((requirement) => !requirement.isPresent(technique));
   return {
     id: technique.id,
     attack: technique.attack,
     status: technique.status,
+    scoring_state: technique.niss?.scoring_state ?? 'unscored',
+    unscored_reason: technique.niss?.unscored_reason ?? null,
+    metrics_supported: supportedMetrics(technique),
+    score_min: technique.niss?.score_min ?? null,
+    score_max: technique.niss?.score_max ?? null,
     legacy_severity: technique.severity,
     tara_mode: technique.tara_mode ?? null,
     source_count: (technique.sources ?? []).length,
@@ -110,13 +124,21 @@ const output = {
     summary: {
       total_techniques: techniques.length,
       scored: scored.length,
+      provisional: provisional.length,
       unscored: unscored.length,
-      id_range: unscored.length ? `${unscored[0].id} to ${unscored[unscored.length - 1].id}` : null,
-      by_status: countBy(unscored, 'status'),
-      by_mode: countBy(unscored, (technique) => technique.tara_mode ?? 'none'),
+      by_unscored_reason: countBy(unscored, (technique) => technique.niss?.unscored_reason ?? 'not_stated'),
+      id_range: notScored.length ? `${notScored[0].id} to ${notScored[notScored.length - 1].id}` : null,
+      by_status: countBy(notScored, 'status'),
+      by_mode: countBy(notScored, (technique) => technique.tara_mode ?? 'none'),
+    },
+    scoring_states: {
+      scored: 'All six metrics are supported by the entry\'s sources. A vector and a score are stored.',
+      provisional:
+        'At least one metric is supported and at least one is not. The supported values are stored with the source for each; score_min and score_max are the lowest and highest results the formula gives when each unknown metric ranges over its allowed values. They are a bound, not an estimate, and no score is stored.',
+      unscored: 'The entry has no peer-reviewed source, or its sources report none of the six effects the metrics measure.',
     },
     why_unscored:
-      'NISS codes six metrics. Four of them (Biological Impact, Cognitive/Functional Disruption, Reversibility, Neuroplasticity) are claims about physical effect and persistence. These entries record the modality, its dual-use clinical counterpart and a physics feasibility tier, but not the effect, dose, persistence or access model, so those metrics cannot be coded from the entry without inventing evidence. Scoring them would produce numbers that look computed but are not.',
+      'NISS codes six metrics, and a metric is coded only when a source on the entry reports the effect that metric measures. Most of these entries cite physiology or therapy studies: they report a mechanism, sometimes a functional effect, and almost never a consent setting or the reversibility of harm. Entries whose only sources are preprints carry no metric at all. Coding the missing metrics would produce numbers that look computed but are not.',
     what_would_change_this:
       'Per technique: a cited measurement of the physical effect and its dose, a functional or clinical outcome mapping, an access and coupling model, and evidence on persistence. The sources already cited on each entry are the place to start.',
     requirements: METRIC_REQUIREMENTS.map(({ metric, name, needs }) => ({ metric, name, needs })),
@@ -132,7 +154,7 @@ const output = {
         population: `${scored.length} scored techniques`,
         scale: registrar.niss_spec.severity_scale,
         distribution: countBy(scored, (technique) => technique.niss.severity),
-        authoritative_for: 'Any statement about neural impact severity. This is what the site displays.',
+        authoritative_for: 'Ranking, and any statement about neural impact severity. Technique pages show it beside the NISS score.',
       },
       {
         field: 'severity',
@@ -140,11 +162,11 @@ const output = {
         population: `all ${techniques.length} techniques`,
         distribution: countBy(techniques, 'severity'),
         authoritative_for:
-          'Nothing published. Retained because it is the only severity value the 26 unscored techniques carry.',
+          `Nothing; it is not a ranking. Technique pages show it as "Filed severity" and several catalog views still colour entries by it. Retained because it is the only severity value the ${notScored.length} techniques without a score carry.`,
       },
     ],
     known_conflict:
-      'No scored technique reaches NISS critical, while the legacy field marks some critical. The two are not comparable: the legacy field was not produced by the NISS formula.',
+      `The two labels differ on ${scored.filter((technique) => technique.severity !== technique.niss.severity).length} of the ${scored.length} scored techniques. No scored technique reaches NISS critical, while the legacy field marks some critical. The two are not comparable: the legacy field was not produced by the NISS formula.`,
     resolution_status:
       'Open framework decision: whether to retire the legacy field, rename it so it cannot be mistaken for a NISS score, or keep it as a separate recorded assessment.',
   },
@@ -152,6 +174,6 @@ const output = {
 
 writeFileSync(OUTPUT_PATH, `${JSON.stringify(output, null, 2)}\n`);
 console.log(
-  `[scoring-gaps] ${unscored.length} unscored of ${techniques.length}; ` +
+  `[scoring-gaps] ${scored.length} scored, ${provisional.length} provisional, ${unscored.length} unscored of ${techniques.length}; ` +
     `metrics determinable per technique: ${[...new Set(unscoredRecords.map((r) => r.metrics_determinable))].sort().join(', ')} of 6`,
 );

@@ -29,9 +29,11 @@ interface Props {
 // Dataset descriptions for known tables
 const DESCRIPTIONS: Record<string, { label: string; description: string; category: string }> = {
   techniques: { label: 'TARA Techniques', description: 'BCI threat techniques with NISS scores, severity, and dual-use classification', category: 'Threats' },
+  variants: { label: 'TARA Technique Variants', description: 'Variants of a technique: same mechanism, tactic and harm as one parent, differing in one named dimension. Counted apart from techniques; proposed and unvalidated', category: 'Threats' },
   technique_dsm: { label: 'Technique-DSM Bridge', description: 'Maps techniques to DSM-5-TR diagnostic categories (for threat modeling)', category: 'Threats' },
   technique_neurorights: { label: 'Technique-Neurorights', description: 'Maps techniques to the 5 neurorights they affect', category: 'Threats' },
-  impact_chains: { label: 'Impact Chains', description: 'Precomputed threat-to-outcome chains across the neural stack', category: 'Threats' },
+  impact_chains: { label: 'Impact Chains', description: 'Technique-to-condition associations by shared band, for threat modeling only: not demonstrated neural paths and not diagnostic claims', category: 'Threats' },
+  hazards: { label: 'Non-Adversarial Hazards', description: 'Hazards with no attacker, such as loss of device support. Kept apart from attack techniques; proposed and unvalidated, for threat modeling only', category: 'Threats' },
   brain_regions: { label: 'Brain Regions', description: '38 brain structures mapped to the QIF hourglass model', category: 'Anatomy' },
   hourglass_bands: { label: 'Hourglass Bands', description: 'The 11 QIF bands spanning silicon to neural', category: 'Framework' },
   companies: { label: 'BCI Companies', description: '57 companies in the BCI landscape with funding and security posture', category: 'Industry' },

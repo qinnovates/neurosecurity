@@ -101,7 +101,7 @@ The window for this is finite. Once devices ship at scale with baked-in architec
 
 This paper does three things.
 
-**First, it maps the full attack surface** of brain-computer interfaces — not hypothetically, but technically. 165 attack techniques across 8 domains, scored with a neural-specific severity system (NISS), cataloged in a dual-use registry (TARA) that bridges security and medicine. Every technique that can harm can also heal. The boundary between the two is consent, dosage, and oversight. The Neural Impact Chain traces each attack from physical mechanism through neural band to clinical outcome, mapped to DSM-5-TR diagnostic categories for threat modeling purposes.
+**First, it maps the full attack surface** of brain-computer interfaces — not hypothetically, but technically. 165 attack techniques across 8 domains, scored with a neural-specific severity system (NISS), cataloged in a dual-use registry (TARA) that bridges security and medicine. Every technique that can harm can also heal. The boundary between the two is consent, dosage, and oversight. The Neural Impact Chain associates each attack, by the neural band it shares with a clinical outcome, with DSM-5-TR diagnostic categories for threat modeling purposes; these are associations by shared band, not demonstrated neural paths.
 
 **Second, it proposes the architecture.** An 11-band security model (the QIF Hourglass) spanning from quantum physics to social engineering. A post-quantum encrypted wire protocol (NSP). A rendering pipeline (Runemate) that eliminates the browser, the app store, and every unnecessary layer between patient and experience. A passwordless authentication system (PQKC + Biomarker MFA) built on cryptographic identity and biological uniqueness. A five-tier guardrail model distinguishing physics constraints from policy decisions. A neural operating system mapped to the Linux model that has proven itself across five decades. A patient terminal that gives direct, scriptable, auditable control — not through a prescribed interface, but through autodidactic navigation where each patient designs their own way of interacting with the system.
 
@@ -233,7 +233,7 @@ New sections (12-18) address: patient sovereignty, the neural terminal, autonomy
   - 4.2 The 11-Band Stack (7 Neural + I0 + 3 Synthetic)
   - 4.3 I0: The Bottleneck
   - 4.4 The Classical Ceiling
-  - 4.5 Severity Stratification
+  - 4.5 Severity Stratification (superseded by addressing version 2, 2026-10-06: band codes are addresses, not a severity order)
   - 4.6 Frequency-Regime Security
 - [5. The Unified QI Equation](#5-the-unified-qi-equation)
   - 5.1 QI(b,t) = e^{-S(b,t)}
@@ -349,7 +349,7 @@ Framework:  QIF Hourglass (11 bands) — defines WHAT to protect
                 │   └── Governance projection (consent, limits, regulation)
                 │
                 ├── Case Study: Algorithmic Psychosis — DEMONSTRATES the chain
-                │   └── Neural Impact Chain: mechanism → band → clinical outcome
+                │   └── Neural Impact Chain: mechanism → band → clinical outcome (association by shared band)
                 │       └── DSM-5-TR mapping (for threat modeling, not diagnosis)
                 │
                 └── Falsifiability — 5 conditions that would weaken/invalidate
@@ -466,7 +466,7 @@ Visualizations that exist on the site and can be referenced/embedded in the whit
 | 3D Hourglass | `/` hero section, `/vision/` | 11-band architecture, band widths, I0 bottleneck |
 | Brain Atlas | `/vision/` BCI section | 7 neural bands (N7–N1) mapped to brain anatomy, technique counts per region |
 | TARA Technique Browser | `/threat-models/tara/` | Searchable/filterable 165-technique registry |
-| Neural Impact Chain | `/threat-models/analysis/` | DAG showing attack propagation through bands |
+| Neural Impact Chain | `/threat-models/analysis/` | Technique-to-outcome associations by shared band (not demonstrated neural paths) |
 | NISS Scoring | `/threat-models/scoring/` | Severity scoring breakdown |
 | Neuroethics Timeline | `/vision/` | Key neuroethics milestones |
 | PQ Overhead Chart | `/guardrails/runemate/` | Classical vs PQ+Staves bandwidth |

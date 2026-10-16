@@ -17,14 +17,14 @@
       "response": ["Stimulation parameter reset", "Clinical escalation", "Patient notification"]
     },
     "N5": {
-      "detection": ["Beta oscillation pathology detection", "Reward circuit anomaly", "Motor output monitoring"],
-      "prevention": ["DBS parameter bounds (voltage, frequency, pulse width)", "Dopamine pathway protection"],
-      "response": ["DBS emergency shutoff", "Movement arrest protocol"]
+      "detection": ["Pallidal beta oscillation pathology detection", "Reward circuit anomaly", "Motor output monitoring"],
+      "prevention": ["Pallidal (GPi) DBS parameter bounds (voltage, frequency, pulse width)", "Dopamine pathway protection"],
+      "response": ["Pallidal DBS emergency shutoff", "Movement arrest protocol"]
     },
     "N4": {
-      "detection": ["Thalamic relay integrity check", "Sleep spindle monitoring", "Sensory gating coherence"],
-      "prevention": ["Consciousness state protection", "Thalamic stimulation limits", "Autonomic safeguards"],
-      "response": ["Emergency consciousness preservation", "Vital function monitoring escalation"]
+      "detection": ["Thalamic relay integrity check", "Sleep spindle monitoring", "Thalamocortical transmission coherence", "Subthalamic beta oscillation pathology detection"],
+      "prevention": ["Consciousness state protection", "Thalamic stimulation limits", "Subthalamic (STN) DBS parameter bounds (voltage, frequency, pulse width)", "Autonomic safeguards"],
+      "response": ["Emergency consciousness preservation", "Vital function monitoring escalation", "Subthalamic DBS emergency shutoff"]
     },
     "N3": {
       "detection": ["Cerebellar timing analysis", "Motor coordination metrics", "Purkinje cell firing pattern"],

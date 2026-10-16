@@ -59,6 +59,8 @@ If you must reference a count in markdown, run `npm run health` after — it che
 **Citation verification gate:** Every new technique must have at least one DOI/PMID-verified citation.
 Migration scripts should verify DOIs via Crossref API before accepting a technique as CONFIRMED or DEMONSTRATED.
 Unverifiable citations get status: THEORETICAL with an explicit `citation_unverified: true` flag.
+A preprint identifier (arXiv, bioRxiv, medRxiv) verifies that the source exists but does not satisfy the peer-review requirement; such entries carry `peer_review_status: "preprint"`, may not hold a status above THEORETICAL, and must not carry a NISS score.
+The citation gate counts only `sources`; `defensive_sources` (defence-side papers: controls, mitigations, benchmarks) never count toward it.
 
 **Batch all techniques before propagating:** Add ALL techniques for the session first, THEN run prebuild + propagation + health check. Never interleave technique addition with count propagation.
 

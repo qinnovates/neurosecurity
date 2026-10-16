@@ -4,26 +4,29 @@
  */
 
 import type { ClinicalData } from '../../../lib/clinical-data';
+import { HOURGLASS_BANDS } from '../../../lib/qif-constants';
 
-const BAND_COLORS: Record<string, string> = {
-  N7: '#166534', N6: '#3a7d44', N5: '#5c7a38', N4: '#72772f',
-  N3: '#877226', N2: '#9b6c1e', N1: '#ae6616', I0: '#f59e0b',
-  S1: '#93c5fd', S2: '#60a5fa', S3: '#3b82f6',
+const BAND_COLORS: Record<string, string> = Object.fromEntries(
+  HOURGLASS_BANDS.map((band) => [band.id, band.color]),
+);
+
+/** Spine bar widths by band id (fraction of panel width). */
+const SPINE_WIDTHS: Record<string, number> = {
+  N7: 1.0, N6: 0.85, N5: 0.72, N4: 0.60, N3: 0.50, N2: 0.42, N1: 0.35,
+  I0: 0.30, S1: 0.42, S2: 0.60, S3: 0.80,
 };
 
-const BANDS = [
-  { id: 'N7', name: 'Neocortex', zone: 'neural', width: 1.0 },
-  { id: 'N6', name: 'Limbic', zone: 'neural', width: 0.85 },
-  { id: 'N5', name: 'Basal Ganglia', zone: 'neural', width: 0.72 },
-  { id: 'N4', name: 'Diencephalon', zone: 'neural', width: 0.60 },
-  { id: 'N3', name: 'Cerebellum', zone: 'neural', width: 0.50 },
-  { id: 'N2', name: 'Brainstem', zone: 'neural', width: 0.42 },
-  { id: 'N1', name: 'Spinal', zone: 'neural', width: 0.35 },
-  { id: 'I0', name: 'Interface', zone: 'interface', width: 0.30 },
-  { id: 'S1', name: 'Hardware', zone: 'synthetic', width: 0.42 },
-  { id: 'S2', name: 'Software', zone: 'synthetic', width: 0.60 },
-  { id: 'S3', name: 'Network', zone: 'synthetic', width: 0.80 },
-];
+/** Short labels the compact spine uses where the full band name does not fit. */
+const SPINE_SHORT_NAMES: Record<string, string> = {
+  N1: 'Spinal', I0: 'Interface', S1: 'Hardware', S2: 'Software', S3: 'Network',
+};
+
+const BANDS = HOURGLASS_BANDS.map((band) => ({
+  id: band.id as string,
+  name: SPINE_SHORT_NAMES[band.id] ?? band.name,
+  zone: band.zone as string,
+  width: SPINE_WIDTHS[band.id],
+}));
 
 interface Props {
   data: ClinicalData;

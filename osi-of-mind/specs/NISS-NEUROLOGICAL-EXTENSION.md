@@ -74,11 +74,11 @@ Each neurological condition maps to specific QIF hourglass bands based on where 
 | Band | Region | Neurological Conditions |
 |------|--------|------------------------|
 | N7 | Neocortex | Cortical blindness, expressive/receptive aphasia, alexia, central pain |
-| N6 | Limbic | Altered sensorium, emotional dysregulation, autonomic conditions |
-| N5 | Basal Ganglia | Tremor, dystonia, bradykinesia, dyskinesia, chorea |
+| N6 | Allocortex | Altered sensorium, emotional dysregulation, autonomic conditions |
+| N5 | Cerebral nuclei | Tremor, dystonia, bradykinesia, dyskinesia, chorea |
 | N4 | Thalamus | Tinnitus, paresthesia, central pain syndrome |
-| N3 | Brainstem | Vertigo, nystagmus, dysarthria, cardiac arrhythmia, syncope |
-| N2 | Cerebellum | Ataxia, intention tremor, dysmetria |
+| N3 | Cerebellum | Ataxia, intention tremor, dysmetria |
+| N2 | Brainstem | Vertigo, nystagmus, dysarthria, cardiac arrhythmia, syncope |
 | N1 | Spinal Cord | Spasticity, hyperreflexia, areflexia, neurogenic bladder |
 | I0 | Interface | All conditions (hardware-biology boundary) |
 
@@ -92,20 +92,20 @@ Neurological conditions are caused by disruption to specific neural pathways. Th
 - **Tremor** depends on the nigrostriatal pathway (substantia nigra -> striatum)
 - **Cortical blindness** depends on the visual pathway (optic nerve -> LGN -> V1)
 
-This creates a chain: **TARA technique -> QIF band -> neural pathway -> neurological condition -> NISS metric**.
+This creates a chain: **TARA technique -> QIF band -> neural pathway -> neurological condition -> NISS metric**. The chain is an association by shared band for threat modeling, not a demonstrated neural path.
 
 ### Impact Chain
 
-The full attack-to-outcome chain:
+The full attack-to-outcome chain (an association by shared band, not a demonstrated neural path):
 
 ```
-TARA Technique (e.g., QIF-T0045: Sensory Channel Injection)
-  -> Targets band N3 (Brainstem) + N4 (Thalamus)
-  -> Disrupts vestibular pathway + auditory pathway
-  -> Causes vertigo (H81.x), tinnitus (H93.1)
+TARA Technique (e.g., QIF-T0111: GVS motion illusion injection)
+  -> Targets band N2 (Brainstem) + N4 (Thalamus)
+  -> Disrupts vestibular pathway
+  -> Associated with vertigo (H81.x)
   -> NISS scores: BI:L, CD:H (sensory disruption), RV:T, NP:T
-  -> DSM cluster: Somatic/Neurological
-  -> ICD-10-CM: H81.x, H93.1
+  -> DSM cluster: Motor/Neurocognitive
+  -> ICD-10-CM: H81.x
 ```
 
 ### NISS Metric Mapping

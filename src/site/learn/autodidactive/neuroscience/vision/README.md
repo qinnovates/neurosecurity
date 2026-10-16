@@ -111,7 +111,7 @@ The Lateral Geniculate Nucleus is a paired thalamic relay with 6 layers:
 
 This reframes the LGN: it is not a passive relay. It is a **programmable switch with policy rules from higher layers**. Attention research (O'Connor et al., 2002) confirmed that attention modulates LGN responses in humans -- attended stimuli get enhanced, ignored stimuli get suppressed, and baseline activity increases even without visual input.
 
-The TRN provides recurrent inhibition: a biological firewall that can gate or suppress visual signals before they reach cortex. In QIF terms, the LGN sits at **N4 (Diencephalon)** -- the brain's natural access-control checkpoint.
+The TRN provides recurrent inhibition that can suppress visual signals before they reach cortex; transmission is state-dependent. In QIF terms, the LGN sits at **N4 (Diencephalon)**. Under review: the earlier description of the TRN as a biological firewall and of N4 as the brain's natural access-control checkpoint rested on an analogy and needs a new justification or withdrawal.
 
 > "The thalamus processes roughly 11 million bits of sensory information per second but only passes about 50 bits to conscious awareness." -- QIF Neuroanatomy, Band N4
 

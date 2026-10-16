@@ -57,7 +57,7 @@ export function renderNeuroanatomy(container) {
                 <p>${esc(band.qifRationale)}</p>
               </div>
               <div class="neuro-band-row">
-                <span class="neuro-band-label">Determinacy</span>
+                <span class="neuro-band-label">Determinacy (hypothesis, untested)</span>
                 <p>${esc(band.determinacy)}</p>
               </div>
               <div class="neuro-band-row">

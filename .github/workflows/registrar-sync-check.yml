@@ -67,6 +67,38 @@ jobs:
           print(f'All {len(d[\"techniques\"])} techniques valid')
           "
 
+      - name: Check variants
+        run: |
+          python3 -c "
+          import json, re, sys
+          d = json.load(open('datalake/qtara-registrar.json'))
+          technique_ids = {t['id'] for t in d['techniques']}
+          dimensions = d['schema_extensions']['variants']['format']['differs_in']
+          variants = d.get('variants', [])
+          errors = []
+          for v in variants:
+              vid = v.get('id', 'UNKNOWN')
+              if not re.fullmatch(r'QIF-T\d{4}-V\d{2}', vid):
+                  errors.append(f'{vid}: variant id must be QIF-Tnnnn-Vnn')
+              if vid in technique_ids:
+                  errors.append(f'{vid}: a variant must not appear in techniques')
+              if v.get('parent') not in technique_ids or not vid.startswith(str(v.get('parent')) + '-V'):
+                  errors.append(f'{vid}: parent must be one existing technique whose id the variant id extends')
+              if v.get('differs_in') not in dimensions:
+                  errors.append(f'{vid}: differs_in is outside the closed vocabulary')
+              if v.get('peer_review_status') != 'peer_reviewed' and (v.get('inherits_niss') or v['niss'].get('scoring_state') != 'unscored'):
+                  errors.append(f'{vid}: a variant without a peer-reviewed source must be unscored')
+          if d['statistics'].get('total_variants') != len(variants):
+              errors.append('statistics.total_variants does not match the variants array')
+          if d['statistics'].get('total_techniques') != len(d['techniques']):
+              errors.append('statistics.total_techniques does not match the techniques array')
+          if errors:
+              for e in errors:
+                  print(f'::error::{e}')
+              sys.exit(1)
+          print(f'All {len(variants)} variants valid; {len(d[\"techniques\"])} techniques')
+          "
+
       - name: Check SDK copy in sync
         run: |
           if [ -f datalake/qtara/src/qtara/data/qtara-registrar.json ]; then

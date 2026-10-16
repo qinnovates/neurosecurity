@@ -3,7 +3,7 @@
 Recalculate NISS v1.1 scores for all TARA techniques.
 
 v1.1 changes: Split CG (Cognitive Integrity) into two metrics:
-  CR (Cognitive Reconnaissance) — read attacks: thought decoding, neural data inference
+  CR (Cognitive Reconnaissance) — read attacks: decoding of speech or motor intent by models trained on a cooperating user, neural data inference
   CD (Cognitive Disruption) — write attacks: perception manipulation, identity modification
 Formula: weighted mean with normalized cognitive weights (CR=0.5, CD=0.5, others=1.0)
 
@@ -227,7 +227,7 @@ def main():
                 "CR": {
                     "name": "Cognitive Reconnaissance",
                     "values": {"N": 0.0, "L": 3.3, "H": 6.7, "C": 10.0},
-                    "description": "Degree of unauthorized cognitive read access: thought decoding, neural data inference, intent extraction",
+                    "description": "Degree of unauthorized cognitive read access: decoding of speech or motor intent by models trained on a cooperating user, neural data inference, intent extraction",
                 },
                 "CD": {
                     "name": "Cognitive/Functional Disruption",

@@ -1582,7 +1582,7 @@ In Phase 2 (visual cortex rendering), TARA's 71 attack-therapy pairs become **co
 | Recovery intervals | Minimum gap between stimulation events | Tissue recovery time (prevents cumulative damage) |
 | Retinotopic bounds | Spatial extent of activation pattern | Per-patient calibration map (Section 16) |
 
-**Three safety gates — no other BCI system has all three:**
+**Three safety gates — we are unaware of another BCI system with all three:**
 
 1. **TARA (compile time):** Forge rejects any electrode pattern exceeding therapeutic bounds BEFORE it reaches the wire. This is a compiler error, not a runtime check.
 2. **NSP (transport):** All electrode patterns encrypted, authenticated, and batch-signed. Provenance chain from Forge to Scribe.
@@ -1756,11 +1756,11 @@ Runemate Forge plugs into the QIF Hourglass at specific bands. Note: QIF bands d
 ```
 QIF Hourglass — Runemate Component Mapping:
 
-  NEURAL DOMAIN (measured, not controlled by Runemate — v4.0 bands)
+  NEURAL DOMAIN (measured, not controlled by Runemate — v4.0 bands, addressing version 2: codes are addresses, not an order)
   N7 (Neocortex) ------------------> Cognitive response to rendered Stave content
-  N6 (Limbic System) --------------> Emotional/memory response to UI content
-  N5 (Basal Ganglia) --------------> Motor selection if UI drives motor output
-  N4 (Diencephalon) ---------------> Thalamic gating of sensory input
+  N6 (Allocortex) -----------------> Emotional/memory response to UI content
+  N5 (Cerebral nuclei) ------------> Motor selection if UI drives motor output
+  N4 (Diencephalon) ---------------> State-dependent thalamic relay of sensory input
   N3 (Cerebellum) -----------------> Timing/coordination of motor responses
   N2 (Brainstem) ------------------> Autonomic responses to stimulation
   N1 (Spinal Cord) ----------------> Peripheral motor/sensory relay
@@ -1784,7 +1784,7 @@ The QI score does NOT validate the Stave bytecode directly. It validates the **n
 - **Rendering bugs** (Scribe errors → neural pattern doesn't match expected Stave semantics)
 - **Adversarial Staves** (UI spoofing → measures user confusion/stress response)
 
-This creates a **closed-loop verification**: Forge compiles → NSP delivers → Scribe renders → brain responds → QI validates the neural response matches expectations. No other BCI security framework closes this loop.
+This creates a **closed-loop verification**: Forge compiles → NSP delivers → Scribe renders → brain responds → QI validates the neural response matches expectations. We are unaware of another BCI security framework that closes this loop.
 
 ---
 
@@ -2790,7 +2790,7 @@ Staves semantic content → Forge (compile to electrode patterns)
   → QI validates neural response (closed loop)
 ```
 
-Three safety gates: TARA (compile time), NSP (transport), QI (runtime). No other BCI system has all three.
+Three safety gates: TARA (compile time), NSP (transport), QI (runtime). We are unaware of another BCI system with all three.
 
 **Why Rust is correct:** no_std for implant chips, formal verification tools (Kani, Prusti), the security innovation is the architecture (TARA-bounded parameters), not the language. NSL (R-002) deprioritized.
 

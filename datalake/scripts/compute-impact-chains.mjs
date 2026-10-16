@@ -2,6 +2,10 @@
 /**
  * Precompute impact chains from source JSON files.
  *
+ * A row is an ASSOCIATION, not a demonstrated path: a technique is joined to every region in each band it is
+ * tagged with, then to every pathway touching that region, then to that pathway's condition codes. Sharing a
+ * band does not show that the technique reaches the region. Diagnostic category references, for threat modeling only.
+ *
  * Eliminates the O(n⁴) nested-loop computation from kql-tables.ts build time.
  * The output (shared/impact-chains.json) is imported directly as a flat table.
  *

@@ -60,10 +60,18 @@ def flatten_technique(t: dict) -> dict:
         "bands": ", ".join(t.get("band_ids", [])) if isinstance(t.get("band_ids"), list) else str(t.get("bands", "")),
         "ui_category": t.get("ui_category", ""),
         "dual_use": tara.get("dual_use", ""),
+        # Citation gate: status derived from `sources`; defence-side papers are kept apart and never counted
+        "peer_review_status": t.get("peer_review_status", ""),
+        "defensive_sources": "; ".join(t.get("defensive_sources") or []),
         # NISS scores
         "niss_score": float(niss.get("score", 0)) if niss.get("score") else None,
         "niss_vector": niss.get("vector", ""),
         "niss_severity": niss.get("severity", ""),
+        # Three-state scoring: a provisional entry has a range and no score; an unscored entry has a reason
+        "niss_scoring_state": niss.get("scoring_state", "unscored"),
+        "niss_score_min": float(niss["score_min"]) if niss.get("score_min") is not None else None,
+        "niss_score_max": float(niss["score_max"]) if niss.get("score_max") is not None else None,
+        "niss_unscored_reason": niss.get("unscored_reason", ""),
         "niss_bi": niss.get("BI", ""),
         "niss_cr": niss.get("CR", ""),
         "niss_cd": niss.get("CD", ""),
@@ -86,6 +94,32 @@ def flatten_technique(t: dict) -> dict:
         "consent_tier": tara.get("consent_tier", ""),
         # Notes
         "notes": t.get("notes", ""),
+    }
+
+
+def flatten_variant(v: dict, parent_names: dict) -> dict:
+    """Flatten a registrar variant into a flat row. Variants are a dataset of their own, never technique rows."""
+    niss = v.get("niss") or {}
+    return {
+        "id": v.get("id", ""),
+        "alias": v.get("alias", ""),
+        "name": v.get("name", ""),
+        "parent": v.get("parent", ""),
+        "parent_name": parent_names.get(v.get("parent", ""), ""),
+        "differs_in": v.get("differs_in", ""),
+        "inherits_niss": bool(v.get("inherits_niss", False)),
+        "status": v.get("status", ""),
+        "peer_review_status": v.get("peer_review_status", ""),
+        # scoring_state is the variant's own; only an inherited vector is read from the parent
+        "niss_scoring_state": niss.get("scoring_state", "unscored"),
+        "niss_unscored_reason": niss.get("unscored_reason", ""),
+        "niss_inherited_from": niss.get("inherited_from", ""),
+        "description": v.get("description", ""),
+        "conditions": "; ".join(v.get("conditions") or []),
+        "sources": "; ".join(v.get("sources") or []),
+        "defensive_sources": "; ".join(v.get("defensive_sources") or []),
+        "related_ids": ", ".join(v.get("related_ids") or []),
+        "notes": v.get("notes") or "",
     }
 
 
@@ -203,6 +237,11 @@ def main():
     # Main techniques table (flat scalars)
     write_parquet("techniques", [flatten_technique(t) for t in techniques_raw], catalog)
 
+    # Variants (kept apart from techniques; join on parent == techniques.id)
+    variants_raw = registrar.get("variants", []) if isinstance(registrar, dict) else []
+    parent_names = {t.get("id", ""): t.get("attack") or t.get("technique") or "" for t in techniques_raw}
+    write_parquet("variants", [flatten_variant(v, parent_names) for v in variants_raw], catalog)
+
     # Bridge tables
     write_parquet("technique_dsm", flatten_dsm_bridge(techniques_raw), catalog)
     write_parquet("technique_neurorights", flatten_neurorights_bridge(techniques_raw), catalog)
@@ -263,6 +302,8 @@ def main():
         "research_legislation": (SHARED / "research-registry.json", "legislation"),
         "validation_registry": (SHARED / "validation-registry.json", "entries"),
         "eeg_samples": (SHARED / "eeg-samples.json", "samples"),
+        # Non-adversarial hazards, kept apart from attack techniques and not counted as techniques
+        "hazards": (SHARED / "qif-hazards.json", "hazards"),
         # Proposed dataset changes from each data refresh — proposals, not published
         # data. Held items are absent from `items` by design, so no unverified
         # claim text is exported here. Surfaced at /research/provenance/.

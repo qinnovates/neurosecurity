@@ -49,6 +49,7 @@ const LOCAL_BASE = '/duckdb';
 // All known parquet datasets served from /data/parquet/
 const PARQUET_DATASETS = [
   'techniques',
+  'variants',
   'technique_dsm',
   'technique_neurorights',
   'impact_chains',

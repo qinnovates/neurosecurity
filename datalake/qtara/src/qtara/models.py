@@ -1,5 +1,8 @@
-from typing import List, Optional, Dict, Any, Union
-from pydantic import BaseModel, ConfigDict, Field
+from typing import List, Literal, Optional, Dict, Any, Union
+from pydantic import BaseModel, ConfigDict, Field, model_validator
+
+TECHNIQUE_ID_REGEX = r"^QIF-T\d{4}$"
+VARIANT_ID_REGEX = r"^QIF-T\d{4}-V\d{2}$"
 
 class DSM5Primary(BaseModel):
     code: str
@@ -54,18 +57,32 @@ class NissComponents(BaseModel):
     detectability: float = 0.0
     coverage: float = 0.0
 
+class NissMetricEvidence(BaseModel):
+    source: str
+    supports: str
+
 class NissData(BaseModel):
     version: str = "1.0"
-    vector: str
-    score: float
-    severity: str
+    # "scored": all six metrics supported, vector and score stored.
+    # "provisional": some metrics supported; score_min/score_max bound the formula result, no score.
+    # "unscored": no peer-reviewed source, or no metric supported.
+    scoring_state: Literal["scored", "provisional", "unscored"] = "scored"
+    vector: Optional[str] = None
+    score: Optional[float] = None
+    severity: Optional[str] = None
     pins: bool = False
     components: Optional[NissComponents] = None
+    metrics: Optional[Dict[str, str]] = None
+    score_min: Optional[float] = None
+    score_max: Optional[float] = None
+    metric_evidence: Optional[Dict[str, NissMetricEvidence]] = None
+    unscored_reason: Optional[Literal["preprint_only", "no_source", "no_metric_supported"]] = None
 
 class PhysicsFeasibility(BaseModel):
     tier: Union[int, str]
     tier_label: str
-    timeline: str
+    # Absent on entries whose feasibility timeline has not been assessed (QIF-T0136 to QIF-T0161).
+    timeline: Optional[str] = None
     gate_reason: Optional[str] = None
     constraint_system_ref: Optional[str] = None
     analysis_date: Optional[str] = None
@@ -116,6 +133,10 @@ class ThreatTechnique(BaseModel):
     classical: Optional[Union[str, bool]] = None
     quantum: Optional[Union[str, bool]] = None
     sources: List[str] = []
+    # Defence-side sources. The citation gate counts only `sources`.
+    defensive_sources: List[str] = Field(default_factory=list)
+    # Derived from `sources`. "preprint" and "none" cap status at THEORETICAL and bar a NISS score.
+    peer_review_status: Literal["peer_reviewed", "preprint", "none"] = "none"
     status: str
     severity: str
     ui_category: Optional[str] = None
@@ -151,7 +172,54 @@ class ThreatTechnique(BaseModel):
         """Return the canonical technique name, preferring v2 `technique` over legacy `attack`."""
         return self.technique or self.attack
 
+class VariantNiss(BaseModel):
+    """A variant's own scoring state. It is never inherited; only the vector may be read from the parent."""
+    version: str = "1.1"
+    scoring_state: Literal["scored", "unscored"]
+    inherited_from: Optional[str] = Field(default=None, pattern=TECHNIQUE_ID_REGEX)
+    unscored_reason: Optional[Literal[
+        "preprint_only", "no_source", "no_metric_supported", "impact_dimension_differs"
+    ]] = None
+
+class Variant(BaseModel):
+    """A variant of one technique: same signal-level mechanism, tactic and harm, differing in one dimension.
+
+    Variants are not techniques and are never counted as techniques. The convention is modelled on
+    MITRE ATT&CK sub-techniques but uses a different id format (QIF-Tnnnn-Vnn).
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    id: str = Field(pattern=VARIANT_ID_REGEX)
+    alias: str
+    name: str
+    parent: str = Field(pattern=TECHNIQUE_ID_REGEX)
+    differs_in: Literal["access_path", "delivery", "target_model", "training_setup", "sensing_site"]
+    inherits_niss: bool
+    description: str
+    conditions: List[str] = Field(default_factory=list)
+    sources: List[str] = Field(default_factory=list)
+    defensive_sources: List[str] = Field(default_factory=list)
+    peer_review_status: Literal["peer_reviewed", "preprint", "none"]
+    status: str
+    niss: VariantNiss
+    related_ids: List[str] = Field(default_factory=list)
+    notes: Optional[str] = None
+
+    @model_validator(mode="after")
+    def check_parent_and_scoring(self) -> "Variant":
+        if not self.id.startswith(f"{self.parent}-V"):
+            raise ValueError(f"{self.id}: the id must extend the parent id {self.parent}")
+        if self.parent in self.related_ids:
+            raise ValueError(f"{self.id}: the parent belongs in parent, not in related_ids")
+        is_scored = self.niss.scoring_state == "scored"
+        if self.inherits_niss != is_scored or is_scored != (self.niss.inherited_from == self.parent):
+            raise ValueError(f"{self.id}: a variant is scored only by inheriting its parent's vector")
+        if self.inherits_niss and self.peer_review_status != "peer_reviewed":
+            raise ValueError(f"{self.id}: a variant without a peer-reviewed source may not inherit a NISS vector")
+        return self
+
 class TaraRegistry(BaseModel):
     version: str
     framework: str
     techniques: List[ThreatTechnique] = []
+    variants: List[Variant] = []

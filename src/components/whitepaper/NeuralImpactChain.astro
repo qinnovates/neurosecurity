@@ -1,14 +1,40 @@
 ---
-import { THREAT_VECTORS } from '../../lib/threat-data';
+import { THREAT_VECTORS, formatNissScore } from '../../lib/threat-data';
+import { HOURGLASS_BANDS } from '../../lib/qif-constants';
 
 const total = THREAT_VECTORS.length;
+
+// The example row is read from the registrar record below, so it cannot drift from the catalog.
+const EXAMPLE_TECHNIQUE_ID = 'QIF-T0022';
+const BAND_PATHWAY_PATTERN = /^(N[1-7]) \(([^)]+)\) \u2192 ([^;]+)$/;
+
+function buildExample() {
+  const technique = THREAT_VECTORS.find((threat) => threat.id === EXAMPLE_TECHNIQUE_ID);
+  const profile = technique?.tara?.dsm5;
+  const pathway = profile?.pathway.match(BAND_PATHWAY_PATTERN);
+  const category = profile?.primary[0];
+  const band = HOURGLASS_BANDS.find((entry) => entry.id === pathway?.[1]);
+  if (!technique || !pathway || !category || !band || technique.niss.scoring_state !== 'scored') {
+    throw new Error(`NeuralImpactChain: ${EXAMPLE_TECHNIQUE_ID} no longer has a scored record with a single-band pathway and a primary category; choose another example in this component.`);
+  }
+  return {
+    technique: `${technique.name} (${technique.id})`,
+    band: `${band.id} ${band.name}`,
+    structure: pathway[2],
+    func: pathway[3],
+    niss: `NISS ${formatNissScore(technique.niss)} (${technique.niss.severity})`,
+    category: `${category.code} ${category.name} (category reference)`,
+  };
+}
+
+const example = buildExample();
 
 const steps = [
   { label: 'Technique', detail: `${total} catalogued`, color: '#ef4444' },
   { label: 'Hourglass Band', detail: '11 bands', color: '#f59e0b' },
   { label: 'Neural Structure', detail: 'Targeted anatomy', color: '#22c55e' },
   { label: 'Function Impact', detail: 'Cognitive/Motor/Affective', color: '#06b6d4' },
-  { label: 'NISS Score', detail: '5 neural metrics', color: '#8b5cf6' },
+  { label: 'NISS Score', detail: '6 neural metrics', color: '#8b5cf6' },
   { label: 'DSM-5-TR', detail: 'Diagnostic mapping', color: '#ec4899' },
 ];
 ---
@@ -18,7 +44,7 @@ const steps = [
     The Neural Impact Chain
   </h3>
   <p class="text-xs text-[var(--color-text-faint)] mb-5">
-    Research mapping from security severity to psychiatric diagnostic categories
+    Associations by shared band address, for threat modeling. A research mapping to diagnostic category references, not a demonstrated path.
   </p>
 
   {/* Chain flow */}
@@ -51,25 +77,25 @@ const steps = [
   {/* Example trace */}
   <div class="mt-5 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-surface)] px-4 py-3">
     <div class="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-faint)] mb-1.5">
-      Example Trace
+      Example Association
     </div>
     <p class="text-xs text-[var(--color-text-muted)] leading-relaxed font-mono break-words">
-      <span class="text-[#ef4444]">Transcranial Magnetic Stimulation (QIF-T0042)</span>
+      <span class="text-[#ef4444]">{example.technique}</span>
       <span class="text-[var(--color-text-faint)]"> &rarr; </span>
-      <span class="text-[#f59e0b]">N7 Neocortex</span>
+      <span class="text-[#f59e0b]">{example.band}</span>
       <span class="text-[var(--color-text-faint)]"> &rarr; </span>
-      <span class="text-[#22c55e]">Prefrontal cortex</span>
+      <span class="text-[#22c55e]">{example.structure}</span>
       <span class="text-[var(--color-text-faint)]"> &rarr; </span>
-      <span class="text-[#06b6d4]">Executive function disruption</span>
+      <span class="text-[#06b6d4]">{example.func}</span>
       <span class="text-[var(--color-text-faint)]"> &rarr; </span>
-      <span class="text-[#8b5cf6]">NISS 7.4 (high)</span>
+      <span class="text-[#8b5cf6]">{example.niss}</span>
       <span class="text-[var(--color-text-faint)]"> &rarr; </span>
-      <span class="text-[#ec4899]">F06.7 Mild neurocognitive disorder</span>
+      <span class="text-[#ec4899]">{example.category}</span>
     </p>
   </div>
 
   <p class="mt-4 pt-3 border-t border-[var(--color-border)] text-xs text-[var(--color-text-muted)] text-center leading-relaxed">
-    Each of the <span class="font-semibold text-[var(--color-text-primary)]">{total}</span> techniques traces a research path from exploit mechanism to diagnostic category reference
+    Each of the <span class="font-semibold text-[var(--color-text-primary)]">{total}</span> techniques is associated, by shared band, with a diagnostic category reference for threat modeling; this is not a traced neural path
   </p>
 </div>
 

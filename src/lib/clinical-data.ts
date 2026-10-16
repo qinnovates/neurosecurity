@@ -286,7 +286,7 @@ function buildImpactChains(): NeuralImpactChain[] {
   const dsmConditions = getDsmConditions();
   const chains: NeuralImpactChain[] = [];
 
-  // For each threat technique, trace its chain through the neural layers
+  // For each threat technique, build its chain of associations by shared band
   for (const threat of THREAT_VECTORS) {
     for (const bandId of threat.bands) {
       // Find pathways that pass through this band

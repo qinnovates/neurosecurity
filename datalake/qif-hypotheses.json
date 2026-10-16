@@ -1,0 +1,120 @@
+{
+  "_metadata": {
+    "title": "QIF per-band hypotheses",
+    "status": "hypothesis",
+    "note": "Untested; no estimator is defined for either quantity. Proposed for the version 1 band memberships, which changed in addressing version 2, so the values do not describe the current sets. The same fields remain on qif_bands in the atlas because site components read them there; this file is the record of their status.",
+    "proposed_for_addressing_version": 1
+  },
+  "band_hypotheses": [
+    {
+      "band_id": "N7",
+      "determinacy": "Quantum Uncertain",
+      "qi_range": [
+        0.3,
+        0.5
+      ],
+      "status": "hypothesis",
+      "evidence": "none"
+    },
+    {
+      "band_id": "N6",
+      "determinacy": "Chaotic → QU",
+      "qi_range": [
+        0.2,
+        0.4
+      ],
+      "status": "hypothesis",
+      "evidence": "none"
+    },
+    {
+      "band_id": "N5",
+      "determinacy": "Chaotic",
+      "qi_range": [
+        0.15,
+        0.35
+      ],
+      "status": "hypothesis",
+      "evidence": "none"
+    },
+    {
+      "band_id": "N4",
+      "determinacy": "Stochastic → Chaotic",
+      "qi_range": [
+        0.1,
+        0.3
+      ],
+      "status": "hypothesis",
+      "evidence": "none"
+    },
+    {
+      "band_id": "N3",
+      "determinacy": "Stochastic",
+      "qi_range": [
+        0.1,
+        0.25
+      ],
+      "status": "hypothesis",
+      "evidence": "none"
+    },
+    {
+      "band_id": "N2",
+      "determinacy": "Stochastic",
+      "qi_range": [
+        0.05,
+        0.15
+      ],
+      "status": "hypothesis",
+      "evidence": "none"
+    },
+    {
+      "band_id": "N1",
+      "determinacy": "Stochastic",
+      "qi_range": [
+        0.01,
+        0.1
+      ],
+      "status": "hypothesis",
+      "evidence": "none"
+    },
+    {
+      "band_id": "I0",
+      "determinacy": "Quasi-quantum",
+      "qi_range": [
+        0.01,
+        0.1
+      ],
+      "status": "hypothesis",
+      "evidence": "none"
+    },
+    {
+      "band_id": "S1",
+      "determinacy": "Stochastic (analog noise)",
+      "qi_range": [
+        0.001,
+        0.01
+      ],
+      "status": "hypothesis",
+      "evidence": "none"
+    },
+    {
+      "band_id": "S2",
+      "determinacy": "Deterministic",
+      "qi_range": [
+        0,
+        0
+      ],
+      "status": "hypothesis",
+      "evidence": "none"
+    },
+    {
+      "band_id": "S3",
+      "determinacy": "Deterministic",
+      "qi_range": [
+        0,
+        0
+      ],
+      "status": "hypothesis",
+      "evidence": "none"
+    }
+  ]
+}

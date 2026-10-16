@@ -17,7 +17,7 @@ export const THREAT_CATEGORIES = [
   { id: 'DM', name: 'Data Manipulation', description: 'Altering decoded intent or recordings' },
   { id: 'DS', name: 'Denial of Service', description: 'Disrupting BCI function' },
   { id: 'PE', name: 'Privilege Escalation', description: 'Gaining unauthorized access depth' },
-  { id: 'CR', name: 'Cognitive Reconnaissance', description: 'Thought decoding, neural data inference, intent extraction' },
+  { id: 'CR', name: 'Cognitive Reconnaissance', description: 'Decoding of speech or motor intent by models trained on a cooperating user, neural data inference, intent extraction' },
   { id: 'CD', name: 'Cognitive/Functional Disruption', description: 'Disruption to cognitive processing, sensory perception, motor output, or autonomic regulation' },
   { id: 'PS', name: 'Physical Safety', description: 'Tissue damage, seizures, involuntary movement' },
   { id: 'EX', name: 'Data Exfiltration', description: 'Extracting neural data for exploitation' },
@@ -40,6 +40,19 @@ export type BandId = typeof HOURGLASS_BANDS[number]['id'];
 export type Severity = 'critical' | 'high' | 'medium' | 'low';
 export type NissSeverity = 'critical' | 'high' | 'medium' | 'low' | 'none';
 export type Status = 'CONFIRMED' | 'DEMONSTRATED' | 'THEORETICAL' | 'EMERGING';
+/** Derived from `sources`. A preprint id shows the source exists; it does not count as peer review. */
+export type PeerReviewStatus = 'peer_reviewed' | 'preprint' | 'none';
+/** scored: all six metrics supported. provisional: some supported, a score range is stored. unscored: none. */
+export type NissScoringState = 'scored' | 'provisional' | 'unscored';
+export type NissUnscoredReason = 'preprint_only' | 'no_source' | 'no_metric_supported';
+export interface NissMetricEvidence { source: string; supports: string }
+
+/** Reader-facing text for each unscored reason. */
+export const NISS_UNSCORED_REASON_LABELS: Record<NissUnscoredReason, string> = {
+  preprint_only: 'Its only sources are preprints, which do not satisfy the citation gate.',
+  no_source: 'It has no peer-reviewed source.',
+  no_metric_supported: 'Its sources report none of the six effects the NISS metrics measure.',
+};
 export type AccessLevel = 'PUBLIC' | 'LICENSED' | 'RESTRICTED' | 'CLASSIFIED' | null;
 export type DualUse = 'confirmed' | 'probable' | 'possible' | 'silicon_only';
 export type ConsentTier = 'standard' | 'enhanced' | 'IRB' | 'prohibited';
@@ -115,6 +128,32 @@ export interface NissScore {
   score: number;
   severity: NissSeverity;
   pins: boolean;
+  scoring_state: NissScoringState;
+  /** Provisional only: metric code per metric, 'unknown' where no source supports a value. */
+  metrics?: Record<string, string>;
+  /** Provisional only: lowest and highest formula result over the unknown metrics. A bound, not an estimate. */
+  score_min?: number;
+  score_max?: number;
+  metric_evidence?: Record<string, NissMetricEvidence>;
+  unscored_reason?: NissUnscoredReason;
+}
+
+/** Values every non-scored entry falls back to, so `niss.score` and `niss.severity` stay safe to read. */
+const NISS_NOT_SCORED_DEFAULTS = { version: '1.1', vector: '', score: 0, severity: 'none' as NissSeverity, pins: false };
+
+function normaliseNiss(raw: any): NissScore {
+  if (!raw) return { ...NISS_NOT_SCORED_DEFAULTS, scoring_state: 'unscored' };
+  if (raw.scoring_state === 'provisional' || raw.scoring_state === 'unscored') return { ...NISS_NOT_SCORED_DEFAULTS, ...raw };
+  return { ...raw, scoring_state: 'scored' };
+}
+
+/** Display text for a NISS cell: the score, the provisional range, or "Unscored". */
+export function formatNissScore(niss: NissScore): string {
+  if (niss.scoring_state === 'scored') return niss.score.toFixed(1);
+  if (niss.scoring_state === 'provisional' && niss.score_min !== undefined && niss.score_max !== undefined) {
+    return `${niss.score_min.toFixed(1)}\u2013${niss.score_max.toFixed(1)}`;
+  }
+  return 'Unscored';
 }
 
 export interface CvssScore {
@@ -162,6 +201,10 @@ export interface ThreatVector {
   crossRefs: { related_ids?: string[]; secondary_tactics?: string[] } | null;
   /** Academic sources */
   sources: string[];
+  /** Peer-review standing of `sources`. 'preprint' and 'none' cap status at THEORETICAL and bar a NISS score. */
+  peerReviewStatus?: PeerReviewStatus;
+  /** Defence-side sources (controls, mitigations). Not counted by the citation gate. */
+  defensiveSources?: string[];
   /** TARA projection data (clinical, governance, engineering overlays) */
   tara: TaraProjection | null;
   /** Physics feasibility tier (constraint system analysis) */
@@ -194,10 +237,12 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
   quantumDetection: t.quantum,
   description: t.notes,
   bandsStr: t.bands,
-  niss: t.niss ?? { version: '1.0', vector: '', score: 0, severity: 'none', pins: false },
+  niss: normaliseNiss(t.niss),
   cvss: t.cvss ?? null,
   crossRefs: t.cross_references ?? null,
   sources: t.sources ?? [],
+  peerReviewStatus: t.peer_review_status as PeerReviewStatus | undefined,
+  defensiveSources: t.defensive_sources ?? [],
   tara: t.tara ?? null,
   physicsFeasibility: t.physics_feasibility ?? null,
   enriched: !t.tara_enrichment_pending,
@@ -211,6 +256,90 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
 
 /** Dynamic technique count from registrar — use this instead of hardcoding */
 export const TECHNIQUE_COUNT = THREAT_VECTORS.length;
+
+/**
+ * Variants. A variant has the same signal-level mechanism, tactic and harm as exactly one parent
+ * technique and differs in one dimension. Variants are not techniques: they are stored in the
+ * registrar's top-level `variants` array and are never part of THREAT_VECTORS or TECHNIQUE_COUNT.
+ * Modelled on MITRE ATT&CK sub-techniques, with a different id format (QIF-Tnnnn-Vnn).
+ */
+export type VariantDimension = 'access_path' | 'delivery' | 'target_model' | 'training_setup' | 'sensing_site';
+export type VariantUnscoredReason = NissUnscoredReason | 'impact_dimension_differs';
+
+export interface VariantDimensionSpec {
+  /** Two-letter code used in the variant alias */
+  code: string;
+  /** Whether a difference in this dimension can change impact; if so the parent's NISS vector is not inherited */
+  changes_impact: boolean;
+  description: string;
+}
+
+export interface VariantNiss {
+  version: string;
+  /** Decided from the variant's own sources. Never inherited from the parent. */
+  scoring_state: 'scored' | 'unscored';
+  /** Parent technique whose vector is read, when inherits_niss is true */
+  inherited_from?: string;
+  unscored_reason?: VariantUnscoredReason;
+}
+
+export interface TechniqueVariant {
+  /** Canonical id: parent id + -V + two-digit sequence. Opaque and permanent. */
+  id: string;
+  /** Parent alias + dimension code + one-digit sequence */
+  alias: string;
+  name: string;
+  /** Exactly one parent technique id */
+  parent: string;
+  differsIn: VariantDimension;
+  inheritsNiss: boolean;
+  description: string;
+  conditions: string[];
+  sources: string[];
+  defensiveSources: string[];
+  peerReviewStatus: PeerReviewStatus;
+  status: Status;
+  niss: VariantNiss;
+  /** Secondary relationships. The parent is never listed here. */
+  relatedIds: string[];
+  notes: string | null;
+}
+
+/** The closed differs_in vocabulary, read from the registrar's schema notes */
+export const VARIANT_DIMENSIONS: Record<VariantDimension, VariantDimensionSpec> =
+  (registry as any).schema_extensions?.variants?.format?.differs_in ?? {};
+
+export const VARIANT_UNSCORED_REASON_LABELS: Record<VariantUnscoredReason, string> = {
+  ...NISS_UNSCORED_REASON_LABELS,
+  impact_dimension_differs: 'It differs from its parent in a dimension that can change impact.',
+};
+
+/** Transform registry variants → TechniqueVariant[] */
+export const TECHNIQUE_VARIANTS: TechniqueVariant[] = ((registry as any).variants ?? []).map((v: any) => ({
+  id: v.id,
+  alias: v.alias,
+  name: v.name,
+  parent: v.parent,
+  differsIn: v.differs_in as VariantDimension,
+  inheritsNiss: v.inherits_niss === true,
+  description: v.description,
+  conditions: v.conditions ?? [],
+  sources: v.sources ?? [],
+  defensiveSources: v.defensive_sources ?? [],
+  peerReviewStatus: v.peer_review_status as PeerReviewStatus,
+  status: v.status as Status,
+  niss: v.niss as VariantNiss,
+  relatedIds: v.related_ids ?? [],
+  notes: v.notes ?? null,
+}));
+
+/** Dynamic variant count from registrar. Reported beside TECHNIQUE_COUNT, never added to it. */
+export const VARIANT_COUNT = TECHNIQUE_VARIANTS.length;
+
+/** Variants filed under one parent technique */
+export function getVariantsForTechnique(techniqueId: string): TechniqueVariant[] {
+  return TECHNIQUE_VARIANTS.filter(v => v.parent === techniqueId);
+}
 
 /** Dynamic domain count */
 export const DOMAIN_COUNT = new Set(THREAT_VECTORS.map(t => t.taraDomainPrimary).filter(Boolean)).size;
@@ -284,11 +413,21 @@ export function getNissStats() {
   return stats;
 }
 
+/** Helper: count threats per NISS scoring state */
+export function getNissScoringStateStats() {
+  const stats: Record<NissScoringState, number> = { scored: 0, provisional: 0, unscored: 0 };
+  for (const t of THREAT_VECTORS) {
+    stats[t.niss.scoring_state]++;
+  }
+  return stats;
+}
+
 /** Registry metadata */
 export function getRegistryStats() {
   return {
     ...registry.statistics,
     totalTechniques: THREAT_VECTORS.length,
+    totalVariants: TECHNIQUE_VARIANTS.length,
     totalTactics: THREAT_TACTICS.length,
     severity: getThreatStats(),
     status: getStatusStats(),
@@ -519,6 +658,8 @@ export interface ChangelogEntry {
   title: string;
   summary: string;
   added?: string[];
+  /** Variants filed in this version. Kept apart from `added` so they are never counted as techniques. */
+  added_variants?: string[];
   added_range?: string[];
   therapeutic_highlights: string[];
   techniques?: ThreatVector[];
@@ -531,7 +672,8 @@ export function getChangelog(): ChangelogEntry[] {
     const techniques = ids.length > 0
       ? THREAT_VECTORS.filter(t => ids.includes(t.id))
       : [];
-    return { ...entry, techniques };
+    // Entries from registrar 4.1 onward carry no therapeutic_highlights; the declared type is a required array.
+    return { ...entry, therapeutic_highlights: entry.therapeutic_highlights ?? [], techniques };
   });
 }
 

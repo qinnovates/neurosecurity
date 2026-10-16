@@ -95,7 +95,7 @@ LOCUS_TACTICS = [
         "domain": "Neural",
         "domain_code": "N",
         "action_code": "MD",
-        "description": "Direct neural state modification via stimulation, entrainment, or signal injection. No traditional cybersecurity equivalent.",
+        "description": "Direct neural state modification via stimulation, entrainment, or signal injection. No direct MITRE ATT&CK tactic equivalent.",
         "legacy_ids": ["TA0050", "QIF-TA0050"],
         "legacy_name": "Neural Manipulation"
     },
@@ -105,7 +105,7 @@ LOCUS_TACTICS = [
         "domain": "Cognitive",
         "domain_code": "C",
         "action_code": "EX",
-        "description": "Exploiting cognitive processes including memory, attention, identity, and agency. No traditional cybersecurity equivalent.",
+        "description": "Exploiting cognitive processes including memory, attention, identity, and agency. No direct MITRE ATT&CK tactic equivalent.",
         "legacy_ids": ["TA0051", "QIF-TA0051"],
         "legacy_name": "Cognitive Exploitation"
     },
@@ -115,7 +115,7 @@ LOCUS_TACTICS = [
         "domain": "Energy",
         "domain_code": "E",
         "action_code": "RD",
-        "description": "EM/RF attacks on neural tissue or BCI hardware via frequency-domain coupling. No traditional cybersecurity equivalent.",
+        "description": "EM/RF attacks on neural tissue or BCI hardware via frequency-domain coupling. No direct MITRE ATT&CK tactic equivalent.",
         "legacy_ids": ["TA0052", "QIF-TA0052"],
         "legacy_name": "Directed Energy"
     },

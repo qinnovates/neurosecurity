@@ -106,7 +106,7 @@ export const BRAIN_REGIONS = [
     clinicalRelevance: 'Somatosensory deficits, neuropathic pain, sensory restoration via BCI'
   },
 
-  // === N6: Limbic System (5 regions) ===
+  // === N6: Allocortex (5 regions) ===
   {
     id: 'hippocampus',
     name: 'Hippocampus',
@@ -158,7 +158,7 @@ export const BRAIN_REGIONS = [
     clinicalRelevance: "Alzheimer's disease (early hypometabolism), dissociative disorders, spatial disorientation"
   },
 
-  // === N5: Basal Ganglia (5 regions) ===
+  // === N5: Cerebral nuclei (4 regions) ===
   {
     id: 'striatum',
     name: 'Striatum (Caudate + Putamen)',
@@ -190,26 +190,6 @@ export const BRAIN_REGIONS = [
     clinicalRelevance: "Parkinson's disease (indirect pathway dysfunction), dystonia"
   },
   {
-    id: 'subthalamic_nucleus',
-    name: 'Subthalamic Nucleus (STN)',
-    band: 'N5',
-    function: "Hyperdirect pathway hub, motor urgency signal, and stop-signal processing. Primary DBS target for Parkinson's disease.",
-    recordingMethods: ['depth electrodes', 'intraoperative microelectrode recording'],
-    stimulationMethods: ['DBS'],
-    latency: '5-70ms',
-    clinicalRelevance: "Parkinson's disease (primary DBS target), OCD. Pathological beta oscillations (15-30 Hz) are a biomarker."
-  },
-  {
-    id: 'substantia_nigra',
-    name: 'Substantia Nigra (SNr/SNc)',
-    band: 'N5',
-    function: "Dopamine production (SNc pars compacta) and basal ganglia output (SNr pars reticulata). Degeneration causes Parkinson's disease.",
-    recordingMethods: ['depth electrodes', 'PET', 'DaTscan'],
-    stimulationMethods: ['DBS (indirect)'],
-    latency: '10-50ms',
-    clinicalRelevance: "Parkinson's disease (SNc degeneration is the hallmark), dopamine-related psychiatric conditions"
-  },
-  {
     id: 'central_amygdala',
     name: 'Central Amygdala (CeA)',
     band: 'N5',
@@ -220,12 +200,12 @@ export const BRAIN_REGIONS = [
     clinicalRelevance: 'Anxiety disorders, PTSD (autonomic fear responses), pain modulation'
   },
 
-  // === N4: Diencephalon (4 regions) ===
+  // === N4: Diencephalon (5 regions) ===
   {
     id: 'thalamus',
     name: 'Thalamus',
     band: 'N4',
-    function: "Central relay station for all sensory modalities except olfaction. Reticular thalamic nucleus implements default-deny gating on ascending traffic.",
+    function: "Principal route by which sensory input (except the first cortical stage of olfaction), cerebellar output and basal ganglia output reach neocortex. Transmission is state-dependent, not a fixed allow-or-block rule.",
     recordingMethods: ['depth electrodes', 'fMRI', 'stereo-EEG'],
     stimulationMethods: ['DBS'],
     latency: '3-20ms',
@@ -261,6 +241,16 @@ export const BRAIN_REGIONS = [
     latency: '5-20ms',
     clinicalRelevance: 'Drug-resistant epilepsy (FDA-approved DBS target), memory circuit dysfunction'
   },
+  {
+    id: 'subthalamic_nucleus',
+    name: 'Subthalamic Nucleus (STN)',
+    band: 'N4',
+    function: "Hyperdirect pathway hub, motor urgency signal, and stop-signal processing. Primary DBS target for Parkinson's disease.",
+    recordingMethods: ['depth electrodes', 'intraoperative microelectrode recording'],
+    stimulationMethods: ['DBS'],
+    latency: '5-70ms',
+    clinicalRelevance: "Parkinson's disease (primary DBS target), OCD. Pathological beta oscillations (15-30 Hz) are a biomarker."
+  },
 
   // === N3: Cerebellum (3 regions) ===
   {
@@ -294,7 +284,7 @@ export const BRAIN_REGIONS = [
     clinicalRelevance: 'Gait ataxia, vertigo, cerebellar cognitive affective syndrome, some psychiatric conditions'
   },
 
-  // === N2: Brainstem (4 regions) ===
+  // === N2: Brainstem (5 regions) ===
   {
     id: 'medulla_oblongata',
     name: 'Medulla Oblongata',
@@ -334,6 +324,16 @@ export const BRAIN_REGIONS = [
     stimulationMethods: ['DBS (experimental)'],
     latency: '5-50ms',
     clinicalRelevance: 'Coma, disorders of consciousness, narcolepsy, central pain syndromes'
+  },
+  {
+    id: 'substantia_nigra',
+    name: 'Substantia Nigra (SNr/SNc)',
+    band: 'N2',
+    function: "Dopamine production (SNc pars compacta) and basal ganglia output (SNr pars reticulata). Degeneration causes Parkinson's disease.",
+    recordingMethods: ['depth electrodes', 'PET', 'DaTscan'],
+    stimulationMethods: ['DBS (indirect)'],
+    latency: '10-50ms',
+    clinicalRelevance: "Parkinson's disease (SNc degeneration is the hallmark), dopamine-related psychiatric conditions"
   },
 
   // === N1: Spinal Cord (5 regions) ===
@@ -403,10 +403,10 @@ export function getRegionById(id) {
 export const BAND_COUNTS = {
   N7: 10,
   N6: 5,
-  N5: 6,
-  N4: 4,
+  N5: 4,
+  N4: 5,
   N3: 3,
-  N2: 4,
+  N2: 5,
   N1: 5
 };
 

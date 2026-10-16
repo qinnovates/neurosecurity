@@ -1,5 +1,7 @@
 {
   "_metadata": {
+    "addressing_version": 2,
+    "addressing_note": "Band codes are addresses, not an order. A structure's band is where it physically is; circuits such as the basal ganglia are functional_groups tags. Version 2 moved substantia_nigra and vta from N5 to N2 and stn from N5 to N4.",
     "title": "QIF Brain-BCI Unified Atlas",
     "version": "1.2.0",
     "created": "2026-02-18",
@@ -20,6 +22,8 @@
     {
       "id": "N7",
       "name": "Neocortex",
+      "display_label": "Neocortex",
+      "membership_rule": "Isocortex, including agranular motor areas.",
       "zone": "neural",
       "determinacy": "Quantum Uncertain",
       "qi_range": [
@@ -27,11 +31,13 @@
         0.5
       ],
       "severity_if_compromised": "HIGH (cognitive)",
-      "description": "Highest cortical processing \u2014 executive function, motor planning, sensory integration, language. Most complex and indeterminate neural band."
+      "description": "Highest cortical processing \u2014 executive function, motor planning, sensory integration, language. Most complex neural band; hypothesised (untested, no estimator defined) to be the most indeterminate."
     },
     {
       "id": "N6",
-      "name": "Limbic System",
+      "name": "Allocortex",
+      "display_label": "Allocortex",
+      "membership_rule": "Allocortex, mesocortex (periallocortex and proisocortex) and pallial nuclei, including basolateral amygdala.",
       "zone": "neural",
       "determinacy": "Chaotic \u2192 QU",
       "qi_range": [
@@ -43,7 +49,9 @@
     },
     {
       "id": "N5",
-      "name": "Basal Ganglia",
+      "name": "Cerebral nuclei",
+      "display_label": "Cerebral nuclei",
+      "membership_rule": "Subpallial nuclei: striatum, pallidum, basal forebrain, central and medial amygdala.",
       "zone": "neural",
       "determinacy": "Chaotic",
       "qi_range": [
@@ -51,23 +59,27 @@
         0.35
       ],
       "severity_if_compromised": "SEVERE (motor selection)",
-      "description": "Motor selection, habit formation, reward processing. Primary target of DBS for Parkinson's."
+      "description": "Motor selection, habit formation, reward processing. GPi is a DBS target for dystonia and Parkinson's; the subthalamic nucleus target is in N4 under addressing version 2."
     },
     {
       "id": "N4",
       "name": "Diencephalon",
+      "display_label": "Diencephalon",
+      "membership_rule": "Thalamus, subthalamus, hypothalamus, epithalamus (Terminologia Anatomica 1998 divisions).",
       "zone": "neural",
       "determinacy": "Stochastic \u2192 Chaotic",
       "qi_range": [
         0.1,
         0.3
       ],
-      "severity_if_compromised": "CRITICAL (relay/gating)",
-      "description": "Thalamic relay and gating of all ascending sensory traffic. Hypothalamic homeostasis. The brain's firewall layer."
+      "severity_if_compromised": "CRITICAL (relay)",
+      "description": "Thalamic relay of most ascending sensory input to neocortex and of cerebellar and basal ganglia output, with state-dependent transmission. Hypothalamic homeostasis. Subthalamic nucleus."
     },
     {
       "id": "N3",
       "name": "Cerebellum",
+      "display_label": "Cerebellum",
+      "membership_rule": "Cerebellar cortex and nuclei.",
       "zone": "neural",
       "determinacy": "Stochastic",
       "qi_range": [
@@ -80,6 +92,8 @@
     {
       "id": "N2",
       "name": "Brainstem",
+      "display_label": "Brainstem",
+      "membership_rule": "Midbrain, pons and medulla, including substantia nigra and ventral tegmental area.",
       "zone": "neural",
       "determinacy": "Stochastic",
       "qi_range": [
@@ -92,6 +106,8 @@
     {
       "id": "N1",
       "name": "Spinal Cord",
+      "display_label": "Spinal cord",
+      "membership_rule": "Spinal cord parenchyma; roots and ganglia are outside it.",
       "zone": "neural",
       "determinacy": "Stochastic",
       "qi_range": [
@@ -99,7 +115,7 @@
         0.1
       ],
       "severity_if_compromised": "HIGH (motor/sensory)",
-      "description": "Motor output and sensory input pathway. Local reflex arcs. Lowest neural band in the hourglass."
+      "description": "Motor output and sensory input pathway. Local reflex arcs."
     },
     {
       "id": "I0",
@@ -878,7 +894,7 @@
           200
         ],
         "measure": "Visual threat stimulus to amygdala response (intracranial EEG)",
-        "notes": "Fastest documented: ~74ms via intracranial EEG (Mendez-Bertolo et al. 2016). NOT 12ms \u2014 no source exists for sub-20ms amygdala response. The 'fast path' bypasses thalamic gating but still requires ~74ms.",
+        "notes": "Fastest documented in humans: ~74ms via intracranial EEG (Mendez-Bertolo et al. 2016). No human source exists for a sub-20ms response; latencies under 15ms are reported for auditory responses in rat lateral amygdala (Quirk, Repa & LeDoux 1995). The proposed 'fast path' runs through the thalamus (pulvinar) and bypasses cortex, not thalamus; its existence is contested, and it still requires ~74ms.",
         "citations": [
           "Mendez-Bertolo et al. 2016 (Nature Neuroscience): Amygdala response to fear at 74ms via intracranial EEG"
         ],
@@ -1276,7 +1292,8 @@
       "id": "stn",
       "name": "Subthalamic Nucleus",
       "abbreviation": "STN",
-      "qif_band": "N5",
+      "qif_band": "N4",
+      "functional_groups": ["basal_ganglia_circuit"],
       "parent_structure": "basal_ganglia",
       "depth_class": "subcortical",
       "hemisphere": "bilateral",
@@ -1333,7 +1350,8 @@
       "id": "substantia_nigra",
       "name": "Substantia Nigra",
       "abbreviation": "SNr/SNc",
-      "qif_band": "N5",
+      "qif_band": "N2",
+      "functional_groups": ["basal_ganglia_circuit"],
       "parent_structure": "midbrain",
       "depth_class": "subcortical",
       "hemisphere": "bilateral",
@@ -1386,7 +1404,8 @@
       "id": "vta",
       "name": "Ventral Tegmental Area",
       "abbreviation": "VTA",
-      "qif_band": "N5",
+      "qif_band": "N2",
+      "functional_groups": ["reward", "dopaminergic"],
       "parent_structure": "midbrain",
       "depth_class": "subcortical",
       "hemisphere": "bilateral",
@@ -1447,7 +1466,7 @@
       "parent_structure": "diencephalon",
       "depth_class": "subcortical",
       "hemisphere": "bilateral",
-      "function": "Central relay station for all sensory modalities (except olfaction). Gating via reticular thalamic nucleus (TRN) implements default-deny on ascending traffic.",
+      "function": "Principal relay for sensory input to neocortex (olfaction reaches its primary cortex without a thalamic relay) and for cerebellar and basal ganglia output. The thalamic reticular nucleus inhibits relay cells; transmission is state-dependent, not a fixed allow-or-block rule.",
       "response_latency_ms": {
         "value": 4,
         "range": [
@@ -1476,7 +1495,7 @@
       ],
       "allen_atlas_id": null,
       "brodmann_areas": null,
-      "how_it_works": "The thalamus is the brain's central relay station \u2014 nearly ALL sensory information (except smell) passes through it before reaching the cortex. But it's not a passive relay. The thalamus actively gates what reaches conscious awareness by switching between two modes: tonic mode (steady firing, passes information faithfully) and burst mode (rhythmic firing, blocks information \u2014 this happens during sleep and absence seizures). Each sensory modality has its own thalamic nucleus: LGN for vision, MGN for hearing, VPL/VPM for touch. The thalamus also receives massive feedback from the cortex (10x more cortical\u2192thalamic connections than thalamic\u2192cortical), making it a dynamic filter that the cortex uses to control its own input.",
+      "how_it_works": "Most sensory information reaches the neocortex through the thalamus; smell reaches its primary cortex directly and involves the thalamus only at a later stage, and motor commands leaving the cortex do not pass through it. But it's not a passive relay. The thalamus actively gates what reaches conscious awareness by switching between two modes: tonic mode (steady firing, passes information faithfully) and burst mode (which also relays, and favours detection of new input; it is the rhythmic bursting of sleep and absence seizures that degrades relay). The main senses have dedicated relay nuclei: LGN for vision, MGN for hearing, VPL/VPM for touch. The vestibular sense has none. The thalamus also receives massive feedback from the cortex (corticothalamic fibres outnumber thalamocortical ones; the often-quoted tenfold figure is an estimate from cat LGN), making it a dynamic filter that the cortex uses to control its own input.",
       "sub_structures": [
         {
           "name": "Lateral Geniculate Nucleus (LGN)",
@@ -1505,7 +1524,7 @@
       ],
       "processing_pipeline": "Sensory receptors \u2192 Sensory nerves \u2192 Specific thalamic nucleus (LGN/MGN/VPL) \u2192 Thalamocortical radiations \u2192 Layer 4 of corresponding cortical area. Gating mechanism: Reticular nucleus receives cortical feedback \u2192 inhibits thalamic relay neurons \u2192 blocks sensory input from reaching cortex (selective attention). During sleep: thalamic neurons enter burst mode \u2192 thalamocortical oscillations \u2192 sleep spindles (12-15Hz) = memory consolidation.",
       "signal_type": "Relay and gating \u2014 tonic mode (faithful transmission) vs. burst mode (rhythmic blocking)",
-      "bci_relevance_detail": "DBS of the thalamus (VIM nucleus) is FDA-approved for essential tremor. Thalamic stimulation can modulate consciousness level in minimally conscious patients. The thalamic gate is a critical security concern: disrupting thalamic relay could alter all conscious sensory experience simultaneously.",
+      "bci_relevance_detail": "DBS of the thalamus (VIM nucleus) is FDA-approved for essential tremor. Thalamic stimulation can modulate consciousness level in minimally conscious patients. Under review: the earlier statement that the thalamic gate is a critical security concern because disrupting thalamic relay could alter all conscious sensory experience simultaneously rested on a firewall analogy and needs a new justification or withdrawal.",
       "clinical_notes": "Thalamic stroke \u2192 thalamic pain syndrome (severe, chronic pain from damaged sensory relay). Absence seizures: thalamocortical circuits enter pathological burst oscillation (3Hz spike-and-wave). Fatal familial insomnia: prion disease destroying thalamus \u2192 complete inability to sleep \u2192 death."
     },
     {

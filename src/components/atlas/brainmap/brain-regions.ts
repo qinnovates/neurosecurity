@@ -4,8 +4,8 @@
  *
  * Anatomical positioning (medial view, left hemisphere):
  * - Cortex (N7): top arc, anterior to posterior
- * - Limbic (N6): deep interior, midline structures
- * - Basal ganglia (N5): deep center
+ * - Allocortex (N6): deep interior, midline structures
+ * - Cerebral nuclei (N5): deep center
  * - Diencephalon (N4): central core
  * - Cerebellum (N3): posterior-inferior
  * - Brainstem (N2): inferior center
@@ -33,20 +33,17 @@ export const BRAIN_REGION_COORDS: Record<string, BrainRegionCoord> = {
   a1:         { cx: 330, cy: 130, rx: 14, ry: 10, labelOffset: { dx: 16, dy: 0 } },
   v1:         { cx: 345, cy: 165, rx: 16, ry: 12, labelOffset: { dx: 16, dy: 0 } },
 
-  // ═══ N6 — Limbic System (deep interior) ═══
+  // ═══ N6 — Allocortex (deep interior) ═══
   acc:          { cx: 135, cy: 115, rx: 14, ry: 10, labelOffset: { dx: -16, dy: 0 } },
   cingulate:    { cx: 220, cy: 90,  rx: 14, ry: 9,  labelOffset: { dx: 0, dy: -14 } },
   insula:       { cx: 155, cy: 165, rx: 14, ry: 10, labelOffset: { dx: -16, dy: 0 } },
   hippocampus:  { cx: 260, cy: 195, rx: 18, ry: 11, labelOffset: { dx: 0, dy: 16 } },
   bla:          { cx: 200, cy: 200, rx: 13, ry: 10, labelOffset: { dx: -16, dy: 0 } },
 
-  // ═══ N5 — Basal Ganglia (deep center) ═══
+  // ═══ N5 — Cerebral nuclei (deep center) ═══
   striatum:         { cx: 180, cy: 145, rx: 16, ry: 11, labelOffset: { dx: 0, dy: -15 } },
   gpi:              { cx: 195, cy: 170, rx: 10, ry: 8,  labelOffset: { dx: 14, dy: 0 } },
   gpe:              { cx: 175, cy: 185, rx: 10, ry: 8,  labelOffset: { dx: -14, dy: 0 } },
-  stn:              { cx: 210, cy: 195, rx: 10, ry: 8,  labelOffset: { dx: 14, dy: 0 } },
-  substantia_nigra: { cx: 220, cy: 230, rx: 14, ry: 9,  labelOffset: { dx: 16, dy: 0 } },
-  vta:              { cx: 195, cy: 235, rx: 11, ry: 8,  labelOffset: { dx: -14, dy: 0 } },
   cea:              { cx: 220, cy: 210, rx: 10, ry: 8,  labelOffset: { dx: 14, dy: 0 } },
 
   // ═══ N4 — Diencephalon (central relay) ═══
@@ -54,6 +51,7 @@ export const BRAIN_REGION_COORDS: Record<string, BrainRegionCoord> = {
   hypothalamus: { cx: 175, cy: 220, rx: 16, ry: 10, labelOffset: { dx: -18, dy: 0 } },
   vim:          { cx: 250, cy: 178, rx: 10, ry: 7,  labelOffset: { dx: 14, dy: 0 } },
   ant:          { cx: 220, cy: 145, rx: 10, ry: 7,  labelOffset: { dx: 0, dy: -12 } },
+  stn:          { cx: 210, cy: 195, rx: 10, ry: 8,  labelOffset: { dx: 14, dy: 0 } },
 
   // ═══ N3 — Cerebellum (posterior-inferior) ═══
   cerebellum_cortex: { cx: 340, cy: 260, rx: 24, ry: 16, labelOffset: { dx: 0, dy: -20 } },
@@ -65,6 +63,8 @@ export const BRAIN_REGION_COORDS: Record<string, BrainRegionCoord> = {
   pons:                { cx: 250, cy: 290, rx: 18, ry: 12, labelOffset: { dx: -20, dy: 0 } },
   medulla:             { cx: 245, cy: 320, rx: 16, ry: 11, labelOffset: { dx: -20, dy: 0 } },
   reticular_formation: { cx: 265, cy: 285, rx: 10, ry: 8,  labelOffset: { dx: 14, dy: 0 } },
+  substantia_nigra:    { cx: 220, cy: 230, rx: 14, ry: 9,  labelOffset: { dx: 16, dy: 0 } },
+  vta:                 { cx: 195, cy: 235, rx: 11, ry: 8,  labelOffset: { dx: -14, dy: 0 } },
 
   // ═══ N1 — Spinal Cord (bottom) ═══
   cervical_cord: { cx: 235, cy: 360, rx: 12, ry: 9,  labelOffset: { dx: -18, dy: 0 } },

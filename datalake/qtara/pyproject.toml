@@ -20,13 +20,12 @@ classifiers = [
 ]
 dependencies = [
     "pydantic>=2.0.0",
-    "stix2>=3.0.0",
     "rich>=13.0.0",
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/qinnovates/qinnovate"
-"Bug Tracker" = "https://github.com/qinnovates/qinnovate/issues"
+"Homepage" = "https://github.com/qinnovates/neurosecurity"
+"Bug Tracker" = "https://github.com/qinnovates/neurosecurity/issues"
 
 [project.scripts]
 qtara = "qtara.cli:main"

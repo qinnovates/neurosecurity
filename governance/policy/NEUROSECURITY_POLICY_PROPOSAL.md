@@ -343,7 +343,7 @@ Two scenarios illustrate the cost of waiting for the first breach:
 
 ### The Canary: A BCI-Infrastructure Vulnerability (February 2026)
 
-In February 2026, QIF disclosed the first BCI-infrastructure vulnerability in a widely used real-time data transport library for BCI research. The library is used in hundreds of research labs worldwide and carries live neural data.
+In February 2026, QIF disclosed a BCI-infrastructure vulnerability in a widely used real-time data transport library for BCI research. The library is used in hundreds of research labs worldwide and carries live neural data.
 
 The vulnerability is real but affects a research tool, not a clinical implant. It is the canary. The next one may not be in a research library. It may be in a device implanted in a human brain. The time to build the frameworks, taxonomies, scoring systems, and incident response procedures is before that happens, not after.
 
@@ -407,7 +407,7 @@ CVSS is a consensus-driven standard maintained by hundreds of organizations. Pro
 | NISS Dimension | What It Scores | Why CVSS Cannot Express It |
 |----------------|---------------|---------------------------|
 | Biological Impact (BI) | Physical harm to neural tissue | CVSS has no "tissue damage" metric |
-| Cognitive Reconnaissance (CR) | Unauthorized neural data read access (thought decoding, inference) | CVSS "Integrity" means data integrity, not cognitive security |
+| Cognitive Reconnaissance (CR) | Unauthorized neural data read access (decoding of speech or motor intent by models trained on a cooperating user; inference) | CVSS "Integrity" means data integrity, not cognitive security |
 | Cognitive Disruption (CD) | Unauthorized neural state modification (perception manipulation) | CVSS has no cognitive write-access metric |
 | Consent Violation (CV) | Whether the attack bypasses user consent | CVSS has no consent dimension |
 | Reversibility (RV) | Whether damage can be undone | CVSS assumes software remediation, not biological recovery |
@@ -857,7 +857,8 @@ License: Apache 2.0
 Preprint: doi.org/10.5281/zenodo.18640105
 
 Architecture: 11-Band Hourglass (7-1-3)
-  N7 (Cortex) → N6 → N5 → N4 → N3 → N2 → N1 → I0 (Interface) → S1 → S2 → S3 (Cloud)
+  N7 (Neocortex), N6, N5, N4, N3, N2, N1 | I0 (Interface) | S1, S2, S3 (Cloud)
+  Band codes are addresses, not an order.
 
 Components:
   TARA    109 techniques | 15 tactics | MITRE-compatible IDs

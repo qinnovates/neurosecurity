@@ -61,6 +61,9 @@ import eegSamplesRaw from '@shared/eeg-samples.json';
 // Research intake ledger (proposals from data refreshes — NOT published data)
 import intakeLedgerRaw from '@shared/intake/ledger.json';
 
+// Non-adversarial hazards (kept apart from attack techniques)
+import hazardsRaw from '@shared/qif-hazards.json';
+
 // Precomputed tables (eliminates O(n⁴) build-time computation)
 import impactChainsRaw from '@shared/impact-chains.json';
 
@@ -163,9 +166,18 @@ function parseNissVector(vector: string): Record<string, string> {
   return metrics;
 }
 
+/** Supported metric codes of a provisional entry, keyed like parseNissVector; unknown metrics are left out. */
+function provisionalMetrics(metrics: Record<string, string> | undefined): Record<string, string> {
+  const supported: Record<string, string> = {};
+  for (const [code, value] of Object.entries(metrics || {})) {
+    if (value !== 'unknown') supported[code.toLowerCase()] = value;
+  }
+  return supported;
+}
+
 function buildTechniques(): Row[] {
   return (registrar.techniques || []).map((t: any) => {
-    const nv = parseNissVector(t.niss?.vector || '');
+    const nv = t.niss?.vector ? parseNissVector(t.niss.vector) : provisionalMetrics(t.niss?.metrics);
     return {
       id: t.id,
       name: t.attack || t.name,
@@ -176,6 +188,11 @@ function buildTechniques(): Row[] {
       niss_vector: t.niss?.vector || '',
       niss_severity: t.niss?.severity || '',
       niss_pins: t.niss?.pins || false,
+      niss_scoring_state: t.niss?.scoring_state || 'unscored',
+      niss_score_min: t.niss?.score_min ?? '',
+      niss_score_max: t.niss?.score_max ?? '',
+      niss_metrics_supported: Object.keys(nv).length,
+      niss_unscored_reason: t.niss?.unscored_reason || '',
       niss_bi: nv.bi || '',
       niss_cr: nv.cr || '',
       niss_cd: nv.cd || '',
@@ -191,8 +208,61 @@ function buildTechniques(): Row[] {
       tara_domain: t.tara_domain_primary || '',
       tara_domain_secondary: (t.tara_domain_secondary || []).join(', '),
       tara_mode: t.tara_mode || '',
+      peer_review_status: t.peer_review_status || '',
+      defensive_sources: (t.defensive_sources || []).join('; '),
     };
   });
+}
+
+/**
+ * Variants: same signal-level mechanism, tactic and harm as one parent
+ * technique, differing in one dimension. A separate table so they are never
+ * counted as techniques; join to techniques on parent == id.
+ */
+function buildVariants(): Row[] {
+  const variants = registrar.variants;
+  if (!Array.isArray(variants)) return [];
+  const parentNames = new Map<string, string>((registrar.techniques || []).map((t: any) => [t.id, t.attack || t.name || '']));
+  return variants.map((v: any) => ({
+    id: v.id,
+    alias: v.alias ?? '',
+    name: v.name ?? '',
+    parent: v.parent ?? '',
+    parent_name: parentNames.get(v.parent) ?? '',
+    differs_in: v.differs_in ?? '',
+    inherits_niss: v.inherits_niss === true,
+    status: v.status ?? '',
+    peer_review_status: v.peer_review_status ?? '',
+    niss_scoring_state: v.niss?.scoring_state || 'unscored',
+    niss_unscored_reason: v.niss?.unscored_reason || '',
+    niss_inherited_from: v.niss?.inherited_from || '',
+    description: v.description ?? '',
+    conditions: (v.conditions || []).join('; '),
+    sources: (v.sources || []).join('; '),
+    defensive_sources: (v.defensive_sources || []).join('; '),
+    related_ids: (v.related_ids || []).join(', '),
+    notes: v.notes ?? '',
+  }));
+}
+
+/**
+ * Non-adversarial hazards: conditions with no attacker (loss of support,
+ * gradual hardware change). A separate table so they are never counted as
+ * techniques. Proposed and unvalidated; for threat modeling only.
+ */
+function buildHazards(): Row[] {
+  const hazards = (hazardsRaw as any)?.hazards;
+  if (!Array.isArray(hazards)) return [];
+  return hazards.map((h: any) => ({
+    id: h.id,
+    name: h.name ?? '',
+    description: h.description ?? '',
+    bands: (h.bands || []).join(', '),
+    related_techniques: (h.related_techniques || []).join(', '),
+    sources: (h.sources || []).join('; '),
+    peer_review_status: h.peer_review_status ?? '',
+    status: h.status ?? '',
+  }));
 }
 
 function buildTactics(): Row[] {
@@ -1198,9 +1268,11 @@ export function getKqlTables(): KqlTables {
 
     // Threats
     techniques: buildTechniques(),
+    variants: buildVariants(),
     tactics: buildTactics(),
     cves: buildCves(),
     impact_chains: buildImpactChains(),
+    hazards: buildHazards(),
 
     // Clinical
     dsm5: buildDsm5(),

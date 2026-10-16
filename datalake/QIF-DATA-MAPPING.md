@@ -41,7 +41,7 @@ All files in `shared/`. This is the single source of truth — site components, 
 
 ### Layer 1: Threat Techniques (Macro)
 
-**`qtara-registrar.json`** — 165 techniques, 16 tactics, 8 domains
+**`qtara-registrar.json`** — 173 techniques, 16 tactics, 8 domains
 
 | Field | Links To | Cardinality |
 |-------|----------|-------------|
@@ -114,7 +114,7 @@ Precursor amino acid (e.g., L-tyrosine)
   → Neurotransmitter (e.g., dopamine)
 ```
 
-**Why this matters for security:** A BCI attack that disrupts neural activity at a specific brain region doesn't just affect "the brain" — it disrupts specific pathways that depend on specific neurotransmitters whose synthesis requires specific molecular cofactors. Understanding the full chain lets TARA map the cascade: technique → band → region → pathway → transmitter → molecular dependency → clinical outcome.
+**Why this matters for security:** A BCI attack that disrupts neural activity at a specific brain region doesn't just affect "the brain" — it disrupts specific pathways that depend on specific neurotransmitters whose synthesis requires specific molecular cofactors. Understanding the full chain lets TARA map the cascade: technique → band → region → pathway → transmitter → molecular dependency → clinical outcome. These links are associations by shared band for threat modeling, not traced neural paths.
 
 ---
 

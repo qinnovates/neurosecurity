@@ -10,7 +10,7 @@ const stats = getBciDirectoryStats();
 
 <PageLayout
   title="BCI Directory — Qinnovate"
-  description="57 BCI companies and 68 devices. Filter by type, FDA status, security posture, and more. The most comprehensive open BCI device directory."
+  description={`${stats.totalCompanies} BCI companies and ${stats.totalDevices} devices. Filter by type, FDA status, security posture, and more. An open BCI device directory.`}
   breadcrumbs={[{ label: 'BCI Directory' }]}
   wide={true}
 >

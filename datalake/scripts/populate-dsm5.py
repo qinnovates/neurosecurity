@@ -3,7 +3,7 @@
 Populate DSM-5-TR diagnostic mapping for all 99 TARA techniques.
 
 Neural Impact Chain (NIC): Technique → Band → Structure → Function → NISS + DSM
-NISS-DSM Bridge: NISS metrics predict diagnostic clusters.
+NISS-DSM Bridge: NISS metrics are related to diagnostic clusters as category references; they do not predict a diagnosis.
 
 Usage:
     python3 shared/scripts/populate-dsm5.py
@@ -63,7 +63,7 @@ BAND_DSM_PROFILES = {
         ],
     },
     "N5": {
-        "structures": ["striatum", "STN", "substantia nigra"],
+        "structures": ["striatum", "pallidum"],
         "functions": ["motor selection", "reward processing", "habit formation"],
         "primary_diagnoses": [
             {"code": "F90", "name": "ADHD", "confidence": "established"},
@@ -78,8 +78,8 @@ BAND_DSM_PROFILES = {
         ],
     },
     "N4": {
-        "structures": ["thalamus", "hypothalamus"],
-        "functions": ["sensory gating", "consciousness", "homeostasis"],
+        "structures": ["thalamus", "hypothalamus", "STN"],
+        "functions": ["sensory relay", "consciousness", "homeostasis"],
         "primary_diagnoses": [
             {"code": "F20", "name": "Schizophrenia Spectrum", "confidence": "established"},
             {"code": "G47", "name": "Sleep-Wake Disorders", "confidence": "established"},
@@ -108,7 +108,7 @@ BAND_DSM_PROFILES = {
         ],
     },
     "N2": {
-        "structures": ["medulla", "pons", "midbrain"],
+        "structures": ["medulla", "pons", "midbrain", "substantia nigra", "VTA"],
         "functions": ["vital functions", "arousal", "neurotransmitter production"],
         "primary_diagnoses": [
             {"code": "G47", "name": "Sleep-Wake Disorders", "confidence": "established"},
@@ -374,7 +374,7 @@ def populate_technique(technique: dict) -> dict:
 DSM5_SPEC = {
     "version": "1.0",
     "name": "DSM-5-TR Diagnostic Mapping via Neural Impact Chain",
-    "description": "Maps BCI techniques to psychiatric diagnoses through the hourglass band model. NISS metrics predict diagnostic clusters. First known formal BCI threat-to-psychiatric-diagnosis taxonomy.",
+    "description": "Relates BCI techniques to DSM-5-TR diagnostic categories through the hourglass band model, for threat modeling. NISS metrics are related to diagnostic clusters as category references; they do not predict a diagnosis. A proposed, unvalidated mapping that requires clinical validation.",
     "methodology": "Band → Structure → Function → NISS (quantitative) + DSM (qualitative)",
     "positioning": "RDoC-aligned, BCI-specific, with quantitative bridge (NISS) to traditional nosology (DSM-5-TR)",
     "band_profiles": {

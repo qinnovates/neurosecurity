@@ -9,6 +9,7 @@
 import { THREAT_VECTORS, getClinicalTechniques } from './threat-data';
 import type { ThreatVector, CategoryId } from './threat-data';
 import { getNeurogovernanceData } from './neurogovernance-data';
+import { NEURAL_BAND_REGIONS } from './qif-constants';
 
 // ═══ Shared Types ═══
 
@@ -33,15 +34,7 @@ export interface BrainView {
 
 // ═══ Brain Region definitions (shared across all views) ═══
 
-const BRAIN_REGIONS = [
-  { id: 'N7', name: 'Neocortex', description: 'PFC, M1, V1, Broca, Wernicke — executive function, language, movement, perception' },
-  { id: 'N6', name: 'Limbic System', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception' },
-  { id: 'N5', name: 'Basal Ganglia', description: 'Striatum, STN, substantia nigra — motor selection, reward, habit' },
-  { id: 'N4', name: 'Diencephalon', description: 'Thalamus, hypothalamus — sensory gating, consciousness relay' },
-  { id: 'N3', name: 'Cerebellum', description: 'Cerebellar cortex, deep nuclei — motor coordination, timing' },
-  { id: 'N2', name: 'Brainstem', description: 'Medulla, pons, midbrain — vital functions, arousal, reflexes' },
-  { id: 'N1', name: 'Spinal Cord', description: 'Cervical through sacral — reflexes, peripheral relay' },
-] as const;
+const BRAIN_REGIONS = NEURAL_BAND_REGIONS;
 
 // ═══ Clinical domain definitions (reused from therapeutics page) ═══
 

@@ -330,7 +330,7 @@
       "date": "2026-02-13",
       "title": "NISS-DSM Bridge",
       "short": "Threats mapped to psychiatric diagnoses",
-      "description": "First formal BCI threat-to-psychiatric-diagnosis taxonomy. Neural Impact Chain links attack mechanisms through NISS metrics to DSM-5-TR diagnostic codes. Five diagnostic clusters identified.",
+      "description": "Formal BCI threat-to-psychiatric-diagnosis taxonomy proposed. Neural Impact Chain links attack mechanisms through NISS metrics to DSM-5-TR diagnostic codes. Five diagnostic clusters identified.",
       "category": "taxonomy",
       "type": "milestone",
       "metrics": {
