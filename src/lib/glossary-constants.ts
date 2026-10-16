@@ -450,10 +450,10 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
   },
   {
     id: 'niss-dsm-bridge',
-    term: 'NISS-DSM Bridge',
+    term: 'NISS-DSM Bridge (retired)',
     type: 'concept',
-    shortDef: 'The link between NISS scores (how bad) and DSM diagnostic categories (what kind). Each NISS metric corresponds to a different diagnostic cluster.',
-    fullDef: 'Maps NISS metrics to diagnostic risk domains: BI (Biological Impact) \u2192 Motor/Neurocognitive, CR (Cognitive Reconnaissance, read-side) \u2192 Cognitive/Psychotic, CD (Cognitive/Functional Disruption, write-side) \u2192 Cognitive/Psychotic, CV (Consent Violation) \u2192 Mood/Trauma, NP (Neuroplasticity) \u2192 Persistent/Personality, RV (Reversibility) \u2192 Chronicity modifier. This structural correspondence between security metrics and diagnostic categories is a research observation that requires clinical validation.',
+    shortDef: 'Retired 2026-10-16. A former table that mapped each NISS metric to DSM-5-TR chapters. NISS does not predict diagnoses or diagnostic clusters.',
+    fullDef: 'The registrar once carried dsm5_spec.niss_dsm_bridge, which mapped each NISS metric (BI, CR, CD, CV, RV, NP) to DSM-5-TR chapters and stated that NISS metrics predict diagnostic clusters. Both were removed in registrar changelog 1.10 because they contradicted the guardrails: NISS scores the impact of a threat technique, and DSM-5-TR names are diagnostic category references for threat modeling, not diagnostic claims.',
     relatedTerms: ['niss', 'neural-impact-chain', 'diagnostic-cluster'],
     tags: ['concept', 'clinical', 'metric'],
   },

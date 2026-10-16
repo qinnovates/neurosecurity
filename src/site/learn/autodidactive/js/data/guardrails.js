@@ -8,7 +8,7 @@ export const GUARDRAILS = [
     constraint: 'Neural correlates do not prove causation or eliminate agency. Neuroscience findings are routinely overclaimed when applied to law and policy.',
     violation: 'Brain activity X proves cognitive state Y',
     correct: 'Brain activity X is associated with / correlates with cognitive state Y',
-    qifScope: 'NISS measures physical amplitude disruption, not "thought harm."'
+    qifScope: 'NISS v1.1 scores six technique-impact metrics (BI, CR, CD, CV, RV, NP), not "thought harm."'
   },
   {
     id: 'G2', name: 'Reverse Inference Fallacy', category: 'methodology',
@@ -40,7 +40,7 @@ export const GUARDRAILS = [
     constraint: '"Mental privacy" and "mental integrity" lack agreed operational definitions. Do not use them as settled concepts.',
     violation: 'Mental privacy is a well-defined right that...',
     correct: '"Mental privacy" (definition varies by author) refers to...',
-    qifScope: 'QIF defines measurable properties (signal amplitude, frequency, coherence), not philosophically contested mental states.'
+    qifScope: 'QIF defines operationally scored metrics (NISS: BI, CR, CD, CV, RV, NP; coherence metric Cs: phase variance, temporal entropy, gain fluctuation, spectral drift), not philosophically contested mental states.'
   },
   {
     id: 'G6', name: 'Brain Reading Limits', category: 'capability',

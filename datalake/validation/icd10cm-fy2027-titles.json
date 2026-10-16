@@ -1,0 +1,653 @@
+{
+  "_metadata": {
+    "title": "ICD-10-CM codes used in the QIF data lake, with official titles",
+    "source": {
+      "publisher": "CDC/NCHS",
+      "release": "ICD-10-CM FY2027",
+      "file": "icd10cm-order-2027.txt",
+      "url": "https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Publications/ICD10CM/2027/icd10cm-code-descriptions-2027.zip",
+      "zip_sha256": "93e3ad6004badf470c55bfe679b748ae88fd9b2b421851e409eec382c7713b9a",
+      "retrieved": "2026-10-16"
+    },
+    "generator": "src/scripts/build-icd10cm-reference.mjs",
+    "note": "Official ICD-10-CM titles only. No DSM-5-TR names or criteria text. kind \"category\" marks a header (non-billable) code used as a category reference."
+  },
+  "codes": {
+    "E24.0": {
+      "title": "Pituitary-dependent Cushing's disease",
+      "kind": "billable"
+    },
+    "E27.1": {
+      "title": "Primary adrenocortical insufficiency",
+      "kind": "billable"
+    },
+    "F01": {
+      "title": "Vascular dementia",
+      "kind": "category"
+    },
+    "F05": {
+      "title": "Delirium due to known physiological condition",
+      "kind": "billable"
+    },
+    "F06.2": {
+      "title": "Psychotic disorder with delusions due to known physiological condition",
+      "kind": "billable"
+    },
+    "F06.7": {
+      "title": "Mild neurocognitive disorder due to known physiological condition",
+      "kind": "category"
+    },
+    "F06.8": {
+      "title": "Other specified mental disorders due to known physiological condition",
+      "kind": "billable"
+    },
+    "F07.0": {
+      "title": "Personality change due to known physiological condition",
+      "kind": "billable"
+    },
+    "F10": {
+      "title": "Alcohol related disorders",
+      "kind": "category"
+    },
+    "F10.20": {
+      "title": "Alcohol dependence, uncomplicated",
+      "kind": "billable"
+    },
+    "F11": {
+      "title": "Opioid related disorders",
+      "kind": "category"
+    },
+    "F12": {
+      "title": "Cannabis related disorders",
+      "kind": "category"
+    },
+    "F14": {
+      "title": "Cocaine related disorders",
+      "kind": "category"
+    },
+    "F15": {
+      "title": "Other stimulant related disorders",
+      "kind": "category"
+    },
+    "F15.9": {
+      "title": "Other stimulant use, unspecified",
+      "kind": "category"
+    },
+    "F17": {
+      "title": "Nicotine dependence",
+      "kind": "category"
+    },
+    "F20": {
+      "title": "Schizophrenia",
+      "kind": "category"
+    },
+    "F30": {
+      "title": "Manic episode",
+      "kind": "category"
+    },
+    "F31": {
+      "title": "Bipolar disorder",
+      "kind": "category"
+    },
+    "F32": {
+      "title": "Depressive episode",
+      "kind": "category"
+    },
+    "F32.0": {
+      "title": "Major depressive disorder, single episode, mild",
+      "kind": "billable"
+    },
+    "F32.1": {
+      "title": "Major depressive disorder, single episode, moderate",
+      "kind": "billable"
+    },
+    "F32.2": {
+      "title": "Major depressive disorder, single episode, severe without psychotic features",
+      "kind": "billable"
+    },
+    "F32.81": {
+      "title": "Premenstrual dysphoric disorder",
+      "kind": "billable"
+    },
+    "F33": {
+      "title": "Major depressive disorder, recurrent",
+      "kind": "category"
+    },
+    "F34.1": {
+      "title": "Dysthymic disorder",
+      "kind": "billable"
+    },
+    "F40": {
+      "title": "Phobic anxiety disorders",
+      "kind": "category"
+    },
+    "F40.01": {
+      "title": "Agoraphobia with panic disorder",
+      "kind": "billable"
+    },
+    "F40.1": {
+      "title": "Social phobias",
+      "kind": "category"
+    },
+    "F40.10": {
+      "title": "Social phobia, unspecified",
+      "kind": "billable"
+    },
+    "F40.2": {
+      "title": "Specific (isolated) phobias",
+      "kind": "category"
+    },
+    "F41": {
+      "title": "Other anxiety disorders",
+      "kind": "category"
+    },
+    "F41.0": {
+      "title": "Panic disorder [episodic paroxysmal anxiety]",
+      "kind": "billable"
+    },
+    "F41.1": {
+      "title": "Generalized anxiety disorder",
+      "kind": "billable"
+    },
+    "F42": {
+      "title": "Obsessive-compulsive disorder",
+      "kind": "category"
+    },
+    "F43": {
+      "title": "Reaction to severe stress, and adjustment disorders",
+      "kind": "category"
+    },
+    "F43.0": {
+      "title": "Acute stress reaction",
+      "kind": "billable"
+    },
+    "F43.1": {
+      "title": "Post-traumatic stress disorder (PTSD)",
+      "kind": "category"
+    },
+    "F43.10": {
+      "title": "Post-traumatic stress disorder, unspecified",
+      "kind": "billable"
+    },
+    "F43.2": {
+      "title": "Adjustment disorders",
+      "kind": "category"
+    },
+    "F44": {
+      "title": "Dissociative and conversion disorders",
+      "kind": "category"
+    },
+    "F44.0": {
+      "title": "Dissociative amnesia",
+      "kind": "billable"
+    },
+    "F44.2": {
+      "title": "Dissociative stupor",
+      "kind": "billable"
+    },
+    "F44.4": {
+      "title": "Conversion disorder with motor symptom or deficit",
+      "kind": "billable"
+    },
+    "F44.81": {
+      "title": "Dissociative identity disorder",
+      "kind": "billable"
+    },
+    "F45": {
+      "title": "Somatoform disorders",
+      "kind": "category"
+    },
+    "F45.22": {
+      "title": "Body dysmorphic disorder",
+      "kind": "billable"
+    },
+    "F45.8": {
+      "title": "Other somatoform disorders",
+      "kind": "billable"
+    },
+    "F48.1": {
+      "title": "Depersonalization-derealization syndrome",
+      "kind": "billable"
+    },
+    "F48.2": {
+      "title": "Pseudobulbar affect",
+      "kind": "billable"
+    },
+    "F50": {
+      "title": "Eating disorders",
+      "kind": "category"
+    },
+    "F50.0": {
+      "title": "Anorexia nervosa",
+      "kind": "category"
+    },
+    "F51": {
+      "title": "Sleep disorders not due to a substance or known physiological condition",
+      "kind": "category"
+    },
+    "F51.0": {
+      "title": "Insomnia not due to a substance or known physiological condition",
+      "kind": "category"
+    },
+    "F52": {
+      "title": "Sexual dysfunction not due to a substance or known physiological condition",
+      "kind": "category"
+    },
+    "F60": {
+      "title": "Specific personality disorders",
+      "kind": "category"
+    },
+    "F60.2": {
+      "title": "Antisocial personality disorder",
+      "kind": "billable"
+    },
+    "F60.3": {
+      "title": "Borderline personality disorder",
+      "kind": "billable"
+    },
+    "F63": {
+      "title": "Impulse disorders",
+      "kind": "category"
+    },
+    "F63.0": {
+      "title": "Pathological gambling",
+      "kind": "billable"
+    },
+    "F64": {
+      "title": "Gender identity disorders",
+      "kind": "category"
+    },
+    "F79": {
+      "title": "Unspecified intellectual disabilities",
+      "kind": "billable"
+    },
+    "F80": {
+      "title": "Specific developmental disorders of speech and language",
+      "kind": "category"
+    },
+    "F80.1": {
+      "title": "Expressive language disorder",
+      "kind": "billable"
+    },
+    "F80.2": {
+      "title": "Mixed receptive-expressive language disorder",
+      "kind": "billable"
+    },
+    "F82": {
+      "title": "Specific developmental disorder of motor function",
+      "kind": "billable"
+    },
+    "F84": {
+      "title": "Pervasive developmental disorders",
+      "kind": "category"
+    },
+    "F84.0": {
+      "title": "Autistic disorder",
+      "kind": "billable"
+    },
+    "F90": {
+      "title": "Attention-deficit hyperactivity disorders",
+      "kind": "category"
+    },
+    "F90.0": {
+      "title": "Attention-deficit hyperactivity disorder, predominantly inattentive type",
+      "kind": "billable"
+    },
+    "F93.0": {
+      "title": "Separation anxiety disorder of childhood",
+      "kind": "billable"
+    },
+    "F94.1": {
+      "title": "Reactive attachment disorder of childhood",
+      "kind": "billable"
+    },
+    "F95": {
+      "title": "Tic disorder",
+      "kind": "category"
+    },
+    "F95.1": {
+      "title": "Chronic motor or vocal tic disorder",
+      "kind": "billable"
+    },
+    "F95.2": {
+      "title": "Tourette's disorder",
+      "kind": "billable"
+    },
+    "F98.4": {
+      "title": "Stereotyped movement disorders",
+      "kind": "billable"
+    },
+    "G11": {
+      "title": "Hereditary ataxia",
+      "kind": "category"
+    },
+    "G12.21": {
+      "title": "Amyotrophic lateral sclerosis",
+      "kind": "billable"
+    },
+    "G20": {
+      "title": "Parkinson's disease",
+      "kind": "category"
+    },
+    "G24": {
+      "title": "Dystonia",
+      "kind": "category"
+    },
+    "G25": {
+      "title": "Other extrapyramidal and movement disorders",
+      "kind": "category"
+    },
+    "G25.0": {
+      "title": "Essential tremor",
+      "kind": "billable"
+    },
+    "G25.3": {
+      "title": "Myoclonus",
+      "kind": "billable"
+    },
+    "G25.5": {
+      "title": "Other chorea",
+      "kind": "billable"
+    },
+    "G25.8": {
+      "title": "Other specified extrapyramidal and movement disorders",
+      "kind": "category"
+    },
+    "G25.89": {
+      "title": "Other specified extrapyramidal and movement disorders",
+      "kind": "billable"
+    },
+    "G30": {
+      "title": "Alzheimer's disease",
+      "kind": "category"
+    },
+    "G35": {
+      "title": "Multiple sclerosis",
+      "kind": "category"
+    },
+    "G40": {
+      "title": "Epilepsy and recurrent seizures",
+      "kind": "category"
+    },
+    "G40.209": {
+      "title": "Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures, not intractable, without status epilepticus",
+      "kind": "billable"
+    },
+    "G40.409": {
+      "title": "Other generalized epilepsy and epileptic syndromes, not intractable, without status epilepticus",
+      "kind": "billable"
+    },
+    "G40.909": {
+      "title": "Epilepsy, unspecified, not intractable, without status epilepticus",
+      "kind": "billable"
+    },
+    "G43.909": {
+      "title": "Migraine, unspecified, not intractable, without status migrainosus",
+      "kind": "billable"
+    },
+    "G44": {
+      "title": "Other headache syndromes",
+      "kind": "category"
+    },
+    "G44.309": {
+      "title": "Post-traumatic headache, unspecified, not intractable",
+      "kind": "billable"
+    },
+    "G45.9": {
+      "title": "Transient cerebral ischemic attack, unspecified",
+      "kind": "billable"
+    },
+    "G47": {
+      "title": "Sleep disorders",
+      "kind": "category"
+    },
+    "G47.0": {
+      "title": "Insomnia",
+      "kind": "category"
+    },
+    "G47.00": {
+      "title": "Insomnia, unspecified",
+      "kind": "billable"
+    },
+    "G47.2": {
+      "title": "Circadian rhythm sleep disorders",
+      "kind": "category"
+    },
+    "G47.33": {
+      "title": "Obstructive sleep apnea (adult) (pediatric)",
+      "kind": "billable"
+    },
+    "G47.4": {
+      "title": "Narcolepsy and cataplexy",
+      "kind": "category"
+    },
+    "G47.8": {
+      "title": "Other sleep disorders",
+      "kind": "billable"
+    },
+    "G50.0": {
+      "title": "Trigeminal neuralgia",
+      "kind": "billable"
+    },
+    "G50.8": {
+      "title": "Other disorders of trigeminal nerve",
+      "kind": "billable"
+    },
+    "G80.9": {
+      "title": "Cerebral palsy, unspecified",
+      "kind": "billable"
+    },
+    "G81.10": {
+      "title": "Spastic hemiplegia affecting unspecified side",
+      "kind": "billable"
+    },
+    "G83.5": {
+      "title": "Locked-in state",
+      "kind": "billable"
+    },
+    "G89": {
+      "title": "Pain, not elsewhere classified",
+      "kind": "category"
+    },
+    "G89.29": {
+      "title": "Other chronic pain",
+      "kind": "billable"
+    },
+    "G90.2": {
+      "title": "Horner's syndrome",
+      "kind": "billable"
+    },
+    "G90.4": {
+      "title": "Autonomic dysreflexia",
+      "kind": "billable"
+    },
+    "G90.50": {
+      "title": "Complex regional pain syndrome I, unspecified",
+      "kind": "billable"
+    },
+    "G90.9": {
+      "title": "Disorder of the autonomic nervous system, unspecified",
+      "kind": "billable"
+    },
+    "G90.A": {
+      "title": "Postural orthostatic tachycardia syndrome [POTS]",
+      "kind": "billable"
+    },
+    "G93.1": {
+      "title": "Anoxic brain damage, not elsewhere classified",
+      "kind": "billable"
+    },
+    "H47.619": {
+      "title": "Cortical blindness, unspecified side of brain",
+      "kind": "billable"
+    },
+    "H53.10": {
+      "title": "Unspecified subjective visual disturbances",
+      "kind": "billable"
+    },
+    "H53.40": {
+      "title": "Unspecified visual field defects",
+      "kind": "billable"
+    },
+    "H55.00": {
+      "title": "Unspecified nystagmus",
+      "kind": "billable"
+    },
+    "H55.09": {
+      "title": "Other forms of nystagmus",
+      "kind": "billable"
+    },
+    "H81.03": {
+      "title": "Meniere's disease, bilateral",
+      "kind": "billable"
+    },
+    "H81.13": {
+      "title": "Benign paroxysmal vertigo, bilateral",
+      "kind": "billable"
+    },
+    "H81.20": {
+      "title": "Vestibular neuronitis, unspecified ear",
+      "kind": "billable"
+    },
+    "H81.399": {
+      "title": "Other peripheral vertigo, unspecified ear",
+      "kind": "billable"
+    },
+    "H83.3X3": {
+      "title": "Noise effects on inner ear, bilateral",
+      "kind": "billable"
+    },
+    "H90.3": {
+      "title": "Sensorineural hearing loss, bilateral",
+      "kind": "billable"
+    },
+    "H93.13": {
+      "title": "Tinnitus, bilateral",
+      "kind": "billable"
+    },
+    "H93.19": {
+      "title": "Tinnitus, unspecified ear",
+      "kind": "billable"
+    },
+    "H93.25": {
+      "title": "Central auditory processing disorder",
+      "kind": "billable"
+    },
+    "H93.3X9": {
+      "title": "Disorders of unspecified acoustic nerve",
+      "kind": "billable"
+    },
+    "I95.1": {
+      "title": "Orthostatic hypotension",
+      "kind": "billable"
+    },
+    "K58": {
+      "title": "Irritable bowel syndrome",
+      "kind": "category"
+    },
+    "N31.9": {
+      "title": "Neuromuscular dysfunction of bladder, unspecified",
+      "kind": "billable"
+    },
+    "R00.0": {
+      "title": "Tachycardia, unspecified",
+      "kind": "billable"
+    },
+    "R00.1": {
+      "title": "Bradycardia, unspecified",
+      "kind": "billable"
+    },
+    "R20.8": {
+      "title": "Other disturbances of skin sensation",
+      "kind": "billable"
+    },
+    "R25.2": {
+      "title": "Cramp and spasm",
+      "kind": "billable"
+    },
+    "R26.0": {
+      "title": "Ataxic gait",
+      "kind": "billable"
+    },
+    "R26.89": {
+      "title": "Other abnormalities of gait and mobility",
+      "kind": "billable"
+    },
+    "R27.0": {
+      "title": "Ataxia, unspecified",
+      "kind": "billable"
+    },
+    "R29.3": {
+      "title": "Abnormal posture",
+      "kind": "billable"
+    },
+    "R40.3": {
+      "title": "Persistent vegetative state",
+      "kind": "billable"
+    },
+    "R41.3": {
+      "title": "Other amnesia",
+      "kind": "billable"
+    },
+    "R41.89": {
+      "title": "Other symptoms and signs involving cognitive functions and awareness",
+      "kind": "billable"
+    },
+    "R42": {
+      "title": "Dizziness and giddiness",
+      "kind": "billable"
+    },
+    "R43.0": {
+      "title": "Anosmia",
+      "kind": "billable"
+    },
+    "R43.1": {
+      "title": "Parosmia",
+      "kind": "billable"
+    },
+    "R43.2": {
+      "title": "Parageusia",
+      "kind": "billable"
+    },
+    "R43.8": {
+      "title": "Other disturbances of smell and taste",
+      "kind": "billable"
+    },
+    "R47.0": {
+      "title": "Dysphasia and aphasia",
+      "kind": "category"
+    },
+    "R47.01": {
+      "title": "Aphasia",
+      "kind": "billable"
+    },
+    "R47.1": {
+      "title": "Dysarthria and anarthria",
+      "kind": "billable"
+    },
+    "R48.1": {
+      "title": "Agnosia",
+      "kind": "billable"
+    },
+    "R48.2": {
+      "title": "Apraxia",
+      "kind": "billable"
+    },
+    "R48.3": {
+      "title": "Visual agnosia",
+      "kind": "billable"
+    },
+    "R55": {
+      "title": "Syncope and collapse",
+      "kind": "billable"
+    },
+    "T85.190A": {
+      "title": "Other mechanical complication of implanted electronic neurostimulator of brain electrode (lead), initial encounter",
+      "kind": "billable"
+    },
+    "T85.731A": {
+      "title": "Infection and inflammatory reaction due to implanted electronic neurostimulator of brain, electrode (lead), initial encounter",
+      "kind": "billable"
+    }
+  }
+}

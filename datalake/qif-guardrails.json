@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "1.0",
-    "lastUpdated": "2026-03-05",
+    "lastUpdated": "2026-10-16",
     "description": "Paired neuroethics and neurosecurity guardrails for QIF research. Each neuroethics constraint from published literature maps to a neurosecurity scope limit that QIF enforces.",
     "totalGuardrails": 8,
     "totalComponentBounds": 4
@@ -24,7 +24,7 @@
         "correct": "Brain activity X is associated with / correlates with cognitive state Y"
       },
       "neurosecurity": {
-        "scope": "We score signal-level interference, not mental states. NISS measures physical amplitude disruption, not 'thought harm.'",
+        "scope": "We score signal-level interference, not mental states. NISS v1.1 scores six technique-impact metrics (BI, CR, CD, CV, RV, NP), not 'thought harm.'",
         "components": ["NISS", "TARA"]
       }
     },
@@ -105,10 +105,10 @@
       "neuroethics": {
         "constraint": "'Mental privacy' and 'mental integrity' lack agreed operational definitions. Never use them as settled concepts.",
         "violation": "NISS protects mental privacy (as if the term is well-defined)",
-        "correct": "NISS measures operationally defined properties: signal amplitude, frequency, coherence"
+        "correct": "NISS scores operationally defined metrics: Biological Impact (BI), Cognitive Reconnaissance (CR), Cognitive/Functional Disruption (CD), Consent Violation (CV), Reversibility (RV), Neuroplasticity (NP)"
       },
       "neurosecurity": {
-        "scope": "We define operationally measurable properties (signal amplitude, frequency, coherence) rather than philosophically contested mental states.",
+        "scope": "We define operationally scored metrics (NISS: BI, CR, CD, CV, RV, NP on fixed ordinal scales; coherence metric Cs: phase variance, temporal entropy, gain fluctuation, spectral drift) rather than philosophically contested mental states.",
         "components": ["NISS", "Cs"]
       }
     },
@@ -180,9 +180,9 @@
     {
       "component": "NISS",
       "fullName": "Neural Impact Scoring System",
-      "does": "Measures physical signal disruption: amplitude deviation, frequency shift, coherence degradation",
+      "does": "Scores the impact of a threat technique on six metrics (NISS v1.1): Biological Impact (BI), Cognitive Reconnaissance (CR), Cognitive/Functional Disruption (CD), Consent Violation (CV), Reversibility (RV) and Neuroplasticity (NP), each on a fixed ordinal scale from 0 to 10, combined as a weighted mean (BI, CV, RV and NP weight 1.0; CR and CD weight 0.5)",
       "doesNot": [
-        "Predict psychiatric diagnoses (corresponds to diagnostic categories for threat modeling)",
+        "Predict psychiatric diagnoses or diagnostic clusters (DSM-5-TR names are category references for threat modeling, not NISS outputs)",
         "Measure 'thought harm' or mental states",
         "Claim clinical diagnostic validity"
       ],

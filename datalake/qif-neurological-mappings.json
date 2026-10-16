@@ -33,7 +33,7 @@
     {
       "id": "NEURO-001",
       "code": "H90.3",
-      "name": "Sensorineural hearing loss",
+      "name": "Sensorineural hearing loss, bilateral",
       "category": "sensory",
       "subcategory": "auditory",
       "definition": "Permanent hearing loss from inner ear (cochlea) or auditory nerve damage.",
@@ -47,7 +47,7 @@
     {
       "id": "NEURO-002",
       "code": "H93.13",
-      "name": "Tinnitus",
+      "name": "Tinnitus, bilateral",
       "category": "sensory",
       "subcategory": "auditory",
       "definition": "Phantom auditory perception (ringing, buzzing, hissing) without external sound source.",
@@ -75,7 +75,7 @@
     {
       "id": "NEURO-004",
       "code": "R48.1",
-      "name": "Auditory agnosia",
+      "name": "Agnosia",
       "category": "sensory",
       "subcategory": "auditory",
       "definition": "Inability to recognize sounds despite intact peripheral hearing and without aphasia.",
@@ -89,7 +89,7 @@
     {
       "id": "NEURO-005",
       "code": "H47.619",
-      "name": "Cortical blindness",
+      "name": "Cortical blindness, unspecified side of brain",
       "category": "sensory",
       "subcategory": "visual",
       "definition": "Loss of vision from bilateral damage to primary visual cortex (V1). Pupillary reflexes intact, eyes structurally normal.",
@@ -103,7 +103,7 @@
     {
       "id": "NEURO-006",
       "code": "H53.40",
-      "name": "Visual field deficits (hemianopia)",
+      "name": "Unspecified visual field defects",
       "category": "sensory",
       "subcategory": "visual",
       "definition": "Loss of vision in one half or quadrant of the visual field from optic tract, LGN, or visual cortex lesion.",
@@ -117,7 +117,7 @@
     {
       "id": "NEURO-007",
       "code": "R48.3",
-      "name": "Visual agnosia / Prosopagnosia",
+      "name": "Visual agnosia",
       "category": "sensory",
       "subcategory": "visual",
       "definition": "Inability to recognize visually presented objects (agnosia) or faces (prosopagnosia) despite intact visual acuity.",
@@ -131,7 +131,7 @@
     {
       "id": "NEURO-008",
       "code": "H81.13",
-      "name": "Vestibular vertigo (BPPV)",
+      "name": "Benign paroxysmal vertigo, bilateral",
       "category": "sensory",
       "subcategory": "vestibular",
       "definition": "Episodic vertigo triggered by head position changes. Most common vestibular disorder.",
@@ -145,7 +145,7 @@
     {
       "id": "NEURO-009",
       "code": "H81.20",
-      "name": "Vestibular neuritis",
+      "name": "Vestibular neuronitis, unspecified ear",
       "category": "sensory",
       "subcategory": "vestibular",
       "definition": "Acute unilateral vestibular dysfunction from inflammation of vestibular nerve. Prolonged severe vertigo with nystagmus.",
@@ -159,7 +159,7 @@
     {
       "id": "NEURO-010",
       "code": "H55.00",
-      "name": "Nystagmus",
+      "name": "Unspecified nystagmus",
       "category": "sensory",
       "subcategory": "vestibular",
       "definition": "Involuntary repetitive eye movements indicating central or vestibular dysfunction.",
@@ -173,7 +173,7 @@
     {
       "id": "NEURO-011",
       "code": "R42",
-      "name": "Spatial disorientation / dizziness",
+      "name": "Dizziness and giddiness",
       "category": "sensory",
       "subcategory": "vestibular",
       "definition": "Persistent sensation of movement mismatch between vestibular, visual, and proprioceptive signals.",
@@ -201,7 +201,7 @@
     {
       "id": "NEURO-013",
       "code": "G50.8",
-      "name": "Trigeminal sensory loss",
+      "name": "Other disorders of trigeminal nerve",
       "category": "sensory",
       "subcategory": "somatosensory",
       "definition": "Reduced or absent sensation in the facial territory of the trigeminal nerve.",
@@ -243,7 +243,7 @@
     {
       "id": "NEURO-016",
       "code": "R43.2",
-      "name": "Dysgeusia",
+      "name": "Parageusia",
       "category": "sensory",
       "subcategory": "gustatory",
       "definition": "Distorted taste perception via CN VII/IX/X through nucleus tractus solitarius to insular cortex.",
@@ -257,7 +257,7 @@
     {
       "id": "NEURO-017",
       "code": "R43.8",
-      "name": "Ageusia",
+      "name": "Other disturbances of smell and taste",
       "category": "sensory",
       "subcategory": "gustatory",
       "definition": "Complete absence of taste perception.",
@@ -271,7 +271,7 @@
     {
       "id": "NEURO-018",
       "code": "R26.0",
-      "name": "Proprioceptive ataxia",
+      "name": "Ataxic gait",
       "category": "sensory",
       "subcategory": "somatosensory",
       "definition": "Loss of joint position sense causing ataxic gait, positive Romberg sign. Distinct from cerebellar ataxia.",
@@ -285,7 +285,7 @@
     {
       "id": "NEURO-019",
       "code": "R48.1",
-      "name": "Tactile agnosia (astereognosis)",
+      "name": "Agnosia",
       "category": "sensory",
       "subcategory": "somatosensory",
       "definition": "Inability to identify objects by touch despite intact tactile sensation. From parietal cortex lesion.",
@@ -299,7 +299,7 @@
     {
       "id": "NEURO-020",
       "code": "R20.8",
-      "name": "Thermoception loss",
+      "name": "Other disturbances of skin sensation",
       "category": "sensory",
       "subcategory": "somatosensory",
       "definition": "Loss of temperature detection (hot/cold) without loss of touch. From spinothalamic tract damage.",
@@ -313,7 +313,7 @@
     {
       "id": "NEURO-021",
       "code": "G89.29",
-      "name": "Allodynia / central sensitization",
+      "name": "Other chronic pain",
       "category": "pain",
       "subcategory": "neuropathic",
       "definition": "Pain produced by normally non-painful stimuli. Pathological sensitization of nociceptive processing.",
@@ -327,7 +327,7 @@
     {
       "id": "NEURO-022",
       "code": "G90.50",
-      "name": "Complex regional pain syndrome (CRPS)",
+      "name": "Complex regional pain syndrome I, unspecified",
       "category": "pain",
       "subcategory": "neuropathic",
       "definition": "Chronic neuropathic pain with allodynia, hyperalgesia, vasomotor changes. Central and peripheral sensitization plus autonomic dysregulation.",
@@ -341,7 +341,7 @@
     {
       "id": "NEURO-023",
       "code": "G90.9",
-      "name": "Dysautonomia",
+      "name": "Disorder of the autonomic nervous system, unspecified",
       "category": "autonomic",
       "subcategory": "systemic",
       "definition": "Generalized failure of autonomic regulation: orthostatic hypotension, heart rate, temperature, sweating, bladder dysfunction.",
@@ -355,7 +355,7 @@
     {
       "id": "NEURO-024",
       "code": "G90.A",
-      "name": "POTS (postural orthostatic tachycardia syndrome)",
+      "name": "Postural orthostatic tachycardia syndrome [POTS]",
       "category": "autonomic",
       "subcategory": "cardiovascular",
       "definition": "Abnormal heart rate increase (>=30 bpm) upon standing with palpitations, lightheadedness, near-syncope.",
@@ -369,7 +369,7 @@
     {
       "id": "NEURO-025",
       "code": "N31.9",
-      "name": "Neurogenic bladder",
+      "name": "Neuromuscular dysfunction of bladder, unspecified",
       "category": "autonomic",
       "subcategory": "genitourinary",
       "definition": "Bladder dysfunction from impaired neural control. Can be hyperreflexic (urge incontinence) or areflexic (retention).",
@@ -397,7 +397,7 @@
     {
       "id": "NEURO-027",
       "code": "I95.1",
-      "name": "Neurogenic orthostatic hypotension",
+      "name": "Orthostatic hypotension",
       "category": "autonomic",
       "subcategory": "cardiovascular",
       "definition": "Sustained BP drop upon standing from failed sympathetic vasoconstriction. Syncope and fall risk.",
@@ -425,7 +425,7 @@
     {
       "id": "NEURO-029",
       "code": "G25.5",
-      "name": "Chorea / Hemiballismus",
+      "name": "Other chorea",
       "category": "motor",
       "subcategory": "movement",
       "definition": "Chorea: irregular involuntary movements. Hemiballismus: violent flinging movements from subthalamic nucleus lesion.",
@@ -453,7 +453,7 @@
     {
       "id": "NEURO-031",
       "code": "G81.10",
-      "name": "Spasticity",
+      "name": "Spastic hemiplegia affecting unspecified side",
       "category": "motor",
       "subcategory": "upper_motor_neuron",
       "definition": "Velocity-dependent increase in tonic stretch reflexes from corticospinal or reticulospinal tract damage.",
@@ -467,7 +467,7 @@
     {
       "id": "NEURO-032",
       "code": "R26.89",
-      "name": "Gait disorder",
+      "name": "Other abnormalities of gait and mobility",
       "category": "motor",
       "subcategory": "locomotion",
       "definition": "Abnormality in walking pattern from cerebellar, basal ganglia, corticospinal, or frontal lobe dysfunction.",
@@ -481,7 +481,7 @@
     {
       "id": "NEURO-033",
       "code": "G80.9",
-      "name": "Cerebral palsy",
+      "name": "Cerebral palsy, unspecified",
       "category": "motor",
       "subcategory": "neurodevelopmental",
       "definition": "Group of permanent movement disorders from brain injury during development. Major BCI target population.",
@@ -523,7 +523,7 @@
     {
       "id": "NEURO-036",
       "code": "R47.1",
-      "name": "Dysarthria",
+      "name": "Dysarthria and anarthria",
       "category": "speech_language",
       "subcategory": "motor_speech",
       "definition": "Motor speech disorder from impaired neuromuscular control. Speech present but slurred or unintelligible. Language intact.",
@@ -537,7 +537,7 @@
     {
       "id": "NEURO-037",
       "code": "R48.2",
-      "name": "Apraxia of speech",
+      "name": "Apraxia",
       "category": "speech_language",
       "subcategory": "motor_programming",
       "definition": "Motor programming disorder — patient knows what to say, has intact speech musculature, but cannot execute learned motor programs for speech.",
@@ -565,7 +565,7 @@
     {
       "id": "NEURO-039",
       "code": "F07.0",
-      "name": "Neurological apathy",
+      "name": "Personality change due to known physiological condition",
       "category": "speech_language",
       "subcategory": "motivation",
       "definition": "Reduction in goal-directed behavior and motivation from ACC, basal ganglia, or frontal lobe dysfunction. Distinct from depression.",
@@ -579,7 +579,7 @@
     {
       "id": "NEURO-040",
       "code": "R41.89",
-      "name": "Anosognosia",
+      "name": "Other symptoms and signs involving cognitive functions and awareness",
       "category": "consciousness",
       "subcategory": "awareness",
       "definition": "Lack of awareness of own neurological deficit. Patient is impaired but denies it. From right parietal/frontal lesions.",
@@ -592,7 +592,7 @@
     },
     {
       "id": "NEURO-041",
-      "code": "G99.0",
+      "code": "G90.4",
       "name": "Autonomic dysreflexia",
       "category": "reflex",
       "subcategory": "autonomic",
@@ -607,7 +607,7 @@
     {
       "id": "NEURO-042",
       "code": "H55.09",
-      "name": "VOR dysfunction / Oscillopsia",
+      "name": "Other forms of nystagmus",
       "category": "reflex",
       "subcategory": "vestibulo_ocular",
       "definition": "Failure of vestibulo-ocular reflex causing oscillopsia — world appears to oscillate during head movement.",
@@ -621,7 +621,7 @@
     {
       "id": "NEURO-043",
       "code": "R00.1",
-      "name": "Bradycardia",
+      "name": "Bradycardia, unspecified",
       "category": "autonomic",
       "subcategory": "cardiovascular",
       "definition": "Abnormally slow heart rate (<60 bpm) from excessive parasympathetic (vagal) tone or SA node dysfunction. Can progress to asystole.",
@@ -635,7 +635,7 @@
     {
       "id": "NEURO-044",
       "code": "R00.0",
-      "name": "Tachycardia",
+      "name": "Tachycardia, unspecified",
       "category": "autonomic",
       "subcategory": "cardiovascular",
       "definition": "Abnormally rapid heart rate (>100 bpm) from sympathetic activation or parasympathetic withdrawal.",
@@ -663,7 +663,7 @@
     {
       "id": "NEURO-046",
       "code": "T85.190A",
-      "name": "Mechanical complication of implanted electronic neurostimulator of brain electrode",
+      "name": "Other mechanical complication of implanted electronic neurostimulator of brain electrode (lead), initial encounter",
       "category": "autonomic",
       "subcategory": "device_complication",
       "definition": "Lead migration, electrode fracture, or connector failure in implanted BCI. ICD-10-CM initial encounter code for mechanical device complications.",
@@ -676,8 +676,8 @@
     },
     {
       "id": "NEURO-047",
-      "code": "T85.730A",
-      "name": "Infection and inflammatory reaction due to implanted electronic neurostimulator of brain electrode",
+      "code": "T85.731A",
+      "name": "Infection and inflammatory reaction due to implanted electronic neurostimulator of brain, electrode (lead), initial encounter",
       "category": "autonomic",
       "subcategory": "device_complication",
       "definition": "Biofilm establishment or inflammatory response at electrode-tissue interface. ICD-10-CM initial encounter code for infection/inflammatory device complications.",
@@ -719,7 +719,7 @@
     {
       "id": "NEURO-050",
       "code": "H93.3X9",
-      "name": "Disorders of acoustic nerve, unspecified ear",
+      "name": "Disorders of unspecified acoustic nerve",
       "category": "sensory",
       "subcategory": "auditory",
       "definition": "Damage to cranial nerve VIII (vestibulocochlear nerve) causing hearing loss, tinnitus, or vestibular dysfunction.",

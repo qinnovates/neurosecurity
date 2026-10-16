@@ -221,6 +221,7 @@ function buildNeuralPathways(): Row[] {
     function: p.function || '',
     bci_relevance: p.bci_relevance || '',
     dsm_conditions: (p.dsm_conditions || []).join(', '),
+    icd10_conditions: (p.icd10_conditions || []).join(', '),
     confidence: p.confidence || '',
   }));
 }
@@ -237,6 +238,7 @@ function buildNeurotransmitters(): Row[] {
     cofactor_count: (nt.cofactor_dependencies || []).length,
     synthesis_steps: (nt.synthesis_pathway || []).length,
     dsm_condition_count: (nt.dsm_conditions || []).length,
+    icd10_condition_count: (nt.icd10_conditions || []).length,
     bci_relevance: nt.bci_relevance || '',
     confidence: nt.confidence || '',
   }));
@@ -425,6 +427,7 @@ function buildNeuroendocrineAxes(): Row[] {
     receptor_count: (ax.receptors || []).length,
     qif_bands: (ax.qif_bands || []).join(', '),
     dsm_condition_count: (ax.dsm_conditions || []).length,
+    icd10_condition_count: (ax.icd10_conditions || []).length,
     bci_relevance: ax.bci_relevance || '',
     confidence: ax.confidence || '',
   }));
@@ -535,6 +538,7 @@ function buildReceptorFamilies(): Row[] {
     signaling_mechanism: rf.signaling_mechanism || '',
     brain_regions: (rf.brain_regions || []).join(', '),
     dsm_condition_count: (rf.dsm_conditions || []).length,
+    icd10_condition_count: (rf.icd10_conditions || []).length,
     bci_relevance: rf.bci_relevance || '',
     confidence: rf.confidence || '',
   }));

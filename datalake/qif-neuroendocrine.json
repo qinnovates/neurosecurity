@@ -7,7 +7,8 @@
     "notes": [
       "DSM associations are diagnostic category references for threat modeling purposes, not diagnostic claims.",
       "BCI relevance ratings reflect current device landscape, not theoretical potential.",
-      "Confidence ratings: HIGH = established physiology, MEDIUM = well-characterized with some gaps, INFERRED = mechanistic inference from literature."
+      "Confidence ratings: HIGH = established physiology, MEDIUM = well-characterized with some gaps, INFERRED = mechanistic inference from literature.",
+      "dsm_conditions holds ICD-10-CM chapter F codes only; codes outside chapter F are in icd10_conditions. Each coded entry's condition is the code's official ICD-10-CM FY2027 title. Header (non-billable) codes are category references and are marked kind 'category' in datalake/validation/icd10cm-fy2027-titles.json. Entries without a code are unchanged."
     ]
   },
   "axes": [
@@ -104,14 +105,16 @@
       "qif_notes": "Hypothalamus/PVN is the command node (N4). Pituitary at sella turcica (N4 floor). Adrenal gland is peripheral effector (N1-equivalent distance).",
       "functions": ["stress response", "metabolism", "immune modulation", "circadian cortisol rhythm"],
       "dsm_conditions": [
-        {"code": "F32.x", "condition": "Major depressive disorder", "association": "40-60% show hypercortisolemia, dexamethasone non-suppression, blunted CRH-ACTH response"},
-        {"code": "F43.10", "condition": "PTSD", "association": "Hypocortisolemia with enhanced negative feedback; blunted cortisol awakening response"},
-        {"code": "F31.x", "condition": "Bipolar disorder", "association": "Elevated cortisol awakening response (CAR) in both phases"},
-        {"code": "E24.0", "condition": "Cushing's disease", "association": "Excess ACTH from pituitary adenoma; depression, anxiety, cognitive impairment, psychosis at high cortisol"},
-        {"code": "E27.1", "condition": "Addison's disease", "association": "Adrenal insufficiency; depression, fatigue, psychosis (adrenal crisis)"},
-        {"code": "F20.x", "condition": "Schizophrenia", "association": "HPA hyperactivity documented; chronic antipsychotic use partially normalizes"},
+        {"code": "F32", "condition": "Depressive episode", "association": "40-60% show hypercortisolemia, dexamethasone non-suppression, blunted CRH-ACTH response"},
+        {"code": "F43.10", "condition": "Post-traumatic stress disorder, unspecified", "association": "Hypocortisolemia with enhanced negative feedback; blunted cortisol awakening response"},
+        {"code": "F31", "condition": "Bipolar disorder", "association": "Elevated cortisol awakening response (CAR) in both phases"},
+        {"code": "F20", "condition": "Schizophrenia", "association": "HPA hyperactivity documented; chronic antipsychotic use partially normalizes"},
         {"code": "F41.1", "condition": "Generalized anxiety disorder", "association": "HPA hyperreactivity"},
-        {"code": "F41.0", "condition": "Panic disorder", "association": "HPA hyperreactivity"}
+        {"code": "F41.0", "condition": "Panic disorder [episodic paroxysmal anxiety]", "association": "HPA hyperreactivity"}
+      ],
+      "icd10_conditions": [
+        {"code": "E24.0", "condition": "Pituitary-dependent Cushing's disease", "association": "Excess ACTH from pituitary adenoma; depression, anxiety, cognitive impairment, psychosis at high cortisol"},
+        {"code": "E27.1", "condition": "Primary adrenocortical insufficiency", "association": "Adrenal insufficiency; depression, fatigue, psychosis (adrenal crisis)"}
       ],
       "epigenetic_notes": "Childhood trauma permanently programs HPA axis reactivity via epigenetic methylation of NR3C1 promoter (Meaney-Szyf paradigm; replications mixed).",
       "bci_relevance": "MEDIUM",
@@ -219,6 +222,7 @@
         {"condition": "Lithium-induced hypothyroidism", "association": "Lithium inhibits thyroid hormone release and blocks TSH signaling in up to 40% of bipolar patients on long-term lithium"},
         {"condition": "Postpartum thyroiditis", "association": "Associated with postpartum depression"}
       ],
+      "icd10_conditions": [],
       "additional_notes": "TRH has independent CNS effects (antidepressant-like, analeptic) suggesting HPT dysregulation has direct neural consequences beyond metabolism.",
       "bci_relevance": "LOW",
       "bci_notes": "No direct BCI interfaces to the HPT axis. Hypothalamic neuromodulation (DBS research) could theoretically modulate TRH secretion (inferred, purely experimental).",
@@ -332,12 +336,13 @@
       "functions": ["reproductive function", "puberty onset", "sex hormone production", "gametogenesis"],
       "dsm_conditions": [
         {"condition": "Hypogonadism", "association": "Depression, cognitive decline, reduced motivation. Low testosterone associated with MDD in men."},
-        {"code": "N94.3", "condition": "Premenstrual dysphoric disorder (PMDD)", "association": "Luteal phase progesterone metabolite (allopregnanolone) acts on GABA-A receptors; abnormal sensitivity implicated"},
+        {"code": "F32.81", "condition": "Premenstrual dysphoric disorder", "association": "Luteal phase progesterone metabolite (allopregnanolone) acts on GABA-A receptors; abnormal sensitivity implicated"},
         {"condition": "Postpartum depression", "association": "Rapid estrogen/progesterone withdrawal post-delivery"},
         {"condition": "PCOS (Polycystic ovary syndrome)", "association": "LH hypersecretion, androgen excess; high prevalence of anxiety and depression"},
-        {"code": "F64.x", "condition": "Gender dysphoria", "association": "HPG axis is the pharmacological target for gender-affirming hormone therapy"},
-        {"code": "F50.0x", "condition": "Anorexia nervosa", "association": "Functional hypogonadism from weight loss suppressing kisspeptin/GnRH"}
+        {"code": "F64", "condition": "Gender identity disorders", "association": "HPG axis is the pharmacological target for gender-affirming hormone therapy"},
+        {"code": "F50.0", "condition": "Anorexia nervosa", "association": "Functional hypogonadism from weight loss suppressing kisspeptin/GnRH"}
       ],
+      "icd10_conditions": [],
       "genetic_conditions": [
         {
           "name": "Kallmann syndrome",
@@ -453,8 +458,9 @@
         {"condition": "GH deficiency (adult)", "association": "Depression, cognitive impairment, reduced quality of life. GH replacement improves mood in some trials."},
         {"condition": "Acromegaly", "association": "GH excess from pituitary adenoma; anxiety, depression, cognitive changes; sleep apnea (genioglossus hypertrophy)"},
         {"condition": "Sleep disorders (disrupted slow-wave sleep)", "association": "Disrupted GH pulses; associated with MDD, PTSD, insomnia disorder"},
-        {"code": "F50.x", "condition": "Eating disorders (ghrelin dysregulation)", "association": "Ghrelin dysregulation associated with anorexia nervosa and binge eating disorder"}
+        {"code": "F50", "condition": "Eating disorders", "association": "Ghrelin dysregulation associated with anorexia nervosa and binge eating disorder"}
       ],
+      "icd10_conditions": [],
       "bci_relevance": "LOW",
       "bci_notes": "Indirect. Hypothalamic neuromodulation targeting slow-wave sleep enhancement could modulate GH axis pulsatility (experimental, inferred). Ghrelin receptor (GHSR) investigated as pharmacological target in eating disorders.",
       "disruption_effects": ["GH deficiency", "acromegaly", "gigantism", "Laron syndrome"],
@@ -532,8 +538,9 @@
         {"condition": "Hyperprolactinemia", "association": "Amenorrhea, galactorrhea, sexual dysfunction, depression, anxiety. Antipsychotic-induced: near-universal with typical antipsychotics (D2 antagonists), common with risperidone, amisulpride."},
         {"condition": "Prolactinoma", "association": "Benign pituitary tumor; depression, sexual dysfunction, infertility"},
         {"condition": "Postpartum psychosis", "association": "Rapid prolactin/estrogen fluctuations implicated"},
-        {"code": "F20.x", "condition": "Schizophrenia (treatment-related)", "association": "All D2-blocking antipsychotics elevate PRL — relevant to monitoring"}
+        {"code": "F20", "condition": "Schizophrenia", "association": "All D2-blocking antipsychotics elevate PRL — relevant to monitoring"}
       ],
+      "icd10_conditions": [],
       "bci_relevance": "LOW",
       "bci_notes": "Indirect. Dopamine modulation from central neuromodulation (DBS, VNS) could affect TIDA tone and PRL. DBS targeting substantia nigra (Parkinson's) affects broader dopamine network with downstream PRL effects (inferred).",
       "disruption_effects": ["hyperprolactinemia", "prolactinoma", "galactorrhea", "hypogonadism (secondary)"],
@@ -629,12 +636,13 @@
       "dsm_conditions": [
         {"condition": "Central diabetes insipidus", "association": "AVP deficiency; polyuria, polydipsia. Causes: trauma, surgery, tumors, autoimmune, Wolfram syndrome (WFS1 gene)."},
         {"condition": "SIADH", "association": "Hyponatremia -> confusion, seizures, cerebral edema. Triggered by SSRIs (mechanism uncertain), carbamazepine, antipsychotics — highly relevant psychiatric medication interaction."},
-        {"code": "F84.x", "condition": "Autism spectrum disorder", "association": "Reduced OXT levels and OXTR polymorphisms documented; intranasal OXT trials ongoing (mixed results as of 2025)"},
+        {"code": "F84", "condition": "Pervasive developmental disorders", "association": "Reduced OXT levels and OXTR polymorphisms documented; intranasal OXT trials ongoing (mixed results as of 2025)"},
         {"condition": "Social anxiety disorder", "association": "OXT modulates amygdala fear responses"},
-        {"code": "F43.10", "condition": "PTSD", "association": "OXT administration shows anxiolytic effects in some trials"},
+        {"code": "F43.10", "condition": "Post-traumatic stress disorder, unspecified", "association": "OXT administration shows anxiolytic effects in some trials"},
         {"condition": "Postpartum depression", "association": "OXT dysregulation in context of parturition/lactation"},
-        {"code": "F20.x", "condition": "Schizophrenia", "association": "OXT studied as adjunctive treatment for social cognition deficits"}
+        {"code": "F20", "condition": "Schizophrenia", "association": "OXT studied as adjunctive treatment for social cognition deficits"}
       ],
+      "icd10_conditions": [],
       "bci_relevance": "MEDIUM",
       "bci_notes": "Intranasal OXT administration demonstrates effects on social behavior, trust, and amygdala reactivity. Hypothalamic neuromodulation for OXT release is being explored. V1bR -> HPA axis connection means PVN-targeting BCI could modulate both OXT/AVP and HPA simultaneously — relevant multi-axis threat surface (inferred).",
       "disruption_effects": ["central diabetes insipidus", "SIADH", "social bonding disruption", "labor dystocia"],
@@ -706,13 +714,15 @@
       "qif_notes": "SCN is an N4 node; pineal gland is epithalamic (N4/N3 junction). Retinohypothalamic tract provides direct CN II -> N4 information channel outside classical visual pathway.",
       "functions": ["circadian rhythm regulation", "sleep-wake cycle", "seasonal physiology", "antioxidant"],
       "dsm_conditions": [
-        {"code": "F33.x", "condition": "Major depressive disorder (seasonal specifier / SAD)", "association": "Reduced melatonin amplitude and phase delays. Light therapy works by phase-advancing melatonin/SCN clock."},
+        {"code": "F33", "condition": "Major depressive disorder, recurrent", "association": "Reduced melatonin amplitude and phase delays. Light therapy works by phase-advancing melatonin/SCN clock."},
         {"condition": "Circadian rhythm sleep-wake disorders", "association": "Delayed and advanced sleep-wake phase disorders directly involve AANAT/melatonin timing dysregulation"},
-        {"code": "F31.x", "condition": "Bipolar disorder", "association": "Melatonin onset is a biological marker for mood states; phase advances in mania"},
-        {"code": "G47.0x", "condition": "Insomnia disorder", "association": "Melatonin supplementation has modest evidence; ramelteon (MT1/MT2 agonist) is FDA-approved"},
-        {"code": "F90.x", "condition": "ADHD", "association": "Delayed circadian phase documented; melatonin for sleep-onset insomnia in ADHD has pediatric evidence"},
-        {"code": "F20.x", "condition": "Schizophrenia", "association": "Disrupted circadian rhythms, reduced melatonin secretion"},
-        {"code": "F84.x", "condition": "Autism spectrum disorder", "association": "ASMT gene variants associated with ASD in some studies"}
+        {"code": "F31", "condition": "Bipolar disorder", "association": "Melatonin onset is a biological marker for mood states; phase advances in mania"},
+        {"code": "F90", "condition": "Attention-deficit hyperactivity disorders", "association": "Delayed circadian phase documented; melatonin for sleep-onset insomnia in ADHD has pediatric evidence"},
+        {"code": "F20", "condition": "Schizophrenia", "association": "Disrupted circadian rhythms, reduced melatonin secretion"},
+        {"code": "F84", "condition": "Pervasive developmental disorders", "association": "ASMT gene variants associated with ASD in some studies"}
+      ],
+      "icd10_conditions": [
+        {"code": "G47.0", "condition": "Insomnia", "association": "Melatonin supplementation has modest evidence; ramelteon (MT1/MT2 agonist) is FDA-approved"}
       ],
       "bci_relevance": "MEDIUM",
       "bci_notes": "Light therapy devices are approved interventions operating through CN II -> retinohypothalamic tract -> SCN -> pineal pathway (photic BCI at CN II/N4). Blue light from BCI screens/devices suppresses melatonin via melanopsin (OPN4) — relevant environmental threat surface.",

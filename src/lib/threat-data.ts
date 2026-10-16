@@ -386,7 +386,7 @@ export const CONSENT_TIER_COLORS = {
   prohibited: { bg: 'rgba(127, 29, 29, 0.2)', text: '#ef4444' },
 } as const;
 
-/** Diagnostic cluster colors (NISS-DSM Bridge driven) */
+/** Diagnostic cluster colors (display grouping; see dsm5_spec.cluster_note) */
 export const DIAGNOSTIC_CLUSTER_COLORS = {
   cognitive_psychotic: { bg: 'rgba(245, 158, 11, 0.15)', border: 'rgba(245, 158, 11, 0.3)', text: '#f59e0b' },
   mood_trauma: { bg: 'rgba(234, 179, 8, 0.15)', border: 'rgba(234, 179, 8, 0.3)', text: '#eab308' },
