@@ -1,9 +1,9 @@
 {
   "metadata": {
     "version": "1.0",
-    "lastUpdated": "2026-10-06",
+    "lastUpdated": "2026-10-16",
     "description": "Unified registry: explorer/timelines (landscape UI) + researchers/institutions/standards/legislation (structured entities). Cross-references QIF-RESEARCH-SOURCES.md. Papers are carried on researcher entries via papers (QIF-RESEARCH-SOURCES.md IDs) and bibKeys (references.bib keys); the schema has no standalone paper collection.",
-    "totalEntities": 190
+    "totalEntities": 283
   },
   "explorer": [
     {
@@ -605,108 +605,23 @@
   ],
   "timelines": {
     "neuroethics": [
-      {
-        "year": "1927",
-        "label": "Fritz Jahr coins \"Bio-Ethik\"",
-        "authors": "Jahr, F.",
-        "desc": "First use of the term in Kosmos journal, proposing a bioethical imperative extending moral consideration to all living things"
-      },
-      {
-        "year": "1947",
-        "label": "Nuremberg Code",
-        "authors": "Nuremberg Military Tribunals",
-        "desc": "First international ethics code for human experimentation, born from the Doctors' Trial"
-      },
-      {
-        "year": "1964",
-        "label": "Declaration of Helsinki",
-        "authors": "World Medical Association",
-        "desc": "World Medical Association establishes ethical principles for medical research on humans"
-      },
-      {
-        "year": "1970",
-        "label": "Potter revives \"Bioethics\"",
-        "authors": "Potter, V.R.",
-        "desc": "Van Rensselaer Potter publishes \"Bioethics: The Science of Survival\" in Perspectives in Biology and Medicine"
-      },
-      {
-        "year": "1974",
-        "label": "National Research Act",
-        "authors": "U.S. Congress",
-        "desc": "Creates the National Commission for the Protection of Human Subjects in response to the Tuskegee study"
-      },
-      {
-        "year": "1979",
-        "label": "Belmont Report",
-        "authors": "National Commission for the Protection of Human Subjects",
-        "desc": "Three core principles for human subjects research: respect for persons, beneficence, justice"
-      },
-      {
-        "year": "1979",
-        "label": "Beauchamp & Childress",
-        "authors": "Beauchamp, T.L., Childress, J.F.",
-        "desc": "Principles of Biomedical Ethics: autonomy, beneficence, non-maleficence, justice"
-      },
-      {
-        "year": "2002",
-        "label": "\"Neuroethics\" defined",
-        "authors": "Safire, W.",
-        "desc": "William Safire's keynote at the Dana Foundation conference establishes the modern field"
-      },
-      {
-        "year": "2006",
-        "label": "Brain Overclaim Syndrome",
-        "authors": "Morse, S.J.",
-        "desc": "Warns neuroscience claims are routinely overclaimed when applied to law. \"Neuromodesty\" follows in 2011"
-      },
-      {
-        "year": "2006",
-        "label": "Int'l Neuroethics Society",
-        "authors": "Gazzaniga, M., Farah, M., Illes, J., Wolpe, P.R.",
-        "desc": "Founded at Asilomar to advance understanding of the ethical implications of neuroscience"
-      },
-      {
-        "year": "2017",
-        "label": "Neurorights",
-        "authors": "Ienca, M., Andorno, R.; Yuste, R. et al.",
-        "desc": "Ienca & Andorno and Yuste et al. (Nature) independently propose neurorights"
-      },
-      {
-        "year": "2019",
-        "label": "OECD Recommendation",
-        "authors": "OECD",
-        "desc": "Nine-principle governance for responsible innovation in neurotechnology"
-      },
-      {
-        "year": "2021",
-        "label": "Chile Constitution",
-        "authors": "Republic of Chile",
-        "desc": "First country to constitutionally protect neurorights (mental integrity)"
-      },
-      {
-        "year": "2023",
-        "label": "Latin American Model Law",
-        "authors": "Latin American Parliament (Parlatino)",
-        "desc": "Regional model law for harmonized neurorights legislation"
-      },
-      {
-        "year": "2024",
-        "label": "US State Neural Data Laws",
-        "authors": "Colorado, California, Montana, Minnesota legislatures",
-        "desc": "Colorado, California, Montana, Minnesota enact neural data protections"
-      },
-      {
-        "year": "2024",
-        "label": "China BCI Ethics + UN HRC",
-        "authors": "China MoST; UN Human Rights Council; Global Privacy Assembly",
-        "desc": "China MoST BCI ethics guidelines. UN HRC advisory on neurotechnology. Global Privacy Assembly neural data resolution"
-      },
-      {
-        "year": "2025",
-        "label": "UNESCO + WHO + MIND Act",
-        "authors": "UNESCO; WHO; US Congress",
-        "desc": "UNESCO global neurotech ethics framework (194 states). WHO neurotechnology guidance. US MIND Act"
-      }
+      { "year": "1927", "label": "Fritz Jahr coins \"Bio-Ethik\"", "authors": "Jahr, F.", "desc": "First use of the term in Kosmos journal, proposing a bioethical imperative extending moral consideration to all living things" },
+      { "year": "1947", "label": "Nuremberg Code", "authors": "Nuremberg Military Tribunals", "desc": "First international ethics code for human experimentation, born from the Doctors' Trial" },
+      { "year": "1964", "label": "Declaration of Helsinki", "authors": "World Medical Association", "desc": "World Medical Association establishes ethical principles for medical research on humans" },
+      { "year": "1970", "label": "Potter revives \"Bioethics\"", "authors": "Potter, V.R.", "desc": "Van Rensselaer Potter publishes \"Bioethics: The Science of Survival\" in Perspectives in Biology and Medicine" },
+      { "year": "1974", "label": "National Research Act", "authors": "U.S. Congress", "desc": "Creates the National Commission for the Protection of Human Subjects in response to the Tuskegee study" },
+      { "year": "1979", "label": "Belmont Report", "authors": "National Commission for the Protection of Human Subjects", "desc": "Three core principles for human subjects research: respect for persons, beneficence, justice" },
+      { "year": "1979", "label": "Beauchamp & Childress", "authors": "Beauchamp, T.L., Childress, J.F.", "desc": "Principles of Biomedical Ethics: autonomy, beneficence, non-maleficence, justice" },
+      { "year": "2002", "label": "\"Neuroethics\" defined", "authors": "Safire, W.", "desc": "William Safire's keynote at the Dana Foundation conference establishes the modern field" },
+      { "year": "2006", "label": "Brain Overclaim Syndrome", "authors": "Morse, S.J.", "desc": "Warns neuroscience claims are routinely overclaimed when applied to law. \"Neuromodesty\" follows in 2011" },
+      { "year": "2006", "label": "Int'l Neuroethics Society", "authors": "Gazzaniga, M., Farah, M., Illes, J., Wolpe, P.R.", "desc": "Founded at Asilomar to advance understanding of the ethical implications of neuroscience" },
+      { "year": "2017", "label": "Neurorights", "authors": "Ienca, M., Andorno, R.; Yuste, R. et al.", "desc": "Ienca & Andorno and Yuste et al. (Nature) independently propose neurorights" },
+      { "year": "2019", "label": "OECD Recommendation", "authors": "OECD", "desc": "Nine-principle governance for responsible innovation in neurotechnology" },
+      { "year": "2021", "label": "Chile Constitution", "authors": "Republic of Chile", "desc": "First country to constitutionally protect neurorights (mental integrity)" },
+      { "year": "2023", "label": "Latin American Model Law", "authors": "Latin American Parliament (Parlatino)", "desc": "Regional model law for harmonized neurorights legislation" },
+      { "year": "2024", "label": "US State Neural Data Laws", "authors": "Colorado, California, Montana, Minnesota legislatures", "desc": "Colorado, California, Montana, Minnesota enact neural data protections" },
+      { "year": "2024", "label": "China BCI Ethics + UN HRC", "authors": "China MoST; UN Human Rights Council; Global Privacy Assembly", "desc": "China MoST BCI ethics guidelines. UN HRC advisory on neurotechnology. Global Privacy Assembly neural data resolution" },
+      { "year": "2025", "label": "UNESCO + WHO + MIND Act", "authors": "UNESCO; WHO; US Congress", "desc": "UNESCO global neurotech ethics framework (194 states). WHO neurotechnology guidance. US MIND Act" }
     ],
     "neurosecurity": [
       {
@@ -888,10 +803,10 @@
     ],
     "ai_ethics": [
       { "year": "1942", "label": "Asimov's Three Laws", "authors": "Asimov, I.", "desc": "Three Laws of Robotics proposed in 'Runaround'" },
-      { "year": "1950", "label": "Turing's Computing Machinery", "authors": "Turing, A.", "desc": "Alan Turing asks 'Can machines think?' — foundational AI ethics question" },
-      { "year": "1979", "label": "Belmont Report", "authors": "National Commission for the Protection of Human Subjects", "desc": "Respect for persons, beneficence, justice — backbone of research ethics" },
+      { "year": "1950", "label": "Turing's Computing Machinery", "authors": "Turing, A.", "desc": "Alan Turing asks 'Can machines think?' \u2014 foundational AI ethics question" },
+      { "year": "1979", "label": "Belmont Report", "authors": "National Commission for the Protection of Human Subjects", "desc": "Respect for persons, beneficence, justice \u2014 backbone of research ethics" },
       { "year": "2004", "label": "Automation Bias", "authors": "Cummings, M.L.", "desc": "Identifies automation bias as a systemic failure mode in human-AI systems" },
-      { "year": "2006", "label": "Neuromodesty", "authors": "Morse, S.J.", "desc": "Warns against brain overclaim syndrome — neuroscience overpromising to law and policy" },
+      { "year": "2006", "label": "Neuromodesty", "authors": "Morse, S.J.", "desc": "Warns against brain overclaim syndrome \u2014 neuroscience overpromising to law and policy" },
       { "year": "2017", "label": "Neurorights Proposed", "authors": "Ienca, M., Andorno, R.; Yuste, R. et al.", "desc": "Four neurorights proposed; Yuste et al. publish in Nature" },
       { "year": "2017", "label": "Off-Switch Problem", "authors": "Hadfield-Menell, D. et al.", "desc": "Formalizes the challenge of safely shutting down AI systems" },
       { "year": "2018", "label": "Industry Charters", "authors": "Google; OpenAI; Floridi, L. et al.", "desc": "Google AI Principles, OpenAI Charter, AI4People framework" },
@@ -902,7 +817,7 @@
       { "year": "2023", "label": "NIST AI RMF 1.0 + Anthropic RSP", "authors": "NIST; Anthropic", "desc": "Govern-Map-Measure-Manage framework; Responsible Scaling Policy published" },
       { "year": "2024", "label": "EU AI Act", "authors": "European Parliament", "desc": "Risk-tiered regulation enters force. Article 14 mandates human oversight for high-risk AI" },
       { "year": "2025", "label": "MIND Act", "authors": "US Congress", "desc": "Proposed US federal neural data protection for BCIs and wearable neurotech" },
-      { "year": "2026", "label": "AI Security Ethics v0.1", "authors": "Qi, K.", "desc": "Asimov reframed for AI at the neural interface — this proposal" }
+      { "year": "2026", "label": "AI Security Ethics v0.1", "authors": "Qi, K.", "desc": "Asimov reframed for AI at the neural interface \u2014 this proposal" }
     ],
     "scholarship": [
       {
@@ -1093,7 +1008,7 @@
         "title": "Subretinal Photovoltaic Implant to Restore Vision in Geographic Atrophy Due to AMD",
         "venue": "NEJM 394(3):232-242",
         "doi": "10.1056/NEJMoa2501396",
-        "desc": "PRIMA pivotal trial — first form vision restoration via subretinal BCI; validates stimulation-based neural interface clinical pathway."
+        "desc": "PRIMA pivotal trial \u2014 first form vision restoration via subretinal BCI; validates stimulation-based neural interface clinical pathway."
       },
       {
         "authors": "Muqit, M.M.K., Le Mer, Y., Olmos de Koo, L., Holz, F.G., Sahel, J.A., Palanker, D.",
@@ -1109,7 +1024,7 @@
         "title": "Optogenetic stimulation of a cortical biohybrid implant guides goal directed behavior",
         "venue": "bioRxiv",
         "doi": "10.1101/2024.11.22.624907",
-        "desc": "First preclinical demonstration of bio-hybrid neural interface with living neurons — permanent attack surface at I0 boundary."
+        "desc": "First preclinical demonstration of bio-hybrid neural interface with living neurons \u2014 permanent attack surface at I0 boundary."
       },
       {
         "authors": "Sanguinetti, J.L., Hameroff, S., Smith, E.E., Sato, T., Daft, C.M.W., Tyler, W.J., Allen, J.J.B.",
@@ -1117,7 +1032,7 @@
         "title": "Transcranial Focused Ultrasound to the Right Prefrontal Cortex Improves Mood",
         "venue": "Front Hum Neurosci 14:52",
         "doi": "10.3389/fnhum.2020.00052",
-        "desc": "Establishes non-invasive ultrasound cognitive/mood modulation pathway — dual-use overlap with TARA stimulation techniques."
+        "desc": "Establishes non-invasive ultrasound cognitive/mood modulation pathway \u2014 dual-use overlap with TARA stimulation techniques."
       },
       {
         "authors": "Sarica, C., Nankoo, J-F., Fomenko, A. et al.",
@@ -1141,7 +1056,7 @@
         "title": "Researchers' Ethical Concerns About Using Adaptive Deep Brain Stimulation for Enhancement",
         "venue": "Front Hum Neurosci 16:813922",
         "doi": "10.3389/fnhum.2022.813922",
-        "desc": "Documents researcher-identified dual-use concerns for closed-loop DBS — mood/cognition modulation beyond therapeutic intent."
+        "desc": "Documents researcher-identified dual-use concerns for closed-loop DBS \u2014 mood/cognition modulation beyond therapeutic intent."
       },
       {
         "authors": "Boufidis, D., Garg, R., Angelopoulos, E., Cullen, D.K., Vitale, F.",
@@ -1189,7 +1104,7 @@
         "title": "Neuroscience, Ethics, and National Security: The State of the Art",
         "venue": "PLoS Biol 10(3):e1001289",
         "doi": "10.1371/journal.pbio.1001289",
-        "desc": "Foundational dual-use framework — same technologies that restore function can enable surveillance/coercion."
+        "desc": "Foundational dual-use framework \u2014 same technologies that restore function can enable surveillance/coercion."
       },
       {
         "authors": "Denning, T., Matsuoka, Y., Kohno, T.",
@@ -1197,7 +1112,7 @@
         "title": "Neurosecurity: Security and Privacy for Neural Devices",
         "venue": "Neurosurg Focus 27(1):E7",
         "doi": "10.3171/2009.4.FOCUS0985",
-        "desc": "Coined 'neurosecurity' — defines threat surface for implanted neural devices. Foundational paper for the entire field."
+        "desc": "Coined 'neurosecurity' \u2014 defines threat surface for implanted neural devices. Foundational paper for the entire field."
       },
       {
         "authors": "Pycroft, L., Boccard, S.G., Owen, S.L.F., Stein, J.F., Fitzgerald, J.J., Green, A.L., Aziz, T.Z.",
@@ -1308,11 +1223,13 @@
       ],
       "papers": [
         "C5",
-        "C96"
+        "C96",
+        "E17"
       ],
       "bibKeys": [
         "ienca2016hacking",
-        "ienca2017neurorights"
+        "ienca2017neurorights",
+        "ienca2018brainleaks"
       ],
       "qifRelevance": "Neurorights pioneer. Co-authored foundational neurorights paper (2017). BCI attack taxonomy (Ethics & IT 2016).",
       "tags": [
@@ -1354,9 +1271,12 @@
         "cognitive-liberty",
         "neural-data-law"
       ],
-      "papers": [],
+      "papers": [
+        "I8"
+      ],
       "bibKeys": [
-        "farahany2023battle"
+        "farahany2023battle",
+        "ramos2019brainintegrating"
       ],
       "qifRelevance": "Battle for Your Brain (2023). Leading voice on cognitive liberty and neural data rights.",
       "tags": [
@@ -1600,10 +1520,14 @@
         "neuroethics-education"
       ],
       "papers": [
-        "INP23"
+        "INP23",
+        "I8",
+        "I23"
       ],
       "bibKeys": [
-        "rommelfanger2019neuroethics"
+        "rommelfanger2019neuroethics",
+        "ramos2019brainintegrating",
+        "ramos2017brainneuroethics"
       ],
       "qifRelevance": "Only US PhD concentration in neuroethics. Center for Neuroimaging and Neuroethics director.",
       "tags": [
@@ -1623,10 +1547,12 @@
         "nih-brain"
       ],
       "papers": [
-        "INP24"
+        "INP24",
+        "I8"
       ],
       "bibKeys": [
-        "chiong2021neuroethics"
+        "chiong2021neuroethics",
+        "ramos2019brainintegrating"
       ],
       "qifRelevance": "UCSF Decision Lab. NIH BRAIN Initiative neuroethics. DBS informed consent research.",
       "tags": [
@@ -1709,7 +1635,7 @@
     },
     {
       "id": "georg-kellmeyer",
-      "name": "Georg Kellmeyer",
+      "name": "Philipp Kellmeyer",
       "institution": "University of Freiburg",
       "country": "DE",
       "expertise": [
@@ -1718,10 +1644,12 @@
         "bci-ethics"
       ],
       "papers": [
-        "E8"
+        "E8",
+        "C93"
       ],
       "bibKeys": [
-        "kellmeyer2022privacy"
+        "kellmeyer2022privacy",
+        "kellmeyer2022neurorights"
       ],
       "qifRelevance": "Mental privacy and integrity conceptual analysis. Highlighted underspecification of core neuroethics concepts.",
       "tags": [
@@ -1769,7 +1697,8 @@
         "neuroscience-communication"
       ],
       "papers": [
-        "E10"
+        "E10",
+        "E16"
       ],
       "bibKeys": [
         "racine2005neuroethics"
@@ -1793,7 +1722,8 @@
         "methodology"
       ],
       "papers": [
-        "E11"
+        "E11",
+        "E15"
       ],
       "bibKeys": [
         "poldrack2006neuroimaging"
@@ -1862,10 +1792,12 @@
         "adversarial-ml"
       ],
       "papers": [
-        "C119"
+        "C119",
+        "C150"
       ],
       "bibKeys": [
-        "chen2025userwise"
+        "chen2025userwise",
+        "chen2024adversarialartifact"
       ],
       "qifRelevance": "Tested countermeasure against brainprint and cognitive-biometric extraction: user-wise perturbations made identity unlearnable while task accuracy was largely preserved. Dataset-level (6 corpora), no device or participant in the loop.",
       "tags": [
@@ -2689,6 +2621,1618 @@
         "governance"
       ],
       "layer": "WHY"
+    },
+    {
+      "id": "mordechai-guri",
+      "name": "Mordechai Guri",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C130"
+      ],
+      "bibKeys": [
+        "guri2018mosquitocovert"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0072 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "karunesh-ganguly",
+      "name": "Karunesh Ganguly",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N30"
+      ],
+      "bibKeys": [
+        "ganguly2009emergencestable"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0059 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "gaetan-de-lavilleon",
+      "name": "Gaetan de Lavill\u00e9on",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N31"
+      ],
+      "bibKeys": [
+        "delavilleon2015explicitmemory"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0060 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "s-m-rosengren",
+      "name": "S.M. Rosengren",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N32"
+      ],
+      "bibKeys": [
+        "rosengren2010vestibularevoked"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0110 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "richard-c-fitzpatrick",
+      "name": "Richard C. Fitzpatrick",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N33"
+      ],
+      "bibKeys": [
+        "fitzpatrick2004probinghuman"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0111 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "erich-schneider",
+      "name": "Erich Schneider",
+      "institution": "Department of Neurology with Center for Sensorimotor Research, Klinikum Grosshadern, Ludwig-Maximilians University, 81377 Munich, Germany",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N34"
+      ],
+      "bibKeys": [
+        "schneider2002comparisonhuman"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0112 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "lloyd-b-minor",
+      "name": "Lloyd B. Minor",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N35"
+      ],
+      "bibKeys": [
+        "minor1998soundpressure"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0113 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "j-g-colebatch",
+      "name": "J G Colebatch",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N36"
+      ],
+      "bibKeys": [
+        "colebatch1994myogenicpotentials"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0113 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "m-a-nitsche",
+      "name": "M. A. Nitsche",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N37"
+      ],
+      "bibKeys": [
+        "nitsche2000excitabilitychanges"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0115 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "katia-monte-silva",
+      "name": "Katia Monte-Silva",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N38"
+      ],
+      "bibKeys": [
+        "montesilva2013inductionlate"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0115 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "gabrielle-girardeau",
+      "name": "Gabrielle Girardeau",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N39"
+      ],
+      "bibKeys": [
+        "girardeau2009selectivesuppression"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0117 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "e-tripoliti",
+      "name": "E. Tripoliti",
+      "institution": "From the UCL (E.T., L.Z., E.F., T.F., M.I.H., P.L.), Institute of Neurology, Sobell Department, Unit of Functional Neurosurgery, Queen Square, London, UK; Neurological Department (I.M.-T.), University Hospital La Fe, Valencia, Spain; Laboratoire Parole et Langage (S.P.), CNRS/Aix-Marseille Universite, France; Medical University Graz (E.H.), Austria; Department of Neurosurgery (E.P.), University of Texas Southwestern Medical Center, Dallas; and Cancer Research UK &amp; UCL Cancer Trials Centre (M.R.)...",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N40"
+      ],
+      "bibKeys": [
+        "tripoliti2011effectssubthalamic"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0118 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "robert-e-adamec",
+      "name": "Robert E. Adamec",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N41"
+      ],
+      "bibKeys": [
+        "adamec1999evidencethat"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0119 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "esra-tasali",
+      "name": "Esra Tasali",
+      "institution": "Department of Medicine, University of Chicago, Chicago, IL 60637",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N42"
+      ],
+      "bibKeys": [
+        "tasali2008slowwave"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0121 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "kiyoshi-morimoto",
+      "name": "Kiyoshi Morimoto",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N43"
+      ],
+      "bibKeys": [
+        "morimoto2004kindlingstatus"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0122 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "m-h-monfils",
+      "name": "M.-H. Monfils",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N44"
+      ],
+      "bibKeys": [
+        "monfils2004longterm"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0123 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "r-j-nudo",
+      "name": "R. J. Nudo",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N45"
+      ],
+      "bibKeys": [
+        "nudo1990repetitivemicrostimulation"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0123 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "harold-a-sackeim",
+      "name": "Harold A Sackeim",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N46"
+      ],
+      "bibKeys": [
+        "sackeim2007cognitiveeffects"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0124 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "emanuele-maiorana",
+      "name": "Emanuele Maiorana",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C131",
+        "C156"
+      ],
+      "bibKeys": [
+        "maiorana2016permanencesignals",
+        "maiorana2018longitudinalevaluation"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0125 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "christoph-s-herrmann",
+      "name": "Christoph S. Herrmann",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N47"
+      ],
+      "bibKeys": [
+        "herrmann2001humanresponses"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0126 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "l-lanteaume",
+      "name": "L. Lanteaume",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N48"
+      ],
+      "bibKeys": [
+        "lanteaume2007emotioninduction"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0127 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "benjamin-k-dichter",
+      "name": "Benjamin K. Dichter",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N49"
+      ],
+      "bibKeys": [
+        "dichter2018controlvocal"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0131 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "d-boatman",
+      "name": "D. Boatman",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N50"
+      ],
+      "bibKeys": [
+        "boatman2000transcorticalsensory"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0132 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "robert-s-fisher",
+      "name": "Robert S. Fisher",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N51"
+      ],
+      "bibKeys": [
+        "fisher2005photicpatterninduced"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0133 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "laura-frohlich",
+      "name": "Laura Fr\u00f6hlich",
+      "institution": "Department of Otorhinolaryngology, Head &amp; Neck Surgery, Martin Luther University Halle\u2010Wittenberg University Medicine Halle (Saale) Halle (Saale) Germany",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N52"
+      ],
+      "bibKeys": [
+        "frohlich2024stimulationconditions"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0134 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "joana-sanches-pires",
+      "name": "Joana Sanches Pires",
+      "institution": "Department of Otolaryngology, Coimbra Hospital and University Centre, Av. Bissaya Barreto \u2013 Praceta Prof. Mota Pinto, Coimbra 3000-075, Portugal",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N53"
+      ],
+      "bibKeys": [
+        "pires2018facialnerve"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0134 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "corey-j-keller",
+      "name": "Corey J. Keller",
+      "institution": "Department of Neurosurgery, Hofstra North Shore LIJ School of Medicine, and Feinstein Institute for Medical Research, Manhasset, NY, USA",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N54"
+      ],
+      "bibKeys": [
+        "keller2014mappinghuman"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0135 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "alexandre-armengol-urpi",
+      "name": "Alexandre Armengol-Urpi",
+      "institution": "Massachusetts Institute of Technology, Cambridge, MA, USA",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C80"
+      ],
+      "bibKeys": [
+        "armengolurpi2023brainhack"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0009 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "romuald-menuet",
+      "name": "Romuald Menuet",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C132"
+      ],
+      "bibKeys": [
+        "menuet2022comprehensivedecoding"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0166 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "tao-ni",
+      "name": "Tao Ni",
+      "institution": "King Abdullah University of Science and Technology",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C133"
+      ],
+      "bibKeys": [
+        "ni2026whenmeets"
+      ],
+      "qifRelevance": "Cited in sources by QIF-T0168 as abstract-level support for the mechanism or capability the entry names. Does not show that an attack was run.",
+      "tags": [
+        "tara-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "georg-nagel",
+      "name": "Georg Nagel",
+      "institution": "Max-Planck-Institut f\u00fcr Biophysik, Marie-Curie-Strasse 15, 60439 Frankfurt, Germany; Institut f\u00fcr Biochemie, Universit\u00e4t Regensburg; Universit\u00e4tsstrasse 31, 93040 Regensburg, Germany; and Institut f\u00fcr Biophysikalische Chemie, Johann Wolfgang Goethe-Universit\u00e4t, Biozentrum, D-60439 Frankfurt, Germany",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N55"
+      ],
+      "bibKeys": [
+        "nagel2003channelrhodopsindirectly"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 24.1: channelrhodopsin-2 as an ion channel opened directly by light; cited as a founding result of optogenetics.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "edward-s-boyden",
+      "name": "Edward S Boyden",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N56"
+      ],
+      "bibKeys": [
+        "boyden2005millisecondtimescale"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 24.1: genetically targeted optical control of neurons on a millisecond timescale.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "jose-alain-sahel",
+      "name": "Jos\u00e9-Alain Sahel",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N57"
+      ],
+      "bibKeys": [
+        "sahel2021partialrecovery"
+      ],
+      "qifRelevance": "Whitepaper v9 Sections 24.1 and 24.8: the one human optogenetic result cited (one blind patient, retina, light-projecting goggles). Section 24.8 notes QIF-T0137 covers one optical technique and that no entry covers the light-delivery hardware.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "christian-luscher",
+      "name": "Christian L\u00fcscher",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N58"
+      ],
+      "bibKeys": [
+        "luscher2025roadmapdirect"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 24.1: roadmap separating direct from indirect translation of optogenetics to humans.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "viviana-gradinaru",
+      "name": "Viviana Gradinaru",
+      "institution": "Department of Bioengineering, Stanford University, Stanford, CA 94305, USA.",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N59"
+      ],
+      "bibKeys": [
+        "gradinaru2009opticaldeconstruction"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 24.3: effect of subthalamic stimulation attributed to fibres arriving from elsewhere (rodent model); cited for the point that the structure an electrode sits in does not name the chain it acts on.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "timothy-m-otchy",
+      "name": "Timothy M. Otchy",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N60"
+      ],
+      "bibKeys": [
+        "otchy2015acutetarget"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 24.3: brief silencing of one region disturbed a downstream region (rats and songbirds); cited for downstream effects of a sudden change at one node.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "meaghan-creed",
+      "name": "Meaghan Creed",
+      "institution": "Department of Basic Neurosciences, University of Geneva, Geneva, Switzerland.",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N61"
+      ],
+      "bibKeys": [
+        "creed2015refiningdeep"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 24.3: an electrical stimulation protocol refined to reproduce an effect first found with light (mice); cited for transfer of circuit knowledge to electrical devices.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "andreas-horn",
+      "name": "Andreas Horn",
+      "institution": "Berenson\u2010Allen Center for Noninvasive Brain Stimulation and Division of Cognitive Neurology, Department of Neurology, Beth Israel Deaconess Medical Center Harvard Medical School Boston MA",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N62"
+      ],
+      "bibKeys": [
+        "horn2017connectivitypredicts"
+      ],
+      "qifRelevance": "Whitepaper v9 Sections 24.3 and 24.7: connectivity of the stimulated site predicted deep brain stimulation outcome in a second patient group; cited for group-level estimation of downstream connectivity in people.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "scott-f-owen",
+      "name": "Scott F. Owen",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N63"
+      ],
+      "bibKeys": [
+        "owen2019thermalconstraints"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 24.3: tissue heating under common illumination protocols; cited as a side effect of the optogenetic method.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "thomas-koeglsperger",
+      "name": "Thomas Koeglsperger",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N64"
+      ],
+      "bibKeys": [
+        "koeglsperger2019deepbrain"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 24.4: deep brain stimulation programming; cited for spread of stimulation to neighbouring tissue as contact, amplitude and pulse width change.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "sophia-mueller",
+      "name": "Sophia Mueller",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N65"
+      ],
+      "bibKeys": [
+        "mueller2013individualvariability"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 24.6: individual differences in functional connectivity are largest in association cortex.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "evan-m-gordon",
+      "name": "Evan M. Gordon",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N66"
+      ],
+      "bibKeys": [
+        "gordon2017precisionfunctional"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 24.6: densely scanned individuals show network features that group averages hide.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "emily-s-finn",
+      "name": "Emily S Finn",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N67"
+      ],
+      "bibKeys": [
+        "finn2015functionalconnectome"
+      ],
+      "qifRelevance": "Whitepaper v9 Sections 24.6 and 26: connectivity profiles identified individuals across fMRI sessions. Section 26 names QIF-T0041 and QIF-T0038 as the closest TARA entries for that projection.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "laura-n-driscoll",
+      "name": "Laura N. Driscoll",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N68"
+      ],
+      "bibKeys": [
+        "driscoll2017dynamicreorganization"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 24.6: drift of task-related activity patterns in mouse parietal cortex over weeks.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "carl-e-schoonover",
+      "name": "Carl E. Schoonover",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N69"
+      ],
+      "bibKeys": [
+        "schoonover2021representationaldrift"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 24.6: drift of odour responses in mouse olfactory cortex over days to weeks.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "guy-h-wilson",
+      "name": "Guy H. Wilson",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "B24"
+      ],
+      "bibKeys": [
+        "wilson2025longterm"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 24.6: intracortical interfaces need frequent recalibration. Section 24.6 relates baselining and recalibration to QIF-T0062, QIF-T0071 and QIF-T0058.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "tsam-kiu-pun",
+      "name": "Tsam Kiu Pun",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "B25"
+      ],
+      "bibKeys": [
+        "pun2024measuringinstability"
+      ],
+      "qifRelevance": "Whitepaper v9 Sections 24.6 and 26: instability measured from neural data alone in two participants, tracking cursor performance. Non-adversarial; cited under drift (QIF-T0062 is the related entry).",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "h-zhang",
+      "name": "H Zhang",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "B26"
+      ],
+      "bibKeys": [
+        "zhang2015baseddecoding"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 25.1: classification of error-related potentials in a driving simulator and a real car.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "zahra-khaliliardali",
+      "name": "Zahra Khaliliardali",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "B27"
+      ],
+      "bibKeys": [
+        "khaliliardali2015actionprediction"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 25.1: anticipatory potentials detected before braking or accelerating in a simulator.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "ali-moin",
+      "name": "Ali Moin",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "B28"
+      ],
+      "bibKeys": [
+        "moin2020wearablebiosensing"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: wearable surface-EMG system that trains and updates a hyperdimensional model on the device.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "alessio-burrello",
+      "name": "Alessio Burrello",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "B29"
+      ],
+      "bibKeys": [
+        "burrello2019laelapsenergy"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: patient-specific seizure detection from intracranial EEG with hyperdimensional computing on an embedded board.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "fatemeh-asgarinejad",
+      "name": "Fatemeh Asgarinejad",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "B30"
+      ],
+      "bibKeys": [
+        "asgarinejad2020detectionepileptic"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: seizure detection from scalp EEG with hyperdimensional computing.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "danial-katoozian",
+      "name": "Danial Katoozian",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "B31"
+      ],
+      "bibKeys": [
+        "katoozian2024approachneural"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: hyperdimensional-inspired decoder of movement direction from intracortical recordings in monkeys.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "abbas-rahimi",
+      "name": "Abbas Rahimi",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "B32"
+      ],
+      "bibKeys": [
+        "rahimi2019efficientbiosignal"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: engineering reasons for hyperdimensional computing on biosignals.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "una-pale",
+      "name": "Una Pale",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "B33"
+      ],
+      "bibKeys": [
+        "pale2024combininggeneral"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: general and personal hyperdimensional seizure-detection models combined and transferred between datasets; a benign demonstration. Closest TARA entries named for that projection: QIF-T0041 and QIF-T0038.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "jordan-l-vasko",
+      "name": "Jordan L. Vasko",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "B34"
+      ],
+      "bibKeys": [
+        "vasko2022increasingrobustness"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: failed recording channels flagged by statistical process control. Non-adversarial.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "ziyi-liang",
+      "name": "Ziyi Liang",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "B35"
+      ],
+      "bibKeys": [
+        "liang2026conformalhdcuncertainty"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: hyperdimensional decoder of hippocampal spiking that abstains on data from other behavioural states. Preprint, not peer reviewed.",
+      "tags": [
+        "whitepaper-source",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "bryce-allen-bagley",
+      "name": "Bryce Allen Bagley",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C134",
+        "C135"
+      ],
+      "bibKeys": [
+        "bagley2024mathematicalframework",
+        "bagley2026threatvectors"
+      ],
+      "qifRelevance": "C134: Whitepaper v9 Sections 23.1, 23.2 and 26: the Cognitive Neurosecurity framework and its 'cogit' construct; the starting point of the Section 26 projections. Cited at version 4 (2025-01-26). Preprint, not peer reviewed; the whitepaper states it reports no experiments. C135: Whitepaper v9 Sections 21.7 and 23.3: review of threat vectors and defences in neurotechnology. Cited in sources by QIF-T0166, QIF-T0170, QIF-T0171, QIF-T0172. Preprint, not peer reviewed.",
+      "tags": [
+        "whitepaper-source",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "jianwei-tai",
+      "name": "Jianwei Tai",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C136"
+      ],
+      "bibKeys": [
+        "tai2026brainprompt"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 21.7: route-safety audit of a BCI-to-agent pipeline. Cited in sources by QIF-T0167. Preprint, not peer reviewed.",
+      "tags": [
+        "whitepaper-source",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "zahra-tarkhani",
+      "name": "Zahra Tarkhani",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C137"
+      ],
+      "bibKeys": [
+        "tarkhani2026nerveattacks"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 21.7: epoch shifting against an EEG decoder and unencrypted BLE on consumer headsets. Cited in sources by QIF-T0169. Preprint, not peer reviewed.",
+      "tags": [
+        "whitepaper-source",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "ahmed-abdelaziz",
+      "name": "Ahmed Abdelaziz",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C138"
+      ],
+      "bibKeys": [
+        "abdelaziz2025protectingintellectual"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 21.7: a watermarking defence for EEG models, named in the notes of QIF-T0170; it presupposes model stealing and does not show it. Preprint, not peer reviewed.",
+      "tags": [
+        "whitepaper-source",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "linhua-cong",
+      "name": "Linhua Cong",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C139"
+      ],
+      "bibKeys": [
+        "cong2026proxycezero"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 21.7 (variants): adversarial transfer from public EEG encoders, kept as an interim note on QIF-T0019. Cited in defensive_sources by QIF-T0019; not counted by the citation gate. Preprint, not peer reviewed.",
+      "tags": [
+        "whitepaper-source",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "sizhe-zhang",
+      "name": "Sizhe Zhang",
+      "institution": "Department of Electrical and Computer Engineering, Villanova University, Villanova, PA, USA",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C140"
+      ],
+      "bibKeys": [
+        "zhang2025exploringhyperdimensional"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: tolerance of hyperdimensional models to random memory bit errors, and the effect of chosen bit flips, with a protection mechanism. The whitepaper calls QIF-T0050 adjacent.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "fangfang-yang",
+      "name": "Fangfang Yang",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C141",
+        "C142"
+      ],
+      "bibKeys": [
+        "yang2020vulnerabilityhyperdimensional",
+        "yang2020adversarialattacks"
+      ],
+      "qifRelevance": "C141: Whitepaper v9 Section 26: adversarial inputs against hyperdimensional classifiers; mapped to QIF-T0019. The whitepaper cites DOI:10.1007/978-3-030-65745-1_22 and arXiv:2006.05594 as one work; the two records share authors but carry different titles and neither links to the other. C142: Whitepaper v9 Section 26: adversarial inputs against hyperdimensional classifiers; mapped to QIF-T0019. Preprint, not peer reviewed. The whitepaper cites DOI:10.1007/978-3-030-65745-1_22 and arXiv:2006.05594 as one work; the two records share authors but carry different titles and neither links to the other.",
+      "tags": [
+        "whitepaper-source",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "dongning-ma",
+      "name": "Dongning Ma",
+      "institution": "Not recorded",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C143",
+        "C144"
+      ],
+      "bibKeys": [
+        "ma2021hdtestdifferential",
+        "ma2023testingenhancing"
+      ],
+      "qifRelevance": "C143: Whitepaper v9 Section 26: adversarial inputs against hyperdimensional classifiers found by fuzz testing; mapped to QIF-T0019. Preprint, not peer reviewed. C144: Whitepaper v9 Section 26: adversarial robustness of hyperdimensional computing with a trained detector; mapped to QIF-T0019.",
+      "tags": [
+        "whitepaper-source",
+        "preprint"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "ruixuan-wang",
+      "name": "Ruixuan Wang",
+      "institution": "Villanova University,ECE Department",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C145",
+        "C152"
+      ],
+      "bibKeys": [
+        "wang2022poisonhdpoison",
+        "wang2021briefindustry"
+      ],
+      "qifRelevance": "C145: Whitepaper v9 Section 26: label poisoning of hyperdimensional models with a data-sanitisation defence; mapped to QIF-T0024. The whitepaper notes it is one primary source. C152: Whitepaper v9 Section 26: hyperdimensional anomaly detection on vehicle sensor readings.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "alejandro-hernandez-cano",
+      "name": "Alejandro Hernandez-Cano",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C146"
+      ],
+      "bibKeys": [
+        "hernandezcano2021pridmodel"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: reconstruction of training inputs from a hyperdimensional model, with noise-injection and quantisation defences. The whitepaper calls QIF-T0021 adjacent and records no entry for inversion of a stored model.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "behnam-khaleghi",
+      "name": "Behnam Khaleghi",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C147"
+      ],
+      "bibKeys": [
+        "khaleghi2020priveprivacy"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: reversibility of hyperdimensional computation and a differentially private variant. The whitepaper calls QIF-T0021 adjacent.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "shijin-duan",
+      "name": "Shijin Duan",
+      "institution": "Northeastern University",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C148"
+      ],
+      "bibKeys": [
+        "duan2022hdlock"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: recovery of a hyperdimensional model from its memory and a keyed-encoding defence. The whitepaper notes QIF-T0170 covers query-based copying, not this. Crossref gives the title as 'HDLock' only.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "fangxin-liu",
+      "name": "Fangxin Liu",
+      "institution": "Shanghai Jiao Tong University",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C149"
+      ],
+      "bibKeys": [
+        "liu2023hyperattackefficient"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: targeted bit flips in hyperdimensional model memory. The whitepaper calls QIF-T0050 adjacent.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "samuel-wilson",
+      "name": "Samuel Wilson",
+      "institution": "Queensland University of Technology,Brisbane,QLD,Australia,4000",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C151"
+      ],
+      "bibKeys": [
+        "wilson2023hyperdimensionalfeature"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: out-of-distribution detection with hyperdimensional methods, shown on images.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "mahboobe-sadeghipour-roodsari",
+      "name": "Mahboobe Sadeghipour Roodsari",
+      "institution": "Karlsruhe Institute of Technology (KIT),Karlsruhe,Germany",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C153"
+      ],
+      "bibKeys": [
+        "roodsari2025lightweightconcurrent"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: out-of-distribution detection in hyperdimensional accelerator hardware.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "heena-rathore",
+      "name": "Heena Rathore",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C154"
+      ],
+      "bibKeys": [
+        "rathore2019noveldeep"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: classification of emulated attack stimulation patterns for deep brain implants.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "patricia-arias-cabarcos",
+      "name": "Patricia Arias-Cabarcos",
+      "institution": "Paderborn University, Paderborn, Germany",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C155"
+      ],
+      "bibKeys": [
+        "ariascabarcos2023performanceusability"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: brainwave authentication with consumer headsets. Closest TARA entries named for that projection: QIF-T0032, QIF-T0038 and QIF-T0071.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "marissa-l-de-ataide",
+      "name": "Marissa L. de Ataide",
+      "institution": "School of Physical and Applied Sciences, Goa University, Taleigao 403206, Goa, India",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C157"
+      ],
+      "bibKeys": [
+        "deataide2026brainsignal"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 26: survey listing open problems in EEG biometric authentication. Closest TARA entries named for that projection: QIF-T0032, QIF-T0038 and QIF-T0071.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "adina-roskies",
+      "name": "Adina Roskies",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "E14"
+      ],
+      "bibKeys": [
+        "roskies2002neuroethics"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 27.1: divides neuroethics into the ethics of neuroscience and the neuroscience of ethics.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "anna-wexler",
+      "name": "Anna Wexler",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "E18"
+      ],
+      "bibKeys": [
+        "wexler2019neurohype"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 27.5, guardrail G6 (limits of present devices). Cited as the project records it; not re-read in the sync that recorded it.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "edward-vul",
+      "name": "Edward Vul",
+      "institution": "Massachussetts Institute of Technology, San Diego",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "E19"
+      ],
+      "bibKeys": [
+        "vul2009puzzlingly"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 27.5, guardrail G8: inflated correlations in fMRI studies of emotion, personality and social cognition.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "anders-eklund",
+      "name": "Anders Eklund",
+      "institution": "Division of Medical Informatics, Department of Biomedical Engineering, Link\u00f6ping University, S-581 85 Link\u00f6ping, Sweden",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "E20"
+      ],
+      "bibKeys": [
+        "eklund2016cluster"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 27.5, guardrail G8: clusterwise fMRI inference shown invalid for common parametric methods.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "WHY"
+    },
+    {
+      "id": "s-murray-sherman",
+      "name": "S Murray Sherman",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N73"
+      ],
+      "bibKeys": [
+        "sherman2016thalamuscentral"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 20.3: cortical areas also communicate through thalamic nuclei (higher-order relays in cortico-thalamo-cortical circuits).",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "brian-l-edlow",
+      "name": "Brian L. Edlow",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N74"
+      ],
+      "bibKeys": [
+        "edlow2012ascendingarousal"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 20.3: brainstem arousal pathways reach the hypothalamus and basal forebrain as well as the thalamus. Tractography in 3 adult human brains, 2 imaged postmortem.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "clementine-bosch-bouju",
+      "name": "Cl\u00e9mentine Bosch-Bouju",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N75"
+      ],
+      "bibKeys": [
+        "boschbouju2013motorthalamus"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 20.3: motor thalamus lies between the basal ganglia and cerebellum and the motor cortex.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "emmanuelle-courtiol",
+      "name": "Emmanuelle Courtiol",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "N76"
+      ],
+      "bibKeys": [
+        "courtiol2015olfactorythalamus"
+      ],
+      "qifRelevance": "Whitepaper v9 Section 20.3: the mediodorsal thalamic nucleus receives direct input from piriform cortex.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "l-sha",
+      "name": "L. Sha",
+      "institution": "Not listed in the Crossref record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C160"
+      ],
+      "bibKeys": [
+        "sha1990priorityinheritance"
+      ],
+      "qifRelevance": "Whitepaper v9 companion Section 18.6.1: non-BCI analogue cited for QIF-T0162 (priority inversion in real-time scheduling). Not evidence of an attack.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "jean-francois-aubry",
+      "name": "Jean-Fran\u00e7ois Aubry",
+      "institution": "Not listed in the arXiv API record",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "C161"
+      ],
+      "bibKeys": [
+        "aubry2023itrusstsafety"
+      ],
+      "qifRelevance": "Whitepaper v9 companion Section 14.2: source for the 2 \u00b0C and 39 \u00b0C temperature levels, attributed in the preprint to ISO 14708-1 and ISO 14708-3. Preprint, not peer reviewed.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "v-cerf",
+      "name": "V. Cerf",
+      "institution": "Dept. of Comp. Science and Elec. Engr.,Stanford Univ.,Stanford, CA",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "P13"
+      ],
+      "bibKeys": [
+        "cerf1974packetnetwork"
+      ],
+      "qifRelevance": "Whitepaper v9 companion Section 18.3: published proposal of the protocol that became TCP/IP.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "j-postel",
+      "name": "J. Postel",
+      "institution": "ISI (as printed in RFC 801)",
+      "country": "UNKNOWN",
+      "expertise": [],
+      "papers": [
+        "P14"
+      ],
+      "bibKeys": [
+        "postel1981rfc801"
+      ],
+      "qifRelevance": "Whitepaper v9 companion Section 18.3: RFC 801 sets 1 January 1983 for the ARPANET move from NCP to TCP.",
+      "tags": [
+        "whitepaper-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "khara-ramos",
+      "name": "Khara M. Ramos",
+      "institution": "NIH BRAIN Initiative Neuroethics Program",
+      "country": "US",
+      "expertise": [
+        "neuroethics",
+        "research-governance",
+        "neurotechnology-oversight"
+      ],
+      "papers": [
+        "I22",
+        "I8",
+        "I23"
+      ],
+      "bibKeys": [
+        "bianchi2018brainneuroethics",
+        "ramos2019brainintegrating",
+        "ramos2017brainneuroethics"
+      ],
+      "qifRelevance": "Led the published accounts of how the NIH BRAIN Initiative integrates neuroethics into a neuroscience funding programme.",
+      "tags": [
+        "nih-brain",
+        "neuroethics",
+        "governance"
+      ],
+      "layer": "WHY"
     }
   ],
   "institutions": [
@@ -3220,6 +4764,43 @@
         "policy",
         "international",
         "governance"
+      ]
+    },
+    {
+      "id": "nih-brain-neuroethics",
+      "name": "NIH BRAIN Initiative Neuroethics Program",
+      "fullName": "National Institutes of Health BRAIN Initiative neuroethics program",
+      "country": "US",
+      "lab": "Neuroethics Working Group",
+      "focus": [
+        "neuroethics",
+        "research-governance",
+        "neurotechnology-oversight"
+      ],
+      "researchers": [
+        "khara-ramos",
+        "karen-rommelfanger",
+        "winston-chiong"
+      ],
+      "layer": "WHY",
+      "url": "https://www.nih.gov/brain/research/neuroethics",
+      "qifRelevance": "A federal research programme that builds neuroethics into neurotechnology development rather than reviewing it afterwards: a standing advisory group, funded neuroethics projects, portfolio scanning for ethical questions, and topic workshops. Cited as the structural model QIF's guardrails imitate and the oversight QIF does not have.",
+      "papers": [
+        "I22",
+        "I8",
+        "I23",
+        "I24"
+      ],
+      "bibKeys": [
+        "bianchi2018brainneuroethics",
+        "ramos2019brainintegrating",
+        "ramos2017brainneuroethics"
+      ],
+      "tags": [
+        "nih-brain",
+        "neuroethics",
+        "governance",
+        "funder"
       ]
     }
   ],

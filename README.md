@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18640105-blue)](https://doi.org/10.5281/zenodo.18640105)
 [![Site](https://img.shields.io/badge/Site-qinnovate.com-gold)](https://qinnovate.com)
-[![TARA](https://img.shields.io/badge/TARA-165_techniques-red)](https://qinnovate.com/atlas/tara/)
+[![TARA](https://img.shields.io/badge/TARA-173_techniques-red)](https://qinnovate.com/atlas/tara/)
 
 </div>
 
@@ -31,6 +31,10 @@ Neuroethics has two hemispheres (Roskies, 2002): the *ethics of neuroscience* go
 | **In this repo** | TARA, NISS, NSP, Neurowall, QIF Model | Governance, neurorights, dual-use insight |
 
 This project does both. It asks: **what happens to a patient when their brain-computer interface is compromised?** Not the data. Not the device. The person.
+
+Neuroethics is not a review step bolted on at the end here. That ordering follows the NIH BRAIN Initiative's neuroethics program, which argues neuroethics should run concurrently with the development of neurotechnology rather than being applied after the fact ([Ramos, Rommelfanger, Greely & Koroshetz, 2017](https://doi.org/10.1080/23299460.2017.1319035)), and runs it through four standing activities: a Neuroethics Working Group, funded neuroethics research, scanning of the research portfolio for the ethical questions it raises, and workshops on neuroethics topics ([Bianchi et al., 2018](https://doi.org/10.1523/JNEUROSCI.2091-18.2018); [Ramos et al., 2019](https://doi.org/10.1016/j.neuron.2019.01.024); [NIH BRAIN Initiative, Neuroethics](https://www.nih.gov/brain/research/neuroethics)).
+
+QIF has none of those four. It is one researcher's framework with no funding, no advisory group and no ethics review. The guardrails it holds itself to are self-imposed, which is the weakness, and the comparison is here to name the standard rather than to claim it. The gap is set out in [Neurosecurity Governance §4](governance/policy/NEUROSECURITY_GOVERNANCE.md#institutional-models-the-nih-brain-initiative-neuroethics-program). **No affiliation:** the NIH, the BRAIN Initiative and its Neuroethics Working Group have not reviewed, endorsed or funded any part of this project.
 
 ---
 
@@ -69,7 +73,7 @@ Each directory has a `CONTEXT.md` with a summary and file map. Start with any di
 | Tool | What It Does | Install |
 |------|-------------|---------|
 | **[Quorum](https://github.com/qinnovates/quorum)** | Orchestrate a swarm of AI experts on any question. Structured dissent, fact-checking, multi-agent validation. | `claude install qinnovates/quorum` |
-| **[BCI Security Plugin](https://github.com/qinnovates/bci-security-plugin)** | First BCI security toolkit for AI coding assistants. Scans code for neural data handling issues. | `claude install qinnovates/bci-security-plugin` |
+| **[BCI Security Plugin](https://github.com/qinnovates/bci-security-plugin)** | A BCI security toolkit for AI coding assistants. Scans code for neural data handling issues. | `claude install qinnovates/bci-security-plugin` |
 | **[NeuroSIM](https://github.com/qinnovates/neurosim)** | Neural Security Operations Simulator. BCI signal processing meets security operations. | See repo |
 | **macshield** | Network-aware macOS security hardening. | `brew install qinnovates/tools/macshield` |
 
@@ -105,7 +109,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 | Component | Description | Status |
 |-----------|-------------|--------|
 | **[QIF](https://qinnovate.com/framework/)** | 11-band hourglass security architecture for BCIs | Proposed, v6.3 ([v8.0](osi-of-mind/whitepapers/QIF-WHITEPAPER-V8.md)) |
-| **[TARA](https://qinnovate.com/atlas/tara/)** | 165 BCI technique pairs, STIX 2.1 registry | v1.7 |
+| **[TARA](https://qinnovate.com/atlas/tara/)** | 173 BCI technique pairs, STIX 2.1 registry | v1.7 |
 | **[qtara](https://pypi.org/project/qtara/)** | Python SDK for TARA registry management and STIX export | v0.2.0 |
 | **[NSP](https://qinnovate.com/tools/nsp/)** | Post-quantum wire protocol for BCI data links | In development, v0.5 |
 | **[NISS](https://qinnovate.com/atlas/scoring/)** | CVSS v4.0 extension proposal for neural interfaces (6 neural metrics) | Proposed, v1.1 |
@@ -145,11 +149,11 @@ This is early-stage research by a solo researcher. Empirical validation requires
 <details>
 <summary><strong>The TARA Insight</strong></summary>
 
-TARA started as an attack matrix. 165 BCI techniques catalogued from published literature. Something unexpected emerged: the same mechanisms kept showing up on the therapeutic side.
+TARA started as an attack matrix. 173 BCI techniques catalogued from published literature. Something unexpected emerged: the same mechanisms kept showing up on the therapeutic side.
 
 Signal injection is an attack vector. It is also the basis of neurostimulation therapy for depression, Parkinson's, and chronic pain. The boundary between attack and therapy is not the mechanism. It is consent, dosage, and oversight.
 
-About 75% of the 165 techniques map to a therapeutic counterpart today. This means the same framework that scores whether an attack is dangerous can also help bound whether a therapy is safe. TARA is both a threat registry and a safety reference.
+About 75% of the 173 techniques map to a therapeutic counterpart today. This means the same framework that scores whether an attack is dangerous can also help bound whether a therapy is safe. TARA is both a threat registry and a safety reference.
 
 [TARA Atlas](https://qinnovate.com/atlas/tara/) | [TARA blog post](https://qinnovate.com/news/2026-02-09-tara-therapeutic-atlas-of-risks-and-applications/)
 
@@ -170,7 +174,7 @@ Three fields converge on BCIs. None covers the full problem alone.
 
 **Neurosecurity** (Denning, Matsuoka & Kohno, 2009) bridges all three. QIF is one attempt to operationalize that bridge — taking phenomena described by neuroscientists and concerns raised by neuroethicists and putting them into a testable security framework.
 
-[Neurosecurity Governance](governance/policy/NEUROSECURITY_GOVERNANCE.md) | [Origin classification of all 165 techniques](datalake/qtara-registrar.json)
+[Neurosecurity Governance](governance/policy/NEUROSECURITY_GOVERNANCE.md) | [Origin classification of all 173 techniques](datalake/qtara-registrar.json)
 
 </details>
 
@@ -189,7 +193,7 @@ An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spina
 
 ### TARA
 
-165 techniques spanning 8 domains and 17 tactics. 103/165 carry CVSS v4.0 base vectors; 139/165 carry proposed NISS extension metrics (coverage expanding). MITRE-compatible IDs.
+173 techniques spanning 8 domains and 17 tactics. 103/173 carry CVSS v4.0 base vectors; 129/173 carry a proposed NISS score, 10 carry a provisional range (some metrics unsupported by a source), and 34 are unscored. MITRE-compatible IDs.
 
 [Legacy: Requires further updates and refining]
 - **Atlas:** [qinnovate.com/atlas/tara](https://qinnovate.com/atlas/tara/)
@@ -203,7 +207,7 @@ A proposed CVSS v4.0 extension for neural interfaces. Six metrics that CVSS cann
 | Metric | Code | What It Measures |
 |--------|------|-----------------|
 | Biological Impact | BI | Tissue damage, neural pathway disruption |
-| Cognitive Reconnaissance | CR | Thought decoding, neural data inference |
+| Cognitive Reconnaissance | CR | Decoding of speech or motor intent by models trained on a cooperating user, neural data inference |
 | Cognitive Disruption | CD | Perception manipulation, cognitive coercion |
 | Consent Violation | CV | Whether the subject knew and agreed |
 | Reversibility | RV | Can the damage be undone? |
@@ -377,7 +381,7 @@ This repository is archived by [Software Heritage](https://archive.softwareherit
 
 The same git history that lets you trace how a security framework evolved is the same history that bug bounty hunters use to find leaked secrets in force-pushed commits. Tools like [TruffleHog](https://github.com/trufflesecurity/trufflehog) and [Gitleaks](https://github.com/gitleaks/gitleaks) scan git history to surface credentials that developers thought they deleted. The mechanism is identical. The difference is consent and intent.
 
-This is the same principle that runs through the entire project. TARA documents 165 BCI techniques where the attack mechanism and the therapeutic mechanism are physically identical. Signal injection is how you compromise a neural interface. It is also how you treat Parkinson's disease. The tool does not determine the use. The boundary is always consent, oversight, and intent.
+This is the same principle that runs through the entire project. TARA documents 173 BCI techniques where the attack mechanism and the therapeutic mechanism are physically identical. Signal injection is how you compromise a neural interface. It is also how you treat Parkinson's disease. The tool does not determine the use. The boundary is always consent, oversight, and intent.
 
 We publish full history because transparency is the foundation of trust in security research. Every claim in this repo can be traced to the commit where it was introduced, the source that informed it, and the [derivation log entry](osi-of-mind/QIF-DERIVATION-LOG.md) where the decision was made. If something was wrong, you can see when it was corrected and why.
 

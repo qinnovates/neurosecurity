@@ -14,7 +14,7 @@
  *   node scripts/generate-citations.mjs --check     # CI mode: exit 1 if out of sync
  */
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -36,9 +36,13 @@ let issues = [];
 let updates = [];
 
 // ── 1. Check landscape.astro imports from registry ──
-const landscapeContent = readFileSync(LANDSCAPE_PATH, 'utf-8');
-if (!landscapeContent.includes("import registry from '../../datalake/research-registry.json'")) {
-  issues.push('landscape.astro does not import from research-registry.json');
+// The page is optional: it was removed in the neuroethics restructuring, and this
+// check is advisory, so its absence must not stop the citation sync from running.
+if (existsSync(LANDSCAPE_PATH)) {
+  const landscapeContent = readFileSync(LANDSCAPE_PATH, 'utf-8');
+  if (!landscapeContent.includes("import registry from '../../datalake/research-registry.json'")) {
+    issues.push('landscape.astro does not import from research-registry.json');
+  }
 }
 
 // ── 2. Check scholarship entries exist in QIF-RESEARCH-SOURCES.md ──

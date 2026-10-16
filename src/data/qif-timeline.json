@@ -7,9 +7,9 @@
     "maintainer": "Kevin Qi"
   },
   "current_stats": {
-    "as_of": "2026-10-06",
-    "threat_techniques": 165,
-    "bci_devices": 70,
+    "as_of": "2026-10-07",
+    "threat_techniques": 173,
+    "bci_devices": 71,
     "brain_regions": 38,
     "physics_constraints": 13,
     "hourglass_bands": 11,
@@ -26,15 +26,17 @@
     "neurowall_version": "v0.8",
     "blog_posts": 59,
     "cross_ai_validations": 14,
-    "research_sources": 380,
-    "techniques_niss_scored": 139,
+    "research_sources": 488,
+    "techniques_niss_scored": 129,
     "tara_domains": 12,
-    "bci_companies": 67,
+    "bci_companies": 68,
     "niss_version": "v1.1",
-    "registrar_version": "v4.0",
+    "registrar_version": "v4.3",
     "landscape_dataset_version": "v2.2",
     "sdk_version": "v0.3.0",
-    "whitepaper_version": "v8.0"
+    "whitepaper_version": "v8.0",
+    "techniques_niss_provisional": 10,
+    "technique_variants": 1
   },
   "milestones": [
     {
@@ -392,8 +394,8 @@
     {
       "date": "2026-02-27",
       "type": "milestone",
-      "title": "FIRST.org CVSS SIG: NISS Accepted for Resources Repo",
-      "description": "CVSS SIG Co-Chair Nick Leali confirmed NISS extension discussed by the SIG and offered inclusion in the official CVSS Resources repository (github.com/FIRSTdotorg/cvss-resources). First external standards body recognition of the framework."
+      "title": "FIRST.org CVSS SIG: NISS Invited to Resources Repo, Contribution Deferred",
+      "description": "The CVSS SIG discussed the NISS extension and invited its inclusion in the CVSS Resources repository (github.com/FIRSTdotorg/cvss-resources). The invitation was deliberately declined for now: NISS is a single-author derivation whose scoring method has not been independently reviewed, and contributing it before that review would lend it authority it has not earned. An invitation is not a review, an endorsement or adoption by any standards body."
     },
     {
       "date": "2026-02-27",
