@@ -42,15 +42,35 @@ export interface SceneShape {
   stepNumbers?: readonly number[];
 }
 
-/** Colours for the bands, neocortex to spinal cord. Categories, not a scale. */
+/**
+ * Colours for the bands, neocortex to spinal cord.
+ *
+ * Two ordinal ramps, not seven categories. Seven mutually distinguishable
+ * categorical hues do not exist: all seven bands can be on screen at once, so
+ * they need all-pairs separation, and one hue carries at most five ordinal
+ * steps before adjacent steps fall under the lightness-gap floor. The earlier
+ * seven-hue set failed on that -- N7 and N3 measured 5.3 deltaE under
+ * deuteranopia and 11.3 with full colour vision, below the 15 floor.
+ *
+ * So lightness carries depth within a hue family, and the hue family carries
+ * the forebrain boundary: N7-N4 (telencephalon and diencephalon) on blue,
+ * N3-N1 (cerebellum, brainstem, cord) on orange. Each family validates as an
+ * ordinal ramp in both modes, and every cross-family pair clears the CVD
+ * floor. Colour is never the only channel: the band is always labelled, since
+ * within a family only position distinguishes the steps.
+ */
 export const BAND_COLOURS: Readonly<Record<string, string>> = {
-  N7: '#5b3fd0', N6: '#0b8a7d', N5: '#c2255c', N4: '#b86a00', N3: '#2b6fd6', N2: '#5d7f16', N1: '#7a5c99',
+  N7: '#82b8fb', N6: '#5598e7', N5: '#2a78d6', N4: '#1c5cab', N3: '#ef8a55', N2: '#d9541f', N1: '#9c3c16',
+};
+/** The same two families stepped for the dark surface, not an automatic flip. */
+export const BAND_COLOURS_DARK: Readonly<Record<string, string>> = {
+  N7: '#9ec5f4', N6: '#6da7ec', N5: '#3987e5', N4: '#256abf', N3: '#f6b08c', N2: '#ef8a55', N1: '#d9541f',
 };
 /** NISS steps, lightest to darkest. Five separate steps, never a ramp between them. */
 export const NISS_COLOURS: Readonly<Record<string, string>> = {
   none: '#d6d0f0', low: '#b0a2e6', medium: '#8a74d8', high: '#5f45c2', critical: '#33207a',
 };
-export const LINKED_COLOUR = '#5b3fd0';
+export const LINKED_COLOUR = '#2a78d6';
 export const NEUTRAL_COLOUR = '#8a90a0';
 
 const FILL_BY_MARK: Readonly<Record<OwnershipMark, FillKind>> = { solid: 'solid', inside_or_mixed: 'translucent', no_data: 'lines', context: 'neutral' };

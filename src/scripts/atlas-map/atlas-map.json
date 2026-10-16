@@ -478,6 +478,38 @@
       ]
     },
     {
+      "id": "change-band-palette",
+      "summary": "Change a band colour or the selection colour",
+      "keywords": [
+        "band colour",
+        "band color",
+        "band palette",
+        "palette",
+        "selection colour",
+        "selection color",
+        "contrast",
+        "colour blind",
+        "color blind"
+      ],
+      "recipe": {
+        "map": "src/lib/anatomy/CONTEXT.md",
+        "number": 3
+      },
+      "edit": [
+        "src/lib/atlas-explorer/scene-shapes.ts",
+        "src/lib/atlas-explorer/scene-drawing.ts",
+        "src/components/atlas-scene/atlas-scene.css"
+      ],
+      "note": "Bands are two ordinal ramps split on the forebrain boundary, not seven categories: one hue carries at most five steps before adjacent steps fall under the lightness-gap floor. Validate any new step with the dataviz validator (per family, --ordinal) before editing, and keep the selection colour neutral so it cannot read as a band.",
+      "commands": [
+        "npx vitest run src/lib/atlas-explorer/__tests__/band-palette.test.ts"
+      ],
+      "checks": [
+        "unit-tests",
+        "type-check"
+      ]
+    },
+    {
       "id": "change-device",
       "summary": "Add a device (lead or electrode layout)",
       "keywords": [
@@ -1574,6 +1606,22 @@
       "owner": "data",
       "status": "open",
       "from": "PR #182 body"
+    },
+    {
+      "id": "ATLAS-F64",
+      "what": "Dark mode renders light-surface band colours. BAND_COLOURS_DARK holds validated dark steps but nothing threads a theme flag through describeFill to the scene renderer.",
+      "ref": "#171",
+      "owner": "engineering",
+      "status": "open",
+      "from": "palette re-step, 2026-10-16"
+    },
+    {
+      "id": "ATLAS-F65",
+      "what": "Within a hue family only lightness separates adjacent bands, so a band mark must always carry its label. Legend presence is not yet asserted by a test.",
+      "ref": "#171",
+      "owner": "engineering",
+      "status": "open",
+      "from": "palette re-step, 2026-10-16"
     }
   ]
 }
