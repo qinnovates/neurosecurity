@@ -8317,7 +8317,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0012",
@@ -11037,7 +11037,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0014",
@@ -14989,7 +14989,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0025",
@@ -37645,7 +37645,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0066",
@@ -41501,7 +41501,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0068",
@@ -45389,7 +45389,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0070",
@@ -46973,7 +46973,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0073",
@@ -51245,7 +51245,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0106",
@@ -52045,7 +52045,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0111",
@@ -53629,7 +53629,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0112",
@@ -54429,7 +54429,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0114",
@@ -58461,7 +58461,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0120",
@@ -61181,7 +61181,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0121",
@@ -68893,7 +68893,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0135",
@@ -71613,7 +71613,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0137",
@@ -72413,7 +72413,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0138",
@@ -73213,7 +73213,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0139",
@@ -74013,7 +74013,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0141",
@@ -74813,7 +74813,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0147",
@@ -75613,7 +75613,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0148",
@@ -76413,7 +76413,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0149",
@@ -77213,7 +77213,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0152",
@@ -78013,7 +78013,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0153",
@@ -78813,7 +78813,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0154",
@@ -80397,7 +80397,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0155",
@@ -81197,7 +81197,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0156",
@@ -85085,7 +85085,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0158",
@@ -85885,7 +85885,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0159",
@@ -86685,7 +86685,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0160",
@@ -87485,7 +87485,7 @@
     "neurotransmitter": "glutamate",
     "dsm_code": "R25.2",
     "dsm_name": "Cramp and spasm",
-    "dsm_cluster": ""
+    "dsm_cluster": "Neurological/motor"
   },
   {
     "technique_id": "QIF-T0161",

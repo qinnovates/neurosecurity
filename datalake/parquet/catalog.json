@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-10-16T05:28:42.780153+00:00",
+    "generated": "2026-10-16T06:33:53.665145+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
@@ -293,7 +293,7 @@
         "niss_affected",
         "confidence"
       ],
-      "size_bytes": 12620,
+      "size_bytes": 12561,
       "compression": "zstd",
       "source": "datalake/parquet/neurological_conditions.parquet"
     },

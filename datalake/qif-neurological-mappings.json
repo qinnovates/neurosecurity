@@ -396,8 +396,8 @@
     },
     {
       "id": "NEURO-027",
-      "code": "I95.1",
-      "name": "Orthostatic hypotension",
+      "code": "G90.3",
+      "name": "Multi-system degeneration of the autonomic nervous system",
       "category": "autonomic",
       "subcategory": "cardiovascular",
       "definition": "Sustained BP drop upon standing from failed sympathetic vasoconstriction. Syncope and fall risk.",
@@ -452,8 +452,8 @@
     },
     {
       "id": "NEURO-031",
-      "code": "G81.10",
-      "name": "Spastic hemiplegia affecting unspecified side",
+      "code": "R25.2",
+      "name": "Cramp and spasm",
       "category": "motor",
       "subcategory": "upper_motor_neuron",
       "definition": "Velocity-dependent increase in tonic stretch reflexes from corticospinal or reticulospinal tract damage.",
@@ -564,8 +564,8 @@
     },
     {
       "id": "NEURO-039",
-      "code": "F07.0",
-      "name": "Personality change due to known physiological condition",
+      "code": "R45.3",
+      "name": "Demoralization and apathy",
       "category": "speech_language",
       "subcategory": "motivation",
       "definition": "Reduction in goal-directed behavior and motivation from ACC, basal ganglia, or frontal lobe dysfunction. Distinct from depression.",
@@ -578,8 +578,8 @@
     },
     {
       "id": "NEURO-040",
-      "code": "R41.89",
-      "name": "Other symptoms and signs involving cognitive functions and awareness",
+      "code": "R41.85",
+      "name": "Anosognosia",
       "category": "consciousness",
       "subcategory": "awareness",
       "definition": "Lack of awareness of own neurological deficit. Patient is impaired but denies it. From right parietal/frontal lesions.",

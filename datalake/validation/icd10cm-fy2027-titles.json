@@ -41,10 +41,6 @@
       "title": "Other specified mental disorders due to known physiological condition",
       "kind": "billable"
     },
-    "F07.0": {
-      "title": "Personality change due to known physiological condition",
-      "kind": "billable"
-    },
     "F10": {
       "title": "Alcohol related disorders",
       "kind": "category"
@@ -437,10 +433,6 @@
       "title": "Cerebral palsy, unspecified",
       "kind": "billable"
     },
-    "G81.10": {
-      "title": "Spastic hemiplegia affecting unspecified side",
-      "kind": "billable"
-    },
     "G83.5": {
       "title": "Locked-in state",
       "kind": "billable"
@@ -455,6 +447,10 @@
     },
     "G90.2": {
       "title": "Horner's syndrome",
+      "kind": "billable"
+    },
+    "G90.3": {
+      "title": "Multi-system degeneration of the autonomic nervous system",
       "kind": "billable"
     },
     "G90.4": {
@@ -537,10 +533,6 @@
       "title": "Disorders of unspecified acoustic nerve",
       "kind": "billable"
     },
-    "I95.1": {
-      "title": "Orthostatic hypotension",
-      "kind": "billable"
-    },
     "K58": {
       "title": "Irritable bowel syndrome",
       "kind": "category"
@@ -589,6 +581,10 @@
       "title": "Other amnesia",
       "kind": "billable"
     },
+    "R41.85": {
+      "title": "Anosognosia",
+      "kind": "billable"
+    },
     "R41.89": {
       "title": "Other symptoms and signs involving cognitive functions and awareness",
       "kind": "billable"
@@ -611,6 +607,10 @@
     },
     "R43.8": {
       "title": "Other disturbances of smell and taste",
+      "kind": "billable"
+    },
+    "R45.3": {
+      "title": "Demoralization and apathy",
       "kind": "billable"
     },
     "R47.0": {
