@@ -1,0 +1,59 @@
+name: CI
+
+# The data-integrity gates, on pull requests as well as main.
+#
+# Why this workflow exists. `npm test` did already run on pull requests, but
+# only inside Security Scan, as a step after `npm audit --audit-level=high` in
+# the same job — so any high-severity advisory in any dependency silently
+# stopped the data-lake guards from ever executing. `npm run health` and
+# `tsc --noEmit` ran in no blocking job at all, and `generated:check` ran only
+# behind a two-path filter. A 1,085-change data migration cannot rest on that.
+#
+# These gates are independent of dependency auditing and of deployment, and
+# they fail the build rather than warn.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
+
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: '22'
+
+      - name: Install
+        run: npm ci
+
+      # Guards the ICD-10-CM codes across datalake/*.json: no wildcards, no
+      # non-chapter-F codes in DSM-named fields, every labelled code carrying
+      # its official title, and the ATLAS-F40 allow-lists exact.
+      - name: Test
+        run: npm test
+
+      - name: Type check
+        run: npm run type-check
+
+      # Registrar-derived files drift silently otherwise.
+      - name: Check generated files are current
+        run: npm run generated:check
+
+      # Propagation check. It reported "Parquet catalog up to date" while
+      # impact-chains.json was 23.7% stale, so it is necessary but not
+      # sufficient; the drift gate for derived rows is a tracked follow-up.
+      - name: Propagation health
+        run: npm run health

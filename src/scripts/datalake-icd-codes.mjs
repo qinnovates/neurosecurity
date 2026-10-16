@@ -14,6 +14,11 @@
  *                  exist in the reference list.
  *   DSM fields   : `dsm_conditions` (any file) and the registrar's `tara.dsm5`.
  *                  They may hold ICD-10-CM chapter F codes only.
+ *   DSM tables   : the band-level tables named for DSM-5-TR —
+ *                  `qif-dsm-mappings.json` diagnostic clusters and the
+ *                  registrar's `dsm5_spec.band_profiles`. They still hold
+ *                  non-chapter-F codes; the guard test carries each one in a
+ *                  dated allow-list (ATLAS-F40) instead of asserting them clean.
  */
 
 import { readdirSync, readFileSync } from 'node:fs';
@@ -120,6 +125,34 @@ export function collectDsmFieldCodes(doc) {
       });
     }
   });
+  return out;
+}
+
+/**
+ * [{ path, code }] for codes in the two DSM-named *tables* — as opposed to the
+ * per-record DSM fields `collectDsmFieldCodes` reads. These are the band-level
+ * tables: `qif-dsm-mappings.json` diagnostic clusters and the registrar's
+ * `dsm5_spec.band_profiles`. Both are named for DSM-5-TR and both hold
+ * non-chapter-F codes, which is why the guard test carries them as an explicit
+ * allow-list rather than asserting they are clean.
+ */
+export function collectDsmTableCodes(doc) {
+  const out = [];
+  for (const [cluster, value] of Object.entries(doc.diagnostic_clusters ?? {})) {
+    (value.conditions ?? []).forEach((entry, index) => {
+      const code = typeof entry === 'string' ? entry : entry?.code;
+      if (typeof code === 'string') {
+        out.push({ path: `$.diagnostic_clusters.${cluster}.conditions[${index}]`, code });
+      }
+    });
+  }
+  for (const [band, profile] of Object.entries(doc.dsm5_spec?.band_profiles ?? {})) {
+    for (const key of ['primary_codes', 'secondary_codes']) {
+      (profile[key] ?? []).forEach((code, index) => {
+        out.push({ path: `$.dsm5_spec.band_profiles.${band}.${key}[${index}]`, code });
+      });
+    }
+  }
   return out;
 }
 
