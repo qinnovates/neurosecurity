@@ -289,6 +289,7 @@ def main():
         "neurotransmitters": (SHARED / "qif-neurotransmitters.json", "neurotransmitters"),
         "dsm_clusters": (SHARED / "qif-dsm-mappings.json", "diagnostic_clusters"),
         "neurological_conditions": (SHARED / "qif-neurological-mappings.json", "conditions"),
+        "severity_anchors": (SHARED / "severity-anchors.json", "anchors"),
         "cranial_nerves": (SHARED / "qif-cranial-nerves.json", "cranial_nerves"),
         "neuroendocrine": (SHARED / "qif-neuroendocrine.json", "axes"),
         "glial_cells": (SHARED / "qif-glial-cells.json", "glial_types"),

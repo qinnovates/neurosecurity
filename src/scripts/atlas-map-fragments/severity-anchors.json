@@ -1,0 +1,101 @@
+{
+  "_note": "Entries to fold into src/scripts/atlas-map/atlas-map.json once PR #184 (branch docs/atlas-index) lands. That file does not exist on main, so adding it here would conflict with #184 and break its own validator. Shipped as a fragment instead: reviewable, version-controlled, and no edit to another branch. THIS PR MUST MERGE AFTER #184. After #184 merges, append these to the matching arrays and `npm run atlas:where -- severity anchors` resolves.",
+  "_target": "src/scripts/atlas-map/atlas-map.json",
+  "_merge": {
+    "data": "append",
+    "checks": "append",
+    "followups": "append"
+  },
+  "data": [
+    {
+      "id": "severity-anchors",
+      "path": "datalake/severity-anchors.json",
+      "holds": "Recoverability-band rate rows: how an unintended effect of a regulated therapeutic neural device ended, by band and by device class. Five bands (B1-B4 plus a cause-level B2-B4 span); death is not a band. Each row carries endpoint as the source defines it, denominator family, N, rate and time base, plus source ids and bibkey.",
+      "validated_by": "src/scripts/validate-severity-anchors.mjs",
+      "generator": "source",
+      "consumers": [
+        "kql-tables",
+        "parquet",
+        "data-studio"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "severity-anchors-scope",
+      "script": "anchors:check",
+      "guards": "Schema (the five fields that make a rate comparable, a band from the allowed five, at least one citation) and the scope guard: fails on any anatomical target, site, contact, amplitude, frequency, pulse width or programming field at any depth, and on any value naming an anatomical structure. Also asserts the forbidden join is named by repository path.",
+      "ci": {
+        "workflow": ".github/workflows/security.yml",
+        "job": "audit",
+        "runs": "npm test"
+      }
+    }
+  ],
+  "followups": [
+    {
+      "id": "SEV-F01",
+      "what": "Owner decision on dsm5_spec.band_profiles and qif-neurological-mappings.json bci_attack_vector: keep with a stated rationale, or retire. Both publish structure to effect/function to diagnostic code per record; one is served whole on a CORS-open public API, one is a queryable KQL table. These are the site-to-state artifacts the project understands itself to have abandoned.",
+      "ref": "#185",
+      "owner": "kevin",
+      "status": "open",
+      "from": "severity-anchors"
+    },
+    {
+      "id": "SEV-F02",
+      "what": "Extend guardrail G2's components binding to NISS. G2 binds TARA and Cs only, so appeals to the reverse-inference guardrail do not formally bind NISS.",
+      "ref": "datalake/qif-guardrails.json",
+      "owner": "kevin",
+      "status": "open",
+      "from": "severity-anchors"
+    },
+    {
+      "id": "SEV-F03",
+      "what": "Add a guardrail for therapeutic-to-adversarial transfer. The error this work is most at risk of has no named constraint in G1-G8.",
+      "ref": "osi-of-mind/GUARDRAILS.md",
+      "owner": "kevin",
+      "status": "open",
+      "from": "severity-anchors"
+    },
+    {
+      "id": "SEV-F04",
+      "what": "Resolve the RV / R naming and construct collision before either is referenced in an anchoring context. The scoring page assigns the outcome reading to R; the registrar's RV description is outcome-flavoured. No derivation-log entry adjudicates.",
+      "ref": "_staging/2026-10-severity-anchors/niss-anchor-proposal.md section 5.4",
+      "owner": "kevin",
+      "status": "open",
+      "from": "severity-anchors"
+    },
+    {
+      "id": "SEV-F05",
+      "what": "Correct the public scoring page, or state in it which source is authoritative: it misdescribes the shipped NISS formula and live profile values, and is stale on condition counts (says 42 across 7 categories where the file holds 50; says chapters G, H, R where the file also holds F, I, N and T).",
+      "ref": "src/pages",
+      "owner": "kevin",
+      "status": "open",
+      "from": "severity-anchors"
+    },
+    {
+      "id": "SEV-F06",
+      "what": "Targeted search of the device-programming and titration literature. It is the one outstanding search that could re-open the B0/B1 split, which is currently collapsed on the grounds that no source read reports a cohort-level device-state-versus-time resolution split.",
+      "ref": "_staging/2026-10-severity-anchors/severity-anchors.md section 2.3",
+      "owner": "kevin",
+      "status": "open",
+      "from": "severity-anchors"
+    },
+    {
+      "id": "SEV-F07",
+      "what": "Make research/clinical/CONTEXT.md line 10 enforced rather than aspirational. It already prohibits exactly the diagnostic claims the shipped blog prose makes.",
+      "ref": "research/clinical/CONTEXT.md",
+      "owner": "kevin",
+      "status": "open",
+      "from": "severity-anchors"
+    },
+    {
+      "id": "SEV-F08",
+      "what": "Four sources are not independently verified by anyone: SA-01 (Jitkritsadakul), SA-03 (Bullard), SA-09 (Morris), SA-16 (Rossi). Two of them (SA-01, SA-03) carry rate rows in datalake/severity-anchors.json.",
+      "ref": "datalake/severity-anchors.json",
+      "owner": "kevin",
+      "status": "open",
+      "from": "severity-anchors"
+    }
+  ]
+}

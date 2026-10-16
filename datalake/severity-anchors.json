@@ -1,0 +1,519 @@
+{
+  "_metadata": {
+    "title": "Recoverability-band rate rows for unintended effects of implanted and worn neural devices",
+    "status": "proposed, unvalidated. Purposive sample, NOT a systematic review.",
+    "compiled": "2026-10-16",
+    "source_document": "_staging/2026-10-severity-anchors/severity-anchors.md",
+    "bands": {
+      "B1": "Resolved without hardware change",
+      "B2": "Persistent, hardware retained",
+      "B3": "Revision required; therapy continues",
+      "B4": "Explant required; therapy ends",
+      "B2-B4": "Cause-level row spanning bands; does not measure a single band's endpoint"
+    },
+    "note": "These rows record HOW an unintended effect of a regulated therapeutic device ended, by band and by device class. They are not severity anchors and the word 'anchor' in the id prefix is historical. They do not estimate, bound or evidence what any adversary can produce: the best-evidenced bands (B3, B4) are dominated by surgical, mechanical and biological events a signal- or firmware-level adversary cannot cause. For an adversarial question the honest answer is 'no evidence', which is a GRADE indirectness failure on the exposure domain rather than a low certainty rating.",
+    "ordering_note": "The bands order INTERVENTION MAGNITUDE, which is not a monotone proxy for harm to a person. A patient with a permanent deficit and a working device (B2) can be worse off than a patient whose generator was explanted and who returned to baseline (B4).",
+    "publication_bias": "Engel's funnel-plot analysis finds published cohorts report LOWER hardware adverse-event rates. The B3 and B4 rows here are therefore biased low.",
+    "heterogeneity": "Engel measured I-squared 77-91% across exactly these three consequence categories.",
+    "commensurability_warning": "These rates are NOT all commensurable. A row with time_base null may not be compared to a per-100-patient-year figure. Cross-class comparisons are not supported and were dropped rather than caveated.",
+    "scope_guard": "Keyed by recoverability band and device CLASS only. No anatomical target, site, contact, amplitude, frequency, pulse width or programming field appears in this file, and none may be added. A per-record target-to-effect-to-setting table would be a new decision, not an extension of this file, and is refused. Enforced by src/lib/__tests__/severity-anchors.test.ts.",
+    "forbidden_join": "No row here may be joined to datalake/qtara-registrar.json dsm5_spec.band_profiles or to datalake/qif-neurological-mappings.json bci_attack_vector, and nothing here may be cited as evidence for a claim composed from either.",
+    "total_rows": 25,
+    "mortality": "Death is NOT a band and does not appear in this file. See severity-anchors.md section 5 for the non-ordinal mortality context note, which records one death among events a source graded severe-or-worse and at least possibly therapy-related."
+  },
+  "anchors": [
+    {
+      "id": "SA-ANCHOR-001",
+      "band": "B1",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-11"
+      ],
+      "bibkey": "engel2018hardware",
+      "endpoint": "Surgery- or hardware-related events, resolving without permanent sequelae in all instances",
+      "denominator_family": "patients",
+      "n": 123,
+      "rate": "18/123 (14.6%)",
+      "rate_value": 14.6,
+      "rate_unit": "percent_of_patients",
+      "time_base": "578 patient-years; mean/median follow-up 4.7 years",
+      "finding_direction": "Events present; all resolved without permanent sequelae.",
+      "same_cohort_as": [
+        "SA-02"
+      ],
+      "certainty_note": "Single-centre cohort, reported twice across SA-11/SA-02. Count once."
+    },
+    {
+      "id": "SA-ANCHOR-002",
+      "band": "B1",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-11"
+      ],
+      "bibkey": "engel2018hardware",
+      "endpoint": "Intracranial bleeding associated with transient neurological deficit",
+      "denominator_family": "patients",
+      "n": 123,
+      "rate": "2/123 (1.6%)",
+      "rate_value": 1.6,
+      "rate_unit": "percent_of_patients",
+      "time_base": "578 patient-years; mean/median follow-up 4.7 years",
+      "finding_direction": "Transient deficit, resolved.",
+      "same_cohort_as": [
+        "SA-02"
+      ],
+      "certainty_note": null
+    },
+    {
+      "id": "SA-ANCHOR-003",
+      "band": "B1",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-02"
+      ],
+      "bibkey": "buhmann2017adverse",
+      "endpoint": "Serious adverse events within 4 weeks of surgery, all reversible",
+      "denominator_family": "events and patients",
+      "n": 123,
+      "rate": "433 events in 106/123 patients (86.2%)",
+      "rate_value": 86.2,
+      "rate_unit": "percent_of_patients",
+      "time_base": "4 weeks post-operative",
+      "finding_direction": "All perioperative serious events reversible.",
+      "same_cohort_as": [
+        "SA-11"
+      ],
+      "certainty_note": "Same cohort as SA-11."
+    },
+    {
+      "id": "SA-ANCHOR-004",
+      "band": "B1",
+      "device_class": "RNS",
+      "source_ids": [
+        "SA-06"
+      ],
+      "bibkey": null,
+      "endpoint": "Unanticipated device-related serious adverse events; primary safety endpoint met",
+      "denominator_family": "subjects",
+      "n": 191,
+      "rate": "none reported",
+      "rate_value": 0.0,
+      "rate_unit": "count",
+      "time_base": "through 2 years",
+      "finding_direction": "Primary safety endpoint met.",
+      "same_cohort_as": [],
+      "certainty_note": "Combined safety population N=256."
+    },
+    {
+      "id": "SA-ANCHOR-005",
+      "band": "B1",
+      "device_class": "cortical_array",
+      "source_ids": [
+        "SA-08"
+      ],
+      "bibkey": "rubin2023interim",
+      "endpoint": "Device-related adverse events, none requiring explantation, no intracranial infection, no permanently increased disability",
+      "denominator_family": "participants and device-days",
+      "n": 14,
+      "rate": "68 events, including 6 serious",
+      "rate_value": null,
+      "rate_unit": "count",
+      "time_base": "12,203 device-days; mean implant duration 872 days",
+      "finding_direction": "No explant, no intracranial infection.",
+      "same_cohort_as": [],
+      "certainty_note": "Zero-numerator for explant: one-sided 95% upper bound 21.4% by rule of three."
+    },
+    {
+      "id": "SA-ANCHOR-006",
+      "band": "B1",
+      "device_class": "TMS",
+      "source_ids": [
+        "SA-15"
+      ],
+      "bibkey": "lerner2019seizures",
+      "endpoint": "Seizures per session",
+      "denominator_family": "sessions, respondent-supplied",
+      "n": 174,
+      "rate": "24 / ~318,560 sessions (0.08 per 1,000)",
+      "rate_value": 0.08,
+      "rate_unit": "per_1000_sessions",
+      "time_base": "2012-2016",
+      "finding_direction": "Low per-session seizure rate.",
+      "same_cohort_as": [],
+      "certainty_note": "174 is the RESPONDENT count. Denominator is respondent-supplied; non-response unknown."
+    },
+    {
+      "id": "SA-ANCHOR-007",
+      "band": "B1",
+      "device_class": "tDCS",
+      "source_ids": [
+        "SA-17"
+      ],
+      "bibkey": "bikson2016safety",
+      "endpoint": "Serious adverse effect or irreversible injury",
+      "denominator_family": "sessions",
+      "n": 33200,
+      "rate": "none reported",
+      "rate_value": 0.0,
+      "rate_unit": "count",
+      "time_base": null,
+      "finding_direction": "Absence of reports.",
+      "same_cohort_as": [],
+      "certainty_note": "Explicitly absence of evidence, not evidence of absence. Zero-numerator: one-sided 95% upper bound 0.009%."
+    },
+    {
+      "id": "SA-ANCHOR-008",
+      "band": "B2",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-02"
+      ],
+      "bibkey": "buhmann2017adverse",
+      "endpoint": "Severe-or-worse, at least possibly therapy-related, non-reversible effects",
+      "denominator_family": "patients",
+      "n": 123,
+      "rate": "3 of 82 patients in one diagnostic group",
+      "rate_value": null,
+      "rate_unit": "count_of_patients",
+      "time_base": "578 patient-years; mean/median 4.7 years",
+      "finding_direction": "Non-reversible effects present in one diagnostic group only.",
+      "same_cohort_as": [
+        "SA-11"
+      ],
+      "certainty_note": "3 of 82, not 4 of 82: the fourth of the four events the source grades at this level is a death, which a band defined as device-retained cannot hold. Moved to the mortality note."
+    },
+    {
+      "id": "SA-ANCHOR-009",
+      "band": "B2",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-02"
+      ],
+      "bibkey": "buhmann2017adverse",
+      "endpoint": "Non-reversible OR of unknown reversibility, at least possibly related, one stimulated subgroup",
+      "denominator_family": "patients, subgroup",
+      "n": 18,
+      "rate": "23.1%; residual severity mild or moderate in 15 of 18",
+      "rate_value": 23.1,
+      "rate_unit": "percent_of_patients",
+      "time_base": "578 patient-years; mean/median 4.7 years",
+      "finding_direction": "Upper bound on persistence, not a device-attributable rate.",
+      "same_cohort_as": [
+        "SA-11"
+      ],
+      "certainty_note": "Merges non-reversible with unknown reversibility; the source concludes most counted effects also represented preexisting and progressive disease symptoms."
+    },
+    {
+      "id": "SA-ANCHOR-010",
+      "band": "B2",
+      "device_class": "SCS",
+      "source_ids": [
+        "SA-04"
+      ],
+      "bibkey": "raccagni2026complications",
+      "endpoint": "At least one adverse event of any kind — spans B1 to B4, NOT a persistence rate",
+      "denominator_family": "patients and patient-years",
+      "n": 3445,
+      "rate": "24% of patients; 3% at least one serious; burden 0.35 events/patient (95% CI 0.28-0.43); incidence 34.5/100 PY (95% CI 24.7-48.3)",
+      "rate_value": 24.0,
+      "rate_unit": "percent_of_patients",
+      "time_base": null,
+      "finding_direction": "Union of all bands. Substantial heterogeneity.",
+      "same_cohort_as": [],
+      "certainty_note": "Not a B2 measurement. Patient-year total not reported, so it cannot be converted. Was the earlier draft's B2 headline; withdrawn."
+    },
+    {
+      "id": "SA-ANCHOR-011",
+      "band": "B3",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-11"
+      ],
+      "bibkey": "engel2018hardware",
+      "endpoint": "Annual hardware removal, per-study / per-patient",
+      "denominator_family": "studies / patients",
+      "n": 103,
+      "rate": "3.6% / 2.4%",
+      "rate_value": 2.4,
+      "rate_unit": "percent_per_year",
+      "time_base": "per year",
+      "finding_direction": "Pooled annual removal rate.",
+      "same_cohort_as": [
+        "SA-02"
+      ],
+      "certainty_note": "Unit-compatible with per-patient-year figures. Omitted entirely from the earlier draft."
+    },
+    {
+      "id": "SA-ANCHOR-012",
+      "band": "B3",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-11"
+      ],
+      "bibkey": "engel2018hardware",
+      "endpoint": "Annual lead revision, per-study / per-patient",
+      "denominator_family": "studies / patients",
+      "n": 103,
+      "rate": "4.1% / 2.6%",
+      "rate_value": 2.6,
+      "rate_unit": "percent_per_year",
+      "time_base": "per year",
+      "finding_direction": "Pooled annual lead-revision rate.",
+      "same_cohort_as": [
+        "SA-02"
+      ],
+      "certainty_note": "Unit-compatible. Omitted entirely from the earlier draft."
+    },
+    {
+      "id": "SA-ANCHOR-013",
+      "band": "B3",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-13"
+      ],
+      "bibkey": "rasiah2023complications",
+      "endpoint": "Overall revision",
+      "denominator_family": "patients",
+      "n": 21261,
+      "rate": "4.9%",
+      "rate_value": 4.9,
+      "rate_unit": "percent_of_patients",
+      "time_base": "mean follow-up 25.8 months",
+      "finding_direction": "Pooled revision rate.",
+      "same_cohort_as": [],
+      "certainty_note": "DBS for Parkinson disease ONLY. Converts to 2.28-2.34/100 PY, 2.8x below SA-04's 6.31/100 PY; the conversion assumes <=1 revision per patient, which SA-04's 0.35 events/patient falsifies."
+    },
+    {
+      "id": "SA-ANCHOR-014",
+      "band": "B3",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-11"
+      ],
+      "bibkey": "engel2018hardware",
+      "endpoint": "Lead revision; no lead migration and no revision for misplacement in this series",
+      "denominator_family": "patients and patient-years",
+      "n": 123,
+      "rate": "2/123 (1.6%; 0.3% per patient-year)",
+      "rate_value": 0.3,
+      "rate_unit": "per_100_patient_years",
+      "time_base": "578 patient-years",
+      "finding_direction": "Zero lead migrations across 578 patient-years.",
+      "same_cohort_as": [
+        "SA-02"
+      ],
+      "certainty_note": "0.3/100 PY sits in the same band as SA-04's 6.31/100 PY: 21x apart in identical units."
+    },
+    {
+      "id": "SA-ANCHOR-015",
+      "band": "B3",
+      "device_class": "SCS",
+      "source_ids": [
+        "SA-04"
+      ],
+      "bibkey": "raccagni2026complications",
+      "endpoint": "Revision; lead migration",
+      "denominator_family": "patient-years",
+      "n": 3445,
+      "rate": "revision 6.31/100 PY; lead migration 7.05/100 PY",
+      "rate_value": 6.31,
+      "rate_unit": "per_100_patient_years",
+      "time_base": null,
+      "finding_direction": "Highest revision rate in the base.",
+      "same_cohort_as": [],
+      "certainty_note": "Patient-year total not reported. Lead migration gap against SA-11's zero tracks spinal mobility, not stimulation."
+    },
+    {
+      "id": "SA-ANCHOR-016",
+      "band": "B3",
+      "device_class": "RNS",
+      "source_ids": [
+        "SA-06"
+      ],
+      "bibkey": null,
+      "endpoint": "Device-related serious events: lead damage; lead revision; premature battery depletion",
+      "denominator_family": "subjects",
+      "n": 191,
+      "rate": "lead damage 2.6%; lead revision 2.1%; battery depletion 1% (2 subjects)",
+      "rate_value": 2.1,
+      "rate_unit": "percent_of_subjects",
+      "time_base": "through 2 years post-implant",
+      "finding_direction": "Low single-digit percentages.",
+      "same_cohort_as": [],
+      "certainty_note": "Premature battery depletion is the ONLY attacker-plausible path into this band, and the published rates do not decompose into attacker-plausible versus ordinary end-of-life depletion."
+    },
+    {
+      "id": "SA-ANCHOR-017",
+      "band": "B3",
+      "device_class": "cortical_array",
+      "source_ids": [
+        "SA-08"
+      ],
+      "bibkey": "rubin2023interim",
+      "endpoint": "Safety-driven surgical intervention on the implanted system",
+      "denominator_family": "participants",
+      "n": 14,
+      "rate": "0/14",
+      "rate_value": 0.0,
+      "rate_unit": "count",
+      "time_base": "12,203 device-days",
+      "finding_direction": "None observed.",
+      "same_cohort_as": [],
+      "certainty_note": "Zero-numerator: one-sided 95% upper bound 21.4% by rule of three. Not comparable to the DBS denominators."
+    },
+    {
+      "id": "SA-ANCHOR-018",
+      "band": "B4",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-11"
+      ],
+      "bibkey": "engel2018hardware",
+      "endpoint": "Pulse generator removed for infection",
+      "denominator_family": "patients and patient-years",
+      "n": 123,
+      "rate": "4/123 (3.3%; 0.7% per patient-year)",
+      "rate_value": 0.7,
+      "rate_unit": "per_100_patient_years",
+      "time_base": "578 patient-years",
+      "finding_direction": "Explant for infection.",
+      "same_cohort_as": [
+        "SA-02"
+      ],
+      "certainty_note": "Measures explant. One of the rows that re-anchors B4 near 3%."
+    },
+    {
+      "id": "SA-ANCHOR-019",
+      "band": "B4",
+      "device_class": "SCS",
+      "source_ids": [
+        "SA-04"
+      ],
+      "bibkey": "raccagni2026complications",
+      "endpoint": "Explantation",
+      "denominator_family": "patient-years",
+      "n": 3445,
+      "rate": "2.93/100 PY",
+      "rate_value": 2.93,
+      "rate_unit": "per_100_patient_years",
+      "time_base": null,
+      "finding_direction": "Explant rate.",
+      "same_cohort_as": [],
+      "certainty_note": "Measures explant. Patient-year total not reported."
+    },
+    {
+      "id": "SA-ANCHOR-020",
+      "band": "B4",
+      "device_class": "RNS",
+      "source_ids": [
+        "SA-06"
+      ],
+      "bibkey": null,
+      "endpoint": "Explanted for infection (7) and for hemorrhage (1)",
+      "denominator_family": "subjects",
+      "n": 230,
+      "rate": "8/230; infection alone 7/230 (3.0%)",
+      "rate_value": 3.0,
+      "rate_unit": "percent_of_subjects",
+      "time_base": "long-term follow-up",
+      "finding_direction": "Explant rate near 3%.",
+      "same_cohort_as": [],
+      "certainty_note": "Measures explant."
+    },
+    {
+      "id": "SA-ANCHOR-021",
+      "band": "B4",
+      "device_class": "cortical_array",
+      "source_ids": [
+        "SA-08"
+      ],
+      "bibkey": "rubin2023interim",
+      "endpoint": "Explants for safety",
+      "denominator_family": "participants",
+      "n": 14,
+      "rate": "0/14",
+      "rate_value": 0.0,
+      "rate_unit": "count",
+      "time_base": "12,203 device-days",
+      "finding_direction": "None observed.",
+      "same_cohort_as": [],
+      "certainty_note": "Zero-numerator: one-sided 95% upper bound 21.4%, consistent with a true rate up to four times SA-12's 5.0% — i.e. with the opposite device-class ranking. Cross-class comparison dropped."
+    },
+    {
+      "id": "SA-ANCHOR-022",
+      "band": "B2-B4",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-12"
+      ],
+      "bibkey": "kantzanou2021deep",
+      "endpoint": "Pooled surgical-site INFECTION prevalence — no explant numerator",
+      "denominator_family": "participants",
+      "n": 12258,
+      "rate": "5.0% (95% CI 4.0-6.0)",
+      "rate_value": 5.0,
+      "rate_unit": "percent_of_participants",
+      "time_base": null,
+      "finding_direction": "Infection prevalence. Similar for early- and late-onset.",
+      "same_cohort_as": [],
+      "certainty_note": "Was the earlier draft's B4 headline; WITHDRAWN. The record never mentions explantation, removal or revision. Infection is a cause whose management spans antibiotics, washout/revision and explant. No time base recorded, so it cannot be converted."
+    },
+    {
+      "id": "SA-ANCHOR-023",
+      "band": "B2-B4",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-01"
+      ],
+      "bibkey": "jitkritsadakul2017systematic",
+      "endpoint": "Hardware-related INFECTION, most common hardware complication — no explant numerator",
+      "denominator_family": "patients",
+      "n": 96,
+      "rate": "5.12% of patients",
+      "rate_value": 5.12,
+      "rate_unit": "percent_of_patients",
+      "time_base": null,
+      "finding_direction": "Infection most common hardware complication.",
+      "same_cohort_as": [],
+      "certainty_note": "Source not independently verified in review. Cause-level, not explant."
+    },
+    {
+      "id": "SA-ANCHOR-024",
+      "band": "B2-B4",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-03"
+      ],
+      "bibkey": "bullard2020hardware",
+      "endpoint": "INFECTION — no explant numerator",
+      "denominator_family": "patients",
+      "n": 240,
+      "rate": "4.57%",
+      "rate_value": 4.57,
+      "rate_unit": "percent_of_patients",
+      "time_base": null,
+      "finding_direction": "Infection rate.",
+      "same_cohort_as": [],
+      "certainty_note": "Source not independently verified in review. Cause-level, not explant."
+    },
+    {
+      "id": "SA-ANCHOR-025",
+      "band": "B2-B4",
+      "device_class": "DBS",
+      "source_ids": [
+        "SA-13"
+      ],
+      "bibkey": "rasiah2023complications",
+      "endpoint": "INFECTION — no explant numerator",
+      "denominator_family": "patients",
+      "n": 21261,
+      "rate": "4.2%",
+      "rate_value": 4.2,
+      "rate_unit": "percent_of_patients",
+      "time_base": "mean follow-up 25.8 months",
+      "finding_direction": "Infection rate.",
+      "same_cohort_as": [],
+      "certainty_note": "DBS for Parkinson disease only. Cause-level, not explant."
+    }
+  ]
+}

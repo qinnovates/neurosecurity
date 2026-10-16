@@ -48,7 +48,8 @@
     "version:patch": "bash src/scripts/version.sh patch",
     "version:minor": "bash src/scripts/version.sh minor",
     "version:major": "bash src/scripts/version.sh major",
-    "evidence:tier": "python3 src/scripts/migrate-populate-evidence-tier.py"
+    "evidence:tier": "python3 src/scripts/migrate-populate-evidence-tier.py",
+    "anchors:check": "node src/scripts/validate-severity-anchors.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.7",

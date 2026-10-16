@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-07T08:01:09.145206+00:00",
+    "generated": "2026-10-16T06:57:14.307338+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
-    "total_datasets": 33,
-    "total_rows": 7982
+    "total_datasets": 34,
+    "total_rows": 8069
   },
   "datasets": {
     "techniques": {
@@ -293,6 +293,30 @@
       "size_bytes": 12556,
       "compression": "zstd",
       "source": "datalake/parquet/neurological_conditions.parquet"
+    },
+    "severity_anchors": {
+      "rows": 25,
+      "columns": 15,
+      "column_names": [
+        "id",
+        "band",
+        "device_class",
+        "source_ids",
+        "bibkey",
+        "endpoint",
+        "denominator_family",
+        "n",
+        "rate",
+        "rate_value",
+        "rate_unit",
+        "time_base",
+        "finding_direction",
+        "same_cohort_as",
+        "certainty_note"
+      ],
+      "size_bytes": 9292,
+      "compression": "zstd",
+      "source": "datalake/parquet/severity_anchors.parquet"
     },
     "cranial_nerves": {
       "rows": 12,
@@ -638,7 +662,7 @@
       "source": "datalake/parquet/intake_ledger.parquet"
     },
     "intel_feed": {
-      "rows": 970,
+      "rows": 1032,
       "columns": 10,
       "column_names": [
         "id",
@@ -652,7 +676,7 @@
         "companies",
         "fetched"
       ],
-      "size_bytes": 188739,
+      "size_bytes": 202026,
       "compression": "zstd",
       "source": "datalake/parquet/intel_feed.parquet"
     },
