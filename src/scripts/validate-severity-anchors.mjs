@@ -71,8 +71,10 @@ export function findForbiddenFields(doc) {
     if (!value || typeof value !== 'object' || Array.isArray(value)) return;
     for (const key of Object.keys(value)) {
       const lower = key.toLowerCase();
-      // `source_ids` and `rate_unit` are legitimate and must not trip `site`/`parameter`.
-      if (['source_ids', 'rate_unit', 'rate_value', 'finding_direction'].includes(lower)) continue;
+      // No allow-list. Every field this file legitimately uses was checked
+      // against FORBIDDEN_FIELD_SUBSTRINGS and none of them matches, so an
+      // exemption would only ever be a hole. If a future legitimate field does
+      // collide, rename the field rather than exempting it.
       const hit = FORBIDDEN_FIELD_SUBSTRINGS.find((bad) => lower.includes(bad));
       if (hit) hits.push({ path: `${path}.${key}`, field: key, matched: hit });
     }
