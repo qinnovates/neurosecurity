@@ -18,6 +18,14 @@ personal/
 
 # Build artifacts
 src/site/data/
+# setuptools build output: a stale copy of datalake/qtara/src/qtara/.
+# It drifted from source (models.py and the bundled registrar both differed)
+# and carried the retired niss_dsm_bridge table as live data.
+datalake/qtara/build/
+# Pre-migration backups. datalake/qtara-registrar.json.bak held the retired
+# niss_dsm_bridge table and the "NISS metrics predict diagnostic clusters"
+# wording as live data; git history is the backup.
+*.bak
 
 # Rust
 **/target/
