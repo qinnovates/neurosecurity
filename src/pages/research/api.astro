@@ -26,7 +26,7 @@ const intelSourceCount = new Set(intelItems.map(i => i.source)).size;
 
 <PageLayout
   title="APIs, Feeds & SDKs"
-  description="Open APIs, STIX 2.1 threat feeds, Python SDK, and automated intelligence for BCI security research. CORS-enabled, free to use."
+  description="Open APIs, STIX 2.1 threat feeds and automated intelligence for BCI security research. CORS-enabled, free to use."
   breadcrumbs={[{ label: 'Research', href: '/research/' }, { label: 'APIs & Feeds' }]}
   maxWidth="wide"
 >
@@ -39,7 +39,7 @@ const intelSourceCount = new Set(intelItems.map(i => i.source)).size;
           { href: '#overview', label: 'Overview' },
           { href: '#unified', label: 'Unified Endpoint' },
           { href: '#structure', label: 'Response Structure' },
-          { href: '#python-sdk', label: 'Python SDK' },
+          { href: '#python-sdk', label: 'Python SDK (deprecated)' },
           { href: '#stix', label: 'STIX 2.1 Feed' },
           { href: '#intel-feed', label: 'Intel Feed' },
           { href: '#examples', label: 'Usage Examples' },
@@ -179,43 +179,42 @@ const intelSourceCount = new Set(intelItems.map(i => i.source)).size;
         </div>
       </section>
 
-      <!-- Python SDK -->
+      <!-- Python SDK (deprecated) -->
       <section id="python-sdk" class="mb-20">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Python SDK</h2>
-        <p class="text-[var(--color-text-muted)] mb-6">
-          Install the official TARA SDK to load the registry, filter techniques, and export to STIX format.
-        </p>
-
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Python SDK (deprecated)</h2>
+        <div class="glass rounded-xl p-6 sm:p-8 mb-6 border-l-4 border-amber-500">
+          <p class="text-sm text-[var(--color-text-primary)] mb-3">
+            <strong>qtara is deprecated and no longer maintained.</strong> Version 0.4.0 (17 October 2026) is the final release, and the registry bundled inside it will not be updated.
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            Use the public endpoints below instead; they stay current and need no package. The SDK may return if outside users ask for a Python client.
+          </p>
+        </div>
         <div class="glass rounded-xl p-6 sm:p-8 mb-6">
-          <div class="glass rounded-lg p-4 overflow-x-auto mb-6">
-            <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]"><code>pip install qtara</code></pre>
-          </div>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">Python, standard library only:</p>
           <div class="glass rounded-lg p-4 overflow-x-auto">
-            <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`from qtara import TaraRegistry
+            <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`import json
+import urllib.request
 
-registry = TaraRegistry.load()
-techniques = registry.get_techniques()
-print(f"Loaded {len(techniques)} mappings")
+# Send a User-Agent: the site's edge rejects urllib's default one.
+request = urllib.request.Request("https://qinnovate.com/api/tara.json", headers={"User-Agent": "tara-example"})
+with urllib.request.urlopen(request) as response:
+    techniques = json.load(response)["techniques"]
+print(f"Loaded {len(techniques)} techniques")
 
-# Filter by severity
-critical = [t for t in techniques if t.severity == "critical"]
+# Each record carries its evidence tier; most techniques are theoretical.
+demonstrated = [t for t in techniques if (t.get("evidence") or {}).get("tier", "").startswith("demonstrated")]
 
-# Export to STIX 2.1
-bundle = registry.to_stix()
-bundle.save("tara-bundle.json")`}</code></pre>
+# STIX 2.1 bundle for threat-intelligence platforms
+stix = urllib.request.Request("https://qinnovate.com/api/stix.json", headers={"User-Agent": "tara-example"})
+with urllib.request.urlopen(stix) as response, open("tara-bundle.json", "wb") as bundle:
+    bundle.write(response.read())`}</code></pre>
           </div>
         </div>
-
-        <div class="grid sm:grid-cols-2 gap-4">
-          <a href="https://pypi.org/project/qtara/" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 block group hover:translate-y-[-2px] transition-transform">
-            <p class="text-sm font-semibold group-hover:text-[var(--color-accent-primary)] transition-colors">PyPI Package</p>
-            <p class="text-xs text-[var(--color-text-faint)]">pypi.org/project/qtara</p>
-          </a>
-          <a href="https://github.com/qinnovates/neurosecurity/tree/main/datalake/qtara" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 block group hover:translate-y-[-2px] transition-transform">
-            <p class="text-sm font-semibold group-hover:text-[var(--color-accent-primary)] transition-colors">Source Code</p>
-            <p class="text-xs text-[var(--color-text-faint)]">shared/qtara/ on GitHub</p>
-          </a>
-        </div>
+        <a href="https://pypi.org/project/qtara/" target="_blank" rel="noopener noreferrer" class="glass rounded-xl p-5 block">
+          <p class="text-sm font-semibold">PyPI: qtara (deprecated, final release 0.4.0)</p>
+          <p class="text-xs text-[var(--color-text-faint)]">pypi.org/project/qtara</p>
+        </a>
       </section>
 
       <!-- STIX 2.1 -->
@@ -235,9 +234,8 @@ bundle.save("tara-bundle.json")`}</code></pre>
             <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`# Count attack patterns
 curl -s https://qinnovate.com/api/stix.json | jq '.objects | length'
 
-# Python SDK
-pip install qtara
-python -m qtara stix --output tara-bundle.json
+# Python, no package needed
+python3 -c "import urllib.request as u; r = u.Request('https://qinnovate.com/api/stix.json', headers={'User-Agent': 'tara-example'}); open('tara-bundle.json', 'wb').write(u.urlopen(r).read())"
 
 # Import to OpenCTI / MISP
 curl -o tara-stix.json https://qinnovate.com/api/stix.json
@@ -380,20 +378,22 @@ console.log(criticalThreats.length, 'critical threats');`}</code></pre>
 
           <!-- Python -->
           <div class="glass rounded-xl p-6">
-            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Python (qtara SDK)</h3>
+            <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Python (standard library)</h3>
             <div class="glass rounded-lg p-4 overflow-x-auto">
-              <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`from qtara import TaraRegistry
+              <pre class="text-xs font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`import json
+import urllib.request
 
-registry = TaraRegistry.load()
+# Send a User-Agent: the site's edge rejects urllib's default one.
+request = urllib.request.Request("https://qinnovate.com/api/tara.json", headers={"User-Agent": "tara-example"})
+with urllib.request.urlopen(request) as response:
+    techniques = json.load(response)["techniques"]
 
-# Find all dual-use techniques (attack == therapy mechanism)
-dual_use = [t for t in registry.get_techniques() if t.dual_use]
-print(f"{len(dual_use)} dual-use techniques")
+# Techniques whose mechanism is shared with a therapy (dual use)
+dual_use = [t for t in techniques if (t.get("tara") or {}).get("dual_use") in ("confirmed", "probable")]
+print(f"{len(dual_use)} techniques share a mechanism with a therapy")
 
-# Export critical threats as STIX 2.1
-critical = registry.filter(severity="critical")
-bundle = critical.to_stix()
-bundle.save("critical-threats.json")`}</code></pre>
+# NISS context flags sit beside the score, not inside it
+flagged = [t for t in techniques if t["niss"].get("harm_flag") or t["niss"].get("cognitive_flag")]`}</code></pre>
             </div>
           </div>
 

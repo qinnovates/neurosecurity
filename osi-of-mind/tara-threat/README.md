@@ -45,7 +45,7 @@ The canonical source of truth for all 165 TARA techniques is `config.py`. JSON o
 - Generated registry: [`shared/qtara-registrar.json`](../../shared/qtara-registrar.json)
 - TARA website: [qinnovate.com/TARA](https://qinnovate.com/TARA/)
 - STIX feed: [qinnovate.com/api/stix.json](https://qinnovate.com/api/stix.json)
-- Python SDK: `pip install qtara`
+- Python SDK: `qtara`, deprecated (final release 0.4.0); use `/api/stix.json` or `/api/tara.json`
 
 ---
 
