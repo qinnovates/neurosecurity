@@ -1,0 +1,84 @@
+name: Paper Build
+
+# Nothing in CI ever compiled the paper, so two defects survived for months:
+# a duplicate BibTeX key (2026-02-14) that aborted the bibliography outright,
+# and an unescaped percent sign (2026-02-26) that silently truncated a sentence
+# in the abstract and reached the published PDF. The lint catches both classes
+# from source; the build catches whatever only a compiler can see.
+
+on:
+  pull_request:
+    paths:
+      - 'research/paper/**'
+      - 'datalake/qtara-registrar.json'
+  push:
+    branches: [main]
+    paths:
+      - 'research/paper/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint the paper source
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
+
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.12'
+
+      - name: Duplicate keys, unescaped percents, unresolved citations
+        run: python3 research/paper/scripts/lint_paper.py --github
+
+      - name: Registry figures are current
+        run: python3 research/paper/scripts/generate_registry_stats.py --check
+
+  build:
+    name: Compile and check the output
+    needs: lint
+    runs-on: ubuntu-latest
+    container:
+      image: texlive/texlive:latest-basic
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
+
+      - name: Install figure dependencies
+        run: |
+          apt-get update -qq && apt-get install -y -qq python3-pip >/dev/null
+          pip3 install --break-system-packages --quiet matplotlib
+
+      - name: Build
+        working-directory: research/paper
+        run: make pdf
+
+      - name: Fail on BibTeX errors
+        working-directory: research/paper
+        run: |
+          if grep -qiE "^(Repeated entry|I couldn't open|.*---line [0-9]+ of file)" main.blg; then
+            echo "::error file=research/paper/references.bib::BibTeX reported an error; the bibliography is incomplete."
+            grep -iE "error|Repeated|---line" main.blg || true
+            exit 1
+          fi
+          echo "BibTeX clean."
+
+      - name: Fail on undefined citations or references
+        working-directory: research/paper
+        run: |
+          undefined=$(grep -c "Citation .* undefined" main.log || true)
+          if [ "$undefined" -gt 0 ]; then
+            echo "::error::$undefined undefined citation(s) in the final pass."
+            grep "Citation .* undefined" main.log | head -20
+            exit 1
+          fi
+          echo "All citations resolved."
+
+      - name: Upload the PDF
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: paper-pdf
+          path: research/paper/main.pdf
