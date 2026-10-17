@@ -291,9 +291,8 @@ import { TARA_TECHNIQUES } from '../../../lib/qif-constants';
             <pre class="p-3 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-xs font-[family-name:var(--font-mono)] overflow-x-auto"><code>curl -s https://qinnovate.com/api/stix.json | jq '.objects | length'</code></pre>
           </div>
           <div>
-            <p class="text-xs text-[var(--color-text-faint)] mb-1">Python (qtara SDK)</p>
-            <pre class="p-3 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-xs font-[family-name:var(--font-mono)] overflow-x-auto"><code>{`pip install qtara
-python -m qtara stix --output tara-bundle.json`}</code></pre>
+            <p class="text-xs text-[var(--color-text-faint)] mb-1">Python (no package needed)</p>
+            <pre class="p-3 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-xs font-[family-name:var(--font-mono)] overflow-x-auto"><code>{`python3 -c "import urllib.request as u; r = u.Request('https://qinnovate.com/api/stix.json', headers={'User-Agent': 'tara-example'}); open('tara-bundle.json', 'wb').write(u.urlopen(r).read())"`}</code></pre>
           </div>
           <div>
             <p class="text-xs text-[var(--color-text-faint)] mb-1">Import to OpenCTI / MISP</p>
@@ -326,7 +325,7 @@ curl -o tara-stix.json https://qinnovate.com/api/stix.json
         <p class="text-xs text-[var(--color-text-faint)]">
           <strong>Source Code:</strong> <a href="https://github.com/qinnovates/neurosecurity/blob/main/src/pages/api/stix.json.ts" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">stix.json.ts</a>
           <br />
-          <strong>Python SDK:</strong> <a href="https://github.com/qinnovates/neurosecurity/tree/main/datalake/qtara" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">shared/qtara/</a> — <code class="bg-[var(--color-bg-primary)] px-1 rounded">pip install qtara</code>
+          <strong>Python SDK:</strong> <a href="https://github.com/qinnovates/neurosecurity/tree/main/datalake/qtara" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">qtara</a> is deprecated (final release 0.4.0); use the endpoint above
           <br />
           <strong>Spec:</strong> <a href="https://docs.oasis-open.org/cti/stix/v2.1/stix-v2.1.html" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">OASIS STIX 2.1</a>
         </p>
