@@ -65,7 +65,7 @@ export default function DeviceFilter({ techniques }: Props) {
   }, [techniques, device]);
 
   const sevCounts = useMemo(() => {
-    const counts: Record<Severity, number> = { critical: 0, high: 0, medium: 0, low: 0 };
+    const counts: Record<Severity, number> = { critical: 0, high: 0, medium: 0, low: 0, none: 0 };
     for (const t of filtered) counts[t.severity]++;
     return counts;
   }, [filtered]);

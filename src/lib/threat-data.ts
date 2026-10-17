@@ -38,7 +38,9 @@ export const TARA_SPEC = (registry as any).tara_spec ?? null;
 
 export type CategoryId = typeof THREAT_CATEGORIES[number]['id'];
 export type BandId = typeof HOURGLASS_BANDS[number]['id'];
-export type Severity = 'critical' | 'high' | 'medium' | 'low';
+export type Severity = 'critical' | 'high' | 'medium' | 'low' | 'none';
+/** Which rule produced a technique's severity label (registrar `severity_source`). */
+export type SeveritySource = 'niss' | 'editorial';
 export type NissSeverity = 'critical' | 'high' | 'medium' | 'low' | 'none';
 /** Registrar `status` values. PLAUSIBLE and SPECULATIVE have been in the data
  *  since 2026-02-13 and were absent from this union, so getStatusStats()
@@ -132,6 +134,12 @@ export interface NissScore {
   score: number;
   severity: NissSeverity;
   pins: boolean;
+  /** True when biological impact is H or C. Shown beside the score; never changes it. */
+  harm_flag?: boolean;
+  /** True when cognitive reconnaissance or disruption is H or C. Shown beside the score; never changes it. */
+  cognitive_flag?: boolean;
+  /** 'unsupported' when NP:S sits on a theoretical or speculative technique. */
+  np_support?: 'unsupported';
 }
 
 export interface CvssScore {
@@ -155,8 +163,12 @@ export interface ThreatVector {
   tactic: string;
   /** Hourglass bands affected */
   bands: BandId[];
-  /** Severity level (original assessment) */
+  /** Severity label: NISS severity for scored techniques, editorial otherwise (see severitySource) */
   severity: Severity;
+  /** Which rule produced `severity` */
+  severitySource: SeveritySource;
+  /** Hand-entered label that preceded the NISS-derived one, kept for one release */
+  severityLegacy: Severity | null;
   /** Evidence status */
   status: Status;
   /** Coupling mechanism (for frequency-domain attacks) */
@@ -215,6 +227,8 @@ export const THREAT_VECTORS: ThreatVector[] = registry.techniques.map((t: any) =
   tactic: t.tactic,
   bands: t.band_ids as unknown as BandId[],
   severity: t.severity as Severity,
+  severitySource: (t.severity_source ?? 'editorial') as SeveritySource,
+  severityLegacy: (t.severity_legacy ?? null) as Severity | null,
   status: t.status as Status,
   coupling: t.coupling,
   access: t.access as AccessLevel,
@@ -260,7 +274,8 @@ export const SEVERITY_COLORS = {
   high: { bg: 'rgba(245, 158, 11, 0.15)', border: 'rgba(245, 158, 11, 0.3)', text: '#f59e0b' },
   medium: { bg: 'rgba(234, 179, 8, 0.15)', border: 'rgba(234, 179, 8, 0.3)', text: '#eab308' },
   low: { bg: 'rgba(148, 163, 184, 0.15)', border: 'rgba(148, 163, 184, 0.3)', text: '#94a3b8' },
-} as const;
+  none: { bg: 'rgba(100, 116, 139, 0.12)', border: 'rgba(100, 116, 139, 0.25)', text: '#64748b' },
+} as const satisfies Record<Severity, { bg: string; border: string; text: string }>;
 
 /** Status color map */
 export const STATUS_COLORS = {
@@ -290,7 +305,7 @@ export function getThreatsForCell(bandId: BandId, categoryId: CategoryId): Threa
 export function getCellSeverity(bandId: BandId, categoryId: CategoryId): Severity | null {
   const threats = getThreatsForCell(bandId, categoryId);
   if (threats.length === 0) return null;
-  const order: Severity[] = ['critical', 'high', 'medium', 'low'];
+  const order: Severity[] = ['critical', 'high', 'medium', 'low', 'none'];
   for (const s of order) {
     if (threats.some(t => t.severity === s)) return s;
   }
@@ -299,7 +314,7 @@ export function getCellSeverity(bandId: BandId, categoryId: CategoryId): Severit
 
 /** Helper: count threats per severity */
 export function getThreatStats() {
-  const stats = { critical: 0, high: 0, medium: 0, low: 0, total: THREAT_VECTORS.length };
+  const stats = { critical: 0, high: 0, medium: 0, low: 0, none: 0, total: THREAT_VECTORS.length };
   for (const t of THREAT_VECTORS) {
     stats[t.severity]++;
   }
