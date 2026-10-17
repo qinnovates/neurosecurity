@@ -7,7 +7,7 @@
     "maintainer": "Kevin Qi"
   },
   "current_stats": {
-    "as_of": "2026-10-07",
+    "as_of": "2026-10-17",
     "threat_techniques": 173,
     "bci_devices": 71,
     "brain_regions": 38,
@@ -21,12 +21,12 @@
     "nsp_version": "v0.5",
     "tara_version": "v1.8",
     "atlas_version": "v1.2.0",
-    "derivation_log_entries": 112,
+    "derivation_log_entries": 113,
     "field_journal_entries": 20,
     "neurowall_version": "v0.8",
     "blog_posts": 59,
     "cross_ai_validations": 14,
-    "research_sources": 488,
+    "research_sources": 491,
     "techniques_niss_scored": 129,
     "tara_domains": 12,
     "bci_companies": 68,
