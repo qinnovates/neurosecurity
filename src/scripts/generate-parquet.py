@@ -69,6 +69,8 @@ def flatten_technique(t: dict) -> dict:
         "tactic": t.get("tactic", ""),
         # Parent technique id for a sub-technique; empty for a top-level entry
         "parent_id": t.get("parent_id") or "",
+        # Earlier display names kept as aliases after a rename
+        "legacy_names": "; ".join(t.get("legacy_names") or []),
         "severity": t.get("severity", ""),
         "status": t.get("status", ""),
         "bands": ", ".join(t.get("band_ids", [])) if isinstance(t.get("band_ids"), list) else str(t.get("bands", "")),

@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-10-17T10:29:31.097593+00:00",
+    "generated": "2026-10-17T11:29:27.830116+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
@@ -10,12 +10,13 @@
   "datasets": {
     "techniques": {
       "rows": 176,
-      "columns": 28,
+      "columns": 29,
       "column_names": [
         "id",
         "name",
         "tactic",
         "parent_id",
+        "legacy_names",
         "severity",
         "status",
         "bands",
@@ -41,8 +42,8 @@
         "consent_tier",
         "notes"
       ],
-      "size_bytes": 44107,
-      "sha256": "05f27f85207fa62b635398f580b3a889c63f691a8a6849dcf40684c0b84443e0",
+      "size_bytes": 45574,
+      "sha256": "c388c06e40283d8f2a730e9643ad96c99f58658960de8e3316b799e7972d2017",
       "compression": "zstd",
       "source": "datalake/parquet/techniques.parquet"
     },
@@ -93,8 +94,8 @@
         "dsm_name",
         "dsm_cluster"
       ],
-      "size_bytes": 23024,
-      "sha256": "5e93ba074123ea23b170d346c97e24aea51deb9fada862380bd0b4e79d5bb30a",
+      "size_bytes": 23007,
+      "sha256": "9f9ebb930554d106777f04608da257bcc273c9cb565b7927fa4f32ba81240566",
       "compression": "zstd",
       "source": "datalake/parquet/impact_chains.parquet"
     },
@@ -935,8 +936,8 @@
         "no_region_term_count",
         "reviewed_term_count"
       ],
-      "size_bytes": 11207,
-      "sha256": "145d0783858e4468d00ee02631b24ccdce53521f6ceee69c737f073a755ea63c",
+      "size_bytes": 11190,
+      "sha256": "fab162ba63081d83f4ab656943962fbf72dfb6ea1f9a5ca9c0a5b147b10d731d",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_technique_term_summary.parquet"
     }

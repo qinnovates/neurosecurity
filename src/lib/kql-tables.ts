@@ -178,6 +178,7 @@ function buildTechniques(): Row[] {
       name: t.attack || t.name,
       tactic: t.tactic,
       parent_id: t.parent_id || '',
+      legacy_names: (t.legacy_names || []).join('; '),
       severity: t.severity,
       severity_source: t.severity_source || 'editorial',
       severity_legacy: t.severity_legacy || '',

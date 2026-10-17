@@ -155,6 +155,8 @@ class ThreatTechnique(BaseModel):
     # Parent technique id (QIF-Txxxx) when this entry is a sub-technique, else None.
     # A child carries its own status, NISS vector and sources.
     parent_id: Optional[str] = None
+    legacy_names: List[str] = []
+    rename_note: Optional[str] = None
 
     # v2 taxonomy fields
     tara_domain_primary: Optional[str] = None
