@@ -5,6 +5,7 @@
   "statistics": {
     "generator": "src/scripts/generate-registrar-statistics.mjs",
     "generated": "2026-10-17",
+    "content_sha256": "caf888a07c8bdbdd75429dc4f47deec8f60b82b9e8d9e68ae524f99905ecf4f1",
     "total_techniques": 176,
     "total_tactics": 17,
     "total_domains": 8,
@@ -32344,7 +32345,7 @@
   ],
   "taxonomy": "QIF Locus Taxonomy v1.0",
   "scoring": "NISS v1.1 (Neural Impact Scoring System)",
-  "generated": "2026-10-17T01:27:21Z",
+  "generated": "2026-10-17T03:27:32Z",
   "legacy_mitre_compatibility": {
     "id_range": "T2001-T2899 (avoids collision with MITRE ATT&CK T1001-T1659)",
     "tactic_ids": "Standard MITRE TA#### where applicable, TA0050-TA0053 for BCI-specific",

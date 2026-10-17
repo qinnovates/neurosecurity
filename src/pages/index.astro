@@ -63,7 +63,7 @@ const nissExampleMetrics = NISS_METRIC_KEYS.map((key) => ({
 }));
 
 // Compute severity breakdown from registrar (build-time)
-const bySeverity: Record<string, number> = { critical: 0, high: 0, medium: 0, low: 0 };
+const bySeverity: Record<string, number> = { critical: 0, high: 0, medium: 0, low: 0, none: 0 };
 techniques.forEach((t: any) => {
   const sev = t.niss?.severity || t.severity || 'low';
   if (bySeverity[sev] !== undefined) bySeverity[sev]++;

@@ -7,6 +7,7 @@
 export const TARA_STATS = {
   "generator": "src/scripts/generate-registrar-statistics.mjs",
   "generated": "2026-10-17",
+  "content_sha256": "caf888a07c8bdbdd75429dc4f47deec8f60b82b9e8d9e68ae524f99905ecf4f1",
   "total_techniques": 176,
   "total_tactics": 17,
   "total_domains": 8,
