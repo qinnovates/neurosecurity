@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-07T08:01:09.145206+00:00",
+    "generated": "2026-10-17T01:17:58.782417+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
     "total_datasets": 33,
-    "total_rows": 7982
+    "total_rows": 9092
   },
   "datasets": {
     "techniques": {
@@ -41,7 +41,7 @@
         "consent_tier",
         "notes"
       ],
-      "size_bytes": 44080,
+      "size_bytes": 44107,
       "compression": "zstd",
       "source": "datalake/parquet/techniques.parquet"
     },
@@ -71,7 +71,7 @@
       "source": "datalake/parquet/technique_neurorights.parquet"
     },
     "impact_chains": {
-      "rows": 4428,
+      "rows": 5476,
       "columns": 14,
       "column_names": [
         "technique_id",
@@ -89,7 +89,7 @@
         "dsm_name",
         "dsm_cluster"
       ],
-      "size_bytes": 14133,
+      "size_bytes": 15277,
       "compression": "zstd",
       "source": "datalake/parquet/impact_chains.parquet"
     },
@@ -638,7 +638,7 @@
       "source": "datalake/parquet/intake_ledger.parquet"
     },
     "intel_feed": {
-      "rows": 970,
+      "rows": 1032,
       "columns": 10,
       "column_names": [
         "id",
@@ -652,7 +652,7 @@
         "companies",
         "fetched"
       ],
-      "size_bytes": 188739,
+      "size_bytes": 202026,
       "compression": "zstd",
       "source": "datalake/parquet/intel_feed.parquet"
     },
