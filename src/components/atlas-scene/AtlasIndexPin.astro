@@ -1,0 +1,9 @@
+---
+import { INDEX_PIN } from './build-index-pin';
+import { INDEX_PIN_ATTRIBUTE } from './read-index-pin';
+
+// The one thing a page that mounts the 3D view is built with: which index it belongs to. No anatomy is in it.
+// RegionViewPanel reads it when the visitor asks for the view; without it the view says the page is unpinned and draws nothing.
+const pin = { [INDEX_PIN_ATTRIBUTE]: JSON.stringify(INDEX_PIN) };
+---
+<div hidden {...pin}></div>

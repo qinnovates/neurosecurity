@@ -6,8 +6,10 @@ import { getKqlTables } from '@/lib/kql-tables';
 import { HOURGLASS_BANDS } from '@/lib/qif-constants';
 import { THREAT_VECTORS, getStatusStats, getNeurorightStats } from '@/lib/threat-data';
 import TaraVisualization from '@/components/TaraVisualization';
+import { getCatalogCoverage } from '@/lib/purpose-and-limits';
 
 const kqlTables = getKqlTables();
+const coverage = getCatalogCoverage();
 const statusStats = getStatusStats();
 const nrStats = getNeurorightStats();
 const bands = [...HOURGLASS_BANDS];
@@ -27,8 +29,8 @@ const THREAT_CATEGORIES = [
 ---
 
 <PageLayout
-  title="TARA Atlas — Neural Security Command"
-  description={`${THREAT_VECTORS.length} BCI techniques mapped across the bio-digital bridge.`}
+  title="TARA Atlas — Threat Catalog"
+  description={`${coverage.total} techniques in a proposed threat catalog for neural-device threat modeling, each with an evidence status.`}
   breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'TARA' }]}
   wide={true}
 >
@@ -41,13 +43,13 @@ const THREAT_CATEGORIES = [
             <div class="flex items-center gap-3 mb-6">
                 <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">TARA Atlas v1.6</span>
                 <span class="w-1 h-1 rounded-full bg-slate-300"></span>
-                <span class="text-[11px] font-semibold text-emerald-500 uppercase tracking-widest">Stable</span>
+                <span class="text-[11px] font-semibold text-amber-500 uppercase tracking-widest">Proposed</span>
             </div>
             <h1 class="text-5xl sm:text-7xl font-semibold tracking-tight text-slate-900 mb-6">
               The TARA Atlas
             </h1>
             <p class="text-2xl text-slate-500 font-medium leading-relaxed tracking-tight">
-              {THREAT_VECTORS.length} neurotechnology techniques mapped to the 4 neurorights they threaten — and the therapeutic applications they enable. Every technique scored for population vulnerability.
+              {coverage.total} techniques documented for threat modeling, each with an evidence status. {coverage.detected} include detection guidance; {coverage.scored} carry draft NISS scores. <a href="/atlas/tara/coverage-gaps/" class="text-[var(--color-accent-primary)] hover:underline">Entries without detection guidance</a>.
             </p>
           </div>
           
@@ -102,7 +104,7 @@ const THREAT_CATEGORIES = [
         <div class="mt-32 pt-16 border-t border-slate-100 max-w-5xl">
             <h2 class="text-3xl font-semibold tracking-tight text-slate-900 mb-6">API & Adoption</h2>
             <p class="text-lg text-slate-500 font-medium leading-relaxed mb-8">
-                The TARA Atlas is designed to be integrated into security platforms, research pipelines, and BCI firmware. Use the official Python SDK, STIX 2.1 feeds, or raw JSON endpoints.
+                The TARA Atlas is designed to be integrated into security platforms, research pipelines, and BCI firmware. Use the STIX 2.1 feed or the raw JSON endpoints. (The qtara Python SDK is deprecated.)
             </p>
             <a href="/research/api/" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors">
                 APIs, Feeds & SDKs

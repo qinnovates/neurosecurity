@@ -14,7 +14,7 @@ function cloneData<T>(value: T): T {
 }
 
 describe('bundled reference data', () => {
-  it('loads the catalog, atlas, CVE mapping, and controls', () => {
+  it('loads the catalog, atlas and CVE mapping', () => {
     const { engineData, tacticIds } = bundle;
     expect(engineData.techniques.length).toBeGreaterThan(100);
     expect(engineData.regions.length).toBeGreaterThan(30);

@@ -3,9 +3,25 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
 import { NISS_SPEC, THREAT_VECTORS, getNissStats } from '@/lib/threat-data';
 import scoringGaps from '@shared/tara-scoring-gaps.json';
+import neurosecurityScores from '@shared/neurosecurity-scores.json';
+import { getCatalogCoverage } from '@/lib/purpose-and-limits';
+import { VALIDATION_ENTRIES, getCheckedTechniqueCount } from '@/lib/validation-data';
 const spec = NISS_SPEC as any;
 const nissStats = getNissStats();
 const totalTechniques = THREAT_VECTORS.length;
+// One source for scored counts: the registrar, via getCatalogCoverage (tara-scoring-gaps.json lags it).
+const coverage = getCatalogCoverage();
+const unscoredCount = coverage.total - coverage.scored;
+// VAL-004 states the count it checked at the time; never substitute today's catalog size.
+const VAL_004_ID = 'VAL-004';
+const val004CheckedCount = getCheckedTechniqueCount(VAL_004_ID);
+const val004Date = VALIDATION_ENTRIES.find((entry) => entry.id === VAL_004_ID)?.date ?? '';
+// NSv2.1 worked example, read from the scores dataset so the vector cannot drift from the data.
+const NSV2_EXAMPLE_DEVICE = 'Neuralink N1';
+const nsv2Example = neurosecurityScores.devices.find((device) => device.device === NSV2_EXAMPLE_DEVICE);
+if (!nsv2Example) {
+  throw new Error(`scoring.astro: ${NSV2_EXAMPLE_DEVICE} not found in datalake/neurosecurity-scores.json; update NSV2_EXAMPLE_DEVICE.`);
+}
 
 // NISS v2.0 Extension Metrics (6 metrics that extend CVSS v4.0)
 // Reconciled: equal weights (1.0 all), context profiles available separately
@@ -82,12 +98,11 @@ const severityLevels = [
 
 // PINS-flagged count
 const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
-import { TARA_TECHNIQUES } from '../../lib/qif-constants';
 ---
 
 <PageLayout
   title="NISS Scoring"
-  description="Neural Impact Scoring System v2.0 — a proposed CVSS v4.0 extension for brain-computer interface security with neurological condition mapping."
+  description="Neural Impact Scoring System v2.0 — a proposed, unvalidated CVSS v4.0 extension for scoring the impact of neural-device vulnerabilities, with outcome categories for threat modeling."
   breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'NISS Scoring' }]}
   maxWidth="wide"
 >
@@ -131,13 +146,10 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
         </h1>
         <div class="flex flex-wrap items-center gap-3 mb-6">
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)]">
-            CVSS v4.0 Extension
-          </span>
-          <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-accent-tertiary)] text-[var(--color-accent-tertiary)]">
-            FIRST.org §3.11
+            Uses CVSS v4.0 extension method (User Guide §3.11)
           </span>
           <span class="text-xs font-semibold px-3 py-1 rounded-full border border-[var(--color-text-faint)]/30 text-[var(--color-text-faint)]">
-            6 Extension Metrics · {scoringGaps.unscored_techniques.summary.scored} of {totalTechniques} Techniques Scored
+            6 Extension Metrics · {coverage.scored} of {coverage.total} Techniques Scored
           </span>
         </div>
         <div class="prose">
@@ -145,10 +157,10 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
             CVSS — the industry standard for scoring software vulnerabilities — was designed for servers, not skulls. It cannot express whether an attack is reversible to neural tissue, whether it crosses the consent boundary, or whether the cognitive damage is temporary or permanent. NISS adds the six dimensions that CVSS structurally cannot: Biological Impact, Cognitive Reconnaissance (read-side attacks), Cognitive/Functional Disruption (write-side attacks), Consent Violation, Reversibility, and Neuroplastic Potential.
           </p>
           <p>
-            When a vulnerability affects a brain, the severity score should reflect what happens to the patient — not just what happens to the device. Following FIRST.org's extension framework (CVSS v4.0 User Guide §3.11), NISS rides <strong>alongside</strong> CVSS v4.0 base vectors. Every technique in the <a href="/atlas/tara/">TARA atlas</a> carries both: how the attack works <em>and</em> what it does to the mind.
+            When a vulnerability affects a brain, the severity score should reflect what happens to the patient — not just what happens to the device. Following the extension method in the CVSS v4.0 User Guide (§3.11), NISS adds a separate metric group alongside unmodified CVSS v4.0 Base, Threat and Environmental metrics. The CVSS SIG does not officially approve extensions; NISS is not approved or endorsed by FIRST. Like CVSS Base scores, NISS scores are not a risk assessment. Every scored technique in the <a href="/atlas/tara/">TARA atlas</a> carries both vectors: how the attack works <em>and</em> its potential neural impact.
           </p>
           <p>
-            NISS serves as the technique-level scoring input to the <a href="#nsv2">Neurosecurity Score (NSv2.1)</a>, a proposed multi-layer risk framework that aggregates NISS scores across four neurorights dimensions (Ienca &amp; Andorno, 2017) with physics-based feasibility gating and population-adjusted context baselines. NISS is the scoring metric; NSv2.1 is the risk framework.
+            NISS serves as the technique-level scoring input to the <a href="#nsv2">Neurosecurity Score (NSv2.1)</a>, a proposed multi-layer risk framework that aggregates NISS scores across four neurorights dimensions (Ienca &amp; Andorno, 2017) and an Equal Access governance dimension, with physics-based feasibility gating and population-adjusted context baselines. NISS is the scoring metric; NSv2.1 is the risk framework.
           </p>
         </div>
 
@@ -182,7 +194,7 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Architecture: Extending CVSS, Not Replacing It</h2>
         <div class="prose mb-8">
           <p>
-            CVSS v4.0 provides a robust framework for scoring exploitability and system impact. NISS does not duplicate that work. Instead, it follows FIRST.org's official extension mechanism (§3.11) to add six metrics that capture dimensions CVSS was never designed to express.
+            CVSS v4.0 provides a robust framework for scoring exploitability and system impact. NISS does not duplicate that work. Instead, it follows the extension method in the CVSS v4.0 User Guide (§3.11) to add six metrics that capture dimensions CVSS was never designed to express.
           </p>
           <p>
             Every scored technique carries <strong>two vectors</strong> side by side:
@@ -392,8 +404,8 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Coverage &amp; Known Gaps</h2>
         <div class="prose mb-6">
           <p>
-            {scoringGaps.unscored_techniques.summary.scored} of {scoringGaps.unscored_techniques.summary.total_techniques} catalogued techniques carry a NISS vector.
-            The remaining {scoringGaps.unscored_techniques.summary.unscored} ({scoringGaps.unscored_techniques.summary.id_range}) are listed in the catalog but are not scored.
+            {coverage.scored} of {coverage.total} cataloged techniques carry a NISS vector.
+            The remaining {unscoredCount} are listed in the catalog but are not scored.
             They are published unscored rather than estimated.
           </p>
           <p>{scoringGaps.unscored_techniques.why_unscored}</p>
@@ -644,7 +656,7 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
             <strong>NISS is the scoring metric. NSv2.1 is the risk framework that models NISS in operational context.</strong>
           </p>
           <p>
-            The Neurosecurity Score v2.1 (NSv2.1) consumes NISS technique scores as input and produces a device-level risk assessment across four neurorights dimensions (Ienca &amp; Andorno, 2017).
+            The Neurosecurity Score v2.1 (NSv2.1) consumes NISS technique scores as input and produces a device-level risk assessment across the four neurorights dimensions (Ienca &amp; Andorno, 2017) plus an Equal Access governance dimension.
           </p>
         </div>
 
@@ -656,7 +668,7 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
               { layer: '2', name: 'Base Neurosecurity Score', detail: 'Weighted geometric mean (CES, rho=0): NISS 0.40, DSM 0.40, CCI 0.20' },
               { layer: '3', name: 'Feasibility Gating', detail: 'ISO 31000 risk: Hazard x P_realize. Physics tiers gate speculative attacks (Tier 3 = 10% probability)' },
               { layer: '4', name: 'Per-Right Aggregation', detail: 'OWA (Yager 1988) with exponential weighting across techniques per neurorights dimension' },
-              { layer: '5', name: 'Overall Score', detail: 'Geometric mean across 4 neurorights dimensions (CL, MI, MP, PC)' },
+              { layer: '5', name: 'Overall Score', detail: 'Geometric mean across five dimensions: the 4 neurorights (CL, MI, MP, PC) plus Equal Access (EA), a governance dimension rather than a separate neuroright' },
               { layer: '6', name: 'Population Adjustment', detail: 'Contextual Risk Baseline (CRB): multiplicative adjustment for vulnerable populations (children, elderly, ALS, autism)' },
             ].map(l => (
               <div class="flex gap-4 items-start">
@@ -702,10 +714,10 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
         <div class="glass rounded-xl p-6 mb-6">
           <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Example: NSv2.1 Vector</h3>
           <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] break-all mb-3">
-            NSv2.1:6.02/CL:6.31/MI:6.32/MP:5.88/PC:4.59/EA:7.37
+            {nsv2Example.vector}
           </p>
           <p class="text-xs text-[var(--color-text-muted)]">
-            Device-level risk score (0-10) broken down by neurorights dimension. This example scores a high-severity invasive BCI across all five rights.
+            Device-level risk score (0-10) broken down by neurorights dimension. This example scores a high-severity invasive BCI across the four neurorights dimensions (CL, MI, MP, PC) and the Equal Access governance dimension (EA); the overall score is their geometric mean.
           </p>
         </div>
 
@@ -736,7 +748,7 @@ import { TARA_TECHNIQUES } from '../../lib/qif-constants';
         <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-secondary)]">
           <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-2">Validation Note</h3>
           <p class="text-sm text-[var(--color-text-muted)]">
-            NISS scoring behavior has been validated in simulation (<a href="/research/validation/#val-004" class="text-[var(--color-accent-primary)] hover:underline">VAL-004</a>): all {TARA_TECHNIQUES} techniques scored correctly, PINS flags trigger as specified, and context profiles shift weights as designed. However, the clinical appropriateness of NISS score magnitudes has <strong>not</strong> been validated by clinicians or tested against real BCI incident data. The scoring engine works as specified; whether the specification itself produces clinically meaningful severity levels is an open question requiring empirical validation.
+            NISS scoring behavior has been checked in simulation (<a href="/research/validation/#val-004" class="text-[var(--color-accent-primary)] hover:underline">VAL-004</a>, {val004Date}): it scored the {val004CheckedCount} techniques in the catalog at the time without errors, PINS flags trigger as specified, and context profiles shift weights as designed. However, the clinical appropriateness of NISS score magnitudes has <strong>not</strong> been validated by clinicians or tested against real BCI incident data. The scoring engine works as specified; whether the specification itself produces clinically meaningful severity levels is an open question requiring empirical validation.
           </p>
           <a href="/research/validation/" class="text-xs text-[var(--color-accent-primary)] hover:underline mt-2 inline-block">
             View full validation status

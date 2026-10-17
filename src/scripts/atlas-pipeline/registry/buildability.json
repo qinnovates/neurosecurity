@@ -1,0 +1,64 @@
+{
+  "note": "Blockers per source from the pipeline's buildability rule; an empty list means buildable. A vitest test compares this with the site's rule.",
+  "sources": {
+    "ahead_structures": [
+      "route_not_settled"
+    ],
+    "allen_hra_3d_2020": [],
+    "cit168_rl": [],
+    "eeg_positions": [],
+    "freesurfer_fsaverage": [
+      "not_cleared",
+      "verdict_not_ship",
+      "agreement_not_accepted",
+      "no_output_folder",
+      "route_not_settled"
+    ],
+    "harvard_aan_v2": [
+      "route_not_settled"
+    ],
+    "hcp1065_tracts": [
+      "not_cleared",
+      "grant_not_explicit",
+      "route_not_settled"
+    ],
+    "hcp_s1200_mmp1": [
+      "not_cleared",
+      "verdict_not_ship",
+      "license_not_commercial",
+      "agreement_not_accepted",
+      "no_output_folder",
+      "route_not_settled"
+    ],
+    "massp_2_0": [
+      "not_cleared",
+      "route_not_settled"
+    ],
+    "mni_icbm152_2009b_sym": [
+      "not_redistributable"
+    ],
+    "mni_icbm152_2009c_asym": [],
+    "neudorfer_hypothalamus": [],
+    "nextbrain": [
+      "route_not_settled"
+    ],
+    "schaefer2018_cbig": [
+      "not_cleared",
+      "grant_not_explicit",
+      "route_not_settled"
+    ],
+    "templateflow_xfm": [
+      "not_cleared",
+      "verdict_not_ship",
+      "grant_not_explicit",
+      "license_not_commercial",
+      "not_redistributable",
+      "no_output_folder"
+    ],
+    "yeo2011_cbig": [
+      "not_cleared",
+      "grant_not_explicit",
+      "route_not_settled"
+    ]
+  }
+}

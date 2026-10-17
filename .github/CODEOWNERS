@@ -17,10 +17,32 @@ SECURITY.md @qikevinl
 /governance/ @qikevinl
 
 # Scripts (data pipelines, CI utilities)
-/scripts/ @qikevinl
+/src/scripts/ @qikevinl
+
+# TARA Lab page policy, and the record of legacy brain geometry that may only shrink
+/src/layouts/ToolLayout.astro @qikevinl
+/src/components/__tests__/legacy-geometry-recorded.ts @qikevinl
+/src/components/__tests__/legacy-geometry-ratchet.test.ts @qikevinl
+/src/lib/legacy-geometry-scan.ts @qikevinl
 
 # Shared data & QTARA SDK
 /shared/qtara/ @qikevinl
 
 # Security audit tools
 /.github/security-audit/ @qikevinl
+
+# TARA Brain Atlas anatomy data: AI-drafted crosswalks, licence verdicts and the review ledger.
+# Only the owner records a review, clears a source or changes what the build expects of either.
+/datalake/qif-anatomy-*.json @qikevinl
+/src/lib/anatomy/ @qikevinl
+/src/site/atlas-assets/ @qikevinl
+/src/scripts/atlas-pipeline/ @qikevinl
+/src/components/atlas-scene/load-anatomy-data.ts @qikevinl
+/src/components/atlas-scene/__tests__/load-anatomy-data.test.ts @qikevinl
+/datalake/scripts/region-resolver.mjs @qikevinl
+/datalake/scripts/__tests__/region-resolver.test.mjs @qikevinl
+/datalake/qif-brain-bci-atlas.json @qikevinl
+/src/pages/atlas/anatomy-index.json.ts @qikevinl
+/src/pages/atlas/anatomy-evidence.json.ts @qikevinl
+/src/scripts/find-anatomy-payload.mjs @qikevinl
+/src/components/atlas-scene/__tests__/find-anatomy-payload.test.ts @qikevinl

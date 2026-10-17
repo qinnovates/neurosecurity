@@ -1,13 +1,13 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import registry from '@shared/qtara-registrar.json';
+import PurposeAndLimits from '@/components/PurposeAndLimits.astro';
+import { getCatalogCoverage } from '@/lib/purpose-and-limits';
 
 const techniques = (registry as any).techniques ?? [];
 const totalThreats = techniques.length;
 const dsm5Count = techniques.filter((t: any) => t?.tara?.dsm5?.primary?.length > 0).length;
-const neurorightsSet = new Set<string>(['EA']);
-techniques.forEach((t: any) => (t?.neurorights?.affected ?? []).forEach((r: string) => neurorightsSet.add(r)));
-const neurorightsCount = neurorightsSet.size;
+const scoredCount = getCatalogCoverage().scored;
 ---
 
 <PageLayout
@@ -38,7 +38,7 @@ const neurorightsCount = neurorightsSet.size;
           Months of personal experience with neurological disruption — COVID compounding PTSD — had already shown me what those failure modes look like from the inside. <strong class="text-[var(--color-text-primary)]">If biology can produce these outcomes without a device, what happens when we connect programmable hardware to the same pathways?</strong>
         </p>
         <p>
-          So I built TARA: I catalogued every known way to attack a brain-computer interface, scored each one for neural impact, traced the affected brain regions to psychiatric outcomes, and mapped the neurorights each technique could violate. <strong class="text-[var(--color-text-primary)]">{totalThreats} techniques. {dsm5Count} diagnostic-category references. {neurorightsCount} neurorights operationalized.</strong>
+          So I built TARA: a proposed catalog of {totalThreats} documented attack techniques against brain-computer interfaces, {scoredCount} with draft NISS scores, mapped to affected brain regions with DSM-5-TR category references for threat modeling (not diagnostic claims), and to the neurorights each technique bears on. <strong class="text-[var(--color-text-primary)]">{totalThreats} techniques. {dsm5Count} with DSM-5-TR category references.</strong>
         </p>
       </div>
     </section>
@@ -62,6 +62,11 @@ const neurorightsCount = neurorightsSet.size;
         </p>
       </div>
     </section>
+
+    <!-- Purpose and limits (canonical statement, also in governance/README.md) -->
+    <div class="mb-16">
+      <PurposeAndLimits />
+    </div>
 
     <!-- The Researcher -->
     <section class="mb-16">

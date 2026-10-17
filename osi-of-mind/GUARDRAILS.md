@@ -1,8 +1,8 @@
 # QIF Guardrails: Neuroethics + Neurosecurity
 
 **Status:** Active
-**Last Updated:** 2026-03-05
-**Data Source:** `shared/qif-guardrails.json` (single source of truth)
+**Last Updated:** 2026-10-16
+**Data Source:** `datalake/qif-guardrails.json` (single source of truth)
 **Enforcement:** `rules/epistemic-integrity.md`
 
 ---
@@ -35,7 +35,7 @@ Every neuroethics constraint maps to a neurosecurity scope limit. They are diffe
 | **Neuroethics constraint** | Neuroscience findings are routinely overclaimed when applied to law and policy. |
 | **Violation** | "Brain activity X proves cognitive state Y" |
 | **Correct form** | "Brain activity X is associated with / correlates with cognitive state Y" |
-| **QIF scope limit** | We score signal-level interference, not mental states. NISS measures physical amplitude disruption, not "thought harm." |
+| **QIF scope limit** | We score signal-level interference, not mental states. NISS v1.1 scores six technique-impact metrics (BI, CR, CD, CV, RV, NP), not "thought harm." |
 | **Components bound** | NISS, TARA |
 
 #### G4: Anti-Inflationism (Ienca 2021, Bublitz 2022)
@@ -47,7 +47,7 @@ Every neuroethics constraint maps to a neurosecurity scope limit. They are diffe
 | **Neuroethics constraint** | Don't assume new rights are needed without showing the gap. |
 | **Violation** | "We need 15 new neurorights for BCI security" |
 | **Correct form** | "We extend Mental Privacy and Mental Integrity with technical depth, not new rights" |
-| **QIF scope limit** | We extend Mental Privacy and Mental Integrity with technical depth, not new rights. Five rights, not fifteen. |
+| **QIF scope limit** | We extend Mental Privacy and Mental Integrity with technical depth, not new rights. Four rights (Ienca & Andorno, 2017), not fifteen. |
 | **Components bound** | QIF (framework level) |
 
 ---
@@ -74,8 +74,8 @@ Every neuroethics constraint maps to a neurosecurity scope limit. They are diffe
 |---|---|
 | **Neuroethics constraint** | Never use philosophically contested terms as if they're settled concepts. |
 | **Violation** | "NISS protects mental privacy" (as if the term is well-defined) |
-| **Correct form** | "NISS measures operationally defined properties: signal amplitude, frequency, coherence" |
-| **QIF scope limit** | We define operationally measurable properties (signal amplitude, frequency, coherence) rather than philosophically contested mental states. |
+| **Correct form** | "NISS scores operationally defined metrics: Biological Impact (BI), Cognitive Reconnaissance (CR), Cognitive/Functional Disruption (CD), Consent Violation (CV), Reversibility (RV), Neuroplasticity (NP)" |
+| **QIF scope limit** | We define operationally scored metrics (NISS: BI, CR, CD, CV, RV, NP on fixed ordinal scales; coherence metric Cs: phase variance, temporal entropy, gain fluctuation, spectral drift) rather than philosophically contested mental states. |
 | **Components bound** | NISS, Cs |
 
 #### G8: Statistical Inflation (Vul et al. 2009, Eklund et al. 2016)
@@ -136,10 +136,10 @@ Every neuroethics constraint maps to a neurosecurity scope limit. They are diffe
 
 ### NISS (Neural Impact Scoring System)
 
-**Does:** Measures physical signal disruption — amplitude deviation, frequency shift, coherence degradation.
+**Does:** Scores the impact of a threat technique on six metrics (NISS v1.1): Biological Impact (BI), Cognitive Reconnaissance (CR), Cognitive/Functional Disruption (CD), Consent Violation (CV), Reversibility (RV) and Neuroplasticity (NP), each on a fixed ordinal scale from 0 to 10, combined as a weighted mean (BI, CV, RV and NP weight 1.0; CR and CD weight 0.5).
 
 **Does NOT:**
-- Predict psychiatric diagnoses (corresponds to diagnostic categories, for threat modeling)
+- Predict psychiatric diagnoses or diagnostic clusters (coded condition labels are ICD-10-CM category references for threat modeling, not NISS outputs)
 - Measure "thought harm" or mental states (G1)
 - Claim clinical diagnostic validity (G8)
 
@@ -188,7 +188,7 @@ Every neuroethics constraint maps to a neurosecurity scope limit. They are diffe
 
 | Document | Role |
 |----------|------|
-| `shared/qif-guardrails.json` | Structured data (single source of truth) |
+| `datalake/qif-guardrails.json` | Structured data (single source of truth) |
 | `rules/epistemic-integrity.md` | Enforcement rules for all AI output |
 | `qif-sec-guardrails.md` | Physics-derived security architecture (4 layers) |
 | `/bci/guardrails` page | Site visualization of security layers |

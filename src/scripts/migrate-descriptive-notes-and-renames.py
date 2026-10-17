@@ -37,7 +37,7 @@ REGISTRAR = REPO / "datalake" / "qtara-registrar.json"
 SDK_COPY = REPO / "datalake" / "qtara" / "src" / "qtara" / "data" / "qtara-registrar.json"
 
 CHANGE_DATE = "2026-10-14"
-CHANGELOG_VERSION = "1.10"
+CHANGELOG_VERSION = "1.11"
 MAY_STATUSES = {"CONFIRMED", "DEMONSTRATED", "EMERGING"}
 COULD_STATUSES = {"THEORETICAL", "PLAUSIBLE", "SPECULATIVE"}
 NO_GUIDANCE_SENTENCE = "Mitigation guidance not yet drafted."

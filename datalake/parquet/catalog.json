@@ -1,21 +1,22 @@
 {
   "_meta": {
-    "generated": "2026-10-07T08:01:09.145206+00:00",
+    "generated": "2026-10-17T11:29:27.830116+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
-    "total_datasets": 33,
-    "total_rows": 7982
+    "total_datasets": 39,
+    "total_rows": 24334
   },
   "datasets": {
     "techniques": {
       "rows": 176,
-      "columns": 28,
+      "columns": 29,
       "column_names": [
         "id",
         "name",
         "tactic",
         "parent_id",
+        "legacy_names",
         "severity",
         "status",
         "bands",
@@ -41,7 +42,8 @@
         "consent_tier",
         "notes"
       ],
-      "size_bytes": 44080,
+      "size_bytes": 45574,
+      "sha256": "c388c06e40283d8f2a730e9643ad96c99f58658960de8e3316b799e7972d2017",
       "compression": "zstd",
       "source": "datalake/parquet/techniques.parquet"
     },
@@ -55,7 +57,8 @@
         "confidence",
         "dsm_type"
       ],
-      "size_bytes": 4063,
+      "size_bytes": 4078,
+      "sha256": "16909c9aecad8d38affbccf40001ab0b373a5ac227c492a6eb6a12e916143c05",
       "compression": "zstd",
       "source": "datalake/parquet/technique_dsm.parquet"
     },
@@ -67,12 +70,13 @@
         "right_code"
       ],
       "size_bytes": 1410,
+      "sha256": "ef0ea95c8cceb791c6a01e323103e42b26359c8b219195949dfa6960042112b1",
       "compression": "zstd",
       "source": "datalake/parquet/technique_neurorights.parquet"
     },
     "impact_chains": {
-      "rows": 4428,
-      "columns": 14,
+      "rows": 20182,
+      "columns": 15,
       "column_names": [
         "technique_id",
         "technique_name",
@@ -82,6 +86,7 @@
         "band_name",
         "region_id",
         "region_name",
+        "region_match",
         "pathway_id",
         "pathway_name",
         "neurotransmitter",
@@ -89,7 +94,8 @@
         "dsm_name",
         "dsm_cluster"
       ],
-      "size_bytes": 14133,
+      "size_bytes": 23007,
+      "sha256": "9f9ebb930554d106777f04608da257bcc273c9cb565b7927fa4f32ba81240566",
       "compression": "zstd",
       "source": "datalake/parquet/impact_chains.parquet"
     },
@@ -118,6 +124,7 @@
         "step_evidence_source"
       ],
       "size_bytes": 18318,
+      "sha256": "87f2a77ba23597b0e161752fce00c9d0ae8bfeb63d8af71388c7bed3177be73f",
       "compression": "zstd",
       "source": "datalake/parquet/attack_chains.parquet"
     },
@@ -146,6 +153,7 @@
         "clinical_notes"
       ],
       "size_bytes": 63615,
+      "sha256": "6b45a22c741c0db0b68476737c494520c360001bc7c9d5157fac1ffe95162538",
       "compression": "zstd",
       "source": "datalake/parquet/brain_regions.parquet"
     },
@@ -162,6 +170,7 @@
         "description"
       ],
       "size_bytes": 3921,
+      "sha256": "b2328b97305f5c393a5ecbbbb5343c6cc0007a614d487f684520fb70a96637b4",
       "compression": "zstd",
       "source": "datalake/parquet/hourglass_bands.parquet"
     },
@@ -186,6 +195,7 @@
         "device_count"
       ],
       "size_bytes": 16219,
+      "sha256": "834416cb0d95987f4789f48b0214ddec1254dc4b3b0a212e9f00d11cecd5266d",
       "compression": "zstd",
       "source": "datalake/parquet/companies.parquet"
     },
@@ -205,12 +215,13 @@
         "company"
       ],
       "size_bytes": 6653,
+      "sha256": "18f8b13bdefa7a6472f86642d940bd9babd3ff2bd28edebba19b502bb2012fd2",
       "compression": "zstd",
       "source": "datalake/parquet/devices.parquet"
     },
     "neural_pathways": {
       "rows": 46,
-      "columns": 15,
+      "columns": 17,
       "column_names": [
         "id",
         "name",
@@ -224,17 +235,20 @@
         "bci_relevance",
         "dsm_conditions",
         "dsm_names",
+        "icd10_conditions",
+        "icd10_names",
         "disruption_effects",
         "therapeutic_applications",
         "confidence"
       ],
-      "size_bytes": 18096,
+      "size_bytes": 18788,
+      "sha256": "5f3f8cec6286f49e328a26d9cbe1fba71ec05463a2754240c52284422ba7e0df",
       "compression": "zstd",
       "source": "datalake/parquet/neural_pathways.parquet"
     },
     "neurotransmitters": {
       "rows": 18,
-      "columns": 15,
+      "columns": 16,
       "column_names": [
         "id",
         "name",
@@ -249,10 +263,12 @@
         "primary_qif_bands",
         "primary_regions",
         "dsm_conditions",
+        "icd10_conditions",
         "bci_relevance",
         "confidence"
       ],
-      "size_bytes": 36533,
+      "size_bytes": 37120,
+      "sha256": "1cec91cd3904ff5e4717e130dae8c0ee5a5f498c8acaf35398165964e03a8a8c",
       "compression": "zstd",
       "source": "datalake/parquet/neurotransmitters.parquet"
     },
@@ -269,7 +285,8 @@
         "persistent_personality",
         "non_diagnostic"
       ],
-      "size_bytes": 22861,
+      "size_bytes": 24082,
+      "sha256": "e8bea1a071d70b2a9c041260700b0aab434b9a9473e20009f487f3667a4a776d",
       "compression": "zstd",
       "source": "datalake/parquet/dsm_clusters.parquet"
     },
@@ -290,13 +307,39 @@
         "niss_affected",
         "confidence"
       ],
-      "size_bytes": 12556,
+      "size_bytes": 12561,
+      "sha256": "a8486d30edd5da82b563ceb710ef14a6bc32516d00951d4b13233512dd08cc26",
       "compression": "zstd",
       "source": "datalake/parquet/neurological_conditions.parquet"
     },
+    "severity_anchors": {
+      "rows": 25,
+      "columns": 15,
+      "column_names": [
+        "id",
+        "band",
+        "device_class",
+        "source_ids",
+        "bibkey",
+        "endpoint",
+        "denominator_family",
+        "n",
+        "rate",
+        "rate_value",
+        "rate_unit",
+        "time_base",
+        "finding_direction",
+        "same_cohort_as",
+        "certainty_note"
+      ],
+      "size_bytes": 9292,
+      "sha256": "0cc4a31adf67c13e8cae839eee9079a18f9ee5d43daf1119621edb765f070c61",
+      "compression": "zstd",
+      "source": "datalake/parquet/severity_anchors.parquet"
+    },
     "cranial_nerves": {
       "rows": 12,
-      "columns": 19,
+      "columns": 20,
       "column_names": [
         "id",
         "number",
@@ -315,16 +358,18 @@
         "bci_devices",
         "bci_notes",
         "dsm_conditions",
+        "icd10_conditions",
         "dsm_source",
         "clinical_notes"
       ],
-      "size_bytes": 25266,
+      "size_bytes": 26040,
+      "sha256": "7412a08e9df188323aff419afd58ab41ef5f98b59c01e5554d61c74236652f2d",
       "compression": "zstd",
       "source": "datalake/parquet/cranial_nerves.parquet"
     },
     "neuroendocrine": {
       "rows": 7,
-      "columns": 20,
+      "columns": 21,
       "column_names": [
         "id",
         "name",
@@ -341,13 +386,15 @@
         "qif_notes",
         "functions",
         "dsm_conditions",
+        "icd10_conditions",
         "epigenetic_notes",
         "bci_relevance",
         "bci_notes",
         "disruption_effects",
         "confidence"
       ],
-      "size_bytes": 33728,
+      "size_bytes": 33939,
+      "sha256": "a7d433e18dae54d4b32160070627b9c060d9c1bfad1993c2cd733b86335f3d97",
       "compression": "zstd",
       "source": "datalake/parquet/neuroendocrine.parquet"
     },
@@ -369,6 +416,7 @@
         "security_implications"
       ],
       "size_bytes": 23056,
+      "sha256": "5e96bd944d3bc4ad01968ad5438a13b25e23ac1f6d7d187bf99ec3ad03e6394e",
       "compression": "zstd",
       "source": "datalake/parquet/glial_cells.parquet"
     },
@@ -389,12 +437,13 @@
         "research_gaps"
       ],
       "size_bytes": 79244,
+      "sha256": "15ccd32baff7fa1c99082b85aad1ca6bcd842b2b2cfa3742f1c2233ae2f02306",
       "compression": "zstd",
       "source": "datalake/parquet/neurovascular.parquet"
     },
     "receptors": {
       "rows": 20,
-      "columns": 19,
+      "columns": 20,
       "column_names": [
         "id",
         "name",
@@ -413,10 +462,12 @@
         "function",
         "pharmacological_agents",
         "dsm_conditions",
+        "icd10_conditions",
         "bci_relevance",
         "confidence"
       ],
-      "size_bytes": 43341,
+      "size_bytes": 43624,
+      "sha256": "40b8127ff84d3d6a5f80468e0d63004cff26d5a128f839b61d915e81d7f848a9",
       "compression": "zstd",
       "source": "datalake/parquet/receptors.parquet"
     },
@@ -438,6 +489,7 @@
         "note"
       ],
       "size_bytes": 24208,
+      "sha256": "27abcc93fbb547afbf0419043a77a54b2d2179148fb700a8ac013d8dc740525c",
       "compression": "zstd",
       "source": "datalake/parquet/cve_mappings.parquet"
     },
@@ -450,6 +502,7 @@
         "nsp_layers"
       ],
       "size_bytes": 18500,
+      "sha256": "d54c46c5cc10dfb699f97c6415079fe95bff09a081c0c2aa8fb28ad3680dbf2b",
       "compression": "zstd",
       "source": "datalake/parquet/security_controls.parquet"
     },
@@ -463,6 +516,7 @@
         "PC"
       ],
       "size_bytes": 6742,
+      "sha256": "2474ba63d34db14b532aa2aa2a8e82e36785fd9069852107bea531018e3f185a",
       "compression": "zstd",
       "source": "datalake/parquet/ethics_controls.parquet"
     },
@@ -477,7 +531,8 @@
         "neuroethics",
         "neurosecurity"
       ],
-      "size_bytes": 7070,
+      "size_bytes": 7496,
+      "sha256": "23e772af936a7b74738a905ac6c9ae7c2d8cc6aabe9991bfd8937c8589427bea",
       "compression": "zstd",
       "source": "datalake/parquet/guardrails.parquet"
     },
@@ -496,6 +551,7 @@
         "vector"
       ],
       "size_bytes": 6235,
+      "sha256": "2e670cfe0e2a69af2e2c92b23ac0c2e0dfc9088ae49e6678084fb88be4b1c976",
       "compression": "zstd",
       "source": "datalake/parquet/neurosecurity_scores.parquet"
     },
@@ -511,6 +567,7 @@
         "category"
       ],
       "size_bytes": 8244,
+      "sha256": "c3e89e76681d0c6d409f50810fcd0dfc34c73f533c51eb51ba6e86875490c89d",
       "compression": "zstd",
       "source": "datalake/parquet/research_explorer.parquet"
     },
@@ -529,6 +586,7 @@
         "tags"
       ],
       "size_bytes": 6386,
+      "sha256": "1820f5a56af21b75381d4af53257f5d9f39092c90182c6473708f80c500ce731",
       "compression": "zstd",
       "source": "datalake/parquet/research_institutions.parquet"
     },
@@ -547,6 +605,7 @@
         "tags"
       ],
       "size_bytes": 5489,
+      "sha256": "213f957a1c04dc5886250c3fe64e211dd7282906c9874ba3b4325b541954bc7f",
       "compression": "zstd",
       "source": "datalake/parquet/research_standards.parquet"
     },
@@ -564,6 +623,7 @@
         "tags"
       ],
       "size_bytes": 3703,
+      "sha256": "cd38b681684f2f64d63a595b563698a5bfcbb3b7f835c9f6bd623db37fc14720",
       "compression": "zstd",
       "source": "datalake/parquet/research_legislation.parquet"
     },
@@ -585,6 +645,7 @@
         "date"
       ],
       "size_bytes": 10787,
+      "sha256": "ccb3311b33d8207f411b5e04ec267e4ce78c8ae3bfbf1ca316c46ab6dbfbc1b2",
       "compression": "zstd",
       "source": "datalake/parquet/validation_registry.parquet"
     },
@@ -613,6 +674,7 @@
         "notes"
       ],
       "size_bytes": 14857,
+      "sha256": "9ffb2dae8efb0b18b5efb3fc731ea2f729f3f407e6f97e586e88d409af7f6fc8",
       "compression": "zstd",
       "source": "datalake/parquet/eeg_samples.parquet"
     },
@@ -634,11 +696,12 @@
         "disposition"
       ],
       "size_bytes": 33190,
+      "sha256": "40654b4c60fe2e871015c143bd37d6ca4fd5e31330babdd40c89a6d68df98d4e",
       "compression": "zstd",
       "source": "datalake/parquet/intake_ledger.parquet"
     },
     "intel_feed": {
-      "rows": 970,
+      "rows": 1032,
       "columns": 10,
       "column_names": [
         "id",
@@ -652,7 +715,8 @@
         "companies",
         "fetched"
       ],
-      "size_bytes": 188739,
+      "size_bytes": 202026,
+      "sha256": "706c15f94b5133fabc6e7457a1b6f6dcee71f7018aea4a741145b16c998dfd5d",
       "compression": "zstd",
       "source": "datalake/parquet/intel_feed.parquet"
     },
@@ -670,6 +734,7 @@
         "intel_feed"
       ],
       "size_bytes": 14339,
+      "sha256": "c982fe1d3f434c932e6bf91b2e9a33a5bc50b3dab8f857f5389ae03c5a7aa723",
       "compression": "zstd",
       "source": "datalake/parquet/intel_sources.parquet"
     },
@@ -681,9 +746,200 @@
         "current_stats",
         "milestones"
       ],
-      "size_bytes": 13248,
+      "size_bytes": 13348,
+      "sha256": "78da248277f065ec4c9edb7b23171095be3e44069910918b02418a432771970f",
       "compression": "zstd",
       "source": "datalake/parquet/timeline.parquet"
+    },
+    "anatomy_sources": {
+      "rows": 16,
+      "columns": 32,
+      "column_names": [
+        "review_mark",
+        "review_state",
+        "reviewed_by_role",
+        "reviewed_on",
+        "drafted_by",
+        "status_sentence",
+        "source_id",
+        "name",
+        "stated_license_id",
+        "handled_as_license_id",
+        "ai_verdict",
+        "grant",
+        "quoted_terms",
+        "terms_url",
+        "license_read_on",
+        "license_read_by",
+        "human_confirmed",
+        "ai_reading_permits_shipping",
+        "clearance_reason",
+        "unlocks_when",
+        "buildable",
+        "pipeline_only",
+        "blockers",
+        "template_space",
+        "delineated_in",
+        "arrives_in",
+        "route_kind",
+        "route_status",
+        "route_note",
+        "delineation_basis",
+        "layers",
+        "urls"
+      ],
+      "size_bytes": 18682,
+      "sha256": "2defae6fe95a9761b95bf4095ec9fc3a5d9e7c03a6926127a4aec40ec1b2d681",
+      "compression": "zstd",
+      "source": "datalake/parquet/anatomy_sources.parquet"
+    },
+    "anatomy_structures": {
+      "rows": 222,
+      "columns": 28,
+      "column_names": [
+        "mapping_review_mark",
+        "mapping_review_state",
+        "mapping_reviewed_by_role",
+        "mapping_reviewed_on",
+        "mapping_drafted_by",
+        "status_sentence",
+        "visual_check_state",
+        "position_check",
+        "structure_key",
+        "atlas",
+        "label_id",
+        "label_name",
+        "template_space",
+        "mapped_qif_record_keys",
+        "mapped_qif_record_count",
+        "check_status",
+        "hemisphere",
+        "hemispheres_drawn",
+        "size_class",
+        "has_drawn_shape",
+        "vertex_count",
+        "centroid_x_mm",
+        "centroid_y_mm",
+        "centroid_z_mm",
+        "asset_id",
+        "asset_path",
+        "asset_sha256",
+        "asset_license_id"
+      ],
+      "size_bytes": 17267,
+      "sha256": "d8f9170ed9e49fe0a08b2d0970eb90a9a5b0c1645a388b9897c164e55a77d323",
+      "compression": "zstd",
+      "source": "datalake/parquet/anatomy_structures.parquet"
+    },
+    "anatomy_crosswalk": {
+      "rows": 39,
+      "columns": 35,
+      "column_names": [
+        "review_mark",
+        "review_state",
+        "reviewed_by_role",
+        "reviewed_on",
+        "drafted_by",
+        "status_sentence",
+        "row_kind",
+        "review_key",
+        "subject_kind",
+        "subject_id",
+        "subject_name",
+        "subject_geometry_state",
+        "subject_geometry_reason",
+        "subject_geometry_reason_source",
+        "subject_name_at_draft",
+        "part",
+        "atlas",
+        "atlas_label_ids",
+        "atlas_label_names",
+        "atlas_label_count",
+        "name_match",
+        "extent_match",
+        "contained_kind",
+        "definition_contested",
+        "drafted_to_draw",
+        "has_drawn_shape",
+        "delineation_basis",
+        "claim_basis",
+        "quoted_text",
+        "quoted_file",
+        "quoted_pointer",
+        "quote_state",
+        "rationale",
+        "check_status",
+        "addressing_version"
+      ],
+      "size_bytes": 18066,
+      "sha256": "7ea792c1edb1122cbbbb24e751abdad7e2e4cde54f6ba5affbb9517825df2df8",
+      "compression": "zstd",
+      "source": "datalake/parquet/anatomy_crosswalk.parquet"
+    },
+    "anatomy_technique_terms": {
+      "rows": 123,
+      "columns": 26,
+      "column_names": [
+        "review_mark",
+        "review_state",
+        "reviewed_by_role",
+        "reviewed_on",
+        "drafted_by",
+        "status_sentence",
+        "technique_id",
+        "technique_name",
+        "technique_band_ids",
+        "named_term",
+        "ai_assigned_term_role",
+        "quoted_field",
+        "claim_basis",
+        "quoted_text",
+        "quoted_file",
+        "quoted_pointer",
+        "quote_state",
+        "rationale",
+        "check_status",
+        "match_kind",
+        "single_region_match",
+        "single_region_id",
+        "other_match_region_id",
+        "region_band_in_technique_bands",
+        "valid_for_current_addressing",
+        "review_key"
+      ],
+      "size_bytes": 16154,
+      "sha256": "96c553275bbf3762e6cd71cac8d2e6d70b8445520fdd98901ecf32803db1716e",
+      "compression": "zstd",
+      "source": "datalake/parquet/anatomy_technique_terms.parquet"
+    },
+    "anatomy_technique_term_summary": {
+      "rows": 111,
+      "columns": 19,
+      "column_names": [
+        "review_mark",
+        "review_state",
+        "reviewed_by_role",
+        "reviewed_on",
+        "terms_drafted_by",
+        "status_sentence",
+        "technique_id",
+        "technique_name",
+        "technique_band_ids",
+        "scope",
+        "band_level_reason",
+        "rationale",
+        "named_term_count",
+        "single_region_term_count",
+        "region_in_other_band_term_count",
+        "stale_region_term_count",
+        "broader_or_narrower_term_count",
+        "no_region_term_count",
+        "reviewed_term_count"
+      ],
+      "size_bytes": 11190,
+      "sha256": "fab162ba63081d83f4ab656943962fbf72dfb6ea1f9a5ca9c0a5b147b10d731d",
+      "compression": "zstd",
+      "source": "datalake/parquet/anatomy_technique_term_summary.parquet"
     }
   }
 }

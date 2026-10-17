@@ -812,7 +812,7 @@ This report served as the intellectual foundation for the 2025 Recommendation an
 |-----------------------|-------------|----------|
 | Ensure suitable oversight | QIF provides technical infrastructure for oversight: logging, auditing, coherence scoring, firewall decisions | firewall.py |
 | Prevent social control/surveillance | QIF is explicitly NOT a surveillance framework. Security without surveillance; integrity validated without reading thoughts | Section 4 |
-| Data protection and cybersecurity | Full regulatory compliance mapping: FDA, FCC, HIPAA, FTC, NIST, state neural data laws (Colorado, California, Montana, Connecticut) | Section 6 |
+| Data protection and cybersecurity | Regulatory context mapping (not a compliance determination): FDA, FCC, HIPAA, FTC, NIST, state neural data laws (Colorado, California, Montana, Connecticut) | Section 6 |
 | Lifecycle evaluation | Regulatory Window Analysis: Research (2000-2020) to Early Clinical (2020-2026) to Consumer Transition (2026-2030) to Mass Adoption (2030+) | Section 6 |
 
 #### Access and Equity
@@ -835,13 +835,13 @@ This report served as the intellectual foundation for the 2025 Recommendation an
 | Freedom of thought | Principle | Cognitive Liberty, informed consent framework, consent states | Implemented | No NIST/ISO control for "freedom of thought" enforcement. AC-3 enforces system access, not cognitive access. |
 | Privacy | Principle | BCI Anonymizer, transport variance, quantum encryption | Implemented | No neural data classification standard in NIST/ISO. SC-28 (Protection of Information at Rest) does not address neural re-identification. |
 | Protection of children | Principle | Pediatric framework, age-tiered assent, tri-level authorization | Implemented | No pediatric-specific security control family. NIST PT (Privacy) does not address age-tiered neural consent. |
-| Consumer protection | Policy | BCI Anonymizer, default-deny firewall, FTC compliance mapping | Implemented | No consumer neural device security baseline. PCI DSS provides a model but no neural equivalent exists. |
+| Consumer protection | Policy | BCI Anonymizer, default-deny firewall, FTC regulatory mapping (draft; not a compliance determination) | Implemented | No consumer neural device security baseline. PCI DSS provides a model but no neural equivalent exists. |
 | Enhancement regulation | Policy | Cognitive Liberty, Psychological Continuity principles | Partial: technical infrastructure exists; policy guidance requires collaboration | No control for "enhancement boundary enforcement." This is a policy gap, not a technical one. |
 | Workplace protections | Policy | Mental Privacy, consent framework | Implemented | No workplace neural monitoring prohibition control. NIST PT-3 (Personally Identifiable Information Processing) does not address employer neural data collection. |
 | Children protections | Policy | Full pediatric framework | Implemented | Same as "Protection of children" above. |
 | Behavioral influence | Policy | Neural ransomware taxonomy, coherence detection | Implemented | No control for "behavioral manipulation detection." NIST SI-4 (System Monitoring) detects network anomalies, not cognitive influence patterns. |
 | Health and well-being | Policy | Post-deployment ethics, lifecycle obligations | Implemented | No control for "device abandonment prevention." Lifecycle coverage in ISO 27001 ends at information system decommissioning, not surgical implant end-of-life. |
-| Oversight and governance | Policy | Logging, auditing, regulatory compliance mapping | Implemented | No neural-specific governance control. NIST PM (Program Management) addresses organizational security programs, not neurotechnology oversight boards. |
+| Oversight and governance | Policy | Logging, auditing, regulatory mapping (draft; not a compliance determination) | Implemented | No neural-specific governance control. NIST PM (Program Management) addresses organizational security programs, not neurotechnology oversight boards. |
 | Access and equity | Policy | Open-source, free PyPI packages, educational modules | Implemented | No control for "equitable neural technology access." This is a distributive justice concern outside GRC scope. |
 
 **Summary: 15 of 17 UNESCO elements fully implemented; 2 partially implemented (requiring policy collaboration beyond technical scope).**
@@ -951,7 +951,7 @@ The Food and Drug Omnibus Reform Act of 2022 (FDORA) and Protecting and Transfor
 | **Security architecture** | Design controls for cybersecurity | 11-band hourglass security model |
 | **Post-market plan** | Ongoing vulnerability monitoring and patching | NSAM continuous monitoring |
 
-> **The structural gap:** Section 524B mandates *that* manufacturers perform threat modeling but does not specify *which* threat taxonomy or scoring system to use for neural devices. The referenced standards (CVSS, IEC 62443, AAMI TIR57, ISO 14971) provide processes and scoring for general medical devices. None catalog neural-specific attack techniques. TARA and NISS fill this gap.
+> **The structural gap:** Section 524B requires cybersecurity documentation for cyber devices, and FDA's premarket guidance (Feb 2026, nonbinding) recommends threat modeling documentation, but neither specifies which threat taxonomy or scoring system to use for neural devices. Commonly used standards (CVSS, IEC 62443, AAMI TIR57, ISO 14971) provide processes and scoring for general medical devices. None catalog neural-specific attack techniques. TARA and NISS, a proposed research catalog and scoring method, are one attempt to address this gap.
 
 **FDA Cybersecurity Guidance (2023):**
 

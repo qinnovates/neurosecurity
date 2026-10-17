@@ -1,0 +1,476 @@
+{
+  "status": "AI-drafted, then checked by a second AI verifier and corrected. Not reviewed by a person. Every fact carries its own source URL and verbatim quote.",
+  "date_checked": "2026-10-09",
+  "paper": {
+    "doi": "10.1126/science.adk4858",
+    "url": "https://api.crossref.org/works/10.1126/science.adk4858",
+    "title": "A petavoxel fragment of human cerebral cortex reconstructed at nanoscale resolution",
+    "journal": "Science",
+    "volume": "384",
+    "issue": "6696",
+    "first_author": "Shapson-Coe",
+    "year": 2024,
+    "author_count": 31,
+    "doi_matches": true,
+    "first_author_matches": true,
+    "year_matches": true
+  },
+  "release_page": "https://h01-release.storage.googleapis.com/landing.html",
+  "data_page": "https://h01-release.storage.googleapis.com/data.html",
+  "source_version_note": "Facts marked accepted_manuscript_pmc are verbatim in the accepted author manuscript held in PubMed Central (PMC11718559) and were not checked against the version of record in Science. Facts marked version_of_record_abstract are from the published abstract as carried by Crossref or PubMed. Facts marked release_page are from the project's own web pages.",
+  "facts_by_source_version": {
+    "accepted_manuscript_pmc": 11,
+    "release_page": 9,
+    "version_of_record_abstract": 4
+  },
+  "facts": [
+    {
+      "id": "sample_what",
+      "fact": "The sample is about one cubic millimetre of human temporal cortex.",
+      "quote": "a cubic millimeter of human temporal cortex that was surgically removed to gain access to an underlying epileptic focus",
+      "quote_location": "abstract",
+      "source_url": "https://api.crossref.org/works/10.1126/science.adk4858",
+      "source_description": "Crossref record for the Science paper, including the published abstract",
+      "source_version": "version_of_record_abstract",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "sample_where_in_brain",
+      "fact": "It comes from the anterior part of the middle temporal gyrus; the slab is 170 micrometres thick and its volume is just over one cubic millimetre.",
+      "quote": "170 micrometer thick slab of human cortex from the anterior part of the middle temporal gyrus, with a total volume of just over one cubic millimeter that was removed to gain access to an epileptic focus in the underlying hippocampus",
+      "quote_location": "introduction",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=PMC11718559&retmode=xml",
+      "source_description": "Author manuscript of the Science paper in PubMed Central (PMC11718559). Its wording differs slightly from the published abstract. Main text only; the supplementary materials were not read.",
+      "source_version": "accepted_manuscript_pmc",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "sample_extent",
+      "fact": "The sample extends through all cortical layers.",
+      "quote": "a cubic millimeter in volume, that extends through all cortical layers",
+      "quote_location": "structured abstract, results",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=PMC11718559&retmode=xml",
+      "source_description": "Author manuscript of the Science paper in PubMed Central (PMC11718559). Its wording differs slightly from the published abstract. Main text only; the supplementary materials were not read.",
+      "source_version": "accepted_manuscript_pmc",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "origin_surgery",
+      "fact": "The tissue was obtained during surgery on one patient with epilepsy, to gain access to a hippocampal lesion beneath it.",
+      "quote": "obtained during surgery to gain access to an underlying hippocampal lesion from a patient with epilepsy",
+      "quote_location": "structured abstract, results",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=PMC11718559&retmode=xml",
+      "source_description": "Author manuscript of the Science paper in PubMed Central (PMC11718559). Its wording differs slightly from the published abstract. Main text only; the supplementary materials were not read.",
+      "source_version": "accepted_manuscript_pmc",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "origin_condition",
+      "fact": "The paper states the condition: the resection was part of treatment for drug-resistant epilepsy, and the sample is excess tissue from it.",
+      "quote": "The sample we analyzed is from excess tissue of the anterior middle temporal gyrus resected as part of treatment for drug-resistant epilepsy",
+      "quote_location": "methods, reconstruction pipeline",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=PMC11718559&retmode=xml",
+      "source_description": "Author manuscript of the Science paper in PubMed Central (PMC11718559). Its wording differs slightly from the published abstract. Main text only; the supplementary materials were not read.",
+      "source_version": "accepted_manuscript_pmc",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "caveat_pathology",
+      "fact": "The authors say they cannot exclude subtle effects of long-term epilepsy, or of its drug treatment, on the fine structure of the sample.",
+      "quote": "we cannot exclude the possibility that long-term epilepsy, or its pharmacological treatment, had subtle effects on the nanometer-scale structure of the sample",
+      "quote_location": "introduction",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=PMC11718559&retmode=xml",
+      "source_description": "Author manuscript of the Science paper in PubMed Central (PMC11718559). Its wording differs slightly from the published abstract. Main text only; the supplementary materials were not read.",
+      "source_version": "accepted_manuscript_pmc",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "caveat_deemed_normal",
+      "fact": "Light-microscope neuropathological examination judged the sample normal.",
+      "quote": "by light microscopy-based neuropathological examination, the sample was deemed normal",
+      "quote_location": "introduction",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=PMC11718559&retmode=xml",
+      "source_description": "Author manuscript of the Science paper in PubMed Central (PMC11718559). Its wording differs slightly from the published abstract. Main text only; the supplementary materials were not read.",
+      "source_version": "accepted_manuscript_pmc",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "cells_paper_abstract",
+      "fact": "Cells, as the published abstract states: about 57,000.",
+      "quote": "It contains about 57,000 cells, about 230 millimeters of blood vessels, and about 150 million synapses and comprises 1.4 petabytes.",
+      "quote_location": "abstract",
+      "source_url": "https://api.crossref.org/works/10.1126/science.adk4858",
+      "source_description": "Crossref record for the Science paper, including the published abstract",
+      "source_version": "version_of_record_abstract",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "cells_paper_text",
+      "fact": "Cells, as the manuscript text counts them: 57,180 in total.",
+      "quote": "57,180 cells total",
+      "quote_location": "results",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=PMC11718559&retmode=xml",
+      "source_description": "Author manuscript of the Science paper in PubMed Central (PMC11718559). Its wording differs slightly from the published abstract. Main text only; the supplementary materials were not read.",
+      "source_version": "accepted_manuscript_pmc",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "cells_glia_neurons",
+      "fact": "Glia outnumber neurons about two to one: 32,315 glia and 16,087 neurons.",
+      "quote": "Glia outnumber neurons 2:1 (32,315 versus 16,087).",
+      "quote_location": "results",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=PMC11718559&retmode=xml",
+      "source_description": "Author manuscript of the Science paper in PubMed Central (PMC11718559). Its wording differs slightly from the published abstract. Main text only; the supplementary materials were not read.",
+      "source_version": "accepted_manuscript_pmc",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "cells_data_page",
+      "fact": "Cell bodies, as the data page describes its layer: 50k.",
+      "quote": "Locations of 50k cell bodies that reside within the volume (somas only)",
+      "quote_location": "Common Layers",
+      "source_url": "https://h01-release.storage.googleapis.com/data.html",
+      "source_description": "H01 released-data page",
+      "source_version": "release_page",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "synapses_paper",
+      "fact": "Synapses, as the published abstract states: about 150 million.",
+      "quote": "about 150 million synapses",
+      "quote_location": "abstract",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=38723085&rettype=abstract&retmode=xml",
+      "source_description": "PubMed record for the Science paper (PMID 38723085)",
+      "source_version": "version_of_record_abstract",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "synapses_landing",
+      "fact": "Synapses, as the release landing page states: 183 million annotated.",
+      "quote": "183 million annotated synapses",
+      "quote_location": "first section",
+      "source_url": "https://h01-release.storage.googleapis.com/landing.html",
+      "source_description": "H01 release landing page",
+      "source_version": "release_page",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "proofread_landing",
+      "fact": "Proofread cells, as the release landing page states: 100.",
+      "quote": "100 proofread cells",
+      "quote_location": "first section",
+      "source_url": "https://h01-release.storage.googleapis.com/landing.html",
+      "source_description": "H01 release landing page",
+      "source_version": "release_page",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "proofread_data_page",
+      "fact": "Proofread cells, as the data page states: 104, manually traced.",
+      "quote": "104 manually traced and proofread cells",
+      "quote_location": "Common Layers",
+      "source_url": "https://h01-release.storage.googleapis.com/data.html",
+      "source_description": "H01 released-data page",
+      "source_version": "release_page",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "proofread_paper_text",
+      "fact": "Proofread cells, as the manuscript states: 104 randomly selected neurons.",
+      "quote": "we proofread 104 randomly-selected neurons",
+      "quote_location": "results",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=PMC11718559&retmode=xml",
+      "source_description": "Author manuscript of the Science paper in PubMed Central (PMC11718559). Its wording differs slightly from the published abstract. Main text only; the supplementary materials were not read.",
+      "source_version": "accepted_manuscript_pmc",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "data_size",
+      "fact": "The dataset is 1.4 petabytes.",
+      "quote": "H01 is a 1.4 petabyte volume of a small sample of human brain tissue.",
+      "quote_location": "first section",
+      "source_url": "https://h01-release.storage.googleapis.com/landing.html",
+      "source_description": "H01 release landing page",
+      "source_version": "release_page",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "imaging",
+      "fact": "It was imaged by multi-beam scanning electron microscopy at 4 by 4 by 33 nanometres.",
+      "quote": "Acquired via multi-beam SEM at a resolution of 4nm*4nm*33nm",
+      "quote_location": "Common Layers",
+      "source_url": "https://h01-release.storage.googleapis.com/data.html",
+      "source_description": "H01 released-data page",
+      "source_version": "release_page",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "method_automated",
+      "fact": "The sample was reconstructed and annotated by automated computational techniques.",
+      "quote": "reconstructed and annotated by automated computational techniques",
+      "quote_location": "first section",
+      "source_url": "https://h01-release.storage.googleapis.com/landing.html",
+      "source_description": "H01 release landing page",
+      "source_version": "release_page",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "licence",
+      "fact": "The released datasets are licensed CC BY 4.0.",
+      "quote": "All released datasets are licensed under a Creative Commons Attribution 4.0 License",
+      "quote_location": "License",
+      "source_url": "https://h01-release.storage.googleapis.com/data.html",
+      "source_description": "H01 released-data page",
+      "source_version": "release_page",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "paper",
+      "fact": "The paper is Shapson-Coe et al. (2024), Science 384(6696), DOI 10.1126/science.adk4858, PMID 38723085.",
+      "quote": "A petavoxel fragment of human cerebral cortex reconstructed at nanoscale resolution.",
+      "quote_location": "article title",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=38723085&rettype=abstract&retmode=xml",
+      "source_description": "PubMed record for the Science paper (PMID 38723085)",
+      "source_version": "version_of_record_abstract",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "who_released",
+      "fact": "The dataset was released by the Lichtman laboratory at Harvard University and the Connectomics at Google team.",
+      "quote": "The Lichtman laboratory at Harvard University and the Connectomics at Google team are releasing the “H01” dataset and companion paper.",
+      "quote_location": "first section",
+      "source_url": "https://h01-release.storage.googleapis.com/landing.html",
+      "source_description": "H01 release landing page",
+      "source_version": "release_page",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "sample_depth",
+      "fact": "The slab chosen runs from layer 1 to the white matter, about 3 millimetres.",
+      "quote": "We chose a slab that extended from layer 1 to white matter (~3 mm)",
+      "quote_location": "main text",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=PMC11718559&retmode=xml",
+      "source_description": "Author manuscript of the Science paper in PubMed Central (PMC11718559). Its wording differs slightly from the published abstract. Main text only; the supplementary materials were not read.",
+      "source_version": "accepted_manuscript_pmc",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    },
+    {
+      "id": "census_manual",
+      "fact": "The cells with nuclei in the sample were identified and counted manually.",
+      "quote": "manually identifying and quantifying them",
+      "quote_location": "results",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=PMC11718559&retmode=xml",
+      "source_description": "Author manuscript of the Science paper in PubMed Central (PMC11718559). Its wording differs slightly from the published abstract. Main text only; the supplementary materials were not read.",
+      "source_version": "accepted_manuscript_pmc",
+      "drafted_by": "ai",
+      "human_review": null,
+      "date_checked": "2026-10-09"
+    }
+  ],
+  "numbers_that_differ_by_source": [
+    {
+      "quantity": "synapses",
+      "values": [
+        {
+          "value": "about 150 million",
+          "fact_id": "synapses_paper"
+        },
+        {
+          "value": "183 million annotated",
+          "fact_id": "synapses_landing"
+        }
+      ],
+      "note": "Not reconciled. Nothing read this session explains the difference; do not merge or average."
+    },
+    {
+      "quantity": "proofread cells",
+      "values": [
+        {
+          "value": "100",
+          "fact_id": "proofread_landing"
+        },
+        {
+          "value": "104",
+          "fact_id": "proofread_data_page"
+        },
+        {
+          "value": "104 randomly selected neurons",
+          "fact_id": "proofread_paper_text"
+        }
+      ],
+      "note": "Two of three sources say 104; the landing page says 100."
+    },
+    {
+      "quantity": "cells",
+      "values": [
+        {
+          "value": "about 57,000",
+          "fact_id": "cells_paper_abstract"
+        },
+        {
+          "value": "57,180 total",
+          "fact_id": "cells_paper_text"
+        },
+        {
+          "value": "50k cell bodies",
+          "fact_id": "cells_data_page"
+        }
+      ],
+      "note": "The manuscript's 57,180 is the sum of 49,080 neurons and glia and 8100 blood-vessel cells in the same sentence; the data page's 50k describes a cell-body layer. Whether 50k is the 49,080 rounded is the drafter's guess, not stated by any source."
+    }
+  ],
+  "must_not_imply": [
+    "Not a whole brain: it is about one cubic millimetre, a slab 170 micrometres thick.",
+    "Not a wiring diagram of a person: it is one fragment, the reconstruction is automated, and the paper reports 104 proofread neurons (the landing page says 100 proofread cells).",
+    "One donor: nothing here generalises to people in general, and the card must not say 'the human brain contains'.",
+    "A surgical sample, not healthy-volunteer tissue: it was removed during surgery for drug-resistant epilepsy to reach the hippocampus (the paper states this). Do not call it diseased tissue either: the paper says it was judged normal by light microscopy and that subtle effects cannot be excluded.",
+    "Nothing about the donor's age or sex: neither appears in the published abstract, the two release pages or the main text of the author manuscript. The supplementary materials were not read. Do not state either from memory or from news coverage.",
+    "Nothing about which hemisphere: not found in the sources read.",
+    "The synapse counts are not exact and are not interchangeable: quote one figure with its source.",
+    "No link to any QIF region's function: H01 is anatomy at nanometre scale and makes no claim about what temporal cortex does.",
+    "No claim about consent or ethics approval wording: not read this session.",
+    "Do not say the whole dataset was made 'not by hand' or 'by computers alone': the manuscript says the cell census was manual."
+  ],
+  "visitor_caveats": [
+    {
+      "text": "This sample is not a whole brain: it is about one cubic millimetre.",
+      "must_not_imply_index": 0,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "It does not show how any person's brain is wired: it is one fragment, reconstructed by automated methods.",
+      "must_not_imply_index": 1,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "It comes from one person, so it says nothing about people in general.",
+      "must_not_imply_index": 2,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "The tissue was removed during surgery for epilepsy, not taken from a healthy volunteer. The paper says it looked normal under a light microscope and that subtle effects cannot be ruled out.",
+      "must_not_imply_index": 3,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "The sources read do not give the donor's age or sex.",
+      "must_not_imply_index": 4,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "The sources read do not say which side of the brain the sample came from.",
+      "must_not_imply_index": 5,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "The synapse counts are not exact, and they differ between sources.",
+      "must_not_imply_index": 6,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "It says nothing about what any QIF region does.",
+      "must_not_imply_index": 7,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "The wording of the consent and ethics approval was not read.",
+      "must_not_imply_index": 8,
+      "drafted_by": "ai"
+    },
+    {
+      "text": "Not all of it was made by computer: the paper says the cells were counted by hand.",
+      "must_not_imply_index": 9,
+      "drafted_by": "ai"
+    }
+  ],
+  "card": {
+    "title": "One cubic millimetre, one patient",
+    "sentences": [
+      {
+        "text": "H01 is a map of about one cubic millimetre of human temporal cortex, imaged with an electron microscope at a resolution of 4 by 4 by 33 nanometres.",
+        "fact_ids": [
+          "sample_what",
+          "imaging"
+        ]
+      },
+      {
+        "text": "The tissue came from one patient with epilepsy: surgeons removed it to reach a deeper part of the brain.",
+        "fact_ids": [
+          "origin_surgery",
+          "origin_condition",
+          "sample_where_in_brain"
+        ]
+      },
+      {
+        "text": "The paper reports about 57,000 cells and about 150 million synapses in the sample, while the project's release page counts 183 million annotated synapses.",
+        "fact_ids": [
+          "cells_paper_abstract",
+          "synapses_paper",
+          "synapses_landing"
+        ]
+      },
+      {
+        "text": "The reconstruction was made by automated methods, and the paper reports that 104 neurons were then proofread by people, so it is a fragment and not the wiring diagram of a brain or a person.",
+        "fact_ids": [
+          "method_automated",
+          "proofread_paper_text"
+        ]
+      },
+      {
+        "text": "The data are free to reuse with attribution under a CC BY 4.0 licence and are described in Shapson-Coe et al., Science, 2024.",
+        "fact_ids": [
+          "licence",
+          "paper"
+        ]
+      }
+    ],
+    "attribution_line": "Shapson-Coe et al. (2024), Science 384(6696), doi:10.1126/science.adk4858. Data: H01 release, CC BY 4.0, https://h01-release.storage.googleapis.com/landing.html",
+    "drafting_notes": "AI-drafted, then reworded in round 2 after an AI verifier's check. Sentence 1 gives the voxel size as the released-data page states it; the paper's own figure was not quoted. Sentence 4 uses the manuscript's count of 104 proofread neurons; the release landing page says 100 proofread cells. 'With attribution' in sentence 5 is what the licence name means; the page itself says only 'Creative Commons Attribution 4.0 License'."
+  }
+}

@@ -21,6 +21,7 @@ import pathwaysRaw from '@shared/qif-neural-pathways.json';
 import neurotransmitterRaw from '@shared/qif-neurotransmitters.json';
 import dsmRaw from '@shared/qif-dsm-mappings.json';
 import neuroRaw from '@shared/qif-neurological-mappings.json';
+import severityAnchorsRaw from '@shared/severity-anchors.json';
 
 // Devices & industry
 import landscapeRaw from '@shared/bci-landscape.json';
@@ -65,6 +66,9 @@ import intakeLedgerRaw from '@shared/intake/ledger.json';
 import impactChainsRaw from '@shared/impact-chains.json';
 import taraChainsRaw from '@shared/tara-chains.json';
 
+// TARA Brain Atlas anatomy tables (AI-drafted, unreviewed; every row carries its review state)
+import { loadAnatomyTables } from './anatomy/load-anatomy-tables';
+
 // ═══ Types ═══
 
 export type Row = Record<string, unknown>;
@@ -85,6 +89,7 @@ export interface DataLakeStats {
   glialCellTypes: number;
   dsmConditions: number;
   neurologicalConditions: number;
+  severityAnchors: number;
   companies: number;
   devices: number;
   neuronTypes: number;
@@ -114,6 +119,7 @@ const intelSources = intelSourcesRaw as any;
 const registry = registryRaw as any;
 const derivationTimeline = derivationTimelineRaw as any;
 const neuro = neuroRaw as any;
+const severityAnchors = severityAnchorsRaw as any;
 const neurosim = neurosimRaw as any;
 
 /** Refang a defanged URL */
@@ -174,11 +180,15 @@ function buildTechniques(): Row[] {
       parent_id: t.parent_id || '',
       legacy_names: (t.legacy_names || []).join('; '),
       severity: t.severity,
+      severity_source: t.severity_source || 'editorial',
+      severity_legacy: t.severity_legacy || '',
       status: t.status,
       niss_score: t.niss?.score || 0,
       niss_vector: t.niss?.vector || '',
       niss_severity: t.niss?.severity || '',
       niss_pins: t.niss?.pins || false,
+      niss_harm_flag: t.niss?.harm_flag || false,
+      niss_np_support: t.niss?.np_support || '',
       niss_bi: nv.bi || '',
       niss_cr: nv.cr || '',
       niss_cd: nv.cd || '',
@@ -222,6 +232,7 @@ function buildNeuralPathways(): Row[] {
     function: p.function || '',
     bci_relevance: p.bci_relevance || '',
     dsm_conditions: (p.dsm_conditions || []).join(', '),
+    icd10_conditions: (p.icd10_conditions || []).join(', '),
     confidence: p.confidence || '',
   }));
 }
@@ -238,6 +249,7 @@ function buildNeurotransmitters(): Row[] {
     cofactor_count: (nt.cofactor_dependencies || []).length,
     synthesis_steps: (nt.synthesis_pathway || []).length,
     dsm_condition_count: (nt.dsm_conditions || []).length,
+    icd10_condition_count: (nt.icd10_conditions || []).length,
     bci_relevance: nt.bci_relevance || '',
     confidence: nt.confidence || '',
   }));
@@ -304,6 +316,35 @@ function buildNeurologicalConditions(): Row[] {
     niss_primary: c.niss_primary || '',
     niss_affected: (c.niss_affected || []).join(', '),
     confidence: c.confidence || '',
+  }));
+}
+
+/**
+ * Recoverability-band rate rows: how an unintended effect of a regulated
+ * therapeutic device ended, by band and by device CLASS.
+ *
+ * Deliberately absent, and guarded by a test: any anatomical target, site,
+ * contact, amplitude, frequency, pulse width or programming field. This table
+ * must never be joined to dsm5_spec.band_profiles or to the
+ * neurological_conditions bci_attack_vector column.
+ */
+function buildSeverityAnchors(): Row[] {
+  return (severityAnchors.anchors || []).map((a: any) => ({
+    id: a.id,
+    band: a.band,
+    device_class: a.device_class,
+    endpoint: a.endpoint,
+    denominator_family: a.denominator_family,
+    n: a.n ?? 0,
+    rate: a.rate ?? '',
+    rate_value: a.rate_value ?? null,
+    rate_unit: a.rate_unit ?? '',
+    time_base: a.time_base ?? 'not reported',
+    source_ids: (a.source_ids || []).join(', '),
+    bibkey: a.bibkey ?? '',
+    same_cohort_as: (a.same_cohort_as || []).join(', '),
+    finding_direction: a.finding_direction ?? '',
+    certainty_note: a.certainty_note ?? '',
   }));
 }
 
@@ -426,6 +467,7 @@ function buildNeuroendocrineAxes(): Row[] {
     receptor_count: (ax.receptors || []).length,
     qif_bands: (ax.qif_bands || []).join(', '),
     dsm_condition_count: (ax.dsm_conditions || []).length,
+    icd10_condition_count: (ax.icd10_conditions || []).length,
     bci_relevance: ax.bci_relevance || '',
     confidence: ax.confidence || '',
   }));
@@ -536,6 +578,7 @@ function buildReceptorFamilies(): Row[] {
     signaling_mechanism: rf.signaling_mechanism || '',
     brain_regions: (rf.brain_regions || []).join(', '),
     dsm_condition_count: (rf.dsm_conditions || []).length,
+    icd10_condition_count: (rf.icd10_conditions || []).length,
     bci_relevance: rf.bci_relevance || '',
     confidence: rf.confidence || '',
   }));
@@ -916,6 +959,12 @@ export interface ImpactChainLink {
   band_name: string;
   region_id: string;
   region_name: string;
+  /**
+   * How the pathway's region id was joined to the atlas: same id, synonym alias, or an alias that changes
+   * anatomical scope. It describes the join, not how exact the anatomy is. Values are REGION_MATCH in
+   * datalake/scripts/region-resolver.mjs.
+   */
+  region_match: 'id' | 'synonym' | 'part_to_whole' | 'whole_to_part';
   pathway_id: string;
   pathway_name: string;
   neurotransmitter: string;
@@ -925,9 +974,9 @@ export interface ImpactChainLink {
 }
 
 /**
- * Impact chains are precomputed by shared/scripts/compute-impact-chains.mjs
+ * Impact chains are precomputed by datalake/scripts/compute-impact-chains.mjs
  * to eliminate the O(n⁴) nested-loop computation at build time.
- * Regenerate with: node shared/scripts/compute-impact-chains.mjs
+ * Regenerate with: npm run compute:chains
  */
 function buildImpactChains(): Row[] {
   return (impactChainsRaw as any) as Row[];
@@ -1240,6 +1289,7 @@ export function getKqlTables(): KqlTables {
     // Clinical
     dsm5: buildDsm5(),
     neurological_conditions: buildNeurologicalConditions(),
+    severity_anchors: buildSeverityAnchors(),
 
     // Devices & industry
     companies: buildCompanies(),
@@ -1328,6 +1378,10 @@ export function getKqlTables(): KqlTables {
 
     // Research intake ledger (proposals, not published data)
     intake_ledger: buildIntakeLedger(),
+
+    // Atlas sources, structures, crosswalk and technique terms. Built by src/lib/anatomy/
+    // from the same reviewed rows as the anatomy index; never flattened a second time here.
+    ...loadAnatomyTables(),
   };
 
   // Filter out empty tables — dynamic discovery
@@ -1373,6 +1427,7 @@ function computeStats(tables: KqlTables): DataLakeStats {
     glialCellTypes: byTable['glial_cells'] || 0,
     dsmConditions: byTable['dsm5'] || 0,
     neurologicalConditions: byTable['neurological_conditions'] || 0,
+    severityAnchors: byTable['severity_anchors'] || 0,
     companies: byTable['companies'] || 0,
     devices: byTable['devices'] || 0,
     neuronTypes: byTable['neuron_types'] || 0,

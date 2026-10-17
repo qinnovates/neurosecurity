@@ -1,0 +1,18 @@
+---
+// Renders the canonical purpose and limits statement (A3). The text lives only in
+// src/data/purpose-and-limits.json; this component never adds wording of its own.
+import { PURPOSE_AND_LIMITS, STATEMENT_LINKS } from '@/lib/purpose-and-limits';
+---
+<section id={PURPOSE_AND_LIMITS.anchor} class="scroll-mt-24 rounded-xl p-6 border" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+  <h2 class="text-2xl font-bold mb-4 font-[family-name:var(--font-heading)]">{PURPOSE_AND_LIMITS.heading}</h2>
+  <div class="space-y-3 text-sm text-[var(--color-text-muted)] leading-relaxed">
+    {PURPOSE_AND_LIMITS.sections.map((section) => (
+      <p>
+        <strong class="text-[var(--color-text-primary)]">{section.label}</strong>{' '}
+        {section.segments.map((segment) => segment.link
+          ? <a href={STATEMENT_LINKS[segment.link]} class="text-[var(--color-accent-primary)] hover:underline" {...(STATEMENT_LINKS[segment.link].startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{segment.text}</a>
+          : segment.text)}
+      </p>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,1 @@
+globalThis.fixtureSideEffect=true;

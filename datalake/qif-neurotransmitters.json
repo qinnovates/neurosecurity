@@ -16,7 +16,8 @@
       "Receptor subtypes include IUPHAR/BPS Guide to Pharmacology classifications.",
       "DSM mappings are diagnostic category references for threat modeling, not diagnostic claims.",
       "Dependency chains show cofactors required for synthesis — disruption of any cofactor can impair neurotransmitter production.",
-      "Confidence: HIGH = primary literature/textbook, MEDIUM = review paper, LOW = inferred."
+      "Confidence: HIGH = primary literature/textbook, MEDIUM = review paper, LOW = inferred.",
+      "dsm_conditions holds ICD-10-CM chapter F codes only; codes outside chapter F are in icd10_conditions. Each coded entry's name is the code's official ICD-10-CM FY2027 title. Header (non-billable) codes are category references and are marked kind 'category' in datalake/validation/icd10cm-fy2027-titles.json. Entries without a code are unchanged."
     ]
   },
   "chemical_classes": {
@@ -250,34 +251,36 @@
       ],
       "dsm_conditions": [
         {
-          "code": "F20.x",
+          "code": "F20",
           "name": "Schizophrenia",
           "mechanism": "Mesolimbic DA excess (positive symptoms), mesocortical DA deficit (negative symptoms)"
         },
         {
-          "code": "G20",
-          "name": "Parkinson's disease",
-          "mechanism": "Nigrostriatal DA neuron degeneration (>80% loss before motor symptoms)"
-        },
-        {
-          "code": "F90.x",
-          "name": "ADHD",
+          "code": "F90",
+          "name": "Attention-deficit hyperactivity disorders",
           "mechanism": "Reduced DA signaling in PFC and striatum"
         },
         {
-          "code": "F32.x",
-          "name": "Major depression",
+          "code": "F32",
+          "name": "Depressive episode",
           "mechanism": "Reduced mesolimbic DA (anhedonia component)"
         },
         {
-          "code": "F14.x",
-          "name": "Cocaine use disorder",
+          "code": "F14",
+          "name": "Cocaine related disorders",
           "mechanism": "DAT blockade → DA accumulation in nucleus accumbens"
         },
         {
-          "code": "F15.x",
-          "name": "Amphetamine use disorder",
+          "code": "F15",
+          "name": "Other stimulant related disorders",
           "mechanism": "DAT reversal → massive DA release"
+        }
+      ],
+      "icd10_conditions": [
+        {
+          "code": "G20",
+          "name": "Parkinson's disease",
+          "mechanism": "Nigrostriatal DA neuron degeneration (>80% loss before motor symptoms)"
         }
       ],
       "bci_relevance": "HIGH — DBS of STN modulates DA circuits in Parkinson's. Closed-loop DBS adjusts stimulation based on beta oscillations in basal ganglia (DA-dependent).",
@@ -499,8 +502,8 @@
       ],
       "dsm_conditions": [
         {
-          "code": "F32.x",
-          "name": "Major depression",
+          "code": "F32",
+          "name": "Depressive episode",
           "mechanism": "Reduced 5-HT signaling (monoamine hypothesis component)"
         },
         {
@@ -509,21 +512,22 @@
           "mechanism": "5-HT1A hypofunction in limbic circuits"
         },
         {
-          "code": "F42.x",
-          "name": "OCD",
+          "code": "F42",
+          "name": "Obsessive-compulsive disorder",
           "mechanism": "Serotonergic dysfunction in CSTC loop; responds to SSRIs"
         },
         {
           "code": "F43.10",
-          "name": "PTSD",
+          "name": "Post-traumatic stress disorder, unspecified",
           "mechanism": "5-HT dysregulation in amygdala-PFC circuit"
         },
         {
-          "code": "F50.x",
+          "code": "F50",
           "name": "Eating disorders",
           "mechanism": "5-HT2C and 5-HT1A in hypothalamic appetite circuits"
         }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "MEDIUM — Raphe nuclei are deep structures, not directly accessible by non-invasive BCI. However, cortical 5-HT effects (via 5-HT2A on PFC pyramidal neurons) are measurable via EEG changes.",
       "confidence": "HIGH"
     },
@@ -698,26 +702,27 @@
       ],
       "dsm_conditions": [
         {
-          "code": "F32.x",
-          "name": "Major depression",
+          "code": "F32",
+          "name": "Depressive episode",
           "mechanism": "NE hypofunction (fatigue, psychomotor retardation component)"
         },
         {
           "code": "F43.10",
-          "name": "PTSD",
+          "name": "Post-traumatic stress disorder, unspecified",
           "mechanism": "LC hyperactivation → NE excess → hyperarousal, nightmares"
         },
         {
-          "code": "F90.x",
-          "name": "ADHD",
+          "code": "F90",
+          "name": "Attention-deficit hyperactivity disorders",
           "mechanism": "NE hypofunction in PFC → inattention"
         },
         {
           "code": "F40.10",
-          "name": "Social anxiety",
+          "name": "Social phobia, unspecified",
           "mechanism": "Excessive NE-mediated sympathetic activation"
         }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "MEDIUM — LC is deep brainstem, not directly accessible. But LC-NE system modulates cortical arousal detectable by EEG (P300 amplitude, pupil-linked arousal).",
       "confidence": "HIGH"
     },
@@ -891,24 +896,26 @@
       ],
       "dsm_conditions": [
         {
-          "code": "G30.x",
+          "code": "F05",
+          "name": "Delirium due to known physiological condition",
+          "mechanism": "Acute cholinergic deficit (anticholinergic drugs are #1 cause)"
+        },
+        {
+          "code": "F17",
+          "name": "Nicotine dependence",
+          "mechanism": "nAChR (α4β2) desensitization and upregulation"
+        }
+      ],
+      "icd10_conditions": [
+        {
+          "code": "G30",
           "name": "Alzheimer's disease",
           "mechanism": "Basal forebrain cholinergic neuron degeneration (nucleus basalis of Meynert)"
         },
         {
           "code": "G20",
-          "name": "Parkinson's dementia",
+          "name": "Parkinson's disease",
           "mechanism": "Cholinergic loss compounds DA loss → cognitive decline"
-        },
-        {
-          "code": "F05",
-          "name": "Delirium",
-          "mechanism": "Acute cholinergic deficit (anticholinergic drugs are #1 cause)"
-        },
-        {
-          "code": "F17.x",
-          "name": "Nicotine use disorder",
-          "mechanism": "nAChR (α4β2) desensitization and upregulation"
         }
       ],
       "bci_relevance": "MEDIUM — Cholinergic modulation affects EEG oscillations (theta in hippocampus, gamma in cortex). DBS in nucleus basalis of Meynert explored for Alzheimer's.",
@@ -1122,23 +1129,25 @@
       ],
       "dsm_conditions": [
         {
-          "code": "G40.x",
-          "name": "Epilepsy",
+          "code": "F20",
+          "name": "Schizophrenia",
+          "mechanism": "NMDA receptor hypofunction hypothesis (Olney & Farber 1995)"
+        }
+      ],
+      "icd10_conditions": [
+        {
+          "code": "G40",
+          "name": "Epilepsy and recurrent seizures",
           "mechanism": "Excitatory/inhibitory imbalance favoring glutamate"
         },
         {
-          "code": "F20.x",
-          "name": "Schizophrenia",
-          "mechanism": "NMDA receptor hypofunction hypothesis (Olney & Farber 1995)"
-        },
-        {
-          "code": "G30.x",
+          "code": "G30",
           "name": "Alzheimer's disease",
           "mechanism": "Glutamate excitotoxicity (memantine targets this)"
         },
         {
           "code": "G12.21",
-          "name": "ALS",
+          "name": "Amyotrophic lateral sclerosis",
           "mechanism": "EAAT2 loss → motor neuron excitotoxicity (riluzole reduces glutamate release)"
         }
       ],
@@ -1266,24 +1275,26 @@
       ],
       "dsm_conditions": [
         {
-          "code": "G40.x",
-          "name": "Epilepsy",
-          "mechanism": "GABA deficit → excitatory/inhibitory imbalance"
-        },
-        {
           "code": "F41.1",
-          "name": "Generalized anxiety",
+          "name": "Generalized anxiety disorder",
           "mechanism": "Reduced GABAergic tone in amygdala and cortex"
         },
         {
-          "code": "F10.x",
-          "name": "Alcohol use disorder",
+          "code": "F10",
+          "name": "Alcohol related disorders",
           "mechanism": "Ethanol potentiates GABA-A (tolerance → withdrawal seizures from GABA downregulation)"
         },
         {
           "code": "F51.0",
-          "name": "Insomnia",
+          "name": "Insomnia not due to a substance or known physiological condition",
           "mechanism": "Insufficient GABAergic sleep promotion"
+        }
+      ],
+      "icd10_conditions": [
+        {
+          "code": "G40",
+          "name": "Epilepsy and recurrent seizures",
+          "mechanism": "GABA deficit → excitatory/inhibitory imbalance"
         }
       ],
       "bci_relevance": "HIGH — GABAergic interneurons generate cortical oscillations (gamma band = PV+ interneurons, theta = SOM+ interneurons). All EEG rhythms depend on GABA-mediated synchronization. tDCS modulates GABA levels (measurable via MRS).",
@@ -1371,6 +1382,7 @@
         "retina"
       ],
       "dsm_conditions": [],
+      "icd10_conditions": [],
       "bci_relevance": "LOW — Primarily spinal/brainstem. Relevant for spinal cord BCI interfaces.",
       "confidence": "HIGH"
     },
@@ -1479,14 +1491,16 @@
       ],
       "dsm_conditions": [
         {
-          "code": "G47.4",
-          "name": "Narcolepsy",
-          "mechanism": "Reduced histaminergic wakefulness drive (compounds orexin loss)"
-        },
-        {
           "code": "F51.0",
-          "name": "Insomnia",
+          "name": "Insomnia not due to a substance or known physiological condition",
           "mechanism": "Excessive histaminergic arousal (suvorexant works on orexin, not histamine)"
+        }
+      ],
+      "icd10_conditions": [
+        {
+          "code": "G47.4",
+          "name": "Narcolepsy and cataplexy",
+          "mechanism": "Reduced histaminergic wakefulness drive (compounds orexin loss)"
         }
       ],
       "bci_relevance": "LOW — TMN is deep hypothalamic. Histamine's effect on cortical arousal affects EEG state (wake vs sleep signatures).",
@@ -1615,16 +1629,17 @@
       ],
       "dsm_conditions": [
         {
-          "code": "F11.x",
-          "name": "Opioid use disorder",
+          "code": "F11",
+          "name": "Opioid related disorders",
           "mechanism": "Exogenous opioids hijack mu receptor reward signaling"
         },
         {
-          "code": "F32.x",
-          "name": "Major depression",
+          "code": "F32",
+          "name": "Depressive episode",
           "mechanism": "Endogenous opioid system dysregulation (kappa system hyperactivation)"
         }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "LOW — Deep brainstem/subcortical. DBS of PAG used for intractable pain.",
       "confidence": "HIGH"
     },
@@ -1718,10 +1733,11 @@
       "primary_regions": [
         "lateral_hypothalamus"
       ],
-      "dsm_conditions": [
+      "dsm_conditions": [],
+      "icd10_conditions": [
         {
           "code": "G47.4",
-          "name": "Narcolepsy type 1",
+          "name": "Narcolepsy and cataplexy",
           "mechanism": "Autoimmune destruction of orexin neurons (>90% loss). CSF orexin-A <110 pg/mL is diagnostic."
         }
       ],
@@ -1771,10 +1787,11 @@
       "dsm_conditions": [
         {
           "code": "F84.0",
-          "name": "Autism spectrum disorder",
+          "name": "Autistic disorder",
           "mechanism": "Oxytocin system differences (research-based association, not causal claim)"
         }
       ],
+      "icd10_conditions": [],
       "confidence": "HIGH"
     },
     {
@@ -2006,11 +2023,12 @@
       ],
       "dsm_conditions": [
         {
-          "code": "F12.x",
-          "name": "Cannabis use disorder",
+          "code": "F12",
+          "name": "Cannabis related disorders",
           "mechanism": "Exogenous CB1 activation → reward system hijacking and CB1 downregulation"
         }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "LOW — Endocannabinoid signaling modulates synaptic plasticity but is not directly detectable by current BCI.",
       "confidence": "HIGH"
     },
@@ -2089,15 +2107,16 @@
       "dsm_conditions": [
         {
           "code": "F51.0",
-          "name": "Insomnia",
+          "name": "Insomnia not due to a substance or known physiological condition",
           "mechanism": "Adenosine accumulates during waking → promotes sleep via A1 and A2A in basal forebrain and VLPO"
         },
         {
           "code": "F15.9",
-          "name": "Caffeine use disorder",
+          "name": "Other stimulant use, unspecified",
           "mechanism": "Chronic A1/A2A antagonism → receptor upregulation → withdrawal symptoms"
         }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "LOW — Purinergic signaling is diffuse and not directly measured by current BCI.",
       "confidence": "HIGH"
     },
@@ -2163,12 +2182,14 @@
       "dsm_conditions": [
         {
           "code": "F43.10",
-          "name": "PTSD",
+          "name": "Post-traumatic stress disorder, unspecified",
           "mechanism": "Low NPY levels associated with PTSD vulnerability (resilience biomarker)"
-        },
+        }
+      ],
+      "icd10_conditions": [
         {
-          "code": "G40.x",
-          "name": "Epilepsy",
+          "code": "G40",
+          "name": "Epilepsy and recurrent seizures",
           "mechanism": "NPY is endogenous anticonvulsant — Y2 receptor activation inhibits glutamate release"
         }
       ],

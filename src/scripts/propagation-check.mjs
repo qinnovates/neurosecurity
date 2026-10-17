@@ -17,6 +17,7 @@
  */
 
 import { readFileSync, statSync, readdirSync, existsSync } from 'fs';
+import { createHash } from 'crypto';
 import { resolve, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -157,7 +158,10 @@ function checkDataConsistency() {
     }
   }
 
-  // 5. Technique count in registrar
+  // 5. Anatomy tables: every one in the KQL JSON is in the parquet catalog with the same rows and columns
+  checkAnatomyTables(kqlPath, catalogPath);
+
+  // 6. Technique count in registrar
   const registrarPath = 'datalake/qtara-registrar.json';
   if (fileExists(registrarPath)) {
     try {
@@ -169,6 +173,70 @@ function checkDataConsistency() {
     }
   } else {
     fail('datalake/qtara-registrar.json missing');
+  }
+}
+
+/** Must equal ANATOMY_TABLE_PREFIX in src/lib/anatomy/table-prefix.ts (a test compares them). */
+const ANATOMY_TABLE_PREFIX = 'anatomy_';
+/**
+ * Every anatomy table opens with these four, then one column saying who drafted the row, then the status
+ * sentence. A table whose review is of something narrower than the row puts one prefix on all four
+ * (`mapping_` on the structures table).
+ */
+const ANATOMY_REVIEW_COLUMNS = ['review_mark', 'review_state', 'reviewed_by_role', 'reviewed_on'];
+const ANATOMY_REVIEW_PREFIX_PATTERN = /^([a-z]+_)?review_mark$/;
+const ANATOMY_DRAFTER_COLUMN_PATTERN = /(^|_)drafted_by$/;
+const ANATOMY_STATUS_COLUMN = 'status_sentence';
+const ANATOMY_REMEDY = 'run: npm run prebuild (with pyarrow installed if the parquet files need rebuilding, then commit datalake/parquet/)';
+
+/** The first way a table's opening columns differ from the six draft-state columns, or null. */
+function findDraftColumnProblem(name, columns) {
+  const prefix = ANATOMY_REVIEW_PREFIX_PATTERN.exec(columns[0] ?? '')?.[1] ?? '';
+  const missing = ANATOMY_REVIEW_COLUMNS.find((column, position) => columns[position] !== `${prefix}${column}`);
+  if (missing !== undefined) return `${name} does not open with ${prefix}${missing} in its place`;
+  if (!ANATOMY_DRAFTER_COLUMN_PATTERN.test(columns[ANATOMY_REVIEW_COLUMNS.length] ?? '')) return `${name} has no drafter column after its review columns`;
+  if (columns[ANATOMY_REVIEW_COLUMNS.length + 1] !== ANATOMY_STATUS_COLUMN) return `${name} has no ${ANATOMY_STATUS_COLUMN} column after its drafter`;
+  return null;
+}
+
+/** The first way a committed parquet file differs from what its catalog entry records, or null. */
+function findParquetFileProblem(name, dataset) {
+  const filePath = `datalake/parquet/${name}.parquet`;
+  if (!fileExists(filePath)) return `${filePath} is missing`;
+  const digest = createHash('sha256').update(readFileSync(resolve(ROOT, filePath))).digest('hex');
+  return digest === dataset.sha256 ? null : `${filePath} is not the file the catalog records (digest differs)`;
+}
+
+/** The first way an anatomy table, its catalog entry and its parquet file disagree, or null. */
+function findAnatomyTableProblem(name, rows, dataset) {
+  const columns = Object.keys(rows[0] ?? {});
+  const draftProblem = findDraftColumnProblem(name, columns);
+  if (draftProblem !== null) return draftProblem;
+  if (dataset === undefined) return `${name} is not in the parquet catalog`;
+  if (dataset.rows !== rows.length) return `${name} has ${rows.length} rows but its parquet file has ${dataset.rows}`;
+  if (JSON.stringify(dataset.column_names) !== JSON.stringify(columns)) return `${name} and its parquet file have different columns`;
+  return findParquetFileProblem(name, dataset);
+}
+
+function checkAnatomyTables(kqlPath, catalogPath) {
+  if (!fileExists(kqlPath) || !fileExists(catalogPath)) {
+    fail(`Anatomy tables cannot be checked: ${fileExists(kqlPath) ? catalogPath : kqlPath} is missing. On a fresh clone, run: npm run prebuild`);
+    return;
+  }
+  const tables = readJSON(kqlPath);
+  const datasets = readJSON(catalogPath).datasets ?? {};
+  const names = Object.keys(tables).filter((name) => name.startsWith(ANATOMY_TABLE_PREFIX));
+  const strayDataset = Object.keys(datasets).find((name) => name.startsWith(ANATOMY_TABLE_PREFIX) && !names.includes(name));
+  if (names.length === 0) {
+    fail(`No anatomy tables in ${kqlPath}: datalake/qif-anatomy-*.json must reach the query tables (${ANATOMY_REMEDY})`);
+    return;
+  }
+  const problems = names.map((name) => findAnatomyTableProblem(name, tables[name], datasets[name])).filter((problem) => problem !== null);
+  if (strayDataset !== undefined) problems.push(`${strayDataset} is in the parquet catalog but not in the query tables`);
+  if (problems.length === 0) {
+    pass(`Anatomy tables: ${names.length} in the query tables, the parquet catalog and on disk, each opening with its review state`);
+  } else {
+    fail(`Anatomy tables out of sync (${ANATOMY_REMEDY}): ${problems.join('; ')}`);
   }
 }
 

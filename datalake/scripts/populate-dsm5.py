@@ -3,7 +3,11 @@
 Populate DSM-5-TR diagnostic mapping for all 99 TARA techniques.
 
 Neural Impact Chain (NIC): Technique → Band → Structure → Function → NISS + DSM
-NISS-DSM Bridge: NISS metrics predict diagnostic clusters.
+Category references only: DSM-5-TR names are diagnostic category references for threat
+modeling, not diagnostic claims, and NISS does not predict diagnoses or clusters. The
+NISS-DSM bridge table was retired in registrar changelog 1.10
+(src/scripts/migrate-icd10cm-codes-and-titles.py). compute_cluster() still adds a
+NISS-vector bonus; see dsm5_spec.cluster_note.
 
 Usage:
     python3 shared/scripts/populate-dsm5.py
@@ -372,11 +376,12 @@ def populate_technique(technique: dict) -> dict:
 # ═══════════════════════════════════════════════════════════════
 
 DSM5_SPEC = {
-    "version": "1.0",
+    "version": "1.1",
     "name": "DSM-5-TR Diagnostic Mapping via Neural Impact Chain",
-    "description": "Maps BCI techniques to psychiatric diagnoses through the hourglass band model. NISS metrics predict diagnostic clusters. First known formal BCI threat-to-psychiatric-diagnosis taxonomy.",
+    "description": "Maps BCI techniques to DSM-5-TR diagnostic categories (ICD-10-CM chapter F codes) through the hourglass band model, for threat modeling purposes. These are diagnostic category references, not diagnostic claims. NISS is a separate score of technique impact (BI, CR, CD, CV, RV, NP); it does not predict diagnoses or diagnostic clusters.",
     "methodology": "Band → Structure → Function → NISS (quantitative) + DSM (qualitative)",
-    "positioning": "RDoC-aligned, BCI-specific, with quantitative bridge (NISS) to traditional nosology (DSM-5-TR)",
+    "positioning": "RDoC-aligned and BCI-specific category references to traditional nosology (DSM-5-TR), for threat modeling. NISS is not a bridge to diagnosis.",
+    "cluster_note": "Each technique's tara.dsm5.cluster was assigned by datalake/scripts/populate-dsm5.py from band weights plus a NISS-vector bonus. It is a display grouping, not a prediction; whether NISS should remain an input is an open follow-up.",
     "band_profiles": {
         band: {
             "structures": profile["structures"],
@@ -385,14 +390,6 @@ DSM5_SPEC = {
             "secondary_codes": [d["code"] for d in profile["secondary_diagnoses"]],
         }
         for band, profile in BAND_DSM_PROFILES.items()
-    },
-    "niss_dsm_bridge": {
-        "BI": {"risk_domain": "Structural/Tissue damage", "primary_clusters": ["motor_neurocognitive"], "dsm_chapters": ["Motor (F82/F95)", "Neurocognitive (F01-G31)"]},
-        "CR": {"risk_domain": "Cognitive reconnaissance (read-side)", "primary_clusters": ["cognitive_psychotic"], "dsm_chapters": ["Neurodevelopmental (F70-F98)", "Schizophrenia Spectrum (F20-F29)"]},
-        "CD": {"risk_domain": "Cognitive disruption (write-side)", "primary_clusters": ["cognitive_psychotic"], "dsm_chapters": ["Neurodevelopmental (F70-F98)", "Schizophrenia Spectrum (F20-F29)"]},
-        "CV": {"risk_domain": "Consent/autonomy violation", "primary_clusters": ["mood_trauma"], "dsm_chapters": ["Depressive (F32-F34)", "Anxiety (F40-F41)", "Trauma/PTSD (F43)", "Dissociative (F44)"]},
-        "RV": {"risk_domain": "Chronicity modifier", "primary_clusters": ["persistent_personality"], "dsm_chapters": ["Distinguishes acute (F43.2) vs persistent (F34.1) presentations"]},
-        "NP": {"risk_domain": "Lasting neural change", "primary_clusters": ["persistent_personality"], "dsm_chapters": ["Personality (F60-F69)", "Neurodegenerative (G30-G31)"]},
     },
     "diagnostic_clusters": {
         "cognitive_psychotic": {

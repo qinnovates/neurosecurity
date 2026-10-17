@@ -41,6 +41,8 @@ export default defineConfig({
     '/interface-risks/landscape/': '/research/landscape/',
     '/interface-risks/explorer/': '/research/bci-explorer/',
     '/interface-risks/dashboard/': '/research/landscape/',
+    // The old BCI dashboard, last kept as a committed build that drew its own brain; same target as the line above
+    '/research/bci-dashboard/': '/research/landscape/',
     '/interface-risks/limits/': '/research/landscape/#physics',
     '/interface-risks/guardrails/': '/guardrails/',
     '/interface-risks/api/': '/research/api/',

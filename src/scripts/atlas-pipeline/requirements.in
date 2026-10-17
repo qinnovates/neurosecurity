@@ -1,0 +1,10 @@
+# Direct dependencies of the atlas pipeline, each with the reason it is here.
+# Versions are the ones the registration evidence was measured with; change them in a reviewed diff.
+nibabel==5.3.2              # NIfTI volumes and headers
+numpy==2.0.1                # arrays, quantisation, the GLB writer (antspyx 0.5.4 needs numpy below 2.1)
+scipy==1.14.1               # resampling, distance transforms, surface distances
+scikit-image==0.24.0        # marching cubes on a continuous field
+antspyx==0.5.4              # the one registration stack: computes and applies the symmetric-to-asymmetric transform
+fast-simplification==0.2.0  # quadric decimation; meshing on a coarser grid shrinks thin shapes, decimation does not
+pillow==12.3.0              # review sheets (PNG)
+pandas==3.0.6               # point tables for antspyx's point transform (displacement statistics)

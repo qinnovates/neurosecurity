@@ -102,6 +102,24 @@ export function getValidationForTechnique(taraId: string): ValidationEntry | und
   return VALIDATION_ENTRIES.find(e => e.related_tara_ids.includes(taraId));
 }
 
+const CHECKED_TECHNIQUES_PATTERN = /^(\d+)\/\d+ techniques\b/;
+
+/**
+ * How many techniques a validation entry actually checked, read from its own
+ * results line ("103/103 techniques ..."), so pages never substitute today's count.
+ */
+export function getCheckedTechniqueCount(validationId: string): number {
+  const entry = VALIDATION_ENTRIES.find((candidate) => candidate.id === validationId);
+  if (!entry) {
+    throw new Error(`validation-data: ${validationId} not found in validation-registry.json`);
+  }
+  for (const line of entry.results) {
+    const match = CHECKED_TECHNIQUES_PATTERN.exec(line);
+    if (match) return Number(match[1]);
+  }
+  throw new Error(`validation-data: ${validationId} has no "N/M techniques" results line; state the count in validation-registry.json`);
+}
+
 /** Summary statistics */
 export function getValidationStats() {
   const tierCounts: Record<string, number> = {};

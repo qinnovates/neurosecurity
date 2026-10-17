@@ -198,7 +198,7 @@ describe('US requirements checklist', () => {
 
   it('marks statutory items required for a connected device in a marketing submission', () => {
     const report = reportFor(buildModel('cortical-read-implant', { submissionType: '510k' }));
-    expect(report.cyberDeviceAssessment.isCyberDevice).toBe(true);
+    expect(report.cyberDeviceAssessment.connectivity).toBe('meets');
     for (const item of report.complianceItems.filter((candidate) => statutoryIds.includes(candidate.requirementId))) {
       expect(item.applicability).toBe('required');
     }
