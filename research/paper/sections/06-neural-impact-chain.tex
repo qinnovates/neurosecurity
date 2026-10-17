@@ -5,12 +5,14 @@
 \section{Neural Impact Chain}
 \label{sec:nic}
 
-The Neural Impact Chain (NIC) is a six-stage methodology for mapping security
-vulnerabilities to clinical psychiatric diagnoses. To our knowledge, this is the
-first systematic pipeline connecting cybersecurity severity scoring to DSM-5-TR
-diagnostic codes~\cite{apa2022dsm5tr}. The NIC answers a question no prior
-framework has addressed: \emph{if this attack succeeds, what psychiatric condition
-could it cause or worsen?}
+The Neural Impact Chain (NIC) is a six-stage threat-modeling method that associates
+attack techniques with DSM-5-TR and ICD-10-CM diagnostic category
+references~\cite{apa2022dsm5tr}. The codes are \textbf{diagnostic category references for
+threat modeling, not diagnostic claims}: an association says that a technique and a
+condition category share an address and a function, not that the technique causes the
+condition. The question the NIC helps a threat modeler ask is \emph{which clinical
+categories should a review of this technique consider?} The mappings have not been reviewed
+by clinicians (Section~\ref{sec:limitations}).
 
 \subsection{Pipeline Architecture}
 
@@ -19,69 +21,56 @@ The NIC traces each technique through six stages:
 \begin{enumerate}
   \item \textbf{Technique}: The TARA attack technique (e.g., cortical signal
         injection)
-  \item \textbf{Hourglass Band}: Which band(s) the technique affects (e.g., N7
-        Neocortex, N6 Limbic)
+  \item \textbf{Address}: The code(s) the technique is tagged at (e.g., N7
+        Neocortex, N6 Allocortex; version 1 memberships in the snapshot)
   \item \textbf{Neural Structure}: The anatomical structure at risk (e.g.,
         hippocampus, prefrontal cortex, amygdala)
   \item \textbf{Cognitive Function}: The function that structure supports (e.g.,
         memory consolidation, executive control, emotional regulation)
   \item \textbf{NISS Score}: The neural impact score, particularly the BI, CR,
         CD, and NP metrics that correlate with clinical outcomes
-  \item \textbf{DSM-5-TR Code}: The ICD-10-CM diagnostic code(s) for the
-        psychiatric condition most closely associated with disruption of that
-        function
+  \item \textbf{Category reference}: The DSM-5-TR/ICD-10-CM code(s) for the
+        condition category most closely associated with disruption of that function
 \end{enumerate}
 
-Figure~\ref{fig:nic} illustrates this pipeline.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.85\textwidth]{figures/neural-impact-chain.pdf}
-  \caption{The Neural Impact Chain: six-stage pipeline from security technique
-  to psychiatric diagnosis. Each arrow represents a mapping grounded in
-  neuroanatomy, functional neuroscience, or clinical psychiatry.}
-  \label{fig:nic}
-\end{figure}
 
 \subsection{NISS-to-DSM Bridge}
 
-The bridge between NISS metrics and DSM-5-TR diagnostic clusters is driven by
-which NISS metric dominates the technique's profile:
+A rule assigns each technique to a DSM-5-TR category cluster according to which NISS
+metric dominates its profile. The rule is a modeling choice, not a clinical finding:
 
 \begin{itemize}
-  \item \textbf{BI-driven} $\to$ Motor/Neurocognitive cluster: biological
-        impact implies tissue damage, leading to movement disorders or
-        neurocognitive deficits
-  \item \textbf{CR/CD-driven} $\to$ Cognitive/Psychotic cluster: cognitive
-        reconnaissance or disruption implies perceptual or thought-process compromise
-  \item \textbf{CV-driven} $\to$ Mood/Trauma cluster: Consent violations
-        imply autonomy loss, mapping to trauma- and stressor-related disorders
-  \item \textbf{NP/RV-driven} $\to$ Persistent/Personality cluster:\linebreak
-        neuroplasticity exploitation or irreversible damage implies
-        lasting personality changes
+  \item \textbf{BI-driven} $\to$ Motor/Neurocognitive cluster: movement and
+        neurocognitive categories
+  \item \textbf{CR/CD-driven} $\to$ Cognitive/Psychotic cluster: perceptual and
+        cognitive categories
+  \item \textbf{CV-driven} $\to$ Mood/Trauma cluster: trauma- and stressor-related
+        categories
+  \item \textbf{NP/RV-driven} $\to$ Persistent/Personality cluster: categories of
+        lasting change
   \item \textbf{No neural impact} $\to$ Non-diagnostic: Silicon-only
-        techniques with no direct psychiatric mapping
+        techniques with no category association
 \end{itemize}
 
 \subsection{Coverage Statistics}
 
-All 109 TARA techniques have been mapped through the NIC pipeline:
+All \SnapshotTechniques{} TARA techniques have been mapped through the NIC pipeline:
 
 \begin{table}[H]
 \centering
-\caption{Neural Impact Chain mapping results across 109 techniques.}
+\caption{Neural Impact Chain mapping results across \SnapshotTechniques{} techniques.}
 \label{tab:nic-stats}
 \small
 \begin{tabular}{@{}l r@{}}
 \toprule
 \textbf{Metric} & \textbf{Value} \\
 \midrule
-Techniques mapped                 & 103 / 109 (94.5\%) \\
-Unique DSM-5-TR codes             & 29 \\
+Techniques mapped                 & 103 / \SnapshotTechniques{} (94.5\%) \\
+Unique category codes             & 29 \\
 Diagnostic clusters               & 5 \\
-Direct diagnostic risk             & 52 (47.7\%) \\
-Indirect diagnostic risk           & 9 (8.3\%) \\
-No diagnostic risk (silicon-only)  & 42 (38.5\%) \\
+Direct association                 & 52 (47.7\%) \\
+Indirect association               & 9 (8.3\%) \\
+No association (silicon-only)      & 42 (38.5\%) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -92,7 +81,7 @@ The five diagnostic clusters and their technique counts:
 
 \begin{table}[H]
 \centering
-\caption{DSM-5-TR diagnostic cluster distribution.}
+\caption{DSM-5-TR diagnostic category clusters (snapshot), for threat modeling.}
 \label{tab:clusters}
 \small
 \begin{tabularx}{\textwidth}{@{}l r X@{}}
@@ -108,57 +97,55 @@ Persistent/Personality  &  7 & F07.0 (personality change) \\
 \end{tabularx}
 \end{table}
 
-The Mood/Trauma cluster is the largest diagnostic cluster (21 techniques),
-reflecting the prevalence of consent-violation and autonomy-disruption attacks
-in the BCI threat landscape. Techniques that covertly manipulate neural signals
-without the subject's knowledge or consent map naturally to trauma- and
-stressor-related disorders.
+The Mood/Trauma cluster is the largest diagnostic category cluster (21 techniques),
+because the bridge rule sends consent-dominated techniques there. That is a consequence of
+the rule, not an observation about outcomes in people.
 
-\subsection{Risk Classification}
+\subsection{Association Classes}
 
-Each technique is classified by diagnostic risk:
+Each technique is placed in one of three association classes:
 
 \begin{itemize}
-  \item \textbf{Direct} (52 techniques, 47.7\%): The attack mechanism can
-        directly trigger or worsen the mapped psychiatric condition. Example:
-        forced cortical stimulation causing seizures maps to epilepsy-related
-        diagnostic codes.
-  \item \textbf{Indirect} (9 techniques, 8.3\%): The attack creates downstream
-        conditions that may lead to the diagnosis. Example: sustained data
-        exfiltration of private thoughts causing anxiety does not directly
-        produce the anxiety disorder but creates the conditions for it.
+  \item \textbf{Direct} (52 techniques, 47.7\%): the technique acts on the
+        structure or function associated with the category. Example: unauthorised
+        cortical stimulation is associated with seizure-related categories.
+  \item \textbf{Indirect} (9 techniques, 8.3\%): the association runs through a
+        downstream effect. Example: exfiltration of neural data is associated with
+        anxiety-related categories through the effect of the disclosure, not through
+        the neural signal.
   \item \textbf{None} (42 techniques, 38.5\%): Silicon-only techniques with no
-        direct neural interaction and thus no psychiatric diagnostic mapping.
+        direct neural interaction and thus no category association.
 \end{itemize}
 
 \subsection{Example Walkthrough}
 
-Consider technique \textbf{QIF-T0001: Cortical Signal Injection}---direct
-injection of adversarial signals via rogue electrode stimulation.
+Consider \textbf{QIF-T0001, Signal injection}, as stored in the live registry. (The v1.5
+walkthrough gave a vector, a score of 8.7 and three codes that did not match the registry
+entry; it is replaced here.)
 
 \begin{enumerate}
-  \item \textbf{Technique}: QIF-T0001 (cortical signal injection)
-  \item \textbf{Band}: N7 (Neocortex), N6 (Limbic System)
-  \item \textbf{Structure}: Primary motor cortex (M1), prefrontal cortex (PFC),
-        hippocampus
-  \item \textbf{Function}: Motor control, executive function, memory
-        consolidation
-  \item \textbf{NISS}: BI:C / CR:H / CD:H / CV:I / RV:P / NP:S $\to$ Score: 8.7
-        (High), PINS flagged
-  \item \textbf{DSM-5-TR}: G25.9 (movement disorder NOS), F06.0 (psychotic
-        disorder due to another medical condition), F07.0 (personality change
-        due to another medical condition)
-  \item \textbf{Risk class}: Direct---the stimulation itself can trigger
-        seizures, involuntary movement, and perception distortion
+  \item \textbf{Technique}: QIF-T0001 (signal injection at the electrode-tissue interface)
+  \item \textbf{Address}: I0, N1
+  \item \textbf{Mechanism}: electrical current delivered at the interface, modulating
+        local field potentials
+  \item \textbf{NISS}: \texttt{BI:H/CR:H/CD:H/CV:E/RV:P/NP:T} $\to$ 6.1 (Medium), PINS
+        set because BI is High
+  \item \textbf{Category references}: F43.2, F45, F44.4 (primary); F82 (secondary)
+  \item \textbf{Association class}: direct
 \end{enumerate}
 
-Figure~\ref{fig:dsm5-clusters} shows the distribution of techniques across
-diagnostic clusters.
+\noindent Its evidence status is theoretical: the technique carried \emph{confirmed} until
+2026-10-16, when its sources were found not to demonstrate signal injection
+(Section~\ref{sec:tara}).
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.65\textwidth]{figures/dsm5-clusters.pdf}
-  \caption{DSM-5-TR cluster distribution across 109 TARA techniques. 61
-  techniques (56.0\%) have direct or indirect diagnostic risk.}
-  \label{fig:dsm5-clusters}
-\end{figure}
+\subsection{Impact Chains as Associations (Live Dataset)}
+
+The live impact-chains dataset (5,546 rows) is built by joins: each technique to every
+structure sharing one of its addresses, then to every pathway touching that structure, then
+to that pathway's condition codes. A row therefore records a shared address, not that the
+technique reaches the structure. The join currently yields rows for 91 of the
+\LiveTechniques{} techniques and 10 structures. A technique with no row has no association
+recorded, which is not evidence that it has no effect. Because the joins run on addresses,
+the move to addressing version 2 (Section~\ref{sec:hourglass}) changes them; the snapshot
+figures above use version 1.
+

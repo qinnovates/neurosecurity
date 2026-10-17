@@ -33,6 +33,7 @@ BOT_BLOCKED_DOMAINS = {
     'ssrn.com',
     'oecd.org',
     'ohchr.org',
+    'medium.com',
 }
 
 

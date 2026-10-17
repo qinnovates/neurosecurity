@@ -12,44 +12,45 @@ dimensions CVSS was never designed to express: biological tissue damage, cogniti
 reconnaissance, cognitive disruption, consent boundary violations, damage
 reversibility, and neuroplastic consequences.
 
-NISS serves as the technique-level scoring input to the Neurosecurity Score
-(NSv2.1), a multi-layer risk framework that aggregates NISS scores across five
-neurorights dimensions using ISO~31000 risk methodology, physics-based feasibility
-gating, and population-adjusted context baselines. In short: NISS is the scoring
-metric; NSv2.1 is the validated risk framework that demonstrates NISS in
-operational context.
+NISS scores impact only; it has no likelihood or exploitability term and is meant to sit
+beside a CVSS base score, not to replace it. It is also the technique-level input to a
+proposed multi-layer Neurosecurity Score (NSv2.1), which is unvalidated and outside the
+scope of this paper.
 
 \subsection{Gap Analysis: Why CVSS Alone Is Insufficient}
 
-We mapped all 109 TARA techniques to CVSS v4.0 base vectors and classified the
-results into three gap groups based on how much information CVSS alone fails to
-capture:
+Each TARA technique carries a CVSS v4.0 base vector and a gap group recording how much of
+its impact CVSS fails to capture. Table~\ref{tab:gap} gives the counts published in v1.5
+beside those recomputed from the registry file committed with v1.5.
 
 \begin{table}[H]
 \centering
-\caption{CVSS v4.0 gap analysis across 109 TARA techniques.}
+\caption{CVSS v4.0 gap groups across the \SnapshotTechniques{} snapshot techniques: as
+published in v1.5, and recomputed from the committed snapshot file.}
 \label{tab:gap}
 \small
-\begin{tabularx}{\textwidth}{@{}c X r l@{}}
+\begin{tabularx}{\textwidth}{@{}c X r r@{}}
 \toprule
-\textbf{Group} & \textbf{Gap Description} & \textbf{Count} & \textbf{Example} \\
+\textbf{Group} & \textbf{Gap Description} & \textbf{v1.5 text} & \textbf{Snapshot file} \\
 \midrule
-1 & CVSS captures most impact; NISS adds nuance &
-    13 & Digital-only \\
-2 & CVSS captures exploitability but misses half &
-    31 & Mixed impact \\
-3 & CVSS fundamentally cannot express primary impact &
-    64 & Neural-dominant \\
+1 & CVSS captures most impact; NISS adds nuance        & 13 & 14 \\
+2 & CVSS captures exploitability but misses part of the impact & 31 & 30 \\
+3 & CVSS cannot express the primary impact             & 64 & 59 \\
+--- & No gap group assigned                            & 1  & 6 \\
 \midrule
-  & \textbf{Techniques needing NISS extension} & \textbf{108} & \textbf{99.1\%} \\
+  & \textbf{Groups 1--3} & \textbf{\SnapshotGapTechniques{} (\SnapshotGapPercent\%)} & \textbf{103 (94.5\%)} \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-Group~3---where CVSS fundamentally cannot express the primary impact---contains
-the majority of techniques (58.7\%). These are attacks where the most severe
-consequence is biological tissue damage, cognitive coercion, or irreversible
-neural harm---dimensions for which CVSS has no metric.
+The v1.5 counts could not be reproduced from the registry file committed with that
+version, which gives 59 techniques (54.1\%) in Group~3 and 103 (94.5\%) in any group; this
+revision uses the reproducible counts in its text and retains the published ones in the
+table for the record. Group~1 techniques are mostly captured by CVSS, so the share that
+\emph{needs} NISS is better read as Groups~2 and~3, 89 techniques (81.7\%). In Group~3 the
+most severe consequence is tissue damage, disruption of neural function or lasting
+harm---dimensions for which CVSS has no metric. Live: \LiveGapTechniques{} of
+\LiveTechniques{} (\LiveGapPercent\%) carry a gap group.
 
 \subsection{Extension Metrics}
 
@@ -80,9 +81,9 @@ C & Critical & 10.0 & Life-threatening or permanently disabling neural harm \\
 
 \subsubsection{CR: Cognitive Reconnaissance}
 
-Degree of unauthorized cognitive read access---thought decoding, neural data
-inference, intent extraction, memory readout. CVSS has no concept of thought
-privacy or cognitive surveillance. CR maps to the Cognitive Liberty and Mental
+Degree of unauthorised read access: decoding of speech or motor intent by models trained
+on a cooperating user, inference from neural data, intent extraction. CVSS treats such
+reads only as loss of data confidentiality. CR maps to the Cognitive Liberty and Mental
 Privacy neurorights dimensions.
 
 \begin{table}[H]
@@ -94,8 +95,8 @@ Privacy neurorights dimensions.
 \midrule
 N & None     & 0.0  & No cognitive read access \\
 L & Low      & 3.3  & Partial intent inference, coarse emotional state detection \\
-H & High     & 6.7  & Full thought decoding, identity inference, or detailed neural data extraction \\
-C & Critical & 10.0 & Complete cognitive surveillance---all neural activity readable in real time \\
+H & High     & 6.7  & Decoding of intent, identity inference, or detailed neural data extraction \\
+C & Critical & 10.0 & Sustained, broad inference from neural data in real time \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -195,12 +196,14 @@ binary indicator triggered when:
 \end{cases}
 \end{equation}
 
-A PINS flag mandates immediate safety review regardless of overall score.
-Across all 109 techniques, 33 are PINS-flagged (30.3\%).
+A PINS flag calls for safety review regardless of overall score. In the snapshot, 33 of
+\SnapshotTechniques{} techniques are PINS-flagged (30.3\%); in the live registry,
+\LivePinsFlagged{} of the \LiveNissScored{} scored techniques are.
 
 \subsection{Scoring Formula}
 
-The NISS score is computed as the weighted mean of the six metric scores:
+The NISS score is computed as the weighted mean of the six metric scores, rounded up to
+one decimal place:
 
 \begin{equation}
 \text{NISS} = \frac{w_{\text{BI}} \cdot \text{BI} + w_{\text{CR}} \cdot \text{CR} + w_{\text{CD}} \cdot \text{CD} + w_{\text{CV}} \cdot \text{CV} + w_{\text{RV}} \cdot \text{RV} + w_{\text{NP}} \cdot \text{NP}}
@@ -215,18 +218,21 @@ metric into Cognitive Reconnaissance (CR) and Cognitive Disruption (CD) in v1.1
 does not inflate the cognitive dimension's influence: at $0.5 + 0.5 = 1.0$ out of
 a total weight sum of~5.0, cognition retains its original 20\% share from the
 five-metric v1.0 formula. The CR/CD split reflects the fundamental distinction
-between read attacks (thought decoding, surveillance) and write attacks
+between read attacks (inference from neural data) and write attacks
 (perception manipulation, cognitive coercion)---attack vectors with different
 mitigations that map to different neurorights dimensions.
 NISS supports four context profiles with differential weights that override
 the default normalization:
 
 \begin{itemize}
-  \item \textbf{Clinical}: Emphasizes BI, RV, and NP (patient safety focus)
-  \item \textbf{Research}: Emphasizes CR and CV (consent and cognition focus)
-  \item \textbf{Consumer}: Emphasizes CR and CV (privacy and consent focus)
-  \item \textbf{Military}: Emphasizes BI, CR, and CD (dual-use concern)
+  \item \textbf{Clinical}: BI, CD and RV at 2.0, others at 1.0
+  \item \textbf{Research}: CR and CV at 2.0, CD and NP at 1.5
+  \item \textbf{Consumer}: CR and CV at 2.0, others at 1.0
+  \item \textbf{Military}: BI, CR and CD at 2.0, RV and NP at 1.5, CV at 0.5
 \end{itemize}
+
+\noindent All stored scores use the default weights. The military profile halves the
+weight of consent, a choice with ethical content that has not been reviewed.
 
 \subsection{Vector Format}
 
@@ -242,14 +248,52 @@ This dual-vector architecture means security teams can triage using familiar CVS
 scores while BCI-specific teams see the neural dimensions that determine whether a
 vulnerability is a software bug or a patient safety emergency.
 
+\subsection{Scoring States and Stated Limits}
+\label{sec:niss-limits}
+
+A NISS score is six judgements about impact. Scoring a technique whose sources support only
+one of them means inventing the other five, so the registry now distinguishes three
+\emph{scoring states}:
+
+\begin{itemize}
+  \item \textbf{Scored}: all six metrics are supported by the technique's sources
+        (\LiveNissScored{} live techniques; these were scored before the rule was
+        introduced and have not yet been re-examined against it).
+  \item \textbf{Provisional}: some metrics are supported; the record stores those
+        values, a source for each, and the lowest and highest score the formula could
+        return (\LiveNissProvisional{}). A range of 0.4 to 9.4 says that one metric is
+        known and five are not; it is a bound, not an estimate, and not a severity.
+  \item \textbf{Unscored}: no peer-reviewed source, or no metric supported
+        (\LiveNissUnscored{}).
+\end{itemize}
+
+\noindent Read the scoring state before the score. Three limits follow from the formula and
+the data:
+
+\begin{enumerate}
+  \item \textbf{Impact only.} NISS has no likelihood term, so a technique with several
+        disclosed vulnerabilities can score low.
+  \item \textbf{Read-only harm cannot exceed 3.0.} With CR at Critical, CV at Implicit
+        and nothing physical, the score is $(0.5 \cdot 10 + 10)/5 = 3.0$. NISS therefore
+        rates every pure privacy-and-consent harm as low, whatever its scale. This is a
+        property of the default weights, and it is the clearest reason to report the
+        vector, not only the number.
+  \item \textbf{No calibration or inter-rater study.} The levels were assigned by one
+        author with AI assistance (Section~\ref{sec:limitations}).
+\end{enumerate}
+
+\noindent NISS scores signal-level interference with a person's neural function and the
+consent under which it occurs; it does not measure mental states, and a score is not a
+clinical or legal finding. Whether NISS should be reported as a single number or as its
+vector with the PINS flag is an open question.
+
 \subsection{NISS Severity Distribution}
 
-Across all 109 techniques, the NISS severity distribution differs markedly from
-CVSS severity:
+The NISS severity distribution in the snapshot, as published in v1.5:
 
 \begin{table}[H]
 \centering
-\caption{NISS severity distribution (all 109 techniques).}
+\caption{NISS severity distribution (\SnapshotTechniques{} snapshot techniques, as published in v1.5).}
 \label{tab:niss-severity}
 \small
 \begin{tabular}{@{}l r r@{}}
@@ -264,20 +308,11 @@ None     &  1 &  0.9\% \\
 \end{tabular}
 \end{table}
 
-The NISS distribution is more uniform than CVSS because NISS captures impact
-dimensions that CVSS flattens into high/critical. Techniques rated ``high'' by
-CVSS may distribute across low, medium, and high NISS scores depending on whether
-they involve biological tissue damage or are purely digital.
+The registry file committed with v1.5 gives 21 high, 37 medium, 50 low and 1 none, and
+several of its stored scores do not reproduce from Equation~\ref{eq:niss}; the live scores
+do. The NISS distribution sits lower than the filed severity (Table~\ref{tab:severity})
+because NISS separates purely digital impact from impact on a person.
 
-Figure~\ref{fig:niss-gap} visualizes the gap between CVSS and NISS scoring.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\textwidth]{figures/niss-gap.pdf}
-  \caption{CVSS v4.0 vs.\ NISS gap analysis: 99.1\% of techniques require
-  extension metrics CVSS cannot express.}
-  \label{fig:niss-gap}
-\end{figure}
 
 \subsection{Neurological Extension (v1.1)}
 
