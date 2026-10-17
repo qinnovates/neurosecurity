@@ -30,7 +30,7 @@ The datasets behind all three are open, with a device inventory of 68 companies 
 > - **Checked so far.** AI agents with specialist briefs reviewed the framework's claims, and this version reports which held and which did not. Every DOI, arXiv identifier and regulatory record cited in Sections 20–28 was resolved through Crossref, the arXiv API or a regulator database. Company, news, legal and reference-work sources are cited by link and were not resolved that way, and Sections 24.9 and 27.8 state how far the papers themselves were read. The band check and the SDK tests pass. The route publishing gate fails on one hop of a route marked for teaching.
 > - **Not reviewed.** **No human neuroanatomist has reviewed the anatomy, and the author's own review of Sections 20–28 and Appendix E is pending.** No patient or patient advocate has reviewed the paper, including the part written for them.
 > - **AI assistance.** Sections 20–28 and Appendix E were drafted with AI assistance on 2026-10-06 and 2026-10-07. So was this opening, which is also pending the author's review. Earlier AI use is described under Claims and Disclaimers.
-> - **Release status.** This draft describes a catalogue that is not yet the published one. The draft's catalogue (registrar 4.3: 173 techniques and 1 variant) is in an unmerged working tree, with the hazards dataset and the inventory of 68 companies and 71 devices. The published catalogue (the repository's main branch, `/api/tara.json` and PyPI `qtara` 0.3.0) is registrar 4.0, with 176 techniques, 67 companies, 70 devices and no hazards file. The draft's air-gap and silent-speech techniques were renumbered QIF-T0177 and QIF-T0178 on 2026-10-17, because QIF-T0172 and QIF-T0173 are published for different techniques; the two catalogues still record sub-techniques differently. Every count in this paper refers to the draft catalogue. The two must be reconciled before release.
+> - **Release status.** This draft describes a catalogue that is not yet the published one. The draft's catalogue (registrar 4.3: 173 techniques and 1 variant) is committed on a branch, with the hazards dataset and the inventory of 68 companies and 71 devices. The published catalogue (the repository's main branch and `/api/tara.json`) is registrar 4.0, with 176 techniques, 67 companies, 70 devices and no hazards file; its PyPI package, `qtara`, reached 0.4.0 on 2026-10-17 and is now deprecated, with no further releases planned. The draft's air-gap and silent-speech techniques were renumbered QIF-T0177 and QIF-T0178 on 2026-10-17, because QIF-T0172 and QIF-T0173 are published for different techniques; the two catalogues still record sub-techniques differently. Every count in this paper refers to the draft catalogue. The two must be reconciled before release.
 > - **How to read it.** Sections are numbered 20 to 28 because the numbering continues from v8.0. Sections 12 to 19 are in the companion document. The NISS scoring method is set out in full in Section 27.3.
 > - **How to respond.** Send corrections, evidence and reviews through [GitHub Issues](https://github.com/qinnovates/neurosecurity/issues). Section 28.7 lists what would help from each kind of reader.
 
@@ -893,7 +893,7 @@ Three ethical commitments are fixed in that arithmetic.
 - NISS scores impact only. It has no term for likelihood or ease of attack, so a technique with several disclosed CVEs can score low. It is meant to sit beside an exploitability score such as CVSS, not to replace one.
 - A technique that only reads cannot score above 3.0. With unauthorised reading at Critical and consent violation at Involuntary, and nothing physical, the score is 15 divided by 5. NISS therefore rates every pure privacy and consent harm as low, whatever its scale.
 - No inter-rater or calibration study exists. The levels were assigned by one author with AI assistance.
-- The catalogue also carries an older `severity` field that was filed by hand. It agrees with the NISS severity on 30 of the 129 scored techniques, and the published SDK and STIX export show 32 techniques as critical under it where NISS rates none critical. Do not read that field as a NISS result.
+- The draft catalogue also carries an older `severity` field that was filed by hand. It agrees with the NISS severity on 30 of the 129 scored techniques. Do not read that field as a NISS result. The published catalogue's `severity` field was changed on 2026-10-17 to be derived from NISS directly (critical 3, high 29, medium 75, low 68, none 1); it no longer disagrees with NISS by construction.
 
 Whether NISS should be reported as a single number or as its six-metric vector with the safety flag is an open question raised in review (Section 28.3).
 
@@ -1011,7 +1011,7 @@ Two kinds of work remain. The first is the author's own and gates release:
 1. Reconcile this catalogue with the published one and freeze identifiers so that none is reused.
 2. Complete the author's review of Sections 20–28, Appendix E and the opening.
 3. Issue a new version of the Zenodo preprint: the abstract of every existing version says that no security framework exists, which this paper's own rules do not allow.
-4. Correct known data errors, including a source attributed to the wrong first author on QIF-T0137 and cochlear implants addressed to neocortex in the atlas.
+4. Correct remaining known data errors, including cochlear implants addressed to neocortex in the atlas. (The QIF-T0137 source misattribution is fixed: it now cites Chen et al. 2018.)
 5. Run the band check, the route gate and a score recomputation in continuous integration.
 6. Decide whether NISS is reported as a single number or as a vector with the safety flag.
 
@@ -1046,7 +1046,7 @@ Step 4 waits on step 3, because offering unreviewed material to a standards body
 
 The mission includes making neurosecurity and neuroengineering more accessible. Four things in the repository serve that aim today.
 
-- **Open data and an SDK.** The published catalogue is served at [`/api/tara.json`](https://qinnovate.com/api/tara.json) with no authentication, and as a STIX 2.1 bundle at [`/api/stix.json`](https://qinnovate.com/api/stix.json). `pip install qtara` gives programmatic access. The catalogue endpoint and the PyPI package currently carry registrar 4.0 with 176 techniques. The STIX bundle, as fetched on 2026-10-09, holds 167 techniques and omits QIF-T0166 to QIF-T0174. None of the three is the version this paper describes, which exists as machine-readable JSON in the working tree.
+- **Open data.** The published catalogue is served at [`/api/tara.json`](https://qinnovate.com/api/tara.json) with no authentication, and as a STIX 2.1 bundle at [`/api/stix.json`](https://qinnovate.com/api/stix.json). The PyPI package, `qtara`, reached 0.4.0 on 2026-10-17 and is now deprecated with no further releases planned; its README points readers to the STIX endpoint instead. The catalogue endpoint and the final PyPI release carry registrar 4.0 with 176 techniques. The STIX bundle, as fetched on 2026-10-09, held 167 techniques and omitted QIF-T0166 to QIF-T0174; it has not been re-fetched since. None of these is the version this paper describes, which exists as machine-readable JSON in the working tree.
 - **A learning module on the site.** The site describes learning modules a newcomer can walk through, with separate modules for TARA and NISS.
 - **The addressing model as a way in for engineers.** With seven codes, N1–N7, and a proposed periphery code (PER), each with a membership rule, an engineer can tag what a device touches without first learning neuroanatomy. The number carries no severity, processing or traversal meaning.
 - **Plain-language material.** The About page tells the origin of the work in the author's own voice. Each section of this paper opens with a key takeaway and states what each type of reader should do.
@@ -1118,7 +1118,7 @@ Changes made on 2026-10-06 and 2026-10-07, with the neuroethics block added on 2
 - Fourteen conclusions that rested on the gating analogy marked under review.
 
 **Registrar (4.0 → 4.3)**
-- Eight techniques added, QIF-T0166 to T0173.
+- Eight techniques added: QIF-T0166 to T0171, and QIF-T0177 and T0178 (renumbered from T0172 and T0173 on 2026-10-17, since those ids are published for different techniques).
 - Variants introduced; QIF-T0024-V01 filed.
 - New fields added: `peer_review_status`, `defensive_sources`, `niss.scoring_state`.
 - Ten techniques lost their score and one lost its status under the evidence rule; 24 gained a verified source.
