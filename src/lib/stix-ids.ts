@@ -2,7 +2,7 @@
  * Deterministic STIX identifiers for TARA techniques and variants.
  *
  * The scheme is the one the Python SDK uses in datalake/qtara/src/qtara/stix.py, so the site
- * export (/api/stix.json) and the SDK export (`qtara stix`) give the same id to the same entry:
+ * export (the retired /api/stix.json) and the SDK export (`qtara stix`) give the same id to the same entry:
  * UUIDv5 (RFC 4122, SHA-1 name-based) in the DNS namespace over `qif.tara.<entry id>`.
  * Both sides are pinned to datalake/qtara/tests/fixtures/stix_ids.json by their test suites.
  *
