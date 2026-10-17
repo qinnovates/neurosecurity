@@ -240,7 +240,7 @@ Limits:
 
 ### Where this fits in what you already file
 
-The registrar carries one regulatory field, `regulatory.fdora_524b`. It is present on 135 of the 173 techniques. The 38 without it are QIF-T0136 to QIF-T0173. Each entry holds:
+The registrar carries one regulatory field, `regulatory.fdora_524b`. It is present on 135 of the 173 techniques. The 38 without it are QIF-T0136 to QIF-T0171, QIF-T0177 and QIF-T0178. Each entry holds:
 
 - `cyber_device`: true on 68, false on 67.
 - `prongs`: `software` (true on 74), `network_connectable` (true on 109), `vulnerable` (true on all 135).
@@ -2041,7 +2041,7 @@ v8.0 stands on its own as this document. The items below are follow-on publishin
 
 **Open questions.** What would change status or score: a documented incident or a peer-reviewed study on a neural-decoder pipeline. Staged vector held: BI:L/CR:N/CD:H/CV:P/RV:T/NP:N, 2.7. Its BI and RV values were themselves marked as projected worst cases in staging.
 
-##### QIF-T0172. Air-gap covert channel exfiltration (malware-modulated physical emanations)
+##### QIF-T0177. Air-gap covert channel exfiltration (malware-modulated physical emanations)
 
 | | |
 |---|---|
@@ -2062,7 +2062,7 @@ v8.0 stands on its own as this document. The items below are follow-on publishin
 
 **Open questions.** What would change status or score: a peer-reviewed demonstration on BCI hardware. The general-computing papers the review cites were not extracted or verified in this refresh. Verifying one would give the technique a peer-reviewed source for the mechanism but, being non-neural, would leave it THEORETICAL under the rubric. Staged vector held: BI:N/CR:L/CD:N/CV:I/RV:F/NP:N, 2.4.
 
-##### QIF-T0173. Peripheral silent-speech readout (in-ear and around-ear sensing of subtly voiced or unvoiced articulation)
+##### QIF-T0178. Peripheral silent-speech readout (in-ear and around-ear sensing of subtly voiced or unvoiced articulation)
 
 | | |
 |---|---|

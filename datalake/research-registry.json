@@ -3665,7 +3665,7 @@
         "bagley2024mathematicalframework",
         "bagley2026threatvectors"
       ],
-      "qifRelevance": "C134: Whitepaper v9 Sections 23.1, 23.2 and 26: the Cognitive Neurosecurity framework and its 'cogit' construct; the starting point of the Section 26 projections. Cited at version 4 (2025-01-26). Preprint, not peer reviewed; the whitepaper states it reports no experiments. C135: Whitepaper v9 Sections 21.7 and 23.3: review of threat vectors and defences in neurotechnology. Cited in sources by QIF-T0166, QIF-T0170, QIF-T0171, QIF-T0172. Preprint, not peer reviewed.",
+      "qifRelevance": "C134: Whitepaper v9 Sections 23.1, 23.2 and 26: the Cognitive Neurosecurity framework and its 'cogit' construct; the starting point of the Section 26 projections. Cited at version 4 (2025-01-26). Preprint, not peer reviewed; the whitepaper states it reports no experiments. C135: Whitepaper v9 Sections 21.7 and 23.3: review of threat vectors and defences in neurotechnology. Cited in sources by QIF-T0166, QIF-T0170, QIF-T0171, QIF-T0177. Preprint, not peer reviewed.",
       "tags": [
         "whitepaper-source",
         "preprint"
