@@ -7,7 +7,8 @@
     "notes": [
       "DSM associations are diagnostic category references for threat modeling purposes, not diagnostic claims.",
       "QIF band assignments are inferred from framework ring model (05-PROPOSED-MODEL.md), not formally assigned.",
-      "BCI relevance ratings reflect current device landscape, not theoretical potential."
+      "BCI relevance ratings reflect current device landscape, not theoretical potential.",
+      "dsm_conditions holds ICD-10-CM chapter F codes only; codes outside chapter F are in icd10_conditions. Each coded entry's condition is the code's official ICD-10-CM FY2027 title. Header (non-billable) codes are category references and are marked kind 'category' in datalake/validation/icd10cm-fy2027-titles.json. Entries without a code are unchanged."
     ]
   },
   "cranial_nerves": [
@@ -33,11 +34,12 @@
       "bci_devices": [],
       "bci_notes": "No current approved BCI interfaces. Experimental olfactory prosthetics at research stage. Direct limbic connection makes this a theoretically high-value target for neuromodulation research.",
       "dsm_conditions": [
-        {"code": "F20.x", "condition": "Schizophrenia", "association": "Olfactory identification deficits consistently documented (acuity threshold preserved)"},
-        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Reduced olfactory sensitivity"},
-        {"code": "F41.x", "condition": "Anxiety disorders", "association": "Olfactory dysfunction associated"},
-        {"code": "F31.x", "condition": "Bipolar disorder", "association": "Olfactory dysfunction associated"}
+        {"code": "F20", "condition": "Schizophrenia", "association": "Olfactory identification deficits consistently documented (acuity threshold preserved)"},
+        {"code": "F32", "condition": "Depressive episode", "association": "Reduced olfactory sensitivity"},
+        {"code": "F41", "condition": "Other anxiety disorders", "association": "Olfactory dysfunction associated"},
+        {"code": "F31", "condition": "Bipolar disorder", "association": "Olfactory dysfunction associated"}
       ],
+      "icd10_conditions": [],
       "dsm_source": "PMC9875195",
       "clinical_notes": "Anosmia from head trauma (shearing of olfactory fila at cribriform plate), viral infections (COVID-19), or neurodegenerative disease. Olfactory groove meningioma can compress olfactory bulb/tract. Phantosmia (olfactory hallucinations) indicates temporal lobe epilepsy. Direct cortical projection without thalamic relay (unique among cranial nerves)."
     },
@@ -86,8 +88,9 @@
       ],
       "bci_notes": "The optic nerve/retinal pathway is one of the most mature BCI targets clinically. Retinohypothalamic tract (ipRGCs with melanopsin/OPN4) also drives circadian regulation via SCN.",
       "dsm_conditions": [
-        {"code": "F20.x", "condition": "Schizophrenia", "association": "Retinal ganglion cell thinning documented; correlates with visual hallucination severity. Glutamate NMDA receptor hypofunction hypothesis implicates the RGC-visual pathway."}
+        {"code": "F20", "condition": "Schizophrenia", "association": "Retinal ganglion cell thinning documented; correlates with visual hallucination severity. Glutamate NMDA receptor hypofunction hypothesis implicates the RGC-visual pathway."}
       ],
+      "icd10_conditions": [],
       "dsm_source": "PubMed 31353068",
       "clinical_notes": "Optic neuritis (inflammation, associated with MS demyelination). Papilledema (disc swelling from raised ICP). Visual field defects: monocular blindness (optic nerve), bitemporal hemianopia (chiasm compression, e.g. pituitary adenoma), contralateral homonymous hemianopia (optic tract/radiation lesions). Technically a CNS tract (myelinated by oligodendrocytes, not Schwann cells)."
     },
@@ -111,10 +114,11 @@
       "bci_devices": [],
       "bci_notes": "Eye-tracking BCIs exploit CN III-mediated eye movements. Pupillometry used in closed-loop neuromodulation research to track arousal/cognitive load.",
       "dsm_conditions": [
-        {"code": "F90.x", "condition": "ADHD", "association": "Convergence insufficiency associated (shared attention network)"},
-        {"code": "F20.x", "condition": "Schizophrenia", "association": "Pupillary hyporeactivity studied as biomarker (inferred from literature)"},
-        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Pupillary hyporeactivity studied as biomarker (inferred from literature)"}
+        {"code": "F90", "condition": "Attention-deficit hyperactivity disorders", "association": "Convergence insufficiency associated (shared attention network)"},
+        {"code": "F20", "condition": "Schizophrenia", "association": "Pupillary hyporeactivity studied as biomarker (inferred from literature)"},
+        {"code": "F32", "condition": "Depressive episode", "association": "Pupillary hyporeactivity studied as biomarker (inferred from literature)"}
       ],
+      "icd10_conditions": [],
       "dsm_source": "Inferred from neuropsychiatric literature",
       "clinical_notes": "CN III palsy: ptosis, eye 'down and out' (unopposed CN IV/VI), fixed dilated pupil. Pupil-involving CN III palsy is a neurosurgical emergency (posterior communicating artery aneurysm). Pupil-sparing CN III palsy: typically diabetic microvascular disease."
     },
@@ -138,6 +142,7 @@
       "bci_devices": [],
       "bci_notes": "Minimal direct BCI interface. Trochlear nucleus used as landmark in deep brainstem electrode placement research.",
       "dsm_conditions": [],
+      "icd10_conditions": [],
       "dsm_source": "No direct DSM association. Diplopia may precipitate anxiety and functional limitations.",
       "clinical_notes": "CN IV palsy: vertical diplopia, worse when looking down and inward. Patient compensates by head tilt away from lesion side (Bielschowsky sign). Most common cause of acquired vertical diplopia in adults. Only cranial nerve that exits dorsally and decussates completely. Longest intracranial course of any cranial nerve."
     },
@@ -178,10 +183,11 @@
       ],
       "bci_notes": "One of the most BCI-relevant cranial nerves outside of CN X. eTNS mechanism works through V1 activation of NTS and locus coeruleus pathways.",
       "dsm_conditions": [
-        {"code": "F32.x", "condition": "Major depressive disorder", "association": "High comorbidity with trigeminal neuralgia (chronic pain models)"},
-        {"code": "F41.x", "condition": "Anxiety disorders", "association": "High comorbidity with trigeminal neuralgia. CGRP pathway involvement in migraine linked to anxiety and depression."},
-        {"code": "F45.x", "condition": "Somatoform disorders", "association": "Orofacial pain associated"}
+        {"code": "F32", "condition": "Depressive episode", "association": "High comorbidity with trigeminal neuralgia (chronic pain models)"},
+        {"code": "F41", "condition": "Other anxiety disorders", "association": "High comorbidity with trigeminal neuralgia. CGRP pathway involvement in migraine linked to anxiety and depression."},
+        {"code": "F45", "condition": "Somatoform disorders", "association": "Orofacial pain associated"}
       ],
+      "icd10_conditions": [],
       "dsm_source": "Published neuropsychiatric literature; Molecular Psychiatry 2023",
       "clinical_notes": "Trigeminal neuralgia: lancinating facial pain, V2/V3 distribution, often from vascular compression of nerve root. Herpes zoster ophthalmicus: VZV reactivation in V1 (Gasserian ganglion). Corneal reflex loss: early sign of CN V damage or pontine lesion."
     },
@@ -205,8 +211,9 @@
       "bci_devices": [],
       "bci_notes": "Gaze-tracking BCIs depend on coordinated CN III/IV/VI function. Abducens nucleus is a key node in horizontal gaze control networks used in several BCI paradigms.",
       "dsm_conditions": [
-        {"code": "F10.x", "condition": "Alcohol use disorder", "association": "Wernicke-Korsakoff syndrome (thiamine deficiency) causes CN VI palsy. Persistent diplopia may precipitate depression and anxiety."}
+        {"code": "F10", "condition": "Alcohol related disorders", "association": "Wernicke-Korsakoff syndrome (thiamine deficiency) causes CN VI palsy. Persistent diplopia may precipitate depression and anxiety."}
       ],
+      "icd10_conditions": [],
       "dsm_source": "Inferred from neuropsychiatric literature",
       "clinical_notes": "CN VI palsy: horizontal diplopia, worse at distance; eye cannot abduct past midline. False localizing sign: raised ICP can stretch long intracranial course, causing CN VI palsy not indicative of pontine lesion. Wernicke encephalopathy (thiamine deficiency): CN VI palsy + gaze palsy."
     },
@@ -232,11 +239,12 @@
       "bci_devices": [],
       "bci_notes": "Facial EMG used in assistive communication BCIs for locked-in syndrome. Chorda tympani taste pathway researched for electrogustatory BCI. Facial nerve stimulators exist for Bell's palsy rehabilitation.",
       "dsm_conditions": [
-        {"code": "F32.x", "condition": "Major depressive disorder", "association": "High comorbidity with Bell's palsy (facial disfigurement/expression loss)"},
-        {"code": "F40.1", "condition": "Social anxiety disorder", "association": "Bell's palsy comorbidity"},
+        {"code": "F32", "condition": "Depressive episode", "association": "High comorbidity with Bell's palsy (facial disfigurement/expression loss)"},
+        {"code": "F40.1", "condition": "Social phobias", "association": "Bell's palsy comorbidity"},
         {"code": "F45.22", "condition": "Body dysmorphic disorder", "association": "Can be triggered by Bell's palsy"},
-        {"code": "F43.1", "condition": "PTSD", "association": "Hyperacusis associated with decreased sound tolerance in PTSD and anxiety disorders"}
+        {"code": "F43.1", "condition": "Post-traumatic stress disorder (PTSD)", "association": "Hyperacusis associated with decreased sound tolerance in PTSD and anxiety disorders"}
       ],
+      "icd10_conditions": [],
       "dsm_source": "Published neuropsychiatric literature",
       "clinical_notes": "Bell's palsy: idiopathic unilateral facial palsy (LMN), all branches affected, associated with HSV-1 reactivation in geniculate ganglion. Ramsay Hunt syndrome: VZV reactivation in geniculate ganglion (facial palsy + ear vesicles + SNHL). Central (UMN) facial palsy: lower face only (forehead spared)."
     },
@@ -291,12 +299,13 @@
       ],
       "bci_notes": "Most clinically mature BCI interface for any cranial nerve. Galvanic vestibular stimulation (GVS) is a non-invasive research tool applied transcutaneously at mastoid.",
       "dsm_conditions": [
-        {"code": "F20.x", "condition": "Schizophrenia", "association": "Auditory hallucinations involve central auditory processing pathway (superior temporal gyrus, Heschl's gyrus); CN VIII is the peripheral gateway"},
-        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Tinnitus strongly associated"},
+        {"code": "F20", "condition": "Schizophrenia", "association": "Auditory hallucinations involve central auditory processing pathway (superior temporal gyrus, Heschl's gyrus); CN VIII is the peripheral gateway"},
+        {"code": "F32", "condition": "Depressive episode", "association": "Tinnitus strongly associated"},
         {"code": "F41.1", "condition": "Generalized anxiety disorder", "association": "Tinnitus strongly associated"},
-        {"code": "F43.1", "condition": "PTSD", "association": "Hyperacusis and phonophobia"},
-        {"code": "F41.0", "condition": "Panic disorder", "association": "Vestibular dysfunction contributes (dizziness, balance anxiety)"}
+        {"code": "F43.1", "condition": "Post-traumatic stress disorder (PTSD)", "association": "Hyperacusis and phonophobia"},
+        {"code": "F41.0", "condition": "Panic disorder [episodic paroxysmal anxiety]", "association": "Vestibular dysfunction contributes (dizziness, balance anxiety)"}
       ],
+      "icd10_conditions": [],
       "dsm_source": "Published neuropsychiatric literature",
       "clinical_notes": "Sensorineural hearing loss (noise, aminoglycosides, presbycusis). Vestibular neuritis (unilateral vestibular loss, vertigo). Acoustic neuroma (vestibular schwannoma). Meniere disease (endolymphatic hydrops, episodic vertigo, fluctuating hearing loss, tinnitus). BPPV (otolith displacement)."
     },
@@ -322,9 +331,10 @@
       "bci_devices": [],
       "bci_notes": "Limited direct BCI interface. Carotid sinus baroreceptor pathway (CN IX -> NTS) relevant to closed-loop cardiovascular neuromodulation research. Implantable carotid body stimulators in trials for heart failure.",
       "dsm_conditions": [
-        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Dysphagia from CN IX/X damage can precipitate depression"},
-        {"code": "F41.x", "condition": "Anxiety disorders", "association": "Glossopharyngeal neuralgia has high comorbidity"}
+        {"code": "F32", "condition": "Depressive episode", "association": "Dysphagia from CN IX/X damage can precipitate depression"},
+        {"code": "F41", "condition": "Other anxiety disorders", "association": "Glossopharyngeal neuralgia has high comorbidity"}
       ],
+      "icd10_conditions": [],
       "dsm_source": "Inferred from neuropsychiatric literature",
       "clinical_notes": "Glossopharyngeal neuralgia: severe lancinating pain in posterior tongue/oropharynx/ear, triggered by swallowing. CN IX lesions: loss of gag reflex afferent arm, loss of posterior tongue taste/sensation. Carotid sinus hypersensitivity: exaggerated baroreceptor response causing syncope. Jugular foramen syndrome (Vernet syndrome): CN IX, X, XI palsy together."
     },
@@ -388,10 +398,12 @@
       ],
       "bci_notes": "Most BCI-active cranial nerve after CN VIII. RESET-RA trial (2025, Nature Medicine): implanted VNS for rheumatoid arthritis. Closed-loop wireless VNS (Mathews et al., 2025, Scientific Reports): heart rate-driven feedback for adaptive neuromodulation. NTS -> hypothalamus -> HPA axis connection is the proposed mechanism for VNS antidepressant effects.",
       "dsm_conditions": [
-        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Vagal afferent pathway to NTS and locus coeruleus is primary neural basis for gut-brain axis dysregulation"},
-        {"code": "F43.1", "condition": "PTSD", "association": "Autonomic dysregulation, HRV reduction"},
+        {"code": "F32", "condition": "Depressive episode", "association": "Vagal afferent pathway to NTS and locus coeruleus is primary neural basis for gut-brain axis dysregulation"},
+        {"code": "F43.1", "condition": "Post-traumatic stress disorder (PTSD)", "association": "Autonomic dysregulation, HRV reduction"},
         {"code": "F41.1", "condition": "Generalized anxiety disorder", "association": "Vagal tone dysregulation"},
-        {"code": "F41.0", "condition": "Panic disorder", "association": "Autonomic dysregulation"},
+        {"code": "F41.0", "condition": "Panic disorder [episodic paroxysmal anxiety]", "association": "Autonomic dysregulation"}
+      ],
+      "icd10_conditions": [
         {"code": "K58", "condition": "Irritable bowel syndrome", "association": "Comorbid with depression/anxiety via gut-brain axis (vagal afferents)"}
       ],
       "dsm_source": "Published neuropsychiatric literature; polyvagal theory (Porges, contested)",
@@ -417,9 +429,10 @@
       "bci_devices": [],
       "bci_notes": "Limited. CN XI monitoring used perioperatively. Sternocleidomastoid EMG has been used as signal source for single-switch BCI in patients with limited motor control.",
       "dsm_conditions": [
-        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Chronic shoulder pain and functional limitation from CN XI palsy can precipitate depression"},
-        {"code": "F45.x", "condition": "Somatic symptom disorder", "association": "CN XI palsy-associated functional limitation"}
+        {"code": "F32", "condition": "Depressive episode", "association": "Chronic shoulder pain and functional limitation from CN XI palsy can precipitate depression"},
+        {"code": "F45", "condition": "Somatoform disorders", "association": "CN XI palsy-associated functional limitation"}
       ],
+      "icd10_conditions": [],
       "dsm_source": "Inferred from neuropsychiatric literature",
       "clinical_notes": "CN XI palsy: most commonly iatrogenic (posterior triangle lymph node biopsy, jugular vein cannulation, carotid endarterectomy). Results in shoulder drop, weakness of shoulder shrug, winging of lower scapula. Jugular foramen tumors can involve CN IX, X, XI simultaneously (Vernet syndrome)."
     },
@@ -451,9 +464,11 @@
       ],
       "bci_notes": "Tongue-machine interfaces (TMI) are being developed as assistive communication devices using tongue electromyography.",
       "dsm_conditions": [
-        {"code": "F32.x", "condition": "Major depressive disorder", "association": "Dysarthria and dysphagia from CN XII damage impact quality of life"},
-        {"code": "F40.1", "condition": "Social anxiety disorder", "association": "Speech impairment from CN XII damage"},
-        {"code": "G47.33", "condition": "Obstructive sleep apnea", "association": "CN XII genioglossus hypotonia is the key muscle dysfunction. OSA linked to depression and major neurocognitive disorder."}
+        {"code": "F32", "condition": "Depressive episode", "association": "Dysarthria and dysphagia from CN XII damage impact quality of life"},
+        {"code": "F40.1", "condition": "Social phobias", "association": "Speech impairment from CN XII damage"}
+      ],
+      "icd10_conditions": [
+        {"code": "G47.33", "condition": "Obstructive sleep apnea (adult) (pediatric)", "association": "CN XII genioglossus hypotonia is the key muscle dysfunction. OSA linked to depression and major neurocognitive disorder."}
       ],
       "dsm_source": "Published neuropsychiatric literature",
       "clinical_notes": "Unilateral CN XII palsy: tongue deviates toward side of lesion on protrusion. Bilateral CN XII palsy: dysarthria, dysphagia, inability to protrude tongue. ALS: hypoglossal nucleus affected, tongue fasciculations and atrophy are diagnostic signs. Obstructive sleep apnea: genioglossus hypotonia during sleep is the key mechanism."

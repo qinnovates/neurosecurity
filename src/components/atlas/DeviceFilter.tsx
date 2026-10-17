@@ -65,7 +65,7 @@ export default function DeviceFilter({ techniques }: Props) {
   }, [techniques, device]);
 
   const sevCounts = useMemo(() => {
-    const counts: Record<Severity, number> = { critical: 0, high: 0, medium: 0, low: 0 };
+    const counts: Record<Severity, number> = { critical: 0, high: 0, medium: 0, low: 0, none: 0 };
     for (const t of filtered) counts[t.severity]++;
     return counts;
   }, [filtered]);
@@ -135,7 +135,7 @@ export default function DeviceFilter({ techniques }: Props) {
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8125rem' }}>
               <thead>
                 <tr>
-                  {['ID', isClinical ? 'Therapeutic Analog' : isBoth ? 'Technique / Analog' : 'Technique', 'Severity', 'NISS', 'Bands'].map(h => (
+                  {['ID', isClinical ? 'Therapeutic Analog' : isBoth ? 'Technique / Analog' : 'Technique', 'Severity (NISS)', 'NISS', 'Bands'].map(h => (
                     <th key={h} style={{
                       padding: '0.5rem 0.625rem', textAlign: 'left', fontWeight: 700,
                       fontSize: '0.625rem', textTransform: 'uppercase', letterSpacing: '0.05em',

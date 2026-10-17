@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-13T17:43:46.048415+00:00",
+    "generated": "2026-10-17T10:29:31.097593+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
-    "total_datasets": 38,
-    "total_rows": 24247
+    "total_datasets": 39,
+    "total_rows": 24334
   },
   "datasets": {
     "techniques": {
@@ -41,8 +41,8 @@
         "consent_tier",
         "notes"
       ],
-      "size_bytes": 44080,
-      "sha256": "f9bb2a65ad888c0f4c93853c17ee5b9b7c6904932890ec69818e14ae7fe4d5c0",
+      "size_bytes": 44107,
+      "sha256": "05f27f85207fa62b635398f580b3a889c63f691a8a6849dcf40684c0b84443e0",
       "compression": "zstd",
       "source": "datalake/parquet/techniques.parquet"
     },
@@ -56,8 +56,8 @@
         "confidence",
         "dsm_type"
       ],
-      "size_bytes": 4063,
-      "sha256": "ec784db0c076963f890498218cd0e310ba8ef02034e0345ab0fa58b62701522e",
+      "size_bytes": 4078,
+      "sha256": "16909c9aecad8d38affbccf40001ab0b373a5ac227c492a6eb6a12e916143c05",
       "compression": "zstd",
       "source": "datalake/parquet/technique_dsm.parquet"
     },
@@ -93,8 +93,8 @@
         "dsm_name",
         "dsm_cluster"
       ],
-      "size_bytes": 22923,
-      "sha256": "08539092e197dccae6e32dcabeb2717f94f22aa9309869311721120694580c19",
+      "size_bytes": 23024,
+      "sha256": "5e93ba074123ea23b170d346c97e24aea51deb9fada862380bd0b4e79d5bb30a",
       "compression": "zstd",
       "source": "datalake/parquet/impact_chains.parquet"
     },
@@ -220,7 +220,7 @@
     },
     "neural_pathways": {
       "rows": 46,
-      "columns": 15,
+      "columns": 17,
       "column_names": [
         "id",
         "name",
@@ -234,18 +234,20 @@
         "bci_relevance",
         "dsm_conditions",
         "dsm_names",
+        "icd10_conditions",
+        "icd10_names",
         "disruption_effects",
         "therapeutic_applications",
         "confidence"
       ],
-      "size_bytes": 18097,
-      "sha256": "bbd6906afe09079af86204dc51a580ac09c1242994300a0373226030c7ef9b8e",
+      "size_bytes": 18788,
+      "sha256": "5f3f8cec6286f49e328a26d9cbe1fba71ec05463a2754240c52284422ba7e0df",
       "compression": "zstd",
       "source": "datalake/parquet/neural_pathways.parquet"
     },
     "neurotransmitters": {
       "rows": 18,
-      "columns": 15,
+      "columns": 16,
       "column_names": [
         "id",
         "name",
@@ -260,11 +262,12 @@
         "primary_qif_bands",
         "primary_regions",
         "dsm_conditions",
+        "icd10_conditions",
         "bci_relevance",
         "confidence"
       ],
-      "size_bytes": 36533,
-      "sha256": "0ebd644a9acc90ee154d0cd7d233d3cb77060af77247bceba4522b433a54c82f",
+      "size_bytes": 37120,
+      "sha256": "1cec91cd3904ff5e4717e130dae8c0ee5a5f498c8acaf35398165964e03a8a8c",
       "compression": "zstd",
       "source": "datalake/parquet/neurotransmitters.parquet"
     },
@@ -281,8 +284,8 @@
         "persistent_personality",
         "non_diagnostic"
       ],
-      "size_bytes": 22861,
-      "sha256": "077e83ff934fcf8eafa021a4635bdf7314dfa50d00d19b9dd88d92080cc8d1e4",
+      "size_bytes": 24082,
+      "sha256": "e8bea1a071d70b2a9c041260700b0aab434b9a9473e20009f487f3667a4a776d",
       "compression": "zstd",
       "source": "datalake/parquet/dsm_clusters.parquet"
     },
@@ -303,14 +306,39 @@
         "niss_affected",
         "confidence"
       ],
-      "size_bytes": 12556,
-      "sha256": "1dff2b8301edb9388538215cf1bcecb311b0f17ef6f82e141a056a85fb101084",
+      "size_bytes": 12561,
+      "sha256": "a8486d30edd5da82b563ceb710ef14a6bc32516d00951d4b13233512dd08cc26",
       "compression": "zstd",
       "source": "datalake/parquet/neurological_conditions.parquet"
     },
+    "severity_anchors": {
+      "rows": 25,
+      "columns": 15,
+      "column_names": [
+        "id",
+        "band",
+        "device_class",
+        "source_ids",
+        "bibkey",
+        "endpoint",
+        "denominator_family",
+        "n",
+        "rate",
+        "rate_value",
+        "rate_unit",
+        "time_base",
+        "finding_direction",
+        "same_cohort_as",
+        "certainty_note"
+      ],
+      "size_bytes": 9292,
+      "sha256": "0cc4a31adf67c13e8cae839eee9079a18f9ee5d43daf1119621edb765f070c61",
+      "compression": "zstd",
+      "source": "datalake/parquet/severity_anchors.parquet"
+    },
     "cranial_nerves": {
       "rows": 12,
-      "columns": 19,
+      "columns": 20,
       "column_names": [
         "id",
         "number",
@@ -329,17 +357,18 @@
         "bci_devices",
         "bci_notes",
         "dsm_conditions",
+        "icd10_conditions",
         "dsm_source",
         "clinical_notes"
       ],
-      "size_bytes": 25266,
-      "sha256": "afe19181c6985735560846a70bc3afde808a5482bc1a0e777a1b0ef558bc03e2",
+      "size_bytes": 26040,
+      "sha256": "7412a08e9df188323aff419afd58ab41ef5f98b59c01e5554d61c74236652f2d",
       "compression": "zstd",
       "source": "datalake/parquet/cranial_nerves.parquet"
     },
     "neuroendocrine": {
       "rows": 7,
-      "columns": 20,
+      "columns": 21,
       "column_names": [
         "id",
         "name",
@@ -356,14 +385,15 @@
         "qif_notes",
         "functions",
         "dsm_conditions",
+        "icd10_conditions",
         "epigenetic_notes",
         "bci_relevance",
         "bci_notes",
         "disruption_effects",
         "confidence"
       ],
-      "size_bytes": 33728,
-      "sha256": "7afcf8c7edd61c34529c996f7d7c186080f40a90c751b58a5887125b503efa3f",
+      "size_bytes": 33939,
+      "sha256": "a7d433e18dae54d4b32160070627b9c060d9c1bfad1993c2cd733b86335f3d97",
       "compression": "zstd",
       "source": "datalake/parquet/neuroendocrine.parquet"
     },
@@ -412,7 +442,7 @@
     },
     "receptors": {
       "rows": 20,
-      "columns": 19,
+      "columns": 20,
       "column_names": [
         "id",
         "name",
@@ -431,11 +461,12 @@
         "function",
         "pharmacological_agents",
         "dsm_conditions",
+        "icd10_conditions",
         "bci_relevance",
         "confidence"
       ],
-      "size_bytes": 43341,
-      "sha256": "e67baecafe9b8ed0cb6ba76ab7256e87c29905dbc53b4b17fffd2aeebd47b6dc",
+      "size_bytes": 43624,
+      "sha256": "40b8127ff84d3d6a5f80468e0d63004cff26d5a128f839b61d915e81d7f848a9",
       "compression": "zstd",
       "source": "datalake/parquet/receptors.parquet"
     },
@@ -499,8 +530,8 @@
         "neuroethics",
         "neurosecurity"
       ],
-      "size_bytes": 7070,
-      "sha256": "85b269972ed69ecf3a31b53261838aefdc516ff75f29dcc910c690908179e29c",
+      "size_bytes": 7496,
+      "sha256": "23e772af936a7b74738a905ac6c9ae7c2d8cc6aabe9991bfd8937c8589427bea",
       "compression": "zstd",
       "source": "datalake/parquet/guardrails.parquet"
     },
@@ -669,7 +700,7 @@
       "source": "datalake/parquet/intake_ledger.parquet"
     },
     "intel_feed": {
-      "rows": 970,
+      "rows": 1032,
       "columns": 10,
       "column_names": [
         "id",
@@ -683,8 +714,8 @@
         "companies",
         "fetched"
       ],
-      "size_bytes": 188739,
-      "sha256": "1c1500e63e8db79eec9e13f32638b0826b04a102234d30a159c992d6a93494c6",
+      "size_bytes": 202026,
+      "sha256": "706c15f94b5133fabc6e7457a1b6f6dcee71f7018aea4a741145b16c998dfd5d",
       "compression": "zstd",
       "source": "datalake/parquet/intel_feed.parquet"
     },
@@ -714,8 +745,8 @@
         "current_stats",
         "milestones"
       ],
-      "size_bytes": 13248,
-      "sha256": "3ec5e560e5f4651bb46daa0466f6870cd0c1d12881eefec0eb58b6a765ac5e4b",
+      "size_bytes": 13348,
+      "sha256": "78da248277f065ec4c9edb7b23171095be3e44069910918b02418a432771970f",
       "compression": "zstd",
       "source": "datalake/parquet/timeline.parquet"
     },

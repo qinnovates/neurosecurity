@@ -9,7 +9,8 @@ export const DEFAULT_EVIDENCE_STATUSES = ['CONFIRMED', 'DEMONSTRATED'] as const;
 /** Strongest first. Statuses not listed here rank below all of these. */
 export const EVIDENCE_STATUS_RANK = ['CONFIRMED', 'DEMONSTRATED', 'EMERGING', 'THEORETICAL'] as const;
 
-export const CATALOG_SEVERITIES = ['critical', 'high', 'medium', 'low'] as const;
+/** Strongest first. 'none' is a NISS score of 0.0 (registrar severity is NISS-derived since 2026-10-16). */
+export const CATALOG_SEVERITIES = ['critical', 'high', 'medium', 'low', 'none'] as const;
 export type CatalogSeverity = typeof CATALOG_SEVERITIES[number];
 
 export type TechniqueMode = 'R' | 'M' | 'D';

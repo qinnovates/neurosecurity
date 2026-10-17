@@ -873,7 +873,7 @@ Validation (simulation only, not clinically validated):
   BrainFlow: 16-channel synthetic board validation
 
 Code: github.com/qinnovates/qinnovate
-PyPI: pip install qtara
+PyPI: qtara (deprecated 2026-10-17; final release 0.4.0. the hosted API was also retired 2026-10-17; use datalake/qtara-registrar.json)
 ```
 
 ---

@@ -4,9 +4,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   ALLOWED_CSP_SOURCES,
+  findFramedAppViolations,
+  findFramedPageViolations,
   findIsolationViolations,
   findPolicyDifferences,
   findToolPageFailures,
+  listFramedDocuments,
 } from '../check-model-page.mjs';
 
 const TEST_DIRECTORY = path.dirname(fileURLToPath(import.meta.url));
@@ -258,5 +261,52 @@ describe('findToolPageFailures', () => {
 
   it('throws with the next step when a listed page was not built', () => {
     expect(() => findToolPageFailures(FIXTURE_DIST, [{ urlPath: '/absent/' }])).toThrow(/Could not read the built page for \/absent\/.*npm run build/);
+  });
+});
+
+describe('listFramedDocuments', () => {
+  it('reads framed pages from the view registry and the app path from the Monitor mode', () => {
+    const registry = "{ id: 'catalog', label: 'Catalog', framedPath: '/atlas/tara/' }, { id: 'own', label: 'Own', framedPath: null }, { id: 'again', label: 'Again', framedPath: '/atlas/tara/' }";
+    const monitor = "const MONITOR_APP_PATH = '/brain-siem/';";
+    expect(listFramedDocuments(registry, monitor)).toEqual({ pages: ['/atlas/tara/'], apps: ['/brain-siem/'] });
+  });
+
+  it('returns nothing when no view is framed', () => {
+    expect(listFramedDocuments("{ id: 'own', framedPath: null }", 'export default function MonitorMode() {}')).toEqual({ pages: [], apps: [] });
+  });
+});
+
+describe('listFramedDocuments, when the Monitor frame cannot be read', () => {
+  it('fails instead of skipping the app', () => {
+    expect(() => listFramedDocuments('', "return <iframe src={SOME_OTHER_NAME} />;")).toThrow(/address was not found/);
+  });
+});
+
+describe('findFramedAppViolations', () => {
+  it('accepts an app that carries the required policy', () => {
+    expect(findFramedAppViolations(buildPage({ head: '<script type="module" src="/brain-siem/assets/index.js"></script>' }))).toEqual([]);
+  });
+
+  it('flags an app with no policy, because a frame does not inherit the page policy', () => {
+    expect(findFramedAppViolations(buildPage({ policy: null }))).toEqual(['no Content-Security-Policy meta tag']);
+  });
+});
+
+describe('findFramedPageViolations', () => {
+  const guardedAnalytics = "<script>(function () { if (window.self !== window.top) return; var beacon = document.createElement('script'); beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js'; })();</script>";
+
+  it('accepts a site page whose analytics is skipped inside a frame', () => {
+    const html = buildPage({ policy: null, head: '<link rel="canonical" href="https://qinnovate.com/atlas/tara/">', body: guardedAnalytics });
+    expect(findFramedPageViolations(html)).toEqual([]);
+  });
+
+  it('flags a site page that would load analytics while framed', () => {
+    const html = buildPage({ policy: null, body: guardedAnalytics.replace('if (window.self !== window.top) return; ', '') });
+    expect(findFramedPageViolations(html)).toEqual(['third-party analytics would load while the page is framed']);
+  });
+
+  it('flags an off-origin stylesheet but not a canonical link', () => {
+    const html = buildPage({ policy: null, head: '<link rel="canonical" href="https://qinnovate.com/x/"><link rel="stylesheet" href="https://fonts.example/a.css">' });
+    expect(findFramedPageViolations(html)).toHaveLength(1);
   });
 });

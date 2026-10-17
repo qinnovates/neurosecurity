@@ -33,8 +33,12 @@ export interface ClinicalPathway {
   targetBands: string[];
   function: string;
   bciRelevance: string;
+  /** ICD-10-CM chapter F codes (DSM-5-TR category references), with official titles */
   dsmCodes: string[];
   dsmNames: string[];
+  /** ICD-10-CM codes outside chapter F (nervous system, eye/ear, symptoms), with official titles */
+  icd10Codes: string[];
+  icd10Names: string[];
   disruptionEffects: string;
   therapeuticApplications: string[];
   confidence: string;
@@ -51,6 +55,7 @@ export interface ClinicalNeurotransmitter {
   receptorIds: string[];
   cofactors: { name: string; role: string; deficiencyEffect: string }[];
   dsmConditions: { code: string; name: string; mechanism: string }[];
+  icd10Conditions: { code: string; name: string; mechanism: string }[];
   bciRelevance: string;
   synthesisSteps: number;
   keyEnzymes: string[];
@@ -67,6 +72,7 @@ export interface ClinicalRegion {
   pathwayIds: string[];
   neurotransmitters: string[];
   dsmCodes: string[];
+  icd10Codes: string[];
   threatCount: number;
   connections: string[];
 }
@@ -115,6 +121,7 @@ export interface ClinicalData {
     neurotransmitters: string[];
     regions: string[];
     dsmCodes: string[];
+    icd10Codes: string[];
     threatCount: number;
   }>;
 }
@@ -136,6 +143,25 @@ let _neurotransmittersCache: ClinicalNeurotransmitter[] | null = null;
 
 // ═══ Helpers ═══
 
+/**
+ * Every condition code a pathway carries: chapter F (dsmCodes) and the rest of
+ * ICD-10-CM (icd10Codes). qif-dsm-mappings.json's clusters list both kinds, so
+ * joins against that table use this, as they used the single field before the split.
+ */
+export function pathwayConditionCodes(p: ClinicalPathway): string[] {
+  return [...p.dsmCodes, ...p.icd10Codes];
+}
+
+interface RawNtCondition {
+  code: string;
+  name: string;
+  mechanism?: string;
+}
+
+function toNtCondition(d: RawNtCondition): ClinicalNeurotransmitter['dsmConditions'][number] {
+  return { code: d.code, name: d.name, mechanism: d.mechanism ?? '' };
+}
+
 function getPathways(): ClinicalPathway[] {
   if (_pathwaysCache) return _pathwaysCache;
   const raw = (pathwayData as any).pathways ?? [];
@@ -152,6 +178,8 @@ function getPathways(): ClinicalPathway[] {
     bciRelevance: p.bci_relevance ?? '',
     dsmCodes: p.dsm_conditions ?? [],
     dsmNames: p.dsm_names ?? [],
+    icd10Codes: p.icd10_conditions ?? [],
+    icd10Names: p.icd10_names ?? [],
     disruptionEffects: p.disruption_effects ?? '',
     therapeuticApplications: p.therapeutic_applications ?? [],
     confidence: p.confidence ?? 'MEDIUM',
@@ -178,11 +206,8 @@ function getNeurotransmitters(): ClinicalNeurotransmitter[] {
       role: c.role,
       deficiencyEffect: c.deficiency_effect ?? '',
     })),
-    dsmConditions: (nt.dsm_conditions ?? []).map((d: any) => ({
-      code: d.code,
-      name: d.name,
-      mechanism: d.mechanism ?? '',
-    })),
+    dsmConditions: (nt.dsm_conditions ?? []).map(toNtCondition),
+    icd10Conditions: (nt.icd10_conditions ?? []).map(toNtCondition),
     bciRelevance: nt.bci_relevance ?? '',
     synthesisSteps: (nt.synthesis_pathway ?? []).length,
     keyEnzymes: (nt.synthesis_pathway ?? []).map((s: any) => s.enzyme_gene).filter(Boolean),
@@ -212,8 +237,9 @@ function getRegions(): ClinicalRegion[] {
       })
       .map((nt) => nt.id);
 
-    // DSM codes from pathways
+    // Condition codes from pathways, chapter F and other ICD-10-CM kept apart
     const dsmCodes = [...new Set(regionPathways.flatMap((p) => p.dsmCodes))];
+    const icd10Codes = [...new Set(regionPathways.flatMap((p) => p.icd10Codes))];
 
     // Threat count
     const band = r.qif_band;
@@ -229,6 +255,7 @@ function getRegions(): ClinicalRegion[] {
       pathwayIds: regionPathways.map((p) => p.id),
       neurotransmitters: regionNTs,
       dsmCodes,
+      icd10Codes,
       threatCount: threats.length,
       connections: r.connections ?? [],
     };
@@ -246,12 +273,12 @@ function getDsmConditions(): ClinicalDsmCondition[] {
     for (const cond of c.conditions ?? []) {
       // Find pathways mentioning this DSM code
       const relPathways = pathways
-        .filter((p) => p.dsmCodes.includes(cond.code))
+        .filter((p) => pathwayConditionCodes(p).includes(cond.code))
         .map((p) => p.id);
 
       // Find neurotransmitters linked to this condition
       const relNTs = nts
-        .filter((nt) => nt.dsmConditions.some((d) => d.code === cond.code))
+        .filter((nt) => [...nt.dsmConditions, ...nt.icd10Conditions].some((d) => d.code === cond.code))
         .map((nt) => nt.id);
 
       // Find regions from band mappings
@@ -301,7 +328,7 @@ function buildImpactChains(): NeuralImpactChain[] {
         .map((r: any) => ({ id: r.id, name: r.name })) ?? [];
 
       // Get DSM conditions linked to these pathways
-      const pathwayDsmCodes = [...new Set(bandPathways.flatMap((p) => p.dsmCodes))];
+      const pathwayDsmCodes = [...new Set(bandPathways.flatMap(pathwayConditionCodes))];
       const dsmMatches = dsmConditions.filter((d) => pathwayDsmCodes.includes(d.code));
 
       if (dsmMatches.length === 0) continue;
@@ -348,6 +375,7 @@ export function getClinicalData(): ClinicalData {
     neurotransmitters: string[];
     regions: string[];
     dsmCodes: string[];
+    icd10Codes: string[];
     threatCount: number;
   }> = {};
 
@@ -360,6 +388,7 @@ export function getClinicalData(): ClinicalData {
     );
     const bandRegions = regions.filter((r) => r.band === band.id);
     const bandDsm = [...new Set(bandPathways.flatMap((p) => p.dsmCodes))];
+    const bandIcd10 = [...new Set(bandPathways.flatMap((p) => p.icd10Codes))];
     const bandThreats = THREAT_VECTORS.filter((t) =>
       t.bands.includes(band.id as BandId)
     );
@@ -369,6 +398,7 @@ export function getClinicalData(): ClinicalData {
       neurotransmitters: bandNTs.map((nt) => nt.id),
       regions: bandRegions.map((r) => r.id),
       dsmCodes: bandDsm,
+      icd10Codes: bandIcd10,
       threatCount: bandThreats.length,
     };
   }

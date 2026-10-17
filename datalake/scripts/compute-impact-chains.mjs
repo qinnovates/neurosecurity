@@ -10,7 +10,8 @@
  * Source data:
  *   - qtara-registrar.json           -> techniques (band_ids, severity, niss)
  *   - qif-brain-bci-atlas.json       -> qif_bands, brain_regions, region_aliases
- *   - qif-neural-pathways.json       -> pathways (origin, targets, dsm_conditions)
+ *   - qif-neural-pathways.json       -> pathways (origin, targets, dsm_conditions,
+ *     icd10_conditions; chapter F codes and all other ICD-10-CM codes respectively)
  *   - qif-dsm-mappings.json          -> diagnostic_clusters
  *   - qif-neurological-mappings.json -> conditions
  *
@@ -118,7 +119,21 @@ function indexConditions(dsm, neuro) {
   return conditionByCode;
 }
 
-function buildChainRow({ technique, bandId, band, region, pathway, match, conditionCode, condition }) {
+/**
+ * A pathway's condition codes with the pathway's own titles: chapter F codes
+ * from dsm_conditions/dsm_names, then every other ICD-10-CM code from
+ * icd10_conditions/icd10_names. Both feed the chain, as the single
+ * dsm_conditions field did before the split.
+ */
+function pathwayConditions(pw) {
+  const pairs = [];
+  for (const [codesKey, namesKey] of [['dsm_conditions', 'dsm_names'], ['icd10_conditions', 'icd10_names']]) {
+    (pw[codesKey] || []).forEach((code, index) => pairs.push({ code, name: (pw[namesKey] || [])[index] }));
+  }
+  return pairs;
+}
+
+function buildChainRow({ technique, bandId, band, region, pathway, match, conditionCode, conditionName, condition }) {
   return {
     technique_id: technique.id,
     technique_name: technique.attack || technique.name,
@@ -133,7 +148,7 @@ function buildChainRow({ technique, bandId, band, region, pathway, match, condit
     pathway_name: pathway.name,
     neurotransmitter: pathway.neurotransmitter || '',
     dsm_code: conditionCode,
-    dsm_name: condition?.name || conditionCode,
+    dsm_name: condition?.name || conditionName || conditionCode,
     dsm_cluster: condition?.cluster || '',
   };
 }
@@ -144,9 +159,9 @@ function buildBandRows(technique, bandId, indexes) {
   const rows = [];
   for (const region of indexes.regionsByBand.get(bandId) ?? []) {
     for (const { pathway, match } of indexes.pathwaysByRegion.get(region.id) ?? []) {
-      for (const conditionCode of pathway.dsm_conditions ?? []) {
+      for (const { code: conditionCode, name: conditionName } of pathwayConditions(pathway)) {
         const condition = indexes.conditionByCode.get(conditionCode);
-        rows.push(buildChainRow({ technique, bandId, band, region, pathway, match, conditionCode, condition }));
+        rows.push(buildChainRow({ technique, bandId, band, region, pathway, match, conditionCode, conditionName, condition }));
       }
     }
   }

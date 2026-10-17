@@ -10,6 +10,10 @@
  * It reads the built HTML only. It cannot see what the scripts do when they run, or
  * anything the host adds to a response after the build.
  *
+ * The page also shows other documents in frames. A frame does not inherit the page's
+ * policy, so each framed document is checked too: a framed app must carry its own
+ * policy, and a framed site page must not load analytics while it is framed.
+ *
  * Usage (after `npm run build`):
  *   node src/scripts/check-model-page.mjs
  */
@@ -37,6 +41,13 @@ export const ALLOWED_CSP_SOURCES = {
   'object-src': ["'none'"],
 };
 
+const BUILT_DIRECTORY = 'dist';
+/** The two source files that declare what the Lab frames. */
+const VIEW_REGISTRY_PATH = 'src/components/workbench/view-registry.ts';
+const MONITOR_MODE_PATH = 'src/components/monitor/MonitorMode.tsx';
+const FRAMED_PAGE_PATTERN = /framedPath:\s*'([^']+)'/g;
+const FRAMED_APP_PATTERN = /MONITOR_APP_PATH\s*=\s*'([^']+)'/;
+
 /** Tags whose attributes make the browser fetch something without a click. */
 const RESOURCE_TAG_PATTERN = /<(script|link|img|iframe|source|video|audio|object|embed|form|track)\b[^>]*>/gi;
 const RESOURCE_ATTRIBUTE_PATTERN = /\b(src|href|data|action|srcset|poster)\s*=\s*("([^"]*)"|'([^']*)')/gi;
@@ -52,15 +63,29 @@ const TAG_NAME_PATTERN = new RegExp(String.raw`<\/?([a-z][a-z0-9-]*)\b${TAG_ATTR
 /** The only elements a head may hold. Any other element, or text, ends the head where it stands. */
 const HEAD_ELEMENTS = ['meta', 'title', 'link', 'style', 'script', 'base', 'noscript', 'template'];
 
+/** A link tag makes a request only for these relations; a canonical or alternate link is an address. */
+const FETCHING_LINK_RELATIONS = ['stylesheet', 'preload', 'modulepreload', 'prefetch', 'preconnect', 'dns-prefetch', 'icon', 'apple-touch-icon', 'manifest'];
+const LINK_RELATION_PATTERN = /\brel\s*=\s*["']([^"']*)["']/i;
+const ANALYTICS_MARKER = 'cloudflareinsights';
+/** The shared layout skips analytics when this test is true, which is the case inside a frame. */
+const FRAMED_GUARD = 'window.self !== window.top';
+
 const FORBIDDEN_MARKERS = [
   { marker: 'astro-view-transitions', reason: 'the soft-navigation router (ClientRouter) is present' },
-  { marker: 'cloudflareinsights', reason: 'third-party analytics is present' },
+  { marker: ANALYTICS_MARKER, reason: 'third-party analytics is present' },
 ];
 
-function findOffOriginResources(html) {
+function isNonFetchingLink(tag) {
+  if (!/^<link\b/i.test(tag)) return false;
+  const relations = (tag.match(LINK_RELATION_PATTERN)?.[1] ?? '').toLowerCase().split(/\s+/);
+  return !relations.some((relation) => FETCHING_LINK_RELATIONS.includes(relation));
+}
+
+function findOffOriginResources(html, { skipNonFetchingLinks = false } = {}) {
   const violations = [];
   for (const tagMatch of html.matchAll(RESOURCE_TAG_PATTERN)) {
     const tag = tagMatch[0];
+    if (skipNonFetchingLinks && isNonFetchingLink(tag)) continue;
     for (const attributeMatch of tag.matchAll(RESOURCE_ATTRIBUTE_PATTERN)) {
       const value = attributeMatch[3] ?? attributeMatch[4] ?? '';
       const candidates = attributeMatch[1].toLowerCase() === 'srcset' ? value.split(',') : [value];
@@ -203,16 +228,83 @@ export function findToolPageFailures(distDirectory = DEFAULT_DIST_DIRECTORY, pag
     .map((violation) => `${urlPath}: ${violation}`));
 }
 
+/**
+ * Site paths the Lab shows in a frame: pages from the view registry, and the separately built Monitor app.
+ * @throws when the Monitor mode has a frame whose address this check cannot find, so a rename fails the build instead of skipping the app
+ */
+export function listFramedDocuments(registrySource, monitorSource) {
+  const pages = [...registrySource.matchAll(FRAMED_PAGE_PATTERN)].map((match) => match[1]);
+  const app = monitorSource.match(FRAMED_APP_PATTERN)?.[1];
+  if (app === undefined && monitorSource.includes('<iframe')) {
+    throw new Error(`${MONITOR_MODE_PATH} shows a frame, but its address was not found. Keep it in a MONITOR_APP_PATH constant so this check can read it.`);
+  }
+  return { pages: [...new Set(pages)], apps: app === undefined ? [] : [app] };
+}
+
+/** A framed app is a separate build with its own scripts, so the browser must hold it to its own policy. */
+export function findFramedAppViolations(html) {
+  return [...findOffOriginResources(html), ...findPolicyViolations(html)];
+}
+
+/**
+ * A framed site page uses the shared layout. This checks what its HTML requests and that
+ * analytics stays off while framed. It cannot see what the page's scripts request later.
+ */
+export function findFramedPageViolations(html) {
+  const violations = findOffOriginResources(html, { skipNonFetchingLinks: true });
+  if (html.includes(ANALYTICS_MARKER) && !html.includes(FRAMED_GUARD)) {
+    violations.push('third-party analytics would load while the page is framed');
+  }
+  return violations;
+}
+
+function readText(filePath, hint) {
+  try {
+    return readFileSync(path.resolve(filePath), 'utf-8');
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    throw new Error(`Could not read ${filePath} (${detail}). ${hint}`);
+  }
+}
+
+function builtPathFor(sitePath) {
+  return path.join(BUILT_DIRECTORY, sitePath, 'index.html');
+}
+
+/**
+ * Checks what the Lab frames: a separately built app carries its own policy; a framed site
+ * page must request nothing off-origin and keep analytics off while framed. Neither is a
+ * tool page in its own right, so neither is in TOOL_PAGES or counted against a byte budget.
+ */
+function findFramedDocumentFailures() {
+  const buildHint = 'Run "npm run build" first.';
+  const framed = listFramedDocuments(
+    readText(VIEW_REGISTRY_PATH, 'The check reads framed views from this file.'),
+    readText(MONITOR_MODE_PATH, 'The check reads the Monitor app path from this file.'),
+  );
+  const results = [
+    ...framed.apps.map((sitePath) => builtPathFor(sitePath)).map((file) => ({ file, violations: findFramedAppViolations(readText(file, buildHint)) })),
+    ...framed.pages.map((sitePath) => builtPathFor(sitePath)).map((file) => ({ file, violations: findFramedPageViolations(readText(file, buildHint)) })),
+  ];
+  return { framed, failures: results.filter((result) => result.violations.length > 0) };
+}
+
 function runCheck() {
-  const failures = findToolPageFailures();
-  if (failures.length > 0) {
+  const toolPageFailures = findToolPageFailures();
+  const { framed, failures: framedFailures } = findFramedDocumentFailures();
+  if (toolPageFailures.length > 0 || framedFailures.length > 0) {
     process.stderr.write('[check-model-page] not isolated:\n');
-    for (const failure of failures) process.stderr.write(`  - ${failure}\n`);
+    for (const failure of toolPageFailures) process.stderr.write(`  - ${failure}\n`);
+    for (const failure of framedFailures) {
+      process.stderr.write(`  - ${failure.file}:\n`);
+      for (const violation of failure.violations) process.stderr.write(`    - ${violation}\n`);
+    }
     process.exitCode = 1;
     return;
   }
   const pageList = TOOL_PAGES.map(({ urlPath }) => urlPath).join(', ');
   process.stdout.write(`[check-model-page] ${pageList}: no off-origin resources, router, or analytics; policy equals the allowed policy.\n`);
+  process.stdout.write(`[check-model-page] framed documents: ${framed.apps.length} app(s) carry their own policy; ${framed.pages.length} site page(s) request nothing off-origin in their HTML and keep analytics off while framed.\n`);
 }
 
 const isRunDirectly = process.argv[1] !== undefined

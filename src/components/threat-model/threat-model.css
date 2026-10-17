@@ -33,6 +33,7 @@
 .tm-badge--high { color: var(--color-severity-high); border-color: var(--color-severity-high); }
 .tm-badge--medium { color: var(--color-severity-medium); border-color: var(--color-severity-medium); }
 .tm-badge--low { color: var(--color-severity-low); border-color: var(--color-severity-low); }
+.tm-badge--none { color: var(--color-text-faint); border-color: var(--color-text-faint); }
 .tm-badge--generated { color: var(--color-accent-primary); border-color: var(--color-accent-primary); }
 .tm-badge--warning { color: var(--color-severity-high); border-color: var(--color-severity-high); }
 

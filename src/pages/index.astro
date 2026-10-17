@@ -63,6 +63,13 @@ const nissExampleMetrics = NISS_METRIC_KEYS.map((key) => ({
   value: CODE_LABELS[key][nissExampleVector[key]],
 }));
 
+// Compute severity breakdown from registrar (build-time)
+const bySeverity: Record<string, number> = { critical: 0, high: 0, medium: 0, low: 0, none: 0 };
+techniques.forEach((t: any) => {
+  const sev = t.niss?.severity || t.severity || 'low';
+  if (bySeverity[sev] !== undefined) bySeverity[sev]++;
+});
+
 // Compute neurorights counts from registrar (build-time)
 const neurorightsCounts: Record<string, number> = { MI: 0, MP: 0, CL: 0, PC: 0, EA: 0 };
 techniques.forEach((t: any) => {

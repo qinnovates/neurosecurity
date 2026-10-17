@@ -1,0 +1,15 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import LabKit from '@/components/lab-kit/LabKit';
+import { loadThreatModelData } from '@/components/threat-model/load-engine-data';
+
+// The same validated data the Lab uses, so every figure on this page is a real one.
+const { engineData, referenceData } = loadThreatModelData();
+---
+<ToolLayout
+  title="TARA Lab kit"
+  description="The design system TARA Lab is built from: type, colour, evidence marks, coverage, filters and tables, shown with the catalog's own data."
+>
+  <LabKit client:only="react" engineData={engineData} referenceData={referenceData} />
+  <noscript><p>This page needs JavaScript. It runs entirely in your browser.</p></noscript>
+</ToolLayout>
