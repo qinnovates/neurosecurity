@@ -61,6 +61,9 @@ class NissData(BaseModel):
     score: float
     severity: str
     pins: bool = False
+    # Shown beside the score; neither changes it (2026-10-16).
+    harm_flag: Optional[bool] = None
+    np_support: Optional[str] = None
     components: Optional[NissComponents] = None
 
 class PhysicsFeasibility(BaseModel):
@@ -132,6 +135,8 @@ class ThreatTechnique(BaseModel):
     sources: List[str] = []
     status: str
     severity: str
+    severity_source: Optional[str] = None  # 'niss' or 'editorial'
+    severity_legacy: Optional[str] = None  # hand label before the NISS-derived one
     ui_category: Optional[str] = None
     notes: Optional[str] = None
     legacy_ids: List[str] = []
@@ -172,4 +177,5 @@ class ThreatTechnique(BaseModel):
 class TaraRegistry(BaseModel):
     version: str
     framework: str
+    generated: Optional[str] = None
     techniques: List[ThreatTechnique] = []
