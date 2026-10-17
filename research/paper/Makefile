@@ -5,11 +5,11 @@ FIGDIR   = figures
 SCRIPTDIR= scripts
 DEPLOY   = ../docs/papers/qif-bci-security-2026.pdf
 
-.PHONY: pdf clean figures deploy
+.PHONY: pdf clean figures deploy stats check-stats
 
-pdf: figures $(MAIN).pdf
+pdf: stats figures $(MAIN).pdf
 
-$(MAIN).pdf: $(MAIN).tex $(wildcard sections/*.tex) references.bib
+$(MAIN).pdf: $(MAIN).tex $(wildcard sections/*.tex) generated/registry-stats.tex references.bib
 	$(TEX) $(MAIN)
 	$(BIB) $(MAIN)
 	$(TEX) $(MAIN)
@@ -19,6 +19,12 @@ deploy: pdf
 	@mkdir -p ../docs/papers
 	cp $(MAIN).pdf $(DEPLOY)
 	@echo "Deployed to $(DEPLOY)"
+
+stats:
+	cd $(SCRIPTDIR) && python3 generate_registry_stats.py
+
+check-stats:
+	cd $(SCRIPTDIR) && python3 generate_registry_stats.py --check
 
 figures:
 	@mkdir -p $(FIGDIR)

@@ -21,13 +21,13 @@ operational context.
 
 \subsection{Gap Analysis: Why CVSS Alone Is Insufficient}
 
-We mapped all 109 TARA techniques to CVSS v4.0 base vectors and classified the
+We mapped all \SnapshotTechniques{} TARA techniques to CVSS v4.0 base vectors and classified the
 results into three gap groups based on how much information CVSS alone fails to
 capture:
 
 \begin{table}[H]
 \centering
-\caption{CVSS v4.0 gap analysis across 109 TARA techniques.}
+\caption{CVSS v4.0 gap analysis across \SnapshotTechniques{} TARA techniques.}
 \label{tab:gap}
 \small
 \begin{tabularx}{\textwidth}{@{}c X r l@{}}
@@ -41,7 +41,7 @@ capture:
 3 & CVSS fundamentally cannot express primary impact &
     64 & Neural-dominant \\
 \midrule
-  & \textbf{Techniques needing NISS extension} & \textbf{108} & \textbf{99.1\%} \\
+  & \textbf{Techniques needing NISS extension} & \textbf{\SnapshotGapTechniques} & \textbf{\SnapshotGapPercent\%} \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -196,7 +196,7 @@ binary indicator triggered when:
 \end{equation}
 
 A PINS flag mandates immediate safety review regardless of overall score.
-Across all 109 techniques, 33 are PINS-flagged (30.3\%).
+Across all \SnapshotTechniques{} techniques, 33 are PINS-flagged (30.3\%).
 
 \subsection{Scoring Formula}
 
@@ -244,12 +244,12 @@ vulnerability is a software bug or a patient safety emergency.
 
 \subsection{NISS Severity Distribution}
 
-Across all 109 techniques, the NISS severity distribution differs markedly from
+Across all \SnapshotTechniques{} techniques, the NISS severity distribution differs markedly from
 CVSS severity:
 
 \begin{table}[H]
 \centering
-\caption{NISS severity distribution (all 109 techniques).}
+\caption{NISS severity distribution (all \SnapshotTechniques{} techniques).}
 \label{tab:niss-severity}
 \small
 \begin{tabular}{@{}l r r@{}}
@@ -274,7 +274,7 @@ Figure~\ref{fig:niss-gap} visualizes the gap between CVSS and NISS scoring.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth]{figures/niss-gap.pdf}
-  \caption{CVSS v4.0 vs.\ NISS gap analysis: 99.1\% of techniques require
+  \caption{CVSS v4.0 vs.\ NISS gap analysis: \SnapshotGapPercent\% of techniques require
   extension metrics CVSS cannot express.}
   \label{fig:niss-gap}
 \end{figure}

@@ -53,13 +53,28 @@ with domain experts from both cybersecurity and neuroscience is needed.
 
 \subsection{Taxonomy Completeness}
 
-The TARA registry contains 109 techniques as of version 1.5. The BCI threat
+The TARA registry contains \SnapshotTechniques{} techniques as of version \SnapshotRegistryVersion{}. The BCI threat
 landscape is evolving rapidly, and additional techniques will emerge as:
 (a)~new BCI devices reach market, (b)~consumer neurotechnology proliferates,
 and (c)~adversarial AI techniques advance. The current registry should be treated
 as a foundation, not a complete enumeration.
 
-Of the 109 techniques, 31 are classified as Theoretical and 1 as Speculative---these
+\paragraph{Every figure in this paper describes registry v\SnapshotRegistryVersion{}.}
+The live registry has grown since publication and now holds \LiveTechniques{} techniques
+and \LiveVariants{} variant across \LiveTactics{} tactics (v\LiveRegistryVersion{}). The gap
+statistic recomputes to \LiveGapTechniques{} of \LiveTechniques{} techniques, or
+\LiveGapPercent\%, against the \SnapshotGapPercent\% reported here. Scoring coverage has
+also changed: \LiveWithCvss{} techniques carry CVSS v4.0 base vectors, and of the NISS
+scores \LiveNissScored{} are complete, \LiveNissProvisional{} are provisional ranges
+and \LiveNissUnscored{} are unscored under a stricter evidence rule introduced after
+this revision. Those later figures are not substituted into the analysis above, because
+every proportion in Sections~\ref{sec:tara} through~\ref{sec:governance} has a numerator
+computed over the v\SnapshotRegistryVersion{} set; re-pointing the denominator without
+recomputing each numerator would produce figures that describe no actual registry state.
+The current values are always derivable from
+\texttt{datalake/qtara-registrar.json} in the project repository.
+
+Of the \SnapshotTechniques{} techniques, 31 are classified as Theoretical and 1 as Speculative---these
 have not been empirically demonstrated. While they are grounded in known physics
 and engineering principles, their practical feasibility remains unvalidated.
 
@@ -122,14 +137,14 @@ derivation (Section~\ref{sec:hourglass}), replaces a mislabeled DBS citation
 with Hallett~(2007) for TMS, corrects NISS case study scores to match the
 arithmetic mean formula (Equation~\ref{eq:niss}), fixes the dual-use
 classification label, and completes a full citation and claims verification
-pass. This revision (v1.5) expands the TARA registry from 102 to 109
+pass. This revision (v1.5) expands the TARA registry from 102 to \SnapshotTechniques{}
 techniques, splits the NISS Cognitive Integrity (CG) metric into Cognitive
 Reconnaissance (CR) and Cognitive Disruption (CD) to distinguish read vs.\
 write attacks (NISS~v1.1, six metrics), normalizes default weights
 ($w_{\text{CR}} = w_{\text{CD}} = 0.5$, others~$= 1.0$) to preserve the
 cognitive dimension at its pre-split 20\% share, updates all statistics and
 tables to reflect the expanded registry, and adds neurorights dimension
-mapping for 103 of 109 techniques.
+mapping for 103 of \SnapshotTechniques{} techniques.
 
 \noindent\textbf{Note on AI use and preprint status:} I did not find anything
 in Zenodo's terms of use that prohibits using AI to help write a preprint, so

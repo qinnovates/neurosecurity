@@ -30,7 +30,7 @@ independent taxonomy purpose-built for the BCI threat landscape.
 
 \subsection{Taxonomy Structure}
 
-The TARA registry organizes 109 techniques into 15 tactics across 8 operational
+The TARA registry organizes \SnapshotTechniques{} techniques into \SnapshotTactics{} tactics across \SnapshotDomains{} operational
 domains. Technique identifiers follow the format \texttt{QIF-TXXX}, where the
 numeric suffix provides sequential ordering.
 
@@ -82,7 +82,7 @@ Speculative  & Hypothetical; requires unproven capabilities             & 1 \\
 
 \subsection{Severity Distribution}
 
-CVSS v4.0 base severity ratings for all 109 techniques show a distribution
+CVSS v4.0 base severity ratings for all \SnapshotTechniques{} techniques show a distribution
 heavily weighted toward high and critical:
 
 \begin{table}[H]
@@ -109,7 +109,7 @@ is neural tissue.
 
 \subsection{Category Breakdown}
 
-The 109 techniques distribute across eight operational categories:
+The \SnapshotTechniques{} techniques distribute across eight operational categories:
 
 \begin{table}[H]
 \centering
@@ -143,7 +143,7 @@ the mechanisms underlying established therapies such as deep brain stimulation
 
 \begin{table}[H]
 \centering
-\caption{Dual-use classification of 109 TARA techniques.}
+\caption{Dual-use classification of \SnapshotTechniques{} TARA techniques.}
 \label{tab:dualuse}
 \small
 \begin{tabular}{@{}l l r r@{}}
@@ -159,7 +159,7 @@ Not Mapped   & Dual-use assessment pending         &  6 &  5.5\% \\
 \end{tabular}
 \end{table}
 
-Of the 109 techniques, 78 (71.6\%) have confirmed, probable, or possible therapeutic analogs.
+Of the \SnapshotTechniques{} techniques, 78 (71.6\%) have confirmed, probable, or possible therapeutic analogs.
 This finding underscores a fundamental challenge for BCI security: the same
 capabilities that must be defended against are often the capabilities that make
 BCIs therapeutically valuable.
@@ -196,7 +196,7 @@ breakdown.
   \begin{minipage}[t]{0.48\textwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/severity-dist.pdf}
-    \caption{TARA severity distribution across 109 techniques.}
+    \caption{TARA severity distribution across \SnapshotTechniques{} techniques.}
     \label{fig:severity-dist}
   \end{minipage}
   \hfill
