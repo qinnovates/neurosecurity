@@ -153,7 +153,6 @@ const modalityProjection: ProjectionConfig = {
       {
         label: 'Status',
         items: [
-          { key: 'CONFIRMED', label: 'Confirmed', count: statusStats.CONFIRMED, dotColor: '#ef4444' },
           { key: 'DEMONSTRATED', label: 'Demonstrated', count: statusStats.DEMONSTRATED, dotColor: '#f59e0b' },
           { key: 'THEORETICAL', label: 'Theoretical', count: statusStats.THEORETICAL, dotColor: '#94a3b8' },
           { key: 'EMERGING', label: 'Emerging', count: statusStats.EMERGING, dotColor: '#8b5cf6' },
@@ -187,7 +186,6 @@ const modalityProjection: ProjectionConfig = {
       label: 'Status',
       attr: 'status',
       values: [
-        { key: 'CONFIRMED', label: 'Confirmed', color: '#ef4444', bg: 'rgba(239,68,68,0.12)' },
         { key: 'DEMONSTRATED', label: 'Demonstrated', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' },
         { key: 'THEORETICAL', label: 'Theoretical', color: '#94a3b8', bg: 'rgba(148,163,184,0.12)' },
         { key: 'EMERGING', label: 'Emerging', color: '#8b5cf6', bg: 'rgba(139,92,246,0.12)' },

@@ -210,7 +210,7 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
 
         {/* Status pills */}
         <div className="flex gap-1 ml-2">
-          {(['CONFIRMED', 'DEMONSTRATED', 'THEORETICAL', 'EMERGING'] as const).map(s => (
+          {(['DEMONSTRATED', 'THEORETICAL', 'EMERGING', 'PLAUSIBLE'] as const).map(s => (
             <button
               key={s}
               onClick={() => setStatusFilter(statusFilter === s ? null : s)}

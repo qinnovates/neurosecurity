@@ -39,7 +39,13 @@ export type CategoryId = typeof THREAT_CATEGORIES[number]['id'];
 export type BandId = typeof HOURGLASS_BANDS[number]['id'];
 export type Severity = 'critical' | 'high' | 'medium' | 'low';
 export type NissSeverity = 'critical' | 'high' | 'medium' | 'low' | 'none';
-export type Status = 'CONFIRMED' | 'DEMONSTRATED' | 'THEORETICAL' | 'EMERGING';
+/**
+ * CONFIRMED was retired on 2026-10-16 (see tara_spec.status_definitions); it is kept in the
+ * union only so historical data and `status_prior` still type-check. PLAUSIBLE and SPECULATIVE
+ * were always present in the registry but missing here, which made getStatusStats() return NaN
+ * for them and the public API serialize them as null.
+ */
+export type Status = 'CONFIRMED' | 'DEMONSTRATED' | 'THEORETICAL' | 'EMERGING' | 'PLAUSIBLE' | 'SPECULATIVE';
 /** Derived from `sources`. A preprint id shows the source exists; it does not count as peer review. */
 export type PeerReviewStatus = 'peer_reviewed' | 'preprint' | 'none';
 /** scored: all six metrics supported. provisional: some supported, a score range is stored. unscored: none. */
@@ -357,7 +363,9 @@ export const SEVERITY_COLORS = {
 
 /** Status color map */
 export const STATUS_COLORS = {
-  CONFIRMED: { bg: 'rgba(239, 68, 68, 0.12)', text: '#ef4444' },
+  CONFIRMED: { bg: 'rgba(239, 68, 68, 0.12)', text: '#ef4444' }, // retired 2026-10-16; historical records only
+  PLAUSIBLE: { bg: 'rgba(100, 116, 139, 0.12)', text: '#64748b' },
+  SPECULATIVE: { bg: 'rgba(100, 116, 139, 0.10)', text: '#78839b' },
   DEMONSTRATED: { bg: 'rgba(245, 158, 11, 0.12)', text: '#f59e0b' },
   THEORETICAL: { bg: 'rgba(148, 163, 184, 0.12)', text: '#94a3b8' },
   EMERGING: { bg: 'rgba(139, 92, 246, 0.12)', text: '#8b5cf6' },
@@ -397,8 +405,11 @@ export function getThreatStats() {
 
 /** Helper: count threats per status */
 export function getStatusStats() {
-  const stats: Record<Status, number> = { CONFIRMED: 0, DEMONSTRATED: 0, THEORETICAL: 0, EMERGING: 0 };
+  // Initialised from the union, not a hand-written literal: a status present in the data but
+  // absent here previously incremented undefined and surfaced as null in /api/tara.json.
+  const stats = { CONFIRMED: 0, DEMONSTRATED: 0, THEORETICAL: 0, EMERGING: 0, PLAUSIBLE: 0, SPECULATIVE: 0 } as Record<Status, number>;
   for (const t of THREAT_VECTORS) {
+    if (stats[t.status] === undefined) stats[t.status] = 0;
     stats[t.status]++;
   }
   return stats;
