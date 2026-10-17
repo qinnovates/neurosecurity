@@ -65,7 +65,7 @@ function DashboardInner({ atlasData, brainViews, threatDetails }: Props) {
   return (
     <div className="space-y-4">
       {/* Dashboard view toggle — command bar */}
-      <div className="flex items-center justify-center gap-4 glass rounded-xl px-4 py-2" style={{ background: 'var(--color-glass-bg)' }}>
+      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 glass rounded-xl px-4 py-2" style={{ background: 'var(--color-glass-bg)' }}>
         <span className="text-[9px] font-mono uppercase tracking-[0.1em] hidden sm:block" style={{ color: 'var(--color-text-faint)' }}>VIEW</span>
         <div className="flex items-center gap-1 rounded-full p-0.5" style={{ background: 'var(--color-bg-surface)', border: '1px solid var(--color-border)' }}>
           {([
@@ -99,7 +99,7 @@ function DashboardInner({ atlasData, brainViews, threatDetails }: Props) {
                   <button
                     key={mode.id}
                     onClick={() => setViewMode(mode.id)}
-                    className="px-4 py-2 rounded-full text-xs font-medium transition-all"
+                    className="px-3 sm:px-4 py-2 rounded-full text-xs font-medium transition-all"
                     style={{
                       background: isActive ? `${mode.color}15` : 'transparent',
                       color: isActive ? mode.color : 'var(--color-text-faint)',
