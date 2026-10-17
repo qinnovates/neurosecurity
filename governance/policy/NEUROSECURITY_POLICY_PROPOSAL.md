@@ -71,7 +71,7 @@ This is not a hypothetical gap. Across 25 mapped organizations and 13 regulatory
 
 The gap is fillable. Early research implementations demonstrate that technical approaches to each of these problems are feasible. For example, the open-source QIF project (one of several emerging efforts in this space) has produced:
 
-- A BCI-specific threat taxonomy with 109 techniques across 15 tactics
+- A BCI-specific threat taxonomy with 173 techniques across 17 tactics
 - A neural impact scoring system with 6 dimensions that CVSS cannot express
 - A post-quantum encryption protocol designed for implantable power budgets (estimated 3.25% overhead at 40 mW in simulation)
 - A real-time coherence monitoring system tested against 14 simulated attack scenarios
@@ -456,7 +456,7 @@ CVSS is a consensus-driven standard maintained by hundreds of organizations. Pro
 | **Medium-term** | Develop BCI-specific cybersecurity review criteria for Breakthrough Device submissions | Internal review guidance for CDRH |
 | **Long-term** | Integrate neural security requirements into the next major revision of cybersecurity guidance | Unified guidance covering generic and neural-specific requirements |
 
-**The structural gap in current guidance:** FDA's cybersecurity guidance asks manufacturers to "identify cybersecurity risks" but provides no neural-specific risk categories. A BCI manufacturer can satisfy this requirement by identifying network-level threats (man-in-the-middle, denial of service, firmware tampering) while entirely missing neural-level threats (signal injection, cognitive exfiltration, neurostimulation manipulation). TARA's 109 techniques provide the taxonomy that would make this requirement meaningful for neural devices.
+**The structural gap in current guidance:** FDA's cybersecurity guidance asks manufacturers to "identify cybersecurity risks" but provides no neural-specific risk categories. A BCI manufacturer can satisfy this requirement by identifying network-level threats (man-in-the-middle, denial of service, firmware tampering) while entirely missing neural-level threats (signal injection, cognitive exfiltration, neurostimulation manipulation). TARA's 173 techniques provide the taxonomy that would make this requirement meaningful for neural devices.
 
 ### 6.2 FTC: Consumer BCI Security Baseline
 
@@ -691,7 +691,7 @@ QIF is one early attempt to address the gaps described in this proposal. It is n
 
 | Component | What It Does | Validation Data | Availability |
 |-----------|-------------|----------------|--------------|
-| **TARA** | BCI threat taxonomy: 109 techniques, 15 tactics, MITRE-compatible IDs | 49 from published literature, 46 recontextualized from neuroscience, 5 chain syntheses, 6 theoretical, 3 neuroethics-formalized. Not independently peer-reviewed. | Apache 2.0, GitHub, PyPI (`qtara`) |
+| **TARA** | BCI threat taxonomy: 173 techniques, 17 tactics, MITRE-compatible IDs | 49 from published literature, 46 recontextualized from neuroscience, 5 chain syntheses, 6 theoretical, 3 neuroethics-formalized. Not independently peer-reviewed. | Apache 2.0, GitHub, PyPI (`qtara`) |
 | **NISS** | Neural impact scoring: 6 dimensions CVSS cannot express | All TARA techniques scored. Dimensions informed by clinical research but not clinically validated. | Apache 2.0, GitHub |
 | **Hourglass Model** | 11-band security architecture: N7-N1 (neural), I0 (interface), S1-S3 (synthetic) | Architectural model. Mapped against 24 commercial BCI devices and IEC 62443 zones/conduits. | Apache 2.0, GitHub |
 | **NSP** | Post-quantum BCI encryption protocol: ML-KEM + ML-DSA + AES-256-GCM-SIV | Estimated 3.25% power overhead at 40 mW in simulation. Uses NIST FIPS 203/204/205 primitives. Not tested on implantable hardware. | Apache 2.0, GitHub, Rust reference implementation |
@@ -708,7 +708,7 @@ QIF is one early attempt to address the gaps described in this proposal. It is n
 ### What QIF Suggests Is Feasible
 
 - Neural signal authenticity verification is technically approachable through coherence monitoring (demonstrated in simulation, not in clinical settings).
-- BCI-specific threats can be systematically cataloged and scored (109 techniques cataloged, scoring framework defined, neither independently peer-reviewed).
+- BCI-specific threats can be systematically cataloged and scored (173 techniques cataloged, scoring framework defined, neither independently peer-reviewed).
 - Post-quantum cryptography may be feasible on implantable power budgets (estimated 3.25% overhead in simulation, not tested on actual implant hardware).
 - Neurorights can be mapped to technical security controls (mapping exists, clinical and legal validity not yet established).
 - Adaptive policy enforcement can respond to neural threat levels dynamically (demonstrated in simulation only).
@@ -861,7 +861,7 @@ Architecture: 11-Band Hourglass (7-1-3)
   Band codes are addresses, not an order.
 
 Components:
-  TARA    109 techniques | 15 tactics | MITRE-compatible IDs
+  TARA    173 techniques | 17 tactics | MITRE-compatible IDs
   NISS    5 neural impact dimensions | 0-10 scale | extends CVSS
   NSP     Post-quantum encryption | ML-KEM + ML-DSA | 3.25% power overhead
   Neurowall  3-layer defense | 15 attacks tested | 5% FPR | auto-calibrating
@@ -904,7 +904,7 @@ PyPI: pip install qtara
 | **Runemate** | QIF's policy engine. Domain-specific language for neural security rules. |
 | **SB 1223** | California Senate Bill 1223 (2025). Adds neural data as sensitive personal information under CCPA. |
 | **SPHINCS+** | Stateless Hash-Based Signature Scheme. NIST FIPS 205. Post-quantum signatures with large signature size. |
-| **TARA** | Threat Assessment for Risk Analysis. QIF's BCI threat taxonomy: 109 techniques, 15 tactics. |
+| **TARA** | Threat Assessment for Risk Analysis. QIF's BCI threat taxonomy: 173 techniques, 17 tactics. |
 
 ---
 

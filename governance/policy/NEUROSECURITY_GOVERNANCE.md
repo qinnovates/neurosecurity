@@ -80,7 +80,7 @@ Neurosecurity takes phenomena described by neuroscientists and concerns raised b
 
 | Cybersecurity Provides | Applied to BCIs As |
 |----------------------|-------------------|
-| MITRE ATT&CK taxonomy | TARA: 109 techniques across 15 tactics, MITRE-compatible IDs |
+| MITRE ATT&CK taxonomy | TARA: 173 techniques across 17 tactics, MITRE-compatible IDs |
 | CVSS scoring | NISS: 5 neural-specific metrics that CVSS cannot express (biological impact, cognitive integrity, consent violation, reversibility, neuroplasticity) |
 | Zero-trust architecture | QIF: every signal validated at every band crossing; no implicit trust |
 | Threat detection and response | Neurowall: real-time coherence monitoring, spectral anomaly detection, CUSUM change-point analysis |
@@ -1428,7 +1428,7 @@ IEEE SA has P7700 (neurotechnology ethics) and comprehensive cybersecurity stand
 
 #### MITRE: Create a Neural ATT&CK Sub-Matrix
 
-ATT&CK has sub-matrices for enterprise, mobile, ICS, and cloud. Neural devices are absent. TARA provides 109 techniques in MITRE-compatible format.
+ATT&CK has sub-matrices for enterprise, mobile, ICS, and cloud. Neural devices are absent. TARA provides 173 techniques in MITRE-compatible format.
 
 **Ask:** Create an ATT&CK sub-matrix for neural devices. TARA can serve as the seed taxonomy, following the same community contribution model that built the ICS matrix.
 
@@ -1471,7 +1471,7 @@ QIF builds on approximately 15 years of foundational work by researchers who ide
 | Denning, Matsuoka, Kohno | 2009 | Coined "neurosecurity." First paper framing BCI security as a distinct research area. | QIF provides the engineering framework they called for: quantified scoring, architectural model, wire protocol. |
 | Martinovic et al. | 2012 | Proved consumer EEG leaks private information (PINs, bank details) via P300 responses. | TARA catalogs as T1001 with NISS scoring. QIF adds detection (coherence monitoring) and defense (signal authentication). |
 | Bonaci, Calo, Chizeck | 2014 | Identified the "app store" threat model for BCIs. Proposed BCI anonymizer. | QIF extends with multi-band isolation, neural data classification, and consent-per-band access controls. |
-| Bernal, Cammack, Peaceful | 2021 | Most comprehensive BCI attack taxonomy before TARA. CIA-based organization. | TARA extends from 3 categories to 109 techniques with NISS scoring and DSM-5-TR psychiatric mappings. |
+| Bernal, Cammack, Peaceful | 2021 | Most comprehensive BCI attack taxonomy before TARA. CIA-based organization. | TARA extends from 3 categories to 173 techniques with NISS scoring and DSM-5-TR psychiatric mappings. |
 | Schroder | 2025 | Practical security assessment of commercial BCI devices. | QIF provides systematic evaluation framework (NISS + hourglass) for the vulnerabilities identified. |
 | Landau | 2020 | Connected neural data privacy to surveillance debates. Argued for neural data as special category. | QIF operationalizes with technical controls: classification by band, encryption requirements, access frameworks. |
 

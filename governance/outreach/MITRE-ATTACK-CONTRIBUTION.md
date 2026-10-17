@@ -153,7 +153,7 @@ Engage MITRE's Center for Threat-Informed Defense (CTID) to co-develop a BCI/neu
 
 | Asset | Detail |
 |-------|--------|
-| Threat taxonomy | 165 techniques across 8 domains, 17 tactics (TARA v4.0) |
+| Threat taxonomy | 173 techniques across 17 tactics (TARA v4.3) |
 | Scoring system | NISS v1.1 — CVSS v4.0 extension with 6 neural metrics |
 | STIX 2.1 feed | Machine-readable threat data ([qinnovate.com/api/stix.json](https://qinnovate.com/api/stix.json)) |
 | Published research | Zenodo preprint (DOI: 10.5281/zenodo.18640105), 193 verified sources |
