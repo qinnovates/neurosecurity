@@ -6,8 +6,8 @@ __version__ = "0.4.0"
 
 DEPRECATION_NOTICE = (
     "qtara is deprecated and no longer maintained (0.4.0, 2026-10-17, is the final release). "
-    "Its bundled registry will not be updated. Use the public data instead: "
-    "https://qinnovate.com/api/stix.json (STIX 2.1) or https://qinnovate.com/api/tara.json. "
+    "Its bundled registry will not be updated. The hosted API was retired on 2026-10-17; the data stays open in "
+    "datalake/qtara-registrar.json in the neurosecurity repository. "
     "TARA, NISS and QIF are a proposed framework that has not been independently validated."
 )
 

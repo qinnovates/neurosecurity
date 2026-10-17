@@ -2,9 +2,7 @@
 
 > **Deprecated.** qtara is no longer maintained. **0.4.0 (2026-10-17) is the final release**, and its bundled registry will not be updated.
 >
-> Use the public data instead, which stays current:
-> - STIX 2.1 bundle: <https://qinnovate.com/api/stix.json>
-> - Full registry as JSON: <https://qinnovate.com/api/tara.json>
+> The hosted API was retired on 2026-10-17 (a paid feed is planned). The data stays open:
 > - Source of truth: [`datalake/qtara-registrar.json`](https://github.com/qinnovates/neurosecurity/blob/main/datalake/qtara-registrar.json)
 >
 > Why: almost no one installs the package, and every registry change had to be mirrored in it. TARA, NISS and QIF are a proposed framework that has not been independently validated; the package will be reconsidered if outside users ask for a Python client.
