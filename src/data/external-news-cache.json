@@ -1,20 +1,47 @@
 [
   {
     "type": "external",
-    "title": "Promoting Internationalised Innovative Development in the Brain-Computer Interface Industry - HKTDC Research",
-    "date": "2026-10-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiYkFVX3lxTE5QV3RUMjVfRUZ5X2xKT3VCVGtpZ3BVbXcwNnY2dVZuSE9DT2I3cm9pOEZzUE1nWVlkUE1BTzUwU1JsZ2c0R3c3MndwT3B6bE00SjMtbzBhTlNnRzh2ZWxDNzd3?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Promoting Internationalised Innovative Development in the Brain-Computer Interface Industry&nbsp;&nbsp;HKTDC Research",
+    "title": "This implant can restore sight for patients with macular degeneration",
+    "date": "2026-10-16",
+    "url": "hxxps://www[.]technologyreview[.]com/2026/10/16/1145840/prima-implant-restores-sight-macular-degeneration-patients/",
+    "source": "MIT Technology Review",
+    "summary": "More than 5 million people around the world with age-related macular degeneration (AMD) experience atrophy in their retinas. And until now, no treatment could restore their vision. The PRIMA system, w",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "[object Object]",
+    "date": "2026-10-16",
+    "url": "hxxps://www[.]fiercebiotech[.]com/medtech/simbiosys-nabs-fda-clearance-nvidia-powered-mri-derived-breast-cancer-recurrence-tool",
+    "source": "Fierce Biotech",
+    "summary": "SimBioSys has been given FDA clearance of the Nvidia-powered TumorSight Risk, an AI and MRI-derived prognostic tool for assessing the risk of a breast cancer coming back.",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "EEG Correlates of Verbal and Perceptual Reasoning",
-    "date": "2026-10-15",
-    "url": "hxxps://arxiv[.]org/abs/2610[.]19979",
+    "title": "Visual Cues Quietly Inflate Deep Learning Accuracy in Brain-Computer Interfaces, Study Finds - Bioengineer.org",
+    "date": "2026-10-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxQTU1odnh1dy02b2FXSmZwaEdCTGFsU0didEhpeDhuUHIyMmdzZTVibFFONGhqWUI2MFdTNzJEcndFQzVyZl9hSXFWdnJUVWktVHQwN05qdVNmOVl1RlpDN1Bkb3VIZndNMTJKMzZFeXJVbG9SSWdYS0NxQWFVcEcwYm0tNThrb3NsN1ZleXNldTRWVjNfbmNFaVllb01zUFc0LTRoUnowQ1BxN3BlWUlFdWo1bGhpM2M?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Visual Cues Quietly Inflate Deep Learning Accuracy in Brain-Computer Interfaces, Study Finds&nbsp;&nbsp;Bioengineer.org",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Two dissociable axes of brain hierarchical dynamics track universal and population-specific effects of mindfulness",
+    "date": "2026-10-16",
+    "url": "hxxps://arxiv[.]org/abs/2610[.]20854",
     "source": "arXiv Neuroscience",
-    "summary": "arXiv:2610.19979v1 Announce Type: new Abstract: Identifying the neural underpinnings of intelligence is one of the major goals of modern intelligence research. However, few imaging studies explore the",
+    "summary": "arXiv:2610.20854v1 Announce Type: new Abstract: How mental training reshapes the temporal architecture of large-scale brain dynamics and how these mechanisms differ between healthy and clinically vuln",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Transferable conditional brain charts link cortico-subcortical structure to Alzheimer's disease progression",
+    "date": "2026-10-16",
+    "url": "hxxps://arxiv[.]org/abs/2610[.]21660",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2610.21660v1 Announce Type: new Abstract: Normative models chart how brain measures vary across the lifespan, expressing each individual as a deviation from a healthy reference. However, most re",
     "category": "research"
   },
   {
@@ -24,15 +51,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMixwFBVV95cUxNYm1relItOHNDSjA1ZVlocGRmR01HZFZoY0lyWEpOWElDbGVkY3FWZlNrWHA0MGFtcGlzZ3o0eDVlVXROMDlyRnJPeWZVcTNpRUNWZWhEMnlsZVhIMkpnaXZ3TGVmaDJtWnc3WnFyRkcwaFZPVVhNUjdmV3VBRHpoT3pybXlGbThwTWhSOW9fd25UcEd6VTJnMUUxT3dlSG9DUGwya1Y1TWJSMmd6RUM3SkgxZmZFOFVrdGtGck5vNWpRNTYxMjJz?oc=5",
     "source": "Google News — BCI",
     "summary": "2 Brain-Computer Interface Stocks to Watch While Neuralink Stays Private&nbsp;&nbsp;InvestorPlace",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "ABILITY Neurotech Begins Testing its Brain-Computer Interface Technology - Medical Product Outsourcing",
-    "date": "2026-10-12",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisAFBVV95cUxQVEw0Xy1LbjY0T1Z2eER4WmxRRkhIaGhyd29ocmtpZWNlTUpRQ01tdDBXVm1sVm50ZXYxZ044R1hSdmN2WTBWZ1Y4TzNCa2NTbmNhRzNYUk9XTV9zZkdMRW14Y1VxUHhQMWZ0LW1VaFktcEVjVzBaUldMV3cwaVVuVDlOS21DZHByT2ZwRHMzU2dPZWg2V0h5b2NzZDR3am45Z0NvTl8wN0NuVWYyMWdSaA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "ABILITY Neurotech Begins Testing its Brain-Computer Interface Technology&nbsp;&nbsp;Medical Product Outsourcing",
     "category": "neurotechnology"
   },
   {
@@ -55,11 +73,29 @@
   },
   {
     "type": "external",
+    "title": "China wants to get inside your head - The Economist",
+    "date": "2026-10-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPWVpQR3l0akJTSHo1Qk1ud0lTSDJ2a0JvekQzalVLR3duZWt0alBIdnZMYXd6STBYbzh2ZmdtanRhclB5c1NWc0x3cEpCelFjQlVmbUMwOHg4WEFobUd1Qi14cC1qNWgzYTZValBVT1V2VlNiMjlJZzFWYU0yWUJ2T0FzNHdtUGRD?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China wants to get inside your head&nbsp;&nbsp;The Economist",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "A New Neurotech Startup Launches to Rival Sam Altman’s Merge Labs - WIRED",
     "date": "2026-10-06",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPZHdGc3pUdVhTQWdlTFRnSXl5VmVTZFR1NlpnRmVuVHJ4dzhrbkZ3dWw5QXZaOXA5WUI1Q1dEN0ItNmN6c0huU2kyMW4zZWNXNktYUEg5QVo2aWlfZXNWU2FtZjgxb0ZtTkxiNDdsM3BkZ01Fa1hFLW5WMkhLanhaSzVrWW91eXp0?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "A New Neurotech Startup Launches to Rival Sam Altman’s Merge Labs&nbsp;&nbsp;WIRED",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink Stock: How to Invest Before the IPO - Yahoo Finance",
+    "date": "2026-10-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxOMmd0ZGVZRzZ3OVNzelY3dlQwU1dpRHdoVW56bWRBWHhGRUYwd0RrWUl6c0NsX01SVy1LRlEtREZ4TktNeW44NVBOMnMybDlqOVFuWndLVW94NXp0OFZWSDNkNlN2ZHlUYVdUYTE2UlVEQU9lU1dZLTh0Qndtal92SzA1OXBmeGUyRUFSSTdRTHY1WllDX2c?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink Stock: How to Invest Before the IPO&nbsp;&nbsp;Yahoo Finance",
     "category": "neurotechnology"
   },
   {
@@ -96,15 +132,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxPYm9qUFd2LWdiSGs5NzExN014MDgxT005dnpQdFl4Uk5IRVhpYjljN1VRMU5BQW5kdUt5dWk4WHFkSG5YQUQzNUNlN19QWlYwUU1pSzYyd1daUDdXQ3NwdURpSnF3SzhKWVAxbTdMYmRmZnFacml5RUh6MGhzX0NscEdkdHlfUW42c0xkSFRKS0N6dEFrMzRtcnFkU0YyLW8?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Neuralink brain implant helps man with ALS speak using his thoughts&nbsp;&nbsp;MobiHealthNews",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Elon Musk's Neuralink Brain Implant Helps Speech-Impaired Man Speak First Words - NDTV",
-    "date": "2026-09-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitgFBVV95cUxNT3ppckQyOHVrUTZUUExLWXdJMWZjQUEtN2xJcjU2WENncGd4a0FmUXV5M3NYZUdCYVJOTmhQMjAtSC1HQVM3eFFmMmQyTFVXc2NRT1N2ZE9oUlQ5dVZYbEQ2NmRmMkdYaEh6dktKM0M5OWgyZFE3UXQxbVdkUG45M19CbXVLcVdqWnhJc3JfYnkzZm1oWWh3ZFJTYUU5cmFkUWRLSUV1MzdjZEdsRFJHMHV0bmZQQQ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk's Neuralink Brain Implant Helps Speech-Impaired Man Speak First Words&nbsp;&nbsp;NDTV",
     "category": "neurotechnology"
   },
   {
@@ -163,20 +190,20 @@
   },
   {
     "type": "external",
+    "title": "Safeguarding Neural Data - Neurology® Journals",
+    "date": "2026-04-30",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiakFVX3lxTE1NTzE3XzVPMjd4MXB3dkZCbDRzMTNSNUpLRE96MWNaeFpuNkFhMkRaV1hDZnFBSG9hOVNPQ3dFcXhjSG5nNnd1cVdBQzg2M3c3TDlaMzU0RnNZRlZhdm1fZS1SMlg1NDhNM3c?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Safeguarding Neural Data&nbsp;&nbsp;Neurology® Journals",
+    "category": "neuroethics"
+  },
+  {
+    "type": "external",
     "title": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology - CSIS | Center for Strategic and International Studies",
     "date": "2025-11-04",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPanNMOEN0Yy16RElvSXJjMk4zR25qd2tGQXhDZDI2cmo0Yk5kSmZNQXJfSnhQb0tOdUJUY3BOQlc0akVlOGZ5aGpBekVWd0NNV1R6enN5Q0RVRnFKX2JhSWRuVVA2MUNkNHJOd0k4NjRLdjZtVUxkZlluWFVUNU0zN21VajFiOW9Udl9aTjhTQ1dkSEphZTAtWVR5MU5ZalQySDdJWTFB?oc=5",
     "source": "Google News — MIND Act",
     "summary": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology&nbsp;&nbsp;CSIS | Center for Strategic and International Studies",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "The MIND Act: Balancing Innovation and Privacy in Neurotechnology - JD Supra",
-    "date": "2025-09-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihwFBVV95cUxQYkt5Qk5UWFcxakVtUE0tRVVSWUZyZ0RSQ2JYaHRDWVBILW85LXVjU3lBMVNhNDBFdm41aWpaTUZBbnlsMmRmaWlIVk1CNERFLU84ZXNmWC1MOHZmSnFWbWY3dnRHS1hXSzhsSlpQdVFCVk4tN092S0hncXRGNHBTblpyY2kyY2c?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "The MIND Act: Balancing Innovation and Privacy in Neurotechnology&nbsp;&nbsp;JD Supra",
     "category": "neuroethics"
   }
 ]
