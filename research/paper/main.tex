@@ -14,43 +14,42 @@
 % Live*     = the registry as it stands at build time.
 \input{generated/registry-stats}
 
-\date{February 2026}
+\date{October 2026 (v1.6; first posted February 2026)}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-Brain-computer interfaces (BCIs) are transitioning from experimental neuroscience tools to
-commercially deployed medical devices, with companies including Neuralink, Synchron,
-Blackrock Neurotech, and Paradromics advancing toward regulatory approval and new
-entrants such as Merge Labs raising \$252M in seed funding~\cite{mergelabs2026}. We are unaware of a security
-framework that accounts for the unique risks of devices that read and write neural
-signals. The Common Vulnerability Scoring System (CVSS v4.0), the industry standard for
-vulnerability assessment, cannot express biological tissue damage, cognitive integrity
-violations, consent boundaries, damage reversibility, or neuroplastic consequences---dimensions
-critical to neural device security.
+Brain-computer interfaces (BCIs) are moving from research tools toward commercially
+deployed medical devices, with companies including Neuralink, Synchron, Blackrock
+Neurotech, and Paradromics advancing toward regulatory approval and new entrants such as
+Merge Labs raising \$252M in seed funding~\cite{mergelabs2026}. These devices read and,
+increasingly, write neural signals. We are unaware of a published security framework that
+scores the harms specific to such devices: the Common Vulnerability Scoring System
+(CVSS v4.0) has no metric for tissue damage, for unauthorised reading or disruption of
+neural function, for violated consent, or for effects that cannot be reversed.
 
-We present an integrated security framework comprising four contributions:
-(1)~an \textbf{11-band hourglass architecture} mapping attack surfaces from neocortex to
-wireless radio across neural, interface, and synthetic zones;
-(2)~\textbf{TARA}, a threat taxonomy of \SnapshotTechniques{} techniques across \SnapshotTactics{} tactics
-and \SnapshotDomains{} domains, each
-classified by status, severity, and dual-use therapeutic potential;
-(3)~\textbf{NISS}, the Neural Impact Scoring System---a CVSS v4.0 extension adding six
-neural-specific metrics (Biological Impact, Cognitive Reconnaissance, Cognitive Disruption, Consent Violation,
-Reversibility, Neuroplasticity) designed to conform with FIRST.org's official extension mechanism; and
-(4)~the \textbf{Neural Impact Chain}, a methodology mapping security vulnerabilities to
-DSM-5-TR psychiatric diagnoses through a six-stage pipeline.
+We present a proposed, unvalidated framework with four parts:
+(1)~an \textbf{addressing model} that tags what a device touches with eleven unordered
+codes for neural structures, the electrode-tissue interface and device systems;
+(2)~\textbf{TARA}, a catalogue of BCI attack techniques, each with a tactic, an evidence
+status and a therapeutic analog where one exists;
+(3)~\textbf{NISS}, an impact-only CVSS v4.0 extension with six neural-specific metrics; and
+(4)~the \textbf{Neural Impact Chain}, which associates techniques with DSM-5-TR and
+ICD-10-CM diagnostic category references for threat modeling, not as diagnostic claims.
 
-Analysis of all \SnapshotTechniques{} techniques (registry v\SnapshotRegistryVersion{}, the state
-this paper analyses) reveals that \SnapshotGapPercent\% require NISS extension metrics
-that CVSS cannot express. The Neural Impact Chain maps all techniques to 29 unique DSM-5-TR diagnostic
-codes across 5 psychiatric clusters, with 52 techniques posing direct diagnostic risk. The
-framework identifies 78 techniques (71.6\%) with confirmed, probable, or possible therapeutic analogs,
-establishing a dual-use atlas where every attack mechanism that can harm neural tissue has a
-corresponding clinical application. The complete framework, threat registry, and scoring
-system are released as open source under the Apache 2.0 license.
+The analysis is of a frozen snapshot of \SnapshotTechniques{} techniques (registry
+v\SnapshotRegistryVersion{}). In that snapshot CVSS cannot express the primary impact of
+59 techniques (54.1\%) and misses part of it for 30 more. Fifty-two techniques are in the
+direct-association class across 29 diagnostic category codes, and 78 (71.6\%) have a recorded
+therapeutic analog: many attack mechanisms are shared with therapies, and what separates the
+two is consent, dosage and oversight. This revision (v1.6) replaces the earlier hourglass
+stack with addresses, adds an evidence rule and three scoring states, states NISS's limits,
+corrects case studies that did not match the registry, and argues why neurosecurity and
+neuroethics are needed now. Live registry figures (v\LiveRegistryVersion{},
+\LiveTechniques{} techniques) are reported beside the snapshot, not substituted into it.
+The framework, catalogue and scoring data are released under the Apache 2.0 license.
 \end{abstract}
 
 \noindent\textbf{Keywords:} brain-computer interface, neurosecurity, CVSS, threat taxonomy,

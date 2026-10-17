@@ -5,7 +5,7 @@
 \section{TARA: Threat Taxonomy}
 \label{sec:tara}
 
-The Therapeutic Applications \& Risk Assessment (TARA) registry catalogs BCI
+The Therapeutic Applications \& Risk Assessment (TARA) registry catalogues BCI
 attack techniques with a structure inspired by MITRE
 ATT\&CK~\cite{mitre2024attack}, independently developed to cover neural,
 cognitive, and physical safety domains. Each
@@ -19,8 +19,8 @@ persistence. BCI threats differ in three fundamental ways that make direct
 adoption inadequate: (1)~the target is biological tissue, not an information
 system---attacks can cause seizures, tissue necrosis, or cognitive coercion,
 none of which map to ATT\&CK's impact categories; (2)~the same technique is
-often simultaneously an attack and a therapy (e.g., deep brain stimulation is
-both a Parkinson's treatment and a neural injection vector), requiring a
+built on the same mechanism as a therapy (e.g., the stimulation used in deep
+brain stimulation for Parkinson's disease can also be delivered without authorisation), requiring a
 dual-use classification that ATT\&CK has no mechanism to express; and (3)~the
 attack lifecycle must span from radio-frequency transmission through silicon
 processing to neural tissue, crossing the bio-digital boundary that ATT\&CK's
@@ -58,36 +58,67 @@ Signal Fingerprinting, and Signal Chaining.
 
 \subsection{Evidence Classification}
 
-Each technique carries an evidence status reflecting the maturity of its
-documentation:
+Each technique carries an evidence status. Table~\ref{tab:status} gives the snapshot
+counts used in this paper beside the live counts.
 
 \begin{table}[H]
 \centering
-\caption{TARA evidence status classification with technique counts.}
+\caption{TARA evidence status: the v\SnapshotRegistryVersion{} snapshot analysed here and
+the live registry (v\LiveRegistryVersion{}, read 2026-10-17).}
 \label{tab:status}
 \small
-\begin{tabular}{@{}l l r@{}}
+\begin{tabularx}{\textwidth}{@{}l X r r@{}}
 \toprule
-\textbf{Status} & \textbf{Definition} & \textbf{Count} \\
+\textbf{Status} & \textbf{Definition (live registry)} & \textbf{v\SnapshotRegistryVersion{}} & \textbf{Live} \\
 \midrule
-Confirmed    & Documented in real-world use or peer-reviewed literature & 19 \\
-Demonstrated & Proven in laboratory or controlled conditions            & 35 \\
-Emerging     & Newly identified; limited but growing evidence           & 22 \\
-Theoretical  & Plausible based on known physics and engineering          & 31 \\
-Plausible    & Possible but with significant uncertainty                & 1 \\
-Speculative  & Hypothetical; requires unproven capabilities             & 1 \\
+Confirmed    & Retired 2026-10-16 (see text)                                          & 19 & --- \\
+Demonstrated & A published source executes the technique against a real system      & 35 & 48 \\
+Emerging     & Shown against an analogous system or in part                         & 22 & 27 \\
+Theoretical  & The mechanism is established but no attack using it has been shown   & 31 & 95 \\
+Plausible    & The mechanism is contested or indirect; the attack is reasoned        & 1  & 2 \\
+Speculative  & Neither mechanism nor attack is established                          & 1  & 1 \\
+\midrule
+             & \textbf{Total}                                                       & \SnapshotTechniques{} & \LiveTechniques{} \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
+
+\paragraph{CONFIRMED retired.} The status \emph{confirmed} was retired on 2026-10-16
+after an audit found that it spanned unrelated kinds of evidence; for example, it had been
+given to signal injection (QIF-T0001) on the strength of a position paper and a P300
+probing study, neither of which demonstrates signal injection. The 27 entries that carried
+it in the live registry were reclassified as theoretical (21), demonstrated (5) and
+plausible (1), each keeping its prior value and a reason. The 19 \emph{confirmed} entries of
+the snapshot should be read with this in mind. \textbf{No status value means that an attack
+has been carried out on a person with an implanted or worn device.}
+
+\paragraph{Evidence rule.} Every live entry records whether its sources are peer-reviewed,
+preprint or absent (158, 7 and 8 entries). \textbf{A technique with no peer-reviewed source
+may not hold a status above theoretical and does not carry a NISS score.} Papers that test a
+defence are held in a separate field, so they cannot satisfy the citation requirement for
+an attack. When the rule was applied, 34 entries broke it; 24 were given a verified
+peer-reviewed source and 10 lost their scores. ``Peer-reviewed'' currently means that no
+preprint identifier was found, which is weaker than verified.
+
+\paragraph{Hazards held separately.} Some conditions harm a device user with no attacker,
+such as a manufacturer withdrawing support for an implant. They do not belong in a catalogue
+of adversary actions, so 23 entries are held in \texttt{datalake/qif-hazards.json}. One,
+QIF-H0001 (loss of manufacturer or sponsor support), rests on two peer-reviewed
+sources~\cite{higgins2026posttrial,zhao2026consentinflux} and is theoretical. The other 22 are unsourced pointers
+to catalogue records that describe a therapy or physical mechanism; they are not warnings
+about those therapies and assert nothing about incidence in people.
 
 \subsection{Severity Distribution}
 
-CVSS v4.0 base severity ratings for all \SnapshotTechniques{} techniques show a distribution
-heavily weighted toward high and critical:
+Each technique also carries a filed severity rating. In v1.5 this table was labelled as
+CVSS v4.0 base ratings; it is in fact the registry's \texttt{severity} field, assigned by
+hand and not computed from the CVSS vectors. In the live registry it agrees with the NISS
+severity for 30 of \LiveNissScored{} scored techniques, so it should not be read as either
+a CVSS or a NISS result.
 
 \begin{table}[H]
 \centering
-\caption{TARA severity distribution (CVSS v4.0 base ratings).}
+\caption{TARA filed severity distribution (v\SnapshotRegistryVersion{} snapshot; hand-assigned).}
 \label{tab:severity}
 \small
 \begin{tabular}{@{}l r r@{}}
@@ -102,10 +133,8 @@ Low      &  3 &  2.8\% \\
 \end{tabular}
 \end{table}
 
-The dominance of high and critical ratings reflects the inherent severity of
-attacks against devices that interface directly with the nervous system. Even
-techniques with low exploitability can have severe consequences when the target
-is neural tissue.
+The weighting toward high and critical reflects the author's judgement at filing, not a
+computed result.
 
 \subsection{Category Breakdown}
 
@@ -134,8 +163,7 @@ PS & Physical Safety         &  7 \\
 
 \subsection{Dual-Use Mapping}
 
-A distinctive feature of TARA is the systematic dual-use mapping: every attack
-technique is assessed for therapeutic analogs. The same physical mechanisms that
+TARA assesses each technique for therapeutic analogs. The same physical mechanisms that
 enable attacks---electromagnetic stimulation, signal decoding, neuromodulation---are
 the mechanisms underlying established therapies such as deep brain stimulation
 (DBS)~\cite{lozano2019dbs}, transcranial magnetic stimulation
@@ -159,51 +187,35 @@ Not Mapped   & Dual-use assessment pending         &  6 &  5.5\% \\
 \end{tabular}
 \end{table}
 
-Of the \SnapshotTechniques{} techniques, 78 (71.6\%) have confirmed, probable, or possible therapeutic analogs.
-This finding underscores a fundamental challenge for BCI security: the same
-capabilities that must be defended against are often the capabilities that make
-BCIs therapeutically valuable.
+Of the \SnapshotTechniques{} techniques, 78 (71.6\%) have a confirmed, probable or
+possible therapeutic analog, and 25 are silicon-only. The finding is that many attack
+mechanisms are shared with therapies, not that every attack has a therapeutic counterpart:
+the mechanism is shared, and the boundary between therapy and attack is consent, dosage and
+oversight. Defences cannot simply remove a capability that treatment depends on.
 
 \subsection{Representative Techniques}
 
-Table~\ref{tab:representative} shows five representative techniques spanning
-different categories, severities, and dual-use classifications.
+Table~\ref{tab:representative} shows five registry entries spanning categories and dual-use
+classes. In v1.5 this table listed descriptions and identifiers that did not match the
+registry entries carrying those identifiers (for example, QIF-T0015 was described as a P300
+side channel but is directed-energy thermal damage); it now quotes the registry.
 
 \begin{table}[H]
 \centering
-\caption{Five representative TARA techniques.}
+\caption{Five representative TARA entries as stored in the registry (status: snapshot
+$\to$ live).}
 \label{tab:representative}
 \small
-\begin{tabularx}{\textwidth}{@{}l l l l X@{}}
+\begin{tabularx}{\textwidth}{@{}l X l l X@{}}
 \toprule
-\textbf{ID} & \textbf{Sev.} & \textbf{Status} & \textbf{Dual-Use} & \textbf{Description} \\
+\textbf{ID} & \textbf{Name} & \textbf{Status} & \textbf{Dual-use} & \textbf{Therapeutic analog} \\
 \midrule
-T0001 & Critical & Confirmed & Confirmed & Cortical signal injection via rogue electrode stimulation; therapeutic analog: deep brain stimulation \\
-T0015 & High & Demonstrated & Confirmed & P300 side-channel extraction of private information; therapeutic analog: P300-based spelling interfaces \\
-T0034 & High & Emerging & Probable & Calibration data poisoning during BCI training sessions; therapeutic analog: adaptive neurofeedback \\
-T0072 & Medium & Confirmed & Confirmed & Ultrasonic side-channel via bone conduction microphone; therapeutic analog: ABR audiometry \\
-T0090 & High & Demonstrated & Confirmed & WiFi CSI body sensing for respiratory and gait inference; therapeutic analog: sleep apnea detection \\
+T0001 & Signal injection & Confirmed $\to$ Theoretical & Confirmed & tDCS/tACS neuromodulation \\
+T0035 & P300 interrogation & Demonstrated & Confirmed & P300 BCI for locked-in patients \\
+T0058 & Calibration poisoning & Demonstrated & Probable & Adaptive BCI calibration \\
+T0072 & Transducer inversion (speaker-to-microphone) & Confirmed $\to$ Demonstrated & Silicon only & --- \\
+T0090 & WiFi CSI passive body sensing & Demonstrated & Confirmed & Contactless vital-sign monitoring \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-Figure~\ref{fig:severity-dist} shows the severity distribution across all
-techniques, and Figure~\ref{fig:dual-use-breakdown} illustrates the dual-use
-breakdown.
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/severity-dist.pdf}
-    \caption{TARA severity distribution across \SnapshotTechniques{} techniques.}
-    \label{fig:severity-dist}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/dual-use-breakdown.pdf}
-    \caption{Dual-use classification: 71.6\% of techniques have therapeutic analogs.}
-    \label{fig:dual-use-breakdown}
-  \end{minipage}
-\end{figure}

@@ -1,164 +1,116 @@
 % ═══════════════════════════════════════════════════════════════
-% Section 3: The Hourglass Architecture
+% Section 3: From the Hourglass to an Addressing Model
+% (label kept as sec:hourglass so earlier cross-references resolve)
 % ═══════════════════════════════════════════════════════════════
 
-\section{The Hourglass Architecture}
+\section{From the Hourglass to an Addressing Model}
 \label{sec:hourglass}
 
-The \qif architecture maps the full BCI attack surface using an 11-band hourglass
-model organized into three zones. The model is derived from two independent
-design traditions: the OSI networking reference model~\cite{zimmermann1980osi},
-which stratifies communication systems into functional layers, and functional
-neuroanatomy, which organizes the nervous system by anatomical structure and
-physiological role. The hourglass shape borrows from the Internet protocol
-architecture~\cite{deering1998hourglass}, where IP serves as a narrow waist
-through which all traffic must pass.
+Versions up to v1.5 of this paper presented an 11-band \emph{hourglass}: seven neural
+bands (N7 neocortex down to N1 spinal cord), one interface band (I0, the electrode-tissue
+boundary) and three synthetic bands (S1--S3), read as a stack. The model borrowed from the
+OSI reference model~\cite{zimmermann1980osi} and from the Internet's narrow
+waist~\cite{deering1998hourglass}, and made three claims: that I0 is a natural security
+chokepoint through which all signals pass; that every component of a BCI maps to exactly
+one band, so that no attack surface falls outside the model; and that behaviour becomes
+less deterministic ascending the neural bands. This revision withdraws all three and
+replaces the stack with addresses. This section records what changed and why.
 
-\subsection{Design Rationale}
+\subsection{Why the Stack Was Withdrawn}
 
-A BCI system spans from high-level cortical computation to low-level radio
-transmission. Any security framework must account for threats at every point
-along this path. We observe that the neural interface---the electrode-tissue
-boundary---forms a natural chokepoint analogous to IP in the Internet hourglass:
-all signals, whether neural or synthetic, must cross this boundary. Above the
-interface, attack surfaces expand through the complexity of neural tissue. Below
-it, they expand through electronic and wireless systems. The resulting shape is
-an asymmetric hourglass with the narrowest point at the interface.
+\paragraph{The numbering carries no flow.}
+If the bands were a stack, neural pathways should mostly join numerically adjacent bands.
+Recomputing each pathway's origin and target bands from the structure table gives 65
+links between distinct N codes, of which 18 (27.7\%) join adjacent codes. Over all 5,040
+possible numberings of the seven codes the mean is 28.6\%, and 60\% of numberings do at
+least as well as the published one. The order is no better than chance.
 
-\subsection{Neural Band Derivation}
+\paragraph{The thalamus is not a gate.}
+The v1.5 text used thalamocortical relay~\cite{sherman2006thalamus} to support
+signal-plausibility checks, and earlier project documents described the thalamus as the
+brain's firewall. The thalamus is the principal route by which sensory input, cerebellar
+output and basal ganglia output reach neocortex, and transmission through it is
+state-dependent~\cite{sherman2016thalamuscentral}. It is not a security control:
+brainstem neuromodulatory systems also reach cortex by extra-thalamic
+routes~\cite{edlow2012ascendingarousal}, motor thalamus integrates cortical, cerebellar and
+basal ganglia input~\cite{boschbouju2013motorthalamus}, and olfaction is not thalamus-free,
+since piriform cortex projects to the mediodorsal thalamus~\cite{courtiol2015olfactorythalamus}.
 
-The seven neural bands (N1--N7) are not arbitrary divisions. They correspond
-directly to the canonical central nervous system hierarchy established in
-foundational neuroscience texts~\cite{kandel2021neuroscience}: spinal cord,
-brainstem, cerebellum, diencephalon, basal ganglia, limbic system, and
-neocortex. This mapping was chosen for three reasons:
+\paragraph{I0 is a boundary, not a chokepoint.}
+The electrode-tissue boundary is where a recording or stimulating device transduces between
+ionic and electronic current, and it remains an address. It is not a point through which
+all attacks pass: of the \LiveTechniques{} techniques in the live catalogue, 110 carry no
+I0 tag and 53 are tagged only at device codes, among them consumer-sensor side channels
+that never touch an electrode.
 
-\begin{enumerate}
-  \item \textbf{Functional differentiation}: Each CNS division performs
-        computationally distinct roles. The spinal cord (N1) mediates reflexes;
-        the brainstem (N2) controls vital autonomic functions; the neocortex (N7)
-        performs executive cognition and language. Attacks targeting different
-        divisions produce qualitatively different harms---from respiratory arrest
-        (N2) to identity manipulation (N7).
+\paragraph{The model was not complete.}
+Nerves, roots, ganglia and sense organs had no address, so the completeness claim did not
+hold. A periphery code (PER) is proposed for them and is not yet integrated.
 
-  \item \textbf{Determinacy gradient}: Ascending the neural hierarchy, system
-        behavior becomes progressively less deterministic. Spinal reflexes (N1)
-        are largely predictable; basal ganglia dynamics (N5) exhibit chaotic
-        sensitivity; prefrontal deliberation (N7) involves the highest degree of
-        unpredictability. This gradient has direct security implications: attacks
-        at lower bands produce more predictable (and often more immediately
-        dangerous) effects, while attacks at higher bands produce less
-        predictable but potentially more insidious cognitive consequences.
+\paragraph{Determinacy was untested.}
+The per-band determinacy classes and ``QI'' ranges had no defined estimator. They are now
+recorded as untested hypotheses (\texttt{datalake/qif-hypotheses.json}), proposed for the
+earlier band memberships.
 
-  \item \textbf{Device deployment mapping}: Existing BCI devices map cleanly
-        onto specific bands. Sacral nerve stimulators and spinal cord stimulators
-        operate at N1, deep brain stimulation systems (e.g., Medtronic Percept)
-        target the subthalamic nucleus at N5, and cortical implants (e.g.,
-        Neuralink N1 chip, Blackrock Utah array) interface at N7. The band
-        structure ensures that every deployed device class has a defined security
-        context.
-\end{enumerate}
+\subsection{Addressing Version 2}
 
-Each band also exhibits characteristic neural oscillation frequency ranges
-(delta through gamma), though the bands are defined by neuroanatomy rather than
-frequency. The oscillation profile of each band informs signal-plausibility
-checks: a stimulation signal injected at N4 (thalamus) can be validated against
-the expected spectral envelope for thalamocortical rhythms~\cite{sherman2006thalamus}, providing a
-physics-based anomaly detection mechanism.
-
-\subsection{Band Definitions}
-
-Table~\ref{tab:bands} defines all 11 bands. The model uses a 7-1-3 asymmetric
-structure: seven neural bands (N7--N1), one interface band (I0), and three
-synthetic bands (S1--S3).
+The seven N codes are retained as identifiers. Each structure has one address, set by the
+adult territory that holds its principal neurons; circuits such as the basal ganglia and
+the limbic system are functional tags a structure can carry, not addresses.
+Table~\ref{tab:bands} gives the codes in use. \textbf{The number carries no severity,
+processing or traversal meaning.}
 
 \begin{table}[H]
 \centering
-\caption{QIF Hourglass: 11 bands across three zones.}
+\caption{Address codes in use (addressing version 2). Listed by code, not by rank.}
 \label{tab:bands}
 \small
-\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\begin{tabularx}{\textwidth}{@{}l l X@{}}
 \toprule
-\textbf{Band} & \textbf{Name} & \textbf{Zone} & \textbf{Attack Surface} \\
+\textbf{Code} & \textbf{Name} & \textbf{Membership rule} \\
 \midrule
-N7 & Neocortex         & Neural     & PFC, M1, V1, Broca, Wernicke---executive function, language, movement, perception \\
-N6 & Limbic System     & Neural     & Hippocampus, amygdala, insula---emotion, memory, interoception \\
-N5 & Basal Ganglia     & Neural     & Striatum, STN, substantia nigra---motor selection, reward, habit \\
-N4 & Diencephalon      & Neural     & Thalamus, hypothalamus---sensory gating, consciousness relay \\
-N3 & Cerebellum        & Neural     & Cerebellar cortex, deep nuclei---motor coordination, timing \\
-N2 & Brainstem         & Neural     & Medulla, pons, midbrain---vital functions, arousal, reflexes \\
-N1 & Spinal Cord       & Neural     & Cervical through sacral---reflexes, peripheral relay \\
+N7 & Neocortex       & Isocortex, including agranular motor areas \\
+N6 & Allocortex      & Allocortex, mesocortex and pallial nuclei, including basolateral amygdala (v1.5: ``Limbic System'') \\
+N5 & Cerebral nuclei & Subpallial nuclei: striatum, pallidum, basal forebrain, central and medial amygdala (v1.5: ``Basal Ganglia'') \\
+N4 & Diencephalon    & Thalamus, subthalamus, hypothalamus, epithalamus \\
+N3 & Cerebellum      & Cerebellar cortex and nuclei \\
+N2 & Brainstem       & Midbrain, pons and medulla, including substantia nigra and ventral tegmental area \\
+N1 & Spinal cord     & Spinal cord parenchyma; roots and ganglia are outside it \\
 \midrule
-I0 & Neural Interface  & Interface  & Electrode-tissue boundary---the hourglass waist; all signals must cross \\
+I0 & Neural interface & Electrode-tissue boundary where biological signals become electronic \\
 \midrule
-S1 & Near-Field / On-Device & Synthetic & Amplification, ADC, near-field EM coupling (0--10\,kHz) \\
-S2 & Guided-Wave / Host-Local & Synthetic & Firmware, drivers, host compute, USB, decoding, BLE/WiFi baseband (10\,kHz--1\,GHz) \\
-S3 & Far-Field / Wide-Area & Synthetic & RF transmission, directed energy, application layer (1\,GHz+) \\
+S1 & Analog front-end   & Amplification, filtering, ADC/DAC conversion \\
+S2 & Digital processing & Decoding algorithms, classification, digital signal processing \\
+S3 & Application        & Clinical software, user interface, data storage, network \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\subsection{Zone Structure}
+Three structures changed address. The substantia nigra and ventral tegmental area moved
+from N5 to N2, because they lie in the midbrain, and the subthalamic nucleus moved from N5
+to N4. All three keep their basal ganglia or reward tags. Subthalamic deep brain
+stimulation, which v1.5 placed at N5, is therefore an N4 example. Because codes keep their
+identifiers while membership changes, the atlas carries \texttt{addressing\_version: 2},
+which should be cited with any band reference. Pathway bands are now computed from the
+structure table by a script with a check mode, which the build does not yet run.
 
-\paragraph{Neural Zone (N7--N1).}
-The neural zone encompasses all biological structures from the neocortex to the
-spinal cord. Attack surfaces in this zone involve direct interaction with neural
-tissue: signal injection, neural manipulation, cognitive exploitation, and
-physical safety threats. The ordering follows neuroanatomical hierarchy---higher
-bands represent more complex cognitive functions, while lower bands represent
-more fundamental physiological processes. Attacks at lower neural bands (N1--N2)
-threaten vital functions; attacks at higher bands (N6--N7) threaten cognition,
-identity, and autonomy.
+Fourteen statements in project documents drew security conclusions from the gate analogy,
+chiefly that a deeper implant bypasses fewer protective layers. They are marked under
+review, neither deleted nor asserted. The NISS formula has no term for implant depth: all
+\LiveNissScored{} stored scores reproduce exactly from their six metric values, although
+that does not show whether depth reasoning influenced the choice of any metric level.
 
-\paragraph{Interface Zone (I0).}
-Band I0 is the singular chokepoint where biological and synthetic signals
-convert. For invasive BCIs, this is the electrode-tissue boundary where
-electrical signals are transduced from ionic currents in neural tissue to
-electronic currents in silicon. For non-invasive devices, it is the sensor
-surface (e.g., scalp electrodes for EEG). The interface band is the narrowest
-point in the hourglass and the most critical for security: every neural signal
-that reaches the synthetic system, and every stimulation signal that reaches
-neural tissue, must pass through I0.
+\subsection{Routes (Proposed)}
 
-\paragraph{Synthetic Zone (S1--S3).}
-The synthetic zone covers electronic and wireless systems from the analog
-front-end through host-side computation to radio transmission, organized by
-propagation mode and spatial scale. S1 (Near-Field/On-Device) handles analog
-signal conditioning and near-field electromagnetic coupling at the sensor level.
-S2 (Guided-Wave/Host-Local) encompasses firmware, drivers, host compute, USB,
-signal decoding, and BLE/WiFi baseband---all processes that operate over
-guided-wave interconnects within the device-local environment. S3
-(Far-Field/Wide-Area) covers radio frequency transmission, directed energy,
-and application-layer communication at off-device ranges. Threats in this zone
-are closest to traditional IT security and are most amenable to conventional
-countermeasures.
+Signal flow, which the stack could not carry, is moved to a proposed route view, staged and
+not integrated. A route is an ordered list of synaptic hops, each with its sign,
+transmitter and own evidence. A source check of all 90 hops in the 17 staged routes found
+47 supported by a source a checker read, 42 partly supported and 1 contradicted for
+primates; 3 hops are recorded as demonstrated in humans and 85 as inferred by homology from
+other species. The routes are suitable for tagging what a device touches and for teaching.
+They are not a basis for claims about what an attack can reach in a person.
 
-\subsection{Security Properties}
-
-The hourglass architecture provides three properties relevant to security analysis:
-
-\begin{enumerate}
-  \item \textbf{Completeness}: Every component of a BCI system maps to exactly
-        one band. There is no attack surface that falls outside the model.
-
-  \item \textbf{Chokepoint identification}: Band I0 identifies the natural
-        monitoring point where all signals can be inspected during transit between
-        neural and synthetic zones.
-
-  \item \textbf{Threat locality}: Each technique in the TARA taxonomy
-        (Section~\ref{sec:tara}) is annotated with the bands it affects, enabling
-        defenders to understand the spatial extent of an attack across the
-        architecture.
-\end{enumerate}
-
-Figure~\ref{fig:hourglass} illustrates the 11-band model with relative band
-widths reflecting attack surface breadth at each layer.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{figures/hourglass.pdf}
-  \caption{The QIF Hourglass Architecture. Band widths reflect relative attack
-  surface breadth. The neural interface (I0) forms the narrow waist---the
-  security chokepoint through which all signals must pass.}
-  \label{fig:hourglass}
-\end{figure}
+\paragraph{Effect on this paper.}
+The band annotations in the snapshot analysis (Sections~\ref{sec:tara}--\ref{sec:nic}) use
+the version 1 memberships. Those analyses are not recomputed here; a reader using a band
+count from them should treat it as a version 1 figure.
