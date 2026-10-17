@@ -12,7 +12,7 @@ policy response. \qif builds on each while addressing gaps left by prior work.
 \subsection{Foundational Neurosecurity}
 
 Denning, Matsuoka, and Kohno~\cite{kohno2009neurosecurity}
-coined the term ``neurosecurity'' and established the field by analyzing attack
+introduced the term ``neurosecurity'' and analyzed attack
 surfaces in implantable neurostimulators. Their work identified wireless
 reprogramming, battery depletion, and signal injection as threat categories, but
 predated modern high-bandwidth BCIs and did not propose a scoring system.
@@ -25,13 +25,11 @@ layer---a concern our governance framework addresses through consent tiers
 
 \subsection{Empirical Attack Demonstrations}
 
-Martinovic et al.~\cite{martinovic2012feasibility} demonstrated at USENIX Security
-2012 that consumer-grade EEG headsets could be exploited via P300 event-related
-potentials to extract private information---PIN numbers, bank details, and personal
-preferences---through subliminal visual stimuli embedded in a game. This remains
-the most influential empirical demonstration of a BCI side-channel attack. Our
-TARA taxonomy (Section~\ref{sec:tara}) classifies this as a confirmed technique
-in the Signal Eavesdropping category.
+Martinovic et al.~\cite{martinovic2012feasibility} showed at USENIX Security
+2012 that P300 event-related potentials recorded with consumer-grade EEG headsets
+leak information about PINs, banks and other private details at better than chance.
+TARA (Section~\ref{sec:tara}) records this as P300 interrogation (QIF-T0035), with
+status demonstrated.
 
 Ienca and Haselager~\cite{ienca2016hacking} broadened the scope to ``hacking the
 brain,'' analyzing BCI security through the lens of informational and physical
@@ -47,8 +45,7 @@ protocol-layer, and cognitive-layer threats.
 
 \subsection{Emerging Frameworks}
 
-Schroder et al.~\cite{schroder2025cyberrisks} published the most recent analysis
-(2025), developing a threat model for network-based attacks on next-generation BCIs
+Schroder et al.~\cite{schroder2025cyberrisks} (2025) developed a threat model for network-based attacks on next-generation BCIs
 and identifying associated regulatory changes needed to address them. Their work
 contributes threat categorization across network pathways but does not propose a
 scoring system, formal threat taxonomy with technique-level granularity, or clinical
@@ -77,30 +74,54 @@ access obligations for implanted neural devices.
 
 UNESCO's 2025 Recommendation on the Ethics of
 Neurotechnology~\cite{unesco2025recommendation}---adopted by 194 Member
-States---represents the first global normative framework for neurotechnology
-governance. The OECD had previously published a Recommendation on Responsible
+States---is a global normative instrument for neurotechnology governance. The OECD had previously published a Recommendation on Responsible
 Innovation in Neurotechnology~\cite{oecd2019neurotechnology} covering 36 member
-countries. Chile became the first nation to constitutionally protect
-neurorights~\cite{chile2021neurorights}. These policy instruments establish
+countries. Chile amended its constitution in 2021 to require the law to safeguard brain
+activity and the information derived from it~\cite{chile2021neurorights}. These policy instruments establish
 principles and values; \qif demonstrates technical implementation
 (Section~\ref{sec:governance}).
 
+\subsection{Cognitive Neurosecurity and Recent Surveys}
+
+Two recent preprints from one group approach the problem from the cognitive side.
+Bagley and Petritsch~\cite{bagley2024mathematicalframework} attribute the gap between
+calls for neurotechnology security and applied work to the lack of a precise way to
+describe the problems, and propose \emph{Cognitive Neurosecurity}: cognitive state
+variables combined into a high-dimensional vector, with two attack classes, readout
+attacks that identify cognitive states against a person's will and alteration attacks
+that modify them. They state that the formalism borrowed from quantum theory implies no
+physically quantum basis for cognition, treat defence as optimisation, expect defence
+against alteration to depend on detection, and argue that open publication of attack
+structures is the most ethical option. Their readout/alteration split corresponds to the
+NISS split between Cognitive Reconnaissance and Cognitive Disruption
+(Section~\ref{sec:niss}). They also note that small alterations spread across many people
+could stay below individual-level detection; TARA records techniques one device and one
+person at a time, so this is a gap in its model.
+
+Bagley et al.~\cite{bagley2026threatvectors} review threat vectors and defences across
+the loop from brain to servers. Mapping each vector in that review against TARA found
+four without a corresponding technique; they were added as QIF-T0166, T0170, T0171 and
+T0177, and one finding was filed as a variant (QIF-T0024-V01). Four of the five rest only on preprint
+evidence and are unscored; QIF-T0166 has one indirect peer-reviewed source and carries a
+provisional range. Both works are preprints, the mappings were
+made with AI assistance, and their authors have not reviewed them.
+
 \subsection{How QIF Differs}
 
-Prior work has addressed BCI security, neuroethics, and vulnerability scoring
-separately. \qif is the first framework to integrate all four layers into a
-single system:
+Prior work has addressed BCI security, neuroethics and vulnerability scoring largely
+separately. We are unaware of prior work that combines the following four elements in one
+open dataset:
 
 \begin{enumerate}
-  \item \textbf{Architecture}: A formal band model (vs.\ informal threat lists)
-  \item \textbf{Taxonomy}: Technique-level granularity with evidence classification
-        (vs.\ category-level surveys)
-  \item \textbf{Scoring}: A CVSS-compatible extension with neural-specific metrics
-        (vs.\ qualitative risk ratings)
-  \item \textbf{Clinical mapping}: A pipeline from security vulnerability to
-        psychiatric diagnosis (novel; no prior work)
+  \item \textbf{Addressing}: codes with membership rules for what a device touches
+  \item \textbf{Taxonomy}: technique-level entries with an evidence status and an
+        evidence rule (vs.\ category-level surveys)
+  \item \textbf{Scoring}: a CVSS-compatible, impact-only extension with neural-specific
+        metrics and explicit scoring states
+  \item \textbf{Clinical association}: links from techniques to diagnostic category
+        references for threat modeling
 \end{enumerate}
 
-The Neural Impact Chain (Section~\ref{sec:nic}) has no precedent in either
-cybersecurity or neuroethics literature. To our knowledge, no prior work has
-systematically mapped vulnerability severity to DSM-5-TR diagnostic codes.
+We found no prior work that systematically associates vulnerability techniques with
+DSM-5-TR diagnostic category codes, but our search was not exhaustive, and the
+association method (Section~\ref{sec:nic}) has not been clinically validated.

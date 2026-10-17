@@ -5,35 +5,33 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-Brain-computer interfaces are transitioning from laboratory prototypes to
-commercial medical devices. The security frameworks designed for information
-technology---while necessary---are insufficient for devices that read and write
-neural signals. A vulnerability in a BCI is not merely a software bug; it is a
-potential path to seizures, cognitive manipulation, privacy violation at the level
-of thought, and irreversible neural harm.
+Brain-computer interfaces are moving from laboratory prototypes to commercial medical
+devices. Security frameworks designed for information technology are necessary for these
+devices but not sufficient: a compromised neural device can act on a person, can expose
+data that cannot be reissued, and can outlast the party that supports it. That is the case
+for neurosecurity. Because the harms include violated consent and effects that cannot be
+undone, and because claims about brains are easily overstated, a neurosecurity framework
+also needs neuroethics, both to decide what counts as harm and to limit what the framework
+itself may claim.
 
-This paper presented the \qif framework: an integrated system comprising an
-11-band hourglass architecture, a 109-technique threat taxonomy (TARA), a
-CVSS v4.0 extension for neural-specific scoring (NISS with six metrics), and the
-Neural Impact Chain---a first-of-its-kind methodology for mapping security
-vulnerabilities to DSM-5-TR psychiatric diagnoses. Analysis of all 109 techniques
-reveals that 99.1\% require scoring dimensions CVSS cannot express, 71.6\% have
-therapeutic dual-use analogs, and 56.0\% pose direct or indirect psychiatric
-diagnostic risk.
+This paper presented the \qif framework, a proposed and unvalidated system comprising an
+addressing model for what a device touches, a threat catalogue (TARA), an impact-only CVSS
+v4.0 extension (NISS, six metrics, with three scoring states), and the Neural Impact Chain,
+a threat-modeling method that associates techniques with diagnostic category references.
+In the \SnapshotTechniques{}-technique snapshot analysed here, CVSS cannot express the
+primary impact of 59 techniques and misses part of it for 30 more; 71.6\% of techniques have
+a recorded therapeutic analog, showing how often the mechanism of an attack is the mechanism
+of a therapy; and 56.0\% are in a direct or indirect association class.
 
-The framework has significant limitations---no empirical validation on BCI
-hardware, no clinical validation of DSM-5-TR mappings, and single-author
-scoring---which we have documented transparently. These are not reasons to delay
-publication; they are invitations to collaborate. The BCI industry is moving
-faster than security standards. Neuralink, Synchron, and Blackrock Neurotech are
-implanting devices in patients today. The gap between what these devices can do
-and what security frameworks can assess grows wider each month.
+This revision also corrected the paper. It withdrew the hourglass stack and its chokepoint,
+retired an evidence status that conflated unrelated kinds of evidence, replaced case studies
+that did not match the registry, and reported which published figures could not be
+reproduced. The framework's limits remain: no empirical validation on BCI hardware, no
+clinical review of the category associations, no expert review of the addressing model, and
+single-author scoring. These are invitations to collaborate, not reasons to delay
+publication.
 
-The complete framework, threat registry, NISS specification, and scoring data are
-released as open source under the Apache 2.0 license. We invite collaboration
-from the neuroscience, neuroethics, cybersecurity, and clinical psychiatry
-communities. Formal registration of NISS with FIRST.org's CVSS Special Interest
-Group is planned as future work.
-
-The question is no longer whether BCI security frameworks are needed.
-The question is whether they will be ready before the first patient is harmed.
+The framework, catalogue, NISS specification and scoring data are released under the
+Apache 2.0 license. We invite review and correction from the neuroscience, neuroethics,
+cybersecurity and clinical communities; a finding that an entry is wrong is as useful as a
+finding that it holds.

@@ -6,7 +6,9 @@
 \label{sec:limitations}
 
 We present these limitations transparently to guide future validation efforts and
-to prevent overstatement of the framework's current maturity.
+to prevent overstatement of the framework's current maturity. QIF, TARA and NISS are
+proposed and unvalidated: not independently peer-reviewed as a whole, and not adopted by
+any standards body or device maker.
 
 \subsection{No Empirical Validation on Real BCI Devices}
 
@@ -14,122 +16,148 @@ The \qif framework has not been validated against operational BCI hardware.
 The TARA taxonomy was developed through literature review, threat modeling, and
 systematic analysis rather than penetration testing of actual neural devices.
 While the framework has been applied to one real software vulnerability
-(Section~\ref{sec:case-studies}), this covers only the synthetic zone. Validation
-against neural-zone and interface-zone threats requires access to implanted BCI
+(Section~\ref{sec:case-studies}), this covers only device-side code. Validation
+against interface and neural threats requires access to implanted BCI
 patients and clinical environments---resources unavailable to independent
 researchers.
 
-\subsection{DSM-5-TR Mapping Not Clinically Validated}
+\subsection{Reproducibility of the v\SnapshotRegistryVersion{} Figures}
 
-The Neural Impact Chain maps security techniques to psychiatric diagnoses based
-on known neuroanatomical pathways and functional neuroscience. However, these
-mappings have not been reviewed or validated by psychiatrists or clinical
-neuroscientists. The mappings represent our best assessment of which diagnostic
-codes correspond to disruption of specific neural functions, but clinical
-validation is essential before these mappings can inform clinical decision-making.
+For this revision the snapshot figures were recomputed from the registry file committed
+with v1.5. The evidence-status, filed-severity, category, dual-use, consent-tier, PINS and
+Neural Impact Chain counts reproduce exactly. Three do not: the gap groups (published
+13/31/64, totalling \SnapshotGapTechniques{} or \SnapshotGapPercent\%; file 14/30/59,
+totalling 103 or 94.5\%), the NISS severity distribution (published 19/37/52/1 high to none;
+file 21/37/50/1), and several stored NISS scores, which do not reproduce from
+Equation~\ref{eq:niss}. The cause was not identified. The text of this revision uses the
+reproducible gap counts; the published ones are kept in the tables for the record. The case
+studies and representative techniques of v1.5 did not match the registry at all and were
+replaced (Sections~\ref{sec:tara} and~\ref{sec:case-studies}).
+
+\subsection{Diagnostic Category Associations Not Clinically Validated}
+
+The Neural Impact Chain associates techniques with diagnostic category references through
+neuroanatomical addresses and functional neuroscience. These associations have not been
+reviewed by psychiatrists, neurologists or clinical neuroscientists. They are references for
+threat modeling, not diagnostic claims, and must not inform clinical decision-making.
 
 \subsection{NISS Weights Not Calibrated}
 
-The NISS scoring formula (Equation~\ref{eq:niss}) uses equal weights (1.0) for
-all six metrics in the default profile. The four context profiles (Clinical,
-Research, Consumer, Military) propose differential weights, but these have not
-been calibrated against empirical data, expert elicitation, or clinical outcomes.
-Weight calibration requires:
-
-\begin{itemize}
-  \item Expert panel scoring of representative scenarios
-  \item Sensitivity analysis across weight configurations
-  \item Correlation with observed clinical outcomes (when available)
-\end{itemize}
+The default profile weights BI, CV, RV and NP at 1.0 and CR and CD at 0.5
+(Equation~\ref{eq:niss}). Neither these nor the four context profiles have been calibrated
+against empirical data, expert elicitation or clinical outcomes, and the read-only ceiling
+of 3.0 (Section~\ref{sec:niss-limits}) is a direct consequence of the default choice.
+Calibration requires expert panel scoring of representative scenarios, sensitivity analysis
+across weight configurations, and correlation with observed outcomes when available.
 
 \subsection{No Interrater Reliability Study}
 
-NISS scores in the TARA registry were assigned by a single analyst (the author).
-No interrater reliability study has been conducted to assess whether independent
-scorers would assign the same metric values. CVSS interrater reliability is a
-known challenge~\cite{first2023cvss4}; NISS, with its novel neural-specific
-metrics, likely faces greater variability. A formal interrater reliability study
-with domain experts from both cybersecurity and neuroscience is needed.
+NISS scores in the TARA registry were assigned by a single analyst (the author) with AI
+assistance. No interrater reliability study has been conducted. CVSS interrater reliability
+is a known challenge~\cite{first2023cvss4}; NISS, with its novel neural-specific metrics,
+likely faces greater variability. A formal study with domain experts from both
+cybersecurity and neuroscience is needed.
 
-\subsection{Taxonomy Completeness}
+\subsection{Evidence and Completeness}
 
-The TARA registry contains 109 techniques as of version 1.5. The BCI threat
-landscape is evolving rapidly, and additional techniques will emerge as:
-(a)~new BCI devices reach market, (b)~consumer neurotechnology proliferates,
-and (c)~adversarial AI techniques advance. The current registry should be treated
-as a foundation, not a complete enumeration.
-
-Of the 109 techniques, 31 are classified as Theoretical and 1 as Speculative---these
-have not been empirically demonstrated. While they are grounded in known physics
-and engineering principles, their practical feasibility remains unvalidated.
+The analysed snapshot contains \SnapshotTechniques{} techniques (v\SnapshotRegistryVersion{}),
+of which 31 are theoretical and 1 speculative. The live registry holds \LiveTechniques{}
+techniques and \LiveVariants{} variant across \LiveTactics{} tactics
+(v\LiveRegistryVersion{}), of which 95 are theoretical. \LiveWithCvss{} carry CVSS v4.0 base
+vectors; of the NISS scores \LiveNissScored{} are complete, \LiveNissProvisional{} are
+provisional ranges and \LiveNissUnscored{} are unscored under the evidence rule. The
+\LiveNissScored{} scored techniques were scored before that rule and have not been
+re-examined against it, so the scored count is expected to fall. Live figures are not
+substituted into the analysis, because every proportion in
+Sections~\ref{sec:tara}--\ref{sec:governance} has a numerator computed over the snapshot;
+re-pointing the denominator would produce figures that describe no actual registry state.
+Current values are derivable from \texttt{datalake/qtara-registrar.json} in the project
+repository. The addressing model has not been reviewed by a human neuroanatomist, and the
+catalogue records techniques one person at a time, so attacks spread across a population are
+outside its model (Section~\ref{sec:related-work}).
 
 \subsection{Single-Author Bias}
 
-The framework was developed by a single independent researcher. While
-multi-model AI verification was used throughout development (Claude, Gemini,
-ChatGPT), the architectural decisions, scoring assignments, and clinical
-mappings reflect a single perspective. Peer review and multi-disciplinary
-collaboration are essential for maturation.
+The framework was developed by a single independent researcher. While multi-model AI
+review was used throughout development (Claude, Gemini, ChatGPT), the architectural
+decisions, scoring assignments, and clinical associations reflect a single perspective, and
+AI review does not substitute for independent human review.
 
 \subsection{AI Tool Disclosure}
 
 In accordance with arXiv, ACM, and IEEE policies on AI-assisted research, we
 disclose the following. Large language models (Claude~3.5/4, Gemini~2.0, ChatGPT-4o)
-were used during the development of this framework. Their roles, by section:
+were used during the development of this framework and versions up to v1.5. Their roles, by
+section:
 
 \begin{itemize}
   \item \textbf{Literature review} (Sections~2, 3, 7): AI assisted in identifying
         relevant publications and summarizing prior work. All citations were
         independently verified by the author via DOI resolution and publisher page
         confirmation (see version history below).
-  \item \textbf{Code generation} (Figures~1--6, TARA data pipeline): AI generated
+  \item \textbf{Code generation} (figures, TARA data pipeline): AI generated
         Python scripts for data analysis, visualization, and figure generation. All
         code was reviewed and modified by the author.
   \item \textbf{Writing assistance} (all sections): AI provided draft text that was
-        substantially rewritten, restructured, and verified by the author. The
-        proportion of AI-generated text retained verbatim is estimated at less
-        than 15\%; the remainder was rewritten or originated by the author.
+        substantially rewritten, restructured, and verified by the author. For versions
+        up to v1.5, the proportion of AI-generated text retained verbatim is estimated at
+        less than 15\%.
   \item \textbf{Cross-validation}: AI models were used to cross-check factual claims
         across multiple systems (Claude, Gemini, ChatGPT) to reduce single-model
         bias. Disagreements between models were resolved by the author through
         primary source verification.
 \end{itemize}
 
-\noindent\textbf{Human-originated contributions:} The 11-band hourglass architecture,
-TARA threat taxonomy structure, NISS scoring methodology, Neural Impact Chain
-pipeline, all DSM-5-TR mappings, all NISS metric assignments, and all research
-conclusions were conceived, designed, and decided by the author. AI did not
-originate any architectural or methodological contribution.
+\noindent\textbf{This revision (v1.6).} The v1.6 changes were drafted on 2026-10-17 by Claude
+Opus~5.5 (Anthropic), operating through Claude Code, from the project's data files, the v9
+whitepaper and the repository history. The AI system wrote the new and rewritten text (the
+abstract; Section~\ref{sec:why-neurosecurity}; the cognitive-neurosecurity subsection of
+Section~\ref{sec:related-work}; Section~\ref{sec:hourglass}; the evidence, hazards and
+representative-technique subsections of Section~\ref{sec:tara}; the gap analysis and
+Section~\ref{sec:niss-limits}; the walkthrough and association subsections of
+Section~\ref{sec:nic}; Sections~\ref{sec:why-neuroethics} and the remainder of
+Section~\ref{sec:governance}; Section~\ref{sec:case-studies}; this section's reproducibility,
+evidence and version notes; and Section~\ref{sec:conclusion}). It recomputed every figure
+it added from the data files with scripts it ran, computed the CVSS scores in
+Section~\ref{sec:case-studies}, and re-resolved each added citation through the Crossref or
+arXiv API on the same date. Text new in v1.6 is predominantly AI-drafted and was pending
+the author's review when drafted; it should not be read as author-reviewed until the
+Zenodo version description says so.
+
+\noindent\textbf{Human-originated contributions:} The original band model, the TARA
+taxonomy structure, the NISS scoring methodology, the Neural Impact Chain method, all
+diagnostic category associations, all NISS metric assignments, and the research conclusions
+of v1.0--v1.5 were conceived, designed and decided by the author. The addressing revision,
+the evidence rule and the retirement of the confirmed status were made in the project's data
+before this revision, which reports them.
 
 \noindent The author takes full responsibility for all content in this paper,
 irrespective of how it was generated. A complete, auditable transparency log
-documenting every AI contribution, human decision, and verification step is
-maintained at
+documenting AI contributions and verification steps is maintained at
 \url{https://github.com/qinnovates/qinnovate/blob/main/governance/TRANSPARENCY.md}.
 
+\paragraph{Version history.}
 An earlier version of this preprint (v1.0) contained citation errors
 introduced during AI-assisted bibliography construction, including three
 fabricated entries. These were corrected in v1.1 through a two-pass
-independent verification audit. All references have been verified against
-their source publications via DOI resolution, author publication pages,
-and database lookup. Version 1.2 corrected an internal percentage
+independent verification audit. Version 1.2 corrected an internal percentage
 inconsistency and added the author responsibility statement above.
-Version~1.3 expanded the regulatory context (Section~2.2) with
-FDORA/PATCH Act Section~524B analysis and added Schroder et al.~(2025)
-to the related work. Version~1.4 adds the missing Sherman \&
-Guillery~(2006) citation for thalamocortical relay logic in the hourglass
-derivation (Section~\ref{sec:hourglass}), replaces a mislabeled DBS citation
-with Hallett~(2007) for TMS, corrects NISS case study scores to match the
-arithmetic mean formula (Equation~\ref{eq:niss}), fixes the dual-use
-classification label, and completes a full citation and claims verification
-pass. This revision (v1.5) expands the TARA registry from 102 to 109
-techniques, splits the NISS Cognitive Integrity (CG) metric into Cognitive
-Reconnaissance (CR) and Cognitive Disruption (CD) to distinguish read vs.\
-write attacks (NISS~v1.1, six metrics), normalizes default weights
-($w_{\text{CR}} = w_{\text{CD}} = 0.5$, others~$= 1.0$) to preserve the
-cognitive dimension at its pre-split 20\% share, updates all statistics and
-tables to reflect the expanded registry, and adds neurorights dimension
-mapping for 103 of 109 techniques.
+Version~1.3 expanded the regulatory context with FDORA/PATCH Act Section~524B analysis and
+added Schroder et al.~(2025) to the related work. Version~1.4 added the Sherman \&
+Guillery~(2006) citation, replaced a mislabeled DBS citation with Hallett~(2007) for TMS,
+corrected case study scores, fixed the dual-use classification label, and completed a
+citation and claims verification pass. Version~1.5 expanded the registry from 102 to
+\SnapshotTechniques{} techniques, split the NISS Cognitive Integrity metric into Cognitive
+Reconnaissance and Cognitive Disruption (NISS~v1.1), normalized default weights, and added
+neurorights mapping for 103 of \SnapshotTechniques{} techniques.
+Version~1.6 (October 2026) replaces the hourglass stack with addressing version 2; adds the
+evidence rule, the three scoring states, the retirement of the confirmed status, the hazards
+dataset and NISS's stated limits; replaces case studies and representative techniques that
+did not match the registry; reports which snapshot figures do and do not reproduce; adds
+arguments for why neurosecurity and neuroethics are needed, with twenty newly cited
+sources; qualifies or removes priority claims, universal negatives and diagnostic language;
+removes six figures whose hard-coded values or labels no longer matched the tables or the
+model; and condenses the future-work list.
 
 \noindent\textbf{Note on AI use and preprint status:} I did not find anything
 in Zenodo's terms of use that prohibits using AI to help write a preprint, so
@@ -143,145 +171,24 @@ and revising it until it holds up to scrutiny. There is a lot more to do.
 \subsection{Future Work}
 
 \begin{enumerate}
-  \item \textbf{Reference implementation}: A software tool that automates NISS
-        scoring and NIC mapping for new techniques
-  \item \textbf{Clinical validation}: Collaboration with psychiatrists to
-        validate DSM-5-TR mappings
-  \item \textbf{Interrater reliability}: Formal study with cybersecurity and
-        neuroscience domain experts
-  \item \textbf{FIRST.org registration}: Formal submission and registration of
-        NISS as a CVSS v4.0 extension
-  \item \textbf{Empirical testing}: Penetration testing against BCI hardware in
-        controlled environments
-  \item \textbf{Weight calibration}: Expert elicitation and sensitivity analysis
-        for NISS context profile weights
-  \item \textbf{Conference paper}: Condensed version for submission to Graz BCI
-        Conference 2026
-  \item \textbf{Blockchain chain-of-evidence for I0 kernels}: Hardware-level
-        system kernels at the I0 interface band enforce immutable safety constraints
-        (amplitude bounds, rate limiting, DoS prevention). We propose extending
-        Neurowall with a blockchain-based chain-of-evidence layer that logs every
-        kernel state change, firmware configuration update, and access event to a
-        tamper-proof ledger. This creates a verifiable audit trail: patients and
-        clinicians can cryptographically verify that no unauthorized modification
-        has occurred at the hardware boundary. The design follows the principle that
-        security-critical state at the biology boundary must be independently
-        verifiable, not merely trusted. Implementation would use a lightweight
-        append-only hash chain suitable for resource-constrained implantable
-        devices, not a full distributed consensus protocol. This requires
-        hardware-software co-design research and power budget analysis for
-        on-device cryptographic operations
-  \item \textbf{Neural terminal interface paradigm}: Regardless of how networked
-        computing evolves beyond current web architectures, neural interfaces will
-        require a terminal---a minimal, reliable rendering surface for patient
-        interaction. White phosphene stimulation provides the simplest, most
-        power-efficient rendering primitive for cortical visual prosthetics. We
-        propose the neural terminal as a design target: a BCI-native interactive
-        surface that gives patients full control over their AI assistants, data
-        access, and device configuration, with blockchain-verified access logs
-        ensuring tamper-proof transparency. The terminal paradigm is deliberately
-        agnostic to application-layer evolution---terminals have persisted across
-        every computing paradigm shift (CLI, GUI, mobile, spatial) and represent
-        the most robust interface primitive for safety-critical neural applications
-  \item \textbf{Knight's Watch --- community deterrence mesh}: We propose an
-        opt-in community awareness network that leverages the environmental
-        sensors already present in vision restoration BCI devices. The concept
-        draws from the established deterrence model of community watch programs:
-        the knowledge that a community is observing changes the risk calculus
-        for those who mean harm. Participating patients contribute anonymized,
-        hashed environmental metadata---never raw imagery, never location, never
-        identity---transmitted through NSP's post-quantum encryption. The target
-        application is locating missing children and disrupting human trafficking
-        networks. Design constraints include: (1)~explicit opt-in with revocable
-        consent (cognitive liberty); (2)~COPPA compliance by architecture, not
-        policy---no biometric data on minors is collected, stored, or transmitted;
-        (3)~on-device processing via Runemate with no raw data exfiltration;
-        (4)~blockchain-auditable participation history enabling patients to verify
-        their contributions and law enforcement to verify alert provenance;
-        (5)~inheritance of the full QIF security stack (NSP, Neurowall, Runemate)
-        with no new trust assumptions. This concept requires legal analysis,
-        ethics review, community governance design, and collaboration with
-        anti-trafficking organizations before any implementation. The architecture
-        is published openly to invite scrutiny and ensure that surveillance
-        deterrence is built on privacy preservation, not surveillance expansion
-  \item \textbf{EEG data pipeline for component validation}: We have assembled a
-        curated registry of openly licensed EEG datasets (including the Mendeley
-        ADHD Adult Resting State dataset, CC~BY~4.0, 79 subjects; PhysioNet
-        motor imagery and epilepsy datasets, ODC-BY; and UCI alcoholism data,
-        CC~BY~4.0) alongside synthetic data generated through BrainFlow and
-        custom attack simulators. All datasets are tagged with provenance,
-        licensing, condition metadata, and DSM-5-TR diagnostic category references
-        in a KQL-queryable data lake. This pipeline enables validation of QIF
-        components (Spectrum/Signal Analyzer, Neurowall, threat detection) against
-        both normal and attack-scenario EEG signals. A potential research direction
-        is using spectral analysis of condition-tagged datasets to produce
-        pattern-match confidence scores---statistical similarity measures against
-        reference distributions---that could complement behavioral assessment for
-        conditions such as ADHD and autism spectrum disorder, where diagnostic
-        overlap and behavioral masking (camouflaging) present challenges for
-        traditional assessment instruments (Hull et~al.\ 2017, Lai et~al.\ 2017).
-        Three specific research gaps are positioned for investigation:
-        (a)~no ADHD-vs-ASD EEG classifier at clinical accuracy ($>$80\%) exists---published
-        classifiers compare one disorder against typically developing controls, not against
-        each other; (b)~no validated multi-paradigm EEG battery for 4-group differential
-        diagnosis (ASD, ADHD, ASD+ADHD, typically developing) exists---the ABC-CT consortium
-        battery is ASD-vs-TD only; and (c)~resting-state EEG alone is insufficient for ADHD
-        discrimination---Shephard et~al.\ (2019) demonstrated that ADHD connectivity
-        differences are invisible at rest, meaning task-state paradigms are required.
-        A particularly promising result is the face processing double dissociation:
-        in the same paradigm, the N170 component (170ms, early perceptual encoding)
-        is impaired in ASD while the N400 component (400ms, semantic/affective integration)
-        is impaired in ADHD, with the comorbid group showing both impairments. One task,
-        two time windows, complete separation. The Healthy Brain Network dataset (3,000+
-        subjects, multi-paradigm, transdiagnostic) provides a potential training set with
-        approximately 66~ASD and 406~ADHD subjects under identical recording protocols.
-        This requires independent clinical validation, larger and more diverse
-        datasets, and formal sensitivity/specificity analysis before any clinical
-        application. The security implication is direct: EEG recordings capable of
-        differentiating neurodevelopmental conditions contain neural signature information
-        sufficient for re-identification and clinical inference, making the security of
-        diagnostic BCI pipelines a present design requirement, not a future concern.
-        Documentation: \url{https://github.com/qinnovates/qinnovate/blob/main/shared/EEG-DATA-PIPELINE.md}
-  \item \textbf{LiDAR-to-BCI Bridge --- vision prosthesis security prototype}:
-        We are developing a commodity-hardware prototype that uses iPhone LiDAR to
-        demonstrate the sensor-to-classification pipeline required by neural vision
-        prostheses. The prototype captures real-time spatial depth data, classifies
-        objects using on-device AI (Core ML), and exports privacy-stripped data---all
-        without network connectivity. The initial clinical use-case is guide dog
-        detection: a single-class, safety-critical classifier that helps a vision
-        prosthesis patient locate their guide dog in the visual field. The guide dog
-        is the failsafe anchor---the one object the system must identify reliably,
-        because early prostheses will not produce sufficient visual quality for
-        independent navigation. The prototype includes phosphene simulation modes
-        (PRIMA 378-pixel, Orion 60-electrode) to visualize what a prosthesis patient
-        would perceive, and an adversarial testing framework mapped to TARA techniques
-        T0001 (signal injection), T0010 (replay attack), T0015 (stimulation parameter
-        manipulation), T0025 (data poisoning), and T0030 (side-channel leakage). Raw
-        depth data serves as a defense-in-depth failsafe: if the AI classification
-        layer fails, the patient still receives spatial information from the depth
-        sensor. This work bridges TARA from a theoretical threat catalog to a testable
-        security framework applied to a clinical vision restoration scenario. Phase~3
-        requires clinical collaboration with vision prosthesis researchers and guide
-        dog training organizations. Full technical specification:
-        \url{https://github.com/qinnovates/qinnovate/blob/main/docs/research/lidar-bci-bridge-technical-spec.md}
-  \item \textbf{BCI Knight's Watch --- consent-gated public safety}: Looking further
-        ahead, if prosthesis resolution reaches a level that supports face rendering
-        (estimated 1,000+ channels), a future capability emerges: patients could
-        voluntarily opt in to help identify missing children via Amber Alerts. We
-        propose the \emph{BCI Knight's Watch}, a consent-gated execution chain where
-        facial comparison activates \emph{only} when all of the following gates pass:
-        (1)~the patient has explicitly enrolled in ``BCI Community Watch'' through a
-        deliberate informed consent process, (2)~a verified Amber Alert has been
-        received, (3)~the device is in the relevant geographic area, (4)~a
-        non-biometric physical profile pre-screen (height, weight via LiDAR depth)
-        matches the alert parameters, and (5)~only then does a 1:1 on-device facial
-        comparison occur against the single missing child's embedding. No biometric
-        data is ever stored or transmitted---only the patient's own location, if they
-        choose to report. The playbook is COPPA-compliant by design: no child's
-        biometric data is collected, stored, or transmitted at any stage. This is not a
-        current deliverable---it is documented to establish the consent architecture
-        before the technical capability arrives. Face detection is deliberately
-        excluded from all current prototype phases (see technical specification for
-        rationale). Implementation would require IRB approval, BIPA/GDPR~Article~9
-        compliance review, and coordination with NCMEC
+  \item \textbf{Re-examination of existing scores}: apply the evidence rule to the
+        \LiveNissScored{} scored techniques
+  \item \textbf{Expert review}: a neuroanatomist's review of the addressing model before
+        the routes are integrated, and clinical review of the category associations
+  \item \textbf{Interrater reliability and weight calibration}: a formal study with
+        cybersecurity and neuroscience experts, with sensitivity analysis of the weights
+  \item \textbf{Checks in the build}: run the band check, a score recomputation and the
+        route gate in continuous integration
+  \item \textbf{Standards input}: offer NISS to FIRST.org's CVSS community only after at
+        least one independent researcher has reviewed the scoring method; no submission has
+        been made
+  \item \textbf{Empirical testing}: testing against BCI hardware in controlled environments
+        with ethics approval
+  \item \textbf{Exploratory directions} documented in the repository and not claims of this
+        paper, each requiring ethics review before any implementation: hash-chained audit
+        logs for interface firmware; an EEG dataset pipeline for validating components
+        (\url{https://github.com/qinnovates/qinnovate/blob/main/shared/EEG-DATA-PIPELINE.md});
+        a commodity-hardware vision-prosthesis security prototype
+        (\url{https://github.com/qinnovates/qinnovate/blob/main/docs/research/lidar-bci-bridge-technical-spec.md});
+        and consent-gated public-safety concepts
 \end{enumerate}

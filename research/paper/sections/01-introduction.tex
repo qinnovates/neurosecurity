@@ -14,79 +14,120 @@ advancing toward high-bandwidth cortical interfaces for paralyzed patients.
 Investment in neurotechnology grew 700\% between 2014 and 2021, with the global
 market projected to reach \$25 billion by 2030~\cite{unesco2025recommendation}.
 
-Despite this rapid commercialization, no security standard exists specifically for
-neural devices. Section 3305 of the Food and Drug Omnibus Reform Act of 2022
+Regulation has begun to require cybersecurity for these devices without saying how to
+assess it. Section 3305 of the Food and Drug Omnibus Reform Act of 2022
 (FDORA, Pub.~L. 117-328) added Section 524B to the FD\&C Act~\cite{fda524b},
 mandating cybersecurity documentation---including threat modeling, software bills
-of materials, and vulnerability disclosure---in all premarket submissions for
-connected medical devices. Since October 2023, the FDA enforces a
-Refuse-to-Accept policy for non-compliant submissions. However, Section 524B
-does not specify which threat taxonomy or scoring system to use, and the
-referenced standards (CVSS, IEC 62443, AAMI TIR57, ISO 14971) contain no
-provisions for the unique risks of devices that read and write neural signals.
-The EU Medical Device Regulation~\cite{eumdr2017} similarly lacks neural-specific
-security requirements.
+of materials, and vulnerability disclosure---in premarket submissions for
+connected medical devices, and since October 2023 the FDA has applied a
+Refuse-to-Accept policy to non-compliant submissions. Section 524B does not specify
+a threat taxonomy or scoring system, and we are unaware of provisions in the standards
+it draws on (CVSS, IEC 62443, AAMI TIR57, ISO 14971) for the risks specific to devices
+that read and write neural signals. We found no neural-specific security requirements in
+the EU Medical Device Regulation~\cite{eumdr2017}.
+
+\subsection{Why Neurosecurity}
+\label{sec:why-neurosecurity}
+
+Four properties of neural devices, each documented in the literature, separate their
+security from that of other connected medical devices.
+
+\paragraph{The device acts on a person.}
+A stimulating device delivers current to tissue. The same mechanisms underlie established
+therapies such as deep brain stimulation~\cite{lozano2019dbs} and transcranial magnetic
+stimulation~\cite{hallett2007tms}, so an unauthorised change to stimulation parameters is a
+change to a treatment, not to a record. Some such effects may not be reversible, and a
+security assessment has to say so.
+
+\paragraph{Neural data cannot be reissued.}
+A leaked password can be changed; a recording of a person's brain activity cannot. Present
+devices do not read thoughts~\cite{ienca2018brainleaks,wexler2019neurohype}: speech
+neuroprostheses decode attempted speech using models trained on a cooperating
+user~\cite{willett2023speech}. Information can nevertheless leak. Martinovic et
+al.~\cite{martinovic2012feasibility} showed that P300 responses recorded with a consumer
+headset reveal information about PINs, banks and other private details at better than
+chance. If decoders keep improving, a recording retained today becomes a readout risk later; the
+catalogue records this as harvest-now-decode-later (QIF-T0166), with theoretical status.
+
+\paragraph{The device can outlast its support.}
+An implant stays in a person after the party that maintains it withdraws. In a modified
+Delphi study with a 24-expert panel, the 14 experts who completed the final survey agreed
+that responsibility for implanted neural devices after a trial needs explicit
+rules~\cite{higgins2026posttrial}. No attacker is needed for harm
+here, which is why this revision keeps such conditions in a separate hazards dataset
+(Section~\ref{sec:tara}).
+
+\paragraph{The attack surface spans biology and silicon.}
+A recent review treats every element of the loop between brain, device, linked devices and
+servers, and every link between them, as an attack surface, and describes defence frameworks
+built specifically for BCIs as research prototypes~\cite{bagley2026threatvectors}.
+
+Two consequences follow. First, an assessment needs dimensions that information-technology
+scoring lacks (Section~\ref{sec:niss}). Second, the evidence base is thin: of the
+\LiveTechniques{} techniques in the live catalogue, 95 are theoretical, and none of the
+catalogue's status values means that an attack has been carried out on a person with a
+device. Neurosecurity at this stage is therefore anticipatory work, and its credibility
+depends on separating what has been shown from what is supposed. The evidence rules added
+in this revision (Section~\ref{sec:tara}) exist for that reason.
 
 \subsection{The Scoring Gap}
 
 The Common Vulnerability Scoring System (CVSS v4.0)~\cite{first2023cvss4} is the
-industry standard for assessing vulnerability severity. CVSS excels at capturing
-exploitability characteristics---attack vector, complexity, privileges required,
-user interaction---and information system impact across confidentiality, integrity,
-and availability. However, CVSS was designed for information technology assets.
-It has no concept of:
+industry standard for assessing vulnerability severity. CVSS captures exploitability
+characteristics---attack vector, complexity, privileges required, user
+interaction---and impact on the confidentiality, integrity and availability of
+information systems. It has no metric for:
 
 \begin{itemize}
-  \item \textbf{Biological tissue damage}---seizure induction, neural tissue
-        necrosis, involuntary motor activation
-  \item \textbf{Cognitive integrity}---thought privacy, perception manipulation,
-        identity modification
+  \item \textbf{Biological tissue damage}---seizure induction, tissue injury,
+        involuntary motor activation
+  \item \textbf{Unauthorised reading or disruption of neural function}---inference
+        from neural data, perceptual or motor disruption
   \item \textbf{Consent boundaries}---the distinction between operating within
-        consented parameters and covert neural manipulation
+        consented parameters and covert manipulation
   \item \textbf{Damage reversibility}---IT assets can be restored from backup;
-        neural tissue cannot be rebooted
-  \item \textbf{Neuroplastic consequences}---prolonged adversarial stimulation can
-        cause lasting structural changes to the brain
+        neural tissue cannot
+  \item \textbf{Neuroplastic consequences}---prolonged stimulation can cause
+        lasting change to neural pathways
 \end{itemize}
 
-When a vulnerability in a BCI device can induce seizures, decode private thoughts,
-or cause irreversible brain damage, a CVSS base score alone is insufficient.
-The gap is not theoretical: our analysis of 109 BCI attack techniques shows that
-99.1\% require scoring dimensions that CVSS cannot express.
+When a vulnerability in a BCI could induce seizures, expose information inferred from
+neural signals, or cause lasting harm, a CVSS base score alone is insufficient. In the
+\SnapshotTechniques{}-technique snapshot analysed here, CVSS cannot express the primary
+impact of 59 techniques and misses part of it for 30 more (Section~\ref{sec:niss}).
 
 \subsection{Contributions}
 
-This paper presents an integrated security framework with four contributions:
+This paper presents a proposed, unvalidated framework with four parts:
 
 \begin{enumerate}
-  \item \textbf{The Hourglass Architecture} (Section~\ref{sec:hourglass}): An
-        11-band model mapping attack surfaces across three zones---neural (7~bands,
-        from neocortex to spinal cord), interface (1~band, the electrode-tissue
-        boundary), and synthetic (3~bands, from analog electronics to wireless
-        radio). The hourglass shape reflects a natural security chokepoint at the
-        neural interface.
+  \item \textbf{An addressing model} (Section~\ref{sec:hourglass}): eleven codes in
+        use---seven for neural structures (N1--N7), one for the electrode-tissue
+        interface (I0) and three for device systems (S1--S3)---each with a membership
+        rule. The codes are addresses with no order. Earlier versions of this paper
+        presented them as an hourglass stack with a chokepoint; Section~\ref{sec:hourglass}
+        says why that was withdrawn.
 
-  \item \textbf{TARA Threat Taxonomy} (Section~\ref{sec:tara}): A registry of
-        109~techniques across 15~tactics and 8~domains, each classified by
-        evidence status, severity, and dual-use therapeutic potential. TARA is
-        an independent taxonomy inspired by the structural methodology of MITRE
-        ATT\&CK\textsuperscript{\textregistered}, tailored to the BCI domain.
+  \item \textbf{TARA} (Section~\ref{sec:tara}): a catalogue of
+        \SnapshotTechniques{}~techniques across \SnapshotTactics{}~tactics in the analysed
+        snapshot (\LiveTechniques{} in the live registry), each classified by evidence
+        status, severity and dual-use therapeutic potential. TARA is an independent
+        taxonomy inspired by the structure of MITRE ATT\&CK\textsuperscript{\textregistered}.
 
-  \item \textbf{NISS Scoring System} (Section~\ref{sec:niss}): The Neural Impact
-        Scoring System---a CVSS v4.0 extension designed to conform with
-        FIRST.org's official extension mechanism (User Guide
+  \item \textbf{NISS} (Section~\ref{sec:niss}): the Neural Impact Scoring
+        System, an impact-only CVSS v4.0 extension designed to conform with
+        FIRST.org's extension mechanism (User Guide
         \S3.11)~\cite{first2023cvss4userguide}, adding six neural-specific
-        metrics. Formal registration with FIRST.org is planned as future work.
+        metrics, with stated limits and three scoring states.
 
-  \item \textbf{The Neural Impact Chain} (Section~\ref{sec:nic}): A methodology
-        mapping security vulnerabilities to psychiatric diagnoses through a
-        six-stage pipeline: technique $\to$ hourglass band $\to$ neural
-        structure $\to$ cognitive function $\to$ NISS score $\to$ DSM-5-TR
-        diagnostic code~\cite{apa2022dsm5tr}.
+  \item \textbf{The Neural Impact Chain} (Section~\ref{sec:nic}): a threat-modeling
+        method that associates techniques with diagnostic category references through
+        addresses, structures and functions to DSM-5-TR and ICD-10-CM
+        codes~\cite{apa2022dsm5tr}. The codes are category references, not
+        diagnostic claims.
 \end{enumerate}
 
-Sections~\ref{sec:governance}--\ref{sec:case-studies} address governance alignment
-with international neuroethics frameworks and present comparative case studies.
-Section~\ref{sec:limitations} discusses limitations and validation gaps honestly.
-The complete framework, threat registry, and scoring system are released as open
-source under the Apache 2.0 license.
+Section~\ref{sec:governance} sets out why a security framework needs neuroethics and
+how it enters the scoring; Section~\ref{sec:case-studies} presents case studies, and
+Section~\ref{sec:limitations} states limitations and what this revision changed. The
+framework, catalogue and scoring system are released under the Apache 2.0 license.
