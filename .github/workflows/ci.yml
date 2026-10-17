@@ -45,6 +45,10 @@ jobs:
       - name: Test
         run: npm test
 
+      # tsc needs Astro's generated types (astro:content); a fresh checkout has none.
+      - name: Generate Astro types
+        run: npx astro sync
+
       - name: Type check
         run: npm run type-check
 
