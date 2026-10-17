@@ -56,7 +56,9 @@ INTERNAL_MARKERS = re.compile("(?i)" + "|".join((
     "not yet sent " + "externally",
 )))
 
-SECRETS = (
+# Named by what they match, not "secrets": the scanner reports a fixed pattern
+# name and never the matched text.
+LEAK_PATTERNS = (
     ("private key block", re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH |DSA |PGP )?PRIVATE KEY")),
     ("AWS access key id", re.compile(r"\bAKIA[0-9A-Z]{16}\b")),
     ("GitHub token", re.compile(r"\bgh[pousr]_[A-Za-z0-9]{36,}\b")),
@@ -81,9 +83,9 @@ def scan(path: Path) -> list[tuple[int, str]]:
             if match.group(1).lower() not in GENERIC_NAMES:
                 # Never echo the name itself: the report would become the leak.
                 findings.append((number, "home-directory path naming a user"))
-        for label, pattern in SECRETS:
+        for pattern_name, pattern in LEAK_PATTERNS:
             if pattern.search(line):
-                findings.append((number, label))
+                findings.append((number, pattern_name))
         if INTERNAL_MARKERS.search(line):
             findings.append((number, "document marked internal"))
     return findings
@@ -101,10 +103,10 @@ def main() -> int:
             total += 1
             print(f"::error file={rel_name}::internal material is tracked" if args.github else f"  LEAK  {rel_name}  internal material is tracked")
             continue
-        for number, label in scan(path):
+        for number, finding_kind in scan(path):
             rel = path.relative_to(REPO_ROOT)
             total += 1
-            print(f"::error file={rel},line={number}::{label}" if args.github else f"  LEAK  {rel}:{number}  {label}")
+            print(f"::error file={rel},line={number}::{finding_kind}" if args.github else f"  LEAK  {rel}:{number}  {finding_kind}")
 
     if total:
         print(f"\n{total} leak(s) in tracked files. Redact with $HOME, ~ or a repo-relative path; "
