@@ -17,7 +17,7 @@ const BAND_GROUPS = [
 ] as const;
 
 const ALL_BANDS = BAND_GROUPS.flatMap(g => g.bands);
-const SEVERITIES: Severity[] = ['critical', 'high', 'medium', 'low'];
+const SEVERITIES: Severity[] = ['critical', 'high', 'medium', 'low', 'none'];
 const STATUSES: Status[] = ['CONFIRMED', 'DEMONSTRATED', 'EMERGING', 'THEORETICAL', 'PLAUSIBLE', 'SPECULATIVE'];
 
 // ═══ Helpers ═══
@@ -107,7 +107,7 @@ export default function TaraExplorer({ techniques }: Props) {
 
       {/* Filter chips */}
       <div className="mb-3">
-        <span className="block mb-1.5 text-[11px] font-bold uppercase tracking-wide" style={{ color: 'var(--color-text-muted, #94a3b8)' }}>Severity</span>
+        <span className="block mb-1.5 text-[11px] font-bold uppercase tracking-wide" style={{ color: 'var(--color-text-muted, #94a3b8)' }}>Neural-impact severity (NISS)</span>
         <div className="flex flex-wrap gap-[0.3rem]">
           {SEVERITIES.map(s => (
             <button key={s} onClick={() => setSelSeverity(toggle(selSeverity, s))}
@@ -185,7 +185,7 @@ export default function TaraExplorer({ techniques }: Props) {
         <table className="w-full text-[13px]" style={{ borderCollapse: 'collapse' }}>
           <thead>
             <tr>
-              {['ID', isClinical ? 'Therapeutic Analog' : isBoth ? 'Technique / Analog' : 'Technique', 'Severity', 'Status', 'NISS', 'Bands'].map((h: string) => (
+              {['ID', isClinical ? 'Therapeutic Analog' : isBoth ? 'Technique / Analog' : 'Technique', 'Severity (NISS)', 'Status', 'NISS', 'Bands'].map((h: string) => (
                 <th key={h} className="px-2.5 py-2 text-left font-bold text-[10px] uppercase tracking-wide whitespace-nowrap"
                   style={{ color: 'var(--color-accent-primary, #60a5fa)', background: 'rgba(0,0,0,0.04)', borderBottom: '2px solid rgba(59,130,246,0.25)' }}>{h}</th>
               ))}

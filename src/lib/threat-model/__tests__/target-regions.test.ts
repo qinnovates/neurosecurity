@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest';
-import { BRAIN_REGION_COORDS } from '@/components/atlas/brainmap/brain-regions';
 import type { DeviceModel } from '../device-model';
 import { buildModelFromIntake, defaultAnswersFor } from '../intake-to-model';
 import { isNeuralInterfaceElement, listTargetRegions } from '../target-regions';
@@ -49,12 +48,5 @@ describe('isNeuralInterfaceElement', () => {
       for (const link of model.links) expect(isNeuralInterfaceElement(model, link.id), link.id).toBe(false);
       expect(isNeuralInterfaceElement(model, null)).toBe(false);
     }
-  });
-});
-
-describe('the schematic region map', () => {
-  it('has a position for every atlas region, so any target region can be drawn', () => {
-    const withoutPosition = engineData.regions.filter((region) => !(region.id in BRAIN_REGION_COORDS)).map((region) => region.id);
-    expect(withoutPosition).toEqual([]);
   });
 });

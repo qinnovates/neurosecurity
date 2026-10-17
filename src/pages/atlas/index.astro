@@ -11,6 +11,7 @@ import { HOURGLASS_BANDS, TARA_TECHNIQUES } from '@/lib/qif-constants';
 import { getCollection } from 'astro:content';
 import { getPostDate } from '@/lib/utils';
 import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
+import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';
 
 // Load chain data for stats
 // A missing or malformed file fails the build rather than rendering "0 chains".
@@ -125,6 +126,8 @@ const iconSvg: Record<string, string> = {
   wide={true}
 >
   <AtlasViewSwitcher current="/atlas/" />
+  <!-- Which anatomy index this page was built with. The band list's 3D view reads it when a visitor asks for the view. -->
+  <AtlasIndexPin />
 
   <!-- Hero Section -->
   <div class="mb-10">

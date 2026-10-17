@@ -4,16 +4,17 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "qtara"
-version = "0.3.0"
+version = "0.4.0"
 authors = [
   { name="Qinnovate" },
 ]
-description = "TARA: proposed, unvalidated threat catalog for neural-device threat modeling and severity scoring"
+description = "[DEPRECATED: final release] TARA: proposed, unvalidated threat catalog for neural-device threat modeling and severity scoring"
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 requires-python = ">=3.9"
 classifiers = [
+    "Development Status :: 7 - Inactive",
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
     "Topic :: Security",

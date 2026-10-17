@@ -1,6 +1,6 @@
 /**
  * AtlasContext — shared state for the unified Atlas Dashboard.
- * Links hourglass, brain visualization, and detail panel interactions.
+ * Links hourglass, band list, and detail panel interactions.
  * Syncs selected band + tab to URL hash for deep-linking.
  */
 

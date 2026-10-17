@@ -1,0 +1,18 @@
+---
+// Correction banner for archived whitepaper versions. The archived text itself is
+// left unchanged (whitepaper archival rule); this notice sits above it.
+import { TARA_FDA_STATUS, WHITEPAPER_524B_CORRECTION } from '@/lib/whitepaper-corrections';
+---
+<aside
+  class="mb-8 p-4 rounded-lg border-2 border-red-400/50 bg-red-50/50"
+  role="note"
+  aria-label={WHITEPAPER_524B_CORRECTION.heading}
+>
+  <p class="font-semibold text-red-800 mb-1">{WHITEPAPER_524B_CORRECTION.heading}</p>
+  <p class="text-sm text-red-700 mb-2">{WHITEPAPER_524B_CORRECTION.retracted}</p>
+  <p class="text-sm text-red-700 mb-2">{TARA_FDA_STATUS}</p>
+  <p class="text-sm text-red-700">
+    {WHITEPAPER_524B_CORRECTION.preserved}
+    <a href="/research/whitepaper/" class="underline font-medium">Read the current version →</a>
+  </p>
+</aside>

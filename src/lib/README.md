@@ -38,7 +38,7 @@ The KQL (Kusto Query Language) engine is the primary data access layer. All comp
 | `nsp-constants.ts` | Neural Sensory Protocol constants |
 | `neurowall-constants.ts` | Neurowall device specs |
 | `bci-limits-constants.ts` | BCI performance limits |
-| `brain-view-data.ts` | Brain visualization data |
+| `brain-view-data.ts` | Per-band view data (security, clinical, governance) for `BandViewPanel` |
 | `glossary-constants.ts` | Glossary term definitions |
 | `evidence-tiers.ts` | Evidence classification schema (STRONG/MODERATE/WEAK/UNVERIFIED) |
 | `convergence-data.ts` | Convergence visualization data |

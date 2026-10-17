@@ -80,7 +80,8 @@ All files in `shared/`. This is the single source of truth — site components, 
 | `id` | Primary key (e.g., `nigrostriatal`) | 1 |
 | `origin` / `target` | Brain region names | N:1 |
 | `neurotransmitter` | `qif-neurotransmitters.json → id` | N:1 |
-| `dsm_conditions[]` | DSM-5-TR codes (F##.#) | 1:N |
+| `dsm_conditions[]` / `dsm_names[]` | ICD-10-CM chapter F codes (DSM-5-TR category references), official titles | 1:N |
+| `icd10_conditions[]` / `icd10_names[]` | ICD-10-CM codes outside chapter F (G, H, R, ...), official titles | 1:N |
 | `disruption_effects[]` | Clinical outcomes if pathway disrupted | 1:N |
 | `bci_relevance` | HIGH / MEDIUM / LOW | 1:1 |
 | `category` | neurotransmitter / sensory / motor / limbic / cortical / cerebellar | 1:1 |
@@ -98,7 +99,8 @@ All files in `shared/`. This is the single source of truth — site components, 
 | `transporters[]` | Reuptake proteins (DAT, SERT, NET, ...) | 1:N |
 | `degradation_enzymes[]` | MAO-A, MAO-B, COMT, AChE, ... | 1:N |
 | `genes[]` | HGNC gene nomenclature | 1:N |
-| `dsm_conditions[]` | DSM-5-TR codes with mechanism detail | 1:N |
+| `dsm_conditions[]` | ICD-10-CM chapter F codes with mechanism detail | 1:N |
+| `icd10_conditions[]` | ICD-10-CM codes outside chapter F, same shape | 1:N |
 
 ### Layer 5: Molecular Dependencies (Micro)
 
@@ -126,10 +128,10 @@ Precursor amino acid (e.g., L-tyrosine)
 
 | Cluster | Example Conditions | Count |
 |---------|-------------------|-------|
-| Cognitive/Psychotic | Schizophrenia (F20.x), Delirium (F05), Psychotic disorder (F06.2) | ~12 |
-| Mood/Trauma | MDD (F32.x), Bipolar (F31.x), PTSD (F43.10), GAD (F41.1), OCD (F42.x) | ~15 |
-| Motor/Neurocognitive | Parkinson's (G20), MS (G35), Epilepsy (G40.x), Alzheimer's (G30.x), ALS (G12.21) | ~10 |
-| Persistent/Personality | BPD (F60.x), Depersonalization (F48.1) | ~5 |
+| Cognitive/Psychotic | Schizophrenia (F20), Delirium (F05), Psychotic disorder (F06.2) | ~12 |
+| Mood/Trauma | Depressive episode (F32), Bipolar (F31), PTSD (F43.10), GAD (F41.1), OCD (F42) | ~15 |
+| Motor/Neurocognitive | Parkinson's (G20), MS (G35), Epilepsy (G40), Alzheimer's (G30), ALS (G12.21) | ~10 |
+| Persistent/Personality | Specific personality disorders (F60), Depersonalization (F48.1) | ~5 |
 | Non-Diagnostic | Silicon-only attacks (no clinical outcome) | ~6 |
 
 ### In Progress (v2.0): ICD-11 + Neurology (Non-Psychiatric)
@@ -177,7 +179,7 @@ For each sensory/neurological outcome, NISS v2.0 scores:
 
 **Extended NISS Vector (v2.0):**
 ```
-NISS:2.0/BI:H/CR:H/RE:M/SC:L/DSM:F32.x/ICD:AB32/R:0.7/FI:0.8/PS:0.6/CE:0.5/MC:0.9
+NISS:2.0/BI:H/CR:H/RE:M/SC:L/DSM:F32/ICD:AB32/R:0.7/FI:0.8/PS:0.6/CE:0.5/MC:0.9
 ```
 
 ### Severity Scale for Non-DSM Outcomes
@@ -235,10 +237,10 @@ brain_regions
 | Component | What It Shows | Data Sources |
 |-----------|-------------|-------------|
 | `HourglassVisualization.tsx` | 11-band stack with technique counts per band | qtara-registrar, brain-bci-atlas |
-| `BrainVisualization.tsx` | 3D brain with region hotspots, security/clinical/governance views | brain-bci-atlas, neural-pathways |
+| `BandViewPanel.tsx` | The seven neural bands as a list, in security/clinical/governance views; draws no anatomy and links to the atlas explorer | built by `src/lib/brain-view-data.ts` |
+| `atlas-scene/AtlasExplorer.tsx` | The one brain scene, from licensed atlas meshes (`/atlas/anatomy/`) | qif-anatomy-* files, fetched at run time |
 | `TaraVisualization.tsx` | Full threat atlas with filtering, sorting, NISS scores | qtara-registrar |
 | `ClinicalDashboard.tsx` | DSM-5-TR diagnostic mapping | dsm-mappings, qtara-registrar |
-| `BciDashboard.tsx` | 6-panel device explorer (specs, threats, brain, hourglass, risk, clinical) | All files |
 | `BciKql.tsx` | In-browser KQL query engine over all datasets | All files |
 | **TBD: NeurotransmitterPathwayViz** | Synthesis chains, cofactors, receptors, disruption effects | neural-pathways, neurotransmitters |
 | **TBD: SensoryModalityMap** | Non-DSM neurological outcomes by sensory modality | ICD-11 mappings (v2.0) |
@@ -267,7 +269,8 @@ The mapping is best visualized as a **drill-down flow** — start at any level a
               Degradation: glutamate dehydrogenase
   ↓ click clinical
 [Clinical Outcomes]
-  DSM-5-TR: Visual hallucinations (F16.x), Seizure disorder (G40.x)
+  DSM-5-TR category (ICD-10-CM chapter F): Hallucinogen related disorders (F16)
+  ICD-10-CM (outside chapter F): Epilepsy and recurrent seizures (G40)
   ICD-11: Phosphenes, cortical blindness (9D90), photosensitive epilepsy
   NISS: 7.2 (High) — R:0.6/FI:0.8/PS:0.9/CE:0.7/MC:0.8
 ```

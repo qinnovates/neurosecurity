@@ -272,7 +272,7 @@ Beyond the seven unaddressed properties, five structural gaps in existing regula
 
 **Legal context:** Section 524B of the FD&C Act (via FDORA) mandates threat modeling and cybersecurity documentation for all medical devices with software. FDA enforces a Refuse-to-Accept policy: submissions lacking cybersecurity documentation are rejected before review.
 
-**Failure mode:** Section 524B mandates that manufacturers perform threat modeling but does not specify which threat taxonomy or scoring system to use for neural devices. The referenced standards (CVSS, IEC 62443, AAMI TIR57, ISO 14971) provide processes and scoring for general medical devices. None catalog neural-specific attack techniques. A manufacturer can satisfy FDORA by performing CVSS-based threat modeling that scores a neural injection attack identically to a web application SQL injection, both rated on the same scale with no neural-specific dimensions.
+**Failure mode:** Section 524B requires cybersecurity documentation for cyber devices, and FDA's premarket guidance (Feb 2026, nonbinding) recommends threat modeling documentation, but neither specifies which threat taxonomy or scoring system to use for neural devices. Commonly used standards (CVSS, IEC 62443, AAMI TIR57, ISO 14971) provide processes and scoring for general medical devices. None catalog neural-specific attack techniques. A manufacturer could document CVSS-based threat modeling that scores a neural injection attack identically to a web application SQL injection, both rated on the same scale with no neural-specific dimensions.
 
 **Consequence:** FDA receives cybersecurity documentation that technically satisfies the requirement but fails to identify or score the most dangerous BCI-specific threats. A neural ransomware scenario scores the same as a data breach scenario because CVSS has no dimension for "biological harm" or "cognitive integrity loss."
 
@@ -444,7 +444,7 @@ CVSS is a consensus-driven standard maintained by hundreds of organizations. Pro
 
 ### 6.1 FDA/CDRH: Neural Threat Categories in 524B Guidance
 
-**The gap:** Section 524B mandates cybersecurity documentation but references generic frameworks (CVSS, IEC 62443). The February 2026 cybersecurity guidance implements the requirement with no neural-data-specific controls.
+**The gap:** Section 524B requires cybersecurity documentation for cyber devices but names no technical framework. FDA's February 2026 premarket cybersecurity guidance (nonbinding) cites general frameworks such as ANSI/ISA 62443-4-1 and contains no neural-data-specific controls.
 
 **Recommendation:** Update the 524B guidance to include neural-specific threat categories and require neural impact scoring alongside CVSS for BCI submissions.
 
@@ -873,7 +873,7 @@ Validation (simulation only, not clinically validated):
   BrainFlow: 16-channel synthetic board validation
 
 Code: github.com/qinnovates/qinnovate
-PyPI: pip install qtara
+PyPI: qtara (deprecated 2026-10-17; final release 0.4.0. the hosted API was also retired 2026-10-17; use datalake/qtara-registrar.json)
 ```
 
 ---

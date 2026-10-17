@@ -2,6 +2,8 @@
 
 BCI security research: website (Astro 5 + React 19 + TailwindCSS 4), QIF model (specs, TARA, NISS, NSP), research data, governance, tools.
 
+Anything TARA Brain Atlas, anatomy, brain view, DSM wording or purpose-and-limits: run `npm run atlas:where -- <words>` first. Source of truth: `src/scripts/atlas-map/atlas-map.json`; readable view and open follow-ups: `docs/atlas/INDEX.md`, `docs/atlas/FOLLOW-UPS.md`.
+
 ## Structure
 - `src/` -- Astro website (TypeScript, KQL-first data via `kql-tables.ts`)
 - `osi-of-mind/` -- QIF specs, whitepapers, derivation logs, NSP + Runemate (Rust), tools (neurowall, neurosim, macshield)
@@ -15,6 +17,7 @@ BCI security research: website (Astro 5 + React 19 + TailwindCSS 4), QIF model (
 `npm run dev` | `npm run build` | `npm run health` (validate sync) | `npm run governance` (regen from derivation log) | `npm test` (unit tests) | `npm run check:model-page` (after build: fails if the TARA Lab page loads anything off-origin)
 `npm run purpose:sync` (rewrite the purpose and limits statement in README.md, SECURITY.md, governance/README.md, governance/SECURITY.md and the qtara README from `src/data/purpose-and-limits.json`; `npm run purpose:check` is part of `generated:check`)
 `npm run cve:coverage` (recompute derived counters in `datalake/cve-technique-mapping.json`) | `npm run cve:gaps` (regenerate `datalake/cve-coverage-gaps.json`) -- run both after editing the CVE mappings or the registrar
+`npm run derive:pathway-bands` (rederive pathway band fields from the atlas region table) | `npm run compute:chains` (regenerate `datalake/impact-chains.json`) -- run both, in that order, after editing the atlas, the pathways or the registrar; `npm test` fails if either output is stale
 
 ## Conventions
 Data changes go in `datalake/` then `npm run prebuild`. All QIF changes align with the 11-band hourglass. See README.md for full details.

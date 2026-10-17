@@ -110,7 +110,7 @@ This is early-stage research by a solo researcher. Empirical validation requires
 |-----------|-------------|--------|
 | **[QIF](https://qinnovate.com/framework/)** | 11-band hourglass security architecture for BCIs | Proposed, v6.3 ([v8.0](osi-of-mind/whitepapers/QIF-WHITEPAPER-V8.md)) |
 | **[TARA](https://qinnovate.com/atlas/tara/)** | 176 BCI technique pairs, STIX 2.1 registry | v1.7 |
-| **[qtara](https://pypi.org/project/qtara/)** | Python SDK for TARA registry management and STIX export | v0.2.0 |
+| **[qtara](https://pypi.org/project/qtara/)** | Python SDK for the TARA registry and STIX export. **Deprecated:** 0.4.0 is the final release; use `datalake/qtara-registrar.json` | v0.4.0 (deprecated) |
 | **[NSP](https://qinnovate.com/tools/nsp/)** | Post-quantum wire protocol for BCI data links | In development, v0.5 |
 | **[NISS](https://qinnovate.com/atlas/scoring/)** | CVSS v4.0 extension proposal for neural interfaces (6 neural metrics) | Proposed, v1.1 |
 | **[Runemate](https://qinnovate.com/tools/runemate/)** | Native DSL compiler (67.8% compression in simulation) | v1.0 Compiler |
@@ -197,8 +197,8 @@ An 11-band hourglass architecture: 7 neural bands (N7 Neocortex down to N1 Spina
 
 [Legacy: Requires further updates and refining]
 - **Atlas:** [qinnovate.com/atlas/tara](https://qinnovate.com/atlas/tara/)
-- **API:** [`/api/tara.json`](https://qinnovate.com/api/tara.json) (full dataset, no auth) | [`/api/stix.json`](https://qinnovate.com/api/stix.json) (STIX 2.1 bundle)
-- **SDK:** `pip install qtara` 
+- **API:** retired 2026-10-17; a supported paid API and STIX feed is planned. The dataset stays open in `datalake/qtara-registrar.json`.
+- **SDK:** `qtara` is deprecated (0.4.0 is the final release). Use `datalake/qtara-registrar.json`.
 
 ### NISS
 

@@ -1,0 +1,5 @@
+/* The button that asks for the 3D view. It ships with the page; everything else of the view loads after it is pressed. */
+.region-view-ask { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; margin: 0.75rem 0 0; font-family: var(--font-body, system-ui, sans-serif); font-size: 0.8125rem; line-height: 1.45; color: var(--color-text-muted); }
+.region-view-ask-button { min-height: 2.75rem; padding: 0 0.875rem; font: inherit; font-weight: 600; color: #fff; background: var(--color-accent-fill, var(--color-accent-primary)); border: 1px solid var(--color-accent-fill, var(--color-accent-primary)); border-radius: 0.5rem; cursor: pointer; }
+.region-view-ask-button:focus-visible { outline: 2px solid var(--color-accent-primary); outline-offset: 2px; }
+.region-view-ask-button:disabled { opacity: 0.6; cursor: progress; }
