@@ -43,6 +43,19 @@ ALLOWLIST = {
     ".github/security-audit/patterns/secrets.json",  # detection signatures, not secrets
     ".github/security-audit/README.md",  # documents those signatures
 }
+# Internal material never belongs in this public repository: planning docs,
+# decision briefs, Quorum output, session reports and outreach drafts.
+# Paths are blocked even if force-added past .gitignore; the markers catch an
+# internal document saved somewhere else in the tree.
+FORBIDDEN_PREFIXES = ("_staging/", "governance/outreach/", "src/site/governance/outreach/",
+                      "src/site/governance/outreach-tracker/")
+# Phrases are split so this file does not itself contain them.
+INTERNAL_MARKERS = re.compile("(?i)" + "|".join((
+    "internal " + "planning document",
+    "INTERNAL" + ": do not publish",
+    "not yet sent " + "externally",
+)))
+
 SECRETS = (
     ("private key block", re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH |DSA |PGP )?PRIVATE KEY")),
     ("AWS access key id", re.compile(r"\bAKIA[0-9A-Z]{16}\b")),
@@ -71,6 +84,8 @@ def scan(path: Path) -> list[tuple[int, str]]:
         for label, pattern in SECRETS:
             if pattern.search(line):
                 findings.append((number, label))
+        if INTERNAL_MARKERS.search(line):
+            findings.append((number, "document marked internal"))
     return findings
 
 
@@ -81,6 +96,11 @@ def main() -> int:
 
     total = 0
     for path in tracked_files():
+        rel_name = path.relative_to(REPO_ROOT).as_posix()
+        if rel_name.startswith(FORBIDDEN_PREFIXES):
+            total += 1
+            print(f"::error file={rel_name}::internal material is tracked" if args.github else f"  LEAK  {rel_name}  internal material is tracked")
+            continue
         for number, label in scan(path):
             rel = path.relative_to(REPO_ROOT)
             total += 1
