@@ -103,6 +103,30 @@
         ],
         "why": "These raw collector outputs contain the unconfirmed claims in full, including claims about named companies. They are retained in local working files and will be published once their items are verified or dropped."
       }
+    },
+    {
+      "batch": "2026-10-17",
+      "collected": "2026-10-17",
+      "baseline": "datalake/bci-landscape.json as of 2026-10-17 (74 companies after this batch; 67 before it)",
+      "raw_files": [
+        "datalake/intake/2026-10-17/sources.json",
+        "datalake/intake/2026-10-17/company-candidates.json",
+        "datalake/intake/2026-10-17/gap-analysis.md"
+      ],
+      "counts": [
+        {
+          "artifact": "market-delta",
+          "verification": "VERIFIED",
+          "items": 8
+        },
+        {
+          "artifact": "market-delta",
+          "verification": "UNVERIFIED",
+          "items": 2
+        }
+      ],
+      "trigger": "theneurotechnewsletter.substack.com 'Neurotech in California' post named 14 companies and a Carter Sciences market-map diagram claiming 120 CA companies tracked; Kevin asked for a coverage diff and ingestion of any gaps.",
+      "note": "theneurotechnewsletter.substack.com and cartersciences.com could not be fetched from this session (egress policy rejected both hosts, confirmed via direct curl, not transient). All 9 gap companies named in the post were independently re-verified via separate secondary sources before 7 were merged into companies[] and 1 (Forecast Bio) into adjacent_tech[]; 1 (Otherside Health) was rejected as out of scope. The 120-company aggregate itself remains held/unverified."
     }
   ],
   "items": [
@@ -3147,6 +3171,166 @@
         "reviewed": "2026-10-06"
       },
       "disposition": "staged"
+    },
+    {
+      "id": "market-delta-064",
+      "artifact": "market-delta",
+      "source_item_id": "M-062",
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name=\"Nudge\"] (new entry)",
+      "summary": "Added company: Nudge, SF-based non-invasive focused-ultrasound BCI startup (Fred Ehrsam/Jeremy Barenholtz/Quintin Frerichs), $100M Series A Jul 2025.",
+      "source_url": "https://thedebrief.org/from-blockchain-to-brainwaves-coinbase-co-founder-fred-ehrsam-enters-the-neurotech-race-with-non-invasive-bci-startup-nudge/",
+      "accessed": "2026-10-17",
+      "verification": "VERIFIED",
+      "independent_review": {
+        "verdict": "CONFIRMED",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
+        "evidence_url": "https://thedebrief.org/from-blockchain-to-brainwaves-coinbase-co-founder-fred-ehrsam-enters-the-neurotech-race-with-non-invasive-bci-startup-nudge/",
+        "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
+        "reviewed": "2026-10-17"
+      },
+      "disposition": "accepted"
+    },
+    {
+      "id": "market-delta-065",
+      "artifact": "market-delta",
+      "source_item_id": "M-063",
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name=\"Echo Neurotechnologies\"] (new entry)",
+      "summary": "Added company: Echo Neurotechnologies, SF-based invasive BCI startup led by Edward Chang (UCSF), ~$50M Series A Jan 2025 (a16z).",
+      "source_url": "https://finder.techleap.nl/news/feed/echo-neurotechnologies-secures-50m-funding",
+      "accessed": "2026-10-17",
+      "verification": "VERIFIED",
+      "independent_review": {
+        "verdict": "CONFIRMED",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
+        "evidence_url": "https://finder.techleap.nl/news/feed/echo-neurotechnologies-secures-50m-funding",
+        "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
+        "reviewed": "2026-10-17"
+      },
+      "disposition": "accepted"
+    },
+    {
+      "id": "market-delta-066",
+      "artifact": "market-delta",
+      "source_item_id": "M-064",
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name=\"Epia Neuro\"] (new entry)",
+      "summary": "Added company: Epia Neuro, skull-implant read/write BCI for stroke upper-limb recovery, led by Michel Maharbiz; HQ disputed (Alameda vs SF) across sources.",
+      "source_url": "https://www.bio-itworld.com/news/2026/04/22/from-brain-implant-to-lifelong-companion--michel-maharbiz-unveils-epia-neuro",
+      "accessed": "2026-10-17",
+      "verification": "VERIFIED",
+      "independent_review": {
+        "verdict": "CONFIRMED",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
+        "evidence_url": "https://www.bio-itworld.com/news/2026/04/22/from-brain-implant-to-lifelong-companion--michel-maharbiz-unveils-epia-neuro",
+        "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
+        "reviewed": "2026-10-17"
+      },
+      "disposition": "accepted"
+    },
+    {
+      "id": "market-delta-067",
+      "artifact": "market-delta",
+      "source_item_id": "M-065",
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name=\"Kandu, Inc.\"] (new entry)",
+      "summary": "Added company: Kandu, Inc. (Apr 2025 merger of Neurolutions + Kandu Health), IpsiHand device (FDA De Novo 2021), $30M first close -- funding total has unresolved conflicts across sources (CB Insights: $9.77M; unconfirmed Jan 2026 round claim).",
+      "source_url": "https://www.medtechdive.com/news/kandu-health-merges-neurolutions-bci/744824/",
+      "accessed": "2026-10-17",
+      "verification": "VERIFIED",
+      "independent_review": {
+        "verdict": "CONFIRMED",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
+        "evidence_url": "https://www.medtechdive.com/news/kandu-health-merges-neurolutions-bci/744824/",
+        "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
+        "reviewed": "2026-10-17"
+      },
+      "disposition": "accepted"
+    },
+    {
+      "id": "market-delta-068",
+      "artifact": "market-delta",
+      "source_item_id": "M-066",
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name=\"Coherence Neuro\"] (new entry)",
+      "summary": "Added company: Coherence Neuro, SF-based invasive closed-loop implant for glioblastoma, $10M seed Nov 2025 -- device-naming discrepancy (SOMA-1 vs Cipher) unresolved, see security_notes.",
+      "source_url": "https://www.massdevice.com/coherence-neuro-raises-10m-seed-round-for-bci-that-aids-in-cancer-treatment/",
+      "accessed": "2026-10-17",
+      "verification": "VERIFIED",
+      "independent_review": {
+        "verdict": "CONFIRMED",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
+        "evidence_url": "https://www.massdevice.com/coherence-neuro-raises-10m-seed-round-for-bci-that-aids-in-cancer-treatment/",
+        "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
+        "reviewed": "2026-10-17"
+      },
+      "disposition": "accepted"
+    },
+    {
+      "id": "market-delta-069",
+      "artifact": "market-delta",
+      "source_item_id": "M-067",
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name=\"iota Biosciences\"] (new entry)",
+      "summary": "Added company: iota Biosciences, UC Berkeley neural-dust origin (2017), acquired by Astellas Pharma (announced Oct 2020, ~$304M deal value). Added as status=acquired to preserve M&A lineage.",
+      "source_url": "https://www.biospace.com/astellas-to-acquire-iota-biosciences",
+      "accessed": "2026-10-17",
+      "verification": "VERIFIED",
+      "independent_review": {
+        "verdict": "CONFIRMED",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
+        "evidence_url": "https://www.biospace.com/astellas-to-acquire-iota-biosciences",
+        "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
+        "reviewed": "2026-10-17"
+      },
+      "disposition": "accepted"
+    },
+    {
+      "id": "market-delta-070",
+      "artifact": "market-delta",
+      "source_item_id": "M-068",
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "companies[name=\"BRILL Neurotech\"] (new entry)",
+      "summary": "Added company: BRILL Neurotech, non-invasive Fast-Optical-Signal brain-imaging headset. GEOGRAPHY FLAG: headquartered Urbana, Illinois, not California, despite being named in a 'Neurotech in California' post.",
+      "source_url": "https://tec.illinois.edu/news/76957",
+      "accessed": "2026-10-17",
+      "verification": "VERIFIED",
+      "independent_review": {
+        "verdict": "CONFIRMED",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
+        "evidence_url": "https://tec.illinois.edu/news/76957",
+        "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
+        "reviewed": "2026-10-17"
+      },
+      "disposition": "accepted"
+    },
+    {
+      "id": "market-delta-071",
+      "artifact": "market-delta",
+      "source_item_id": "M-069",
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "target_key": "adjacent_tech[name=\"Forecast Bio\"] (new entry)",
+      "summary": "Added adjacent_tech entry: Forecast Bio, SF-based AI preclinical platform modeling drug effects on brain circuits for mental-health therapeutics. Not a BCI/device company.",
+      "source_url": "https://onemind.org/companies/forecast-bio/",
+      "accessed": "2026-10-17",
+      "verification": "VERIFIED",
+      "independent_review": {
+        "verdict": "CONFIRMED",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
+        "evidence_url": "https://onemind.org/companies/forecast-bio/",
+        "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
+        "reviewed": "2026-10-17"
+      },
+      "disposition": "accepted"
     }
   ],
   "held_items": [
@@ -3389,6 +3573,26 @@
       "subject": "catalogue record",
       "disposition": "held-unverified",
       "why_held": "Not confirmed at a primary source. Held from publication; retained in local working files pending verification."
+    },
+    {
+      "id": "market-delta-072",
+      "artifact": "market-delta",
+      "source_item_id": "M-070",
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "Carter Sciences 'California neurotech market map' aggregate (120 companies tracked; regional breakdown Bay Area 58 / LA-Santa Clarita 21 / Orange County 7 / San Diego-Carlsbad 12 / Central Coast-Sacramento-Central Valley 4 / out-of-state CA sites 6 / acquired-historical 12; technology-row counts BCI 12, FUS 11, neuromodulation 34, neuro-AI/software 27, wearables 17, EEG/MEG 17, imaging 4, neurorehab/digital therapeutics 5, neurovascular 11, vision/gene therapy 3, other 4)",
+      "disposition": "held-unverified",
+      "why_held": "Neither theneurotechnewsletter.substack.com nor cartersciences.com could be independently fetched from this session (egress policy rejects both hosts). These figures are carried over from a different chat session's report and are self-published by Carter Sciences with no stated methodology; Carter Sciences' own publications give inconsistent totals across posts/dates. Not published as data in datalake/bci-landscape.json. ~106 of the 120 named companies remain unresolved behind the newsletter's paywall -- no placeholder rows created."
+    },
+    {
+      "id": "market-delta-073",
+      "artifact": "market-delta",
+      "source_item_id": "M-071",
+      "change": "add",
+      "target_file": "datalake/bci-landscape.json",
+      "subject": "Otherside Health (named in the newsletter's free text)",
+      "disposition": "rejected",
+      "why_held": "Not a neurotechnology device or BCI company -- a New York-based patient-support/community platform. Out of scope for bci-landscape.json's schema regardless of verification status. Also not California-headquartered, despite appearing in a 'Neurotech in California' post. Verified via https://www.startuphub.ai/startups/otherside-health.md"
     }
   ],
   "publication_policy": "Only items confirmed against a fetched source are published here. Items that could not be confirmed, and items an independent review contradicted, are held: their claim text and sources are not published, and only the fact that they exist is recorded. Several concern named companies, so an unconfirmed claim is not put into a public repository."

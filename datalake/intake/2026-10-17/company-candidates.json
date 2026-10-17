@@ -1,0 +1,206 @@
+{
+  "batch": "2026-10-17",
+  "note": "Proposed additions to datalake/bci-landscape.json `companies[]` (and one `adjacent_tech[]` entry). Staged, not accepted -- a human/independent reviewer must sign off per datalake/intake/CONTEXT.md before these are merged into the source-of-truth file. Fields left null were not found in independently-corroborated sources; do not fill from inference.",
+  "companies": [
+    {
+      "name": "Nudge",
+      "type": "non-invasive",
+      "modality": "focused_ultrasound",
+      "founded": "2024",
+      "headquarters": "San Francisco, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 100000000,
+      "funding_note": "$100M Series A reported July 2025, led by Thrive Capital and Greenoaks. Secondary-source reporting only (The Debrief, Dealroom); headcount and some figures disagree across sources (32-50 employees). Verified 2026-10-17.",
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Non-invasive focused-ultrasound brain interface. First product 'Nudge Zero' in research use as of April 2026; no public security documentation found. Co-founded by Fred Ehrsam (Coinbase co-founder), Jeremy Barenholtz, Quintin Frerichs.",
+      "devices": [
+        {
+          "name": "Nudge Zero",
+          "type": "non-invasive",
+          "channels": null,
+          "electrode_type": null,
+          "fda_status": null,
+          "units_deployed": null,
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "research",
+          "cves_known": []
+        }
+      ],
+      "company_category": "early_stage"
+    },
+    {
+      "name": "Echo Neurotechnologies",
+      "type": "invasive",
+      "modality": null,
+      "founded": null,
+      "headquarters": "San Francisco, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 50000000,
+      "funding_note": "~$50M Series A reported January 2025, led by Andreessen Horowitz (a16z). Neither party publicly confirmed exact figures per press coverage. Verified 2026-10-17.",
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Implantable BCI company led by neurosurgeon Edward Chang (UCSF), targeting restoration of communication/movement for people with severe neurological disability. No public security documentation found. Development stage not independently confirmed (no peer-reviewed paper, regulatory filing, or trial report found).",
+      "devices": [],
+      "company_category": "early_stage"
+    },
+    {
+      "name": "Epia Neuro",
+      "type": "invasive",
+      "modality": null,
+      "founded": "2025 (disputed; sources disagree)",
+      "headquarters": "Alameda, California, USA (one source instead says San Francisco; unresolved)",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "funding_note": "No confirmed total. April 2026 public-debut coverage describes a mix of venture and pharmaceutical investment without a disclosed amount. Verified 2026-10-17.",
+      "valuation_usd": null,
+      "employees_approx": 45,
+      "security_posture": "none_published",
+      "security_notes": "Minimally invasive skull-implant 'read/write' BCI (non-dura-penetrating) for stroke-related upper-limb motor impairment, paired with an external grip-assist glove. Planned expansion to cognitive decline. Leadership: Michel Maharbiz PhD (CEO; also iota Biosciences co-founder), Gil Mandelbaum PhD (CTO/CSO), Michelle Patruno (COO). Planned first-in-human demonstrations at Lenox Hill Hospital, slated for 2026 (not yet completed as of this record). No public security documentation found.",
+      "devices": [
+        {
+          "name": "Epia read/write BCI implant",
+          "type": "invasive",
+          "channels": null,
+          "electrode_type": "non_penetrating",
+          "fda_status": null,
+          "units_deployed": "0 (pre-clinical; first-in-human planned 2026)",
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "early_stage"
+    },
+    {
+      "name": "Kandu, Inc.",
+      "type": "non-invasive",
+      "modality": "EEG",
+      "founded": "2025 merger (Neurolutions ~2014; Kandu Health ~2021/2022, sources disagree)",
+      "headquarters": "Campbell, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 30000000,
+      "funding_note": "$30M first close co-led by Ally Bridge Group and AMED Ventures, announced with the April 2025 Kandu Health + Neurolutions merger (confirmed via Fierce Biotech, MedTech Dive, Healthcare Dive). CONFLICT: CB Insights lists total raised as $9.77M, and a Simplify.jobs listing claims an unconfirmed January 2026 round from K2 HealthVentures and Piper Sandler -- neither reconciled against a primary source; treat $30M as the best-supported figure and the others as unresolved. Verified 2026-10-17.",
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Formed by the April 2025 merger of Neurolutions, Inc. (device maker) and Kandu Health, Inc. (post-discharge stroke-recovery support service) under CEO Leo Petrossian. IpsiHand (Neurolutions) uses scalp EEG to detect ipsilateral motor intent and drive a hand/arm orthosis; received FDA De Novo clearance in 2021 -- company states this was the first BCI device to receive that clearance (company claim, not independently verified against the FDA database by this session). CMS created a procedure code and benefit-category determination for IpsiHand in 2024. A randomized controlled trial of IpsiHand (Dr. Eric Leuthardt) was reportedly presented at the International Stroke Conference 2026 (New Orleans, Feb 4-6, 2026) showing positive motor-gain results -- secondary-source reporting only, not independently confirmed against conference proceedings. No public device security documentation found. Prior to the merger, the two firms had partnered since 2023.",
+      "devices": [
+        {
+          "name": "IpsiHand",
+          "type": "non-invasive",
+          "channels": null,
+          "electrode_type": "scalp_EEG",
+          "fda_status": "de_novo_cleared_2021",
+          "units_deployed": null,
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "growth_stage"
+    },
+    {
+      "name": "Coherence Neuro",
+      "type": "invasive",
+      "modality": "closed_loop_stimulation",
+      "founded": "2022",
+      "headquarters": "San Francisco, California, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": 10000000,
+      "funding_note": "$10M seed round closed November 2025, co-led by Artesian and Topology Ventures (joined by Blackbird, Possible Ventures, and others). One secondary aggregator instead lists $13.46M total raised to date -- unresolved discrepancy, not independently reconciled. Verified 2026-10-17 via MassDevice and Seedtable.",
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Coin-sized wireless closed-loop brain implant paired with an over-ear wearable and companion app; records from and stimulates brain tissue, targeting glioblastoma by disrupting tumor bioelectric signaling. Designed to be placed during tumor-resection surgery. DEVICE-NAMING FLAG: called 'SOMA-1' in most profiles, but a June 2026 MassDevice report says the company began a first-in-human trial of an investigational device named 'Cipher' at Royal Melbourne Hospital (Australia), led by Dr. Andrew Morokoff -- the relationship between 'SOMA-1' and 'Cipher' is not resolved by available sources (same device renamed, or two different programs). Founded by Cambridge researchers Ben Woodington and Elise Jenkins; Neuralink head neurosurgeon Matthew MacDougall is an adviser/investor. No public security documentation found.",
+      "devices": [
+        {
+          "name": "SOMA-1 / Cipher (naming unresolved -- see security_notes)",
+          "type": "invasive",
+          "channels": null,
+          "electrode_type": "unspecified",
+          "fda_status": null,
+          "units_deployed": "First-in-human trial reportedly begun June 2026 at Royal Melbourne Hospital, Australia (MassDevice); units deployed count not found",
+          "first_human": "2026-06 (reported; unconfirmed beyond one outlet)",
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": []
+        }
+      ],
+      "company_category": "early_stage"
+    },
+    {
+      "name": "iota Biosciences",
+      "type": "invasive",
+      "modality": "neural_dust",
+      "founded": "2017",
+      "headquarters": "Berkeley, California, USA",
+      "status": "acquired",
+      "acquired_by": "Astellas Pharma (announced October 2020)",
+      "funding_total_usd": 304000000,
+      "funding_note": "This figure is acquisition deal consideration, NOT a funding round: Astellas Pharma's 2020 acquisition. Outlets disagree on the upfront-vs-milestone split (~$127.6M upfront + ~$176.5M milestones per UC Berkeley/Implantable Device reporting, vs. Fierce Biotech's headline framing of a $304M deal with $125M earmarked for program growth). Verified 2026-10-17 via BioSpace, Fierce Biotech, BusinessWire.",
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "UC Berkeley-originated 'neural dust' technology: millimeter-scale, battery-free, ultrasound-powered wireless implants (Maharbiz/Carmena labs). Astellas and iota held a prior R&D agreement from August 2019 before the 2020 acquisition. No public security documentation found. Retained as an acquired/historical entry for M&A lineage (Astellas).",
+      "devices": [],
+      "company_category": "acquired"
+    },
+    {
+      "name": "BRILL Neurotech",
+      "type": "non-invasive",
+      "modality": "optical_imaging",
+      "founded": "2025",
+      "headquarters": "Urbana, Illinois, USA",
+      "status": "active",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "funding_note": "No funding total found via independent sources beyond a listed Illinois state investment-fund recipient mention; not independently confirmed. Verified 2026-10-17.",
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "GEOGRAPHY FLAG: headquartered in Urbana, Illinois, NOT California -- named in a 'Neurotech in California' newsletter post despite this; see gap-analysis.md. Non-invasive brain-imaging headset using Fast Optical Signals (FOS) to detect when and where neurons fire in real time; stated application areas include epilepsy diagnosis and improving BCI signal quality. Co-founded by Mehmet Gunal (Beckman Institute Cognitive Imaging Lab research affiliate). Filed a 'NEURODATA' USPTO trademark application (July 2025, covering brain-derived datasets; non-final office action as of filing). No public security documentation found.",
+      "devices": [
+        {
+          "name": "BRILL FOS imaging headset",
+          "type": "non-invasive",
+          "channels": null,
+          "electrode_type": null,
+          "fda_status": null,
+          "units_deployed": null,
+          "first_human": null,
+          "price_usd": null,
+          "target_use": "research",
+          "cves_known": []
+        }
+      ],
+      "company_category": "early_stage"
+    }
+  ],
+  "adjacent_tech": [
+    {
+      "name": "Forecast Bio",
+      "product": "AI-powered preclinical brain-circuit mapping platform",
+      "note": "NOT a BCI or device company -- an AI/computational biology platform linking cellular neurobiology to mental-health drug effects. Included for sensor/data convergence relevance to neurosecurity (brain-circuit modeling data could itself be a sensitive data-security surface). San Francisco, California; March 2026 accelerator round reported (amount not found). Verified 2026-10-17 via One Mind and Dealroom profiles.",
+      "channels": 0,
+      "relevance": "Preclinical AI platform modeling drug effects on brain circuits for mental-health therapeutics; relevant to QIF NeuroAI/software threat surface even though it builds no hardware device."
+    }
+  ],
+  "excluded": [
+    {
+      "name": "Otherside Health",
+      "reason": "Out of scope for this dataset. It is a New York-based neuroscience patient-support/community platform, not a neurotechnology device or BCI company, and not California-headquartered despite being named in the 'Neurotech in California' post. See ledger item market-delta-073 (disposition: rejected).",
+      "verified_via": "https://www.startuphub.ai/startups/otherside-health.md"
+    }
+  ]
+}

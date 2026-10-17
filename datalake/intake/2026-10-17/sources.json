@@ -1,0 +1,122 @@
+[
+  {
+    "url": "https://theneurotechnewsletter.substack.com/p/neurotech-in-california",
+    "title": "Neurotech in California",
+    "publisher": "The Neurotech Newsletter (Chay Carter)",
+    "date": "2026-10",
+    "used_for": "Lead list only: 14 company names found in the post's free (non-paywalled) text, plus a market-map diagram footer crediting Carter Sciences. NOT independently fetched by this session -- DNS resolution for theneurotechnewsletter.substack.com failed from this sandbox. Content here is carried over from a prior chat session's report of the page and is NOT treated as a verified primary source; every company name drawn from it was independently re-verified against separate sources below before being staged.",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://cartersciences.com",
+    "title": "Carter Sciences",
+    "publisher": "Carter Sciences",
+    "date": "2026-10-11",
+    "used_for": "Claimed source of the 'California neurotech market map, 120 companies tracked' diagram referenced in the newsletter post. NOT independently fetched by this session -- DNS resolution for cartersciences.com failed from this sandbox. The 120-count, regional breakdown (Bay Area 58, LA/Santa Clarita 21, Orange County 7, San Diego/Carlsbad 12, Central Coast/Sacramento/Central Valley 4, out-of-state CA sites 6, acquired/historical 12) and technology-row counts carried over from a prior chat session's report are HELD, not published as verified data -- see ledger item market-delta-072.",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://www.massdevice.com/coherence-neuro-raises-10m-seed-round-for-bci-that-aids-in-cancer-treatment/",
+    "title": "Coherence Neuro raises $10M seed round for BCI that aids in cancer treatment",
+    "publisher": "MassDevice",
+    "date": "2025-11",
+    "used_for": "Independent corroboration of Coherence Neuro: SOMA-1 closed-loop implant, glioblastoma focus, $10M seed (Artesian, Topology Ventures), founders Ben Woodington / Elise Jenkins, adviser Matthew MacDougall.",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://seedtable.com/companies/coherence-neuro/funding-rounds/seed-2025-11",
+    "title": "Coherence Neuro Raises $10.0M USD in Seed Funding",
+    "publisher": "Seedtable",
+    "date": "2025-11",
+    "used_for": "Secondary corroboration of Coherence Neuro seed round amount and date.",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://www.bio-itworld.com/news/2026/04/22/from-brain-implant-to-lifelong-companion--michel-maharbiz-unveils-epia-neuro",
+    "title": "From Brain Implant to Lifelong Companion: Michel Maharbiz Unveils Epia Neuro",
+    "publisher": "Bio-IT World",
+    "date": "2026-04-22",
+    "used_for": "Independent corroboration of Epia Neuro's public debut: skull-implant read/write BCI for stroke upper-limb recovery, leadership (Maharbiz/Mandelbaum/Patruno), ~45 employees, planned Lenox Hill Hospital first-in-human work.",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://finder.techleap.nl/news/feed/echo-neurotechnologies-secures-50m-funding",
+    "title": "Echo Neurotechnologies secures $50M funding",
+    "publisher": "Techleap Finder",
+    "date": "2025-01",
+    "used_for": "Independent corroboration of Echo Neurotechnologies: implantable BCI for severe disability, led by Edward Chang, ~$50M Series A led by a16z.",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://thedebrief.org/from-blockchain-to-brainwaves-coinbase-co-founder-fred-ehrsam-enters-the-neurotech-race-with-non-invasive-bci-startup-nudge/",
+    "title": "From blockchain to brainwaves: Coinbase co-founder Fred Ehrsam enters the neurotech race with non-invasive BCI startup Nudge",
+    "publisher": "The Debrief",
+    "date": "2026",
+    "used_for": "Independent corroboration of Nudge: non-invasive focused-ultrasound brain interface, founders Ehrsam/Barenholtz/Frerichs, Nudge Zero product.",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://ai-startups.dealroom.co/news/feed/nudge-raises-100m-for-brain-interface",
+    "title": "Nudge Raises $100M for Brain Interface",
+    "publisher": "Dealroom",
+    "date": "2025-07",
+    "used_for": "Independent corroboration of Nudge's $100M Series A (Thrive Capital, Greenoaks).",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://www.medtechdive.com/news/kandu-health-merges-neurolutions-bci/744824/",
+    "title": "Kandu Health merges with Neurolutions to form stroke-recovery company",
+    "publisher": "MedTech Dive",
+    "date": "2025-04-14",
+    "used_for": "Independent corroboration of the Kandu Health + Neurolutions merger (-> Kandu, Inc.), IpsiHand device, FDA De Novo clearance (2021), $30M first-close financing (Ally Bridge Group, AMED Ventures), CEO Leo Petrossian.",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://www.healthcaredive.com/news/kandu-health-merges-neurolutions-bci/744917",
+    "title": "Kandu Health, Neurolutions merge to target stroke recovery",
+    "publisher": "Healthcare Dive",
+    "date": "2025-04-14",
+    "used_for": "Secondary corroboration of the Kandu/Neurolutions merger terms.",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://www.biospace.com/astellas-to-acquire-iota-biosciences",
+    "title": "Astellas to Acquire iota Biosciences",
+    "publisher": "BioSpace",
+    "date": "2020-10",
+    "used_for": "Independent corroboration of the Astellas/iota Biosciences acquisition (2020), neural-dust origin at UC Berkeley (Maharbiz/Carmena labs), founded 2017.",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://www.fiercebiotech.com/medtech/after-r-d-tryout-astellas-opts-to-acquire-bioelectronics-maker-iota-biosciences-304m-deal",
+    "title": "After R&D tryout, Astellas opts to acquire bioelectronics maker Iota Biosciences in $304M deal",
+    "publisher": "Fierce Biotech",
+    "date": "2020-10",
+    "used_for": "Deal-value corroboration for iota Biosciences acquisition; notes conflicting upfront-vs-milestone breakdowns across outlets.",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://tec.illinois.edu/news/76957",
+    "title": "Illinois Innovation Meets Silicon Valley Capital",
+    "publisher": "University of Illinois Technology Entrepreneur Center",
+    "date": "2026",
+    "used_for": "Independent corroboration of BRILL Neurotech: non-invasive Fast-Optical-Signal brain-imaging headset, co-founder Mehmet Gunal, headquartered Urbana, Illinois (NOT California -- see gap-analysis.md caveat).",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://onemind.org/companies/forecast-bio/",
+    "title": "Forecast Bio",
+    "publisher": "One Mind",
+    "date": "2026",
+    "used_for": "Independent corroboration of Forecast Bio: AI-powered preclinical platform mapping drug effects on brain circuits for mental-health therapeutics. Not a BCI/device company -- staged as adjacent_tech, not companies[].",
+    "collected_for": ["market-delta"]
+  },
+  {
+    "url": "https://www.startuphub.ai/startups/otherside-health.md",
+    "title": "Otherside Health",
+    "publisher": "StartupHub.ai",
+    "date": "2026",
+    "used_for": "Corroboration that Otherside Health is a New York-based neuroscience community/support platform (not a device or BCI company, not California-headquartered). Used to justify EXCLUSION from this dataset -- see ledger item market-delta-073.",
+    "collected_for": ["market-delta"]
+  }
+]

@@ -5,14 +5,14 @@ order: 5
 ---
 
 <!-- AUTO-GENERATED from QIF-DERIVATION-LOG.md — do not edit directly -->
-<!-- Regenerate: npm run decisions | Last generated: 2026-10-16 -->
+<!-- Regenerate: npm run decisions | Last generated: 2026-10-17 -->
 
 # Decision Log
 
 Rolling record of framework decisions extracted from the [QIF Derivation Log](../osi-of-mind/QIF-DERIVATION-LOG.md).
 Each entry links back to the full derivation context.
 
-**Last generated:** 2026-10-16 at 01:28:42
+**Last generated:** 2026-10-17 at 05:36:20
 
 **RACI Key:** R (Responsible) | A (Accountable) | C (Consulted) | I (Informed)
 
@@ -31,13 +31,13 @@ Each entry links back to the full derivation context.
 
 ## Table of Contents
 
-- [September 2026](#september-2026) (3 decisions)
-- [February 2026](#february-2026) (9 decisions)
-- [January 2026](#january-2026) (8 decisions)
+- [October 2026](#october-2026) (3 decisions)
+- [March 2026](#march-2026) (9 decisions)
+- [February 2026](#february-2026) (8 decisions)
 
 ---
 
-## September 2026
+## October 2026
 
 | Status | # | Date | Decision | Classification | RACI | AI Level |
 |--------|---|------|----------|---------------|------|----------|
@@ -45,7 +45,7 @@ Each entry links back to the full derivation context.
 | 🔴 | [107](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-107-cve-evidence-pass-a-real-vulnerability-m) | 2026-10-06 | CVE Evidence Pass — A Real Vulnerability Misclassified as Fabricated, and the Fi | CORRECTION | R: Claude Opus 5 and research subagents | A: KQ | C: none | I: none | AI-generated, each correction below independently verified against NVD by the orchestrator |
 | 🔴 | [106](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-106-october-2026-data-refresh-landscape-craw) | 2026-10-06 | October 2026 Data Refresh — Landscape Crawl, Citation Audit, Homepage Correction | CORRECTION | R: Claude Opus 5.5 and research subagents | A: KQ | C: none | I: none | AI-generated, pending Quorum review |
 
-## February 2026
+## March 2026
 
 | Status | # | Date | Decision | Classification | RACI | AI Level |
 |--------|---|------|----------|---------------|------|----------|
@@ -59,7 +59,7 @@ Each entry links back to the full derivation context.
 | ⚪ | [86](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-86-epistemic-reckoning-research-compiled-ma) | 2026-03-06 | Epistemic Reckoning — Research Compiled, Major Overhaul Needed | DECISION (epistemic methodology + project direction) | See entry | — |
 | 🟡 | [84](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-84-privacy-preserving-neural-data-architect) | 2026-03-05 | Privacy-Preserving Neural Data Architecture — HE, DP, Data Fiduciaries, Consent  | HYPOTHESIS | See entry | — |
 
-## January 2026
+## February 2026
 
 | Status | # | Date | Decision | Classification | RACI | AI Level |
 |--------|---|------|----------|---------------|------|----------|
