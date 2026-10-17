@@ -1,0 +1,688 @@
+{
+  "_metadata": {
+    "title": "QIF non-adversarial hazards",
+    "version": "1.1",
+    "created": "2026-10-06",
+    "status": "proposed, unvalidated",
+    "description": "Non-adversarial hazards to people who use neural devices: conditions with no attacker, such as loss of support or gradual hardware change. They are kept apart from the attack techniques in qtara-registrar.json and are not counted as techniques. For threat modeling only. Proposed and unvalidated: not peer-reviewed as a set, not adopted by any standards body, and not a clinical or diagnostic instrument.",
+    "id_format": "QIF-H#### (sequential; never reused)",
+    "fields": {
+      "bands": "QIF hourglass band ids the hazard is tagged to",
+      "related_techniques": "QIF-T#### ids of registrar techniques that are adjacent to the hazard; a link is a pointer, not evidence",
+      "sources": "Citation strings for the hazard itself",
+      "peer_review_status": "peer_reviewed | preprint | none, derived from sources by the same rule as the registrar",
+      "status": "Registrar evidence vocabulary. An entry whose peer_review_status is preprint or none may not hold a status above THEORETICAL",
+      "hazard_class": "Optional grouping tag. 'environmental_operational' marks everyday, non-adversarial conditions (interference, moisture, heat, motion, power, contact, configuration) that can degrade a neural device or its signal without any attacker",
+      "detection": "Optional block for monitoring tools. 'signals' lists observable indicators; 'requires' lists the device capabilities needed to observe them; 'observability' states what a monitor may claim: observable (direct sensor exists), indirect (only correlated signal evidence; report as suspected, never confirmed), or user_report (not machine-observable). A monitor without the required capability must report the check as unavailable, never as normal or safe"
+    },
+    "updated": "2026-10-17"
+  },
+  "hazards": [
+    {
+      "id": "QIF-H0001",
+      "name": "Loss of manufacturer or sponsor support for an implanted neural device",
+      "description": "A person keeps an implanted neural device after the party that maintains it withdraws. No one acts on the device and the neural signal is untouched; what changes is the support layer around it. Supported by the source: Higgins et al. 2026, a 24-expert modified Delphi study in an Australian context, reached consensus that post-trial responsibility for implantable neural devices needs explicit rules, motivated by the risk that access ends on trial failure, commercial non-viability or safety suspension. Zhao and Lin 2026 add a normative argument that long-term embodiment complicates consent to explantation. Not shown by either source: how often loss of support happens, or what harm follows. Projected, and not from the sources: that vulnerabilities on an unsupported device stay unpatched, or that a third party could exploit the gap. Paired control: a continuity plan agreed before implantation that names who maintains, funds, secures and, if needed, removes the device when the sponsor exits. The specific Delphi recommendations were not read; this entry rests on a summary of the papers, not their full text.",
+      "bands": [
+        "S2",
+        "S3"
+      ],
+      "related_techniques": [
+        "QIF-T0002",
+        "QIF-T0031",
+        "QIF-T0046",
+        "QIF-T0047",
+        "QIF-T0165"
+      ],
+      "sources": [
+        "Higgins et al. 2026 (BMC Med Ethics; 24-expert modified Delphi on post-trial responsibility for implantable neural devices) DOI:10.1186/s12910-026-01475-7",
+        "Zhao, Lin 2026 (BMC Med Ethics; normative analysis of consent to explantation) DOI:10.1186/s12910-026-01540-1"
+      ],
+      "peer_review_status": "peer_reviewed",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0002",
+      "name": "Chronic electrode micromotion (non-adversarial reading of QIF-T0120)",
+      "description": "Pointer entry. The registrar holds QIF-T0120 as a technique, but the mechanism it records describes no adversary: movement of an implanted electrode over time, with change at the electrode-tissue interface and in recording or stimulation fidelity. That fits this file better than the technique list. QIF-T0120 has not been moved, because moving it would change the published technique count and existing references; the move is an open decision for the framework's author. No source is attached to QIF-T0120 and none was added here, so this entry asserts nothing about incidence, tissue response or any cognitive outcome, and the band tags are carried over from QIF-T0120 without review. Paired control, stated as a general practice and not drawn from a source: trend monitoring of electrode impedance and signal quality.",
+      "bands": [
+        "I0",
+        "N1",
+        "N2",
+        "N3",
+        "N4",
+        "N5",
+        "N6",
+        "N7"
+      ],
+      "related_techniques": [
+        "QIF-T0120"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0003",
+      "name": "Transcranial photobiomodulation (670/808nm) (non-adversarial reading of QIF-T0136)",
+      "description": "Pointer entry. The registrar holds QIF-T0136 as a technique, but the text recorded for it describes the absorption of near-infrared light by mitochondria, described as protective, with no adversary and no access model. Deciding sentence in the entry: \"Neuroprotective, not acutely stimulatory.\" QIF-T0136 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0136 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0136 without review.",
+      "bands": [
+        "I0",
+        "N1"
+      ],
+      "related_techniques": [
+        "QIF-T0136"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0004",
+      "name": "UCNP-mediated optogenetic dopamine release (980nm) (non-adversarial reading of QIF-T0137)",
+      "description": "Pointer entry. The registrar holds QIF-T0137 as a technique, but the text recorded for it describes a research method that needs gene delivery and a nanoparticle injection, with no adversary and no access model. Deciding sentence in the entry: \"Requires both genetic modification (ChR2 expression) and NP injection (neurosurgery).\" QIF-T0137 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0137 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0137 without review.",
+      "bands": [
+        "I0",
+        "N1",
+        "N2",
+        "N3"
+      ],
+      "related_techniques": [
+        "QIF-T0137"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0005",
+      "name": "HUP photovoltaic nanoparticle dopamine stimulation (980nm) (non-adversarial reading of QIF-T0138)",
+      "description": "Pointer entry. The registrar holds QIF-T0138 as a technique, but the text recorded for it describes a research method that needs nanoparticles injected into the midbrain, with no adversary and no access model. Deciding sentence in the entry: \"39.2 W/cm2 at VTA (mouse); human safety not established\" QIF-T0138 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0138 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0138 without review.",
+      "bands": [
+        "I0",
+        "N1",
+        "N2",
+        "N3"
+      ],
+      "related_techniques": [
+        "QIF-T0138"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0006",
+      "name": "Photothermal gold nanoparticle TRPV1 dopamine activation (non-adversarial reading of QIF-T0139)",
+      "description": "Pointer entry. The registrar holds QIF-T0139 as a technique, but the text recorded for it describes photothermal activation of a heat-sensitive channel, with a narrow thermal margin, with no adversary and no access model. Deciding sentence in the entry: \"Narrow thermal safety window (43.8-47C).\" QIF-T0139 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0139 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0139 without review.",
+      "bands": [
+        "I0",
+        "N1",
+        "N2"
+      ],
+      "related_techniques": [
+        "QIF-T0139"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0007",
+      "name": "Infrared neural stimulation (1875nm fiber contact) (non-adversarial reading of QIF-T0140)",
+      "description": "Pointer entry. The registrar holds QIF-T0140 as a technique, but the text recorded for it describes contact-fibre infrared nerve stimulation and its thermal margin, with no adversary and no access model. Deciding sentence in the entry: \"Safety ratio only 2:1 (stimulation:damage threshold).\" QIF-T0140 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0140 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0140 without review.",
+      "bands": [
+        "I0",
+        "N1"
+      ],
+      "related_techniques": [
+        "QIF-T0140"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0008",
+      "name": "Magnetothermal nanoparticle TRPV1 stimulation (AMF) (non-adversarial reading of QIF-T0141)",
+      "description": "Pointer entry. The registrar holds QIF-T0141 as a technique, but the text recorded for it describes magnetically heated nanoparticles and an iron-load toxicity warning, with no adversary and no access model. Deciding sentence in the entry: \"WARNING: iron-oxide NPs in VTA/SNc add exogenous iron to brain regions where Fenton chemistry is a neurotoxicity risk.\" QIF-T0141 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0141 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0141 without review.",
+      "bands": [
+        "I0",
+        "N1",
+        "N2",
+        "N3"
+      ],
+      "related_techniques": [
+        "QIF-T0141"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0009",
+      "name": "SICI-TMS GABA-A cortical inhibition (short-interval paired-pulse) (non-adversarial reading of QIF-T0142)",
+      "description": "Pointer entry. The registrar holds QIF-T0142 as a technique, but the text recorded for it describes a paired-pulse TMS measurement protocol, with no adversary and no access model. Deciding sentence in the entry: \"Paired-pulse TMS: subthreshold conditioning stimulus (70-80% RMT) at ISI 1-5ms activates synaptic GABA-A inhibitory interneurons.\" QIF-T0142 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0142 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0142 without review.",
+      "bands": [
+        "I0",
+        "N1"
+      ],
+      "related_techniques": [
+        "QIF-T0142"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0010",
+      "name": "LICI-TMS GABA-B long-interval cortical inhibition (suprathreshold paired-pulse) (non-adversarial reading of QIF-T0143)",
+      "description": "Pointer entry. The registrar holds QIF-T0143 as a technique, but the text recorded for it describes a paired-pulse TMS measurement protocol and its pharmacology, with no adversary and no access model. Deciding sentence in the entry: \"Pharmacologically distinct from SICI: baclofen enhances LICI, benzodiazepines do not.\" QIF-T0143 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0143 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0143 without review.",
+      "bands": [
+        "I0",
+        "N1"
+      ],
+      "related_techniques": [
+        "QIF-T0143"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0011",
+      "name": "cTBS GABAergic LTD interneuron upregulation (theta-burst GABA increase) (non-adversarial reading of QIF-T0144)",
+      "description": "Pointer entry. The registrar holds QIF-T0144 as a technique, but the text recorded for it describes a theta-burst stimulation protocol and the plasticity response to it, with no adversary and no access model. Deciding sentence in the entry: \"The GABA increase is a neuroplasticity response, not acute receptor activation.\" QIF-T0144 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0144 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0144 without review.",
+      "bands": [
+        "I0",
+        "N1"
+      ],
+      "related_techniques": [
+        "QIF-T0144"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0012",
+      "name": "Anodal tDCS polarity-specific GABA depletion (MRS-measured) (non-adversarial reading of QIF-T0145)",
+      "description": "Pointer entry. The registrar holds QIF-T0145 as a technique, but the text recorded for it describes the neurochemical effect of a standard tDCS protocol, with no adversary and no access model. Deciding sentence in the entry: \"Polarity-specific: anodal reduces GABA only; cathodal reduces both GABA and glutamate (coupled).\" QIF-T0145 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0145 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0145 without review.",
+      "bands": [
+        "I0",
+        "N1"
+      ],
+      "related_techniques": [
+        "QIF-T0145"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0013",
+      "name": "Gamma-tACS PV-interneuron GABA-A modulation (40Hz contact entrainment) (non-adversarial reading of QIF-T0146)",
+      "description": "Pointer entry. The registrar holds QIF-T0146 as a technique, but the text recorded for it describes the effect of 40 Hz alternating current through contact electrodes, with no adversary and no access model. Deciding sentence in the entry: \"40Hz tACS via contact electrodes drives PV+ fast-spiking GABAergic interneurons phase-locked at gamma.\" QIF-T0146 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0146 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0146 without review.",
+      "bands": [
+        "I0",
+        "N1"
+      ],
+      "related_techniques": [
+        "QIF-T0146"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0014",
+      "name": "FUS thalamic GABAergic suppression (acoustic GABA reduction) (non-adversarial reading of QIF-T0147)",
+      "description": "Pointer entry. The registrar holds QIF-T0147 as a technique, but the text recorded for it describes the neurochemical effect of focused ultrasound on the thalamus in rats, with no adversary and no access model. Deciding sentence in the entry: \"Transcranial focused ultrasound (0.25MHz, 100ms pulses) targeting thalamus reduces extracellular GABA ~20% without glutamate change (Yang 2012, rat microdialysis).\" QIF-T0147 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0147 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0147 without review.",
+      "bands": [
+        "I0",
+        "N1",
+        "N2"
+      ],
+      "related_techniques": [
+        "QIF-T0147"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0015",
+      "name": "GENUS gamma-sensory entrainment of PV+ GABAergic interneurons (non-contact 40Hz) (non-adversarial reading of QIF-T0148)",
+      "description": "Pointer entry. The registrar holds QIF-T0148 as a technique, but the text recorded for it describes sensory 40 Hz stimulation studied as a therapy, with no adversary and no access model. Deciding sentence in the entry: \"No electrode contact required.\" QIF-T0148 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0148 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0148 without review.",
+      "bands": [
+        "N1",
+        "N2",
+        "N3"
+      ],
+      "related_techniques": [
+        "QIF-T0148"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0016",
+      "name": "Implanted VNS cholinergic cortical manipulation via nucleus basalis (non-adversarial reading of QIF-T0149)",
+      "description": "Pointer entry. The registrar holds QIF-T0149 as a technique, but the text recorded for it describes the cortical effect of an approved implanted vagus nerve stimulator, with no adversary and no access model. Deciding sentence in the entry: \"Pre-condition: surgical implant. FDA-approved platform (LivaNova).\" QIF-T0149 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0149 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0149 without review.",
+      "bands": [
+        "I0",
+        "N1",
+        "N2",
+        "N3"
+      ],
+      "related_techniques": [
+        "QIF-T0149"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0017",
+      "name": "Transcutaneous auricular VNS (tVNS) cholinergic modulation (non-adversarial reading of QIF-T0150)",
+      "description": "Pointer entry. The registrar holds QIF-T0150 as a technique, but the text recorded for it describes the effect of a wearable ear-clip nerve stimulator, with no adversary and no access model. Deciding sentence in the entry: \"No surgery. Wearable ear clip (CE-marked Nemos).\" QIF-T0150 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0150 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0150 without review.",
+      "bands": [
+        "I0",
+        "N1"
+      ],
+      "related_techniques": [
+        "QIF-T0150"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0018",
+      "name": "AChE inhibition BCI signal corruption (organophosphate exposure) (non-adversarial reading of QIF-T0152)",
+      "description": "Pointer entry. The registrar holds QIF-T0152 as a technique, but the text recorded for it describes the state of a neural recording during chemical exposure, framed by the entry as defensive, with no adversary and no access model. Deciding sentence in the entry: \"DEFENSIVE FRAMING: threat is BCI signal integrity during chemical exposure.\" QIF-T0152 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0152 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0152 without review.",
+      "bands": [
+        "I0",
+        "N1",
+        "N2",
+        "N3"
+      ],
+      "related_techniques": [
+        "QIF-T0152"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0019",
+      "name": "VNS disynaptic serotonin upregulation (NTS->LC->DRN pathway) (non-adversarial reading of QIF-T0154)",
+      "description": "Pointer entry. The registrar holds QIF-T0154 as a technique, but the text recorded for it describes the pathway by which vagus nerve stimulation changes serotonin signalling, with no adversary and no access model. Deciding sentence in the entry: \"Disynaptic peripheral-to-brainstem cascade distinct from T0009 (EM cortical) and T0136 (photon CCO).\" QIF-T0154 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0154 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0154 without review.",
+      "bands": [
+        "N1",
+        "N2",
+        "N3",
+        "N4"
+      ],
+      "related_techniques": [
+        "QIF-T0154"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0020",
+      "name": "Transcranial focused ultrasound DRN serotonin release (Piezo1/TRPA1 mechanotransduction) (non-adversarial reading of QIF-T0155)",
+      "description": "Pointer entry. The registrar holds QIF-T0155 as a technique, but the text recorded for it describes focused ultrasound aimed at a brainstem nucleus; a low-signature property is stated but no operator or access route, with no adversary and no access model. Deciding sentence in the entry: \"No RF signature, no surface contact.\" QIF-T0155 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0155 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0155 without review.",
+      "bands": [
+        "I0",
+        "N1",
+        "N2",
+        "N3"
+      ],
+      "related_techniques": [
+        "QIF-T0155"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0021",
+      "name": "High-frequency electroacupuncture dorsal raphe serotonin drive (100Hz peripheral afferent) (non-adversarial reading of QIF-T0156)",
+      "description": "Pointer entry. The registrar holds QIF-T0156 as a technique, but the text recorded for it describes the effect of electroacupuncture at stated parameters, with no adversary and no access model. Deciding sentence in the entry: \"100Hz electroacupuncture (ST36/SP6, 1-2mA, 0.2ms pulse, 45min) selectively activates serotonergic DRN neurons.\" QIF-T0156 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0156 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0156 without review.",
+      "bands": [
+        "I0",
+        "N1",
+        "N2",
+        "N3",
+        "N4",
+        "N5"
+      ],
+      "related_techniques": [
+        "QIF-T0156"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0022",
+      "name": "Acute tryptophan depletion — serotonin precursor starvation via LAT1 competition (non-adversarial reading of QIF-T0157)",
+      "description": "Pointer entry. The registrar holds QIF-T0157 as a technique, but the text recorded for it describes a dietary research challenge; an access condition is named but no adversary, with no adversary and no access model. Deciding sentence in the entry: \"Reversible within 24hrs; requires food supply access\" QIF-T0157 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0157 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0157 without review.",
+      "bands": [
+        "N4",
+        "N5",
+        "N6",
+        "N7"
+      ],
+      "related_techniques": [
+        "QIF-T0157"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0023",
+      "name": "LIFU astrocytic gliotransmission (acoustic TRPA1->extrasynaptic NMDA) (non-adversarial reading of QIF-T0159)",
+      "description": "Pointer entry. The registrar holds QIF-T0159 as a technique, but the text recorded for it describes the cellular pathway by which low-intensity ultrasound acts on astrocytes, with no adversary and no access model. Deciding sentence in the entry: \"Distinct: (1) acoustic not EM, (2) astrocyte-first not neuron-first, (3) gliotransmission not synaptic vesicle, (4) extrasynaptic NMDA pool pharmacologically distinct from synaptic.\" QIF-T0159 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0159 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0159 without review.",
+      "bands": [
+        "I0",
+        "N1",
+        "N2"
+      ],
+      "related_techniques": [
+        "QIF-T0159"
+      ],
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0024",
+      "name": "Moisture and liquid exposure (sweat, spills, humidity, condensation)",
+      "description": "Everyday moisture around a worn or implanted-adjacent neural device: sweat accumulating under surface electrodes, rain or spills, high humidity, condensation after temperature change, or liquid entering a connector. Plausible effects, stated as general electronics and electrophysiology practice and not drawn from a verified source in this pass: changed electrode contact and impedance, corrosion or shorts in connectors, degraded or misleading recordings, and electrical risk where the hardware is not rated for the exposure. A signal change alone cannot confirm moisture; confirmation needs a moisture/humidity sensor, impedance telemetry, a device-reported fault, or a user report. Paired control: impedance and contact-quality trend monitoring where supported, manufacturer drying and inspection guidance, and pausing interpretation of affected channels. No incidence or outcome claim is made.",
+      "hazard_class": "environmental_operational",
+      "bands": [
+        "I0",
+        "S1"
+      ],
+      "related_techniques": [
+        "QIF-T0001",
+        "QIF-T0048"
+      ],
+      "detection": {
+        "signals": [
+          "moisture/humidity sensor reading",
+          "per-channel impedance shift",
+          "abrupt channel noise change",
+          "device-reported electrical fault",
+          "user report of liquid exposure"
+        ],
+        "requires": [
+          "impedance telemetry or contact-quality telemetry (for indirect evidence)",
+          "moisture sensor (for direct observation)"
+        ],
+        "observability": "indirect"
+      },
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0025",
+      "name": "Static and low-frequency magnetic field exposure (magnets, motors, MRI environments)",
+      "description": "Ambient magnetic fields from permanent magnets, magnetic clasps and mounts, motors, speakers, or high-field environments such as MRI suites. Effects are strongly device-dependent: magnetometers and magnetically sensitive components can be disturbed or saturated, while ordinary EEG electrodes are not a general-purpose magnetic field sensor, so a magnetic cause cannot be established from EEG channels alone. MRI is a special case: exposure of a device not cleared for that environment is a serious physical hazard governed by the manufacturer's MRI safety labeling; a software alert, or its absence, must never be treated as MRI clearance. Paired control: magnetometer or field-sensor thresholds where the hardware has one, device fault telemetry, and display of the manufacturer's documented MRI restrictions. No incidence or outcome claim is made.",
+      "hazard_class": "environmental_operational",
+      "bands": [
+        "I0",
+        "S1"
+      ],
+      "related_techniques": [
+        "QIF-T0009",
+        "QIF-T0025"
+      ],
+      "detection": {
+        "signals": [
+          "magnetometer or field-sensor reading beyond configured limit",
+          "sensor saturation or fault flags",
+          "correlated disturbance across magnetically sensitive channels"
+        ],
+        "requires": [
+          "magnetometer or dedicated field sensor (for observation); without one the hazard is at best suspected"
+        ],
+        "observability": "indirect"
+      },
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0026",
+      "name": "Mains electrical interference and power-quality faults (50/60 Hz, ground loops, faulty chargers)",
+      "description": "Everyday electrical interference coupling into acquisition: 50/60 Hz mains pickup and harmonics, broadband noise from nearby equipment, ground loops, poor shielding, damaged cables, static discharge, or a faulty charger. Mains contamination of biopotential recordings is standard measurement practice knowledge, though no source was verified in this pass. A spectral peak near the local mains frequency is consistent with mains interference but does not by itself establish the source; the observation and the attributed cause must stay separate. Paired control: notch/spectral monitoring of mains bands, clipping and common-mode indicators, device fault telemetry, and safe-configuration guidance. Controls must never advise defeating protective earth or opening powered equipment. No incidence or outcome claim is made.",
+      "hazard_class": "environmental_operational",
+      "bands": [
+        "I0",
+        "S1"
+      ],
+      "related_techniques": [
+        "QIF-T0009",
+        "QIF-T0025",
+        "QIF-T0063"
+      ],
+      "detection": {
+        "signals": [
+          "persistent spectral peak at local mains frequency and harmonics",
+          "broadband noise floor rise",
+          "amplifier clipping or offsets",
+          "common-mode pattern across channels"
+        ],
+        "requires": [
+          "raw signal access with known sampling rate (spectral analysis)"
+        ],
+        "observability": "indirect"
+      },
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0027",
+      "name": "Device overheating and battery thermal fault",
+      "description": "Excessive device or battery temperature from charging while worn, blocked ventilation, hot environments, direct sunlight, or a degrading battery. Plausible effects, stated as general electronics practice: degraded electronics and measurements, skin discomfort or burn risk, and battery failure modes. Overheating cannot be confirmed from signal noise alone: confirmation needs temperature or battery telemetry or a device-reported fault, and a device without a temperature sensor must be reported as 'temperature monitoring unavailable', never as 'temperature normal'. Severe warning signs (swelling, smoke, burning smell) call for the manufacturer's stop-use and emergency guidance, not continued monitoring. Paired control: manufacturer thresholds with hysteresis on temperature and charge telemetry. No incidence or outcome claim is made.",
+      "hazard_class": "environmental_operational",
+      "bands": [
+        "S1"
+      ],
+      "related_techniques": [
+        "QIF-T0015",
+        "QIF-T0031"
+      ],
+      "detection": {
+        "signals": [
+          "onboard temperature above manufacturer limit",
+          "abnormal rate of temperature rise",
+          "battery fault or charge-state anomaly",
+          "device-reported thermal fault"
+        ],
+        "requires": [
+          "temperature or battery telemetry exposed by the device"
+        ],
+        "observability": "observable"
+      },
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0028",
+      "name": "Surface electrode contact degradation (dry gel, shift, hair, detachment)",
+      "description": "Non-adversarial loss of recording contact on wearable or cap-based systems: dried conductive gel, dry electrodes losing pressure, hair obstructing contact, a shifted headband or cap, uneven pressure, or a detached electrode. Distinct from QIF-H0002, which records implanted electrode micromotion. Plausible effects: noisy, attenuated or misleading channels that can be mistaken for neural change. Paired control: per-channel impedance or contact-quality checks where the device supports them, flatline and dropout detection, cross-channel comparison, and user inspection prompts. A contact fault is a signal-integrity finding, not evidence of cognitive change or attack. No incidence or outcome claim is made.",
+      "hazard_class": "environmental_operational",
+      "bands": [
+        "I0"
+      ],
+      "related_techniques": [
+        "QIF-T0048",
+        "QIF-T0120"
+      ],
+      "detection": {
+        "signals": [
+          "elevated per-channel impedance",
+          "flatline or dropout on specific channels",
+          "sudden baseline offset",
+          "channel-specific noise against quiet neighbours"
+        ],
+        "requires": [
+          "impedance/contact telemetry (direct) or raw per-channel signal (indirect)"
+        ],
+        "observability": "indirect"
+      },
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0029",
+      "name": "Motion and vibration artifact (movement, cable tug, vehicle travel)",
+      "description": "Movement-linked signal contamination: head and body movement, walking or running, cable tugging, mechanical vibration from vehicles or equipment. Motion artifact in biopotential recording is standard measurement practice knowledge, though no source was verified in this pass. Movement-related signal change must not be classified as neural abnormality; correlation with inertial measurements is the discriminator where an accelerometer exists. Paired control: accelerometer correlation, artifact-aware quality flags, and timing analysis between motion and signal events. No incidence or outcome claim is made.",
+      "hazard_class": "environmental_operational",
+      "bands": [
+        "I0",
+        "S1"
+      ],
+      "related_techniques": [
+        "QIF-T0063"
+      ],
+      "detection": {
+        "signals": [
+          "signal transients time-locked to accelerometer/IMU activity",
+          "abrupt electrode offsets during movement",
+          "channel dropout coinciding with cable strain"
+        ],
+        "requires": [
+          "accelerometer or IMU channel (for correlation); without one, motion is only suspected"
+        ],
+        "observability": "indirect"
+      },
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0030",
+      "name": "Wireless link instability and RF congestion (Bluetooth/Wi-Fi packet loss)",
+      "description": "Transport-layer degradation of a wireless neural device link: Bluetooth congestion, Wi-Fi interference, distance or body shadowing, reconnection loops, packet loss, latency and jitter. A transport fault and analog signal contamination are different failure modes and must not be conflated: lost packets make samples missing, they do not make the underlying neural signal wrong. Paired control: packet counters, sequence-gap detection, link-quality telemetry where exposed, and visible missing-sample accounting. Missing data must be marked missing, never silently interpolated. No incidence or outcome claim is made.",
+      "hazard_class": "environmental_operational",
+      "bands": [
+        "S1",
+        "S2"
+      ],
+      "related_techniques": [
+        "QIF-T0042"
+      ],
+      "detection": {
+        "signals": [
+          "packet loss and sequence gaps",
+          "latency/jitter excursions",
+          "reconnection count",
+          "missing-sample intervals in the record"
+        ],
+        "requires": [
+          "transport telemetry or sequence-numbered sample stream"
+        ],
+        "observability": "observable"
+      },
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0031",
+      "name": "Power instability and battery depletion (brownouts, resets, unstable supply)",
+      "description": "Non-adversarial power problems: low or degraded battery, unstable USB supply, charging faults, voltage excursions, and the resets or recording interruptions that follow. Distinct from QIF-H0027 (thermal) and from QIF-T0031, which records deliberate battery drain by an adversary. Paired control: battery and power telemetry where exposed, device error codes, and explicit incomplete-recording status after an interruption. Telemetry the device does not expose must be reported as unavailable, never invented. No incidence or outcome claim is made.",
+      "hazard_class": "environmental_operational",
+      "bands": [
+        "S1"
+      ],
+      "related_techniques": [
+        "QIF-T0031",
+        "QIF-T0165"
+      ],
+      "detection": {
+        "signals": [
+          "battery state and discharge-rate anomalies",
+          "voltage/current excursions where exposed",
+          "unexpected resets or disconnects",
+          "power-correlated recording interruptions"
+        ],
+        "requires": [
+          "battery/power telemetry or device status events"
+        ],
+        "observability": "observable"
+      },
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0032",
+      "name": "Environmental contamination and out-of-limit storage or use (dust, residues, temperature/humidity extremes)",
+      "description": "Gradual environmental degradation: dust or debris in connectors, skin products or residues affecting electrode contact, condensation cycles, and storage or use outside the manufacturer's documented environmental limits. Most of these conditions are not directly machine-observable on common devices; where no sensor exists, the correct product behaviour is a transparent inspection checklist and a user-report pathway, not an unsupported detection claim. Paired control: manufacturer cleaning and storage guidance, periodic inspection prompts, and contact-quality trending as indirect evidence. No incidence or outcome claim is made.",
+      "hazard_class": "environmental_operational",
+      "bands": [
+        "I0",
+        "S1"
+      ],
+      "related_techniques": [
+        "QIF-T0048"
+      ],
+      "detection": {
+        "signals": [
+          "gradual contact-quality decline across sessions",
+          "environmental sensor readings outside documented limits where fitted",
+          "user-reported contamination"
+        ],
+        "requires": [
+          "environmental sensors (rare) or longitudinal contact-quality records"
+        ],
+        "observability": "user_report"
+      },
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    },
+    {
+      "id": "QIF-H0033",
+      "name": "Acquisition configuration and data-integrity faults (rate changes, dropped or duplicated samples, saturation)",
+      "description": "Non-adversarial acquisition faults that corrupt the record without any attacker: sampling-rate or channel-map changes from reconfiguration or firmware updates, driver incompatibilities, buffer overflows, missing or duplicated samples, timestamp discontinuities, and amplifier saturation or clipping. These are deterministic, software-observable checks and belong in the first line of monitoring for any neural recording. An integrity fault makes downstream analysis unreliable and must gate interpretation: a record failing integrity checks may not be used as evidence of neural change or of an attack. Paired control: metadata validation, sequence and timestamp checks, sample-count reconciliation, configuration hashes, and clipping detection. No incidence or outcome claim is made.",
+      "hazard_class": "environmental_operational",
+      "bands": [
+        "S1",
+        "S2"
+      ],
+      "related_techniques": [
+        "QIF-T0063",
+        "QIF-T0165"
+      ],
+      "detection": {
+        "signals": [
+          "sampling-rate or channel-map mismatch against session metadata",
+          "sequence gaps and duplicate samples",
+          "timestamp discontinuities",
+          "rail-value saturation and flat-topped waveforms"
+        ],
+        "requires": [
+          "timestamped, sequence-numbered sample stream with declared configuration"
+        ],
+        "observability": "observable"
+      },
+      "sources": [],
+      "peer_review_status": "none",
+      "status": "THEORETICAL"
+    }
+  ]
+}

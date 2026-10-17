@@ -30,6 +30,7 @@ import cveRaw from '@shared/cve-technique-mapping.json';
 // Governance & security
 import ethicsRaw from '@shared/qif-ethics-controls.json';
 import controlsRaw from '@shared/qif-security-controls.json';
+import hazardsRaw from '@shared/qif-hazards.json';
 import guardrailsRaw from '@shared/qif-guardrails.json';
 import scoresRaw from '@shared/neurosecurity-scores.json';
 
@@ -104,6 +105,7 @@ const dsm = dsmRaw as any;
 const ethics = ethicsRaw as any;
 const cve = cveRaw as any;
 const controls = controlsRaw as any;
+const hazards = hazardsRaw as any;
 const pathways = pathwaysRaw as any;
 const ntData = neurotransmitterRaw as any;
 const timeline = timelineRaw as any;
@@ -415,6 +417,25 @@ function buildControls(): Row[] {
       }))
     )
   );
+}
+
+/**
+ * Non-adversarial hazards, kept apart from the attack techniques: these have no
+ * attacker. related_techniques is a pointer to the adversarial reading of the
+ * same mechanism, not evidence that one caused the other.
+ */
+function buildHazards(): Row[] {
+  return ((hazards as any).hazards || []).map((h: any) => ({
+    id: h.id,
+    name: h.name,
+    hazard_class: h.hazard_class || '',
+    bands: (h.bands || []).join(', '),
+    related_techniques: (h.related_techniques || []).join(', '),
+    observability: h.detection?.observability || '',
+    status: h.status || '',
+    peer_review_status: h.peer_review_status || '',
+    source_count: (h.sources || []).length,
+  }));
 }
 
 function buildNeurosecurityScores(): Row[] {
@@ -1325,6 +1346,7 @@ export function getKqlTables(): KqlTables {
     // Governance
     neurorights: buildNeurorights(),
     controls: buildControls(),
+    hazards: buildHazards(),
     consent_tiers: buildConsentTiers(),
     frameworks: buildFrameworks(),
     neurosecurity_scores: buildNeurosecurityScores(),
