@@ -1,134 +1,57 @@
-import { useState } from 'react';
-import { MODEL_LIMITS, RISK_STATUSES, type RiskStatus } from '@/lib/threat-model/device-model';
-import { NOT_SCORED_LABEL } from '@/lib/threat-model/register-csv';
+import { EvidenceGlyph } from '@/components/lab-kit/EvidenceMark';
+import EvidenceLegend from '@/components/lab-kit/EvidenceLegend';
+import SeverityMark from '@/components/lab-kit/SeverityMark';
+import { countByEvidence, describeEvidence } from '@/lib/threat-model/evidence-levels';
+import { CATALOG_SEVERITY_HEADING } from '@/lib/threat-model/lab-terms';
+import type { OrphanDecision } from '@/lib/threat-model/orphan-decisions';
 import type { RiskRow } from '@/lib/threat-model/report-types';
-import { isRiskAddressed } from '@/lib/threat-model/risk-register';
-
-type SourceFilter = 'catalog' | 'stride' | 'all';
+import { ReportTable, type ReportColumn } from './report/ReportSection';
+import { RISK_STATUS_LABELS } from './risk-status-labels';
 
 interface Props {
   rows: readonly RiskRow[];
-  controlsInPlace: readonly string[];
-  /** Omit to render a read-only register, as in the printed report. */
-  onDecide?: (riskId: string, status: RiskStatus, note: string) => void;
-  onToggleControl?: (control: string) => void;
+  /** Decisions saved in the model that no row now carries. Listed under the register so none is lost from the page. */
+  orphanDecisions?: readonly OrphanDecision[];
 }
 
-const STATUS_LABELS: Record<RiskStatus, string> = {
-  open: 'Open',
-  mitigated: 'Mitigated',
-  accepted: 'Accepted',
-  not_applicable: 'Not applicable',
-};
+const BASELINE_LABEL = 'Generic baseline';
+const NO_VALUE = '';
 
-const FILTER_LABELS: Record<SourceFilter, string> = {
-  catalog: 'Neural techniques',
-  stride: 'STRIDE baseline',
-  all: 'All',
-};
+const REGISTER_COLUMNS: readonly ReportColumn<RiskRow>[] = [
+  { id: 'threat', header: 'Threat', render: (row) => row.title },
+  { id: 'id', header: 'ID', render: (row) => (row.techniqueId === null ? NO_VALUE : <span className="lab-id">{row.techniqueId}</span>) },
+  { id: 'part', header: 'Part', render: (row) => row.elementLabel },
+  { id: 'severity', header: CATALOG_SEVERITY_HEADING, render: (row) => (row.catalogSeverity === null ? NO_VALUE : <SeverityMark severity={row.catalogSeverity} />) },
+  { id: 'evidence', header: 'Evidence', render: (row) => (row.source === 'catalog' ? <EvidenceGlyph evidence={describeEvidence(row)} labelForm="short" /> : <span className="lab-soft">{BASELINE_LABEL}</span>) },
+  { id: 'decision', header: 'Decision', render: (row) => RISK_STATUS_LABELS[row.status] },
+  { id: 'note', header: 'Note', render: (row) => row.note },
+];
 
-function ControlList({ row, controlsInPlace, onToggleControl }: { row: RiskRow; controlsInPlace: readonly string[]; onToggleControl?: (control: string) => void }) {
-  if (row.controls.length === 0) return <span className="tm-muted tm-small">None suggested</span>;
+const ORPHAN_COLUMNS: readonly ReportColumn<OrphanDecision>[] = [
+  { id: 'id', header: 'Recorded on', render: (orphan) => <span className="lab-id report-wrap">{orphan.decision.riskId}</span> },
+  { id: 'decision', header: 'Decision', render: (orphan) => RISK_STATUS_LABELS[orphan.decision.status] },
+  { id: 'note', header: 'Note', render: (orphan) => orphan.decision.note },
+  { id: 'cause', header: 'Why it has no row', render: (orphan) => orphan.detail },
+];
+
+/** The whole register as the report prints it: one line per row, nothing to operate. */
+export default function RiskRegister({ rows, orphanDecisions = [] }: Props) {
+  // A row kept only because a saved decision names a technique the catalog no longer holds is listed with the decisions below.
+  const current = rows.filter((row) => row.catalogState === 'current');
+  const catalogRows = current.filter((row) => row.source === 'catalog');
   return (
     <>
-      {row.controls.map((control) => (
-        <label key={control} className="tm-check">
-          <input
-            type="checkbox" checked={controlsInPlace.includes(control)} disabled={onToggleControl === undefined}
-            onChange={() => onToggleControl?.(control)}
-          />
-          <span>{control}</span>
-        </label>
-      ))}
-    </>
-  );
-}
-
-function ThreatCell({ row }: { row: RiskRow }) {
-  return (
-    <>
-      <div>{row.title}</div>
-      <div className="tm-muted tm-small">
-        {row.elementLabel}
-        {row.techniqueId !== null && <> · <span className="tm-mono">{row.techniqueId}</span></>}
-      </div>
-      {row.catalogState === 'missing' && <span className="tm-badge tm-badge--warning">No longer in the catalog</span>}
-      {row.precedentCveIds.length > 0 && <div className="tm-muted tm-small">Precedent CVEs in similar products: {row.precedentCveIds.length}</div>}
-    </>
-  );
-}
-
-function ScoreCell({ row }: { row: RiskRow }) {
-  return (
-    <>
-      {row.catalogSeverity !== null && <span className={`tm-badge tm-badge--${row.catalogSeverity}`}>{row.catalogSeverity}</span>}
-      <div className="tm-mono">{row.cvssBaseVector ?? NOT_SCORED_LABEL}</div>
-      {row.nissScore !== null && <div className="tm-muted tm-small">NISS annex: {row.nissScore}</div>}
-    </>
-  );
-}
-
-export default function RiskRegister({ rows, controlsInPlace, onDecide, onToggleControl }: Props) {
-  const [sourceFilter, setSourceFilter] = useState<SourceFilter>('catalog');
-  const [isOpenOnly, setOpenOnly] = useState(false);
-  const isReadOnly = onDecide === undefined;
-  const sourceRows = rows.filter((row) => isReadOnly || sourceFilter === 'all' || row.source === sourceFilter);
-  const openCount = sourceRows.filter((row) => !isRiskAddressed(row, controlsInPlace)).length;
-  // Open rows first, so triage starts at the top; the order within each group is kept.
-  const visibleRows = isReadOnly ? sourceRows : [
-    ...sourceRows.filter((row) => !isRiskAddressed(row, controlsInPlace)),
-    ...(isOpenOnly ? [] : sourceRows.filter((row) => isRiskAddressed(row, controlsInPlace))),
-  ];
-
-  return (
-    <div>
-      {!isReadOnly && (
-        <div className="tm-tabs tm-no-print" role="group" aria-label="Register rows to show">
-          {(Object.keys(FILTER_LABELS) as SourceFilter[]).map((filter) => (
-            <button key={filter} type="button" className="tm-tab" aria-pressed={sourceFilter === filter} onClick={() => setSourceFilter(filter)}>
-              {FILTER_LABELS[filter]}
-            </button>
-          ))}
-          <button type="button" className="tm-tab" aria-pressed={isOpenOnly} onClick={() => setOpenOnly(!isOpenOnly)}>Open only</button>
-          <span className="tm-muted tm-small" style={{ alignSelf: 'center' }} role="status">
-            {openCount} open of {sourceRows.length}. A row is addressed once it has a decision or one of its controls is marked in place.
-          </span>
-        </div>
+      <ReportTable
+        caption={`${current.length} rows: ${catalogRows.length} from the technique catalog, ${current.length - catalogRows.length} from the generic baseline`}
+        columns={REGISTER_COLUMNS} rows={current} rowKey={(row) => row.riskId} emptyMessage="No rows to show here."
+      />
+      {catalogRows.length > 0 && <EvidenceLegend counts={countByEvidence(catalogRows)} isCompact />}
+      {orphanDecisions.length > 0 && (
+        <>
+          <h3 className="report-subheading">Decisions without a row: {orphanDecisions.length}</h3>
+          <ReportTable caption="Decisions saved in the model that no row now carries" columns={ORPHAN_COLUMNS} rows={orphanDecisions} rowKey={(orphan) => orphan.decision.riskId} emptyMessage="Every saved decision has a row." />
+        </>
       )}
-      {visibleRows.length === 0 && <p className="tm-muted">{isOpenOnly ? 'Nothing open here.' : 'No rows to show here.'}</p>}
-      {visibleRows.length > 0 && (
-        <div className="tm-table-wrap">
-          <table className="tm-table">
-            <thead>
-              <tr><th>Threat</th><th>Evidence</th><th>Score</th><th>Suggested controls</th><th>Status</th></tr>
-            </thead>
-            <tbody>
-              {visibleRows.map((row) => (
-                <tr key={row.riskId} className={isRiskAddressed(row, controlsInPlace) ? 'tm-row--addressed' : undefined}>
-                  <td><ThreatCell row={row} /></td>
-                  <td>{row.evidenceStatus ?? <span className="tm-muted tm-small">Generic baseline</span>}</td>
-                  <td><ScoreCell row={row} /></td>
-                  <td><ControlList row={row} controlsInPlace={controlsInPlace} onToggleControl={onToggleControl} /></td>
-                  <td>
-                    {isReadOnly ? STATUS_LABELS[row.status] : (
-                      <select className="tm-select" aria-label={`Status of ${row.title}`} value={row.status} onChange={(event) => onDecide(row.riskId, event.target.value as RiskStatus, row.note)}>
-                        {RISK_STATUSES.map((status) => <option key={status} value={status}>{STATUS_LABELS[status]}</option>)}
-                      </select>
-                    )}
-                    {isReadOnly ? (row.note !== '' && <div className="tm-muted tm-small">{row.note}</div>) : (
-                      <input
-                        className="tm-input" style={{ marginTop: '0.25rem' }} type="text" placeholder="Note" aria-label={`Note for ${row.title}`}
-                        maxLength={MODEL_LIMITS.maxNoteLength} value={row.note}
-                        onChange={(event) => onDecide(row.riskId, row.status, event.target.value)}
-                      />
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </div>
+    </>
   );
 }

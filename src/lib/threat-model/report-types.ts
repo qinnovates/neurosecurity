@@ -1,7 +1,8 @@
 import type { CatalogSeverity } from './catalog-types';
 import type { ChainGenerationResult } from './chain-types';
 import type { DeviceModel, RiskStatus } from './device-model';
-import type { NotPlacedCategory, PlacedEntryPath } from './reference-data-types';
+import type { ScopeTerm } from './lab-terms';
+import type { ComplianceSource, NotPlacedCategory, PlacedEntryPath } from './reference-data-types';
 
 export const STRIDE_CATEGORIES = [
   'spoofing', 'tampering', 'repudiation', 'information_disclosure', 'denial_of_service', 'elevation_of_privilege',
@@ -24,14 +25,23 @@ export interface TechniqueMatch {
   reasons: MatchReason[];
 }
 
+/** A technique the placement table puts on an element, kept off it by a condition the device does not meet. */
+export interface TechniqueExclusion {
+  techniqueId: string;
+  elementId: string;
+  /** The unmet condition, in the engine's words. */
+  reason: MatchReason;
+}
+
 /**
  * Every element gets exactly one outcome, so an empty result can never read as "no threats":
  * `not_applicable` means rules ran and excluded everything; `not_modelled` means no rule covers it.
+ * `excluded` keeps, per technique, each condition that kept a technique off the element, whatever the outcome.
  */
 export type ElementOutcome =
-  | { elementId: string; kind: 'matched'; matches: TechniqueMatch[] }
-  | { elementId: string; kind: 'not_applicable'; exclusions: MatchReason[] }
-  | { elementId: string; kind: 'not_modelled'; detail: string };
+  | { elementId: string; kind: 'matched'; matches: TechniqueMatch[]; excluded: TechniqueExclusion[] }
+  | { elementId: string; kind: 'not_applicable'; exclusions: MatchReason[]; excluded: TechniqueExclusion[] }
+  | { elementId: string; kind: 'not_modelled'; detail: string; excluded: TechniqueExclusion[] };
 
 /**
  * Whether a saved row's technique still exists in the current catalog. The catalog keeps no
@@ -55,9 +65,13 @@ export interface RiskRow {
   /** Null means not scored. It must never be displayed or sorted as low. */
   cvssBaseVector: string | null;
   nissScore: number | null;
+  /** The legacy status the engine's eligibility gate reads. Never shown; wording goes through describeEvidence. */
   evidenceStatus: string | null;
+  /** The catalog's evidence tier code; null on baseline rows and on records with no tier. */
+  evidenceTier: string | null;
   precedentCveIds: string[];
-  controls: string[];
+  /** The catalog's own note on how the technique might be noticed. Not a control, and not chosen for this device. */
+  detectionNote: string | null;
   fdaRequirementCodes: string[];
   status: RiskStatus;
   note: string;
@@ -76,7 +90,11 @@ export interface ArchitectureViewSelection {
   explanation: string;
 }
 
-export type RequirementApplicability = 'required' | 'recommended' | 'not_required';
+/**
+ * `not_evaluated`: no submission type is chosen, so nothing was checked.
+ * `not_determined`: the model cannot settle the statutory definition, and the tool does not guess.
+ */
+export type RequirementApplicability = 'required' | 'recommended' | 'not_required' | 'not_evaluated' | 'not_determined';
 export type RequirementEvidence = 'draft_in_this_report' | 'user_must_supply';
 
 export interface ComplianceItem {
@@ -93,18 +111,32 @@ export interface ComplianceItem {
   supportingQuote: string;
 }
 
-/** Whether the model meets the statutory definition of a cyber device, with the assumptions made. */
+/** `not_determined` is never a "no": the tool cannot rule the definition out from a model. */
+export type CyberDeviceConnectivity = 'meets' | 'not_determined';
+
+/**
+ * What the model shows about the connectivity part of the cyber device definition, with the
+ * assumptions made, and what the checklist file says about itself.
+ */
 export interface CyberDeviceAssessment {
-  isCyberDevice: boolean;
+  connectivity: CyberDeviceConnectivity;
+  /** Links on a connection type FDA lists that carry data, commands or updates in the model. */
   internetCapableLinkIds: string[];
   explanation: string;
+  /** FDA's own words on which features count, quoted from the checklist file. */
+  connectivityQuote: string;
+  /** The checklist file's statement of its own review status. */
+  checklistStatus: string;
+  /** Every source the checklist was built from. Nothing outside them is covered. */
+  checklistSources: ComplianceSource[];
 }
 
-/** How much of the catalog the placement table covers, so the report can state what was not considered. */
 /** How much of the catalog's techniques of one goal can appear in a model at all. */
 export interface GoalCoverage {
   placedTechniques: number;
   catalogTechniques: number;
+  /** True when some technique of this goal has no placement decision. A zero for the goal must then never be shown bare. */
+  isIncomplete: boolean;
 }
 
 export interface CatalogCoverage {
@@ -112,7 +144,7 @@ export interface CatalogCoverage {
   placedTechniques: number;
   /** Evidenced techniques deliberately not placed, counted by the reason category. */
   notPlacedByCategory: Record<string, number>;
-  /** Techniques with no placement decision yet (weaker evidence). */
+  /** Techniques with no placement decision recorded. */
   notReviewedTechniques: number;
 }
 
@@ -124,14 +156,16 @@ export interface AmbientThreat {
   reason: string;
   goal: ThreatGoal | null;
   evidenceStatus: string;
+  evidenceTier: string | null;
 }
 
 export interface ThemeTechnique {
   techniqueId: string;
   name: string;
   evidenceStatus: string;
-  /** Whether this technique is part of this device's threat model, listed beside it, or not yet reviewed. */
-  standing: 'in_this_model' | 'placed_elsewhere' | 'around_device' | 'not_reviewed';
+  evidenceTier: string | null;
+  /** Where the technique stands against this device, in the Lab's four terms. */
+  standing: ScopeTerm;
 }
 
 /** A subject beyond one device's architecture, with the catalog techniques that speak to it. */

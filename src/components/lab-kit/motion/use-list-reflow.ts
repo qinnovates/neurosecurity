@@ -1,9 +1,7 @@
 import { useLayoutEffect, useRef, type RefObject } from 'react';
+import { DURATION_MOVE_MS, DURATION_QUICK_MS, EASE } from './motion-tokens';
 import { useReducedMotion } from './use-reduced-motion';
 
-const REFLOW_MS = 240;
-const ENTER_MS = 160;
-const REFLOW_EASING = 'cubic-bezier(0.2, 0.7, 0.2, 1)';
 /** Above this many items the move is not animated: it would cost more than it explains. */
 const MAX_ANIMATED_ITEMS = 120;
 const KEY_ATTRIBUTE = 'data-reflow-key';
@@ -32,9 +30,9 @@ export function useListReflow<Container extends HTMLElement>(containerRef: RefOb
         const previousTop = previousTops.current.get(key);
         const currentTop = currentTops.get(key) ?? 0;
         if (previousTop === undefined) {
-          item.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ENTER_MS, easing: REFLOW_EASING });
+          item.animate([{ opacity: 0 }, { opacity: 1 }], { duration: DURATION_QUICK_MS, easing: EASE });
         } else if (previousTop !== currentTop) {
-          item.animate([{ transform: `translateY(${previousTop - currentTop}px)` }, { transform: 'none' }], { duration: REFLOW_MS, easing: REFLOW_EASING });
+          item.animate([{ transform: `translateY(${previousTop - currentTop}px)` }, { transform: 'none' }], { duration: DURATION_MOVE_MS, easing: EASE });
         }
       }
     }
