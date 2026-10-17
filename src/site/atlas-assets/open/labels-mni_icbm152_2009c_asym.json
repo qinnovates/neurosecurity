@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "atlas": "mni_icbm152_2009c_asym",
+  "labels": [
+    {
+      "id": "brain_mask",
+      "name": "Brain outline (average template)",
+      "hemisphere": "both"
+    },
+    {
+      "id": "head_surface",
+      "name": "Head surface (average template)",
+      "hemisphere": "both"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "description": "Golden STIX ids. The SDK (tests/test_stix.py) and the site (src/lib/__tests__/stix-ids.test.ts) are both pinned to this file, so the two exports give one entry one id. Same scheme and values as the data/scholar-papers line.",
+  "scheme": "UUIDv5 over 'qif.tara.<entry id>' in uuid.NAMESPACE_DNS; identity over 'qinnovate.com'",
+  "namespace": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+  "identity": "identity--12622ab9-a49d-5332-bac6-1bb002b5c7e1",
+  "attack_patterns": {
+    "QIF-T0001": "attack-pattern--65e849dd-2639-5620-bf5a-869d513904ac",
+    "QIF-T0042": "attack-pattern--4e436050-6633-5cd8-a14a-ad03623a5315"
+  }
+}

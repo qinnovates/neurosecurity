@@ -8,7 +8,8 @@ import SignalBench from '../components/signal-bench/SignalBench';
 import { buildSignalBenchEvents } from '../components/signal-bench/signal-bench-events';
 import { THREAT_VECTORS } from '../lib/threat-data';
 import HourglassReveal from '../components/HourglassReveal';
-import ThreatAtlasViz from '../components/ThreatAtlasViz';
+import ScrollCounter from '../components/ScrollCounter';
+import AtlasExplorerLink from '../components/brain/AtlasExplorerLink';
 import DualUseSplit from '../components/DualUseSplit';
 import NeurorightsPentagon from '../components/NeurorightsPentagon';
 import '../styles/global.css';
@@ -63,7 +64,7 @@ const nissExampleMetrics = NISS_METRIC_KEYS.map((key) => ({
 }));
 
 // Compute severity breakdown from registrar (build-time)
-const bySeverity: Record<string, number> = { critical: 0, high: 0, medium: 0, low: 0 };
+const bySeverity: Record<string, number> = { critical: 0, high: 0, medium: 0, low: 0, none: 0 };
 techniques.forEach((t: any) => {
   const sev = t.niss?.severity || t.severity || 'low';
   if (bySeverity[sev] !== undefined) bySeverity[sev]++;
@@ -170,12 +171,16 @@ techniques.forEach((t: any) => {
       </p>
 
       <div class="grid md:grid-cols-2 gap-10 items-center mb-12 text-left">
-        <div>
-          <ThreatAtlasViz
+        <div class="text-center">
+          <ScrollCounter
             client:visible
-            total={totalThreats}
-            bySeverity={bySeverity}
+            end={totalThreats}
+            className="text-6xl sm:text-7xl font-bold font-[family-name:var(--font-heading)] bg-gradient-to-b from-[#f97316] to-[#ef4444] bg-clip-text text-transparent"
           />
+          <p class="text-sm text-[var(--color-text-muted)] mt-4">techniques in the TARA catalog.</p>
+          <p class="text-sm mt-2">
+            <AtlasExplorerLink className="text-[var(--color-accent-primary)] hover:underline">See the brain regions in the TARA Brain Atlas &rarr;</AtlasExplorerLink>
+          </p>
         </div>
         <div>
           <DualUseSplit

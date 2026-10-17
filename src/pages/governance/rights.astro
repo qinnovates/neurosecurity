@@ -1,6 +1,6 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
-import BrainVisualization from '@/components/brain/BrainVisualization';
+import BandViewPanel from '@/components/brain/BandViewPanel';
 import NeurorightCards from '@/components/neurogovernance/NeurorightCards';
 import { getNeurogovernanceData } from '@/lib/neurogovernance-data';
 import { getBrainViewData } from '@/lib/brain-view-data';
@@ -729,10 +729,10 @@ const breadcrumbs = [
       <NeurorightCards client:visible neurorights={data.neurorights} />
     </div>
 
-    <!-- Brain Visualization (maps rights to regions) -->
+    <!-- The seven neural bands, per view, as a list (rights are mapped to bands, not to drawn regions) -->
     <div class="glass rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto reveal">
-      <BrainVisualization
-        client:only="react"
+      <BandViewPanel
+        client:visible
         views={brainViews}
         defaultView="governance"
       />

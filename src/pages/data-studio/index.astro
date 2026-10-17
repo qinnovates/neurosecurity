@@ -1,6 +1,8 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import DataStudioBrowser from '@/components/data-studio/DataStudioBrowser';
+import { describeAnatomyTables } from '@/lib/anatomy/describe-tables';
+import { getKqlTables } from '@/lib/kql-tables';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -19,6 +21,10 @@ const datasets = Object.entries(catalog.datasets || {}).map(([id, meta]: [string
   sizeBytes: meta.size_bytes || 0,
   compression: meta.compression || 'zstd',
 }));
+
+// The anatomy tables are AI-drafted: their descriptions carry the caveat and counts computed from the rows.
+// Only the description strings reach the page; the rows are fetched from /data/kql-tables.json on request.
+const computedDescriptions = describeAnatomyTables(getKqlTables());
 
 const totalRows = datasets.reduce((s: number, d: any) => s + d.rows, 0);
 const totalSize = datasets.reduce((s: number, d: any) => s + d.sizeBytes, 0);
@@ -96,6 +102,7 @@ df = pl.read_parquet(
       <DataStudioBrowser
         client:load
         datasets={datasets}
+        computedDescriptions={computedDescriptions}
       />
 
       <!-- Data License -->

@@ -1,5 +1,35 @@
 # Changelog
 
+<!--
+  Entries above the marker are hand-written. The generator
+  (src/scripts/changelog-update.mjs) replaces the marker in place and inserts
+  generated sections after it, so this section is preserved.
+-->
+
+## API
+
+### `GET /api/qif.json` — envelope `1.0` → `1.1` (2026-10-16)
+
+**Removed:** `specs.dsm5.niss_dsm_bridge`.
+
+A per-metric NISS-to-DSM-chapter table. Its wording stated that NISS metrics
+predict diagnostic clusters. NISS scores the signal-level impact of a threat
+technique; it does not predict diagnoses, and the table contradicted guardrail
+G1. Retired in registrar changelog 1.10.
+
+The endpoint is served with `Access-Control-Allow-Origin: *`, so external
+consumers cannot be enumerated. For one release the response carries a
+`_deprecated` block naming the removed path, its removal date and its reason.
+There is no replacement field: the inference the table encoded is one the
+framework does not make.
+
+**Also changed in the same release:** condition labels across the data lake are
+now official ICD-10-CM FY2027 titles rather than DSM-5-TR names. The KQL
+columns `dsm_condition_count` and `dsm_conditions` keep their names while
+narrowing to ICD-10-CM chapter F; query authors reading them as "all coded
+conditions" will see lower counts. Non-F codes moved to `icd10_conditions` /
+`tara.icd10`. A column rename is tracked as a follow-up.
+
 <!-- changelog-marker: 9248ec1b6b071e5ca3ebe65cc07e51e63eed2fef -->
 
 ## 2026-04-24

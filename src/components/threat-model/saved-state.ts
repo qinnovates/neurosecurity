@@ -6,10 +6,9 @@
 import { MODEL_LIMITS, type DeviceModel } from '@/lib/threat-model/device-model';
 import { DeviceModelFormatError } from '@/lib/threat-model/errors';
 import { isRecord } from '@/lib/threat-model/guards';
-import { answersFromModel } from '@/lib/threat-model/intake-to-model';
 import { parseDeviceModelText } from '@/lib/threat-model/parse-device-model';
 import type { DeviceArchetype } from '@/lib/threat-model/reference-data-types';
-import type { StudioState } from './studio-state';
+import { isUntouchedPreset, type StudioState } from './studio-state';
 
 export function serialiseState(state: StudioState): string {
   return JSON.stringify({ archetypeId: state.archetypeId, model: state.model });
@@ -34,8 +33,7 @@ export function parseSavedState(text: string, archetypes: readonly DeviceArchety
   const envelope = parseEnvelope(text);
   const model: DeviceModel = parseDeviceModelText(JSON.stringify(envelope.model), knownRegionIds);
   const archetype = archetypes.find((candidate) => candidate.id === envelope.archetypeId);
-  // A model whose preset no longer exists is kept, as an imported model.
-  return archetype === undefined
-    ? { archetypeId: null, answers: null, model }
-    : { archetypeId: archetype.id, answers: answersFromModel(model, archetype), model };
+  // The saved preset name is believed only while the model still equals that preset; any other model is just a model.
+  const archetypeId = archetype !== undefined && isUntouchedPreset(model, archetype) ? archetype.id : null;
+  return { archetypeId, model, editProblem: null };
 }

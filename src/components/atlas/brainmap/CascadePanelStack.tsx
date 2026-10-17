@@ -5,7 +5,7 @@
  */
 
 import { useState, useMemo } from 'react';
-import type { ClinicalData } from '../../../lib/clinical-data';
+import { pathwayConditionCodes, type ClinicalData } from '../../../lib/clinical-data';
 
 const PATHWAY_TYPE_COLORS: Record<string, string> = {
   neurotransmitter: '#8b5cf6',
@@ -73,12 +73,13 @@ export default function CascadePanelStack({ data, selectedRegionId, onPathwaySel
       ntIds.has(nt.id.toLowerCase()) || ntIds.has(nt.name.toLowerCase())
     );
 
+    // qif-dsm-mappings.json conditions include non-chapter-F categories, so match both code lists.
     const dsmCodes = new Set<string>();
     for (const p of pathways) {
-      for (const code of p.dsmCodes) dsmCodes.add(code);
+      for (const code of pathwayConditionCodes(p)) dsmCodes.add(code);
     }
     if (region) {
-      for (const code of region.dsmCodes) dsmCodes.add(code);
+      for (const code of [...region.dsmCodes, ...region.icd10Codes]) dsmCodes.add(code);
     }
 
     const dsmConditions = data.dsmConditions.filter(d => dsmCodes.has(d.code));
@@ -106,7 +107,7 @@ export default function CascadePanelStack({ data, selectedRegionId, onPathwaySel
             Select a region
           </div>
           <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>
-            Click a brain region or hourglass band to see pathways, neurotransmitters, and DSM outcomes.
+            Click a brain region or hourglass band to see pathways, neurotransmitters, and DSM-5-TR category references.
           </p>
         </div>
       </div>
@@ -226,7 +227,7 @@ export default function CascadePanelStack({ data, selectedRegionId, onPathwaySel
 
       {/* DSM Outcomes Panel */}
       <CascadePanel
-        title="DSM Outcomes"
+        title="DSM-5-TR references"
         icon="Dx"
         count={filtered.dsmConditions.length}
         color="#f59e0b"

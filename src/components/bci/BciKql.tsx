@@ -14,6 +14,7 @@ import {
   getField,
   toStr,
 } from '../../lib/kql-engine';
+import { ANATOMY_PRESETS, type PresetQuery } from './anatomy-presets';
 
 interface BciKqlProps {
   tables: TableData;
@@ -21,7 +22,7 @@ interface BciKqlProps {
 
 // --- Preset Queries ---
 
-const PRESETS: Array<{ label: string; query: string; group?: string }> = [
+const PRESETS: PresetQuery[] = [
   // Companies & Devices
   { label: 'All companies', query: 'companies', group: 'industry' },
   { label: 'No security', query: 'companies | where security_posture == "none_published"', group: 'industry' },
@@ -40,6 +41,7 @@ const PRESETS: Array<{ label: string; query: string; group?: string }> = [
   { label: 'Hourglass bands', query: 'hourglass_bands', group: 'neuro' },
   { label: 'DSM-5', query: 'dsm5 | sort by cluster asc', group: 'neuro' },
   { label: 'Neurorights', query: 'neurorights', group: 'neuro' },
+  ...ANATOMY_PRESETS,
   // Governance & Security
   { label: 'Frameworks', query: 'frameworks', group: 'governance' },
   { label: 'Consent tiers', query: 'consent_tiers', group: 'governance' },
@@ -102,6 +104,7 @@ const PRESETS: Array<{ label: string; query: string; group?: string }> = [
   { label: 'Neurotransmitters', query: 'neurotransmitters | sort by name asc', group: 'neurosci' },
   { label: 'Impact chains', query: 'impact_chains | sort by niss_score desc | take 50', group: 'neurosci' },
   { label: 'Neurological conditions', query: 'neurological_conditions', group: 'neurosci' },
+  { label: 'Recoverability bands', query: 'severity_anchors', group: 'neurosci' },
   // Cross-table joins
   { label: 'Regions → Pathways', query: 'brain_regions | join neural_pathways on qif_band == origin_band | project name, qif_band, neural_pathways_name, neurotransmitter | take 50', group: 'joins' },
   { label: 'Techniques → Bands', query: 'techniques | where severity == "critical" | join hourglass_bands on id | take 20', group: 'joins' },

@@ -1,0 +1,18 @@
+Third-party material in this repository
+
+The root LICENSE covers this project's own work. The files under
+src/site/atlas-assets/ are third-party material: brain atlas shapes made from
+atlases that other people published, each changed as described beside it. They
+keep their sources' licenses, not the root LICENSE.
+
+  src/site/atlas-assets/open/    sources under attribution licenses
+                                 (see open/NOTICE.txt)
+  src/site/atlas-assets/by-sa/   sources handled as share-alike, CC BY-SA 4.0
+                                 (see by-sa/NOTICE.txt and by-sa/LICENSE.txt)
+
+Each folder's NOTICE.txt lists, per file, the source, its attribution, its
+license, the wording the source requires, and the changes made. The same record
+is published at /atlas/attribution/.
+
+The license readings behind these notices were made by AI and not by a lawyer.
+No person has confirmed them. They are not legal advice.

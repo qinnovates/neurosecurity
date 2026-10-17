@@ -4,7 +4,7 @@
  *
  * Splits the data into:
  *   src/site/data/kql-tables.json         — all tables EXCEPT impact_chains (~800KB)
- *   src/site/data/kql-impact-chains.json  — impact_chains only (~2.1MB, lazy-loaded)
+ *   src/site/data/kql-impact-chains.json  — impact_chains only (~8.8MB, lazy-loaded)
  *
  * This eliminates the 2-3MB prop serialization overhead where Astro embedded
  * the entire KQL table set as inline JSON in every BciKql page.
@@ -13,7 +13,8 @@
  * Called automatically by: npm run prebuild
  */
 
-import { writeFileSync, mkdirSync } from 'fs';
+import { execFileSync } from 'child_process';
+import { writeFileSync, mkdirSync, rmSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -33,9 +34,6 @@ const ROOT = resolve(__dirname, '../..');
 async function main() {
   const outDir = resolve(ROOT, 'src/site/data');
   mkdirSync(outDir, { recursive: true });
-
-  // Use tsx to run the TypeScript table builder
-  const { execSync } = await import('child_process');
 
   // Generate via a tiny inline script that imports kql-tables and writes JSON
   const script = `
@@ -84,15 +82,16 @@ async function main() {
   const tmpScript = resolve(ROOT, '.tmp-kql-export.ts');
   writeFileSync(tmpScript, script);
 
+  // Run the TypeScript table builder with tsx. The path is passed as an argument,
+  // never spliced into a shell command, so no character in it can change what runs.
   try {
-    execSync(`npx tsx ${tmpScript}`, {
+    execFileSync('npx', ['tsx', tmpScript], {
       cwd: ROOT,
       stdio: 'inherit',
       env: { ...process.env, NODE_OPTIONS: '' },
     });
   } finally {
-    // Clean up temp file
-    try { execSync(`rm ${tmpScript}`); } catch { /* ignore */ }
+    rmSync(tmpScript, { force: true });
   }
 }
 

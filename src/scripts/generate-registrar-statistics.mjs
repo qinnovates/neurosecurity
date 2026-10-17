@@ -27,6 +27,7 @@
  * copy used to be a manual `cp` and drifted whenever anything touched the
  * registrar after the copy was taken.
  */
+import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -153,9 +154,17 @@ const nissSeveritySeed = Object.fromEntries(
   Object.keys(registrar.niss_spec?.severity_scale ?? {}).map((severity) => [severity, 0]),
 );
 
+// Content fingerprint: the registrar minus its own `generated` stamp and this
+// block. When it changes, the top-level `generated` stamp moves forward. STIX
+// `modified` reads that stamp; it sat at 2026-02-09 for eight months of edits.
+const { generated: _previousStamp, statistics: _previousBlock, ...registrarContent } = registrar;
+const contentSha256 = createHash('sha256').update(JSON.stringify(registrarContent)).digest('hex');
+const isContentUnchanged = contentSha256 === previous.content_sha256;
+
 const statistics = {
   generator: 'src/scripts/generate-registrar-statistics.mjs',
   generated: new Date().toISOString().slice(0, 10),
+  content_sha256: contentSha256,
   total_techniques: techniques.length,
   total_tactics: (registrar.tactics ?? []).length,
   total_domains: Array.isArray(registrar.domains)
@@ -291,12 +300,15 @@ if (checkOnly) {
   // The SDK copy must be byte-identical; the Registrar Sync Check workflow
   // fails the build when it is not, so check it here rather than only in CI.
   const isSdkCopyInSync = readFileSync(SDK_REGISTRAR_PATH, 'utf8') === registrarRaw;
-  if (isUnchanged && isSdkCopyInSync) {
+  if (isUnchanged && isSdkCopyInSync && isContentUnchanged) {
     console.log(`[registrar-stats] statistics block is current (${techniques.length} techniques).`);
     process.exit(0);
   }
   if (!isUnchanged) {
     console.error('[registrar-stats] statistics block is stale. Run: npm run registrar:stats');
+  }
+  if (!isContentUnchanged) {
+    console.error('[registrar-stats] registrar content changed since the last stamp. Run: npm run registrar:stats');
   }
   if (!isSdkCopyInSync) {
     console.error('[registrar-stats] the SDK bundled registrar differs from the source. Run: npm run registrar:stats');
@@ -310,8 +322,15 @@ if (dryRun) {
   process.exit(0);
 }
 
-writeFileSync(REGISTRAR_PATH, nextRaw);
-writeFileSync(SDK_REGISTRAR_PATH, nextRaw);
+const TOP_LEVEL_GENERATED = /^  "generated": "[^"]*"/m;
+if (!TOP_LEVEL_GENERATED.test(nextRaw)) {
+  throw new Error('Could not locate the top-level "generated" stamp in the registrar; add `"generated": "<ISO time>"` at the top level.');
+}
+const stampedRaw = isContentUnchanged
+  ? nextRaw
+  : nextRaw.replace(TOP_LEVEL_GENERATED, `  "generated": "${new Date().toISOString().slice(0, 19)}Z"`);
+writeFileSync(REGISTRAR_PATH, stampedRaw);
+writeFileSync(SDK_REGISTRAR_PATH, stampedRaw);
 console.log(
   `[registrar-stats] ${techniques.length} techniques; TARA v${statistics.tara.version}; ` +
     `DSM-5 primary ${statistics.tara.dsm5.techniques_with_dsm5} over ${statistics.tara.dsm5.unique_dsm_codes} codes ` +

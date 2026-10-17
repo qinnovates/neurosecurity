@@ -1,8 +1,15 @@
 # qtara
 
+> **Deprecated.** qtara is no longer maintained. **0.4.0 (2026-10-17) is the final release**, and its bundled registry will not be updated.
+>
+> The hosted API was retired on 2026-10-17 (a paid feed is planned). The data stays open:
+> - Source of truth: [`datalake/qtara-registrar.json`](https://github.com/qinnovates/neurosecurity/blob/main/datalake/qtara-registrar.json)
+>
+> Why: almost no one installs the package, and every registry change had to be mirrored in it. TARA, NISS and QIF are a proposed framework that has not been independently validated; the package will be reconsidered if outside users ask for a Python client.
+
 **Threat Analysis & Risk Assessment (TARA)** framework for Neural Security.
 
-The `qtara` package provides programmatic access to the TARA registry (161 techniques), NISS (Neural Impact Scoring System) calculators, physics feasibility tiers, and STIX 2.1 exporters.
+The `qtara` package provides programmatic access to a snapshot of the TARA registry (176 techniques as of 0.4.0), NISS (Neural Impact Scoring System) scores, physics feasibility tiers, and STIX 2.1 export.
 
 ## Installation
 
@@ -12,7 +19,7 @@ pip install qtara
 
 ## Features
 
-- **TARA Registry:** Query 161 verified BCI threat techniques with full enrichment data.
+- **TARA Registry:** Query a snapshot of 176 proposed BCI threat techniques with enrichment data. Most are theoretical; check each technique's evidence tier.
 - **Physics Feasibility Tiers:** Filter techniques by physics feasibility (T0: feasible now, T1: mid-term, T2: far-term, T3: no physics gate).
 - **NISS Scorer:** Calculate neural impact scores based on physics-derived metrics.
 - **CVSS + Neurorights:** Access CVSS 4.0 mappings and neuroright impact data per technique.
@@ -91,10 +98,10 @@ Each technique is classified by its physics feasibility:
 
 ```bash
 git clone https://github.com/qinnovates/neurosecurity
-cd shared/qtara
+cd neurosecurity/datalake/qtara
 pip install -e .
 ```
 
 ## License
 
-MIT
+Apache-2.0

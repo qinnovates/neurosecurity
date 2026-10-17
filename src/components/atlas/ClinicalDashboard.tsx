@@ -19,6 +19,7 @@ import type {
 } from '../../lib/clinical-data';
 import BrainMapView from './brainmap/BrainMapView';
 import { THREAT_VECTORS, type ThreatVector, type BandId } from '../../lib/threat-data';
+import { DSM_QUALIFIER } from './dsm-qualifier';
 
 // ═══ Types ═══
 
@@ -127,7 +128,7 @@ function StatsBanner({ stats }: { stats: ClinicalData['stats'] }) {
 // ═══ Tab Bar ═══
 
 const TABS: { id: ViewTab; label: string; icon: string }[] = [
-  { id: 'brainmap', label: 'Brain Map', icon: '◎' },
+  { id: 'brainmap', label: 'Regions', icon: '◎' },
   { id: 'zoom', label: 'Drill-Down', icon: '⊕' },
   { id: 'chain', label: 'Impact Chain', icon: '⟶' },
   { id: 'pathways', label: 'Pathways', icon: '◈' },
@@ -567,8 +568,8 @@ function BandsZoom({ data, techniqueId, onSelect, onBack }: {
                 <div className="text-[9px]" style={{ color: 'var(--color-text-faint)' }}>NTs</div>
               </div>
               <div className="text-center">
-                <div className="text-lg font-bold" style={{ color }}>{bcd.dsmCodes.length}</div>
-                <div className="text-[9px]" style={{ color: 'var(--color-text-faint)' }}>DSM</div>
+                <div className="text-lg font-bold" style={{ color }}>{bcd.dsmCodes.length} / {bcd.icd10Codes.length}</div>
+                <div className="text-[9px]" style={{ color: 'var(--color-text-faint)' }}>DSM / ICD-10-CM</div>
               </div>
             </div>
             {/* Mini region pills */}
@@ -631,6 +632,7 @@ function RegionsZoom({
               <span>{region.pathwayCount} pathways</span>
               <span>{region.neurotransmitters.length} NTs</span>
               <span>{region.dsmCodes.length} DSM</span>
+              <span>{region.icd10Codes.length} ICD-10-CM</span>
               <span>{region.threatCount} threats</span>
             </div>
             {/* NT pills */}
@@ -698,9 +700,9 @@ function PathwaysZoom({
                 Disruption: {p.disruptionEffects.slice(0, 80)}{p.disruptionEffects.length > 80 ? '...' : ''}
               </p>
             )}
-            {p.dsmNames.length > 0 && (
+            {p.dsmNames.length + p.icd10Names.length > 0 && (
               <div className="flex flex-wrap gap-1 mt-2">
-                {p.dsmNames.slice(0, 3).map((name, i) => (
+                {[...p.dsmNames, ...p.icd10Names].slice(0, 3).map((name, i) => (
                   <span key={i} className="text-[9px] px-1.5 py-0.5 rounded" style={{ background: '#f59e0b10', color: '#f59e0b' }}>
                     {name.length > 25 ? name.slice(0, 25) + '...' : name}
                   </span>
@@ -925,6 +927,26 @@ function MolecularZoom({
           </div>
         )}
 
+        {/* Other ICD-10-CM conditions (outside chapter F) */}
+        {nt && nt.icd10Conditions.length > 0 && (
+          <div>
+            <h4 className="text-[10px] font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--color-text-faint)' }}>
+              Other ICD-10-CM Conditions (for threat modeling)
+            </h4>
+            <div className="space-y-1">
+              {nt.icd10Conditions.map((d, i) => (
+                <div key={i} className="text-[11px] flex items-start gap-2">
+                  <span className="font-mono shrink-0" style={{ color: '#f59e0b' }}>{d.code}</span>
+                  <span style={{ color: 'var(--color-text-primary)' }}>{d.name}</span>
+                  {d.mechanism && (
+                    <span style={{ color: 'var(--color-text-faint)' }}>— {d.mechanism}</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         <p className="text-[9px] mt-4 italic" style={{ color: 'var(--color-text-faint)' }}>
           Molecular data dynamically compiled from shared/qif-neurotransmitters.json.
           Gene names follow HGNC conventions. Diagnostic references for threat modeling only.
@@ -1062,7 +1084,7 @@ function ImpactChainView({ data }: { data: ClinicalData }) {
         <div className="text-[10px] font-semibold uppercase tracking-wider">Technique</div>
         <div className="text-[10px] font-semibold uppercase tracking-wider">Band</div>
         <div className="text-[10px] font-semibold uppercase tracking-wider">Pathway</div>
-        <div className="text-[10px] font-semibold uppercase tracking-wider">DSM Outcome</div>
+        <div className="text-[10px] font-semibold uppercase tracking-wider">DSM-5-TR reference</div>
       </div>
 
       {/* Chain rows */}
@@ -1642,6 +1664,12 @@ function PathwaysView({ data }: { data: ClinicalData }) {
                       <span style={{ color: 'var(--color-text-primary)' }}>{p.dsmNames.join('; ')}</span>
                     </div>
                   )}
+                  {p.icd10Names.length > 0 && (
+                    <div>
+                      <span className="font-semibold" style={{ color: '#f59e0b' }}>ICD-10-CM: </span>
+                      <span style={{ color: 'var(--color-text-primary)' }}>{p.icd10Names.join('; ')}</span>
+                    </div>
+                  )}
                   <div className="flex items-center gap-1">
                     <span className="text-[10px]" style={{ color: 'var(--color-text-faint)' }}>
                       Confidence: {p.confidence} | BCI: {p.bciRelevance.split('—')[0].trim()}
@@ -1729,6 +1757,7 @@ function NeurotransmittersView({ data }: { data: ClinicalData }) {
                   <span>{nt.synthesisSteps} steps</span>
                   <span>{nt.cofactors.length} cofactors</span>
                   <span>{nt.dsmConditions.length} DSM</span>
+                  <span>{nt.icd10Conditions.length} ICD-10-CM</span>
                 </div>
 
                 {/* Expanded detail */}
@@ -1767,6 +1796,26 @@ function NeurotransmittersView({ data }: { data: ClinicalData }) {
                         </span>
                         <div className="mt-1 space-y-1">
                           {nt.dsmConditions.map((d, i) => (
+                            <div key={i} className="text-[10px]">
+                              <span className="font-mono" style={{ color: '#f59e0b' }}>{d.code}</span>{' '}
+                              <span style={{ color: 'var(--color-text-primary)' }}>{d.name}</span>
+                              {d.mechanism && (
+                                <span style={{ color: 'var(--color-text-faint)' }}> — {d.mechanism}</span>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Other ICD-10-CM conditions (outside chapter F) */}
+                    {nt.icd10Conditions.length > 0 && (
+                      <div>
+                        <span className="text-[10px] font-semibold" style={{ color: 'var(--color-text-secondary)' }}>
+                          Other ICD-10-CM Conditions:
+                        </span>
+                        <div className="mt-1 space-y-1">
+                          {nt.icd10Conditions.map((d, i) => (
                             <div key={i} className="text-[10px]">
                               <span className="font-mono" style={{ color: '#f59e0b' }}>{d.code}</span>{' '}
                               <span style={{ color: 'var(--color-text-primary)' }}>{d.name}</span>
@@ -1821,10 +1870,6 @@ function DsmView({ data }: { data: ClinicalData }) {
 
   return (
     <div>
-      <p className="text-[10px] mb-4 italic" style={{ color: 'var(--color-text-faint)' }}>
-        DSM-5-TR diagnostic category references for threat modeling purposes. Not clinical diagnosis. Requires clinical validation.
-      </p>
-
       {clusters.map(([cluster, conditions]) => (
         <div key={cluster} className="mb-4">
           <div className="flex items-center gap-2 mb-2">
@@ -1952,6 +1997,7 @@ export default function ClinicalDashboard({ data }: Props) {
     <div>
       <StatsBanner stats={data.stats} />
       <TabBar active={activeTab} onChange={setActiveTab} />
+      <p className="text-xs text-center mb-4" data-dsm-qualifier style={{ color: 'var(--color-text-faint)' }}>{DSM_QUALIFIER}</p>
 
       {activeTab === 'brainmap' && <BrainMapView data={data} />}
       {activeTab === 'zoom' && <SemanticZoomView data={data} />}

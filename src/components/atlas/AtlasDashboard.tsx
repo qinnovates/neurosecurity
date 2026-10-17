@@ -1,60 +1,20 @@
 /**
- * AtlasDashboard — unified dashboard putting hourglass and 3D brain side-by-side.
- * Linked interaction: clicking either side updates both + detail panel.
+ * AtlasDashboard — unified dashboard putting the hourglass and the per-band list side-by-side.
+ * Linked interaction: clicking either side updates both + detail panel. The brain itself is on the atlas explorer page.
  * All data driven from JSON via atlas-data.ts.
  */
 
-import { Component, Suspense, useState, useEffect, useCallback, lazy, type ReactNode } from 'react';
+import { useState, useCallback } from 'react';
 import { AtlasProvider, useAtlas, type ViewMode } from './AtlasContext';
+import BandViewPanel from '../brain/BandViewPanel';
 import HourglassVisualization from './HourglassVisualization';
 import AtlasDetailPanel from './AtlasDetailPanel';
 import ThreatMap from './ThreatMap';
 import { THREAT_VECTORS, THREAT_TACTICS } from '../../lib/threat-data';
 import { HOURGLASS_BANDS } from '../../lib/qif-constants';
+import { BAND_LENS } from '../atlas-scene/RegionViewMount';
 import type { AtlasData } from '../../lib/atlas-data';
 import type { BrainView } from '../../lib/brain-view-data';
-
-// Lazy-load with retry — if the chunk fails to load (network issue, stale cache),
-// retry up to 3 times with increasing delay before giving up.
-function lazyWithRetry<T extends { default: React.ComponentType<any> }>(
-  loader: () => Promise<T>,
-  retries = 3,
-): React.LazyExoticComponent<T['default']> {
-  return lazy(() => {
-    let attempt = 0;
-    const tryLoad = (): Promise<T> =>
-      loader().catch((err) => {
-        attempt++;
-        if (attempt >= retries) throw err;
-        // Increasing delay: 1s, 2s, 3s — gives cache/network time to recover
-        return new Promise<T>((resolve) =>
-          setTimeout(() => resolve(tryLoad()), attempt * 1000)
-        );
-      });
-    return tryLoad();
-  });
-}
-
-const BrainVisualization = lazyWithRetry(() => import('../brain/BrainVisualization'));
-
-// Error boundary — catches WebGL crashes, chunk load failures, and Three.js errors.
-// Shows a useful fallback instead of a blank page.
-interface ErrorBoundaryProps {
-  fallback: (props: { error: Error; retry: () => void }) => ReactNode;
-  children: ReactNode;
-}
-interface ErrorBoundaryState {
-  error: Error | null;
-}
-class WebGLErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  state: ErrorBoundaryState = { error: null };
-  static getDerivedStateFromError(error: Error) { return { error }; }
-  retry = () => { this.setState({ error: null }); };
-  render() {
-    if (this.state.error) return this.props.fallback({ error: this.state.error, retry: this.retry });
-    return this.props.children;
-  }
-}
 
 interface Props {
   atlasData: AtlasData;
@@ -81,81 +41,11 @@ export default function AtlasDashboard({ atlasData, brainViews, threatDetails }:
   );
 }
 
-function SafariDialog({ onDismiss }: { onDismiss: () => void }) {
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ background: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(4px)' }}
-    >
-      <div
-        className="max-w-md w-full rounded-2xl p-6 shadow-2xl"
-        style={{ background: 'var(--color-bg-primary)', border: '1px solid var(--color-border)' }}
-      >
-        <div className="flex items-center gap-3 mb-4">
-          <div
-            className="w-10 h-10 rounded-full flex items-center justify-center text-lg shrink-0"
-            style={{ background: 'rgba(245, 158, 11, 0.12)' }}
-          >
-            <svg className="w-5 h-5" style={{ color: '#f59e0b' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-            </svg>
-          </div>
-          <div>
-            <h2
-              className="text-lg font-bold"
-              style={{ color: 'var(--color-text-primary)', fontFamily: 'var(--font-heading)' }}
-            >
-              Browser Compatibility
-            </h2>
-          </div>
-        </div>
-
-        <p className="text-sm mb-2" style={{ color: 'var(--color-text-muted)' }}>
-          The QIF Atlas uses WebGL for 3D brain visualization, which has limited support in Safari.
-        </p>
-        <p className="text-sm mb-5" style={{ color: 'var(--color-text-muted)' }}>
-          For the best experience, please use <strong style={{ color: 'var(--color-text-primary)' }}>Google Chrome</strong> or <strong style={{ color: 'var(--color-text-primary)' }}>Mozilla Firefox</strong>.
-        </p>
-
-        <div className="flex flex-col gap-2">
-          <a
-            href="https://www.google.com/chrome/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors"
-            style={{
-              background: 'var(--color-accent-primary)',
-              color: '#fff',
-            }}
-          >
-            Download Chrome
-            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-            </svg>
-          </a>
-          <button
-            onClick={onDismiss}
-            className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-            style={{
-              background: 'var(--color-bg-secondary)',
-              color: 'var(--color-text-faint)',
-              border: '1px solid var(--color-border)',
-            }}
-          >
-            Continue with Safari anyway
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 type DashboardView = 'hourglass' | 'threatmap';
 
 function DashboardInner({ atlasData, brainViews, threatDetails }: Props) {
   const { selectedBandId, activeTab, viewMode, selectBand, setActiveTab, setViewMode } = useAtlas();
-  const [mobileTab, setMobileTab] = useState<'hourglass' | 'brain'>('hourglass');
-  const [showSafariDialog, setShowSafariDialog] = useState(false);
+  const [mobileTab, setMobileTab] = useState<'hourglass' | 'bands'>('hourglass');
   const [dashView, setDashView] = useState<DashboardView>('hourglass');
 
   const handleThreatMapBandHighlight = useCallback((bandIds: string[]) => {
@@ -165,27 +55,15 @@ function DashboardInner({ atlasData, brainViews, threatDetails }: Props) {
     }
   }, [selectedBandId]);
 
-  useEffect(() => {
-    const ua = navigator.userAgent;
-    const isSafari = /Safari/.test(ua) && !/Chrome/.test(ua) && !/Chromium/.test(ua);
-    if (isSafari) setShowSafariDialog(true);
-  }, []);
-
   const selectedBand = selectedBandId
     ? atlasData.bands.find(b => b.id === selectedBandId) ?? null
     : null;
 
-  // Map hourglass band ID to brain view region ID (they're the same: N7, N6, etc.)
+  // The band list is keyed by the same band ids as the hourglass (N7, N6, etc.)
   const brainViewId = VIEW_MODE_CONFIG.find(v => v.id === viewMode)?.brainViewId ?? 'security';
-
-  const handleBrainRegionSelect = (regionId: string | null) => {
-    selectBand(regionId);
-  };
 
   return (
     <div className="space-y-4">
-      {showSafariDialog && <SafariDialog onDismiss={() => setShowSafariDialog(false)} />}
-
       {/* Dashboard view toggle — command bar */}
       <div className="flex items-center justify-center gap-4 glass rounded-xl px-4 py-2" style={{ background: 'var(--color-glass-bg)' }}>
         <span className="text-[9px] font-mono uppercase tracking-[0.1em] hidden sm:block" style={{ color: 'var(--color-text-faint)' }}>VIEW</span>
@@ -254,15 +132,15 @@ function DashboardInner({ atlasData, brainViews, threatDetails }: Props) {
               Hourglass
             </button>
             <button
-              onClick={() => setMobileTab('brain')}
+              onClick={() => setMobileTab('bands')}
               className="px-4 py-1.5 rounded-full text-xs font-medium transition-all"
               style={{
-                background: mobileTab === 'brain' ? 'var(--color-bg-secondary)' : 'transparent',
-                color: mobileTab === 'brain' ? 'var(--color-text-primary)' : 'var(--color-text-faint)',
-                border: `1px solid ${mobileTab === 'brain' ? 'var(--color-border)' : 'transparent'}`,
+                background: mobileTab === 'bands' ? 'var(--color-bg-secondary)' : 'transparent',
+                color: mobileTab === 'bands' ? 'var(--color-text-primary)' : 'var(--color-text-faint)',
+                border: `1px solid ${mobileTab === 'bands' ? 'var(--color-border)' : 'transparent'}`,
               }}
             >
-              Brain
+              Band list
             </button>
           </div>
 
@@ -291,52 +169,16 @@ function DashboardInner({ atlasData, brainViews, threatDetails }: Props) {
               />
             </div>
 
-            {/* Brain render (60% desktop, full mobile when active) */}
-            <div
-              className={`lg:w-[60%] glass rounded-xl overflow-hidden ${mobileTab !== 'brain' ? 'hidden lg:block' : ''}`}
-              style={{ minHeight: '400px' }}
-            >
-              <WebGLErrorBoundary fallback={({ error, retry }) => (
-                <div className="flex flex-col items-center justify-center h-full gap-3" style={{ minHeight: '400px' }}>
-                  <p className="text-sm" style={{ color: 'var(--color-text-faint)' }}>
-                    3D visualization failed to load
-                  </p>
-                  <p className="text-xs max-w-xs text-center" style={{ color: 'var(--color-text-faint)' }}>
-                    {error.message.includes('WebGL')
-                      ? 'Your browser may not support WebGL. Try Chrome or Firefox.'
-                      : 'A loading error occurred. This can happen with cached or interrupted page loads.'}
-                  </p>
-                  <button
-                    onClick={retry}
-                    className="px-4 py-1.5 rounded-lg text-xs font-medium transition-colors"
-                    style={{
-                      background: 'var(--color-accent-primary)',
-                      color: '#fff',
-                    }}
-                  >
-                    Retry
-                  </button>
-                </div>
-              )}>
-                <Suspense fallback={
-                  <div className="flex items-center justify-center h-full" style={{ minHeight: '400px' }}>
-                    <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Loading 3D brain...</p>
-                  </div>
-                }>
-                  <BrainVisualization
-                    views={brainViews}
-                    defaultView={brainViewId}
-                    externalActiveRegion={selectedBandId}
-                    onRegionSelect={handleBrainRegionSelect}
-                    externalViewId={brainViewId}
-                    onViewChange={(id) => {
-                      const mode = VIEW_MODE_CONFIG.find(v => v.brainViewId === id);
-                      if (mode) setViewMode(mode.id);
-                    }}
-                    hideViewToggle
-                  />
-                </Suspense>
-              </WebGLErrorBoundary>
+            {/* Band list (60% desktop, full mobile when active) */}
+            <div className={`lg:w-[60%] glass rounded-xl p-4 ${mobileTab !== 'bands' ? 'hidden lg:block' : ''}`}>
+              <BandViewPanel
+                views={brainViews}
+                selectedBandId={selectedBandId}
+                onBandSelect={selectBand}
+                viewId={brainViewId}
+                hideViewToggle
+                regionViewLens={BAND_LENS}
+              />
             </div>
           </div>
 
@@ -372,7 +214,7 @@ function DashboardInner({ atlasData, brainViews, threatDetails }: Props) {
                   </svg>
                 </div>
                 <p className="text-sm font-medium" style={{ color: 'var(--color-text-muted)' }}>
-                  Select a band or brain region to explore
+                  Select a band to explore
                 </p>
                 <p className="text-xs mt-1.5 font-mono" style={{ color: 'var(--color-text-faint)' }}>
                   11 bands &middot; {atlasData.devices.length} devices &middot; {atlasData.neurorights.length} neurorights
