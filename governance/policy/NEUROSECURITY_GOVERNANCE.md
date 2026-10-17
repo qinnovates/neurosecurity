@@ -1563,7 +1563,7 @@ The gap between security GRC and neuroethics is not a technical problem. It is a
 ### Research Programme Neuroethics
 
 50. Ramos, K. M., Rommelfanger, K. S., Greely, H. T., & Koroshetz, W. J. (2017). Neuroethics and the NIH BRAIN Initiative. *Journal of Responsible Innovation*, 5(1), 122-130. https://doi.org/10.1080/23299460.2017.1319035
-51. Bianchi, D. J., Cooper, J., Gordon, J. A., Heemskerk, J., Hodes, R., Koob, G., Koroshetz, W., Shurtleff, D., Sieving, P., Volkow, N., Churchill, J. D., & Ramos, K. M. (2018). Neuroethics for the National Institutes of Health BRAIN Initiative. *The Journal of Neuroscience*, 38(50), 10583-10585. https://doi.org/10.1523/JNEUROSCI.2091-18.2018
+51. Bianchi, D. W., Cooper, J. A., Gordon, J. A., Heemskerk, J., Hodes, R., Koob, G., Koroshetz, W., Shurtleff, D., Sieving, P., Volkow, N., Churchill, J. D., & Ramos, K. M. (2018). Neuroethics for the National Institutes of Health BRAIN Initiative. *The Journal of Neuroscience*, 38(50), 10583-10585. https://doi.org/10.1523/JNEUROSCI.2091-18.2018
 52. Ramos, K. M., Grady, C., Greely, H. T., Chiong, W., Eberwine, J., Farahany, N. A., Johnson, L. S. M., Hyman, B. T., Hyman, S. E., Rommelfanger, K. S., Serrano, E. E., Churchill, J. D., Gordon, J. A., & Koroshetz, W. J. (2019). The NIH BRAIN Initiative: Integrating Neuroethics and Neuroscience. *Neuron*, 101(3), 394-398. https://doi.org/10.1016/j.neuron.2019.01.024
 53. National Institutes of Health. *Neuroethics*. NIH BRAIN Initiative programme page. https://www.nih.gov/brain/research/neuroethics
 

@@ -15,7 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit, Claim Corrections
 | Entry | Topic | Link |
 |-------|-------|------|
-| 107 | Correcting a published endorsement claim; reverifying all twelve rows of the pre-outreach fix list (8 resolved, 2 live, 1 self-contradictory, 1 new adjacent defect); the paper now asserts both 59.4% and 99.1%; Neurowall privacy bound; NIH BRAIN neuroethics as the standard QIF falls short of | [Entry 107](#entry-107-endorsement-claim-and-stale-fix-list) |
+| 113 | Correcting a published endorsement claim; reverifying all twelve rows of the pre-outreach fix list (8 resolved, 2 live, 1 self-contradictory, 1 new adjacent defect); the paper now asserts both 59.4% and 99.1%; Neurowall privacy bound; NIH BRAIN neuroethics as the standard QIF falls short of | [Entry 113](#entry-113-endorsement-claim-and-stale-fix-list) |
 | 106 | October 2026 data refresh: landscape and device crawl, attack research survey, 63 site inconsistencies, three homepage corrections, citation defect C52, intake ledger and tracked metrics. Staged proposals pending Quorum fact-check | [Entry 106](#entry-106-october-2026-data-refresh) |
 
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails, Data Lake Sprint, AI Governance
@@ -110,7 +110,7 @@ See also: [Neurorights Derivation Log](./NEURORIGHTS-DERIVATION-LOG.md) | [Field
 ### Key Transitions
 
 ```
-2026-02-14  NSP/Runemate Implementation (Secure Pipe Verified)
+2026-03-04  NSP/Runemate Implementation (Secure Pipe Verified)
      │
      ├── morning     NSP Core & Handshake (Rust, ML-KEM, ML-DSA)
      ├── afternoon   Runemate Forge (HTML-to-Staves Compiler)
@@ -222,7 +222,7 @@ Each entry follows this structure:
 | [67](#entry-67) | 2026-02-18 | Security Guardrails + SSVEP Discovery + Thalamic Gate | ANALYSIS |
 | [66](#entry-66-ssvep-frequency-hijack-discovery) | 2026-02-18 | SSVEP Frequency Hijack + BCI Limits Validation | DISCOVERY |
 | [65](#entry-65) | 2026-02-18 | Physics Feasibility Tiering of TARA Techniques | ANALYSIS |
-| [54](#entry-54) | 2026-02-14 | TARA Interactive Visualization & Dual-Use Toggle | Implemented |
+| [54](#entry-54) | 2026-03-04 | TARA Interactive Visualization & Dual-Use Toggle | Implemented |
 | [53](#entry-53) | 2026-02-13 | TARA-to-DSM-5-TR Diagnostic Mapping | Implemented |
 | [50](#entry-50-tara--therapeutic-atlas-of-risks-and-applications) | 2026-02-09 | TARA — Therapeutic Atlas of Risks and Applications | Implemented |
 | [49](#entry-49) | 2026-02-09 | Dual-Use Gap Analysis — What Does Not Map | ANALYSIS |
@@ -235,8 +235,8 @@ Each entry follows this structure:
 **Tools & Implementation**
 | # | Date | Title | Status |
 |---|------|-------|--------|
-| [56](#entry-56) | 2026-02-14 | Runemate Forge & NSP Integration | Implemented |
-| [55](#entry-55) | 2026-02-14 | NSP Core & Handshake Implementation (Rust) | Implemented |
+| [56](#entry-56) | 2026-03-04 | Runemate Forge & NSP Integration | Implemented |
+| [55](#entry-55) | 2026-03-04 | NSP Core & Handshake Implementation (Rust) | Implemented |
 | [48](#entry-48) | 2026-02-09 | NSP Reframed — Trust Layer That Enables Medicine | Active |
 | [47](#entry-47) | 2026-02-09 | DSM Dissolved into NSP — No Separate Component | Active |
 | [46](#entry-46) | 2026-02-09 | Baseline-Free Security at I0 + Defensive Medical Apps | Active |
@@ -300,9 +300,9 @@ Each entry follows this structure:
 | 59 | 2026-02-18 | Hallucination Audit and Biology-First Reframing | VERIFIED + HYPOTHESIS |
 | 58 | 2026-02-18 | Neurorights Cross-Validation Against Established Frameworks | VERIFIED |
 | 57 | 2026-02-18 | Neurorights Mapping & Consent Complexity Index | VERIFIED + HYPOTHESIS |
-| 56 | 2026-02-14 | Runemate Forge & NSP Integration | Implemented — Secure Pipe Verified |
-| 55 | 2026-02-14 | NSP Core & Handshake Implementation | Implemented — Rust, PQ-secure |
-| 54 | 2026-02-14 | TARA Interactive Visualization & Dual-Use Toggle | Implemented |
+| 56 | 2026-03-04 | Runemate Forge & NSP Integration | Implemented — Secure Pipe Verified |
+| 55 | 2026-03-04 | NSP Core & Handshake Implementation | Implemented — Rust, PQ-secure |
+| 54 | 2026-03-04 | TARA Interactive Visualization & Dual-Use Toggle | Implemented |
 | 53 | 2026-02-13 | TARA-to-DSM-5-TR Diagnostic Mapping via Neural Impact Chain | Implemented |
 | 52 | 2026-02-13 | Three Floors + Energy-Time Security Bounds Applied to QIF | Implemented |
 | 51 | 2026-02-13 | P=E/t → ΔEΔt → Computational Scaling: Classical-Quantum Transition | Derived |
@@ -356,7 +356,7 @@ Each entry follows this structure:
 
 ---
 
-## Entry 107: Correcting a Published Endorsement Claim, and What a Stale Fix List Costs {#entry-107-endorsement-claim-and-stale-fix-list}
+## Entry 113: Correcting a Published Endorsement Claim, and What a Stale Fix List Costs {#entry-113-endorsement-claim-and-stale-fix-list}
 
 **Date:** 2026-10-16, ~19:00
 **Classification:** CORRECTION
@@ -409,7 +409,7 @@ All twelve rows of Section 1 were then reverified against the current code, regi
 | 9 | Four Canons code of ethics | Reverified resolved. `src/data/code-of-ethics.ts` absent; archive header still marks it aspirational |
 | 10 | neurosim priority claims | Resolved. Both rephrased to "We are unaware of another..." form |
 | 11 | Neurowall zCDP composition | Resolved July 2026; a narrower issue found and fixed this session |
-| 12 | 84% quantum framing | **Live, essentially unchanged: 147/173, 85%.** A framing decision, not a defect |
+| 12 | 84% quantum framing | **Live. Recounted 2026-10-16: 84/173 (49%) carry affirmative quantum framing; a plain non-empty count gives 147/173 (85%) but 63 of those say "No", "Not assessed" or "Not applicable". A framing decision, not a defect |
 
 ### Two Findings That Were Not On The List
 
@@ -5056,7 +5056,7 @@ CCI mean: 1.01 | max: 2.7 | 11 techniques above 2.0
 
 ## Entry 56: Runemate Forge & NSP Integration
 
-**Date:** 2026-02-14 ~afternoon
+**Date:** 2026-03-04 ~afternoon
 **Context:** Completing the "Secure Neural Pipe" vision where content is not just compressed but safely delivered.
 **Builds on:** Entry 48 (NSP as Trust Layer) and Entry 55
 **Status:** Implemented
@@ -5209,7 +5209,7 @@ Kevin is actively studying neuroscience via MIT OpenCourseWare 9.13: The Human B
 
 ## Entry 55: NSP Core & Handshake Implementation
 
-**Date:** 2026-02-14 ~morning
+**Date:** 2026-03-04 ~morning
 **Context:** Transitioning from the NSP v0.3 draft to a functional Rust implementation.
 **Builds on:** Entry 31 (NSP goes Post-Quantum)
 **Status:** Implemented
@@ -5232,7 +5232,7 @@ This is the transition from "specification" to "protocol." Having a functional, 
 
 ## Entry 55: Standard Name Transition — Quantified Interconnection Framework (QIF) {#entry-55-standard-name-transition--quantified-interconnection-framework-qif}
 
-**Date:** 2026-02-14
+**Date:** 2026-03-04
 **Context:** Maturation of the TARA Atlas and PyPI package release requires a shift from speculative theoretical naming to a rigorous, industry-aligned security standard.
 **AI Systems:** Antigravity (Gemini 2.0 Pro)
 **Human Decision:** Transition the overall QIF name to "Quantified Interconnection Framework" while maintaining acronym stability and mirroring the OSI model.
@@ -5260,7 +5260,7 @@ This is the transition from "specification" to "protocol." Having a functional, 
 
 ## Entry 54: TARA Interactive Visualization & Dual-Use Toggle {#entry-54-tara-interactive-visualization--dual-use-toggle}
 
-**Date:** 2026-02-14
+**Date:** 2026-03-04
 **Context:** User requested TARA Atlas upgrade for high-rigor academic portfolio clarity and industry adoption.
 **AI Systems:** Antigravity (Gemini 2.0 Pro)
 **Human Decision:** Explicitly model the "Dual-Use Dilemma" by toggling the SAME data between "Attacker" and "Therapeutic" perspectives, rather than separate datasets.
@@ -5397,7 +5397,7 @@ This framework is aligned with NIMH's Research Domain Criteria (RDoC) approach �
 ---
 
 *Created: 2026-02-02*
-*Last entry: #54 (2026-02-14)*
+*Last entry: #54 (2026-03-04)*
 *Maintainer: Kevin Qi*
 *Location: qinnovates/qinnovate/osi-of-mind/QIF-DERIVATION-LOG.md*
 

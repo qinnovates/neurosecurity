@@ -12,7 +12,7 @@ order: 5
 Rolling record of framework decisions extracted from the [QIF Derivation Log](../osi-of-mind/QIF-DERIVATION-LOG.md).
 Each entry links back to the full derivation context.
 
-**Last generated:** 2026-10-17 at 20:56:01
+**Last generated:** 2026-10-17 at 21:26:59
 
 **RACI Key:** R (Responsible) | A (Accountable) | C (Consulted) | I (Informed)
 
@@ -41,7 +41,7 @@ Each entry links back to the full derivation context.
 
 | Status | # | Date | Decision | Classification | RACI | AI Level |
 |--------|---|------|----------|---------------|------|----------|
-| 🔴 | [107](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-107-correcting-a-published-endorsement-claim) | 2026-10-16 | Correcting a Published Endorsement Claim, and What a Stale Fix List Costs | CORRECTION | R: Claude Opus 5 | A: KQ | C: none | I: none | AI-generated, human-decided on scope and on two reversals |
+| 🔴 | [113](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-113-correcting-a-published-endorsement-claim) | 2026-10-16 | Correcting a Published Endorsement Claim, and What a Stale Fix List Costs | CORRECTION | R: Claude Opus 5 | A: KQ | C: none | I: none | AI-generated, human-decided on scope and on two reversals |
 | 🔴 | [106](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-106-october-2026-data-refresh-landscape-craw) | 2026-10-06 | October 2026 Data Refresh — Landscape Crawl, Citation Audit, Homepage Correction | CORRECTION | R: Claude Opus 5.5 and research subagents | A: KQ | C: none | I: none | AI-generated, pending Quorum review |
 
 ## February 2026

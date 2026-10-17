@@ -27,11 +27,10 @@
       "QIF-N.NM": 3
     },
     "by_status": {
-      "CONFIRMED": 27,
       "EMERGING": 27,
-      "DEMONSTRATED": 43,
-      "THEORETICAL": 74,
-      "PLAUSIBLE": 1,
+      "DEMONSTRATED": 48,
+      "THEORETICAL": 95,
+      "PLAUSIBLE": 2,
       "SPECULATIVE": 1
     },
     "by_severity": {
@@ -608,7 +607,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "SI",
       "notes": "Inject crafted signals mimicking legitimate brain activity at electrode-tissue boundary. Classical detection via impedance anomaly. QI coherence metric flags phase/timing inconsistency.",
@@ -776,7 +775,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Kohno 2009 is a position paper; Bonaci 2015 demonstrates P300 probing, not signal injection."
     },
     {
       "id": "QIF-T0002",
@@ -1064,7 +1065,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "SE",
       "notes": "Passive interception of neural signals. At I0: quantum measurement disturbs state (detectable). At S1-S3: classical RF interception, most consumer BCIs transmit unencrypted.",
@@ -1232,7 +1233,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Kohno 2009, Landau 2020 and Schroder 2025 are analysis, not demonstration."
     },
     {
       "id": "QIF-T0004",
@@ -2204,7 +2207,7 @@
       "classical": "Partial",
       "quantum": "Enhanced (Dsf + coherence)",
       "sources": [
-        "Zhang et al. 2024",
+        "Zhang et al. 2024 [UNVERIFIED: not locatable by the 2026-10-06 attack-research survey nor by Crossref searches on 2026-10-16. Retained because failure to locate is not proof of non-existence, and substituting a different paper would repeat the I8 defect. Do not cite externally until resolved.]",
         "Indirect corticothalamic-raphe 5-HT pathway (rTMS DLPFC -> DRN serotonin)",
         "Armengol-Urpi, Kovacs, Sarma 2023, \"Brain-Hack: Remotely Injecting False Brain-Waves with RF\" (analog-front-end RF injection variant, demonstrated through walls at ~3m against live EEG-BCI hardware, no software access required) DOI:10.1145/3605758.3623497"
       ],
@@ -2459,7 +2462,7 @@
       "origin": {
         "category": "qif_recontextualized",
         "original_authors": [
-          "Zhang et al. 2024"
+          "Zhang et al. 2024 [UNVERIFIED: not locatable by the 2026-10-06 attack-research survey nor by Crossref searches on 2026-10-16. Retained because failure to locate is not proof of non-existence, and substituting a different paper would repeat the I8 defect. Do not cite externally until resolved.]"
         ],
         "qif_contribution": "threat_recontextualization"
       },
@@ -3043,7 +3046,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "PS",
       "notes": "S-band (2-4 GHz) pulsed microwave. Thermoelastic expansion causes cochlea to perceive as sound. Havana Syndrome model. PRF selects neural target: 40 Hz gamma, 10 Hz alpha, 4 Hz theta, 1 Hz delta.",
@@ -3261,7 +3264,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Frey 1962 and Lin 1978 establish the microwave auditory effect; no attack on an interface is shown."
     },
     {
       "id": "QIF-T0013",
@@ -4010,14 +4015,15 @@
       "classical": "Partial",
       "quantum": "Enhanced (QI decoder integrity check)",
       "sources": [
-        "Zhang et al. 2024 (Professor X attack on EEG models)"
+        "Li F, Huang M, You W, Zhu L, Cheng H, Yang R. (2025). \"Spatialspectral-Backdoor: Realizing backdoor attack for deep neural networks in brain-computer interface via EEG characteristics.\" Neurocomputing 616:128902. DOI:10.1016/j.neucom.2024.128902. [Verified via Crossref 2026-10-16: DOI, authors, venue and title confirmed]",
+        "Zhang et al. 2024 (Professor X attack on EEG models) [UNVERIFIED: not locatable by the 2026-10-06 attack-research survey, nor by Crossref and arXiv searches on 2026-10-16 including a direct search for \"Professor X\". Retained rather than deleted; the DEMONSTRATED status no longer rests on it.]"
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
       "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "DM",
-      "notes": "Backdoor injected during BCI decoder training. Trigger pattern in EEG input activates attacker-chosen output. Model performs normally on clean inputs. Demonstrated on P300, MI, SSVEP paradigms.",
+      "notes": "Backdoor injected during BCI decoder training. Trigger pattern in EEG input activates attacker-chosen output. Model performs normally on clean inputs. Demonstrated on P300, MI, SSVEP paradigms. Status evidence: Li et al. 2025 (Neurocomputing) demonstrates an EEG-characteristic backdoor against BCI deep-learning decoders, which supports DEMONSTRATED. The original \"Professor X\" citation could not be located and the specific claim of demonstration on P300, MI and SSVEP paradigms traces only to it, so treat that paradigm list as unverified.",
       "legacy_ids": [],
       "legacy_technique_id": "T2201",
       "niss": {
@@ -4123,7 +4129,7 @@
       "origin": {
         "category": "literature",
         "original_authors": [
-          "Zhang et al. 2024"
+          "Zhang et al. 2024 [UNVERIFIED: not locatable by the 2026-10-06 attack-research survey nor by Crossref searches on 2026-10-16. Retained because failure to locate is not proof of non-existence, and substituting a different paper would repeat the I8 defect. Do not cite externally until resolved.]"
         ],
         "qif_contribution": "framework_mapping"
       },
@@ -9731,7 +9737,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "medium",
       "ui_category": "SE",
       "notes": "Extract neural data from BLE/RF emissions via timing, power, or EM side-channels. All wireless BCIs vulnerable. Consumer devices (Muse, EMOTIV) transmit unencrypted.",
@@ -9858,7 +9864,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. no BLE/RF side-channel demonstration against a BCI is cited."
     },
     {
       "id": "QIF-T0043",
@@ -9878,7 +9886,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "PE",
       "notes": "Tamper with BCI hardware/firmware during manufacturing or distribution. Firmware rootkits persist across updates. QI-enhanced firmware attestation detects unauthorized modifications.",
@@ -10012,7 +10020,9 @@
           "QIF-T0043",
           "QIF-T0046"
         ]
-      }
+      },
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Schroder 2025 is a risk analysis; no firmware backdoor demonstrated."
     },
     {
       "id": "QIF-T0044",
@@ -10031,7 +10041,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "medium",
       "ui_category": "EX",
       "notes": "Compromise cloud services processing neural data (EMOTIV Cortex API, Neuralink cloud). Data exfiltration, model poisoning, API manipulation. PQC/QKD protects data in transit.",
@@ -10152,7 +10162,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Schroder 2025 alone; no demonstration."
     },
     {
       "id": "QIF-T0045",
@@ -10171,7 +10183,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "critical",
       "ui_category": "EX",
       "notes": "Record encrypted BCI traffic now, decrypt when quantum computers arrive (2030-2035). Neural data is permanently sensitive -- can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival.",
@@ -10291,7 +10303,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Gidney 2025 is a quantum resource estimate; harvest-now-decrypt-later is a threat model."
     },
     {
       "id": "QIF-T0046",
@@ -10766,7 +10780,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "PE",
       "notes": "Exploit weak or absent authentication on BCI wireless interfaces. Many consumer and older clinical devices assume connection implies authorization. No pairing, no encryption, no auth.",
@@ -10886,7 +10900,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Schroder 2025 alone; no demonstration."
     },
     {
       "id": "QIF-T0050",
@@ -11054,7 +11070,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "CI",
       "notes": "Unauthorized access to recorded neural data across any band. Harvest raw EEG from consumer devices, decode intent/emotion. GDPR Article 9 (special category data). NSP end-to-end encryption from I0 to cloud.",
@@ -11206,7 +11222,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Landau 2020 plus GDPR Article 9; a legal instrument is not evidence of an attack."
     },
     {
       "id": "QIF-T0052",
@@ -11477,7 +11495,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "EX",
       "notes": "Record patterns that reveal attention, emotion, fatigue, or other cognitive states without user awareness. Consumer BCI apps routinely over-collect. Attention-tracking in workplace BCIs.",
@@ -11707,7 +11725,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Landau 2020 alone; analysis."
     },
     {
       "id": "QIF-T0054",
@@ -12485,7 +12505,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "low",
       "ui_category": "SE",
       "notes": "Discover topology of BCI networks: communication pathways between electrodes, processing units, and external interfaces. Prerequisite for targeted attacks. Deploy honeypot nodes and dynamic addressing.",
@@ -12618,7 +12638,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Schroder 2025 alone; no demonstration."
     },
     {
       "id": "QIF-T0058",
@@ -14024,7 +14046,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "PLAUSIBLE",
       "severity": "critical",
       "ui_category": "CI",
       "notes": "A recommendation algorithm profiles user psychological vulnerabilities via behavioral data (watch time, engagement patterns, emotional triggers), then systematically serves content designed to destabilize cognitive function. The attack does not require a BCI — it operates through normal sensory channels (screen → eyes → visual cortex → limbic system → prefrontal cortex). The algorithm acts as both the reconnaissance tool (profiling) and the delivery mechanism (curated feed). Documented real-world outcomes include induced psychosis, radicalization, eating disorders, and suicidal ideation in vulnerable populations. With a BCI, this attack becomes catastrophically more effective: neural state data replaces behavioral proxies, stimulation bypasses conscious filtering, and real-time feedback loops enable millisecond adaptation. This technique represents the bridge between classical social engineering and neural-direct cognitive exploitation.",
@@ -14271,7 +14293,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": true,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. social-media population studies are correlational; the mechanism is indirect and no induction is demonstrated."
     },
     {
       "id": "QIF-T0066",
@@ -14871,7 +14895,7 @@
         "original_authors": [
           "Martinovic et al. 2012",
           "Marcel & Millan 2007",
-          "Zhang et al. 2024"
+          "Zhang et al. 2024 [UNVERIFIED: not locatable by the 2026-10-06 attack-research survey nor by Crossref searches on 2026-10-16. Retained because failure to locate is not proof of non-existence, and substituting a different paper would repeat the I8 defect. Do not cite externally until resolved.]"
         ],
         "qif_contribution": "framework_mapping"
       },
@@ -15933,7 +15957,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "SE",
       "notes": "Consumer audio hardware (earbuds, headphones, speakers) uses electromagnetic transducers that are physically bidirectional — a speaker cone can capture sound pressure waves just as a microphone diaphragm does. RealTek HD Audio codecs (used in most consumer PCs and many embedded devices) expose jack retasking registers that allow software to reassign an output jack as an input. The SPEAKE(a)R attack (Ben-Gurion University, 2017) demonstrated recording intelligible audio through headphones connected to an output-only jack by reprogramming the codec. In a supply chain attack scenario, generic earbuds (which lack proprietary protocol protections like Apple's W1/H1 chip authentication) could be modified at the factory or distribution level to include firmware that silently enables input mode, turning every pair of compromised earbuds into an ambient microphone. The captured audio is routed through the normal audio data path, making detection difficult. This is a pre-BCI eavesdropping vector: before any neural signal is involved, the attacker has ambient audio from the user's environment.",
@@ -16073,7 +16097,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Guri 2017 SPEAKE(a)R and Guri 2018 MOSQUITO execute the attack on real hardware."
     },
     {
       "id": "QIF-T0073",
@@ -17928,7 +17954,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "CI",
       "notes": "Advertisers and tracking firms embed inaudible ultrasonic beacons (18-22 kHz) in TV commercials, web ads, and in-store audio. Any device with microphone access (phone, tablet, smart speaker) within acoustic range can detect these beacons and report them to a tracking server. This enables cross-device user identification (linking phone, laptop, TV viewing), physical location tracking (in-store beacons), and de-anonymization of Tor/VPN users (TV ad beacons correlate with browsing sessions). Silverpush was found embedded in 234 Android apps (2017). The beacons are inaudible to humans but easily detected by consumer microphones. Combined with QIF-T0075 (ultrasonic sonar), the same frequency band serves both tracking and physiological surveillance. This technique requires no hardware modification — only software with microphone permission.",
@@ -18067,7 +18093,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Mavroudis 2017 and Arp 2017 demonstrate ultrasonic cross-device tracking."
     },
     {
       "id": "QIF-T0083",
@@ -18090,7 +18118,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "CI",
       "notes": "Each key on a keyboard produces a subtly different acoustic signature based on its position, the mechanical structure beneath it, and the user's typing dynamics. Harrison & Matyunin (2023) achieved 95% keystroke classification accuracy using a deep learning model trained on laptop keyboard audio captured by a nearby phone. The attack works over Zoom/Skype calls (Compagno et al. 2017), enabling remote credential theft during video conferences. Attack scenarios: (1) malicious app with microphone access on the same desk, (2) nearby compromised smart speaker, (3) during a video call where keyboard sounds leak through the microphone. This technique pairs with accelerometer keystroke inference (T0087) for multi-modal confirmation, significantly reducing error rates.",
@@ -18227,7 +18255,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Zhuang 2009, Compagno 2017 and Harrison 2023 demonstrate acoustic keystroke recovery."
     },
     {
       "id": "QIF-T0084",
@@ -18846,7 +18876,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "CI",
       "notes": "When a user taps on a touchscreen, the phone tilts slightly depending on the tap location relative to the device's center of mass. The accelerometer and gyroscope capture these micro-tilts, and the pattern differs for each key position on the virtual keyboard. Owusu et al. (2012) demonstrated 4-digit PIN recovery from accelerometer data alone, and Miluzzo et al. (2012) showed that tap signatures are consistent enough for user identification. The attack works because: (1) different screen positions produce distinct tilt vectors, (2) typing rhythm provides temporal constraints, and (3) language models constrain character sequences. Combined with acoustic keystroke inference (T0083), the multi-modal approach achieves near-perfect accuracy. Since motion sensor access traditionally required no permission, any app could silently capture PIN entry.",
@@ -18986,7 +19016,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Cai & Chen 2011, Owusu 2012 and Miluzzo 2012 demonstrate accelerometer keystroke inference."
     },
     {
       "id": "QIF-T0088",
@@ -19009,7 +19041,7 @@
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
-      "status": "CONFIRMED",
+      "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "CI",
       "notes": "Every person has a unique gait signature determined by limb length ratios, joint flexibility, muscle strength distribution, and neurological motor control patterns. Smartphone IMU sensors (accelerometer + gyroscope) carried in a pocket capture this signature with high fidelity — Muaaz & Mayrhofer (2017) achieved >95% identification accuracy across 175 subjects. The gait signature is: (1) difficult to spoof (requires altering unconscious motor patterns), (2) captured passively (phone in pocket during normal walking), (3) persistent across sessions and devices, and (4) capturable without any explicit permission. Gait biometrics enable persistent user tracking even when other identifiers (cookies, device IDs, face) are unavailable. Combined with T0089 (neurological profiling), gait data also reveals health conditions affecting motor control.",
@@ -19166,7 +19198,9 @@
       "tara_direction": null,
       "use_context_tags": [],
       "biological_target": false,
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Muaaz & Mayrhofer 2017 and Ngo 2014 demonstrate IMU gait identification."
     },
     {
       "id": "QIF-T0089",
@@ -27509,7 +27543,7 @@
         "I0",
         "N1"
       ],
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "low",
       "ui_category": "EX",
       "classical": "Yes",
@@ -27557,7 +27591,9 @@
         "scoring_state": "unscored",
         "unscored_reason": "no_metric_supported"
       },
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. photobiomodulation efficacy studies; mechanism only."
     },
     {
       "id": "QIF-T0137",
@@ -27753,7 +27789,7 @@
         "I0",
         "N1"
       ],
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "medium",
       "ui_category": "SI",
       "classical": "Yes",
@@ -27797,7 +27833,9 @@
         "scoring_state": "unscored",
         "unscored_reason": "no_metric_supported"
       },
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Cayce 2011 and Pan 2023 establish infrared neural stimulation as a method; mechanism only."
     },
     {
       "id": "QIF-T0141",
@@ -27879,7 +27917,7 @@
         "I0",
         "N1"
       ],
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "medium",
       "ui_category": "DM",
       "classical": "Yes",
@@ -27923,7 +27961,9 @@
         "unscored_reason": "no_metric_supported"
       },
       "tara_alias": "TARA-COG-M-013",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Kujirai 1993 is a neurophysiology measurement protocol; mechanism only."
     },
     {
       "id": "QIF-T0143",
@@ -27934,7 +27974,7 @@
         "I0",
         "N1"
       ],
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "medium",
       "ui_category": "DM",
       "classical": "Yes",
@@ -27979,7 +28019,9 @@
         "unscored_reason": "no_metric_supported"
       },
       "tara_alias": "TARA-COG-M-014",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Valls-Sole 1992 and McDonnell 2006 establish LICI as a protocol; mechanism only."
     },
     {
       "id": "QIF-T0144",
@@ -27990,7 +28032,7 @@
         "I0",
         "N1"
       ],
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "DS",
       "classical": "Yes",
@@ -28054,7 +28096,9 @@
         }
       },
       "tara_alias": "TARA-COG-D-006",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Huang 2005 and Stagg 2009 establish cTBS and its GABAergic effect; mechanism only."
     },
     {
       "id": "QIF-T0145",
@@ -28065,7 +28109,7 @@
         "I0",
         "N1"
       ],
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "medium",
       "ui_category": "DM",
       "classical": "Yes",
@@ -28110,7 +28154,9 @@
         "unscored_reason": "no_metric_supported"
       },
       "tara_alias": "TARA-COG-M-015",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Stagg 2009 measures tDCS-induced GABA change; mechanism only."
     },
     {
       "id": "QIF-T0146",
@@ -28290,7 +28336,7 @@
         "N2",
         "N3"
       ],
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "high",
       "ui_category": "DM",
       "classical": "Yes",
@@ -28337,7 +28383,9 @@
         "unscored_reason": "no_metric_supported"
       },
       "tara_alias": "TARA-COG-M-018",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Bowles 2022 and Nichols 2011 on VNS cholinergic signalling; mechanism only."
     },
     {
       "id": "QIF-T0150",
@@ -28615,7 +28663,7 @@
         "N3",
         "N4"
       ],
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "medium",
       "ui_category": "DM",
       "classical": "Yes",
@@ -28657,7 +28705,9 @@
         "unscored_reason": "no_metric_supported"
       },
       "tara_alias": "TARA-EMO-M-010",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Dorr & Debonnel 2006 on the VNS serotonin pathway; mechanism only."
     },
     {
       "id": "QIF-T0155",
@@ -28744,7 +28794,7 @@
         "N4",
         "N5"
       ],
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "medium",
       "ui_category": "DM",
       "classical": "Yes",
@@ -28790,7 +28840,9 @@
         "unscored_reason": "no_metric_supported"
       },
       "tara_alias": "TARA-EMO-M-012",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Wu 2017 and Zhao 2019 on electroacupuncture and raphe serotonin; mechanism only."
     },
     {
       "id": "QIF-T0157",
@@ -28803,7 +28855,7 @@
         "N6",
         "N7"
       ],
-      "status": "CONFIRMED",
+      "status": "THEORETICAL",
       "severity": "medium",
       "ui_category": "EX",
       "classical": "Yes",
@@ -28861,7 +28913,9 @@
         }
       },
       "tara_alias": "TARA-EMO-M-013",
-      "tara_enrichment_pending": false
+      "tara_enrichment_pending": false,
+      "status_prior": "CONFIRMED",
+      "status_change_reason": "CONFIRMED retired 2026-10-16; reclassified under tara_spec.status_definitions. Young 2013 and van Donkelaar 2011 on tryptophan depletion as a research method; mechanism only."
     },
     {
       "id": "QIF-T0158",
@@ -30576,6 +30630,19 @@
       "preclinical": "Animal or in-vitro studies",
       "theoretical": "No empirical evidence yet",
       "N/A": "Not applicable"
+    },
+    "status_definitions": {
+      "adoption_status": "ACCEPTED 2026-10-16. The 27 CONFIRMED techniques were reclassified by datalake/scripts/retire-confirmed-status.py; each carries status_prior and status_change_reason. CONFIRMED is retired and must not be reintroduced.",
+      "axis": "How far the technique has been shown AS AN ATTACK. This is deliberately not the same question as whether its underlying mechanism is established: that axis is carried by tara_spec.dual_use_classifications and tara_spec.evidence_levels. Conflating the two is what the current values do.",
+      "scope_note": "No status value means an attack has been carried out on a person with an implanted or worn device. None of the catalogue's evidence supports that claim for any technique.",
+      "values": {
+        "DEMONSTRATED": "A published source executes the technique against a real system and reports the result. The target need not be a neural interface, but the record should say what it was: 5 of the 27 entries currently labelled CONFIRMED are demonstrations against consumer sensors, not BCIs.",
+        "EMERGING": "Demonstrated against an analogous system, or shown in part, such that the step to a neural interface is engineering rather than discovery.",
+        "THEORETICAL": "The mechanism is established but no attack using it has been shown.",
+        "PLAUSIBLE": "The mechanism is contested or indirect; the attack is reasoned, not shown.",
+        "SPECULATIVE": "Neither mechanism nor attack is established. Retained for completeness.",
+        "CONFIRMED": "RETIRED 2026-10-16. Spanned four unrelated kinds of evidence and read as stronger than DEMONSTRATED while asserting less. Its entries were redistributed to DEMONSTRATED, THEORETICAL and PLAUSIBLE. Do not reintroduce this value."
+      }
     },
     "data_classifications": {
       "PHI": "Protected Health Information (HIPAA/HITECH)",

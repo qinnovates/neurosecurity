@@ -161,7 +161,7 @@ jobs:
       - name: Check the paper's registry figures are not stale
         run: |
           python3 research/paper/scripts/generate_registry_stats.py --check \
-            || echo "::error::research/paper/generated/registry-stats.tex is stale against the registry. Run 'make stats' in research/paper/ and commit the result."
+            || { echo "::error::research/paper/generated/registry-stats.tex is stale against the registry. Run 'make stats' in research/paper/ and commit the result."; exit 1; }
 
       - name: Check frozen pages in publicDir for stale counts
         run: python3 src/scripts/verify/check_frozen_pages.py --github

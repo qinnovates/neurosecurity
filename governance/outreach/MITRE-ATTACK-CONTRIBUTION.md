@@ -179,7 +179,7 @@ for brain-computer interfaces (BCIs). BCIs are a growing category of
 cyber-physical medical devices with no representation in ATT&CK, ATLAS, or
 any MITRE framework.
 
-We have published an open-source threat taxonomy (TARA, 165 techniques in
+We have published an open-source threat taxonomy (TARA, 173 techniques in
 STIX 2.1 format) and a CVSS v4.0 scoring extension (NISS, proposed to the
 FIRST.org CVSS Resources repository — formal registration deliberately
 deferred pending independent methodological review) that together provide

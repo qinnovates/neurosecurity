@@ -2,7 +2,7 @@
 title: "We Found Our Own False Claim, and the Audit That Missed It"
 subtitle: "A standards body never endorsed NISS. Our timeline said it did. Here is how that happened, what we fixed, and what is still wrong."
 date_posted: "2026-10-16"
-source: "https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-107-endorsement-claim-and-stale-fix-list"
+source: "https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-113-endorsement-claim-and-stale-fix-list"
 tags: ["#Neurosecurity", "#Transparency", "#ThreatModeling", "#NISS", "#TARA"]
 author: "Kevin Qi"
 fact_checked: false
@@ -55,7 +55,7 @@ The three that are not clean are below. We would rather you read them from us th
 
 **Five different technique counts exist across our artifacts.** The registry and README say 173. The paper's abstract says 165 in one paragraph and 109 in another — in the same file. The body says 109. A proof-of-concept repository says 99. The structural problem is that the number is hand-copied rather than derived once, so every artifact drifts independently.
 
-**Most of the registry still carries speculative framing.** 147 of 173 techniques (85%) include a "quantum" characterization. That is a framing decision we have not resolved rather than a bug, but if you are assessing the registry's rigor you should know the proportion.
+**Most of the registry still carries speculative framing.** 83 of 173 techniques (48%) include a "quantum" characterization. That is a framing decision we have not resolved rather than a bug, but if you are assessing the registry's rigor you should know the proportion.
 
 Until the first two are settled, **no technique count or gap percentage from our paper should be quoted**, including by us.
 
@@ -64,7 +64,7 @@ Every figure in this section is derived from one public file, [`datalake/qtara-r
 - 173 techniques — length of the `techniques` array.
 - 103 with CVSS, and 129 / 10 / 34 scoring states — count of a non-empty `cvss` field, and `statistics.by_scoring_state`.
 - 59.5% — `statistics.niss_cvss_mapping.by_gap_group` sums to 103 (14 + 30 + 59), over 173.
-- 85% quantum framing — count of a non-empty `quantum` field: 147 of 173.
+- 48% quantum framing — count of records whose `quantum` field is affirmative rather than "No"/"Not assessed"/"Not applicable": 83 of 173. A plain non-empty count gives 147 and overstates it.
 
 ## What we fixed today
 
@@ -122,4 +122,4 @@ The honest summary: the taxonomy is the most complete public catalogue of BCI th
 
 *Corrections to this post, or to anything linked from it, are welcome as [issues](https://github.com/qinnovates/neurosecurity/issues). If you recompute one of these numbers and get something different, we want to know.*
 
-*Written with AI assistance (Claude Opus 5). All claims verified by the author. Every figure in this post was recomputed from the live registry during the session it describes; the full account, including the two reversals, is [Entry 107](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-107-endorsement-claim-and-stale-fix-list) of the derivation log. Human-originated: the decision to publish, the scope, and the choice to disclose the unresolved items.*
+*Written with AI assistance (Claude Opus 5). All claims verified by the author. Every figure in this post was recomputed from the live registry during the session it describes; the full account, including the two reversals, is [Entry 113](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-113-endorsement-claim-and-stale-fix-list) of the derivation log. Human-originated: the decision to publish, the scope, and the choice to disclose the unresolved items.*
