@@ -119,7 +119,7 @@ describe('the report', () => {
     const counts = SCOPE_TERMS.map((term) => scope[SCOPE_LIST_BY_TERM[term]].length);
     expect(counts.reduce((sum, count) => sum + count, 0)).toBe(engineData.techniques.length);
     SCOPE_TERMS.forEach((term, index) => {
-      expect(screen.getByRole('heading', { name: new RegExp(`${SCOPE_TERM_LABELS[term].replace(/[()]/g, '\\$&')}: ${counts[index]}$`) })).toBeTruthy();
+      expect(screen.getByRole('heading', { name: new RegExp(`${SCOPE_TERM_LABELS[term].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}: ${counts[index]}$`) })).toBeTruthy();
     });
     const scopeSection = container.querySelector('[aria-labelledby="report-scope"]') as HTMLElement;
     expect(scopeSection.querySelectorAll('tbody tr')).toHaveLength(engineData.techniques.length);
