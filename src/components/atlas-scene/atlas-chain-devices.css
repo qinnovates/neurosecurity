@@ -22,8 +22,8 @@
 @keyframes atlas-step-in { from { opacity: 0; } to { opacity: 1; } }
 
 /* The electrode layout panel and the leads beside the brain. */
-.atlas-electrode-picked { margin: 0.5rem 0; padding: 0.5rem 0.75rem; background: var(--atlas-ground); border: 1px solid var(--atlas-line-strong); border-left: 3px solid #ff9f1c; border-radius: 0.375rem; }
-.atlas-chip[aria-pressed="true"] { border-color: #ff9f1c; box-shadow: inset 0 -3px 0 #ff9f1c; font-weight: 700; }
+.atlas-electrode-picked { margin: 0.5rem 0; padding: 0.5rem 0.75rem; background: var(--atlas-ground); border: 1px solid var(--atlas-line-strong); border-left: 3px solid var(--atlas-selection); border-radius: 0.375rem; }
+.atlas-chip[aria-pressed="true"] { border-color: var(--atlas-selection); box-shadow: inset 0 -3px 0 var(--atlas-selection); font-weight: 700; }
 .atlas-caption-device { margin-top: 0.375rem; padding-top: 0.375rem; border-top: 1px solid var(--atlas-line); }
 .atlas-leads { margin-top: 0.875rem; padding-top: 0.75rem; border-top: 1px solid var(--atlas-line); }
 .atlas-leads .atlas-table { min-width: 34rem; }

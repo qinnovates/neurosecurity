@@ -2,7 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import type { DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
-import { STEP_EASE_MS, stepEaseDuration } from '@/lib/atlas-explorer/scene-drawing';
+import { SELECTION_COLOUR, STEP_EASE_MS, stepEaseDuration } from '@/lib/atlas-explorer/scene-drawing';
 import type { SceneShape } from '@/lib/atlas-explorer/scene-shapes';
 import { toIndexReviewState, UNREVIEWED } from '@/lib/anatomy/review-state';
 import { listSceneObjects, resetStandIn, standIn, type StandInObject } from './three-stand-in';
@@ -234,7 +234,7 @@ describe('the electrode layout in the picture', () => {
     renderer.setShapes(SHAPES, NODES, new Set(), []);
     renderer.setDevices(DEVICES, 'Oz');
     const colourOf = (electrodeId: string): unknown => kindsOf('mesh').find((mesh) => mesh.userData.electrodeDot === electrodeId)?.material?.params.color;
-    expect(colourOf('Oz')).toBe('#ff9f1c');
+    expect(colourOf('Oz')).toBe(SELECTION_COLOUR);
     expect(colourOf('Cz')).toBe('#ffffff');
     expect(kindsOf('lines')).toEqual([]);
   });

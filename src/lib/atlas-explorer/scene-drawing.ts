@@ -14,7 +14,16 @@ import type { Point3 } from '@/lib/anatomy/ras-to-scene';
 import { positionOfPose, type OrbitPose } from './camera-views';
 import { NEUTRAL_COLOUR, type FillKind, type SceneShape } from './scene-shapes';
 
-export const SELECTION_COLOUR = '#ff9f1c';
+/**
+ * Selection is a state, not a category, so it wears neutral ink rather than a
+ * hue. The previous orange sat at 2:1 against the light surface, under the 3:1
+ * floor, and it now shares a hue family with bands N3-N1, where it could read
+ * as a band rather than as "this one is selected". No band is neutral, so this
+ * cannot be mistaken for one.
+ */
+export const SELECTION_COLOUR = '#1a1a19';
+/** The same role stepped for the dark surface. */
+export const SELECTION_COLOUR_DARK = '#fcfcfb';
 /** Pale shapes are darker and denser than context shapes, so "somewhere inside this shape" is legible across the whole brain. */
 export const INSIDE_COLOUR = '#5b6170';
 const OUTLINE_LAYER = 'outline';

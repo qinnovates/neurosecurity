@@ -62,7 +62,7 @@ Generated from the `followups` section of `src/scripts/atlas-map/atlas-map.json`
 - [ ] **FRAME-F22**: QIF-T0066 cross-references "generic gradual drift (QIF-T0045)", but T0045 is harvest-now-decrypt-later; T0067 claims "0% detection rate against sophisticated replays". Ref: `datalake/qtara-registrar.json`. From: framing decision.
 - [ ] **FRAME-F23**: The `datalake/qtara/test_stix.json` fixture predates the renames. Ref: #182. From: PR #182 body.
 
-## Engineering (21 open)
+## Engineering (23 open)
 
 - [ ] **ATLAS-F31**: Design a `contains` relation that does not list a child on every shape of the parent (the three removed in #180 stated false anatomy for midbrain and cerebellum). Ref: #180, `src/lib/anatomy/CONTEXT.md` recipe 2. From: PR #180 body.
 - [ ] **ATLAS-F45**: Re-baseline the first-load budgets in whichever of #165 and the Lab stack (#163, #166) merges second (steps in #165). Ref: #165. From: PR #165, #163, #166 body.
@@ -85,6 +85,8 @@ Generated from the `followups` section of `src/scripts/atlas-map/atlas-map.json`
 - [ ] **ATLAS-F62**: Screenshots and browser evidence are attached to no PR (`gh` cannot upload images); about 240 MB `dist/` folders remain in three old worktrees. Ref: `<staging>/2026-10-atlas-geometry/evidence/`. From: epic.
 - [ ] **FRAME-F20**: M13: the decided limit wording in `src/lib/anatomy/limits-copy.ts` was not applied because the file lives on the atlas stack; apply it after both merge. Ref: #181, #179. From: PR #181, #179 body.
 - [ ] **FRAME-F21**: L1 to L6: fix on next touch, as decided. Ref: `docs/atlas/provenance/framing-decision.md`. From: framing decision.
+- [ ] **ATLAS-F64**: Dark mode renders light-surface band colours. BAND_COLOURS_DARK holds validated dark steps but nothing threads a theme flag through describeFill to the scene renderer. Ref: #171. From: palette re-step, 2026-10-16.
+- [ ] **ATLAS-F65**: Within a hue family only lightness separates adjacent bands, so a band mark must always carry its label. Legend presence is not yet asserted by a test. Ref: #171. From: palette re-step, 2026-10-16.
 
 ## Domain review (12 open)
 
