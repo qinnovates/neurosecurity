@@ -51,6 +51,8 @@ vi.mock('../../ComplianceChecklist', () => ({ default: () => <div data-testid="c
 const [, headset] = PRESETS[0];
 const modelViewIds = MODE_VIEW_GROUPS.model.flatMap((group) => group.views.map((view) => view.id));
 const catalogRows = headset.report.riskRows.filter((row) => row.source === 'catalog');
+/** One test renders every Model view in turn; a loaded CI runner needs more than the default 5 s. */
+const ALL_VIEWS_TIMEOUT_MS = 30_000;
 const FACET_BAR = 'Filter this device\'s rows';
 
 let restoreMatchMedia: (() => void) | null = null;
@@ -137,7 +139,7 @@ describe('Model frame', () => {
       expect(container.querySelector('input[type="file"]')).toBeNull();
       cleanup();
     }
-  });
+  }, ALL_VIEWS_TIMEOUT_MS);
 
   it('hands the diagram a count for every part and connection', () => {
     renderModel('risks');

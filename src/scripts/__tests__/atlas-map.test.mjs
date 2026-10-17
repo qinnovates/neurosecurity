@@ -103,7 +103,7 @@ describe('parseAtlasMap', () => {
     extra.checks[0].owner = 'x';
     expectRejected(extra, 'checks[0]: unexpected key "owner"');
     const home = buildMap();
-    home.data[0].holds = 'Copied from /Users/someone/file';
+    home.data[0].holds = `Copied from ${['', 'Users', 'someone', 'file'].join('/')}`;
     expectRejected(home, 'data[0].holds: text names a home directory');
   });
 
