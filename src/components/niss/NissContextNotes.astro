@@ -6,6 +6,7 @@
  *     demonstrated one;
  *   - the harm flag, because the weighted mean can average critical
  *     biological impact down to a low score;
+ *   - the cognitive flag, because CR and CD carry half weight;
  *   - the NP:S support note on theoretical and speculative techniques;
  *   - where the severity label came from, and the label it replaced.
  */
@@ -33,6 +34,13 @@ const relabelled = severitySource === 'niss' && severityLegacy !== null && sever
       <span aria-hidden="true">⚠</span>
       <span class="font-semibold">Harm flag:</span> biological impact is rated high or critical. The weighted
       score can average this down; read the BI metric, not only the total.
+    </li>
+  )}
+  {niss.cognitive_flag && (
+    <li class="text-amber-400">
+      <span aria-hidden="true">⚠</span>
+      <span class="font-semibold">Cognitive flag:</span> cognitive reconnaissance or disruption is rated high or
+      critical. These metrics carry half weight in the total; read them directly.
     </li>
   )}
   {niss.np_support === 'unsupported' && (

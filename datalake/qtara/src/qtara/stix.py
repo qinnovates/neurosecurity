@@ -57,6 +57,7 @@ def _scoring_properties(t: ThreatTechnique) -> Dict[str, Any]:
         properties["x_qif_niss_score"] = t.niss.score
         properties["x_qif_niss_vector"] = t.niss.vector
         properties["x_qif_niss_harm_flag"] = t.niss.harm_flag
+        properties["x_qif_niss_cognitive_flag"] = t.niss.cognitive_flag
         properties["x_qif_niss_np_support"] = t.niss.np_support
     return {key: value for key, value in properties.items() if value is not None}
 

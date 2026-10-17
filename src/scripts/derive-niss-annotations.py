@@ -12,6 +12,10 @@ Why this exists (2026-10-16 architecture review, defects D4, D5, D7):
 - NISS is a weighted mean, so critical biological impact can average down to
   "low". `niss.harm_flag` is true whenever biological impact (BI) is H or C. It
   is shown beside the score and never changes it.
+- The same averaging hides cognitive harm: CR and CD carry half weight.
+  `niss.cognitive_flag` is true whenever CR or CD is H or C (added 2026-10-16
+  after the severity change moved memory extraction and covert speech
+  decoding to "low"). Shown beside the score; never changes it.
 - NP:S ("structural" neuroplasticity) asserts a lasting mechanism. Where the
   technique's evidence tier is theoretical or speculative, `niss.np_support` is
   set to "unsupported". The score is unchanged.
@@ -38,6 +42,8 @@ from typing import Any
 REGISTRAR_PATH = Path(__file__).resolve().parents[2] / "datalake" / "qtara-registrar.json"
 
 HARM_FLAG_BI_VALUES = frozenset({"H", "C"})
+COGNITIVE_FLAG_METRICS = ("CR", "CD")
+COGNITIVE_FLAG_VALUES = frozenset({"H", "C"})
 UNSUPPORTED_NP_VALUE = "S"
 UNSUPPORTED_EVIDENCE_TIERS = frozenset({"theoretical_proposed", "theoretical_modeled", "speculative"})
 NP_UNSUPPORTED_LABEL = "unsupported"
@@ -50,6 +56,12 @@ ANNOTATION_SPEC: dict[str, Any] = {
         "rule": "true when BI is H or C",
         "scoring": "none; shown beside the score, never folded into it",
         "reason": "The weighted mean lets critical biological impact average down to a low score.",
+        "introduced": "2026-10-16",
+    },
+    "cognitive_flag": {
+        "rule": "true when CR or CD is H or C",
+        "scoring": "none; shown beside the score, never folded into it",
+        "reason": "CR and CD carry half weight, so high cognitive reconnaissance or disruption can average down to a low score.",
         "introduced": "2026-10-16",
     },
     "np_support": {
@@ -105,8 +117,9 @@ def insert_after(record: dict[str, Any], anchor: str, key: str, value: Any) -> d
 def derive_niss_block(niss: dict[str, Any], evidence_tier: str | None, technique_id: str) -> dict[str, Any]:
     """Return the NISS block with harm_flag and np_support recomputed from its vector."""
     metrics = parse_niss_vector(niss["vector"], technique_id)
-    block = {key: value for key, value in niss.items() if key not in ("harm_flag", "np_support")}
+    block = {key: value for key, value in niss.items() if key not in ("harm_flag", "cognitive_flag", "np_support")}
     block["harm_flag"] = metrics.get("BI") in HARM_FLAG_BI_VALUES
+    block["cognitive_flag"] = any(metrics.get(code) in COGNITIVE_FLAG_VALUES for code in COGNITIVE_FLAG_METRICS)
     if metrics.get("NP") == UNSUPPORTED_NP_VALUE and evidence_tier in UNSUPPORTED_EVIDENCE_TIERS:
         block["np_support"] = NP_UNSUPPORTED_LABEL
     return block
@@ -114,6 +127,8 @@ def derive_niss_block(niss: dict[str, Any], evidence_tier: str | None, technique
 
 def derive_scored(technique: dict[str, Any]) -> dict[str, Any]:
     """Derive severity fields and NISS annotations for a technique with a NISS vector."""
+    if not technique["niss"].get("severity"):
+        raise RegistrarFormatError(f"{technique['id']}: NISS block has a vector but no severity; run datalake/scripts/recalculate-niss.py --dry-run and fix the block")
     evidence = technique.get("evidence")
     evidence_tier = evidence.get("tier") if isinstance(evidence, dict) else None
     niss = derive_niss_block(technique["niss"], evidence_tier, technique["id"])
@@ -166,6 +181,7 @@ def summarize(before: dict[str, Any], after: dict[str, Any]) -> list[str]:
         f"severity labels changed: {sum(relabelled.values())}",
         *(f"  {old} -> {new}: {count}" for (old, new), count in relabelled.most_common()),
         f"harm_flag true: {sum(1 for t in scored if t['niss']['harm_flag'])}",
+        f"cognitive_flag true: {sum(1 for t in scored if t['niss']['cognitive_flag'])}",
         f"np_support unsupported: {sum(1 for t in scored if t['niss'].get('np_support'))}",
     ]
     return lines

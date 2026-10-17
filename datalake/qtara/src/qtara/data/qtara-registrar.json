@@ -613,7 +613,8 @@
         "score": 6.1,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -810,7 +811,8 @@
         "score": 6.1,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -1090,7 +1092,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -1286,7 +1289,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -1466,7 +1470,8 @@
         "score": 6.1,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "tara": {
         "mechanism": "Exploitation of quantum tunneling effects at nanoscale electrode-tissue junctions",
@@ -1653,7 +1658,8 @@
         "score": 6.1,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "tara": {
         "mechanism": "Davydov soliton propagation in protein alpha-helices at electrode-tissue interface",
@@ -1841,7 +1847,8 @@
         "score": 4.1,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -2010,7 +2017,8 @@
         "score": 6.1,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -2293,7 +2301,8 @@
         "score": 7.4,
         "severity": "high",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -2591,6 +2600,7 @@
         "severity": "high",
         "pins": true,
         "harm_flag": true,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -2883,6 +2893,7 @@
         "severity": "high",
         "pins": true,
         "harm_flag": true,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -3158,7 +3169,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": false
       },
       "cross_references": {
         "secondary_tactics": [
@@ -3408,7 +3420,8 @@
         "score": 7.4,
         "severity": "high",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "secondary_tactics": [
@@ -3687,7 +3700,8 @@
         "score": 8.1,
         "severity": "high",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "secondary_tactics": [
@@ -3994,7 +4008,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": false
       },
       "cross_references": {
         "secondary_tactics": [
@@ -4169,7 +4184,8 @@
         "score": 6.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -4321,7 +4337,8 @@
         "score": 6.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -4474,7 +4491,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -4628,7 +4646,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -4782,7 +4801,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -4946,7 +4966,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -5109,7 +5130,8 @@
         "score": 8.1,
         "severity": "high",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -5348,6 +5370,7 @@
         "severity": "high",
         "pins": true,
         "harm_flag": true,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -5632,7 +5655,8 @@
         "score": 6.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -5794,7 +5818,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -6100,7 +6125,8 @@
         "score": 6.1,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -6397,7 +6423,8 @@
         "score": 3.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -6685,7 +6712,8 @@
         "score": 6.1,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -6870,7 +6898,8 @@
         "score": 6.1,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -7165,7 +7194,8 @@
         "score": 6.7,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -7453,7 +7483,8 @@
         "score": 0.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -7601,7 +7632,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -7872,6 +7904,7 @@
         "severity": "high",
         "pins": true,
         "harm_flag": false,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -8129,7 +8162,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "secondary_tactics": [
@@ -8387,7 +8421,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -8616,7 +8651,8 @@
         "score": 3.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -8851,6 +8887,7 @@
         "severity": "high",
         "pins": false,
         "harm_flag": false,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -9127,7 +9164,8 @@
         "score": 4.7,
         "severity": "medium",
         "pins": true,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -9385,6 +9423,7 @@
         "severity": "high",
         "pins": true,
         "harm_flag": false,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -9643,7 +9682,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -9871,7 +9911,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -10136,7 +10177,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -10292,7 +10334,8 @@
         "score": 4.7,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -10453,7 +10496,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -10603,7 +10647,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -10753,7 +10798,8 @@
         "score": 6.7,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -10923,7 +10969,8 @@
         "score": 6.1,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -11077,7 +11124,8 @@
         "score": 6.1,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -11240,7 +11288,8 @@
         "score": 0.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -11388,7 +11437,8 @@
         "score": 3.4,
         "severity": "low",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -11546,7 +11596,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -11731,7 +11782,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -11991,7 +12043,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -12251,7 +12304,8 @@
         "score": 3.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -12510,6 +12564,7 @@
         "severity": "high",
         "pins": true,
         "harm_flag": true,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -12781,7 +12836,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -13040,7 +13096,8 @@
         "score": 0.0,
         "severity": "none",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -13203,7 +13260,8 @@
         "score": 6.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -13375,6 +13433,7 @@
         "severity": "high",
         "pins": false,
         "harm_flag": false,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -13602,6 +13661,7 @@
         "severity": "high",
         "pins": false,
         "harm_flag": false,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -13858,7 +13918,8 @@
         "score": 0.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -14030,6 +14091,7 @@
         "severity": "high",
         "pins": false,
         "harm_flag": false,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -14257,7 +14319,8 @@
         "score": 1.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -14431,7 +14494,8 @@
         "score": 4.7,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -14660,7 +14724,8 @@
         "score": 8.1,
         "severity": "high",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [],
@@ -14944,6 +15009,7 @@
         "severity": "high",
         "pins": false,
         "harm_flag": false,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -15268,7 +15334,8 @@
         "score": 6.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -15576,6 +15643,7 @@
         "severity": "high",
         "pins": true,
         "harm_flag": true,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -15869,7 +15937,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -16179,6 +16248,7 @@
         "severity": "high",
         "pins": true,
         "harm_flag": true,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -16453,6 +16523,7 @@
         "severity": "high",
         "pins": false,
         "harm_flag": false,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -16639,7 +16710,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -16816,7 +16888,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -17099,7 +17172,8 @@
         "score": 4.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -17425,7 +17499,8 @@
         "score": 1.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -17615,7 +17690,8 @@
         "score": 1.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -17805,7 +17881,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -18003,7 +18080,8 @@
         "score": 1.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -18197,7 +18275,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -18394,7 +18473,8 @@
         "score": 1.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -18563,7 +18643,8 @@
         "score": 1.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -18734,7 +18815,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -18906,7 +18988,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -19077,7 +19160,8 @@
         "score": 1.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -19268,7 +19352,8 @@
         "score": 3.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -19535,7 +19620,8 @@
         "score": 0.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -19702,7 +19788,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -19875,7 +19962,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -20067,7 +20155,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -20336,7 +20425,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -20553,7 +20643,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -20727,7 +20818,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -20974,7 +21066,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -21165,7 +21258,8 @@
         "score": 1.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -21339,7 +21433,8 @@
         "score": 4.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -21611,7 +21706,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -21799,7 +21895,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -22048,7 +22145,8 @@
         "score": 2.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -22239,7 +22337,8 @@
         "score": 4.7,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -22532,7 +22631,8 @@
         "score": 1.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -22730,7 +22830,8 @@
         "score": 1.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -22925,7 +23026,8 @@
         "score": 0.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -23113,7 +23215,8 @@
         "score": 6.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -23322,7 +23425,8 @@
         "score": 4.7,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -23468,7 +23572,8 @@
         "score": 4.7,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -23612,7 +23717,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -23754,7 +23860,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -23901,7 +24008,8 @@
         "score": 4.7,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -24045,7 +24153,8 @@
         "score": 3.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": []
@@ -24184,7 +24293,8 @@
         "score": 1.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": []
@@ -24349,7 +24459,8 @@
         "score": 4.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -24539,7 +24650,8 @@
         "score": 4.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -24722,7 +24834,8 @@
         "score": 4.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -24903,7 +25016,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -25087,7 +25201,8 @@
         "score": 5.7,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": []
@@ -25277,6 +25392,7 @@
         "severity": "medium",
         "pins": false,
         "harm_flag": false,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -25453,7 +25569,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -25639,7 +25756,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -25824,6 +25942,7 @@
         "severity": "medium",
         "pins": false,
         "harm_flag": false,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -26006,7 +26125,8 @@
         "score": 6.1,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -26191,7 +26311,8 @@
         "score": 4.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -26381,6 +26502,7 @@
         "severity": "high",
         "pins": true,
         "harm_flag": true,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -26559,6 +26681,7 @@
         "severity": "medium",
         "pins": false,
         "harm_flag": false,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -26742,6 +26865,7 @@
         "severity": "medium",
         "pins": false,
         "harm_flag": false,
+        "cognitive_flag": true,
         "np_support": "unsupported"
       },
       "cross_references": {
@@ -26914,7 +27038,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -27074,7 +27199,8 @@
         "score": 2.1,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -27227,7 +27353,8 @@
         "score": 4.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -27403,7 +27530,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -27577,7 +27705,8 @@
         "score": 4.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -27751,7 +27880,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -27923,7 +28053,8 @@
         "score": 4.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -28103,7 +28234,8 @@
         "score": 4.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -28287,7 +28419,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -28470,7 +28603,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -28660,7 +28794,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": []
@@ -30453,7 +30588,8 @@
         "score": 0.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -30559,7 +30695,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -30665,7 +30802,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -30770,7 +30908,8 @@
         "score": 3.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -30873,7 +31012,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -30993,7 +31133,8 @@
         "score": 1.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -31118,7 +31259,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -31251,7 +31393,8 @@
         "score": 0.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -31373,7 +31516,8 @@
         "score": 1.0,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -31493,7 +31637,8 @@
         "score": 4.7,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -31624,7 +31769,8 @@
         "score": 5.4,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -31748,7 +31894,8 @@
         "score": 2.4,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": false
       },
       "cross_references": {
         "related_ids": [
@@ -31868,7 +32015,8 @@
         "score": 6.0,
         "severity": "medium",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -31995,7 +32143,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": true,
-        "harm_flag": true
+        "harm_flag": true,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -32102,7 +32251,8 @@
         "score": 2.7,
         "severity": "low",
         "pins": false,
-        "harm_flag": false
+        "harm_flag": false,
+        "cognitive_flag": true
       },
       "cross_references": {
         "related_ids": [
@@ -32194,7 +32344,7 @@
   ],
   "taxonomy": "QIF Locus Taxonomy v1.0",
   "scoring": "NISS v1.1 (Neural Impact Scoring System)",
-  "generated": "2026-02-09T04:30:00Z",
+  "generated": "2026-10-17T01:27:21Z",
   "legacy_mitre_compatibility": {
     "id_range": "T2001-T2899 (avoids collision with MITRE ATT&CK T1001-T1659)",
     "tactic_ids": "Standard MITRE TA#### where applicable, TA0050-TA0053 for BCI-specific",
@@ -32370,6 +32520,12 @@
         "rule": "true when BI is H or C",
         "scoring": "none; shown beside the score, never folded into it",
         "reason": "The weighted mean lets critical biological impact average down to a low score.",
+        "introduced": "2026-10-16"
+      },
+      "cognitive_flag": {
+        "rule": "true when CR or CD is H or C",
+        "scoring": "none; shown beside the score, never folded into it",
+        "reason": "CR and CD carry half weight, so high cognitive reconnaissance or disruption can average down to a low score.",
         "introduced": "2026-10-16"
       },
       "np_support": {

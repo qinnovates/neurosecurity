@@ -92,3 +92,12 @@ def test_severity_provenance_and_niss_annotations_are_exported():
         if technique.id in patterns and technique.niss:
             assert patterns[technique.id]["x_qif_severity_source"] == "niss"
             assert patterns[technique.id]["x_qif_severity"] == technique.niss.severity
+
+
+def test_cognitive_flag_is_exported():
+    bundle, loader = _bundle()
+    patterns = {o["external_references"][0]["external_id"]: o for o in bundle["objects"] if o["type"] == "attack-pattern"}
+    flagged = [t for t in loader.list_techniques() if t.niss and t.niss.cognitive_flag and t.id in patterns]
+    assert flagged, "expected at least one technique with CR or CD at H or C"
+    for technique in flagged:
+        assert patterns[technique.id]["x_qif_niss_cognitive_flag"] is True

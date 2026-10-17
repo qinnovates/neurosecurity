@@ -63,6 +63,7 @@ class NissData(BaseModel):
     pins: bool = False
     # Shown beside the score; neither changes it (2026-10-16).
     harm_flag: Optional[bool] = None
+    cognitive_flag: Optional[bool] = None
     np_support: Optional[str] = None
     components: Optional[NissComponents] = None
 

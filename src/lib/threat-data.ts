@@ -136,6 +136,8 @@ export interface NissScore {
   pins: boolean;
   /** True when biological impact is H or C. Shown beside the score; never changes it. */
   harm_flag?: boolean;
+  /** True when cognitive reconnaissance or disruption is H or C. Shown beside the score; never changes it. */
+  cognitive_flag?: boolean;
   /** 'unsupported' when NP:S sits on a theoretical or speculative technique. */
   np_support?: 'unsupported';
 }

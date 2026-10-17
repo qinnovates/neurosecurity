@@ -36,6 +36,7 @@ function scoringProperties(t: ThreatVector): Record<string, unknown> {
     properties.x_qif_niss_score = t.niss.score;
     properties.x_qif_niss_vector = t.niss.vector;
     properties.x_qif_niss_harm_flag = t.niss.harm_flag;
+    properties.x_qif_niss_cognitive_flag = t.niss.cognitive_flag;
     properties.x_qif_niss_np_support = t.niss.np_support;
   }
   return Object.fromEntries(Object.entries(properties).filter(([, value]) => value !== undefined && value !== null));
