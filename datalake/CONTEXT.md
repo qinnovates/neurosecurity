@@ -24,3 +24,20 @@ The `qtara/` directory is a standalone Python package. Run `pytest` from `datala
 - `impact-chains.json` -- Precomputed attack chains (`npm run compute:chains`)
 - `eeg-samples.json` -- EEG dataset catalog
 - `research-registry.json` -- Structured citation registry (researchers, institutions, standards)
+
+## Anatomy files (TARA Brain Atlas)
+Maintainer's map, with step-by-step recipes for adding a source, a region, a device, refreshing technique links and a full data refresh: `src/lib/anatomy/CONTEXT.md`.
+Entry point for anything atlas: `npm run atlas:where -- <words>`, backed by `src/scripts/atlas-map/atlas-map.json`.
+
+All anatomy content here is AI-drafted and unreviewed, and licence readings were made by AI, not by a lawyer. The files are parsed at build time by `src/lib/anatomy/` through `src/components/atlas-scene/load-anatomy-data.ts`; a malformed file stops the build.
+- `qif-anatomy-sources.json` -- upstream atlas registry: stated licence, files, route to the template space
+- `qif-anatomy-verdicts.json` -- licence verdict and clearance record per source. A source builds only if `assessBuildability` in `src/lib/anatomy/licence-rules.ts` says so
+- `qif-anatomy-crosswalk.json` -- QIF region, pathway and network ids to atlas label ids, and `no_geometry` records. Rows store no band and no review field
+- `qif-anatomy-technique-regions.json` -- per technique, the catalog's own words for brain structures. Never store what a term resolves to. Generated from `scripts/technique-region-curation.json` by `scripts/draft-technique-regions.mjs`; edit the curation record, not this file. `scripts/audit-technique-regions.mjs` prints what each term resolves to and every mention read and not linked
+- `qif-anatomy-review-ledger.json` -- the only record of a review. **Only the repository owner edits it; an agent never writes this file.** An entry counts only while its digest matches; adding one also needs `REVIEWED_ENTRY_COUNTS` in `src/lib/anatomy/review-state.ts` changed
+- `qif-anatomy-device-geometry.json` -- scalp fiducials and lead dimensions with their sources
+- `qif-anatomy-region-evidence.json` -- statements from the literature, one verbatim quote from one paper each, filed under a QIF region. Drafted by one AI and quote-checked by a second; no person has reviewed a row. A row is filed under a region, which is not the same as being about it: `anatomy_as_stated` and `anatomy_match` say what the paper is about, and a display always shows both. Parsed by `src/lib/anatomy/parse-region-evidence.ts`, which recomputes the file's tallies
+- `qif-anatomy-h01-card.json` -- a five-sentence card about the H01 sample of human cortex, the sourced facts behind each sentence, the figures that differ by source and what the card must not imply. Parsed by `src/lib/anatomy/parse-h01-card.ts`
+- Neither of the last two is projected into the KQL or parquet tables yet
+
+The sources, structures, crosswalk and technique terms are also published as the `anatomy_*` query tables and `parquet/anatomy_*.parquet`, built by `src/lib/anatomy/anatomy-tables.ts`. Every row carries its review state and status sentence. Device geometry and the review ledger are not exported.

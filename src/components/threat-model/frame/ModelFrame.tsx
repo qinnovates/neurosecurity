@@ -125,7 +125,7 @@ export default function ModelFrame({ viewId, onSelectView }: ModeProps) {
       )}
       {hasFacets && selectedElementLabel !== null && isNeuralInterfaceElement(model, lens.elementId) && (
         <div className="model-no-print">
-          <TargetRegionsPanel summary={listTargetRegions(model, engineData.regions)} interfaceLabel={selectedElementLabel} invasiveness={model.invasiveness} />
+          <TargetRegionsPanel summary={listTargetRegions(model, engineData.regions)} interfaceLabel={selectedElementLabel} />
         </div>
       )}
       {hasFacets && selectedElementLabel !== null && selectedOutcome !== undefined && (

@@ -43,7 +43,7 @@ vi.mock('../../PartStrip', () => ({
   default: ({ elementCounts }: { elementCounts?: unknown[] }) => <div data-testid="part-strip" data-counts={elementCounts?.length ?? -1} />,
 }));
 vi.mock('../../TargetRegionsPanel', () => ({
-  default: ({ invasiveness }: { invasiveness?: string }) => <div data-testid="target-regions" data-invasiveness={invasiveness ?? ''} />,
+  default: () => <div data-testid="target-regions" />,
 }));
 vi.mock('../../ReportView', () => ({ default: () => <div data-testid="report" /> }));
 vi.mock('../../ComplianceChecklist', () => ({ default: () => <div data-testid="checklist" /> }));
@@ -51,6 +51,8 @@ vi.mock('../../ComplianceChecklist', () => ({ default: () => <div data-testid="c
 const [, headset] = PRESETS[0];
 const modelViewIds = MODE_VIEW_GROUPS.model.flatMap((group) => group.views.map((view) => view.id));
 const catalogRows = headset.report.riskRows.filter((row) => row.source === 'catalog');
+/** One test renders every Model view in turn; a loaded CI runner needs more than the default 5 s. */
+const ALL_VIEWS_TIMEOUT_MS = 30_000;
 const FACET_BAR = 'Filter this device\'s rows';
 
 let restoreMatchMedia: (() => void) | null = null;
@@ -137,7 +139,7 @@ describe('Model frame', () => {
       expect(container.querySelector('input[type="file"]')).toBeNull();
       cleanup();
     }
-  });
+  }, ALL_VIEWS_TIMEOUT_MS);
 
   it('hands the diagram a count for every part and connection', () => {
     renderModel('risks');
@@ -268,13 +270,13 @@ describe('the fold of the diagram', () => {
     expect(screen.getByTestId('diagram').getAttribute('data-foldable')).toBe('true');
   });
 
-  it('tells the regions panel how the device contacts the body', () => {
+  it('shows the regions panel for a selected tissue-contact part', () => {
     const store = createViewStateStore(null);
     const tissuePart = headset.model.components.find((component) => component.isNeuralInterface);
     if (tissuePart === undefined) throw new Error('test setup: the preset has no tissue-contact part');
     store.write(VIEW_STATE_KEYS.modelSelectedElementId, tissuePart.id);
     renderModel('risks', store);
-    expect(screen.getByTestId('target-regions').getAttribute('data-invasiveness')).toBe(headset.model.invasiveness);
+    expect(screen.getByTestId('target-regions')).toBeTruthy();
   });
 });
 

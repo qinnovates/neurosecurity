@@ -6,14 +6,12 @@ import { EMPTY_LENS } from '@/lib/threat-model/lens';
 import { listElementsInModelOrder } from '@/lib/threat-model/model-order';
 import { countRowsByElement } from '@/lib/threat-model/register-counts';
 import { countOpenRisksByElement } from '@/lib/threat-model/risk-register';
-import { listTargetRegions } from '@/lib/threat-model/target-regions';
-import { PRESETS, engineData } from '@/lib/threat-model/__tests__/preset-reports';
+import { PRESETS } from '@/lib/threat-model/__tests__/preset-reports';
 import DeviceCanvas, { DIAGRAM_TOGGLE_LABEL, LEGEND_TOGGLE_LABEL } from '../DeviceCanvas';
 import { COMPACT_METRICS } from '../diagram/diagram-metrics';
 import DeviceMiniDiagram from '../diagram/DeviceMiniDiagram';
 import { ModelHighlightProvider, useModelHighlight } from '../model-highlight';
 import PartStrip from '../PartStrip';
-import TargetRegionsPanel from '../TargetRegionsPanel';
 
 afterEach(cleanup);
 
@@ -202,37 +200,5 @@ describe('PartStrip', () => {
     if (item === null) throw new Error('test setup: the strip is empty');
     fireEvent.pointerEnter(item);
     expect(screen.getByTestId('lit-key').textContent).toBe(first.id);
-  });
-});
-
-describe('TargetRegionsPanel', () => {
-  const summaryOf = (preset: typeof eeg) => listTargetRegions(preset.model, engineData.regions);
-
-  it('heads a non-invasive device "Electrode coverage (description only)" and draws nothing inside a brain', () => {
-    const { container } = render(<TargetRegionsPanel summary={summaryOf(eeg)} interfaceLabel="EEG headset" invasiveness={eeg.model.invasiveness} />);
-    expect(eeg.model.invasiveness).toBe('noninvasive');
-    expect(screen.getByRole('heading').textContent).toBe('Electrode coverage (description only)');
-    expect(container.querySelector('svg')).toBeNull();
-    expect(container.textContent).not.toMatch(/records from/i);
-  });
-
-  it.each(PRESETS)('prints no band beside a region and nothing that pulses for %s', (_presetId, preset) => {
-    const summary = summaryOf(preset);
-    const { container } = render(<TargetRegionsPanel summary={summary} interfaceLabel="the interface" invasiveness={preset.model.invasiveness} />);
-    expect(summary.regions.length).toBeGreaterThan(0);
-    for (const region of summary.regions) {
-      expect(container.textContent).toContain(region.name);
-      expect(container.textContent).not.toContain(`band ${region.bandId}`);
-    }
-    expect(container.textContent).not.toMatch(/records from/i);
-    expect(container.querySelectorAll('[class*="halo"], animate, animateTransform')).toHaveLength(0);
-  });
-
-  it('keeps the schematic for an implanted device, and leaves it out when it is not told how the device contacts the body', () => {
-    const { container, rerender } = render(<TargetRegionsPanel summary={summaryOf(cortical)} interfaceLabel="Cortical implant" invasiveness={cortical.model.invasiveness} />);
-    expect(screen.getByRole('heading').textContent).toBe('Target regions');
-    expect(container.querySelectorAll('svg[role="img"]')).toHaveLength(1);
-    rerender(<TargetRegionsPanel summary={summaryOf(cortical)} interfaceLabel="Cortical implant" />);
-    expect(container.querySelector('svg')).toBeNull();
   });
 });

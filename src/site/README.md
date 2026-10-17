@@ -16,4 +16,3 @@ Files served as-is at the site root. Not processed by Astro's build pipeline.
 | File | Purpose |
 |------|---------|
 | `robots.txt` | Search engine crawler directives |
-| `brain-capture.html` | Standalone brain capture visualization |

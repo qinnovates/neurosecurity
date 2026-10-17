@@ -1,6 +1,6 @@
 /**
  * Brain View Data — prepares all 3 views (Security, Clinical, Governance)
- * for the unified BrainVisualization component.
+ * for the BandViewPanel component, which lists them band by band.
  *
  * All computation happens at build time (Astro frontmatter).
  * The component receives pre-computed view data as props.
@@ -11,6 +11,9 @@ import type { ThreatVector, CategoryId } from './threat-data';
 import { getNeurogovernanceData } from './neurogovernance-data';
 
 // ═══ Shared Types ═══
+
+/** Said wherever bands are shown: the band scheme belongs to QIF, which has not been reviewed. */
+export const QIF_BANDS_FRAMEWORK_NOTE = 'Bands are layers in QIF, a proposed and unreviewed framework.';
 
 export interface BrainViewRegion {
   id: string;
@@ -252,7 +255,7 @@ function buildGovernanceView(): BrainView {
       description: staticRegion?.description ?? region.description,
       color,
       intensity: Math.min(1, count / 80),
-      stat: { label: 'techniques target this region', value: String(count) },
+      stat: { label: 'techniques filed under this band', value: String(count) },
       badges,
       details,
     };

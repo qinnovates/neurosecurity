@@ -1,0 +1,25 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import AtlasExplorer from '@/components/atlas-scene/AtlasExplorer';
+import { loadAnatomyBundle } from '@/components/atlas-scene/load-anatomy-data';
+
+// The page is built with no anatomy in it: only the index's path, length and digest, so the
+// explorer can refuse an index from any other build. It fetches this site's own static files
+// when it starts and parses each one before showing any of it.
+const { indexPin } = loadAnatomyBundle();
+---
+<ToolLayout
+  title="TARA Brain Atlas"
+  description="Explore the brain regions, device stages and attack techniques of the TARA catalog as text: what each region is drawn through, what is linked to it, and what the data cannot tell you."
+>
+  <div>
+    <h1 class="text-3xl font-bold" style="color: var(--color-text-primary)">TARA Brain Atlas</h1>
+    <p class="mt-3 mb-6 max-w-3xl" style="color: var(--color-text-muted)">
+      Brain regions, the device stages beside them, and the attack techniques of the TARA catalog, a proposed catalog that has not been peer reviewed.
+      An AI drafted every link between them and no expert has checked it. Each part says what it cannot tell you.
+    </p>
+  </div>
+  <!-- Rendered in the browser only: the page carries no anatomy, so there is nothing to render at build time. -->
+  <AtlasExplorer client:only="react" indexPin={indexPin} />
+  <noscript><p>This explorer needs JavaScript. It runs entirely in your browser and reads only this site's own data files.</p></noscript>
+</ToolLayout>
