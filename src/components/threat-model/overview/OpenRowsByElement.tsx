@@ -20,7 +20,7 @@ interface Props {
 export const OPEN_ROWS_TITLE = 'Open rows by part and connection';
 const NOT_ASSESSED_LABEL = 'Not assessed';
 /** Severity by fill: only Critical is red; the rest step down in ink. */
-const TONE_BY_SEVERITY: Readonly<Record<CatalogSeverity, StackTone>> = { critical: 'critical', high: 'strong', medium: 'medium', low: 'light' };
+const TONE_BY_SEVERITY: Readonly<Record<CatalogSeverity, StackTone>> = { critical: 'critical', high: 'strong', medium: 'medium', low: 'light', none: 'light' };
 
 interface LineProps extends Omit<Props, 'elementCounts'> {
   counts: ElementRowCounts;

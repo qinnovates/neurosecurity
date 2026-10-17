@@ -7,7 +7,7 @@ export const BADGE_ROW_HEIGHT = 14;
 const BAR_HEIGHT = 10;
 const BAR_DROP = 2;
 /** A share's height says its severity, as the kit's severity stripe does: the taller, the more severe. */
-export const SHARE_HEIGHT: Readonly<Record<CatalogSeverity, number>> = { critical: 10, high: 7, medium: 4, low: 2 };
+export const SHARE_HEIGHT: Readonly<Record<CatalogSeverity, number>> = { critical: 10, high: 7, medium: 4, low: 2, none: 0 };
 const TEXT_GAP = 6;
 const TEXT_BASELINE = 11;
 const SWATCH_SIZE = 12;

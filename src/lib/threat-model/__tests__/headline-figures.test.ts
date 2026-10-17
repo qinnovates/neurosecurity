@@ -75,7 +75,10 @@ describe.each(PRESETS)('headline figures of the preset %s', (presetId, { model, 
   it('equal the figures recomputed from the raw data files, with no decision recorded', () => {
     expect(raw.catalogRows).toBeGreaterThan(0);
     expect(byId.get('open-rows')).toMatchObject({ figure: raw.catalogRows, unit: `of ${raw.catalogRows}`, note: `${raw.baselineRows} of ${raw.baselineRows} baseline rows open`, isNotAssessed: false });
-    expect(byId.get('severe-open')).toMatchObject({ figure: raw.severeRows, unit: `of ${raw.severeRows}`, isNotAssessed: false });
+    // A device with no severe row placed reads "not assessed" rather than "0 of 0" whenever the
+    // catalog still has any unreviewed technique: a device cannot be cleared of severe risk by a
+    // catalog nobody has finished reviewing.
+    expect(byId.get('severe-open')).toMatchObject({ figure: raw.severeRows, unit: `of ${raw.severeRows}`, isNotAssessed: raw.severeRows === 0 && raw.notAssessed > 0 });
     expect(byId.get('techniques-that-apply')).toMatchObject({ figure: raw.techniquesThatApply, unit: `of ${raw.catalogTechniques}` });
     expect(byId.get('techniques-not-assessed')).toMatchObject({ figure: raw.notAssessed, unit: `of ${raw.catalogTechniques}` });
   });
@@ -90,11 +93,16 @@ describe.each(PRESETS)('headline figures of the preset %s', (presetId, { model, 
   });
 
   it('count a row as closed only once a decision is recorded on it', () => {
-    const [first] = report.riskRows.filter((row) => row.source === 'catalog' && (row.catalogSeverity === 'critical' || row.catalogSeverity === 'high'));
+    const [first] = report.riskRows.filter((row) => row.source === 'catalog');
     const decided = { ...report, riskRows: report.riskRows.map((row) => (row.riskId === first.riskId ? { ...row, status: 'mitigated' as const } : row)) };
     const after = new Map(summariseHeadlineFigures(decided).map((figure) => [figure.id, figure]));
     expect(after.get('open-rows')).toMatchObject({ figure: raw.catalogRows - 1, unit: `of ${raw.catalogRows}` });
-    expect(after.get('severe-open')).toMatchObject({ figure: raw.severeRows - 1, unit: `of ${raw.severeRows}` });
+    // Only check severe-open moves when the closed row was itself severe; this device may have none.
+    if (first.catalogSeverity === 'critical' || first.catalogSeverity === 'high') {
+      expect(after.get('severe-open')).toMatchObject({ figure: raw.severeRows - 1, unit: `of ${raw.severeRows}` });
+    } else {
+      expect(after.get('severe-open')).toMatchObject({ figure: raw.severeRows, unit: `of ${raw.severeRows}` });
+    }
   });
 });
 

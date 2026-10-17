@@ -47,7 +47,7 @@ export function effectLabelForMode(mode: TechniqueMode): string {
 }
 
 export const CATALOG_SEVERITY_HEADING = 'Catalog severity';
-export const CATALOG_SEVERITY_LABELS: Readonly<Record<CatalogSeverity, string>> = { critical: 'Critical', high: 'High', medium: 'Medium', low: 'Low' };
+export const CATALOG_SEVERITY_LABELS: Readonly<Record<CatalogSeverity, string>> = { critical: 'Critical', high: 'High', medium: 'Medium', low: 'Low', none: 'None' };
 
 export const TECHNIQUE_FAMILY_HEADING = 'Technique family';
 

@@ -1,10 +1,10 @@
 import type { CatalogSeverity } from '@/lib/threat-model/catalog-types';
 
-const SEVERITY_LABELS: Readonly<Record<CatalogSeverity, string>> = { critical: 'Critical', high: 'High', medium: 'Medium', low: 'Low' };
+const SEVERITY_LABELS: Readonly<Record<CatalogSeverity, string>> = { critical: 'Critical', high: 'High', medium: 'Medium', low: 'Low', none: 'None' };
 const STRIPE_WIDTH = 4;
 const STRIPE_BOX_HEIGHT = 14;
 /** Stripe height in pixels. Height carries the order, so it reads without colour. */
-const STRIPE_HEIGHT: Readonly<Record<CatalogSeverity, number>> = { critical: 14, high: 10, medium: 6, low: 3 };
+const STRIPE_HEIGHT: Readonly<Record<CatalogSeverity, number>> = { critical: 14, high: 10, medium: 6, low: 3, none: 0 };
 
 interface Props {
   severity: CatalogSeverity;

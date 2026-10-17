@@ -90,14 +90,22 @@ describe('overview figures', () => {
 describe('OverviewView', () => {
   it.each(PRESETS)('%s: prints the four tiles, the unit sentence and the diagram', (_presetId, preset) => {
     const rows = currentRowsOf(preset);
-    const { scope, container } = renderOverview(preset);
+    const { scope, severityCoverage, container } = renderOverview(preset);
     const figures = summariseOverview(rows, scope);
     const tiles = within(screen.getByRole('region', { name: 'This device at a glance' }));
     const tileText = Array.from(container.querySelectorAll('.lab-stat')).map((tile) => tile.textContent);
     expect(tileText).toHaveLength(4);
     expect(tileText[0]).toContain(`${figures.openCatalogRows}of ${figures.catalogRows}Open rows`);
     expect(tileText[0]).toContain(`${figures.openBaselineRows} of ${figures.baselineRows} baseline rows open`);
-    expect(tileText[1]).toContain(`${figures.openSevereRows}of ${figures.severeRows}Critical and high still open`);
+    // Severe-open reads as a bare "X of Y" only while the catalog's critical/high techniques are
+    // fully assessed; once any of them still lacks a placement decision, the tile says so in words
+    // instead ("none on this device" or "not assessed"), same as every other headline figure.
+    const severeHeadline = summariseHeadlineFigures(preset.report, severityCoverage).find((figure) => figure.id === 'severe-open');
+    if (severeHeadline?.isNotAssessed !== true) {
+      expect(tileText[1]).toContain(`${figures.openSevereRows}of ${figures.severeRows}Critical and high still open`);
+    } else {
+      expect(tileText[1]).toMatch(/none on this device|not assessed/i);
+    }
     expect(tileText[2]).toContain(`${figures.techniquesThatApply}of ${figures.catalogTechniques}Techniques that apply`);
     expect(tileText[3]).toContain(`${figures.techniquesNotAssessed}of ${figures.catalogTechniques}Catalog techniques not assessed`);
     expect(tiles.getByText('Open rows')).toBeTruthy();
@@ -105,7 +113,10 @@ describe('OverviewView', () => {
     expect(screen.getByTestId('diagram')).toBeTruthy();
     // The tiles are the figures the Report prints too: one function, one set of labels.
     const shared = summariseHeadlineFigures(preset.report, summariseCoverageBySeverity(engineData.techniques, scope));
-    shared.forEach((figure, index) => expect(tileText[index]).toContain(`${figure.figure}${figure.unit}${figure.label}`));
+    shared.forEach((figure, index) => {
+      if (!figure.isNotAssessed) expect(tileText[index]).toContain(`${figure.figure}${figure.unit}${figure.label}`);
+      else expect(tileText[index]).toContain(figure.label);
+    });
   });
 
   it('prints every integer of coverage by catalog severity, with a hatch for "Not assessed"', () => {

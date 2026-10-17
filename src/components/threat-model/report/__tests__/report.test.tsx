@@ -9,8 +9,10 @@ import { FocusProvider } from '@/components/workbench/FocusContext';
 import { STANDING_STATEMENTS } from '@/components/workbench/StandingLine';
 import { buildThreatModelReport } from '@/lib/threat-model/build-report';
 import { CHECKLIST_TITLE } from '@/lib/threat-model/compliance-us';
+import { summariseHeadlineFigures } from '@/lib/threat-model/headline-figures';
 import { buildModelFromIntake, defaultAnswersFor } from '@/lib/threat-model/intake-to-model';
 import { SCOPE_TERMS, SCOPE_TERM_LABELS } from '@/lib/threat-model/lab-terms';
+import { summariseCoverageBySeverity } from '@/lib/threat-model/placement-coverage';
 import { buildRegisterExportCsv } from '@/lib/threat-model/register-csv';
 import { describeRegisterUnits, summariseRegisterUnits } from '@/lib/threat-model/register-counts';
 import { SCOPE_LIST_BY_TERM, summariseScope } from '@/lib/threat-model/scope-statement';
@@ -91,12 +93,18 @@ describe('the report', () => {
     const severe = catalog.filter((row) => row.catalogSeverity === 'critical' || row.catalogSeverity === 'high');
     const openOf = (rows: typeof current): number => rows.filter((row) => row.status === 'open').length;
     const tiles = Object.fromEntries([...container.querySelectorAll('.report-tiles .lab-stat')].map((tile) => [tile.querySelector('.lab-stat-label')?.textContent, tile.querySelector('.lab-stat-figure')?.textContent]));
-    expect(tiles).toEqual({
-      'Open rows': `${openOf(catalog)}of ${catalog.length}`,
-      'Critical and high still open': `${openOf(severe)}of ${severe.length}`,
-      'Techniques that apply': `${scope.applies.length}of ${scope.total}`,
-      'Catalog techniques not assessed': `${scope.notAssessed.length}of ${scope.total}`,
-    });
+    // Severe-open is a bare "X of Y" only while every critical/high technique has a placement
+    // decision; once one does not, the tile says so in words instead (same rule as the Overview).
+    const severityCoverage = summariseCoverageBySeverity(engineData.techniques, scope);
+    const severeHeadline = summariseHeadlineFigures(report, severityCoverage).find((figure) => figure.id === 'severe-open');
+    expect(tiles['Open rows']).toBe(`${openOf(catalog)}of ${catalog.length}`);
+    expect(tiles['Techniques that apply']).toBe(`${scope.applies.length}of ${scope.total}`);
+    expect(tiles['Catalog techniques not assessed']).toBe(`${scope.notAssessed.length}of ${scope.total}`);
+    if (severeHeadline?.isNotAssessed !== true) {
+      expect(tiles['Critical and high still open']).toBe(`${openOf(severe)}of ${severe.length}`);
+    } else {
+      expect(tiles['Critical and high still open']).toMatch(/none on this device|not assessed/i);
+    }
     // The baseline rows are counted apart, in the note under the first tile, as on the Overview.
     expect(container.querySelector('.report-tiles .lab-stat-note')?.textContent).toBe(`${openOf(baseline)} of ${baseline.length} baseline rows open`);
     expect(screen.getByText(describeRegisterUnits(summariseRegisterUnits(report.model, report.riskRows)))).toBeTruthy();

@@ -54,9 +54,9 @@ describe('badges', () => {
   it('describes a badge in words and never as a bare zero for an element with nothing placed', () => {
     expect(describeBadge({ kind: 'not-assessed' })).toContain('Not assessed');
     expect(describeBadge({ kind: 'total', open: 1 })).toBe('1 open catalog row.');
-    expect(describeBadge({ kind: 'split', open: 3, bySeverity: { critical: 1, high: 2, medium: 0, low: 0 } })).toBe('3 open catalog rows: 1 critical, 2 high, 0 medium, 0 low.');
+    expect(describeBadge({ kind: 'split', open: 3, bySeverity: { critical: 1, high: 2, medium: 0, low: 0, none: 0 } })).toBe('3 open catalog rows: 1 critical, 2 high, 0 medium, 0 low, 0 none.');
     expect(describeBadge(undefined)).toBe('');
-    expect(splitBar({ critical: 0, high: 0, medium: 0, low: 0 }, 40)).toEqual([]);
+    expect(splitBar({ critical: 0, high: 0, medium: 0, low: 0, none: 0 }, 40)).toEqual([]);
   });
 });
 

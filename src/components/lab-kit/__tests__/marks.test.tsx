@@ -135,7 +135,7 @@ describe('SeverityMark', () => {
       cleanup();
       return height;
     });
-    expect(heights).toEqual([14, 10, 6, 3]);
+    expect(heights).toEqual([14, 10, 6, 3, 0]);
   });
 
   it('shows the word, or names the stripe when the word is hidden', () => {
