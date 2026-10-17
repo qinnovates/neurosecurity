@@ -4010,14 +4010,15 @@
       "classical": "Partial",
       "quantum": "Enhanced (QI decoder integrity check)",
       "sources": [
-        "Zhang et al. 2024 (Professor X attack on EEG models)"
+        "Li F, Huang M, You W, Zhu L, Cheng H, Yang R. (2025). \"Spatialspectral-Backdoor: Realizing backdoor attack for deep neural networks in brain-computer interface via EEG characteristics.\" Neurocomputing 616:128902. DOI:10.1016/j.neucom.2024.128902. [Verified via Crossref 2026-10-16: DOI, authors, venue and title confirmed]",
+        "Zhang et al. 2024 (Professor X attack on EEG models) [UNVERIFIED: not locatable by the 2026-10-06 attack-research survey, nor by Crossref and arXiv searches on 2026-10-16 including a direct search for \"Professor X\". Retained rather than deleted; the DEMONSTRATED status no longer rests on it.]"
       ],
       "defensive_sources": [],
       "peer_review_status": "peer_reviewed",
       "status": "DEMONSTRATED",
       "severity": "high",
       "ui_category": "DM",
-      "notes": "Backdoor injected during BCI decoder training. Trigger pattern in EEG input activates attacker-chosen output. Model performs normally on clean inputs. Demonstrated on P300, MI, SSVEP paradigms.",
+      "notes": "Backdoor injected during BCI decoder training. Trigger pattern in EEG input activates attacker-chosen output. Model performs normally on clean inputs. Demonstrated on P300, MI, SSVEP paradigms. Status evidence: Li et al. 2025 (Neurocomputing) demonstrates an EEG-characteristic backdoor against BCI deep-learning decoders, which supports DEMONSTRATED. The original \"Professor X\" citation could not be located and the specific claim of demonstration on P300, MI and SSVEP paradigms traces only to it, so treat that paradigm list as unverified.",
       "legacy_ids": [],
       "legacy_technique_id": "T2201",
       "niss": {
@@ -30576,6 +30577,20 @@
       "preclinical": "Animal or in-vitro studies",
       "theoretical": "No empirical evidence yet",
       "N/A": "Not applicable"
+    },
+    "status_definitions_proposed": {
+      "adoption_status": "PROPOSED 2026-10-16 — NOT ACCEPTED. Drafted from how the values are actually used, measured by datalake/scripts/audit-confirmed-evidence.py. Nothing has been reclassified against it. Whitepaper v9 Section 21.2 records the absence of these definitions as an open item.",
+      "axis": "How far the technique has been shown AS AN ATTACK. This is deliberately not the same question as whether its underlying mechanism is established: that axis is carried by tara_spec.dual_use_classifications and tara_spec.evidence_levels. Conflating the two is what the current values do.",
+      "scope_note": "No status value means an attack has been carried out on a person with an implanted or worn device. None of the catalogue's evidence supports that claim for any technique.",
+      "values": {
+        "DEMONSTRATED": "A published source executes the technique against a real system and reports the result. The target need not be a neural interface, but the record should say what it was: 5 of the 27 entries currently labelled CONFIRMED are demonstrations against consumer sensors, not BCIs.",
+        "EMERGING": "Demonstrated against an analogous system, or shown in part, such that the step to a neural interface is engineering rather than discovery.",
+        "THEORETICAL": "The mechanism is established but no attack using it has been shown.",
+        "PLAUSIBLE": "The mechanism is contested or indirect; the attack is reasoned, not shown.",
+        "SPECULATIVE": "Neither mechanism nor attack is established. Retained for completeness.",
+        "CONFIRMED": "PROPOSED FOR RETIREMENT. The audit found this value spans four unrelated kinds of evidence: 11 established physiological mechanisms with no attack, 8 position or risk-analysis papers, 5 demonstrated attacks on consumer sensors, 2 regulatory or roadmap documents, and 1 set of correlational population studies. It reads as stronger than DEMONSTRATED while asserting less, since 11 of its 27 entries show no attack at all. If retired, its entries redistribute to DEMONSTRATED or THEORETICAL by the definitions above, and the mechanism claim moves to the dual-use axis where it belongs."
+      },
+      "if_accepted": "Reclassifying the 27 CONFIRMED entries changes a count that appears in the README, the site and the paper. Run the audit script first, then the registrar sync check, then regenerate the paper macros."
     },
     "data_classifications": {
       "PHI": "Protected Health Information (HIPAA/HITECH)",

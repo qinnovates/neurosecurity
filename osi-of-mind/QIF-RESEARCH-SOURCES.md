@@ -418,6 +418,8 @@ This markdown file remains the human-readable catalog of record. The KQL datalak
 | C64 | European Data Protection Supervisor. (2024). "TechDispatch #1/2024: Neurodata." EDPS. | https://www.edps.europa.eu/ | Privacy | EU regulatory perspective on neurodata classification and protection. Analyzes whether neural data qualifies as special category data under GDPR. Relevant to TARA regulatory compliance mapping. |
 | C65 | Neurorights Foundation. (2024). "Safeguarding Brain Data." | https://neurorightsfoundation.org/ | Neurorights | Policy framework for brain data protection. Proposes five neurorights: mental privacy, identity, agency, fair augmentation, protection from bias. Foundational for TARA neurorights mapping. |
 
+| C110 | Li F, Huang M, You W, Zhu L, Cheng H, Yang R. (2025). "Spatialspectral-Backdoor: Realizing backdoor attack for deep neural networks in brain-computer interface via EEG characteristics." Neurocomputing 616:128902. DOI:10.1016/j.neucom.2024.128902. | https://doi.org/10.1016/j.neucom.2024.128902 | Verified: Crossref 2026-10-16 (DOI, authors, venue and title confirmed) | Training-time backdoor against BCI deep-learning decoders using EEG spatial and spectral characteristics. Located while auditing QIF-T0016, whose DEMONSTRATED status previously rested solely on an unlocatable "Zhang et al. 2024" reference; this entry now carries it. |
+
 ### Risk Scoring Frameworks
 
 | # | Citation | URL | Agent | QIF Relevance |
