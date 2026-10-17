@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-10-16T06:33:53.665145+00:00",
+    "generated": "2026-10-17T03:35:22.913241+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
@@ -41,7 +41,7 @@
         "consent_tier",
         "notes"
       ],
-      "size_bytes": 44080,
+      "size_bytes": 44107,
       "compression": "zstd",
       "source": "datalake/parquet/techniques.parquet"
     },
@@ -89,7 +89,7 @@
         "dsm_name",
         "dsm_cluster"
       ],
-      "size_bytes": 15391,
+      "size_bytes": 15401,
       "compression": "zstd",
       "source": "datalake/parquet/impact_chains.parquet"
     },

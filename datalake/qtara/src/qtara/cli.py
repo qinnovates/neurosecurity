@@ -156,7 +156,9 @@ def main():
     elif args.command == "stix":
         techniques = loader.list_techniques()
         include_pending = getattr(args, 'include_pending', False)
-        bundle = StixExporter.to_bundle(techniques, include_pending=include_pending)
+        bundle = StixExporter.to_bundle(
+            techniques, include_pending=include_pending, modified=loader.registry.generated
+        )
         exported_count = len(bundle["objects"]) - 1  # subtract identity object
         console.print(f"[green]Successfully exported {exported_count} techniques to {args.output}[/green]")
         with open(args.output, 'w') as f:

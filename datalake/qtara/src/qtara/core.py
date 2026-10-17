@@ -27,6 +27,7 @@ class TaraLoader:
         self._registry = TaraRegistry(
             version=data.get("version", "unknown"),
             framework=data.get("framework", "unknown"),
+            generated=data.get("generated"),
             techniques=[ThreatTechnique(**t) for t in data.get("techniques", [])]
         )
         return self._registry

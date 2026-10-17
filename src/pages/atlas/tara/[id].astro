@@ -7,6 +7,7 @@ import NissVectorChips from '../../../components/niss/NissVectorChips';
 import NissScoreBadge from '../../../components/niss/NissScoreBadge';
 import NissRadarChart from '../../../components/niss/NissRadarChart';
 import PinsBadge from '../../../components/niss/PinsBadge';
+import NissContextNotes from '../../../components/niss/NissContextNotes.astro';
 import DriftBadge from '../../../components/tara/DriftBadge';
 import { THREAT_VECTORS, SEVERITY_COLORS, getChildTechniques } from '@/lib/threat-data';
 import { parseNiss } from '@/lib/niss-parser';
@@ -355,6 +356,12 @@ const hasGovernance = nr || reg;
           <div class="mt-3">
             {threat.nissScored ? (
               <NissScoreBadge client:load score={threat.niss.score} severity={threat.niss.severity ?? 'low'} />
+              <NissContextNotes
+                niss={threat.niss}
+                evidenceTier={threat.evidence?.tier ?? statusToEvidenceTier(threat.status)}
+                severitySource={threat.severitySource}
+                severityLegacy={threat.severityLegacy}
+              />
             ) : (
               <a
                 href="/atlas/scoring/#coverage"
