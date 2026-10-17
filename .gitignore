@@ -95,3 +95,9 @@ drafts/
 # core.ignorecase matches "drafts/" against "IR Playbooks/Drafts/" too — carve it back out.
 !IR Playbooks/Drafts/
 .gstack/
+
+# Internal material: never publish.
+_staging/
+governance/outreach/
+src/site/governance/outreach/
+src/site/governance/outreach-tracker/
