@@ -14,41 +14,21 @@ import DualUseSplit from '../components/DualUseSplit';
 import NeurorightsPentagon from '../components/NeurorightsPentagon';
 import '../styles/global.css';
 import registry from '@shared/qtara-registrar.json';
-import landscape from '@shared/bci-landscape.json';
 import { CODE_LABELS, METRIC_NAMES, parseNiss } from '../lib/niss-parser';
+import { getCatalogCoverage, PURPOSE_SUMMARY, STATEMENT_LINKS } from '../lib/purpose-and-limits';
 
 // Compute hero metrics from registrar (build-time)
 const techniques = (registry as any).techniques ?? [];
 const totalThreats = techniques.length;
-// Techniques that carry a NISS vector. The claim below stays accurate while some are still unscored.
-const scoredThreats = techniques.filter((t: any) => t?.niss?.vector).length;
-const scoredPhrase = scoredThreats === totalThreats ? 'scored for neural impact' : `${scoredThreats} of them scored for neural impact so far`;
 const therapeuticCount = techniques.filter((t: any) => t?.tara?.clinical?.therapeutic_analog).length;
-const dsm5Count = techniques.filter((t: any) => t?.tara?.dsm5?.primary?.length > 0).length;
 const confirmed = techniques.filter((t: any) => t.status === 'CONFIRMED').length;
 const demonstrated = techniques.filter((t: any) => t.status === 'DEMONSTRATED').length;
 const theoretical = techniques.filter((t: any) => ['THEORETICAL', 'EMERGING', 'PLAUSIBLE', 'SPECULATIVE'].includes(t.status)).length;
-const neurorightsSet = new Set<string>(['EA']); // Equal Access is structural, not threat-mapped
-techniques.forEach((t: any) => (t?.neurorights?.affected ?? []).forEach((r: string) => neurorightsSet.add(r)));
-const neurorightsCount = neurorightsSet.size;
 
 // Labels for the hero signal bench, resolved from the catalog (build-time)
 const signalBenchEvents = buildSignalBenchEvents(THREAT_VECTORS);
 
-// Market size: median of the dataset's estimates for one year, so the claim and its footnote cannot drift from the data
-const MARKET_ESTIMATE_YEAR = 2024;
-const marketEstimates = landscape.market_data.market_size_estimates
-  .filter((estimate) => estimate.year === MARKET_ESTIMATE_YEAR)
-  .map((estimate) => estimate.value_billion_usd)
-  .sort((smaller, larger) => smaller - larger);
-if (marketEstimates.length === 0) {
-  throw new Error(`Homepage: bci-landscape.json has no market size estimates for ${MARKET_ESTIMATE_YEAR}. Update MARKET_ESTIMATE_YEAR in src/pages/index.astro.`);
-}
-const middleIndex = Math.floor(marketEstimates.length / 2);
-const marketMedianBillions = marketEstimates.length % 2 === 1
-  ? marketEstimates[middleIndex]
-  : (marketEstimates[middleIndex - 1] + marketEstimates[middleIndex]) / 2;
-const marketMedianLabel = `$${marketMedianBillions.toFixed(1)} billion`;
+const coverage = getCatalogCoverage();
 
 // NISS worked example: one catalogued technique with its real metric values and score
 const NISS_EXAMPLE_ID = 'QIF-T0001';
@@ -71,7 +51,7 @@ techniques.forEach((t: any) => {
 });
 
 // Compute neurorights counts from registrar (build-time)
-const neurorightsCounts: Record<string, number> = { MI: 0, MP: 0, CL: 0, PC: 0, EA: 0 };
+const neurorightsCounts: Record<string, number> = { MI: 0, MP: 0, CL: 0, PC: 0 };
 techniques.forEach((t: any) => {
   (t?.neurorights?.affected ?? []).forEach((r: string) => {
     if (neurorightsCounts[r] !== undefined) neurorightsCounts[r]++;
@@ -79,7 +59,7 @@ techniques.forEach((t: any) => {
 });
 ---
 
-<BaseLayout title="TARA — Open Threat Catalog for BCI Security" description={`${totalThreats} brain-computer interface attack techniques catalogued in TARA and mapped to the QIF hourglass architecture, ${scoredThreats} of them scored with NISS. A proposed open framework for a ${marketMedianLabel} industry (${MARKET_ESTIMATE_YEAR} estimate).`}>
+<BaseLayout title="TARA — Threat Modeling Catalog for Neural Devices · Qinnovate" description={`A proposed, unvalidated framework for threat modeling, severity scoring and impact assessment of neural devices: ${coverage.total} cataloged techniques, ${coverage.scored} with draft NISS scores, ${coverage.detected} with detection guidance.`}>
   <Nav />
 
   <!-- ═══ HERO ═══ -->
@@ -88,11 +68,14 @@ techniques.forEach((t: any) => {
       <p class="text-sm mb-5 hero-byline">Brain-computer interface research by Kevin L. Qi</p>
 
       <h1 class="hero-title font-[family-name:var(--font-heading)] max-w-5xl mb-6 text-balance">
-        An open threat catalog for brain&#8209;computer interface security
+        Threat modeling for brain&#8209;computer interfaces
       </h1>
 
       <p class="text-base sm:text-lg text-[var(--color-text-muted)] mb-8 max-w-2xl leading-relaxed">
-        TARA maps {totalThreats} BCI attack techniques — {scoredPhrase}, mapped to the neurorights they threaten, and traced to their therapeutic counterparts. Built on the QIF hourglass architecture for a <a href="/research/landscape/" class="text-[var(--color-accent-primary)] hover:underline">{marketMedianLabel} industry</a> ({MARKET_ESTIMATE_YEAR} estimate).*
+        A proposed research framework for modeling, scoring and prioritizing threats to neural devices.
+      </p>
+      <p class="text-sm text-[var(--color-text-faint)] -mt-4 mb-8 max-w-2xl">
+        {coverage.total} techniques, {coverage.scored} with draft NISS scores, each with an evidence status.
       </p>
 
       <!-- Primary CTAs -->
@@ -129,7 +112,6 @@ techniques.forEach((t: any) => {
       <TrustBar />
       <p class="text-xs text-[var(--color-text-faint)] mt-4">
         {confirmed} confirmed, {demonstrated} demonstrated, {theoretical} theoretical.
-        *Median of <a href="/research/landscape/" class="underline hover:text-[var(--color-text-muted)] transition-colors">{marketEstimates.length} market research estimates</a> for {MARKET_ESTIMATE_YEAR}.
       </p>
     </div>
   </section>
@@ -164,10 +146,10 @@ techniques.forEach((t: any) => {
     <div class="max-w-5xl mx-auto text-center">
       <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[#f97316] mb-3">The TARA Catalog</p>
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-4">
-        {totalThreats} techniques. Scored, mapped, and mirrored against a therapeutic use.
+        {coverage.total} techniques, each with an evidence status. {coverage.detected} include detection guidance; {coverage.scored} carry draft NISS scores.
       </h2>
       <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto mb-12">
-        Attack techniques catalogued and scored across the QIF hourglass — alongside the same mechanisms as they appear in medicine.
+        {PURPOSE_SUMMARY} <a href={STATEMENT_LINKS.purposeAndLimits} class="text-[var(--color-accent-primary)] hover:underline">Purpose and limits &rarr;</a>
       </p>
 
       <div class="grid md:grid-cols-2 gap-10 items-center mb-12 text-left">
@@ -270,21 +252,21 @@ techniques.forEach((t: any) => {
   <!-- ═══ FILLS A REAL GAP ═══ -->
   <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="reveal">
-      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-4 text-center">Fills a Real Gap</p>
-      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">No BCI-specific threat taxonomy existed</h2>
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-4 text-center">Context</p>
+      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">Where current device-security guidance stops</h2>
       <div class="space-y-4 text-sm text-[var(--color-text-muted)] leading-relaxed">
         <div class="grid sm:grid-cols-2 gap-3">
           <div class="glass rounded-lg p-4">
             <p class="font-semibold text-[var(--color-text-primary)] mb-1">FDA</p>
-            <p>Requires medical device cybersecurity assessments, but has <strong class="text-[var(--color-text-primary)]">no BCI-specific attack taxonomy</strong>. Guidance says "assess risk per ISO 14971" without defining what BCI threats look like.</p>
+            <p>FDA recommends threat modeling for connected medical devices in its premarket cybersecurity guidance (Feb 2026). It does not describe neural-specific threats.</p>
           </div>
           <div class="glass rounded-lg p-4">
             <p class="font-semibold text-[var(--color-text-primary)] mb-1">MITRE</p>
-            <p>Published a medical device threat modeling playbook (2021), but it is methodology-generic. <strong class="text-[var(--color-text-primary)]">No neural-specific techniques. No BCI entries in ATT&CK.</strong></p>
+            <p>Published a medical device threat modeling playbook (2021), but it is methodology-generic.</p>
           </div>
           <div class="glass rounded-lg p-4">
             <p class="font-semibold text-[var(--color-text-primary)] mb-1">CISA</p>
-            <p>Created a <a href="https://www.cisa.gov/resources-tools/resources/matrix-game-brain-computer-interfaces" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">tabletop foresight game</a> for BCI futures planning. A board game for brainstorming, not a security framework.</p>
+            <p>Created a <a href="https://www.cisa.gov/resources-tools/resources/matrix-game-brain-computer-interfaces" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">tabletop foresight game</a> for BCI futures planning.</p>
           </div>
           <div class="glass rounded-lg p-4">
             <p class="font-semibold text-[var(--color-text-primary)] mb-1">BCI Manufacturers</p>
@@ -292,8 +274,8 @@ techniques.forEach((t: any) => {
           </div>
         </div>
         <div class="glass rounded-lg p-4" style="border-left: 3px solid var(--color-accent-primary);">
-          <p class="font-semibold text-[var(--color-text-primary)] mb-1">What TARA Fills</p>
-          <p>{totalThreats} techniques, each scored for neural impact, traced to affected brain regions with {dsm5Count} DSM-5-TR category references (research-based, requiring clinical validation), and mapped to {neurorightsCount} neurorights.</p>
+          <p class="font-semibold text-[var(--color-text-primary)] mb-1">What TARA proposes</p>
+          <p>{coverage.total} techniques, {coverage.scored} with draft NISS scores, {coverage.dsm5Count} DSM-5-TR category references for threat modeling (not diagnostic claims).</p>
         </div>
       </div>
     </div>
@@ -304,10 +286,10 @@ techniques.forEach((t: any) => {
     <div class="max-w-3xl mx-auto text-center mb-8">
       <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--color-accent-primary)] mb-3">What TARA Is Built On</p>
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-4">
-        Every technique maps to the QIF hourglass and a NISS score.
+        {coverage.total} techniques map to the QIF hourglass; {coverage.scored} carry draft NISS scores.
       </h2>
       <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto">
-        QIF is a proposed 11-band architecture — biology above, silicon below, with the physical neural interface at the bottleneck where security either holds or fails. NISS scores each technique on {nissExampleMetrics.length} metrics; the example below shows them for one catalogued technique.
+        QIF is a proposed 11-band architecture — biology above, silicon below, with the physical neural interface at the bottleneck where security either holds or fails. NISS scores a technique on {nissExampleMetrics.length} metrics; the example below shows them for one catalogued technique.
       </p>
     </div>
 
@@ -385,10 +367,10 @@ techniques.forEach((t: any) => {
     <div class="max-w-4xl mx-auto text-center mb-10">
       <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[#8b5cf6] mb-3">Governance & Neurorights</p>
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-4">
-        Five rights, quantified. Governance spanning all 11 bands.
+        Four proposed neurorights, mapped. Governance spanning all {HOURGLASS_BANDS.length} bands.
       </h2>
       <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto">
-        Neuroethics scholarship defined the rights; TARA operationalizes them against every catalogued technique. The policy bridge connects those findings to accelerating regulation.
+        Neuroethics scholarship proposed these rights (Ienca &amp; Andorno, 2017); TARA maps cataloged techniques to them for threat modeling. Equal access is treated as a governance commitment, not a separate right. The policy bridge connects those findings to accelerating regulation.
       </p>
     </div>
 
@@ -399,7 +381,6 @@ techniques.forEach((t: any) => {
         { code: 'MP', name: 'Mental Privacy', count: neurorightsCounts.MP, color: '#f59e0b' },
         { code: 'CL', name: 'Cognitive Liberty', count: neurorightsCounts.CL, color: '#3b82f6' },
         { code: 'PC', name: 'Psychological Continuity', count: neurorightsCounts.PC, color: '#8b5cf6' },
-        { code: 'EA', name: 'Equal Access', count: neurorightsCounts.EA, color: '#10b981' },
       ]}
     />
 

@@ -14,9 +14,9 @@ interface Props {
 }
 
 const APPLICABILITY_LABELS: Record<RequirementApplicability, string> = {
-  required: 'Required by statute',
+  required: 'Statutory if the device is a cyber device (connectivity prong only checked)',
   recommended: 'Recommended by FDA guidance',
-  not_required: 'Not required here',
+  not_required: 'Not triggered by connectivity; FDA guidance may still apply',
   not_evaluated: 'Not evaluated',
   not_determined: 'Not determined by this tool',
 };
@@ -25,6 +25,15 @@ const CONNECTIVITY_LABELS: Record<CyberDeviceConnectivity, string> = {
   meets: 'As modelled, it meets the connectivity part of the definition.',
   not_determined: 'Not determined by this tool.',
 };
+
+// not_required also covers "no submission type" and investigational submissions, where
+// connectivity may be met; the connectivity wording would be false there.
+const NOT_TRIGGERED_BY_SUBMISSION_LABEL = 'Not triggered for this submission type; FDA guidance may still apply';
+
+function labelApplicability(applicability: RequirementApplicability, isConnectivityMet: boolean): string {
+  if (applicability === 'not_required' && isConnectivityMet) return NOT_TRIGGERED_BY_SUBMISSION_LABEL;
+  return APPLICABILITY_LABELS[applicability];
+}
 
 const EVIDENCE_LABELS: Record<RequirementEvidence, string> = {
   draft_in_this_report: 'A first draft is in this report',
@@ -58,12 +67,12 @@ function CyberDeviceItem({ assessment, isSelected }: { assessment: CyberDeviceAs
   );
 }
 
-function RequirementItem({ item, isSelected }: { item: ComplianceItem; isSelected: boolean }) {
+function RequirementItem({ item, isSelected, isConnectivityMet }: { item: ComplianceItem; isSelected: boolean; isConnectivityMet: boolean }) {
   return (
     <section className="report-item" id={`checklist-${item.requirementId}`} data-selected={isSelected}>
       <h3 className="report-subheading">{item.title}</h3>
       <p className="report-step-meta">
-        <span className="report-tag">{APPLICABILITY_LABELS[item.applicability]}</span>
+        <span className="report-tag">{labelApplicability(item.applicability, isConnectivityMet)}</span>
         <span className="report-tag">{EVIDENCE_LABELS[item.evidence]}</span>
       </p>
       <p className="lab-soft">{item.applicabilityReason}</p>
@@ -77,9 +86,9 @@ function RequirementItem({ item, isSelected }: { item: ComplianceItem; isSelecte
 }
 
 /** How many requirements stand under each status, in the order the statuses are defined; a status with none is left out. */
-export function countByApplicability(items: readonly ComplianceItem[]): { applicability: RequirementApplicability; label: string; count: number }[] {
+export function countByApplicability(items: readonly ComplianceItem[], isConnectivityMet = false): { applicability: RequirementApplicability; label: string; count: number }[] {
   return (Object.keys(APPLICABILITY_LABELS) as RequirementApplicability[])
-    .map((applicability) => ({ applicability, label: APPLICABILITY_LABELS[applicability], count: items.filter((item) => item.applicability === applicability).length }))
+    .map((applicability) => ({ applicability, label: labelApplicability(applicability, isConnectivityMet), count: items.filter((item) => item.applicability === applicability).length }))
     .filter((entry) => entry.count > 0);
 }
 
@@ -87,14 +96,15 @@ interface NavProps {
   items: readonly ComplianceItem[];
   selectedId: string;
   onSelect: (id: string) => void;
+  isConnectivityMet: boolean;
 }
 
 /** Every requirement by title with its status, under a count of each status. Choosing one shows it beside the list. */
-function ChecklistNav({ items, selectedId, onSelect }: NavProps) {
+function ChecklistNav({ items, selectedId, onSelect, isConnectivityMet }: NavProps) {
   return (
     <nav className="checklist-nav" aria-label="Requirements">
       <ul className="checklist-counts" aria-label={`${items.length} requirements by status`}>
-        {countByApplicability(items).map((entry) => <li key={entry.applicability}><span className="lab-figure">{entry.count}</span> {entry.label}</li>)}
+        {countByApplicability(items, isConnectivityMet).map((entry) => <li key={entry.applicability}><span className="lab-figure">{entry.count}</span> {entry.label}</li>)}
       </ul>
       <ul className="checklist-nav-list">
         <li>
@@ -104,7 +114,7 @@ function ChecklistNav({ items, selectedId, onSelect }: NavProps) {
           <li key={item.requirementId}>
             <button type="button" className="checklist-pick" aria-current={selectedId === item.requirementId ? 'true' : undefined} onClick={() => onSelect(item.requirementId)}>
               <span>{item.title}</span>
-              <span className="lab-label">{APPLICABILITY_LABELS[item.applicability]}</span>
+              <span className="lab-label">{labelApplicability(item.applicability, isConnectivityMet)}</span>
             </button>
           </li>
         ))}
@@ -119,6 +129,7 @@ function ChecklistNav({ items, selectedId, onSelect }: NavProps) {
  */
 export default function ComplianceChecklist({ assessment, items, isTitleShown = true }: Props) {
   const sourceCount = assessment.checklistSources.length;
+  const isConnectivityMet = assessment.connectivity === 'meets';
   const [chosenId, setChosenId] = useState(CYBER_DEVICE_ID);
   // A requirement that is no longer listed (the submission type changed) falls back to the first entry.
   const selectedId = items.some((item) => item.requirementId === chosenId) ? chosenId : CYBER_DEVICE_ID;
@@ -144,10 +155,10 @@ export default function ComplianceChecklist({ assessment, items, isTitleShown = 
         </ul>
       </div>
       <div className={isTitleShown ? 'checklist-body' : undefined}>
-        {isTitleShown && <ChecklistNav items={items} selectedId={selectedId} onSelect={select} />}
+        {isTitleShown && <ChecklistNav items={items} selectedId={selectedId} onSelect={select} isConnectivityMet={isConnectivityMet} />}
         <div className={isTitleShown ? 'checklist-detail' : undefined}>
           <CyberDeviceItem assessment={assessment} isSelected={selectedId === CYBER_DEVICE_ID} />
-          {items.map((item) => <RequirementItem key={item.requirementId} item={item} isSelected={selectedId === item.requirementId} />)}
+          {items.map((item) => <RequirementItem key={item.requirementId} item={item} isSelected={selectedId === item.requirementId} isConnectivityMet={isConnectivityMet} />)}
         </div>
       </div>
     </div>

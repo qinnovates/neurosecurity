@@ -71,7 +71,7 @@ import { TARA_TECHNIQUES } from '../../../lib/qif-constants';
 
 <PageLayout
   title="Threat Matrix — TARA Tactics, Techniques & Procedures"
-  description="Interactive threat matrix mapping {TARA_TECHNIQUES} BCI attack techniques across 11 hourglass bands and 9 attack categories. Explore the full TARA taxonomy."
+  description={`Matrix of ${TARA_TECHNIQUES} techniques across ${HOURGLASS_BANDS.length} hourglass bands and ${THREAT_CATEGORIES.length} categories, for threat modeling and prioritizing defenses.`}
   breadcrumbs={[
     { label: 'Neural Atlas', href: '/atlas/' },
     { label: 'TARA', href: '/atlas/tara/' },
