@@ -69,9 +69,9 @@ mne.set_log_level("WARNING")
 # Paths
 # ---------------------------------------------------------------------------
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-REGISTRY_PATH = REPO_ROOT / "shared" / "eeg-samples.json"
+REGISTRY_PATH = REPO_ROOT / "datalake" / "eeg-samples.json"
 DATA_DIR = REPO_ROOT / "_archive" / "qif-lab" / "data"
-OUTPUT_DIR = REPO_ROOT / "docs" / "data" / "parquet" / "eeg"
+OUTPUT_DIR = REPO_ROOT / "datalake" / "parquet" / "eeg"
 
 # ---------------------------------------------------------------------------
 # Processing parameters

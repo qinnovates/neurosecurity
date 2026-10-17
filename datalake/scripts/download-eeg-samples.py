@@ -25,8 +25,8 @@ from pathlib import Path
 
 # Resolve paths relative to repo root
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-REGISTRY_PATH = REPO_ROOT / "shared" / "eeg-samples.json"
-DATA_DIR = REPO_ROOT / "qif-framework" / "qif-lab" / "data"
+REGISTRY_PATH = REPO_ROOT / "datalake" / "eeg-samples.json"
+DATA_DIR = REPO_ROOT / "_archive" / "qif-lab" / "data"
 
 # Download configs for each dataset that has a direct download path
 # Mendeley Data API: https://data.mendeley.com/public-files/datasets/<id>/files/<file-id>/file_downloaded

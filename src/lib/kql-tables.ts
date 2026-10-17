@@ -766,13 +766,29 @@ function buildInvestmentPatterns(): Row[] {
 }
 
 // Hardware, Comms & Ops
+/**
+ * The inventory records directionality as free text ("read-only (ECoG recording)").
+ * Normalise it to the atlas's interface_type enum so the two datasets join, and
+ * leave anything unrecognised empty rather than guessing.
+ */
+function normalizeInterfaceType(value: unknown): string {
+  if (typeof value !== 'string') return '';
+  const text = value.toLowerCase();
+  if (text.startsWith('bidirectional')) return 'bidirectional';
+  if (text.startsWith('read-only initially')) return 'read';
+  if (text.startsWith('read-only')) return 'read';
+  if (text.startsWith('stimulation only') || text.startsWith('write-only')) return 'write';
+  return '';
+}
+
 function buildHardwareSpecs(): Row[] {
   return (hardware.devices || []).map((d: any) => ({
     id: d.id, manufacturer: d.manufacturer, device_name: d.device_name,
     device_type: d.device_type || '', fda_status: (d.fda_status || '').slice(0, 40),
     channels: d.core_specs?.channel_count?.value ?? '',
     power_mw: d.core_specs?.power_consumption_total?.value ?? '',
-    directionality: d.core_specs?.directionality?.value ?? '',
+    directionality: typeof d.core_specs?.directionality === 'string' ? d.core_specs.directionality : '',
+    interface_type: normalizeInterfaceType(d.core_specs?.directionality),
   }));
 }
 
