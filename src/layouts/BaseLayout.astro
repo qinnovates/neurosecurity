@@ -113,7 +113,10 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
 
 
   <!-- Theme + Vision mode + Lens initialization (prevent flash) -->
-  <script is:inline>
+  <!-- data-astro-rerun: ClientRouter replaces <html>'s attributes on swap and dedupes
+       identical inline scripts, so without this the saved theme is lost on every
+       client-side navigation and the page reverts to data-theme="light". -->
+  <script is:inline data-astro-rerun>
     (function(){
       try {
         var path = window.location.pathname;
