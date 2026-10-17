@@ -1,6 +1,6 @@
 import type { CatalogSeverity } from '@/lib/threat-model/catalog-types';
 
-const SEVERITY_LABELS: Record<CatalogSeverity, string> = { critical: 'Critical', high: 'High', medium: 'Medium', low: 'Low' };
+const SEVERITY_LABELS: Record<CatalogSeverity, string> = { critical: 'Critical', high: 'High', medium: 'Medium', low: 'Low', none: 'None' };
 
 /** Severity as a word with a coloured stripe beside it. The colour never sits behind the text. */
 export default function SeverityMark({ severity }: { severity: CatalogSeverity }) {

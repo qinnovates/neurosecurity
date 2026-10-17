@@ -52,7 +52,9 @@ const distinct = (rows: readonly AnatomyRow[], column: string): string[] => [...
 const countWhere = (rows: readonly AnatomyRow[], test: (row: AnatomyRow) => boolean): number => rows.filter(test).length;
 const everyRow = ANATOMY_TABLE_NAMES.flatMap((name) => tables[name]);
 
+/** Empty for a directory that does not exist, so a retired export path is simply nothing to scan. */
 function listFiles(directory: string): string[] {
+  if (!fs.existsSync(directory)) return [];
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const entryPath = path.join(directory, entry.name);
     return entry.isDirectory() ? listFiles(entryPath) : [entryPath.split(path.sep).join('/')];

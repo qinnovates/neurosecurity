@@ -17,6 +17,7 @@ const REGION: ClinicalRegion = {
   pathwayIds: [],
   neurotransmitters: [],
   dsmCodes: [],
+  icd10Codes: [],
   threatCount: 0,
   connections: [],
 };

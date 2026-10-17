@@ -21,7 +21,7 @@ vi.mock('../RegionViewMount', () => ({
 
 const lastMount = (): RegionViewMountProps => mounts[mounts.length - 1];
 const clinicalRegion = (id: string, band: string): ClinicalRegion => ({
-  id, name: `Region ${id}`, abbreviation: id, band, function: '', pathwayCount: 1, pathwayIds: [], neurotransmitters: [], dsmCodes: [], threatCount: 0, connections: [],
+  id, name: `Region ${id}`, abbreviation: id, band, function: '', pathwayCount: 1, pathwayIds: [], neurotransmitters: [], dsmCodes: [], icd10Codes: [], threatCount: 0, connections: [],
 });
 const band = (id: string): BrainView['regions'][number] => ({ id, name: `Band ${id}`, description: '', color: '#000', intensity: 1, stat: { label: 'filed', value: '1' }, badges: [], details: [] });
 const VIEWS: BrainView[] = [{ id: 'security', label: 'Security', icon: 'shield', accentColor: '#000', regions: [band('N7'), band('N6')] }];
