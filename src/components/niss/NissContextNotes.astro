@@ -8,7 +8,9 @@
  *     biological impact down to a low score;
  *   - the cognitive flag, because CR and CD carry half weight;
  *   - the NP:S support note on theoretical and speculative techniques;
- *   - where the severity label came from, and the label it replaced.
+ *   - where the severity label came from, and the label it replaced;
+ *   - the neural-impact scope: NISS measures impact on the nervous system, so a
+ *     technique with no biological effect (BI:N) reads low by construction.
  */
 import { EVIDENCE_TIER_LABELS, type EvidenceTierCode } from '../../lib/evidence-tiers';
 import type { NissScore, Severity, SeveritySource } from '../../lib/threat-data';
@@ -22,6 +24,7 @@ interface Props {
 
 const { niss, evidenceTier, severitySource, severityLegacy } = Astro.props;
 const tierLabel = EVIDENCE_TIER_LABELS[evidenceTier] ?? evidenceTier;
+const hasNoBiologicalImpact = niss.vector.includes('/BI:N');
 const relabelled = severitySource === 'niss' && severityLegacy !== null && severityLegacy !== niss.severity;
 ---
 
@@ -49,8 +52,15 @@ const relabelled = severitySource === 'niss' && severityLegacy !== null && sever
       rating is not supported by demonstrated evidence for this technique. The score is unchanged.
     </li>
   )}
+  {hasNoBiologicalImpact && (
+    <li>
+      <span class="font-semibold text-[var(--color-text-secondary)]">Scope:</span> NISS measures impact on the
+      nervous system only. This technique has no direct biological effect, so its NISS severity understates its
+      classical severity; read the CVSS vector for that.
+    </li>
+  )}
   <li>
-    <span class="font-semibold text-[var(--color-text-secondary)]">Severity label:</span>
+    <span class="font-semibold text-[var(--color-text-secondary)]">Neural-impact severity (NISS):</span>
     {severitySource === 'niss' ? 'derived from the NISS score' : 'editorial; this technique has no NISS score yet'}
     {relabelled && <span> (previously rated {severityLegacy})</span>}
   </li>
