@@ -1,7 +1,6 @@
 # tools/ -- Security Tools
 
 ## Structure
-- `macshield/` -- macOS security hardening tool
 - `neurowall/` -- Neural firewall implementation (zero-trust at I0 boundary)
 - `neurosim/` -- Neural simulation environment
 

@@ -69,7 +69,6 @@ drafts/*
 
 # Local
 _memory/
-tools/macshield
 fact-check-report.json
 .vercel
 

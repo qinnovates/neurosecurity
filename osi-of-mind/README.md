@@ -73,7 +73,7 @@ This directory contains every piece of that puzzle.
 | [framework/](framework/) | 9-document architecture series (read in order) | Complete |
 | [nsp/](nsp/) | NSP Rust implementation (post-quantum) | In development |
 | [runemate/](runemate/) | Runemate compiler (Staves DSL → bytecode) | v1.0 compiler |
-| [tools/](tools/) | Neurowall, neurosim, macshield | Prototypes |
+| [tools/](tools/) | Neurowall, neurosim | Prototypes |
 | [tara-threat/](tara-threat/) | TARA technique deep-dives and PoCs | Active |
 | [logs/](logs/) | Neurorights derivation log | Active |
 
