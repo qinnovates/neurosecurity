@@ -5,11 +5,13 @@ from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
 from .core import TaraLoader
+from . import DEPRECATION_NOTICE
 from .stix import StixExporter
 
 console = Console()
 
 def main():
+    print(f"Note: {DEPRECATION_NOTICE}", file=sys.stderr)
     parser = argparse.ArgumentParser(description="qtara: TARA Framework CLI")
     subparsers = parser.add_subparsers(dest="command")
 
