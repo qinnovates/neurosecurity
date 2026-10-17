@@ -15,7 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit, Claim Corrections
 | Entry | Topic | Link |
 |-------|-------|------|
-| 113 | Correcting a published endorsement claim; reverifying all twelve rows of the pre-outreach fix list (8 resolved, 2 live, 1 self-contradictory, 1 new adjacent defect); the paper now asserts both 59.4% and 99.1%; Neurowall privacy bound; NIH BRAIN neuroethics as the standard QIF falls short of | [Entry 113](#entry-113-endorsement-claim-and-stale-fix-list) |
+| 113 | Status taxonomy: CONFIRMED retired and 27 techniques reclassified; colliding QIF-T0172/T0173 renumbered to T0177/T0178; Professor X source corrected; registry figures in the paper generated from the registrar; CI leak, staleness and paper-build checks | [Entry 113](#entry-113-status-taxonomy-renumbering-derived-figures) |
 | 106 | October 2026 data refresh: landscape and device crawl, attack research survey, 63 site inconsistencies, three homepage corrections, citation defect C52, intake ledger and tracked metrics. Staged proposals pending Quorum fact-check | [Entry 106](#entry-106-october-2026-data-refresh) |
 
 ### March (Entries 84+) — Privacy Architecture, Research Infrastructure, Epistemic Guardrails, Data Lake Sprint, AI Governance
@@ -356,114 +356,48 @@ Each entry follows this structure:
 
 ---
 
-## Entry 113: Correcting a Published Endorsement Claim, and What a Stale Fix List Costs {#entry-113-endorsement-claim-and-stale-fix-list}
+## Entry 113: Status Taxonomy Retirement, Identifier Renumbering and Derived Registry Figures {#entry-113-status-taxonomy-renumbering-derived-figures}
 
-**Date:** 2026-10-16, ~19:00
+**Date:** 2026-10-16
 **Classification:** CORRECTION
-**AI Systems:** Claude Opus 5 (verification, corrections, code and tests). An eight-decision Quorum panel ran earlier the same day; its output is recorded separately and is not integrated here.
-**Connected entries:** Entry 106 (October 2026 data refresh), Entry 98 (ICD-10 neurological gap)
-**RACI:** R: Claude Opus 5 | A: KQ | C: none | I: none
-**AI Contribution Level:** AI-generated, human-decided on scope and on two reversals
+**AI Systems:** Claude Opus 5, Claude Opus 5.5
+**Connected entries:** Entry 106 (October 2026 data refresh)
+**AI Contribution Level:** AI-generated, human-approved
 
-### Context
+Major schema and structural changes to the registrar, the site code, the paper build and CI.
 
-Three things were open at the start of this session: a claim on the public timeline that NISS had been accepted by a standards body, a PyPI workflow that triggered on data paths, and a differential-privacy bug in Neurowall. All three were listed as live and unactioned, on the authority of `governance/outreach/DRBRYCE-QIF-CROSSREFERENCE.md`, a Quorum-deliberated pre-outreach fix list written on 2026-07-31.
+### Schema: evidence status
 
-Two of the three were not what the list said they were. Establishing that is the substance of this entry.
+- `tara_spec.status_definitions` added. `status` now answers one question: how far a technique has been shown as an attack. Whether its mechanism is established is carried by `dual_use_classifications` and `evidence_levels`.
+- `CONFIRMED` retired. Its 27 techniques were reclassified: 5 to `DEMONSTRATED`, 21 to `THEORETICAL`, 1 to `PLAUSIBLE`. Each carries `status_prior` and `status_change_reason`.
+- `statistics.by_status` is now: THEORETICAL 95, DEMONSTRATED 48, EMERGING 27, PLAUSIBLE 2, SPECULATIVE 1 (173).
+- Site code: the `Status` type covers all six values. `PLAUSIBLE` and `SPECULATIVE` were previously missing, so `getStatusStats()` produced `null` for them in `/api/tara.json` and `/api/qif.json`.
+- Script: `datalake/scripts/retire-confirmed-status.py`; evidence audit: `datalake/scripts/audit-confirmed-evidence.py`.
 
-### The Endorsement Claim
+### Identifiers
 
-The 2026-02-27 milestone in `src/data/qif-timeline.json` stated that the CVSS SIG had "offered inclusion in the official CVSS Resources repository" and called it "First external standards body recognition of the framework." It served from the public API.
+- `QIF-T0172` and `QIF-T0173` on this draft catalogue named different techniques than the published catalogue (registrar 4.0, PyPI 0.3.0). They are renumbered `QIF-T0177` (air-gap covert channel exfiltration) and `QIF-T0178` (peripheral silent-speech readout); published identifiers keep their meaning. The mapping is in the registrar changelog. Script: `datalake/scripts/renumber-colliding-ids.py`.
+- Open: alias collisions with the published catalogue on `TARA-SIL-R-018` and `TARA-SIL-M-022`.
 
-The position the project actually holds is the opposite, and is stronger. `QIF-WHITEPAPER-V9.md:1043` and `QIF-WHITEPAPER-V8.md:1284-1286` both state that the invitation was received and **declined for now**, because NISS is a single-author derivation whose scoring method has not been independently reviewed, and contributing it to a standards resource repository before that review would lend unearned authority to unvalidated mathematics.
+### Sources
 
-The milestone now says invited and deferred, and adds that an invitation is not a review, an endorsement or adoption by any standards body. The claim also violated two neuromodesty checks independently of its truth: a standards claim (check 4) and a priority claim without evidence (check 6).
+- The source cited as "Zhang et al. 2024" on QIF-T0009, T0016 and T0067 is Liu, Song, He, Lu and Zheng (2024), "Professor X: Manipulating EEG BCI with Invisible and Robust Backdoor Attack", arXiv:2409.20158. Corrected on all occurrences.
+- QIF-T0016 adds Li et al. 2025, Neurocomputing 616:128902 (DOI:10.1016/j.neucom.2024.128902).
+- NIH BRAIN Initiative neuroethics sources added (Bianchi et al. 2018; Ramos et al. 2017, 2019) to the README, whitepaper v9 Section 27.7 and Neurosecurity Governance Section 4.
 
-The same false strings survived in a second place: `src/site/governance/outreach/mitre-attack-contribution/index.html`. That file is a committed Astro build artifact sitting in `publicDir`. The governance content collection globs only `DECISION-LOG.md`, `TRANSPARENCY.md` and `SHIP-LOG.md`, so no route regenerates that page — the artifact *is* the published page. The markdown source had been correct since July. Correcting generated output is normally the wrong move; here there is no generator to re-run, so the two strings were corrected in place and the architectural problem recorded instead.
+### Published claims
 
-### What the Stale Fix List Cost
+- The 2026-02-27 timeline milestone now states that NISS was invited to the CVSS Resources repository and that contribution was deferred pending independent review. It no longer describes acceptance or standards-body recognition.
 
-The Neurowall zCDP bug was already fixed. `b9bec3ce` (2026-07-31) removed exactly the reciprocal overwrite the list describes:
+### Paper build
 
-```
--        rho = 1.0 / (2.0 * epsilon * epsilon)
-+        rho = (epsilon ** 2) / 2.0  # Laplace mechanism (Bun & Steinke 2016)
-```
+- Registry figures are generated LaTeX macros (`research/paper/scripts/generate_registry_stats.py`): `\Snapshot*` for the registry v1.5 state the analysis describes, `\Live*` for the current registrar. No literal registry figure remains in the source.
+- Source defects fixed: an unescaped percent sign that truncated the abstract, a duplicate BibTeX key, and a universal-negative sentence in the abstract. The published v1.5 PDF is unchanged.
 
-That same commit **added the fix list**. The document has therefore described a pre-fix state since the day it was written, for the items it fixed itself. It also fixed the endorsement claim in the README, the MITRE outreach markdown and the changelog post — which is exactly why those three were already correct while the timeline and the build artifact were missed.
+### Infrastructure
 
-So the document generated a false BLOCKING report twice in one session, and the cost was not hypothetical: work was planned against it.
-
-All twelve rows of Section 1 were then reverified against the current code, registry, paper source and sibling repositories. Each row now carries its status inline, and the header states that any unannotated row is unverified.
-
-| # | Row | Verified status, 2026-10-16 |
-|---|-----|------------------------------|
-| 1 | Paper 1 wrongly described as Stanford | Resolved. Both PDFs renamed with correct affiliations; no repo artifact makes the claim |
-| 2 | NISS "accepted" for CVSS Resources repo | Resolved. Source docs in July; timeline and build artifact this session |
-| 3 | README overclaims CVSS/NISS coverage | Resolved. `README.md:196` now states 103/173 CVSS and 129/10/34 scoring states, which match the registry |
-| 4 | Registry self-consistency: tactics and domains | Resolved as written. **A new defect of the same class is live** (below) |
-| 5 | Conflicting technique counts | **Live and worse: five counts, two inside one file** |
-| 6 | "99.1% need NISS extension" is stale | **Partially resolved; the paper now contradicts itself** |
-| 7 | CONFIRMED applied to non-attack citations | Resolved for T0010 and T0015, both now THEORETICAL. 27 CONFIRMED entries remain unaudited |
-| 8 | RealTek CVE disclosure contradiction | Resolved. Both artifacts agree: ticket AC2026000022, no CVE assigned, follow-up pending |
-| 9 | Four Canons code of ethics | Reverified resolved. `src/data/code-of-ethics.ts` absent; archive header still marks it aspirational |
-| 10 | neurosim priority claims | Resolved. Both rephrased to "We are unaware of another..." form |
-| 11 | Neurowall zCDP composition | Resolved July 2026; a narrower issue found and fixed this session |
-| 12 | 84% quantum framing | **Live. Recounted 2026-10-16: 84/173 (49%) carry affirmative quantum framing; a plain non-empty count gives 147/173 (85%) but 63 of those say "No", "Not assessed" or "Not applicable". A framing decision, not a defect |
-
-### Two Findings That Were Not On The List
-
-**The paper now asserts two different gap percentages.** `main.tex:40` was corrected to 59.4%, and the body was not. `sections/01-introduction.tex:55`, `sections/05-niss.tex:44`, `sections/05-niss.tex:277` and `sections/10-conclusion.tex:20` still say 99.1%. The corrected figure is itself stale: recomputed from the live registry's own `niss_cvss_mapping.by_gap_group` (14+30+59=103), the ratio is 103/173 = **59.5%**. Patching a figure in the abstract alone converted a uniformly stale number into an internal contradiction, which is worse.
-
-Technique counts behave the same way: the registry and README say 173, `main.tex:40` says 165, `main.tex:32` and the whole body say 109, and `tara-poc` says 99. Five values, two of them in one file. The structural fix is to derive the figure once rather than hand-copy it into five artifacts.
-
-**`total_domains` now describes a taxonomy nothing references.** The July fix added the orphaned `S` domain to the `domains` array, and `total_tactics` was corrected from 16 to 17. But no technique field references any of the eight declared domain codes (N, C, P, D, B, M, E, S). The live per-technique taxonomy is `tara_domain_primary`, with twelve values (AUD, AUT, COG, EMO, IDN, LNG, MEM, MOT, SIL, SOM, VES, VIS), which `statistics` does not count at all. `README.md:196` repeats "8 domains". The original row was a hand-maintained scalar that did not match the data; one schema generation later, that is true again of a different scalar.
-
-### Neurowall: What Was Still Wrong
-
-Reverifying the composition arithmetic against Bun & Steinke 2016 (Prop 1.4 for ε-DP ⇒ (ε²/2)-zCDP, Prop 1.3 for the conversion back) surfaced a real remaining problem. Neither composition route dominates the other. The zCDP conversion carries a `2·sqrt(rho·ln(1/delta))` penalty that exceeds the naive sum at low query counts:
-
-| ε = 0.1, δ = 1e-6 | Naive | zCDP | Guaranteed |
-|---|---|---|---|
-| 1 query | **0.10** | 0.53 | 0.10 |
-| 1000 queries | 100.0 | **21.6** | 21.6 |
-
-The simulator reported the zCDP figure alone as "total privacy cost", overstating a short session by roughly 5x, and never used the `naive_epsilon` it tracked. Both bounds are sound, so the guarantee is the smaller: `epsilon_bound` now takes the minimum, `consume` rejects a non-positive epsilon rather than accounting it, and `test_privacy_budget.py` pins the whole relationship with eight checks that each fail under one of the two original defects. Neither original defect was caught by a test, which is why both survived to a line-by-line read.
-
-An open caveat: `epsilon_bound` is correct for sequential composition of independent queries. The simulator calls `apply_local_dp` per sample at 250 Hz, and whether those are genuinely independent releases rather than repeated queries on a correlated signal was not established. That must be settled before any epsilon figure goes into a paper.
-
-### Neuroethics: Naming The Standard QIF Falls Short Of
-
-Separately, the NIH BRAIN Initiative's neuroethics programme was added to the README, to whitepaper v9 as new Section 27.7, and to `NEUROSECURITY_GOVERNANCE.md` Section 4. Its stated approach is that neuroethics should run concurrently with tool development rather than being applied as review afterwards, implemented through four standing activities: a Neuroethics Working Group, funded neuroethics research, portfolio scanning for ethical questions, and topic workshops.
-
-QIF has none of the four. The comparison is in the documents as a gap statement, not a claim: the guardrails QIF holds itself to are self-imposed, which is the weakness, and each of the three locations carries an explicit no-affiliation statement.
-
-Three sources were verified through Crossref for DOI, author list, title and venue, and recorded in all three citation stores. The programme page itself refused automated retrieval (HTTP 403), so it is recorded as supplied rather than fetched, and the *BRAIN 2025* quotation is attributed as quoted on that page rather than read directly.
-
-This pass also corrected catalogue entry I8, which carried the title "Neuroethics, Brain Science, and Society" attributed to Greely alone against a DOI that resolves to Ramos et al. (2019) with fourteen authors — a real DOI with fabricated metadata, the failure mode the citation-integrity protocol was written for.
-
-### Human Decisions
-
-| Decision | Choice |
-|----------|--------|
-| Where the NIH BRAIN material belongs | `NEUROSECURITY_GOVERNANCE.md` §4, over a README component-table row or a new whitepaper governance section |
-| Which draft is current | Whitepaper v9, not the companion |
-| Commit strategy on a branch with 148 dirty paths | Two commits: the pre-existing WIP as found, then the session's work on top |
-| Delete the stale build artifacts | Proposed and approved, then **not executed** — see below |
-
-### Two Reversals
-
-The proposal to delete the eighteen committed build artifacts in `src/site/` was approved on an incorrect description and withdrawn before execution. `.claude/rules/whitepaper-archival.md` makes the static v2/v3/v5 archives mandatory ("no version is ever lost"; every `/research/whitepaper/v*/` URL must return 200), and the governance pages have no route either, so those files are the live site rather than shadows of it. Deleting them would have removed most of the governance section and broken a standing rule. Only the single page carrying a verified falsehood was corrected.
-
-The PyPI severity was also overstated when first reported, by this session's own relay of the Quorum panel. `skip-existing: true` already meant an unchanged version uploaded nothing, and the local version equalled PyPI's latest, so no publication was pending. The trigger had been verified; the flag had not. A version gate was still added, because publishing should be a release decision rather than a consequence of editing data.
-
-### AI Collaboration
-
-Claude Opus 5 did the verification, the corrections, the Neurowall change and the tests. Every factual claim that drove a change was checked against the repository or Crossref in-session rather than taken from the fix list or from the earlier Quorum panel; that discipline is what surfaced the two reversals and the already-fixed bug. Kevin decided scope, placement and commit strategy, and the two reversals were raised rather than executed.
-
-### Process Change
-
-A fix list that is not updated when its items are fixed becomes a generator of false alarms. Section 1 now records resolution inline and states that unannotated rows are unverified. The same applies to any future audit document: the fix and the record of the fix belong in the same commit.
+- CI: paper lint and build (`paper-build.yml`); registrar statistics checked against its arrays; generated paper figures and frozen `publicDir` pages checked for staleness; tracked files scanned for workstation identity, secrets and internal material (`security.yml`, `.githooks/pre-push`).
+- `datalake/scripts/sync-package-data.py` paths corrected; it now fails rather than publishing an unsynced package. The PyPI workflow publishes only when the declared version is absent from PyPI.
 
 ---
 

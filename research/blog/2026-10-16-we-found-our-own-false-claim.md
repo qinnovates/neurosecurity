@@ -2,7 +2,7 @@
 title: "We Found Our Own False Claim, and the Audit That Missed It"
 subtitle: "A standards body never endorsed NISS. Our timeline said it did. Here is how that happened, what we fixed, and what is still wrong."
 date_posted: "2026-10-16"
-source: "https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-113-endorsement-claim-and-stale-fix-list"
+source: "https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-113-status-taxonomy-renumbering-derived-figures"
 tags: ["#Neurosecurity", "#Transparency", "#ThreatModeling", "#NISS", "#TARA"]
 author: "Kevin Qi"
 fact_checked: false
@@ -122,4 +122,4 @@ The honest summary: the taxonomy is the most complete public catalogue of BCI th
 
 *Corrections to this post, or to anything linked from it, are welcome as [issues](https://github.com/qinnovates/neurosecurity/issues). If you recompute one of these numbers and get something different, we want to know.*
 
-*Written with AI assistance (Claude Opus 5). All claims verified by the author. Every figure in this post was recomputed from the live registry during the session it describes; the full account, including the two reversals, is [Entry 113](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-113-endorsement-claim-and-stale-fix-list) of the derivation log. Human-originated: the decision to publish, the scope, and the choice to disclose the unresolved items.*
+*Written with AI assistance (Claude Opus 5). All claims verified by the author. Every figure in this post was recomputed from the live registry during the session it describes; the full account, including the two reversals, is [Entry 113](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-113-status-taxonomy-renumbering-derived-figures) of the derivation log. Human-originated: the decision to publish, the scope, and the choice to disclose the unresolved items.*

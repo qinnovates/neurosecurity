@@ -3,8 +3,8 @@ title: "Transparency Statement"
 description: "Auditable record of Human-AI collaboration in QIF Framework development"
 order: 4
 audit:
-  decisionsLogged: 19
-  independentReviews: 7
+  decisionsLogged: 18
+  independentReviews: 6
   humanDecisionRate: "100%"
   verificationPasses: 113
   automatedTests: 0
@@ -18,7 +18,7 @@ audit:
 > This document is auto-generated from the [QIF Derivation Log](../osi-of-mind/QIF-DERIVATION-LOG.md),
 > which is the single source of truth for all framework decisions and AI collaboration records.
 
-**Last generated:** 2026-10-17 at 21:26:59
+**Last generated:** 2026-10-17 at 23:51:57
 
 ## Table of Contents
 
@@ -37,7 +37,7 @@ audit:
 | Total derivation entries | **113** |
 | Entries involving AI | 79 (70%) |
 | Corrections / retractions | 🔴 7 |
-| Quorum swarm reviews | 🟢 7 |
+| Quorum swarm reviews | 🟢 6 |
 | Human-only entries | 0 |
 | Human decision rate | 🟢 100% (Kevin Qi is Accountable on every entry) |
 
