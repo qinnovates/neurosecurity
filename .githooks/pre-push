@@ -1,0 +1,15 @@
+#!/bin/sh
+# Pre-push security gate. Install once per clone:  git config core.hooksPath .githooks
+# Blocks the push if any tracked file leaks workstation identity or a secret,
+# or if the citation/paper/registry contracts are broken. Mirrors CI so a leak
+# never leaves the machine.
+set -e
+root=$(git rev-parse --show-toplevel)
+cd "$root"
+echo "[pre-push] scanning tracked files for identity and secret leaks"
+python3 src/scripts/verify/check_identity_leaks.py
+echo "[pre-push] paper source lint"
+python3 research/paper/scripts/lint_paper.py >/dev/null
+echo "[pre-push] frozen-page staleness"
+python3 src/scripts/verify/check_frozen_pages.py >/dev/null
+echo "[pre-push] ok"
