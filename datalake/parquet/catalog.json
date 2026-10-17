@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-10-16T23:58:40.792371+00:00",
+    "generated": "2026-10-17T00:40:38.523916+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
@@ -701,7 +701,7 @@
         "current_stats",
         "milestones"
       ],
-      "size_bytes": 13470,
+      "size_bytes": 13472,
       "compression": "zstd",
       "source": "datalake/parquet/timeline.parquet"
     }
