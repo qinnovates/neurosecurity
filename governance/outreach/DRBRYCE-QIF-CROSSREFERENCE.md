@@ -45,6 +45,34 @@ These are not report-formatting issues — they are factual errors in your own r
 
 ---
 
+## Verification of Sections 2 to 7 (added 2026-10-16)
+
+Section 1 was reverified row by row; this covers the rest.
+
+**Section 2 verifies**, with one small discrepancy. The arXiv record for 2607.10451
+gives the title "Threat Vectors and the State of the Art in Defense Methods for
+Security in Neurotechnology" and the authors Bagley, Bryce-Allen; Rose, Nathaniel;
+Kilbourn, Quintus; Canham, Matthew — matching this document exactly, including the
+absence of any Stanford affiliation on Paper 1. The arXiv `citation_date` is
+**2026/07/11**, where this document says July 14; likely submission versus
+announcement, but the date here is not what arXiv reports.
+
+**Section 3 contains one factual claim that is false as written.** It states TARA has
+"no mitigation/defense field on any technique record". A `defensive_sources` field is
+present on all 173 records, and `deployment_control_gap` on 2. The substance survives
+— only 8 of 173 records (4.6%) have any defensive content — so "defensive coverage is
+essentially absent" is right while "no field exists" is wrong. The coverage ratings in
+that section (STRONG / PARTIAL / THIN / NONE) are assessments rather than checkable
+claims and were not graded.
+
+**Sections 4, 5 and 7 were not verified** because they are judgement, not fact:
+feasibility verdicts on unbuilt research, lessons learned, and a collaboration
+proposal. They contain no claims about the current state of the repository that can be
+checked true or false. Section 6's action items duplicate Section 1 and are covered by
+those rows, except items 13 to 17, which are research proposals rather than defects.
+
+---
+
 ## 2. Bibliographic & Context Note
 
 **Paper 2 — genuinely Stanford:** *"A Mathematical Framework for the Problem of Security for Cognition in Neurotechnology."* Bryce Allen Bagley, Claudia Katherina Petritsch — Mathematical Medicine Group / Petritsch Laboratory, Dept. of Neurosurgery, Stanford University. arXiv:2403.07945v4, January 2025. Purely theoretical: introduces Cognitive Neurosecurity (CNS), "cogits" (qubit-analog cognitive state representations via Projective/Quantum Cognition + Hyperdimensional Computing), Readout Attacks (RA) vs. Alteration Attacks (AA), and Bures-distance/quantum-Jensen-Shannon-divergence security metrics. Zero empirical validation anywhere in the paper — no real neural data, no implemented attack or defense.
