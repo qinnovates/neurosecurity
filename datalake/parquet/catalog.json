@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-10-17T01:26:58.891907+00:00",
+    "generated": "2026-10-17T03:31:28.671965+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
@@ -46,7 +46,7 @@
         "consent_tier",
         "notes"
       ],
-      "size_bytes": 48101,
+      "size_bytes": 48104,
       "compression": "zstd",
       "source": "datalake/parquet/techniques.parquet"
     },
@@ -98,7 +98,7 @@
         "technique_id",
         "right_code"
       ],
-      "size_bytes": 1403,
+      "size_bytes": 1405,
       "compression": "zstd",
       "source": "datalake/parquet/technique_neurorights.parquet"
     },
