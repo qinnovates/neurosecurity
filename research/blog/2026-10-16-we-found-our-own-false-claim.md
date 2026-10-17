@@ -64,7 +64,7 @@ Every figure in this section is derived from one public file, [`datalake/qtara-r
 - 173 techniques — length of the `techniques` array.
 - 103 with CVSS, and 129 / 10 / 34 scoring states — count of a non-empty `cvss` field, and `statistics.by_scoring_state`.
 - 59.5% — `statistics.niss_cvss_mapping.by_gap_group` sums to 103 (14 + 30 + 59), over 173.
-- 48% quantum framing — count of records whose `quantum` field is affirmative rather than "No"/"Not assessed"/"Not applicable": 83 of 173. A plain non-empty count gives 147 and overstates it.
+- 48% quantum framing — count of records whose `quantum` field is affirmative rather than "No"/"Not assessed"/"Not applicable": 83 of 173 ("N/A" counted as not affirmative). A plain non-empty count gives 147 and overstates it.
 
 ## What we fixed today
 

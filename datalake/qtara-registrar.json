@@ -2209,7 +2209,7 @@
       "classical": "Partial",
       "quantum": "Enhanced (Dsf + coherence)",
       "sources": [
-        "Liu X-H, Song X, He D, Lu B-L, Zheng W-L. (2024). \"Professor X: Manipulating EEG BCI with Invisible and Robust Backdoor Attack.\" arXiv:2409.20158. [Verified 2026-10-16 via the arXiv record; previously mis-cited in this registry as \"Zhang et al. 2024\", a misattribution of last author Zheng]",
+        "Zhang et al. 2024 [UNVERIFIED: unidentified. Not the Professor X paper (arXiv:2409.20158), which is a training-time EEG backdoor and does not concern RF injection. Not located by the 2026-10-06 survey or by searches on 2026-10-16; do not cite externally]",
         "Indirect corticothalamic-raphe 5-HT pathway (rTMS DLPFC -> DRN serotonin)",
         "Armengol-Urpi, Kovacs, Sarma 2023, \"Brain-Hack: Remotely Injecting False Brain-Waves with RF\" (analog-front-end RF injection variant, demonstrated through walls at ~3m against live EEG-BCI hardware, no software access required) DOI:10.1145/3605758.3623497"
       ],
@@ -2464,7 +2464,7 @@
       "origin": {
         "category": "qif_recontextualized",
         "original_authors": [
-          "Liu X-H, Song X, He D, Lu B-L, Zheng W-L. 2024 (arXiv:2409.20158)"
+          "Armengol-Urpi, Kovacs, Sarma 2023 (DOI:10.1145/3605758.3623497)"
         ],
         "qif_contribution": "threat_recontextualization"
       },

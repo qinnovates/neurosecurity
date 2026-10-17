@@ -46,7 +46,7 @@ The datasets behind all three are open, with a device inventory of 68 companies 
 | Route and hop | A route is an ordered chain of connections between structures. Each connection is a hop, with its own evidence (Section 20.4). Staged, not integrated |
 | Technique | One entry in the TARA catalogue, with an id such as QIF-T0166 |
 | Tactic | The purpose a technique serves. The catalogue has 17, with ids such as QIF-D.HV (Data Harvest) |
-| Evidence status | How far a technique has been shown: confirmed, demonstrated, emerging or theoretical. The data does not yet define these terms (Section 21.2) |
+| Evidence status | How far a technique has been shown: theoretical, emerging, demonstrated, plausible or speculative (Section 21.2) |
 | Scoring state | Whether a technique's NISS score is complete (scored), bounded by a range (provisional) or withheld (unscored) (Section 21.3) |
 | NISS vector | The six metric levels behind a score, written as `NISS:1.1/BI:H/CR:H/...` (Section 27.3) |
 | PINS | A safety flag set when biological impact is High or Critical, or the effect is irreversible (Section 27.3) |
@@ -424,7 +424,7 @@ Earlier versions gave each band a determinacy class and a QI range. Three AI rev
 
 ![Horizontal bars of the 173 TARA techniques, in total and by evidence status, each split into scored, provisional and unscored](../images/tara-catalogue-scoring-states-v9.svg)
 
-*Figure 21.1. The 173 techniques by evidence status, split by scoring state: 129 scored, 10 provisional and 34 unscored. Unscored and provisional entries appear at each of the four statuses shown; the two techniques with the statuses plausible and speculative are counted as theoretical. Source: datalake/qtara-registrar.json.*
+*Figure 21.1. The 173 techniques by evidence status, split by scoring state: 129 scored, 10 provisional and 34 unscored. Unscored and provisional entries appear at each of the three statuses shown; the 3 techniques with the statuses plausible and speculative are counted as theoretical, and the status confirmed was retired on 2026-10-16. Source: datalake/qtara-registrar.json.*
 
 ### 21.2 Evidence rules
 
@@ -432,7 +432,7 @@ Every technique now carries a `peer_review_status` of peer-reviewed, preprint or
 
 The rule is that **a technique with no peer-reviewed source may not hold an evidence status above theoretical and does not carry a NISS score.**
 
-The registrar uses six status values: confirmed (27 techniques), demonstrated (43), emerging (27), theoretical (74), plausible (1) and speculative (1). It does not define them, and none of them means that an attack has been carried out on a person with a device. Written definitions and inclusion criteria for techniques are an open item.
+The registrar uses five status values: theoretical (95 techniques), demonstrated (48), emerging (27), plausible (2) and speculative (1). A sixth, confirmed, was retired on 2026-10-16 after an audit found it spanned four unrelated kinds of evidence, and its 27 entries were redistributed. None of the values means that an attack has been carried out on a person with a device. The values are defined in `tara_spec.status_definitions` in the registrar; written inclusion criteria for techniques remain an open item.
 
 When the rule was applied, 34 existing techniques broke it, and each was searched for a peer-reviewed source supporting its premise.
 
