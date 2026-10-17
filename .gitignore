@@ -18,6 +18,14 @@ personal/
 
 # Build artifacts
 src/site/data/
+# setuptools build output: a stale copy of datalake/qtara/src/qtara/.
+# It drifted from source (models.py and the bundled registrar both differed)
+# and carried the retired niss_dsm_bridge table as live data.
+datalake/qtara/build/
+# Pre-migration backups. datalake/qtara-registrar.json.bak held the retired
+# niss_dsm_bridge table and the "NISS metrics predict diagnostic clusters"
+# wording as live data; git history is the backup.
+*.bak
 
 # Rust
 **/target/
@@ -87,3 +95,9 @@ drafts/
 # core.ignorecase matches "drafts/" against "IR Playbooks/Drafts/" too — carve it back out.
 !IR Playbooks/Drafts/
 .gstack/
+
+# Internal material: never publish.
+_staging/
+governance/outreach/
+src/site/governance/outreach/
+src/site/governance/outreach-tracker/

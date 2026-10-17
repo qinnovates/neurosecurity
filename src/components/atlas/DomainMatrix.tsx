@@ -18,7 +18,7 @@ interface Props { techniques: ThreatVector[] }
 const EV_SHORT: Record<EvidenceTierGroup, string> = { validated: 'T1', demonstrated: 'T3', theoretical: 'T5', speculative: 'T7' };
 
 function sevCounts(ts: ThreatVector[]) {
-  const c: Record<Severity, number> = { critical: 0, high: 0, medium: 0, low: 0 };
+  const c: Record<Severity, number> = { critical: 0, high: 0, medium: 0, low: 0, none: 0 };
   for (const t of ts) c[t.severity]++;
   return c;
 }

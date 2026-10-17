@@ -8,7 +8,8 @@
  * Source data:
  *   - qtara-registrar.json    → techniques (with band_ids, severity, niss)
  *   - qif-brain-bci-atlas.json → qif_bands, brain_regions
- *   - qif-neural-pathways.json → pathways (with origin, targets, dsm_conditions)
+ *   - qif-neural-pathways.json → pathways (with origin, targets, dsm_conditions,
+ *     icd10_conditions; chapter F codes and all other ICD-10-CM codes respectively)
  *   - qif-dsm-mappings.json   → diagnostic_clusters
  *   - qif-neurological-mappings.json → conditions
  *
@@ -76,6 +77,20 @@ for (const nc of neuro.conditions || []) {
   neuroLookup.set(nc.code, { name: nc.name, cluster: `Neurological/${nc.category}` });
 }
 
+/**
+ * A pathway's condition codes with the pathway's own titles: chapter F codes
+ * from dsm_conditions/dsm_names, then every other ICD-10-CM code from
+ * icd10_conditions/icd10_names. Both feed the chain, as the single
+ * dsm_conditions field did before the split.
+ */
+function pathwayConditions(pw) {
+  const pairs = [];
+  for (const [codesKey, namesKey] of [['dsm_conditions', 'dsm_names'], ['icd10_conditions', 'icd10_names']]) {
+    (pw[codesKey] || []).forEach((code, index) => pairs.push({ code, name: (pw[namesKey] || [])[index] }));
+  }
+  return pairs;
+}
+
 // Compute impact chains with optimized lookups
 const chains = [];
 
@@ -88,7 +103,7 @@ for (const tech of techniques) {
       const regionPws = pathwaysByRegion.get(region.id) || [];
 
       for (const pw of regionPws) {
-        for (const condCode of pw.dsm_conditions || []) {
+        for (const { code: condCode, name: pathwayName } of pathwayConditions(pw)) {
           const dsmMatch = dsmLookup.get(condCode);
           const neuroMatch = !dsmMatch ? neuroLookup.get(condCode) : null;
 
@@ -105,7 +120,7 @@ for (const tech of techniques) {
             pathway_name: pw.name,
             neurotransmitter: pw.neurotransmitter || '',
             dsm_code: condCode,
-            dsm_name: dsmMatch?.name || neuroMatch?.name || condCode,
+            dsm_name: dsmMatch?.name || neuroMatch?.name || pathwayName || condCode,
             dsm_cluster: dsmMatch?.cluster || neuroMatch?.cluster || '',
           });
         }

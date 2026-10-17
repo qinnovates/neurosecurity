@@ -130,7 +130,7 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
 
   const stats = useMemo(() => {
     const visible = techniques.filter(t => filteredTechniques.has(t.id));
-    const bySev: Record<string, number> = { critical: 0, high: 0, medium: 0, low: 0 };
+    const bySev: Record<string, number> = { critical: 0, high: 0, medium: 0, low: 0, none: 0 };
     for (const t of visible) bySev[t.severity] = (bySev[t.severity] ?? 0) + 1;
     return { total: visible.length, bySev };
   }, [techniques, filteredTechniques]);

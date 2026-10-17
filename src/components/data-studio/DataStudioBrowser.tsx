@@ -48,6 +48,7 @@ const DESCRIPTIONS: Record<string, { label: string; description: string; categor
   research_explorer: { label: 'Research Papers', description: 'Published research relevant to QIF', category: 'Research' },
   research_institutions: { label: 'Institutions', description: 'Universities and labs working in neurosecurity', category: 'Research' },
   neurological_conditions: { label: 'Neurological Conditions', description: 'Conditions mapped to affected brain structures', category: 'Clinical' },
+  severity_anchors: { label: 'Recoverability Bands', description: 'How unintended effects of therapeutic neural devices ended, by band and device class. Not evidence about an adversary.', category: 'Clinical' },
   neuroendocrine: { label: 'Neuroendocrine Axes', description: 'HPA, HPG, HPT axes with hormone cascades', category: 'Anatomy' },
   glial_cells: { label: 'Glial Cell Types', description: 'Astrocytes, oligodendrocytes, microglia', category: 'Anatomy' },
   guardrails: { label: 'QIF Guardrails', description: 'Neuroethics constraints governing QIF output', category: 'Governance' },

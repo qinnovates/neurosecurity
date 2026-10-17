@@ -24,14 +24,16 @@
     "changelog": "node src/scripts/changelog-update.mjs",
     "citations": "node src/scripts/generate-citations.mjs",
     "citations:check": "node src/scripts/generate-citations.mjs --check",
-    "compute:chains": "node datalake/src/scripts/compute-impact-chains.mjs",
+    "compute:chains": "node datalake/scripts/compute-impact-chains.mjs",
+    "registrar:niss-derive": "python3 src/scripts/derive-niss-annotations.py",
+    "registrar:niss-derive:check": "python3 src/scripts/derive-niss-annotations.py --check",
     "registrar:stats": "node src/scripts/generate-registrar-statistics.mjs",
     "registrar:stats:check": "node src/scripts/generate-registrar-statistics.mjs --check",
     "truth:registry": "node src/scripts/generate-truth-registry-section.mjs",
     "truth:registry:check": "node src/scripts/generate-truth-registry-section.mjs --check",
     "autodidactive:tara": "node src/scripts/generate-autodidactive-tara.mjs",
     "autodidactive:tara:check": "node src/scripts/generate-autodidactive-tara.mjs --check",
-    "generated:check": "npm run registrar:stats:check && npm run truth:registry:check && npm run autodidactive:tara:check",
+    "generated:check": "npm run registrar:niss-derive:check && npm run registrar:stats:check && npm run truth:registry:check && npm run autodidactive:tara:check",
     "cve:coverage": "node src/scripts/recompute-cve-coverage.mjs",
     "cve:gaps": "node src/scripts/generate-cve-coverage-gaps.mjs",
     "eeg:list": "python3 datalake/src/scripts/download-eeg-samples.py --list",
@@ -48,7 +50,8 @@
     "version:patch": "bash src/scripts/version.sh patch",
     "version:minor": "bash src/scripts/version.sh minor",
     "version:major": "bash src/scripts/version.sh major",
-    "evidence:tier": "python3 src/scripts/migrate-populate-evidence-tier.py"
+    "evidence:tier": "python3 src/scripts/migrate-populate-evidence-tier.py",
+    "anchors:check": "node src/scripts/validate-severity-anchors.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.7",

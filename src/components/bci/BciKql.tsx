@@ -102,6 +102,7 @@ const PRESETS: Array<{ label: string; query: string; group?: string }> = [
   { label: 'Neurotransmitters', query: 'neurotransmitters | sort by name asc', group: 'neurosci' },
   { label: 'Impact chains', query: 'impact_chains | sort by niss_score desc | take 50', group: 'neurosci' },
   { label: 'Neurological conditions', query: 'neurological_conditions', group: 'neurosci' },
+  { label: 'Recoverability bands', query: 'severity_anchors', group: 'neurosci' },
   // Cross-table joins
   { label: 'Regions → Pathways', query: 'brain_regions | join neural_pathways on qif_band == origin_band | project name, qif_band, neural_pathways_name, neurotransmitter | take 50', group: 'joins' },
   { label: 'Techniques → Bands', query: 'techniques | where severity == "critical" | join hourglass_bands on id | take 20', group: 'joins' },

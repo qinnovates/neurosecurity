@@ -16,7 +16,7 @@ for (const tactic of tactics) {
 }
 
 // Severity distribution
-const severityCounts = { critical: 0, high: 0, medium: 0, low: 0 };
+const severityCounts = { critical: 0, high: 0, medium: 0, low: 0, none: 0 };
 for (const t of THREAT_VECTORS) {
   if (t.severity in severityCounts) severityCounts[t.severity as keyof typeof severityCounts]++;
 }

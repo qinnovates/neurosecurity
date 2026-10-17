@@ -1,39 +1,66 @@
 [
   {
     "type": "external",
-    "title": "Butterfly Network to chase ultrasound brain-computer interfaces with newcomer Bridge Neurotech - MassDevice",
-    "date": "2026-10-08",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxPS0x2YW1QWjFCYVpDWTdzRGdkdjZVd0xtLWQ0N0J4NlNwdHIyZnJOSGhXTDMwU3ZsYkpYcUpXZFBfMFRGbWJYdnJTRmk2RkdfZUM1bW5GSG5Ud1c1dmdnd2d1MVFQTDlndTVQaGNaaHFGNDJhQVBRQ3pqeDZvWmRRLTAteVJ3b2tBNF9PNW9saDRuNnBWbnRZQXNRb1dPakd6NTlldw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Butterfly Network to chase ultrasound brain-computer interfaces with newcomer Bridge Neurotech&nbsp;&nbsp;MassDevice",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Paradromics Demonstrates Four Years of Stable Neural Recording in Major Brain-Computer Interface Durability Milestone - Yahoo Finance",
-    "date": "2026-10-08",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqgFBVV95cUxPME1NSUNaYk9pR194Z1AwdU5FTldTTVBHR0x1SnF3eGwtNXkwNFBBbWhqc0plZmVRYlhiMjd2WFhDVjFCcWFWWE5RS2lINDdWRXZVNnh1LWczSTk4WDJVZVk0d0hUcVowb25rWF9WaXl6cUdMUWM4OUd6YXBmczFfZ3NBSFFGdFJYZHRZYzRUTmlJcjFiREtLcUs5ZWliUDB4bnJld21EbUEzZw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Paradromics Demonstrates Four Years of Stable Neural Recording in Major Brain-Computer Interface Durability Milestone&nbsp;&nbsp;Yahoo Finance",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Before Elon Musk Takes Neuralink Public, Here’s Where to Look for Profits - InvestorPlace",
-    "date": "2026-10-08",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxOTndKazZFRDFPTjlLam1IX2piS3ZYMlh0dEFEZ2l2RjFFeHJfM2hxazlOaHE4Y01XS0tHQVljTGIxMTFfbTRhcEc5aWJuR1BqdWJNSVNqS0YzcS1XMTF0NnZUdWpGcFRrUnBFenhTd3VzS3prVkdHeGFxaTlaLVRDSk5VVWMwZ080QzNqUEpuWE1Jb3Q1a1E?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Before Elon Musk Takes Neuralink Public, Here’s Where to Look for Profits&nbsp;&nbsp;InvestorPlace",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Scaling subjects in cross-modal alignment: video decoding with EEG foundation model",
-    "date": "2026-10-08",
-    "url": "hxxps://arxiv[.]org/abs/2610[.]09287",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2610.09287v1 Announce Type: new Abstract: Naturalistic visual decoding from EEG has long been constrained by cohort size: existing scaling literature caps out at a few dozen subjects, leading pr",
+    "title": "This implant can restore sight for patients with macular degeneration",
+    "date": "2026-10-16",
+    "url": "hxxps://www[.]technologyreview[.]com/2026/10/16/1145840/prima-implant-restores-sight-macular-degeneration-patients/",
+    "source": "MIT Technology Review",
+    "summary": "More than 5 million people around the world with age-related macular degeneration (AMD) experience atrophy in their retinas. And until now, no treatment could restore their vision. The PRIMA system, w",
     "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "[object Object]",
+    "date": "2026-10-16",
+    "url": "hxxps://www[.]fiercebiotech[.]com/medtech/simbiosys-nabs-fda-clearance-nvidia-powered-mri-derived-breast-cancer-recurrence-tool",
+    "source": "Fierce Biotech",
+    "summary": "SimBioSys has been given FDA clearance of the Nvidia-powered TumorSight Risk, an AI and MRI-derived prognostic tool for assessing the risk of a breast cancer coming back.",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Visual Cues Quietly Inflate Deep Learning Accuracy in Brain-Computer Interfaces, Study Finds - Bioengineer.org",
+    "date": "2026-10-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxQTU1odnh1dy02b2FXSmZwaEdCTGFsU0didEhpeDhuUHIyMmdzZTVibFFONGhqWUI2MFdTNzJEcndFQzVyZl9hSXFWdnJUVWktVHQwN05qdVNmOVl1RlpDN1Bkb3VIZndNMTJKMzZFeXJVbG9SSWdYS0NxQWFVcEcwYm0tNThrb3NsN1ZleXNldTRWVjNfbmNFaVllb01zUFc0LTRoUnowQ1BxN3BlWUlFdWo1bGhpM2M?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Visual Cues Quietly Inflate Deep Learning Accuracy in Brain-Computer Interfaces, Study Finds&nbsp;&nbsp;Bioengineer.org",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Two dissociable axes of brain hierarchical dynamics track universal and population-specific effects of mindfulness",
+    "date": "2026-10-16",
+    "url": "hxxps://arxiv[.]org/abs/2610[.]20854",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2610.20854v1 Announce Type: new Abstract: How mental training reshapes the temporal architecture of large-scale brain dynamics and how these mechanisms differ between healthy and clinically vuln",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Transferable conditional brain charts link cortico-subcortical structure to Alzheimer's disease progression",
+    "date": "2026-10-16",
+    "url": "hxxps://arxiv[.]org/abs/2610[.]21660",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2610.21660v1 Announce Type: new Abstract: Normative models chart how brain measures vary across the lifespan, expressing each individual as a deviation from a healthy reference. However, most re",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "2 Brain-Computer Interface Stocks to Watch While Neuralink Stays Private - InvestorPlace",
+    "date": "2026-10-12",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixwFBVV95cUxNYm1relItOHNDSjA1ZVlocGRmR01HZFZoY0lyWEpOWElDbGVkY3FWZlNrWHA0MGFtcGlzZ3o0eDVlVXROMDlyRnJPeWZVcTNpRUNWZWhEMnlsZVhIMkpnaXZ3TGVmaDJtWnc3WnFyRkcwaFZPVVhNUjdmV3VBRHpoT3pybXlGbThwTWhSOW9fd25UcEd6VTJnMUUxT3dlSG9DUGwya1Y1TWJSMmd6RUM3SkgxZmZFOFVrdGtGck5vNWpRNTYxMjJz?oc=5",
+    "source": "Google News — BCI",
+    "summary": "2 Brain-Computer Interface Stocks to Watch While Neuralink Stays Private&nbsp;&nbsp;InvestorPlace",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Tether Evo’s latest research addresses one of the biggest challenges in brain-computer interfaces - TechCrunch",
+    "date": "2026-10-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi0AFBVV95cUxPYW9udFBiLWFEWGZfVVVxcFUxVHFuX1hRWDIyNzZLSENPSEtsX2JCQjZYd2J2eDByQXh3SEZlY1RvQV9lbW5FVnZEVE5DaG9md2pTVEhnd01UY29zUFNBWk9xeEpHNnQzM0VCY0g0cnYydF9qajQtZFM1QmNvaWVSTjJqTTgwdmhNaEtqVzl3ZmVjeDktYXBIcFM2LUQ5LTVsa0dQbldtRWpSSGI2cEhNYnRzNUlvV3RiLVp1QUlndVQ2RXBzaEJqMVZTZnVyOFZX?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Tether Evo’s latest research addresses one of the biggest challenges in brain-computer interfaces&nbsp;&nbsp;TechCrunch",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -42,15 +69,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMimgFBVV95cUxQSFJmaWVLVkZaMjRhTHVxTzZtN2tfUDF5LWNOaEdmRWN5Z2V3VnFNVTc4M0l3ekdGUVJYTXN3by1uZ1BBSV9ZSEZzQTByMkNOelB5RkN2azJxWTZkbDhDT2w2czlQS3EtakpIS01YZTk1XzBIRW1lbUtVZDlNUEtwRmNhdlc0dzlaNmlndGwxRDNsR1g0WU1OX2tR?oc=5",
     "source": "Google News — BCI",
     "summary": "Device helps people with paralysis communicate&nbsp;&nbsp;National Institutes of Health (NIH) | (.gov)",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Tether Evo’s latest research addresses one of the biggest challenges in brain-computer interfaces - TechCrunch",
-    "date": "2026-10-06",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi0AFBVV95cUxPYW9udFBiLWFEWGZfVVVxcFUxVHFuX1hRWDIyNzZLSENPSEtsX2JCQjZYd2J2eDByQXh3SEZlY1RvQV9lbW5FVnZEVE5DaG9md2pTVEhnd01UY29zUFNBWk9xeEpHNnQzM0VCY0g0cnYydF9qajQtZFM1QmNvaWVSTjJqTTgwdmhNaEtqVzl3ZmVjeDktYXBIcFM2LUQ5LTVsa0dQbldtRWpSSGI2cEhNYnRzNUlvV3RiLVp1QUlndVQ2RXBzaEJqMVZTZnVyOFZX?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Tether Evo’s latest research addresses one of the biggest challenges in brain-computer interfaces&nbsp;&nbsp;TechCrunch",
     "category": "neurotechnology"
   },
   {
@@ -67,9 +85,27 @@
     "title": "A New Neurotech Startup Launches to Rival Sam Altman’s Merge Labs - WIRED",
     "date": "2026-10-06",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPZHdGc3pUdVhTQWdlTFRnSXl5VmVTZFR1NlpnRmVuVHJ4dzhrbkZ3dWw5QXZaOXA5WUI1Q1dEN0ItNmN6c0huU2kyMW4zZWNXNktYUEg5QVo2aWlfZXNWU2FtZjgxb0ZtTkxiNDdsM3BkZ01Fa1hFLW5WMkhLanhaSzVrWW91eXp0?oc=5",
-    "source": "Google News — Neuralink",
+    "source": "Google News — Neural Startups",
     "summary": "A New Neurotech Startup Launches to Rival Sam Altman’s Merge Labs&nbsp;&nbsp;WIRED",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink Stock: How to Invest Before the IPO - Yahoo Finance",
+    "date": "2026-10-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxOMmd0ZGVZRzZ3OVNzelY3dlQwU1dpRHdoVW56bWRBWHhGRUYwd0RrWUl6c0NsX01SVy1LRlEtREZ4TktNeW44NVBOMnMybDlqOVFuWndLVW94NXp0OFZWSDNkNlN2ZHlUYVdUYTE2UlVEQU9lU1dZLTh0Qndtal92SzA1OXBmeGUyRUFSSTdRTHY1WllDX2c?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink Stock: How to Invest Before the IPO&nbsp;&nbsp;Yahoo Finance",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "The Sacrificial Swarm: Deceptive AI and the Trojan Horse at the Gates of the Mind - Outer Temple Chambers",
+    "date": "2026-10-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTFBnekQzdXBCSjBoWU00eHVZc1NYTUdpUldxODJOZVdockhxSE1jQzYyVVNndXAtZHRGcGw0QlpzZ213TmthdXFaN3ozM1VVbkVKQUtDaGJ3NGdLU1lualQw?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "The Sacrificial Swarm: Deceptive AI and the Trojan Horse at the Gates of the Mind&nbsp;&nbsp;Outer Temple Chambers",
+    "category": "neuroethics"
   },
   {
     "type": "external",
@@ -78,6 +114,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiaEFVX3lxTFBaZDVWbFZHdC02S1hVam15NFRWQnduQXZuME1wU21hcnZqTUpVbmtjZmNOdVlhUVUwaEY5WmV3dk5RTXg5UmUwaDIya2ZxTDNPQmJIWkppNnV5SENWQUNJTFBVWEw2a2It?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Pretraining on 50,000 Hours of Unlabeled Brain Data&nbsp;&nbsp;Neuralink",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Precision Neuroscience raises $250M for brain-computer interface work - MedTech Dive",
+    "date": "2026-09-25",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirgFBVV95cUxNQm40THpGZVFUdDZ0R283Ynp4ZUVBU0swU3hYbHh3Nk5UcTRtYm5MTWlFT0h1Q3pSd0VmNWRscjB3cFFYaFQwZ0VQUVpQMDFlR3BLQ3FXdGtIRjRzVEl3dlhJaWxEc0E5R0x3TU1IVkVvUlBIVHVIWTZSa1NZMDNQR3Nhc29yQjNieV9PMGhmNGpISVBBWlJxT09aZV9FT1pid3pMYXA4RENlUktSVnc?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Precision Neuroscience raises $250M for brain-computer interface work&nbsp;&nbsp;MedTech Dive",
     "category": "neurotechnology"
   },
   {
@@ -105,6 +150,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTFBLOXdWeEQ1NlF3MlNyVDJmSTFxdHdxbkRzRkV1dFdVUlBYcThRbkgwQU15MExOLThCbm1PTG5NdlpCQ3o4ekc4cFhiVC16UWpKVjJr?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Post-2000s Tsinghua doctoral student launches a \"neural interface\" startup: turning human muscle reactions into tokens&nbsp;&nbsp;36 Kr",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Elon Musk’s Neuralink Chip Changed My Life - Macleans.ca",
+    "date": "2026-08-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxNRTh4WldQd1dzVGJjVHhEUUFtX2JURmt2ajZjNGpZWWhYLThGcnk2aHlZeTV2UmJTenZZbGJzd0xlVlVmNXFucjd1OC1zZXllaU5jWU54VXprLXJldFppSjFydWZ3UE5nYy13V2drd1c2UW9DUHU5bzFLbGVwdnA2UlJGOXVwRWFS?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk’s Neuralink Chip Changed My Life&nbsp;&nbsp;Macleans.ca",
     "category": "neurotechnology"
   },
   {
@@ -145,29 +199,11 @@
   },
   {
     "type": "external",
-    "title": "Your brain for sale? The new frontier of neural data - The Conversation",
-    "date": "2026-04-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxPdFNPU0haTVFQZXhPWkREZndLUnFqZzdZX0E1VUJkRXNaM3pWS0RMOFp3c0wzQWhKZDluc2pGSGo3dDU1NzJub0RsUUpuZkhtaF9IelpXaW01ckt4TzR5VG00SkpMWGswZFNXUHF4bFpZYTJpTW1MUHpVWndldkV4ajdob0NZX0xhdHZBWlFFVQ?oc=5",
+    "title": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology - CSIS | Center for Strategic and International Studies",
+    "date": "2025-11-04",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPanNMOEN0Yy16RElvSXJjMk4zR25qd2tGQXhDZDI2cmo0Yk5kSmZNQXJfSnhQb0tOdUJUY3BOQlc0akVlOGZ5aGpBekVWd0NNV1R6enN5Q0RVRnFKX2JhSWRuVVA2MUNkNHJOd0k4NjRLdjZtVUxkZlluWFVUNU0zN21VajFiOW9Udl9aTjhTQ1dkSEphZTAtWVR5MU5ZalQySDdJWTFB?oc=5",
     "source": "Google News — MIND Act",
-    "summary": "Your brain for sale? The new frontier of neural data&nbsp;&nbsp;The Conversation",
+    "summary": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology&nbsp;&nbsp;CSIS | Center for Strategic and International Studies",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Law, neuroscience, and authenticity by design: protecting users’ minds in the digital sphere - Frontiers",
-    "date": "2026-03-25",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikgFBVV95cUxQZUFUOVBDMW1iS2JjRlQ0cV9zaktfTkhTWlNUTHVYbWVGVGlGYlhfY3VtUGRUbXpLbjNORWloaWVYRGxjeVVWcnBJWFFzNUFGd3JrWi1HWHFZaFVhcV9xS2N0aEttUlFoX09JeEg4QmQtcWVpbWhQdDZYR1cwUTl3OE51RDF1NVBvT3ZkYlROR2JEZw?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Law, neuroscience, and authenticity by design: protecting users’ minds in the digital sphere&nbsp;&nbsp;Frontiers",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Brain-computer interface startup Science raises $230M - SiliconANGLE",
-    "date": "2026-03-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxPS0YxUk82N2IzSE16bDNnQS1Ba1hzMmZZNklwZXd0ZFJ4aThsS0xLdC1OdE1CWHMxTWUtU1U0M3EwNWd6NU1vQUxiZGhnelBJbXQ2anRZY2l1a1hsazZlakdBRE1QblVjNFpYZ1BTZDVnRm4zYmNLNHVTVVFLcGNvbmlSMFEzMGktRmJVbldQU2U2RW8?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Brain-computer interface startup Science raises $230M&nbsp;&nbsp;SiliconANGLE",
-    "category": "neurotechnology"
   }
 ]

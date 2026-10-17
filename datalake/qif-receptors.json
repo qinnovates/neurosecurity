@@ -17,7 +17,8 @@
       "NCBI Gene IDs verified against NCBI Gene database.",
       "DSM mappings are diagnostic category references for threat modeling purposes, not diagnostic claims.",
       "BCI relevance reflects signal-level and pharmacological interactions, not cognitive claims.",
-      "Confidence: HIGH = multiple verified sources, MEDIUM = single verified source, LOW = inferred."
+      "Confidence: HIGH = multiple verified sources, MEDIUM = single verified source, LOW = inferred.",
+      "dsm_conditions holds ICD-10-CM chapter F codes only; codes outside chapter F are in icd10_conditions. Each coded entry's name is the code's official ICD-10-CM FY2027 title. Header (non-billable) codes are category references and are marked kind 'category' in datalake/validation/icd10cm-fy2027-titles.json. Entries without a code are unchanged."
     ]
   },
   "receptor_families": [
@@ -69,11 +70,13 @@
         { "name": "D-cycloserine", "action": "partial agonist at glycine site" }
       ],
       "dsm_conditions": [
-        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "NMDA hypofunction hypothesis", "qualifier": "for threat modeling purposes" },
-        { "code": "F32.x", "name": "Major Depressive Disorder", "mechanism": "Ketamine (NMDA antagonist) rapid antidepressant", "qualifier": "for threat modeling purposes" },
-        { "code": "F84.0", "name": "Autism Spectrum Disorder", "mechanism": "GRIN subunit variants", "qualifier": "for threat modeling purposes" },
-        { "code": "G30.x", "name": "Alzheimer's Disease", "mechanism": "Memantine indication", "qualifier": "for threat modeling purposes" },
+        { "code": "F20", "name": "Schizophrenia", "mechanism": "NMDA hypofunction hypothesis", "qualifier": "for threat modeling purposes" },
+        { "code": "F32", "name": "Depressive episode", "mechanism": "Ketamine (NMDA antagonist) rapid antidepressant", "qualifier": "for threat modeling purposes" },
+        { "code": "F84.0", "name": "Autistic disorder", "mechanism": "GRIN subunit variants", "qualifier": "for threat modeling purposes" },
         { "name": "GRIN Disorder Encephalopathies", "mechanism": "GRIN1/2A/2B loss-of-function: DEE, intellectual disability, epilepsy", "qualifier": "for threat modeling purposes" }
+      ],
+      "icd10_conditions": [
+        { "code": "G30", "name": "Alzheimer's disease", "mechanism": "Memantine indication", "qualifier": "for threat modeling purposes" }
       ],
       "bci_relevance": "High. NMDA receptors gate synaptic plasticity underlying motor learning encoded by BCI feedback loops. Ketamine alters EEG power spectral density (increased gamma, decreased delta) in patterns measurable by BCI. Adversarial neurostimulation targeting coincidence-detection windows could theoretically disrupt LTP encoding.",
       "confidence": "HIGH"
@@ -109,10 +112,12 @@
         { "name": "Aniracetam", "action": "positive allosteric modulator (AMPAkine)", "notes": "Cognitive enhancement research" }
       ],
       "dsm_conditions": [
-        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "Reduced GluA1/GluA2 in DLPFC", "qualifier": "for threat modeling purposes" },
-        { "code": "F32.x", "name": "Major Depressive Disorder", "mechanism": "AMPA/NMDA ratio hypothesis", "qualifier": "for threat modeling purposes" },
-        { "code": "G40.x", "name": "Epilepsy", "mechanism": "Perampanel indication", "qualifier": "for threat modeling purposes" },
+        { "code": "F20", "name": "Schizophrenia", "mechanism": "Reduced GluA1/GluA2 in DLPFC", "qualifier": "for threat modeling purposes" },
+        { "code": "F32", "name": "Depressive episode", "mechanism": "AMPA/NMDA ratio hypothesis", "qualifier": "for threat modeling purposes" },
         { "name": "ALS", "mechanism": "GluA2 under-editing in motor neurons", "qualifier": "for threat modeling purposes" }
+      ],
+      "icd10_conditions": [
+        { "code": "G40", "name": "Epilepsy and recurrent seizures", "mechanism": "Perampanel indication", "qualifier": "for threat modeling purposes" }
       ],
       "bci_relevance": "Moderate-High. AMPA receptors mediate the fast depolarization component of ERPs measurable in EEG. AMPAkines have been explored to enhance BCI signal-to-noise during motor imagery tasks. Flip/flop ratio affects temporal resolution of neural coding.",
       "confidence": "HIGH"
@@ -143,10 +148,12 @@
         { "name": "Kainate", "action": "agonist", "notes": "Tool compound; neurotoxic at high doses" }
       ],
       "dsm_conditions": [
-        { "code": "G40.x", "name": "Epilepsy", "mechanism": "GluK1, GluK2 mutations — focal, generalized", "qualifier": "for threat modeling purposes" },
         { "name": "Intellectual Disability", "mechanism": "GluK2 mutations (X-linked)", "qualifier": "for threat modeling purposes" },
-        { "code": "F31.x", "name": "Bipolar Disorder", "mechanism": "GluK4/GluK5 linkage studies", "qualifier": "for threat modeling purposes" },
+        { "code": "F31", "name": "Bipolar disorder", "mechanism": "GluK4/GluK5 linkage studies", "qualifier": "for threat modeling purposes" },
         { "name": "Chronic Pain", "mechanism": "GluK1", "qualifier": "for threat modeling purposes" }
+      ],
+      "icd10_conditions": [
+        { "code": "G40", "name": "Epilepsy and recurrent seizures", "mechanism": "GluK1, GluK2 mutations — focal, generalized", "qualifier": "for threat modeling purposes" }
       ],
       "bci_relevance": "Low-moderate. Kainate receptor activation alters hippocampal theta oscillations detectable in intracranial EEG; relevant to memory BCI applications.",
       "confidence": "HIGH"
@@ -183,10 +190,11 @@
       ],
       "dsm_conditions": [
         { "name": "Fragile X Syndrome/Autism", "mechanism": "mGluR5 overactivation; Bear mGluR theory", "qualifier": "for threat modeling purposes" },
-        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "mGluR2/3 target", "qualifier": "for threat modeling purposes" },
+        { "code": "F20", "name": "Schizophrenia", "mechanism": "mGluR2/3 target", "qualifier": "for threat modeling purposes" },
         { "name": "Anxiety Disorders", "mechanism": "mGluR5, mGluR7", "qualifier": "for threat modeling purposes" },
         { "name": "Addiction/Craving", "mechanism": "mGluR5", "qualifier": "for threat modeling purposes" }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "Moderate. mGluR5 modulates synaptic plasticity at theta-burst intervals used in TMS-BCI protocols. mGluR2/3 agonism reduces signal-to-noise in glutamatergic readout.",
       "confidence": "HIGH"
     },
@@ -258,10 +266,12 @@
       "dsm_conditions": [
         { "name": "Anxiety Disorders", "mechanism": "alpha2 subunit", "qualifier": "for threat modeling purposes" },
         { "name": "Insomnia", "mechanism": "alpha1 subunit", "qualifier": "for threat modeling purposes" },
-        { "code": "G40.x", "name": "Epilepsy", "mechanism": "GABRA1/B2/G2 mutations — Dravet syndrome, GEFS+", "qualifier": "for threat modeling purposes" },
-        { "code": "F10.x", "name": "Alcohol Use Disorder", "mechanism": "Ethanol potentiation", "qualifier": "for threat modeling purposes" },
-        { "code": "F32.x", "name": "Major Depressive Disorder", "mechanism": "Allopregnanolone/brexanolone", "qualifier": "for threat modeling purposes" },
+        { "code": "F10", "name": "Alcohol related disorders", "mechanism": "Ethanol potentiation", "qualifier": "for threat modeling purposes" },
+        { "code": "F32", "name": "Depressive episode", "mechanism": "Allopregnanolone/brexanolone", "qualifier": "for threat modeling purposes" },
         { "name": "CDKL5 Deficiency Disorder", "mechanism": "Ganaxolone indication", "qualifier": "for threat modeling purposes" }
+      ],
+      "icd10_conditions": [
+        { "code": "G40", "name": "Epilepsy and recurrent seizures", "mechanism": "GABRA1/B2/G2 mutations — Dravet syndrome, GEFS+", "qualifier": "for threat modeling purposes" }
       ],
       "bci_relevance": "High. GABA-A tone sets the E/I balance measurable as EEG oscillatory power (beta, alpha bands). Benzodiazepines profoundly alter EEG signatures used by BCI decoders. Neurosteroid modulation affects sleep-stage EEG patterns used in closed-loop neurostimulation. GABA-A is primary target of most anesthetic agents that confound intraoperative neural recording.",
       "confidence": "HIGH"
@@ -292,9 +302,11 @@
       ],
       "dsm_conditions": [
         { "name": "Muscle Spasticity", "mechanism": "Intrathecal baclofen", "qualifier": "for threat modeling purposes" },
-        { "code": "F10.x", "name": "Alcohol Use Disorder", "mechanism": "GABA-B upregulation hypothesis", "qualifier": "for threat modeling purposes" },
-        { "name": "Anxiety", "mechanism": "GABA-B modulation", "qualifier": "for threat modeling purposes" },
-        { "code": "G40.x", "name": "Epilepsy", "mechanism": "GABA-B deficiency", "qualifier": "for threat modeling purposes" }
+        { "code": "F10", "name": "Alcohol related disorders", "mechanism": "GABA-B upregulation hypothesis", "qualifier": "for threat modeling purposes" },
+        { "name": "Anxiety", "mechanism": "GABA-B modulation", "qualifier": "for threat modeling purposes" }
+      ],
+      "icd10_conditions": [
+        { "code": "G40", "name": "Epilepsy and recurrent seizures", "mechanism": "GABA-B deficiency", "qualifier": "for threat modeling purposes" }
       ],
       "bci_relevance": "Moderate. Presynaptic GABA-B autoreceptors and heteroreceptors set gain on glutamatergic and GABAergic transmission; relevant to BCI calibration stability over long sessions.",
       "confidence": "HIGH"
@@ -339,10 +351,12 @@
         { "name": "alpha-Bungarotoxin", "action": "alpha7-selective antagonist", "notes": "Irreversible" }
       ],
       "dsm_conditions": [
-        { "code": "F17.x", "name": "Nicotine Use Disorder", "mechanism": "alpha4-beta2 (CHRNA4/CHRNB2)", "qualifier": "for threat modeling purposes" },
-        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "alpha7 CHRNA7 on chr 15q14 — schizophrenia susceptibility locus; reduced alpha7 in postmortem brains", "qualifier": "for threat modeling purposes" },
-        { "name": "ADHD", "mechanism": "Nicotinic modulation of attention", "qualifier": "for threat modeling purposes" },
-        { "code": "G30.x", "name": "Alzheimer's Disease", "mechanism": "Cholinergic degeneration", "qualifier": "for threat modeling purposes" }
+        { "code": "F17", "name": "Nicotine dependence", "mechanism": "alpha4-beta2 (CHRNA4/CHRNB2)", "qualifier": "for threat modeling purposes" },
+        { "code": "F20", "name": "Schizophrenia", "mechanism": "alpha7 CHRNA7 on chr 15q14 — schizophrenia susceptibility locus; reduced alpha7 in postmortem brains", "qualifier": "for threat modeling purposes" },
+        { "name": "ADHD", "mechanism": "Nicotinic modulation of attention", "qualifier": "for threat modeling purposes" }
+      ],
+      "icd10_conditions": [
+        { "code": "G30", "name": "Alzheimer's disease", "mechanism": "Cholinergic degeneration", "qualifier": "for threat modeling purposes" }
       ],
       "bci_relevance": "High. alpha7 nAChR modulates hippocampal theta/gamma coupling measurable in EEG; relevant to memory and attention BCIs. Nicotinic tone alters arousal-related EEG signatures (alpha suppression, gamma enhancement) used in closed-loop neurofeedback. Cholinergic depletion in Alzheimer's is a primary target for BCI-augmented cognitive neuroprosthetics.",
       "confidence": "HIGH"
@@ -383,9 +397,11 @@
         { "name": "Xanomeline+Trospium", "action": "M1/M4 agonist + peripheral antagonist", "notes": "FDA-approved 2024 for schizophrenia" }
       ],
       "dsm_conditions": [
-        { "code": "G30.x", "name": "Alzheimer's Disease", "mechanism": "M1 loss — primary target; CHRM1/CHRM3 reduced", "qualifier": "for threat modeling purposes" },
-        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "M4 PAM as antipsychotic strategy; xanomeline+trospium FDA-approved 2024", "qualifier": "for threat modeling purposes" },
-        { "code": "F31.x", "name": "Bipolar Disorder", "mechanism": "M2 supersensitivity hypothesis", "qualifier": "for threat modeling purposes" }
+        { "code": "F20", "name": "Schizophrenia", "mechanism": "M4 PAM as antipsychotic strategy; xanomeline+trospium FDA-approved 2024", "qualifier": "for threat modeling purposes" },
+        { "code": "F31", "name": "Bipolar disorder", "mechanism": "M2 supersensitivity hypothesis", "qualifier": "for threat modeling purposes" }
+      ],
+      "icd10_conditions": [
+        { "code": "G30", "name": "Alzheimer's disease", "mechanism": "M1 loss — primary target; CHRM1/CHRM3 reduced", "qualifier": "for threat modeling purposes" }
       ],
       "bci_relevance": "High. Muscarinic tone (particularly M1) gates cortical EEG desynchronization and arousal. Scopolamine produces EEG changes (increased theta, decreased alpha) mimicking early Alzheimer's — a confound for BCI systems relying on alpha-band motor imagery. M1 agonism is a primary target for cognitive neuroprosthetics.",
       "confidence": "HIGH"
@@ -430,12 +446,14 @@
         { "name": "Entacapone", "action": "COMT inhibitor", "notes": "Parkinson's" }
       ],
       "dsm_conditions": [
-        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "D2 hyperdopaminergia in mesolimbic; D1 hypodopaminergia in PFC", "qualifier": "for threat modeling purposes" },
-        { "code": "G20.x", "name": "Parkinson's Disease", "mechanism": "Nigrostriatal D2 loss", "qualifier": "for threat modeling purposes" },
+        { "code": "F20", "name": "Schizophrenia", "mechanism": "D2 hyperdopaminergia in mesolimbic; D1 hypodopaminergia in PFC", "qualifier": "for threat modeling purposes" },
         { "name": "ADHD", "mechanism": "Mesocortical DA; DRD4 VNTR polymorphism", "qualifier": "for threat modeling purposes" },
         { "name": "Addiction", "mechanism": "Mesolimbic D2/D3", "qualifier": "for threat modeling purposes" },
-        { "code": "F31.x", "name": "Bipolar Disorder", "mechanism": "Dopamine dysregulation", "qualifier": "for threat modeling purposes" },
+        { "code": "F31", "name": "Bipolar disorder", "mechanism": "Dopamine dysregulation", "qualifier": "for threat modeling purposes" },
         { "name": "Tourette Syndrome", "mechanism": "D2 antagonism therapeutic", "qualifier": "for threat modeling purposes" }
+      ],
+      "icd10_conditions": [
+        { "code": "G20", "name": "Parkinson's disease", "mechanism": "Nigrostriatal D2 loss", "qualifier": "for threat modeling purposes" }
       ],
       "bci_relevance": "High. Dopamine gates motor cortex excitability and reward-related learning. D2 receptor occupancy by antipsychotics reduces beta-band activity in motor cortex — major confound for motor BCI users. Dopaminergic state modulates P300 amplitude (BCI control signal) and sensorimotor mu rhythm. Closed-loop DBS of basal ganglia directly modulates dopaminergic circuits (DBS for Parkinson's).",
       "confidence": "HIGH"
@@ -490,15 +508,16 @@
         { "name": "Sumatriptan", "action": "5-HT1B/1D agonist", "notes": "Triptan; migraine" }
       ],
       "dsm_conditions": [
-        { "code": "F32.x", "name": "Major Depressive Disorder", "mechanism": "HTR1A, SLC6A4", "qualifier": "for threat modeling purposes" },
+        { "code": "F32", "name": "Depressive episode", "mechanism": "HTR1A, SLC6A4", "qualifier": "for threat modeling purposes" },
         { "name": "Anxiety Disorders", "mechanism": "5-HT1A, 5-HT2C", "qualifier": "for threat modeling purposes" },
-        { "code": "F42.x", "name": "OCD", "mechanism": "5-HT2C, SLC6A4", "qualifier": "for threat modeling purposes" },
-        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "5-HT2A — target of atypical antipsychotics", "qualifier": "for threat modeling purposes" },
+        { "code": "F42", "name": "Obsessive-compulsive disorder", "mechanism": "5-HT2C, SLC6A4", "qualifier": "for threat modeling purposes" },
+        { "code": "F20", "name": "Schizophrenia", "mechanism": "5-HT2A — target of atypical antipsychotics", "qualifier": "for threat modeling purposes" },
         { "name": "Migraine", "mechanism": "5-HT1B/1D", "qualifier": "for threat modeling purposes" },
-        { "code": "F43.1x", "name": "PTSD", "mechanism": "SSRIs; 5-HT2A involved in fear conditioning", "qualifier": "for threat modeling purposes" },
+        { "code": "F43.1", "name": "Post-traumatic stress disorder (PTSD)", "mechanism": "SSRIs; 5-HT2A involved in fear conditioning", "qualifier": "for threat modeling purposes" },
         { "name": "Eating Disorders", "mechanism": "5-HT2C", "qualifier": "for threat modeling purposes" },
         { "name": "Substance Use Disorders", "mechanism": "5-HT3", "qualifier": "for threat modeling purposes" }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "Moderate-High. 5-HT2A is the primary target of classic psychedelics (psilocybin, LSD), which produce profound broadband EEG changes (increased gamma entropy, decreased alpha power, disrupted DMN) that are now being mapped as altered BCI decoding states. SSRIs alter ERP components (P300, N200) used in BCI paradigms over weeks. 5-HT7 modulates hippocampal theta rhythm relevant to memory BCIs.",
       "confidence": "HIGH"
     },
@@ -542,11 +561,12 @@
       ],
       "dsm_conditions": [
         { "name": "ADHD", "mechanism": "alpha2A — guanfacine/clonidine; NET blockade", "qualifier": "for threat modeling purposes" },
-        { "code": "F43.1x", "name": "PTSD", "mechanism": "Prazosin alpha1 for nightmares; guanfacine alpha2A for hyperarousal", "qualifier": "for threat modeling purposes" },
+        { "code": "F43.1", "name": "Post-traumatic stress disorder (PTSD)", "mechanism": "Prazosin alpha1 for nightmares; guanfacine alpha2A for hyperarousal", "qualifier": "for threat modeling purposes" },
         { "name": "Anxiety Disorders", "mechanism": "Beta-blockers for performance anxiety; yohimbine challenge model", "qualifier": "for threat modeling purposes" },
-        { "code": "F32.x", "name": "Major Depressive Disorder", "mechanism": "NE component", "qualifier": "for threat modeling purposes" },
+        { "code": "F32", "name": "Depressive episode", "mechanism": "NE component", "qualifier": "for threat modeling purposes" },
         { "name": "Panic Disorder", "mechanism": "NE dysregulation", "qualifier": "for threat modeling purposes" }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "Moderate. NE (via alpha2A) modulates prefrontal cortex working memory representations; guanfacine used in ADHD BCI studies to stabilize attention signals. Beta-adrenergic activation (arousal/stress) increases EEG noise (muscle artifact, altered alpha) that degrades BCI performance. Closed-loop DBS for pain modulates NE circuits.",
       "confidence": "HIGH"
     },
@@ -591,12 +611,13 @@
         { "name": "Aticaprant", "action": "KOR antagonist", "notes": "Phase III for MDD (JNJ-67953964)" }
       ],
       "dsm_conditions": [
-        { "code": "F11.x", "name": "Opioid Use Disorder", "mechanism": "OPRM1 A118G polymorphism — altered endorphin binding", "qualifier": "for threat modeling purposes" },
-        { "code": "F32.x", "name": "Major Depressive Disorder", "mechanism": "KOR antagonism — kappa tone mediates stress-induced dysphoria", "qualifier": "for threat modeling purposes" },
-        { "code": "F50.x", "name": "Anorexia Nervosa", "mechanism": "Opioid modulation of food reward", "qualifier": "for threat modeling purposes" },
-        { "code": "F43.1x", "name": "PTSD", "mechanism": "Endorphin hypothesis", "qualifier": "for threat modeling purposes" },
+        { "code": "F11", "name": "Opioid related disorders", "mechanism": "OPRM1 A118G polymorphism — altered endorphin binding", "qualifier": "for threat modeling purposes" },
+        { "code": "F32", "name": "Depressive episode", "mechanism": "KOR antagonism — kappa tone mediates stress-induced dysphoria", "qualifier": "for threat modeling purposes" },
+        { "code": "F50", "name": "Eating disorders", "mechanism": "Opioid modulation of food reward", "qualifier": "for threat modeling purposes" },
+        { "code": "F43.1", "name": "Post-traumatic stress disorder (PTSD)", "mechanism": "Endorphin hypothesis", "qualifier": "for threat modeling purposes" },
         { "name": "Chronic Pain", "mechanism": "MOR/DOR/KOR pain pathways", "qualifier": "for threat modeling purposes" }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "Moderate. Opioid receptor activation alters consciousness and EEG state globally (mu rhythms desynchronize with opioid administration; high-dose opioids produce burst-suppression). Opioid-dependent patients using neural prosthetics represent a risk population. KOR modulation of dopaminergic tone in VTA affects reward-learning signals used in BCI training paradigms.",
       "confidence": "HIGH"
     },
@@ -638,10 +659,12 @@
       ],
       "dsm_conditions": [
         { "name": "Anxiety Disorders", "mechanism": "CB1 modulates fear extinction; anandamide tone in amygdala", "qualifier": "for threat modeling purposes" },
-        { "code": "F43.1x", "name": "PTSD", "mechanism": "FAAH inhibition reduces AEA degradation, reduces fear recall", "qualifier": "for threat modeling purposes" },
-        { "code": "F20.x", "name": "Schizophrenia Risk", "mechanism": "CNR1 genetic variants; heavy cannabis use increases risk via CB1 in developing brain", "qualifier": "for threat modeling purposes" },
-        { "code": "F12.x", "name": "Cannabis Use Disorder", "mechanism": "CB1 tolerance and dependence", "qualifier": "for threat modeling purposes" },
-        { "code": "G40.x", "name": "Epilepsy", "mechanism": "CBD/Epidiolex", "qualifier": "for threat modeling purposes" }
+        { "code": "F43.1", "name": "Post-traumatic stress disorder (PTSD)", "mechanism": "FAAH inhibition reduces AEA degradation, reduces fear recall", "qualifier": "for threat modeling purposes" },
+        { "code": "F20", "name": "Schizophrenia", "mechanism": "CNR1 genetic variants; heavy cannabis use increases risk via CB1 in developing brain", "qualifier": "for threat modeling purposes" },
+        { "code": "F12", "name": "Cannabis related disorders", "mechanism": "CB1 tolerance and dependence", "qualifier": "for threat modeling purposes" }
+      ],
+      "icd10_conditions": [
+        { "code": "G40", "name": "Epilepsy and recurrent seizures", "mechanism": "CBD/Epidiolex", "qualifier": "for threat modeling purposes" }
       ],
       "bci_relevance": "High. CB1 is the most abundant GPCR in the brain. THC/cannabis use profoundly alters EEG (increased frontal theta, reduced beta coherence), degrading BCI decoding performance. The retrograde endocannabinoid system acts as a gain control mechanism for synaptic plasticity — directly relevant to BCI training and neural adaptation. FAAH genetic variants affect anandamide tone and may influence inter-individual variability in BCI performance.",
       "confidence": "HIGH"
@@ -686,6 +709,7 @@
         { "name": "SCN2A Epilepsy/Autism", "mechanism": "SCN2A GoF/LoF", "qualifier": "for threat modeling purposes" },
         { "name": "SCN8A DEE", "mechanism": "SCN8A GoF — developmental epileptic encephalopathy", "qualifier": "for threat modeling purposes" }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "Moderate. Na+ channel dynamics determine action potential timing precision — directly constraining the temporal resolution of neural spike sorting in intracortical BCIs. SCN1A haploinsufficiency (Dravet) is increasingly managed with closed-loop neurostimulation; these patients represent an emerging BCI user population.",
       "confidence": "HIGH"
     },
@@ -728,11 +752,13 @@
         { "name": "Pregabalin", "action": "alpha2-delta modulator", "notes": "FDA-approved epilepsy, neuropathic pain, fibromyalgia" }
       ],
       "dsm_conditions": [
-        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "CACNA1C rs1006737 — strongest GWAS signal in psychiatry; also bipolar and MDD", "qualifier": "for threat modeling purposes" },
+        { "code": "F20", "name": "Schizophrenia", "mechanism": "CACNA1C rs1006737 — strongest GWAS signal in psychiatry; also bipolar and MDD", "qualifier": "for threat modeling purposes" },
         { "name": "Autism/ADHD", "mechanism": "CACNA1D variants", "qualifier": "for threat modeling purposes" },
-        { "code": "G40.x", "name": "Absence Epilepsy", "mechanism": "Cav3.1/3.2/3.3 T-type channels", "qualifier": "for threat modeling purposes" },
         { "name": "Episodic Ataxia Type 2", "mechanism": "CACNA1A", "qualifier": "for threat modeling purposes" },
         { "name": "Timothy Syndrome", "mechanism": "CACNA1C GoF — autism + QTc prolongation", "qualifier": "for threat modeling purposes" }
+      ],
+      "icd10_conditions": [
+        { "code": "G40", "name": "Epilepsy and recurrent seizures", "mechanism": "Cav3.1/3.2/3.3 T-type channels", "qualifier": "for threat modeling purposes" }
       ],
       "bci_relevance": "High. T-type Cav3 channels in thalamus generate spindle oscillations detectable in EEG — used in sleep-stage BCI applications and closed-loop memory consolidation stimulation. CACNA1C is the strongest genetic risk locus for psychiatric disorders affecting BCI user populations. L-type Cav1.2/1.3 couple neural activity to plasticity-related gene expression, directly relevant to BCI training-induced plasticity.",
       "confidence": "HIGH"
@@ -774,6 +800,7 @@
         { "name": "Autism", "mechanism": "KCNQ2/KCNMA1/KCND2 variants", "qualifier": "for threat modeling purposes" },
         { "name": "Myoclonic Epilepsy", "mechanism": "KCNC1", "qualifier": "for threat modeling purposes" }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "Moderate. Kv channels determine action potential waveform shape and firing frequency — affecting spike sorting quality in intracortical BCIs. Kv3 channels in PV+ fast-spiking interneurons are essential for the gamma oscillations (40 Hz) used in BCI paradigms. Kv7/M-current is a therapeutic target in epilepsy patients using closed-loop neurostimulation.",
       "confidence": "HIGH"
     },
@@ -811,9 +838,10 @@
       "dsm_conditions": [
         { "name": "Narcolepsy", "mechanism": "Orexin/histamine — pitolisant H3 antagonist increases histamine tone, approved treatment", "qualifier": "for threat modeling purposes" },
         { "name": "Insomnia", "mechanism": "H1 — diphenhydramine, doxepin at low doses", "qualifier": "for threat modeling purposes" },
-        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "H3 modulators as adjunctive cognition enhancers, in trials", "qualifier": "for threat modeling purposes" },
+        { "code": "F20", "name": "Schizophrenia", "mechanism": "H3 modulators as adjunctive cognition enhancers, in trials", "qualifier": "for threat modeling purposes" },
         { "name": "ADHD", "mechanism": "Histamine modulates attention circuits", "qualifier": "for threat modeling purposes" }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "Low-moderate. Histamine/H1 tone contributes to arousal state that determines EEG background oscillations (wakefulness vs. sleep). Antihistamine-induced sedation degrades BCI performance. H3 heteroreceptor modulation of multiple neurotransmitter systems makes H3 a potential BCI-adjacent target for state control.",
       "confidence": "HIGH"
     },
@@ -855,11 +883,13 @@
         { "name": "Ticagrelor", "action": "P2Y12 antagonist", "notes": "Antiplatelet" }
       ],
       "dsm_conditions": [
-        { "code": "G20.x", "name": "Parkinson's Disease", "mechanism": "A2A-D2R interaction; istradefylline approved", "qualifier": "for threat modeling purposes" },
         { "name": "Sleep Disorders", "mechanism": "A1/A2A adenosine accumulation during wakefulness — sleep pressure; caffeine blocks", "qualifier": "for threat modeling purposes" },
-        { "code": "G40.x", "name": "Epilepsy", "mechanism": "A1 endogenous anticonvulsant; A2A can be proconvulsant", "qualifier": "for threat modeling purposes" },
-        { "code": "G30.x", "name": "Alzheimer's/Neuroinflammation", "mechanism": "P2X7 in microglia activation", "qualifier": "for threat modeling purposes" },
         { "name": "Pain", "mechanism": "P2X3, P2X4", "qualifier": "for threat modeling purposes" }
+      ],
+      "icd10_conditions": [
+        { "code": "G20", "name": "Parkinson's disease", "mechanism": "A2A-D2R interaction; istradefylline approved", "qualifier": "for threat modeling purposes" },
+        { "code": "G40", "name": "Epilepsy and recurrent seizures", "mechanism": "A1 endogenous anticonvulsant; A2A can be proconvulsant", "qualifier": "for threat modeling purposes" },
+        { "code": "G30", "name": "Alzheimer's disease", "mechanism": "P2X7 in microglia activation", "qualifier": "for threat modeling purposes" }
       ],
       "bci_relevance": "Low-moderate. Adenosine accumulation during sustained cognitive effort (neural fatigue) reduces signal amplitude via A1 receptor activation — directly relevant to BCI session duration limits. Caffeine (A2A antagonism) is ubiquitously used by BCI users; its EEG effects (reduced alpha, increased beta) must be accounted for in BCI calibration.",
       "confidence": "HIGH"
@@ -896,9 +926,10 @@
       ],
       "dsm_conditions": [
         { "name": "Hyperekplexia", "mechanism": "GLRA1 mutations — startle disease; neonatal stiff baby syndrome", "qualifier": "for threat modeling purposes" },
-        { "code": "F20.x", "name": "Schizophrenia", "mechanism": "GlyT1 inhibition as adjunct to enhance NMDA function via glycine site", "qualifier": "for threat modeling purposes" },
+        { "code": "F20", "name": "Schizophrenia", "mechanism": "GlyT1 inhibition as adjunct to enhance NMDA function via glycine site", "qualifier": "for threat modeling purposes" },
         { "name": "Pain", "mechanism": "GlyR alpha3 in dorsal horn", "qualifier": "for threat modeling purposes" }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "Low. Primarily relevant to spinal/brainstem BCIs for restoring motor function in spinal cord injury, where glycinergic inhibitory circuits are disrupted.",
       "confidence": "HIGH"
     },
@@ -933,6 +964,7 @@
         { "name": "Migraine", "mechanism": "TRPM8, TRPV1", "qualifier": "for threat modeling purposes" },
         { "name": "PTSD-related Pain Comorbidity", "mechanism": "TRP-mediated nociception", "qualifier": "for threat modeling purposes" }
       ],
+      "icd10_conditions": [],
       "bci_relevance": "Low-moderate. TRPV1 in brain (hippocampus, cortex, brainstem) modulates synaptic transmission and LTP via retrograde Ca2+ signaling. Pain BCIs (closed-loop spinal cord stimulation, intracortical pain decoding) are the primary BCI application where TRP channels are directly relevant.",
       "confidence": "HIGH"
     }
