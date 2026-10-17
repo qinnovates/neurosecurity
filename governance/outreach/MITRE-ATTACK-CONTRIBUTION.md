@@ -155,7 +155,7 @@ Engage MITRE's Center for Threat-Informed Defense (CTID) to co-develop a BCI/neu
 |-------|--------|
 | Threat taxonomy | 165 techniques across 8 domains, 17 tactics (TARA v4.0) |
 | Scoring system | NISS v1.1 — CVSS v4.0 extension with 6 neural metrics |
-| STIX 2.1 feed | Machine-readable threat data ([qinnovate.com/api/stix.json](https://qinnovate.com/api/stix.json)) |
+| STIX 2.1 feed | Machine-readable threat data (hosted endpoint retired 2026-10-17; registrar file in the repository) |
 | Published research | Zenodo preprint (DOI: 10.5281/zenodo.18640105), 193 verified sources |
 | Standards engagement | FIRST.org CVSS SIG member; NISS proposed as a CVSS v4.0 extension, formal registration deliberately deferred pending independent methodological review |
 | Open source | Full framework, scoring engine, and data (Apache 2.0) |
