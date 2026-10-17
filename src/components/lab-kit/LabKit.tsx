@@ -48,7 +48,7 @@ export default function LabKit({ engineData, referenceData }: Props) {
     const model = buildModelFromIntake(defaultAnswersFor(archetype), archetype, engineData.registrarVersion);
     const report = buildThreatModelReport({ model, engineData, referenceData, generatedAt: NO_TIMESTAMP });
     const techniqueIdsOnDevice = new Set(report.riskRows.flatMap((row) => (row.source === 'catalog' && row.techniqueId !== null ? [row.techniqueId] : [])));
-    return { label: archetype.label, report, techniqueIdsOnDevice, goalCounts: countOpenRisks(report.riskRows, EMPTY_LENS, model.controlsInPlace).byGoal };
+    return { label: archetype.label, report, techniqueIdsOnDevice, goalCounts: countOpenRisks(report.riskRows, EMPTY_LENS, { model, techniques }).byGoal };
   }, [engineData, referenceData]);
   const catalogCoverage = useMemo(() => summarisePlacementCoverage(techniques, referenceData.placementRules), [techniques, referenceData]);
   const deviceCoverage = useMemo(
