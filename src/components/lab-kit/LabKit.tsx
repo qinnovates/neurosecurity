@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { buildThreatModelReport } from '@/lib/threat-model/build-report';
 import type { CatalogTechnique, EngineData } from '@/lib/threat-model/catalog-types';
 import { CATALOG_SEVERITIES } from '@/lib/threat-model/catalog-types';
-import { EVIDENCE_LEVELS, countByEvidenceLevel, evidenceLevelOf, type EvidenceLevel } from '@/lib/threat-model/evidence-levels';
+import { countByEvidence, evidenceRankOf, describeEvidence, type EvidenceLevel } from '@/lib/threat-model/evidence-levels';
 import { buildModelFromIntake, defaultAnswersFor } from '@/lib/threat-model/intake-to-model';
 import { EMPTY_LENS, countOpenRisks } from '@/lib/threat-model/lens';
 import { summarisePlacementCoverage } from '@/lib/threat-model/placement-coverage';
@@ -10,7 +10,7 @@ import type { ReferenceData } from '@/lib/threat-model/reference-data-types';
 import { THREAT_GOALS, type ThreatGoal } from '@/lib/threat-model/report-types';
 import CoverageMeter from './CoverageMeter';
 import DataTable, { type DataTableColumn } from './DataTable';
-import EvidenceMark from './EvidenceMark';
+import EvidenceMark, { EvidenceGlyph } from './EvidenceMark';
 import FilterChip from './FilterChip';
 import Panel from './Panel';
 import SeverityMark from './SeverityMark';
@@ -28,7 +28,7 @@ const KIT_GRID = { display: 'grid', gap: '0.75rem', gridTemplateColumns: 'repeat
 const CHIP_ROW = { display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' } as const;
 
 const TECHNIQUE_COLUMNS: readonly DataTableColumn<CatalogTechnique>[] = [
-  { id: 'evidence', header: 'Evidence', render: (technique) => <EvidenceMark status={technique.evidenceStatus} />, sortValue: (technique) => EVIDENCE_LEVELS.indexOf(evidenceLevelOf(technique.evidenceStatus)) },
+  { id: 'evidence', header: 'Evidence', render: (technique) => <EvidenceMark tier={technique.evidenceTier} status={technique.evidenceStatus} />, sortValue: (technique) => evidenceRankOf(technique) },
   { id: 'name', header: 'Technique', render: (technique) => technique.name, sortValue: (technique) => technique.name },
   { id: 'id', header: 'ID', render: (technique) => <span className="lab-id">{technique.id}</span>, sortValue: (technique) => technique.id },
   { id: 'tactic', header: 'Tactic', render: (technique) => <span className="lab-id">{technique.tactic}</span>, sortValue: (technique) => technique.tactic },
@@ -42,13 +42,13 @@ export default function LabKit({ engineData, referenceData }: Props) {
   const [openedTechnique, setOpenedTechnique] = useState<CatalogTechnique | null>(null);
   const { techniques } = engineData;
 
-  const evidenceCounts = useMemo(() => countByEvidenceLevel(techniques), [techniques]);
+  const evidenceCounts = useMemo(() => countByEvidence(techniques), [techniques]);
   const exampleDevice = useMemo(() => {
     const [archetype] = referenceData.archetypes;
     const model = buildModelFromIntake(defaultAnswersFor(archetype), archetype, engineData.registrarVersion);
     const report = buildThreatModelReport({ model, engineData, referenceData, generatedAt: NO_TIMESTAMP });
     const techniqueIdsOnDevice = new Set(report.riskRows.flatMap((row) => (row.source === 'catalog' && row.techniqueId !== null ? [row.techniqueId] : [])));
-    return { label: archetype.label, report, techniqueIdsOnDevice, goalCounts: countOpenRisks(report.riskRows, EMPTY_LENS, model.controlsInPlace).byGoal };
+    return { label: archetype.label, report, techniqueIdsOnDevice, goalCounts: countOpenRisks(report.riskRows, EMPTY_LENS, { model, techniques }).byGoal };
   }, [engineData, referenceData]);
   const catalogCoverage = useMemo(() => summarisePlacementCoverage(techniques, referenceData.placementRules), [techniques, referenceData]);
   const deviceCoverage = useMemo(
@@ -56,7 +56,7 @@ export default function LabKit({ engineData, referenceData }: Props) {
     [techniques, referenceData, exampleDevice],
   );
   const shownTechniques = useMemo(
-    () => (activeLevels.length === 0 ? techniques : techniques.filter((technique) => activeLevels.includes(evidenceLevelOf(technique.evidenceStatus)))),
+    () => (activeLevels.length === 0 ? techniques : techniques.filter((technique) => activeLevels.includes(describeEvidence(technique).level))),
     [techniques, activeLevels],
   );
   const toggleGoal = (goal: ThreatGoal): void => {
@@ -80,10 +80,10 @@ export default function LabKit({ engineData, referenceData }: Props) {
           <p className="lab-soft">Certainty is drawn as how solid the mark is. A status the interface does not know keeps its own word.</p>
           <dl className="lab-meter-legend">
             {evidenceCounts.map((entry) => (
-              <div key={entry.level} style={{ display: 'contents' }}>
+              <div key={entry.label} style={{ display: 'contents' }}>
                 <dt className="lab-figure">{entry.count}</dt>
                 <dd style={CHIP_ROW}>
-                  {entry.statuses.length === 0 ? <span className="lab-soft">none ({entry.level})</span> : entry.statuses.map((status) => <EvidenceMark key={status} status={status} />)}
+                  <EvidenceGlyph evidence={entry} />
                 </dd>
               </div>
             ))}
@@ -126,7 +126,7 @@ export default function LabKit({ engineData, referenceData }: Props) {
           <div style={CHIP_ROW} role="group" aria-label="Filter the table by evidence">
             {evidenceCounts.filter((entry) => entry.count > 0).map((entry) => (
               <FilterChip
-                key={entry.level} label={entry.statuses.join(', ')} count={entry.count}
+                key={entry.label} label={entry.label} count={entry.count}
                 isPressed={activeLevels.includes(entry.level)} onToggle={() => toggleLevel(entry.level)}
               />
             ))}

@@ -39,6 +39,12 @@ jobs:
       - name: Install
         run: npm ci
 
+      # The Lab's Query mode tests read the site's served KQL tables (under
+      # the lab table policy), not just the TS builder — generate it, same as
+      # the build does, so a fresh checkout matches what ships.
+      - name: Generate KQL JSON
+        run: node src/scripts/generate-kql-json.mjs
+
       # Guards the ICD-10-CM codes across datalake/*.json: no wildcards, no
       # non-chapter-F codes in DSM-named fields, every labelled code carrying
       # its official title, and the ATLAS-F40 allow-lists exact.

@@ -39,9 +39,10 @@ const CODE_FILE_PATTERN = /\.([cm]?[jt]sx?|astro)$/;
 const GLOB_SPECIAL_PATTERN = /[.+^${}()|[\]\\]/g;
 /**
  * Files in a tool page's imports that may read files or run commands at build time, each with the reason.
- * None today: no file the Lab page reaches imports a file-system or child-process module.
+ * - src/components/atlas/load-tara-chains.ts: read and validated in the page's frontmatter (src/pages/atlas/model.astro),
+ *   which runs at build time only; the Lab island receives the parsed chains as a prop and never imports the loader.
  */
-export const BUILD_TIME_FILE_ACCESS_ALLOWED = Object.freeze([]);
+export const BUILD_TIME_FILE_ACCESS_ALLOWED = Object.freeze(['src/components/atlas/load-tara-chains.ts']);
 
 /**
  * What no tool page's import graph may reach: every module that loads the

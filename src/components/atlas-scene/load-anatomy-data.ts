@@ -10,7 +10,6 @@ import registrar from '@shared/qtara-registrar.json';
 import atlas from '@shared/qif-brain-bci-atlas.json';
 import pathways from '@shared/qif-neural-pathways.json';
 import cveMapping from '@shared/cve-technique-mapping.json';
-import securityControls from '@shared/qif-security-controls.json';
 import sources from '@shared/qif-anatomy-sources.json';
 import verdicts from '@shared/qif-anatomy-verdicts.json';
 import reviewLedger from '@shared/qif-anatomy-review-ledger.json';
@@ -50,7 +49,7 @@ function toRepositoryPaths(modules: Record<string, unknown>): Record<string, unk
 
 /** Every anatomy data file, parsed and cross-checked. Throws AnatomyDataError on the first problem. */
 export function loadAnatomyData(): AnatomyData {
-  const { engineData } = buildEngineData({ registrar, atlas, cveMapping, securityControls });
+  const { engineData } = buildEngineData({ registrar, atlas, cveMapping });
   const data = parseAnatomyFiles({
     engineData,
     registrar,

@@ -16,7 +16,7 @@ import path from 'node:path';
  * To re-baseline: run `npm run build && npm run check:lab-budget`, copy the gzip figure
  * on the "code" line here, and say in the pull request which code grew and why.
  */
-export const LAB_CODE_BASELINE_GZIP_BYTES = 115_891;
+export const LAB_CODE_BASELINE_GZIP_BYTES = 173_337;
 
 /** Room for a registry entry, a capability check and a fallback before the code budget fails. */
 export const CODE_HEADROOM_GZIP_BYTES = 8_192;
@@ -27,7 +27,7 @@ export const CODE_HEADROOM_GZIP_BYTES = 8_192;
  * To re-baseline: run the same command, copy the gzip figure on the "document" line here,
  * and say in the pull request which data grew.
  */
-export const LAB_DOCUMENT_BASELINE_GZIP_BYTES = 40_724;
+export const LAB_DOCUMENT_BASELINE_GZIP_BYTES = 62_087;
 
 /** Larger than the code headroom on purpose: a data-only change should rarely need a re-baseline. */
 export const DOCUMENT_HEADROOM_GZIP_BYTES = 16_384;

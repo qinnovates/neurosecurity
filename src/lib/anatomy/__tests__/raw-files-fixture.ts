@@ -28,16 +28,18 @@ function buildTechnique(id: string, bandIds: string[]): EngineData['techniques']
   return {
     id, name: `Fixture technique ${id}`, tactic: 'QIF-N.IJ', bandIds, evidenceStatus: 'THEORETICAL', severity: 'high', mode: null, domain: null,
     coupling: null, cvssBaseVector: null, nissScore: null, nissVector: null, alias: null, relatedTechniqueIds: [], detection: null, fdaRequirementCodes: [],
+    evidenceTier: null, evidenceBasis: null, evidencePopulation: null, neuralProductCveCount: null, adjacentCveCount: null,
+    cveRecordCategories: [], evidenceDerivedBy: null, evidenceDerivedOn: null, sources: [],
   };
 }
 
 const ENGINE_DATA: EngineData = {
   registrarVersion: 'fixture',
+  tactics: [],
   techniques: [buildTechnique(TECHNIQUE_ID, ['N5', 'N7']), buildTechnique('QIF-T9002', ['N7']), buildTechnique('QIF-T9005', ['S1'])],
   regions: REGIONS.map(([id, name, bandId]) => ({ id, name, bandId, depthClass: 'unspecified' })),
   precedentCves: [],
   precedentCvesAsOf: '2026-10-09',
-  controlsByBand: {},
 };
 
 const ATLAS = {

@@ -29,9 +29,9 @@ export default class ModeErrorBoundary extends Component<Props, State> {
   render(): ReactNode {
     if (!this.state.hasFailed) return this.props.children;
     return (
-      <div className="tm-notice" role="alert">
+      <div className="lab-notice" role="alert">
         <p><strong>{this.props.modeLabel} could not be shown.</strong> Your device is still in memory and the other modes still work.</p>
-        <button type="button" className="tm-button" onClick={() => this.setState({ hasFailed: false })}>Try again</button>
+        <button type="button" className="lab-button" onClick={() => this.setState({ hasFailed: false })}>Try again</button>
       </div>
     );
   }

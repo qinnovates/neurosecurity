@@ -3,25 +3,39 @@ import type { EngineData } from './catalog-types';
 import type { ChainGenerationOptions } from './chain-types';
 import { assessCyberDevice, evaluateCompliance } from './compliance-us';
 import type { DeviceModel } from './device-model';
+import { evidenceRankOf } from './evidence-levels';
 import { DEFAULT_CHAIN_OPTIONS, generateChains } from './generate-chains';
 import { collectMatches, matchTechniques } from './match-techniques';
 import { collectPrecedentCves } from './precedent-cves';
+import type { ScopeTerm } from './lab-terms';
 import type { ReferenceData } from './reference-data-types';
 import type {
   AmbientThreat, CatalogCoverage, ElementOutcome, GoalCoverage, ThemeSummary, ThemeTechnique, ThreatGoal, ThreatModelReport,
 } from './report-types';
-import { buildRiskRegister, evidenceRank, goalOf } from './risk-register';
+import { buildRiskRegister, goalOf } from './risk-register';
+import { indexScopeTerms, summariseScope } from './scope-statement';
 
-/** Caveats printed with every report. They describe what the tool is and is not. */
+/** Caveats printed with every report, in order. They describe what the tool is and is not. One more, computed from the placement table, follows `CVES_LIMITATION`. */
+const CVES_LIMITATION = 'CVEs in other products are records about similar products. They are not findings about the modelled device.';
 export const REPORT_LIMITATIONS: readonly string[] = [
   'This is a drafting aid. It is not a compliance determination, legal advice, or a substitute for review by a qualified regulatory or security professional.',
   'TARA and NISS are proposed research frameworks. They are not peer reviewed and are not adopted by any standards body.',
   'The device presets, placement rules, entry paths, themes, STRIDE mapping, chain roles, and requirements checklist are this tool\'s own analysis. They were drafted with an AI assistant and have not yet been reviewed line by line by the author.',
   'Attack chains are generated hypotheses. A chain shows that a path exists in the model; it is not evidence that the attack has been carried out.',
-  'Precedent CVEs come from similar products. They are not findings about the modelled device.',
-  'Only catalog techniques with confirmed or demonstrated evidence have a placement decision. The rest of the catalog is not assessed.',
+  CVES_LIMITATION,
   'Techniques are placed from the answers given. Anything not described in the model is not assessed.',
 ];
+
+/** How much of the catalog the placement table decides on: techniques placed plus techniques reviewed and left outside, of the catalog's total. */
+export function describePlacementCoverage(coverage: CatalogCoverage): string {
+  const decided = coverage.totalTechniques - coverage.notReviewedTechniques;
+  return `${decided} of ${coverage.totalTechniques} catalog techniques have a placement decision. The rest of the catalog is not assessed.`;
+}
+
+/** The standing caveats with the computed coverage sentence in its place. */
+export function listLimitations(coverage: CatalogCoverage): string[] {
+  return REPORT_LIMITATIONS.flatMap((limitation) => (limitation === CVES_LIMITATION ? [limitation, describePlacementCoverage(coverage)] : [limitation]));
+}
 
 export interface ReportInputs {
   model: DeviceModel;
@@ -54,15 +68,17 @@ function summariseCatalogCoverage(engineData: EngineData, referenceData: Referen
 
 function summariseGoalCoverage(engineData: EngineData, referenceData: ReferenceData): Record<ThreatGoal, GoalCoverage> {
   const coverage: Record<ThreatGoal, GoalCoverage> = {
-    read: { placedTechniques: 0, catalogTechniques: 0 },
-    change: { placedTechniques: 0, catalogTechniques: 0 },
-    deny: { placedTechniques: 0, catalogTechniques: 0 },
+    read: { placedTechniques: 0, catalogTechniques: 0, isIncomplete: false },
+    change: { placedTechniques: 0, catalogTechniques: 0, isIncomplete: false },
+    deny: { placedTechniques: 0, catalogTechniques: 0, isIncomplete: false },
   };
+  const { placements, notPlaced } = referenceData.placementRules;
   for (const technique of engineData.techniques) {
     const goal = goalOf(technique);
     if (goal === null) continue;
     coverage[goal].catalogTechniques += 1;
-    if (technique.id in referenceData.placementRules.placements) coverage[goal].placedTechniques += 1;
+    if (technique.id in placements) coverage[goal].placedTechniques += 1;
+    else if (!(technique.id in notPlaced)) coverage[goal].isIncomplete = true;
   }
   return coverage;
 }
@@ -76,20 +92,14 @@ function listAmbientThreats(engineData: EngineData, referenceData: ReferenceData
       if (decision === undefined || decision.category === 'other_device_class') return [];
       return [{
         techniqueId: technique.id, name: technique.name, category: decision.category, reason: decision.reason,
-        goal: goalOf(technique), evidenceStatus: technique.evidenceStatus,
+        goal: goalOf(technique), evidenceStatus: technique.evidenceStatus, evidenceTier: technique.evidenceTier,
       }];
     })
-    .sort((left, right) => evidenceRank(left.evidenceStatus) - evidenceRank(right.evidenceStatus) || left.techniqueId.localeCompare(right.techniqueId));
+    .sort((left, right) => evidenceRankOf(left) - evidenceRankOf(right) || left.techniqueId.localeCompare(right.techniqueId));
 }
 
-function summariseThemes(engineData: EngineData, referenceData: ReferenceData, matchedTechniqueIds: ReadonlySet<string>): ThemeSummary[] {
-  const { placements, notPlaced } = referenceData.placementRules;
+function summariseThemes(engineData: EngineData, referenceData: ReferenceData, termByTechniqueId: ReadonlyMap<string, ScopeTerm>): ThemeSummary[] {
   const techniqueById = new Map(engineData.techniques.map((technique) => [technique.id, technique]));
-  const standingOf = (techniqueId: string): ThemeTechnique['standing'] => {
-    if (matchedTechniqueIds.has(techniqueId)) return 'in_this_model';
-    if (techniqueId in placements) return 'placed_elsewhere';
-    return techniqueId in notPlaced ? 'around_device' : 'not_reviewed';
-  };
   return referenceData.themes.map((theme): ThemeSummary => ({
     id: theme.id,
     label: theme.label,
@@ -97,7 +107,9 @@ function summariseThemes(engineData: EngineData, referenceData: ReferenceData, m
     catalogGap: theme.catalogGap,
     techniques: theme.techniqueIds.flatMap((techniqueId): ThemeTechnique[] => {
       const technique = techniqueById.get(techniqueId);
-      return technique === undefined ? [] : [{ techniqueId, name: technique.name, evidenceStatus: technique.evidenceStatus, standing: standingOf(techniqueId) }];
+      const standing = termByTechniqueId.get(techniqueId);
+      if (technique === undefined || standing === undefined) return [];
+      return [{ techniqueId, name: technique.name, evidenceStatus: technique.evidenceStatus, evidenceTier: technique.evidenceTier, standing }];
     }),
   }));
 }
@@ -107,6 +119,8 @@ export function buildThreatModelReport(inputs: ReportInputs): ThreatModelReport 
   const elementOutcomes = matchTechniques(model, engineData, referenceData.placementRules);
   const matches = collectMatches(elementOutcomes);
   const matchedTechniqueIds = new Set(matches.map((match) => match.techniqueId));
+
+  const catalogCoverage = summariseCatalogCoverage(engineData, referenceData);
 
   return {
     generatedAt,
@@ -124,10 +138,10 @@ export function buildThreatModelReport(inputs: ReportInputs): ThreatModelReport 
     cyberDeviceAssessment: assessCyberDevice(model, referenceData.compliance),
     complianceItems: evaluateCompliance(model, referenceData.compliance),
     ambientThreats: listAmbientThreats(engineData, referenceData),
-    themes: summariseThemes(engineData, referenceData, matchedTechniqueIds),
-    catalogCoverage: summariseCatalogCoverage(engineData, referenceData),
+    themes: summariseThemes(engineData, referenceData, indexScopeTerms(summariseScope(model, engineData, referenceData))),
+    catalogCoverage,
     goalCoverage: summariseGoalCoverage(engineData, referenceData),
     coverageGaps: listCoverageGaps(elementOutcomes),
-    limitations: [...REPORT_LIMITATIONS],
+    limitations: listLimitations(catalogCoverage),
   };
 }

@@ -7,7 +7,7 @@ interface Props {
   children: ReactNode;
 }
 
-/** A titled region. Flat, one hairline: the frame every part of a Lab screen sits in. */
+/** A titled region. Flat, one hairline, no shadow: the frame every part of a Lab screen sits in. */
 export default function Panel({ title, actions, children }: Props) {
   const titleId = useId();
   return (

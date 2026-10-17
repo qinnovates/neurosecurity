@@ -14,7 +14,6 @@ import registrar from '@shared/qtara-registrar.json';
 import atlas from '@shared/qif-brain-bci-atlas.json';
 import pathways from '@shared/qif-neural-pathways.json';
 import cveMapping from '@shared/cve-technique-mapping.json';
-import securityControls from '@shared/qif-security-controls.json';
 import sources from '@shared/qif-anatomy-sources.json';
 import verdicts from '@shared/qif-anatomy-verdicts.json';
 import reviewLedger from '@shared/qif-anatomy-review-ledger.json';
@@ -41,7 +40,7 @@ export const LABEL_TABLES_BY_PATH: Readonly<Record<string, unknown>> = {
 };
 
 function readRawAnatomyFiles(): RawAnatomyFiles {
-  const { engineData } = buildEngineData({ registrar, atlas, cveMapping, securityControls });
+  const { engineData } = buildEngineData({ registrar, atlas, cveMapping });
   return {
     engineData, registrar, atlas, pathways, sources, verdicts, reviewLedger, crosswalk, techniqueRegions, deviceGeometry,
     manifest,

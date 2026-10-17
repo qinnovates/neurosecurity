@@ -56,6 +56,11 @@ export interface AttackChain {
 
 interface Props {
   chain: AttackChain;
+  /**
+   * The easy / moderate / hard lane, graded by a keyword test on each step's detection text.
+   * The Lab passes false: it shows the catalog's note and does not grade it.
+   */
+  isDetectionLaneShown?: boolean;
 }
 
 const NODE_W = 140, NODE_H = 72, GAP_X = 48, PAD_X = 24, PAD_Y = 24;
@@ -125,7 +130,7 @@ function ChainEvidenceNote({ evidence }: { evidence: ChainEvidence }) {
   );
 }
 
-function MobileList({ chain }: Props) {
+function MobileList({ chain }: { chain: AttackChain }) {
   return (
     <div className="space-y-3" role="list" aria-label={`Attack chain: ${chain.chain_name}`}>
       {chain.steps.map((s) => {
@@ -152,7 +157,7 @@ function MobileList({ chain }: Props) {
   );
 }
 
-function SvgDiagram({ chain }: Props) {
+function SvgDiagram({ chain, isDetectionLaneShown }: { chain: AttackChain; isDetectionLaneShown: boolean }) {
   const [hovered, setHovered] = useState<number | null>(null);
   const [tooltip, setTooltip] = useState<{ x: number; y: number; step: ChainStep } | null>(null);
 
@@ -163,7 +168,7 @@ function SvgDiagram({ chain }: Props) {
   const totalW = PAD_X * 2 + steps.length * NODE_W + (steps.length - 1) * GAP_X;
   const nodeY = HEADER_H + PAD_Y;
   const detectY = nodeY + NODE_H + DETECT_GAP;
-  const clinicalY = detectY + DETECT_H + CLINICAL_GAP;
+  const clinicalY = (isDetectionLaneShown ? detectY + DETECT_H : nodeY + NODE_H) + CLINICAL_GAP;
   const totalH = clinicalY + (hasClinical ? CLINICAL_H : 0) + PAD_Y;
 
   const enter = useCallback((step: ChainStep, i: number) => {
@@ -291,8 +296,8 @@ function SvgDiagram({ chain }: Props) {
       })}
 
       {/* Detection timeline */}
-      <text x={PAD_X} y={detectY - 2} fill="var(--color-text-muted)" fontSize={9} fontWeight={600}>DETECTABILITY</text>
-      {steps.map((s, i) => {
+      {isDetectionLaneShown && <text x={PAD_X} y={detectY - 2} fill="var(--color-text-muted)" fontSize={9} fontWeight={600}>DETECTABILITY</text>}
+      {isDetectionLaneShown && steps.map((s, i) => {
         const x = nodeX(i);
         const level = detectLevel(s.detection_window);
         const c = DETECT_COLORS[level];
@@ -354,7 +359,7 @@ function SvgDiagram({ chain }: Props) {
 
 /* ── Main component with responsive switch ─────────────────── */
 
-export default function AttackChainViz({ chain }: Props) {
+export default function AttackChainViz({ chain, isDetectionLaneShown = true }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -381,7 +386,7 @@ export default function AttackChainViz({ chain }: Props) {
       </div>
       <p className="mb-3 text-xs text-[var(--color-text-muted)]">{chain.objective}</p>
       {chain.evidence && <ChainEvidenceNote evidence={chain.evidence} />}
-      {isMobile ? <MobileList chain={chain} /> : <SvgDiagram chain={chain} />}
+      {isMobile ? <MobileList chain={chain} /> : <SvgDiagram chain={chain} isDetectionLaneShown={isDetectionLaneShown} />}
       {!isMobile && chain.steps.some((s) => s.evidence) && (
         <div className="mt-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-surface)] p-3">
           <h4 className="mb-1 text-xs font-semibold text-[var(--color-text-primary)]">Step evidence</h4>

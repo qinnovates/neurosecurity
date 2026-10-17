@@ -6,7 +6,7 @@ import { buildExplorerCatalog, parseExplorerCatalog } from '../explorer-catalog'
 import { buildBandGroups, tallyLens } from '../region-rows';
 import { FIXTURE_IDS, buildFixtureModel, loadRealCatalog } from './explorer-fixtures';
 
-const ENGINE_DATA = { registrarVersion: '1', techniques: [], regions: [], precedentCves: [], precedentCvesAsOf: '2026-01-01', controlsByBand: {} };
+const ENGINE_DATA = { registrarVersion: '1', tactics: [], techniques: [], regions: [], precedentCves: [], precedentCvesAsOf: '2026-01-01' };
 const NO_DSM = { registrar: { techniques: [] }, pathways: { pathways: [] } };
 
 describe('explorer catalog', () => {

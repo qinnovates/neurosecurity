@@ -3,37 +3,67 @@
  * The output is a checklist with sources. It never states that a device complies.
  */
 
-import type { DeviceModel } from './device-model';
+import type { DeviceModel, ModelLink } from './device-model';
 import type { ComplianceData, ComplianceRequirement } from './reference-data-types';
-import type { ComplianceItem, CyberDeviceAssessment, RequirementApplicability } from './report-types';
+import type { ComplianceItem, CyberDeviceAssessment, CyberDeviceConnectivity, RequirementApplicability } from './report-types';
+
+/** The name of the checklist wherever it is headed: what it is, and no wider. */
+export const CHECKLIST_TITLE = 'FDA premarket cybersecurity checklist';
+
+/**
+ * Said wherever the model cannot settle the definition. The second sentence repeats the words
+ * FDA uses of its own list, which the data file quotes; a test holds the two together.
+ */
+export const NOT_DETERMINED_STATEMENT = "Not determined by this tool. FDA's list is illustrative, not exhaustive.";
+export const NOT_EVALUATED_STATEMENT = 'Not evaluated. Choose a submission type.';
 
 interface ApplicabilityDecision {
   applicability: RequirementApplicability;
   reason: string;
 }
 
+/** A link that moves data, commands or software in the model; a power-only link carries none of them. */
+function carriesModelledPayload(link: ModelLink): boolean {
+  return link.carriesNeuralData || link.carriesStimulationCommands || link.carriesSoftwareUpdates;
+}
+
+/**
+ * What the model shows, then the checklist file's own note on how link types were read onto
+ * FDA's list, word for word: the count rests on that reading, so the two are never printed apart.
+ */
+function describeConnectivity(carryingCount: number, emptyCount: number, readingNote: string | null): string {
+  const note = readingNote === null ? '' : ` ${readingNote}`;
+  if (carryingCount > 0) return `${carryingCount} link(s) use a connection type FDA lists as able to connect to the internet.${note}`;
+  const found = emptyCount > 0
+    ? `${emptyCount} link(s) use a connection type on FDA's list but carry no neural data, stimulation commands or software updates in this model.`
+    : "No link in the model uses a connection type on FDA's list as this tool reads it.";
+  return `${found}${note} ${NOT_DETERMINED_STATEMENT}`;
+}
+
 /**
  * Section 524B(c) has three prongs. This tool can only check connectivity from the
- * model; the software and vulnerability prongs are assumed true and said so.
+ * model; the software and vulnerability prongs are assumed true and said so. A model
+ * can show that the connectivity prong is met. It can never show that it is not, so
+ * the tool does not make that call.
  */
 export function assessCyberDevice(model: DeviceModel, compliance: ComplianceData): CyberDeviceAssessment {
-  const internetCapableLinkIds = model.links
-    .filter((link) => compliance.internetCapableMedia.includes(link.medium))
-    .map((link) => link.id);
-  const isCyberDevice = internetCapableLinkIds.length > 0;
-  const connectivity = isCyberDevice
-    ? `${internetCapableLinkIds.length} link(s) use a connection type FDA lists as able to connect to the internet.`
-    : 'No link in the model uses a connection type FDA lists as able to connect to the internet.';
+  const listedLinks = model.links.filter((link) => compliance.internetCapableMedia.includes(link.medium));
+  const internetCapableLinkIds = listedLinks.filter(carriesModelledPayload).map((link) => link.id);
+  const connectivity: CyberDeviceConnectivity = internetCapableLinkIds.length > 0 ? 'meets' : 'not_determined';
+  const found = describeConnectivity(internetCapableLinkIds.length, listedLinks.length - internetCapableLinkIds.length, compliance.internetCapableMediaNote);
   return {
-    isCyberDevice,
+    connectivity,
     internetCapableLinkIds,
-    explanation: `${connectivity} This tool assumes the device includes software and has characteristics that could be vulnerable to cybersecurity threats; confirm both.`,
+    explanation: `${found} This tool assumes the device includes software and has characteristics that could be vulnerable to cybersecurity threats; confirm both.`,
+    connectivityQuote: compliance.internetCapableMediaQuote,
+    checklistStatus: compliance.status,
+    checklistSources: compliance.sources,
   };
 }
 
-function decideMarketingRequirement(requirement: ComplianceRequirement, model: DeviceModel, compliance: ComplianceData, isCyberDevice: boolean): ApplicabilityDecision {
+function decideMarketingRequirement(requirement: ComplianceRequirement, model: DeviceModel, compliance: ComplianceData, connectivity: CyberDeviceConnectivity): ApplicabilityDecision {
   if (model.submissionType === 'none') {
-    return { applicability: 'not_required', reason: 'No FDA submission type is selected.' };
+    return { applicability: 'not_evaluated', reason: NOT_EVALUATED_STATEMENT };
   }
   if (!compliance.marketingSubmissionTypes.includes(model.submissionType)) {
     return {
@@ -44,9 +74,9 @@ function decideMarketingRequirement(requirement: ComplianceRequirement, model: D
   if (requirement.force === 'guidance') {
     return { applicability: 'recommended', reason: 'FDA guidance recommends this for premarket submissions. Guidance is not binding.' };
   }
-  return isCyberDevice
+  return connectivity === 'meets'
     ? { applicability: 'required', reason: 'The model meets the connectivity prong of the cyber device definition, and this is a marketing submission.' }
-    : { applicability: 'not_required', reason: 'The model has no internet-capable connection, so it does not meet the cyber device definition as modelled.' };
+    : { applicability: 'not_determined', reason: `${NOT_DETERMINED_STATEMENT} The model shows no listed connection carrying data, commands or updates, which does not settle the cyber device definition.` };
 }
 
 function toItem(requirement: ComplianceRequirement, decision: ApplicabilityDecision, compliance: ComplianceData): ComplianceItem {
@@ -66,7 +96,7 @@ function toItem(requirement: ComplianceRequirement, decision: ApplicabilityDecis
 }
 
 export function evaluateCompliance(model: DeviceModel, compliance: ComplianceData): ComplianceItem[] {
-  const { isCyberDevice } = assessCyberDevice(model, compliance);
+  const { connectivity } = assessCyberDevice(model, compliance);
   const isInvestigational = model.submissionType === 'ide';
   return compliance.requirements.flatMap((requirement): ComplianceItem[] => {
     if (requirement.appliesTo === 'ide') {
@@ -77,6 +107,6 @@ export function evaluateCompliance(model: DeviceModel, compliance: ComplianceDat
       };
       return [toItem(requirement, decision, compliance)];
     }
-    return [toItem(requirement, decideMarketingRequirement(requirement, model, compliance, isCyberDevice), compliance)];
+    return [toItem(requirement, decideMarketingRequirement(requirement, model, compliance, connectivity), compliance)];
   });
 }
