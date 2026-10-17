@@ -5,8 +5,8 @@
   "attack_patterns": {
     "QIF-T0001": "attack-pattern--65e849dd-2639-5620-bf5a-869d513904ac",
     "QIF-T0042": "attack-pattern--4e436050-6633-5cd8-a14a-ad03623a5315",
-    "QIF-T0173": "attack-pattern--b84f02b1-3b14-58a0-b469-1c949556233c",
-    "QIF-T0024-V01": "attack-pattern--26986f29-ebea-59dc-a998-b42bb3977198"
+    "QIF-T0024-V01": "attack-pattern--26986f29-ebea-59dc-a998-b42bb3977198",
+    "QIF-T0178": "attack-pattern--0ca0a7ea-e07b-5f7c-8c65-28f424e6a111"
   },
   "variant_relationships": [
     {

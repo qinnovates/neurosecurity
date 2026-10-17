@@ -14,7 +14,7 @@
         "preprint_only": 7,
         "no_metric_supported": 19
       },
-      "id_range": "QIF-T0061 to QIF-T0173",
+      "id_range": "QIF-T0061 to QIF-T0171, QIF-T0177, QIF-T0178",
       "by_status": {
         "THEORETICAL": 19,
         "CONFIRMED": 10,
@@ -1878,7 +1878,7 @@
         ]
       },
       {
-        "id": "QIF-T0172",
+        "id": "QIF-T0177",
         "attack": "Air-gap covert channel exfiltration (malware-modulated physical emanations)",
         "status": "THEORETICAL",
         "scoring_state": "unscored",
@@ -1918,7 +1918,7 @@
         ]
       },
       {
-        "id": "QIF-T0173",
+        "id": "QIF-T0178",
         "attack": "Peripheral silent-speech readout (in-ear and around-ear sensing of subtly voiced or unvoiced articulation)",
         "status": "EMERGING",
         "scoring_state": "provisional",
