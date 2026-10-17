@@ -9,9 +9,13 @@
 
 ---
 
+## Executive Summary
+
+Brain-computer interfaces are in clinical trials, in clinical use and on sale as consumer EEG headsets. A security team assessing one has no shared reference for how it could be misused or how well each possibility is evidenced. This paper proposes three open tools: QIF, an addressing scheme for where a device acts; TARA, a catalogue of 173 techniques, each labelled with its evidence; and NISS, an impact score that shows its own uncertainty. All three are proposed and unvalidated, and no standards body or outside organisation has adopted them. Use the catalogue as a checklist and read each entry's evidence label. Nine open items, listed in Section 28.3, say what would close the gaps.
+
 ## The Problem
 
-Brain-computer interfaces connect devices to the human nervous system. Implanted devices are in clinical use and in human trials, and consumer EEG headsets are on sale. The people who secure these devices, the people who know the biology, and the published research do not share a reference. Security engineers have no checkable account of what lies on the other side of the electrode. Neuroscientists have no catalogue of how a device can be turned against its user. The literature rarely makes clear what has been shown and what has only been proposed.
+A security team assessing a brain-computer interface has no shared reference for what sits on the tissue side of the electrode, how a device could be misused, or how well each possibility is evidenced. This paper proposes one. Implanted devices are in clinical use and in human trials, and consumer EEG headsets are on sale. Security engineers have no checkable account of what lies on the other side of the electrode. Neuroscientists have no catalogue of how a device can be turned against its user. The literature rarely makes clear what has been shown and what has only been proposed.
 
 ## What Qinnovate Offers
 
@@ -25,14 +29,14 @@ The datasets behind all three are open, with a device inventory of 68 companies 
 
 ## Status of This Paper
 
-> - **Working draft, not released.**
+> - **In active development, not yet a standard.** Use it today as a structured checklist of what to consider and how well each item is evidenced; it is not a certification or a clinical tool. No outside organisation has yet adopted or independently reviewed it.
 > - **Proposed and unvalidated.** QIF is a proposed framework, not a standard. It has not been independently peer-reviewed or validated in clinical deployment, and no standards body (IEEE, ISO, NIST or otherwise) or outside organisation has adopted it.
-> - **Checked so far.** AI agents with specialist briefs reviewed the framework's claims, and this version reports which held and which did not. Every DOI, arXiv identifier and regulatory record cited in Sections 20–28 was resolved through Crossref, the arXiv API or a regulator database. Company, news, legal and reference-work sources are cited by link and were not resolved that way, and Sections 24.9 and 27.8 state how far the papers themselves were read. The band check and the SDK tests pass. The route publishing gate fails on one hop of a route marked for teaching.
+> - **Checked so far.** AI-assisted review (AI agents with specialist briefs) checked the framework's claims, and this version reports which held and which did not. Every DOI, arXiv identifier and regulatory record cited in Sections 20–28 was resolved through Crossref, the arXiv API or a regulator database. Company, news, legal and reference-work sources are cited by link and were not resolved that way, and Sections 24.9 and 27.8 state how far the papers themselves were read. Automated consistency checks pass, except one route-evidence check that fails on a route marked for teaching. See Claims and Disclaimers for what "AI-assisted" means here.
 > - **Not reviewed.** **No human neuroanatomist has reviewed the anatomy, and the author's own review of Sections 20–28 and Appendix E is pending.** No patient or patient advocate has reviewed the paper, including the part written for them.
 > - **AI assistance.** Sections 20–28 and Appendix E were drafted with AI assistance on 2026-10-06 and 2026-10-07. So was this opening, which is also pending the author's review. Earlier AI use is described under Claims and Disclaimers.
-> - **Release status.** This draft describes a catalogue that is not yet the published one. The draft's catalogue (registrar 4.3: 173 techniques and 1 variant) is committed on a branch, with the hazards dataset and the inventory of 68 companies and 71 devices. The published catalogue (the repository's main branch and `/api/tara.json`) is registrar 4.0, with 176 techniques, 67 companies, 70 devices and no hazards file; its PyPI package, `qtara`, reached 0.4.0 on 2026-10-17 and is now deprecated, with no further releases planned. The draft's air-gap and silent-speech techniques were renumbered QIF-T0177 and QIF-T0178 on 2026-10-17, because QIF-T0172 and QIF-T0173 are published for different techniques; the two catalogues still record sub-techniques differently. Every count in this paper refers to the draft catalogue. The two must be reconciled before release.
+> - **Release status.** This draft describes a catalogue that has not yet been released. The draft's catalogue (173 techniques and 1 variant) is tracked in the project's version history, with the hazards dataset and the inventory of 68 companies and 71 devices. The published catalogue (`/api/tara.json`) has 176 techniques, 67 companies, 70 devices and no hazards file; its PyPI package, `qtara`, reached 0.4.0 on 2026-10-17 and is now deprecated, with no further releases planned. The draft's air-gap and silent-speech techniques were renumbered QIF-T0177 and QIF-T0178 on 2026-10-17, because QIF-T0172 and QIF-T0173 are published for different techniques; the two catalogues still record sub-techniques differently. Every count in this paper refers to the draft catalogue. The two must be reconciled before release.
 > - **How to read it.** Sections are numbered 20 to 28 because the numbering continues from v8.0. Sections 12 to 19 are in the companion document. The NISS scoring method is set out in full in Section 27.3.
-> - **How to respond.** Send corrections, evidence and reviews through [GitHub Issues](https://github.com/qinnovates/neurosecurity/issues). Section 28.7 lists what would help from each kind of reader.
+> - **How to respond.** Send corrections, evidence and reviews through [GitHub Issues](https://github.com/qinnovates/neurosecurity/issues). Section 28.7 lists what would help from each kind of reader. Tell us where an entry in your device's risk file is wrong or missing.
 
 ## Terms Used in This Paper
 
@@ -69,11 +73,11 @@ This is one researcher's proposal. No outside organisation has checked or adopte
 
 ## Key Findings
 
-Each finding sets a limit on how far a reader can rely on the framework today.
+Usable now: the catalogue as a labelled checklist of techniques to consider. Not yet usable: the routes, the unscored entries and any claim about reach into a person. Each finding below sets the limit.
 
-1. **The catalogue grew and the scored share fell.** TARA holds 173 techniques and 1 variant, up from 165. Of these, 129 are fully scored, 10 are provisional and 34 are unscored, against 139 scored in v8.0. The evidence rule tightened, and no technique was removed (Section 21).
-2. **The band numbers carry no order.** The share of pathway links joining numerically adjacent bands was no different from chance. The seven codes N1–N7 stay as addresses (Section 20).
-3. **The thalamus description was wrong.** The earlier description of the thalamus as a gate or firewall has been corrected (Section 20.3). Fourteen conclusions that rested on the analogy are marked under review. The NISS formula has no term for implant depth: all 139 scores that existed before this version reproduce from their six metric values. Whether depth reasoning influenced the choice of a metric level was not checked.
+1. **The catalogue grew and the evidence rule became stricter.** TARA holds 173 techniques and 1 variant, up from 165. Of these, 129 are fully scored, 10 are provisional and 34 are unscored, against 139 scored in v8.0. The evidence rule tightened, and no technique was removed (Section 21).
+2. **The address numbers are labels, not a ranking.** The share of pathway links joining numerically adjacent addresses was no different from chance. The seven codes N1–N7 stay as addresses (Section 20).
+3. **A central analogy was corrected.** An earlier version described the thalamus as a gate; that was wrong (Section 20.3), and design rationale that treats implant depth as protection should not rely on it. Fourteen conclusions that rested on the analogy are marked under review. The NISS formula has no term for implant depth: all 139 scores that existed before this version reproduce from their six metric values. Whether depth reasoning influenced the choice of a metric level was not checked.
 4. **Route evidence comes mostly from animals.** A source check of all 90 hops in the 17 proposed routes found 47 supported, 42 partly supported and 1 contradicted for primates. Three hops are demonstrated in humans. The routes suit tagging, listing canonical pathways and teaching, and are not yet a basis for claims about what an attack can reach in a person (Section 20.4).
 5. **Impact chains are associations, not paths.** Each of the 5,546 rows in the impact-chains dataset says that a technique and a condition code share an address, not that the technique reaches the structure. Condition codes are diagnostic category references for threat modeling, not diagnostic claims (Section 22.3).
 6. **None of the eight new techniques is fully scored.** Three carry provisional ranges, and five are unscored because their only support is a preprint. Of the 23 entries in the separate hazards dataset, one describes loss of maker support for an implant. The other 22 point to therapy and mechanism records and are not warnings about those therapies (Sections 21.5 and 21.6).
@@ -82,10 +86,15 @@ Each finding sets a limit on how far a reader can rely on the framework today.
 
 **Device makers and their security teams**
 
-- Check any internal use of the v8.0 stack against addressing version 2 (finding 2).
+- If earlier design notes used the numbered-stack model, treat its numbers as labels, not as depth or severity (finding 2).
 - Read a provisional NISS range as a bound, and do not rank techniques on unscored or provisional entries (findings 1 and 6).
 - Withdraw any design rationale that relies on a thalamic gate, or on implant depth as protection, until the statements under review are resolved (finding 3).
 - Keep the 23 hazards separate from adversarial techniques in risk files (finding 6).
+
+**Hospital and clinical security leads**
+
+- Ask each device maker what happens to an implant if the maker withdraws support (finding 6). When anyone cites a catalogue technique to you, ask for its evidence status and scoring state (findings 1 and 6).
+- Put the maker-support question in your next procurement or vendor review.
 
 **Researchers**
 
@@ -94,7 +103,7 @@ Each finding sets a limit on how far a reader can rely on the framework today.
 
 **Regulators and standards bodies**
 
-- Require evidence status and scoring state with any technique cited from the catalogue (findings 1 and 6).
+- Require evidence status and scoring state with any technique cited from the catalogue (findings 1 and 6). Review the evidence-status and scoring-state fields as a model for what a cited technique should carry.
 - Use the impact-chains dataset only as associations, never as evidence of clinical outcome or as diagnoses (finding 5).
 - Take up the governance questions the paper raises, including who sets the amplitude ceiling for cortical stimulation (Section 18, in the companion document).
 
@@ -102,6 +111,26 @@ Each finding sets a limit on how far a reader can rely on the framework today.
 
 - Ask device makers what happens to an implant if the maker withdraws support (finding 6).
 - Treat the patient-control requirements (inspect, disconnect, switch hardware) as proposals that have not been validated in clinical use.
+
+**Funders and investors**
+
+- This is a framework in active development. The nine open items in Section 28.3 are the diligence list, each with a stated closing condition.
+- Each open item in 28.3 has a closing condition; funding or time against one of them is the most direct way to move the project.
+
+---
+
+## Worked Example: a Deep Brain Stimulator, from Device to Risk Register
+
+A worked example takes one device, a subthalamic deep brain stimulator, from address to risk register with the catalogue as it stands.
+
+1. **Find the address.** The atlas places the subthalamic nucleus at N4. That says where the lead sits, with no depth, severity or traversal meaning.
+2. **Choose the device's addresses.** N4 for the target, I0 for the electrode interface, and S2 and S3 for telemetry. The last two are the engineer's judgement, because the atlas tags no device with a device-side code.
+3. **Query the catalogue.** 141 of the 173 techniques are tagged with the device's tissue location or its electronics. A match means a shared address. It does not mean the technique reaches the device.
+4. **Cut to a register.** Keeping the techniques that are fully scored and rated high leaves 14 rows, each with its evidence status and its controls. None of the 14 has a linked hazard or a mapped CVE.
+
+Step 4 leans on the NISS severity word, an open question in Section 28.3, and sets aside every unscored and provisional technique (set-aside techniques are not cleared). The full example, including how the result fits beside CVSS, ATT&CK and the medical-device standards a security team already files against, is in the companion document, [QIF-WHITEPAPER-V9-COMPANION.md](QIF-WHITEPAPER-V9-COMPANION.md).
+
+**Run these four steps on a device you assess and report where the address or the shortlist is wrong.**
 
 ## Planning Assumptions
 
@@ -113,19 +142,6 @@ These are the author's assumptions. They are not forecasts, and they carry no pr
 | 2 | The scored count will fall further when the 129 existing scores are re-examined under the strict evidence rule. | Applying the rule to 34 techniques left 24 sourced and 10 without a score. | A completed catalogue-wide pass in which all 129 scores are retained. |
 | 3 | An implant can outlast the company that built it. | Second Sight laid off most of its staff in March 2020 and announced its intention to wind down, leaving Argus II patients without support ([IEEE Spectrum, 15 February 2022](https://spectrum.ieee.org/bionic-eye-obsolete)). The company did not close. | Evidence that support obligations for implanted devices survive the bankruptcy, pivot or acquisition of the maker. |
 | 4 | Neural interfaces using AI for stimulation decisions would be classified as high-risk under the EU AI Act. | The Act classifies AI systems by risk. Under Article 6(1), an AI system that is a safety component of a medical device, or is itself one, is high-risk where the device requires third-party conformity assessment under the EU medical device regulation. Annex III also lists safety components of critical infrastructure (Regulation (EU) 2024/1689). | A classification decision or guidance placing such systems outside the high-risk tier. |
-
----
-
-## Using QIF on Monday Morning
-
-A worked example takes one device, a subthalamic deep brain stimulator, from address to risk register with the catalogue as it stands.
-
-1. **Find the address.** The atlas places the subthalamic nucleus at N4. That says where the lead sits, with no depth, severity or traversal meaning.
-2. **Choose the device's addresses.** N4 for the target, I0 for the electrode interface, and S2 and S3 for telemetry. The last two are the engineer's judgement, because the atlas tags no device with a device-side code.
-3. **Query the catalogue.** 141 of the 173 techniques carry at least one of those addresses. A match means a shared address. It does not mean the technique reaches the device.
-4. **Cut to a register.** Keeping the techniques that are fully scored and rated high leaves 14 rows, each with its evidence status and its controls. None of the 14 has a linked hazard or a mapped CVE.
-
-Step 4 leans on the NISS severity word, an open question in Section 28.3, and sets aside every unscored and provisional technique. The full example, including how the result fits beside CVSS, ATT&CK and the medical-device standards a security team already files against, is in the companion document, [QIF-WHITEPAPER-V9-COMPANION.md](QIF-WHITEPAPER-V9-COMPANION.md).
 
 ---
 
@@ -299,7 +315,7 @@ v8.0 asked who decides, who controls and who is accountable. v9.0 asks **which o
 
 ## Contents
 
-**Front matter:** The Problem · What Qinnovate Offers · Status of This Paper · Terms Used in This Paper · Mission and Vision · In Plain Language · Key Findings · Recommendations · Planning Assumptions · Using QIF on Monday Morning · Author's Note · Claims and Disclaimers · The Proposal · What Changed in v9.0
+**Front matter:** Executive Summary · The Problem · What Qinnovate Offers · Status of This Paper · Terms Used in This Paper · Mission and Vision · In Plain Language · Key Findings · Recommendations · Worked Example: a Deep Brain Stimulator, from Device to Risk Register · Planning Assumptions · Author's Note · Claims and Disclaimers · The Proposal · What Changed in v9.0
 
 - [20. The Neural Addressing Model](#20-the-neural-addressing-model)
 - [21. TARA 4.3: New Techniques, Variants and Evidence Rules](#21-tara-43-new-techniques-variants-and-evidence-rules)
@@ -664,7 +680,7 @@ We found no published study of a deliberately tampered implant in a person. The 
 | Which techniques act there? | TARA entries carry addresses | Applied: 173 techniques |
 | Which changes are not attacks? | Hazards dataset (Section 21.5) | Applied: 23 entries |
 
-The staged routes already include the three cortico-basal ganglia loops (direct, indirect and hyperdirect), which are the chains relevant to the subthalamic example in "Using QIF on Monday Morning". TARA holds one optogenetic technique, QIF-T0137 (demonstrated in animals, provisional score).
+The staged routes already include the three cortico-basal ganglia loops (direct, indirect and hyperdirect), which are the chains relevant to the subthalamic example in "Worked Example: a Deep Brain Stimulator, from Device to Risk Register". TARA holds one optogenetic technique, QIF-T0137 (demonstrated in animals, provisional score).
 
 Each new causal finding becomes a hop or raises the evidence on an existing one, from inferred to shown in rodents, in primates and in humans. A publishing gate in the check script (`--gate`) fails when a taught route has a hop that is unchecked, contradicted or has no stated human status. It does not require a hop to be demonstrated in humans, and it is not yet wired into the build. The map can be extended without changing its structure, and it is not claimed to be complete.
 
@@ -1076,7 +1092,7 @@ Each risk closes when another person reviews, tests or checks the work.
 
 ### 28.7 How to help
 
-Each request maps to an open item in 28.3. Send findings through [GitHub Issues](https://github.com/qinnovates/neurosecurity/issues). A finding that an entry is wrong is as useful as a finding that it holds.
+Each request maps to an open item in 28.3. Send findings through [GitHub Issues](https://github.com/qinnovates/neurosecurity/issues). A finding that an entry is wrong is as useful as a finding that it holds. Most requests below take under an hour; item 5 is a ten-minute test.
 
 | Who | What would help | Item |
 |---|---|---|
