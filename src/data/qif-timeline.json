@@ -7,7 +7,7 @@
     "maintainer": "Kevin Qi"
   },
   "current_stats": {
-    "as_of": "2026-10-07",
+    "as_of": "2026-10-16",
     "threat_techniques": 176,
     "bci_devices": 70,
     "brain_regions": 38,
@@ -19,9 +19,9 @@
     "physics_constants_verified": 14,
     "preprint_version": "v1.5",
     "nsp_version": "v0.5",
-    "tara_version": "v1.9",
+    "tara_version": "v1.10",
     "atlas_version": "v1.2.0",
-    "derivation_log_entries": 118,
+    "derivation_log_entries": 119,
     "field_journal_entries": 18,
     "neurowall_version": "v0.8",
     "blog_posts": 76,

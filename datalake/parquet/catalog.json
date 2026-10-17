@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-10-17T03:34:33.774668+00:00",
+    "generated": "2026-10-17T04:04:31.940159+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
@@ -55,7 +55,7 @@
         "confidence",
         "dsm_type"
       ],
-      "size_bytes": 4063,
+      "size_bytes": 4078,
       "compression": "zstd",
       "source": "datalake/parquet/technique_dsm.parquet"
     },
@@ -89,7 +89,7 @@
         "dsm_name",
         "dsm_cluster"
       ],
-      "size_bytes": 15277,
+      "size_bytes": 15401,
       "compression": "zstd",
       "source": "datalake/parquet/impact_chains.parquet"
     },
@@ -210,7 +210,7 @@
     },
     "neural_pathways": {
       "rows": 46,
-      "columns": 15,
+      "columns": 17,
       "column_names": [
         "id",
         "name",
@@ -224,17 +224,19 @@
         "bci_relevance",
         "dsm_conditions",
         "dsm_names",
+        "icd10_conditions",
+        "icd10_names",
         "disruption_effects",
         "therapeutic_applications",
         "confidence"
       ],
-      "size_bytes": 18096,
+      "size_bytes": 18787,
       "compression": "zstd",
       "source": "datalake/parquet/neural_pathways.parquet"
     },
     "neurotransmitters": {
       "rows": 18,
-      "columns": 15,
+      "columns": 16,
       "column_names": [
         "id",
         "name",
@@ -249,10 +251,11 @@
         "primary_qif_bands",
         "primary_regions",
         "dsm_conditions",
+        "icd10_conditions",
         "bci_relevance",
         "confidence"
       ],
-      "size_bytes": 36533,
+      "size_bytes": 37120,
       "compression": "zstd",
       "source": "datalake/parquet/neurotransmitters.parquet"
     },
@@ -269,7 +272,7 @@
         "persistent_personality",
         "non_diagnostic"
       ],
-      "size_bytes": 22861,
+      "size_bytes": 24082,
       "compression": "zstd",
       "source": "datalake/parquet/dsm_clusters.parquet"
     },
@@ -290,7 +293,7 @@
         "niss_affected",
         "confidence"
       ],
-      "size_bytes": 12556,
+      "size_bytes": 12561,
       "compression": "zstd",
       "source": "datalake/parquet/neurological_conditions.parquet"
     },
@@ -320,7 +323,7 @@
     },
     "cranial_nerves": {
       "rows": 12,
-      "columns": 19,
+      "columns": 20,
       "column_names": [
         "id",
         "number",
@@ -339,16 +342,17 @@
         "bci_devices",
         "bci_notes",
         "dsm_conditions",
+        "icd10_conditions",
         "dsm_source",
         "clinical_notes"
       ],
-      "size_bytes": 25266,
+      "size_bytes": 26040,
       "compression": "zstd",
       "source": "datalake/parquet/cranial_nerves.parquet"
     },
     "neuroendocrine": {
       "rows": 7,
-      "columns": 20,
+      "columns": 21,
       "column_names": [
         "id",
         "name",
@@ -365,13 +369,14 @@
         "qif_notes",
         "functions",
         "dsm_conditions",
+        "icd10_conditions",
         "epigenetic_notes",
         "bci_relevance",
         "bci_notes",
         "disruption_effects",
         "confidence"
       ],
-      "size_bytes": 33728,
+      "size_bytes": 33939,
       "compression": "zstd",
       "source": "datalake/parquet/neuroendocrine.parquet"
     },
@@ -418,7 +423,7 @@
     },
     "receptors": {
       "rows": 20,
-      "columns": 19,
+      "columns": 20,
       "column_names": [
         "id",
         "name",
@@ -437,10 +442,11 @@
         "function",
         "pharmacological_agents",
         "dsm_conditions",
+        "icd10_conditions",
         "bci_relevance",
         "confidence"
       ],
-      "size_bytes": 43341,
+      "size_bytes": 43624,
       "compression": "zstd",
       "source": "datalake/parquet/receptors.parquet"
     },
@@ -501,7 +507,7 @@
         "neuroethics",
         "neurosecurity"
       ],
-      "size_bytes": 7070,
+      "size_bytes": 7496,
       "compression": "zstd",
       "source": "datalake/parquet/guardrails.parquet"
     },
@@ -705,7 +711,7 @@
         "current_stats",
         "milestones"
       ],
-      "size_bytes": 13248,
+      "size_bytes": 13253,
       "compression": "zstd",
       "source": "datalake/parquet/timeline.parquet"
     }

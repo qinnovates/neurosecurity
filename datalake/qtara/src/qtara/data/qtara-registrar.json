@@ -5,7 +5,7 @@
   "statistics": {
     "generator": "src/scripts/generate-registrar-statistics.mjs",
     "generated": "2026-10-17",
-    "content_sha256": "caf888a07c8bdbdd75429dc4f47deec8f60b82b9e8d9e68ae524f99905ecf4f1",
+    "content_sha256": "ffa03f499de596b97b4731da8cf895a0b7b0ca6ab426790a0ec72f4b6b3c244c",
     "total_techniques": 176,
     "total_tactics": 17,
     "total_domains": 8,
@@ -76,7 +76,7 @@
       "techniques_without_cvss": 73
     },
     "tara": {
-      "version": "1.9",
+      "version": "1.10",
       "enriched_techniques": 176,
       "dual_use_breakdown": {
         "confirmed": 102,
@@ -87,7 +87,7 @@
       "techniques_with_clinical_analog": 130,
       "techniques_silicon_only": 44,
       "dsm5": {
-        "version": "1.0",
+        "version": "1.1",
         "techniques_with_dsm5_block": 149,
         "techniques_with_dsm5": 76,
         "unique_dsm_codes": 28,
@@ -385,6 +385,22 @@
         "QIF-T0168's controls are device-side (IMU access policy); the remaining 8 are data-governance or MLOps controls",
         "The framework remains proposed and unvalidated; no causal or diagnostic claim about neural data is made by any entry"
       ]
+    },
+    {
+      "version": "1.10",
+      "date": "2026-10-16",
+      "title": "ICD-10-CM Code Titles and NISS-DSM Bridge Retirement",
+      "summary": "Retired dsm5_spec.niss_dsm_bridge and the wording 'NISS metrics predict diagnostic clusters': NISS scores technique impact (BI, CR, CD, CV, RV, NP), and DSM-5-TR names are category references for threat modeling, not diagnostic claims. Every tara.dsm5 and tara.icd10 entry now carries its code's official ICD-10-CM FY2027 title, and two swapped language-disorder codes were corrected.",
+      "added": [],
+      "removed": [
+        "dsm5_spec.niss_dsm_bridge - per-metric NISS-to-DSM-chapter table; its only reader was the /api/qif.json pass-through of dsm5_spec"
+      ],
+      "changed": [
+        "dsm5_spec.version 1.1: description and positioning reworded; cluster_note records that tara.dsm5.cluster used a NISS bonus",
+        "722 tara.dsm5 / tara.icd10 entries retitled to the official ICD-10-CM FY2027 title",
+        "code corrected: F80.1 -> F80.2",
+        "code corrected: F80.2 -> F80.1"
+      ]
     }
   ],
   "tactics": [
@@ -679,7 +695,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
@@ -689,14 +705,14 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "probable"
             }
           ],
@@ -878,7 +894,7 @@
           "primary": [
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "established"
             },
             {
@@ -888,37 +904,37 @@
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             }
           ],
@@ -935,22 +951,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -960,12 +976,12 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
@@ -1156,7 +1172,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
@@ -1166,14 +1182,14 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "probable"
             }
           ],
@@ -1355,7 +1371,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             }
           ],
@@ -1525,7 +1541,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
@@ -1535,14 +1551,14 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "probable"
             }
           ],
@@ -1713,7 +1729,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
@@ -1723,14 +1739,14 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "probable"
             }
           ],
@@ -2082,47 +2098,47 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             }
           ],
@@ -2134,22 +2150,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -2164,7 +2180,7 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
@@ -2370,59 +2386,59 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             },
             {
@@ -2432,7 +2448,7 @@
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -2442,7 +2458,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -2452,12 +2468,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -2475,7 +2491,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -2665,59 +2681,59 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             },
             {
@@ -2727,7 +2743,7 @@
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -2737,7 +2753,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -2747,12 +2763,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -2770,7 +2786,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -2957,59 +2973,59 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             },
             {
@@ -3019,7 +3035,7 @@
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -3029,7 +3045,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -3047,7 +3063,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -3232,34 +3248,34 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F41.0",
-              "name": "Panic Disorder",
+              "name": "Panic disorder [episodic paroxysmal anxiety]",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
@@ -3274,22 +3290,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -3307,7 +3323,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -3484,59 +3500,59 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             },
             {
@@ -3546,7 +3562,7 @@
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -3556,7 +3572,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -3574,7 +3590,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -3769,12 +3785,12 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             },
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "established"
             },
             {
@@ -3784,54 +3800,54 @@
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F41.0",
-              "name": "Panic Disorder",
+              "name": "Panic disorder [episodic paroxysmal anxiety]",
               "confidence": "probable"
             },
             {
@@ -3846,32 +3862,32 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -3889,7 +3905,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -4073,7 +4089,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             }
           ],
@@ -5200,22 +5216,22 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -5227,22 +5243,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -5437,59 +5453,59 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
@@ -5499,7 +5515,7 @@
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -5509,7 +5525,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -5519,12 +5535,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -5880,12 +5896,12 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "established"
             },
             {
@@ -5895,54 +5911,54 @@
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F41.0",
-              "name": "Panic Disorder",
+              "name": "Panic disorder [episodic paroxysmal anxiety]",
               "confidence": "probable"
             },
             {
@@ -5957,17 +5973,17 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -5977,17 +5993,17 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -6005,7 +6021,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -6190,64 +6206,64 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             },
             {
@@ -6257,7 +6273,7 @@
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -6267,7 +6283,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -6277,12 +6293,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -6300,7 +6316,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -6485,64 +6501,64 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             },
             {
@@ -6552,7 +6568,7 @@
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -6562,7 +6578,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -6572,12 +6588,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -6595,7 +6611,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -6776,7 +6792,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             }
           ],
@@ -6962,64 +6978,64 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             },
             {
@@ -7029,7 +7045,7 @@
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -7039,7 +7055,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -7049,12 +7065,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -7072,7 +7088,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -7264,59 +7280,59 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
@@ -7326,7 +7342,7 @@
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -7336,7 +7352,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -7346,12 +7362,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -7697,7 +7713,7 @@
           "primary": [
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "established"
             },
             {
@@ -7707,37 +7723,37 @@
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             }
           ],
@@ -7754,22 +7770,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -7779,12 +7795,12 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
@@ -7965,37 +7981,37 @@
           "primary": [
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -8007,17 +8023,17 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -8027,7 +8043,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -8037,12 +8053,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -8225,37 +8241,37 @@
           "primary": [
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -8267,17 +8283,17 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -8287,7 +8303,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -8297,12 +8313,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -8487,22 +8503,22 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -8514,22 +8530,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -8719,22 +8735,22 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -8746,22 +8762,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -8949,54 +8965,54 @@
           "primary": [
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
@@ -9006,7 +9022,7 @@
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -9016,7 +9032,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -9026,12 +9042,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -9229,37 +9245,37 @@
           "primary": [
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -9271,17 +9287,17 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -9291,7 +9307,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -9301,12 +9317,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -9486,37 +9502,37 @@
           "primary": [
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -9528,17 +9544,17 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -9548,7 +9564,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -9558,12 +9574,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -9745,22 +9761,22 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -9772,22 +9788,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -9978,37 +9994,37 @@
           "primary": [
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -10020,17 +10036,17 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -10040,7 +10056,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -10050,12 +10066,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -11172,7 +11188,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             }
           ],
@@ -11660,14 +11676,14 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "probable"
             }
           ],
@@ -11846,37 +11862,37 @@
           "primary": [
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -11888,17 +11904,17 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -11908,7 +11924,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -11918,12 +11934,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -12108,37 +12124,37 @@
           "primary": [
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -12150,17 +12166,17 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -12170,7 +12186,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -12180,12 +12196,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -12366,37 +12382,37 @@
           "primary": [
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -12408,17 +12424,17 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -12428,7 +12444,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -12438,12 +12454,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -12609,59 +12625,59 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             },
             {
@@ -12671,7 +12687,7 @@
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -12681,7 +12697,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -12691,12 +12707,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -12714,7 +12730,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -12899,37 +12915,37 @@
           "primary": [
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -12941,17 +12957,17 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -12961,7 +12977,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -12971,12 +12987,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -13495,22 +13511,22 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -13522,22 +13538,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -13724,37 +13740,37 @@
           "primary": [
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -13766,17 +13782,17 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -13786,7 +13802,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -13796,12 +13812,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -13981,7 +13997,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             }
           ],
@@ -14154,22 +14170,22 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -14181,22 +14197,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -14383,7 +14399,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             }
           ],
@@ -14554,22 +14570,22 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -14581,22 +14597,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -14787,54 +14803,54 @@
           "primary": [
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
@@ -14844,7 +14860,7 @@
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -14854,7 +14870,7 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -14864,12 +14880,12 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -15077,7 +15093,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
@@ -15087,12 +15103,12 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             },
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "established"
             },
             {
@@ -15102,54 +15118,54 @@
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F41.0",
-              "name": "Panic Disorder",
+              "name": "Panic disorder [episodic paroxysmal anxiety]",
               "confidence": "probable"
             },
             {
@@ -15164,32 +15180,32 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -15207,7 +15223,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -15405,7 +15421,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
@@ -15415,12 +15431,12 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             },
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "established"
             },
             {
@@ -15430,47 +15446,47 @@
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             }
           ],
@@ -15487,27 +15503,27 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "probable"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -15710,7 +15726,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
@@ -15720,12 +15736,12 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             },
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "established"
             },
             {
@@ -15735,44 +15751,44 @@
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "probable"
             },
             {
               "code": "F41.0",
-              "name": "Panic Disorder",
+              "name": "Panic disorder [episodic paroxysmal anxiety]",
               "confidence": "probable"
             },
             {
@@ -15787,17 +15803,17 @@
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "probable"
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             }
           ],
@@ -15810,7 +15826,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -16004,7 +16020,7 @@
           "primary": [
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "established"
             },
             {
@@ -16014,52 +16030,52 @@
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             },
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             }
           ],
@@ -16076,17 +16092,17 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -16096,17 +16112,17 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -16124,7 +16140,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -16316,7 +16332,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
@@ -16326,12 +16342,12 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             },
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "established"
             },
             {
@@ -16341,29 +16357,29 @@
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             }
           ],
           "secondary": [
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "probable"
             },
             {
               "code": "F41.0",
-              "name": "Panic Disorder",
+              "name": "Panic disorder [episodic paroxysmal anxiety]",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
@@ -16373,7 +16389,7 @@
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "probable"
             },
             {
@@ -16383,17 +16399,17 @@
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "probable"
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             }
           ],
@@ -16406,7 +16422,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -16591,7 +16607,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             }
           ],
@@ -16968,7 +16984,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
@@ -16978,12 +16994,12 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             },
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "established"
             },
             {
@@ -16995,17 +17011,17 @@
           "secondary": [
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "probable"
             },
             {
               "code": "F41.0",
-              "name": "Panic Disorder",
+              "name": "Panic disorder [episodic paroxysmal anxiety]",
               "confidence": "probable"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
@@ -17015,12 +17031,12 @@
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "probable"
             },
             {
@@ -17030,7 +17046,7 @@
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "probable"
             }
           ],
@@ -17043,7 +17059,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -17251,7 +17267,7 @@
           "primary": [
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "established"
             },
             {
@@ -17261,47 +17277,47 @@
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F44",
-              "name": "Dissociative Disorders",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F10",
-              "name": "Alcohol-related disorders (F10)",
+              "name": "Alcohol related disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             },
             {
               "code": "F95",
-              "name": "Tic Disorders",
+              "name": "Tic disorder",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             },
             {
               "code": "F43.10",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder, unspecified",
               "confidence": "established"
             }
           ],
@@ -17318,17 +17334,17 @@
             },
             {
               "code": "F50",
-              "name": "Eating Disorders",
+              "name": "Eating disorders",
               "confidence": "established"
             },
             {
               "code": "F52",
-              "name": "Sexual Dysfunctions",
+              "name": "Sexual dysfunction not due to a substance or known physiological condition",
               "confidence": "probable"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "established"
             },
             {
@@ -17338,17 +17354,17 @@
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
@@ -17366,7 +17382,7 @@
           "primary": [
             {
               "code": "G47",
-              "name": "Sleep-Wake Disorders",
+              "name": "Sleep disorders",
               "confidence": "established"
             }
           ],
@@ -19428,7 +19444,7 @@
           "primary": [
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "established"
             },
             {
@@ -19438,22 +19454,22 @@
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -19465,7 +19481,7 @@
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "probable"
             },
             {
@@ -19475,22 +19491,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -20234,34 +20250,34 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "probable"
             },
             {
@@ -20271,22 +20287,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -20890,22 +20906,22 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -20917,22 +20933,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -21511,7 +21527,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
@@ -21521,34 +21537,34 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "probable"
             },
             {
@@ -21558,22 +21574,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -21970,22 +21986,22 @@
           "primary": [
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
@@ -21997,22 +22013,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -22425,7 +22441,7 @@
           "primary": [
             {
               "code": "F43.2",
-              "name": "Adjustment Disorder",
+              "name": "Adjustment disorders",
               "confidence": "established"
             },
             {
@@ -22435,34 +22451,34 @@
             },
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             },
             {
               "code": "F20",
-              "name": "Schizophrenia Spectrum",
+              "name": "Schizophrenia",
               "confidence": "established"
             },
             {
               "code": "F32",
-              "name": "Major Depressive Disorder",
+              "name": "Depressive episode",
               "confidence": "established"
             },
             {
               "code": "F90",
-              "name": "ADHD",
+              "name": "Attention-deficit hyperactivity disorders",
               "confidence": "established"
             },
             {
               "code": "F42",
-              "name": "OCD",
+              "name": "Obsessive-compulsive disorder",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F82",
-              "name": "Developmental Coordination Disorder",
+              "name": "Specific developmental disorder of motor function",
               "confidence": "probable"
             },
             {
@@ -22472,22 +22488,22 @@
             },
             {
               "code": "F43",
-              "name": "PTSD / Trauma",
+              "name": "Reaction to severe stress, and adjustment disorders",
               "confidence": "established"
             },
             {
               "code": "F80",
-              "name": "Communication Disorders",
+              "name": "Specific developmental disorders of speech and language",
               "confidence": "established"
             },
             {
               "code": "F60",
-              "name": "Personality Disorders",
+              "name": "Specific personality disorders",
               "confidence": "probable"
             },
             {
               "code": "F63",
-              "name": "Impulse-Control Disorders",
+              "name": "Impulse disorders",
               "confidence": "probable"
             },
             {
@@ -23285,19 +23301,19 @@
           "primary": [
             {
               "code": "F44",
-              "name": "Conversion Disorder (functional neurological)",
+              "name": "Dissociative and conversion disorders",
               "confidence": "probable"
             }
           ],
           "secondary": [
             {
               "code": "F41",
-              "name": "Anxiety Disorders",
+              "name": "Other anxiety disorders",
               "confidence": "probable"
             },
             {
               "code": "F43.1",
-              "name": "PTSD",
+              "name": "Post-traumatic stress disorder (PTSD)",
               "confidence": "theoretical"
             }
           ],
@@ -23310,7 +23326,7 @@
           "primary": [
             {
               "code": "G40.409",
-              "name": "Other generalized epilepsy, not intractable, without status epilepticus",
+              "name": "Other generalized epilepsy and epileptic syndromes, not intractable, without status epilepticus",
               "confidence": "established"
             }
           ],
@@ -24400,7 +24416,7 @@
           "secondary": [
             {
               "code": "F45.8",
-              "name": "Other Somatoform Disorders",
+              "name": "Other somatoform disorders",
               "confidence": "probable"
             }
           ],
@@ -24571,12 +24587,12 @@
           "secondary": [
             {
               "code": "F41.0",
-              "name": "Panic Disorder",
+              "name": "Panic disorder [episodic paroxysmal anxiety]",
               "confidence": "probable"
             },
             {
               "code": "F40.01",
-              "name": "Agoraphobia",
+              "name": "Agoraphobia with panic disorder",
               "confidence": "probable"
             }
           ],
@@ -24762,7 +24778,7 @@
           "secondary": [
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "probable"
             }
           ],
@@ -24941,7 +24957,7 @@
           "secondary": [
             {
               "code": "F41.0",
-              "name": "Panic Disorder",
+              "name": "Panic disorder [episodic paroxysmal anxiety]",
               "confidence": "probable"
             }
           ],
@@ -25124,12 +25140,12 @@
           "secondary": [
             {
               "code": "F41.0",
-              "name": "Panic Disorder",
+              "name": "Panic disorder [episodic paroxysmal anxiety]",
               "confidence": "established"
             },
             {
               "code": "F43.0",
-              "name": "Acute Stress Reaction",
+              "name": "Acute stress reaction",
               "confidence": "probable"
             }
           ],
@@ -25142,7 +25158,7 @@
           "primary": [
             {
               "code": "H81.03",
-              "name": "Meniere's disease, bilateral (iatrogenic analog)",
+              "name": "Meniere's disease, bilateral",
               "confidence": "established"
             },
             {
@@ -25317,7 +25333,7 @@
           "secondary": [
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "probable"
             }
           ],
@@ -25502,12 +25518,12 @@
           "primary": [
             {
               "code": "F32.2",
-              "name": "Major Depressive Episode, Severe (anhedonia subtype)",
+              "name": "Major depressive disorder, single episode, severe without psychotic features",
               "confidence": "established"
             },
             {
               "code": "F48.1",
-              "name": "Depersonalization-Derealization Disorder",
+              "name": "Depersonalization-derealization syndrome",
               "confidence": "probable"
             }
           ],
@@ -25676,14 +25692,14 @@
           "primary": [
             {
               "code": "F06.8",
-              "name": "Other specified mental disorder due to known physiological condition (memory)",
+              "name": "Other specified mental disorders due to known physiological condition",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "probable"
             }
           ],
@@ -25862,20 +25878,20 @@
         "dsm5": {
           "primary": [
             {
-              "code": "F80.2",
-              "name": "Expressive Language Disorder",
+              "code": "F80.1",
+              "name": "Expressive language disorder",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F32.1",
-              "name": "Major Depressive Episode, Moderate",
+              "name": "Major depressive disorder, single episode, moderate",
               "confidence": "probable"
             },
             {
               "code": "F40.10",
-              "name": "Social Phobia",
+              "name": "Social phobia, unspecified",
               "confidence": "probable"
             }
           ],
@@ -25888,7 +25904,7 @@
           "primary": [
             {
               "code": "R47.0",
-              "name": "Dysphasia and Aphasia",
+              "name": "Dysphasia and aphasia",
               "confidence": "established"
             }
           ],
@@ -26051,19 +26067,19 @@
           "primary": [
             {
               "code": "F34.1",
-              "name": "Persistent Depressive Disorder (Dysthymia)",
+              "name": "Dysthymic disorder",
               "confidence": "established"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F32.0",
-              "name": "Major Depressive Episode, Mild",
+              "name": "Major depressive disorder, single episode, mild",
               "confidence": "probable"
             }
           ],
@@ -26231,19 +26247,19 @@
           "primary": [
             {
               "code": "F06.7",
-              "name": "Mild Neurocognitive Disorder due to another medical condition",
+              "name": "Mild neurocognitive disorder due to known physiological condition",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F32.1",
-              "name": "Major Depressive Episode, Moderate",
+              "name": "Major depressive disorder, single episode, moderate",
               "confidence": "probable"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "probable"
             }
           ],
@@ -26256,7 +26272,7 @@
           "primary": [
             {
               "code": "R41.89",
-              "name": "Other symptoms involving cognitive functions and awareness",
+              "name": "Other symptoms and signs involving cognitive functions and awareness",
               "confidence": "established"
             }
           ],
@@ -26423,7 +26439,7 @@
           "secondary": [
             {
               "code": "F32.0",
-              "name": "Major Depressive Episode, Mild",
+              "name": "Major depressive disorder, single episode, mild",
               "confidence": "probable"
             }
           ],
@@ -26448,7 +26464,7 @@
           "secondary": [
             {
               "code": "R41.89",
-              "name": "Other symptoms involving cognitive functions and awareness",
+              "name": "Other symptoms and signs involving cognitive functions and awareness",
               "confidence": "probable"
             }
           ],
@@ -26607,12 +26623,12 @@
           "secondary": [
             {
               "code": "F06.8",
-              "name": "Other specified mental disorder due to known physiological condition",
+              "name": "Other specified mental disorders due to known physiological condition",
               "confidence": "established"
             },
             {
               "code": "F41.0",
-              "name": "Panic Disorder",
+              "name": "Panic disorder [episodic paroxysmal anxiety]",
               "confidence": "probable"
             }
           ],
@@ -26625,7 +26641,7 @@
           "primary": [
             {
               "code": "G40.209",
-              "name": "Localization-related epilepsy, not intractable, without status epilepticus",
+              "name": "Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures, not intractable, without status epilepticus",
               "confidence": "established"
             }
           ],
@@ -26790,14 +26806,14 @@
           "primary": [
             {
               "code": "F44.4",
-              "name": "Conversion Disorder (Functional motor symptom)",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F32.1",
-              "name": "Major Depressive Episode, Moderate",
+              "name": "Major depressive disorder, single episode, moderate",
               "confidence": "probable"
             }
           ],
@@ -26966,24 +26982,24 @@
           "primary": [
             {
               "code": "F44.0",
-              "name": "Dissociative Amnesia",
+              "name": "Dissociative amnesia",
               "confidence": "established"
             },
             {
               "code": "F48.1",
-              "name": "Depersonalization-Derealization Disorder",
+              "name": "Depersonalization-derealization syndrome",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F44.81",
-              "name": "Dissociative Identity Disorder",
+              "name": "Dissociative identity disorder",
               "confidence": "probable"
             },
             {
               "code": "F43.1",
-              "name": "Post-Traumatic Stress Disorder",
+              "name": "Post-traumatic stress disorder (PTSD)",
               "confidence": "probable"
             }
           ],
@@ -27144,7 +27160,7 @@
           "secondary": [
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder (surveillance awareness)",
+              "name": "Generalized anxiety disorder",
               "confidence": "probable"
             }
           ],
@@ -27457,24 +27473,24 @@
           "primary": [
             {
               "code": "F41.0",
-              "name": "Panic Disorder",
+              "name": "Panic disorder [episodic paroxysmal anxiety]",
               "confidence": "established"
             },
             {
               "code": "F43.0",
-              "name": "Acute Stress Reaction",
+              "name": "Acute stress reaction",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F43.1",
-              "name": "Post-Traumatic Stress Disorder",
+              "name": "Post-traumatic stress disorder (PTSD)",
               "confidence": "probable"
             },
             {
               "code": "F40.2",
-              "name": "Specific Phobias",
+              "name": "Specific (isolated) phobias",
               "confidence": "probable"
             }
           ],
@@ -27638,19 +27654,19 @@
           "primary": [
             {
               "code": "F32.2",
-              "name": "Major Depressive Episode, Severe (anhedonia)",
+              "name": "Major depressive disorder, single episode, severe without psychotic features",
               "confidence": "established"
             },
             {
               "code": "F34.1",
-              "name": "Persistent Depressive Disorder (Dysthymia)",
+              "name": "Dysthymic disorder",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F48.1",
-              "name": "Depersonalization-Derealization Disorder",
+              "name": "Depersonalization-derealization syndrome",
               "confidence": "probable"
             }
           ],
@@ -27807,24 +27823,24 @@
           "primary": [
             {
               "code": "F43.0",
-              "name": "Acute Stress Reaction",
+              "name": "Acute stress reaction",
               "confidence": "established"
             },
             {
               "code": "F60.3",
-              "name": "Borderline Personality Disorder (affect instability)",
+              "name": "Borderline personality disorder",
               "confidence": "probable"
             }
           ],
           "secondary": [
             {
               "code": "F44.2",
-              "name": "Dissociative Stupor",
+              "name": "Dissociative stupor",
               "confidence": "probable"
             },
             {
               "code": "F43.1",
-              "name": "Post-Traumatic Stress Disorder",
+              "name": "Post-traumatic stress disorder (PTSD)",
               "confidence": "probable"
             }
           ],
@@ -27986,19 +28002,19 @@
           "primary": [
             {
               "code": "F60.2",
-              "name": "Antisocial Personality Disorder (acquired empathy deficit)",
+              "name": "Antisocial personality disorder",
               "confidence": "probable"
             },
             {
               "code": "F94.1",
-              "name": "Reactive Attachment Disorder",
+              "name": "Reactive attachment disorder of childhood",
               "confidence": "probable"
             }
           ],
           "secondary": [
             {
               "code": "F60.3",
-              "name": "Borderline Personality Disorder",
+              "name": "Borderline personality disorder",
               "confidence": "probable"
             }
           ],
@@ -28162,24 +28178,24 @@
           "primary": [
             {
               "code": "F44.4",
-              "name": "Conversion Disorder (speech symptom)",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "established"
             },
             {
               "code": "F95.1",
-              "name": "Chronic Vocal Tic Disorder",
+              "name": "Chronic motor or vocal tic disorder",
               "confidence": "probable"
             }
           ],
           "secondary": [
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "probable"
             },
             {
               "code": "F40.10",
-              "name": "Social Phobia",
+              "name": "Social phobia, unspecified",
               "confidence": "probable"
             }
           ],
@@ -28340,20 +28356,20 @@
         "dsm5": {
           "primary": [
             {
-              "code": "F80.1",
-              "name": "Receptive Language Disorder",
+              "code": "F80.2",
+              "name": "Mixed receptive-expressive language disorder",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "probable"
             },
             {
               "code": "F32.0",
-              "name": "Major Depressive Episode, Mild",
+              "name": "Major depressive disorder, single episode, mild",
               "confidence": "probable"
             }
           ],
@@ -28366,7 +28382,7 @@
           "primary": [
             {
               "code": "R47.0",
-              "name": "Dysphasia and Aphasia (receptive)",
+              "name": "Dysphasia and aphasia",
               "confidence": "established"
             }
           ],
@@ -28524,7 +28540,7 @@
           "secondary": [
             {
               "code": "F41.0",
-              "name": "Panic Disorder",
+              "name": "Panic disorder [episodic paroxysmal anxiety]",
               "confidence": "probable"
             }
           ],
@@ -28537,7 +28553,7 @@
           "primary": [
             {
               "code": "G40.409",
-              "name": "Other generalized epilepsy, not intractable, without status epilepticus",
+              "name": "Other generalized epilepsy and epileptic syndromes, not intractable, without status epilepticus",
               "confidence": "established"
             },
             {
@@ -28709,7 +28725,7 @@
           "secondary": [
             {
               "code": "F43.0",
-              "name": "Acute Stress Reaction",
+              "name": "Acute stress reaction",
               "confidence": "probable"
             }
           ],
@@ -28722,7 +28738,7 @@
           "primary": [
             {
               "code": "H93.13",
-              "name": "Tinnitus, bilateral (iatrogenic)",
+              "name": "Tinnitus, bilateral",
               "confidence": "established"
             },
             {
@@ -28734,7 +28750,7 @@
           "secondary": [
             {
               "code": "H81.399",
-              "name": "Other peripheral vertigo, unspecified ear (current spread)",
+              "name": "Other peripheral vertigo, unspecified ear",
               "confidence": "probable"
             }
           ],
@@ -28906,24 +28922,24 @@
           "primary": [
             {
               "code": "F06.8",
-              "name": "Other specified mental disorder due to known physiological condition",
+              "name": "Other specified mental disorders due to known physiological condition",
               "confidence": "established"
             }
           ],
           "secondary": [
             {
               "code": "F44.4",
-              "name": "Conversion Disorder",
+              "name": "Conversion disorder with motor symptom or deficit",
               "confidence": "probable"
             },
             {
               "code": "F41.1",
-              "name": "Generalized Anxiety Disorder",
+              "name": "Generalized anxiety disorder",
               "confidence": "probable"
             },
             {
               "code": "F32.0",
-              "name": "Major Depressive Episode, Mild",
+              "name": "Major depressive disorder, single episode, mild",
               "confidence": "probable"
             }
           ],
@@ -32345,7 +32361,7 @@
   ],
   "taxonomy": "QIF Locus Taxonomy v1.0",
   "scoring": "NISS v1.1 (Neural Impact Scoring System)",
-  "generated": "2026-10-17T03:27:32Z",
+  "generated": "2026-10-17T03:35:21Z",
   "legacy_mitre_compatibility": {
     "id_range": "T2001-T2899 (avoids collision with MITRE ATT&CK T1001-T1659)",
     "tactic_ids": "Standard MITRE TA#### where applicable, TA0050-TA0053 for BCI-specific",
@@ -32606,11 +32622,12 @@
     }
   },
   "dsm5_spec": {
-    "version": "1.0",
+    "version": "1.1",
     "name": "DSM-5-TR Diagnostic Mapping via Neural Impact Chain",
-    "description": "Maps BCI techniques to psychiatric diagnoses through the hourglass band model. NISS metrics predict diagnostic clusters. First known formal BCI threat-to-psychiatric-diagnosis taxonomy.",
+    "description": "Maps BCI techniques to DSM-5-TR diagnostic categories (ICD-10-CM chapter F codes) through the hourglass band model, for threat modeling purposes. These are diagnostic category references, not diagnostic claims. NISS is a separate score of technique impact (BI, CR, CD, CV, RV, NP); it does not predict diagnoses or diagnostic clusters.",
     "methodology": "Band → Structure → Function → NISS (quantitative) + DSM (qualitative)",
-    "positioning": "RDoC-aligned, BCI-specific, with quantitative bridge (NISS) to traditional nosology (DSM-5-TR)",
+    "positioning": "RDoC-aligned and BCI-specific category references to traditional nosology (DSM-5-TR), for threat modeling. NISS is not a bridge to diagnosis.",
+    "cluster_note": "Each technique's tara.dsm5.cluster was assigned by datalake/scripts/populate-dsm5.py from band weights plus a NISS-vector bonus. It is a display grouping, not a prediction; whether NISS should remain an input is an open follow-up.",
     "band_profiles": {
       "N7": {
         "structures": [
@@ -32817,69 +32834,6 @@
         ],
         "primary_codes": [],
         "secondary_codes": []
-      }
-    },
-    "niss_dsm_bridge": {
-      "BI": {
-        "risk_domain": "Structural/Tissue damage",
-        "primary_clusters": [
-          "motor_neurocognitive"
-        ],
-        "dsm_chapters": [
-          "Motor (F82/F95)",
-          "Neurocognitive (F01-G31)"
-        ]
-      },
-      "CR": {
-        "risk_domain": "Cognitive read access (thought decoding, neural data inference)",
-        "primary_clusters": [
-          "cognitive_psychotic"
-        ],
-        "dsm_chapters": [
-          "Neurodevelopmental (F70-F98)",
-          "Schizophrenia Spectrum (F20-F29)"
-        ]
-      },
-      "CD": {
-        "risk_domain": "Cognitive write access (perception manipulation, identity modification)",
-        "primary_clusters": [
-          "cognitive_psychotic"
-        ],
-        "dsm_chapters": [
-          "Neurodevelopmental (F70-F98)",
-          "Schizophrenia Spectrum (F20-F29)"
-        ]
-      },
-      "CV": {
-        "risk_domain": "Consent/autonomy violation",
-        "primary_clusters": [
-          "mood_trauma"
-        ],
-        "dsm_chapters": [
-          "Depressive (F32-F34)",
-          "Anxiety (F40-F41)",
-          "Trauma/PTSD (F43)",
-          "Dissociative (F44)"
-        ]
-      },
-      "RV": {
-        "risk_domain": "Chronicity modifier",
-        "primary_clusters": [
-          "persistent_personality"
-        ],
-        "dsm_chapters": [
-          "Distinguishes acute (F43.2) vs persistent (F34.1) presentations"
-        ]
-      },
-      "NP": {
-        "risk_domain": "Lasting neural change",
-        "primary_clusters": [
-          "persistent_personality"
-        ],
-        "dsm_chapters": [
-          "Personality (F60-F69)",
-          "Neurodegenerative (G30-G31)"
-        ]
       }
     },
     "diagnostic_clusters": {

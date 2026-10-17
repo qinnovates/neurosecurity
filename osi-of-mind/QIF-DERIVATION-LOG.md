@@ -15,6 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit
 | Entry | Topic | Link |
 |-------|-------|------|
+| 113 | ICD-10-CM code integrity: 33 wildcard forms (`F20.x` and the like, 214 entries) replaced by the categories they stand for; 89 codes outside chapter F moved out of `dsm_conditions` into `icd10_conditions`; every code label set to its official FY2027 title; five wrong codes corrected; `niss_dsm_bridge` and "NISS metrics predict diagnostic clusters" retired; GUARDRAILS now describes NISS by its six metrics | [Entry 113](#entry-113-icd10cm-code-integrity) |
 | 112 | `evidence.population` added as a non-ordinal dimension (GRADE precedent) so 12 adjacent-only techniques stop reading as theoretical; no tier changed, proving orthogonality; `PLAUSIBLE`/`SPECULATIVE` cases added, which exposed NaN in `getStatusStats()` and two colourless filter chips | [Entry 112](#entry-112-evidence-population) |
 | 111 | `evidence.tier` populated across all 176 techniques by deterministic rubric, replacing a legacy `status` word nothing re-derived; the seven-tier scheme had 0 adoption and its one consumer passed null; 6 techniques promoted; validated tiers and adjacent-CVE promotion both refused; 26 incomplete physics blocks found, and the Python SDK had never parsed its own registrar | [Entry 111](#entry-111-evidence-tier) |
 | 110 | Privilege-boundary split of QIF-T0163/T0164: QIF-T0175 (CONFIRMED on four Natus Xltek clinical EEG RCEs) and QIF-T0176 take the application-layer parsing boundary; 22 CVEs divided 11/11; no technique now exceeds the evidence-concentration threshold; three of my own recollections of the task were wrong and re-read from the record | [Entry 110](#entry-110-privilege-split) |
@@ -358,6 +359,44 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 113: Codes That Are Codes, and a Bridge That Was a Claim {#entry-113-icd10cm-code-integrity}
+
+**Date:** 2026-10-16, ~01:30
+**Classification:** CORRECTION
+**AI Systems:** Claude Opus 5.5 (implementation, this entry)
+**Connected entries:** Entry 98 (ICD-10 neurological gap, where the non-F codes came from), Entry 81 (NISS v1.1 metrics), Entry 112
+**RACI:** R: Claude Opus 5.5 | A: KQ (approved the five-item fix) | C: none | I: none
+**AI Contribution Level:** AI-generated; every code and title derived by script from the CDC/NCHS FY2027 order file, none hand-typed
+
+### Context
+
+The 2026-10 pathway-effects analysis checked the data lake's codes against the ICD-10-CM FY2027 order file and found defects that predate it: wildcard notation where a code belongs, neurological codes in fields named for DSM-5-TR, labels that are not the code's title, and a registrar table claiming that NISS metrics predict diagnostic clusters. Kevin approved fixing five items as one change.
+
+### What changed
+
+| Item | Change | Scale |
+|---|---|---|
+| Wildcards | `F20.x`, `F43.1x`, `G47.0x` and 30 other forms became the category they stand for (`F20`, `F43.1`, `G47.0`). No specificity was added, so every cross-file join that matched the old strings still matches. Category (header, non-billable) status is recorded per code in `datalake/validation/icd10cm-fy2027-titles.json` | 214 entries in 6 source files, plus the regenerated impact chains |
+| Field split | Codes outside chapter F moved from `dsm_conditions` / `dsm_names` to `icd10_conditions` / `icd10_names`, the split the registrar already uses (`tara.dsm5` vs `tara.icd10`). Readers updated: clinical-data adapter, KQL tables, clinical dashboard, cascade panel, impact-chain generator | 89 codes, 32 of 46 pathways plus 4 other files |
+| Titles | Every labelled code now carries its official ICD-10-CM title: F14 "Cocaine related disorders", G25 "Other extrapyramidal and movement disorders", F63.0 "Pathological gambling", F32 "Depressive episode" and the rest. DSM-5-TR names and record-specific qualifiers ("(positive symptoms)") were dropped from code labels; record text such as `disruption_effects` and `mechanism` is unchanged | 988 labels |
+| Wrong codes | G99.0 to G90.4 (autonomic dysreflexia, 2 entries), N94.3 to F32.81 (premenstrual dysphoric disorder), T85.730A to T85.731A (neurostimulator, not shunt), F80.1 and F80.2 swapped in the registrar | 6 entries |
+| Bridge | `dsm5_spec.niss_dsm_bridge` removed; description and positioning no longer say NISS predicts diagnoses; a `cluster_note` records that `tara.dsm5.cluster` was computed with a NISS-vector bonus (registrar changelog 1.10) | 1 table |
+| Guardrails | GUARDRAILS (markdown and JSON) said NISS measures amplitude, frequency and coherence. It now names the six NISS v1.1 metrics and their weights | 6 lines |
+
+A test (`src/lib/__tests__/datalake-icd-codes.test.ts`) now fails on any wildcard code, any non-F code in a DSM-named field, and any label that differs from the committed reference list. On the pre-change data it reported 2,251 wildcard hits, 90 misplaced codes and 2,277 title mismatches.
+
+### Decisions left to the owner
+
+- Where a label named a different condition but no single code fits (G93.1 labelled "Disorders of consciousness", G47.2 labelled "Narcolepsy", G81.10 labelled "Spasticity", F07.0 labelled "Neurological apathy"), the code was kept and given its official title. Each needs a ruling: keep, recode, or drop.
+- Specific codes the record text would support (G47.52 for REM sleep behavior disorder, G40.A for absence epilepsy, F40.2, F51.0, G25.2, F50.0, F84.0) were not applied, because they would break exact-match joins with `qif-dsm-mappings.json` until ATLAS-F40 settles that table.
+- NISS still feeds the stored `tara.dsm5.cluster` and `niss_correlation` values. Removing that input would regroup techniques and is not part of this change.
+
+### AI Collaboration
+
+Claude Opus 5.5 wrote the migration and reference-list scripts, the reader changes and the test, and drafted this entry. No other model was consulted. Kevin approved the scope; the open rulings above are his.
 
 ---
 

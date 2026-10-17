@@ -120,8 +120,9 @@ const intelSourceCount = new Set(intelItems.map(i => i.source)).size;
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Response Structure</h2>
         <div class="glass rounded-xl p-6 sm:p-8 overflow-x-auto">
           <pre class="text-xs sm:text-sm font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] leading-relaxed"><code>{`{
-  "version": "1.0",
+  "version": "1.1",
   "generated": "2026-02-21T...",
+  "_deprecated": {...},            // fields removed in this envelope version
   "hourglass_bands": [...],        // 11 QIF bands (shared key)
 
   "threats": {
@@ -158,10 +159,18 @@ const intelSourceCount = new Set(intelItems.map(i => i.source)).size;
   "specs": {
     "niss": {...},                 // NISS scoring specification
     "tara": {...},                 // TARA specification
-    "dsm5": {...}                  // DSM-5 bridge specification
+    "dsm5": {...}                  // ICD-10-CM category-reference specification
   }
 }`}</code></pre>
         </div>
+        <p class="mt-4 text-sm text-[var(--color-text-muted)]">
+          <strong>Envelope 1.1 (2026-10-16) removes <code>specs.dsm5.niss_dsm_bridge</code></strong>,
+          a per-metric NISS-to-DSM-chapter table whose wording stated that NISS metrics predict
+          diagnostic clusters. NISS scores the signal-level impact of a threat technique; it does not
+          predict diagnoses. There is no replacement field. For one release the response carries a
+          <code>_deprecated</code> block naming the removed path and its reason. Condition labels
+          across the dataset are now official ICD-10-CM FY2027 titles rather than DSM-5-TR names.
+        </p>
 
         <div class="glass rounded-xl p-5 mt-6" style="border-left: 3px solid var(--color-accent-primary);">
           <p class="text-sm text-[var(--color-text-muted)]">

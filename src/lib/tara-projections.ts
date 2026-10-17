@@ -501,7 +501,7 @@ const governanceProjection: ProjectionConfig = {
 
 // ═══════════════════════════════════════════════════════════════
 // Diagnostic Projection (DSM-5-TR via Neural Impact Chain)
-// Cell color = diagnostic cluster (5 values, NISS-DSM Bridge driven)
+// Cell color = diagnostic cluster (5 values; display grouping, see dsm5_spec.cluster_note)
 // ═══════════════════════════════════════════════════════════════
 
 const RISK_CLASS_BADGE: Record<string, { bg: string; color: string; border: string }> = {

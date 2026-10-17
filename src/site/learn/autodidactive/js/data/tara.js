@@ -7,7 +7,7 @@
 export const TARA_STATS = {
   "generator": "src/scripts/generate-registrar-statistics.mjs",
   "generated": "2026-10-17",
-  "content_sha256": "caf888a07c8bdbdd75429dc4f47deec8f60b82b9e8d9e68ae524f99905ecf4f1",
+  "content_sha256": "ffa03f499de596b97b4731da8cf895a0b7b0ca6ab426790a0ec72f4b6b3c244c",
   "total_techniques": 176,
   "total_tactics": 17,
   "total_domains": 8,
@@ -78,7 +78,7 @@ export const TARA_STATS = {
     "techniques_without_cvss": 73
   },
   "tara": {
-    "version": "1.9",
+    "version": "1.10",
     "enriched_techniques": 176,
     "dual_use_breakdown": {
       "confirmed": 102,
@@ -89,7 +89,7 @@ export const TARA_STATS = {
     "techniques_with_clinical_analog": 130,
     "techniques_silicon_only": 44,
     "dsm5": {
-      "version": "1.0",
+      "version": "1.1",
       "techniques_with_dsm5_block": 149,
       "techniques_with_dsm5": 76,
       "unique_dsm_codes": 28,
