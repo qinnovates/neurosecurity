@@ -3185,8 +3185,8 @@
       "verification": "VERIFIED",
       "independent_review": {
         "verdict": "CONFIRMED",
-        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
-        "evidence_url": "https://thedebrief.org/from-blockchain-to-brainwaves-coinbase-co-founder-fred-ehrsam-enters-the-neurotech-race-with-non-invasive-bci-startup-nudge/",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields. RE-VERIFICATION PASS (2026-10-17, same day, requested by Kevin): Nudge: added a Goodwin LLP deal-announcement (law firm that advised Nudge), dated 2025-08-04, conflicting with the July 2025 date most trackers use. Not reconciled.",
+        "evidence_url": "https://www.goodwinlaw.com/en/news-and-events/news/2025/08/announcements-technology-goodwin-advises-nudge-series-a-100-million-financing",
         "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
         "reviewed": "2026-10-17"
       },
@@ -3205,8 +3205,8 @@
       "verification": "VERIFIED",
       "independent_review": {
         "verdict": "CONFIRMED",
-        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
-        "evidence_url": "https://finder.techleap.nl/news/feed/echo-neurotechnologies-secures-50m-funding",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields. RE-VERIFICATION PASS (2026-10-17, same day, requested by Kevin): Echo Neurotechnologies: upgraded primary source to Bloomberg (2025-01-30), adding investor names (A&E Investments, Andreessen Horowitz, PL Capital) and surfacing an unresolved founding-year conflict (2022 vs 2023).",
+        "evidence_url": "https://www.bloomberg.com/news/articles/2025-01-30/andreessen-horowitz-backs-rival-to-musk-s-neuralink-in-new-funding-round",
         "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
         "reviewed": "2026-10-17"
       },
@@ -3225,8 +3225,8 @@
       "verification": "VERIFIED",
       "independent_review": {
         "verdict": "CONFIRMED",
-        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
-        "evidence_url": "https://www.bio-itworld.com/news/2026/04/22/from-brain-implant-to-lifelong-companion--michel-maharbiz-unveils-epia-neuro",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields. RE-VERIFICATION PASS (2026-10-17, same day, requested by Kevin): Epia Neuro HQ re-verified as San Francisco per official 2026-04-02 Business Wire release (businesswire.com/news/home/20260402282679), upgrading from a job-listing-sourced Alameda claim.",
+        "evidence_url": "https://www.businesswire.com/news/home/20260402282679/en/Epia-Neuro-Launches-to-Develop-Intent-Driven-Neural-Technology-to-Restore-Function-After-Stroke-and-Address-Cognitive-Decline",
         "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
         "reviewed": "2026-10-17"
       },
@@ -3245,8 +3245,8 @@
       "verification": "VERIFIED",
       "independent_review": {
         "verdict": "CONFIRMED",
-        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
-        "evidence_url": "https://www.medtechdive.com/news/kandu-health-merges-neurolutions-bci/744824/",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields. RE-VERIFICATION PASS (2026-10-17, same day, requested by Kevin): Kandu, Inc. merger date corrected to 2025-04-08 per official Business Wire release (previously cited 2025-04-14 syndication date); Neurolutions/Kandu Health founding years confirmed (2007/2022).",
+        "evidence_url": "https://www.businesswire.com/news/home/20250408666638/en/Kandu-Health-and-Neurolutions-Merge-to-Form-Kandu-Inc.-a-New-Leader-in-Stroke-Recovery",
         "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
         "reviewed": "2026-10-17"
       },
@@ -3265,8 +3265,8 @@
       "verification": "VERIFIED",
       "independent_review": {
         "verdict": "CONFIRMED",
-        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
-        "evidence_url": "https://www.massdevice.com/coherence-neuro-raises-10m-seed-round-for-bci-that-aids-in-cancer-treatment/",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields. RE-VERIFICATION PASS (2026-10-17, same day, requested by Kevin): Coherence Neuro device-naming question RESOLVED (not unresolved as originally staged): ClinicalTrials.gov NCT07465796 shows CIPHER (intraoperative safety study) and SOMA-1 (planned chronic implant) are two distinct, related devices.",
+        "evidence_url": "https://clinicaltrials.gov/study/NCT07465796",
         "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
         "reviewed": "2026-10-17"
       },
@@ -3285,8 +3285,8 @@
       "verification": "VERIFIED",
       "independent_review": {
         "verdict": "CONFIRMED",
-        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
-        "evidence_url": "https://www.biospace.com/astellas-to-acquire-iota-biosciences",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields. RE-VERIFICATION PASS (2026-10-17, same day, requested by Kevin): iota Biosciences deal-value breakdown tightened against Astellas's own press releases ($304M = ~$127.5M upfront + up to $176.5M milestones; $429M BioWorld figure includes a separate $125M/5yr R&D commitment).",
+        "evidence_url": "https://newsroom.astellas.com/2020-10-30-Astellas-Completes-Acquisition-of-iota-Biosciences",
         "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
         "reviewed": "2026-10-17"
       },
@@ -3305,8 +3305,8 @@
       "verification": "VERIFIED",
       "independent_review": {
         "verdict": "CONFIRMED",
-        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
-        "evidence_url": "https://tec.illinois.edu/news/76957",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields. RE-VERIFICATION PASS (2026-10-17, same day, requested by Kevin): BRILL Neurotech headquarters changed from a confirmed 'not California' geography flag to DISPUTED: a Foresight Institute bio says San Francisco, contradicting the Illinois source originally cited. Treat neither claim as settled.",
+        "evidence_url": "https://foresight.org/people/mehmet-gunal/",
         "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
         "reviewed": "2026-10-17"
       },
@@ -3325,8 +3325,8 @@
       "verification": "VERIFIED",
       "independent_review": {
         "verdict": "CONFIRMED",
-        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields.",
-        "evidence_url": "https://onemind.org/companies/forecast-bio/",
+        "checked": "Cross-referenced against 2+ independent secondary sources per company (full list in datalake/intake/2026-10-17/sources.json); collector and reviewer are the same session for this batch -- no separate human/agent fact-checker ran. Full detail and any unresolved conflicts recorded in datalake/intake/2026-10-17/company-candidates.json security_notes/funding_note fields. RE-VERIFICATION PASS (2026-10-17, same day, requested by Kevin): Forecast Bio: identified founder Kira Poskanzer (UCSF); found a $2.4M SEC Form D SAFE filing that may or may not reconcile with a separately-reported $100K accelerator investment -- flagged unresolved.",
+        "evidence_url": "https://runtimewire.com/article/forecast-bio-discloses-2-4m-safe-financing-astrocyte-ai-platform",
         "note": "Merged directly into datalake/bci-landscape.json on explicit instruction from Kevin (repo owner), standing in for the review gate described in datalake/intake/CONTEXT.md.",
         "reviewed": "2026-10-17"
       },
@@ -3592,7 +3592,7 @@
       "target_file": "datalake/bci-landscape.json",
       "subject": "Otherside Health (named in the newsletter's free text)",
       "disposition": "rejected",
-      "why_held": "Not a neurotechnology device or BCI company -- a New York-based patient-support/community platform. Out of scope for bci-landscape.json's schema regardless of verification status. Also not California-headquartered, despite appearing in a 'Neurotech in California' post. Verified via https://www.startuphub.ai/startups/otherside-health.md"
+      "why_held": "Not a neurotechnology device or BCI company -- a New York-based patient-support/community platform. Out of scope for bci-landscape.json's schema regardless of verification status. Also not California-headquartered, despite appearing in a 'Neurotech in California' post. Verified via https://www.startuphub.ai/startups/otherside-health.md RE-VERIFICATION PASS (2026-10-17): NY headquarters claim remains single-sourced (StartupHub.ai only); founding date looks like a placeholder. Exclusion rationale unchanged."
     }
   ],
   "publication_policy": "Only items confirmed against a fetched source are published here. Items that could not be confirmed, and items an independent review contradicted, are held: their claim text and sources are not published, and only the fact that they exist is recorded. Several concern named companies, so an unconfirmed claim is not put into a public repository."
