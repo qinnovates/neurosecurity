@@ -4,8 +4,8 @@
   "framework": "Quantified Interconnection Framework (QIF) for Neural Security",
   "statistics": {
     "generator": "src/scripts/generate-registrar-statistics.mjs",
-    "generated": "2026-10-17",
-    "content_sha256": "f4728d4f989a2fedb91d01164683165df052a40080310aa3b413bb8103478e4f",
+    "generated": "2026-10-18",
+    "content_sha256": "a537513e5d32ca9b9a389d0f501c8d03e82de95f756b2378e4669c06b2f888c1",
     "total_techniques": 176,
     "total_tactics": 17,
     "total_domains": 8,
@@ -76,7 +76,7 @@
       "techniques_without_cvss": 73
     },
     "tara": {
-      "version": "1.11",
+      "version": "1.12",
       "enriched_techniques": 176,
       "dual_use_breakdown": {
         "confirmed": 102,
@@ -415,6 +415,31 @@
         "notes rewritten descriptively for 31 techniques: QIF-T0001, QIF-T0004, QIF-T0005, QIF-T0007, QIF-T0008, QIF-T0009, QIF-T0018, QIF-T0022, QIF-T0026, QIF-T0034, QIF-T0037, QIF-T0044, QIF-T0045, QIF-T0046, QIF-T0049, QIF-T0053, QIF-T0059, QIF-T0061, QIF-T0064, QIF-T0066, QIF-T0067, QIF-T0071, QIF-T0103, QIF-T0107, QIF-T0109, QIF-T0038, QIF-T0042, QIF-T0052, QIF-T0054, QIF-T0069, QIF-T0171",
         "schema: techniques[].legacy_names and techniques[].rename_note added",
         "QIF-T0171 detection text: US spelling (artifact, behavioral)"
+      ]
+    },
+    {
+      "version": "1.12",
+      "date": "2026-10-18",
+      "title": "Species and preparation on the memory and optogenetics entries, and one citation correction",
+      "summary": "The evidence tiers grade strength and name no organism, so three entries resting entirely on animal evidence read as simply 'Demonstrated'. Two descriptive fields, species_of_evidence and preparation, are added on tara.clinical for QIF-T0137, QIF-T0054 and QIF-T0060, stating the species, what the cited work required, and whether a human equivalent is established. No tier, NISS vector or severity changes. QIF-T0137's first source is corrected from 'Gong 2018' to Chen et al. 2018 for DOI:10.1126/science.aaq1144, which carries no author named Gong. No technique is added or removed; the count stays at 176.",
+      "added": [],
+      "changed": [
+        "QIF-T0137 sources: 'Gong 2018' corrected to 'Chen et al. 2018 (Science 359:679-684)'",
+        "QIF-T0137 tara.clinical: species_of_evidence and preparation added (mouse; no human application)",
+        "QIF-T0137 tara.governance: governance_gap added, naming gene-delivery custody as out of QIF scope",
+        "QIF-T0054 tara.clinical: species_of_evidence and preparation added (mouse and Drosophila)",
+        "QIF-T0054 tara.clinical.sources: DOIs attached; the unresolved Ngo 2013 entry marked unverified",
+        "QIF-T0054 notes: evidence-status sentence appended",
+        "QIF-T0060 tara.clinical: species_of_evidence and preparation added, with the three result directions that invert if dropped",
+        "QIF-T0060 tara.clinical.sources: five verified DOIs added for the artificial-association line"
+      ],
+      "enrichments": [
+        "tara.clinical.species_of_evidence -- organism the causal evidence comes from",
+        "tara.clinical.preparation -- what the cited work required to obtain the effect"
+      ],
+      "therapeutic_highlights": [
+        "An animal-only result can no longer be read as a human-demonstrated one on these three entries",
+        "The therapeutic analogues on all three entries are unchanged; only the species record is added"
       ]
     }
   ],
@@ -12333,7 +12358,7 @@
       ],
       "status": "THEORETICAL",
       "ui_category": "EX",
-      "notes": "If feasible, an adversary could extract memory-related neural patterns associated with personal experiences, knowledge or intentions. Targets hippocampal activity. High-density implants (Neuralink, Utah Array) approach memory-trace resolution. Detection: Memory protocol audit logging, unauthorized access detection, hippocampal activity monitoring.",
+      "notes": "If feasible, an adversary could extract memory-related neural patterns associated with personal experiences, knowledge or intentions. Targets hippocampal activity. High-density implants (Neuralink, Utah Array) approach memory-trace resolution. Detection: Memory protocol audit logging, unauthorized access detection, hippocampal activity monitoring. Evidence status: every causal result behind this entry is from laboratory animals, and no human equivalent is established; see tara.clinical.species_of_evidence.",
       "legacy_ids": [
         "ONI-T018"
       ],
@@ -12366,9 +12391,14 @@
           "evidence_level": "preclinical",
           "safe_parameters": "Memory-related protocols require specific consent; no covert extraction",
           "sources": [
-            "Ramirez et al. 2013 (Science, optogenetic memory)",
-            "Ngo et al. 2013 (Neuron, sleep memory consolidation)"
-          ]
+            "Ramirez et al. 2013 (Science 341:387-391) DOI:10.1126/science.1239073",
+            "Liu et al. 2012 (Nature 484:381-385) DOI:10.1038/nature11028",
+            "Shao et al. 2026 (PLOS Biology 24:e3003886) DOI:10.1371/journal.pbio.3003886",
+            "Moore et al. 2026 (Nature 657:724-734) DOI:10.1038/s41586-026-10879-9",
+            "Ngo et al. 2013 (Neuron) -- DOI not resolved in the 2026-10-17 or 2026-10-18 intake pass; unverified, retained for provenance and relied on for nothing"
+          ],
+          "species_of_evidence": "Mouse, and for the 2025-2026 results Drosophila melanogaster. Every causal result behind this entry is from a laboratory animal under conditions no deployed interface has. No read-out of memory content has been demonstrated in any species. The nearest human work used electrical stimulation of surgically resected tissue and measured how strongly groups of cells fired together, plus which genes changed, not what was remembered (Moore et al. 2026). The demonstrated route to a false memory in a person is misinformation delivered through ordinary perception (Shao et al. 2026, n=100), which is a social and informational channel, not a neural one.",
+          "preparation": "The animal work requires an activity-dependent transgenic background, viral delivery of a light-gated channel and an implanted light guide, or in the fly work whole-animal illumination of a transparent insect. The human study required tissue removed during clinically indicated surgery. None of these is a preparation that can be arrived at through a device interface."
         },
         "governance": {
           "consent_tier": "IRB",
@@ -13724,8 +13754,15 @@
           "safe_parameters": "Sleep-stage targeted; content-specific consent; reversibility assessment",
           "sources": [
             "Rasch et al. 2007 (Science, sleep memory reactivation)",
-            "Oudiette & Paller 2013 (Front Psychol)"
-          ]
+            "Oudiette & Paller 2013 (Front Psychol)",
+            "Ohkawa et al. 2015 (Cell Reports 11:261-269) DOI:10.1016/j.celrep.2015.03.017",
+            "Redondo et al. 2014 (Nature 513:426-430) DOI:10.1038/nature13725",
+            "Tumkaya et al. 2025 (iScience 28:113540) DOI:10.1016/j.isci.2025.113540",
+            "Yang et al. 2026 (Nature Neuroscience 29:2204-2213) DOI:10.1038/s41593-026-02381-2",
+            "Hu et al. 2026 (Neuron 114:759-773.e5) DOI:10.1016/j.neuron.2025.12.031"
+          ],
+          "species_of_evidence": "Mouse, and for the 2025-2026 results Drosophila melanogaster. What the animal work demonstrates is the artificial formation or re-valuing of an ASSOCIATION between things the animal had already stored, not the insertion of an experience: Ohkawa et al. 2015 state that the information they linked was already stored and that the link was made by activating two groups of cells at the same time. Direction matters in three places. Redondo et al. 2014 obtained a valence switch at one site and NOT at the neighbouring one. Hu et al. 2026 report that driving a second group of cells causes forgetting while 'learned information remains unperturbed', which is availability and not integrity. Yang et al. 2026 produced a false memory in flies by manipulating reminder cues rather than by writing with light, and their own control found that activating the circuit during reminders in untrained flies induced nothing at all. No human equivalent of any of this is established.",
+          "preparation": "Transgenic animals, viral delivery of a light-gated channel, and either an implanted light guide in the rodent work or whole-animal illumination in the fly work; several of the fly gating experiments used whole-animal heating rather than light. The human sources cited on this entry are behavioural sleep studies with no genetic step and no implant, and they do not show content being written."
         },
         "governance": {
           "consent_tier": "IRB",
@@ -29102,17 +29139,20 @@
             "addiction"
           ],
           "fda_status": "none",
-          "evidence_level": "preclinical"
+          "evidence_level": "preclinical",
+          "species_of_evidence": "Mouse. The causal evidence for this mechanism is rodent. No human application of this technique is established: the only published human use of a light-gated channel is in the eye, by intravitreal viral delivery for vision, and the two trials recorded in this project's sources disagree on benefit (Bunnell et al. 2026 reports no evidence of efficacy; Han et al. 2026 reports a small open-label improvement). Neither is a nervous-system application and neither concerns memory.",
+          "preparation": "Genetic modification so the chosen cells express a light-gated channel, plus injection of an upconversion nanoparticle population, plus an external near-infrared source. Both the genetic step and the injection are physically invasive procedures, and the gene delivery is not undone by a software update. No human preparation for this technique exists."
         },
         "governance": {
           "consent_tier": "IRB",
           "data_classification": "sensitive_neural",
-          "safety_ceiling": "Requires stereotactic neurosurgery + gene therapy"
+          "safety_ceiling": "Requires stereotactic neurosurgery + gene therapy",
+          "governance_gap": "The binding control on this mechanism is custody of the gene-delivery step, which sits with gene-therapy and institutional biosafety oversight rather than with device security. No neurosecurity framework, this one included, governs that handoff, and QIF asserts no coverage of it."
         }
       },
       "sources": [
-        "Gong 2018 DOI:10.1126/science.aaq1144",
-        "Liu 2021 DOI:10.1038/s41467-021-25993-7"
+        "Chen et al. 2018 (Science 359:679-684) DOI:10.1126/science.aaq1144",
+        "Liu et al. 2021 (Nature Communications 12:5662) DOI:10.1038/s41467-021-25993-7"
       ],
       "tara_enrichment_pending": false,
       "evidence": {
@@ -32388,7 +32428,7 @@
   ],
   "taxonomy": "QIF Locus Taxonomy v1.0",
   "scoring": "NISS v1.1 (Neural Impact Scoring System)",
-  "generated": "2026-10-17T11:28:00Z",
+  "generated": "2026-10-18T11:32:30Z",
   "legacy_mitre_compatibility": {
     "id_range": "T2001-T2899 (avoids collision with MITRE ATT&CK T1001-T1659)",
     "tactic_ids": "Standard MITRE TA#### where applicable, TA0050-TA0053 for BCI-specific",
@@ -32659,6 +32699,15 @@
       "description": "Short public note explaining why a technique was renamed, shown on the technique page.",
       "format": {
         "rename_note": "One or two sentences, or absent"
+      }
+    },
+    "species_of_evidence": {
+      "added": "2026-10-18",
+      "description": "The species the entry's causal evidence comes from, and what that work required to obtain it, written on tara.clinical beside evidence_level. Added because the seven evidence tiers in src/lib/evidence-tiers.ts grade evidence strength only: demonstrated_lab displays as 'Demonstrated' and names no organism, so an animal-only result is indistinguishable from a human one once tagged. Moving a tier to encode species would change what every other entry's tier means, so the species is recorded in its own field and evidence.tier is left as derived.",
+      "format": {
+        "species_of_evidence": "The organism or organisms the causal evidence comes from, with an explicit statement of whether a human equivalent is established. Absent where no species applies.",
+        "preparation": "What the cited work required to obtain the effect: genetic modification, injected agent, implanted hardware, surgical access, or none. Absent where no species applies.",
+        "note": "Neither field is scored. Neither changes evidence.tier, niss or severity. An entry naming a non-human species has no demonstrated human analogue unless the entry says so."
       }
     }
   },

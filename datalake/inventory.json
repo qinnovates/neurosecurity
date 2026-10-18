@@ -6,7 +6,7 @@
     "datalake_files": 39,
     "datasets_inventoried": 28,
     "records": 21467,
-    "unique_dois": 192,
+    "unique_dois": 221,
     "techniques_with_cve_evidence": 27,
     "cve_coverage_ratio": 0.1534
   },

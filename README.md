@@ -27,7 +27,7 @@ QIF, TARA and NISS help builders and defenders start a neural-device threat mode
 
 ![Open datalake inventory](src/site/images/datalake-corpus.svg)
 
-**21,467 records inventoried below, from 28 of the 39 datasets in [`datalake/`](datalake/).** 20,182 neural impact chains · 176 proposed techniques · 24 BCI devices specced · 67 companies tracked · 107 CVEs mapped · 192 unique DOIs cited.
+**21,467 records inventoried below, from 28 of the 39 datasets in [`datalake/`](datalake/).** 20,182 neural impact chains · 176 proposed techniques · 24 BCI devices specced · 67 companies tracked · 107 CVEs mapped · 221 unique DOIs cited.
 
 Counted from the files themselves on 2026-10-18. Re-run `npm run datalake:inventory` and every figure on this page moves with the data; `npm run datalake:inventory:check` fails the build if it has drifted.
 

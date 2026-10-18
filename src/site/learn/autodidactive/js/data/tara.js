@@ -6,8 +6,8 @@
 
 export const TARA_STATS = {
   "generator": "src/scripts/generate-registrar-statistics.mjs",
-  "generated": "2026-10-17",
-  "content_sha256": "f4728d4f989a2fedb91d01164683165df052a40080310aa3b413bb8103478e4f",
+  "generated": "2026-10-18",
+  "content_sha256": "a537513e5d32ca9b9a389d0f501c8d03e82de95f756b2378e4669c06b2f888c1",
   "total_techniques": 176,
   "total_tactics": 17,
   "total_domains": 8,
@@ -78,7 +78,7 @@ export const TARA_STATS = {
     "techniques_without_cvss": 73
   },
   "tara": {
-    "version": "1.11",
+    "version": "1.12",
     "enriched_techniques": 176,
     "dual_use_breakdown": {
       "confirmed": 102,
@@ -277,7 +277,7 @@ export const TARA_TECHNIQUES = [
   {"id":"QIF-T0051","name":"Neural data privacy breach","tactic":"QIF-D.HV","description":"Unauthorized access to recorded neural data across any band. Harvest raw EEG from consumer devices, decode intent/emotion. GDPR Article 9 (special category data). NSP end-to-end encryption from I0 to cloud.","status":"CONFIRMED","severity":"low","bands":["N1","S1","S2","S3"],"dualUse":"probable","clinicalAnalog":"Clinical neural data management for treatment optimization","niss_severity":"low"},
   {"id":"QIF-T0052","name":"ERP harvesting","tactic":"QIF-D.HV","description":"An adversary may extract event-related potentials (P300, N170, N400) associated with recognition, attention and decision-making. BCI apps can embed covert stimulus-response protocols. Detection: Stimulus audit logging, unauthorized ERP extraction detection, data access monitoring.","status":"DEMONSTRATED","severity":"low","bands":["N6","N7"],"dualUse":"confirmed","clinicalAnalog":"ERP-based clinical diagnostics","niss_severity":"low"},
   {"id":"QIF-T0053","name":"Cognitive state capture","tactic":"QIF-D.HV","description":"An adversary may record signal patterns associated with attention, emotion, fatigue or other cognitive states without user awareness. Consumer BCI apps routinely over-collect. Attention-tracking in workplace BCIs. Detection: Classification audit logging, unauthorized state capture detection, data flow monitoring.","status":"CONFIRMED","severity":"low","bands":["N6","N7"],"dualUse":"confirmed","clinicalAnalog":"Brain-state dependent therapy timing","niss_severity":"low"},
-  {"id":"QIF-T0054","name":"Memory extraction","tactic":"QIF-D.HV","description":"If feasible, an adversary could extract memory-related neural patterns associated with personal experiences, knowledge or intentions. Targets hippocampal activity. High-density implants (Neuralink, Utah Array) approach memory-trace resolution. Detection: Memory protocol audit logging, unauthorized access detection, hippocampal activity monitoring.","status":"THEORETICAL","severity":"low","bands":["N6","N7"],"dualUse":"probable","clinicalAnalog":"Memory retrieval and consolidation enhancement therapy","niss_severity":"low"},
+  {"id":"QIF-T0054","name":"Memory extraction","tactic":"QIF-D.HV","description":"If feasible, an adversary could extract memory-related neural patterns associated with personal experiences, knowledge or intentions. Targets hippocampal activity. High-density implants (Neuralink, Utah Array) approach memory-trace resolution. Detection: Memory protocol audit logging, unauthorized access detection, hippocampal activity monitoring. Evidence status: every causal result behind this entry is from laboratory animals, and no human equivalent is established; see tara.clinical.species_of_evidence.","status":"THEORETICAL","severity":"low","bands":["N6","N7"],"dualUse":"probable","clinicalAnalog":"Memory retrieval and consolidation enhancement therapy","niss_severity":"low"},
   {"id":"QIF-T0055","name":"BCI cognitive warfare","tactic":"QIF-P.DS","description":"State-level exploitation of BCI infrastructure for cognitive warfare: mass influence, decision degradation, combat effectiveness reduction. Combines multiple techniques (T2101-T2106, T2506). Military BCI programs (DARPA N3, BrainSTORMS) as targets.","status":"THEORETICAL","severity":"high","bands":["S3","N4","N5","N6","N7"],"dualUse":"probable","clinicalAnalog":"","niss_severity":"high"},
   {"id":"QIF-T0056","name":"Neuro-surveillance","tactic":"QIF-D.HV","description":"Systematic collection of neural data from consumer BCI populations for surveillance purposes. Workplace attention monitoring, law enforcement lie detection, social credit via neural markers. Neurorights: mental privacy.","status":"EMERGING","severity":"low","bands":["N6","N7","S3"],"dualUse":"probable","clinicalAnalog":"Continuous EEG monitoring (epilepsy, ICU)","niss_severity":"low"},
   {"id":"QIF-T0057","name":"Network mapping (BCI topology)","tactic":"QIF-N.SC","description":"Discover topology of BCI networks: communication pathways between electrodes, processing units, and external interfaces. Prerequisite for targeted attacks. Deploy honeypot nodes and dynamic addressing.","status":"CONFIRMED","severity":"none","bands":["S2","S3"],"dualUse":"confirmed","clinicalAnalog":"Brain network analysis for diagnosis and surgical planning","niss_severity":"none"},

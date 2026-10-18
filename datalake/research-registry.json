@@ -1,9 +1,9 @@
 {
   "metadata": {
     "version": "1.0",
-    "lastUpdated": "2026-10-16",
+    "lastUpdated": "2026-10-18",
     "description": "Unified registry: explorer/timelines (landscape UI) + researchers/institutions/standards/legislation (structured entities). Cross-references QIF-RESEARCH-SOURCES.md. Papers are carried on researcher entries via papers (QIF-RESEARCH-SOURCES.md IDs) and bibKeys (references.bib keys); the schema has no standalone paper collection.",
-    "totalEntities": 285
+    "totalEntities": 404
   },
   "explorer": [
     {
@@ -1137,6 +1137,222 @@
         "venue": "IEEE TNSRE 31:2224-2234",
         "doi": "10.1109/TNSRE.2023.3273214",
         "desc": "Narrow-period-pulse poisoning embeds unsynchronized backdoor trigger in EEG training data."
+      },
+      {
+        "authors": "Liu X, Ramirez S, Pang PT, Puryear CB, Govindarajan A, Deisseroth K, Tonegawa S.",
+        "year": "2012",
+        "title": "Optogenetic stimulation of a hippocampal engram activates fear memory recall",
+        "venue": "Nature 484:381-385",
+        "doi": "10.1038/nature11028",
+        "desc": "MOUSE. Reactivating a tagged dentate-gyrus ensemble was sufficient to induce freezing. A sufficiency claim about recall of an already-formed memory, not about creating or reading one. Transgenic background plus viral delivery plus implanted fibre."
+      },
+      {
+        "authors": "Ramirez S, Liu X, Lin P-A, Suh J, Pignatelli M, Redondo RL, Ryan TJ, Tonegawa S.",
+        "year": "2013",
+        "title": "Creating a False Memory in the Hippocampus",
+        "venue": "Science 341:387-391",
+        "doi": "10.1126/science.1239073",
+        "desc": "MOUSE. The authors' own operational definition of the 'false memory' is context-specific freezing in a context where no foot shock was delivered: an artificially formed ASSOCIATION, not an inserted episodic narrative. The popular 'implanted a memory' reading comes from the title, not from a content-level claim."
+      },
+      {
+        "authors": "Redondo RL, Kim J, Arons AL, Ramirez S, Liu X, Tonegawa S.",
+        "year": "2014",
+        "title": "Bidirectional switch of the valence associated with a hippocampal contextual memory engram",
+        "venue": "Nature 513:426-430",
+        "doi": "10.1038/nature13725",
+        "desc": "MOUSE. ASYMMETRIC RESULT: the dentate-gyrus engram group switched valence; the basolateral-amygdala group did NOT. Site specificity, not a general rewrite capability. Recording only the positive half inverts half the finding."
+      },
+      {
+        "authors": "Ohkawa N, Saitoh Y, Suzuki A, Tsujimura S, Murayama E, Kosugi S, Nishizono H, Matsuo M, Takahashi Y, Nagase M et al.",
+        "year": "2015",
+        "title": "Artificial Association of Pre-stored Information to Generate a Qualitatively New Memory",
+        "venue": "Cell Reports 11:261-269",
+        "doi": "10.1016/j.celrep.2015.03.017",
+        "desc": "MOUSE. The clearest statement of the actual primitive: synchronous activation of two ensembles whose information was ALREADY STORED, with no sensory input, dependent on ordinary NMDA-receptor and protein-synthesis plasticity. Note the DOI: 10.1016/j.celrep.2015.02.004 resolves to an unrelated Hi-C paper and must not be used."
+      },
+      {
+        "authors": "Oishi N, Nomoto M, Ohkawa N, Saitoh Y, Sano Y, Tsujimura S, Nishizono H, Matsuo M, Muramatsu S-i, Inokuchi K.",
+        "year": "2019",
+        "title": "Artificial association of memory events by optogenetic stimulation of hippocampal CA3 cell ensembles",
+        "venue": "Molecular Brain 12",
+        "doi": "10.1186/s13041-018-0424-1",
+        "desc": "MOUSE. TITLE-LEVEL VERIFICATION ONLY (abstract not retrieved); do not quote beyond the title. Extends the artificial-association primitive to CA3."
+      },
+      {
+        "authors": "Nomoto M, Ohkawa N, Inokuchi K, Oishi N.",
+        "year": "2023",
+        "title": "Requirement for hippocampal CA3 NMDA receptors in artificial association of memory events stored in CA3 cell ensembles",
+        "venue": "Molecular Brain 16",
+        "doi": "10.1186/s13041-023-01004-2",
+        "desc": "MOUSE. TITLE-LEVEL VERIFICATION ONLY. Carries a published correction (DOI:10.1186/s13041-023-01016-y) which must be read before citing. Indicates the artificial association runs on ordinary synaptic plasticity machinery."
+      },
+      {
+        "authors": "Yang W, Zattera B, Pavao-Delgado M, Warnecke C, Schweizer JA, Ricciuti A, Coban B, Felsenberg J.",
+        "year": "2026",
+        "title": "Creating true and false memories from forgotten information in Drosophila",
+        "venue": "Nature Neuroscience 29:2204-2213",
+        "doi": "10.1038/s41593-026-02381-2",
+        "desc": "DROSOPHILA (vinegar fly), NOT a mammal. The false memory is produced by manipulating REMINDER CUES, not by writing with light; circuit activation only gates whether the distortion takes hold. The authors' null control is load-bearing: activating recovery dopaminergic neurons during reminders in mock-trained flies did not induce avoidance. Several key gating experiments used thermogenetics, not optogenetics."
+      },
+      {
+        "authors": "Tumkaya T, Zhang X, Mai Y, Stewart J, Claridge-Chang A.",
+        "year": "2025",
+        "title": "Entirely synthetic memory inception via dual optogenetic activation of sensory and dopaminergic neurons",
+        "venue": "iScience 28:113540",
+        "doi": "10.1016/j.isci.2025.113540",
+        "desc": "DROSOPHILA (vinegar fly). The strongest 'association built entirely out of stimulation' result found: both the conditioned and the unconditioned stimulus were replaced by light. The content is a two-element odour-valence association, not episodic content, and there is no mammalian analogue."
+      },
+      {
+        "authors": "Pouget C, Morier F, Autore L, Treiber N, Fernandez Garcia P, Mazza N, Zhang R, Reeves IL, Winston SM, Brimble MA et al.",
+        "year": "2026",
+        "title": "Deconstruction of a memory engram reveals distinct ensembles recruited at learning",
+        "venue": "Nature Neuroscience 29:1157-1165",
+        "doi": "10.1038/s41593-026-02230-2",
+        "desc": "MOUSE. Sub-second tagging resolved nonoverlapping dorsal CA1 ensembles, some sufficient alone to drive memory expression. Decomposition of a memory, not falsification: the addressable unit got smaller, which bears on how precisely a hypothetical write would have to be aimed."
+      },
+      {
+        "authors": "Suto N, Wang M-Y, Morikawa S, Chung M, Tao K, Huang Z, Ikegaya Y, Takeuchi H, Kira S, Okuyama T.",
+        "year": "2026",
+        "title": "Neural circuits for valence updating in social memory",
+        "venue": "Science 393:eadx8231",
+        "doi": "10.1126/science.adx8231",
+        "desc": "MOUSE. Extends re-valuing from context (2014) to social identity and names the ventral-CA1 to basolateral-amygdala to nucleus-accumbens substrate. The update is driven by an actual social experience (defeat), not by stimulation alone."
+      },
+      {
+        "authors": "Hu S, Yang J, Yin S, Zhong Y, An Y, Guo Y, Zhai Z, Zhong Y.",
+        "year": "2026",
+        "title": "Identification of an engram ensemble mediating memory forgetting in the dentate gyrus",
+        "venue": "Neuron 114:759-773.e5",
+        "doi": "10.1016/j.neuron.2025.12.031",
+        "desc": "MOUSE. BIDIRECTIONAL: reactivating the Fos-tagged ensemble promotes retrieval; reactivating the Npas4-dependent ensemble drives FORGETTING, while 'learned information remains unperturbed'. Availability, not integrity. Reporting one direction inverts the result."
+      },
+      {
+        "authors": "Berdugo-Vega G, Sierra C, Astori S, Calati V, Orsat J, Scoglio MJ, Sandi C, Graff J.",
+        "year": "2026",
+        "title": "Cognitive rejuvenation through partial reprogramming of engram cells",
+        "venue": "Neuron 114:1102-1116.e7",
+        "doi": "10.1016/j.neuron.2025.11.028",
+        "desc": "MOUSE (aged and Alzheimer's-disease models). Gene-therapy intervention on engram cells restored learning and memory CAPACITY. Capacity restoration, not content manipulation, and further from device capability rather than closer."
+      },
+      {
+        "authors": "Wang S, Sheng T, Su F, Yang H, Cao R, Wang Q, Fang W-Q, Zhang C, Lu W.",
+        "year": "2025",
+        "title": "Unsilenced inhibitory cortical ensemble gates remote memory retrieval",
+        "venue": "Cell Reports 44:116360",
+        "doi": "10.1016/j.celrep.2025.116360",
+        "desc": "MOUSE. Simultaneous two-photon imaging plus holographic optogenetics gated a dormant remote memory in both directions. Methodologically the closest thing to single-cell read-and-write on a memory in a mammal, and it needs a chronic cranial window and a head-fixed animal: MORE invasive than the 2012 fibre, not less."
+      },
+      {
+        "authors": "Chen Q, Wu A, Yu B, Chae S, Tan Z, Ramot A, Aljadeff J, Komiyama T.",
+        "year": "2026",
+        "title": "Targeted stimulation of motor cortex ensembles drives learned movements",
+        "venue": "Nature",
+        "doi": "10.1038/s41586-026-11174-3",
+        "desc": "MOUSE. About 20 specifically chosen layer-2/3 neurons whose onset precedes movement could trigger a learned forelimb movement. State-dependent: it failed in task-disengaged animals and failed for neurons whose activity followed rather than preceded movement. A trigger into a prepared system, not a command."
+      },
+      {
+        "authors": "Abdeladim L, Jagadisan UK, Shin H, Ogando MB, Adesnik H.",
+        "year": "2026",
+        "title": "Probing inter-areal computations with a two-photon holographic mesoscope",
+        "venue": "Nature Neuroscience 29:2023-2035",
+        "doi": "10.1038/s41593-026-02350-9",
+        "desc": "MOUSE. Simultaneous multi-area read and write at near-single-cell resolution. A methods platform with no memory claim; the scale was bought with a larger optical window, which is the translation-relevant detail."
+      },
+      {
+        "authors": "Chen I-W, Chan CY, Navarro P, de Sars V, Ronzitti E, Oweiss K, Tanese D, Emiliani V.",
+        "year": "2025",
+        "title": "High-throughput synaptic connectivity mapping using in vivo two-photon holographic optogenetics and compressive sensing",
+        "venue": "Nature Neuroscience 28:2141-2153",
+        "doi": "10.1038/s41593-025-02024-y",
+        "desc": "MOUSE. TITLE/ABSTRACT-LEVEL VERIFICATION ONLY. Circuit-mapping throughput rose sharply once access exists; getting access did not get cheaper."
+      },
+      {
+        "authors": "Triplett MA, Gajowa M, Antin B, Sadahiro M, Adesnik H, Paninski L.",
+        "year": "2025",
+        "title": "Rapid learning of neural circuitry from holographic ensemble stimulation enabled by model-based compressed sensing",
+        "venue": "Nature Neuroscience 28:2154-2165",
+        "doi": "10.1038/s41593-025-02053-7",
+        "desc": "MOUSE. TITLE-LEVEL VERIFICATION ONLY. Companion methods paper to N92: the inference efficiency of circuit mapping improved."
+      },
+      {
+        "authors": "Hira R, Isomura Y.",
+        "year": "2026",
+        "title": "Technical development of two-photon optogenetic stimulation and its potential application to brain-machine interfaces",
+        "venue": "Neurophotonics 13:1-23",
+        "doi": "10.1117/1.NPh.13.1.010601",
+        "desc": "REVIEW of mouse-derived literature. The one source where the authors themselves connect two-photon optogenetics to brain-machine interfaces, and they do it prospectively, naming 'the technical challenges that must be addressed'. Cite for 'this is a proposed direction', never for 'this exists': the optics are demonstrated, the application is not."
+      },
+      {
+        "authors": "Yuste R.",
+        "year": "2026",
+        "title": "Neuronal ensembles in cortical function and disease",
+        "venue": "Physiological Reviews 106:1593-1621",
+        "doi": "10.1152/physrev.00003.2025",
+        "desc": "REVIEW, primarily mouse visual cortex. Supplies the vocabulary for ensemble-level access (imprinting by synchrony, pattern-completion trigger cells) without reaching for memory-content language. The ensemble model of the cortex is offered as a model; the disease links are mouse-model alterations, not diagnostic claims about people."
+      },
+      {
+        "authors": "Moore H, Dehnad M, Freelin A, Granger B, Subramanian S, van der Molen T, Kulkarni A, Berto S, Lega BC, Konopka G.",
+        "year": "2026",
+        "title": "Stimulation modulates gene-linked cell assemblies in the human brain",
+        "venue": "Nature 657:724-734",
+        "doi": "10.1038/s41586-026-10879-9",
+        "desc": "HUMAN, and NOT optogenetics: electrical microelectrode-array stimulation of resected ex vivo temporal cortex plus in vivo stimulation, read out with single-nucleus genomics. No opsin, no light, no genetic modification of the patient. Stimulation strengthened cell assemblies and the effect mapped onto cell-type-specific gene regulatory networks: assembly strength and gene expression, not memory content and not falsification. The honest human anchor, and it required resected tissue."
+      },
+      {
+        "authors": "Bunnell B, Lopez FJ, Yuan D, Robinson MR, Duncan JL, Birch DG.",
+        "year": "2026",
+        "title": "Phase I/IIa Study of an Intravitreal Optogenetic Therapy (AGN-151597) in Patients with Advanced Retinitis Pigmentosa",
+        "venue": "Ophthalmology Science 6:101323",
+        "doi": "10.1016/j.xops.2026.101323",
+        "desc": "HUMAN (n=14). DIRECTION IS NEGATIVE: 'There was no evidence of AGN-151597 efficacy in slowing vision decline.' Safety over five years was reported as encouraging. The flagship first-in-human optogenetics trial, in the eye, by intravitreal viral delivery. Citing it as a success inverts the result."
+      },
+      {
+        "authors": "Han X, Zhu Z, Song Z, Liu G, Yin X, Shen J, Xue J, Wu K, Luo X, Cui Z, Lu P.",
+        "year": "2026",
+        "title": "Optogenetic Therapy With UGX-201 in Advanced Nonsyndromic Retinitis Pigmentosa: Safety and Efficacy From an Exploratory Clinical Trial",
+        "venue": "American Journal of Ophthalmology 287:222-236",
+        "doi": "10.1016/j.ajo.2026.03.042",
+        "desc": "HUMAN (n=9). Small, open-label, unrandomised, with a positive signal: +0.30 logMAR at week 52 in the light-perception cohort, and all three no-light-perception participants regained light perception, two sustained at week 52. Read beside N97's null, this sets the realistic frontier of human optogenetics: the retina, viral delivery, vision."
+      },
+      {
+        "authors": "Tran TT, Hernandez-Morales M, Han V, Liu C.",
+        "year": "2026",
+        "title": "Magnetogenetics: Tools for Noninvasive Neuromodulation with Cellular Resolution",
+        "venue": "Journal of Neuroscience 46:e0315252026",
+        "doi": "10.1523/JNEUROSCI.0315-25.2026",
+        "desc": "REVIEW, animal models. The authors' own hedges are the finding: efficacy 'has been met with skepticism', mechanisms 'have been unclear', and 'improvements are still needed for magnetogenetics to become a routine technique'. 'Noninvasive' refers to the stimulation only; the genetic-targeting requirement is unchanged."
+      },
+      {
+        "authors": "Hou X, Jing J, Shi Z, Sun L.",
+        "year": "2026",
+        "title": "Targeted Mechanogenetics to Modulate Specific Deep Neural Circuits",
+        "venue": "Advanced Science",
+        "doi": "10.1002/advs.78177",
+        "desc": "MOUSE. Nanobubble-enhanced ultrasound modulated a deep region with a real behavioural endpoint and 'minimal disturbance in adjacent areas'. The most concrete 2026 step toward deep, implant-free, genetically targeted neuromodulation: the delivery constraint relaxed, the genetic constraint did not, resolution is regional rather than cellular, and biosafety is claimed only 'under the tested conditions'. No memory or engram application."
+      },
+      {
+        "authors": "Gong C, Lu G, Liu B, Che ZP, Ji J, Wei F et al.",
+        "year": "2026",
+        "title": "A wearable non-invasive sonogenetic pacemaker",
+        "venue": "Nature Biomedical Engineering",
+        "doi": "10.1038/s41551-026-01673-z",
+        "desc": "TITLE-LEVEL VERIFICATION ONLY; species not confirmed. CARDIAC, not neural, and OUT OF SCOPE for engram work and for QIF's neural scope. Recorded only as evidence that wearable actuation of genetically sensitised tissue is being demonstrated somewhere in the body. Do not transfer it to the brain."
+      },
+      {
+        "authors": "Brunswick CA, Carpenter CM, Dennis NA, Kwapis JL.",
+        "year": "2025",
+        "title": "Not the same as it ever was: A review of memory modification, updating, and distortion in humans and rodents",
+        "venue": "Neuroscience & Biobehavioral Reviews 174:106195",
+        "doi": "10.1016/j.neubiorev.2025.106195",
+        "desc": "REVIEW, humans and rodents. The right citation for 'human and rodent memory modification share converging mechanisms' without implying shared intervention capability: the human work it reviews is behavioural and pharmacological, not optogenetic."
+      },
+      {
+        "authors": "Shao X, Chen C, Loftus EF, Zhu B.",
+        "year": "2026",
+        "title": "Shared memories of event details in the human brain are altered by misinformation and test expectations",
+        "venue": "PLOS Biology 24:e3003886",
+        "doi": "10.1371/journal.pbio.3003886",
+        "desc": "HUMAN (n=100), fMRI, entirely non-invasive and observational: nothing was done to the brain. 'Misinformation increased the likelihood of people forming shared false memories of event details.' The demonstrated route to a false memory in a person is a social and informational channel, not an optical one. The neural component is correlational pattern similarity and supports association, not a causal neural claim."
       }
     ]
   },
@@ -1250,7 +1466,9 @@
         "neurotechnology-ethics",
         "cortical-circuits"
       ],
-      "papers": [],
+      "papers": [
+        "N95"
+      ],
       "bibKeys": [
         "yuste2017four"
       ],

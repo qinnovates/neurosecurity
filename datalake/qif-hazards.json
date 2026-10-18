@@ -79,7 +79,7 @@
     {
       "id": "QIF-H0004",
       "name": "UCNP-mediated optogenetic dopamine release (980nm) (non-adversarial reading of QIF-T0137)",
-      "description": "Pointer entry. The registrar holds QIF-T0137 as a technique, but the text recorded for it describes a research method that needs gene delivery and a nanoparticle injection, with no adversary and no access model. Deciding sentence in the entry: \"Requires both genetic modification (ChR2 expression) and NP injection (neurosurgery).\" QIF-T0137 has not been moved or edited for this, and the technique count is unchanged. No source is attached here: the sources listed on QIF-T0137 were not re-verified in this pass, so this entry asserts nothing about effect size, incidence or outcome in people. Band tags are carried over from QIF-T0137 without review.",
+      "description": "Pointer entry. The registrar holds QIF-T0137 as a technique, but the text recorded for it describes a research method that needs gene delivery and a nanoparticle injection, with no adversary and no access model. Deciding sentence in the entry: \"Requires both genetic modification (ChR2 expression) and NP injection (neurosurgery).\" QIF-T0137 has not been moved or edited for this, and the technique count is unchanged. The two sources now listed here were resolved at Crossref in the 2026-10-17 intake batch, which also found that the attribution previously carried on QIF-T0137 named the wrong first author; resolving a citation establishes that the paper exists and who wrote it, and this entry still asserts nothing about effect size, incidence or outcome in people. The evidence is rodent. Band tags are carried over from QIF-T0137 without review.",
       "bands": [
         "I0",
         "N1",
@@ -89,7 +89,10 @@
       "related_techniques": [
         "QIF-T0137"
       ],
-      "sources": [],
+      "sources": [
+        "Chen et al. 2018 (Science 359:679-684) DOI:10.1126/science.aaq1144",
+        "Liu et al. 2021 (Nature Communications 12:5662) DOI:10.1038/s41467-021-25993-7"
+      ],
       "peer_review_status": "none",
       "status": "THEORETICAL"
     },
