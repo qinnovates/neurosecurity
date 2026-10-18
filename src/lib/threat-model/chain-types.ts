@@ -36,7 +36,9 @@ export interface GeneratedChainStep {
   detection_window: string;
   /** Component or link id in the device model this step acts on. */
   elementId: string;
+  /** The legacy status the eligibility gate read. Never shown; wording goes through describeEvidence. */
   evidenceStatus: string;
+  evidenceTier: string | null;
 }
 
 export interface GeneratedChainEdge {
@@ -54,8 +56,10 @@ export interface GeneratedChain {
   steps: GeneratedChainStep[];
   defenses: string[];
   edges: GeneratedChainEdge[];
-  /** The weakest evidence status among the steps. */
+  /** The weakest legacy status among the steps; orders the chain list. Never shown; wording goes through describeEvidence. */
   weakestEvidenceStatus: string;
+  /** The tier of the step with the weakest evidence by tier rank. */
+  weakestEvidenceTier: string | null;
   generatorVersion: string;
   registrarVersion: string;
 }
@@ -73,6 +77,17 @@ export interface ChainGenerationResult {
   chains: GeneratedChain[];
   /** The search hit its node budget, so better chains may exist. */
   wasTruncated: boolean;
+  /** Chains the search built before the list was cut to `maxChains`. */
+  chainsFound: number;
+  /** True when `chains` holds fewer than were found, so the list is the first few and not all of them. */
+  wasCapped: boolean;
   /** Set when `chains` is empty, saying why. The filter is never relaxed to fill the list. */
   emptyReason: string | null;
 }
+
+/**
+ * What a generated chain is, said the same way wherever chains are shown. The Chains view
+ * (src/components/threat-model/ChainsSection.tsx) prints the same two sentences; a test holds them together.
+ */
+export const CHAIN_HYPOTHESIS_STATEMENT = 'Chains are assembled along real paths in your device model, using only techniques the engine admits on evidence. '
+  + 'Every chain is a hypothesis for review: a path through the model exists, which is not evidence the attack has been carried out.';

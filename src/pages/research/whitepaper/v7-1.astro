@@ -1,6 +1,7 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import WhitepaperVersionSelector from '@/components/WhitepaperVersionSelector.astro';
+import RegulatoryCorrectionNotice from '@/components/whitepaper/RegulatoryCorrectionNotice.astro';
 import { getWhitepaperStats } from '@/lib/whitepaper-stats';
 import { getLatestChangelog, getTacticsWithCounts, THREAT_DOMAINS } from '@/lib/threat-data';
 import { PILLARS, HOURGLASS_BANDS, HOURGLASS_WIDTHS, TARA_TECHNIQUES } from '@/lib/qif-constants';
@@ -70,6 +71,7 @@ const tacticColors: Record<string, string> = {
 
     <!-- Main content -->
     <div class="max-w-3xl">
+      <RegulatoryCorrectionNotice />
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "TechArticle",

@@ -1,0 +1,59 @@
+/*
+ * Marks. Evidence and "not assessed" are the product's signature and stay monochrome: they
+ * are drawn as SVG in the text colour, so they hold in both themes, on paper and in forced colours.
+ */
+
+.lab-evidence { display: inline-flex; align-items: center; gap: 0.375rem; white-space: nowrap; }
+.lab-evidence-mark, .lab-hatch-swatch, .lab-severity-stripe { flex: none; display: inline-block; vertical-align: -0.125em; color: var(--lab-ink); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+.lab-chip[aria-pressed="true"] :is(.lab-evidence-mark, .lab-hatch-swatch, .lab-severity-stripe) { color: inherit; }
+.lab-chip[data-not-assessed="true"] .lab-hatch-swatch { color: inherit; }
+
+/* Severity: the taller the stripe, the more severe. Red is for Critical and nothing else. */
+.lab-severity { display: inline-flex; align-items: center; gap: 0.375rem; white-space: nowrap; }
+.lab-severity[data-severity="critical"] .lab-severity-stripe { color: var(--lab-critical); }
+
+/* Old class, still on two screens: a hatch swatch before the words, never a pattern behind them. */
+.lab-hatch::before { content: ""; display: inline-block; width: 0.75rem; height: 0.75rem; margin-right: 0.375rem; vertical-align: -0.125em; border: 1px solid currentColor; background-image: repeating-linear-gradient(135deg, currentColor 0 1px, transparent 1px 5px); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+
+/* Legends: mark, short name, optional integer. */
+.lab-legend { display: flex; flex-wrap: wrap; gap: 0.25rem var(--lab-pad); margin: 0; padding: 0; list-style: none; font-size: var(--lab-text-meta); line-height: 1rem; color: var(--lab-ink-soft); }
+.lab-legend li { display: inline-flex; align-items: center; gap: 0.375rem; }
+.lab-legend-name { color: var(--lab-ink); }
+.lab-legend-note { margin: 0.5rem 0 0; font-size: var(--lab-text-meta); line-height: 1rem; color: var(--lab-ink-soft); }
+.lab-legend--stacked { display: grid; gap: 0.25rem; }
+
+/* A set split into parts, with the integers printed. Segments re-size in one move when the set changes. */
+.lab-splitbar { display: grid; gap: 0.5rem; }
+.lab-splitbar-track { display: flex; height: 0.75rem; border: 1px solid var(--lab-ink); border-radius: 3px; overflow: hidden; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+.lab-splitbar-segment { flex-basis: 0; min-width: 3px; color: var(--lab-ink); transition: flex-grow var(--lab-dur-2) var(--lab-ease); }
+.lab-splitbar-segment[data-empty="true"] { min-width: 0; }
+.lab-splitbar-segment:not([data-empty="true"]) ~ .lab-splitbar-segment:not([data-empty="true"]) { border-left: 1px solid var(--lab-ink); }
+.lab-splitbar-segment[data-kind="solid"] { background-color: var(--lab-ink); }
+.lab-splitbar-segment[data-kind="solid"]:not([data-empty="true"]) ~ .lab-splitbar-segment[data-kind="solid"]:not([data-empty="true"]) { border-left-color: var(--lab-panel); }
+.lab-splitbar-segment[data-kind="soft"] { background-color: var(--lab-ink-faint); }
+.lab-splitbar-segment svg, .lab-splitbar-key svg { display: block; width: 100%; height: 100%; }
+.lab-splitbar-key { flex: none; display: inline-block; width: 0.75rem; height: 0.75rem; border: 1px solid var(--lab-ink); color: var(--lab-ink); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+.lab-splitbar-key[data-kind="solid"] { background-color: var(--lab-ink); }
+.lab-splitbar-key[data-kind="soft"] { background-color: var(--lab-ink-faint); }
+.lab-splitbar-list { display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: center; gap: 0.125rem 0.5rem; margin: 0; }
+.lab-splitbar-list dt { display: contents; }
+.lab-splitbar-list dd { margin: 0; color: var(--lab-ink-soft); }
+.lab-splitbar-count { text-align: right; color: var(--lab-ink); }
+
+/* A figure with its label and unit. */
+.lab-stat { display: grid; gap: 0.125rem; min-width: 0; }
+.lab-stat-figure { display: inline-flex; align-items: baseline; gap: 0.375rem; font-size: var(--lab-text-figure); font-weight: 600; line-height: 2rem; font-variant-numeric: tabular-nums; }
+.lab-stat-figure[data-not-assessed="true"] { align-items: center; font-size: var(--lab-text-title); line-height: 2rem; }
+.lab-stat-unit { font-size: var(--lab-text-meta); line-height: 1rem; font-weight: 400; color: var(--lab-ink-soft); }
+.lab-stat-label { color: var(--lab-ink-soft); }
+.lab-stat-note { font-size: var(--lab-text-meta); line-height: 1rem; color: var(--lab-ink-soft); }
+
+/* A tally of a set by evidence: integer, mark, name. */
+.lab-evidence-legend { display: flex; flex-wrap: wrap; gap: 0.125rem var(--lab-pad); margin: 0; padding: 0; list-style: none; color: var(--lab-ink-soft); }
+.lab-evidence-legend li { display: inline-flex; align-items: center; gap: 0.375rem; white-space: nowrap; }
+
+@media (forced-colors: active) {
+  .lab-splitbar-segment[data-kind="solid"], .lab-splitbar-key[data-kind="solid"] { background-color: CanvasText; forced-color-adjust: none; }
+  .lab-splitbar-segment[data-kind="soft"], .lab-splitbar-key[data-kind="soft"] { background-color: GrayText; forced-color-adjust: none; }
+  .lab-splitbar-track, .lab-splitbar-segment, .lab-splitbar-key { border-color: CanvasText; }
+}

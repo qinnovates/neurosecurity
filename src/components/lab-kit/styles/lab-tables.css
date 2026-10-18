@@ -1,0 +1,35 @@
+/* Tables: the header stays put as a translucent bar; rows are one grid step tall. */
+
+.lab-table-wrap { overflow: auto; scroll-padding-top: calc(var(--lab-row) + 0.5rem); }
+.lab-table { width: 100%; border-collapse: collapse; }
+.lab-table caption { text-align: left; padding: 0 var(--lab-gap) 0.375rem; }
+.lab-table th { position: sticky; top: 0; z-index: 1; padding: 0; text-align: left; font-size: var(--lab-text-meta); line-height: 1rem; font-weight: 600; color: var(--lab-ink-soft); background: var(--lab-material); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); box-shadow: inset 0 -1px 0 var(--lab-control-line); white-space: nowrap; }
+.lab-table-sort, .lab-table-head { display: flex; align-items: center; gap: 0.25rem; width: 100%; padding: 0.5rem var(--lab-gap); font: inherit; color: inherit; background: none; border: 0; text-align: left; }
+.lab-table-sort { cursor: pointer; transition: color var(--lab-dur-1) var(--lab-ease); }
+.lab-table-sort:hover, .lab-table th[aria-sort] .lab-table-sort { color: var(--lab-ink); }
+.lab-table td { height: var(--lab-row); padding: 0 var(--lab-gap); border-bottom: 1px solid var(--lab-line); vertical-align: middle; }
+.lab-table tbody tr { transition: background-color var(--lab-dur-1) var(--lab-ease); }
+.lab-table tbody tr:focus-visible, .lab-card:focus-visible { outline-offset: -2px; }
+.lab-table tbody tr[data-openable="true"], .lab-card[data-openable="true"] { cursor: pointer; }
+.lab-table tbody tr[data-openable="true"]:hover, .lab-card[data-openable="true"]:hover { background-color: var(--lab-hover); }
+/* A row dealt with is quieter by colour, never by opacity, so it stays readable. */
+.lab-table tbody tr[data-quiet="true"], .lab-card[data-quiet="true"] { color: var(--lab-ink-soft); }
+/*
+ * Lit: the same item is under the pointer or focus in another view. It has its own fill, stronger than a
+ * hovered row, and an ink bar on its leading edge so it does not rest on the tint alone. Selected: the reader opened it.
+ */
+.lab [data-lit="true"] { background-color: var(--lab-lit); }
+.lab-table tbody tr[data-lit="true"] td:first-child, .lab-card[data-lit="true"] { box-shadow: inset 3px 0 0 var(--lab-ink); }
+.lab-table tbody tr[aria-current="true"], .lab-card[aria-current="true"] { background-color: var(--lab-select-soft); }
+.lab-table tbody tr[aria-current="true"] td:first-child { border-left: 3px solid var(--lab-select); padding-left: calc(var(--lab-gap) - 3px); }
+.lab-table-empty { padding: var(--lab-pad) var(--lab-gap); color: var(--lab-ink-soft); }
+
+/* Under 720px each row is a card. */
+.lab-cards { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
+.lab-card { padding: var(--lab-gap) var(--lab-pad); background: var(--lab-panel); border: 1px solid var(--lab-line); border-radius: var(--lab-radius-l); transition: background-color var(--lab-dur-1) var(--lab-ease); }
+.lab-card[aria-current="true"] { border-color: var(--lab-select); }
+.lab-cards-caption { margin: 0 0 0.375rem; }
+
+@media (pointer: coarse) {
+  .lab-table-sort { min-height: 2.75rem; }
+}

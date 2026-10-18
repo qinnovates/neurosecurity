@@ -5,7 +5,7 @@
   "statistics": {
     "generator": "src/scripts/generate-registrar-statistics.mjs",
     "generated": "2026-10-17",
-    "content_sha256": "ffa03f499de596b97b4731da8cf895a0b7b0ca6ab426790a0ec72f4b6b3c244c",
+    "content_sha256": "f4728d4f989a2fedb91d01164683165df052a40080310aa3b413bb8103478e4f",
     "total_techniques": 176,
     "total_tactics": 17,
     "total_domains": 8,
@@ -76,7 +76,7 @@
       "techniques_without_cvss": 73
     },
     "tara": {
-      "version": "1.10",
+      "version": "1.11",
       "enriched_techniques": 176,
       "dual_use_breakdown": {
         "confirmed": 102,
@@ -401,6 +401,21 @@
         "code corrected: F80.1 -> F80.2",
         "code corrected: F80.2 -> F80.1"
       ]
+    },
+    {
+      "version": "1.11",
+      "date": "2026-10-14",
+      "title": "Descriptive technique notes and three renames",
+      "summary": "Renamed for descriptive clarity; no technique removed. 31 technique notes that opened as instructions now describe the technique ('An adversary may...' or 'If feasible, an adversary could...', by evidence status) and end with the entry's detection guidance. Three techniques renamed; earlier names kept in the new legacy_names field. Basis: 2026-10 framing decision (AI panel recommendation, pending owner acceptance).",
+      "added": [],
+      "changed": [
+        "QIF-T0011 renamed: 'Intermodulation (BCI signal weaponized)' -> 'Intermodulation via BCI telemetry signal'",
+        "QIF-T0046 renamed: 'OTA firmware weaponization' -> 'Malicious over-the-air firmware update'",
+        "QIF-T0099 renamed: 'Consumer-sensor-to-BCI kill chain escalation (pre-implant reconnaissance and cognitive priming via consumer devices)' -> 'Consumer-sensor-to-BCI escalation path (projected)'",
+        "notes rewritten descriptively for 31 techniques: QIF-T0001, QIF-T0004, QIF-T0005, QIF-T0007, QIF-T0008, QIF-T0009, QIF-T0018, QIF-T0022, QIF-T0026, QIF-T0034, QIF-T0037, QIF-T0044, QIF-T0045, QIF-T0046, QIF-T0049, QIF-T0053, QIF-T0059, QIF-T0061, QIF-T0064, QIF-T0066, QIF-T0067, QIF-T0071, QIF-T0103, QIF-T0107, QIF-T0109, QIF-T0038, QIF-T0042, QIF-T0052, QIF-T0054, QIF-T0069, QIF-T0171",
+        "schema: techniques[].legacy_names and techniques[].rename_note added",
+        "QIF-T0171 detection text: US spelling (artifact, behavioral)"
+      ]
     }
   ],
   "tactics": [
@@ -619,7 +634,7 @@
       ],
       "status": "CONFIRMED",
       "ui_category": "SI",
-      "notes": "Inject crafted signals mimicking legitimate brain activity at electrode-tissue boundary. Classical detection via impedance anomaly. QI coherence metric flags phase/timing inconsistency.",
+      "notes": "An adversary may inject crafted signals that mimic legitimate brain activity at the electrode-tissue boundary. Classical detection via impedance anomaly. QI coherence metric flags phase/timing inconsistency. Detection: Impedance anomaly detection, waveform verification, current leakage monitoring.",
       "legacy_ids": [
         "ONI-T007"
       ],
@@ -1297,7 +1312,7 @@
       ],
       "status": "DEMONSTRATED",
       "ui_category": "DM",
-      "notes": "Intercept and modify signals at I0 boundary or BCI telemetry. No-cloning theorem prevents perfect copy of quantum neural states. Bell test detects entanglement disruption.",
+      "notes": "An adversary may intercept and modify signals at the I0 boundary or in BCI telemetry. No-cloning theorem prevents perfect copy of quantum neural states. Bell test detects entanglement disruption. Detection: End-to-end latency monitoring, cryptographic integrity checks, signal fingerprinting.",
       "legacy_ids": [],
       "legacy_technique_id": "T2004",
       "niss": {
@@ -1478,7 +1493,7 @@
       ],
       "status": "THEORETICAL",
       "ui_category": "SI",
-      "notes": "Exploit ion channel quantum tunneling to inject false synaptic events. Detectable via Q_tunnel term anomaly in QI equation. Requires understanding of target's ion channel tunneling profile.",
+      "notes": "If feasible, an adversary could exploit ion channel quantum tunneling to inject false synaptic events. Detectable via Q_tunnel term anomaly in QI equation. Requires understanding of target's ion channel tunneling profile. Detection: Tunneling current anomaly detection, junction impedance spectroscopy.",
       "legacy_ids": [],
       "legacy_technique_id": "T2005",
       "niss": {
@@ -1853,7 +1868,7 @@
       ],
       "status": "DEMONSTRATED",
       "ui_category": "DM",
-      "notes": "Exploit weaknesses in BCI data protocols to inject commands or alter data formatting, bypassing security controls. Targets the digital decoding/telemetry pipeline.",
+      "notes": "An adversary may exploit weaknesses in BCI data protocols to inject commands or alter data formatting, bypassing security controls. Targets the digital decoding/telemetry pipeline. Detection: Protocol conformance testing, sequence number validation, timing analysis.",
       "legacy_ids": [
         "ONI-T008"
       ],
@@ -2023,7 +2038,7 @@
       ],
       "status": "THEORETICAL",
       "ui_category": "SI",
-      "notes": "Intercept and modify motor commands or cognitive instructions in transit through the BCI system. Targets closed-loop stimulation devices. Intent verification detects command-intent mismatch.",
+      "notes": "If feasible, an adversary could intercept and modify motor commands or cognitive instructions in transit through the BCI system. Targets closed-loop stimulation devices. Intent verification detects command-intent mismatch. Detection: Command pattern anomaly detection, user intent verification, behavioral consistency checks.",
       "legacy_ids": [
         "ONI-T009"
       ],
@@ -2309,7 +2324,7 @@
       ],
       "status": "EMERGING",
       "ui_category": "SI",
-      "notes": "Inject RF signals calibrated to neural frequencies through BCI's own antenna or nearby transmitter. Synthetic brainwave patterns bypass analog front-end filters designed for biological signals. CAUTION 2026-07-31: this entry currently conflates two physically distinct mechanisms. (1) The mechanism described above and the Armengol-Urpi et al. 2023 source is analog-front-end RF injection: electrode wires act as unintended antennas, RF is demodulated into fabricated readings at the acquisition stage; the brain itself is never affected; no Tesla-scale field, no software access needed, demonstrated through walls at ~3m. (2) The tara.engineering fields below (1.5-2.0T field strength, rTMS coil hardware, 1-50Hz pulse pattern) describe TMS-grade electromagnetic neuromodulation, which actually induces neural activity via a completely different physical mechanism. These should likely be split into two separate techniques; treat this entry's clinical/engineering/CVSS fields as describing mechanism (2), and its notes/Armengol-Urpi source as describing mechanism (1), until resolved.",
+      "notes": "An adversary may inject RF signals calibrated to neural frequencies through the BCI's own antenna or a nearby transmitter. Synthetic brainwave patterns bypass analog front-end filters designed for biological signals. CAUTION 2026-07-31: this entry currently conflates two physically distinct mechanisms. (1) The mechanism described above and the Armengol-Urpi et al. 2023 source is analog-front-end RF injection: electrode wires act as unintended antennas, RF is demodulated into fabricated readings at the acquisition stage; the brain itself is never affected; no Tesla-scale field, no software access needed, demonstrated through walls at ~3m. (2) The tara.engineering fields below (1.5-2.0T field strength, rTMS coil hardware, 1-50Hz pulse pattern) describe TMS-grade electromagnetic neuromodulation, which actually induces neural activity via a completely different physical mechanism. These should likely be split into two separate techniques; treat this entry's clinical/engineering/CVSS fields as describing mechanism (2), and its notes/Armengol-Urpi source as describing mechanism (1), until resolved. Detection: RF spectrum analysis, field strength monitoring, EEG artifact detection.",
       "legacy_ids": [],
       "legacy_technique_id": "T2009",
       "niss": {
@@ -2882,7 +2897,7 @@
     },
     {
       "id": "QIF-T0011",
-      "attack": "Intermodulation (BCI signal weaponized)",
+      "attack": "Intermodulation via BCI telemetry signal",
       "tactic": "QIF-E.RD",
       "bands": "S2→N4–N6",
       "band_ids": [
@@ -3132,7 +3147,7 @@
         ],
         "qif_contribution": "threat_recontextualization"
       },
-      "technique": "Intermodulation (BCI signal weaponized)",
+      "technique": "Intermodulation via BCI telemetry signal",
       "tara_alias": "TARA-COG-M-003",
       "tara_domain_primary": "COG",
       "tara_domain_secondary": [],
@@ -3153,6 +3168,10 @@
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
       },
+      "legacy_names": [
+        "Intermodulation (BCI signal weaponized)"
+      ],
+      "rename_note": "Renamed 2026-10 for descriptive clarity; no technique removed.",
       "severity": "high",
       "severity_source": "niss",
       "severity_legacy": "critical"
@@ -4499,7 +4518,7 @@
       ],
       "status": "DEMONSTRATED",
       "ui_category": "DM",
-      "notes": "Craft minimal perturbations that pass through BCI analog/digital filters but flip decoder output. Exploits gap between what filters remove and what classifiers rely on.",
+      "notes": "An adversary may craft minimal perturbations that pass through BCI analog/digital filters but flip decoder output. Exploits gap between what filters remove and what classifiers rely on. Detection: Input validation, filter integrity monitoring, adversarial example detection.",
       "legacy_ids": [],
       "legacy_technique_id": "T2203",
       "niss": {
@@ -5138,7 +5157,7 @@
       ],
       "status": "EMERGING",
       "ui_category": "DS",
-      "notes": "Manipulate neurofeedback display or stimulation parameters in closed-loop BCIs. User adapts brain state to false feedback, causing maladaptive neuroplasticity. Therapeutic BCIs (ADHD, depression) most vulnerable.",
+      "notes": "An adversary may manipulate neurofeedback displays or stimulation parameters in closed-loop BCIs. User adapts brain state to false feedback, causing maladaptive neuroplasticity. Therapeutic BCIs (ADHD, depression) most vulnerable. Detection: Feedback-signal correlation verification, display integrity hashing, outcome trend analysis.",
       "legacy_ids": [],
       "legacy_technique_id": "T2207",
       "niss": {
@@ -6133,7 +6152,7 @@
       ],
       "status": "THEORETICAL",
       "ui_category": "PS",
-      "notes": "Flood neural tissue with maximum stimulation across all available electrodes simultaneously. Unlike jamming (targeted), flooding is broad-area saturation. Can trigger seizures. Emergency shutoff required.",
+      "notes": "If feasible, an adversary could drive maximum stimulation across all available electrodes simultaneously. Unlike jamming (targeted), flooding is broad-area saturation. Can trigger seizures. Emergency shutoff required. Detection: Current overload monitoring, seizure detection, post-stimulation EEG assessment.",
       "legacy_ids": [],
       "legacy_technique_id": "T2302",
       "niss": {
@@ -8170,7 +8189,7 @@
       ],
       "status": "THEORETICAL",
       "ui_category": "CI",
-      "notes": "Inject false information into working memory circuits via targeted hippocampal/PFC stimulation. User perceives false memories or corrupted working memory contents as genuine. Closed-loop memory BCIs most vulnerable.",
+      "notes": "If feasible, an adversary could introduce false information into working memory circuits via targeted hippocampal/PFC stimulation. User perceives false memories or corrupted working memory contents as genuine. Closed-loop memory BCIs most vulnerable. Detection: Working memory performance monitoring, theta power spectral analysis, sustained activity tracking.",
       "legacy_ids": [],
       "legacy_technique_id": "T2403",
       "niss": {
@@ -8894,7 +8913,7 @@
       ],
       "status": "THEORETICAL",
       "ui_category": "CI",
-      "notes": "Manipulate sense of agency -- user believes externally triggered actions are self-initiated, or vice versa. Targets basal ganglia (motor selection) and PFC (executive control). Neurorights: cognitive liberty.",
+      "notes": "If feasible, an adversary could manipulate the sense of agency, so that the user believes externally triggered actions are self-initiated, or vice versa. Targets basal ganglia (motor selection) and PFC (executive control). Neurorights: cognitive liberty. Detection: Agency scale monitoring, intentional binding measurement, self-report tracking.",
       "legacy_ids": [],
       "legacy_technique_id": "T2406",
       "niss": {
@@ -9172,7 +9191,7 @@
       ],
       "status": "EMERGING",
       "ui_category": "EX",
-      "notes": "Extract the user's unique brainprint (ERP template, spectral fingerprint) for later replay/spoofing. Unlike passwords, neural biometrics cannot be changed. Permanent compromise if extracted.",
+      "notes": "An adversary may extract a user's individual brainprint (ERP template, spectral fingerprint) for later replay or spoofing. Unlike passwords, neural biometrics cannot be changed. Permanent compromise if extracted. Detection: Template access logging, cross-session consistency checks, theft detection via usage patterns.",
       "legacy_ids": [],
       "legacy_technique_id": "T2407",
       "niss": {
@@ -10182,7 +10201,7 @@
       ],
       "status": "CONFIRMED",
       "ui_category": "SE",
-      "notes": "Extract neural data from BLE/RF emissions via timing, power, or EM side-channels. All wireless BCIs vulnerable. Consumer devices (Muse, EMOTIV) transmit unencrypted.",
+      "notes": "An adversary may extract neural data from BLE/RF emissions via timing, power or EM side channels. Wireless BCIs without link-layer protection are exposed. Consumer devices (Muse, EMOTIV) transmit unencrypted. Detection: RF emission monitoring, protocol compliance testing, traffic analysis detection.",
       "legacy_ids": [
         "ONI-T002",
         "ONI-T005"
@@ -10504,7 +10523,7 @@
       ],
       "status": "CONFIRMED",
       "ui_category": "EX",
-      "notes": "Compromise cloud services processing neural data (EMOTIV Cortex API, Neuralink cloud). Data exfiltration, model poisoning, API manipulation. PQC/QKD protects data in transit.",
+      "notes": "An adversary may compromise cloud services that process neural data (EMOTIV Cortex API, Neuralink cloud). Data exfiltration, model poisoning, API manipulation. PQC/QKD protects data in transit. Detection: Cloud security monitoring, API anomaly detection, data access auditing.",
       "legacy_ids": [],
       "legacy_technique_id": "T2503",
       "niss": {
@@ -10655,7 +10674,7 @@
       ],
       "status": "CONFIRMED",
       "ui_category": "EX",
-      "notes": "Record encrypted BCI traffic now, decrypt when quantum computers arrive (2030-2035). Neural data is permanently sensitive -- can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival.",
+      "notes": "An adversary may record encrypted BCI traffic now and decrypt it if a cryptographically relevant quantum computer becomes available (projected 2030-2035). Neural data is permanently sensitive -- can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival. Detection: Encrypted traffic volume monitoring, data exfiltration detection, PQC migration tracking.",
       "legacy_ids": [],
       "legacy_technique_id": "T2504",
       "niss": {
@@ -10790,7 +10809,7 @@
     },
     {
       "id": "QIF-T0046",
-      "attack": "OTA firmware weaponization",
+      "attack": "Malicious over-the-air firmware update",
       "tactic": "QIF-C.IM",
       "bands": "S2–S3",
       "band_ids": [
@@ -10806,7 +10825,7 @@
       ],
       "status": "EMERGING",
       "ui_category": "PE",
-      "notes": "Compromise OTA firmware update mechanism to push malicious updates to implanted BCIs. Update channel becomes persistent backdoor. Secure boot + cryptographic attestation + rollback protection required.",
+      "notes": "An adversary may compromise the OTA firmware update mechanism to push malicious updates to implanted BCIs. Update channel becomes persistent backdoor. Secure boot + cryptographic attestation + rollback protection required. Detection: Firmware signature verification, update integrity checks, behavioral monitoring post-update.",
       "legacy_ids": [],
       "legacy_technique_id": "T2505",
       "niss": {
@@ -10921,7 +10940,7 @@
         ],
         "qif_contribution": "framework_mapping"
       },
-      "technique": "OTA firmware weaponization",
+      "technique": "Malicious over-the-air firmware update",
       "tara_alias": "TARA-SIL-M-010",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
@@ -10953,6 +10972,10 @@
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
       },
+      "legacy_names": [
+        "OTA firmware weaponization"
+      ],
+      "rename_note": "Renamed 2026-10 for descriptive clarity; no technique removed.",
       "severity": "medium",
       "severity_source": "niss",
       "severity_legacy": "high"
@@ -11294,7 +11317,7 @@
       ],
       "status": "CONFIRMED",
       "ui_category": "PE",
-      "notes": "Exploit weak or absent authentication on BCI wireless interfaces. Many consumer and older clinical devices assume connection implies authorization. No pairing, no encryption, no auth.",
+      "notes": "An adversary may exploit weak or absent authentication on BCI wireless interfaces. Many consumer and older clinical devices assume connection implies authorization. No pairing, no encryption, no auth. Detection: Authentication attempt monitoring, unauthorized connection detection, pairing audit log.",
       "legacy_ids": [
         "ONI-T022"
       ],
@@ -11788,7 +11811,7 @@
       ],
       "status": "DEMONSTRATED",
       "ui_category": "EX",
-      "notes": "Extract event-related potentials (P300, N170, N400) that reveal cognitive states, recognition, and decision-making processes. BCI apps can embed covert stimulus-response protocols.",
+      "notes": "An adversary may extract event-related potentials (P300, N170, N400) associated with recognition, attention and decision-making. BCI apps can embed covert stimulus-response protocols. Detection: Stimulus audit logging, unauthorized ERP extraction detection, data access monitoring.",
       "legacy_ids": [
         "ONI-T016"
       ],
@@ -12049,7 +12072,7 @@
       ],
       "status": "CONFIRMED",
       "ui_category": "EX",
-      "notes": "Record patterns that reveal attention, emotion, fatigue, or other cognitive states without user awareness. Consumer BCI apps routinely over-collect. Attention-tracking in workplace BCIs.",
+      "notes": "An adversary may record signal patterns associated with attention, emotion, fatigue or other cognitive states without user awareness. Consumer BCI apps routinely over-collect. Attention-tracking in workplace BCIs. Detection: Classification audit logging, unauthorized state capture detection, data flow monitoring.",
       "legacy_ids": [
         "ONI-T017"
       ],
@@ -12310,7 +12333,7 @@
       ],
       "status": "THEORETICAL",
       "ui_category": "EX",
-      "notes": "Extract memory-related neural patterns revealing personal experiences, knowledge, or intentions. Targets hippocampal activity. High-density implants (Neuralink, Utah Array) approach memory-trace resolution.",
+      "notes": "If feasible, an adversary could extract memory-related neural patterns associated with personal experiences, knowledge or intentions. Targets hippocampal activity. High-density implants (Neuralink, Utah Array) approach memory-trace resolution. Detection: Memory protocol audit logging, unauthorized access detection, hippocampal activity monitoring.",
       "legacy_ids": [
         "ONI-T018"
       ],
@@ -13438,7 +13461,7 @@
       "sources": [],
       "status": "THEORETICAL",
       "ui_category": "DM",
-      "notes": "Embed recurring attack patterns that survive system resets by exploiting learned neural pathways or stored calibration data. Leverages neuroplasticity -- brain adapts to malicious patterns, making them harder to remove.",
+      "notes": "If feasible, an adversary could embed recurring attack patterns that survive system resets by exploiting learned neural pathways or stored calibration data. Leverages neuroplasticity -- brain adapts to malicious patterns, making them harder to remove. Detection: Cross-session performance pattern analysis, pathway stability monitoring, unlearning protocols.",
       "legacy_ids": [
         "ONI-T010"
       ],
@@ -13924,7 +13947,7 @@
       "sources": [],
       "status": "THEORETICAL",
       "ui_category": "DM",
-      "notes": "Craft malicious signals that maintain legitimate coherence scores (Cs) to bypass QI metric. Directly attacks QIF's detection mechanism. Defense: multi-factor signal validation, behavioral analysis beyond coherence, ensemble detection.",
+      "notes": "If feasible, an adversary could craft malicious signals that maintain legitimate coherence scores (Cs) to bypass the QI metric. Directly attacks QIF's detection mechanism. Defense: multi-factor signal validation, behavioral analysis beyond coherence, ensemble detection. Detection: Multi-dimensional validation (coherence + spatial + temporal + spectral), anomaly detection beyond single metric.",
       "legacy_ids": [
         "ONI-T013"
       ],
@@ -14502,7 +14525,7 @@
       ],
       "status": "EMERGING",
       "ui_category": "PE",
-      "notes": "Flood user with BCI-mediated permission requests until cognitive fatigue leads to reflexive approval of malicious requests. Exploits the neural-intent interface where 'yes/no' decisions may be captured from brain signals. BCI app ecosystems with frequent permission prompts are the attack surface.",
+      "notes": "An adversary may flood a user with BCI-mediated permission requests until cognitive fatigue leads to reflexive approval of malicious requests. Exploits the neural-intent interface where 'yes/no' decisions may be captured from brain signals. BCI app ecosystems with frequent permission prompts are the attack surface. Detection: Permission request rate monitoring, approval pattern analysis, cognitive load estimation.",
       "legacy_ids": [],
       "legacy_technique_id": "T2807",
       "niss": {
@@ -15016,7 +15039,7 @@
       ],
       "status": "THEORETICAL",
       "ui_category": "DM",
-      "notes": "Manipulate BCI parameters along adiabatic paths in neural phase space, keeping instantaneous change rates below detection thresholds while accumulating significant state displacement over time. Unlike generic gradual drift (QIF-T0045), this attack is formalized in dynamical systems theory: the attacker traces a path through parameter space that avoids bifurcation boundaries, ensuring the neural system tracks smoothly to the target state without triggering discontinuous transitions that detection systems monitor. Defense: QI phase space trajectory curvature monitoring, cumulative displacement tracking, Lyapunov exponent trend analysis. Derivation Log Entry 45.",
+      "notes": "If feasible, an adversary could manipulate BCI parameters along adiabatic paths in neural phase space, keeping instantaneous change rates below detection thresholds while accumulating significant state displacement over time. Unlike generic gradual drift (QIF-T0045), this attack is formalized in dynamical systems theory: the attacker traces a path through parameter space that avoids bifurcation boundaries, ensuring the neural system tracks smoothly to the target state without triggering discontinuous transitions that detection systems monitor. Defense: QI phase space trajectory curvature monitoring, cumulative displacement tracking, Lyapunov exponent trend analysis. Derivation Log Entry 45. Detection: Phase space trajectory curvature monitoring, Lyapunov exponent trending, cumulative displacement tracking.",
       "legacy_ids": [],
       "legacy_technique_id": "T2061",
       "niss": {
@@ -15342,7 +15365,7 @@
       ],
       "status": "DEMONSTRATED",
       "ui_category": "SI",
-      "notes": "Replay recorded or GAN-synthesized neural signals that reproduce the dynamical system trajectory of legitimate brain activity. 20 verified attack methods exist (2012-2025) spanning RF injection (Brain-Hack), GAN synthesis (ATGAN, EEG-GAN), template replay, subliminal probing (66.7% success), and adversarial ML (Professor X backdoors, universal perturbations). Current BCI systems have 0% detection rate against sophisticated replays. CRITICAL DUAL-USE: The same replay physics enables therapeutic applications (vision restoration, sensory prosthetics). Defense: Biological TLS validation (spatial dipole patterns, H-H temporal compliance, 1/f scaling, microstate compliance, challenge-response), phase space attractor geometry validation. Priority case study per Kevin. Derivation Log Entries 45-46.",
+      "notes": "An adversary may replay recorded or GAN-synthesized neural signals that reproduce the dynamical system trajectory of legitimate brain activity. 20 verified attack methods exist (2012-2025) spanning RF injection (Brain-Hack), GAN synthesis (ATGAN, EEG-GAN), template replay, subliminal probing (66.7% success), and adversarial ML (Professor X backdoors, universal perturbations). Current BCI systems have 0% detection rate against sophisticated replays. CRITICAL DUAL-USE: The same replay physics enables therapeutic applications (vision restoration, sensory prosthetics). Defense: Biological TLS validation (spatial dipole patterns, H-H temporal compliance, 1/f scaling, microstate compliance, challenge-response), phase space attractor geometry validation. Priority case study per Kevin. Derivation Log Entries 45-46. Detection: Biological TLS (spatial dipole, H-H compliance, 1/f scaling, microstate, challenge-response), phase space attractor validation.",
       "legacy_ids": [],
       "legacy_technique_id": "T2062",
       "niss": {
@@ -15945,7 +15968,7 @@
       ],
       "status": "THEORETICAL",
       "ui_category": "EX",
-      "notes": "Extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain has unique separatrix geometry — the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker extracts a dynamical fingerprint without requiring enrollment or stored biometrics. This is a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45.",
+      "notes": "If feasible, an adversary could extract individual identity information by observing neural dynamical transitions (state changes, attractor switching, bifurcation responses). Each person's brain is hypothesized to have unique separatrix geometry — the boundaries between attractor basins in phase space. By probing near these boundaries (via subtle stimuli or environmental manipulation) and observing which way the neural state falls, an attacker could extract a dynamical fingerprint without requiring enrollment or stored biometrics. This would be a side-channel attack on the brain's dynamical structure. Defense: Rate-limit observable transitions at I0, add noise to transition timing, detect probing patterns. Derivation Log Entry 45. Detection: Transition rate monitoring, probe pattern detection, unauthorized phase space analysis detection.",
       "legacy_ids": [],
       "legacy_technique_id": "T2064",
       "niss": {
@@ -16530,7 +16553,7 @@
       ],
       "status": "EMERGING",
       "ui_category": "DM",
-      "notes": "Exploit the re-enrollment or adaptive baseline update window in BCI authentication systems. When a BCI recalibrates (daily calibration, post-seizure reset, firmware update, drift correction), inject adversarial signals during the enrollment period to corrupt the stored baseline. Three windows: (1) initial enrollment, (2) periodic recalibration, (3) drift-triggered adaptation. Once the baseline is poisoned, all subsequent authentication is compromised. This is the fundamental vulnerability that motivated QIF's baseline-free 'Biological TLS' architecture: by validating signals against universal biological physics (spatial dipole patterns, H-H compliance, 1/f scaling, microstates) rather than individual baselines, the entire attack surface is eliminated. Defense: Biological TLS validation (no baselines needed), multi-session enrollment consistency checks, anomaly detection during calibration windows. Derivation Log Entry 46.",
+      "notes": "An adversary may exploit the re-enrollment or adaptive baseline update window in BCI authentication systems. When a BCI recalibrates (daily calibration, post-seizure reset, firmware update, drift correction), adversarial signals injected during the enrollment period can corrupt the stored baseline. Three windows: (1) initial enrollment, (2) periodic recalibration, (3) drift-triggered adaptation. Once the baseline is poisoned, all subsequent authentication is compromised. This is the fundamental vulnerability that motivated QIF's baseline-free 'Biological TLS' architecture: by validating signals against universal biological physics (spatial dipole patterns, H-H compliance, 1/f scaling, microstates) rather than individual baselines, this attack surface would be removed (proposed, unvalidated). Defense: Biological TLS validation (no baselines needed), multi-session enrollment consistency checks, anomaly detection during calibration windows. Derivation Log Entry 46. Detection: Baseline-free biological TLS (eliminates baseline dependency), historical comparison, multi-session validation.",
       "legacy_ids": [],
       "legacy_technique_id": "T2066",
       "niss": {
@@ -22322,7 +22345,7 @@
     },
     {
       "id": "QIF-T0099",
-      "attack": "Consumer-sensor-to-BCI kill chain escalation (pre-implant reconnaissance and cognitive priming via consumer devices)",
+      "attack": "Consumer-sensor-to-BCI escalation path (projected)",
       "tactic": "QIF-S.CH",
       "bands": "S1→S2→S3→I0→N1→N7",
       "band_ids": [
@@ -22587,7 +22610,7 @@
         "original_authors": null,
         "qif_contribution": "chain_synthesis"
       },
-      "technique": "Consumer-sensor-to-BCI kill chain escalation (pre-implant reconnaissance and cognitive priming via consumer devices)",
+      "technique": "Consumer-sensor-to-BCI escalation path (projected)",
       "tara_alias": "TARA-COG-R-012",
       "tara_domain_primary": "SIL",
       "tara_domain_secondary": [],
@@ -22608,6 +22631,10 @@
         "derived_by": "src/scripts/migrate-populate-evidence-tier.py",
         "derived_on": "2026-10-07"
       },
+      "legacy_names": [
+        "Consumer-sensor-to-BCI kill chain escalation (pre-implant reconnaissance and cognitive priming via consumer devices)"
+      ],
+      "rename_note": "Renamed 2026-10 for descriptive clarity; no technique removed.",
       "severity": "medium",
       "severity_source": "niss",
       "severity_legacy": "critical"
@@ -23223,7 +23250,7 @@
       ],
       "status": "DEMONSTRATED",
       "ui_category": "PE",
-      "notes": "Exploit the SSVEP pathway by injecting imperceptible display flicker (above critical flicker fusion threshold, ~60Hz) that drives visual cortex responses without user awareness. Proven: Ming et al. 2023 demonstrated 60Hz flickers invisible to users produce classifiable SSVEP responses at 52.8 bits/min. Attack scenarios: (1) inject false BCI commands by matching SSVEP control frequencies, (2) jam BCI operation with broadband visual noise, (3) exfiltrate neural state via stimulus-response probing, (4) trigger photosensitive seizures at epileptogenic frequencies. Unlike T0040 (neurophishing via app-layer stimuli), this attack operates at the display hardware level and requires no BCI application cooperation. The display itself becomes the attack vector.",
+      "notes": "An adversary may exploit the SSVEP pathway by injecting imperceptible display flicker (above critical flicker fusion threshold, ~60Hz) that drives visual cortex responses without user awareness. Ming et al. 2023 demonstrated 60Hz flickers invisible to users produce classifiable SSVEP responses at 52.8 bits/min. Scenarios: (1) false BCI commands matching SSVEP control frequencies, (2) jamming of BCI operation with broadband visual noise, (3) inference of neural state through stimulus-response probing, (4) photosensitive seizures at epileptogenic frequencies. Unlike T0040 (neurophishing via app-layer stimuli), this attack operates at the display hardware level and requires no BCI application cooperation. The display itself becomes the attack vector. Detection: Display frame-rate analysis, sub-frame luminance monitoring, SSVEP response correlation with non-user-initiated stimuli, firmware integrity checking on display controllers.",
       "legacy_ids": [],
       "legacy_technique_id": "T2103",
       "niss": {
@@ -23868,7 +23895,7 @@
       ],
       "status": "THEORETICAL",
       "ui_category": "SI",
-      "notes": "Replay previously valid neural signal nonces to bypass freshness/replay protections. Exploits lack of temporal validation in neural signal authentication. Analogous to nonce replay in cryptographic protocols. From Murcia neural cyberattack taxonomy.",
+      "notes": "If feasible, an adversary could replay previously valid neural signal nonces to bypass freshness/replay protections. Exploits lack of temporal validation in neural signal authentication. Analogous to nonce replay in cryptographic protocols. From Murcia neural cyberattack taxonomy. Detection: Sequence number validation, timestamp freshness checks, session binding verification.",
       "legacy_ids": [],
       "legacy_technique_id": null,
       "niss": {
@@ -24161,7 +24188,7 @@
       ],
       "status": "THEORETICAL",
       "ui_category": "EX",
-      "notes": "Target the data alignment step used by adversarial defenses (ABAT, A3E). If defenders use Euclidean alignment or reference matrices for cross-session EEG normalization, an attacker who can influence alignment reference data can bias the alignment transform, causing downstream misclassification. QIF-derived: inferred from defense architecture analysis.",
+      "notes": "If feasible, an adversary could target the data alignment step used by adversarial defenses (ABAT, A3E). If defenders use Euclidean alignment or reference matrices for cross-session EEG normalization, an attacker who can influence alignment reference data can bias the alignment transform, causing downstream misclassification. QIF-derived: inferred from defense architecture analysis. Detection: Cross-stage data validation, statistical anomaly detection, pipeline integrity checks.",
       "legacy_ids": [],
       "legacy_technique_id": null,
       "niss": {
@@ -31645,7 +31672,7 @@
       ],
       "status": "THEORETICAL",
       "ui_category": "PE",
-      "notes": "Compromise of the infrastructure that stores, retrains, serves or configures a deployed BCI decoder, as opposed to its training data or its inputs. Sub-types named by Bagley et al. 2026 (section 2.4.4 and Figure 2; review, preprint): model registry or repository substitution, retraining-loop hijack, monitoring evasion, deployment-configuration tampering and compiler or runtime attacks. A malicious federated aggregator distributing a manipulated global model is the same mechanism. PROJECTED: no BCI-specific incident or demonstration was found. Differs from QIF-T0043 and QIF-T0046, which concern hardware and firmware: a substituted or slowly degraded model can change device behaviour with firmware attestation intact. Keep distinct from QIF-T0058 and QIF-T0071 (poisoning of calibration or re-enrolment data), QIF-T0024 (training-data poisoning) and QIF-T0017 (poisoned upstream pre-trained model). NISS vector revised from the originally proposed NISS:1.1/BI:L/CR:N/CD:H/CV:P/RV:T/NP:N (2.7) to NISS:1.1/BI:L/CR:N/CD:H/CV:I/RV:P/NP:N (4.7) on owner instruction: CV:I because substitution of a deployed decoder happens without the subject's knowledge and with no consent step they could refuse, and RV:P because restoring a known-good model does not undo decisions already acted on, nor user adaptation to the substituted behaviour. BI:L, CR:N, CD:H and NP:N are unchanged from the proposal. Evidence basis: review only. The sole source for this entry is the Bagley et al. 2026 review preprint (arXiv:2607.10451v1), which is not peer reviewed; no demonstration against a neural decoder or BCI pipeline was found. Status is capped at THEORETICAL on that basis. Recorded as a sub-technique of QIF-T0043 via parent_id: its status, NISS vector and sources are its own and do not restate the parent's.",
+      "notes": "If feasible, an adversary could compromise the infrastructure that stores, retrains, serves or configures a deployed BCI decoder, as opposed to its training data or its inputs. Sub-types named by Bagley et al. 2026 (section 2.4.4 and Figure 2; review, preprint): model registry or repository substitution, retraining-loop hijack, monitoring evasion, deployment-configuration tampering and compiler or runtime attacks. A malicious federated aggregator distributing a manipulated global model is the same mechanism. PROJECTED: no BCI-specific incident or demonstration was found. Differs from QIF-T0043 and QIF-T0046, which concern hardware and firmware: a substituted or slowly degraded model can change device behavior with firmware attestation intact. Keep distinct from QIF-T0058 and QIF-T0071 (poisoning of calibration or re-enrollment data), QIF-T0024 (training-data poisoning) and QIF-T0017 (poisoned upstream pre-trained model). NISS vector revised from the originally proposed NISS:1.1/BI:L/CR:N/CD:H/CV:P/RV:T/NP:N (2.7) to NISS:1.1/BI:L/CR:N/CD:H/CV:I/RV:P/NP:N (4.7) on owner instruction: CV:I because substitution of a deployed decoder happens without the subject's knowledge and with no consent step they could refuse, and RV:P because restoring a known-good model does not undo decisions already acted on, nor user adaptation to the substituted behavior. BI:L, CR:N, CD:H and NP:N are unchanged from the proposal. Evidence basis: review only. The sole source for this entry is the Bagley et al. 2026 review preprint (arXiv:2607.10451v1), which is not peer reviewed; no demonstration against a neural decoder or BCI pipeline was found. Status is capped at THEORETICAL on that basis. Recorded as a sub-technique of QIF-T0043 via parent_id: its status, NISS vector and sources are its own and do not restate the parent's. Detection: Model artifact attestation, registry provenance tracking, configuration-change auditing, behavioral drift monitoring against a pinned reference model.",
       "legacy_ids": [],
       "legacy_technique_id": null,
       "niss": {
@@ -31704,7 +31731,7 @@
             "retraining_pipeline",
             "model_serving_infrastructure"
           ],
-          "detection": "Model artefact attestation, registry provenance tracking, configuration-change auditing, behavioural drift monitoring against a pinned reference model"
+          "detection": "Model artifact attestation, registry provenance tracking, configuration-change auditing, behavioral drift monitoring against a pinned reference model"
         },
         "dsm5": {
           "primary": [],
@@ -32361,7 +32388,7 @@
   ],
   "taxonomy": "QIF Locus Taxonomy v1.0",
   "scoring": "NISS v1.1 (Neural Impact Scoring System)",
-  "generated": "2026-10-17T03:35:21Z",
+  "generated": "2026-10-17T11:28:00Z",
   "legacy_mitre_compatibility": {
     "id_range": "T2001-T2899 (avoids collision with MITRE ATT&CK T1001-T1659)",
     "tactic_ids": "Standard MITRE TA#### where applicable, TA0050-TA0053 for BCI-specific",
@@ -32618,6 +32645,20 @@
       "format": {
         "parent_id": "QIF-Txxxx of the parent technique, or null for a top-level technique",
         "note": "A child's status is independent of its parent's and must not be read as the parent's. Children are counted in statistics.total_techniques like any other entry; statistics.by_level reports the top-level/child split."
+      }
+    },
+    "legacy_names": {
+      "added": "2026-10-14",
+      "description": "Earlier display names of a technique, kept as aliases after a rename so old names still resolve in search and queries. The canonical QIF-Txxxx id never changes.",
+      "format": {
+        "legacy_names": "Array of previous `technique`/`attack` names, oldest first; absent or empty if never renamed"
+      }
+    },
+    "rename_note": {
+      "added": "2026-10-14",
+      "description": "Short public note explaining why a technique was renamed, shown on the technique page.",
+      "format": {
+        "rename_note": "One or two sentences, or absent"
       }
     }
   },

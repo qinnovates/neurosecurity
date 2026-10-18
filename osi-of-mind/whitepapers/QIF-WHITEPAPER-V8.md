@@ -233,7 +233,7 @@ New sections (12-18) address: patient sovereignty, the neural terminal, autonomy
   - 4.2 The 11-Band Stack (7 Neural + I0 + 3 Synthetic)
   - 4.3 I0: The Bottleneck
   - 4.4 The Classical Ceiling
-  - 4.5 Severity Stratification
+  - 4.5 Severity Stratification (superseded by addressing version 2, 2026-10-06: band codes are addresses, not a severity order)
   - 4.6 Frequency-Regime Security
 - [5. The Unified QI Equation](#5-the-unified-qi-equation)
   - 5.1 QI(b,t) = e^{-S(b,t)}
@@ -349,7 +349,7 @@ Framework:  QIF Hourglass (11 bands) — defines WHAT to protect
                 │   └── Governance projection (consent, limits, regulation)
                 │
                 ├── Case Study: Algorithmic Psychosis — DEMONSTRATES the chain
-                │   └── Neural Impact Chain: mechanism → band → clinical outcome
+                │   └── Neural Impact Chain: mechanism → band → clinical outcome (association by shared band)
                 │       └── DSM-5-TR mapping (for threat modeling, not diagnosis)
                 │
                 └── Falsifiability — 5 conditions that would weaken/invalidate
@@ -466,7 +466,7 @@ Visualizations that exist on the site and can be referenced/embedded in the whit
 | 3D Hourglass | `/` hero section, `/vision/` | 11-band architecture, band widths, I0 bottleneck |
 | Brain Atlas | `/vision/` BCI section | 7 neural bands (N7–N1) mapped to brain anatomy, technique counts per region |
 | TARA Technique Browser | `/threat-models/tara/` | Searchable/filterable 174-technique registry |
-| Neural Impact Chain | `/threat-models/analysis/` | DAG showing attack propagation through bands |
+| Neural Impact Chain | `/threat-models/analysis/` | Technique-to-outcome associations by shared band (not demonstrated neural paths) |
 | NISS Scoring | `/threat-models/scoring/` | Severity scoring breakdown |
 | Neuroethics Timeline | `/vision/` | Key neuroethics milestones |
 | PQ Overhead Chart | `/guardrails/runemate/` | Classical vs PQ+Staves bandwidth |

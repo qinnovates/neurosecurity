@@ -15,6 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit
 | Entry | Topic | Link |
 |-------|-------|------|
+| 114 | Descriptive technique notes and three renames (framing decision M2/M3, pending owner acceptance): 31 notes (the decision's 26 plus 5 "Extract..." openings found in verification) no longer read as instructions and end with the entry's detection text; T0011, T0046, T0099 renamed with `legacy_names` aliases (T0065 rename held for owner check 12); no technique removed | [Entry 113](#entry-114-describing-techniques-not-instructing) |
 | 113 | ICD-10-CM code integrity: 33 wildcard forms (`F20.x` and the like, 214 entries) replaced by the categories they stand for; 89 codes outside chapter F moved out of `dsm_conditions` into `icd10_conditions`; every code label set to its official FY2027 title; five wrong codes corrected; `niss_dsm_bridge` and "NISS metrics predict diagnostic clusters" retired; GUARDRAILS now describes NISS by its six metrics | [Entry 113](#entry-113-icd10cm-code-integrity) |
 | 112 | `evidence.population` added as a non-ordinal dimension (GRADE precedent) so 12 adjacent-only techniques stop reading as theoretical; no tier changed, proving orthogonality; `PLAUSIBLE`/`SPECULATIVE` cases added, which exposed NaN in `getStatusStats()` and two colourless filter chips | [Entry 112](#entry-112-evidence-population) |
 | 111 | `evidence.tier` populated across all 176 techniques by deterministic rubric, replacing a legacy `status` word nothing re-derived; the seven-tier scheme had 0 adoption and its one consumer passed null; 6 techniques promoted; validated tiers and adjacent-CVE promotion both refused; 26 incomplete physics blocks found, and the Python SDK had never parsed its own registrar | [Entry 111](#entry-111-evidence-tier) |
@@ -361,6 +362,41 @@ Each entry follows this structure:
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
 
 ---
+
+<a id="entry-114-describing-techniques-not-instructing"></a>
+
+## Entry 114: Describing Techniques, Not Instructing {#entry-114-describing-techniques-not-instructing}
+
+**Date:** 2026-10-14, ~00:30
+**Classification:** CORRECTION
+**AI Systems:** Claude Opus 5.5 (implementation); framing decision produced earlier by an AI review panel (Quorum)
+**Connected entries:** Entry 108 (parent_id and the 2026-10 techniques, including QIF-T0171), Entry 106 (data refresh)
+**RACI:** R: Claude Opus 5.5 | A: KQ (pending: this entry is a proposal until the PR is merged) | C: AI review panel | I: none
+**AI Contribution Level:** AI-generated; Kevin's merge is the acceptance
+
+### Context
+
+The 2026-10 framing decision asked that QIF, TARA and NISS read as threat modeling, severity scoring and impact assessment, never as an attack toolkit. Its inventory found 26 technique notes that opened with a second-person imperative ("Inject crafted signals...", "Exploit weak or absent authentication..."). These notes render as the description and meta description of each technique page, so they read as instructions (guardrail G7).
+
+### What changed
+
+| Change | Detail |
+|---|---|
+| 31 notes rewritten | The decision's 26, plus QIF-T0038, T0042, T0052, T0054 and T0069 (openings "Extract...", found in verification). Openings now say "An adversary may..." for CONFIRMED, DEMONSTRATED and EMERGING entries and "If feasible, an adversary could..." for THEORETICAL, PLAUSIBLE and SPECULATIVE ones, following ATT&CK's descriptive convention. Each note ends with the entry's own `tara.engineering.detection` text. All 31 already had detection text, so none needed "Mitigation guidance not yet drafted." |
+| In-sentence fixes | QIF-T0053 and T0052 "reveal" became "associated with", and T0054 "revealing" likewise (G2, reverse inference). QIF-T0042 no longer says all wireless BCIs are vulnerable. QIF-T0069 marks separatrix uniqueness as a hypothesis. QIF-T0071 no longer says Biological TLS "eliminates" the attack surface (it is proposed and unvalidated). QIF-T0103's numbered "Attack scenarios" are now noun phrases, not commands. QIF-T0045 says a cryptographically relevant quantum computer is projected (2030-2035), not certain. QIF-T0171 uses US spelling, including in its detection text. |
+| Three renames | QIF-T0011, T0046 and T0099. Old names are kept in the new `legacy_names` field; `rename_note` shows on the technique page. |
+| Held | The decided QIF-T0065 rename. Its note asserts that no cited source shows a demonstrated clinical effect, which is what owner check 12 (T0065 sources) verifies. The decided name also says "BCI-linked", while the entry's notes say no BCI is required. |
+| Deviation from the decision | QIF-T0011: the decision text says "via BCI stimulation signal", but the entry's notes describe the BCI's telemetry signal (MICS 402 MHz), so the name says "telemetry". Flagged for Kevin. |
+
+No detection or mitigation guidance was written. The 26 techniques without detection guidance (QIF-T0136 to T0161) are a separate set and remain for Kevin to commission. They are listed on the coverage gap page proposed in the companion PR.
+
+### Human decisions
+
+None yet. Kevin accepts or rejects this by merging or closing the PR.
+
+### AI Collaboration
+
+Claude Opus 5.5 wrote the migration script (`src/scripts/migrate-descriptive-notes-and-renames.py`), ran it after a dry run, and regenerated the derived copies. No sources were added.
 
 ## Entry 113: Codes That Are Codes, and a Bridge That Was a Claim {#entry-113-icd10cm-code-integrity}
 

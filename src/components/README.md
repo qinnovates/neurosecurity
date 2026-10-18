@@ -12,9 +12,8 @@ React 19 and Astro components for the qinnovate.com site. Organized by feature d
 |-----------|-------|---------|
 | `atlas/` | 14 | Neural atlas visualization, threat atlas, device explorer, risk matrix, interaction matrix |
 | `bci/` | 5 | BCI device timeline, specs cards, limits visualization |
-| `brain/` | 1 | 3D brain visualization (Three.js) |
+| `brain/` | 2 | Per-band list (`BandViewPanel`) and the link to the atlas explorer; no drawing |
 | `case-study/` | 6 | Case study page layouts (hero, summary, timeline, gallery) |
-| `dashboard/` | 1 | Main dashboard view |
 | `data-studio/` | 5 | Data Studio: DuckDB-WASM console, Parquet viewer, query builder, table view |
 | `hooks/` | 1 | `useQueryState.tsx` -- URL query state management |
 | `neurogovernance/` | 1 | Governance timeline visualization |
@@ -38,7 +37,6 @@ React 19 and Astro components for the qinnovate.com site. Organized by feature d
 | `HourglassReveal.tsx` | React | Hourglass scroll animation |
 | `FloatingOrbs.tsx` | React | Decorative particle effects |
 | `signal-bench/SignalBench.tsx` | React | Homepage hero strip chart: catalogued interference classes on synthetic traces |
-| `ThreatAtlasViz.tsx` | React | Threat atlas main visualization |
 | `ThreatMatrix.tsx` | React | Threat matrix grid view |
 | `TaraVisualization.tsx` | React | TARA data visualization |
 | `NeurorightsPentagon.tsx` | React | Neurorights radar chart |

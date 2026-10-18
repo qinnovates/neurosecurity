@@ -25,9 +25,21 @@ jobs:
           node-version: '22'
       - run: npm ci
       - run: npm audit --audit-level=high
+      - name: Generate KQL JSON
+        run: node src/scripts/generate-kql-json.mjs
       - name: Test
         run: npm test
+      - name: Atlas pipeline tests that need only the standard library
+        # The imaging stack is not installed here, so the meshing, registration and overlay tests skip themselves.
+        # What runs: the buildability rule against the registry, the fetch rules, the notices, and the committed
+        # manifest against the registry, the build plan and the pipeline's code hash.
+        run: |
+          python3 -m venv "$RUNNER_TEMP/atlas-venv"
+          "$RUNNER_TEMP/atlas-venv/bin/python" -m pip install --quiet --require-hashes -r src/scripts/atlas-pipeline/requirements-dev.txt
+          "$RUNNER_TEMP/atlas-venv/bin/python" -I -m pytest -p no:cacheprovider -rs src/scripts/atlas-pipeline/tests
       - name: Build
         run: npm run build
-      - name: Check threat model page isolation
-        run: npm run check:model-page
+      - name: Check tool page isolation and first-load budgets
+        run: npm run check:post-build
+      - name: Type check
+        run: npm run type-check

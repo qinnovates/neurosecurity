@@ -12,7 +12,7 @@ import { ThreatModelDataError } from './errors';
 import { isArrayOf, isBoundedString, isOneOf, isRecord } from './guards';
 import {
   LINK_PAYLOADS, NOT_PLACED_CATEGORIES, PLACED_ENTRY_PATHS,
-  type NotPlacedDecision, type PlacementRules, type StrideMap, type TechniquePlacement, type ThreatTheme,
+  type NotPlacedDecision, type PlacementRules, type PlacementTableInfo, type StrideMap, type TechniquePlacement, type ThreatTheme,
 } from './reference-data-types';
 import { STRIDE_CATEGORIES } from './report-types';
 
@@ -86,6 +86,32 @@ export function parsePlacementRules(raw: unknown, techniques: readonly CatalogTe
   const coverageProblem = findPlacementCoverageProblem(rules, techniques);
   if (coverageProblem !== null) throw new ThreatModelDataError(PLACEMENT_FILE, coverageProblem);
   return rules;
+}
+
+/**
+ * The field a placement record would carry once a person has reviewed it. The placement file
+ * defines no such field today; until it does, no placement counts as reviewed.
+ */
+export const PLACEMENT_REVIEW_FIELD = 'reviewedBy';
+
+function isReviewed(placement: unknown): boolean {
+  const review = isRecord(placement) ? placement[PLACEMENT_REVIEW_FIELD] : undefined;
+  return typeof review === 'string' && review.trim() !== '';
+}
+
+/** The placement file's version and status as written, with counts taken from its records. */
+export function readPlacementTableInfo(raw: unknown): PlacementTableInfo {
+  if (!isRecord(raw) || !isBoundedString(raw.version, MAX_REASON_LENGTH) || typeof raw.status !== 'string' || raw.status === '') {
+    throw new ThreatModelDataError(PLACEMENT_FILE, 'the top level needs a "version" and a "status" string');
+  }
+  const placements = isRecord(raw.placements) ? Object.values(raw.placements) : [];
+  return {
+    version: raw.version,
+    status: raw.status,
+    placementCount: placements.length,
+    reviewedPlacementCount: placements.filter(isReviewed).length,
+    notPlacedCount: isRecord(raw.notPlaced) ? Object.keys(raw.notPlaced).length : 0,
+  };
 }
 
 function isStrideRecord(value: unknown, requiredKeys: readonly string[]): boolean {

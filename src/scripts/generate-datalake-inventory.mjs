@@ -120,6 +120,14 @@ const DATASETS = [
   { key: 'glial_types', label: 'Glial cell types', file: 'datalake/qif-glial-cells.json', path: 'glial_types', group: 'anatomy', unit: 'types' },
   { key: 'neuroendocrine_axes', label: 'Neuroendocrine axes', file: 'datalake/qif-neuroendocrine.json', path: 'axes', group: 'anatomy', unit: 'axes' },
 
+  { key: 'anatomy_region_evidence', label: 'Brain-region evidence rows', file: 'datalake/qif-anatomy-region-evidence.json', path: 'rows', group: 'anatomy', unit: 'rows' },
+  { key: 'anatomy_crosswalk', label: 'Anatomy atlas crosswalk rows', file: 'datalake/qif-anatomy-crosswalk.json', path: 'rows', group: 'anatomy', unit: 'rows' },
+  { key: 'anatomy_sources', label: 'Anatomy sources vetted', file: 'datalake/qif-anatomy-sources.json', path: 'sources', group: 'anatomy', unit: 'sources' },
+  { key: 'anatomy_verdicts', label: 'Anatomy review verdicts', file: 'datalake/qif-anatomy-verdicts.json', path: 'verdicts', group: 'anatomy', unit: 'verdicts' },
+  { key: 'white_matter_tracts', label: 'White-matter tracts', file: 'datalake/qif-neurosim.json', path: 'whitematterTracts', group: 'anatomy', unit: 'tracts' },
+  { key: 'eeg_electrodes', label: 'EEG electrode positions', file: 'datalake/qif-neurosim.json', path: 'eegElectrodes', group: 'anatomy', unit: 'electrodes' },
+  { key: 'governance_frameworks', label: 'Governance frameworks mapped', file: 'datalake/qif-ethics-controls.json', path: 'governance_frameworks', group: 'evidence', unit: 'frameworks' },
+
   {
     key: 'bci_devices',
     label: 'BCI devices with hardware specs',
@@ -333,7 +341,7 @@ function renderCorpusSvg(inventory) {
   parts.push(
     `<text x="${pad}" y="82" font-family="${FONT}" font-size="15" fill="${PALETTE.muted}">${escapeXml(
       formatNumber(inventory.totals.records),
-    )} records across ${inventory.totals.datalake_files} machine-readable datasets. Every figure is counted from the file that owns it, not hand-typed.</text>`,
+    )} records inventoried from ${inventory.totals.datasets_inventoried} of the ${inventory.totals.datalake_files} open datasets. Every figure is counted from the file that owns it, not hand-typed.</text>`,
   );
 
   tiles.forEach((tile, index) => {
@@ -498,7 +506,7 @@ function renderReadmeBlock(inventory) {
   lines.push('![Open datalake inventory](src/site/images/datalake-corpus.svg)');
   lines.push('');
   lines.push(
-    `**${formatNumber(inventory.totals.records)} records across ${inventory.totals.datalake_files} machine-readable datasets.** ` +
+    `**${formatNumber(inventory.totals.records)} records inventoried below, from ${inventory.totals.datasets_inventoried} of the ${inventory.totals.datalake_files} datasets in [\`datalake/\`](datalake/).** ` +
       `${formatNumber(get('impact_chains'))} neural impact chains · ${formatNumber(get('techniques'))} proposed techniques · ` +
       `${formatNumber(get('bci_devices'))} BCI devices specced · ${formatNumber(get('companies'))} companies tracked · ` +
       `${formatNumber(get('cve_mappings'))} CVEs mapped · ${formatNumber(inventory.totals.unique_dois)} unique DOIs cited.`,

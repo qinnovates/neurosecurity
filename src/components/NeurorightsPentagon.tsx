@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * NeurorightsPentagon — 5 neurorights as a radar/pentagon visualization.
- * Vertices scale proportionally to technique threat count. MI (81) is the largest.
+ * NeurorightsPentagon — neurorights as a radar polygon, one vertex per right passed in.
+ * Vertices scale proportionally to each right's technique count.
  * Edges draw themselves on scroll, then vertices pulse to size.
  */
 
@@ -17,15 +17,7 @@ interface Props {
   rights: Right[];
 }
 
-const DEFAULTS: Right[] = [
-  { code: 'MI', name: 'Mental Integrity', count: 81, color: '#ef4444' },
-  { code: 'MP', name: 'Mental Privacy', count: 64, color: '#f59e0b' },
-  { code: 'CL', name: 'Cognitive Liberty', count: 60, color: '#3b82f6' },
-  { code: 'PC', name: 'Psychological Continuity', count: 28, color: '#8b5cf6' },
-  { code: 'EA', name: 'Equal Access', count: 0, color: '#10b981' },
-];
-
-export default function NeurorightsPentagon({ rights = DEFAULTS }: Props) {
+export default function NeurorightsPentagon({ rights }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState(false);
   const [counts, setCounts] = useState<number[]>(rights.map(() => 0));
@@ -101,8 +93,8 @@ export default function NeurorightsPentagon({ rights = DEFAULTS }: Props) {
     return `M${points.join(' L')} Z`;
   });
 
-  // Pentagon edge total length (approximate for stroke-dashoffset animation)
-  const perimeterApprox = 5 * 2 * maxRadius * Math.sin(Math.PI / 5);
+  // Polygon edge total length (approximate for stroke-dashoffset animation)
+  const perimeterApprox = rights.length * 2 * maxRadius * Math.sin(Math.PI / rights.length);
 
   return (
     <div ref={containerRef} className="w-full max-w-lg mx-auto px-4">

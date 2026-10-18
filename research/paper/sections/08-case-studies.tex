@@ -5,134 +5,78 @@
 \section{Case Studies}
 \label{sec:case-studies}
 
-To demonstrate the practical difference between CVSS-only and CVSS+NISS
-scoring, we present five representative techniques scored with both systems.
-Each case illustrates dimensions that CVSS cannot capture.
+To show the practical difference between CVSS-only and CVSS+NISS scoring, we score four
+registry entries with both systems, one from each gap group plus a read-only case.
 
-\textbf{Important caveat:} Cases 1--4 are \emph{threat model scenarios} derived
-from the TARA taxonomy. They represent plausible attack vectors based on known
-neuroscience and engineering principles, but have not been empirically executed
-against real BCI hardware. Case~5 is the only empirically confirmed
-vulnerability. This distinction is discussed further in
-Section~\ref{sec:limitations}.
+\textbf{Correction.} In v1.5, Cases 1--4 used identifiers whose registry entries describe
+different techniques (QIF-T0015, T0034 and T0050 are directed-energy damage, working-memory
+poisoning and hardware fault injection, not the P300, calibration and surveillance attacks
+described), and their NISS vectors and scores did not match the registry. Some case scores
+were also computed as an unweighted mean of six, which is not Equation~\ref{eq:niss}. This
+revision replaces them with entries as stored in the live registry.
 
-\subsection{Scoring Comparison}
-
-Table~\ref{tab:case-studies} presents five techniques spanning different
-categories, severity levels, and gap groups.
+\textbf{Method and caveat.} NISS scores are recomputed from the stored vectors with
+Equation~\ref{eq:niss} and match the stored values. CVSS v4.0 base scores were computed
+from the stored base vectors with the open-source \texttt{cvss} Python library (v3.6) and
+have not been checked against the FIRST.org calculator. The vectors were unchanged between
+the snapshot and the live registry, but the snapshot file stored NISS scores that do not
+reproduce from the equation (for example 3.4 for QIF-T0035 against 2.7). None of these
+techniques has been executed against an implanted device; Case~5 is the only analysis of a
+real vulnerability.
 
 \begin{table}[H]
 \centering
-\caption{CVSS v4.0 vs.\ NISS scoring for five representative techniques.}
+\caption{CVSS v4.0 vs.\ NISS for four registry entries (live registry).}
 \label{tab:case-studies}
 \small
-\begin{tabularx}{\textwidth}{@{}l X c c@{}}
+\begin{tabularx}{\textwidth}{@{}l X l c c@{}}
 \toprule
-\textbf{Technique} & \textbf{Description} & \textbf{CVSS} & \textbf{NISS} \\
+\textbf{Technique} & \textbf{Name} & \textbf{Status} & \textbf{CVSS} & \textbf{NISS} \\
 \midrule
-QIF-T0001 & Cortical signal injection via rogue electrode & 9.3 (Crit) & 8.7 (High) \\
-QIF-T0015 & P300 side-channel private data extraction     & 7.7 (High) & 3.3 (Low) \\
-QIF-T0034 & BCI calibration data poisoning                & 8.2 (High) & 5.8 (Med) \\
-QIF-T0050 & Covert neural signal decoding for surveillance & 7.1 (High) & 5.0 (Med) \\
-QIF-T0072 & Ultrasonic bone-conduction side-channel        & 5.3 (Med)  & 2.7 (Low) \\
+QIF-T0001 & Signal injection       & Theoretical  & 5.8 (Med)  & 6.1 (Med), PINS \\
+QIF-T0035 & P300 interrogation     & Demonstrated & 6.9 (Med)  & 2.7 (Low) \\
+QIF-T0058 & Calibration poisoning  & Demonstrated & 7.1 (High) & 6.0 (Med) \\
+QIF-T0072 & Transducer inversion   & Demonstrated & 5.6 (Med)  & 2.0 (Low) \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\subsection{Case 1: Cortical Signal Injection (QIF-T0001)}
+\subsection{Case 1: Signal Injection (QIF-T0001, Gap Group 3)}
 
-\paragraph{CVSS v4.0 assessment.}
-CVSS rates this technique as Critical (9.3) based on network attack vector,
-low complexity, no privileges required, and high impact on confidentiality,
-integrity, and availability. This accurately captures the exploitability and
-system impact.
+CVSS rates this Medium (5.8): the vector requires physical access and attack preconditions,
+with high integrity and availability impact on the system and high integrity impact on
+subsequent systems. What it cannot express is the consequence for the person: current
+delivered at the electrode-tissue boundary can cause tissue stress or involuntary activation.
+\texttt{NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T} gives 6.1 and sets PINS because BI is High.
+The technique is theoretical: its two listed sources are a position paper and a P300 probing
+study, so the score describes a modeled impact, not an observed one.
 
-\paragraph{What CVSS misses.}
-The primary consequence of cortical signal injection is not system
-compromise---it is seizure induction, involuntary motor activation, and potential
-permanent tissue damage. The patient experiences a medical emergency, not a data
-breach. CVSS has no metric for biological harm, consent violation (the stimulation
-occurs without the patient's knowledge), or irreversibility (neural tissue damage
-may be permanent).
+\subsection{Case 2: P300 Interrogation (QIF-T0035, Read-Only)}
 
-\paragraph{NISS extension.}
-\texttt{NISS:1.1/BI:C/CR:H/CD:H/CV:I/RV:P/NP:S} --- Score: 8.7 (High), PINS
-flagged. The NISS vector captures that this technique causes critical biological
-impact (BI:C), high cognitive reconnaissance (CR:H) and high cognitive
-disruption (CD:H), covert consent violation (CV:I), partially irreversible
-damage (RV:P), and structural neuroplastic changes (NP:S). The PINS flag
-triggers mandatory safety review.
+CVSS rates this Medium (6.9) for high confidentiality impact on the device and on subsequent
+systems. The leaked data is the person's own evoked responses, which reveal recognition of
+stimuli such as PINs, faces or places~\cite{martinovic2012feasibility}.
+\texttt{NISS:1.1/BI:N/CR:H/CD:H/CV:E/RV:F/NP:N} gives
+$(0 + 0.5 \cdot 6.7 + 0.5 \cdot 6.7 + 6.7 + 0 + 0)/5 = 2.68 \to 2.7$. The low score is
+a direct consequence of the read-only ceiling (Section~\ref{sec:niss-limits}); the CR and CV
+values, not the total, carry the information. The registry's CD:H for a read attack is a
+scoring choice that warrants review.
 
-\paragraph{NIC diagnostic mapping.}
-Via the Neural Impact Chain: N7/N6 bands $\to$ motor cortex, hippocampus $\to$
-motor control, memory $\to$ G25.9 (movement disorder), F06.0 (psychosis due to
-medical condition). Risk class: direct.
+\subsection{Case 3: Calibration Poisoning (QIF-T0058, Gap Group 2)}
 
-\subsection{Case 2: P300 Side-Channel (QIF-T0015)}
+CVSS rates this High (7.1) for integrity impact during calibration. Corrupted calibration
+data makes the decoder learn wrong mappings between neural signals and intended actions,
+and the user may adapt to the corrupted mapping. \texttt{NISS:1.1/BI:L/CR:H/CD:H/CV:I/RV:P/NP:T}
+gives $(3.3 + 3.35 + 3.35 + 10 + 6.7 + 3.3)/5 = 6.0$; CV:I records that the user cannot
+detect the corruption. The entry's source is Schroder et al.~\cite{schroder2025cyberrisks}; the
+registry pairs it with signed calibration data and recalibration audits as controls.
 
-\paragraph{CVSS assessment.}
-Rated High (7.7) for passive eavesdropping with high confidentiality impact.
+\subsection{Case 4: Transducer Inversion (QIF-T0072, Gap Group 1)}
 
-\paragraph{What CVSS misses.}
-The extracted data is not files or credentials---it is private cognitive
-responses. The P300 ERP component reveals whether the subject recognizes a
-stimulus, enabling extraction of PINs, personal preferences, and identity
-information~\cite{martinovic2012feasibility}. CVSS treats this as a
-confidentiality breach; the actual impact is cognitive reconnaissance---covert
-extraction of private mental content.
-
-\paragraph{NISS extension.}
-\texttt{NISS:1.1/BI:N/CR:H/CD:H/CV:E/RV:F/NP:N} --- Score: 3.3 (Low). No
-biological impact (BI:N = 0), high cognitive reconnaissance (CR:H = 6.7) and
-high cognitive disruption (CD:H = 6.7), explicit consent violation
-(CV:E = 6.7), fully reversible (RV:F = 0), no neuroplastic effect (NP:N = 0).
-The arithmetic mean is $(0 + 6.7 + 6.7 + 6.7 + 0 + 0)/6 = 3.3$. The NISS
-score is significantly lower than CVSS because no physical harm occurs and the
-attack is fully reversible---but the CR:H flag alerts BCI-specific teams that
-private cognitive data is at risk.
-
-\subsection{Case 3: Calibration Poisoning (QIF-T0034)}
-
-\paragraph{CVSS assessment.}
-Rated High (8.2) for integrity impact during the BCI training phase.
-
-\paragraph{What CVSS misses.}
-Poisoned calibration data causes the BCI to learn incorrect mappings between
-neural signals and intended actions. The patient's device responds to wrong
-signals or fails to respond to correct ones. Over time, neuroplasticity causes
-the brain to adapt to the corrupted interface, creating lasting neural pathway
-changes even after the poisoning is discovered and corrected.
-
-\paragraph{NISS extension.}
-\texttt{NISS:1.1/BI:L/CR:H/CD:H/CV:I/RV:T/NP:T} --- Score: 5.8 (Medium). Low
-biological impact (BI:L = 3.3), high cognitive reconnaissance (CR:H = 6.7) and
-high cognitive disruption (CD:H = 6.7, the device misinterprets intent), covert
-consent violation (CV:I = 10.0, the patient doesn't know calibration was
-corrupted), temporary reversibility (RV:T = 3.3), and temporary neuroplastic
-changes (NP:T = 5.0). The arithmetic mean is
-$(3.3 + 6.7 + 6.7 + 10.0 + 3.3 + 5.0)/6 = 5.8$.
-
-\subsection{Case 4: Covert Neural Surveillance (QIF-T0050)}
-
-\paragraph{CVSS assessment.}
-Rated High (7.1) for sustained confidentiality impact.
-
-\paragraph{What CVSS misses.}
-Continuous covert decoding of neural signals constitutes ongoing mental privacy
-violation. Unlike data exfiltration from a server, the ``data'' being stolen is
-the patient's thoughts, emotional states, and cognitive patterns. The consent
-violation is maximal: the patient cannot detect or refuse the surveillance.
-
-\paragraph{NISS extension.}
-\texttt{NISS:1.1/BI:N/CR:C/CD:C/CV:I/RV:F/NP:N} --- Score: 5.0 (Medium). No
-biological impact (BI:N = 0), critical cognitive reconnaissance (CR:C = 10.0,
-full thought decoding) and critical cognitive disruption (CD:C = 10.0), covert
-consent violation (CV:I = 10.0), fully reversible (RV:F = 0), no neuroplastic
-effect (NP:N = 0). The arithmetic mean is
-$(0 + 10.0 + 10.0 + 10.0 + 0 + 0)/6 = 5.0$. Despite the moderate aggregate
-score, the CR:C, CD:C, and CV:I flags distinguish this from ordinary data
-exfiltration---these maximum-severity cognitive and consent violations demand
-BCI-specific review.
+A speaker is re-tasked as a microphone. CVSS rates this Medium (5.6), and its
+confidentiality metrics describe the impact well. NISS adds little:
+\texttt{NISS:1.1/BI:N/CR:N/CD:N/CV:I/RV:F/NP:N} gives 2.0, and the dual-use class is
+silicon-only. The case is included to show that NISS is not meant to raise every score.
 
 \subsection{Case 5: Real-World Vulnerability Disclosure}
 
@@ -141,11 +85,10 @@ systematic analysis of the BCI software ecosystem, we identified a multi-phase
 exploit chain in an open-source library used in clinical and research BCI
 pipelines.
 
-The exploit chain demonstrates escalation from synthetic-zone vulnerabilities
-(S2/S3 bands) to potential neural-zone impact (N-band: corrupted data reaching
-clinical decision-making). CVSS scores the software vulnerabilities accurately;
-NISS captures the downstream risk to patients whose clinical care depends on
-the integrity of the data stream.
+The exploit chain demonstrates escalation from device-side vulnerabilities
+(S2/S3) to potential impact on clinical decision-making through corrupted data.
+CVSS scores the software vulnerabilities accurately; NISS records the downstream
+risk to patients whose clinical care depends on the integrity of the data stream.
 
 Responsible disclosure is in progress. Specific vulnerability details, including
 affected software and CWE identifiers, will be published after coordinated

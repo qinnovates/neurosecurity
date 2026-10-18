@@ -1,0 +1,1627 @@
+{
+  "schema_version": 1,
+  "summary": "The TARA Brain Atlas replaces hand-drawn brain pictures with cited, licence-cleared atlas geometry tied to QIF regions, pathways, devices and techniques, shown in the explorer at /atlas/anatomy/ and as a region view mounted on other pages. Every mapping is AI-drafted and unreviewed until the owner records a review, and the site states that and its other limits wherever the data appears.",
+  "modules": [
+    {
+      "id": "datalake-anatomy",
+      "path": "datalake/",
+      "responsibility": "The anatomy data files and the scripts that draft technique links and chains; parsed at build time as untrusted input",
+      "entry_files": [
+        "datalake/qif-anatomy-crosswalk.json",
+        "datalake/scripts/draft-technique-regions.mjs"
+      ],
+      "depends_on": [],
+      "map_file": "datalake/CONTEXT.md"
+    },
+    {
+      "id": "anatomy-lib",
+      "path": "src/lib/anatomy/",
+      "responsibility": "Parse and cross-check the data, build the index and query tables, decide licences, hold every visitor-facing limit sentence",
+      "entry_files": [
+        "src/lib/anatomy/anatomy-inputs.ts",
+        "src/lib/anatomy/build-anatomy-index.ts",
+        "src/lib/anatomy/licence-rules.ts",
+        "src/lib/anatomy/limits-copy.ts"
+      ],
+      "depends_on": [],
+      "map_file": "src/lib/anatomy/CONTEXT.md"
+    },
+    {
+      "id": "atlas-explorer",
+      "path": "src/lib/atlas-explorer/",
+      "responsibility": "What the explorer shows, as pure functions of the index",
+      "entry_files": [
+        "src/lib/atlas-explorer/explorer-model.ts",
+        "src/lib/atlas-explorer/lens-state.ts",
+        "src/lib/atlas-explorer/region-dsm.ts"
+      ],
+      "depends_on": [
+        "anatomy-lib"
+      ],
+      "map_file": "src/lib/atlas-explorer/CONTEXT.md"
+    },
+    {
+      "id": "atlas-scene",
+      "path": "src/components/atlas-scene/",
+      "responsibility": "React and three.js for the explorer and the mounted region view; the loader of the data files (composition root)",
+      "entry_files": [
+        "src/components/atlas-scene/load-anatomy-data.ts",
+        "src/components/atlas-scene/AtlasExplorer.tsx",
+        "src/components/atlas-scene/AtlasRegionView.tsx",
+        "src/components/atlas-scene/RegionViewPanel.tsx"
+      ],
+      "depends_on": [
+        "atlas-explorer",
+        "anatomy-lib"
+      ],
+      "map_file": "src/components/atlas-scene/CONTEXT.md"
+    },
+    {
+      "id": "site-pages",
+      "path": "src/pages/",
+      "responsibility": "Site pages: the explorer, the attribution page, the six anatomy JSON endpoints and the pages that mount the region view",
+      "entry_files": [
+        "src/pages/atlas/anatomy.astro",
+        "src/pages/atlas/attribution.astro",
+        "src/pages/atlas/anatomy-index.json.ts"
+      ],
+      "depends_on": [
+        "atlas-scene",
+        "anatomy-lib"
+      ],
+      "map_file": "src/CONTEXT.md"
+    },
+    {
+      "id": "atlas-pipeline",
+      "path": "src/scripts/atlas-pipeline/",
+      "responsibility": "Offline Python that downloads pinned atlases and writes the atlas assets; shares no code with the site and never runs in CI",
+      "entry_files": [
+        "src/scripts/atlas-pipeline/atlas.sh",
+        "src/scripts/atlas-pipeline/atlas_build.py",
+        "src/scripts/atlas-pipeline/registry/pipeline-inputs.json"
+      ],
+      "depends_on": [],
+      "map_file": "src/scripts/atlas-pipeline/CONTEXT.md"
+    },
+    {
+      "id": "atlas-map",
+      "path": "src/scripts/atlas-map/",
+      "responsibility": "This feature map, its validator, the atlas:where lookup and the generator of the docs/atlas pages",
+      "entry_files": [
+        "src/scripts/atlas-map/atlas-map.json",
+        "src/scripts/atlas-map/atlas-where.mjs"
+      ],
+      "depends_on": [],
+      "map_file": "src/scripts/atlas-map/CONTEXT.md"
+    }
+  ],
+  "data": [
+    {
+      "id": "anatomy-sources",
+      "path": "datalake/qif-anatomy-sources.json",
+      "holds": "Upstream atlas registry: stated licence, pinned files, route to the template space",
+      "validated_by": "src/lib/anatomy/parse-sources.ts",
+      "generator": "source",
+      "consumers": [
+        "anatomy-lib",
+        "atlas-pipeline"
+      ]
+    },
+    {
+      "id": "anatomy-verdicts",
+      "path": "datalake/qif-anatomy-verdicts.json",
+      "holds": "Licence verdict and clearance record per source (AI readings, not legal advice)",
+      "validated_by": "src/lib/anatomy/parse-verdicts.ts",
+      "generator": "source",
+      "consumers": [
+        "anatomy-lib",
+        "atlas-pipeline"
+      ]
+    },
+    {
+      "id": "anatomy-crosswalk",
+      "path": "datalake/qif-anatomy-crosswalk.json",
+      "holds": "QIF region, pathway and network ids to atlas label ids, and no_geometry records",
+      "validated_by": "src/lib/anatomy/parse-crosswalk.ts",
+      "generator": "source",
+      "consumers": [
+        "anatomy-lib"
+      ]
+    },
+    {
+      "id": "technique-region-curation",
+      "path": "datalake/scripts/technique-region-curation.json",
+      "holds": "The AI-drafted curation record: the catalog's own words for structures, per technique",
+      "validated_by": "datalake/scripts/draft-technique-regions.mjs",
+      "generator": "source",
+      "consumers": [
+        "datalake-anatomy"
+      ]
+    },
+    {
+      "id": "anatomy-technique-regions",
+      "path": "datalake/qif-anatomy-technique-regions.json",
+      "holds": "Per technique, the catalog's words for brain structures; never what they resolve to",
+      "validated_by": "src/lib/anatomy/parse-technique-regions.ts",
+      "generator": "node datalake/scripts/draft-technique-regions.mjs",
+      "consumers": [
+        "anatomy-lib"
+      ]
+    },
+    {
+      "id": "anatomy-review-ledger",
+      "path": "datalake/qif-anatomy-review-ledger.json",
+      "holds": "The only record of a human review; written by the repository owner only, never by an agent",
+      "validated_by": "src/lib/anatomy/parse-review-ledger.ts",
+      "generator": "source",
+      "consumers": [
+        "anatomy-lib",
+        "atlas-pipeline"
+      ]
+    },
+    {
+      "id": "anatomy-device-geometry",
+      "path": "datalake/qif-anatomy-device-geometry.json",
+      "holds": "Scalp landmarks and electrode rows (pipeline-written) and lead dimensions with sources (hand-written)",
+      "validated_by": "src/lib/anatomy/parse-device-geometry.ts",
+      "generator": "npm run atlas:devices",
+      "consumers": [
+        "anatomy-lib"
+      ]
+    },
+    {
+      "id": "anatomy-region-evidence",
+      "path": "datalake/qif-anatomy-region-evidence.json",
+      "holds": "Verbatim literature statements filed under a QIF region, quote-checked by a second AI",
+      "validated_by": "src/lib/anatomy/parse-region-evidence.ts",
+      "generator": "source",
+      "consumers": [
+        "anatomy-lib"
+      ]
+    },
+    {
+      "id": "anatomy-h01-card",
+      "path": "datalake/qif-anatomy-h01-card.json",
+      "holds": "The five-sentence H01 card, its sourced facts and what it must not imply",
+      "validated_by": "src/lib/anatomy/parse-h01-card.ts",
+      "generator": "source",
+      "consumers": [
+        "anatomy-lib"
+      ]
+    },
+    {
+      "id": "atlas-assets",
+      "path": "src/site/atlas-assets/",
+      "holds": "Meshes, label tables and notices by licence family, pinned by the manifest",
+      "validated_by": "src/lib/anatomy/parse-manifest.ts",
+      "generator": "npm run atlas:build",
+      "consumers": [
+        "anatomy-lib",
+        "atlas-scene"
+      ]
+    },
+    {
+      "id": "buildability",
+      "path": "src/scripts/atlas-pipeline/registry/buildability.json",
+      "holds": "The pipeline's answers to the buildability rule, compared with the site's rule",
+      "validated_by": "src/components/atlas-scene/__tests__/shared-constants.guard.test.ts",
+      "generator": "bash src/scripts/atlas-pipeline/atlas.sh buildability",
+      "consumers": [
+        "atlas-pipeline"
+      ]
+    },
+    {
+      "id": "registration-evidence",
+      "path": "src/scripts/atlas-pipeline/evidence/registration-evidence.json",
+      "holds": "Measurements behind the template-space registration",
+      "validated_by": "src/scripts/atlas-pipeline/tests/",
+      "generator": "bash src/scripts/atlas-pipeline/atlas.sh evidence",
+      "consumers": [
+        "atlas-pipeline"
+      ]
+    },
+    {
+      "id": "impact-chains",
+      "path": "datalake/impact-chains.json",
+      "holds": "Technique to region to outcome chains, joined through region aliases",
+      "validated_by": "datalake/scripts/__tests__/compute-impact-chains.test.mjs",
+      "generator": "npm run compute:chains",
+      "consumers": [
+        "site-pages"
+      ]
+    },
+    {
+      "id": "anatomy-parquet",
+      "path": "datalake/parquet/anatomy_*.parquet",
+      "holds": "The anatomy_* query tables as parquet, with their entries in the parquet catalog",
+      "validated_by": "src/lib/anatomy/__tests__/anatomy-parquet.test.ts",
+      "generator": "npm run prebuild",
+      "consumers": []
+    },
+    {
+      "id": "brain-atlas-catalog",
+      "path": "datalake/qif-brain-bci-atlas.json",
+      "holds": "The QIF region catalog; the atlas reads it and does not own it",
+      "validated_by": "src/lib/anatomy/anatomy-inputs.ts",
+      "generator": "source",
+      "consumers": [
+        "anatomy-lib",
+        "datalake-anatomy"
+      ]
+    },
+    {
+      "id": "registrar",
+      "path": "datalake/qtara-registrar.json",
+      "holds": "The TARA technique registrar, including legacy_names and rename_note once #182 merges; owned by the registrar protocol",
+      "validated_by": ".github/workflows/registrar-sync-check.yml",
+      "generator": "source",
+      "consumers": [
+        "anatomy-lib",
+        "datalake-anatomy",
+        "site-pages"
+      ]
+    },
+    {
+      "id": "purpose-and-limits-statement",
+      "path": "src/data/purpose-and-limits.json",
+      "holds": "The one purpose-and-limits statement and the DSM-5-TR qualifier (dsm5Qualifier)",
+      "validated_by": "src/lib/purpose-and-limits.ts",
+      "generator": "source",
+      "consumers": [
+        "site-pages"
+      ],
+      "pending_pr": 181
+    }
+  ],
+  "checks": [
+    {
+      "id": "unit-tests",
+      "script": "test",
+      "guards": "Parsers, cross-checks, committed-file guards, map guards, this feature map and its generated pages, limit-copy snapshot",
+      "ci": {
+        "workflow": ".github/workflows/security.yml",
+        "job": "audit",
+        "runs": "npm test"
+      }
+    },
+    {
+      "id": "unit-tests-deploy",
+      "script": "test",
+      "guards": "The same suite again before every deploy of main",
+      "ci": {
+        "workflow": ".github/workflows/deploy.yml",
+        "job": "deploy",
+        "runs": "npm test"
+      }
+    },
+    {
+      "id": "pipeline-tests",
+      "script": "atlas:test",
+      "guards": "Pipeline stages on synthetic fixtures and the manifest code hash; CI runs the standard-library subset with pytest",
+      "ci": {
+        "workflow": ".github/workflows/security.yml",
+        "job": "audit",
+        "runs": "pytest -p no:cacheprovider -rs src/scripts/atlas-pipeline/tests"
+      }
+    },
+    {
+      "id": "build",
+      "script": "build",
+      "guards": "The index and endpoints build; a malformed data file stops the build",
+      "ci": {
+        "workflow": ".github/workflows/security.yml",
+        "job": "audit",
+        "runs": "npm run build"
+      }
+    },
+    {
+      "id": "post-build",
+      "script": "check:post-build",
+      "guards": "Served files equal the manifest; attribution wording; no anatomy in a Lab page; first-load budgets; three.js behind the button",
+      "ci": {
+        "workflow": ".github/workflows/security.yml",
+        "job": "audit",
+        "runs": "npm run check:post-build"
+      }
+    },
+    {
+      "id": "type-check",
+      "script": "type-check",
+      "guards": "Types; needs a build first in a fresh checkout",
+      "ci": {
+        "workflow": ".github/workflows/security.yml",
+        "job": "audit",
+        "runs": "npm run type-check"
+      }
+    },
+    {
+      "id": "lab-budget",
+      "script": "check:lab-budget",
+      "guards": "First-load budgets alone, for local runs; part of check:post-build",
+      "ci": null
+    },
+    {
+      "id": "anatomy-payload",
+      "script": "check:anatomy-payload",
+      "guards": "No anatomy rows in built pages, alone; part of check:post-build",
+      "ci": null
+    },
+    {
+      "id": "health",
+      "script": "health",
+      "guards": "Propagation: datalake, query tables and pages in sync",
+      "ci": null
+    },
+    {
+      "id": "atlas-docs-check",
+      "script": "atlas:docs:check",
+      "guards": "docs/atlas/INDEX.md and FOLLOW-UPS.md match this map; also asserted inside npm test",
+      "ci": null
+    },
+    {
+      "id": "generated-check",
+      "script": "generated:check",
+      "guards": "Generated registrar sections, and the purpose-and-limits blocks once #181 merges",
+      "ci": {
+        "workflow": ".github/workflows/registrar-sync-check.yml",
+        "job": "validate-registrar",
+        "runs": "npm run generated:check"
+      }
+    },
+    {
+      "id": "purpose-check",
+      "script": "purpose:check",
+      "guards": "Markdown purpose-and-limits blocks match src/data/purpose-and-limits.json",
+      "ci": null,
+      "pending_pr": 181
+    }
+  ],
+  "changes": [
+    {
+      "id": "change-region-mapping",
+      "summary": "Add a region or change a region's mapping",
+      "keywords": [
+        "region mapping",
+        "crosswalk",
+        "add a region",
+        "region outcome",
+        "contained",
+        "no geometry",
+        "atlas label"
+      ],
+      "recipe": {
+        "map": "src/lib/anatomy/CONTEXT.md",
+        "number": 2
+      },
+      "edit": [
+        "datalake/qif-anatomy-crosswalk.json",
+        "src/lib/anatomy/__tests__/region-outcome.guard.test.ts",
+        "src/components/atlas-scene/__tests__/load-anatomy-data.test.ts"
+      ],
+      "note": "A new region is a catalog change first (datalake/qif-brain-bci-atlas.json); commit changed anatomy parquet with only its catalog entries",
+      "commands": [
+        "npm run prebuild"
+      ],
+      "checks": [
+        "unit-tests",
+        "build",
+        "post-build",
+        "type-check"
+      ]
+    },
+    {
+      "id": "change-atlas-source",
+      "summary": "Add or replace an atlas source",
+      "keywords": [
+        "atlas source",
+        "new atlas",
+        "licence",
+        "license",
+        "verdict",
+        "attribution"
+      ],
+      "recipe": {
+        "map": "src/lib/anatomy/CONTEXT.md",
+        "number": 1
+      },
+      "edit": [
+        "datalake/qif-anatomy-sources.json",
+        "datalake/qif-anatomy-verdicts.json",
+        "src/lib/anatomy/licence-rules.ts",
+        "src/scripts/atlas-pipeline/registry/pipeline-inputs.json",
+        "src/lib/anatomy/load-anatomy-tables.ts"
+      ],
+      "note": "Quote the publisher's licence yourself; a new licence id is written in four places held by the shared-constants guard",
+      "commands": [
+        "bash src/scripts/atlas-pipeline/atlas.sh buildability",
+        "npm run atlas:fetch",
+        "npm run atlas:build"
+      ],
+      "checks": [
+        "unit-tests",
+        "pipeline-tests",
+        "build",
+        "post-build",
+        "type-check"
+      ]
+    },
+    {
+      "id": "change-lens",
+      "summary": "Add a lens (colour mode)",
+      "keywords": [
+        "lens",
+        "colour mode",
+        "color mode",
+        "colouring"
+      ],
+      "recipe": {
+        "map": "src/lib/anatomy/CONTEXT.md",
+        "number": 3
+      },
+      "edit": [
+        "src/lib/atlas-explorer/lens-state.ts",
+        "src/lib/anatomy/colour-modes.ts",
+        "src/lib/atlas-explorer/region-lens.ts",
+        "src/lib/anatomy/limits-copy.ts",
+        "src/lib/atlas-explorer/limit-selection.ts",
+        "src/components/atlas-scene/LensPanel.tsx"
+      ],
+      "note": "The explorer's first-load budget has almost no headroom; a lens likely needs code behind the gated chunks",
+      "commands": [
+        "npx vitest run src/lib/anatomy/__tests__/limits-copy.test.ts -u"
+      ],
+      "checks": [
+        "unit-tests",
+        "build",
+        "post-build",
+        "type-check"
+      ]
+    },
+    {
+      "id": "change-band-palette",
+      "summary": "Change a band colour or the selection colour",
+      "keywords": [
+        "band colour",
+        "band color",
+        "band palette",
+        "palette",
+        "selection colour",
+        "selection color",
+        "contrast",
+        "colour blind",
+        "color blind"
+      ],
+      "recipe": {
+        "map": "src/lib/anatomy/CONTEXT.md",
+        "number": 3
+      },
+      "edit": [
+        "src/lib/atlas-explorer/scene-shapes.ts",
+        "src/lib/atlas-explorer/scene-drawing.ts",
+        "src/components/atlas-scene/atlas-scene.css"
+      ],
+      "note": "Bands are two ordinal ramps split on the forebrain boundary, not seven categories: one hue carries at most five steps before adjacent steps fall under the lightness-gap floor. Validate any new step with the dataviz validator (per family, --ordinal) before editing, and keep the selection colour neutral so it cannot read as a band.",
+      "commands": [
+        "npx vitest run src/lib/atlas-explorer/__tests__/band-palette.test.ts"
+      ],
+      "checks": [
+        "unit-tests",
+        "type-check"
+      ]
+    },
+    {
+      "id": "change-device",
+      "summary": "Add a device (lead or electrode layout)",
+      "keywords": [
+        "device",
+        "lead",
+        "electrode",
+        "dbs",
+        "eeg layout",
+        "landmark"
+      ],
+      "recipe": {
+        "map": "src/lib/anatomy/CONTEXT.md",
+        "number": 4
+      },
+      "edit": [
+        "datalake/qif-anatomy-device-geometry.json",
+        "src/lib/anatomy/__tests__/device-geometry.guard.test.ts",
+        "src/scripts/atlas-pipeline/atlas_pipeline/electrodes.py"
+      ],
+      "note": "Leads by hand with a source and quote per dimension; electrode positions only from the pipeline",
+      "commands": [
+        "npm run atlas:devices"
+      ],
+      "checks": [
+        "unit-tests",
+        "pipeline-tests",
+        "build",
+        "type-check"
+      ]
+    },
+    {
+      "id": "change-limit-wording",
+      "summary": "Change visitor-facing limit wording on atlas views",
+      "keywords": [
+        "limit wording",
+        "limit sentence",
+        "visitor copy",
+        "caveat",
+        "disclaimer",
+        "button wording"
+      ],
+      "recipe": null,
+      "edit": [
+        "src/lib/anatomy/limits-copy.ts",
+        "src/lib/anatomy/mount-copy.ts",
+        "src/lib/anatomy/__tests__/__snapshots__/limits-copy.test.ts.snap"
+      ],
+      "note": "Never shorten or drop a limit sentence to save bytes; read the snapshot diff",
+      "commands": [
+        "npx vitest run src/lib/anatomy/__tests__/limits-copy.test.ts -u"
+      ],
+      "checks": [
+        "unit-tests",
+        "build",
+        "post-build"
+      ]
+    },
+    {
+      "id": "change-registrar-refresh",
+      "summary": "Refresh the technique links after a registrar update",
+      "keywords": [
+        "registrar refresh",
+        "registrar update",
+        "technique links",
+        "technique regions",
+        "curation"
+      ],
+      "recipe": {
+        "map": "src/lib/anatomy/CONTEXT.md",
+        "number": 5
+      },
+      "edit": [
+        "datalake/scripts/technique-region-curation.json",
+        "src/components/atlas-scene/__tests__/technique-regions-content.test.ts"
+      ],
+      "note": "Never edit datalake/qif-anatomy-technique-regions.json by hand; links stay AI-drafted, unreviewed",
+      "commands": [
+        "node datalake/scripts/draft-technique-regions.mjs",
+        "node datalake/scripts/audit-technique-regions.mjs",
+        "npm run compute:chains",
+        "npm run prebuild"
+      ],
+      "checks": [
+        "unit-tests",
+        "build",
+        "post-build",
+        "type-check"
+      ]
+    },
+    {
+      "id": "change-pipeline",
+      "summary": "Re-run the atlas pipeline",
+      "keywords": [
+        "pipeline",
+        "rebuild assets",
+        "meshes",
+        "atlas assets",
+        "manifest",
+        "code hash"
+      ],
+      "recipe": {
+        "map": "src/lib/anatomy/CONTEXT.md",
+        "number": 6
+      },
+      "edit": [
+        "src/scripts/atlas-pipeline/registry/pipeline-inputs.json"
+      ],
+      "note": "Any edit to the pipeline code changes the manifest code hash; see src/scripts/atlas-pipeline/CONTEXT.md",
+      "commands": [
+        "npm run atlas:fetch",
+        "npm run atlas:build",
+        "npm run atlas:devices",
+        "bash src/scripts/atlas-pipeline/atlas.sh buildability"
+      ],
+      "checks": [
+        "pipeline-tests",
+        "unit-tests",
+        "build",
+        "post-build"
+      ]
+    },
+    {
+      "id": "change-full-refresh",
+      "summary": "Full data refresh",
+      "keywords": [
+        "full refresh",
+        "data refresh",
+        "regenerate everything"
+      ],
+      "recipe": {
+        "map": "src/lib/anatomy/CONTEXT.md",
+        "number": 7
+      },
+      "edit": [],
+      "note": "Restore the five build-rewritten files with git checkout after the build",
+      "commands": [
+        "npm run derive:pathway-bands",
+        "npm run compute:chains",
+        "npm run prebuild",
+        "npm run build"
+      ],
+      "checks": [
+        "unit-tests",
+        "build",
+        "post-build",
+        "type-check",
+        "health"
+      ]
+    },
+    {
+      "id": "change-mount-region-view",
+      "summary": "Mount the 3D region view on another page",
+      "keywords": [
+        "mount",
+        "region view",
+        "brain view",
+        "3d view on a page"
+      ],
+      "recipe": {
+        "map": "src/lib/anatomy/CONTEXT.md",
+        "number": 8
+      },
+      "edit": [
+        "src/components/atlas-scene/RegionViewPanel.tsx",
+        "src/scripts/tool-pages.mjs"
+      ],
+      "note": "three.js must stay behind the button; measure the page's first load",
+      "commands": [
+        "node src/scripts/measure-lab-first-load.mjs"
+      ],
+      "checks": [
+        "unit-tests",
+        "build",
+        "post-build",
+        "lab-budget"
+      ]
+    },
+    {
+      "id": "change-review",
+      "summary": "Record a human review of anatomy rows",
+      "keywords": [
+        "review",
+        "reviewed",
+        "ledger",
+        "unreviewed"
+      ],
+      "recipe": null,
+      "edit": [
+        "datalake/qif-anatomy-review-ledger.json",
+        "src/lib/anatomy/review-state.ts"
+      ],
+      "note": "Only the repository owner writes the ledger; an agent never does. Also change REVIEWED_ENTRY_COUNTS",
+      "commands": [],
+      "checks": [
+        "unit-tests",
+        "build"
+      ]
+    },
+    {
+      "id": "change-atlas-dsm-wording",
+      "summary": "Change DSM-5-TR wording inside the atlas explorer",
+      "keywords": [
+        "dsm wording",
+        "dsm lens",
+        "dsm references",
+        "atlas dsm"
+      ],
+      "recipe": null,
+      "edit": [
+        "src/lib/anatomy/limits-copy.ts",
+        "src/lib/atlas-explorer/region-dsm.ts",
+        "src/lib/atlas-explorer/catalog-dsm.ts"
+      ],
+      "note": "Keys dsm_* and lens_dsm in limits-copy.ts; every DSM mention keeps a not-a-diagnosis qualifier",
+      "commands": [
+        "npx vitest run src/lib/anatomy/__tests__/limits-copy.test.ts -u"
+      ],
+      "checks": [
+        "unit-tests",
+        "build"
+      ]
+    },
+    {
+      "id": "change-purpose-statement",
+      "summary": "Change the purpose-and-limits statement",
+      "keywords": [
+        "purpose statement",
+        "purpose and limits",
+        "what it isn't",
+        "framing"
+      ],
+      "recipe": null,
+      "edit": [
+        "src/data/purpose-and-limits.json",
+        "src/lib/purpose-and-limits.ts",
+        "src/components/PurposeAndLimits.astro"
+      ],
+      "note": "The JSON is the one source; the markdown blocks are generated between BEGIN and END markers",
+      "commands": [
+        "npm run purpose:sync"
+      ],
+      "checks": [
+        "purpose-check",
+        "generated-check",
+        "unit-tests"
+      ],
+      "pending_pr": 181
+    },
+    {
+      "id": "change-dsm-qualifier",
+      "summary": "Change the site-wide DSM-5-TR qualifier",
+      "keywords": [
+        "dsm qualifier",
+        "diagnostic claims",
+        "dsm5qualifier"
+      ],
+      "recipe": null,
+      "edit": [
+        "src/data/purpose-and-limits.json",
+        "src/lib/purpose-and-limits.ts"
+      ],
+      "note": "Field dsm5Qualifier, exported as DSM5_QUALIFIER; inside the explorer the wording is in limits-copy.ts (see change-atlas-dsm-wording)",
+      "commands": [
+        "npm run purpose:sync"
+      ],
+      "checks": [
+        "purpose-check",
+        "unit-tests",
+        "build"
+      ],
+      "pending_pr": 181
+    },
+    {
+      "id": "change-coverage-gaps-page",
+      "summary": "Change the technique coverage-gap page",
+      "keywords": [
+        "coverage gaps",
+        "coverage-gap page",
+        "detection gaps"
+      ],
+      "recipe": null,
+      "edit": [
+        "src/pages/atlas/tara/coverage-gaps.astro",
+        "src/lib/validation-data.ts"
+      ],
+      "note": "Counts are computed, not typed",
+      "commands": [],
+      "checks": [
+        "unit-tests",
+        "build"
+      ],
+      "pending_pr": 181
+    },
+    {
+      "id": "change-technique-names",
+      "summary": "Rename a technique, keeping its old name as an alias",
+      "keywords": [
+        "technique rename",
+        "legacy names",
+        "rename note",
+        "technique description"
+      ],
+      "recipe": null,
+      "edit": [
+        "datalake/qtara-registrar.json",
+        "src/lib/threat-data.ts",
+        "src/pages/atlas/tara/[id].astro",
+        "src/scripts/migrate-descriptive-notes-and-renames.py"
+      ],
+      "note": "Follow the registrar update protocol (.claude/rules/registrar.md); fields legacy_names and rename_note",
+      "commands": [
+        "npm run registrar:stats",
+        "npm run truth:registry",
+        "npm run autodidactive:tara"
+      ],
+      "checks": [
+        "generated-check",
+        "unit-tests",
+        "build"
+      ],
+      "pending_pr": 182
+    },
+    {
+      "id": "change-524b-correction",
+      "summary": "Change the section 524B correction notice on the whitepaper",
+      "keywords": [
+        "524b",
+        "regulatory correction",
+        "whitepaper correction"
+      ],
+      "recipe": null,
+      "edit": [
+        "src/lib/whitepaper-corrections.ts",
+        "src/components/whitepaper/RegulatoryCorrectionNotice.astro"
+      ],
+      "note": "Archived whitepaper versions follow .claude/rules/whitepaper-archival.md",
+      "commands": [],
+      "checks": [
+        "unit-tests",
+        "build"
+      ],
+      "pending_pr": 183
+    },
+    {
+      "id": "change-followup",
+      "summary": "Add, close or re-own a follow-up",
+      "keywords": [
+        "follow-up",
+        "followup",
+        "decision",
+        "todo",
+        "open items"
+      ],
+      "recipe": null,
+      "edit": [
+        "src/scripts/atlas-map/atlas-map.json"
+      ],
+      "note": "Ids are never reused; close by setting status to done and naming the PR in what",
+      "commands": [
+        "npm run atlas:docs"
+      ],
+      "checks": [
+        "unit-tests"
+      ]
+    }
+  ],
+  "provenance": [
+    {
+      "id": "prov-licence-verification",
+      "path": "docs/atlas/provenance/licence-verification.md",
+      "justifies": "Each source's licence verdict in datalake/qif-anatomy-verdicts.json"
+    },
+    {
+      "id": "prov-licence-check",
+      "path": "docs/atlas/provenance/licence-verification-check.md",
+      "justifies": "Independent check of the licence verification"
+    },
+    {
+      "id": "prov-hodos-audit",
+      "path": "docs/atlas/provenance/hodos-licence-validity-audit.md",
+      "justifies": "Licence and validity audit of the Hodos atlas build"
+    },
+    {
+      "id": "prov-sources-survey",
+      "path": "docs/atlas/provenance/sources-survey.md",
+      "justifies": "Which atlases were considered and why"
+    },
+    {
+      "id": "prov-crosswalk-recheck",
+      "path": "docs/atlas/provenance/crosswalk-recheck.md",
+      "justifies": "The 38-region crosswalk re-check applied in #180"
+    },
+    {
+      "id": "prov-crosswalk-verification",
+      "path": "docs/atlas/provenance/crosswalk-recheck-verification.md",
+      "justifies": "Independent verification of #180"
+    },
+    {
+      "id": "prov-mapping-coverage",
+      "path": "docs/atlas/provenance/mapping-coverage.md",
+      "justifies": "The mapping coverage table behind #177"
+    },
+    {
+      "id": "prov-framing-decision",
+      "path": "docs/atlas/provenance/framing-decision.md",
+      "justifies": "The purpose-and-limits framing in #181, #182 and #183, and its pre-publish checks"
+    }
+  ],
+  "followups": [
+    {
+      "id": "ATLAS-F01",
+      "what": "Merge the draft PRs in the order in the epic; merging to main publishes the site.",
+      "ref": "#164 to #180",
+      "owner": "kevin",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F02",
+      "what": "Acknowledge the KR3 shortfall: the 31-of-38 target is not reachable with cleanly licensed sources; the outcome is 23 own shape / 10 contained / 5 none, each gap with a written reason.",
+      "ref": "#180, `src/lib/anatomy/__tests__/region-outcome.guard.test.ts`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #180 body; epic"
+    },
+    {
+      "id": "ATLAS-F03",
+      "what": "Rule on deep Allen shapes: shipped warped by an agent's ruling; the alternative is a header-only resample.",
+      "ref": "#169",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #169 body; epic"
+    },
+    {
+      "id": "ATLAS-F04",
+      "what": "Decide what deep Allen shapes say on screen about placement (measured 0.7 to 2.5 mm against CIT168).",
+      "ref": "#169, `src/lib/anatomy/limits-copy.ts`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #169 body"
+    },
+    {
+      "id": "ATLAS-F05",
+      "what": "Rule on the VTA band: `vta.qif_band` is N5 while its parent `midbrain` is N2; #164 makes three pathway origin bands follow N5 (visible on the data-lake page, clinical band views and a KQL preset). Then rerun `npm run derive:pathway-bands`.",
+      "ref": "#164",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #164 body; epic"
+    },
+    {
+      "id": "ATLAS-F06",
+      "what": "Accept that #164 raises the public Data Studio row count from 7,982 to 23,736 (a band-level cross product, not technique-specific anatomy).",
+      "ref": "#164",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #164 body; epic"
+    },
+    {
+      "id": "ATLAS-F07",
+      "what": "Read the AI-written visitor copy nobody has reviewed: the limit sentences (69 listed in #171, more added in #172, #175, #179) and the ten \"what this card does not say\" sentences on the H01 card.",
+      "ref": "`src/lib/anatomy/limits-copy.ts`, `datalake/qif-anatomy-h01-card.json`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #171, #172, #175, #179 body; epic"
+    },
+    {
+      "id": "ATLAS-F08",
+      "what": "Rule on the eight spec departures listed for a ruling in #171 (index not pinned to the page build, no noscript table, route, third endpoint, rail tags, code budget, `evidence_species`, not propagated).",
+      "ref": "#171",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #171 body"
+    },
+    {
+      "id": "ATLAS-F09",
+      "what": "Rule on the eight spec departures listed for a ruling in #172 (no GLTFLoader, no millimetre caption, manifest not fetched, `contained_kind` not shown, outline wording, tab order, no rim during a cut, `OpenViewport` as the gate).",
+      "ref": "#172",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #172 body"
+    },
+    {
+      "id": "ATLAS-F10",
+      "what": "Decide whether unreviewed device rows are drawn; the EEG electrode layout is off by default by a PM ruling because three of four landmarks are judged weak.",
+      "ref": "#173, #175",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #173, #175 body"
+    },
+    {
+      "id": "ATLAS-F11",
+      "what": "Decide whether the Koessler electrode-to-cortex figure is shown before the full paper is read (recorded from the abstract only).",
+      "ref": "#173",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #173 body"
+    },
+    {
+      "id": "ATLAS-F12",
+      "what": "Ask a lawyer about the 8 to 14 word verbatim quotes from two non-commercially licensed review papers kept as lead-dimension sources.",
+      "ref": "`datalake/qif-anatomy-device-geometry.json`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F13",
+      "what": "Decide between the `INDEX_PIN_MODULES` stop and the setting.",
+      "ref": "#179",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #179 body"
+    },
+    {
+      "id": "ATLAS-F14",
+      "what": "Turn on branch protection if wanted: `main` has no required reviews, code-owner requirement or status checks, so CODEOWNERS and the PR `audit` job are advisory.",
+      "ref": "repository settings, `.github/CODEOWNERS`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F15",
+      "what": "Acknowledge the push-gate and process breaches: #167 (`00843f2f`) and #168 (`d5829bd6`) pushed with the marker step refused; #165 (`0b8b455f`, `5eb0c84e`) and #179 (`3a77e848`) pushed on self-made markers; #164 (`b065ca04`) pushed unreviewed. Later heads were fully reviewed.",
+      "ref": "epic log",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #167, #168, #165, #179, #164 body; epic"
+    },
+    {
+      "id": "ATLAS-F16",
+      "what": "Give the registration transform (about 92 MB, sha256 pinned in the pipeline inputs) a durable home; it lives only in the untracked staging `pipeline-archive/`.",
+      "ref": "`src/scripts/atlas-pipeline/registry/pipeline-inputs.json`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F17",
+      "what": "Give the rest of the staging archive a durable home (build spec, screenshots, evidence JSON, review sheets); it sits uncommitted in a worktree that belongs to other work. The provenance in `docs/atlas/provenance/` is now versioned.",
+      "ref": "`<staging>/2026-10-atlas-geometry/`, `<staging>/2026-10-framing/`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F18",
+      "what": "Decide whether to delete `raw/hcp1065/` (6 MB, uncleared tract-atlas files) and the pipeline cache and environment in session scratch, which are the only copies (a rebuild without them needs fresh downloads).",
+      "ref": "session scratch",
+      "owner": "kevin",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F19",
+      "what": "Live-site settings outside the repository: Cloudflare sends `frame-ancestors 'none'`, so the Lab's framed views are refused in production, and injects its analytics beacon, which only the page policy blocks; the headers in force are not those in `src/site/_headers`.",
+      "ref": "#165, Cloudflare",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #165 body; epic"
+    },
+    {
+      "id": "ATLAS-F20",
+      "what": "Accept the HCP Open Access Data Use Terms (ConnectomeDB / BALSA) if any HCP-terms layer is to ship.",
+      "ref": "`datalake/qif-anatomy-verdicts.json`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F21",
+      "what": "Tracts: get the HCP1065 author's written confirmation that CC BY-SA 4.0 alone governs redistribution (or accept the HCP terms), then run the gated pipeline step and add a tract loader and pin check.",
+      "ref": "`datalake/qif-anatomy-verdicts.json`, #175",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #175 body; epic"
+    },
+    {
+      "id": "ATLAS-F22",
+      "what": "Network colouring: get the Yeo/CBIG authors' confirmation that the MIT licence covers the parcellation files, or accept the FreeSurfer licence obligations.",
+      "ref": "`datalake/qif-anatomy-verdicts.json`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F23",
+      "what": "Ask the Diedrichsen lab which licence governs the cerebellar atlas (README says CC BY; LICENSE and lab site say CC BY-NC). Not shipped until answered.",
+      "ref": "`datalake/qif-anatomy-verdicts.json`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F24",
+      "what": "PAM50 spinal cord has no licence (upstream issue #53 unanswered), so spinal cord regions have no geometry.",
+      "ref": "`datalake/qif-anatomy-crosswalk.json`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F25",
+      "what": "Review the AI-drafted crosswalk rows and technique region links, or commission a neuroanatomist; a review counts only as the owner's entry in the ledger.",
+      "ref": "`datalake/qif-anatomy-review-ledger.json`",
+      "owner": "domain-review",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F26",
+      "what": "acc and the paracingulate gyrus (146034872): not added; the abstract gives area 32 but the publisher files the label under the frontal lobe.",
+      "ref": "#180",
+      "owner": "domain-review",
+      "status": "open",
+      "from": "PR #180 body"
+    },
+    {
+      "id": "ATLAS-F27",
+      "what": "Decide which region owns the precuneus (12137): QIF lists it under cingulate, the publisher under parietal, ppc lacks it.",
+      "ref": "#180",
+      "owner": "domain-review",
+      "status": "open",
+      "from": "PR #180 body"
+    },
+    {
+      "id": "ATLAS-F28",
+      "what": "Check acc + 12160 and a1 + 12145 against the atlas plates; each rests on one abstract-level statement.",
+      "ref": "#180",
+      "owner": "domain-review",
+      "status": "open",
+      "from": "PR #180 body"
+    },
+    {
+      "id": "ATLAS-F29",
+      "what": "Locate a1's belt and parabelt; the row stays \"contained\" with that caveat.",
+      "ref": "#180",
+      "owner": "domain-review",
+      "status": "open",
+      "from": "PR #180 body"
+    },
+    {
+      "id": "ATLAS-F30",
+      "what": "Check where the atlas draws 12115 against 12126, and whether areas 29 and 30 fall in 12158 or 12159.",
+      "ref": "#180",
+      "owner": "domain-review",
+      "status": "open",
+      "from": "PR #180 body"
+    },
+    {
+      "id": "ATLAS-F31",
+      "what": "Design a `contains` relation that does not list a child on every shape of the parent (the three removed in #180 stated false anatomy for midbrain and cerebellum).",
+      "ref": "#180, `src/lib/anatomy/CONTEXT.md` recipe 2",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #180 body"
+    },
+    {
+      "id": "ATLAS-F32",
+      "what": "Decide whether to ship CIT168 label 9 (parabrachial pigmented nucleus) so vta covers the usual definition.",
+      "ref": "#180",
+      "owner": "domain-review",
+      "status": "open",
+      "from": "PR #180 body"
+    },
+    {
+      "id": "ATLAS-F33",
+      "what": "Check whether the Allen cerebellar-cortex shapes include folial white matter (the whole 22 to 23 own-shape change rests on it).",
+      "ref": "#180",
+      "owner": "domain-review",
+      "status": "open",
+      "from": "PR #180 body"
+    },
+    {
+      "id": "ATLAS-F34",
+      "what": "Aliases for unresolved region words, an anatomy judgment (only 12 of 111 neural-band techniques light a region; 89 of 123 link words resolve to nothing): Broca's and Wernicke's area display names; sub-structures (locus coeruleus, NTS, DLPFC, mPFC, orbitofrontal cortex, anterior insula, ventral premotor cortex, SNc); wider terms (motor, visual, auditory, somatosensory cortex); anterior versus posterior cingulate; adjectives.",
+      "ref": "#168, `datalake/scripts/technique-region-curation.json`",
+      "owner": "domain-review",
+      "status": "open",
+      "from": "PR #168 body; epic"
+    },
+    {
+      "id": "ATLAS-F35",
+      "what": "Settle the device landmarks: inion and both preauricular points judged about 1 cm low on the average head; look at the review sheets.",
+      "ref": "#173, `<staging>/2026-10-atlas-geometry/pr-sheets/devices/`",
+      "owner": "domain-review",
+      "status": "open",
+      "from": "PR #173 body; epic"
+    },
+    {
+      "id": "ATLAS-F36",
+      "what": "Compare the template head's 405 mm midline arc with a population figure.",
+      "ref": "#173",
+      "owner": "domain-review",
+      "status": "open",
+      "from": "PR #173 body"
+    },
+    {
+      "id": "ATLAS-F37",
+      "what": "Atlas file text the evidence papers do not support as written (11 items, e.g. Broca's area damage, \"STN lesion causes hemiballismus\", \">60% SNc loss\", \"VIM-DBS reduces tremor by 60-90%\", \"must decompress within 48 hours\").",
+      "ref": "`datalake/qif-brain-bci-atlas.json`, `<staging>/2026-10-atlas-geometry/evidence/README.md`",
+      "owner": "domain-review",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F38",
+      "what": "28 techniques whose registrar text contradicts their own band tags (T0104 to T0107 say device-only while tagged N1/N2; 19 name an untagged band; 9 name a region outside their bands); those links light nothing until resolved.",
+      "ref": "#168, `datalake/qtara-registrar.json`",
+      "owner": "data",
+      "status": "open",
+      "from": "PR #168 body; epic"
+    },
+    {
+      "id": "ATLAS-F39",
+      "what": "Data-side causal wording for the owner to edit: 17 technique notes, 14 region fields, 3 pathway strings, one `dsm5_spec.description`.",
+      "ref": "#177",
+      "owner": "data",
+      "status": "open",
+      "from": "PR #177 body; epic"
+    },
+    {
+      "id": "ATLAS-F40",
+      "what": "Settle data disagreements before surfacing them: band-level DSM tables (`dsm5_spec.band_profiles` and `qif-dsm-mappings.json` share 2 codes), `severity` versus `niss.severity` (differ for 54 techniques), impact-chain rows per region.",
+      "ref": "#177",
+      "owner": "data",
+      "status": "open",
+      "from": "PR #177 body; epic"
+    },
+    {
+      "id": "ATLAS-F41",
+      "what": "Curated chain `objective` and `clinical_parallel` are not served; only one curated step lights a region.",
+      "ref": "#175, #177",
+      "owner": "data",
+      "status": "open",
+      "from": "PR #175, #177 body"
+    },
+    {
+      "id": "ATLAS-F42",
+      "what": "Leads left out for want of a primary document: Abbott Infinity, Boston Scientific Cartesia, St. Jude Brio; A1, A2 and the 10-10 set not placed.",
+      "ref": "#173, `datalake/qif-anatomy-device-geometry.json`",
+      "owner": "data",
+      "status": "open",
+      "from": "PR #173 body; epic"
+    },
+    {
+      "id": "ATLAS-F43",
+      "what": "After #164 and #182 both merge, regenerate `datalake/impact-chains.json` with `npm run compute:chains` (it still shows old technique names, and a stale file blocks the deploy through #164's byte-exact test).",
+      "ref": "#164, #182",
+      "owner": "data",
+      "status": "open",
+      "from": "PR #164, #182 body; epic"
+    },
+    {
+      "id": "ATLAS-F44",
+      "what": "Project region evidence, the H01 card and #173's layout, fact and lead-source fields into the KQL and parquet tables.",
+      "ref": "#170, `src/lib/anatomy/anatomy-tables.ts`",
+      "owner": "data",
+      "status": "open",
+      "from": "PR #173, #170 body; epic"
+    },
+    {
+      "id": "ATLAS-F45",
+      "what": "Re-baseline the first-load budgets in whichever of #165 and the Lab stack (#163, #166) merges second (steps in #165).",
+      "ref": "#165",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #165, #163, #166 body"
+    },
+    {
+      "id": "ATLAS-F46",
+      "what": "Explorer first-load budget has about 300 bytes of headroom; the next explorer change will likely hit it.",
+      "ref": "#178, `src/scripts/measure-lab-first-load.mjs`",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #178 body; epic"
+    },
+    {
+      "id": "ATLAS-F47",
+      "what": "Long code: `createSceneRenderer` (224 lines), `OpenViewport`, three explorer components and eight pipeline functions over 30 lines; four test files over 300 lines.",
+      "ref": "#169, #171, #172, #178",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #169, #171, #172, #178 body; epic"
+    },
+    {
+      "id": "ATLAS-F48",
+      "what": "14 test-only imports from components into the library and 107 over-exported names.",
+      "ref": "#178",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #178 body"
+    },
+    {
+      "id": "ATLAS-F49",
+      "what": "Pipeline: K10 written as a constant; no per-stage skip (every build re-meshes, two to four minutes); label tables hash-checked but not regenerated in CI; pipeline commands and `npm run evidence:browser` documented but not run.",
+      "ref": "#169, #178, `src/scripts/atlas-pipeline/`",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #169, #178 body; epic"
+    },
+    {
+      "id": "ATLAS-F50",
+      "what": "Explorer: count announcements fire per keystroke; no payload marker for region descriptions; caption link wraps; raw ids as device and DSM lens subjects; a selected pale shape may block a pick behind it; no deep link to one region.",
+      "ref": "#171, #172, #179",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #171, #172, #179 body; epic"
+    },
+    {
+      "id": "ATLAS-F51",
+      "what": "Device view: electrode names overlap in the top view (Cz covers its dot); step labels overlap in the front view; side electrodes cropped at 390 px; far-side names show through pale shapes; the \"EEG electrode layout\" toggle also opens the lead drawings.",
+      "ref": "#175",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #175 body; epic"
+    },
+    {
+      "id": "ATLAS-F52",
+      "what": "Guards: the drawn-line guard allows any drawing inside a review mark (narrow to the two glyphs); the first link's review state wins per region; the map guard does not check symbol names; `generate-parquet.py` error paths have no test.",
+      "ref": "#170, #175, #178",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #170, #175, #178 body; epic"
+    },
+    {
+      "id": "ATLAS-F53",
+      "what": "Mounted region view: a band selection brackets nearly the whole brain where most regions sit in one larger shape; the view is about 2,000 px tall; the Lab sticky bar leaves about 480 px at a 900 px viewport; on the hub at 390 px it sits behind the \"Band list\" tab; lens limit and outline shown twice; focus falls to the document after \"Hide the 3D view\".",
+      "ref": "#179",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #179 body; epic"
+    },
+    {
+      "id": "ATLAS-F54",
+      "what": "Pages not mounted: homepage, rights page, NeuroSIM; NeuroSIM still loads three.js at first load (lazy-load its 3D levels).",
+      "ref": "#176, #179",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #176, #179 body; epic"
+    },
+    {
+      "id": "ATLAS-F55",
+      "what": "Legacy cleanup: retire or rebuild the 17 committed-HTML pages and delete the five stale build files; delete `src/site/brain-siem/` once the Lab monitor lands; the committed sitemap still lists `/research/bci-dashboard/`.",
+      "ref": "#176",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #176 body; epic"
+    },
+    {
+      "id": "ATLAS-F56",
+      "what": "Older pages: sideways overflow at 390 px (hub 33 px, Clinical 266 px, rights 124 px) and monospace labels; the Clinical page loads the analytics beacon from the base layout.",
+      "ref": "#176, #177",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #176, #177 body; epic"
+    },
+    {
+      "id": "ATLAS-F57",
+      "what": "Shell commands built from data, same pattern #174 fixed: `src/scripts/changelog-update.mjs:93`, `src/scripts/timeline-check.mjs:232`; plus `npx tsx` fetches an unpinned package each build, the KQL export splices its output path into generated source, and its temp script has a fixed, un-ignored name.",
+      "ref": "#174",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #174 body; epic"
+    },
+    {
+      "id": "ATLAS-F58",
+      "what": "The CodeQL fix to `src/scripts/source-imports.mjs` made in #176 is also wanted in #170 if #170 merges alone.",
+      "ref": "#170, #176",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #176, #170 body; epic"
+    },
+    {
+      "id": "ATLAS-F59",
+      "what": "CODEOWNERS still names paths that no longer exist (`/qif-spec/`, `/shared/qtara/`).",
+      "ref": "`.github/CODEOWNERS`",
+      "owner": "engineering",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F60",
+      "what": "The clinical brain map (`BrainMapView`) uses its own band-level computation in `src/lib/clinical-data.ts`, not `impact-chains.json`.",
+      "ref": "#164",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #164 body"
+    },
+    {
+      "id": "ATLAS-F61",
+      "what": "Not checked anywhere: a real GPU, Safari, Firefox, touch, screen readers, and the cited FDA and DOI documents against the device numbers.",
+      "ref": "#175, #176, #179",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #175, #176, #179 body"
+    },
+    {
+      "id": "ATLAS-F62",
+      "what": "Screenshots and browser evidence are attached to no PR (`gh` cannot upload images); about 240 MB `dist/` folders remain in three old worktrees.",
+      "ref": "`<staging>/2026-10-atlas-geometry/evidence/`",
+      "owner": "engineering",
+      "status": "open",
+      "from": "epic"
+    },
+    {
+      "id": "ATLAS-F63",
+      "what": "Device ear notes lost \"The average image blurs the ear.\" to fit 400 characters; the first verifier's ear sensitivity ranges were reproduced by nobody.",
+      "ref": "#173",
+      "owner": "data",
+      "status": "open",
+      "from": "PR #173 body; epic"
+    },
+    {
+      "id": "FRAME-F01",
+      "what": "Accept the framing decision (merge #183 first: the 524B text it corrects is live).",
+      "ref": "#181, #182, #183",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #183, #181, #182 body"
+    },
+    {
+      "id": "FRAME-F02",
+      "what": "Check 1: section 524B text and the cyber device definition, and which prongs `src/components/threat-model/ComplianceChecklist.tsx` evaluates; until then \"every technique is classified against this three-prong test\" (whitepaper 8.2) and the Refuse-to-Accept line in `RegulatoryTimeline.astro` stay, and H11 relies on it.",
+      "ref": "#183, #181",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #183, #181 body"
+    },
+    {
+      "id": "FRAME-F03",
+      "what": "Check 2: what `.claude/rules/whitepaper-archival.md` allows for archived copies (banner or edit).",
+      "ref": "#183",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #183 body"
+    },
+    {
+      "id": "FRAME-F04",
+      "what": "Check 3: \"not peer reviewed\" is still true at publish time (omitted from A2 and A3 until then).",
+      "ref": "#181",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #181 body"
+    },
+    {
+      "id": "FRAME-F05",
+      "what": "Check 4: whether FIRST or the CVSS SIG reviewed NISS in any capacity; adjust H8 and the whitepaper's CVSS Resources invitation line.",
+      "ref": "#181, #183",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #181, #183 body"
+    },
+    {
+      "id": "FRAME-F06",
+      "what": "Check 5: the registrar's definitions of CONFIRMED, DEMONSTRATED and EMERGING before any \"observed\" or \"lab-demonstrated\" wording.",
+      "ref": "#182",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #182 body"
+    },
+    {
+      "id": "FRAME-F07",
+      "what": "Check 6: the MITRE/MDIC 2021 playbook and CISA BCI foresight facts; run the ATT&CK search and record the date; then apply the decided H4 MITRE text and update the held CISA card.",
+      "ref": "#181",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #181 body"
+    },
+    {
+      "id": "FRAME-F08",
+      "what": "Checks 7 and 13: confirm the data source for `{detected}` (shipped from `tara.engineering.detection`) and `{m}` (not added), and the T0136 to T0161 decision, before the homepage copy ships.",
+      "ref": "#181",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #181 body"
+    },
+    {
+      "id": "FRAME-F09",
+      "what": "Check 8: what the epic-security-toolbox BCI flow actually does (M12, other repository).",
+      "ref": "other repository",
+      "owner": "kevin",
+      "status": "open",
+      "from": "framing decision"
+    },
+    {
+      "id": "FRAME-F10",
+      "what": "Check 9: the \"11 bands\" and \"9 categories\" figures are current.",
+      "ref": "#181",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #181 body"
+    },
+    {
+      "id": "FRAME-F11",
+      "what": "Check 10: whether `clinical.safe_parameters` (therapeutic dose envelopes) stays public next to attack entries.",
+      "ref": "`datalake/qtara-registrar.json`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "framing decision"
+    },
+    {
+      "id": "FRAME-F12",
+      "what": "Check 11: no DSM-5-TR criteria text is reproduced anywhere (APA copyright).",
+      "ref": "site-wide",
+      "owner": "kevin",
+      "status": "open",
+      "from": "framing decision"
+    },
+    {
+      "id": "FRAME-F13",
+      "what": "Check 12: the T0103 \"~60 Hz\" figure and the T0065 sources; the T0065 rename is held until then.",
+      "ref": "#182",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #182 body"
+    },
+    {
+      "id": "FRAME-F14",
+      "what": "Check 14: the governance link path in the org profile resolves.",
+      "ref": "GitHub org profile",
+      "owner": "kevin",
+      "status": "open",
+      "from": "framing decision"
+    },
+    {
+      "id": "FRAME-F15",
+      "what": "Confirm T0011's name: #182 uses \"telemetry\" (the entry's notes describe MICS telemetry mixing), not the decided \"stimulation\".",
+      "ref": "#182",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #182 body"
+    },
+    {
+      "id": "FRAME-F16",
+      "what": "Commission detection and mitigation guidance for QIF-T0136 to QIF-T0161 (26 techniques with none).",
+      "ref": "#182, `datalake/qtara-registrar.json`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #182 body"
+    },
+    {
+      "id": "FRAME-F17",
+      "what": "Apply the decided text outside this repository: H1 repository description, H6 org profile, M12 epic-security-toolbox.",
+      "ref": "GitHub settings, other repositories",
+      "owner": "kevin",
+      "status": "open",
+      "from": "framing decision"
+    },
+    {
+      "id": "FRAME-F18",
+      "what": "Older copy noticed and not changed: the About page origin story (\"catalogued every known way…\", \"{n} neurorights operationalized\"); the homepage dual-use line about Parkinson's.",
+      "ref": "#181",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #181 body"
+    },
+    {
+      "id": "FRAME-F19",
+      "what": "Older clinical copy: the Clinical page \"For Clinicians\" diagnostic scenario and approved-therapies sentence; `/atlas/scoring/` \"clinical outcome mapping\"; the \"Direct Risk\" description.",
+      "ref": "#177",
+      "owner": "kevin",
+      "status": "open",
+      "from": "PR #177 body"
+    },
+    {
+      "id": "FRAME-F20",
+      "what": "M13: the decided limit wording in `src/lib/anatomy/limits-copy.ts` was not applied because the file lives on the atlas stack; apply it after both merge.",
+      "ref": "#181, #179",
+      "owner": "engineering",
+      "status": "open",
+      "from": "PR #181, #179 body"
+    },
+    {
+      "id": "FRAME-F21",
+      "what": "L1 to L6: fix on next touch, as decided.",
+      "ref": "`docs/atlas/provenance/framing-decision.md`",
+      "owner": "engineering",
+      "status": "open",
+      "from": "framing decision"
+    },
+    {
+      "id": "FRAME-F22",
+      "what": "QIF-T0066 cross-references \"generic gradual drift (QIF-T0045)\", but T0045 is harvest-now-decrypt-later; T0067 claims \"0% detection rate against sophisticated replays\".",
+      "ref": "`datalake/qtara-registrar.json`",
+      "owner": "data",
+      "status": "open",
+      "from": "framing decision"
+    },
+    {
+      "id": "FRAME-F23",
+      "what": "The `datalake/qtara/test_stix.json` fixture predates the renames.",
+      "ref": "#182",
+      "owner": "data",
+      "status": "open",
+      "from": "PR #182 body"
+    },
+    {
+      "id": "ATLAS-F64",
+      "what": "Dark mode renders light-surface band colours. BAND_COLOURS_DARK holds validated dark steps but nothing threads a theme flag through describeFill to the scene renderer.",
+      "ref": "#171",
+      "owner": "engineering",
+      "status": "open",
+      "from": "palette re-step, 2026-10-16"
+    },
+    {
+      "id": "ATLAS-F65",
+      "what": "Within a hue family only lightness separates adjacent bands, so a band mark must always carry its label. Legend presence is not yet asserted by a test.",
+      "ref": "#171",
+      "owner": "engineering",
+      "status": "open",
+      "from": "palette re-step, 2026-10-16"
+    }
+  ]
+}

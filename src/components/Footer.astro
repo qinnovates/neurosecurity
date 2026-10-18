@@ -1,5 +1,6 @@
 ---
 import { QIF_VERSION, QIF_ARCHITECTURE } from '../lib/qif-constants';
+import { FRAMEWORK_STATUS, STATEMENT_LINKS } from '../lib/purpose-and-limits';
 const year = new Date().getFullYear();
 
 const sections = [
@@ -56,7 +57,8 @@ const sections = [
           Open research on the security and governance of neural interfaces.
         </p>
         <p class="mt-4 text-xs text-[var(--color-text-faint)]">
-          QIF v{QIF_VERSION} {QIF_ARCHITECTURE} &middot; Proposed Framework
+          QIF v{QIF_VERSION} {QIF_ARCHITECTURE}
+          <span class="ml-1 inline-block rounded-full border border-[var(--color-border)] px-2 py-0.5 font-medium text-[var(--color-text-muted)]">{FRAMEWORK_STATUS.badge}</span>
         </p>
       </div>
 
@@ -83,7 +85,11 @@ const sections = [
     </div>
 
 
-    <div class="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <p class="mt-6 text-xs text-[var(--color-text-faint)] text-center sm:text-left">
+      {FRAMEWORK_STATUS.footerLine} <a href={STATEMENT_LINKS.purposeAndLimits} class="underline hover:text-[var(--color-text-muted)] transition-colors">{FRAMEWORK_STATUS.footerLinkLabel} &rarr;</a>
+    </p>
+
+    <div class="mt-4 flex flex-col sm:flex-row justify-between items-center gap-4">
       <p class="text-xs text-[var(--color-text-faint)]">
         &copy; {year} Qinnovate. Open research on the security and governance of neural interfaces.
       </p>

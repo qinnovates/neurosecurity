@@ -94,7 +94,7 @@ export function getCellValue(cells: MatrixCell[], rowId: string, colId: string):
 
 // ═══ Highlight Resolution ═══
 
-/** Given a heatmap hover, resolve which region IDs should highlight on the brain SVG */
+/** Given a heatmap hover, resolve which region IDs should be outlined in the region list */
 export function getHighlightedRegionsFromCell(
   data: ClinicalData,
   chains: NeuralImpactChain[],

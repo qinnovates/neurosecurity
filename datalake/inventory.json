@@ -3,10 +3,10 @@
   "_note": "Derived file. Do not hand-edit — run `npm run datalake:inventory`.",
   "generated_on": "2026-10-18",
   "totals": {
-    "datalake_files": 31,
-    "datasets_inventoried": 22,
-    "records": 6511,
-    "unique_dois": 120,
+    "datalake_files": 39,
+    "datasets_inventoried": 28,
+    "records": 21467,
+    "unique_dois": 192,
     "techniques_with_cve_evidence": 27,
     "cve_coverage_ratio": 0.1534
   },
@@ -14,7 +14,7 @@
     {
       "key": "impact_chains",
       "label": "Neural impact chains",
-      "count": 5476,
+      "count": 20182,
       "file": "datalake/impact-chains.json",
       "path": "",
       "group": "threat",
@@ -184,6 +184,69 @@
       "unit": "axes"
     },
     {
+      "key": "anatomy_region_evidence",
+      "label": "Brain-region evidence rows",
+      "count": 58,
+      "file": "datalake/qif-anatomy-region-evidence.json",
+      "path": "rows",
+      "group": "anatomy",
+      "unit": "rows"
+    },
+    {
+      "key": "anatomy_crosswalk",
+      "label": "Anatomy atlas crosswalk rows",
+      "count": 34,
+      "file": "datalake/qif-anatomy-crosswalk.json",
+      "path": "rows",
+      "group": "anatomy",
+      "unit": "rows"
+    },
+    {
+      "key": "anatomy_sources",
+      "label": "Anatomy sources vetted",
+      "count": 16,
+      "file": "datalake/qif-anatomy-sources.json",
+      "path": "sources",
+      "group": "anatomy",
+      "unit": "sources"
+    },
+    {
+      "key": "anatomy_verdicts",
+      "label": "Anatomy review verdicts",
+      "count": 16,
+      "file": "datalake/qif-anatomy-verdicts.json",
+      "path": "verdicts",
+      "group": "anatomy",
+      "unit": "verdicts"
+    },
+    {
+      "key": "white_matter_tracts",
+      "label": "White-matter tracts",
+      "count": 10,
+      "file": "datalake/qif-neurosim.json",
+      "path": "whitematterTracts",
+      "group": "anatomy",
+      "unit": "tracts"
+    },
+    {
+      "key": "eeg_electrodes",
+      "label": "EEG electrode positions",
+      "count": 20,
+      "file": "datalake/qif-neurosim.json",
+      "path": "eegElectrodes",
+      "group": "anatomy",
+      "unit": "electrodes"
+    },
+    {
+      "key": "governance_frameworks",
+      "label": "Governance frameworks mapped",
+      "count": 7,
+      "file": "datalake/qif-ethics-controls.json",
+      "path": "governance_frameworks",
+      "group": "evidence",
+      "unit": "frameworks"
+    },
+    {
       "key": "bci_devices",
       "label": "BCI devices with hardware specs",
       "count": 24,
@@ -241,7 +304,7 @@
     {
       "key": "researchers",
       "label": "Researchers catalogued",
-      "count": 66,
+      "count": 154,
       "file": "datalake/research-registry.json",
       "path": "researchers",
       "group": "evidence",
@@ -250,7 +313,7 @@
     {
       "key": "institutions",
       "label": "Institutions",
-      "count": 27,
+      "count": 28,
       "file": "datalake/research-registry.json",
       "path": "institutions",
       "group": "evidence",

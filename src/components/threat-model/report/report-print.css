@@ -1,0 +1,49 @@
+/*
+ * The report on paper. It prints light whatever theme is on screen: the kit resets its tokens
+ * to their light values for print, and the colours that carry the text are also stated here as
+ * literals, so a heading can never inherit a light colour from the page around it.
+ */
+
+@media print {
+  @page { margin: 14mm; }
+
+  .report, .report-checklist { color: #1d1d1f; background: #ffffff; border: 0; padding: 0; color-scheme: light; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .report :is(h1, h2, h3, h4), .report-checklist :is(h1, h2, h3, h4) { color: #1d1d1f; }
+  .report :is(p, li, dd, td, caption), .report-checklist :is(p, li) { color: #1d1d1f; }
+  .report :is(.lab-soft, .lab-label, .lab-id, dt, th), .report-checklist :is(.lab-soft, .lab-label) { color: #515154; }
+
+  /*
+   * Paper is laid out as blocks. A grid or flex container that is broken across pages paints its
+   * next child over the last lines of the one before, so the report, its sections, the checklist
+   * and the Model frame around them all print as plain block flow, with margins where the gaps were.
+   */
+  .report, .report-section, .report-checklist, .report-title-block, .checklist-body, .checklist-detail, .model-frame, .model-results { display: block; }
+  .report-section, .report > * + *, .report-checklist > * + *, .report-title-block > * + *, .checklist-detail > * + * { margin-top: 12pt; }
+  .report-section > * + * { margin-top: 6pt; }
+  .model-frame { padding: 0; }
+
+  .report-no-print, .checklist-nav { display: none; }
+  .report-print-block { display: block; }
+  .checklist-detail .report-item { border: 0; border-top: 1px solid #c7c7cc; border-radius: 0; padding: 8pt 0 0; max-width: none; }
+  .report-print-only { display: inline; overflow-wrap: anywhere; }
+  .report .lab-link { color: #1d1d1f; }
+
+  /* A section runs on across pages; a heading stays with what follows it. */
+  .report-section { break-inside: auto; }
+  .report :is(h2, h3, h4), .report-checklist :is(h2, h3, h4) { break-after: avoid; }
+  .report-title-block, .report-tiles, .report-chain .lab-steps > li, .report-item { break-inside: avoid; }
+
+  /* No table is clipped: nothing scrolls, every cell wraps, and the table is as wide as the page. */
+  .report-table-wrap { overflow: visible; max-height: none; }
+  .report-table { width: 100%; table-layout: auto; }
+  .report-table :is(th, td) { white-space: normal; overflow-wrap: anywhere; }
+  .report-table :is(th, td)[data-figure="true"] { white-space: nowrap; }
+  /* The head is repeated on every page a table reaches, and a row is never split between two. */
+  .report-table thead { display: table-header-group; }
+  .report-table th { position: static; background: #ffffff; }
+  .report-table tr { break-inside: avoid; }
+  .report-table td { border-bottom: 1px solid #c7c7cc; }
+
+  /* The drawing scaled to a page would print its labels under 9pt, so it is left off paper and the tables carry the system. */
+  .report-diagram { display: none; }
+}

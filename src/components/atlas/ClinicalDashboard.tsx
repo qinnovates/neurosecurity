@@ -19,6 +19,7 @@ import type {
 } from '../../lib/clinical-data';
 import BrainMapView from './brainmap/BrainMapView';
 import { THREAT_VECTORS, type ThreatVector, type BandId } from '../../lib/threat-data';
+import { DSM_QUALIFIER } from './dsm-qualifier';
 
 // ═══ Types ═══
 
@@ -127,7 +128,7 @@ function StatsBanner({ stats }: { stats: ClinicalData['stats'] }) {
 // ═══ Tab Bar ═══
 
 const TABS: { id: ViewTab; label: string; icon: string }[] = [
-  { id: 'brainmap', label: 'Brain Map', icon: '◎' },
+  { id: 'brainmap', label: 'Regions', icon: '◎' },
   { id: 'zoom', label: 'Drill-Down', icon: '⊕' },
   { id: 'chain', label: 'Impact Chain', icon: '⟶' },
   { id: 'pathways', label: 'Pathways', icon: '◈' },
@@ -1083,7 +1084,7 @@ function ImpactChainView({ data }: { data: ClinicalData }) {
         <div className="text-[10px] font-semibold uppercase tracking-wider">Technique</div>
         <div className="text-[10px] font-semibold uppercase tracking-wider">Band</div>
         <div className="text-[10px] font-semibold uppercase tracking-wider">Pathway</div>
-        <div className="text-[10px] font-semibold uppercase tracking-wider">DSM Outcome</div>
+        <div className="text-[10px] font-semibold uppercase tracking-wider">DSM-5-TR reference</div>
       </div>
 
       {/* Chain rows */}
@@ -1869,10 +1870,6 @@ function DsmView({ data }: { data: ClinicalData }) {
 
   return (
     <div>
-      <p className="text-[10px] mb-4 italic" style={{ color: 'var(--color-text-faint)' }}>
-        DSM-5-TR diagnostic category references for threat modeling purposes. Not clinical diagnosis. Requires clinical validation.
-      </p>
-
       {clusters.map(([cluster, conditions]) => (
         <div key={cluster} className="mb-4">
           <div className="flex items-center gap-2 mb-2">
@@ -2000,6 +1997,7 @@ export default function ClinicalDashboard({ data }: Props) {
     <div>
       <StatsBanner stats={data.stats} />
       <TabBar active={activeTab} onChange={setActiveTab} />
+      <p className="text-xs text-center mb-4" data-dsm-qualifier style={{ color: 'var(--color-text-faint)' }}>{DSM_QUALIFIER}</p>
 
       {activeTab === 'brainmap' && <BrainMapView data={data} />}
       {activeTab === 'zoom' && <SemanticZoomView data={data} />}
