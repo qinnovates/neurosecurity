@@ -74,8 +74,6 @@ Each directory has a `CONTEXT.md` with a summary and file map. Start with any di
 |------|-------------|---------|
 | **[Quorum](https://github.com/qinnovates/quorum)** | Orchestrate a swarm of AI experts on any question. Structured dissent, fact-checking, multi-agent validation. | `claude install qinnovates/quorum` |
 | **[BCI Security Plugin](https://github.com/qinnovates/bci-security-plugin)** | A BCI security toolkit for AI coding assistants. Scans code for neural data handling issues. | `claude install qinnovates/bci-security-plugin` |
-| **[NeuroSIM](https://github.com/qinnovates/neurosim)** | Neural Security Operations Simulator. BCI signal processing meets security operations. | See repo |
-| **macshield** | Network-aware macOS security hardening. | `brew install qinnovates/tools/macshield` |
 
 </details>
 

@@ -37,4 +37,4 @@ Each `.astro` file or directory becomes a URL on qinnovate.com. Astro file-based
 | `security/` | `/security/` | Security overview | 1 |
 | `signal-security/` | `/signal-security/` | Signal security details | 1 |
 | `threat-models/` | `/threat-models/*` | Threat modeling: matrix, scenarios, tools | 4 |
-| `tools/` | `/tools/*` | Tools index: neurosim, neurowall, qif-lidar, NISS scoring | 5 |
+| `tools/` | `/tools/*` | Tools index: neurowall, qif-lidar, NISS scoring | 5 |
