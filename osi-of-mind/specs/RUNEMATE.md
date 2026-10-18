@@ -4,7 +4,7 @@
 >
 > **Project Status:** v1.0 — Native DSL Compiler + TARA Safety
 > **Version:** 1.0 (2026-02-18)
-> **Author:** Kevin Qi
+> **Author:** Qinnovate LLC
 > **Parent Framework:** QIF (Quantified Interconnection Framework)
 > **Delivery Protocol:** NSP (Neural Sensory Protocol)
 > **Integration Roadmap:** [osi-of-mind/specs/INTEGRATION-ROADMAP.md](INTEGRATION-ROADMAP.md)

@@ -5,7 +5,7 @@
 > and explains why the honest answer is "we can't measure it yet."
 >
 > **Methodology:** Claims were sourced from Google Gemini, independently verified by
-> Claude (Anthropic) via deep research, and reviewed by Kevin Qi. All corrections —
+> Claude (Anthropic) via deep research, and reviewed by Qinnovate LLC. All corrections —
 > including corrections to Claude's own errors — are documented transparently.
 
 ---
@@ -25,7 +25,7 @@ Both have been individually validated as **not fundamental laws of physics**.
 > they were assumptions. The experiments confirmed that quantum effects extend beyond where
 > we assumed they stopped. Physics was always this way; we just hadn't measured it.
 >
-> *— Correction by Kevin Qi. Initial draft used "broken," which implies adversarial framing
+> *— Correction by Qinnovate LLC. Initial draft used "broken," which implies adversarial framing
 > (us vs physics) rather than discovery framing (physics was always this way). This matters
 > in a scientific framework.*
 
@@ -337,10 +337,10 @@ The ONI Framework bets on the right QUESTION instead.
 ## 🔄 Orch OR: Three Claims, Three Verdicts
 
 > Claude's initial assessment treated Orch OR as a single "rejected" claim.
-> Kevin Qi correctly identified that this was sloppy — the theory contains
+> Qinnovate LLC correctly identified that this was sloppy — the theory contains
 > three independent claims that must be evaluated separately.
 >
-> *— Correction by Kevin Qi. Claude's blanket rejection was imprecise.*
+> *— Correction by Qinnovate LLC. Claude's blanket rejection was imprecise.*
 
 ```
 ORCH OR IS THREE SEPARATE CLAIMS
@@ -419,7 +419,7 @@ KEY INSIGHT:
 
 ## 🔬 Microtubule Information Encoding: Two Different Claims
 
-> Claude initially lumped these together. Kevin Qi's question forced the distinction.
+> Claude initially lumped these together. Qinnovate LLC's question forced the distinction.
 
 ```
 TWO CLAIMS THAT LOOK THE SAME BUT AREN'T
@@ -450,7 +450,7 @@ TWO CLAIMS THAT LOOK THE SAME BUT AREN'T
   "Microtubule quantum storage │ ❌ Orch OR, rejected"
   This conflated Claims A and B. Claim A (classical phosphorylation
   storage) was incorrectly rejected by association with Claim B
-  (quantum computation). Kevin Qi's question exposed this error.
+  (quantum computation). Qinnovate LLC's question exposed this error.
 ```
 
 ---
@@ -506,7 +506,7 @@ TWO CLAIMS THAT LOOK THE SAME BUT AREN'T
 
 ## 🧠 How Memory Actually Works (What's Proven)
 
-> Kevin Qi asked: "How does the other neuron remember? DNA?"
+> Qinnovate LLC asked: "How does the other neuron remember? DNA?"
 > This section documents the proven mechanisms.
 
 ```
@@ -566,7 +566,7 @@ TWO CLAIMS THAT LOOK THE SAME BUT AREN'T
 │                          │                            │              │
 └──────────────────────────┴────────────────────────────┴──────────────┘
 
-KEY INSIGHT (Kevin Qi's question):
+KEY INSIGHT (Qinnovate LLC's question):
   "Insights and experiences aren't in DNA, right?"
 
   CORRECT. DNA is the genome you're born with.
@@ -585,7 +585,7 @@ KEY INSIGHT (Kevin Qi's question):
 
 > During the development of this document, Google Gemini provided claims about quantum
 > biology that were used as input. Claude (Anthropic) independently verified each claim.
-> Kevin Qi reviewed both and corrected errors from both AI sources.
+> Qinnovate LLC reviewed both and corrected errors from both AI sources.
 >
 > **This table is a transparency record of that process.**
 
@@ -635,7 +635,7 @@ KEY INSIGHT (Kevin Qi's question):
 │                             │              │              │ ⚠️ BOTH AIs WERE WRONG. │
 │                             │              │              │ Gemini: too accepting.   │
 │                             │              │              │ Claude: too dismissive.  │
-│                             │              │              │ Kevin Qi pushed for      │
+│                             │              │              │ Qinnovate LLC pushed for      │
 │                             │              │              │ the three-part split.    │
 │                             │              │              │                          │
 ├─────────────────────────────┼──────────────┼──────────────┼──────────────────────────┤
@@ -661,7 +661,7 @@ KEY INSIGHT (Kevin Qi's question):
 │                             │              │ Orch OR)     │ structured. Not rejected.│
 │                             │              │              │                          │
 │                             │              │              │ ⚠️ CLAUDE WAS WRONG.    │
-│                             │              │              │ Kevin Qi's question      │
+│                             │              │              │ Qinnovate LLC's question      │
 │                             │              │              │ forced the distinction   │
 │                             │              │              │ between classical and    │
 │                             │              │              │ quantum microtubule      │
@@ -678,7 +678,7 @@ KEY INSIGHT (Kevin Qi's question):
 │ is a tech limitation"       │ can bypass"  │ interpretation│                         │
 │                             │              │ — cryogenic  │ ⚠️ CLAUDE WAS WRONG.     │
 │                             │              │ only"        │                          │
-│                             │              │              │ Kevin Qi corrected:      │
+│                             │              │              │ Qinnovate LLC corrected:      │
 │                             │              │              │ Nobel validates scale is │
 │                             │              │              │ not fundamental. Enzymes │
 │                             │              │              │ validate temp is not     │
@@ -720,7 +720,7 @@ KEY INSIGHT (Kevin Qi's question):
 │ Use "broken" for barriers   │ (not Gemini) │ ❌ Used      │ ✅ USE "VALIDATED"       │
 │ that were disproven         │              │ "broken" in  │                          │
 │                             │              │ initial draft│ ⚠️ CLAUDE WAS WRONG.     │
-│                             │              │              │ Kevin Qi corrected.      │
+│                             │              │              │ Qinnovate LLC corrected.      │
 │                             │              │              │ "Broken" = adversarial.  │
 │                             │              │              │ "Validated" = discovery. │
 │                             │              │              │                          │
@@ -729,7 +729,7 @@ KEY INSIGHT (Kevin Qi's question):
 │ Classical explanations      │ (not         │ ✅ "Classical│ ⚠️ INCOMPLETE            │
 │ are sufficient for all      │ directly     │ LTP explains │                          │
 │ neural phenomena            │ claimed)     │ memory"      │ ⚠️ CLAUDE WAS WRONG.    │
-│                             │              │              │ Kevin Qi pushed back:    │
+│                             │              │              │ Qinnovate LLC pushed back:    │
 │                             │              │              │ "What about non-classical│
 │                             │              │              │ reasons?" Classical      │
 │                             │              │              │ descriptions work at     │
@@ -747,10 +747,10 @@ KEY INSIGHT (Kevin Qi's question):
 
 ```
 Gemini:   5 wrong/overstated, 3 correct, 3 partially correct
-Claude:   5 wrong (corrected by Kevin Qi + deep research), 7 correct
-Kevin Qi: Corrected both AIs on 6 distinct points
+Claude:   5 wrong (corrected by Qinnovate LLC + deep research), 7 correct
+Qinnovate LLC: Corrected both AIs on 6 distinct points
 
-Kevin Qi corrections:
+Qinnovate LLC corrections:
   1. "Broken" → "Validated" (language framing)
   2. Nobel barrier interpretation (two independent validations)
   3. Orch OR must be split into three parts, not blanket rejected
@@ -807,7 +807,7 @@ THE LOGIC CHAIN
 
 ### 🧠 The Non-Classical Argument
 
-> Kevin Qi pushed back on Claude's purely classical explanation with:
+> Qinnovate LLC pushed back on Claude's purely classical explanation with:
 > "What about non-classical reasons?"
 > This forced a more complete picture.
 
@@ -1049,7 +1049,7 @@ CAUTIONARY:
 ---
 
 > *This document reflects the collaborative analysis of Google Gemini (initial claims),
-> Claude/Anthropic (independent verification + deep research), and Kevin Qi
+> Claude/Anthropic (independent verification + deep research), and Qinnovate LLC
 > (final review, corrections, and critical challenges that improved both AI outputs).
 > Where AI outputs conflicted or were wrong, the resolution is documented in the
 > verification table above. This transparency is intentional — it models the kind

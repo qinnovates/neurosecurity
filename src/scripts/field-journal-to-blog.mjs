@@ -233,7 +233,7 @@ subtitle: "From the QIF Field Journal"
 date_posted: "${entry.date}"
 source: "${sourceUrl}"
 tags: ${tags}
-author: "Kevin Qi"
+author: "Qinnovate LLC"
 fact_checked: false
 fact_check_date: ""
 fact_check_notes: []

@@ -2,7 +2,7 @@
 
 > **Status:** Living document
 > **Last Updated:** 2026-02-21
-> **Author:** Kevin Qi
+> **Author:** Qinnovate LLC
 
 ## System Architecture
 

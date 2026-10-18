@@ -3,7 +3,7 @@
 > **QIF Module — Neurowall**
 > **Status:** Phase 1 Architecture (Design-Complete)
 > **Date:** 2026-02-21
-> **Authors:** Kevin Qi, Antigravity (Gemini)
+> **Authors:** Qinnovate LLC, Antigravity (Gemini)
 > **Parent Framework:** [QIF v4.0 Hourglass](../../osi-of-mind/README.md) / [NSP v0.5](../../osi-of-mind/specs/NSP-PROTOCOL-SPEC.md) / [Runemate](../../osi-of-mind/specs/RUNEMATE.md)
 > **Integration Roadmap:** [osi-of-mind/specs/INTEGRATION-ROADMAP.md](../../osi-of-mind/specs/INTEGRATION-ROADMAP.md)
 

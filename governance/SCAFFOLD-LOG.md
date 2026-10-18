@@ -3,7 +3,7 @@
 **Status:** Living document -- updated with each scaffold improvement
 **Created:** 2026-03-17
 **Last Updated:** 2026-03-17
-**Author:** Kevin Qi + Claude Opus 4.6 (Quorum-reviewed, 8 agents)
+**Author:** Qinnovate LLC + Claude Opus 4.6 (Quorum-reviewed, 8 agents)
 **Purpose:** Architecture decision record for the agentic AI scaffold. Documents design decisions, efficiency gains, before/after comparisons, and the Unix-philosophy principles that govern how AI agents interact with this codebase at scale.
 
 ---

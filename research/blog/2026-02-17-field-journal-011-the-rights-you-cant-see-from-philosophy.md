@@ -5,7 +5,7 @@ subtitle: "From the QIF Field Journal"
 date_posted: "2026-02-17"
 source: "https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#entry-011"
 tags: ["#FieldJournal","#QIF","#Neurorights"]
-author: "Kevin Qi"
+author: "Qinnovate LLC"
 fact_checked: true
 fact_check_date: "2026-02-21"
 fact_check_notes:

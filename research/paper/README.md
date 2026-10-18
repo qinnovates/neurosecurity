@@ -84,7 +84,7 @@ paper/
 @misc{qi2026qif,
   title   = {Quantified Interconnection Framework: An 11-Band Security
              Architecture for Brain-Computer Interfaces},
-  author  = {Kevin Qi},
+  author  = {Qinnovate LLC},
   year    = {2026},
   doi     = {10.5281/zenodo.18640105},
   url     = {https://doi.org/10.5281/zenodo.18640105},

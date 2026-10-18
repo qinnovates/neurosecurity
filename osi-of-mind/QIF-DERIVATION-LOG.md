@@ -2,7 +2,7 @@
 
 > **A living journal of how the Quantified Interconnection Framework for Neural Security was derived.**
 >
-> **Authors:** Kevin Qi
+> **Authors:** Qinnovate LLC
 > **Started:** 2026-02-02
 > **Purpose:** Document every insight, derivation step, and conceptual breakthrough as it happens — with timestamps, reasoning chains, and context — so that future readers (peer reviewers, collaborators, or Kevin himself) can trace exactly how and why each decision was made.
 >
@@ -150,7 +150,7 @@ See also: [Neurorights Derivation Log](./NEURORIGHTS-DERIVATION-LOG.md) | [Field
 | 2026-02-02 night | Claude research agents (3x) | Quantum physics, neuroscience, cybersecurity validation (Entry 15) |
 | 2026-02-02 late night | **Google Gemini 2.5** | Independent peer review — first cross-AI validation (Entry 16) |
 
-**All AI involvement is assistive. Kevin Qi retains authorship and all final decision-making authority.**
+**All AI involvement is assistive. Qinnovate LLC retains authorship and all final decision-making authority.**
 
 > **See also:** [TRANSPARENCY.md](../../main/neurosecurity/qif/governance/TRANSPARENCY.md) — full AI tool disclosure, contribution matrix, documented corrections, and verification methodology.
 
@@ -3937,7 +3937,7 @@ Six parallel research agents gathered data from:
 **Date:** 2026-02-21 ~14:30
 **Classification:** VERIFIED
 **AI Systems:** Claude Opus 4.6 (research synthesis), web search (CISA, FDA, manufacturer disclosure policies)
-**Human Decision:** Kevin Qi requested consolidation of prior gap analysis findings into a single derivation entry. Directed front page update to showcase positioning.
+**Human Decision:** Qinnovate LLC requested consolidation of prior gap analysis findings into a single derivation entry. Directed front page update to showcase positioning.
 **Builds on:** Entry 71 (CVE-to-TARA mapping), Entry 57 (neurorights)
 
 ### The Gap (Validated)
@@ -5491,7 +5491,7 @@ This confirms that the "Harvest Now, Decrypt Later" threat is mitigated for Rune
 
 **Date:** 2026-02-18
 **AI Systems:** Claude Opus 4.6 (implementation), Gemini 2.5 Pro (prior validation)
-**Human Decision:** Kevin Qi decided to restructure from 7 → 5 neurorights after cross-referencing QIF's 3 proposed rights (CA, DI, IDA) against 6 established frameworks.
+**Human Decision:** Qinnovate LLC decided to restructure from 7 → 5 neurorights after cross-referencing QIF's 3 proposed rights (CA, DI, IDA) against 6 established frameworks.
 **Classification:** VERIFIED (based on literature review)
 
 ### Context
@@ -5541,7 +5541,7 @@ This restructuring is academically honest. Ienca & Andorno thought through the t
 
 **Date:** 2026-02-18 ~12:00
 **AI Systems:** Claude Opus 4.6 (research, co-derivation), web search agents (Hopkins BCI ecosystem, CELLS publications, cybersecurity guardrails mapping)
-**Human Decision:** Kevin Qi identified thalamic gating as security analog from MIT OCW 9.13 self-study, directed I0 depth parameter addition, directed cybersecurity-to-QIF guardrails mapping, confirmed CELLS alignment strategy for JHU MBE application.
+**Human Decision:** Qinnovate LLC identified thalamic gating as security analog from MIT OCW 9.13 self-study, directed I0 depth parameter addition, directed cybersecurity-to-QIF guardrails mapping, confirmed CELLS alignment strategy for JHU MBE application.
 **Classification:** VERIFIED (thalamic gating based on neuroanatomy) + INFERRED (I0 depth NISS modulation) + HYPOTHESIS (27 guardrails mapped to QIF bands)
 **Builds on:** Entry 34 (v4.0), Entry 37 (TARA taxonomy), Entry 57 (Neurorights)
 
@@ -5804,7 +5804,7 @@ This framework is aligned with NIMH's Research Domain Criteria (RDoC) approach �
 
 *Created: 2026-02-02*
 *Last entry: #54 (2026-02-14)*
-*Maintainer: Kevin Qi*
+*Maintainer: Qinnovate LLC*
 *Location: qinnovates/qinnovate/osi-of-mind/QIF-DERIVATION-LOG.md*
 
 ---
@@ -6007,7 +6007,7 @@ This led to the key realization:
 **Date:** 2026-02-09 ~02:00 AM
 **Context:** The QIF threat registry (71 techniques, 11 tactics, 7 domains) needs to evolve from a threat-only catalog into a dual-use mechanism registry. Four parallel research agents (MITRE D3FEND/ENGAGE deep analysis, medical taxonomy research, BCI therapeutic modalities catalog, naming/framing/architecture analysis) completed and were synthesized into REGISTRY-REFRAMING-PROPOSAL.md. Gemini peer review scored 8/10 with three actionable fixes. The naming process went through multiple iterations before Kevin selected the final name.
 **AI Systems:** Claude Opus 4.6 (synthesis, collision checking, proposal writing), four research agents (MITRE frameworks, medical taxonomies, BCI therapeutics, naming/framing), Google Gemini 2.5 Pro (independent peer review)
-**Human decision:** Kevin Qi — selected TARA name, established framing constraints (therapeutics first, "risks" not "exploits", serene/non-threatening, Buddhist/Western resonance)
+**Human decision:** Qinnovate LLC — selected TARA name, established framing constraints (therapeutics first, "risks" not "exploits", serene/non-threatening, Buddhist/Western resonance)
 
 ### The Registry Problem
 
@@ -6124,7 +6124,7 @@ Gemini validated: architecture "excellent," framing "strategic masterstroke," sc
 **Date:** 2026-02-09 ~late night
 **Context:** During the five-agent review of the Alzheimer's/NSP blog post, reviewers flagged the claim "every attack maps to a therapy" as overclaiming. Of 71 techniques in the threat registry, at least some operate at the silicon, firmware, network, or supply chain layer with no obvious therapeutic analog. Kevin pushed back: "Maybe this is more open ended as there is still so much about the brain we don't know. I think this framework can help us get there." This entry documents the systematic gap analysis: what maps, what does not, and three bridging hypotheses for what might.
 **AI Systems:** Claude Opus 4.6 (analysis, classification, blog integration), five independent review agents (Gemini 2.5 Pro peer review, neuroscience verification, security credibility, institutional appeal, citation verification)
-**Human decision:** Kevin Qi — rejected narrow scoping, insisted the framework's value is making future connections visible as they emerge
+**Human decision:** Qinnovate LLC — rejected narrow scoping, insisted the framework's value is making future connections visible as they emerge
 
 ### The Claim Under Scrutiny
 
@@ -6274,7 +6274,7 @@ This preserves Kevin's conviction (the framework will reveal connections we cann
 **Date:** 2026-02-09 ~late night
 **Context:** While discussing how Bluetooth and UWB already map environments from a phone, Kevin connected the dots: the same spatial sensing that enables a game engine rendering layer for vision restoration prostheses is already multicasting around us. The missing piece was never the technology. The missing piece was the secure envelope. This entry documents a fundamental reframing of NSP's purpose.
 **AI Systems:** Claude Opus 4.6 (synthesis and framing)
-**Human decision:** Kevin Qi — the reframing itself, the tinnitus/Alzheimer's application vision, and the critical framing constraint: our work must not slow down clinical research
+**Human decision:** Qinnovate LLC — the reframing itself, the tinnitus/Alzheimer's application vision, and the critical framing constraint: our work must not slow down clinical research
 
 ### The Reframing
 
@@ -6359,7 +6359,7 @@ NSP is the infrastructure. PQCKs are the keys. QIF is the threat model that prov
 **Date:** 2026-02-09 ~late night
 **Context:** While naming the Dynamical Systems Monitor (DSM), Kevin identified a deeper design truth: the dynamical systems monitoring capabilities don't need to be a separate named component at all. They fold naturally into NSP's existing Biological TLS validation layers. This is a simplification decision, not an addition.
 **AI Systems:** Claude Opus 4.6 (analysis), Gemini 2.5 Flash (naming consultation)
-**Human decision:** Kevin Qi — the integration approach, rejecting both "DSM" and all proposed replacements
+**Human decision:** Qinnovate LLC — the integration approach, rejecting both "DSM" and all proposed replacements
 
 ### The Problem
 
@@ -9601,7 +9601,7 @@ This unification was driven by extensive research into the BCI security field (c
 
 **Date:** 2026-02-06 ~06:00 AM
 **Context:** Immediately following Entry 24's multi-AI hypothesis validation, Kevin asked to finalize the 7-layer architecture. Claude presented three options (7+I0, 7-1-3, two-resolution). Kevin requested a direct side-by-side comparison of the current 3-1-3 strategic model vs the tactical 7-layer neural decomposition. The comparison revealed a critical gap in the 3-1-3 that neither Claude nor Gemini had caught in Entry 24: the spinal cord is not listed in the current model at all.
-**AI Systems:** Claude (Opus 4.6) — architecture analysis. Kevin Qi — stress-testing via directed questions.
+**AI Systems:** Claude (Opus 4.6) — architecture analysis. Qinnovate LLC — stress-testing via directed questions.
 **Human decision:** Kevin identified the cauda equina as a critical structure missing from all prior QIF versions, prompting a deeper analysis of what the 3-1-3 actually covers vs what it misses.
 **Builds on:** Entry 24 (7-layer proposal), Entry 15 (v3.1 Hourglass), Entry 22 (Classical reconciliation)
 
@@ -9824,7 +9824,7 @@ Kevin is reviewing before final decision. The brain region audit and motor/senso
 
 **Date:** 2026-02-06 ~02:30–05:00 AM
 **Context:** Late-night research session that began with a simple question — "Are the ONI layers mapped to the 7 layers of the nervous system?" — and cascaded into a full architectural redesign, a neural protocol theory, and 8 hypotheses subjected to independent multi-AI peer review.
-**AI Systems:** Claude (Opus 4.6) — classical physicist role. Gemini (2.5) — quantum physicist role, independent peer review via CLI. Kevin Qi — principal researcher, hypothesis generation, architectural decisions.
+**AI Systems:** Claude (Opus 4.6) — classical physicist role. Gemini (2.5) — quantum physicist role, independent peer review via CLI. Qinnovate LLC — principal researcher, hypothesis generation, architectural decisions.
 **Method:** Kevin's hypotheses logged verbatim first. Claude and Gemini respond independently to reduce cognitive bias. Disagreements documented, not resolved by consensus — resolved by evidence.
 
 ### The Triggering Question
@@ -10459,10 +10459,10 @@ The immersive features aren't cosmetic — they serve the framework's goals:
 
 ### AI Transparency Note
 
-This entry documents a deliberate methodological choice: **cross-AI validation**. The QIF framework has been developed collaboratively between Kevin Qi (human researcher) and Claude (Anthropic, Opus 4.5). To counteract potential confirmation bias — where the developing AI might be inclined to validate its own outputs — an independent AI (Google Gemini 2.5) was asked to review the complete whitepaper from scratch with no prior context or relationship to the project.
+This entry documents a deliberate methodological choice: **cross-AI validation**. The QIF framework has been developed collaboratively between Qinnovate LLC (human researcher) and Claude (Anthropic, Opus 4.5). To counteract potential confirmation bias — where the developing AI might be inclined to validate its own outputs — an independent AI (Google Gemini 2.5) was asked to review the complete whitepaper from scratch with no prior context or relationship to the project.
 
 **The collaboration chain at this point:**
-1. Kevin Qi — original framework conception, domain knowledge, all final decisions
+1. Qinnovate LLC — original framework conception, domain knowledge, all final decisions
 2. Claude (Opus 4.5) — co-derivation of hourglass model, equation implementation, as-code architecture, research agent orchestration
 3. Claude research agents (3x) — quantum physics, neuroscience, cybersecurity validation (102 sources, Entry 15)
 4. **Gemini 2.5 (independent)** — unbiased critical peer review (this entry)

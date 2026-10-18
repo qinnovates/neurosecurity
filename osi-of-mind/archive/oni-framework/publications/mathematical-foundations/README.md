@@ -69,5 +69,5 @@ Each section in [TechDoc-Mathematical_Foundations](TechDoc-Mathematical_Foundati
 ---
 
 *Document created: 2026-01-29*
-*Author: Kevin Qi + Claude (QI Collaboration)*
+*Author: Qinnovate LLC + Claude (QI Collaboration)*
 *For: ONI Framework — qinnovates/mindloft*

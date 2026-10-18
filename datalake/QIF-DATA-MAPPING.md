@@ -281,4 +281,4 @@ This drill-down can be implemented as a linked dashboard where clicking any node
 
 *Source of truth: `shared/` directory*
 *Last updated: 2026-03-11*
-*Maintained by: Kevin Qi*
+*Maintained by: Qinnovate LLC*

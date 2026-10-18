@@ -1,0 +1,319 @@
+{
+  "_generator": "src/scripts/generate-datalake-inventory.mjs",
+  "_note": "Derived file. Do not hand-edit — run `npm run datalake:inventory`.",
+  "generated_on": "2026-10-18",
+  "totals": {
+    "datalake_files": 31,
+    "datasets_inventoried": 22,
+    "records": 6511,
+    "unique_dois": 120,
+    "techniques_with_cve_evidence": 27,
+    "cve_coverage_ratio": 0.1534
+  },
+  "counts": [
+    {
+      "key": "impact_chains",
+      "label": "Neural impact chains",
+      "count": 5476,
+      "file": "datalake/impact-chains.json",
+      "path": "",
+      "group": "threat",
+      "unit": "chains",
+      "note": "technique x brain region x QIF band permutations"
+    },
+    {
+      "key": "techniques",
+      "label": "TARA techniques",
+      "count": 176,
+      "file": "datalake/qtara-registrar.json",
+      "path": "techniques",
+      "group": "threat",
+      "unit": "techniques"
+    },
+    {
+      "key": "tactics",
+      "label": "TARA tactics",
+      "count": 17,
+      "file": "datalake/qtara-registrar.json",
+      "path": "tactics",
+      "group": "threat",
+      "unit": "tactics"
+    },
+    {
+      "key": "domains",
+      "label": "TARA domains",
+      "count": 8,
+      "file": "datalake/qtara-registrar.json",
+      "path": "domains",
+      "group": "threat",
+      "unit": "domains"
+    },
+    {
+      "key": "cve_mappings",
+      "label": "CVE to technique mappings",
+      "count": 107,
+      "file": "datalake/cve-technique-mapping.json",
+      "path": "mappings",
+      "group": "threat",
+      "unit": "CVEs"
+    },
+    {
+      "key": "hazards",
+      "label": "QIF hazards",
+      "count": 33,
+      "file": "datalake/qif-hazards.json",
+      "path": "hazards",
+      "group": "threat",
+      "unit": "hazards"
+    },
+    {
+      "key": "attack_chains",
+      "label": "Composed attack chains",
+      "count": 7,
+      "file": "datalake/tara-chains.json",
+      "path": "chains",
+      "group": "threat",
+      "unit": "chains"
+    },
+    {
+      "key": "severity_anchors",
+      "label": "Severity anchors",
+      "count": 25,
+      "file": "datalake/severity-anchors.json",
+      "path": "anchors",
+      "group": "threat",
+      "unit": "anchors"
+    },
+    {
+      "key": "guardrails",
+      "label": "Physics guardrails",
+      "count": 8,
+      "file": "datalake/qif-guardrails.json",
+      "path": "guardrails",
+      "group": "threat",
+      "unit": "guardrails"
+    },
+    {
+      "key": "bands",
+      "label": "QIF bands",
+      "count": 11,
+      "file": "datalake/qif-brain-bci-atlas.json",
+      "path": "qif_bands",
+      "group": "anatomy",
+      "unit": "bands"
+    },
+    {
+      "key": "brain_regions",
+      "label": "Brain regions",
+      "count": 38,
+      "file": "datalake/qif-brain-bci-atlas.json",
+      "path": "brain_regions",
+      "group": "anatomy",
+      "unit": "regions"
+    },
+    {
+      "key": "device_region_mappings",
+      "label": "Device to region mappings",
+      "count": 24,
+      "file": "datalake/qif-brain-bci-atlas.json",
+      "path": "device_region_mappings",
+      "group": "anatomy",
+      "unit": "mappings"
+    },
+    {
+      "key": "neural_pathways",
+      "label": "Neural pathways",
+      "count": 46,
+      "file": "datalake/qif-neural-pathways.json",
+      "path": "pathways",
+      "group": "anatomy",
+      "unit": "pathways"
+    },
+    {
+      "key": "conditions",
+      "label": "Neurological condition mappings",
+      "count": 50,
+      "file": "datalake/qif-neurological-mappings.json",
+      "path": "conditions",
+      "group": "anatomy",
+      "unit": "conditions"
+    },
+    {
+      "key": "receptor_families",
+      "label": "Receptor families",
+      "count": 20,
+      "file": "datalake/qif-receptors.json",
+      "path": "receptor_families",
+      "group": "anatomy",
+      "unit": "families"
+    },
+    {
+      "key": "neurotransmitters",
+      "label": "Neurotransmitters",
+      "count": 18,
+      "file": "datalake/qif-neurotransmitters.json",
+      "path": "neurotransmitters",
+      "group": "anatomy",
+      "unit": "neurotransmitters"
+    },
+    {
+      "key": "cranial_nerves",
+      "label": "Cranial nerves",
+      "count": 12,
+      "file": "datalake/qif-cranial-nerves.json",
+      "path": "cranial_nerves",
+      "group": "anatomy",
+      "unit": "nerves"
+    },
+    {
+      "key": "glial_types",
+      "label": "Glial cell types",
+      "count": 6,
+      "file": "datalake/qif-glial-cells.json",
+      "path": "glial_types",
+      "group": "anatomy",
+      "unit": "types"
+    },
+    {
+      "key": "neuroendocrine_axes",
+      "label": "Neuroendocrine axes",
+      "count": 7,
+      "file": "datalake/qif-neuroendocrine.json",
+      "path": "axes",
+      "group": "anatomy",
+      "unit": "axes"
+    },
+    {
+      "key": "bci_devices",
+      "label": "BCI devices with hardware specs",
+      "count": 24,
+      "file": "src/site/bci-hardware-inventory.json",
+      "path": "devices",
+      "group": "landscape",
+      "unit": "devices",
+      "note": "implant, DBS, cochlear and consumer EEG classes"
+    },
+    {
+      "key": "scored_devices",
+      "label": "Devices scored (proposed NISS)",
+      "count": 22,
+      "file": "datalake/neurosecurity-scores.json",
+      "path": "devices",
+      "group": "landscape",
+      "unit": "devices"
+    },
+    {
+      "key": "companies",
+      "label": "BCI companies tracked",
+      "count": 67,
+      "file": "datalake/bci-landscape.json",
+      "path": "companies",
+      "group": "landscape",
+      "unit": "companies"
+    },
+    {
+      "key": "policy_timeline",
+      "label": "Policy timeline entries",
+      "count": 26,
+      "file": "datalake/bci-landscape.json",
+      "path": "policy_timeline",
+      "group": "landscape",
+      "unit": "entries"
+    },
+    {
+      "key": "industry_timeline",
+      "label": "Industry timeline entries",
+      "count": 25,
+      "file": "datalake/bci-landscape.json",
+      "path": "industry_timeline",
+      "group": "landscape",
+      "unit": "entries"
+    },
+    {
+      "key": "organisations",
+      "label": "Research organisations",
+      "count": 73,
+      "file": "datalake/research-registry.json",
+      "path": "explorer",
+      "group": "evidence",
+      "unit": "organisations"
+    },
+    {
+      "key": "researchers",
+      "label": "Researchers catalogued",
+      "count": 66,
+      "file": "datalake/research-registry.json",
+      "path": "researchers",
+      "group": "evidence",
+      "unit": "researchers"
+    },
+    {
+      "key": "institutions",
+      "label": "Institutions",
+      "count": 27,
+      "file": "datalake/research-registry.json",
+      "path": "institutions",
+      "group": "evidence",
+      "unit": "institutions"
+    },
+    {
+      "key": "standards",
+      "label": "Standards tracked",
+      "count": 14,
+      "file": "datalake/research-registry.json",
+      "path": "standards",
+      "group": "evidence",
+      "unit": "standards"
+    },
+    {
+      "key": "legislation",
+      "label": "Legislation tracked",
+      "count": 12,
+      "file": "datalake/research-registry.json",
+      "path": "legislation",
+      "group": "evidence",
+      "unit": "items"
+    },
+    {
+      "key": "eeg_datasets",
+      "label": "EEG datasets catalogued",
+      "count": 26,
+      "file": "datalake/eeg-samples.json",
+      "path": "samples",
+      "group": "evidence",
+      "unit": "datasets"
+    },
+    {
+      "key": "derivation_milestones",
+      "label": "Derivation milestones",
+      "count": 31,
+      "file": "datalake/derivation-timeline.json",
+      "path": "milestones",
+      "group": "evidence",
+      "unit": "milestones"
+    },
+    {
+      "key": "validation_entries",
+      "label": "Validation entries",
+      "count": 9,
+      "file": "datalake/validation-registry.json",
+      "path": "entries",
+      "group": "evidence",
+      "unit": "entries"
+    }
+  ],
+  "technique_evidence_tiers": {
+    "theoretical_proposed": 78,
+    "demonstrated_lab": 63,
+    "theoretical_modeled": 18,
+    "demonstrated_case": 15,
+    "speculative": 2
+  },
+  "technique_feasibility_tiers": {
+    "feasible_now": 100,
+    "no_physics_gate": 37,
+    "near_term": 22,
+    "mid_term": 13,
+    "far_term": 4
+  }
+}

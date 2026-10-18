@@ -578,9 +578,9 @@ Propagation to ring-level behavior = the measurement wall.
 
 ---
 
-## 🧠 Kevin Qi's Energy Efficiency Insight
+## 🧠 Qinnovate LLC's Energy Efficiency Insight
 
-> Kevin Qi's observation during development:
+> Qinnovate LLC's observation during development:
 > "Not all brain functions require complex quantum (like motor movements)
 > because less energy required... physics and the biology says hey,
 > let's just be efficient and get it done."
@@ -588,7 +588,7 @@ Propagation to ring-level behavior = the measurement wall.
 ```
 THE EFFICIENCY ARGUMENT FOR Q DISTRIBUTION
 
-Kevin Qi proposed that Q might NOT be uniform across rings.
+Qinnovate LLC proposed that Q might NOT be uniform across rings.
 Instead, Q may correlate with ENERGY DEMAND:
 
   SIMPLE PROCESSES (motor reflex, brainstem)
@@ -848,13 +848,13 @@ Q VALUES BY (RING, DEPTH) — A 2D MAP OF UNKNOWNS
 ```
 KEVIN QI CONTRIBUTIONS TO THIS DOCUMENT:
 
-  1. THE FUNNEL ITSELF — Kevin Qi's original model.
+  1. THE FUNNEL ITSELF — Qinnovate LLC's original model.
      He had been thinking about the brain as a funnel
      (not a stack, not a pyramid) before this conversation.
      The concentric-ring, loop-based architecture is his design.
      Everything in this document builds on that foundation.
 
-  2. The Josephson junction analogy was Kevin Qi's original
+  2. The Josephson junction analogy was Qinnovate LLC's original
      insight — "the funnel reminds me of a Josephson junction"
 
   3. The energy efficiency distribution hypothesis:
@@ -882,11 +882,11 @@ KEVIN QI CONTRIBUTIONS TO THIS DOCUMENT:
 CLAUDE CORRECTIONS:
 
   1. Initial framework presented Q as potentially relevant to
-     ALL neural processes equally. Kevin Qi's energy argument
+     ALL neural processes equally. Qinnovate LLC's energy argument
      corrected this to a ring-dependent distribution.
 
   2. Classical explanations were initially presented as
-     "sufficient." Kevin Qi's challenge revealed they rest
+     "sufficient." Qinnovate LLC's challenge revealed they rest
      on a quantum foundation — Q was needed at the molecular
      level even for "classical" processes.
 ```
@@ -917,7 +917,7 @@ THIS DOCUMENT PROVIDES:
 
 ## 🧬 Notes: QI Bipolar Logic and the Ferritin-Dopamine Model
 
-> **Source:** Google Gemini output, reviewed by Kevin Qi.
+> **Source:** Google Gemini output, reviewed by Qinnovate LLC.
 > **Status:** Conceptual mapping — references real biology, novel logical framework.
 > **Verification:** See notes below each claim.
 
@@ -1074,7 +1074,7 @@ THREE BREAKTHROUGHS IF QI LOGIC HOLDS (as Gemini claims):
   │  1. The biology is real and relevant to BCI (Parkinson's)    │
   │  2. The math exists and could be applied                     │
   │  3. Q provides the natural container for this application    │
-  │  4. Kevin Qi identified the connection to TARA coherence     │
+  │  4. Qinnovate LLC identified the connection to TARA coherence     │
   └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -1082,8 +1082,8 @@ THREE BREAKTHROUGHS IF QI LOGIC HOLDS (as Gemini claims):
 
 ## 🌀 The Josephson-Funnel: Complete Brain-Information Model
 
-> **Source:** Google Gemini output, building on Kevin Qi's original funnel concept.
-> **Key attribution:** The funnel model itself is Kevin Qi's idea — he had been
+> **Source:** Google Gemini output, building on Qinnovate LLC's original funnel concept.
+> **Key attribution:** The funnel model itself is Qinnovate LLC's idea — he had been
 > thinking about the brain as a funnel (not a stack, not a pyramid) before this
 > conversation. Gemini extended it with QI integer coordinates and the mirrored
 > output side. The synthesis below combines both.
@@ -1094,7 +1094,7 @@ THREE BREAKTHROUGHS IF QI LOGIC HOLDS (as Gemini claims):
 ### 🧠 The Brain-Information Funnel Diagram
 
 ```
-Kevin Qi's core insight: the brain is a FUNNEL, not a pyramid.
+Qinnovate LLC's core insight: the brain is a FUNNEL, not a pyramid.
 Information complexity determines position relative to the rim.
 The more complex the state (superposition of multiple outcomes),
 the larger the QI integer and the closer it sits to the outer rim.
@@ -1283,7 +1283,7 @@ BECAUSE THE BCI SITS AT THE NECK, IT CAN SEE BOTH SIDES:
 │                                  │              │                         │
 ├──────────────────────────────────┼──────────────┼─────────────────────────┤
 │                                  │              │                         │
-│ The funnel shape (not pyramid,   │ ✅ CONSISTENT│ Kevin Qi's original     │
+│ The funnel shape (not pyramid,   │ ✅ CONSISTENT│ Qinnovate LLC's original     │
 │ not stack) models loops at       │ WITH NEURO-  │ insight. Consistent     │
 │ different depths/speeds          │ SCIENCE      │ with known cortical-    │
 │                                  │              │ subcortical loop        │
@@ -1385,7 +1385,7 @@ THE EXTENSION ADDS:
   • OPM quantum sensors as future BCI modality
 
 THE EXTENSION DOES NOT CHANGE:
-  • The funnel shape (Kevin Qi's original)
+  • The funnel shape (Qinnovate LLC's original)
   • BCI placement at center/neck
   • Ring definitions (1-4 + higher)
   • The dependency stack (Kandel)
@@ -1419,7 +1419,7 @@ Two directions this model could focus on (from Gemini):
 ## 🌐 Prior Art: Quantum-Converged OSI Stack
 
 > **This is not our invention.** Research already exists on extending the OSI model
-> with quantum layers using a funnel structure. This validates Kevin Qi's independent
+> with quantum layers using a funnel structure. This validates Qinnovate LLC's independent
 > arrival at the same architectural shape — and shows where ONI's model fits in
 > a broader quantum networking landscape.
 
@@ -1464,7 +1464,7 @@ QUANTUM-CONVERGED OSI              ONI JOSEPHSON-FUNNEL
 ────────────────────────────────── ──────────────────────────────────────
 
 Layer 8: Cognitive Intent Plane    Ring ?: Higher Cognition
-(NEW — above classical OSI)        (Kevin Qi's outer rim — abstract
+(NEW — above classical OSI)        (Qinnovate LLC's outer rim — abstract
                                    thought, planning, moral reasoning)
 
 Layers 4-7: Transport/Session      Ring 3-4: Subcortical → Cortical
@@ -1514,7 +1514,7 @@ KEY OBSERVATIONS:
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
 │                                                                        │
-│  Kevin Qi arrived at the funnel shape INDEPENDENTLY,                   │
+│  Qinnovate LLC arrived at the funnel shape INDEPENDENTLY,                   │
 │  thinking about the brain as a neuroscientist,                         │
 │  not from the quantum networking literature.                           │
 │                                                                        │
@@ -1540,7 +1540,7 @@ KEY OBSERVATIONS:
 
 ## 🔄 Q → Coherence Metric Enhancement for TARA
 
-> **Kevin Qi insight:** Q can enhance the existing Coherence metric (Cₛ)
+> **Qinnovate LLC insight:** Q can enhance the existing Coherence metric (Cₛ)
 > at the quantum level for TARA (Telemetry Analysis & Response Automation).
 
 ```
@@ -1696,7 +1696,7 @@ DEPENDENCY CHAIN:
 
 ## 🛑 Why TARA Waits: Ethics and Governance First
 
-> **Kevin Qi's position:** Before building security tools that touch the brain,
+> **Qinnovate LLC's position:** Before building security tools that touch the brain,
 > you need to understand how the brain works, what the attacks look like,
 > and what the ethical boundaries are. Building TARA without this foundation
 > would be engineering without understanding — the opposite of what ONI stands for.
@@ -1937,7 +1937,7 @@ OVERALL TREND:
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
 │                                                                        │
-│  Kevin Qi arrived at these ethical dilemmas by prompting Google         │
+│  Qinnovate LLC arrived at these ethical dilemmas by prompting Google         │
 │  Gemini with the funnel model and asking it to reason about            │
 │  consequences.                                                         │
 │                                                                        │
@@ -1946,7 +1946,7 @@ OVERALL TREND:
 │  "If I drew these conclusions using Google Gemini,                     │
 │   then whose ethical questions are these — mine or theirs?"            │
 │                                                                        │
-│                                              — Kevin Qi                │
+│                                              — Qinnovate LLC                │
 │                                                                        │
 │  This is not a throwaway observation. It IS the ethics:                │
 │                                                                        │
@@ -1958,9 +1958,9 @@ OVERALL TREND:
 │    what is the intellectual provenance?                                │
 │                                                                        │
 │  • The ONI Framework's answer: DOCUMENT IT TRANSPARENTLY.              │
-│    The funnel model is Kevin Qi's. The ethical reasoning was           │
-│    generated by Gemini in response to Kevin Qi's prompts.             │
-│    The selection, verification, and integration is Kevin Qi's.        │
+│    The funnel model is Qinnovate LLC's. The ethical reasoning was           │
+│    generated by Gemini in response to Qinnovate LLC's prompts.             │
+│    The selection, verification, and integration is Qinnovate LLC's.        │
 │    The verification tables are Claude's.                              │
 │    ALL of this is documented.                                         │
 │                                                                        │
@@ -1973,7 +1973,7 @@ OVERALL TREND:
 │  The meta-ethical question — "whose ethics are these?" —               │
 │  is itself an ethical question that the framework must answer.         │
 │  And the answer is: they belong to whoever takes                       │
-│  RESPONSIBILITY for them. That's Kevin Qi.                             │
+│  RESPONSIBILITY for them. That's Qinnovate LLC.                             │
 │                                                                        │
 │  The AI generated options. The human chose which ones matter.          │
 │  That choice IS the ethics.                                            │
@@ -2070,7 +2070,7 @@ OVERALL TREND:
 │  │   forward-thinking frameworks to things that                │      │
 │  │   don't exist yet."                                         │      │
 │  │                                                              │      │
-│  │                                    — Kevin Qi               │      │
+│  │                                    — Qinnovate LLC               │      │
 │  │                                                              │      │
 │  └──────────────────────────────────────────────────────────────┘      │
 │                                                                        │
@@ -2122,10 +2122,10 @@ WHAT TO DO, IN ORDER:
 > computation, there exists a ratio we cannot yet measure. The model is designed
 > to hold any value Q turns out to be, including zero.*
 >
-> *Original concept: Kevin Qi (the funnel model itself, Josephson junction analogy,
+> *Original concept: Qinnovate LLC (the funnel model itself, Josephson junction analogy,
 > energy distribution hypothesis, ferritin-dopamine QI mapping, Josephson-Funnel
 > brain-information model, TARA coherence enhancement proposal)*
 > *Formalization: Claude/Anthropic (deep research, nine-scenario mapping, formal definition,
 > verification tables)*
-> *Review and corrections: Kevin Qi (non-classical challenge, energy efficiency insight,
+> *Review and corrections: Qinnovate LLC (non-classical challenge, energy efficiency insight,
 > bipolar logic application, quantum lab testing direction)*

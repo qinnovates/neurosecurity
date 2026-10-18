@@ -159,7 +159,7 @@ Adapted from the [Contributor Covenant v1.4](https://www.contributor-covenant.or
 
 **Effective Date:** 2026-03-11
 **Last Updated:** 2026-03-11
-**Maintainer:** Kevin Qi ([QInnovate](https://github.com/qinnovates))
+**Maintainer:** [Qinnovate LLC](https://github.com/qinnovates)
 
 ---
 
@@ -405,4 +405,4 @@ This Disclaimer shall be governed by and construed in accordance with the laws o
 
 *This document does not constitute legal advice. If you are planning to apply any aspect of this research to real devices, real patients, or real clinical environments, consult a qualified attorney and the relevant regulatory authorities in your jurisdiction.*
 
-*Copyright 2024-2026 Kevin Qi / Qinnovate. Licensed under Apache 2.0.*
+*Copyright 2024-2026 Qinnovate LLC. Licensed under Apache 2.0.*

@@ -3,11 +3,11 @@
 ## Securing Neural Interfaces: Architecture, Threat Taxonomy, Neural Impact Scoring, and Governance for Brain-Computer Interfaces
 
 > *"The brain doesn't run on ones and zeros. Its security shouldn't either."*
-> — Kevin Qi
+> — Qinnovate LLC
 
 **Version:** 8.0
 **Date:** 2026-07-27 (core v8.0 content — Sections 12–18.4 — dated 2026-03-11; Sections 18.5–18.6, IR Playbook v1, added 2026-07-25 and merged 2026-07-27; see Appendix D)
-**Author:** Kevin Qi
+**Author:** Qinnovate LLC
 **Predecessor:** QIF Whitepaper v6.3.0
 **Status:** Proposed framework — unvalidated, not adopted by any standards body (see Claims and Disclaimers below)
 **Academic Preprint:** [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105)
@@ -26,7 +26,7 @@ That is the mission behind this paper.
 
 The concepts here span neuroscience, security architecture, ethics, law, and clinical medicine. Some are well-established; many are proposed and unvalidated. I have worked to distill them into a single coherent framework, and to be explicit about where the evidence is strong and where the work is still theoretical. Where claims are speculative or unverified, the text says so. Where I do not know the answer, the paper raises the question rather than fabricating a response.
 
-— Kevin Qi
+— Qinnovate LLC
 
 ---
 
@@ -1473,4 +1473,4 @@ This appendix documents all major changes between v7.0 (February 21, 2026) and v
 
 ---
 
-*Version 8.0 — Last updated 2026-07-27 — Kevin Qi*
+*Version 8.0 — Last updated 2026-07-27 — Qinnovate LLC*

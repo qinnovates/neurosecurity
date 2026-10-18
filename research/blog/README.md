@@ -28,7 +28,7 @@ subtitle: "Optional subtitle"
 date_posted: "YYYY-MM-DD"
 source: "https://github.com/qinnovates/neurosecurity/blob/main/..."  # optional
 tags: ["#Tag1", "#Tag2"]
-author: "Kevin Qi"
+author: "Qinnovate LLC"
 fact_checked: false          # set to true after verification
 fact_check_date: "YYYY-MM-DD"  # date of last fact-check
 fact_check_notes:            # array of advisory notes

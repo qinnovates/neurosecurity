@@ -2,7 +2,7 @@
 
 > **Status:** 🔧 Active Design Phase
 > **Tracking:** [GitHub Issue #30](https://github.com/qinnovates/qinnovate/issues/30)
-> **Author:** Kevin Qi
+> **Author:** Qinnovate LLC
 > **Started:** 2026-02-01
 
 ---

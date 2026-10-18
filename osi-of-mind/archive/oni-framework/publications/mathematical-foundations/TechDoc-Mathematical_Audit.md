@@ -2,7 +2,7 @@
 
 *A Rigorous Examination of Core Mathematical Claims*
 
-**Author:** Kevin Qi + Claude (QI Collaboration)
+**Author:** Qinnovate LLC + Claude (QI Collaboration)
 **Date:** 2026-01-29
 **Status:** Living document — expand as claims are resolved
 **Tags:** mathematical-rigor, coherence-metric, scale-frequency, fourier, quasi-static, audit
@@ -378,6 +378,6 @@ Correcting these errors actually opens productive research directions:
 ---
 
 *Document created: 2026-01-29*
-*Author: Kevin Qi + Claude (QI Collaboration)*
+*Author: Qinnovate LLC + Claude (QI Collaboration)*
 *For: ONI Framework — qinnovates/mindloft*
 *Location: MAIN/legacy-core/publications/mathematical-foundations/TechDoc-Mathematical_Audit.md*

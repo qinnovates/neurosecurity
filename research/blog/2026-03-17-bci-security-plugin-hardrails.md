@@ -3,7 +3,7 @@ title: "I Built the First BCI Security Plugin for AI Coding Platforms. Here's Ho
 date: "2026-03-17"
 source: "https://github.com/qinnovates/bci-security"
 tags: ["#BCI", "#Security", "#Plugin", "#TARA", "#EEG", "#OpenSource"]
-author: "Kevin Qi"
+author: "Qinnovate LLC"
 fact_checked: true
 fact_check_date: "2026-03-17"
 fact_check_notes:

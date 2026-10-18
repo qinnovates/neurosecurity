@@ -101,6 +101,6 @@ No single piece solves the problem. Together, they are the security architecture
 
 ---
 
-*Author: Kevin Qi*
+*Author: Qinnovate LLC*
 *Status: Active Design Phase*
 *See also: [qinnovate.com](https://qinnovate.com) | [TARA Atlas](https://qinnovate.com/TARA/) | [Preprint](https://doi.org/10.5281/zenodo.18640105)*

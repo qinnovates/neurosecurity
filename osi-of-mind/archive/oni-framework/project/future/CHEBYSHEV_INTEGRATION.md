@@ -3,7 +3,7 @@
 **Status:** Planned
 **Priority:** High
 **Target:** v0.3.0
-**Author:** Kevin Qi
+**Author:** Qinnovate LLC
 **Created:** 2026-01-29
 
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Terminal Blog #002: Feeling creative and artsy - embracing the renaissance."
 date_posted: 2026-03-23
-author: Kevin Qi
+author: Qinnovate LLC
 type: terminal-blog
 tags: [design, ui-ux, ai, art, y2k, prediction, creativity]
 status: raw

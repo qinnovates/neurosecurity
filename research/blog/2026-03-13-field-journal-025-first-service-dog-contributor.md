@@ -4,7 +4,7 @@ subtitle: "From the QIF Field Journal"
 date_posted: "2026-03-13"
 source: "https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#entry-025"
 tags: ["fieldjournal", "qif", "bci", "vision-restoration", "service-dog"]
-author: "Kevin Qi"
+author: "Qinnovate LLC"
 fact_checked: true
 ai_assisted: true
 ---

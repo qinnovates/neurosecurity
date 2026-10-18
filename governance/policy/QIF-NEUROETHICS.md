@@ -6,7 +6,7 @@ order: 10
 
 # QIF NeuroEthics — Running Questions & Thesis Foundation
 
-> **Living document.** These are the open ethical questions that QIF raises — questions that *must* be answered before quantum-aware BCI security can be deployed responsibly. This document grows as Kevin Qi pursues neuroethics in graduate school, filling unknowns from a position of rigorous academic inquiry.
+> **Living document.** These are the open ethical questions that QIF raises — questions that *must* be answered before quantum-aware BCI security can be deployed responsibly. This document grows as Qinnovate LLC pursues neuroethics in graduate school, filling unknowns from a position of rigorous academic inquiry.
 >
 > **See also:** [QIF-GOVERNANCE-QUESTIONS.md](../QIF-GOVERNANCE-QUESTIONS.md) (RACI governance perspective) | [GUARDRAILS.md](../../osi-of-mind/GUARDRAILS.md) (neuroethics constraint mapping)
 >
@@ -14,7 +14,7 @@ order: 10
 >
 > **Format:** Each question is numbered, timestamped, and tagged by domain. Questions are never deleted — only answered, refined, or superseded. This is a compounding research agenda.
 
-**Author:** Kevin Qi
+**Author:** Qinnovate LLC
 **Started:** 2026-02-02
 **Status:** Active — appending as questions arise
 **Intended Use:** Graduate thesis foundation, admissions paper core argument, regulatory engagement framework

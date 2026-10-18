@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 272" width="1200" height="272" role="img" aria-label="Evidence and physics-feasibility profile of the 176 catalogued techniques.">
+<rect width="1200" height="272" rx="18" fill="#0b1120"/>
+<text x="32" y="44" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="26" font-weight="700" fill="#e6ebf5">What the catalogue is actually made of</text>
+<text x="32" y="70" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#93a1bd">78 of 176 techniques rest on a lab or case demonstration in the literature; the rest are modelled or proposed. Nothing here is validated.</text>
+<text x="32" y="92" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="600" fill="#e6ebf5">Evidence tier</text>
+<text x="182" y="92" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#93a1bd">What the published literature actually shows for each technique</text>
+<rect x="32.0" y="104" width="406.6" height="44" fill="#10b981"/>
+<text x="235.3" y="124" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#0b1120">63</text>
+<text x="235.3" y="140" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.5" fill="#0b1120">Demonstrated in lab</text>
+<rect x="438.6" y="104" width="96.8" height="44" fill="#34d399"/>
+<text x="487.0" y="124" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#0b1120">15</text>
+<rect x="535.5" y="104" width="116.2" height="44" fill="#f59e0b"/>
+<text x="593.5" y="124" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#0b1120">18</text>
+<rect x="651.6" y="104" width="503.5" height="44" fill="#fbbf24"/>
+<text x="903.4" y="124" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#0b1120">78</text>
+<text x="903.4" y="140" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.5" fill="#0b1120">Proposed, not modelled</text>
+<rect x="1155.1" y="104" width="12.9" height="44" fill="#ef4444"/>
+<text x="32" y="166" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" fill="#93a1bd">Demonstrated in a real case 15   ·   Modelled, not demonstrated 18   ·   Speculative 2</text>
+<text x="32" y="208" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="600" fill="#e6ebf5">Physics feasibility tier</text>
+<text x="182" y="208" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#93a1bd">Whether the hardware an attack would need exists yet</text>
+<rect x="32.0" y="220" width="645.5" height="44" fill="#06b6d4"/>
+<text x="354.7" y="240" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#0b1120">100</text>
+<text x="354.7" y="256" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.5" fill="#0b1120">Hardware exists today</text>
+<rect x="677.5" y="220" width="142.0" height="44" fill="#38bdf8"/>
+<text x="748.5" y="240" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#0b1120">22</text>
+<text x="748.5" y="256" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.5" fill="#0b1120">Near term (integration new)</text>
+<rect x="819.5" y="220" width="83.9" height="44" fill="#8b5cf6"/>
+<text x="861.4" y="240" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#0b1120">13</text>
+<rect x="903.4" y="220" width="25.8" height="44" fill="#c084fc"/>
+<rect x="929.2" y="220" width="238.8" height="44" fill="#93a1bd"/>
+<text x="1048.6" y="240" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#0b1120">37</text>
+<text x="1048.6" y="256" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.5" fill="#0b1120">Software — no physics gate</text>
+<text x="32" y="282" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" fill="#93a1bd">Mid term 13   ·   Far term 4</text>
+</svg>

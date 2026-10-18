@@ -207,7 +207,7 @@ This document proposes principles. It does not answer every question those princ
 
 ## Part V: How This Document Was Made
 
-This proposal was drafted by Kevin Qi with the assistance of three AI systems:
+This proposal was drafted by Qinnovate LLC with the assistance of three AI systems:
 
 - **Claude** (Anthropic) — primary drafting, research synthesis, neuroethics integration
 - **Gemini** (Google) — review pass for tone, credibility, and completeness. Gemini identified the neural data involuntariness nuance, flagged the consent revocation technical gap, and recommended the off-switch problem reference

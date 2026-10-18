@@ -4,7 +4,7 @@ title: Comprehensive Survey of Neuroethics Laws, Bylaws, and Governance Instrume
 
 # Comprehensive Survey of Neuroethics Laws, Bylaws, and Governance Instruments
 
-**Compiled by:** Kevin Qi, Qinnovate LLC
+**Compiled by:** Qinnovate LLC
 **Date:** March 2026
 **Status:** Research compilation — living document
 **Disclosure:** Compiled with AI research assistance (Claude). All instruments verified against official sources. No fabricated entries.

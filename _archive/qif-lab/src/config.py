@@ -16,10 +16,10 @@ FRAMEWORK = {
     "layer_model_version": "v3.1 (Hourglass, 7-band)",
     "layer_model_date": "2026-02-02",
     "github": "qinnovates/qinnovate",
-    "authors": "Kevin Qi, with Claude (Anthropic)",
+    "authors": "Qinnovate LLC, with Claude (Anthropic)",
     "collaboration": "Qinnovate",
     "ai_transparency": {
-        "statement": "This framework was developed collaboratively between Kevin Qi (human researcher) and AI assistants. All AI involvement is assistive — Kevin retains authorship and all decision-making authority.",
+        "statement": "This framework was developed collaboratively between Qinnovate LLC (human researcher) and AI assistants. All AI involvement is assistive — Kevin retains authorship and all decision-making authority.",
         "ai_systems": [
             {"name": "Claude (Opus 4.5)", "role": "Co-derivation, implementation, research agent orchestration", "provider": "Anthropic"},
             {"name": "Gemini 2.5", "role": "Independent peer review (cross-AI validation)", "provider": "Google"},

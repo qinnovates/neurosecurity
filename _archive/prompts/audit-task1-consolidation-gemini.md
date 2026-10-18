@@ -5,7 +5,7 @@ I've completed the audit of the `src/pages/` directory and its subdirectories. T
 Here is the full consolidation audit:
 
 ## Current: /about
-- **Unique content:** The personal story and motivation of the author, Kevin Qi. Details about his background and the "why" behind the project.
+- **Unique content:** The personal story and motivation of the author, Qinnovate LLC. Details about his background and the "why" behind the project.
 - **Overlaps with:** `index` (project summary), `pitch` (origin story), `framework` (what was built).
 - **Audience:** Potential collaborators, journalists, anyone curious about the person behind the project.
 - **Recommendation:** **MERGE** into a new, single `/about` page that tells the story of the project and the author.

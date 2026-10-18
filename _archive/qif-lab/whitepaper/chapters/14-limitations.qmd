@@ -117,7 +117,7 @@ All research sources are cataloged in [{ai['research_sources']}]({ai['research_s
 
 **What AI did:** Literature synthesis, equation derivation assistance, code implementation, cross-validation between domains, independent peer review (Gemini).
 
-**What AI did NOT do:** Make framework decisions, choose between competing hypotheses, or determine what to publish. All architectural decisions (e.g., v3.1 hourglass, dropping N4, choosing QIF over ONI) were made by Kevin Qi.
+**What AI did NOT do:** Make framework decisions, choose between competing hypotheses, or determine what to publish. All architectural decisions (e.g., v3.1 hourglass, dropping N4, choosing QIF over ONI) were made by Qinnovate LLC.
 
 This transparency is itself a novel contribution — few frameworks in any field provide this level of AI-collaboration documentation.
 """)

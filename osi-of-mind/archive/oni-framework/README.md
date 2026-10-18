@@ -84,5 +84,5 @@ The publications here remain valid research. The architectural model evolved.
 ---
 
 *Originally developed as: ONI (Open Neurosecurity Interoperability)*
-*Author: Kevin Qi*
+*Author: Qinnovate LLC*
 *See also: [Quantum Model →](../qif/) | [Neuroethics →](../governance/)*

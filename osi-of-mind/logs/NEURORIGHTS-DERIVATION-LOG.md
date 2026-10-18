@@ -2,7 +2,7 @@
 
 > **A living journal of how the Quantified Interconnection Framework's neurorights quantification was derived.**
 >
-> **Authors:** Kevin Qi
+> **Authors:** Qinnovate LLC
 > **Started:** 2026-02-24
 > **Purpose:** Document the reasoning chain for reframing QIF from security-first to rights-first, and for developing the first quantitative neurorights measurement framework backed by cross-domain evidence from physics, neuroscience, security engineering, and clinical psychiatry.
 >
@@ -24,7 +24,7 @@ This work exists to start the momentum to drive policies that are lacking for th
 
 We want the answers ready before the questions become emergencies. So that companies developing advancements can adopt protections without slowing down. So that the frameworks exist not as barriers to progress but as infrastructure for responsible progress.
 
--- Kevin Qi
+-- Qinnovate LLC
 
 ### Thesis
 

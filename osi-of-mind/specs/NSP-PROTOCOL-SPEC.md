@@ -5,7 +5,7 @@ Title:          Neural Sensory Protocol (NSP) v0.5
 Version:        0.5
 Date:           2026-02-18
 Status:         Implemented (Alpha)
-Author:         Kevin Qi (Qinnovate)
+Author:         Qinnovate LLC
 Framework:      QIF v4.0 Hourglass Model (11-band, 7-1-3)
 Integration:    osi-of-mind/specs/INTEGRATION-ROADMAP.md (unified NSP + Runemate + Neurowall roadmap)
 ```
@@ -1775,7 +1775,7 @@ Document:       NSP-PROTOCOL-SPEC.md
 Version:        0.5
 Status:         Draft
 Date:           2026-02-18
-Author:         Kevin Qi (Qinnovate)
+Author:         Qinnovate LLC
 Location:       qinnovates/qinnovate/osi-of-mind/
 Related:        NSP-PITCH.md, NSP-USE-CASE.md, QIF-TRUTH.md
 Reviewed by:    Gemini (Google, independent peer review rounds 1-2),

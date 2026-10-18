@@ -5,7 +5,7 @@ subtitle: "From the QIF Field Journal"
 date_posted: "2026-02-15"
 source: "https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#011--2026-02-15"
 tags: ["#FieldJournal","#QIF","#Hourglass","#NSP"]
-author: "Kevin Qi"
+author: "Qinnovate LLC"
 fact_checked: true
 fact_check_date: "2026-02-21"
 fact_check_notes:

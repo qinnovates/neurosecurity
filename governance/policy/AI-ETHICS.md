@@ -6,7 +6,7 @@ title: "AI Ethics: Principles, Frameworks, and the Governance of Artificial Inte
 
 > **A comprehensive reference for understanding AI ethics — its origins, core principles, global regulatory landscape, key institutions, open problems, and direct implications for brain-computer interface security architecture.**
 
-**Author:** Kevin Qi
+**Author:** Qinnovate LLC
 **Date:** 2026-03-11
 **Status:** Living Document
 **Companion to:** QIF-WHITEPAPER-V8.md, QIF-GOVERNANCE-QUESTIONS.md, QIF-NEUROETHICS.md
@@ -637,4 +637,4 @@ That document translates the frameworks surveyed here into enforceable conduct r
 
 ---
 
-*Last updated 2026-03-11 — Kevin Qi*
+*Last updated 2026-03-11 — Qinnovate LLC*

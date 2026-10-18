@@ -11,11 +11,11 @@ BCI technology is early enough that we don't have to repeat that. If we could re
 ---
 
 > *"The brain doesn't run on ones and zeros. Its security shouldn't either."*
-> — Kevin Qi
+> — Qinnovate LLC
 
 **Version:** 6.2.1 (Working Draft)
 **Date:** 2026-02-16
-**Author:** Kevin Qi
+**Author:** Qinnovate LLC
 **Predecessor:** QIF Whitepaper v6.1
 **Status:** DRAFT
 **Academic Preprint:** [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) — *Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces* (Qi, 2026)
@@ -1157,6 +1157,6 @@ Time is the variable that constrains all of this. The devices are shipping. The 
 
 ---
 
-*Version 5.2 Working Draft -- Last updated 2026-02-10 -- Kevin Qi*
+*Version 5.2 Working Draft -- Last updated 2026-02-10 -- Qinnovate LLC*
 
 *Source of Truth: QIF-TRUTH.md*

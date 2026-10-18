@@ -381,7 +381,7 @@ Every brain-computer interface shipping today transmits the most intimate data a
 
 > *"The question isn't whether BCIs need post-quantum security. The question is why they don't have it yet."*
 >
-> — Kevin Qi, Qinnovate
+> — Qinnovate LLC
 
 ---
 

@@ -549,7 +549,7 @@ For N channels at temperature T. This determines where Σc dominates (classical)
 
 ## 8. Strategic Decisions (Resolved 2026-02-02)
 
-All 8 questions from QI-EQUATION-RESEARCH.md Section 8, answered by Kevin Qi.
+All 8 questions from QI-EQUATION-RESEARCH.md Section 8, answered by Qinnovate LLC.
 
 | # | Question | Decision | Rationale |
 |---|----------|----------|-----------|
@@ -700,4 +700,4 @@ To strictly adhere to VERA neuroethics, the system **MUST** allow toggling betwe
 *Document version: 4.5*
 *Created: 2026-02-02*
 *Last updated: 2026-10-06*
-*Maintainer: Kevin Qi*
+*Maintainer: Qinnovate LLC*

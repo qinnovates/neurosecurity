@@ -5,7 +5,7 @@ subtitle: "From the QIF Field Journal"
 date_posted: "2026-03-12"
 source: "https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#entry-024"
 tags: ["#FieldJournal","#QIF","#BCI","#TARA"]
-author: "Kevin Qi"
+author: "Qinnovate LLC"
 fact_checked: true
 fact_check_date: "2026-03-14"
 fact_check_notes: []

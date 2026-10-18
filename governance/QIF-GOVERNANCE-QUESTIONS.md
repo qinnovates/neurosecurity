@@ -2,7 +2,7 @@
 
 > **Living document.** These are the governance, ethical, and architectural questions that must be answered before neural interfaces can be deployed responsibly. Each question ties back to neurorights, neuroethics, and the QIF security architecture. The RACI matrix at the end maps accountability for every scenario class.
 
-**Author:** Kevin Qi
+**Author:** Qinnovate LLC
 **Date:** 2026-03-11
 **Status:** Active Draft
 **Companion to:** QIF-WHITEPAPER-V8.md, QIF-NEUROETHICS.md, NEUROSECURITY_GOVERNANCE.md

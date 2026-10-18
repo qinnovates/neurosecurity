@@ -3,7 +3,7 @@
 **Status:** Planned (pending hardware testing)
 **Priority:** Medium
 **Target:** Post-v1.0
-**Author:** Kevin Qi
+**Author:** Qinnovate LLC
 **Created:** 2026-02-02
 
 ---

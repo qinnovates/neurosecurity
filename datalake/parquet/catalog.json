@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-17T04:04:31.940159+00:00",
+    "generated": "2026-10-17T20:46:09.620703+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
     "total_datasets": 34,
-    "total_rows": 9117
+    "total_rows": 9141
   },
   "datasets": {
     "techniques": {
@@ -647,7 +647,7 @@
       "source": "datalake/parquet/eeg_samples.parquet"
     },
     "intake_ledger": {
-      "rows": 156,
+      "rows": 180,
       "columns": 12,
       "column_names": [
         "id",
@@ -663,7 +663,7 @@
         "independent_review",
         "disposition"
       ],
-      "size_bytes": 33190,
+      "size_bytes": 38923,
       "compression": "zstd",
       "source": "datalake/parquet/intake_ledger.parquet"
     },
@@ -711,7 +711,7 @@
         "current_stats",
         "milestones"
       ],
-      "size_bytes": 13253,
+      "size_bytes": 13348,
       "compression": "zstd",
       "source": "datalake/parquet/timeline.parquet"
     }

@@ -2,7 +2,7 @@
 
 > A central catalog of every external tool, library, dataset, and standard referenced or used by the ONI Framework — with integration status, license, and relevance to the project.
 
-**Author:** Kevin Qi
+**Author:** Qinnovate LLC
 **Date:** 2026-01-29
 **Version:** 1.0
 

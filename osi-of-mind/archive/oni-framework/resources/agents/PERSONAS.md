@@ -3,7 +3,7 @@
 > **Purpose:** Define distinct personas for research verification and framework development to prevent echo chamber thinking and ensure rigorous academic standards.
 > **Adapted from:** kevinqicode/automation/agents/personas.md
 > **Last Updated:** 2026-01-24
-> **Created By:** Kevin Qi + Claude
+> **Created By:** Qinnovate LLC + Claude
 
 ---
 

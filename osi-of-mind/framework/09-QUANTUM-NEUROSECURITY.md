@@ -909,7 +909,7 @@ Course Structure (suggested):
 |-------|--------|--------|
 | NIST CSF is the standard risk management framework | ✅ VERIFIED | NIST SP 800-53, NIST CSF 2.0 |
 | Zero Trust Architecture defined by NIST | ✅ VERIFIED | NIST SP 800-207 |
-| ONI diagram maps to IDENTIFY phase | 🔬 HYPOTHESIS | Kevin Qi / ONI Framework |
+| ONI diagram maps to IDENTIFY phase | 🔬 HYPOTHESIS | Qinnovate LLC / ONI Framework |
 | DSKE as PROTECT control for BCIs | 🔬 HYPOTHESIS | ONI analysis based on DSKE properties |
 | Cₛ as DETECT mechanism | 🔬 HYPOTHESIS | ONI Framework coherence metric |
 
@@ -1013,7 +1013,7 @@ FOR SECURE QUANTUM NEUROSECURITY OF TOMORROW.
 > and neurotechnology governance is happening now. ONI is the framework.*
 >
 > *Research compiled: Claude/Anthropic (deep research agent, web search, paper analysis)*
-> *Direction and requirements: Kevin Qi (DSKE selection, defense-in-depth rings,
+> *Direction and requirements: Qinnovate LLC (DSKE selection, defense-in-depth rings,
 > neurosecurity filtering concept, funnel-to-rings mapping, "quantum neurosecurity
 > of tomorrow" framing, NIST CSF lifecycle as educational framework, ONI diagram
 > as constant pedagogical reference)*

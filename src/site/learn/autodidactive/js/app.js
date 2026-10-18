@@ -671,7 +671,7 @@ function renderHourglassPhysics(container) {
     <div class="vision-section">
       <div class="vision-intro">
         <p class="vision-qualifier" style="background:#fef3c7;border-left:3px solid #f59e0b;padding:12px 16px;border-radius:6px;margin-bottom:16px;">
-          <strong>Disclaimer:</strong> QIF is a proposed framework by Kevin Qi. It has not been peer-reviewed, independently validated, or adopted by any standards body. The physics and math referenced below are established science. The <em>mapping</em> of those principles to BCI security architecture is theoretical and requires independent verification. This page explains the reasoning, not settled fact.
+          <strong>Disclaimer:</strong> QIF is a proposed framework by Qinnovate LLC. It has not been peer-reviewed, independently validated, or adopted by any standards body. The physics and math referenced below are established science. The <em>mapping</em> of those principles to BCI security architecture is theoretical and requires independent verification. This page explains the reasoning, not settled fact.
         </p>
       </div>
 

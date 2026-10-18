@@ -119,8 +119,8 @@ def generate():
     lines = []
     lines.append("# Progress Log")
     lines.append("")
-    lines.append("**Author:** Kevin Qi — all research, architecture, and implementation decisions originate from Kevin.")
-    lines.append("AI assists with execution; every concept, direction, and framework choice is Kevin's.")
+    lines.append("**Author:** Qinnovate LLC — all research, architecture, and implementation decisions originate from the maintainer.")
+    lines.append("AI assists with execution; every concept, direction, and framework choice is the maintainer's.")
     lines.append("")
     lines.append(f"> Auto-generated from git history. Run `python3 MAIN/shared/generate_progress.py` to update.")
     lines.append(f"> Last generated: {now}")

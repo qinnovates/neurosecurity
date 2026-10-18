@@ -113,7 +113,7 @@ function generateDecisionLog(entries) {
     `| Total decisions | ${decisions.length} |`,
     `| Total derivation entries | ${entries.length} |`,
     `| Date range | ${decisions.length > 0 ? decisions[decisions.length - 1].date.match(/\d{4}-\d{2}-\d{2}/)?.[0] || '?' : '?'} to ${decisions.length > 0 ? decisions[0].date.match(/\d{4}-\d{2}-\d{2}/)?.[0] || '?' : '?'} |`,
-    `| Accountable (all decisions) | Kevin Qi |`,
+    `| Accountable (all decisions) | Qinnovate LLC |`,
     '',
   ];
 
@@ -237,7 +237,7 @@ function generateTransparency(entries) {
     `| Corrections / retractions | ${corrections > 0 ? '🔴' : '🟢'} ${corrections} |`,
     `| Quorum swarm reviews | ${quorumReviewed > 0 ? '🟢' : '🟡'} ${quorumReviewed} |`,
     `| Human-only entries | ${humanOnly} |`,
-    `| Human decision rate | 🟢 100% (Kevin Qi is Accountable on every entry) |`,
+    `| Human decision rate | 🟢 100% (Qinnovate LLC is Accountable on every entry) |`,
     '',
     '## AI Contribution Breakdown',
     '',
@@ -253,7 +253,7 @@ function generateTransparency(entries) {
     '',
     'Every contribution is categorized by its cognitive origin. AI assistance is treated as a tool subject',
     'to human oversight, not a collaborator with independent judgment on ethical or novel technical matters.',
-    'All final decisions are made by Kevin Qi (A = Accountable in every RACI entry).',
+    'All final decisions are made by Qinnovate LLC (A = Accountable in every RACI entry).',
     '',
     '## Tools Used',
     '',

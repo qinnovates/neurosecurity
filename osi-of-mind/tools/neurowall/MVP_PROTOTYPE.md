@@ -130,4 +130,4 @@ Timeline: ~8–12 weeks after Phase 0
 
 ---
 
-*Validated by: Gemini 2.5 (Gemini CLI, 2026-02-21). Human oversight: Kevin Qi.*
+*Validated by: Gemini 2.5 (Gemini CLI, 2026-02-21). Human oversight: Qinnovate LLC.*

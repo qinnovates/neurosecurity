@@ -73,7 +73,7 @@ Before writing ANY derivation log entry, apply this filter:
 - Specific institutional file paths from EEG datasets
 
 **Tier 3 -- ALLOWED (safe, do not over-filter):**
-- Published researcher names, Kevin Qi's name, AI model names
+- Published researcher names, the project's company name (Qinnovate LLC), AI model names
 - Framework component names (QIF, NISS, TARA, NSP), technique IDs (QIF-T0001)
 - DOIs, arXiv IDs, public GitHub URLs
 - Architecture decisions, NISS scores, compression benchmarks

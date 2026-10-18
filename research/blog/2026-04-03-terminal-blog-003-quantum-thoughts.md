@@ -2,7 +2,7 @@
 title: "Terminal Blog #003: Quantum Thoughts"
 date_posted: 2026-04-03
 time: "~04:11 EST"
-author: Kevin Qi
+author: Qinnovate LLC
 type: terminal-blog
 tags: [quantum, physics, time, vector-space, electrons, philosophy, bci]
 status: raw

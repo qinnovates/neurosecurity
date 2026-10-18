@@ -129,7 +129,7 @@ export const QIF_BANDS = [
 export const HOURGLASS_EXPLAINER = {
   title: 'The QIF Hourglass: Why 7-1-3?',
   description: 'QIF maps the full brain-computer interface stack as an hourglass with 7 neural bands, 1 interface band, and 3 silicon bands. Neural bands widen at the top (more complex, less deterministic). Silicon bands widen at the bottom (more exposed, fully deterministic). The interface band I0 is the bottleneck where biology meets machine.',
-  status: 'Proposed framework (QIF v4.0). Not an adopted standard. Based on neuroanatomical consensus (Kandel et al. 2021) with security-specific mapping by Kevin Qi.',
+  status: 'Proposed framework (QIF v4.0). Not an adopted standard. Based on neuroanatomical consensus (Kandel et al. 2021) with security-specific mapping by Qinnovate LLC.',
   keyPrinciple: 'The hourglass shape reflects the determinacy spectrum: neural systems at the top are indeterminate and unpredictable, silicon systems at the bottom are fully deterministic and auditable. Security approaches must differ across this spectrum because you cannot apply the same threat model to a neuron and a microchip.',
   zones: [
     { name: 'Neural Zone (N7-N1)', color: '#166534', description: '7 bands from neocortex to spinal cord. Signals are probabilistic. Traditional security tools do not apply. Requires novel approaches.' },

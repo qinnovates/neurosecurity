@@ -7,11 +7,11 @@
 ---
 
 > *"Like all things that matter, we are deeply entangled. It is rooted in laws that define the universe we exist in. From silicon to synapse, and security to ethics. Life's most important connections deserve the most thought."*
-> — Kevin Qi
+> — Qinnovate LLC
 
 **Version:** 8.0 Scientific Reference
 **Date:** 2026-03-12
-**Author:** Kevin Qi
+**Author:** Qinnovate LLC
 **Status:** Living reference document for scientific and mathematical content
 **Current Whitepaper:** [QIF Whitepaper v8.0](https://qinnovate.com/research/whitepaper/) — the canonical, up-to-date framework document
 **Academic Preprint:** [DOI: 10.5281/zenodo.18640105](https://doi.org/10.5281/zenodo.18640105) — *Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces* (Qi, 2026)
@@ -1987,6 +1987,6 @@ Time is the variable that constrains all of this. The devices are shipping. The 
 
 ---
 
-*Version 7.0 Working Draft -- Last updated 2026-02-21 -- Kevin Qi*
+*Version 7.0 Working Draft -- Last updated 2026-02-21 -- Qinnovate LLC*
 
 *Source of Truth: QIF-TRUTH.md*

@@ -175,7 +175,7 @@ Hashing (SHA-256, etc.) would make scores incomparable. Monitoring requires:
 - Prioritizes user sovereignty and cognitive freedom
 
 #### Q: Who created QIF?
-**A:** QIF was created by Kevin Qi (Qinnovate) with AI assistance from Claude (Anthropic) and cross-validated by Gemini (Google) and ChatGPT (OpenAI). It builds on academic research from published BCI security literature. All contributions are documented in the [Transparency Statement](TRANSPARENCY.md).
+**A:** QIF was created by Qinnovate LLC with AI assistance from Claude (Anthropic) and cross-validated by Gemini (Google) and ChatGPT (OpenAI). It builds on academic research from published BCI security literature. All contributions are documented in the [Transparency Statement](TRANSPARENCY.md).
 
 ---
 

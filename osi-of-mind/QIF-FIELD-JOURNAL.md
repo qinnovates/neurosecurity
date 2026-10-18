@@ -4,7 +4,7 @@
 >
 > These are real-time observations — not polished, not retroactive. Dated, honest, append-only. Newest entries first.
 >
-> **Author:** Kevin Qi
+> **Author:** Qinnovate LLC
 > **Started:** 2026-02-02
 > **Rule:** This log only grows. Never delete or edit past entries. Corrections get new entries.
 >

@@ -2,7 +2,7 @@
 
 > A comprehensive catalog of every equation used, adapted, or proposed in the ONI Framework — with physical basis, domain of applicability, and current status.
 
-**Author:** Kevin Qi
+**Author:** Qinnovate LLC
 **Date:** 2026-01-29
 **Version:** 1.0
 
@@ -203,5 +203,5 @@ The author wishes to acknowledge the support of colleagues and mentors in the de
 
 ---
 
-*© 2026 Kevin Qi. ONI Neuroassurance Stack*
+*© 2026 Qinnovate LLC. ONI Neuroassurance Stack*
 *Open source under Apache 2.0 License*

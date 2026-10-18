@@ -4,7 +4,7 @@ subtitle: "Signal coherence, adaptive spectral detection, and honest results fro
 date_posted: "2026-02-21"
 source: "https://github.com/qinnovates/neurosecurity/tree/main/tools/neurowall"
 tags: ["#Neurowall","#QIF","#BCI","#SignalSecurity","#TARA","#Simulation","#NeuralFirewall"]
-author: "Kevin Qi"
+author: "Qinnovate LLC"
 fact_checked: false
 fact_check_date: ""
 fact_check_notes: []

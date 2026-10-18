@@ -2,7 +2,7 @@
 
 *Corrected Physics, Labeled Hypotheses, and Expansion Stubs*
 
-**Author:** Kevin Qi + Claude (QI Collaboration)
+**Author:** Qinnovate LLC + Claude (QI Collaboration)
 **Date:** 2026-01-29
 **Status:** Living document — sections marked [STUB] require expansion
 **Tags:** mathematical-foundations, volume-conduction, quasi-static, coherence-metric, scale-frequency, fourier, dispersion, anisotropy
@@ -569,6 +569,6 @@ Welch, P. D. (1967). The use of fast Fourier transform for the estimation of pow
 ---
 
 *Document created: 2026-01-29*
-*Author: Kevin Qi + Claude (QI Collaboration)*
+*Author: Qinnovate LLC + Claude (QI Collaboration)*
 *For: ONI Framework — qinnovates/mindloft*
 *Location: MAIN/legacy-core/publications/mathematical-foundations/TechDoc-Mathematical_Foundations.md*

@@ -1,7 +1,7 @@
 ---
 title: "QIF — Quantified Interconnection Framework for Neural Security"
 subtitle: "Why the Next Generation of Brain-Computer Interfaces Needs Quantum-Aware Protection"
-author: "Kevin Qi, with Claude (Anthropic)"
+author: "Qinnovate LLC, with Claude (Anthropic)"
 date: "2026-02-02"
 format:
   html:
@@ -73,7 +73,7 @@ COLORS = {
 ```
 
 > *"The brain doesn't run on ones and zeros. Its security shouldn't either."*
-> — Kevin Qi
+> — Qinnovate LLC
 
 **Version:** 3.0 (Working Draft) | **Collaboration:** `{python} FRAMEWORK['collaboration']` | **GitHub:** `{python} FRAMEWORK['github']`
 
@@ -681,4 +681,4 @@ df_threats.style.hide(axis='index')
 
 *QIF Whitepaper v3.1 — Generated from code. Change the equation, re-render, paper updates.*
 
-*Authors: Kevin Qi | 2026-02-02*
+*Authors: Qinnovate LLC | 2026-02-02*

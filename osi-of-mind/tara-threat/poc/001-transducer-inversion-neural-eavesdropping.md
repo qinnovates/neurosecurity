@@ -1,7 +1,7 @@
 # TARA Threat Research: Transducer Inversion to Neural Eavesdropping
 
 > **Status:** WORK IN PROGRESS
-> **Author:** Kevin Qi
+> **Author:** Qinnovate LLC
 > **Date:** 2026-02-10
 > **TARA Relevance:** Novel attack escalation chain. Traditional acoustic eavesdropping → neural eavesdropping via electromagnetic transducer inversion.
 > **NSP Relevance:** Reinforces multi-layer protocol necessity. This attack chain crosses physical, electromagnetic, acoustic, and biological layers.

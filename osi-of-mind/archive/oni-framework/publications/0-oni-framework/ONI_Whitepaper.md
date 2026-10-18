@@ -818,7 +818,7 @@ The author wishes to acknowledge the support of colleagues and mentors in the de
 
 ---
 
-*© 2026 Kevin Qi. ONI Neuroassurance Stack*
+*© 2026 Qinnovate LLC. ONI Neuroassurance Stack*
 *Open source under Apache 2.0 License*
 
 ---

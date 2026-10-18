@@ -73,7 +73,7 @@ IF you find an error in a blog or repo doc:
   QIF-TRUTH.md is updated based on:
   - Primary sources (peer-reviewed papers, textbooks)
   - Physics / mathematics / neuroscience evidence
-  - Strategic decisions by Kevin Qi
+  - Strategic decisions by Qinnovate LLC
   - Novel QIF contributions (labeled as hypothesis)
 ```
 
@@ -191,4 +191,4 @@ This transparency lives in the Derivation Log — one place, chronological, comp
 *Created: 2026-02-02*
 *Updated: 2026-02-02 (added Validation Pipeline, Gemini protocol, research tracking, transparency)*
 *Lives next to: QIF-TRUTH.md*
-*Maintainer: Kevin Qi*
+*Maintainer: Qinnovate LLC*

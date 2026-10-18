@@ -1,7 +1,7 @@
 ---
 title: "How The 'Apple Wallpaper Index' Predicted the Neo-Y2K Bubble Pop & The Return Of Gradients, Chromatic Gradients, Pop-Art, Bryce-like Y2K Design"
 date_posted: 2026-03-23
-author: Kevin Qi
+author: Qinnovate LLC
 type: medium-post
 tags: [design, ui-ux, ai, art, y2k, prediction, creativity]
 status: draft

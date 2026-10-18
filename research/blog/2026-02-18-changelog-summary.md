@@ -4,7 +4,7 @@ subtitle: "Recent changes and improvements"
 date_posted: "2026-02-18"
 source: "https://github.com/qinnovates/neurosecurity/commits/main"
 tags: ["#Changelog","#Release","#TARA","#Validation","#BCI","#NSP"]
-author: "Kevin Qi"
+author: "Qinnovate LLC"
 fact_checked: false
 fact_check_date: ""
 fact_check_notes: []

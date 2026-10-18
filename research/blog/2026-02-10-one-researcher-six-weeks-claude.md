@@ -86,7 +86,7 @@ Everything is live at [qinnovate.com](https://qinnovate.com).
 
 · · ·
 
-*Kevin Qi is the founder of Qinnovate, an open standards body for brain-computer interface security. He is a cybersecurity professional with 15 years of experience across financial services, media, consumer tech, and biotech. His independent research on BCI security bridges cybersecurity, neuroscience, and quantum physics.*
+*Qinnovate LLC is the founder of Qinnovate, an open standards body for brain-computer interface security. He is a cybersecurity professional with 15 years of experience across financial services, media, consumer tech, and biotech. His independent research on BCI security bridges cybersecurity, neuroscience, and quantum physics.*
 
 ---
 

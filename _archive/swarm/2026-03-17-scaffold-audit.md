@@ -257,10 +257,10 @@ The Quorum skill alone costs more tokens than the entire baseline context. Refac
 # ~/.claude/skills/swarm/SKILL.md
 # REMOVE from frontmatter:
 #   version: 4.1.0
-#   author: Kevin Qi (qinnovate.com)
+#   author: Qinnovate LLC (qinnovate.com)
 #   homepage: https://qinnovate.com
 # ADD to body (after ---):
-# **Version:** 4.1.0 | **Author:** Kevin Qi (qinnovate.com) | [qinnovate.com](https://qinnovate.com)
+# **Version:** 4.1.0 | **Author:** Qinnovate LLC (qinnovate.com) | [qinnovate.com](https://qinnovate.com)
 ```
 
 ### F4: Delete duplicate ci-cd

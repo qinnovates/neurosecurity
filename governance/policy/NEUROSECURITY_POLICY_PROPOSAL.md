@@ -11,7 +11,7 @@ order: 8
 **Version:** 1.2
 **Date:** 2026-02-21
 **Status:** Active Development
-**Author:** Kevin Qi (Qinnovate)
+**Author:** Qinnovate LLC
 
 **Disclosure:** The author develops the QIF framework referenced in this document. QIF is presented as one possible approach to the problems described, not as a prescription. The proposals in this document are intended to benefit the BCI security field broadly, regardless of which specific frameworks or tools are ultimately adopted. All QIF components are open-source (Apache 2.0) and freely available for evaluation, adaptation, or replacement.
 

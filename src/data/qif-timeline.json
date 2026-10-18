@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "created": "2026-02-21",
     "description": "Chronological record of QIF milestones, discoveries, dataset growth, and major updates. Updated when significant changes occur. Automation: scripts/timeline-check.mjs detects staleness.",
-    "maintainer": "Kevin Qi"
+    "maintainer": "Qinnovate LLC"
   },
   "current_stats": {
     "as_of": "2026-10-16",
