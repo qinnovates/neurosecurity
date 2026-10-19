@@ -1,12 +1,66 @@
 [
   {
     "type": "external",
-    "title": "[object Object]",
-    "date": "2026-10-18",
-    "url": "hxxps://www[.]fiercebiotech[.]com/medtech/simbiosys-nabs-fda-clearance-nvidia-powered-mri-derived-breast-cancer-recurrence-tool",
-    "source": "Fierce Biotech",
-    "summary": "SimBioSys has been given FDA clearance of the Nvidia-powered TumorSight Risk, an AI and MRI-derived prognostic tool for assessing the risk of a breast cancer coming back.",
+    "title": "Paradromics taps Siemens Healthineers to develop scalable BCI imaging - MassDevice",
+    "date": "2026-10-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqwFBVV95cUxOUnJQbTRyRVMtejhjaXhMUHpGQkZQN0VYVkJEVGFJR3JRV0FabEpRSHhTa3dqRnVYalByOEJvUnNJMFE3b0tmY25wa3hNdWxyakFqRlJHSlU5T1NfZFFZTVh3YXdTbldSM0hFeEhsZmxuOXpOcTRrN0JWRmk2X1VIYUJJMTNIUk5WYUFlX2JOTWpwRER0cXdtY09Ma1h0b1h5aXJLbXI1VWZ5cVU?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Paradromics taps Siemens Healthineers to develop scalable BCI imaging&nbsp;&nbsp;MassDevice",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China achieves breakthrough in international standards for brain-computer interfaces - Global Times",
+    "date": "2026-10-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiYkFVX3lxTE9zellVZERub1N5Tk5mZUhWZG13S3Q5M2pXODdDTmFkbERhRmFXSGtLaElpQUMwVElyaGM0aHZiNVl2Q2hOVnZmZWJ3WXVpdG1GTUlhUjBPckZDdnduRmlzMTJB?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China achieves breakthrough in international standards for brain-computer interfaces&nbsp;&nbsp;Global Times",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Siemens Healthineers partners with Paradromics to build out new imaging system to support BCIs - Fierce Biotech",
+    "date": "2026-10-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivgFBVV95cUxQYWpycXVQeEc5dFpCSGhCbWhKbDBzMFRHUnpUdlRGdzZYdXFERFZ6bHJhaURzOTIzNWMxM0RkZFoxRXdRREtJVGQwZHBESGY4XzJRV1RNc2xqb1FZS2VGM044a2FxWFZjVUhWakJ1MkFYWW5nMnhWTjFUWDlBTTVOcURkaHFrVGhEempRMWVzbEF6aWUwQlBFQkVWSlNHRTFaNS05dFpBRFVjTUY0QzFQSkJVVk1LSEhRNWdrN0xR?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Siemens Healthineers partners with Paradromics to build out new imaging system to support BCIs&nbsp;&nbsp;Fierce Biotech",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain stimulation plus brain-computer interface shows no clear extra benefit for stroke arm recovery - Bioengineer.org",
+    "date": "2026-10-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwwFBVV95cUxQY1pKRjg2bXNNczFxNXF3Y0xDYTF1YjBRdWYtODFYNm5tUEtCQWhKYUVJWFBzdGN6OFA3YjFYX0xPLXVuZGNvWWZxTDlMbW1BUldubGxINk9RRXJMWllnNU1CbTQxcVdpZW52MjhfVUJ2TUZoSGRNMm1BM2tnOWtCM3FTcU1aNGVkUGRPczdSTHZGNG9rbXRYUVVCb1F2TnNLVkI3Z0o2cDhnQXBqdlE5azlTWk9ONWtDb0l3V000RWdXeWM?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain stimulation plus brain-computer interface shows no clear extra benefit for stroke arm recovery&nbsp;&nbsp;Bioengineer.org",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink is becoming as much a part of patients' daily routine as getting out of bed. For people living with ALS, that means being able to control a computer through their thoughts throughout the day. Think about being able to send a message, browse the inter - X",
+    "date": "2026-10-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMibEFVX3lxTE5Na1hGR0l6ZGhNZEFnR1dLaGgxMWk2TWNjM3hBX1M5NTdSVVM1aTR0c2NzQ0w1Mlc2RHJFcm91WUlPdjB5V2JrUkEzdWVjeTBvcUhtVDdTX2ZDYS1BT09PbmpDaExTVTQ5NzF0WA?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink is becoming as much a part of patients' daily routine as getting out of bed. For people living with ALS, that means being able to control a computer through their thoughts throughout the day",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Alignment of visual brain encoding models with individual perceptual similarity judgments",
+    "date": "2026-10-19",
+    "url": "hxxps://arxiv[.]org/abs/2610[.]22569",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2610.22569v1 Announce Type: new Abstract: Encoding models that predict brain activation responses to images have traditionally been trained to maximize accuracy when predicting observed brain da",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "EEG Lempel-Ziv Complexity vis-\\`a-vis Autocorrelation Function",
+    "date": "2026-10-19",
+    "url": "hxxps://arxiv[.]org/abs/2610[.]23231",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2610.23231v1 Announce Type: new Abstract: Measures of signal complexity have become increasingly popular in electroencephalography (EEG), where they are often interpreted as indicators of neural",
+    "category": "research"
   },
   {
     "type": "external",
@@ -15,42 +69,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMi0AFBVV95cUxPYW9udFBiLWFEWGZfVVVxcFUxVHFuX1hRWDIyNzZLSENPSEtsX2JCQjZYd2J2eDByQXh3SEZlY1RvQV9lbW5FVnZEVE5DaG9md2pTVEhnd01UY29zUFNBWk9xeEpHNnQzM0VCY0g0cnYydF9qajQtZFM1QmNvaWVSTjJqTTgwdmhNaEtqVzl3ZmVjeDktYXBIcFM2LUQ5LTVsa0dQbldtRWpSSGI2cEhNYnRzNUlvV3RiLVp1QUlndVQ2RXBzaEJqMVZTZnVyOFZX?oc=5",
     "source": "Google News — BCI",
     "summary": "Tether Evo’s latest research addresses one of the biggest challenges in brain-computer interfaces&nbsp;&nbsp;TechCrunch",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Sliding Windows and Fourier Decomposition Give Brain-Computer Interfaces a Lightweight Edge - Bioengineer.org",
-    "date": "2026-10-17",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxPdVNpNGJ3WE4tSG8xNUJUUVVjcl9ZT3ZadjF0ODRoQmN4d1ZIWURRVlFTVlRoblBfMVpwemNNWU8xS0JrRDJqa1RJUjZScWY2aDZVWk96TDYzY0VNTXU0am9hOFhSaDFhX1ZJQzc4ZnlMR0NnRlRFa0ZESUhVUVZNeTFTUTlCSlhjLURkamRDV1dCejlld24tc0FydHBBRkpGSnFwbmxjc3JvZVhScmdqMjJtS0VIZ1U?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Sliding Windows and Fourier Decomposition Give Brain-Computer Interfaces a Lightweight Edge&nbsp;&nbsp;Bioengineer.org",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Musk claims Neuralink will 'help millions of people' - Breakingthenews.net",
-    "date": "2026-10-17",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMingFBVV95cUxPbk9LTlZEa1M1SFhiOGZZUmZXTWRVWEhzbW9rRE5KS0Q5bXV1a1MwTDZycV91cVdTOVFScU9aZ3NUYnY4ZTlacFJOUGg0UUg5WFVPOGhsQVFzc0xKNDE0R0dtVWxNWDEtckZmTWF4eTY1SFVNY1I2b1lRODU5NjNLdDJCYzFXanRnLXRwaFM2QUg5RlBOcFpJUE1Ea09sdw?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Musk claims Neuralink will 'help millions of people'&nbsp;&nbsp;Breakingthenews.net",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "This implant can restore sight for patients with macular degeneration",
-    "date": "2026-10-16",
-    "url": "hxxps://www[.]technologyreview[.]com/2026/10/16/1145840/prima-implant-restores-sight-macular-degeneration-patients/",
-    "source": "MIT Technology Review",
-    "summary": "More than 5 million people around the world have an advanced form of age-related macular degeneration (AMD) called geographic atrophy, in which cells in the retinas die off. And until now, no treatmen",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Device helps people with paralysis communicate - National Institutes of Health (NIH) | (.gov)",
-    "date": "2026-10-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimgFBVV95cUxQSFJmaWVLVkZaMjRhTHVxTzZtN2tfUDF5LWNOaEdmRWN5Z2V3VnFNVTc4M0l3ekdGUVJYTXN3by1uZ1BBSV9ZSEZzQTByMkNOelB5RkN2azJxWTZkbDhDT2w2czlQS3EtakpIS01YZTk1XzBIRW1lbUtVZDlNUEtwRmNhdlc0dzlaNmlndGwxRDNsR1g0WU1OX2tR?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Device helps people with paralysis communicate&nbsp;&nbsp;National Institutes of Health (NIH) | (.gov)",
     "category": "neurotechnology"
   },
   {
@@ -91,29 +109,11 @@
   },
   {
     "type": "external",
-    "title": "Brain-computer interface study sheds light on neural activity during observation, or 'mirror neurons' - Brown University",
-    "date": "2026-09-23",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMib0FVX3lxTE1sNXJCZ1R0cWE5RkRBbjV1UTM5NmNNbnJybHd3WktGam1PNk85bm9wc0IzZUlNeEZaRzB3SmxOSG9VLXNHZWxOcmdVd2c3ZkkxNU9KeVdvdHNScWhNZUUwVXpnbXAwWmhxN05VdUFQTQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-computer interface study sheds light on neural activity during observation, or 'mirror neurons'&nbsp;&nbsp;Brown University",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Neuralink brain implant helps man with ALS speak using his thoughts - MobiHealthNews",
     "date": "2026-09-23",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxPYm9qUFd2LWdiSGs5NzExN014MDgxT005dnpQdFl4Uk5IRVhpYjljN1VRMU5BQW5kdUt5dWk4WHFkSG5YQUQzNUNlN19QWlYwUU1pSzYyd1daUDdXQ3NwdURpSnF3SzhKWVAxbTdMYmRmZnFacml5RUh6MGhzX0NscEdkdHlfUW42c0xkSFRKS0N6dEFrMzRtcnFkU0YyLW8?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Neuralink brain implant helps man with ALS speak using his thoughts&nbsp;&nbsp;MobiHealthNews",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Ethical considerations for implantable human brain–computer interfaces - Nature",
-    "date": "2026-09-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE1OdlU3YnltOEduS1ZHWC1xMzdiWVhINWFJdmI2ZENYSDdSQnJTdHE1VnhHYjd0X3gySHhMdXRnWEJLVXAyaEpxeVVZdFdGSHNDZHRJcVJUSHNXV3lDd1N3?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Ethical considerations for implantable human brain–computer interfaces&nbsp;&nbsp;Nature",
     "category": "neurotechnology"
   },
   {
