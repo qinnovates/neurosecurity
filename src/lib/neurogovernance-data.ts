@@ -4,7 +4,7 @@
  */
 
 import registry from '@shared/qtara-registrar.json';
-import { HOURGLASS_BANDS } from './qif-constants';
+import { HOURGLASS_BANDS, NEURAL_BAND_REGIONS } from './qif-constants';
 
 const techniques = (registry as any).techniques ?? [];
 
@@ -77,21 +77,14 @@ const NEURORIGHT_DEFS: Record<string, { name: string; shortDef: string; source: 
 /** Map neurorights to QIF bands they primarily protect */
 const NEURORIGHT_BRAIN_MAP: Record<string, string[]> = {
   MP: ['N7', 'N6', 'N1'],           // thoughts + data linkage (absorbs IDA)
-  CL: ['N7', 'N6', 'N4'],           // cognition spans cortex, limbic, thalamic gating
+  CL: ['N7', 'N6', 'N4'],           // cognition spans cortex, limbic, thalamic relay
   MI: ['N7', 'N6', 'N5', 'N4', 'N3', 'N2', 'N1'], // integrity + dynamics + authenticity across all layers
   PC: ['N6', 'N7'],                  // identity rooted in limbic + cortex
 };
 
 /** QIF neural bands as brain regions — 1:1 with the hourglass model */
-const BRAIN_REGIONS: { id: string; name: string; description: string; bandIds: string[] }[] = [
-  { id: 'N7', name: 'Neocortex', description: 'PFC, M1, V1, Broca, Wernicke — executive function, language, movement, perception', bandIds: ['N7'] },
-  { id: 'N6', name: 'Limbic System', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception', bandIds: ['N6'] },
-  { id: 'N5', name: 'Basal Ganglia', description: 'Striatum, STN, substantia nigra — motor selection, reward, habit', bandIds: ['N5'] },
-  { id: 'N4', name: 'Diencephalon', description: 'Thalamus, hypothalamus — sensory gating, consciousness relay', bandIds: ['N4'] },
-  { id: 'N3', name: 'Cerebellum', description: 'Cerebellar cortex, deep nuclei — motor coordination, timing', bandIds: ['N3'] },
-  { id: 'N2', name: 'Brainstem', description: 'Medulla, pons, midbrain — vital functions, arousal, reflexes', bandIds: ['N2'] },
-  { id: 'N1', name: 'Spinal Cord', description: 'Cervical through sacral — reflexes, peripheral relay', bandIds: ['N1'] },
-];
+const BRAIN_REGIONS: { id: string; name: string; description: string; bandIds: string[] }[] =
+  NEURAL_BAND_REGIONS.map((region) => ({ ...region, bandIds: [region.id] }));
 
 /** Compute all neurogovernance data from the registrar */
 export function getNeurogovernanceData(): NeurogovernanceData {

@@ -85,9 +85,12 @@ describe('placement table validation', () => {
   });
 
   it('fails when an evidenced technique has no decision', () => {
+    const evidencedPlaced = techniques.find((technique) => (DEFAULT_EVIDENCE_STATUSES as readonly string[]).includes(technique.evidenceStatus) && technique.id in validPlacement.placements);
+    expect(evidencedPlaced, 'the catalog has at least one evidenced, placed technique').toBeDefined();
+    const id = evidencedPlaced!.id;
     const broken = cloneData(validPlacement);
-    delete broken.placements['QIF-T0049'];
-    expect(() => parsePlacementRules(broken, techniques)).toThrow(/QIF-T0049.*no placement decision/);
+    delete broken.placements[id];
+    expect(() => parsePlacementRules(broken, techniques)).toThrow(new RegExp(`${id}.*no placement decision`));
   });
 
   it('fails when a decision names a technique the catalog does not have', () => {

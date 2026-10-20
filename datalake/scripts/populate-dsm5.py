@@ -378,7 +378,7 @@ def populate_technique(technique: dict) -> dict:
 DSM5_SPEC = {
     "version": "1.1",
     "name": "DSM-5-TR Diagnostic Mapping via Neural Impact Chain",
-    "description": "Maps BCI techniques to DSM-5-TR diagnostic categories (ICD-10-CM chapter F codes) through the hourglass band model, for threat modeling purposes. These are diagnostic category references, not diagnostic claims. NISS is a separate score of technique impact (BI, CR, CD, CV, RV, NP); it does not predict diagnoses or diagnostic clusters.",
+    "description": "Maps BCI techniques to DSM-5-TR diagnostic categories (ICD-10-CM chapter F codes) through the hourglass band model, for threat modeling purposes. These are diagnostic category references, not diagnostic claims. NISS is a separate score of technique impact (BI, CR, CD, CV, RV, NP); it does not predict diagnoses or diagnostic clusters. A proposed, unvalidated mapping that requires clinical validation.",
     "methodology": "Band → Structure → Function → NISS (quantitative) + DSM (qualitative)",
     "positioning": "RDoC-aligned and BCI-specific category references to traditional nosology (DSM-5-TR), for threat modeling. NISS is not a bridge to diagnosis.",
     "cluster_note": "Each technique's tara.dsm5.cluster was assigned by datalake/scripts/populate-dsm5.py from band weights plus a NISS-vector bonus. It is a display grouping, not a prediction; whether NISS should remain an input is an open follow-up.",

@@ -27,7 +27,7 @@ interface Technique {
   status: string;
   description: string;
   bandsStr: string;
-  niss: { score: number; severity: string; vector: string };
+  niss: { score: number; severity: string; vector: string; scoring_state?: string; score_min?: number; score_max?: number };
   tara: { dual_use: string; clinical?: { therapeutic_analog: string } | null } | null;
 }
 
@@ -210,7 +210,7 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
 
         {/* Status pills */}
         <div className="flex gap-1 ml-2">
-          {(['CONFIRMED', 'DEMONSTRATED', 'THEORETICAL', 'EMERGING'] as const).map(s => (
+          {(['DEMONSTRATED', 'THEORETICAL', 'EMERGING', 'PLAUSIBLE'] as const).map(s => (
             <button
               key={s}
               onClick={() => setStatusFilter(statusFilter === s ? null : s)}
@@ -529,6 +529,11 @@ export default function ThreatMatrix({ techniques, categories, bands }: ThreatMa
                         color: SEV_BADGE[t.niss.severity]?.text ?? 'var(--color-text-faint)',
                       }}>
                         NISS {t.niss.score.toFixed(1)}
+                      </span>
+                    )}
+                    {t.niss.scoring_state === 'provisional' && t.niss.score_min !== undefined && t.niss.score_max !== undefined && (
+                      <span className="text-[10px] font-mono ml-auto" style={{ color: 'var(--color-text-faint)' }} title="Provisional range: a bound, not a score">
+                        NISS {t.niss.score_min.toFixed(1)}–{t.niss.score_max.toFixed(1)} provisional
                       </span>
                     )}
                   </div>

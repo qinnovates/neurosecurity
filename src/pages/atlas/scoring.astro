@@ -24,7 +24,7 @@ if (!nsv2Example) {
 }
 
 // NISS v2.0 Extension Metrics (6 metrics that extend CVSS v4.0)
-// Reconciled: equal weights (1.0 all), context profiles available separately
+// Default weights follow niss_spec in the registrar: CR and CD 0.5 each, the other four 1.0. Context profiles are separate.
 const extensionMetrics = [
   {
     id: 'BI', name: 'Biological Impact', weight: 1.0,
@@ -37,17 +37,17 @@ const extensionMetrics = [
     ],
   },
   {
-    id: 'CR', name: 'Cognitive Reconnaissance', weight: 1.0,
-    description: 'Read-side attacks: impact from neural data inference, thought decoding, and intent extraction. CVSS has no concept of thought privacy. CR captures the passive reading of cognitive state without the subject\'s knowledge.',
+    id: 'CR', name: 'Cognitive Reconnaissance', weight: 0.5,
+    description: 'Read-side attacks: impact from neural data inference, decoding of speech or motor intent by models trained on a cooperating user, and intent extraction. CVSS has no concept of neural data privacy. CR captures the passive reading of cognitive state without the subject\'s knowledge.',
     values: [
       { code: 'N', label: 'None', score: '0.0', description: 'No cognitive read impact.' },
       { code: 'L', label: 'Low', score: '3.3', description: 'Partial intent or emotional state inferred from neural signals.' },
-      { code: 'H', label: 'High', score: '6.7', description: 'Full thought decoding, identity inference, or detailed cognitive state extraction.' },
-      { code: 'C', label: 'Critical', score: '10.0', description: 'Complete cognitive surveillance: real-time thought stream, memory extraction, or subconscious state decoding.' },
+      { code: 'H', label: 'High', score: '6.7', description: 'Reliable decoding of speech or motor intent by a model trained on the user, identity inference, or detailed cognitive state inference.' },
+      { code: 'C', label: 'Critical', score: '10.0', description: 'Hypothetical ceiling: continuous, unrestricted decoding of cognitive state. Not a demonstrated capability; current decoders are trained on a cooperating user for a specific task.' },
     ],
   },
   {
-    id: 'CD', name: 'Cognitive/Functional Disruption', weight: 1.0,
+    id: 'CD', name: 'Cognitive/Functional Disruption', weight: 0.5,
     description: 'Write-side attacks: impact on perception, decision-making, identity, cognitive autonomy, motor output, and autonomic regulation. CD captures active manipulation of cognitive or functional state, from minor perceptual distortion to full identity modification.',
     values: [
       { code: 'N', label: 'None', score: '0.0', description: 'No cognitive write impact.' },
@@ -251,11 +251,11 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         <div class="grid gap-4 sm:grid-cols-2">
           {[
             { gap: 'No biological impact metric', detail: 'CVSS cannot distinguish between a server crash and a seizure. NISS adds Biological Impact (BI) with 4 severity levels.' },
-            { gap: 'No cognitive impact metrics', detail: 'CVSS has no concept of thought privacy or perception manipulation. NISS adds Cognitive Reconnaissance (CR) for read-side attacks and Cognitive/Functional Disruption (CD) for write-side attacks, each with 4 severity levels.' },
+            { gap: 'No cognitive impact metrics', detail: 'CVSS has no concept of neural data privacy or perception manipulation. NISS adds Cognitive Reconnaissance (CR) for read-side attacks and Cognitive/Functional Disruption (CD) for write-side attacks, each with 4 severity levels.' },
             { gap: 'No consent model', detail: 'CVSS does not model informed consent or cognitive liberty. NISS adds Consent Violation (CV) — ordered by detectability, with covert violations ranked highest.' },
             { gap: 'No reversibility dimension', detail: 'IT assets restore from backup. Neural tissue cannot. NISS adds Reversibility (RV) with 4 levels from Full to Irreversible.' },
             { gap: 'No neuroplasticity tracking', detail: 'Prolonged adversarial stimulation physically rewires the brain. NISS adds Neuroplasticity (NP) — None, Temporary, Partial, or Structural.' },
-            { gap: 'Context-blind scoring', detail: 'CVSS uses one set of weights. NISS provides equal-weight defaults plus context profiles (Clinical, Research, Consumer, Military) that shift priorities by deployment context.' },
+            { gap: 'Context-blind scoring', detail: 'CVSS uses one set of weights. NISS provides default weights (CR and CD at 0.5 each, the other four at 1.0) plus context profiles (Clinical, Research, Consumer, Military) that shift priorities by deployment context.' },
           ].map(item => (
             <div class="glass rounded-xl p-5">
               <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)] mb-2">{item.gap}</h3>
@@ -326,16 +326,16 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Scoring Formula</h2>
         <div class="glass rounded-xl p-8 text-center mb-6">
           <p class="text-lg font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)] mb-4">
-            NISS = (BI + CR + CD + CV + RV + NP) / 6
+            NISS = (BI + 0.5&times;CR + 0.5&times;CD + CV + RV + NP) / 5
           </p>
           <p class="text-sm text-[var(--color-text-faint)]">
-            Score range: 0.0 – 10.0 &ensp;|&ensp; Equal weights (default) &ensp;|&ensp; Context profiles available
+            Score range: 0.0 – 10.0 &ensp;|&ensp; Default weights: CR and CD 0.5, others 1.0 &ensp;|&ensp; Rounded up to one decimal &ensp;|&ensp; Context profiles available
           </p>
         </div>
 
         <div class="prose mb-6">
           <p>
-            The default formula uses <strong>equal weights</strong> for all six metrics — each dimension contributes equally to the composite score. This follows the same principle as CVSS v4.0 base scoring: no a priori bias toward any impact dimension. Organizations can apply <strong>context profiles</strong> that shift weights based on deployment context (see below).
+            The default formula weights BI, CV, RV and NP at 1.0 and <strong>CR and CD at 0.5 each</strong>, so the two cognitive metrics together carry the weight of one dimension (20% of the score). The severity label is read from the score with the bands below. Organizations can apply <strong>context profiles</strong> that shift weights based on deployment context (see below).
           </p>
         </div>
 
@@ -404,10 +404,17 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Coverage &amp; Known Gaps</h2>
         <div class="prose mb-6">
           <p>
-            {coverage.scored} of {coverage.total} cataloged techniques carry a NISS vector.
-            The remaining {unscoredCount} are listed in the catalog but are not scored.
-            They are published unscored rather than estimated.
+            {scoringGaps.unscored_techniques.summary.scored} of {scoringGaps.unscored_techniques.summary.total_techniques} catalogued techniques carry a NISS vector and score.
+            {scoringGaps.unscored_techniques.summary.provisional} carry a provisional range: only some of their six metrics are supported by a source, so the entry stores those values and the lowest and highest score the formula allows for the rest. A range is a bound, not an estimate, and no score is stored.
+            The remaining {scoringGaps.unscored_techniques.summary.unscored} are unscored
+            ({Object.entries(scoringGaps.unscored_techniques.summary.by_unscored_reason).map(([reason, count]) => `${count} ${reason.replaceAll('_', ' ')}`).join(', ')}).
+            They are published that way rather than estimated.
           </p>
+          <ul>
+            {Object.entries(scoringGaps.unscored_techniques.scoring_states).map(([state, meaning]) => (
+              <li><strong>{state}</strong>: {meaning}</li>
+            ))}
+          </ul>
           <p>{scoringGaps.unscored_techniques.why_unscored}</p>
         </div>
 
@@ -595,13 +602,14 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         <div class="glass rounded-xl p-6 mb-6">
           <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Impact Chain</h3>
           <div class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-text-muted)] space-y-1">
-            <p>TARA Technique (e.g., QIF-T0045: Sensory Channel Injection)</p>
-            <p class="pl-4">&#8594; Targets band N3 (Brainstem) + N4 (Thalamus)</p>
-            <p class="pl-8">&#8594; Disrupts vestibular pathway + auditory pathway</p>
-            <p class="pl-12">&#8594; Causes vertigo (H81.x), tinnitus (H93.1)</p>
+            <p>TARA Technique (e.g., QIF-T0111: GVS motion illusion injection)</p>
+            <p class="pl-4">&#8594; Targets band N2 (Brainstem) + N4 (Thalamus)</p>
+            <p class="pl-8">&#8594; Disrupts vestibular pathway</p>
+            <p class="pl-12">&#8594; Associated with vertigo (H81.x)</p>
             <p class="pl-16">&#8594; NISS: BI:L, CD:H, RV:T, NP:T</p>
-            <p class="pl-20">&#8594; ICD-10-CM: H81.x, H93.1</p>
+            <p class="pl-20">&#8594; ICD-10-CM: H81.x</p>
           </div>
+          <p class="text-[11px] text-[var(--color-text-faint)] mt-3">An association by shared band for threat modeling, not a demonstrated neural path.</p>
         </div>
 
         <div class="glass rounded-xl p-6 mb-6">
@@ -618,11 +626,11 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
               <tbody>
                 {[
                   { band: 'N7', region: 'Neocortex', conditions: 'Cortical blindness, expressive/receptive aphasia, alexia, central pain' },
-                  { band: 'N6', region: 'Limbic', conditions: 'Altered sensorium, emotional dysregulation, autonomic conditions' },
-                  { band: 'N5', region: 'Basal Ganglia', conditions: 'Tremor, dystonia, bradykinesia, dyskinesia, chorea' },
+                  { band: 'N6', region: 'Allocortex', conditions: 'Altered sensorium, emotional dysregulation, autonomic conditions' },
+                  { band: 'N5', region: 'Cerebral nuclei', conditions: 'Tremor, dystonia, bradykinesia, dyskinesia, chorea' },
                   { band: 'N4', region: 'Thalamus', conditions: 'Tinnitus, paresthesia, central pain syndrome' },
-                  { band: 'N3', region: 'Brainstem', conditions: 'Vertigo, nystagmus, dysarthria, cardiac arrhythmia, syncope' },
-                  { band: 'N2', region: 'Cerebellum', conditions: 'Ataxia, intention tremor, dysmetria' },
+                  { band: 'N3', region: 'Cerebellum', conditions: 'Ataxia, intention tremor, dysmetria' },
+                  { band: 'N2', region: 'Brainstem', conditions: 'Vertigo, nystagmus, dysarthria, cardiac arrhythmia, syncope' },
                   { band: 'N1', region: 'Spinal Cord', conditions: 'Spasticity, hyperreflexia, areflexia, neurogenic bladder' },
                   { band: 'I0', region: 'Interface', conditions: 'All conditions (hardware-biology boundary)' },
                 ].map(b => (

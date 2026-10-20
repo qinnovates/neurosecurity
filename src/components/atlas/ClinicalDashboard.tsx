@@ -436,7 +436,7 @@ function TechniquesZoom({ data, onSelect, onSkip }: {
       </div>
 
       <div className="text-[10px] mb-3" style={{ color: 'var(--color-text-faint)' }}>
-        {techniques.length} technique{techniques.length !== 1 ? 's' : ''} | Select one to trace its full neural impact chain
+        {techniques.length} technique{techniques.length !== 1 ? 's' : ''} | Select one to view its neural impact chain (associations by shared band)
       </div>
 
       {/* Technique grid */}

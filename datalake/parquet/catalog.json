@@ -1,16 +1,16 @@
 {
   "_meta": {
-    "generated": "2026-10-20T03:39:25.305182+00:00",
+    "generated": "2026-10-20T07:42:14.775795+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
-    "total_datasets": 39,
-    "total_rows": 24416
+    "total_datasets": 41,
+    "total_rows": 24490
   },
   "datasets": {
     "techniques": {
-      "rows": 176,
-      "columns": 29,
+      "rows": 178,
+      "columns": 35,
       "column_names": [
         "id",
         "name",
@@ -22,9 +22,15 @@
         "bands",
         "ui_category",
         "dual_use",
+        "peer_review_status",
+        "defensive_sources",
         "niss_score",
         "niss_vector",
         "niss_severity",
+        "niss_scoring_state",
+        "niss_score_min",
+        "niss_score_max",
+        "niss_unscored_reason",
         "niss_bi",
         "niss_cr",
         "niss_cd",
@@ -42,10 +48,38 @@
         "consent_tier",
         "notes"
       ],
-      "size_bytes": 45648,
-      "sha256": "d08f181527dc92b0d3811e389994f9475694c317ce1293cea49960b570c836b8",
+      "size_bytes": 51689,
+      "sha256": "0cfdb2348693ff29ed5c19e65bcb642b24fdc5c58a1ece9bbf798431534158fe",
       "compression": "zstd",
       "source": "datalake/parquet/techniques.parquet"
+    },
+    "variants": {
+      "rows": 1,
+      "columns": 18,
+      "column_names": [
+        "id",
+        "alias",
+        "name",
+        "parent",
+        "parent_name",
+        "differs_in",
+        "inherits_niss",
+        "status",
+        "peer_review_status",
+        "niss_scoring_state",
+        "niss_unscored_reason",
+        "niss_inherited_from",
+        "description",
+        "conditions",
+        "sources",
+        "defensive_sources",
+        "related_ids",
+        "notes"
+      ],
+      "size_bytes": 13001,
+      "sha256": "54eadc5b0219a51e3aa1cc4808e23ac0ad36a973ed509988018139ec8e720720",
+      "compression": "zstd",
+      "source": "datalake/parquet/variants.parquet"
     },
     "technique_dsm": {
       "rows": 890,
@@ -63,14 +97,14 @@
       "source": "datalake/parquet/technique_dsm.parquet"
     },
     "technique_neurorights": {
-      "rows": 468,
+      "rows": 470,
       "columns": 2,
       "column_names": [
         "technique_id",
         "right_code"
       ],
-      "size_bytes": 1410,
-      "sha256": "ef0ea95c8cceb791c6a01e323103e42b26359c8b219195949dfa6960042112b1",
+      "size_bytes": 1411,
+      "sha256": "4c81628b7c09b331f7395a428fe20839648d759ed4501d1f291fce0592823556",
       "compression": "zstd",
       "source": "datalake/parquet/technique_neurorights.parquet"
     },
@@ -94,8 +128,8 @@
         "dsm_name",
         "dsm_cluster"
       ],
-      "size_bytes": 23007,
-      "sha256": "9f9ebb930554d106777f04608da257bcc273c9cb565b7927fa4f32ba81240566",
+      "size_bytes": 23009,
+      "sha256": "ee69a29d425cf367136b3a5fa54acdc783409f940fd01dacef5062534e1dd2ef",
       "compression": "zstd",
       "source": "datalake/parquet/impact_chains.parquet"
     },
@@ -152,8 +186,8 @@
         "bci_relevance_detail",
         "clinical_notes"
       ],
-      "size_bytes": 63615,
-      "sha256": "6b45a22c741c0db0b68476737c494520c360001bc7c9d5157fac1ffe95162538",
+      "size_bytes": 63925,
+      "sha256": "9d8c8949eae409fd20bcc50ab443ce076caf28e8799c672fcb44c06d66952b3d",
       "compression": "zstd",
       "source": "datalake/parquet/brain_regions.parquet"
     },
@@ -169,13 +203,13 @@
         "severity_if_compromised",
         "description"
       ],
-      "size_bytes": 3921,
-      "sha256": "b2328b97305f5c393a5ecbbbb5343c6cc0007a614d487f684520fb70a96637b4",
+      "size_bytes": 3965,
+      "sha256": "8148971623dde60e5c28ec128d75026689f369a54833bb9b0221240e1d668e8c",
       "compression": "zstd",
       "source": "datalake/parquet/hourglass_bands.parquet"
     },
     "companies": {
-      "rows": 67,
+      "rows": 68,
       "columns": 15,
       "column_names": [
         "name",
@@ -194,13 +228,13 @@
         "company_category",
         "device_count"
       ],
-      "size_bytes": 16219,
-      "sha256": "834416cb0d95987f4789f48b0214ddec1254dc4b3b0a212e9f00d11cecd5266d",
+      "size_bytes": 17474,
+      "sha256": "fb9725748098aa39f9b337ba027976031ba62ee4e2b88bc2416f2a39096aa558",
       "compression": "zstd",
       "source": "datalake/parquet/companies.parquet"
     },
     "devices": {
-      "rows": 70,
+      "rows": 71,
       "columns": 10,
       "column_names": [
         "name",
@@ -214,8 +248,8 @@
         "target_use",
         "company"
       ],
-      "size_bytes": 6653,
-      "sha256": "18f8b13bdefa7a6472f86642d940bd9babd3ff2bd28edebba19b502bb2012fd2",
+      "size_bytes": 6774,
+      "sha256": "637d918d57e4745e7a2e0f1addd796872b594c3c29445f8beb7dfebb6ca17d1c",
       "compression": "zstd",
       "source": "datalake/parquet/devices.parquet"
     },
@@ -241,8 +275,8 @@
         "therapeutic_applications",
         "confidence"
       ],
-      "size_bytes": 18788,
-      "sha256": "5f3f8cec6286f49e328a26d9cbe1fba71ec05463a2754240c52284422ba7e0df",
+      "size_bytes": 19106,
+      "sha256": "b6486066159d83eb14813eadf4fdb3194087ef857e1ec3c708fd34e08178e68f",
       "compression": "zstd",
       "source": "datalake/parquet/neural_pathways.parquet"
     },
@@ -393,8 +427,8 @@
         "disruption_effects",
         "confidence"
       ],
-      "size_bytes": 33939,
-      "sha256": "a7d433e18dae54d4b32160070627b9c060d9c1bfad1993c2cd733b86335f3d97",
+      "size_bytes": 34238,
+      "sha256": "48a712c0db8cc02b7de3f416d7af2d1c0c953ef343c5918c21d143aa02449909",
       "compression": "zstd",
       "source": "datalake/parquet/neuroendocrine.parquet"
     },
@@ -488,8 +522,8 @@
         "verification",
         "note"
       ],
-      "size_bytes": 24208,
-      "sha256": "27abcc93fbb547afbf0419043a77a54b2d2179148fb700a8ac013d8dc740525c",
+      "size_bytes": 24785,
+      "sha256": "1990f4a79d55644b43e1a4f197c4b8c4ca81e09d36a62f2db5b6489bed159026",
       "compression": "zstd",
       "source": "datalake/parquet/cve_mappings.parquet"
     },
@@ -501,8 +535,8 @@
         "controls_by_band",
         "nsp_layers"
       ],
-      "size_bytes": 18500,
-      "sha256": "d54c46c5cc10dfb699f97c6415079fe95bff09a081c0c2aa8fb28ad3680dbf2b",
+      "size_bytes": 19396,
+      "sha256": "ea9328bbda034fb0e2bf9e80b5856e219b3d0da906764162afbbfa006b740b37",
       "compression": "zstd",
       "source": "datalake/parquet/security_controls.parquet"
     },
@@ -531,8 +565,8 @@
         "neuroethics",
         "neurosecurity"
       ],
-      "size_bytes": 7496,
-      "sha256": "23e772af936a7b74738a905ac6c9ae7c2d8cc6aabe9991bfd8937c8589427bea",
+      "size_bytes": 7514,
+      "sha256": "85b3ff1855ad158793c5997851021eefe42337d8e3c7fa31895e2d707374a372",
       "compression": "zstd",
       "source": "datalake/parquet/guardrails.parquet"
     },
@@ -678,6 +712,24 @@
       "compression": "zstd",
       "source": "datalake/parquet/eeg_samples.parquet"
     },
+    "hazards": {
+      "rows": 33,
+      "columns": 8,
+      "column_names": [
+        "id",
+        "name",
+        "description",
+        "bands",
+        "related_techniques",
+        "sources",
+        "peer_review_status",
+        "status"
+      ],
+      "size_bytes": 14869,
+      "sha256": "19921e4752a071eba4c8789f8058c584004bd46454767be0bbc03b41dc3eaf23",
+      "compression": "zstd",
+      "source": "datalake/parquet/hazards.parquet"
+    },
     "intake_ledger": {
       "rows": 237,
       "columns": 12,
@@ -701,7 +753,7 @@
       "source": "datalake/parquet/intake_ledger.parquet"
     },
     "intel_feed": {
-      "rows": 1032,
+      "rows": 1066,
       "columns": 10,
       "column_names": [
         "id",
@@ -715,8 +767,8 @@
         "companies",
         "fetched"
       ],
-      "size_bytes": 202026,
-      "sha256": "706c15f94b5133fabc6e7457a1b6f6dcee71f7018aea4a741145b16c998dfd5d",
+      "size_bytes": 208307,
+      "sha256": "e576dfd85234ea1bfeca40f642a7dc6a3bff7b70b99a017d35594bd6ba21d42b",
       "compression": "zstd",
       "source": "datalake/parquet/intel_feed.parquet"
     },
@@ -746,8 +798,8 @@
         "current_stats",
         "milestones"
       ],
-      "size_bytes": 13371,
-      "sha256": "12ac72fd4472a546d6073b8719faf15e21eaa21e38a34b887126286fcd11a2e3",
+      "size_bytes": 13617,
+      "sha256": "6193b1d3fb52463ca10b29163e63be11d310acff94825c8bfed377244df96139",
       "compression": "zstd",
       "source": "datalake/parquet/timeline.parquet"
     },
@@ -937,7 +989,7 @@
         "reviewed_term_count"
       ],
       "size_bytes": 11190,
-      "sha256": "fab162ba63081d83f4ab656943962fbf72dfb6ea1f9a5ca9c0a5b147b10d731d",
+      "sha256": "d6028bbb860c913a3d3b3a04f797f83353d1d4a83327253974059a03c31f606c",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_technique_term_summary.parquet"
     }

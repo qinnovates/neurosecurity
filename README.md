@@ -27,16 +27,16 @@ QIF, TARA and NISS help builders and defenders start a neural-device threat mode
 
 ![Open datalake inventory](src/site/images/datalake-corpus.svg)
 
-**21,467 records inventoried below, from 28 of the 39 datasets in [`datalake/`](datalake/).** 20,182 neural impact chains · 176 proposed techniques · 24 BCI devices specced · 67 companies tracked · 107 CVEs mapped · 221 unique DOIs cited.
+**21,471 records inventoried below, from 28 of the 40 datasets in [`datalake/`](datalake/).** 20,182 neural impact chains · 178 proposed techniques · 24 BCI devices specced · 68 companies tracked · 107 CVEs mapped · 257 unique DOIs cited.
 
-Counted from the files themselves on 2026-10-18. Re-run `npm run datalake:inventory` and every figure on this page moves with the data; `npm run datalake:inventory:check` fails the build if it has drifted.
+Counted from the files themselves on 2026-10-20. Re-run `npm run datalake:inventory` and every figure on this page moves with the data; `npm run datalake:inventory:check` fails the build if it has drifted.
 
 ### Threat model
 
 | Inventory | Count | Derived from |
 |---|---:|---|
 | Neural impact chains <sub>technique x brain region x QIF band permutations</sub> | **20,182** | [`datalake/impact-chains.json`](datalake/impact-chains.json) |
-| TARA techniques | **176** | [`datalake/qtara-registrar.json`](datalake/qtara-registrar.json) |
+| TARA techniques | **178** | [`datalake/qtara-registrar.json`](datalake/qtara-registrar.json) |
 | CVE to technique mappings | **107** | [`datalake/cve-technique-mapping.json`](datalake/cve-technique-mapping.json) |
 | QIF hazards | **33** | [`datalake/qif-hazards.json`](datalake/qif-hazards.json) |
 | Severity anchors | **25** | [`datalake/severity-anchors.json`](datalake/severity-anchors.json) |
@@ -70,8 +70,8 @@ Counted from the files themselves on 2026-10-18. Re-run `npm run datalake:invent
 
 | Inventory | Count | Derived from |
 |---|---:|---|
-| BCI companies tracked | **67** | [`datalake/bci-landscape.json`](datalake/bci-landscape.json) |
-| Policy timeline entries | **26** | [`datalake/bci-landscape.json`](datalake/bci-landscape.json) |
+| BCI companies tracked | **68** | [`datalake/bci-landscape.json`](datalake/bci-landscape.json) |
+| Policy timeline entries | **27** | [`datalake/bci-landscape.json`](datalake/bci-landscape.json) |
 | Industry timeline entries | **25** | [`datalake/bci-landscape.json`](datalake/bci-landscape.json) |
 | BCI devices with hardware specs <sub>implant, DBS, cochlear and consumer EEG classes</sub> | **24** | [`src/site/bci-hardware-inventory.json`](src/site/bci-hardware-inventory.json) |
 | Devices scored (proposed NISS) | **22** | [`datalake/neurosecurity-scores.json`](datalake/neurosecurity-scores.json) |
@@ -94,9 +94,9 @@ Counted from the files themselves on 2026-10-18. Re-run `npm run datalake:invent
 
 ![Evidence and feasibility profile](src/site/images/evidence-profile.svg)
 
-- **78 of 176 techniques** rest on a lab or case demonstration in the published literature (63 lab, 15 case). The remaining 98 are modelled, proposed or speculative.
-- Hardware that exists today would suffice for **100 of them**; 37 are software or network attacks that physics does not constrain at all.
-- **107 CVEs** are mapped to 27 of 176 techniques (15.3%). Mapping is ongoing — [contributions welcome](#collaboration).
+- **61 of 178 techniques** rest on a lab or case demonstration in the published literature (46 lab, 15 case). The remaining 117 are modelled, proposed or speculative.
+- Hardware that exists today would suffice for **102 of them**; 37 are software or network attacks that physics does not constrain at all.
+- **107 CVEs** are mapped to 27 of 178 techniques (15.2%). Mapping is ongoing — [contributions welcome](#collaboration).
 
 These splits are published here rather than buried, because anyone can compute them from the JSON in a minute, and a catalogue that hides its theoretical share is not worth scoring against.
 
@@ -173,6 +173,12 @@ Neuroethics has two hemispheres (Roskies, 2002): the *ethics of neuroscience* go
 | **Method** | Engineering | Research + philosophy |
 | **Output** | Tools, protocols, detections | Principles, rights, governance |
 | **In this repo** | TARA, NISS, NSP, Neurowall, QIF Model | Governance, neurorights, dual-use insight |
+
+Neuroethics is not a review step bolted on at the end here. That ordering follows the NIH BRAIN Initiative's neuroethics program, which argues neuroethics should run concurrently with the development of neurotechnology rather than being applied after the fact ([Ramos, Rommelfanger, Greely & Koroshetz, 2017](https://doi.org/10.1080/23299460.2017.1319035)), and runs it through four standing activities: a Neuroethics Working Group, funded neuroethics research, scanning of the research portfolio for the ethical questions it raises, and workshops on neuroethics topics ([Bianchi et al., 2018](https://doi.org/10.1523/JNEUROSCI.2091-18.2018); [Ramos et al., 2019](https://doi.org/10.1016/j.neuron.2019.01.024); [NIH BRAIN Initiative, Neuroethics](https://www.nih.gov/brain/research/neuroethics)).
+
+QIF has none of those four. It is one researcher's framework with no funding, no advisory group and no ethics review. The guardrails it holds itself to are self-imposed, which is the weakness, and the comparison is here to name the standard rather than to claim it. The gap is set out in [Neurosecurity Governance §4](governance/policy/NEUROSECURITY_GOVERNANCE.md#institutional-models-the-nih-brain-initiative-neuroethics-program). **No affiliation:** the NIH, the BRAIN Initiative and its Neuroethics Working Group have not reviewed, endorsed or funded any part of this project.
+
+---
 
 ## Repository
 
@@ -314,7 +320,7 @@ A proposed CVSS v4.0 extension for neural interfaces. Six metrics that CVSS cann
 | Metric | Code | What It Measures |
 |--------|------|-----------------|
 | Biological Impact | BI | Tissue damage, neural pathway disruption |
-| Cognitive Reconnaissance | CR | Thought decoding, neural data inference |
+| Cognitive Reconnaissance | CR | Decoding of speech or motor intent by models trained on a cooperating user, neural data inference |
 | Cognitive Disruption | CD | Perception manipulation, cognitive coercion |
 | Consent Violation | CV | Whether the subject knew and agreed |
 | Reversibility | RV | Can the damage be undone? |

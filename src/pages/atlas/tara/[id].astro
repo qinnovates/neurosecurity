@@ -11,11 +11,12 @@ import NissRadarChart from '../../../components/niss/NissRadarChart';
 import PinsBadge from '../../../components/niss/PinsBadge';
 import NissContextNotes from '../../../components/niss/NissContextNotes.astro';
 import DriftBadge from '../../../components/tara/DriftBadge';
-import { THREAT_VECTORS, SEVERITY_COLORS, getChildTechniques } from '@/lib/threat-data';
+import { THREAT_VECTORS, SEVERITY_COLORS, getChildTechniques, NISS_UNSCORED_REASON_LABELS, formatNissScore, getVariantsForTechnique, VARIANT_DIMENSIONS, VARIANT_UNSCORED_REASON_LABELS } from '@/lib/threat-data';
 import { parseNiss } from '@/lib/niss-parser';
 import { getValidationForTechnique, TIER_COLORS, STATUS_LABELS, STATUS_COLORS, VALIDATION_TIERS } from '@/lib/validation-data';
 import type { ValidationTierId } from '@/lib/validation-data';
 import type { BrainView, BrainViewRegion } from '@/lib/brain-view-data';
+import { NEURAL_BAND_REGIONS } from '@/lib/qif-constants';
 
 export function getStaticPaths() {
   return THREAT_VECTORS.map((threat) => ({
@@ -29,17 +30,11 @@ const severityColor = SEVERITY_COLORS[threat.severity] || SEVERITY_COLORS.low;
 const validation = getValidationForTechnique(threat.id);
 const parent = threat.parentId ? THREAT_VECTORS.find(t => t.id === threat.parentId) ?? null : null;
 const children = getChildTechniques(threat.id);
+const variants = getVariantsForTechnique(threat.id);
+const techniqueIds = new Set(THREAT_VECTORS.map(t => t.id));
 
 // --- Build the band list for this technique: which bands the catalog lists for it ---
-const BRAIN_REGIONS = [
-  { id: 'N7', name: 'Neocortex', description: 'PFC, M1, V1, Broca, Wernicke — executive function, language, movement, perception' },
-  { id: 'N6', name: 'Limbic System', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception' },
-  { id: 'N5', name: 'Basal Ganglia', description: 'Striatum, STN, substantia nigra — motor selection, reward, habit' },
-  { id: 'N4', name: 'Diencephalon', description: 'Thalamus, hypothalamus — sensory gating, consciousness relay' },
-  { id: 'N3', name: 'Cerebellum', description: 'Cerebellar cortex, deep nuclei — motor coordination, timing' },
-  { id: 'N2', name: 'Brainstem', description: 'Medulla, pons, midbrain — vital functions, arousal, reflexes' },
-  { id: 'N1', name: 'Spinal Cord', description: 'Cervical through sacral — reflexes, peripheral relay' },
-] as const;
+const BRAIN_REGIONS = NEURAL_BAND_REGIONS;
 
 const SEVERITY_ACCENT: Record<string, string> = {
   critical: '#ef4444', high: '#f59e0b', medium: '#eab308', low: '#94a3b8',
@@ -106,6 +101,13 @@ function crbSeverityColor(sev: string): string {
 }
 
 const nissBase = threat.niss?.score ?? 0;
+const nissState = threat.niss.scoring_state;
+const nissSupportedMetrics = Object.entries(threat.niss.metrics ?? {}).filter(([, value]) => value !== 'unknown');
+const nissSummary = nissState === 'scored'
+  ? `NISS score: ${nissBase}/10.`
+  : nissState === 'provisional'
+    ? `NISS provisional range: ${formatNissScore(threat.niss)} (not a score).`
+    : 'NISS: unscored.';
 let nissVector = null;
 try {
   if (threat.niss?.vector) nissVector = parseNiss(threat.niss.vector);
@@ -136,7 +138,7 @@ const hasGovernance = nr || reg;
 
 <PageLayout
   title={`${threat.id}: ${threat.name} — BCI Attack Technique`}
-  description={`${threat.description ?? threat.name} Severity: ${threat.severity}. ${threat.nissScored ? `NISS score: ${nissBase}/10.` : 'NISS: not yet scored.'} Domains: ${threat.bands?.join(', ') || 'N/A'}. Part of the TARA threat catalog for brain-computer interface security.`}
+  description={`${threat.description ?? threat.name} Severity: ${threat.severity}. ${nissSummary} Domains: ${threat.bands?.join(', ') || 'N/A'}. Part of the TARA threat catalog for brain-computer interface security.`}
   breadcrumbs={[
     { label: 'Atlas', href: '/atlas/' },
     { label: 'TARA', href: '/atlas/tara/' },
@@ -168,8 +170,9 @@ const hasGovernance = nr || reg;
       <span
         class="px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wider border"
         style={`background:${severityColor.bg}; color:${severityColor.text}; border-color:${severityColor.border}`}
+        title="Editorial label assigned when the entry was filed. It is not derived from the NISS score; rank by the NISS severity under Scoring."
       >
-        {threat.severity}
+        Filed severity: {threat.severity}
       </span>
       <DriftBadge client:load drift={threat.tara_drift ?? null} driftWindow={threat.tara_drift_window ?? null} />
     </div>
@@ -246,6 +249,73 @@ const hasGovernance = nr || reg;
             </p>
           )}
         </div>
+
+        <!-- Variants -->
+        {variants.length > 0 && (
+          <div id="variants" class="glass rounded-xl p-6 border-l-4 mb-6" style="border-left-color: var(--color-accent-secondary);">
+            <h3 class="text-lg font-bold text-[var(--color-text-primary)] mb-1">Variants</h3>
+            <p class="text-xs text-[var(--color-text-faint)] mb-4">
+              A variant has the same mechanism, tactic and harm as this technique and differs in one named dimension.
+              Variants are counted apart from techniques. See <a href="/atlas/tara/numbering/#variants" class="text-[var(--color-accent-primary)] hover:underline">how variant IDs work</a>.
+            </p>
+            <div class="space-y-5">
+              {variants.map((variant) => (
+                <div id={variant.id} class="pt-4 border-t border-[var(--color-border)] first:border-t-0 first:pt-0">
+                  <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1">
+                    <span class="font-mono text-sm font-bold" style="color: var(--color-accent-secondary);">{variant.id}</span>
+                    <span class="font-mono text-xs text-[var(--color-text-faint)]">{variant.alias}</span>
+                  </div>
+                  <p class="text-sm font-medium text-[var(--color-text-primary)] mb-2">{variant.name}</p>
+                  <p class="text-sm text-[var(--color-text-muted)] mb-3">{variant.description}</p>
+                  <dl class="text-sm space-y-2">
+                    <div class="flex justify-between gap-4">
+                      <dt class="text-[var(--color-text-muted)]">Differs in</dt>
+                      <dd class="text-right">{variant.differsIn.replace(/_/g, ' ')} <span class="font-mono text-xs text-[var(--color-text-faint)]">({VARIANT_DIMENSIONS[variant.differsIn]?.code})</span></dd>
+                    </div>
+                    <div class="flex justify-between gap-4">
+                      <dt class="text-[var(--color-text-muted)]">Status</dt>
+                      <dd>{variant.status}</dd>
+                    </div>
+                    <div class="flex justify-between gap-4">
+                      <dt class="text-[var(--color-text-muted)]">Sources</dt>
+                      <dd class="text-right">{variant.peerReviewStatus === 'peer_reviewed' ? 'Peer-reviewed' : variant.peerReviewStatus === 'preprint' ? 'Preprint only' : 'None'}</dd>
+                    </div>
+                    <div class="flex justify-between gap-4">
+                      <dt class="text-[var(--color-text-muted)]">NISS</dt>
+                      <dd class="text-right">
+                        {variant.inheritsNiss
+                          ? `Vector inherited from ${variant.parent}`
+                          : `Not scored. ${variant.niss.unscored_reason ? VARIANT_UNSCORED_REASON_LABELS[variant.niss.unscored_reason] : ''}`}
+                      </dd>
+                    </div>
+                  </dl>
+                  {variant.conditions.length > 0 && (
+                    <div class="mt-3">
+                      <h4 class="text-xs font-bold uppercase text-[var(--color-text-faint)] mb-1">Applies when</h4>
+                      <ul class="text-sm list-disc pl-4 text-[var(--color-text-muted)]">
+                        {variant.conditions.map(condition => <li>{condition}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                  {variant.relatedIds.length > 0 && (
+                    <p class="text-xs text-[var(--color-text-muted)] mt-3">
+                      Related:{' '}
+                      {variant.relatedIds.map((relatedId, index) => (
+                        <>
+                          {index > 0 && ', '}
+                          {techniqueIds.has(relatedId)
+                            ? <a href={`/atlas/tara/${relatedId}/`} class="font-mono text-[var(--color-accent-primary)] hover:underline">{relatedId}</a>
+                            : <span class="font-mono">{relatedId}</span>}
+                        </>
+                      ))}
+                    </p>
+                  )}
+                  {variant.notes && <p class="text-xs text-[var(--color-text-faint)] mt-3">{variant.notes}</p>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <!-- Dual Use Section -->
         {threat.tara && (
@@ -354,7 +424,25 @@ const hasGovernance = nr || reg;
           <div class="text-sm space-y-2">
              <div>
                <span class="text-[var(--color-text-muted)] block text-xs">NISS v1.1</span>
-               <code class="text-xs break-all">{threat.niss.vector}</code>
+               {nissState === 'scored' && <code class="text-xs break-all">{threat.niss.vector}</code>}
+               {nissState === 'provisional' && (
+                 <div class="text-xs text-[var(--color-text-muted)] space-y-1">
+                   <p>
+                     <span class="font-mono font-bold text-[var(--color-text-primary)]">Provisional range {formatNissScore(threat.niss)}</span>.
+                     A bound, not a score: {nissSupportedMetrics.length} of 6 metrics are supported by this entry's sources, and the range is what the formula allows for the rest.
+                   </p>
+                   <ul class="space-y-1">
+                     {nissSupportedMetrics.map(([metric, value]) => (
+                       <li><code>{metric}:{value}</code> {threat.niss.metric_evidence?.[metric]?.supports} ({threat.niss.metric_evidence?.[metric]?.source})</li>
+                     ))}
+                   </ul>
+                 </div>
+               )}
+               {nissState === 'unscored' && (
+                 <p class="text-xs text-[var(--color-text-muted)]">
+                   Unscored. {threat.niss.unscored_reason ? NISS_UNSCORED_REASON_LABELS[threat.niss.unscored_reason] : 'No metric is supported by its sources.'}
+                 </p>
+               )}
              </div>
              {threat.cvss && (
                <div>
@@ -363,8 +451,8 @@ const hasGovernance = nr || reg;
                </div>
              )}
           </div>
-          <div class="mt-3">
-            {threat.nissScored ? (
+          {nissState === 'scored' && (
+            <div class="mt-3">
               <NissScoreBadge client:load score={threat.niss.score} severity={threat.niss.severity ?? 'low'} />
               <NissContextNotes
                 niss={threat.niss}
@@ -372,15 +460,8 @@ const hasGovernance = nr || reg;
                 severitySource={threat.severitySource}
                 severityLegacy={threat.severityLegacy}
               />
-            ) : (
-              <a
-                href="/atlas/scoring/#coverage"
-                class="inline-flex items-center gap-2 rounded-lg border border-slate-500/20 bg-slate-500/10 px-3 py-1 text-sm text-slate-400 hover:underline"
-              >
-                <span aria-hidden="true">○</span> NISS not yet scored
-              </a>
-            )}
-          </div>
+            </div>
+          )}
           {threat.niss?.pins && <PinsBadge client:load pins={true} size="md" showExplanation={true} />}
           {nissVector && (
             <div class="mt-4">

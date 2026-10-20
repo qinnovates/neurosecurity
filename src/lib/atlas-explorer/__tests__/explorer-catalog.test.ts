@@ -15,7 +15,7 @@ describe('explorer catalog', () => {
     expect(catalog.bands.map((band) => band.id).sort()).toEqual(['I0', 'N1', 'N2', 'N3', 'N4', 'N5', 'N6', 'N7', 'S1', 'S2', 'S3']);
     expect(catalog.regions).toHaveLength(38);
     expect(catalog.regions[0].function).toBe(atlas.brain_regions[0].function);
-    expect(catalog.device_stage_techniques).toHaveLength(142);
+    expect(catalog.device_stage_techniques).toHaveLength(144);
   });
 
   it('stops the build when the atlas file lacks a band name or a description', () => {

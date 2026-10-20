@@ -166,6 +166,8 @@ const statistics = {
   generated: new Date().toISOString().slice(0, 10),
   content_sha256: contentSha256,
   total_techniques: techniques.length,
+  // Variants are held apart from techniques and never counted as techniques.
+  total_variants: (registrar.variants ?? []).length,
   total_tactics: (registrar.tactics ?? []).length,
   total_domains: Array.isArray(registrar.domains)
     ? registrar.domains.length
@@ -176,6 +178,12 @@ const statistics = {
     child: techniques.filter((technique) => technique.parent_id).length,
   },
   by_tactic: sortTally(countBy(techniques, 'tactic')),
+  // A block with a vector but no scoring_state predates the three-state rule and is scored.
+  by_scoring_state: countBy(
+    techniques,
+    (technique) => technique.niss?.scoring_state ?? (technique.niss?.vector ? 'scored' : 'unscored'),
+    { scored: 0, provisional: 0, unscored: 0 },
+  ),
   by_status: sortTally(countBy(techniques, 'status')),
   by_severity: sortTally(countBy(techniques, 'severity')),
   by_ui_category: sortTally(countBy(techniques, 'ui_category')),

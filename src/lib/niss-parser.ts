@@ -6,7 +6,7 @@
  * scoring (with optional context profiles), and PINS evaluation.
  *
  * v1.1 changes: Split CG (Cognitive Integrity) into two metrics:
- *   CR (Cognitive Reconnaissance) — read attacks: thought decoding, neural data inference
+ *   CR (Cognitive Reconnaissance) — read attacks: decoding of speech or motor intent by models trained on a cooperating user, neural data inference
  *   CD (Cognitive/Functional Disruption) — disruption of cognitive processing, sensory perception, motor output, or autonomic regulation
  * Formula: weighted mean with normalized cognitive weights
  * Default: BI=1.0, CR=0.5, CD=0.5, CV=1.0, RV=1.0, NP=1.0

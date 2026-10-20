@@ -39,6 +39,7 @@
     "datalake:inventory": "node src/scripts/generate-datalake-inventory.mjs",
     "datalake:inventory:check": "node src/scripts/generate-datalake-inventory.mjs --check",
     "derive:pathway-bands": "node datalake/scripts/derive-pathway-bands.mjs",
+    "check:bands": "node datalake/scripts/derive-pathway-bands.mjs --check",
     "registrar:niss-derive": "python3 src/scripts/derive-niss-annotations.py",
     "registrar:niss-derive:check": "python3 src/scripts/derive-niss-annotations.py --check",
     "registrar:stats": "node src/scripts/generate-registrar-statistics.mjs",
@@ -97,6 +98,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "jsdom": "^28.1.0",
+    "tsx": "4.23.15",
     "typescript": "^5.8.0",
     "vitest": "^4.0.18"
   },

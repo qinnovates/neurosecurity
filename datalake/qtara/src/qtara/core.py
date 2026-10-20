@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 from typing import List, Optional, Dict, Any, Union
-from .models import ThreatTechnique, TaraRegistry
+from .models import ThreatTechnique, TaraRegistry, Variant
 
 class TaraLoader:
     def __init__(self, data_path: Optional[Path] = None):
@@ -28,9 +28,31 @@ class TaraLoader:
             version=data.get("version", "unknown"),
             framework=data.get("framework", "unknown"),
             generated=data.get("generated"),
-            techniques=[ThreatTechnique(**t) for t in data.get("techniques", [])]
+            techniques=[ThreatTechnique(**t) for t in data.get("techniques", [])],
+            variants=[Variant(**v) for v in data.get("variants", [])]
         )
+        self._check_variant_parents(self._registry)
         return self._registry
+
+    @staticmethod
+    def _check_variant_parents(registry: TaraRegistry) -> None:
+        """A variant whose parent is not a technique in the same file is a broken registrar, not a soft miss."""
+        technique_ids = {t.id for t in registry.techniques}
+        orphans = [v.id for v in registry.variants if v.parent not in technique_ids]
+        if orphans:
+            raise ValueError(f"TARA registry: variants {orphans} name a parent that is not in techniques")
+
+    def get_variant(self, variant_id: str) -> Optional[Variant]:
+        for v in self.registry.variants:
+            if v.id == variant_id:
+                return v
+        return None
+
+    def list_variants(self, parent: Optional[str] = None) -> List[Variant]:
+        """All variants, or the variants of one parent technique. Variants are not in list_techniques()."""
+        if parent:
+            return [v for v in self.registry.variants if v.parent == parent]
+        return self.registry.variants
 
     def get_technique(self, technique_id: str) -> Optional[ThreatTechnique]:
         if not self._registry:
@@ -106,6 +128,7 @@ class TaraLoader:
 
         return {
             "total": len(techniques),
+            "total_variants": len(self._registry.variants),
             "by_tier": by_tier,
             "by_severity": by_severity,
             "by_status": by_status,

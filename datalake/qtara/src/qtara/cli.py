@@ -19,7 +19,7 @@ def main():
     list_parser = subparsers.add_parser("list", help="List all TARA techniques")
     list_parser.add_argument("--band", help="Filter by neural band (e.g., N1)")
     list_parser.add_argument("--tier", help="Filter by physics feasibility tier (0-3, or X)")
-    list_parser.add_argument("--severity", help="Filter by severity (critical, high, medium, low)")
+    list_parser.add_argument("--severity", help="Filter by the filed severity label (critical, high, medium, low); this is not the NISS severity")
     list_parser.add_argument("--domain", help="Filter by TARA domain (e.g., VIS, AUD, SOM)")
     list_parser.add_argument("--mode", help="Filter by TARA mode (R=Recon, M=Manipulation, D=Disruption)")
     list_parser.add_argument("--enriched-only", action="store_true", help="Exclude skeleton/unenriched techniques")
@@ -58,7 +58,7 @@ def main():
             title_extra = f" (Tier {args.tier})"
         elif args.severity:
             techniques = loader.list_by_severity(args.severity)
-            title_extra = f" (Severity: {args.severity})"
+            title_extra = f" (Filed severity: {args.severity})"
         elif args.band:
             techniques = loader.list_techniques(band=args.band)
             title_extra = f" (Band: {args.band})"
@@ -80,7 +80,7 @@ def main():
         table = Table(title=f"TARA Techniques{title_extra}")
         table.add_column("ID", style="cyan")
         table.add_column("Name", style="green")
-        table.add_column("Severity", style="bold")
+        table.add_column("Filed severity", style="bold")
         table.add_column("Bands")
         table.add_column("Domain")
         table.add_column("Mode")
@@ -101,7 +101,7 @@ def main():
             sys.exit(1)
 
         panel_content = f"[bold]Description:[/bold] {t.notes or 'No notes available.'}\n\n"
-        panel_content += f"[bold]Severity:[/bold] {t.severity}\n"
+        panel_content += f"[bold]Filed severity (editorial, not from NISS):[/bold] {t.severity}\n"
         panel_content += f"[bold]Bands:[/bold] {t.bands}\n"
         panel_content += f"[bold]Tactic:[/bold] {t.tactic}\n"
 
@@ -109,7 +109,8 @@ def main():
             pf = t.physics_feasibility
             panel_content += f"\n[bold magenta]Physics Feasibility:[/bold magenta]\n"
             panel_content += f"Tier: T{pf.tier} ({pf.tier_label})\n"
-            panel_content += f"Timeline: {pf.timeline}\n"
+            if pf.timeline is not None:
+                panel_content += f"Timeline: {pf.timeline}\n"
             if pf.gate_reason:
                 panel_content += f"Gate: {pf.gate_reason}\n"
 
@@ -138,8 +139,17 @@ def main():
 
         if t.niss:
             panel_content += f"\n[bold blue]NISS Scoring:[/bold blue]\n"
-            panel_content += f"Score: {t.niss.score}\n"
-            panel_content += f"Vector: {t.niss.vector}\n"
+            panel_content += f"State: {t.niss.scoring_state}\n"
+            if t.niss.scoring_state == "scored":
+                panel_content += f"Score: {t.niss.score}\n"
+                panel_content += f"Severity (from score; use this to rank): {t.niss.severity}\n"
+                panel_content += f"Vector: {t.niss.vector}\n"
+            elif t.niss.scoring_state == "provisional":
+                supported = {k: v for k, v in (t.niss.metrics or {}).items() if v != "unknown"}
+                panel_content += f"Range: {t.niss.score_min} to {t.niss.score_max} (a bound, not an estimate)\n"
+                panel_content += f"Supported metrics: {', '.join(f'{k}:{v}' for k, v in supported.items())}\n"
+            else:
+                panel_content += f"Unscored: {t.niss.unscored_reason or 'not stated'}\n"
 
         if t.cvss:
             panel_content += f"\n[bold red]CVSS {t.cvss.version}:[/bold red]\n"
@@ -159,16 +169,21 @@ def main():
         techniques = loader.list_techniques()
         include_pending = getattr(args, 'include_pending', False)
         bundle = StixExporter.to_bundle(
-            techniques, include_pending=include_pending, modified=loader.registry.generated
+            techniques,
+            include_pending=include_pending,
+            modified=loader.registry.generated,
+            variants=loader.list_variants(),
         )
-        exported_count = len(bundle["objects"]) - 1  # subtract identity object
-        console.print(f"[green]Successfully exported {exported_count} techniques to {args.output}[/green]")
+        patterns = [obj for obj in bundle["objects"] if obj["type"] == "attack-pattern"]
+        variant_count = sum(1 for obj in patterns if "x_qif_variant_of" in obj)
+        console.print(f"[green]Successfully exported {len(patterns) - variant_count} techniques and "
+                      f"{variant_count} variants to {args.output}[/green]")
         with open(args.output, 'w') as f:
             json.dump(bundle, f, indent=2)
 
     elif args.command == "stats":
         stats = loader.get_statistics()
-        console.print(f"\n[bold]TARA Registry: {stats['total']} techniques[/bold]\n")
+        console.print(f"\n[bold]TARA Registry: {stats['total']} techniques, {stats['total_variants']} variants[/bold]\n")
 
         tier_table = Table(title="By Physics Feasibility Tier")
         tier_table.add_column("Tier", style="cyan")
@@ -177,8 +192,8 @@ def main():
             tier_table.add_row(label, str(count))
         console.print(tier_table)
 
-        sev_table = Table(title="By Severity")
-        sev_table.add_column("Severity", style="bold")
+        sev_table = Table(title="By Filed Severity (editorial label, not the NISS severity)")
+        sev_table.add_column("Filed severity", style="bold")
         sev_table.add_column("Count", justify="right")
         for sev, count in sorted(stats["by_severity"].items()):
             sev_table.add_row(sev, str(count))

@@ -59,7 +59,7 @@
       "valuation_usd": null,
       "employees_approx": 120,
       "security_posture": "none_published",
-      "security_notes": "No public security documentation. Endovascular Stentrode implanted via jugular vein. FDA pivotal trial IDE approved Jul 2023. 10 patients across US and Australia trials. First human 2019 (Melbourne, Australia); first US human Jul 2022. $200M Series D (Nov 2025) led by Double Point Ventures; IQT (In-Q-Tel, CIA/IC venture arm), Bezos Expeditions, QIA, and others participated. Next-gen transcatheter whole-brain interface in early development. AI decoding team established in NYC. Verified 2026-03-13.",
+      "security_notes": "No public security documentation. Endovascular Stentrode implanted via jugular vein. FDA pivotal trial IDE approved Jul 2023. 10 patients across US and Australia trials. First human 2019 (Melbourne, Australia); first US human Jul 2022. $200M Series D (Nov 2025) led by Double Point Ventures; IQT (In-Q-Tel, CIA/IC venture arm), Bezos Expeditions, QIA, and others participated. Next-gen transcatheter whole-brain interface in early development. AI decoding team established in NYC. Verified 2026-03-13. Company release titles (Synchron news index) announce, on 2025-05-14, native BCI integration with iPhone, iPad and Apple Vision Pro, and, on 2025-08-04, an iPad control demonstration using Apple's BCI Human Interface Device (BCI HID) protocol. Only the titles and dates were read: the transport, pairing and authentication design and the number of participants are not known from them, and no security statement was read. Titles and dates verified 2026-10-06.",
       "devices": [
         {
           "name": "Stentrode",
@@ -216,7 +216,7 @@
       "valuation_usd": null,
       "employees_approx": 80,
       "security_posture": "basic_encryption",
-      "security_notes": "Consumer EEG. Claims AES-128 encryption for data transfer. Cloud platform for data storage. No formal security audit published. Chile Supreme Court ruled against Emotiv in 2023 neurodata privacy case.",
+      "security_notes": "Consumer EEG. Claims AES-128 encryption for data transfer. Cloud platform for data storage. No formal security audit published. Chile's Supreme Court (Girardi v. Emotiv, Rol No. 105065-2023, 2023-08-09) ordered Emotiv to delete the stored information linked to the claimant's use of the Insight headset and instructed the public health institute (ISP) and the customs authority to act so that the device's commercialisation and data handling comply with Chilean law. The analysis read (Stanford Law School, 2026-04-27) does not describe a sales ban; the judgment text itself was not read. Verified 2026-10-06.",
       "devices": [
         {
           "name": "EPOC X",
@@ -2036,6 +2036,39 @@
       "security_notes": "fNIRS research-systems vendor. iMotions × Artinis software integration partnership 2025-06-25. Brite Ultra hyperscanning fNIRS (claim: up to 30 simultaneous participants) — claim not directly verified. Verified 2026-04-29.",
       "devices": [],
       "company_category": "established"
+    },
+    {
+      "name": "Epiminder",
+      "type": "semi_invasive",
+      "modality": "subscalp_eeg_monitoring",
+      "founded": null,
+      "headquarters": "Melbourne, Victoria, Australia",
+      "status": "public",
+      "ticker": "EPI",
+      "acquired_by": null,
+      "funding_total_usd": null,
+      "funding_note": "ASX-listed (ticker EPI). Company-stated '$125m capital raise on 1 Dec 2025' (currency as reported, not converted; no USD total recorded). Verified 2026-10-06 via Epiminder FY26 interim results release (2026-02-25).",
+      "valuation_usd": null,
+      "employees_approx": null,
+      "security_posture": "none_published",
+      "security_notes": "Implanted sub-scalp EEG recorder for long-term seizure monitoring (recording only; no stimulation function is described in the sources read). FDA De Novo DEN240062 granted 2025-04-17: classification name 'sub-scalp implanted electroencephalogram system for remote patient monitoring', 21 CFR 882.1360, product code SEM; predetermined change control plan authorized: No. Per registry record NCT07110337, an implanted telemetry unit continuously transmits EEG to external Minder devices for remote clinician review; the transport, app and cloud path and any link security were not found in the sources read. security_posture is a schema default: the company's security or disclosure pages were not assessed. Verified 2026-10-06 via FDA De Novo database, ClinicalTrials.gov, Crossref (10.1111/epi.18458), Epiminder releases.",
+      "tara_attack_surface": [],
+      "devices": [
+        {
+          "name": "Minder System",
+          "type": "semi_invasive",
+          "channels": null,
+          "electrode_type": "eeg",
+          "fda_status": "cleared",
+          "units_deployed": "26 implanted in the UMPIRE first-in-human study (2019-11 to 2023-07); first US implant 2026-01 (company-stated); DETECT study recruiting, estimated enrolment 210",
+          "first_human": "2019-11",
+          "price_usd": null,
+          "target_use": "medical",
+          "cves_known": [],
+          "note": "Regulatory state: FDA De Novo DEN240062 granted 2025-04-17 (received 2024-10-18; requester Epi-Minder Pty Ltd, Melbourne). fda_status 'cleared' is the closest existing value in this file; a De Novo grant is not a 510(k) clearance. electrode_type 'eeg' is likewise the closest existing value; the electrodes are implanted under the scalp, outside the skull. Per registry record NCT07110337: an implanted electrode lead with four electrodes records EEG from both sides of the brain and connects to an implanted telemetry unit that continuously transmits to external Minder devices. Channel count not confirmed. UMPIRE (Epilepsia 2025;66:3426-3439, 10.1111/epi.18458): prospective, multicentre first-in-human study, 26 implanted; primary outcome was adverse events in the first 6 months; no serious device- or implant procedure-related adverse events were reported (abstract read; no comparator arm described). DETECT (NCT07110337): randomised, estimated enrolment 210, Recruiting (started 2025-12-23); primary outcome is the proportion of participants with an actionable event at 6 months versus standard of care; no results posted as of 2026-10-06."
+        }
+      ],
+      "company_category": "public"
     }
   ],
   "adjacent_tech": [
@@ -3866,7 +3899,7 @@
     },
     {
       "year": 2026.21,
-      "label": "NMPA approves Neuracle NEO (first market-approved invasive BCI)",
+      "label": "NMPA registers Neuracle NEO epidural implantable BCI (Class III, China)",
       "type": "regulatory"
     },
     {
@@ -3891,6 +3924,14 @@
       "jurisdiction": "USA (federal)",
       "scope": "statute",
       "note": "Requires NIH to consider neurotech ethics, but no binding BCI rules"
+    },
+    {
+      "date": "2022-12",
+      "event": "EU Implementing Regulation 2022/2347: non-medical non-invasive brain stimulation devices reclassified to Class III",
+      "type": "law",
+      "jurisdiction": "EU",
+      "scope": "supranational",
+      "note": "Applies to non-invasive brain stimulation products without an intended medical purpose (MDR Annex XVI). Regulation number, month and effect as reported in J Law Biosci 2026 (10.1093/jlb/lsag021); the EUR-Lex text was not retrieved. That paper's analysis of the five references cited for the reclassification reports that none reviewed clinical safety."
     },
     {
       "date": "2023-03",

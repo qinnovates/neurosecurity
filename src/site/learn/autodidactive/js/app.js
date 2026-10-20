@@ -690,13 +690,13 @@ function renderHourglassPhysics(container) {
 
       <div class="vision-card">
         <h4 class="vision-heading">Step 2: The Neural Side Has Layers</h4>
-        <p>Neuroscience already organizes the CNS into a functional hierarchy (Kandel et al., 2021). I mapped 7 bands to this hierarchy because each level has distinct signal properties that matter for security:</p>
+        <p>Neuroscience already organizes the CNS into a functional hierarchy (Kandel et al., 2021). I mapped 7 bands to this hierarchy because each level has distinct signal properties that matter for security. Since addressing version 2 (2026-10-06) the band codes are addresses, not an order: the number carries no severity, processing or traversal meaning, and the dynamics listed below are hypotheses (untested, no estimator defined):</p>
         <div class="vision-table">
           <div class="vision-row vision-row-header"><span>Band</span><span>Structure</span><span>Why It Is Its Own Band</span></div>
           <div class="vision-row"><span>N7</span><span>Neocortex (PFC, M1, V1)</span><span>Highest abstraction. Processes like decision-making and abstract thought involve the smallest-scale dynamics where quantum effects may be non-negligible.</span></div>
-          <div class="vision-row"><span>N6</span><span>Limbic (hippocampus, amygdala)</span><span>Emotion and memory encoding. Chaotic dynamics -- sensitive dependence on initial conditions (Lyapunov exponent > 0).</span></div>
-          <div class="vision-row"><span>N5</span><span>Basal Ganglia (striatum, STN)</span><span>Action selection and reward. Oscillatory loops with chaotic switching between states.</span></div>
-          <div class="vision-row"><span>N4</span><span>Diencephalon (thalamus)</span><span>The brain's router. 95% of LGN input is feedback from cortex, not sensory input. Acts as a biological firewall via the reticular thalamic nucleus (default-deny gating).</span></div>
+          <div class="vision-row"><span>N6</span><span>Allocortex (hippocampus, basolateral amygdala)</span><span>Emotion and memory encoding. Chaotic dynamics -- sensitive dependence on initial conditions (Lyapunov exponent > 0).</span></div>
+          <div class="vision-row"><span>N5</span><span>Cerebral nuclei (striatum, pallidum)</span><span>Action selection and reward. Oscillatory loops with chaotic switching between states.</span></div>
+          <div class="vision-row"><span>N4</span><span>Diencephalon (thalamus)</span><span>The brain's router. 95% of LGN input is feedback from cortex, not sensory input. Transmission through it is state-dependent; it is not a security control.</span></div>
           <div class="vision-row"><span>N3</span><span>Cerebellum</span><span>Motor coordination. High-frequency, timing-precise, stochastic but relatively predictable.</span></div>
           <div class="vision-row"><span>N2</span><span>Brainstem</span><span>Vital functions (breathing, heart rate). Rhythmic, stochastic, life-critical. Attacks here are immediately dangerous.</span></div>
           <div class="vision-row"><span>N1</span><span>Spinal Cord</span><span>Reflexes. Nearly deterministic. Simple input-output arcs that are the most predictable neural signals.</span></div>
@@ -719,7 +719,7 @@ function renderHourglassPhysics(container) {
       <div class="vision-card">
         <h4 class="vision-heading">Step 4: Width = Unpredictability</h4>
         <p>Here is where the hourglass shape comes from physics. The width of each band represents its <strong>state space</strong> -- how many possible states the system can occupy at that level. This maps directly to unpredictability, which maps directly to how hard it is to secure.</p>
-        <p>I identified four types of unpredictability, each with different security implications:</p>
+        <p>I identified four types of unpredictability, each with different security implications. The assignment of a type to each band is a hypothesis: untested, with no estimator defined:</p>
         <div class="vision-table">
           <div class="vision-row vision-row-header"><span>Type</span><span>What It Means</span><span>Bands</span><span>Can an Attacker Predict It?</span></div>
           <div class="vision-row"><span>Deterministic</span><span>Fully predictable given inputs</span><span>S2, S3</span><span>Yes, completely</span></div>
@@ -772,8 +772,8 @@ function renderHourglassPhysics(container) {
           <div class="vision-row"><span>I0-spinal / peripheral</span><span>5-6 layers</span><span>Moderate</span></div>
           <div class="vision-row"><span>I0-noninvasive (scalp EEG)</span><span>All 7 layers intact</span><span>Lowest</span></div>
         </div>
-        <p>The thalamus at N4 acts as the brain's natural firewall. Its reticular thalamic nucleus implements something like a default-deny policy: it gates and suppresses signals before they reach cortex. Only ~50 bits per second of the 11 million bits of sensory information processed by the thalamus reach conscious awareness. A cortical implant (I0-cortical) bypasses this protection entirely.</p>
-        <p>This is why the hourglass model matters for security: the depth of the interface determines how many natural protection layers are bypassed, which determines the threat surface.</p>
+        <p>The thalamus is the principal route by which sensory input (except the first cortical stage of olfaction), cerebellar output and basal ganglia output reach neocortex; transmission through it is state-dependent. It is not a security control: motor output, cortico-cortical traffic and neuromodulatory projections do not relay there.</p>
+        <p><strong>Under review:</strong> the table above, and the earlier statements that the thalamus at N4 acts as the brain's natural firewall with something like a default-deny policy, that a cortical implant (I0-cortical) bypasses this protection entirely, and that the depth of the interface determines how many natural protection layers are bypassed and so the threat surface, rested on a firewall analogy and need a new justification or withdrawal.</p>
       </div>
 
       <div class="vision-card">

@@ -25,15 +25,15 @@ describe('buildDeviceRail', () => {
     expect(rail.stages[0].techniques[0]).toMatchObject({ neuralBandIds: [], draftedLinkCount: 0, reviewState: null });
   });
 
-  it('holds exactly the techniques with no brain band on the real catalog: 65 today (guard)', () => {
+  it('holds exactly the techniques with no brain band on the real catalog: 67 today (guard)', () => {
     const rail = buildDeviceRail(loadRealModel(), false);
-    expect(deviceOnlyIds).toHaveLength(65);
+    expect(deviceOnlyIds).toHaveLength(67);
     expect(listRailTechniqueIds(rail)).toEqual(deviceOnlyIds);
-    expect(rail).toMatchObject({ deviceOnlyCount: 65, mixedCount: 77 });
+    expect(rail).toMatchObject({ deviceOnlyCount: 67, mixedCount: 77 });
   });
 
   it('holds every technique with a device band once the mixed ones are included (guard)', () => {
     expect(listRailTechniqueIds(buildDeviceRail(loadRealModel(), true))).toEqual(anyDeviceBandIds);
-    expect(anyDeviceBandIds).toHaveLength(142);
+    expect(anyDeviceBandIds).toHaveLength(144);
   });
 });

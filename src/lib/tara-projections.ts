@@ -153,7 +153,6 @@ const modalityProjection: ProjectionConfig = {
       {
         label: 'Status',
         items: [
-          { key: 'CONFIRMED', label: 'Confirmed', count: statusStats.CONFIRMED, dotColor: '#ef4444' },
           { key: 'DEMONSTRATED', label: 'Demonstrated', count: statusStats.DEMONSTRATED, dotColor: '#f59e0b' },
           { key: 'THEORETICAL', label: 'Theoretical', count: statusStats.THEORETICAL, dotColor: '#94a3b8' },
           { key: 'EMERGING', label: 'Emerging', count: statusStats.EMERGING, dotColor: '#8b5cf6' },
@@ -187,7 +186,6 @@ const modalityProjection: ProjectionConfig = {
       label: 'Status',
       attr: 'status',
       values: [
-        { key: 'CONFIRMED', label: 'Confirmed', color: '#ef4444', bg: 'rgba(239,68,68,0.12)' },
         { key: 'DEMONSTRATED', label: 'Demonstrated', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' },
         { key: 'THEORETICAL', label: 'Theoretical', color: '#94a3b8', bg: 'rgba(148,163,184,0.12)' },
         { key: 'EMERGING', label: 'Emerging', color: '#8b5cf6', bg: 'rgba(139,92,246,0.12)' },
@@ -607,7 +605,7 @@ const diagnosticProjection: ProjectionConfig = {
 
     // Primary diagnoses
     if (dsm.primary.length) {
-      html += '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.5rem;"><strong>Primary diagnoses:</strong></div>';
+      html += '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.5rem;"><strong>Primary diagnostic categories:</strong></div>';
       html += '<ul style="font-size:0.75rem;color:var(--color-text-muted);margin:0 0 0.4rem 1rem;padding:0;">';
       for (const d of dsm.primary) {
         const confC = CONFIDENCE_BADGE[d.confidence] ?? CONFIDENCE_BADGE.theoretical;
@@ -620,7 +618,7 @@ const diagnosticProjection: ProjectionConfig = {
     // Secondary diagnoses (collapsed by default)
     if (dsm.secondary.length) {
       html += '<details style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.3rem;">';
-      html += `<summary style="cursor:pointer;"><strong>Secondary diagnoses</strong> (${dsm.secondary.length})</summary>`;
+      html += `<summary style="cursor:pointer;"><strong>Secondary diagnostic categories</strong> (${dsm.secondary.length})</summary>`;
       html += '<ul style="margin:0.2rem 0 0 1rem;padding:0;">';
       for (const d of dsm.secondary) {
         const confC = CONFIDENCE_BADGE[d.confidence] ?? CONFIDENCE_BADGE.theoretical;
@@ -635,7 +633,7 @@ const diagnosticProjection: ProjectionConfig = {
 
   explanation: {
     title: 'Diagnostic projection (DSM-5-TR)',
-    body: `<div><strong class="text-[var(--color-text-primary)]">Diagnostic cluster colors</strong> \u2014 Which psychiatric domain a technique's neural impact maps to, via the Neural Impact Chain (NIC): Technique \u2192 Band \u2192 Structure \u2192 Function \u2192 NISS + DSM.</div>
+    body: `<div><strong class="text-[var(--color-text-primary)]">Diagnostic cluster colors</strong> \u2014 Which psychiatric domain a technique's neural impact maps to, via the Neural Impact Chain (NIC), an association by shared band for threat modeling, not a demonstrated neural path: Technique, Band, Structure, Function, NISS + DSM.</div>
 <div style="margin-left:0.5rem;">
 <span style="color:${DIAGNOSTIC_CLUSTER_COLORS.cognitive_psychotic.text};font-weight:600;">Cognitive/Psychotic</span> = affects perception, cognition (CR/CD-driven).<br/>
 <span style="color:${DIAGNOSTIC_CLUSTER_COLORS.mood_trauma.text};font-weight:600;">Mood/Trauma</span> = affects emotion, consent, autonomy (CV-driven).<br/>
@@ -643,8 +641,8 @@ const diagnosticProjection: ProjectionConfig = {
 <span style="color:${DIAGNOSTIC_CLUSTER_COLORS.persistent_personality.text};font-weight:600;">Persistent/Personality</span> = lasting neural change (NP/RV-driven).<br/>
 <span style="color:${DIAGNOSTIC_CLUSTER_COLORS.non_diagnostic.text};font-weight:600;">Non-Diagnostic</span> = silicon-only, no neural impact.
 </div>
-<div><strong class="text-[var(--color-text-primary)]">Risk class badges</strong> \u2014 <span style="color:#ef4444;font-weight:600;">Direct</span> = can trigger/worsen the diagnosis. <span style="color:#f59e0b;font-weight:600;">Indirect</span> = downstream effect. <span style="color:#94a3b8;font-weight:600;">None</span> = no diagnostic risk.</div>
-<div><strong class="text-[var(--color-text-primary)]">Drawer details</strong> \u2014 ICD-10-CM codes, primary and secondary diagnoses, confidence level, neural pathway chain, and NISS-to-DSM correlation.</div>`,
+<div><strong class="text-[var(--color-text-primary)]">Risk class badges</strong> \u2014 <span style="color:#ef4444;font-weight:600;">Direct</span> = addresses a neural band and has a confirmed or probable clinical analogue. <span style="color:#f59e0b;font-weight:600;">Indirect</span> = addresses a neural band without one. <span style="color:#94a3b8;font-weight:600;">None</span> = silicon-only, no category reference. A threat-modeling label, not a prediction of a diagnosis.</div>
+<div><strong class="text-[var(--color-text-primary)]">Drawer details</strong> \u2014 ICD-10-CM codes, primary and secondary diagnostic categories, confidence level, associated neural pathways, and NISS-to-DSM correlation.</div>`,
   },
 };
 

@@ -1650,7 +1650,7 @@
       "created": "2026-01-01T00:00:00.000Z",
       "modified": "2026-02-14T00:00:00.000Z",
       "name": "Slow drift / boiling frog (adiabatic phase space manipulation)",
-      "description": "Manipulate BCI parameters along adiabatic paths in neural phase space, keeping instantaneous change rates below detection thresholds while accumulating significant state displacement over time. Unlike generic gradual drift (QIF-T0045), this attack is formalized in dynamical systems theory: the attacker traces a path through parameter space that avoids bifurcation boundaries, ensuring the neural system tracks smoothly to the target state without triggering discontinuous transitions that detection systems monitor. Defense: QI phase space trajectory curvature monitoring, cumulative displacement tracking, Lyapunov exponent trend analysis. Derivation Log Entry 45.",
+      "description": "Manipulate BCI parameters along adiabatic paths in neural phase space, keeping instantaneous change rates below detection thresholds while accumulating significant state displacement over time. Unlike generic gradual drift (QIF-T0062), this attack is formalized in dynamical systems theory: the attacker traces a path through parameter space that avoids bifurcation boundaries, ensuring the neural system tracks smoothly to the target state without triggering discontinuous transitions that detection systems monitor. Defense: QI phase space trajectory curvature monitoring, cumulative displacement tracking, Lyapunov exponent trend analysis. Derivation Log Entry 45.",
       "kill_chain_phases": [
         {
           "kill_chain_name": "qif-interaction-chain",

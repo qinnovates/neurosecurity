@@ -12,9 +12,10 @@
 
 ## Entry Index
 
-### October 2026 (Entries 106+) — Data Refresh, Citation Audit
+### October 2026 (Entries 106+) — Data Refresh, Citation Audit, Claim Corrections
 | Entry | Topic | Link |
 |-------|-------|------|
+| 115 | Status taxonomy: CONFIRMED retired and 27 techniques reclassified; colliding QIF-T0172/T0173 renumbered to T0177/T0178; Professor X source corrected; registry figures in the paper generated from the registrar; CI leak, staleness and paper-build checks | [Entry 115](#entry-115-status-taxonomy-renumbering-derived-figures) |
 | 114 | Descriptive technique notes and three renames (framing decision M2/M3, pending owner acceptance): 31 notes (the decision's 26 plus 5 "Extract..." openings found in verification) no longer read as instructions and end with the entry's detection text; T0011, T0046, T0099 renamed with `legacy_names` aliases (T0065 rename held for owner check 12); no technique removed | [Entry 113](#entry-114-describing-techniques-not-instructing) |
 | 113 | ICD-10-CM code integrity: 33 wildcard forms (`F20.x` and the like, 214 entries) replaced by the categories they stand for; 89 codes outside chapter F moved out of `dsm_conditions` into `icd10_conditions`; every code label set to its official FY2027 title; five wrong codes corrected; `niss_dsm_bridge` and "NISS metrics predict diagnostic clusters" retired; GUARDRAILS now describes NISS by its six metrics | [Entry 113](#entry-113-icd10cm-code-integrity) |
 | 112 | `evidence.population` added as a non-ordinal dimension (GRADE precedent) so 12 adjacent-only techniques stop reading as theoretical; no tier changed, proving orthogonality; `PLAUSIBLE`/`SPECULATIVE` cases added, which exposed NaN in `getStatusStats()` and two colourless filter chips | [Entry 112](#entry-112-evidence-population) |
@@ -117,7 +118,7 @@ See also: [Neurorights Derivation Log](./NEURORIGHTS-DERIVATION-LOG.md) | [Field
 ### Key Transitions
 
 ```
-2026-02-14  NSP/Runemate Implementation (Secure Pipe Verified)
+2026-03-04  NSP/Runemate Implementation (Secure Pipe Verified)
      │
      ├── morning     NSP Core & Handshake (Rust, ML-KEM, ML-DSA)
      ├── afternoon   Runemate Forge (HTML-to-Staves Compiler)
@@ -229,7 +230,7 @@ Each entry follows this structure:
 | [67](#entry-67) | 2026-02-18 | Security Guardrails + SSVEP Discovery + Thalamic Gate | ANALYSIS |
 | [66](#entry-66-ssvep-frequency-hijack-discovery) | 2026-02-18 | SSVEP Frequency Hijack + BCI Limits Validation | DISCOVERY |
 | [65](#entry-65) | 2026-02-18 | Physics Feasibility Tiering of TARA Techniques | ANALYSIS |
-| [54](#entry-54) | 2026-02-14 | TARA Interactive Visualization & Dual-Use Toggle | Implemented |
+| [54](#entry-54) | 2026-03-04 | TARA Interactive Visualization & Dual-Use Toggle | Implemented |
 | [53](#entry-53) | 2026-02-13 | TARA-to-DSM-5-TR Diagnostic Mapping | Implemented |
 | [50](#entry-50-tara--therapeutic-atlas-of-risks-and-applications) | 2026-02-09 | TARA — Therapeutic Atlas of Risks and Applications | Implemented |
 | [49](#entry-49) | 2026-02-09 | Dual-Use Gap Analysis — What Does Not Map | ANALYSIS |
@@ -242,8 +243,8 @@ Each entry follows this structure:
 **Tools & Implementation**
 | # | Date | Title | Status |
 |---|------|-------|--------|
-| [56](#entry-56) | 2026-02-14 | Runemate Forge & NSP Integration | Implemented |
-| [55](#entry-55) | 2026-02-14 | NSP Core & Handshake Implementation (Rust) | Implemented |
+| [56](#entry-56) | 2026-03-04 | Runemate Forge & NSP Integration | Implemented |
+| [55](#entry-55) | 2026-03-04 | NSP Core & Handshake Implementation (Rust) | Implemented |
 | [48](#entry-48) | 2026-02-09 | NSP Reframed — Trust Layer That Enables Medicine | Active |
 | [47](#entry-47) | 2026-02-09 | DSM Dissolved into NSP — No Separate Component | Active |
 | [46](#entry-46) | 2026-02-09 | Baseline-Free Security at I0 + Defensive Medical Apps | Active |
@@ -307,9 +308,9 @@ Each entry follows this structure:
 | 59 | 2026-02-18 | Hallucination Audit and Biology-First Reframing | VERIFIED + HYPOTHESIS |
 | 58 | 2026-02-18 | Neurorights Cross-Validation Against Established Frameworks | VERIFIED |
 | 57 | 2026-02-18 | Neurorights Mapping & Consent Complexity Index | VERIFIED + HYPOTHESIS |
-| 56 | 2026-02-14 | Runemate Forge & NSP Integration | Implemented — Secure Pipe Verified |
-| 55 | 2026-02-14 | NSP Core & Handshake Implementation | Implemented — Rust, PQ-secure |
-| 54 | 2026-02-14 | TARA Interactive Visualization & Dual-Use Toggle | Implemented |
+| 56 | 2026-03-04 | Runemate Forge & NSP Integration | Implemented — Secure Pipe Verified |
+| 55 | 2026-03-04 | NSP Core & Handshake Implementation | Implemented — Rust, PQ-secure |
+| 54 | 2026-03-04 | TARA Interactive Visualization & Dual-Use Toggle | Implemented |
 | 53 | 2026-02-13 | TARA-to-DSM-5-TR Diagnostic Mapping via Neural Impact Chain | Implemented |
 | 52 | 2026-02-13 | Three Floors + Energy-Time Security Bounds Applied to QIF | Implemented |
 | 51 | 2026-02-13 | P=E/t → ΔEΔt → Computational Scaling: Classical-Quantum Transition | Derived |
@@ -360,6 +361,51 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 115: Status Taxonomy Retirement, Identifier Renumbering and Derived Registry Figures {#entry-115-status-taxonomy-renumbering-derived-figures}
+
+**Date:** 2026-10-16
+**Classification:** CORRECTION
+**AI Systems:** Claude Opus 5, Claude Opus 5.5
+**Connected entries:** Entry 106 (October 2026 data refresh)
+**AI Contribution Level:** AI-generated, human-approved
+
+Major schema and structural changes to the registrar, the site code, the paper build and CI.
+
+### Schema: evidence status
+
+- `tara_spec.status_definitions` added. `status` now answers one question: how far a technique has been shown as an attack. Whether its mechanism is established is carried by `dual_use_classifications` and `evidence_levels`.
+- `CONFIRMED` retired. Its 27 techniques were reclassified: 5 to `DEMONSTRATED`, 21 to `THEORETICAL`, 1 to `PLAUSIBLE`. Each carries `status_prior` and `status_change_reason`.
+- `statistics.by_status` is now: THEORETICAL 95, DEMONSTRATED 48, EMERGING 27, PLAUSIBLE 2, SPECULATIVE 1 (173).
+- Site code: the `Status` type covers all six values. `PLAUSIBLE` and `SPECULATIVE` were previously missing, so `getStatusStats()` produced `null` for them in `/api/tara.json` and `/api/qif.json`.
+- Script: `datalake/scripts/retire-confirmed-status.py`; evidence audit: `datalake/scripts/audit-confirmed-evidence.py`.
+
+### Identifiers
+
+- `QIF-T0172` and `QIF-T0173` on this draft catalogue named different techniques than the published catalogue (registrar 4.0, PyPI 0.3.0). They are renumbered `QIF-T0177` (air-gap covert channel exfiltration) and `QIF-T0178` (peripheral silent-speech readout); published identifiers keep their meaning. The mapping is in the registrar changelog. Script: `datalake/scripts/renumber-colliding-ids.py`.
+- Open: alias collisions with the published catalogue on `TARA-SIL-R-018` and `TARA-SIL-M-022`.
+
+### Sources
+
+- The source cited as "Zhang et al. 2024" on QIF-T0009, T0016 and T0067 is Liu, Song, He, Lu and Zheng (2024), "Professor X: Manipulating EEG BCI with Invisible and Robust Backdoor Attack", arXiv:2409.20158. Corrected on all occurrences.
+- QIF-T0016 adds Li et al. 2025, Neurocomputing 616:128902 (DOI:10.1016/j.neucom.2024.128902).
+- NIH BRAIN Initiative neuroethics sources added (Bianchi et al. 2018; Ramos et al. 2017, 2019) to the README, whitepaper v9 Section 27.7 and Neurosecurity Governance Section 4.
+
+### Published claims
+
+- The 2026-02-27 timeline milestone now states that NISS was invited to the CVSS Resources repository and that contribution was deferred pending independent review. It no longer describes acceptance or standards-body recognition.
+
+### Paper build
+
+- Registry figures are generated LaTeX macros (`research/paper/scripts/generate_registry_stats.py`): `\Snapshot*` for the registry v1.5 state the analysis describes, `\Live*` for the current registrar. No literal registry figure remains in the source.
+- Source defects fixed: an unescaped percent sign that truncated the abstract, a duplicate BibTeX key, and a universal-negative sentence in the abstract. The published v1.5 PDF is unchanged.
+
+### Infrastructure
+
+- CI: paper lint and build (`paper-build.yml`); registrar statistics checked against its arrays; generated paper figures and frozen `publicDir` pages checked for staleness; tracked files scanned for workstation identity, secrets and internal material (`security.yml`, `.githooks/pre-push`).
+- `datalake/scripts/sync-package-data.py` paths corrected; it now fails rather than publishing an unsynced package. The PyPI workflow publishes only when the declared version is absent from PyPI.
 
 ---
 
@@ -5498,7 +5544,7 @@ CCI mean: 1.01 | max: 2.7 | 11 techniques above 2.0
 
 ## Entry 56: Runemate Forge & NSP Integration
 
-**Date:** 2026-02-14 ~afternoon
+**Date:** 2026-03-04 ~afternoon
 **Context:** Completing the "Secure Neural Pipe" vision where content is not just compressed but safely delivered.
 **Builds on:** Entry 48 (NSP as Trust Layer) and Entry 55
 **Status:** Implemented
@@ -5651,7 +5697,7 @@ Kevin is actively studying neuroscience via MIT OpenCourseWare 9.13: The Human B
 
 ## Entry 55: NSP Core & Handshake Implementation
 
-**Date:** 2026-02-14 ~morning
+**Date:** 2026-03-04 ~morning
 **Context:** Transitioning from the NSP v0.3 draft to a functional Rust implementation.
 **Builds on:** Entry 31 (NSP goes Post-Quantum)
 **Status:** Implemented
@@ -5674,7 +5720,7 @@ This is the transition from "specification" to "protocol." Having a functional, 
 
 ## Entry 55: Standard Name Transition — Quantified Interconnection Framework (QIF) {#entry-55-standard-name-transition--quantified-interconnection-framework-qif}
 
-**Date:** 2026-02-14
+**Date:** 2026-03-04
 **Context:** Maturation of the TARA Atlas and PyPI package release requires a shift from speculative theoretical naming to a rigorous, industry-aligned security standard.
 **AI Systems:** Antigravity (Gemini 2.0 Pro)
 **Human Decision:** Transition the overall QIF name to "Quantified Interconnection Framework" while maintaining acronym stability and mirroring the OSI model.
@@ -5702,7 +5748,7 @@ This is the transition from "specification" to "protocol." Having a functional, 
 
 ## Entry 54: TARA Interactive Visualization & Dual-Use Toggle {#entry-54-tara-interactive-visualization--dual-use-toggle}
 
-**Date:** 2026-02-14
+**Date:** 2026-03-04
 **Context:** User requested TARA Atlas upgrade for high-rigor academic portfolio clarity and industry adoption.
 **AI Systems:** Antigravity (Gemini 2.0 Pro)
 **Human Decision:** Explicitly model the "Dual-Use Dilemma" by toggling the SAME data between "Attacker" and "Therapeutic" perspectives, rather than separate datasets.

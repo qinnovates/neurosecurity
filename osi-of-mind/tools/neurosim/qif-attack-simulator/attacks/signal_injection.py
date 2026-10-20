@@ -107,7 +107,7 @@ FLOODING_META = AttackMetadata(
     niss_vector="NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T",
     severity="CRITICAL",
     description="Broadband saturation across all frequencies. DDoS for neural tissue. "
-                "Overwhelms thalamic gate, causes phase coherence collapse.",
+                "Modeled as saturating thalamic relay, with phase coherence collapse.",
     status="EMERGING",
 )
 

@@ -53,9 +53,9 @@ describe('classifyTechniqueColouring, on the data the site serves', () => {
     expect(buildViewportCaption(model, lensOf(techniqueId), []).lensLimits.map((limit) => limit.id)).toContain('view_nothing_coloured_none_named');
   });
 
-  it('not in the index: exactly the catalog techniques with no neural band, 65 of them, and the sentence says that', () => {
+  it('not in the index: exactly the catalog techniques with no neural band, 67 of them, and the sentence says that', () => {
     const outside = THREAT_VECTORS.filter((threat) => !model.techniquesById.has(threat.id));
-    expect(outside.length).toBe(65);
+    expect(outside.length).toBe(67);
     for (const threat of outside) {
       expect(threat.bands.some((band: string) => band.startsWith('N')), threat.id).toBe(false);
       expect(classifyTechniqueColouring(model, threat.id), threat.id).toBe('not_in_index');

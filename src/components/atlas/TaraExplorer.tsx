@@ -18,7 +18,7 @@ const BAND_GROUPS = [
 
 const ALL_BANDS = BAND_GROUPS.flatMap(g => g.bands);
 const SEVERITIES: Severity[] = ['critical', 'high', 'medium', 'low', 'none'];
-const STATUSES: Status[] = ['CONFIRMED', 'DEMONSTRATED', 'EMERGING', 'THEORETICAL', 'PLAUSIBLE', 'SPECULATIVE'];
+const STATUSES: Status[] = ['DEMONSTRATED', 'EMERGING', 'THEORETICAL', 'PLAUSIBLE', 'SPECULATIVE'];
 
 // ═══ Helpers ═══
 

@@ -131,7 +131,7 @@ const breadcrumbs = [
             Rights without enforcement are aspirational. QIF provides the technical implementation:
             <strong class="text-[var(--color-text-primary)]">NISS</strong> quantifies neural harm (non-maleficence, measurable),
             the <strong class="text-[var(--color-text-primary)]">TARA Atlas</strong> catalogues {data.stats.totalThreats} threat techniques,
-            the <strong class="text-[var(--color-text-primary)]">Neural Impact Chain</strong> traces attacks to clinical outcomes, and
+            the <strong class="text-[var(--color-text-primary)]">Neural Impact Chain</strong> associates attacks with clinical outcomes by shared band, and
             <strong class="text-[var(--color-text-primary)]">signal integrity analysis</strong> (future work) will detect provenance violations in real time.
           </p>
         </div>
@@ -1138,7 +1138,7 @@ const breadcrumbs = [
           <div class="rounded-lg p-3 border border-green-500/30 bg-green-500/5">
             <p class="text-[10px] font-bold text-green-500 uppercase tracking-wider mb-1">Extension</p>
             <p class="text-xs font-medium text-[var(--color-text-primary)]">QIF 11-Band Hourglass</p>
-            <p class="text-[10px] text-[var(--color-text-muted)]">Neural (N7-N1), Interface (I0), Synthetic (S1-S3). Every band validated. Biology-first security.</p>
+            <p class="text-[10px] text-[var(--color-text-muted)]">Neural (N7-N1), Interface (I0), Synthetic (S1-S3). Proposed and unvalidated. Biology-first security.</p>
           </div>
         </div>
 
@@ -1313,8 +1313,8 @@ const breadcrumbs = [
       </p>
       <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-6">
         TARA is the full registry: {data.stats.totalThreats} techniques mapped across four projections (security, clinical,
-        diagnostic, governance). Each technique traces through the Neural Impact Chain from physical mechanism
-        to clinical outcome. The neurorights shown here are the governance layer that sits on top.
+        diagnostic, governance). Each technique is associated through the Neural Impact Chain, by shared band,
+        with a clinical outcome. The neurorights shown here are the governance layer that sits on top.
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3">

@@ -100,6 +100,38 @@ jobs:
           print(f'All {len(d[\"techniques\"])} techniques valid')
           "
 
+      - name: Check variants
+        run: |
+          python3 -c "
+          import json, re, sys
+          d = json.load(open('datalake/qtara-registrar.json'))
+          technique_ids = {t['id'] for t in d['techniques']}
+          dimensions = d['schema_extensions']['variants']['format']['differs_in']
+          variants = d.get('variants', [])
+          errors = []
+          for v in variants:
+              vid = v.get('id', 'UNKNOWN')
+              if not re.fullmatch(r'QIF-T\d{4}-V\d{2}', vid):
+                  errors.append(f'{vid}: variant id must be QIF-Tnnnn-Vnn')
+              if vid in technique_ids:
+                  errors.append(f'{vid}: a variant must not appear in techniques')
+              if v.get('parent') not in technique_ids or not vid.startswith(str(v.get('parent')) + '-V'):
+                  errors.append(f'{vid}: parent must be one existing technique whose id the variant id extends')
+              if v.get('differs_in') not in dimensions:
+                  errors.append(f'{vid}: differs_in is outside the closed vocabulary')
+              if v.get('peer_review_status') != 'peer_reviewed' and (v.get('inherits_niss') or v['niss'].get('scoring_state') != 'unscored'):
+                  errors.append(f'{vid}: a variant without a peer-reviewed source must be unscored')
+          if d['statistics'].get('total_variants') != len(variants):
+              errors.append('statistics.total_variants does not match the variants array')
+          if d['statistics'].get('total_techniques') != len(d['techniques']):
+              errors.append('statistics.total_techniques does not match the techniques array')
+          if errors:
+              for e in errors:
+                  print(f'::error::{e}')
+              sys.exit(1)
+          print(f'All {len(variants)} variants valid; {len(d[\"techniques\"])} techniques')
+          "
+
       - name: Check SDK copy in sync
         run: |
           if [ -f datalake/qtara/src/qtara/data/qtara-registrar.json ]; then
@@ -125,6 +157,47 @@ jobs:
           else:
               print(f'Technique count in sync: {reg_count}')
           "
+
+      - name: Check statistics block against the arrays
+        run: |
+          python3 -c "
+          import json, sys
+          d = json.load(open('datalake/qtara-registrar.json'))
+          s = d['statistics']
+          errors = []
+          if s['total_techniques'] != len(d['techniques']):
+              errors.append(f\"total_techniques={s['total_techniques']} but techniques array holds {len(d['techniques'])}\")
+          if s['total_tactics'] != len(d['tactics']):
+              errors.append(f\"total_tactics={s['total_tactics']} but tactics array holds {len(d['tactics'])}\")
+          if s['total_tactics'] != len(s['by_tactic']):
+              errors.append(f\"total_tactics={s['total_tactics']} but by_tactic holds {len(s['by_tactic'])}\")
+          if s['total_domains'] != len(d['domains']):
+              errors.append(f\"total_domains={s['total_domains']} but domains array holds {len(d['domains'])}\")
+          scoring = sum(s['by_scoring_state'].values())
+          if scoring != len(d['techniques']):
+              errors.append(f'by_scoring_state sums to {scoring}, not {len(d[\"techniques\"])}')
+          status = sum(s['by_status'].values())
+          if status != len(d['techniques']):
+              errors.append(f'by_status sums to {status}, not {len(d[\"techniques\"])}')
+          for e in errors:
+              print(f'::error::{e}')
+          # The declared domain codes are not referenced by any technique field;
+          # tara_domain_primary uses a separate 12-value taxonomy. Advisory until
+          # the two are reconciled. See DRBRYCE-QIF-CROSSREFERENCE.md item 4.
+          declared = {x['code'] for x in d['domains']}
+          used = {t.get('tara_domain_primary') for t in d['techniques']} - {None}
+          if not (declared & used):
+              print(f'::warning::domains array {sorted(declared)} is referenced by no technique; tara_domain_primary uses {sorted(used)}')
+          sys.exit(1 if errors else 0)
+          "
+
+      - name: Check the paper's registry figures are not stale
+        run: |
+          python3 research/paper/scripts/generate_registry_stats.py --check \
+            || { echo "::error::research/paper/generated/registry-stats.tex is stale against the registry. Run 'make stats' in research/paper/ and commit the result."; exit 1; }
+
+      - name: Check frozen pages in publicDir for stale counts
+        run: python3 src/scripts/verify/check_frozen_pages.py --github
 
       - name: Type check
         run: |

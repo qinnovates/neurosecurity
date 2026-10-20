@@ -222,7 +222,7 @@ export default function HourglassVisualization({ bands, selectedBandId, onBandSe
                   {band.brainRegions.length} regions
                 </span>
                 <span className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ color: band.color, background: `${band.color}10` }}>
-                  QI: {band.qiRange[0]}-{band.qiRange[1]}
+                  QI (hypothesis): {band.qiRange[0]}-{band.qiRange[1]}
                 </span>
               </div>
             </div>

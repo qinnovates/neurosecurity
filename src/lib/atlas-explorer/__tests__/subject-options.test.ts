@@ -23,9 +23,9 @@ describe('listTechniqueOptions', () => {
   it('offers every technique of the real catalog, once (guard)', () => {
     const real = listTechniqueOptions(loadRealModel());
     expect(real).toHaveLength(registrar.techniques.length);
-    expect(real).toHaveLength(176);
-    expect(new Set(real.map((option) => option.id)).size).toBe(176);
-    expect(real.filter((option) => option.techniqueKind === 'device_only')).toHaveLength(65);
+    expect(real).toHaveLength(178);
+    expect(new Set(real.map((option) => option.id)).size).toBe(178);
+    expect(real.filter((option) => option.techniqueKind === 'device_only')).toHaveLength(67);
     expect(real.filter((option) => option.reviewState !== null).length).toBeGreaterThan(0);
   });
 });

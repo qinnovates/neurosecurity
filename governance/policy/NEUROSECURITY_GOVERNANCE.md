@@ -8,8 +8,8 @@ order: 5
 
 > Unified governance framework for brain-computer interface security. Covers the discipline of neurosecurity, the regulatory gap analysis, neuroethics and UNESCO alignment, regulatory compliance, and the convergence strategy to connect security GRC with brain science.
 
-**Last Updated:** 2026-02-21
-**Version:** 3.0
+**Last Updated:** 2026-10-16
+**Version:** 3.1
 
 ---
 
@@ -80,7 +80,7 @@ Neurosecurity takes phenomena described by neuroscientists and concerns raised b
 
 | Cybersecurity Provides | Applied to BCIs As |
 |----------------------|-------------------|
-| MITRE ATT&CK taxonomy | TARA: 109 techniques across 15 tactics, MITRE-compatible IDs |
+| MITRE ATT&CK taxonomy | TARA: 173 techniques across 17 tactics, MITRE-compatible IDs |
 | CVSS scoring | NISS: 5 neural-specific metrics that CVSS cannot express (biological impact, cognitive integrity, consent violation, reversibility, neuroplasticity) |
 | Zero-trust architecture | QIF: every signal validated at every band crossing; no implicit trust |
 | Threat detection and response | Neurowall: real-time coherence monitoring, spectral anomaly detection, CUSUM change-point analysis |
@@ -326,7 +326,7 @@ The bottom five rows are properties that only QIF addresses. They are the gap th
 - Cognitive Liberty = Authorization/Consent (protection against coercive use)
 - Psychological Continuity = Availability + State Preservation (protection against identity alteration)
 
-**Gap:** Philosophical/legal constructs with no technical implementation guidance. No mapping to security controls, no measurable compliance criteria. QIF provides the first such mapping.
+**Gap:** Philosophical/legal constructs with no technical implementation guidance. No mapping to security controls, no measurable compliance criteria. QIF proposes such a mapping; it is unvalidated.
 
 #### Yuste et al. (2017): Four Ethical Priorities
 
@@ -587,6 +587,27 @@ This means:
 - Trusted others can be formally designated in consent records
 - ACCEPT_FLAG decisions can escalate to designated stakeholders
 - Collaborative decision-making is supported, not just tolerated
+
+### Institutional Models: The NIH BRAIN Initiative Neuroethics Program
+
+The principles above are drawn from the neuroethics literature, and the mapping that follows them is QIF's own. Neither is reviewed by anyone outside this project. It is worth stating plainly what a funded programme does instead, because it defines the standard this document falls short of.
+
+The neuroethics programme of the NIH BRAIN Initiative is the clearest published example. Its position is that neuroethics should run concurrently with tool and technology development rather than being applied as review after the fact [50], and it implements that through four standing activities [51]:
+
+| Activity | What it does |
+|----------|--------------|
+| **Neuroethics Working Group** | A standing group of neuroethics and neuroscience experts that advises the Initiative on neuroethics |
+| **Funded neuroethics research** | Neuroethics research projects supported since 2017, routed through a bioethics funding topic rather than a separate neuroethics mechanism [53] |
+| **Portfolio scanning** | Periodic review of the funded research portfolio to identify the ethical questions that the work raises |
+| **Topic workshops** | Workshops on neuroethics topics the programme judges important to its own direction |
+
+A later account describes the same arrangement as integrating neuroethics into neuroscience rather than appending it [52]. The rationale given is that brain research carries ethical considerations beyond those common to the rest of biomedical science, because the organ under study is the one that gives rise to consciousness and to a person's own thoughts — the position set out in the Initiative's strategic plan, *BRAIN 2025: A Scientific Vision*, and quoted on the programme page [53].
+
+**What QIF has by comparison.** Nothing equivalent to any of the four. QIF is one researcher's framework with no funding, no advisory group, no portfolio to scan and no workshops. The neuroethics alignment in this section was assigned by the author with AI assistance, and the "Currently Unaddressed" table below is the nearest thing the project has to portfolio scanning — self-applied, which is the weakness.
+
+This matters for how the alignment claims in this section should be read. QIF asserts that it is constrained by neuroethics; it does not assert that any body has checked the constraint. The four activities above are the shape that check would take, and they are a stated aspiration, not a roadmap item with a date.
+
+**No affiliation.** Nothing in this section implies that the NIH, the BRAIN Initiative, or its Neuroethics Working Group has reviewed, endorsed, funded or has any connection to QIF, NISS, TARA or this document. The programme is cited as published prior art on research governance structure.
 
 ### Gaps and Future Work
 
@@ -1407,7 +1428,7 @@ IEEE SA has P7700 (neurotechnology ethics) and comprehensive cybersecurity stand
 
 #### MITRE: Create a Neural ATT&CK Sub-Matrix
 
-ATT&CK has sub-matrices for enterprise, mobile, ICS, and cloud. Neural devices are absent. TARA provides 109 techniques in MITRE-compatible format.
+ATT&CK has sub-matrices for enterprise, mobile, ICS, and cloud. Neural devices are absent. TARA provides 173 techniques in MITRE-compatible format.
 
 **Ask:** Create an ATT&CK sub-matrix for neural devices. TARA can serve as the seed taxonomy, following the same community contribution model that built the ICS matrix.
 
@@ -1450,7 +1471,7 @@ QIF builds on approximately 15 years of foundational work by researchers who ide
 | Denning, Matsuoka, Kohno | 2009 | Coined "neurosecurity." First paper framing BCI security as a distinct research area. | QIF provides the engineering framework they called for: quantified scoring, architectural model, wire protocol. |
 | Martinovic et al. | 2012 | Proved consumer EEG leaks private information (PINs, bank details) via P300 responses. | TARA catalogs as T1001 with NISS scoring. QIF adds detection (coherence monitoring) and defense (signal authentication). |
 | Bonaci, Calo, Chizeck | 2014 | Identified the "app store" threat model for BCIs. Proposed BCI anonymizer. | QIF extends with multi-band isolation, neural data classification, and consent-per-band access controls. |
-| Bernal, Cammack, Peaceful | 2021 | Most comprehensive BCI attack taxonomy before TARA. CIA-based organization. | TARA extends from 3 categories to 109 techniques with NISS scoring and DSM-5-TR psychiatric mappings. |
+| Bernal, Cammack, Peaceful | 2021 | Most comprehensive BCI attack taxonomy before TARA. CIA-based organization. | TARA extends from 3 categories to 173 techniques with NISS scoring and DSM-5-TR psychiatric mappings. |
 | Schroder | 2025 | Practical security assessment of commercial BCI devices. | QIF provides systematic evaluation framework (NISS + hourglass) for the vulnerabilities identified. |
 | Landau | 2020 | Connected neural data privacy to surveillance debates. Argued for neural data as special category. | QIF operationalizes with technical controls: classification by band, encryption requirements, access frameworks. |
 
@@ -1539,12 +1560,22 @@ The gap between security GRC and neuroethics is not a technical problem. It is a
 48. IEEE Standards Association. (in development). *P2794: Standard for Reporting in Neural Interface Research*.
 49. IEEE Standards Association. (in development). *P2731: Standard for Brain-Computer Interface Terminology*.
 
+### Research Programme Neuroethics
+
+50. Ramos, K. M., Rommelfanger, K. S., Greely, H. T., & Koroshetz, W. J. (2017). Neuroethics and the NIH BRAIN Initiative. *Journal of Responsible Innovation*, 5(1), 122-130. https://doi.org/10.1080/23299460.2017.1319035
+51. Bianchi, D. W., Cooper, J. A., Gordon, J. A., Heemskerk, J., Hodes, R., Koob, G., Koroshetz, W., Shurtleff, D., Sieving, P., Volkow, N., Churchill, J. D., & Ramos, K. M. (2018). Neuroethics for the National Institutes of Health BRAIN Initiative. *The Journal of Neuroscience*, 38(50), 10583-10585. https://doi.org/10.1523/JNEUROSCI.2091-18.2018
+52. Ramos, K. M., Grady, C., Greely, H. T., Chiong, W., Eberwine, J., Farahany, N. A., Johnson, L. S. M., Hyman, B. T., Hyman, S. E., Rommelfanger, K. S., Serrano, E. E., Churchill, J. D., Gordon, J. A., & Koroshetz, W. J. (2019). The NIH BRAIN Initiative: Integrating Neuroethics and Neuroscience. *Neuron*, 101(3), 394-398. https://doi.org/10.1016/j.neuron.2019.01.024
+53. National Institutes of Health. *Neuroethics*. NIH BRAIN Initiative programme page. https://www.nih.gov/brain/research/neuroethics
+
+References 50-52 were verified via Crossref on 2026-10-16 for DOI, author list, title and venue. Reference 53 is a programme page that refused automated retrieval (HTTP 403) on the same date; its content is recorded as supplied rather than independently fetched, and the strategy it describes is verified through references 51 and 52.
+
 ---
 
 ## Document History
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 3.1 | 2026-10-16 | Added "Institutional Models: The NIH BRAIN Initiative Neuroethics Program" to Section 4, setting the Initiative's four standing neuroethics activities against what QIF has, with a no-affiliation statement. Added References 50-53 and their verification note. |
 | 3.0 | 2026-02-21 | Unified governance document consolidating: NEUROSECURITY.md, NEUROSECURITY-GRC.md, NEUROSECURITY_GRC_CONVERGENCE.md, NEUROETHICS_ALIGNMENT.md, UNESCO_ALIGNMENT.md, REGULATORY_COMPLIANCE.md. Added Security GRC Counterpart mappings to neuroethics and UNESCO sections. Previous versions archived in governance/archive/. |
 
 ---

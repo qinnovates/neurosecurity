@@ -223,7 +223,7 @@ describe('AtlasExplorer: lenses and the picker', () => {
     expect(drafted.length).toBeGreaterThan(0);
     expect(drafted.filter((option) => option.querySelector('[data-ai-drafted="true"]') === null)).toEqual([]);
     const deviceOnly = options.filter((option) => option.dataset.techniqueKind === 'device_only');
-    expect(deviceOnly).toHaveLength(65);
+    expect(deviceOnly).toHaveLength(67);
     expect(deviceOnly.filter((option) => option.querySelector('[data-ai-drafted]') !== null)).toEqual([]);
   });
 

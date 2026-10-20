@@ -2,13 +2,12 @@ import shutil
 from pathlib import Path
 
 def sync_data():
-    source = Path("shared/qtara-registrar.json")
-    target_dir = Path("shared/qtara/src/qtara/data")
+    source = Path("datalake/qtara-registrar.json")
+    target_dir = Path("datalake/qtara/src/qtara/data")
     target = target_dir / "qtara-registrar.json"
 
     if not source.exists():
-        print(f"Error: Source file {source} not found.")
-        return
+        raise SystemExit(f"Error: source file {source} not found. Refusing to publish an unsynced package.")
 
     target_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, target)

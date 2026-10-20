@@ -638,7 +638,7 @@ where Squantum = SvN(ρ) + λ·Φtunnel − μ·E(ρAB)
 
 **What it is:** The principle that NSP-encrypted neural data is indistinguishable from random noise -- the same information-theoretic property as Hawking radiation. Grounded in four established physics results: scrambling bound, holographic principle, Page curve, and semantic security.
 
-**How QIF uses it:** Provides a physics-derived information-theoretic foundation for NSP security guarantees. No other BCI security approach has this.
+**How QIF uses it:** Provides a physics-derived information-theoretic foundation for NSP security guarantees. We are unaware of another BCI security approach that has this.
 
 **Status:** Proposed (QIF contribution, Entry 35). Pending peer review.
 

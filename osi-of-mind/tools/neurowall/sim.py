@@ -126,6 +126,15 @@ class PrivacyBudget:
 
     Convert back to (epsilon, delta)-DP via:
         epsilon_total = rho_total + 2*sqrt(rho_total * ln(1/delta))
+
+    Both composition bounds are tracked, because neither dominates the other.
+    The zCDP route grows with sqrt(queries) and wins over long runs; the naive
+    sum grows linearly but carries no sqrt(rho*ln(1/delta)) penalty, so it is
+    the tighter of the two at low query counts. At epsilon=0.1 and delta=1e-6,
+    one query is 0.10 naive against 0.53 via zCDP, and a thousand queries are
+    100.0 naive against 21.6 via zCDP. Report `epsilon_bound`, which takes
+    whichever is smaller; reporting the zCDP figure alone overstates the
+    privacy cost of a short session by roughly 5x.
     """
     total_rho: float = 0.0
     total_epsilon_naive: float = 0.0
@@ -134,14 +143,23 @@ class PrivacyBudget:
 
     def consume(self, epsilon: float):
         """Record one Laplace mechanism query at the given epsilon."""
-        rho = (epsilon ** 2) / 2.0  # Laplace mechanism (Bun & Steinke 2016): rho = eps^2 / 2
+        if not epsilon > 0.0:
+            raise ValueError(f"epsilon must be positive, got {epsilon}")
+        # Bun & Steinke 2016, Prop 1.4: an eps-DP mechanism is (eps^2/2)-zCDP.
+        # This must stay a squaring, not a reciprocal: 1/(2*eps^2) inverts the
+        # budget relationship and overstates the cost by ~10,000x at eps=0.1.
+        rho = (epsilon ** 2) / 2.0
         self.total_rho += rho
         self.total_epsilon_naive += epsilon  # naive sequential composition: eps_total = sum(eps_i)
         self.queries += 1
 
     @property
     def effective_epsilon(self) -> float:
-        """Convert accumulated zCDP rho to (epsilon, delta)-DP."""
+        """The zCDP route: accumulated rho converted to (epsilon, delta)-DP.
+
+        Bun & Steinke 2016, Prop 1.3. Valid at any query count, but not always
+        the tighter of the two bounds -- see `epsilon_bound`.
+        """
         if self.total_rho == 0:
             return 0.0
         return self.total_rho + 2.0 * np.sqrt(
@@ -152,6 +170,18 @@ class PrivacyBudget:
     def naive_epsilon(self) -> float:
         """What basic (non-advanced) sequential composition would give: sum of per-query epsilons."""
         return self.total_epsilon_naive
+
+    @property
+    def epsilon_bound(self) -> float:
+        """The privacy loss actually guaranteed: the smaller valid bound.
+
+        Both routes are sound, so the guarantee is the minimum of the two. This
+        is the figure to quote; `effective_epsilon` and `naive_epsilon` are the
+        two routes it chooses between.
+        """
+        if self.queries == 0:
+            return 0.0
+        return min(self.naive_epsilon, self.effective_epsilon)
 
 
 def apply_local_dp(
@@ -1614,12 +1644,15 @@ def run_simulation(args):
         print(f"  Baseline Cs:        {mon['baseline_cs']:.4f}")
     print()
 
-    print("  --- Privacy Budget (zCDP) ---")
+    print("  --- Privacy Budget ---")
     print(f"  DP queries:         {budget.queries}")
     print(f"  Accumulated rho:    {budget.total_rho:.4f}")
-    print(f"  Effective epsilon:  {budget.effective_epsilon:.4f} "
+    print(f"  zCDP route:         {budget.effective_epsilon:.4f} "
           f"(at delta={budget.delta})")
-    print(f"  Per-query average:  {budget.effective_epsilon / max(budget.queries, 1):.6f}")
+    print(f"  Naive route:        {budget.naive_epsilon:.4f}")
+    print(f"  Guaranteed epsilon: {budget.epsilon_bound:.4f} "
+          f"(the smaller of the two)")
+    print(f"  Per-query average:  {budget.epsilon_bound / max(budget.queries, 1):.6f}")
     print()
 
     print("  --- NSP Transport ---")
@@ -1661,8 +1694,8 @@ def run_simulation(args):
         print(f"  The notch filter at {attack_freq}Hz attenuates the injected signal.")
         print(f"  NISS detected via SSVEP signature AND coherence monitor (Cs drop).")
         print(f"  Policy triggers:    {policy._total_triggers}")
-        print(f"  Total privacy cost: epsilon={budget.effective_epsilon:.4f} "
-              f"(zCDP, delta={budget.delta})")
+        print(f"  Total privacy cost: epsilon={budget.epsilon_bound:.4f} "
+              f"(delta={budget.delta})")
 
     if spike_time:
         print(f"\n  IMPEDANCE SPIKE ANALYSIS")

@@ -6,6 +6,9 @@ order: 1
 
 # Accessibility Statement & Requirements
 
+> **Accuracy note added 2026-10-16.** Parts of this document describe the pre-Astro GitHub Pages site and are stale against `src/`. Two items marked complete are not true of the deployed site: *"Minimum 14px body text — Done"* (the live site carries 865 sub-14px declarations; most text on `/atlas/` is below 14px) and the two checked BCI Accessibility Mode items (no `bci-mode` implementation exists in `src/`). `prefers-contrast: more` is listed but not implemented. The WCAG conformance statement in §4 is a self-assessment, not an audited result. A full audit against the current site is scheduled; until it reports, treat every status box here as unverified.
+
+
 > **Qinnovate** is committed to ensuring digital accessibility for all users, including people with disabilities, neurodivergent individuals, and BCI (brain-computer interface) users.
 
 **Last Updated:** 2026-02-10

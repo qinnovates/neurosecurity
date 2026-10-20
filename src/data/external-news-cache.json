@@ -1,12 +1,30 @@
 [
   {
     "type": "external",
-    "title": "Paradromics taps Siemens Healthineers to develop scalable BCI imaging - MassDevice",
-    "date": "2026-10-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqwFBVV95cUxOUnJQbTRyRVMtejhjaXhMUHpGQkZQN0VYVkJEVGFJR3JRV0FabEpRSHhTa3dqRnVYalByOEJvUnNJMFE3b0tmY25wa3hNdWxyakFqRlJHSlU5T1NfZFFZTVh3YXdTbldSM0hFeEhsZmxuOXpOcTRrN0JWRmk2X1VIYUJJMTNIUk5WYUFlX2JOTWpwRER0cXdtY09Ma1h0b1h5aXJLbXI1VWZ5cVU?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Paradromics taps Siemens Healthineers to develop scalable BCI imaging&nbsp;&nbsp;MassDevice",
-    "category": "neurotechnology"
+    "title": "Longitudinal fMRI reveals multi-network reconfiguration and a recurrent frontoparietal shift across rest and task states during adult aging",
+    "date": "2026-10-20",
+    "url": "hxxps://arxiv[.]org/abs/2610[.]24433",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2610.24433v1 Announce Type: new Abstract: Functional connectivity changes across adult aging, but most evidence is cross-sectional, and covariance-based connectivity depends on blood oxygenation",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Spontaneous brain-wide rotational dynamics constrain cue-evoked behavior",
+    "date": "2026-10-20",
+    "url": "hxxps://arxiv[.]org/abs/2610[.]25061",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2610.25061v1 Announce Type: new Abstract: Uncovering low-dimensional representations of brain-wide neural dynamics and their relationship to behavior remains a central challenge. Here, we show t",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "PyGPLA: A Python Package for Generalized Phase Locking Analysis",
+    "date": "2026-10-20",
+    "url": "hxxps://arxiv[.]org/abs/2610[.]26304",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2610.26304v1 Announce Type: new Abstract: Spike-field couplings measure the links between neuronal spiking and local field potential (LFP) and provide a tool to study how neural populations coor",
+    "category": "research"
   },
   {
     "type": "external",
@@ -19,20 +37,20 @@
   },
   {
     "type": "external",
-    "title": "Siemens Healthineers partners with Paradromics to build out new imaging system to support BCIs - Fierce Biotech",
+    "title": "Paradromics taps Siemens Healthineers to develop scalable BCI imaging - MassDevice",
     "date": "2026-10-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivgFBVV95cUxQYWpycXVQeEc5dFpCSGhCbWhKbDBzMFRHUnpUdlRGdzZYdXFERFZ6bHJhaURzOTIzNWMxM0RkZFoxRXdRREtJVGQwZHBESGY4XzJRV1RNc2xqb1FZS2VGM044a2FxWFZjVUhWakJ1MkFYWW5nMnhWTjFUWDlBTTVOcURkaHFrVGhEempRMWVzbEF6aWUwQlBFQkVWSlNHRTFaNS05dFpBRFVjTUY0QzFQSkJVVk1LSEhRNWdrN0xR?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqwFBVV95cUxOUnJQbTRyRVMtejhjaXhMUHpGQkZQN0VYVkJEVGFJR3JRV0FabEpRSHhTa3dqRnVYalByOEJvUnNJMFE3b0tmY25wa3hNdWxyakFqRlJHSlU5T1NfZFFZTVh3YXdTbldSM0hFeEhsZmxuOXpOcTRrN0JWRmk2X1VIYUJJMTNIUk5WYUFlX2JOTWpwRER0cXdtY09Ma1h0b1h5aXJLbXI1VWZ5cVU?oc=5",
     "source": "Google News — BCI",
-    "summary": "Siemens Healthineers partners with Paradromics to build out new imaging system to support BCIs&nbsp;&nbsp;Fierce Biotech",
+    "summary": "Paradromics taps Siemens Healthineers to develop scalable BCI imaging&nbsp;&nbsp;MassDevice",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Brain stimulation plus brain-computer interface shows no clear extra benefit for stroke arm recovery - Bioengineer.org",
+    "title": "Paradromics and Siemens Healthineers Launch Strategic Initiative to Build Advanced Imaging Foundation for the Future of Brain-Computer Interfaces - Business Wire",
     "date": "2026-10-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwwFBVV95cUxQY1pKRjg2bXNNczFxNXF3Y0xDYTF1YjBRdWYtODFYNm5tUEtCQWhKYUVJWFBzdGN6OFA3YjFYX0xPLXVuZGNvWWZxTDlMbW1BUldubGxINk9RRXJMWllnNU1CbTQxcVdpZW52MjhfVUJ2TUZoSGRNMm1BM2tnOWtCM3FTcU1aNGVkUGRPczdSTHZGNG9rbXRYUVVCb1F2TnNLVkI3Z0o2cDhnQXBqdlE5azlTWk9ONWtDb0l3V000RWdXeWM?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqgJBVV95cUxOS3lmekUwQlQtVFVlaHdOek9MVFNzSEpfTGlwUUNQcmdWRG9Wcy1kRkFwYU5GTHd4aWlWc0xQWGtNUVA1NC1kU0IyM0J6ZHpkZ3pFTG0wQTBYTXVBMTNmNXFKN01QdlBLZ3JTOWowQ19kaFZkSTVzOEZ6b1dvQklmM1dKWU1aYk9LdWhVUE9sTGZ1bUZuWmpyaFkyakZPRzlWUS1pcFkwOE1ZeG1sci1HLXNDQ0t2NmNfYnJBVEQyUDMwWjBhWW9mb29MMTBRR0h4ZVVtNWE3TFVoTmVmckxkMUhsd1FWSVQ4SUVtbzcwWkRxYnpWSHI3cGpCMV9MZXhPUzkxbVZvX0VHcU5UTERNb1F5RFpBUXVZSTZBMkhsREd1VEVBamhrSDh3?oc=5",
     "source": "Google News — BCI",
-    "summary": "Brain stimulation plus brain-computer interface shows no clear extra benefit for stroke arm recovery&nbsp;&nbsp;Bioengineer.org",
+    "summary": "Paradromics and Siemens Healthineers Launch Strategic Initiative to Build Advanced Imaging Foundation for the Future of Brain-Computer Interfaces&nbsp;&nbsp;Business Wire",
     "category": "neurotechnology"
   },
   {
@@ -46,29 +64,29 @@
   },
   {
     "type": "external",
-    "title": "Alignment of visual brain encoding models with individual perceptual similarity judgments",
-    "date": "2026-10-19",
-    "url": "hxxps://arxiv[.]org/abs/2610[.]22569",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2610.22569v1 Announce Type: new Abstract: Encoding models that predict brain activation responses to images have traditionally been trained to maximize accuracy when predicting observed brain da",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "EEG Lempel-Ziv Complexity vis-\\`a-vis Autocorrelation Function",
-    "date": "2026-10-19",
-    "url": "hxxps://arxiv[.]org/abs/2610[.]23231",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2610.23231v1 Announce Type: new Abstract: Measures of signal complexity have become increasingly popular in electroencephalography (EEG), where they are often interpreted as indicators of neural",
-    "category": "research"
-  },
-  {
-    "type": "external",
     "title": "Tether Evo’s latest research addresses one of the biggest challenges in brain-computer interfaces - TechCrunch",
     "date": "2026-10-17",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMi0AFBVV95cUxPYW9udFBiLWFEWGZfVVVxcFUxVHFuX1hRWDIyNzZLSENPSEtsX2JCQjZYd2J2eDByQXh3SEZlY1RvQV9lbW5FVnZEVE5DaG9md2pTVEhnd01UY29zUFNBWk9xeEpHNnQzM0VCY0g0cnYydF9qajQtZFM1QmNvaWVSTjJqTTgwdmhNaEtqVzl3ZmVjeDktYXBIcFM2LUQ5LTVsa0dQbldtRWpSSGI2cEhNYnRzNUlvV3RiLVp1QUlndVQ2RXBzaEJqMVZTZnVyOFZX?oc=5",
     "source": "Google News — BCI",
     "summary": "Tether Evo’s latest research addresses one of the biggest challenges in brain-computer interfaces&nbsp;&nbsp;TechCrunch",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Human patient with Neuralink brain chip gets reply from Elon Musk after he says: I am connected to mine f - The Times of India",
+    "date": "2026-10-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi8wJBVV95cUxPcjlMRTZlUGMya050NktWUEk3dExSWTQwWW1fcVFyZHkwNGtRQXctb08xR2ZibDd1SGZKTlMwNGZrYmhWeDVWSmNRNm82UU55RXFVRXV5dWthYkpoeFF6c1M0X0trUnB5UWVTc1VoRXhqRnVVTVFDQl93TmxvSHJ6N0xoZ2FXal9hQWxuZGJwUFJJczcwN2hFVXZzdG9rZ2VGVHdkZUEtZy0zNUlldV85VUZIeF9sTU9vMkJHTGQ2RXVvYWhnclJwNDJPVlNabXdaTUpHRGVZWHVIUXdsWVRaT1VPdC15eUliRDJKc0pTR1UtWGZxOW50YXVCWXQ2RllsZW5Ldlc1YXJaQWJLREJtazZzajF0U2NXZGk3cjgzY3p6UktBWFAzOVR0b0pKUG05aV8xWlY1M2V1ZXdMR3dSd2p2LXBMemI0TlVPc0lYVTFuTkFER1dtMGFVbzdCaURjMkUxSkdvR1JiMEVtbHcxZXFWd9IB-AJBVV95cUxNTlE4X2poUmY3UEtfdjVZZ0pXYlBsNmJVbTFuTV9RcHF1OFdIamVnbGpQclI0d2xPNEduUjhsVDdzRnk0OGN2TFQtbXU5QXl6aU1DQm9FQzNZUndHY1RpMTZ5VjlxYmUxV1NXUDVNU2hpY1FfTVl2YUh6REpmS1dKZWcxUVFGcVcwUTFjT3Z5b0N0MHB4dHdyYnFOM2ptTmt4eGlQV1RLSFdidXU5TFE2LS1RTjRLbUtMaXBKRlJrQ0RzNWVLRlhwZTZBOG1aeG1qUzNuZTgzZWRyanlPYVEwVmttNTNUWlRLT0dWWW5JSGFCWkRpaUZTNzVLVmo3WW1xNEpFM3VDdGFFRXRvOWRpNjJoZmtVZ1hta3U0RUVMeWt1STJwQ0hYZEVOZHd5TmI0bWpXTjJESi02Z2V3dGNTTkdhOENlRUpTOEM4T0hsZUJsV0xCT1UxTmN3eG9LUVpBSFpIS3Bzc0tjZHFlempQbUhsNjRFXzNa?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Human patient with Neuralink brain chip gets reply from Elon Musk after he says: I am connected to mine f&nbsp;&nbsp;The Times of India",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Device helps people with paralysis communicate - National Institutes of Health (NIH) | (.gov)",
+    "date": "2026-10-07",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimgFBVV95cUxQSFJmaWVLVkZaMjRhTHVxTzZtN2tfUDF5LWNOaEdmRWN5Z2V3VnFNVTc4M0l3ekdGUVJYTXN3by1uZ1BBSV9ZSEZzQTByMkNOelB5RkN2azJxWTZkbDhDT2w2czlQS3EtakpIS01YZTk1XzBIRW1lbUtVZDlNUEtwRmNhdlc0dzlaNmlndGwxRDNsR1g0WU1OX2tR?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Device helps people with paralysis communicate&nbsp;&nbsp;National Institutes of Health (NIH) | (.gov)",
     "category": "neurotechnology"
   },
   {
@@ -127,20 +145,11 @@
   },
   {
     "type": "external",
-    "title": "Post-2000s Tsinghua doctoral student launches a \"neural interface\" startup: turning human muscle reactions into tokens - 36 Kr",
+    "title": "Post-2000s Tsinghua doctoral student launches a \"neural interface\" startup: turning human muscle reactions into tokens - 36Kr",
     "date": "2026-08-23",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTFBLOXdWeEQ1NlF3MlNyVDJmSTFxdHdxbkRzRkV1dFdVUlBYcThRbkgwQU15MExOLThCbm1PTG5NdlpCQ3o4ekc4cFhiVC16UWpKVjJr?oc=5",
     "source": "Google News — Neural Startups",
-    "summary": "Post-2000s Tsinghua doctoral student launches a \"neural interface\" startup: turning human muscle reactions into tokens&nbsp;&nbsp;36 Kr",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Elon Musk’s Neuralink Chip Changed My Life - Macleans.ca",
-    "date": "2026-08-14",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxNRTh4WldQd1dzVGJjVHhEUUFtX2JURmt2ajZjNGpZWWhYLThGcnk2aHlZeTV2UmJTenZZbGJzd0xlVlVmNXFucjd1OC1zZXllaU5jWU54VXprLXJldFppSjFydWZ3UE5nYy13V2drd1c2UW9DUHU5bzFLbGVwdnA2UlJGOXVwRWFS?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk’s Neuralink Chip Changed My Life&nbsp;&nbsp;Macleans.ca",
+    "summary": "Post-2000s Tsinghua doctoral student launches a \"neural interface\" startup: turning human muscle reactions into tokens&nbsp;&nbsp;36Kr",
     "category": "neurotechnology"
   },
   {

@@ -110,7 +110,12 @@
     },
     "QIF-T0055": { "band_level": "no_structure_named" },
     "QIF-T0056": { "band_level": "no_structure_named" },
-    "QIF-T0059": { "band_level": "no_structure_named" },
+    "QIF-T0059": {
+      "band_level": "structure_named_only_as_context",
+      "skipped": [
+        { "field": "/sources/0", "text": "motor cortex", "category": "citation" }
+      ]
+    },
     "QIF-T0060": { "band_level": "no_structure_named" },
     "QIF-T0062": { "band_level": "no_structure_named" },
     "QIF-T0064": { "band_level": "no_structure_named" },
@@ -242,6 +247,9 @@
     "QIF-T0115": {
       "links": [
         { "term": "cortical", "field": "/tara/dsm5/pathway", "quote": "I0 (electrodes) → N1-N2 (cortical tissue)", "role": "adjective" }
+      ],
+      "skipped": [
+        { "field": "/sources/0", "text": "motor cortex", "category": "citation" }
       ]
     },
     "QIF-T0116": {
@@ -270,7 +278,8 @@
       ],
       "skipped": [
         { "field": "/tara/engineering/parameters/target", "text": "Broca_area", "category": "same_structure_other_wording" },
-        { "field": "/tara/clinical/conditions/0", "text": "Broca", "category": "clinical_analog" }
+        { "field": "/tara/clinical/conditions/0", "text": "Broca", "category": "clinical_analog" },
+        { "field": "/sources/0", "text": "subthalamic nucleus", "category": "citation" }
       ]
     },
     "QIF-T0119": {
@@ -302,6 +311,9 @@
         { "term": "primary_motor_cortex", "field": "/tara/engineering/parameters/target", "quote": "primary_motor_cortex", "role": "target_field" },
         { "term": "corticospinal tract", "field": "/tara/dsm5/pathway", "quote": "N2 (corticospinal tract) → N1 (motor neurons)", "role": "pathway_stage" },
         { "term": "motor neurons", "field": "/tara/dsm5/pathway", "quote": "N2 (corticospinal tract) → N1 (motor neurons)", "role": "pathway_stage" }
+      ],
+      "skipped": [
+        { "field": "/sources/0", "text": "Cortex", "category": "citation" }
       ]
     },
     "QIF-T0124": {
@@ -324,6 +336,9 @@
         { "term": "hypothalamus", "field": "/tara/dsm5/pathway", "quote": "N4 (hypothalamus/PAG)", "role": "pathway_stage" },
         { "term": "PAG", "field": "/tara/dsm5/pathway", "quote": "N4 (hypothalamus/PAG)", "role": "pathway_stage" },
         { "term": "autonomic nervous system", "field": "/tara/dsm5/pathway", "quote": "N1 (autonomic nervous system)", "role": "pathway_stage" }
+      ],
+      "skipped": [
+        { "field": "/sources/0", "text": "Cortex", "category": "citation" }
       ]
     },
     "QIF-T0128": {
@@ -440,6 +455,9 @@
       "links": [
         { "term": "VTA", "field": "/tara/mechanism", "quote": "iron-oxide NPs in VTA/SNc", "role": "action_target" },
         { "term": "SNc", "field": "/tara/mechanism", "quote": "iron-oxide NPs in VTA/SNc", "role": "action_target" }
+      ],
+      "skipped": [
+        { "field": "/niss/metric_evidence/CD/supports", "text": "subthalamic nucleus", "category": "prior_demonstration" }
       ]
     },
     "QIF-T0142": {
@@ -455,6 +473,9 @@
     "QIF-T0144": {
       "links": [
         { "term": "M1", "field": "/tara/mechanism", "quote": "MRS-confirmed GABA increase in M1", "role": "action_target" }
+      ],
+      "skipped": [
+        { "field": "/niss/metric_evidence/CD/supports", "text": "motor cortex", "category": "prior_demonstration" }
       ]
     },
     "QIF-T0145": {

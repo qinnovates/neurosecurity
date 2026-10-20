@@ -532,7 +532,7 @@
         "Vitamin B6 (pyridoxine, cofactor for AADC in dopamine synthesis)"
       ],
       "qif_band": "N4",
-      "qif_notes": "Arcuate nucleus TIDA neurons (N4). Dopaminergic control pathway bridges N4 to N5 (basal ganglia dopamine system interconnections).",
+      "qif_notes": "Arcuate nucleus TIDA neurons (N4), projecting to the median eminence. The midbrain dopamine cell groups (substantia nigra, VTA) are addressed in N2 under addressing version 2; the earlier note that this pathway bridges N4 to N5 is withdrawn.",
       "functions": ["lactation", "reproductive function", "immune modulation", "dopaminergic tone regulation"],
       "dsm_conditions": [
         {"condition": "Hyperprolactinemia", "association": "Amenorrhea, galactorrhea, sexual dysfunction, depression, anxiety. Antipsychotic-induced: near-universal with typical antipsychotics (D2 antagonists), common with risperidone, amisulpride."},

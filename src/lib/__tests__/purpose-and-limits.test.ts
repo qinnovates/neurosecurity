@@ -27,8 +27,13 @@ describe('catalog coverage', () => {
     }
   });
 
-  it('counts NISS scores from techniques that carry a niss block', () => {
-    expect(coverage.scored).toBe(techniques.filter((technique) => technique.niss).length);
+  it('counts only complete NISS scores, not provisional ranges or unscored entries', () => {
+    const isCompleteScore = (niss: unknown): boolean => {
+      if (!niss || typeof niss !== 'object') return false;
+      const state = (niss as { scoring_state?: unknown }).scoring_state;
+      return state !== 'provisional' && state !== 'unscored';
+    };
+    expect(coverage.scored).toBe(techniques.filter((technique) => isCompleteScore(technique.niss)).length);
   });
 });
 

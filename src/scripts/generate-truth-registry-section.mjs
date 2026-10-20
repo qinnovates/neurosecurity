@@ -41,6 +41,23 @@ const registrar = JSON.parse(readFileSync(REGISTRAR_PATH, 'utf8'));
 const techniques = registrar.techniques;
 const scored = techniques.filter((technique) => technique.niss?.vector);
 const unscored = techniques.filter((technique) => !technique.niss?.vector);
+// Three-state NISS: a provisional entry stores a score range, an unscored one stores a reason.
+const provisional = unscored.filter((technique) => technique.niss?.scoring_state === 'provisional');
+const withheld = unscored.filter((technique) => technique.niss?.scoring_state !== 'provisional');
+const unscoredReasons = tally(withheld, (technique) => technique.niss?.unscored_reason ?? 'not recorded');
+const UNSCORED_REASON_TEXT = {
+  preprint_only: 'rest on preprints alone',
+  no_source: 'have no source',
+  no_metric_supported: 'cite sources that report none of the six effects the metrics measure',
+};
+const unscoredReasonText = Object.entries(unscoredReasons)
+  .sort(([, a], [, b]) => b - a)
+  .map(([reason, count]) => `${count} ${UNSCORED_REASON_TEXT[reason] ?? `record the reason "${reason}"`}`)
+  .join(', ');
+const statusDefinitions = registrar.tara_spec?.status_definitions;
+const retiredStatuses = Object.entries(statusDefinitions?.values ?? {})
+  .filter(([, definition]) => String(definition).startsWith('RETIRED'))
+  .map(([name]) => name);
 const children = techniques.filter((technique) => technique.parent_id);
 const severity = tally(scored, (technique) => technique.niss.severity);
 const status = tally(techniques, (technique) => technique.status);
@@ -74,7 +91,7 @@ const section = `> **Last computed: ${computedOn} from \`datalake/qtara-registra
 | Metric | Value |
 |--------|-------|
 | **Total techniques** | ${techniques.length} (${techniques.length - children.length} top-level, ${children.length} sub-techniques) |
-| **NISS version** | v${nissVersions.join(', v')} on ${scored.length} techniques; ${unscored.length} not yet scored${unscored.length ? ` (${unscored[0].id} to ${unscored[unscored.length - 1].id})` : ''} |
+| **NISS version** | v${nissVersions.join(', v')}. Three scoring states: ${scored.length} scored, ${provisional.length} provisional (a score range, no score), ${withheld.length} unscored |
 | **Domains** | ${domains.length} (${domains.join(', ')}) |
 | **Modes** | ${modes.length} (${modes.join(', ')}) |
 | **Tactics** | ${(registrar.tactics ?? []).length} unique |
@@ -82,9 +99,11 @@ const section = `> **Last computed: ${computedOn} from \`datalake/qtara-registra
 | **Evidence status** | ${statusText} |
 
 **Open items**, documented per technique in \`datalake/tara-scoring-gaps.json\` and published at \`/atlas/scoring/#coverage\`:
-- ${unscored.length} techniques carry no NISS score. Each entry supports only one of the six metrics, so the other five would have to be invented. They stay unscored until their entries carry a measured effect, a functional outcome mapping, an access model and persistence evidence.
-- Two severity fields disagree. \`niss.severity\` is formula-derived over the ${scored.length} scored techniques and is what the site shows; the legacy \`severity\` field predates NISS, has no recorded formula, and is retained only because the unscored techniques carry nothing else.
-- \`PLAUSIBLE\` and \`SPECULATIVE\` appear as status values but are not among the four documented levels.
+- ${unscored.length} techniques carry no NISS score. ${provisional.length} are provisional: at least one metric is supported by a source on the entry and at least one is not, so the entry stores the supported values, the source for each, and the lowest and highest score the formula allows for the rest (a bound, not an estimate). ${withheld.length} are unscored: ${unscoredReasonText}. A metric is coded only when a source reports the effect it measures.
+- Two severity fields disagree. \`niss.severity\` is formula-derived over the ${scored.length} scored techniques and is what the site shows; the legacy \`severity\` field predates NISS, has no recorded formula, and is retained only because the ${unscored.length} techniques without a score carry nothing else. Whether to retire or rename it is an open framework decision.
+${statusDefinitions
+    ? `- Status values are defined in \`tara_spec.status_definitions\`${retiredStatuses.length ? `; ${retiredStatuses.join(', ')} is retired and appears only in \`status_prior\`` : ''}.`
+    : '- `PLAUSIBLE` and `SPECULATIVE` appear as status values but are not among the four documented levels.'}
 
 ### 10.2 NISS Severity Distribution
 

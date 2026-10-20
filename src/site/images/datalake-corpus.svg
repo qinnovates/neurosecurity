@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" aria-label="Open datalake inventory: 21,467 records across 28 datasets, including 20,182 neural impact chains, 176 proposed techniques, 24 BCI devices and 221 cited DOIs.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" aria-label="Open datalake inventory: 21,471 records across 28 datasets, including 20,182 neural impact chains, 178 proposed techniques, 24 BCI devices and 257 cited DOIs.">
 <rect width="1200" height="460" rx="18" fill="#0b1120"/>
 <text x="36" y="52" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="30" font-weight="700" fill="#e6ebf5">Open datalake inventory</text>
-<text x="36" y="82" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" fill="#93a1bd">21,467 records inventoried from 28 of the 39 open datasets. Every figure is counted from the file that owns it, not hand-typed.</text>
+<text x="36" y="82" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" fill="#93a1bd">21,471 records inventoried from 28 of the 40 open datasets. Every figure is counted from the file that owns it, not hand-typed.</text>
 <rect x="36" y="118" width="365.3333333333333" height="132" rx="12" fill="#111a2e"/>
 <rect x="36" y="118" width="365.3333333333333" height="4" rx="2" fill="#06b6d4"/>
 <text x="60" y="192" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="54" font-weight="700" fill="#e6ebf5">20,182</text>
@@ -9,7 +9,7 @@
 <text x="60" y="238" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" fill="#93a1bd">technique x region x band</text>
 <rect x="417.3333333333333" y="118" width="365.3333333333333" height="132" rx="12" fill="#111a2e"/>
 <rect x="417.3333333333333" y="118" width="365.3333333333333" height="4" rx="2" fill="#06b6d4"/>
-<text x="441.3333333333333" y="192" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="54" font-weight="700" fill="#e6ebf5">176</text>
+<text x="441.3333333333333" y="192" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="54" font-weight="700" fill="#e6ebf5">178</text>
 <text x="441.3333333333333" y="218" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="600" fill="#e6ebf5">proposed TARA techniques</text>
 <text x="441.3333333333333" y="238" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" fill="#93a1bd">17 tactics · 8 domains</text>
 <rect x="798.6666666666666" y="118" width="365.3333333333333" height="132" rx="12" fill="#111a2e"/>
@@ -19,18 +19,18 @@
 <text x="822.6666666666666" y="238" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" fill="#93a1bd">implant, DBS, cochlear, consumer</text>
 <rect x="36" y="266" width="365.3333333333333" height="132" rx="12" fill="#111a2e"/>
 <rect x="36" y="266" width="365.3333333333333" height="4" rx="2" fill="#f59e0b"/>
-<text x="60" y="340" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="54" font-weight="700" fill="#e6ebf5">67</text>
+<text x="60" y="340" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="54" font-weight="700" fill="#e6ebf5">68</text>
 <text x="60" y="366" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="600" fill="#e6ebf5">BCI companies tracked</text>
-<text x="60" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" fill="#93a1bd">26 policy milestones</text>
+<text x="60" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" fill="#93a1bd">27 policy milestones</text>
 <rect x="417.3333333333333" y="266" width="365.3333333333333" height="132" rx="12" fill="#111a2e"/>
 <rect x="417.3333333333333" y="266" width="365.3333333333333" height="4" rx="2" fill="#10b981"/>
 <text x="441.3333333333333" y="340" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="54" font-weight="700" fill="#e6ebf5">107</text>
 <text x="441.3333333333333" y="366" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="600" fill="#e6ebf5">CVEs mapped to techniques</text>
-<text x="441.3333333333333" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" fill="#93a1bd">covering 27 of 176</text>
+<text x="441.3333333333333" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" fill="#93a1bd">covering 27 of 178</text>
 <rect x="798.6666666666666" y="266" width="365.3333333333333" height="132" rx="12" fill="#111a2e"/>
 <rect x="798.6666666666666" y="266" width="365.3333333333333" height="4" rx="2" fill="#10b981"/>
-<text x="822.6666666666666" y="340" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="54" font-weight="700" fill="#e6ebf5">221</text>
+<text x="822.6666666666666" y="340" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="54" font-weight="700" fill="#e6ebf5">257</text>
 <text x="822.6666666666666" y="366" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="600" fill="#e6ebf5">unique DOIs cited</text>
 <text x="822.6666666666666" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" fill="#93a1bd">154 researchers catalogued</text>
-<text x="36" y="434" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" fill="#93a1bd">Proposed, unvalidated research artefacts for threat modelling and risk assessment. Generated 2026-10-18 by npm run datalake:inventory.</text>
+<text x="36" y="434" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" fill="#93a1bd">Proposed, unvalidated research artefacts for threat modelling and risk assessment. Generated 2026-10-20 by npm run datalake:inventory.</text>
 </svg>

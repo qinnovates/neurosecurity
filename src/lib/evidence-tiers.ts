@@ -163,7 +163,10 @@ export function statusToEvidenceGroup(status: string | undefined | null): Eviden
   if (!status) return 'speculative';
   switch (status.toUpperCase()) {
     case 'CONFIRMED':
-      return 'demonstrated'; // confirmed ≠ peer-reviewed; best we can claim is demonstrated
+      return 'demonstrated'; // retired 2026-10-16; retained for historical records
+    case 'PLAUSIBLE':
+    case 'SPECULATIVE':
+      return 'speculative';
     case 'DEMONSTRATED':
       return 'demonstrated';
     case 'THEORETICAL':

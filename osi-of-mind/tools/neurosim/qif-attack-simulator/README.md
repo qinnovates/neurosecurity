@@ -53,7 +53,7 @@ qif-attack-simulator/
 Attacks are organized by two dimensions:
 
 - **Primary key: QIF-T ID** (unique per technique, from TARA registry)
-- **Grouping: NIC chain** (Neural Impact Chain, shows signal flow through the 11-band hourglass)
+- **Grouping: NIC chain** (Neural Impact Chain, shows the hourglass bands a technique is associated with; not a traced signal path)
 
 ### By QIF-T ID
 

@@ -549,10 +549,10 @@ But surgical procedures and medicine will advance. Robotic surgery, better elect
 
 1. **A device at the thalamus has access to essentially all sensory traffic** (vision, audition, somatosensory, proprioception — everything except olfaction). What governance framework should exist *before* this becomes technically feasible?
 2. **How do you obtain informed consent** for a device that could access all sensory modalities simultaneously? Current consent frameworks are built for single-modality BCIs (motor cortex for movement, auditory cortex for hearing).
-3. **What are the security implications of a compromised thalamic BCI vs a cortical one?** In QIF terms, I0-subcortical has fewer biological gating layers bypassed but access to mixed sensory relay traffic — a different and potentially more dangerous threat profile.
+3. **What are the security implications of a compromised thalamic BCI vs a cortical one?** In QIF terms, I0-subcortical has access to mixed sensory relay traffic — a different and potentially more dangerous threat profile. (**Under review, 2026-10-06:** the earlier wording that it has "fewer biological gating layers bypassed" rested on the gating analogy and needs a new justification or withdrawal.)
 4. **Should there be a regulatory distinction** between cortical BCIs (single-modality access) and thalamic BCIs (multi-modality access)? Current FDA classifications don't differentiate by implant depth.
 5. **Who decides when the risk/reward threshold has shifted enough** to justify thalamic implantation for recording? Clinicians? Ethics boards? Patients? Regulators?
-6. **The olfactory exception:** A thalamic BCI would be "smell-blind" since olfaction bypasses the thalamus. If you wanted full sensory capture, you'd still need a separate sensor at the olfactory bulb. Does this create a regulatory loophole or a natural privacy protection?
+6. **The olfactory exception:** A thalamic BCI would be "smell-blind" since the first cortical stage of olfaction does not relay in the thalamus. If you wanted full sensory capture, you'd still need a separate sensor at the olfactory bulb. Does this create a regulatory loophole or a natural privacy protection?
 
 #### Why This Is Not Hypothetical
 
@@ -563,7 +563,7 @@ But surgical procedures and medicine will advance. Robotic surgery, better elect
 
 #### Connection to QIF
 
-The I0 depth subclassification (Entry 59) was created specifically to capture this distinction. I0-cortical, I0-subcortical, I0-spinal/peripheral, and I0-noninvasive have different security profiles because they bypass different numbers of biological gating layers. The thalamic BCI question is the most acute case of I0-subcortical risk.
+The I0 depth subclassification (Entry 59) was created specifically to capture this distinction. I0-cortical, I0-subcortical, I0-spinal/peripheral, and I0-noninvasive differ in where the electrode sits. **Under review (2026-10-06):** the earlier claim that they have different security profiles because they bypass different numbers of biological gating layers rested on the gating analogy and needs a new justification or withdrawal. The thalamic BCI question is the most acute case of I0-subcortical risk.
 
 ---
 

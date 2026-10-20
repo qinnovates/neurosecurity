@@ -16,7 +16,7 @@
         "year": 2006,
         "work": "Brain Overclaim Syndrome",
         "journal": "Ohio State J. Criminal Law / Mercer Law Review (2011)",
-        "researchSourceId": "E11"
+        "researchSourceId": "I3"
       },
       "neuroethics": {
         "constraint": "Neural correlates do not prove causation or eliminate agency. Neuroscience findings are routinely overclaimed when applied to law and policy.",
@@ -37,7 +37,7 @@
         "year": 2006,
         "work": "Can cognitive processes be inferred from neuroimaging data?",
         "journal": "Trends in Cognitive Sciences",
-        "researchSourceId": "E12"
+        "researchSourceId": "E15"
       },
       "neuroethics": {
         "constraint": "Brain region activation does not uniquely identify a cognitive process. Signal detection does not entail mental-state identification.",
@@ -58,7 +58,7 @@
         "year": 2005,
         "work": "Neuroethics rigor in neuroscience communication",
         "journal": "Nature Reviews Neuroscience (related work)",
-        "researchSourceId": "E11"
+        "researchSourceId": "E16"
       },
       "neuroethics": {
         "constraint": "Brain images create three biases: neuro-realism (overcredibility), neuro-essentialism (reducing people to brains), neuropolicy (premature policy justification). Check all three.",
@@ -79,7 +79,7 @@
         "year": 2022,
         "work": "Mental privacy / cognitive liberty",
         "journal": "Various (Ienca 2021, Bublitz 2022)",
-        "researchSourceId": "E9"
+        "researchSourceId": "C92"
       },
       "neuroethics": {
         "constraint": "Existing human rights may cover neural data without inventing new neurorights. Don't assume new rights are needed without showing the gap.",
@@ -121,7 +121,7 @@
         "year": 2019,
         "work": "Brain reading capability limits",
         "journal": "Various (Ienca 2018, Wexler 2019)",
-        "researchSourceId": "E10"
+        "researchSourceId": "E17"
       },
       "neuroethics": {
         "constraint": "Current BCIs cannot 'read thoughts.' Decoded outputs are selected from known lists, require user cooperation, and need algorithm training.",
@@ -142,7 +142,7 @@
         "year": 2012,
         "work": "Neuroscience, ethics, and national security",
         "journal": "PLoS Biology",
-        "researchSourceId": "E13"
+        "researchSourceId": "C111"
       },
       "neuroethics": {
         "constraint": "Security framing of neurotech risks enabling surveillance. Always pair threat descriptions with governance constraints.",
@@ -163,7 +163,7 @@
         "year": 2009,
         "work": "Neuroimaging false-positive rates",
         "journal": "Various (Vul 2009, Eklund 2016)",
-        "researchSourceId": null
+        "researchSourceId": "E19"
       },
       "neuroethics": {
         "constraint": "Neuroimaging studies have high false-positive rates. Never cite fMRI correlations as strong evidence without noting methodological limitations.",

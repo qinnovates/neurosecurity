@@ -18,30 +18,8 @@ Domain-specific protocols load automatically via `.claude/rules/` when you work 
 | Whitepaper Archival | `.claude/rules/whitepaper-archival.md` | `src/pages/research/whitepaper/**` |
 | AI Security Ethics | `.claude/rules/ai-security-ethics.md` | `osi-of-mind/**`, `governance/**`, `research/**` |
 
-## claudeq Mode -- Live Derivation Journaling
+## claudeq Mode -- retired 2026-10-16
 
-When Kevin says "claudeq" or "start journaling", activate live derivation logging to `osi-of-mind/QIF-DERIVATION-LOG.md`.
-
-### Activation Steps
-1. Announce: "Derivation journal active. Tracking all exchanges to QIF-DERIVATION-LOG.md."
-2. Determine next entry number from the log
-3. Create entry header at TOP (reverse-chronological):
-   ```markdown
-   ## Entry [N]: [Topic TBD] {#entry-[n]-[slug]}
-   **Date:** [YYYY-MM-DD], ~[HH:MM]
-   **Classification:** [TBD]
-   **AI Systems:** Claude Opus 4.6
-   **Connected entries:** [fill as connections emerge]
-   ```
-4. Log every exchange with `[YYYY-MM-DD HH:MM]` timestamps
-5. Kevin's words are COMPLETELY RAW. No corrections. No polish. No grammar fixes
-6. Update entry title when topic becomes clear
-7. At session end, add AI Collaboration section and update Entry Index table
-
-### Rules
-- Do NOT skip logging trivial exchanges
-- Normalize spelling, grammar, and phrasing before committing -- preserve meaning and decisions, not verbatim text
-- Do NOT wait until end to write (log as you go)
-- Do NOT create separate files (everything in QIF-DERIVATION-LOG.md)
-- Standard triggers (glossary sync, research sources, etc.) still apply
-- Exception: "incognito" exchanges or PII/credentials
+Live journaling into the public derivation log is retired. The log records major changes only, as
+technical outcomes (see `.claude/rules/derivation-log.md`). Conversation, raw notes and
+deliberation are internal and go to the private vault or `_staging/`, never into this repository.

@@ -501,7 +501,7 @@ export const PREDECESSOR_RESEARCH: PredecessorResearch[] = [
     year: 2021,
     title: 'A Framework and Taxonomy of Attacks on Brain-Computer Interfaces',
     venue: 'arXiv preprint',
-    contribution: 'Most comprehensive BCI attack taxonomy before TARA. Organized attacks by confidentiality, integrity, and availability.',
+    contribution: 'A broad BCI attack taxonomy that predates TARA. Organized attacks by confidentiality, integrity, and availability.',
     whatQifAdds: `TARA extends from their CIA foundation to ${TECHNIQUE_COUNT} techniques with NISS scoring, dual-use classification, and DSM-5-TR psychiatric impact mappings.`,
   },
   {

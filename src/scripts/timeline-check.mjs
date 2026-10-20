@@ -133,9 +133,12 @@ if (registry?.techniques) {
 
 // Scoring coverage, domains and declared versions (from qtara-registrar.json)
 if (registry?.techniques) {
-  actual.techniques_niss_scored = registry.techniques.filter((technique) => technique.niss?.version).length;
+  actual.techniques_niss_scored = registry.techniques.filter((technique) => technique.niss?.scoring_state === 'scored').length;
+  actual.techniques_niss_provisional = registry.techniques.filter((technique) => technique.niss?.scoring_state === 'provisional').length;
   actual.tara_domains = new Set(registry.techniques.map((technique) => technique.tara_domain_primary).filter(Boolean)).size;
 }
+// Variants are counted apart from techniques, never added to threat_techniques
+if (Array.isArray(registry?.variants)) actual.technique_variants = registry.variants.length;
 if (registry?.niss_spec?.version) actual.niss_version = `v${registry.niss_spec.version}`;
 if (registry?.version) actual.registrar_version = `v${registry.version}`;
 
@@ -198,7 +201,7 @@ console.log(`Check date:     ${iso()}\n`);
 const fields = [
   'threat_techniques', 'tara_tactics', 'neurorights_mapped', 'bci_devices', 'brain_regions',
   'physics_constraints', 'research_sources', 'derivation_log_entries',
-  'techniques_niss_scored', 'tara_domains', 'bci_companies',
+  'techniques_niss_scored', 'techniques_niss_provisional', 'technique_variants', 'tara_domains', 'bci_companies',
   'niss_version', 'registrar_version', 'landscape_dataset_version', 'sdk_version', 'whitepaper_version',
   'hourglass_bands', 'dsm5_diagnoses_mapped', 'techniques_with_dsm5', 'field_journal_entries', 'blog_posts',
 ];

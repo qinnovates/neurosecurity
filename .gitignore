@@ -106,7 +106,9 @@ drafts/
 *.tt.gz
 src/scripts/atlas-pipeline/**/__pycache__/
 
-# Internal material: never publish.
+# Internal material: never publish (2026-10-16).
+# Planning docs, decision briefs, Quorum output, session reports and outreach drafts
+# live in _staging/ or the private Obsidian vault, never in this public repository.
 _staging/
 governance/outreach/
 src/site/governance/outreach/

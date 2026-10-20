@@ -129,8 +129,8 @@ function OverviewTab({ band }: { band: AtlasBand }) {
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <StatCard label="Zone" value={band.zone} color={band.color} />
-        <StatCard label="Determinacy" value={band.determinacy} color={band.color} />
-        <StatCard label="QI Range" value={`${band.qiRange[0]} - ${band.qiRange[1]}`} color={band.color} />
+        <StatCard label="Determinacy (hypothesis)" value={band.determinacy} color={band.color} />
+        <StatCard label="QI Range (hypothesis)" value={`${band.qiRange[0]} - ${band.qiRange[1]}`} color={band.color} />
         <StatCard label="Severity" value={band.severity.split('(')[0].trim()} color={band.color} />
       </div>
 

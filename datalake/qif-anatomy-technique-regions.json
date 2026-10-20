@@ -407,7 +407,7 @@
     },
     "QIF-T0059": {
       "scope": "band_level",
-      "rationale": "no_structure_named: No field of this technique's registrar text names a structure. Its generated band summary is not counted.",
+      "rationale": "structure_named_only_as_context: A structure is named only as context (negation, contrast, clinical analog, citation), not as this technique's target. Its generated band summary is not counted.",
       "links": []
     },
     "QIF-T0060": {

@@ -380,11 +380,11 @@ describe('AtlasExplorer: device stages and the H01 card', () => {
   it('lists exactly the techniques with no brain band across its four stages', async () => {
     const rail = await renderRail();
     expect([...rail.querySelectorAll<HTMLElement>('[data-stage-id]')].map((stage) => stage.dataset.stageId)).toEqual(['S3', 'S2', 'S1', 'I0']);
-    expect(rail.textContent).toContain('65 techniques carry no brain band.');
+    expect(rail.textContent).toContain('67 techniques carry no brain band.');
     expect(rail.textContent).not.toMatch(/not on a brain region|act on the device/);
     expect(['device_stages', 'stage_tags', 'band_order'].filter((id) => rail.querySelector(`[data-limit-id="${id}"]`) === null)).toEqual([]);
     expect(openEveryStage(rail)).toEqual(deviceOnlyIds);
-    expect(deviceOnlyIds).toHaveLength(65);
+    expect(deviceOnlyIds).toHaveLength(67);
     expect(rail.querySelector('[data-ai-drafted]')).toBeNull();
     expect(rail.querySelectorAll('[data-mixed="true"]')).toHaveLength(0);
     expect(rail.textContent).not.toContain('Also carries');
@@ -393,7 +393,7 @@ describe('AtlasExplorer: device stages and the H01 card', () => {
   it('opens one stage at a time and marks every drafted link it shows once mixed techniques are listed', async () => {
     const rail = await renderRail();
     fireEvent.click(within(rail).getByRole('button', { name: /Also list the 77 techniques/ }));
-    expect(openEveryStage(rail)).toHaveLength(142);
+    expect(openEveryStage(rail)).toHaveLength(144);
     expect(rail.querySelectorAll('[data-stage-id][data-active="true"]')).toHaveLength(1);
     const withLinks = [...rail.querySelectorAll<HTMLElement>('[data-mixed="true"]')].filter((item) => /\d+ region links? drafted/.test(item.textContent ?? ''));
     expect(withLinks.length).toBeGreaterThan(0);

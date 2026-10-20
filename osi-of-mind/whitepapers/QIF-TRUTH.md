@@ -44,16 +44,20 @@
 
 ### 3 Zones, 11 Bands (7-1-3)
 
-**NEURAL DOMAIN (Upper Hourglass) — 7 bands, severity-stratified**
+**NEURAL DOMAIN (Upper Hourglass) — 7 bands (addressing version 2, 2026-10-06)**
+
+> Band codes are addresses, not an order: the number carries no severity, processing or traversal meaning. A structure's band is where it physically is. Circuits such as the basal ganglia and the limbic system are functional tags, not bands. Version 2 moved the substantia nigra and VTA from N5 to N2 and the STN from N5 to N4, and renamed N5 and N6. Source of truth for membership: `datalake/qif-brain-bci-atlas.json`.
+>
+> Determinacy and QI Range are **hypotheses**: untested, with no estimator defined, and proposed for the version 1 memberships (`datalake/qif-hypotheses.json`).
 
 | Band | Name | Key Structures | Determinacy | QI Range |
 |------|------|----------------|-------------|----------|
 | **N7** | Neocortex | PFC, M1, V1, A1, Broca, Wernicke, PMC, SMA, PPC | Quantum Uncertain | 0.3–0.5 |
-| **N6** | Limbic System | Hippocampus, BLA, insula, ACC, cingulate | Chaotic → QU | 0.2–0.4 |
-| **N5** | Basal Ganglia | Striatum, GPi/GPe, STN, substantia nigra | Chaotic | 0.15–0.35 |
-| **N4** | Diencephalon | Thalamus, hypothalamus, VIM, ANT | Stochastic → Chaotic | 0.1–0.3 |
+| **N6** | Allocortex | Hippocampus, BLA, insula, ACC, cingulate | Chaotic → QU | 0.2–0.4 |
+| **N5** | Cerebral nuclei | Striatum, GPi/GPe, central amygdala | Chaotic | 0.15–0.35 |
+| **N4** | Diencephalon | Thalamus, hypothalamus, STN, VIM, ANT | Stochastic → Chaotic | 0.1–0.3 |
 | **N3** | Cerebellum | Cerebellar cortex, deep nuclei, vermis | Stochastic | 0.1–0.25 |
-| **N2** | Brainstem | Medulla, pons, midbrain, reticular formation | Stochastic | 0.05–0.15 |
+| **N2** | Brainstem | Medulla, pons, midbrain, substantia nigra, VTA, reticular formation | Stochastic | 0.05–0.15 |
 | **N1** | Spinal Cord | Cervical, thoracic, lumbar, sacral, cauda equina | Stochastic | 0.01–0.1 |
 
 **INTERFACE ZONE (Bottleneck) — Quasi-quantum**
@@ -75,14 +79,14 @@
 | v3.1 | v4.0 | Change |
 |------|------|--------|
 | N3 Integrative Association | **N7** Neocortex + **N6** Limbic | Split cortical cognition from emotional/memory |
-| N2 Sensorimotor Processing | **N7** (cortices) + **N5** Basal Ganglia + **N3** Cerebellum | Split cortical from subcortical motor |
+| N2 Sensorimotor Processing | **N7** (cortices) + **N5** Cerebral nuclei + **N3** Cerebellum | Split cortical from subcortical motor |
 | N1 Subcortical Relay | **N4** Diencephalon + **N2** Brainstem + **N1** Spinal Cord | Full peripheral coverage |
 | I0, S1, S2, S3 | Unchanged | Silicon domain already granular |
 
 ### Key Anatomical Decisions (v4.0)
 - **38 brain regions mapped** (was 17 in v3.1). Each region has a canonical band assignment and documented inter-region connections.
-- **Severity stratification:** Bands are ordered by clinical severity if compromised. N7 (neocortex) = highest cognitive impact. N1 (spinal cord) = reflex/motor only.
-- **BCI device mapping:** Each band lists which real-world devices interface with it (e.g., N5: Medtronic Percept STN DBS; N7: Neuralink N1).
+- **Severity stratification (superseded 2026-10-06):** v4.0 ordered bands by clinical severity if compromised (N7 highest cognitive impact, N1 reflex/motor only). Under addressing version 2 the band number carries no severity meaning.
+- **BCI device mapping:** Each band lists which real-world devices interface with it (e.g., N4: Medtronic Percept STN DBS; N7: Neuralink N1).
 - **S1_cortex:** Primary somatosensory cortex renamed to avoid collision with S1 (Analog Front-End) band ID.
 
 ### Naming Convention
@@ -100,26 +104,27 @@
 
 ### I0 Depth Subclassification (Entry 59, 2026-02-18)
 
-The security criticality of the I0 band depends on **where** in the neural hierarchy the electrode is placed. Deeper implants bypass more biological security layers (the thalamic gating, cortical gating, brainstem autonomic regulation), increasing both the attack surface and the severity of compromise.
+The I0 subtypes below record **where** the electrode is placed, by band. **Under review:** the earlier statement that security criticality depends on depth because an implant bypasses biological security layers (thalamic gating, cortical gating, brainstem autonomic regulation) rested on the gating analogy and needs a new justification or withdrawal. The "Bands Above" counts and the risk ranking in the table (highest, high, moderate, lowest) rested on the same analogy and are under review with it.
 
-| Subtype | Placement | Biological Layers Above | Directionality | Risk Profile | Example Devices |
+| Subtype | Placement | Bands Above (count only, under review) | Directionality | Risk Profile | Example Devices |
 |---------|-----------|------------------------|----------------|--------------|-----------------|
-| **I0-cortical** | Neocortex (N7) surface/penetrating | 0 — no biological security layers above | Read (BrainGate, Utah Array), Bidirectional (Neuralink N1) | Highest direct cognitive risk. Full access to executive, motor, sensory cortex. Bypasses thalamic gating entirely. | Neuralink N1, Utah Array, BrainGate, CortiCom |
-| **I0-subcortical** | Thalamus (N4), Basal Ganglia (N5), Limbic (N6) | 1–3 — inside or below the thalamic gating | Bidirectional (Medtronic Percept RC, NeuroPace RNS), Write (older DBS leads) | High risk. Direct access to relay, motor control, emotional circuits. Some thalamic gating preserved for non-target regions. | Medtronic Percept (STN DBS), ANT-DBS, NeuroPace RNS |
-| **I0-spinal/peripheral** | Spinal cord (N1), brainstem (N2) | 5–6 — full neural hierarchy above | Write (epidural stimulators, VNS) | Moderate risk. Motor/autonomic effects but limited cognitive access. Signal must traverse brainstem, cerebellum, diencephalon to reach cortex. | Epidural spinal stimulators, vagus nerve stimulators |
-| **I0-noninvasive** | Scalp surface (above N7) | All 7 — full biological stack | Read (EEG, fNIRS), Write (TMS, tDCS) | Lowest direct risk. Signal attenuated by skull, CSF, meninges. Volume conduction limits spatial resolution. Attack bandwidth limited by physics. | EEG (Muse, Emotiv), fNIRS, TMS, tDCS |
+| **I0-cortical** | Neocortex (N7) surface/penetrating | 0 | Read (BrainGate, Utah Array), Bidirectional (Neuralink N1) | Highest direct cognitive risk. Full access to executive, motor, sensory cortex. Stimulation or recording here does not pass through the thalamic relay. | Neuralink N1, Utah Array, BrainGate, CortiCom |
+| **I0-subcortical** | Thalamus and STN (N4), Cerebral nuclei (N5), Allocortex (N6) | 1–3 | Bidirectional (Medtronic Percept RC, NeuroPace RNS), Write (older DBS leads) | High risk. Direct access to relay, motor control, emotional circuits. | Medtronic Percept (STN DBS), ANT-DBS, NeuroPace RNS |
+| **I0-spinal/peripheral** | Spinal cord (N1), brainstem (N2) | 5–6 | Write (epidural stimulators, VNS) | Moderate risk. Motor/autonomic effects but limited cognitive access. Ascending sensory signals reach cortex through brainstem and thalamic relays. | Epidural spinal stimulators, vagus nerve stimulators |
+| **I0-noninvasive** | Scalp surface (above N7) | All 7 | Read (EEG, fNIRS), Write (TMS, tDCS) | Lowest direct risk. Signal attenuated by skull, CSF, meninges. Volume conduction limits spatial resolution. Attack bandwidth limited by physics. | EEG (Muse, Emotiv), fNIRS, TMS, tDCS |
 
-**Key insight:** The thalamus (N4) acts as a biological gating layer — the reticular thalamic nucleus (TRN) implements default-deny inhibition on all ascending sensory traffic. I0-cortical implants sit **above** this firewall, bypassing its protection entirely. This is why cortical BCIs have the highest security criticality in the QIF model.
+**Thalamic relay (corrected 2026-10-06):** The thalamus (N4) is the principal route by which sensory input (except the first cortical stage of olfaction), cerebellar output and basal ganglia output reach neocortex. Transmission through it is state-dependent, set by cortical layer-6 feedback, brainstem neuromodulators and inhibition from the thalamic reticular nucleus. It is not a security control: motor output, cortico-cortical traffic and neuromodulatory projections do not relay there. **Under review:** the earlier statement that cortical implants have the highest security criticality because they sit above a thalamic gate rested on that analogy and needs a new justification or withdrawal.
 
-**NISS implications:** I0 depth should modulate NISS scoring. An identical attack technique targeting I0-cortical vs I0-noninvasive would receive different Biological Impact (BI) and Reversibility (RV) scores due to the difference in biological security layers traversed.
+**NISS implications:** I0 depth should modulate NISS scoring. An identical attack technique targeting I0-cortical vs I0-noninvasive would receive different Biological Impact (BI) and Reversibility (RV) scores. **Under review:** this was justified by a difference in "biological security layers traversed", which rested on the gating analogy and needs a new justification or withdrawal.
 
-**Thalamic bypass exceptions:** Not all neural traffic passes through the thalamus. Known bypass pathways include:
-- Amygdala fast path (direct sensory → BLA, ~12ms, no thalamic gating — emergency/threat response)
+**Routes that do not relay in the thalamus:** Not all neural traffic passes through the thalamus. Examples include:
 - Spinal reflexes (local loop at N1, never ascends)
 - Brainstem autonomic (N2, direct regulation of vital functions)
 - Olfactory pathway (olfactory bulb → piriform cortex, phylogenetically ancient)
 
-These bypasses represent additional attack surfaces without the thalamic gating's protection.
+The amygdala fast path was listed here in error: the subcortical route to the amygdala skips the cortical stage but runs through the sensory thalamus, so it is not a non-thalamic route.
+
+**Under review:** the earlier conclusion that these routes are additional attack surfaces because they lack the thalamic gate's protection rested on the gating analogy and needs a new justification or withdrawal.
 
 ### I0 Directionality (Entry 014 Field Journal, 2026-02-18)
 
@@ -134,10 +139,10 @@ BCI directionality is orthogonal to I0 depth and critically affects the threat p
 **NISS implications:** Directionality should modulate NISS scoring alongside I0 depth. A bidirectional I0-subcortical device (e.g., NeuroPace RNS) may warrant higher composite scores than a read-only I0-cortical device (e.g., BrainGate) despite shallower depth, because bidirectionality enables both exfiltration and injection.
 
 ### Classical Ceiling
-The boundary between N6 (chaotic → quantum uncertain) and N7 (quantum uncertain) is the **classical ceiling** — below it, all unpredictability is in principle resolvable with better measurement; above it, the unpredictability is ontic (Bell's theorem). Classical security tools operate below the ceiling. QIF operates across the full spectrum.
+Under the determinacy hypothesis (untested, no estimator defined), the boundary between N6 (chaotic → quantum uncertain) and N7 (quantum uncertain) would be the **classical ceiling** — below it, all unpredictability is in principle resolvable with better measurement; above it, the unpredictability is ontic (Bell's theorem). Classical security tools operate below the ceiling. QIF operates across the full spectrum.
 
 ### QI Range Philosophy (v4.0)
-QI ranges reflect security-relevant indeterminacy, not literal quantum effects. The highest band (N7) caps at 0.5, meaning "half the unpredictability at this band may be ontic." Ranges overlap between adjacent bands, reflecting that determinacy is a spectrum, not discrete levels. This is defensible without requiring proof of quantum cognition.
+QI ranges are hypothesised values (untested, no estimator defined) meant to reflect security-relevant indeterminacy, not literal quantum effects. The highest band (N7) caps at 0.5, meaning "half the unpredictability at this band may be ontic." Ranges overlap between adjacent bands, reflecting that determinacy is a spectrum, not discrete levels. This is defensible without requiring proof of quantum cognition.
 
 ---
 
@@ -302,7 +307,7 @@ Maximize: n_ch (channel count) OR I_total (information bandwidth) OR Cs (coheren
 
 **Prior art gap:** No unified constraint system exists in published literature. Marblestone et al. 2013 (DOI: 10.3389/fncom.2013.00137) is closest but lacks Moore's Law projections, Shannon safety, timeline, and security dimension. Stevenson & Kording 2011 (DOI: 10.1038/nn.2731) observed 7.4-year empirical doubling but no physics derivation.
 
-**Novel QIF contribution:** The coherence metric Cs as a security constraint alongside physics constraints. No other framework includes a signal integrity/security dimension in BCI hardware limits.
+**Novel QIF contribution:** The coherence metric Cs as a security constraint alongside physics constraints. We are unaware of another framework that includes a signal integrity/security dimension in BCI hardware limits.
 
 **Derivation:** Entry 60 (synthesis), Entry 65 (feasibility tiering), Entry 66 (N1 validation)
 
@@ -598,7 +603,7 @@ NSP-secured BCI data crossing the encryption boundary becomes indistinguishable 
 
 **Supporting literature:** Dvali (2018), Tozzi et al. (2023), Pastawski et al. (2015)
 
-**Security implication:** No other BCI security approach has a physics-derived information-theoretic foundation. The Black Hole Security Principle provides provable guarantees grounded in established physics (not just "we used strong encryption").
+**Security implication:** We are unaware of another BCI security approach with a physics-derived information-theoretic foundation. The Black Hole Security Principle provides provable guarantees grounded in established physics (not just "we used strong encryption").
 
 
 Full derivations: QIF-DERIVATION-LOG.md Entry 35
@@ -607,35 +612,35 @@ Full derivations: QIF-DERIVATION-LOG.md Entry 35
 
 ## 10. TARA Registry (Current State)
 
-> **Last computed: 2026-10-18 from `datalake/qtara-registrar.json`** by `npm run truth:registry`. Sections 10.1-10.4 are generated; do not edit them by hand. 10.5 and 10.6 are editorial.
+> **Last computed: 2026-10-20 from `datalake/qtara-registrar.json`** by `npm run truth:registry`. Sections 10.1-10.4 are generated; do not edit them by hand. 10.5 and 10.6 are editorial.
 
 ### 10.1 Technique Count & Taxonomy
 
 | Metric | Value |
 |--------|-------|
-| **Total techniques** | 176 (171 top-level, 5 sub-techniques) |
-| **NISS version** | v1.1 on 150 techniques; 26 not yet scored (QIF-T0136 to QIF-T0161) |
+| **Total techniques** | 178 (173 top-level, 5 sub-techniques) |
+| **NISS version** | v1.1. Three scoring states: 131 scored, 10 provisional (a score range, no score), 37 unscored |
 | **Domains** | 12 (AUD, AUT, COG, EMO, IDN, LNG, MEM, MOT, SIL, SOM, VES, VIS) |
 | **Modes** | 3 (D, M, R) |
 | **Tactics** | 17 unique |
-| **PINS flagged** | 41 |
-| **Evidence status** | Theoretical 72, Demonstrated 44, Emerging 30, Confirmed 28, Plausible 1, Speculative 1 |
+| **PINS flagged** | 38 |
+| **Evidence status** | Theoretical 99, Demonstrated 49, Emerging 27, Plausible 2, Speculative 1 |
 
 **Open items**, documented per technique in `datalake/tara-scoring-gaps.json` and published at `/atlas/scoring/#coverage`:
-- 26 techniques carry no NISS score. Each entry supports only one of the six metrics, so the other five would have to be invented. They stay unscored until their entries carry a measured effect, a functional outcome mapping, an access model and persistence evidence.
-- Two severity fields disagree. `niss.severity` is formula-derived over the 150 scored techniques and is what the site shows; the legacy `severity` field predates NISS, has no recorded formula, and is retained only because the unscored techniques carry nothing else.
-- `PLAUSIBLE` and `SPECULATIVE` appear as status values but are not among the four documented levels.
+- 47 techniques carry no NISS score. 10 are provisional: at least one metric is supported by a source on the entry and at least one is not, so the entry stores the supported values, the source for each, and the lowest and highest score the formula allows for the rest (a bound, not an estimate). 37 are unscored: 19 cite sources that report none of the six effects the metrics measure, 10 rest on preprints alone, 8 have no source. A metric is coded only when a source reports the effect it measures.
+- Two severity fields disagree. `niss.severity` is formula-derived over the 131 scored techniques and is what the site shows; the legacy `severity` field predates NISS, has no recorded formula, and is retained only because the 47 techniques without a score carry nothing else. Whether to retire or rename it is an open framework decision.
+- Status values are defined in `tara_spec.status_definitions`; CONFIRMED is retired and appears only in `status_prior`.
 
 ### 10.2 NISS Severity Distribution
 
-Percentages are of the 150 scored techniques.
+Percentages are of the 131 scored techniques.
 
 | Severity | Count | Percentage |
 |----------|-------|------------|
-| High (7.0-8.9) | 20 | 13.3% |
-| Medium (4.0-6.9) | 62 | 41.3% |
-| Low (0.1-3.9) | 67 | 44.7% |
-| None (0.0) | 1 | 0.7% |
+| High (7.0-8.9) | 20 | 15.3% |
+| Medium (4.0-6.9) | 52 | 39.7% |
+| Low (0.1-3.9) | 58 | 44.3% |
+| None (0.0) | 1 | 0.8% |
 
 **NP levels:** N (None), T (Temporary/3.3), P (Partial/6.7), S (Structural/10.0) — 4-level scale since v1.1.1
 
@@ -643,8 +648,8 @@ Percentages are of the 150 scored techniques.
 
 | Mapping | Techniques Covered |
 |---------|--------------------|
-| DSM-5-TR (F-codes) | 76 of 176 |
-| ICD-10 (G/H/R-codes) | 38 of 176 |
+| DSM-5-TR (F-codes) | 76 of 178 |
+| ICD-10 (G/H/R-codes) | 38 of 178 |
 
 **Schema note:** DSM-5-TR codes (F-codes) live in `tara.dsm5`. ICD-10 codes (G/H/R-codes for neurological conditions) live in `tara.icd10`. These were split on 2026-03-15. Both are diagnostic category references for threat modeling, not diagnostic claims.
 
@@ -652,11 +657,11 @@ Percentages are of the 150 scored techniques.
 
 | Right | Techniques | % |
 |-------|-----------|---|
-| MP (Mental Privacy) | 112 | 63.6% |
-| MI (Mental Integrity) | 104 | 59.1% |
-| CL (Cognitive Liberty) | 89 | 50.6% |
-| PC (Psychological Continuity) | 80 | 45.5% |
-| DI (Dynamical Integrity) | 77 | 43.8% |
+| MP (Mental Privacy) | 114 | 64.0% |
+| MI (Mental Integrity) | 104 | 58.4% |
+| CL (Cognitive Liberty) | 89 | 50.0% |
+| PC (Psychological Continuity) | 80 | 44.9% |
+| DI (Dynamical Integrity) | 77 | 43.3% |
 | IDA (Informational Disassociation) | 6 | 3.4% |
 
 ### 10.5 TARA Interactive Visualization (Entry 54, 2026-02-14)
@@ -675,7 +680,7 @@ To strictly adhere to VERA neuroethics, the system **MUST** allow toggling betwe
 **The Data is Identical.** The *perspective* changes. This visualizes the **Dual-Use Dilemma**: the same mechanism used to cure (DBS) can be used to harm (Signal Injection).
 
 ### 10.6 Diagnostic Mapping (Neural Impact Chain)
-- **Mechanism:** Attack Vector → I0 Interface → Brain Structure → Cognitive Function → Clinical Outcome.
+- **Mechanism:** Attack Vector → I0 Interface → Brain Structure → Cognitive Function → Clinical Outcome (an association by shared band, not a traced neural path).
 - **Classification:** DSM-5-TR Clusters + ICD-10 Neurological Codes.
 - **Purpose:** Translates technical signal disruption into recognizable clinical risk (for threat modeling purposes).
 
@@ -691,6 +696,7 @@ To strictly adhere to VERA neuroethics, the system **MUST** allow toggling betwe
 | TARA registry | 165 techniques | 2026-10-06 | Recount from the registrar: 165 techniques, 17 tactics; 26 techniques found without a NISS score |
 | TARA registry | 174 techniques | 2026-10-06 | `parent_id` sub-technique field added; 9 techniques added (QIF-T0166–QIF-T0174): 4 top-level, 5 sub-techniques of QIF-T0019/T0024/T0041/T0043/T0109 |
 | TARA registry | 176 techniques | 2026-10-07 | QIF-T0163/T0164 split on the privilege boundary (decision T0163-LAYER): QIF-T0175 and QIF-T0176 take the application-layer parsing boundary, with 12 of the 24 affected CVE records remapped |
+| TARA registry | 178 techniques, 1 variant | 2026-10-20 | Draft catalogue (registrar 4.3) reconciled with the published one: QIF-T0177 and T0178 added (renumbered from the draft's T0172 and T0173); three-state NISS scoring and the citation gate applied to every entry; CONFIRMED retired; QIF-T0024-V01 filed as a variant |
 | QIF-TRUTH.md | v4.3 | 2026-03-15 | Added TARA current state, version tracking, severity audit |
 | QIF-TRUTH.md | v4.4 | 2026-10-06 | Section 10 recomputed by script from the registrar; unscored techniques and undocumented status values flagged |
 | QIF-TRUTH.md | v4.5 | 2026-10-06 | Sections 10.1-10.4 are now generated by `src/scripts/generate-truth-registry-section.mjs`, after the section stated 174 techniques above a severity table summing to 139. TARA registry at v1.9. |

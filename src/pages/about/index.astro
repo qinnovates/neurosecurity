@@ -32,7 +32,7 @@ const scoredCount = getCatalogCoverage().scored;
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8">How a security engineer found a neuroscience problem</h2>
       <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed">
         <p>
-          I was studying a diagram of the thalamus — the brain's sensory relay — when I recognized the architecture. Every signal entering the cortex passes through this one structure. Compromise it, and you control what a person perceives. I had built that exact chokepoint in network security: <strong class="text-[var(--color-text-primary)]">a SIEM correlation engine. All signals in, one classification out.</strong> That was not a metaphor. That was a shared architecture with no security framework on the biological side.
+          I was studying a diagram of the thalamus — the brain's sensory relay — when I recognized the architecture. Most sensory input reaching the cortex passes through this one structure. Compromise it, and you could alter what a person perceives. I had built that exact chokepoint in network security: <strong class="text-[var(--color-text-primary)]">a SIEM correlation engine. All signals in, one classification out.</strong> It was an analogy, and analogies break. But it was enough to make me ask what my own field had to say about devices wired into pathways like that one.
         </p>
         <p>
           Months of personal experience with neurological disruption — COVID compounding PTSD — had already shown me what those failure modes look like from the inside. <strong class="text-[var(--color-text-primary)]">If biology can produce these outcomes without a device, what happens when we connect programmable hardware to the same pathways?</strong>
@@ -49,13 +49,13 @@ const scoredCount = getCatalogCoverage().scored;
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8">Before mass adoption, not after</h2>
       <div class="space-y-6 text-[var(--color-text-muted)] leading-relaxed">
         <p>
-          Neuralink has implanted chips in human patients. Synchron's Stentrode is in FDA trials. Consumer EEG headsets sit on store shelves. These devices are tested for safety and efficacy — but <strong class="text-[var(--color-text-primary)]">no public framework exists to audit what they can do to a mind.</strong>
+          Neuralink has implanted chips in human patients. Synchron's Stentrode is in FDA trials. Consumer EEG headsets sit on store shelves. These devices are tested for safety and efficacy — but <strong class="text-[var(--color-text-primary)]">I could not find a public framework for auditing what they can do to a mind.</strong>
         </p>
         <p>
           This dual-use reality means BCI security is not an engineering problem. <strong class="text-[var(--color-text-primary)]">It is a patient rights problem.</strong> Every proposed neurorights framework — cognitive liberty, mental privacy, psychological continuity — can be violated through technical pathways that already exist. The question is whether we build governance before the harm, or after.
         </p>
         <p>
-          Right now, BCI governance is like writing fire codes without building fire hydrants or fire stations. The neuroethics community has defined the rights. Legislators are passing laws. But <strong class="text-[var(--color-text-primary)]">nobody has built the technical infrastructure to enforce any of it.</strong>
+          Right now, BCI governance is like writing fire codes without building fire hydrants or fire stations. The neuroethics community has defined the rights. Legislators are passing laws. But <strong class="text-[var(--color-text-primary)]">I have not found technical infrastructure built to enforce any of it.</strong>
         </p>
         <p>
           <strong class="text-[var(--color-text-primary)]">IEEE's own BMI standards roadmap identifies BCI-specific security standards as an open standardization gap.</strong> This catalog is an attempt to fill it. Open source. Open data. Ready for peer review.
