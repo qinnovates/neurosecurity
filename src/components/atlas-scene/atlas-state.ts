@@ -21,6 +21,8 @@ export interface Target {
 export interface ExplorerState {
   selection: Target | null;
   lens: Lens;
+  /** The lens in use before the last change of lens kind, so a drill-down into one technique or device can be undone. Null at the start and once restored. */
+  previousLens: Lens | null;
   /** Which layers the visitor has asked to see. A layer is drawn only if the index also says it is available. */
   layers: Record<LayerId, boolean>;
   filter: ListFilter;
@@ -34,6 +36,7 @@ export type ExplorerAction =
   | { type: 'target_selected'; target: Target }
   | { type: 'lens_kind_chosen'; kind: LensKind }
   | { type: 'lens_subject_chosen'; kind: LensKind; subjectId: string }
+  | { type: 'lens_restored' }
   | { type: 'layer_toggled'; layerId: LayerId }
   | { type: 'filter_changed'; filter: Partial<ListFilter> }
   | { type: 'filter_cleared' }
@@ -45,18 +48,23 @@ const LAYERS_ON_AT_START: readonly LayerId[] = ['outline', 'cortical', 'deep'];
 export const INITIAL_EXPLORER_STATE: ExplorerState = {
   selection: null,
   lens: DEFAULT_LENS,
+  previousLens: null,
   layers: Object.fromEntries(LAYER_IDS.map((layerId) => [layerId, LAYERS_ON_AT_START.includes(layerId)])) as Record<LayerId, boolean>,
   filter: EMPTY_LIST_FILTER,
   railStageId: null,
   railIncludesMixed: false,
 };
 
-/** Changing the lens, the layers or the filter never touches the selection. */
+/**
+ * Changing the lens, the layers or the filter never touches the selection. A change of lens kind remembers the lens
+ * it replaced; changing the subject within one kind keeps that memory, and restoring it uses it up.
+ */
 export function explorerReducer(state: ExplorerState, action: ExplorerAction): ExplorerState {
   switch (action.type) {
     case 'target_selected': return { ...state, selection: action.target };
-    case 'lens_kind_chosen': return state.lens.kind === action.kind ? state : { ...state, lens: emptyLens(action.kind) };
-    case 'lens_subject_chosen': return { ...state, lens: withLensSubject(action.kind, action.subjectId) };
+    case 'lens_kind_chosen': return state.lens.kind === action.kind ? state : { ...state, lens: emptyLens(action.kind), previousLens: state.lens };
+    case 'lens_subject_chosen': return { ...state, lens: withLensSubject(action.kind, action.subjectId), previousLens: state.lens.kind === action.kind ? state.previousLens : state.lens };
+    case 'lens_restored': return state.previousLens === null ? state : { ...state, lens: state.previousLens, previousLens: null };
     case 'layer_toggled': return { ...state, layers: { ...state.layers, [action.layerId]: !state.layers[action.layerId] } };
     case 'filter_changed': return { ...state, filter: { ...state.filter, ...action.filter } };
     case 'filter_cleared': return { ...state, filter: EMPTY_LIST_FILTER };
