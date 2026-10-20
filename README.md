@@ -27,9 +27,9 @@ QIF, TARA and NISS help builders and defenders start a neural-device threat mode
 
 ![Open datalake inventory](src/site/images/datalake-corpus.svg)
 
-**21,467 records inventoried below, from 28 of the 39 datasets in [`datalake/`](datalake/).** 20,182 neural impact chains · 176 proposed techniques · 24 BCI devices specced · 67 companies tracked · 107 CVEs mapped · 221 unique DOIs cited.
+**21,469 records inventoried below, from 28 of the 39 datasets in [`datalake/`](datalake/).** 20,182 neural impact chains · 176 proposed techniques · 24 BCI devices specced · 67 companies tracked · 107 CVEs mapped · 221 unique DOIs cited.
 
-Counted from the files themselves on 2026-10-18. Re-run `npm run datalake:inventory` and every figure on this page moves with the data; `npm run datalake:inventory:check` fails the build if it has drifted.
+Counted from the files themselves on 2026-10-20. Re-run `npm run datalake:inventory` and every figure on this page moves with the data; `npm run datalake:inventory:check` fails the build if it has drifted.
 
 ### Threat model
 
@@ -80,7 +80,7 @@ Counted from the files themselves on 2026-10-18. Re-run `npm run datalake:invent
 
 | Inventory | Count | Derived from |
 |---|---:|---|
-| Researchers catalogued | **154** | [`datalake/research-registry.json`](datalake/research-registry.json) |
+| Researchers catalogued | **156** | [`datalake/research-registry.json`](datalake/research-registry.json) |
 | Research organisations | **73** | [`datalake/research-registry.json`](datalake/research-registry.json) |
 | Derivation milestones | **31** | [`datalake/derivation-timeline.json`](datalake/derivation-timeline.json) |
 | Institutions | **28** | [`datalake/research-registry.json`](datalake/research-registry.json) |

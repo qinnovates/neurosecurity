@@ -1,9 +1,9 @@
 {
   "metadata": {
     "version": "1.0",
-    "lastUpdated": "2026-10-18",
+    "lastUpdated": "2026-10-20",
     "description": "Unified registry: explorer/timelines (landscape UI) + researchers/institutions/standards/legislation (structured entities). Cross-references QIF-RESEARCH-SOURCES.md. Papers are carried on researcher entries via papers (QIF-RESEARCH-SOURCES.md IDs) and bibKeys (references.bib keys); the schema has no standalone paper collection.",
-    "totalEntities": 404
+    "totalEntities": 406
   },
   "explorer": [
     {
@@ -4501,6 +4501,51 @@
         "protocol-testing",
         "cve-origin",
         "peer-reviewed"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "edward-m-callaway",
+      "name": "Edward M. Callaway",
+      "institution": "Salk Institute for Biological Studies",
+      "country": "US",
+      "expertise": [
+        "circuit-tracing",
+        "rabies-tracing",
+        "visual-cortex"
+      ],
+      "papers": [
+        "N104"
+      ],
+      "bibKeys": [
+        "patino2024transcriptomic"
+      ],
+      "qifRelevance": "Senior author of START (monosynaptic rabies tracing plus single-nucleus RNA sequencing), which showed transcriptomic-subtype specificity of inhibitory inputs in mouse V1. Whitepaper v9 'Why Neurosecurity?': cell-type-resolved circuit mapping without optogenetics. Mouse only.",
+      "tags": [
+        "whitepaper-source",
+        "blog-source"
+      ],
+      "layer": "HOW"
+    },
+    {
+      "id": "pallav-kosuri",
+      "name": "Pallav Kosuri",
+      "institution": "Salk Institute for Biological Studies",
+      "country": "US",
+      "expertise": [
+        "single-molecule-biophysics",
+        "dna-origami"
+      ],
+      "papers": [
+        "N105"
+      ],
+      "bibKeys": [
+        "wacker2026dyecycling"
+      ],
+      "qifRelevance": "Senior author of dye-cycling ORBIT: DNA origami rotors tracking DNA rotation for more than 10 min at 20 Hz with single-base-pair precision on bacterial RNA polymerase. Whitepaper v9 'Why Neurosecurity?': cited to separate molecular tooling from circuit mapping.",
+      "tags": [
+        "whitepaper-source",
+        "blog-source"
       ],
       "layer": "HOW"
     }
