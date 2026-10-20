@@ -51,6 +51,13 @@ jobs:
           apt-get update -qq && apt-get install -y -qq python3-pip >/dev/null
           pip3 install --break-system-packages --quiet matplotlib
 
+      - name: Install the LaTeX packages the paper uses
+        # latest-basic ships a minimal TeX Live; install exactly what research/paper loads.
+        run: |
+          tlmgr install --no-persistent-downloads \
+            amsfonts amsmath booktabs caption enumitem fancyhdr float geometry graphics \
+            hyperref listings lm microtype multirow natbib tools titlesec url xcolor
+
       - name: Build
         working-directory: research/paper
         run: make pdf
