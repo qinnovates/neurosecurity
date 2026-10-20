@@ -11,10 +11,10 @@
  */
 
 import {
-  DirectionalLight, HemisphereLight, type Mesh, type Object3D, PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer, type BufferGeometry,
+  DirectionalLight, HemisphereLight, type Material, type Mesh, type Object3D, PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer, type BufferGeometry,
 } from 'three';
 import { HEAD_VIEW_SCALE, type DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
-import { axisDirectionsFor, choosePickTarget, idleTurnSpeed, pointerToNdc, stepEaseDuration, type AxisDirections, type PickHit, type PickTarget } from '@/lib/atlas-explorer/scene-drawing';
+import { HOVER_EMISSIVE, axisDirectionsFor, choosePickTarget, hoverParamsFor, idleTurnSpeed, pointerToNdc, stepEaseDuration, type AxisDirections, type PickHit, type PickTarget } from '@/lib/atlas-explorer/scene-drawing';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import { rasToScene } from '@/lib/anatomy/ras-to-scene';
 import {
@@ -23,7 +23,7 @@ import {
 import type { SceneShape } from '@/lib/atlas-explorer/scene-shapes';
 import { slicePlane, type SliceState } from '@/lib/atlas-explorer/slice-plane';
 import { buildDeviceObjects, type DeviceObjects } from './device-objects';
-import { buildSelectionMarks, buildStepLabels, createEaser, disposeTree, easeKeyOf, listMaterials, readLabelFont } from './scene-marks';
+import { buildSelectionLabel, buildSelectionMarks, buildStepLabels, createEaser, disposeTree, easeKeyOf, listMaterials, readLabelFont } from './scene-marks';
 import { buildGeometry, buildShapeObjects, listDisposables, type ShapeObjects } from './scene-objects';
 
 export type { AxisDirections };
@@ -39,8 +39,11 @@ export interface SceneCallbacks {
 }
 
 export interface SceneRenderer {
-  /** @param bracketGroups the structure keys selected together; each group gets one bracket set around all its shapes */
-  setShapes: (shapes: readonly SceneShape[], nodesByShapeId: ReadonlyMap<string, DecodedNode>, selectedKeys: ReadonlySet<string>, bracketGroups?: ReadonlyArray<readonly string[]>) => void;
+  /**
+   * @param bracketGroups the structure keys selected together; each group gets one bracket set around all its shapes
+   * @param selectionLabel the name of what the first group selects, written just above its brackets; null for no label
+   */
+  setShapes: (shapes: readonly SceneShape[], nodesByShapeId: ReadonlyMap<string, DecodedNode>, selectedKeys: ReadonlySet<string>, bracketGroups?: ReadonlyArray<readonly string[]>, selectionLabel?: string | null) => void;
   /** The electrode dots to draw, or null for none. */
   setDevices: (drawing: DeviceDrawing | null, selectedElectrodeId: string | null) => void;
   setSlice: (slice: SliceState | null) => void;
@@ -62,6 +65,14 @@ const DRAG_RADIANS_PER_PIXEL = 0.006;
 const WHEEL_ZOOM_PER_PIXEL = 0.0015;
 /** A pointer that moved less than this between press and release was a click, not a drag. */
 const CLICK_SLOP_PX = 4;
+/** Set on the canvas while a shape a click would pick lies under the pointer; the stylesheet shows the pick cursor for it. */
+const PICK_ATTRIBUTE = 'data-pick';
+const PICK_VALUE = 'shape';
+const EMISSIVE_OFF = '#000000';
+
+/** A material that can glow, as three.js's lit materials can and its flat ones cannot. */
+type Glowing = Material & { emissive?: { set: (colour: string) => void }; emissiveIntensity?: number };
+interface HoverRestore { material: Glowing; opacity: number; transparent: boolean; emissiveIntensity: number | undefined }
 
 function easeOut(progress: number): number {
   return 1 - (1 - progress) ** 3;
@@ -97,8 +108,34 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
   let hoveredKey: string | null = null;
   let press: { x: number; y: number; pointerId: number } | null = null;
   let clip: Plane | null = null;
-  let drawn: { shapes: readonly SceneShape[]; nodesByShapeId: ReadonlyMap<string, DecodedNode>; selectedKeys: ReadonlySet<string>; bracketGroups: ReadonlyArray<readonly string[]> } | null = null;
+  let drawn: { shapes: readonly SceneShape[]; nodesByShapeId: ReadonlyMap<string, DecodedNode>; selectedKeys: ReadonlySet<string>; bracketGroups: ReadonlyArray<readonly string[]>; selectionLabel: string | null } | null = null;
+  /** The materials lifted for the shape under the pointer, with what to put back. */
+  let lifted: HoverRestore[] = [];
   const raycaster = new Raycaster();
+
+  /**
+   * Lifts every drawn shape of the hovered structure and puts the last one back. A marker ring is not lifted: its
+   * pick target is an invisible sphere, and making it visible would add a surface the data does not hold.
+   */
+  const applyHover = (key: string | null): void => {
+    for (const { material, opacity, transparent, emissiveIntensity } of lifted) {
+      Object.assign(material, { opacity, transparent });
+      if (emissiveIntensity !== undefined) { material.emissive?.set(EMISSIVE_OFF); material.emissiveIntensity = emissiveIntensity; }
+    }
+    lifted = [];
+    if (key === null) canvas.removeAttribute(PICK_ATTRIBUTE);
+    else canvas.setAttribute(PICK_ATTRIBUTE, PICK_VALUE);
+    if (key === null) return;
+    for (const entry of objects.filter((item) => item.shape.structureKey === key && item.shape.sizeMark !== 'ring_only')) {
+      const params = hoverParamsFor(entry.shape);
+      for (const target of entry.pickTargets) {
+        const material = target.material as Glowing;
+        lifted.push({ material, opacity: material.opacity, transparent: material.transparent, emissiveIntensity: material.emissive === undefined ? undefined : material.emissiveIntensity });
+        Object.assign(material, { opacity: params.opacity, transparent: params.opacity < 1 });
+        if (params.emissiveIntensity > 0 && material.emissive !== undefined) { material.emissive.set(HOVER_EMISSIVE); material.emissiveIntensity = params.emissiveIntensity; }
+      }
+    }
+  };
 
   const invalidate = (): void => {
     if (frame === 0) frame = requestAnimationFrame(draw);
@@ -147,6 +184,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       hoverPoint = null;
       if (key !== hoveredKey) {
         hoveredKey = key;
+        applyHover(key);
         callbacks.onHover(key);
       }
     }
@@ -207,6 +245,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
   for (const [type, listener, options] of listeners) canvas.addEventListener(type, listener, options);
 
   const clearObjects = (): void => {
+    lifted = [];
     for (const entry of objects) {
       scene.remove(entry.group);
       for (const owned of listDisposables(entry, geometries.get(entry.shape.id) ?? null)) owned.dispose();
@@ -220,8 +259,8 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
   };
 
   return {
-    setShapes(shapes, nodesByShapeId, selectedKeys, bracketGroups = []) {
-      drawn = { shapes, nodesByShapeId, selectedKeys, bracketGroups };
+    setShapes(shapes, nodesByShapeId, selectedKeys, bracketGroups = [], selectionLabel = null) {
+      drawn = { shapes, nodesByShapeId, selectedKeys, bracketGroups, selectionLabel };
       clearObjects();
       const brainOutline = shapes.find((shape) => shape.layer === 'outline');
       if (brainOutline !== undefined && home.every((value) => value === 0)) {
@@ -238,8 +277,11 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
         scene.add(entry.group);
         objects.push(entry);
       }
-      marks = [...buildSelectionMarks(bracketGroups, objects), ...buildStepLabels(objects, labelFont)];
+      const nameLabel = selectionLabel === null || bracketGroups.length === 0 ? null : buildSelectionLabel(bracketGroups[0], objects, selectionLabel, labelFont);
+      marks = [...buildSelectionMarks(bracketGroups, objects), ...(nameLabel === null ? [] : [nameLabel]), ...buildStepLabels(objects, labelFont)];
       for (const mark of marks) scene.add(mark);
+      // The objects were rebuilt, so the shape under the pointer is lifted again on the new ones.
+      applyHover(hoveredKey);
       // A step's marks fade in once, when the step arrives; a redraw for any other reason leaves them as they are.
       const easeKey = easeKeyOf(objects);
       const stepMarked = objects.filter((entry) => (entry.shape.stepNumbers ?? []).length > 0).map((entry) => entry.group);
@@ -265,7 +307,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       clip = plane === null ? null : new Plane(new Vector3(plane.normal[0], plane.normal[1], plane.normal[2]), plane.constant);
       renderer.clippingPlanes = clip === null ? [] : [clip];
       // Opening or closing the cut changes how filled shapes and the selection are drawn; moving it does not.
-      if (wasCut !== (clip !== null) && drawn !== null) this.setShapes(drawn.shapes, drawn.nodesByShapeId, drawn.selectedKeys, drawn.bracketGroups);
+      if (wasCut !== (clip !== null) && drawn !== null) this.setShapes(drawn.shapes, drawn.nodesByShapeId, drawn.selectedKeys, drawn.bracketGroups, drawn.selectionLabel);
       invalidate();
     },
     setView: (viewId) => moveTo(poseForView(viewId, home, viewId === DEFAULT_CAMERA_VIEW ? homeDistance() : pose.distance)),
@@ -282,6 +324,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
     },
     dispose() {
       cancelAnimationFrame(frame);
+      canvas.removeAttribute(PICK_ATTRIBUTE);
       for (const [type, listener, options] of listeners) canvas.removeEventListener(type, listener, options);
       clearObjects();
       if (devices !== null) disposeTree(devices.group);

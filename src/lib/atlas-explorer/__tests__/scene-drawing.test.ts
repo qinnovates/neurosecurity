@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { poseForView, turnPose } from '../camera-views';
 import {
-  BRAIN_OUTLINE_OPACITY, FILL_OPACITY, IDLE_RADIANS_PER_MS, INSIDE_COLOUR, SELECTION_COLOUR, axisDirectionsFor, choosePick, idleTurnSpeed, isPickable, materialParamsFor,
+  BRAIN_OUTLINE_OPACITY, FILL_OPACITY, HOVER_OPACITY, IDLE_RADIANS_PER_MS, INSIDE_COLOUR, SELECTION_COLOUR, axisDirectionsFor, choosePick, hoverParamsFor, idleTurnSpeed, isPickable, materialParamsFor,
   pointerToNdc, selectionBrackets, type PickHit,
 } from '../scene-drawing';
 import { FILL_KINDS, NEUTRAL_COLOUR } from '../scene-shapes';
@@ -35,6 +35,20 @@ describe('materialParamsFor', () => {
   it('shows a filled shape\'s own inside under a cut, and only then', () => {
     expect(materialParamsFor(shape('solid'), true).isDoubleSided).toBe(true);
     expect(materialParamsFor(shape('solid'), false).isDoubleSided).toBe(false);
+  });
+});
+
+describe('hoverParamsFor', () => {
+  it('lifts a see-through shape by opacity alone, keeps it short of filled, and brightens a filled one without changing its hue', () => {
+    for (const fill of FILL_KINDS.filter((kind) => kind !== 'solid')) {
+      const params = hoverParamsFor(shape(fill));
+      expect(params.opacity, fill).toBeGreaterThan(FILL_OPACITY[fill]);
+      expect(params.opacity, fill).toBeLessThan(1);
+      expect(params.emissiveIntensity, fill).toBe(0);
+    }
+    expect(hoverParamsFor(shape('solid'))).toEqual({ opacity: 1, emissiveIntensity: expect.any(Number) });
+    expect(hoverParamsFor(shape('solid')).emissiveIntensity).toBeGreaterThan(0);
+    expect(HOVER_OPACITY.translucent).toBeGreaterThan(HOVER_OPACITY.lines);
   });
 });
 

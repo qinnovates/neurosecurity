@@ -235,6 +235,29 @@ describe('AtlasViewport: open', () => {
     expect(canvasProps?.focusMm?.every((value) => Number.isFinite(value))).toBe(true);
   });
 
+  it('names the selection in the picture and beside it, and offers the way to its details where the page has them', async () => {
+    const regionId = resolvePick(model, ownShapeKey)?.selectedRegionId ?? '';
+    const regionName = model.regionsById.get(regionId)?.name ?? '';
+    const onShowDetails = vi.fn();
+    const container = await openViewport({ selectedRegionId: regionId, onShowDetails });
+    expect(canvasProps?.selectionLabel).toBe(regionName);
+    const row = container.querySelector('[data-picture-selected]');
+    expect(row?.getAttribute('data-picture-selected')).toBe(regionName);
+    expect(container.querySelector('figure')?.contains(row)).toBe(true);
+    fireEvent.click(within(row as HTMLElement).getByRole('button', { name: 'See its details' }));
+    expect(onShowDetails).toHaveBeenCalledTimes(1);
+    expect(screen.getByText(/corner marks with a name above them: selected/)).not.toBeNull();
+  });
+
+  it('names a picked shape above its brackets when the pick selects no region, and says nothing beside the picture', async () => {
+    const container = await openViewport();
+    expect(container.querySelector('[data-picture-selected]')).toBeNull();
+    canvasProps?.onPick(sharedShapeKey);
+    await waitFor(() => expect(canvasProps?.selectionLabel).toBe(resolvePick(model, sharedShapeKey)?.label));
+    expect(container.querySelector('[data-picture-selected]')).toBeNull();
+    expect(container.querySelector('button[name="See its details"]')).toBeNull();
+  });
+
   it('moves the view only through real buttons, and marks which named view is current', async () => {
     await openViewport();
     fireEvent.click(screen.getByRole('button', { name: 'Left side' }));

@@ -84,7 +84,7 @@ export default function ViewportLegend({ caption, drawnShapes, assets, assetStat
         <li><MarkGlyph mark="inside_or_mixed" /> pale: somewhere inside, or records differ</li>
         <li><MarkGlyph mark="no_data" /> lines only: no data</li>
         <li><span className="atlas-ring-swatch" aria-hidden="true" /> ring: too small to outline, or only roughly outlined</li>
-        <li><span className="atlas-selection-swatch" aria-hidden="true" /> orange corner marks: selected</li>
+        <li><span className="atlas-selection-swatch" aria-hidden="true" /> corner marks with a name above them: selected</li>
         {steps.map((entry) => <li key={entry.step}><span className="atlas-step-swatch" style={{ background: entry.colour }} aria-hidden="true" /> {entry.step.replaceAll('_', ' ')}</li>)}
       </ul>
       {caption.markLimits.map((limit) => <LimitNote key={limit.id} limit={limit} />)}
