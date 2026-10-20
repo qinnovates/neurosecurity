@@ -67,8 +67,14 @@ export default function SubjectPicker({ noun, options, chosenId, onChoose }: Pro
   const active = matches[Math.min(activeIndex, matches.length - 1)];
   const optionId = (option: SubjectOption): string => `${baseId}-option-${option.id}`;
 
+  // The list scrolls itself to keep the active option in view. It never scrolls the page: a choice made from elsewhere
+  // on the page has its own place to land, and this must not pull the page away from it.
   useEffect(() => {
-    if (active !== undefined) listRef.current?.querySelector(`[data-active="true"]`)?.scrollIntoView?.({ block: 'nearest' });
+    const list = listRef.current;
+    const option = list?.querySelector<HTMLElement>(`[data-active="true"]`) ?? null;
+    if (list === null || list === undefined || option === null) return;
+    if (option.offsetTop < list.scrollTop) list.scrollTop = option.offsetTop;
+    else if (option.offsetTop + option.offsetHeight > list.scrollTop + list.clientHeight) list.scrollTop = option.offsetTop + option.offsetHeight - list.clientHeight;
   }, [active]);
 
   const handleKey = (event: KeyboardEvent<HTMLInputElement>): void => {

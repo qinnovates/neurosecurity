@@ -1,5 +1,5 @@
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
-import { LENS_LABELS, lensNeedsSubject, lensSubjectId, type Lens, type LensKind } from '@/lib/atlas-explorer/lens-state';
+import { LENS_DESCRIPTIONS, LENS_LABELS, LENS_SUBJECT_NOUNS, lensNeedsSubject, lensSubjectId, type Lens, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { limitSentence } from '@/lib/anatomy/limits-copy';
 import { limitsForLens } from '@/lib/atlas-explorer/limit-selection';
 import type { LensTally } from '@/lib/atlas-explorer/region-rows';
@@ -13,13 +13,22 @@ import SubjectPicker from './SubjectPicker';
 interface Props {
   model: ExplorerModel;
   lens: Lens;
+  /** The lens before the last change of kind, or null: with one, the panel offers the way back to it. */
+  previousLens: Lens | null;
   tally: LensTally;
   onChooseKind: (kind: LensKind) => void;
+  onRestoreLens: () => void;
   onChooseSubject: (kind: LensKind, subjectId: string) => void;
   onSelectRegion: (regionId: string) => void;
 }
 
-const SUBJECT_NOUNS: Readonly<Partial<Record<LensKind, string>>> = { technique: 'technique', dsm: 'cluster tag', stated_targets: 'device' };
+/** The heading a drill-down from the region's details lands on while the picture is closed. */
+export const LENS_HEADING_ID = 'atlas-lens-heading';
+
+/** "Back to the Band lens". */
+export function restoreLensLabel(previousLens: Lens): string {
+  return `Back to the ${LENS_LABELS[previousLens.kind]} lens`;
+}
 
 function RegionButtons({ regions, onSelectRegion }: { regions: ReadonlyArray<{ id: string; name: string }>; onSelectRegion: (regionId: string) => void }) {
   return (
@@ -74,14 +83,18 @@ function LensSummary({ lens, tally }: Pick<Props, 'lens' | 'tally'>) {
  * limit sentences for the lens as it stands, the subject picker when the lens
  * needs one, and a count of what the lens shows.
  */
-export default function LensPanel({ model, lens, tally, onChooseKind, onChooseSubject, onSelectRegion }: Props) {
-  const noun = SUBJECT_NOUNS[lens.kind];
+export default function LensPanel({ model, lens, previousLens, tally, onChooseKind, onRestoreLens, onChooseSubject, onSelectRegion }: Props) {
+  const noun = LENS_SUBJECT_NOUNS[lens.kind];
   const subjectId = lensSubjectId(lens);
   const summary = lens.kind === 'technique' && subjectId !== null ? summariseTechnique(model, subjectId) : null;
   return (
     <section className="atlas-panel atlas-lens-panel" aria-labelledby="atlas-lens-heading" data-lens={lens.kind}>
-      <h2 className="atlas-heading" id="atlas-lens-heading">Lens</h2>
+      <h2 className="atlas-heading" id={LENS_HEADING_ID} tabIndex={-1}>Lens</h2>
       <ColourModePicker activeKind={lens.kind} onChoose={onChooseKind} />
+      <p className="atlas-lens-what" data-lens-description={lens.kind}>
+        {LENS_DESCRIPTIONS[lens.kind]}
+        {previousLens !== null && <> <button type="button" className="atlas-link-button" onClick={onRestoreLens}>{restoreLensLabel(previousLens)}</button></>}
+      </p>
       <div className="atlas-lens-body" key={lens.kind}>
         <div className="atlas-lens-limits">
           {limitsForLens(model, lens).map((limit) => <LimitNote key={limit.id} limit={limit} />)}

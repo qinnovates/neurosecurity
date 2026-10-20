@@ -70,12 +70,13 @@
 .atlas-lens-thumb { position: absolute; top: 0.1875rem; bottom: 0.1875rem; left: 0.1875rem; width: calc((100% - 0.375rem) / var(--atlas-lens-count)); border-radius: 0.4375rem; background: var(--atlas-accent-fill); transform: translateX(calc(var(--atlas-lens-index) * 100%)); transition: transform var(--atlas-move) var(--atlas-ease); }
 .atlas-lens { position: relative; padding: 0 0.125rem; font-weight: 600; background: transparent; border-color: transparent; overflow-wrap: normal; hyphens: none; }
 .atlas-lens[aria-pressed="true"] { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.atlas-lens-what { margin: 0.5rem 0 0; color: var(--atlas-ink-soft); }
 .atlas-lens-body { display: grid; gap: 0.75rem 1.25rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-top: 0.75rem; animation: atlas-fade var(--atlas-quick) linear both; }
 .atlas-subject { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--atlas-line); }
 
 /* The subject picker: one text field driving a list. */
 .atlas-picker-count { margin: 0.25rem 0; font-size: 0.75rem; color: var(--atlas-ink-soft); }
-.atlas-options { max-height: 16rem; overflow-y: auto; border: 1px solid var(--atlas-line-strong); border-radius: 0.5rem; background: var(--atlas-ground); }
+.atlas-options { position: relative; max-height: 16rem; overflow-y: auto; border: 1px solid var(--atlas-line-strong); border-radius: 0.5rem; background: var(--atlas-ground); }
 .atlas-option { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 0.75rem; align-items: baseline; min-height: var(--atlas-row); padding: 0.375rem 0.625rem; border-bottom: 1px solid var(--atlas-line); cursor: pointer; }
 .atlas-option-label { font-weight: 600; }
 .atlas-option-detail { grid-column: 1; color: var(--atlas-ink-soft); font-size: 0.75rem; }
@@ -215,7 +216,8 @@
 .atlas-picture-notice { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; }
 /* What the picture has selected, under the canvas and above the caption, so a tap in the picture shows its result where the finger is. */
 .atlas-picture-selected { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.75rem; margin: 0; padding: 0.5rem 0.75rem; background: var(--atlas-panel); border-top: 1px solid var(--atlas-line-strong); border-left: 3px solid var(--atlas-selection); }
-.atlas-picture-selected .atlas-link-button { min-height: var(--atlas-row); }
+.atlas-picture-selected .atlas-link-button, .atlas-picture-lens .atlas-link-button { min-height: var(--atlas-row); }
+.atlas-picture-lens { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; margin: 0; padding: 0 0.75rem; background: var(--atlas-panel); border-top: 1px solid var(--atlas-line-strong); }
 .atlas-caption { padding: 0.5rem 0.75rem; font-size: 0.75rem; background: var(--atlas-panel); border-top: 1px solid var(--atlas-line-strong); }
 .atlas-caption-line { margin: 0 0 0.25rem; }
 .atlas-caption .atlas-limit { margin: 0.1875rem 0; max-width: none; }
