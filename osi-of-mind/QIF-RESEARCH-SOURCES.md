@@ -5,9 +5,9 @@
 > validation agents (quantum physics, neuroscience, cybersecurity) during the
 > framework review conducted on 2026-02-02.
 >
-> **Last updated:** 2026-10-18
+> **Last updated:** 2026-10-20
 > **Sources extracted from:** Three parallel validation agent sessions + ongoing research + landscape research agents + scholar crawl integration (2026-10-06)
-> **Total unique sources:** 536
+> **Total unique sources:** 538
 
 ---
 
@@ -333,6 +333,15 @@ This markdown file remains the human-readable catalog of record. The KQL datalak
 | N103 | Shao X, Chen C, Loftus EF, Zhu B. (2026). "Shared memories of event details in the human brain are altered by misinformation and test expectations." PLOS Biology 24:e3003886. DOI:10.1371/journal.pbio.3003886. | https://doi.org/10.1371/journal.pbio.3003886 | Verified: Crossref 2026-10-18 (metadata, plus abstract or full text as the intake manifest records) | HUMAN (n=100), fMRI, entirely non-invasive and observational: nothing was done to the brain. 'Misinformation increased the likelihood of people forming shared false memories of event details.' The demonstrated route to a false memory in a person is a social and informational channel, not an optical one. The neural component is correlational pattern similarity and supports association, not a causal neural claim. |
 
 ---
+
+### Circuit-Mapping Families Beyond Optogenetics (Citation Sync, 2026-10-20)
+
+> Cited by the whitepaper v9 opening section "Why Neurosecurity?" and the blog post "Optogenetics Is the Actuator, Not the Map". Each DOI was resolved through the Crossref REST API, and each claim was checked against the abstract (Europe PMC). Species is stated in every row.
+
+| # | Citation | URL | Source | QIF Relevance |
+|---|----------|-----|--------|---------------|
+| N104 | Patiño M, Rossa MA, Lagos WN, Patne NS, Callaway EM. (2024). "Transcriptomic cell-type specificity of local cortical circuits." Neuron 112(23):3851-3866.e4. DOI:10.1016/j.neuron.2024.09.003. | https://doi.org/10.1016/j.neuron.2024.09.003 | Verified: Crossref 2026-10-20 (metadata) + Europe PMC abstract | START: monosynaptic rabies tracing combined with single-nucleus RNA sequencing; inhibitory inputs onto five layer-specific excitatory populations in mouse V1 are specific at transcriptomic-subtype level. Mouse only. Cited as cell-type-resolved circuit mapping that uses no optogenetics. |
+| N105 | Wacker AL, Fantasia RJ, Tenner B, Liu B, Wu JD, Monell N, Kosuri P. (2026). "Dye-cycling DNA origami rotors for long-term tracking of transcription at base-pair resolution." Cell Reports Methods 6(10):101550. DOI:10.1016/j.crmeth.2026.101550. | https://doi.org/10.1016/j.crmeth.2026.101550 | Verified: Crossref 2026-10-20 (metadata) + Europe PMC abstract | dcORBIT: tracking of DNA rotation for more than 10 min at 20 Hz with single-base-pair precision, on bacterial (E. coli) RNA polymerase transcription. In vitro molecular biophysics, not circuit mapping; cited to bound that distinction. |
 
 ## 3. Brain-Computer Interfaces (BCI Technology)
 
@@ -1037,7 +1046,7 @@ This markdown file remains the human-readable catalog of record. The KQL datalak
 | Domain | Count | Newest | Oldest |
 |--------|-------|--------|--------|
 | Quantum Physics & Biology | 40 | 2026 | 1993 |
-| Neuroscience | 76 | 2026 | 1990 |
+| Neuroscience | 78 | 2026 | 1990 |
 | BCI Technology | 35 | 2026 | 1992 |
 | Cybersecurity & BCI Security | 162 | 2026 | 1990 |
 | Electrode Technology | 7 | 2025 | 2018 |
@@ -1056,7 +1065,7 @@ This markdown file remains the human-readable catalog of record. The KQL datalak
 | Neurorights Legislation | 4 | 2025 | 2021 |
 | Global Neuroethics Policy & Governance | 39 | 2026 | 2020 |
 | BCI Companies & Devices | 9 | 2026 | 2018 |
-| **Total** | **509** | | |
+| **Total** | **511** | | |
 
 | Source | Sources Found |
 |--------|---------------|

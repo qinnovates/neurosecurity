@@ -17,6 +17,76 @@ Brain-computer interfaces are in clinical trials, in clinical use and on sale as
 
 A security team assessing a brain-computer interface has no shared reference for what sits on the tissue side of the electrode, how a device could be misused, or how well each possibility is evidenced. This paper proposes one. Implanted devices are in clinical use and in human trials, and consumer EEG headsets are on sale. Security engineers have no checkable account of what lies on the other side of the electrode. Neuroscientists have no catalogue of how a device can be turned against its user. The literature rarely makes clear what has been shown and what has only been proposed.
 
+## Why Neurosecurity?
+
+Three things are true at the same time, and the gap between them is the subject of this paper.
+
+**Devices are deployed now.** Implanted neural interfaces are in clinical use and in human trials, and consumer EEG headsets are on sale to anyone. This is the present tense, not a forecast.
+
+**The science that makes neural circuits legible is advancing, and it is not one technique.** This matters for a threat catalogue, because a catalogue that reasons about one method inherits that method's limits as if they were the field's. Six families of technique do different jobs, and no single one yields a map:
+
+| Family | What it establishes | What it cannot establish |
+|---|---|---|
+| Structural connectomics (volume electron microscopy) | Anatomy: what is physically wired to what | Function or activity |
+| Projection tracing (monosynaptic rabies, AAV, barcoded sequencing) | Connectivity between populations | Causality, or which connections matter |
+| Functional readout (calcium and voltage imaging, high-density electrophysiology) | Activity over time | Cell identity, or direction of influence |
+| Molecular identity (single-cell RNA sequencing, spatial transcriptomics, epigenomics) | What kind of cell each one is | How the cells are wired |
+| Actuators (optogenetics, chemogenetics) | Causal necessity or sufficiency, **only when paired with a readout above** | Anything on their own: an actuator is not a measurement |
+| Integrative methods (for example, rabies tracing combined with single-nucleus sequencing) | Connectivity at cell-type resolution | A human map: the work so far is in animals |
+
+**The governance for all of it sits in a different field from device security.** The rest of the paper develops that argument, and it is why the gap is a security problem rather than only a science problem.
+
+### What is demonstrated today
+
+Stated conservatively, and labelled by species.
+
+- **Optogenetics is an actuator, not a map.** A gene for a light-gated ion channel is delivered to a chosen cell population, and light then drives or silences those cells. The first such channel, channelrhodopsin, came from a green alga. Tracing what is connected to what needs a separate readout, because the perturbation alone shows nothing about wiring. Section 24.1 gives the 2026 Nobel Prize in Physiology or Medicine for this work, with its citation. Almost all of it is in animals. The human results this paper cites are in the eye: partial restoration of vision in one patient, and two small retinal trials with mixed results (Sections 24.1 and 24.11).
+- **Cell-type-resolved circuit mapping does not need optogenetics.** Single transcriptome assisted rabies tracing (START) combines monosynaptic rabies tracing with single-nucleus RNA sequencing. Applied to inputs onto five layer-specific excitatory populations in mouse primary visual cortex, it showed that inhibitory inputs are specific at the level of transcriptomic subtype (Patiño et al., 2024, *Neuron* 112(23):3851–3866, DOI:10.1016/j.neuron.2024.09.003). **Mouse. Not shown in humans.**
+- **Molecular tooling is improving independently of circuit mapping, and is easy to confuse with it.** Dye-cycling origami-rotor-based imaging and tracking (dcORBIT) extended single-molecule tracking of DNA rotation to more than ten minutes at 20 Hz with single-base-pair precision, and was demonstrated on transcription by a bacterial RNA polymerase (Wacker et al., 2026, *Cell Reports Methods* 6(10):101550, DOI:10.1016/j.crmeth.2026.101550). This is transcription biophysics. It is not a brain-mapping result, and this paper does not present it as one.
+
+### Where this is heading: a projection, not a finding
+
+**This subsection is a projection.** Nothing in it is demonstrated, none of it is required for the rest of the paper to stand, and a reader who rejects all of it should still find Sections 20–28 usable.
+
+The direction of travel is from population-level description toward cell-type-level description, and from animal preparations toward human tissue. If that continues, the objects a security framework has to reason about become more specific: not "a region was stimulated" but "an identified cell population was engaged". A framework whose addressing scheme only describes regions will not be able to express that finding. That is the reason to build the addressing scheme before it is needed, and to publish its open items as open items.
+
+### Why now, rather than later
+
+Not because an attack is imminent. We are unaware of a documented attack on a clinical neural device, and this paper does not claim one. The case for now is narrower:
+
+1. **The device population is growing while the shared vocabulary does not exist.** A security team assessing a neural interface today has no checkable account of what sits on the tissue side of the electrode, and risk registers are being written now.
+2. **The binding control for the most consequential techniques is not a device control.** For any technique that requires gene delivery, custody of the delivery step decides whether the capability exists at all, and that custody sits inside gene-therapy regulation. We are unaware of a framework that covers the handoff. Naming where a control already lives tells a reader which regulator to ask.
+3. **Architecture decided now is expensive to revisit.** Consent gates, data tiering and provenance are cheap while a device is designed and costly afterwards.
+4. **Separating the demonstrated from the speculated is itself a safety contribution.** Every catalogue entry carries its evidence, so a reader can discount what deserves discounting, including entries in this paper.
+
+### What this section does not say
+
+- It does not say the brain can be read. Decoded outputs are selected from known alternatives and need the user's cooperation and trained models.
+- It does not say any technique described here has been used against a person.
+- It does not claim QIF, TARA or NISS are validated, adopted or standard. They are proposed and unvalidated, and no outside organisation has adopted or independently reviewed them.
+- It does not claim completeness. The six families are the ones that bear on neural addressing, and corrections to the list are welcome.
+
+## Purpose and Goal
+
+Brain-computer interfaces are in clinical use, in human trials and on sale as consumer EEG headsets. The security discipline that would assess them does not yet share a vocabulary with the neuroscience that explains what sits on the tissue side of the electrode. A security engineer can describe a firmware flaw precisely and has no standard way to say which neural structure a stimulation parameter acts on. A neuroscientist can describe that structure precisely and has no catalogue of how a device could be turned against the person carrying it. This project exists to close that gap, and its method is translation rather than discovery.
+
+**How the model was built.** The framework began from two established hierarchies and the observation that they share a scale. Kandel's nervous-system hierarchy spans seven levels, from molecular signal transduction at roughly 10⁻⁹ m to the whole brain at roughly 10⁰ m. Campbell's levels of biological organization span eight, from the atom at roughly 10⁻¹⁰ m to the organism. Side by side, each advances by about one order of magnitude in spatial extent, with a matching step in timescale. QIF's addressing scheme is built on that shared scale: seven neural addresses, **adapted from those hierarchies by functional grouping rather than reproducing either**, alongside the interface and device addresses (Section 20.2). The adaptation is recorded in the project's derivation log, so a reader can see where the published hierarchies end and this project's judgement begins.
+
+**What the model is.** A shared reference for where a device acts, so that a security finding and a neuroanatomical structure can be discussed in the same sentence. It is a baseline for comparison, not a representation of the nervous system.
+
+**What the model is not, and how we know.** Earlier versions borrowed the OSI model's numbered-layer form, and readers reasonably read the numbered bands as layers a signal traverses in turn. We tested that reading against the framework's own pathway data by comparing the published numbering with all 5,040 possible numberings of the seven addresses (Section 20.1). The published order was indistinguishable from an arbitrary one: it carried no traversal information. It was retired. The addresses are now labels with no order, severity or sequence meaning. Signal flow is to be carried by explicit route records that can be checked against anatomy one at a time, and those are proposed and staged, not yet integrated (Section 20.4). A construct that cannot survive a measurement against its own data does not stay in the model because it is useful or because it is ours.
+
+**Why mapping should begin now, and in which order.**
+
+1. **Start from what is demonstrated.** Every TARA technique carries an evidence label, and the catalogue reads as a checklist in descending order of evidential strength. The evidence tiers do not yet record species, so a reader should check whether a demonstrated result is human or animal (Section 21.2).
+2. **Then the theoretical, labelled as theoretical.** A threat model that excludes untested mechanisms is incomplete, and one that presents them as findings is worse. Labelling is what lets the catalogue carry both.
+3. **Then the controls that are not device controls.** For techniques that require gene delivery, custody of the delivery step sits inside gene-therapy regulation, and naming that tells a reader which regulator to ask.
+4. **Then architecture, while it is still cheap.** Consent gates, data tiering and provenance cost little during design and a great deal afterwards.
+
+**The constraint the work operates under.** Patients depend on these devices today. Deep brain stimulators, cochlear implants and responsive neurostimulators improve and sometimes save lives. A security framework that makes them harder to build, approve or obtain has done net harm however rigorous it is. That is why the catalogue is published as a checklist with its evidence exposed, not as a conformance requirement.
+
+**Status, limits and what is being asked for.** QIF, TARA and NISS are proposed and unvalidated, and no standards body or outside organisation has adopted or independently reviewed them. The work is one researcher's: more than thirteen years in cybersecurity, a seat on the FIRST.org CVSS Special Interest Group, and no formal training in neuroscience. No human neuroanatomist has reviewed the anatomy, and that bounds how much weight the anatomical claims can carry. The most useful response to this paper is a correction with evidence attached, especially from reviewers able to falsify the proposed NISS extension to CVSS. Section 28.3 lists the work that remains, and Section 28.7 says what would help from each kind of reader.
+
 ## What Qinnovate Offers
 
 Qinnovate, currently a solo research effort by the author, Qinnovate LLC, works on that gap. It offers three things, each proposed and unvalidated:
@@ -315,7 +385,7 @@ v8.0 asked who decides, who controls and who is accountable. v9.0 asks **which o
 
 ## Contents
 
-**Front matter:** Executive Summary · The Problem · What Qinnovate Offers · Status of This Paper · Terms Used in This Paper · Mission and Vision · In Plain Language · Key Findings · Recommendations · Worked Example: a Deep Brain Stimulator, from Device to Risk Register · Planning Assumptions · Author's Note · Claims and Disclaimers · The Proposal · What Changed in v9.0
+**Front matter:** Executive Summary · The Problem · Why Neurosecurity? · Purpose and Goal · What Qinnovate Offers · Status of This Paper · Terms Used in This Paper · Mission and Vision · In Plain Language · Key Findings · Recommendations · Worked Example: a Deep Brain Stimulator, from Device to Risk Register · Planning Assumptions · Author's Note · Claims and Disclaimers · The Proposal · What Changed in v9.0
 
 - [20. The Neural Addressing Model](#20-the-neural-addressing-model)
 - [21. TARA 4.3: New Techniques, Variants and Evidence Rules](#21-tara-43-new-techniques-variants-and-evidence-rules)
@@ -645,6 +715,8 @@ Optogenetics delivers the gene for a light-gated ion channel to chosen neurons, 
 Almost all of this work is in animals. In people, one blind patient with retinitis pigmentosa regained partial visual function after a light-sensitive protein was delivered to the retina and paired with light-projecting goggles (Sahel et al., 2021, *Nature Medicine*, DOI:10.1038/s41591-021-01351-4). A 2025 roadmap separates such direct use from the indirect use of circuit findings to guide other therapies (Lüscher et al., 2025, *Nature Neuroscience*, DOI:10.1038/s41593-025-02097-9).
 
 ### 24.2 How brain circuits work
+
+Mapping a circuit draws on six families of technique. Optogenetics belongs to the actuator family, with chemogenetics: it perturbs cells rather than measuring them. The section Why Neurosecurity? sets out what each family can and cannot establish.
 
 A nucleus a few millimetres across holds several cell types that project to different places, and fibres from other regions pass through it. A circuit is therefore defined by cell type and by where those cells project, not by location alone.
 

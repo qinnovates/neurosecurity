@@ -27,7 +27,7 @@ QIF, TARA and NISS help builders and defenders start a neural-device threat mode
 
 ![Open datalake inventory](src/site/images/datalake-corpus.svg)
 
-**21,471 records inventoried below, from 28 of the 40 datasets in [`datalake/`](datalake/).** 20,182 neural impact chains · 178 proposed techniques · 24 BCI devices specced · 68 companies tracked · 107 CVEs mapped · 257 unique DOIs cited.
+**21,473 records inventoried below, from 28 of the 40 datasets in [`datalake/`](datalake/).** 20,182 neural impact chains · 178 proposed techniques · 24 BCI devices specced · 68 companies tracked · 107 CVEs mapped · 257 unique DOIs cited.
 
 Counted from the files themselves on 2026-10-20. Re-run `npm run datalake:inventory` and every figure on this page moves with the data; `npm run datalake:inventory:check` fails the build if it has drifted.
 
@@ -80,7 +80,7 @@ Counted from the files themselves on 2026-10-20. Re-run `npm run datalake:invent
 
 | Inventory | Count | Derived from |
 |---|---:|---|
-| Researchers catalogued | **154** | [`datalake/research-registry.json`](datalake/research-registry.json) |
+| Researchers catalogued | **156** | [`datalake/research-registry.json`](datalake/research-registry.json) |
 | Research organisations | **73** | [`datalake/research-registry.json`](datalake/research-registry.json) |
 | Derivation milestones | **31** | [`datalake/derivation-timeline.json`](datalake/derivation-timeline.json) |
 | Institutions | **28** | [`datalake/research-registry.json`](datalake/research-registry.json) |
@@ -173,12 +173,6 @@ Neuroethics has two hemispheres (Roskies, 2002): the *ethics of neuroscience* go
 | **Method** | Engineering | Research + philosophy |
 | **Output** | Tools, protocols, detections | Principles, rights, governance |
 | **In this repo** | TARA, NISS, NSP, Neurowall, QIF Model | Governance, neurorights, dual-use insight |
-
-Neuroethics is not a review step bolted on at the end here. That ordering follows the NIH BRAIN Initiative's neuroethics program, which argues neuroethics should run concurrently with the development of neurotechnology rather than being applied after the fact ([Ramos, Rommelfanger, Greely & Koroshetz, 2017](https://doi.org/10.1080/23299460.2017.1319035)), and runs it through four standing activities: a Neuroethics Working Group, funded neuroethics research, scanning of the research portfolio for the ethical questions it raises, and workshops on neuroethics topics ([Bianchi et al., 2018](https://doi.org/10.1523/JNEUROSCI.2091-18.2018); [Ramos et al., 2019](https://doi.org/10.1016/j.neuron.2019.01.024); [NIH BRAIN Initiative, Neuroethics](https://www.nih.gov/brain/research/neuroethics)).
-
-QIF has none of those four. It is one researcher's framework with no funding, no advisory group and no ethics review. The guardrails it holds itself to are self-imposed, which is the weakness, and the comparison is here to name the standard rather than to claim it. The gap is set out in [Neurosecurity Governance §4](governance/policy/NEUROSECURITY_GOVERNANCE.md#institutional-models-the-nih-brain-initiative-neuroethics-program). **No affiliation:** the NIH, the BRAIN Initiative and its Neuroethics Working Group have not reviewed, endorsed or funded any part of this project.
-
----
 
 ## Repository
 
@@ -320,7 +314,7 @@ A proposed CVSS v4.0 extension for neural interfaces. Six metrics that CVSS cann
 | Metric | Code | What It Measures |
 |--------|------|-----------------|
 | Biological Impact | BI | Tissue damage, neural pathway disruption |
-| Cognitive Reconnaissance | CR | Decoding of speech or motor intent by models trained on a cooperating user, neural data inference |
+| Cognitive Reconnaissance | CR | Thought decoding, neural data inference |
 | Cognitive Disruption | CD | Perception manipulation, cognitive coercion |
 | Consent Violation | CV | Whether the subject knew and agreed |
 | Reversibility | RV | Can the damage be undone? |
