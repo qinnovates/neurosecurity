@@ -171,11 +171,11 @@ function compareChains(left: GeneratedChain, right: GeneratedChain): number {
 /** Reader-facing words for the evidence gate, e.g. "validated, lab or case study". */
 function describeTierFilter(tiers: readonly string[]): string {
   const labels = [...new Set(tiers.map((tier) => (EVIDENCE_SHORT_LABELS[tier as EvidenceTierCode] ?? tier).toLowerCase()))];
-  if (labels.length === 0) return 'no permitted';
   return labels.length === 1 ? labels[0] : `${labels.slice(0, -1).join(', ')} or ${labels[labels.length - 1]}`;
 }
 
 function explainEmptyResult(candidates: readonly Candidate[], hasEntries: boolean, hasTerminals: boolean, tiers: readonly string[]): string {
+  if (tiers.length === 0) return 'No technique placed on this model passes the evidence filter, because the filter allows no evidence tier.';
   const filter = `${describeTierFilter(tiers)} evidence`;
   if (candidates.length === 0) return `No technique placed on this model has ${filter}.`;
   if (!hasEntries) return `No initial-access technique with ${filter} is placed on this model.`;
