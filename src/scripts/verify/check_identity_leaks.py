@@ -110,7 +110,10 @@ CITATION_CONTEXT = re.compile(
     r"\bmaintainers?\b\s*[:=]|name=[\"']author[\"']|\bwritten by\b|\bby\b\s*$)"
 )
 # Whole files that are citation records end to end.
-CITATION_FILE_SUFFIXES = (".bib", ".cff", ".qmd")
+# Pure citation formats only. A Quarto .qmd is a whole document, so allowlisting it
+# wholesale would let narrative self-attribution anywhere in a whitepaper pass; its
+# genuine citation lines are already caught by CITATION_CONTEXT.
+CITATION_FILE_SUFFIXES = (".bib", ".cff")
 
 
 # A name in prose is an editorial call: a byline on one's own paper is legitimate,
@@ -235,6 +238,15 @@ def main() -> int:
         print(f"\n{notes} prose occurrence(s) of an author's full name. Not a build failure: a byline on "
               "one's own work is legitimate attribution. Review the inventory and decide per site; "
               "re-run with --strict to treat these as failures once the editorial pass is done.")
+    if not NAME_PATTERNS:
+        # A shallow clone (actions/checkout defaults to fetch-depth 1) whose HEAD is
+        # bot-authored yields only single-token names, which are skipped, so the name
+        # check would pass while checking nothing. Refuse that rather than report clean.
+        total += 1
+        print("::error::no multi-token author name could be derived from git history; the "
+              "name check did not run. Use a full clone (fetch-depth: 0)." if args.github else
+              "  LEAK  name check did not run: no multi-token author derivable from git history "
+              "(shallow clone?). Re-run with full history.")
     if total:
         print(f"\n{total} leak(s) in tracked files. Redact with $HOME, ~ or a repo-relative path; "
               "rotate any real credential before removing it.")

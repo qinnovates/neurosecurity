@@ -15,6 +15,9 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
         with:
           persist-credentials: false
+          # Full history: the identity check derives protected names from git authorship,
+          # and a depth-1 clone with a bot-authored HEAD would leave it nothing to check.
+          fetch-depth: 0
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: '3.12'
