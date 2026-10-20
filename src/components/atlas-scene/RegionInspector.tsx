@@ -23,6 +23,8 @@ interface Props {
   onChooseTechnique: (techniqueId: string) => void;
   onChooseDevice: (deviceId: string) => void;
   onBackToList: () => void;
+  /** Returns the visitor to the 3D view's heading. */
+  onBackToView: () => void;
 }
 
 function Devices({ detail, onChooseDevice }: { detail: RegionDetail; onChooseDevice: (deviceId: string) => void }) {
@@ -45,7 +47,8 @@ function Devices({ detail, onChooseDevice }: { detail: RegionDetail; onChooseDev
 
 /**
  * Everything the atlas holds for the selected region. Its heading takes focus
- * when a region is chosen from the keyboard, and "Back to the list" returns it.
+ * when a region is chosen from the keyboard; "Back to the list" returns it to
+ * the region's row, and "Back to the 3D view" to the picture.
  */
 export default function RegionInspector(props: Props) {
   const { detail, headingRef } = props;
@@ -62,7 +65,10 @@ export default function RegionInspector(props: Props) {
     <section className="atlas-panel atlas-inspector" aria-labelledby="atlas-inspector-heading" key={region.id}>
       <p className="atlas-kicker">{band === null ? 'No band' : `QIF band ${band.id}, ${band.name}`}</p>
       <h2 className="atlas-heading atlas-inspector-title" id="atlas-inspector-heading" ref={headingRef} tabIndex={-1}>{region.name}</h2>
-      <button type="button" className="atlas-link-button" onClick={props.onBackToList}>Back to the list</button>
+      <p className="atlas-inspector-ways">
+        <button type="button" className="atlas-link-button" onClick={props.onBackToList}>Back to the list</button>
+        <button type="button" className="atlas-link-button" onClick={props.onBackToView}>Back to the 3D view</button>
+      </p>
       {detail.description !== null && (
         <section className="atlas-section" aria-labelledby="atlas-inspector-what">
           <h3 className="atlas-subheading" id="atlas-inspector-what">What the QIF atlas file says it does</h3>

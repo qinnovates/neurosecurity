@@ -62,6 +62,27 @@ export function materialParamsFor(shape: Pick<SceneShape, 'layer' | 'fill' | 'co
   return { shading: 'lit', colour, opacity: FILL_OPACITY[shape.fill], isWireframe: false, isDoubleSided: false, writesDepth: false, drawOrder: DRAW_ORDER.seeThrough };
 }
 
+/**
+ * How a shape under the pointer is lifted, so the visitor sees which shape a
+ * click would pick. The lift keeps the fill kind: a see-through shape grows
+ * denser and a filled one brighter. Nothing changes hue, so a hovered shape
+ * never reads as holding a value it does not hold.
+ */
+export const HOVER_OPACITY: Readonly<Record<FillKind, number>> = { solid: 1, translucent: 0.7, lines: 0.55, neutral: 0.4 };
+/** White light added to a filled shape under the pointer: brighter, not another colour. */
+export const HOVER_EMISSIVE = '#ffffff';
+export const HOVER_EMISSIVE_INTENSITY = 0.7;
+
+export interface HoverParams {
+  opacity: number;
+  /** Zero for every see-through fill, which is lifted by opacity alone. */
+  emissiveIntensity: number;
+}
+
+export function hoverParamsFor(shape: Pick<SceneShape, 'fill'>): HoverParams {
+  return { opacity: HOVER_OPACITY[shape.fill], emissiveIntensity: shape.fill === 'solid' ? HOVER_EMISSIVE_INTENSITY : 0 };
+}
+
 /** The brain outline and the head surface are context: they are never picked, so neither stands between the pointer and a shape inside it. */
 export function isPickable(shape: Pick<SceneShape, 'layer'>): boolean {
   return shape.layer !== OUTLINE_LAYER && shape.layer !== DEVICES_LAYER;

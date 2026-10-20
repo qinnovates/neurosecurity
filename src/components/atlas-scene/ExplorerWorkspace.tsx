@@ -7,7 +7,7 @@ import { isDevicesLayerShown, layersAtStart } from '@/lib/atlas-explorer/devices
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { LENS_LABELS, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE, explorerReducer } from './atlas-state';
-import AtlasViewport from './AtlasViewport';
+import AtlasViewport, { VIEWPORT_HEADING_ID } from './AtlasViewport';
 import ChainView from './ChainView';
 import { loadAnatomyEvidence, loadRegionEvidence } from './explorer-companions';
 import H01Card from './H01Card';
@@ -36,6 +36,8 @@ const TECHNIQUE_LENS = 'technique';
 const DeviceGeometry = lazy(() => import('./DeviceGeometry'));
 /** The width at which the list and the inspector stop sitting side by side. Matches atlas-scene.css. */
 const STACKED_LAYOUT_QUERY = '(max-width: 960px)';
+/** Where a selection came from: the list by keyboard, the list by pointer, or the picture. */
+type SelectionSource = 'keyboard' | 'pointer' | 'picture';
 
 /** Says a change out loud once it has happened. The first render announces nothing. */
 function useAnnouncement(message: string): string {
@@ -83,22 +85,32 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
   const lensAnnouncement = useAnnouncement(announceLens(model, state.lens, tally));
 
   /**
-   * Focus moves to the inspector when a region is chosen from the keyboard, and also on a narrow screen, where the
-   * inspector lies below the whole list and a tap would otherwise change nothing the visitor can see. The move waits
-   * for the inspector to show the chosen region, so it lands on that region's heading and not on the one it replaces.
+   * Focus moves to the inspector when a region is chosen from the keyboard, and also when a row is tapped on a narrow
+   * screen, where the inspector lies below the whole list and the tap would otherwise change nothing the visitor can
+   * see. A pick in the picture moves nothing: the picture names what it selected and offers the way to the details, so
+   * the visitor is not carried away from the view they were using. The move waits for the inspector to show the chosen
+   * region, so it lands on that region's heading and not on the one it replaces.
    */
-  const [focusRequest, setFocusRequest] = useState<{ isStacked: boolean } | null>(null);
-  const selectRegion = (regionId: string, byKeyboard: boolean): void => {
+  const [focusRequest, setFocusRequest] = useState<{ shouldScroll: boolean } | null>(null);
+  const selectRegion = (regionId: string, source: SelectionSource): void => {
     dispatch({ type: 'target_selected', target: { kind: 'region', id: regionId } });
+    if (source === 'picture') return;
     const isStacked = typeof window.matchMedia === 'function' && window.matchMedia(STACKED_LAYOUT_QUERY).matches;
-    if (byKeyboard || isStacked) setFocusRequest({ isStacked });
+    if (source === 'keyboard' || isStacked) setFocusRequest({ shouldScroll: isStacked });
   };
+  const showDetails = (): void => setFocusRequest({ shouldScroll: true });
   useEffect(() => {
     if (focusRequest === null) return;
-    inspectorHeadingRef.current?.focus({ preventScroll: focusRequest.isStacked });
-    // Stacked, the inspector is brought to the top of the screen, so the tap visibly lands on the region's details.
-    if (focusRequest.isStacked) inspectorHeadingRef.current?.scrollIntoView?.({ block: 'start' });
+    inspectorHeadingRef.current?.focus({ preventScroll: focusRequest.shouldScroll });
+    // Brought to the top of the screen, so the choice visibly lands on the region's details.
+    if (focusRequest.shouldScroll) inspectorHeadingRef.current?.scrollIntoView?.({ block: 'start' });
   }, [focusRequest]);
+  /** The way back from the details to the picture: the 3D view's heading, brought to the top of the screen. */
+  const showViewport = (): void => {
+    const heading = mainRef.current?.closest<HTMLElement>('.atlas-root')?.querySelector<HTMLElement>(`#${VIEWPORT_HEADING_ID}`) ?? null;
+    heading?.focus({ preventScroll: true });
+    heading?.scrollIntoView?.({ block: 'start' });
+  };
   const chooseSubject = (kind: LensKind, subjectId: string): void => dispatch({ type: 'lens_subject_chosen', kind, subjectId });
   const focusSelectedRow = (): void => {
     const rows = [...(mainRef.current?.querySelectorAll<HTMLButtonElement>('[data-region-id]') ?? [])];
@@ -109,7 +121,7 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
     <div className="atlas-root" data-lens={state.lens.kind}>
       <AtlasViewport
         model={model} lens={state.lens} layers={state.layers} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep}
-        chain={chainView.frame} electrodeId={electrodeId} onPickElectrode={setElectrodeId} onSelectRegion={(regionId) => selectRegion(regionId, false)}
+        chain={chainView.frame} electrodeId={electrodeId} onPickElectrode={setElectrodeId} onSelectRegion={(regionId) => selectRegion(regionId, 'picture')} onShowDetails={showDetails}
       />
       {isDevicesLayerShown(model.index, state.layers) && (
         <Suspense fallback={<p className="atlas-loading" role="status">Loading the electrode layout…</p>}>
@@ -120,18 +132,18 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
         <div className="atlas-main-list">
           <LensPanel
             model={model} lens={state.lens} tally={tally} onChooseKind={(kind) => dispatch({ type: 'lens_kind_chosen', kind })}
-            onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, true)}
+            onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, 'keyboard')}
           />
           <StructureList
             groups={groups} regionCount={model.regions.length} filter={state.filter} lensLabel={LENS_LABELS[state.lens.kind]} selectedRegionId={selectedRegionId}
-            onFilter={(filter) => dispatch({ type: 'filter_changed', filter })} onClearFilter={() => dispatch({ type: 'filter_cleared' })} onSelect={selectRegion}
+            onFilter={(filter) => dispatch({ type: 'filter_changed', filter })} onClearFilter={() => dispatch({ type: 'filter_cleared' })} onSelect={(regionId, byKeyboard) => selectRegion(regionId, byKeyboard ? 'keyboard' : 'pointer')}
           />
         </div>
         <RegionInspector
           model={model} detail={detail} headingRef={inspectorHeadingRef} anatomyEvidence={anatomyEvidence.state} regionEvidence={regionEvidence.state}
           onRetryAnatomyEvidence={anatomyEvidence.retry} onRetryRegionEvidence={regionEvidence.retry}
           onChooseTechnique={(techniqueId) => chooseSubject(TECHNIQUE_LENS, techniqueId)} onChooseDevice={(deviceId) => chooseSubject('stated_targets', deviceId)}
-          onBackToList={focusSelectedRow}
+          onBackToList={focusSelectedRow} onBackToView={showViewport}
         />
       </div>
       <LayerPanel layers={model.index.layers} sources={model.index.sources} requested={state.layers} onToggle={(layerId) => dispatch({ type: 'layer_toggled', layerId })} />
