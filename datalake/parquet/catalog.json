@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-17T11:29:27.830116+00:00",
+    "generated": "2026-10-20T03:39:25.305182+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
     "total_datasets": 39,
-    "total_rows": 24334
+    "total_rows": 24416
   },
   "datasets": {
     "techniques": {
@@ -42,8 +42,8 @@
         "consent_tier",
         "notes"
       ],
-      "size_bytes": 45574,
-      "sha256": "c388c06e40283d8f2a730e9643ad96c99f58658960de8e3316b799e7972d2017",
+      "size_bytes": 45648,
+      "sha256": "d08f181527dc92b0d3811e389994f9475694c317ce1293cea49960b570c836b8",
       "compression": "zstd",
       "source": "datalake/parquet/techniques.parquet"
     },
@@ -566,13 +566,13 @@
         "domain",
         "category"
       ],
-      "size_bytes": 8244,
-      "sha256": "c3e89e76681d0c6d409f50810fcd0dfc34c73f533c51eb51ba6e86875490c89d",
+      "size_bytes": 8247,
+      "sha256": "cab0300418639b00440948bf96a965d80608ed6f80f2da6fa1b229d605c669b7",
       "compression": "zstd",
       "source": "datalake/parquet/research_explorer.parquet"
     },
     "research_institutions": {
-      "rows": 27,
+      "rows": 28,
       "columns": 9,
       "column_names": [
         "id",
@@ -585,8 +585,8 @@
         "layer",
         "tags"
       ],
-      "size_bytes": 6386,
-      "sha256": "1820f5a56af21b75381d4af53257f5d9f39092c90182c6473708f80c500ce731",
+      "size_bytes": 6508,
+      "sha256": "bed43f8a81a8978c01a55c32db7870f54e7e31adf3e0c3a07ce0c02895c35b1c",
       "compression": "zstd",
       "source": "datalake/parquet/research_institutions.parquet"
     },
@@ -679,7 +679,7 @@
       "source": "datalake/parquet/eeg_samples.parquet"
     },
     "intake_ledger": {
-      "rows": 156,
+      "rows": 237,
       "columns": 12,
       "column_names": [
         "id",
@@ -695,8 +695,8 @@
         "independent_review",
         "disposition"
       ],
-      "size_bytes": 33190,
-      "sha256": "40654b4c60fe2e871015c143bd37d6ca4fd5e31330babdd40c89a6d68df98d4e",
+      "size_bytes": 59257,
+      "sha256": "0154f08eaeb88287ca421d7169cf2426f4e1cb33cc128fda79aa9eca02075450",
       "compression": "zstd",
       "source": "datalake/parquet/intake_ledger.parquet"
     },
@@ -746,8 +746,8 @@
         "current_stats",
         "milestones"
       ],
-      "size_bytes": 13348,
-      "sha256": "78da248277f065ec4c9edb7b23171095be3e44069910918b02418a432771970f",
+      "size_bytes": 13371,
+      "sha256": "12ac72fd4472a546d6073b8719faf15e21eaa21e38a34b887126286fcd11a2e3",
       "compression": "zstd",
       "source": "datalake/parquet/timeline.parquet"
     },

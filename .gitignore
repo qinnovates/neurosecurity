@@ -111,3 +111,8 @@ _staging/
 governance/outreach/
 src/site/governance/outreach/
 src/site/governance/outreach-tracker/
+
+# Intake staging: sanitize before tracking (see datalake/intake/2026-10-06 for the pattern)
+datalake/intake/*/
+!datalake/intake/2026-10-06/
+!datalake/intake/2026-10-18/
