@@ -57,7 +57,16 @@ const statusText = Object.entries(status)
   .map(([name, count]) => `${name.charAt(0)}${name.slice(1).toLowerCase()} ${count}`)
   .join(', ');
 
-const computedOn = new Date().toISOString().slice(0, 10);
+// The date the registrar records for itself, not today's date. Stamping wall-clock time
+// made --check fail every day the calendar passed the committed date, even with no data
+// change, so CI broke on any later push until someone regenerated a date line. A
+// generated section must be a pure function of its input.
+const registrarGenerated = typeof registrar.generated === 'string' ? registrar.generated : '';
+if (!/^\d{4}-\d{2}-\d{2}/.test(registrarGenerated)) {
+  console.error(`[truth-registry] ${REGISTRAR_PATH} has no ISO 'generated' date; cannot stamp the section deterministically.`);
+  process.exit(1);
+}
+const computedOn = registrarGenerated.slice(0, 10);
 const section = `> **Last computed: ${computedOn} from \`datalake/qtara-registrar.json\`** by \`npm run truth:registry\`. Sections 10.1-10.4 are generated; do not edit them by hand. 10.5 and 10.6 are editorial.
 
 ### 10.1 Technique Count & Taxonomy
