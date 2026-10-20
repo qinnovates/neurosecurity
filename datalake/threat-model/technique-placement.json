@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "status": "Authored, unreviewed. One decision per catalog technique with confirmed or demonstrated evidence: where it acts on a device, or why it is not placed. Techniques with weaker evidence are not mapped yet. These decisions are this tool's own analysis and need expert review. Each placement also names how the technique gets in: through the device's own systems, at the neural interface, or through what the patient sees and hears.",
+  "status": "Authored, unreviewed. One decision per catalog technique whose evidence tier is replicated, lab-demonstrated or case evidence: where it acts on a device, or why it is not placed. Techniques with weaker evidence are not mapped yet. These decisions are this tool's own analysis and need expert review. Each placement also names how the technique gets in: through the device's own systems, at the neural interface, or through what the patient sees and hears.",
   "placements": {
     "QIF-T0001": {
       "onNeuralInterface": true,
@@ -58,6 +58,39 @@
       "requiresCorticalTarget": false,
       "chainRole": "pivot",
       "basis": "Alters protocol messages to or from the neural interface.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0008": {
+      "onNeuralInterface": false,
+      "componentKinds": [],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "stimulationCommands"
+      ],
+      "requiresDirection": [
+        "write",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": false,
+      "chainRole": "objective",
+      "basis": "Intercepts and substitutes commands where they travel to the stimulation path, so it needs a link carrying stimulation commands.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0009": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "implant",
+        "headset"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": [
+        "read",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": false,
+      "chainRole": "pivot",
+      "basis": "Introduces false signals at the recording front end, so it applies where the device records and feeds what it records onward.",
       "entryPath": "device_systems"
     },
     "QIF-T0016": {
@@ -130,6 +163,23 @@
       "basis": "Feeds a decoder inputs crafted to be misclassified.",
       "entryPath": "device_systems"
     },
+    "QIF-T0022": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "patient_app",
+        "wearable_processor"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": [
+        "read",
+        "bidirectional"
+      ],
+      "requiresCorticalTarget": false,
+      "chainRole": "objective",
+      "basis": "Falsifies the feedback a closed-loop device shows the user, so it needs a component that presents feedback.",
+      "entryPath": "senses"
+    },
     "QIF-T0024": {
       "onNeuralInterface": false,
       "componentKinds": [
@@ -162,6 +212,21 @@
       "chainRole": "objective",
       "basis": "Floods the stimulation path the device controls.",
       "entryPath": "neural_interface"
+    },
+    "QIF-T0031": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "implant",
+        "headset",
+        "wearable_processor"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "objective",
+      "basis": "Forces sustained high-power operation on a battery-powered component.",
+      "entryPath": "device_systems"
     },
     "QIF-T0035": {
       "onNeuralInterface": true,
@@ -258,6 +323,34 @@
       "requiresCorticalTarget": false,
       "chainRole": "exfiltration",
       "basis": "Captures encrypted recordings now for later decryption.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0046": {
+      "onNeuralInterface": true,
+      "componentKinds": [],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "softwareUpdates"
+      ],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "initial_access",
+      "basis": "Enters through the over-the-air update path, so it needs a link carrying software updates.",
+      "entryPath": "device_systems"
+    },
+    "QIF-T0047": {
+      "onNeuralInterface": false,
+      "componentKinds": [
+        "cloud_service"
+      ],
+      "linkMedia": [],
+      "onLinksCarrying": [
+        "softwareUpdates"
+      ],
+      "requiresDirection": null,
+      "requiresCorticalTarget": false,
+      "chainRole": "objective",
+      "basis": "Uses a shared platform service to reach many devices at once, so it needs a back-end service or a shared update path.",
       "entryPath": "device_systems"
     },
     "QIF-T0048": {

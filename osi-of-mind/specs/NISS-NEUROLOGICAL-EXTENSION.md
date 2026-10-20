@@ -74,8 +74,8 @@ Each neurological condition maps to specific QIF hourglass bands based on where 
 | Band | Region | Neurological Conditions |
 |------|--------|------------------------|
 | N7 | Neocortex | Cortical blindness, expressive/receptive aphasia, alexia, central pain |
-| N6 | Allocortex | Altered sensorium, emotional dysregulation, autonomic conditions |
-| N5 | Cerebral nuclei | Tremor, dystonia, bradykinesia, dyskinesia, chorea |
+| N6 | Limbic System | Altered sensorium, emotional dysregulation, autonomic conditions |
+| N5 | Basal Ganglia | Tremor, dystonia, bradykinesia, dyskinesia, chorea |
 | N4 | Thalamus | Tinnitus, paresthesia, central pain syndrome |
 | N3 | Cerebellum | Ataxia, intention tremor, dysmetria |
 | N2 | Brainstem | Vertigo, nystagmus, dysarthria, cardiac arrhythmia, syncope |

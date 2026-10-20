@@ -690,12 +690,12 @@ function renderHourglassPhysics(container) {
 
       <div class="vision-card">
         <h4 class="vision-heading">Step 2: The Neural Side Has Layers</h4>
-        <p>Neuroscience already organizes the CNS into a functional hierarchy (Kandel et al., 2021). I mapped 7 bands to this hierarchy because each level has distinct signal properties that matter for security. Since addressing version 2 (2026-10-06) the band codes are addresses, not an order: the number carries no severity, processing or traversal meaning, and the dynamics listed below are hypotheses (untested, no estimator defined):</p>
+        <p>Neuroscience already organizes the CNS into a functional hierarchy (Kandel et al., 2021). I mapped 7 bands to this hierarchy because each level has distinct signal properties that matter for security. Since 2026-10-06 the band codes are addresses, not an order: the number carries no severity, processing or traversal meaning, and the dynamics listed below are hypotheses (untested, no estimator defined):</p>
         <div class="vision-table">
           <div class="vision-row vision-row-header"><span>Band</span><span>Structure</span><span>Why It Is Its Own Band</span></div>
           <div class="vision-row"><span>N7</span><span>Neocortex (PFC, M1, V1)</span><span>Highest abstraction. Processes like decision-making and abstract thought involve the smallest-scale dynamics where quantum effects may be non-negligible.</span></div>
-          <div class="vision-row"><span>N6</span><span>Allocortex (hippocampus, basolateral amygdala)</span><span>Emotion and memory encoding. Chaotic dynamics -- sensitive dependence on initial conditions (Lyapunov exponent > 0).</span></div>
-          <div class="vision-row"><span>N5</span><span>Cerebral nuclei (striatum, pallidum)</span><span>Action selection and reward. Oscillatory loops with chaotic switching between states.</span></div>
+          <div class="vision-row"><span>N6</span><span>Limbic (hippocampus, amygdala)</span><span>Emotion and memory encoding. Chaotic dynamics -- sensitive dependence on initial conditions (Lyapunov exponent > 0).</span></div>
+          <div class="vision-row"><span>N5</span><span>Basal Ganglia (striatum, STN)</span><span>Action selection and reward. Oscillatory loops with chaotic switching between states.</span></div>
           <div class="vision-row"><span>N4</span><span>Diencephalon (thalamus)</span><span>The brain's router. 95% of LGN input is feedback from cortex, not sensory input. Transmission through it is state-dependent; it is not a security control.</span></div>
           <div class="vision-row"><span>N3</span><span>Cerebellum</span><span>Motor coordination. High-frequency, timing-precise, stochastic but relatively predictable.</span></div>
           <div class="vision-row"><span>N2</span><span>Brainstem</span><span>Vital functions (breathing, heart rate). Rhythmic, stochastic, life-critical. Attacks here are immediately dangerous.</span></div>

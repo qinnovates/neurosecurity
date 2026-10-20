@@ -23,7 +23,7 @@ TARA, NISS and QIF are a proposed framework. They have not been independently va
 pip install qtara
 ```
 
-The release on PyPI can lag this repository: 0.4.0 shipped 176 techniques and no variants. Check what you have with `qtara stats`; the counts below describe the registrar bundled in the repository (178 techniques and 1 variant).
+The release on PyPI can lag this repository: 0.4.0 shipped 176 techniques and no variants. Check what you have with `qtara stats`; the counts below describe the registrar bundled in the repository (178 techniques and no variants).
 
 ## Features
 
@@ -134,7 +134,7 @@ A variant has the same signal-level mechanism, tactic and harm as exactly one pa
 ```python
 loader.list_variants()                    # all variants
 loader.list_variants(parent="QIF-T0024")  # variants of one technique
-v = loader.get_variant("QIF-T0024-V01")
+v = loader.get_variant("QIF-T0024-V01")    # example id: withdrawn 2026-10-20 as a duplicate of QIF-T0174; the bundled registrar holds no variants
 print(v.alias, v.differs_in, v.peer_review_status, v.niss.scoring_state, v.niss.unscored_reason)
 ```
 

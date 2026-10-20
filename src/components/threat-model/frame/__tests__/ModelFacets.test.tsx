@@ -9,7 +9,8 @@ import { summariseCoverageBySeverity } from '@/lib/threat-model/placement-covera
 import { PLACED_ENTRY_PATHS } from '@/lib/threat-model/reference-data-types';
 import { THREAT_GOALS, type RiskRow, type ThreatGoal } from '@/lib/threat-model/report-types';
 import { summariseScope, type ScopeStatement } from '@/lib/threat-model/scope-statement';
-import { PRESETS, engineData, referenceData, type Preset } from '@/lib/threat-model/__tests__/preset-reports';
+import type { ReferenceData } from '@/lib/threat-model/reference-data-types';
+import { PRESETS, engineData, referenceData, referenceWithEffectReviewedOutside, type Preset } from '@/lib/threat-model/__tests__/preset-reports';
 import { countFacets } from '../facet-counts';
 import GoalChip from '../GoalChip';
 import ModelFacets, { MODEL_FACET_IDS, MOST_FIRST_ROW_FACETS, type ModelFacetId } from '../ModelFacets';
@@ -17,16 +18,16 @@ import { buildScopeByKind, describeTermCounts, zeroLabelFor, type TermCounts } f
 
 afterEach(cleanup);
 
-function scopeOf({ model }: Preset): ScopeStatement {
-  return summariseScope(model, engineData, referenceData);
+function scopeOf({ model }: Preset, reference: ReferenceData = referenceData): ScopeStatement {
+  return summariseScope(model, engineData, reference);
 }
 
-function setUp(preset: Preset, lens: Lens, rows: readonly RiskRow[] = preset.report.riskRows, facetIds?: readonly ModelFacetId[]) {
+function setUp(preset: Preset, lens: Lens, rows: readonly RiskRow[] = preset.report.riskRows, facetIds?: readonly ModelFacetId[], reference: ReferenceData = referenceData) {
   const { model } = preset;
   const context = { model, techniques: engineData.techniques };
   const counts = countFacets(rows, lens, context);
-  const scope = scopeOf(preset);
-  const scopeByKind = buildScopeByKind(scope, engineData.techniques, referenceData.placementRules.placements, summariseCoverageBySeverity(engineData.techniques, scope));
+  const scope = scopeOf(preset, reference);
+  const scopeByKind = buildScopeByKind(scope, engineData.techniques, reference.placementRules.placements, summariseCoverageBySeverity(engineData.techniques, scope));
   const handlers = { onLensChange: vi.fn(), onOpenOnlyChange: vi.fn() };
   const view = render(
     <ModelFacets
@@ -38,8 +39,8 @@ function setUp(preset: Preset, lens: Lens, rows: readonly RiskRow[] = preset.rep
 }
 
 /** Counted here from the scope lists alone, apart from the code under test: techniques of one effect under each term. */
-function countGoalTerms(preset: Preset, goal: ThreatGoal): TermCounts {
-  const scope = scopeOf(preset);
+function countGoalTerms(preset: Preset, goal: ThreatGoal, reference: ReferenceData = referenceData): TermCounts {
+  const scope = scopeOf(preset, reference);
   const goalOf = (techniqueId: string): ThreatGoal | null => {
     const mode = engineData.techniques.find((technique) => technique.id === techniqueId)?.mode ?? null;
     return mode === null ? null : GOAL_BY_MODE[mode];
@@ -115,10 +116,12 @@ describe('what a chip prints in place of a zero', () => {
   });
 
   it('says "none on this device" for an effect with decisions and no row, and carries the counts under the scope terms', () => {
-    const found = PRESETS.flatMap(([, preset]) => THREAT_GOALS.map((goal) => ({ preset, goal, terms: countGoalTerms(preset, goal) })))
+    const reference = referenceWithEffectReviewedOutside('deny');
+    const found = PRESETS.flatMap(([, preset]) => THREAT_GOALS.map((goal) => ({ preset, goal, terms: countGoalTerms(preset, goal, reference) })))
       .find(({ terms }) => terms.applies === 0 && terms.would_apply_if + terms.reviewed_outside > 0);
-    if (found === undefined) throw new Error('test setup: no preset has an effect with decisions and no row');
-    setUp(found.preset, EMPTY_LENS);
+    if (found === undefined) throw new Error('test setup: the fixture has no effect with decisions and no row');
+    const rowsWithoutEffect = found.preset.report.riskRows.filter((row) => !(row.source === 'catalog' && row.goal === found.goal));
+    setUp(found.preset, EMPTY_LENS, rowsWithoutEffect, undefined, reference);
     const chip = findChip(EFFECT_LABELS[found.goal]);
     expect(chip.textContent).toContain('none on this device');
     expect(chip.getAttribute('data-not-assessed')).toBe('false');

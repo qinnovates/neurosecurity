@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { ThreatModelDataError } from '../errors';
 import { parseArchetypes } from '../parse-archetypes';
 import { parseComplianceUs } from '../parse-compliance';
-import { DEFAULT_EVIDENCE_STATUSES } from '../catalog-types';
+import { hasDefaultEvidence } from '../catalog-types';
 import { parsePlacementRules } from '../parse-mappings';
 import { loadEngineBundle, loadReferenceData, readDataFile } from './load-test-data';
 
@@ -76,16 +76,17 @@ describe('placement table validation', () => {
   };
   const techniques = bundle.engineData.techniques;
 
-  it('holds a decision for every confirmed or demonstrated technique', () => {
+  it('holds a decision for every technique that passes the default evidence-tier gate', () => {
     const rules = parsePlacementRules(validPlacement, techniques);
-    const evidenced = techniques.filter((technique) => (DEFAULT_EVIDENCE_STATUSES as readonly string[]).includes(technique.evidenceStatus));
+    const evidenced = techniques.filter(hasDefaultEvidence);
+    expect(evidenced.length).toBeGreaterThan(0);
     for (const technique of evidenced) {
       expect(technique.id in rules.placements || technique.id in rules.notPlaced, technique.id).toBe(true);
     }
   });
 
   it('fails when an evidenced technique has no decision', () => {
-    const evidencedPlaced = techniques.find((technique) => (DEFAULT_EVIDENCE_STATUSES as readonly string[]).includes(technique.evidenceStatus) && technique.id in validPlacement.placements);
+    const evidencedPlaced = techniques.find((technique) => hasDefaultEvidence(technique) && technique.id in validPlacement.placements);
     expect(evidencedPlaced, 'the catalog has at least one evidenced, placed technique').toBeDefined();
     const id = evidencedPlaced!.id;
     const broken = cloneData(validPlacement);

@@ -44,20 +44,20 @@
 
 ### 3 Zones, 11 Bands (7-1-3)
 
-**NEURAL DOMAIN (Upper Hourglass) — 7 bands (addressing version 2, 2026-10-06)**
+**NEURAL DOMAIN (Upper Hourglass) — 7 bands (addressing version 1)**
 
-> Band codes are addresses, not an order: the number carries no severity, processing or traversal meaning. A structure's band is where it physically is. Circuits such as the basal ganglia and the limbic system are functional tags, not bands. Version 2 moved the substantia nigra and VTA from N5 to N2 and the STN from N5 to N4, and renamed N5 and N6. Source of truth for membership: `datalake/qif-brain-bci-atlas.json`.
+> Band codes are addresses, not an order: the number carries no severity, processing or traversal meaning. Membership follows addressing version 1, a functional grouping adapted from Kandel's hierarchy. A proposed version 2 would assign each structure to the territory that holds it, moving the substantia nigra and VTA from N5 to N2 and the STN from N5 to N4 and renaming N5 and N6; it is not applied. Source of truth for membership: `datalake/qif-brain-bci-atlas.json`.
 >
 > Determinacy and QI Range are **hypotheses**: untested, with no estimator defined, and proposed for the version 1 memberships (`datalake/qif-hypotheses.json`).
 
 | Band | Name | Key Structures | Determinacy | QI Range |
 |------|------|----------------|-------------|----------|
 | **N7** | Neocortex | PFC, M1, V1, A1, Broca, Wernicke, PMC, SMA, PPC | Quantum Uncertain | 0.3–0.5 |
-| **N6** | Allocortex | Hippocampus, BLA, insula, ACC, cingulate | Chaotic → QU | 0.2–0.4 |
-| **N5** | Cerebral nuclei | Striatum, GPi/GPe, central amygdala | Chaotic | 0.15–0.35 |
-| **N4** | Diencephalon | Thalamus, hypothalamus, STN, VIM, ANT | Stochastic → Chaotic | 0.1–0.3 |
+| **N6** | Limbic System | Hippocampus, BLA, insula, ACC, cingulate | Chaotic → QU | 0.2–0.4 |
+| **N5** | Basal Ganglia | Striatum, GPi/GPe, STN, substantia nigra | Chaotic | 0.15–0.35 |
+| **N4** | Diencephalon | Thalamus, hypothalamus, VIM, ANT | Stochastic → Chaotic | 0.1–0.3 |
 | **N3** | Cerebellum | Cerebellar cortex, deep nuclei, vermis | Stochastic | 0.1–0.25 |
-| **N2** | Brainstem | Medulla, pons, midbrain, substantia nigra, VTA, reticular formation | Stochastic | 0.05–0.15 |
+| **N2** | Brainstem | Medulla, pons, midbrain, reticular formation | Stochastic | 0.05–0.15 |
 | **N1** | Spinal Cord | Cervical, thoracic, lumbar, sacral, cauda equina | Stochastic | 0.01–0.1 |
 
 **INTERFACE ZONE (Bottleneck) — Quasi-quantum**
@@ -79,13 +79,13 @@
 | v3.1 | v4.0 | Change |
 |------|------|--------|
 | N3 Integrative Association | **N7** Neocortex + **N6** Limbic | Split cortical cognition from emotional/memory |
-| N2 Sensorimotor Processing | **N7** (cortices) + **N5** Cerebral nuclei + **N3** Cerebellum | Split cortical from subcortical motor |
+| N2 Sensorimotor Processing | **N7** (cortices) + **N5** Basal Ganglia + **N3** Cerebellum | Split cortical from subcortical motor |
 | N1 Subcortical Relay | **N4** Diencephalon + **N2** Brainstem + **N1** Spinal Cord | Full peripheral coverage |
 | I0, S1, S2, S3 | Unchanged | Silicon domain already granular |
 
 ### Key Anatomical Decisions (v4.0)
 - **38 brain regions mapped** (was 17 in v3.1). Each region has a canonical band assignment and documented inter-region connections.
-- **Severity stratification (superseded 2026-10-06):** v4.0 ordered bands by clinical severity if compromised (N7 highest cognitive impact, N1 reflex/motor only). Under addressing version 2 the band number carries no severity meaning.
+- **Severity stratification (superseded 2026-10-06):** v4.0 ordered bands by clinical severity if compromised (N7 highest cognitive impact, N1 reflex/motor only). Since 2026-10-06 the band number carries no severity meaning.
 - **BCI device mapping:** Each band lists which real-world devices interface with it (e.g., N4: Medtronic Percept STN DBS; N7: Neuralink N1).
 - **S1_cortex:** Primary somatosensory cortex renamed to avoid collision with S1 (Analog Front-End) band ID.
 
@@ -109,7 +109,7 @@ The I0 subtypes below record **where** the electrode is placed, by band. **Under
 | Subtype | Placement | Bands Above (count only, under review) | Directionality | Risk Profile | Example Devices |
 |---------|-----------|------------------------|----------------|--------------|-----------------|
 | **I0-cortical** | Neocortex (N7) surface/penetrating | 0 | Read (BrainGate, Utah Array), Bidirectional (Neuralink N1) | Highest direct cognitive risk. Full access to executive, motor, sensory cortex. Stimulation or recording here does not pass through the thalamic relay. | Neuralink N1, Utah Array, BrainGate, CortiCom |
-| **I0-subcortical** | Thalamus and STN (N4), Cerebral nuclei (N5), Allocortex (N6) | 1–3 | Bidirectional (Medtronic Percept RC, NeuroPace RNS), Write (older DBS leads) | High risk. Direct access to relay, motor control, emotional circuits. | Medtronic Percept (STN DBS), ANT-DBS, NeuroPace RNS |
+| **I0-subcortical** | Thalamus (N4), Basal Ganglia including STN (N5), Limbic System (N6) | 1–3 | Bidirectional (Medtronic Percept RC, NeuroPace RNS), Write (older DBS leads) | High risk. Direct access to relay, motor control, emotional circuits. | Medtronic Percept (STN DBS), ANT-DBS, NeuroPace RNS |
 | **I0-spinal/peripheral** | Spinal cord (N1), brainstem (N2) | 5–6 | Write (epidural stimulators, VNS) | Moderate risk. Motor/autonomic effects but limited cognitive access. Ascending sensory signals reach cortex through brainstem and thalamic relays. | Epidural spinal stimulators, vagus nerve stimulators |
 | **I0-noninvasive** | Scalp surface (above N7) | All 7 | Read (EEG, fNIRS), Write (TMS, tDCS) | Lowest direct risk. Signal attenuated by skull, CSF, meninges. Volume conduction limits spatial resolution. Attack bandwidth limited by physics. | EEG (Muse, Emotiv), fNIRS, TMS, tDCS |
 
@@ -696,7 +696,7 @@ To strictly adhere to VERA neuroethics, the system **MUST** allow toggling betwe
 | TARA registry | 165 techniques | 2026-10-06 | Recount from the registrar: 165 techniques, 17 tactics; 26 techniques found without a NISS score |
 | TARA registry | 174 techniques | 2026-10-06 | `parent_id` sub-technique field added; 9 techniques added (QIF-T0166–QIF-T0174): 4 top-level, 5 sub-techniques of QIF-T0019/T0024/T0041/T0043/T0109 |
 | TARA registry | 176 techniques | 2026-10-07 | QIF-T0163/T0164 split on the privilege boundary (decision T0163-LAYER): QIF-T0175 and QIF-T0176 take the application-layer parsing boundary, with 12 of the 24 affected CVE records remapped |
-| TARA registry | 178 techniques, 1 variant | 2026-10-20 | Draft catalogue (registrar 4.3) reconciled with the published one: QIF-T0177 and T0178 added (renumbered from the draft's T0172 and T0173); three-state NISS scoring and the citation gate applied to every entry; CONFIRMED retired; QIF-T0024-V01 filed as a variant |
+| TARA registry | 178 techniques, no variants | 2026-10-20 | Draft catalogue (registrar 4.3) reconciled with the published one: QIF-T0177 and T0178 added (renumbered from the draft's T0172 and T0173); three-state NISS scoring and the citation gate applied to every entry; CONFIRMED retired; the draft variant QIF-T0024-V01 withdrawn as a duplicate of QIF-T0174; TARA Lab selects by evidence tier |
 | QIF-TRUTH.md | v4.3 | 2026-03-15 | Added TARA current state, version tracking, severity audit |
 | QIF-TRUTH.md | v4.4 | 2026-10-06 | Section 10 recomputed by script from the registrar; unscored techniques and undocumented status values flagged |
 | QIF-TRUTH.md | v4.5 | 2026-10-06 | Sections 10.1-10.4 are now generated by `src/scripts/generate-truth-registry-section.mjs`, after the section stated 174 techniques above a severity table summing to 139. TARA registry at v1.9. |

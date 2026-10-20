@@ -7,7 +7,7 @@
  * are joined. A chain is always a hypothesis, whatever the evidence behind its steps.
  */
 
-import { CATALOG_SEVERITIES, DEFAULT_EVIDENCE_STATUSES, EVIDENCE_STATUS_RANK, type CatalogTechnique, type EngineData } from './catalog-types';
+import { CATALOG_SEVERITIES, DEFAULT_EVIDENCE_TIERS, EVIDENCE_TIER_RANK, type CatalogTechnique, type EngineData } from './catalog-types';
 import { areDirectlyConnected, buildElementGraph, findShortestPath, type ElementGraph } from './chain-graph';
 import {
   CHAIN_GENERATOR_VERSION, GENERATED_CHAIN_ID_PREFIX, GENERATED_CHAIN_ORIGIN,
@@ -15,13 +15,14 @@ import {
   type GeneratedChain, type GeneratedChainEdge, type GeneratedChainStep,
 } from './chain-types';
 import type { DeviceModel } from './device-model';
-import { weakestEvidenceOf } from './evidence-levels';
+import { EVIDENCE_SHORT_LABELS, weakestEvidenceOf } from './evidence-levels';
+import type { EvidenceTierCode } from '@/lib/evidence-tiers';
 import type { PlacementRules } from './reference-data-types';
 import type { TechniqueMatch } from './report-types';
 import { describeElement } from './stride';
 
 export const DEFAULT_CHAIN_OPTIONS: ChainGenerationOptions = {
-  allowedEvidenceStatuses: DEFAULT_EVIDENCE_STATUSES,
+  allowedEvidenceTiers: DEFAULT_EVIDENCE_TIERS,
   maxChains: 5,
   maxSteps: 6,
   nodeBudget: 5_000,
@@ -39,13 +40,9 @@ export interface ChainInputs {
 
 const UNRANKED = 99;
 
-/**
- * The order the search prefers candidates and chains in. Like the eligibility gate, it reads
- * the legacy status: it decides which chains are generated, so it stays as it was until the
- * owner decides otherwise. What a reader sees of a step's evidence is worded from the tier.
- */
-function selectionRank(evidenceStatus: string): number {
-  const rank = (EVIDENCE_STATUS_RANK as readonly string[]).indexOf(evidenceStatus);
+/** The order the search prefers candidates and chains in: strongest evidence tier first. */
+function selectionRank(evidenceTier: string | null): number {
+  const rank = evidenceTier === null ? -1 : (EVIDENCE_TIER_RANK as readonly string[]).indexOf(evidenceTier);
   return rank === -1 ? UNRANKED : rank;
 }
 
@@ -56,19 +53,19 @@ interface Candidate {
 }
 
 function compareCandidates(left: Candidate, right: Candidate): number {
-  return selectionRank(left.technique.evidenceStatus) - selectionRank(right.technique.evidenceStatus)
+  return selectionRank(left.technique.evidenceTier) - selectionRank(right.technique.evidenceTier)
     || CATALOG_SEVERITIES.indexOf(left.technique.severity) - CATALOG_SEVERITIES.indexOf(right.technique.severity)
     || left.technique.id.localeCompare(right.technique.id)
     || left.elementId.localeCompare(right.elementId);
 }
 
-function listCandidates(inputs: ChainInputs, allowedStatuses: readonly string[]): Candidate[] {
+function listCandidates(inputs: ChainInputs, allowedTiers: readonly string[]): Candidate[] {
   const techniqueById = new Map(inputs.data.techniques.map((technique) => [technique.id, technique]));
   return inputs.matches
     .flatMap((match): Candidate[] => {
       const technique = techniqueById.get(match.techniqueId);
       const role = inputs.placementRules.placements[match.techniqueId]?.chainRole;
-      if (technique === undefined || role === undefined || !allowedStatuses.includes(technique.evidenceStatus)) return [];
+      if (technique === undefined || role === undefined || technique.evidenceTier === null || !allowedTiers.includes(technique.evidenceTier)) return [];
       return [{ technique, elementId: match.elementId, role }];
     })
     .sort(compareCandidates);
@@ -171,8 +168,15 @@ function compareChains(left: GeneratedChain, right: GeneratedChain): number {
     || left.chain_id.localeCompare(right.chain_id);
 }
 
-function explainEmptyResult(candidates: readonly Candidate[], hasEntries: boolean, hasTerminals: boolean, statuses: readonly string[]): string {
-  const filter = `evidence status ${statuses.join(' or ')}`;
+/** Reader-facing words for the evidence gate, e.g. "validated, lab or case study". */
+function describeTierFilter(tiers: readonly string[]): string {
+  const labels = [...new Set(tiers.map((tier) => (EVIDENCE_SHORT_LABELS[tier as EvidenceTierCode] ?? tier).toLowerCase()))];
+  if (labels.length === 0) return 'no permitted';
+  return labels.length === 1 ? labels[0] : `${labels.slice(0, -1).join(', ')} or ${labels[labels.length - 1]}`;
+}
+
+function explainEmptyResult(candidates: readonly Candidate[], hasEntries: boolean, hasTerminals: boolean, tiers: readonly string[]): string {
+  const filter = `${describeTierFilter(tiers)} evidence`;
   if (candidates.length === 0) return `No technique placed on this model has ${filter}.`;
   if (!hasEntries) return `No initial-access technique with ${filter} is placed on this model.`;
   if (!hasTerminals) return `No objective or exfiltration technique with ${filter} is placed on this model.`;
@@ -217,7 +221,7 @@ function buildChainForTerminal(terminal: Candidate, entries: readonly Candidate[
 }
 
 export function generateChains(inputs: ChainInputs, options: ChainGenerationOptions = DEFAULT_CHAIN_OPTIONS): ChainGenerationResult {
-  const candidates = listCandidates(inputs, options.allowedEvidenceStatuses);
+  const candidates = listCandidates(inputs, options.allowedEvidenceTiers);
   const entries = candidates.filter((candidate) => candidate.role === 'initial_access');
   const terminals = preferNeuralInterface(candidates.filter((candidate) => TERMINAL_ROLES.includes(candidate.role)), inputs.model);
   const graph = buildElementGraph(inputs.model);
@@ -245,6 +249,6 @@ export function generateChains(inputs: ChainInputs, options: ChainGenerationOpti
     wasTruncated: remainingBudget < 0,
     chainsFound: chainById.size,
     wasCapped: chainById.size > chains.length,
-    emptyReason: chains.length > 0 ? null : explainEmptyResult(candidates, entries.length > 0, terminals.length > 0, options.allowedEvidenceStatuses),
+    emptyReason: chains.length > 0 ? null : explainEmptyResult(candidates, entries.length > 0, terminals.length > 0, options.allowedEvidenceTiers),
   };
 }

@@ -15,31 +15,31 @@ export const QIF_BANDS = [
     oscillations: ['Theta (4-8 Hz)', 'Alpha (8-13 Hz)', 'Beta (13-30 Hz)', 'Gamma (30-100 Hz)']
   },
   {
-    id: 'N6', name: 'Allocortex', zone: 'neural', color: '#3a7d44',
+    id: 'N6', name: 'Limbic System', zone: 'neural', color: '#3a7d44',
     emoji: '💚',
     structures: ['Hippocampus', 'Amygdala (BLA + CeA)', 'Anterior Cingulate Cortex (ACC)', 'Insula'],
     determinacy: 'Chaotic to Quantum Uncertain',
     severity: 'SEVERE (emotional/memory)',
     function: 'Emotion regulation, memory formation, fear conditioning, interoception. Bridges cognitive and autonomic processing.',
-    qifRationale: 'Mapped to N6 because these structures are allocortex, mesocortex or pallial nuclei; many belong to the limbic circuit. That they process information less deterministically than lower bands but more predictably than cortex is a hypothesis: untested, no estimator defined. Compromise here affects memory consolidation and emotional regulation, corresponding to clinical conditions like PTSD and anxiety disorders (for threat modeling purposes).',
+    qifRationale: 'Mapped to N6 because these are limbic structures: hippocampus, amygdala and insula. That they process information less deterministically than lower bands but more predictably than cortex is a hypothesis: untested, no estimator defined. Compromise here affects memory consolidation and emotional regulation, corresponding to clinical conditions like PTSD and anxiety disorders (for threat modeling purposes).',
     keyFact: 'The hippocampus is one of only two brain regions where new neurons are born throughout life (adult neurogenesis). It is also the first structure damaged in Alzheimer\'s disease.',
     oscillations: ['Theta (4-8 Hz)', 'Sharp-wave ripples (80-120 Hz)']
   },
   {
-    id: 'N5', name: 'Cerebral nuclei', zone: 'neural', color: '#5c7a38',
+    id: 'N5', name: 'Basal Ganglia', zone: 'neural', color: '#5c7a38',
     emoji: '🔄',
-    structures: ['Striatum (Caudate + Putamen)', 'Globus Pallidus'],
+    structures: ['Striatum (Caudate + Putamen)', 'Subthalamic Nucleus (STN)', 'Substantia Nigra', 'Globus Pallidus'],
     determinacy: 'Chaotic',
     severity: 'SEVERE (motor selection)',
     function: 'Motor selection, habit formation, reward processing, action initiation and suppression.',
-    qifRationale: 'Holds the striatum and pallidum, part of the basal ganglia circuit. The main deep brain stimulation (DBS) target for Parkinson\'s disease, the subthalamic nucleus, is addressed N4 under addressing version 2, and the substantia nigra is N2. That the dynamics here are chaotic but bounded is a hypothesis: untested, no estimator defined. DBS devices directly modulate this band, making it a high-priority security boundary for implanted BCIs.',
-    keyFact: 'The subthalamic nucleus (STN, addressed N4 and tagged basal ganglia circuit) is smaller than a pea but is the main DBS target. Over 200,000 people worldwide have electrodes implanted here.',
+    qifRationale: 'Holds the basal ganglia: striatum, pallidum, subthalamic nucleus and substantia nigra. The subthalamic nucleus is the main deep brain stimulation (DBS) target for Parkinson\'s disease. A proposed addressing revision (version 2) would move the subthalamic nucleus to N4 and the substantia nigra to N2; it is not applied. That the dynamics here are chaotic but bounded is a hypothesis: untested, no estimator defined. DBS devices directly modulate this band, making it a high-priority security boundary for implanted BCIs.',
+    keyFact: 'The subthalamic nucleus (STN) is smaller than a pea but is the main DBS target. Over 200,000 people worldwide have electrodes implanted here.',
     oscillations: ['Beta (13-30 Hz, pathological in Parkinson\'s)', 'Gamma bursts']
   },
   {
     id: 'N4', name: 'Diencephalon', zone: 'neural', color: '#72772f',
     emoji: '🚦',
-    structures: ['Thalamus', 'Hypothalamus', 'Subthalamic Nucleus (STN)', 'Lateral Geniculate Nucleus (LGN)', 'Medial Geniculate Nucleus (MGN)'],
+    structures: ['Thalamus', 'Hypothalamus', 'Lateral Geniculate Nucleus (LGN)', 'Medial Geniculate Nucleus (MGN)'],
     determinacy: 'Stochastic to Chaotic',
     severity: 'CRITICAL (relay)',
     function: 'State-dependent thalamic relay of most ascending sensory input and of cerebellar and basal ganglia output. Hypothalamic homeostasis (temperature, hunger, circadian rhythm).',
@@ -61,7 +61,7 @@ export const QIF_BANDS = [
   {
     id: 'N2', name: 'Brainstem', zone: 'neural', color: '#9b6c1e',
     emoji: '❤️',
-    structures: ['Medulla Oblongata', 'Pons', 'Midbrain (Tectum + Tegmentum)', 'Substantia Nigra', 'Ventral Tegmental Area (VTA)', 'Reticular Formation'],
+    structures: ['Medulla Oblongata', 'Pons', 'Midbrain (Tectum + Tegmentum)', 'Reticular Formation'],
     determinacy: 'Stochastic',
     severity: 'LETHAL (vital functions)',
     function: 'Vital functions: respiration, heart rate, blood pressure, arousal, sleep-wake cycles. Compromise is life-threatening.',

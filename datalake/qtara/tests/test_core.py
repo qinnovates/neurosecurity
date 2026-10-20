@@ -100,12 +100,14 @@ def test_techniques_without_peer_review_are_unscored_and_theoretical():
 
 
 def test_variants_load_apart_from_techniques():
-    """Variants are a separate list: none appears among techniques, and each names one existing parent."""
+    """Variants are a separate list: none appears among techniques, and each names one existing parent.
+
+    The bundled registrar may hold none (QIF-T0024-V01 was withdrawn on 2026-10-20); the variant
+    model itself is covered by the VARIANT_FIELDS fixture tests below."""
     loader = TaraLoader()
     registry = loader.load()
     technique_ids = {t.id for t in registry.techniques}
 
-    assert len(registry.variants) > 0
     assert loader.get_statistics()["total"] == len(registry.techniques)
     assert loader.get_statistics()["total_variants"] == len(registry.variants)
     for variant in registry.variants:

@@ -18,9 +18,9 @@ export const TARA_TECHNIQUES = (registrar as { techniques: unknown[] }).techniqu
 /** Hourglass bands (7-1-3 asymmetric) */
 export const HOURGLASS_BANDS = [
   { id: 'N7', name: 'Neocortex', zone: 'neural', color: '#166534', description: 'PFC, M1, V1, Broca, Wernicke — executive function, language, movement, perception' },
-  { id: 'N6', name: 'Allocortex', zone: 'neural', color: '#3a7d44', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception' },
-  { id: 'N5', name: 'Cerebral nuclei', zone: 'neural', color: '#5c7a38', description: 'Striatum, pallidum, basal forebrain — motor selection, reward, habit' },
-  { id: 'N4', name: 'Diencephalon', zone: 'neural', color: '#72772f', description: 'Thalamus, hypothalamus, subthalamic nucleus — relay to neocortex, homeostasis' },
+  { id: 'N6', name: 'Limbic System', zone: 'neural', color: '#3a7d44', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception' },
+  { id: 'N5', name: 'Basal Ganglia', zone: 'neural', color: '#5c7a38', description: 'Striatum, STN, substantia nigra — motor selection, reward, habit' },
+  { id: 'N4', name: 'Diencephalon', zone: 'neural', color: '#72772f', description: 'Thalamus, hypothalamus — sensory gating, consciousness relay' },
   { id: 'N3', name: 'Cerebellum', zone: 'neural', color: '#877226', description: 'Cerebellar cortex, deep nuclei — motor coordination, timing' },
   { id: 'N2', name: 'Brainstem', zone: 'neural', color: '#9b6c1e', description: 'Medulla, pons, midbrain — vital functions, arousal, reflexes' },
   { id: 'N1', name: 'Spinal Cord', zone: 'neural', color: '#ae6616', description: 'Cervical through sacral — reflexes, peripheral relay' },

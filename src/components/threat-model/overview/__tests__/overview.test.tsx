@@ -10,7 +10,8 @@ import { countRowsByElement, describeRegisterUnits, summariseRegisterUnits } fro
 import { THREAT_GOALS, type RiskRow, type ThreatGoal } from '@/lib/threat-model/report-types';
 import { isRiskAddressed } from '@/lib/threat-model/risk-register';
 import { summariseScope, type ScopeStatement } from '@/lib/threat-model/scope-statement';
-import { PRESETS, engineData, referenceData, reportFor, type Preset } from '@/lib/threat-model/__tests__/preset-reports';
+import type { ReferenceData } from '@/lib/threat-model/reference-data-types';
+import { PRESETS, engineData, referenceData, referenceWithEffectReviewedOutside, reportFor, type Preset } from '@/lib/threat-model/__tests__/preset-reports';
 import { findCoverageGaps } from '../../frame/facet-counts';
 import { buildScopeByKind } from '../../frame/scope-by-kind';
 import { ModelHighlightProvider } from '../../model-highlight';
@@ -38,16 +39,16 @@ function countGoal(scope: ScopeStatement, goal: ThreatGoal): { decided: number; 
   return { decided: applies + wouldApply + outside, all: applies + wouldApply + outside + notAssessed, wouldApply, outside, notAssessed };
 }
 
-function renderOverview(preset: Preset, rows: readonly RiskRow[] = currentRowsOf(preset)) {
-  const scope = summariseScope(preset.model, engineData, referenceData);
+function renderOverview(preset: Preset, rows: readonly RiskRow[] = currentRowsOf(preset), reference: ReferenceData = referenceData) {
+  const scope = summariseScope(preset.model, engineData, reference);
   const severityCoverage = summariseCoverageBySeverity(engineData.techniques, scope);
   const handlers = { onSelectElement: vi.fn(), onOpenRisk: vi.fn(), onOpenTechnique: vi.fn(), onOpenScopeLists: vi.fn() };
   const view = render(
     <ModelHighlightProvider>
       <OverviewView
         model={preset.model} report={preset.report} rows={rows} scope={scope} severityCoverage={severityCoverage}
-        scopeByKind={buildScopeByKind(scope, engineData.techniques, referenceData.placementRules.placements, severityCoverage)}
-        gaps={findCoverageGaps(preset.report.goalCoverage, severityCoverage)} placementTable={referenceData.placementTable}
+        scopeByKind={buildScopeByKind(scope, engineData.techniques, reference.placementRules.placements, severityCoverage)}
+        gaps={findCoverageGaps(preset.report.goalCoverage, severityCoverage)} placementTable={reference.placementTable}
         diagram={<div data-testid="diagram" />} {...handlers}
       />
     </ModelHighlightProvider>,
@@ -156,9 +157,10 @@ describe('OverviewView', () => {
 
   it('says how far placement has got for each effect that is incomplete, and that no row is not the same as no risk', () => {
     const [, preset] = PRESETS[0];
-    renderOverview(preset);
-    const rows = currentRowsOf(preset);
-    const scope = summariseScope(preset.model, engineData, referenceData);
+    const reference = referenceWithEffectReviewedOutside('deny');
+    const rows = currentRowsOf(preset).filter((row) => !(row.source === 'catalog' && row.goal === 'deny'));
+    renderOverview(preset, rows, reference);
+    const scope = summariseScope(preset.model, engineData, reference);
     let zeroRowNotes = 0;
     for (const goal of THREAT_GOALS) {
       const counted = countGoal(scope, goal);

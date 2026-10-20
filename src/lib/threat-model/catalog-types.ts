@@ -4,7 +4,19 @@
  * browser, in tests, and later from a command line.
  */
 
-export const DEFAULT_EVIDENCE_STATUSES = ['CONFIRMED', 'DEMONSTRATED'] as const;
+/**
+ * Evidence tiers (src/lib/evidence-tiers.ts) a technique needs before the engine places it in a
+ * chain or requires a placement decision for it: replicated, lab-demonstrated or case evidence.
+ */
+export const DEFAULT_EVIDENCE_TIERS = ['validated_rct', 'validated_replication', 'demonstrated_lab', 'demonstrated_case'] as const;
+
+/** Strongest first, in tier-number order. Tiers not listed here rank below all of these. */
+export const EVIDENCE_TIER_RANK = ['validated_rct', 'validated_replication', 'demonstrated_lab', 'demonstrated_case', 'theoretical_modeled', 'theoretical_proposed', 'speculative'] as const;
+
+/** True when a technique's evidence tier passes the engine's default evidence gate. */
+export function hasDefaultEvidence(technique: { evidenceTier: string | null }): boolean {
+  return technique.evidenceTier !== null && (DEFAULT_EVIDENCE_TIERS as readonly string[]).includes(technique.evidenceTier);
+}
 
 /** Strongest first. Statuses not listed here rank below all of these. */
 export const EVIDENCE_STATUS_RANK = ['CONFIRMED', 'DEMONSTRATED', 'EMERGING', 'THEORETICAL'] as const;
@@ -30,7 +42,7 @@ export interface CatalogTechnique {
   bandIds: string[];
   /** Evidence status as written in the catalog (CONFIRMED, DEMONSTRATED, EMERGING, THEORETICAL, ...). */
   evidenceStatus: string;
-  /** The catalog's derived evidence tier code (see src/lib/evidence-tiers.ts), or null when a record has none. Shown in the interface; the engine's matching still reads the status. */
+  /** The catalog's derived evidence tier code (see src/lib/evidence-tiers.ts), or null when a record has none. The engine's evidence gate and ranking read this. */
   evidenceTier: string | null;
   /** What the tier was derived from, as the catalog records it (`evidence.basis`). */
   evidenceBasis: string | null;

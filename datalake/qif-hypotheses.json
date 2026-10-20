@@ -2,7 +2,7 @@
   "_metadata": {
     "title": "QIF per-band hypotheses",
     "status": "hypothesis",
-    "note": "Untested; no estimator is defined for either quantity. Proposed for the version 1 band memberships, which changed in addressing version 2, so the values do not describe the current sets. The same fields remain on qif_bands in the atlas because site components read them there; this file is the record of their status.",
+    "note": "Untested; no estimator is defined for either quantity. Proposed for the version 1 band memberships, which are the memberships in use. A proposed addressing version 2 would change them, and the values would then not describe the new sets. The same fields remain on qif_bands in the atlas because site components read them there; this file is the record of their status.",
     "proposed_for_addressing_version": 1
   },
   "band_hypotheses": [

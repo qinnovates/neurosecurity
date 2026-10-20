@@ -65,8 +65,8 @@ export interface GeneratedChain {
 }
 
 export interface ChainGenerationOptions {
-  /** Evidence statuses a step may have. Defaults to confirmed and demonstrated only. */
-  allowedEvidenceStatuses: readonly string[];
+  /** Evidence tiers a step may have. Defaults to DEFAULT_EVIDENCE_TIERS (replicated, lab or case evidence). */
+  allowedEvidenceTiers: readonly string[];
   maxChains: number;
   maxSteps: number;
   /** Hard cap on search expansions; reaching it sets `wasTruncated`. */

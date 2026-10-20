@@ -53,7 +53,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     term: 'Neural Domain (N7-N1)',
     type: 'architecture',
     shortDef: 'The seven bands above I0 representing biological neural structures.',
-    fullDef: 'Spans from the Neocortex (N7: executive function, language, perception) down through Allocortex (N6), Cerebral nuclei (N5), Diencephalon (N4), Cerebellum (N3), Brainstem (N2), to Spinal Cord (N1). Each band has distinct threat surfaces and security requirements.',
+    fullDef: 'Spans from the Neocortex (N7: executive function, language, perception) down through Limbic System (N6), Basal Ganglia (N5), Diencephalon (N4), Cerebellum (N3), Brainstem (N2), to Spinal Cord (N1). Each band has distinct threat surfaces and security requirements.',
     relatedTerms: ['hourglass-model', 'synthetic-domain'],
     href: '/framework/#bands',
     tags: ['architecture'],

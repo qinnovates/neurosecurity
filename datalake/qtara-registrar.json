@@ -5,9 +5,9 @@
   "statistics": {
     "generator": "src/scripts/generate-registrar-statistics.mjs",
     "generated": "2026-10-20",
-    "content_sha256": "fbeb71d4f71d4b9b086937ab1da0b81dde8ed34ef6afff94367f421980b3611a",
+    "content_sha256": "f30fc03d341a8e96dcfc8a55d5ac50e74d7d4e6452a1913707a6293a479b50bc",
     "total_techniques": 178,
-    "total_variants": 1,
+    "total_variants": 0,
     "total_tactics": 17,
     "total_domains": 8,
     "by_level": {
@@ -224,6 +224,12 @@
     ]
   },
   "changelog": [
+    {
+      "version": "4.3",
+      "date": "2026-10-20",
+      "title": "Draft and published catalogues reconciled",
+      "summary": "No file-version change. The draft catalogue was reconciled with the published one. QIF-T0177 and QIF-T0178 were added. The draft's variant QIF-T0024-V01 duplicated published QIF-T0174 and was withdrawn in favour of it; the id is listed under deprecated so it stays resolvable. The citation gate was applied to every NISS score, so scores whose evidence does not meet it are provisional or unscored. TARA, NISS and QIF are a proposed, unvalidated framework."
+    },
     {
       "version": "4.3",
       "date": "2026-10-07",
@@ -33576,11 +33582,16 @@
       "schema": "v2.0 (MITRE-compatible IDs)",
       "reason": "QIF-T2xxx IDs replaced with QIF-T0xxx sequential IDs in v3.0. MITRE tactic IDs (TA####) replaced with QIF Locus Taxonomy IDs.",
       "migration": "See legacy_technique_id field on each technique. Tactic legacy_ids on each tactic definition."
+    },
+    {
+      "id": "QIF-T0024-V01",
+      "reason": "Duplicate of published QIF-T0174 (Federated update poisoning, parent_id QIF-T0024). Filed in the draft as a variant before the draft and published catalogues were reconciled; one sub-technique model (parent_id) is kept.",
+      "migration": "Use QIF-T0174."
     }
   ],
   "taxonomy": "QIF Locus Taxonomy v1.0",
   "scoring": "NISS v1.1 (Neural Impact Scoring System)",
-  "generated": "2026-10-20T07:45:52Z",
+  "generated": "2026-10-20T09:48:21Z",
   "legacy_mitre_compatibility": {
     "id_range": "T2001-T2899 (avoids collision with MITRE ATT&CK T1001-T1659)",
     "tactic_ids": "Standard MITRE TA#### where applicable, TA0050-TA0053 for BCI-specific",
@@ -34307,35 +34318,5 @@
       }
     }
   },
-  "variants": [
-    {
-      "id": "QIF-T0024-V01",
-      "alias": "TARA-SIL-M-006-TS1",
-      "name": "Federated update poisoning (malicious-client model-update manipulation)",
-      "parent": "QIF-T0024",
-      "differs_in": "training_setup",
-      "inherits_niss": false,
-      "description": "Federated-training form of training data poisoning. A participant in the federated training of a shared neural decoder contributes altered model updates, so that the aggregated global model is biased or carries a backdoor; the altered updates can resemble the ordinary non-IID variation between sites. Differs from the parent only in the training setup: the manipulation enters through a client's model update, not through records in a centrally assembled dataset. PROJECTED for BCI: described at review level for neurotechnology; no demonstration on a neural decoder was found.",
-      "conditions": [
-        "The decoder is trained or updated by federated learning across sites or devices",
-        "The adversary controls at least one participating client",
-        "Client updates are aggregated without robust aggregation or per-client auditing"
-      ],
-      "sources": [],
-      "defensive_sources": [],
-      "peer_review_status": "preprint",
-      "status": "THEORETICAL",
-      "niss": {
-        "version": "1.1",
-        "scoring_state": "unscored",
-        "unscored_reason": "preprint_only"
-      },
-      "related_ids": [
-        "QIF-T0171",
-        "QIF-T0016",
-        "QIF-T0021"
-      ],
-      "notes": "Preprint reference (not peer-reviewed; does not count toward the citation gate): Bagley B-A, Rose N, Kilbourn Q, Canham M. 2026. Threat Vectors and the State of the Art in Defense Methods for Security in Neurotechnology. arXiv:2607.10451v1 (review, preprint), section 2.4.1.1. Citation gate: this variant holds no peer-reviewed source, so its status is THEORETICAL, the parent's NISS vector is not inherited and no score is stored. The aggregator-to-client direction (a malicious aggregator distributing a manipulated global model) is treated under ML pipeline compromise (QIF-T0171). Controls named by the review: robust aggregation, which it says addresses only part of the surface, with provenance tracking, cryptographic integrity verification, controlled access and continuous auditing of what enters the training pipeline."
-    }
-  ]
+  "variants": []
 }

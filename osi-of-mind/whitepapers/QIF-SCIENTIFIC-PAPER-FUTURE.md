@@ -280,22 +280,22 @@ Aggregated threats are visualized using a **Neural Impact Chain (Network Graph)*
 
 ### 4.1 Design Principles
 
-Three principles govern the design. **Width represents state space**: how many possible states exist at each band. The architecture is widest at the extremes and narrowest at the center. The **7-1-3 asymmetry** (7 neural bands, 1 interface band, 3 synthetic bands) reflects the real structure: two domains converging on a single bottleneck. The neural domain is wider because the brain has 500 million years of evolutionary complexity; the synthetic domain is human-designed with bounded complexity. **Band codes are addresses, not an order** (addressing version 2, 2026-10-06): the number carries no severity, processing or traversal meaning. Earlier versions described the bands as severity-stratified; that is withdrawn.
+Three principles govern the design. **Width represents state space**: how many possible states exist at each band. The architecture is widest at the extremes and narrowest at the center. The **7-1-3 asymmetry** (7 neural bands, 1 interface band, 3 synthetic bands) reflects the real structure: two domains converging on a single bottleneck. The neural domain is wider because the brain has 500 million years of evolutionary complexity; the synthetic domain is human-designed with bounded complexity. **Band codes are addresses, not an order** (since 2026-10-06): the number carries no severity, processing or traversal meaning. Earlier versions described the bands as severity-stratified; that is withdrawn.
 
 ### 4.2 The 11-Band Stack
 
-**Neural Domain (Upper Hourglass) --- 7 bands (addressing version 2)**
+**Neural Domain (Upper Hourglass) --- 7 bands (addressing version 1)**
 
 > Determinacy and Cs Range per band are **hypotheses**: untested, with no estimator defined. Circuits such as the basal ganglia and the limbic system are functional tags, not bands. Source of truth for membership: `datalake/qif-brain-bci-atlas.json`.
 
 | Band | Name | Key Structures | Determinacy | Cs Range |
 |------|------|---------------|-------------|----------|
 | N7 | Neocortex | PFC, M1, V1, A1, Broca, Wernicke, PMC, SMA, PPC | Quantum Uncertain | 0.3--0.5 |
-| N6 | Allocortex | Hippocampus, BLA, insula, ACC, cingulate | Chaotic to QU | 0.2--0.4 |
-| N5 | Cerebral nuclei | Striatum, GPi/GPe, central amygdala | Chaotic | 0.15--0.35 |
-| N4 | Diencephalon | Thalamus, hypothalamus, STN, VIM, ANT | Stochastic to Chaotic | 0.1--0.3 |
+| N6 | Limbic System | Hippocampus, BLA, insula, ACC, cingulate | Chaotic to QU | 0.2--0.4 |
+| N5 | Basal Ganglia | Striatum, GPi/GPe, STN, substantia nigra | Chaotic | 0.15--0.35 |
+| N4 | Diencephalon | Thalamus, hypothalamus, VIM, ANT | Stochastic to Chaotic | 0.1--0.3 |
 | N3 | Cerebellum | Cerebellar cortex, deep nuclei, vermis | Stochastic | 0.1--0.25 |
-| N2 | Brainstem | Medulla, pons, midbrain, substantia nigra, VTA, reticular formation | Stochastic | 0.05--0.15 |
+| N2 | Brainstem | Medulla, pons, midbrain, reticular formation | Stochastic | 0.05--0.15 |
 | N1 | Spinal Cord | Cervical, thoracic, lumbar, sacral, cauda equina | Stochastic | 0.01--0.1 |
 
 **Interface Zone (Bottleneck)**
@@ -326,7 +326,7 @@ Under the determinacy hypothesis (untested, with no estimator defined), the boun
 
 ### 4.5 Severity Stratification
 
-**Superseded (2026-10-06).** Earlier versions ordered the seven neural bands by clinical severity, with an attack targeting N7 (neocortex) ranked categorically above one targeting N1 (spinal cord). Under addressing version 2 the band number carries no severity meaning. The threat taxonomy (Section 6.3--6.4) still assigns band-level targeting to each attack; severity is scored per technique by the NISS framework (Section 6.5), not read from the band code.
+**Superseded (2026-10-06).** Earlier versions ordered the seven neural bands by clinical severity, with an attack targeting N7 (neocortex) ranked categorically above one targeting N1 (spinal cord). Since 2026-10-06 the band number carries no severity meaning. The threat taxonomy (Section 6.3--6.4) still assigns band-level targeting to each attack; severity is scored per technique by the NISS framework (Section 6.5), not read from the band code.
 
 ### 4.6 Why Three Synthetic Bands: Frequency-Regime Security
 
@@ -797,8 +797,8 @@ NISS v1.x mapped outcomes exclusively to DSM-5-TR psychiatric categories. Neural
 | Band | Region | Neurological Conditions |
 |------|--------|------------------------|
 | N7 | Neocortex | Cortical blindness, expressive/receptive aphasia, alexia, central pain |
-| N6 | Allocortex | Altered sensorium, emotional dysregulation, autonomic conditions |
-| N5 | Cerebral nuclei | Tremor, dystonia, bradykinesia, dyskinesia, chorea |
+| N6 | Limbic System | Altered sensorium, emotional dysregulation, autonomic conditions |
+| N5 | Basal Ganglia | Tremor, dystonia, bradykinesia, dyskinesia, chorea |
 | N4 | Thalamus | Tinnitus, paresthesia, central pain syndrome |
 | N3 | Cerebellum | Ataxia, intention tremor, dysmetria |
 | N2 | Brainstem | Vertigo, nystagmus, dysarthria, cardiac arrhythmia, syncope |
@@ -915,7 +915,7 @@ Repeated exposure to curated triggering content rewrites cognitive patterns over
 
 **Stage 4: Cognitive Exploitation** (`QIF-C.EX`, Band N6 -> N7)
 
-The brain's pattern-matching and threat-detection systems are exploited until they malfunction. Paranoia, hypervigilance, and conspiratorial thinking emerge as limbic circuits (allocortex, N6) receive persistent false-threat signals, and the prefrontal cortex (N7) cannot override them fast enough.
+The brain's pattern-matching and threat-detection systems are exploited until they malfunction. Paranoia, hypervigilance, and conspiratorial thinking emerge as limbic circuits (N6) receive persistent false-threat signals, and the prefrontal cortex (N7) cannot override them fast enough.
 
 **Stage 5: Physiological Disruption** (`QIF-P.DS`, Band N5 -> N7)
 
@@ -1087,7 +1087,7 @@ Each NISS impact dimension is associated with a diagnostic cluster:
 
 **Band-to-Diagnosis Mapping:**
 
-The hourglass bands are used to associate techniques with diagnostic categories (for threat modeling purposes, not as diagnostic claims). An attack targeting N7 (neocortex) is associated with schizophrenia-spectrum and executive function disorder categories. An attack targeting N6 (allocortex) is associated with mood and trauma disorder categories. An attack targeting N5 (cerebral nuclei) is associated with movement and substance use disorder categories. Attacks confined to S1-S3 (synthetic bands) carry no direct diagnostic mapping because they do not reach neural tissue.
+The hourglass bands are used to associate techniques with diagnostic categories (for threat modeling purposes, not as diagnostic claims). An attack targeting N7 (neocortex) is associated with schizophrenia-spectrum and executive function disorder categories. An attack targeting N6 (limbic system) is associated with mood and trauma disorder categories. An attack targeting N5 (basal ganglia) is associated with movement and substance use disorder categories. Attacks confined to S1-S3 (synthetic bands) carry no direct diagnostic mapping because they do not reach neural tissue.
 
 Of 109 techniques, 102 carry DSM-5 mappings (7 are software-only with no neural pathway). 51 carry a "direct" risk class (the attack mechanism directly produces the diagnostic outcome), 9 carry "indirect" (the attack enables conditions for the outcome), and 42 carry "none" (silicon-only). 15 unique DSM-5 codes are represented across the registry.
 
@@ -1667,7 +1667,7 @@ The constraint system extends Marblestone et al. (2013), which addressed thermal
 12. **Unified QI Equation.** The current coherence metric ($C_s = e^{-S_c}$) captures classical signal integrity. A theoretical extension incorporating quantum terms (ion channel tunneling, entanglement gated by decoherence, indeterminacy) remains a research direction: $QI(b,t) = e^{-(S_c + S_q)}$. This extension requires experimental measurement of the decoherence time $\tau_D$ at the electrode-tissue boundary, which is currently an unresolved question in quantum biology (estimates range from $10^{-13}$ seconds [15] to $10^{-3}$ seconds [55]). If $\tau_D$ proves to be very short, the quantum terms are negligible and $C_s$ is the complete metric. If longer coherence times are confirmed, the quantum terms provide additional attack detection capabilities. The framework is designed so this question is empirically resolvable rather than assumed.
 13. **Quantum State Tomography at the BCI Interface.** Measure the actual $\tau_D$ at a BCI electrode-tissue junction.
 14. **Tunneling Biometric Feasibility.** Single-channel patch clamp studies to determine individual variability in tunneling coefficients.
-15. **v4.0 Architecture Validation.** Map historical BCI adverse events to specific bands to test whether band membership is associated with adverse-event type (severity stratification by band number was withdrawn in addressing version 2).
+15. **v4.0 Architecture Validation.** Map historical BCI adverse events to specific bands to test whether band membership is associated with adverse-event type (severity stratification by band number was withdrawn on 2026-10-06).
 16. **$H_{\text{interface}}$ Formulation.** Write down the total Hamiltonian $H_{\text{total}} = H_{\text{neuron}} + H_{\text{electrode}} + H_{\text{interface}} + H_{\text{environment}}$ for a specific BCI system.
 17. **Cardiac Intrinsic Nervous System as Independent Coherence Monitor.** The heart contains an intrinsic cardiac nervous system (ICNS) of approximately 40,000 neurons (Armour 1991, 2007; Shivkumar et al. 2016, *Journal of Clinical Investigation*) that sense, process, and retain information independently of central nervous system input. The vagus nerve, the primary conduit between heart and brain, is approximately 80% afferent (heart-to-brain) and 20% efferent (brain-to-heart) (Berthoud & Neuhuber 2000, *Autonomic Neuroscience*). The heart sends substantially more information to the brain than the brain sends to the heart --- not because the heart "thinks," but because the vagus nerve's fiber composition is asymmetrically weighted toward sensory transmission. Note: the afferent fibers carry all visceral signals (gut, lungs, heart), not cardiac signals exclusively; the 80/20 ratio describes the vagus nerve as a whole, not a dedicated cardiac-to-brain channel.
 

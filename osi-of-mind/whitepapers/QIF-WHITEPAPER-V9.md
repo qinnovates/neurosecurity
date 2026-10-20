@@ -104,7 +104,7 @@ The datasets behind all three are open, with a device inventory of 68 companies 
 > - **Checked so far.** AI-assisted review (AI agents with specialist briefs) checked the framework's claims, and this version reports which held and which did not. Every DOI, arXiv identifier and regulatory record cited in Sections 20–28 was resolved through Crossref, the arXiv API or a regulator database. Company, news, legal and reference-work sources are cited by link and were not resolved that way, and Sections 24.14 and 27.8 state how far the papers themselves were read. Automated consistency checks pass, except one route-evidence check that fails on a route marked for teaching. See Claims and Disclaimers for what "AI-assisted" means here.
 > - **Not reviewed.** **No human neuroanatomist has reviewed the anatomy, and the author's own review of Sections 20–28 and Appendix E is pending.** No patient or patient advocate has reviewed the paper, including the part written for them.
 > - **AI assistance.** Sections 20–28 and Appendix E were drafted with AI assistance on 2026-10-06 and 2026-10-07. So was this opening, which is also pending the author's review. Earlier AI use is described under Claims and Disclaimers.
-> - **Release status.** This draft describes a catalogue that has not yet been released. The draft's catalogue (173 techniques and 1 variant) is tracked in the project's version history, with the hazards dataset and the inventory of 68 companies and 71 devices. The published catalogue (`/api/tara.json`) has 176 techniques, 67 companies, 70 devices and no hazards file; its PyPI package, `qtara`, reached 0.4.0 on 2026-10-17 and is now deprecated, with no further releases planned. The draft's air-gap and silent-speech techniques were renumbered QIF-T0177 and QIF-T0178 on 2026-10-17, because QIF-T0172 and QIF-T0173 are published for different techniques; the two catalogues still record sub-techniques differently. Every count in this paper refers to the draft catalogue. The two must be reconciled before release.
+> - **Release status.** On 2026-10-20 the draft catalogue described here was reconciled with the published one. The reconciled catalogue holds 178 techniques and no variants: 131 fully scored, 10 provisional and 37 unscored under the citation gate. QIF-T0177 and QIF-T0178 were added (renumbered on 2026-10-17 because QIF-T0172 and QIF-T0173 are published for different techniques), and the draft's variant QIF-T0024-V01 duplicated published QIF-T0174 and was withdrawn in its favour. The PyPI package `qtara` reached 0.4.0 on 2026-10-17 and is deprecated. **Counts in the body of this paper describe the draft as dated 2026-10-07 (173 techniques and 1 variant; 129 scored, 10 provisional, 34 unscored) unless a passage gives a later date.**
 > - **How to read it.** Sections are numbered 20 to 28 because the numbering continues from v8.0. Sections 12 to 19 are in the companion document. The NISS scoring method is set out in full in Section 27.3.
 > - **How to respond.** Send corrections, evidence and reviews through [GitHub Issues](https://github.com/qinnovates/neurosecurity/issues). Section 28.7 lists what would help from each kind of reader. Tell us where an entry in your device's risk file is wrong or missing.
 
@@ -113,7 +113,7 @@ The datasets behind all three are open, with a device inventory of 68 companies 
 | Term | Meaning |
 |---|---|
 | Address (also "code"; "band" in the data files and in earlier versions) | A label for where a structure or component is. The numbers carry no order, severity or traversal meaning (Section 20.2) |
-| N1 to N7 | Addresses in the nervous system: N1 spinal cord, N2 brainstem, N3 cerebellum, N4 diencephalon, N5 cerebral nuclei, N6 allocortex, N7 neocortex |
+| N1 to N7 | Addresses in the nervous system (addressing version 1): N1 spinal cord, N2 brainstem, N3 cerebellum, N4 diencephalon, N5 basal ganglia, N6 limbic system, N7 neocortex. A proposed version 2 regroups N5 and N6 (Section 20.2) |
 | I0 | The neural interface: the boundary between electrode and tissue |
 | S1 to S3 | Addresses in the device: S1 analog front-end, S2 digital processing, S3 application |
 | PER | A proposed address for structures outside the brain and spinal cord. Staged, not integrated |
@@ -412,7 +412,7 @@ QIF began as an extension of the OSI model, and readers trained on protocol stac
 
 ![Histogram of the share of pathway links joining numerically adjacent N codes under every possible numbering of the seven codes, with the published numbering marked near the average](../images/qif-band-adjacency-test-v9.svg)
 
-*Figure 20.1. The share of pathway links that join numerically adjacent N codes, for the published numbering (18 of 65 links, 28%) against all 5,040 possible numberings of the seven codes (average 29%). Recomputed from origin and target bands in datalake/qif-neural-pathways.json.*
+*Figure 20.1. The share of cross-code pathway links that join numerically adjacent N codes, for the published numbering (21 of 63 links, 33.3%) against all 5,040 possible numberings of the seven codes (average 28.6%). 27.6% of numberings place at least as many links on adjacent codes as the published one, so the published order carries no traversal information. Addressing version 1, the version in use. Generated from origin and target bands in datalake/qif-neural-pathways.json by datalake/scripts/render-band-adjacency-figure.py, which CI checks for staleness.*
 
 Three review rounds, the last by five AI reviewers with neuroanatomy briefs, reached the same verdict: keep the seven codes, drop the order, and carry signal flow somewhere else.
 
@@ -422,29 +422,29 @@ N1–N7 are retained as identifiers, and one unnumbered code, PER, is proposed f
 
 ![Twelve tiles, one per QIF address code, grouped as nervous system, interface and device and listed alphabetically by name, each with its membership rule and the number of catalogue techniques tagged there; the periphery tile is dashed as proposed](../images/qif-address-map-v9.svg)
 
-*Figure 20.2. The eleven address codes in use and the proposed periphery code, shown as unordered tiles with each code's membership rule, structure records and the number of catalogue techniques tagged at it. Counts are tags, not a measure of risk. Sources: datalake/qif-brain-bci-atlas.json, datalake/qtara-registrar.json and the staged proposal in _staging/2026-10-refresh/neural-structure-delta.json.*
+*Figure 20.2. The eleven address codes in use and the proposed periphery code, shown as unordered tiles with each code's membership rule as proposed for addressing version 2 (the data uses version 1; see the table below), structure records and the number of catalogue techniques tagged at it. Counts are tags, not a measure of risk. Sources: datalake/qif-brain-bci-atlas.json, datalake/qtara-registrar.json and the staged proposal in _staging/2026-10-refresh/neural-structure-delta.json.*
 
-Every structure has one address, set by the adult territory that holds its principal neurons. Circuits such as the basal ganglia and the limbic system are functional tags that a structure can carry, not addresses.
+The data uses addressing version 1, in which each code is a functional grouping adapted from Kandel's hierarchy. A proposed version 2 would give every structure the address of the adult territory that holds its principal neurons, and treat circuits such as the basal ganglia and the limbic system as functional tags rather than addresses. Version 2 is not applied.
 
-| Code | Membership rule | Name in v8.0 |
+| Code | Name in use (version 1) | Proposed membership rule (version 2) |
 |---|---|---|
-| N7 | Isocortex, including agranular motor areas | Neocortex |
-| N6 | Allocortex, mesocortex (periallocortex and proisocortex) and pallial nuclei | Limbic System |
-| N5 | Subpallial nuclei: striatum, pallidum, basal forebrain, central and medial amygdala | Basal Ganglia |
-| N4 | Diencephalon: thalamus, subthalamus, hypothalamus, epithalamus | Diencephalon |
+| N7 | Neocortex | Isocortex, including agranular motor areas |
+| N6 | Limbic System | Allocortex, mesocortex (periallocortex and proisocortex) and pallial nuclei |
+| N5 | Basal Ganglia | Subpallial nuclei: striatum, pallidum, basal forebrain, central and medial amygdala |
+| N4 | Diencephalon | Diencephalon: thalamus, subthalamus, hypothalamus, epithalamus |
 | N3 | Cerebellum | Cerebellum |
-| N2 | Brainstem: midbrain, pons, medulla | Brainstem |
-| N1 | Spinal cord parenchyma | Spinal Cord |
-| PER | Nerves, roots, ganglia, sense organs | (none) |
+| N2 | Brainstem | Brainstem: midbrain, pons, medulla |
+| N1 | Spinal Cord | Spinal cord parenchyma |
+| PER | (proposed code) | Nerves, roots, ganglia, sense organs |
 
-Three structures change address. The substantia nigra and ventral tegmental area move from N5 to N2, because they are in the midbrain, and the subthalamic nucleus moves from N5 to N4. All three keep the basal ganglia or reward tag, so the functional tags still find them together. Subthalamic deep brain stimulation, a target of four of the 24 devices mapped to brain regions in the atlas (a separate dataset from the 71-device inventory of Section 22.4), is therefore an N4 example. The site labels N5 "Cerebral nuclei" and N6 "Allocortex".
+Version 2 would change three addresses. The substantia nigra and ventral tegmental area would move from N5 to N2, because they are in the midbrain, and the subthalamic nucleus from N5 to N4. All three would keep the basal ganglia or reward tag, so the functional tags would still find them together. Under version 1, the version in use, subthalamic deep brain stimulation, a target of four of the 24 devices mapped to brain regions in the atlas (a separate dataset from the 71-device inventory of Section 22.4), is an N5 example. Applying version 2 broke dependent tests across the atlas and site, so it was deferred on 2026-10-20 and the site keeps the version 1 names.
 
-Because codes keep their identifiers while membership changes, the atlas carries `addressing_version: 2`, which should be cited with any band reference. Pathway bands are now computed from the structure table by a script whose check mode (`npm run check:bands`) exits with an error on any mismatch, but the check is not yet run by the build or by CI.
+Because codes would keep their identifiers while membership changes, any band reference should say which addressing version it uses. Pathway bands are now computed from the structure table by a script whose check mode (`npm run check:bands`) exits with an error on any mismatch, but the check is not yet run by the build or by CI.
 
 | State | Items |
 |---|---|
-| Applied in the repository | The three moves, the labels, the derived bands and the corrected text |
-| Staged proposal, not integrated | The periphery code, the route records described in 20.4, and 69 further structure records |
+| Applied in the repository | Codes as addresses with no order, the derived bands and the corrected thalamus text |
+| Staged proposal, not integrated | Addressing version 2 (the three moves and the N5 and N6 names), the periphery code, the route records described in 20.4, and 69 further structure records |
 
 ### 20.3 The thalamus, corrected
 
@@ -549,7 +549,7 @@ A provisional range is a bound, not an estimate, and cannot be used as a severit
 
 Some findings are a known technique reached by a different route. Giving each its own number inflates the count and duplicates the parent's score, while folding it into the parent makes it impossible to cite. v9.0 therefore adopts variants, modelled on MITRE ATT&CK sub-techniques and written differently because the registrar's cross-references already hold ATT&CK identifiers such as T1565.001.
 
-- **Identifier:** the parent's id with a variant suffix, for example `QIF-T0024-V01`.
+- **Identifier:** the parent's id with a variant suffix, for example `QIF-T0024-V01`. The one variant filed in the draft was withdrawn on 2026-10-20 as a duplicate of published QIF-T0174, so the reconciled catalogue holds none.
 - **One parent only.** Other relationships are cross-references.
 - **Membership test:** the same signal-level mechanism, tactic and harm as the parent, differing in exactly one of five dimensions: access path, delivery, target model, training setup or sensing site. Anything else is a technique.
 - **No inherited score.** A variant takes its parent's vector only if it passes the citation rule itself.
@@ -679,7 +679,7 @@ Each threat vector in the review was compared with the TARA catalogue. Most had 
 | Model stealing against a decoder | QIF-T0170 | Theoretical | Unscored: preprint only |
 | Compromise of the machine-learning pipeline | QIF-T0171 | Theoretical | Unscored: preprint only |
 | Air-gap covert channels | QIF-T0177 | Theoretical | Unscored: preprint only |
-| Poisoning through federated training | QIF-T0024-V01 (variant) | Theoretical | Unscored: preprint only |
+| Poisoning through federated training | QIF-T0174 (sub-technique of QIF-T0024; filed in the draft as variant QIF-T0024-V01) | Theoretical | Unscored: preprint only |
 
 The mathematical framework is not a list of techniques, so it was mapped at the level of its two attack classes. Readout and alteration correspond to a split NISS has made since NISS v1.1, introduced in whitepaper v7.1, which scores unauthorised read access (Cognitive Reconnaissance) and unauthorised write access (Cognitive Disruption) as separate metrics. Among the 129 fully scored techniques, 86 carry a non-zero read score and 101 a non-zero write score.
 
@@ -1018,7 +1018,7 @@ These are engineering precautions that hold whichever projections come true. The
 3. Record whether a decoder uses hyperdimensional encoding and where its item memory and encodings are stored. Keep both secret, device-bound and integrity-checked.
 4. Baseline device and decoder behaviour so that drift is visible, and use the hazards dataset to separate ordinary change (QIF-H0002, electrode micromotion) from QIF-T0062.
 5. Treat retained recordings as a future readout risk (QIF-T0166): minimise them and set retention limits.
-6. Authenticate model, calibration and federated updates (QIF-T0171, QIF-T0058, QIF-T0024-V01), and limit query access to decoders (QIF-T0170).
+6. Authenticate model, calibration and federated updates (QIF-T0171, QIF-T0058, QIF-T0174), and limit query access to decoders (QIF-T0170).
 
 ### What we do not know
 
@@ -1292,9 +1292,8 @@ Progress on each item can be counted against the closing conditions in 28.3. A l
 Changes made on 2026-10-06 and 2026-10-07, with the neuroethics block added on 2026-10-16 and the optogenetics and memory-engram block on 2026-10-18.
 
 **Addressing**
-- Band codes redefined as addresses with no order; addressing version 2.
-- Substantia nigra and VTA moved from N5 to N2; subthalamic nucleus moved from N5 to N4.
-- N5 labelled "Cerebral nuclei" and N6 labelled "Allocortex"; each band given a membership rule.
+- Band codes redefined as addresses with no order.
+- Addressing version 2 proposed: substantia nigra and VTA from N5 to N2, subthalamic nucleus from N5 to N4, N5 renamed "Cerebral nuclei" and N6 "Allocortex", each band given a membership rule. Deferred on 2026-10-20; the data and site stay on version 1.
 - Pathway bands derived from the structure table by script; three pathways corrected.
 - Thalamus text corrected in the atlas, the pathways file, the truth document and the site; "firewall" and "default-deny" removed.
 - Determinacy and QI range recorded as hypotheses.
@@ -1302,7 +1301,7 @@ Changes made on 2026-10-06 and 2026-10-07, with the neuroethics block added on 2
 
 **Registrar (4.0 → 4.3)**
 - Eight techniques added: QIF-T0166 to T0171, and QIF-T0177 and T0178 (renumbered from T0172 and T0173 on 2026-10-17, since those ids are published for different techniques).
-- Variants introduced; QIF-T0024-V01 filed.
+- Variants introduced; QIF-T0024-V01 filed, then withdrawn on 2026-10-20 as a duplicate of QIF-T0174.
 - New fields added: `peer_review_status`, `defensive_sources`, `niss.scoring_state`.
 - Ten techniques lost their score and one lost its status under the evidence rule; 24 gained a verified source.
 - Nine existing techniques updated from new papers; QIF-T0066's cross-reference corrected; QIF-T0116 gained N2.

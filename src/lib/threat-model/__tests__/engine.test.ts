@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { TaraChainsFormatError, isAttackChain, parseTaraChains } from '../../../components/atlas/load-tara-chains';
 import { buildThreatModelReport } from '../build-report';
-import { DEFAULT_EVIDENCE_STATUSES } from '../catalog-types';
+import { hasDefaultEvidence } from '../catalog-types';
 import { GENERATED_CHAIN_ID_PREFIX } from '../chain-types';
 import type { DeviceModel } from '../device-model';
 import { DEFAULT_CHAIN_OPTIONS } from '../generate-chains';
@@ -71,10 +71,12 @@ describe.each(ARCHETYPE_IDS)('report for %s', (archetypeId) => {
     }
   });
 
-  it('keeps emerging and theoretical techniques out of chains by default', () => {
+  it('keeps techniques below a demonstrated evidence tier out of chains by default', () => {
     for (const chain of report.chainResult.chains) {
       for (const step of chain.steps) {
-        expect(DEFAULT_EVIDENCE_STATUSES).toContain(techniqueById.get(step.technique_id)?.evidenceStatus);
+        const technique = techniqueById.get(step.technique_id);
+        expect(technique, step.technique_id).toBeDefined();
+        expect(hasDefaultEvidence(technique!), step.technique_id).toBe(true);
       }
     }
   });
@@ -145,7 +147,7 @@ describe('read and write preconditions', () => {
 
 describe('chain generation limits', () => {
   it('shows no chains, with a reason, when the evidence filter excludes everything', () => {
-    const result = reportFor(buildModel('subcortical-stimulator'), { ...DEFAULT_CHAIN_OPTIONS, allowedEvidenceStatuses: [] }).chainResult;
+    const result = reportFor(buildModel('subcortical-stimulator'), { ...DEFAULT_CHAIN_OPTIONS, allowedEvidenceTiers: [] }).chainResult;
     expect(result.chains).toEqual([]);
     expect(result.emptyReason).toMatch(/No technique placed on this model/);
   });

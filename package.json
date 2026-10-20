@@ -50,7 +50,7 @@
     "autodidactive:tara:check": "node src/scripts/generate-autodidactive-tara.mjs --check",
     "purpose:sync": "node src/scripts/generate-purpose-and-limits.mjs",
     "purpose:check": "node src/scripts/generate-purpose-and-limits.mjs --check",
-    "generated:check": "npm run registrar:niss-derive:check && npm run registrar:stats:check && npm run truth:registry:check && npm run autodidactive:tara:check && npm run purpose:check && npm run datalake:inventory:check",
+    "generated:check": "npm run registrar:niss-derive:check && npm run registrar:stats:check && npm run truth:registry:check && npm run autodidactive:tara:check && npm run purpose:check && npm run datalake:inventory:check && npm run figure:bands:check",
     "cve:coverage": "node src/scripts/recompute-cve-coverage.mjs",
     "cve:gaps": "node src/scripts/generate-cve-coverage-gaps.mjs",
     "eeg:list": "python3 datalake/scripts/download-eeg-samples.py --list",
@@ -68,7 +68,9 @@
     "version:minor": "bash src/scripts/version.sh minor",
     "version:major": "bash src/scripts/version.sh major",
     "evidence:tier": "python3 src/scripts/migrate-populate-evidence-tier.py",
-    "anchors:check": "node src/scripts/validate-severity-anchors.mjs"
+    "anchors:check": "node src/scripts/validate-severity-anchors.mjs",
+    "figure:bands": "python3 datalake/scripts/render-band-adjacency-figure.py",
+    "figure:bands:check": "python3 datalake/scripts/render-band-adjacency-figure.py --check"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.7",

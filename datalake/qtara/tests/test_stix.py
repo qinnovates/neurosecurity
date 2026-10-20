@@ -5,7 +5,18 @@ from pathlib import Path
 
 import pytest
 from qtara.core import TaraLoader
+from qtara.models import Variant
 from qtara.stix import IDENTITY_ID, StixExporter, attack_pattern_id, tactic_phase_name
+
+# The bundled registrar holds no variants since QIF-T0024-V01 was withdrawn (2026-10-20), so the
+# variant export is tested on this fixture. Its id matches the golden STIX fixture.
+FIXTURE_VARIANT = Variant(
+    id="QIF-T0024-V01", alias="TARA-SIL-M-006-TS1", name="Example variant", parent="QIF-T0024",
+    differs_in="training_setup", inherits_niss=False, description="Example.", conditions=[],
+    sources=[], defensive_sources=[], peer_review_status="none", status="THEORETICAL",
+    niss={"version": "1.1", "scoring_state": "unscored", "unscored_reason": "no_source"},
+    related_ids=[], notes=None,
+)
 
 UUID_STIX_ID = re.compile(r"relationship--[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")
 
@@ -130,8 +141,7 @@ def test_stix_variant_is_an_attack_pattern_related_to_its_parent():
     """Each variant exports as an attack-pattern plus one standard relationship pointing at its parent."""
     loader = TaraLoader()
     techniques = loader.list_techniques()
-    variants = loader.list_variants()
-    assert variants
+    variants = [FIXTURE_VARIANT]
 
     bundle = StixExporter.to_bundle(techniques, include_pending=True, variants=variants)
     by_stix_id = {obj["id"]: obj for obj in bundle["objects"]}
@@ -157,7 +167,7 @@ def test_stix_variant_is_an_attack_pattern_related_to_its_parent():
 
 def test_stix_variant_is_left_out_when_its_parent_is_not_exported():
     loader = TaraLoader()
-    variants = loader.list_variants()
+    variants = [FIXTURE_VARIANT]
     parent_ids = {variant.parent for variant in variants}
     without_parents = [t for t in loader.list_techniques() if t.id not in parent_ids]
 
@@ -174,7 +184,7 @@ def test_stix_ids_match_the_golden_fixture_shared_with_the_site():
         assert attack_pattern_id(entry_id) == stix_id
 
     loader = TaraLoader()
-    bundle = StixExporter.to_bundle(loader.list_techniques(), include_pending=True, variants=loader.list_variants())
+    bundle = StixExporter.to_bundle(loader.list_techniques(), include_pending=True, variants=[FIXTURE_VARIANT])
     exported = {obj["external_references"][0]["external_id"]: obj["id"]
                 for obj in bundle["objects"] if obj["type"] == "attack-pattern"}
     for entry_id, stix_id in golden["attack_patterns"].items():

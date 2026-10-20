@@ -138,10 +138,11 @@ describe('goal coverage', () => {
     expect(placedTotal).toBe(Object.keys(referenceData.placementRules.placements).length);
   });
 
-  it('shows that deny-type techniques are mostly not placed, which is why a recording device counts none', () => {
+  it('counts deny-type risks on a recording device once they are placed, while deny placement stays incomplete', () => {
     const headset = reportFor('noninvasive-eeg-headset');
     const counts = countOpenRisks(headset.riskRows, EMPTY_LENS);
-    expect(counts.byGoal.deny - counts.baselineByGoal.deny).toBe(0);
+    expect(headset.goalCoverage.deny.placedTechniques).toBeGreaterThan(0);
+    expect(counts.byGoal.deny - counts.baselineByGoal.deny).toBeGreaterThan(0);
     expect(headset.goalCoverage.deny.placedTechniques).toBeLessThan(headset.goalCoverage.deny.catalogTechniques);
   });
 });

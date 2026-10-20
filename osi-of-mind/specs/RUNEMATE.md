@@ -1756,10 +1756,10 @@ Runemate Forge plugs into the QIF Hourglass at specific bands. Note: QIF bands d
 ```
 QIF Hourglass — Runemate Component Mapping:
 
-  NEURAL DOMAIN (measured, not controlled by Runemate — v4.0 bands, addressing version 2: codes are addresses, not an order)
+  NEURAL DOMAIN (measured, not controlled by Runemate — v4.0 bands, addressing version 1: codes are addresses, not an order)
   N7 (Neocortex) ------------------> Cognitive response to rendered Stave content
-  N6 (Allocortex) -----------------> Emotional/memory response to UI content
-  N5 (Cerebral nuclei) ------------> Motor selection if UI drives motor output
+  N6 (Limbic System) --------------> Emotional/memory response to UI content
+  N5 (Basal Ganglia) --------------> Motor selection if UI drives motor output
   N4 (Diencephalon) ---------------> State-dependent thalamic relay of sensory input
   N3 (Cerebellum) -----------------> Timing/coordination of motor responses
   N2 (Brainstem) ------------------> Autonomic responses to stimulation

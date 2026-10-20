@@ -191,7 +191,7 @@ Processes spatial location and sensorimotor integration.
 | QIF Band | Structure | Auditory Role | Threat Surface |
 |----------|-----------|---------------|---------------|
 | **N7** (Neocortex) | A1, Belt, Parabelt, STS, Wernicke's, Broca's | All cortical auditory processing + language | ASSR attacks; auditory cortex stimulation; speech-brain decoding |
-| **N6** (Allocortex) | Amygdala (via MGN medial), Hippocampus | Emotional tagging of sounds; memory consolidation | Affective sound manipulation; fear conditioning via audio |
+| **N6** (Limbic) | Amygdala (via MGN medial), Hippocampus | Emotional tagging of sounds; memory consolidation | Affective sound manipulation; fear conditioning via audio |
 | **N4** (Diencephalon) | MGN (thalamus) | Relay + attention gating | Controls what the brain "hears"; modifiable via cortical feedback |
 | **N2** (Brainstem) | CN, SOC, LL, IC | Localization, startle, pre-processing | Acoustic startle manipulation; brainstem auditory evoked potentials (BAEP) |
 | **I0** (Interface) | Cochlear implant electrode array | Where prosthetic signal meets auditory nerve | Electrode-nerve boundary; same security considerations as visual I0 |

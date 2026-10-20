@@ -1061,8 +1061,8 @@ QI computation parameters vary by QIF band. The following table defines expected
 | Band | Expected QI Range | Dominant Terms | Notes |
 |------|------------------|----------------|-------|
 | N7 | 0.3 - 0.5 | sigma2_phi, H_tau | Neocortex. High natural variability. Widest acceptance window. |
-| N6 | 0.2 - 0.4 | sigma2_phi, H_tau | Allocortex. Emotion/memory introduces variability. |
-| N5 | 0.15 - 0.35 | sigma2_phi, sigma2_gamma | Cerebral nuclei. Pathological beta oscillations in the basal ganglia circuit (Parkinson's). |
+| N6 | 0.2 - 0.4 | sigma2_phi, H_tau | Limbic system. Emotion/memory introduces variability. |
+| N5 | 0.15 - 0.35 | sigma2_phi, sigma2_gamma | Basal ganglia. Pathological beta oscillations in the basal ganglia circuit (Parkinson's). |
 | N4 | 0.1 - 0.3 | sigma2_phi, sigma2_gamma | Diencephalon/thalamus. State-dependent relay variability. |
 | N3 | 0.1 - 0.25 | sigma2_gamma | Cerebellum. Complex spike timing. |
 | N2 | 0.05 - 0.15 | H_tau, sigma2_gamma | Brainstem. Low variability, vital function monitoring. |

@@ -1,11 +1,12 @@
 /**
  * Parsers for the authored mapping files. The placement table is checked against the
- * catalog: every technique with confirmed or demonstrated evidence must have a decision,
+ * catalog: every technique whose evidence tier passes the default gate (replicated, lab or
+ * case evidence; see DEFAULT_EVIDENCE_TIERS) must have a decision,
  * so an evidenced technique added to the catalog fails the build until someone decides
  * where it belongs.
  */
 
-import { DEFAULT_EVIDENCE_STATUSES, type CatalogTechnique } from './catalog-types';
+import { hasDefaultEvidence, type CatalogTechnique } from './catalog-types';
 import { CHAIN_ROLES } from './chain-types';
 import { COMPONENT_KINDS, INTERFACE_DIRECTIONS, LINK_MEDIA } from './device-model';
 import { ThreatModelDataError } from './errors';
@@ -68,11 +69,11 @@ function findPlacementCoverageProblem(rules: PlacementRules, techniques: readonl
   const decidedTwice = placedIds.find((techniqueId) => techniqueId in rules.notPlaced);
   if (decidedTwice !== undefined) return `"${decidedTwice}" is both placed and not placed`;
   const undecided = techniques.find((technique) =>
-    (DEFAULT_EVIDENCE_STATUSES as readonly string[]).includes(technique.evidenceStatus)
+    hasDefaultEvidence(technique)
     && !(technique.id in rules.placements) && !(technique.id in rules.notPlaced));
   return undecided === undefined
     ? null
-    : `catalog technique "${undecided.id}" (${undecided.evidenceStatus}) has no placement decision`;
+    : `catalog technique "${undecided.id}" (${undecided.evidenceTier}) has no placement decision`;
 }
 
 /**

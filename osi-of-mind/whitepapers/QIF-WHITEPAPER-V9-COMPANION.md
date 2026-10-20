@@ -18,7 +18,7 @@ QIF is a proposed framework. It is unvalidated and no standards body has adopted
 
 **Step 1. Find the address.** Look up the target in `datalake/qif-brain-bci-atlas.json`.
 
-- The subthalamic nucleus (`stn`) has `qif_band: N4` and the tag `basal_ganglia_circuit`. The atlas is on `addressing_version: 2`.
+- The subthalamic nucleus (`stn`) has `qif_band: N5` under addressing version 1, the version in use. A proposed version 2 would address it N4 with the tag `basal_ganglia_circuit`.
 - N4 is an address. It says where the lead sits, and it carries no depth, severity or traversal meaning.
 - Four atlas devices list `stn` as a target. Two are bidirectional and two are write.
 - Those device rows carry `qif_bands: ["N5", "N4"]` because each covers three targets (`stn`, `gpi`, `vim`). For an STN lead, take the band from the region record.
@@ -371,7 +371,7 @@ The endpoint's ids are not UUIDs. A strict STIX 2.1 consumer may reject them. Th
 - The README's tier table read T1 mid-term, T2 far-term, T3 no physics gate and now matches the data. The registrar and CLI use 0 `feasible_now`, 1 `near_term`, 2 `mid_term`, 3 `far_term`, X `no_physics_gate`. `list --tier 3` returns the 4 far-term entries, and `list --tier X` returns 18.
 - The README's development steps said `cd shared/qtara` and now say `cd neurosecurity/datalake/qtara`.
 - The README did not mention variants, `--include-pending`, `--enriched-only`, `--domain` or `--mode`. It now documents all five.
-- The `Bands` column and `x_qif_bands` in the SDK export print strings with arrows, such as "S1–S2→N4–N7". Under addressing version 2 the bands carry no order. Read `band_ids`.
+- The `Bands` column and `x_qif_bands` in the SDK export print strings with arrows, such as "S1–S2→N4–N7". The bands carry no order. Read `band_ids`.
 - `pyproject.toml` listed `stix2>=3.0.0`, which no file under `src` or `tests` imports. The dependency has been removed.
 
 ### What this does not tell you
@@ -558,7 +558,7 @@ The components form one chain: a framework that defines what to protect, a proto
 **Limits**
 
 - Counts in the map and in the cross-reference tables (165 techniques) reflect v8.0. Section 21 gives the current catalogue: 173 techniques and 1 variant.
-- The hourglass bands are addresses with no order under addressing version 2 (Section 20).
+- The hourglass bands are addresses with no order (Section 20).
 - Every component shown is a proposal. Compression and other engineering figures are AI-derived estimates that have not been independently validated (see Claims and Disclaimers).
 
 ```
@@ -706,7 +706,7 @@ Thirteen visualizations exist on the site and can be referenced or embedded in t
 
 **Limits**
 
-- The Brain Atlas entry lists the neural bands as N1–N7. Under addressing version 2 these codes are addresses with no order (Section 20).
+- The Brain Atlas entry lists the neural bands as N1–N7. These codes are addresses with no order (Section 20).
 - The technique browser count (165) reflects v8.0.
 
 | Visualization | Location | Shows |
@@ -2156,6 +2156,8 @@ Sources were retrieved on 2026-10-07: arXiv:2607.10451v1 from its arxiv.org abst
 
 ##### QIF-T0024-V01. Federated update poisoning (malicious-client model-update manipulation)
 
+> **Withdrawn 2026-10-20.** This variant duplicated published QIF-T0174 (Federated update poisoning, sub-technique of QIF-T0024) and was withdrawn in its favour when the draft and published catalogues were reconciled. The id is listed as deprecated. The write-up below is kept as the record of the draft.
+
 | | |
 |---|---|
 | Parent | QIF-T0024, Training data poisoning (model bias injection) |
@@ -2382,7 +2384,7 @@ The window is finite. Once devices ship at scale with baked-in architectural dec
 
 | Component | What the paper proposes |
 |-----------|-------------------------|
-| QIF Hourglass | An 11-band security model (7 neural + I0 + 3 synthetic). Band codes are addresses with no order: the number carries no severity, processing or traversal meaning (addressing version 2, Section 20) |
+| QIF Hourglass | An 11-band security model (7 neural + I0 + 3 synthetic). Band codes are addresses with no order: the number carries no severity, processing or traversal meaning (Section 20) |
 | NSP | A post-quantum encrypted wire protocol |
 | Runemate | A rendering pipeline that eliminates the browser, the app store, and every unnecessary layer between patient and experience |
 | PQKC + Biomarker MFA | A passwordless authentication system built on cryptographic identity and biological uniqueness |
@@ -2516,7 +2518,7 @@ These engineering precautions hold whichever projections come true. They are not
 3. Record whether a decoder uses hyperdimensional encoding and where its item memory and encodings are stored, by QIF band. The registrar has no field for this. Keep both secret, device-bound and integrity-checked.
 4. Baseline device and decoder behaviour so drift is visible, and use `datalake/qif-hazards.json` to separate non-adversarial change (for example QIF-H0002, electrode micromotion) from QIF-T0062.
 5. Treat retained recordings as future readout risk (QIF-T0166). Minimise them and set retention limits.
-6. Authenticate model, calibration and federated updates (QIF-T0171, QIF-T0058, QIF-T0024-V01), and limit query access to decoders (QIF-T0170).
+6. Authenticate model, calibration and federated updates (QIF-T0171, QIF-T0058, QIF-T0174), and limit query access to decoders (QIF-T0170).
 
 ### What we do not know
 
@@ -2551,6 +2553,6 @@ Electrical stimulation affects whatever is near the electrode. Optogenetics lets
 Almost all of this work is in animals. In one blind patient with retinitis pigmentosa, a light-sensitive protein delivered to the retina and paired with light-projecting goggles gave partial recovery of visual function: the patient could perceive, locate, count and touch objects with the goggles on (Sahel et al., 2021, *Nature Medicine*, DOI:10.1038/s41591-021-01351-4). That is one patient, and the target was the retina. A 2025 roadmap by Lüscher, Deisseroth and nine co-authors separates this direct route (the method used in a patient) from an indirect one, in which circuit findings from animals guide other therapies (*Nature Neuroscience*, DOI:10.1038/s41593-025-02097-9).
 
 
-Neurons connect in chains. One neuron signals the next across a synapse, and the signal either excites the next neuron or inhibits it. Chains also form loops. Cortex, the cerebral nuclei and the thalamus are joined in loops, so an effect can return to where it started. Some sources broadcast: a small group of cells can release a modulator, such as dopamine, across many regions at once.
+Neurons connect in chains. One neuron signals the next across a synapse, and the signal either excites the next neuron or inhibits it. Chains also form loops. Cortex, the basal ganglia and the thalamus are joined in loops, so an effect can return to where it started. Some sources broadcast: a small group of cells can release a modulator, such as dopamine, across many regions at once.
 
 A structure is not a circuit. A nucleus a few millimetres across holds several cell types, each projecting somewhere different, and fibres from other regions pass through it. A circuit is therefore defined by cell type and by where those cells project. A location alone does not define it.
