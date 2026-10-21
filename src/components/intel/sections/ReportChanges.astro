@@ -1,0 +1,57 @@
+---
+// Section 1: what moved since the Q1 2026 report, as before/after pairs, plus the
+// corrections to Q1 we owe readers.
+import type { ReportModel } from '@/lib/intel/bci-security-2026/report-model';
+import { formatPercent, formatUsdCompact } from '@/lib/intel/bci-security-2026/format';
+import SourceLinks from '../SourceLinks.astro';
+
+interface Props {
+  model: ReportModel;
+}
+
+const { model } = Astro.props;
+const { q1, capital, cve, evidence, report } = model;
+const addedCompanies = model.companies - q1.companies;
+const newCves = cve.total - q1.neural_device_cves_in_nvd_at_q1;
+const deltas = [
+  { metric: 'Companies tracked', before: String(q1.companies), after: String(model.companies), note: `${addedCompanies} added; no existing company's record changed posture.` },
+  { metric: 'Tracked lifetime funding', before: `${formatUsdCompact(q1.funding_total_usd)} (${q1.funding_companies} cos.)`, after: `${formatUsdCompact(capital.totalUsd)} (${capital.companiesWithFunding} cos.)`, note: 'Company records only; 2026 rounds are counted separately in Figure 2.' },
+  { metric: 'Threat-catalog entries', before: String(q1.techniques), after: String(evidence.total), note: `${q1.added_since_q1} added, ${q1.added_since_q1_theoretical_proposed} of them proposed (see Figure 6).` },
+  { metric: 'Neural-device CVEs', before: `${q1.neural_device_cves_in_nvd_at_q1} on record (Q1 said ${q1.neural_device_cves_reported_in_q1})`, after: String(cve.total), note: `${newCves} published since, including ${cve.staged} verified and staged for mapping. See correction Q1-E1.` },
+  { metric: 'No security documentation (dataset field)', before: `${q1.no_documentation_companies} of ${q1.companies} (${formatPercent(q1.no_documentation_companies / q1.companies)})`, after: `${model.postureNonePublished} of ${model.companies} (${formatPercent(model.postureNonePublished / model.companies)})`, note: 'Field last fully reviewed 29 Apr 2026. This edition adds a direct disclosure-channel check instead (Section 3).' },
+];
+---
+<section id="what-changed" aria-labelledby="what-changed-heading" class="scroll-mt-24">
+  <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Section 1</p>
+  <h2 id="what-changed-heading" class="text-2xl font-bold font-[family-name:var(--font-heading)]">What changed since Q1</h2>
+  <p class="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--color-text-muted)]">
+    This annual edition replaces the quarterly series that began with the Q1 2026 report. Two data points are not a trend,
+    so changes are shown as before and after, not as lines.
+  </p>
+  <div class="mt-5 overflow-x-auto rounded-xl border border-[var(--color-border)]">
+    <table class="viz-table min-w-[36rem]">
+      <thead><tr><th>Measure</th><th class="viz-right">Q1 2026 (13 Mar)</th><th class="viz-right">Now (20 Oct)</th><th>Note</th></tr></thead>
+      <tbody>
+        {deltas.map((row) => (
+          <tr><td class="font-medium">{row.metric}</td><td class="viz-right">{row.before}</td><td class="viz-right">{row.after}</td><td class="text-[var(--color-text-muted)]">{row.note}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div id="corrections" class="mt-8 rounded-xl border border-[var(--color-status-warn)]/40 bg-[var(--color-status-warn)]/5 p-5 scroll-mt-24">
+    <h3 class="text-base font-semibold">Corrections to the Q1 2026 report</h3>
+    <p class="mt-1 text-sm text-[var(--color-text-muted)]">We re-checked every Q1 number against primary sources. These are the ones that were wrong.</p>
+    <ol class="mt-4 space-y-3 text-sm">
+      {report.corrections.map((correction) => (
+        <li class="grid gap-1 sm:grid-cols-[4.5rem_1fr]">
+          <span class="viz-num text-xs font-semibold text-[var(--color-text-faint)]">{correction.id}</span>
+          <span>
+            <span class="text-[var(--color-text-muted)]"><span class="font-medium">Q1 said:</span> {correction.q1_said}</span><br />
+            <span class="text-[var(--color-text-primary)]"><span class="font-medium">Correct:</span> {correction.correct}</span><SourceLinks ids={correction.source_ids} />
+          </span>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
