@@ -118,6 +118,7 @@ src/site/governance/outreach-tracker/
 datalake/intake/*/
 !datalake/intake/2026-10-06/
 !datalake/intake/2026-10-18/
+!datalake/intake/2026-10-20/
 
 # Agent worktrees: isolated per-session checkouts, never content of this repo
 .claude/worktrees/

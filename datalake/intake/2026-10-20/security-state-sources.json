@@ -1,0 +1,1153 @@
+{
+ "_meta": {
+  "status": "PROPOSAL. Collector output only. No datalake/*.json source of truth was modified.",
+  "batch": "2026-10-20",
+  "topic": "State of BCI Security 2026: vulnerabilities, advisories, regulation, neurorights, incidents and research attacks, each classified validated or theoretical.",
+  "evidence_classes": {
+   "validated": "A disclosed CVE or advisory, a maintainer-acknowledged weakness, a published demonstration, a final court ruling, or a measured count.",
+   "theoretical": "Argued or modelled, not demonstrated.",
+   "not_applicable": "Laws, guidance and legal analysis: reported by legal status instead."
+  },
+  "framing": "Defensive. TARA and NISS are threat-modelling and risk-assessment tools. No item here describes how to carry out an attack.",
+  "verification_date": "2026-10-20",
+  "independent_review": null
+ },
+ "metrics": {
+  "registrar": {
+   "total_techniques": 178,
+   "by_tier": {
+    "theoretical_modeled": 26,
+    "theoretical_proposed": 88,
+    "demonstrated_case": 15,
+    "demonstrated_lab": 46,
+    "speculative": 3
+   },
+   "validated_by_tier": 61,
+   "theoretical_by_tier": 114,
+   "speculative_by_tier": 3,
+   "legacy_status_demonstrated": 49,
+   "demonstrated_case_without_neural_device_cve": [
+    {
+     "id": "QIF-T0004",
+     "attack": "Man-in-the-middle",
+     "legacy_status": "DEMONSTRATED"
+    },
+    {
+     "id": "QIF-T0031",
+     "attack": "Battery drain attack (resource depletion)",
+     "legacy_status": "THEORETICAL"
+    },
+    {
+     "id": "QIF-T0042",
+     "attack": "BLE/RF side-channel",
+     "legacy_status": "THEORETICAL"
+    },
+    {
+     "id": "QIF-T0046",
+     "attack": "Malicious over-the-air firmware update",
+     "legacy_status": "EMERGING"
+    },
+    {
+     "id": "QIF-T0047",
+     "attack": "Mass BCI compromise (platform attack)",
+     "legacy_status": "EMERGING"
+    },
+    {
+     "id": "QIF-T0057",
+     "attack": "Network mapping (BCI topology)",
+     "legacy_status": "THEORETICAL"
+    },
+    {
+     "id": "QIF-T0067",
+     "attack": "Phase dynamics replay/mimicry (GAN-synthesized or RF-injected neural trajectories)",
+     "legacy_status": "DEMONSTRATED"
+    }
+   ],
+   "validated_if_neural_product_means_neural_device": 56
+  },
+  "security_posture": {
+   "companies": 68,
+   "by_security_posture": {
+    "none_published": 60,
+    "basic_encryption": 3,
+    "minimal_claims": 2,
+    "open_source": 1,
+    "regulatory_compliance": 2
+   },
+   "formal_audit_published": 0,
+   "last_verified": "2026-04-29T04:19:08Z"
+  },
+  "cves": {
+   "total_mapped_cves": 107,
+   "techniques_with_cve": 27,
+   "neural_device_cves": 10,
+   "neural_device_cves_published_2026": 2,
+   "in_cisa_kev": 0
+  },
+  "us_states_with_enacted_neural_data_law": 5
+ },
+ "sources": [
+  {
+   "id": "SEC-CVE-2017-2852",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2852",
+   "title": "CVE-2017-2852: Natus Xltek EEG software",
+   "publisher": "NIST National Vulnerability Database",
+   "date": "2018-06-01",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "NVD API 2.0 single-record query by cveId on 2026-10-20; totalResults 1; description and CNA read from the record.",
+   "used_for": "Count of disclosed vulnerabilities in neural-device products",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-CVE-2017-2853",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2853",
+   "title": "CVE-2017-2853: Natus Xltek NeuroWorks 8: stack buffer overflow via crafted network packet, code execution",
+   "publisher": "NIST National Vulnerability Database",
+   "date": "2018-04-05",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "NVD API 2.0 single-record query by cveId on 2026-10-20; totalResults 1; description and CNA read from the record.",
+   "used_for": "Count of disclosed vulnerabilities in neural-device products",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-CVE-2017-2867",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2867",
+   "title": "CVE-2017-2867: Natus Xltek NeuroWorks 8 (SavePatientMontage)",
+   "publisher": "NIST National Vulnerability Database",
+   "date": "2018-04-05",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "NVD API 2.0 single-record query by cveId on 2026-10-20; totalResults 1; description and CNA read from the record.",
+   "used_for": "Count of disclosed vulnerabilities in neural-device products",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-CVE-2017-2868",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2868",
+   "title": "CVE-2017-2868: Natus Xltek NeuroWorks 8 (NewProducerStream)",
+   "publisher": "NIST National Vulnerability Database",
+   "date": "2018-04-05",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "NVD API 2.0 single-record query by cveId on 2026-10-20; totalResults 1; description and CNA read from the record.",
+   "used_for": "Count of disclosed vulnerabilities in neural-device products",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-CVE-2017-2869",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2869",
+   "title": "CVE-2017-2869: Natus Xltek NeuroWorks 8 (OpenProducer)",
+   "publisher": "NIST National Vulnerability Database",
+   "date": "2018-04-05",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "NVD API 2.0 single-record query by cveId on 2026-10-20; totalResults 1; description and CNA read from the record.",
+   "used_for": "Count of disclosed vulnerabilities in neural-device products",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-CVE-2023-25931",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-25931",
+   "title": "CVE-2023-25931: Medtronic Pelvic Health clinician apps on the Smart Programmer: password weakness",
+   "publisher": "NIST National Vulnerability Database",
+   "date": "2023-03-01",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "NVD API 2.0 single-record query by cveId on 2026-10-20; totalResults 1; description and CNA read from the record.",
+   "used_for": "Count of disclosed vulnerabilities in neural-device products",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-CVE-2023-47800",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-47800",
+   "title": "CVE-2023-47800: Natus NeuroWorks and SleepWorks before 8.4 GMA3: default SQL Server sa password",
+   "publisher": "NIST National Vulnerability Database",
+   "date": "2023-11-10",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "NVD API 2.0 single-record query by cveId on 2026-10-20; totalResults 1; description and CNA read from the record.",
+   "used_for": "Count of disclosed vulnerabilities in neural-device products",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-CVE-2023-49914",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-49914",
+   "title": "CVE-2023-49914: InteraXon Muse 2: RF carrier modulated by a false brain wave produces a misleading app report",
+   "publisher": "NIST National Vulnerability Database",
+   "date": "2023-12-02",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "NVD API 2.0 single-record query by cveId on 2026-10-20; totalResults 1; description and CNA read from the record.",
+   "used_for": "Count of disclosed vulnerabilities in neural-device products",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-CVE-2026-2671",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-2671",
+   "title": "CVE-2026-2671: Mendi Neurofeedback Headset V4: cleartext BLE transmission (CVSS 3.1 3.1, CNA VulDB; vendor did not respond)",
+   "publisher": "NIST National Vulnerability Database",
+   "date": "2026-03-07",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "NVD API 2.0 single-record query by cveId on 2026-10-20; totalResults 1; description and CNA read from the record.",
+   "used_for": "Count of disclosed vulnerabilities in neural-device products",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-CVE-2026-18844",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-18844",
+   "title": "CVE-2026-18844: Pulsetto Vagus Nerve Stimulator: undisclosed unauthenticated BLE commands (CWE-912, CVSS 3.1 8.1)",
+   "publisher": "NIST National Vulnerability Database",
+   "date": "2026-08-11",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "NVD API 2.0 single-record query by cveId on 2026-10-20; totalResults 1; description and CNA read from the record.",
+   "used_for": "Count of disclosed vulnerabilities in neural-device products",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-ICSMA-26-223-02",
+   "url": "https://www.cisa.gov/news-events/ics-medical-advisories/icsma-26-223-02",
+   "title": "ICSMA-26-223-02 Pulsetto Vagus Nerve Stimulator (Update A)",
+   "publisher": "CISA",
+   "date": "2026-08-11 (Update A 2026-10-08)",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Page fetched on 2026-10-20 and the cited statement read on the page.",
+   "used_for": "Pulsetto CVE-2026-18844: affected versions, fix in firmware 1.2.0 (May 2026), no known public exploitation reported to CISA",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-LIBLSL-262",
+   "url": "https://github.com/sccn/liblsl/issues/262",
+   "title": "sccn/liblsl#262: Preferred contact for responsible vulnerability disclosure?",
+   "publisher": "GitHub, sccn/liblsl",
+   "date": "2026-02-11",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Page fetched on 2026-10-20 and the cited statement read on the page.",
+   "used_for": "Maintainer reply of 2026-02-18: LSL transport has no encryption, authentication or integrity checking by design (trusted lab networks). No CVE. Reporter is Qinnovate (GitHub dakevinci): conflict of interest to disclose",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-SECURELSL",
+   "url": "https://eeglab.org/secureLSL/",
+   "title": "Secure LSL: transparent encryption for Lab Streaming Layer",
+   "publisher": "SCCN, UC San Diego",
+   "date": "undated page, version 1.16.1-secure.1.1.0",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Page fetched on 2026-10-20 and the cited statement read on the page.",
+   "used_for": "Mitigation: ChaCha20-Poly1305, Ed25519 device authentication, replay protection, session key rotation",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-KEV-20261020",
+   "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+   "title": "CISA Known Exploited Vulnerabilities catalog, version 2026.10.20",
+   "publisher": "CISA",
+   "date": "2026-10-20",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Catalog JSON downloaded 2026-10-20 (1754 entries) and matched against all 107 cve_id values in datalake/cve-technique-mapping.json",
+   "used_for": "None of the 107 mapped CVEs, and none of the 10 neural-device CVEs, is in KEV",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-FDA-PREMARKET-2026",
+   "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-management-system-considerations-and-content-premarket",
+   "title": "Cybersecurity in Medical Devices: Quality Management System Considerations and Content of Premarket Submissions (final)",
+   "publisher": "US FDA (CDRH, CBER), docket FDA-2021-D-1158",
+   "date": "2026-02 (page current as of 2026-02-03)",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Page fetched on 2026-10-20 and the cited statement read on the page.",
+   "used_for": "Current FDA premarket cybersecurity guidance; supersedes the 2025-06-27 final guidance",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-FDA-PREMARKET-2025",
+   "url": "https://www.govinfosecurity.com/fda-expands-premarket-medical-device-cyber-guidance-a-28850",
+   "title": "FDA expands premarket medical device cyber guidance",
+   "publisher": "GovInfoSecurity",
+   "date": "2025-06",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Read in a dated secondary source on 2026-10-20; primary text not retrieved in this pass.",
+   "used_for": "2025-06-27 revision added Section VII on FD&C Act section 524B cyber devices; superseded the 2023-09-27 guidance",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-CRA-REPORTING",
+   "url": "https://www.mccannfitzgerald.com/knowledge/data-privacy-and-cyber-risk/cyber-resilience-act-reporting-obligations-apply-from-11-september-2026",
+   "title": "Cyber Resilience Act: Reporting Obligations apply from 11 September 2026",
+   "publisher": "McCann FitzGerald",
+   "date": "2026-09-10",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Page fetched on 2026-10-20 and the cited statement read on the page.",
+   "used_for": "EU CRA: reporting of actively exploited vulnerabilities and severe incidents from 2026-09-11 (24 h early warning, 72 h notification, final report); most obligations from 2027-12-11. Medical devices under Regulation (EU) 2017/745 are outside the CRA (statutory text not retrieved in this pass)",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-AIACT-OMNIBUS",
+   "url": "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+   "title": "EU AI Act Omnibus Agreement: Postponed High-Risk Deadlines and Other Key Changes",
+   "publisher": "Gibson Dunn",
+   "date": "2026-05-27",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Page fetched on 2026-10-20 and the cited statement read on the page.",
+   "used_for": "Annex III high-risk obligations moved to 2027-12-02 and Annex I to 2028-08-02 (provisional agreement 2026-05-06). Formal adoption as Regulation (EU) 2026/1744 is reported only by secondary sources and was not confirmed at EUR-Lex",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-FPF-NEURAL-DATA",
+   "url": "https://fpf.org/blog/the-neural-data-goldilocks-problem-defining-neural-data-in-u-s-state-privacy-laws/",
+   "title": "The Neural Data Goldilocks Problem: Defining Neural Data in U.S. State Privacy Laws",
+   "publisher": "Future of Privacy Forum",
+   "date": "2025-08-12 (updated 2026-06-27)",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Page fetched on 2026-10-20 and the cited statement read on the page.",
+   "used_for": "Enacted state neural-data laws and effective dates: Colorado HB 24-1058 (2024-08-07), California SB 1223 (2025-01-01), Montana SB 163 (2025-10-01), Connecticut SB 1295 (2026-07-01)",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-COOLEY-VERMONT",
+   "url": "https://www.cooley.com/news/insight/2026/2026-06-23-from-maple-to-mind-taps-new-vermont-law-puts-neurotech-on-notice",
+   "title": "From Maple to Mind Taps: New Vermont Law Puts Neurotech on Notice",
+   "publisher": "Cooley",
+   "date": "2026-06-23",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Page fetched on 2026-10-20 and the cited statement read on the page.",
+   "used_for": "Vermont S.71 classifies neural data (CNS) as sensitive data, effective 2028-01-01; H.814 adopted 2026-05-18 is a non-binding study bill",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-MIND-ACT",
+   "url": "https://www.congress.gov/119/bills/s2925/BILLS-119s2925is.htm",
+   "title": "S. 2925, Management of Individuals' Neural Data Act of 2025 (MIND Act), introduced",
+   "publisher": "US Congress",
+   "date": "2025-09-29",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Read in a dated secondary source on 2026-10-20; primary text not retrieved in this pass. Bill text URL returned by search; tracker shows no action after introduction.",
+   "used_for": "Federal status: introduced, referred to Senate Commerce; no committee action found",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-UNESCO-NEUROTECH",
+   "url": "https://unesco.org.uk/news/unesco-adopts-first-global-framework-on-neurotechnology-ethics",
+   "title": "UNESCO adopts first global framework on neurotechnology ethics",
+   "publisher": "UK National Commission for UNESCO",
+   "date": "2025-11-18",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Read in a dated secondary source on 2026-10-20; primary text not retrieved in this pass.",
+   "used_for": "Recommendation on the Ethics of Neurotechnology adopted 2025-11-12, non-binding",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-UN-A81351",
+   "url": "https://news.un.org/en/story/2026/10/1168609",
+   "title": "Could your brain data be used against you? UN calls for limits on neurotechnology",
+   "publisher": "UN News",
+   "date": "2026-10-15",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Page fetched on 2026-10-20 and the cited statement read on the page.",
+   "used_for": "Secretary-General report A/81/351: neural data as uniquely sensitive; calls for prohibitions on coercive uses",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-GIRARDI-EMOTIV",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10929545/",
+   "title": "Chilean Supreme Court ruling on the protection of brain activity: neurorights, personal data protection, and neurodata",
+   "publisher": "Frontiers in Psychology (PMC)",
+   "date": "2024",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Read in a dated secondary source on 2026-10-20; primary text not retrieved in this pass.",
+   "used_for": "Supreme Court of Chile, 2023-08-09, Girardi v. Emotiv: consent violation, deletion ordered. Case number differs between sources and is not stated",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-NRF-2024",
+   "url": "https://perseus-strategies.com/wp-content/uploads/FINAL_Consumer_Neurotechnology_Report_Neurorights_Foundation_April-1-3.pdf",
+   "title": "Safeguarding Brain Data: Assessing the Privacy Practices of Consumer Neurotechnology Companies",
+   "publisher": "Neurorights Foundation",
+   "date": "2024-04",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Read in a dated secondary source on 2026-10-20; primary text not retrieved in this pass. Figures cross-read in STAT News 2024-04-17.",
+   "used_for": "Policy review of 30 consumer neurotech companies: 29 of 30 have access to brain data with no meaningful limits",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-NEURALINK-VDP",
+   "url": "https://neuralink.com/.well-known/security.txt",
+   "title": "Neuralink security.txt and vulnerability disclosure program",
+   "publisher": "Neuralink",
+   "date": "security.txt Expires 2027-01-01",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "security.txt fetched 2026-10-20: Contact vulnerability-disclosure mailbox, Policy https://neuralink.com/vulnerability-disclosure/. Policy scope not read (page is script-rendered)",
+   "used_for": "Posture correction: Neuralink publishes a disclosure channel; datalake records none_published",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-BSCI-PSIRT",
+   "url": "https://www.bostonscientific.com/en-US/customer-service/product-security.html",
+   "title": "Product Security",
+   "publisher": "Boston Scientific",
+   "date": "undated",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Page fetched on 2026-10-20 and the cited statement read on the page. Page title 'Product Security'; page text mentions disclosure.",
+   "used_for": "Posture correction: corporate product-security disclosure page",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-ABBOTT-PSIRT",
+   "url": "https://www.abbott.com/policies/cybersecurity.html",
+   "title": "Cybersecurity",
+   "publisher": "Abbott",
+   "date": "undated",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Page fetched on 2026-10-20 and the cited statement read on the page. Page title 'Cybersecurity'; page text mentions disclosure.",
+   "used_for": "Posture correction: corporate product-security disclosure page",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-MARTINOVIC-2012",
+   "url": "https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/martinovic",
+   "title": "On the Feasibility of Side-Channel Attacks with Brain-Computer Interfaces",
+   "publisher": "USENIX Security 2012, pp. 143-158",
+   "date": "2012-08",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Page fetched on 2026-10-20 and the cited statement read on the page. Title, authors and venue matched on the USENIX proceedings page.",
+   "used_for": "Research evidence for the State of BCI Security",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-FRANK-2017",
+   "url": "https://doi.org/10.1145/3139550.3139559",
+   "title": "Using EEG-Based BCI Devices to Subliminally Probe for Private Information",
+   "publisher": "ACM WPES 2017",
+   "date": "2017-10-30",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Crossref REST API api.crossref.org/works/{DOI} on 2026-10-20; title, first author, venue and year matched.",
+   "used_for": "Research evidence for the State of BCI Security",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-ZHANG-WU-2019",
+   "url": "https://doi.org/10.1109/TNSRE.2019.2908955",
+   "title": "On the Vulnerability of CNN Classifiers in EEG-Based BCIs",
+   "publisher": "IEEE TNSRE",
+   "date": "2019-05",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Crossref REST API api.crossref.org/works/{DOI} on 2026-10-20; title, first author, venue and year matched.",
+   "used_for": "Research evidence for the State of BCI Security",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-MENG-2023",
+   "url": "https://doi.org/10.1109/TNSRE.2023.3273214",
+   "title": "EEG-Based Brain-Computer Interfaces are Vulnerable to Backdoor Attacks",
+   "publisher": "IEEE TNSRE",
+   "date": "2023",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Crossref REST API api.crossref.org/works/{DOI} on 2026-10-20; title, first author, venue and year matched.",
+   "used_for": "Research evidence for the State of BCI Security",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-MARIN-2018",
+   "url": "https://doi.org/10.1145/3176258.3176310",
+   "title": "Securing Wireless Neurostimulators",
+   "publisher": "ACM CODASPY 2018",
+   "date": "2018-03-13",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Crossref REST API api.crossref.org/works/{DOI} on 2026-10-20; title, first author, venue and year matched.",
+   "used_for": "Research evidence for the State of BCI Security",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-ARMENGOL-2023",
+   "url": "https://doi.org/10.1145/3605758.3623497",
+   "title": "Brain-Hack: Remotely Injecting False Brain-Waves with RF to Take Control of a Brain-Computer Interface",
+   "publisher": "ACM CPSIoTSec 2023",
+   "date": "2023-11-26",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Crossref REST API api.crossref.org/works/{DOI} on 2026-10-20; title, first author, venue and year matched.",
+   "used_for": "Research evidence for the State of BCI Security",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-PYCROFT-2016",
+   "url": "https://doi.org/10.1016/j.wneu.2016.05.010",
+   "title": "Brainjacking: Implant Security Issues in Invasive Neuromodulation",
+   "publisher": "World Neurosurgery",
+   "date": "2016-08",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Crossref REST API api.crossref.org/works/{DOI} on 2026-10-20; title, first author, venue and year matched.",
+   "used_for": "Research evidence for the State of BCI Security",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-DENNING-2009",
+   "url": "https://doi.org/10.3171/2009.4.FOCUS0985",
+   "title": "Neurosecurity: security and privacy for neural devices",
+   "publisher": "Neurosurgical Focus",
+   "date": "2009-07",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Crossref REST API api.crossref.org/works/{DOI} on 2026-10-20; title, first author, venue and year matched.",
+   "used_for": "Research evidence for the State of BCI Security",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-SCHRODER-2025",
+   "url": "https://doi.org/10.1007/s12152-025-09607-3",
+   "title": "Cyber Risks to Next-Gen Brain-Computer Interfaces: Analysis and Recommendations",
+   "publisher": "Neuroethics 18, 34",
+   "date": "2025-07-04",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Crossref REST API api.crossref.org/works/{DOI} on 2026-10-20; title, first author, venue and year matched.",
+   "used_for": "Research evidence for the State of BCI Security",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-SANDBRINK-2026",
+   "url": "https://doi.org/10.1038/s43856-026-01797-y",
+   "title": "Advancing data protections for implantable brain-computer interfaces",
+   "publisher": "Communications Medicine",
+   "date": "2026-07-27",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Crossref REST API api.crossref.org/works/{DOI} on 2026-10-20; title, first author, venue and year matched.",
+   "used_for": "Research evidence for the State of BCI Security",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  },
+  {
+   "id": "SEC-SAYAH-2026",
+   "url": "https://doi.org/10.1016/j.csi.2026.104155",
+   "title": "Adversarial attacks and defenses in EEG based Brain Computer Interfaces: A comprehensive survey and future directions",
+   "publisher": "Computer Standards & Interfaces",
+   "date": "2026-08",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED",
+   "verification_method": "Crossref REST API api.crossref.org/works/{DOI} on 2026-10-20; title, first author, venue and year matched.",
+   "used_for": "Research evidence for the State of BCI Security",
+   "collected_for": [
+    "state-of-bci-security-2026"
+   ]
+  }
+ ],
+ "items": [
+  {
+   "id": "SECITEM-CVE-2017-2852",
+   "category": "cve",
+   "title": "Natus Xltek EEG software",
+   "date": "2018-06-01",
+   "source_ids": [
+    "SEC-CVE-2017-2852"
+   ],
+   "evidence_class": "validated",
+   "reason": "A published CVE record against a shipped neural-device product. Validated means a disclosed, recorded vulnerability, not observed exploitation.",
+   "datalake_trace": "cves | where cve_id == 'CVE-2017-2852'"
+  },
+  {
+   "id": "SECITEM-CVE-2017-2853",
+   "category": "cve",
+   "title": "Natus Xltek NeuroWorks 8: stack buffer overflow via crafted network packet, code execution",
+   "date": "2018-04-05",
+   "source_ids": [
+    "SEC-CVE-2017-2853"
+   ],
+   "evidence_class": "validated",
+   "reason": "A published CVE record against a shipped neural-device product. Validated means a disclosed, recorded vulnerability, not observed exploitation.",
+   "datalake_trace": "cves | where cve_id == 'CVE-2017-2853'"
+  },
+  {
+   "id": "SECITEM-CVE-2017-2867",
+   "category": "cve",
+   "title": "Natus Xltek NeuroWorks 8 (SavePatientMontage)",
+   "date": "2018-04-05",
+   "source_ids": [
+    "SEC-CVE-2017-2867"
+   ],
+   "evidence_class": "validated",
+   "reason": "A published CVE record against a shipped neural-device product. Validated means a disclosed, recorded vulnerability, not observed exploitation.",
+   "datalake_trace": "cves | where cve_id == 'CVE-2017-2867'"
+  },
+  {
+   "id": "SECITEM-CVE-2017-2868",
+   "category": "cve",
+   "title": "Natus Xltek NeuroWorks 8 (NewProducerStream)",
+   "date": "2018-04-05",
+   "source_ids": [
+    "SEC-CVE-2017-2868"
+   ],
+   "evidence_class": "validated",
+   "reason": "A published CVE record against a shipped neural-device product. Validated means a disclosed, recorded vulnerability, not observed exploitation.",
+   "datalake_trace": "cves | where cve_id == 'CVE-2017-2868'"
+  },
+  {
+   "id": "SECITEM-CVE-2017-2869",
+   "category": "cve",
+   "title": "Natus Xltek NeuroWorks 8 (OpenProducer)",
+   "date": "2018-04-05",
+   "source_ids": [
+    "SEC-CVE-2017-2869"
+   ],
+   "evidence_class": "validated",
+   "reason": "A published CVE record against a shipped neural-device product. Validated means a disclosed, recorded vulnerability, not observed exploitation.",
+   "datalake_trace": "cves | where cve_id == 'CVE-2017-2869'"
+  },
+  {
+   "id": "SECITEM-CVE-2023-25931",
+   "category": "cve",
+   "title": "Medtronic Pelvic Health clinician apps on the Smart Programmer: password weakness",
+   "date": "2023-03-01",
+   "source_ids": [
+    "SEC-CVE-2023-25931"
+   ],
+   "evidence_class": "validated",
+   "reason": "A published CVE record against a shipped neural-device product. Validated means a disclosed, recorded vulnerability, not observed exploitation.",
+   "datalake_trace": "cves | where cve_id == 'CVE-2023-25931'"
+  },
+  {
+   "id": "SECITEM-CVE-2023-47800",
+   "category": "cve",
+   "title": "Natus NeuroWorks and SleepWorks before 8.4 GMA3: default SQL Server sa password",
+   "date": "2023-11-10",
+   "source_ids": [
+    "SEC-CVE-2023-47800"
+   ],
+   "evidence_class": "validated",
+   "reason": "A published CVE record against a shipped neural-device product. Validated means a disclosed, recorded vulnerability, not observed exploitation.",
+   "datalake_trace": "cves | where cve_id == 'CVE-2023-47800'"
+  },
+  {
+   "id": "SECITEM-CVE-2023-49914",
+   "category": "cve",
+   "title": "InteraXon Muse 2: RF carrier modulated by a false brain wave produces a misleading app report",
+   "date": "2023-12-02",
+   "source_ids": [
+    "SEC-CVE-2023-49914"
+   ],
+   "evidence_class": "validated",
+   "reason": "A published CVE record against a shipped neural-device product. Validated means a disclosed, recorded vulnerability, not observed exploitation.",
+   "datalake_trace": "cves | where cve_id == 'CVE-2023-49914'"
+  },
+  {
+   "id": "SECITEM-CVE-2026-2671",
+   "category": "cve",
+   "title": "Mendi Neurofeedback Headset V4: cleartext BLE transmission (CVSS 3.1 3.1, CNA VulDB; vendor did not respond)",
+   "date": "2026-03-07",
+   "source_ids": [
+    "SEC-CVE-2026-2671"
+   ],
+   "evidence_class": "validated",
+   "reason": "A published CVE record against a shipped neural-device product. Validated means a disclosed, recorded vulnerability, not observed exploitation.",
+   "datalake_trace": "cves | where cve_id == 'CVE-2026-2671'"
+  },
+  {
+   "id": "SECITEM-CVE-2026-18844",
+   "category": "cve",
+   "title": "Pulsetto Vagus Nerve Stimulator: undisclosed unauthenticated BLE commands (CWE-912, CVSS 3.1 8.1)",
+   "date": "2026-08-11",
+   "source_ids": [
+    "SEC-CVE-2026-18844"
+   ],
+   "evidence_class": "validated",
+   "reason": "A published CVE record against a shipped neural-device product. Validated means a disclosed, recorded vulnerability, not observed exploitation.",
+   "datalake_trace": "cves | where cve_id == 'CVE-2026-18844'"
+  },
+  {
+   "id": "SECITEM-LSL-TRANSPORT",
+   "category": "advisory",
+   "title": "Lab Streaming Layer transport has no encryption, authentication or integrity checking",
+   "date": "2026-02-18",
+   "source_ids": [
+    "SEC-LIBLSL-262",
+    "SEC-SECURELSL"
+   ],
+   "evidence_class": "validated",
+   "reason": "Maintainer-acknowledged design characteristic of a widely used neural-data streaming library; a mitigation (Secure LSL) is published. No CVE was assigned. Qinnovate raised the issue: disclose as a conflict of interest.",
+   "datalake_trace": "policy | where event has 'liblsl'"
+  },
+  {
+   "id": "SECITEM-KEV-NONE",
+   "category": "incident",
+   "title": "No mapped CVE appears in the CISA Known Exploited Vulnerabilities catalog",
+   "date": "2026-10-20",
+   "source_ids": [
+    "SEC-KEV-20261020",
+    "SEC-ICSMA-26-223-02"
+   ],
+   "evidence_class": "validated",
+   "reason": "Measured absence: 0 of 107 mapped CVEs in KEV v2026.10.20; CISA reports no known public exploitation for Pulsetto. Absence of recorded exploitation is not evidence of security.",
+   "datalake_trace": "cves | count"
+  },
+  {
+   "id": "SECITEM-INCIDENTS-NONE",
+   "category": "incident",
+   "title": "No publicly confirmed malicious compromise of a BCI or neural-data product was found",
+   "date": "2026-10-20",
+   "source_ids": [
+    "SEC-KEV-20261020"
+   ],
+   "evidence_class": "validated",
+   "reason": "Search scope: NVD, CISA ICS medical advisories, KEV, web news for 2025-2026. One vendor-blog claim of a February 2026 CISA advisory naming three BCI makers could not be found at CISA and is excluded.",
+   "datalake_trace": null
+  },
+  {
+   "id": "SECITEM-GIRARDI",
+   "category": "neurorights_case",
+   "title": "Supreme Court of Chile, Girardi v. Emotiv: consumer EEG data processed without valid consent",
+   "date": "2023-08-09",
+   "source_ids": [
+    "SEC-GIRARDI-EMOTIV"
+   ],
+   "evidence_class": "validated",
+   "reason": "Final court ruling; a privacy and consent finding, not a security breach.",
+   "datalake_trace": "companies | where name == 'Emotiv'"
+  },
+  {
+   "id": "SECITEM-NRF-AUDIT",
+   "category": "research_measurement",
+   "title": "Neurorights Foundation review of 30 consumer neurotech privacy policies",
+   "date": "2024-04",
+   "source_ids": [
+    "SEC-NRF-2024"
+   ],
+   "evidence_class": "validated",
+   "reason": "Published systematic policy review with stated method; measures stated practice, not technical security.",
+   "datalake_trace": null
+  },
+  {
+   "id": "SECITEM-MARTINOVIC",
+   "category": "research_attack",
+   "title": "P300 side channel leaks private information through consumer EEG",
+   "date": "2012",
+   "source_ids": [
+    "SEC-MARTINOVIC-2012"
+   ],
+   "evidence_class": "validated",
+   "reason": "Demonstrated in a lab study using inexpensive consumer EEG BCI devices (per the abstract).",
+   "datalake_trace": null
+  },
+  {
+   "id": "SECITEM-FRANK",
+   "category": "research_attack",
+   "title": "Subliminal probing for private information with EEG-based BCIs",
+   "date": "2017",
+   "source_ids": [
+    "SEC-FRANK-2017"
+   ],
+   "evidence_class": "validated",
+   "reason": "Lab demonstration with human participants.",
+   "datalake_trace": null
+  },
+  {
+   "id": "SECITEM-MARIN",
+   "category": "research_attack",
+   "title": "Wireless protocol of an implantable neurostimulator reverse-engineered",
+   "date": "2018",
+   "source_ids": [
+    "SEC-MARIN-2018"
+   ],
+   "evidence_class": "validated",
+   "reason": "Lab demonstration on real neurostimulator hardware; authors propose a countermeasure.",
+   "datalake_trace": null
+  },
+  {
+   "id": "SECITEM-ARMENGOL",
+   "category": "research_attack",
+   "title": "RF injection of false brain waves into a consumer EEG headset",
+   "date": "2023",
+   "source_ids": [
+    "SEC-ARMENGOL-2023",
+    "SEC-CVE-2023-49914"
+   ],
+   "evidence_class": "validated",
+   "reason": "Lab demonstration that produced CVE-2023-49914.",
+   "datalake_trace": null
+  },
+  {
+   "id": "SECITEM-ADVERSARIAL-ML",
+   "category": "research_attack",
+   "title": "Adversarial and backdoor attacks on EEG decoders",
+   "date": "2019-2023",
+   "source_ids": [
+    "SEC-ZHANG-WU-2019",
+    "SEC-MENG-2023"
+   ],
+   "evidence_class": "validated",
+   "reason": "Demonstrated on recorded EEG datasets (in silico). Validated as a decoder weakness; not demonstrated against a deployed clinical BCI.",
+   "datalake_trace": null
+  },
+  {
+   "id": "SECITEM-BRAINJACKING",
+   "category": "research_threat_model",
+   "title": "Brainjacking: attack scenarios for implanted neuromodulation",
+   "date": "2016",
+   "source_ids": [
+    "SEC-PYCROFT-2016"
+   ],
+   "evidence_class": "theoretical",
+   "reason": "Review and threat analysis; scenarios are argued, not demonstrated on a neural implant in the paper.",
+   "datalake_trace": null
+  },
+  {
+   "id": "SECITEM-DENNING",
+   "category": "research_threat_model",
+   "title": "Neurosecurity defined for neural devices",
+   "date": "2009",
+   "source_ids": [
+    "SEC-DENNING-2009"
+   ],
+   "evidence_class": "theoretical",
+   "reason": "Framing paper; no attack demonstration.",
+   "datalake_trace": null
+  },
+  {
+   "id": "SECITEM-SCHRODER",
+   "category": "research_threat_model",
+   "title": "Cyber risks to next-generation BCIs and recommendations to regulators",
+   "date": "2025",
+   "source_ids": [
+    "SEC-SCHRODER-2025"
+   ],
+   "evidence_class": "theoretical",
+   "reason": "Analysis and recommendations (non-surgical updates, strong authentication, encryption, minimal connectivity); no new demonstration.",
+   "datalake_trace": null
+  },
+  {
+   "id": "SECITEM-SANDBRINK",
+   "category": "governance_analysis",
+   "title": "Five gaps in data protection for implantable BCIs under HIPAA and GDPR",
+   "date": "2026-07-27",
+   "source_ids": [
+    "SEC-SANDBRINK-2026"
+   ],
+   "evidence_class": "not_applicable",
+   "reason": "Legal and policy analysis; evidence class applies to threats, not to legal arguments.",
+   "datalake_trace": null
+  },
+  {
+   "id": "SECITEM-FDA-2026",
+   "category": "regulatory",
+   "title": "FDA premarket cybersecurity guidance revised to align with the Quality Management System Regulation",
+   "date": "2026-02",
+   "source_ids": [
+    "SEC-FDA-PREMARKET-2026",
+    "SEC-FDA-PREMARKET-2025"
+   ],
+   "evidence_class": "not_applicable",
+   "reason": "Regulatory status: final guidance in force. Section 524B premarket cybersecurity requirements apply to cyber devices since 2023-03-29.",
+   "datalake_trace": "policy | where jurisdiction has 'USA (federal)'"
+  },
+  {
+   "id": "SECITEM-CRA",
+   "category": "regulatory",
+   "title": "EU Cyber Resilience Act vulnerability and incident reporting in force",
+   "date": "2026-09-11",
+   "source_ids": [
+    "SEC-CRA-REPORTING"
+   ],
+   "evidence_class": "not_applicable",
+   "reason": "Regulatory status: in force. Inferred, not confirmed: consumer neurotech without a medical intended purpose falls under the CRA, while MDR medical devices are excluded.",
+   "datalake_trace": null
+  },
+  {
+   "id": "SECITEM-AIACT",
+   "category": "regulatory",
+   "title": "EU AI Act high-risk deadlines postponed",
+   "date": "2026-05-27",
+   "source_ids": [
+    "SEC-AIACT-OMNIBUS"
+   ],
+   "evidence_class": "not_applicable",
+   "reason": "Regulatory status: Annex III 2027-12-02, Annex I 2028-08-02. Adoption reference not confirmed at EUR-Lex.",
+   "datalake_trace": null
+  },
+  {
+   "id": "SECITEM-US-STATES",
+   "category": "neurorights_law",
+   "title": "Five US states treat neural data as sensitive data; no federal law",
+   "date": "2026-06-23",
+   "source_ids": [
+    "SEC-FPF-NEURAL-DATA",
+    "SEC-COOLEY-VERMONT",
+    "SEC-MIND-ACT"
+   ],
+   "evidence_class": "not_applicable",
+   "reason": "Enacted: Colorado, California, Montana, Connecticut, Vermont (Vermont effective 2028-01-01). Federal MIND Act introduced 2025-09-29, no action found.",
+   "datalake_trace": "neurorights"
+  },
+  {
+   "id": "SECITEM-UN",
+   "category": "neurorights_law",
+   "title": "UNESCO Recommendation (2025-11-12) and UN Secretary-General report A/81/351 (2026-10-15)",
+   "date": "2026-10-15",
+   "source_ids": [
+    "SEC-UNESCO-NEUROTECH",
+    "SEC-UN-A81351"
+   ],
+   "evidence_class": "not_applicable",
+   "reason": "Non-binding international instruments.",
+   "datalake_trace": null
+  }
+ ],
+ "corrections_proposed": [
+  {
+   "target": "policy_timeline[date=2024-09].event",
+   "was": "California AB 1008: neural data under CCPA",
+   "proposed": "California SB 1223 (neural data as sensitive personal information under the CCPA), effective 2025-01-01",
+   "source_ids": [
+    "SEC-FPF-NEURAL-DATA"
+   ]
+  },
+  {
+   "target": "policy_timeline[date=2026-01].event",
+   "was": "California SB 1223 neural data protections effective 2026-01",
+   "proposed": "SB 1223 took effect 2025-01-01",
+   "source_ids": [
+    "SEC-FPF-NEURAL-DATA"
+   ]
+  },
+  {
+   "target": "policy_timeline[date=2024-04].event",
+   "was": "Colorado SB 24-058",
+   "proposed": "Colorado HB 24-1058, effective 2024-08-07",
+   "source_ids": [
+    "SEC-FPF-NEURAL-DATA"
+   ]
+  },
+  {
+   "target": "policy_timeline[date=2024-10, Montana SB 214] and [date=2025-05]; research-registry legislation[id=montana-sb214]",
+   "was": "Montana SB 214 (2024) and a 2025-05 effective date",
+   "proposed": "No source found. Montana's neural-data law is SB 163, effective 2025-10-01. Remove or hold SB 214 until a source is found",
+   "source_ids": [
+    "SEC-FPF-NEURAL-DATA"
+   ]
+  },
+  {
+   "target": "policy_timeline[Minnesota HF 1370]; research-registry legislation[id=minnesota-hf1370].status",
+   "was": "active",
+   "proposed": "Not listed as enacted by FPF (2026-06-27 update) or Cooley (2026-06-23). Set status to unverified or proposed",
+   "source_ids": [
+    "SEC-FPF-NEURAL-DATA",
+    "SEC-COOLEY-VERMONT"
+   ]
+  },
+  {
+   "target": "policy_timeline[date=2025-03].event",
+   "was": "MIND Act introduced: Mental Integrity in the Digital Age",
+   "proposed": "MIND Act is the Management of Individuals' Neural Data Act, S. 2925, introduced 2025-09-29. No March 2025 introduction found",
+   "source_ids": [
+    "SEC-MIND-ACT"
+   ]
+  },
+  {
+   "target": "policy_timeline[date=2025-06, FDA]",
+   "was": "FDA updated postmarket cybersecurity guidance",
+   "proposed": "The 2025-06-27 update was the premarket guidance. Add the 2026-02 revision",
+   "source_ids": [
+    "SEC-FDA-PREMARKET-2025",
+    "SEC-FDA-PREMARKET-2026"
+   ]
+  },
+  {
+   "target": "policy_timeline[date=2025-08, EU AI Act]",
+   "was": "EU AI Act high-risk requirements take effect",
+   "proposed": "High-risk Annex III obligations now apply from 2027-12-02 (Annex I 2028-08-02)",
+   "source_ids": [
+    "SEC-AIACT-OMNIBUS"
+   ]
+  },
+  {
+   "target": "policy_timeline (additions)",
+   "was": null,
+   "proposed": "Add: Vermont S.71 (effective 2028-01-01); Connecticut SB 1295 effective 2026-07-01; EU CRA reporting 2026-09-11; UN A/81/351 2026-10-15; CVE-2026-18844 Pulsetto (CISA ICSMA-26-223-02)",
+   "source_ids": [
+    "SEC-COOLEY-VERMONT",
+    "SEC-FPF-NEURAL-DATA",
+    "SEC-CRA-REPORTING",
+    "SEC-UN-A81351",
+    "SEC-ICSMA-26-223-02"
+   ]
+  },
+  {
+   "target": "companies[name=Neuralink].security_posture",
+   "was": "none_published",
+   "proposed": "Publishes security.txt and a vulnerability disclosure program. Suggest a separate disclosure_channel field rather than overloading security_posture",
+   "source_ids": [
+    "SEC-NEURALINK-VDP"
+   ]
+  },
+  {
+   "target": "companies[name=Boston Scientific Neuromodulation | Abbott Neuromodulation | Medtronic DBS].security_posture",
+   "was": "none_published",
+   "proposed": "Corporate product-security disclosure pages exist (Boston Scientific, Abbott); Medtronic acts as a CVE Numbering Authority (CNA on CVE-2025-4386). Re-audit all 68 companies before publishing posture figures (last verified 2026-04-29)",
+   "source_ids": [
+    "SEC-BSCI-PSIRT",
+    "SEC-ABBOTT-PSIRT"
+   ]
+  },
+  {
+   "target": "companies[name=Natus Medical (Integra LifeSciences)].devices[0].cves_known",
+   "was": "4 CVEs",
+   "proposed": "Add CVE-2017-2852 and CVE-2023-47800 (already in cve-technique-mapping.json)",
+   "source_ids": [
+    "SEC-CVE-2017-2852",
+    "SEC-CVE-2023-47800"
+   ]
+  },
+  {
+   "target": "evidence-tier derivation: NEURAL_PRODUCT_CATEGORIES in src/scripts/migrate-populate-evidence-tier.py",
+   "was": "Implant Telemetry and Implant Gateway/Hub count as neural_product",
+   "proposed": "Those CVEs are in cardiac and insulin-pump products. 7 of 15 demonstrated_case techniques have no Neural/EEG Systems CVE; 5 of them would leave the validated group. Requires a maintainer decision; the report should state which definition its count uses",
+   "source_ids": []
+  },
+  {
+   "target": "src/lib/kql-tables.ts buildTechniques",
+   "was": "techniques table exposes status only",
+   "proposed": "Add evidence_tier so readers can reproduce the validated-versus-theoretical chart from the public tables",
+   "source_ids": []
+  },
+  {
+   "target": "datalake/cve-coverage-gaps.json",
+   "was": "total_techniques 176 (generated 2026-10-14)",
+   "proposed": "Regenerate against the 178-technique registrar",
+   "source_ids": []
+  },
+  {
+   "target": "Q1 2026 report, section 2.2",
+   "was": "4 published CVEs, all from a single product",
+   "proposed": "When Q1 was published, NVD already listed CVE-2017-2852, CVE-2023-47800 (Natus) and CVE-2023-49914 (InteraXon Muse 2). Publish an erratum",
+   "source_ids": [
+    "SEC-CVE-2017-2852",
+    "SEC-CVE-2023-47800",
+    "SEC-CVE-2023-49914"
+   ]
+  },
+  {
+   "target": "Q1 2026 report, section 2.1",
+   "was": "44 of 57 (77%) none published; rows sum to 55",
+   "proposed": "The datalake at Q1 (commit e0f5e8fd) recorded 49 of 57. Publish an erratum",
+   "source_ids": []
+  },
+  {
+   "target": "Q1 2026 report, section 2.3",
+   "was": "Of 52, only 6 CVE-backed: 81.25% blind",
+   "proposed": "6 of 52 gives 88.5%, not 81.25%. Publish an erratum",
+   "source_ids": []
+  }
+ ],
+ "excluded": [
+  {
+   "claim": "A February 2026 CISA advisory flagged three BCI manufacturers",
+   "seen_in": "vendor blogs (hive-project.com, rasec.app)",
+   "why_excluded": "No such advisory found on CISA's ICS medical advisories listing; the blogs cite no advisory ID."
+  },
+  {
+   "claim": "Glucobit Reframe app data breach (June 2026) as a neural-data incident",
+   "seen_in": "web search summary",
+   "why_excluded": "Primary report not retrieved; the app is not shown to collect neural signals."
+  }
+ ]
+}

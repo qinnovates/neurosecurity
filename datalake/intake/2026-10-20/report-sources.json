@@ -1,0 +1,229 @@
+{
+ "_meta": {
+  "batch": "2026-10-20",
+  "status": "Applied to the report dataset src/data/intel/state-of-bci-security-2026.json. No datalake/*.json source of truth was modified.",
+  "topic": "Sources first cited by the State of BCI Security 2026 report."
+ },
+ "sources": [
+  {
+   "id": "RPT-BRAINCO-2026",
+   "publisher": "Yicai Global",
+   "title": "China's BrainCo raises USD286 million, most for a brain chip developer outside the US",
+   "date": "2026-01-08",
+   "url": "https://www.yicaiglobal.com/news/chinas-brainco-raises-usd2863-million-in-largest-bci-funding-outside-the-us",
+   "verification_method": "Page fetched on 2026-10-20 and the cited facts read in the page text.",
+   "used_for": "CNY 2B (about $286.3M) round co-led by IDG Capital and Walden International.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-MERGE-TC",
+   "publisher": "TechCrunch",
+   "title": "OpenAI invests in Sam Altman's brain-computer interface startup Merge Labs",
+   "date": "2026-01-15",
+   "url": "https://techcrunch.com/2026/01/15/openai-invests-in-sam-altmans-brain-computer-interface-startup-merge-labs/",
+   "verification_method": "Page fetched on 2026-10-20 and the cited facts read in the page text.",
+   "used_for": "Seed round reported at $250M; OpenAI wrote the largest check. The datalake funding row records $252M.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-SCIENCE-MD",
+   "publisher": "MassDevice",
+   "title": "Science closes $230M Series C",
+   "date": "2026-03-05",
+   "url": "https://www.massdevice.com/science-closes-230m-series-c-bci/",
+   "verification_method": "Publisher blocks automated fetches or is paywalled; facts read from the search-index snapshot on 2026-10-20 and corroborated by at least one other outlet.",
+   "used_for": "Series C of $230M; about $490M raised in total. Publisher returns HTTP 403 to automated fetches.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-GESTALA-TC",
+   "publisher": "TechCrunch",
+   "title": "BCI startup Gestala raises $21 million for non-invasive ultrasound brain tech",
+   "date": "2026-03-11",
+   "url": "https://techcrunch.com/2026/03/11/bci-startup-gestala-raises-21-million-for-non-invasive-ultrasound-brain-tech/",
+   "verification_method": "Page fetched on 2026-10-20 and the cited facts read in the page text.",
+   "used_for": "CNY 150M angel round co-led by Guosheng Capital and Dalton Venture.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-STAIRMED-MD",
+   "publisher": "MassDevice",
+   "title": "Chinese BCI startup StairMed raises $72M",
+   "date": "2026-04",
+   "url": "https://www.massdevice.com/chinese-bci-startup-stairmed-72m-financing/",
+   "verification_method": "Publisher blocks automated fetches or is paywalled; facts read from the search-index snapshot on 2026-10-20 and corroborated by at least one other outlet.",
+   "used_for": "RMB 500M round led by Alibaba with Tencent. Announcement date is reported as March by some outlets and 2026-04-02 by the release. Publisher returns HTTP 403 to automated fetches.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-AXOFT-BW",
+   "publisher": "Business Wire via BioSpace",
+   "title": "Axoft secures $55M Series A to advance clinical trials globally",
+   "date": "2026-04-29",
+   "url": "https://www.biospace.com/press-releases/axoft-secures-55m-series-a-to-advance-clinical-trials-globally-for-its-bio-inspired-implantable-brain-computer-interface",
+   "verification_method": "Page fetched on 2026-10-20 and the cited facts read in the page text.",
+   "used_for": "Series A of $55M led by C.P. Group Innovation.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-NEUROSOFT-BW",
+   "publisher": "Business Wire via BioSpace",
+   "title": "Neurosoft Bioelectronics closes $7.5M oversubscribed seed round",
+   "date": "2026-05-20",
+   "url": "https://www.biospace.com/press-releases/neurosoft-bioelectronics-closes-7-5m-oversubscribed-seed-round-to-build-stretchable-and-scalable-brain-computer-interfaces",
+   "verification_method": "Page fetched on 2026-10-20 and the cited facts read in the page text.",
+   "used_for": "Seed of $7.5M led by Skybound Venture Capital.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-SABI-PR",
+   "publisher": "Sabi press release (WebDisclosure)",
+   "title": "Sabi raises $50 million seed round led by Khosla Ventures",
+   "date": "2026-10-09",
+   "url": "https://www.webdisclosure.com/press-release/sabi-raises-50-million-seed-round-led-by-khosla-ventures-to-put-a-brain-ai-interface-inside-a-baseball-cap-OZoCAUXee6B",
+   "verification_method": "Page fetched on 2026-10-20 and the cited facts read in the page text.",
+   "used_for": "Seed of $50M led by Khosla Ventures; non-invasive wearable.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-NEURACLE-BBG",
+   "publisher": "Bloomberg",
+   "title": "China approves first brain implant for commercial use",
+   "date": "2026-03-13",
+   "url": "https://www.bloomberg.com/news/articles/2026-03-13/china-approves-first-brain-implant-for-commercial-use",
+   "verification_method": "Publisher blocks automated fetches or is paywalled; facts read from the search-index snapshot on 2026-10-20 and corroborated by at least one other outlet.",
+   "used_for": "NMPA marketing approval for Neuracle's NEO epidural implant for adults with cervical spinal cord injury. Paywalled; corroborated by several outlets. Some sources class NEO as semi-invasive.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-PARADROMICS-BW",
+   "publisher": "Business Wire",
+   "title": "Paradromics and University of Michigan complete first Connexus BCI implantation for the FDA-approved Connect-One clinical study",
+   "date": "2026-06-17",
+   "url": "https://www.businesswire.com/news/home/20260617963732/en/Paradromics-and-University-of-Michigan-Complete-First-Connexus-BCI-Implantation-for-the-FDA-Approved-Connect-One-Clinical-Study",
+   "verification_method": "Publisher blocks automated fetches or is paywalled; facts read from the search-index snapshot on 2026-10-20 and corroborated by at least one other outlet.",
+   "used_for": "First implant in the Connect-One early feasibility study. Publisher returns HTTP 403 to automated fetches.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-PRIMA-CE",
+   "publisher": "Science Corporation",
+   "title": "Science Corp. announces European commercial launch of PRIMA",
+   "date": "2026-07-22",
+   "url": "https://science.xyz/news/ce-mark/",
+   "verification_method": "Page fetched on 2026-10-20 and the cited facts read in the page text.",
+   "used_for": "CE mark under the EU MDR issued by DEKRA; commercial availability in 30 European countries.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-PRIMA-CE-APPLICATION",
+   "publisher": "Science Corporation",
+   "title": "Science submits CE mark application for PRIMA retinal implant",
+   "date": "2025-06",
+   "url": "https://science.xyz/news/prima-ce-mark-application-submitted/",
+   "verification_method": "Publisher blocks automated fetches or is paywalled; facts read from the search-index snapshot on 2026-10-20 and corroborated by at least one other outlet.",
+   "used_for": "The June 2025 event was the CE mark application, not the grant.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-NEURALINK-21",
+   "publisher": "Reuters (syndicated by WHBL)",
+   "title": "Elon Musk's Neuralink says it has 21 participants enrolled in trials",
+   "date": "2026-01-28",
+   "url": "https://whbl.com/2026/01/28/elon-musks-neuralink-says-it-has-21-participants-enrolled-in-trials/",
+   "verification_method": "Page fetched on 2026-10-20 and the cited facts read in the page text.",
+   "used_for": "21 participants enrolled worldwide, per the company.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-FLOW-NVD",
+   "publisher": "NIST National Vulnerability Database",
+   "title": "CVE-2026-18164: Flow Neuroscience FL-100",
+   "date": "2026-08-13",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-18164",
+   "verification_method": "NVD API 2.0 single-record query on 2026-10-20.",
+   "used_for": "NVD API 2.0 query by cveId, totalResults 1; CNA ics-cert@hq.dhs.gov; CWE-798; CVSS 3.1 8.1, CVSS 4.0 7.2; adjacent (Bluetooth) attack vector.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-FLOW-ICSMA",
+   "publisher": "CISA",
+   "title": "ICSMA-26-225-01 Flow Neuroscience FL-100 (CSAF record)",
+   "date": "2026-08-13",
+   "url": "https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsma-26-225-01.json",
+   "verification_method": "Page fetched on 2026-10-20 and the cited facts read in the page text.",
+   "used_for": "Affects FL-100 and Halo FL-100 before July 2026 firmware; fix via app firmware update; not exploitable remotely; no known public exploitation reported to CISA.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-AB1883",
+   "publisher": "Fisher Phillips",
+   "title": "California bans AI tools that read employees' emotions or nervous system data",
+   "date": "2026-10-01",
+   "url": "https://www.fisherphillips.com/en/insights/insights/california-bans-ai-tools-that-read-employees-emotions-or-nervous-system-data.html",
+   "verification_method": "Page fetched on 2026-10-20 and the cited facts read in the page text.",
+   "used_for": "AB 1883 signed 2026-09-30, effective 2027-01-01; bars employer AI surveillance tools that infer emotional state or collect neural data, with exceptions.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-MINDMAZE-TXT",
+   "publisher": "MindMaze Therapeutics",
+   "title": "security.txt",
+   "date": "undated (Expires 2027-09-08)",
+   "url": "https://mindmazetherapeutics.com/.well-known/security.txt",
+   "verification_method": "Page fetched on 2026-10-20 and the cited facts read in the page text.",
+   "used_for": "RFC 9116 file with a security contact.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-ABBOTT-CVD",
+   "publisher": "Abbott",
+   "title": "Cybersecurity (product disclosure program)",
+   "date": "undated",
+   "url": "https://www.abbott.com/en-us/policies/cybersecurity",
+   "verification_method": "Page fetched on 2026-10-20 and the cited facts read in the page text.",
+   "used_for": "Product disclosure program for security researchers to report device vulnerabilities.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-DISCLOSURE-AUDIT",
+   "publisher": "Qinnovate",
+   "title": "Disclosure-channel audit of 68 tracked BCI companies",
+   "date": "2026-10-20",
+   "url": "https://github.com/qinnovates/neurosecurity/blob/main/datalake/intake/2026-10-20/disclosure-channel-audit.json",
+   "verification_method": "Qinnovate measurement; the raw output is the cited file.",
+   "used_for": "Automated probe plus manual review, recorded in this batch.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  },
+  {
+   "id": "RPT-ANNOUNCEMENT-AUDIT",
+   "publisher": "Qinnovate",
+   "title": "Security language in 2026 BCI funding and clinical announcements",
+   "date": "2026-10-20",
+   "url": "https://github.com/qinnovates/neurosecurity/blob/main/datalake/intake/2026-10-20/announcement-security-language.json",
+   "verification_method": "Qinnovate measurement; the raw output is the cited file.",
+   "used_for": "Article text scanned for security terms, page chrome excluded by manual review, recorded in this batch.",
+   "accessed": "2026-10-20",
+   "verification": "VERIFIED"
+  }
+ ]
+}
