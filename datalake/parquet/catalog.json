@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-20T07:42:14.775795+00:00",
+    "generated": "2026-10-21T23:24:55.837505+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
-    "total_datasets": 41,
-    "total_rows": 24490
+    "total_datasets": 40,
+    "total_rows": 24567
   },
   "datasets": {
     "techniques": {
@@ -52,34 +52,6 @@
       "sha256": "0cfdb2348693ff29ed5c19e65bcb642b24fdc5c58a1ece9bbf798431534158fe",
       "compression": "zstd",
       "source": "datalake/parquet/techniques.parquet"
-    },
-    "variants": {
-      "rows": 1,
-      "columns": 18,
-      "column_names": [
-        "id",
-        "alias",
-        "name",
-        "parent",
-        "parent_name",
-        "differs_in",
-        "inherits_niss",
-        "status",
-        "peer_review_status",
-        "niss_scoring_state",
-        "niss_unscored_reason",
-        "niss_inherited_from",
-        "description",
-        "conditions",
-        "sources",
-        "defensive_sources",
-        "related_ids",
-        "notes"
-      ],
-      "size_bytes": 13001,
-      "sha256": "54eadc5b0219a51e3aa1cc4808e23ac0ad36a973ed509988018139ec8e720720",
-      "compression": "zstd",
-      "source": "datalake/parquet/variants.parquet"
     },
     "technique_dsm": {
       "rows": 890,
@@ -427,8 +399,8 @@
         "disruption_effects",
         "confidence"
       ],
-      "size_bytes": 34238,
-      "sha256": "48a712c0db8cc02b7de3f416d7af2d1c0c953ef343c5918c21d143aa02449909",
+      "size_bytes": 34284,
+      "sha256": "47908dcae40aa8ac99984f6e3b6a8e4c0accab814e18f917f34c7116c8670848",
       "compression": "zstd",
       "source": "datalake/parquet/neuroendocrine.parquet"
     },
@@ -506,7 +478,7 @@
       "source": "datalake/parquet/receptors.parquet"
     },
     "cve_mappings": {
-      "rows": 107,
+      "rows": 108,
       "columns": 12,
       "column_names": [
         "cve_id",
@@ -522,8 +494,8 @@
         "verification",
         "note"
       ],
-      "size_bytes": 24785,
-      "sha256": "1990f4a79d55644b43e1a4f197c4b8c4ca81e09d36a62f2db5b6489bed159026",
+      "size_bytes": 25473,
+      "sha256": "c78a9e45a5d4703293077ff798ee8aabf2e041198cfafeb813c2dda66e1dec16",
       "compression": "zstd",
       "source": "datalake/parquet/cve_mappings.parquet"
     },
@@ -731,7 +703,7 @@
       "source": "datalake/parquet/hazards.parquet"
     },
     "intake_ledger": {
-      "rows": 237,
+      "rows": 314,
       "columns": 12,
       "column_names": [
         "id",
@@ -747,8 +719,8 @@
         "independent_review",
         "disposition"
       ],
-      "size_bytes": 59257,
-      "sha256": "0154f08eaeb88287ca421d7169cf2426f4e1cb33cc128fda79aa9eca02075450",
+      "size_bytes": 67312,
+      "sha256": "c8eb95876bcee71b91cbe826df8096d870932e44c26d24c6c8bd10ec113fbcc8",
       "compression": "zstd",
       "source": "datalake/parquet/intake_ledger.parquet"
     },

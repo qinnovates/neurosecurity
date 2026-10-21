@@ -576,22 +576,7 @@
    ]
   }
  },
- "staged_cves": [
-  {
-   "cve_id": "CVE-2026-18164",
-   "vendor": "Flow Neuroscience",
-   "product": "FL-100 and Halo FL-100 tDCS headset",
-   "published": "2026-08-13",
-   "cvss31": 8.1,
-   "cvss40": 7.2,
-   "device_group": "consumer_home",
-   "note": "Hard-coded credential (CWE-798). Within Bluetooth range only; fixed by firmware update; no known exploitation reported to CISA. Verified at NVD and CISA; staged for technique mapping.",
-   "source_ids": [
-    "RPT-FLOW-NVD",
-    "RPT-FLOW-ICSMA"
-   ]
-  }
- ],
+ "staged_cves": [],
  "neural_device_cve_groups": {
   "$comment": "Device group for each neural-device CVE in datalake/cve-technique-mapping.json (category 'Neural/EEG Systems'), keyed by vendor prefix of the product field.",
   "Natus": "clinical_software",
@@ -1067,6 +1052,13 @@
     "SEC-CVE-2026-18844",
     "SEC-ICSMA-26-223-02"
    ]
+  },
+  "CVE-2026-18164": {
+   "published": "2026-08-13",
+   "source_ids": [
+    "RPT-FLOW-NVD",
+    "RPT-FLOW-ICSMA"
+   ]
   }
  },
  "reproduce_queries": [
@@ -1081,9 +1073,9 @@
    "expected_count": 39
   },
   {
-   "label": "Neural-device CVEs mapped in the datalake (before the staged Flow CVE)",
+   "label": "Neural-device CVEs mapped in the datalake",
    "query": "cves | where category == \"Neural/EEG Systems\" | count",
-   "expected_count": 10
+   "expected_count": 11
   }
  ],
  "kev_check": {

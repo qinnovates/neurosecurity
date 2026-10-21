@@ -23,6 +23,8 @@ const vcColumns = vc.map((year) => ({ year: year.year, valueUsd: year.total_usd,
 const partialYears = vc.filter(isPartialYear).map((year) => year.year);
 const topFour = rounds.rounds.slice(0, 4).map((round) => round.company);
 const topFourList = `${topFour.slice(0, -1).join(', ')} and ${topFour[topFour.length - 1]}`;
+const announcements = report.announcement_audit;
+const securityMentions = announcements.mention_device_security === 0 ? 'None' : String(announcements.mention_device_security);
 ---
 <section id="capital" aria-labelledby="capital-heading" class="scroll-mt-24">
   <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Section 2</p>
@@ -77,7 +79,7 @@ const topFourList = `${topFour.slice(0, -1).join(', ')} and ${topFour[topFour.le
   </ol>
   <p class="mt-3 text-xs text-[var(--color-text-faint)]">
     The 2026 FDA decision that lets an implanted BCI connect to personal computing devices widens the attack surface: the implant's
-    data path now reaches general-purpose, internet-connected hardware. None of the ten 2026 announcements we could read in full
-    mentions device security (Section 3).
+    data path now reaches general-purpose, internet-connected hardware. {securityMentions} of the {announcements.readable} 2026 announcements we could read in full
+    mention{announcements.mention_device_security === 1 ? 's' : ''} device security (Section 3).
   </p>
 </section>

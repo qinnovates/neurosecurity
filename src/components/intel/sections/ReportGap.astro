@@ -40,7 +40,7 @@ const laws = report.us_state_neural_data_laws;
   </ChartFigure>
 
   <p class="max-w-3xl text-sm leading-relaxed text-[var(--color-text-muted)]">
-    {laws.count} US states have enacted laws that treat neural data as sensitive data: {laws.states.join(', ')}. Vermont's takes effect in 2028. There is no federal neural-data law; the {laws.federal_bill.name} was introduced in
+    At state level, {laws.count} US states have enacted laws that treat neural data as sensitive data: {laws.states.join(', ')}. Vermont's takes effect in 2028. There is no federal neural-data law; the {laws.federal_bill.name} was introduced in
     the Senate in September 2025 and referred to committee.<SourceLinks ids={[...laws.source_ids, ...laws.federal_bill.source_ids]} />
   </p>
 </section>

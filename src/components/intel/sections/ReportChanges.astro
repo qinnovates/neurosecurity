@@ -17,7 +17,7 @@ const deltas = [
   { metric: 'Companies tracked', before: String(q1.companies), after: String(model.companies), note: `${addedCompanies} companies added; no existing company's security-posture record changed.` },
   { metric: 'Tracked lifetime funding', before: `${formatUsdCompact(q1.funding_total_usd)} (${q1.funding_companies} cos.)`, after: `${formatUsdCompact(capital.totalUsd)} (${capital.companiesWithFunding} cos.)`, note: 'Company records only; 2026 rounds are counted separately in Figure 2.' },
   { metric: 'Threat-catalog entries', before: String(q1.techniques), after: String(evidence.total), note: `${q1.added_since_q1} added, ${q1.added_since_q1_theoretical_proposed} of them proposed (see Figure 6).` },
-  { metric: 'Neural-device CVEs', before: `${q1.neural_device_cves_in_nvd_at_q1} on record (Q1 said ${q1.neural_device_cves_reported_in_q1})`, after: String(cve.total), note: `${newCves} published since, including ${cve.staged} verified and staged for mapping. See correction Q1-E1.` },
+  { metric: 'Neural-device CVEs', before: `${q1.neural_device_cves_in_nvd_at_q1} on record (Q1 said ${q1.neural_device_cves_reported_in_q1})`, after: String(cve.total), note: `${newCves} published since${cve.staged > 0 ? `, including ${cve.staged} verified and staged for mapping` : ''}. See correction Q1-E1.` },
   { metric: 'No security documentation (dataset field)', before: `${q1.no_documentation_companies} of ${q1.companies} (${formatPercent(q1.no_documentation_companies / q1.companies)})`, after: `${model.postureNonePublished} of ${model.companies} (${formatPercent(model.postureNonePublished / model.companies)})`, note: 'Field last fully reviewed 29 Apr 2026. This edition adds a direct disclosure-channel check instead (Section 3).' },
 ];
 ---

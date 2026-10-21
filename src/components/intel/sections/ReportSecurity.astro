@@ -6,6 +6,7 @@ import StackedShareChart from '../StackedShareChart.astro';
 import CveDotPlot from '../CveDotPlot.astro';
 import SourceLinks from '../SourceLinks.astro';
 import type { ReportModel } from '@/lib/intel/bci-security-2026/report-model';
+import type { LegendEntry } from '../chart-types';
 import { CHANNEL_LEGEND, CHANNEL_SERIES } from './channel-series';
 import { formatReportDate } from '@/lib/intel/bci-security-2026/format';
 import { resolveSources } from '@/lib/intel/bci-security-2026/report-data';
@@ -24,6 +25,13 @@ const classRows = [
 ];
 const leaderSources = report.disclosure_audit.companies.filter((row) => row.status === 'found');
 const advisory = report.featured_advisory;
+const announcements = report.announcement_audit;
+const mentionsSecurity = announcements.mention_device_security === 0 ? 'none' : String(announcements.mention_device_security);
+const cveLegend: LegendEntry[] = [
+  { label: 'Clinical neurodiagnostic software', colorVar: '--viz-clinical', shape: 'circle' },
+  { label: 'Consumer or home device', colorVar: '--viz-consumer', shape: 'diamond' },
+  ...(cve.staged > 0 ? [{ label: 'Verified, staged for mapping', colorVar: '--viz-consumer', shape: 'ring' as const }] : []),
+];
 ---
 <section id="security" aria-labelledby="security-heading" class="scroll-mt-24">
   <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Section 3</p>
@@ -36,7 +44,7 @@ const advisory = report.featured_advisory;
   <h3 class="mt-6 text-lg font-semibold">Disclosure readiness</h3>
   <p class="mt-2 max-w-3xl text-sm leading-relaxed text-[var(--color-text-muted)]">
     On {formatReportDate(report.disclosure_audit.checked_on)} we checked all {model.companies} tracked companies for a public way to report a product
-    vulnerability: a security.txt file, a vulnerability disclosure program or a product-security page. We found one for {disclosure.all.found}.
+    vulnerability: a security.txt file, a vulnerability disclosure program or a product-security page. We found one for {disclosure.all.found} of them.
     Among the {disclosure.implantTotal} implant-class companies, {disclosure.implant.found} publish one, {disclosure.implant.none_found} had none we could find and{' '}
     {disclosure.implant.not_checked} could not be checked. Of the {disclosure.roundRecipients.length} tracked companies that raised a 2026 round,{' '}
     {disclosure.roundRecipientsWithChannel === 0 ? 'none' : disclosure.roundRecipientsWithChannel} had a channel we could find.
@@ -56,7 +64,7 @@ const advisory = report.featured_advisory;
 
   <div class="rounded-xl border border-[var(--color-border)] p-5">
     <h4 class="text-sm font-semibold">Companies that publish a disclosure channel</h4>
-    <p class="mt-1 text-xs text-[var(--color-text-faint)]">Named for doing the basic thing right. Each name links to the page we found.</p>
+    <p class="mt-1 text-xs text-[var(--color-text-faint)]">Each name links to the page we found.</p>
     <ul class="mt-3 grid gap-2 text-sm sm:grid-cols-2">
       {leaderSources.map((row) => resolveSources(row.source_ids ?? []).map((source) => (
         <li><a href={source.url} target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">{row.company}</a></li>
@@ -74,11 +82,7 @@ const advisory = report.featured_advisory;
 
   <ChartFigure id="figure-5" number={5} title="Neural-device CVEs by publication date and severity"
     takeaway={`Five 2018 CVEs sit in one clinical EEG product line; all ${cve.publishedThisYear} CVEs published in 2026 are in consumer or home stimulation and neurofeedback devices.`}
-    legend={[
-      { label: 'Clinical neurodiagnostic software', colorVar: '--viz-clinical', shape: 'circle' },
-      { label: 'Consumer or home device', colorVar: '--viz-consumer', shape: 'diamond' },
-      { label: 'Verified, staged for mapping', colorVar: '--viz-consumer', shape: 'ring' },
-    ]}
+    legend={cveLegend}
     sources={resolveSources([...report.kev_check.source_ids, ...advisory.source_ids])}
     datalakeNote={`Mapped CVEs: datalake/cve-technique-mapping.json, category "Neural/EEG Systems"; dates and scores from NVD.`}
   >
@@ -102,7 +106,7 @@ const advisory = report.featured_advisory;
       <ul class="mt-2 space-y-2 text-[var(--color-text-muted)]">
         <li>Lab Streaming Layer, a common research transport for EEG streams, has no encryption, authentication or integrity checking; the maintainer calls this a known design characteristic. Qinnovate raised the issue, so we have an interest.<SourceLinks ids={report.lsl_transport.source_ids} /></li>
         {report.corporate_incidents.map((incident) => (<li>{incident.company}, {formatReportDate(incident.date)}: {incident.label}<SourceLinks ids={incident.source_ids} /></li>))}
-        <li>Of {report.announcement_audit.readable} 2026 funding and clinical announcements we could read in full, {report.announcement_audit.mention_device_security} mention device cybersecurity.<SourceLinks ids={report.announcement_audit.source_ids} /></li>
+        <li>Of the {announcements.readable} funding and clinical announcements from 2026 that we could read in full, {mentionsSecurity} mention{announcements.mention_device_security === 1 ? 's' : ''} device cybersecurity.<SourceLinks ids={announcements.source_ids} /></li>
       </ul>
     </div>
   </div>
