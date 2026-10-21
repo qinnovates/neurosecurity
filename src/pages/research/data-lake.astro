@@ -100,7 +100,10 @@ const peFirms = investorIntel.pe_firms || [];
 const intelDefense = investorIntel.intelligence_agencies_defense || [];
 const govGrants = landscape.market_data?.government_grants || [];
 const acquisitions = landscape.market_data?.acquisition_history || [];
-const totalTrackedFunding = landscape.market_data?.total_funding_tracked_usd || 0;
+// Computed from companies[].funding_total_usd, not market_data.total_funding_tracked_usd:
+// that field was a stale hand-entered figure ($4.8B, copied from the unrelated 2025
+// partial-year VC-tracker row) that undercounted the real company-level sum (~$5.96B).
+const totalTrackedFunding = companies.reduce((sum: number, company: any) => sum + (company.funding_total_usd || 0), 0);
 const marketForecasts = landscape.market_data?.market_size_estimates || [];
 const fundingRounds = landscape.market_data?.major_funding_rounds || [];
 const vcDeals = landscape.market_data?.vc_aggregate_by_year || [];

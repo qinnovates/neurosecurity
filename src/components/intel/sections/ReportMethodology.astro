@@ -1,0 +1,75 @@
+---
+// Methodology, definitions, conflicts of interest, reproduction queries and the full
+// source list. Every source here has a row in the datalake intake ledger.
+import type { ReportModel } from '@/lib/intel/bci-security-2026/report-model';
+import { collectCitedSourceIds, resolveSources } from '@/lib/intel/bci-security-2026/report-data';
+import { formatReportDate } from '@/lib/intel/bci-security-2026/format';
+
+interface Props {
+  model: ReportModel;
+}
+
+const { model } = Astro.props;
+const { report, meta } = model;
+const cited = resolveSources(collectCitedSourceIds(report)).sort((a, b) => a.publisher.localeCompare(b.publisher));
+const DATA_ROOT = 'https://github.com/qinnovates/neurosecurity/blob/main/';
+const DEFINITIONS = [
+  { term: 'Disclosure channel', text: report.disclosure_audit.method },
+  { term: 'Demonstrated', text: 'A TARA entry whose evidence.tier is demonstrated_lab or demonstrated_case. The strict reading used in headlines also drops demonstrated_case entries whose cited case is not in a neural device. Replicated means validated_rct or validated_replication.' },
+  { term: 'Tracked funding', text: 'The sum of companies[].funding_total_usd in datalake/bci-landscape.json: lifetime disclosed funding, not 2026 activity. 2026 rounds are counted separately and only when confirmed at a dated source.' },
+  { term: 'Neural-device CVE', text: 'A CVE mapped in datalake/cve-technique-mapping.json with category "Neural/EEG Systems". CVEs in pacemakers, insulin pumps and their monitors are excluded.' },
+  { term: 'Implant class', text: 'Companies typed invasive or semi-invasive in the datalake.' },
+];
+---
+<section id="methodology" aria-labelledby="methodology-heading" class="scroll-mt-24">
+  <h2 id="methodology-heading" class="text-2xl font-bold font-[family-name:var(--font-heading)]">Methodology and sources</h2>
+  <p class="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--color-text-muted)]">
+    Data: the Qinnovate public datalake at commit {meta.datalake_commit}, plus sources dated up to {formatReportDate(meta.coverage_end)}. Each source below
+    was checked between 6 and 20 October 2026, opened directly or, where the publisher blocks automated access, read through a search-index
+    snapshot and corroborated. Access dates and methods are recorded in the <a href={`${DATA_ROOT}datalake/intake/ledger.json`} target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">intake ledger</a>{' '}
+    (batch 2026-10-20). The report's own dataset is <a href={`${DATA_ROOT}src/data/intel/state-of-bci-security-2026.json`} target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">state-of-bci-security-2026.json</a>.
+    Unknowns are stated as unknown.
+  </p>
+
+  <dl class="mt-5 grid gap-4 text-sm md:grid-cols-2">
+    {DEFINITIONS.map((definition) => (
+      <div class="rounded-xl border border-[var(--color-border)] p-4">
+        <dt class="font-semibold">{definition.term}</dt>
+        <dd class="mt-1 text-[var(--color-text-muted)]">{definition.text}</dd>
+      </div>
+    ))}
+  </dl>
+
+  <h3 class="mt-8 text-base font-semibold">Limits</h3>
+  <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-[var(--color-text-muted)]">
+    <li>{report.disclosure_audit.limits}</li>
+    <li>The company tracker covers {model.companies} companies, not the whole market; Chinese companies and stealth programs are under-represented.</li>
+    <li>The company security-posture field was last fully reviewed on {formatReportDate(meta.posture_last_full_review)}; the disclosure-channel check is dated {formatReportDate(report.disclosure_audit.checked_on)}.</li>
+    <li>QIF, TARA and NISS are a proposed research framework: unvalidated, not a standard and not endorsed by any standards body.</li>
+  </ul>
+
+  <h3 class="mt-8 text-base font-semibold">Conflicts of interest</h3>
+  <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-[var(--color-text-muted)]">
+    <li>Qinnovate filed the Lab Streaming Layer issue cited in Section 3.</li>
+    <li>Qinnovate offers the due-diligence briefs and NISS baselines named in Section 5.</li>
+    <li>This report was written with AI assistance; every figure was recomputed from the cited files and every source was checked between 6 and 20 October 2026.</li>
+  </ul>
+
+  <h3 class="mt-8 text-base font-semibold">Check our numbers</h3>
+  <p class="mt-1 text-sm text-[var(--color-text-muted)]">Run these in the <a href="/data-studio/" class="text-[var(--color-accent-primary)] hover:underline">Data Studio</a>. Evidence tiers are read from the registrar file directly.</p>
+  <ul class="mt-2 space-y-1.5 text-sm">
+    {report.reproduce_queries.map((query) => (
+      <li class="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-2">
+        <span class="text-[var(--color-text-muted)]">{query.label}:</span>
+        <span><code class="rounded bg-[var(--color-bg-secondary)] px-1.5 py-0.5 text-xs">{query.query}</code> <span class="viz-num font-medium">→ {query.expected_count}</span></span>
+      </li>
+    ))}
+  </ul>
+
+  <h3 class="mt-8 text-base font-semibold">Sources ({cited.length})</h3>
+  <ol class="mt-2 grid gap-1 text-xs text-[var(--color-text-muted)] md:grid-cols-2">
+    {cited.map((source) => (
+      <li class="break-words"><a href={source.url} target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">{source.publisher}</a>, {source.date} <span class="text-[var(--color-text-faint)]">(ledger {source.ledger_id})</span></li>
+    ))}
+  </ol>
+</section>

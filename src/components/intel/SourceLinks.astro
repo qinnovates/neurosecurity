@@ -1,0 +1,13 @@
+---
+// Inline bracketed source links for a list of report source ids.
+import { resolveSources } from '@/lib/intel/bci-security-2026/report-data';
+
+interface Props {
+  ids: string[];
+}
+
+const sources = resolveSources(Astro.props.ids);
+---
+{sources.map((source) => (
+  <>{' '}<a href={source.url} target="_blank" rel="noopener noreferrer" class="text-[11px] text-[var(--color-text-faint)] underline decoration-dotted hover:text-[var(--color-accent-primary)]">[{source.publisher}, {source.date}]</a></>
+))}

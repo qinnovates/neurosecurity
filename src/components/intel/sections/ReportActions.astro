@@ -1,0 +1,66 @@
+---
+// Section 5: one action per reader. Five diligence questions, three calls to action
+// (one per reader type) and the single defensive-purpose statement.
+import { PURPOSE_SUMMARY } from '@/lib/purpose-and-limits';
+
+const CORRECTIONS_URL = 'https://github.com/qinnovates/neurosecurity/issues/new?labels=report-correction&title=Global%20BCI%20Landscape%20Report%202026%3A%20';
+
+const DILIGENCE_QUESTIONS = [
+  { question: 'Can a researcher report a vulnerability in your product today?', look: 'A security.txt file, a vulnerability disclosure program or a product-security page that names the device.' },
+  { question: 'What is your section 524B plan?', look: 'A postmarket vulnerability plan, coordinated disclosure and a software bill of materials for every cyber device in the pipeline.' },
+  { question: 'How is implant firmware updated, and who can sign an update?', look: 'Signed updates, a rollback path and a named owner for the signing keys.' },
+  { question: 'Where does neural data go after it leaves the body?', look: 'A data-flow diagram covering phones, clouds and third-party models, with encryption and retention stated per hop.' },
+  { question: 'Which neural-data laws already apply to you?', look: 'A mapping to the five US state laws, EU rules where relevant, and California AB 1883 for any workplace product.' },
+];
+---
+<section id="what-to-do" aria-labelledby="what-to-do-heading" class="scroll-mt-24">
+  <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Section 5</p>
+  <h2 id="what-to-do-heading" class="text-2xl font-bold font-[family-name:var(--font-heading)]">What to do</h2>
+
+  <h3 class="mt-5 text-lg font-semibold">Five questions to ask a BCI company before you invest</h3>
+  <ol class="mt-3 space-y-3">
+    {DILIGENCE_QUESTIONS.map((item, index) => (
+      <li class="grid grid-cols-[2rem_1fr] gap-2 rounded-xl border border-[var(--color-border)] p-4 text-sm">
+        <span class="viz-num text-lg font-semibold text-[var(--color-accent-primary)]">{index + 1}</span>
+        <span>
+          <span class="block font-medium text-[var(--color-text-primary)]">{item.question}</span>
+          <span class="mt-1 block text-[var(--color-text-muted)]">Good answer: {item.look}</span>
+        </span>
+      </li>
+    ))}
+  </ol>
+
+  <div id="get-involved" class="mt-8 grid gap-4 md:grid-cols-3 scroll-mt-24">
+    <div class="flex flex-col rounded-xl border border-[var(--color-border)] bg-[var(--color-glass-bg)] p-5">
+      <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Investors</p>
+      <h3 class="mt-1 text-base font-semibold">Request a due-diligence brief</h3>
+      <p class="mt-2 text-sm text-[var(--color-text-muted)]">A security posture check and NISS severity profile for a BCI company you are evaluating. NISS is our research scoring model; its limits are stated in the methodology.</p>
+      <p class="mt-auto pt-4 text-sm font-medium"><a href={CORRECTIONS_URL} target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">Open a request on GitHub</a></p>
+    </div>
+    <div class="flex flex-col rounded-xl border border-[var(--color-border)] bg-[var(--color-glass-bg)] p-5">
+      <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Founders and security leads</p>
+      <h3 class="mt-1 text-base font-semibold">Publish a disclosure channel, then baseline</h3>
+      <p class="mt-2 text-sm text-[var(--color-text-muted)]">Add a security.txt and a disclosure policy, then ask us for a NISS baseline. Think we recorded you wrong? Tell us and we will correct it.</p>
+      <p class="mt-auto pt-4 text-sm font-medium"><a href={CORRECTIONS_URL} target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">Request a baseline or a correction</a></p>
+    </div>
+    <div class="flex flex-col rounded-xl border border-[var(--color-border)] bg-[var(--color-glass-bg)] p-5">
+      <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Everyone</p>
+      <h3 class="mt-1 text-base font-semibold">Get the next edition</h3>
+      <form action="https://buttondown.com/api/emails/embed-subscribe/qinnovate" method="post" target="_blank" class="mt-3 space-y-2">
+        <label for="report-subscribe-email" class="block text-xs text-[var(--color-text-muted)]">Email address</label>
+        <input id="report-subscribe-email" type="email" name="email" autocomplete="email" required
+          class="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-secondary)] px-3 py-2 text-sm text-[var(--color-text-primary)] focus:border-[var(--color-accent-primary)] focus:outline-none" />
+        <button type="submit" class="min-h-11 w-full cursor-pointer rounded-lg bg-[var(--color-accent-fill)] px-4 py-2 text-sm font-semibold text-white hover:opacity-90">Subscribe</button>
+      </form>
+      <a href="/rss.xml" class="mt-2 text-xs text-[var(--color-text-faint)] hover:text-[var(--color-accent-primary)]">Or follow the RSS feed</a>
+    </div>
+  </div>
+
+  <div id="about-qinnovate" class="mt-8 rounded-xl border border-[var(--color-border)] p-5 scroll-mt-24">
+    <h3 class="text-base font-semibold">About Qinnovate</h3>
+    <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)]">
+      Qinnovate maintains an open, evidence-tiered catalog of BCI attack techniques (TARA), a neural-specific severity score (NISS) and a threat-modelling
+      framework (QIF), all used for defensive risk assessment, and the public datalake this report is built from. {PURPOSE_SUMMARY}
+    </p>
+  </div>
+</section>

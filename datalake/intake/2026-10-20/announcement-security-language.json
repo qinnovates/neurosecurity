@@ -1,0 +1,100 @@
+{
+ "_meta": {
+  "batch": "2026-10-20",
+  "checked_on": "2026-10-20",
+  "question": "Does the announcement or report of a 2026 BCI funding round or clinical milestone mention device cybersecurity?",
+  "method": "Each page was fetched and its text scanned for cyber*, secur*, vulnerab* and privacy. Every hit was read in context; hits in site navigation, footers, privacy-policy links and unrelated headlines were excluded, as were 'secures' and 'securing' in the sense of obtaining.",
+  "limits": "Ten pages were readable. Four publishers blocked automated fetches and are not counted. Five of the ten are news reports rather than company releases. A company may discuss security elsewhere.",
+  "summary": {
+   "readable": 10,
+   "mention_device_security": 0,
+   "not_retrievable": 4
+  }
+ },
+ "pages": [
+  {
+   "subject": "BrainCo round",
+   "kind": "news report",
+   "url": "https://www.yicaiglobal.com/news/chinas-brainco-raises-usd2863-million-in-largest-bci-funding-outside-the-us",
+   "result": "no mention"
+  },
+  {
+   "subject": "Merge Labs seed",
+   "kind": "news report",
+   "url": "https://techcrunch.com/2026/01/15/openai-invests-in-sam-altmans-brain-computer-interface-startup-merge-labs/",
+   "result": "no mention"
+  },
+  {
+   "subject": "Gestala angel round",
+   "kind": "news report",
+   "url": "https://techcrunch.com/2026/03/11/bci-startup-gestala-raises-21-million-for-non-invasive-ultrasound-brain-tech/",
+   "result": "no mention"
+  },
+  {
+   "subject": "Axoft Series A",
+   "kind": "company release",
+   "url": "https://www.biospace.com/press-releases/axoft-secures-55m-series-a-to-advance-clinical-trials-globally-for-its-bio-inspired-implantable-brain-computer-interface",
+   "result": "no mention"
+  },
+  {
+   "subject": "Neurosoft seed",
+   "kind": "company release",
+   "url": "https://www.biospace.com/press-releases/neurosoft-bioelectronics-closes-7-5m-oversubscribed-seed-round-to-build-stretchable-and-scalable-brain-computer-interfaces",
+   "result": "no mention"
+  },
+  {
+   "subject": "Precision Series D",
+   "kind": "news report",
+   "url": "https://www.medtechdive.com/news/precision-neuroscience-raises-250m-for-brain-computer-interface-work/831344/",
+   "result": "no mention"
+  },
+  {
+   "subject": "Sabi seed",
+   "kind": "company release",
+   "url": "https://www.webdisclosure.com/press-release/sabi-raises-50-million-seed-round-led-by-khosla-ventures-to-put-a-brain-ai-interface-inside-a-baseball-cap-OZoCAUXee6B",
+   "result": "no mention"
+  },
+  {
+   "subject": "PRIMA CE mark and European launch",
+   "kind": "company release",
+   "url": "https://science.xyz/news/ce-mark/",
+   "result": "no mention"
+  },
+  {
+   "subject": "Neuralink trial enrolment",
+   "kind": "news report",
+   "url": "https://whbl.com/2026/01/28/elon-musks-neuralink-says-it-has-21-participants-enrolled-in-trials/",
+   "result": "no mention"
+  },
+  {
+   "subject": "ONWARD ARC-BCI implants",
+   "kind": "company release",
+   "url": "https://www.biospace.com/press-releases/onward-medical-completes-two-additional-brain-computer-interface-implants-paired-with-spinal-cord-stimulation-technology-to-restore-thought-driven-movement",
+   "result": "no mention"
+  },
+  {
+   "subject": "Science Series C",
+   "kind": "news report",
+   "url": "https://www.massdevice.com/science-closes-230m-series-c-bci/",
+   "result": "not retrievable (HTTP 403)"
+  },
+  {
+   "subject": "StairMed round",
+   "kind": "news report",
+   "url": "https://www.massdevice.com/chinese-bci-startup-stairmed-72m-financing/",
+   "result": "not retrievable (HTTP 403)"
+  },
+  {
+   "subject": "Neuracle NMPA approval",
+   "kind": "news report",
+   "url": "https://www.bloomberg.com/news/articles/2026-03-13/china-approves-first-brain-implant-for-commercial-use",
+   "result": "not retrievable (HTTP 403)"
+  },
+  {
+   "subject": "Paradromics first Connect-One implant",
+   "kind": "company release",
+   "url": "https://www.businesswire.com/news/home/20260617963732/en/Paradromics-and-University-of-Michigan-Complete-First-Connexus-BCI-Implantation-for-the-FDA-Approved-Connect-One-Clinical-Study",
+   "result": "not retrievable (HTTP 403)"
+  }
+ ]
+}

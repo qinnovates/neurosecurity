@@ -1,0 +1,54 @@
+---
+// Horizontal 100% stacked bars (part-to-whole). One row per entity, segments in a fixed
+// series order, a 2px surface gap between segments, 4px rounded outer ends, and a value
+// label inside a segment only when the segment is wide enough to hold it.
+import type { StackRow, StackSeries } from './chart-types';
+
+interface Props {
+  series: StackSeries[];
+  rows: StackRow[];
+  formatValue: (value: number) => string;
+  totalLabel?: (total: number) => string;
+  unitNoun: string;
+}
+
+const MIN_LABEL_SHARE = 0.12;
+const { series, rows, formatValue, totalLabel = formatValue, unitNoun } = Astro.props;
+
+const layout = rows.map((row) => {
+  const total = series.reduce((sum, item) => sum + (row.values[item.key] ?? 0), 0);
+  const segments = series
+    .map((item) => ({ ...item, value: row.values[item.key] ?? 0 }))
+    .filter((segment) => segment.value > 0)
+    .map((segment) => ({ ...segment, share: total > 0 ? segment.value / total : 0 }));
+  return { ...row, total, segments };
+});
+const percent = (share: number): string => `${Math.round(share * 100)}%`;
+---
+<div class="space-y-5">
+  {layout.map((row) => (
+    <div>
+      <div class="flex items-baseline justify-between gap-3 text-sm">
+        <span class="font-medium text-[var(--color-text-primary)]">{row.label}</span>
+        <span class="viz-num text-xs text-[var(--color-text-muted)]">{totalLabel(row.total)}</span>
+      </div>
+      {row.note && <p class="text-xs text-[var(--color-text-faint)]">{row.note}</p>}
+      <div class="mt-1.5 flex h-6 w-full gap-[2px]" role="img" aria-label={`${row.label}: ${row.segments.map((s) => `${s.label} ${formatValue(s.value)} (${percent(s.share)})`).join(', ')}`}>
+        {row.segments.map((segment, index) => (
+          <span
+            class:list={['viz-mark flex items-center justify-center overflow-visible text-[11px] font-semibold whitespace-nowrap',
+              index === 0 && 'rounded-l', index === row.segments.length - 1 && 'rounded-r']}
+            style={`flex:${segment.share} 1 0;min-width:3px;background:var(${segment.colorVar});color:var(${segment.labelColorVar});`}
+            data-texture={segment.texture}
+            data-tip-value={`${formatValue(segment.value)} (${percent(segment.share)})`}
+            data-tip-label={`${row.label}: ${segment.label}`}
+            tabindex="0"
+            aria-label={`${segment.label}: ${formatValue(segment.value)}, ${percent(segment.share)} of ${unitNoun}`}
+          >
+            {segment.share >= MIN_LABEL_SHARE ? percent(segment.share) : ''}
+          </span>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>

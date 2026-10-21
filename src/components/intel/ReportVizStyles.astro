@@ -1,0 +1,77 @@
+---
+// Chart tokens and shared chart chrome for the intel report pages. Palette values are
+// the dataviz reference steps, validated (validate_palette.js) against the site's card
+// surfaces: light #fdfdfd, dark #14161d. Categorical pairs pass all-pairs CVD checks;
+// the evidence ramp passes the ordinal checks in both modes.
+---
+<style is:global>
+  .viz {
+    --viz-surface: #fdfdfd;
+    --viz-ink: var(--color-text-primary);
+    --viz-ink-2: var(--color-text-muted);
+    --viz-muted: #6f6d68;
+    --viz-grid: #e1e0d9;
+    --viz-axis: #c3c2b7;
+    --viz-accent: #4c33b8;
+    --viz-found: #2a78d6;
+    --viz-none: #eb6834;
+    --viz-unchecked: #8f8d86;
+    --viz-clinical: #6250d6;
+    --viz-consumer: #1baf7a;
+    --viz-ev-demonstrated: #184f95;
+    --viz-ev-theoretical: #5598e7;
+    --viz-ev-speculative: #86b6ef;
+    --viz-on-found: #ffffff;
+    --viz-on-none: #0b0b0b;
+    --viz-on-unchecked: #0b0b0b;
+    --viz-on-ev-demonstrated: #ffffff;
+    --viz-on-ev-theoretical: #0b0b0b;
+    --viz-on-ev-speculative: #0b0b0b;
+  }
+  :root[data-theme="dark"] .viz {
+    --viz-surface: #14161d;
+    --viz-muted: #9a988f;
+    --viz-grid: #2c2c2a;
+    --viz-axis: #45443f;
+    --viz-accent: #7f66ff;
+    --viz-found: #3987e5;
+    --viz-none: #d95926;
+    --viz-unchecked: #6b6a64;
+    --viz-clinical: #9085e9;
+    --viz-consumer: #199e70;
+    --viz-ev-demonstrated: #9ec5f4;
+    --viz-ev-theoretical: #3987e5;
+    --viz-ev-speculative: #1c5cab;
+    --viz-on-unchecked: #ffffff;
+    --viz-on-ev-demonstrated: #0b0b0b;
+    --viz-on-ev-speculative: #ffffff;
+  }
+  .viz-mark { transition: opacity 150ms ease-out, filter 150ms ease-out; cursor: default; }
+  .viz-mark:hover, .viz-mark:focus-visible { filter: brightness(1.12); }
+  .viz-mark:focus-visible { outline: 2px solid var(--viz-ink); outline-offset: 2px; }
+  .viz-swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .viz-num { font-variant-numeric: tabular-nums; }
+  .viz-table { width: 100%; font-size: 0.8125rem; border-collapse: collapse; }
+  .viz-table th, .viz-table td { text-align: left; padding: 0.375rem 0.5rem; border-bottom: 1px solid var(--color-border); }
+  .viz-table td.viz-right, .viz-table th.viz-right { text-align: right; font-variant-numeric: tabular-nums; }
+  .viz-tooltip {
+    position: fixed; z-index: 60; pointer-events: none; max-width: 16rem;
+    padding: 0.5rem 0.625rem; border-radius: 0.5rem; font-size: 0.75rem; line-height: 1.35;
+    background: var(--color-bg-deep); color: var(--color-text-primary);
+    border: 1px solid var(--color-border-hover); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    opacity: 0; transition: opacity 120ms ease-out;
+  }
+  .viz-tooltip[data-visible="true"] { opacity: 1; }
+  .viz-tooltip strong { display: block; font-size: 0.875rem; font-weight: 600; }
+  @media (forced-colors: active), print {
+    .viz [data-texture="theoretical"] { background-image: repeating-linear-gradient(45deg, currentColor 0 1px, transparent 1px 6px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .viz-mark, .viz-tooltip { transition: none; }
+  }
+</style>
+<div class="viz-tooltip" id="viz-tooltip" aria-hidden="true"></div>
+<script>
+  import { attachChartTooltips } from './chart-tooltip';
+  attachChartTooltips(document, 'viz-tooltip');
+</script>

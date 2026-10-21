@@ -1,0 +1,38 @@
+---
+// Disclosed 2026 BCI rounds as thin horizontal bars sorted by size, value at the tip.
+// One series, one hue; the device class rides in the label, not in color.
+import type { FundingRound } from '@/lib/intel/bci-security-2026/types';
+import { formatReportDate, formatUsdCompact } from '@/lib/intel/bci-security-2026/format';
+
+interface Props {
+  rounds: FundingRound[];
+}
+
+const CLASS_LABEL: Record<FundingRound['device_class'], string> = { implant: 'Implant', non_invasive: 'Non-invasive' };
+const { rounds } = Astro.props;
+const largest = Math.max(...rounds.map((round) => round.amount_usd));
+---
+<ol class="space-y-2.5" aria-label="2026 rounds, largest first">
+  {rounds.map((round) => {
+    const width = (round.amount_usd / largest) * 100;
+    return (
+      <li class="grid grid-cols-[7.5rem_1fr] items-center gap-3 text-sm sm:grid-cols-[11rem_1fr]">
+        <span class="leading-tight">
+          <span class="block font-medium text-[var(--color-text-primary)]">{round.company}</span>
+          <span class="block text-[11px] text-[var(--color-text-faint)]">{CLASS_LABEL[round.device_class]} · {round.round}</span>
+        </span>
+        <span class="flex items-center gap-2 min-w-0">
+          <span
+            class="viz-mark block h-3.5 rounded-r"
+            style={`width:calc(${width}% - 3.5rem);min-width:3px;background:var(--viz-accent);`}
+            data-tip-value={formatUsdCompact(round.amount_usd)}
+            data-tip-label={`${round.company}, ${round.round}, ${formatReportDate(round.date)}`}
+            tabindex="0"
+            aria-label={`${round.company}: ${formatUsdCompact(round.amount_usd)}, ${round.round}, ${formatReportDate(round.date)}`}
+          ></span>
+          <span class="viz-num shrink-0 text-xs font-semibold text-[var(--color-text-primary)]">{formatUsdCompact(round.amount_usd)}</span>
+        </span>
+      </li>
+    );
+  })}
+</ol>

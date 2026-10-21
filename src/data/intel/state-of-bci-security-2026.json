@@ -1,0 +1,1107 @@
+{
+ "$comment": "Sourced facts for the Qinnovate Global BCI Landscape Report, 2026 Edition that the datalake tables do not hold. Every row cites source ids; every source id has a ledger row in datalake/intake/ledger.json (batch 2026-10-20). Counts that the datalake does hold are computed at build time in src/lib/intel/, never copied here.",
+ "meta": {
+  "title": "Qinnovate Global BCI Landscape Report, 2026 Edition",
+  "edition": "2026 annual edition",
+  "published": "2026-10-20",
+  "coverage_start": "2026-01-01",
+  "coverage_end": "2026-10-20",
+  "datalake_commit": "36f19456",
+  "posture_last_full_review": "2026-04-29",
+  "q1_report_url": "/research/intel/2026/q1/"
+ },
+ "sources": [
+  {
+   "id": "RPT-BRAINCO-2026",
+   "ledger_id": "report2026-src-001",
+   "publisher": "Yicai Global",
+   "date": "2026-01-08",
+   "url": "https://www.yicaiglobal.com/news/chinas-brainco-raises-usd2863-million-in-largest-bci-funding-outside-the-us"
+  },
+  {
+   "id": "RPT-MERGE-TC",
+   "ledger_id": "report2026-src-002",
+   "publisher": "TechCrunch",
+   "date": "2026-01-15",
+   "url": "https://techcrunch.com/2026/01/15/openai-invests-in-sam-altmans-brain-computer-interface-startup-merge-labs/"
+  },
+  {
+   "id": "RPT-SCIENCE-MD",
+   "ledger_id": "report2026-src-003",
+   "publisher": "MassDevice",
+   "date": "2026-03-05",
+   "url": "https://www.massdevice.com/science-closes-230m-series-c-bci/"
+  },
+  {
+   "id": "RPT-GESTALA-TC",
+   "ledger_id": "report2026-src-004",
+   "publisher": "TechCrunch",
+   "date": "2026-03-11",
+   "url": "https://techcrunch.com/2026/03/11/bci-startup-gestala-raises-21-million-for-non-invasive-ultrasound-brain-tech/"
+  },
+  {
+   "id": "RPT-STAIRMED-MD",
+   "ledger_id": "report2026-src-005",
+   "publisher": "MassDevice",
+   "date": "2026-04",
+   "url": "https://www.massdevice.com/chinese-bci-startup-stairmed-72m-financing/"
+  },
+  {
+   "id": "RPT-AXOFT-BW",
+   "ledger_id": "report2026-src-006",
+   "publisher": "Business Wire via BioSpace",
+   "date": "2026-04-29",
+   "url": "https://www.biospace.com/press-releases/axoft-secures-55m-series-a-to-advance-clinical-trials-globally-for-its-bio-inspired-implantable-brain-computer-interface"
+  },
+  {
+   "id": "RPT-NEUROSOFT-BW",
+   "ledger_id": "report2026-src-007",
+   "publisher": "Business Wire via BioSpace",
+   "date": "2026-05-20",
+   "url": "https://www.biospace.com/press-releases/neurosoft-bioelectronics-closes-7-5m-oversubscribed-seed-round-to-build-stretchable-and-scalable-brain-computer-interfaces"
+  },
+  {
+   "id": "RPT-SABI-PR",
+   "ledger_id": "report2026-src-008",
+   "publisher": "Sabi press release",
+   "date": "2026-10-09",
+   "url": "https://www.webdisclosure.com/press-release/sabi-raises-50-million-seed-round-led-by-khosla-ventures-to-put-a-brain-ai-interface-inside-a-baseball-cap-OZoCAUXee6B"
+  },
+  {
+   "id": "RPT-NEURACLE-BBG",
+   "ledger_id": "report2026-src-009",
+   "publisher": "Bloomberg",
+   "date": "2026-03-13",
+   "url": "https://www.bloomberg.com/news/articles/2026-03-13/china-approves-first-brain-implant-for-commercial-use"
+  },
+  {
+   "id": "RPT-PARADROMICS-BW",
+   "ledger_id": "report2026-src-010",
+   "publisher": "Business Wire",
+   "date": "2026-06-17",
+   "url": "https://www.businesswire.com/news/home/20260617963732/en/Paradromics-and-University-of-Michigan-Complete-First-Connexus-BCI-Implantation-for-the-FDA-Approved-Connect-One-Clinical-Study"
+  },
+  {
+   "id": "RPT-PRIMA-CE",
+   "ledger_id": "report2026-src-011",
+   "publisher": "Science Corporation",
+   "date": "2026-07-22",
+   "url": "https://science.xyz/news/ce-mark/"
+  },
+  {
+   "id": "RPT-PRIMA-CE-APPLICATION",
+   "ledger_id": "report2026-src-012",
+   "publisher": "Science Corporation",
+   "date": "2025-06",
+   "url": "https://science.xyz/news/prima-ce-mark-application-submitted/"
+  },
+  {
+   "id": "RPT-NEURALINK-21",
+   "ledger_id": "report2026-src-013",
+   "publisher": "Reuters (syndicated)",
+   "date": "2026-01-28",
+   "url": "https://whbl.com/2026/01/28/elon-musks-neuralink-says-it-has-21-participants-enrolled-in-trials/"
+  },
+  {
+   "id": "RPT-FLOW-NVD",
+   "ledger_id": "report2026-src-014",
+   "publisher": "NIST NVD (CVE-2026-18164)",
+   "date": "2026-08-13",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-18164"
+  },
+  {
+   "id": "RPT-FLOW-ICSMA",
+   "ledger_id": "report2026-src-015",
+   "publisher": "CISA (ICSMA-26-225-01)",
+   "date": "2026-08-13",
+   "url": "https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsma-26-225-01.json"
+  },
+  {
+   "id": "RPT-AB1883",
+   "ledger_id": "report2026-src-016",
+   "publisher": "Fisher Phillips",
+   "date": "2026-10-01",
+   "url": "https://www.fisherphillips.com/en/insights/insights/california-bans-ai-tools-that-read-employees-emotions-or-nervous-system-data.html"
+  },
+  {
+   "id": "RPT-MINDMAZE-TXT",
+   "ledger_id": "report2026-src-017",
+   "publisher": "MindMaze Therapeutics",
+   "date": "accessed 2026-10-20",
+   "url": "https://mindmazetherapeutics.com/.well-known/security.txt"
+  },
+  {
+   "id": "RPT-ABBOTT-CVD",
+   "ledger_id": "report2026-src-018",
+   "publisher": "Abbott",
+   "date": "accessed 2026-10-20",
+   "url": "https://www.abbott.com/en-us/policies/cybersecurity"
+  },
+  {
+   "id": "RPT-DISCLOSURE-AUDIT",
+   "ledger_id": "report2026-src-019",
+   "publisher": "Qinnovate",
+   "date": "2026-10-20",
+   "url": "https://github.com/qinnovates/neurosecurity/blob/main/datalake/intake/2026-10-20/disclosure-channel-audit.json"
+  },
+  {
+   "id": "RPT-ANNOUNCEMENT-AUDIT",
+   "ledger_id": "report2026-src-020",
+   "publisher": "Qinnovate",
+   "date": "2026-10-20",
+   "url": "https://github.com/qinnovates/neurosecurity/blob/main/datalake/intake/2026-10-20/announcement-security-language.json"
+  },
+  {
+   "id": "SEC-NEURALINK-VDP",
+   "ledger_id": "secstate-src-026",
+   "publisher": "Neuralink",
+   "date": "accessed 2026-10-20",
+   "url": "https://neuralink.com/.well-known/security.txt"
+  },
+  {
+   "id": "SEC-BSCI-PSIRT",
+   "ledger_id": "secstate-src-027",
+   "publisher": "Boston Scientific",
+   "date": "accessed 2026-10-20",
+   "url": "https://www.bostonscientific.com/en-US/customer-service/product-security.html"
+  },
+  {
+   "id": "SEC-KEV-20261020",
+   "ledger_id": "secstate-src-014",
+   "publisher": "CISA KEV catalog v2026.10.20",
+   "date": "2026-10-20",
+   "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
+  },
+  {
+   "id": "SEC-ICSMA-26-223-02",
+   "ledger_id": "secstate-src-011",
+   "publisher": "CISA (ICSMA-26-223-02)",
+   "date": "2026-08-11",
+   "url": "https://www.cisa.gov/news-events/ics-medical-advisories/icsma-26-223-02"
+  },
+  {
+   "id": "SEC-LIBLSL-262",
+   "ledger_id": "secstate-src-012",
+   "publisher": "GitHub sccn/liblsl",
+   "date": "2026-02-11",
+   "url": "https://github.com/sccn/liblsl/issues/262"
+  },
+  {
+   "id": "SEC-FDA-PREMARKET-2026",
+   "ledger_id": "secstate-src-015",
+   "publisher": "US FDA",
+   "date": "2026-02-03",
+   "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-management-system-considerations-and-content-premarket"
+  },
+  {
+   "id": "SEC-CRA-REPORTING",
+   "ledger_id": "secstate-src-017",
+   "publisher": "McCann FitzGerald",
+   "date": "2026-09-10",
+   "url": "https://www.mccannfitzgerald.com/knowledge/data-privacy-and-cyber-risk/cyber-resilience-act-reporting-obligations-apply-from-11-september-2026"
+  },
+  {
+   "id": "SEC-AIACT-OMNIBUS",
+   "ledger_id": "secstate-src-018",
+   "publisher": "Gibson Dunn",
+   "date": "2026-05-27",
+   "url": "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/"
+  },
+  {
+   "id": "SEC-FPF-NEURAL-DATA",
+   "ledger_id": "secstate-src-019",
+   "publisher": "Future of Privacy Forum",
+   "date": "2026-06-27",
+   "url": "https://fpf.org/blog/the-neural-data-goldilocks-problem-defining-neural-data-in-u-s-state-privacy-laws/"
+  },
+  {
+   "id": "SEC-COOLEY-VERMONT",
+   "ledger_id": "secstate-src-020",
+   "publisher": "Cooley",
+   "date": "2026-06-23",
+   "url": "https://www.cooley.com/news/insight/2026/2026-06-23-from-maple-to-mind-taps-new-vermont-law-puts-neurotech-on-notice"
+  },
+  {
+   "id": "market-delta-001",
+   "ledger_id": "market-delta-001",
+   "publisher": "MedTech Dive",
+   "date": "2026-09-25",
+   "url": "https://www.medtechdive.com/news/precision-neuroscience-raises-250m-for-brain-computer-interface-work/831344/"
+  },
+  {
+   "id": "market-delta-008",
+   "ledger_id": "market-delta-008",
+   "publisher": "Paradromics",
+   "date": "2026-08-26",
+   "url": "https://paradromics.com/news"
+  },
+  {
+   "id": "market-delta-021",
+   "ledger_id": "market-delta-021",
+   "publisher": "ONWARD Medical via BioSpace",
+   "date": "2026-01-22",
+   "url": "https://www.biospace.com/press-releases/onward-medical-completes-two-additional-brain-computer-interface-implants-paired-with-spinal-cord-stimulation-technology-to-restore-thought-driven-movement"
+  },
+  {
+   "id": "market-delta-027",
+   "ledger_id": "market-delta-027",
+   "publisher": "US SEC (Boston Scientific 8-K)",
+   "date": "2026-09-07",
+   "url": "https://www.sec.gov/Archives/edgar/data/0000885725/000088572526000059/bsx-20260907.htm"
+  },
+  {
+   "id": "market-delta-030",
+   "ledger_id": "market-delta-030",
+   "publisher": "Medtronic",
+   "date": "accessed 2026-10-06",
+   "url": "https://www.medtronic.com/en-us/e/product-security/coordinated-disclosure-process.html"
+  },
+  {
+   "id": "market-delta-033",
+   "ledger_id": "market-delta-033",
+   "publisher": "LivaNova",
+   "date": "accessed 2026-10-06",
+   "url": "https://www.livanova.com/en-us/security"
+  },
+  {
+   "id": "market-delta-037",
+   "ledger_id": "market-delta-037",
+   "publisher": "MedTech Dive",
+   "date": "2026-07-17",
+   "url": "https://www.medtechdive.com/news/abbott-discloses-cyberattack-on-cancer-diagnostics-business/825529/"
+  },
+  {
+   "id": "SEC-CVE-2017-2852",
+   "ledger_id": "secstate-src-001",
+   "publisher": "NIST NVD (CVE-2017-2852)",
+   "date": "2018-06-01",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2852"
+  },
+  {
+   "id": "SEC-CVE-2017-2853",
+   "ledger_id": "secstate-src-002",
+   "publisher": "NIST NVD (CVE-2017-2853)",
+   "date": "2018-04-05",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2853"
+  },
+  {
+   "id": "SEC-CVE-2017-2867",
+   "ledger_id": "secstate-src-003",
+   "publisher": "NIST NVD (CVE-2017-2867)",
+   "date": "2018-04-05",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2867"
+  },
+  {
+   "id": "SEC-CVE-2017-2868",
+   "ledger_id": "secstate-src-004",
+   "publisher": "NIST NVD (CVE-2017-2868)",
+   "date": "2018-04-05",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2868"
+  },
+  {
+   "id": "SEC-CVE-2017-2869",
+   "ledger_id": "secstate-src-005",
+   "publisher": "NIST NVD (CVE-2017-2869)",
+   "date": "2018-04-05",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-2869"
+  },
+  {
+   "id": "SEC-CVE-2023-25931",
+   "ledger_id": "secstate-src-006",
+   "publisher": "NIST NVD (CVE-2023-25931)",
+   "date": "2023-03-01",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-25931"
+  },
+  {
+   "id": "SEC-CVE-2023-47800",
+   "ledger_id": "secstate-src-007",
+   "publisher": "NIST NVD (CVE-2023-47800)",
+   "date": "2023-11-10",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-47800"
+  },
+  {
+   "id": "SEC-CVE-2023-49914",
+   "ledger_id": "secstate-src-008",
+   "publisher": "NIST NVD (CVE-2023-49914)",
+   "date": "2023-12-02",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-49914"
+  },
+  {
+   "id": "SEC-CVE-2026-2671",
+   "ledger_id": "secstate-src-009",
+   "publisher": "NIST NVD (CVE-2026-2671)",
+   "date": "2026-03-07",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-2671"
+  },
+  {
+   "id": "SEC-CVE-2026-18844",
+   "ledger_id": "secstate-src-010",
+   "publisher": "NIST NVD (CVE-2026-18844)",
+   "date": "2026-08-11",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-18844"
+  },
+  {
+   "id": "SEC-MIND-ACT",
+   "ledger_id": "secstate-src-021",
+   "publisher": "US Congress (S.2925)",
+   "date": "2025-09-29",
+   "url": "https://www.congress.gov/119/bills/s2925/BILLS-119s2925is.htm"
+  }
+ ],
+ "rounds_2026": [
+  {
+   "company": "BrainCo",
+   "amount_usd": 286000000,
+   "round": "Undisclosed series (CNY 2B)",
+   "date": "2026-01-08",
+   "device_class": "non_invasive",
+   "source_ids": [
+    "RPT-BRAINCO-2026"
+   ],
+   "datalake_trace": "funding | where company == 'BrainCo'"
+  },
+  {
+   "company": "Merge Labs",
+   "amount_usd": 252000000,
+   "round": "Seed",
+   "date": "2026-01-15",
+   "device_class": "non_invasive",
+   "source_ids": [
+    "RPT-MERGE-TC"
+   ],
+   "datalake_trace": "funding | where company == 'Merge Labs'",
+   "note": "TechCrunch reports $250M; the datalake row records $252M."
+  },
+  {
+   "company": "Science Corporation",
+   "amount_usd": 230000000,
+   "round": "Series C",
+   "date": "2026-03-05",
+   "device_class": "implant",
+   "source_ids": [
+    "RPT-SCIENCE-MD"
+   ]
+  },
+  {
+   "company": "Gestala",
+   "amount_usd": 21600000,
+   "round": "Angel (CNY 150M)",
+   "date": "2026-03-11",
+   "device_class": "non_invasive",
+   "source_ids": [
+    "RPT-GESTALA-TC"
+   ]
+  },
+  {
+   "company": "StairMed",
+   "amount_usd": 72000000,
+   "round": "Strategic (RMB 500M)",
+   "date": "2026-04",
+   "device_class": "implant",
+   "source_ids": [
+    "RPT-STAIRMED-MD"
+   ],
+   "note": "Reported in March by some outlets and dated 2026-04-02 by the release."
+  },
+  {
+   "company": "Axoft",
+   "amount_usd": 55000000,
+   "round": "Series A",
+   "date": "2026-04-29",
+   "device_class": "implant",
+   "source_ids": [
+    "RPT-AXOFT-BW"
+   ]
+  },
+  {
+   "company": "Neurosoft Bioelectronics",
+   "amount_usd": 7500000,
+   "round": "Seed",
+   "date": "2026-05-20",
+   "device_class": "implant",
+   "source_ids": [
+    "RPT-NEUROSOFT-BW"
+   ]
+  },
+  {
+   "company": "Precision Neuroscience",
+   "amount_usd": 250000000,
+   "round": "Series D",
+   "date": "2026-09-24",
+   "device_class": "implant",
+   "source_ids": [
+    "market-delta-001"
+   ]
+  },
+  {
+   "company": "Sabi",
+   "amount_usd": 50000000,
+   "round": "Seed",
+   "date": "2026-10-09",
+   "device_class": "non_invasive",
+   "source_ids": [
+    "RPT-SABI-PR"
+   ]
+  }
+ ],
+ "clinical_milestones": [
+  {
+   "date": "2026-01-22",
+   "label": "ONWARD: seven people have received ARC-BCI therapy",
+   "source_ids": [
+    "market-delta-021"
+   ]
+  },
+  {
+   "date": "2026-01-28",
+   "label": "Neuralink reports 21 trial participants enrolled worldwide",
+   "source_ids": [
+    "RPT-NEURALINK-21"
+   ]
+  },
+  {
+   "date": "2026-03-13",
+   "label": "China's NMPA approves Neuracle's NEO epidural implant for cervical spinal cord injury",
+   "source_ids": [
+    "RPT-NEURACLE-BBG"
+   ]
+  },
+  {
+   "date": "2026-06-17",
+   "label": "Paradromics: first implant in the FDA-approved Connect-One study",
+   "source_ids": [
+    "RPT-PARADROMICS-BW"
+   ]
+  },
+  {
+   "date": "2026-07-22",
+   "label": "Science's PRIMA retinal implant gets an EU MDR CE mark and launches in Europe",
+   "source_ids": [
+    "RPT-PRIMA-CE"
+   ]
+  },
+  {
+   "date": "2026-08-26",
+   "label": "FDA lets Paradromics connect its implant to personal computing devices",
+   "source_ids": [
+    "market-delta-008"
+   ]
+  }
+ ],
+ "regulatory_clock": [
+  {
+   "date": "2026-02-03",
+   "label": "FDA final premarket cybersecurity guidance (section 524B)",
+   "jurisdiction": "US federal",
+   "source_ids": [
+    "SEC-FDA-PREMARKET-2026"
+   ]
+  },
+  {
+   "date": "2026-07-01",
+   "label": "Connecticut neural-data provisions take effect",
+   "jurisdiction": "US state",
+   "source_ids": [
+    "SEC-FPF-NEURAL-DATA"
+   ]
+  },
+  {
+   "date": "2026-09-11",
+   "label": "EU Cyber Resilience Act reporting duties apply",
+   "jurisdiction": "EU",
+   "source_ids": [
+    "SEC-CRA-REPORTING"
+   ]
+  },
+  {
+   "date": "2027-01-01",
+   "label": "California AB 1883: no AI tools that collect workers' neural data",
+   "jurisdiction": "US state",
+   "source_ids": [
+    "RPT-AB1883"
+   ]
+  },
+  {
+   "date": "2027-12-02",
+   "label": "EU AI Act high-risk duties, Annex III systems",
+   "jurisdiction": "EU",
+   "source_ids": [
+    "SEC-AIACT-OMNIBUS"
+   ]
+  },
+  {
+   "date": "2027-12-11",
+   "label": "EU Cyber Resilience Act main obligations",
+   "jurisdiction": "EU",
+   "source_ids": [
+    "SEC-CRA-REPORTING"
+   ]
+  },
+  {
+   "date": "2028-01-01",
+   "label": "Vermont neural-data law takes effect",
+   "jurisdiction": "US state",
+   "source_ids": [
+    "SEC-COOLEY-VERMONT"
+   ]
+  },
+  {
+   "date": "2028-08-02",
+   "label": "EU AI Act high-risk duties, Annex I products (incl. medical devices)",
+   "jurisdiction": "EU",
+   "source_ids": [
+    "SEC-AIACT-OMNIBUS"
+   ]
+  }
+ ],
+ "us_state_neural_data_laws": {
+  "count": 5,
+  "states": [
+   "Colorado (HB 24-1058)",
+   "California (SB 1223)",
+   "Montana (SB 163)",
+   "Connecticut (SB 1295)",
+   "Vermont (S.71)"
+  ],
+  "federal_law": false,
+  "source_ids": [
+   "SEC-FPF-NEURAL-DATA",
+   "SEC-COOLEY-VERMONT"
+  ],
+  "federal_bill": {
+   "name": "MIND Act (S.2925)",
+   "status": "Introduced 2025-09-29 and referred to the Senate Commerce Committee.",
+   "source_ids": [
+    "SEC-MIND-ACT"
+   ]
+  }
+ },
+ "staged_cves": [],
+ "neural_device_cve_groups": {
+  "$comment": "Device group for each neural-device CVE in datalake/cve-technique-mapping.json (category 'Neural/EEG Systems'), keyed by vendor prefix of the product field.",
+  "Natus": "clinical_software",
+  "Medtronic": "clinical_software",
+  "InteraXon": "consumer_home",
+  "Mendi": "consumer_home",
+  "Pulsetto": "consumer_home",
+  "Flow": "consumer_home"
+ },
+ "strict_demonstrated_exclusions": {
+  "reason": "Tiered demonstrated_case, but the cited case is a CVE in a non-neural implant (pacemaker, insulin pump or remote monitor), not in a neural device.",
+  "technique_ids": [
+   "QIF-T0004",
+   "QIF-T0031",
+   "QIF-T0042",
+   "QIF-T0046",
+   "QIF-T0047",
+   "QIF-T0057",
+   "QIF-T0067"
+  ]
+ },
+ "corporate_incidents": [
+  {
+   "date": "2026-08-25",
+   "company": "Boston Scientific",
+   "label": "Material cybersecurity incident (8-K Item 1.05) disrupted manufacturing, order processing and shipping. The filings do not mention implanted devices.",
+   "source_ids": [
+    "market-delta-027"
+   ]
+  },
+  {
+   "date": "2026-07-17",
+   "company": "Abbott",
+   "label": "Unauthorized access to internal systems in the cancer diagnostics business; the company stated no impact on other businesses.",
+   "source_ids": [
+    "market-delta-037"
+   ]
+  }
+ ],
+ "q1_baseline": {
+  "$comment": "Values from the Q1 2026 report and the datalake at commit 996d8022 (2026-03-13).",
+  "companies": 57,
+  "funding_total_usd": 5930000000,
+  "funding_companies": 38,
+  "techniques": 109,
+  "techniques_demonstrated_or_confirmed": 54,
+  "mapped_cves": 55,
+  "no_documentation_companies": 49,
+  "q1_cohort_demonstrated_now": 50,
+  "added_since_q1": 69,
+  "added_since_q1_demonstrated": 11,
+  "added_since_q1_theoretical_proposed": 49,
+  "neural_device_cves_reported_in_q1": 4,
+  "neural_device_cves_in_nvd_at_q1": 9
+ },
+ "corrections": [
+  {
+   "id": "Q1-E1",
+   "q1_said": "The industry had 4 published CVEs, all in one product, none since 2017.",
+   "correct": "At Q1 publication NVD already listed 9 neural-device CVEs from 4 vendors, including CVE-2017-2852, CVE-2023-47800, CVE-2023-25931, CVE-2023-49914 and CVE-2026-2671 (published 2026-03-07).",
+   "source_ids": [
+    "SEC-CVE-2017-2852",
+    "SEC-CVE-2023-47800",
+    "SEC-CVE-2023-25931",
+    "SEC-CVE-2023-49914",
+    "SEC-CVE-2026-2671"
+   ]
+  },
+  {
+   "id": "Q1-E2",
+   "q1_said": "81.25% of feasible, clinically mapped attacks had no CVE, out of 52.",
+   "correct": "The 81.25% was right (26 of 32). The denominator was 32 techniques that were both feasible and clinically mapped, not 52.",
+   "source_ids": []
+  },
+  {
+   "id": "Q1-E3",
+   "q1_said": "$482M in new BCI funding in Q1 2026.",
+   "correct": "About $790M. Q1 missed BrainCo (about $286M, 2026-01-08) and Gestala ($21.6M, 2026-03-11).",
+   "source_ids": [
+    "RPT-BRAINCO-2026",
+    "RPT-GESTALA-TC"
+   ]
+  },
+  {
+   "id": "Q1-E4",
+   "q1_said": "PRIMA received its CE mark in June 2025.",
+   "correct": "June 2025 was the CE mark application. The CE mark under the EU MDR was granted and announced on 2026-07-22.",
+   "source_ids": [
+    "RPT-PRIMA-CE-APPLICATION",
+    "RPT-PRIMA-CE"
+   ]
+  },
+  {
+   "id": "Q1-E5",
+   "q1_said": "44 of 57 companies (77%) published no security documentation.",
+   "correct": "The Q1 dataset recorded 49 of 57 (86%); the Q1 table's rows summed to 55.",
+   "source_ids": []
+  },
+  {
+   "id": "Q1-E6",
+   "q1_said": "Neuralink valued at $9.6B; top-four valuations above $13B.",
+   "correct": "Withdrawn. We could not confirm these valuations at a primary source.",
+   "source_ids": []
+  }
+ ],
+ "disclosure_audit": {
+  "checked_on": "2026-10-20",
+  "method": "For each of the 68 companies in datalake/bci-landscape.json: fetch RFC 9116 security.txt at /.well-known/ and the site root (with and without www), and the paths /security, /product-security, /vulnerability-disclosure, /responsible-disclosure, /security-policy, /trust and /en/security. A page counts only if it answers 200, is not the homepage, and its title names security, vulnerability or disclosure. Every candidate, and every site that did not answer cleanly, was reviewed by hand. Parent-company channels count where the parent sells the tracked product line.",
+  "limits": "A channel hosted at another path, behind a contact form, or on a third-party platform can be missed. 'none_found' means none was found by this method on this date, not that none exists. Companies are invited to send corrections.",
+  "source_ids": [
+   "RPT-DISCLOSURE-AUDIT"
+  ],
+  "companies": [
+   {
+    "company": "Neuralink",
+    "status": "found",
+    "source_ids": [
+     "SEC-NEURALINK-VDP"
+    ]
+   },
+   {
+    "company": "Synchron",
+    "status": "none_found"
+   },
+   {
+    "company": "Blackrock Neurotech",
+    "status": "none_found"
+   },
+   {
+    "company": "Precision Neuroscience",
+    "status": "none_found"
+   },
+   {
+    "company": "Paradromics",
+    "status": "none_found"
+   },
+   {
+    "company": "BrainGate",
+    "status": "none_found"
+   },
+   {
+    "company": "Emotiv",
+    "status": "none_found"
+   },
+   {
+    "company": "NeuroSky",
+    "status": "none_found"
+   },
+   {
+    "company": "InteraXon (Muse)",
+    "status": "none_found"
+   },
+   {
+    "company": "OpenBCI",
+    "status": "none_found"
+   },
+   {
+    "company": "NextMind",
+    "status": "not_checked"
+   },
+   {
+    "company": "Kernel",
+    "status": "none_found"
+   },
+   {
+    "company": "CTRL-Labs",
+    "status": "not_checked"
+   },
+   {
+    "company": "Merge Labs",
+    "status": "none_found"
+   },
+   {
+    "company": "AlterEgo (MIT Media Lab)",
+    "status": "none_found"
+   },
+   {
+    "company": "Neurosity",
+    "status": "none_found"
+   },
+   {
+    "company": "BrainCo",
+    "status": "none_found"
+   },
+   {
+    "company": "Nihon Kohden",
+    "status": "none_found"
+   },
+   {
+    "company": "Natus Medical (Integra LifeSciences)",
+    "status": "not_checked"
+   },
+   {
+    "company": "g.tec medical engineering",
+    "status": "none_found"
+   },
+   {
+    "company": "Cognixion",
+    "status": "none_found"
+   },
+   {
+    "company": "Cortera Neurotechnologies",
+    "status": "none_found"
+   },
+   {
+    "company": "MindMaze",
+    "status": "found",
+    "source_ids": [
+     "RPT-MINDMAZE-TXT"
+    ]
+   },
+   {
+    "company": "INBRAIN Neuroelectronics",
+    "status": "none_found"
+   },
+   {
+    "company": "Neurable",
+    "status": "none_found"
+   },
+   {
+    "company": "Arctop",
+    "status": "none_found"
+   },
+   {
+    "company": "Science Corporation",
+    "status": "none_found"
+   },
+   {
+    "company": "Cortigent",
+    "status": "not_checked"
+   },
+   {
+    "company": "Pixium Vision",
+    "status": "none_found"
+   },
+   {
+    "company": "GenSight Biologics",
+    "status": "none_found"
+   },
+   {
+    "company": "Nano Retina",
+    "status": "none_found"
+   },
+   {
+    "company": "Subsense",
+    "status": "none_found"
+   },
+   {
+    "company": "Motif Neurotech",
+    "status": "none_found"
+   },
+   {
+    "company": "Axoft",
+    "status": "none_found"
+   },
+   {
+    "company": "Forest Neurotech",
+    "status": "none_found"
+   },
+   {
+    "company": "CorTec GmbH",
+    "status": "none_found"
+   },
+   {
+    "company": "Medtronic DBS",
+    "status": "found",
+    "source_ids": [
+     "market-delta-030"
+    ]
+   },
+   {
+    "company": "Abbott Neuromodulation",
+    "status": "found",
+    "source_ids": [
+     "RPT-ABBOTT-CVD"
+    ]
+   },
+   {
+    "company": "Boston Scientific Neuromodulation",
+    "status": "found",
+    "source_ids": [
+     "SEC-BSCI-PSIRT"
+    ]
+   },
+   {
+    "company": "Saluda Medical",
+    "status": "none_found"
+   },
+   {
+    "company": "Galvani Bioelectronics",
+    "status": "not_checked"
+   },
+   {
+    "company": "ONWARD Medical",
+    "status": "none_found"
+   },
+   {
+    "company": "NeuroXess",
+    "status": "none_found"
+   },
+   {
+    "company": "Neuracle Technology",
+    "status": "not_checked"
+   },
+   {
+    "company": "Zhiran Medical",
+    "status": "not_checked"
+   },
+   {
+    "company": "BrainsWay",
+    "status": "none_found"
+   },
+   {
+    "company": "Alpha Omega Engineering",
+    "status": "none_found"
+   },
+   {
+    "company": "Neuroelectrics",
+    "status": "none_found"
+   },
+   {
+    "company": "Flow Neuroscience",
+    "status": "none_found"
+   },
+   {
+    "company": "Openwater",
+    "status": "none_found"
+   },
+   {
+    "company": "Soterix Medical",
+    "status": "none_found"
+   },
+   {
+    "company": "NeuroPace",
+    "status": "none_found"
+   },
+   {
+    "company": "LivaNova",
+    "status": "found",
+    "source_ids": [
+     "market-delta-033"
+    ]
+   },
+   {
+    "company": "Cognito Therapeutics",
+    "status": "none_found"
+   },
+   {
+    "company": "Inner Cosmos",
+    "status": "none_found"
+   },
+   {
+    "company": "Magnus Medical",
+    "status": "none_found"
+   },
+   {
+    "company": "Rune Labs",
+    "status": "none_found"
+   },
+   {
+    "company": "Wispr AI",
+    "status": "none_found"
+   },
+   {
+    "company": "Sonera Inc.",
+    "status": "not_checked"
+   },
+   {
+    "company": "Araya Inc.",
+    "status": "none_found"
+   },
+   {
+    "company": "NAOX Technologies",
+    "status": "none_found"
+   },
+   {
+    "company": "IDUN Technologies",
+    "status": "none_found"
+   },
+   {
+    "company": "Cerca Magnetics",
+    "status": "none_found"
+   },
+   {
+    "company": "Pupil Labs",
+    "status": "none_found"
+   },
+   {
+    "company": "AlterEgo AI Inc.",
+    "status": "none_found"
+   },
+   {
+    "company": "NIRx Medical Technologies",
+    "status": "none_found"
+   },
+   {
+    "company": "Artinis Medical Systems",
+    "status": "none_found"
+   },
+   {
+    "company": "Epiminder",
+    "status": "none_found"
+   }
+  ]
+ },
+ "announcement_audit": {
+  "checked_on": "2026-10-20",
+  "readable": 10,
+  "mention_device_security": 0,
+  "not_retrievable": 4,
+  "source_ids": [
+   "RPT-ANNOUNCEMENT-AUDIT"
+  ]
+ },
+ "neural_device_cve_published": {
+  "CVE-2017-2852": {
+   "published": "2018-06-01",
+   "source_ids": [
+    "SEC-CVE-2017-2852"
+   ]
+  },
+  "CVE-2017-2853": {
+   "published": "2018-04-05",
+   "source_ids": [
+    "SEC-CVE-2017-2853"
+   ]
+  },
+  "CVE-2017-2867": {
+   "published": "2018-04-05",
+   "source_ids": [
+    "SEC-CVE-2017-2867"
+   ]
+  },
+  "CVE-2017-2868": {
+   "published": "2018-04-05",
+   "source_ids": [
+    "SEC-CVE-2017-2868"
+   ]
+  },
+  "CVE-2017-2869": {
+   "published": "2018-04-05",
+   "source_ids": [
+    "SEC-CVE-2017-2869"
+   ]
+  },
+  "CVE-2023-25931": {
+   "published": "2023-03-01",
+   "source_ids": [
+    "SEC-CVE-2023-25931"
+   ]
+  },
+  "CVE-2023-47800": {
+   "published": "2023-11-10",
+   "source_ids": [
+    "SEC-CVE-2023-47800"
+   ]
+  },
+  "CVE-2023-49914": {
+   "published": "2023-12-02",
+   "source_ids": [
+    "SEC-CVE-2023-49914"
+   ]
+  },
+  "CVE-2026-2671": {
+   "published": "2026-03-07",
+   "source_ids": [
+    "SEC-CVE-2026-2671"
+   ]
+  },
+  "CVE-2026-18844": {
+   "published": "2026-08-11",
+   "source_ids": [
+    "SEC-CVE-2026-18844",
+    "SEC-ICSMA-26-223-02"
+   ]
+  },
+  "CVE-2026-18164": {
+   "published": "2026-08-13",
+   "source_ids": [
+    "RPT-FLOW-NVD",
+    "RPT-FLOW-ICSMA"
+   ]
+  }
+ },
+ "reproduce_queries": [
+  {
+   "label": "Companies tracked",
+   "query": "companies | count",
+   "expected_count": 68
+  },
+  {
+   "label": "Companies with disclosed funding",
+   "query": "companies | where funding_total_usd > 0 | count",
+   "expected_count": 39
+  },
+  {
+   "label": "Neural-device CVEs mapped in the datalake",
+   "query": "cves | where category == \"Neural/EEG Systems\" | count",
+   "expected_count": 11
+  }
+ ],
+ "kev_check": {
+  "catalog_version": "2026.10.20",
+  "neural_device_cves_in_kev": 0,
+  "source_ids": [
+   "SEC-KEV-20261020"
+  ]
+ },
+ "lsl_transport": {
+  "label": "Lab Streaming Layer transport has no encryption, authentication or integrity checking; the maintainer called this a known design characteristic on 2026-02-18. Filed by Qinnovate.",
+  "source_ids": [
+   "SEC-LIBLSL-262"
+  ]
+ },
+ "featured_advisory": {
+  "cve_id": "CVE-2026-18164",
+  "vendor": "Flow Neuroscience",
+  "product": "FL-100 and Halo FL-100 tDCS headset",
+  "cvss31": 8.1,
+  "advisory": "ICSMA-26-225-01",
+  "quote": "could allow an attacker within Bluetooth range to manipulate brain stimulation parameters and override safety limits",
+  "context": "It is not exploitable remotely, a firmware update fixes it and no exploitation has been reported to CISA.",
+  "source_ids": [
+   "RPT-FLOW-NVD",
+   "RPT-FLOW-ICSMA"
+  ]
+ }
+}

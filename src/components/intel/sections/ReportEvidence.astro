@@ -1,0 +1,61 @@
+---
+// Section 3, continued: how much of the TARA threat catalog is demonstrated. The chart
+// is the transparency check behind every other security number in the report.
+import ChartFigure from '../ChartFigure.astro';
+import StackedShareChart from '../StackedShareChart.astro';
+import type { StackSeries } from '../chart-types';
+import type { ReportModel } from '@/lib/intel/bci-security-2026/report-model';
+import { formatPercent } from '@/lib/intel/bci-security-2026/format';
+
+interface Props {
+  model: ReportModel;
+}
+
+const { model } = Astro.props;
+const { evidence, q1 } = model;
+const excludedCount = evidence.demonstrated - evidence.demonstratedStrict;
+const series: StackSeries[] = [
+  { key: 'demonstrated', label: 'Demonstrated (lab or case)', colorVar: '--viz-ev-demonstrated', labelColorVar: '--viz-on-ev-demonstrated' },
+  { key: 'theoretical', label: 'Theoretical: not yet demonstrated, tracked for threat modelling', colorVar: '--viz-ev-theoretical', labelColorVar: '--viz-on-ev-theoretical', texture: 'theoretical' },
+  { key: 'speculative', label: 'Speculative', colorVar: '--viz-ev-speculative', labelColorVar: '--viz-on-ev-speculative' },
+];
+const rows = [{
+  label: 'TARA catalog',
+  note: `Replicated or validated by an independent group: ${evidence.replicated}.`,
+  values: { demonstrated: evidence.demonstrated, theoretical: evidence.theoretical, speculative: evidence.speculative },
+}];
+const entryLabel = (count: number): string => `${count} entr${count === 1 ? 'y' : 'ies'}`;
+---
+<div id="evidence-maturity" class="scroll-mt-24">
+  <h3 class="mt-10 text-lg font-semibold">Evidence maturity of the threat catalog</h3>
+  <p class="mt-2 max-w-3xl text-sm leading-relaxed text-[var(--color-text-muted)]">
+    TARA is Qinnovate's catalog of ways a neural device could be misused, kept for defensive threat modelling. Each entry carries an evidence tier.{' '}
+    {evidence.demonstratedStrict} of {evidence.total} entries ({formatPercent(evidence.strictShare)}) are demonstrated in a lab or on a neural device. The tier
+    field counts {evidence.demonstrated} ({formatPercent(evidence.tierShare)}); we leave out {excludedCount} whose cited case is in a pacemaker, insulin pump or
+    remote monitor rather than a neural device. None has been independently replicated. Every other security figure in this report uses only demonstrated or
+    directly measured evidence.
+  </p>
+
+  <ChartFigure id="figure-6" number={6} title="How much of the threat catalog is demonstrated"
+    takeaway={`${evidence.demonstratedStrict} of ${evidence.total} (${formatPercent(evidence.strictShare)}) are demonstrated on a neural device. The bar shows the raw tier field (${formatPercent(evidence.tierShare)} demonstrated), which includes ${excludedCount} cases from non-neural implants. ${formatPercent(evidence.theoretical / evidence.total)} is theoretical: hypotheses we track, not findings. ${evidence.replicated} replicated.`}
+    legend={series.map((item) => ({ label: item.label, colorVar: item.colorVar }))}
+    sources={[]}
+    datalakeNote={`Source: datalake/qtara-registrar.json, techniques[].evidence.tier, at commit ${model.meta.datalake_commit}. Q1 2026 used an older status field: ${q1.techniques_demonstrated_or_confirmed} of ${q1.techniques} entries were marked demonstrated or confirmed. Since then ${q1.added_since_q1} entries were added, ${q1.added_since_q1_theoretical_proposed} of them proposed; ${q1.q1_cohort_demonstrated_now} of the original ${q1.techniques} are demonstrated under the stricter tier field.`}
+  >
+    <StackedShareChart series={series} rows={rows} formatValue={entryLabel} unitNoun="catalog entries" />
+    <p class="mt-3 text-xs text-[var(--color-text-faint)]">
+      Strict reading: {evidence.demonstratedStrict} demonstrated ({evidence.demonstratedLab} lab, {evidence.demonstratedCase - excludedCount} case on a neural device).
+    </p>
+    <table slot="table" class="viz-table">
+      <thead><tr><th>Evidence tier</th><th class="viz-right">Entries</th></tr></thead>
+      <tbody>
+        <tr><td>Replicated (validated_rct, validated_replication)</td><td class="viz-right">{evidence.replicated}</td></tr>
+        <tr><td>Demonstrated in a lab (demonstrated_lab)</td><td class="viz-right">{evidence.demonstratedLab}</td></tr>
+        <tr><td>Demonstrated in a case (demonstrated_case)</td><td class="viz-right">{evidence.demonstratedCase}</td></tr>
+        <tr><td>Of which the case is not in a neural device</td><td class="viz-right">{excludedCount}</td></tr>
+        <tr><td>Theoretical (proposed or modelled)</td><td class="viz-right">{evidence.theoretical}</td></tr>
+        <tr><td>Speculative</td><td class="viz-right">{evidence.speculative}</td></tr>
+      </tbody>
+    </table>
+  </ChartFigure>
+</div>
