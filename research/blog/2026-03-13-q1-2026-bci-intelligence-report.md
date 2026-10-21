@@ -13,6 +13,8 @@ description: "Quarterly threat intelligence report covering the BCI industry's s
 **Data Sources:** QIF BCI Landscape Tracker (57 companies), TARA v1.7 (109 techniques), NISS v2.1 (20 devices scored), CVE-Technique Mapping (55 CVEs), BCI Intel Feed (215 items)
 **Classification:** PUBLIC — Qinnovate Threat Intelligence
 
+> **Corrections, 20 October 2026.** Several figures below were wrong, including the neural-device CVE count, first-quarter funding and the PRIMA CE mark date. The corrections, with sources, are in the [State of BCI Security 2026](/research/intel/2026/state-of-bci-security/#corrections) report, which replaces this quarterly series. This page is kept unchanged otherwise as the record of what we published.
+
 ---
 
 ## Executive Summary
