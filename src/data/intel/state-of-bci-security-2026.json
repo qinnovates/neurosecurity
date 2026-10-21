@@ -1,7 +1,7 @@
 {
- "$comment": "Sourced facts for the State of BCI Security 2026 report that the datalake tables do not hold. Every row cites source ids; every source id has a ledger row in datalake/intake/ledger.json (batch 2026-10-20). Counts that the datalake does hold are computed at build time in src/lib/intel/, never copied here.",
+ "$comment": "Sourced facts for the Qinnovate Global BCI Landscape Report, 2026 Edition that the datalake tables do not hold. Every row cites source ids; every source id has a ledger row in datalake/intake/ledger.json (batch 2026-10-20). Counts that the datalake does hold are computed at build time in src/lib/intel/, never copied here.",
  "meta": {
-  "title": "State of BCI Security 2026",
+  "title": "Qinnovate Global BCI Landscape Report, 2026 Edition",
   "edition": "2026 annual edition",
   "published": "2026-10-20",
   "coverage_start": "2026-01-01",

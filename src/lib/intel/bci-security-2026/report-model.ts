@@ -1,5 +1,5 @@
 /**
- * Assembles the figures the State of BCI Security 2026 page renders, so each section
+ * Assembles the figures the Qinnovate Global BCI Landscape Report, 2026 Edition page renders, so each section
  * component reads one object and none of them recomputes a metric.
  */
 import { REPORT } from './report-data';

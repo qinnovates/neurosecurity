@@ -1,4 +1,4 @@
-/** Number and date formatting for the State of BCI Security 2026 report. */
+/** Number and date formatting for the Qinnovate Global BCI Landscape Report, 2026 Edition. */
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const BILLION = 1_000_000_000;

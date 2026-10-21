@@ -1,5 +1,5 @@
 /**
- * Headline metrics for the State of BCI Security 2026 report, computed from the
+ * Headline metrics for the Qinnovate Global BCI Landscape Report, 2026 Edition, computed from the
  * datalake (companies, CVE mappings, TARA registrar, VC aggregates) and the report
  * dataset. Nothing here is a hand-typed count.
  */
@@ -30,7 +30,7 @@ const LARGEST_HOLDER = 'Neuralink';
 export function normalizeCompanyClass(type: string): CompanyClass {
   const normalized = type.replace('-', '_');
   if (normalized === 'invasive' || normalized === 'semi_invasive' || normalized === 'non_invasive') return normalized;
-  throw new Error(`State of BCI Security 2026: company type "${type}" in datalake/bci-landscape.json has no report class. Add it to normalizeCompanyClass.`);
+  throw new Error(`Qinnovate Global BCI Landscape Report, 2026 Edition: company type "${type}" in datalake/bci-landscape.json has no report class. Add it to normalizeCompanyClass.`);
 }
 
 function auditStatusByCompany(): Map<string, DisclosureStatus> {
@@ -39,7 +39,7 @@ function auditStatusByCompany(): Map<string, DisclosureStatus> {
 
 function statusOf(company: LandscapeCompany, statuses: Map<string, DisclosureStatus>): DisclosureStatus {
   const status = statuses.get(company.name);
-  if (!status) throw new Error(`State of BCI Security 2026: "${company.name}" is in the datalake but missing from disclosure_audit. Re-run the audit.`);
+  if (!status) throw new Error(`Qinnovate Global BCI Landscape Report, 2026 Edition: "${company.name}" is in the datalake but missing from disclosure_audit. Re-run the audit.`);
   return status;
 }
 
@@ -114,13 +114,13 @@ export function evidenceMaturity(): EvidenceMaturity {
 
 function cveGroup(product: string): { vendor: string; group: CveDeviceGroup } {
   const vendor = Object.keys(REPORT.neural_device_cve_groups).find((prefix) => product.startsWith(prefix));
-  if (!vendor) throw new Error(`State of BCI Security 2026: no device group for neural-device CVE product "${product}". Add its vendor to neural_device_cve_groups.`);
+  if (!vendor) throw new Error(`Qinnovate Global BCI Landscape Report, 2026 Edition: no device group for neural-device CVE product "${product}". Add its vendor to neural_device_cve_groups.`);
   return { vendor, group: REPORT.neural_device_cve_groups[vendor] as CveDeviceGroup };
 }
 
 function publishedDate(cveId: string): string {
   const entry = REPORT.neural_device_cve_published[cveId];
-  if (!entry) throw new Error(`State of BCI Security 2026: no NVD publication date recorded for ${cveId}. Add it to neural_device_cve_published.`);
+  if (!entry) throw new Error(`Qinnovate Global BCI Landscape Report, 2026 Edition: no NVD publication date recorded for ${cveId}. Add it to neural_device_cve_published.`);
   return entry.published;
 }
 

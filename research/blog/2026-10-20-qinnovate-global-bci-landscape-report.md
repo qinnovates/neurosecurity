@@ -1,14 +1,14 @@
 ---
-title: "State of BCI Security 2026: Capital Is Outrunning Evidence"
+title: "Qinnovate Global BCI Landscape Report, 2026 Edition: Capital Is Outrunning Evidence"
 subtitle: "Our annual report on BCI capital, clinical momentum and the measured state of BCI security, built from the public datalake with demonstrated evidence only."
 date_posted: "2026-10-20"
-source: "https://qinnovate.com/research/intel/2026/state-of-bci-security/"
+source: "https://qinnovate.com/research/intel/2026/landscape-report/"
 tags: ["#Neurosecurity", "#BCI", "#ThreatIntelligence", "#Report", "#TARA"]
 author: "Qinnovate LLC"
 fact_checked: false
 ---
 
-Today we are publishing [State of BCI Security 2026](/research/intel/2026/state-of-bci-security/), the annual edition of our BCI intelligence report. It replaces the quarterly series that began with the [Q1 2026 report](/research/intel/2026/q1/), and it adds a second part: a measured look at the security of brain-computer interfaces, next to the market and investment picture.
+Today we are publishing [Qinnovate Global BCI Landscape Report, 2026 Edition](/research/intel/2026/landscape-report/), the annual edition of our BCI intelligence report. It replaces the quarterly series that began with the [Q1 2026 report](/research/intel/2026/q1/), and it adds a second part: a measured look at the security of brain-computer interfaces, next to the market and investment picture.
 
 The report has one thesis. Money and implants are reaching the human nervous system faster than the security evidence that should come with them. We set out to measure that gap with evidence we can show, not to dramatise it.
 
@@ -40,7 +40,7 @@ We re-checked every Q1 number. Several were wrong. Q1 said the industry had four
 - It does not say a company without a disclosure channel is insecure. It says we could not find a public way to report a problem.
 - It does not say our threat catalog is validated. QIF, TARA and NISS are a proposed research framework, unvalidated and not a standard.
 
-[Read the report](/research/intel/2026/state-of-bci-security/). Every figure links to its source, and every source is recorded in the datalake.
+[Read the report](/research/intel/2026/landscape-report/). Every figure links to its source, and every source is recorded in the datalake.
 
 ---
 

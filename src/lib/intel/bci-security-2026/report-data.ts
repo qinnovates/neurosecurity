@@ -1,5 +1,5 @@
 /**
- * Loads the State of BCI Security 2026 dataset and resolves source ids.
+ * Loads the Qinnovate Global BCI Landscape Report, 2026 Edition dataset and resolves source ids.
  * The JSON is build-time input; a missing source id is a build failure, not a blank cell.
  */
 import reportJson from '@/data/intel/state-of-bci-security-2026.json';
@@ -11,7 +11,7 @@ const SOURCE_INDEX: ReadonlyMap<string, ReportSource> = new Map(REPORT.sources.m
 
 export class UnknownSourceError extends Error {
   constructor(sourceId: string) {
-    super(`State of BCI Security 2026: source id "${sourceId}" is cited but not listed in sources[]. Add it to src/data/intel/state-of-bci-security-2026.json and to the intake ledger.`);
+    super(`Qinnovate Global BCI Landscape Report, 2026 Edition: source id "${sourceId}" is cited but not listed in sources[]. Add it to src/data/intel/state-of-bci-security-2026.json and to the intake ledger.`);
     this.name = 'UnknownSourceError';
   }
 }

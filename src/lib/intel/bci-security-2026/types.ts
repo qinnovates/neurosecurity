@@ -1,5 +1,5 @@
 /**
- * Types for the State of BCI Security 2026 report dataset
+ * Types for the Qinnovate Global BCI Landscape Report, 2026 Edition dataset
  * (src/data/intel/state-of-bci-security-2026.json) and the metrics computed from it
  * and from the datalake.
  */
