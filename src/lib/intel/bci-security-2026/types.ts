@@ -87,7 +87,6 @@ export interface ReportData {
     datalake_commit: string;
     posture_last_full_review: string;
     q1_report_url: string;
-    contact: { user: string; domain: string };
   };
   sources: ReportSource[];
   rounds_2026: FundingRound[];

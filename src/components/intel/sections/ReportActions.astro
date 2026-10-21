@@ -1,11 +1,9 @@
 ---
 // Section 5: one action per reader. Five diligence questions, three calls to action
 // (one per reader type) and the single defensive-purpose statement.
-import ObfuscatedEmail from '@/components/ObfuscatedEmail.astro';
 import { PURPOSE_SUMMARY } from '@/lib/purpose-and-limits';
-import { REPORT } from '@/lib/intel/bci-security-2026/report-data';
 
-const { user: contactUser, domain: contactDomain } = REPORT.meta.contact;
+const CORRECTIONS_URL = 'https://github.com/qinnovates/neurosecurity/issues/new?labels=report-correction&title=State%20of%20BCI%20Security%202026%3A%20';
 
 const DILIGENCE_QUESTIONS = [
   { question: 'Can a researcher report a vulnerability in your product today?', look: 'A security.txt file, a vulnerability disclosure program or a product-security page that names the device.' },
@@ -37,13 +35,13 @@ const DILIGENCE_QUESTIONS = [
       <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Investors</p>
       <h3 class="mt-1 text-base font-semibold">Request a due-diligence brief</h3>
       <p class="mt-2 text-sm text-[var(--color-text-muted)]">A security posture check and NISS severity profile for a BCI company you are evaluating. NISS is our research scoring model; its limits are stated in the methodology.</p>
-      <p class="mt-auto pt-4 text-sm font-medium"><ObfuscatedEmail user={contactUser} domain={contactDomain} label="Email the research team" subject="BCI due-diligence brief" class="text-[var(--color-accent-primary)] hover:underline" /></p>
+      <p class="mt-auto pt-4 text-sm font-medium"><a href={CORRECTIONS_URL} target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">Open a request on GitHub</a></p>
     </div>
     <div class="flex flex-col rounded-xl border border-[var(--color-border)] bg-[var(--color-glass-bg)] p-5">
       <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Founders and security leads</p>
       <h3 class="mt-1 text-base font-semibold">Publish a disclosure channel, then baseline</h3>
       <p class="mt-2 text-sm text-[var(--color-text-muted)]">Add a security.txt and a disclosure policy, then ask us for a NISS baseline. Think we recorded you wrong? Tell us and we will correct it.</p>
-      <p class="mt-auto pt-4 text-sm font-medium"><ObfuscatedEmail user={contactUser} domain={contactDomain} label="Request a baseline or a correction" subject="NISS baseline or listing correction" class="text-[var(--color-accent-primary)] hover:underline" /></p>
+      <p class="mt-auto pt-4 text-sm font-medium"><a href={CORRECTIONS_URL} target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">Request a baseline or a correction</a></p>
     </div>
     <div class="flex flex-col rounded-xl border border-[var(--color-border)] bg-[var(--color-glass-bg)] p-5">
       <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Everyone</p>
