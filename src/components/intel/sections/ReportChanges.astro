@@ -14,7 +14,7 @@ const { q1, capital, cve, evidence, report } = model;
 const addedCompanies = model.companies - q1.companies;
 const newCves = cve.total - q1.neural_device_cves_in_nvd_at_q1;
 const deltas = [
-  { metric: 'Companies tracked', before: String(q1.companies), after: String(model.companies), note: `${addedCompanies} added; no existing company's record changed posture.` },
+  { metric: 'Companies tracked', before: String(q1.companies), after: String(model.companies), note: `${addedCompanies} companies added; no existing company's security-posture record changed.` },
   { metric: 'Tracked lifetime funding', before: `${formatUsdCompact(q1.funding_total_usd)} (${q1.funding_companies} cos.)`, after: `${formatUsdCompact(capital.totalUsd)} (${capital.companiesWithFunding} cos.)`, note: 'Company records only; 2026 rounds are counted separately in Figure 2.' },
   { metric: 'Threat-catalog entries', before: String(q1.techniques), after: String(evidence.total), note: `${q1.added_since_q1} added, ${q1.added_since_q1_theoretical_proposed} of them proposed (see Figure 6).` },
   { metric: 'Neural-device CVEs', before: `${q1.neural_device_cves_in_nvd_at_q1} on record (Q1 said ${q1.neural_device_cves_reported_in_q1})`, after: String(cve.total), note: `${newCves} published since, including ${cve.staged} verified and staged for mapping. See correction Q1-E1.` },
@@ -41,7 +41,7 @@ const deltas = [
 
   <div id="corrections" class="mt-8 rounded-xl border border-[var(--color-status-warn)]/40 bg-[var(--color-status-warn)]/5 p-5 scroll-mt-24">
     <h3 class="text-base font-semibold">Corrections to the Q1 2026 report</h3>
-    <p class="mt-1 text-sm text-[var(--color-text-muted)]">We re-checked every Q1 number against primary sources. These are the ones that were wrong.</p>
+    <p class="mt-1 text-sm text-[var(--color-text-muted)]">We re-checked every Q1 number against primary sources. These are the ones that were wrong, misstated or unsupported.</p>
     <ol class="mt-4 space-y-3 text-sm">
       {report.corrections.map((correction) => (
         <li class="grid gap-1 sm:grid-cols-[4.5rem_1fr]">

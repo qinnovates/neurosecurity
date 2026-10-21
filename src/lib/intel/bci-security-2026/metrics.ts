@@ -14,7 +14,8 @@ import type {
 interface LandscapeCompany { name: string; type: string; funding_total_usd: number | null; security_posture: string }
 interface CveMapping { cve_id: string; product: string; category: string; cvss: { score: number } }
 interface RegistrarTechnique { id: string; evidence?: { tier?: string } }
-interface VcYear { year: number; deals: number; total_usd: number; source?: string }
+/** `note` carries the datalake's qualifier (for example "partial year"), which the chart must surface. */
+interface VcYear { year: number; deals: number; total_usd: number; source?: string; note?: string }
 
 const COMPANIES = (landscapeJson as { companies: LandscapeCompany[] }).companies;
 const VC_BY_YEAR = (landscapeJson as { market_data: { vc_aggregate_by_year: VcYear[] } }).market_data.vc_aggregate_by_year;

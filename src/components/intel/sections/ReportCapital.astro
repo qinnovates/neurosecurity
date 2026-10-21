@@ -17,15 +17,19 @@ const { rounds, vc, report } = model;
 const roundSources = resolveSources([...new Set(rounds.rounds.flatMap((round) => round.source_ids))]);
 // The tracker name only; the datalake's free-text qualifiers are not shown as findings.
 const trackerName = (source: string | undefined): string => (source ?? 'cited tracker').split(' (')[0];
-const vcColumns = vc.map((year) => ({ year: year.year, valueUsd: year.total_usd, detail: `${year.deals} deals, per ${trackerName(year.source)}` }));
+const isPartialYear = (year: { note?: string; source?: string }): boolean => /partial year/i.test(`${year.note ?? ''} ${year.source ?? ''}`);
+const yearLabel = (year: { year: number; note?: string; source?: string }): string => `${year.year}${isPartialYear(year) ? ' (partial)' : ''}`;
+const vcColumns = vc.map((year) => ({ year: year.year, valueUsd: year.total_usd, detail: `${year.deals} deals, per ${trackerName(year.source)}${isPartialYear(year) ? '; partial-year figure' : ''}` }));
+const partialYears = vc.filter(isPartialYear).map((year) => year.year);
 const topFour = rounds.rounds.slice(0, 4).map((round) => round.company);
+const topFourList = `${topFour.slice(0, -1).join(', ')} and ${topFour[topFour.length - 1]}`;
 ---
 <section id="capital" aria-labelledby="capital-heading" class="scroll-mt-24">
-  <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Section 2 · Part 1</p>
+  <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Section 2</p>
   <h2 id="capital-heading" class="text-2xl font-bold font-[family-name:var(--font-heading)]">Capital and clinic</h2>
   <p class="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--color-text-muted)]">
     We count only rounds we could confirm at a dated source: {rounds.rounds.length} rounds totalling {formatUsdCompact(rounds.totalUsd)}{' '}
-    between 1 January and 20 October 2026. {topFour.join(', ')} account for {formatPercent(rounds.topFourShare)} of it, and implant
+    between 1 January and 20 October 2026. {topFourList} account for {formatPercent(rounds.topFourShare)} of it, and implant
     programs took {formatPercent(rounds.implantShare)} of the dollars. Undisclosed rounds and many Chinese financings are missing, so the
     true total is higher.
   </p>
@@ -47,15 +51,15 @@ const topFour = rounds.rounds.slice(0, 4).map((round) => round.company);
   </ChartFigure>
 
   <ChartFigure id="figure-3" number={3} title="Neurotechnology venture funding by year, as reported by third-party trackers"
-    takeaway="Context, not our measurement: neurotech-wide totals more than doubled from 2024 to 2025."
+    takeaway={`Context, not our measurement: tracker totals for the whole neurotech sector rose every year, and the ${partialYears.join(', ')} figure is a partial-year count that already exceeds the full 2024 total.`}
     sources={[]}
-    datalakeNote="Source: datalake/bci-landscape.json market_data.vc_aggregate_by_year (PitchBook for 2022–2023; Neurotechnology Substack for 2024–2025). Trackers differ in scope, so treat the years as indicative."
+    datalakeNote={`Source: datalake/bci-landscape.json market_data.vc_aggregate_by_year (PitchBook for 2022–2023; Neurotechnology Substack for 2024–2025). Trackers differ in scope and the ${partialYears.join(', ')} count is marked partial-year in the datalake, so treat the series as indicative.`}
   >
     <YearColumnChart columns={vcColumns} ariaLabel="Neurotechnology venture funding by year" />
     <table slot="table" class="viz-table">
       <thead><tr><th>Year</th><th class="viz-right">Deals</th><th class="viz-right">Total</th><th>Source</th></tr></thead>
       <tbody>
-        {vc.map((year) => (<tr><td>{year.year}</td><td class="viz-right">{year.deals}</td><td class="viz-right">{formatUsdCompact(year.total_usd)}</td><td>{trackerName(year.source)}</td></tr>))}
+        {vc.map((year) => (<tr><td>{yearLabel(year)}</td><td class="viz-right">{year.deals}</td><td class="viz-right">{formatUsdCompact(year.total_usd)}</td><td>{trackerName(year.source)}{isPartialYear(year) ? ', partial year' : ''}</td></tr>))}
       </tbody>
     </table>
   </ChartFigure>

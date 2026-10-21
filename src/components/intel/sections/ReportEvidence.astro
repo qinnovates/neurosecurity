@@ -37,15 +37,11 @@ const entryLabel = (count: number): string => `${count} entr${count === 1 ? 'y' 
   </p>
 
   <ChartFigure id="figure-6" number={6} title="How much of the threat catalog is demonstrated"
-    takeaway={`${formatPercent(evidence.tierShare)} demonstrated, ${formatPercent(evidence.theoretical / evidence.total)} theoretical, ${evidence.replicated} replicated. Theoretical entries are hypotheses we track, not findings.`}
+    takeaway={`${evidence.demonstratedStrict} of ${evidence.total} (${formatPercent(evidence.strictShare)}) are demonstrated on a neural device. The bar shows the raw tier field (${formatPercent(evidence.tierShare)} demonstrated), which includes ${excludedCount} cases from non-neural implants. ${formatPercent(evidence.theoretical / evidence.total)} is theoretical: hypotheses we track, not findings. ${evidence.replicated} replicated.`}
     legend={series.map((item) => ({ label: item.label, colorVar: item.colorVar }))}
     sources={[]}
     datalakeNote={`Source: datalake/qtara-registrar.json, techniques[].evidence.tier, at commit ${model.meta.datalake_commit}. Q1 2026 used an older status field: ${q1.techniques_demonstrated_or_confirmed} of ${q1.techniques} entries were marked demonstrated or confirmed. Since then ${q1.added_since_q1} entries were added, ${q1.added_since_q1_theoretical_proposed} of them proposed; ${q1.q1_cohort_demonstrated_now} of the original ${q1.techniques} are demonstrated under the stricter tier field.`}
   >
-    <div class="mb-3 flex items-center gap-2 text-xs text-[var(--color-text-muted)]">
-      <span class="viz-num inline-flex h-6 min-w-6 items-center justify-center rounded border border-[var(--viz-axis)] px-1.5 font-semibold">{evidence.replicated}</span>
-      Replicated
-    </div>
     <StackedShareChart series={series} rows={rows} formatValue={entryLabel} unitNoun="catalog entries" />
     <p class="mt-3 text-xs text-[var(--color-text-faint)]">
       Strict reading: {evidence.demonstratedStrict} demonstrated ({evidence.demonstratedLab} lab, {evidence.demonstratedCase - excludedCount} case on a neural device).
