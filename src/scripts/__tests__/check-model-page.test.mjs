@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { ISOLATED_POLICY, TOOL_PAGE_CSP } from '../../lib/csp-policy.ts';
 import {
   ALLOWED_CSP_SOURCES,
   findFramedAppViolations,
@@ -14,12 +14,6 @@ import {
 
 const TEST_DIRECTORY = path.dirname(fileURLToPath(import.meta.url));
 const FIXTURE_DIST = path.join(TEST_DIRECTORY, 'fixtures', 'lab-first-load');
-const TOOL_LAYOUT_SOURCE = path.resolve(TEST_DIRECTORY, '..', '..', 'layouts', 'ToolLayout.astro');
-const LAYOUT_POLICY_BLOCK_PATTERN = /const TOOL_PAGE_CSP = \[([\s\S]*?)\]\.join\('; '\)/;
-const DOUBLE_QUOTED_STRING_PATTERN = /"([^"\n]*)"/g;
-
-/** The policy of today's built /atlas/model/ page, as src/layouts/ToolLayout.astro writes it. */
-const ISOLATED_POLICY = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'";
 const SCRIPT_DIRECTIVE = "script-src 'self' 'unsafe-inline'";
 
 function buildPage({ policy = ISOLATED_POLICY, head = '', body = '' } = {}) {
@@ -170,10 +164,10 @@ describe('findPolicyDifferences', () => {
     expect(recorded).toBe(ISOLATED_POLICY);
   });
 
-  it('equals the policy the tool layout writes, read from its source', () => {
-    const policyBlock = readFileSync(TOOL_LAYOUT_SOURCE, 'utf-8').match(LAYOUT_POLICY_BLOCK_PATTERN)?.[1] ?? '';
-    const layoutDirectives = [...policyBlock.matchAll(DOUBLE_QUOTED_STRING_PATTERN)].map((match) => match[1]);
-    expect(layoutDirectives.join('; ')).toBe(ISOLATED_POLICY);
+  it('equals the tool page policy of csp-policy.ts, directive for directive', () => {
+    expect(TOOL_PAGE_CSP.join('; ')).toBe(ISOLATED_POLICY);
+    expect(TOOL_PAGE_CSP).toContain("worker-src 'self'");
+    expect(ISOLATED_POLICY).not.toContain('blob:');
   });
 
   it.each([
@@ -186,7 +180,7 @@ describe('findPolicyDifferences', () => {
   });
 
   it.each([
-    ['worker-src', "worker-src 'self' blob:"],
+    ['child-src', "child-src 'self' blob:"],
     ['frame-src', 'frame-src *'],
     ['script-src-elem', 'script-src-elem https://cdn.example'],
   ])('rejects an added %s directive', (name, addedDirective) => {
@@ -200,6 +194,12 @@ describe('findPolicyDifferences', () => {
       'Content-Security-Policy "img-src" allows *, which is not in the allowed policy',
       'Content-Security-Policy "img-src" no longer has \'self\'',
       'Content-Security-Policy "img-src" no longer has data:',
+    ]);
+  });
+
+  it('rejects blob: added to worker-src, which the policy names with self only', () => {
+    expect(findPolicyDifferences(ISOLATED_POLICY.replace("worker-src 'self'", "worker-src 'self' blob:"))).toEqual([
+      'Content-Security-Policy "worker-src" allows blob:, which is not in the allowed policy',
     ]);
   });
 

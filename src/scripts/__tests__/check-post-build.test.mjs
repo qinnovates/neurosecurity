@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ATLAS_ASSET_CHECKS, POST_BUILD_CHECKS, REGION_VIEW_CHECKS, TOOL_PAGE_CHECKS, findAnatomyPayloadFailures, findRegionViewFailures, findRegionViewMarkFailures, runPostBuildChecks } from '../check-post-build.mjs';
+import { ATLAS_ASSET_CHECKS, HEADER_CHECKS, POST_BUILD_CHECKS, REGION_VIEW_CHECKS, TOOL_PAGE_CHECKS, findAnatomyPayloadFailures, findRegionViewFailures, findRegionViewMarkFailures, runPostBuildChecks } from '../check-post-build.mjs';
 import { measureFirstLoad } from '../measure-lab-first-load.mjs';
 
 const FIXTURE_DIST = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures', 'lab-first-load');
@@ -16,7 +16,7 @@ describe('runPostBuildChecks', () => {
   it('passes every check on an isolated page within its budget', () => {
     const results = runPostBuildChecks(FIXTURE_DIST, [passingPage], TOOL_PAGE_CHECKS);
     expect(results.map(({ name }) => name)).toEqual(TOOL_PAGE_CHECKS.map(({ name }) => name));
-    expect(POST_BUILD_CHECKS).toEqual([...TOOL_PAGE_CHECKS, ...ATLAS_ASSET_CHECKS, ...REGION_VIEW_CHECKS]);
+    expect(POST_BUILD_CHECKS).toEqual([...TOOL_PAGE_CHECKS, ...ATLAS_ASSET_CHECKS, ...REGION_VIEW_CHECKS, ...HEADER_CHECKS]);
     expect(results.every(({ failures }) => failures.length === 0)).toBe(true);
   });
 

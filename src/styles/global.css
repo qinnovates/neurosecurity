@@ -183,13 +183,14 @@
 }
 
 /* ═══ Base Styles ═══ */
+/* Dark is the site default; the light theme is a stored choice. */
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
-:root[data-theme="dark"] {
-  color-scheme: dark;
+:root[data-theme="light"] {
+  color-scheme: light;
 }
 
 body {

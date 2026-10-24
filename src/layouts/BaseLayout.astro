@@ -1,6 +1,7 @@
 ---
 // Astro 6: ViewTransitions removed; use ClientRouter component instead.
 import { ClientRouter } from 'astro:transitions';
+import { SITE_PAGE_CSP, joinPolicy } from '../lib/csp-policy';
 
 interface Props {
   title: string;
@@ -14,13 +15,24 @@ interface Props {
 const { title, description = "Quantum Indeterministic Framework for Brain-Computer Interface Security", ogImage, ogType = "website", articleMeta, breadcrumbs } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site).toString();
+
+// Vite's dev server needs a websocket for hot reload, which the policy blocks, so it applies to built pages only.
+const isBuiltPage = import.meta.env.PROD;
+// A preview build is never indexed; the flag is server-side only (not PUBLIC_), read at build time.
+const isPreviewBuild = process.env.QINNOVATE_PREVIEW === '1';
+// Dark is the site default. The pre-paint script only honours a stored choice; it never asks the system.
+const DEFAULT_THEME = 'dark';
 ---
 
 <!DOCTYPE html>
-<html lang="en-US" data-theme="light">
+<html lang="en-US" data-theme={DEFAULT_THEME}>
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  {/* The one policy this page states. GitHub Pages sends no header, so this meta is the whole policy in production. */}
+  {isBuiltPage && <meta http-equiv="Content-Security-Policy" content={joinPolicy(SITE_PAGE_CSP)} />}
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  {isPreviewBuild && <meta name="robots" content="noindex, nofollow" />}
   <meta name="description" content={description} />
   <meta name="author" content="Kevin L. Qi" />
   <link rel="canonical" href={canonicalURL} />
@@ -95,13 +107,6 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
   <!-- RSS autodiscovery -->
   <link rel="alternate" type="application/rss+xml" title="Qinnovate Intel" href="/rss.xml" />
 
-  <!-- Security headers (meta tags for non-CSP headers; Cloudflare adds HTTP headers too) -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-  <!-- CSP is enforced via _headers file (Cloudflare Pages). Meta-tag CSP removed to avoid conflict. -->
-  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
-  <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
-
   <title>{title} | Qinnovate</title>
 
   <!-- Additional head content from child layouts -->
@@ -114,16 +119,17 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
   <!-- Theme + Vision mode + Lens initialization (prevent flash) -->
   <!-- data-astro-rerun: ClientRouter replaces <html>'s attributes on swap and dedupes
        identical inline scripts, so without this the saved theme is lost on every
-       client-side navigation and the page reverts to data-theme="light". -->
-  <script is:inline data-astro-rerun>
+       client-side navigation and the page reverts to the default theme. -->
+  <script is:inline data-astro-rerun define:vars={{ defaultTheme: DEFAULT_THEME }}>
     (function(){
       try {
         var path = window.location.pathname;
         var isVisionPage = path.startsWith('/vision');
         var vision = isVisionPage && localStorage.getItem('bci-vision') === 'on';
-        // Theme: vision pages force dark when vision is on, otherwise use saved preference or system
+        // Theme: vision pages force dark when vision is on; otherwise a stored choice, else the default.
+        // The system preference is deliberately not read, so the attribute never changes between SSR and first paint.
         var savedTheme = localStorage.getItem('theme');
-        var theme = vision ? 'dark' : (savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        var theme = vision ? 'dark' : (savedTheme || defaultTheme);
         document.documentElement.setAttribute('data-theme', theme);
         document.documentElement.setAttribute('data-vision', vision ? 'on' : 'off');
         // Shown inside TARA Lab's frame: the page hides its own navigation and footer.
@@ -131,7 +137,7 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
         var lens = localStorage.getItem('qif-lens') || 'both';
         document.documentElement.setAttribute('data-lens', lens);
       } catch(e) {
-        document.documentElement.setAttribute('data-theme', 'light');
+        document.documentElement.setAttribute('data-theme', defaultTheme);
         document.documentElement.setAttribute('data-vision', 'off');
         document.documentElement.setAttribute('data-lens', 'both');
       }
@@ -162,21 +168,5 @@ const resolvedOgImage = ogImage || new URL('/images/og-default.png', Astro.site)
     initScrollReveal();
     document.addEventListener('astro:after-swap', initScrollReveal);
   </script>
-  <!-- Cloudflare Web Analytics -->
-  <!-- TODO: Add SRI integrity hash when Cloudflare publishes one for this beacon version -->
-  <script is:inline>
-    // Analytics loads only on a page opened directly. A page framed inside TARA Lab stays silent,
-    // so the Lab's promise that nothing is sent anywhere holds for the views it embeds.
-    (function () {
-      if (window.self !== window.top) return;
-      var beacon = document.createElement('script');
-      beacon.defer = true;
-      beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-      beacon.crossOrigin = 'anonymous';
-      beacon.setAttribute('data-cf-beacon', '{"token": "7e92b0e996474c9e9502b816aa36beed"}');
-      document.body.appendChild(beacon);
-    })();
-  </script>
-  <!-- End Cloudflare Web Analytics -->
 </body>
 </html>

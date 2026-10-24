@@ -14,6 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { findAssetCoherenceFailures, findAttributionFailures } from './check-atlas-assets.mjs';
+import { findHeaderPolicyFailures } from './check-headers.mjs';
 import { findToolPageFailures } from './check-model-page.mjs';
 import { findAnatomyPayload, findAnatomyPayloadInScript } from './find-anatomy-payload.mjs';
 import { extractPageEntries, readBuiltFile, traceImportChain, walkImportGraph } from './first-load-closure.mjs';
@@ -126,8 +127,13 @@ export const REGION_VIEW_CHECKS = [
   { name: 'technique pages that mention drafted links carry the review mark', findFailures: (distDirectory) => findRegionViewMarkFailures(distDirectory) },
 ];
 
+/** The preview host's `_headers`, emitted by prebuild from the policy module; it takes no page list. */
+export const HEADER_CHECKS = [
+  { name: 'emitted _headers policies equal csp-policy.ts', findFailures: (distDirectory) => findHeaderPolicyFailures(distDirectory) },
+];
+
 /** @type {readonly PostBuildCheck[]} */
-export const POST_BUILD_CHECKS = [...TOOL_PAGE_CHECKS, ...ATLAS_ASSET_CHECKS, ...REGION_VIEW_CHECKS];
+export const POST_BUILD_CHECKS = [...TOOL_PAGE_CHECKS, ...ATLAS_ASSET_CHECKS, ...REGION_VIEW_CHECKS, ...HEADER_CHECKS];
 
 /**
  * Runs each check and collects its failures. A check that cannot run (for example because
