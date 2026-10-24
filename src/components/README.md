@@ -10,14 +10,13 @@ React 19 and Astro components for the qinnovate.com site. Organized by feature d
 
 | Directory | Files | Purpose |
 |-----------|-------|---------|
-| `atlas/` | 14 | Neural atlas visualization, threat atlas, device explorer, risk matrix, interaction matrix |
+| `atlas/` | 13 | Neural atlas visualization, threat atlas, device explorer, risk matrix, interaction matrix |
 | `bci/` | 5 | BCI device timeline, specs cards, limits visualization |
 | `brain/` | 2 | Per-band list (`BandViewPanel`) and the link to the atlas explorer; no drawing |
-| `case-study/` | 6 | Case study page layouts (hero, summary, timeline, gallery) |
+| `case-study/` | 3 | Case study page layouts (attack chain flow, attack surface, policy map) |
 | `data-studio/` | 5 | Data Studio: DuckDB-WASM console, Parquet viewer, query builder, table view |
 | `hooks/` | 1 | `useQueryState.tsx` -- URL query state management |
 | `neurogovernance/` | 1 | Governance timeline visualization |
-| `neurosim/` | 3 | Attack simulator, impact chain visualization |
 | `niss/` | 5 | NISS calculator, impact gauge, risk gauge, score display |
 | `roadmap/` | 1 | Development roadmap |
 | `tara/` | 2 | TARA technique viewer, searchable threat browser |
@@ -33,7 +32,6 @@ React 19 and Astro components for the qinnovate.com site. Organized by feature d
 | `Nav.astro` | Astro | Site navigation |
 | `Footer.astro` | Astro | Site footer |
 | `Breadcrumbs.astro` | Astro | Breadcrumb navigation |
-| `Hourglass3D.tsx` | React | QIF hourglass model (Three.js) |
 | `HourglassReveal.tsx` | React | Hourglass scroll animation |
 | `FloatingOrbs.tsx` | React | Decorative particle effects |
 | `signal-bench/SignalBench.tsx` | React | Homepage hero strip chart: catalogued interference classes on synthetic traces |
@@ -45,7 +43,6 @@ React 19 and Astro components for the qinnovate.com site. Organized by feature d
 | `DualUseSplit.tsx` | React | Dual-use split view |
 | `KinectVision.tsx` | React | Kinect-style depth view |
 | `LensToggle.tsx` | React | Lens/theme toggle |
-| `OniSpheres.tsx` | React | ONI sphere animation |
 | `WebGLCheck.tsx` | React | WebGL capability detector |
 | `TransparencyAudit.astro` | Astro | AI transparency audit display |
 | `TrustBar.astro` | Astro | Trust indicators bar |
@@ -55,4 +52,3 @@ React 19 and Astro components for the qinnovate.com site. Organized by feature d
 | `ObfuscatedEmail.astro` | Astro | Anti-scrape email display |
 | `ThemeToggle.astro` | Astro | Light/dark theme toggle |
 | `TechCount.astro` | Astro | Technology count display |
-| `index.ts` | TS | Barrel export |

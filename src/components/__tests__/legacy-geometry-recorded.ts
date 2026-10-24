@@ -30,9 +30,7 @@ export const RECORDED_LEGACY_GEOMETRY: Record<string, readonly string[]> = {
  * cannot tell a colour triple from a position. A file listed here is not watched for a
  * real table, so the list must stay short; the test fails if an entry stops being needed.
  */
-export const RECORDED_NOT_GEOMETRY: Record<string, string> = {
-  'src/components/OniSpheres.tsx': 'band ids beside colour triples and shell radii; no positions',
-};
+export const RECORDED_NOT_GEOMETRY: Record<string, string> = {};
 
 /** Old files that are to be deleted outright, whatever they contain. */
 export const RECORDED_LEGACY_FILES: readonly string[] = [];
