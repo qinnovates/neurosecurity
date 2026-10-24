@@ -1,6 +1,15 @@
 [
   {
     "type": "external",
+    "title": "Frost & Sullivan Releases the Global Brain-Computer Interface Industry Development White Paper - The National Law Review",
+    "date": "2026-10-24",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxQMW5XMEJsVjFYWHg2dnJxYkZneHRlQnZRVE16ZnV0VThYZ18zRFplOEQybDhaZkhJVGtNdHBzNGlGSGF5N3BYbFVZNDZDM0tSRnpDMnYyWTFtdC1zX01CU0lwWU1SMlJndFBKa3ZFLTU1S0w5VHRidGRmTkJ3YlFEeWNmZ1VMS19ybWotRl9OVjdKM2xIUEppVlFJVHhEMzBWYWxCTzdObVRLcWV1WkQwUWU1b0RqU2M?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Frost & Sullivan Releases the Global Brain-Computer Interface Industry Development White Paper&nbsp;&nbsp;The National Law Review",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Brain-computer interface enables unresponsive ICU patients to control sounds - News-Medical",
     "date": "2026-10-23",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxNdmVHaURVd2dwNXE1ZW9QaDF5eXpHQXpKMU9DcFFoVGVBX3dKbXVPdlBnWmpEbkhGSHJWVUZLaEdPZzRpVktFaWVCWkdwZ0VOX1NrWWRNbEZtV2ZvUHRTeE5PNkc4d0djdDhZOUdYREhiSzVhcVM1WW9GQjdlWDN1bGRTdEctMTR2bW1wRGdzR1g3LUoyaGlJS2dwOUdZczRYSXlXczl6T1lRTkwzRWV6aXJ6b2ZxY3kyam9Hd2N1ZjVJQQ?oc=5",
@@ -10,38 +19,20 @@
   },
   {
     "type": "external",
-    "title": "Brain-Computer Interface Could Give Unresponsive Patients a Voice - Tomorrow's World Today",
-    "date": "2026-10-23",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiswFBVV95cUxOY0F5M3BiUHRsMjdCelRfVnFwMTg2emZsYzhGNzdNV0ZET19YTjN3aFdOZHd4el9vdFFoaHRZV1A0VGxfM3I0cUlTSkk4NVk1eEk0RWplYkt6T1BIS25VUTRkbmxZWFFyYTFrQzIwS3piTG5UbEFHNDR1WDhEZnNBTmFyTUd0ODZuMVAxdW9CSUdsWFhQUFhTSjJpYV9uV1p3LTMxajZKbTJ4VXJnTHFLNFRIUQ?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-Computer Interface Could Give Unresponsive Patients a Voice&nbsp;&nbsp;Tomorrow's World Today",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Exclusive Interview with the Father of Brain-Computer Interface: What Elon Musk’s BCI Company Can Do — My Monkeys Achieved It 20 Years Ago - 36Kr",
-    "date": "2026-10-23",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTFBjN05qYXdBaTk5MDk5TWhONklLUzREX19QcHhrT0Zid1hrM2U0SERoc1QtSGJLYW1fdTRfM1dyX0tKVnZ1MnR2RDRsTmJJSGZKNmJr?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Exclusive Interview with the Father of Brain-Computer Interface: What Elon Musk’s BCI Company Can Do — My Monkeys Achieved It 20 Years Ago&nbsp;&nbsp;36Kr",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Gate-Based Feature Importance in Simulation-Based Inference for EEG: A Cautionary Tale",
-    "date": "2026-10-23",
-    "url": "hxxps://arxiv[.]org/abs/2610[.]30364",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2610.30364v1 Announce Type: new Abstract: Simulation-based inference (SBI) provides a powerful way to fit mechanistic models to data, but offers little insight into which information in the data",
-    "category": "research"
-  },
-  {
-    "type": "external",
     "title": "How long until wearable brain-computer interfaces become mainstream? - The Conversation",
     "date": "2026-10-22",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxPMzZELUlXckdpMmdYelIySFUtZVpCMUFaV29vcTUzN2EtZ3h0QW40R1ROTWdhSkpHVGNMdEJsdDJTVFNiRDJUQVE3TzhNSGNheHQ1Q2hIRmxyRENrUVJWX1R2MVlDNUZHY1A2dTc3Nmt2b1VBQ3JnQ0NIZlAxUm5rOGxHZVh1dWZleU5YeWxMQ2NhUV93YnBEcGxZZ1c3ZlZlcXRZSA?oc=5",
     "source": "Google News — BCI",
     "summary": "How long until wearable brain-computer interfaces become mainstream?&nbsp;&nbsp;The Conversation",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China takes step to standardise technology linking human minds to computers - South China Morning Post",
+    "date": "2026-10-22",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiyAFBVV95cUxOM0RWcVpJemZ1ZnlVZkt5WG9WZGdZUzlfS0hVd01qR2VwSWoxQXVsQmNkOW13SFJveE0tS0ZCVHM2SjA5NXVabWo3QVRkVFZiR1JiUlZObVlsUnFHcno4cGVIbDRHWFNkVlRpU0lNSFQ3aEM3QlgzU0VVUTRWSjJiOGpYZGdOWUhZWS1laVczSTdwOTFLQ0FSV00tdUNEa1BHZzJqRkhZLW1PTnNETVU0LUFtTG1qU29yNzVHdUo4bWNqVWpxeHJiWNIByAFBVV95cUxPZXZhNS1JazE3dXZla2lqdkptNG5WNGVhWHBjWm43d2p4OXZjLW94Ulp2ZVJCZmlvWnVleG9OQkMwbjBuTzVLaENpOFhST0hMZTV4TmRTbm15bHlSQmFMRnREdUJUOGxRbE4wZkpCTEhaM2Zsc056aEVxbTFYRkkzS05OT0J2aExTN2lWMk82N1JHU1B2WmFVellCWmVvdFRsT2JTZHBYSC1DWC1IblNWc1J4Q3pqZ2xPTXRYNXRUYlRfQXhQUF9ISA?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China takes step to standardise technology linking human minds to computers&nbsp;&nbsp;South China Morning Post",
     "category": "neurotechnology"
   },
   {
@@ -82,11 +73,29 @@
   },
   {
     "type": "external",
+    "title": "China wants to get inside your head - The Economist",
+    "date": "2026-10-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPWVpQR3l0akJTSHo1Qk1ud0lTSDJ2a0JvekQzalVLR3duZWt0alBIdnZMYXd6STBYbzh2ZmdtanRhclB5c1NWc0x3cEpCelFjQlVmbUMwOHg4WEFobUd1Qi14cC1qNWgzYTZValBVT1V2VlNiMjlJZzFWYU0yWUJ2T0FzNHdtUGRD?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "China wants to get inside your head&nbsp;&nbsp;The Economist",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Neuralink Stock: How to Invest Before the IPO - Yahoo Finance",
     "date": "2026-10-02",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxOMmd0ZGVZRzZ3OVNzelY3dlQwU1dpRHdoVW56bWRBWHhGRUYwd0RrWUl6c0NsX01SVy1LRlEtREZ4TktNeW44NVBOMnMybDlqOVFuWndLVW94NXp0OFZWSDNkNlN2ZHlUYVdUYTE2UlVEQU9lU1dZLTh0Qndtal92SzA1OXBmeGUyRUFSSTdRTHY1WllDX2c?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Neuralink Stock: How to Invest Before the IPO&nbsp;&nbsp;Yahoo Finance",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink trains on 50,000 hours of brain data, hits 11.32-bit/s cursor record - Interesting Engineering",
+    "date": "2026-10-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxOQnk1MktwQ1hjOE5qc09GQUpvUDhaUG9SWGI4RWVLa2pNMlFneXpseWltM3p5ZTRXYlUtUnN6Yms0NTE5a1c4ZmRWRndvYUJPX080cFFsTXk1b1VEWlpLTjRWWGFRczA2ZERmR0NfTHNuaVlxcE5sVW50NFF0NzRReDJfdmpEN0dm?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink trains on 50,000 hours of brain data, hits 11.32-bit/s cursor record&nbsp;&nbsp;Interesting Engineering",
     "category": "neurotechnology"
   },
   {
@@ -127,20 +136,20 @@
   },
   {
     "type": "external",
+    "title": "Butterfly Network, Merge Labs partner on ultrasound brain-computer interfaces - MobiHealthNews",
+    "date": "2026-09-03",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirgFBVV95cUxOLXpXNkJyYkhncDE1N3lYTGg3Tk5kd2tocGVjaDdaR21jcDQ3TXpVZ3BZQVdiVEFmelEtM1A0dVNXVDB6MG5wSjEtUlZlN2FmeW8xT0taLUN3ODZ3YmJHWXdmakVGUDlMLTVFd21vamRTdVlSZkd0bk13RDVUTVFhZ2QwVHlqaFlscmJldkxBeURMSUtBNV9JOVRZMkViRVVNM2pxUFlXS0xyZUM2X2c?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "Butterfly Network, Merge Labs partner on ultrasound brain-computer interfaces&nbsp;&nbsp;MobiHealthNews",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Merge Labs and Butterfly Network Partner to Advance Ultrasound-Based Brain-Computer Interfaces - Yahoo Finance",
     "date": "2026-09-01",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMingFBVV95cUxNcnVTeVdlODNYSnJkeWY1TTVVamhiaGFzaVFmc1NNQU51emJVZnhxM2dEOW5KMkZBTG5DU016MW5OLWV2c000dG1fZmppOFlfQjRWYlBENldDWlJsRi1qbjZpSk9kbVZLOUdHdno4N3VzOU5Fa1R1RHpQX21OOWdZUS1VaWh5QUwyajNPREFJaFhhOWhld19qOXNGQXVfdw?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Merge Labs and Butterfly Network Partner to Advance Ultrasound-Based Brain-Computer Interfaces&nbsp;&nbsp;Yahoo Finance",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Post-2000s Tsinghua doctoral student launches a \"neural interface\" startup: turning human muscle reactions into tokens - 36Kr",
-    "date": "2026-08-23",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTFBLOXdWeEQ1NlF3MlNyVDJmSTFxdHdxbkRzRkV1dFdVUlBYcThRbkgwQU15MExOLThCbm1PTG5NdlpCQ3o4ekc4cFhiVC16UWpKVjJr?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Post-2000s Tsinghua doctoral student launches a \"neural interface\" startup: turning human muscle reactions into tokens&nbsp;&nbsp;36Kr",
     "category": "neurotechnology"
   },
   {
@@ -151,15 +160,6 @@
     "source": "Google News — MIND Act",
     "summary": "Would you trust your boss with data about your brain? California moves to regulate neurotech&nbsp;&nbsp;CalMatters",
     "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Forget Neuralink. This startup thinks your tongue is the better interface - Fast Company",
-    "date": "2026-08-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihwFBVV95cUxQa2tXYzZsMmItTGdqY0Z1SlFKa2RHNE9OeXdSVmJxN3F2c0NvbDZRa3hfZ1ZpTXFoZVQ1cFF3ZG5sTHM0LTBBS0JLcktfV1pNZ1kyYk5haDVHclJycEJiZEthdDZRTXU5S2p3NkU4Z2h0b2tzbXAtd2lueUtiOHUyMmt3bFFsMGs?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Forget Neuralink. This startup thinks your tongue is the better interface&nbsp;&nbsp;Fast Company",
-    "category": "neurotechnology"
   },
   {
     "type": "external",
