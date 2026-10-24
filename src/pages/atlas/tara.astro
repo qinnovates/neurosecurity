@@ -4,7 +4,7 @@ import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
 import BciKql from '@/components/bci/BciKql';
 import { getKqlTables } from '@/lib/kql-tables';
 import { HOURGLASS_BANDS } from '@/lib/qif-constants';
-import { THREAT_VECTORS, getStatusStats, getNeurorightStats } from '@/lib/threat-data';
+import { CATALOG_VERSION, THREAT_CATEGORIES, THREAT_VECTORS, getStatusStats, getNeurorightStats } from '@/lib/threat-data';
 import TaraVisualization from '@/components/TaraVisualization';
 import { getCatalogCoverage } from '@/lib/purpose-and-limits';
 
@@ -13,19 +13,7 @@ const coverage = getCatalogCoverage();
 const statusStats = getStatusStats();
 const nrStats = getNeurorightStats();
 const bands = [...HOURGLASS_BANDS];
-
-// TARA Categories (simplified for display)
-const THREAT_CATEGORIES = [
-  { id: 'SI', name: 'Signal Injection', description: 'Injecting false neural or electronic signals' },
-  { id: 'SE', name: 'Signal Eavesdropping', description: 'Intercepting signals in transit' },
-  { id: 'DM', name: 'Data Manipulation', description: 'Altering decoded intent or recordings' },
-  { id: 'DS', name: 'Denial of Service', description: 'Disrupting BCI function' },
-  { id: 'PE', name: 'Privilege Escalation', description: 'Gaining unauthorized access depth' },
-  { id: 'CR', name: 'Cognitive Reconnaissance', description: 'Decoding of speech or motor intent by models trained on a cooperating user, neural data inference, intent extraction' },
-  { id: 'CD', name: 'Cognitive/Functional Disruption', description: 'Disruption to cognitive processing, sensory perception, motor output, or autonomic regulation' },
-  { id: 'PS', name: 'Physical Safety', description: 'Tissue damage, seizures, involuntary movement' },
-  { id: 'EX', name: 'Data Exfiltration', description: 'Extracting neural data for exploitation' },
-];
+const categories = [...THREAT_CATEGORIES];
 ---
 
 <PageLayout
@@ -41,7 +29,7 @@ const THREAT_CATEGORIES = [
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-16">
           <div class="max-w-3xl">
             <div class="flex items-center gap-3 mb-6">
-                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">TARA Atlas v1.6</span>
+                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">TARA catalog v{CATALOG_VERSION}</span>
                 <span class="w-1 h-1 rounded-full bg-slate-300"></span>
                 <span class="text-[11px] font-semibold text-amber-500 uppercase tracking-widest">Proposed</span>
             </div>
@@ -61,7 +49,7 @@ const THREAT_CATEGORIES = [
                   </div>
               </div>
               <div class="bg-slate-900 px-8 py-5 rounded-[2rem] shadow-xl shadow-slate-900/10 min-w-[200px]">
-                  <span class="block text-[11px] text-slate-500 font-semibold mb-1">Critical Paths</span>
+                  <span class="block text-[11px] text-slate-500 font-semibold mb-1">Demonstrated or confirmed</span>
                   <div class="flex items-baseline gap-2">
                     <span class="text-3xl font-semibold text-red-500">{statusStats.CONFIRMED + statusStats.DEMONSTRATED}</span>
                   </div>
@@ -86,7 +74,7 @@ const THREAT_CATEGORIES = [
           <TaraVisualization 
             client:only="react" 
             threats={THREAT_VECTORS} 
-            categories={THREAT_CATEGORIES} 
+            categories={categories} 
             bands={bands} 
           />
         </div>

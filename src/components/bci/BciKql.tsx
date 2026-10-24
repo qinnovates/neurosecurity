@@ -1,5 +1,5 @@
 /**
- * BciKql — KLQ (Kevin's Landscape Query) UI component.
+ * BciKql — pipe-query console over the site's data tables.
  *
  * Query engine logic lives in src/lib/kql-engine.ts.
  * This file is UI-only: input, presets, result table, formatting, badges.
@@ -512,7 +512,7 @@ export default function BciKql({ tables: tablesProp }: BciKqlProps) {
     return (
       <div style={S.container}>
         <div style={S.header}>
-          <h2 style={S.title}>KLQ</h2>
+          <h2 style={S.title}>Query</h2>
           <span style={{ fontSize: '0.875rem', color: 'var(--color-text-muted, #94a3b8)' }}>
             Loading data lake...
           </span>
@@ -524,7 +524,7 @@ export default function BciKql({ tables: tablesProp }: BciKqlProps) {
   return (
     <div style={S.container}>
       <div style={S.header}>
-        <h2 style={S.title}>KLQ</h2>
+        <h2 style={S.title}>Query</h2>
         <span style={{ fontSize: '0.875rem', color: 'var(--color-text-muted, #94a3b8)' }}>
           Pipe-based queries over BCI data
         </span>
