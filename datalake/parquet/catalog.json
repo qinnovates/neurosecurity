@@ -542,25 +542,6 @@
       "compression": "zstd",
       "source": "datalake/parquet/guardrails.parquet"
     },
-    "neurosecurity_scores": {
-      "rows": 22,
-      "columns": 9,
-      "column_names": [
-        "device",
-        "type",
-        "purpose",
-        "n_techniques",
-        "overall_score",
-        "severity",
-        "subscores",
-        "details",
-        "vector"
-      ],
-      "size_bytes": 6235,
-      "sha256": "2e670cfe0e2a69af2e2c92b23ac0c2e0dfc9088ae49e6678084fb88be4b1c976",
-      "compression": "zstd",
-      "source": "datalake/parquet/neurosecurity_scores.parquet"
-    },
     "research_explorer": {
       "rows": 73,
       "columns": 6,

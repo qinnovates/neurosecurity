@@ -51,27 +51,6 @@ interface TaraVisualizationProps {
     bands: { id: string; name: string; zone: string; color: string }[];
 }
 
-// --- CRB Population Profiles (from NSv2.1b Entry 14) ---
-const CRB_POPULATIONS = [
-    { id: 'default', label: 'Adult (Default)', crb: 0.0, short: 'Adult' },
-    { id: 'child_adhd', label: 'Child (10yr) + ADHD', crb: 0.5875, short: 'Child+ADHD' },
-    { id: 'adult_als', label: 'Adult with ALS', crb: 0.5375, short: 'ALS' },
-] as const;
-
-const CRB_GAMMA = 0.30;
-
-function crbAdjust(niss: number, crb: number): number {
-    return Math.min(niss * (1 + CRB_GAMMA * crb), 10.0);
-}
-
-function nissSeverityLabel(score: number): string {
-    if (score >= 9.0) return 'critical';
-    if (score >= 7.0) return 'high';
-    if (score >= 4.0) return 'medium';
-    if (score > 0) return 'low';
-    return 'none';
-}
-
 const NEURORIGHT_LABELS: Record<string, string> = {
     MP: 'Mental Privacy',
     CL: 'Cognitive Liberty',
@@ -92,7 +71,6 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
     const [activeTechnique, setActiveTechnique] = useState<ThreatVector | null>(null);
     const [viewMode, setViewMode] = useState<ViewMode>('modality');
     const [neurorightFilter, setNeurorightFilter] = useState<NeurorightCode | null>(null);
-    const [crbPopulation, setCrbPopulation] = useState<typeof CRB_POPULATIONS[number]>(CRB_POPULATIONS[0]);
     const [sortMode, setSortMode] = useState<SortMode>('default');
 
     // Derived: Group bands by zone
@@ -273,7 +251,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                 </div>
             </div>
 
-            {/* Neurorights Filter Bar + CRB Population Selector (visible in governance mode) */}
+            {/* Neurorights Filter Bar (visible in governance mode) */}
             {viewMode === 'governance' && selectedBand && (
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 px-2 pb-4 border-b border-slate-50">
                     {/* Neurorights filter pills */}
@@ -302,24 +280,6 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                 </button>
                             );
                         })}
-                    </div>
-
-                    {/* CRB Population selector */}
-                    <div className="flex items-center gap-2 sm:ml-auto">
-                        <span className="text-[11px] font-semibold text-slate-400 mr-1">Population:</span>
-                        {CRB_POPULATIONS.map(pop => (
-                            <button
-                                key={pop.id}
-                                onClick={() => setCrbPopulation(pop)}
-                                className={`px-3 py-1 rounded-full text-[11px] font-bold transition-all ${crbPopulation.id === pop.id
-                                    ? 'bg-purple-600 text-white'
-                                    : 'bg-slate-50 text-slate-400 hover:text-slate-600'
-                                }`}
-                                title={pop.label}
-                            >
-                                {pop.short}
-                            </button>
-                        ))}
                     </div>
 
                     {/* Sort selector */}
@@ -405,11 +365,6 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                 const isActive = activeTechnique?.id === t.id;
                                 const nr = (t as any).neurorights as { affected: string[]; cci: number } | null;
                                 const nissBase = t.niss?.score ?? 0;
-                                const nissAdj = crbPopulation.crb > 0 ? crbAdjust(nissBase, crbPopulation.crb) : nissBase;
-                                const nissDelta = nissAdj - nissBase;
-                                const adjSeverity = nissSeverityLabel(nissAdj);
-                                const baseSeverity = nissSeverityLabel(nissBase);
-                                const tierChanged = adjSeverity !== baseSeverity && crbPopulation.crb > 0;
 
                                 return (
                                     <button
@@ -482,28 +437,10 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                                                     <CciBar cci={nr.cci} />
                                                                 </div>
 
-                                                                {/* NISS + CRB delta */}
-                                                                <div className="mt-3 flex items-center gap-3">
-                                                                    <div className="flex items-baseline gap-1">
-                                                                        <span className="text-[10px] font-semibold text-slate-400">NISS</span>
-                                                                        <span className="text-lg font-semibold text-slate-900">{nissBase.toFixed(1)}</span>
-                                                                    </div>
-                                                                    {crbPopulation.crb > 0 && nissBase > 0 && (
-                                                                        <div className="flex items-center gap-1.5">
-                                                                            <span className="text-[10px] text-slate-300">→</span>
-                                                                            <span className={`text-lg font-semibold ${tierChanged ? 'text-red-500' : 'text-slate-700'}`}>
-                                                                                {nissAdj.toFixed(1)}
-                                                                            </span>
-                                                                            <span className={`text-[10px] font-bold ${tierChanged ? 'text-red-500' : 'text-orange-400'}`}>
-                                                                                +{nissDelta.toFixed(2)}
-                                                                            </span>
-                                                                            {tierChanged && (
-                                                                                <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-red-500/10 text-red-600 border border-red-500/20">
-                                                                                    TIER CHANGE
-                                                                                </span>
-                                                                            )}
-                                                                        </div>
-                                                                    )}
+                                                                {/* NISS */}
+                                                                <div className="mt-3 flex items-baseline gap-1">
+                                                                    <span className="text-[10px] font-semibold text-slate-400">NISS</span>
+                                                                    <span className="text-lg font-semibold text-slate-900">{nissBase.toFixed(1)}</span>
                                                                 </div>
                                                             </div>
                                                         ) : (

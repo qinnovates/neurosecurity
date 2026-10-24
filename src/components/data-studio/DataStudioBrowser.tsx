@@ -49,7 +49,6 @@ const FIXED_DESCRIPTIONS: Record<string, DatasetDescription> = {
   cve_mappings: { label: 'CVE Mappings', description: 'CVEs mapped to QIF/TARA techniques', category: 'Security' },
   intel_feed: { label: 'Intel Feed', description: 'BCI industry news, funding rounds, and regulatory updates', category: 'Intelligence' },
   intel_sources: { label: 'Intel Sources', description: 'News outlets and feeds with credibility ratings', category: 'Intelligence' },
-  neurosecurity_scores: { label: 'Device Security Scores', description: 'NISS-based security scoring per BCI device', category: 'Security' },
   research_explorer: { label: 'Research Papers', description: 'Published research relevant to QIF', category: 'Research' },
   research_institutions: { label: 'Institutions', description: 'Universities and labs working in neurosecurity', category: 'Research' },
   neurological_conditions: { label: 'Neurological Conditions', description: 'Conditions mapped to affected brain structures', category: 'Clinical' },
@@ -154,7 +153,6 @@ export default function DataStudioBrowser({ datasets, computedDescriptions }: Pr
         research_explorer: 'publications',
         research_institutions: 'sources',
         cve_mappings: 'cves',
-        neurosecurity_scores: 'neurosecurity_scores',
       };
 
       const kqlName = tableNameMap[datasetId] || datasetId;

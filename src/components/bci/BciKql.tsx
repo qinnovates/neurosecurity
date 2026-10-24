@@ -70,9 +70,6 @@ const PRESETS: PresetQuery[] = [
   { label: 'Convergence timeline', query: 'convergence | sort by year asc', group: 'analysis' },
   { label: 'Auto vs BCI', query: 'convergence | where market contains "Automotive" | sort by year asc', group: 'analysis' },
   { label: 'Investment momentum', query: 'momentum | sort by year asc', group: 'analysis' },
-  { label: 'Risk profile', query: 'risk_profile | sort by risk_index desc', group: 'analysis' },
-  { label: 'Highest risk', query: 'risk_profile | where risk_index > 1 | project company, funding_B, devices, security_posture, risk_index', group: 'analysis' },
-  { label: 'Zero security + funded', query: 'risk_profile | where security_score == "0/4" | where funding_B > 0 | sort by funding_B desc', group: 'analysis' },
   // Investor Intelligence
   { label: 'All funding rounds', query: 'funding | sort by date desc', group: 'investors' },
   { label: 'Cross-portfolio VCs', query: 'cross_portfolio | sort by bci_bet_count desc', group: 'investors' },

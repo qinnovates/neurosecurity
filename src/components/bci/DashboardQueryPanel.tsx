@@ -50,11 +50,6 @@ const PRESETS: PresetQuery[] = [
     description: 'BCI devices with no wireless encryption',
     query: 'comms | where encryption contains "None" | project device, wireless_protocol, encryption, data_link_risk',
   },
-  {
-    label: 'Top Risk Index',
-    description: 'Companies ranked by composite risk score',
-    query: 'risk_profile | where risk_index > 0.5 | project company, type, funding_B, security_score, risk_index | sort by risk_index desc | take 10',
-  },
 ];
 
 export default function DashboardQueryPanel({ tables: tablesProp }: Props) {
