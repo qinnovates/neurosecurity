@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-21T23:24:55.837505+00:00",
+    "generated": "2026-10-26T13:54:01.114557+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
     "total_datasets": 40,
-    "total_rows": 24567
+    "total_rows": 24599
   },
   "datasets": {
     "techniques": {
@@ -48,8 +48,8 @@
         "consent_tier",
         "notes"
       ],
-      "size_bytes": 51689,
-      "sha256": "0cfdb2348693ff29ed5c19e65bcb642b24fdc5c58a1ece9bbf798431534158fe",
+      "size_bytes": 51721,
+      "sha256": "f67102f292e3fd05b1281cbcb9d0c1f6b1e6db62c60238827799e8233ccda2c8",
       "compression": "zstd",
       "source": "datalake/parquet/techniques.parquet"
     },
@@ -725,7 +725,7 @@
       "source": "datalake/parquet/intake_ledger.parquet"
     },
     "intel_feed": {
-      "rows": 1066,
+      "rows": 1098,
       "columns": 10,
       "column_names": [
         "id",
@@ -739,8 +739,8 @@
         "companies",
         "fetched"
       ],
-      "size_bytes": 208307,
-      "sha256": "e576dfd85234ea1bfeca40f642a7dc6a3bff7b70b99a017d35594bd6ba21d42b",
+      "size_bytes": 215275,
+      "sha256": "3654f2f7b6b1343fc3f0b4a34db4c5697d6906214bd43541bbe87eba7080c48e",
       "compression": "zstd",
       "source": "datalake/parquet/intel_feed.parquet"
     },
