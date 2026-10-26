@@ -16,6 +16,9 @@ import { RESOLUTIONS } from './resolve-region-term';
 import { shapes, type Shape } from './shape-check';
 import { SOURCE_REF_STATES } from './source-ref';
 import { GRANTS, LAYER_IDS, LICENCE_IDS, ROUTE_KINDS, ROUTE_STATUSES, VERDICTS } from './source-types';
+import {
+  MAX_NISS_SCORE, MAX_NISS_VECTOR_LENGTH, NEURORIGHT_CODES, NISS_SCORING_STATES, NISS_VECTOR_FORMAT, NISS_VECTOR_PATTERN,
+} from './technique-tags';
 
 const MAX_ID_LENGTH = 120;
 const MAX_TEXT_LENGTH = 1200;
@@ -73,8 +76,29 @@ const link = shapes.record({
   claim_basis: shapes.word(CLAIM_BASES), review_state: reviewState, check_status: checkStatus,
 });
 
+/**
+ * The registrar's NISS block. Every field but the scoring state is nullable,
+ * because the registrar scores only some techniques; which nulls are allowed
+ * beside which state is a rule between fields, so parse-anatomy-index.ts holds
+ * them to it. The vector is held to its format, not merely to a length: a
+ * malformed one would reach whatever takes the six metrics apart.
+ */
+const niss = shapes.record({
+  scoring_state: shapes.nullable(shapes.word(NISS_SCORING_STATES)),
+  vector: shapes.nullable(shapes.pattern(NISS_VECTOR_PATTERN, MAX_NISS_VECTOR_LENGTH, NISS_VECTOR_FORMAT)),
+  score: shapes.nullable(shapes.number(0, MAX_NISS_SCORE)),
+  pins: shapes.nullable(shapes.boolean),
+});
+
+/** The raw codes, held to the glossary's own set. A record naming no right is an empty list; a technique with no record carries null instead. */
+const neurorights = shapes.nullable(shapes.record({ affected: shapes.list(shapes.word(NEURORIGHT_CODES)) }));
+
+const neurorightCode = shapes.record({
+  code: shapes.word(NEURORIGHT_CODES), name: text, folds_into: shapes.nullable(shapes.word(NEURORIGHT_CODES)),
+});
+
 const technique = shapes.record({
-  id, name: text, band_ids: ids, severity: id, niss_severity: shapes.nullable(id), dsm_cluster: shapes.nullable(id),
+  id, name: text, band_ids: ids, severity: id, niss_severity: shapes.nullable(id), dsm_cluster: shapes.nullable(id), niss, neurorights,
   scope: shapes.word(INDEX_TECHNIQUE_SCOPES), links: shapes.list(link),
 });
 
@@ -110,6 +134,7 @@ export const ANATOMY_INDEX_SHAPE: Shape = shapes.record({
   structures: shapes.list(structure),
   subjects: shapes.list(subject),
   techniques: shapes.list(technique),
+  neurorights_taxonomy: shapes.list(neurorightCode),
   tracts: shapes.record({ index_asset_id: shapes.nullable(id), proximity_asset_id: shapes.nullable(id), group_asset_ids: ids }),
   devices,
   stale_evidence_keys: shapes.list(text),

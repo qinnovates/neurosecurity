@@ -201,15 +201,6 @@ export function parseAnatomyFiles(raw: RawAnatomyFiles): AnatomyData {
   };
 }
 
-/** The registrar's own fields that the engine catalog does not carry: NISS's severity word and the DSM cluster tag. */
-export function readTechniqueTags(registrar: unknown, techniqueId: string): { niss_severity: string | null; dsm_cluster: string | null } {
-  const techniques = isRecord(registrar) && Array.isArray(registrar.techniques) ? registrar.techniques : [];
-  const technique = techniques.find((candidate) => isRecord(candidate) && candidate.id === techniqueId);
-  const niss = isRecord(technique) && isRecord(technique.niss) ? technique.niss.severity : undefined;
-  const tara = isRecord(technique) && isRecord(technique.tara) && isRecord(technique.tara.dsm5) ? technique.tara.dsm5.cluster : undefined;
-  return { niss_severity: typeof niss === 'string' ? niss : null, dsm_cluster: typeof tara === 'string' ? tara : null };
-}
-
 /** The regions each device's own record in the atlas file names. An id that is not a region stops the build. */
 export function readStatedTargets(atlas: unknown, regionIds: ReadonlySet<string>): Array<{ device_id: string; region_ids: string[] }> {
   const mappings = isRecord(atlas) && Array.isArray(atlas.device_region_mappings) ? atlas.device_region_mappings : [];

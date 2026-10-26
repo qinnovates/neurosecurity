@@ -10,7 +10,7 @@ import { ANATOMY_INDEX_STATUS } from '../status-sentences';
 import { FIXTURE_ATLAS_ID, FIXTURE_SHA256, buildSource, buildSourcesFile, buildVerdict, buildVerdictsFile } from './anatomy-fixtures';
 import { buildRow } from './crosswalk-fixtures';
 import { FIXTURE_ASSET_ID, buildAsset, buildManifest, buildNode } from './manifest-fixtures';
-import { PATHWAY_TEXT, TECHNIQUE_ID, TRACTS_SOURCE_ID, buildLedgerFile, buildRawFiles } from './raw-files-fixture';
+import { PATHWAY_TEXT, TECHNIQUE_ID, TRACTS_SOURCE_ID, buildLedgerFile, buildRawFiles, buildRegistrarFile } from './raw-files-fixture';
 
 const build = (overrides: Partial<RawAnatomyFiles> = {}): AnatomyBundle => buildAnatomyBundle(parseAnatomyFiles(buildRawFiles(overrides)));
 const structureOf = (index: AnatomyIndex, labelId: string): IndexStructure => index.structures.find((structure) => structure.label_id === labelId) as IndexStructure;
@@ -115,7 +115,7 @@ describe('buildAnatomyBundle: technique links', () => {
   });
 
   it('demotes, unlights and lists a link whose quoted words no longer appear in the registrar', () => {
-    const registrar = { techniques: [{ id: TECHNIQUE_ID, tara: { dsm5: { pathway: 'The text was rewritten.' } } }] };
+    const registrar = buildRegistrarFile([{ id: TECHNIQUE_ID, tara: { dsm5: { pathway: 'The text was rewritten.' } } }]);
     const stale = build({ registrar }).index;
     const staleLink = stale.techniques[0].links[0];
     expect(staleLink).toMatchObject({ quote_state: 'quote_missing', check_status: 'unchecked', lit: false });

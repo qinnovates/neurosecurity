@@ -76,7 +76,11 @@ describe('parseAnatomyIndex: wrong types', () => {
   const { indexJson } = buildAnatomyBundle(parseAnatomyFiles(buildRawFiles({ deviceGeometry: DEVICE_GEOMETRY })));
   const index: unknown = JSON.parse(indexJson);
   /** Fields the index type declares nullable. Null is a valid value there, so it is not a wrong type. */
-  const NULLABLE = /(reason|reason_source|name|extent_match|niss_severity|dsm_cluster|resolved_region_id|index_asset_id|proximity_asset_id|fiducial_space|role|reviewed_on)$/;
+  const NULLABLE = new RegExp([
+    '(reason|reason_source|name|extent_match|niss_severity|dsm_cluster|resolved_region_id|index_asset_id|proximity_asset_id|fiducial_space|role|reviewed_on',
+    /** The registrar scores only some techniques, and holds a neurorights record for only some: every absent field reads null. */
+    '|neurorights|scoring_state|vector|score|pins|folds_into)$',
+  ].join(''));
 
   it('accepts the index the build emits, with every section populated', () => {
     const parsed = parseAnatomyIndex(index);
