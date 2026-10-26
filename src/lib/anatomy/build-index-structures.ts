@@ -85,14 +85,24 @@ function toSubject(data: AnatomyData, kind: SubjectKind, id: string, name: strin
   const record = facts.noGeometry.find((reviewed) => subjectKey(reviewed.record) === key);
   const reviewStates = [...rows.map((reviewed) => reviewed.review_state), ...(record === undefined ? [] : [record.review_state])];
   const band = kind === 'region' ? facts.bandsByRegion.get(id) : undefined;
+  const declaredChildren = kind === 'region' ? data.crosswalk.contains.filter((relation) => relation.parent === id).map((relation) => relation.child) : [];
+  // R1 (asymmetric containment, G6 §5.19 / build-region-anchors.ts): a region's structure
+  // keys are its own direct rows, union the direct rows of every region it declares as a
+  // `contains` child — never the reverse. Without this merge a container (e.g. thalamus)
+  // never picks up the keys its declared children (e.g. vim, ant) carry individually, so
+  // its own structure set ships with holes the spec requires closed.
+  const childRows = declaredChildren.length === 0
+    ? []
+    : facts.crosswalk.current.filter((reviewed) => reviewed.row.subject_kind === 'region' && declaredChildren.includes(reviewed.row.subject_id));
+  const structureKeys = [...rows, ...childRows].flatMap((reviewed) => reviewed.row.atlas_ids.map((labelId) => structureKey(reviewed.row.atlas, labelId)));
   return {
     kind,
     id,
     name,
     band_ids: band === undefined ? [] : [band],
     geometry: describeGeometry(kind, id, facts),
-    structure_keys: [...new Set(rows.flatMap((reviewed) => reviewed.row.atlas_ids.map((labelId) => structureKey(reviewed.row.atlas, labelId))))],
-    declared_children: kind === 'region' ? data.crosswalk.contains.filter((relation) => relation.parent === id).map((relation) => relation.child) : [],
+    structure_keys: [...new Set(structureKeys)],
+    declared_children: declaredChildren,
     review_state: toIndexReviewState(worstReviewState(reviewStates)),
     check_status: worstCheckStatus(rows.map((reviewed) => reviewed.check_status)),
   };

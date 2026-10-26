@@ -39,9 +39,14 @@ function isActive(href: string, currentPath: string): boolean {
   style="top: var(--nav-height, 64px); background: color-mix(in srgb, var(--color-glass-bg) 85%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-glass-border);"
   aria-label="Atlas sub-navigation"
 >
-  <div class="flex items-center gap-1.5">
-    {/* Scrollable tabs */}
-    <div class="flex-1 min-w-0 overflow-x-auto scrollbar-hide">
+  <div class="flex flex-col lg:flex-row lg:items-center gap-1.5">
+    {/* Scrollable tabs. Below the lg breakpoint this gets the full row width instead of
+        sharing it with the lens toggle, which previously squeezed 10 tabs into ~153px of
+        a 375px viewport (7 of them reachable only by a hidden, undiscoverable scrollbar) and
+        still cut off the last 3 tabs at 768px (the tab strip's natural width is ~746px, wider
+        than 768px minus nav padding and the lens toggle). The edge-fade mask gives a visual
+        cue that there's more to scroll either way. */}
+    <div class="atlas-tab-scroll flex-1 min-w-0 overflow-x-auto scrollbar-hide">
       <div class="flex items-center gap-1.5 min-w-max">
         {tabs.map((tab) => {
           const active = isActive(tab.href, current);
@@ -62,7 +67,10 @@ function isActive(href: string, currentPath: string): boolean {
       </div>
     </div>
     {/* Divider + pinned lens toggle */}
-    <div class="flex-shrink-0 pl-2 ml-1" style="border-left: 1px solid var(--color-border);">
+    <div
+      class="flex-shrink-0 self-start lg:self-auto pt-1.5 lg:pt-0 lg:pl-2 lg:ml-1 border-t lg:border-t-0 lg:border-l"
+      style="border-color: var(--color-border);"
+    >
       <LensToggle client:idle />
     </div>
   </div>
@@ -70,7 +78,12 @@ function isActive(href: string, currentPath: string): boolean {
 
 <style>
   .atlas-tab--active {
-    background: var(--color-accent-primary);
+    /* Dark theme's --color-accent-primary (#7f66ff) only reaches 4.0:1 against white text,
+       below the WCAG AA 4.5:1 minimum for 12px text (axe-core: color-contrast, serious).
+       Darkened locally (not via the shared --color-accent-primary token, to avoid changing
+       every other accent-colored element) to ~5.8:1. Light theme's accent (#4c33b8) already
+       clears 8.5:1 and is unaffected. */
+    background: color-mix(in srgb, var(--color-accent-primary) 80%, black);
     color: #fff;
     box-shadow: 0 1px 6px color-mix(in srgb, var(--color-accent-primary) 30%, transparent);
   }
@@ -83,6 +96,12 @@ function isActive(href: string, currentPath: string): boolean {
     color: var(--color-text-primary);
     border-color: var(--color-accent-primary);
     background: color-mix(in srgb, var(--color-accent-primary) 8%, var(--color-glass-bg));
+  }
+  /* Edge-fade affordance so a horizontally-scrollable tab strip with a hidden scrollbar
+     still signals there's more to scroll, instead of looking like a hard, final cut-off. */
+  .atlas-tab-scroll {
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - 20px), transparent 100%);
+    mask-image: linear-gradient(to right, black calc(100% - 20px), transparent 100%);
   }
   /* .scrollbar-hide itself now lives in src/styles/global.css: a scoped Astro <style> block
      can't be shared with the React islands that also need it (TaraVisualization.tsx). */

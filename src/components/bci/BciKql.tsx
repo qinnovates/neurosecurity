@@ -79,7 +79,9 @@ const PRESETS: PresetQuery[] = [
   { label: 'Intel/Defense', query: 'intel_defense', group: 'investors' },
   { label: 'Notable individuals', query: 'notable_investors', group: 'investors' },
   { label: 'Investment patterns', query: 'investment_patterns', group: 'investors' },
-  { label: '$100M+ rounds', query: 'funding | where amount_usd > 100000000 | sort by amount_usd desc', group: 'investors' },
+  // '$100M+ rounds' lived here too (identical label and query to the Market & Funding
+  // entry above) — a duplicate React key (`key={p.label}` below) that made one of the
+  // two preset buttons silently drop out of the flat PRESETS list at render time.
   { label: 'By company category', query: 'companies | summarize count() by category', group: 'investors' },
   { label: 'Growth stage cos', query: 'companies | where category == "growth_stage" | sort by funding_total_usd desc', group: 'investors' },
   { label: 'Startups', query: 'companies | where category == "startup" | sort by funding_total_usd desc', group: 'investors' },
@@ -586,7 +588,6 @@ export default function BciKql({ tables: tablesProp }: BciKqlProps) {
                     key={col}
                     style={S.th}
                     scope="col"
-                    role="button"
                     tabIndex={0}
                     aria-sort={sortCol === col ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
                     onClick={() => handleHeaderClick(col)}

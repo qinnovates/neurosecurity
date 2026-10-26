@@ -194,7 +194,14 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                             className={`group flex flex-col items-center p-12 rounded-[3rem] bg-white border border-slate-100 border-l-4 border-l-transparent ${d.borderAccent} ${d.hoverBg} cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 relative overflow-hidden`}
                         >
                             <div className="mb-8 w-1 h-12 rounded-full transition-transform duration-500 group-hover:scale-y-150" style={{ backgroundColor: d.color }} />
-                            <h3 className="text-2xl font-semibold tracking-tighter mb-3 text-slate-800">{d.name}</h3>
+                            {/* Inline color (not the text-slate-800 utility): global.css's unlayered
+                                `h1,h2,h3,h4,h5,h6 { color: var(--color-text-primary) }` base rule outranks
+                                Tailwind utility-layer classes regardless of selector specificity, so a
+                                Tailwind text-color utility on a heading silently no-ops and falls back to
+                                the theme-reactive --color-text-primary (near-white in dark mode) against
+                                this card's hardcoded bg-white. Verified live: all three hub cards
+                                (Neural/Interface/Synthetic) rendered white-on-white, not just two. */}
+                            <h3 className="text-2xl font-semibold tracking-tighter mb-3" style={{ color: '#1e293b' }}>{d.name}</h3>
                             <p className="text-sm font-medium text-slate-400 leading-relaxed mb-6">{d.desc}</p>
                             <span className={`text-xs font-semibold px-4 py-2 rounded-full transition-all duration-500 ${d.pillBg}`}>
                                 Access Zone <span className="inline-block transition-transform duration-500 group-hover:translate-x-1">→</span>
