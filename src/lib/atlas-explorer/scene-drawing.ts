@@ -42,8 +42,8 @@ export interface MaterialParams {
   drawOrder: number;
 }
 
-/** Fills first, then see-through things, then the brain outline over them. */
-export const DRAW_ORDER = { fill: 0, seeThrough: 1, brainOutline: 2, mark: 3 } as const;
+/** Fills first, then see-through things, then the brain outline, then the marker rings, then the marks over all of it. */
+export const DRAW_ORDER = { fill: 0, seeThrough: 1, brainOutline: 2, marker: 3, mark: 4 } as const;
 export const FILL_OPACITY: Readonly<Record<FillKind, number>> = { solid: 1, translucent: 0.4, lines: 0.2, neutral: 0.14 };
 export const BRAIN_OUTLINE_OPACITY = 0.1;
 export const HEAD_SURFACE_OPACITY = 0.07;
@@ -60,6 +60,91 @@ export function materialParamsFor(shape: Pick<SceneShape, 'layer' | 'fill' | 'co
   if (shape.fill === 'lines') return { shading: 'flat', colour: NEUTRAL_COLOUR, opacity: FILL_OPACITY.lines, isWireframe: true, isDoubleSided: false, writesDepth: false, drawOrder: DRAW_ORDER.seeThrough };
   const colour = shape.fill === 'translucent' ? INSIDE_COLOUR : NEUTRAL_COLOUR;
   return { shading: 'lit', colour, opacity: FILL_OPACITY[shape.fill], isWireframe: false, isDoubleSided: false, writesDepth: false, drawOrder: DRAW_ORDER.seeThrough };
+}
+
+/* The marker ring: the mark that says how well the atlas resolves a structure. */
+
+export const RING_REASONS = ['coarse_outline', 'place_only'] as const;
+/** `coarse_outline`: a mesh is drawn but only a few scan pixels wide. `place_only`: no outline exists at all, just a point. */
+export type RingReason = typeof RING_REASONS[number];
+
+/**
+ * Nominal sizes in millimetres. Both cases use the same radius: a ring marks a
+ * place, so its size must say nothing about the structure's, and the two cases
+ * are told apart by the centre, not by how big the ring is.
+ */
+export const RING_OUTER_MM = 3.2;
+/** The band of a ring the lens fills, and of one it does not: weight is a channel, like the mesh's opacity. */
+const RING_BAND_MM = 0.8;
+const RING_HAIRLINE_MM = 0.5;
+/** The filled centre of a place-only marker. Small enough to stay inside the ring at any distance. */
+const RING_DOT_MM = 1.1;
+
+export interface RingParams {
+  colour: string;
+  opacity: number;
+  innerMm: number;
+  outerMm: number;
+  /** The pieces the ring is drawn in, each `[start, length]` in radians. One whole turn only where the lens fills the shape. */
+  arcs: ReadonlyArray<readonly [number, number]>;
+  /** The radius of the filled centre, or 0 for none. Drawn only where the atlas has no outline at all. */
+  dotMm: number;
+  reason: RingReason;
+}
+
+/** `count` equal arcs around the ring, each followed by a gap of `gapShare` of the pitch. */
+function brokenRing(count: number, gapShare: number): ReadonlyArray<readonly [number, number]> {
+  const pitch = (Math.PI * 2) / count;
+  return Array.from({ length: count }, (_unused, at) => [at * pitch, pitch * (1 - gapShare)] as const);
+}
+const WHOLE_TURN: ReadonlyArray<readonly [number, number]> = [[0, Math.PI * 2]];
+
+/**
+ * How much of the ring is drawn, and how heavily, for each lens state. The ring
+ * carries the lens on the channels a ring has, so it is never a silent
+ * exception to it: a closed, full-weight band means the lens fills this shape,
+ * and the broken forms mean it does not, each break pattern standing for a
+ * different reason the way the mesh's wireframe and pale fills do.
+ *
+ * Colour is never the only channel: every pair of states here differs in how
+ * the ring is drawn as well, which `scene-drawing.test.ts` pins. Only a shape
+ * the lens fills takes a step colour, so a ring is grey exactly when the lens
+ * holds nothing for it -- the same rule the mesh follows.
+ *
+ * Weights are set from what a reader actually meets. Measured on the shipped
+ * index, all 25 ring-bearing shapes are `solid` under the band lens, `lines`
+ * under NISS and `neutral` with no lens chosen: so the broken hairline forms
+ * are the common case, and they are weighted to stay legible as an annotation
+ * rather than to read as 25 circles standing inside the brain, which is what a
+ * full-weight opaque ring in every state looked like.
+ */
+const RING_BY_FILL: Readonly<Record<FillKind, { arcs: ReadonlyArray<readonly [number, number]>; weightMm: number; opacity: number; isLensColoured: boolean }>> = {
+  solid: { arcs: WHOLE_TURN, weightMm: RING_BAND_MM, opacity: 1, isLensColoured: true },
+  translucent: { arcs: brokenRing(2, 0.3), weightMm: RING_BAND_MM, opacity: 0.8, isLensColoured: false },
+  lines: { arcs: brokenRing(6, 0.45), weightMm: RING_HAIRLINE_MM, opacity: 0.7, isLensColoured: false },
+  neutral: { arcs: brokenRing(3, 0.45), weightMm: RING_HAIRLINE_MM, opacity: 0.5, isLensColoured: false },
+};
+
+/**
+ * The ring for a shape, or null for one the atlas resolves well enough to need none.
+ *
+ * The colour arrives already chosen for the surface the canvas is drawn on
+ * (`describeFill` reads the palette for that surface), so this adds no palette
+ * of its own and the ring follows the theme the fills follow.
+ */
+export function ringParamsFor(shape: Pick<SceneShape, 'fill' | 'colour' | 'sizeMark'>): RingParams | null {
+  if (shape.sizeMark === 'mesh') return null;
+  const look = RING_BY_FILL[shape.fill];
+  const isPlaceOnly = shape.sizeMark === 'ring_only';
+  return {
+    colour: look.isLensColoured ? shape.colour : NEUTRAL_COLOUR,
+    opacity: look.opacity,
+    innerMm: RING_OUTER_MM - look.weightMm,
+    outerMm: RING_OUTER_MM,
+    arcs: look.arcs,
+    dotMm: isPlaceOnly ? RING_DOT_MM : 0,
+    reason: isPlaceOnly ? 'place_only' : 'coarse_outline',
+  };
 }
 
 /** The brain outline and the head surface are context: they are never picked, so neither stands between the pointer and a shape inside it. */

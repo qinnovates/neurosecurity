@@ -75,6 +75,10 @@ function PickedPanel({ picked, onSelectRegion, onClearPick }: Pick<Props, 'onSel
 /** What the marks in the picture mean, in words beside each, with the limit of every mark on screen. */
 export default function ViewportLegend({ caption, drawnShapes, assets, assetStates, picked, onRetryAssets, onSelectRegion, onClearPick }: Props) {
   const steps = listLegendSteps(drawnShapes);
+  // Each ring line, and the sentence under them, is shown only while that ring is on screen, so the legend never explains a mark the picture does not hold.
+  const hasCoarseRing = drawnShapes.some((shape) => shape.sizeMark === 'mesh_and_ring');
+  const hasPlaceOnlyRing = drawnShapes.some((shape) => shape.sizeMark === 'ring_only');
+  const hasRing = hasCoarseRing || hasPlaceOnlyRing;
   return (
     <div className="atlas-legend">
       <AssetStatuses assets={assets} assetStates={assetStates} onRetryAssets={onRetryAssets} />
@@ -83,10 +87,12 @@ export default function ViewportLegend({ caption, drawnShapes, assets, assetStat
         <li><MarkGlyph mark="solid" /> filled: the lens holds a value for this shape</li>
         <li><MarkGlyph mark="inside_or_mixed" /> pale: somewhere inside, or records differ</li>
         <li><MarkGlyph mark="no_data" /> lines only: no data</li>
-        <li><span className="atlas-ring-swatch" aria-hidden="true" /> ring: too small to outline, or only roughly outlined</li>
-        <li><span className="atlas-selection-swatch" aria-hidden="true" /> orange corner marks: selected</li>
+        {hasCoarseRing && <li><span className="atlas-ring-swatch" data-ring="coarse_outline" aria-hidden="true" /> ring: the shape it sits on is outlined only roughly</li>}
+        {hasPlaceOnlyRing && <li><span className="atlas-ring-swatch" data-ring="place_only" aria-hidden="true" /> ring with a centre: no outline at all, only a place</li>}
+        <li><span className="atlas-selection-swatch" aria-hidden="true" /> corner marks: selected</li>
         {steps.map((entry) => <li key={entry.step}><span className="atlas-step-swatch" style={{ background: entry.colour }} aria-hidden="true" /> {entry.step.replaceAll('_', ' ')}</li>)}
       </ul>
+      {hasRing && <p className="atlas-fact">A ring reads under the lens like a fill does: closed and in the step&rsquo;s own colour where the lens holds a value for its shape, broken and grey where it holds none.</p>}
       {caption.markLimits.map((limit) => <LimitNote key={limit.id} limit={limit} />)}
     </div>
   );

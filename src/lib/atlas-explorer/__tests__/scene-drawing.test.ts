@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { poseForView, turnPose } from '../camera-views';
 import {
-  BRAIN_OUTLINE_OPACITY, FILL_OPACITY, IDLE_RADIANS_PER_MS, INSIDE_COLOUR, SELECTION_COLOUR, axisDirectionsFor, choosePick, idleTurnSpeed, isPickable, materialParamsFor,
-  pointerToNdc, selectionBrackets, type PickHit,
+  BRAIN_OUTLINE_OPACITY, DRAW_ORDER, FILL_OPACITY, IDLE_RADIANS_PER_MS, INSIDE_COLOUR, RING_OUTER_MM, SELECTION_COLOUR, axisDirectionsFor, choosePick, idleTurnSpeed,
+  isPickable, materialParamsFor, pointerToNdc, ringParamsFor, selectionBrackets, type PickHit, type RingParams,
 } from '../scene-drawing';
-import { FILL_KINDS, NEUTRAL_COLOUR } from '../scene-shapes';
+import { FILL_KINDS, NEUTRAL_COLOUR, NISS_COLOURS, NISS_COLOURS_DARK, SIZE_MARKS } from '../scene-shapes';
 
 const shape = (fill: (typeof FILL_KINDS)[number], layer = 'cortical', colour = '#123456') => ({ fill, layer: layer as 'cortical', colour });
 const hit = (structureKey: string, distance: number, overrides: Partial<PickHit> = {}): PickHit => ({ structureKey, distance, fill: 'translucent', isSelected: false, isHiddenByCut: false, ...overrides });
@@ -104,6 +104,90 @@ describe('the selection mark', () => {
 
   it('uses a colour no fill uses', () => {
     expect([NEUTRAL_COLOUR, INSIDE_COLOUR]).not.toContain(SELECTION_COLOUR);
+  });
+});
+
+describe('ringParamsFor', () => {
+  const ring = (fill: (typeof FILL_KINDS)[number], sizeMark: (typeof SIZE_MARKS)[number], colour = NISS_COLOURS.critical): RingParams => {
+    const params = ringParamsFor({ fill, sizeMark, colour });
+    if (params === null) throw new Error(`no ring for ${fill} ${sizeMark}`);
+    return params;
+  };
+  /** Everything about a ring except its colour: how much of it is drawn, how heavily, and whether it has a centre. */
+  const shapeOf = (params: RingParams): string =>
+    [params.arcs.length, params.arcs.reduce((total, [, length]) => total + length, 0).toFixed(3), (params.outerMm - params.innerMm).toFixed(3), params.dotMm].join('/');
+
+  it('draws no ring for a structure the atlas resolves well enough', () => {
+    for (const fill of FILL_KINDS) expect(ringParamsFor({ fill, sizeMark: 'mesh', colour: NISS_COLOURS.high }), fill).toBeNull();
+    for (const sizeMark of SIZE_MARKS.filter((mark) => mark !== 'mesh')) expect(ringParamsFor({ fill: 'solid', sizeMark, colour: NISS_COLOURS.high })).not.toBeNull();
+  });
+
+  it('gives a ring on a filled shape the lens\'s own step colour, on either surface, and a whole closed band', () => {
+    for (const sizeMark of ['mesh_and_ring', 'ring_only'] as const) {
+      for (const colour of [NISS_COLOURS.critical, NISS_COLOURS_DARK.critical, NISS_COLOURS.none, NISS_COLOURS_DARK.none]) {
+        const params = ring('solid', sizeMark, colour);
+        expect(params.colour, `${sizeMark} ${colour}`).toBe(colour);
+        expect(params.opacity).toBe(1);
+        expect(params.arcs).toEqual([[0, Math.PI * 2]]);
+      }
+    }
+  });
+
+  it('is neutral exactly when the lens holds nothing for the shape, like the mesh, and never carries a step colour then', () => {
+    for (const fill of FILL_KINDS.filter((kind) => kind !== 'solid')) {
+      const params = ring(fill, 'ring_only');
+      expect(params.colour, fill).toBe(NEUTRAL_COLOUR);
+      expect(params.colour, fill).not.toBe(NISS_COLOURS.critical);
+      expect(params.colour, fill).not.toBe(INSIDE_COLOUR);
+      expect(params.colour, fill).not.toBe(SELECTION_COLOUR);
+    }
+  });
+
+  it('tells every lens state apart without colour: no two states differ in colour alone', () => {
+    const shapes = FILL_KINDS.map((fill) => ({ fill, drawn: shapeOf(ring(fill, 'ring_only')) }));
+    expect(new Set(shapes.map((entry) => entry.drawn)).size, JSON.stringify(shapes)).toBe(FILL_KINDS.length);
+    // Only a shape the lens fills gets the whole turn: a broken ring is the mark of a lens that holds nothing.
+    for (const fill of FILL_KINDS) expect(ring(fill, 'ring_only').arcs.length === 1, fill).toBe(fill === 'solid');
+  });
+
+  it('keeps the ring\'s weight in the order the mesh\'s fills are, and never lets it fade out of sight', () => {
+    const opacity = (fill: (typeof FILL_KINDS)[number]): number => ring(fill, 'ring_only').opacity;
+    expect(opacity('solid')).toBeGreaterThan(opacity('translucent'));
+    expect(opacity('translucent')).toBeGreaterThan(opacity('lines'));
+    expect(opacity('lines')).toBeGreaterThan(opacity('neutral'));
+    // A hairline needs more of its colour than a filled surface to carry the same weight, so the floor is above the mesh's.
+    for (const fill of FILL_KINDS) expect(opacity(fill), fill).toBeGreaterThanOrEqual(FILL_OPACITY[fill]);
+    expect(FILL_OPACITY.translucent).toBeGreaterThan(FILL_OPACITY.neutral);
+  });
+
+  it('tells a coarse outline from no outline at all by the centre, not by the ring\'s size', () => {
+    const coarse = ring('solid', 'mesh_and_ring');
+    const place = ring('solid', 'ring_only');
+    expect(coarse.reason).toBe('coarse_outline');
+    expect(place.reason).toBe('place_only');
+    expect(coarse.dotMm).toBe(0);
+    expect(place.dotMm).toBeGreaterThan(0);
+    expect(place.dotMm).toBeLessThan(place.innerMm);
+    // The same radius in both cases: a ring marks a place, so its size must say nothing about the structure's.
+    expect([place.innerMm, place.outerMm]).toEqual([coarse.innerMm, coarse.outerMm]);
+    expect(place.outerMm).toBe(RING_OUTER_MM);
+  });
+
+  it('lays the arcs out in one turn, in order, with a gap after each and no overlap', () => {
+    for (const fill of FILL_KINDS) {
+      const { arcs } = ring(fill, 'ring_only');
+      for (const [at, [start, length]] of arcs.entries()) {
+        expect(length, fill).toBeGreaterThan(0);
+        expect(start + length).toBeLessThanOrEqual(Math.PI * 2 + 1e-9);
+        const next = arcs[at + 1];
+        if (next !== undefined) expect(start + length, `${fill} arc ${at}`).toBeLessThanOrEqual(next[0] + 1e-9);
+      }
+    }
+  });
+
+  it('draws the ring over the shapes but under the selection mark and the step labels', () => {
+    expect(DRAW_ORDER.marker).toBeGreaterThan(DRAW_ORDER.brainOutline);
+    expect(DRAW_ORDER.marker).toBeLessThan(DRAW_ORDER.mark);
   });
 });
 
