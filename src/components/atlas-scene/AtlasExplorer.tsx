@@ -6,6 +6,7 @@ import LoadNotice from './LoadNotice';
 import { useLoaded } from './use-loaded';
 import './atlas-scene.css';
 import './atlas-chain-devices.css';
+import './atlas-workspace.css';
 
 /**
  * The atlas explorer. It is built with no anatomy at all: everything it shows
