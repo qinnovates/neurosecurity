@@ -54,7 +54,7 @@ function isActive(href: string, currentPath: string): boolean {
             <a
               href={tab.href}
               class:list={[
-                'atlas-tab inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 whitespace-nowrap',
+                'atlas-tab inline-flex items-center justify-center min-h-11 px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 whitespace-nowrap',
                 active ? 'atlas-tab--active' : 'atlas-tab--inactive',
               ]}
               aria-current={active ? 'page' : undefined}
