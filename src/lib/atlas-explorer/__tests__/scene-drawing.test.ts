@@ -11,15 +11,15 @@ const hit = (structureKey: string, distance: number, overrides: Partial<PickHit>
 
 describe('materialParamsFor', () => {
   it('gives a filled shape its step colour, opaque, and every other fill a neutral, see-through look', () => {
-    expect(materialParamsFor(shape('solid'), false)).toMatchObject({ colour: '#123456', opacity: 1, isWireframe: false, writesDepth: true, shading: 'lit' });
-    expect(materialParamsFor(shape('translucent'), false)).toMatchObject({ colour: INSIDE_COLOUR, opacity: FILL_OPACITY.translucent, isWireframe: false, writesDepth: false });
-    expect(materialParamsFor(shape('lines'), false)).toMatchObject({ colour: NEUTRAL_COLOUR, isWireframe: true, shading: 'flat' });
-    expect(materialParamsFor(shape('neutral'), false)).toMatchObject({ colour: NEUTRAL_COLOUR, opacity: FILL_OPACITY.neutral });
+    expect(materialParamsFor(shape('solid'), false, 'light')).toMatchObject({ colour: '#123456', opacity: 1, isWireframe: false, writesDepth: true, shading: 'lit' });
+    expect(materialParamsFor(shape('translucent'), false, 'light')).toMatchObject({ colour: INSIDE_COLOUR, opacity: FILL_OPACITY.translucent, isWireframe: false, writesDepth: false });
+    expect(materialParamsFor(shape('lines'), false, 'light')).toMatchObject({ colour: NEUTRAL_COLOUR, isWireframe: true, shading: 'flat' });
+    expect(materialParamsFor(shape('neutral'), false, 'light')).toMatchObject({ colour: NEUTRAL_COLOUR, opacity: FILL_OPACITY.neutral });
   });
 
   it('never lets a see-through fill reach full opacity or take the lens colour, so only a filled shape reads as filled', () => {
     for (const fill of FILL_KINDS.filter((kind) => kind !== 'solid')) {
-      const params = materialParamsFor(shape(fill), false);
+      const params = materialParamsFor(shape(fill), false, 'light');
       expect(params.opacity, fill).toBeLessThan(0.5);
       expect(params.colour, fill).not.toBe('#123456');
       expect(params.colour, fill).not.toBe(SELECTION_COLOUR);
@@ -29,12 +29,12 @@ describe('materialParamsFor', () => {
   });
 
   it('draws the brain outline faint, two-sided and neutral whatever fill it is given', () => {
-    for (const fill of FILL_KINDS) expect(materialParamsFor(shape(fill, 'outline'), false)).toMatchObject({ colour: NEUTRAL_COLOUR, opacity: BRAIN_OUTLINE_OPACITY, isDoubleSided: true, writesDepth: false });
+    for (const fill of FILL_KINDS) expect(materialParamsFor(shape(fill, 'outline'), false, 'light')).toMatchObject({ colour: NEUTRAL_COLOUR, opacity: BRAIN_OUTLINE_OPACITY, isDoubleSided: true, writesDepth: false });
   });
 
   it('shows a filled shape\'s own inside under a cut, and only then', () => {
-    expect(materialParamsFor(shape('solid'), true).isDoubleSided).toBe(true);
-    expect(materialParamsFor(shape('solid'), false).isDoubleSided).toBe(false);
+    expect(materialParamsFor(shape('solid'), true, 'light').isDoubleSided).toBe(true);
+    expect(materialParamsFor(shape('solid'), false, 'light').isDoubleSided).toBe(false);
   });
 });
 

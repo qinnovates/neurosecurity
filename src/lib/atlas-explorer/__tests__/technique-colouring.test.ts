@@ -16,7 +16,7 @@ const CONTAINED_ONLY_TECHNIQUE = 'QIF-T0034';
 const lensOf = (techniqueId: string) => ({ kind: 'technique', techniqueId }) as const;
 const namedStates = (techniqueId: string): string[] => listNamedRegionIds(model.techniquesById.get(techniqueId)).map((regionId) => model.regionsById.get(regionId)?.geometry.state ?? 'missing');
 /** Whether the picture a page mounts, with the layers it starts with, fills any shape for the technique. */
-const fillsInMountedView = (techniqueId: string): boolean => buildSceneShapes(model, lensOf(techniqueId), INITIAL_EXPLORER_STATE.layers).some((shape) => shape.fill === 'solid');
+const fillsInMountedView = (techniqueId: string): boolean => buildSceneShapes(model, lensOf(techniqueId), INITIAL_EXPLORER_STATE.layers, 'light').some((shape) => shape.fill === 'solid');
 
 describe('classifyTechniqueColouring, on the data the site serves', () => {
   it('finds techniques of all three kinds the index holds, and puts every one of them in exactly one', () => {

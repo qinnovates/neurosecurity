@@ -13,8 +13,8 @@ import {
 } from 'three';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import { positionsToScene, rasToScene } from '@/lib/anatomy/ras-to-scene';
-import { DRAW_ORDER, RING_OUTER_MM, SELECTION_COLOUR, isPickable, materialParamsFor, ringParamsFor, selectionBrackets, type Box, type RingParams } from '@/lib/atlas-explorer/scene-drawing';
-import type { SceneShape } from '@/lib/atlas-explorer/scene-shapes';
+import { DRAW_ORDER, RING_OUTER_MM, SURFACE_INK, isPickable, materialParamsFor, ringParamsFor, selectionBrackets, type Box, type RingParams } from '@/lib/atlas-explorer/scene-drawing';
+import type { SceneShape, SceneTheme } from '@/lib/atlas-explorer/scene-shapes';
 
 /** How many segments a whole turn of a ring is drawn in; an arc gets its share of them, never fewer than three, which is three.js's own floor. */
 const RING_SEGMENTS_PER_TURN = 48;
@@ -43,17 +43,23 @@ export function buildGeometry(node: DecodedNode): BufferGeometry {
   return geometry;
 }
 
-function fillMaterial(shape: SceneShape, isCut: boolean): Material {
-  const params = materialParamsFor(shape, isCut);
+function fillMaterial(shape: SceneShape, isCut: boolean, theme: SceneTheme): Material {
+  const params = materialParamsFor(shape, isCut, theme);
   const shared = { color: params.colour, transparent: params.opacity < 1, opacity: params.opacity, depthWrite: params.writesDepth, side: params.isDoubleSided ? DoubleSide : FrontSide };
   return params.shading === 'flat' ? new MeshBasicMaterial({ ...shared, wireframe: params.isWireframe }) : new MeshLambertMaterial(shared);
 }
 
-/** Corner brackets around a box given in scene axes: lines only, drawn over everything so the mark is never hidden. */
-export function buildBrackets({ min, max }: Box): LineSegments {
+/**
+ * Corner brackets around a box given in scene axes: lines only, drawn over
+ * everything so the mark is never hidden.
+ *
+ * The ink is the surface's, not a constant: near-black brackets on the dark
+ * surface read at 1.10:1, which is a mark drawn and then hidden.
+ */
+export function buildBrackets({ min, max }: Box, theme: SceneTheme): LineSegments {
   const geometry = new BufferGeometry();
   geometry.setAttribute('position', new Float32BufferAttribute(selectionBrackets(min, max), 3));
-  const brackets = new LineSegments(geometry, new LineBasicMaterial({ color: SELECTION_COLOUR, depthTest: false, transparent: true }));
+  const brackets = new LineSegments(geometry, new LineBasicMaterial({ color: SURFACE_INK[theme].selection, depthTest: false, transparent: true }));
   brackets.renderOrder = DRAW_ORDER.mark;
   return brackets;
 }
@@ -104,13 +110,16 @@ function buildMarkerTarget(centre: readonly [number, number, number]): Mesh {
   return target;
 }
 
-/** @param geometry the shape's mesh, or null for a structure the atlas marks with a ring alone */
-export function buildShapeObjects(shape: SceneShape, geometry: BufferGeometry | null, isSelected: boolean, isCut: boolean): ShapeObjects {
+/**
+ * @param geometry the shape's mesh, or null for a structure the atlas marks with a ring alone
+ * @param theme the surface the canvas is drawn on, for the inks that are not the shape's own
+ */
+export function buildShapeObjects(shape: SceneShape, geometry: BufferGeometry | null, isSelected: boolean, isCut: boolean, theme: SceneTheme): ShapeObjects {
   const objects: ShapeObjects = { shape, group: new Group(), pickTargets: [], billboards: [], box: null };
   const centre = rasToScene(shape.centroidMm);
   if (geometry !== null) {
-    const mesh = new Mesh(geometry, fillMaterial(shape, isCut));
-    mesh.renderOrder = materialParamsFor(shape, isCut).drawOrder;
+    const mesh = new Mesh(geometry, fillMaterial(shape, isCut, theme));
+    mesh.renderOrder = materialParamsFor(shape, isCut, theme).drawOrder;
     objects.group.add(mesh);
     if (isPickable(shape)) objects.pickTargets.push(mesh);
     const box = geometry.boundingBox;

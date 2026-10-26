@@ -79,8 +79,8 @@ describe('the devices layer', () => {
 
 describe('the head surface and electrode picks', () => {
   it('draws the head surface as a faint shell that is never picked', () => {
-    const shell = materialParamsFor({ layer: 'devices', fill: 'neutral', colour: '#000000' }, false);
-    expect(shell.opacity).toBeLessThan(materialParamsFor({ layer: 'outline', fill: 'neutral', colour: '#000000' }, false).opacity);
+    const shell = materialParamsFor({ layer: 'devices', fill: 'neutral', colour: '#000000' }, false, 'light');
+    expect(shell.opacity).toBeLessThan(materialParamsFor({ layer: 'outline', fill: 'neutral', colour: '#000000' }, false, 'light').opacity);
     expect(shell.writesDepth).toBe(false);
     expect(isPickable({ layer: 'devices' })).toBe(false);
   });

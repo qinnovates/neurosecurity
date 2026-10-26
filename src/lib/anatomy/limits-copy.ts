@@ -7,6 +7,13 @@
  *
  * Written for a reader who is not a specialist: plain words, one or two
  * sentences each, placed beside the thing they limit.
+ *
+ * No sentence names the colour of a mark the canvas draws, unless that colour is
+ * the same on both surfaces. The selection brackets and the pale fill are
+ * authored per surface (`SURFACE_INK` in atlas-explorer/scene-drawing.ts), so a
+ * sentence that called the corner marks orange was describing an ink that had
+ * already been replaced and would be wrong again on the next restyle. Name the
+ * mark by its shape and its role instead.
  */
 
 export const LIMIT_TEMPLATES = {
@@ -89,8 +96,9 @@ export const LIMIT_TEMPLATES = {
   whole_scene: 'The layers come from different studies and were lined up to one average brain by computer. Do not read meaning into shapes that only just touch or miss.',
   outline_shape: 'This is the outer shape of an average made from many people\'s brain scans, not anyone\'s real brain. Much of the brain\'s surface lies inside folds that averaging smooths away, so only the outside is shown.',
   mirrored_scene: 'The {source} shapes were drawn on one side of the brain and mirrored to make the other. A difference between left and right in them means nothing.',
-  marker_ring: 'A ring alone marks a structure too small to draw as a shape here. It shows roughly where the structure is, not its size or shape.',
+  marker_ring: 'A ring alone marks a structure this build has no outline for: none was built from the source, so there is no shape to draw. It shows roughly where the structure is, not its size or shape.',
   coarse_ring: 'A shape with a ring on it is only a few scan pixels wide, so its size and edges are rough.',
+  ring_under_lens: 'A ring reads under the lens the way a fill does: it is closed and takes the step\'s colour where the lens holds a value for its shape, and broken and grey where it holds none. A broken ring is not a low value.',
   unfilled_shape: 'A shape drawn as lines with no fill has no data under this lens. That is not the same as a low value.',
   inside_shape: 'A pale shape holds what the lens shows somewhere inside it, or holds records that differ. It is not filled, because the shape is not any one of them.',
   lens_fills_nothing: 'Nothing is filled under this lens. Where it holds a value, the value lies somewhere inside a larger shape, which is drawn pale and darker than the shapes with no record.',
@@ -135,8 +143,8 @@ export const LIMIT_TEMPLATES = {
   device_fact_full_text: 'An AI wrote this sentence from the paper. No person has checked it.',
 
   // The 3D view on another page: what its marks mean there.
-  view_chosen_regions: 'The orange corner marks stand around the regions you chose. They show your choice and nothing the data says about those regions; the fill colours come from the lens alone.',
-  view_chosen_band: 'The orange corner marks stand around every shape drawn for a region that QIF places in band {band}, the band you chose. They show your choice; the fill colours come from the lens alone.',
+  view_chosen_regions: 'The corner marks stand around the regions you chose. They show your choice and nothing the data says about those regions; the fill colours come from the lens alone.',
+  view_chosen_band: 'The corner marks stand around every shape drawn for a region that QIF places in band {band}, the band you chose. They show your choice; the fill colours come from the lens alone.',
   view_regions_without_shape: 'No shape of its own is drawn for {count} of these, so no mark here stands for it alone: {regions}.',
   view_technique_band_reach: 'The catalog also tags this technique with {bands}. A band tag is about the band as a whole: it names none of the regions there, and no region is filled because of it.',
   view_region_unknown: 'Not in this build of the atlas, so not shown in the picture: {regions}.',
