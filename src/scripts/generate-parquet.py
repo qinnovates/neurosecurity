@@ -79,10 +79,13 @@ def flatten_technique(t: dict) -> dict:
         # Citation gate: status derived from `sources`; defence-side papers are kept apart and never counted
         "peer_review_status": t.get("peer_review_status", ""),
         "defensive_sources": "; ".join(t.get("defensive_sources") or []),
-        # NISS scores
-        "niss_score": float(niss.get("score", 0)) if niss.get("score") else None,
-        "niss_vector": niss.get("vector", ""),
-        "niss_severity": niss.get("severity", ""),
+        # NISS scores. Null means nobody scored the technique; it is not a low
+        # score. `is not None` rather than a truth test, so the one technique
+        # measured at 0.0 keeps its measured score instead of reading as unscored,
+        # and the 47 with no NISS score carry null rather than 0, "" or "none".
+        "niss_score": float(niss["score"]) if niss.get("score") is not None else None,
+        "niss_vector": niss.get("vector"),
+        "niss_severity": niss.get("severity"),
         # Three-state scoring: a provisional entry has a range and no score; an unscored entry has a reason
         "niss_scoring_state": niss.get("scoring_state", "unscored"),
         "niss_score_min": float(niss["score_min"]) if niss.get("score_min") is not None else None,
