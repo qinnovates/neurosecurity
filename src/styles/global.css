@@ -277,6 +277,20 @@ code, pre {
   border-color: var(--color-accent-primary);
 }
 
+/* ═══ Hidden-scrollbar overflow track ═══ */
+/* For a horizontally-scrollable strip (tab bars, segmented controls) that must not show a
+   scrollbar while still scrolling on touch and with a trackpad. Global because more than one
+   island needs it (AtlasViewSwitcher's tab row, TaraVisualization's view-mode control) and an
+   Astro component's own <style> block is scoped, so it cannot be shared by a React island. */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* ═══ Gradient Border Utility ═══ */
 .gradient-border {
   position: relative;

@@ -227,9 +227,12 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                     </div>
                 </div>
 
-                <div className="flex flex-col items-end gap-1.5">
+                <div className="flex flex-col items-end gap-1.5 max-w-full">
                     <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mr-2">View techniques by</span>
-                    <div className="flex p-1.5 bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+                    {/* overflow-x-auto (matching AtlasViewSwitcher's own tab-row pattern) keeps this segmented
+                        control from forcing page-level horizontal scroll once four px-8 buttons no longer fit
+                        the viewport (from ~390px down to the 320px floor). */}
+                    <div className="flex p-1.5 bg-slate-50 rounded-2xl border border-slate-100 max-w-full overflow-x-auto scrollbar-hide">
                         {(['modality', 'clinical', 'diagnostic', 'governance'] as ViewMode[]).map(mode => {
                             const colors = getModeColor(mode);
                             const isActive = viewMode === mode;
@@ -237,7 +240,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                 <button
                                     key={mode}
                                     onClick={() => setViewMode(mode)}
-                                    className={`px-8 py-3 rounded-xl text-xs font-bold transition-all duration-300 flex items-center gap-2 ${isActive
+                                    className={`min-h-11 shrink-0 px-5 sm:px-8 py-3 rounded-xl text-xs font-bold transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${isActive
                                         ? `${colors.bg} text-white shadow-lg ${colors.shadow}`
                                         : 'text-slate-400 hover:text-slate-600 hover:bg-white/50'
                                         }`}
@@ -259,7 +262,8 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                         <span className="text-[11px] font-semibold text-slate-400 mr-1">Filter by right:</span>
                         <button
                             onClick={() => setNeurorightFilter(null)}
-                            className={`px-3 py-1 rounded-full text-[11px] font-bold transition-all ${!neurorightFilter ? 'bg-purple-600 text-white' : 'bg-slate-50 text-slate-400 hover:text-slate-600'}`}
+                            // min-h-11 (44px) keeps the tap target WCAG-sized on touch while the chip itself stays visually compact.
+                            className={`min-h-11 inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold transition-all ${!neurorightFilter ? 'bg-purple-600 text-white' : 'bg-slate-50 text-slate-400 hover:text-slate-600'}`}
                         >
                             All
                         </button>
@@ -270,7 +274,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                 <button
                                     key={code}
                                     onClick={() => setNeurorightFilter(isActive ? null : code)}
-                                    className={`px-3 py-1 rounded-full text-[11px] font-bold transition-all ${isActive
+                                    className={`min-h-11 inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold transition-all ${isActive
                                         ? `${colors.bg} ${colors.text} border ${colors.border}`
                                         : 'bg-slate-50 text-slate-400 hover:text-slate-600'
                                     }`}
@@ -293,7 +297,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                             <button
                                 key={s.id}
                                 onClick={() => setSortMode(s.id)}
-                                className={`px-3 py-1 rounded-full text-[11px] font-bold transition-all ${sortMode === s.id
+                                className={`min-h-11 inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold transition-all ${sortMode === s.id
                                     ? 'bg-slate-900 text-white'
                                     : 'bg-slate-50 text-slate-400 hover:text-slate-600'
                                 }`}

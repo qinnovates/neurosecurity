@@ -84,11 +84,6 @@ function isActive(href: string, currentPath: string): boolean {
     border-color: var(--color-accent-primary);
     background: color-mix(in srgb, var(--color-accent-primary) 8%, var(--color-glass-bg));
   }
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
+  /* .scrollbar-hide itself now lives in src/styles/global.css: a scoped Astro <style> block
+     can't be shared with the React islands that also need it (TaraVisualization.tsx). */
 </style>
