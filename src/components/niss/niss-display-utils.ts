@@ -1,25 +1,28 @@
 /**
  * NISS Display Utilities
  *
- * Shared display constants and helpers for NISS UI components.
- * Maps NISS types from niss-parser.ts to visual properties
- * (colors, icons, labels, descriptions) used by NissScoreBadge,
- * PinsBadge, and NissVectorChips.
+ * Shared display constants and helpers for NISS UI components: the shape and
+ * the words for each severity, and the metric order.
+ *
+ * Colour is not here. The severity display used to carry its own Tailwind
+ * classes, which was the second of four severity palettes in the tree and the
+ * one that measured worst: every one of its five values sat between 1.3:1 and
+ * 2.4:1 against a light page, under the 3:1 floor this codebase names. It now
+ * carries the tone key of the one measured palette in
+ * `components/radar/radar-palette.css`, and a consumer resolves it with
+ * `data-radar-fill`.
  */
 
 import type { NissSeverity, NissVector } from '../../lib/niss-parser';
+import type { RadarTone } from '@/components/radar/radar-patterns';
 
 // ═══════════════════════════════════════════════════════════════════
 // Severity Display Map
 // ═══════════════════════════════════════════════════════════════════
 
 export interface SeverityDisplay {
-  /** Tailwind background class */
-  bg: string;
-  /** Tailwind border class */
-  border: string;
-  /** Tailwind text class */
-  text: string;
+  /** The tone key of the one radar palette; a consumer sets `data-radar-fill` to it and reads `--radar-tone`. */
+  tone: RadarTone;
   /** Unique Unicode shape icon (colorblind-accessible) */
   icon: string;
   /** Human-readable label */
@@ -29,52 +32,23 @@ export interface SeverityDisplay {
 }
 
 export const SEVERITY_DISPLAY: Record<NissSeverity, SeverityDisplay> = {
-  none: {
-    bg: 'bg-slate-500/10',
-    border: 'border-slate-500/20',
-    text: 'text-slate-400',
-    icon: '\u25CB',       // ○ open circle
-    label: 'None',
-    ariaLabel: 'NISS severity: none',
-  },
-  low: {
-    bg: 'bg-blue-500/15',
-    border: 'border-blue-500/30',
-    text: 'text-blue-400',
-    icon: '\u25CE',       // ◎ bullseye
-    label: 'Low',
-    ariaLabel: 'NISS severity: low',
-  },
-  medium: {
-    bg: 'bg-yellow-500/15',
-    border: 'border-yellow-500/30',
-    text: 'text-yellow-400',
-    icon: '\u25B2',       // ▲ triangle
-    label: 'Medium',
-    ariaLabel: 'NISS severity: medium',
-  },
-  high: {
-    bg: 'bg-amber-500/15',
-    border: 'border-amber-500/30',
-    text: 'text-amber-400',
-    icon: '\u25C6',       // ◆ diamond
-    label: 'High',
-    ariaLabel: 'NISS severity: high',
-  },
-  critical: {
-    bg: 'bg-red-500/15',
-    border: 'border-red-500/30',
-    text: 'text-red-400',
-    icon: '\u2B22',       // ⬢ hexagon
-    label: 'Critical',
-    ariaLabel: 'NISS severity: critical',
-  },
+  none: { tone: 'none', icon: '\u25CB', label: 'None', ariaLabel: 'NISS severity: none' },
+  low: { tone: 'low', icon: '\u25CE', label: 'Low', ariaLabel: 'NISS severity: low' },
+  medium: { tone: 'medium', icon: '\u25B2', label: 'Medium', ariaLabel: 'NISS severity: medium' },
+  high: { tone: 'high', icon: '\u25C6', label: 'High', ariaLabel: 'NISS severity: high' },
+  critical: { tone: 'critical', icon: '\u2B22', label: 'Critical', ariaLabel: 'NISS severity: critical' },
 } as const;
 
 // ═══════════════════════════════════════════════════════════════════
 // Metric Descriptions
 // ═══════════════════════════════════════════════════════════════════
 
+/**
+ * Nothing renders these today: the chip component that did was orphaned and has
+ * been removed, and the scoring page carries its own copy of the metric prose.
+ * Left in place rather than deleted because it is framework content, not a
+ * display detail; wire it in or delete it when the NISS copy is next revised.
+ */
 export interface MetricDescription {
   /** One-line summary of the metric */
   summary: string;
@@ -161,53 +135,3 @@ export const METRIC_DESCRIPTIONS: Record<string, MetricDescription> = {
 export const METRIC_KEYS: readonly (keyof Omit<NissVector, 'version'>)[] = [
   'bi', 'cr', 'cd', 'cv', 'rv', 'np',
 ] as const;
-
-// ═══════════════════════════════════════════════════════════════════
-// Chip Color Helper
-// ═══════════════════════════════════════════════════════════════════
-
-/** Color tier for an individual metric value chip */
-export interface ChipColor {
-  bg: string;
-  border: string;
-  text: string;
-}
-
-/**
- * Map a metric's numeric value (0-10 scale) to a color tier.
- * Colors reflect the individual metric intensity, not overall severity.
- *
- * - 0.0       -> slate  (none / baseline)
- * - 0.1-3.3   -> blue   (low)
- * - 3.4-6.7   -> amber  (moderate)
- * - 6.8-10.0  -> red    (high / critical)
- * - undefined  -> slate  (X / not defined)
- */
-export function getMetricChipColor(value: number | undefined): ChipColor {
-  if (value === undefined || value === 0) {
-    return {
-      bg: 'bg-slate-500/10',
-      border: 'border-slate-500/25',
-      text: 'text-slate-400',
-    };
-  }
-  if (value <= 3.3) {
-    return {
-      bg: 'bg-blue-500/15',
-      border: 'border-blue-500/30',
-      text: 'text-blue-400',
-    };
-  }
-  if (value <= 6.7) {
-    return {
-      bg: 'bg-amber-500/15',
-      border: 'border-amber-500/30',
-      text: 'text-amber-400',
-    };
-  }
-  return {
-    bg: 'bg-red-500/15',
-    border: 'border-red-500/30',
-    text: 'text-red-400',
-  };
-}

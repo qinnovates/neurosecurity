@@ -7,10 +7,11 @@ import { buildChainShapes, describeChainFrame, type ChainFrame } from '@/lib/atl
 import { buildDeviceCaption, buildDeviceDrawing, type DeviceCaption, type DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { toColourMode, type Lens } from '@/lib/atlas-explorer/lens-state';
-import { buildSceneShapes, type SceneShape } from '@/lib/atlas-explorer/scene-shapes';
+import { buildSceneShapes, type SceneShape, type SceneTheme } from '@/lib/atlas-explorer/scene-shapes';
 import type { BoundsMm } from '@/lib/atlas-explorer/slice-plane';
 import { buildViewportCaption, type ViewportCaption } from '@/lib/atlas-explorer/viewport-caption';
 import { useSceneAssets, type SceneAssetStates } from './use-scene-assets';
+import { useSceneTheme } from './use-scene-theme';
 
 export interface ViewportScene {
   /** The files the requested layers need, in the order they load. */
@@ -26,6 +27,12 @@ export interface ViewportScene {
   /** The electrode dots, once the head surface they sit on has arrived and passed its checks. Null otherwise. */
   devices: DeviceDrawing | null;
   deviceCaption: DeviceCaption | null;
+  /**
+   * The surface the canvas is drawn on. Read once here, by the one hook that asks
+   * the document, and carried out to the canvas so the drawing layer is handed the
+   * answer rather than looking it up again. See `SceneTheme` in scene-shapes.ts.
+   */
+  theme: SceneTheme;
 }
 
 const SHAPE_ID_SEPARATOR = ':';
@@ -43,7 +50,8 @@ function unionBounds(nodes: readonly DecodedNode[]): BoundsMm | null {
  * @param chain the threat-model steps on screen; while set, shapes carry the technique lens's marks for those steps
  */
 export function useViewportScene(model: ExplorerModel, lens: Lens, layers: Readonly<Record<LayerId, boolean>>, chain: ChainFrame | null = null): ViewportScene {
-  const shapes = useMemo(() => (chain === null ? buildSceneShapes(model, toColourMode(lens), layers) : buildChainShapes(model, chain, layers)), [model, lens, layers, chain]);
+  const theme = useSceneTheme();
+  const shapes = useMemo(() => (chain === null ? buildSceneShapes(model, toColourMode(lens), layers, theme) : buildChainShapes(model, chain, layers, theme)), [model, lens, layers, chain, theme]);
   const assets = useMemo(() => model.index.assets.filter((asset) => shapes.some((shape) => shape.assetId === asset.id)), [model, shapes]);
   const { states, retry } = useSceneAssets(model.index, assets.map((asset) => asset.id));
 
@@ -64,7 +72,7 @@ export function useViewportScene(model: ExplorerModel, lens: Lens, layers: Reado
     const devices = hasHeadSurface ? buildDeviceDrawing(model.index, layers) : null;
     return {
       assets, assetStates: states, retryAssets: retry, drawnShapes, nodesByShapeId, bounds: unionBounds(drawnNodes), caption,
-      devices, deviceCaption: devices === null ? null : buildDeviceCaption(devices),
+      devices, deviceCaption: devices === null ? null : buildDeviceCaption(devices), theme,
     };
-  }, [model, lens, layers, chain, shapes, assets, states, retry]);
+  }, [model, lens, layers, chain, shapes, assets, states, retry, theme]);
 }

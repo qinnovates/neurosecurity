@@ -1,0 +1,84 @@
+/*
+ * The brain-first layout of the explorer, and the parts of the region pane the
+ * layout introduced.
+ *
+ * It is a separate stylesheet from atlas-scene.css on purpose. The rules here
+ * reach into the 3D view's own classes to put the picture inside a column of
+ * the main grid, and atlas-scene.css keeps the 3D view's class names to the 3D
+ * view's own section, which a guard asserts.
+ *
+ * Colours come from the explorer's theme variables, so both themes follow the
+ * Lab. Every state has a word beside it; nothing here is carried by colour
+ * alone, and nothing here is carried by a bar alone.
+ */
+
+/* The picture shares the left column with the list, so that column takes a little more of the row than the pane. */
+.atlas-workspace .atlas-main { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+
+/* The picture stands in a column, so its controls and legend go under it rather than beside it, and it is as wide as the column. */
+.atlas-workspace .atlas-main-list .atlas-viewport-body { grid-template-columns: minmax(0, 1fr); }
+.atlas-workspace .atlas-main-list .atlas-canvas { height: min(54vh, 30rem); }
+
+/* The lens bar spans both columns above the grid: it governs the picture and the list together. */
+.atlas-workspace > .atlas-lens-panel { grid-column: 1 / -1; }
+.atlas-lenses[data-fact-lens="false"] .atlas-lens-thumb { opacity: 0; }
+.atlas-lens-blocked { grid-column: 1 / -1; margin: 0.375rem 0 0; padding: 0 0.125rem; font-size: 0.75rem; color: var(--atlas-ink-soft); }
+.atlas-lens[aria-disabled="true"] { cursor: not-allowed; color: var(--atlas-ink-soft); text-decoration: line-through; text-decoration-thickness: 1px; }
+.atlas-highlight { border-top: 1px solid var(--atlas-line); padding-top: 0.625rem; }
+
+/* How a fact reached this region: stated on every block that holds one, because the join is what separates a threat model from a colour. */
+.atlas-route { display: block; margin: 0.125rem 0 0.375rem; font-size: 0.75rem; font-weight: 600; color: var(--atlas-ink-soft); }
+
+/* What we hold, before anything derived from it. */
+.atlas-coverage-rows { list-style: none; margin: 0.5rem 0; padding: 0; display: grid; gap: 0.5rem; }
+.atlas-coverage-row { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 0.125rem 0.75rem; align-items: baseline; }
+.atlas-coverage-row > .atlas-route { grid-column: 2; }
+.atlas-coverage-rows[data-atlas-coverage="true"] .atlas-coverage-row { grid-template-columns: minmax(0, 1fr); }
+.atlas-coverage-count { overflow-wrap: anywhere; }
+.atlas-coverage-of { color: var(--atlas-ink-soft); }
+.atlas-coverage-line { margin: 0.375rem 0; }
+/* A nought is not a quieter number than a five, so a row holding nothing keeps full-strength ink and says so in words. */
+.atlas-coverage-row[data-held="false"] .atlas-coverage-count { font-weight: inherit; }
+.atlas-coverage-bar {
+  display: block; position: relative; overflow: hidden; height: 0.625rem; border: 1px solid var(--atlas-line-strong); border-radius: 0.1875rem;
+  /* Absence is a hatch, never a pale fill: a pale fill would read as a small value. */
+  background-image: repeating-linear-gradient(45deg, var(--atlas-line-strong) 0 1px, transparent 1px 4px);
+}
+.atlas-coverage-fill { position: absolute; inset: 0 auto 0 0; background: var(--atlas-accent-fill); animation: atlas-coverage-fill var(--atlas-move) var(--atlas-ease) both; }
+.atlas-coverage-bar[data-held="true"] { background-image: none; }
+.atlas-coverage-note { margin: 0.375rem 0; padding-left: 0.625rem; max-width: 72ch; border-left: 2px solid var(--atlas-line-strong); color: var(--atlas-ink-soft); }
+.atlas-coverage-charts:empty { display: none; }
+
+/* The regions the lens holds nothing for, under their own heading below every band, ordered against nothing. */
+.atlas-not-assessed { padding-left: 0; border-top: 2px solid var(--atlas-line-strong); }
+.atlas-not-assessed::before { content: none; }
+.atlas-not-assessed .atlas-band-heading { padding-left: 0; }
+.atlas-not-assessed .atlas-row { padding-left: 0.5rem; }
+
+/* Material that arrives through the region's band: a bucket of up to every region, so it is fenced off and counted in no total. */
+.atlas-band-context { margin-top: 1rem; padding: 0 0 0 0.75rem; border-left: 3px dashed var(--atlas-line-strong); }
+.atlas-band-context .atlas-section { margin-top: 0.5rem; }
+
+@keyframes atlas-coverage-fill { from { width: 0; } }
+
+/* Less motion: the bar is there at its length and never grows into it. */
+@media (prefers-reduced-motion: reduce) {
+  .atlas-coverage-fill { animation: none; }
+}
+
+@media (max-width: 960px) {
+  /* Stacked, the picture no longer shares a row with the pane, so it takes the window's height again. */
+  .atlas-workspace .atlas-main-list .atlas-canvas { height: min(60vh, 32rem); }
+}
+
+/* Reflow, WCAG 1.4.10: at 320 px every grid here is one column and nothing is measured in a width the window may not have. */
+@media (max-width: 460px) {
+  .atlas-coverage-row, .atlas-coverage-row[data-held] { grid-template-columns: minmax(0, 1fr); }
+  .atlas-coverage-row > .atlas-route { grid-column: 1; }
+  .atlas-coverage-bar { width: 100%; }
+  /* Two rows of two, so the thumb's one-row arithmetic no longer applies: the pressed lens carries the fill itself. */
+  .atlas-lenses { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .atlas-lens-thumb { display: none; }
+  .atlas-lens[aria-pressed="true"] { background: var(--atlas-accent-fill); border-radius: 0.4375rem; }
+  .atlas-band-context { padding-left: 0.5rem; }
+}

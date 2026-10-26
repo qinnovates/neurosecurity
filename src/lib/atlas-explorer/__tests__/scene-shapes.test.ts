@@ -3,7 +3,8 @@ import { INITIAL_EXPLORER_STATE } from '@/components/atlas-scene/atlas-state';
 import { OWNERSHIP_MARKS, type ColourMode } from '@/lib/anatomy/colour-modes';
 import { matchesLimitTemplate } from '@/lib/anatomy/limits-copy';
 import { resolvePick } from '../resolve-pick';
-import { BAND_COLOURS, NEUTRAL_COLOUR, NISS_COLOURS, buildSceneShapes, describeFill, listLegendSteps } from '../scene-shapes';
+import { ringParamsFor } from '../scene-drawing';
+import { BAND_COLOURS, BAND_COLOURS_DARK, NEUTRAL_COLOUR, NISS_COLOURS, NISS_COLOURS_DARK, buildSceneShapes, describeFill, listLegendSteps, type SceneShape } from '../scene-shapes';
 import { buildViewportCaption, readDisagreementRange } from '../viewport-caption';
 import { FIXTURE_IDS, buildFixtureModel, loadRealModel } from './explorer-fixtures';
 
@@ -19,16 +20,28 @@ const HEX = /^#[0-9a-f]{6}$/;
 
 describe('describeFill', () => {
   it('fills a shape only where the style functions say solid, in a colour keyed by the step', () => {
-    expect(describeFill(fixture, 'fixture_atlas:10', { kind: 'band' })).toMatchObject({ fill: 'solid', colour: BAND_COLOURS.N7, step: 'N7' });
-    expect(describeFill(fixture, 'fixture_atlas:10', { kind: 'niss' })).toMatchObject({ fill: 'solid', colour: NISS_COLOURS.high, step: 'high' });
-    expect(describeFill(fixture, 'fixture_atlas:20', { kind: 'band' })).toMatchObject({ fill: 'translucent', colour: NEUTRAL_COLOUR, step: null });
+    expect(describeFill(fixture, 'fixture_atlas:10', { kind: 'band' }, 'light')).toMatchObject({ fill: 'solid', colour: BAND_COLOURS.N7, step: 'N7' });
+    expect(describeFill(fixture, 'fixture_atlas:10', { kind: 'niss' }, 'light')).toMatchObject({ fill: 'solid', colour: NISS_COLOURS.high, step: 'high' });
+    expect(describeFill(fixture, 'fixture_atlas:20', { kind: 'band' }, 'light')).toMatchObject({ fill: 'translucent', colour: NEUTRAL_COLOUR, step: null });
+  });
+
+  it('keys the colour to the surface the canvas is on, never to one palette for both', () => {
+    for (const mode of [{ kind: 'band' } as const, { kind: 'niss' } as const]) {
+      const light = describeFill(fixture, 'fixture_atlas:10', mode, 'light');
+      const dark = describeFill(fixture, 'fixture_atlas:10', mode, 'dark');
+      // The same step and the same fill: only the ink follows the surface.
+      expect(dark, mode.kind).toMatchObject({ fill: light.fill, step: light.step });
+      expect(dark.colour, mode.kind).not.toBe(light.colour);
+    }
+    expect(describeFill(fixture, 'fixture_atlas:10', { kind: 'band' }, 'dark').colour).toBe(BAND_COLOURS_DARK.N7);
+    expect(describeFill(fixture, 'fixture_atlas:10', { kind: 'niss' }, 'dark').colour).toBe(NISS_COLOURS_DARK.high);
   });
 
   it('draws no data as lines, never as the lowest step, and colours nothing while the lens waits for a subject', () => {
-    const unlit = describeFill(fixture, 'fixture_atlas:10', { kind: 'technique', techniqueId: FIXTURE_IDS.bandLevelTechnique });
+    const unlit = describeFill(fixture, 'fixture_atlas:10', { kind: 'technique', techniqueId: FIXTURE_IDS.bandLevelTechnique }, 'light');
     expect(unlit).toMatchObject({ fill: 'lines', colour: NEUTRAL_COLOUR, step: null });
     expect(unlit.colour).not.toBe(NISS_COLOURS.low);
-    expect(describeFill(fixture, 'fixture_atlas:10', null)).toMatchObject({ fill: 'neutral', step: null });
+    expect(describeFill(fixture, 'fixture_atlas:10', null, 'light')).toMatchObject({ fill: 'neutral', step: null });
   });
 
   it('never fills a real shape that the style functions do not mark solid, in any mode (guard)', () => {
@@ -36,7 +49,7 @@ describe('describeFill', () => {
     for (const mode of MODES) {
       for (const structure of real.index.structures) {
         const mark = real.styleStructure(structure.key, mode).mark;
-        const look = describeFill(real, structure.key, mode);
+        const look = describeFill(real, structure.key, mode, 'light');
         expect(OWNERSHIP_MARKS).toContain(mark);
         expect(look.fill === 'solid', `${structure.key} ${mode.kind}`).toBe(mark === 'solid');
         expect(look.colour).toMatch(HEX);
@@ -57,14 +70,14 @@ describe('describeFill', () => {
 });
 
 describe('buildSceneShapes on the real index (guard)', () => {
-  const shapes = buildSceneShapes(real, { kind: 'band' }, INITIAL_EXPLORER_STATE.layers);
+  const shapes = buildSceneShapes(real, { kind: 'band' }, INITIAL_EXPLORER_STATE.layers, 'light');
 
   it('draws only layers that are both asked for and available, one shape per structure and side', () => {
     expect(new Set(shapes.map((shape) => shape.layer))).toEqual(new Set(['outline', 'cortical', 'deep']));
     expect(new Set(shapes.map((shape) => shape.id)).size).toBe(shapes.length);
     expect(shapes.length).toBeGreaterThan(150);
-    expect(buildSceneShapes(real, { kind: 'band' }, { ...INITIAL_EXPLORER_STATE.layers, cortical: false }).some((shape) => shape.layer === 'cortical')).toBe(false);
-    expect(buildSceneShapes(real, { kind: 'band' }, ALL_LAYERS).some((shape) => shape.layer === 'tracts' || shape.layer === 'networks')).toBe(false);
+    expect(buildSceneShapes(real, { kind: 'band' }, { ...INITIAL_EXPLORER_STATE.layers, cortical: false }, 'light').some((shape) => shape.layer === 'cortical')).toBe(false);
+    expect(buildSceneShapes(real, { kind: 'band' }, ALL_LAYERS, 'light').some((shape) => shape.layer === 'tracts' || shape.layer === 'networks')).toBe(false);
   });
 
   it('marks structures too small to outline with a ring alone, and coarse ones with a mesh and a ring', () => {
@@ -82,7 +95,32 @@ describe('buildSceneShapes on the real index (guard)', () => {
 
   it('lists the steps on screen for the legend', () => {
     expect(listLegendSteps(shapes).map((entry) => entry.step)).toEqual(expect.arrayContaining(['N7', 'N6']));
-    expect(listLegendSteps(buildSceneShapes(real, null, INITIAL_EXPLORER_STATE.layers))).toEqual([]);
+    expect(listLegendSteps(buildSceneShapes(real, null, INITIAL_EXPLORER_STATE.layers, 'light'))).toEqual([]);
+  });
+
+  /**
+   * The rings sit on the structures the atlas resolves worst -- the hypothalamic
+   * nuclei, the subthalamic nucleus, the two parts of the substantia nigra and the
+   * ventral tegmental area -- which is exactly where a reader most needs to know
+   * what the lens says. A ring that looked the same under every lens was the lens
+   * quietly stopping at the hardest cases.
+   */
+  it('shows the lens on every ring, and never one look for every lens state', () => {
+    const ringsUnder = (mode: ColourMode | null): SceneShape[] => buildSceneShapes(real, mode, INITIAL_EXPLORER_STATE.layers, 'light').filter((shape) => shape.sizeMark !== 'mesh');
+    const looksUnder = (mode: ColourMode | null): Set<string> => new Set(ringsUnder(mode).map((shape) => JSON.stringify(ringParamsFor(shape))));
+    expect(ringsUnder({ kind: 'band' }).length).toBeGreaterThan(20);
+    expect(ringsUnder({ kind: 'band' }).some((shape) => shape.sizeMark === 'ring_only')).toBe(true);
+    for (const mode of MODES) {
+      for (const shape of ringsUnder(mode)) {
+        const ring = ringParamsFor(shape);
+        expect(ring, `${shape.id} ${mode.kind}`).not.toBeNull();
+        // The ring is the fill's own colour wherever the lens fills the shape, and the shared neutral wherever it does not.
+        expect(ring?.colour, `${shape.id} ${mode.kind}`).toBe(shape.fill === 'solid' ? shape.colour : NEUTRAL_COLOUR);
+      }
+    }
+    // Under a lens that reaches these structures the rings differ; with no lens chosen the only difference left is why each ring is there.
+    expect(looksUnder({ kind: 'band' }).size).toBeGreaterThan(looksUnder(null).size);
+    expect(new Set(ringsUnder(null).map((shape) => ringParamsFor(shape)?.reason)).size).toBe(looksUnder(null).size);
   });
 });
 
@@ -109,7 +147,7 @@ describe('resolvePick', () => {
 });
 
 describe('buildViewportCaption', () => {
-  const shapes = buildSceneShapes(real, { kind: 'niss' }, INITIAL_EXPLORER_STATE.layers);
+  const shapes = buildSceneShapes(real, { kind: 'niss' }, INITIAL_EXPLORER_STATE.layers, 'light');
   const caption = buildViewportCaption(real, { kind: 'niss' }, shapes);
 
   it('carries the review mark, the lens with its own limit, and a position sentence for every layer drawn', () => {

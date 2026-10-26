@@ -4,10 +4,15 @@
  *
  * Each severity level uses a unique Unicode shape for colorblind accessibility:
  *   none=○  low=◎  medium=▲  high=◆  critical=⬢
+ *
+ * The colour is the one measured palette, resolved through `data-radar-fill`,
+ * so the badge and the radar beside it on a technique page agree and both clear
+ * the 3:1 floor in either theme.
  */
 
 import type { NissSeverity } from '../../lib/niss-parser';
 import { SEVERITY_DISPLAY } from './niss-display-utils';
+import '@/components/radar/radar-palette.css';
 
 interface Props {
   /** Numeric NISS score (0.0-10.0) */
@@ -52,7 +57,9 @@ export default function NissScoreBadge({
 
   return (
     <span
-      className={`inline-flex items-center rounded-full border ${display.bg} ${display.border} ${display.text} ${sizes.badge}`}
+      className={`inline-flex items-center rounded-full border ${sizes.badge}`}
+      data-radar-fill={display.tone}
+      style={{ color: 'var(--radar-tone)', borderColor: 'var(--radar-tone)', backgroundColor: 'var(--radar-wash)' }}
       role="status"
       aria-label={`${display.ariaLabel}, score ${score.toFixed(1)}`}
     >

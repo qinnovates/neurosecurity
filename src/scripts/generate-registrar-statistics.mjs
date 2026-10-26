@@ -154,6 +154,30 @@ const nissSeveritySeed = Object.fromEntries(
   Object.keys(registrar.niss_spec?.severity_scale ?? {}).map((severity) => [severity, 0]),
 );
 
+/**
+ * `niss.severity` exists only on a scored technique: the vector, the score, the
+ * PINS flag and the severity word are written together or not at all. The
+ * severity tally therefore has the scored techniques as its denominator, and a
+ * technique nobody has scored must never be filed under a severity word — least
+ * of all `none`, which is a measured NISS score of 0.0. Enforced here rather
+ * than assumed, so a half-written NISS block fails generation instead of
+ * silently publishing an unmeasured technique as measured.
+ */
+const nissFieldDisagreements = techniques
+  .filter((technique) => {
+    const niss = technique.niss ?? {};
+    const hasSeverity = typeof niss.severity === 'string';
+    const hasVector = typeof niss.vector === 'string' && niss.vector !== '';
+    const hasScore = typeof niss.score === 'number';
+    return hasSeverity !== hasVector || hasSeverity !== hasScore;
+  })
+  .map((technique) => technique.id);
+if (nissFieldDisagreements.length > 0) {
+  throw new Error(
+    `NISS severity, vector and score must be present together or absent together. These techniques carry some but not all: ${nissFieldDisagreements.join(', ')}`,
+  );
+}
+
 // Content fingerprint: the registrar minus its own `generated` stamp and this
 // block. When it changes, the top-level `generated` stamp moves forward. STIX
 // `modified` reads that stamp; it sat at 2026-02-09 for eight months of edits.
@@ -187,7 +211,16 @@ const statistics = {
   by_status: sortTally(countBy(techniques, 'status')),
   by_severity: sortTally(countBy(techniques, 'severity')),
   by_ui_category: sortTally(countBy(techniques, 'ui_category')),
-  by_niss_severity: sortTally(countBy(techniques, (t) => t.niss?.severity ?? 'none', nissSeveritySeed)),
+  // Severity words are counted over the scored techniques only, with the
+  // denominator stated beside them. The techniques that are not scored are a
+  // named population here, never a severity bucket.
+  by_niss_severity: {
+    scored_techniques: scored.length,
+    not_scored_techniques: techniques.length - scored.length,
+    counts: sortTally(countBy(scored, (technique) => technique.niss.severity, nissSeveritySeed)),
+    denominator:
+      'counts is over the scored techniques only. niss.severity is absent unless niss.scoring_state is scored, so the techniques that are not scored carry no severity word; they are counted in by_scoring_state and in niss_cvss_mapping.techniques_unscored. Severity "none" means a NISS score that was measured at 0.0 — not an unmeasured technique.',
+  },
   niss_cvss_mapping: {
     techniques_scored: scored.length,
     techniques_unscored: techniques.length - scored.length,

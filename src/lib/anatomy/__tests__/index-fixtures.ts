@@ -4,6 +4,7 @@ import type { ExtentMatch } from '../anatomy-types';
 import type {
   AnatomyIndex, IndexOwner, IndexReviewState, IndexStructure, IndexSubject, IndexTechnique, IndexTechniqueLink, OwnerVia,
 } from '../anatomy-index-types';
+import type { IndexNeurorightCode, IndexTechniqueNiss } from '../technique-tags';
 import { ANATOMY_INDEX_STATUS } from '../status-sentences';
 import { FIXTURE_ATLAS_ID, FIXTURE_SHA256, FIXTURE_SPACE } from './anatomy-fixtures';
 
@@ -31,8 +32,15 @@ export function buildIndexLink(regionId: string, lit: boolean): IndexTechniqueLi
   };
 }
 
+export const SCORED_NISS: IndexTechniqueNiss = { scoring_state: 'scored', vector: 'NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T', score: 6.1, pins: false };
+/** The glossary of the one code the index fixtures use. */
+export const NEURORIGHTS_TAXONOMY: IndexNeurorightCode[] = [{ code: 'MP', name: 'Mental Privacy', folds_into: null }];
+
 export function buildTechnique(id: string, overrides: Partial<IndexTechnique> = {}): IndexTechnique {
-  return { id, name: id, band_ids: ['N5'], severity: 'high', niss_severity: 'medium', dsm_cluster: 'mood_trauma', scope: 'regions', links: [], ...overrides };
+  return {
+    id, name: id, band_ids: ['N5'], severity: 'high', niss_severity: 'medium', dsm_cluster: 'mood_trauma',
+    niss: { ...SCORED_NISS }, neurorights: { affected: ['MP'] }, scope: 'regions', links: [], ...overrides,
+  };
 }
 
 export function buildIndex(overrides: Partial<AnatomyIndex> = {}): AnatomyIndex {
@@ -49,6 +57,7 @@ export function buildIndex(overrides: Partial<AnatomyIndex> = {}): AnatomyIndex 
     structures: [],
     subjects: [],
     techniques: [],
+    neurorights_taxonomy: NEURORIGHTS_TAXONOMY,
     tracts: { index_asset_id: null, proximity_asset_id: null, group_asset_ids: [] },
     devices: { fiducial_space: null, fiducial_method: null, fiducials: [], electrode_layouts: [], leads: [], facts: [], stated_targets: [] },
     stale_evidence_keys: [],
