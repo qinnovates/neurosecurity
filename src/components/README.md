@@ -39,7 +39,9 @@ React 19 and Astro components for the qinnovate.com site. Organized by feature d
 | `signal-bench/SignalBench.tsx` | React | Homepage hero strip chart: catalogued interference classes on synthetic traces |
 | `ThreatMatrix.tsx` | React | Threat matrix grid view |
 | `TaraVisualization.tsx` | React | TARA data visualization |
-| `NeurorightsPentagon.tsx` | React | Neurorights radar chart |
+| `radar/RadarChart.tsx` | React | The shared radar primitive: one polar geometry, one palette, a plotted state and a withheld state |
+| `radar/NissVectorRadar.tsx` | React | The six NISS metrics as a shape, drawn only where the registrar has scored |
+| `radar/NeurorightsRadar.tsx` | React | The four proposed neurorights by technique count, with the registrar's folds printed |
 | `ScrollCounter.tsx` | React | Animated scroll counter |
 | `BciVisionToggle.tsx` | React | BCI vision mode toggle |
 | `DualUseSplit.tsx` | React | Dual-use split view |

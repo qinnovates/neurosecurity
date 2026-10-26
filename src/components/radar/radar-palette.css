@@ -1,0 +1,68 @@
+/*
+ * The one palette the radars draw with.
+ *
+ * Four severity palettes were in the tree when this file was written, and the
+ * site's own `--color-severity-*` tokens had no dark-theme block at all, so the
+ * same hex was used on a near-white page and a near-black one. Measured against
+ * the surfaces a chart actually sits on (bg-deep, bg-surface, bg-elevated, and
+ * `.glass` over each), the light theme failed the 3:1 floor this codebase holds
+ * its own control edges to: slate-400 low reached 2.2:1, yellow-500 medium
+ * 1.7:1, amber-500 high 1.9:1, and the scoring page's own green low 2.2:1.
+ *
+ * So: the dark values are the ones the registrar's palette already used and
+ * which measure clean, and the light values are the same hues taken down until
+ * they pass. Critical is the measured red from `lab-kit/styles/lab-tokens.css`
+ * in both themes. Every value here is a literal, like the kit's tokens, so
+ * `__tests__/radar-palette.test.ts` can read and measure it; do not point one
+ * at a site variable.
+ *
+ * Theme: `data-theme` on <html> is authoritative on this site. BaseLayout seeds
+ * it from `prefers-color-scheme` and the theme toggle overrides it, so a
+ * `prefers-color-scheme` block here would fight a reader who chose light on a
+ * dark machine. Dark values hang off `:root[data-theme="dark"]` only.
+ *
+ * Hue is never the only channel: `radar-patterns.ts` carries the severity order
+ * as ink coverage, and every chart prints the word beside the shape.
+ */
+
+.radar,
+.radar-legend {
+  --radar-grid: var(--color-border);
+  --radar-spoke: var(--color-border-hover);
+  --radar-label: var(--color-text-muted);
+  --radar-label-strong: var(--color-text-primary);
+  /* "Nothing is plotted." The hatch ink, which is not a severity. */
+  --radar-withheld: #636366;
+}
+
+/* `count` is ink: a chart of counts carries no severity at all. */
+[data-radar-fill="count"] { --radar-tone: #4a4f5e; --radar-wash: rgba(74, 79, 94, 0.08); }
+[data-radar-fill="none"] { --radar-tone: #636366; --radar-wash: rgba(99, 99, 102, 0.08); }
+[data-radar-fill="low"] { --radar-tone: #4a5a7a; --radar-wash: rgba(74, 90, 122, 0.1); }
+[data-radar-fill="medium"] { --radar-tone: #7a6a00; --radar-wash: rgba(122, 106, 0, 0.1); }
+[data-radar-fill="high"] { --radar-tone: #a35200; --radar-wash: rgba(163, 82, 0, 0.1); }
+[data-radar-fill="critical"] { --radar-tone: #c80014; --radar-wash: rgba(200, 0, 20, 0.1); }
+
+:root[data-theme="dark"] .radar,
+:root[data-theme="dark"] .radar-legend {
+  --radar-withheld: #a1a1a6;
+}
+
+:root[data-theme="dark"] [data-radar-fill="count"] { --radar-tone: #a3a8b8; --radar-wash: rgba(163, 168, 184, 0.1); }
+:root[data-theme="dark"] [data-radar-fill="none"] { --radar-tone: #a1a1a6; --radar-wash: rgba(161, 161, 166, 0.1); }
+:root[data-theme="dark"] [data-radar-fill="low"] { --radar-tone: #9bb6d8; --radar-wash: rgba(155, 182, 216, 0.12); }
+:root[data-theme="dark"] [data-radar-fill="medium"] { --radar-tone: #eab308; --radar-wash: rgba(234, 179, 8, 0.12); }
+:root[data-theme="dark"] [data-radar-fill="high"] { --radar-tone: #f59e0b; --radar-wash: rgba(245, 158, 11, 0.12); }
+:root[data-theme="dark"] [data-radar-fill="critical"] { --radar-tone: #ff7a72; --radar-wash: rgba(255, 122, 114, 0.12); }
+
+/* Paper is light, whatever the theme on screen: the light values come back and the fills print. */
+@media print {
+  :root[data-theme="dark"] .radar,
+  :root[data-theme="dark"] .radar-legend { --radar-withheld: #636366; }
+  :root[data-theme="dark"] [data-radar-fill="count"] { --radar-tone: #4a4f5e; --radar-wash: rgba(74, 79, 94, 0.08); }
+  :root[data-theme="dark"] [data-radar-fill="none"] { --radar-tone: #636366; --radar-wash: rgba(99, 99, 102, 0.08); }
+  :root[data-theme="dark"] [data-radar-fill="low"] { --radar-tone: #4a5a7a; --radar-wash: rgba(74, 90, 122, 0.1); }
+  :root[data-theme="dark"] [data-radar-fill="medium"] { --radar-tone: #7a6a00; --radar-wash: rgba(122, 106, 0, 0.1); }
+  :root[data-theme="dark"] [data-radar-fill="high"] { --radar-tone: #a35200; --radar-wash: rgba(163, 82, 0, 0.1); }
+  :root[data-theme="dark"] [data-radar-fill="critical"] { --radar-tone: #c80014; --radar-wash: rgba(200, 0, 20, 0.1); }
+}
