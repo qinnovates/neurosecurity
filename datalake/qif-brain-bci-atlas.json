@@ -1,9 +1,9 @@
 {
   "_metadata": {
     "title": "QIF Brain-BCI Unified Atlas",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "created": "2026-02-18",
-    "description": "Comprehensive machine-readable atlas unifying brain regions (37 structures across QIF 7-1-3 hourglass), BCI hardware (24 devices), device-region mappings, neural latency metrics, and physics constraints. Designed for dynamic visualization rendering and API consumption.",
+    "description": "Comprehensive machine-readable atlas unifying brain regions (38 structures across QIF 7-1-3 hourglass), BCI hardware (24 devices), device-region mappings, neural latency metrics, and physics constraints. Designed for dynamic visualization rendering and API consumption.",
     "qif_version": "v4.0 Hourglass (7-1-3)",
     "primary_neuroanatomical_source": "Kandel ER, et al. Principles of Neural Science. 6th ed. McGraw Hill, 2021",
     "license": "CC-BY-4.0",
@@ -2332,7 +2332,37 @@
       "processing_pipeline": "MOTOR: Spinal cord (conus medullaris) \u2192 Ventral roots \u2192 Cauda equina nerve roots \u2192 Exit at respective vertebral foramina \u2192 Peripheral nerves (femoral, sciatic, pudendal) \u2192 Muscles. SENSORY: Receptors (legs, perineum, bladder) \u2192 Peripheral nerves \u2192 Dorsal roots in cauda equina \u2192 Enter spinal cord (or ascend to higher cord levels) \u2192 Brain. DAMAGE PATTERN: Unlike cord injury (UMN signs), cauda equina injury \u2192 LMN signs (flaccid weakness, areflexia) because these are peripheral nerve roots.",
       "signal_type": "Peripheral motor/sensory \u2014 lower limb and pelvic nerve root bundle",
       "bci_relevance_detail": "Cauda equina nerve roots are peripheral (potential regeneration), making them targets for nerve root stimulation and peripheral nerve interfaces. Less relevant for cortical BCIs but important for understanding the full neural pathway from brain to muscle.",
-      "clinical_notes": "Cauda equina syndrome: SURGICAL EMERGENCY. Compression (usually massive disc herniation) \u2192 bilateral leg weakness, saddle anesthesia, bladder retention, bowel incontinence. Must decompress within 48 hours or risk permanent deficit. Key differentiator from conus medullaris: cauda equina = LMN signs (flaccid, areflexic), conus = UMN signs (spastic, hyperreflexic)."
+      "clinical_notes": "Cauda equina syndrome: SURGICAL EMERGENCY. Compression (usually massive disc herniation) \u2192 bilateral leg weakness, saddle anesthesia, bladder retention, bowel incontinence. Must decompress within 48 hours or risk permanent deficit. Key differentiator from conus medullaris: cauda equina = LMN signs (flaccid, areflexic), conus = UMN signs (spastic, hyperreflexic).",
+      "scope_review": {
+        "defect_id": "T-152",
+        "reviewed_on": "2026-10-26",
+        "verdict": "rescoped_not_removed",
+        "tissue_class": "peripheral_nerve_roots",
+        "cns_membership": "outside",
+        "what_it_is": "The bundle of lumbar, sacral and coccygeal nerve roots together with the filum terminale, running in the lumbar cistern distal to the conus medullaris. Nerve roots are peripheral nervous tissue. No spinal cord segment lies within the bundle, so this entry holds no spinal cord.",
+        "in_file_evidence": "This entry's own sub_structures list holds only 'Lumbar nerve roots (L2-L5)', 'Sacral nerve roots (S1-S5)' and 'Filum terminale'. It names no cord segment. The coccygeal root, also part of the bundle, is not listed.",
+        "citations": [
+          {
+            "citation": "Gardner A, Gardner E, Morley T (2011). Cauda equina syndrome: a review of the current clinical and medico-legal position. European Spine Journal 20:690-697.",
+            "doi": "10.1007/s00586-010-1668-3",
+            "supports": "The cauda equina is the lumbosacral nerve roots distal to the conus medullaris.",
+            "verified": "2026-10-26 via Crossref (api.crossref.org/works/10.1007/s00586-010-1668-3): title, authors, journal, volume and pages all match.",
+            "access": "metadata only; the full text was not opened in this pass"
+          }
+        ],
+        "band_basis": "contradicted",
+        "band_basis_reason": "The entry is banded N1, whose name in qif_bands is 'Spinal Cord', but it holds nerve roots and not spinal cord. N1 is kept only as a legacy address so the 38-entry addressing does not move. It is not a claim that the cauda equina is spinal cord, and nothing may read the band as one.",
+        "depth_class_note": "depth_class still reads 'spinal'. It is left as it stands because files outside this lane read the field; tissue_class above is the corrected reading and takes precedence over it.",
+        "removal_considered": "Removal was considered and rejected in this pass: it would take brain_regions from 38 entries to 37, and 38 is pinned in seven test files that this lane does not own (src/lib/atlas-explorer, src/lib/anatomy and src/components/atlas-scene), with cauda_equina also pinned by name in the no-geometry list of src/lib/anatomy/__tests__/region-outcome.guard.test.ts. Removing the entry is the owner's call and needs those pins moved in the same change.",
+        "no_precedent": "This entry does not license admitting any further peripheral structure - nerve, root, ganglion, plexus or end organ - to brain_regions. It is a legacy exception, marked as one. A scope decision on peripheral tissue is the owner's and is not taken here.",
+        "terminologia_neuroanatomica": {
+          "claim": "The cauda equina is absent from the central nervous system chapter of Terminologia Neuroanatomica (FIPAT, 1st ed., 2017).",
+          "state": "UNVERIFIED",
+          "why": "Not checked in this pass. fipat.library.dal.ca did not resolve and ifaa.unifr.ch returned 404 for the TNA viewer, so no TNA page was opened. The rescope above does not rest on this claim; it rests on this entry's own sub_structures list and on the Crossref-verified citation."
+        },
+        "drafted_by": "ai",
+        "human_reviewed": false
+      }
     },
     {
       "id": "cea",
@@ -2482,12 +2512,28 @@
     ]
   },
   "bci_devices": "SEE docs/bci-hardware-inventory.json \u2014 24 devices with full hardware specs. This field cross-references device IDs for the mapping table below.",
+  "device_region_relation_kinds": {
+    "_note": "States, for every entry of device_region_mappings, what its target_regions list means. The field was overloaded: it was used for an electrode placed in the tissue of a region, for a scalp sensor positioned over a region at centimetre scale, for stimulation of a peripheral afferent whose signal later arrives at a region, and for a sensor inside a blood vessel next to a region. Those are four different relations and a consumer could not tell them apart. Every mapping now carries region_relation, one of the kinds below, and region_relation_basis, which says what the kind rests on. i0_depth was used as evidence for the kind, not as the kind itself: synchron-stentrode carries i0_depth I0-cortical and is still endovascular_adjacent_to, because its own notes record that it has no tissue contact. region_relation states where a device is and what it acts on. It is not a claim that the device reaches, affects or decodes the region.",
+    "_classification": {
+      "drafted_by": "ai",
+      "human_reviewed": false,
+      "basis": "Read from each mapping's own i0_depth, interface_type and notes in this file, plus the device's published interface class. No engineer or clinician has confirmed it.",
+      "reviewed_on": "2026-10-26",
+      "defect_id": "T-158"
+    },
+    "implanted_in": "The device's electrodes or contacts are placed in, or directly on, the tissue of the named region: penetrating intracortical arrays, subdural surface arrays over the named cortex, and depth leads in the named nucleus. The region names where the hardware sits.",
+    "scalp_position_over": "The device's sensors sit on the scalp at standard positions over the named region, at centimetre scale. The region names roughly what the sensor faces, not what it measures: for EEG, volume conduction mixes sources over several centimetres, and for fNIRS the photon path samples a banana-shaped volume between source and detector. Nothing here is a claim that the signal came from the named region.",
+    "stimulates_afferent_to": "The device's electrodes sit on or in a peripheral sense organ or nerve, outside the brain_regions table, and stimulate an afferent pathway whose signal later arrives at the named region through intervening relays. The region names a downstream arrival point, not the implant site.",
+    "endovascular_adjacent_to": "The device sits inside a blood vessel next to the named region, with the vessel wall between the contacts and the tissue. The region names what the vessel runs beside; there is no tissue contact."
+  },
   "device_region_mappings": [
     {
       "device_id": "neuralink-n1",
       "target_regions": [
         "m1"
       ],
+      "region_relation": "implanted_in",
+      "region_relation_basis": "i0_depth I0-cortical and the mapping's own notes: a penetrating 1024-channel array in motor cortex.",
       "qif_bands": [
         "N7"
       ],
@@ -2501,6 +2547,8 @@
         "m1",
         "v1"
       ],
+      "region_relation": "implanted_in",
+      "region_relation_basis": "i0_depth I0-cortical and the mapping's own notes: penetrating arrays in motor and visual cortex.",
       "qif_bands": [
         "N7"
       ],
@@ -2514,6 +2562,8 @@
         "m1",
         "s1_cortex"
       ],
+      "region_relation": "implanted_in",
+      "region_relation_basis": "i0_depth I0-cortical and the mapping's own notes: penetrating Utah electrodes in the named cortex.",
       "qif_bands": [
         "N7"
       ],
@@ -2526,6 +2576,8 @@
       "target_regions": [
         "m1"
       ],
+      "region_relation": "implanted_in",
+      "region_relation_basis": "i0_depth I0-cortical and the mapping's own notes: the system uses penetrating Utah arrays in motor cortex.",
       "qif_bands": [
         "N7"
       ],
@@ -2540,6 +2592,8 @@
         "bla",
         "cerebellum_cortex"
       ],
+      "region_relation": "implanted_in",
+      "region_relation_basis": "i0_depth I0-subcortical and the mapping's own notes: depth electrodes in hippocampus and amygdala, surface strips over cortical foci.",
       "qif_bands": [
         "N6",
         "N3"
@@ -2555,6 +2609,8 @@
         "gpi",
         "vim"
       ],
+      "region_relation": "implanted_in",
+      "region_relation_basis": "i0_depth I0-subcortical and the mapping's own notes: DBS leads placed in STN, GPi and VIM.",
       "qif_bands": [
         "N5",
         "N4"
@@ -2570,6 +2626,8 @@
         "gpi",
         "vim"
       ],
+      "region_relation": "implanted_in",
+      "region_relation_basis": "i0_depth I0-subcortical and the mapping's own notes: the same lead placement as the PC variant.",
       "qif_bands": [
         "N5",
         "N4"
@@ -2583,6 +2641,8 @@
       "target_regions": [
         "m1"
       ],
+      "region_relation": "endovascular_adjacent_to",
+      "region_relation_basis": "The mapping's own notes decide this against i0_depth: i0_depth reads I0-cortical, but the notes record 'Endovascular (superior sagittal sinus). Adjacent to motor cortex but inside blood vessel. No direct tissue contact.' The contacts are separated from m1 by the sinus wall.",
       "qif_bands": [
         "N7"
       ],
@@ -2595,6 +2655,8 @@
       "target_regions": [
         "a1"
       ],
+      "region_relation": "stimulates_afferent_to",
+      "region_relation_basis": "i0_depth I0-spinal/peripheral and the mapping's own notes: the electrode array sits in the cochlea and stimulates the cochlear nerve (CN VIII); 'Signal reaches A1 via brainstem auditory pathway'. The cochlea and cochlear nerve are not entries of brain_regions, so target_regions names the arrival point, a1, and not the implant site. The mapping's qif_bands reads N7, which is a1's band and not the band of the site; it is left as it stands and reported, because other files read that field.",
       "qif_bands": [
         "N7"
       ],
@@ -2607,6 +2669,8 @@
       "target_regions": [
         "a1"
       ],
+      "region_relation": "stimulates_afferent_to",
+      "region_relation_basis": "i0_depth I0-spinal/peripheral and the mapping's own notes: an intracochlear electrode array of up to 34 mm. The implant site is the cochlea, which is not an entry of brain_regions; target_regions names the arrival point, a1. The mapping's qif_bands reads N7, a1's band and not the band of the site; left as it stands and reported.",
       "qif_bands": [
         "N7"
       ],
@@ -2621,6 +2685,8 @@
         "gpi",
         "vim"
       ],
+      "region_relation": "implanted_in",
+      "region_relation_basis": "i0_depth I0-subcortical and the mapping's own notes: 16-contact directional DBS leads in the named nuclei.",
       "qif_bands": [
         "N5",
         "N4"
@@ -2636,6 +2702,8 @@
         "gpi",
         "vim"
       ],
+      "region_relation": "implanted_in",
+      "region_relation_basis": "i0_depth I0-subcortical and the mapping's own notes: 8-contact segmented DBS leads in the named nuclei.",
       "qif_bands": [
         "N5",
         "N4"
@@ -2653,6 +2721,8 @@
         "a1",
         "m1"
       ],
+      "region_relation": "scalp_position_over",
+      "region_relation_basis": "i0_depth I0-noninvasive and the mapping's own notes: scalp electrode positions. Volume conduction limits the spatial scale to centimetres, so target_regions names the positions' rough anatomical reference, not a measured source.",
       "qif_bands": [
         "N7"
       ],
@@ -2666,6 +2736,8 @@
         "pfc",
         "ppc"
       ],
+      "region_relation": "scalp_position_over",
+      "region_relation_basis": "i0_depth I0-noninvasive and the mapping's own notes: scalp electrode positions. Volume conduction limits the spatial scale to centimetres, so target_regions names the positions' rough anatomical reference, not a measured source.",
       "qif_bands": [
         "N7"
       ],
@@ -2682,6 +2754,8 @@
         "v1",
         "a1"
       ],
+      "region_relation": "scalp_position_over",
+      "region_relation_basis": "i0_depth I0-noninvasive and the mapping's own notes: scalp electrode positions. Volume conduction limits the spatial scale to centimetres, so target_regions names the positions' rough anatomical reference, not a measured source.",
       "qif_bands": [
         "N7"
       ],
@@ -2695,6 +2769,8 @@
         "pfc",
         "m1"
       ],
+      "region_relation": "scalp_position_over",
+      "region_relation_basis": "i0_depth I0-noninvasive and the mapping's own notes: scalp electrode positions. Volume conduction limits the spatial scale to centimetres, so target_regions names the positions' rough anatomical reference, not a measured source.",
       "qif_bands": [
         "N7"
       ],
@@ -2707,6 +2783,8 @@
       "target_regions": [
         "pfc"
       ],
+      "region_relation": "scalp_position_over",
+      "region_relation_basis": "i0_depth I0-noninvasive and the mapping's own notes: scalp electrode positions. Volume conduction limits the spatial scale to centimetres, so target_regions names the positions' rough anatomical reference, not a measured source.",
       "qif_bands": [
         "N7"
       ],
@@ -2719,6 +2797,8 @@
       "target_regions": [
         "pfc"
       ],
+      "region_relation": "scalp_position_over",
+      "region_relation_basis": "i0_depth I0-noninvasive and the mapping's own notes: scalp electrode positions. Volume conduction limits the spatial scale to centimetres, so target_regions names the positions' rough anatomical reference, not a measured source.",
       "qif_bands": [
         "N7"
       ],
@@ -2732,6 +2812,8 @@
         "broca",
         "m1"
       ],
+      "region_relation": "implanted_in",
+      "region_relation_basis": "i0_depth I0-cortical and the mapping's own notes: a 128-channel subdural ECoG array laid on the named cortex. The array is on the cortical surface, not penetrating it.",
       "qif_bands": [
         "N7"
       ],
@@ -2745,6 +2827,8 @@
         "m1",
         "broca"
       ],
+      "region_relation": "implanted_in",
+      "region_relation_basis": "i0_depth I0-cortical and the mapping's own notes: intracortical microwires inserted to 1.5 mm.",
       "qif_bands": [
         "N7"
       ],
@@ -2758,6 +2842,8 @@
         "m1",
         "s1_cortex"
       ],
+      "region_relation": "implanted_in",
+      "region_relation_basis": "i0_depth I0-cortical and the mapping's own notes: a thin-film array laid on the named cortex through a sub-millimetre slit.",
       "qif_bands": [
         "N7"
       ],
@@ -2772,6 +2858,8 @@
         "m1",
         "ppc"
       ],
+      "region_relation": "scalp_position_over",
+      "region_relation_basis": "i0_depth I0-noninvasive and the mapping's own notes: scalp electrode positions. Volume conduction limits the spatial scale to centimetres, so target_regions names the positions' rough anatomical reference, not a measured source.",
       "qif_bands": [
         "N7"
       ],
@@ -2788,6 +2876,8 @@
         "v1",
         "a1"
       ],
+      "region_relation": "scalp_position_over",
+      "region_relation_basis": "i0_depth I0-noninvasive and the mapping's own notes: TD-fNIRS optode modules on the scalp measuring a hemodynamic, not an electrical, signal. The photon path samples a volume between source and detector, so target_regions names the modules' rough anatomical reference, not a measured source.",
       "qif_bands": [
         "N7"
       ],
@@ -2801,6 +2891,8 @@
         "m1",
         "pfc"
       ],
+      "region_relation": "scalp_position_over",
+      "region_relation_basis": "i0_depth I0-noninvasive and the mapping's own notes: a research program with five teams and a 16-channel target, not a built device. target_regions names the program's stated objective, so this mapping records an intended non-invasive reading position and not a placement that exists.",
       "qif_bands": [
         "N7"
       ],
