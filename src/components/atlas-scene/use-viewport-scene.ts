@@ -11,6 +11,7 @@ import { buildSceneShapes, type SceneShape } from '@/lib/atlas-explorer/scene-sh
 import type { BoundsMm } from '@/lib/atlas-explorer/slice-plane';
 import { buildViewportCaption, type ViewportCaption } from '@/lib/atlas-explorer/viewport-caption';
 import { useSceneAssets, type SceneAssetStates } from './use-scene-assets';
+import { useSceneTheme } from './use-scene-theme';
 
 export interface ViewportScene {
   /** The files the requested layers need, in the order they load. */
@@ -43,7 +44,8 @@ function unionBounds(nodes: readonly DecodedNode[]): BoundsMm | null {
  * @param chain the threat-model steps on screen; while set, shapes carry the technique lens's marks for those steps
  */
 export function useViewportScene(model: ExplorerModel, lens: Lens, layers: Readonly<Record<LayerId, boolean>>, chain: ChainFrame | null = null): ViewportScene {
-  const shapes = useMemo(() => (chain === null ? buildSceneShapes(model, toColourMode(lens), layers) : buildChainShapes(model, chain, layers)), [model, lens, layers, chain]);
+  const theme = useSceneTheme();
+  const shapes = useMemo(() => (chain === null ? buildSceneShapes(model, toColourMode(lens), layers, theme) : buildChainShapes(model, chain, layers)), [model, lens, layers, chain, theme]);
   const assets = useMemo(() => model.index.assets.filter((asset) => shapes.some((shape) => shape.assetId === asset.id)), [model, shapes]);
   const { states, retry } = useSceneAssets(model.index, assets.map((asset) => asset.id));
 
