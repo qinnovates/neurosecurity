@@ -9,6 +9,8 @@ import type { ExplorerState } from './atlas-state';
 export interface ExplorerViews {
   /** The list as filtered. */
   groups: BandGroup[];
+  /** The same groups before the filter, so a section can state its own total. */
+  allGroups: BandGroup[];
   /** Counted over every region, whatever the filter hides. */
   tally: LensTally;
   /** The selected region's detail, or null when no region is selected. */
@@ -25,5 +27,5 @@ export function useExplorerViews(model: ExplorerModel, state: ExplorerState): Ex
   const tally = useMemo(() => tallyLens(allGroups), [allGroups]);
   const detail = useMemo(() => (selectedRegionId === null ? null : buildRegionDetail(model, selectedRegionId)), [model, selectedRegionId]);
   const rail = useMemo(() => buildDeviceRail(model, state.railIncludesMixed), [model, state.railIncludesMixed]);
-  return { groups, tally, detail, rail };
+  return { groups, allGroups, tally, detail, rail };
 }

@@ -15,6 +15,7 @@ import LayerPanel from './LayerPanel';
 import LensPanel from './LensPanel';
 import LimitsPanel from './LimitsPanel';
 import NetworkNames from './NetworkNames';
+import { buildAtlasCoverage, buildRegionCoverage, describeCoverage } from './region-coverage';
 import RegionInspector from './RegionInspector';
 import SignalChainRail from './SignalChainRail';
 import StructureList from './StructureList';
@@ -52,12 +53,16 @@ function useAnnouncement(message: string): string {
 }
 
 /**
- * The explorer once its data has loaded. What people come for is first: the
- * way in to the 3D view (one button until it is asked for), then the lens and
- * the region list, with the selected region's details beside them.
+ * The explorer once its data has loaded, laid out around the picture.
+ *
+ * The brain is the subject of this page, so the picture stands inside the main
+ * grid with the chosen region's details beside it: picking a region in the
+ * picture no longer scrolls the answer off the screen. The lens bar spans both
+ * columns above them, because it governs both. Under the picture is the region
+ * list, which is the whole of this page for anyone the 3D view is gated for.
  * Then the layers of the 3D view, the device stages, network names and the
- * notes on limits. Tab order follows that reading order. One reducer holds the state, and the
- * selection survives every lens, layer and filter change.
+ * notes on limits. Tab order follows that reading order. One reducer holds the
+ * state, and the selection survives every lens, layer and filter change.
  */
 export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = false }: Props) {
   // The layers that start on follow the data: the electrode layout is off unless the index says it is shown by default.
@@ -72,7 +77,9 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
   const mainRef = useRef<HTMLDivElement>(null);
   const selectedRegionId = state.selection?.kind === 'region' ? state.selection.id : null;
 
-  const { groups, tally, detail, rail } = useExplorerViews(model, state);
+  const { groups, allGroups, tally, detail, rail } = useExplorerViews(model, state);
+  // Counted once over the whole index: the pane states it before a region is chosen, and scales its bars by it.
+  const atlasCoverage = useMemo(() => buildAtlasCoverage(model), [model]);
 
   const loadQuotes = useCallback((signal: AbortSignal) => loadAnatomyEvidence(model, signal), [model]);
   const loadStatements = useCallback((signal: AbortSignal) => loadRegionEvidence(model, signal), [model]);
@@ -81,6 +88,8 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
 
   const selectionAnnouncement = useAnnouncement(selectedRegionId === null ? '' : announceSelection(model, selectedRegionId));
   const lensAnnouncement = useAnnouncement(announceLens(model, state.lens, tally));
+  // Said apart from the name, so what is heard on a selection is how much the atlas holds and not only which region it is.
+  const coverageAnnouncement = useAnnouncement(detail === null ? '' : describeCoverage(buildRegionCoverage(model, detail, atlasCoverage)));
 
   /**
    * Focus moves to the inspector when a region is chosen from the keyboard, and also on a narrow screen, where the
@@ -106,32 +115,32 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
   };
 
   return (
-    <div className="atlas-root" data-lens={state.lens.kind}>
-      <AtlasViewport
-        model={model} lens={state.lens} layers={state.layers} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep}
-        chain={chainView.frame} electrodeId={electrodeId} onPickElectrode={setElectrodeId} onSelectRegion={(regionId) => selectRegion(regionId, false)}
+    <div className="atlas-root atlas-workspace" data-lens={state.lens.kind}>
+      <LensPanel
+        model={model} lens={state.lens} tally={tally} onChooseKind={(kind) => dispatch({ type: 'lens_kind_chosen', kind })}
+        onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, true)}
       />
-      {isDevicesLayerShown(model.index, state.layers) && (
-        <Suspense fallback={<p className="atlas-loading" role="status">Loading the electrode layout…</p>}>
-          <DeviceGeometry index={model.index} electrodeId={electrodeId} onPickElectrode={setElectrodeId} />
-        </Suspense>
-      )}
       <div className="atlas-main" ref={mainRef}>
         <div className="atlas-main-list">
-          <LensPanel
-            model={model} lens={state.lens} tally={tally} onChooseKind={(kind) => dispatch({ type: 'lens_kind_chosen', kind })}
-            onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, true)}
+          <AtlasViewport
+            model={model} lens={state.lens} layers={state.layers} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep}
+            chain={chainView.frame} electrodeId={electrodeId} onPickElectrode={setElectrodeId} onSelectRegion={(regionId) => selectRegion(regionId, false)}
           />
+          {isDevicesLayerShown(model.index, state.layers) && (
+            <Suspense fallback={<p className="atlas-loading" role="status">Loading the electrode layout…</p>}>
+              <DeviceGeometry index={model.index} electrodeId={electrodeId} onPickElectrode={setElectrodeId} />
+            </Suspense>
+          )}
           <StructureList
-            groups={groups} regionCount={model.regions.length} filter={state.filter} lensLabel={LENS_LABELS[state.lens.kind]} selectedRegionId={selectedRegionId}
+            groups={groups} unfilteredGroups={allGroups} regionCount={model.regions.length} filter={state.filter} lensLabel={LENS_LABELS[state.lens.kind]} selectedRegionId={selectedRegionId}
             onFilter={(filter) => dispatch({ type: 'filter_changed', filter })} onClearFilter={() => dispatch({ type: 'filter_cleared' })} onSelect={selectRegion}
           />
         </div>
         <RegionInspector
-          model={model} detail={detail} headingRef={inspectorHeadingRef} anatomyEvidence={anatomyEvidence.state} regionEvidence={regionEvidence.state}
+          model={model} detail={detail} atlasCoverage={atlasCoverage} headingRef={inspectorHeadingRef} anatomyEvidence={anatomyEvidence.state} regionEvidence={regionEvidence.state}
           onRetryAnatomyEvidence={anatomyEvidence.retry} onRetryRegionEvidence={regionEvidence.retry}
           onChooseTechnique={(techniqueId) => chooseSubject(TECHNIQUE_LENS, techniqueId)} onChooseDevice={(deviceId) => chooseSubject('stated_targets', deviceId)}
-          onBackToList={focusSelectedRow}
+          onSelectRegion={(regionId) => selectRegion(regionId, true)} onBackToList={focusSelectedRow}
         />
       </div>
       <LayerPanel layers={model.index.layers} sources={model.index.sources} requested={state.layers} onToggle={(layerId) => dispatch({ type: 'layer_toggled', layerId })} />
@@ -149,6 +158,7 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
       </div>
       <p className="sr-only" role="status" aria-live="polite" data-announce="selection">{selectionAnnouncement}</p>
       <p className="sr-only" role="status" aria-live="polite" data-announce="lens">{lensAnnouncement}</p>
+      <p className="sr-only" role="status" aria-live="polite" data-announce="coverage">{coverageAnnouncement}</p>
     </div>
   );
 }
