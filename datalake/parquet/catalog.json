@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-26T13:54:01.114557+00:00",
+    "generated": "2026-10-26T23:22:47.097069+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
     "total_datasets": 40,
-    "total_rows": 24599
+    "total_rows": 24074
   },
   "datasets": {
     "techniques": {
@@ -81,7 +81,7 @@
       "source": "datalake/parquet/technique_neurorights.parquet"
     },
     "impact_chains": {
-      "rows": 20182,
+      "rows": 19658,
       "columns": 15,
       "column_names": [
         "technique_id",
@@ -100,8 +100,8 @@
         "dsm_name",
         "dsm_cluster"
       ],
-      "size_bytes": 23009,
-      "sha256": "ee69a29d425cf367136b3a5fa54acdc783409f940fd01dacef5062534e1dd2ef",
+      "size_bytes": 23044,
+      "sha256": "c63ba94bb4c69e083f36e1387118e12d7fb92a25d68beaa628463a230b8a026b",
       "compression": "zstd",
       "source": "datalake/parquet/impact_chains.parquet"
     },
@@ -226,8 +226,8 @@
       "source": "datalake/parquet/devices.parquet"
     },
     "neural_pathways": {
-      "rows": 46,
-      "columns": 17,
+      "rows": 45,
+      "columns": 18,
       "column_names": [
         "id",
         "name",
@@ -237,6 +237,7 @@
         "origin_band",
         "targets",
         "target_bands",
+        "endpoint_naming",
         "function",
         "bci_relevance",
         "dsm_conditions",
@@ -247,8 +248,8 @@
         "therapeutic_applications",
         "confidence"
       ],
-      "size_bytes": 19106,
-      "sha256": "b6486066159d83eb14813eadf4fdb3194087ef857e1ec3c708fd34e08178e68f",
+      "size_bytes": 19918,
+      "sha256": "4cfd4c058f8c63f40b29a202191f9acaf65e5c7947becae42268afa459d8fad1",
       "compression": "zstd",
       "source": "datalake/parquet/neural_pathways.parquet"
     },
