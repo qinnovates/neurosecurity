@@ -3,7 +3,7 @@ import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import { rasToScene } from '@/lib/anatomy/ras-to-scene';
 import { ORBIT_STEP_RADIANS, zoomDistance, type CameraViewId } from '@/lib/atlas-explorer/camera-views';
 import type { DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
-import type { SceneShape } from '@/lib/atlas-explorer/scene-shapes';
+import type { SceneShape, SceneTheme } from '@/lib/atlas-explorer/scene-shapes';
 import type { SliceState } from '@/lib/atlas-explorer/slice-plane';
 import { createSceneRenderer, type SceneCallbacks, type SceneRenderer } from './scene-renderer';
 
@@ -27,6 +27,8 @@ export interface AtlasCanvasProps extends SceneCallbacks {
   /** Where the selection is, in the atlas's millimetres, or null. The camera settles on it when it changes. */
   focusMm: readonly [number, number, number] | null;
   slice: SliceState | null;
+  /** The surface the canvas is drawn on, from the one hook that reads it. The canvas never asks the document itself. */
+  theme: SceneTheme;
   prefersLessMotion: boolean;
   /** Says in words what the picture shows, for anyone who cannot see it. */
   description: string;
@@ -41,11 +43,16 @@ export interface AtlasCanvasProps extends SceneCallbacks {
  * a button outside it, so nothing here needs a pointer.
  */
 export default function AtlasCanvas(props: AtlasCanvasProps) {
-  const { shapes, nodesByShapeId, selectedKeys, bracketGroups, devices, selectedElectrodeId, focusMm, slice, prefersLessMotion, description, commands } = props;
+  const { shapes, nodesByShapeId, selectedKeys, bracketGroups, devices, selectedElectrodeId, focusMm, slice, theme, prefersLessMotion, description, commands } = props;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<SceneRenderer | null>(null);
   const callbacksRef = useRef(props);
   callbacksRef.current = props;
+  // The renderer is made once and told the surface afterwards, so a theme change redraws rather than taking the WebGL
+  // context down and losing the camera with it. A theme change also builds new shapes, so a toggle redraws twice: both
+  // redraws are correct, and a toggle is something a person did, not something that happens every frame.
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -58,7 +65,7 @@ export default function AtlasCanvas(props: AtlasCanvasProps) {
         onHover: (key) => callbacksRef.current.onHover(key),
         onCameraTurn: (directions) => callbacksRef.current.onCameraTurn(directions),
         onContextLost: () => callbacksRef.current.onContextLost(),
-      }, prefersLessMotion);
+      }, prefersLessMotion, themeRef.current);
     } catch {
       // The probe said WebGL was there and the renderer still could not start: say so in the page, in place of the picture.
       callbacksRef.current.onUnavailable();
@@ -74,6 +81,7 @@ export default function AtlasCanvas(props: AtlasCanvasProps) {
     };
   }, [prefersLessMotion]);
 
+  useEffect(() => rendererRef.current?.setTheme(theme), [theme]);
   useEffect(() => rendererRef.current?.setShapes(shapes, nodesByShapeId, selectedKeys, bracketGroups), [shapes, nodesByShapeId, selectedKeys, bracketGroups]);
   useEffect(() => rendererRef.current?.setDevices(devices, selectedElectrodeId), [devices, selectedElectrodeId]);
   useEffect(() => rendererRef.current?.setSlice(slice), [slice]);

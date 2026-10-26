@@ -78,7 +78,6 @@ export default function ViewportLegend({ caption, drawnShapes, assets, assetStat
   // Each ring line, and the sentence under them, is shown only while that ring is on screen, so the legend never explains a mark the picture does not hold.
   const hasCoarseRing = drawnShapes.some((shape) => shape.sizeMark === 'mesh_and_ring');
   const hasPlaceOnlyRing = drawnShapes.some((shape) => shape.sizeMark === 'ring_only');
-  const hasRing = hasCoarseRing || hasPlaceOnlyRing;
   return (
     <div className="atlas-legend">
       <AssetStatuses assets={assets} assetStates={assetStates} onRetryAssets={onRetryAssets} />
@@ -92,7 +91,7 @@ export default function ViewportLegend({ caption, drawnShapes, assets, assetStat
         <li><span className="atlas-selection-swatch" aria-hidden="true" /> corner marks: selected</li>
         {steps.map((entry) => <li key={entry.step}><span className="atlas-step-swatch" style={{ background: entry.colour }} aria-hidden="true" /> {entry.step.replaceAll('_', ' ')}</li>)}
       </ul>
-      {hasRing && <p className="atlas-fact">A ring reads under the lens like a fill does: closed and in the step&rsquo;s own colour where the lens holds a value for its shape, broken and grey where it holds none.</p>}
+      {/* How a ring reads under the lens is a limit sentence like the others now: it arrives in caption.markLimits, from limits-copy.ts, rather than being typed here. */}
       {caption.markLimits.map((limit) => <LimitNote key={limit.id} limit={limit} />)}
     </div>
   );

@@ -12,7 +12,7 @@
 
 import type { Point3 } from '@/lib/anatomy/ras-to-scene';
 import { positionOfPose, type OrbitPose } from './camera-views';
-import { NEUTRAL_COLOUR, type FillKind, type SceneShape } from './scene-shapes';
+import { NEUTRAL_COLOUR, type FillKind, type SceneShape, type SceneTheme } from './scene-shapes';
 
 /**
  * Selection is a state, not a category, so it wears neutral ink rather than a
@@ -26,6 +26,42 @@ export const SELECTION_COLOUR = '#1a1a19';
 export const SELECTION_COLOUR_DARK = '#fcfcfb';
 /** Pale shapes are darker and denser than context shapes, so "somewhere inside this shape" is legible across the whole brain. */
 export const INSIDE_COLOUR = '#5b6170';
+/**
+ * The same ink lifted for the dark surface: the light one's channels raised by
+ * 76 each, so it is the same cool slate at the same chroma, not a different colour.
+ *
+ * It is lifted because the relationship, not the colour, is what the pale fill
+ * means: a pale shape has to be *denser* than the context shapes it sits among,
+ * or "the lens holds this somewhere inside here" reads as less than "the lens
+ * holds nothing here". On the light surface that held -- 5.07:1 for the pale ink
+ * against 2.61:1 for the context neutral. Drawn on the dark surface the same ink
+ * inverted it: 3.09:1 against the neutral's 6.01:1, so the shapes with no record
+ * were the denser ones. This step lands at 8.54:1, about the geometric mean
+ * between the context neutral (6.01) and the loudest NISS step (11.70), so it is
+ * clearly denser than context and clearly quieter than a filled step.
+ */
+export const INSIDE_COLOUR_DARK = '#a7adbd';
+
+/**
+ * The inks that belong to the surface rather than to a shape, in one table.
+ *
+ * A shape arrives with its own colour already resolved for the surface (see
+ * `SceneTheme` in scene-shapes.ts). These two cannot: the selection brackets are
+ * drawn around a group of shapes and the pale fill stands for the lens holding
+ * no colour at all, so neither has a step to read a palette with. They are the
+ * drawing layer's own inks, and this is the only place they are chosen.
+ */
+export interface SurfaceInk {
+  /** The corner brackets. Named nowhere in the copy, because it is not one colour. */
+  selection: string;
+  /** The "inside or mixed" fill. */
+  inside: string;
+}
+export const SURFACE_INK: Readonly<Record<SceneTheme, SurfaceInk>> = {
+  light: { selection: SELECTION_COLOUR, inside: INSIDE_COLOUR },
+  dark: { selection: SELECTION_COLOUR_DARK, inside: INSIDE_COLOUR_DARK },
+};
+
 const OUTLINE_LAYER = 'outline';
 /** The head surface the electrode layout sits on. Context, like the brain outline, and fainter. */
 const DEVICES_LAYER = 'devices';
@@ -48,8 +84,11 @@ export const FILL_OPACITY: Readonly<Record<FillKind, number>> = { solid: 1, tran
 export const BRAIN_OUTLINE_OPACITY = 0.1;
 export const HEAD_SURFACE_OPACITY = 0.07;
 
-/** @param isCut with a cut open, a filled shape shows its own inside in its own colour, not what lies behind it */
-export function materialParamsFor(shape: Pick<SceneShape, 'layer' | 'fill' | 'colour'>, isCut: boolean): MaterialParams {
+/**
+ * @param isCut with a cut open, a filled shape shows its own inside in its own colour, not what lies behind it
+ * @param theme the surface the canvas is drawn on, for the one ink here that is not the shape's own
+ */
+export function materialParamsFor(shape: Pick<SceneShape, 'layer' | 'fill' | 'colour'>, isCut: boolean, theme: SceneTheme): MaterialParams {
   if (shape.layer === OUTLINE_LAYER) {
     return { shading: 'lit', colour: NEUTRAL_COLOUR, opacity: BRAIN_OUTLINE_OPACITY, isWireframe: false, isDoubleSided: true, writesDepth: false, drawOrder: DRAW_ORDER.brainOutline };
   }
@@ -58,7 +97,7 @@ export function materialParamsFor(shape: Pick<SceneShape, 'layer' | 'fill' | 'co
   }
   if (shape.fill === 'solid') return { shading: 'lit', colour: shape.colour, opacity: FILL_OPACITY.solid, isWireframe: false, isDoubleSided: isCut, writesDepth: true, drawOrder: DRAW_ORDER.fill };
   if (shape.fill === 'lines') return { shading: 'flat', colour: NEUTRAL_COLOUR, opacity: FILL_OPACITY.lines, isWireframe: true, isDoubleSided: false, writesDepth: false, drawOrder: DRAW_ORDER.seeThrough };
-  const colour = shape.fill === 'translucent' ? INSIDE_COLOUR : NEUTRAL_COLOUR;
+  const colour = shape.fill === 'translucent' ? SURFACE_INK[theme].inside : NEUTRAL_COLOUR;
   return { shading: 'lit', colour, opacity: FILL_OPACITY[shape.fill], isWireframe: false, isDoubleSided: false, writesDepth: false, drawOrder: DRAW_ORDER.seeThrough };
 }
 
