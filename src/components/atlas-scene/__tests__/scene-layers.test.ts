@@ -2,8 +2,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import type { DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
-import { SELECTION_COLOUR, STEP_EASE_MS, stepEaseDuration } from '@/lib/atlas-explorer/scene-drawing';
-import type { SceneShape } from '@/lib/atlas-explorer/scene-shapes';
+import { DRAW_ORDER, SELECTION_COLOUR, STEP_EASE_MS, ringParamsFor, stepEaseDuration } from '@/lib/atlas-explorer/scene-drawing';
+import { NEUTRAL_COLOUR, NISS_COLOURS, NISS_COLOURS_DARK, type SceneShape } from '@/lib/atlas-explorer/scene-shapes';
 import { toIndexReviewState, UNREVIEWED } from '@/lib/anatomy/review-state';
 import { listSceneObjects, resetStandIn, standIn, type StandInObject } from './three-stand-in';
 
@@ -183,6 +183,71 @@ describe('threat-model steps in the picture', () => {
     expect(listSceneObjects().filter((object) => object.material !== undefined).every((object) => (object.material?.opacity ?? 1) > 0)).toBe(true);
     runFrame(1000);
     expect(frames).toEqual([]);
+  });
+});
+
+describe('the marker ring', () => {
+  const rings = (): StandInObject[] => listSceneObjects().filter((object) => object.userData.ringReason !== undefined);
+  const ringFor = (reason: string): StandInObject | undefined => rings().find((group) => group.userData.ringReason === reason);
+  const inkOf = (ring: StandInObject | undefined): unknown[] => [...new Set((ring?.children ?? []).map((part) => part.material?.params.color))];
+  /** A structure the atlas marks with a ring alone: no file, no mesh, only a place. */
+  const placeOnly = (overrides: Partial<SceneShape> = {}): SceneShape[] => [shapeAt('front', CENTRES.front, { sizeMark: 'ring_only', fill: 'solid', colour: NISS_COLOURS.critical, step: 'critical', ...overrides })];
+
+  it('carries the lens it is under: the step\'s own colour where the lens fills the shape, on either surface', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true);
+    renderer.setShapes(placeOnly(), new Map(), new Set(), []);
+    expect(inkOf(ringFor('place_only'))).toEqual([NISS_COLOURS.critical]);
+    renderer.setShapes(placeOnly({ colour: NISS_COLOURS.none, step: 'none' }), new Map(), new Set(), []);
+    expect(inkOf(ringFor('place_only'))).toEqual([NISS_COLOURS.none]);
+    renderer.setShapes(placeOnly({ colour: NISS_COLOURS_DARK.critical }), new Map(), new Set(), []);
+    expect(inkOf(ringFor('place_only'))).toEqual([NISS_COLOURS_DARK.critical]);
+    // The ring was the one mark that stayed neutral under every lens; it must never read as neutral while the lens fills its shape.
+    expect(inkOf(ringFor('place_only'))).not.toContain(NEUTRAL_COLOUR);
+  });
+
+  it('changes how much of itself it draws when the lens state changes, so colour is not the only channel', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const drawn = (shapes: SceneShape[]): { ink: unknown[]; parts: number } => {
+      renderer.setShapes(shapes, new Map(), new Set(), []);
+      const ring = ringFor('place_only');
+      return { ink: inkOf(ring), parts: ring?.children.length ?? 0 };
+    };
+    const filled = drawn(placeOnly());
+    const noData = drawn(placeOnly({ fill: 'lines', colour: NEUTRAL_COLOUR, step: null }));
+    const inside = drawn(placeOnly({ fill: 'translucent', colour: NEUTRAL_COLOUR, step: null }));
+    expect(noData.ink).toEqual([NEUTRAL_COLOUR]);
+    expect(new Set([filled.parts, noData.parts, inside.parts]).size).toBe(3);
+    // Each ring is one material for all its pieces, so no piece can drift from the rest.
+    expect(filled.ink).toHaveLength(1);
+  });
+
+  it('marks a structure with no outline at all with a centre, and a coarse outline with a ring alone', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true);
+    renderer.setShapes([
+      ...placeOnly(),
+      shapeAt('back', CENTRES.back, { sizeMark: 'mesh_and_ring', fill: 'solid', colour: NISS_COLOURS.high, step: 'high' }),
+    ], NODES, new Set(), []);
+    const place = ringFor('place_only');
+    const coarse = ringFor('coarse_outline');
+    expect(place?.children).toHaveLength((ringParamsFor({ fill: 'solid', sizeMark: 'ring_only', colour: '#000000' })?.arcs.length ?? 0) + 1);
+    expect(coarse?.children).toHaveLength(ringParamsFor({ fill: 'solid', sizeMark: 'mesh_and_ring', colour: '#000000' })?.arcs.length ?? 0);
+    expect(place?.children.length).toBeGreaterThan(coarse?.children.length ?? 0);
+    // The mesh of the coarse shape is still drawn: the ring annotates it, it does not replace it.
+    expect(kindsOf('mesh').some((mesh) => mesh.userData.structureKey === 'a:back')).toBe(true);
+  });
+
+  it('draws over the shapes on purpose, under the selection mark, and turns with the camera as one piece', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, false);
+    renderer.setShapes(placeOnly(), new Map(), new Set(['a:front']), [['a:front']]);
+    const ring = ringFor('place_only');
+    // A mark that says the outline here is approximate, or absent, is worthless if the drawing can hide it.
+    expect(ring?.children.every((part) => part.material?.params.depthTest === false)).toBe(true);
+    expect(ring?.children.every((part) => part.renderOrder === DRAW_ORDER.marker)).toBe(true);
+    expect(kindsOf('lines').every((brackets) => brackets.renderOrder > DRAW_ORDER.marker)).toBe(true);
+    // Nothing about the ring moves on its own: it is billboarded, which is a camera turn, not an animation.
+    runFrame(1000);
+    expect([ring?.position.x, ring?.position.y, ring?.position.z]).toEqual([0, 0, -60]);
+    expect(ring?.children.every((part) => (part.material?.opacity ?? 0) > 0)).toBe(true);
   });
 });
 

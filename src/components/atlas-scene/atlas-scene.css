@@ -225,6 +225,8 @@
 .atlas-legend-marks li { display: flex; align-items: center; gap: 0.5rem; }
 .atlas-ring-swatch, .atlas-selection-swatch, .atlas-step-swatch { flex: none; width: 0.875rem; height: 0.875rem; border-radius: 0.1875rem; }
 .atlas-ring-swatch { border: 2.5px solid currentColor; border-radius: 50%; }
+/* The two ring cases in the picture, drawn the same way here: a band alone for a rough outline, a band with a centre for no outline at all. */
+.atlas-ring-swatch[data-ring="place_only"] { background: radial-gradient(currentColor 0 34%, transparent 36%); }
 .atlas-selection-swatch { border: 3px solid var(--atlas-selection); border-radius: 0; clip-path: polygon(0 0, 35% 0, 35% 100%, 0 100%, 0 0, 65% 0, 100% 0, 100% 100%, 65% 100%, 65% 0); }
 .atlas-step-swatch { border: 1px solid var(--atlas-line-strong); }
 .atlas-picked { padding: 0.5rem 0.75rem; background: var(--atlas-ground); border: 1px solid var(--atlas-line-strong); border-left: 3px solid var(--atlas-selection); border-radius: 0.375rem; }

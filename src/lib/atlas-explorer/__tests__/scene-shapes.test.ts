@@ -3,7 +3,8 @@ import { INITIAL_EXPLORER_STATE } from '@/components/atlas-scene/atlas-state';
 import { OWNERSHIP_MARKS, type ColourMode } from '@/lib/anatomy/colour-modes';
 import { matchesLimitTemplate } from '@/lib/anatomy/limits-copy';
 import { resolvePick } from '../resolve-pick';
-import { BAND_COLOURS, NEUTRAL_COLOUR, NISS_COLOURS, buildSceneShapes, describeFill, listLegendSteps } from '../scene-shapes';
+import { ringParamsFor } from '../scene-drawing';
+import { BAND_COLOURS, NEUTRAL_COLOUR, NISS_COLOURS, buildSceneShapes, describeFill, listLegendSteps, type SceneShape } from '../scene-shapes';
 import { buildViewportCaption, readDisagreementRange } from '../viewport-caption';
 import { FIXTURE_IDS, buildFixtureModel, loadRealModel } from './explorer-fixtures';
 
@@ -83,6 +84,31 @@ describe('buildSceneShapes on the real index (guard)', () => {
   it('lists the steps on screen for the legend', () => {
     expect(listLegendSteps(shapes).map((entry) => entry.step)).toEqual(expect.arrayContaining(['N7', 'N6']));
     expect(listLegendSteps(buildSceneShapes(real, null, INITIAL_EXPLORER_STATE.layers))).toEqual([]);
+  });
+
+  /**
+   * The rings sit on the structures the atlas resolves worst -- the hypothalamic
+   * nuclei, the subthalamic nucleus, the two parts of the substantia nigra and the
+   * ventral tegmental area -- which is exactly where a reader most needs to know
+   * what the lens says. A ring that looked the same under every lens was the lens
+   * quietly stopping at the hardest cases.
+   */
+  it('shows the lens on every ring, and never one look for every lens state', () => {
+    const ringsUnder = (mode: ColourMode | null): SceneShape[] => buildSceneShapes(real, mode, INITIAL_EXPLORER_STATE.layers).filter((shape) => shape.sizeMark !== 'mesh');
+    const looksUnder = (mode: ColourMode | null): Set<string> => new Set(ringsUnder(mode).map((shape) => JSON.stringify(ringParamsFor(shape))));
+    expect(ringsUnder({ kind: 'band' }).length).toBeGreaterThan(20);
+    expect(ringsUnder({ kind: 'band' }).some((shape) => shape.sizeMark === 'ring_only')).toBe(true);
+    for (const mode of MODES) {
+      for (const shape of ringsUnder(mode)) {
+        const ring = ringParamsFor(shape);
+        expect(ring, `${shape.id} ${mode.kind}`).not.toBeNull();
+        // The ring is the fill's own colour wherever the lens fills the shape, and the shared neutral wherever it does not.
+        expect(ring?.colour, `${shape.id} ${mode.kind}`).toBe(shape.fill === 'solid' ? shape.colour : NEUTRAL_COLOUR);
+      }
+    }
+    // Under a lens that reaches these structures the rings differ; with no lens chosen the only difference left is why each ring is there.
+    expect(looksUnder({ kind: 'band' }).size).toBeGreaterThan(looksUnder(null).size);
+    expect(new Set(ringsUnder(null).map((shape) => ringParamsFor(shape)?.reason)).size).toBe(looksUnder(null).size);
   });
 });
 
