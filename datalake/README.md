@@ -121,6 +121,14 @@ const grouped = Object.groupBy(registry.techniques, t => t.category);
 
 > **This file is deprecated.** It contains the legacy ONI-era taxonomy with 24 techniques using ONI-T### identifiers. All entries have been merged into `qtara-registrar.json` with MITRE-compatible IDs. See the `legacy_ids` field on each technique for the migration mapping.
 
+## Security
+
+External research data (MNI templates, OSF, Zenodo, Allen Institute) is ingested through
+`src/scripts/atlas-pipeline/` with HTTPS-only fetching, a per-source host allowlist with
+anti-redirect-hijack protection, and sha256 pinning — never trusted on name or on a redirect
+alone. Full control list, the verification flowchart, and planned hardening: see
+[`SECURITY.md`](../SECURITY.md#datalake-source-integrity).
+
 ## Source of Truth
 
 The canonical source is `config.py` (archived to `_archive/qif-lab/`). The JSON is generated via the registrar update protocol. See `.claude/rules/registrar.md` for the full workflow.
