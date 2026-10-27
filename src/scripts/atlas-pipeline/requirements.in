@@ -6,5 +6,5 @@ scipy==1.14.1               # resampling, distance transforms, surface distances
 scikit-image==0.24.0        # marching cubes on a continuous field
 antspyx==0.5.4              # the one registration stack: computes and applies the symmetric-to-asymmetric transform
 fast-simplification==0.2.0  # quadric decimation; meshing on a coarser grid shrinks thin shapes, decimation does not
-pillow==12.3.0              # review sheets (PNG)
+pillow==13.0.0               # review sheets (PNG); 13.0.0 fixes GHSA-5x8w-8jj5-q52h, GHSA-v9pv-5gc8-w2m6, GHSA-332p-7hrc-92wf, GHSA-w889-685w-c8fh, GHSA-8g5g-8vmr-9782 (critical) and the related high-severity Pillow CVEs
 pandas==3.0.6               # point tables for antspyx's point transform (displacement statistics)
