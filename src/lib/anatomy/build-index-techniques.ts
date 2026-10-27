@@ -5,7 +5,7 @@
  */
 
 import { isValidForAddressing } from './addressing-version';
-import { readTechniqueTags, type AnatomyData } from './anatomy-inputs';
+import type { AnatomyData } from './anatomy-inputs';
 import type { IndexTechnique, IndexTechniqueLink } from './anatomy-index-types';
 import type { TechniqueLink } from './anatomy-types';
 import type { CatalogTechnique } from '@/lib/threat-model/catalog-types';
@@ -13,6 +13,7 @@ import { createTermResolver, lightsRegion, type TermResolution } from './resolve
 import { checkEvidence, reviewOf, type CheckedEvidence } from './review-rows';
 import { digestTechniqueLink, techniqueLinkKey } from './row-digest';
 import { SOURCE_REF_STATES } from './source-ref';
+import { readTechniqueTags } from './technique-tags';
 
 const NEURAL_BAND_PREFIX = 'N';
 

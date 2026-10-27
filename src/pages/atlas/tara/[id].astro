@@ -5,14 +5,12 @@ import BandViewPanel from '@/components/brain/BandViewPanel';
 import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';
 import { readLinksReview, readUncolouredLimit } from '@/components/atlas-scene/build-technique-colouring';
 import EvidenceTierBanner from '../../../components/atlas/EvidenceTierBanner';
-import NissVectorChips from '../../../components/niss/NissVectorChips';
 import NissScoreBadge from '../../../components/niss/NissScoreBadge';
-import NissRadarChart from '../../../components/niss/NissRadarChart';
+import NissVectorRadar, { type NissReading } from '@/components/radar/NissVectorRadar';
 import PinsBadge from '../../../components/niss/PinsBadge';
 import NissContextNotes from '../../../components/niss/NissContextNotes.astro';
 import DriftBadge from '../../../components/tara/DriftBadge';
 import { THREAT_VECTORS, SEVERITY_COLORS, getChildTechniques, NISS_UNSCORED_REASON_LABELS, formatNissScore, getVariantsForTechnique, VARIANT_DIMENSIONS, VARIANT_UNSCORED_REASON_LABELS } from '@/lib/threat-data';
-import { parseNiss } from '@/lib/niss-parser';
 import { getValidationForTechnique, TIER_COLORS, STATUS_LABELS, STATUS_COLORS, VALIDATION_TIERS } from '@/lib/validation-data';
 import type { ValidationTierId } from '@/lib/validation-data';
 import type { BrainView, BrainViewRegion } from '@/lib/brain-view-data';
@@ -79,16 +77,30 @@ const nissSummary = nissState === 'scored'
   : nissState === 'provisional'
     ? `NISS provisional range: ${formatNissScore(threat.niss)} (not a score).`
     : 'NISS: unscored.';
-// An empty vector is an unscored technique; a vector that will not parse is registrar corruption and stops the build.
-let nissVector = null;
-if (threat.niss?.vector) {
-  try {
-    nissVector = parseNiss(threat.niss.vector);
-  } catch (parseError) {
-    const detail = parseError instanceof Error ? parseError.message : String(parseError);
-    throw new Error(`atlas/tara/[id]: ${threat.id} has a NISS vector that does not parse (${detail}); fix the registrar entry.`);
-  }
-}
+/*
+ * The radar is handed the registrar's scoring state, not a parsed vector, so
+ * every state draws something: a shape for a scored entry, and a hatched frame
+ * that says why for a provisional or unscored one. Before this, an unscored
+ * entry rendered no chart at all, which reads as a missing feature rather than
+ * as an absence of measurement. NissVectorRadar parses and validates the raw
+ * vector itself (src/components/radar/NissVectorRadar.tsx), rendering an
+ * explained "withheld" state on an unreadable vector rather than throwing, so
+ * there is no separate top-level parse step here.
+ */
+const nissReading: NissReading = nissState === 'scored'
+  ? {
+      state: 'scored',
+      vector: threat.niss.vector,
+      severity: threat.niss.severity,
+      score: threat.niss.score,
+      pins: threat.niss.pins,
+      harmFlag: threat.niss.harm_flag,
+      cognitiveFlag: threat.niss.cognitive_flag,
+      isNeuroplasticityUnsupported: threat.niss.np_support === 'unsupported',
+    }
+  : nissState === 'provisional'
+    ? { state: 'provisional', rangeLabel: formatNissScore(threat.niss), supportedMetricCount: nissSupportedMetrics.length }
+    : { state: 'unscored', reason: threat.niss.unscored_reason ? NISS_UNSCORED_REASON_LABELS[threat.niss.unscored_reason] : null };
 
 const REQ_LABELS: Record<string, string> = {
   TM: 'Threat Modeling', VA: 'Vulnerability Assessment',
@@ -433,16 +445,9 @@ const hasGovernance = nr || reg;
             </div>
           )}
           {threat.niss?.pins && <PinsBadge client:load pins={true} size="md" showExplanation={true} />}
-          {nissVector && (
-            <div class="mt-4">
-              <NissRadarChart
-                client:load
-                vector={nissVector}
-                severity={threat.niss.severity || 'low'}
-                size={200}
-              />
-            </div>
-          )}
+          <div class="mt-4">
+            <NissVectorRadar client:visible title={`${threat.id} ${threat.name}`} reading={nissReading} size={220} />
+          </div>
         </div>
 
         <!-- Governance & FDORA -->

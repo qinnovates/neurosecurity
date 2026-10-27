@@ -8,7 +8,9 @@
  * the length and digest it was built with, and those bytes passed here.
  */
 
-import { ANATOMY_INDEX_SCHEMA_VERSION, type AnatomyIndex, type IndexLayer, type IndexOwner, type IndexReviewState, type IndexTechniqueLink } from './anatomy-index-types';
+import {
+  ANATOMY_INDEX_SCHEMA_VERSION, type AnatomyIndex, type IndexLayer, type IndexOwner, type IndexReviewState, type IndexTechnique, type IndexTechniqueLink,
+} from './anatomy-index-types';
 import { ANATOMY_INDEX_SHAPE } from './anatomy-index-schema';
 import { UNCHECKED } from './evidence';
 import { childOf, failAt, itemOf, rootOf, show, type FieldLocation } from './field-readers';
@@ -16,6 +18,7 @@ import { readSchemaVersion } from './format-readers';
 import { lightsRegion } from './resolve-region-term';
 import { describeReviewState } from './review-state';
 import { checkShape } from './shape-check';
+import type { IndexNeurorightCode } from './technique-tags';
 import { ANATOMY_INDEX_STATUS, readStatus } from './status-sentences';
 
 const INDEX_NAME = 'anatomy index';
@@ -71,6 +74,47 @@ function checkLink(link: IndexTechniqueLink, location: FieldLocation, regionIds:
   checkVouchedStatus(link, location);
 }
 
+const SCORED = 'scored';
+
+/**
+ * NISS's measured fields stand or fall together, and the severity word is one
+ * of them. A technique the registrar scored carries a state of `scored`, a
+ * vector, a score, a PINS flag and a severity word; one it has not scored
+ * carries none of the four. So filling an absent severity in — the one-character
+ * `?? 'none'` — cannot pass this gate, and nothing downstream can mistake an
+ * absence of measurement for a measured floor.
+ */
+function checkNiss(technique: IndexTechnique, location: FieldLocation): void {
+  const { niss } = technique;
+  const isScored = niss.scoring_state === SCORED;
+  const measured: unknown[] = [niss.vector, niss.score, niss.pins, technique.niss_severity];
+  if (measured.some((field) => (field !== null) !== isScored)) {
+    failAt(location, 'a NISS vector, score, PINS flag and severity word are present exactly when the scoring state reads "scored"',
+      'Carry the registrar\'s own fields with readTechniqueTags; never fill an absent one in, and never default a severity word.');
+  }
+}
+
+/** Every code a technique names must be defined in the glossary, so nothing reaches a reader that cannot say what it means or whether it folds. */
+function checkNeurorights(technique: IndexTechnique, location: FieldLocation, declaredCodes: ReadonlySet<string>): void {
+  const strayCode = technique.neurorights?.affected.find((code) => !declaredCodes.has(code));
+  if (strayCode !== undefined) {
+    failAt(childOf(location, 'neurorights'), `"${show(strayCode)}" is not defined in neurorights_taxonomy`,
+      'Define every code in the registrar\'s glossary before a technique is tagged with it.');
+  }
+}
+
+/** A fold target stands on its own, so folding once is enough and no reader has to follow a chain. */
+function checkNeurorightsTaxonomy(codes: readonly IndexNeurorightCode[], root: FieldLocation): void {
+  const byCode = new Map(codes.map((entry) => [entry.code, entry]));
+  codes.forEach((entry, index) => {
+    if (entry.folds_into === null) return;
+    const location = childOf(itemOf(root, 'neurorights_taxonomy', index), 'folds_into');
+    const target = byCode.get(entry.folds_into);
+    if (target === undefined) failAt(location, `"${show(entry.folds_into)}" is not a code in the glossary`, 'Fold into a code the glossary defines.');
+    if (target?.folds_into !== null) failAt(location, `"${entry.code}" folds into a code that folds again`, 'A fold target must stand on its own.');
+  });
+}
+
 function checkEach<T>(items: readonly T[], location: FieldLocation, key: string, check: (item: T, itemLocation: FieldLocation) => void): void {
   items.forEach((item, index) => check(item, itemOf(location, key, index)));
 }
@@ -86,8 +130,13 @@ function checkDraftedThings(index: AnatomyIndex, root: FieldLocation): void {
   });
   checkEach(index.subjects, root, 'subjects', (subject, location) => checkReviewState(subject.review_state, childOf(location, 'review_state')));
   const regionIds = new Set(index.subjects.filter((subject) => subject.kind === 'region').map((subject) => subject.id));
-  checkEach(index.techniques, root, 'techniques', (technique, location) =>
-    checkEach(technique.links, location, 'links', (link, linkLocation) => checkLink(link, linkLocation, regionIds)));
+  const declaredCodes = new Set(index.neurorights_taxonomy.map((entry) => entry.code));
+  checkNeurorightsTaxonomy(index.neurorights_taxonomy, root);
+  checkEach(index.techniques, root, 'techniques', (technique, location) => {
+    checkNiss(technique, location);
+    checkNeurorights(technique, location, declaredCodes);
+    checkEach(technique.links, location, 'links', (link, linkLocation) => checkLink(link, linkLocation, regionIds));
+  });
   checkEach(index.devices.fiducials, childOf(root, 'devices'), 'fiducials', (fiducial, location) => checkReviewState(fiducial.review_state, childOf(location, 'review_state')));
   checkEach(index.devices.electrode_layouts, childOf(root, 'devices'), 'electrode_layouts', (layout, location) => checkReviewState(layout.review_state, childOf(location, 'review_state')));
   checkEach(index.devices.leads, childOf(root, 'devices'), 'leads', (lead, location) => checkReviewState(lead.review_state, childOf(location, 'review_state')));

@@ -109,9 +109,9 @@ describe('buildRegionViewNotes: a technique', () => {
 
 describe('the selection and the fill are separate channels', () => {
   it('builds the same shapes, fills and colours whatever the visitor chose: the selection is not an input to them', () => {
-    const shapes = buildSceneShapes(model, toColourMode(BAND_LENS), INITIAL_EXPLORER_STATE.layers);
-    // The only inputs are the model, the colour mode and the layers.
-    expect(buildSceneShapes).toHaveLength(3);
+    const shapes = buildSceneShapes(model, toColourMode(BAND_LENS), INITIAL_EXPLORER_STATE.layers, 'light');
+    // The only inputs are the model, the colour mode, the layers and the surface the canvas is drawn on. What the visitor chose is not among them.
+    expect(buildSceneShapes).toHaveLength(4);
     expect(shapes.length).toBeGreaterThan(0);
     const notes = buildRegionViewNotes(model, BAND_LENS, { regionIds: model.regions.map((region) => region.id), bandId: null });
     expect(Object.keys(notes)).toEqual(['lists', 'bracketGroups', 'limits', 'reviewState']);
@@ -121,7 +121,7 @@ describe('the selection and the fill are separate channels', () => {
 describe('withoutCaptionCopies: what the open picture already says is not said again beside it', () => {
   const lens = { kind: 'technique', techniqueId: 'QIF-T0034' } as const;
   const notes = buildRegionViewNotes(model, lens);
-  const shapes = buildSceneShapes(model, toColourMode(lens), INITIAL_EXPLORER_STATE.layers);
+  const shapes = buildSceneShapes(model, toColourMode(lens), INITIAL_EXPLORER_STATE.layers, 'light');
   const caption = buildViewportCaption(model, lens, shapes);
 
   it('takes nothing out while no picture is open, so no sentence loses its last copy', () => {

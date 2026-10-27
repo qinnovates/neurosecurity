@@ -1,7 +1,11 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
-import { NISS_SPEC, THREAT_VECTORS, getNissStats } from '@/lib/threat-data';
+import NissVectorRadar, { type NissReading } from '@/components/radar/NissVectorRadar';
+import RadarFillLegend from '@/components/radar/RadarFillLegend';
+// The page itself keys rows off `data-radar-fill`, so it imports the palette rather than relying on an island to pull it in.
+import '@/components/radar/radar-palette.css';
+import { NISS_SPEC, THREAT_VECTORS, getNissStats, NISS_UNSCORED_REASON_LABELS } from '@/lib/threat-data';
 import scoringGaps from '@shared/tara-scoring-gaps.json';
 import { getCatalogCoverage } from '@/lib/purpose-and-limits';
 import { VALIDATION_ENTRIES, getCheckedTechniqueCount } from '@/lib/validation-data';
@@ -81,16 +85,52 @@ const extensionMetrics = [
   },
 ];
 
+/*
+ * The severity bands, carrying the tone name the radar palette is keyed on
+ * rather than a hex of their own. This page used to hold a fifth palette, in
+ * which Low was green (#10b981) while the rest of the site drew it slate, and
+ * four of its five values missed the 3:1 floor on a light page.
+ */
 const severityLevels = [
-  { range: '9.0 – 10.0', label: 'Critical', color: '#ef4444', description: 'Immediate risk of irreversible neural harm, full cognitive compromise, or life-threatening physical safety failure.' },
-  { range: '7.0 – 8.9', label: 'High', color: '#f97316', description: 'Significant biological impact, serious cognitive integrity violation, or widespread data exfiltration with lasting consequences.' },
-  { range: '4.0 – 6.9', label: 'Medium', color: '#f59e0b', description: 'Moderate impact — reversible biological effects, partial data exposure, or attacks requiring specialized conditions.' },
-  { range: '0.1 – 3.9', label: 'Low', color: '#10b981', description: 'Minor impact — temporary disruption, limited data exposure, or attacks requiring high privilege and physical access.' },
-  { range: '0.0', label: 'None', color: '#94a3b8', description: 'Informational. No measurable impact on biological, cognitive, or information security.' },
+  { range: '9.0 – 10.0', label: 'Critical', tone: 'critical', description: 'Immediate risk of irreversible neural harm, full cognitive compromise, or life-threatening physical safety failure.' },
+  { range: '7.0 – 8.9', label: 'High', tone: 'high', description: 'Significant biological impact, serious cognitive integrity violation, or widespread data exfiltration with lasting consequences.' },
+  { range: '4.0 – 6.9', label: 'Medium', tone: 'medium', description: 'Moderate impact — reversible biological effects, partial data exposure, or attacks requiring specialized conditions.' },
+  { range: '0.1 – 3.9', label: 'Low', tone: 'low', description: 'Minor impact — temporary disruption, limited data exposure, or attacks requiring high privilege and physical access.' },
+  { range: '0.0', label: 'None', tone: 'none', description: 'Informational. No measurable impact on biological, cognitive, or information security. A measured zero, which is not the same as an entry NISS has not scored.' },
 ];
 
 // PINS-flagged count
 const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
+
+/*
+ * The vector drawn as a shape, in both of the states a reader meets: one scored
+ * entry and one the registrar has not scored. They are shown together because
+ * the page's own point is that 47 of the 178 catalogued techniques are
+ * unmeasured rather than low, and a chart has to say so by looking different.
+ */
+const SHAPE_SCORED_ID = 'QIF-T0001';
+const shapeScored = THREAT_VECTORS.find((technique) => technique.id === SHAPE_SCORED_ID && technique.niss.scoring_state === 'scored');
+if (!shapeScored) {
+  throw new Error(`scoring.astro: ${SHAPE_SCORED_ID} is not in the catalog with a complete NISS score; update SHAPE_SCORED_ID.`);
+}
+const shapeUnscored = THREAT_VECTORS.find((technique) => technique.niss.scoring_state === 'unscored');
+if (!shapeUnscored) {
+  throw new Error('scoring.astro: the catalog holds no unscored technique, so the withheld chart has nothing real to show. Drop the comparison or pick another pair.');
+}
+const scoredReading: NissReading = {
+  state: 'scored',
+  vector: shapeScored.niss.vector,
+  severity: shapeScored.niss.severity,
+  score: shapeScored.niss.score,
+  pins: shapeScored.niss.pins,
+  harmFlag: shapeScored.niss.harm_flag,
+  cognitiveFlag: shapeScored.niss.cognitive_flag,
+  isNeuroplasticityUnsupported: shapeScored.niss.np_support === 'unsupported',
+};
+const unscoredReading: NissReading = {
+  state: 'unscored',
+  reason: shapeUnscored.niss.unscored_reason ? NISS_UNSCORED_REASON_LABELS[shapeUnscored.niss.unscored_reason] : null,
+};
 ---
 
 <PageLayout
@@ -115,6 +155,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
           { href: '#severity', label: 'Severity Levels' },
           { href: '#coverage', label: 'Coverage & Known Gaps' },
           { href: '#vector', label: 'Vector Format' },
+          { href: '#shape', label: 'The Vector as a Shape' },
           { href: '#examples', label: 'Examples' },
           { href: '#v2-weights', label: 'v2.0 Weighting Factors' },
           { href: '#neurological', label: 'Neurological Extension' },
@@ -381,10 +422,10 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Severity Levels</h2>
         <div class="space-y-3">
           {severityLevels.map(level => (
-            <div class="glass rounded-xl p-4 flex items-start gap-4 border-l-4" style={`border-left-color: ${level.color};`}>
+            <div class="glass rounded-xl p-4 flex items-start gap-4 border-l-4" data-radar-fill={level.tone} style="border-left-color: var(--radar-tone);">
               <div class="shrink-0 w-24">
-                <div class="text-lg font-bold font-[family-name:var(--font-heading)]" style={`color: ${level.color};`}>{level.range}</div>
-                <div class="text-xs font-semibold" style={`color: ${level.color};`}>{level.label}</div>
+                <div class="text-lg font-bold font-[family-name:var(--font-heading)]" style="color: var(--radar-tone);">{level.range}</div>
+                <div class="text-xs font-semibold" style="color: var(--radar-tone);">{level.label}</div>
               </div>
               <p class="text-sm text-[var(--color-text-muted)]">{level.description}</p>
             </div>
@@ -473,6 +514,45 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         </div>
       </section>
 
+      <!-- The vector as a shape -->
+      <section id="shape" class="mb-20">
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">The Vector as a Shape</h2>
+        <div class="prose mb-6">
+          <p>
+            The same six values, drawn on six axes. The shape is only ever drawn for an entry whose scoring state reads <code>scored</code>.
+            {coverage.scored} of {coverage.total} catalogued techniques are in that state; the remaining {unscoredCount} are provisional or unscored, and they are
+            <strong>unmeasured, not zero</strong>. A chart that drew them at the origin would publish an absence of measurement as a measured floor, so it draws no
+            shape at all: a hatched frame, the state as a word, an em dash on every axis, and the registrar's own reason underneath.
+          </p>
+          <p>
+            The score and the flags sit beside the shape and are never folded into it. The weighted mean is a mean: as
+            <code>niss_spec.annotations</code> puts it, it lets a critical biological impact average down to a low score, which is what the flags beside the figure exist to say.
+          </p>
+        </div>
+        <div class="grid gap-6 sm:grid-cols-2 mb-6">
+          <div class="glass rounded-xl p-5">
+            <p class="text-xs font-semibold text-[var(--color-text-faint)] mb-3">
+              Scored &middot; <span class="font-[family-name:var(--font-mono)]">{shapeScored.id}</span> {shapeScored.name}
+            </p>
+            <NissVectorRadar client:visible title={`${shapeScored.id} ${shapeScored.name}`} reading={scoredReading} size={240} />
+          </div>
+          <div class="glass rounded-xl p-5">
+            <p class="text-xs font-semibold text-[var(--color-text-faint)] mb-3">
+              Unscored &middot; <span class="font-[family-name:var(--font-mono)]">{shapeUnscored.id}</span> {shapeUnscored.name}
+            </p>
+            <NissVectorRadar client:visible title={`${shapeUnscored.id} ${shapeUnscored.name}`} reading={unscoredReading} size={240} />
+          </div>
+        </div>
+        <div class="glass rounded-xl p-5">
+          <h3 class="text-sm font-semibold mb-3">What the fills mean</h3>
+          <RadarFillLegend client:visible />
+          <p class="text-xs text-[var(--color-text-faint)] mt-3">
+            The order is carried by how much ink a fill lays down, so it holds in greyscale, on a printer and with any colour vision. Hue repeats the same thing, and the
+            word is printed beside every shape.
+          </p>
+        </div>
+      </section>
+
       <!-- Examples -->
       <section id="examples" class="mb-20">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-6">Scored Examples</h2>
@@ -481,16 +561,16 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         </p>
         <div class="space-y-4">
           {THREAT_VECTORS.filter(t => ['QIF-T0001', 'QIF-T0003', 'QIF-T0045'].includes(t.id)).map(t => (
-            <div class="glass rounded-xl p-5 border-l-4" style={`border-left-color: ${t.niss.severity === 'critical' ? '#ef4444' : t.niss.severity === 'high' ? '#f97316' : t.niss.severity === 'medium' ? '#f59e0b' : '#10b981'};`}>
+            <div class="glass rounded-xl p-5 border-l-4" data-radar-fill={t.niss.severity} style="border-left-color: var(--radar-tone);">
               <div class="flex items-baseline justify-between mb-2">
                 <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)]">
                   <span class="font-[family-name:var(--font-mono)] text-[var(--color-text-faint)]">{t.id}</span> {t.name}
                 </h3>
                 <div class="flex items-center gap-2">
                   {t.niss.pins && (
-                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#ef4444]/10 text-[#ef4444]">PINS</span>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full border" data-radar-fill="critical" style="color: var(--radar-tone); border-color: var(--radar-tone);">PINS</span>
                   )}
-                  <span class="text-lg font-bold font-[family-name:var(--font-mono)]" style={`color: ${t.niss.severity === 'critical' ? '#ef4444' : t.niss.severity === 'high' ? '#f97316' : t.niss.severity === 'medium' ? '#f59e0b' : '#10b981'};`}>
+                  <span class="text-lg font-bold font-[family-name:var(--font-mono)]" style="color: var(--radar-tone);">
                     {t.niss.score.toFixed(1)}
                   </span>
                 </div>
@@ -507,7 +587,7 @@ const pinsFlagged = THREAT_VECTORS.filter(t => t.niss?.pins).length;
         </div>
         <div class="mt-8 prose">
           <p>
-            All {totalTechniques} techniques are scored and browsable in the <a href="/atlas/tara/">TARA Atlas</a>. The scoring methodology is documented in the <a href="/research/whitepaper/#niss">QIF Whitepaper §6.5</a>.
+            All {totalTechniques} techniques are browsable in the <a href="/atlas/tara/">TARA Atlas</a>; {coverage.scored} of them carry a complete NISS score, and the other {unscoredCount} say so rather than being estimated. The scoring methodology is documented in the <a href="/research/whitepaper/#niss">QIF Whitepaper §6.5</a>.
           </p>
         </div>
       </section>

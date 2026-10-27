@@ -11,9 +11,11 @@ import HourglassReveal from '../components/HourglassReveal';
 import ScrollCounter from '../components/ScrollCounter';
 import AtlasExplorerLink from '../components/brain/AtlasExplorerLink';
 import DualUseSplit from '../components/DualUseSplit';
-import NeurorightsPentagon from '../components/NeurorightsPentagon';
+import NeurorightsRadar from '@/components/radar/NeurorightsRadar';
 import '../styles/global.css';
 import registry from '@shared/qtara-registrar.json';
+import { readNeurorightsTaxonomy, type NeurorightCode } from '@/lib/anatomy/technique-tags';
+import { foldNeurorights } from '@/lib/neurorights-fold';
 import { CODE_LABELS, METRIC_NAMES, parseNiss } from '../lib/niss-parser';
 import { getCatalogCoverage, PURPOSE_SUMMARY, STATEMENT_LINKS } from '../lib/purpose-and-limits';
 
@@ -50,13 +52,17 @@ techniques.forEach((t: any) => {
   if (bySeverity[sev] !== undefined) bySeverity[sev]++;
 });
 
-// Compute neurorights counts from registrar (build-time)
-const neurorightsCounts: Record<string, number> = { MI: 0, MP: 0, CL: 0, PC: 0 };
-techniques.forEach((t: any) => {
-  (t?.neurorights?.affected ?? []).forEach((r: string) => {
-    if (neurorightsCounts[r] !== undefined) neurorightsCounts[r]++;
-  });
-});
+/*
+ * Neurorights counts (build-time). The registrar tags techniques with six
+ * codes and states in the glossary that two of them fold in; the fold is read
+ * from `folds_into` rather than from the name text, and the chart prints it.
+ * The previous count kept MP, CL, MI and PC and dropped DI and IDA silently,
+ * which lost every technique that reaches a right only through a folded code.
+ */
+const neurorightsFold = foldNeurorights(
+  readNeurorightsTaxonomy(registry),
+  techniques.map((technique: any) => (technique?.neurorights == null ? null : ((technique.neurorights.affected ?? []) as NeurorightCode[]))),
+);
 ---
 
 <BaseLayout title="TARA — Threat Modeling Catalog for Neural Devices · Qinnovate" description={`A proposed, unvalidated framework for threat modeling, severity scoring and impact assessment of neural devices: ${coverage.total} cataloged techniques, ${coverage.scored} with draft NISS scores, ${coverage.detected} with detection guidance.`}>
@@ -374,15 +380,9 @@ techniques.forEach((t: any) => {
       </p>
     </div>
 
-    <NeurorightsPentagon
-      client:visible
-      rights={[
-        { code: 'MI', name: 'Mental Integrity', count: neurorightsCounts.MI, color: '#ef4444' },
-        { code: 'MP', name: 'Mental Privacy', count: neurorightsCounts.MP, color: '#f59e0b' },
-        { code: 'CL', name: 'Cognitive Liberty', count: neurorightsCounts.CL, color: '#3b82f6' },
-        { code: 'PC', name: 'Psychological Continuity', count: neurorightsCounts.PC, color: '#8b5cf6' },
-      ]}
-    />
+    <div class="max-w-lg mx-auto px-4">
+      <NeurorightsRadar client:visible fold={neurorightsFold} size={300} />
+    </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto mt-12 reveal-stagger reveal">
       {[{ name: 'FDA', desc: 'Medical device cybersecurity' }, { name: 'EU AI Act', desc: 'High-risk AI compliance' }, { name: 'OECD', desc: 'Neurotechnology principles' }, { name: 'ISO', desc: 'Medical device standards' }].map((r) => (

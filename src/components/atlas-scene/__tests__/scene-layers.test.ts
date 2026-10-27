@@ -2,8 +2,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import type { DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
-import { SELECTION_COLOUR, STEP_EASE_MS, stepEaseDuration } from '@/lib/atlas-explorer/scene-drawing';
-import type { SceneShape } from '@/lib/atlas-explorer/scene-shapes';
+import { DRAW_ORDER, SELECTION_COLOUR, STEP_EASE_MS, SURFACE_INK, ringParamsFor, stepEaseDuration } from '@/lib/atlas-explorer/scene-drawing';
+import { NEUTRAL_COLOUR, NISS_COLOURS, NISS_COLOURS_DARK, type SceneShape } from '@/lib/atlas-explorer/scene-shapes';
 import { toIndexReviewState, UNREVIEWED } from '@/lib/anatomy/review-state';
 import { listSceneObjects, resetStandIn, standIn, type StandInObject } from './three-stand-in';
 
@@ -82,7 +82,7 @@ afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
 describe('the selection mark', () => {
   it('is one bracket set around a region drawn as two shapes, enclosing both, and one more for a picked shape outside it', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set(REGION_KEYS.twin), [REGION_KEYS.twin]);
     expect(kindsOf('lines')).toHaveLength(1);
     const twin = regionBoxes().find((box) => box.region === 'twin');
@@ -97,13 +97,47 @@ describe('the selection mark', () => {
     renderer.setShapes(SHAPES, NODES, new Set(), []);
     expect(kindsOf('lines')).toHaveLength(0);
   });
+
+  /**
+   * The brackets and the pale fills are the two inks the drawing layer chooses
+   * itself, so they are the two that can be drawn for the wrong surface. They
+   * were: the brackets took the light ink on both themes, which is 1.10:1 on the
+   * dark surface, and the pale fill had no dark step at all and so was fainter
+   * there than the shapes with no record. Both are checked at the renderer,
+   * because that is where the surface arrives.
+   */
+  it('inks the brackets and the pale fills for the surface it was given, and redraws both when the surface changes', () => {
+    const inkOfBrackets = (): unknown => kindsOf('lines')[0]?.material?.params.color;
+    const inkOfPaleFill = (): unknown => kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:front')?.material?.params.color;
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
+    renderer.setShapes(SHAPES, NODES, new Set(REGION_KEYS.front), [REGION_KEYS.front]);
+    expect(inkOfBrackets()).toBe(SURFACE_INK.light.selection);
+    expect(inkOfPaleFill()).toBe(SURFACE_INK.light.inside);
+
+    renderer.setTheme('dark');
+    expect(inkOfBrackets()).toBe(SURFACE_INK.dark.selection);
+    expect(inkOfPaleFill()).toBe(SURFACE_INK.dark.inside);
+    // One bracket set and one shape still: the surface changes the ink, never what is drawn.
+    expect(kindsOf('lines')).toHaveLength(1);
+
+    renderer.setTheme('light');
+    expect(inkOfBrackets()).toBe(SURFACE_INK.light.selection);
+    expect(inkOfPaleFill()).toBe(SURFACE_INK.light.inside);
+  });
+
+  it('starts on the surface it was made for, without waiting to be told again', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'dark');
+    renderer.setShapes(SHAPES, NODES, new Set(REGION_KEYS.front), [REGION_KEYS.front]);
+    expect(kindsOf('lines')[0]?.material?.params.color).toBe(SURFACE_INK.dark.selection);
+    expect(kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:front')?.material?.params.color).toBe(SURFACE_INK.dark.inside);
+  });
 });
 
 describe('no line joins two regions', () => {
   const stepShapes = (numbers: Record<string, number[]>): SceneShape[] => SHAPES.map((shape) => ({ ...shape, stepNumbers: numbers[shape.structureKey] ?? [], fill: numbers[shape.structureKey] === undefined ? shape.fill : 'solid' as const }));
 
   it('finds a line between two regions when one is planted, so the check below means something', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set(), []);
     const three = standIn.scenes[0];
     const planted = Object.assign(Object.create(Object.getPrototypeOf(kindsOf('mesh')[0])), { kind: 'lines', children: [], userData: {}, geometry: { attributes: { position: { array: [0, 0, -60, 0, 0, 60] } } } });
@@ -112,7 +146,7 @@ describe('no line joins two regions', () => {
   });
 
   it('draws none for a selection, a stepped threat model, a whole threat model, the electrode layout, or all of them at once', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, false);
+    const renderer = createSceneRenderer(canvas, callbacks, false, 'light');
     const everyRegion = Object.values(REGION_KEYS);
     const states: Array<() => void> = [
       () => renderer.setShapes(SHAPES, NODES, new Set(everyRegion.flat()), everyRegion),
@@ -142,7 +176,7 @@ describe('threat-model steps in the picture', () => {
   const labels = (): string[] => kindsOf('sprite').map((sprite) => String(sprite.userData.labelText));
 
   it('numbers the shapes a step marks, in place at the middle of each, and nothing else', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(marked([4]), NODES, new Set(), []);
     expect(labels()).toEqual(['Step 4']);
     const [label] = kindsOf('sprite');
@@ -155,7 +189,7 @@ describe('threat-model steps in the picture', () => {
   });
 
   it('eases a step\'s own marks in where they stand, once, and leaves every other shape alone', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, false);
+    const renderer = createSceneRenderer(canvas, callbacks, false, 'light');
     renderer.setShapes(marked([4]), NODES, new Set(), []);
     const meshOf = (key: string): StandInObject => kindsOf('mesh').find((mesh) => mesh.userData.structureKey === key) as StandInObject;
     const before = [meshOf('a:front').position.x, meshOf('a:front').position.y, meshOf('a:front').position.z];
@@ -176,7 +210,7 @@ describe('threat-model steps in the picture', () => {
 
   it('shows every numbered step at once under reduced motion, with no fade', () => {
     expect(stepEaseDuration(true)).toBe(0);
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     const whole = SHAPES.map((shape, at) => ({ ...shape, fill: 'solid' as const, stepNumbers: [at + 1] }));
     renderer.setShapes(whole, NODES, new Set(), []);
     expect(kindsOf('sprite').map((sprite) => sprite.userData.labelText)).toEqual(['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5']);
@@ -186,9 +220,74 @@ describe('threat-model steps in the picture', () => {
   });
 });
 
+describe('the marker ring', () => {
+  const rings = (): StandInObject[] => listSceneObjects().filter((object) => object.userData.ringReason !== undefined);
+  const ringFor = (reason: string): StandInObject | undefined => rings().find((group) => group.userData.ringReason === reason);
+  const inkOf = (ring: StandInObject | undefined): unknown[] => [...new Set((ring?.children ?? []).map((part) => part.material?.params.color))];
+  /** A structure the atlas marks with a ring alone: no file, no mesh, only a place. */
+  const placeOnly = (overrides: Partial<SceneShape> = {}): SceneShape[] => [shapeAt('front', CENTRES.front, { sizeMark: 'ring_only', fill: 'solid', colour: NISS_COLOURS.critical, step: 'critical', ...overrides })];
+
+  it('carries the lens it is under: the step\'s own colour where the lens fills the shape, on either surface', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
+    renderer.setShapes(placeOnly(), new Map(), new Set(), []);
+    expect(inkOf(ringFor('place_only'))).toEqual([NISS_COLOURS.critical]);
+    renderer.setShapes(placeOnly({ colour: NISS_COLOURS.none, step: 'none' }), new Map(), new Set(), []);
+    expect(inkOf(ringFor('place_only'))).toEqual([NISS_COLOURS.none]);
+    renderer.setShapes(placeOnly({ colour: NISS_COLOURS_DARK.critical }), new Map(), new Set(), []);
+    expect(inkOf(ringFor('place_only'))).toEqual([NISS_COLOURS_DARK.critical]);
+    // The ring was the one mark that stayed neutral under every lens; it must never read as neutral while the lens fills its shape.
+    expect(inkOf(ringFor('place_only'))).not.toContain(NEUTRAL_COLOUR);
+  });
+
+  it('changes how much of itself it draws when the lens state changes, so colour is not the only channel', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
+    const drawn = (shapes: SceneShape[]): { ink: unknown[]; parts: number } => {
+      renderer.setShapes(shapes, new Map(), new Set(), []);
+      const ring = ringFor('place_only');
+      return { ink: inkOf(ring), parts: ring?.children.length ?? 0 };
+    };
+    const filled = drawn(placeOnly());
+    const noData = drawn(placeOnly({ fill: 'lines', colour: NEUTRAL_COLOUR, step: null }));
+    const inside = drawn(placeOnly({ fill: 'translucent', colour: NEUTRAL_COLOUR, step: null }));
+    expect(noData.ink).toEqual([NEUTRAL_COLOUR]);
+    expect(new Set([filled.parts, noData.parts, inside.parts]).size).toBe(3);
+    // Each ring is one material for all its pieces, so no piece can drift from the rest.
+    expect(filled.ink).toHaveLength(1);
+  });
+
+  it('marks a structure with no outline at all with a centre, and a coarse outline with a ring alone', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
+    renderer.setShapes([
+      ...placeOnly(),
+      shapeAt('back', CENTRES.back, { sizeMark: 'mesh_and_ring', fill: 'solid', colour: NISS_COLOURS.high, step: 'high' }),
+    ], NODES, new Set(), []);
+    const place = ringFor('place_only');
+    const coarse = ringFor('coarse_outline');
+    expect(place?.children).toHaveLength((ringParamsFor({ fill: 'solid', sizeMark: 'ring_only', colour: '#000000' })?.arcs.length ?? 0) + 1);
+    expect(coarse?.children).toHaveLength(ringParamsFor({ fill: 'solid', sizeMark: 'mesh_and_ring', colour: '#000000' })?.arcs.length ?? 0);
+    expect(place?.children.length).toBeGreaterThan(coarse?.children.length ?? 0);
+    // The mesh of the coarse shape is still drawn: the ring annotates it, it does not replace it.
+    expect(kindsOf('mesh').some((mesh) => mesh.userData.structureKey === 'a:back')).toBe(true);
+  });
+
+  it('draws over the shapes on purpose, under the selection mark, and turns with the camera as one piece', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, false, 'light');
+    renderer.setShapes(placeOnly(), new Map(), new Set(['a:front']), [['a:front']]);
+    const ring = ringFor('place_only');
+    // A mark that says the outline here is approximate, or absent, is worthless if the drawing can hide it.
+    expect(ring?.children.every((part) => part.material?.params.depthTest === false)).toBe(true);
+    expect(ring?.children.every((part) => part.renderOrder === DRAW_ORDER.marker)).toBe(true);
+    expect(kindsOf('lines').every((brackets) => brackets.renderOrder > DRAW_ORDER.marker)).toBe(true);
+    // Nothing about the ring moves on its own: it is billboarded, which is a camera turn, not an animation.
+    runFrame(1000);
+    expect([ring?.position.x, ring?.position.y, ring?.position.z]).toEqual([0, 0, -60]);
+    expect(ring?.children.every((part) => (part.material?.opacity ?? 0) > 0)).toBe(true);
+  });
+});
+
 describe('the electrode layout in the picture', () => {
   it('draws a named dot per electrode only when asked, and removes them all when the layer goes off', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set(), []);
     expect(kindsOf('sprite')).toEqual([]);
     renderer.setDevices(DEVICES, null);
@@ -201,7 +300,7 @@ describe('the electrode layout in the picture', () => {
   });
 
   it('stands the camera back far enough to hold the whole head while the head surface is drawn, and returns when it is not', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     const brainDistance = renderer.distance();
     renderer.setDevices(DEVICES, null);
     expect(renderer.distance()).toBeGreaterThan(brainDistance * 1.2);
@@ -213,7 +312,7 @@ describe('the electrode layout in the picture', () => {
   });
 
   it('reports a click on a dot as an electrode pick and never as a shape, so it can select no region', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set(), []);
     renderer.setDevices(DEVICES, null);
     const dot = kindsOf('mesh').find((mesh) => mesh.userData.electrodeId === 'Cz');
@@ -230,7 +329,7 @@ describe('the electrode layout in the picture', () => {
   });
 
   it('marks the picked dot with the selection colour and draws nothing from a dot to the brain', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set(), []);
     renderer.setDevices(DEVICES, 'Oz');
     const colourOf = (electrodeId: string): unknown => kindsOf('mesh').find((mesh) => mesh.userData.electrodeDot === electrodeId)?.material?.params.color;

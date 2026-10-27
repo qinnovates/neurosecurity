@@ -17,6 +17,7 @@ import { buildTechniques, reviewTechniqueLinks } from './build-index-techniques'
 import { REGISTRAR_FILE } from './parse-technique-regions';
 import { parseAnatomyIndex } from './parse-anatomy-index';
 import { reviewCrosswalkRows, reviewNoGeometry } from './review-rows';
+import { readNeurorightsTaxonomy } from './technique-tags';
 import { sha256Hex } from './row-digest';
 import { SOURCE_REF_STATES } from './source-ref';
 import { ANATOMY_INDEX_STATUS } from './status-sentences';
@@ -45,6 +46,7 @@ function pin(path: string, content: string): PinnedFile {
 
 /** @param companions files served beside the index; the index records each one's length and digest */
 export function buildAnatomyBundle(data: AnatomyData, companions: readonly CompanionFile[] = []): AnatomyBundle {
+  const registrar = data.documentsByFile.get(REGISTRAR_FILE);
   const crosswalk = reviewCrosswalkRows(data);
   const noGeometry = reviewNoGeometry(data);
   const links = reviewTechniqueLinks(data);
@@ -63,7 +65,8 @@ export function buildAnatomyBundle(data: AnatomyData, companions: readonly Compa
     assets,
     structures: buildStructures(data, crosswalk),
     subjects: buildSubjects(data, crosswalk, noGeometry),
-    techniques: buildTechniques(data, links, data.documentsByFile.get(REGISTRAR_FILE)),
+    techniques: buildTechniques(data, links, registrar),
+    neurorights_taxonomy: readNeurorightsTaxonomy(registrar),
     tracts: buildTracts(assets),
     devices: buildDevices(data),
     stale_evidence_keys: staleKeys,

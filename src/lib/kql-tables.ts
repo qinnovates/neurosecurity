@@ -181,6 +181,17 @@ function provisionalMetrics(metrics: Record<string, string> | undefined): Record
   return supported;
 }
 
+/**
+ * True only when the technique carries a complete NISS score. The registrar
+ * writes `niss.score`, `vector`, `severity`, `pins` and `harm_flag` together or
+ * not at all, so one numeric score settles the whole group. A provisional entry
+ * has bounds (`score_min`/`score_max`) and no score, and an unscored entry has
+ * a reason; neither has been measured, and neither may be published as a value.
+ */
+function isNissMeasured(t: any): boolean {
+  return typeof t.niss?.score === 'number';
+}
+
 function buildTechniques(): Row[] {
   return (registrar.techniques || []).map((t: any) => {
     const nv = t.niss?.vector ? parseNissVector(t.niss.vector) : provisionalMetrics(t.niss?.metrics);
@@ -194,11 +205,16 @@ function buildTechniques(): Row[] {
       severity_source: t.severity_source || 'editorial',
       severity_legacy: t.severity_legacy || '',
       status: t.status,
-      niss_score: t.niss?.score || 0,
-      niss_vector: t.niss?.vector || '',
-      niss_severity: t.niss?.severity || '',
-      niss_pins: t.niss?.pins || false,
-      niss_harm_flag: t.niss?.harm_flag || false,
+      // The NISS score, vector, severity word, PINS flag and harm flag are
+      // written together or not at all, so they are read together here. A cell
+      // is null when the technique was never scored: on a query surface, 0,
+      // 'none', '' and false all read as findings, and nobody measured this
+      // technique. `niss_scoring_state` says which of the unscored states it is.
+      niss_score: isNissMeasured(t) ? t.niss.score : null,
+      niss_vector: isNissMeasured(t) ? t.niss.vector : null,
+      niss_severity: isNissMeasured(t) ? t.niss.severity : null,
+      niss_pins: isNissMeasured(t) ? t.niss.pins : null,
+      niss_harm_flag: isNissMeasured(t) ? t.niss.harm_flag : null,
       niss_np_support: t.niss?.np_support || '',
       niss_scoring_state: t.niss?.scoring_state || 'unscored',
       niss_score_min: t.niss?.score_min ?? '',

@@ -67,6 +67,19 @@ const ROWS = [
   buildRow({ subject_id: 'cingulate', subject_name_at_draft: 'Cingulate Gyrus (Posterior)', atlas_ids: ['11'], extent_match: 'approximate', valid_for_addressing: [2] }),
 ];
 
+/** The registrar's neurorights glossary, with the two folds it states inside the code's own name. */
+export const NEURORIGHTS_TAXONOMY: Readonly<Record<string, string>> = {
+  MP: 'Mental Privacy', CL: 'Cognitive Liberty', MI: 'Mental Integrity', PC: 'Psychological Continuity',
+  DI: 'Dynamical Integrity (folded into MI)', IDA: 'Informational Disassociation (folded into MP)',
+};
+export const FIXTURE_NISS_VECTOR = 'NISS:1.1/BI:H/CR:H/CD:H/CV:E/RV:P/NP:T';
+export const FIXTURE_NISS_SCORE = 6.1;
+
+/** The registrar as the anatomy build reads it: the glossary every code is defined in, and one entry per technique it holds. */
+export function buildRegistrarFile(techniques: ReadonlyArray<Record<string, unknown>>): Record<string, unknown> {
+  return { statistics: { neurorights: { taxonomy: NEURORIGHTS_TAXONOMY } }, techniques };
+}
+
 const UNCLEARED = { cleared: false, reason: 'The text cannot settle whether further terms pass through.', unlocks_when: ['A written confirmation.'], drafted_by: 'ai' as const };
 
 export function buildLedgerFile(entries: LedgerEntry[] = []): Record<string, unknown> {
@@ -77,7 +90,15 @@ export function buildRawFiles(overrides: Partial<RawAnatomyFiles> = {}): RawAnat
   const tractsSource = buildSource({ id: TRACTS_SOURCE_ID, name: 'Fixture tracts', layers: ['tracts'], license_id: 'cc-by-sa-4.0' });
   return {
     engineData: ENGINE_DATA,
-    registrar: { techniques: [{ id: TECHNIQUE_ID, niss: { severity: 'high' }, tara: { dsm5: { cluster: 'mood_trauma', pathway: PATHWAY_TEXT } } }] },
+    registrar: buildRegistrarFile([
+      {
+        id: TECHNIQUE_ID,
+        niss: { scoring_state: 'scored', severity: 'high', vector: FIXTURE_NISS_VECTOR, score: FIXTURE_NISS_SCORE, pins: false },
+        neurorights: { affected: ['MP', 'DI'], cci: 0.96 },
+        tara: { dsm5: { cluster: 'mood_trauma', pathway: PATHWAY_TEXT } },
+      },
+      { id: 'QIF-T9002', niss: { scoring_state: 'unscored', unscored_reason: 'The fixture scores nothing for it.' }, neurorights: { affected: [] } },
+    ]),
     atlas: ATLAS,
     pathways: { pathways: [{ id: 'corticospinal', name: 'Corticospinal Tract', type: 'motor_descending' }, { id: 'default_mode_network', name: 'Default Mode Network', type: 'cortical_network' }] },
     sources: buildSourcesFile([buildSource(), tractsSource]),
