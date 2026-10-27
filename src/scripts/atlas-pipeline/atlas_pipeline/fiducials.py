@@ -2,7 +2,11 @@
 
 These are placements on an average head, made by this code and not by a person feeling a skull. The
 average blurs skin landmarks, and the inion is a bump on bone that the skin does not show. Each rule
-below says what it measures; the review sheet exists so that a person can overrule it.
+below says what it measures. Visual review-sheet generation was removed (it depended on Pillow, which
+carried unrelated but unneeded CVE exposure for a QA-only feature); the numeric layout checks in
+layout_checks.py (arc share, surface distance, midline, mirror symmetry) are the standing-library
+substitute, and the images already archived under `<staging>/2026-10-atlas-geometry/pr-sheets/devices/`
+remain the record a person can overrule these placements against.
 """
 from __future__ import annotations
 

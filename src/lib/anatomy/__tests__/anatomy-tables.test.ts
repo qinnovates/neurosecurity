@@ -4,7 +4,7 @@ import { buildAnatomyTables, type AnatomyTables } from '../anatomy-tables';
 import type { AnatomyEvidence } from '../build-anatomy-evidence';
 import { buildAnatomyBundle } from '../build-anatomy-index';
 import { AnatomyDataError } from '../errors';
-import type { LedgerEntry } from '../parse-review-ledger';
+import { parseReviewLedger, type LedgerEntry } from '../parse-review-ledger';
 import { readBandLevelReason } from '../parse-technique-regions';
 import { reviewStateOfLicenceReading } from '../review-state';
 import { CROSSWALK_STATUS, SOURCES_STATUS, TECHNIQUE_REGIONS_STATUS, VERDICTS_STATUS } from '../status-sentences';
@@ -101,8 +101,9 @@ describe('buildAnatomyTables: sources', () => {
     expect(sources[1].blockers).toContain('not_cleared');
   });
 
-  it('reads every licence reading as unreviewed, since none can be confirmed', () => {
-    expect(reviewStateOfLicenceReading({ human_confirmed: false })).toEqual({ state: 'ai_drafted_unreviewed' });
+  it('reads an unconfirmed licence reading as unreviewed', () => {
+    const verdict = { human_confirmed: false as const, source_id: FIXTURE_ATLAS_ID, licence_digest: 'c'.repeat(64) };
+    expect(reviewStateOfLicenceReading(verdict, parseReviewLedger(buildLedgerFile()))).toEqual({ state: 'ai_drafted_unreviewed' });
   });
 });
 

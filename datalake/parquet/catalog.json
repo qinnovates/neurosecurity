@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-10-26T23:22:47.097069+00:00",
+    "generated": "2026-10-27T19:37:25.366063+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
@@ -794,8 +794,8 @@
         "layers",
         "urls"
       ],
-      "size_bytes": 18682,
-      "sha256": "2defae6fe95a9761b95bf4095ec9fc3a5d9e7c03a6926127a4aec40ec1b2d681",
+      "size_bytes": 18730,
+      "sha256": "c95481eee9eea3cc96cdd643c3dd0cf2852876d90291159415845652acf7a0b9",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_sources.parquet"
     },

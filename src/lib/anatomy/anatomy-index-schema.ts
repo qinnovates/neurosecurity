@@ -41,7 +41,7 @@ const layer = shapes.record({ id: shapes.word(LAYER_IDS), available: shapes.bool
 const source = shapes.record({
   id, name: text, license_id: shapes.word(LICENCE_IDS), stated_license_id: shapes.word(LICENCE_IDS), verdict: shapes.word(VERDICTS),
   grant: shapes.word(GRANTS), route_kind: shapes.word(ROUTE_KINDS), route_status: shapes.word(ROUTE_STATUSES), buildable: shapes.boolean, pipeline_only: shapes.boolean,
-  blockers: shapes.list(shapes.word(UNBUILDABLE_REASONS)), clearance_reason: text, human_confirmed: shapes.alwaysFalse,
+  blockers: shapes.list(shapes.word(UNBUILDABLE_REASONS)), clearance_reason: text, human_confirmed: shapes.boolean,
 });
 
 const asset = shapes.record({

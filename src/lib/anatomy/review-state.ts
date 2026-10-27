@@ -24,7 +24,7 @@ export const UNREVIEWED: ReviewState = { state: 'ai_drafted_unreviewed' };
  * reviewed therefore takes two deliberate edits: the ledger entry, and this
  * number. Both belong to the repository owner.
  */
-export const REVIEWED_ENTRY_COUNTS: Readonly<Record<LedgerEntryKind, number>> = { row_review: 0, visual_check: 0, agreement: 0 };
+export const REVIEWED_ENTRY_COUNTS: Readonly<Record<LedgerEntryKind, number>> = { row_review: 0, visual_check: 0, agreement: 0, licence_confirmation: 16 };
 
 /** Least able to vouch for anatomy first. An owner's review is not a specialist's. */
 const ROLE_RANK: readonly ReviewerRole[] = ['other', 'owner', 'clinician', 'neuroanatomist'];
@@ -41,15 +41,15 @@ export function findReview(ledger: ReviewLedger, kind: LedgerEntryKind, key: str
 }
 
 /**
- * A licence reading has no ledger entry kind, and `human_confirmed` can only be
- * false, so every reading is unreviewed. The table is keyed by the field's own
- * type: the day a reading can be confirmed, this stops compiling until someone
- * decides what a confirmed reading's state and mark are.
+ * A `human_confirmed: true` claim only reads as reviewed while a
+ * `licence_confirmation` ledger entry backs it at the verdict's own
+ * `licence_digest` (`anatomy-inputs.ts`'s `rejectUnbackedConfirmation` refuses
+ * to build at all if the claim and the ledger ever disagree) -- so by the time
+ * this runs, `human_confirmed: true` implies a real, role-bearing entry exists.
  */
-const LICENCE_READING_STATES: Readonly<Record<`${LicenceVerdict['human_confirmed']}`, ReviewState>> = { false: UNREVIEWED };
-
-export function reviewStateOfLicenceReading(verdict: Pick<LicenceVerdict, 'human_confirmed'>): ReviewState {
-  return LICENCE_READING_STATES[`${verdict.human_confirmed}`];
+export function reviewStateOfLicenceReading(verdict: Pick<LicenceVerdict, 'human_confirmed' | 'source_id' | 'licence_digest'>, ledger: ReviewLedger): ReviewState {
+  if (!verdict.human_confirmed) return UNREVIEWED;
+  return findReview(ledger, 'licence_confirmation', verdict.source_id, verdict.licence_digest);
 }
 
 function rankOf(state: ReviewState): number {
@@ -84,7 +84,7 @@ export function toIndexReviewState(state: ReviewState): IndexReviewState {
 
 export function countEntriesByKind(ledger: ReviewLedger): Record<LedgerEntryKind, number> {
   const count = (kind: LedgerEntryKind): number => ledger.entries.filter((entry) => entry.kind === kind).length;
-  return { row_review: count('row_review'), visual_check: count('visual_check'), agreement: count('agreement') };
+  return { row_review: count('row_review'), visual_check: count('visual_check'), agreement: count('agreement'), licence_confirmation: count('licence_confirmation') };
 }
 
 /** Stops the build when the ledger and REVIEWED_ENTRY_COUNTS disagree. */
