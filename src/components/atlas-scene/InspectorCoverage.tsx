@@ -1,3 +1,9 @@
+import NeurorightsRadar from '@/components/radar/NeurorightsRadar';
+import NissVectorRadar, { type NissReading } from '@/components/radar/NissVectorRadar';
+import type { IndexTechnique } from '@/lib/anatomy/anatomy-index-types';
+import { listLitLinks, type ExplorerModel, type RegionLink } from '@/lib/atlas-explorer/explorer-model';
+import { foldNeurorights } from '@/lib/neurorights-fold';
+import { getSeverity } from '@/lib/niss-parser';
 import type { CoverageCount, RegionCoverage } from './region-coverage';
 
 /*
@@ -38,14 +44,47 @@ function CountRow({ count }: { count: CoverageCount }) {
   );
 }
 
+/** The region's linked techniques, once per technique id: a technique linked by two terms gets one shape, not two. */
+function uniqueLinkedTechniques(regionLinks: readonly RegionLink[]): IndexTechnique[] {
+  const seen = new Set<string>();
+  const techniques: IndexTechnique[] = [];
+  for (const { technique } of regionLinks) {
+    if (seen.has(technique.id)) continue;
+    seen.add(technique.id);
+    techniques.push(technique);
+  }
+  return techniques;
+}
+
+/**
+ * The shape for one technique, or none: `niss.vector` is populated only for the
+ * state the registrar calls `scored`. A `provisional` or `unscored` entry holds
+ * no vector, no score and no PINS flag here, so there is no reading this pane
+ * can draw without inventing one; it carries none rather than a guessed shape.
+ */
+function scoredReadingOf(technique: IndexTechnique): { title: string; reading: NissReading } | null {
+  const { niss } = technique;
+  if (niss.scoring_state !== 'scored' || niss.vector === null || niss.score === null || niss.pins === null) return null;
+  return {
+    title: `${technique.id} ${technique.name}`,
+    reading: { state: 'scored', vector: niss.vector, severity: getSeverity(niss.score), score: niss.score, pins: niss.pins },
+  };
+}
+
 /**
  * What the atlas holds for the chosen region, before anything derived from it:
  * one row per route with its count, what the count is out of, and the join it
  * arrived through. It is the first block of the pane on purpose. Most regions
  * hold nothing, and a reader has to know that before reading a severity.
  */
-export default function InspectorCoverage({ coverage }: { coverage: RegionCoverage }) {
+export default function InspectorCoverage({ coverage, model, regionId }: { coverage: RegionCoverage; model: ExplorerModel; regionId: string }) {
   const { niss, dsm } = coverage;
+  const linkedTechniques = uniqueLinkedTechniques(listLitLinks(model, regionId));
+  const nissReadings = linkedTechniques.flatMap((technique) => scoredReadingOf(technique) ?? []);
+  const neurorightsFold = foldNeurorights(
+    model.index.neurorights_taxonomy,
+    linkedTechniques.map((technique) => (technique.neurorights === null ? null : technique.neurorights.affected)),
+  );
   return (
     <section className="atlas-section atlas-coverage" aria-labelledby="atlas-inspector-coverage" data-holds-nothing={coverage.holdsNothing}>
       <h3 className="atlas-subheading" id="atlas-inspector-coverage">What we hold for this region</h3>
@@ -65,15 +104,20 @@ export default function InspectorCoverage({ coverage }: { coverage: RegionCovera
         ? <p className="atlas-coverage-note" data-coverage-note="lens_no_data_not_safe">{NOTHING_LINKED}</p>
         : <p className="atlas-coverage-note" data-coverage-note="coverage_counts_not_risk">{COUNTS_NOT_RISK}</p>}
       {/*
-        * Seam for Lane 4's charts, and for the index fields Lane 2 adds.
-        * `NissVectorRadar` needs `techniques[].niss.vector` and `NeurorightsRadar` needs
-        * `techniques[].neurorights.affected` and the index's `neurorights_taxonomy`; this
-        * branch's index carries neither, so neither chart is mounted and no axis is drawn
-        * from a value this build does not hold. Once both land, the two charts mount here,
-        * inline and in this order (decisions 14 and 15), each under this block's coverage
-        * line so the denominator is read before the shape.
+        * Seam for Lane 4's charts, closed. `NissVectorRadar` draws one shape per
+        * linked technique the registrar reads as `scored` — the only state
+        * `niss.vector` is ever populated for, so a `provisional` or `unscored`
+        * entry carries no reading here rather than a guessed one.
+        * `NeurorightsRadar` folds every linked technique's `neurorights.affected`
+        * onto the index's `neurorights_taxonomy`, including the techniques that
+        * carry no record at all, so it mounts even when nothing is linked. Both
+        * mount inline, in this order (decisions 14 and 15), under this block's
+        * coverage line so the denominator is read before the shape.
         */}
-      <div className="atlas-coverage-charts" data-seam="lane4-radars" />
+      <div className="atlas-coverage-charts" data-seam="lane4-radars">
+        {nissReadings.map(({ title, reading }) => <NissVectorRadar key={title} title={title} reading={reading} />)}
+        <NeurorightsRadar fold={neurorightsFold} />
+      </div>
     </section>
   );
 }

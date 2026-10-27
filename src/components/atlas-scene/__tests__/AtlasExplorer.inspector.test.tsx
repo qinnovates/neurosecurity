@@ -411,9 +411,24 @@ describe('AtlasExplorer: what each statement and section says', () => {
     expect(coverage.querySelector('[data-coverage-note="lens_no_data_not_safe"]')?.textContent)
       .toBe('Nothing is linked to this region. That is not a finding that the region is safe, or low: it means nobody has drafted a link to it, on any of the routes above.');
     expect(coverage.textContent).not.toMatch(/\b(safe|secure|low risk|no risk)\b(?!,)/);
-    // Nothing derived is drawn from an absence: no chart is mounted, and the seam for them is empty.
-    expect(coverage.querySelector('[data-seam="lane4-radars"]')?.childElementCount).toBe(0);
-    expect(coverage.querySelector('svg')).toBeNull();
+    // Nothing linked means no NISS shape can be drawn, but the neurorights chart still mounts and says plainly that it holds no record.
+    const chartSeam = coverage.querySelector('[data-seam="lane4-radars"]') as HTMLElement;
+    expect(chartSeam.querySelectorAll('figure.radar')).toHaveLength(1);
+    expect(chartSeam.querySelectorAll('figure.radar[data-state="plotted"]')).toHaveLength(0);
+    expect(within(chartSeam).getByText('No records')).toBeTruthy();
+  });
+
+  it('mounts a NISS shape for every distinct scored technique linked to the region, and the neurorights chart beside them', async () => {
+    const { inspector } = await openRegion(litRegionId);
+    const coverage = inspector.querySelector('.atlas-coverage') as HTMLElement;
+    const chartSeam = coverage.querySelector('[data-seam="lane4-radars"]') as HTMLElement;
+    const model = loadRealModel();
+    const linkedTechniques = [...new Set(listLitLinks(model, litRegionId).map((regionLink) => regionLink.technique))];
+    const scoredCount = linkedTechniques.filter((technique) => technique.niss.scoring_state === 'scored').length;
+    const hasNeurorightsRecord = linkedTechniques.some((technique) => technique.neurorights !== null);
+    // One NISS figure per distinct scored technique (a technique linked by two terms gets one shape), plus one neurorights figure, plotted only once a linked technique carries a record.
+    expect(chartSeam.querySelectorAll('figure.radar')).toHaveLength(scoredCount + 1);
+    expect(chartSeam.querySelectorAll('figure.radar[data-state="plotted"]')).toHaveLength(scoredCount + (hasNeurorightsRecord ? 1 : 0));
   });
 
   it('says across the whole atlas how little it holds, before a region is chosen, and offers the regions that hold a link', async () => {

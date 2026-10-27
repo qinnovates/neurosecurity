@@ -84,7 +84,7 @@ export default function RegionInspector(props: Props) {
         <button type="button" className="atlas-link-button" onClick={props.onBackToList}>Back to the list</button>
         <button type="button" className="atlas-link-button" onClick={props.onBackToView}>Back to the 3D view</button>
       </p>
-      <InspectorCoverage coverage={coverage} />
+      <InspectorCoverage coverage={coverage} model={props.model} regionId={region.id} />
       {detail.description !== null && (
         <section className="atlas-section" aria-labelledby="atlas-inspector-what">
           <h3 className="atlas-subheading" id="atlas-inspector-what">What the QIF atlas file says it does</h3>
