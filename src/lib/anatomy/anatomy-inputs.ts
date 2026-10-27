@@ -21,12 +21,13 @@ import { parseReviewLedger, type ReviewLedger, type ReviewerRole } from './parse
 import { parseSources } from './parse-sources';
 import { REGISTRAR_FILE, parseTechniqueRegions } from './parse-technique-regions';
 import { findReview } from './review-state';
-import { parseVerdicts } from './parse-verdicts';
+import { VERDICTS_FILE, parseVerdicts } from './parse-verdicts';
 import type { AnatomySources, LicenceId, LicenceVerdict, LicenceVerdicts } from './source-types';
 
 export { ATLAS_FILE, PATHWAYS_FILE };
 const NETWORK_PATHWAY_TYPE = 'cortical_network';
 const AGREEMENT_ACCEPTING_ROLE: ReviewerRole = 'owner';
+const LICENCE_CONFIRMING_ROLE: ReviewerRole = 'owner';
 const NEURAL_BAND_PREFIX = 'N';
 const LABEL_TABLE_FOLDER_PATTERN = /^src\/site\/atlas-assets\/(open|by-sa)\/labels-[a-z0-9_]+\.json$/;
 
@@ -98,6 +99,19 @@ export function isAgreementAccepted(verdict: LicenceVerdict, ledger: ReviewLedge
   return acceptance.state === 'reviewed' && acceptance.reviewer_role === AGREEMENT_ACCEPTING_ROLE;
 }
 
+/** A `human_confirmed: true` claim is honoured only while a ledger entry backs it at this exact digest. */
+export function isLicenceConfirmed(verdict: LicenceVerdict, ledger: ReviewLedger): boolean {
+  const confirmation = findReview(ledger, 'licence_confirmation', verdict.source_id, verdict.licence_digest);
+  return confirmation.state === 'reviewed' && confirmation.reviewer_role === LICENCE_CONFIRMING_ROLE;
+}
+
+function rejectUnbackedConfirmation(verdicts: readonly LicenceVerdict[], ledger: ReviewLedger): void {
+  const unbacked = verdicts.find((verdict) => verdict.human_confirmed && !isLicenceConfirmed(verdict, ledger));
+  if (unbacked === undefined) return;
+  throw new AnatomyDataError(VERDICTS_FILE, `source ${unbacked.source_id}`, 'human_confirmed is true but no licence_confirmation ledger entry backs it at this digest',
+    `Add a licence_confirmation entry (key "${unbacked.source_id}", digest "${unbacked.licence_digest}", reviewer role "${LICENCE_CONFIRMING_ROLE}") to the review ledger, or set human_confirmed back to false.`);
+}
+
 function parseLabelTables(
   tablesByPath: Readonly<Record<string, unknown>>, sources: AnatomySources, effectiveLicence: ReadonlyMap<string, LicenceId>, buildability: ReadonlyMap<string, Buildability>,
 ): Map<string, LabelTable> {
@@ -164,6 +178,7 @@ export function parseAnatomyFiles(raw: RawAnatomyFiles): AnatomyData {
   const sources = parseSources(raw.sources);
   const verdicts = parseVerdicts(raw.verdicts, sources);
   const ledger = parseReviewLedger(raw.reviewLedger);
+  rejectUnbackedConfirmation(verdicts.verdicts, ledger);
   const verdictBySource = new Map(verdicts.verdicts.map((verdict) => [verdict.source_id, verdict]));
   const judged = sources.sources.map((source) => ({ source, verdict: verdictBySource.get(source.id) as LicenceVerdict }));
   const buildabilityBySource = new Map(judged.map(({ source, verdict }) =>

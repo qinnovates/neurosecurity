@@ -59,8 +59,8 @@ export interface IndexSource {
   blockers: UnbuildableReason[];
   /** The clearance record's reason, AI-drafted. */
   clearance_reason: string;
-  /** Always false today: no person has confirmed any licence reading. */
-  human_confirmed: false;
+  /** True only while a `licence_confirmation` ledger entry backs this source's reading at its own digest (see review-state.ts). */
+  human_confirmed: boolean;
 }
 
 export const VISUAL_CHECK_STATES = ['not_done', 'signed'] as const;

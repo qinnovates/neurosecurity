@@ -173,10 +173,10 @@ describe('licence clearance against the committed verdict file (guards)', () => 
     expect(index.sources.filter((source) => source.buildable).map((source) => source.id).sort()).toEqual([...PINNED_ANATOMY_STATE.buildableSourceIds].sort());
   });
 
-  it('has a verdict for every source, none confirmed by a person, every clearance marked AI-drafted', () => {
+  it('has a verdict for every source, every clearance marked AI-drafted regardless of confirmation', () => {
     expect(data.verdicts.verdicts.map((verdict) => verdict.source_id).sort()).toEqual(data.sources.sources.map((source) => source.id).sort());
     expect(data.verdicts.verdicts.length).toBeGreaterThan(0);
-    expect(data.verdicts.verdicts.filter((verdict) => verdict.human_confirmed !== false || verdict.clearance.drafted_by !== 'ai')).toEqual([]);
+    expect(data.verdicts.verdicts.filter((verdict) => verdict.clearance.drafted_by !== 'ai')).toEqual([]);
     expect(data.verdicts.verifiers.filter((verifier) => verifier.kind !== 'ai')).toEqual([]);
   });
 

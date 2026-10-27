@@ -171,8 +171,12 @@ These aren't committed yet — noted here for transparency about where this is h
   `datalake/qif-anatomy-sources.json` carries a `license_id` checked against a closed list when
   the registry loads (`src/scripts/atlas-pipeline/atlas_pipeline/sources.py`), with the
   publisher's quoted terms, the date read, and the reviewer kind recorded in
-  `datalake/qif-anatomy-verdicts.json`. Every reading is AI-drafted (`human_confirmed: false` on
-  all five sources as of 2026-10-27); none has had a human legal or owner sign-off yet
+  `datalake/qif-anatomy-verdicts.json`. Every reading was AI-drafted; as of 2026-10-27 all 16
+  registered sources have been read and confirmed by the repository owner, recorded as
+  `licence_confirmation` entries in `datalake/qif-anatomy-review-ledger.json` (each tied to a
+  digest of the exact terms confirmed, so an edit to the underlying reading un-confirms it until
+  reviewed again). This is an owner's confirmation that the AI-drafted reading looks right, not a
+  lawyer's sign-off -- no source here has had a review by outside legal counsel
 - External files the atlas pipeline fetches are sha256-pinned per file in the same registry, and
   the pin is enforced before any file is used (`atlas_pipeline/fetch.py`). As of 2026-10-27, the
   pins for three of the five anatomy sources (`cit168_rl`, `neudorfer_hypothalamus`,

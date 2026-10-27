@@ -7,5 +7,118 @@
       "role": "owner"
     }
   ],
-  "entries": []
+  "entries": [
+    {
+      "kind": "licence_confirmation",
+      "key": "mni_icbm152_2009c_asym",
+      "digest": "1a446608b31525d84abb4479619f0eee79172a356bbc8ffe73f3fd2ccfbbc22f",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "mni_icbm152_2009b_sym",
+      "digest": "9a0b02da6991a6545c627026fda170255356acde55b567a211ae9d1071d9e332",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "allen_hra_3d_2020",
+      "digest": "e4f7d851a780d119ef7978bf6d74b772493acd70bf4ad97e55b970fbf280d33e",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "cit168_rl",
+      "digest": "0a1cbaa94b3c688418a174b336f996613173d83cf1d815e15ce08bc06b95955f",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "harvard_aan_v2",
+      "digest": "884a44bbfd18308f273f0528de12078220ef893a21408581d2e69be8471ea95c",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "neudorfer_hypothalamus",
+      "digest": "1a82db27bbcc3ad48475d4fe4c8692d6f3a90e9381c07d85e12592e456ba6951",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "ahead_structures",
+      "digest": "ad2a388eb03d7dcaa9a795ac9b7ee4023a42eb7b462b764a3cc20238221325e5",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "eeg_positions",
+      "digest": "396d4f1f2969ce56d59950cb38d5ca19d8be3184a8e7daa26266a4f6e1b0934f",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "hcp1065_tracts",
+      "digest": "bd1553ee0868a5bf3ea0f602ff8ac55b69ef001476a1b5bdacd7680002190814",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "yeo2011_cbig",
+      "digest": "3e357f51c0075fef66604671040d290223aa1746cace2fbfa7262dbc59f8f1b9",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "schaefer2018_cbig",
+      "digest": "58dda9fb6c93796cdb89f8b800a51f14c01869e6b3b860175b40a1234cb86984",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "nextbrain",
+      "digest": "b08d196589f7cf327f14bff6b4e552161d0b941ea62079c2fb4007ea6cc7b39b",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "massp_2_0",
+      "digest": "b85b401a7d69e8af4d542ed50a4a9268a099d7dabbee719aef9e2370b7bed2fc",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "hcp_s1200_mmp1",
+      "digest": "1072f906a09ab870142f45d474b021b5803ba28b5a064238d628734358c41e06",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "freesurfer_fsaverage",
+      "digest": "86900bb065bf5a530e2d8f2d1676ac98ec623603fc7b278d497959c74aa2fcb3",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    },
+    {
+      "kind": "licence_confirmation",
+      "key": "templateflow_xfm",
+      "digest": "e85d561d60b4f65387c5b79b0768b864029f2e7d2fbd9ee7962df2289c3e83a7",
+      "reviewer_id": "owner-1",
+      "reviewed_on": "2026-10-27"
+    }
+  ]
 }

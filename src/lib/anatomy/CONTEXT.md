@@ -122,12 +122,12 @@ Checks: `__tests__/parse-device-geometry.test.ts`, `__tests__/device-geometry.gu
 
 ### 6. Re-run the pipeline
 Full detail: `src/scripts/atlas-pipeline/README.md`. None of these commands was run when this map was written; they need the offline cache.
-1. Environment: `ATLAS_CACHE_DIR` (downloads, archived transform, review sheets; outside git) and `ATLAS_VENV_DIR`. Defaults are in the README.
+1. Environment: `ATLAS_CACHE_DIR` (downloads, archived transform; outside git) and `ATLAS_VENV_DIR`. Defaults are in the README.
 2. Commit pipeline and registry changes first: the build refuses a dirty tree so the code hash names a real state.
 3. `npm run atlas:fetch`, then `npm run atlas:build`, then `npm run atlas:devices`.
 4. Expected output, as `src/scripts/atlas-pipeline/atlas_pipeline/manifest.py` states it: a second run on unchanged inputs changes nothing, so `git status` shows nothing under `src/site/atlas-assets/`. After a code-only change the manifest's `pipeline_code_hash` and fingerprints change; a mesh, label table or notice whose bytes change needs an explanation before it is committed. This was not verified when the map was written.
 5. When the code hash changes (any edit to `src/scripts/atlas-pipeline/atlas_pipeline/`, `src/scripts/atlas-pipeline/requirements.txt` or `src/scripts/atlas-pipeline/registry/pipeline-inputs.json`): `src/scripts/atlas-pipeline/tests/test_manifest_records.py` fails until the pipeline is re-run and the new manifest committed. Never type a hash into the manifest.
-6. A file whose bytes change gets a new name (its digest prefix). Look at the review sheets in the cache before committing. The archived registration is never recomputed silently.
+6. A file whose bytes change gets a new name (its digest prefix). Check the layout checks (`src/scripts/atlas-pipeline/atlas_pipeline/layout_checks.py`) before committing -- visual review-sheet generation was removed 2026-10-27 (Pillow dependency; see atlas-pipeline README). The archived registration is never recomputed silently.
 7. `bash src/scripts/atlas-pipeline/atlas.sh buildability` after any licence or verdict change.
 
 ### 7. Full data refresh
