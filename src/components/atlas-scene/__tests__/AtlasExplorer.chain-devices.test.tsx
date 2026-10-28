@@ -160,7 +160,9 @@ describe('AtlasExplorer: the electrode layout and the leads', () => {
   /** Turns the layer on and waits for its panel, which is fetched only then. */
   const turnOnLayout = async (container: HTMLElement): Promise<HTMLElement> => {
     fireEvent.click(within(openLayers()).getByRole('button', { name: 'EEG electrode layout' }));
-    await screen.findByRole('heading', { name: 'EEG electrode layout' });
+    // See the note beside the other use of this query below: the lazy chunk's own Suspense resolution needs more
+    // margin than the default findBy* timeout under a CPU-contended full-suite run.
+    await screen.findByRole('heading', { name: 'EEG electrode layout' }, { timeout: 5000 });
     return container.querySelector('.atlas-devices') as HTMLElement;
   };
   const openLayers = (): HTMLElement => {
@@ -182,7 +184,9 @@ describe('AtlasExplorer: the electrode layout and the leads', () => {
     expect(tracts.getAttribute('aria-pressed')).toBe('false');
     fireEvent.click(toggle);
     expect(toggle.getAttribute('aria-pressed')).toBe('true');
-    expect(await screen.findByRole('heading', { name: 'EEG electrode layout' })).not.toBeNull();
+    // The layer's own Suspense boundary resolves its lazy chunk here; the default findBy* timeout is tight enough
+    // to flake under a CPU-contended CI run (the full suite forks many workers), so this one gets more margin.
+    expect(await screen.findByRole('heading', { name: 'EEG electrode layout' }, { timeout: 5000 })).not.toBeNull();
     expect(container.querySelector('.atlas-devices')).not.toBeNull();
   });
 
