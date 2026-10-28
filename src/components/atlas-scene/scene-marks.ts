@@ -8,6 +8,7 @@
 import { CanvasTexture, Sprite, SpriteMaterial, type LineSegments, type Material, type Mesh, type Object3D } from 'three';
 import type { Point3 } from '@/lib/anatomy/ras-to-scene';
 import { DRAW_ORDER, unionBoxes, type Box } from '@/lib/atlas-explorer/scene-drawing';
+import type { SceneTheme } from '@/lib/atlas-explorer/scene-shapes';
 import { buildBrackets, type ShapeObjects } from './scene-objects';
 
 const FALLBACK_FONT = 'system-ui, sans-serif';
@@ -15,6 +16,12 @@ const FALLBACK_FONT = 'system-ui, sans-serif';
 const LABEL_FONT_PX = 44;
 const LABEL_PAD_PX = 14;
 const LABEL_BORDER_PX = 3;
+/**
+ * A label is dark words on its own light plate, on both surfaces. The plate is
+ * the label's background, so what the words need contrast against is the plate
+ * and not the page: these take no theme for the same reason the electrode dots
+ * do not. See `SURFACE_INK` in scene-drawing.ts for the inks that do.
+ */
 const LABEL_INK = '#1c1e26';
 const LABEL_PAPER = 'rgba(255, 255, 255, 0.94)';
 const STEP_LABEL_HEIGHT_MM = 9;
@@ -68,10 +75,10 @@ export function buildLabelSprite(text: string, at: Point3, heightMm: number, fon
  * One bracket set for each group of shapes selected together: a region drawn
  * as many shapes gets one mark around all of them, not one per shape.
  */
-export function buildSelectionMarks(groups: ReadonlyArray<readonly string[]>, entries: readonly ShapeObjects[]): LineSegments[] {
+export function buildSelectionMarks(groups: ReadonlyArray<readonly string[]>, entries: readonly ShapeObjects[], theme: SceneTheme): LineSegments[] {
   return groups.flatMap((keys) => {
     const box = unionBoxes(entries.filter((entry) => keys.includes(entry.shape.structureKey)).flatMap((entry) => entry.box ?? []));
-    return box === null ? [] : [buildBrackets(box)];
+    return box === null ? [] : [buildBrackets(box, theme)];
   });
 }
 

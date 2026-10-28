@@ -6,7 +6,7 @@
  */
 
 import {
-  MAX_NUMBER, childOf, failAt, readRecord, requireBoolean, requireEnum, requireInteger, requireList, requireNumber, requireText, type FieldLocation,
+  MAX_NUMBER, childOf, failAt, readRecord, requireBoolean, requireEnum, requireInteger, requireList, requireNumber, requirePattern, requireText, type FieldLocation,
 } from './field-readers';
 import { requireDate, requireSha256 } from './format-readers';
 
@@ -17,8 +17,9 @@ export type Shape =
   | { kind: 'boolean' }
   | { kind: 'always_false' }
   | { kind: 'integer'; minimum: number }
-  | { kind: 'number'; minimum: number }
+  | { kind: 'number'; minimum: number; maximum: number }
   | { kind: 'word'; allowed: readonly string[] }
+  | { kind: 'pattern'; pattern: RegExp; maxLength: number; format: string }
   | { kind: 'sha256' }
   | { kind: 'date' }
   | { kind: 'point' }
@@ -32,8 +33,10 @@ export const shapes = {
   /** A flag that nothing may set: it is false or the value is refused. */
   alwaysFalse: { kind: 'always_false' } as Shape,
   integer: (minimum: number): Shape => ({ kind: 'integer', minimum }),
-  number: (minimum: number): Shape => ({ kind: 'number', minimum }),
+  number: (minimum: number, maximum: number = MAX_NUMBER): Shape => ({ kind: 'number', minimum, maximum }),
   word: (allowed: readonly string[]): Shape => ({ kind: 'word', allowed }),
+  /** Text held to a format rather than to a length alone. `format` says how the value must be written. */
+  pattern: (pattern: RegExp, maxLength: number, format: string): Shape => ({ kind: 'pattern', pattern, maxLength, format }),
   sha256: { kind: 'sha256' } as Shape,
   date: { kind: 'date' } as Shape,
   point: { kind: 'point' } as Shape,
@@ -64,8 +67,9 @@ export function checkShape(value: unknown, shape: Shape, location: FieldLocation
     case 'boolean': requireBoolean(value, location); return;
     case 'always_false': if (value !== false) failAt(location, 'this flag can only be false', 'Remove the claim; nothing in the data may set it.'); return;
     case 'integer': requireInteger(value, location, shape.minimum); return;
-    case 'number': requireNumber(value, location, shape.minimum); return;
+    case 'number': requireNumber(value, location, shape.minimum, shape.maximum); return;
     case 'word': requireEnum(value, location, shape.allowed); return;
+    case 'pattern': requirePattern(value, location, shape.pattern, shape.maxLength, shape.format); return;
     case 'sha256': requireSha256(value, location); return;
     case 'date': requireDate(value, location); return;
     case 'point': checkPoint(value, location); return;

@@ -13,6 +13,14 @@ Updated each session. Source of truth for "what's the status of X?"
 
 ---
 
+## 2026-10-20: State of BCI Security 2026 (annual intel report)
+
+| Feature | Status | What Was Done | Notes |
+|---------|--------|--------------|-------|
+| Annual report page | 🚧 In Progress | /research/intel/2026/state-of-bci-security/: executive summary, five sections, seven figures, methodology and sources, corrections to Q1 | Every count is computed at build time from the datalake and `src/data/intel/state-of-bci-security-2026.json`; tests tie each source to an intake-ledger row |
+| Disclosure-channel audit | 🚧 In Progress | security.txt and disclosure-page check of all 68 tracked companies, recorded in `datalake/intake/2026-10-20/` | Companies are invited to correct their records |
+| Intel index | 🚧 In Progress | Annual edition listed first; Q1 marked corrected; Q2/Q3 placeholders marked superseded | |
+
 ## 2026-10-13: Purpose and limits statement (draft, pending Kevin's acceptance)
 
 | Feature | Status | What Was Done | Notes |

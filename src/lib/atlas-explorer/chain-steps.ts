@@ -14,7 +14,7 @@ import type { LayerId } from '@/lib/anatomy/source-types';
 import type { AtlasChain, StepEvidenceLabel } from './chain-file';
 import { DEVICE_STAGE_BAND_IDS } from './explorer-catalog';
 import type { ExplorerModel } from './explorer-model';
-import { FILL_KINDS, buildSceneShapes, describeFill, type SceneShape } from './scene-shapes';
+import { FILL_KINDS, buildSceneShapes, describeFill, type SceneShape, type SceneTheme } from './scene-shapes';
 
 export interface ChainStepView {
   position: number;
@@ -127,13 +127,18 @@ function strongestLook(looks: readonly Look[]): Look {
  * The shapes for the steps on screen. Each shape gets the technique lens's own
  * mark for each step, from the same style function the lens uses, and keeps
  * the strongest; a filled or pale shape remembers which steps mark it.
+ *
+ * @param theme the surface the canvas is drawn on, threaded through to the same
+ * style function the lens uses, so the steps are drawn on the surface they are
+ * actually on. Without it this path drew from whatever palette the default named
+ * and a threat model on screen was the one view the theme could not reach.
  */
-export function buildChainShapes(model: ExplorerModel, frame: ChainFrame, requested: Readonly<Record<LayerId, boolean>>): ChainShape[] {
+export function buildChainShapes(model: ExplorerModel, frame: ChainFrame, requested: Readonly<Record<LayerId, boolean>>, theme: SceneTheme): ChainShape[] {
   const looksByKey = new Map<string, { look: Look; stepNumbers: number[] }>();
-  return buildSceneShapes(model, null, requested).map((shape) => {
+  return buildSceneShapes(model, null, requested, theme).map((shape) => {
     let entry = looksByKey.get(shape.structureKey);
     if (entry === undefined) {
-      const looks = frame.steps.map((step) => ({ position: step.position, look: describeFill(model, shape.structureKey, { kind: 'technique', techniqueId: step.techniqueId }) }));
+      const looks = frame.steps.map((step) => ({ position: step.position, look: describeFill(model, shape.structureKey, { kind: 'technique', techniqueId: step.techniqueId }, theme) }));
       entry = { look: looks.length === 0 ? shape : strongestLook(looks.map((item) => item.look)), stepNumbers: looks.filter((item) => MARKED_FILLS.includes(item.look.fill)).map((item) => item.position) };
       looksByKey.set(shape.structureKey, entry);
     }

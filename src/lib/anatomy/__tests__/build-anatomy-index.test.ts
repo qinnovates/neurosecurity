@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isAgreementAccepted, parseAnatomyFiles, type RawAnatomyFiles } from '../anatomy-inputs';
+import { isAgreementAccepted, isLicenceConfirmed, parseAnatomyFiles, type RawAnatomyFiles } from '../anatomy-inputs';
 import type { AnatomyIndex, IndexStructure, IndexSubject } from '../anatomy-index-types';
 import { buildAnatomyBundle, type AnatomyBundle } from '../build-anatomy-index';
 import { buildOwnerMap, type ReviewedRow } from '../build-owner-map';
@@ -10,7 +10,7 @@ import { ANATOMY_INDEX_STATUS } from '../status-sentences';
 import { FIXTURE_ATLAS_ID, FIXTURE_SHA256, buildSource, buildSourcesFile, buildVerdict, buildVerdictsFile } from './anatomy-fixtures';
 import { buildRow } from './crosswalk-fixtures';
 import { FIXTURE_ASSET_ID, buildAsset, buildManifest, buildNode } from './manifest-fixtures';
-import { PATHWAY_TEXT, TECHNIQUE_ID, TRACTS_SOURCE_ID, buildLedgerFile, buildRawFiles } from './raw-files-fixture';
+import { PATHWAY_TEXT, TECHNIQUE_ID, TRACTS_SOURCE_ID, buildLedgerFile, buildRawFiles, buildRegistrarFile } from './raw-files-fixture';
 
 const build = (overrides: Partial<RawAnatomyFiles> = {}): AnatomyBundle => buildAnatomyBundle(parseAnatomyFiles(buildRawFiles(overrides)));
 const structureOf = (index: AnatomyIndex, labelId: string): IndexStructure => index.structures.find((structure) => structure.label_id === labelId) as IndexStructure;
@@ -115,7 +115,7 @@ describe('buildAnatomyBundle: technique links', () => {
   });
 
   it('demotes, unlights and lists a link whose quoted words no longer appear in the registrar', () => {
-    const registrar = { techniques: [{ id: TECHNIQUE_ID, tara: { dsm5: { pathway: 'The text was rewritten.' } } }] };
+    const registrar = buildRegistrarFile([{ id: TECHNIQUE_ID, tara: { dsm5: { pathway: 'The text was rewritten.' } } }]);
     const stale = build({ registrar }).index;
     const staleLink = stale.techniques[0].links[0];
     expect(staleLink).toMatchObject({ quote_state: 'quote_missing', check_status: 'unchecked', lit: false });
@@ -272,6 +272,33 @@ describe('access agreements', () => {
   it('never accepts an agreement whose text nobody has pinned', () => {
     const unpinned = buildVerdict({ access_agreement: { name: 'Fixture terms', terms_url: 'https://example.org/terms', text_sha256: null } });
     expect(isAgreementAccepted(unpinned, acceptance({}))).toBe(false);
+  });
+});
+
+describe('licence confirmation', () => {
+  const licenceDigest = 'd'.repeat(64);
+  const verdict = buildVerdict({ human_confirmed: true, licence_digest: licenceDigest });
+  const confirmation = (overrides: Partial<LedgerEntry>): ReturnType<typeof parseReviewLedger> => parseReviewLedger(buildLedgerFile([
+    { kind: 'licence_confirmation', key: FIXTURE_ATLAS_ID, digest: licenceDigest, reviewer_id: 'owner-1', reviewed_on: '2026-10-09', ...overrides },
+  ]));
+
+  it('counts a confirmation as valid only for the exact digest, and only in the owner\'s role', () => {
+    expect(isLicenceConfirmed(verdict, confirmation({}))).toBe(true);
+    expect(isLicenceConfirmed(verdict, confirmation({ digest: 'f'.repeat(64) }))).toBe(false);
+    expect(isLicenceConfirmed(verdict, confirmation({ reviewer_id: 'neuroanatomist-1' }))).toBe(false);
+    expect(isLicenceConfirmed(verdict, parseReviewLedger(buildLedgerFile()))).toBe(false);
+  });
+
+  it('stops the build when human_confirmed is true but no ledger entry backs it', () => {
+    expect(() => build({ sources: buildSourcesFile([buildSource()]), verdicts: buildVerdictsFile([verdict]), reviewLedger: buildLedgerFile() }))
+      .toThrow(/human_confirmed is true but no licence_confirmation ledger entry backs it/);
+  });
+
+  it('builds when human_confirmed is true and a matching entry backs it', () => {
+    expect(() => build({
+      sources: buildSourcesFile([buildSource()]), verdicts: buildVerdictsFile([verdict]),
+      reviewLedger: buildLedgerFile(confirmation({}).entries),
+    })).not.toThrow();
   });
 });
 

@@ -20,7 +20,7 @@ import { rasToScene } from '@/lib/anatomy/ras-to-scene';
 import {
   DEFAULT_CAMERA_VIEW, DEFAULT_DISTANCE_MM, blendPoses, clampDistance, planCameraMove, poseForView, positionOfPose, turnPose, type CameraViewId, type OrbitPose,
 } from '@/lib/atlas-explorer/camera-views';
-import type { SceneShape } from '@/lib/atlas-explorer/scene-shapes';
+import type { SceneShape, SceneTheme } from '@/lib/atlas-explorer/scene-shapes';
 import { slicePlane, type SliceState } from '@/lib/atlas-explorer/slice-plane';
 import { buildDeviceObjects, type DeviceObjects } from './device-objects';
 import { buildSelectionLabel, buildSelectionMarks, buildStepLabels, createEaser, disposeTree, easeKeyOf, listMaterials, readLabelFont } from './scene-marks';
@@ -46,6 +46,12 @@ export interface SceneRenderer {
   setShapes: (shapes: readonly SceneShape[], nodesByShapeId: ReadonlyMap<string, DecodedNode>, selectedKeys: ReadonlySet<string>, bracketGroups?: ReadonlyArray<readonly string[]>, selectionLabel?: string | null) => void;
   /** The electrode dots to draw, or null for none. */
   setDevices: (drawing: DeviceDrawing | null, selectedElectrodeId: string | null) => void;
+  /**
+   * The surface the canvas is drawn on. The renderer holds it rather than reading
+   * it, and redraws what is already on screen when it changes: the theme can be
+   * toggled with the view open, and the brackets and pale fills are built from it.
+   */
+  setTheme: (theme: SceneTheme) => void;
   setSlice: (slice: SliceState | null) => void;
   setView: (viewId: CameraViewId) => void;
   focusOn: (centreScene: readonly [number, number, number]) => void;
@@ -78,8 +84,13 @@ function easeOut(progress: number): number {
   return 1 - (1 - progress) ** 3;
 }
 
-/** @throws when the browser gives no WebGL context; the caller shows the "not available" notice */
-export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneCallbacks, prefersLessMotion: boolean): SceneRenderer {
+/**
+ * @param theme the surface the canvas is drawn on. It arrives as data, from the
+ * one hook that asks the document, and is never read here. See `SceneTheme` in
+ * scene-shapes.ts for where the theme lives and why.
+ * @throws when the browser gives no WebGL context; the caller shows the "not available" notice
+ */
+export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneCallbacks, prefersLessMotion: boolean, theme: SceneTheme): SceneRenderer {
   const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_PIXEL_RATIO));
   const scene = new Scene();
@@ -93,6 +104,8 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
   /** Selection brackets and step labels: drawn over the shapes and rebuilt with them. */
   let marks: Object3D[] = [];
   let devices: DeviceObjects | null = null;
+  /** The surface the shapes were last built for. Only the brackets and the pale fills read it. */
+  let surface = theme;
   const labelFont = readLabelFont(canvas);
   const easer = createEaser(stepEaseDuration(prefersLessMotion));
   let easedKey = '';
@@ -273,12 +286,12 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
         const geometry = geometries.get(shape.id) ?? null;
         // A shape whose file has not arrived is not drawn at all; a marker needs no file.
         if (geometry === null && shape.sizeMark !== 'ring_only') continue;
-        const entry = buildShapeObjects(shape, geometry, selectedKeys.has(shape.structureKey), clip !== null);
+        const entry = buildShapeObjects(shape, geometry, selectedKeys.has(shape.structureKey), clip !== null, surface);
         scene.add(entry.group);
         objects.push(entry);
       }
       const nameLabel = selectionLabel === null || bracketGroups.length === 0 ? null : buildSelectionLabel(bracketGroups[0], objects, selectionLabel, labelFont);
-      marks = [...buildSelectionMarks(bracketGroups, objects), ...(nameLabel === null ? [] : [nameLabel]), ...buildStepLabels(objects, labelFont)];
+      marks = [...buildSelectionMarks(bracketGroups, objects, surface), ...(nameLabel === null ? [] : [nameLabel]), ...buildStepLabels(objects, labelFont)];
       for (const mark of marks) scene.add(mark);
       // The objects were rebuilt, so the shape under the pointer is lifted again on the new ones.
       applyHover(hoveredKey);
@@ -299,6 +312,13 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       devices = drawing === null ? null : buildDeviceObjects(drawing, selectedElectrodeId, labelFont);
       if (isFirstDrawing) pose = { ...pose, distance: Math.max(pose.distance, homeDistance()) };
       if (devices !== null) scene.add(devices.group);
+      invalidate();
+    },
+    setTheme(next) {
+      if (next === surface) return;
+      surface = next;
+      // The shapes carry everything the surface decides -- their brackets and their pale fills -- so they are rebuilt from what setShapes was last given. The electrode dots take no surface ink (see device-objects.ts).
+      if (drawn !== null) this.setShapes(drawn.shapes, drawn.nodesByShapeId, drawn.selectedKeys, drawn.bracketGroups, drawn.selectionLabel);
       invalidate();
     },
     setSlice(slice) {

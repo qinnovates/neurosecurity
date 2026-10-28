@@ -12,6 +12,9 @@ export default defineConfig({
   site: 'https://qinnovate.com',
   publicDir: 'src/site',
   redirects: {
+    // 2026-10-21 rename: State of BCI Security -> Qinnovate Global BCI Landscape Report
+    '/research/intel/2026/state-of-bci-security/': '/research/intel/2026/landscape-report/',
+
     // Legacy short routes
     '/threats/': '/atlas/tara/',
     '/niss/': '/atlas/scoring/',

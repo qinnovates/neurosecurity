@@ -16,7 +16,7 @@ export const REVIEW_LEDGER_FILE = 'datalake/qif-anatomy-review-ledger.json';
 export const REVIEWER_ROLES = ['neuroanatomist', 'clinician', 'owner', 'other'] as const;
 export type ReviewerRole = typeof REVIEWER_ROLES[number];
 
-export const LEDGER_ENTRY_KINDS = ['row_review', 'visual_check', 'agreement'] as const;
+export const LEDGER_ENTRY_KINDS = ['row_review', 'visual_check', 'agreement', 'licence_confirmation'] as const;
 export type LedgerEntryKind = typeof LEDGER_ENTRY_KINDS[number];
 
 export interface Reviewer {
@@ -51,6 +51,7 @@ const KEY_PATTERNS: Readonly<Record<LedgerEntryKind, readonly RegExp[]>> = {
   row_review: [CROSSWALK_ROW_KEY, TECHNIQUE_LINK_KEY, DEVICE_ROW_KEY],
   visual_check: [/^[a-z0-9][a-z0-9_-]*$/],
   agreement: [/^[a-z0-9][a-z0-9_]*$/],
+  licence_confirmation: [/^[a-z0-9][a-z0-9_]*$/],
 };
 
 function parseReviewer(value: unknown, location: FieldLocation): Reviewer {

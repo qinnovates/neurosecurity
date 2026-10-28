@@ -11,6 +11,7 @@ The island on `/atlas/anatomy/`, its gated 3D view, and the build-time loader of
 - `LimitsPanel.tsx`, `LimitNote.tsx`, `LoadNotice.tsx`, `ReviewMark.tsx`, `MarkGlyph.tsx`, `Disclosure.tsx` -- limits, load states, the unreviewed mark
 - `AtlasViewport.tsx`, `viewport-gate.ts`, `OpenViewport.tsx`, `ViewportStage.tsx`, `use-viewport-scene.ts` -- the gate: the 3D view opens only on request, and says why when it cannot
 - `AtlasCanvas.tsx`, `scene-renderer.ts`, `scene-objects.ts`, `scene-marks.ts`, `device-objects.ts`, `TractLines.tsx` -- the canvas chunk, the only files that may import three.js
+- `use-scene-theme.ts` -- the one reader of which surface the page is on. The canvas chunk is handed the answer (`AtlasCanvas`'s `theme` prop, the renderer's `setTheme`) and never asks the document itself; what each surface's inks are lives in `src/lib/atlas-explorer/`
 - `DeviceGeometry.tsx`, `LeadFigure.tsx` -- electrode layout controls and the lead figure
 - `AtlasRegionView.tsx`, `RegionViewNotes.tsx` -- the one 3D view other pages mount, with its words. A lens decides every fill; a page may add only the visitor's own selection (`selectedRegionIds`, `selectedBandId`), which is marked and never filled
 - `RegionViewMount.tsx`, `region-view-mount.css` -- all that ships with a mounting page: the button and its sentences, which come from `src/lib/anatomy/mount-copy.ts`. `RegionViewPanel.tsx`, `atlas-region-mount.css` -- the lazy chunk behind it: reads the page's pin, loads the model, links the styles by address

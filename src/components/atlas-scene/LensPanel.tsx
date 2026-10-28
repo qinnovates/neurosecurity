@@ -6,6 +6,7 @@ import type { LensTally } from '@/lib/atlas-explorer/region-rows';
 import { listSubjectOptions } from '@/lib/atlas-explorer/subject-options';
 import { summariseTechnique, type TechniqueSummary } from '@/lib/atlas-explorer/technique-summary';
 import ColourModePicker from './ColourModePicker';
+import HighlightPicker from './HighlightPicker';
 import LimitNote from './LimitNote';
 import ReviewMark from './ReviewMark';
 import SubjectPicker from './SubjectPicker';
@@ -29,6 +30,9 @@ export const LENS_HEADING_ID = 'atlas-lens-heading';
 export function restoreLensLabel(previousLens: Lens): string {
   return `Back to the ${LENS_LABELS[previousLens.kind]} lens`;
 }
+
+/** The lens kinds a highlight drives, so the picker can show which one is carrying the colour, and so a fact lens's own `SubjectPicker` is never shown beside it for the same subject. */
+const HIGHLIGHT_KINDS: readonly LensKind[] = ['technique', 'stated_targets'];
 
 function RegionButtons({ regions, onSelectRegion }: { regions: ReadonlyArray<{ id: string; name: string }>; onSelectRegion: (regionId: string) => void }) {
   return (
@@ -80,13 +84,21 @@ function LensSummary({ lens, tally }: Pick<Props, 'lens' | 'tally'>) {
 
 /**
  * The lens controls with everything that qualifies them in the same group: the
- * limit sentences for the lens as it stands, the subject picker when the lens
- * needs one, and a count of what the lens shows.
+ * four lens buttons, the one highlight picker that searches techniques and
+ * devices together, the limit sentences for the lens as it stands, a fact
+ * lens's own subject where it has one, and a count of what the lens shows.
+ *
+ * Lens and highlight are two different questions. A lens says what a colour
+ * means — a fact the index holds about every region. A highlight says what to
+ * pick out, and the regions linked to it light up. They were one row of five
+ * buttons, three of which coloured nothing until a subject had been found.
  */
 export default function LensPanel({ model, lens, previousLens, tally, onChooseKind, onRestoreLens, onChooseSubject, onSelectRegion }: Props) {
-  const noun = LENS_SUBJECT_NOUNS[lens.kind];
+  // A highlight kind's noun is used elsewhere (the way back from a drill-down names it), but its own picker here is the HighlightPicker below, not a SubjectPicker.
+  const noun = HIGHLIGHT_KINDS.includes(lens.kind) ? undefined : LENS_SUBJECT_NOUNS[lens.kind];
   const subjectId = lensSubjectId(lens);
   const summary = lens.kind === 'technique' && subjectId !== null ? summariseTechnique(model, subjectId) : null;
+  const highlightId = HIGHLIGHT_KINDS.includes(lens.kind) ? subjectId : null;
   return (
     <section className="atlas-panel atlas-lens-panel" aria-labelledby="atlas-lens-heading" data-lens={lens.kind}>
       <h2 className="atlas-heading" id={LENS_HEADING_ID} tabIndex={-1}>Lens</h2>
@@ -105,6 +117,7 @@ export default function LensPanel({ model, lens, previousLens, tally, onChooseKi
         {noun !== undefined && (
           <SubjectPicker noun={noun} options={listSubjectOptions(model, lens.kind)} chosenId={subjectId} onChoose={(chosenId) => onChooseSubject(lens.kind, chosenId)} />
         )}
+        <HighlightPicker model={model} chosenId={highlightId} onChoose={onChooseSubject} />
       </div>
     </section>
   );

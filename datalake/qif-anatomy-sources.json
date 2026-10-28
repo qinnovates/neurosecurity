@@ -167,21 +167,21 @@
           "url": "https://osf.io/download/w8zq2/",
           "sha256": "7a91c36701f36d9d908479b862e65a879d15f54badcec6878e61d857ab570f66",
           "bytes": 857744,
-          "digest_origin": "first_download"
+          "digest_origin": "publisher"
         },
         {
           "name": "labels.txt",
           "url": "https://osf.io/download/6qrcb/",
           "sha256": "5e00265a7bbbdf242356345e0f6615d84791ada54aa9739539096aab3c1e1b41",
           "bytes": 123,
-          "digest_origin": "first_download"
+          "digest_origin": "publisher"
         },
         {
           "name": "CIT168toMNI152-2009c_T1w.nii.gz",
           "url": "https://osf.io/download/j9gqh/",
           "sha256": "d6f18f858867ca46f982b6b88e0333957ef7cdbcaadf0372cf2f2826cbf34a93",
           "bytes": 18158937,
-          "digest_origin": "first_download"
+          "digest_origin": "publisher"
         }
       ]
     },

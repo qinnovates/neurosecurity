@@ -62,7 +62,7 @@ def pipeline_tree_is_dirty() -> bool:
     return bool(result.stdout.strip())
 
 
-def command_build(registry: sources.Registry, allow_dirty: bool, sheets: bool) -> int:
+def command_build(registry: sources.Registry, allow_dirty: bool) -> int:
     if pipeline_tree_is_dirty() and not allow_dirty:
         raise PipelineError("the pipeline or its registry has uncommitted changes; commit them first so the code hash in the manifest names a real state")
     command_fetch(registry)
@@ -91,13 +91,11 @@ def command_build(registry: sources.Registry, allow_dirty: bool, sheets: bool) -
                                  for plan in registry.inputs["assets"] if "context_label_ids" in plan},
               "assets": {item.plan["id"]: item.report for item in built}}
     manifest.write_json(REPORT_PATH, report)
-    if sheets:
-        print("review sheets:", outputs.write_review_sheets(cache_dir() / "review", cache_dir(), registry, built))
     print("total asset bytes:", report["total_asset_bytes"])
     return 0
 
 
-def command_devices(registry: sources.Registry, sheets: bool) -> int:
+def command_devices(registry: sources.Registry) -> int:
     """Place the landmarks and the electrode layout, check them on the shipped head mesh, and write the device rows."""
     command_fetch(registry)
     shipped = json.loads((ASSET_DIR / "manifest.json").read_text(encoding="utf-8"))
@@ -108,8 +106,6 @@ def command_devices(registry: sources.Registry, sheets: bool) -> int:
     document = devices.placement_document(cache_dir(), registry, scalp_glb, scalp["sha256"])
     manifest.write_json(PLACEMENT_PATH, document)
     devices.merge_into_geometry_file(DEVICE_GEOMETRY_PATH, devices.geometry_rows(document, SCALP_ASSET_ID))
-    if sheets:
-        print("review sheets:", outputs.write_device_sheets(cache_dir() / "review" / "devices", cache_dir(), registry, document, scalp_glb))
     print("wrote", PLACEMENT_PATH.relative_to(sources.REPO_ROOT), "and", DEVICE_GEOMETRY_PATH.relative_to(sources.REPO_ROOT))
     return 0
 
@@ -137,9 +133,7 @@ def main(argv: list[str]) -> int:
     commands.add_parser("buildability", help="rewrite the per-source buildability file")
     build_parser = commands.add_parser("build", help="build every buildable asset, the manifest, label tables and notices")
     build_parser.add_argument("--allow-dirty", action="store_true", help="build with uncommitted pipeline changes (development only)")
-    build_parser.add_argument("--no-sheets", action="store_true", help="skip the review sheets")
-    devices_parser = commands.add_parser("devices", help="place the scalp landmarks and the 10-20 layout on the built head surface")
-    devices_parser.add_argument("--no-sheets", action="store_true", help="skip the review sheets")
+    commands.add_parser("devices", help="place the scalp landmarks and the 10-20 layout on the built head surface")
     register_parser = commands.add_parser("register", help="compute the registration under one setting into the cache")
     register_parser.add_argument("setting", choices=sorted(registration.SETTINGS))
     arguments = parser.parse_args(argv)
@@ -152,10 +146,10 @@ def main(argv: list[str]) -> int:
         if arguments.command == "buildability":
             return command_buildability(registry)
         if arguments.command == "devices":
-            return command_devices(registry, not arguments.no_sheets)
+            return command_devices(registry)
         if arguments.command == "register":
             return command_register(registry, arguments.setting)
-        return command_build(registry, arguments.allow_dirty, not arguments.no_sheets)
+        return command_build(registry, arguments.allow_dirty)
     except PipelineError as error:
         print(f"atlas pipeline: {error}", file=sys.stderr)
         return 1

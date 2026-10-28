@@ -1,0 +1,257 @@
+/*
+ * The radar's layout. Colour lives in radar-palette.css; this file places the
+ * plot, the reading beside it and the words under it, and holds the one move
+ * the chart is allowed to make.
+ */
+
+/*
+ * The reading sits beside the plot and wraps under it when its own container is
+ * too narrow, whatever the window is doing: the chart goes in a narrow column on
+ * one page and across the width on another, so the wrap follows the space it has
+ * rather than a viewport width.
+ */
+.radar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+  margin: 0;
+  color: var(--radar-label);
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.radar-plot {
+  display: block;
+  flex: 0 1 auto;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+  /* The one move the chart makes: it appears once, when its island mounts. */
+  animation: radar-appear var(--motion-base, 320ms) var(--ease-signal, ease-out) both;
+}
+
+@keyframes radar-appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.radar-ring,
+.radar-spoke {
+  fill: none;
+  stroke: var(--radar-grid);
+  stroke-width: 1;
+}
+
+.radar-ring--outer {
+  stroke: var(--radar-spoke);
+}
+
+/* A plotted shape: the wash, the ink of the tone's pattern over it, and a solid edge. */
+.radar-wash {
+  fill: var(--radar-wash);
+  stroke: none;
+}
+
+.radar-fill {
+  stroke: none;
+}
+
+/*
+ * Pattern content inherits from the <pattern>, not from the shape that
+ * references it, so the ink colour is set on the pattern itself and its marks
+ * are drawn in currentColor.
+ */
+.radar-pattern--tone { color: var(--radar-tone); }
+.radar-pattern--withheld { color: var(--radar-withheld); }
+
+.radar-edge {
+  fill: none;
+  stroke: var(--radar-tone);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.radar-vertex {
+  fill: var(--radar-tone);
+  stroke: var(--color-bg-surface);
+  stroke-width: 1;
+}
+
+/*
+ * Withheld: no polygon, no vertex, no edge. A hatch across the whole plot, a
+ * dashed outer frame and the words in the middle. Four channels apart from a
+ * measured floor, which is a small solid shape with dots on its corners.
+ */
+.radar-withheld-fill {
+  stroke: none;
+  opacity: 0.55;
+}
+
+.radar-withheld-frame {
+  fill: none;
+  stroke: var(--radar-withheld);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.radar-withheld-word {
+  fill: var(--radar-label-strong);
+  /* The word sits over the hatch, so it is drawn with a halo of the surface it is on. */
+  paint-order: stroke;
+  stroke: var(--color-bg-surface);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.radar-axis-label {
+  fill: var(--radar-label-strong);
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.radar-axis-note {
+  fill: var(--radar-label);
+  font-size: 0.625rem;
+}
+
+/* The reading beside the plot: the score, the severity word and the flags. Never drawn into the shape. */
+.radar-reading {
+  display: grid;
+  flex: 1 1 11rem;
+  gap: 0.25rem;
+  align-content: center;
+  min-width: 0;
+}
+
+.radar-reading-figure {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--radar-label-strong);
+}
+
+.radar-reading-label {
+  color: var(--radar-label);
+}
+
+.radar-reading-flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0.125rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.radar-reading-flags li {
+  border: 1px solid var(--radar-tone);
+  border-radius: var(--radius-md, 0.1875rem);
+  padding: 0 0.3125rem;
+  color: var(--radar-label-strong);
+  font-size: 0.6875rem;
+  line-height: 1.125rem;
+}
+
+.radar-caption {
+  display: grid;
+  flex: 1 1 100%;
+  gap: 0.375rem;
+  max-width: 52ch;
+  margin: 0;
+  color: var(--radar-label);
+}
+
+/* One row per axis: the code, the name, and the value. The value channel, printed. */
+.radar-values {
+  display: grid;
+  gap: 0.125rem;
+  margin: 0;
+  padding: 0;
+}
+
+.radar-values div {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.radar-values dt {
+  min-width: 0;
+}
+
+.radar-values-code {
+  display: inline-block;
+  min-width: 1.75em;
+  color: var(--radar-label-strong);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-weight: 600;
+}
+
+.radar-values dd {
+  margin: 0;
+  color: var(--radar-label-strong);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.radar-note {
+  margin: 0;
+}
+
+/* What the fills mean. */
+.radar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--radar-label);
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.radar-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.radar-legend-swatch {
+  flex: none;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.radar-legend-edge {
+  stroke: var(--radar-tone);
+}
+
+.radar-legend-edge--withheld {
+  stroke: var(--radar-withheld);
+  stroke-dasharray: 3 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .radar-plot { animation: none; }
+}
+
+/* Forced colours: the fills go to system ink, so a pattern is still a pattern. */
+@media (forced-colors: active) {
+  .radar-pattern--tone,
+  .radar-pattern--withheld { forced-color-adjust: none; color: CanvasText; }
+  .radar-edge,
+  .radar-withheld-frame { forced-color-adjust: none; stroke: CanvasText; }
+  .radar-vertex { forced-color-adjust: none; fill: CanvasText; stroke: Canvas; }
+  .radar-wash { fill: none; }
+  .radar-withheld-fill { opacity: 1; }
+}

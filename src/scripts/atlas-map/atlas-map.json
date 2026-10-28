@@ -1193,7 +1193,7 @@
     },
     {
       "id": "ATLAS-F35",
-      "what": "Settle the device landmarks: inion and both preauricular points judged about 1 cm low on the average head; look at the review sheets.",
+      "what": "Settle the device landmarks: inion and both preauricular points judged about 1 cm low on the average head; look at the review sheets. Review-sheet generation (overlays.py, device_sheets.py) was removed 2026-10-27 to drop the Pillow dependency; the sheets already archived at the ref below are the only ones that exist. If the landmark rule changes and needs re-verifying, add an absolute-height check to layout_checks.py (standard library only) instead of regenerating images.",
       "ref": "#173, `<staging>/2026-10-atlas-geometry/pr-sheets/devices/`",
       "owner": "domain-review",
       "status": "open",

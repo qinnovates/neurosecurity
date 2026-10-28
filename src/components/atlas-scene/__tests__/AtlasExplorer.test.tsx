@@ -60,11 +60,21 @@ const announcement = (container: HTMLElement, kind: 'selection' | 'lens'): strin
 /** A click as the keyboard makes it: Enter or Space on a button arrives as a click with no pointer detail. */
 const pressEnterOn = (element: HTMLElement): boolean => fireEvent.click(element, { detail: 0 });
 
-async function chooseTechnique(container: HTMLElement, query: string): Promise<void> {
-  fireEvent.click(lensButton('Technique'));
-  const input = screen.getByRole('combobox', { name: 'Choose a technique' });
+/**
+ * A technique and a device are highlights, not lenses: they are chosen from the one combined picker,
+ * which colours the regions linked to whatever is picked. There is no lens button for either, because
+ * such a button coloured nothing until its own picker had been found and used.
+ */
+const highlightInput = (): HTMLElement => screen.getByRole('combobox', { name: 'Choose a technique or device' });
+
+function highlight(query: string): void {
+  const input = highlightInput();
   fireEvent.change(input, { target: { value: query } });
   fireEvent.keyDown(input, { key: 'Enter' });
+}
+
+async function chooseTechnique(container: HTMLElement, query: string): Promise<void> {
+  highlight(query);
   await waitFor(() => expect(container.querySelector('.atlas-subject')).not.toBeNull());
 }
 
@@ -169,10 +179,7 @@ describe('AtlasExplorer: the list', () => {
 
   it('announces the Device lens without any count of AI-drafted links, and keeps the provenance words in each row', async () => {
     const container = await renderExplorer();
-    fireEvent.click(lensButton('Device'));
-    const input = screen.getByRole('combobox', { name: 'Choose a device' });
-    fireEvent.change(input, { target: { value: 'neuralink-n1' } });
-    fireEvent.keyDown(input, { key: 'Enter' });
+    highlight('neuralink-n1');
     await waitFor(() => expect(announcement(container, 'lens')).toMatch(/^Device lens: neuralink-n1\. \d+ regions? listed in the device's QIF record, \d+ not listed\.$/));
     expect(announcement(container, 'lens')).not.toContain('AI-drafted');
     const listed = rows(container).filter((row) => row.dataset.standing === 'value');
@@ -224,12 +231,13 @@ describe('AtlasExplorer: lenses and the picker', () => {
     expect(withStep.every((row) => row.querySelector('.atlas-cell-lens [data-ai-drafted="true"]') !== null)).toBe(true);
   });
 
-  it('offers every technique of the catalog in the picker and narrows it from the keyboard', async () => {
+  it('offers every technique and every device in one picker and narrows it from the keyboard', async () => {
     await renderExplorer();
-    fireEvent.click(lensButton('Technique'));
-    const listbox = screen.getByRole('listbox', { name: 'technique list' });
-    expect(within(listbox).getAllByRole('option')).toHaveLength(registrar.techniques.length);
-    const input = screen.getByRole('combobox', { name: 'Choose a technique' });
+    const listbox = screen.getByRole('listbox', { name: 'technique or device list' });
+    const deviceCount = JSON.parse(REAL_FILES[ANATOMY_INDEX_PATH] as string).devices.stated_targets.length;
+    expect(deviceCount).toBeGreaterThan(0);
+    expect(within(listbox).getAllByRole('option')).toHaveLength(registrar.techniques.length + deviceCount);
+    const input = highlightInput();
     fireEvent.change(input, { target: { value: 'QIF-T001' } });
     const matches = within(listbox).getAllByRole('option');
     expect(matches.length).toBeGreaterThan(1);
@@ -242,13 +250,41 @@ describe('AtlasExplorer: lenses and the picker', () => {
     expect(input.getAttribute('aria-activedescendant')).toBe(matches[0].id);
     fireEvent.keyDown(input, { key: 'Escape' });
     expect((input as HTMLInputElement).value).toBe('');
-    expect(within(listbox).getAllByRole('option')).toHaveLength(registrar.techniques.length);
+    expect(within(listbox).getAllByRole('option')).toHaveLength(registrar.techniques.length + deviceCount);
+  });
+
+  /**
+   * Four buttons, not five, and none of them a state that colours nothing: `technique` and `device`
+   * left the row for the highlight picker. The fourth is specified and unavailable, and keeps its
+   * control, reachable and with the reason tied to it, rather than vanishing.
+   */
+  it('offers four fact lenses, the unavailable one reachable with its reason, and no lens that colours nothing', async () => {
+    const container = await renderExplorer();
+    const lenses = [...container.querySelectorAll<HTMLButtonElement>('button.atlas-lens')];
+    expect(lenses.map((lens) => lens.textContent)).toEqual(['Band', 'NISS severity', 'DSM cluster', 'Body function']);
+    expect(lenses.filter((lens) => lens.textContent === 'Technique' || lens.textContent === 'Device')).toEqual([]);
+    const blocked = lenses[3];
+    expect(blocked.getAttribute('aria-disabled')).toBe('true');
+    expect(blocked.disabled).toBe(false);
+    expect(document.getElementById(blocked.getAttribute('aria-describedby') ?? '')?.textContent)
+      .toMatch(/^Not available in this build\. A body-function lens needs a controlled list of functions\./);
+    fireEvent.click(blocked);
+    expect(blocked.getAttribute('aria-pressed')).toBe('false');
+    expect(container.querySelector('.atlas-lenses')?.getAttribute('data-fact-lens')).toBe('true');
+    // Every lens the row offers colours something the moment it is pressed: none waits for a subject.
+    for (const lens of ['Band', 'NISS severity']) {
+      fireEvent.click(lensButton(lens));
+      expect(rows(container).filter((row) => row.dataset.standing === 'value').length, lens).toBeGreaterThan(0);
+    }
+    // A highlight carries the colour instead, and then no fact lens claims to.
+    highlight('neuralink-n1');
+    expect(container.querySelector('.atlas-lenses')?.getAttribute('data-fact-lens')).toBe('false');
+    expect(lenses.filter((lens) => lens.getAttribute('aria-pressed') === 'true')).toEqual([]);
   });
 
   it('marks a picker result that shows drafted links, and not one that shows none', async () => {
     await renderExplorer();
-    fireEvent.click(lensButton('Technique'));
-    const options = within(screen.getByRole('listbox', { name: 'technique list' })).getAllByRole('option');
+    const options = within(screen.getByRole('listbox', { name: 'technique or device list' })).getAllByRole('option');
     const drafted = options.filter((option) => option.dataset.techniqueKind === 'regions');
     expect(drafted.length).toBeGreaterThan(0);
     expect(drafted.filter((option) => option.querySelector('[data-ai-drafted="true"]') === null)).toEqual([]);
@@ -311,10 +347,12 @@ describe('AtlasExplorer: limits, layers and marks', () => {
 
   it('puts a limit sentence in the same group as each control it limits', async () => {
     const container = await renderExplorer();
-    for (const lens of ['Band', 'Technique', 'NISS severity', 'DSM cluster', 'Device']) {
+    for (const lens of ['Band', 'NISS severity', 'DSM cluster']) {
       fireEvent.click(lensButton(lens));
       expect(container.querySelectorAll('.atlas-lens-panel [data-limit-id]').length, lens).toBeGreaterThan(0);
     }
+    highlight('neuralink-n1');
+    expect(container.querySelectorAll('.atlas-lens-panel [data-limit-id]').length).toBeGreaterThan(0);
     for (const heading of ['Layers', 'Regions', 'Device stages', 'Network names', 'A real sample at nanometre scale']) {
       expect(panelOf(heading).querySelector('[data-limit-id]'), heading).not.toBeNull();
     }

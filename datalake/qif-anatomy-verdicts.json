@@ -26,14 +26,15 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": true,
         "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it.",
         "unlocks_when": [],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "1a446608b31525d84abb4479619f0eee79172a356bbc8ffe73f3fd2ccfbbc22f"
     },
     {
       "source_id": "mni_icbm152_2009b_sym",
@@ -49,14 +50,15 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": true,
         "reason": "The same notice sits above all six 2009 templates on the publisher's page, read by two AI passes. No person has confirmed it.",
         "unlocks_when": [],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "9a0b02da6991a6545c627026fda170255356acde55b567a211ae9d1071d9e332"
     },
     {
       "source_id": "allen_hra_3d_2020",
@@ -72,14 +74,15 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": true,
         "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it. The grant covers the files in the download directory only; anything taken from the Allen API falls under non-commercial terms.",
         "unlocks_when": [],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "e4f7d851a780d119ef7978bf6d74b772493acd70bf4ad97e55b970fbf280d33e"
     },
     {
       "source_id": "cit168_rl",
@@ -95,14 +98,15 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": true,
         "reason": "The only licence statement is a repository field (CC BY 4.0), and the same field is contradicted by the authors' own text on a sibling atlas. It is handled as share-alike, which satisfies both readings.",
         "unlocks_when": [],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "0a1cbaa94b3c688418a174b336f996613173d83cf1d815e15ce08bc06b95955f"
     },
     {
       "source_id": "harvard_aan_v2",
@@ -118,14 +122,15 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": true,
         "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it.",
         "unlocks_when": [],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "884a44bbfd18308f273f0528de12078220ef893a21408581d2e69be8471ea95c"
     },
     {
       "source_id": "neudorfer_hypothalamus",
@@ -141,14 +146,15 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": true,
         "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it. The archives were not opened, so a licence file inside them is unread.",
         "unlocks_when": [],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "1a82db27bbcc3ad48475d4fe4c8692d6f3a90e9381c07d85e12592e456ba6951"
     },
     {
       "source_id": "ahead_structures",
@@ -164,14 +170,15 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": true,
         "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it. The archive was not opened, so a licence file inside it is unread.",
         "unlocks_when": [],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "ad2a388eb03d7dcaa9a795ac9b7ee4023a42eb7b462b764a3cc20238221325e5"
     },
     {
       "source_id": "eeg_positions",
@@ -187,14 +194,15 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": true,
         "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it. The licence names software; the position files are the package's own computed output.",
         "unlocks_when": [],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "396d4f1f2969ce56d59950cb38d5ca19d8be3184a8e7daa26266a4f6e1b0934f"
     },
     {
       "source_id": "hcp1065_tracts",
@@ -210,7 +218,7 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": false,
@@ -220,7 +228,8 @@
           "The owner accepts the Human Connectome Project terms."
         ],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "bd1553ee0868a5bf3ea0f602ff8ac55b69ef001476a1b5bdacd7680002190814"
     },
     {
       "source_id": "yeo2011_cbig",
@@ -237,7 +246,7 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": false,
@@ -247,7 +256,8 @@
           "Another network source is cleared on its words."
         ],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "3e357f51c0075fef66604671040d290223aa1746cace2fbfa7262dbc59f8f1b9"
     },
     {
       "source_id": "schaefer2018_cbig",
@@ -263,7 +273,7 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": false,
@@ -273,7 +283,8 @@
           "Another network source is cleared on its words."
         ],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "58dda9fb6c93796cdb89f8b800a51f14c01869e6b3b860175b40a1234cb86984"
     },
     {
       "source_id": "nextbrain",
@@ -290,14 +301,15 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": true,
         "reason": "The grant is in the publisher's own words, read by two AI passes. No person has confirmed it. Nothing is built from it: its template space is not stated.",
         "unlocks_when": [],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "b08d196589f7cf327f14bff6b4e552161d0b941ea62079c2fb4007ea6cc7b39b"
     },
     {
       "source_id": "massp_2_0",
@@ -313,7 +325,7 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": false,
@@ -322,7 +334,8 @@
           "The owner decides the priors may be shown despite the publisher's caveat, and the template space is read."
         ],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "b85b401a7d69e8af4d542ed50a4a9268a099d7dabbee719aef9e2370b7bed2fc"
     },
     {
       "source_id": "hcp_s1200_mmp1",
@@ -338,7 +351,7 @@
       "verified_by": [
         "ai-licence-verification"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": {
         "name": "WU-Minn HCP Consortium Open Access Data Use Terms",
         "terms_url": "https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms",
@@ -352,7 +365,8 @@
           "Public redistribution under those terms is answered."
         ],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "1072f906a09ab870142f45d474b021b5803ba28b5a064238d628734358c41e06"
     },
     {
       "source_id": "freesurfer_fsaverage",
@@ -370,7 +384,7 @@
         "ai-licence-verification",
         "ai-licence-recheck"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": {
         "name": "FreeSurfer Software License Agreement v1.0",
         "terms_url": "https://raw.githubusercontent.com/freesurfer/freesurfer/dev/LICENSE.txt",
@@ -383,7 +397,8 @@
           "The owner accepts the FreeSurfer Software License Agreement and the acceptance is recorded in the review ledger."
         ],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "86900bb065bf5a530e2d8f2d1676ac98ec623603fc7b278d497959c74aa2fcb3"
     },
     {
       "source_id": "templateflow_xfm",
@@ -396,7 +411,7 @@
       "verified_by": [
         "ai-licence-verification"
       ],
-      "human_confirmed": false,
+      "human_confirmed": true,
       "access_agreement": null,
       "clearance": {
         "cleared": false,
@@ -405,7 +420,8 @@
           "The publisher states a licence that permits redistribution."
         ],
         "drafted_by": "ai"
-      }
+      },
+      "licence_digest": "e85d561d60b4f65387c5b79b0768b864029f2e7d2fbd9ee7962df2289c3e83a7"
     }
   ]
 }

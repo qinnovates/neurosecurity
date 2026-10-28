@@ -7,6 +7,8 @@ import type { AnatomyIndex } from '@/lib/anatomy/anatomy-index-types';
 import { ANATOMY_EVIDENCE_PATH, ANATOMY_INDEX_PATH } from '@/lib/anatomy/anatomy-index-types';
 import { H01_CARD_PATH } from '@/lib/anatomy/parse-h01-card';
 import { REGION_EVIDENCE_PATH, type RegionEvidence } from '@/lib/anatomy/region-evidence-types';
+import { listLitLinks } from '@/lib/atlas-explorer/explorer-model';
+import { loadRealModel } from '@/lib/atlas-explorer/__tests__/explorer-fixtures';
 import AtlasExplorer from '../AtlasExplorer';
 import { FETCH_TIMEOUT_MS } from '../fetch-atlas-json';
 import { loadAnatomyBundle } from '../load-anatomy-data';
@@ -46,6 +48,19 @@ async function openRegion(regionId: string, files: Record<string, ServedFile> = 
 const litRegionId = REAL_INDEX.techniques.flatMap((technique) => technique.links).find((link) => link.lit)?.resolved_region_id ?? '';
 const linkedIds = new Set(REAL_INDEX.techniques.flatMap((technique) => technique.links.map((link) => link.resolved_region_id)));
 const unlinkedRegionId = REAL_INDEX.subjects.find((subject) => subject.kind === 'region' && !linkedIds.has(subject.id))?.id ?? '';
+/**
+ * A region no honest route reaches: no drafted technique link, no pathway listing it as an endpoint,
+ * no device record naming it. 31 of 38 regions hold no technique link and four hold nothing at all,
+ * which is why the pane's empty state is its main state and is tested as such.
+ */
+const emptyRegionId = (() => {
+  const model = loadRealModel();
+  const region = model.regions.find((candidate) => listLitLinks(model, candidate.id).length === 0
+    && (model.pathwaysByRegion.get(candidate.id)?.length ?? 0) === 0
+    && model.index.devices.stated_targets.every((device) => !device.region_ids.includes(candidate.id)));
+  if (region === undefined) throw new Error('No region of the real atlas holds nothing, so the pane\'s empty state cannot be tested over real data.');
+  return region.id;
+})();
 
 describe('AtlasExplorer: the inspector', () => {
   it('fetches the quotes and the literature only once a region is opened', async () => {
@@ -210,7 +225,7 @@ describe('AtlasExplorer: failures', () => {
   it('keeps the inspector working when the evidence files cannot be fetched, and says which part is missing', async () => {
     const { inspector } = await openRegion(litRegionId, { ...REAL_FILES, [ANATOMY_EVIDENCE_PATH]: SERVER_ERROR, [REGION_EVIDENCE_PATH]: SERVER_ERROR });
     const alerts = within(inspector).getAllByRole('alert');
-    expect(alerts.map((alert) => alert.textContent?.split('.')[0])).toEqual(['Not shown: the literature statements', 'Not shown: the quoted catalog text']);
+    expect(alerts.map((alert) => alert.textContent?.split('.')[0])).toEqual(['Not shown: the quoted catalog text', 'Not shown: the literature statements']);
     expect(inspector.querySelectorAll('.atlas-technique').length).toBeGreaterThan(0);
     expect(inspector.querySelector('.atlas-technique blockquote')).toBeNull();
     expect(inspector.querySelector('.atlas-statement')).toBeNull();
@@ -223,9 +238,9 @@ describe('AtlasExplorer: failures', () => {
     const softenedIndex = JSON.stringify({ ...REAL_INDEX, companions: REAL_INDEX.companions.map((pin) => (pin.path === REGION_EVIDENCE_PATH ? { ...pin, bytes: new TextEncoder().encode(softened).length, sha256: createHash('sha256').update(softened).digest('hex') } : pin)) });
     const { inspector } = await openRegion(litRegionId, { ...REAL_FILES, [ANATOMY_INDEX_PATH]: softenedIndex, [ANATOMY_EVIDENCE_PATH]: tampered, [REGION_EVIDENCE_PATH]: softened });
     const alerts = within(inspector).getAllByRole('alert');
-    expect(alerts.map((alert) => alert.dataset.failure)).toEqual(['invalid', 'out_of_step']);
-    expect(alerts[1].textContent).toContain('The page\'s data files are out of step with each other');
-    expect(alerts[1].textContent).not.toContain('connection');
+    expect(alerts.map((alert) => alert.dataset.failure)).toEqual(['out_of_step', 'invalid']);
+    expect(alerts[0].textContent).toContain('The page\'s data files are out of step with each other');
+    expect(alerts[0].textContent).not.toContain('connection');
     expect(inspector.querySelector('.atlas-statement')).toBeNull();
     expect(inspector.querySelector('.atlas-technique blockquote')).toBeNull();
   });
@@ -351,11 +366,75 @@ describe('AtlasExplorer: what each statement and section says', () => {
     expect(bandOnly.querySelectorAll('.atlas-chip').length).toBeGreaterThan(0);
   });
 
-  it('puts the evidence before the technique lists in the inspector', async () => {
+  /**
+   * The pane's order is the design's, not a convenience: a reader must know how much the atlas holds,
+   * and out of what, before reading anything derived from it, and must never meet band-sourced material
+   * mixed into the region's own claims. The band holds up to every region in the atlas, so it is last
+   * and fenced off.
+   */
+  it('orders the pane by what a reader needs first: coverage, the region\'s own words, the techniques, then the mappings', async () => {
     const { inspector } = await openRegion(litRegionId);
     const headings = [...inspector.querySelectorAll('h3')].map((heading) => heading.textContent ?? '');
-    expect(headings.indexOf('Evidence from the literature')).toBeLessThan(headings.indexOf('Techniques linked to this region'));
-    expect(headings.indexOf('Evidence from the literature')).toBeGreaterThan(-1);
+    const at = (text: string): number => {
+      const index = headings.findIndex((heading) => heading.startsWith(text));
+      expect(index, text).toBeGreaterThan(-1);
+      return index;
+    };
+    expect(at('What we hold for this region')).toBe(0);
+    expect(at('What we hold for this region')).toBeLessThan(at('What the QIF atlas file says it does'));
+    expect(at('What the QIF atlas file says it does')).toBeLessThan(at('Techniques linked to this region'));
+    expect(at('Techniques linked to this region')).toBeLessThan(at('DSM-5-TR category references'));
+    expect(at('DSM-5-TR category references')).toBeLessThan(at('Evidence from the literature'));
+    // Band context is last, inside its own fence, and nothing above it is inside that fence.
+    const bandContext = inspector.querySelector('[data-band-context="true"]') as HTMLElement;
+    expect(bandContext.querySelector('h3')?.textContent).toMatch(/^Tagged with this band only \(\d+\)$/);
+    expect(at('Tagged with this band only')).toBe(headings.length - 1);
+    expect(bandContext.querySelector('.atlas-coverage')).toBeNull();
+  });
+
+  /**
+   * 31 of the atlas's 38 regions hold no technique link at all, so a pane that is informative only
+   * when full would be uninformative on most of the atlas. The empty case must state what was looked
+   * for, out of what, and that nothing linked is not nothing there.
+   */
+  it('reads as a full answer for a region that holds nothing: every route, its denominator, and no word that reads as safe', async () => {
+    const { inspector } = await openRegion(emptyRegionId);
+    const coverage = inspector.querySelector('.atlas-coverage') as HTMLElement;
+    expect(coverage.dataset.holdsNothing).toBe('true');
+    const routes = [...coverage.querySelectorAll<HTMLElement>('.atlas-coverage-row')];
+    expect(routes.map((row) => row.dataset.route)).toEqual(['technique', 'pathway', 'device']);
+    for (const row of routes) {
+      expect(row.querySelector('.atlas-coverage-count')?.textContent, row.dataset.route).toMatch(/^\d+ .+ of \d+ .+$/);
+      expect(row.querySelector('.atlas-route')?.textContent, row.dataset.route).toMatch(/^via .+/);
+    }
+    expect(coverage.querySelector('[data-fact="niss-coverage"]')?.textContent).toBe('0 of 0 links carry a NISS severity.');
+    expect(coverage.querySelector('[data-coverage-note="lens_no_data_not_safe"]')?.textContent)
+      .toBe('Nothing is linked to this region. That is not a finding that the region is safe, or low: it means nobody has drafted a link to it, on any of the routes above.');
+    expect(coverage.textContent).not.toMatch(/\b(safe|secure|low risk|no risk)\b(?!,)/);
+    // Nothing derived is drawn from an absence: no chart is mounted, and the seam for them is empty.
+    expect(coverage.querySelector('[data-seam="lane4-radars"]')?.childElementCount).toBe(0);
+    expect(coverage.querySelector('svg')).toBeNull();
+  });
+
+  it('says across the whole atlas how little it holds, before a region is chosen, and offers the regions that hold a link', async () => {
+    serveFiles(REAL_FILES);
+    const { container } = render(<AtlasExplorer />);
+    await screen.findByRole('heading', { name: 'Regions' });
+    const inspector = container.querySelector('.atlas-inspector') as HTMLElement;
+    expect(inspector.dataset.empty).toBe('true');
+    const rows = [...inspector.querySelectorAll<HTMLElement>('[data-coverage-row]')];
+    expect(rows.map((row) => row.dataset.coverageRow)).toEqual(['linked', 'niss', 'unlinked', 'reviewed']);
+    const held = (key: string): number => Number(rows.find((row) => row.dataset.coverageRow === key)?.querySelector('strong')?.textContent);
+    expect(held('linked') + held('unlinked')).toBe(REAL_INDEX.subjects.filter((subject) => subject.kind === 'region').length);
+    expect(held('unlinked')).toBeGreaterThan(held('linked'));
+    expect(held('niss')).toBeLessThanOrEqual(held('linked'));
+    expect(held('reviewed')).toBe(0);
+    // The chips are the shortest path to the only regions that hold anything, and there is one per counted region.
+    const chips = [...inspector.querySelectorAll<HTMLButtonElement>('.atlas-chip')];
+    expect(chips).toHaveLength(held('linked'));
+    fireEvent.click(chips[0]);
+    await waitFor(() => expect(container.querySelector('.atlas-inspector')?.getAttribute('data-empty')).toBeNull());
+    expect(container.querySelector('.atlas-coverage [data-fact="niss-coverage"]')?.textContent).toMatch(/^\d+ of [1-9]\d* links? carr(y|ies) a NISS severity/);
   });
 });
 

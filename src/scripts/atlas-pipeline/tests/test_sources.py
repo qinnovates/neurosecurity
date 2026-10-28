@@ -94,3 +94,17 @@ def test_share_alike_material_goes_to_its_own_folder() -> None:
 def test_unpinned_file_is_refused() -> None:
     with pytest.raises(RegistryError, match="no sha256 pin"):
         sources.pinned_sha256({"name": "x", "sha256": None})
+
+
+def test_every_source_has_a_recognised_license_and_every_file_the_pipeline_reads_is_pinned() -> None:
+    """Registry integrity (T-221): a source missing a license, or a file the pipeline actually
+    reads missing its sha256 pin, must fail here rather than surface later as an unpinned
+    download or an unlicensed asset. 'Actually reads' means an asset's file/names_file (checked
+    already by test_every_planned_source_is_buildable_and_pinned_and_held_sources_are_not) plus
+    the shift-scan comparison images in pipeline-inputs.json, which no other test covers.
+    """
+    registry = sources.load_registry()
+    for source_id, source in registry.sources.items():
+        assert source.get("license_id") in sources.LICENSE_FACTS, f"{source_id}: license_id is missing or not in the closed list"
+    for source_id, file_name in registry.inputs.get("shift_scan_images", {}).items():
+        assert sources.pinned_sha256(sources.registry_file(registry, source_id, file_name)), f"{source_id}/{file_name}"

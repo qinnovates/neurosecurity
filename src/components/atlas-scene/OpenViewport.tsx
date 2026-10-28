@@ -101,7 +101,7 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
   const description = `3D picture of an average brain outline with ${atlasShapeCount} atlas shapes drawn inside it. ${scene.caption.lensLabel} View: ${activeView === null ? 'turned by hand' : CAMERA_VIEW_LABELS[activeView].toLowerCase()}. Every fact it shows is in the region list.${deviceWords}`;
 
   const canvasProps: Omit<AtlasCanvasProps, 'commands'> = {
-    shapes: scene.drawnShapes, nodesByShapeId: scene.nodesByShapeId, selectedKeys, bracketGroups, selectionLabel, devices: scene.devices, selectedElectrodeId: electrodeId, focusMm, slice, prefersLessMotion, description,
+    shapes: scene.drawnShapes, nodesByShapeId: scene.nodesByShapeId, selectedKeys, bracketGroups, selectionLabel, devices: scene.devices, selectedElectrodeId: electrodeId, focusMm, slice, theme: scene.theme, prefersLessMotion, description,
     onPick: pick, onPickElectrode, onHover: setHoveredKey, onCameraTurn: setDirections, onContextLost: () => onStopped('context_lost'), onUnavailable: () => onStopped('no_webgl'),
   };
   return (

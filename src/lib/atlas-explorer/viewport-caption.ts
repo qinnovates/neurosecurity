@@ -77,6 +77,8 @@ function markLimitsFor(shapes: readonly SceneShape[]): LimitSentence[] {
     ...(has((shape) => shape.fill === 'translucent') && !has((shape) => shape.fill === 'solid') ? [limitSentence('lens_fills_nothing')] : []),
     ...(has((shape) => shape.sizeMark === 'ring_only') ? [limitSentence('marker_ring')] : []),
     ...(has((shape) => shape.sizeMark === 'mesh_and_ring') ? [limitSentence('coarse_ring')] : []),
+    // How a ring carries the lens, wherever either ring is on screen. It lived inline in the legend, which put wording about a mark outside the one table that holds it.
+    ...(has((shape) => shape.sizeMark !== 'mesh') ? [limitSentence('ring_under_lens')] : []),
   ];
 }
 

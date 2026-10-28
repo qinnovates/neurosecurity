@@ -98,7 +98,7 @@ describe('createSceneRenderer', () => {
     const removed: Array<[string, EventListenerOrEventListenerObject]> = [];
     const remove = canvas.removeEventListener.bind(canvas);
     canvas.removeEventListener = ((type: string, listener: EventListenerOrEventListenerObject) => { removed.push([type, listener]); remove(type, listener); }) as typeof canvas.removeEventListener;
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set());
     expect(listeners.map(([type]) => type).sort()).toEqual(['pointercancel', 'pointerdown', 'pointermove', 'pointerup', 'webglcontextlost', 'wheel']);
     renderer.dispose();
@@ -112,7 +112,7 @@ describe('createSceneRenderer', () => {
   });
 
   it('tells the page when the browser takes the context away, and keeps the browser from discarding it for good', () => {
-    createSceneRenderer(canvas, callbacks, true);
+    createSceneRenderer(canvas, callbacks, true, 'light');
     const lost = new Event('webglcontextlost', { cancelable: true });
     canvas.dispatchEvent(lost);
     expect(callbacks.onContextLost).toHaveBeenCalledTimes(1);
@@ -120,12 +120,12 @@ describe('createSceneRenderer', () => {
   });
 
   it('turns idly until touched, and never under reduced motion', () => {
-    const still = createSceneRenderer(canvas, callbacks, true);
+    const still = createSceneRenderer(canvas, callbacks, true, 'light');
     still.setShapes(SHAPES, NODES, new Set());
     runFrames(1);
     expect(frames).toHaveLength(0);
     expect(three.rendered).toBe(1);
-    const turning = createSceneRenderer(document.createElement('canvas'), callbacks, false);
+    const turning = createSceneRenderer(document.createElement('canvas'), callbacks, false, 'light');
     turning.setShapes(SHAPES, NODES, new Set());
     runFrames(3);
     expect(frames).toHaveLength(1);
@@ -133,7 +133,7 @@ describe('createSceneRenderer', () => {
   });
 
   it('never tests the brain outline for a pick, and picks a filled shape through a pale one in front of it', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set());
     const [, pale, filled] = SHAPES;
     three.hits = [
@@ -147,7 +147,7 @@ describe('createSceneRenderer', () => {
   });
 
   it('lifts the shape under the pointer, shows a pick cursor, and puts both back when the pointer leaves', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set());
     const [, pale] = SHAPES;
     three.hits = [{ distance: 10, point: {}, object: { userData: { structureKey: pale.structureKey, fill: 'translucent', isSelected: false } } }];
@@ -168,7 +168,7 @@ describe('createSceneRenderer', () => {
   });
 
   it('does not pick through an open cut, and treats a drag as a drag', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set());
     renderer.setSlice({ axis: 'back_front', positionMm: 0 });
     expect(three.renderers[0].clippingPlanes).toHaveLength(1);
@@ -183,7 +183,7 @@ describe('createSceneRenderer', () => {
   });
 
   it('leaves an ordinary wheel to the page, zooms with Ctrl or Command, and lets go at the end of the range', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     const wheel = (init: WheelEventInit): WheelEvent => { const event = new WheelEvent('wheel', { cancelable: true, ...init }); canvas.dispatchEvent(event); return event; };
     expect(wheel({ deltaY: 100 }).defaultPrevented).toBe(false);
     const before = renderer.distance();
@@ -195,7 +195,7 @@ describe('createSceneRenderer', () => {
   });
 
   it('marks a selected shape with line brackets and adds no second surface to it', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set([SHAPES[1].structureKey]), [[SHAPES[1].structureKey]]);
     three.hits = [];
     click(5, 5);
@@ -207,7 +207,7 @@ describe('createSceneRenderer', () => {
   });
 
   it('draws one bracket set around a region made of many shapes, not one per shape', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     const regionKeys = [SHAPES[1].structureKey, SHAPES[2].structureKey];
     renderer.setShapes(SHAPES, NODES, new Set(regionKeys), [regionKeys]);
     renderer.dispose();
@@ -216,7 +216,7 @@ describe('createSceneRenderer', () => {
   });
 
   it('reports which way is left as the camera turns', () => {
-    const renderer = createSceneRenderer(canvas, callbacks, true);
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set());
     runFrames(1);
     const first = callbacks.onCameraTurn.mock.calls.at(-1)?.[0];

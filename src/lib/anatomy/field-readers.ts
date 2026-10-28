@@ -76,6 +76,19 @@ export function readString(record: Record<string, unknown>, key: string, locatio
   return requireText(record[key], childOf(location, key), maxLength);
 }
 
+/**
+ * Text that matches `pattern` whole. For a field whose value is a format rather
+ * than free text, so a malformed one is named here and never reaches whatever
+ * takes the format apart.
+ *
+ * @param format how the value must be written, shown in the remedy
+ */
+export function requirePattern(value: unknown, location: FieldLocation, pattern: RegExp, maxLength: number, format: string): string {
+  const text = requireText(value, location, maxLength);
+  if (!pattern.test(text)) return failAt(location, `"${show(text)}" is not written in the required format`, `Write it as ${format}.`);
+  return text;
+}
+
 export function requireEnum<T extends string>(value: unknown, location: FieldLocation, allowed: readonly T[]): T {
   if (typeof value !== 'string' || !(allowed as readonly string[]).includes(value)) {
     return failAt(location, `"${show(value)}" is not an allowed value`, `Use one of: ${allowed.join(', ')}.`);
@@ -98,9 +111,9 @@ export function readBoolean(record: Record<string, unknown>, key: string, locati
   return requireBoolean(record[key], childOf(location, key));
 }
 
-export function requireNumber(value: unknown, location: FieldLocation, minimum: number): number {
-  if (typeof value !== 'number' || !Number.isFinite(value) || value < minimum || Math.abs(value) > MAX_NUMBER) {
-    return failAt(location, 'expected a finite number in range', `Write a number of at least ${minimum} and at most ${MAX_NUMBER}.`);
+export function requireNumber(value: unknown, location: FieldLocation, minimum: number, maximum: number = MAX_NUMBER): number {
+  if (typeof value !== 'number' || !Number.isFinite(value) || value < minimum || value > maximum || Math.abs(value) > MAX_NUMBER) {
+    return failAt(location, 'expected a finite number in range', `Write a number of at least ${minimum} and at most ${maximum}.`);
   }
   return value;
 }

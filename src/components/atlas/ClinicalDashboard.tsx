@@ -3,7 +3,7 @@
  *
  * Four-column flow: Technique → Band → Pathway/Region → DSM Outcome
  * All data dynamic from shared JSON files — any update propagates automatically.
- * SVG-first pattern (following NeurorightsPentagon.tsx).
+ * SVG-first pattern (following components/radar/RadarChart.tsx).
  *
  * For threat modeling purposes — diagnostic category references, not diagnostic claims.
  */
