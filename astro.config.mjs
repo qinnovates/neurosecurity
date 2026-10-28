@@ -18,7 +18,6 @@ export default defineConfig({
     // Legacy short routes
     '/threats/': '/atlas/tara/',
     '/niss/': '/atlas/scoring/',
-    '/advisory/': '/alliance/',
     '/TARA/': '/atlas/tara/',
     '/neural-atlas/': '/atlas/',
     '/scoring/': '/atlas/scoring/',
@@ -62,9 +61,6 @@ export default defineConfig({
     '/pitch/': 'https://github.com/qinnovates/neurosecurity',
     '/learning/': '/about/',
     '/about/milestones/': '/news/roadmap/',
-
-    // 2026-03-10 Nav restructure redirects
-    '/licensing/': '/about/',
 
     // 2026-08-13 TARA-led IA restructure — dead stub/orphan page cleanup
     '/threat-models/': '/atlas/tara/',

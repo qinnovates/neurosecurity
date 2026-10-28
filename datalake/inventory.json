@@ -1,11 +1,11 @@
 {
   "_generator": "src/scripts/generate-datalake-inventory.mjs",
   "_note": "Derived file. Do not hand-edit — run `npm run datalake:inventory`.",
-  "generated_on": "2026-10-20",
+  "generated_on": "2026-10-24",
   "totals": {
     "datalake_files": 40,
-    "datasets_inventoried": 28,
-    "records": 21473,
+    "datasets_inventoried": 27,
+    "records": 21452,
     "unique_dois": 257,
     "techniques_with_cve_evidence": 27,
     "cve_coverage_ratio": 0.1517
@@ -51,7 +51,7 @@
     {
       "key": "cve_mappings",
       "label": "CVE to technique mappings",
-      "count": 107,
+      "count": 108,
       "file": "datalake/cve-technique-mapping.json",
       "path": "mappings",
       "group": "threat",
@@ -255,15 +255,6 @@
       "group": "landscape",
       "unit": "devices",
       "note": "implant, DBS, cochlear and consumer EEG classes"
-    },
-    {
-      "key": "scored_devices",
-      "label": "Devices scored (proposed NISS)",
-      "count": 22,
-      "file": "datalake/neurosecurity-scores.json",
-      "path": "devices",
-      "group": "landscape",
-      "unit": "devices"
     },
     {
       "key": "companies",

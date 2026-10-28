@@ -137,7 +137,6 @@ const DATASETS = [
     unit: 'devices',
     note: 'implant, DBS, cochlear and consumer EEG classes',
   },
-  { key: 'scored_devices', label: 'Devices scored (proposed NISS)', file: 'datalake/neurosecurity-scores.json', path: 'devices', group: 'landscape', unit: 'devices' },
   { key: 'companies', label: 'BCI companies tracked', file: 'datalake/bci-landscape.json', path: 'companies', group: 'landscape', unit: 'companies' },
   { key: 'policy_timeline', label: 'Policy timeline entries', file: 'datalake/bci-landscape.json', path: 'policy_timeline', group: 'landscape', unit: 'entries' },
   { key: 'industry_timeline', label: 'Industry timeline entries', file: 'datalake/bci-landscape.json', path: 'industry_timeline', group: 'landscape', unit: 'entries' },

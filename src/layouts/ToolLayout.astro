@@ -3,42 +3,39 @@
 // It deliberately omits what BaseLayout loads: the soft-navigation router and
 // third-party analytics. src/scripts/check-model-page.mjs enforces this on the built page.
 import '../styles/global.css';
+import { TOOL_PAGE_CSP, joinPolicy } from '../lib/csp-policy';
+
+type ThemeName = 'dark' | 'light';
 
 interface Props {
   title: string;
   description: string;
   /** True when the page brings its own full-width frame, so the layout adds no header or margins. */
   isAppShell?: boolean;
+  /** True for a launched page search engines may list. A review draft or a framed tool stays out. */
+  indexable?: boolean;
+  /** The theme rendered on the server and used when the visitor has stored no choice. */
+  theme?: ThemeName;
 }
 
-const { title, description, isAppShell = false } = Astro.props;
+const { title, description, isAppShell = false, indexable = false, theme = 'dark' } = Astro.props;
 
 // Vite's dev server needs a websocket for hot reload, which this policy blocks,
 // so the policy is applied to built pages only.
 const isBuiltPage = import.meta.env.PROD;
-const TOOL_PAGE_CSP = [
-  "default-src 'self'",
-  // Astro's island hydration and React inline styles need inline script and style.
-  "script-src 'self' 'unsafe-inline'",
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data:",
-  "font-src 'self' data:",
-  // Same origin only: the page may read this site's own data files and can reach no other host.
-  "connect-src 'self'",
-  "form-action 'none'",
-  "base-uri 'none'",
-  "object-src 'none'",
-].join('; ');
+// A preview build is never indexed, whatever the page asks; the flag is server-side only.
+const isPreviewBuild = process.env.QINNOVATE_PREVIEW === '1';
+const isNoindex = !indexable || isPreviewBuild;
 ---
 
 <!DOCTYPE html>
-<html lang="en-US" data-theme="light">
+<html lang="en-US" data-theme={theme}>
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content={description} />
-  <meta name="robots" content="noindex, nofollow" />
-  {isBuiltPage && <meta http-equiv="Content-Security-Policy" content={TOOL_PAGE_CSP} />}
+  {isNoindex && <meta name="robots" content="noindex, nofollow" />}
+  {isBuiltPage && <meta http-equiv="Content-Security-Policy" content={joinPolicy(TOOL_PAGE_CSP)} />}
   <meta name="referrer" content="no-referrer" />
   <title>{title} | Qinnovate</title>
 
@@ -54,17 +51,17 @@ const TOOL_PAGE_CSP = [
       }
     })();
   </script>
-  <script is:inline>
+  <script is:inline define:vars={{ defaultTheme: theme }}>
     (function () {
-      var theme = 'light';
+      // A stored choice wins; otherwise the server-rendered theme stays, so the attribute never changes before first paint.
+      var resolved = defaultTheme;
       try {
-        theme = localStorage.getItem('theme')
-          || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        resolved = localStorage.getItem('theme') || defaultTheme;
       } catch (storageError) {
-        // Storage can be blocked by browser settings; the light theme is the safe default.
-        theme = 'light';
+        // Storage can be blocked by browser settings; the rendered theme is the safe default.
+        resolved = defaultTheme;
       }
-      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-theme', resolved);
     })();
   </script>
 </head>
@@ -72,7 +69,7 @@ const TOOL_PAGE_CSP = [
   {/* An app shell brings its own skip link: its address holds the screen, so a link to "#main-content" would change the screen. */}
   {!isAppShell && <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg" style="background: var(--color-bg-surface); color: var(--color-text-primary); border: 1px solid var(--color-accent-primary)">Skip to content</a>}
   {!isAppShell && <header class="tool-header px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl pt-6 flex items-center justify-between gap-4">
-    <a href="/atlas/" class="text-sm font-medium" style="color: var(--color-accent-primary)">&larr; Back to the site</a>
+    <a href="/atlas/tara/" class="text-sm font-medium" style="color: var(--color-accent-primary)">&larr; Back to the site</a>
     <span class="text-xs" style="color: var(--color-text-muted)">Runs in your browser. Nothing you enter is sent anywhere.</span>
   </header>}
   <main id="main-content" class={isAppShell ? undefined : 'px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl py-8'}>

@@ -6,28 +6,13 @@ import { loadExplorerModel } from './explorer-data';
 import LoadNotice from './LoadNotice';
 import { readIndexPin } from './read-index-pin';
 import { useLoaded } from './use-loaded';
+import { useViewStylesheets } from './use-view-stylesheets';
 // As addresses, not as imports of the styles: a stylesheet imported here would be linked from every page that can reach
 // this chunk and so load on its first visit. These two are added to the page only when the view is.
 import mountStylesUrl from './atlas-region-mount.css?url';
 import sceneStylesUrl from './atlas-scene.css?url';
 
 const STYLESHEET_URLS: readonly string[] = [sceneStylesUrl, mountStylesUrl];
-const STYLESHEET_ATTRIBUTE = 'data-atlas-view-styles';
-
-/** Links the view's two stylesheets from this site, once per page however many views it holds. */
-function useViewStylesheets(): void {
-  useEffect(() => {
-    for (const url of STYLESHEET_URLS) {
-      const isLinked = [...document.head.querySelectorAll(`link[${STYLESHEET_ATTRIBUTE}]`)].some((link) => link.getAttribute('href') === url);
-      if (isLinked) continue;
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = url;
-      link.setAttribute(STYLESHEET_ATTRIBUTE, 'true');
-      document.head.append(link);
-    }
-  }, []);
-}
 
 /** A region picked in the view, as the page hears of it. */
 export interface RegionPick {
@@ -55,7 +40,7 @@ export default function RegionViewPanel({ lens: givenLens, selectedRegionIds, se
   // A page passes the lens as a fresh object on every render; the scene is rebuilt only when its content changes.
   const lensKey = JSON.stringify(givenLens);
   const lens = useMemo(() => givenLens, [lensKey]);
-  useViewStylesheets();
+  useViewStylesheets(STYLESHEET_URLS);
   const pin = useMemo(() => readIndexPin(), []);
   const load = useCallback((signal: AbortSignal) => loadExplorerModel(signal, pin), [pin]);
   const { state, retry } = useLoaded(load, true, ANATOMY_INDEX_PATH);

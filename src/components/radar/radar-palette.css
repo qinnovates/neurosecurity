@@ -16,8 +16,8 @@
  * `__tests__/radar-palette.test.ts` can read and measure it; do not point one
  * at a site variable.
  *
- * Theme: `data-theme` on <html> is authoritative on this site. BaseLayout seeds
- * it from `prefers-color-scheme` and the theme toggle overrides it, so a
+ * Theme: `data-theme` on <html> is authoritative on this site. The layouts render
+ * it dark, honour a stored choice, and never read `prefers-color-scheme`, so a
  * `prefers-color-scheme` block here would fight a reader who chose light on a
  * dark machine. Dark values hang off `:root[data-theme="dark"]` only.
  *

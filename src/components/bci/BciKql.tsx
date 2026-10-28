@@ -1,5 +1,5 @@
 /**
- * BciKql — KLQ (Kevin's Landscape Query) UI component.
+ * BciKql — pipe-query console over the site's data tables.
  *
  * Query engine logic lives in src/lib/kql-engine.ts.
  * This file is UI-only: input, presets, result table, formatting, badges.
@@ -70,9 +70,6 @@ const PRESETS: PresetQuery[] = [
   { label: 'Convergence timeline', query: 'convergence | sort by year asc', group: 'analysis' },
   { label: 'Auto vs BCI', query: 'convergence | where market contains "Automotive" | sort by year asc', group: 'analysis' },
   { label: 'Investment momentum', query: 'momentum | sort by year asc', group: 'analysis' },
-  { label: 'Risk profile', query: 'risk_profile | sort by risk_index desc', group: 'analysis' },
-  { label: 'Highest risk', query: 'risk_profile | where risk_index > 1 | project company, funding_B, devices, security_posture, risk_index', group: 'analysis' },
-  { label: 'Zero security + funded', query: 'risk_profile | where security_score == "0/4" | where funding_B > 0 | sort by funding_B desc', group: 'analysis' },
   // Investor Intelligence
   { label: 'All funding rounds', query: 'funding | sort by date desc', group: 'investors' },
   { label: 'Cross-portfolio VCs', query: 'cross_portfolio | sort by bci_bet_count desc', group: 'investors' },
@@ -82,7 +79,9 @@ const PRESETS: PresetQuery[] = [
   { label: 'Intel/Defense', query: 'intel_defense', group: 'investors' },
   { label: 'Notable individuals', query: 'notable_investors', group: 'investors' },
   { label: 'Investment patterns', query: 'investment_patterns', group: 'investors' },
-  { label: '$100M+ rounds', query: 'funding | where amount_usd > 100000000 | sort by amount_usd desc', group: 'investors' },
+  // '$100M+ rounds' lived here too (identical label and query to the Market & Funding
+  // entry above) — a duplicate React key (`key={p.label}` below) that made one of the
+  // two preset buttons silently drop out of the flat PRESETS list at render time.
   { label: 'By company category', query: 'companies | summarize count() by category', group: 'investors' },
   { label: 'Growth stage cos', query: 'companies | where category == "growth_stage" | sort by funding_total_usd desc', group: 'investors' },
   { label: 'Startups', query: 'companies | where category == "startup" | sort by funding_total_usd desc', group: 'investors' },
@@ -512,7 +511,7 @@ export default function BciKql({ tables: tablesProp }: BciKqlProps) {
     return (
       <div style={S.container}>
         <div style={S.header}>
-          <h2 style={S.title}>KLQ</h2>
+          <h2 style={S.title}>Query</h2>
           <span style={{ fontSize: '0.875rem', color: 'var(--color-text-muted, #94a3b8)' }}>
             Loading data lake...
           </span>
@@ -524,7 +523,7 @@ export default function BciKql({ tables: tablesProp }: BciKqlProps) {
   return (
     <div style={S.container}>
       <div style={S.header}>
-        <h2 style={S.title}>KLQ</h2>
+        <h2 style={S.title}>Query</h2>
         <span style={{ fontSize: '0.875rem', color: 'var(--color-text-muted, #94a3b8)' }}>
           Pipe-based queries over BCI data
         </span>
@@ -589,7 +588,6 @@ export default function BciKql({ tables: tablesProp }: BciKqlProps) {
                     key={col}
                     style={S.th}
                     scope="col"
-                    role="button"
                     tabIndex={0}
                     aria-sort={sortCol === col ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
                     onClick={() => handleHeaderClick(col)}

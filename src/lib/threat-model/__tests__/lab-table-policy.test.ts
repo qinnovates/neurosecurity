@@ -40,7 +40,7 @@ describe('lab table policy', () => {
 
   it('keeps scores, counts, funding and ratings of named companies and devices out', () => {
     const shown = applyLabTablePolicy(siteTables);
-    for (const table of ['risk_profile', 'companies', 'validations', 'hourglass_bands', 'brain_regions', 'dsm5', 'neurological_conditions', 'controls']) {
+    for (const table of ['companies', 'validations', 'hourglass_bands', 'brain_regions', 'dsm5', 'neurological_conditions', 'controls']) {
       expect(siteTables, `test setup: ${table} is no longer a site table`).toHaveProperty(table);
       expect(shown).not.toHaveProperty(table);
     }

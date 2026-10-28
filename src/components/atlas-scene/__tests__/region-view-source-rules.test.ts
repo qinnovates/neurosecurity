@@ -15,7 +15,7 @@ const MOUNTS = [
 ];
 const SOURCE_EXTENSIONS = ['.astro', '.ts', '.tsx'];
 /** three.js, the canvas chunk's modules, and the two lazy chunks that lead to them. A page or a host may name none of them in a static import. */
-const HEAVY_MODULES = ['AtlasCanvas', 'scene-renderer', 'scene-objects', 'scene-marks', 'device-objects', 'TractLines', 'OpenViewport', 'RegionViewPanel', 'AtlasRegionView', 'AtlasViewport', 'explorer-data'];
+const HEAVY_MODULES = ['AtlasCanvas', 'scene-renderer', 'scene-objects', 'scene-marks', 'device-objects', 'TractLines', 'OpenViewport', 'RegionViewPanel', 'AtlasRegionView', 'AtlasViewport', 'explorer-data', 'BrainHeroPanel', 'BrainHeroView'];
 const STATIC_HEAVY_IMPORT = new RegExp(String.raw`^\s*import (?!type )[^;]*from ['"](three|three/[^'"]*|@react-three/[^'"]*|[^'"]*/(${HEAVY_MODULES.join('|')})(\.tsx?)?)['"]`, 'm');
 const read = (filePath: string): string => fs.readFileSync(filePath, 'utf-8');
 
@@ -70,6 +70,28 @@ describe('the 3D view on other pages: what may import what', () => {
   it('adds the view\'s stylesheets by address, so no page links them on its first load', () => {
     const panel = read(path.join(SCENE_DIRECTORY, 'RegionViewPanel.tsx'));
     expect(panel.match(/^import .*\.css.*$/gm)).toEqual(["import mountStylesUrl from './atlas-region-mount.css?url';", "import sceneStylesUrl from './atlas-scene.css?url';"]);
+    const hero = read(path.join(SCENE_DIRECTORY, 'BrainHeroPanel.tsx'));
+    expect(hero.match(/^import .*\.css.*$/gm)).toEqual(["import heroStylesUrl from './brain-hero.css?url';", "import sceneStylesUrl from './atlas-scene.css?url';"]);
+  });
+
+  it('lets the homepage reach the brain hero only through its mount, which reaches the rest through import(), and gives the page the pin', () => {
+    const page = read('src/pages/index.astro');
+    expect(STATIC_HEAVY_IMPORT.test(page)).toBe(false);
+    expect(page).toContain("import BrainHeroMount from '@/components/atlas-scene/BrainHeroMount';");
+    expect(page).toContain("import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';");
+    expect(page.match(/<AtlasIndexPin \/>/g)).toHaveLength(1);
+    expect(page.match(/<BrainHeroMount client:load \/>/g)).toHaveLength(1);
+    const mount = read(path.join(SCENE_DIRECTORY, 'BrainHeroMount.tsx'));
+    expect(mount).toContain("import('./BrainHeroPanel')");
+    expect(STATIC_HEAVY_IMPORT.test(mount)).toBe(false);
+    // What ships with the homepage is the shell and its sentences: no limit table, no parser, no data loader.
+    expect(mount.match(/^import .*$/gm)).toEqual([
+      "import { useEffect, useRef, useState, type ComponentType } from 'react';",
+      "import { HERO_COPY } from '@/lib/anatomy/hero-copy';",
+      "import type { BrainHeroPanelProps } from './BrainHeroPanel';",
+      "import './brain-hero-mount.css';",
+    ]);
+    expect(read('src/lib/anatomy/hero-copy.ts')).not.toMatch(/^import /m);
   });
 
   it('gives every mounting page the index pin, and through the one module that exports nothing else', () => {

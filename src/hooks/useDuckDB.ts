@@ -71,7 +71,6 @@ const PARQUET_DATASETS = [
   'security_controls',
   'ethics_controls',
   'guardrails',
-  'neurosecurity_scores',
   'research_explorer',
   'research_institutions',
   'research_standards',

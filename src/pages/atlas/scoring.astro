@@ -7,7 +7,6 @@ import RadarFillLegend from '@/components/radar/RadarFillLegend';
 import '@/components/radar/radar-palette.css';
 import { NISS_SPEC, THREAT_VECTORS, getNissStats, NISS_UNSCORED_REASON_LABELS } from '@/lib/threat-data';
 import scoringGaps from '@shared/tara-scoring-gaps.json';
-import neurosecurityScores from '@shared/neurosecurity-scores.json';
 import { getCatalogCoverage } from '@/lib/purpose-and-limits';
 import { VALIDATION_ENTRIES, getCheckedTechniqueCount } from '@/lib/validation-data';
 const spec = NISS_SPEC as any;
@@ -20,12 +19,6 @@ const unscoredCount = coverage.total - coverage.scored;
 const VAL_004_ID = 'VAL-004';
 const val004CheckedCount = getCheckedTechniqueCount(VAL_004_ID);
 const val004Date = VALIDATION_ENTRIES.find((entry) => entry.id === VAL_004_ID)?.date ?? '';
-// NSv2.1 worked example, read from the scores dataset so the vector cannot drift from the data.
-const NSV2_EXAMPLE_DEVICE = 'Neuralink N1';
-const nsv2Example = neurosecurityScores.devices.find((device) => device.device === NSV2_EXAMPLE_DEVICE);
-if (!nsv2Example) {
-  throw new Error(`scoring.astro: ${NSV2_EXAMPLE_DEVICE} not found in datalake/neurosecurity-scores.json; update NSV2_EXAMPLE_DEVICE.`);
-}
 
 // NISS v2.0 Extension Metrics (6 metrics that extend CVSS v4.0)
 // Default weights follow niss_spec in the registrar: CR and CD 0.5 each, the other four 1.0. Context profiles are separate.
@@ -796,31 +789,6 @@ const unscoredReading: NissReading = {
                 ))}
               </tbody>
             </table>
-          </div>
-        </div>
-
-        <div class="glass rounded-xl p-6 mb-6">
-          <h3 class="text-sm font-semibold font-[family-name:var(--font-heading)] mb-3">Example: NSv2.1 Vector</h3>
-          <p class="font-[family-name:var(--font-mono)] text-sm text-[var(--color-accent-tertiary)] break-all mb-3">
-            {nsv2Example.vector}
-          </p>
-          <p class="text-xs text-[var(--color-text-muted)]">
-            Device-level risk score (0-10) broken down by neurorights dimension. This example scores a high-severity invasive BCI across the four neurorights dimensions (CL, MI, MP, PC) and the Equal Access governance dimension (EA); the overall score is their geometric mean.
-          </p>
-        </div>
-
-        <div class="grid gap-4 sm:grid-cols-3 mb-6">
-          <div class="glass rounded-xl p-5 text-center">
-            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">22</div>
-            <div class="text-xs text-[var(--color-text-faint)] mt-1">BCI Devices Scored</div>
-          </div>
-          <div class="glass rounded-xl p-5 text-center">
-            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">5</div>
-            <div class="text-xs text-[var(--color-text-faint)] mt-1">Population Baselines</div>
-          </div>
-          <div class="glass rounded-xl p-5 text-center">
-            <div class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-tertiary)]">10K</div>
-            <div class="text-xs text-[var(--color-text-faint)] mt-1">Monte Carlo Samples</div>
           </div>
         </div>
 

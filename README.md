@@ -27,9 +27,9 @@ QIF, TARA and NISS help builders and defenders start a neural-device threat mode
 
 ![Open datalake inventory](src/site/images/datalake-corpus.svg)
 
-**21,473 records inventoried below, from 28 of the 40 datasets in [`datalake/`](datalake/).** 20,182 neural impact chains · 178 proposed techniques · 24 BCI devices specced · 68 companies tracked · 107 CVEs mapped · 257 unique DOIs cited.
+**21,452 records inventoried below, from 27 of the 40 datasets in [`datalake/`](datalake/).** 20,182 neural impact chains · 178 proposed techniques · 24 BCI devices specced · 68 companies tracked · 108 CVEs mapped · 257 unique DOIs cited.
 
-Counted from the files themselves on 2026-10-20. Re-run `npm run datalake:inventory` and every figure on this page moves with the data; `npm run datalake:inventory:check` fails the build if it has drifted.
+Counted from the files themselves on 2026-10-24. Re-run `npm run datalake:inventory` and every figure on this page moves with the data; `npm run datalake:inventory:check` fails the build if it has drifted.
 
 ### Threat model
 
@@ -37,7 +37,7 @@ Counted from the files themselves on 2026-10-20. Re-run `npm run datalake:invent
 |---|---:|---|
 | Neural impact chains <sub>technique x brain region x QIF band permutations</sub> | **20,182** | [`datalake/impact-chains.json`](datalake/impact-chains.json) |
 | TARA techniques | **178** | [`datalake/qtara-registrar.json`](datalake/qtara-registrar.json) |
-| CVE to technique mappings | **107** | [`datalake/cve-technique-mapping.json`](datalake/cve-technique-mapping.json) |
+| CVE to technique mappings | **108** | [`datalake/cve-technique-mapping.json`](datalake/cve-technique-mapping.json) |
 | QIF hazards | **33** | [`datalake/qif-hazards.json`](datalake/qif-hazards.json) |
 | Severity anchors | **25** | [`datalake/severity-anchors.json`](datalake/severity-anchors.json) |
 | TARA tactics | **17** | [`datalake/qtara-registrar.json`](datalake/qtara-registrar.json) |
@@ -74,7 +74,6 @@ Counted from the files themselves on 2026-10-20. Re-run `npm run datalake:invent
 | Policy timeline entries | **27** | [`datalake/bci-landscape.json`](datalake/bci-landscape.json) |
 | Industry timeline entries | **25** | [`datalake/bci-landscape.json`](datalake/bci-landscape.json) |
 | BCI devices with hardware specs <sub>implant, DBS, cochlear and consumer EEG classes</sub> | **24** | [`src/site/bci-hardware-inventory.json`](src/site/bci-hardware-inventory.json) |
-| Devices scored (proposed NISS) | **22** | [`datalake/neurosecurity-scores.json`](datalake/neurosecurity-scores.json) |
 
 ### Evidence & provenance
 
@@ -96,7 +95,7 @@ Counted from the files themselves on 2026-10-20. Re-run `npm run datalake:invent
 
 - **61 of 178 techniques** rest on a lab or case demonstration in the published literature (46 lab, 15 case). The remaining 117 are modelled, proposed or speculative.
 - Hardware that exists today would suffice for **102 of them**; 37 are software or network attacks that physics does not constrain at all.
-- **107 CVEs** are mapped to 27 of 178 techniques (15.2%). Mapping is ongoing — [contributions welcome](#collaboration).
+- **108 CVEs** are mapped to 27 of 178 techniques (15.2%). Mapping is ongoing — [contributions welcome](#collaboration).
 
 These splits are published here rather than buried, because anyone can compute them from the JSON in a minute, and a catalogue that hides its theoretical share is not worth scoring against.
 

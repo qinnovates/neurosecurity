@@ -25,7 +25,6 @@ const taraGroups: NavGroup[] = [
     links: [
       { href: '/atlas/scoring/', label: 'NISS Scoring', desc: 'Neural Impact Severity Score for each technique' },
       { href: '/atlas/clinical/', label: 'Clinical Mappings', desc: 'DSM-5-TR category references, therapeutic analogs' },
-      { href: '/demo-atlas/', label: 'Demo Atlas (PoC)', desc: 'Interactive demo — devices, EEG, and techniques unified' },
     ],
   },
 ];
@@ -94,7 +93,7 @@ const aboutGroups: NavGroup[] = [
   },
 ];
 
-const isTaraActive = currentPath.startsWith('/atlas/') || currentPath.startsWith('/demo-atlas/');
+const isTaraActive = currentPath.startsWith('/atlas/');
 const isFrameworkActive = currentPath.startsWith('/framework/') || currentPath.startsWith('/guardrails/');
 const isResearchActive = currentPath.startsWith('/research/') || currentPath.startsWith('/data-studio/')
   || currentPath.startsWith('/tools/') || (currentPath.startsWith('/news/') && !currentPath.startsWith('/news/roadmap/') && !currentPath.startsWith('/news/derivation/'));

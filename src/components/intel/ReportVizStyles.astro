@@ -2,7 +2,8 @@
 // Chart tokens and shared chart chrome for the intel report pages. Palette values are
 // the dataviz reference steps, validated (validate_palette.js) against the site's card
 // surfaces: light #fdfdfd, dark #14161d. Categorical pairs pass all-pairs CVD checks;
-// the evidence ramp passes the ordinal checks in both modes.
+// the evidence ramp passes the ordinal checks in both modes. --viz-accent is the site's
+// interactive accent in both themes, so it follows the token rather than repeating its hex.
 ---
 <style is:global>
   .viz {
@@ -12,7 +13,7 @@
     --viz-muted: #6f6d68;
     --viz-grid: #e1e0d9;
     --viz-axis: #c3c2b7;
-    --viz-accent: #4c33b8;
+    --viz-accent: var(--color-accent-primary);
     --viz-found: #2a78d6;
     --viz-none: #eb6834;
     --viz-unchecked: #8f8d86;
@@ -33,7 +34,6 @@
     --viz-muted: #9a988f;
     --viz-grid: #2c2c2a;
     --viz-axis: #45443f;
-    --viz-accent: #7f66ff;
     --viz-found: #3987e5;
     --viz-none: #d95926;
     --viz-unchecked: #6b6a64;

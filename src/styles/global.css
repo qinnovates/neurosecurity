@@ -1,30 +1,34 @@
 @import "tailwindcss";
 @import "tailwindcss/theme" theme(static);
 
-/* ═══ Design Tokens — Light Theme (Academic Default) ═══ */
+/* ═══ Design Tokens — Dark Theme (site default) ═══
+   Colour values come from the org brand config, src/site/brands.json (theme.colors):
+   background_primary, cyan_accent, purple_accent, brand_teal, text_primary, text_secondary.
+   The bare :root carries the full dark set; :root[data-theme="light"] below overrides it. */
 @theme {
-  --color-bg-deep: #f5f6f8;
-  --color-bg-surface: #eceef2;
-  --color-bg-elevated: #dfe2e9;
+  --color-bg-deep: #0a0a0f;
+  --color-bg-surface: #14161d;
+  --color-bg-elevated: #1f222c;
   /* Accent roles: primary = interactive, secondary = therapeutic use, tertiary = adversarial use */
-  --color-accent-primary: #4c33b8;
-  /* Solid fills that carry white text. Kept separate so dark-mode links can be lighter than buttons. */
-  --color-accent-fill: #4c33b8;
-  --color-accent-secondary: #0b766c;
-  --color-accent-tertiary: #b81f55;
-  --color-text-primary: #10121a;
-  --color-text-muted: #4a4f5e;
-  --color-text-faint: #646a7a;
-  --color-border: rgba(16, 18, 26, 0.1);
-  --color-border-hover: rgba(16, 18, 26, 0.22);
+  --color-accent-primary: #00e5ff;
+  /* Solid fills that carry white text. Kept separate because the cyan accent reads at 1.5:1 under
+     white text; this is brands.json purple_accent at 85% over black, which white text clears at 5.2:1. */
+  --color-accent-fill: #993fd9;
+  --color-accent-secondary: #22c68d;
+  --color-accent-tertiary: #b44aff;
+  --color-text-primary: #e0e0e0;
+  --color-text-muted: #a0a0a0;
+  --color-text-faint: #7d8396;
+  --color-border: rgba(255, 255, 255, 0.09);
+  --color-border-hover: rgba(255, 255, 255, 0.18);
   --color-status-safe: #10b981;
   --color-status-warn: #f59e0b;
   --color-status-danger: #ef4444;
-  --color-glass-bg: rgba(255, 255, 255, 0.92);
-  --color-glass-border: rgba(16, 18, 26, 0.1);
-  --color-glow-primary: rgba(76, 51, 184, 0.15);
-  --color-glow-secondary: rgba(11, 118, 108, 0.1);
-  --color-glow-tertiary: rgba(184, 31, 85, 0.1);
+  --color-glass-bg: rgba(20, 22, 29, 0.92);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glow-primary: rgba(0, 229, 255, 0.15);
+  --color-glow-secondary: rgba(34, 198, 141, 0.15);
+  --color-glow-tertiary: rgba(180, 74, 255, 0.15);
 
   /* Typography */
   --font-heading: "Space Grotesk", "Inter", system-ui, sans-serif;
@@ -61,19 +65,19 @@
   --color-severity-medium: #eab308;    /* yellow-500 */
   --color-severity-low: #94a3b8;       /* slate-400 */
 
-  /* TARA Domain Colors (light mode — WCAG AA on white backgrounds) */
-  --color-domain-vis: #7c3aed;    /* violet-600 — Vision */
-  --color-domain-aud: #9333ea;    /* purple-600 — Audition */
-  --color-domain-som: #dc2626;    /* red-600 — Somatosensory */
-  --color-domain-ves: #0891b2;    /* cyan-600 — Vestibular */
-  --color-domain-mot: #ea580c;    /* orange-600 — Motor */
-  --color-domain-emo: #d97706;    /* amber-600 — Affect */
-  --color-domain-cog: #ca8a04;    /* yellow-600 — Cognition */
-  --color-domain-mem: #65a30d;    /* lime-600 — Memory */
-  --color-domain-lng: #059669;    /* emerald-600 — Language */
-  --color-domain-aut: #0d9488;    /* teal-600 — Autonomic */
-  --color-domain-idn: #0284c7;    /* sky-600 — Identity */
-  --color-domain-sil: #4b5563;    /* gray-600 — Silicon */
+  /* TARA Domain Colors (dark mode — brighter for dark backgrounds) */
+  --color-domain-vis: #8b5cf6;    /* violet-500 — Vision */
+  --color-domain-aud: #a855f7;    /* purple-500 — Audition */
+  --color-domain-som: #ef4444;    /* red-500 — Somatosensory */
+  --color-domain-ves: #06b6d4;    /* cyan-500 — Vestibular */
+  --color-domain-mot: #f97316;    /* orange-500 — Motor */
+  --color-domain-emo: #f59e0b;    /* amber-500 — Affect */
+  --color-domain-cog: #eab308;    /* yellow-500 — Cognition */
+  --color-domain-mem: #84cc16;    /* lime-500 — Memory */
+  --color-domain-lng: #10b981;    /* emerald-500 — Language */
+  --color-domain-aut: #14b8a6;    /* teal-500 — Autonomic */
+  --color-domain-idn: #0ea5e9;    /* sky-500 — Identity */
+  --color-domain-sil: #6b7280;    /* gray-500 — Silicon */
 }
 
 /* ═══ Token aliases ═══
@@ -106,41 +110,42 @@
   line-height: 1.06;
 }
 
-/* ═══ Dark Theme (BCI Vision) ═══ */
-:root[data-theme="dark"] {
-  --color-bg-deep: #0c0d12;
-  --color-bg-surface: #14161d;
-  --color-bg-elevated: #1f222c;
-  --color-accent-primary: #7f66ff;
-  --color-accent-fill: #6f55ea;
-  --color-accent-secondary: #45cdbd;
-  --color-accent-tertiary: #ff6b9a;
-  --color-text-primary: #f1f2f6;
-  --color-text-muted: #a3a8b8;
-  --color-text-faint: #7d8396;
-  --color-border: rgba(255, 255, 255, 0.09);
-  --color-border-hover: rgba(255, 255, 255, 0.18);
-  --color-glass-bg: rgba(20, 22, 29, 0.92);
-  --color-glass-border: rgba(255, 255, 255, 0.1);
-  --color-glow-primary: rgba(127, 102, 255, 0.2);
-  --color-glow-secondary: rgba(69, 205, 189, 0.15);
-  --color-glow-tertiary: rgba(255, 107, 154, 0.15);
+/* ═══ Light Theme (Academic) — the stored opt-out ═══
+   Only the values that differ from the dark default are declared here. */
+:root[data-theme="light"] {
+  --color-bg-deep: #f5f6f8;
+  --color-bg-surface: #eceef2;
+  --color-bg-elevated: #dfe2e9;
+  --color-accent-primary: #4c33b8;
+  --color-accent-fill: #4c33b8;
+  --color-accent-secondary: #0b766c;
+  --color-accent-tertiary: #b81f55;
+  --color-text-primary: #10121a;
+  --color-text-muted: #4a4f5e;
+  --color-text-faint: #646a7a;
+  --color-border: rgba(16, 18, 26, 0.1);
+  --color-border-hover: rgba(16, 18, 26, 0.22);
+  --color-glass-bg: rgba(255, 255, 255, 0.92);
+  --color-glass-border: rgba(16, 18, 26, 0.1);
+  --color-glow-primary: rgba(76, 51, 184, 0.15);
+  --color-glow-secondary: rgba(11, 118, 108, 0.1);
+  --color-glow-tertiary: rgba(184, 31, 85, 0.1);
 
-  /* TARA Domain Colors (dark mode — brighter for dark backgrounds) */
-  --color-domain-vis: #8b5cf6;    /* violet-500 */
-  --color-domain-aud: #a855f7;    /* purple-500 */
-  --color-domain-som: #ef4444;    /* red-500 */
-  --color-domain-ves: #06b6d4;    /* cyan-500 */
-  --color-domain-mot: #f97316;    /* orange-500 */
-  --color-domain-emo: #f59e0b;    /* amber-500 */
-  --color-domain-cog: #eab308;    /* yellow-500 */
-  --color-domain-mem: #84cc16;    /* lime-500 */
-  --color-domain-lng: #10b981;    /* emerald-500 */
-  --color-domain-aut: #14b8a6;    /* teal-500 */
-  --color-domain-idn: #0ea5e9;    /* sky-500 */
-  --color-domain-sil: #6b7280;    /* gray-500 */
+  /* TARA Domain Colors (light mode — WCAG AA on white backgrounds) */
+  --color-domain-vis: #7c3aed;    /* violet-600 */
+  --color-domain-aud: #9333ea;    /* purple-600 */
+  --color-domain-som: #dc2626;    /* red-600 */
+  --color-domain-ves: #0891b2;    /* cyan-600 */
+  --color-domain-mot: #ea580c;    /* orange-600 */
+  --color-domain-emo: #d97706;    /* amber-600 */
+  --color-domain-cog: #ca8a04;    /* yellow-600 */
+  --color-domain-mem: #65a30d;    /* lime-600 */
+  --color-domain-lng: #059669;    /* emerald-600 */
+  --color-domain-aut: #0d9488;    /* teal-600 */
+  --color-domain-idn: #0284c7;    /* sky-600 */
+  --color-domain-sil: #4b5563;    /* gray-600 */
 
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 /* ═══ Command Center Grid Overlay (Dark Mode Only) ═══ */
@@ -183,12 +188,9 @@
 }
 
 /* ═══ Base Styles ═══ */
+/* Dark is the site default; the light theme block above sets color-scheme: light. */
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
-}
-
-:root[data-theme="dark"] {
   color-scheme: dark;
 }
 
@@ -222,11 +224,11 @@ button.glass:hover {
 }
 
 .nav-dropdown {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(24, 24, 27, 0.92);
 }
 
-:root[data-theme="dark"] .nav-dropdown {
-  background: rgba(24, 24, 27, 0.92);
+:root[data-theme="light"] .nav-dropdown {
+  background: rgba(255, 255, 255, 0.92);
 }
 
 .glass-subtle {
@@ -274,6 +276,20 @@ code, pre {
 .card-hover:hover {
   transform: translateY(-2px);
   border-color: var(--color-accent-primary);
+}
+
+/* ═══ Hidden-scrollbar overflow track ═══ */
+/* For a horizontally-scrollable strip (tab bars, segmented controls) that must not show a
+   scrollbar while still scrolling on touch and with a trackpad. Global because more than one
+   island needs it (AtlasViewSwitcher's tab row, TaraVisualization's view-mode control) and an
+   Astro component's own <style> block is scoped, so it cannot be shared by a React island. */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* ═══ Gradient Border Utility ═══ */
