@@ -105,13 +105,14 @@ export default function TaraExplorer({ techniques }: Props) {
         }}
       />
 
-      {/* Filter chips */}
+      {/* Primary filter: plain-English severity, always visible. Everything else is jargon
+          (band codes, evidence-status taxonomy, category ids) and lives behind "Advanced filters" below. */}
       <div className="mb-3">
-        <span className="block mb-1.5 text-[11px] font-bold uppercase tracking-wide" style={{ color: 'var(--color-text-muted, #94a3b8)' }}>Neural-impact severity (NISS)</span>
+        <span className="block mb-1.5 text-[11px] font-bold uppercase tracking-wide" style={{ color: 'var(--color-text-muted, #94a3b8)' }}>Severity</span>
         <div className="flex flex-wrap gap-[0.3rem]">
           {SEVERITIES.map(s => (
             <button key={s} onClick={() => setSelSeverity(toggle(selSeverity, s))}
-              className="px-2 py-[0.2rem] text-[11px] rounded-full cursor-pointer transition-all duration-[120ms] font-mono"
+              className="px-2.5 py-1 text-[12px] rounded-full cursor-pointer transition-all duration-[120ms] capitalize"
               style={{
                 border: '1px solid rgba(255,255,255,0.1)',
                 background: selSeverity.has(s) ? SEVERITY_COLORS[s]?.bg : 'rgba(255,255,255,0.04)',
@@ -122,57 +123,68 @@ export default function TaraExplorer({ techniques }: Props) {
         </div>
       </div>
 
-      <div className="mb-3">
-        <span className="block mb-1.5 text-[11px] font-bold uppercase tracking-wide" style={{ color: 'var(--color-text-muted, #94a3b8)' }}>Status</span>
-        <div className="flex flex-wrap gap-[0.3rem]">
-          {STATUSES.map(s => (
-            <button key={s} onClick={() => setSelStatus(toggle(selStatus, s))}
-              className="px-2 py-[0.2rem] text-[11px] rounded-full cursor-pointer transition-all duration-[120ms] font-mono"
-              style={{
-                border: '1px solid rgba(255,255,255,0.1)',
-                background: selStatus.has(s) ? STATUS_COLORS[s]?.bg : 'rgba(255,255,255,0.04)',
-                borderColor: selStatus.has(s) ? 'rgba(255,255,255,0.2)' : undefined,
-                color: selStatus.has(s) ? STATUS_COLORS[s]?.text : 'var(--color-text-muted, #94a3b8)',
-              }}>{s}</button>
-          ))}
-        </div>
-      </div>
-
-      <div className="mb-3">
-        <span className="block mb-1.5 text-[11px] font-bold uppercase tracking-wide" style={{ color: 'var(--color-text-muted, #94a3b8)' }}>Bands</span>
-        <div className="flex flex-wrap gap-[0.3rem]">
-          {BAND_GROUPS.map(g => (
-            <span key={g.zone} className="contents">
-              {g.bands.map(b => (
-                <button key={b} onClick={() => setSelBands(toggle(selBands, b))}
+      <details className="mb-3 group">
+        <summary
+          className="cursor-pointer select-none text-[11px] font-bold uppercase tracking-wide list-none flex items-center gap-1"
+          style={{ color: 'var(--color-text-muted, #94a3b8)' }}
+        >
+          <span className="inline-block transition-transform group-open:rotate-90">&rsaquo;</span>
+          Advanced filters (evidence status, hourglass band, category)
+        </summary>
+        <div className="mt-3 space-y-3">
+          <div>
+            <span className="block mb-1.5 text-[11px] font-bold uppercase tracking-wide" style={{ color: 'var(--color-text-muted, #94a3b8)' }}>Evidence status</span>
+            <div className="flex flex-wrap gap-[0.3rem]">
+              {STATUSES.map(s => (
+                <button key={s} onClick={() => setSelStatus(toggle(selStatus, s))}
                   className="px-2 py-[0.2rem] text-[11px] rounded-full cursor-pointer transition-all duration-[120ms] font-mono"
                   style={{
                     border: '1px solid rgba(255,255,255,0.1)',
-                    background: selBands.has(b) ? `${g.color}22` : 'rgba(255,255,255,0.04)',
-                    borderColor: selBands.has(b) ? `${g.color}55` : undefined,
-                    color: selBands.has(b) ? g.color : 'var(--color-text-muted, #94a3b8)',
-                  }}>{b}</button>
+                    background: selStatus.has(s) ? STATUS_COLORS[s]?.bg : 'rgba(255,255,255,0.04)',
+                    borderColor: selStatus.has(s) ? 'rgba(255,255,255,0.2)' : undefined,
+                    color: selStatus.has(s) ? STATUS_COLORS[s]?.text : 'var(--color-text-muted, #94a3b8)',
+                  }}>{s}</button>
               ))}
-            </span>
-          ))}
-        </div>
-      </div>
+            </div>
+          </div>
 
-      <div className="mb-3">
-        <span className="block mb-1.5 text-[11px] font-bold uppercase tracking-wide" style={{ color: 'var(--color-text-muted, #94a3b8)' }}>Category</span>
-        <div className="flex flex-wrap gap-[0.3rem]">
-          {categories.map(c => (
-            <button key={c.id} onClick={() => setSelCategory(toggle(selCategory, c.id))}
-              className="px-2 py-[0.2rem] text-[11px] rounded-full cursor-pointer transition-all duration-[120ms] font-mono"
-              style={{
-                border: '1px solid rgba(255,255,255,0.1)',
-                background: selCategory.has(c.id) ? 'rgba(59,130,246,0.2)' : 'rgba(255,255,255,0.04)',
-                borderColor: selCategory.has(c.id) ? 'rgba(59,130,246,0.4)' : undefined,
-                color: selCategory.has(c.id) ? '#60a5fa' : 'var(--color-text-muted, #94a3b8)',
-              }}>{c.id}</button>
-          ))}
+          <div>
+            <span className="block mb-1.5 text-[11px] font-bold uppercase tracking-wide" style={{ color: 'var(--color-text-muted, #94a3b8)' }}>QIF hourglass band</span>
+            <div className="flex flex-wrap gap-[0.3rem]">
+              {BAND_GROUPS.map(g => (
+                <span key={g.zone} className="contents">
+                  {g.bands.map(b => (
+                    <button key={b} onClick={() => setSelBands(toggle(selBands, b))}
+                      className="px-2 py-[0.2rem] text-[11px] rounded-full cursor-pointer transition-all duration-[120ms] font-mono"
+                      style={{
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        background: selBands.has(b) ? `${g.color}22` : 'rgba(255,255,255,0.04)',
+                        borderColor: selBands.has(b) ? `${g.color}55` : undefined,
+                        color: selBands.has(b) ? g.color : 'var(--color-text-muted, #94a3b8)',
+                      }}>{b}</button>
+                  ))}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <span className="block mb-1.5 text-[11px] font-bold uppercase tracking-wide" style={{ color: 'var(--color-text-muted, #94a3b8)' }}>Category</span>
+            <div className="flex flex-wrap gap-[0.3rem]">
+              {categories.map(c => (
+                <button key={c.id} onClick={() => setSelCategory(toggle(selCategory, c.id))}
+                  className="px-2 py-[0.2rem] text-[11px] rounded-full cursor-pointer transition-all duration-[120ms] font-mono"
+                  style={{
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    background: selCategory.has(c.id) ? 'rgba(59,130,246,0.2)' : 'rgba(255,255,255,0.04)',
+                    borderColor: selCategory.has(c.id) ? 'rgba(59,130,246,0.4)' : undefined,
+                    color: selCategory.has(c.id) ? '#60a5fa' : 'var(--color-text-muted, #94a3b8)',
+                  }}>{c.id}</button>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      </details>
 
       {/* Results bar */}
       <div className="flex justify-between items-center py-2 text-[13px] mb-1" style={{ color: 'var(--color-text-muted, #94a3b8)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
@@ -185,7 +197,7 @@ export default function TaraExplorer({ techniques }: Props) {
         <table className="w-full text-[13px]" style={{ borderCollapse: 'collapse' }}>
           <thead>
             <tr>
-              {['ID', isClinical ? 'Therapeutic Analog' : isBoth ? 'Technique / Analog' : 'Technique', 'Severity (NISS)', 'Status', 'NISS', 'Bands'].map((h: string) => (
+              {['ID', isClinical ? 'Therapeutic Analog' : isBoth ? 'Technique / Analog' : 'Technique', 'Severity', 'Status', 'NISS', 'Bands'].map((h: string) => (
                 <th key={h} className="px-2.5 py-2 text-left font-bold text-[10px] uppercase tracking-wide whitespace-nowrap"
                   style={{ color: 'var(--color-accent-primary, #60a5fa)', background: 'rgba(0,0,0,0.04)', borderBottom: '2px solid rgba(59,130,246,0.25)' }}>{h}</th>
               ))}

@@ -17,6 +17,8 @@ export interface BrainHeroPanelProps {
   /** Replaceable in tests. In the page they are the real WebGL probe and the real 3D view, fetched only once the gate opens. */
   probe?: AtlasViewportProps['probe'];
   loadOpenView?: AtlasViewportProps['loadOpenView'];
+  /** False for a teaser placement: orbit/zoom stay on, region pick-to-summary is disabled. Defaults to true. */
+  interactive?: boolean;
 }
 
 /**
@@ -25,7 +27,7 @@ export interface BrainHeroPanelProps {
  * and parses them, and hands the model to the hero view. If any of that fails
  * it says which; the page's link to the full atlas is unchanged.
  */
-export default function BrainHeroPanel({ probe, loadOpenView }: BrainHeroPanelProps) {
+export default function BrainHeroPanel({ probe, loadOpenView, interactive = true }: BrainHeroPanelProps) {
   useViewStylesheets(STYLESHEET_URLS);
   const pin = useMemo(() => readIndexPin(), []);
   const load = useCallback((signal: AbortSignal) => loadExplorerModel(signal, pin), [pin]);
@@ -37,5 +39,5 @@ export default function BrainHeroPanel({ probe, loadOpenView }: BrainHeroPanelPr
       </div>
     );
   }
-  return <BrainHeroView model={state.data.model} isIndexPinned={state.data.indexPinState === 'pinned'} isOutOfStep={state.data.indexPinState === 'mismatched'} probe={probe} loadOpenView={loadOpenView} />;
+  return <BrainHeroView model={state.data.model} isIndexPinned={state.data.indexPinState === 'pinned'} isOutOfStep={state.data.indexPinState === 'mismatched'} probe={probe} loadOpenView={loadOpenView} interactive={interactive} />;
 }

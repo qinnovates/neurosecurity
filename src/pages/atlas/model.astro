@@ -8,6 +8,17 @@ import { loadTaraChains } from '@/components/atlas/load-tara-chains';
 // Validates every data file at build time; malformed data stops the build here.
 const { engineData, referenceData } = loadThreatModelData();
 const curatedChains = loadTaraChains();
+
+// Former top-level AtlasViewSwitcher tabs, demoted (2026-10 redesign) rather than
+// deleted: each still has its own page and its own data shape, so it stays
+// reachable here instead of being removed outright.
+const moreViews = [
+  { href: '/atlas/scoring/', label: 'NISS Scoring' },
+  { href: '/atlas/clinical/', label: 'Clinical Mappings' },
+  { href: '/atlas/domains/', label: 'Domain Matrix' },
+  { href: '/atlas/device-filter/', label: 'Device Filter' },
+  { href: '/atlas/anatomy/', label: 'Brain Atlas' },
+];
 ---
 <ToolLayout
   isAppShell
@@ -19,4 +30,30 @@ const curatedChains = loadTaraChains();
   <!-- The anatomy index's path, length and digest, and nothing else of it. The Target regions panel's 3D view reads it when asked for. -->
   <AtlasIndexPin />
   <noscript><p>This tool needs JavaScript. It runs entirely in your browser.</p></noscript>
+
+  <nav class="more-views" aria-label="More advanced views">
+    <span class="more-views-label">More advanced views:</span>
+    {moreViews.map((v) => <a href={v.href}>{v.label}</a>)}
+  </nav>
+
+  <style>
+    .more-views {
+      max-width: 1400px;
+      margin: 2rem auto 3rem;
+      padding: 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+    }
+    .more-views-label { color: var(--color-text-faint); }
+    .more-views a {
+      color: var(--color-text-muted);
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      transition: color 0.15s, text-decoration-color 0.15s;
+    }
+    .more-views a:hover { color: var(--color-accent-primary); text-decoration-color: currentColor; }
+  </style>
 </ToolLayout>

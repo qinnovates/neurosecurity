@@ -14,17 +14,15 @@ interface AtlasTab {
   needsFullPageLoad?: boolean;
 }
 
+// Collapsed from 10 tabs to 3 (2026-10 redesign): Hub and Catalog merged into one
+// page (/atlas/tara/), Explorer retired as a separate destination (folded into the
+// Catalog's own filters), and Scoring/Clinical/Domains/Devices/Brain Atlas/Model
+// demoted to links inside the single "Advanced" page instead of competing, equal-
+// weight top-level tabs with no shared vocabulary.
 const tabs: AtlasTab[] = [
-  { label: 'Hub', href: '/atlas/' },
   { label: 'Catalog', href: '/atlas/tara/' },
-  { label: 'Scoring', href: '/atlas/scoring/' },
-  { label: 'Clinical', href: '/atlas/clinical/' },
-  { label: 'Domains', href: '/atlas/domains/' },
-  { label: 'Explorer', href: '/atlas/explorer/' },
-  { label: 'Brain Atlas', href: '/atlas/anatomy/', needsFullPageLoad: true },
-  { label: 'Devices', href: '/atlas/device-filter/' },
   { label: 'Chains', href: '/atlas/chains/' },
-  { label: 'Model', href: '/atlas/model/', needsFullPageLoad: true },
+  { label: 'Advanced: Visualize & Model', href: '/atlas/model/', needsFullPageLoad: true },
 ];
 
 function isActive(href: string, currentPath: string): boolean {
@@ -102,6 +100,6 @@ function isActive(href: string, currentPath: string): boolean {
     -webkit-mask-image: linear-gradient(to right, black calc(100% - 20px), transparent 100%);
     mask-image: linear-gradient(to right, black calc(100% - 20px), transparent 100%);
   }
-  /* .scrollbar-hide itself now lives in src/styles/global.css: a scoped Astro <style> block
-     can't be shared with the React islands that also need it (TaraVisualization.tsx). */
+  /* .scrollbar-hide itself lives in src/styles/global.css: a scoped Astro <style> block
+     can't be shared with any React island that also needs it. */
 </style>

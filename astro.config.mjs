@@ -72,6 +72,12 @@ export default defineConfig({
     '/research/physics/': '/research/landscape/#physics',
     '/security/': '/framework/',
     '/development/': '/guardrails/',
+
+    // 2026-10 clutter redesign — retire competing "browse the threats" entry points.
+    // /atlas/ was an 8-card nav wall + duplicate hero; /atlas/explorer/ was a second
+    // search+filter table with no cross-link to the catalog at /atlas/tara/.
+    '/atlas/': '/atlas/tara/',
+    '/atlas/explorer/': '/atlas/tara/',
   },
   integrations: [
     react(),

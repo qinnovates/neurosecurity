@@ -1,106 +1,61 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
-import BciKql from '@/components/bci/BciKql';
-import { getKqlTables } from '@/lib/kql-tables';
-import { HOURGLASS_BANDS } from '@/lib/qif-constants';
-import { CATALOG_VERSION, THREAT_CATEGORIES, THREAT_VECTORS, getStatusStats, getNeurorightStats } from '@/lib/threat-data';
-import TaraVisualization from '@/components/TaraVisualization';
+import TaraExplorer from '@/components/atlas/TaraExplorer';
+import { CATALOG_VERSION, THREAT_VECTORS, getStatusStats, getNeurorightStats } from '@/lib/threat-data';
 import { getCatalogCoverage } from '@/lib/purpose-and-limits';
 
-const kqlTables = getKqlTables();
 const coverage = getCatalogCoverage();
 const statusStats = getStatusStats();
 const nrStats = getNeurorightStats();
-const bands = [...HOURGLASS_BANDS];
-const categories = [...THREAT_CATEGORIES];
+
+// 2026-10 redesign: this is now the single primary "browse the threats" page.
+// It replaces the separate /atlas/ hub (8-card nav wall) and /atlas/explorer/
+// (a second, disconnected search+filter table) — both now redirect here.
+// TaraVisualization's own view-mode/sort taxonomy and the inline raw-KQL
+// console are retired from this page: TaraExplorer is the one catalog UI,
+// and query access lives at /data-studio/, which already owns that job.
 ---
 
 <PageLayout
   title="TARA Atlas — Threat Catalog"
   description={`${coverage.total} techniques in a proposed threat catalog for neural-device threat modeling, each with an evidence status.`}
-  breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'TARA' }]}
+  breadcrumbs={[{ label: 'Atlas', href: '/atlas/tara/' }, { label: 'TARA' }]}
   wide={true}
 >
   <AtlasViewSwitcher current="/atlas/tara/" />
-  <div id="tara-command-center" class="min-h-screen -mt-4 pt-4">
-    <div class="max-w-[1400px] mx-auto">
-      <div class="mb-12">
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-16">
-          <div class="max-w-3xl">
-            <div class="flex items-center gap-3 mb-6">
-                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">TARA catalog v{CATALOG_VERSION}</span>
-                <span class="w-1 h-1 rounded-full bg-slate-300"></span>
-                <span class="text-[11px] font-semibold text-amber-500 uppercase tracking-widest">Proposed</span>
-            </div>
-            <h1 class="text-5xl sm:text-7xl font-semibold tracking-tight text-slate-900 mb-6">
-              The TARA Atlas
-            </h1>
-            <p class="text-2xl text-slate-500 font-medium leading-relaxed tracking-tight">
-              {coverage.total} techniques documented for threat modeling, each with an evidence status. {coverage.detected} include detection guidance; {coverage.scored} carry draft NISS scores. <a href="/atlas/tara/coverage-gaps/" class="text-[var(--color-accent-primary)] hover:underline">Entries without detection guidance</a>.
-            </p>
-          </div>
-          
-          <div class="flex flex-col gap-4">
-              <div class="bg-white px-8 py-5 rounded-[2rem] border border-slate-100 shadow-sm min-w-[200px]">
-                  <span class="block text-[11px] text-slate-400 font-semibold mb-1">Total Techniques</span>
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-semibold text-slate-900">{THREAT_VECTORS.length}</span>
-                  </div>
-              </div>
-              <div class="bg-slate-900 px-8 py-5 rounded-[2rem] shadow-xl shadow-slate-900/10 min-w-[200px]">
-                  <span class="block text-[11px] text-slate-500 font-semibold mb-1">Demonstrated or confirmed</span>
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-semibold text-red-500">{statusStats.CONFIRMED + statusStats.DEMONSTRATED}</span>
-                  </div>
-              </div>
-              <div class="bg-purple-50 px-8 py-5 rounded-[2rem] border border-purple-100 shadow-sm min-w-[200px]">
-                  <span class="block text-[11px] text-purple-500 font-semibold mb-1">Neurorights Mapped</span>
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-semibold text-purple-700">{nrStats.withNeurorights}/{THREAT_VECTORS.length}</span>
-                    <span class="text-sm text-purple-400 font-medium">5 rights</span>
-                  </div>
-              </div>
-              <a href="/atlas/chains/" class="group flex items-center justify-between px-8 py-4 rounded-[2rem] border border-slate-100 hover:border-slate-300 transition-colors min-w-[200px]">
-                  <span class="text-sm font-medium text-slate-500 group-hover:text-slate-900 transition-colors">See a technique in a kill chain</span>
-                  <svg class="w-4 h-4 text-slate-400 group-hover:text-slate-900 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-              </a>
-          </div>
+  <div class="min-h-screen -mt-4 pt-4">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-[11px] font-semibold text-[var(--color-text-faint)] uppercase tracking-widest">TARA catalog v{CATALOG_VERSION}</span>
+          <span class="w-1 h-1 rounded-full" style="background: var(--color-text-faint);"></span>
+          <span class="text-[11px] font-semibold text-amber-500 uppercase tracking-widest">Proposed</span>
         </div>
+        <h1 class="text-4xl sm:text-5xl font-semibold tracking-tight mb-4" style="color: var(--color-text-primary);">
+          The TARA Atlas
+        </h1>
+        <p class="text-lg text-[var(--color-text-muted)] leading-relaxed max-w-2xl mb-6">
+          {coverage.total} techniques, each with an evidence status. {coverage.detected} include detection guidance; {coverage.scored} carry draft NISS scores.
+        </p>
+        <div class="flex flex-wrap gap-6 text-sm text-[var(--color-text-muted)]">
+          <span><strong style="color: var(--color-text-primary);">{statusStats.CONFIRMED + statusStats.DEMONSTRATED}</strong> demonstrated or confirmed</span>
+          <span><strong style="color: var(--color-text-primary);">{nrStats.withNeurorights}/{THREAT_VECTORS.length}</strong> mapped to a neurorights (of 5)</span>
+          <a href="/atlas/chains/" class="text-[var(--color-accent-primary)] hover:underline">See a technique in a kill chain &rarr;</a>
+          <a href="/atlas/tara/coverage-gaps/" class="text-[var(--color-accent-primary)] hover:underline">Entries without detection guidance &rarr;</a>
+        </div>
+      </div>
 
-        <div class="mt-8">
-          <TaraVisualization 
-            client:only="react" 
-            threats={THREAT_VECTORS} 
-            categories={categories} 
-            bands={bands} 
-          />
-        </div>
+      <TaraExplorer client:load techniques={THREAT_VECTORS} />
 
-        <!-- KQL Query Engine -->
-        <div class="mt-16">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="flex-1 h-px" style="background: var(--color-border);" />
-            <span class="text-[10px] uppercase tracking-[0.12em] font-mono" style="color: var(--color-text-faint);">Query Engine</span>
-            <div class="flex-1 h-px" style="background: var(--color-border);" />
-          </div>
-          <BciKql client:only="react" tables={{}} />
-        </div>
-
-        <div class="mt-32 pt-16 border-t border-slate-100 max-w-5xl">
-            <h2 class="text-3xl font-semibold tracking-tight text-slate-900 mb-6">API & Adoption</h2>
-            <p class="text-lg text-slate-500 font-medium leading-relaxed mb-8">
-                The TARA Atlas is designed to be integrated into security platforms, research pipelines, and BCI firmware. Use the STIX 2.1 feed or the raw JSON endpoints. (The qtara Python SDK is deprecated.)
-            </p>
-            <a href="/research/api/" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors">
-                APIs, Feeds & SDKs
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-            </a>
-        </div>
+      <div class="mt-16 pt-10 border-t max-w-3xl" style="border-color: var(--color-border);">
+        <h2 class="text-xl font-semibold mb-3" style="color: var(--color-text-primary);">API & Adoption</h2>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+          This catalog is designed to be integrated into security platforms, research pipelines, and BCI firmware. Use the STIX 2.1 feed or the raw JSON endpoints. (The qtara Python SDK is deprecated.) To query the full dataset directly, use <a href="/data-studio/" class="text-[var(--color-accent-primary)] hover:underline">Data Studio</a>.
+        </p>
+        <a href="/research/api/" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium" style="background: var(--color-accent-fill); color: #fff;">
+          APIs, Feeds & SDKs &rarr;
+        </a>
       </div>
     </div>
   </div>

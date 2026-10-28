@@ -9,7 +9,6 @@
  * Architecture:
  *   shared/*.json  →  kql-tables.ts (build time)  →  BciKql.tsx (browser)
  *                                                  →  ClinicalDashboard.tsx
- *                                                  →  AtlasDashboard.tsx
  *                                                  →  data-lake.astro
  */
 

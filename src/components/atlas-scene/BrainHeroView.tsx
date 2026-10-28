@@ -14,7 +14,11 @@ interface Props {
   isOutOfStep: boolean;
   probe?: AtlasViewportProps['probe'];
   loadOpenView?: AtlasViewportProps['loadOpenView'];
+  /** False for a teaser placement (e.g. the homepage hero): orbit/zoom stay on, region pick-to-summary is disabled. Defaults to true. */
+  interactive?: boolean;
 }
+
+const IGNORE_SELECTION = () => {};
 
 /** The hero colours each region by the highest NISS step among the techniques linked to it: the catalog's own subject, not a grouping. */
 export const HERO_LENS: Lens = { kind: 'niss' };
@@ -31,7 +35,7 @@ export const HERO_LAYERS: Readonly<Record<LayerId, boolean>> = { ...INITIAL_EXPL
  * view's own probe, so a browser that cannot draw gets the region list in the
  * picture's place and never waits on a view that would only say no.
  */
-export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe = probeWebGL, loadOpenView }: Props) {
+export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe = probeWebGL, loadOpenView, interactive = true }: Props) {
   const [selectedRegionId, setSelectedRegionId] = useState<string | null>(null);
   const gate = useMemo(() => decideGate(isIndexPinned, globalThis.crypto?.subtle !== undefined, probe, isOutOfStep), [isIndexPinned, isOutOfStep, probe]);
   if (gate !== 'open') {
@@ -43,12 +47,12 @@ export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe
     );
   }
   return (
-    <div className="atlas-root brain-hero" data-brain-hero="open">
+    <div className="atlas-root brain-hero" data-brain-hero="open" data-interactive={interactive}>
       <AtlasViewport
         model={model} lens={HERO_LENS} layers={HERO_LAYERS} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep} isAsked
-        onSelectRegion={setSelectedRegionId} probe={probe} loadOpenView={loadOpenView}
+        onSelectRegion={interactive ? setSelectedRegionId : IGNORE_SELECTION} probe={probe} loadOpenView={loadOpenView}
       />
-      <BrainHeroSummary model={model} regionId={selectedRegionId} />
+      {interactive && <BrainHeroSummary model={model} regionId={selectedRegionId} />}
     </div>
   );
 }

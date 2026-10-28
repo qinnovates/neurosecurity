@@ -126,7 +126,6 @@ export const TOOL_PAGES = [
  * @type {readonly { urlPath: string, interactionGatedEntryNames: readonly string[] }[]}
  */
 export const REGION_VIEW_PAGES = [
-  { urlPath: '/atlas/', interactionGatedEntryNames: ['RegionViewPanel'] },
   { urlPath: '/atlas/clinical/', interactionGatedEntryNames: ['RegionViewPanel'] },
   { urlPath: '/atlas/tara/QIF-T0001/', interactionGatedEntryNames: ['RegionViewPanel'] },
 ];

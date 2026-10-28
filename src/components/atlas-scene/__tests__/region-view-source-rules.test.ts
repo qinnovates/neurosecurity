@@ -11,7 +11,6 @@ const MOUNTS = [
   { page: 'src/pages/atlas/model.astro', host: 'src/components/threat-model/TargetRegionsPanel.tsx', builtPath: '/atlas/model/' },
   { page: 'src/pages/atlas/tara/[id].astro', host: 'src/components/brain/BandViewPanel.tsx', builtPath: '/atlas/tara/QIF-T0001/' },
   { page: 'src/pages/atlas/clinical.astro', host: 'src/components/atlas/brainmap/RegionPicker.tsx', builtPath: '/atlas/clinical/' },
-  { page: 'src/pages/atlas/index.astro', host: 'src/components/brain/BandViewPanel.tsx', builtPath: '/atlas/' },
 ];
 const SOURCE_EXTENSIONS = ['.astro', '.ts', '.tsx'];
 /** three.js, the canvas chunk's modules, and the two lazy chunks that lead to them. A page or a host may name none of them in a static import. */
@@ -80,7 +79,7 @@ describe('the 3D view on other pages: what may import what', () => {
     expect(page).toContain("import BrainHeroMount from '@/components/atlas-scene/BrainHeroMount';");
     expect(page).toContain("import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';");
     expect(page.match(/<AtlasIndexPin \/>/g)).toHaveLength(1);
-    expect(page.match(/<BrainHeroMount client:load \/>/g)).toHaveLength(1);
+    expect(page.match(/<BrainHeroMount client:load interactive=\{false\} \/>/g)).toHaveLength(1);
     const mount = read(path.join(SCENE_DIRECTORY, 'BrainHeroMount.tsx'));
     expect(mount).toContain("import('./BrainHeroPanel')");
     expect(STATIC_HEAVY_IMPORT.test(mount)).toBe(false);
