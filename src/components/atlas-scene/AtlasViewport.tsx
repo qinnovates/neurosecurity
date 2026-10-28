@@ -5,6 +5,7 @@ import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import type { Lens } from '@/lib/atlas-explorer/lens-state';
 import type { ViewportCaption } from '@/lib/atlas-explorer/viewport-caption';
 import type { OpenViewportProps } from './OpenViewport';
+import type { LensWays } from './ViewportStage';
 import { GATE_NOTICES, decideGate, probeWebGL, type GateState } from './viewport-gate';
 
 type OpenViewModule = { default: ComponentType<OpenViewportProps> };
@@ -24,6 +25,10 @@ export interface AtlasViewportProps {
   electrodeId?: string | null;
   onPickElectrode?: (electrodeId: string) => void;
   onSelectRegion: (regionId: string) => void;
+  /** Takes the visitor to the selected region's details. Absent on a page that keeps them elsewhere. */
+  onShowDetails?: () => void;
+  /** The ways out of the current lens, offered under the picture. Absent on a page whose lens is fixed. */
+  lensWays?: LensWays | null;
   /** Regions the visitor chose on an embedding page, in groups bracketed as one. Marked, never filled. */
   selectedRegionGroups?: ReadonlyArray<readonly string[]>;
   /** The visitor already asked for the view with the embedding page's own control, so it starts decided, not closed. */
@@ -36,6 +41,8 @@ export interface AtlasViewportProps {
 }
 
 const BYTES_PER_MEGABYTE = 1_000_000;
+/** The heading "Back to the 3D view" returns focus to, from the region's details. */
+export const VIEWPORT_HEADING_ID = 'atlas-viewport-heading';
 const IGNORE_ELECTRODE = (): void => undefined;
 const NO_GROUPS: ReadonlyArray<readonly string[]> = [];
 const loadRealOpenView = (): Promise<OpenViewModule> => import('./OpenViewport');
@@ -55,7 +62,7 @@ function sumRequestedBytes(model: ExplorerModel, layers: Readonly<Record<LayerId
  * facts are.
  */
 export default function AtlasViewport(props: AtlasViewportProps) {
-  const { model, lens, layers, selectedRegionId, isIndexPinned, isOutOfStep = false, chain = null, electrodeId = null, onPickElectrode = IGNORE_ELECTRODE, onSelectRegion, selectedRegionGroups = NO_GROUPS, isAsked = false, onCaptionChange, probe = probeWebGL, loadOpenView = loadRealOpenView } = props;
+  const { model, lens, layers, selectedRegionId, isIndexPinned, isOutOfStep = false, chain = null, electrodeId = null, onPickElectrode = IGNORE_ELECTRODE, onSelectRegion, onShowDetails, lensWays = null, selectedRegionGroups = NO_GROUPS, isAsked = false, onCaptionChange, probe = probeWebGL, loadOpenView = loadRealOpenView } = props;
   const decide = (): GateState => decideGate(isIndexPinned, globalThis.crypto?.subtle !== undefined, probe, isOutOfStep);
   const [gate, setGate] = useState<GateState>(() => (isAsked ? decide() : 'closed'));
   const [run, setRun] = useState(0);
@@ -78,7 +85,7 @@ export default function AtlasViewport(props: AtlasViewportProps) {
 
   return (
     <section className="atlas-panel atlas-viewport" aria-labelledby="atlas-viewport-heading" data-gate={gate}>
-      <h2 className="atlas-heading" id="atlas-viewport-heading">3D view</h2>
+      <h2 className="atlas-heading" id={VIEWPORT_HEADING_ID} tabIndex={-1}>3D view</h2>
       {gate !== 'closed' && gate !== 'open' && <p className="atlas-failure" role="alert" data-gate-notice={gate}>{GATE_NOTICES[gate]}</p>}
       {(gate === 'closed' || gate === 'context_lost') && (
         <>
@@ -91,7 +98,7 @@ export default function AtlasViewport(props: AtlasViewportProps) {
           <OpenView
             key={run} model={model} lens={lens} layers={layers} selectedRegionId={selectedRegionId} onSelectRegion={onSelectRegion}
             chain={chain} electrodeId={electrodeId} onPickElectrode={onPickElectrode} selectedRegionGroups={selectedRegionGroups}
-            onClose={hide} onStopped={setGate} onCaption={onCaptionChange}
+            onClose={hide} onShowDetails={onShowDetails} lensWays={lensWays} onStopped={setGate} onCaption={onCaptionChange}
           />
         </Suspense>
       )}

@@ -146,6 +146,27 @@ describe('createSceneRenderer', () => {
     expect(three.pickTargets.map((target) => (target as { userData: { structureKey: string } }).userData.structureKey)).not.toContain(SHAPES[0].structureKey);
   });
 
+  it('lifts the shape under the pointer, shows a pick cursor, and puts both back when the pointer leaves', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
+    renderer.setShapes(SHAPES, NODES, new Set());
+    const [, pale] = SHAPES;
+    three.hits = [{ distance: 10, point: {}, object: { userData: { structureKey: pale.structureKey, fill: 'translucent', isSelected: false } } }];
+    canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 20, clientY: 20 }));
+    runFrames(1);
+    const target = (three.pickTargets as Array<{ userData: { structureKey: string }; material: { opacity?: number; transparent?: boolean } }>).find((entry) => entry.userData.structureKey === pale.structureKey);
+    expect(callbacks.onHover).toHaveBeenLastCalledWith(pale.structureKey);
+    expect(canvas.getAttribute('data-pick')).toBe('shape');
+    expect(target?.material.opacity).toBe(0.7);
+    expect(target?.material.transparent).toBe(true);
+    three.hits = [];
+    canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 200, clientY: 200 }));
+    runFrames(1);
+    expect(callbacks.onHover).toHaveBeenLastCalledWith(null);
+    expect(canvas.hasAttribute('data-pick')).toBe(false);
+    // The stand-in material never had an opacity of its own, so putting it back leaves none.
+    expect(target?.material.opacity).toBeUndefined();
+  });
+
   it('does not pick through an open cut, and treats a drag as a drag', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set());

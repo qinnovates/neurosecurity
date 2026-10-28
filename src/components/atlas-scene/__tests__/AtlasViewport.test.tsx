@@ -236,6 +236,43 @@ describe('AtlasViewport: open', () => {
     expect(canvasProps?.focusMm?.every((value) => Number.isFinite(value))).toBe(true);
   });
 
+  it('names the selection in the picture and beside it, and offers the way to its details where the page has them', async () => {
+    const regionId = resolvePick(model, ownShapeKey)?.selectedRegionId ?? '';
+    const regionName = model.regionsById.get(regionId)?.name ?? '';
+    const onShowDetails = vi.fn();
+    const container = await openViewport({ selectedRegionId: regionId, onShowDetails });
+    expect(canvasProps?.selectionLabel).toBe(regionName);
+    const row = container.querySelector('[data-picture-selected]');
+    expect(row?.getAttribute('data-picture-selected')).toBe(regionName);
+    expect(container.querySelector('figure')?.contains(row)).toBe(true);
+    fireEvent.click(within(row as HTMLElement).getByRole('button', { name: 'See its details' }));
+    expect(onShowDetails).toHaveBeenCalledTimes(1);
+    expect(screen.getByText(/corner marks with a name above them: selected/)).not.toBeNull();
+  });
+
+  it('names a picked shape above its brackets when the pick selects no region, and says nothing beside the picture', async () => {
+    const container = await openViewport();
+    expect(container.querySelector('[data-picture-selected]')).toBeNull();
+    canvasProps?.onPick(sharedShapeKey);
+    await waitFor(() => expect(canvasProps?.selectionLabel).toBe(resolvePick(model, sharedShapeKey)?.label));
+    expect(container.querySelector('[data-picture-selected]')).toBeNull();
+    expect(container.querySelector('button[name="See its details"]')).toBeNull();
+  });
+
+  it('offers the ways out of the lens under the picture, as real buttons, and nothing when there is none', async () => {
+    const onChoose = vi.fn();
+    const onBack = vi.fn();
+    const container = await openViewport({ lens: { kind: 'technique', techniqueId: 'QIF-T0001' }, lensWays: { choose: { label: 'Choose another technique', onChoose }, back: { label: 'Back to the Band lens', onBack } } });
+    const row = container.querySelector('[data-picture-lens]') as HTMLElement;
+    expect(container.querySelector('figure')?.contains(row)).toBe(true);
+    fireEvent.click(within(row).getByRole('button', { name: 'Choose another technique' }));
+    fireEvent.click(within(row).getByRole('button', { name: 'Back to the Band lens' }));
+    expect([onChoose.mock.calls.length, onBack.mock.calls.length]).toEqual([1, 1]);
+    cleanup();
+    const bare = await openViewport({ lensWays: { choose: null, back: null } });
+    expect(bare.querySelector('[data-picture-lens]')).toBeNull();
+  });
+
   it('names every view in one menu, moves the camera to the chosen one, and says which it is on', async () => {
     const container = await openViewport();
     const menu = screen.getByRole('combobox', { name: 'View' }) as HTMLSelectElement;

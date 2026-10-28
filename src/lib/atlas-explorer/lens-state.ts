@@ -24,6 +24,18 @@ export const LENS_LABELS: Readonly<Record<LensKind, string>> = {
   stated_targets: 'Device',
 };
 
+/** What each lens colours by, in one line under the lens bar, so a visitor knows what a choice shows before reading its limits. */
+export const LENS_DESCRIPTIONS: Readonly<Record<LensKind, string>> = {
+  band: 'Colours each region by the QIF band it is grouped under.',
+  technique: 'Colours the regions an AI linked to one technique. Choose the technique below.',
+  niss: 'Colours each region by the highest NISS step among the techniques an AI linked to it.',
+  dsm: 'Colours the regions whose linked techniques carry one DSM cluster tag. Choose the tag below.',
+  stated_targets: 'Colours the regions that one device\'s QIF record lists. Choose the device below.',
+};
+
+/** The singular noun of what a lens is about, for the lenses that take a subject. */
+export const LENS_SUBJECT_NOUNS: Readonly<Partial<Record<LensKind, string>>> = { technique: 'technique', dsm: 'cluster tag', stated_targets: 'device' };
+
 export const DEFAULT_LENS: Lens = { kind: 'band' };
 
 /** A lens of this kind with no subject chosen yet. */

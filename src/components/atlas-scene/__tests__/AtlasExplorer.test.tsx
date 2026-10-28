@@ -136,6 +136,36 @@ describe('AtlasExplorer: the list', () => {
     expect(document.activeElement).toBe(rowOf(container, 'hippocampus'));
   });
 
+  it('returns from the details to the 3D view\'s heading, brought to the top of the screen', async () => {
+    const scrolled = vi.fn();
+    window.HTMLElement.prototype.scrollIntoView = scrolled;
+    const container = await renderExplorer();
+    pressEnterOn(rowOf(container, 'hippocampus'));
+    await waitFor(() => expect(document.activeElement?.id).toBe('atlas-inspector-heading'));
+    fireEvent.click(screen.getByRole('button', { name: 'Back to the 3D view' }));
+    expect(document.activeElement?.id).toBe('atlas-viewport-heading');
+    expect(document.activeElement?.textContent).toBe('3D view');
+    expect(scrolled).toHaveBeenLastCalledWith({ block: 'start' });
+  });
+
+  it('lands a technique chosen from the details on the lens panel while the picture is closed, and offers the way back to the band lens', async () => {
+    const scrolled = vi.fn();
+    window.HTMLElement.prototype.scrollIntoView = scrolled;
+    const container = await renderExplorer();
+    pressEnterOn(rowOf(container, 'hippocampus'));
+    await waitFor(() => expect(document.activeElement?.id).toBe('atlas-inspector-heading'));
+    const technique = panelOf('Hippocampus').querySelector<HTMLButtonElement>('.atlas-techniques .atlas-link-button');
+    if (technique === null) throw new Error('No linked technique to drill into.');
+    fireEvent.click(technique);
+    await waitFor(() => expect(container.querySelector('.atlas-root')?.getAttribute('data-lens')).toBe('technique'));
+    expect(document.activeElement?.id).toBe('atlas-lens-heading');
+    expect(scrolled).toHaveBeenLastCalledWith({ block: 'start' });
+    expect(screen.getByRole('heading', { level: 2, name: 'Hippocampus' })).not.toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Back to the Band lens' }));
+    await waitFor(() => expect(container.querySelector('.atlas-root')?.getAttribute('data-lens')).toBe('band'));
+    expect(screen.queryByRole('button', { name: /^Back to the .* lens$/ })).toBeNull();
+  });
+
   it('moves focus and the view to the details when a row is tapped on a narrow, stacked screen', async () => {
     vi.stubGlobal('matchMedia', (query: string) => ({ matches: query === '(max-width: 960px)', addEventListener: () => undefined, removeEventListener: () => undefined }));
     const scrolled = vi.fn();
