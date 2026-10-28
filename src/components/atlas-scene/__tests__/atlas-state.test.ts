@@ -33,6 +33,19 @@ describe('explorerReducer', () => {
     expect(apply([{ type: 'lens_subject_chosen', kind: 'stated_targets', subjectId: 'device-a' }]).lens).toEqual({ kind: 'stated_targets', deviceId: 'device-a' });
   });
 
+  it('remembers the lens a change of kind replaced, keeps it through subject changes, and restores it once', () => {
+    expect(INITIAL_EXPLORER_STATE.previousLens).toBeNull();
+    const onTechnique = apply([{ type: 'lens_kind_chosen', kind: 'technique' }, { type: 'lens_subject_chosen', kind: 'technique', subjectId: 'QIF-T0001' }, { type: 'lens_subject_chosen', kind: 'technique', subjectId: 'QIF-T0002' }]);
+    expect(onTechnique).toMatchObject({ lens: { kind: 'technique', techniqueId: 'QIF-T0002' }, previousLens: { kind: 'band' } });
+    // A subject chosen straight from another kind (a technique chip under the band lens) remembers that kind too.
+    expect(apply([{ type: 'lens_subject_chosen', kind: 'stated_targets', subjectId: 'device-a' }]).previousLens).toEqual({ kind: 'band' });
+    const restored = explorerReducer(onTechnique, { type: 'lens_restored' });
+    expect(restored).toMatchObject({ lens: { kind: 'band' }, previousLens: null });
+    expect(explorerReducer(restored, { type: 'lens_restored' })).toBe(restored);
+    // Going on to a third kind remembers the second, not the first.
+    expect(explorerReducer(onTechnique, { type: 'lens_kind_chosen', kind: 'niss' }).previousLens).toEqual(onTechnique.lens);
+  });
+
   it('clears the filter only when asked, and closes a rail stage toggled twice', () => {
     const state = apply([{ type: 'target_selected', target: REGION }, { type: 'filter_changed', filter: { onlyWithData: true } }, { type: 'rail_stage_toggled', stageId: 'I0' }]);
     expect(explorerReducer(state, { type: 'filter_cleared' }).selection).toEqual(REGION);
