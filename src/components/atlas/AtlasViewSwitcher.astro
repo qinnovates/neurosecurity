@@ -78,12 +78,11 @@ function isActive(href: string, currentPath: string): boolean {
 
 <style>
   .atlas-tab--active {
-    /* Dark theme's --color-accent-primary (#7f66ff) only reaches 4.0:1 against white text,
-       below the WCAG AA 4.5:1 minimum for 12px text (axe-core: color-contrast, serious).
-       Darkened locally (not via the shared --color-accent-primary token, to avoid changing
-       every other accent-colored element) to ~5.8:1. Light theme's accent (#4c33b8) already
-       clears 8.5:1 and is unaffected. */
-    background: color-mix(in srgb, var(--color-accent-primary) 80%, black);
+    /* White text sits on this tab, so it takes the fill token, not the link accent: the dark
+       accent (cyan) reads at 1.5:1 under white text, far below the WCAG AA 4.5:1 minimum for
+       12px text (axe-core: color-contrast, serious). --color-accent-fill is kept white-text
+       safe in both themes (dark 5.2:1, light 8.5:1). */
+    background: var(--color-accent-fill);
     color: #fff;
     box-shadow: 0 1px 6px color-mix(in srgb, var(--color-accent-primary) 30%, transparent);
   }

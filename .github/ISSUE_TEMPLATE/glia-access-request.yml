@@ -1,0 +1,41 @@
+name: Request Glia access
+description: Ask about access to Glia, the full neurosecurity console this site previews a slice of.
+title: "[Glia access] "
+labels: ["glia-access-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This site shows a slice of what Glia's console can do (the 3D atlas, TARA threat
+        catalog, NISS scoring). Glia itself isn't public yet. Tell us a bit about what
+        you're trying to do and we'll follow up here.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      placeholder: How should we address you?
+    validations:
+      required: true
+  - type: input
+    id: affiliation
+    attributes:
+      label: Affiliation (optional)
+      placeholder: Lab, company, or project -- if any
+    validations:
+      required: false
+  - type: textarea
+    id: use-case
+    attributes:
+      label: What are you trying to do?
+      description: A sentence or two is plenty -- research, security review, product evaluation, something else.
+      placeholder: e.g. "Evaluating BCI device security posture for a lab deployment."
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: Best way to reach you
+      description: An email or another way to follow up, if you'd rather not rely on GitHub notifications.
+      placeholder: your@email.example (optional -- we can also just reply here)
+    validations:
+      required: false

@@ -66,7 +66,8 @@ export default function BciVisionToggle() {
 
     setIsOn(next);
     localStorage.setItem('bci-vision', next ? 'on' : 'off');
-    document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light');
+    // Vision forces dark; leaving it restores the stored theme, else the dark default (same resolution as BaseLayout).
+    document.documentElement.setAttribute('data-theme', next ? 'dark' : (localStorage.getItem('theme') || 'dark'));
     document.documentElement.setAttribute('data-vision', next ? 'on' : 'off');
 
     // Delay navigation to allow triple-click detection
