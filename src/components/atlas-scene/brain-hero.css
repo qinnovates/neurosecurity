@@ -21,8 +21,17 @@
 .brain-hero .atlas-viewport-side .atlas-legend { margin-top: 0.5rem; }
 .brain-hero .atlas-viewport-side .atlas-button, .brain-hero .atlas-viewport-side .atlas-toggle, .brain-hero .atlas-viewport-side .atlas-input, .brain-hero .atlas-viewport-side .atlas-proxy { font-size: 0.8125rem; }
 
-/* The card: a few facts and one way on. Its heading is the region's name; its button is the hero's one primary action. */
-.brain-hero-card, .brain-hero-regions { padding: 1rem 1.125rem; background: var(--atlas-panel); border: 1px solid var(--color-glass-border); border-radius: 0.875rem; font-size: 0.875rem; line-height: 1.5; }
+/*
+ * The card: a few facts and one way on. Its heading is the region's name; its button is the hero's one primary action.
+ * Unlike atlas-scene.css's own flat panels, this one floats directly over the moving 3D picture, so it is the one
+ * surface on the page that earns a real glass treatment: more translucent than --atlas-panel's 92% opacity, with an
+ * actual blur so the brain reads through it rather than a hairline rectangle sitting on top of the canvas.
+ */
+.brain-hero-card, .brain-hero-regions {
+  padding: 1rem 1.125rem; background: color-mix(in srgb, var(--atlas-panel) 70%, transparent);
+  backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--color-glass-border); border-radius: 0.875rem; font-size: 0.875rem; line-height: 1.5;
+}
 .brain-hero-card[data-hero-card="selected"] { border-left: 3px solid var(--atlas-selection); animation: atlas-fade var(--atlas-move) var(--atlas-ease) both; }
 .brain-hero-card-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem 0.625rem; margin: 0 0 0.5rem; font-family: var(--font-heading, inherit); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; color: var(--atlas-ink); }
 .brain-hero-card-text { margin: 0 0 0.75rem; color: var(--atlas-ink-soft); }

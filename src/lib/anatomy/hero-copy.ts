@@ -15,7 +15,11 @@ export const HERO_COPY = {
   selected_bands: 'QIF band',
   selected_links: 'Techniques linked',
   /** How many drafted links reach the region, and how many of them pass the index's checks and so count in the picture. */
-  selected_links_value: (lit: number, drafted: number): string => `${drafted} drafted, ${lit} ${lit === 1 ? 'counts' : 'count'} under the current checks`,
+  selected_links_value: (lit: number, drafted: number): string => {
+    if (drafted === 0) return 'No linked techniques yet.';
+    if (lit === drafted) return `${drafted} technique${drafted === 1 ? '' : 's'} linked.`;
+    return `${drafted} technique${drafted === 1 ? '' : 's'} linked, ${lit} shown under the current lens.`;
+  },
   selected_announcement: (name: string): string => `Selected: ${name}. Its summary is beside the picture.`,
   see_details: 'See its details',
   fallback_title: 'The regions in the atlas',
