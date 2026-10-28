@@ -1,5 +1,6 @@
 ---
 import Search from 'astro-pagefind/components/Search';
+import RequestAccessCta from './RequestAccessCta.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import { TARA_TECHNIQUES } from '../lib/qif-constants';
 
@@ -202,6 +203,11 @@ const navSections: NavSection[] = [
           Whitepaper
         </a>
 
+        <!-- The one way in to Glia from the public site -->
+        <div class="hidden lg:block">
+          <RequestAccessCta compact />
+        </div>
+
         <!-- GitHub link -->
         <a
           href="https://github.com/qinnovates/neurosecurity"
@@ -315,6 +321,9 @@ const navSections: NavSection[] = [
           </div>
         </div>
       ))}
+      <div class="px-3 pt-2 mt-2 border-t border-[var(--color-border)]">
+        <RequestAccessCta compact />
+      </div>
     </div>
   </div>
 </nav>
