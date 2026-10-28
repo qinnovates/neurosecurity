@@ -45,14 +45,28 @@ export const DOCUMENT_HEADROOM_GZIP_BYTES = 16_384;
  * the modules this page shares with those mounts (the gate, the model loader, the limit sentences) are now chunks of
  * their own, and several small files compress worse than one; the limit table gained five sentences for the mounts,
  * and it loads here whole; the gate gained two props. Nothing was moved off this page and no sentence was shortened.
+ *
+ * Re-pinned again, from 136_472 to 155_481 (the full 8_192 code headroom restored) by three merged slices this
+ * check never ran against: T-140's navigation and lens work (selection labels and hover-lift in the 3D view, a
+ * lens-description line, the HighlightPicker replacing the old subject picker for techniques and devices, "back
+ * to the list"/"back to the 3D view" navigation) and T-186 (NissVectorRadar and NeurorightsRadar mounted in the
+ * region inspector's coverage seam, previously an empty div). `npm run check:post-build` could not run on any of
+ * it until now -- a Node-version mismatch (`node-version: 22` resolving to 22.23.3 against Astro's `>=22.23.4`
+ * requirement) broke every build on this branch and on main since before these landed, so none of them were
+ * measured against this budget until the build itself was fixed. All three are real, shipped UI; none of the
+ * growth is this session's own homepage hero (a separate page, its own lazy chunk, not loaded here).
  */
-export const ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES = 136_472;
+export const ATLAS_EXPLORER_CODE_BASELINE_GZIP_BYTES = 155_481;
 
 /**
  * Document: the explorer's HTML carries no data at all (it fetches everything when it starts),
  * so it is only the layout. The headroom is small on purpose: growth here means something was inlined.
+ *
+ * Re-pinned from 3_513 to 5_317 (the full 1_024 headroom restored) for the same reason and at the same time as
+ * the code budget above: the lens-description sentences and the inspector's two new navigation buttons are
+ * rendered in the explorer's own markup, not fetched, so they count here too.
  */
-export const ATLAS_EXPLORER_DOCUMENT_BASELINE_GZIP_BYTES = 3_513;
+export const ATLAS_EXPLORER_DOCUMENT_BASELINE_GZIP_BYTES = 5_317;
 export const ATLAS_EXPLORER_DOCUMENT_HEADROOM_GZIP_BYTES = 1_024;
 
 /**
