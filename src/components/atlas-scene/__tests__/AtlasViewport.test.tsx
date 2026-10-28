@@ -259,6 +259,20 @@ describe('AtlasViewport: open', () => {
     expect(container.querySelector('button[name="See its details"]')).toBeNull();
   });
 
+  it('offers the ways out of the lens under the picture, as real buttons, and nothing when there is none', async () => {
+    const onChoose = vi.fn();
+    const onBack = vi.fn();
+    const container = await openViewport({ lens: { kind: 'technique', techniqueId: 'QIF-T0001' }, lensWays: { choose: { label: 'Choose another technique', onChoose }, back: { label: 'Back to the Band lens', onBack } } });
+    const row = container.querySelector('[data-picture-lens]') as HTMLElement;
+    expect(container.querySelector('figure')?.contains(row)).toBe(true);
+    fireEvent.click(within(row).getByRole('button', { name: 'Choose another technique' }));
+    fireEvent.click(within(row).getByRole('button', { name: 'Back to the Band lens' }));
+    expect([onChoose.mock.calls.length, onBack.mock.calls.length]).toEqual([1, 1]);
+    cleanup();
+    const bare = await openViewport({ lensWays: { choose: null, back: null } });
+    expect(bare.querySelector('[data-picture-lens]')).toBeNull();
+  });
+
   it('names every view in one menu, moves the camera to the chosen one, and says which it is on', async () => {
     const container = await openViewport();
     const menu = screen.getByRole('combobox', { name: 'View' }) as HTMLSelectElement;

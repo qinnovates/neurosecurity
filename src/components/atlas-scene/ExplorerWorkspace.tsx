@@ -5,20 +5,22 @@ import { announceLens, announceSelection } from '@/lib/atlas-explorer/announceme
 import { stageStepNumbers } from '@/lib/atlas-explorer/chain-steps';
 import { isDevicesLayerShown, layersAtStart } from '@/lib/atlas-explorer/devices-layer';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
-import { LENS_LABELS, type LensKind } from '@/lib/atlas-explorer/lens-state';
+import { LENS_LABELS, LENS_SUBJECT_NOUNS, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE, explorerReducer } from './atlas-state';
 import AtlasViewport, { VIEWPORT_HEADING_ID } from './AtlasViewport';
 import ChainView from './ChainView';
 import { loadAnatomyEvidence, loadRegionEvidence } from './explorer-companions';
 import H01Card from './H01Card';
 import LayerPanel from './LayerPanel';
-import LensPanel from './LensPanel';
+import LensPanel, { LENS_HEADING_ID, restoreLensLabel } from './LensPanel';
 import LimitsPanel from './LimitsPanel';
 import NetworkNames from './NetworkNames';
 import { buildAtlasCoverage, buildRegionCoverage, describeCoverage } from './region-coverage';
 import RegionInspector from './RegionInspector';
 import SignalChainRail from './SignalChainRail';
 import StructureList from './StructureList';
+import type { LensWays } from './ViewportStage';
+import type { ViewportCaption } from '@/lib/atlas-explorer/viewport-caption';
 import { useChainView } from './use-chain-view';
 import { useExplorerViews } from './use-explorer-views';
 import { useLoaded } from './use-loaded';
@@ -70,6 +72,10 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
   // The layers that start on follow the data: the electrode layout is off unless the index says it is shown by default.
   const [state, dispatch] = useReducer(explorerReducer, model.index, (index) => ({ ...INITIAL_EXPLORER_STATE, layers: layersAtStart(index, INITIAL_EXPLORER_STATE.layers) }));
   const [electrodeId, setElectrodeId] = useState<string | null>(null);
+  /** Whether the 3D picture is open: the caption exists only while it is. Decides where a drill-down from the details lands. */
+  const [isPictureOpen, setPictureOpen] = useState(false);
+  // Stable, so the open view's caption effect does not re-run on every render of the workspace.
+  const noteCaption = useCallback((caption: ViewportCaption | null) => setPictureOpen(caption !== null), []);
   const chainView = useChainView(model, useMemo(() => readPrefersLessMotion(), []));
   const stepNumbersByStage = useMemo(() => stageStepNumbers(chainView.frame), [chainView.frame]);
   // Stepping through a threat model puts the technique lens on the step's technique, so the list shows the same marks as the picture.
@@ -121,6 +127,31 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
     heading?.scrollIntoView?.({ block: 'start' });
   };
   const chooseSubject = (kind: LensKind, subjectId: string): void => dispatch({ type: 'lens_subject_chosen', kind, subjectId });
+  const bringToTop = (elementId: string): void => {
+    const element = mainRef.current?.closest<HTMLElement>('.atlas-root')?.querySelector<HTMLElement>(`#${elementId}`) ?? null;
+    element?.focus({ preventScroll: true });
+    element?.scrollIntoView?.({ block: 'start' });
+  };
+  /**
+   * A technique or device chosen from the region's details changes the lens, which shows in the picture and the lens
+   * panel, both above the details. The visitor is taken to where the change shows: the picture while it is open, else
+   * the lens panel. The details stay on the region, and the picture and the lens panel each offer the way back.
+   */
+  const drillInto = (kind: LensKind, subjectId: string): void => {
+    chooseSubject(kind, subjectId);
+    bringToTop(isPictureOpen ? VIEWPORT_HEADING_ID : LENS_HEADING_ID);
+  };
+  const focusPicker = (): void => {
+    const input = mainRef.current?.querySelector<HTMLInputElement>('.atlas-lens-panel input[role="combobox"]') ?? null;
+    input?.focus({ preventScroll: true });
+    input?.scrollIntoView?.({ block: 'center' });
+  };
+  const restoreLens = (): void => dispatch({ type: 'lens_restored' });
+  const subjectNoun = LENS_SUBJECT_NOUNS[state.lens.kind];
+  const lensWays: LensWays = {
+    choose: subjectNoun === undefined ? null : { label: `Choose another ${subjectNoun}`, onChoose: focusPicker },
+    back: state.previousLens === null ? null : { label: restoreLensLabel(state.previousLens), onBack: restoreLens },
+  };
   const focusSelectedRow = (): void => {
     const rows = [...(mainRef.current?.querySelectorAll<HTMLButtonElement>('[data-region-id]') ?? [])];
     (rows.find((row) => row.dataset.regionId === selectedRegionId) ?? rows[0])?.focus();
@@ -129,14 +160,15 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
   return (
     <div className="atlas-root atlas-workspace" data-lens={state.lens.kind}>
       <LensPanel
-        model={model} lens={state.lens} tally={tally} onChooseKind={(kind) => dispatch({ type: 'lens_kind_chosen', kind })}
-        onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, 'keyboard')}
+        model={model} lens={state.lens} previousLens={state.previousLens} tally={tally} onChooseKind={(kind) => dispatch({ type: 'lens_kind_chosen', kind })}
+        onRestoreLens={restoreLens} onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, 'keyboard')}
       />
       <div className="atlas-main" ref={mainRef}>
         <div className="atlas-main-list">
           <AtlasViewport
             model={model} lens={state.lens} layers={state.layers} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep}
-            chain={chainView.frame} electrodeId={electrodeId} onPickElectrode={setElectrodeId} onSelectRegion={(regionId) => selectRegion(regionId, 'picture')} onShowDetails={showDetails}
+            chain={chainView.frame} electrodeId={electrodeId} onPickElectrode={setElectrodeId} onSelectRegion={(regionId) => selectRegion(regionId, 'picture')} onShowDetails={showDetails} lensWays={lensWays}
+            onCaptionChange={noteCaption}
           />
           {isDevicesLayerShown(model.index, state.layers) && (
             <Suspense fallback={<p className="atlas-loading" role="status">Loading the electrode layout…</p>}>
@@ -151,7 +183,7 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
         <RegionInspector
           model={model} detail={detail} atlasCoverage={atlasCoverage} headingRef={inspectorHeadingRef} anatomyEvidence={anatomyEvidence.state} regionEvidence={regionEvidence.state}
           onRetryAnatomyEvidence={anatomyEvidence.retry} onRetryRegionEvidence={regionEvidence.retry}
-          onChooseTechnique={(techniqueId) => chooseSubject(TECHNIQUE_LENS, techniqueId)} onChooseDevice={(deviceId) => chooseSubject('stated_targets', deviceId)}
+          onChooseTechnique={(techniqueId) => drillInto(TECHNIQUE_LENS, techniqueId)} onChooseDevice={(deviceId) => drillInto('stated_targets', deviceId)}
           onSelectRegion={(regionId) => selectRegion(regionId, 'keyboard')} onBackToList={focusSelectedRow} onBackToView={showViewport}
         />
       </div>
