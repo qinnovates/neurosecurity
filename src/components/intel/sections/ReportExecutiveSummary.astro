@@ -1,0 +1,74 @@
+---
+// Executive summary: the thesis, five headline metrics, the forwardable chart and the
+// three answers a reader should leave with.
+import KpiTile from '../KpiTile.astro';
+import ChartFigure from '../ChartFigure.astro';
+import StackedShareChart from '../StackedShareChart.astro';
+import type { ReportModel } from '@/lib/intel/bci-security-2026/report-model';
+import { CHANNEL_SERIES, CHANNEL_LEGEND } from './channel-series';
+import { formatPercent, formatReportDate, formatUsdCompact } from '@/lib/intel/bci-security-2026/format';
+import { resolveSources } from '@/lib/intel/bci-security-2026/report-data';
+
+interface Props {
+  model: ReportModel;
+}
+
+const { model } = Astro.props;
+const { capital, disclosure, cve, evidence, rounds } = model;
+const clock = model.report.regulatory_clock;
+const capitalRows = [
+  { label: 'All tracked BCI funding', note: `${capital.companiesWithFunding} companies with disclosed funding`, values: { ...capital.split } },
+  { label: `Excluding ${capital.largestHolder}`, note: `${capital.largestHolder} holds ${formatUsdCompact(capital.largestHolderUsd)} and publishes a disclosure program`, values: { ...capital.withoutLargest } },
+];
+---
+<section id="executive-summary" aria-labelledby="executive-summary-heading" class="scroll-mt-24">
+  <h2 id="executive-summary-heading" class="text-2xl font-bold font-[family-name:var(--font-heading)]">Executive summary</h2>
+  <p class="mt-3 max-w-3xl text-base leading-relaxed text-[var(--color-text-muted)]">
+    Money and implants are reaching the human nervous system faster than the security evidence that should come with them.
+    This report measures that gap with evidence we can show, so investors and builders can price BCI security risk before
+    regulators or incidents price it for them. Every number links to its source; what we could not check is marked as unchecked.
+  </p>
+
+  <div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-6 lg:[&>*:nth-child(-n+2)]:col-span-3 lg:[&>*:nth-child(n+3)]:col-span-2">
+    <KpiTile label="Disclosed BCI rounds, 2026 to date" value={formatUsdCompact(rounds.totalUsd)}
+      context={`${rounds.rounds.length} rounds; the four largest are ${formatPercent(rounds.topFourShare)} of the total.`}
+      trace="Primary-sourced rounds, 1 Jan – 20 Oct 2026 (Figure 2)." />
+    <KpiTile label="Tracked capital with no disclosure channel found" value={formatPercent(capital.noneFoundShare)}
+      context={`${formatUsdCompact(capital.split.none_found)} of ${formatUsdCompact(capital.totalUsd)}; ${formatPercent(capital.noneFoundShareWithoutLargest)} if ${capital.largestHolder} is left out.`}
+      trace="Datalake company funding × disclosure-channel check of 20 Oct 2026 (Figure 1)." />
+    <KpiTile label="Implant-class companies with no disclosure channel found" value={`${disclosure.implant.none_found} of ${disclosure.implantTotal}`}
+      context={`${disclosure.implant.found} publish one; ${disclosure.implant.not_checked} could not be checked.`}
+      trace="Invasive and semi-invasive companies in the datalake (Figure 4)." />
+    <KpiTile label="Neural-device CVEs on record" value={String(cve.total)}
+      context={`${cve.vendors} vendors, ${cve.publishedThisYear} published in 2026. None is on CISA's exploited list and none is in an implanted BCI.`}
+      trace="NVD records; CISA KEV catalog 2026.10.20 (Figure 5)." />
+    <KpiTile label="Catalogued techniques demonstrated" value={formatPercent(evidence.strictShare)}
+      context={`${evidence.demonstratedStrict} of ${evidence.total} demonstrated in a lab or on a neural device; ${evidence.replicated} independently replicated.`}
+      trace="TARA registrar evidence.tier field, strict reading (Figure 6)." />
+  </div>
+
+  <ChartFigure id="figure-1" number={1}
+    title="Where tracked BCI capital sits, by whether the company publishes a way to report vulnerabilities"
+    takeaway={`${formatPercent(capital.noneFoundShare)} of tracked funding is in companies where we found no public disclosure channel. One company moves the figure by ${Math.round((capital.noneFoundShareWithoutLargest - capital.noneFoundShare) * 100)} points.`}
+    legend={CHANNEL_LEGEND}
+    sources={resolveSources(['RPT-DISCLOSURE-AUDIT'])}
+    datalakeNote="Funding: datalake/bci-landscape.json, companies[].funding_total_usd (lifetime disclosed funding)."
+  >
+    <StackedShareChart series={CHANNEL_SERIES} rows={capitalRows} formatValue={formatUsdCompact} unitNoun="tracked funding" />
+    <table slot="table" class="viz-table">
+      <thead><tr><th>Row</th><th class="viz-right">Channel found</th><th class="viz-right">None found</th><th class="viz-right">Not checked</th></tr></thead>
+      <tbody>
+        {capitalRows.map((row) => (
+          <tr><td>{row.label}</td><td class="viz-right">{formatUsdCompact(row.values.found)}</td><td class="viz-right">{formatUsdCompact(row.values.none_found)}</td><td class="viz-right">{formatUsdCompact(row.values.not_checked)}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </ChartFigure>
+
+  <h3 class="mt-8 text-lg font-semibold">Three takeaways</h3>
+  <ol class="mt-3 space-y-3 text-sm leading-relaxed text-[var(--color-text-muted)] list-decimal pl-5">
+    <li><strong class="text-[var(--color-text-primary)]">Where the money went.</strong> {formatUsdCompact(rounds.totalUsd)} in {rounds.rounds.length} disclosed rounds, concentrated in four companies, with half the dollars going to implant programs. Implant programs passed regulatory milestones in the US, the EU and China.</li>
+    <li><strong class="text-[var(--color-text-primary)]">The measured security state.</strong> Few companies publish a way to report a vulnerability, every 2026 neural-device CVE sits in a consumer or home device, and fewer than a third of catalogued attack techniques are demonstrated. We found no confirmed malicious compromise of a BCI.</li>
+    <li><strong class="text-[var(--color-text-primary)]">The gap, and what to do.</strong> {clock.length} compliance dates land between {formatReportDate(clock[0].date)} and {formatReportDate(clock[clock.length - 1].date)} on an industry where most companies have no disclosure channel we could find. Section 5 gives investors five diligence questions and founders a starting point.</li>
+  </ol>
+</section>

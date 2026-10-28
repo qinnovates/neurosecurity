@@ -1,0 +1,250 @@
+{
+  "_metadata": {
+    "schema_version": 1,
+    "generated": "2026-10-26",
+    "purpose": "Why each brain region carries the band it carries, graded against an external standard. Replaces a hardcoded \"not reviewed by an expert\" string applied to all 38 regions regardless of evidence.",
+    "reference": "Terminologia Neuroanatomica (TNA), FIPAT 2017 — the official IFAA/FIPAT neuroanatomical terminology. IFAA Executive validated 2016-09-22; FIPAT accepted 2016-09-24; IFAA General Assembly approved London 2019. TNA terms are in the public domain.",
+    "reference_companion": "ten Donkelaar HJ, et al. Towards a Terminologia Neuroanatomica. Clin Anat. 2017;30(2):145-155.",
+    "verification": "Entry numbers and section placement read directly from the published TNA chapter-1 (central nervous system) text, extracted from the official PDF and re-verified this session. The site was unreachable from one agent environment; the extraction is cached locally, so these claims are reproducible without network access.",
+    "not_verified": "Kandel 6th ed., which source_bibliography names as the basis for these assignments, was NOT consulted. No claim here rests on it.",
+    "tiers": {
+      "tna_concordant": "The band equals the structural division TNA assigns. A textbook fact, not an inference.",
+      "declared_functional_grouping": "The band is a circuit-function grouping that departs from TNA topography. Legitimate, but a declared choice: the page must say so and name the TNA division.",
+      "contradicted": "The band is inconsistent with the structure and should be changed."
+    },
+    "name_collision_warning": "TNA holds TWO similar terms that are different structures: 2532 \"Nucleus basalis\" = basal nucleus of Meynert (the Ch4 cholinergic source), and 2506 \"Nucleus basalis lateralis\" = basolateral amygdaloid nucleus. Confusing them is the most likely origin of the shipped error in which basal_forebrain_cholinergic listed its origin as basolateral_amygdala. Any future work naming a \"basal nucleus\" must state which.",
+    "caveat": "This grades region-to-band assignment only. It says nothing about whether any TARA technique implicates any region, and licenses no claim about cognitive content.",
+    "drafted_by": "ai",
+    "human_reviewed": false
+  },
+  "regions": {
+    "pfc": {
+      "tier": "tna_concordant",
+      "tna_term": "Isocortex (2208, listed with Neocortex as a synonym)",
+      "tna_division": "Telencephalon > Isocortex",
+      "note": null
+    },
+    "m1": {
+      "tier": "tna_concordant",
+      "tna_term": "Isocortex (2208, listed with Neocortex as a synonym)",
+      "tna_division": "Telencephalon > Isocortex",
+      "note": null
+    },
+    "v1": {
+      "tier": "tna_concordant",
+      "tna_term": "Isocortex (2208, listed with Neocortex as a synonym)",
+      "tna_division": "Telencephalon > Isocortex",
+      "note": null
+    },
+    "a1": {
+      "tier": "tna_concordant",
+      "tna_term": "Isocortex (2208, listed with Neocortex as a synonym)",
+      "tna_division": "Telencephalon > Isocortex",
+      "note": null
+    },
+    "pmc": {
+      "tier": "tna_concordant",
+      "tna_term": "Isocortex (2208, listed with Neocortex as a synonym)",
+      "tna_division": "Telencephalon > Isocortex",
+      "note": null
+    },
+    "sma": {
+      "tier": "tna_concordant",
+      "tna_term": "Isocortex (2208, listed with Neocortex as a synonym)",
+      "tna_division": "Telencephalon > Isocortex",
+      "note": null
+    },
+    "ppc": {
+      "tier": "tna_concordant",
+      "tna_term": "Isocortex (2208, listed with Neocortex as a synonym)",
+      "tna_division": "Telencephalon > Isocortex",
+      "note": null
+    },
+    "s1_cortex": {
+      "tier": "tna_concordant",
+      "tna_term": "Isocortex (2208, listed with Neocortex as a synonym)",
+      "tna_division": "Telencephalon > Isocortex",
+      "note": null
+    },
+    "broca": {
+      "tier": "tna_concordant",
+      "tna_term": "Isocortex (2208, listed with Neocortex as a synonym)",
+      "tna_division": "Telencephalon > Isocortex",
+      "note": "Eponym, not a TNA term. The division is certain; the boundary is disputed."
+    },
+    "wernicke": {
+      "tier": "tna_concordant",
+      "tna_term": "Isocortex (2208, listed with Neocortex as a synonym)",
+      "tna_division": "Telencephalon > Isocortex",
+      "note": "Eponym, not a TNA term. The division is certain; the referent is disputed (Binder 2015)."
+    },
+    "thalamus": {
+      "tier": "tna_concordant",
+      "tna_term": "Thalamus",
+      "tna_division": "Diencephalon",
+      "note": null
+    },
+    "hypothalamus": {
+      "tier": "tna_concordant",
+      "tna_term": "Hypothalamus",
+      "tna_division": "Diencephalon",
+      "note": null
+    },
+    "vim": {
+      "tier": "tna_concordant",
+      "tna_term": "Nuclei ventrales thalami",
+      "tna_division": "Diencephalon > Thalamus",
+      "note": null
+    },
+    "ant": {
+      "tier": "tna_concordant",
+      "tna_term": "Nuclei anteriores thalami",
+      "tna_division": "Diencephalon > Thalamus",
+      "note": null
+    },
+    "cerebellum_cortex": {
+      "tier": "tna_concordant",
+      "tna_term": "Cortex cerebelli",
+      "tna_division": "Cerebellum",
+      "note": null
+    },
+    "cerebellum_nuclei": {
+      "tier": "tna_concordant",
+      "tna_term": "Nuclei cerebelli",
+      "tna_division": "Cerebellum",
+      "note": null
+    },
+    "vermis": {
+      "tier": "tna_concordant",
+      "tna_term": "Vermis cerebelli",
+      "tna_division": "Cerebellum",
+      "note": null
+    },
+    "medulla": {
+      "tier": "tna_concordant",
+      "tna_term": "Medulla oblongata",
+      "tna_division": "Truncus encephali / BRAIN STEM (959)",
+      "note": null
+    },
+    "pons": {
+      "tier": "tna_concordant",
+      "tna_term": "Pons",
+      "tna_division": "Truncus encephali / BRAIN STEM (959)",
+      "note": null
+    },
+    "midbrain": {
+      "tier": "tna_concordant",
+      "tna_term": "Mesencephalon",
+      "tna_division": "Truncus encephali / BRAIN STEM (959)",
+      "note": null
+    },
+    "reticular_formation": {
+      "tier": "tna_concordant",
+      "tna_term": "Formatio reticularis",
+      "tna_division": "Truncus encephali / BRAIN STEM (959)",
+      "note": "Spans medulla, pons and midbrain."
+    },
+    "cervical_cord": {
+      "tier": "tna_concordant",
+      "tna_term": "Pars cervicalis (776)",
+      "tna_division": "Medulla spinalis",
+      "note": null
+    },
+    "thoracic_cord": {
+      "tier": "tna_concordant",
+      "tna_term": "Pars thoracica (777)",
+      "tna_division": "Medulla spinalis",
+      "note": null
+    },
+    "lumbar_cord": {
+      "tier": "tna_concordant",
+      "tna_term": "Pars lumbalis (778)",
+      "tna_division": "Medulla spinalis",
+      "note": null
+    },
+    "sacral_cord": {
+      "tier": "tna_concordant",
+      "tna_term": "Pars sacralis",
+      "tna_division": "Medulla spinalis",
+      "note": null
+    },
+    "striatum": {
+      "tier": "tna_concordant",
+      "tna_term": "Striatum (2500)",
+      "tna_division": "Telencephalon > Nuclei basales (2559)",
+      "note": null
+    },
+    "gpi": {
+      "tier": "tna_concordant",
+      "tna_term": "Globus pallidus medialis (2569)",
+      "tna_division": "Telencephalon > Nuclei basales (2559)",
+      "note": null
+    },
+    "gpe": {
+      "tier": "tna_concordant",
+      "tna_term": "Globus pallidus lateralis (2567)",
+      "tna_division": "Telencephalon > Nuclei basales (2559)",
+      "note": null
+    },
+    "stn": {
+      "tier": "declared_functional_grouping",
+      "tna_term": "Nucleus subthalamicus (1916)",
+      "tna_division": "Diencephalon > Subthalamus (1915)",
+      "note": "Banded N5 by basal-ganglia circuit function. TNA places it in the subthalamus, i.e. diencephalon."
+    },
+    "substantia_nigra": {
+      "tier": "declared_functional_grouping",
+      "tna_term": "Substantia nigra (1417)",
+      "tna_division": "Mesencephalon",
+      "note": "Banded N5 by basal-ganglia circuit function. TNA places it in the midbrain."
+    },
+    "vta": {
+      "tier": "declared_functional_grouping",
+      "tna_term": "Nuclei tegmentales ventrales (1429)",
+      "tna_division": "Mesencephalon",
+      "note": "Banded N5 by mesolimbic circuit function. TNA places it in the midbrain; synonym \"ventral tegmental area of Tsai\"."
+    },
+    "cea": {
+      "tier": "declared_functional_grouping",
+      "tna_term": "Corpus amygdaloideum (2504)",
+      "tna_division": "Telencephalon > Amygdaloid body",
+      "note": "Banded N5 as centromedial, striatal-like amygdala; TNA records \"Archistriatum\" as a synonym."
+    },
+    "bla": {
+      "tier": "declared_functional_grouping",
+      "tna_term": "Nucleus basalis lateralis (2506)",
+      "tna_division": "Telencephalon > Amygdaloid body",
+      "note": "Banded N6 as the pallial, cortex-like amygdala, opposite CeA. NOTE the collision below."
+    },
+    "hippocampus": {
+      "tier": "declared_functional_grouping",
+      "tna_term": "Hippocampus",
+      "tna_division": "Telencephalon > Allocortex > Archicortex (2206)",
+      "note": "Banded N6. TNA classes it as archicortex, not isocortex, so it is correctly NOT N7."
+    },
+    "insula": {
+      "tier": "declared_functional_grouping",
+      "tna_term": "Insula",
+      "tna_division": "Telencephalon > Lobus limbicus (2152) / Isocortex",
+      "note": "Banded N6. Cortical, and within the TNA limbic lobe."
+    },
+    "acc": {
+      "tier": "declared_functional_grouping",
+      "tna_term": "Gyrus cinguli",
+      "tna_division": "Telencephalon > Lobus limbicus (2152)",
+      "note": "Banded N6. Cortical, and within the TNA limbic lobe."
+    },
+    "cingulate": {
+      "tier": "declared_functional_grouping",
+      "tna_term": "Gyrus cinguli",
+      "tna_division": "Telencephalon > Lobus limbicus (2152)",
+      "note": "Banded N6. Cortical, and within the TNA limbic lobe."
+    },
+    "cauda_equina": {
+      "tier": "contradicted",
+      "tna_term": "Cauda equina",
+      "tna_division": "Peripheral nervous system (spinal nerve roots)",
+      "note": "Banded N1 Spinal Cord, which is wrong. The cauda equina is the bundle of lumbar, sacral and coccygeal nerve ROOTS distal to the conus medullaris. VERIFIED: \"Cauda equina\" occurs 0 times in the published TNA central-nervous-system chapter. Rescoped in place on the region (scope_review, branch fix/lane1-data-defects); N1 is retained only as a legacy address and is not a claim of cord membership."
+    }
+  }
+}

@@ -136,19 +136,25 @@ describe('review state', () => {
   });
 });
 
+/** 16 distinct licence_confirmation entries -- enough to satisfy REVIEWED_ENTRY_COUNTS without coupling this unit test to the real datalake's actual source ids. */
+function buildLicenceConfirmationEntries(): LedgerEntry[] {
+  return Array.from({ length: 16 }, (_, index) => ({ kind: 'licence_confirmation', key: `fixture_source_${index}`, digest: 'a'.repeat(64), reviewer_id: 'owner-1', reviewed_on: '2026-10-09' }));
+}
+
 describe('ledger ratchet', () => {
-  it('starts at zero entries of every kind', () => {
-    expect(REVIEWED_ENTRY_COUNTS).toEqual({ row_review: 0, visual_check: 0, agreement: 0 });
+  it('starts at zero entries of every row/visual/agreement kind, with licence_confirmation deliberately non-zero (see review-state.ts)', () => {
+    expect(REVIEWED_ENTRY_COUNTS).toEqual({ row_review: 0, visual_check: 0, agreement: 0, licence_confirmation: 16 });
   });
 
   it('counts entries by kind', () => {
     const ledger = parseReviewLedger(buildLedgerFile([buildEntry(), buildEntry({ kind: 'visual_check', key: 'deep_fixture' })]));
-    expect(countEntriesByKind(ledger)).toEqual({ row_review: 1, visual_check: 1, agreement: 0 });
+    expect(countEntriesByKind(ledger)).toEqual({ row_review: 1, visual_check: 1, agreement: 0, licence_confirmation: 0 });
   });
 
   it('stops the build when the ledger holds an entry the ratchet does not expect', () => {
-    const ledger = parseReviewLedger(buildLedgerFile([buildEntry()]));
+    const balanced = buildLicenceConfirmationEntries();
+    const ledger = parseReviewLedger(buildLedgerFile([buildEntry(), ...balanced]));
     expect(() => assertLedgerRatchet(ledger)).toThrow(/holds 1 row_review entries but REVIEWED_ENTRY_COUNTS expects 0/);
-    expect(() => assertLedgerRatchet(parseReviewLedger(buildLedgerFile()))).not.toThrow();
+    expect(() => assertLedgerRatchet(parseReviewLedger(buildLedgerFile(balanced)))).not.toThrow();
   });
 });

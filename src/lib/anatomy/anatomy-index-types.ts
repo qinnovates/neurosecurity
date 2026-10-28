@@ -17,6 +17,7 @@ import type { ReviewerRole } from './parse-review-ledger';
 import type { Resolution } from './resolve-region-term';
 import type { ReviewState } from './review-state';
 import type { SourceRefState } from './source-ref';
+import type { IndexNeurorightCode, IndexTechniqueNeurorights, IndexTechniqueNiss } from './technique-tags';
 import type { Grant, LayerId, LicenceId, RouteKind, RouteStatus, Verdict } from './source-types';
 
 export const ANATOMY_INDEX_SCHEMA_VERSION = 1;
@@ -58,8 +59,8 @@ export interface IndexSource {
   blockers: UnbuildableReason[];
   /** The clearance record's reason, AI-drafted. */
   clearance_reason: string;
-  /** Always false today: no person has confirmed any licence reading. */
-  human_confirmed: false;
+  /** True only while a `licence_confirmation` ledger entry backs this source's reading at its own digest (see review-state.ts). */
+  human_confirmed: boolean;
 }
 
 export const VISUAL_CHECK_STATES = ['not_done', 'signed'] as const;
@@ -182,10 +183,15 @@ export interface IndexTechnique {
   id: string;
   name: string;
   band_ids: string[];
+  /** The catalog's severity word. For a technique NISS has not scored it is an editorial label, so `niss.scoring_state` says which it is. */
   severity: string;
-  /** NISS's own severity word as the registrar holds it, or null when the registrar holds none. */
+  /** NISS's own severity word, or null where the registrar holds none. Null is not a severity of `none`: see `niss.scoring_state`, which the parser holds to this field. */
   niss_severity: string | null;
   dsm_cluster: string | null;
+  /** The registrar's NISS block: the scoring state, and the vector, score and PINS flag it holds only where it has scored. */
+  niss: IndexTechniqueNiss;
+  /** The registrar's raw neurorights codes, unfolded, or null where it holds no record. `neurorights_taxonomy` defines each code and names the folds. */
+  neurorights: IndexTechniqueNeurorights | null;
   scope: IndexTechniqueScope;
   links: IndexTechniqueLink[];
 }
@@ -291,6 +297,8 @@ export interface AnatomyIndex {
   structures: IndexStructure[];
   subjects: IndexSubject[];
   techniques: IndexTechnique[];
+  /** The registrar's neurorights glossary once: every code a technique may name, with the code it folds into where the registrar states one. Nothing here is folded. */
+  neurorights_taxonomy: IndexNeurorightCode[];
   tracts: IndexTracts;
   devices: IndexDevices;
   /** Ledger keys of drafted items whose quoted words no longer appear at their pointer. Their check status reads unchecked. */

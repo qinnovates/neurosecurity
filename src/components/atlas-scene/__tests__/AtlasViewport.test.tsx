@@ -6,6 +6,7 @@ import { useImperativeHandle } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { isLimitId, matchesLimitTemplate, type LimitId } from '@/lib/anatomy/limits-copy';
+import { CAMERA_VIEW_IDS, DEFAULT_CAMERA_VIEW } from '@/lib/atlas-explorer/camera-views';
 import { loadRealModel } from '@/lib/atlas-explorer/__tests__/explorer-fixtures';
 import { resolvePick } from '@/lib/atlas-explorer/resolve-pick';
 import type { AtlasCanvasProps } from '../AtlasCanvas';
@@ -258,19 +259,52 @@ describe('AtlasViewport: open', () => {
     expect(container.querySelector('button[name="See its details"]')).toBeNull();
   });
 
-  it('moves the view only through real buttons, and marks which named view is current', async () => {
-    await openViewport();
-    fireEvent.click(screen.getByRole('button', { name: 'Left side' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Zoom in' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Turn right' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Tilt up' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Bottom' }));
-    expect(commandLog).toEqual(['view:left', 'zoom:in', 'turn:right', 'tilt:up', 'view:bottom']);
-    fireEvent.click(screen.getByRole('button', { name: 'Turn right' }));
-    expect(screen.getByRole('button', { name: 'Left side' }).getAttribute('aria-pressed')).toBe('false');
+  it('names every view in one menu, moves the camera to the chosen one, and says which it is on', async () => {
+    const container = await openViewport();
+    const menu = screen.getByRole('combobox', { name: 'View' }) as HTMLSelectElement;
+    // Seven buttons became seven options behind one control, and every named view is still offered.
+    expect([...menu.options].map((option) => option.value)).toEqual([...CAMERA_VIEW_IDS]);
+    expect(menu.value).toBe(DEFAULT_CAMERA_VIEW);
+    fireEvent.change(menu, { target: { value: 'left' } });
+    fireEvent.change(menu, { target: { value: 'bottom' } });
+    expect(commandLog).toEqual(['view:left', 'view:bottom']);
+    expect(menu.value).toBe('bottom');
+    fireEvent.click(screen.getByRole('button', { name: 'Reset the view' }));
+    expect(commandLog.at(-1)).toBe(`view:${DEFAULT_CAMERA_VIEW}`);
+    // Turned by hand the menu holds no named view, and says so rather than naming the wrong one.
+    fireEvent.keyDown(container.querySelector('[data-viewport-proxy]') as HTMLElement, { key: 'ArrowRight' });
+    expect(menu.value).toBe('');
     expect(screen.getByRole('img').getAttribute('aria-label')).toContain('turned by hand');
-    expect(screen.getByRole('button', { name: 'Bottom' }).getAttribute('aria-pressed')).toBe('false');
     expect(screen.getByRole('img').hasAttribute('tabindex')).toBe(false);
+  });
+
+  /**
+   * The parity this asserts is the reason the six orbit buttons could go: they existed only as the
+   * keyboard's path to what a drag does. Every camera command the canvas exposes must still be
+   * reachable without a pointer, so a later reduction cannot quietly drop one.
+   */
+  it('reaches every camera command from the keyboard alone, through a focusable stand-in for the picture', async () => {
+    const container = await openViewport();
+    const proxy = container.querySelector('[data-viewport-proxy]') as HTMLElement;
+    expect(proxy.tabIndex).toBe(0);
+    expect(proxy.getAttribute('role')).toBe('application');
+    expect(proxy.getAttribute('aria-roledescription')).toBe('3D brain view');
+    expect(proxy.getAttribute('aria-label')).toBe('Move the 3D view from the keyboard');
+    proxy.focus();
+    expect(document.activeElement).toBe(proxy);
+    for (const key of ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '-', 'Home']) {
+      const event = fireEvent.keyDown(proxy, { key, cancelable: true });
+      // The page must not also scroll: an arrow key that moved the view and the page would move neither usefully.
+      expect(event, key).toBe(false);
+    }
+    expect(commandLog).toEqual(['turn:left', 'turn:right', 'tilt:up', 'tilt:down', 'zoom:in', 'zoom:out', `view:${DEFAULT_CAMERA_VIEW}`]);
+    // Every command the canvas offers is covered, and the keys are written out rather than left to be guessed.
+    expect(new Set(commandLog.map((entry) => entry.split(':')[0]))).toEqual(new Set(['turn', 'tilt', 'zoom', 'view']));
+    const keyLegend = container.querySelector('.atlas-proxy-keys')?.textContent ?? '';
+    for (const word of ['arrows turn', 'arrows tilt', 'Plus and minus zoom', 'Home returns']) expect(keyLegend, word).toContain(word);
+    // A key the view has no command for is left to the page.
+    expect(fireEvent.keyDown(proxy, { key: 'PageDown', cancelable: true })).toBe(true);
+    expect(commandLog).toHaveLength(7);
   });
 
   it('cuts through everything along an axis, says it is not a scan, and lists what the cut passes through', async () => {

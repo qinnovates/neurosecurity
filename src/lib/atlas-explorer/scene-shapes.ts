@@ -70,16 +70,83 @@ export const BAND_COLOURS_DARK: Readonly<Record<string, string>> = {
 export const NISS_COLOURS: Readonly<Record<string, string>> = {
   none: '#d6d0f0', low: '#b0a2e6', medium: '#8a74d8', high: '#5f45c2', critical: '#33207a',
 };
+/**
+ * The same five steps restepped for the dark surface, not an automatic flip.
+ *
+ * On a light surface severity reads as *darker*; on a dark surface that ordering
+ * inverts the meaning, because the darkest swatch is then the one nearest the
+ * background. Using the light ramp on dark put `critical` at 1.49:1 — effectively
+ * invisible — while `none` sat at 12.91:1, the loudest thing on screen. That is the
+ * absence channel shouting over the severity channel, which is the one reading this
+ * palette must never produce.
+ *
+ * Here visibility rises with severity: 1.65 / 2.62 / 4.28 / 7.09 / 11.70 against
+ * `#0e0f11`, strictly ascending, with roughly 1.6:1 between adjacent steps so the
+ * five stay distinguishable from each other and not just from the surface.
+ *
+ * `none` is quiet, never absent. Quiet is not "safe": the step is always labelled,
+ * and the no-data sentence carries that meaning in words, not in colour.
+ */
+export const NISS_COLOURS_DARK: Readonly<Record<string, string>> = {
+  none: '#3b3550', low: '#584f85', medium: '#7a6cba', high: '#a492e0', critical: '#cfc2ff',
+};
+
+/**
+ * Which surface the canvas is drawn on. The palettes are authored per surface, never derived.
+ *
+ * ## Where the theme lives
+ *
+ * In one value, read in one place, passed on as data.
+ *
+ * `useSceneTheme` is the only thing in the explorer that asks the document which
+ * surface the page is on. Everything below it is handed the answer, and there are
+ * exactly two things that need it:
+ *
+ *   - the shape builder here, which turns a lens step into the ink for that
+ *     surface (`colourOfStep`), so a shape carries its own already-resolved colour;
+ *   - the renderer, for the inks that are not any one shape's -- the selection
+ *     brackets and the "inside or mixed" fill -- which come from the one table in
+ *     `scene-drawing.ts` (`SURFACE_INK`).
+ *
+ * No drawing function reads the document, holds a theme of its own, or chooses
+ * between two palettes by any other route. A colour in the scene is either
+ * resolved at one of those two seams or it is the same on both surfaces, and the
+ * ones that are the same say so where they are declared.
+ *
+ * ## Why the argument is required
+ *
+ * The theme is a required parameter of every function that resolves an ink, with
+ * no default. The first half of this fix defaulted it to `'light'`, and the
+ * default was the bug: `buildChainShapes` never passed a theme at all, so while a
+ * threat model was on screen nothing on that path could follow the surface, and
+ * no type error said so. A required argument makes the omission a compile error.
+ * Where a caller asks about fills rather than inks, it names a surface explicitly
+ * and says at the call site why either would do.
+ */
+export type SceneTheme = 'light' | 'dark';
+/**
+ * The technique lens's one colour. It has no per-surface step because it needs
+ * none: measured against the surfaces the palette tests use, it reads 3.62:1 on
+ * the light one and 4.34:1 on the dark one, so it clears the 3:1 floor on both.
+ */
 export const LINKED_COLOUR = '#2a78d6';
+/**
+ * The colour of a shape the lens holds nothing for, and the ink of the context
+ * layers. One value for both surfaces, deliberately: it is read as data as well
+ * as drawn (it is a shape's `colour` wherever no step applies), and it sits
+ * between the two surfaces at 2.61:1 on the light one and 6.01:1 on the dark one.
+ * It is always drawn at a context opacity, never as a mark that must be found.
+ */
 export const NEUTRAL_COLOUR = '#8a90a0';
 
 const FILL_BY_MARK: Readonly<Record<OwnershipMark, FillKind>> = { solid: 'solid', inside_or_mixed: 'translucent', no_data: 'lines', context: 'neutral' };
 const MESHLESS: readonly SizeClass[] = ['unresolved', 'not_drawn'];
 
-function colourOfStep(mode: ColourMode, step: string | null, isKnown: boolean): string {
+function colourOfStep(mode: ColourMode, step: string | null, isKnown: boolean, theme: SceneTheme): string {
   if (step === null || !isKnown) return NEUTRAL_COLOUR;
-  if (mode.kind === 'band') return BAND_COLOURS[step] ?? NEUTRAL_COLOUR;
-  if (mode.kind === 'niss') return NISS_COLOURS[step] ?? NEUTRAL_COLOUR;
+  const isDark = theme === 'dark';
+  if (mode.kind === 'band') return (isDark ? BAND_COLOURS_DARK : BAND_COLOURS)[step] ?? NEUTRAL_COLOUR;
+  if (mode.kind === 'niss') return (isDark ? NISS_COLOURS_DARK : NISS_COLOURS)[step] ?? NEUTRAL_COLOUR;
   return LINKED_COLOUR;
 }
 
@@ -89,19 +156,19 @@ function sizeMarkOf(sizeClass: SizeClass, vertexCount: number): SizeMark {
 }
 
 /** The fill and colour of one structure under a lens. With no lens subject chosen, nothing is coloured. */
-export function describeFill(model: Pick<ExplorerModel, 'styleStructure'>, structureKey: string, mode: ColourMode | null): Pick<SceneShape, 'fill' | 'colour' | 'step' | 'words'> {
+export function describeFill(model: Pick<ExplorerModel, 'styleStructure'>, structureKey: string, mode: ColourMode | null, theme: SceneTheme): Pick<SceneShape, 'fill' | 'colour' | 'step' | 'words'> {
   if (mode === null) return { fill: 'neutral', colour: NEUTRAL_COLOUR, step: null, words: 'no lens subject chosen' };
   const style = model.styleStructure(structureKey, mode);
   const fill = FILL_BY_MARK[style.mark];
-  return { fill, colour: fill === 'solid' ? colourOfStep(mode, style.step, style.step_known) : NEUTRAL_COLOUR, step: fill === 'solid' ? style.step : null, words: style.words };
+  return { fill, colour: fill === 'solid' ? colourOfStep(mode, style.step, style.step_known, theme) : NEUTRAL_COLOUR, step: fill === 'solid' ? style.step : null, words: style.words };
 }
 
 /** Every shipped shape and marker, with its three marks, for the layers the visitor has asked to see. */
-export function buildSceneShapes(model: Pick<ExplorerModel, 'index' | 'styleStructure'>, mode: ColourMode | null, requested: Readonly<Record<LayerId, boolean>>): SceneShape[] {
+export function buildSceneShapes(model: Pick<ExplorerModel, 'index' | 'styleStructure'>, mode: ColourMode | null, requested: Readonly<Record<LayerId, boolean>>, theme: SceneTheme): SceneShape[] {
   const assetsById = new Map(model.index.assets.map((asset) => [asset.id, asset]));
   const availableLayers = new Set(model.index.layers.filter((layer) => layer.available && requested[layer.id]).map((layer) => layer.id));
   return model.index.structures.flatMap((structure) => {
-    const look = describeFill(model, structure.key, mode);
+    const look = describeFill(model, structure.key, mode, theme);
     return structure.nodes.flatMap((node) => {
       const asset = assetsById.get(node.asset_id);
       if (asset === undefined || !availableLayers.has(asset.layer)) return [];

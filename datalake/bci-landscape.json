@@ -2462,7 +2462,7 @@
         "note": "cumulative, partial year"
       }
     ],
-    "total_funding_tracked_usd": 4800000000,
+    "total_funding_tracked_usd": 5958860000,
     "major_funding_rounds": [
       {
         "company": "Neuralink",
@@ -3779,7 +3779,8 @@
           "date": "2024"
         }
       ]
-    }
+    },
+    "total_funding_tracked_usd_note": "Computed as the sum of companies[].funding_total_usd (verified figures only, across 39 of 68 tracked companies). Previously hand-entered as 4800000000 (4.80B), a stale figure that duplicated the unrelated 2025 partial-year vc_aggregate_by_year row. Recompute whenever a company's funding_total_usd changes; never hand-edit it."
   },
   "industry_timeline": [
     {

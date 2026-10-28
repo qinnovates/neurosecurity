@@ -1,0 +1,113 @@
+---
+// Section 3 (Part 2): the measured security state. Disclosure readiness, then
+// disclosed vulnerabilities and incidents. Evidence maturity follows in ReportEvidence.
+import ChartFigure from '../ChartFigure.astro';
+import StackedShareChart from '../StackedShareChart.astro';
+import CveDotPlot from '../CveDotPlot.astro';
+import SourceLinks from '../SourceLinks.astro';
+import type { ReportModel } from '@/lib/intel/bci-security-2026/report-model';
+import type { LegendEntry } from '../chart-types';
+import { CHANNEL_LEGEND, CHANNEL_SERIES } from './channel-series';
+import { formatReportDate } from '@/lib/intel/bci-security-2026/format';
+import { resolveSources } from '@/lib/intel/bci-security-2026/report-data';
+
+interface Props {
+  model: ReportModel;
+}
+
+const { model } = Astro.props;
+const { disclosure, cve, report } = model;
+const companyLabel = (count: number): string => `${count} compan${count === 1 ? 'y' : 'ies'}`;
+const classRows = [
+  { label: 'Invasive', values: { ...disclosure.byClass.invasive } },
+  { label: 'Semi-invasive', values: { ...disclosure.byClass.semi_invasive } },
+  { label: 'Non-invasive', values: { ...disclosure.byClass.non_invasive } },
+];
+const leaderSources = report.disclosure_audit.companies.filter((row) => row.status === 'found');
+const advisory = report.featured_advisory;
+const announcements = report.announcement_audit;
+const mentionsSecurity = announcements.mention_device_security === 0 ? 'none' : String(announcements.mention_device_security);
+const cveLegend: LegendEntry[] = [
+  { label: 'Clinical neurodiagnostic software', colorVar: '--viz-clinical', shape: 'circle' },
+  { label: 'Consumer or home device', colorVar: '--viz-consumer', shape: 'diamond' },
+  ...(cve.staged > 0 ? [{ label: 'Verified, staged for mapping', colorVar: '--viz-consumer', shape: 'ring' as const }] : []),
+];
+---
+<section id="security" aria-labelledby="security-heading" class="scroll-mt-24">
+  <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Section 3</p>
+  <h2 id="security-heading" class="text-2xl font-bold font-[family-name:var(--font-heading)]">State of BCI security</h2>
+  <p class="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--color-text-muted)]">
+    Every headline in this section rests on something that can be checked: a published page, a CVE record, a regulator's advisory
+    or a count. Where we could not check, we say so.
+  </p>
+
+  <h3 class="mt-6 text-lg font-semibold">Disclosure readiness</h3>
+  <p class="mt-2 max-w-3xl text-sm leading-relaxed text-[var(--color-text-muted)]">
+    On {formatReportDate(report.disclosure_audit.checked_on)} we checked all {model.companies} tracked companies for a public way to report a product
+    vulnerability: a security.txt file, a vulnerability disclosure program or a product-security page. We found one for {disclosure.all.found} of them.
+    Among the {disclosure.implantTotal} implant-class companies, {disclosure.implant.found} publish one, {disclosure.implant.none_found} had none we could find and{' '}
+    {disclosure.implant.not_checked} could not be checked. Of the {disclosure.roundRecipients.length} tracked companies that raised a 2026 round,{' '}
+    {disclosure.roundRecipientsWithChannel === 0 ? 'none' : disclosure.roundRecipientsWithChannel} had a channel we could find.
+  </p>
+
+  <ChartFigure id="figure-4" number={4} title="Public vulnerability-disclosure channel, by device class"
+    takeaway={`Implant makers that publish a channel are mostly large neuromodulation incumbents; most startups have none we could find.`}
+    legend={CHANNEL_LEGEND} sources={resolveSources(report.disclosure_audit.source_ids)}
+    datalakeNote={`Companies: datalake/bci-landscape.json. "None found" means none was found by the stated method on ${formatReportDate(report.disclosure_audit.checked_on)}, not that none exists.`}
+  >
+    <StackedShareChart series={CHANNEL_SERIES} rows={classRows} formatValue={companyLabel} unitNoun="companies in the class" />
+    <table slot="table" class="viz-table">
+      <thead><tr><th>Class</th><th class="viz-right">Found</th><th class="viz-right">None found</th><th class="viz-right">Not checked</th></tr></thead>
+      <tbody>{classRows.map((row) => (<tr><td>{row.label}</td><td class="viz-right">{row.values.found}</td><td class="viz-right">{row.values.none_found}</td><td class="viz-right">{row.values.not_checked}</td></tr>))}</tbody>
+    </table>
+  </ChartFigure>
+
+  <div class="rounded-xl border border-[var(--color-border)] p-5">
+    <h4 class="text-sm font-semibold">Companies that publish a disclosure channel</h4>
+    <p class="mt-1 text-xs text-[var(--color-text-faint)]">Each name links to the page we found.</p>
+    <ul class="mt-3 grid gap-2 text-sm sm:grid-cols-2">
+      {leaderSources.map((row) => resolveSources(row.source_ids ?? []).map((source) => (
+        <li><a href={source.url} target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">{row.company}</a></li>
+      )))}
+    </ul>
+  </div>
+
+  <h3 class="mt-10 text-lg font-semibold">Disclosed vulnerabilities</h3>
+  <p class="mt-2 max-w-3xl text-sm leading-relaxed text-[var(--color-text-muted)]">
+    We count {cve.total} CVEs in neural devices from {cve.vendors} vendors. {cve.publishedThisYear} were published in 2026, all in consumer or home
+    devices. {report.kev_check.neural_device_cves_in_kev === 0 ? 'None' : report.kev_check.neural_device_cves_in_kev} of the {cve.total} is in CISA's Known Exploited Vulnerabilities catalog (version {report.kev_check.catalog_version}) and none is in an implanted BCI (the closest, CVE-2023-25931, is in
+    clinician programming software for an implanted pelvic neurostimulator). We found no confirmed
+    malicious compromise of a BCI. A CVE records a weakness; it is not evidence that anyone was harmed.
+  </p>
+
+  <ChartFigure id="figure-5" number={5} title="Neural-device CVEs by publication date and severity"
+    takeaway={`Five 2018 CVEs sit in one clinical EEG product line; all ${cve.publishedThisYear} CVEs published in 2026 are in consumer or home stimulation and neurofeedback devices.`}
+    legend={cveLegend}
+    sources={resolveSources([...report.kev_check.source_ids, ...advisory.source_ids])}
+    datalakeNote={`Mapped CVEs: datalake/cve-technique-mapping.json, category "Neural/EEG Systems"; dates and scores from NVD.`}
+  >
+    <CveDotPlot cves={cve.cves} startYear={2018} endYear={2027} />
+    <table slot="table" class="viz-table">
+      <thead><tr><th>CVE</th><th>Product</th><th>NVD published</th><th class="viz-right">CVSS 3.1</th></tr></thead>
+      <tbody>{cve.cves.map((row) => (<tr><td class="viz-num">{row.cveId}{row.isStaged ? ' (staged)' : ''}</td><td>{row.product}</td><td>{formatReportDate(row.published)}</td><td class="viz-right">{row.cvss}</td></tr>))}</tbody>
+    </table>
+  </ChartFigure>
+
+  <div class="grid items-start gap-4 md:grid-cols-2">
+    <div class="rounded-xl border border-[var(--color-border)] p-5 text-sm">
+      <h4 class="font-semibold">The most serious 2026 advisory</h4>
+      <p class="mt-2 text-[var(--color-text-muted)]">
+        {advisory.cve_id} ({advisory.vendor} {advisory.product}, CVSS 3.1 {advisory.cvss31}). CISA advisory {advisory.advisory}: successful exploitation
+        "{advisory.quote}." {advisory.context}<SourceLinks ids={advisory.source_ids} />
+      </p>
+    </div>
+    <div class="rounded-xl border border-[var(--color-border)] p-5 text-sm">
+      <h4 class="font-semibold">Beyond CVEs</h4>
+      <ul class="mt-2 space-y-2 text-[var(--color-text-muted)]">
+        <li>Lab Streaming Layer, a common research transport for EEG streams, has no encryption, authentication or integrity checking; the maintainer calls this a known design characteristic. Qinnovate raised the issue, so we have an interest.<SourceLinks ids={report.lsl_transport.source_ids} /></li>
+        {report.corporate_incidents.map((incident) => (<li>{incident.company}, {formatReportDate(incident.date)}: {incident.label}<SourceLinks ids={incident.source_ids} /></li>))}
+        <li>Of the {announcements.readable} funding and clinical announcements from 2026 that we could read in full, {mentionsSecurity} mention{announcements.mention_device_security === 1 ? 's' : ''} device cybersecurity.<SourceLinks ids={announcements.source_ids} /></li>
+      </ul>
+    </div>
+  </div>
+</section>

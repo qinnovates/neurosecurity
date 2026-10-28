@@ -493,12 +493,3 @@ export const METRIC_VALUES: Record<string, Record<string, number | undefined>> =
   rv: RV_VALUES,
   np: NP_VALUES,
 } as const;
-
-/** Severity color map (matches threat-data.ts SEVERITY_COLORS + none) */
-export const NISS_SEVERITY_COLORS: Record<NissSeverity, { bg: string; border: string; text: string }> = {
-  none: { bg: 'rgba(148, 163, 184, 0.08)', border: 'rgba(148, 163, 184, 0.2)', text: '#64748b' },
-  low: { bg: 'rgba(148, 163, 184, 0.15)', border: 'rgba(148, 163, 184, 0.3)', text: '#94a3b8' },
-  medium: { bg: 'rgba(234, 179, 8, 0.15)', border: 'rgba(234, 179, 8, 0.3)', text: '#eab308' },
-  high: { bg: 'rgba(245, 158, 11, 0.15)', border: 'rgba(245, 158, 11, 0.3)', text: '#f59e0b' },
-  critical: { bg: 'rgba(239, 68, 68, 0.15)', border: 'rgba(239, 68, 68, 0.3)', text: '#ef4444' },
-} as const;

@@ -1,0 +1,56 @@
+---
+// Neural-device CVEs on a time axis (NVD publication date) against CVSS 3.1 base score.
+// Built in HTML with percentage positions so labels stay at text size on a phone.
+// Shape and color both encode the device group; a ring marks the CVE staged for mapping.
+import type { NeuralDeviceCve } from '@/lib/intel/bci-security-2026/types';
+import { formatReportDate, toFractionalYear } from '@/lib/intel/bci-security-2026/format';
+
+interface Props {
+  cves: NeuralDeviceCve[];
+  startYear: number;
+  endYear: number;
+}
+
+const DOT_PX = 12;
+const NUDGE_PX = 9;
+const CVSS_TICKS = [0, 4, 7, 9, 10];
+const GROUP_LABEL = { clinical_software: 'Clinical neurodiagnostic software', consumer_home: 'Consumer or home device' } as const;
+const { cves, startYear, endYear } = Astro.props;
+
+const xPercent = (isoDate: string): number => ((toFractionalYear(isoDate) - startYear) / (endYear - startYear)) * 100;
+const seen = new Map<string, number>();
+const points = cves.map((cve) => {
+  const key = `${cve.published.slice(0, 7)}|${cve.cvss}`;
+  const order = seen.get(key) ?? 0;
+  seen.set(key, order + 1);
+  return { ...cve, left: xPercent(cve.published), bottom: cve.cvss * 10, nudge: order * NUDGE_PX };
+});
+const yearTicks = Array.from({ length: endYear - startYear + 1 }, (_, index) => startYear + index);
+---
+<div class="relative ml-8 mr-2" style="height:15rem;" role="group" aria-label="Neural-device CVEs by publication date and CVSS score">
+  {CVSS_TICKS.map((tick) => (
+    <div class="absolute inset-x-0 border-t border-[var(--viz-grid)]" style={`bottom:${tick * 10}%;`} aria-hidden="true">
+      <span class="viz-num absolute -left-8 -translate-y-1/2 w-6 text-right text-[11px] text-[var(--color-text-faint)]">{tick}</span>
+    </div>
+  ))}
+  {points.map((point) => (
+    <span
+      class="viz-mark absolute block"
+      style={`left:calc(${point.left}% + ${point.nudge}px);bottom:${point.bottom}%;width:${DOT_PX}px;height:${DOT_PX}px;margin:0 0 -${DOT_PX / 2}px -${DOT_PX / 2}px;`
+        + (point.isStaged
+          ? `border:2px solid var(--viz-consumer);background:var(--viz-surface);border-radius:9999px;`
+          : `background:var(${point.group === 'clinical_software' ? '--viz-clinical' : '--viz-consumer'});box-shadow:0 0 0 2px var(--viz-surface);`
+            + (point.group === 'clinical_software' ? 'border-radius:9999px;' : 'transform:rotate(45deg) scale(0.85);border-radius:2px;'))}
+      data-tip-value={`${point.cveId} · CVSS ${point.cvss}`}
+      data-tip-label={`${point.product}. NVD ${formatReportDate(point.published)}.${point.isStaged ? ' Staged for technique mapping.' : ''}`}
+      tabindex="0"
+      aria-label={`${point.cveId}, ${point.vendor}, CVSS ${point.cvss}, published ${formatReportDate(point.published)}, ${GROUP_LABEL[point.group]}${point.isStaged ? ', staged' : ''}`}
+    ></span>
+  ))}
+</div>
+<div class="relative ml-8 mr-2 mt-1 h-4" aria-hidden="true">
+  {yearTicks.filter((year) => year % 2 === 0).map((year) => (
+    <span class="viz-num absolute -translate-x-1/2 text-[11px] text-[var(--color-text-faint)]" style={`left:${((year - startYear) / (endYear - startYear)) * 100}%;`}>{year}</span>
+  ))}
+</div>
+<p class="mt-2 text-[11px] text-[var(--color-text-faint)]">Vertical axis: CVSS 3.1 base score (0–10). Horizontal axis: NVD publication date.</p>

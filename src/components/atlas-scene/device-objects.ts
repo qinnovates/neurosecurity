@@ -22,6 +22,16 @@ const LABEL_HEIGHT_MM = 7;
 const LABEL_OFFSET_MM = 8;
 const DOT_COLOUR = '#ffffff';
 const RIM_COLOUR = '#1c1e26';
+/**
+ * The picked dot's ink takes no theme, and that is deliberate rather than
+ * overlooked. A dot is white with a dark rim on both surfaces, so what the
+ * picked one has to stand out against is the dot beside it, not the page: this
+ * ink reads 17.8:1 against the white dot, where the dark surface's selection ink
+ * (`#fcfcfb`) would be the white dot. The brackets around a shape are the other
+ * way round -- they stand against the page -- which is why they take the surface's
+ * ink and this does not. See `SURFACE_INK` in scene-drawing.ts.
+ */
+const PICKED_DOT_COLOUR = SELECTION_COLOUR;
 
 export interface DeviceObjects {
   group: Group;
@@ -49,7 +59,7 @@ export function buildDeviceObjects(drawing: DeviceDrawing, selectedElectrodeId: 
     const [x, y, z] = electrode.positionScene;
     const isPicked = electrode.id === selectedElectrodeId;
     const rim = new Mesh(new SphereGeometry(RIM_RADIUS_MM, DOT_SEGMENTS, DOT_SEGMENTS), new MeshBasicMaterial({ color: RIM_COLOUR, side: BackSide }));
-    const dot = new Mesh(new SphereGeometry(DOT_RADIUS_MM, DOT_SEGMENTS, DOT_SEGMENTS), new MeshBasicMaterial({ color: isPicked ? SELECTION_COLOUR : DOT_COLOUR }));
+    const dot = new Mesh(new SphereGeometry(DOT_RADIUS_MM, DOT_SEGMENTS, DOT_SEGMENTS), new MeshBasicMaterial({ color: isPicked ? PICKED_DOT_COLOUR : DOT_COLOUR }));
     const target = new Mesh(new SphereGeometry(PICK_RADIUS_MM, PICK_SEGMENTS, PICK_SEGMENTS), new MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false }));
     for (const part of [rim, dot, target]) {
       part.position.set(x, y, z);

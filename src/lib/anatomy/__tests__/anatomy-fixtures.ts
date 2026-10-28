@@ -48,6 +48,7 @@ export function buildVerdict(overrides: Partial<LicenceVerdict> = {}): LicenceVe
     read_on: '2026-10-09',
     verified_by: ['ai-pass-1'],
     human_confirmed: false,
+    licence_digest: 'c'.repeat(64),
     access_agreement: null,
     clearance: { cleared: true, reason: 'The grant is in the publisher\'s words.', unlocks_when: [], drafted_by: 'ai' },
     ...overrides,

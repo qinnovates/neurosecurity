@@ -138,7 +138,9 @@ export interface LicenceVerdict {
   quoted_terms: string[];
   read_on: string;
   verified_by: string[];
-  human_confirmed: false;
+  human_confirmed: boolean;
+  /** sha256 of canonicalJson({source_id, grant, treat_as, terms_url, quoted_terms}): what a confirmation vouches for. Changing any of those un-confirms it. */
+  licence_digest: string;
   access_agreement: AccessAgreement | null;
   clearance: Clearance;
 }

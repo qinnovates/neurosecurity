@@ -1,7 +1,7 @@
 {
   "_metadata": {
     "title": "QIF Neural Pathways Atlas",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "created": "2026-03-11",
     "description": "Named neural pathways, tracts, circuits, and large-scale networks mapped to QIF hourglass bands, brain regions, DSM-5-TR conditions, and threat techniques. Organized by pathway type: neurotransmitter-specific, sensory ascending, motor descending, limbic circuits, cortical networks, and cerebellar loops. For threat modeling purposes — diagnostic category references, not diagnostic claims.",
     "primary_sources": [
@@ -16,6 +16,9 @@
       "DSM mappings are diagnostic category references requiring clinical validation.",
       "BCI relevance indicates which pathways are targetable by current or near-future BCI technology.",
       "Confidence: HIGH = well-established in primary literature, MEDIUM = supported by review papers, LOW = inferred from connectivity data.",
+      "endpoint_naming says, for every endpoint of every pathway, whether the region id written there names the structure the pathway itself describes. exact: it does. container_stand_in: the id names a region that contains, or spans beyond, the structure meant, because that structure has no entry in brain_regions of qif-brain-bci-atlas.json; the structure meant is named in endpoint_naming_notes. unreviewed: this pass did not establish which of the two it is, and nothing may be concluded either way. The lists are positional: endpoint_naming.origin[i] is about origin[i] and endpoint_naming.targets[i] about targets[i]. The field exists because an atlas id written as a stand-in resolves as an exact id match and nothing downstream could tell the difference: region_alias_relations in qif-brain-bci-atlas.json classifies aliases only, and its own note says a file that writes an atlas id directly as a stand-in is not flagged by it. endpoint_naming changes no id, adds no region and adds no alias; it only states what the existing ids mean.",
+      "A container_stand_in endpoint still resolves as an exact id match in the datalake scripts, so a condition code filed with the pathway is still joined to the containing region. The mark says that join carries the whole container, not the nucleus the pathway names. Fixing that is an addressing decision for the repository owner, not a correction this field makes.",
+      "withheld_pathways holds pathways removed from the pathways list because a defect was found in them that cannot be stated correctly in the current region table. A withheld entry is kept in full, with the superseded claim recorded verbatim, so the correction is auditable. Nothing reads it: the datalake scripts, the query tables and the site all read pathways only. A withheld entry carries no band field, because bands are derived from brain_regions[].qif_band by npm run derive:pathway-bands and only pathways entries are derived.",
       "dsm_conditions holds ICD-10-CM chapter F codes only, and dsm_names gives each code's official ICD-10-CM FY2027 title (not DSM-5-TR text). icd10_conditions and icd10_names hold the codes outside chapter F on the same terms. Header (non-billable) codes are category references and are marked kind 'category' in datalake/validation/icd10cm-fy2027-titles.json."
     ]
   },
@@ -42,6 +45,7 @@
       "origin_band": "N5",
       "targets": ["prefrontal_cortex", "anterior_cingulate_cortex"],
       "target_bands": ["N7", "N6"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["exact", "exact"]},
       "function": "Executive function, working memory, attention, cognitive flexibility, motivation",
       "bci_relevance": "HIGH — PFC is primary target of non-invasive neurostimulation (tDCS, TMS). Disruption affects decision-making and impulse control.",
       "dsm_conditions": ["F20", "F90", "F32"],
@@ -61,6 +65,10 @@
       "origin_band": "N5",
       "targets": ["striatum", "basolateral_amygdala", "hippocampus"],
       "target_bands": ["N5", "N6"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["container_stand_in", "exact", "exact"]},
+      "endpoint_naming_notes": {
+        "targets:striatum": "This pathway's own bci_relevance names the nucleus accumbens ('DBS targets nucleus accumbens for treatment-resistant depression and OCD'). The accumbens is the ventral striatum; qif-brain-bci-atlas.json lists it as a sub-structure of striatum and carries nucleus_accumbens only as a part_to_whole alias, so there is no entry to name and striatum stands in for it."
+      },
       "function": "Reward processing, pleasure, motivation, reinforcement learning, emotional salience",
       "bci_relevance": "HIGH — DBS targets nucleus accumbens for treatment-resistant depression and OCD. Reward circuit manipulation is a primary dual-use concern.",
       "dsm_conditions": ["F20", "F14", "F32", "F63.0"],
@@ -80,6 +88,10 @@
       "origin_band": "N5",
       "targets": ["striatum"],
       "target_bands": ["N5"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["exact"]},
+      "endpoint_naming_notes": {
+        "origin:substantia_nigra": "The nigrostriatal dopamine projection arises from the pars compacta. qif-brain-bci-atlas.json lists 'Pars Compacta (SNc)' and 'Pars Reticulata (SNr)' as sub-structures of substantia_nigra and has no entry for either, so the whole nucleus stands in for the compacta."
+      },
       "function": "Voluntary motor control, movement initiation, motor learning, habit formation",
       "bci_relevance": "CRITICAL — Primary target of DBS for Parkinson's disease. STN stimulation modulates this pathway. Most clinically validated BCI intervention.",
       "dsm_conditions": [],
@@ -99,6 +111,11 @@
       "origin_band": "N4",
       "targets": ["hypothalamus"],
       "target_bands": ["N4"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["container_stand_in"]},
+      "endpoint_naming_notes": {
+        "origin:hypothalamus": "The neurons are the tuberoinfundibular dopamine group of the arcuate and periventricular hypothalamus. qif-brain-bci-atlas.json's hypothalamus sub-structures list the suprachiasmatic, paraventricular, lateral, ventromedial and preoptic divisions and no arcuate entry, so hypothalamus stands in for it.",
+        "targets:hypothalamus": "The axons end on the portal capillaries of the median eminence, and this pathway's own function names the anterior pituitary as what it acts on. Neither the median eminence nor the pituitary is an entry of brain_regions, so hypothalamus stands in for the median eminence."
+      },
       "function": "Inhibits prolactin release from anterior pituitary. Regulates reproductive and metabolic hormones.",
       "bci_relevance": "LOW — Deep structure, not directly targetable by current non-invasive BCI. Relevant for understanding side effects of DBS near hypothalamus.",
       "dsm_conditions": [],
@@ -119,6 +136,10 @@
       "origin_band": "N2",
       "targets": ["prefrontal_cortex", "anterior_cingulate_cortex", "insular_cortex"],
       "target_bands": ["N7", "N6"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["exact", "exact", "exact"]},
+      "endpoint_naming_notes": {
+        "origin:pons": "This pathway's own name is 'Dorsal Raphe -> Cortex (Serotonergic)'. qif-brain-bci-atlas.json lists 'Raphe nuclei (pontine)' as a sub-structure of pons and has no raphe entry, so pons stands in for the dorsal raphe nucleus. The human dorsal raphe is not wholly pontine: it runs from the caudal mesencephalon into the rostral pons (Hornung 2003, 10.1016/j.jchemneu.2003.10.002), so the stand-in also drops the midbrain part of the nucleus."
+      },
       "function": "Mood regulation, impulse control, emotional processing, anxiety modulation",
       "bci_relevance": "MEDIUM — TMS protocols affect serotonergic tone indirectly. Vagus nerve stimulation modulates raphe activity.",
       "dsm_conditions": ["F32", "F41.1", "F42", "F50"],
@@ -138,6 +159,10 @@
       "origin_band": "N2",
       "targets": ["hippocampus", "basolateral_amygdala"],
       "target_bands": ["N6"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["exact", "exact"]},
+      "endpoint_naming_notes": {
+        "origin:pons": "This pathway's own name is 'Median Raphe -> Limbic (Serotonergic)'. qif-brain-bci-atlas.json lists 'Raphe nuclei (pontine)' as a sub-structure of pons and has no raphe entry, so pons stands in for the median raphe nucleus (Hornung 2003, 10.1016/j.jchemneu.2003.10.002)."
+      },
       "function": "Fear conditioning, memory consolidation under emotional arousal, anxiety regulation",
       "bci_relevance": "MEDIUM — Hippocampal-targeted stimulation affects this circuit. Fear extinction protocols modulate amygdala serotonin.",
       "dsm_conditions": ["F43.10", "F40", "F41.0"],
@@ -158,6 +183,10 @@
       "origin_band": "N2",
       "targets": ["prefrontal_cortex", "posterior_parietal_cortex", "primary_somatosensory_cortex"],
       "target_bands": ["N7"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["exact", "exact", "exact"]},
+      "endpoint_naming_notes": {
+        "origin:pons": "This pathway's own name is 'Locus Coeruleus -> Cortex (Noradrenergic)'. qif-brain-bci-atlas.json lists 'Locus coeruleus' as a sub-structure of pons and has no entry for it, so pons stands in for the nucleus, which occupies a small part of the dorsal rostral pons (Samuels & Szabadi 2008, 10.2174/157015908785777229)."
+      },
       "function": "Arousal, alertness, attention, stress response, vigilance, fight-or-flight activation",
       "bci_relevance": "MEDIUM — VNS activates locus coeruleus. Arousal state affects all BCI signal quality.",
       "dsm_conditions": ["F43.10", "F41.0", "F90", "F51"],
@@ -177,6 +206,10 @@
       "origin_band": "N2",
       "targets": ["basolateral_amygdala", "central_amygdala"],
       "target_bands": ["N6", "N5"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["exact", "exact"]},
+      "endpoint_naming_notes": {
+        "origin:pons": "This pathway's own name is 'Locus Coeruleus -> Amygdala (Noradrenergic)'. qif-brain-bci-atlas.json lists 'Locus coeruleus' as a sub-structure of pons and has no entry for it, so pons stands in for the nucleus (Samuels & Szabadi 2008, 10.2174/157015908785777229)."
+      },
       "function": "Emotional memory encoding under stress, fear consolidation, threat detection amplification",
       "bci_relevance": "HIGH — This pathway is why stress enhances traumatic memory formation. BCI-induced arousal could strengthen fear memories.",
       "dsm_conditions": ["F43.10", "F43.0"],
@@ -189,25 +222,6 @@
     },
 
     {
-      "id": "basal_forebrain_cholinergic",
-      "name": "Basal Forebrain → Cortex (Cholinergic)",
-      "type": "neurotransmitter",
-      "neurotransmitter": "acetylcholine",
-      "origin": ["basolateral_amygdala"],
-      "origin_band": "N6",
-      "targets": ["prefrontal_cortex", "hippocampus", "primary_visual_cortex", "primary_auditory_cortex"],
-      "target_bands": ["N7", "N6"],
-      "function": "Sustained attention, memory encoding, cortical plasticity, learning, REM sleep",
-      "bci_relevance": "HIGH — Cholinergic tone affects all EEG-based BCI performance. Attention-dependent BCIs rely on this pathway.",
-      "dsm_conditions": ["F90"],
-      "dsm_names": ["Attention-deficit hyperactivity disorders"],
-      "icd10_conditions": ["G30"],
-      "icd10_names": ["Alzheimer's disease"],
-      "disruption_effects": "Memory impairment, attentional deficits, confusion, reduced cortical plasticity",
-      "therapeutic_applications": ["Cholinesterase inhibitors for Alzheimer's", "Neurofeedback for attention training"],
-      "confidence": "HIGH"
-    },
-    {
       "id": "pedunculopontine_cholinergic",
       "name": "Pedunculopontine Nucleus → Thalamus (Cholinergic)",
       "type": "neurotransmitter",
@@ -216,6 +230,10 @@
       "origin_band": "N2",
       "targets": ["thalamus", "substantia_nigra", "subthalamic_nucleus"],
       "target_bands": ["N4", "N5"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["exact", "exact", "exact"]},
+      "endpoint_naming_notes": {
+        "origin:pons": "This pathway's own name is 'Pedunculopontine Nucleus -> Thalamus (Cholinergic)'. brain_regions has no entry for the nucleus, and qif-brain-bci-atlas.json lists 'Pedunculopontine nucleus (PPN)' as a sub-structure of reticular_formation, not of pons, so the origin written here is a stand-in that also disagrees with where the same atlas files the nucleus. The PPN straddles the pontomesencephalic junction (Mena-Segovia & Bolam 2017, 10.1016/j.neuron.2017.02.027; Mesulam et al. 1983 group Ch5, 10.1016/0306-4522(83)90108-2). Retargeting it to reticular_formation is a separate change and is not made in this pass."
+      },
       "function": "Sleep-wake transitions, REM sleep generation, gait initiation, postural control",
       "bci_relevance": "MEDIUM — DBS of PPN being investigated for freezing of gait in Parkinson's.",
       "dsm_conditions": [],
@@ -236,6 +254,10 @@
       "origin_band": "N1",
       "targets": ["thalamus", "primary_somatosensory_cortex"],
       "target_bands": ["N4", "N7"],
+      "endpoint_naming": {"origin": ["exact", "exact", "exact"], "targets": ["container_stand_in", "exact"]},
+      "endpoint_naming_notes": {
+        "targets:thalamus": "The medial lemniscus ends in the ventral posterolateral nucleus, which qif-brain-bci-atlas.json lists as a sub-structure of thalamus with no entry of its own, so thalamus stands in for it. The gracile and cuneate nuclei of the medulla, the pathway's first central relay, are listed as no endpoint at all."
+      },
       "function": "Fine touch, proprioception, vibration sense, two-point discrimination",
       "bci_relevance": "HIGH — Proprioceptive feedback essential for motor BCIs. Spinal cord stimulation targets this pathway.",
       "dsm_conditions": [],
@@ -255,6 +277,10 @@
       "origin_band": "N1",
       "targets": ["thalamus", "primary_somatosensory_cortex", "insular_cortex", "anterior_cingulate_cortex"],
       "target_bands": ["N4", "N7", "N6"],
+      "endpoint_naming": {"origin": ["exact", "exact", "exact", "exact"], "targets": ["container_stand_in", "exact", "exact", "exact"]},
+      "endpoint_naming_notes": {
+        "targets:thalamus": "The spinothalamic projection ends mainly in the ventral posterolateral nucleus, which qif-brain-bci-atlas.json lists as a sub-structure of thalamus with no entry of its own, so thalamus stands in for it."
+      },
       "function": "Pain, temperature, crude touch. The primary nociceptive (pain) pathway.",
       "bci_relevance": "CRITICAL — Pain is the most common target of spinal cord stimulation BCIs. Disruption has immediate quality-of-life impact.",
       "dsm_conditions": ["F45"],
@@ -274,6 +300,7 @@
       "origin_band": "N1",
       "targets": ["cerebellar_cortex", "deep_cerebellar_nuclei"],
       "target_bands": ["N3"],
+      "endpoint_naming": {"origin": ["exact", "exact", "exact"], "targets": ["exact", "exact"]},
       "function": "Unconscious proprioception — limb position and movement for real-time motor coordination",
       "bci_relevance": "MEDIUM — Cerebellar BCIs rely on this input. Disruption impairs all cerebellar-dependent motor tasks.",
       "dsm_conditions": [],
@@ -293,6 +320,12 @@
       "origin_band": "N2",
       "targets": ["thalamus", "primary_somatosensory_cortex"],
       "target_bands": ["N4", "N7"],
+      "endpoint_naming": {"origin": ["container_stand_in", "container_stand_in"], "targets": ["container_stand_in", "exact"]},
+      "endpoint_naming_notes": {
+        "origin:pons": "The relays are the trigeminal sensory nuclei: datalake/qif-cranial-nerves.json files CN-V's 'main sensory nucleus (pons, discriminative touch)' and 'spinal trigeminal nucleus (pons to C2, pain and temperature)'. brain_regions has no entry for either, so the brainstem region written here stands in for the part it contains. The spinal trigeminal nucleus also reaches C2, below either region.",
+        "origin:medulla_oblongata": "The relays are the trigeminal sensory nuclei: datalake/qif-cranial-nerves.json files CN-V's 'main sensory nucleus (pons, discriminative touch)' and 'spinal trigeminal nucleus (pons to C2, pain and temperature)'. brain_regions has no entry for either, so the brainstem region written here stands in for the part it contains. The spinal trigeminal nucleus also reaches C2, below either region.",
+        "targets:thalamus": "The relay is the ventral posteromedial nucleus, which qif-brain-bci-atlas.json lists as a sub-structure of thalamus with no entry of its own, so thalamus stands in for it."
+      },
       "function": "Face and head sensation — touch, pain, temperature from trigeminal nerve territory",
       "bci_relevance": "LOW — Not directly targeted by BCIs, but relevant for facial nerve interfaces.",
       "dsm_conditions": [],
@@ -312,6 +345,12 @@
       "origin_band": "N2",
       "targets": ["thalamus", "primary_auditory_cortex"],
       "target_bands": ["N4", "N7"],
+      "endpoint_naming": {"origin": ["container_stand_in", "container_stand_in"], "targets": ["container_stand_in", "exact"]},
+      "endpoint_naming_notes": {
+        "origin:pons": "The relays below the thalamus are the cochlear nuclei and the superior olivary complex. Neither is an entry of brain_regions, so pons stands in for them; the cochlear nuclei sit at the pontomedullary junction, so the stand-in is not wholly within pons either. The cochlea and the cochlear nerve, the pathway's first stages, are not in brain_regions at all.",
+        "origin:midbrain": "The midbrain relay is the inferior colliculus, which qif-brain-bci-atlas.json lists as a sub-structure of midbrain with no entry of its own, so midbrain stands in for it.",
+        "targets:thalamus": "The thalamic relay is the medial geniculate nucleus, which qif-brain-bci-atlas.json lists as a sub-structure of thalamus with no entry of its own, so thalamus stands in for it."
+      },
       "function": "Sound processing — frequency discrimination, sound localization, speech perception",
       "bci_relevance": "HIGH — Cochlear implants are the most successful BCI. Auditory cortex BCIs for deaf individuals.",
       "dsm_conditions": [],
@@ -331,6 +370,10 @@
       "origin_band": "N4",
       "targets": ["primary_visual_cortex"],
       "target_bands": ["N7"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["exact"]},
+      "endpoint_naming_notes": {
+        "origin:thalamus": "This pathway's own name is 'Retino-Geniculo-Striate'. The geniculate relay is the lateral geniculate nucleus, which qif-brain-bci-atlas.json lists as a sub-structure of thalamus with no entry of its own, so thalamus stands in for it. The retina, the pathway's actual first stage, is not in brain_regions and is listed as no endpoint."
+      },
       "function": "Conscious vision — object recognition, color, motion, depth perception",
       "bci_relevance": "HIGH — Visual cortex prostheses (Orion, CORTIVIS) target this pathway. Retinal implants bypass early stages.",
       "dsm_conditions": [],
@@ -350,6 +393,12 @@
       "origin_band": "N2",
       "targets": ["cerebellar_vermis", "thalamus", "primary_somatosensory_cortex"],
       "target_bands": ["N3", "N4", "N7"],
+      "endpoint_naming": {"origin": ["container_stand_in", "container_stand_in"], "targets": ["exact", "unreviewed", "exact"]},
+      "endpoint_naming_notes": {
+        "origin:medulla_oblongata": "The relays are the four vestibular nuclei (superior, lateral, medial, inferior), which span the caudal pons and the rostral medulla; datalake/qif-cranial-nerves.json files them under CN-VIII. brain_regions has no entry for the complex, so each brainstem region written here stands in for the part of it that region contains.",
+        "origin:pons": "The relays are the four vestibular nuclei (superior, lateral, medial, inferior), which span the caudal pons and the rostral medulla; datalake/qif-cranial-nerves.json files them under CN-VIII. brain_regions has no entry for the complex, so each brainstem region written here stands in for the part of it that region contains.",
+        "targets:thalamus": "The vestibular thalamic targets are usually given as parts of the ventral posterior complex and the pulvinar, and this pathway's own text names none of them. Left unreviewed."
+      },
       "function": "Balance, spatial orientation, vestibulo-ocular reflex, postural control",
       "bci_relevance": "MEDIUM — Vestibular implants under development. GVS (galvanic vestibular stimulation) is a known attack vector.",
       "dsm_conditions": [],
@@ -369,6 +418,13 @@
       "origin_band": "N7",
       "targets": ["basolateral_amygdala", "hippocampus", "insular_cortex"],
       "target_bands": ["N6"],
+      "endpoint_naming": {"origin": ["unreviewed"], "targets": ["unreviewed", "unreviewed", "unreviewed"]},
+      "endpoint_naming_notes": {
+        "origin:prefrontal_cortex": "Flagged, not resolved. This pathway's own function says olfactory bulb output goes to piriform cortex and cortical amygdala, and that piriform cortex reaches orbitofrontal cortex only through the mediodorsal thalamic nucleus. prefrontal_cortex is therefore neither this pathway's origin nor a region containing it. The olfactory bulb, piriform cortex, olfactory tubercle, entorhinal cortex and mediodorsal thalamic nucleus are all absent from brain_regions. This is the same class of defect as T-156 and needs its own verdict; this pass marks it and changes nothing.",
+        "targets:basolateral_amygdala": "This pathway's own function names the cortical amygdala, which is not the basolateral amygdala and is not an entry of brain_regions. Left unreviewed; see the origin note.",
+        "targets:hippocampus": "This pathway's own function names the entorhinal cortex, not the hippocampus, and entorhinal cortex is not an entry of brain_regions. Left unreviewed; see the origin note.",
+        "targets:insular_cortex": "This pathway's own function names no insular stage. Left unreviewed; see the origin note."
+      },
       "function": "Olfaction is the only major sensory modality that reaches its primary cortex without an obligatory thalamic relay: in rodents, olfactory bulb output goes directly to piriform cortex and cortical amygdala, and projections to the olfactory tubercle and entorhinal cortex are also described; the human pathway is inferred by homology. It is not thalamus-free: piriform cortex projects to the mediodorsal thalamic nucleus, which is reciprocally connected with orbitofrontal cortex.",
       "bci_relevance": "LOW — No current BCIs target olfaction. But direct limbic access makes it a theoretical attack vector for emotional manipulation.",
       "dsm_conditions": [],
@@ -388,6 +444,11 @@
       "origin_band": "N2",
       "targets": ["thalamus", "insular_cortex"],
       "target_bands": ["N4", "N6"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["container_stand_in", "exact"]},
+      "endpoint_naming_notes": {
+        "origin:medulla_oblongata": "This pathway's own function names the relay: 'Relays through nucleus tractus solitarius to thalamus VPM to insular cortex/frontal operculum'. qif-brain-bci-atlas.json lists 'Nucleus tractus solitarius (NTS)' as a sub-structure of medulla with no entry of its own, so medulla stands in for it.",
+        "targets:thalamus": "This pathway's own function names thalamus VPM. qif-brain-bci-atlas.json lists 'Ventral Posteromedial (VPM)' as a sub-structure of thalamus with no entry of its own, so thalamus stands in for it."
+      },
       "function": "Taste processing — sweet, sour, salty, bitter, umami via CN VII (anterior 2/3 tongue), CN IX (posterior 1/3), CN X (epiglottis). Relays through nucleus tractus solitarius to thalamus VPM to insular cortex/frontal operculum.",
       "bci_relevance": "LOW — No current BCIs target taste. However, the insular cortex (gustatory terminus) is an emerging BCI target for interoception, pain modulation, and salience network interventions. Insula-targeting BCIs could disrupt taste as a side effect.",
       "dsm_conditions": [],
@@ -408,6 +469,7 @@
       "origin_band": "N7",
       "targets": ["cervical_spinal_cord", "thoracic_spinal_cord", "lumbar_spinal_cord"],
       "target_bands": ["N1"],
+      "endpoint_naming": {"origin": ["exact", "exact", "exact"], "targets": ["exact", "exact", "exact"]},
       "function": "Voluntary movement — fine motor control of limbs, especially distal muscles (hands, fingers)",
       "bci_relevance": "CRITICAL — Motor BCIs decode signals from this tract. BrainGate, Neuralink target motor cortex neurons feeding this pathway.",
       "dsm_conditions": [],
@@ -427,6 +489,11 @@
       "origin_band": "N7",
       "targets": ["pons", "medulla_oblongata"],
       "target_bands": ["N2"],
+      "endpoint_naming": {"origin": ["exact", "exact"], "targets": ["container_stand_in", "container_stand_in"]},
+      "endpoint_naming_notes": {
+        "targets:pons": "The tract ends on cranial nerve motor nuclei. datalake/qif-cranial-nerves.json files the motor nucleus of CN V in the pons; brain_regions has no entry for it, so pons stands in for the nuclei it contains.",
+        "targets:medulla_oblongata": "datalake/qif-cranial-nerves.json files the nucleus ambiguus in the medulla, and the hypoglossal nucleus lies there too; brain_regions has no entry for either, so medulla stands in for the nuclei it contains."
+      },
       "function": "Motor control of face, jaw, tongue, pharynx, larynx — speech and swallowing",
       "bci_relevance": "HIGH — Speech BCIs decode signals from cortical regions feeding this tract.",
       "dsm_conditions": ["F48.2"],
@@ -446,6 +513,10 @@
       "origin_band": "N2",
       "targets": ["cervical_spinal_cord"],
       "target_bands": ["N1"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["exact"]},
+      "endpoint_naming_notes": {
+        "origin:midbrain": "This pathway's own name is 'Rubrospinal': the red nucleus. qif-brain-bci-atlas.json lists 'Red nucleus' as a sub-structure of midbrain with no entry of its own, so midbrain stands in for it."
+      },
       "function": "Flexor motor control — assists corticospinal tract for upper limb movements",
       "bci_relevance": "LOW — Not directly targeted by BCIs. May serve as compensatory pathway after corticospinal damage.",
       "dsm_conditions": [],
@@ -465,6 +536,10 @@
       "origin_band": "N2",
       "targets": ["cervical_spinal_cord", "thoracic_spinal_cord", "lumbar_spinal_cord"],
       "target_bands": ["N1"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["exact", "exact", "exact"]},
+      "endpoint_naming_notes": {
+        "origin:medulla_oblongata": "The relays are the four vestibular nuclei (superior, lateral, medial, inferior), which span the caudal pons and the rostral medulla; datalake/qif-cranial-nerves.json files them under CN-VIII. brain_regions has no entry for the complex, so each brainstem region written here stands in for the part of it that region contains. The superior and lateral vestibular nuclei reach the caudal pons, which this pathway does not list."
+      },
       "function": "Postural control — maintains balance by activating extensor muscles in response to vestibular input",
       "bci_relevance": "MEDIUM — GVS (galvanic vestibular stimulation) modulates this pathway. Used in balance rehabilitation.",
       "dsm_conditions": [],
@@ -484,6 +559,11 @@
       "origin_band": "N2",
       "targets": ["cervical_spinal_cord", "thoracic_spinal_cord", "lumbar_spinal_cord"],
       "target_bands": ["N1"],
+      "endpoint_naming": {"origin": ["container_stand_in", "container_stand_in"], "targets": ["exact", "exact", "exact"]},
+      "endpoint_naming_notes": {
+        "origin:pons": "This pathway's own name is 'Reticulospinal': the pontine and medullary reticular formation. brain_regions does hold reticular_formation (N2), so unlike the other stand-ins in this file this endpoint has an available entry and the pathway names the container instead. Retargeting it is a separate change and is not made in this pass.",
+        "origin:medulla_oblongata": "As for the pontine origin: brain_regions holds reticular_formation (N2) and this endpoint names the container instead. qif-brain-bci-atlas.json lists 'Pontine reticular formation' as a sub-structure of pons and the gigantocellular reticular nucleus under reticular_formation. Retargeting is a separate change and is not made in this pass."
+      },
       "function": "Automatic posture, locomotion, muscle tone regulation, respiratory motor neurons",
       "bci_relevance": "MEDIUM — Spinal cord stimulation for locomotion recovery targets neurons receiving reticulospinal input.",
       "dsm_conditions": [],
@@ -503,6 +583,10 @@
       "origin_band": "N2",
       "targets": ["cervical_spinal_cord"],
       "target_bands": ["N1"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["exact"]},
+      "endpoint_naming_notes": {
+        "origin:midbrain": "This pathway's own name is 'Tectospinal': the tectum, that is the superior colliculus. qif-brain-bci-atlas.json lists 'Superior colliculus' as a sub-structure of midbrain with no entry of its own, so midbrain stands in for it."
+      },
       "function": "Head and neck orientation toward visual and auditory stimuli — reflexive gaze stabilization",
       "bci_relevance": "LOW — Not directly targeted. Relevant for understanding gaze-tracking BCI interference.",
       "dsm_conditions": [],
@@ -522,6 +606,10 @@
       "origin_band": "N7",
       "targets": ["pons", "cerebellar_cortex"],
       "target_bands": ["N2", "N3"],
+      "endpoint_naming": {"origin": ["exact", "exact", "exact"], "targets": ["container_stand_in", "exact"]},
+      "endpoint_naming_notes": {
+        "targets:pons": "The cortical input ends on the pontine nuclei, which qif-brain-bci-atlas.json lists as a sub-structure of pons with no entry of their own, so pons stands in for them."
+      },
       "function": "Sends motor plan copy to cerebellum for error correction and timing adjustment",
       "bci_relevance": "MEDIUM — Cerebellar processing of motor commands is critical for smooth BCI-controlled movement.",
       "dsm_conditions": [],
@@ -542,6 +630,11 @@
       "origin_band": "N6",
       "targets": ["hypothalamus", "thalamus", "anterior_cingulate_cortex", "hippocampus"],
       "target_bands": ["N4", "N6"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["container_stand_in", "container_stand_in", "exact", "exact"]},
+      "endpoint_naming_notes": {
+        "targets:hypothalamus": "This pathway's own function names the circuit: 'hippocampus -> fornix -> mammillary bodies -> anterior thalamus -> cingulate -> hippocampus'. The mammillary bodies are not an entry of brain_regions, so hypothalamus stands in for them.",
+        "targets:thalamus": "This pathway's own function names the anterior thalamus. brain_regions does hold ant, 'Anterior Nucleus of Thalamus' (N4), so this endpoint has an available entry and the pathway names the whole thalamus instead. Retargeting it is a separate change and is not made in this pass."
+      },
       "function": "Episodic memory formation and emotional context. The core memory circuit — hippocampus → fornix → mammillary bodies → anterior thalamus → cingulate → hippocampus.",
       "bci_relevance": "HIGH — Memory prosthetics (DARPA RAM) target hippocampal nodes of this circuit. Memory manipulation is a dual-use concern.",
       "dsm_conditions": ["F43.10"],
@@ -561,6 +654,7 @@
       "origin_band": "N6",
       "targets": ["prefrontal_cortex"],
       "target_bands": ["N7"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["exact"]},
       "function": "Top-down emotion regulation — PFC inhibits amygdala fear response. Bidirectional: amygdala signals threat to PFC for appraisal.",
       "bci_relevance": "HIGH — TMS to DLPFC modulates this circuit for depression and anxiety. Neurofeedback targets amygdala-PFC connectivity.",
       "dsm_conditions": ["F41.1", "F43.10", "F60.3", "F32"],
@@ -580,6 +674,7 @@
       "origin_band": "N6",
       "targets": ["prefrontal_cortex"],
       "target_bands": ["N7"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["exact"]},
       "function": "Memory consolidation, contextual memory retrieval, working memory maintenance, spatial decision-making",
       "bci_relevance": "HIGH — Memory BCIs must interface with this circuit. Sleep replay (sharp-wave ripples) consolidates through this pathway.",
       "dsm_conditions": ["F32", "F20"],
@@ -599,6 +694,7 @@
       "origin_band": "N7",
       "targets": ["striatum", "globus_pallidus_internus", "thalamus", "prefrontal_cortex"],
       "target_bands": ["N5", "N4", "N7"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["exact", "exact", "exact", "exact"]},
       "function": "Action selection, habit formation, reward-based decision making, impulse control. Multiple parallel loops (motor, cognitive, limbic, oculomotor).",
       "bci_relevance": "CRITICAL — DBS targets nodes of this loop (STN, GPi) for multiple conditions. Most common DBS target system.",
       "dsm_conditions": ["F42", "F95.2", "F63"],
@@ -618,6 +714,10 @@
       "origin_band": "N5",
       "targets": ["striatum", "prefrontal_cortex", "basolateral_amygdala", "hippocampus", "anterior_cingulate_cortex"],
       "target_bands": ["N5", "N7", "N6"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["unreviewed", "exact", "exact", "exact", "exact"]},
+      "endpoint_naming_notes": {
+        "targets:striatum": "The extended reward circuit is usually drawn on the ventral striatum, but this pathway's own text names neither the accumbens nor a striatal division. Left unreviewed."
+      },
       "function": "Reward prediction, motivation, pleasure, reinforcement learning. Integrates VTA dopamine with cortical evaluation and limbic salience.",
       "bci_relevance": "CRITICAL — Highest dual-use concern. DBS of nucleus accumbens treats depression but could theoretically induce compulsive states. Reward manipulation is the clearest BCI abuse vector.",
       "dsm_conditions": ["F14", "F32", "F42", "F63.0"],
@@ -637,6 +737,10 @@
       "origin_band": "N6",
       "targets": ["central_amygdala", "hypothalamus", "pons", "prefrontal_cortex"],
       "target_bands": ["N5", "N4", "N2", "N7"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["exact", "exact", "unreviewed", "exact"]},
+      "endpoint_naming_notes": {
+        "targets:pons": "This pathway's own text names an autonomic fear response and no pontine structure. The periaqueductal gray, the usual descending node, is midbrain and is carried in qif-brain-bci-atlas.json only as the part_to_whole alias PAG -> midbrain. Left unreviewed."
+      },
       "function": "Threat detection, fear conditioning, autonomic fear response (heart rate, cortisol), fear extinction via PFC inhibition",
       "bci_relevance": "HIGH — Fear circuit manipulation is a primary TARA concern. Both attack vector (inducing fear) and therapeutic target (fear extinction for PTSD).",
       "dsm_conditions": ["F43.10", "F40", "F41.0", "F93.0"],
@@ -657,6 +761,10 @@
       "origin_band": "N7",
       "targets": ["cingulate", "hippocampus", "posterior_parietal_cortex"],
       "target_bands": ["N6", "N7"],
+      "endpoint_naming": {"origin": ["unreviewed"], "targets": ["unreviewed", "unreviewed", "unreviewed"]},
+      "endpoint_naming_notes": {
+        "_pathway": "Network membership is parcellation-dependent. The repository's own Class C pass (datalake/intake/2026-10-21/atlas-class-c-networks.json) found most constituents of the large-scale networks unaddressable in the 38-entry region table and proposed that they light nothing. Every endpoint of this pathway is therefore left unreviewed rather than called exact."
+      },
       "function": "Self-referential thinking, mind-wandering, autobiographical memory, theory of mind, internal mentation. Active at rest, suppressed during tasks.",
       "bci_relevance": "HIGH — DMN activity interferes with task-based BCIs. Neurofeedback can train DMN suppression. Aberrant DMN activity is a biomarker for multiple disorders.",
       "dsm_conditions": ["F32", "F20", "F84.0"],
@@ -676,6 +784,10 @@
       "origin_band": "N6",
       "targets": ["prefrontal_cortex", "basolateral_amygdala", "striatum"],
       "target_bands": ["N7", "N6", "N5"],
+      "endpoint_naming": {"origin": ["unreviewed", "unreviewed"], "targets": ["unreviewed", "unreviewed", "unreviewed"]},
+      "endpoint_naming_notes": {
+        "_pathway": "Network membership is parcellation-dependent. The repository's own Class C pass (datalake/intake/2026-10-21/atlas-class-c-networks.json) found most constituents of the large-scale networks unaddressable in the 38-entry region table and proposed that they light nothing. Every endpoint of this pathway is therefore left unreviewed rather than called exact."
+      },
       "function": "Detects salient stimuli and switches between DMN (internal) and CEN (external) processing. The brain's attention router.",
       "bci_relevance": "HIGH — Salience network dysfunction disrupts all attention-dependent BCIs. Insula is emerging as a key BCI target for interoception.",
       "dsm_conditions": ["F20", "F41.1", "F43.10", "F84.0"],
@@ -695,6 +807,10 @@
       "origin_band": "N7",
       "targets": ["posterior_parietal_cortex", "premotor_cortex"],
       "target_bands": ["N7"],
+      "endpoint_naming": {"origin": ["unreviewed"], "targets": ["unreviewed", "unreviewed"]},
+      "endpoint_naming_notes": {
+        "_pathway": "Network membership is parcellation-dependent. The repository's own Class C pass (datalake/intake/2026-10-21/atlas-class-c-networks.json) found most constituents of the large-scale networks unaddressable in the 38-entry region table and proposed that they light nothing. Every endpoint of this pathway is therefore left unreviewed rather than called exact."
+      },
       "function": "Goal-directed attention, working memory manipulation, cognitive control, problem-solving, task switching",
       "bci_relevance": "HIGH — Task-based BCIs rely on CEN engagement. P300-based BCIs measure CEN output.",
       "dsm_conditions": ["F90", "F20"],
@@ -714,6 +830,7 @@
       "origin_band": "N7",
       "targets": ["wernicke"],
       "target_bands": ["N7"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["exact"]},
       "function": "Language production and comprehension — connects Broca's area (speech production) with Wernicke's area (speech comprehension). Bidirectional.",
       "bci_relevance": "HIGH — Speech BCIs decode from areas connected by this tract. Disruption causes conduction aphasia.",
       "dsm_conditions": [],
@@ -733,6 +850,11 @@
       "origin_band": "N7",
       "targets": ["basolateral_amygdala", "hippocampus"],
       "target_bands": ["N6"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["exact", "unreviewed"]},
+      "endpoint_naming_notes": {
+        "origin:prefrontal_cortex": "This pathway's own function names the ventromedial PFC. qif-brain-bci-atlas.json lists 'Ventromedial PFC (vmPFC)' as a sub-structure of pfc with no entry of its own, so prefrontal_cortex stands in for it.",
+        "targets:hippocampus": "This pathway's own function names the anterior temporal lobe, which is not an entry of brain_regions and is not the hippocampus. Left unreviewed."
+      },
       "function": "Connects ventromedial PFC to anterior temporal lobe and amygdala. Emotional evaluation of memories, social cognition, naming.",
       "bci_relevance": "MEDIUM — White matter integrity of this tract is a biomarker for psychopathy, anxiety, and depression.",
       "dsm_conditions": ["F60.2", "F41.1", "F32"],
@@ -752,6 +874,7 @@
       "origin_band": "N6",
       "targets": ["hippocampus", "cingulate", "prefrontal_cortex"],
       "target_bands": ["N6", "N7"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["exact", "exact", "exact"]},
       "function": "Connects cingulate cortex to hippocampus and medial PFC. Emotional regulation, pain processing, memory retrieval, attention.",
       "bci_relevance": "MEDIUM — Cingulotomy (severing this tract) was historically used for intractable pain and OCD. DBS of cingulate targets this system.",
       "dsm_conditions": ["F42", "F32"],
@@ -771,6 +894,11 @@
       "origin_band": "N6",
       "targets": ["hypothalamus", "thalamus"],
       "target_bands": ["N4"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["container_stand_in", "unreviewed"]},
+      "endpoint_naming_notes": {
+        "targets:hypothalamus": "This pathway's own function names the mammillary bodies and the septal nuclei. Neither is an entry of brain_regions, so hypothalamus stands in for the mammillary bodies; the septal nuclei are listed as no endpoint at all.",
+        "targets:thalamus": "The fornix reaches the anterior thalamic nucleus, for which brain_regions holds ant. This pass did not establish whether the whole thalamus is intended here. Left unreviewed."
+      },
       "function": "Primary output pathway of hippocampus. Carries memory signals to mammillary bodies and septal nuclei. Essential for episodic memory.",
       "bci_relevance": "HIGH — DBS of fornix investigated for Alzheimer's disease (phase II trials). Damage causes severe amnesia.",
       "dsm_conditions": [],
@@ -790,6 +918,7 @@
       "origin_band": "N7",
       "targets": ["prefrontal_cortex", "primary_motor_cortex", "primary_visual_cortex", "primary_somatosensory_cortex"],
       "target_bands": ["N7"],
+      "endpoint_naming": {"origin": ["exact", "exact", "exact", "exact"], "targets": ["exact", "exact", "exact", "exact"]},
       "function": "Largest white matter tract. Connects left and right hemispheres for interhemispheric integration of motor, sensory, and cognitive information.",
       "bci_relevance": "MEDIUM — Callosotomy for epilepsy creates split-brain. Bilateral BCI designs rely on callosal integration.",
       "dsm_conditions": [],
@@ -810,6 +939,7 @@
       "origin_band": "N3",
       "targets": ["ventral_intermediate_nucleus", "primary_motor_cortex", "prefrontal_cortex"],
       "target_bands": ["N4", "N7"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["exact", "exact", "exact"]},
       "function": "Cerebellar output to cortex via thalamus. Error correction for ongoing movements, timing, motor learning, and cognitive functions.",
       "bci_relevance": "HIGH — DBS of VIM thalamus for essential tremor interrupts this loop. Cerebellar contribution to motor BCI accuracy.",
       "dsm_conditions": [],
@@ -829,6 +959,11 @@
       "origin_band": "N3",
       "targets": ["medulla_oblongata", "pons"],
       "target_bands": ["N2"],
+      "endpoint_naming": {"origin": ["exact", "exact"], "targets": ["container_stand_in", "container_stand_in"]},
+      "endpoint_naming_notes": {
+        "targets:medulla_oblongata": "The relays are the four vestibular nuclei (superior, lateral, medial, inferior), which span the caudal pons and the rostral medulla; datalake/qif-cranial-nerves.json files them under CN-VIII. brain_regions has no entry for the complex, so each brainstem region written here stands in for the part of it that region contains.",
+        "targets:pons": "The relays are the four vestibular nuclei (superior, lateral, medial, inferior), which span the caudal pons and the rostral medulla; datalake/qif-cranial-nerves.json files them under CN-VIII. brain_regions has no entry for the complex, so each brainstem region written here stands in for the part of it that region contains."
+      },
       "function": "Balance calibration — cerebellum adjusts vestibular reflexes based on learned patterns. Adapts vestibulo-ocular reflex.",
       "bci_relevance": "MEDIUM — Vestibular prosthetics interface with this circuit. GVS affects cerebellar-vestibular processing.",
       "dsm_conditions": [],
@@ -849,6 +984,7 @@
       "origin_band": "N4",
       "targets": ["prefrontal_cortex", "primary_motor_cortex", "primary_somatosensory_cortex", "primary_visual_cortex", "primary_auditory_cortex"],
       "target_bands": ["N7"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["exact", "exact", "exact", "exact", "exact"]},
       "function": "Principal route by which sensory input (except the first cortical stage of olfaction), cerebellar output and basal ganglia output reach neocortex. Transmission is state-dependent, set by cortical layer-6 feedback, brainstem neuromodulators and inhibition from the thalamic reticular nucleus.",
       "bci_relevance": "CRITICAL — Thalamic nuclei are approved stimulation targets (anterior nucleus for epilepsy, ventral intermediate nucleus for tremor) and are recorded from by sensing-capable systems. Effects are specific to the nucleus stimulated. Central thalamic stimulation (central lateral and adjacent nuclei) for disorders of consciousness is investigational.",
       "dsm_conditions": ["F05"],
@@ -869,6 +1005,10 @@
       "origin_band": "N4",
       "targets": ["pons", "medulla_oblongata", "thoracic_spinal_cord", "sacral_spinal_cord"],
       "target_bands": ["N2", "N1"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["unreviewed", "unreviewed", "unreviewed", "unreviewed"]},
+      "endpoint_naming_notes": {
+        "_pathway": "The preganglionic neurons of this outflow are the intermediolateral cell column (T1-L2) and the sacral parasympathetic nuclei (S2-S4), neither an entry of brain_regions, and this pathway's own text names no brainstem structure. All four endpoints are left unreviewed."
+      },
       "function": "Autonomic regulation — body temperature, hunger, thirst, circadian rhythm, blood pressure, heart rate, fight-or-flight vs rest-and-digest",
       "bci_relevance": "HIGH — Hypothalamic DBS for cluster headaches and obesity. Autonomic disruption is a critical safety concern for any deep brain BCI.",
       "dsm_conditions": ["F50"],
@@ -888,6 +1028,12 @@
       "origin_band": "N2",
       "targets": ["hypothalamus", "pons", "insular_cortex"],
       "target_bands": ["N4", "N2", "N6"],
+      "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["unreviewed", "unreviewed", "exact"]},
+      "endpoint_naming_notes": {
+        "origin:medulla_oblongata": "This pathway's own function names the vagus nerve. datalake/qif-cranial-nerves.json files CN-X's nuclei in the medulla: the dorsal motor nucleus of CN X, the nucleus ambiguus and the nucleus tractus solitarius. brain_regions has no entry for any of them, so medulla stands in for them. The vagus nerve itself is peripheral and is in no region table.",
+        "targets:hypothalamus": "datalake/qif-cranial-nerves.json records that the NTS projects to hypothalamus, locus coeruleus and the parabrachial nucleus. This file names hypothalamus without saying which hypothalamic structure is meant. Left unreviewed.",
+        "targets:pons": "The pontine targets of the NTS are the parabrachial nucleus and the locus coeruleus, neither an entry of brain_regions; this file names pons without saying which is meant. Left unreviewed."
+      },
       "function": "Bidirectional gut-brain axis via vagus nerve. Controls heart rate, digestion, inflammation, and sends visceral sensory information to brain.",
       "bci_relevance": "CRITICAL — VNS (vagus nerve stimulation) is FDA-approved for epilepsy and depression. Most widely deployed neural stimulation BCI after cochlear implants.",
       "dsm_conditions": ["F32", "F43.10"],
@@ -907,6 +1053,10 @@
       "origin_band": "N4",
       "targets": ["thoracic_spinal_cord", "lumbar_spinal_cord"],
       "target_bands": ["N1"],
+      "endpoint_naming": {"origin": ["exact"], "targets": ["unreviewed", "unreviewed"]},
+      "endpoint_naming_notes": {
+        "_pathway": "The preganglionic neurons are the intermediolateral cell column of T1-L2, not the whole cord segment, and the column is not an entry of brain_regions. Both endpoints are left unreviewed."
+      },
       "function": "Fight-or-flight: increases heart rate, dilates pupils, releases adrenaline, redirects blood to muscles, suppresses digestion",
       "bci_relevance": "MEDIUM — Spinal cord stimulation can affect sympathetic outflow. Relevant for autonomic side effects of all BCIs near spinal cord.",
       "dsm_conditions": ["F41.0", "F43.0"],
@@ -915,6 +1065,93 @@
       "icd10_names": [],
       "disruption_effects": "Autonomic storm, hypertension, tachycardia, hyperhidrosis, Horner's syndrome (disruption)",
       "therapeutic_applications": ["Stellate ganglion block for PTSD", "Spinal cord stimulation for CRPS"],
+      "confidence": "HIGH"
+    }
+  ],
+
+  "withheld_pathways": [
+    {
+      "id": "basal_forebrain_cholinergic",
+      "name": "Basal Forebrain → Cortex (Cholinergic)",
+      "type": "neurotransmitter",
+      "neurotransmitter": "acetylcholine",
+      "withheld": {
+        "defect_id": "T-156",
+        "withheld_on": "2026-10-26",
+        "reason": "The entry shipped with origin [\"basolateral_amygdala\"] at confidence HIGH. The basolateral amygdala is not a source of the cortical cholinergic projection, so the entry credited the wrong structure as the origin and its condition codes were joined to bla through an exact id match. The structure that is the origin has no entry in brain_regions, so the entry cannot be corrected in place: it is withheld until the addressing question is decided.",
+        "superseded_claim": {
+          "origin": [
+            "basolateral_amygdala"
+          ],
+          "confidence": "HIGH",
+          "effect": "bla resolved as an exact id match, so this pathway's F90 and G30 references were filed on the basolateral amygdala, and prefrontal_cortex, hippocampus, primary_visual_cortex and primary_auditory_cortex inherited them from an origin that is not the source of the projection."
+        },
+        "corrected_origin": {
+          "as_stated": "The basal forebrain cholinergic cell groups Ch1-Ch4 of Mesulam's nomenclature. Ch4, the nucleus basalis of Meynert in the substantia innominata, supplies the neocortex; Ch1 and Ch2, the medial septal nucleus and the vertical limb of the diagonal band, supply the hippocampal formation. The basolateral amygdala is a cortical-type target of this system, not a source of it.",
+          "evidence": [
+            {
+              "citation": "Mesulam M-M, Mufson EJ, Wainer BH, Levey AI (1983). Central cholinergic pathways in the rat: An overview based on an alternative nomenclature (Ch1-Ch6). Neuroscience 10:1185-1201.",
+              "doi": "10.1016/0306-4522(83)90108-2",
+              "supports": "The Ch1-Ch6 nomenclature for the central cholinergic cell groups, in which Ch4 is the nucleus basalis and the cortically projecting group.",
+              "species": "rat",
+              "verified": "2026-10-26 via Crossref (api.crossref.org/works/10.1016/0306-4522(83)90108-2): the DOI resolves and the title, the four authors, the journal, volume 10 and pages 1185-1201 all match.",
+              "access": "metadata only; the full text was not opened in this pass"
+            },
+            {
+              "citation": "Mesulam M-M, Mufson EJ, Levey AI, Wainer BH (1983). Cholinergic innervation of cortex by the basal forebrain: Cytochemistry and cortical connections of the septal area, diagonal band nuclei, nucleus basalis (substantia innominata), and hypothalamus in the rhesus monkey. Journal of Comparative Neurology 214:170-197.",
+              "doi": "10.1002/cne.902140206",
+              "supports": "The same organisation in a primate: the cortical cholinergic innervation arises from the basal forebrain cell groups, nucleus basalis among them, and not from the amygdala.",
+              "species": "rhesus monkey",
+              "verified": "2026-10-26 via Crossref (api.crossref.org/works/10.1002/cne.902140206): the DOI resolves and the title, the four authors, the journal, volume 214 and pages 170-197 all match.",
+              "access": "metadata only; the full text was not opened in this pass"
+            }
+          ],
+          "terminologia_neuroanatomica": {
+            "claim": "Terminologia Neuroanatomica (FIPAT, 1st ed., 2017) carries the term Nucleus basalis with the identifier 2532.",
+            "state": "UNVERIFIED",
+            "why": "No TNA page was opened in this pass: fipat.library.dal.ca did not resolve and the ifaa.unifr.ch TNA viewer returned 404. The identifier is therefore recorded as unverified and nothing here rests on it. The correction rests on the two Crossref-verified citations above."
+          }
+        },
+        "addressing_gap": {
+          "structure": "basal forebrain cholinergic cell groups (nucleus basalis of Meynert, medial septal nucleus, nuclei of the diagonal band)",
+          "state": "unaddressable",
+          "why": "brain_regions of qif-brain-bci-atlas.json holds 38 entries and none of them is the basal forebrain. The nearest entries are gpi and gpe, and the repository's own reading (datalake/intake/2026-10-21/atlas-class-a-vocabulary.md, row 17, citing Mesulam & Geula 1988) records that the nucleus basalis is distinct from the pallidum, so neither contains it. No alias can fix it either: a pathway endpoint must resolve as an exact id or a synonym, and a synonym pointing at any existing entry would be a false claim of sameness.",
+          "options_considered": [
+            "Add a basal forebrain entry to brain_regions. Rejected in this pass: it takes the table from 38 entries to 39, and 38 is pinned in seven test files this lane does not own; it would also require a band for the new entry, which is an unsourced claim, and adding coarser regions so terms resolve as id is option (c) of the owner's open decision D-021.",
+            "Point the origin at a container and mark it container_stand_in, as T-157 does for the pons endpoints. Rejected: no entry contains the basal forebrain, so the containment itself would be the false claim, and a non-synonym endpoint is refused by the build.",
+            "Leave the origin empty. Rejected: the band derivation requires every pathway to have origins in exactly one band, and relaxing that is loosening a gate."
+          ],
+          "chosen": "Withhold the entry, record the correction and the gap, and change no region, alias or relation. This is valid under every outcome of D-021, because it adds nothing for that decision to rule on.",
+          "reinstatement_condition": "A reviewed brain_regions entry for the basal forebrain, with its band and its evidence, and the pinned region counts moved in the same change. Then this entry returns to pathways with origin pointing at that entry."
+        },
+        "drafted_by": "ai",
+        "human_reviewed": false
+      },
+      "targets": [
+        "prefrontal_cortex",
+        "hippocampus",
+        "primary_visual_cortex",
+        "primary_auditory_cortex"
+      ],
+      "function": "Sustained attention, memory encoding, cortical plasticity, learning, REM sleep",
+      "bci_relevance": "HIGH — Cholinergic tone affects all EEG-based BCI performance. Attention-dependent BCIs rely on this pathway.",
+      "dsm_conditions": [
+        "F90"
+      ],
+      "dsm_names": [
+        "Attention-deficit hyperactivity disorders"
+      ],
+      "icd10_conditions": [
+        "G30"
+      ],
+      "icd10_names": [
+        "Alzheimer's disease"
+      ],
+      "disruption_effects": "Memory impairment, attentional deficits, confusion, reduced cortical plasticity",
+      "therapeutic_applications": [
+        "Cholinesterase inhibitors for Alzheimer's",
+        "Neurofeedback for attention training"
+      ],
       "confidence": "HIGH"
     }
   ]

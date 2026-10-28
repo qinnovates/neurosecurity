@@ -14,7 +14,7 @@ import type { IndexTechnique } from '@/lib/anatomy/anatomy-index-types';
 import { LAYER_IDS, type LayerId } from '@/lib/anatomy/source-types';
 import type { ExplorerModel } from './explorer-model';
 import type { Lens } from './lens-state';
-import { buildSceneShapes } from './scene-shapes';
+import { buildSceneShapes, type SceneTheme } from './scene-shapes';
 
 /**
  * `coloured`: at least one shape is filled. `named_none_coloured`: the links name regions, and none of them has a
@@ -31,6 +31,13 @@ export type TechniqueColouring = typeof TECHNIQUE_COLOURINGS[number];
 export type ColouringSource = Pick<ExplorerModel, 'index' | 'styleStructure' | 'catalogTechniqueIds'>;
 
 const EVERY_LAYER = Object.fromEntries(LAYER_IDS.map((layerId) => [layerId, true])) as Record<LayerId, boolean>;
+/**
+ * The question below is whether the lens fills any shape, which is the lens's
+ * ownership mark and not an ink: the answer is the same on either surface. The
+ * surface is named rather than defaulted, so a reader can see that it was chosen
+ * and not forgotten.
+ */
+const EITHER_SURFACE: SceneTheme = 'light';
 /** The sentence for each classification that has one. `coloured` and `not_in_catalog` have none. */
 const NOTHING_COLOURED_LIMITS = {
   named_none_coloured: 'view_nothing_coloured_no_own_shape',
@@ -49,7 +56,7 @@ export function classifyTechniqueColouring(source: ColouringSource, techniqueId:
   const regionIds = new Set(source.index.subjects.filter((subject) => subject.kind === 'region').map((subject) => subject.id));
   const named = listNamedRegionIds(technique).filter((regionId) => regionIds.has(regionId));
   if (named.length === 0) return 'none_named';
-  const isFilled = buildSceneShapes(source, { kind: 'technique', techniqueId }, EVERY_LAYER).some((shape) => shape.fill === 'solid');
+  const isFilled = buildSceneShapes(source, { kind: 'technique', techniqueId }, EVERY_LAYER, EITHER_SURFACE).some((shape) => shape.fill === 'solid');
   return isFilled ? 'coloured' : 'named_none_coloured';
 }
 

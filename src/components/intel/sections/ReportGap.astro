@@ -1,0 +1,46 @@
+---
+// Section 4: the gap between the capital curve and the evidence curve, and the
+// compliance dates that will close it from outside if the industry does not.
+import ChartFigure from '../ChartFigure.astro';
+import RegulatoryClock from '../RegulatoryClock.astro';
+import SourceLinks from '../SourceLinks.astro';
+import type { ReportModel } from '@/lib/intel/bci-security-2026/report-model';
+import { formatPercent, formatReportDate, formatUsdCompact } from '@/lib/intel/bci-security-2026/format';
+import { resolveSources } from '@/lib/intel/bci-security-2026/report-data';
+
+interface Props {
+  model: ReportModel;
+}
+
+const { model } = Astro.props;
+const { capital, report, meta } = model;
+const clock = report.regulatory_clock;
+const clockSources = resolveSources([...new Set(clock.flatMap((event) => event.source_ids))]);
+const laws = report.us_state_neural_data_laws;
+---
+<section id="the-gap" aria-labelledby="the-gap-heading" class="scroll-mt-24">
+  <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Section 4</p>
+  <h2 id="the-gap-heading" class="text-2xl font-bold font-[family-name:var(--font-heading)]">The gap</h2>
+  <p class="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--color-text-muted)]">
+    {formatUsdCompact(capital.split.none_found)} of tracked funding ({formatPercent(capital.noneFoundShare)}) sits in companies with no public way to report a
+    vulnerability that we could find (Figure 1). The rules that apply to these companies are arriving on fixed dates. For devices that count as cyber devices,
+    section 524B of the US Food, Drug, and Cosmetic Act already requires premarket submissions to include a plan to monitor and address vulnerabilities,
+    coordinated vulnerability disclosure among them, and a software bill of materials.<SourceLinks ids={['SEC-FDA-PREMARKET-2026']} />
+  </p>
+
+  <ChartFigure id="figure-7" number={7} title="The regulatory clock: security and neural-data dates that land on BCI companies"
+    takeaway={`${clock.filter((event) => event.date > meta.published).length} of these ${clock.length} dates are still ahead; the last is on ${formatReportDate(clock[clock.length - 1].date)}.`}
+    sources={clockSources}
+  >
+    <RegulatoryClock events={clock} asOf={meta.published} startYear={2026} endYear={2029} />
+    <table slot="table" class="viz-table">
+      <thead><tr><th>Date</th><th>Milestone</th><th>Jurisdiction</th></tr></thead>
+      <tbody>{clock.map((event) => (<tr><td>{formatReportDate(event.date)}</td><td>{event.label}</td><td>{event.jurisdiction}</td></tr>))}</tbody>
+    </table>
+  </ChartFigure>
+
+  <p class="max-w-3xl text-sm leading-relaxed text-[var(--color-text-muted)]">
+    At state level, {laws.count} US states have enacted laws that treat neural data as sensitive data: {laws.states.join(', ')}. Vermont's takes effect in 2028. There is no federal neural-data law; the {laws.federal_bill.name} was introduced in
+    the Senate in September 2025 and referred to committee.<SourceLinks ids={[...laws.source_ids, ...laws.federal_bill.source_ids]} />
+  </p>
+</section>

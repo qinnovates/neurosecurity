@@ -16,12 +16,12 @@ npm run atlas:test       # the pipeline's own tests (pytest)
 
 | Variable | Meaning | Default |
 |---|---|---|
-| `ATLAS_CACHE_DIR` | Downloads, the archived transform, work files and review sheets. Outside git | `~/.cache/qinnovate-atlas` |
+| `ATLAS_CACHE_DIR` | Downloads, the archived transform and work files. Outside git | `~/.cache/qinnovate-atlas` |
 | `ATLAS_VENV_DIR` | The virtual environment, installed from `requirements.txt` with hashes | `$ATLAS_CACHE_DIR/venv` |
 
 The build refuses to run when the pipeline or the registry has uncommitted changes, so the code hash in the manifest names a real state. `atlas.sh build --allow-dirty` is for development only.
 
-The pull-request workflow runs the tests that need only the standard library and pytest: the buildability rule against the registry (`test_sources.py`), the fetch rules (`test_fetch.py`), the notices (`test_notices.py`), and the committed manifest against the registry, the build plan and the pipeline's code hash (`test_manifest_records.py`). The meshing, registration, GLB and overlay tests need the imaging stack and skip themselves there; run them locally.
+The pull-request workflow runs the tests that need only the standard library and pytest: the buildability rule against the registry (`test_sources.py`), the fetch rules (`test_fetch.py`), the notices (`test_notices.py`), and the committed manifest against the registry, the build plan and the pipeline's code hash (`test_manifest_records.py`). The meshing, registration and GLB tests need the imaging stack and skip themselves there; run them locally.
 
 ## What it reads
 
@@ -89,7 +89,7 @@ An error the publisher made before distribution; two same-side labels swapped in
 
 ## Cannot be automated
 
-The first pin of each download; looking at the review sheets; reviewing AI-drafted rows; reading a publisher's page when a space or licence is unstated; accepting any agreement (owner only).
+The first pin of each download; reviewing AI-drafted rows; reading a publisher's page when a space or licence is unstated; accepting any agreement (owner only). Review-sheet generation (visual QA for registration/placement accuracy) was removed 2026-10-27 to drop the Pillow dependency; the layout checks (`layout_checks.py`, standard library only) are the automated substitute for layout/placement correctness, and the already-archived sheets at `<staging>/2026-10-atlas-geometry/pr-sheets/` are historical record only, not regenerable.
 
 ## Layout
 
@@ -107,6 +107,6 @@ atlas_pipeline/
   meshing.py  glb.py
   checks.py  evidence.py  overlap.py
   codehash.py  registration_settings.py   standard library only
-  build.py  manifest.py  notices.py  outputs.py  overlays.py  cli.py
+  build.py  manifest.py  notices.py  outputs.py  cli.py
 tests/                   pytest, synthetic fixtures only
 ```

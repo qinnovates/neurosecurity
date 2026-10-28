@@ -1,0 +1,876 @@
+{
+ "_meta": {
+  "batch": "2026-10-20",
+  "checked_on": "2026-10-20",
+  "question": "Does the company publish a channel for reporting product vulnerabilities?",
+  "method": "For each of the 68 companies in datalake/bci-landscape.json: fetch RFC 9116 security.txt at /.well-known/ and the site root (with and without www), and the paths /security, /product-security, /vulnerability-disclosure, /responsible-disclosure, /security-policy, /trust and /en/security. A page counts only if it answers 200, is not the homepage, and its title names security, vulnerability or disclosure. Every candidate, and every site that did not answer cleanly, was reviewed by hand. Parent-company channels count where the parent sells the tracked product line.",
+  "limits": "A channel hosted at another path, behind a contact form, or on a third-party platform can be missed. 'none_found' means none was found by this method on this date, not that none exists. Companies are invited to send corrections.",
+  "summary": {
+   "found": 6,
+   "none_found": 54,
+   "not_checked": 8
+  }
+ },
+ "companies": [
+  {
+   "company": "Neuralink",
+   "domain_checked": "neuralink.com",
+   "status": "found",
+   "evidence_url": "https://neuralink.com/vulnerability-disclosure/",
+   "note": "security.txt with contact and policy, and a vulnerability disclosure program page.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": {
+     "url": "https://neuralink.com/.well-known/security.txt",
+     "contact": [
+      "mailto:vulnerability-disclosure@neuralink.com"
+     ]
+    },
+    "page_candidates": [
+     {
+      "url": "https://neuralink.com/vulnerability-disclosure/",
+      "title": "Vulnerability Disclosure Program | Neuralink"
+     }
+    ]
+   }
+  },
+  {
+   "company": "Synchron",
+   "domain_checked": "synchron.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Blackrock Neurotech",
+   "domain_checked": "blackrockneurotech.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Precision Neuroscience",
+   "domain_checked": "precisionneuro.io",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Paradromics",
+   "domain_checked": "paradromics.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "BrainGate",
+   "domain_checked": "braingate.org",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Emotiv",
+   "domain_checked": "emotiv.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "NeuroSky",
+   "domain_checked": "neurosky.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "InteraXon (Muse)",
+   "domain_checked": "choosemuse.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "OpenBCI",
+   "domain_checked": "openbci.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "NextMind",
+   "domain_checked": "www.snap.com",
+   "status": "not_checked",
+   "evidence_url": null,
+   "note": "Acquired by Snap; no standalone product site to check.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Kernel",
+   "domain_checked": "kernel.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "CTRL-Labs",
+   "domain_checked": "www.facebook.com",
+   "status": "not_checked",
+   "evidence_url": null,
+   "note": "Acquired by Meta; no standalone product site to check.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": {
+     "url": "https://www.facebook.com/.well-known/security.txt",
+     "contact": [
+      "https://www.facebook.com/whitehat/report/"
+     ]
+    },
+    "page_candidates": [
+     {
+      "url": "https://www.facebook.com/security",
+      "title": "Facebook Security"
+     },
+     {
+      "url": "https://www.facebook.com/securitypolicy/",
+      "title": "Jepoy Scatter (&#064;securitypolicy) • Facebook, Connect with friends"
+     }
+    ]
+   }
+  },
+  {
+   "company": "Merge Labs",
+   "domain_checked": "merge.io",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "AlterEgo (MIT Media Lab)",
+   "domain_checked": "media.mit.edu",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Neurosity",
+   "domain_checked": "neurosity.co",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "BrainCo",
+   "domain_checked": "brainco.tech",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Nihon Kohden",
+   "domain_checked": "www.nihonkohden.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Natus Medical (Integra LifeSciences)",
+   "domain_checked": "www.natus.com",
+   "status": "not_checked",
+   "evidence_url": null,
+   "note": "natus.com answered HTTP 403 to every automated request.",
+   "probe": {
+    "home_status": 403,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "g.tec medical engineering",
+   "domain_checked": "gtec.at",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Cognixion",
+   "domain_checked": "cognixion.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Cortera Neurotechnologies",
+   "domain_checked": "corteraneuro.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "MindMaze",
+   "domain_checked": "mindmaze.com",
+   "status": "found",
+   "evidence_url": "https://mindmazetherapeutics.com/.well-known/security.txt",
+   "note": "security.txt with a security contact (mindmaze.com redirects to mindmazetherapeutics.com).",
+   "probe": {
+    "home_status": 200,
+    "security_txt": {
+     "url": "https://mindmazetherapeutics.com/.well-known/security.txt",
+     "contact": [
+      "mailto:security@mindmazetherapeutics.com"
+     ]
+    },
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "INBRAIN Neuroelectronics",
+   "domain_checked": "inbrain-neuroelectronics.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Neurable",
+   "domain_checked": "neurable.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Arctop",
+   "domain_checked": "arctop.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Science Corporation",
+   "domain_checked": "science.xyz",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Cortigent",
+   "domain_checked": "www.cortigent.com",
+   "status": "not_checked",
+   "evidence_url": null,
+   "note": "cortigent.com answered HTTP 503.",
+   "probe": {
+    "home_status": 503,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Pixium Vision",
+   "domain_checked": "pixium-vision.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "GenSight Biologics",
+   "domain_checked": "gensight-biologics.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Nano Retina",
+   "domain_checked": "nano-retina.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Subsense",
+   "domain_checked": "subsense.co",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Motif Neurotech",
+   "domain_checked": "motifneuro.tech",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Axoft",
+   "domain_checked": "axoft.us",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Forest Neurotech",
+   "domain_checked": "www.forestneurotech.org",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "CorTec GmbH",
+   "domain_checked": "cortec-neuro.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Medtronic DBS",
+   "domain_checked": "medtronic.com",
+   "status": "found",
+   "evidence_url": "https://www.medtronic.com/en-us/e/product-security/coordinated-disclosure-process.html",
+   "note": "Parent company security.txt and a coordinated disclosure process for products. Medtronic is also a CVE Numbering Authority.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": {
+     "url": "https://www.medtronic.com/.well-known/security.txt",
+     "contact": [
+      "mailto:security@medtronic.com"
+     ]
+    },
+    "page_candidates": [
+     {
+      "url": "https://www.medtronic.com/en-us/e/product-security.html",
+      "title": "Product Security &amp; Cybersecurity | Medtronic"
+     }
+    ]
+   }
+  },
+  {
+   "company": "Abbott Neuromodulation",
+   "domain_checked": "abbott.com",
+   "status": "found",
+   "evidence_url": "https://www.abbott.com/en-us/policies/cybersecurity",
+   "note": "Parent company product disclosure program for device vulnerabilities.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Boston Scientific Neuromodulation",
+   "domain_checked": "bostonscientific.com",
+   "status": "found",
+   "evidence_url": "https://www.bostonscientific.com/en-US/customer-service/product-security/responsible-disclosure.html",
+   "note": "Parent company product-security responsible disclosure page.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": [
+     {
+      "url": "https://www.bostonscientific.com/en-US/customer-service/product-security/product-security-information.html",
+      "title": "Product Security Information - Customer Support - Boston Scientific"
+     }
+    ]
+   }
+  },
+  {
+   "company": "Saluda Medical",
+   "domain_checked": "saludamedical.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Galvani Bioelectronics",
+   "domain_checked": "www.galvani.bio",
+   "status": "not_checked",
+   "evidence_url": null,
+   "note": "galvani.bio redirects to a retired GSK page.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "ONWARD Medical",
+   "domain_checked": "onwd.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "NeuroXess",
+   "domain_checked": "neuroxess.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Neuracle Technology",
+   "domain_checked": "www.neuracle.cn",
+   "status": "not_checked",
+   "evidence_url": null,
+   "note": "neuracle.cn refused or rate-limited automated requests (HTTP 429).",
+   "probe": {
+    "home_status": 429,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Zhiran Medical",
+   "domain_checked": "www.zhiranmedical.com",
+   "status": "not_checked",
+   "evidence_url": null,
+   "note": "No company website could be identified.",
+   "probe": {
+    "home_status": null,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "BrainsWay",
+   "domain_checked": "brainsway.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Alpha Omega Engineering",
+   "domain_checked": "alphaomega-eng.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Neuroelectrics",
+   "domain_checked": "neuroelectrics.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Flow Neuroscience",
+   "domain_checked": "flowneuroscience.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Openwater",
+   "domain_checked": "openwater.health",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Soterix Medical",
+   "domain_checked": "soterixmedical.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "NeuroPace",
+   "domain_checked": "neuropace.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "LivaNova",
+   "domain_checked": "livanova.com",
+   "status": "found",
+   "evidence_url": "https://www.livanova.com/en-us/security",
+   "note": "Product security page with a coordinated vulnerability disclosure program.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Cognito Therapeutics",
+   "domain_checked": "cognitotx.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Inner Cosmos",
+   "domain_checked": "innercosmos.ai",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Magnus Medical",
+   "domain_checked": "magnusmed.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Rune Labs",
+   "domain_checked": "runelabs.io",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Wispr AI",
+   "domain_checked": "wisprflow.ai",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Sonera Inc.",
+   "domain_checked": "www.sonera.ai",
+   "status": "not_checked",
+   "evidence_url": null,
+   "note": "No company website could be identified.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Araya Inc.",
+   "domain_checked": "araya.org",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "NAOX Technologies",
+   "domain_checked": "naox.tech",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "IDUN Technologies",
+   "domain_checked": "iduntechnologies.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Cerca Magnetics",
+   "domain_checked": "cercamagnetics.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Pupil Labs",
+   "domain_checked": "pupil-labs.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "AlterEgo AI Inc.",
+   "domain_checked": "alterego.io",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "NIRx Medical Technologies",
+   "domain_checked": "nirx.net",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Artinis Medical Systems",
+   "domain_checked": "artinis.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  },
+  {
+   "company": "Epiminder",
+   "domain_checked": "epiminder.com",
+   "status": "none_found",
+   "evidence_url": null,
+   "note": "No security.txt and no disclosure page at the probed paths.",
+   "probe": {
+    "home_status": 200,
+    "security_txt": null,
+    "page_candidates": []
+   }
+  }
+ ]
+}

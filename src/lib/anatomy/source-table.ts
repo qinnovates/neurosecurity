@@ -76,7 +76,7 @@ export function buildSourceTable(data: AnatomyData): AnatomyRow[] {
   return buildSources(data).map((entry) => {
     const { source, verdict } = findRecords(entry, data);
     return {
-      ...draftColumns(TABLE, [verdict.clearance.drafted_by], toIndexReviewState(reviewStateOfLicenceReading(verdict)), statusSentence),
+      ...draftColumns(TABLE, [verdict.clearance.drafted_by], toIndexReviewState(reviewStateOfLicenceReading(verdict, data.ledger)), statusSentence),
       source_id: entry.id,
       name: entry.name,
       ...licenceColumns(entry, verdict, data.verdicts),

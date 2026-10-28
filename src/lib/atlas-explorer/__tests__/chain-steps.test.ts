@@ -80,7 +80,7 @@ describe('buildChainSteps', () => {
 
   it('holds nothing that could join one step to the next: no path, line, arrow or direction in a step or a frame', () => {
     const frame = buildChainFrame(fixtureChain, fixtureSteps, 2, false);
-    const keys = [...allKeysOf(frame), ...allKeysOf(buildChainShapes(fixtureModel, frame, INITIAL_EXPLORER_STATE.layers)), ...allKeysOf(served)];
+    const keys = [...allKeysOf(frame), ...allKeysOf(buildChainShapes(fixtureModel, frame, INITIAL_EXPLORER_STATE.layers, 'light')), ...allKeysOf(served)];
     expect(keys.length).toBeGreaterThan(40);
     expect(keys.filter((key) => TRAVEL_KEY_PATTERN.test(key))).toEqual([]);
     for (const word of ['path', 'fromPosition', 'toPosition', 'edges', 'arrow_to', 'direction']) expect(TRAVEL_KEY_PATTERN.test(word), word).toBe(true);
@@ -103,20 +103,32 @@ describe('a frame of a threat model', () => {
     expect([...stageStepNumbers(null)]).toEqual([]);
   });
 
-  it('draws a step with exactly the technique lens\'s marks, and numbers only the shapes that lens marks', () => {
+  /**
+   * "Exactly the technique lens's marks" has to include the colours the lens
+   * resolves for the surface the canvas is on, or a threat model on screen is the
+   * one view the theme cannot reach. It was: this path took no surface at all,
+   * and the palette the lens read was whatever the default named. Nothing on
+   * screen changed colour, because the technique lens has a single step, and that
+   * is the point -- the next lens step authored per surface would have been
+   * silently wrong here. Both surfaces are checked, so the path cannot be dropped
+   * again without a test saying so.
+   */
+  it('draws a step with exactly the technique lens\'s marks, on either surface, and numbers only the shapes that lens marks', () => {
     const layers = { ...INITIAL_EXPLORER_STATE.layers, cortical: true, deep: true };
     const frame = buildChainFrame(fixtureChain, fixtureSteps, 2, false);
-    const underLens = buildSceneShapes(fixtureModel, { kind: 'technique', techniqueId: FIXTURE_IDS.linkedTechnique }, layers);
-    const shapes = buildChainShapes(fixtureModel, frame, layers);
-    expect(shapes.map(({ stepNumbers: _numbers, ...shape }) => shape)).toEqual(underLens);
-    expect(shapes.filter((shape) => shape.stepNumbers.length > 0).every((shape) => shape.fill === 'solid' || shape.fill === 'translucent')).toBe(true);
-    expect(shapes.filter((shape) => shape.fill === 'solid').every((shape) => shape.stepNumbers.join() === '2')).toBe(true);
+    for (const theme of ['light', 'dark'] as const) {
+      const underLens = buildSceneShapes(fixtureModel, { kind: 'technique', techniqueId: FIXTURE_IDS.linkedTechnique }, layers, theme);
+      const shapes = buildChainShapes(fixtureModel, frame, layers, theme);
+      expect(shapes.map(({ stepNumbers: _numbers, ...shape }) => shape), theme).toEqual(underLens);
+      expect(shapes.filter((shape) => shape.stepNumbers.length > 0).every((shape) => shape.fill === 'solid' || shape.fill === 'translucent')).toBe(true);
+      expect(shapes.filter((shape) => shape.fill === 'solid').every((shape) => shape.stepNumbers.join() === '2')).toBe(true);
+    }
   });
 
   it('draws the whole threat model as the strongest mark any step gives each shape, numbered by the steps that give it', () => {
     const layers = { ...INITIAL_EXPLORER_STATE.layers, cortical: true, deep: true };
-    const whole = buildChainShapes(fixtureModel, buildChainFrame(fixtureChain, fixtureSteps, 1, true), layers);
-    const alone = buildChainShapes(fixtureModel, buildChainFrame(fixtureChain, fixtureSteps, 2, false), layers);
+    const whole = buildChainShapes(fixtureModel, buildChainFrame(fixtureChain, fixtureSteps, 1, true), layers, 'light');
+    const alone = buildChainShapes(fixtureModel, buildChainFrame(fixtureChain, fixtureSteps, 2, false), layers, 'light');
     expect(whole.map((shape) => [shape.id, shape.fill, shape.stepNumbers])).toEqual(alone.map((shape) => [shape.id, shape.fill, shape.stepNumbers]));
   });
 });

@@ -97,10 +97,15 @@ describe('parseVerdicts', () => {
     expect(() => parseVerdicts(buildVerdictsFile([buildVerdict(), stray]), sources)).toThrow(/"stray_atlas" is not a source in the registry/);
   });
 
-  it('rejects a claim of human confirmation', () => {
+  it('accepts a claim of human confirmation as a field -- whether it is actually backed by the review ledger is checked at parseAnatomyFiles, not here', () => {
     const verdict = { ...buildVerdict(), human_confirmed: true };
+    expect(parseVerdicts(buildVerdictsFile([verdict as never]), parseSources(buildSourcesFile())).verdicts[0].human_confirmed).toBe(true);
+  });
+
+  it('rejects a licence_digest that is not a sha256', () => {
+    const verdict = { ...buildVerdict(), licence_digest: 'not-a-digest' };
     expect(() => parseVerdicts(buildVerdictsFile([verdict as never]), parseSources(buildSourcesFile())))
-      .toThrow(/human_confirmed: no person has confirmed any licence reading/);
+      .toThrow(/licence_digest/);
   });
 
   it('rejects a clearance that does not say it is AI-drafted', () => {

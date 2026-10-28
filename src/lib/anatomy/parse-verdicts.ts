@@ -24,7 +24,7 @@ const MAX_NAME_LENGTH = 200;
 const MAX_TEXT_LENGTH = 1200;
 const VERDICT_KEYS = [
   'source_id', 'verdict', 'grant', 'treat_as', 'terms_url', 'quoted_terms', 'read_on',
-  'verified_by', 'human_confirmed', 'access_agreement', 'clearance',
+  'verified_by', 'human_confirmed', 'licence_digest', 'access_agreement', 'clearance',
 ] as const;
 
 function parseClearance(value: unknown, location: FieldLocation): Clearance {
@@ -51,13 +51,6 @@ function parseAgreement(value: unknown, location: FieldLocation): AccessAgreemen
   };
 }
 
-function readHumanConfirmed(record: Record<string, unknown>, location: FieldLocation): false {
-  if (record.human_confirmed !== false) {
-    failAt(childOf(location, 'human_confirmed'), 'no person has confirmed any licence reading',
-      'Keep it false. Recording a confirmation needs a review-ledger entry kind that does not exist yet; add that first.');
-  }
-  return false;
-}
 
 function parseVerdict(value: unknown, location: FieldLocation, verifierIds: ReadonlySet<string>): LicenceVerdict {
   const record = readRecord(value, location, { required: VERDICT_KEYS });
@@ -76,7 +69,8 @@ function parseVerdict(value: unknown, location: FieldLocation, verifierIds: Read
     quoted_terms: readStringList(record, 'quoted_terms', location, MAX_TEXT_LENGTH),
     read_on: readDate(record, 'read_on', location),
     verified_by: verifiedBy,
-    human_confirmed: readHumanConfirmed(record, location),
+    human_confirmed: readBoolean(record, 'human_confirmed', location),
+    licence_digest: readSha256(record, 'licence_digest', location),
     access_agreement: readNullable(record, 'access_agreement', () => parseAgreement(record.access_agreement, childOf(location, 'access_agreement'))),
     clearance: parseClearance(record.clearance, childOf(location, 'clearance')),
   };

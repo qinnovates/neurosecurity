@@ -33,7 +33,9 @@ function toLessonTechnique(technique) {
     bands: technique.band_ids ?? [],
     dualUse: technique.tara?.dual_use ?? '',
     clinicalAnalog: technique.tara?.clinical?.therapeutic_analog ?? '',
-    niss_severity: technique.niss?.severity ?? 'none',
+    // Null, not 'none': a technique with no NISS score carries no severity
+    // word, and 'none' is the severity of a score measured at 0.0.
+    niss_severity: technique.niss?.severity ?? null,
   };
 }
 

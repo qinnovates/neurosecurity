@@ -93,12 +93,12 @@ describe('no anatomy table lacks its review state', () => {
     expect(anatomyNames.filter((name) => Object.keys(kqlTables[name][0]).slice(0, listDraftColumns(name).length).join() !== listDraftColumns(name).join())).toEqual([]);
   });
 
-  it('marks every row AI-drafted and unreviewed in a cell short enough for a preview, with one of the status sentences the files must carry', () => {
+  it('marks every row with a review state in a cell short enough for a preview, with one of the status sentences the files must carry', () => {
     const previewWidth = 60;
     const marked = ANATOMY_TABLE_NAMES.flatMap((name) => tables[name].map((row) => [row[reviewColumn(name, 'review_state')], row[reviewColumn(name, 'review_mark')]].join()));
     expect(marked.length).toBe(everyRow.length);
-    expect([...new Set(marked)]).toEqual(['ai_drafted_unreviewed,AI-drafted, unreviewed']);
-    expect('AI-drafted, unreviewed'.length).toBeLessThan(previewWidth);
+    expect(new Set(marked)).toEqual(new Set(['ai_drafted_unreviewed,AI-drafted, unreviewed', 'reviewed,Reviewed by owner, 2026-10-27']));
+    expect(Math.max(...[...new Set(marked)].map((mark) => mark.length))).toBeLessThan(previewWidth);
     expect(countWhere(everyRow, (row) => !statusSentences.includes(String(row.status_sentence)))).toBe(0);
     expect(distinct(everyRow, 'status_sentence').sort()).toEqual([...statusSentences].sort());
   });
@@ -138,10 +138,11 @@ describe('no column or vocabulary value states a drafted reading as an effect', 
 });
 
 describe('row counts tie back to the source files', () => {
-  it('has one source row per registered source, each with a verdict and none confirmed by a person', () => {
+  it('has one source row per registered source, each with a verdict, every reading AI-drafted, and a person confirming exactly the sources the ledger backs', () => {
     expect(tables.anatomy_sources).toHaveLength(data.sources.sources.length);
     expect(distinct(tables.anatomy_sources, 'source_id')).toEqual(data.sources.sources.map((source) => source.id));
-    expect(countWhere(tables.anatomy_sources, (row) => row.human_confirmed !== false || row.license_read_by !== 'ai' || row.ai_verdict === '')).toBe(0);
+    expect(countWhere(tables.anatomy_sources, (row) => row.license_read_by !== 'ai' || row.ai_verdict === '')).toBe(0);
+    expect(countWhere(tables.anatomy_sources, (row) => row.human_confirmed === true)).toBe(16);
   });
 
   it('has one structure per label of the shipped label tables and one row per shipped shape', () => {

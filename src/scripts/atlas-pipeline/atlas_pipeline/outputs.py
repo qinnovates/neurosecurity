@@ -5,17 +5,14 @@ import json
 import pathlib
 from typing import Any
 
-from . import manifest, notices, overlays
+from . import manifest, notices
 from .build import BuiltAsset
 from .codehash import pipeline_code_hash, sha256_of_bytes
 from .errors import CheckError
-from .headers import load_canonical
-from .fetch import source_file
 from .sources import Registry, output_folder
 
 FOLDERS = ("open", "by-sa")
 NOTICE_NAME, LICENCE_NAME = "NOTICE.txt", "LICENSE.txt"
-T1_WINDOW_PERCENTILES = (1.0, 99.5)
 
 
 def _write_support_files(out_dir: pathlib.Path, registry: Registry, built_assets: list[BuiltAsset], records: list[dict[str, Any]]) -> dict[str, str]:
@@ -59,33 +56,3 @@ def write_assets(out_dir: pathlib.Path, registry: Registry, built_assets: list[B
     return document
 
 
-def write_review_sheets(review_dir: pathlib.Path, cache_dir: pathlib.Path, registry: Registry, built_assets: list[BuiltAsset]) -> int:
-    """One sheet per meshed structure, under the cache. Returns how many were written."""
-    import numpy as np
-
-    template = registry.inputs["template"]
-    t1, affine = load_canonical(source_file(cache_dir, template["source"], template["t1"]))
-    low, high = (float(v) for v in np.percentile(t1[t1 > 0], T1_WINDOW_PERCENTILES))
-    count = 0
-    for built in built_assets:
-        for key, mesh in built.meshes.items():
-            label_id, hemisphere = key.rsplit(":", 1)
-            overlays.write_sheet(review_dir / built.plan["id"] / f"{label_id}-{hemisphere}.png", mesh, t1, affine, (low, high))
-            count += 1
-    return count
-
-
-def write_device_sheets(review_dir: pathlib.Path, cache_dir: pathlib.Path, registry: Registry, placement: dict[str, Any], scalp_glb: bytes) -> int:
-    """One sheet per landmark on the template image and one of the layout on the head mesh. Returns how many were written."""
-    import numpy as np
-
-    from . import device_sheets, devices, glb_triangles
-
-    template = registry.inputs["template"]
-    t1, affine = load_canonical(source_file(cache_dir, template["source"], template["t1"]))
-    window = tuple(float(v) for v in np.percentile(t1[t1 > 0], T1_WINDOW_PERCENTILES))
-    for name, row in placement["fiducials"].items():
-        device_sheets.write_fiducial_sheet(review_dir / f"fiducial-{name}.png", np.array(row["position_mm"]), t1, affine, (window[0], window[1]))
-    points = {**{name: row["position_mm"] for name, row in placement["fiducials"].items()}, **placement["electrodes"]}
-    device_sheets.write_layout_sheet(review_dir / "layout-10-20.png", glb_triangles.read_glb_triangles(scalp_glb)[devices.SCALP_MESH_KEY], points)
-    return len(placement["fiducials"]) + 1

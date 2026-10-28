@@ -1,0 +1,67 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import ReportVizStyles from '@/components/intel/ReportVizStyles.astro';
+import ReportExecutiveSummary from '@/components/intel/sections/ReportExecutiveSummary.astro';
+import ReportChanges from '@/components/intel/sections/ReportChanges.astro';
+import ReportCapital from '@/components/intel/sections/ReportCapital.astro';
+import ReportSecurity from '@/components/intel/sections/ReportSecurity.astro';
+import ReportEvidence from '@/components/intel/sections/ReportEvidence.astro';
+import ReportGap from '@/components/intel/sections/ReportGap.astro';
+import ReportActions from '@/components/intel/sections/ReportActions.astro';
+import ReportMethodology from '@/components/intel/sections/ReportMethodology.astro';
+import { buildReportModel } from '@/lib/intel/bci-security-2026/report-model';
+import { formatReportDate } from '@/lib/intel/bci-security-2026/format';
+
+const model = buildReportModel();
+const { meta } = model;
+const CONTENTS = [
+  { href: '#executive-summary', label: 'Executive summary' },
+  { href: '#what-changed', label: '1. What changed since Q1' },
+  { href: '#capital', label: '2. Capital and clinic' },
+  { href: '#security', label: '3. State of BCI security' },
+  { href: '#the-gap', label: '4. The gap' },
+  { href: '#what-to-do', label: '5. What to do' },
+  { href: '#methodology', label: 'Methodology and sources' },
+];
+const description = 'Qinnovate\'s 2026 annual report on BCI capital, clinical momentum and the measured state of BCI security, built from the public datalake. Headline security figures rest on demonstrated or directly measured evidence only.';
+---
+<PageLayout
+  title={`${meta.title} | Qinnovate`}
+  description={description}
+  breadcrumbs={[{ label: 'Research', href: '/research/' }, { label: 'Global BCI Landscape Report', href: '/research/intel/' }, { label: '2026 Edition' }]}
+>
+  <ReportVizStyles />
+  <article class="mx-auto max-w-4xl pb-16 pt-6">
+    <header class="border-b border-[var(--color-border)] pb-8">
+      <p class="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-accent-primary)]">Qinnovate research · {meta.edition}</p>
+      <h1 class="mt-3 text-4xl font-bold leading-tight tracking-tight font-[family-name:var(--font-heading)] sm:text-5xl">{meta.title}</h1>
+      <p class="mt-3 text-xl text-[var(--color-text-muted)]">Capital is outrunning evidence.</p>
+      <dl class="mt-6 grid grid-cols-2 gap-4 text-xs sm:grid-cols-4">
+        <div><dt class="text-[var(--color-text-faint)]">Published</dt><dd class="mt-0.5 font-medium">{formatReportDate(meta.published)}</dd></div>
+        <div><dt class="text-[var(--color-text-faint)]">Coverage</dt><dd class="mt-0.5 font-medium">{formatReportDate(meta.coverage_start)} – {formatReportDate(meta.coverage_end)}</dd></div>
+        <div><dt class="text-[var(--color-text-faint)]">Data</dt><dd class="mt-0.5 font-medium">Public datalake, commit {meta.datalake_commit}</dd></div>
+        <div><dt class="text-[var(--color-text-faint)]">Previous edition</dt><dd class="mt-0.5 font-medium"><a href={meta.q1_report_url} class="text-[var(--color-accent-primary)] hover:underline">Q1 2026 report</a></dd></div>
+      </dl>
+    </header>
+
+    <nav aria-label="Report contents" class="my-8 rounded-xl border border-[var(--color-border)] p-4">
+      <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Contents</p>
+      <ol class="mt-2 gap-x-6 text-sm sm:columns-2 [&>li]:mb-1">
+        {CONTENTS.map((item) => (<li><a href={item.href} class="text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)]">{item.label}</a></li>))}
+      </ol>
+    </nav>
+
+    <div class="space-y-16">
+      <ReportExecutiveSummary model={model} />
+      <ReportChanges model={model} />
+      <ReportCapital model={model} />
+      <div>
+        <ReportSecurity model={model} />
+        <ReportEvidence model={model} />
+      </div>
+      <ReportGap model={model} />
+      <ReportActions />
+      <ReportMethodology model={model} />
+    </div>
+  </article>
+</PageLayout>
