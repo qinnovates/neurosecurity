@@ -1,0 +1,23 @@
+/**
+ * The sentences of the homepage brain hero: what it says while the 3D view
+ * loads, when it cannot load, and beside the picture before and after a region
+ * is picked. Held apart from limits-copy.ts for the same reason as
+ * mount-copy.ts: the hero's shell ships with the homepage, and the whole limit
+ * table must not load there to say a few sentences. The limits of the picture
+ * itself come from the view's own caption, not from here. This module imports
+ * nothing.
+ */
+export const HERO_COPY = {
+  loading: 'Loading the 3D brain…',
+  failed: 'The 3D brain could not be loaded. The full atlas has everything it would show.',
+  idle_title: 'Pick a region',
+  idle: 'Turn the brain and pick a region to see what the TARA catalog links to it. Each link was drafted by an AI and no expert has checked it.',
+  selected_bands: 'QIF band',
+  selected_links: 'Techniques linked',
+  /** How many drafted links reach the region, and how many of them pass the index's checks and so count in the picture. */
+  selected_links_value: (lit: number, drafted: number): string => `${drafted} drafted, ${lit} ${lit === 1 ? 'counts' : 'count'} under the current checks`,
+  selected_announcement: (name: string): string => `Selected: ${name}. Its summary is beside the picture.`,
+  see_details: 'See its details',
+  fallback_title: 'The regions in the atlas',
+  fallback: 'Each opens the full atlas with that region selected.',
+} as const;

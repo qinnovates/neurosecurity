@@ -1,5 +1,6 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { ANATOMY_INDEX_PATH, type PinnedFile } from '@/lib/anatomy/anatomy-index-types';
+import { readRegionDeepLink } from './atlas-deep-link';
 import ExplorerWorkspace from './ExplorerWorkspace';
 import { loadExplorerModel } from './explorer-data';
 import LoadNotice from './LoadNotice';
@@ -19,12 +20,20 @@ import './atlas-workspace.css';
 interface Props {
   /** The index's path, length and digest, and nothing else of it: the page is built with these three values. */
   indexPin?: PinnedFile;
+  /** The page's query string. Read from the address in the page; given in tests. */
+  search?: string;
 }
 
-export default function AtlasExplorer({ indexPin }: Props) {
+/** The island renders in the browser only, so the address is there to read; a render without one asks for nothing. */
+const readSearch = (): string => (typeof window === 'undefined' ? '' : window.location.search);
+
+export default function AtlasExplorer({ indexPin, search }: Props) {
   const pin = indexPin ?? null;
   const load = useCallback((signal: AbortSignal) => loadExplorerModel(signal, pin), [pin?.sha256, pin?.bytes, pin?.path]);
   const { state, retry } = useLoaded(load, true, ANATOMY_INDEX_PATH);
+  const model = state.status === 'ready' ? state.data.model : null;
+  // Decided once per model, against the regions it holds: an id the index does not name selects nothing.
+  const initialSelection = useMemo(() => (model === null ? null : readRegionDeepLink(search ?? readSearch(), model.regionsById)), [model, search]);
   if (state.status === 'ready') {
     return (
       <>
@@ -34,7 +43,7 @@ export default function AtlasExplorer({ indexPin }: Props) {
             The list below is read from the data now served. Reload the page to get a matching copy.
           </p>
         )}
-        <ExplorerWorkspace model={state.data.model} isIndexPinned={state.data.indexPinState === 'pinned'} isOutOfStep={state.data.indexPinState === 'mismatched'} />
+        <ExplorerWorkspace model={state.data.model} isIndexPinned={state.data.indexPinState === 'pinned'} isOutOfStep={state.data.indexPinState === 'mismatched'} initialSelection={initialSelection} />
       </>
     );
   }
