@@ -21,25 +21,16 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { TOOL_PAGE_CSP, toAllowedSources } from '../lib/csp-policy.ts';
 import { TAG_ATTRIBUTES_SOURCE, blankInertContent, parseAttributes } from './built-html.mjs';
 import { DEFAULT_DIST_DIRECTORY, TOOL_PAGES, ToolPageCheckError, resolveBuiltFile } from './tool-pages.mjs';
 
 /**
  * The whole policy of a tool page: every directive, and every source each may name.
- * It mirrors TOOL_PAGE_CSP in src/layouts/ToolLayout.astro. A change there fails this
- * check until the same change is made here, which is the review point for the policy.
+ * Read from src/lib/csp-policy.ts, the same module ToolLayout renders its meta from, so the
+ * policy is reviewed in one place and the built page is held to exactly it.
  */
-export const ALLOWED_CSP_SOURCES = {
-  'default-src': ["'self'"],
-  'script-src': ["'self'", "'unsafe-inline'"],
-  'style-src': ["'self'", "'unsafe-inline'"],
-  'img-src': ["'self'", 'data:'],
-  'font-src': ["'self'", 'data:'],
-  'connect-src': ["'self'"],
-  'form-action': ["'none'"],
-  'base-uri': ["'none'"],
-  'object-src': ["'none'"],
-};
+export const ALLOWED_CSP_SOURCES = toAllowedSources(TOOL_PAGE_CSP);
 
 const BUILT_DIRECTORY = 'dist';
 /** The two source files that declare what the Lab frames. */

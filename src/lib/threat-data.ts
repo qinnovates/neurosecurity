@@ -11,18 +11,38 @@ import { HOURGLASS_BANDS } from './qif-constants';
 import type { EvidencePopulation, EvidenceTierCode } from './evidence-tiers';
 import registry from '@shared/qtara-registrar.json';
 
-/** Attack categories (columns in the threat map) */
-export const THREAT_CATEGORIES = [
-  { id: 'SI', name: 'Signal Injection', description: 'Injecting false neural or electronic signals' },
-  { id: 'SE', name: 'Signal Eavesdropping', description: 'Intercepting signals in transit' },
-  { id: 'DM', name: 'Data Manipulation', description: 'Altering decoded intent or recordings' },
-  { id: 'DS', name: 'Denial of Service', description: 'Disrupting BCI function' },
-  { id: 'PE', name: 'Privilege Escalation', description: 'Gaining unauthorized access depth' },
-  { id: 'CR', name: 'Cognitive Reconnaissance', description: 'Decoding of speech or motor intent by models trained on a cooperating user, neural data inference, intent extraction' },
-  { id: 'CD', name: 'Cognitive/Functional Disruption', description: 'Disruption to cognitive processing, sensory perception, motor output, or autonomic regulation' },
-  { id: 'PS', name: 'Physical Safety', description: 'Tissue damage, seizures, involuntary movement' },
-  { id: 'EX', name: 'Data Exfiltration', description: 'Extracting neural data for exploitation' },
-] as const;
+/** The catalog version the registrar states; every page that names a version reads it from here. */
+export const CATALOG_VERSION: string = String((registry as { version: string }).version);
+
+export interface ThreatCategory { id: string; name: string; description: string }
+
+/**
+ * Display names for the `ui_category` codes the registrar uses. Keyed, not listed: the set of
+ * categories is read from the techniques themselves, so a code with no technique never renders
+ * an empty column and a code without a label fails the build instead of rendering bare.
+ */
+const UI_CATEGORY_LABELS: Record<string, Omit<ThreatCategory, 'id'>> = {
+  SI: { name: 'Signal Injection', description: 'Injecting false neural or electronic signals' },
+  SE: { name: 'Signal Eavesdropping', description: 'Intercepting signals in transit' },
+  DM: { name: 'Data Manipulation', description: 'Altering decoded intent or recordings' },
+  DS: { name: 'Denial of Service', description: 'Disrupting BCI function' },
+  PE: { name: 'Privilege Escalation', description: 'Gaining unauthorized access depth' },
+  CI: { name: 'Cognitive Inference', description: 'Decoding of speech or motor intent by models trained on a cooperating user, neural data inference, intent extraction' },
+  PS: { name: 'Physical Safety', description: 'Tissue damage, seizures, involuntary movement' },
+  EX: { name: 'Data Exfiltration', description: 'Extracting neural data for exploitation' },
+};
+
+function listCategoriesInUse(): ThreatCategory[] {
+  const inUse = new Set<string>(registry.techniques.map((technique: { ui_category: string }) => technique.ui_category));
+  const unlabelled = [...inUse].filter((id) => !(id in UI_CATEGORY_LABELS));
+  if (unlabelled.length > 0) {
+    throw new Error(`threat-data: registrar ui_category ${unlabelled.join(', ')} has no label in UI_CATEGORY_LABELS; add one.`);
+  }
+  return Object.keys(UI_CATEGORY_LABELS).filter((id) => inUse.has(id)).map((id) => ({ id, ...UI_CATEGORY_LABELS[id] }));
+}
+
+/** Attack categories (columns in the threat map): the registrar's `ui_category` codes in use, each with its label. */
+export const THREAT_CATEGORIES: readonly ThreatCategory[] = listCategoriesInUse();
 
 /** TARA Tactics from registry */
 export const THREAT_TACTICS = registry.tactics;
@@ -36,7 +56,7 @@ export const NISS_SPEC = (registry as any).niss_spec ?? null;
 /** TARA specification */
 export const TARA_SPEC = (registry as any).tara_spec ?? null;
 
-export type CategoryId = typeof THREAT_CATEGORIES[number]['id'];
+export type CategoryId = ThreatCategory['id'];
 export type BandId = typeof HOURGLASS_BANDS[number]['id'];
 export type Severity = 'critical' | 'high' | 'medium' | 'low' | 'none';
 /** Which rule produced a technique's severity label (registrar `severity_source`). */

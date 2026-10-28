@@ -13,6 +13,10 @@ cp datalake/derivation-timeline.json src/site/data/
 cp datalake/validation-registry.json src/site/data/
 cp datalake/research-registry.json src/site/data/
 
+# 2b. Preview-host response headers, from the one CSP module (src/lib/csp-policy.ts)
+echo "[prebuild] Writing _headers from csp-policy.ts..."
+node src/scripts/generate-headers.mjs
+
 # 3. Generate KQL JSON (async-fetchable tables for BciKql)
 echo "[prebuild] Generating KQL JSON..."
 node src/scripts/generate-kql-json.mjs

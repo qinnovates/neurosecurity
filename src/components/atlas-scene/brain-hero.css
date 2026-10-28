@@ -1,0 +1,62 @@
+/*
+ * The homepage brain hero, over the explorer's own styles (atlas-scene.css). The 3D view is reused whole; what changes
+ * here is only where its parts sit: the picture is the hero, the summary card stands beside it, and the view's controls
+ * and legend become a quiet column under the card. The view's section and body are laid out as their children
+ * (display: contents) so this one grid can place them; the view's heading stays for assistive technology.
+ */
+/* The height is the page's to set (--brain-hero-height on the hero's stage); the frame that ships with the page uses the same value. */
+.brain-hero { gap: 1rem; }
+.brain-hero[data-brain-hero="loading"], .brain-hero[data-brain-hero="idle"] { min-height: var(--brain-hero-height, 60vh); align-content: center; justify-items: center; }
+.brain-hero .atlas-viewport, .brain-hero .atlas-viewport-body { display: contents; }
+.brain-hero .atlas-heading { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.brain-hero .atlas-viewport > *, .brain-hero .atlas-picture, .brain-hero .atlas-viewport-side, .brain-hero-card { min-width: 0; }
+
+/* Reading and tab order are the view's own; only the drawn order changes: picture, card, the hide button, then the details. */
+.brain-hero .atlas-picture { order: 0; border-radius: 0.875rem; box-shadow: 0 0 0 1px var(--atlas-line-strong), 0 24px 80px -24px var(--atlas-tint); }
+.brain-hero-card { order: 1; }
+.brain-hero .atlas-viewport > .atlas-link-button { order: 2; justify-self: start; }
+.brain-hero .atlas-viewport-side { order: 3; font-size: 0.75rem; color: var(--atlas-ink-soft); }
+.brain-hero .atlas-viewport > :is(.atlas-failure, .atlas-fact, .atlas-button-primary, .atlas-loading) { order: 0; }
+.brain-hero .atlas-canvas { height: var(--brain-hero-height, 60vh); min-height: 20rem; }
+.brain-hero .atlas-viewport-side .atlas-legend { margin-top: 0.5rem; }
+.brain-hero .atlas-viewport-side .atlas-button, .brain-hero .atlas-viewport-side .atlas-toggle, .brain-hero .atlas-viewport-side .atlas-input, .brain-hero .atlas-viewport-side .atlas-proxy { font-size: 0.8125rem; }
+
+/*
+ * The card: a few facts and one way on. Its heading is the region's name; its button is the hero's one primary action.
+ * Unlike atlas-scene.css's own flat panels, this one floats directly over the moving 3D picture, so it is the one
+ * surface on the page that earns a real glass treatment: more translucent than --atlas-panel's 92% opacity, with an
+ * actual blur so the brain reads through it rather than a hairline rectangle sitting on top of the canvas.
+ */
+.brain-hero-card, .brain-hero-regions {
+  padding: 1rem 1.125rem; background: color-mix(in srgb, var(--atlas-panel) 70%, transparent);
+  backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--color-glass-border); border-radius: 0.875rem; font-size: 0.875rem; line-height: 1.5;
+}
+.brain-hero-card[data-hero-card="selected"] { border-left: 3px solid var(--atlas-selection); animation: atlas-fade var(--atlas-move) var(--atlas-ease) both; }
+.brain-hero-card-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem 0.625rem; margin: 0 0 0.5rem; font-family: var(--font-heading, inherit); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; color: var(--atlas-ink); }
+.brain-hero-card-text { margin: 0 0 0.75rem; color: var(--atlas-ink-soft); }
+.brain-hero-card-facts { display: grid; gap: 0.5rem; margin: 0 0 1rem; }
+.brain-hero-card-facts > div { display: grid; gap: 0.125rem; }
+.brain-hero-card-facts dt { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--atlas-ink-soft); }
+.brain-hero-card-facts dd { margin: 0; color: var(--atlas-ink); }
+.brain-hero-cta {
+  display: inline-flex; align-items: center; min-height: var(--atlas-row); padding: 0 1rem; font-weight: 600; color: #fff; text-decoration: none;
+  background: var(--atlas-accent-fill); border: 1px solid var(--atlas-accent-fill); border-radius: 0.5rem; transition: opacity var(--atlas-quick) var(--atlas-ease);
+}
+.brain-hero-cta:hover { opacity: 0.9; }
+
+/* Where the view cannot open: the notice, then every region as a link, in the picture's place. */
+.brain-hero[data-brain-hero="fallback"] .atlas-failure { margin: 0; }
+.brain-hero-regions .atlas-chips { margin: 0; }
+.brain-hero-region-link { display: inline-flex; align-items: center; padding: 0 0.75rem; color: inherit; text-decoration: none; }
+
+@media (min-width: 961px) {
+  .brain-hero[data-brain-hero="open"] { grid-template-columns: minmax(0, 1.8fr) minmax(17rem, 1fr); gap: 0.75rem 1.25rem; align-items: start; }
+  /* The picture spans the card's row and the controls' row, so the controls and legend stand under the card beside it and not under the picture. */
+  .brain-hero[data-brain-hero="open"] .atlas-picture { grid-column: 1; grid-row: 1 / span 2; }
+  .brain-hero[data-brain-hero="open"] .atlas-viewport > .atlas-loading { grid-column: 1; grid-row: 1; }
+  .brain-hero[data-brain-hero="open"] .atlas-viewport > .atlas-link-button { grid-column: 1; grid-row: 3; }
+  .brain-hero[data-brain-hero="open"] .brain-hero-card { grid-column: 2; grid-row: 1; }
+  .brain-hero[data-brain-hero="open"] .atlas-viewport-side { grid-column: 2; grid-row: 2; }
+}
+@media (prefers-reduced-motion: reduce) { .brain-hero-card[data-hero-card="selected"] { animation: none; } }

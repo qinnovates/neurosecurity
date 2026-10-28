@@ -6,8 +6,8 @@ const EXPLORER_DIRECTORIES = ['src/components/atlas-scene', 'src/lib/atlas-explo
 const EXPLORER_FILES = ['src/lib/anatomy/limits-copy.ts', 'src/pages/atlas/anatomy.astro'];
 const PAGE_PATH = 'src/pages/atlas/anatomy.astro';
 const SOURCE_EXTENSIONS = ['.ts', '.tsx', '.css', '.astro'];
-/** three.js and its React bindings. Only the files of the gated canvas chunk may import them. */
-const THREE_IMPORT_PATTERN = /(from|import\(|import)\s*['"](three|three\/[^'"]*|@react-three\/[^'"]*)['"]/;
+/** three.js. Only the files of the gated canvas chunk may import it. */
+const THREE_IMPORT_PATTERN = /(from|import\(|import)\s*['"](three|three\/[^'"]*)['"]/;
 /** Labels are set in the sans face: no monospace utility, variable or family. */
 const MONOSPACE_PATTERN = /\bfont-mono\b|--font-mono|--lab-mono|\bmonospace\b|\btm-mono\b|\bui-monospace\b|\b(Menlo|Monaco|Consolas|Courier|SFMono|JetBrains Mono|Fira Code|Source Code Pro)\b/i;
 /** The modules that import three.js, and the canvas that is their only way in. */
@@ -31,14 +31,13 @@ describe('explorer source rules', () => {
     expect(files.length).toBeGreaterThan(30);
     expect(files).toContain(path.join('src/components/atlas-scene', 'atlas-scene.css'));
     expect(THREE_IMPORT_PATTERN.test('import { Vector3 } from \'three\';')).toBe(true);
-    expect(THREE_IMPORT_PATTERN.test('const scene = await import("@react-three/fiber");')).toBe(true);
+    expect(THREE_IMPORT_PATTERN.test('const scene = await import("three/examples/jsm/controls/OrbitControls.js");')).toBe(true);
     expect(THREE_IMPORT_PATTERN.test('import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";')).toBe(true);
     expect(MONOSPACE_PATTERN.test('.label { font-family: var(--font-mono); }')).toBe(true);
     expect(MONOSPACE_PATTERN.test('<span className="font-mono text-xs">')).toBe(true);
     expect(MONOSPACE_PATTERN.test('font-family: ui-monospace, monospace;')).toBe(true);
     for (const family of ['Menlo', 'Consolas', '"Courier New"', 'SFMono-Regular']) expect(MONOSPACE_PATTERN.test(`font-family: ${family};`), family).toBe(true);
     expect(THREE_IMPORT_PATTERN.test("import 'three';")).toBe(true);
-    expect(THREE_IMPORT_PATTERN.test("import '@react-three/fiber';")).toBe(true);
   });
 
   it('imports three.js only in the modules that draw for the canvas, and the tract lines no build mounts yet', () => {

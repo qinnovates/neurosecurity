@@ -405,7 +405,6 @@ def main():
         "security_controls": (SHARED / "qif-security-controls.json", "controls"),
         "ethics_controls": (SHARED / "qif-ethics-controls.json", "neurorights"),
         "guardrails": (SHARED / "qif-guardrails.json", "guardrails"),
-        "neurosecurity_scores": (SHARED / "neurosecurity-scores.json", "devices"),
         "research_explorer": (SHARED / "research-registry.json", "explorer"),
         "research_institutions": (SHARED / "research-registry.json", "institutions"),
         "research_standards": (SHARED / "research-registry.json", "standards"),

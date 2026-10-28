@@ -32,7 +32,6 @@ import ethicsRaw from '@shared/qif-ethics-controls.json';
 import controlsRaw from '@shared/qif-security-controls.json';
 import hazardsRaw from '@shared/qif-hazards.json';
 import guardrailsRaw from '@shared/qif-guardrails.json';
-import scoresRaw from '@shared/neurosecurity-scores.json';
 
 // Additional sources (site data + docs)
 import timelineRaw from '@/data/qif-timeline.json';
@@ -508,16 +507,6 @@ function buildHazards(): Row[] {
   }));
 }
 
-function buildNeurosecurityScores(): Row[] {
-  return ((scoresRaw as any).scores || []).map((s: any) => ({
-    device: s.device || s.name || '',
-    overall_score: s.overall_score || s.score || 0,
-    authentication: s.authentication || '',
-    encryption: s.encryption || '',
-    firmware: s.firmware || '',
-    physical: s.physical || '',
-  }));
-}
 
 // ═══ NEW DATA LAKE TABLES (dynamic — only built if data exists) ═══
 
@@ -1037,19 +1026,6 @@ function buildMomentum(): Row[] {
   });
 }
 
-function buildRiskProfile(): Row[] {
-  return buildCompanies().map((c: any) => {
-    const fB = (c.funding_total_usd || 0) / 1e9;
-    const ss = c.security_posture === 'none_published' ? 0 : c.security_posture === 'minimal' ? 1
-      : c.security_posture === 'basic' ? 2 : c.security_posture === 'moderate' ? 3 : 4;
-    return {
-      company: c.name, type: c.type, funding_B: Number(fB.toFixed(2)),
-      devices: c.device_count, security_posture: c.security_posture,
-      security_score: `${ss}/4`,
-      risk_index: Number((fB * Math.max(c.device_count, 1) * (5 - ss)).toFixed(2)),
-    };
-  }).sort((a: any, b: any) => (b.risk_index as number) - (a.risk_index as number));
-}
 
 // ═══ Cross-Reference: Impact Chain ═══
 
@@ -1426,7 +1402,6 @@ export function getKqlTables(): KqlTables {
     hazards: buildHazards(),
     consent_tiers: buildConsentTiers(),
     frameworks: buildFrameworks(),
-    neurosecurity_scores: buildNeurosecurityScores(),
     nsp_layers: buildNspLayers(),
     policy: buildPolicy(),
 
@@ -1443,7 +1418,6 @@ export function getKqlTables(): KqlTables {
     tam_sam_som: buildTamSamSom(),
     convergence: buildConvergence(),
     momentum: buildMomentum(),
-    risk_profile: buildRiskProfile(),
 
     // Timelines (unified)
     neuroethics_timeline: buildNeuroethicsTimeline(),

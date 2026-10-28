@@ -10,6 +10,8 @@ import { THREAT_VECTORS } from '../lib/threat-data';
 import HourglassReveal from '../components/HourglassReveal';
 import ScrollCounter from '../components/ScrollCounter';
 import AtlasExplorerLink from '../components/brain/AtlasExplorerLink';
+import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';
+import BrainHeroMount from '@/components/atlas-scene/BrainHeroMount';
 import DualUseSplit from '../components/DualUseSplit';
 import NeurorightsRadar from '@/components/radar/NeurorightsRadar';
 import '../styles/global.css';
@@ -68,57 +70,66 @@ const neurorightsFold = foldNeurorights(
 <BaseLayout title="TARA — Threat Modeling Catalog for Neural Devices · Qinnovate" description={`A proposed, unvalidated framework for threat modeling, severity scoring and impact assessment of neural devices: ${coverage.total} cataloged techniques, ${coverage.scored} with draft NISS scores, ${coverage.detected} with detection guidance.`}>
   <Nav />
 
-  <!-- ═══ HERO ═══ -->
-  <section class="relative min-h-screen flex flex-col overflow-hidden bg-[var(--color-bg-deep)]">
-    <div class="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28">
-      <p class="text-sm mb-5 hero-byline">Brain-computer interface research by Kevin L. Qi</p>
+  <!-- ═══ HERO: the brain is the first thing on the screen ═══ -->
+  <!--
+    The 3D brain is this page's subject, so the words above it are a strip and not a column: title beside
+    the one-sentence framing, both small enough that the picture sits above the fold. Picking a region in
+    the picture shows a short summary beside it with one way on, into the full atlas with that region
+    selected; the plain link under the picture reaches the same atlas without the 3D view at all.
+  -->
+  <section class="relative overflow-hidden bg-[var(--color-bg-deep)]" aria-labelledby="hero-heading">
+    <AtlasIndexPin />
+    <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-10">
+      <header class="brain-hero-head">
+        <div>
+          <p class="text-sm mb-3 hero-byline">Brain-computer interface research by Kevin L. Qi</p>
+          <h1 id="hero-heading" class="brain-hero-title font-[family-name:var(--font-heading)] text-balance">
+            Threat modeling for brain&#8209;computer interfaces
+          </h1>
+        </div>
+        <div class="brain-hero-lede">
+          <p class="text-base text-[var(--color-text-muted)] leading-relaxed">
+            A proposed research framework for modeling, scoring and prioritizing threats to neural devices.
+          </p>
+          <p class="text-sm text-[var(--color-text-faint)] mt-2">
+            {coverage.total} techniques, {coverage.scored} with draft NISS scores, each with an evidence status.
+            The brain below is coloured by the highest draft NISS step linked to each region.
+          </p>
+        </div>
+      </header>
 
-      <h1 class="hero-title font-[family-name:var(--font-heading)] max-w-5xl mb-6 text-balance">
-        Threat modeling for brain&#8209;computer interfaces
-      </h1>
+      <div class="brain-hero-stage mt-7">
+        <BrainHeroMount client:load />
+        <noscript><p class="text-sm text-[var(--color-text-muted)] mt-3">The 3D brain needs JavaScript. The full atlas, linked below, lists every region as text.</p></noscript>
+      </div>
 
-      <p class="text-base sm:text-lg text-[var(--color-text-muted)] mb-8 max-w-2xl leading-relaxed">
-        A proposed research framework for modeling, scoring and prioritizing threats to neural devices.
-      </p>
-      <p class="text-sm text-[var(--color-text-faint)] -mt-4 mb-8 max-w-2xl">
-        {coverage.total} techniques, {coverage.scored} with draft NISS scores, each with an evidence status.
-      </p>
-
-      <!-- Primary CTAs -->
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-6">
+      <!-- The ways on. The atlas link is a plain link on purpose: it reaches every region without the 3D view. -->
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-7">
         <a
           href="/atlas/tara/"
           class="px-6 py-3 rounded-lg bg-[var(--color-accent-fill)] text-white font-medium text-center hover:opacity-90 transition-opacity"
         >
           Explore the TARA Catalog
         </a>
-        <a
-          href="/framework/"
-          class="px-6 py-3 rounded-lg glass text-[var(--color-text-primary)] font-medium text-center"
-        >
-          How It's Built
+        <AtlasExplorerLink className="px-6 py-3 rounded-lg glass text-[var(--color-text-primary)] font-medium text-center">Explore the full brain atlas</AtlasExplorerLink>
+        <a href="/framework/" class="px-2 py-3 text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors text-center">
+          How it's built &rarr;
         </a>
       </div>
 
-      <div class="flex flex-wrap items-center gap-2 text-xs text-[var(--color-text-faint)]">
-        <span class="mr-1">Explore by role:</span>
-        <a href="/atlas/tara/" class="glass px-3 py-1.5 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">Security Researcher</a>
-        <a href="/atlas/clinical/" class="glass px-3 py-1.5 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">Clinician</a>
-        <a href="/governance/" class="glass px-3 py-1.5 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">Policymaker</a>
-        <a href="/research/api/" class="glass px-3 py-1.5 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">Developer</a>
+      <div class="mt-10 flex flex-col gap-4">
+        <TrustBar />
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-[var(--color-text-faint)]">
+          <p class="m-0">{confirmed} confirmed, {demonstrated} demonstrated, {theoretical} theoretical.</p>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="mr-1">Explore by role:</span>
+            <a href="/atlas/tara/" class="glass px-3 py-1.5 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">Security Researcher</a>
+            <a href="/atlas/clinical/" class="glass px-3 py-1.5 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">Clinician</a>
+            <a href="/governance/" class="glass px-3 py-1.5 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">Policymaker</a>
+            <a href="/research/api/" class="glass px-3 py-1.5 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">Developer</a>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <!-- Signal bench: catalogued interference classes playing out on synthetic traces -->
-    <div class="flex-1 flex flex-col min-h-[280px] mt-8">
-      <SignalBench client:idle events={signalBenchEvents} />
-    </div>
-
-    <div class="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8">
-      <TrustBar />
-      <p class="text-xs text-[var(--color-text-faint)] mt-4">
-        {confirmed} confirmed, {demonstrated} demonstrated, {theoretical} theoretical.
-      </p>
     </div>
   </section>
 
@@ -179,6 +190,11 @@ const neurorightsFold = foldNeurorights(
           />
           <p class="text-sm text-[var(--color-text-muted)] mt-4 text-center">{therapeuticCount} of those same mechanisms are already used in medicine.</p>
         </div>
+      </div>
+
+      <!-- Signal bench: catalogued interference classes playing out on synthetic traces. Below the fold now, so it draws once seen. -->
+      <div class="flex flex-col min-h-[280px] mb-12 -mx-4 sm:mx-0">
+        <SignalBench client:visible events={signalBenchEvents} />
       </div>
 
       <!-- One concrete technique -->
@@ -441,6 +457,17 @@ const neurorightsFold = foldNeurorights(
   </section>
 
   <Footer />
+
+  <style>
+    /* Title beside the framing sentence, as on the atlas page, so the picture under them is the first thing on the screen. */
+    .brain-hero-head { display: grid; gap: 1rem 3rem; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: end; }
+    .brain-hero-title { margin: 0; font-size: clamp(1.875rem, 3vw, 2.75rem); line-height: 1.08; letter-spacing: -0.015em; }
+    .brain-hero-lede { max-width: 44rem; }
+    .brain-hero-stage { --brain-hero-height: clamp(20rem, 62vh, 40rem); }
+    @media (max-width: 860px) {
+      .brain-hero-head { grid-template-columns: minmax(0, 1fr); align-items: start; }
+    }
+  </style>
 
   <script>
     document.getElementById('copy-bibtex-btn')?.addEventListener('click', function() {

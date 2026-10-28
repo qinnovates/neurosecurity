@@ -12,6 +12,8 @@ export const GATE_STATES = ['closed', 'open', 'no_webgl', 'integrity_unavailable
  * another. `context_lost`: the browser took the drawing surface away.
  */
 export type GateState = typeof GATE_STATES[number];
+/** What the gate can decide when asked: open, or the first reason it cannot open. Never closed, and never the loss of a context it has not yet given. */
+export type DecidedGate = Exclude<GateState, 'closed' | 'context_lost'>;
 
 /** What the visitor reads in place of the picture. Each says where the same facts are. */
 export const GATE_NOTICES: Readonly<Record<Exclude<GateState, 'closed' | 'open'>, string>> = {
@@ -45,7 +47,7 @@ export function readPrefersLessMotion(): boolean {
  *
  * @param isOutOfStep the page carries a pin and the served index is not that file; said as what it is, never as a missing pin
  */
-export function decideGate(isIndexPinned: boolean, hasDigest: boolean, probe: () => boolean, isOutOfStep = false): GateState {
+export function decideGate(isIndexPinned: boolean, hasDigest: boolean, probe: () => boolean, isOutOfStep = false): DecidedGate {
   if (isOutOfStep) return 'out_of_step';
   if (!isIndexPinned) return 'unpinned';
   if (!hasDigest) return 'integrity_unavailable';

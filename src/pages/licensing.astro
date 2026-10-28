@@ -1,0 +1,67 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { ATTRIBUTION_STATEMENTS } from '@/lib/anatomy/build-attribution';
+
+/** Each line names what is covered, the licence, and where its text lives. Readings are recorded, not legal advice. */
+const LICENCE_ROWS = [
+  {
+    covers: 'Site code, data pipelines, the TARA catalog data files and the published packages',
+    licence: 'Apache License 2.0',
+    href: 'https://github.com/qinnovates/neurosecurity/blob/main/LICENSE',
+  },
+  {
+    covers: 'The QIF whitepaper preprint',
+    licence: 'Creative Commons Attribution 4.0 (CC BY 4.0)',
+    href: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    covers: 'Brain atlas shapes under src/site/atlas-assets/by-sa/, made from CIT168 with the WU-Minn HCP data use terms acknowledged',
+    licence: 'Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)',
+    href: '/atlas/attribution/',
+  },
+  {
+    covers: 'Brain atlas shapes under src/site/atlas-assets/open/',
+    licence: 'Attribution licences, per file',
+    href: '/atlas/attribution/',
+  },
+  {
+    covers: 'Self-hosted web fonts (Inter, JetBrains Mono, Space Grotesk)',
+    licence: 'SIL Open Font License 1.1',
+    href: 'https://openfontlicense.org/',
+  },
+] as const;
+---
+
+<PageLayout
+  title="Licensing"
+  description="What on this site is licensed under which terms: Apache-2.0 code and data, the CC BY 4.0 preprint, share-alike atlas shapes and open fonts."
+  breadcrumbs={[{ label: 'Licensing' }]}
+>
+  <article class="max-w-3xl pb-16">
+    <h1 class="text-3xl font-bold mb-4" style="color: var(--color-text-primary)">Licensing</h1>
+    <p class="mb-6" style="color: var(--color-text-muted)">
+      One repository holds the site, its data and its papers. The root licence covers the project's own work;
+      third-party material keeps its source's licence, listed per file in the repository's NOTICE and on the
+      <a href="/atlas/attribution/" class="underline" style="color: var(--color-accent-primary)">attribution page</a>.
+    </p>
+    <table class="w-full text-sm mb-8">
+      <thead>
+        <tr style="border-bottom: 1px solid var(--color-border)">
+          <th class="text-left py-2 pr-4 font-semibold" style="color: var(--color-text-faint)">Covers</th>
+          <th class="text-left py-2 font-semibold" style="color: var(--color-text-faint)">Licence</th>
+        </tr>
+      </thead>
+      <tbody>
+        {LICENCE_ROWS.map((row) => (
+          <tr style="border-bottom: 1px solid var(--color-border)">
+            <td class="py-3 pr-4 align-top" style="color: var(--color-text-primary)">{row.covers}</td>
+            <td class="py-3 align-top">
+              <a href={row.href} rel={row.href.startsWith('http') ? 'noopener noreferrer' : undefined} class="underline" style="color: var(--color-accent-primary)">{row.licence}</a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="text-sm" style="color: var(--color-text-muted)">{ATTRIBUTION_STATEMENTS.licenseReading}</p>
+  </article>
+</PageLayout>

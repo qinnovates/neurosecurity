@@ -1,0 +1,50 @@
+---
+/**
+ * The one way in from this site to Glia, the full console this site previews a slice of.
+ * Glia itself stays non-public -- this opens a GitHub issue (template: glia-access-request.yml),
+ * not a form with its own backend, so there is no new data processor and no stored PII beyond
+ * what GitHub already handles for every other issue on this repo.
+ */
+export interface Props {
+  /** Shorter copy for a tight space (a nav bar, a card footer). Default fits a standalone placement. */
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+const REQUEST_URL = 'https://github.com/qinnovates/neurosecurity/issues/new?template=glia-access-request.yml';
+---
+<a class="request-access-cta glass" class:list={{ 'request-access-cta--compact': compact }} href={REQUEST_URL} target="_blank" rel="noopener noreferrer">
+  <span class="request-access-cta__label">{compact ? 'Request access' : 'Request full Glia access'}</span>
+  {!compact && <span class="request-access-cta__sub">This site previews it. Glia itself isn&rsquo;t public yet.</span>}
+</a>
+
+<style>
+  .request-access-cta {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.75rem;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: border-color var(--motion-fast) ease, transform var(--motion-fast) ease;
+  }
+  .request-access-cta:hover {
+    transform: translateY(-1px);
+  }
+  .request-access-cta__label {
+    font-size: 0.9375rem;
+  }
+  .request-access-cta__sub {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+  .request-access-cta--compact {
+    padding: 0.5rem 0.875rem;
+    border-radius: 0.5rem;
+  }
+  .request-access-cta--compact .request-access-cta__label {
+    font-size: 0.8125rem;
+  }
+</style>

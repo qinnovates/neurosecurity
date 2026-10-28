@@ -13,7 +13,6 @@ import { getRelated, getPathWithEdges, getAllNodes, getAllEdges } from './graph.
 import { search, highlightMatch, groupResults } from './search.js';
 import { renderPathList, renderPathDetail, markStepComplete, LEARNING_PATHS } from './paths.js?v=7';
 import { initCanvas, addNodeToCanvas, addPathToCanvas, setLayout, renderTray, renderCanvasControls, saveCanvas, loadCanvas, stopAnimation, getActiveContext, syncNotes } from './canvas.js';
-import { processMessage, processMessageTier3, renderChat, clearChat, trackStyle, getLearningStyle, getTutorPrefs, setTutorPref, initTier2, testConnection, processSynthesis, initTutorActionDelegation } from './tutor.js?v=7';
 import { renderEthicsTimeline } from './ethics-timeline.js';
 import { ETHICS_TIMELINE } from './data/ethics.js';
 import { renderNeuroanatomy } from './neuroanatomy.js';
@@ -1034,7 +1033,6 @@ function openPerson(personId) {
   const person = ALL_PEOPLE.find(p => p.id === personId);
   if (!person) return;
 
-  trackStyle('cards');
   recordView(personId);
 
   const bookmarked = isBookmarked(personId);
@@ -1282,172 +1280,6 @@ function renderLearningDashboard() {
     </div>
   `;
 }
-function renderAISettings() {
-  const prefs = getTutorPrefs();
-  const provider = prefs.provider || 'ollama';
-  const showOllama = provider === 'ollama';
-  const showCloud = provider === 'openai' || provider === 'anthropic';
-
-  return `
-    <div class="settings-group">
-      <div class="settings-row">
-        <div class="settings-row-info">
-          <div class="settings-row-label">Web Search</div>
-          <div class="settings-row-desc">Fall back to DuckDuckGo when local data has no answer</div>
-        </div>
-        <label class="toggle">
-          <input type="checkbox" id="setting-webSearch" ${prefs.webSearch !== false ? 'checked' : ''}>
-          <span class="toggle-slider"></span>
-        </label>
-      </div>
-
-      <div class="settings-divider"></div>
-
-      <div class="settings-row">
-        <div class="settings-row-info">
-          <div class="settings-row-label">Socratic Mode</div>
-          <div class="settings-row-desc">Tutor will guide you with questions instead of answers</div>
-        </div>
-        <label class="toggle">
-          <input type="checkbox" id="setting-socraticMode" ${prefs.socraticMode ? 'checked' : ''}>
-          <span class="toggle-slider"></span>
-        </label>
-      </div>
-
-      <div class="settings-divider"></div>
-
-      <div class="settings-row">
-        <div class="settings-row-info">
-          <div class="settings-row-label">AI Provider</div>
-          <div class="settings-row-desc">Choose an LLM for richer responses (optional)</div>
-        </div>
-        <select id="setting-provider" class="settings-select">
-          <option value="none" ${!prefs.tier2 && !prefs.tier3 ? 'selected' : ''}>None</option>
-          <option value="webllm" ${prefs.tier2 && !prefs.tier3 ? 'selected' : ''}>WebLLM (on-device)</option>
-          <option value="ollama" ${prefs.tier3 && provider === 'ollama' ? 'selected' : ''}>Ollama (local)</option>
-          <option value="openai" ${prefs.tier3 && provider === 'openai' ? 'selected' : ''}>OpenAI</option>
-          <option value="anthropic" ${prefs.tier3 && provider === 'anthropic' ? 'selected' : ''}>Anthropic</option>
-        </select>
-      </div>
-
-      <div id="settings-ollama" class="settings-extra" style="display:${prefs.tier3 && showOllama ? 'block' : 'none'}">
-        <div class="settings-field">
-          <label class="settings-field-label" for="setting-ollamaUrl">Ollama URL</label>
-          <input type="text" id="setting-ollamaUrl" class="settings-input" value="${esc(prefs.ollamaUrl || 'http://localhost:11434')}" placeholder="http://localhost:11434">
-        </div>
-        <div class="settings-field">
-          <label class="settings-field-label" for="setting-ollamaModel">Model</label>
-          <input type="text" id="setting-ollamaModel" class="settings-input" value="${esc(prefs.ollamaModel || 'llama3.2')}" placeholder="llama3.2">
-        </div>
-      </div>
-
-      <div id="settings-cloud" class="settings-extra" style="display:${prefs.tier3 && showCloud ? 'block' : 'none'}">
-        <div class="settings-field">
-          <label class="settings-field-label" for="setting-apiKey">API Key</label>
-          <input type="password" id="setting-apiKey" class="settings-input" value="${esc(prefs.apiKey || '')}" placeholder="sk-...">
-        </div>
-        <div class="settings-field">
-          <label class="settings-field-label" for="setting-cloudModel">Model</label>
-          <input type="text" id="setting-cloudModel" class="settings-input" value="${esc(prefs.cloudModel || 'gpt-4o-mini')}" placeholder="gpt-4o-mini">
-        </div>
-        ${provider === 'anthropic' ? '<p class="settings-note">Anthropic requires the <code>anthropic-dangerous-direct-browser-access</code> header. If CORS blocks requests, use Ollama or OpenAI instead.</p>' : ''}
-      </div>
-
-      <div id="settings-test-row" class="settings-row" style="display:${prefs.tier3 ? 'flex' : 'none'}">
-        <button id="setting-testBtn" class="settings-test-btn">Test Connection</button>
-        <span id="setting-testResult" class="settings-test-result"></span>
-      </div>
-
-      <div id="settings-tier2-status" style="display:${prefs.tier2 && !prefs.tier3 ? 'block' : 'none'}">
-        <p class="settings-note" id="tutor-tier2-status">WebLLM will load a ~1.7GB model in your browser on first use.</p>
-      </div>
-    </div>
-  `;
-}
-
-function initAISettingsHandlers() {
-  const webSearchEl = document.getElementById('setting-webSearch');
-  const providerEl = document.getElementById('setting-provider');
-  const testBtn = document.getElementById('setting-testBtn');
-
-  if (webSearchEl) {
-    webSearchEl.addEventListener('change', () => {
-      setTutorPref('webSearch', webSearchEl.checked);
-    });
-  }
-
-  const socraticEl = document.getElementById('setting-socraticMode');
-  if (socraticEl) {
-    socraticEl.addEventListener('change', () => {
-      setTutorPref('socraticMode', socraticEl.checked);
-    });
-  }
-
-  if (providerEl) {
-    providerEl.addEventListener('change', () => {
-      const val = providerEl.value;
-      if (val === 'none') {
-        setTutorPref('tier2', false);
-        setTutorPref('tier3', false);
-      } else if (val === 'webllm') {
-        setTutorPref('tier2', true);
-        setTutorPref('tier3', false);
-        initTier2();
-      } else {
-        setTutorPref('tier2', false);
-        setTutorPref('tier3', true);
-        setTutorPref('provider', val);
-        // Update default model for provider
-        if (val === 'anthropic') setTutorPref('cloudModel', 'claude-sonnet-4-20250514');
-        else if (val === 'openai') setTutorPref('cloudModel', 'gpt-4o-mini');
-      }
-
-      // Show/hide relevant fields
-      const ollamaSection = document.getElementById('settings-ollama');
-      const cloudSection = document.getElementById('settings-cloud');
-      const testRow = document.getElementById('settings-test-row');
-      const tier2Status = document.getElementById('settings-tier2-status');
-
-      if (ollamaSection) ollamaSection.style.display = val === 'ollama' ? 'block' : 'none';
-      if (cloudSection) cloudSection.style.display = (val === 'openai' || val === 'anthropic') ? 'block' : 'none';
-      if (testRow) testRow.style.display = (val === 'ollama' || val === 'openai' || val === 'anthropic') ? 'flex' : 'none';
-      if (tier2Status) tier2Status.style.display = val === 'webllm' ? 'block' : 'none';
-
-      // Update cloud model display
-      const cloudModelEl = document.getElementById('setting-cloudModel');
-      if (cloudModelEl) {
-        const prefs = getTutorPrefs();
-        cloudModelEl.value = prefs.cloudModel || 'gpt-4o-mini';
-      }
-    });
-  }
-
-  // Persist field changes on blur
-  for (const [id, key] of [['setting-ollamaUrl', 'ollamaUrl'], ['setting-ollamaModel', 'ollamaModel'], ['setting-apiKey', 'apiKey'], ['setting-cloudModel', 'cloudModel']]) {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener('change', () => setTutorPref(key, el.value));
-    }
-  }
-
-  if (testBtn) {
-    testBtn.addEventListener('click', async () => {
-      const resultEl = document.getElementById('setting-testResult');
-      testBtn.disabled = true;
-      testBtn.textContent = 'Testing...';
-      if (resultEl) resultEl.textContent = '';
-
-      const result = await testConnection();
-      testBtn.disabled = false;
-      testBtn.textContent = 'Test Connection';
-      if (resultEl) {
-        resultEl.textContent = result.message;
-        resultEl.className = `settings-test-result ${result.ok ? 'settings-test-ok' : 'settings-test-fail'}`;
-      }
-    });
-  }
-}
-
 // ── Profile View ────────────────────────────────────────────────────────────
 function renderProfile() {
   const container = document.getElementById('view-profile');
@@ -1513,27 +1345,11 @@ function renderProfile() {
     ` : ''}
 
     <div class="profile-section">
-      <h3 class="profile-section-title">AI & Search</h3>
-      ${renderAISettings()}
-    </div>
-
-    <div class="profile-section">
-      <h3 class="profile-section-title">Learning Style</h3>
-      ${(() => {
-      const style = getLearningStyle();
-      return `<p class="profile-about"><strong>${esc(style.style)}</strong> — ${esc(style.desc)}</p>`;
-    })()}
-    </div>
-
-    <div class="profile-section">
       <h3 class="profile-section-title">About Autodidactive</h3>
       <p class="profile-about">A daily learning companion featuring ${ALL_PEOPLE.length} historical figures across ${FIELDS.length - 1} disciplines. Built for daily scrolling and active recall.</p>
       <p class="profile-about">All data stored locally on your device. No account needed.</p>
     </div>
   `;
-
-  // Defer event handler init to next tick (after DOM update)
-  requestAnimationFrame(() => initAISettingsHandlers());
 }
 
 // ── Search Overlay ──────────────────────────────────────────────────────────
@@ -1592,9 +1408,6 @@ function openPath(pathId) {
   currentCategory = 'paths';
   currentPath = pathId;
   renderLearn();
-  // Close tutor panel if open
-  const tutor = document.getElementById('tutor-panel');
-  if (tutor && tutor.style.display !== 'none') closeTutor();
 }
 
 function showPaths() {
@@ -1611,7 +1424,6 @@ function openCanvas() {
   view.style.display = 'flex';
   document.querySelector('.app').style.display = 'none';
   document.querySelector('.tab-nav').style.display = 'none';
-  document.getElementById('tutor-fab').style.display = 'none';
 
   if (!canvasInitialized) {
     initCanvas(document.getElementById('canvas-container'));
@@ -1627,7 +1439,6 @@ function closeCanvas() {
   document.getElementById('canvas-view').style.display = 'none';
   document.querySelector('.app').style.display = '';
   document.querySelector('.tab-nav').style.display = '';
-  document.getElementById('tutor-fab').style.display = '';
   stopAnimation();
 }
 
@@ -1637,64 +1448,10 @@ function showOnCanvas(idsJson) {
   addPathToCanvas(ids);
 }
 
-// ── Tutor UI ────────────────────────────────────────────────────────────────
-function openTutor() {
-  const panel = document.getElementById('tutor-panel');
-  panel.style.display = 'flex';
-  document.getElementById('tutor-messages').innerHTML = renderChat();
-  document.getElementById('tutor-input').focus();
-  scrollTutorToBottom();
-}
-
-function closeTutor() {
-  document.getElementById('tutor-panel').style.display = 'none';
-}
-
-async function sendTutorMessage() {
-  const input = document.getElementById('tutor-input');
-  const query = input.value.trim();
-  if (!query) return;
-  input.value = '';
-  input.disabled = true;
-
-  // Show loading state
-  const msgs = document.getElementById('tutor-messages');
-  msgs.innerHTML = renderChat() + '<div class="tutor-msg tutor-msg--tutor" id="tutor-loading"><div class="tutor-msg-text tutor-thinking">Thinking...</div></div>';
-  scrollTutorToBottom();
-
-  try {
-    const prefs = getTutorPrefs();
-    let response;
-    if (prefs.tier3) {
-      response = await processMessageTier3(query);
-    } else if (prefs.tier2) {
-      const { processMessageTier2 } = await import('./tutor.js');
-      response = await processMessageTier2(query);
-    } else {
-      response = await processMessage(query);
-    }
-
-    msgs.innerHTML = renderChat();
-    scrollTutorToBottom();
-  } catch (err) {
-    const loading = document.getElementById('tutor-loading');
-    if (loading) loading.remove();
-    console.error('[Tutor] Error:', err);
-  } finally {
-    input.disabled = false;
-    input.focus();
-  }
-}
-
-function scrollTutorToBottom() {
-  const msgs = document.getElementById('tutor-messages');
-  if (msgs) msgs.scrollTop = msgs.scrollHeight;
-}
-
 // ── Global Handlers ─────────────────────────────────────────────────────────
 window._navigate = navigate;
 window._renderHome = renderHome;
-window._openPerson = (id) => { trackStyle('cards'); openPerson(id); };
+window._openPerson = openPerson;
 window._openLab = openLab;
 window._toggleBookmark = (id) => {
   toggleBookmark(id);
@@ -1706,7 +1463,6 @@ window._toggleBookmark = (id) => {
   }
 };
 window._processRecall = (id, correct) => {
-  trackStyle('recall');
   processRecall(id, correct);
   const card = document.getElementById('recallCard');
   if (card) {
@@ -1722,7 +1478,7 @@ window._closeSearch = closeSearch;
 // Paths
 window._openPath = (id) => { currentConcept = null; openPath(id); };
 window._showPaths = () => { currentConcept = null; showPaths(); };
-window._markPathStep = (pathId, idx) => { markStepComplete(pathId, idx); trackStyle('paths'); };
+window._markPathStep = markStepComplete;
 
 // Concepts
 window._openConcept = openConcept;
@@ -1732,7 +1488,7 @@ window._closeConcept = closeConcept;
 // Canvas
 window._openCanvas = openCanvas;
 window._closeCanvas = closeCanvas;
-window._addToCanvas = (id) => { addNodeToCanvas(id); trackStyle('canvas'); };
+window._addToCanvas = addNodeToCanvas;
 window._setCanvasLayout = setLayout;
 window._saveCanvas = () => {
   const name = prompt('Canvas name:');
@@ -1750,14 +1506,6 @@ window._setLayout = setLayout;
 window._showOnCanvas = showOnCanvas;
 
 
-
-// Tutor
-window._openTutor = openTutor;
-window._closeTutor = closeTutor;
-window._tutorAsk = async (query) => {
-  document.getElementById('tutor-input').value = query;
-  await sendTutorMessage();
-};
 
 // ── Consent Gate ────────────────────────────────────────────────────────────
 const CONSENT_KEY = 'autodidactive-consent';
@@ -1819,18 +1567,10 @@ function initApp() {
     if (e.target === e.currentTarget) closeSearch();
   });
 
-  // Tutor
-  initTutorActionDelegation(document.getElementById('tutor-messages'));
-  document.getElementById('tutor-send').addEventListener('click', sendTutorMessage);
-  document.getElementById('tutor-input').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') sendTutorMessage();
-  });
-
   // Keyboard shortcuts
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       if (document.getElementById('search-overlay').style.display !== 'none') closeSearch();
-      else if (document.getElementById('tutor-panel').style.display !== 'none') closeTutor();
       else if (document.getElementById('canvas-view').style.display !== 'none') closeCanvas();
       else closeModal();
     }
@@ -1854,9 +1594,6 @@ function initApp() {
   // Default: home
   navigate('home');
   updateStreak();
-
-  // Init Tier 2 if opted in
-  initTier2();
 }
 
 // ── Init ────────────────────────────────────────────────────────────────────
