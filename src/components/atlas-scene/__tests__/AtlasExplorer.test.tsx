@@ -136,6 +136,18 @@ describe('AtlasExplorer: the list', () => {
     expect(document.activeElement).toBe(rowOf(container, 'hippocampus'));
   });
 
+  it('returns from the details to the 3D view\'s heading, brought to the top of the screen', async () => {
+    const scrolled = vi.fn();
+    window.HTMLElement.prototype.scrollIntoView = scrolled;
+    const container = await renderExplorer();
+    pressEnterOn(rowOf(container, 'hippocampus'));
+    await waitFor(() => expect(document.activeElement?.id).toBe('atlas-inspector-heading'));
+    fireEvent.click(screen.getByRole('button', { name: 'Back to the 3D view' }));
+    expect(document.activeElement?.id).toBe('atlas-viewport-heading');
+    expect(document.activeElement?.textContent).toBe('3D view');
+    expect(scrolled).toHaveBeenLastCalledWith({ block: 'start' });
+  });
+
   it('moves focus and the view to the details when a row is tapped on a narrow, stacked screen', async () => {
     vi.stubGlobal('matchMedia', (query: string) => ({ matches: query === '(max-width: 960px)', addEventListener: () => undefined, removeEventListener: () => undefined }));
     const scrolled = vi.fn();

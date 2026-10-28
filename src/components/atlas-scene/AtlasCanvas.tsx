@@ -21,6 +21,8 @@ export interface AtlasCanvasProps extends SceneCallbacks {
   selectedKeys: ReadonlySet<string>;
   /** The structure keys selected together. Each group gets one bracket set around all its shapes. */
   bracketGroups: ReadonlyArray<readonly string[]>;
+  /** The name of what the first bracket group selects, written in the picture just above it. Null for no label. */
+  selectionLabel: string | null;
   /** The electrode dots to draw, or null while the devices layer is off. */
   devices: DeviceDrawing | null;
   selectedElectrodeId: string | null;
@@ -43,7 +45,7 @@ export interface AtlasCanvasProps extends SceneCallbacks {
  * a button outside it, so nothing here needs a pointer.
  */
 export default function AtlasCanvas(props: AtlasCanvasProps) {
-  const { shapes, nodesByShapeId, selectedKeys, bracketGroups, devices, selectedElectrodeId, focusMm, slice, theme, prefersLessMotion, description, commands } = props;
+  const { shapes, nodesByShapeId, selectedKeys, bracketGroups, selectionLabel, devices, selectedElectrodeId, focusMm, slice, theme, prefersLessMotion, description, commands } = props;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<SceneRenderer | null>(null);
   const callbacksRef = useRef(props);
@@ -82,7 +84,7 @@ export default function AtlasCanvas(props: AtlasCanvasProps) {
   }, [prefersLessMotion]);
 
   useEffect(() => rendererRef.current?.setTheme(theme), [theme]);
-  useEffect(() => rendererRef.current?.setShapes(shapes, nodesByShapeId, selectedKeys, bracketGroups), [shapes, nodesByShapeId, selectedKeys, bracketGroups]);
+  useEffect(() => rendererRef.current?.setShapes(shapes, nodesByShapeId, selectedKeys, bracketGroups, selectionLabel), [shapes, nodesByShapeId, selectedKeys, bracketGroups, selectionLabel]);
   useEffect(() => rendererRef.current?.setDevices(devices, selectedElectrodeId), [devices, selectedElectrodeId]);
   useEffect(() => rendererRef.current?.setSlice(slice), [slice]);
   useEffect(() => { if (focusMm !== null) rendererRef.current?.focusOn(rasToScene(focusMm)); }, [focusMm]);

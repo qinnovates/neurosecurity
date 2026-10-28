@@ -25,6 +25,9 @@ const LABEL_BORDER_PX = 3;
 const LABEL_INK = '#1c1e26';
 const LABEL_PAPER = 'rgba(255, 255, 255, 0.94)';
 const STEP_LABEL_HEIGHT_MM = 9;
+const SELECTION_LABEL_HEIGHT_MM = 7;
+/** How far above the top of the bracketed box the selection's name stands. */
+const SELECTION_LABEL_LIFT_MM = 4;
 
 /**
  * The face the canvas inherits from the explorer: the Lab's sans body face, which the stylesheet sets and its
@@ -80,6 +83,18 @@ export function buildSelectionMarks(groups: ReadonlyArray<readonly string[]>, en
 }
 
 const middleOf = (box: Box): Point3 => [(box.min[0] + box.max[0]) / 2, (box.min[1] + box.max[1]) / 2, (box.min[2] + box.max[2]) / 2];
+
+/**
+ * The selected region's name, standing just above the box its brackets mark,
+ * so the selection can be found among many shapes. Null where none of the
+ * group's shapes is drawn, or where the browser gives no 2D canvas for the words.
+ */
+export function buildSelectionLabel(keys: readonly string[], entries: readonly ShapeObjects[], text: string, fontFamily: string): Sprite | null {
+  const box = unionBoxes(entries.filter((entry) => keys.includes(entry.shape.structureKey)).flatMap((entry) => entry.box ?? []));
+  if (box === null) return null;
+  const middle = middleOf(box);
+  return buildLabelSprite(text, [middle[0], box.max[1] + SELECTION_LABEL_LIFT_MM, middle[2]], SELECTION_LABEL_HEIGHT_MM, fontFamily);
+}
 
 /** "Step 4", or "Steps 1, 3" where several steps mark the same shape, at the middle of each marked shape. */
 export function buildStepLabels(entries: readonly ShapeObjects[], fontFamily: string): Sprite[] {
