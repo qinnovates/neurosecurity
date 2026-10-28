@@ -36,6 +36,6 @@ body:
     attributes:
       label: Best way to reach you
       description: An email or another way to follow up, if you'd rather not rely on GitHub notifications.
-      placeholder: your@email.example (optional -- we can also just reply here)
+      placeholder: Email, or leave blank -- we can reply here instead
     validations:
       required: false
