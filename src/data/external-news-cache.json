@@ -1,29 +1,65 @@
 [
   {
     "type": "external",
+    "title": "“The Future of Brain–Computer Interfaces Will Be Measured by Independence, Not Laboratory Performance” - BioSpectrum Asia",
+    "date": "2026-10-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi4wFBVV95cUxOOXpWWVVseW1YWmlCOGotRlBkMVlQbERUb3RsUXE0R0kyYU00Ykp6RzE0UzdVelhpMlpMWWhGSUIzLTFMeTY3aUZXLUhlaEVDdFZBZ0FEbVFIRFN5cW1HVGlvc2dhYTNZRk1vU3FUcEU3b3ZCWkxjc1pVeW5nVFZXeER4aWVyQlRBSjFHdHJVek9nenJmblZrdlF5eUF5dlJSSzJXSDFjTERkQUE2dFZHYm8zRnY4am5XS2tsOVpXZXRleU5VcFhsVlBYSkJkY1luUlBGci1lc0ZsdGJENnRkYmQ5cw?oc=5",
+    "source": "Google News — BCI",
+    "summary": "“The Future of Brain–Computer Interfaces Will Be Measured by Independence, Not Laboratory Performance”&nbsp;&nbsp;BioSpectrum Asia",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink tests hands-free calls, text dictation and Grok control through brain signals - Interesting Engineering",
+    "date": "2026-10-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxQYVFEbllEZnN2NnZQZlkzb3hEUEd4UUdFTllmSEpqU0xFanZuZmx4Y3pXOWJrdVRRRm1iNHI5SGoyVHRWdXVIUVZFaXpubFh2SnhMUVhVLUZjRkhHRDUtSmFEX0ZOMld6MXYtMUxPaU8ySHZhUTlJVmJ4QV9vaVRXWmdSNXZmcDlRR21va1FfYVg2T2hseWVXOHNqM2I?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Neuralink tests hands-free calls, text dictation and Grok control through brain signals&nbsp;&nbsp;Interesting Engineering",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink Prototypes Grok Agent You Can Summon Just By Thinking - BASENOR - Tesla Accessories",
+    "date": "2026-10-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxNNUk4dTA5SlhvQW1wbDkxX3hqeW11dnhvNlFONG1KQnJ1LV9QWGZJbk4zd0pveDVKQU1VcWJ0VHNrZnNtMDZWZjY4Q2syVWtXQ3JWMURBZ1FONEZ2eFBKYjNpWlp3Z0YxdlYyWlR2SFFNcDJYRldKVFl4V3FucFoxNjJ5d3RXRXlUTFFJa3htZG9NRkdlUi1jaHYwMEE0WE0?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink Prototypes Grok Agent You Can Summon Just By Thinking&nbsp;&nbsp;BASENOR - Tesla Accessories",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink's 72-Hour Hackathon: Your Questions Answered - BASENOR - Tesla Accessories",
+    "date": "2026-10-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikAFBVV95cUxQem1ibjUzczBhYWozWGluOFEtZExYclNWS0lEYkxGeVluUmtxT2d2REdNTjU2bGNDV2NkMUF2N0VzOEtPXzNJVjF2akRXMUVWTkV1MWZEWmkxc2UxWVhUTjQ0N1hYLWRvZlVKcEZxWWJEU1ZXc3Q4NXdUVGp5WFdpNUJLR1NVSl9yOGpKVFNRR3I?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink's 72-Hour Hackathon: Your Questions Answered&nbsp;&nbsp;BASENOR - Tesla Accessories",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Mesh Woven Into Heart Tissue Harvests Energy From Motion",
+    "date": "2026-10-29",
+    "url": "hxxps://spectrum[.]ieee[.]org/medical-implant-energy-harvesting-mesh",
+    "source": "IEEE Spectrum",
+    "summary": "Medical implants like pacemakers and deep brain stimulators now rely on batteries that are bulky, stiff, and eventually need replacing. But what if these devices could be powered by the body itself? R",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Implanted brain-computer interfaces lack a shared safety rulebook, review warns - Bioengineer.org",
+    "date": "2026-10-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPNlB6MjZFa294WGVHVTFUYlo2a3BKUC02UkQ3NVBWVURPREs0V2lTb2dlMnpiRmM5Q1pQQU9ONDZ4cUp5SUtZVG9qTldvQ01CMGt3cW1ZZUdTZmt4WEhxSUUydUZLTllCTlIzX3hhUkF3WmxScTRvTVUzTk1BdG1hbms0aDlvei1RN0hsZG5sUWJ3UV80N0VXTy1ONjV2VWxUcGxscExR?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Implanted brain-computer interfaces lack a shared safety rulebook, review warns&nbsp;&nbsp;Bioengineer.org",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Brain-computer interface startup NeuroXess raises RMB 700 million in Series B funding - TechNode",
     "date": "2026-10-28",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiugFBVV95cUxOWll4OVp1NWpFd0tRRmpZbHU0eU9ZNE05anNmMHpKTVZGcHFlRUwteHprOERyQ3JxS3B5dloxTFNfODRLY1VSZXJkTkoxR00tR29IaVlzNF9wUnFxNk0zWmZsX3JFajQ3XzBELWNrNHduTE91b3N4RHFXSFJ5N3FmOE93MnhaYWt0QTYyaDQ3LVF1MHdHNF9CX1pIRklWMEh4c3ZHV0RyS2pyTVpnaEZ1dFFXN3pWcDBmbUE?oc=5",
     "source": "Google News — BCI",
     "summary": "Brain-computer interface startup NeuroXess raises RMB 700 million in Series B funding&nbsp;&nbsp;TechNode",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "The geometry of cognition: from neural populations to neurotechnology",
-    "date": "2026-10-28",
-    "url": "hxxps://arxiv[.]org/abs/2610[.]36541",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2610.36541v1 Announce Type: new Abstract: Cognition is implemented by distributed neural populations whose collective activity evolves through structured, low-dimensional state spaces. In this r",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "GC IV Commentary Series – Brain Computer Interface-Assisted Interrogations and Articles 27, 31, & 32 - Lieber Institute West Point",
-    "date": "2026-10-27",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinAFBVV95cUxNejdZcVMxdFQ4ZDExZ3ZjMEJhalVKTFJ5SGEwZTVFS09XVkQtNzV2X2dZRUNBWjhiUnJIZ0o4UUZFX05TRHVLb1lOb1p0cGxJazZPY01IalNTQWpNUS1jeTZmQ2JLZnJyd0t4NWVabm5aeWJFejRKSW9oSUVkR3VnTy01YlgzZUU4cWFVb2NtRkF0VUtfdnBxVXNPNjc?oc=5",
-    "source": "Google News — BCI",
-    "summary": "GC IV Commentary Series – Brain Computer Interface-Assisted Interrogations and Articles 27, 31, & 32&nbsp;&nbsp;Lieber Institute West Point",
     "category": "neurotechnology"
   },
   {
@@ -37,24 +73,6 @@
   },
   {
     "type": "external",
-    "title": "How long until wearable brain-computer interfaces become mainstream? - The Conversation",
-    "date": "2026-10-22",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxPMzZELUlXckdpMmdYelIySFUtZVpCMUFaV29vcTUzN2EtZ3h0QW40R1ROTWdhSkpHVGNMdEJsdDJTVFNiRDJUQVE3TzhNSGNheHQ1Q2hIRmxyRENrUVJWX1R2MVlDNUZHY1A2dTc3Nmt2b1VBQ3JnQ0NIZlAxUm5rOGxHZVh1dWZleU5YeWxMQ2NhUV93YnBEcGxZZ1c3ZlZlcXRZSA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "How long until wearable brain-computer interfaces become mainstream?&nbsp;&nbsp;The Conversation",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Computer science student takes engineering skills to Neuralink - UT San Antonio Today",
-    "date": "2026-10-21",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimAFBVV95cUxOMkIwamstY3g1M2NCSVNVSnlCTjJ6S20zYUtpU0FmVTdNUnhtZ2NKQ3VuLWxnc0JiVm5COWR2c0IyMFpfVm03UWFqVUFqWXhLUTJQV2xnREtDdmpNOEhacXhTR2hDOHNzVDY3RTFuN1k1RnNyZkE4ZFBfamhhM3BYZHhSX1FhYl9BbW94RkpkQTRDM0RTeHp2Vg?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Computer science student takes engineering skills to Neuralink&nbsp;&nbsp;UT San Antonio Today",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Under-Skin Implant Controls Prosthetic Arms",
     "date": "2026-10-20",
     "url": "hxxps://spectrum[.]ieee[.]org/phantom-neuro-prosthetic-arm-implant",
@@ -64,47 +82,11 @@
   },
   {
     "type": "external",
-    "title": "Could your brain data be used against you? UN calls for limits on neurotechnology - UN News",
-    "date": "2026-10-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiV0FVX3lxTE9jblJRel9jTXFkbHAtVGVIeFVvdlhlRF83eE0yWGd0ZzBsMUNOejJjbVA0cVU5bEJBVHBBeERWbk15VWoxY1JHWElRSmMtQUNVU2Rsb19uYw?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Could your brain data be used against you? UN calls for limits on neurotechnology&nbsp;&nbsp;UN News",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
     "title": "A New Neurotech Startup Launches to Rival Sam Altman’s Merge Labs - WIRED",
     "date": "2026-10-06",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPZHdGc3pUdVhTQWdlTFRnSXl5VmVTZFR1NlpnRmVuVHJ4dzhrbkZ3dWw5QXZaOXA5WUI1Q1dEN0ItNmN6c0huU2kyMW4zZWNXNktYUEg5QVo2aWlfZXNWU2FtZjgxb0ZtTkxiNDdsM3BkZ01Fa1hFLW5WMkhLanhaSzVrWW91eXp0?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "A New Neurotech Startup Launches to Rival Sam Altman’s Merge Labs&nbsp;&nbsp;WIRED",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink Stock: How to Invest Before the IPO - Yahoo Finance",
-    "date": "2026-10-02",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilgFBVV95cUxOMmd0ZGVZRzZ3OVNzelY3dlQwU1dpRHdoVW56bWRBWHhGRUYwd0RrWUl6c0NsX01SVy1LRlEtREZ4TktNeW44NVBOMnMybDlqOVFuWndLVW94NXp0OFZWSDNkNlN2ZHlUYVdUYTE2UlVEQU9lU1dZLTh0Qndtal92SzA1OXBmeGUyRUFSSTdRTHY1WllDX2c?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink Stock: How to Invest Before the IPO&nbsp;&nbsp;Yahoo Finance",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink brain implant sets 11.32-bit/s cursor-control record - Interesting Engineering",
-    "date": "2026-10-02",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxOQnk1MktwQ1hjOE5qc09GQUpvUDhaUG9SWGI4RWVLa2pNMlFneXpseWltM3p5ZTRXYlUtUnN6Yms0NTE5a1c4ZmRWRndvYUJPX080cFFsTXk1b1VEWlpLTjRWWGFRczA2ZERmR0NfTHNuaVlxcE5sVW50NFF0NzRReDJfdmpEN0dm?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink brain implant sets 11.32-bit/s cursor-control record&nbsp;&nbsp;Interesting Engineering",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Pretraining on 50,000 Hours of Unlabeled Brain Data - Neuralink",
-    "date": "2026-10-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiaEFVX3lxTFBaZDVWbFZHdC02S1hVam15NFRWQnduQXZuME1wU21hcnZqTUpVbmtjZmNOdVlhUVUwaEY5WmV3dk5RTXg5UmUwaDIya2ZxTDNPQmJIWkppNnV5SENWQUNJTFBVWEw2a2It?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Pretraining on 50,000 Hours of Unlabeled Brain Data&nbsp;&nbsp;Neuralink",
     "category": "neurotechnology"
   },
   {
@@ -118,24 +100,6 @@
   },
   {
     "type": "external",
-    "title": "‘I Have a Lot to Say’: Brain Implant Helps a Disabled Patient Speak - The New York Times",
-    "date": "2026-09-14",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimwFBVV95cUxPMEFTODdPeF9LVWxTVmM5VzMtTy1lWmRPXzBVakRkazB2MHZUeHAxYTZxMUR3ZkF2VFpDcWh4dlN3QjlkTll4d3phZFFzTjJRcWQ2Y18xSjA2Rkg0VnFIaDRRejRKNHFma3ppcGxVdzlYTFpPelJ0MW1lbFg3WmNMWUdEMUJsczBvd2NMWm5veGJPTnJqdmlMTkZuZw?oc=5",
-    "source": "Google News — BCI",
-    "summary": "‘I Have a Lot to Say’: Brain Implant Helps a Disabled Patient Speak&nbsp;&nbsp;The New York Times",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Butterfly Network, Merge Labs partner on ultrasound brain-computer interfaces - MobiHealthNews",
-    "date": "2026-09-03",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirgFBVV95cUxOLXpXNkJyYkhncDE1N3lYTGg3Tk5kd2tocGVjaDdaR21jcDQ3TXpVZ3BZQVdiVEFmelEtM1A0dVNXVDB6MG5wSjEtUlZlN2FmeW8xT0taLUN3ODZ3YmJHWXdmakVGUDlMLTVFd21vamRTdVlSZkd0bk13RDVUTVFhZ2QwVHlqaFlscmJldkxBeURMSUtBNV9JOVRZMkViRVVNM2pxUFlXS0xyZUM2X2c?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Butterfly Network, Merge Labs partner on ultrasound brain-computer interfaces&nbsp;&nbsp;MobiHealthNews",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "AI visionary Ray Kurzweil is joining a Silicon Valley startup developing a brain computer system that involves snorting nanoparticles - Fortune",
     "date": "2026-09-03",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMi-gFBVV95cUxPaWsxNURtUVhjV2pRRDVFR1Zza1QwWGVlWldvQWVGa0pVQ0x3Z3I1QzV4VmY4SjhXcmEzTTd0MmNLWWFPNFZ6cUszOGNFbC1kZ0FwczVLZXBiYzB4YkZDNzdjTDJ5cjBLb3pBLUtXUlJBSXZILWxOVWtOQVNTRkxEcmVDMnoxVU1lV0VUb2RhVE5mRkFKNmwzM3BleXBMVUdxQ1hodHNYbEFNdjAwN1dNVEtDejVzTFBCYWtVYVVHU1hSYjZWRE5sNjVGMTZoRTY5ZTJDMzFtNWNicXhuMkU5SUxjRDZHZUpMOHZoUU1kU0tyVFVRa1BqNjFR?oc=5",
@@ -145,21 +109,12 @@
   },
   {
     "type": "external",
-    "title": "Merge Labs and Butterfly Network Partner to Advance Ultrasound-Based Brain-Computer Interfaces - Yahoo Finance",
-    "date": "2026-09-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMingFBVV95cUxNcnVTeVdlODNYSnJkeWY1TTVVamhiaGFzaVFmc1NNQU51emJVZnhxM2dEOW5KMkZBTG5DU016MW5OLWV2c000dG1fZmppOFlfQjRWYlBENldDWlJsRi1qbjZpSk9kbVZLOUdHdno4N3VzOU5Fa1R1RHpQX21OOWdZUS1VaWh5QUwyajNPREFJaFhhOWhld19qOXNGQXVfdw?oc=5",
+    "title": "Post-2000s Tsinghua doctoral student launches a \"neural interface\" startup: turning human muscle reactions into tokens - eu.36kr.com",
+    "date": "2026-08-23",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTFBLOXdWeEQ1NlF3MlNyVDJmSTFxdHdxbkRzRkV1dFdVUlBYcThRbkgwQU15MExOLThCbm1PTG5NdlpCQ3o4ekc4cFhiVC16UWpKVjJr?oc=5",
     "source": "Google News — Neural Startups",
-    "summary": "Merge Labs and Butterfly Network Partner to Advance Ultrasound-Based Brain-Computer Interfaces&nbsp;&nbsp;Yahoo Finance",
+    "summary": "Post-2000s Tsinghua doctoral student launches a \"neural interface\" startup: turning human muscle reactions into tokens&nbsp;&nbsp;eu.36kr.com",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Would you trust your boss with data about your brain? California moves to regulate neurotech - CalMatters",
-    "date": "2026-08-10",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimwFBVV95cUxNSlR3UERFeVEtdWVqVHFfR19fUldCYTB4RXFXSVBqUkFZSVgtMG1oMF9PNV9scU5VRnAtdDFobmVjeDcydWR0MXhGLU5KT2pGdERMWVFCYVpoM1B2VC1xSEt0R2tMdkxja2RaaVl3TWpEZGVaTmdTdFB4TUVLU3dMdWlPa2hqak1CUWZyeUdqMmpFbnZ4TVk0aXBucw?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Would you trust your boss with data about your brain? California moves to regulate neurotech&nbsp;&nbsp;CalMatters",
-    "category": "neuroethics"
   },
   {
     "type": "external",
@@ -172,29 +127,65 @@
   },
   {
     "type": "external",
-    "title": "From Maple to Mind Taps: New Vermont Law Puts Neurotech on Notice - JDSupra",
+    "title": "From Maple to Mind Taps: New Vermont Law Puts Neurotech on Notice - JD Supra",
     "date": "2026-06-24",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxOZThuek9LZFlGNWczajZuMTdjWWMwaUJDTlliUGhaRTlaOTJGMFNRdlJJd2pzYTJRTVNhdzhDcHk1b090QlY3WWdoNnh0LVZqRFBBZHlQYmM4cG5sMmYwOFdtb3U3a0NIbEtER0hpeF9XUU5JTEpyMU8wdUdFZFUtWEtvY3NKay1GalE?oc=5",
     "source": "Google News — MIND Act",
-    "summary": "From Maple to Mind Taps: New Vermont Law Puts Neurotech on Notice&nbsp;&nbsp;JDSupra",
+    "summary": "From Maple to Mind Taps: New Vermont Law Puts Neurotech on Notice&nbsp;&nbsp;JD Supra",
     "category": "neuroethics"
   },
   {
     "type": "external",
-    "title": "All the World's Neural Data, No Common Rule - Davis Wright Tremaine",
-    "date": "2026-05-28",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxNSzZsakgxaUlpX0ZBZHV2d2s5NVQzUmQ5OGtLV09VWUdXWEc4d21BZnIzMzNKdGJ3aloyTUVZbjBudXplSkRfV3JXczN4RWJ6N3dXR1RENU9pR0dNcmRobTgtaE83SERyVm45SklOQ1FJOXZfQ0hOTGZSX1ZoY3lYM2ZyYXAzSmh2NFV0QXBfUHdzdW80Q0ZMc0MxRzc5M1Q1NVR4cDZFSQ?oc=5",
+    "title": "BCI startup Neurable looks to license its ‘mind-reading’ tech for consumer wearables - Yahoo Finance",
+    "date": "2026-04-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxNZVp4TGpkOEtMOGxzQ0l2SDZKdGY3aHg2eWptLUg2dHY4T1RfellVcktnUHY4ZGU3eHAyTlpoRUNta3E4S1AwMEdOMHdrbXlFQS1HcmNOYUdNOGhrQl90N2dJbktmUTFRZm9rYjMxYS02MUhsaGh1dVNNQ3FFa191SmZsX3pzWU5xYjMwdVBNVTVUeWZFX2J4U0NvOXlPT0JjR2pETV93?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "BCI startup Neurable looks to license its ‘mind-reading’ tech for consumer wearables&nbsp;&nbsp;Yahoo Finance",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Two Years of Telepathy | Updates - Neuralink",
+    "date": "2026-01-28",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiY0FVX3lxTE52MnEtZ2hnLTVXV3dEamVSM3lVYXdEU0hPZHl3c0Nna3BjdjlnNUozTVdhdlNRVEJfVkhSSnZpYW1xQ1JvVUdaaEJndnp5S1dJSUZDZ1p0NFMxZ3JhcXJGcnNOWQ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Two Years of Telepathy | Updates&nbsp;&nbsp;Neuralink",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology - CSIS | Center for Strategic and International Studies",
+    "date": "2025-11-04",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPanNMOEN0Yy16RElvSXJjMk4zR25qd2tGQXhDZDI2cmo0Yk5kSmZNQXJfSnhQb0tOdUJUY3BOQlc0akVlOGZ5aGpBekVWd0NNV1R6enN5Q0RVRnFKX2JhSWRuVVA2MUNkNHJOd0k4NjRLdjZtVUxkZlluWFVUNU0zN21VajFiOW9Udl9aTjhTQ1dkSEphZTAtWVR5MU5ZalQySDdJWTFB?oc=5",
     "source": "Google News — MIND Act",
-    "summary": "All the World's Neural Data, No Common Rule&nbsp;&nbsp;Davis Wright Tremaine",
+    "summary": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology&nbsp;&nbsp;CSIS | Center for Strategic and International Studies",
     "category": "neuroethics"
   },
   {
     "type": "external",
-    "title": "Safeguarding Neural Data - Neurology® Journals",
-    "date": "2026-04-30",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiakFVX3lxTE1NTzE3XzVPMjd4MXB3dkZCbDRzMTNSNUpLRE96MWNaeFpuNkFhMkRaV1hDZnFBSG9hOVNPQ3dFcXhjSG5nNnd1cVdBQzg2M3c3TDlaMzU0RnNZRlZhdm1fZS1SMlg1NDhNM3c?oc=5",
+    "title": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data - Davis Wright Tremaine",
+    "date": "2025-10-15",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPR0g3MFdtRG5ZekMyUFlxbXEzVkJ3SVJ5c2hqTTlIRHVyb0lNc2NzRTdSN3VYT2NNSl9VQ043b3l1ei1aZEpkajNiU1FRY2tYb3hBWE9IOUVmRVoxZTh2bzM0MGRTa00yeDFVT2d5c21aa1VJRFJzNExhRVlvTl9TejNKaFB5eHEwTUd2eHFQcHlKTWhtWHJseWxFNmU0aWJvZGZzSVh3?oc=5",
     "source": "Google News — MIND Act",
-    "summary": "Safeguarding Neural Data&nbsp;&nbsp;Neurology® Journals",
+    "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
+    "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "Senators ask FTC to study neurotechnology's promises, implications - IAPP",
+    "date": "2025-10-03",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxNS3FBelpMZGNUWExYbEtEQzZtLXNYRGJnRjhsNjFTYTRrMHpMYW9iU2ZlM3JqM3BBendfblNmNHVNUURrNG4xNzlRNU1xLWN5ZmIzNVJSR1JBRTFBclU5NHFQMTUxLVQ2OEY4bVJJS3VRRFVFcm95NEZpbTRtY1lhWDdBdmJydTI2MHBLNVJvVkxUS0E?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Senators ask FTC to study neurotechnology's promises, implications&nbsp;&nbsp;IAPP",
+    "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "Mind over Machine: Navigating the Legal and Ethical Frontier of Neurotech - Petrie-Flom Center",
+    "date": "2025-02-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiuwFBVV95cUxPN0RJTWI5UzFiUUxSbnFfZFh0RUdQYkw0LUJDTkctc21sNFUteENfTHFBZk1lSnpVaW42NWJ2a3VmaHlDQ2xiR0VLWDVBVnBpNWV4UWQ2UDVualBoQTlkTkpiYWo4V0J3Wmo5SkhSQ2JmUFg1em5zLVlNQ0Z6dXJtenhObDR2a0dQMUFCQXJ0cDFiUXpnYWFmNDdhNXBlT1laUGhlNFB3cV81UzJYc3UtaDR4S1BfRVhQek0w?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Mind over Machine: Navigating the Legal and Ethical Frontier of Neurotech&nbsp;&nbsp;Petrie-Flom Center",
     "category": "neuroethics"
   }
 ]
