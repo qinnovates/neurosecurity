@@ -1,0 +1,47 @@
+---
+/**
+ * Glia, the full console this site previews a slice of, is not public yet and
+ * for now has no request door at all: this is only the tease. Not a link, so
+ * nothing on the site promises a way in that does not exist. The motion teaser
+ * (A-89 in Mission Control) takes this element's place when it lands.
+ */
+export interface Props {
+  /** Shorter copy for a tight space (a nav bar). Default fits a standalone placement. */
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+<span class="glia-teaser glass" class:list={{ 'glia-teaser--compact': compact }} data-glia-teaser="coming-soon">
+  <span class="glia-teaser__label">{compact ? 'Glia' : 'Glia, the full console'}</span>
+  <span class="glia-teaser__soon">Coming soon</span>
+</span>
+
+<style>
+  .glia-teaser {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.75rem;
+    color: var(--color-text-primary);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    cursor: default;
+  }
+  .glia-teaser__soon {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent-primary);
+    padding: 0.125rem 0.5rem;
+    border: 1px solid color-mix(in srgb, var(--color-accent-primary) 35%, transparent);
+    border-radius: 999px;
+  }
+  .glia-teaser--compact {
+    padding: 0.5rem 0.875rem;
+    border-radius: 0.5rem;
+    font-size: 0.8125rem;
+    gap: 0.5rem;
+  }
+</style>
