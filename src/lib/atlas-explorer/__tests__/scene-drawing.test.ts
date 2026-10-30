@@ -121,7 +121,7 @@ describe('ringParamsFor', () => {
     [params.arcs.length, params.arcs.reduce((total, [, length]) => total + length, 0).toFixed(3), (params.outerMm - params.innerMm).toFixed(3), params.dotMm].join('/');
 
   it('draws no ring for a structure the atlas resolves well enough', () => {
-    for (const fill of FILL_KINDS) expect(ringParamsFor({ fill, sizeMark: 'mesh', colour: NISS_COLOURS.high }), fill).toBeNull();
+    for (const fill of FILL_KINDS) expect(ringParamsFor({ fill, highlightColour: null, sizeMark: 'mesh', colour: NISS_COLOURS.high }), fill).toBeNull();
     for (const sizeMark of SIZE_MARKS.filter((mark) => mark !== 'mesh')) expect(ringParamsFor({ fill: 'solid', sizeMark, colour: NISS_COLOURS.high })).not.toBeNull();
   });
 

@@ -75,10 +75,12 @@ const PICK_ATTRIBUTE = 'data-pick';
 const PICK_VALUE = 'shape';
 const EMISSIVE_OFF = '#000000';
 
-/** A material that can glow, as three.js's lit materials can and its flat ones cannot. */
-type Glowing = Material & { emissive?: { set: (colour: string) => void; getHexString: () => string }; emissiveIntensity?: number };
-/** What a lifted material was before the pointer reached it: a selected shape's own glow comes back, not darkness. */
-interface HoverRestore { material: Glowing; opacity: number; transparent: boolean; emissiveColour: string | null; emissiveIntensity: number | undefined }
+/** A colour as three.js holds it on a material: set from a hex string, read back without the hash. */
+interface MaterialColour { set: (colour: string) => void; getHexString: () => string }
+/** A material with a colour, which three.js's drawn materials have, and that can glow, as its lit ones can and its flat ones cannot. */
+type Glowing = Material & { color?: MaterialColour; emissive?: MaterialColour; emissiveIntensity?: number };
+/** What a lifted material was before the pointer reached it: a selected shape's own colour and glow come back, not the lens colour and darkness. */
+interface HoverRestore { material: Glowing; colour: string | null; opacity: number; transparent: boolean; emissiveColour: string | null; emissiveIntensity: number | undefined }
 
 function easeOut(progress: number): number {
   return 1 - (1 - progress) ** 3;
@@ -127,9 +129,10 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
   const raycaster = new Raycaster();
 
   /**
-   * The selection, on the selected shapes themselves: the same lift as hover, held. A filled shape is lit from within;
-   * a see-through one is drawn denser and gets no light, by the same rule as hover, so it never reads as holding a
-   * value it does not hold. A marker ring is not lifted, for the reason given at applyHover.
+   * The selection, on the selected shapes themselves: the same lift as hover, held. A shape with a region's own colour
+   * takes it; a filled shape is lit from within; a see-through one is drawn denser and gets no light, by the same rule
+   * as hover, so it never reads as holding a value it does not hold. A marker ring is not lifted, for the reason given
+   * at applyHover.
    */
   const glowSelected = (selectedKeys: ReadonlySet<string>): void => {
     for (const entry of objects.filter((item) => selectedKeys.has(item.shape.structureKey) && item.shape.sizeMark !== 'ring_only')) {
@@ -138,6 +141,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       for (const target of entry.pickTargets) {
         const material = target.material as Glowing;
         Object.assign(material, { opacity, transparent: opacity < 1 });
+        if (entry.shape.highlightColour !== null) material.color?.set(entry.shape.highlightColour);
         if (params.emissiveIntensity > 0 && material.emissive !== undefined) { material.emissive.set(HOVER_EMISSIVE); material.emissiveIntensity = SELECTED_EMISSIVE_INTENSITY; }
       }
     }
@@ -149,8 +153,9 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
    * does not hold.
    */
   const applyHover = (key: string | null): void => {
-    for (const { material, opacity, transparent, emissiveColour, emissiveIntensity } of lifted) {
+    for (const { material, colour, opacity, transparent, emissiveColour, emissiveIntensity } of lifted) {
       Object.assign(material, { opacity, transparent });
+      if (colour !== null) material.color?.set(`#${colour}`);
       if (emissiveIntensity !== undefined) { material.emissive?.set(emissiveColour === null ? EMISSIVE_OFF : `#${emissiveColour}`); material.emissiveIntensity = emissiveIntensity; }
     }
     lifted = [];
@@ -163,11 +168,13 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
         const material = target.material as Glowing;
         const emissive = material.emissive;
         lifted.push({
-          material, opacity: material.opacity, transparent: material.transparent,
+          material, colour: material.color?.getHexString() ?? null, opacity: material.opacity, transparent: material.transparent,
           emissiveColour: emissive === undefined ? null : emissive.getHexString(),
           emissiveIntensity: emissive === undefined ? undefined : material.emissiveIntensity,
         });
         Object.assign(material, { opacity: params.opacity, transparent: params.opacity < 1 });
+        // The region's own colour, so the shape under the pointer is told from its neighbours; it is no step's colour.
+        if (entry.shape.highlightColour !== null) material.color?.set(entry.shape.highlightColour);
         if (params.emissiveIntensity > 0 && material.emissive !== undefined) { material.emissive.set(HOVER_EMISSIVE); material.emissiveIntensity = params.emissiveIntensity; }
       }
     }

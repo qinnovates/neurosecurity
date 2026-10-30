@@ -30,20 +30,27 @@ export class StandInGeometry {
   dispose(): void { this.isDisposed = true; }
 }
 
+/** A colour as the renderer touches it: set from a hex string, read back without the hash. */
+export class StandInColour {
+  private hex: string;
+  constructor(colour = '#000000') { this.hex = colour.replace('#', '').toLowerCase(); }
+  set(colour: string): void { this.hex = colour.replace('#', '').toLowerCase(); }
+  getHexString(): string { return this.hex; }
+}
+
 export class StandInMaterial {
   opacity = 1;
   transparent = false;
   isDisposed = false;
   map?: { dispose: () => void };
-  constructor(public params: Record<string, unknown> = {}) { Object.assign(this, params); }
+  /** The material's colour as three.js holds it, from the `color` it was made with; `params.color` keeps the value it was made with. */
+  color: StandInColour;
+  constructor(public params: Record<string, unknown> = {}) {
+    const { color, ...rest } = params;
+    Object.assign(this, rest);
+    this.color = new StandInColour(typeof color === 'string' ? color : '#000000');
+  }
   dispose(): void { this.isDisposed = true; }
-}
-
-/** A colour as the renderer touches it: set from a hex string, read back without the hash. */
-export class StandInColour {
-  constructor(private hex = '000000') {}
-  set(colour: string): void { this.hex = colour.replace('#', '').toLowerCase(); }
-  getHexString(): string { return this.hex; }
 }
 
 /** A lit material, as three.js's MeshLambertMaterial: it can glow, with black and full intensity meaning no glow, as three.js defaults them. */

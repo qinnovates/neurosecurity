@@ -2,7 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import type { DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
-import { DRAW_ORDER, FILL_OPACITY, HOVER_EMISSIVE_INTENSITY, HOVER_OPACITY, SELECTED_EMISSIVE_INTENSITY, SELECTION_COLOUR, STEP_EASE_MS, SURFACE_INK, ringParamsFor, stepEaseDuration } from '@/lib/atlas-explorer/scene-drawing';
+import { DRAW_ORDER, FILL_OPACITY, HOVER_EMISSIVE_INTENSITY, HOVER_OPACITY, INSIDE_COLOUR, SELECTED_EMISSIVE_INTENSITY, SELECTION_COLOUR, STEP_EASE_MS, SURFACE_INK, ringParamsFor, stepEaseDuration } from '@/lib/atlas-explorer/scene-drawing';
 import { NEUTRAL_COLOUR, NISS_COLOURS, NISS_COLOURS_DARK, type SceneShape } from '@/lib/atlas-explorer/scene-shapes';
 import { toIndexReviewState, UNREVIEWED } from '@/lib/anatomy/review-state';
 import { listSceneObjects, resetStandIn, standIn, type StandInLitMaterial, type StandInObject } from './three-stand-in';
@@ -18,10 +18,11 @@ function nodeAt(labelId: string, centre: readonly [number, number, number], half
   return { atlas: 'a', labelId, hemisphere: 'left', positionsMm, indices: new Uint32Array([0, 1, 2, 0, 2, 3]), boundsMm: { min: [x - half, y - half, z - half], max: [x + half, y + half, z + half] } };
 }
 function shapeAt(labelId: string, centroidMm: readonly [number, number, number], overrides: Partial<SceneShape> = {}): SceneShape {
-  return {
+  const base: SceneShape = {
     id: `a:${labelId}:left`, structureKey: `a:${labelId}`, assetId: 'asset', layer: 'cortical', hemisphere: 'left', fill: 'translucent', colour: '#8a90a0', step: null, words: '',
-    sizeMark: 'mesh', centroidMm, mirrored: false, ...overrides,
+    highlightColour: null, sizeMark: 'mesh', centroidMm, mirrored: false,
   };
+  return Object.assign(base, overrides);
 }
 
 /** Three regions far apart, each one shape, and one region drawn as two shapes. */
@@ -96,25 +97,70 @@ describe('the selection', () => {
    * box the data does not hold, and the plate as a patch over the brain. A
    * selected shape is now lit from within, and nothing is drawn around it.
    */
-  /** The twin region filled, as under a lens that holds a value for it; the rest see-through. */
-  const LIT_SHAPES = SHAPES.map((shape) => (REGION_KEYS.twin.includes(shape.structureKey) ? { ...shape, fill: 'solid' as const } : shape));
+  /**
+   * The twin region filled, as under a lens that holds a value for it, with a colour of its own; the left region
+   * see-through but with a colour of its own; the rest see-through and shared or unowned, so with none.
+   */
+  const TWIN_OWN = '#aa3366';
+  const LEFT_OWN = '#3366aa';
+  /** What a filled shape rests in: the lens colour the fixture gives it. */
+  const LENS_COLOUR = '8a90a0';
+  /** What a see-through shape rests in: the surface's pale ink, not the lens colour (materialParamsFor). */
+  const PALE_COLOUR = INSIDE_COLOUR.slice(1);
+  const LIT_SHAPES = SHAPES.map((shape) => {
+    if (REGION_KEYS.twin.includes(shape.structureKey)) return { ...shape, fill: 'solid' as const, highlightColour: TWIN_OWN };
+    return shape.structureKey === 'a:left' ? { ...shape, highlightColour: LEFT_OWN } : shape;
+  });
 
-  it('lights every filled shape of a selected region from within, draws nothing around it, and puts it back when it is unselected', () => {
+  it('shows a selected region in its own colour, lit from within where it is filled, draws nothing around it, and puts it back when it is unselected', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(LIT_SHAPES, NODES, new Set(REGION_KEYS.twin));
     expect(kindsOf('lines')).toHaveLength(0);
     expect(kindsOf('sprite')).toHaveLength(0);
     for (const key of REGION_KEYS.twin) {
       const material = litMaterialOf(key);
+      expect(material.color.getHexString(), key).toBe(TWIN_OWN.slice(1));
       expect(material.emissive.getHexString(), key).toBe(WHITE);
       expect(material.emissiveIntensity, key).toBe(SELECTED_EMISSIVE_INTENSITY);
       expect(material.opacity, key).toBe(FILL_OPACITY.solid);
     }
     const front = litMaterialOf('a:front');
+    expect(front.color.getHexString()).toBe(PALE_COLOUR);
     expect(front.emissive.getHexString()).toBe(NO_GLOW);
     expect(front.opacity).toBe(FILL_OPACITY.translucent);
     renderer.setShapes(LIT_SHAPES, NODES, new Set());
-    for (const key of REGION_KEYS.twin) expect(litMaterialOf(key).emissive.getHexString(), key).toBe(NO_GLOW);
+    for (const key of REGION_KEYS.twin) {
+      expect(litMaterialOf(key).color.getHexString(), key).toBe(LENS_COLOUR);
+      expect(litMaterialOf(key).emissive.getHexString(), key).toBe(NO_GLOW);
+    }
+  });
+
+  it('shows a see-through shape under the pointer in its own colour and denser, with no light, and puts both back when the pointer leaves', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
+    renderer.setShapes(LIT_SHAPES, NODES, new Set());
+    const left = kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:left') as StandInObject;
+    standIn.hits = [{ object: left, distance: 1, point: {} }];
+    canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 5, clientY: 5 }));
+    runFrame(1016);
+    expect(litMaterialOf('a:left').color.getHexString()).toBe(LEFT_OWN.slice(1));
+    expect(litMaterialOf('a:left').opacity).toBe(HOVER_OPACITY.translucent);
+    expect(litMaterialOf('a:left').emissive.getHexString()).toBe(NO_GLOW);
+    standIn.hits = [];
+    canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 300, clientY: 300 }));
+    runFrame(1032);
+    expect(litMaterialOf('a:left').color.getHexString()).toBe(PALE_COLOUR);
+    expect(litMaterialOf('a:left').opacity).toBe(FILL_OPACITY.translucent);
+  });
+
+  it('leaves the colour of a shape with no colour of its own alone under the pointer, and only lifts it', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
+    renderer.setShapes(LIT_SHAPES, NODES, new Set());
+    const front = kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:front') as StandInObject;
+    standIn.hits = [{ object: front, distance: 1, point: {} }];
+    canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 5, clientY: 5 }));
+    runFrame(1016);
+    expect(litMaterialOf('a:front').color.getHexString()).toBe(PALE_COLOUR);
+    expect(litMaterialOf('a:front').opacity).toBe(HOVER_OPACITY.translucent);
   });
 
   it('draws a selected see-through shape denser and adds no light to it, by the same rule as hover, so it never reads as holding a value', () => {
@@ -139,6 +185,8 @@ describe('the selection', () => {
     canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 300, clientY: 300 }));
     runFrame(1032);
     expect(callbacks.onHover).toHaveBeenLastCalledWith(null);
+    // Back to the selection's own state: its colour, its glow, its opacity.
+    expect(litMaterialOf('a:twinA').color.getHexString()).toBe(TWIN_OWN.slice(1));
     expect(litMaterialOf('a:twinA').emissive.getHexString()).toBe(WHITE);
     expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(SELECTED_EMISSIVE_INTENSITY);
     expect(litMaterialOf('a:twinA').opacity).toBe(FILL_OPACITY.solid);

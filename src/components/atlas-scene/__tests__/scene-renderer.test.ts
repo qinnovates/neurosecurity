@@ -65,10 +65,10 @@ vi.mock('three', () => {
 const { createSceneRenderer } = await import('../scene-renderer');
 
 const node = (labelId: string): DecodedNode => ({ atlas: 'a', labelId, hemisphere: 'left', positionsMm: new Float32Array(9), indices: new Uint32Array([0, 1, 2]), boundsMm: { min: [0, 0, 0], max: [1, 1, 1] } });
-const shape = (labelId: string, overrides: Partial<SceneShape> = {}): SceneShape => ({
+const shape = (labelId: string, overrides: Partial<SceneShape> = {}): SceneShape => Object.assign({
   id: `a:${labelId}:left`, structureKey: `a:${labelId}`, assetId: 'asset', layer: 'cortical', hemisphere: 'left', fill: 'translucent', colour: '#8a90a0', step: null, words: '',
-  sizeMark: 'mesh', centroidMm: [0, 0, 0], mirrored: false, ...overrides,
-});
+  highlightColour: null, sizeMark: 'mesh', centroidMm: [0, 0, 0], mirrored: false,
+} as SceneShape, overrides);
 const SHAPES = [shape('brain', { layer: 'outline' }), shape('pale'), shape('filled', { fill: 'solid', colour: '#5b3fd0' })];
 const NODES = new Map(SHAPES.map((entry) => [entry.id, node(entry.id)]));
 

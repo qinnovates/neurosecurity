@@ -249,7 +249,7 @@ describe('AtlasViewport: open', () => {
     expect(container.querySelector('figure')?.contains(row)).toBe(true);
     fireEvent.click(within(row as HTMLElement).getByRole('button', { name: 'See its details' }));
     expect(onShowDetails).toHaveBeenCalledTimes(1);
-    expect(screen.getByText(/lit from within: selected/)).not.toBeNull();
+    expect(screen.getByText(/in a colour of its own: under the pointer, or selected/)).not.toBeNull();
   });
 
   it('lights a picked shape that selects no region and names it in the legend, and says nothing beside the picture', async () => {

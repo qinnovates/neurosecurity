@@ -3,16 +3,19 @@
  * shipped shape gets three marks that never share a channel:
  *   fill        what the lens says (the ownership mark, from the style functions)
  *   size mark   how well the atlas resolves the structure (mesh, mesh with a ring, ring alone)
- *   outline     whether it is selected
+ *   highlight   the colour it shows while under the pointer or selected (highlight-colour.ts)
  * The fill comes only from `model.styleStructure`, so a shape that holds
  * several records, or holds one only somewhere inside it, is never filled as
- * one owner. Colours are keyed by the lens's step, never by region.
+ * one owner. Fill colours are keyed by the lens's step, never by region; the
+ * highlight colour is keyed by region and by nothing the lens holds, and it is
+ * never shown at rest, so the two cannot be read as one.
  */
 
 import type { ColourMode, OwnershipMark } from '@/lib/anatomy/colour-modes';
 import type { SizeClass } from '@/lib/anatomy/manifest-types';
 import type { LayerId } from '@/lib/anatomy/source-types';
 import type { ExplorerModel } from './explorer-model';
+import { highlightColourOfStructure, regionOrdinals } from './highlight-colour';
 
 export const FILL_KINDS = ['solid', 'translucent', 'lines', 'neutral'] as const;
 /** `solid`: opaque, in the step's colour. `translucent`: pale and neutral. `lines`: no fill. `neutral`: a quiet fill no lens colours. */
@@ -38,6 +41,11 @@ export interface SceneShape {
   centroidMm: readonly [number, number, number];
   /** One side was drawn and the other is its mirror image. */
   mirrored: boolean;
+  /**
+   * The colour of the shape's one owning region, shown while the pointer is on it or it is selected (highlight-colour.ts).
+   * Null for a shape several regions share or none owns, which is lifted without a colour of its own.
+   */
+  highlightColour: string | null;
   /** Set only while a threat model's steps are shown: the steps whose technique marks this shape. See chain-steps.ts. */
   stepNumbers?: readonly number[];
 }
@@ -167,14 +175,16 @@ export function describeFill(model: Pick<ExplorerModel, 'styleStructure'>, struc
 export function buildSceneShapes(model: Pick<ExplorerModel, 'index' | 'styleStructure'>, mode: ColourMode | null, requested: Readonly<Record<LayerId, boolean>>, theme: SceneTheme): SceneShape[] {
   const assetsById = new Map(model.index.assets.map((asset) => [asset.id, asset]));
   const availableLayers = new Set(model.index.layers.filter((layer) => layer.available && requested[layer.id]).map((layer) => layer.id));
+  const ordinals = regionOrdinals(model.index);
   return model.index.structures.flatMap((structure) => {
     const look = describeFill(model, structure.key, mode, theme);
+    const highlightColour = highlightColourOfStructure(structure, ordinals);
     return structure.nodes.flatMap((node) => {
       const asset = assetsById.get(node.asset_id);
       if (asset === undefined || !availableLayers.has(asset.layer)) return [];
       return [{
         ...look, id: `${structure.key}:${node.hemisphere}`, structureKey: structure.key, assetId: asset.id, layer: asset.layer, hemisphere: node.hemisphere,
-        sizeMark: sizeMarkOf(node.size_class, node.vertex_count), centroidMm: node.centroid_mm, mirrored: node.hemispheres_drawn === 'mirrored',
+        sizeMark: sizeMarkOf(node.size_class, node.vertex_count), centroidMm: node.centroid_mm, mirrored: node.hemispheres_drawn === 'mirrored', highlightColour,
       }];
     });
   });

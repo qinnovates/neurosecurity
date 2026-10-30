@@ -104,8 +104,9 @@ export function materialParamsFor(shape: Pick<SceneShape, 'layer' | 'fill' | 'co
 /**
  * How a shape under the pointer is lifted, so the visitor sees which shape a
  * click would pick. The lift keeps the fill kind: a see-through shape grows
- * denser and a filled one brighter. Nothing changes hue, so a hovered shape
- * never reads as holding a value it does not hold.
+ * denser and a filled one brighter. The one hue change is to the shape's own
+ * region colour (highlight-colour.ts), which is no band's and no step's, so a
+ * hovered shape still never reads as holding a value it does not hold.
  */
 export const HOVER_OPACITY: Readonly<Record<FillKind, number>> = { solid: 1, translucent: 0.7, lines: 0.55, neutral: 0.4 };
 /** White light added to a filled shape under the pointer: brighter, not another colour. */
