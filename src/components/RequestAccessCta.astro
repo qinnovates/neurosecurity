@@ -1,20 +1,22 @@
 ---
 /**
  * The one way in from this site to Glia, the full console this site previews a slice of.
- * Glia itself stays non-public -- this opens a GitHub issue (template: glia-access-request.yml),
- * not a form with its own backend, so there is no new data processor and no stored PII beyond
- * what GitHub already handles for every other issue on this repo.
+ * Glia itself stays non-public, and a request has to be private: a public issue on this repo
+ * is not, and a mailto has no address to publish yet. So the way in is a direct message to the
+ * maintainer on Threads. Threads has no address that opens a message, so this opens the profile
+ * and the visitor presses Message there. No form, no backend, no data held by this site.
  */
 export interface Props {
   /** Shorter copy for a tight space (a nav bar, a card footer). Default fits a standalone placement. */
   compact?: boolean;
 }
 const { compact = false } = Astro.props;
-const REQUEST_URL = 'https://github.com/qinnovates/neurosecurity/issues/new?template=glia-access-request.yml';
+const THREADS_HANDLE = '@crazyrealasian';
+const REQUEST_URL = 'https://www.threads.com/@crazyrealasian';
 ---
-<a class="request-access-cta glass" class:list={{ 'request-access-cta--compact': compact }} href={REQUEST_URL} target="_blank" rel="noopener noreferrer">
-  <span class="request-access-cta__label">{compact ? 'Request Glia access' : 'Request full Glia access'}</span>
-  {!compact && <span class="request-access-cta__sub">This site previews it. Glia itself isn&rsquo;t public yet.</span>}
+<a class="request-access-cta glass" class:list={{ 'request-access-cta--compact': compact }} href={REQUEST_URL} target="_blank" rel="noopener noreferrer" data-request-access="threads">
+  <span class="request-access-cta__label">Request Glia access</span>
+  {!compact && <span class="request-access-cta__sub">Glia isn&rsquo;t public yet. This opens a private message to the maintainer on Threads ({THREADS_HANDLE}).</span>}
 </a>
 
 <style>
