@@ -11,6 +11,10 @@ concurrency:
   group: field-journal-blog
   cancel-in-progress: false
 
+# Read by default; the one job that pushes declares contents: write itself.
+permissions:
+  contents: read
+
 jobs:
   generate-blog-post:
     runs-on: ubuntu-latest

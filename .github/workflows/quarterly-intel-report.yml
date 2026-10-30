@@ -6,6 +6,10 @@ on:
     - cron: '0 12 1 1,4,7,10 *'  # Noon UTC on Q start
   workflow_dispatch:  # Manual trigger for testing
 
+# Read by default; the one job that opens the PR declares its write scopes itself.
+permissions:
+  contents: read
+
 jobs:
   generate-report:
     runs-on: ubuntu-latest

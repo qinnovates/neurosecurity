@@ -9,6 +9,10 @@ concurrency:
   group: changelog
   cancel-in-progress: false
 
+# Read by default; the one job that pushes declares contents: write itself.
+permissions:
+  contents: read
+
 jobs:
   changelog:
     runs-on: ubuntu-latest
