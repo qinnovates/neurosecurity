@@ -49,7 +49,6 @@ const subPages = [
     href: '/atlas/tara/',
     icon: 'shield',
     stat: `${totalThreats} techniques`,
-    color: '#ef4444',
   },
   {
     title: 'NISS Scoring',
@@ -57,7 +56,6 @@ const subPages = [
     href: '/atlas/scoring/',
     icon: 'chart',
     stat: `Avg ${avgNiss}`,
-    color: '#f59e0b',
   },
   {
     title: 'Case Studies',
@@ -65,7 +63,6 @@ const subPages = [
     href: '/atlas/analysis/',
     icon: 'document',
     stat: 'Analysis',
-    color: '#3b82f6',
   },
   {
     title: 'Clinical & Therapeutics',
@@ -73,7 +70,6 @@ const subPages = [
     href: '/atlas/clinical/',
     icon: 'brain',
     stat: `${atlasData.bands.reduce((s, b) => s + b.brainRegions.length, 0)} regions`,
-    color: '#10b981',
   },
   {
     title: 'Domain Matrix',
@@ -81,7 +77,6 @@ const subPages = [
     href: '/atlas/domains/',
     icon: 'heart',
     stat: '11 domains',
-    color: '#ec4899',
   },
   {
     title: 'Device Filter',
@@ -89,7 +84,6 @@ const subPages = [
     href: '/atlas/device-filter/',
     icon: 'shield',
     stat: '7 devices',
-    color: '#06b6d4',
   },
   {
     title: 'TARA Explorer',
@@ -97,7 +91,6 @@ const subPages = [
     href: '/atlas/explorer/',
     icon: 'chart',
     stat: `${totalThreats} techniques`,
-    color: '#8b5cf6',
   },
   {
     title: 'Attack Chains',
@@ -105,9 +98,17 @@ const subPages = [
     href: '/atlas/chains/',
     icon: 'chain',
     stat: `${chainCount} ${chainCount === 1 ? 'chain' : 'chains'}`,
-    color: '#f97316',
   },
 ];
+
+/**
+ * Cards and stat tiles take an accent from the site's three tokens by position. The hue was never what told a card
+ * apart (its icon and title do), and eight hues per screen made the page read as its own palette; three keep it
+ * within the site's. Tints are mixed from the token, since a hex-alpha suffix cannot be appended to a variable.
+ */
+const ACCENTS = ['var(--color-accent-primary)', 'var(--color-accent-secondary)', 'var(--color-accent-tertiary)'] as const;
+const accentFor = (index: number): string => ACCENTS[index % ACCENTS.length];
+const tint = (colour: string, percent: number): string => `color-mix(in srgb, ${colour} ${percent}%, transparent)`;
 
 const iconSvg: Record<string, string> = {
   shield: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />',
@@ -158,52 +159,58 @@ const iconSvg: Record<string, string> = {
     <!-- Stats Bar -->
     <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
       {[
-        { label: 'Attack Techniques', value: totalThreats, color: '#ef4444' },
-        { label: 'BCI Devices', value: totalDevices, color: '#3b82f6' },
-        { label: 'Neurorights', value: totalNeurorights, color: '#8b5cf6' },
-        { label: 'DSM-5 Codes', value: totalDsmCodes, color: '#10b981' },
-        { label: 'Hourglass Bands', value: 11, color: '#f59e0b' },
-      ].map((stat) => (
-        <div class="glass rounded-xl px-4 py-3 text-center group card-hover relative overflow-hidden" style={`border-color: ${stat.color}20;`}>
-          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={`background: radial-gradient(circle at 50% 50%, ${stat.color}08 0%, transparent 70%);`} />
-          <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] relative" style={`color: ${stat.color};`}>{stat.value}</p>
-          <p class="text-[10px] uppercase tracking-[0.1em] mt-1 relative" style="color: var(--color-text-faint);">{stat.label}</p>
-        </div>
-      ))}
+        { label: 'Attack Techniques', value: totalThreats },
+        { label: 'BCI Devices', value: totalDevices },
+        { label: 'Neurorights', value: totalNeurorights },
+        { label: 'DSM-5 Codes', value: totalDsmCodes },
+        { label: 'Hourglass Bands', value: 11 },
+      ].map((stat, index) => {
+        const colour = accentFor(index);
+        return (
+          <div class="glass rounded-xl px-4 py-3 text-center group card-hover relative overflow-hidden" style={`border-color: ${tint(colour, 12)};`}>
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={`background: radial-gradient(circle at 50% 50%, ${tint(colour, 4)} 0%, transparent 70%);`} />
+            <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] relative" style={`color: ${colour};`}>{stat.value}</p>
+            <p class="text-[10px] uppercase tracking-[0.1em] mt-1 relative" style="color: var(--color-text-faint);">{stat.label}</p>
+          </div>
+        );
+      })}
     </div>
   </div>
 
   <!-- Sub-Page Navigation Cards -->
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
-    {subPages.map((page) => (
-      <a
-        href={page.href}
-        class="glass rounded-xl p-5 group transition-all duration-300 hover:shadow-lg relative overflow-hidden glow-border"
-        style={`border-color: ${page.color}15;`}
-      >
-        <div class="absolute top-0 left-0 w-full h-0.5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" style={`background: ${page.color};`} />
-        <div class="flex items-center gap-3 mb-3">
-          <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-110" style={`background: ${page.color}12;`}>
-            <svg class="w-4.5 h-4.5" style={`color: ${page.color};`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" set:html={iconSvg[page.icon]} />
+    {subPages.map((page, index) => {
+      const colour = accentFor(index);
+      return (
+        <a
+          href={page.href}
+          class="glass rounded-xl p-5 group transition-all duration-300 hover:shadow-lg relative overflow-hidden glow-border"
+          style={`border-color: ${tint(colour, 8)};`}
+        >
+          <div class="absolute top-0 left-0 w-full h-0.5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" style={`background: ${colour};`} />
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-110" style={`background: ${tint(colour, 8)};`}>
+              <svg class="w-4.5 h-4.5" style={`color: ${colour};`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" set:html={iconSvg[page.icon]} />
+            </div>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full" style={`background: ${tint(colour, 7)}; color: ${colour};`}>
+              {page.stat}
+            </span>
           </div>
-          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full" style={`background: ${page.color}10; color: ${page.color};`}>
-            {page.stat}
-          </span>
-        </div>
-        <h3 class="text-sm font-bold mb-1.5 group-hover:text-[var(--color-accent-primary)] transition-colors" style="color: var(--color-text-primary);">
-          {page.title}
-        </h3>
-        <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">
-          {page.description}
-        </p>
-      </a>
-    ))}
+          <h3 class="text-sm font-bold mb-1.5 group-hover:text-[var(--color-accent-primary)] transition-colors" style="color: var(--color-text-primary);">
+            {page.title}
+          </h3>
+          <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">
+            {page.description}
+          </p>
+        </a>
+      );
+    })}
   </div>
 
   <!-- Section Divider -->
   <div class="flex items-center gap-3 mb-6">
     <div class="flex-1 h-px" style="background: linear-gradient(to right, transparent, var(--color-border), var(--color-accent-primary), var(--color-border));" />
-    <span class="text-[10px] uppercase tracking-[0.12em] font-mono px-3 py-1 rounded-full" style="color: var(--color-accent-secondary); background: rgba(6, 182, 212, 0.06); border: 1px solid rgba(6, 182, 212, 0.12);">[ Interactive Dashboard ]</span>
+    <span class="text-[10px] uppercase tracking-[0.12em] font-mono px-3 py-1 rounded-full" style="color: var(--color-accent-secondary); background: color-mix(in srgb, var(--color-accent-secondary) 6%, transparent); border: 1px solid color-mix(in srgb, var(--color-accent-secondary) 12%, transparent);">[ Interactive Dashboard ]</span>
     <div class="flex-1 h-px" style="background: linear-gradient(to left, transparent, var(--color-border), var(--color-accent-primary), var(--color-border));" />
   </div>
 
@@ -253,7 +260,7 @@ const iconSvg: Record<string, string> = {
   <div class="mt-12">
     <div class="flex items-center gap-3 mb-6">
       <div class="flex-1 h-px" style="background: linear-gradient(to right, transparent, var(--color-border), var(--color-accent-primary), var(--color-border));" />
-      <span class="text-[10px] uppercase tracking-[0.12em] font-mono px-3 py-1 rounded-full" style="color: var(--color-accent-primary); background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(59, 130, 246, 0.12);">[ Query Engine ]</span>
+      <span class="text-[10px] uppercase tracking-[0.12em] font-mono px-3 py-1 rounded-full" style="color: var(--color-accent-primary); background: color-mix(in srgb, var(--color-accent-primary) 6%, transparent); border: 1px solid color-mix(in srgb, var(--color-accent-primary) 12%, transparent);">[ Query Engine ]</span>
       <div class="flex-1 h-px" style="background: linear-gradient(to left, transparent, var(--color-border), var(--color-accent-primary), var(--color-border));" />
     </div>
     <!-- Example Queries -->
@@ -293,8 +300,8 @@ const iconSvg: Record<string, string> = {
         position: relative;
       }
       .kql-example-pill:hover {
-        border-color: var(--color-accent-primary, #3b82f6);
-        background: rgba(59, 130, 246, 0.06);
+        border-color: var(--color-accent-primary);
+        background: color-mix(in srgb, var(--color-accent-primary) 6%, transparent);
       }
       .kql-example-pill:active {
         transform: scale(0.97);
@@ -306,7 +313,7 @@ const iconSvg: Record<string, string> = {
       .kql-pill-query {
         font-family: var(--font-mono, monospace);
         font-size: 0.625rem;
-        color: var(--color-accent-primary, #3b82f6);
+        color: var(--color-accent-primary);
         opacity: 0.7;
         display: none;
       }
@@ -330,8 +337,8 @@ const iconSvg: Record<string, string> = {
         if (kqlEl) kqlEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
         // Brief visual feedback on the pill
-        pill.style.borderColor = 'var(--color-accent-primary, #3b82f6)';
-        pill.style.background = 'rgba(59, 130, 246, 0.12)';
+        pill.style.borderColor = 'var(--color-accent-primary)';
+        pill.style.background = 'color-mix(in srgb, var(--color-accent-primary) 12%, transparent)';
         setTimeout(() => {
           pill.style.borderColor = '';
           pill.style.background = '';
