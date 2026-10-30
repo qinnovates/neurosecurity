@@ -40,7 +40,7 @@ const sections = [
 ];
 ---
 
-<footer class="border-t border-[var(--color-border)] mt-24 relative overflow-hidden">
+<footer class="border-t border-[var(--color-border)] relative overflow-hidden">
   <!-- Background brand mark -->
   <div class="footer-brand-bg select-none pointer-events-none" aria-hidden="true">
     <span class="footer-brand font-bold font-[family-name:var(--font-heading)] leading-none bg-gradient-to-r from-[var(--color-accent-primary)] via-[var(--color-accent-secondary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">
@@ -105,17 +105,18 @@ const sections = [
 <style>
   .footer-brand-bg {
     position: absolute;
-    bottom: 0;
-    right: -10%;
+    inset: auto 0 0 0;
     display: flex;
+    justify-content: center;
     align-items: flex-end;
     z-index: 0;
   }
 
   .footer-brand {
-    font-size: clamp(5rem, 18vw, 16rem);
+    font-size: clamp(3rem, 11vw, 9rem);
     letter-spacing: -0.03em;
-    opacity: 0.07;
+    opacity: 0.06;
     line-height: 0.8;
+    white-space: nowrap;
   }
 </style>

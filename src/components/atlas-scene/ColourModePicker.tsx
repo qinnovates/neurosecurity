@@ -36,20 +36,25 @@ export default function ColourModePicker({ activeKind, onChoose }: Props) {
   const activeIndex = FACT_LENS_KINDS.indexOf(activeKind);
   const slots = FACT_LENS_KINDS.length + 1;
   return (
-    <div
-      className="atlas-lenses" role="group" aria-label="Lens" data-fact-lens={activeIndex >= 0}
-      style={{ '--atlas-lens-index': Math.max(activeIndex, 0), '--atlas-lens-count': slots } as React.CSSProperties}
-    >
-      <span className="atlas-lens-thumb" aria-hidden="true" />
-      {FACT_LENS_KINDS.map((kind) => (
-        <button key={kind} type="button" className="atlas-lens" aria-pressed={kind === activeKind} onClick={() => onChoose(kind)}>
-          {LENS_LABELS[kind]}
+    <>
+      <div
+        className="atlas-lenses" role="group" aria-label="Lens" data-fact-lens={activeIndex >= 0}
+        style={{ '--atlas-lens-index': Math.max(activeIndex, 0), '--atlas-lens-count': slots } as React.CSSProperties}
+      >
+        <span className="atlas-lens-thumb" aria-hidden="true" />
+        {FACT_LENS_KINDS.map((kind) => (
+          <button key={kind} type="button" className="atlas-lens" aria-pressed={kind === activeKind} onClick={() => onChoose(kind)}>
+            {LENS_LABELS[kind]}
+          </button>
+        ))}
+        <button type="button" className="atlas-lens" aria-pressed={false} aria-disabled="true" aria-describedby={reasonId} onClick={() => undefined}>
+          {BLOCKED_LENS_LABEL}
         </button>
-      ))}
-      <button type="button" className="atlas-lens" aria-pressed={false} aria-disabled="true" aria-describedby={reasonId} onClick={() => undefined}>
-        {BLOCKED_LENS_LABEL}
-      </button>
+      </div>
+      {/* Kept out of the .atlas-lenses grid: that container is also the thumb's positioning
+          context (top/bottom insets), so a second grid row here would sit under the thumb's
+          full-height fill and get visually clipped. */}
       <p className="atlas-lens-blocked" id={reasonId} data-coverage-note="lens_body_function">{BLOCKED_LENS_REASON}</p>
-    </div>
+    </>
   );
 }

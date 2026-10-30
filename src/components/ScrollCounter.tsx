@@ -8,7 +8,10 @@ interface Props {
 }
 
 export default function ScrollCounter({ end, suffix = '', duration = 1500, className = '' }: Props) {
-  const [count, setCount] = useState(0);
+  // Starts at the final value, not 0 -- a visitor who sees this before the scroll
+  // trigger fires (first paint, a screenshot, a quick glance) sees the real number.
+  // The count-up animation still runs in full once the observer fires.
+  const [count, setCount] = useState(end);
   const [started, setStarted] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
 

@@ -22,7 +22,7 @@
 /* The lens bar spans both columns above the grid: it governs the picture and the list together. */
 .atlas-workspace > .atlas-lens-panel { grid-column: 1 / -1; }
 .atlas-lenses[data-fact-lens="false"] .atlas-lens-thumb { opacity: 0; }
-.atlas-lens-blocked { grid-column: 1 / -1; margin: 0.375rem 0 0; padding: 0 0.125rem; font-size: 0.75rem; color: var(--atlas-ink-soft); }
+.atlas-lens-blocked { margin: 0.375rem 0 0; padding: 0 0.125rem; font-size: 0.75rem; color: var(--atlas-ink-soft); }
 .atlas-lens[aria-disabled="true"] { cursor: not-allowed; color: var(--atlas-ink-soft); text-decoration: line-through; text-decoration-thickness: 1px; }
 .atlas-highlight { border-top: 1px solid var(--atlas-line); padding-top: 0.625rem; }
 
