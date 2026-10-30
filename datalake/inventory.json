@@ -1,12 +1,12 @@
 {
   "_generator": "src/scripts/generate-datalake-inventory.mjs",
   "_note": "Derived file. Do not hand-edit — run `npm run datalake:inventory`.",
-  "generated_on": "2026-10-24",
+  "generated_on": "2026-10-30",
   "totals": {
-    "datalake_files": 40,
+    "datalake_files": 41,
     "datasets_inventoried": 27,
-    "records": 21452,
-    "unique_dois": 257,
+    "records": 20927,
+    "unique_dois": 266,
     "techniques_with_cve_evidence": 27,
     "cve_coverage_ratio": 0.1517
   },
@@ -14,7 +14,7 @@
     {
       "key": "impact_chains",
       "label": "Neural impact chains",
-      "count": 20182,
+      "count": 19658,
       "file": "datalake/impact-chains.json",
       "path": "",
       "group": "threat",
@@ -123,7 +123,7 @@
     {
       "key": "neural_pathways",
       "label": "Neural pathways",
-      "count": 46,
+      "count": 45,
       "file": "datalake/qif-neural-pathways.json",
       "path": "pathways",
       "group": "anatomy",

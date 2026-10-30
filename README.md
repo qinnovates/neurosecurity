@@ -27,15 +27,15 @@ QIF, TARA and NISS help builders and defenders start a neural-device threat mode
 
 ![Open datalake inventory](src/site/images/datalake-corpus.svg)
 
-**21,452 records inventoried below, from 27 of the 40 datasets in [`datalake/`](datalake/).** 20,182 neural impact chains · 178 proposed techniques · 24 BCI devices specced · 68 companies tracked · 108 CVEs mapped · 257 unique DOIs cited.
+**20,927 records inventoried below, from 27 of the 41 datasets in [`datalake/`](datalake/).** 19,658 neural impact chains · 178 proposed techniques · 24 BCI devices specced · 68 companies tracked · 108 CVEs mapped · 266 unique DOIs cited.
 
-Counted from the files themselves on 2026-10-24. Re-run `npm run datalake:inventory` and every figure on this page moves with the data; `npm run datalake:inventory:check` fails the build if it has drifted.
+Counted from the files themselves on 2026-10-30. Re-run `npm run datalake:inventory` and every figure on this page moves with the data; `npm run datalake:inventory:check` fails the build if it has drifted.
 
 ### Threat model
 
 | Inventory | Count | Derived from |
 |---|---:|---|
-| Neural impact chains <sub>technique x brain region x QIF band permutations</sub> | **20,182** | [`datalake/impact-chains.json`](datalake/impact-chains.json) |
+| Neural impact chains <sub>technique x brain region x QIF band permutations</sub> | **19,658** | [`datalake/impact-chains.json`](datalake/impact-chains.json) |
 | TARA techniques | **178** | [`datalake/qtara-registrar.json`](datalake/qtara-registrar.json) |
 | CVE to technique mappings | **108** | [`datalake/cve-technique-mapping.json`](datalake/cve-technique-mapping.json) |
 | QIF hazards | **33** | [`datalake/qif-hazards.json`](datalake/qif-hazards.json) |
@@ -51,7 +51,7 @@ Counted from the files themselves on 2026-10-24. Re-run `npm run datalake:invent
 |---|---:|---|
 | Brain-region evidence rows | **58** | [`datalake/qif-anatomy-region-evidence.json`](datalake/qif-anatomy-region-evidence.json) |
 | Neurological condition mappings | **50** | [`datalake/qif-neurological-mappings.json`](datalake/qif-neurological-mappings.json) |
-| Neural pathways | **46** | [`datalake/qif-neural-pathways.json`](datalake/qif-neural-pathways.json) |
+| Neural pathways | **45** | [`datalake/qif-neural-pathways.json`](datalake/qif-neural-pathways.json) |
 | Brain regions | **38** | [`datalake/qif-brain-bci-atlas.json`](datalake/qif-brain-bci-atlas.json) |
 | Anatomy atlas crosswalk rows | **34** | [`datalake/qif-anatomy-crosswalk.json`](datalake/qif-anatomy-crosswalk.json) |
 | Device to region mappings | **24** | [`datalake/qif-brain-bci-atlas.json`](datalake/qif-brain-bci-atlas.json) |
