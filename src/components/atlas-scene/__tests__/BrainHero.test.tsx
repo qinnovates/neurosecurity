@@ -3,6 +3,8 @@ import { webcrypto } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, cleanup, render, screen, waitFor, within } from '@testing-library/react';
 import { HERO_COPY } from '@/lib/anatomy/hero-copy';
+import { HERO_RISK_CAP, rankRegionRisks, techniquePagePath } from '@/lib/atlas-explorer/hero-risks';
+import { buildRegionDetail } from '@/lib/atlas-explorer/region-detail';
 import { resolvePick } from '@/lib/atlas-explorer/resolve-pick';
 import type { AtlasCanvasProps } from '../AtlasCanvas';
 import { buildRegionDeepLink } from '../atlas-deep-link';
@@ -116,13 +118,41 @@ describe('the brain hero: a pick and the way on', () => {
     const card = await waitFor(() => { const found = container.querySelector('[data-hero-card="selected"]'); expect(found).not.toBeNull(); return found as HTMLElement; });
     expect(card.getAttribute('data-hero-selected')).toBe(ownRegion.id);
     expect(within(card).getByRole('heading', { level: 3 }).textContent).toContain(ownRegion.name);
-    const links = within(card).getAllByRole('link');
-    expect(links).toHaveLength(1);
-    expect(links[0].textContent).toBe(HERO_COPY.see_details);
-    expect(links[0].getAttribute('href')).toBe(buildRegionDeepLink(ownRegion.id));
-    expect(links[0].getAttribute('href')).toBe(`/atlas/anatomy/?region=${ownRegion.id}`);
+    // One primary action, into the full atlas at this region.
+    const ctas = [...card.querySelectorAll<HTMLAnchorElement>('a.brain-hero-cta')];
+    expect(ctas).toHaveLength(1);
+    expect(ctas[0].textContent).toBe(HERO_COPY.see_details);
+    expect(ctas[0].getAttribute('href')).toBe(buildRegionDeepLink(ownRegion.id));
+    expect(ctas[0].getAttribute('href')).toBe(`/atlas/anatomy/?region=${ownRegion.id}`);
     // The explorer has its own layout without the client router, so the link asks for a full page load.
-    expect(links[0].hasAttribute('data-astro-reload')).toBe(true);
+    expect(ctas[0].hasAttribute('data-astro-reload')).toBe(true);
+    // The dashboard: the region's risks, highest NISS step first and cut at the cap, from the same detail the inspector shows.
+    const detail = buildRegionDetail(model, ownRegion.id);
+    if (detail === null) throw new Error('The picked region is not in the index.');
+    const { shown, hiddenCount } = rankRegionRisks(detail.linked, HERO_RISK_CAP);
+    const risks = [...card.querySelectorAll('[data-hero-risk]')];
+    expect(risks.map((risk) => risk.getAttribute('data-hero-risk'))).toEqual(shown.map((technique) => technique.id));
+    expect(risks.length).toBeLessThanOrEqual(HERO_RISK_CAP);
+    for (const technique of shown) {
+      const risk = card.querySelector(`[data-hero-risk="${technique.id}"]`) as HTMLElement;
+      const link = risk.querySelector('a');
+      if (model.catalogTechniqueIds.has(technique.id)) expect(link?.getAttribute('href')).toBe(techniquePagePath(technique.id));
+      else expect(link).toBeNull();
+      expect(risk.querySelector('[data-review-state]')).not.toBeNull();
+    }
+    if (shown.length === 0) expect(card.textContent).toContain(HERO_COPY.risks_none);
+    else expect(card.textContent).toContain(HERO_COPY.risks_note);
+    if (hiddenCount > 0) expect(card.textContent).toContain(HERO_COPY.risks_more(hiddenCount));
+    else expect(card.textContent).not.toContain('more in the full atlas');
+    if (detail.nissStep !== null) expect(card.textContent).toContain(HERO_COPY.risk_step(detail.nissStep, detail.linked.length));
+    // The devices whose records name the region, as the inspector lists them.
+    const devices = [...card.querySelectorAll('[data-hero-device]')].map((chip) => chip.getAttribute('data-hero-device'));
+    expect(devices).toEqual(detail.deviceIds);
+    if (detail.deviceIds.length === 0) expect(card.textContent).toContain(HERO_COPY.devices_none);
+    // Every link in the card is the one CTA or a technique's catalog page: the card offers no other way on.
+    for (const link of card.querySelectorAll('a')) {
+      expect(link.classList.contains('brain-hero-cta') || /^\/atlas\/tara\/[^/]+\/$/.test(link.getAttribute('href') ?? '')).toBe(true);
+    }
     // The region's drafted links carry their review mark, so the count is never shown without it.
     expect(card.querySelector('[data-review-state]')).not.toBeNull();
     expect(card.textContent).toContain(HERO_COPY.selected_bands);

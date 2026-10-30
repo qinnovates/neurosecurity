@@ -40,6 +40,16 @@
 .brain-hero-card-facts > div { display: grid; gap: 0.125rem; }
 .brain-hero-card-facts dt { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--atlas-ink-soft); }
 .brain-hero-card-facts dd { margin: 0; color: var(--atlas-ink); }
+/* The dashboard under the facts: the region's risks, then its devices. Headings match the facts' terms; the list is short by design. */
+.brain-hero-section { margin: 0 0 1rem; }
+.brain-hero-subheading { margin: 0 0 0.375rem; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--atlas-ink-soft); }
+.brain-hero-note, .brain-hero-more { margin: 0.25rem 0 0; font-size: 0.8125rem; color: var(--atlas-ink-soft); }
+.brain-hero-risks { list-style: none; margin: 0.375rem 0 0; padding: 0; display: grid; gap: 0.375rem; }
+.brain-hero-risk { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.5rem; }
+.brain-hero-risk > a { font-weight: 600; color: var(--atlas-accent); text-decoration: underline; text-underline-offset: 2px; }
+.brain-hero-risk-name { font-weight: 600; color: var(--atlas-ink); }
+.brain-hero-sev { padding: 0 0.5rem; font-size: 0.6875rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--atlas-ink-soft); border: 1px solid var(--atlas-line-strong); border-radius: 999px; }
+.brain-hero-device { border: 1px solid var(--atlas-line-strong); color: var(--atlas-ink); }
 .brain-hero-cta {
   display: inline-flex; align-items: center; min-height: var(--atlas-row); padding: 0 1rem; font-weight: 600; color: #fff; text-decoration: none;
   background: var(--atlas-accent-fill); border: 1px solid var(--atlas-accent-fill); border-radius: 0.5rem; transition: opacity var(--atlas-quick) var(--atlas-ease);

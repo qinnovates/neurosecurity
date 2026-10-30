@@ -21,6 +21,14 @@ export const HERO_COPY = {
     return `${drafted} technique${drafted === 1 ? '' : 's'} linked, ${lit} shown under the current lens.`;
   },
   selected_announcement: (name: string): string => `Selected: ${name}. Its summary is beside the picture.`,
+  /** The card's two sections after a pick: the region's risks, then the devices whose records name it. */
+  risks_title: 'Risks linked to this region',
+  risks_note: 'Each link was drafted by an AI; none has been checked by an expert.',
+  risks_none: 'No linked techniques yet.',
+  risks_more: (hiddenCount: number): string => `${hiddenCount} more in the full atlas.`,
+  risk_step: (step: string, count: number): string => `Highest NISS step: ${step}, across ${count} linked technique${count === 1 ? '' : 's'}.`,
+  devices_title: 'Devices whose record lists this region',
+  devices_none: 'No device record lists this region yet.',
   see_details: 'See its details',
   fallback_title: 'The regions in the atlas',
   fallback: 'Each opens the full atlas with that region selected.',
