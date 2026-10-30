@@ -4,7 +4,7 @@ updates:
   - package-ecosystem: "pip"
     directory: "/shared/qtara"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
     open-pull-requests-limit: 5
     commit-message:
       prefix: "deps(qtara)"
@@ -22,7 +22,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
     commit-message:
       prefix: "ci"
     labels:
@@ -33,7 +33,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
     open-pull-requests-limit: 5
     commit-message:
       prefix: "deps(npm)"
