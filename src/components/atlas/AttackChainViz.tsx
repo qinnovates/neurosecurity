@@ -6,9 +6,9 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import {
-  DOMAIN_COLORS, ROLE_CONFIG, DETECT_COLORS, EVIDENCE_LABELS,
+  DOMAIN_COLORS, ON_FILL_INK, ROLE_CONFIG, DETECT_COLORS, EVIDENCE_LABELS,
   extractDomain, isSilicon,
-  type DomainCode, type ChainRole, type EvidenceLabel,
+  type ChainRole, type EvidenceLabel,
 } from './chain-constants';
 
 /* ── Types ─────────────────────────────────────────────────── */
@@ -64,8 +64,7 @@ interface Props {
 }
 
 const NODE_W = 140, NODE_H = 72, GAP_X = 48, PAD_X = 24, PAD_Y = 24;
-// Node fills and the tooltip are fixed colours in both themes, so text on them is fixed too.
-const ON_NODE_TEXT = '#475569';
+// The tooltip is a fixed dark plate in both themes, so text on it is fixed too. Text on a node fill uses ON_FILL_INK.
 const ON_TOOLTIP_TEXT = '#cbd5e1';
 // Gaps leave room for the 9px lane labels drawn just above each lane.
 const HEADER_H = 48, DETECT_H = 20, DETECT_GAP = 18, CLINICAL_H = 28, CLINICAL_GAP = 18;
@@ -142,9 +141,11 @@ function MobileList({ chain }: { chain: AttackChain }) {
             className="flex items-start gap-3 rounded-lg border p-3 hover:bg-[var(--color-bg-surface)]"
             style={{ borderColor: st.stroke + '44' }}>
             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold"
-              style={{ background: st.fill, color: st.stroke, border: `1.5px solid ${st.stroke}` }}>{s.position}</span>
+              style={{ background: st.fill, color: ON_FILL_INK, border: `1.5px solid ${st.stroke}` }}>{s.position}</span>
             <div className="min-w-0">
               <span className="text-xs font-mono text-[var(--color-text-primary)]">{s.tara_alias}</span>
+              {/* The domain in words: the colour on the border is never its only mark. */}
+              <span className="text-[10px] font-semibold text-[var(--color-text-muted)] ml-2" data-step-domain={domain ?? 'SIL'}>{st.label}</span>
               <span className="text-[10px] text-[var(--color-text-faint)] ml-2">{role.icon} {role.label}</span>
               {s.evidence && <span className="ml-2"><EvidenceBadge label={s.evidence.label} small /></span>}
               <p className="mt-0.5 text-xs text-[var(--color-text-muted)] line-clamp-2">{s.action}</p>
@@ -279,16 +280,14 @@ function SvgDiagram({ chain, isDetectionLaneShown }: { chain: AttackChain; isDet
             <text x={x + 16} y={nodeY + 20} textAnchor="middle" fill="#fff" fontSize={11} fontWeight={700}>
               {s.position}
             </text>
-            {/* TARA alias */}
-            <text x={x + 34} y={nodeY + 20} fill={style.stroke} fontSize={9} fontFamily="monospace" fontWeight={600}>
+            {/* TARA alias, role and domain, all in the on-fill ink: the domain colour stays on the border and the position dot. */}
+            <text x={x + 34} y={nodeY + 20} fill={ON_FILL_INK} fontSize={9} fontFamily="monospace" fontWeight={600}>
               {s.tara_alias}
             </text>
-            {/* Role label */}
-            <text x={x + NODE_W / 2} y={nodeY + 42} textAnchor="middle" fill={ON_NODE_TEXT} fontSize={9}>
+            <text x={x + NODE_W / 2} y={nodeY + 42} textAnchor="middle" fill={ON_FILL_INK} fontSize={9}>
               {role.icon} {role.label}
             </text>
-            {/* Domain label */}
-            <text x={x + NODE_W / 2} y={nodeY + 58} textAnchor="middle" fill={style.stroke} fontSize={8} fontWeight={600}>
+            <text x={x + NODE_W / 2} y={nodeY + 58} textAnchor="middle" fill={ON_FILL_INK} fontSize={8} fontWeight={600} data-step-domain={domain ?? 'SIL'}>
               {style.label}
             </text>
           </g>

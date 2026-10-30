@@ -13,7 +13,22 @@ export interface DomainStyle {
   label: string;
 }
 
-/** 12 domains from the TARA domain taxonomy (Section 3). */
+/**
+ * The ink for words set on a domain or evidence fill, in both themes: the fills
+ * are fixed light pastels, so the ink is fixed too. Words were once set in the
+ * domain's own stroke colour on its fill, which fell to about 3:1 at the small
+ * sizes the chain uses and made the colour carry the reading. The colour now
+ * carries only the border and the position dot; the domain is read from its
+ * name, which every rendering writes beside it. A test holds this ink at or
+ * above 4.5:1 on every fill in this file.
+ */
+export const ON_FILL_INK = '#475569';
+
+/**
+ * 12 domains from the TARA domain taxonomy (Section 3). Twelve hues cannot be
+ * told apart reliably, and several sit near the site's accent purple, so the
+ * colour is never the only mark of a domain: the name is always written.
+ */
 export const DOMAIN_COLORS: Record<DomainCode, DomainStyle> = {
   SIL: { fill: '#dbeafe', stroke: '#3b82f6', label: 'Silicon' },
   VIS: { fill: '#ede9fe', stroke: '#8b5cf6', label: 'Vision' },
