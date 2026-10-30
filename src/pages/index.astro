@@ -93,7 +93,7 @@ const neurorightsFold = foldNeurorights(
             A proposed research framework for modeling, scoring and prioritizing threats to neural devices.
           </p>
           <p class="text-sm text-[var(--color-text-faint)] mt-2">
-            {coverage.total} techniques, {coverage.scored} with draft NISS scores, each with an evidence status.
+            {coverage.total} cataloged techniques, each with an evidence status.
             The brain below is coloured by the highest draft NISS step linked to each region.
           </p>
         </div>
@@ -121,7 +121,7 @@ const neurorightsFold = foldNeurorights(
       <div class="mt-10 flex flex-col gap-4">
         <TrustBar />
         <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-[var(--color-text-faint)]">
-          <p class="m-0">{confirmed} confirmed, {demonstrated} demonstrated, {theoretical} theoretical.</p>
+          <p class="m-0">{demonstrated} demonstrated, {theoretical} theoretical, {confirmed} confirmed with full chain-of-custody.</p>
           <div class="flex flex-wrap items-center gap-2">
             <span class="mr-1">Explore by role:</span>
             <a href="/atlas/tara/" class="glass px-3 py-1.5 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">Security Researcher</a>
@@ -135,7 +135,7 @@ const neurorightsFold = foldNeurorights(
   </section>
 
   <!-- ═══ WHAT THIS WORK IS / IS NOT ═══ -->
-  <section class="py-16" style="background: var(--color-bg-surface);">
+  <section class="py-[var(--spacing-section)]" style="background: var(--color-bg-surface);">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-2 gap-6 reveal-stagger reveal">
         <div class="glass rounded-xl p-6">
@@ -160,14 +160,14 @@ const neurorightsFold = foldNeurorights(
   </section>
 
   <!-- ═══ TARA SNAPSHOT — the flagship showcase ═══ -->
-  <section class="relative py-20 px-4 overflow-hidden">
+  <section class="relative py-[var(--spacing-section)] px-4 overflow-hidden">
     <div class="max-w-5xl mx-auto text-center">
       <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--color-accent-primary)] mb-3">The TARA Catalog</p>
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-4">
-        {coverage.total} techniques, each with an evidence status. {coverage.detected} include detection guidance; {coverage.scored} carry draft NISS scores.
+        Every entry carries an evidence status, not just a name.
       </h2>
       <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto mb-12">
-        {PURPOSE_SUMMARY} <a href={STATEMENT_LINKS.purposeAndLimits} class="text-[var(--color-accent-primary)] hover:underline">Purpose and limits &rarr;</a>
+        {coverage.total} techniques: {coverage.detected} include detection guidance, {coverage.scored} carry draft NISS scores. {PURPOSE_SUMMARY} <a href={STATEMENT_LINKS.purposeAndLimits} class="text-[var(--color-accent-primary)] hover:underline">Purpose and limits &rarr;</a>
       </p>
 
       <div class="grid md:grid-cols-2 gap-10 items-start mb-12 text-left">
@@ -215,7 +215,8 @@ const neurorightsFold = foldNeurorights(
   </section>
 
   <!-- ═══ VALIDATED, NOT JUST CLAIMED ═══ -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  <section class="py-[var(--spacing-section)]" style="background: var(--color-bg-surface);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="reveal">
       <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-4 text-center">Validated, Not Just Claimed</p>
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3 text-center">Does the catalog hold up?</h2>
@@ -270,10 +271,11 @@ const neurorightsFold = foldNeurorights(
         </p>
       </a>
     </div>
+    </div>
   </section>
 
   <!-- ═══ FILLS A REAL GAP ═══ -->
-  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-[var(--spacing-section)]">
     <div class="reveal">
       <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-4 text-center">Context</p>
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">Where current device-security guidance stops</h2>
@@ -298,18 +300,18 @@ const neurorightsFold = foldNeurorights(
         </div>
         <div class="glass rounded-lg p-4" style="border-left: 3px solid var(--color-accent-primary);">
           <p class="font-semibold text-[var(--color-text-primary)] mb-1">What TARA proposes</p>
-          <p>{coverage.total} techniques, {coverage.scored} with draft NISS scores, {coverage.dsm5Count} DSM-5-TR category references for threat modeling (not diagnostic claims).</p>
+          <p>A catalog of {coverage.total} techniques, {coverage.dsm5Count} with DSM-5-TR category references for threat modeling (not diagnostic claims) — filling the gap the sources above leave open.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ═══ BUILT ON: THE QIF STACK ═══ -->
-  <section class="relative py-20 px-4 overflow-hidden">
+  <section class="relative py-[var(--spacing-section)] px-4 overflow-hidden" style="background: var(--color-bg-surface);">
     <div class="max-w-3xl mx-auto text-center mb-8">
       <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--color-accent-primary)] mb-3">What TARA Is Built On</p>
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-4">
-        {coverage.total} techniques map to the QIF hourglass; {coverage.scored} carry draft NISS scores.
+        Every technique maps to one band of the hourglass.
       </h2>
       <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto">
         QIF is a proposed 11-band architecture — biology above, silicon below, with the physical neural interface at the bottleneck where security either holds or fails. NISS scores a technique on {nissExampleMetrics.length} metrics; the example below shows them for one catalogued technique.
@@ -357,7 +359,7 @@ const neurorightsFold = foldNeurorights(
   </section>
 
   <!-- ═══ WHAT CONSUMES TARA'S DATA ═══ -->
-  <section class="py-20" style="background: var(--color-bg-surface);">
+  <section class="py-[var(--spacing-section)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12 reveal">
         <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-4">Future Work</p>
@@ -387,7 +389,7 @@ const neurorightsFold = foldNeurorights(
   </section>
 
   <!-- ═══ GOVERNANCE & NEURORIGHTS ═══ -->
-  <section class="relative py-20 px-4 overflow-hidden">
+  <section class="relative py-[var(--spacing-section)] px-4 overflow-hidden" style="background: var(--color-bg-surface);">
     <div class="max-w-4xl mx-auto text-center mb-10">
       <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--color-accent-tertiary)] mb-3">Governance & Neurorights</p>
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-4">
@@ -417,7 +419,7 @@ const neurorightsFold = foldNeurorights(
 
   <!-- ═══ CLOSING CTA ═══ -->
   <section class="border-t border-[var(--color-border)] bg-[var(--color-bg-deep)]">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center reveal">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-[var(--spacing-section)] text-center reveal">
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">
         The research is open. Start anywhere.
       </h2>

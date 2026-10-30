@@ -6,7 +6,8 @@
  */
 /* The height is the page's to set (--brain-hero-height on the hero's stage); the frame that ships with the page uses the same value. */
 .brain-hero { gap: 1rem; }
-.brain-hero[data-brain-hero="loading"], .brain-hero[data-brain-hero="idle"] { min-height: var(--brain-hero-height, 60vh); align-content: center; justify-items: center; }
+.brain-hero[data-brain-hero="loading"], .brain-hero[data-brain-hero="idle"] { position: relative; overflow: hidden; border-radius: 0.875rem; min-height: var(--brain-hero-height, 60vh); align-content: center; justify-items: center; }
+.brain-hero[data-brain-hero="loading"] .atlas-loading, .brain-hero[data-brain-hero="idle"] .atlas-loading { position: relative; }
 .brain-hero .atlas-viewport, .brain-hero .atlas-viewport-body { display: contents; }
 .brain-hero .atlas-heading { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .brain-hero .atlas-viewport > *, .brain-hero .atlas-picture, .brain-hero .atlas-viewport-side, .brain-hero-card { min-width: 0; }

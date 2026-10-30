@@ -3,8 +3,28 @@
  * arrives and the page does not jump when the picture does. The view's own styles come with the view (brain-hero.css).
  */
 .brain-hero-frame {
+  position: relative; overflow: hidden;
   display: grid; place-items: center; min-height: var(--brain-hero-height, 60vh);
   background: var(--color-bg-surface); border: 1px solid var(--color-border-hover); border-radius: 0.875rem;
   font-family: var(--font-body, system-ui, sans-serif); font-size: 0.8125rem; line-height: 1.45; color: var(--color-text-muted);
 }
-.brain-hero-notice { margin: 0; padding: 0 1rem; text-align: center; }
+.brain-hero-notice { position: relative; margin: 0; padding: 0 1rem; text-align: center; }
+
+/* A soft glow stands in for the picture while it loads, instead of an empty surface. Shared with the
+   atlas-data phase in brain-hero.css, so the two loading screens the visitor can hit read as one. */
+.brain-hero-frame::before,
+.brain-hero[data-brain-hero="loading"]::before,
+.brain-hero[data-brain-hero="idle"]::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 60% 55% at 50% 50%, color-mix(in srgb, var(--color-accent-primary) 16%, transparent), transparent 70%);
+  animation: brain-hero-glow 3.6s ease-in-out infinite;
+}
+@keyframes brain-hero-glow {
+  0%, 100% { opacity: 0.6; transform: scale(0.96); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brain-hero-frame::before,
+  .brain-hero[data-brain-hero="loading"]::before,
+  .brain-hero[data-brain-hero="idle"]::before { animation: none; opacity: 0.8; }
+}

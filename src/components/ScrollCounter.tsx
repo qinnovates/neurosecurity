@@ -36,6 +36,11 @@ export default function ScrollCounter({ end, suffix = '', duration = 1500, class
   useEffect(() => {
     if (!started) return;
 
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      setCount(end);
+      return;
+    }
+
     const startTime = performance.now();
     let raf: number;
 
