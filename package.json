@@ -75,7 +75,7 @@
     "figure:bands:check": "python3 datalake/scripts/render-band-adjacency-figure.py --check"
   },
   "dependencies": {
-    "@astrojs/react": "^5.0.7",
+    "@astrojs/react": "^7.1.2",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.4",
     "@duckdb/duckdb-wasm": "1.32.0",
