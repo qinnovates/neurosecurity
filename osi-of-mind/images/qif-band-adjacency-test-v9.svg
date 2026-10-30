@@ -10,7 +10,7 @@ text{font-family:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;f
 </style>
 <rect class="surface" width="800" height="487"/>
 <text class="title" x="24.0" y="34.0">Does the N-code numbering predict which codes a pathway joins?</text>
-<text class="sub" x="24.0" y="55.0">63 links between different N codes, from 46 pathway records. Each bar counts how many of the 5,040 possible numberings of</text>
+<text class="sub" x="24.0" y="55.0">62 links between different N codes, from 45 pathway records. Each bar counts how many of the 5,040 possible numberings of</text>
 <text class="sub" x="24.0" y="72.0">the seven codes give that share of links between adjacent numbers. The published numbering is the blue bar.</text>
 <line class="hair" x1="70.0" y1="280.2" x2="770.0" y2="280.2"/>
 <text class="muted" x="62.0" y="284.2" text-anchor="end">150</text>
@@ -20,48 +20,47 @@ text{font-family:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;f
 <text class="muted" x="62.0" y="170.8" text-anchor="end">450</text>
 <line class="hair" x1="70.0" y1="110.0" x2="770.0" y2="110.0"/>
 <text class="muted" x="62.0" y="114.0" text-anchor="end">600</text>
-<rect class="grey" x="71.0" y="336.2" width="23.0" height="0.8" rx="2"/>
-<text class="muted" x="82.5" y="355.0" text-anchor="middle">10%</text>
-<rect class="grey" x="96.0" y="335.5" width="23.0" height="1.5" rx="2"/>
-<rect class="grey" x="121.0" y="331.7" width="23.0" height="5.3" rx="2"/>
-<rect class="grey" x="146.0" y="318.8" width="23.0" height="18.2" rx="2"/>
-<text class="muted" x="157.5" y="355.0" text-anchor="middle">14%</text>
-<rect class="grey" x="171.0" y="308.2" width="23.0" height="28.8" rx="2"/>
-<rect class="grey" x="196.0" y="293.9" width="23.0" height="43.1" rx="2"/>
-<rect class="grey" x="221.0" y="268.1" width="23.0" height="68.9" rx="2"/>
-<text class="muted" x="232.5" y="355.0" text-anchor="middle">19%</text>
-<rect class="grey" x="246.0" y="234.8" width="23.0" height="102.2" rx="2"/>
-<rect class="grey" x="271.0" y="215.9" width="23.0" height="121.1" rx="2"/>
-<rect class="grey" x="296.0" y="184.9" width="23.0" height="152.1" rx="2"/>
-<text class="muted" x="307.5" y="355.0" text-anchor="middle">24%</text>
-<rect class="grey" x="321.0" y="163.7" width="23.0" height="173.3" rx="2"/>
-<rect class="grey" x="346.0" y="164.5" width="23.0" height="172.5" rx="2"/>
-<rect class="grey" x="371.0" y="156.9" width="23.0" height="180.1" rx="2"/>
-<text class="muted" x="382.5" y="355.0" text-anchor="middle">29%</text>
-<rect class="grey" x="396.0" y="183.4" width="23.0" height="153.6" rx="2"/>
-<rect class="grey" x="421.0" y="177.3" width="23.0" height="159.7" rx="2"/>
-<rect class="blue" x="446.0" y="201.6" width="23.0" height="135.4" rx="2"/>
-<text class="strong" x="457.5" y="193.6" text-anchor="middle">33.3%</text>
-<rect class="grey" x="471.0" y="224.3" width="23.0" height="112.7" rx="2"/>
-<rect class="grey" x="496.0" y="241.7" width="23.0" height="95.3" rx="2"/>
-<rect class="grey" x="521.0" y="266.6" width="23.0" height="70.4" rx="2"/>
-<text class="muted" x="532.5" y="355.0" text-anchor="middle">38%</text>
-<rect class="grey" x="546.0" y="291.6" width="23.0" height="45.4" rx="2"/>
-<rect class="grey" x="571.0" y="308.2" width="23.0" height="28.8" rx="2"/>
-<rect class="grey" x="596.0" y="319.6" width="23.0" height="17.4" rx="2"/>
-<text class="muted" x="607.5" y="355.0" text-anchor="middle">43%</text>
-<rect class="grey" x="621.0" y="327.9" width="23.0" height="9.1" rx="2"/>
-<rect class="grey" x="646.0" y="330.2" width="23.0" height="6.8" rx="2"/>
-<rect class="grey" x="671.0" y="334.0" width="23.0" height="3.0" rx="2"/>
-<text class="muted" x="682.5" y="355.0" text-anchor="middle">48%</text>
-<rect class="grey" x="696.0" y="337.0" width="23.0" height="0.0" rx="2"/>
-<rect class="grey" x="721.0" y="336.2" width="23.0" height="0.8" rx="2"/>
-<rect class="grey" x="746.0" y="336.2" width="23.0" height="0.8" rx="2"/>
-<text class="muted" x="757.5" y="355.0" text-anchor="middle">52%</text>
+<rect class="grey" x="71.0" y="336.2" width="23.9" height="0.8" rx="2"/>
+<text class="muted" x="83.0" y="355.0" text-anchor="middle">10%</text>
+<rect class="grey" x="96.9" y="335.5" width="23.9" height="1.5" rx="2"/>
+<rect class="grey" x="122.9" y="331.7" width="23.9" height="5.3" rx="2"/>
+<rect class="grey" x="148.8" y="318.8" width="23.9" height="18.2" rx="2"/>
+<text class="muted" x="160.7" y="355.0" text-anchor="middle">15%</text>
+<rect class="grey" x="174.7" y="308.2" width="23.9" height="28.8" rx="2"/>
+<rect class="grey" x="200.6" y="293.9" width="23.9" height="43.1" rx="2"/>
+<rect class="grey" x="226.6" y="267.4" width="23.9" height="69.6" rx="2"/>
+<text class="muted" x="238.5" y="355.0" text-anchor="middle">19%</text>
+<rect class="grey" x="252.5" y="231.8" width="23.9" height="105.2" rx="2"/>
+<rect class="grey" x="278.4" y="209.1" width="23.9" height="127.9" rx="2"/>
+<rect class="grey" x="304.3" y="175.8" width="23.9" height="161.2" rx="2"/>
+<text class="muted" x="316.3" y="355.0" text-anchor="middle">24%</text>
+<rect class="grey" x="330.3" y="157.7" width="23.9" height="179.3" rx="2"/>
+<rect class="grey" x="356.2" y="145.6" width="23.9" height="191.4" rx="2"/>
+<rect class="grey" x="382.1" y="153.9" width="23.9" height="183.1" rx="2"/>
+<text class="muted" x="394.1" y="355.0" text-anchor="middle">29%</text>
+<rect class="grey" x="408.0" y="173.6" width="23.9" height="163.4" rx="2"/>
+<rect class="blue" x="434.0" y="172.8" width="23.9" height="164.2" rx="2"/>
+<text class="strong" x="445.9" y="164.8" text-anchor="middle">32.3%</text>
+<rect class="grey" x="459.9" y="200.0" width="23.9" height="137.0" rx="2"/>
+<text class="muted" x="471.9" y="355.0" text-anchor="middle">34%</text>
+<rect class="grey" x="485.8" y="225.0" width="23.9" height="112.0" rx="2"/>
+<rect class="grey" x="511.7" y="252.3" width="23.9" height="84.7" rx="2"/>
+<rect class="grey" x="537.7" y="284.8" width="23.9" height="52.2" rx="2"/>
+<text class="muted" x="549.6" y="355.0" text-anchor="middle">39%</text>
+<rect class="grey" x="563.6" y="301.4" width="23.9" height="35.6" rx="2"/>
+<rect class="grey" x="589.5" y="317.3" width="23.9" height="19.7" rx="2"/>
+<rect class="grey" x="615.4" y="325.6" width="23.9" height="11.4" rx="2"/>
+<text class="muted" x="627.4" y="355.0" text-anchor="middle">44%</text>
+<rect class="grey" x="641.4" y="330.2" width="23.9" height="6.8" rx="2"/>
+<rect class="grey" x="667.3" y="334.0" width="23.9" height="3.0" rx="2"/>
+<rect class="grey" x="693.2" y="337.0" width="23.9" height="0.0" rx="2"/>
+<text class="muted" x="705.2" y="355.0" text-anchor="middle">48%</text>
+<rect class="grey" x="719.1" y="336.2" width="23.9" height="0.8" rx="2"/>
+<rect class="grey" x="745.1" y="336.2" width="23.9" height="0.8" rx="2"/>
 <line class="rule" x1="70.0" y1="337.0" x2="770.0" y2="337.0"/>
-<line class="s-ink" x1="382.5" y1="104.0" x2="382.5" y2="337.0"/>
-<text class="muted" x="388.5" y="114.0">average of all numberings, 28.6%</text>
+<line class="s-ink" x1="386.7" y1="104.0" x2="386.7" y2="337.0"/>
+<text class="muted" x="392.7" y="114.0">average of all numberings, 28.6%</text>
 <text class="muted" x="420.0" y="377.0" text-anchor="middle">Share of cross-code links joining adjacent numbers</text>
-<text class="strong" x="24.0" y="435.0">Published numbering: 21 of 63 links (33.3%).</text>
-<text class="sub" x="24.0" y="455.0">27.6% of all numberings place at least as many links on adjacent numbers,</text><text class="sub" x="24.0" y="473.0">so the published order carries no traversal information.</text>
+<text class="strong" x="24.0" y="435.0">Published numbering: 20 of 62 links (32.3%).</text>
+<text class="sub" x="24.0" y="455.0">32.9% of all numberings place at least as many links on adjacent numbers,</text><text class="sub" x="24.0" y="473.0">so the published order carries no traversal information.</text>
 </svg>
