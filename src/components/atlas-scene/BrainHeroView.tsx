@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import type { LayerId } from '@/lib/anatomy/source-types';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
-import { LENS_LABELS, type Lens } from '@/lib/atlas-explorer/lens-state';
+import { LENS_LABELS, SUBJECT_FREE_LENS_KINDS, emptyLens, type Lens } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE } from './atlas-state';
 import AtlasViewport, { type AtlasViewportProps } from './AtlasViewport';
 import BrainHeroRegionList from './BrainHeroRegionList';
@@ -17,11 +17,12 @@ interface Props {
 }
 
 /**
- * The two lenses the hero offers, both facts about a region and neither needing a subject. Band first: under it every
+ * The lenses the hero offers: the ones whole without a subject, which are also the ones the explorer's address can
+ * open on, so the way on from the card carries the lens the visitor was looking through. Band first: under it every
  * region holds a value, so the whole brain is filled, lit under the pointer and picks on the first click. NISS severity
  * is the catalog's own subject, and most regions hold no value under it yet, so it is the second look and not the first.
  */
-export const HERO_LENSES: readonly Lens[] = [{ kind: 'band' }, { kind: 'niss' }];
+export const HERO_LENSES: readonly Lens[] = SUBJECT_FREE_LENS_KINDS.map((kind) => emptyLens(kind));
 export const HERO_DEFAULT_LENS: Lens = HERO_LENSES[0];
 /**
  * The outline and the cortical shapes, and not the deep ones: the cortex is what a first picture of a brain shows and the
@@ -68,7 +69,7 @@ export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe
         onSelectRegion={setSelectedRegionId} probe={probe} loadOpenView={loadOpenView}
       />
       <HeroLensSwitch lens={lens} onChoose={setLens} />
-      <BrainHeroSummary model={model} regionId={selectedRegionId} />
+      <BrainHeroSummary model={model} regionId={selectedRegionId} lens={lens} />
     </div>
   );
 }

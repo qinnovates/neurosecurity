@@ -10,7 +10,7 @@ import type { AtlasCanvasProps } from '../AtlasCanvas';
 import { buildRegionDeepLink } from '../atlas-deep-link';
 import BrainHeroMount from '../BrainHeroMount';
 import BrainHeroPanel, { type BrainHeroPanelProps } from '../BrainHeroPanel';
-import { HERO_LAYERS } from '../BrainHeroView';
+import { HERO_DEFAULT_LENS, HERO_LAYERS } from '../BrainHeroView';
 import OpenViewport, { type OpenViewportProps } from '../OpenViewport';
 import { GATE_NOTICES } from '../viewport-gate';
 import { model, serveSite, writePin } from './region-view-test-kit';
@@ -133,10 +133,13 @@ describe('the brain hero: a pick and the way on', () => {
     const ctas = [...card.querySelectorAll<HTMLAnchorElement>('a.brain-hero-cta')];
     expect(ctas).toHaveLength(1);
     expect(ctas[0].textContent).toBe(HERO_COPY.see_details);
-    expect(ctas[0].getAttribute('href')).toBe(buildRegionDeepLink(ownRegion.id));
-    expect(ctas[0].getAttribute('href')).toBe(`/atlas/anatomy/?region=${ownRegion.id}`);
+    // The way on carries the lens the visitor was looking through, so the explorer opens on the same picture.
+    expect(ctas[0].getAttribute('href')).toBe(buildRegionDeepLink(ownRegion.id, HERO_DEFAULT_LENS));
+    expect(ctas[0].getAttribute('href')).toBe(`/atlas/anatomy/?region=${ownRegion.id}&lens=band`);
     // The explorer has its own layout without the client router, so the link asks for a full page load.
     expect(ctas[0].hasAttribute('data-astro-reload')).toBe(true);
+    act(() => { within(container.querySelector('.brain-hero-lenses') as HTMLElement).getAllByRole('button')[1].click(); });
+    await waitFor(() => expect(card.querySelector('a.brain-hero-cta')?.getAttribute('href')).toBe(`/atlas/anatomy/?region=${ownRegion.id}&lens=niss`));
     // The dashboard: the region's risks, highest NISS step first and cut at the cap, from the same detail the inspector shows.
     const detail = buildRegionDetail(model, ownRegion.id);
     if (detail === null) throw new Error('The picked region is not in the index.');

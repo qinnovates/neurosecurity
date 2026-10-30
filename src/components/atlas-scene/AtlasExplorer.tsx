@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { ANATOMY_INDEX_PATH, type PinnedFile } from '@/lib/anatomy/anatomy-index-types';
-import { readRegionDeepLink } from './atlas-deep-link';
+import { readLensDeepLink, readRegionDeepLink } from './atlas-deep-link';
 import ExplorerWorkspace from './ExplorerWorkspace';
 import { loadExplorerModel } from './explorer-data';
 import LoadNotice from './LoadNotice';
@@ -34,6 +34,8 @@ export default function AtlasExplorer({ indexPin, search }: Props) {
   const model = state.status === 'ready' ? state.data.model : null;
   // Decided once per model, against the regions it holds: an id the index does not name selects nothing.
   const initialSelection = useMemo(() => (model === null ? null : readRegionDeepLink(search ?? readSearch(), model.regionsById)), [model, search]);
+  // The lens needs no model to be checked: it is one of a fixed few kinds, or nothing.
+  const initialLens = useMemo(() => readLensDeepLink(search ?? readSearch()), [search]);
   if (state.status === 'ready') {
     return (
       <>
@@ -43,7 +45,7 @@ export default function AtlasExplorer({ indexPin, search }: Props) {
             The list below is read from the data now served. Reload the page to get a matching copy.
           </p>
         )}
-        <ExplorerWorkspace model={state.data.model} isIndexPinned={state.data.indexPinState === 'pinned'} isOutOfStep={state.data.indexPinState === 'mismatched'} initialSelection={initialSelection} />
+        <ExplorerWorkspace model={state.data.model} isIndexPinned={state.data.indexPinState === 'pinned'} isOutOfStep={state.data.indexPinState === 'mismatched'} initialSelection={initialSelection} initialLens={initialLens} />
       </>
     );
   }

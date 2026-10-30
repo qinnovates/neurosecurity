@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { HERO_COPY } from '@/lib/anatomy/hero-copy';
 import { nameBands, type ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { rankRegionRisks, techniquePagePath } from '@/lib/atlas-explorer/hero-risks';
+import type { Lens } from '@/lib/atlas-explorer/lens-state';
 import { buildRegionDetail, type DetailTechnique, type RegionDetail } from '@/lib/atlas-explorer/region-detail';
 import { buildRegionDeepLink } from './atlas-deep-link';
 import ReviewMark from './ReviewMark';
@@ -10,6 +11,8 @@ interface Props {
   model: ExplorerModel;
   /** The region picked in the picture, or null while none is. */
   regionId: string | null;
+  /** The lens the picture is coloured by. The way on opens the explorer on the same lens. */
+  lens: Lens;
 }
 
 function RiskItem({ technique, isInCatalog }: { technique: DetailTechnique; isInCatalog: boolean }) {
@@ -66,7 +69,7 @@ function Devices({ detail }: { detail: RegionDetail }) {
  * the whole list stay on the explorer page, which the link opens with this
  * region selected.
  */
-export default function BrainHeroSummary({ model, regionId }: Props) {
+export default function BrainHeroSummary({ model, regionId, lens }: Props) {
   const detail = useMemo(() => (regionId === null ? null : buildRegionDetail(model, regionId)), [model, regionId]);
   if (detail === null) {
     return (
@@ -88,7 +91,7 @@ export default function BrainHeroSummary({ model, regionId }: Props) {
       </dl>
       <Risks model={model} detail={detail} />
       <Devices detail={detail} />
-      <a className="brain-hero-cta" href={buildRegionDeepLink(region.id)} data-astro-reload>{HERO_COPY.see_details}</a>
+      <a className="brain-hero-cta" href={buildRegionDeepLink(region.id, lens)} data-astro-reload>{HERO_COPY.see_details}</a>
       <p className="sr-only" role="status">{HERO_COPY.selected_announcement(region.name)}</p>
     </aside>
   );

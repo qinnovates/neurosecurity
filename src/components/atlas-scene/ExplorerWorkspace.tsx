@@ -5,7 +5,7 @@ import { announceLens, announceSelection } from '@/lib/atlas-explorer/announceme
 import { stageStepNumbers } from '@/lib/atlas-explorer/chain-steps';
 import { isDevicesLayerShown, layersAtStart } from '@/lib/atlas-explorer/devices-layer';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
-import { LENS_LABELS, LENS_SUBJECT_NOUNS, type LensKind } from '@/lib/atlas-explorer/lens-state';
+import { LENS_LABELS, LENS_SUBJECT_NOUNS, type Lens, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE, explorerReducer, type Target } from './atlas-state';
 import AtlasViewport, { VIEWPORT_HEADING_ID } from './AtlasViewport';
 import ChainView from './ChainView';
@@ -34,6 +34,8 @@ interface Props {
   isOutOfStep?: boolean;
   /** The selection the page's address asked for (atlas-deep-link.ts), already checked against the model. The state starts with it, so nothing is selected after the fact. */
   initialSelection?: Target | null;
+  /** The lens the page's address asked to open on (atlas-deep-link.ts), already checked. The state starts on it, so no lens change is announced. */
+  initialLens?: Lens | null;
 }
 
 const TECHNIQUE_LENS = 'technique';
@@ -72,9 +74,11 @@ function useAnnouncement(message: string): string {
  * details. The grid areas are in atlas-workspace.css. One reducer holds the
  * state, and the selection survives every lens, layer and filter change.
  */
-export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = false, initialSelection = null }: Props) {
+export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = false, initialSelection = null, initialLens = null }: Props) {
   // The layers that start on follow the data: the electrode layout is off unless the index says it is shown by default.
-  const [state, dispatch] = useReducer(explorerReducer, model.index, (index) => ({ ...INITIAL_EXPLORER_STATE, selection: initialSelection, layers: layersAtStart(index, INITIAL_EXPLORER_STATE.layers) }));
+  const [state, dispatch] = useReducer(explorerReducer, model.index, (index) => ({
+    ...INITIAL_EXPLORER_STATE, selection: initialSelection, lens: initialLens ?? INITIAL_EXPLORER_STATE.lens, layers: layersAtStart(index, INITIAL_EXPLORER_STATE.layers),
+  }));
   const [electrodeId, setElectrodeId] = useState<string | null>(null);
   /** Whether the 3D picture is open: the caption exists only while it is. Decides where a drill-down from the details lands. */
   const [isPictureOpen, setPictureOpen] = useState(false);

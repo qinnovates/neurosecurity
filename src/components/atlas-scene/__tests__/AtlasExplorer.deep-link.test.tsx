@@ -62,3 +62,24 @@ describe('AtlasExplorer: opening at a region', () => {
     expect(container.textContent).not.toContain('not-a-region');
   });
 });
+
+describe('AtlasExplorer: opening on a lens', () => {
+  const lensOf = (container: HTMLElement): string | null => container.querySelector('.atlas-workspace')?.getAttribute('data-lens') ?? null;
+
+  it('opens on the lens the address names, with the region selected too, and announces no change: the page opened that way', async () => {
+    const container = await renderExplorer(buildRegionDeepLink(REGION_ID, { kind: 'niss' }).split('?')[1]);
+    expect(lensOf(container)).toBe('niss');
+    expect(currentRows(container)).toEqual([REGION_ID]);
+    expect(container.querySelector('[data-announce="lens"]')?.textContent).toBe('');
+  });
+
+  it.each([
+    ['a lens that waits for a subject', '?lens=technique'],
+    ['a lens that does not exist', `?lens=${encodeURIComponent('<b>x</b>')}`],
+    ['an empty lens', '?lens='],
+  ])('opens on the default lens for %s, exactly as from a bare address', async (_case, search) => {
+    const container = await renderExplorer(search);
+    expect(lensOf(container)).toBe('band');
+    expect(currentRows(container)).toEqual([]);
+  });
+});

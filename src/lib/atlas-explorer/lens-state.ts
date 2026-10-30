@@ -60,6 +60,12 @@ export function lensNeedsSubject(kind: LensKind): boolean {
   }
 }
 
+/**
+ * The lenses that are whole without a subject. They are the ones a compact mount (the homepage hero) offers, and the
+ * ones an address may open the explorer on: a lens that waits for a subject would open on nothing coloured.
+ */
+export const SUBJECT_FREE_LENS_KINDS: readonly LensKind[] = LENS_KINDS.filter((kind) => !lensNeedsSubject(kind));
+
 /** The lens's subject id, or null when it has none or none is chosen. */
 export function lensSubjectId(lens: Lens): string | null {
   switch (lens.kind) {
