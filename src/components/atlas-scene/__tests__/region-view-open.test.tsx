@@ -27,7 +27,6 @@ vi.mock('../atlas-region-mount.css?url', () => ({ default: '/_astro/atlas-region
 const TEST_TIMEOUT_MS = 20_000;
 vi.setConfig({ testTimeout: TEST_TIMEOUT_MS });
 
-const REVIEW_MARK = 'AI-drafted, unreviewed';
 const GROUP_NAME = '3D view and what it shows';
 const techniqueIds = model.index.techniques.map((technique) => technique.id);
 const findTechnique = (colouring: ReturnType<typeof classifyTechniqueColouring>): string => techniqueIds.find((techniqueId) => classifyTechniqueColouring(model, techniqueId) === colouring) ?? '';
@@ -44,7 +43,6 @@ const group = (): HTMLElement => screen.getByRole('group', { name: GROUP_NAME })
 const hints = (): string[] => [...group().querySelectorAll('[data-view-hint="choose-in-list"]')].map((hint) => hint.textContent ?? '');
 const limitTexts = (id: string): string[] => [...group().querySelectorAll(`[data-limit-id="${id}"]`)].map((note) => note.textContent ?? '');
 const everyLimitText = (): string[] => [...group().querySelectorAll('[data-limit-id]')].map((note) => note.textContent ?? '');
-const reviewMarks = (): string[] => [...group().querySelectorAll('[data-ai-drafted="true"]')].map((mark) => mark.textContent ?? '');
 const countOf = (texts: readonly string[], text: string): number => texts.filter((candidate) => candidate === text).length;
 
 /** Renders the mount as a page does, presses its button, and waits for the picture with every shape file in. */
@@ -78,12 +76,9 @@ describe('one copy of each sentence and of the review mark, per mount', () => {
     await openMount({ lens: BAND_LENS, selectedRegionIds: [drawnRegion?.id ?? ''] });
     expect(limitTexts('lens_band')).toHaveLength(1);
     expect(limitTexts('outline_shape')).toHaveLength(1);
-    expect(reviewMarks()).toEqual([REVIEW_MARK]);
-    // Nearest the picture: the lens limit and the mark are inside the figure's own caption.
+    // Nearest the picture: the lens limit is inside the figure's own caption.
     const caption = group().querySelector('[data-viewport-caption="true"]');
     expect(caption?.querySelector('[data-limit-id="lens_band"]')).not.toBeNull();
-    expect(caption?.querySelector('[data-ai-drafted="true"]')).not.toBeNull();
-    expect(group().querySelector('[data-view-notes="true"] [data-ai-drafted="true"]')).toBeNull();
     // And no sentence at all stands twice in the group.
     expect(new Set(everyLimitText()).size).toBe(everyLimitText().length);
     expect(limitTexts('view_chosen_regions')).toHaveLength(1);
@@ -98,7 +93,6 @@ describe('one copy of each sentence and of the review mark, per mount', () => {
     expect(group().querySelector('[data-viewport-caption="true"]')).toBeNull();
     expect(limitTexts('lens_band')).toHaveLength(1);
     expect(limitTexts('outline_shape')).toHaveLength(1);
-    expect(reviewMarks()).toEqual([REVIEW_MARK]);
     expect(new Set(everyLimitText()).size).toBe(everyLimitText().length);
   });
 });
@@ -114,7 +108,6 @@ describe('a technique page: what the links name, and whether anything is coloure
     expect(screen.getByRole('heading', { name: `${NAMED_REGIONS_HEADING} (${named.length})` })).toBeTruthy();
     expect(everyLimitText().filter((text) => text.startsWith('No region is coloured'))).toEqual([]);
     expect(hints()).toEqual([]);
-    expect(reviewMarks()).toEqual([REVIEW_MARK]);
   });
 
   it('named but contained: fills nothing, and says so beside the button and then once in the caption, with the mark by the list', async () => {
@@ -131,11 +124,9 @@ describe('a technique page: what the links name, and whether anything is coloure
     expect(screen.getByRole('heading', { name: `${NAMED_REGIONS_HEADING} (1)` })).toBeTruthy();
     expect(countOf(everyLimitText(), LIMIT_TEMPLATES.view_nothing_coloured_no_own_shape)).toBe(1);
     expect(group().querySelector('[data-viewport-caption="true"] [data-limit-id="view_nothing_coloured_no_own_shape"]')).not.toBeNull();
-    expect(reviewMarks()).toEqual([REVIEW_MARK]);
-    // With the picture hidden the sentence and the mark stand beside the list and the button, once.
+    // With the picture hidden the sentence stands beside the list and the button, once.
     fireEvent.click(screen.getByRole('button', { name: 'Hide the 3D view' }));
     expect(countOf(everyLimitText(), LIMIT_TEMPLATES.view_nothing_coloured_no_own_shape)).toBe(1);
-    expect([...group().querySelectorAll('[data-view-notes="true"] [data-ai-drafted="true"]')].map((mark) => mark.textContent)).toEqual([REVIEW_MARK]);
   });
 
   it('none: fills nothing, lists no region, says its links name no single region, and where to choose', async () => {

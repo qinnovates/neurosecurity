@@ -15,7 +15,7 @@ import type { ColourMode, OwnershipMark } from '@/lib/anatomy/colour-modes';
 import type { SizeClass } from '@/lib/anatomy/manifest-types';
 import type { LayerId } from '@/lib/anatomy/source-types';
 import type { ExplorerModel } from './explorer-model';
-import { highlightColourOfStructure, regionOrdinals } from './highlight-colour';
+import { highlightColourOfStructure, regionHighlightHues } from './highlight-colour';
 
 export const FILL_KINDS = ['solid', 'translucent', 'lines', 'neutral'] as const;
 /** `solid`: opaque, in the step's colour. `translucent`: pale and neutral. `lines`: no fill. `neutral`: a quiet fill no lens colours. */
@@ -42,8 +42,9 @@ export interface SceneShape {
   /** One side was drawn and the other is its mirror image. */
   mirrored: boolean;
   /**
-   * The colour of the shape's one owning region, shown while the pointer is on it or it is selected (highlight-colour.ts).
-   * Null for a shape several regions share or none owns, which is lifted without a colour of its own.
+   * The colour of the shape's one owning region, already resolved for the surface, shown while the pointer is on it or
+   * it is selected (highlight-colour.ts). Null for a shape several regions share or none owns, which is lifted without
+   * a colour of its own.
    */
   highlightColour: string | null;
   /** Set only while a threat model's steps are shown: the steps whose technique marks this shape. See chain-steps.ts. */
@@ -61,18 +62,19 @@ export interface SceneShape {
  * deuteranopia and 11.3 with full colour vision, below the 15 floor.
  *
  * So lightness carries depth within a hue family, and the hue family carries
- * the forebrain boundary: N7-N4 (telencephalon and diencephalon) on blue,
- * N3-N1 (cerebellum, brainstem, cord) on orange. Each family validates as an
- * ordinal ramp in both modes, and every cross-family pair clears the CVD
- * floor. Colour is never the only channel: the band is always labelled, since
- * within a family only position distinguishes the steps.
+ * the forebrain boundary: N7-N4 (telencephalon and diencephalon) on the site's
+ * hot pink, N3-N1 (cerebellum, brainstem, cord) on its electric blue. The two
+ * families sit about 97 degrees apart in hue, each validates as an ordinal ramp
+ * in both modes, and every cross-family pair clears the CVD floor. Colour is
+ * never the only channel: the band is always labelled, since within a family
+ * only position distinguishes the steps.
  */
 export const BAND_COLOURS: Readonly<Record<string, string>> = {
-  N7: '#82b8fb', N6: '#5598e7', N5: '#2a78d6', N4: '#1c5cab', N3: '#ef8a55', N2: '#d9541f', N1: '#9c3c16',
+  N7: '#ea64ba', N6: '#d2379e', N5: '#b61f86', N4: '#8f0f68', N3: '#4f88e6', N2: '#2f65cc', N1: '#1e4aa3',
 };
 /** The same two families stepped for the dark surface, not an automatic flip. */
 export const BAND_COLOURS_DARK: Readonly<Record<string, string>> = {
-  N7: '#9ec5f4', N6: '#6da7ec', N5: '#3987e5', N4: '#256abf', N3: '#f6b08c', N2: '#ef8a55', N1: '#d9541f',
+  N7: '#ffb3e6', N6: '#ff85d4', N5: '#ff57c2', N4: '#f02aa8', N3: '#a9c8ff', N2: '#6f9fff', N1: '#3570f0',
 };
 /** NISS steps, lightest to darkest. Five separate steps, never a ramp between them. */
 export const NISS_COLOURS: Readonly<Record<string, string>> = {
@@ -133,11 +135,12 @@ export const NISS_COLOURS_DARK: Readonly<Record<string, string>> = {
  */
 export type SceneTheme = 'light' | 'dark';
 /**
- * The technique lens's one colour. It has no per-surface step because it needs
- * none: measured against the surfaces the palette tests use, it reads 3.62:1 on
- * the light one and 4.34:1 on the dark one, so it clears the 3:1 floor on both.
+ * The technique lens's one colour: the site's interactive blue. It has no
+ * per-surface step because it needs none: measured against the surfaces the
+ * palette tests use, it reads 3.38:1 on the light one and 5.02:1 on the dark
+ * one, so it clears the 3:1 floor on both.
  */
-export const LINKED_COLOUR = '#2a78d6';
+export const LINKED_COLOUR = '#3d86ff';
 /**
  * The colour of a shape the lens holds nothing for, and the ink of the context
  * layers. One value for both surfaces, deliberately: it is read as data as well
@@ -175,10 +178,10 @@ export function describeFill(model: Pick<ExplorerModel, 'styleStructure'>, struc
 export function buildSceneShapes(model: Pick<ExplorerModel, 'index' | 'styleStructure'>, mode: ColourMode | null, requested: Readonly<Record<LayerId, boolean>>, theme: SceneTheme): SceneShape[] {
   const assetsById = new Map(model.index.assets.map((asset) => [asset.id, asset]));
   const availableLayers = new Set(model.index.layers.filter((layer) => layer.available && requested[layer.id]).map((layer) => layer.id));
-  const ordinals = regionOrdinals(model.index);
+  const hues = regionHighlightHues(model.index);
   return model.index.structures.flatMap((structure) => {
     const look = describeFill(model, structure.key, mode, theme);
-    const highlightColour = highlightColourOfStructure(structure, ordinals);
+    const highlightColour = highlightColourOfStructure(structure, hues, theme);
     return structure.nodes.flatMap((node) => {
       const asset = assetsById.get(node.asset_id);
       if (asset === undefined || !availableLayers.has(asset.layer)) return [];

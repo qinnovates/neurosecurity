@@ -312,7 +312,7 @@ const syntheticBands = HOURGLASS_BANDS.filter(b => b.id.startsWith('S'));
           <p class="text-xs text-[var(--color-text-muted)] mb-3">Biological layers. N7 = outermost (neocortex), N1 = deepest (spinal cord). Higher numbers = higher-level cognitive function.</p>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {neuralBands.map((band) => (
-              <a href={`/atlas/#${band.id}`} class="rounded-lg p-3 border transition-colors hover:border-emerald-500/30" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+              <a href={`/atlas/#${band.id}`} class="rounded-lg p-3 border transition-colors hover:border-[var(--color-accent-secondary)]/30" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
                 <span class="font-mono text-sm font-bold" style={`color: ${band.color};`}>{band.id}</span>
                 <p class="text-xs text-[var(--color-text-muted)] mt-1">{band.name}</p>
               </a>
@@ -346,7 +346,7 @@ const syntheticBands = HOURGLASS_BANDS.filter(b => b.id.startsWith('S'));
           <p class="text-xs text-[var(--color-text-muted)] mb-3">Silicon layers. S1 = nearest to interface (on-device), S3 = farthest (cloud/wide-area). Traditional cybersecurity territory.</p>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {syntheticBands.map((band) => (
-              <a href={`/atlas/#${band.id}`} class="rounded-lg p-3 border transition-colors hover:border-blue-500/30" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
+              <a href={`/atlas/#${band.id}`} class="rounded-lg p-3 border transition-colors hover:border-[var(--color-accent-primary)]/30" style="background: var(--color-bg-secondary); border-color: var(--color-border);">
                 <span class="font-mono text-sm font-bold" style={`color: ${band.color};`}>{band.id}</span>
                 <p class="text-xs text-[var(--color-text-muted)] mt-1">{band.name}</p>
               </a>

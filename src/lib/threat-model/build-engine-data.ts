@@ -113,6 +113,19 @@ function toTechnique(raw: Record<string, unknown>, index: number, recordCategori
   };
 }
 
+/** Hues are whole degrees around the wheel. */
+const LAST_HUE_DEGREE = 359;
+
+/** The record's `highlight_hue`, or null when it states none. A hue that is present but not a whole degree stops the build: it would draw wrong rather than not at all. */
+function readHighlightHue(raw: Record<string, unknown>, index: number): number | null {
+  const hue = raw.highlight_hue;
+  if (hue === undefined || hue === null) return null;
+  if (typeof hue !== 'number' || !Number.isInteger(hue) || hue < 0 || hue > LAST_HUE_DEGREE) {
+    throw new ThreatModelDataError(ATLAS_FILE, `brain_regions[${index}].highlight_hue must be a whole number from 0 to ${LAST_HUE_DEGREE}`);
+  }
+  return hue;
+}
+
 function toRegion(raw: Record<string, unknown>, index: number): BrainRegion {
   const id = readString(raw, 'id');
   const name = readString(raw, 'name');
@@ -120,7 +133,7 @@ function toRegion(raw: Record<string, unknown>, index: number): BrainRegion {
   if (id === null || name === null || bandId === null) {
     throw new ThreatModelDataError(ATLAS_FILE, `brain_regions[${index}] is missing id, name, or qif_band`);
   }
-  return { id, name, bandId, depthClass: readString(raw, 'depth_class') ?? 'unspecified' };
+  return { id, name, bandId, depthClass: readString(raw, 'depth_class') ?? 'unspecified', highlightHue: readHighlightHue(raw, index) };
 }
 
 function toPrecedentCve(raw: Record<string, unknown>, index: number): PrecedentCve {

@@ -195,7 +195,7 @@ export default function TaraExplorer({ techniques }: Props) {
             {filtered.map((t, i) => (
               <tr
                 key={t.id}
-                className="cursor-pointer transition-[background] duration-100 hover:!bg-blue-500/[0.08] odd:bg-transparent even:bg-white/[0.02]"
+                className="cursor-pointer transition-[background] duration-100 hover:!bg-[var(--color-accent-fill)]/[0.08] odd:bg-transparent even:bg-white/[0.02]"
                 onClick={() => { window.location.href = `/atlas/tara/${t.id}/`; }}
               >
                 <td className="px-2.5 py-1.5 whitespace-nowrap max-w-56 overflow-hidden text-ellipsis font-mono text-xs" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>{t.id}</td>

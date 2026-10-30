@@ -23,6 +23,8 @@ const REGIONS = [
   ['m1', 'Primary Motor Cortex', 'N7'], ['pmc', 'Premotor Cortex', 'N7'], ['cervical_cord', 'Cervical Spinal Cord', 'N1'],
   ['cingulate', 'Cingulate Gyrus (Posterior)', 'N6'], ['insula', 'Insular Cortex', 'N6'],
 ] as const;
+/** One region's record states a highlight hue; the others state none, so the index carries both cases. */
+export const FIXTURE_HIGHLIGHT_HUES: Readonly<Record<string, number>> = { stn: 200 };
 
 function buildTechnique(id: string, bandIds: string[]): EngineData['techniques'][number] {
   return {
@@ -37,13 +39,13 @@ const ENGINE_DATA: EngineData = {
   registrarVersion: 'fixture',
   tactics: [],
   techniques: [buildTechnique(TECHNIQUE_ID, ['N5', 'N7']), buildTechnique('QIF-T9002', ['N7']), buildTechnique('QIF-T9005', ['S1'])],
-  regions: REGIONS.map(([id, name, bandId]) => ({ id, name, bandId, depthClass: 'unspecified' })),
+  regions: REGIONS.map(([id, name, bandId]) => ({ id, name, bandId, depthClass: 'unspecified', highlightHue: FIXTURE_HIGHLIGHT_HUES[id] ?? null })),
   precedentCves: [],
   precedentCvesAsOf: '2026-10-09',
 };
 
 const ATLAS = {
-  brain_regions: REGIONS.map(([id, name, band]) => ({ id, name, qif_band: band })),
+  brain_regions: REGIONS.map(([id, name, band]) => ({ id, name, qif_band: band, highlight_hue: FIXTURE_HIGHLIGHT_HUES[id] ?? null })),
   region_aliases: { subthalamic_nucleus: 'stn', motor_strip: 'm1' },
   region_alias_relations: { synonym: ['subthalamic_nucleus'], whole_to_part: ['motor_strip'], part_to_whole: [] },
   device_region_mappings: [{ device_id: 'fixture-device', target_regions: ['m1'] }],

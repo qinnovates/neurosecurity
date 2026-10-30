@@ -8,7 +8,6 @@ import { summariseTechnique, type TechniqueSummary } from '@/lib/atlas-explorer/
 import ColourModePicker from './ColourModePicker';
 import HighlightPicker from './HighlightPicker';
 import LimitNote from './LimitNote';
-import ReviewMark from './ReviewMark';
 import SubjectPicker from './SubjectPicker';
 
 interface Props {
@@ -47,8 +46,7 @@ function TechniqueFacts({ summary, onSelectRegion }: { summary: TechniqueSummary
   return (
     <div className="atlas-subject" data-technique-kind={summary.kind}>
       <p className="atlas-fact">
-        <strong>{summary.name}</strong> <span className="atlas-id">{summary.id}</span>. Bands: {summary.bandNames}.{' '}
-        {summary.reviewState !== null && <ReviewMark state={summary.reviewState} />}
+        <strong>{summary.name}</strong> <span className="atlas-id">{summary.id}</span>. Bands: {summary.bandNames}.
       </p>
       {summary.linkedRegions.length > 0 && <><p className="atlas-label">Linked regions</p><RegionButtons regions={summary.linkedRegions} onSelectRegion={onSelectRegion} /></>}
       {summary.namedNotCounted.length > 0 && (

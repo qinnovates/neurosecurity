@@ -127,7 +127,6 @@ exports[`limit sentences > hold the sentences beside the 3D view's button word f
   "ask": "Draws this on an average brain, with what the picture cannot tell you beside it. Nothing is fetched until you ask.",
   "choose_in_list": "Choose a band or region in the list on this page to mark it in the picture.",
   "failed": "The 3D view could not be loaded. The list on this page is unchanged.",
-  "links_review": "The region links drafted for this technique:",
   "loading": "Loading the 3D view…",
 }
 `;

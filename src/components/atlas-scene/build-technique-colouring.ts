@@ -1,9 +1,6 @@
 import { createStructureStyler } from '@/lib/anatomy/colour-modes';
 import type { LimitSentence } from '@/lib/anatomy/limits-copy';
 import { limitsForUncolouredTechnique, type ColouringSource } from '@/lib/atlas-explorer/technique-colouring';
-import type { IndexReviewState } from '@/lib/anatomy/anatomy-index-types';
-import { weakestReviewState } from '@/lib/atlas-explorer/explorer-model';
-import { UNREVIEWED_MARK } from './unreviewed-mark';
 import { THREAT_VECTORS } from '@/lib/threat-data';
 import { loadAnatomyBundle } from './load-anatomy-data';
 
@@ -25,15 +22,4 @@ const COLOURING_SOURCE = loadColouringSource();
  */
 export function readUncolouredLimit(techniqueId: string): LimitSentence | null {
   return limitsForUncolouredTechnique(COLOURING_SOURCE, { kind: 'technique', techniqueId })[0] ?? null;
-}
-
-/**
- * Build time only. The review state of the region links drafted for a technique the index holds: the weakest of its
- * links', and unreviewed when it has none, since the sentence beside the button still speaks of drafted links. Null for
- * a technique the index does not hold (no neural band): nothing was drafted for it, so there is nothing to mark.
- */
-export function readLinksReview(techniqueId: string): IndexReviewState | null {
-  const technique = COLOURING_SOURCE.index.techniques.find((candidate) => candidate.id === techniqueId);
-  if (technique === undefined) return null;
-  return weakestReviewState(technique.links.map((link) => link.review_state)) ?? UNREVIEWED_MARK;
 }

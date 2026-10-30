@@ -323,18 +323,30 @@ const iconSvg: Record<string, string> = {
     </style>
 
     <script>
+      import { KQL_INJECT_EVENT, KQL_READY_EVENT, KQL_ROOT_ATTRIBUTE } from '@/components/bci/BciKql';
+
+      // The editor is a client:only island; a pill clicked before it mounts is held and re-sent on ready.
+      let pendingQuery: string | null = null;
+      let isEditorReady = false;
+
+      const sendQuery = (query: string) => {
+        window.dispatchEvent(new CustomEvent(KQL_INJECT_EVENT, { detail: query }));
+        document.querySelector(`[${KQL_ROOT_ATTRIBUTE}]`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+
+      window.addEventListener(KQL_READY_EVENT, () => {
+        isEditorReady = true;
+        if (pendingQuery !== null) { sendQuery(pendingQuery); pendingQuery = null; }
+      });
+
       document.getElementById('kql-examples')?.addEventListener('click', (e) => {
         const pill = (e.target as HTMLElement).closest('.kql-example-pill') as HTMLElement | null;
         if (!pill) return;
         const query = pill.dataset.query;
         if (!query) return;
 
-        // Dispatch event to BciKql React island
-        window.dispatchEvent(new CustomEvent('kql:inject', { detail: query }));
-
-        // Scroll the KQL component into view
-        const kqlEl = document.querySelector('[data-kql-root]') || pill.closest('.mt-12')?.querySelector('.glass, [style]');
-        if (kqlEl) kqlEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (isEditorReady) sendQuery(query);
+        else pendingQuery = query;
 
         // Brief visual feedback on the pill
         pill.style.borderColor = 'var(--color-accent-primary)';

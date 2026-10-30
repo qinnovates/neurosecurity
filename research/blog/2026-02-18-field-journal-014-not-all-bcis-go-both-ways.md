@@ -17,7 +17,7 @@ fact_check_notes:
 
 **Date:** 2026-02-18
 **Source:** Conversation with Claude about BCI directionality
-**Derivation details:** [Entry 60 — BCI Limits Equation Synthesis](QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis) (Part 1)
+**Derivation details:** [Entry 60 — BCI Limits Equation Synthesis](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis) (Part 1)
 
 I assumed most BCIs were unidirectional — either read or write. Turns out that's mostly true, but the exceptions matter a lot for security.
 

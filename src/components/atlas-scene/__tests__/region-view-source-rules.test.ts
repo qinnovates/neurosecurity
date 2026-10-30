@@ -55,16 +55,10 @@ describe('the 3D view on other pages: what may import what', () => {
       "import { useEffect, useRef, useState, type ComponentType } from 'react';",
       "import type { LimitId, LimitSentence } from '@/lib/anatomy/limits-copy';",
       "import { MOUNT_COPY } from '@/lib/anatomy/mount-copy';",
-      "import type { IndexReviewState } from '@/lib/anatomy/anatomy-index-types';",
       "import type { Lens } from '@/lib/atlas-explorer/lens-state';",
       "import type { RegionViewPanelProps } from './RegionViewPanel';",
-      "import ReviewMark from './ReviewMark';",
       "import './region-view-mount.css';",
     ]);
-    // The mark the button shows must not pull the limit table, the review ledger parser or three.js into a first load: type imports only.
-    const reviewMark = read(path.join(SCENE_DIRECTORY, 'ReviewMark.tsx'));
-    // Its own small stylesheet comes with it, so the mark is styled wherever it renders, before the view's stylesheets load.
-    expect(reviewMark.match(/^import .*$/gm)).toEqual(["import type { IndexReviewState } from '@/lib/anatomy/anatomy-index-types';", "import './review-mark.css';"]);
   });
 
   it('adds the view\'s stylesheets by address, so no page links them on its first load', () => {
@@ -114,11 +108,10 @@ describe('the 3D view on other pages: what may import what', () => {
 
   it('builds a technique page with the sentence for a picture with nothing coloured, from the module that chooses it as the view does', () => {
     const page = read('src/pages/atlas/tara/[id].astro');
-    expect(page).toContain("import { readLinksReview, readUncolouredLimit } from '@/components/atlas-scene/build-technique-colouring';");
-    expect(page.match(/regionViewLinksReview=\{readLinksReview\(threat\.id\)\}/g)).toHaveLength(1);
+    expect(page).toContain("import { readUncolouredLimit } from '@/components/atlas-scene/build-technique-colouring';");
     expect(page.match(/regionViewNothingColoured=\{readUncolouredLimit\(threat\.id\)\}/g)).toHaveLength(1);
     const buildModule = read(path.join(SCENE_DIRECTORY, 'build-technique-colouring.ts'));
-    expect(buildModule.match(/^export .*$/gm)).toEqual(['export function readUncolouredLimit(techniqueId: string): LimitSentence | null {', 'export function readLinksReview(techniqueId: string): IndexReviewState | null {']);
+    expect(buildModule.match(/^export .*$/gm)).toEqual(['export function readUncolouredLimit(techniqueId: string): LimitSentence | null {']);
     expect(buildModule).toContain("limitsForUncolouredTechnique(COLOURING_SOURCE, { kind: 'technique', techniqueId })");
     // No client file may import a build-time module: each leads to the anatomy loader.
     const clientFiles = [...listSourceFiles('src/components'), ...listSourceFiles('src/lib')].filter((filePath) => !filePath.includes('__tests__') && !filePath.endsWith('.astro'));
@@ -135,7 +128,7 @@ describe('the 3D view on other pages: what may import what', () => {
     const mount = read(path.join(SCENE_DIRECTORY, 'RegionViewMount.tsx'));
     // Text between tags, apart from the two button labels: every sentence comes from MOUNT_COPY.
     expect(mount.match(/<span[^>]*>[^<{]+<\/span>/g)).toBeNull();
-    expect([...new Set(mount.match(/MOUNT_COPY\.[a-z_]+/g))].sort()).toEqual(['MOUNT_COPY.ask', 'MOUNT_COPY.choose_in_list', 'MOUNT_COPY.failed', 'MOUNT_COPY.links_review', 'MOUNT_COPY.loading']);
+    expect([...new Set(mount.match(/MOUNT_COPY\.[a-z_]+/g))].sort()).toEqual(['MOUNT_COPY.ask', 'MOUNT_COPY.choose_in_list', 'MOUNT_COPY.failed', 'MOUNT_COPY.loading']);
     // The one sentence about the atlas that the button shows is a limit sentence the page was built with.
     expect(mount).toContain('{nothingColoured.text}');
   });

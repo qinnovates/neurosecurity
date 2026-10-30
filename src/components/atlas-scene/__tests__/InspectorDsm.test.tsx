@@ -24,9 +24,8 @@ describe('the inspector\'s DSM-5-TR references', () => {
     }
   });
 
-  it('marks references that arrive through an AI-drafted link, and lists each with what carries it once opened', () => {
+  it('lists each reference with what carries it once opened', () => {
     const section = renderFor('pfc');
-    expect(section.querySelector('[data-ai-drafted="true"]')?.textContent).toBe('AI-drafted, unreviewed');
     expect(section.querySelector('[data-dsm-code]')).toBeNull();
     for (const button of section.querySelectorAll<HTMLButtonElement>('.atlas-disclosure-button')) fireEvent.click(button);
     expect([...section.querySelectorAll('[data-dsm-code]')].map((item) => item.textContent)).toEqual([
@@ -35,14 +34,8 @@ describe('the inspector\'s DSM-5-TR references', () => {
     expect(matchesLimitTemplate('dsm_via_pathways', section.querySelector('[data-limit-id="dsm_via_pathways"]')?.textContent ?? '')).toBe(true);
   });
 
-  it('marks the pathway group as AI-drafted and unreviewed wherever a pathway reaches the region, with or without a linked technique', () => {
-    for (const regionId of ['pfc', 'm1']) {
-      const heading = renderFor(regionId).querySelector('[data-dsm-group="pathways"]');
-      expect(heading?.querySelector('[data-ai-drafted="true"]')?.textContent).toBe('AI-drafted, unreviewed');
-      cleanup();
-    }
+  it('says under the pathway group, on the real data, that no person has reviewed the pathway file\'s references', () => {
     const real = renderFor('cervical_cord', loadRealModel());
-    expect(real.querySelector('[data-dsm-group="pathways"] [data-ai-drafted="true"]')?.textContent).toBe('AI-drafted, unreviewed');
     expect(real.querySelector('[data-limit-id="dsm_via_pathways"]')?.textContent).toContain('No person has reviewed the pathway file\'s references, and an AI matched the pathway\'s region names to this region.');
   });
 
@@ -54,10 +47,9 @@ describe('the inspector\'s DSM-5-TR references', () => {
     expect(renderFor('pfc').querySelector('[data-dsm-group="pathways"]')?.textContent).toContain('Through pathways (1 reference to 1 code)');
   });
 
-  it('says so in words when nothing arrives, and shows no mark', () => {
+  it('says so in words when nothing arrives', () => {
     const section = renderFor('cord');
     expect(section.querySelectorAll('[data-limit-id="dsm_none"]')).toHaveLength(2);
-    expect(section.querySelector('[data-ai-drafted]')).toBeNull();
   });
 
   it('on the real data, words no heading or sentence of its own as a cause, an outcome or a diagnosis', () => {

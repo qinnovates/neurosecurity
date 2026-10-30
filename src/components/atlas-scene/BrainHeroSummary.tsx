@@ -5,7 +5,6 @@ import { rankRegionRisks, techniquePagePath } from '@/lib/atlas-explorer/hero-ri
 import type { Lens } from '@/lib/atlas-explorer/lens-state';
 import { buildRegionDetail, type DetailTechnique, type RegionDetail } from '@/lib/atlas-explorer/region-detail';
 import { buildRegionDeepLink } from './atlas-deep-link';
-import ReviewMark from './ReviewMark';
 
 interface Props {
   model: ExplorerModel;
@@ -21,7 +20,6 @@ function RiskItem({ technique, isInCatalog }: { technique: DetailTechnique; isIn
       {isInCatalog ? <a href={techniquePagePath(technique.id)}>{technique.name}</a> : <span className="brain-hero-risk-name">{technique.name}</span>}
       <span className="atlas-id">{technique.id}</span>
       {technique.nissSeverity !== null && <span className="brain-hero-sev" data-severity={technique.nissSeverity}>{technique.nissSeverity}</span>}
-      <ReviewMark state={technique.reviewState} />
     </li>
   );
 }
@@ -83,7 +81,7 @@ export default function BrainHeroSummary({ model, regionId, lens }: Props) {
   const drafted = model.linksByRegion.get(region.id) ?? [];
   return (
     <aside className="brain-hero-card" data-hero-card="selected" data-hero-selected={region.id} aria-labelledby="brain-hero-card-heading">
-      <h3 className="brain-hero-card-heading" id="brain-hero-card-heading">{region.name} <ReviewMark state={region.review_state} /></h3>
+      <h3 className="brain-hero-card-heading" id="brain-hero-card-heading">{region.name}</h3>
       {detail.description !== null && <p className="brain-hero-card-text">{detail.description}</p>}
       <dl className="brain-hero-card-facts">
         <div><dt>{HERO_COPY.selected_bands}</dt><dd>{nameBands(model, region.band_ids)}</dd></div>

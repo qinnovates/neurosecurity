@@ -226,7 +226,8 @@
       "processing_pipeline": "Sensory input (all modalities) \u2192 Posterior cortex \u2192 PFC integration \u2192 Working memory maintenance (persistent firing) \u2192 Decision computation (vmPFC value signals + dlPFC rule maintenance) \u2192 Motor output via PMC/SMA \u2192 M1 execution. Feedback loops: PFC \u2194 Basal ganglia (action selection), PFC \u2194 Amygdala (emotional regulation), PFC \u2194 Hippocampus (memory retrieval).",
       "signal_type": "Integrative \u2014 sustained firing patterns encoding rules, goals, and abstract representations",
       "bci_relevance_detail": "PFC signals encode abstract intentions and decisions, making it valuable for high-level BCI control (selecting between options, error detection). However, PFC signals are noisier and more variable than motor cortex signals, making reliable decoding harder.",
-      "clinical_notes": "PFC damage \u2192 executive dysfunction: poor planning, impulsivity, flat affect, social inappropriateness. ADHD linked to PFC hypofunction (dopamine deficit in dlPFC). Depression linked to vmPFC/OFC dysfunction. Schizophrenia: dlPFC working memory deficits."
+      "clinical_notes": "PFC damage \u2192 executive dysfunction: poor planning, impulsivity, flat affect, social inappropriateness. ADHD linked to PFC hypofunction (dopamine deficit in dlPFC). Depression linked to vmPFC/OFC dysfunction. Schizophrenia: dlPFC working memory deficits.",
+      "highlight_hue": 0
     },
     {
       "id": "m1",
@@ -295,7 +296,8 @@
       "processing_pipeline": "PFC (intention) \u2192 SMA (sequence planning) \u2192 PMC (spatial planning) \u2192 M1 Layer 5 (execution) \u2192 Corticospinal tract \u2192 Pyramidal decussation (crossing in medulla) \u2192 Lateral corticospinal tract \u2192 Spinal motor neuron \u2192 Neuromuscular junction (acetylcholine) \u2192 Muscle contraction",
       "signal_type": "Motor \u2014 efferent electrical signals encoding movement direction and force",
       "bci_relevance_detail": "Motor BCIs decode intended movement from M1 neural activity. Utah arrays in the hand knob area can decode individual finger movements. Population vector decoding: each neuron's firing rate \u00d7 preferred direction, summed across population = decoded movement. BrainGate, Neuralink, and Blackrock focus here.",
-      "clinical_notes": "Stroke in M1 causes contralateral hemiparesis/hemiplegia. ALS progressively destroys motor neurons, making M1 a key BCI target (locked-in patients). Damage to left M1 affects right body and vice versa (pyramidal decussation)."
+      "clinical_notes": "Stroke in M1 causes contralateral hemiparesis/hemiplegia. ALS progressively destroys motor neurons, making M1 a key BCI target (locked-in patients). Damage to left M1 affects right body and vice versa (pyramidal decussation).",
+      "highlight_hue": 218
     },
     {
       "id": "v1",
@@ -364,7 +366,8 @@
       "processing_pipeline": "Photons \u2192 Retina (rods/cones) \u2192 Retinal ganglion cells \u2192 Optic nerve \u2192 Optic chiasm (partial crossing) \u2192 LGN (thalamus) \u2192 V1 Layer 4C \u2192 V1 Layers 2/3 \u2192 V2 \u2192 Ventral stream (V4 \u2192 IT: object recognition, 'what') + Dorsal stream (V3 \u2192 MT/V5 \u2192 PPC: motion/spatial, 'where')",
       "signal_type": "Visual \u2014 electromagnetic radiation (380-740nm wavelength)",
       "bci_relevance_detail": "Visual BCIs (cortical prostheses like Orion/PRIMA) stimulate V1 directly to create phosphenes. Resolution limited by electrode spacing vs. cortical magnification factor. Current devices produce ~600 phosphenes, far below the ~1 million needed for natural vision.",
-      "clinical_notes": "Damage to V1 causes cortical blindness. Damage to specific areas causes scotomas (blind spots). Lesions in ventral stream \u2192 visual agnosia (can't recognize objects). Lesions in dorsal stream \u2192 optic ataxia (can't reach for objects)."
+      "clinical_notes": "Damage to V1 causes cortical blindness. Damage to specific areas causes scotomas (blind spots). Lesions in ventral stream \u2192 visual agnosia (can't recognize objects). Lesions in dorsal stream \u2192 optic ataxia (can't reach for objects).",
+      "highlight_hue": 76
     },
     {
       "id": "a1",
@@ -428,7 +431,8 @@
       "processing_pipeline": "Sound waves \u2192 Eardrum \u2192 Ossicles (malleus/incus/stapes) \u2192 Cochlea (hair cells on basilar membrane) \u2192 Auditory nerve \u2192 Cochlear nucleus \u2192 Superior olive (binaural localization) \u2192 Inferior colliculus \u2192 MGN (thalamus) \u2192 A1 \u2192 Belt \u2192 Parabelt \u2192 Ventral stream (sound identity) + Dorsal stream (sound location)",
       "signal_type": "Auditory \u2014 mechanical pressure waves (20Hz-20kHz)",
       "bci_relevance_detail": "Cochlear implants bypass damaged hair cells, directly stimulating the auditory nerve with ~22 electrode channels (vs. 3,500 hair cells). Auditory BCIs for brainstem-level deafness stimulate the cochlear nucleus directly. Current challenge: frequency resolution far below natural hearing.",
-      "clinical_notes": "Damage to A1 causes cortical deafness. Wernicke's area (adjacent) processes speech comprehension. Tinnitus linked to reorganization of tonotopic map after hearing loss \u2014 phantom signals from deafferented frequency regions."
+      "clinical_notes": "Damage to A1 causes cortical deafness. Wernicke's area (adjacent) processes speech comprehension. Tinnitus linked to reorganization of tonotopic map after hearing loss \u2014 phantom signals from deafferented frequency regions.",
+      "highlight_hue": 294
     },
     {
       "id": "broca",
@@ -488,7 +492,8 @@
       "processing_pipeline": "Conceptual intention (PFC) \u2192 Semantic formulation (Wernicke's area) \u2192 Arcuate fasciculus (white matter tract connecting Wernicke's \u2192 Broca's) \u2192 Grammatical structuring (BA 45) \u2192 Articulatory motor planning (BA 44) \u2192 M1 face/mouth area \u2192 Cranial nerves VII, X, XII \u2192 Lips, tongue, larynx, jaw \u2192 Speech output",
       "signal_type": "Language production \u2014 syntactic structuring, articulatory motor programming",
       "bci_relevance_detail": "Speech BCIs aim to decode speech intentions from Broca's area activity before motor execution. Recent work (Willett et al. 2023, Nature) decoded attempted speech at 62 words/min from a paralyzed participant by recording from the ventral premotor cortex near Broca's area. This is among the most promising BCI applications for locked-in patients.",
-      "clinical_notes": "Broca's aphasia: damage produces telegraphic speech \u2014 patient understands language but can't produce fluent sentences. Says 'want... coffee... now' instead of 'I would like some coffee please.' Comprehension relatively preserved. Frustration is common because the patient knows what they want to say but can't produce it."
+      "clinical_notes": "Broca's aphasia: damage produces telegraphic speech \u2014 patient understands language but can't produce fluent sentences. Says 'want... coffee... now' instead of 'I would like some coffee please.' Comprehension relatively preserved. Frustration is common because the patient knows what they want to say but can't produce it.",
+      "highlight_hue": 152
     },
     {
       "id": "wernicke",
@@ -548,7 +553,8 @@
       "processing_pipeline": "Auditory input \u2192 A1 (raw sound) \u2192 Auditory association cortex (phoneme extraction) \u2192 Wernicke's area (word recognition, semantic retrieval) \u2192 Angular gyrus (cross-modal integration) \u2192 Arcuate fasciculus \u2192 Broca's area (if speaking). READING: Visual cortex \u2192 Visual Word Form Area (VWFA, fusiform gyrus) \u2192 Wernicke's area (meaning extraction).",
       "signal_type": "Language comprehension \u2014 phoneme discrimination, semantic retrieval, sentence parsing",
       "bci_relevance_detail": "Wernicke's area signals contain semantic content \u2014 the meaning behind words. Decoding semantic representations could enable BCIs that understand what the user is thinking about (not just motor intentions). Current research is in early stages; semantic decoding is harder than motor decoding.",
-      "clinical_notes": "Wernicke's aphasia: fluent but meaningless speech \u2014 patient speaks in grammatically correct but nonsensical sentences ('the slithy toves did gyre and gimble'). Cannot comprehend spoken or written language. Often unaware of their deficit (anosognosia). Conduction aphasia: arcuate fasciculus damage \u2192 can understand and speak but cannot repeat phrases."
+      "clinical_notes": "Wernicke's aphasia: fluent but meaningless speech \u2014 patient speaks in grammatically correct but nonsensical sentences ('the slithy toves did gyre and gimble'). Cannot comprehend spoken or written language. Often unaware of their deficit (anosognosia). Conduction aphasia: arcuate fasciculus damage \u2192 can understand and speak but cannot repeat phrases.",
+      "highlight_hue": 9
     },
     {
       "id": "pmc",
@@ -605,7 +611,8 @@
       "processing_pipeline": "Visual target (PPC spatial processing) \u2192 PMd (reach trajectory computation) + Object recognition (ventral stream) \u2192 PMv (grasp configuration) \u2192 M1 (execution) \u2192 Corticospinal tract \u2192 Muscles. MIRROR SYSTEM: Observed action \u2192 PMv mirror neurons \u2192 Action understanding without executing.",
       "signal_type": "Motor planning \u2014 spatial trajectory, grasp configuration, sensorimotor transformation",
       "bci_relevance_detail": "PMC is a strong candidate for motor BCIs because it encodes movement intention before execution \u2014 giving the decoder a head start. PMd signals predict reach direction 100-200ms before M1 activation. Combined PMC+M1 recording improves BCI decode accuracy.",
-      "clinical_notes": "PMC lesions \u2192 ideomotor apraxia: knows what to do but can't translate intention to action. Can describe how to use a hammer but fumbles when trying. Mirror neuron dysfunction hypothesized in autism spectrum disorder (difficulty understanding others' intentions), though this remains debated."
+      "clinical_notes": "PMC lesions \u2192 ideomotor apraxia: knows what to do but can't translate intention to action. Can describe how to use a hammer but fumbles when trying. Mirror neuron dysfunction hypothesized in autism spectrum disorder (difficulty understanding others' intentions), though this remains debated.",
+      "highlight_hue": 227
     },
     {
       "id": "sma",
@@ -657,7 +664,8 @@
       "processing_pipeline": "Internal motor intention \u2192 Pre-SMA (action selection, sequence planning) \u2192 SMA proper (motor program assembly, timing) \u2192 M1 (execution). Readiness potential: Pre-SMA/SMA \u2192 builds activity 1-2 seconds before movement \u2192 Peaks at M1 activation \u2192 Movement onset. SEQUENCE LEARNING: initial (cortical/conscious) \u2192 practiced (SMA-basal ganglia loop) \u2192 automatic (cerebellar).",
       "signal_type": "Motor sequencing \u2014 readiness potential, internally generated movement timing",
       "bci_relevance_detail": "The readiness potential from SMA is one of the earliest detectable signals of movement intention, making it valuable for BCIs that need to anticipate movement. SMA activity is used in EEG-based BCIs for detecting self-initiated movement vs. rest states.",
-      "clinical_notes": "SMA lesions \u2192 motor neglect (failure to use contralateral limbs despite intact strength). Alien hand syndrome (medial frontal variant): hand performs purposeful but unintended actions. SMA seizures: bilateral asymmetric tonic posturing, fencing posture, preserved consciousness."
+      "clinical_notes": "SMA lesions \u2192 motor neglect (failure to use contralateral limbs despite intact strength). Alien hand syndrome (medial frontal variant): hand performs purposeful but unintended actions. SMA seizures: bilateral asymmetric tonic posturing, fencing posture, preserved consciousness.",
+      "highlight_hue": 85
     },
     {
       "id": "ppc",
@@ -727,7 +735,8 @@
       "processing_pipeline": "Visual input (V1 \u2192 Dorsal stream) \u2192 PPC spatial map (MIP: reach targets, LIP: saccade targets, AIP: grasp targets) \u2192 Coordinate transformation (eye-centered \u2192 hand-centered) \u2192 PMC/M1 (execution). ATTENTION: Sensory input \u2192 IPL (salience detection) \u2192 Attentional spotlight \u2192 Enhanced processing of attended location \u2192 Biased competition in visual cortex.",
       "signal_type": "Spatial computing \u2014 coordinate transformation, attentional selection, body schema",
       "bci_relevance_detail": "PPC encodes movement intentions in a cognitive format (goals rather than muscle commands), making it attractive for high-level BCIs. PPC recordings can decode intended reach targets even in paralyzed patients who cannot actually reach. Andersen lab (Caltech) demonstrated thought-controlled cursor from PPC signals.",
-      "clinical_notes": "Right PPC damage \u2192 left hemispatial neglect (ignores left side of space \u2014 not blind, but unaware). Optic ataxia: can see objects but can't reach accurately for them (impaired visuomotor transformation). Balint syndrome (bilateral PPC): can only perceive one object at a time (simultanagnosia), can't direct gaze voluntarily."
+      "clinical_notes": "Right PPC damage \u2192 left hemispatial neglect (ignores left side of space \u2014 not blind, but unaware). Optic ataxia: can see objects but can't reach accurately for them (impaired visuomotor transformation). Balint syndrome (bilateral PPC): can only perceive one object at a time (simultanagnosia), can't direct gaze voluntarily.",
+      "highlight_hue": 303
     },
     {
       "id": "s1_cortex",
@@ -795,7 +804,8 @@
       "processing_pipeline": "Skin receptors (Meissner/Merkel/Pacinian/Ruffini) \u2192 Peripheral nerve \u2192 Dorsal root ganglion \u2192 Spinal cord dorsal column \u2192 Medulla (nucleus gracilis/cuneatus) \u2192 Medial lemniscus \u2192 VPL thalamus \u2192 S1 (Areas 3a/3b \u2192 1 \u2192 2) \u2192 S2 (bilateral integration) \u2192 PPC (spatial awareness)",
       "signal_type": "Somatosensory \u2014 mechanical deformation, thermal, nociceptive",
       "bci_relevance_detail": "Somatosensory BCIs provide artificial touch feedback for prosthetic limbs. Intracortical microstimulation of S1 can create naturalistic touch sensations. Key challenge: matching the receptor-type specificity (pressure vs. vibration vs. temperature) with electrical stimulation patterns.",
-      "clinical_notes": "Damage to S1 causes loss of fine touch discrimination (astereognosis). Phantom limb pain occurs from cortical reorganization \u2014 neighboring body map areas invade the deafferented region. The homunculus can reorganize after amputation within weeks."
+      "clinical_notes": "Damage to S1 causes loss of fine touch discrimination (astereognosis). Phantom limb pain occurs from cortical reorganization \u2014 neighboring body map areas invade the deafferented region. The homunculus can reorganize after amputation within weeks.",
+      "highlight_hue": 161
     },
     {
       "id": "hippocampus",
@@ -860,7 +870,8 @@
       "processing_pipeline": "Experience \u2192 Sensory cortices \u2192 Perirhinal/Parahippocampal cortex \u2192 Entorhinal Cortex (grid cells) \u2192 DG (pattern separation) \u2192 CA3 (pattern completion) \u2192 CA1 (comparison) \u2192 Subiculum \u2192 Neocortex (long-term storage). Consolidation: during sleep (sharp-wave ripples), CA3 replays memories to neocortex for permanent storage.",
       "signal_type": "Memory encoding \u2014 theta oscillations (4-8Hz) during encoding, sharp-wave ripples (80-120Hz) during consolidation",
       "bci_relevance_detail": "Memory prostheses aim to restore hippocampal function by recording CA3 activity patterns and replaying them to CA1. DARPA RAM program demonstrated proof-of-concept in epilepsy patients. Closed-loop stimulation during theta can enhance memory encoding by ~15-25%.",
-      "clinical_notes": "Bilateral hippocampal damage \u2192 anterograde amnesia (can't form new memories; patient H.M.). Alzheimer's disease attacks the hippocampus first \u2014 early symptom is memory loss. Chronic stress shrinks hippocampal dendrites via cortisol. PTSD: hippocampus fails to contextualize fear memories, so they replay inappropriately."
+      "clinical_notes": "Bilateral hippocampal damage \u2192 anterograde amnesia (can't form new memories; patient H.M.). Alzheimer's disease attacks the hippocampus first \u2014 early symptom is memory loss. Chronic stress shrinks hippocampal dendrites via cortisol. PTSD: hippocampus fails to contextualize fear memories, so they replay inappropriately.",
+      "highlight_hue": 19
     },
     {
       "id": "bla",
@@ -917,7 +928,8 @@
       "processing_pipeline": "Threat stimulus \u2192 Thalamus \u2192 LOW ROAD: direct to BLA lateral nucleus (12ms, crude but fast) + HIGH ROAD: via sensory cortex to BLA (30-40ms, detailed analysis) \u2192 Central Amygdala (CeA) \u2192 Hypothalamus (stress hormones) + Periaqueductal gray (freezing) + Nucleus basalis (arousal) + Locus coeruleus (norepinephrine) + Brainstem (startle reflex)",
       "signal_type": "Emotional valence \u2014 rapid threat assessment, fear/reward learning signals",
       "bci_relevance_detail": "DBS of the amygdala has been explored for treatment-resistant PTSD and anxiety. Key security concern: BCI signals near the amygdala could inadvertently trigger fear responses or suppress threat detection. Amygdala activity is a proposed biomarker for emotional state decoding in affective BCIs.",
-      "clinical_notes": "Bilateral amygdala damage \u2192 inability to recognize fear in faces, poor threat assessment (patient S.M.). PTSD: amygdala hyperactivation \u2014 threat detector stuck on high. Anxiety disorders: lowered amygdala activation threshold. Psychopathy: reduced amygdala response to distress cues."
+      "clinical_notes": "Bilateral amygdala damage \u2192 inability to recognize fear in faces, poor threat assessment (patient S.M.). PTSD: amygdala hyperactivation \u2014 threat detector stuck on high. Anxiety disorders: lowered amygdala activation threshold. Psychopathy: reduced amygdala response to distress cues.",
+      "highlight_hue": 237
     },
     {
       "id": "insula",
@@ -980,7 +992,8 @@
       "processing_pipeline": "Internal body state (heart, gut, lungs, muscles) \u2192 Vagus nerve + spinal afferents \u2192 Brainstem nuclei (NTS, parabrachial) \u2192 Thalamus (VMpo, VMb) \u2192 Posterior insula (raw interoceptive map) \u2192 Anterior insula (integrated feeling state + prediction of future body states) \u2192 ACC/PFC (conscious awareness and decision-making based on body signals).",
       "signal_type": "Interoceptive \u2014 internal body state mapping, subjective feeling construction",
       "bci_relevance_detail": "Insular activity is a key target for affective BCIs \u2014 decoding emotional states from interoceptive processing. Insular stimulation during epilepsy surgery produces vivid visceral sensations (nausea, warmth, tingling). Security concern: disrupting insular processing could alter body awareness and emotional experience.",
-      "clinical_notes": "Insular stroke \u2192 loss of body awareness, inability to recognize emotions. Anterior insula damage \u2192 loss of disgust response, empathy deficits. Addiction: insula lesions can eliminate cigarette cravings instantly (suggesting insula maintains interoceptive urges). Anxiety disorders: insula hyperactivation amplifies body signals into threat."
+      "clinical_notes": "Insular stroke \u2192 loss of body awareness, inability to recognize emotions. Anterior insula damage \u2192 loss of disgust response, empathy deficits. Addiction: insula lesions can eliminate cigarette cravings instantly (suggesting insula maintains interoceptive urges). Anxiety disorders: insula hyperactivation amplifies body signals into threat.",
+      "highlight_hue": 95
     },
     {
       "id": "acc",
@@ -1041,7 +1054,8 @@
       "processing_pipeline": "Response conflict (competing responses active simultaneously) \u2192 dACC detects conflict (ERN/theta oscillations at 200ms post-response) \u2192 Signals dlPFC to increase top-down control \u2192 dlPFC adjusts attention/inhibition \u2192 Reduced conflict on next trial. PAIN pathway: Nociceptive input \u2192 Thalamus \u2192 dACC (suffering/unpleasantness component, distinct from S1 sensory-discriminative component).",
       "signal_type": "Conflict/error monitoring \u2014 theta oscillations (4-8Hz), error-related negativity (ERN)",
       "bci_relevance_detail": "ACC signals can be used as error detection in BCIs \u2014 when the user's intended action doesn't match the decoded output, the ACC generates an error signal that can be used to correct the decoder in real-time. DBS of sgACC is an experimental treatment for treatment-resistant depression (Brodmann area 25 DBS).",
-      "clinical_notes": "Depression: sgACC hyperactivity (rumination, excessive self-monitoring). OCD: dACC hyperactivity (persistent error signal \u2014 'something is wrong' feeling that won't resolve). Anterior cingulotomy (lesioning ACC) is a last-resort treatment for intractable OCD and chronic pain. Akinetic mutism: bilateral ACC damage \u2192 loss of motivation to speak or move despite intact motor ability."
+      "clinical_notes": "Depression: sgACC hyperactivity (rumination, excessive self-monitoring). OCD: dACC hyperactivity (persistent error signal \u2014 'something is wrong' feeling that won't resolve). Anterior cingulotomy (lesioning ACC) is a last-resort treatment for intractable OCD and chronic pain. Akinetic mutism: bilateral ACC damage \u2192 loss of motivation to speak or move despite intact motor ability.",
+      "highlight_hue": 313
     },
     {
       "id": "cingulate",
@@ -1101,7 +1115,8 @@
       "processing_pipeline": "Rest/mind-wandering \u2192 PCC activates (DMN hub) \u2192 Integrates hippocampus (memory), mPFC (self-reference), angular gyrus (semantic) \u2192 Internal mentation. TASK ONSET: External stimulus \u2192 PCC deactivates \u2192 Dorsal attention network activates \u2192 Focused processing. NAVIGATION: Spatial cues \u2192 Retrosplenial cortex (coordinate transformation) \u2192 Hippocampus (cognitive map) \u2192 PPC (spatial planning).",
       "signal_type": "Default mode \u2014 self-referential processing, internal mentation, attention switching",
       "bci_relevance_detail": "PCC/DMN deactivation is a reliable neural marker of attention and engagement \u2014 useful for BCIs that monitor cognitive state. Neurofeedback targeting PCC activity has been explored for meditation training and ADHD. Disruption of DMN is associated with psychedelic states and some psychiatric conditions.",
-      "clinical_notes": "PCC is among the first regions affected in Alzheimer's disease \u2014 shows hypometabolism on PET years before symptoms. Damage to retrosplenial cortex \u2192 topographical disorientation (lost in familiar places). The precuneus is one of the last brain regions to lose activity under anesthesia and one of the first to recover \u2014 possibly related to consciousness itself."
+      "clinical_notes": "PCC is among the first regions affected in Alzheimer's disease \u2014 shows hypometabolism on PET years before symptoms. Damage to retrosplenial cortex \u2192 topographical disorientation (lost in familiar places). The precuneus is one of the last brain regions to lose activity under anesthesia and one of the first to recover \u2014 possibly related to consciousness itself.",
+      "highlight_hue": 171
     },
     {
       "id": "striatum",
@@ -1164,7 +1179,8 @@
       "processing_pipeline": "Cortex (action proposals via glutamate) \u2192 Striatum (MSNs integrate cortical votes) \u2192 DIRECT: D1-MSNs \u2192 inhibit GPi \u2192 disinhibit thalamus \u2192 cortex \u2192 GO. INDIRECT: D2-MSNs \u2192 inhibit GPe \u2192 disinhibit STN \u2192 excite GPi \u2192 inhibit thalamus \u2192 STOP. Dopamine from SNc/VTA modulates the balance: D1 activation (GO) + D2 inhibition (less STOP) = net facilitation of movement.",
       "signal_type": "Action selection \u2014 integration of cortical inputs, dopamine-modulated output via direct/indirect pathways",
       "bci_relevance_detail": "DBS of the striatum (specifically STN or GPi) is the primary treatment for advanced Parkinson's disease. Closed-loop DBS systems detect pathological beta oscillations (13-30Hz) in the striatum and deliver stimulation only when needed. Security: disrupting striatal dopamine signaling could alter reward processing (addiction) or motor control (dyskinesia).",
-      "clinical_notes": "Parkinson's disease: loss of dopamine neurons in SNc \u2192 striatal dopamine depletion \u2192 inability to initiate movement (bradykinesia), rigidity, tremor. Huntington's disease: degeneration of striatal MSNs \u2192 involuntary movements (chorea) + cognitive decline. OCD: hyperactive caudate \u2192 repetitive action loops. Addiction: hijacked NAc reward circuitry."
+      "clinical_notes": "Parkinson's disease: loss of dopamine neurons in SNc \u2192 striatal dopamine depletion \u2192 inability to initiate movement (bradykinesia), rigidity, tremor. Huntington's disease: degeneration of striatal MSNs \u2192 involuntary movements (chorea) + cognitive decline. OCD: hyperactive caudate \u2192 repetitive action loops. Addiction: hijacked NAc reward circuitry.",
+      "highlight_hue": 28
     },
     {
       "id": "gpi",
@@ -1217,7 +1233,8 @@
       "processing_pipeline": "RESTING STATE: GPi \u2192 tonic GABA inhibition \u2192 Thalamus silenced \u2192 No movement. DIRECT PATHWAY: Cortex \u2192 Striatum (D1-MSNs) \u2192 INHIBITS GPi \u2192 Thalamus released \u2192 Cortex activated \u2192 Selected movement executes. INDIRECT PATHWAY: Cortex \u2192 Striatum (D2-MSNs) \u2192 GPe \u2192 STN \u2192 EXCITES GPi \u2192 Thalamus more inhibited \u2192 Competing movements suppressed.",
       "signal_type": "Inhibitory gate \u2014 tonic GABAergic inhibition of thalamus, released by striatal direct pathway",
       "bci_relevance_detail": "DBS of the GPi is FDA-approved for Parkinson's disease (reduces rigidity and dyskinesia) and primary generalized dystonia. GPi-DBS works by disrupting pathological oscillatory patterns rather than simply inhibiting or exciting \u2014 the mechanism is still debated.",
-      "clinical_notes": "Parkinson's: GPi hyperactive (excess inhibition of thalamus \u2192 bradykinesia). Dystonia: GPi firing patterns become irregular \u2192 sustained muscle contractions. Hemiballismus: damage to STN \u2192 GPi loses excitatory input \u2192 thalamus disinhibited \u2192 wild flinging movements of contralateral limbs."
+      "clinical_notes": "Parkinson's: GPi hyperactive (excess inhibition of thalamus \u2192 bradykinesia). Dystonia: GPi firing patterns become irregular \u2192 sustained muscle contractions. Hemiballismus: damage to STN \u2192 GPi loses excitatory input \u2192 thalamus disinhibited \u2192 wild flinging movements of contralateral limbs.",
+      "highlight_hue": 246
     },
     {
       "id": "gpe",
@@ -1270,7 +1287,8 @@
       "processing_pipeline": "INDIRECT PATHWAY: Cortex \u2192 Striatum (D2-MSNs) \u2192 INHIBIT GPe prototypic neurons \u2192 STN released from inhibition \u2192 STN excites GPi \u2192 GPi increases thalamic inhibition \u2192 Movement suppressed. ARKYPALLIDAL: GPe arkypallidal neurons \u2192 Back to striatum \u2192 Reset ongoing activity \u2192 Action cancellation (stop signal).",
       "signal_type": "Inhibitory relay \u2014 GABAergic modulation of STN, striatal feedback via arkypallidal projection",
       "bci_relevance_detail": "GPe is not a common DBS target but is increasingly recognized as important for understanding basal ganglia computation. GPe-STN circuit dynamics generate pathological beta oscillations in Parkinson's \u2014 understanding this could improve closed-loop DBS algorithms.",
-      "clinical_notes": "GPe lesions \u2192 poorly characterized in isolation (rare). GPe dysfunction contributes to Parkinson's pathophysiology \u2014 loss of dopamine shifts balance toward indirect pathway dominance \u2192 GPe hypoactive \u2192 STN hyperactive \u2192 excessive movement suppression."
+      "clinical_notes": "GPe lesions \u2192 poorly characterized in isolation (rare). GPe dysfunction contributes to Parkinson's pathophysiology \u2014 loss of dopamine shifts balance toward indirect pathway dominance \u2192 GPe hypoactive \u2192 STN hyperactive \u2192 excessive movement suppression.",
+      "highlight_hue": 104
     },
     {
       "id": "stn",
@@ -1327,7 +1345,8 @@
       "processing_pipeline": "HYPERDIRECT PATHWAY (fastest, ~10ms): Cortex \u2192 STN (glutamate, excitatory) \u2192 GPi (broadly excited) \u2192 Thalamus (broadly inhibited) \u2192 ALL movements paused. Then DIRECT pathway (slower) releases the selected action. This creates a 'pause-then-select' mechanism: brake everything first, then release the intended movement. IN PARKINSON'S: dopamine loss \u2192 D2 indirect pathway overactive \u2192 GPe inhibited \u2192 STN hyperactive \u2192 excessive GPi activation \u2192 thalamus over-inhibited \u2192 bradykinesia.",
       "signal_type": "Excitatory brake \u2014 glutamatergic broad-stop signal, hyperdirect pathway terminus",
       "bci_relevance_detail": "STN-DBS is the gold standard surgical treatment for Parkinson's disease. High-frequency stimulation (~130Hz) disrupts pathological beta oscillations. Adaptive/closed-loop DBS detects beta power in real-time and stimulates only when needed \u2014 reduces side effects and extends battery life. The STN is the most studied DBS target in neuroscience.",
-      "clinical_notes": "STN-DBS for Parkinson's: reduces tremor, rigidity, and bradykinesia. Allows L-DOPA dose reduction by ~50%. Side effects: speech difficulty, impulsivity (limbic territory stimulation), mood changes. STN lesion \u2192 hemiballismus (violent flinging movements \u2014 loss of the 'brake'). Adaptive DBS (Medtronic Percept PC) now available clinically."
+      "clinical_notes": "STN-DBS for Parkinson's: reduces tremor, rigidity, and bradykinesia. Allows L-DOPA dose reduction by ~50%. Side effects: speech difficulty, impulsivity (limbic territory stimulation), mood changes. STN lesion \u2192 hemiballismus (violent flinging movements \u2014 loss of the 'brake'). Adaptive DBS (Medtronic Percept PC) now available clinically.",
+      "highlight_hue": 322
     },
     {
       "id": "substantia_nigra",
@@ -1380,7 +1399,8 @@
       "processing_pipeline": "SNc dopamine neurons \u2192 nigrostriatal pathway \u2192 Dorsal striatum (caudate/putamen). Firing pattern: TONIC (~4Hz baseline) maintains normal dopamine tone for movement. PHASIC BURST (reward prediction error): unexpected reward \u2192 burst \u2192 increased dopamine \u2192 reinforces preceding action. Expected reward absent \u2192 pause \u2192 decreased dopamine \u2192 weakens preceding action. This is the cellular mechanism of reinforcement learning.",
       "signal_type": "Dopaminergic \u2014 tonic baseline for motor function, phasic bursts for reward prediction error",
       "bci_relevance_detail": "Loss of SNc neurons is the defining pathology of Parkinson's. DBS downstream (STN/GPi) compensates but doesn't restore dopamine. Cell replacement therapies and optogenetic stimulation of remaining SNc neurons are active research areas. BCI security: disrupting SNc output mimics Parkinson's symptoms.",
-      "clinical_notes": "Parkinson's disease: >60% SNc neuron loss before symptoms appear. Progressive \u2014 no cure, DBS and L-DOPA are symptomatic treatments. L-DOPA is converted to dopamine by remaining neurons, compensating for loss. Over time, fewer neurons \u2192 L-DOPA dose increases \u2192 dyskinesia (involuntary movements from excess dopamine)."
+      "clinical_notes": "Parkinson's disease: >60% SNc neuron loss before symptoms appear. Progressive \u2014 no cure, DBS and L-DOPA are symptomatic treatments. L-DOPA is converted to dopamine by remaining neurons, compensating for loss. Over time, fewer neurons \u2192 L-DOPA dose increases \u2192 dyskinesia (involuntary movements from excess dopamine).",
+      "highlight_hue": 180
     },
     {
       "id": "vta",
@@ -1437,7 +1457,8 @@
       "processing_pipeline": "Reward stimulus \u2192 Lateral hypothalamus/PFC/amygdala \u2192 VTA dopamine neurons \u2192 MESOLIMBIC: VTA \u2192 NAc (motivation, wanting, reward salience) \u2192 PFC (decision-making about reward). MESOCORTICAL: VTA \u2192 PFC (working memory, cognitive control). Reward prediction error: Expected reward present \u2192 no change. Unexpected reward \u2192 burst \u2192 dopamine surge \u2192 'this was good, do it again.' Expected reward absent \u2192 pause \u2192 dopamine dip \u2192 'this was bad, avoid.'",
       "signal_type": "Dopaminergic \u2014 reward prediction error, motivation, incentive salience",
       "bci_relevance_detail": "VTA is the target of the mesolimbic pathway \u2014 the primary reward circuit. DBS of the VTA has been explored for treatment-resistant depression. Security concern: VTA stimulation could create artificial reward signals, potentially inducing compulsive device use or addiction-like states. This is one of the most ethically sensitive BCI targets.",
-      "clinical_notes": "Depression: VTA hypoactivity \u2192 reduced motivation and anhedonia. Addiction: VTA hijacked by drugs \u2192 natural rewards become insufficient. Schizophrenia (positive symptoms): excessive VTA dopamine in mesolimbic pathway. ADHD: insufficient VTA dopamine in mesocortical pathway to PFC."
+      "clinical_notes": "Depression: VTA hypoactivity \u2192 reduced motivation and anhedonia. Addiction: VTA hijacked by drugs \u2192 natural rewards become insufficient. Schizophrenia (positive symptoms): excessive VTA dopamine in mesolimbic pathway. ADHD: insufficient VTA dopamine in mesocortical pathway to PFC.",
+      "highlight_hue": 38
     },
     {
       "id": "thalamus",
@@ -1506,7 +1527,8 @@
       "processing_pipeline": "Sensory receptors \u2192 Sensory nerves \u2192 Specific thalamic nucleus (LGN/MGN/VPL) \u2192 Thalamocortical radiations \u2192 Layer 4 of corresponding cortical area. Gating mechanism: Reticular nucleus receives cortical feedback \u2192 inhibits thalamic relay neurons \u2192 blocks sensory input from reaching cortex (selective attention). During sleep: thalamic neurons enter burst mode \u2192 thalamocortical oscillations \u2192 sleep spindles (12-15Hz) = memory consolidation.",
       "signal_type": "Relay and gating \u2014 tonic mode (faithful transmission) vs. burst mode (rhythmic blocking)",
       "bci_relevance_detail": "DBS of the thalamus (VIM nucleus) is FDA-approved for essential tremor. Thalamic stimulation can modulate consciousness level in minimally conscious patients. Under review: the earlier statement that the thalamic gate is a critical security concern because disrupting thalamic relay could alter all conscious sensory experience simultaneously rested on a firewall analogy and needs a new justification or withdrawal.",
-      "clinical_notes": "Thalamic stroke \u2192 thalamic pain syndrome (severe, chronic pain from damaged sensory relay). Absence seizures: thalamocortical circuits enter pathological burst oscillation (3Hz spike-and-wave). Fatal familial insomnia: prion disease destroying thalamus \u2192 complete inability to sleep \u2192 death."
+      "clinical_notes": "Thalamic stroke \u2192 thalamic pain syndrome (severe, chronic pain from damaged sensory relay). Absence seizures: thalamocortical circuits enter pathological burst oscillation (3Hz spike-and-wave). Fatal familial insomnia: prion disease destroying thalamus \u2192 complete inability to sleep \u2192 death.",
+      "highlight_hue": 256
     },
     {
       "id": "hypothalamus",
@@ -1568,7 +1590,8 @@
       "processing_pipeline": "Blood chemistry sensors (glucose, osmolarity, temperature, hormones) \u2192 Hypothalamic nuclei \u2192 TWO output pathways: (1) Endocrine: hypothalamus \u2192 releasing hormones \u2192 pituitary gland \u2192 target endocrine glands (thyroid, adrenal, gonads) \u2192 systemic hormones. (2) Autonomic: hypothalamus \u2192 brainstem autonomic centers \u2192 sympathetic/parasympathetic nervous system \u2192 heart rate, blood pressure, digestion, pupils.",
       "signal_type": "Homeostatic \u2014 chemical sensing and neuroendocrine/autonomic output",
       "bci_relevance_detail": "DBS of the hypothalamus has been explored for cluster headaches (posterior hypothalamus) and obesity (ventromedial). Security concern: hypothalamic disruption via BCI could alter fundamental homeostatic set points \u2014 body temperature, hunger, sleep-wake cycles, stress response. This represents a particularly dangerous attack surface because effects are systemic and potentially life-threatening.",
-      "clinical_notes": "Hypothalamic tumors \u2192 precocious puberty, diabetes insipidus, thermoregulation failure. Narcolepsy: loss of orexin neurons in lateral hypothalamus. Cushing's disease: excess CRH from PVN \u2192 chronic cortisol elevation."
+      "clinical_notes": "Hypothalamic tumors \u2192 precocious puberty, diabetes insipidus, thermoregulation failure. Narcolepsy: loss of orexin neurons in lateral hypothalamus. Cushing's disease: excess CRH from PVN \u2192 chronic cortisol elevation.",
+      "highlight_hue": 114
     },
     {
       "id": "vim",
@@ -1618,7 +1641,8 @@
       "processing_pipeline": "Cerebellum (deep nuclei) \u2192 Superior cerebellar peduncle \u2192 Crosses midline (decussation) \u2192 VIM thalamus \u2192 Thalamocortical projections \u2192 M1/PMC (motor correction applied). IN TREMOR: pathological oscillation in cerebellum \u2194 VIM \u2194 cortex loop \u2192 rhythmic motor output \u2192 visible tremor. DBS at 130Hz disrupts this oscillation.",
       "signal_type": "Motor relay \u2014 cerebellar correction signals to cortex, pathological tremor oscillations when dysfunctional",
       "bci_relevance_detail": "VIM-DBS is the most established DBS target (FDA-approved 1997 for essential tremor). VIM-targeted focused ultrasound (Insightec Exablate Neuro) provides lesion-free tremor treatment. Closed-loop VIM stimulation triggered by tremor detection is an active research area.",
-      "clinical_notes": "Essential tremor: VIM-DBS reduces tremor by 60-90%. Focused ultrasound thalamotomy (FUS): non-invasive, one-session treatment, FDA-approved 2016. Risk: VIM is small (~4mm) and adjacent to sensory thalamus \u2014 miss by 1-2mm \u2192 numbness or paresthesias."
+      "clinical_notes": "Essential tremor: VIM-DBS reduces tremor by 60-90%. Focused ultrasound thalamotomy (FUS): non-invasive, one-session treatment, FDA-approved 2016. Risk: VIM is small (~4mm) and adjacent to sensory thalamus \u2014 miss by 1-2mm \u2192 numbness or paresthesias.",
+      "highlight_hue": 332
     },
     {
       "id": "ant",
@@ -1671,7 +1695,8 @@
       "processing_pipeline": "Hippocampus (memory encoding) \u2192 Fornix \u2192 Mammillary bodies \u2192 Mammillothalamic tract \u2192 ANT \u2192 Cingulate cortex (PCC) \u2192 Parahippocampal gyrus \u2192 back to Hippocampus (Papez circuit complete). HEAD DIRECTION: Vestibular input \u2192 Brainstem \u2192 Lateral mammillary nucleus \u2192 ANT (AD) \u2192 Retrosplenial cortex \u2192 Spatial orientation signal.",
       "signal_type": "Limbic relay \u2014 memory circuit (Papez circuit), head direction signals",
       "bci_relevance_detail": "ANT-DBS is FDA-approved for drug-resistant epilepsy (SANTE trial, Medtronic). Stimulation modulates seizure propagation through the limbic circuit. The ANT is also being explored as a target for memory enhancement \u2014 stimulation during specific memory phases may strengthen encoding.",
-      "clinical_notes": "ANT-DBS reduces seizure frequency by ~40-70% in drug-resistant epilepsy. Korsakoff syndrome (thiamine deficiency, often from alcoholism): mammillary body/ANT damage \u2192 severe anterograde amnesia and confabulation. ANT lesions in animal models impair spatial memory and navigation."
+      "clinical_notes": "ANT-DBS reduces seizure frequency by ~40-70% in drug-resistant epilepsy. Korsakoff syndrome (thiamine deficiency, often from alcoholism): mammillary body/ANT damage \u2192 severe anterograde amnesia and confabulation. ANT lesions in animal models impair spatial memory and navigation.",
+      "highlight_hue": 189
     },
     {
       "id": "cerebellum_cortex",
@@ -1733,7 +1758,8 @@
       "processing_pipeline": "Motor cortex (planned movement) \u2192 Pontine nuclei \u2192 Mossy fibers \u2192 Granule cells \u2192 Parallel fibers \u2192 Purkinje cells (prediction). SIMULTANEOUSLY: Actual movement \u2192 Sensory feedback \u2192 Inferior olive \u2192 Climbing fibers \u2192 Purkinje cells (error signal). MISMATCH: climbing fiber error \u2192 long-term depression at parallel fiber synapse \u2192 updated prediction \u2192 smoother movement next time. Output: Purkinje cells (inhibitory) \u2192 Deep cerebellar nuclei \u2192 Thalamus \u2192 Motor cortex (corrected motor commands).",
       "signal_type": "Error correction \u2014 forward model prediction vs. sensory feedback comparison",
       "bci_relevance_detail": "Cerebellar stimulation (tDCS/TMS) can enhance motor learning speed. Cerebellar BCIs could augment coordination in real-time. Less explored than cortical BCIs but the uniform circuit architecture makes it theoretically tractable.",
-      "clinical_notes": "Cerebellar damage \u2192 ataxia (uncoordinated movement), dysmetria (overshooting targets), intention tremor, slurred speech (dysarthria). Cerebellar cognitive affective syndrome: damage to posterior cerebellum causes executive dysfunction, spatial cognition deficits, personality changes \u2014 showing the cerebellum does more than just motor control."
+      "clinical_notes": "Cerebellar damage \u2192 ataxia (uncoordinated movement), dysmetria (overshooting targets), intention tremor, slurred speech (dysarthria). Cerebellar cognitive affective syndrome: damage to posterior cerebellum causes executive dysfunction, spatial cognition deficits, personality changes \u2014 showing the cerebellum does more than just motor control.",
+      "highlight_hue": 47
     },
     {
       "id": "cerebellum_nuclei",
@@ -1786,7 +1812,8 @@
       "processing_pipeline": "Cerebellar cortex (Purkinje cells, inhibitory) \u2192 DCN (release from inhibition = corrective signal) \u2192 DENTATE: Thalamus (VL) \u2192 M1/PMC/PFC (motor correction and cognitive modulation). INTERPOSED: Red nucleus \u2192 Rubrospinal tract \u2192 Spinal motor neurons (limb correction). FASTIGIAL: Vestibular nuclei \u2192 Balance reflexes; Reticular formation \u2192 Posture; Autonomic centers \u2192 Heart rate, blood pressure.",
       "signal_type": "Motor output \u2014 corrective signals timed by Purkinje cell inhibition patterns",
       "bci_relevance_detail": "DCN stimulation is being explored for motor rehabilitation after stroke \u2014 amplifying cerebellar corrective signals to help relearn movement. The dentate nucleus's connections to PFC suggest cerebellar neuromodulation could enhance cognitive functions beyond motor control.",
-      "clinical_notes": "Dentate lesions \u2192 intention tremor (tremor that worsens as you approach a target) + dysmetria (overshooting). Fastigial lesions \u2192 truncal ataxia (inability to sit/stand without swaying). Cerebellar cognitive affective syndrome: DCN damage affecting cognitive circuits \u2192 executive dysfunction, personality changes."
+      "clinical_notes": "Dentate lesions \u2192 intention tremor (tremor that worsens as you approach a target) + dysmetria (overshooting). Fastigial lesions \u2192 truncal ataxia (inability to sit/stand without swaying). Cerebellar cognitive affective syndrome: DCN damage affecting cognitive circuits \u2192 executive dysfunction, personality changes.",
+      "highlight_hue": 265
     },
     {
       "id": "vermis",
@@ -1839,7 +1866,8 @@
       "processing_pipeline": "Vestibular organs (semicircular canals, otoliths) \u2192 Vestibular nuclei \u2192 Vermis (balance computation) \u2192 Fastigial nucleus \u2192 Vestibular nuclei (VOR correction) + Reticular formation (postural tone) + Spinal cord (balance reflexes). EMOTIONAL: Vermis \u2192 Fastigial nucleus \u2192 Hypothalamus/Amygdala (emotional modulation).",
       "signal_type": "Balance and axial motor \u2014 vestibular integration, postural control, emotional modulation",
       "bci_relevance_detail": "Vermis stimulation (tDCS/TMS) is being explored for ataxia rehabilitation and emotional regulation. Less relevant for typical motor BCIs but important for vestibular prostheses and balance-related applications.",
-      "clinical_notes": "Vermis lesions \u2192 truncal ataxia (wide-based staggering gait, like being drunk). Medulloblastoma (childhood brain tumor) commonly arises in the vermis \u2192 balance problems as presenting symptom. Vermis hypoplasia found in some cases of autism \u2014 may contribute to motor clumsiness and emotional dysregulation."
+      "clinical_notes": "Vermis lesions \u2192 truncal ataxia (wide-based staggering gait, like being drunk). Medulloblastoma (childhood brain tumor) commonly arises in the vermis \u2192 balance problems as presenting symptom. Vermis hypoplasia found in some cases of autism \u2014 may contribute to motor clumsiness and emotional dysregulation.",
+      "highlight_hue": 123
     },
     {
       "id": "medulla",
@@ -1903,7 +1931,8 @@
       "processing_pipeline": "BREATHING: Pre-B\u00f6tzinger complex (pacemaker neurons) \u2192 Phrenic nerve \u2192 Diaphragm contraction \u2192 Inspiration. Chemoreceptors detect high CO\u2082 \u2192 increase respiratory rate. HEART: Baroreceptors (carotid/aortic) detect blood pressure \u2192 NTS \u2192 Cardiovascular center \u2192 Vagus nerve (parasympathetic, slows heart) or sympathetic nerves (speeds heart). ALL MOTOR: Cortex \u2192 Internal capsule \u2192 Cerebral peduncle \u2192 Pyramidal decussation (crossing) \u2192 Lateral corticospinal tract \u2192 Spinal motor neurons.",
       "signal_type": "Autonomic \u2014 rhythmic pattern generation for vital functions, visceral sensory integration",
       "bci_relevance_detail": "Vagus nerve stimulation (VNS) \u2014 an FDA-approved neuromodulation therapy \u2014 targets medullary circuits for epilepsy and depression. The medulla is generally avoided in invasive BCI placement due to risk of respiratory/cardiac arrest. Security: any BCI disruption reaching the medulla could be life-threatening.",
-      "clinical_notes": "Medullary stroke \u2192 life-threatening: respiratory failure, cardiac arrest, or Wallenberg syndrome (lateral medullary syndrome \u2014 difficulty swallowing, vertigo, loss of pain/temperature sensation on one side). Brainstem death = death \u2014 when the medulla stops functioning, there is no spontaneous breathing or heartbeat."
+      "clinical_notes": "Medullary stroke \u2192 life-threatening: respiratory failure, cardiac arrest, or Wallenberg syndrome (lateral medullary syndrome \u2014 difficulty swallowing, vertigo, loss of pain/temperature sensation on one side). Brainstem death = death \u2014 when the medulla stops functioning, there is no spontaneous breathing or heartbeat.",
+      "highlight_hue": 341
     },
     {
       "id": "pons",
@@ -1965,7 +1994,8 @@
       "processing_pipeline": "SLEEP: Pontine reticular formation \u2192 Acetylcholine release \u2192 Cortical activation (dreams) + Glycine/GABA to spinal motor neurons \u2192 Muscle paralysis (REM atonia). AROUSAL: Locus coeruleus \u2192 Norepinephrine to entire cortex \u2192 Increased alertness, attention, vigilance. MOTOR RELAY: Cortex \u2192 Pontine nuclei \u2192 Middle cerebellar peduncle \u2192 Cerebellar cortex (motor command copy for error correction).",
       "signal_type": "Modulatory \u2014 noradrenergic arousal, serotonergic mood regulation, cholinergic REM generation",
       "bci_relevance_detail": "Locus coeruleus-norepinephrine system modulates attention and arousal globally \u2014 important for BCI performance (alertness affects signal quality). Pontine DBS has been explored for disorders of consciousness. Security: disrupting pontine sleep circuits could cause REM behavior disorder (acting out dreams) or narcolepsy-like episodes.",
-      "clinical_notes": "Pontine stroke \u2192 locked-in syndrome (conscious but completely paralyzed except eye movements \u2014 basis for BCI communication). REM behavior disorder: loss of REM atonia \u2192 violent dream enactment, often precedes Parkinson's by years. Central pontine myelinolysis: rapid sodium correction \u2192 demyelination \u2192 quadriplegia."
+      "clinical_notes": "Pontine stroke \u2192 locked-in syndrome (conscious but completely paralyzed except eye movements \u2014 basis for BCI communication). REM behavior disorder: loss of REM atonia \u2192 violent dream enactment, often precedes Parkinson's by years. Central pontine myelinolysis: rapid sodium correction \u2192 demyelination \u2192 quadriplegia.",
+      "highlight_hue": 199
     },
     {
       "id": "midbrain",
@@ -2029,7 +2059,8 @@
       "processing_pipeline": "VISUAL ORIENTING: Peripheral stimulus \u2192 Retina \u2192 Superior colliculus (spatial map) \u2192 Saccade command \u2192 Brainstem saccade generator \u2192 Eye muscles \u2192 Gaze shift (~200ms total). PAIN MODULATION: Threatening stimulus \u2192 PAG activation \u2192 Releases endorphins \u2192 Inhibits dorsal horn pain neurons (spinal cord) \u2192 Pain signals blocked from reaching brain. DBS of PAG mimics this.",
       "signal_type": "Multimodal integration \u2014 visual orienting, auditory relay, pain modulation, motor relay",
       "bci_relevance_detail": "PAG-DBS is used for chronic pain management. Superior colliculus signals could inform gaze-tracking BCIs. The midbrain contains the SNc and VTA (covered separately) which are the dopaminergic nuclei relevant to movement and reward BCIs.",
-      "clinical_notes": "Midbrain stroke (Weber syndrome): ipsilateral oculomotor nerve palsy (drooping eyelid, dilated pupil) + contralateral hemiparesis. Parinaud syndrome (dorsal midbrain lesion): inability to look upward, convergence problems. PAG lesions \u2192 increased pain sensitivity (hyperalgesia)."
+      "clinical_notes": "Midbrain stroke (Weber syndrome): ipsilateral oculomotor nerve palsy (drooping eyelid, dilated pupil) + contralateral hemiparesis. Parinaud syndrome (dorsal midbrain lesion): inability to look upward, convergence problems. PAG lesions \u2192 increased pain sensitivity (hyperalgesia).",
+      "highlight_hue": 57
     },
     {
       "id": "reticular_formation",
@@ -2083,7 +2114,8 @@
       "processing_pipeline": "AROUSAL: Sensory input (pain, sound, light) \u2192 Reticular formation \u2192 ARAS \u2192 Thalamus (switches tonic mode, opens sensory gate) + Cortex (widespread depolarization) \u2192 Wakefulness. SLEEP: Reduced sensory input + VLPO (hypothalamus) inhibits ARAS \u2192 Thalamus enters burst mode \u2192 Cortex disconnected from sensory input \u2192 Sleep. COMA: ARAS destroyed bilaterally \u2192 Cortex receives no activation signal \u2192 Unconscious despite intact cortex.",
       "signal_type": "Arousal modulation \u2014 multi-neurotransmitter ascending activation, consciousness gating",
       "bci_relevance_detail": "DBS of the reticular formation/ARAS has been explored for disorders of consciousness (minimally conscious state, vegetative state). Central thalamic DBS (which targets ARAS projections) has shown some success in promoting arousal. Understanding ARAS is critical for BCIs in non-responsive patients.",
-      "clinical_notes": "Bilateral ARAS damage \u2192 coma (cortex intact but not activated). Brainstem death = irreversible ARAS destruction = legal death in most jurisdictions. Narcolepsy involves dysregulation of reticular arousal systems. General anesthesia works partly by suppressing ARAS activity."
+      "clinical_notes": "Bilateral ARAS damage \u2192 coma (cortex intact but not activated). Brainstem death = irreversible ARAS destruction = legal death in most jurisdictions. Narcolepsy involves dysregulation of reticular arousal systems. General anesthesia works partly by suppressing ARAS activity.",
+      "highlight_hue": 275
     },
     {
       "id": "cervical_cord",
@@ -2141,7 +2173,8 @@
       "processing_pipeline": "MOTOR: M1 \u2192 Corticospinal tract \u2192 Pyramidal decussation (medulla) \u2192 Lateral corticospinal tract \u2192 Ventral horn motor neurons (C5-T1) \u2192 Peripheral nerve \u2192 Neuromuscular junction \u2192 Arm/hand muscle contraction. SENSORY: Skin/joint receptors \u2192 Peripheral nerve \u2192 Dorsal root ganglion \u2192 Dorsal horn (pain/temp via spinothalamic) or Dorsal columns (touch/proprioception) \u2192 Brainstem \u2192 Thalamus \u2192 S1. REFLEX: Tendon stretch \u2192 Muscle spindle \u2192 Dorsal root \u2192 Direct synapse on ventral horn motor neuron \u2192 Muscle contraction (monosynaptic reflex arc, ~30ms).",
       "signal_type": "Motor/sensory relay \u2014 corticospinal commands down, somatosensory signals up, local reflex arcs",
       "bci_relevance_detail": "Spinal cord injury at C4-C5 is the most common BCI indication \u2014 patients retain brain activity but lose motor output. Epidural spinal stimulation below the injury can reactivate spinal circuits for standing/stepping. BCI bridges: decode motor intent from M1 \u2192 stimulate spinal cord below lesion \u2192 restore movement. Onward Medical and others targeting this.",
-      "clinical_notes": "C4-C5 injury \u2192 quadriplegia (most common SCI level). Above C3 \u2192 ventilator-dependent (phrenic nerve destroyed). Central cord syndrome: hyperextension injury \u2192 hand weakness > leg weakness (central gray matter damage). Brown-S\u00e9quard: hemisection \u2192 ipsilateral paralysis + contralateral pain/temp loss."
+      "clinical_notes": "C4-C5 injury \u2192 quadriplegia (most common SCI level). Above C3 \u2192 ventilator-dependent (phrenic nerve destroyed). Central cord syndrome: hyperextension injury \u2192 hand weakness > leg weakness (central gray matter damage). Brown-S\u00e9quard: hemisection \u2192 ipsilateral paralysis + contralateral pain/temp loss.",
+      "highlight_hue": 133
     },
     {
       "id": "thoracic_cord",
@@ -2189,7 +2222,8 @@
       "processing_pipeline": "SYMPATHETIC: Hypothalamus/brainstem \u2192 Descending autonomic pathways \u2192 IML (T1-L2) \u2192 Preganglionic sympathetic axons \u2192 Sympathetic chain ganglia \u2192 Postganglionic axons \u2192 Target organs (heart, lungs, blood vessels, sweat glands, pupils, adrenal medulla). MOTOR: Corticospinal tract \u2192 Thoracic ventral horn \u2192 Intercostal nerves \u2192 Respiratory muscles (T1-T12) and abdominal muscles.",
       "signal_type": "Autonomic/motor \u2014 sympathetic fight-or-flight origin, trunk motor control, respiratory muscles",
       "bci_relevance_detail": "Thoracic SCI eliminates sympathetic control below the lesion \u2192 autonomic dysreflexia (dangerous blood pressure spikes from uncontrolled sympathetic responses below injury). Epidural stimulation at thoracic levels is being explored for autonomic function restoration (blood pressure, bladder, sexual function).",
-      "clinical_notes": "T6 SCI \u2192 paraplegia with intact arms. Above T6: risk of autonomic dysreflexia (uncontrolled sympathetic response to below-level stimuli \u2192 hypertensive crisis). Thoracic disc herniation is rare (<1% of disc herniations) but can cause myelopathy. Horner syndrome: T1 sympathetic disruption \u2192 ipsilateral ptosis, miosis, anhidrosis."
+      "clinical_notes": "T6 SCI \u2192 paraplegia with intact arms. Above T6: risk of autonomic dysreflexia (uncontrolled sympathetic response to below-level stimuli \u2192 hypertensive crisis). Thoracic disc herniation is rare (<1% of disc herniations) but can cause myelopathy. Horner syndrome: T1 sympathetic disruption \u2192 ipsilateral ptosis, miosis, anhidrosis.",
+      "highlight_hue": 351
     },
     {
       "id": "lumbar_cord",
@@ -2239,7 +2273,8 @@
       "processing_pipeline": "VOLUNTARY: Cortex \u2192 Corticospinal tract \u2192 Lumbar ventral horn motor neurons \u2192 Femoral nerve (L2-L4, knee extension), Sciatic nerve (L4-S3, hip extension/knee flexion/ankle) \u2192 Leg muscles. REFLEX: Patellar tendon tap \u2192 Muscle spindle stretch \u2192 L3-L4 dorsal root \u2192 Monosynaptic reflex \u2192 Quadriceps motor neuron \u2192 Knee jerk (~25ms). CPG: Tonic descending input (or epidural stimulation) \u2192 Lumbar CPG activation \u2192 Alternating L/R flexor-extensor patterns \u2192 Rhythmic stepping.",
       "signal_type": "Motor/CPG \u2014 voluntary leg control, central pattern generation for locomotion, lower limb reflexes",
       "bci_relevance_detail": "Lumbar epidural stimulation is a leading BCI approach for restoring walking after SCI. STIMO (Courtine lab, EPFL) demonstrated that targeted epidural stimulation of lumbar CPGs enables SCI patients to walk with assistance. Combined with brain-spine interfaces (BSI), decoded motor cortex signals wirelessly trigger lumbar stimulation in real-time.",
-      "clinical_notes": "Lumbar SCI \u2192 paraplegia with preserved arms and trunk. Cauda equina syndrome (below L1-L2): LMN injury \u2192 flaccid paralysis, bladder/bowel dysfunction, saddle anesthesia \u2014 surgical emergency. Lumbar stenosis: compression of lumbar nerves \u2192 neurogenic claudication (leg pain/weakness with walking)."
+      "clinical_notes": "Lumbar SCI \u2192 paraplegia with preserved arms and trunk. Cauda equina syndrome (below L1-L2): LMN injury \u2192 flaccid paralysis, bladder/bowel dysfunction, saddle anesthesia \u2014 surgical emergency. Lumbar stenosis: compression of lumbar nerves \u2192 neurogenic claudication (leg pain/weakness with walking).",
+      "highlight_hue": 208
     },
     {
       "id": "sacral_cord",
@@ -2287,7 +2322,8 @@
       "processing_pipeline": "MICTURITION: Bladder stretch receptors \u2192 Pelvic nerve \u2192 Sacral cord (S2-S4) \u2192 Ascending to pontine micturition center (permission signal) \u2192 Descending back to sacral parasympathetic nucleus \u2192 Detrusor contraction + Internal sphincter relaxation \u2192 Onuf's nucleus relaxes external sphincter \u2192 Urination. SEXUAL: Psychogenic (cortex \u2192 thoracolumbar sympathetic) + Reflexogenic (genital stimulation \u2192 sacral parasympathetic S2-S4) \u2192 Erection/lubrication.",
       "signal_type": "Parasympathetic/somatic \u2014 bladder/bowel/sexual autonomic control, pelvic floor motor",
       "bci_relevance_detail": "Sacral nerve stimulation (InterStim, Medtronic) is FDA-approved for overactive bladder and fecal incontinence. Sacral neuromodulation is a major quality-of-life target for SCI patients \u2014 surveys consistently show bladder/bowel/sexual function recovery is ranked higher than walking recovery by SCI patients.",
-      "clinical_notes": "SCI above sacral cord \u2192 neurogenic bladder (loss of voluntary control, reflex voiding). Conus medullaris syndrome (S1-S5 damage): areflexic bladder/bowel, saddle anesthesia, erectile dysfunction. Cauda equina syndrome: similar presentation but involves nerve roots, not cord \u2014 potentially reversible if decompressed within 48 hours."
+      "clinical_notes": "SCI above sacral cord \u2192 neurogenic bladder (loss of voluntary control, reflex voiding). Conus medullaris syndrome (S1-S5 damage): areflexic bladder/bowel, saddle anesthesia, erectile dysfunction. Cauda equina syndrome: similar presentation but involves nerve roots, not cord \u2014 potentially reversible if decompressed within 48 hours.",
+      "highlight_hue": 66
     },
     {
       "id": "cauda_equina",
@@ -2362,7 +2398,8 @@
         },
         "drafted_by": "ai",
         "human_reviewed": false
-      }
+      },
+      "highlight_hue": 284
     },
     {
       "id": "cea",
@@ -2415,7 +2452,8 @@
       "processing_pipeline": "BLA (threat detected) \u2192 CeA (CeL gate \u2192 CeM output) \u2192 MULTIPLE PARALLEL OUTPUTS: Hypothalamus PVN (HPA axis \u2192 cortisol), Lateral hypothalamus (sympathetic activation \u2192 heart rate, blood pressure), PAG (freezing/fight/flight behavior), Parabrachial nucleus (respiratory rate change), Nucleus basalis (acetylcholine \u2192 cortical arousal/vigilance), Dorsal vagal complex (gastrointestinal response \u2014 'gut feeling'). EXTINCTION: PFC (infralimbic) \u2192 ITCs \u2192 Inhibit CeM \u2192 Reduced fear expression.",
       "signal_type": "Fear output \u2014 autonomic, endocrine, and behavioral fear response execution",
       "bci_relevance_detail": "CeA is not a typical BCI target due to its deep location and functional criticality. However, understanding CeA output pathways is important for BCI safety \u2014 inadvertent stimulation near the amygdala could trigger full autonomic fear responses. Relevant for affective state monitoring in emotional BCIs.",
-      "clinical_notes": "CeA hyperactivation \u2192 panic attacks (full autonomic fear cascade without actual threat). PTSD: CeA fails to extinguish \u2014 fear responses persist despite safety. Anxiety disorders: lowered CeA activation threshold. CeA lesions in animals \u2192 fearlessness, inability to learn danger associations."
+      "clinical_notes": "CeA hyperactivation \u2192 panic attacks (full autonomic fear cascade without actual threat). PTSD: CeA fails to extinguish \u2014 fear responses persist despite safety. Anxiety disorders: lowered CeA activation threshold. CeA lesions in animals \u2192 fearlessness, inability to learn danger associations.",
+      "highlight_hue": 142
     }
   ],
   "region_aliases": {

@@ -95,7 +95,7 @@ export default function DualUseSplit({ therapeutic, siliconOnly, total }: Props)
           </span>
         </div>
         <div className="text-center">
-          <span className="text-xs sm:text-sm tracking-wider uppercase text-emerald-400/80">
+          <span className="text-xs sm:text-sm tracking-wider uppercase text-[var(--color-accent-secondary)]/80">
             Therapy
           </span>
         </div>
@@ -177,7 +177,7 @@ export default function DualUseSplit({ therapeutic, siliconOnly, total }: Props)
           <p className="text-[10px] text-[var(--color-text-muted)] mt-1">techniques</p>
         </div>
         <div className="text-center">
-          <span className="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-emerald-400">
+          <span className="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">
             {therapyCount}
           </span>
           <p className="text-[10px] text-[var(--color-text-muted)] mt-1">therapeutic mirrors</p>

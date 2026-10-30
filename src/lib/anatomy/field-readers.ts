@@ -122,8 +122,8 @@ export function readNumber(record: Record<string, unknown>, key: string, locatio
   return requireNumber(record[key], childOf(location, key), minimum);
 }
 
-export function requireInteger(value: unknown, location: FieldLocation, minimum: number): number {
-  const number = requireNumber(value, location, minimum);
+export function requireInteger(value: unknown, location: FieldLocation, minimum: number, maximum: number = MAX_NUMBER): number {
+  const number = requireNumber(value, location, minimum, maximum);
   if (!Number.isInteger(number)) return failAt(location, 'expected a whole number', 'Remove the fraction.');
   return number;
 }

@@ -138,7 +138,7 @@ describe('AtlasViewport: open', () => {
     expect(screen.getByRole('img').getAttribute('aria-label')).toMatch(/^3D picture of an average brain outline with \d+ atlas shapes drawn inside it\. Band lens\. View: from behind and above\. Every fact it shows is in the region list\.$/);
   });
 
-  it('fetches the head surface only when the electrode layout is turned on, and then draws the dots with their review state in the caption', async () => {
+  it('fetches the head surface only when the electrode layout is turned on, and then draws the dots with their line and limits in the caption', async () => {
     const container = await openViewport({ layers: { ...INITIAL_EXPLORER_STATE.layers, devices: true } });
     const headSurface = assetOf('devices');
     expect(fetchLog.filter((url) => url === assetUrl(headSurface.path))).toHaveLength(1);
@@ -147,8 +147,8 @@ describe('AtlasViewport: open', () => {
     expect(canvasProps?.shapes.filter((shape) => shape.layer === 'devices')).toHaveLength(1);
     const deviceCaption = container.querySelector('[data-viewport-caption] [data-device-caption]') as HTMLElement;
     expect(deviceCaption.textContent).toContain('EEG electrode layout: 21 positions.');
-    expect(deviceCaption.querySelector('[data-ai-drafted="true"]')?.textContent).toBe('AI-drafted, unreviewed');
-    expect([...deviceCaption.querySelectorAll('[data-limit-id]')].map((note) => note.getAttribute('data-limit-id'))).toEqual(['device_electrodes', 'device_head_surface']);
+    const captionNoteIds = [...container.querySelectorAll('[data-viewport-caption] [data-caption-notes] [data-limit-id]')].map((note) => note.getAttribute('data-limit-id'));
+    expect(captionNoteIds).toEqual(expect.arrayContaining(['device_electrodes', 'device_head_surface']));
     expect(screen.getByRole('img').getAttribute('aria-label')).toContain('EEG electrode layout: 21 positions. Each dot is named in the electrode layout panel below the picture.');
   });
 
@@ -180,10 +180,9 @@ describe('AtlasViewport: open', () => {
     expect(canvasProps?.shapes.every((shape) => Array.isArray(shape.stepNumbers))).toBe(true);
   });
 
-  it('keeps the caption inside the picture, with the mark, the lens limit and a position sentence per layer', async () => {
+  it('keeps the caption inside the picture, with the lens limit and a position sentence per layer', async () => {
     const container = await openViewport({ lens: { kind: 'niss' } });
     const caption = container.querySelector('[data-viewport-stage] [data-viewport-caption]') as HTMLElement;
-    expect(caption.querySelector('[data-ai-drafted="true"]')?.textContent).toBe('AI-drafted, unreviewed');
     expect(caption.textContent).toContain('NISS severity lens.');
     const captionLimitIds = [...caption.querySelectorAll('[data-limit-id]')].map((note) => note.getAttribute('data-limit-id'));
     expect(captionLimitIds.slice(0, 2)).toEqual(['lens_niss', 'whole_scene']);

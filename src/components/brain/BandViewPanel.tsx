@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { QIF_BANDS_FRAMEWORK_NOTE, type BrainView, type BrainViewRegion } from '../../lib/brain-view-data';
 import type { Lens } from '../../lib/atlas-explorer/lens-state';
-import type { IndexReviewState } from '../../lib/anatomy/anatomy-index-types';
 import type { LimitSentence } from '../../lib/anatomy/limits-copy';
 import RegionViewMount from '../atlas-scene/RegionViewMount';
 import AtlasExplorerLink from './AtlasExplorerLink';
@@ -24,8 +23,6 @@ export interface BandViewPanelProps {
   regionViewLens?: Lens;
   /** With a technique lens whose links colour no shape: the sentence saying so, as the page was built with it. Shown beside the view's button. */
   regionViewNothingColoured?: LimitSentence | null;
-  /** With a technique lens the index holds: the review state of its drafted links, shown beside the view's button in every state. */
-  regionViewLinksReview?: IndexReviewState | null;
 }
 
 const FALLBACK_VIEW_ID = 'security';
@@ -131,7 +128,7 @@ function BandDetail({ band, accentColor }: { band: BrainViewRegion; accentColor:
  * The list itself draws no anatomy and puts nothing at a position. A page may ask for the 3D
  * view under it (`regionViewLens`), which loads only when the visitor presses its button.
  */
-export default function BandViewPanel({ views, defaultView, selectedBandId, onBandSelect, viewId, onViewChange, hideViewToggle, regionViewLens, regionViewNothingColoured, regionViewLinksReview }: BandViewPanelProps) {
+export default function BandViewPanel({ views, defaultView, selectedBandId, onBandSelect, viewId, onViewChange, hideViewToggle, regionViewLens, regionViewNothingColoured }: BandViewPanelProps) {
   const [internalViewId, setInternalViewId] = useState(defaultView ?? views[0]?.id ?? FALLBACK_VIEW_ID);
   const [internalBandId, setInternalBandId] = useState<string | null>(null);
   const activeViewId = viewId ?? internalViewId;
@@ -162,7 +159,7 @@ export default function BandViewPanel({ views, defaultView, selectedBandId, onBa
             : <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-faint)' }}>{EMPTY_STATE_BY_VIEW[activeView.id] ?? EMPTY_STATE_DEFAULT}</p>}
         </div>
       </div>
-      {regionViewLens !== undefined && <RegionViewMount lens={regionViewLens} nothingColoured={regionViewNothingColoured} linksReview={regionViewLinksReview} selectedBandId={activeBandId} onRegionPick={(pick) => selectBandOf(pick.bandIds)} />}
+      {regionViewLens !== undefined && <RegionViewMount lens={regionViewLens} nothingColoured={regionViewNothingColoured} selectedBandId={activeBandId} onRegionPick={(pick) => selectBandOf(pick.bandIds)} />}
       <p className="text-xs mt-5" style={{ color: 'var(--color-text-faint)' }}>
         {QIF_BANDS_FRAMEWORK_NOTE} This list draws no anatomy and counts by band, not by brain region.{' '}
         <AtlasExplorerLink className="underline">See the brain itself in the TARA Brain Atlas</AtlasExplorerLink>.

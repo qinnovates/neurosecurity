@@ -203,8 +203,7 @@ describe('RegionViewPanel: the view with its words, on a page', () => {
     const { container } = render(<RegionViewPanel lens={BAND_LENS} selectedRegionIds={chosenIds} />);
     expect((await screen.findByRole('alert')).textContent).toBe(GATE_NOTICES.no_webgl);
     const group = screen.getByRole('group', { name: '3D view and what it shows' });
-    // The mark and every limit sentence stand in the same group as the view.
-    expect(group.querySelector('[data-ai-drafted="true"]')?.textContent).toContain('AI-drafted, unreviewed');
+    // Every limit sentence stands in the same group as the view.
     const limitIds = [...group.querySelectorAll('[data-limit-id]')].map((note) => note.getAttribute('data-limit-id') ?? '');
     expect(limitIds).toEqual(['view_chosen_regions', 'lens_band', 'view_regions_without_shape', 'region_matching', 'outline_shape']);
     expect(limitIds.every(isLimitId)).toBe(true);

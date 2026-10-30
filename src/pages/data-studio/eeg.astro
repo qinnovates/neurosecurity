@@ -34,7 +34,7 @@ const taraCount = samples.filter((s: any) => s.taraId).length;
           <div class="flex items-center gap-3 mb-6">
             <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">Data Studio</span>
             <span class="w-1 h-1 rounded-full bg-slate-300"></span>
-            <span class="text-[11px] font-semibold text-blue-500 uppercase tracking-widest">EEG Samples</span>
+            <span class="text-[11px] font-semibold text-[var(--color-accent-primary)] uppercase tracking-widest">EEG Samples</span>
           </div>
           <h1 class="text-5xl sm:text-7xl font-semibold tracking-tight text-slate-900 mb-6">
             EEG Sample Browser
@@ -55,9 +55,9 @@ const taraCount = samples.filter((s: any) => s.taraId).length;
             <span class="block text-[11px] text-slate-500 font-semibold mb-1">TARA Mapped</span>
             <span class="text-3xl font-semibold text-red-400">{taraCount}</span>
           </div>
-          <div class="bg-emerald-50 px-8 py-5 rounded-[2rem] border border-emerald-100 shadow-sm min-w-[200px]">
-            <span class="block text-[11px] text-emerald-500 font-semibold mb-1">Redistributable</span>
-            <span class="text-3xl font-semibold text-emerald-700">{redistributableCount}</span>
+          <div class="bg-emerald-50 px-8 py-5 rounded-[2rem] border border-[var(--color-border)] shadow-sm min-w-[200px]">
+            <span class="block text-[11px] text-[var(--color-accent-secondary)] font-semibold mb-1">Redistributable</span>
+            <span class="text-3xl font-semibold text-[var(--color-accent-secondary)]">{redistributableCount}</span>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@ const taraCount = samples.filter((s: any) => s.taraId).length;
         <p class="text-sm text-slate-500 leading-relaxed">
           TARA technique mappings are proposed correspondences for threat modeling purposes.
           They do not constitute clinical or diagnostic claims.
-          See <a href="/guardrails/" class="text-blue-600 underline">Guardrails</a> for epistemic constraints.
+          See <a href="/guardrails/" class="text-[var(--color-accent-primary)] underline">Guardrails</a> for epistemic constraints.
         </p>
       </div>
     </div>

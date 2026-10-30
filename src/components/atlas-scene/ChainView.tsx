@@ -6,7 +6,6 @@ import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { nameBands } from '@/lib/atlas-explorer/explorer-model';
 import LimitNote from './LimitNote';
 import LoadNotice from './LoadNotice';
-import ReviewMark from './ReviewMark';
 import type { ChainView as ChainViewState } from './use-chain-view';
 
 interface Props {
@@ -39,7 +38,7 @@ function StepLine({ model, step, isCurrent, rules }: { model: ExplorerModel; ste
         <p className="atlas-row-why" data-step-regions={step.litRegions.map((region) => region.id).join(' ')}>
           {step.litRegions.length === 0 ? 'Lights no region.' : 'Lights: '}
           {step.litRegions.map((region, index) => (
-            <span key={region.id}>{index > 0 && ', '}{region.name} <ReviewMark state={region.reviewState} /></span>
+            <span key={region.id}>{index > 0 && ', '}{region.name}</span>
           ))}
         </p>
         {step.litRegions.length > 0 && <LimitNote limit={limitSentence('lens_technique')} />}

@@ -41,12 +41,12 @@
   },
   "theme": {
     "colors": {
-      "cyan_accent": "#00e5ff",
-      "purple_accent": "#b44aff",
-      "background_primary": "#0a0a0f",
-      "background_deep": "#050a14",
-      "text_primary": "#e0e0e0",
-      "text_secondary": "#a0a0a0",
+      "electric_blue": "#3d86ff",
+      "hot_pink": "#ff3fa4",
+      "background_primary": "#000000",
+      "background_deep": "#0b0b10",
+      "text_primary": "#e8e8ee",
+      "text_secondary": "#a3a7b5",
       "brand_teal": "#22C68D",
       "gateway_amber": "#d97706",
       "identity_purple": "#9E61EB"

@@ -29,7 +29,7 @@ function tableEntry(name: string, label: string): { name: string; label: string;
 const categories: TableCategory[] = [
   {
     name: 'Core Neuroscience',
-    color: 'text-cyan-400',
+    color: 'text-[var(--color-accent-primary)]',
     icon: '\u{1F9E0}',
     tables: [
       tableEntry('brain_regions', 'Brain Regions'),
@@ -63,7 +63,7 @@ const categories: TableCategory[] = [
   },
   {
     name: 'Clinical',
-    color: 'text-purple-400',
+    color: 'text-[var(--color-accent-tertiary)]',
     icon: '\u{1FA7A}',
     tables: [
       tableEntry('dsm5', 'DSM-5 Conditions'),
@@ -98,7 +98,7 @@ const categories: TableCategory[] = [
   },
   {
     name: 'Governance',
-    color: 'text-green-400',
+    color: 'text-[var(--color-accent-secondary)]',
     icon: '\u{2696}',
     tables: [
       tableEntry('neurorights', 'Neurorights'),
@@ -111,7 +111,7 @@ const categories: TableCategory[] = [
   },
   {
     name: 'Simulation',
-    color: 'text-indigo-400',
+    color: 'text-[var(--color-accent-primary)]',
     icon: '\u{1F52C}',
     tables: [
       tableEntry('neuron_types', 'Neuron Types'),
@@ -132,7 +132,7 @@ const categories: TableCategory[] = [
   },
   {
     name: 'Operations',
-    color: 'text-teal-400',
+    color: 'text-[var(--color-accent-secondary)]',
     icon: '\u{2699}',
     tables: [
       tableEntry('validations', 'Validations'),
@@ -149,7 +149,7 @@ const categories: TableCategory[] = [
   },
   {
     name: 'Timelines',
-    color: 'text-sky-400',
+    color: 'text-[var(--color-accent-primary)]',
     icon: '\u{1F4C5}',
     tables: [
       tableEntry('neuroethics_timeline', 'Neuroethics'),
@@ -214,13 +214,13 @@ function categoryRowCount(cat: TableCategory): number {
         <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Research Sources</p>
       </div>
       <div class="glass rounded-lg p-4">
-        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-cyan-400">
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">
           {totalTables}
         </p>
         <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">KQL Tables</p>
       </div>
       <div class="glass rounded-lg p-4">
-        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-purple-400">
+        <p class="text-3xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">
           {totalRows.toLocaleString()}
         </p>
         <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Total Rows</p>

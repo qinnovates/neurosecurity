@@ -25,7 +25,7 @@ fact_check_notes:
 
 **Date:** 2026-02-18 ~09:00 UTC
 **Source:** Live back-and-forth with Claude. This is a verbatim capture of the thinking session that produced the BCI physical limits constraint system.
-**Derivation details:** [Entry 60 — BCI Limits Equation Synthesis](QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis) (Full verbatim transcript)
+**Derivation details:** [Entry 60 — BCI Limits Equation Synthesis](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis) (Full verbatim transcript)
 
 ### How It Started
 

@@ -37,8 +37,8 @@ describe('announcements', () => {
   const model = buildFixtureModel();
   const tallyFor = (mode: Parameters<typeof buildBandGroups>[1]) => tallyLens(buildBandGroups(model, mode));
 
-  it('name the region, its band, what stands for it and its review state', () => {
-    expect(announceSelection(model, 'm1')).toBe('m1 selected. Band N7. inside a larger shape. AI-drafted, unreviewed.');
+  it('name the region, its band and what stands for it', () => {
+    expect(announceSelection(model, 'm1')).toBe('m1 selected. Band N7. inside a larger shape.');
     expect(announceSelection(model, 'nowhere')).toBe('Selection cleared.');
   });
 

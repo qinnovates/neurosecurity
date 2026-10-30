@@ -18,10 +18,10 @@ export function buildStructure(labelId: string, owners: IndexOwner[]): IndexStru
   return { key: `${FIXTURE_ATLAS_ID}:${labelId}`, atlas: FIXTURE_ATLAS_ID, label_id: labelId, name: `Label ${labelId}`, nodes: [], owners, review_state: UNREVIEWED_MARK, check_status: 'unchecked' };
 }
 
-export function buildSubject(id: string, bandIds: string[]): IndexSubject {
+export function buildSubject(id: string, bandIds: string[], highlightHue: number | null = null): IndexSubject {
   return {
     kind: 'region', id, name: id, band_ids: bandIds, geometry: { state: 'drawn', reason: null, reason_source: null },
-    structure_keys: [], declared_children: [], review_state: UNREVIEWED_MARK, check_status: 'unchecked',
+    structure_keys: [], declared_children: [], highlight_hue: highlightHue, review_state: UNREVIEWED_MARK, check_status: 'unchecked',
   };
 }
 

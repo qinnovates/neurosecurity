@@ -1,7 +1,6 @@
 import type { KeyboardEvent, MouseEvent } from 'react';
 import type { RegionRow } from '@/lib/atlas-explorer/region-rows';
 import MarkGlyph, { MARK_WORDS } from './MarkGlyph';
-import ReviewMark from './ReviewMark';
 
 interface Props {
   row: RegionRow;
@@ -22,8 +21,8 @@ function isKeyboardClick(event: MouseEvent<HTMLButtonElement>): boolean {
 
 /**
  * One region as a button whose text says everything the row shows: the region,
- * what stands for it and why, its review state, and what the active lens holds
- * for it. The mark is also an attribute, for the 3D view and for tests.
+ * what stands for it and why, and what the active lens holds for it. The lens
+ * mark is also an attribute, for the 3D view and for tests.
  */
 export default function RegionRowButton({ row, isSelected, isTabStop, onSelect, onKeyDown }: Props) {
   return (
@@ -41,13 +40,11 @@ export default function RegionRowButton({ row, isSelected, isTabStop, onSelect, 
           <span className="sr-only">Shape: </span>
           <span className="atlas-row-fact">{row.geometryLabel}</span>
           {row.geometryReason !== null && row.geometryState !== 'drawn' && <span className="atlas-row-why">{row.geometryReason}</span>}
-          <ReviewMark state={row.reviewState} />
         </span>
         <span className="atlas-cell atlas-cell-lens" key={`${row.lens.standing}:${row.lens.value}`}>
           <span className="sr-only">Under this lens: </span>
           <span className="atlas-row-value"><MarkGlyph mark={row.lens.mark} />{row.lens.value}</span>
           <span className="atlas-row-why">{row.lens.reason}; {row.geometryState === 'marker_only' ? MARKER_WORDS : MARK_WORDS[row.lens.mark]}</span>
-          {row.lens.reviewState !== null && <ReviewMark state={row.lens.reviewState} />}
         </span>
       </button>
     </li>

@@ -20,7 +20,7 @@ const LABEL_FONT_SIZE_PX = 11;
 const LABEL_FONT_TOKEN = '--font-mono';
 
 const PALETTE_TOKENS: Record<keyof SignalBenchPalette, string> = {
-  trace: '--color-text-muted',
+  trace: '--color-accent-primary',
   adversarial: '--color-accent-tertiary',
   grid: '--color-border',
   background: '--color-bg-deep',

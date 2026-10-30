@@ -77,7 +77,7 @@ describe('parseAnatomyIndex: wrong types', () => {
   const index: unknown = JSON.parse(indexJson);
   /** Fields the index type declares nullable. Null is a valid value there, so it is not a wrong type. */
   const NULLABLE = new RegExp([
-    '(reason|reason_source|name|extent_match|niss_severity|dsm_cluster|resolved_region_id|index_asset_id|proximity_asset_id|fiducial_space|role|reviewed_on',
+    '(reason|reason_source|name|extent_match|niss_severity|dsm_cluster|resolved_region_id|index_asset_id|proximity_asset_id|fiducial_space|role|reviewed_on|highlight_hue',
     /** The registrar scores only some techniques, and holds a neurorights record for only some: every absent field reads null. */
     '|neurorights|scoring_state|vector|score|pins|folds_into)$',
   ].join(''));

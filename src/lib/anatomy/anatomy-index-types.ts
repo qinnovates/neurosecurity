@@ -156,6 +156,12 @@ export interface IndexSubject {
   geometry: { state: GeometryState; reason: string | null; reason_source: string | null };
   structure_keys: string[];
   declared_children: string[];
+  /**
+   * Carried from the region table's `highlight_hue`: the hue, in whole degrees 0-359, of the colour the scene
+   * shows on the region's shapes under the pointer or while selected, and nothing else. Null for a pathway or a
+   * network, and for a region whose record states none; the scene then derives one from the region's position.
+   */
+  highlight_hue: number | null;
   review_state: IndexReviewState;
   check_status: CheckStatus;
 }

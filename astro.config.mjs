@@ -12,8 +12,22 @@ export default defineConfig({
   site: 'https://qinnovate.com',
   publicDir: 'src/site',
   redirects: {
+    '/glossary/': '/research/whitepaper/#glossary',
+    '/adopt/': '/research/whitepaper/#adopt',
+    '/governance/UNESCO_ALIGNMENT/': '/governance/neurosecurity_governance/',
+    '/governance/foundations/': '/governance/',
+    '/TARA/': '/atlas/tara/',
     // 2026-10-21 rename: State of BCI Security -> Qinnovate Global BCI Landscape Report
     '/research/intel/2026/state-of-bci-security/': '/research/intel/2026/landscape-report/',
+    // Neuromodesty rename of a published post; the old slug was linked from outside the site
+    '/research/papers/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/':
+      '/research/papers/2026-02-13-the-neural-impact-chain-when-niss-scores-map-to-psychiatric-risk-categories/',
+    // Posts were moved from /news/ to /research/papers/; these slugs are still cited elsewhere
+    '/news/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/': '/research/papers/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/',
+    '/news/2026-02-09-tara-therapeutic-atlas-of-risks-and-applications/': '/research/papers/2026-02-09-tara-therapeutic-atlas-of-risks-and-applications/',
+    '/news/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/':
+      '/research/papers/2026-02-13-the-neural-impact-chain-when-niss-scores-map-to-psychiatric-risk-categories/',
+    '/research/papers/q1-2026-bci-intelligence-report/': '/research/papers/2026-03-13-q1-2026-bci-intelligence-report/',
 
     // Legacy short routes
     '/threats/': '/atlas/tara/',

@@ -13,7 +13,6 @@ import InspectorEvidence from './InspectorEvidence';
 import InspectorShapes from './InspectorShapes';
 import InspectorTechniques, { InspectorBandOnly } from './InspectorTechniques';
 import LimitNote from './LimitNote';
-import ReviewMark from './ReviewMark';
 import { buildRegionCoverage, type AtlasCoverage } from './region-coverage';
 
 interface Props {
@@ -77,9 +76,7 @@ export default function RegionInspector(props: Props) {
     <section className="atlas-panel atlas-inspector" aria-labelledby="atlas-inspector-heading" key={region.id}>
       <p className="atlas-kicker">{band === null ? 'No band' : `QIF band ${band.id}, ${band.name}`}</p>
       <h2 className="atlas-heading atlas-inspector-title" id="atlas-inspector-heading" ref={headingRef} tabIndex={-1}>{region.name}</h2>
-      <p className="atlas-fact atlas-inspector-standing">
-        {GEOMETRY_LABELS[region.geometry.state]} <ReviewMark state={region.review_state} />
-      </p>
+      <p className="atlas-fact atlas-inspector-standing">{GEOMETRY_LABELS[region.geometry.state]}</p>
       <p className="atlas-inspector-ways">
         <button type="button" className="atlas-link-button" onClick={props.onBackToList}>Back to the list</button>
         <button type="button" className="atlas-link-button" onClick={props.onBackToView}>Back to the 3D view</button>

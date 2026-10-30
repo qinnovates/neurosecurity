@@ -1,7 +1,6 @@
 import { limitSentence } from '@/lib/anatomy/limits-copy';
 import { NOT_TO_SCALE_END_MM, SCALE_BAR_MM, SOURCE_KIND_WORDS, isLinkable, type LeadFigure as LeadFigureData } from '@/lib/atlas-explorer/lead-figure';
 import LimitNote from './LimitNote';
-import ReviewMark from './ReviewMark';
 
 interface Props {
   figure: LeadFigureData;
@@ -30,7 +29,7 @@ function LeadDrawing({ figure, widestSpanMm }: Props) {
   return (
     <svg
       className="atlas-lead-drawing" viewBox={`0 0 ${width} ${height}`} role="img" data-lead-drawing={figure.id}
-      aria-label={`${figure.name}: ${shape.contacts.length} contacts along ${shape.contact_span_mm} mm, ${shape.diameter_mm} mm thick, drawn to scale with a ${SCALE_BAR_MM} mm bar. ${figure.reviewState.mark}.`}
+      aria-label={`${figure.name}: ${shape.contacts.length} contacts along ${shape.contact_span_mm} mm, ${shape.diameter_mm} mm thick, drawn to scale with a ${SCALE_BAR_MM} mm bar.`}
     >
       <rect className="atlas-lead-body" x={startX} y={top} width={shape.contact_span_mm} height={shape.diameter_mm} />
       <rect className="atlas-lead-end" x={MARGIN_MM} y={top} width={NOT_TO_SCALE_END_MM} height={shape.diameter_mm} />
@@ -74,11 +73,11 @@ function DimensionTable({ figure }: Pick<Props, 'figure'>) {
   );
 }
 
-/** A lead beside the brain: its drawing, its review state, and its table. Never drawn without the review state. */
+/** A lead beside the brain: its drawing and its table. */
 export default function LeadFigure({ figure, widestSpanMm }: Props) {
   return (
     <figure className="atlas-lead" data-lead-id={figure.id}>
-      <figcaption className="atlas-fact"><strong>{figure.name}</strong> <ReviewMark state={figure.reviewState} /></figcaption>
+      <figcaption className="atlas-fact"><strong>{figure.name}</strong></figcaption>
       <LeadDrawing figure={figure} widestSpanMm={widestSpanMm} />
       <DimensionTable figure={figure} />
     </figure>

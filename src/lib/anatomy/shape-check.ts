@@ -16,7 +16,7 @@ export type Shape =
   | { kind: 'text'; maxLength: number }
   | { kind: 'boolean' }
   | { kind: 'always_false' }
-  | { kind: 'integer'; minimum: number }
+  | { kind: 'integer'; minimum: number; maximum: number }
   | { kind: 'number'; minimum: number; maximum: number }
   | { kind: 'word'; allowed: readonly string[] }
   | { kind: 'pattern'; pattern: RegExp; maxLength: number; format: string }
@@ -32,7 +32,7 @@ export const shapes = {
   boolean: { kind: 'boolean' } as Shape,
   /** A flag that nothing may set: it is false or the value is refused. */
   alwaysFalse: { kind: 'always_false' } as Shape,
-  integer: (minimum: number): Shape => ({ kind: 'integer', minimum }),
+  integer: (minimum: number, maximum: number = MAX_NUMBER): Shape => ({ kind: 'integer', minimum, maximum }),
   number: (minimum: number, maximum: number = MAX_NUMBER): Shape => ({ kind: 'number', minimum, maximum }),
   word: (allowed: readonly string[]): Shape => ({ kind: 'word', allowed }),
   /** Text held to a format rather than to a length alone. `format` says how the value must be written. */
@@ -66,7 +66,7 @@ export function checkShape(value: unknown, shape: Shape, location: FieldLocation
     case 'text': requireText(value, location, shape.maxLength); return;
     case 'boolean': requireBoolean(value, location); return;
     case 'always_false': if (value !== false) failAt(location, 'this flag can only be false', 'Remove the claim; nothing in the data may set it.'); return;
-    case 'integer': requireInteger(value, location, shape.minimum); return;
+    case 'integer': requireInteger(value, location, shape.minimum, shape.maximum); return;
     case 'number': requireNumber(value, location, shape.minimum, shape.maximum); return;
     case 'word': requireEnum(value, location, shape.allowed); return;
     case 'pattern': requirePattern(value, location, shape.pattern, shape.maxLength, shape.format); return;

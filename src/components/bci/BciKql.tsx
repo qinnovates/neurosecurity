@@ -7,7 +7,6 @@
 
 import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import {
-  type Row,
   type TableData,
   buildIndexes,
   executeQuery,
@@ -397,6 +396,13 @@ function formatValue(val: unknown, field: string): React.ReactNode {
   return str;
 }
 
+/** Dispatched on `window` by the page with a query string as `detail`; the editor runs it. */
+export const KQL_INJECT_EVENT = 'kql:inject';
+/** Dispatched on `window` by the editor once it is mounted with data and can take a query. */
+export const KQL_READY_EVENT = 'kql:ready';
+/** Marks the editor's root so the page can scroll to it. */
+export const KQL_ROOT_ATTRIBUTE = 'data-kql-root';
+
 // --- Component ---
 
 export default function BciKql({ tables: tablesProp }: BciKqlProps) {
@@ -497,9 +503,15 @@ export default function BciKql({ tables: tablesProp }: BciKqlProps) {
         if (inputRef.current) inputRef.current.value = detail;
       }
     };
-    window.addEventListener('kql:inject', handler);
-    return () => window.removeEventListener('kql:inject', handler);
+    window.addEventListener(KQL_INJECT_EVENT, handler);
+    return () => window.removeEventListener(KQL_INJECT_EVENT, handler);
   }, []);
+
+  // Tell the page the editor can take a query; a pill clicked before hydration re-sends on this.
+  useEffect(() => {
+    if (loading) return;
+    window.dispatchEvent(new CustomEvent(KQL_READY_EVENT));
+  }, [loading]);
 
   useEffect(() => {
     if (inputRef.current && inputRef.current.value !== query) {
@@ -521,7 +533,7 @@ export default function BciKql({ tables: tablesProp }: BciKqlProps) {
   }
 
   return (
-    <div style={S.container}>
+    <div style={S.container} {...{ [KQL_ROOT_ATTRIBUTE]: '' }}>
       <div style={S.header}>
         <h2 style={S.title}>Query</h2>
         <span style={{ fontSize: '0.875rem', color: 'var(--color-text-muted, #94a3b8)' }}>

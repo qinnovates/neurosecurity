@@ -48,6 +48,8 @@ interface SubjectFacts {
   crosswalk: ReviewedCrosswalk;
   noGeometry: readonly ReviewedNoGeometry[];
   bandsByRegion: ReadonlyMap<string, string>;
+  /** Region id -> the hue its record states for its highlight, where it states one. */
+  huesByRegion: ReadonlyMap<string, number>;
   /** Structure key -> the largest vertex count among its shipped nodes. Zero means a marker with no mesh. */
   shippedNodes: ReadonlyMap<string, number>;
 }
@@ -103,6 +105,7 @@ function toSubject(data: AnatomyData, kind: SubjectKind, id: string, name: strin
     geometry: describeGeometry(kind, id, facts),
     structure_keys: [...new Set(structureKeys)],
     declared_children: declaredChildren,
+    highlight_hue: (kind === 'region' ? facts.huesByRegion.get(id) : undefined) ?? null,
     review_state: toIndexReviewState(worstReviewState(reviewStates)),
     check_status: worstCheckStatus(rows.map((reviewed) => reviewed.check_status)),
   };
@@ -115,7 +118,11 @@ export function buildSubjects(data: AnatomyData, crosswalk: ReviewedCrosswalk, n
     const key = structureKey(node.extras.atlas, node.extras.label_id);
     shippedNodes.set(key, Math.max(shippedNodes.get(key) ?? 0, node.vertex_count));
   }
-  const facts: SubjectFacts = { crosswalk, noGeometry, shippedNodes, bandsByRegion: new Map(data.engineData.regions.map((region) => [region.id, region.bandId])) };
+  const facts: SubjectFacts = {
+    crosswalk, noGeometry, shippedNodes,
+    bandsByRegion: new Map(data.engineData.regions.map((region) => [region.id, region.bandId])),
+    huesByRegion: new Map(data.engineData.regions.flatMap((region) => (region.highlightHue === null ? [] : [[region.id, region.highlightHue] as const]))),
+  };
   const kinds: SubjectKind[] = ['region', 'pathway', 'network'];
   return kinds.flatMap((kind) => [...data.subjectNames[kind]].map(([id, name]) => toSubject(data, kind, id, name, facts)));
 }

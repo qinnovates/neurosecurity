@@ -17,7 +17,6 @@ import { buildServedFiles, requestedPaths, serveFiles, type ServedFile } from '.
 const REAL_FILES = buildServedFiles();
 const REAL_INDEX = JSON.parse(REAL_FILES[ANATOMY_INDEX_PATH] as string) as AnatomyIndex;
 const REAL_EVIDENCE = JSON.parse(REAL_FILES[REGION_EVIDENCE_PATH] as string) as RegionEvidence;
-const UNREVIEWED = 'AI-drafted, unreviewed';
 /** Each test renders the whole explorer over the real data; on a loaded machine that can pass the default five seconds. */
 const TEST_TIMEOUT_MS = 20_000;
 vi.setConfig({ testTimeout: TEST_TIMEOUT_MS });
@@ -69,19 +68,17 @@ describe('AtlasExplorer: the inspector', () => {
     expect(requestedPaths(fetchMock)).not.toContain(H01_CARD_PATH);
   });
 
-  it('shows what the atlas file says, the geometry status with its limit, and the mark', async () => {
+  it('shows what the atlas file says and the geometry status with its limit', async () => {
     const { inspector } = await openRegion(litRegionId);
     expect(inspector.querySelector('[data-limit-id="region_description"]')).not.toBeNull();
     expect(inspector.querySelector('[data-limit-id^="geometry_"]')).not.toBeNull();
-    expect(within(inspector).getByRole('heading', { name: 'What stands for it' }).parentElement?.querySelector('[data-ai-drafted="true"]')?.textContent).toBe(UNREVIEWED);
   });
 
-  it('shows each linked technique with the catalog\'s own quoted words and the AI-drafted mark', async () => {
+  it('shows each linked technique with the catalog\'s own quoted words', async () => {
     const { inspector } = await openRegion(litRegionId);
     const linked = [...inspector.querySelectorAll<HTMLElement>('.atlas-techniques')][0].querySelectorAll<HTMLElement>('.atlas-technique');
     expect(linked.length).toBeGreaterThan(0);
     for (const technique of linked) {
-      expect(technique.querySelector('[data-ai-drafted="true"]')?.textContent, technique.dataset.techniqueId).toBe(UNREVIEWED);
       expect(technique.querySelector('blockquote')?.textContent?.length, technique.dataset.techniqueId).toBeGreaterThan(10);
     }
     expect(inspector.querySelector('[data-limit-id="technique_quote"]')).not.toBeNull();
@@ -122,7 +119,7 @@ describe('AtlasExplorer: literature statements', () => {
     const statements = [...inspector.querySelectorAll<HTMLElement>('.atlas-statement')];
     expect(statements).toHaveLength(3);
     for (const statement of statements) {
-      expect(statement.querySelector('[data-anatomy-line="true"]')?.textContent).toMatch(/^Filed under Posterior Parietal Cortex; the paper says ".+"\. AI-drafted, unreviewed$/);
+      expect(statement.querySelector('[data-anatomy-line="true"]')?.textContent).toMatch(/^Filed under Posterior Parietal Cortex; the paper says ".+"\.$/);
       expect(statement.querySelector('[data-limit-id^="evidence_match_"]')).not.toBeNull();
       expect(statement.querySelector('blockquote')?.textContent?.length).toBeGreaterThan(10);
       expect(statement.querySelector('a[href^="https://pubmed.ncbi.nlm.nih.gov/"]')?.getAttribute('rel')).toBe('noopener noreferrer');
@@ -479,19 +476,17 @@ describe('AtlasExplorer: device stages and the H01 card', () => {
     expect(['device_stages', 'stage_tags', 'band_order'].filter((id) => rail.querySelector(`[data-limit-id="${id}"]`) === null)).toEqual([]);
     expect(openEveryStage(rail)).toEqual(deviceOnlyIds);
     expect(deviceOnlyIds).toHaveLength(67);
-    expect(rail.querySelector('[data-ai-drafted]')).toBeNull();
     expect(rail.querySelectorAll('[data-mixed="true"]')).toHaveLength(0);
     expect(rail.textContent).not.toContain('Also carries');
   });
 
-  it('opens one stage at a time and marks every drafted link it shows once mixed techniques are listed', async () => {
+  it('opens one stage at a time and counts every drafted link it shows once mixed techniques are listed', async () => {
     const rail = await renderRail();
     fireEvent.click(within(rail).getByRole('button', { name: /Also list the 77 techniques/ }));
     expect(openEveryStage(rail)).toHaveLength(144);
     expect(rail.querySelectorAll('[data-stage-id][data-active="true"]')).toHaveLength(1);
     const withLinks = [...rail.querySelectorAll<HTMLElement>('[data-mixed="true"]')].filter((item) => /\d+ region links? drafted/.test(item.textContent ?? ''));
     expect(withLinks.length).toBeGreaterThan(0);
-    expect(withLinks.filter((item) => item.querySelector('[data-ai-drafted="true"]')?.textContent !== UNREVIEWED)).toEqual([]);
     expect(rail.querySelector('[data-limit-id="device_stages_mixed"]')).not.toBeNull();
   });
 
@@ -505,7 +500,6 @@ describe('AtlasExplorer: device stages and the H01 card', () => {
     expect(requestedPaths(fetchMock).filter((path) => path === H01_CARD_PATH)).toHaveLength(1);
     expect(panel.querySelectorAll('.atlas-h01-sentences > li')).toHaveLength(5);
     expect(within(panel).getAllByRole('button', { name: /^Sources for this sentence \(\d\)$/ })).toHaveLength(5);
-    expect(panel.querySelector('[data-ai-drafted="true"]')?.textContent).toBe(UNREVIEWED);
     const caveats = [...panel.querySelectorAll('[data-caveats="true"] li')].map((item) => item.textContent ?? '');
     expect(caveats).toHaveLength(10);
     expect(caveats[0]).toBe('This sample is not a whole brain: it is about one cubic millimetre.');

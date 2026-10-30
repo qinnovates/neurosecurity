@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { buildEngineData } from '../build-engine-data';
 import { ThreatModelDataError } from '../errors';
 import { parseArchetypes } from '../parse-archetypes';
 import { parseComplianceUs } from '../parse-compliance';
@@ -37,6 +38,31 @@ describe('bundled reference data', () => {
       expect(source?.url.startsWith('https://')).toBe(true);
       expect(source?.dateRead).toMatch(/^\d{4}-\d{2}-\d{2}$/);
       expect(requirement.quote.length).toBeGreaterThanOrEqual(20);
+    }
+  });
+});
+
+describe('brain region highlight hues', () => {
+  const LAST_HUE_DEGREE = 359;
+  const rawSources = { registrar: readDataFile('qtara-registrar.json'), atlas: readDataFile('qif-brain-bci-atlas.json'), cveMapping: readDataFile('cve-technique-mapping.json') };
+  const withFirstRegion = (edit: (region: Record<string, unknown>) => void): typeof rawSources => {
+    const atlas = cloneData(rawSources.atlas) as { brain_regions: Record<string, unknown>[] };
+    edit(atlas.brain_regions[0]);
+    return { ...rawSources, atlas };
+  };
+
+  it('carries every region\'s whole-degree hue, no two the same', () => {
+    const hues = bundle.engineData.regions.map((region) => region.highlightHue);
+    for (const hue of hues) expect(hue !== null && Number.isInteger(hue) && hue >= 0 && hue <= LAST_HUE_DEGREE, String(hue)).toBe(true);
+    expect(new Set(hues).size).toBe(hues.length);
+  });
+
+  it('reads a region that states no hue as null, and rejects one that states a hue that is not a whole degree', () => {
+    expect(buildEngineData(withFirstRegion((region) => { delete region.highlight_hue; })).engineData.regions[0].highlightHue).toBeNull();
+    expect(buildEngineData(withFirstRegion((region) => { region.highlight_hue = null; })).engineData.regions[0].highlightHue).toBeNull();
+    for (const wrong of [360, -1, 12.5, '120', true]) {
+      expect(() => buildEngineData(withFirstRegion((region) => { region.highlight_hue = wrong; })), String(wrong)).toThrow(/brain_regions\[0\]\.highlight_hue/);
+      expect(() => buildEngineData(withFirstRegion((region) => { region.highlight_hue = wrong; })), String(wrong)).toThrow(ThreatModelDataError);
     }
   });
 });

@@ -54,6 +54,6 @@ Will the "Neo Y2K Bubble Pop" just be another trend again?
 
 I wonder if DaVinci stopped to think "Hmm following this crazy plague, I shall call this the Renaeesancehe." (jk, idk how old Italians would pronounce it then.)
 
-[View the prediction page the AI built: POST-CYBERPUNK — The Human Web Returns](/post-cyberpunk.html)
+The prediction page the AI built: POST-CYBERPUNK — The Human Web Returns.
 
 [Read the Medium post](https://medium.com/@qikevinl/my-unofficial-apple-wallpaper-index-analysis-on-the-return-of-0b09c1f42de5?postPublishedType=repub)

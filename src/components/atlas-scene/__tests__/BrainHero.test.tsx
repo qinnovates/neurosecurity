@@ -152,7 +152,6 @@ describe('the brain hero: a pick and the way on', () => {
       const link = risk.querySelector('a');
       if (model.catalogTechniqueIds.has(technique.id)) expect(link?.getAttribute('href')).toBe(techniquePagePath(technique.id));
       else expect(link).toBeNull();
-      expect(risk.querySelector('[data-review-state]')).not.toBeNull();
     }
     if (shown.length === 0) expect(card.textContent).toContain(HERO_COPY.risks_none);
     else expect(card.textContent).toContain(HERO_COPY.risks_note);
@@ -167,8 +166,6 @@ describe('the brain hero: a pick and the way on', () => {
     for (const link of card.querySelectorAll('a')) {
       expect(link.classList.contains('brain-hero-cta') || /^\/atlas\/tara\/[^/]+\/$/.test(link.getAttribute('href') ?? '')).toBe(true);
     }
-    // The region's drafted links carry their review mark, so the count is never shown without it.
-    expect(card.querySelector('[data-review-state]')).not.toBeNull();
     expect(card.textContent).toContain(HERO_COPY.selected_bands);
     // The picture names the selection too, and holds no second way on: the card's link is the one action.
     expect(container.querySelector('[data-picture-selected]')?.getAttribute('data-picture-selected')).toBe(ownRegion.name);

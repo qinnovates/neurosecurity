@@ -64,10 +64,14 @@ const structure = shapes.record({
   review_state: reviewState, check_status: checkStatus,
 });
 
+/** A hue is a whole number of degrees around the wheel. */
+const LAST_HUE_DEGREE = 359;
+
 const subject = shapes.record({
   kind: shapes.word(SUBJECT_KINDS), id, name: text, band_ids: ids,
   geometry: shapes.record({ state: shapes.word(GEOMETRY_STATES), reason: shapes.nullable(text), reason_source: shapes.nullable(text) }),
-  structure_keys: shapes.list(text), declared_children: ids, review_state: reviewState, check_status: checkStatus,
+  structure_keys: shapes.list(text), declared_children: ids, highlight_hue: shapes.nullable(shapes.integer(0, LAST_HUE_DEGREE)),
+  review_state: reviewState, check_status: checkStatus,
 });
 
 const link = shapes.record({

@@ -70,7 +70,7 @@ const windows = [
 
           {/* Window Label */}
           <div>
-            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--color-accent-secondary)]">
               Window {i + 1}
             </span>
             <h4 class="text-sm font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mt-1 mb-3">
@@ -84,7 +84,7 @@ const windows = [
                   class="pim-bullet text-xs text-[var(--color-text-muted)] leading-relaxed flex items-start gap-1.5"
                   style={`--bullet-index: ${ai};`}
                 >
-                  <span class="text-emerald-400 mt-0.5 shrink-0">&#8226;</span>
+                  <span class="text-[var(--color-accent-secondary)] mt-0.5 shrink-0">&#8226;</span>
                   {action}
                 </li>
               ))}

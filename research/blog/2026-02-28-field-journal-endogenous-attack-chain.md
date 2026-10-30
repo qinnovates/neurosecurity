@@ -87,7 +87,7 @@ This framework is essential for me to make sense of my recovery and the changes 
 
 I didn't build QIF because it was an interesting research problem. I built it because I lived the attack chain. And I needed a language precise enough to describe what happened, structured enough to prevent it from happening to others, and honest enough to admit that the body can be its own worst threat actor.
 
-[Read the full case study with interactive visualizations](/case-studies/endogenous-attack-chain/)
+[Read the full case study with interactive visualizations](/atlas/analysis/)
 
 ---
 

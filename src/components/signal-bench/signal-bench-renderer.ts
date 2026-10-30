@@ -51,6 +51,12 @@ const WRITE_HEAD_RADIUS_PX = 2.5;
 const LANE_AMPLITUDE_RATIO = 0.4;
 const TRACE_WIDTH_PX = 1.25;
 const ADVERSARIAL_WIDTH_PX = 1.75;
+/** Healthy traces sit back at this alpha (3.35:1 on black, 3.42:1 on the light ground) so the altered run is the brightest thing on the strip. */
+const TRACE_ALPHA = 0.7;
+/** The altered run and its write head carry a soft halo of their own colour. */
+const ADVERSARIAL_GLOW_PX = 6;
+/** A faint wash of the adversarial colour behind the lanes an event touches, so the window reads as a region before the trace is read. */
+const EVENT_WASH_ALPHA = 0.07;
 const GHOST_OFFSET_RATIO = 0.42;
 const GHOST_AMPLITUDE_RATIO = 0.6;
 const GHOST_DASH_PX = [3, 3];
@@ -109,10 +115,41 @@ function drawTimeGrid(frame: SignalBenchFrame, geometry: StripGeometry): void {
   context.stroke();
 }
 
+function setAdversarialGlow(frame: SignalBenchFrame): void {
+  frame.context.shadowColor = frame.palette.adversarial;
+  frame.context.shadowBlur = ADVERSARIAL_GLOW_PX;
+}
+
 function strokeRun(frame: SignalBenchFrame, isAdversarial: boolean): void {
-  frame.context.strokeStyle = isAdversarial ? frame.palette.adversarial : frame.palette.trace;
-  frame.context.lineWidth = isAdversarial ? ADVERSARIAL_WIDTH_PX : TRACE_WIDTH_PX;
-  frame.context.stroke();
+  const { context } = frame;
+  context.save();
+  if (isAdversarial) {
+    context.strokeStyle = frame.palette.adversarial;
+    context.lineWidth = ADVERSARIAL_WIDTH_PX;
+    setAdversarialGlow(frame);
+  } else {
+    context.strokeStyle = frame.palette.trace;
+    context.lineWidth = TRACE_WIDTH_PX;
+    context.globalAlpha = TRACE_ALPHA;
+  }
+  context.stroke();
+  context.restore();
+}
+
+/** Tints the lanes an event touches, between its start and end, before any trace is drawn over it. */
+function drawEventWash(frame: SignalBenchFrame, geometry: StripGeometry, event: SignalEventWindow): void {
+  const startX = Math.max(0, getXAtTime(frame, geometry, event.startTime));
+  const endX = Math.min(geometry.headX, getXAtTime(frame, geometry, event.endTime));
+  if (endX <= startX) return;
+  const { context } = frame;
+  context.save();
+  context.globalAlpha = EVENT_WASH_ALPHA;
+  context.fillStyle = frame.palette.adversarial;
+  for (let channel = 0; channel < frame.channelCount; channel++) {
+    if (!isChannelAffected(event, channel)) continue;
+    context.fillRect(startX, getLaneCenter(geometry, channel) - geometry.laneHeight / 2, endX - startX, geometry.laneHeight);
+  }
+  context.restore();
 }
 
 function drawChannelTrace(frame: SignalBenchFrame, geometry: StripGeometry, visibleEvents: VisibleEvents, channel: number): void {
@@ -222,10 +259,13 @@ function drawWriteHeads(frame: SignalBenchFrame, geometry: StripGeometry, visibl
   const currentEvent = getEventForTime(visibleEvents, frame.time);
   for (let channel = 0; channel < frame.channelCount; channel++) {
     const sample = sampleChannel(channel, frame.time, currentEvent);
+    context.save();
     context.fillStyle = sample.isAdversarial ? frame.palette.adversarial : frame.palette.trace;
+    if (sample.isAdversarial) setAdversarialGlow(frame);
     context.beginPath();
     context.arc(geometry.headX, getLaneCenter(geometry, channel) - sample.value * geometry.amplitude, WRITE_HEAD_RADIUS_PX, 0, Math.PI * 2);
     context.fill();
+    context.restore();
   }
 }
 
@@ -236,6 +276,7 @@ export function drawSignalBench(frame: SignalBenchFrame): void {
   frame.context.clearRect(0, 0, frame.width, frame.height);
   frame.context.lineJoin = 'round';
   drawTimeGrid(frame, geometry);
+  for (const event of visibleEvents.windows) drawEventWash(frame, geometry, event);
   for (let channel = 0; channel < frame.channelCount; channel++) {
     drawChannelTrace(frame, geometry, visibleEvents, channel);
   }

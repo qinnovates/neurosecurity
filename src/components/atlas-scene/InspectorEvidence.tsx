@@ -3,8 +3,6 @@ import { buildRegionEvidenceView, type CitationView, type EvidenceStatement } fr
 import type { Loaded } from './explorer-data';
 import LimitNote from './LimitNote';
 import LoadNotice from './LoadNotice';
-import ReviewMark from './ReviewMark';
-import { UNREVIEWED_MARK } from './unreviewed-mark';
 
 interface Props {
   regionId: string;
@@ -27,7 +25,7 @@ function Citation({ view }: { view: CitationView }) {
 function Statement({ statement }: { statement: EvidenceStatement }) {
   return (
     <li className="atlas-statement" data-contested={statement.contestedLimit !== null} data-about-region={statement.isAboutRegionItself}>
-      <p className="atlas-filed" data-anatomy-line="true">{statement.filedUnderLine} <ReviewMark state={UNREVIEWED_MARK} /></p>
+      <p className="atlas-filed" data-anatomy-line="true">{statement.filedUnderLine}</p>
       {statement.anatomyLimits.map((limit) => <LimitNote key={limit.id} limit={limit} />)}
       {statement.contestedLimit !== null && <><p className="atlas-flag">Contested</p><LimitNote limit={statement.contestedLimit} /></>}
       {statement.rivalLimit !== null && <LimitNote limit={statement.rivalLimit} />}

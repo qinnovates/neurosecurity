@@ -337,13 +337,13 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
   <!-- ═══════════════════════════════════════════════════════ -->
   <section class="py-12 md:py-20">
     <div class="text-center max-w-3xl mx-auto mb-12">
-      <p class="text-xs font-medium tracking-[0.2em] uppercase mb-4 text-emerald-500">
+      <p class="text-xs font-medium tracking-[0.2em] uppercase mb-4 text-[var(--color-accent-secondary)]">
         Clinical &amp; Therapeutic Research
       </p>
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-6 leading-[1.15]">
         <span class="text-[var(--color-text-primary)]">Clinical category references</span>
         <br />
-        <span class="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-transparent">
+        <span class="bg-gradient-to-r from-[var(--color-accent-secondary-fill)] via-[var(--color-accent-secondary-fill)] to-[var(--color-accent-fill)] bg-clip-text text-transparent">
           for Threat Modeling.
         </span>
       </h1>
@@ -358,25 +358,25 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
     <!-- Stats bar -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mb-12">
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-emerald-500">
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">
           {dsm5Stats.withDsm5}
         </p>
         <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">DSM-5 mapped<br/><span class="text-[var(--color-text-faint)]">of {totalTechniques} techniques</span></p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-teal-500">
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">
           {clinical.length}
         </p>
         <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">therapeutic<br/><span class="text-[var(--color-text-faint)]">analogs mapped</span></p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-cyan-500">
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">
           {uniqueDiagnoses}
         </p>
         <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">DSM-5-TR<br/><span class="text-[var(--color-text-faint)]">category references</span></p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-green-500">
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">
           {uniqueConditions}
         </p>
         <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">treatable<br/><span class="text-[var(--color-text-faint)]">conditions</span></p>
@@ -731,7 +731,7 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
       <div class="text-center mt-4">
         <a
           href="/research/papers/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/"
-          class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-500 hover:underline"
+          class="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--color-accent-secondary)] hover:underline"
         >
           Read the full Neural Impact Chain paper
           <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -767,7 +767,7 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
         return (
           <a
             href={`/atlas/tara/${t.id}/`}
-            class="glass rounded-lg p-4 hover:ring-1 hover:ring-emerald-500/20 transition-all group"
+            class="glass rounded-lg p-4 hover:ring-1 hover:ring-[var(--color-accent-secondary)]/20 transition-all group"
           >
             <div class="flex items-start justify-between gap-2 mb-2">
               <p class="text-xs font-mono text-[var(--color-text-faint)]">{t.id}</p>
@@ -778,7 +778,7 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
                 {clusterLabel}
               </span>
             </div>
-            <p class="text-sm font-medium text-[var(--color-text-primary)] mb-1 group-hover:text-emerald-500 transition-colors">
+            <p class="text-sm font-medium text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-accent-secondary)] transition-colors">
               {t.name}
             </p>
             <p class="text-xs text-[var(--color-text-faint)] mb-3 line-clamp-1">
@@ -862,7 +862,7 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
                   </td>
                   <td class="py-2 px-2 text-[var(--color-text-faint)]">{nt.chemical_class || '—'}</td>
                   <td class="py-2 px-2 text-center font-mono">{synthSteps}</td>
-                  <td class="py-2 px-2 text-center font-mono text-cyan-400">{receptorCount}</td>
+                  <td class="py-2 px-2 text-center font-mono text-[var(--color-accent-primary)]">{receptorCount}</td>
                   <td class="py-2 px-2 text-center font-mono text-amber-400">{cofactorCount}</td>
                   <td class="py-2 px-2 text-[10px] text-[var(--color-text-faint)]">{enzymes.join(', ') || '—'}</td>
                   <td class="py-2 px-2">
@@ -882,11 +882,11 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
 
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-green-400">{totalNeurotransmitters}</p>
+        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{totalNeurotransmitters}</p>
         <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Neurotransmitters</p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-cyan-400">{totalReceptors}</p>
+        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{totalReceptors}</p>
         <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Receptor Subtypes</p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
@@ -894,7 +894,7 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
         <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Cofactor Dependencies</p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-purple-400">{totalSynthSteps}</p>
+        <p class="text-xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">{totalSynthSteps}</p>
         <p class="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider mt-1">Synthesis Steps</p>
       </div>
     </div>
@@ -914,7 +914,7 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
     <div class="text-center max-w-3xl mx-auto mb-12">
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] tracking-tight mb-4">
         <span class="text-[var(--color-text-primary)]">Same Mechanism.</span>
-        <span class="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-transparent ml-2">
+        <span class="bg-gradient-to-r from-[var(--color-accent-secondary-fill)] via-[var(--color-accent-secondary-fill)] to-[var(--color-accent-fill)] bg-clip-text text-transparent ml-2">
           Two Outcomes.
         </span>
       </h2>
@@ -928,15 +928,15 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
     <!-- Therapeutics stats bar -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mb-12">
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-emerald-500">{clinical.length}</p>
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">{clinical.length}</p>
         <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">therapeutic<br/>analogs mapped</p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-cyan-500">{uniqueConditions}</p>
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">{uniqueConditions}</p>
         <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">treatable<br/>conditions</p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
-        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-green-500">{fdaGroups[0].count + fdaGroups[1].count}</p>
+        <p class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-secondary)]">{fdaGroups[0].count + fdaGroups[1].count}</p>
         <p class="text-[10px] sm:text-xs text-[var(--color-text-muted)] mt-1 leading-tight">FDA approved<br/>or cleared</p>
       </div>
       <div class="glass rounded-lg p-4 text-center">
@@ -1233,12 +1233,12 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
         const duC = DUAL_USE_COLORS[du as DualUse];
         const fda = fdaColor(c.fda_status);
         return (
-          <a href={`/atlas/tara/${t.id}/`} class="glass rounded-lg p-4 hover:ring-1 hover:ring-emerald-500/20 transition-all group">
+          <a href={`/atlas/tara/${t.id}/`} class="glass rounded-lg p-4 hover:ring-1 hover:ring-[var(--color-accent-secondary)]/20 transition-all group">
             <div class="flex items-start justify-between gap-2 mb-2">
               <p class="text-xs font-mono text-[var(--color-text-faint)]">{t.id}</p>
               <span class="px-2 py-0.5 rounded-full text-[9px] font-semibold uppercase shrink-0" style={`background: ${duC.bg}; color: ${duC.text}; border: 1px solid ${duC.border};`}>{du.replace('_', ' ')}</span>
             </div>
-            <p class="text-sm font-medium text-[var(--color-text-primary)] mb-1 group-hover:text-emerald-500 transition-colors">{c.therapeutic_analog}</p>
+            <p class="text-sm font-medium text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-accent-secondary)] transition-colors">{c.therapeutic_analog}</p>
             <p class="text-xs text-[var(--color-text-faint)] mb-3 line-clamp-1">Attack: {t.name}</p>
             <div class="flex flex-wrap gap-1.5 mb-2">
               <span class="px-2 py-0.5 rounded-full text-[10px] font-medium" style={`background: ${fda.bg}; color: ${fda.text};`}>{c.fda_status}</span>
@@ -1285,7 +1285,7 @@ const domainCards: ClinicalDomainInfo[] = MATRIX_ROWS.map(row => {
       <div class="flex flex-wrap items-center justify-center gap-3">
         <a
           href="/atlas/"
-          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-white transition-colors bg-emerald-600 hover:bg-emerald-700"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-white transition-colors bg-[var(--color-accent-secondary-fill)] hover:bg-[var(--color-accent-secondary-fill)]"
         >
           Threat Explorer
         </a>

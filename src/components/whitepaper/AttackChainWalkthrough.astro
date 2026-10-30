@@ -84,7 +84,7 @@ const steps = [
               <span class="text-xs font-semibold uppercase tracking-wider" style={`color: ${step.color};`}>{step.label}</span>
               <span class="text-xs text-[var(--color-text-faint)]">{step.bandName}</span>
               {step.technique && (
-                <a href={`/atlas/tara/${step.technique.replace('QIF-', '')}/`} class="text-[10px] font-mono text-[var(--color-accent-primary)] hover:underline ml-auto">{step.technique}</a>
+                <a href={`/atlas/tara/${step.technique}/`} class="text-[10px] font-mono text-[var(--color-accent-primary)] hover:underline ml-auto">{step.technique}</a>
               )}
             </div>
             <p class="text-xs text-[var(--color-text-muted)]">{step.content}</p>

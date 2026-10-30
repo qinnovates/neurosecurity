@@ -16,7 +16,7 @@ import {
   DirectionalLight, HemisphereLight, type Material, type Mesh, type Object3D, PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer, type BufferGeometry,
 } from 'three';
 import { HEAD_VIEW_SCALE, type DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
-import { HOVER_EMISSIVE, SELECTED_EMISSIVE_INTENSITY, axisDirectionsFor, choosePickTarget, hoverParamsFor, idleTurnSpeed, pointerToNdc, stepEaseDuration, type AxisDirections, type PickHit, type PickTarget } from '@/lib/atlas-explorer/scene-drawing';
+import { axisDirectionsFor, choosePickTarget, hoverParamsFor, idleTurnSpeed, pointerToNdc, stepEaseDuration, type AxisDirections, type PickHit, type PickTarget } from '@/lib/atlas-explorer/scene-drawing';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import { rasToScene } from '@/lib/anatomy/ras-to-scene';
 import {
@@ -129,20 +129,20 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
   const raycaster = new Raycaster();
 
   /**
-   * The selection, on the selected shapes themselves: the same lift as hover, held. A shape with a region's own colour
-   * takes it; a filled shape is lit from within; a see-through one is drawn denser and gets no light, by the same rule
-   * as hover, so it never reads as holding a value it does not hold. A marker ring is not lifted, for the reason given
-   * at applyHover.
+   * The selection, on the selected shapes themselves: the same lift as hover, held lower. A shape with a region's own
+   * colour takes it and is lit in it; a filled shape with none is lit in white; a see-through one is drawn denser and
+   * gets no light, by the same rule as hover, so it never reads as holding a value it does not hold. A marker ring is
+   * not lifted, for the reason given at applyHover.
    */
   const glowSelected = (selectedKeys: ReadonlySet<string>): void => {
     for (const entry of objects.filter((item) => selectedKeys.has(item.shape.structureKey) && item.shape.sizeMark !== 'ring_only')) {
-      const params = hoverParamsFor(entry.shape);
+      const params = hoverParamsFor(entry.shape, 'selected');
       const opacity = Math.max(params.opacity, ...entry.pickTargets.map((target) => (target.material as Material).opacity));
       for (const target of entry.pickTargets) {
         const material = target.material as Glowing;
         Object.assign(material, { opacity, transparent: opacity < 1 });
         if (entry.shape.highlightColour !== null) material.color?.set(entry.shape.highlightColour);
-        if (params.emissiveIntensity > 0 && material.emissive !== undefined) { material.emissive.set(HOVER_EMISSIVE); material.emissiveIntensity = SELECTED_EMISSIVE_INTENSITY; }
+        if (params.emissiveColour !== null && material.emissive !== undefined) { material.emissive.set(params.emissiveColour); material.emissiveIntensity = params.emissiveIntensity; }
       }
     }
   };
@@ -175,7 +175,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
         Object.assign(material, { opacity: params.opacity, transparent: params.opacity < 1 });
         // The region's own colour, so the shape under the pointer is told from its neighbours; it is no step's colour.
         if (entry.shape.highlightColour !== null) material.color?.set(entry.shape.highlightColour);
-        if (params.emissiveIntensity > 0 && material.emissive !== undefined) { material.emissive.set(HOVER_EMISSIVE); material.emissiveIntensity = params.emissiveIntensity; }
+        if (params.emissiveColour !== null && material.emissive !== undefined) { material.emissive.set(params.emissiveColour); material.emissiveIntensity = params.emissiveIntensity; }
       }
     }
   };
@@ -257,6 +257,14 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
     }
     invalidate();
   };
+  const onPointerLeave = (): void => {
+    hoverPoint = null;
+    if (hoveredKey === null) return;
+    hoveredKey = null;
+    applyHover(null);
+    callbacks.onHover(null);
+    invalidate();
+  };
   const onPointerUp = (event: PointerEvent): void => {
     const isClick = press !== null && Math.hypot(event.clientX - press.x, event.clientY - press.y) < CLICK_SLOP_PX;
     press = null;
@@ -282,7 +290,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
     callbacks.onContextLost();
   };
   const listeners: Array<[string, EventListener, AddEventListenerOptions?]> = [
-    ['pointerdown', onPointerDown as EventListener], ['pointermove', onPointerMove as EventListener], ['pointerup', onPointerUp as EventListener], ['pointercancel', onPointerCancel],
+    ['pointerdown', onPointerDown as EventListener], ['pointermove', onPointerMove as EventListener], ['pointerleave', onPointerLeave], ['pointerup', onPointerUp as EventListener], ['pointercancel', onPointerCancel],
     ['wheel', onWheel as EventListener, { passive: false }], ['webglcontextlost', onContextLost],
   ];
   for (const [type, listener, options] of listeners) canvas.addEventListener(type, listener, options);

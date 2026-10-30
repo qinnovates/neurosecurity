@@ -3,8 +3,6 @@ import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { buildRegionDsm, type RegionDsmReference } from '@/lib/atlas-explorer/region-dsm';
 import Disclosure from './Disclosure';
 import LimitNote from './LimitNote';
-import ReviewMark from './ReviewMark';
-import { UNREVIEWED_MARK } from './unreviewed-mark';
 
 interface Props {
   model: ExplorerModel;
@@ -41,20 +39,14 @@ export default function InspectorDsm({ model, regionId }: Props) {
     <section className="atlas-section" aria-labelledby="atlas-inspector-dsm">
       <h3 className="atlas-subheading" id="atlas-inspector-dsm">DSM-5-TR category references</h3>
       <LimitNote limit={limitSentence('dsm_references')} />
-      <h4 className="atlas-minor-heading">
-        Through linked techniques ({describeReferenceCount(dsm.viaTechniques)}){' '}
-        {dsm.linkReviewState !== null && <ReviewMark state={dsm.linkReviewState} />}
-      </h4>
+      <h4 className="atlas-minor-heading">Through linked techniques ({describeReferenceCount(dsm.viaTechniques)})</h4>
       {dsm.viaTechniques.length === 0 ? <LimitNote limit={limitSentence('dsm_none')} /> : (
         <>
           <LimitNote limit={limitSentence('dsm_via_techniques')} />
           <Disclosure label="Show them"><ReferenceList references={dsm.viaTechniques} /></Disclosure>
         </>
       )}
-      <h4 className="atlas-minor-heading" data-dsm-group="pathways">
-        Through pathways ({describeReferenceCount(dsm.viaPathways)}){' '}
-        {dsm.pathwayNames.length > 0 && <ReviewMark state={UNREVIEWED_MARK} />}
-      </h4>
+      <h4 className="atlas-minor-heading" data-dsm-group="pathways">Through pathways ({describeReferenceCount(dsm.viaPathways)})</h4>
       {dsm.pathwayNames.length === 0 ? <LimitNote limit={limitSentence('dsm_none')} /> : (
         <>
           <LimitNote limit={limitSentence('dsm_via_pathways', { pathways: dsm.pathwayNames.join(', ') })} />

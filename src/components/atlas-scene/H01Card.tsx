@@ -8,8 +8,6 @@ import Disclosure from './Disclosure';
 import { loadH01Card } from './explorer-companions';
 import LimitNote from './LimitNote';
 import LoadNotice from './LoadNotice';
-import ReviewMark from './ReviewMark';
-import { UNREVIEWED_MARK } from './unreviewed-mark';
 import { useLoaded } from './use-loaded';
 
 function Fact({ fact }: { fact: H01Fact }) {
@@ -25,7 +23,7 @@ function CardBody({ card }: { card: H01CardData }) {
   const factsById = new Map(card.facts.map((fact) => [fact.id, fact]));
   return (
     <div className="atlas-h01">
-      <h3 className="atlas-subheading">{card.card.title} <ReviewMark state={UNREVIEWED_MARK} /></h3>
+      <h3 className="atlas-subheading">{card.card.title}</h3>
       <ol className="atlas-h01-sentences">
         {card.card.sentences.map((sentence) => (
           <li key={sentence.text}>

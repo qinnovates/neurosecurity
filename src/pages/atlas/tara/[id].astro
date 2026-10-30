@@ -3,7 +3,7 @@ import { statusToEvidenceTier } from '../../../lib/evidence-tiers';
 import PageLayout from '@/layouts/PageLayout.astro';
 import BandViewPanel from '@/components/brain/BandViewPanel';
 import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';
-import { readLinksReview, readUncolouredLimit } from '@/components/atlas-scene/build-technique-colouring';
+import { readUncolouredLimit } from '@/components/atlas-scene/build-technique-colouring';
 import EvidenceTierBanner from '../../../components/atlas/EvidenceTierBanner';
 import NissScoreBadge from '../../../components/niss/NissScoreBadge';
 import NissVectorRadar, { type NissReading } from '@/components/radar/NissVectorRadar';
@@ -301,9 +301,9 @@ const hasGovernance = nr || reg;
 
         <!-- Dual Use Section -->
         {threat.tara && (
-          <div class="glass rounded-xl p-6 border-l-4 border-green-500 mb-6">
+          <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-secondary)] mb-6">
             <h3 class="text-lg font-bold text-[var(--color-text-primary)] mb-3 flex items-center gap-2">
-              <span class="text-green-500">&#10010;</span> Therapeutic Application
+              <span class="text-[var(--color-accent-secondary)]">&#10010;</span> Therapeutic Application
             </h3>
             <p class="text-sm text-[var(--color-text-muted)] mb-4">{threat.tara.mechanism}</p>
 
@@ -347,7 +347,6 @@ const hasGovernance = nr || reg;
             hideViewToggle={true}
             regionViewLens={{ kind: 'technique', techniqueId: threat.id }}
             regionViewNothingColoured={readUncolouredLimit(threat.id)}
-            regionViewLinksReview={readLinksReview(threat.id)}
           />
           <!-- Which anatomy index this page was built with. The 3D view reads it when a visitor asks for the view. -->
           <AtlasIndexPin />
@@ -364,7 +363,7 @@ const hasGovernance = nr || reg;
                 <span
                   class={`px-2 py-0.5 rounded-full text-xs font-medium ${
                     d.confidence === 'established'
-                      ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                      ? 'bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)] border border-[var(--color-accent-secondary)]/20'
                       : d.confidence === 'probable'
                         ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
                         : 'bg-[var(--color-border)] text-[var(--color-text-faint)] border border-dashed border-[var(--color-text-faint)]/30'
@@ -377,7 +376,7 @@ const hasGovernance = nr || reg;
                 <span
                   class={`px-2 py-0.5 rounded-full text-xs font-medium ${
                     d.confidence === 'established'
-                      ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                      ? 'bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)] border border-[var(--color-accent-secondary)]/20'
                       : d.confidence === 'probable'
                         ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
                         : 'bg-[var(--color-border)] text-[var(--color-text-faint)] border border-dashed border-[var(--color-text-faint)]/30'
@@ -452,7 +451,7 @@ const hasGovernance = nr || reg;
 
         <!-- Governance & FDORA -->
         {hasGovernance && (
-          <div class="glass rounded-xl p-6 border-l-4 border-purple-500 mb-6">
+          <div class="glass rounded-xl p-6 border-l-4 border-[var(--color-accent-tertiary)] mb-6">
             <h3 class="text-lg font-bold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(168,85,247)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               Governance
@@ -468,9 +467,9 @@ const hasGovernance = nr || reg;
                   </p>
                   <div class="flex flex-wrap gap-1.5 mb-3">
                     {nr.affected.map((code: string) => (
-                      <a href={`/governance/rights/#${(NEURORIGHT_LABELS[code] ?? code).toLowerCase().replace(/\s+/g, '-')}`} class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20 hover:bg-purple-500/20 transition-colors">
+                      <a href={`/governance/rights/#${(NEURORIGHT_LABELS[code] ?? code).toLowerCase().replace(/\s+/g, '-')}`} class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[var(--color-accent-tertiary)]/10 text-[var(--color-accent-tertiary)] border border-[var(--color-accent-tertiary)]/20 hover:bg-[var(--color-accent-tertiary)]/20 transition-colors">
                         <span class="font-bold">{code}</span>
-                        <span class="text-purple-400/70">{NEURORIGHT_LABELS[code] ?? code}</span>
+                        <span class="text-[var(--color-accent-tertiary)]/70">{NEURORIGHT_LABELS[code] ?? code}</span>
                       </a>
                     ))}
                   </div>
@@ -484,7 +483,7 @@ const hasGovernance = nr || reg;
                           style={`width: ${Math.min(nr.cci / 4 * 100, 100)}%; background: ${nr.cci >= 2.0 ? 'rgb(239,68,68)' : nr.cci >= 1.0 ? 'rgb(234,179,8)' : 'rgb(34,197,94)'}`}
                         />
                       </div>
-                      <span class={`font-mono font-bold text-xs ${nr.cci >= 2.0 ? 'text-red-400' : nr.cci >= 1.0 ? 'text-yellow-400' : 'text-green-400'}`}>
+                      <span class={`font-mono font-bold text-xs ${nr.cci >= 2.0 ? 'text-red-400' : nr.cci >= 1.0 ? 'text-yellow-400' : 'text-[var(--color-accent-secondary)]'}`}>
                         {nr.cci.toFixed(2)}
                       </span>
                       <span class="text-[var(--color-text-faint)] text-xs">/ 4.0</span>
@@ -506,7 +505,7 @@ const hasGovernance = nr || reg;
 
                   {/* Cyber Device Status */}
                   <div class="flex items-center gap-2 mb-3">
-                    <span class={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-bold ${reg.cyber_device ? 'bg-blue-500/15 text-blue-400 border border-blue-500/25' : 'bg-[var(--color-border)] text-[var(--color-text-faint)] border border-transparent'}`}>
+                    <span class={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-bold ${reg.cyber_device ? 'bg-[var(--color-accent-primary)]/15 text-[var(--color-accent-primary)] border border-[var(--color-accent-primary)]/25' : 'bg-[var(--color-border)] text-[var(--color-text-faint)] border border-transparent'}`}>
                       {reg.cyber_device ? 'Cyber Device' : 'Non-Cyber Device'}
                     </span>
                     {!reg.cyber_device && (
@@ -529,7 +528,7 @@ const hasGovernance = nr || reg;
                           style={`width: ${reg.coverage_score * 100}%; background: ${reg.coverage_score >= 0.7 ? 'rgb(34,197,94)' : reg.coverage_score >= 0.4 ? 'rgb(234,179,8)' : 'rgb(239,68,68)'}`}
                         />
                       </div>
-                      <span class={`font-mono font-bold text-xs ${reg.coverage_score >= 0.7 ? 'text-green-400' : reg.coverage_score >= 0.4 ? 'text-yellow-400' : 'text-red-400'}`}>
+                      <span class={`font-mono font-bold text-xs ${reg.coverage_score >= 0.7 ? 'text-[var(--color-accent-secondary)]' : reg.coverage_score >= 0.4 ? 'text-yellow-400' : 'text-red-400'}`}>
                         {reg.coverage_score.toFixed(1)}
                       </span>
                       <span class="text-[var(--color-text-faint)] text-xs">/ 1.0</span>

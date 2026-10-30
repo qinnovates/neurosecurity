@@ -385,7 +385,7 @@ export default function KinectVision({ className = '', fullBleed = false, varian
         <div className="absolute inset-0 flex items-center justify-center z-20" style={{ fontFamily: 'var(--font-mono, monospace)', background: '#050a08' }}>
           <div className="text-center px-6">
             <p className="text-sm text-white mb-2">WebGL is not supported in this browser.</p>
-            <p className="text-xs text-zinc-400">For the full 3D experience, please use <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer" className="underline text-blue-400 hover:text-blue-300">Chrome</a>, <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener noreferrer" className="underline text-blue-400 hover:text-blue-300">Firefox</a>, or <a href="https://www.microsoft.com/edge" target="_blank" rel="noopener noreferrer" className="underline text-blue-400 hover:text-blue-300">Edge</a>.</p>
+            <p className="text-xs text-zinc-400">For the full 3D experience, please use <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer" className="underline text-[var(--color-accent-primary)] hover:text-[var(--color-accent-primary)]">Chrome</a>, <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener noreferrer" className="underline text-[var(--color-accent-primary)] hover:text-[var(--color-accent-primary)]">Firefox</a>, or <a href="https://www.microsoft.com/edge" target="_blank" rel="noopener noreferrer" className="underline text-[var(--color-accent-primary)] hover:text-[var(--color-accent-primary)]">Edge</a>.</p>
           </div>
         </div>
       )}

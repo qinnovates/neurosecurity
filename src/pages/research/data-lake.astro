@@ -154,11 +154,11 @@ const bandColors: Record<string, string> = {
         <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">TARA Techniques</p>
       </div>
       <div class="glass rounded-lg p-3">
-        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-cyan-400">{totalRegions}</p>
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">{totalRegions}</p>
         <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Brain Regions</p>
       </div>
       <div class="glass rounded-lg p-3">
-        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-purple-400">{totalPathways}</p>
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-tertiary)]">{totalPathways}</p>
         <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Neural Pathways</p>
       </div>
       <div class="glass rounded-lg p-3">
@@ -170,7 +170,7 @@ const bandColors: Record<string, string> = {
         <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">Security Controls</p>
       </div>
       <div class="glass rounded-lg p-3">
-        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-green-400">{cveCount}</p>
+        <p class="text-2xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-secondary)]">{cveCount}</p>
         <p class="text-[10px] text-[var(--color-text-faint)] mt-1 uppercase tracking-wider">CVE Mappings</p>
       </div>
     </div>
@@ -227,7 +227,7 @@ const bandColors: Record<string, string> = {
               </div>
               <div class="flex justify-between text-xs">
                 <span class="text-[var(--color-text-muted)]">Non-invasive</span>
-                <span class="font-mono text-cyan-400">{nonInvasiveCount}</span>
+                <span class="font-mono text-[var(--color-accent-primary)]">{nonInvasiveCount}</span>
               </div>
               <div class="flex justify-between text-xs">
                 <span class="text-[var(--color-text-muted)]">Semi-invasive</span>
@@ -240,11 +240,11 @@ const bandColors: Record<string, string> = {
             <div class="space-y-1.5">
               <div class="flex justify-between text-xs">
                 <span class="text-[var(--color-text-muted)]">Active</span>
-                <span class="font-mono text-green-400">{activeCompanies}</span>
+                <span class="font-mono text-[var(--color-accent-secondary)]">{activeCompanies}</span>
               </div>
               <div class="flex justify-between text-xs">
                 <span class="text-[var(--color-text-muted)]">Acquired</span>
-                <span class="font-mono text-purple-400">{companies.filter((c: any) => c.status === 'acquired').length}</span>
+                <span class="font-mono text-[var(--color-accent-tertiary)]">{companies.filter((c: any) => c.status === 'acquired').length}</span>
               </div>
               <div class="flex justify-between text-xs">
                 <span class="text-[var(--color-text-muted)]">Defunct</span>
@@ -278,7 +278,7 @@ const bandColors: Record<string, string> = {
               <div class="text-center glass rounded-lg p-3 min-w-[90px]">
                 <p class="text-lg font-bold font-[family-name:var(--font-mono)] text-[var(--color-accent-primary)]">${m.value_billion_usd}B</p>
                 <p class="text-[10px] text-[var(--color-text-faint)] mt-0.5">{m.year}</p>
-                {m.cagr_percent && <p class="text-[9px] text-green-400">{m.cagr_percent}% CAGR</p>}
+                {m.cagr_percent && <p class="text-[9px] text-[var(--color-accent-secondary)]">{m.cagr_percent}% CAGR</p>}
                 {m.source && <p class="text-[8px] text-[var(--color-text-faint)] mt-1 truncate max-w-[80px]">{m.source}</p>}
               </div>
             ))}
@@ -304,10 +304,10 @@ const bandColors: Record<string, string> = {
             </thead>
             <tbody class="text-[var(--color-text-muted)]">
               {topRounds.map((r: any, i: number) => (
-                <tr class={`border-b border-[var(--color-border)]/10 ${i === 0 ? 'bg-green-500/5' : ''}`}>
+                <tr class={`border-b border-[var(--color-border)]/10 ${i === 0 ? 'bg-[var(--color-accent-secondary)]/5' : ''}`}>
                   <td class="py-2 px-2 font-semibold text-[var(--color-text-primary)]">{r.company}</td>
                   <td class="py-2 px-2">{r.round}</td>
-                  <td class="py-2 px-2 text-right font-mono text-green-400">${Math.round((r.amount_usd || 0) / 1_000_000)}M</td>
+                  <td class="py-2 px-2 text-right font-mono text-[var(--color-accent-secondary)]">${Math.round((r.amount_usd || 0) / 1_000_000)}M</td>
                   <td class="py-2 px-2 text-[var(--color-text-faint)]">{r.date || '—'}</td>
                   <td class="py-2 px-2 text-[var(--color-text-faint)] truncate max-w-[150px]">{r.lead_investor || '—'}</td>
                 </tr>
@@ -329,7 +329,7 @@ const bandColors: Record<string, string> = {
             const pct = maxDeals > 0 ? ((y.deals || 0) / maxDeals) * 100 : 0;
             return (
               <div class="flex flex-col items-center flex-1">
-                <span class="text-[10px] font-mono text-green-400 mb-1">{y.deals}</span>
+                <span class="text-[10px] font-mono text-[var(--color-accent-secondary)] mb-1">{y.deals}</span>
                 <div class="w-full rounded-t" style={`height: ${pct}%; background: linear-gradient(to top, var(--color-accent-primary), #22c55e)`} />
                 <span class="text-[9px] text-[var(--color-text-faint)] mt-1">{y.year}</span>
                 <span class="text-[8px] font-mono text-[var(--color-text-faint)]">${Math.round((y.total_usd || 0) / 1_000_000)}M</span>
@@ -352,7 +352,7 @@ const bandColors: Record<string, string> = {
               <div class="flex items-center justify-between text-xs">
                 <span class="text-[var(--color-text-muted)] truncate mr-2">{vc.name}</span>
                 <div class="flex items-center gap-2 shrink-0">
-                  <span class="font-mono text-cyan-400">{(vc.portfolio || []).length} cos</span>
+                  <span class="font-mono text-[var(--color-accent-primary)]">{(vc.portfolio || []).length} cos</span>
                 </div>
               </div>
             ))}
@@ -379,7 +379,7 @@ const bandColors: Record<string, string> = {
         )}
         {bigTechBCI.length > 0 && (
           <div>
-            <p class="text-[10px] text-purple-400 font-semibold uppercase tracking-wider mb-2">Big Tech / Corporate</p>
+            <p class="text-[10px] text-[var(--color-accent-tertiary)] font-semibold uppercase tracking-wider mb-2">Big Tech / Corporate</p>
             <div class="space-y-1.5">
               {bigTechBCI.map((b: any) => (
                 <div class="flex justify-between text-xs">
@@ -397,7 +397,7 @@ const bandColors: Record<string, string> = {
         <h3 class="text-sm font-semibold text-[var(--color-text-primary)] mb-3">Other Investors</h3>
         {peFirms.length > 0 && (
           <div class="mb-3">
-            <p class="text-[10px] text-green-400 font-semibold uppercase tracking-wider mb-2">Private Equity</p>
+            <p class="text-[10px] text-[var(--color-accent-secondary)] font-semibold uppercase tracking-wider mb-2">Private Equity</p>
             <div class="space-y-1.5">
               {peFirms.map((f: any) => (
                 <div class="text-xs text-[var(--color-text-muted)]">{f.name}</div>
@@ -417,7 +417,7 @@ const bandColors: Record<string, string> = {
         )}
         {govGrants.length > 0 && (
           <div>
-            <p class="text-[10px] text-blue-400 font-semibold uppercase tracking-wider mb-2">Government Grants</p>
+            <p class="text-[10px] text-[var(--color-accent-primary)] font-semibold uppercase tracking-wider mb-2">Government Grants</p>
             <div class="space-y-1.5">
               {govGrants.slice(0, 4).map((g: any) => (
                 <div class="text-xs text-[var(--color-text-muted)] truncate">{g.program || g.agency}: {g.recipient || '—'}</div>
@@ -439,7 +439,7 @@ const bandColors: Record<string, string> = {
               <span class="text-[var(--color-text-faint)]">&larr;</span>
               <span class="text-[var(--color-text-muted)]">{a.target}</span>
               {a.year && <span class="text-[9px] text-[var(--color-text-faint)]">({a.year})</span>}
-              {a.amount_usd && <span class="font-mono text-green-400 text-[10px]">${Math.round(a.amount_usd / 1_000_000)}M</span>}
+              {a.amount_usd && <span class="font-mono text-[var(--color-accent-secondary)] text-[10px]">${Math.round(a.amount_usd / 1_000_000)}M</span>}
             </span>
           ))}
         </div>
@@ -500,15 +500,15 @@ const bandColors: Record<string, string> = {
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-[var(--color-text-muted)]">Security Controls</span>
-            <span class="text-sm font-mono text-green-400">{totalControls}</span>
+            <span class="text-sm font-mono text-[var(--color-accent-secondary)]">{totalControls}</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-[var(--color-text-muted)]">Neurorights Mapped</span>
-            <span class="text-sm font-mono text-purple-400">{totalNeurorights}</span>
+            <span class="text-sm font-mono text-[var(--color-accent-tertiary)]">{totalNeurorights}</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-[var(--color-text-muted)]">Governance Frameworks</span>
-            <span class="text-sm font-mono text-cyan-400">{frameworks.length}</span>
+            <span class="text-sm font-mono text-[var(--color-accent-primary)]">{frameworks.length}</span>
           </div>
           <hr class="border-[var(--color-border)]/30" />
           <div class="flex justify-between items-center">
@@ -571,7 +571,7 @@ const bandColors: Record<string, string> = {
               {Object.entries(pathwaysByType).sort((a, b) => b[1] - a[1]).map(([type, count]) => (
                 <div class="flex justify-between text-xs">
                   <span class="text-[var(--color-text-muted)] truncate mr-2">{type.replace(/_/g, ' ')}</span>
-                  <span class="font-mono text-purple-400">{count}</span>
+                  <span class="font-mono text-[var(--color-accent-tertiary)]">{count}</span>
                 </div>
               ))}
             </div>
@@ -582,7 +582,7 @@ const bandColors: Record<string, string> = {
               {Object.entries(pathwaysByNT).sort((a, b) => b[1] - a[1]).map(([nt, count]) => (
                 <div class="flex justify-between text-xs">
                   <span class="text-[var(--color-text-muted)] capitalize">{nt}</span>
-                  <span class="font-mono text-cyan-400">{count}</span>
+                  <span class="font-mono text-[var(--color-accent-primary)]">{count}</span>
                 </div>
               ))}
             </div>
@@ -689,7 +689,7 @@ const bandColors: Record<string, string> = {
                       {/* BCI Relevance */}
                       {r.bci_relevance_detail && (
                         <div>
-                          <p class="text-[10px] text-cyan-400 uppercase tracking-wider font-semibold mb-1">BCI Relevance</p>
+                          <p class="text-[10px] text-[var(--color-accent-primary)] uppercase tracking-wider font-semibold mb-1">BCI Relevance</p>
                           <p class="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{r.bci_relevance_detail}</p>
                         </div>
                       )}
@@ -744,21 +744,21 @@ const bandColors: Record<string, string> = {
     <p class="text-xs text-[var(--color-text-faint)] mb-6">QIF maps attacks from the hourglass band level down to molecular structure. This section demonstrates how a single pathway disruption cascades through biochemical dependencies.</p>
 
     <!-- Reward center attack example -->
-    <div class="glass rounded-xl p-5 sm:p-8 mb-6 border-l-4 border-purple-500">
+    <div class="glass rounded-xl p-5 sm:p-8 mb-6 border-l-4 border-[var(--color-accent-tertiary)]">
       <h3 class="text-base font-bold text-[var(--color-text-primary)] mb-2">Case Study: Reward Center Attack &mdash; Dopamine Dependency Chain</h3>
       <p class="text-xs text-[var(--color-text-faint)] italic mb-4">For threat modeling purposes. Diagnostic category references, not diagnostic claims.</p>
 
       {mesolimbicPathway && (
         <div class="glass rounded-lg p-4 mb-5">
           <div class="flex flex-wrap items-center gap-2 mb-2">
-            <span class="text-xs font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-400">{mesolimbicPathway.id}</span>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-[var(--color-accent-tertiary)]/20 text-[var(--color-accent-tertiary)]">{mesolimbicPathway.id}</span>
             <span class="text-sm font-semibold text-[var(--color-text-primary)]">{mesolimbicPathway.name}</span>
           </div>
           <p class="text-xs text-[var(--color-text-muted)] mb-2">{mesolimbicPathway.function}</p>
           <div class="flex flex-wrap gap-2 text-[10px]">
             <span class="px-1.5 py-0.5 rounded glass">Origin: VTA ({mesolimbicPathway.origin_band})</span>
             <span class="px-1.5 py-0.5 rounded glass">Targets: NAc, Amygdala, Hippocampus ({(mesolimbicPathway.target_bands || []).join(', ')})</span>
-            <span class="px-1.5 py-0.5 rounded glass text-cyan-400">NT: Dopamine</span>
+            <span class="px-1.5 py-0.5 rounded glass text-[var(--color-accent-primary)]">NT: Dopamine</span>
           </div>
         </div>
       )}
@@ -771,8 +771,8 @@ const bandColors: Record<string, string> = {
       <div class="overflow-x-auto mb-6">
         <div class="flex items-center gap-1 min-w-max px-2">
           <!-- Step 1: Phenylalanine -->
-          <div class="glass rounded-lg p-3 min-w-[140px] text-center border-t-2 border-blue-400">
-            <p class="text-xs font-bold text-blue-400">Phenylalanine</p>
+          <div class="glass rounded-lg p-3 min-w-[140px] text-center border-t-2 border-[var(--color-accent-primary)]">
+            <p class="text-xs font-bold text-[var(--color-accent-primary)]">Phenylalanine</p>
             <p class="text-[9px] text-[var(--color-text-faint)]">Essential amino acid</p>
             <p class="text-[9px] text-[var(--color-text-faint)]">(dietary intake)</p>
           </div>
@@ -782,8 +782,8 @@ const bandColors: Record<string, string> = {
           </div>
 
           <!-- Step 2: Tyrosine -->
-          <div class="glass rounded-lg p-3 min-w-[140px] text-center border-t-2 border-cyan-400">
-            <p class="text-xs font-bold text-cyan-400">Tyrosine</p>
+          <div class="glass rounded-lg p-3 min-w-[140px] text-center border-t-2 border-[var(--color-accent-primary)]">
+            <p class="text-xs font-bold text-[var(--color-accent-primary)]">Tyrosine</p>
             <p class="text-[9px] text-[var(--color-text-faint)]">Non-essential amino acid</p>
             <p class="text-[9px] text-[var(--color-text-faint)]">(also from diet)</p>
           </div>
@@ -800,12 +800,12 @@ const bandColors: Record<string, string> = {
           </div>
           <div class="flex flex-col items-center gap-0.5 shrink-0">
             <span class="text-[var(--color-text-faint)]">&rarr;</span>
-            <span class="text-[8px] text-green-400 text-center leading-tight">AADC<br/>+ PLP (B6)</span>
+            <span class="text-[8px] text-[var(--color-accent-secondary)] text-center leading-tight">AADC<br/>+ PLP (B6)</span>
           </div>
 
           <!-- Step 4: Dopamine -->
-          <div class="glass rounded-lg p-3 min-w-[140px] text-center border-t-2 border-green-400 ring-1 ring-green-400/30">
-            <p class="text-xs font-bold text-green-400">Dopamine</p>
+          <div class="glass rounded-lg p-3 min-w-[140px] text-center border-t-2 border-[var(--color-accent-secondary)] ring-1 ring-[var(--color-accent-secondary)]/30">
+            <p class="text-xs font-bold text-[var(--color-accent-secondary)]">Dopamine</p>
             <p class="text-[9px] text-[var(--color-text-faint)]">Active neurotransmitter</p>
             <p class="text-[9px] text-[var(--color-text-faint)]">→ reward, motivation</p>
           </div>
@@ -838,22 +838,22 @@ const bandColors: Record<string, string> = {
               <td class="py-2 px-2 text-amber-400">Both conversion steps fail. Hyperphenylalaninemia + dopamine depletion.</td>
             </tr>
             <tr class="border-b border-[var(--color-border)]/10">
-              <td class="py-2 px-2 font-semibold text-green-400">Pyridoxal Phosphate (PLP/B6)</td>
+              <td class="py-2 px-2 font-semibold text-[var(--color-accent-secondary)]">Pyridoxal Phosphate (PLP/B6)</td>
               <td class="py-2 px-2">AADC (Aromatic L-Amino Acid Decarboxylase)</td>
               <td class="py-2 px-2">PLP-dependent decarboxylase. Removes carboxyl group from L-DOPA to produce dopamine.</td>
-              <td class="py-2 px-2 text-green-400">L-DOPA accumulates but cannot convert to dopamine. Also affects serotonin synthesis (same enzyme).</td>
+              <td class="py-2 px-2 text-[var(--color-accent-secondary)]">L-DOPA accumulates but cannot convert to dopamine. Also affects serotonin synthesis (same enzyme).</td>
             </tr>
             <tr class="border-b border-[var(--color-border)]/10">
-              <td class="py-2 px-2 font-semibold text-cyan-400">Molecular Oxygen (O&sub2;)</td>
+              <td class="py-2 px-2 font-semibold text-[var(--color-accent-primary)]">Molecular Oxygen (O&sub2;)</td>
               <td class="py-2 px-2">TH (hydroxylation reaction)</td>
               <td class="py-2 px-2">TH is a monooxygenase &mdash; inserts one oxygen atom into tyrosine to produce L-DOPA.</td>
-              <td class="py-2 px-2 text-cyan-400">Hypoxia impairs dopamine synthesis. Relevant to cerebrovascular BCI complications.</td>
+              <td class="py-2 px-2 text-[var(--color-accent-primary)]">Hypoxia impairs dopamine synthesis. Relevant to cerebrovascular BCI complications.</td>
             </tr>
             <tr>
-              <td class="py-2 px-2 font-semibold text-blue-400">Ferritin</td>
+              <td class="py-2 px-2 font-semibold text-[var(--color-accent-primary)]">Ferritin</td>
               <td class="py-2 px-2">Iron storage &amp; buffering</td>
               <td class="py-2 px-2">Ferritin <strong>stores</strong> iron (up to 4,500 Fe&sup3;&plus; atoms per molecule). Releases Fe&sup2;&plus; when needed. Does NOT "need" iron &mdash; it <em>provides</em> iron to TH.</td>
-              <td class="py-2 px-2 text-blue-400">Low ferritin = low iron reserves = eventual TH inactivation. Serum ferritin &lt;30 ng/mL associated with restless legs syndrome (dopaminergic).</td>
+              <td class="py-2 px-2 text-[var(--color-accent-primary)]">Low ferritin = low iron reserves = eventual TH inactivation. Serum ferritin &lt;30 ng/mL associated with restless legs syndrome (dopaminergic).</td>
             </tr>
           </tbody>
         </table>
@@ -874,20 +874,20 @@ const bandColors: Record<string, string> = {
           <p class="text-xs text-[var(--color-text-muted)]">Altered firing rate in VTA dopamine neurons changes vesicular dopamine release at NAc synapses</p>
           <p class="text-[9px] text-[var(--color-text-faint)] mt-1">Mechanism: frequency-dependent release</p>
         </div>
-        <div class="glass rounded-lg p-3 border-l-2 border-purple-400">
-          <p class="text-[10px] text-purple-400 font-semibold uppercase tracking-wider mb-1">Layer 3: Molecular</p>
+        <div class="glass rounded-lg p-3 border-l-2 border-[var(--color-accent-tertiary)]">
+          <p class="text-[10px] text-[var(--color-accent-tertiary)] font-semibold uppercase tracking-wider mb-1">Layer 3: Molecular</p>
           <p class="text-xs text-[var(--color-text-muted)]">Sustained disruption alters TH phosphorylation (Ser40), changing enzyme activity. Chronic over-stimulation depletes BH4 and iron cofactors.</p>
           <p class="text-[9px] text-[var(--color-text-faint)] mt-1">Dependency: Fe&sup2;&plus; &rarr; TH &rarr; L-DOPA &rarr; DA</p>
         </div>
-        <div class="glass rounded-lg p-3 border-l-2 border-cyan-400">
-          <p class="text-[10px] text-cyan-400 font-semibold uppercase tracking-wider mb-1">Layer 4: Clinical</p>
+        <div class="glass rounded-lg p-3 border-l-2 border-[var(--color-accent-primary)]">
+          <p class="text-[10px] text-[var(--color-accent-primary)] font-semibold uppercase tracking-wider mb-1">Layer 4: Clinical</p>
           <p class="text-xs text-[var(--color-text-muted)]">Anhedonia, motivational deficit, or reward hypersensitivity. Corresponds to DSM-5-TR diagnostic categories for depressive, substance use, or impulse control disorders.</p>
           <p class="text-[9px] text-[var(--color-text-faint)] mt-1">DSM refs (ICD-10-CM): F32 Depressive episode, F14 Cocaine related disorders, F63.0 Pathological gambling</p>
         </div>
       </div>
 
       <!-- Iron-Ferritin direction clarification -->
-      <div class="glass-subtle rounded-lg p-4 border-l-2 border-blue-400">
+      <div class="glass-subtle rounded-lg p-4 border-l-2 border-[var(--color-accent-primary)]">
         <p class="text-xs text-[var(--color-text-primary)] font-semibold mb-1">Clarification: Ferritin &harr; Iron Direction</p>
         <p class="text-xs text-[var(--color-text-muted)]">
           Ferritin does not "need" iron. The relationship is: <strong>Ferritin stores iron</strong> (as Fe&sup3;&plus;) and <strong>releases it</strong> (as Fe&sup2;&plus;) when enzymes like Tyrosine Hydroxylase require it. The correct dependency chain is:
@@ -970,26 +970,26 @@ const bandColors: Record<string, string> = {
       </div>
 
       <div class="glass rounded-xl p-5">
-        <h3 class="text-sm font-semibold text-purple-400 mb-3">Clinical Mapping</h3>
+        <h3 class="text-sm font-semibold text-[var(--color-accent-tertiary)] mb-3">Clinical Mapping</h3>
         <div class="space-y-2 text-xs text-[var(--color-text-muted)]">
           <div class="flex items-start gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-tertiary)] mt-1.5 shrink-0" />
             <div><strong class="text-[var(--color-text-primary)]">Brain Anatomy:</strong> {totalRegions} brain structures mapped to {totalBands} QIF hourglass bands with function, latency, and zone classification</div>
           </div>
           <div class="flex items-start gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-tertiary)] mt-1.5 shrink-0" />
             <div><strong class="text-[var(--color-text-primary)]">Neural Pathways:</strong> {totalPathways} named pathways &mdash; neurotransmitter-specific, sensory, motor, limbic, cortical networks, and cerebellar loops. Each mapped to origin/target bands, DSM conditions, and BCI relevance</div>
           </div>
           <div class="flex items-start gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-tertiary)] mt-1.5 shrink-0" />
             <div><strong class="text-[var(--color-text-primary)]">Molecular Dependencies:</strong> Synthesis pathways for dopamine, serotonin, norepinephrine, GABA, glutamate &mdash; mapping enzymes, cofactors (iron, BH4, PLP), and metabolic bottlenecks to hourglass band disruption</div>
           </div>
           <div class="flex items-start gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-tertiary)] mt-1.5 shrink-0" />
             <div><strong class="text-[var(--color-text-primary)]">DSM-5-TR Overlay:</strong> {totalConditions} diagnostic categories across {totalClusters} clusters, each mapped to affected QIF bands (for threat modeling, not diagnostic claims)</div>
           </div>
           <div class="flex items-start gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-tertiary)] mt-1.5 shrink-0" />
             <div><strong class="text-[var(--color-text-primary)]">Neurorights &amp; Governance:</strong> {totalNeurorights} neurorights mapped to bands, {frameworks.length} governance frameworks, consent tiers, and {totalControls} security controls spanning all 11 bands</div>
           </div>
         </div>

@@ -12,12 +12,12 @@ function plural(count: number, singular: string, pluralForm: string): string {
   return `${count} ${count === 1 ? singular : pluralForm}`;
 }
 
-/** Names the region, its band, what stands for it and its review state. */
+/** Names the region, its band and what stands for it. */
 export function announceSelection(model: ExplorerModel, regionId: string): string {
   const region = model.regionsById.get(regionId);
   if (region === undefined) return 'Selection cleared.';
   const band = region.band_ids[0] ?? 'no band';
-  return `${region.name} selected. Band ${band}. ${GEOMETRY_LABELS[region.geometry.state]}. ${region.review_state.mark}.`;
+  return `${region.name} selected. Band ${band}. ${GEOMETRY_LABELS[region.geometry.state]}.`;
 }
 
 function describeSubject(model: ExplorerModel, lens: Lens): string {

@@ -1,7 +1,6 @@
 import { limitSentence } from '@/lib/anatomy/limits-copy';
 import type { DeviceRail, RailStage, RailTechnique } from '@/lib/atlas-explorer/rail-stages';
 import LimitNote from './LimitNote';
-import ReviewMark from './ReviewMark';
 
 interface Props {
   rail: DeviceRail;
@@ -34,8 +33,7 @@ function RailTechniqueItem({ technique, isChosen, onChooseTechnique }: Technique
       {isMixed && (
         <p className="atlas-row-why">
           Also carries {technique.neuralBandNames}.{' '}
-          {technique.draftedLinkCount === 0 ? 'No region link drafted.' : `${technique.draftedLinkCount} region ${technique.draftedLinkCount === 1 ? 'link' : 'links'} drafted.`}{' '}
-          {technique.reviewState !== null && <ReviewMark state={technique.reviewState} />}
+          {technique.draftedLinkCount === 0 ? 'No region link drafted.' : `${technique.draftedLinkCount} region ${technique.draftedLinkCount === 1 ? 'link' : 'links'} drafted.`}
         </p>
       )}
     </li>

@@ -233,7 +233,7 @@ export default function EEGDatasetCard({ sample }: Props) {
           {taraIds.map(id => (
             <a
               key={id}
-              href={`/TARA/${id.trim()}/`}
+              href={`/atlas/tara/${id.trim()}/`}
               style={{
                 fontSize: '0.625rem',
                 fontWeight: 700,

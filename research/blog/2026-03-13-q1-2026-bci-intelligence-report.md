@@ -430,6 +430,6 @@ QIF is a proposed research framework. It has not been independently peer-reviewe
 
 **Q2 2026 Report** will be published in July 2026. To track developments between reports, see the [BCI Intel Feed](https://qinnovate.com/dashboards/intel) on qinnovate.com.
 
-**Citation:** Qi, K.L. (2026). Q1 2026 BCI Intelligence Report. Qinnovate. https://qinnovate.com/research/papers/q1-2026-bci-intelligence-report/
+**Citation:** Qi, K.L. (2026). Q1 2026 BCI Intelligence Report. Qinnovate. https://qinnovate.com/research/papers/2026-03-13-q1-2026-bci-intelligence-report/
 
 **Framework Reference:** Qi, K.L. (2026). Securing Neural Interfaces: Architecture, Threat Taxonomy, and Neural Impact Scoring for Brain-Computer Interfaces. Zenodo. https://doi.org/10.5281/zenodo.18640105

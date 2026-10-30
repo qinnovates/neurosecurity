@@ -6,7 +6,6 @@ import type { Loaded } from './explorer-data';
 import Disclosure from './Disclosure';
 import LimitNote from './LimitNote';
 import LoadNotice from './LoadNotice';
-import ReviewMark from './ReviewMark';
 
 interface Props {
   detail: RegionDetail;
@@ -27,7 +26,7 @@ function TechniqueItem({ technique, item, onChooseTechnique }: TechniqueItemProp
     <li className="atlas-technique" data-technique-id={technique.id}>
       <p className="atlas-fact">
         <button type="button" className="atlas-link-button" onClick={() => onChooseTechnique(technique.id)}>{technique.name}</button>
-        <span className="atlas-id">{technique.id}</span> <ReviewMark state={technique.reviewState} />
+        <span className="atlas-id">{technique.id}</span>
       </p>
       <p className="atlas-row-why">
         The catalog&rsquo;s word: &ldquo;{technique.term}&rdquo;. Bands: {technique.bandNames}.

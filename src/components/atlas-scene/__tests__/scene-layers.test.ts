@@ -2,7 +2,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import type { DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
-import { DRAW_ORDER, FILL_OPACITY, HOVER_EMISSIVE_INTENSITY, HOVER_OPACITY, INSIDE_COLOUR, SELECTED_EMISSIVE_INTENSITY, SELECTION_COLOUR, STEP_EASE_MS, SURFACE_INK, ringParamsFor, stepEaseDuration } from '@/lib/atlas-explorer/scene-drawing';
+import {
+  DRAW_ORDER, FILL_OPACITY, HOVER_EMISSIVE_INTENSITY, HOVER_OPACITY, INSIDE_COLOUR, OWN_COLOUR_HOVER_EMISSIVE_INTENSITY, OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY,
+  SELECTED_EMISSIVE_INTENSITY, SELECTION_COLOUR, STEP_EASE_MS, SURFACE_INK, ringParamsFor, stepEaseDuration,
+} from '@/lib/atlas-explorer/scene-drawing';
 import { NEUTRAL_COLOUR, NISS_COLOURS, NISS_COLOURS_DARK, type SceneShape } from '@/lib/atlas-explorer/scene-shapes';
 import { toIndexReviewState, UNREVIEWED } from '@/lib/anatomy/review-state';
 import { listSceneObjects, resetStandIn, standIn, type StandInLitMaterial, type StandInObject } from './three-stand-in';
@@ -120,8 +123,9 @@ describe('the selection', () => {
     for (const key of REGION_KEYS.twin) {
       const material = litMaterialOf(key);
       expect(material.color.getHexString(), key).toBe(TWIN_OWN.slice(1));
-      expect(material.emissive.getHexString(), key).toBe(WHITE);
-      expect(material.emissiveIntensity, key).toBe(SELECTED_EMISSIVE_INTENSITY);
+      // Lit in its own colour, not in white: white light at this level on a lit material washed the hue out.
+      expect(material.emissive.getHexString(), key).toBe(TWIN_OWN.slice(1));
+      expect(material.emissiveIntensity, key).toBe(OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY);
       expect(material.opacity, key).toBe(FILL_OPACITY.solid);
     }
     const front = litMaterialOf('a:front');
@@ -179,7 +183,8 @@ describe('the selection', () => {
     standIn.hits = [{ object: twinA, distance: 1, point: {} }];
     canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 5, clientY: 5 }));
     runFrame(1016);
-    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(HOVER_EMISSIVE_INTENSITY);
+    expect(litMaterialOf('a:twinA').emissive.getHexString()).toBe(TWIN_OWN.slice(1));
+    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(OWN_COLOUR_HOVER_EMISSIVE_INTENSITY);
     expect(callbacks.onHover).toHaveBeenLastCalledWith('a:twinA');
     standIn.hits = [];
     canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 300, clientY: 300 }));
@@ -187,9 +192,31 @@ describe('the selection', () => {
     expect(callbacks.onHover).toHaveBeenLastCalledWith(null);
     // Back to the selection's own state: its colour, its glow, its opacity.
     expect(litMaterialOf('a:twinA').color.getHexString()).toBe(TWIN_OWN.slice(1));
-    expect(litMaterialOf('a:twinA').emissive.getHexString()).toBe(WHITE);
-    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(SELECTED_EMISSIVE_INTENSITY);
+    expect(litMaterialOf('a:twinA').emissive.getHexString()).toBe(TWIN_OWN.slice(1));
+    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY);
     expect(litMaterialOf('a:twinA').opacity).toBe(FILL_OPACITY.solid);
+  });
+
+  it('lights a filled shape with no colour of its own in white, under the pointer and when selected, and puts the darkness back', () => {
+    // The back region filled under a lens, but shared or unowned, so with no region colour: white is the only lift left to it.
+    const sharedFilled = SHAPES.map((shape) => (REGION_KEYS.back.includes(shape.structureKey) ? { ...shape, fill: 'solid' as const } : shape));
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
+    renderer.setShapes(sharedFilled, NODES, new Set(REGION_KEYS.back));
+    expect(litMaterialOf('a:back').color.getHexString()).toBe(LENS_COLOUR);
+    expect(litMaterialOf('a:back').emissive.getHexString()).toBe(WHITE);
+    expect(litMaterialOf('a:back').emissiveIntensity).toBe(SELECTED_EMISSIVE_INTENSITY);
+    const back = kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:back') as StandInObject;
+    standIn.hits = [{ object: back, distance: 1, point: {} }];
+    canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 5, clientY: 5 }));
+    runFrame(1016);
+    expect(litMaterialOf('a:back').color.getHexString()).toBe(LENS_COLOUR);
+    expect(litMaterialOf('a:back').emissive.getHexString()).toBe(WHITE);
+    expect(litMaterialOf('a:back').emissiveIntensity).toBe(HOVER_EMISSIVE_INTENSITY);
+    renderer.setShapes(sharedFilled, NODES, new Set());
+    standIn.hits = [];
+    canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 300, clientY: 300 }));
+    runFrame(1032);
+    expect(litMaterialOf('a:back').emissive.getHexString()).toBe(NO_GLOW);
   });
 
   /**
@@ -197,7 +224,8 @@ describe('the selection', () => {
    * one that can be drawn for the wrong surface. It was: it had no dark step at
    * all and so was fainter there than the shapes with no record. It is checked
    * at the renderer, because that is where the surface arrives; the selection's
-   * glow is white light on either surface and owes the surface nothing.
+   * glow is the shape's own colour, which arrives already resolved for the surface
+   * (highlight-colour.ts), or white, so the renderer owes the surface nothing for it.
    */
   it('inks the pale fills for the surface it was given, redraws them when the surface changes, and keeps the glow through it', () => {
     const inkOfPaleFill = (): unknown => kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:front')?.material?.params.color;
@@ -205,11 +233,11 @@ describe('the selection', () => {
     // The pale front and the filled twin selected together: the one shows the surface ink, the other the glow.
     renderer.setShapes(LIT_SHAPES, NODES, new Set([...REGION_KEYS.front, ...REGION_KEYS.twin]));
     expect(inkOfPaleFill()).toBe(SURFACE_INK.light.inside);
-    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(SELECTED_EMISSIVE_INTENSITY);
+    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY);
 
     renderer.setTheme('dark');
     expect(inkOfPaleFill()).toBe(SURFACE_INK.dark.inside);
-    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(SELECTED_EMISSIVE_INTENSITY);
+    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY);
     // The same shapes still, and nothing drawn around them: the surface changes the ink, never what is drawn.
     expect(kindsOf('lines')).toHaveLength(0);
 

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ATLAS_ASSET_CHECKS, HEADER_CHECKS, POST_BUILD_CHECKS, REGION_VIEW_CHECKS, TOOL_PAGE_CHECKS, findAnatomyPayloadFailures, findRegionViewFailures, findRegionViewMarkFailures, runPostBuildChecks } from '../check-post-build.mjs';
+import { ATLAS_ASSET_CHECKS, HEADER_CHECKS, LINK_CHECKS, POST_BUILD_CHECKS, REGION_VIEW_CHECKS, TOOL_PAGE_CHECKS, findAnatomyPayloadFailures, findRegionViewFailures, runPostBuildChecks } from '../check-post-build.mjs';
 import { measureFirstLoad } from '../measure-lab-first-load.mjs';
 
 const FIXTURE_DIST = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures', 'lab-first-load');
@@ -16,7 +16,7 @@ describe('runPostBuildChecks', () => {
   it('passes every check on an isolated page within its budget', () => {
     const results = runPostBuildChecks(FIXTURE_DIST, [passingPage], TOOL_PAGE_CHECKS);
     expect(results.map(({ name }) => name)).toEqual(TOOL_PAGE_CHECKS.map(({ name }) => name));
-    expect(POST_BUILD_CHECKS).toEqual([...TOOL_PAGE_CHECKS, ...ATLAS_ASSET_CHECKS, ...REGION_VIEW_CHECKS, ...HEADER_CHECKS]);
+    expect(POST_BUILD_CHECKS).toEqual([...TOOL_PAGE_CHECKS, ...ATLAS_ASSET_CHECKS, ...REGION_VIEW_CHECKS, ...HEADER_CHECKS, ...LINK_CHECKS]);
     expect(results.every(({ failures }) => failures.length === 0)).toBe(true);
   });
 
@@ -34,23 +34,6 @@ describe('runPostBuildChecks', () => {
     expect(findRegionViewFailures(FIXTURE_DIST, [{ urlPath: '/eager/' }])).toEqual([
       '/eager/: three.js can load without the visitor asking for it, through /_astro/eager-3d.js -> /_astro/heavy-3d.js; it may sit only behind a chunk named in interactionGatedEntryNames',
     ]);
-  });
-
-  it('requires the review mark inside the rendered links-review note, not merely in the props', () => {
-    const dist = fs.mkdtempSync(path.join(os.tmpdir(), 'region-view-mark-'));
-    const writePage = (urlPath, body) => { fs.mkdirSync(path.join(dist, urlPath), { recursive: true }); fs.writeFileSync(path.join(dist, urlPath, 'index.html'), body); };
-    const props = '<astro-island props="{&quot;regionViewLinksReview&quot;:{&quot;mark&quot;:&quot;AI-drafted, unreviewed&quot;}}"></astro-island>';
-    writePage('with-mark', `<span data-mount-note="links-review">Drafted: <span class="atlas-mark" data-ai-drafted="true">AI-drafted, unreviewed</span></span><span data-mount-note="choose-in-list">x</span>`);
-    writePage('no-mark', `${props}<span data-mount-note="links-review">Drafted: </span><span data-mount-note="choose-in-list"><span data-ai-drafted="true">AI-drafted, unreviewed</span></span>`);
-    writePage('props-only', `${props}<span data-mount-note="nothing-coloured">drafted links name no region</span>`);
-    try {
-      expect(findRegionViewMarkFailures(dist, ['/with-mark/'])).toEqual([]);
-      // The mark's words in the serialized props, or in another note, do not count: it must sit inside the links-review note.
-      expect(findRegionViewMarkFailures(dist, ['/no-mark/'])).toEqual(['/no-mark/: the rendered links-review note has no data-ai-drafted="true" element reading "AI-drafted, unreviewed"']);
-      expect(findRegionViewMarkFailures(dist, ['/props-only/'])[0]).toContain('no rendered <span data-mount-note="links-review"> element');
-    } finally {
-      fs.rmSync(dist, { recursive: true, force: true });
-    }
   });
 
   it('fails the budget check alone when a page\'s code is one byte over', () => {

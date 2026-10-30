@@ -59,8 +59,8 @@ const NEURORIGHT_LABELS: Record<string, string> = {
 };
 
 const NEURORIGHT_COLORS: Record<string, { bg: string; text: string; border: string }> = {
-    MP: { bg: 'bg-violet-500/10', text: 'text-violet-600', border: 'border-violet-500/20' },
-    CL: { bg: 'bg-blue-500/10', text: 'text-blue-600', border: 'border-blue-500/20' },
+    MP: { bg: 'bg-[var(--color-accent-tertiary)]/10', text: 'text-[var(--color-accent-tertiary)]', border: 'border-[var(--color-accent-tertiary)]/20' },
+    CL: { bg: 'bg-[var(--color-accent-primary)]/10', text: 'text-[var(--color-accent-primary)]', border: 'border-[var(--color-accent-primary)]/20' },
     MI: { bg: 'bg-red-500/10', text: 'text-red-600', border: 'border-red-500/20' },
     PC: { bg: 'bg-amber-500/10', text: 'text-amber-600', border: 'border-amber-500/20' },
 };
@@ -112,16 +112,16 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
             case 'critical': return { text: 'text-red-500', bg: 'bg-red-500/10', border: 'border-red-500/20', glow: 'shadow-red-500/30' };
             case 'high': return { text: 'text-orange-500', bg: 'bg-orange-500/10', border: 'border-orange-500/20', glow: 'shadow-orange-500/30' };
             case 'medium': return { text: 'text-yellow-500', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', glow: 'shadow-yellow-500/30' };
-            default: return { text: 'text-blue-500', bg: 'bg-blue-500/10', border: 'border-blue-500/20', glow: 'shadow-blue-500/30' };
+            default: return { text: 'text-[var(--color-accent-primary)]', bg: 'bg-[var(--color-accent-primary)]/10', border: 'border-[var(--color-accent-primary)]/20', glow: 'shadow-blue-500/30' };
         }
     };
 
     const getModeColor = (mode: ViewMode) => {
         switch (mode) {
             case 'modality': return { text: 'text-slate-900', bg: 'bg-slate-900', shadow: 'shadow-slate-900/20', dot: 'bg-slate-400' };
-            case 'clinical': return { text: 'text-emerald-600', bg: 'bg-emerald-600', shadow: 'shadow-emerald-600/20', dot: 'bg-emerald-400' };
+            case 'clinical': return { text: 'text-[var(--color-accent-secondary)]', bg: 'bg-[var(--color-accent-secondary-fill)]', shadow: 'shadow-emerald-600/20', dot: 'bg-[var(--color-accent-secondary)]' };
             case 'diagnostic': return { text: 'text-amber-600', bg: 'bg-amber-600', shadow: 'shadow-amber-600/20', dot: 'bg-amber-400' };
-            case 'governance': return { text: 'text-purple-600', bg: 'bg-purple-600', shadow: 'shadow-purple-600/20', dot: 'bg-purple-400' };
+            case 'governance': return { text: 'text-[var(--color-accent-tertiary)]', bg: 'bg-[var(--color-accent-tertiary-fill)]', shadow: 'shadow-purple-600/20', dot: 'bg-[var(--color-accent-tertiary)]' };
             default: return { text: 'text-slate-900', bg: 'bg-slate-900', shadow: 'shadow-slate-900/20', dot: 'bg-slate-400' };
         }
     };
@@ -161,9 +161,9 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
         return (
             <div className="flex gap-1.5 mt-3 pt-3 border-t border-slate-50">
                 <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${t.niss?.score && t.niss.score > 5 ? 'bg-red-500/10 text-red-600' : 'bg-slate-50 text-slate-400'}`} title="Modality/NISS">Security</span>
-                <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${t.tara?.clinical ? 'bg-emerald-500/10 text-emerald-600' : 'bg-slate-50 text-slate-400'}`} title="Clinical/Therapeutic">Clinical</span>
+                <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${t.tara?.clinical ? 'bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)]' : 'bg-slate-50 text-slate-400'}`} title="Clinical/Therapeutic">Clinical</span>
                 <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${t.tara?.dsm5 ? 'bg-amber-500/10 text-amber-600' : 'bg-slate-50 text-slate-400'}`} title="Diagnostic/Psychiatric">Diagnostic</span>
-                <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${nr?.affected?.length > 0 ? 'bg-purple-500/10 text-purple-600' : 'bg-slate-50 text-slate-400'}`} title="Neurorights">Rights</span>
+                <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tight ${nr?.affected?.length > 0 ? 'bg-[var(--color-accent-tertiary)]/10 text-[var(--color-accent-tertiary)]' : 'bg-slate-50 text-slate-400'}`} title="Neurorights">Rights</span>
             </div>
         );
     };
@@ -184,9 +184,9 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-7xl px-4">
                     {[
-                        { id: 'neural', name: 'Neural', desc: 'Biological Mind (N7-N1)', color: '#10b981', hoverBg: 'hover:bg-emerald-500/5', pillBg: 'bg-emerald-500/10 text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white', borderAccent: 'group-hover:border-l-emerald-500' },
+                        { id: 'neural', name: 'Neural', desc: 'Biological Mind (N7-N1)', color: '#10b981', hoverBg: 'hover:bg-[var(--color-accent-secondary)]/5', pillBg: 'bg-[var(--color-accent-secondary)]/10 text-[var(--color-accent-secondary)] group-hover:bg-[var(--color-accent-secondary-fill)] group-hover:text-white', borderAccent: 'group-hover:border-l-emerald-500' },
                         { id: 'interface', name: 'Interface', desc: 'Boundary Transduction (I0)', color: '#f59e0b', hoverBg: 'hover:bg-amber-500/5', pillBg: 'bg-amber-500/10 text-amber-600 group-hover:bg-amber-500 group-hover:text-white', borderAccent: 'group-hover:border-l-amber-500' },
-                        { id: 'synthetic', name: 'Synthetic', desc: 'Computation & Tel (S1-S3)', color: '#3b82f6', hoverBg: 'hover:bg-blue-500/5', pillBg: 'bg-blue-500/10 text-blue-600 group-hover:bg-blue-500 group-hover:text-white', borderAccent: 'group-hover:border-l-blue-500' }
+                        { id: 'synthetic', name: 'Synthetic', desc: 'Computation & Tel (S1-S3)', color: '#3b82f6', hoverBg: 'hover:bg-[var(--color-accent-primary)]/5', pillBg: 'bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] group-hover:bg-[var(--color-accent-fill)] group-hover:text-white', borderAccent: 'group-hover:border-l-blue-500' }
                     ].map(d => (
                         <button
                             key={d.id}
@@ -228,7 +228,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <span className="text-[11px] font-medium text-slate-400">Operational Area:</span>
-                            <span className="text-[11px] font-semibold text-emerald-500">Active</span>
+                            <span className="text-[11px] font-semibold text-[var(--color-accent-secondary)]">Active</span>
                         </div>
                         <h2 className="text-4xl font-semibold tracking-tighter text-slate-900">{selectedDomain.charAt(0).toUpperCase() + selectedDomain.slice(1)} Zone</h2>
                     </div>
@@ -270,7 +270,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                         <button
                             onClick={() => setNeurorightFilter(null)}
                             // min-h-11 (44px) keeps the tap target WCAG-sized on touch while the chip itself stays visually compact.
-                            className={`min-h-11 inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold transition-all ${!neurorightFilter ? 'bg-purple-600 text-white' : 'bg-slate-50 text-slate-400 hover:text-slate-600'}`}
+                            className={`min-h-11 inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold transition-all ${!neurorightFilter ? 'bg-[var(--color-accent-tertiary-fill)] text-white' : 'bg-slate-50 text-slate-400 hover:text-slate-600'}`}
                         >
                             All
                         </button>
@@ -335,7 +335,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                     }`}
                             >
                                 <div className="flex items-center justify-between pointer-events-none mb-1">
-                                    <span className={`text-[11px] font-mono font-bold ${selectedBand === band.id ? 'text-blue-400' : 'text-slate-300'}`}>
+                                    <span className={`text-[11px] font-mono font-bold ${selectedBand === band.id ? 'text-[var(--color-accent-primary)]' : 'text-slate-300'}`}>
                                         {band.id}
                                     </span>
                                 </div>
@@ -353,7 +353,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                         <h3 className="text-xs font-semibold text-slate-400">
                             {selectedBand ? `${selectedBand} Techniques` : "Awaiting Locus Activation"}
                             {neurorightFilter && selectedBand && (
-                                <span className="ml-2 text-purple-500">
+                                <span className="ml-2 text-[var(--color-accent-tertiary)]">
                                     ({NEURORIGHT_LABELS[neurorightFilter]})
                                 </span>
                             )}
@@ -389,7 +389,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                         <div>
                                             {/* Header */}
                                             <div className="flex items-center justify-between mb-6">
-                                                <code className="text-xs font-mono font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg tracking-tight">{t.id}</code>
+                                                <code className="text-xs font-mono font-bold text-[var(--color-accent-primary)] bg-blue-50 px-2.5 py-1 rounded-lg tracking-tight">{t.id}</code>
                                                 <span className={`text-[10px] font-bold px-3 py-1 rounded-full ${style.bg} ${style.text} border ${style.border}`}>
                                                     {t.severity}
                                                 </span>
@@ -399,7 +399,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                             <div className="mb-4">
                                                 {viewMode === 'modality' && (
                                                     <div>
-                                                        <h4 className="text-xl font-semibold text-slate-900 tracking-tight leading-tight mb-2 group-hover:text-blue-600 transition-colors">
+                                                        <h4 className="text-xl font-semibold text-slate-900 tracking-tight leading-tight mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
                                                             {t.name}
                                                         </h4>
                                                         <p className="text-xs font-medium text-slate-400">{t.tactic}</p>
@@ -407,12 +407,12 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                                 )}
                                                 {viewMode === 'clinical' && (
                                                     <div>
-                                                        <span className="text-[11px] font-semibold text-emerald-500 mb-1 block">Therapeutic Variant</span>
+                                                        <span className="text-[11px] font-semibold text-[var(--color-accent-secondary)] mb-1 block">Therapeutic Variant</span>
                                                         <h4 className="text-xl font-semibold text-slate-900 tracking-tight leading-tight mb-2">
                                                             {t.tara?.clinical?.therapeutic_analog || t.name}
                                                         </h4>
                                                         <div className="flex gap-2 mt-2">
-                                                            <span className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-600 text-[10px] font-bold border border-emerald-100">
+                                                            <span className="px-2.5 py-1 rounded-lg bg-emerald-50 text-[var(--color-accent-secondary)] text-[10px] font-bold border border-[var(--color-border)]">
                                                                 {t.tara?.clinical?.fda_status || 'Pre-Clinical'}
                                                             </span>
                                                         </div>
@@ -438,7 +438,7 @@ export default function TaraVisualization({ threats, bands }: TaraVisualizationP
                                                         {/* Neurorights badges */}
                                                         {nr && nr.affected.length > 0 ? (
                                                             <div>
-                                                                <span className="text-[11px] font-semibold text-purple-500 mb-2 block">
+                                                                <span className="text-[11px] font-semibold text-[var(--color-accent-tertiary)] mb-2 block">
                                                                     {nr.affected.length} Neuroright{nr.affected.length !== 1 ? 's' : ''} at Risk
                                                                 </span>
                                                                 <NeurorightsBadges codes={nr.affected} />

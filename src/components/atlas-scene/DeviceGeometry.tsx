@@ -4,7 +4,6 @@ import { ELECTRODE_LAYER_NAME, describeElectrode, listDrawableLayouts, listLandm
 import { buildLeadFigures, longestContactSpanMm } from '@/lib/atlas-explorer/lead-figure';
 import LeadFigure, { Citation, LeadLimits } from './LeadFigure';
 import LimitNote from './LimitNote';
-import ReviewMark from './ReviewMark';
 
 interface Props {
   index: AnatomyIndex;
@@ -18,7 +17,7 @@ function Landmarks({ landmarks }: { landmarks: readonly LandmarkNote[] }) {
     <ul className="atlas-plain-list" aria-label="The four points the layout is measured from, and how far each can be trusted">
       {landmarks.map((landmark) => (
         <li key={landmark.id} className="atlas-fact" data-landmark={landmark.id}>
-          <strong>{landmark.words}.</strong> {landmark.note ?? 'The data file says nothing about how far this point can be trusted.'} <ReviewMark state={landmark.reviewState} />
+          <strong>{landmark.words}.</strong> {landmark.note ?? 'The data file says nothing about how far this point can be trusted.'}
         </li>
       ))}
     </ul>
@@ -30,7 +29,7 @@ function PickedElectrode({ detail, onClear }: { detail: ElectrodeDetail; onClear
   return (
     <div className="atlas-electrode-picked" data-picked-electrode={detail.id} role="status">
       <p className="atlas-fact">
-        Picked electrode: <strong>{detail.id}</strong>{detail.alsoCalled !== null && ` (also called ${detail.alsoCalled})`}, in the {detail.layoutName}. <ReviewMark state={detail.reviewState} />
+        Picked electrode: <strong>{detail.id}</strong>{detail.alsoCalled !== null && ` (also called ${detail.alsoCalled})`}, in the {detail.layoutName}.
       </p>
       {detail.limits.map((limit) => <LimitNote key={limit.id} limit={limit} />)}
       <Landmarks landmarks={detail.landmarks} />
@@ -41,11 +40,11 @@ function PickedElectrode({ detail, onClear }: { detail: ElectrodeDetail; onClear
 
 type LayoutProps = Pick<Props, 'electrodeId' | 'onPickElectrode'> & { layout: IndexElectrodeLayout };
 
-/** One layout: its name and review state, how it was made, its limits, and every electrode as a button. */
+/** One layout: its name, how it was made, its limits, and every electrode as a button. */
 function ElectrodeLayout({ layout, electrodeId, onPickElectrode }: LayoutProps) {
   return (
     <div data-layout-id={layout.id}>
-      <p className="atlas-fact"><strong>{layout.name}</strong> <ReviewMark state={layout.review_state} /></p>
+      <p className="atlas-fact"><strong>{layout.name}</strong></p>
       <p className="atlas-fact">{layout.construction}</p>
       <LimitNote limit={limitSentence('device_electrodes')} />
       <LimitNote limit={limitSentence('device_head_surface')} />
@@ -83,8 +82,7 @@ function DeviceFacts({ facts }: { facts: readonly IndexDeviceFact[] }) {
  * whether or not the 3D view is open: the electrode layout's dots by name, the
  * landmarks it is measured from, sourced statements about it, and each lead as
  * a to-scale object with a scale bar and a table of its numbers. The leads sit
- * here, beside the picture of the brain and never in it. Every drawing and
- * list carries its review state.
+ * here, beside the picture of the brain and never in it.
  */
 export default function DeviceGeometry({ index, electrodeId, onPickElectrode }: Props) {
   const layouts = listDrawableLayouts(index);

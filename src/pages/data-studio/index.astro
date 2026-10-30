@@ -44,7 +44,7 @@ const totalSize = datasets.reduce((s: number, d: any) => s + d.sizeBytes, 0);
           <div class="flex items-center gap-3 mb-6">
             <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">Data Studio</span>
             <span class="w-1 h-1 rounded-full bg-slate-300"></span>
-            <span class="text-[11px] font-semibold text-emerald-500 uppercase tracking-widest">Open Data</span>
+            <span class="text-[11px] font-semibold text-[var(--color-accent-secondary)] uppercase tracking-widest">Open Data</span>
           </div>
           <h1 class="text-5xl sm:text-7xl font-semibold tracking-tight text-slate-900 mb-6">
             QIF Data Studio
@@ -62,11 +62,11 @@ const totalSize = datasets.reduce((s: number, d: any) => s + d.sizeBytes, 0);
           </div>
           <div class="bg-slate-900 px-8 py-5 rounded-[2rem] shadow-xl shadow-slate-900/10 min-w-[200px]">
             <span class="block text-[11px] text-slate-500 font-semibold mb-1">Total Rows</span>
-            <span class="text-3xl font-semibold text-emerald-400">{totalRows.toLocaleString()}</span>
+            <span class="text-3xl font-semibold text-[var(--color-accent-secondary)]">{totalRows.toLocaleString()}</span>
           </div>
-          <div class="bg-purple-50 px-8 py-5 rounded-[2rem] border border-purple-100 shadow-sm min-w-[200px]">
-            <span class="block text-[11px] text-purple-500 font-semibold mb-1">Parquet Size</span>
-            <span class="text-3xl font-semibold text-purple-700">{(totalSize / 1024).toFixed(0)}KB</span>
+          <div class="bg-purple-50 px-8 py-5 rounded-[2rem] border border-[var(--color-border)] shadow-sm min-w-[200px]">
+            <span class="block text-[11px] text-[var(--color-accent-tertiary)] font-semibold mb-1">Parquet Size</span>
+            <span class="text-3xl font-semibold text-[var(--color-accent-tertiary)]">{(totalSize / 1024).toFixed(0)}KB</span>
           </div>
         </div>
       </div>
@@ -109,10 +109,10 @@ df = pl.read_parquet(
       <div class="mt-16 pt-8 border-t border-slate-100 max-w-3xl">
         <h2 class="text-xl font-semibold text-slate-900 mb-3">Data License</h2>
         <p class="text-sm text-slate-500 leading-relaxed">
-          QIF framework data is licensed under <a href="https://creativecommons.org/licenses/by/4.0/" class="text-blue-600 underline" target="_blank" rel="noopener noreferrer">CC-BY 4.0</a>.
+          QIF framework data is licensed under <a href="https://creativecommons.org/licenses/by/4.0/" class="text-[var(--color-accent-primary)] underline" target="_blank" rel="noopener noreferrer">CC-BY 4.0</a>.
           Attribution: "QIF Framework, qinnovate.com".
           NISS scores and TARA techniques are proposed research outputs — AI-derived, not independently validated.
-          See <a href="/guardrails/" class="text-blue-600 underline">Guardrails</a> for epistemic constraints.
+          See <a href="/guardrails/" class="text-[var(--color-accent-primary)] underline">Guardrails</a> for epistemic constraints.
         </p>
       </div>
     </div>

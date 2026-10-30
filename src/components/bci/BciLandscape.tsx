@@ -66,9 +66,9 @@ const POSTURE_COLORS: Record<string, { bg: string; text: string; label: string }
   none_published: { bg: 'bg-rose-500/20', text: 'text-rose-400', label: 'None' },
   minimal_claims: { bg: 'bg-amber-500/20', text: 'text-amber-400', label: 'Minimal' },
   basic_encryption: { bg: 'bg-yellow-500/20', text: 'text-yellow-400', label: 'Basic' },
-  regulatory_compliance: { bg: 'bg-blue-500/20', text: 'text-blue-400', label: 'Regulatory' },
-  open_source: { bg: 'bg-cyan-500/20', text: 'text-cyan-400', label: 'Open Source' },
-  mature: { bg: 'bg-emerald-500/20', text: 'text-emerald-400', label: 'Mature' },
+  regulatory_compliance: { bg: 'bg-[var(--color-accent-primary)]/20', text: 'text-[var(--color-accent-primary)]', label: 'Regulatory' },
+  open_source: { bg: 'bg-[var(--color-accent-primary)]/20', text: 'text-[var(--color-accent-primary)]', label: 'Open Source' },
+  mature: { bg: 'bg-[var(--color-accent-secondary)]/20', text: 'text-[var(--color-accent-secondary)]', label: 'Mature' },
 };
 const EVENT_COLORS: Record<string, string> = {
   company: '#22c55e',
@@ -327,7 +327,7 @@ function PublicationChart({ data }: { data: BciLandscapeProps['publicationTrends
         })()}
       </svg>
       <div className="flex flex-wrap gap-x-5 gap-y-1 mt-3 text-xs text-gray-400">
-        <span className="flex items-center gap-1.5"><span className="inline-block w-3 h-0.5 bg-blue-500 rounded" /> BCI publications (PubMed)</span>
+        <span className="flex items-center gap-1.5"><span className="inline-block w-3 h-0.5 bg-[var(--color-accent-fill)] rounded" /> BCI publications (PubMed)</span>
         <span className="flex items-center gap-1.5"><span className="inline-block w-3 h-0.5 bg-rose-500 rounded" /> Security-focused papers</span>
         <span className="flex items-center gap-1.5"><span className="inline-block w-3 h-0.5 bg-amber-500 rounded" /> Known threat vectors (TARA)</span>
         <span className="flex items-center gap-1.5"><span className="inline-block w-3 h-0.5 bg-amber-500/50 rounded border-t border-dashed border-amber-500" /> Projected trend</span>
@@ -557,11 +557,11 @@ function FundingGap({
             <div>
               <div className="flex justify-between text-xs text-gray-400 mb-1">
                 <span>Tracked BCI funding</span>
-                <span className="text-blue-400 font-medium">{formatUsd(totalFunding)}</span>
+                <span className="text-[var(--color-accent-primary)] font-medium">{formatUsd(totalFunding)}</span>
               </div>
               <div className="h-6 rounded-full bg-white/[0.04] overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-blue-600 to-blue-400 transition-all duration-700"
+                  className="h-full rounded-full bg-gradient-to-r from-[var(--color-accent-fill)] to-[var(--color-accent-primary)] transition-all duration-700"
                   style={{ width: '100%' }}
                 />
               </div>

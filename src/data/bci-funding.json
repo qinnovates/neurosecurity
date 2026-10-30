@@ -1,0 +1,176 @@
+[
+  {
+    "name": "Neuralink",
+    "funding_usd": 1290000000,
+    "type": "invasive"
+  },
+  {
+    "name": "Science Corp",
+    "funding_usd": 552000000,
+    "type": "invasive"
+  },
+  {
+    "name": "Galvani Bioelectronics",
+    "funding_usd": 540000000,
+    "type": "therapeutic"
+  },
+  {
+    "name": "BrainCo",
+    "funding_usd": 370000000,
+    "type": "noninvasive"
+  },
+  {
+    "name": "Synchron",
+    "funding_usd": 345000000,
+    "type": "invasive"
+  },
+  {
+    "name": "MindMaze",
+    "funding_usd": 330000000,
+    "type": "noninvasive"
+  },
+  {
+    "name": "Merge Labs",
+    "funding_usd": 252000000,
+    "type": "other"
+  },
+  {
+    "name": "Saluda Medical",
+    "funding_usd": 250000000,
+    "type": "therapeutic"
+  },
+  {
+    "name": "Blackrock Neurotech",
+    "funding_usd": 210000000,
+    "type": "invasive"
+  },
+  {
+    "name": "Precision Neuroscience",
+    "funding_usd": 183000000,
+    "type": "invasive"
+  },
+  {
+    "name": "Kernel",
+    "funding_usd": 158000000,
+    "type": "noninvasive"
+  },
+  {
+    "name": "Paradromics",
+    "funding_usd": 127000000,
+    "type": "invasive"
+  },
+  {
+    "name": "Openwater",
+    "funding_usd": 100000000,
+    "type": "noninvasive"
+  },
+  {
+    "name": "GenSight Biologics",
+    "funding_usd": 98000000,
+    "type": "therapeutic"
+  },
+  {
+    "name": "INBRAIN Neuroelectronics",
+    "funding_usd": 82800000,
+    "type": "invasive"
+  },
+  {
+    "name": "CTRL-Labs",
+    "funding_usd": 67000000,
+    "type": "noninvasive",
+    "note": "Acquired by Meta"
+  },
+  {
+    "name": "Neurable",
+    "funding_usd": 65000000,
+    "type": "noninvasive"
+  },
+  {
+    "name": "Pixium Vision",
+    "funding_usd": 65000000,
+    "type": "invasive",
+    "note": "Acquired by Science Corp"
+  },
+  {
+    "name": "InteraXon (Muse)",
+    "funding_usd": 60000000,
+    "type": "noninvasive"
+  },
+  {
+    "name": "ONWARD Medical",
+    "funding_usd": 55000000,
+    "type": "therapeutic"
+  },
+  {
+    "name": "Forest Neurotech",
+    "funding_usd": 34000000,
+    "type": "invasive"
+  },
+  {
+    "name": "Motif Neurotech",
+    "funding_usd": 30000000,
+    "type": "therapeutic"
+  },
+  {
+    "name": "Cognixion",
+    "funding_usd": 29000000,
+    "type": "noninvasive"
+  },
+  {
+    "name": "Subsense",
+    "funding_usd": 27000000,
+    "type": "invasive"
+  },
+  {
+    "name": "Neuroelectrics",
+    "funding_usd": 17000000,
+    "type": "therapeutic"
+  },
+  {
+    "name": "Arctop",
+    "funding_usd": 16300000,
+    "type": "noninvasive"
+  },
+  {
+    "name": "NeuroSky",
+    "funding_usd": 15000000,
+    "type": "noninvasive"
+  },
+  {
+    "name": "Emotiv",
+    "funding_usd": 12000000,
+    "type": "noninvasive"
+  },
+  {
+    "name": "Flow Neuroscience",
+    "funding_usd": 11900000,
+    "type": "therapeutic"
+  },
+  {
+    "name": "Axoft",
+    "funding_usd": 8000000,
+    "type": "invasive"
+  },
+  {
+    "name": "Cortigent",
+    "funding_usd": 6400000,
+    "type": "invasive",
+    "note": "Second Sight successor"
+  },
+  {
+    "name": "NextMind",
+    "funding_usd": 5000000,
+    "type": "noninvasive",
+    "note": "Acquired by Snap"
+  },
+  {
+    "name": "Neurosity",
+    "funding_usd": 4000000,
+    "type": "noninvasive"
+  },
+  {
+    "name": "OpenBCI",
+    "funding_usd": 2060000,
+    "type": "noninvasive"
+  }
+]

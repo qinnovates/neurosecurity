@@ -48,8 +48,8 @@ fact_check_notes:
 - Color science deep dive — phosphenes are monochrome white, color is unsolved
 
 **Connected derivation entries:**
-- [QIF Derivation Log Entry 89](QIF-DERIVATION-LOG.md#entry-89-neuroethics-to-bci-vision)
-- [Neurorights Derivation Log Entry 19](NEURORIGHTS-DERIVATION-LOG.md#entry-19-neuroethics-principles)
+- [QIF Derivation Log Entry 89](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-89-neuroethics-to-bci-vision)
+- [Neurorights Derivation Log Entry 19](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/logs/NEURORIGHTS-DERIVATION-LOG.md#entry-19-neuroethics-principles)
 
 ---
 

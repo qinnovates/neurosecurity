@@ -16,7 +16,7 @@
 .brain-hero[data-brain-hero="loading"]::before,
 .brain-hero[data-brain-hero="idle"]::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(ellipse 60% 55% at 50% 50%, color-mix(in srgb, var(--color-accent-primary) 16%, transparent), transparent 70%);
+  background: radial-gradient(ellipse 60% 55% at 50% 50%, color-mix(in srgb, var(--color-accent-brain) 18%, transparent), transparent 70%);
   animation: brain-hero-glow 3.6s ease-in-out infinite;
 }
 @keyframes brain-hero-glow {

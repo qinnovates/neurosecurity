@@ -9,7 +9,6 @@ import AtlasExplorer from '../AtlasExplorer';
 import { buildServedFiles, requestedPaths, serveFiles } from './explorer-test-server';
 
 const REAL_FILES = buildServedFiles();
-const UNREVIEWED = 'AI-drafted, unreviewed';
 /** The one curated threat model with a step that lights a region today (step 4), and one with none. */
 const LIT_CHAIN_ID = 'CHAIN-VIS-002';
 const UNLIT_CHAIN_ID = 'CHAIN-EEG-001';
@@ -122,15 +121,14 @@ describe('AtlasExplorer: threat model steps', () => {
     expect(container.querySelector('.atlas-root')?.getAttribute('data-lens')).toBe('band');
   });
 
-  it('puts the review mark and the technique lens limit on every step that lights a region', async () => {
+  it('puts the technique lens limit on every step that lights a region', async () => {
     const container = await renderExplorer();
     await openChain(container, LIT_CHAIN_ID);
     const litSteps = [...chainPanel(container).querySelectorAll<HTMLElement>('[data-chain-step]')].filter((step) => (step.querySelector('[data-step-regions]')?.getAttribute('data-step-regions') ?? '') !== '');
     expect(litSteps).toHaveLength(1);
     const [litStep] = litSteps;
-    expect(litStep.querySelector('[data-step-regions] [data-review-state][data-ai-drafted="true"]')?.textContent).toBe(UNREVIEWED);
     expect(litStep.querySelector('[data-limit-id="lens_technique"]')?.textContent).toBe(LIMIT_TEMPLATES.lens_technique);
-    for (const unlit of [...chainPanel(container).querySelectorAll<HTMLElement>('[data-chain-step]')].filter((step) => step !== litStep)) expect(unlit.querySelector('[data-step-regions] [data-review-state]')).toBeNull();
+    for (const unlit of [...chainPanel(container).querySelectorAll<HTMLElement>('[data-chain-step]')].filter((step) => step !== litStep)) expect(unlit.querySelector('[data-limit-id="lens_technique"]')).toBeNull();
   });
 
   it('says so, on the chain and on every step, when the data file gives no evidence label, and only then', async () => {
@@ -150,7 +148,7 @@ describe('AtlasExplorer: threat model steps', () => {
     const container = await renderExplorer();
     await openChain(container, LIT_CHAIN_ID);
     expect(chainPanel(container).textContent).not.toMatch(/[→⟶➔➜►▶]|->|flows? (to|into)|travels|propagat|spreads to/);
-    expect([...chainPanel(container).querySelectorAll('svg, canvas, line, path')].filter((drawn) => drawn.closest('.atlas-mark') === null)).toEqual([]);
+    expect([...chainPanel(container).querySelectorAll('svg, canvas, line, path')]).toEqual([]);
     for (const file of ['ChainView.tsx', 'use-chain-view.ts']) expect(fs.readFileSync(`src/components/atlas-scene/${file}`, 'utf-8'), file).not.toMatch(/from 'three'|<svg|<line|<path|marker-end|arrow/i);
     expect(fs.readFileSync('src/lib/atlas-explorer/chain-steps.ts', 'utf-8')).not.toMatch(/from 'three'|centroid|lerp|interpolat/i);
   });
@@ -197,11 +195,8 @@ describe('AtlasExplorer: the electrode layout and the leads', () => {
     fireEvent.click(within(panel).getByRole('button', { name: 'Cz' }));
     const picked = panel.querySelector('[data-picked-electrode="Cz"]') as HTMLElement;
     expect(picked.textContent).toContain('Picked electrode: Cz');
-    expect(picked.querySelector('[data-review-state]')?.textContent).toBe(UNREVIEWED);
-    expect(picked.querySelector(':scope > p > [data-review-state][data-ai-drafted="true"]')?.textContent).toBe(UNREVIEWED);
     expect([...picked.querySelectorAll('[data-limit-id]')].map((note) => note.textContent)).toEqual([LIMIT_TEMPLATES.device_electrodes, LIMIT_TEMPLATES.device_electrode_pick, LIMIT_TEMPLATES.device_landmarks]);
     expect([...picked.querySelectorAll('[data-landmark]')].map((landmark) => landmark.getAttribute('data-landmark'))).toEqual(['nasion', 'inion', 'left_preauricular', 'right_preauricular']);
-    expect(picked.querySelectorAll('[data-landmark] [data-review-state]')).toHaveLength(4);
     // No region is selected, in the list, the inspector or the announcement.
     expect(container.querySelector('button[data-region-id][aria-current="true"], button[data-region-id][aria-pressed="true"]')).toBeNull();
     expect(container.querySelector('[data-announce="selection"]')?.textContent).toBe('');
@@ -210,16 +205,15 @@ describe('AtlasExplorer: the electrode layout and the leads', () => {
     expect(panel.querySelector('[data-picked-electrode]')).toBeNull();
   });
 
-  it('draws each lead beside the brain with a scale bar, its review state, and a table giving every number its source and kind', async () => {
+  it('draws each lead beside the brain with a scale bar and a table giving every number its source and kind', async () => {
     const container = await renderExplorer();
     await turnOnLayout(container);
     const leads = [...container.querySelectorAll<HTMLElement>('.atlas-devices [data-lead-id]')];
     expect(leads.length).toBeGreaterThan(0);
     expect(container.querySelector('.atlas-viewport [data-lead-id]')).toBeNull();
     for (const lead of leads) {
-      expect(lead.querySelector('[data-review-state]')?.textContent, lead.dataset.leadId).toBe(UNREVIEWED);
       expect(lead.querySelector('svg[data-lead-drawing] [data-scale-bar-mm]')).not.toBeNull();
-      expect(lead.querySelector('svg[data-lead-drawing]')?.getAttribute('aria-label')).toContain(UNREVIEWED);
+      expect(lead.querySelector('svg[data-lead-drawing]')?.getAttribute('aria-label')).toContain('drawn to scale');
       const rows = [...lead.querySelectorAll('tbody tr')];
       expect(rows.map((row) => row.getAttribute('data-dimension'))).toEqual(['contacts', 'contact_length_mm', 'contact_spacing_mm', 'spacing_measure', 'diameter_mm']);
       for (const row of rows) {
@@ -231,14 +225,11 @@ describe('AtlasExplorer: the electrode layout and the leads', () => {
     expect([...leadPanel.querySelectorAll('[data-limit-id]')].map((note) => note.getAttribute('data-limit-id'))).toEqual(['device_lead', 'device_lead_scale', 'device_lead_panel']);
   });
 
-  it('claims nothing the data does not hold: no reach, coverage, nearest region or distance, and every device drawing is marked unreviewed', async () => {
+  it('claims nothing the data does not hold: no reach, coverage, nearest region or distance', async () => {
     const container = await renderExplorer();
     const panel = await turnOnLayout(container);
     fireEvent.click(within(panel).getByRole('button', { name: 'Oz' }));
     const ownWords = [...panel.querySelectorAll('h2, h3, button, th, figcaption strong, [data-limit-id]')].map((node) => node.textContent ?? '').join(' ');
     expect(ownWords).not.toMatch(/\breach|coverage|nearest|closest|distance to|picks up activity/i);
-    expect(panel.querySelectorAll('[data-layout-id] [data-review-state]').length).toBeGreaterThan(0);
-    expect(panel.querySelectorAll('[data-review-state="reviewed"]')).toHaveLength(0);
-    for (const file of ['DeviceGeometry.tsx', 'LeadFigure.tsx', 'ViewportStage.tsx']) expect(fs.readFileSync(`src/components/atlas-scene/${file}`, 'utf-8'), file).toMatch(/ReviewMark|reviewState/);
   });
 });

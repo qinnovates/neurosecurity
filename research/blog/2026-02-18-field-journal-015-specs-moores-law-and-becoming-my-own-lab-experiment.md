@@ -14,7 +14,7 @@ fact_check_notes:
 
 **Date:** 2026-02-18
 **Source:** Thinking out loud with Claude
-**Derivation details:** [Entry 60 — BCI Limits Equation Synthesis](QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis) (Part 2)
+**Derivation details:** [Entry 60 — BCI Limits Equation Synthesis](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis) (Part 2)
 
 The cool thing about mapping multiple data points is math. I need to check if we have the power consumption requirement for each BCI in the JSON inventory. We need to include that. Once we map it, we can also identify all of their sizes and specs based on public patent information. It gives us an idea given Moore's law of what the researchers have identified such as potential limits of that specific region of the brain, how it functions, and how the BCI security implementation can work. I can't really figure out how to secure implants just yet without requiring another device or compression hence my initial idea of Runemate and NSP to allow automated baselining for anomalies based on baselines and standard deviations. This would help me paint a better picture of what I'm working with.
 

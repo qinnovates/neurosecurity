@@ -85,11 +85,11 @@ The visual pathway does not go directly from eye to cortex. It passes through th
 
 The thalamic reticular nucleus (TRN) acts as a gatekeeper, filtering what gets through to cortex and what gets suppressed. Here is the problem: TRN filtering is weakest during states of low arousal, fatigue, distraction, and passive screen watching. The exact conditions under which most people consume digital content.
 
-The depth model below maps how risk escalates as the signal penetrates deeper through the neural pathway. Each layer corresponds to [QIF hourglass bands](/lab/hourglass.html) where applicable.
+The depth model below maps how risk escalates as the signal penetrates deeper through the neural pathway. Each layer corresponds to [QIF hourglass bands](/framework/#hourglass) where applicable.
 
 ### Depth 1: Visual Cortex (V1-V5)
 
-**Hourglass Band:** [N7 (Neural Tissue)](/lab/hourglass.html#N7)
+**Hourglass Band:** [N7 (Neural Tissue)](/framework/#hourglass#N7)
 
 **Mechanism:** SSVEP entrainment, photic driving, visual disruption. The cortex phase-locks to the flicker frequency. This is the basic SSVEP response that makes the entire attack class possible.
 
@@ -101,7 +101,7 @@ The depth model below maps how risk escalates as the signal penetrates deeper th
 
 ### Depth 2: Thalamic Gate (LGN + Pulvinar + Reticular Nucleus)
 
-**Hourglass Band:** [N4 (Thalamic Relay)](/lab/hourglass.html#N4)
+**Hourglass Band:** [N4 (Thalamic Relay)](/framework/#hourglass#N4)
 
 **Mechanism:** This is the critical boundary. The LGN relays visual input to V1. The pulvinar routes input to the amygdala via the low road. The TRN decides what gets filtered and what passes through. TRN filtering weakens during low arousal states: fatigue, distraction, passive screen watching, drowsiness. The defense mechanism is least effective precisely when people are most exposed to screens.
 
@@ -113,7 +113,7 @@ The depth model below maps how risk escalates as the signal penetrates deeper th
 
 ### Depth 3: Amygdala (via Pulvinar "Low Road")
 
-**Hourglass Band:** [N7 (Neural Tissue)](/lab/hourglass.html#N7), subcortical
+**Hourglass Band:** [N7 (Neural Tissue)](/framework/#hourglass#N7), subcortical
 
 **Mechanism:** Emotional valence modification. Threat perception bias. Conditioned fear associations. The pulvinar-amygdala pathway processes visual threat cues in under 120ms, before V1 has finished its analysis. Subliminal flicker paired with specific content can condition emotional associations that the subject never consciously formed.
 
@@ -125,7 +125,7 @@ The depth model below maps how risk escalates as the signal penetrates deeper th
 
 ### Depth 4: Hypothalamus (via Amygdala)
 
-**Hourglass Band:** [N7 (Neural Tissue)](/lab/hourglass.html#N7), deep subcortical
+**Hourglass Band:** [N7 (Neural Tissue)](/framework/#hourglass#N7), deep subcortical
 
 **Mechanism:** HPA axis activation, cortisol release, autonomic nervous system effects. The amygdala projects directly to the hypothalamus, triggering the stress response cascade. Separately, the melanopsin pathway (intrinsically photosensitive retinal ganglion cells → suprachiasmatic nucleus) means certain light frequencies directly disrupt circadian regulation. Physical harm from photons alone, no BCI required.
 
@@ -137,7 +137,7 @@ The depth model below maps how risk escalates as the signal penetrates deeper th
 
 ### Depth 5: Prefrontal Cortex (via Amygdala Projections)
 
-**Hourglass Band:** [N7 (Neural Tissue)](/lab/hourglass.html#N7), higher cortical
+**Hourglass Band:** [N7 (Neural Tissue)](/framework/#hourglass#N7), higher cortical
 
 **Mechanism:** Decision-making bias, risk assessment alteration, preference manipulation. The amygdala has strong projections to the ventromedial and orbitofrontal prefrontal cortex, the regions responsible for value-based decision-making. Subliminal emotional priming shifts choices without the subject knowing why. Karremans et al. (2006) demonstrated that subliminal brand exposure (below conscious detection threshold) significantly influenced beverage choice in thirsty participants. The mechanism is the same: bypass conscious awareness, modulate the emotional valence associated with a choice, and the prefrontal cortex incorporates that valence into its decision calculus.
 
@@ -149,7 +149,7 @@ The depth model below maps how risk escalates as the signal penetrates deeper th
 
 ### Depth 6: Basal Ganglia + Hippocampus
 
-**Hourglass Band:** [N7 (Neural Tissue)](/lab/hourglass.html#N7), deep structures
+**Hourglass Band:** [N7 (Neural Tissue)](/framework/#hourglass#N7), deep structures
 
 **Mechanism:** Habit formation via the dorsal striatum. Memory encoding bias via the hippocampus. Reward pathway modulation via the nucleus accumbens. These structures consolidate repeated subliminal inputs into lasting behavioral patterns. The dorsal striatum converts repeated stimulus-response associations into automatic habits. The hippocampus encodes the contextual memories that frame future decisions. The nucleus accumbens modulates reward prediction, making certain choices feel more rewarding for reasons the subject cannot articulate.
 

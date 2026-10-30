@@ -1,4 +1,5 @@
 ---
+import FundingChart from '../../../components/whitepaper/FundingChart.astro';
 import PageLayout from '@/layouts/PageLayout.astro';
 import WhitepaperVersionSelector from '@/components/WhitepaperVersionSelector.astro';
 import { getWhitepaperStats } from '@/lib/whitepaper-stats';
@@ -529,28 +530,9 @@ const tacticColors: Record<string, string> = {
         <p class="text-sm text-[var(--color-text-muted)] mb-4">
           Over $4 billion in disclosed venture funding deployed into BCI companies through 2024 (source: Pitchbook, Tracxn), with annual investment reaching $2.3B in 2024 alone (Neuralink $1.29B, Synchron $145M, Paradromics $103M, Precision Neuroscience $93M, and others). To our knowledge, none have published public-facing security documentation. Click any company for funding rounds and investors.
         </p>
-        <div class="glass rounded-xl overflow-hidden mb-2" style="height: 580px;">
-          <iframe
-            id="funding-chart-frame"
-            width="100%"
-            height="100%"
-            style="border: none; background: #0f172a;"
-            title="BCI Industry Cumulative Funding Timeline"
-          ></iframe>
-          <script is:inline>
-            // Set iframe src after DOM load to bypass Astro View Transitions router
-            (function() {
-              var f = document.getElementById('funding-chart-frame');
-              if (f && !f.src) f.src = '/charts/business/funding-timeline-interactive.html';
-              document.addEventListener('astro:page-load', function() {
-                var f2 = document.getElementById('funding-chart-frame');
-                if (f2 && !f2.getAttribute('src')) f2.src = '/charts/business/funding-timeline-interactive.html';
-              });
-            })();
-          </script>
-        </div>
+        <FundingChart />
         <p class="text-xs text-[var(--color-text-faint)] text-center">
-          Source: QIF BCI Landscape Database v2.0. Hover to inspect, click to expand.
+          Source: QIF BCI Landscape Database v2.0.
         </p>
       </section>
 
@@ -593,7 +575,7 @@ const tacticColors: Record<string, string> = {
                     </div>
                   )}
                   <a
-                    href={`/news/derivation/hourglass.html#${band.id}`}
+                    href="/framework/#hourglass"
                     class="flex items-center gap-3 py-[3px] group cursor-pointer rounded hover:bg-black/[0.03] transition-all"
                     title={band.description}
                   >
@@ -617,7 +599,7 @@ const tacticColors: Record<string, string> = {
           </div>
         </div>
         <div class="text-center mt-4">
-          <a href="/news/derivation/hourglass.html" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
+          <a href="/framework/#hourglass" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
             Explore the full interactive model &rarr;
           </a>
         </div>
@@ -898,7 +880,7 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <div class="text-center mt-8">
-          <a href="/news/derivation/hourglass.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg glass text-[var(--color-accent-primary)] font-medium hover:bg-white/10 transition-colors">
+          <a href="/framework/#hourglass" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg glass text-[var(--color-accent-primary)] font-medium hover:bg-white/10 transition-colors">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
             Explore the Interactive Layer Explorer &rarr;
           </a>
@@ -1466,7 +1448,7 @@ const tacticColors: Record<string, string> = {
           <ul>
             <li><strong>FDA 21 CFR Part 820 / 524B</strong> &mdash; Quality system requirements and cybersecurity expectations for medical devices</li>
             <li><strong>EU Medical Device Regulation (MDR) 2017/745</strong> &mdash; Post-market surveillance and clinical evaluation requirements</li>
-            <li><strong>HIPAA</strong> &mdash; Neural signals constitute Protected Health Information (PHI) when linked to an individual. Raw EEG, decoded intentions, and cognitive state inferences all fall under the Security Rule and Breach Notification Rule. See the full <a href="/governance/REGULATORY_COMPLIANCE/">Regulatory Compliance Guide</a> for neural data classification</li>
+            <li><strong>HIPAA</strong> &mdash; Neural signals constitute Protected Health Information (PHI) when linked to an individual. Raw EEG, decoded intentions, and cognitive state inferences all fall under the Security Rule and Breach Notification Rule. See the full <a href="/governance/neurosecurity_governance/">Neurosecurity Governance guide</a> for neural data classification</li>
             <li><strong>GDPR Article 9</strong> &mdash; Neural data is special category data (health data) under EU regulation, requiring explicit consent for processing. The right to erasure poses unique challenges for neural recordings</li>
             <li><strong>ISO 14971</strong> &mdash; Risk management for medical devices, mapped to NISS severity levels</li>
             <li><strong>IEC 62304</strong> &mdash; Software lifecycle for medical devices, with Runemate targeting Class C certification</li>
@@ -1617,7 +1599,7 @@ const tacticColors: Record<string, string> = {
         </div>
 
         <div class="text-center">
-          <a href="/governance/ai-ethics/" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg glass text-[var(--color-accent-primary)] font-medium hover:bg-white/10 transition-colors">
+          <a href="/governance/ai-security-ethics/" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg glass text-[var(--color-accent-primary)] font-medium hover:bg-white/10 transition-colors">
             Read the Full AI Ethics Reference &rarr;
           </a>
         </div>
@@ -3590,7 +3572,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
               v8.0 Working Draft
             </span>
             <span class="text-xs text-[var(--color-text-faint)]">2026-03-11</span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">Apache 2.0</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-[var(--color-accent-secondary)] text-[var(--color-accent-secondary)] font-medium">Apache 2.0</span>
           </div>
           <p class="text-sm text-[var(--color-text-muted)]">
             <strong>Author:</strong> Qinnovate LLC &middot;

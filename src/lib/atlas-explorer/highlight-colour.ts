@@ -6,22 +6,39 @@
  * it cannot be read as a value the lens holds. The hover label and the card
  * name the region in words beside it.
  *
- * The hues are spaced evenly around the wheel, one per region of the index, so
- * no two regions are closer than 360/n degrees; the walk around the wheel takes
- * a stride coprime with n, near the golden section, so regions that stand next
- * to each other in the index (often next to each other in the brain) land far
- * apart in hue. Two lightness tiers, alternated by position, add a second
- * difference. The position is stable for one index and nothing more is
- * claimed for it.
+ * The hue is data. Each region's record in the atlas file states it
+ * (`brain_regions[].highlight_hue`, carried into the index as the subject's
+ * `highlight_hue`), so the assignment is tagged once, in the data lake, and
+ * every renderer that reads the index draws the same colour for the same region.
+ * This file is the one place that turns the hue into a colour for the surface
+ * the canvas is drawn on: a fixed saturation, and a lightness per surface chosen
+ * so every hue on the wheel clears 3:1 against that surface (highlight-colour.test.ts
+ * holds both to it).
+ *
+ * A region whose record states no hue still gets one, derived from its position
+ * among the index's regions: the hues are spaced evenly around the wheel, one per
+ * region, walked with a stride coprime with their number near the golden section,
+ * so regions that stand next to each other in the index land far apart in hue.
+ * That derivation is what seeded the stored values, and it is what a new region
+ * shows until its record is given a hue of its own.
  */
 
 import type { AnatomyIndex, IndexStructure } from '@/lib/anatomy/anatomy-index-types';
+import type { SceneTheme } from './scene-shapes';
 
 const GOLDEN_SECTION = 0.6180339887;
-export const HIGHLIGHT_SATURATION = 0.72;
-/** Alternated by position: even ordinals the deeper tier, odd the lighter. Both read on either surface. */
-export const HIGHLIGHT_LIGHTNESS: readonly [number, number] = [0.5, 0.66];
+const HUE_DEGREES = 360;
+export const HIGHLIGHT_SATURATION = 0.7;
+/**
+ * One lightness per surface, not one for both. On the light surface the weakest
+ * hue is yellow (60), which at this lightness reads 3.35:1 against #fcfcfb; on
+ * the dark one it is blue (240), at 4.08:1 against #1a1a19. Either value on the
+ * other surface would fail the weakest hue.
+ */
+export const HIGHLIGHT_LIGHTNESS: Readonly<Record<SceneTheme, number>> = { light: 0.33, dark: 0.66 };
 const REGION_KIND = 'region';
+const FNV_OFFSET = 0x811c9dc5;
+const FNV_PRIME = 0x01000193;
 
 const greatestCommonDivisor = (first: number, second: number): number => (second === 0 ? first : greatestCommonDivisor(second, first % second));
 
@@ -43,7 +60,7 @@ function channelToHex(value: number): string {
 
 /** HSL to a lower-case hex colour, as three.js reads it and as the palettes are written. */
 export function hslToHex(hueDegrees: number, saturation: number, lightness: number): string {
-  const hue = ((hueDegrees % 360) + 360) % 360;
+  const hue = ((hueDegrees % HUE_DEGREES) + HUE_DEGREES) % HUE_DEGREES;
   const chroma = (1 - Math.abs(2 * lightness - 1)) * saturation;
   const second = chroma * (1 - Math.abs(((hue / 60) % 2) - 1));
   const base = lightness - chroma / 2;
@@ -53,30 +70,45 @@ export function hslToHex(hueDegrees: number, saturation: number, lightness: numb
 }
 
 /**
- * The colour of the region at this position among the index's regions.
+ * The hue, in whole degrees, derived for the region at this position among the
+ * index's regions when its record states none.
  *
  * @param ordinal the region's position, from 0
  * @param count how many regions the index holds; the wheel is divided into that many hues
  */
-export function highlightColourFor(ordinal: number, count: number): string {
+export function derivedHueFor(ordinal: number, count: number): number {
   const slots = Math.max(count, 1);
   const slot = (ordinal * hueStrideFor(slots)) % slots;
-  return hslToHex((slot * 360) / slots, HIGHLIGHT_SATURATION, HIGHLIGHT_LIGHTNESS[ordinal % 2]);
+  return Math.round((slot * HUE_DEGREES) / slots) % HUE_DEGREES;
 }
 
-/** Each region's position among the index's regions, in the index's own order. Pathways and networks take no position. */
-export function regionOrdinals(index: Pick<AnatomyIndex, 'subjects'>): ReadonlyMap<string, number> {
-  return new Map(index.subjects.filter((subject) => subject.kind === REGION_KIND).map((subject, ordinal) => [subject.id, ordinal]));
+/** The colour a hue is drawn in on a surface: the fixed saturation and that surface's lightness. */
+export function renderHighlightHue(hue: number, theme: SceneTheme): string {
+  return hslToHex(hue, HIGHLIGHT_SATURATION, HIGHLIGHT_LIGHTNESS[theme]);
 }
 
 /**
- * The colour a structure shows under the pointer: its one owning region's. A
- * structure that several regions have a record on belongs to none of them
- * alone and gets no colour of its own; so does one no region owns.
+ * Each region's highlight hue: the one its record states, or the derived one for
+ * a record that states none. Pathways and networks take no hue.
  */
-export function highlightColourOfStructure(structure: Pick<IndexStructure, 'owners'>, ordinals: ReadonlyMap<string, number>): string | null {
-  const regionIds = [...new Set(structure.owners.filter((owner) => owner.subject_kind === REGION_KIND).map((owner) => owner.subject_id))];
-  if (regionIds.length !== 1) return null;
-  const ordinal = ordinals.get(regionIds[0]);
-  return ordinal === undefined ? null : highlightColourFor(ordinal, ordinals.size);
+export function regionHighlightHues(index: Pick<AnatomyIndex, 'subjects'>): ReadonlyMap<string, number> {
+  const regions = index.subjects.filter((subject) => subject.kind === REGION_KIND);
+  return new Map(regions.map((subject, ordinal) => [subject.id, subject.highlight_hue ?? derivedHueFor(ordinal, regions.length)]));
+}
+
+/** A stable hue for a shape no region owns, from its key (FNV-1a), so it keeps its colour between builds. */
+export function structureHue(structureKey: string): number {
+  let hash = FNV_OFFSET;
+  for (const character of structureKey) hash = Math.imul(hash ^ character.charCodeAt(0), FNV_PRIME) >>> 0;
+  return hash % HUE_DEGREES;
+}
+
+/**
+ * The colour a structure shows under the pointer, so every shape answers to it:
+ * its owning region's, the first owner's on a shape several regions share, or a
+ * hue of the shape's own where no region in the index owns it.
+ */
+export function highlightColourOfStructure(structure: Pick<IndexStructure, 'key' | 'owners'>, hues: ReadonlyMap<string, number>, theme: SceneTheme): string {
+  const ownerHue = structure.owners.filter((owner) => owner.subject_kind === REGION_KIND).map((owner) => hues.get(owner.subject_id)).find((hue) => hue !== undefined);
+  return renderHighlightHue(ownerHue ?? structureHue(structure.key), theme);
 }

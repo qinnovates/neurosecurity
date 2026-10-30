@@ -8,7 +8,6 @@ import AtlasExplorer from '../AtlasExplorer';
 import { buildServedFiles, requestedPaths, serveFiles, type ServedFile } from './explorer-test-server';
 
 const REAL_FILES = buildServedFiles();
-const UNREVIEWED = 'AI-drafted, unreviewed';
 /** Each test renders the whole explorer over the real data; on a loaded machine that can pass the default five seconds. */
 const TEST_TIMEOUT_MS = 20_000;
 vi.setConfig({ testTimeout: TEST_TIMEOUT_MS });
@@ -97,13 +96,6 @@ describe('AtlasExplorer: the list', () => {
     expect(rowOf(container, 'cervical_cord').textContent).toContain('The only spinal cord template found states no licence');
   });
 
-  it('puts the AI-drafted mark on every list row', async () => {
-    const container = await renderExplorer();
-    const unmarked = rows(container).filter((row) => row.querySelector('[data-ai-drafted="true"]')?.textContent !== UNREVIEWED);
-    expect(rows(container).length).toBeGreaterThan(0);
-    expect(unmarked.map((row) => row.dataset.regionId)).toEqual([]);
-  });
-
   it('moves between rows with the arrow keys, Home and End, keeping one tab stop', async () => {
     const container = await renderExplorer();
     const all = rows(container);
@@ -127,7 +119,7 @@ describe('AtlasExplorer: the list', () => {
     await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('heading', { level: 2, name: 'Hippocampus' })));
     expect(rowOf(container, 'hippocampus').getAttribute('aria-current')).toBe('true');
     expect(rowOf(container, 'hippocampus').tabIndex).toBe(0);
-    await waitFor(() => expect(announcement(container, 'selection')).toMatch(/^Hippocampus selected\. Band N6\. .+\. AI-drafted, unreviewed\.$/));
+    await waitFor(() => expect(announcement(container, 'selection')).toMatch(/^Hippocampus selected\. Band N6\. .+\.$/));
     for (const kind of ['selection', 'lens']) {
       const region = container.querySelector(`[data-announce="${kind}"]`);
       expect([region?.getAttribute('role'), region?.getAttribute('aria-live')]).toEqual(['status', 'polite']);
@@ -185,7 +177,6 @@ describe('AtlasExplorer: the list', () => {
     const listed = rows(container).filter((row) => row.dataset.standing === 'value');
     expect(listed.length).toBeGreaterThan(0);
     for (const row of listed) expect(row.querySelector('.atlas-cell-lens')?.textContent).toContain('QIF\'s atlas file lists this region for the device; no expert has reviewed the list');
-    expect(listed.filter((row) => row.querySelector('.atlas-cell-lens [data-ai-drafted]') !== null)).toEqual([]);
   });
 
   it('leaves focus where it is when a row is chosen with a pointer', async () => {
@@ -228,7 +219,6 @@ describe('AtlasExplorer: lenses and the picker', () => {
     const withStep = rows(container).filter((row) => row.dataset.standing === 'value');
     expect(withStep.length).toBeGreaterThan(0);
     expect(withStep.every((row) => /^(none|low|medium|high|critical)$/.test(row.querySelector('.atlas-row-value')?.textContent ?? ''))).toBe(true);
-    expect(withStep.every((row) => row.querySelector('.atlas-cell-lens [data-ai-drafted="true"]') !== null)).toBe(true);
   });
 
   it('offers every technique and every device in one picker and narrows it from the keyboard', async () => {
@@ -287,20 +277,17 @@ describe('AtlasExplorer: lenses and the picker', () => {
     const options = within(screen.getByRole('listbox', { name: 'technique or device list' })).getAllByRole('option');
     const drafted = options.filter((option) => option.dataset.techniqueKind === 'regions');
     expect(drafted.length).toBeGreaterThan(0);
-    expect(drafted.filter((option) => option.querySelector('[data-ai-drafted="true"]') === null)).toEqual([]);
     const deviceOnly = options.filter((option) => option.dataset.techniqueKind === 'device_only');
     expect(deviceOnly).toHaveLength(67);
-    expect(deviceOnly.filter((option) => option.querySelector('[data-ai-drafted]') !== null)).toEqual([]);
   });
 
-  it('shows a chosen technique\'s linked regions with the mark, and the limit for a technique that is band-level only', async () => {
+  it('shows a chosen technique\'s linked regions, and the limit for a technique that is band-level only', async () => {
     const container = await renderExplorer();
     const linked = JSON.parse(REAL_FILES[ANATOMY_INDEX_PATH] as string).techniques.find((technique: { links: Array<{ lit: boolean }> }) => technique.links.some((link) => link.lit));
     await chooseTechnique(container, linked.id);
     const linkedRows = rows(container).filter((row) => row.dataset.standing === 'value');
     expect(linkedRows.length).toBeGreaterThan(0);
-    expect(linkedRows.every((row) => row.querySelector('.atlas-cell-lens [data-ai-drafted="true"]') !== null)).toBe(true);
-    expect(container.querySelector('.atlas-subject [data-ai-drafted="true"]')).not.toBeNull();
+    expect(container.querySelector('.atlas-subject')).not.toBeNull();
     expect(container.querySelector('.atlas-lens-limits [data-limit-id="lens_technique"]')).not.toBeNull();
   });
 

@@ -85,6 +85,12 @@ export interface BrainRegion {
   name: string;
   bandId: string;
   depthClass: string;
+  /**
+   * The hue, in whole degrees 0-359, of the colour the atlas shows on this region's shapes under the pointer or
+   * while selected (`brain_regions[].highlight_hue`). It identifies the region and means nothing else. Null for a
+   * record that states none; the scene then derives one from the region's position.
+   */
+  highlightHue: number | null;
 }
 
 export interface PrecedentCve {

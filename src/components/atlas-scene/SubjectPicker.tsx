@@ -1,6 +1,5 @@
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { filterSubjectOptions, type SubjectOption } from '@/lib/atlas-explorer/subject-options';
-import ReviewMark from './ReviewMark';
 
 interface Props {
   /** What is being chosen, in the singular: "technique". */
@@ -28,7 +27,6 @@ function PickerOption({ option, elementId, isActive, isChosen, onChoose }: Optio
       <span className="atlas-option-label">{option.label}</span>
       <span className="atlas-option-id">{option.id}</span>
       <span className="atlas-option-detail">{option.detail}</span>
-      {option.reviewState !== null && <ReviewMark state={option.reviewState} />}
     </li>
   );
 }

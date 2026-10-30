@@ -17,7 +17,7 @@ fact_check_notes:
 
 **Date:** 2026-02-18 ~08:30 UTC
 **Source:** Thinking out loud with Claude, lightbulb moment
-**Derivation details:** [Entry 60 — BCI Limits Equation Synthesis](QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis) (Parts 3-5)
+**Derivation details:** [Entry 60 — BCI Limits Equation Synthesis](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-DERIVATION-LOG.md#entry-60-bci-limits-equation-synthesis) (Parts 3-5)
 
 **Lesson Learned (Moore's Law vs Reality):**
 Apple M1→M4 over 4 years only hit 44% of Moore's Law prediction for transistor count (1.75x actual vs 4x predicted). Density only went up 1.27x. Die size actually GREW 1.38x. Apple likely didn't push harder because they didn't have demand and found more efficient ways — clock speed, architecture, efficiency gains matter more than raw transistor count now. The point is there's other factors. But what we DO have is the ratio, and that ratio is a useful baseline.

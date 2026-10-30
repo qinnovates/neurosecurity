@@ -54,11 +54,11 @@ const categories = [...THREAT_CATEGORIES];
                     <span class="text-3xl font-semibold text-red-500">{statusStats.CONFIRMED + statusStats.DEMONSTRATED}</span>
                   </div>
               </div>
-              <div class="bg-purple-50 px-8 py-5 rounded-[2rem] border border-purple-100 shadow-sm min-w-[200px]">
-                  <span class="block text-[11px] text-purple-500 font-semibold mb-1">Neurorights Mapped</span>
+              <div class="bg-purple-50 px-8 py-5 rounded-[2rem] border border-[var(--color-border)] shadow-sm min-w-[200px]">
+                  <span class="block text-[11px] text-[var(--color-accent-tertiary)] font-semibold mb-1">Neurorights Mapped</span>
                   <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-semibold text-purple-700">{nrStats.withNeurorights}/{THREAT_VECTORS.length}</span>
-                    <span class="text-sm text-purple-400 font-medium">5 rights</span>
+                    <span class="text-3xl font-semibold text-[var(--color-accent-tertiary)]">{nrStats.withNeurorights}/{THREAT_VECTORS.length}</span>
+                    <span class="text-sm text-[var(--color-accent-tertiary)] font-medium">5 rights</span>
                   </div>
               </div>
               <a href="/atlas/chains/" class="group flex items-center justify-between px-8 py-4 rounded-[2rem] border border-slate-100 hover:border-slate-300 transition-colors min-w-[200px]">

@@ -6,10 +6,10 @@
  * selection mark.
  *
  * The selection is drawn on the selected shapes themselves: lit from within,
- * in white light at a level below the pointer's lift, and a see-through shape
- * drawn denser. Nothing is drawn around a selection and no hue is added, so a
- * selected shape keeps its own colour and never reads as holding a value it
- * does not hold.
+ * in the region's own colour where it has one and in white otherwise, at a
+ * level below the pointer's lift, and a see-through shape drawn denser. Nothing
+ * is drawn around a selection and no lens hue is added, so a selected shape
+ * never reads as holding a value it does not hold.
  */
 
 import type { Point3 } from '@/lib/anatomy/ras-to-scene';
@@ -104,29 +104,55 @@ export function materialParamsFor(shape: Pick<SceneShape, 'layer' | 'fill' | 'co
 /**
  * How a shape under the pointer is lifted, so the visitor sees which shape a
  * click would pick. The lift keeps the fill kind: a see-through shape grows
- * denser and a filled one brighter. The one hue change is to the shape's own
- * region colour (highlight-colour.ts), which is no band's and no step's, so a
- * hovered shape still never reads as holding a value it does not hold.
+ * denser and a filled one is lit from within. The one hue change is to the
+ * shape's own region colour (highlight-colour.ts), which is no band's and no
+ * step's, so a hovered shape still never reads as holding a value it does not hold.
  */
 export const HOVER_OPACITY: Readonly<Record<FillKind, number>> = { solid: 1, translucent: 0.7, lines: 0.55, neutral: 0.4 };
-/** White light added to a filled shape under the pointer: brighter, not another colour. */
+/**
+ * The light a filled shape with no colour of its own is lit with: white, so it is brighter and not another
+ * colour. A shape that has a region colour is lit in that colour instead (see `hoverParamsFor`).
+ */
 export const HOVER_EMISSIVE = '#ffffff';
 export const HOVER_EMISSIVE_INTENSITY = 0.7;
 /**
- * The selection: the same white light, held, at a lower level than the pointer's lift, so a selected shape stays
+ * The selection: the same light, held, at a lower level than the pointer's lift, so a selected shape stays
  * recognisably its own colour and the one under the pointer still stands out over it. Nothing is drawn around a
  * selection; its name stands beside the picture.
  */
 export const SELECTED_EMISSIVE_INTENSITY = 0.35;
+/**
+ * The levels for a shape lit in its own region colour. A Lambert material adds its emissive colour straight onto
+ * the lit diffuse colour, so white at 0.7 under the scene's 1.6 headlight and 1.5 hemisphere light put every
+ * channel near 1 and the region hue vanished into white. The same hue added to itself at these levels brightens
+ * the shape without moving its hue, and the gap between the two keeps the pointer's lift above the selection's.
+ */
+export const OWN_COLOUR_HOVER_EMISSIVE_INTENSITY = 0.35;
+export const OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY = 0.25;
+
+/** The two lifts a shape can wear; the selection's is the lower, so the shape under the pointer stands out over it. */
+export type LiftKind = 'hover' | 'selected';
 
 export interface HoverParams {
   opacity: number;
+  /** The colour the shape is lit with: its own region colour where it has one, white otherwise. Null where no light is added. */
+  emissiveColour: string | null;
   /** Zero for every see-through fill, which is lifted by opacity alone. */
   emissiveIntensity: number;
 }
 
-export function hoverParamsFor(shape: Pick<SceneShape, 'fill'>): HoverParams {
-  return { opacity: HOVER_OPACITY[shape.fill], emissiveIntensity: shape.fill === 'solid' ? HOVER_EMISSIVE_INTENSITY : 0 };
+const WHITE_INTENSITY: Readonly<Record<LiftKind, number>> = { hover: HOVER_EMISSIVE_INTENSITY, selected: SELECTED_EMISSIVE_INTENSITY };
+const OWN_COLOUR_INTENSITY: Readonly<Record<LiftKind, number>> = { hover: OWN_COLOUR_HOVER_EMISSIVE_INTENSITY, selected: OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY };
+
+/**
+ * How a shape is lifted for the pointer or for the selection. Only a filled shape is lit; it is lit in its own
+ * region colour where it has one, and in white where it is shared or unowned and so has none.
+ */
+export function hoverParamsFor(shape: Pick<SceneShape, 'fill' | 'highlightColour'>, lift: LiftKind = 'hover'): HoverParams {
+  const opacity = HOVER_OPACITY[shape.fill];
+  if (shape.fill !== 'solid') return { opacity, emissiveColour: null, emissiveIntensity: 0 };
+  if (shape.highlightColour === null) return { opacity, emissiveColour: HOVER_EMISSIVE, emissiveIntensity: WHITE_INTENSITY[lift] };
+  return { opacity, emissiveColour: shape.highlightColour, emissiveIntensity: OWN_COLOUR_INTENSITY[lift] };
 }
 
 /* The marker ring: the mark that says how well the atlas resolves a structure. */

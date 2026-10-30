@@ -1,12 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { poseForView, turnPose } from '../camera-views';
 import {
-  BRAIN_OUTLINE_OPACITY, DRAW_ORDER, FILL_OPACITY, HOVER_EMISSIVE_INTENSITY, HOVER_OPACITY, IDLE_RADIANS_PER_MS, INSIDE_COLOUR, RING_OUTER_MM, SELECTED_EMISSIVE_INTENSITY, axisDirectionsFor, choosePick, hoverParamsFor, idleTurnSpeed,
+  BRAIN_OUTLINE_OPACITY, DRAW_ORDER, FILL_OPACITY, HOVER_EMISSIVE, HOVER_EMISSIVE_INTENSITY, HOVER_OPACITY, IDLE_RADIANS_PER_MS, INSIDE_COLOUR, OWN_COLOUR_HOVER_EMISSIVE_INTENSITY,
+  OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY, RING_OUTER_MM, SELECTED_EMISSIVE_INTENSITY, axisDirectionsFor, choosePick, hoverParamsFor, idleTurnSpeed,
   isPickable, materialParamsFor, pointerToNdc, ringParamsFor, type PickHit, type RingParams,
 } from '../scene-drawing';
 import { FILL_KINDS, NEUTRAL_COLOUR, NISS_COLOURS, NISS_COLOURS_DARK, SIZE_MARKS } from '../scene-shapes';
 
-const shape = (fill: (typeof FILL_KINDS)[number], layer = 'cortical', colour = '#123456') => ({ fill, layer: layer as 'cortical', colour });
+const shape = (fill: (typeof FILL_KINDS)[number], layer = 'cortical', colour = '#123456', highlightColour: string | null = null) => ({ fill, layer: layer as 'cortical', colour, highlightColour });
+/** A region's own colour, as highlight-colour.ts resolves one. */
+const OWN_COLOUR = '#8f1f3c';
 const hit = (structureKey: string, distance: number, overrides: Partial<PickHit> = {}): PickHit => ({ structureKey, distance, fill: 'translucent', isSelected: false, isHiddenByCut: false, ...overrides });
 
 describe('materialParamsFor', () => {
@@ -38,16 +41,35 @@ describe('materialParamsFor', () => {
 });
 
 describe('hoverParamsFor', () => {
-  it('lifts a see-through shape by opacity alone, keeps it short of filled, and brightens a filled one without changing its hue', () => {
+  it('lifts a see-through shape by opacity alone, keeps it short of filled, and adds no light to it whether or not it has a colour of its own', () => {
     for (const fill of FILL_KINDS.filter((kind) => kind !== 'solid')) {
-      const params = hoverParamsFor(shape(fill));
-      expect(params.opacity, fill).toBeGreaterThan(FILL_OPACITY[fill]);
-      expect(params.opacity, fill).toBeLessThan(1);
-      expect(params.emissiveIntensity, fill).toBe(0);
+      for (const own of [null, OWN_COLOUR]) {
+        for (const lift of ['hover', 'selected'] as const) {
+          const params = hoverParamsFor(shape(fill, 'cortical', '#123456', own), lift);
+          expect(params.opacity, `${fill} ${lift}`).toBeGreaterThan(FILL_OPACITY[fill]);
+          expect(params.opacity, `${fill} ${lift}`).toBeLessThan(1);
+          expect(params, `${fill} ${lift}`).toMatchObject({ emissiveColour: null, emissiveIntensity: 0 });
+        }
+      }
     }
-    expect(hoverParamsFor(shape('solid'))).toEqual({ opacity: 1, emissiveIntensity: expect.any(Number) });
-    expect(hoverParamsFor(shape('solid')).emissiveIntensity).toBeGreaterThan(0);
     expect(HOVER_OPACITY.translucent).toBeGreaterThan(HOVER_OPACITY.lines);
+  });
+
+  it('lights a filled shape with no colour of its own in white, and one with a region colour in that colour, never in white', () => {
+    expect(hoverParamsFor(shape('solid'))).toEqual({ opacity: 1, emissiveColour: HOVER_EMISSIVE, emissiveIntensity: HOVER_EMISSIVE_INTENSITY });
+    expect(hoverParamsFor(shape('solid'), 'selected')).toEqual({ opacity: 1, emissiveColour: HOVER_EMISSIVE, emissiveIntensity: SELECTED_EMISSIVE_INTENSITY });
+    const own = shape('solid', 'cortical', '#123456', OWN_COLOUR);
+    expect(hoverParamsFor(own)).toEqual({ opacity: 1, emissiveColour: OWN_COLOUR, emissiveIntensity: OWN_COLOUR_HOVER_EMISSIVE_INTENSITY });
+    expect(hoverParamsFor(own, 'selected')).toEqual({ opacity: 1, emissiveColour: OWN_COLOUR, emissiveIntensity: OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY });
+    expect(HOVER_EMISSIVE).toBe('#ffffff');
+  });
+
+  it('lights a shape in its own colour below the white level, so the hue is not washed out: a Lambert material adds the light straight onto the lit colour', () => {
+    // At these levels the brightest channel of a resolved colour stays below the light's own, so the added light shifts
+    // brightness and not hue. White at the same level would add equally to every channel and grey the hue out.
+    expect(OWN_COLOUR_HOVER_EMISSIVE_INTENSITY).toBeGreaterThan(0);
+    expect(OWN_COLOUR_HOVER_EMISSIVE_INTENSITY).toBeLessThan(HOVER_EMISSIVE_INTENSITY);
+    expect(OWN_COLOUR_HOVER_EMISSIVE_INTENSITY).toBeLessThanOrEqual(0.5);
   });
 });
 
@@ -104,9 +126,14 @@ describe('axisDirectionsFor', () => {
 });
 
 describe('the selection glow', () => {
-  it('is held below the pointer\'s lift, so the shape under the pointer still stands out over a selected one', () => {
+  it('is held below the pointer\'s lift in either light, so the shape under the pointer still stands out over a selected one', () => {
     expect(SELECTED_EMISSIVE_INTENSITY).toBeGreaterThan(0);
     expect(SELECTED_EMISSIVE_INTENSITY).toBeLessThan(HOVER_EMISSIVE_INTENSITY);
+    expect(OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY).toBeGreaterThan(0);
+    expect(OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY).toBeLessThan(OWN_COLOUR_HOVER_EMISSIVE_INTENSITY);
+    const own = shape('solid', 'cortical', '#123456', OWN_COLOUR);
+    expect(hoverParamsFor(own, 'selected').emissiveIntensity).toBeLessThan(hoverParamsFor(own, 'hover').emissiveIntensity);
+    expect(hoverParamsFor(shape('solid'), 'selected').emissiveIntensity).toBeLessThan(hoverParamsFor(shape('solid'), 'hover').emissiveIntensity);
   });
 });
 
@@ -121,7 +148,7 @@ describe('ringParamsFor', () => {
     [params.arcs.length, params.arcs.reduce((total, [, length]) => total + length, 0).toFixed(3), (params.outerMm - params.innerMm).toFixed(3), params.dotMm].join('/');
 
   it('draws no ring for a structure the atlas resolves well enough', () => {
-    for (const fill of FILL_KINDS) expect(ringParamsFor({ fill, highlightColour: null, sizeMark: 'mesh', colour: NISS_COLOURS.high }), fill).toBeNull();
+    for (const fill of FILL_KINDS) expect(ringParamsFor({ fill, sizeMark: 'mesh', colour: NISS_COLOURS.high }), fill).toBeNull();
     for (const sizeMark of SIZE_MARKS.filter((mark) => mark !== 'mesh')) expect(ringParamsFor({ fill: 'solid', sizeMark, colour: NISS_COLOURS.high })).not.toBeNull();
   });
 

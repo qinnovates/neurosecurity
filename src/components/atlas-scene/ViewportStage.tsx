@@ -5,7 +5,6 @@ import { SLICE_AXIS_LABELS, type SliceState } from '@/lib/atlas-explorer/slice-p
 import type { ViewportCaption } from '@/lib/atlas-explorer/viewport-caption';
 import type { AtlasCanvasProps, CanvasCommands } from './AtlasCanvas';
 import LimitNote from './LimitNote';
-import ReviewMark from './ReviewMark';
 import type { AxisDirections } from './scene-renderer';
 
 interface Props {
@@ -46,6 +45,7 @@ export interface LensWays {
 
 export const ATTRIBUTION_PATH = '/atlas/attribution/';
 export const SHOW_DETAILS_LABEL = 'See its details';
+export const CAPTION_NOTES_LABEL = 'About this picture';
 /** The three moves, over the picture until the first touch or a few seconds, whichever comes first. The full sentence stays in the controls. */
 const HINT_PARTS = ['Drag to turn', 'Ctrl or ⌘ + scroll to zoom', 'Click a region'] as const;
 const HINT_MS = 9000;
@@ -109,17 +109,19 @@ export default function ViewportStage({ Canvas, canvasProps, commands, caption, 
       )}
       <figcaption className="atlas-caption" data-viewport-caption="true">
         <p className="atlas-caption-line">
-          {caption.reviewState !== null && <ReviewMark state={caption.reviewState} />} <strong>{caption.lensLabel}</strong>{' '}
+          <strong>{caption.lensLabel}</strong>{' '}
           Average template {caption.templateSpace}, not anyone&rsquo;s brain. <a href={ATTRIBUTION_PATH}>Sources and licences</a>
         </p>
-        {isChainShown && <LimitNote limit={limitSentence('chain_order')} />}
-        {[...caption.lensLimits, ...caption.positionLimits, ...sliceLimits].map((limit) => <LimitNote key={`${limit.id}:${limit.text}`} limit={limit} />)}
         {deviceCaption !== null && (
-          <div className="atlas-caption-device" data-device-caption="true">
-            <p className="atlas-caption-line"><ReviewMark state={deviceCaption.reviewState} /> <strong>{deviceCaption.label}</strong></p>
-            {deviceCaption.limits.map((limit) => <LimitNote key={limit.id} limit={limit} />)}
-          </div>
+          <p className="atlas-caption-line" data-device-caption="true"><strong>{deviceCaption.label}</strong></p>
         )}
+        {/* Every limit of what is drawn stays in the caption, one disclosure away, so the picture carries its notes without the notes crowding the picture. */}
+        <details className="atlas-caption-notes" data-caption-notes="true">
+          <summary>{CAPTION_NOTES_LABEL}</summary>
+          {isChainShown && <LimitNote limit={limitSentence('chain_order')} />}
+          {[...caption.lensLimits, ...caption.positionLimits, ...sliceLimits].map((limit) => <LimitNote key={`${limit.id}:${limit.text}`} limit={limit} />)}
+          {deviceCaption?.limits.map((limit) => <LimitNote key={limit.id} limit={limit} />)}
+        </details>
       </figcaption>
     </figure>
   );

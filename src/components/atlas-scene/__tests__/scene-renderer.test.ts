@@ -100,7 +100,7 @@ describe('createSceneRenderer', () => {
     canvas.removeEventListener = ((type: string, listener: EventListenerOrEventListenerObject) => { removed.push([type, listener]); remove(type, listener); }) as typeof canvas.removeEventListener;
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set());
-    expect(listeners.map(([type]) => type).sort()).toEqual(['pointercancel', 'pointerdown', 'pointermove', 'pointerup', 'webglcontextlost', 'wheel']);
+    expect(listeners.map(([type]) => type).sort()).toEqual(['pointercancel', 'pointerdown', 'pointerleave', 'pointermove', 'pointerup', 'webglcontextlost', 'wheel']);
     renderer.dispose();
     expect(removed).toEqual(listeners);
     expect(three.contextLosses).toBe(1);

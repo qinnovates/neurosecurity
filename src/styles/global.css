@@ -3,30 +3,43 @@
 
 /* ═══ Design Tokens — Dark Theme (site default) ═══
    Colour values come from the org brand config, src/site/brands.json (theme.colors):
-   background_primary, cyan_accent, purple_accent, brand_teal, text_primary, text_secondary.
+   background_primary, electric_blue, hot_pink, brand_teal, text_primary, text_secondary.
+   Three colours carry the site: a black ground, electric blue for everything interactive, and hot
+   pink for the brain and for adversarial marks. Every ratio below is WCAG 2.x against the ground
+   it sits on: text 4.5:1, graphics and controls 3:1.
    The bare :root carries the full dark set; :root[data-theme="light"] below overrides it. */
 @theme {
-  --color-bg-deep: #0a0a0f;
-  --color-bg-surface: #14161d;
-  --color-bg-elevated: #1f222c;
-  /* Accent roles: primary = interactive, secondary = therapeutic use, tertiary = adversarial use */
-  --color-accent-primary: #00e5ff;
-  /* Solid fills that carry white text. Kept separate because the cyan accent reads at 1.5:1 under
-     white text; this is brands.json purple_accent at 85% over black, which white text clears at 5.2:1. */
-  --color-accent-fill: #993fd9;
+  --color-bg-deep: #000000;
+  --color-bg-surface: #0b0b10;
+  --color-bg-elevated: #15151c;
+  /* Accent roles: primary = interactive, secondary = therapeutic use, tertiary = adversarial use.
+     Primary reads 6.05:1 on the ground and 5.24:1 on the elevated surface, so it may carry text. */
+  --color-accent-primary: #3d86ff;
+  /* Solid fills that carry white text: the primary is too light for that (3.47:1), this deeper step
+     of the same blue clears it at 5.48:1. */
+  --color-accent-fill: #1d5fe6;
   --color-accent-secondary: #22c68d;
-  --color-accent-tertiary: #b44aff;
-  --color-text-primary: #e0e0e0;
-  --color-text-muted: #a0a0a0;
-  --color-text-faint: #7d8396;
-  --color-border: rgba(255, 255, 255, 0.09);
-  --color-border-hover: rgba(255, 255, 255, 0.18);
+  --color-accent-tertiary: #ff3fa4;
+  /* The secondary and tertiary roles as solid fills under white text: 5.33:1 and 5.54:1. */
+  --color-accent-secondary-fill: #0c7a57;
+  --color-accent-tertiary-fill: #c8156f;
+  /* The brain's own colour, for the hero glow and anything that stands in for the render. */
+  --color-accent-brain: #ff3fa4;
+  --color-text-primary: #e8e8ee;
+  --color-text-muted: #a3a7b5;
+  /* 5.96:1 on the ground, 5.16:1 on the elevated surface, 4.55:1 on glass over it: the faintest step that still passes AA everywhere. */
+  --color-text-faint: #82889e;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-hover: rgba(255, 255, 255, 0.2);
   --color-status-safe: #10b981;
   --color-status-warn: #f59e0b;
   --color-status-danger: #ef4444;
-  --color-glass-bg: rgba(20, 22, 29, 0.92);
+  --color-glass-bg: rgba(11, 11, 16, 0.9);
+  /* The glass a card is made of on a black ground: a whisper of white over the blur, and a brighter top edge. */
+  --color-glass-tint: rgba(255, 255, 255, 0.05);
+  --color-glass-sheen: rgba(255, 255, 255, 0.08);
   --color-glass-border: rgba(255, 255, 255, 0.1);
-  --color-glow-primary: rgba(0, 229, 255, 0.15);
+  --color-glow-primary: rgba(61, 134, 255, 0.16);
   --color-glow-secondary: rgba(34, 198, 141, 0.15);
   --color-glow-tertiary: rgba(180, 74, 255, 0.15);
 
@@ -116,18 +129,24 @@
   --color-bg-deep: #f5f6f8;
   --color-bg-surface: #eceef2;
   --color-bg-elevated: #dfe2e9;
-  --color-accent-primary: #4c33b8;
-  --color-accent-fill: #4c33b8;
+  /* The same electric blue, stepped down for a light ground: 6.27:1 on it, 6.78:1 under white text. */
+  --color-accent-primary: #1f4fd1;
+  --color-accent-fill: #1f4fd1;
   --color-accent-secondary: #0b766c;
   --color-accent-tertiary: #b81f55;
+  --color-accent-secondary-fill: #0b766c;
+  --color-accent-tertiary-fill: #b81f55;
+  --color-accent-brain: #b81f55;
   --color-text-primary: #10121a;
   --color-text-muted: #4a4f5e;
   --color-text-faint: #646a7a;
   --color-border: rgba(16, 18, 26, 0.1);
   --color-border-hover: rgba(16, 18, 26, 0.22);
   --color-glass-bg: rgba(255, 255, 255, 0.92);
+  --color-glass-tint: rgba(255, 255, 255, 0.62);
+  --color-glass-sheen: rgba(255, 255, 255, 0.95);
   --color-glass-border: rgba(16, 18, 26, 0.1);
-  --color-glow-primary: rgba(76, 51, 184, 0.15);
+  --color-glow-primary: rgba(31, 79, 209, 0.15);
   --color-glow-secondary: rgba(11, 118, 108, 0.1);
   --color-glow-tertiary: rgba(184, 31, 85, 0.1);
 
@@ -209,8 +228,9 @@ body {
    Falls back to the near-opaque flat surface when the OS asks for reduced
    transparency, or when backdrop-filter isn't supported at all. */
 .glass {
-  background: color-mix(in srgb, var(--color-glass-bg) 65%, transparent);
+  background: var(--color-glass-tint);
   border: 1px solid var(--color-glass-border);
+  box-shadow: inset 0 1px 0 var(--color-glass-sheen);
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   transition: border-color var(--motion-fast) ease;

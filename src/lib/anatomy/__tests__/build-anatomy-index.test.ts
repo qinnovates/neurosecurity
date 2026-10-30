@@ -10,7 +10,7 @@ import { ANATOMY_INDEX_STATUS } from '../status-sentences';
 import { FIXTURE_ATLAS_ID, FIXTURE_SHA256, buildSource, buildSourcesFile, buildVerdict, buildVerdictsFile } from './anatomy-fixtures';
 import { buildRow } from './crosswalk-fixtures';
 import { FIXTURE_ASSET_ID, buildAsset, buildManifest, buildNode } from './manifest-fixtures';
-import { PATHWAY_TEXT, TECHNIQUE_ID, TRACTS_SOURCE_ID, buildLedgerFile, buildRawFiles, buildRegistrarFile } from './raw-files-fixture';
+import { FIXTURE_HIGHLIGHT_HUES, PATHWAY_TEXT, TECHNIQUE_ID, TRACTS_SOURCE_ID, buildLedgerFile, buildRawFiles, buildRegistrarFile } from './raw-files-fixture';
 
 const build = (overrides: Partial<RawAnatomyFiles> = {}): AnatomyBundle => buildAnatomyBundle(parseAnatomyFiles(buildRawFiles(overrides)));
 const structureOf = (index: AnatomyIndex, labelId: string): IndexStructure => index.structures.find((structure) => structure.label_id === labelId) as IndexStructure;
@@ -95,6 +95,12 @@ describe('buildAnatomyBundle: subjects', () => {
   it('lists pathways and networks as subjects too', () => {
     expect(index.subjects.filter((subject) => subject.kind !== 'region').map((subject) => `${subject.kind}:${subject.id}`))
       .toEqual(['pathway:corticospinal', 'network:default_mode_network']);
+  });
+
+  it('carries a region\'s stated highlight hue from the region table, null for a region that states none, and none for a pathway or a network', () => {
+    expect(subjectOf(index, 'stn').highlight_hue).toBe(FIXTURE_HIGHLIGHT_HUES.stn);
+    expect(subjectOf(index, 'thalamus').highlight_hue).toBeNull();
+    for (const subject of index.subjects.filter((candidate) => candidate.kind !== 'region')) expect(subject.highlight_hue, subject.id).toBeNull();
   });
 });
 

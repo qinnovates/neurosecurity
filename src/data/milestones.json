@@ -20,7 +20,7 @@
         "RealTek",
         "MITRE"
       ],
-      "href": "/news/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
+      "href": "/research/papers/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
     },
     {
       "id": "neural-stream-01",
@@ -96,7 +96,7 @@
       "description": "Dual-use atlas mapping 71 attack techniques to therapeutic analogs. 60% of attack mechanisms have clinical counterparts.",
       "category": "research",
       "icon": "book",
-      "href": "/news/2026-02-09-tara-therapeutic-atlas-of-risks-and-applications/"
+      "href": "/research/papers/2026-02-09-tara-therapeutic-atlas-of-risks-and-applications/"
     },
     {
       "date": "2026-02-08",
@@ -120,7 +120,7 @@
       "description": "Three-phase exploit chain against a widely-used BCI data streaming library. Responsible disclosure in progress.",
       "category": "security",
       "icon": "terminal",
-      "href": "/news/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
+      "href": "/research/papers/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
     },
     {
       "date": "2026-02-11",
@@ -136,7 +136,7 @@
       "description": "CWE-862 (Missing Authorization) on RealTek HD Audio codec jack retasking. 9-year-old unfiled vulnerability found through systematic gap analysis. Disclosed to TWCERT/CC, RealTek, and MITRE.",
       "category": "security",
       "icon": "alert",
-      "href": "/news/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
+      "href": "/research/papers/2026-02-11-tara-first-cve-realtek-audio-jack-retasking/"
     },
     {
       "date": "2026-02-11",
@@ -160,7 +160,7 @@
       "description": "Research mapping from BCI security severity scores to psychiatric diagnostic categories. All techniques mapped to DSM-5-TR diagnostic clusters via the Neural Impact Chain. Requires clinical validation. See the research proposal v6 or TARA changelog for details.",
       "category": "research",
       "icon": "brain",
-      "href": "/news/2026-02-13-the-neural-impact-chain-when-niss-scores-predict-psychiatric-diagnoses/"
+      "href": "/research/papers/2026-02-13-the-neural-impact-chain-when-niss-scores-map-to-psychiatric-risk-categories/"
     },
     {
       "date": "2026-02-13",

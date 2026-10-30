@@ -15,6 +15,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { findAssetCoherenceFailures, findAttributionFailures } from './check-atlas-assets.mjs';
 import { findHeaderPolicyFailures } from './check-headers.mjs';
+import { findDeadInternalLinkFailures } from './check-internal-links.mjs';
 import { findToolPageFailures } from './check-model-page.mjs';
 import { findAnatomyPayload, findAnatomyPayloadInScript } from './find-anatomy-payload.mjs';
 import { extractPageEntries, readBuiltFile, traceImportChain, walkImportGraph } from './first-load-closure.mjs';
@@ -91,40 +92,9 @@ export function findRegionViewFailures(distDirectory, pages = REGION_VIEW_PAGES)
   return checkFirstLoadBudgets(distDirectory, pages, { isAdHoc: true }).failures;
 }
 
-/**
- * Technique pages whose mount shows the drafted-links note before the view is asked for. QIF-T0034 names a region;
- * QIF-T0001's links name no single region, so its mount takes the "none named" branch.
- */
-export const REGION_VIEW_MARK_PAGES = ['/atlas/tara/QIF-T0034/', '/atlas/tara/QIF-T0001/'];
-const LINKS_REVIEW_NOTE_OPEN = '<span data-mount-note="links-review">';
-const NEXT_MOUNT_NOTE_OPEN = '<span data-mount-note=';
-const MARK_ELEMENT_ATTRIBUTE = 'data-ai-drafted="true"';
-const REVIEW_MARK_WORDS = 'AI-drafted, unreviewed';
-
-/**
- * The island is server-rendered, so its elements are in the built HTML; this check reads those elements, not the
- * serialized island props (which carry the same words as data and would pass whether or not the mark rendered). On each
- * listed page the links-review note must exist and hold, inside its own element, the mark's attribute and its words.
- * It shows the mark is in the HTML the visitor receives; that the mark is styled and visible is covered by the
- * component test and by looking at the page, not by this check.
- */
-export function findRegionViewMarkFailures(distDirectory, urlPaths = REGION_VIEW_MARK_PAGES) {
-  return urlPaths.flatMap((urlPath) => {
-    const html = fs.readFileSync(resolveBuiltFile(distDirectory, urlPath), 'utf-8');
-    const noteStart = html.indexOf(LINKS_REVIEW_NOTE_OPEN);
-    if (noteStart === -1) return [`${urlPath}: no rendered ${LINKS_REVIEW_NOTE_OPEN} element in the built HTML, so this check holds nothing; point it at a page whose mount shows it`];
-    const afterNote = html.slice(noteStart + LINKS_REVIEW_NOTE_OPEN.length);
-    const nextNote = afterNote.indexOf(NEXT_MOUNT_NOTE_OPEN);
-    const noteHtml = nextNote === -1 ? afterNote : afterNote.slice(0, nextNote);
-    const hasMark = noteHtml.includes(MARK_ELEMENT_ATTRIBUTE) && noteHtml.includes(REVIEW_MARK_WORDS);
-    return hasMark ? [] : [`${urlPath}: the rendered links-review note has no ${MARK_ELEMENT_ATTRIBUTE} element reading "${REVIEW_MARK_WORDS}"`];
-  });
-}
-
 /** Checks of the pages listed in REGION_VIEW_PAGES. They take their own page list, not the tool pages'. */
 export const REGION_VIEW_CHECKS = [
   { name: 'pages that mount the 3D view keep three.js behind its button', findFailures: (distDirectory) => findRegionViewFailures(distDirectory) },
-  { name: 'technique pages that mention drafted links carry the review mark', findFailures: (distDirectory) => findRegionViewMarkFailures(distDirectory) },
 ];
 
 /** The preview host's `_headers`, emitted by prebuild from the policy module; it takes no page list. */
@@ -132,8 +102,13 @@ export const HEADER_CHECKS = [
   { name: 'emitted _headers policies equal csp-policy.ts', findFailures: (distDirectory) => findHeaderPolicyFailures(distDirectory) },
 ];
 
+/** Every built page except the frozen whitepaper archives; it takes no page list. */
+export const LINK_CHECKS = [
+  { name: 'same-site links in built pages point at something in the build', findFailures: (distDirectory) => findDeadInternalLinkFailures(distDirectory) },
+];
+
 /** @type {readonly PostBuildCheck[]} */
-export const POST_BUILD_CHECKS = [...TOOL_PAGE_CHECKS, ...ATLAS_ASSET_CHECKS, ...REGION_VIEW_CHECKS, ...HEADER_CHECKS];
+export const POST_BUILD_CHECKS = [...TOOL_PAGE_CHECKS, ...ATLAS_ASSET_CHECKS, ...REGION_VIEW_CHECKS, ...HEADER_CHECKS, ...LINK_CHECKS];
 
 /**
  * Runs each check and collects its failures. A check that cannot run (for example because

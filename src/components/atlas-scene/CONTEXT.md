@@ -8,7 +8,7 @@ The island on `/atlas/anatomy/`, its gated 3D view, and the build-time loader of
 - `fetch-atlas-json.ts`, `scene-assets.ts`, `use-scene-assets.ts` -- every fetch. Same-site paths only, each checked by length and sha256 before use
 - `StructureList.tsx`, `RegionRowButton.tsx`, `RegionInspector.tsx`, `Inspector*.tsx`, `SignalChainRail.tsx`, `ChainView.tsx`, `use-chain-view.ts`, `NetworkNames.tsx`, `H01Card.tsx` -- list, inspector, rail, threat-model steps
 - `ColourModePicker.tsx`, `LensPanel.tsx`, `SubjectPicker.tsx`, `LayerPanel.tsx`, `ViewportLegend.tsx`, `ViewportControls.tsx` -- lens, layer and view controls
-- `LimitsPanel.tsx`, `LimitNote.tsx`, `LoadNotice.tsx`, `ReviewMark.tsx`, `MarkGlyph.tsx`, `Disclosure.tsx` -- limits, load states, the unreviewed mark
+- `LimitsPanel.tsx`, `LimitNote.tsx`, `LoadNotice.tsx`, `MarkGlyph.tsx`, `Disclosure.tsx` -- limits, load states, lens marks. Review state (`review_state` in the index, `src/lib/anatomy/review-state.ts`) is recorded per row and surfaced once, in `LimitsPanel.tsx`'s "What this page holds" disclosure, not as a per-item mark beside each row
 - `AtlasViewport.tsx`, `viewport-gate.ts`, `OpenViewport.tsx`, `ViewportStage.tsx`, `use-viewport-scene.ts` -- the gate: the 3D view opens only on request, and says why when it cannot
 - `AtlasCanvas.tsx`, `scene-renderer.ts`, `scene-objects.ts`, `scene-marks.ts`, `device-objects.ts`, `TractLines.tsx` -- the canvas chunk, the only files that may import three.js
 - `use-scene-theme.ts` -- the one reader of which surface the page is on. The canvas chunk is handed the answer (`AtlasCanvas`'s `theme` prop, the renderer's `setTheme`) and never asks the document itself; what each surface's inks are lives in `src/lib/atlas-explorer/`

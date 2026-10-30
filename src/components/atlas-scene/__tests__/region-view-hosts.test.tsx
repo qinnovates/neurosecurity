@@ -34,7 +34,10 @@ beforeEach(() => {
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
 
 describe('the Lab\'s Target regions panel', () => {
-  const regions = [{ id: 'm1', name: 'Primary motor cortex', bandId: 'N7', depthClass: 'cortical' }, { id: 'stn', name: 'Subthalamic nucleus', bandId: 'N5', depthClass: 'deep' }];
+  const regions = [
+    { id: 'm1', name: 'Primary motor cortex', bandId: 'N7', depthClass: 'cortical', highlightHue: null },
+    { id: 'stn', name: 'Subthalamic nucleus', bandId: 'N5', depthClass: 'deep', highlightHue: null },
+  ];
 
   it('gives the view the regions of its own list as the visitor\'s selection, coloured by band alone', () => {
     render(<TargetRegionsPanel summary={{ regions, unknownRegionIds: [] }} interfaceLabel="the electrode array" />);

@@ -19,8 +19,8 @@ const PALETTE = parseRules(readFileSync(path.resolve(import.meta.dirname, '..', 
 
 /** The page surfaces from `src/styles/global.css`, and the glass fill a chart's card is made of. */
 const SURFACES = {
-  light: { deep: '#f5f6f8', surface: '#eceef2', elevated: '#dfe2e9', glass: 'rgba(255, 255, 255, 0.92)' },
-  dark: { deep: '#0a0a0f', surface: '#14161d', elevated: '#1f222c', glass: 'rgba(20, 22, 29, 0.92)' },
+  light: { deep: '#f5f6f8', surface: '#eceef2', elevated: '#dfe2e9', glass: 'rgba(255, 255, 255, 0.62)' },
+  dark: { deep: '#000000', surface: '#0b0b10', elevated: '#15151c', glass: 'rgba(255, 255, 255, 0.05)' },
 } as const;
 type ThemeName = keyof typeof SURFACES;
 const THEMES = Object.keys(SURFACES) as ThemeName[];

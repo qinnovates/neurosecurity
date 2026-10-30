@@ -2,7 +2,6 @@ import { limitSentence } from '@/lib/anatomy/limits-copy';
 import type { RegionDetail } from '@/lib/atlas-explorer/region-detail';
 import { GEOMETRY_LABELS } from '@/lib/atlas-explorer/region-rows';
 import LimitNote from './LimitNote';
-import ReviewMark from './ReviewMark';
 
 /** What ships for a structure, in words. A marker is a point: it is never called a shape. */
 const SHIPPED_WORDS = { shape: 'A shape ships in this build.', marker: 'Only a location marker ships in this build, not a shape.', nothing: 'No shape ships in this build yet.' } as const;
@@ -17,7 +16,7 @@ export default function InspectorShapes({ detail }: Props) {
   return (
     <section className="atlas-section" aria-labelledby="atlas-inspector-shape">
       <h3 className="atlas-subheading" id="atlas-inspector-shape">What stands for it</h3>
-      <p className="atlas-fact"><strong>{GEOMETRY_LABELS[region.geometry.state]}</strong> <ReviewMark state={region.review_state} /></p>
+      <p className="atlas-fact"><strong>{GEOMETRY_LABELS[region.geometry.state]}</strong></p>
       <LimitNote limit={detail.geometryLimit} />
       {region.geometry.reason_source !== null && <p className="atlas-source">Reason recorded in: {region.geometry.reason_source}</p>}
       {shapes.length > 0 && (
@@ -25,8 +24,7 @@ export default function InspectorShapes({ detail }: Props) {
           {shapes.map((shape) => (
             <li key={shape.structureKey} className="atlas-shape">
               <p className="atlas-fact">
-                Drawn through <strong>{shape.label}</strong>, from {shape.sourceName}. {SHIPPED_WORDS[shape.shipped]}{' '}
-                <ReviewMark state={shape.reviewState} />
+                Drawn through <strong>{shape.label}</strong>, from {shape.sourceName}. {SHIPPED_WORDS[shape.shipped]}
               </p>
               <LimitNote limit={shape.sourceLimit} />
               {shape.mirrored && <LimitNote limit={limitSentence('mirrored_shape')} />}
