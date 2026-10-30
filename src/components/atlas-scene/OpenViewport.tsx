@@ -75,12 +75,9 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
   const regionKeys = selectedRegionId === null ? [] : model.regionsById.get(selectedRegionId)?.structure_keys ?? [];
   // The page's own selection, as shapes: each group of regions becomes one group of the shapes that draw them.
   const groupKeys = useMemo(() => selectedRegionGroups.map((regionIds) => [...new Set(regionIds.flatMap((regionId) => model.regionsById.get(regionId)?.structure_keys ?? []))]), [model, selectedRegionGroups]);
+  // The selection as shapes: the region's own, every group the page selected, and a picked shape outside them. Each is lit from within in the picture; the name stands beside it.
   const selectedKeys = useMemo(() => new Set([...regionKeys, ...groupKeys.flat(), ...(pickedKey === null ? [] : [pickedKey])]), [regionKeys.join(' '), groupKeys, pickedKey]);
-  // One bracket set around the whole selected region, however many shapes draw it, one around a picked shape outside it, and one around each group the page selected.
-  const bracketGroups = useMemo(() => [regionKeys, pickedKey === null || regionKeys.includes(pickedKey) ? [] : [pickedKey], ...groupKeys].filter((keys) => keys.length > 0), [regionKeys.join(' '), groupKeys, pickedKey]);
   const selectedRegionName = selectedRegionId === null ? null : model.regionsById.get(selectedRegionId)?.name ?? null;
-  // The name written above the first bracket set: the selected region's, or the picked shape's when the pick selected no region.
-  const selectionLabel = regionKeys.length > 0 ? selectedRegionName : pickedKey === null ? null : resolvePick(model, pickedKey)?.label ?? null;
   const focusMm = useMemo(() => meanOf(scene.drawnShapes.filter((shape) => regionKeys.includes(shape.structureKey)).map((shape) => shape.centroidMm)), [selectedRegionId, scene.drawnShapes.length]);
   useEffect(() => {
     onCaption?.(scene.caption);
@@ -101,7 +98,7 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
   const description = `3D picture of an average brain outline with ${atlasShapeCount} atlas shapes drawn inside it. ${scene.caption.lensLabel} View: ${activeView === null ? 'turned by hand' : CAMERA_VIEW_LABELS[activeView].toLowerCase()}. Every fact it shows is in the region list.${deviceWords}`;
 
   const canvasProps: Omit<AtlasCanvasProps, 'commands'> = {
-    shapes: scene.drawnShapes, nodesByShapeId: scene.nodesByShapeId, selectedKeys, bracketGroups, selectionLabel, devices: scene.devices, selectedElectrodeId: electrodeId, focusMm, slice, theme: scene.theme, prefersLessMotion, description,
+    shapes: scene.drawnShapes, nodesByShapeId: scene.nodesByShapeId, selectedKeys, devices: scene.devices, selectedElectrodeId: electrodeId, focusMm, slice, theme: scene.theme, prefersLessMotion, description,
     onPick: pick, onPickElectrode, onHover: setHoveredKey, onCameraTurn: setDirections, onContextLost: () => onStopped('context_lost'), onUnavailable: () => onStopped('no_webgl'),
   };
   return (

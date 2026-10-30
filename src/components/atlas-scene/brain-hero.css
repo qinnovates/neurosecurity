@@ -12,15 +12,35 @@
 .brain-hero .atlas-heading { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .brain-hero .atlas-viewport > *, .brain-hero .atlas-picture, .brain-hero .atlas-viewport-side, .brain-hero-card { min-width: 0; }
 
-/* Reading and tab order are the view's own; only the drawn order changes: picture, card, the hide button, then the details. */
+/* Reading and tab order are the view's own; only the drawn order changes: picture, card, the lens switch, the hide button, then the controls and legend. */
 .brain-hero .atlas-picture { order: 0; border-radius: 0.875rem; box-shadow: 0 0 0 1px var(--atlas-line-strong), 0 24px 80px -24px var(--atlas-tint); }
 .brain-hero-card { order: 1; }
-.brain-hero .atlas-viewport > .atlas-link-button { order: 2; justify-self: start; }
-.brain-hero .atlas-viewport-side { order: 3; font-size: 0.75rem; color: var(--atlas-ink-soft); }
+.brain-hero-lenses { order: 2; }
+.brain-hero .atlas-viewport > .atlas-link-button { order: 3; justify-self: start; }
+.brain-hero .atlas-viewport-side { order: 4; font-size: 0.75rem; color: var(--atlas-ink-soft); }
 .brain-hero .atlas-viewport > :is(.atlas-failure, .atlas-fact, .atlas-button-primary, .atlas-loading) { order: 0; }
 .brain-hero .atlas-canvas { height: var(--brain-hero-height, 60vh); min-height: 20rem; }
-.brain-hero .atlas-viewport-side .atlas-legend { margin-top: 0.5rem; }
 .brain-hero .atlas-viewport-side .atlas-button, .brain-hero .atlas-viewport-side .atlas-toggle, .brain-hero .atlas-viewport-side .atlas-input, .brain-hero .atlas-viewport-side .atlas-proxy { font-size: 0.8125rem; }
+
+/* The lens switch: two buttons, the pressed one filled. */
+.brain-hero-lenses { display: inline-flex; gap: 0.25rem; padding: 0.1875rem; background: var(--atlas-ground); border: 1px solid var(--atlas-line-strong); border-radius: 0.625rem; justify-self: start; }
+.brain-hero-lens { min-height: 1.875rem; padding: 0 0.75rem; font: inherit; font-size: 0.8125rem; font-weight: 600; color: var(--atlas-ink-soft); background: transparent; border: 0; border-radius: 0.4375rem; cursor: pointer; }
+.brain-hero-lens[aria-pressed="true"] { color: #fff; background: var(--atlas-accent-fill); }
+
+/*
+ * The hero is the picture, so the view's prose under it is kept to what the picture needs: the lens's colour steps as a
+ * row of swatches, the camera menu and the cut. The file statuses, the keyboard key list and the rows that explain the
+ * pale and lines-only marks stay in the page for assistive technology and are not drawn; the explorer page shows them all.
+ */
+.brain-hero-quiet, .brain-hero .atlas-asset-states, .brain-hero .atlas-proxy-keys, .brain-hero .atlas-legend-marks > [data-legend-row="mark"] {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+.brain-hero .atlas-viewport-side { display: grid; gap: 0.5rem; }
+.brain-hero .atlas-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; }
+.brain-hero .atlas-controls .atlas-control-group { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; }
+.brain-hero .atlas-legend { margin: 0; }
+.brain-hero .atlas-legend-marks { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
+.brain-hero .atlas-legend-marks > [data-legend-row="step"] { display: inline-flex; align-items: center; gap: 0.375rem; text-transform: capitalize; }
 
 /*
  * The card: a few facts and one way on. Its heading is the region's name; its button is the hero's one primary action.
@@ -34,8 +54,10 @@
   border: 1px solid var(--color-glass-border); border-radius: 0.875rem; font-size: 0.875rem; line-height: 1.5;
 }
 .brain-hero-card[data-hero-card="selected"] { border-left: 3px solid var(--atlas-selection); animation: atlas-fade var(--atlas-move) var(--atlas-ease) both; }
+/* The card is as tall as the picture and scrolls inside, so a region with many links never moves anything around it. */
+.brain-hero-card { box-sizing: border-box; height: var(--brain-hero-height, 60vh); min-height: 20rem; overflow-y: auto; align-self: start; }
 .brain-hero-card-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem 0.625rem; margin: 0 0 0.5rem; font-family: var(--font-heading, inherit); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; color: var(--atlas-ink); }
-.brain-hero-card-text { margin: 0 0 0.75rem; color: var(--atlas-ink-soft); }
+.brain-hero-card-text { margin: 0 0 0.75rem; color: var(--atlas-ink-soft); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .brain-hero-card-facts { display: grid; gap: 0.5rem; margin: 0 0 1rem; }
 .brain-hero-card-facts > div { display: grid; gap: 0.125rem; }
 .brain-hero-card-facts dt { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--atlas-ink-soft); }

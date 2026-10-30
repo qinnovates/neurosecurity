@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import type { LayerId } from '@/lib/anatomy/source-types';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
-import type { Lens } from '@/lib/atlas-explorer/lens-state';
+import { LENS_LABELS, type Lens } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE } from './atlas-state';
 import AtlasViewport, { type AtlasViewportProps } from './AtlasViewport';
 import BrainHeroRegionList from './BrainHeroRegionList';
@@ -16,23 +16,42 @@ interface Props {
   loadOpenView?: AtlasViewportProps['loadOpenView'];
 }
 
-/** The hero colours each region by the highest NISS step among the techniques linked to it: the catalog's own subject, not a grouping. */
-export const HERO_LENS: Lens = { kind: 'niss' };
+/**
+ * The two lenses the hero offers, both facts about a region and neither needing a subject. Band first: under it every
+ * region holds a value, so the whole brain is filled, lit under the pointer and picks on the first click. NISS severity
+ * is the catalog's own subject, and most regions hold no value under it yet, so it is the second look and not the first.
+ */
+export const HERO_LENSES: readonly Lens[] = [{ kind: 'band' }, { kind: 'niss' }];
+export const HERO_DEFAULT_LENS: Lens = HERO_LENSES[0];
 /**
  * The outline and the cortical shapes, and not the deep ones: the cortex is what a first picture of a brain shows and the
  * deep layer is more than half of the geometry's bytes. The full atlas draws every layer and lets the visitor choose.
  */
 export const HERO_LAYERS: Readonly<Record<LayerId, boolean>> = { ...INITIAL_EXPLORER_STATE.layers, deep: false };
 
+/** Two buttons under the picture: what the brain is coloured by. The caption under the picture names the lens in words. */
+function HeroLensSwitch({ lens, onChoose }: { lens: Lens; onChoose: (lens: Lens) => void }) {
+  return (
+    <div className="brain-hero-lenses" role="group" aria-label="Colour the brain by">
+      {HERO_LENSES.map((choice) => (
+        <button key={choice.kind} type="button" className="brain-hero-lens" aria-pressed={choice.kind === lens.kind} onClick={() => onChoose(choice)}>
+          {LENS_LABELS[choice.kind]}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 /**
  * The homepage brain once its data has loaded: the 3D view, opened without a
- * button, with a summary of the picked region beside it and one way on to that
- * region's details in the full atlas. The gate is decided here first, with the
- * view's own probe, so a browser that cannot draw gets the region list in the
+ * button, with the region's dashboard beside it and one way on to that region's
+ * details in the full atlas. The gate is decided here first, with the view's
+ * own probe, so a browser that cannot draw gets the region list in the
  * picture's place and never waits on a view that would only say no.
  */
 export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe = probeWebGL, loadOpenView }: Props) {
   const [selectedRegionId, setSelectedRegionId] = useState<string | null>(null);
+  const [lens, setLens] = useState<Lens>(HERO_DEFAULT_LENS);
   const gate = useMemo(() => decideGate(isIndexPinned, globalThis.crypto?.subtle !== undefined, probe, isOutOfStep), [isIndexPinned, isOutOfStep, probe]);
   if (gate !== 'open') {
     return (
@@ -43,11 +62,12 @@ export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe
     );
   }
   return (
-    <div className="atlas-root brain-hero" data-brain-hero="open">
+    <div className="atlas-root brain-hero" data-brain-hero="open" data-hero-lens={lens.kind}>
       <AtlasViewport
-        model={model} lens={HERO_LENS} layers={HERO_LAYERS} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep} isAsked
+        model={model} lens={lens} layers={HERO_LAYERS} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep} isAsked
         onSelectRegion={setSelectedRegionId} probe={probe} loadOpenView={loadOpenView}
       />
+      <HeroLensSwitch lens={lens} onChoose={setLens} />
       <BrainHeroSummary model={model} regionId={selectedRegionId} />
     </div>
   );

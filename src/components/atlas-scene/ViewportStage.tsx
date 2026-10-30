@@ -1,4 +1,4 @@
-import { Suspense, type ComponentType, type ReactNode, type Ref } from 'react';
+import { Suspense, useEffect, useState, type ComponentType, type ReactNode, type Ref } from 'react';
 import { limitSentence } from '@/lib/anatomy/limits-copy';
 import type { DeviceCaption } from '@/lib/atlas-explorer/device-drawing';
 import { SLICE_AXIS_LABELS, type SliceState } from '@/lib/atlas-explorer/slice-plane';
@@ -46,6 +46,21 @@ export interface LensWays {
 
 export const ATTRIBUTION_PATH = '/atlas/attribution/';
 export const SHOW_DETAILS_LABEL = 'See its details';
+/** The three moves, over the picture until the first touch or a few seconds, whichever comes first. The full sentence stays in the controls. */
+const HINT_PARTS = ['Drag to turn', 'Ctrl or ⌘ + scroll to zoom', 'Click a region'] as const;
+const HINT_MS = 9000;
+
+/** Shown over the picture once something is drawn, and gone at the first press or wheel on it, or after a few seconds. */
+function MoveHint({ isDrawn }: { isDrawn: boolean }) {
+  const [isShown, setShown] = useState(true);
+  useEffect(() => {
+    if (!isDrawn || !isShown) return;
+    const timer = window.setTimeout(() => setShown(false), HINT_MS);
+    return () => window.clearTimeout(timer);
+  }, [isDrawn, isShown]);
+  if (!isDrawn || !isShown) return null;
+  return <p className="atlas-picture-hint" data-picture-hint="true" aria-hidden="true">{HINT_PARTS.join(' · ')}</p>;
+}
 const DIRECTION_LABELS: Readonly<Record<keyof AxisDirections, string>> = { left: 'Left', right: 'Right', front: 'Front', back: 'Back', top: 'Top', bottom: 'Bottom' };
 /** How far from the middle of the marker a label sits, as a share of its half-width. */
 const MARKER_REACH = 38;
@@ -70,12 +85,14 @@ function OrientationMarker({ directions }: { directions: AxisDirections }) {
  */
 export default function ViewportStage({ Canvas, canvasProps, commands, caption, directions, slice, deviceCaption, isChainShown, hoverLabel, selection, lensWays = null, children }: Props) {
   const sliceLimits = slice === null ? [] : [limitSentence('slice_position', { position: String(slice.positionMm), axis: SLICE_AXIS_LABELS[slice.axis].toLowerCase() }), limitSentence('slice_view')];
+  const [hasTouched, setTouched] = useState(false);
   return (
-    <figure className="atlas-picture" data-viewport-stage="true">
+    <figure className="atlas-picture" data-viewport-stage="true" onPointerDownCapture={() => setTouched(true)} onWheelCapture={() => setTouched(true)}>
       <Suspense fallback={<p className="atlas-loading atlas-picture-notice" role="status">Loading the 3D view…</p>}>
         <Canvas {...canvasProps} commands={commands} />
       </Suspense>
       {children}
+      {!hasTouched && <MoveHint isDrawn={canvasProps.shapes.length > 0} />}
       {directions !== null && <OrientationMarker directions={directions} />}
       {hoverLabel !== null && <p className="atlas-hover-label" aria-hidden="true">{hoverLabel}</p>}
       {selection !== null && (

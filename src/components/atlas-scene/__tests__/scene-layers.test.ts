@@ -2,10 +2,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import type { DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
-import { DRAW_ORDER, SELECTION_COLOUR, STEP_EASE_MS, SURFACE_INK, ringParamsFor, stepEaseDuration } from '@/lib/atlas-explorer/scene-drawing';
+import { DRAW_ORDER, FILL_OPACITY, HOVER_EMISSIVE_INTENSITY, HOVER_OPACITY, SELECTED_EMISSIVE_INTENSITY, SELECTION_COLOUR, STEP_EASE_MS, SURFACE_INK, ringParamsFor, stepEaseDuration } from '@/lib/atlas-explorer/scene-drawing';
 import { NEUTRAL_COLOUR, NISS_COLOURS, NISS_COLOURS_DARK, type SceneShape } from '@/lib/atlas-explorer/scene-shapes';
 import { toIndexReviewState, UNREVIEWED } from '@/lib/anatomy/review-state';
-import { listSceneObjects, resetStandIn, standIn, type StandInObject } from './three-stand-in';
+import { listSceneObjects, resetStandIn, standIn, type StandInLitMaterial, type StandInObject } from './three-stand-in';
 
 vi.mock('three', async () => (await import('./three-stand-in')).createThreeStandIn());
 
@@ -80,55 +80,98 @@ beforeEach(() => {
 });
 afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
-describe('the selection mark', () => {
-  it('is one bracket set around a region drawn as two shapes, enclosing both, and one more for a picked shape outside it', () => {
+/** The lit material of the shape with this key: the fill mesh the renderer built for it. */
+const litMaterialOf = (structureKey: string): StandInLitMaterial => {
+  const material = kindsOf('mesh').find((mesh) => mesh.userData.structureKey === structureKey)?.material as StandInLitMaterial | undefined;
+  if (material === undefined) throw new Error(`No lit mesh for ${structureKey}.`);
+  return material;
+};
+const WHITE = 'ffffff';
+const NO_GLOW = '000000';
+
+describe('the selection', () => {
+  /**
+   * The selection used to be corner brackets around the shapes' box and a name
+   * plate above it, both drawn over everything. Both are gone: they read as a
+   * box the data does not hold, and the plate as a patch over the brain. A
+   * selected shape is now lit from within, and nothing is drawn around it.
+   */
+  /** The twin region filled, as under a lens that holds a value for it; the rest see-through. */
+  const LIT_SHAPES = SHAPES.map((shape) => (REGION_KEYS.twin.includes(shape.structureKey) ? { ...shape, fill: 'solid' as const } : shape));
+
+  it('lights every filled shape of a selected region from within, draws nothing around it, and puts it back when it is unselected', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
-    renderer.setShapes(SHAPES, NODES, new Set(REGION_KEYS.twin), [REGION_KEYS.twin]);
-    expect(kindsOf('lines')).toHaveLength(1);
-    const twin = regionBoxes().find((box) => box.region === 'twin');
-    const marks = positionsOf(kindsOf('lines')[0]);
-    const along = (axis: number): number[] => marks.filter((_value, at) => at % 3 === axis);
-    for (const axis of [0, 1, 2]) {
-      expect(Math.min(...along(axis))).toBeLessThan(twin?.min[axis] ?? 0);
-      expect(Math.max(...along(axis))).toBeGreaterThan(twin?.max[axis] ?? 0);
-    }
-    renderer.setShapes(SHAPES, NODES, new Set([...REGION_KEYS.twin, 'a:front']), [REGION_KEYS.twin, ['a:front']]);
-    expect(kindsOf('lines')).toHaveLength(2);
-    renderer.setShapes(SHAPES, NODES, new Set(), []);
+    renderer.setShapes(LIT_SHAPES, NODES, new Set(REGION_KEYS.twin));
     expect(kindsOf('lines')).toHaveLength(0);
+    expect(kindsOf('sprite')).toHaveLength(0);
+    for (const key of REGION_KEYS.twin) {
+      const material = litMaterialOf(key);
+      expect(material.emissive.getHexString(), key).toBe(WHITE);
+      expect(material.emissiveIntensity, key).toBe(SELECTED_EMISSIVE_INTENSITY);
+      expect(material.opacity, key).toBe(FILL_OPACITY.solid);
+    }
+    const front = litMaterialOf('a:front');
+    expect(front.emissive.getHexString()).toBe(NO_GLOW);
+    expect(front.opacity).toBe(FILL_OPACITY.translucent);
+    renderer.setShapes(LIT_SHAPES, NODES, new Set());
+    for (const key of REGION_KEYS.twin) expect(litMaterialOf(key).emissive.getHexString(), key).toBe(NO_GLOW);
+  });
+
+  it('draws a selected see-through shape denser and adds no light to it, by the same rule as hover, so it never reads as holding a value', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
+    renderer.setShapes(SHAPES, NODES, new Set(REGION_KEYS.front));
+    const front = litMaterialOf('a:front');
+    expect(front.opacity).toBe(HOVER_OPACITY.translucent);
+    expect(front.emissive.getHexString()).toBe(NO_GLOW);
+    expect(litMaterialOf('a:back').opacity).toBe(FILL_OPACITY.translucent);
+  });
+
+  it('lifts the shape under the pointer over its own glow, and puts the glow back, not darkness, when the pointer leaves', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
+    renderer.setShapes(LIT_SHAPES, NODES, new Set(REGION_KEYS.twin));
+    const twinA = kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:twinA') as StandInObject;
+    standIn.hits = [{ object: twinA, distance: 1, point: {} }];
+    canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 5, clientY: 5 }));
+    runFrame(1016);
+    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(HOVER_EMISSIVE_INTENSITY);
+    expect(callbacks.onHover).toHaveBeenLastCalledWith('a:twinA');
+    standIn.hits = [];
+    canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 300, clientY: 300 }));
+    runFrame(1032);
+    expect(callbacks.onHover).toHaveBeenLastCalledWith(null);
+    expect(litMaterialOf('a:twinA').emissive.getHexString()).toBe(WHITE);
+    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(SELECTED_EMISSIVE_INTENSITY);
+    expect(litMaterialOf('a:twinA').opacity).toBe(FILL_OPACITY.solid);
   });
 
   /**
-   * The brackets and the pale fills are the two inks the drawing layer chooses
-   * itself, so they are the two that can be drawn for the wrong surface. They
-   * were: the brackets took the light ink on both themes, which is 1.10:1 on the
-   * dark surface, and the pale fill had no dark step at all and so was fainter
-   * there than the shapes with no record. Both are checked at the renderer,
-   * because that is where the surface arrives.
+   * The pale fill is the one ink the drawing layer chooses itself, so it is the
+   * one that can be drawn for the wrong surface. It was: it had no dark step at
+   * all and so was fainter there than the shapes with no record. It is checked
+   * at the renderer, because that is where the surface arrives; the selection's
+   * glow is white light on either surface and owes the surface nothing.
    */
-  it('inks the brackets and the pale fills for the surface it was given, and redraws both when the surface changes', () => {
-    const inkOfBrackets = (): unknown => kindsOf('lines')[0]?.material?.params.color;
+  it('inks the pale fills for the surface it was given, redraws them when the surface changes, and keeps the glow through it', () => {
     const inkOfPaleFill = (): unknown => kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:front')?.material?.params.color;
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
-    renderer.setShapes(SHAPES, NODES, new Set(REGION_KEYS.front), [REGION_KEYS.front]);
-    expect(inkOfBrackets()).toBe(SURFACE_INK.light.selection);
+    // The pale front and the filled twin selected together: the one shows the surface ink, the other the glow.
+    renderer.setShapes(LIT_SHAPES, NODES, new Set([...REGION_KEYS.front, ...REGION_KEYS.twin]));
     expect(inkOfPaleFill()).toBe(SURFACE_INK.light.inside);
+    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(SELECTED_EMISSIVE_INTENSITY);
 
     renderer.setTheme('dark');
-    expect(inkOfBrackets()).toBe(SURFACE_INK.dark.selection);
     expect(inkOfPaleFill()).toBe(SURFACE_INK.dark.inside);
-    // One bracket set and one shape still: the surface changes the ink, never what is drawn.
-    expect(kindsOf('lines')).toHaveLength(1);
+    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(SELECTED_EMISSIVE_INTENSITY);
+    // The same shapes still, and nothing drawn around them: the surface changes the ink, never what is drawn.
+    expect(kindsOf('lines')).toHaveLength(0);
 
     renderer.setTheme('light');
-    expect(inkOfBrackets()).toBe(SURFACE_INK.light.selection);
     expect(inkOfPaleFill()).toBe(SURFACE_INK.light.inside);
   });
 
   it('starts on the surface it was made for, without waiting to be told again', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'dark');
-    renderer.setShapes(SHAPES, NODES, new Set(REGION_KEYS.front), [REGION_KEYS.front]);
-    expect(kindsOf('lines')[0]?.material?.params.color).toBe(SURFACE_INK.dark.selection);
+    renderer.setShapes(SHAPES, NODES, new Set(REGION_KEYS.front));
     expect(kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:front')?.material?.params.color).toBe(SURFACE_INK.dark.inside);
   });
 });
@@ -138,7 +181,7 @@ describe('no line joins two regions', () => {
 
   it('finds a line between two regions when one is planted, so the check below means something', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
-    renderer.setShapes(SHAPES, NODES, new Set(), []);
+    renderer.setShapes(SHAPES, NODES, new Set());
     const three = standIn.scenes[0];
     const planted = Object.assign(Object.create(Object.getPrototypeOf(kindsOf('mesh')[0])), { kind: 'lines', children: [], userData: {}, geometry: { attributes: { position: { array: [0, 0, -60, 0, 0, 60] } } } });
     three.add(planted);
@@ -149,12 +192,12 @@ describe('no line joins two regions', () => {
     const renderer = createSceneRenderer(canvas, callbacks, false, 'light');
     const everyRegion = Object.values(REGION_KEYS);
     const states: Array<() => void> = [
-      () => renderer.setShapes(SHAPES, NODES, new Set(everyRegion.flat()), everyRegion),
-      () => renderer.setShapes(stepShapes({ 'a:front': [1] }), NODES, new Set(), []),
-      () => renderer.setShapes(stepShapes({ 'a:back': [2] }), NODES, new Set(), []),
-      () => renderer.setShapes(stepShapes({ 'a:front': [1], 'a:back': [2], 'a:left': [3], 'a:twinA': [4], 'a:twinB': [4, 5] }), NODES, new Set(), []),
+      () => renderer.setShapes(SHAPES, NODES, new Set(everyRegion.flat())),
+      () => renderer.setShapes(stepShapes({ 'a:front': [1] }), NODES, new Set()),
+      () => renderer.setShapes(stepShapes({ 'a:back': [2] }), NODES, new Set()),
+      () => renderer.setShapes(stepShapes({ 'a:front': [1], 'a:back': [2], 'a:left': [3], 'a:twinA': [4], 'a:twinB': [4, 5] }), NODES, new Set()),
       () => renderer.setDevices(DEVICES, 'Cz'),
-      () => renderer.setShapes(stepShapes({ 'a:front': [1], 'a:back': [2] }), NODES, new Set(everyRegion.flat()), everyRegion),
+      () => renderer.setShapes(stepShapes({ 'a:front': [1], 'a:back': [2] }), NODES, new Set(everyRegion.flat())),
     ];
     for (const enter of states) {
       enter();
@@ -177,20 +220,20 @@ describe('threat-model steps in the picture', () => {
 
   it('numbers the shapes a step marks, in place at the middle of each, and nothing else', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
-    renderer.setShapes(marked([4]), NODES, new Set(), []);
+    renderer.setShapes(marked([4]), NODES, new Set());
     expect(labels()).toEqual(['Step 4']);
     const [label] = kindsOf('sprite');
     // The atlas's front (y = 60 mm) is scene -z.
     expect([label.position.x, label.position.y, label.position.z]).toEqual([0, 0, -60]);
-    renderer.setShapes(marked([1, 3]), NODES, new Set(), []);
+    renderer.setShapes(marked([1, 3]), NODES, new Set());
     expect(labels()).toEqual(['Steps 1, 3']);
-    renderer.setShapes(SHAPES, NODES, new Set(), []);
+    renderer.setShapes(SHAPES, NODES, new Set());
     expect(labels()).toEqual([]);
   });
 
   it('eases a step\'s own marks in where they stand, once, and leaves every other shape alone', () => {
     const renderer = createSceneRenderer(canvas, callbacks, false, 'light');
-    renderer.setShapes(marked([4]), NODES, new Set(), []);
+    renderer.setShapes(marked([4]), NODES, new Set());
     const meshOf = (key: string): StandInObject => kindsOf('mesh').find((mesh) => mesh.userData.structureKey === key) as StandInObject;
     const before = [meshOf('a:front').position.x, meshOf('a:front').position.y, meshOf('a:front').position.z];
     expect(meshOf('a:front').material?.opacity).toBe(0);
@@ -204,7 +247,7 @@ describe('threat-model steps in the picture', () => {
     expect(meshOf('a:front').material?.transparent).toBe(false);
     expect([meshOf('a:front').position.x, meshOf('a:front').position.y, meshOf('a:front').position.z]).toEqual(before);
     // A redraw for another reason (a selection) does not fade the same step in again.
-    renderer.setShapes(marked([4]), NODES, new Set(['a:back']), [['a:back']]);
+    renderer.setShapes(marked([4]), NODES, new Set(['a:back']));
     expect(meshOf('a:front').material?.opacity).toBe(1);
   });
 
@@ -212,7 +255,7 @@ describe('threat-model steps in the picture', () => {
     expect(stepEaseDuration(true)).toBe(0);
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     const whole = SHAPES.map((shape, at) => ({ ...shape, fill: 'solid' as const, stepNumbers: [at + 1] }));
-    renderer.setShapes(whole, NODES, new Set(), []);
+    renderer.setShapes(whole, NODES, new Set());
     expect(kindsOf('sprite').map((sprite) => sprite.userData.labelText)).toEqual(['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5']);
     expect(listSceneObjects().filter((object) => object.material !== undefined).every((object) => (object.material?.opacity ?? 1) > 0)).toBe(true);
     runFrame(1000);
@@ -229,11 +272,11 @@ describe('the marker ring', () => {
 
   it('carries the lens it is under: the step\'s own colour where the lens fills the shape, on either surface', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
-    renderer.setShapes(placeOnly(), new Map(), new Set(), []);
+    renderer.setShapes(placeOnly(), new Map(), new Set());
     expect(inkOf(ringFor('place_only'))).toEqual([NISS_COLOURS.critical]);
-    renderer.setShapes(placeOnly({ colour: NISS_COLOURS.none, step: 'none' }), new Map(), new Set(), []);
+    renderer.setShapes(placeOnly({ colour: NISS_COLOURS.none, step: 'none' }), new Map(), new Set());
     expect(inkOf(ringFor('place_only'))).toEqual([NISS_COLOURS.none]);
-    renderer.setShapes(placeOnly({ colour: NISS_COLOURS_DARK.critical }), new Map(), new Set(), []);
+    renderer.setShapes(placeOnly({ colour: NISS_COLOURS_DARK.critical }), new Map(), new Set());
     expect(inkOf(ringFor('place_only'))).toEqual([NISS_COLOURS_DARK.critical]);
     // The ring was the one mark that stayed neutral under every lens; it must never read as neutral while the lens fills its shape.
     expect(inkOf(ringFor('place_only'))).not.toContain(NEUTRAL_COLOUR);
@@ -242,7 +285,7 @@ describe('the marker ring', () => {
   it('changes how much of itself it draws when the lens state changes, so colour is not the only channel', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     const drawn = (shapes: SceneShape[]): { ink: unknown[]; parts: number } => {
-      renderer.setShapes(shapes, new Map(), new Set(), []);
+      renderer.setShapes(shapes, new Map(), new Set());
       const ring = ringFor('place_only');
       return { ink: inkOf(ring), parts: ring?.children.length ?? 0 };
     };
@@ -260,7 +303,7 @@ describe('the marker ring', () => {
     renderer.setShapes([
       ...placeOnly(),
       shapeAt('back', CENTRES.back, { sizeMark: 'mesh_and_ring', fill: 'solid', colour: NISS_COLOURS.high, step: 'high' }),
-    ], NODES, new Set(), []);
+    ], NODES, new Set());
     const place = ringFor('place_only');
     const coarse = ringFor('coarse_outline');
     expect(place?.children).toHaveLength((ringParamsFor({ fill: 'solid', sizeMark: 'ring_only', colour: '#000000' })?.arcs.length ?? 0) + 1);
@@ -270,14 +313,15 @@ describe('the marker ring', () => {
     expect(kindsOf('mesh').some((mesh) => mesh.userData.structureKey === 'a:back')).toBe(true);
   });
 
-  it('draws over the shapes on purpose, under the selection mark, and turns with the camera as one piece', () => {
+  it('draws over the shapes on purpose, with nothing drawn over it for a selection, and turns with the camera as one piece', () => {
     const renderer = createSceneRenderer(canvas, callbacks, false, 'light');
-    renderer.setShapes(placeOnly(), new Map(), new Set(['a:front']), [['a:front']]);
+    renderer.setShapes(placeOnly(), new Map(), new Set(['a:front']));
     const ring = ringFor('place_only');
     // A mark that says the outline here is approximate, or absent, is worthless if the drawing can hide it.
     expect(ring?.children.every((part) => part.material?.params.depthTest === false)).toBe(true);
     expect(ring?.children.every((part) => part.renderOrder === DRAW_ORDER.marker)).toBe(true);
-    expect(kindsOf('lines').every((brackets) => brackets.renderOrder > DRAW_ORDER.marker)).toBe(true);
+    // The selection adds no line over the ring: a selected ring-only structure is not lifted, and nothing is drawn around it.
+    expect(kindsOf('lines')).toHaveLength(0);
     // Nothing about the ring moves on its own: it is billboarded, which is a camera turn, not an animation.
     runFrame(1000);
     expect([ring?.position.x, ring?.position.y, ring?.position.z]).toEqual([0, 0, -60]);
@@ -288,7 +332,7 @@ describe('the marker ring', () => {
 describe('the electrode layout in the picture', () => {
   it('draws a named dot per electrode only when asked, and removes them all when the layer goes off', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
-    renderer.setShapes(SHAPES, NODES, new Set(), []);
+    renderer.setShapes(SHAPES, NODES, new Set());
     expect(kindsOf('sprite')).toEqual([]);
     renderer.setDevices(DEVICES, null);
     expect(kindsOf('sprite').map((sprite) => sprite.userData.labelText)).toEqual(['Cz', 'Oz']);
@@ -313,7 +357,7 @@ describe('the electrode layout in the picture', () => {
 
   it('reports a click on a dot as an electrode pick and never as a shape, so it can select no region', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
-    renderer.setShapes(SHAPES, NODES, new Set(), []);
+    renderer.setShapes(SHAPES, NODES, new Set());
     renderer.setDevices(DEVICES, null);
     const dot = kindsOf('mesh').find((mesh) => mesh.userData.electrodeId === 'Cz');
     const shape = kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:front');
@@ -330,7 +374,7 @@ describe('the electrode layout in the picture', () => {
 
   it('marks the picked dot with the selection colour and draws nothing from a dot to the brain', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
-    renderer.setShapes(SHAPES, NODES, new Set(), []);
+    renderer.setShapes(SHAPES, NODES, new Set());
     renderer.setDevices(DEVICES, 'Oz');
     const colourOf = (electrodeId: string): unknown => kindsOf('mesh').find((mesh) => mesh.userData.electrodeDot === electrodeId)?.material?.params.color;
     expect(colourOf('Oz')).toBe(SELECTION_COLOUR);

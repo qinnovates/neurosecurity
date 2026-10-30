@@ -39,6 +39,19 @@ export class StandInMaterial {
   dispose(): void { this.isDisposed = true; }
 }
 
+/** A colour as the renderer touches it: set from a hex string, read back without the hash. */
+export class StandInColour {
+  constructor(private hex = '000000') {}
+  set(colour: string): void { this.hex = colour.replace('#', '').toLowerCase(); }
+  getHexString(): string { return this.hex; }
+}
+
+/** A lit material, as three.js's MeshLambertMaterial: it can glow, with black and full intensity meaning no glow, as three.js defaults them. */
+export class StandInLitMaterial extends StandInMaterial {
+  emissive = new StandInColour();
+  emissiveIntensity = 1;
+}
+
 class Vector {
   constructor(public x = 0, public y = 0, public z = 0) {}
   set(x: number, y: number, z: number): void { Object.assign(this, { x, y, z }); }
@@ -107,7 +120,7 @@ export function createThreeStandIn(): Record<string, unknown> {
   return {
     BufferAttribute: StandInAttribute, Float32BufferAttribute: StandInAttribute, BufferGeometry: StandInGeometry, RingGeometry: StandInGeometry, SphereGeometry: StandInGeometry,
     DoubleSide: 2, FrontSide: 0, BackSide: 1, Group: StandInObject, Scene, DirectionalLight: StandInObject, HemisphereLight: StandInObject, PerspectiveCamera: Camera,
-    Mesh, LineSegments, Sprite, SpriteMaterial: StandInMaterial, CanvasTexture, MeshBasicMaterial: StandInMaterial, MeshLambertMaterial: StandInMaterial, LineBasicMaterial: StandInMaterial,
+    Mesh, LineSegments, Sprite, SpriteMaterial: StandInMaterial, CanvasTexture, MeshBasicMaterial: StandInMaterial, MeshLambertMaterial: StandInLitMaterial, LineBasicMaterial: StandInMaterial,
     WebGLRenderer, Raycaster, Plane, Vector2: Vector, Vector3: Vector,
   };
 }

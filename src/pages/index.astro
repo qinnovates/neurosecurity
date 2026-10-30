@@ -8,7 +8,6 @@ import SignalBench from '../components/signal-bench/SignalBench';
 import { buildSignalBenchEvents } from '../components/signal-bench/signal-bench-events';
 import { THREAT_VECTORS } from '../lib/threat-data';
 import HourglassReveal from '../components/HourglassReveal';
-import ScrollCounter from '../components/ScrollCounter';
 import AtlasExplorerLink from '../components/brain/AtlasExplorerLink';
 import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';
 import BrainHeroMount from '@/components/atlas-scene/BrainHeroMount';
@@ -93,8 +92,7 @@ const neurorightsFold = foldNeurorights(
             A proposed research framework for modeling, scoring and prioritizing threats to neural devices.
           </p>
           <p class="text-sm text-[var(--color-text-faint)] mt-2">
-            {coverage.total} cataloged techniques, each with an evidence status.
-            The brain below is coloured by the highest draft NISS step linked to each region.
+            {coverage.total} cataloged techniques, each with an evidence status. Pick a region to see the risks and devices linked to it.
           </p>
         </div>
       </header>
@@ -172,11 +170,7 @@ const neurorightsFold = foldNeurorights(
 
       <div class="grid md:grid-cols-2 gap-10 items-start mb-12 text-left">
         <div class="text-center">
-          <ScrollCounter
-            client:visible
-            end={totalThreats}
-            className="text-6xl sm:text-7xl font-bold font-[family-name:var(--font-heading)] bg-gradient-to-b from-[var(--color-accent-primary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent"
-          />
+          <span class="text-6xl sm:text-7xl font-bold font-[family-name:var(--font-heading)] bg-gradient-to-b from-[var(--color-accent-primary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">{totalThreats}</span>
           <p class="text-sm text-[var(--color-text-muted)] mt-4">techniques in the TARA catalog.</p>
           <p class="text-sm mt-2">
             <AtlasExplorerLink className="text-[var(--color-accent-primary)] hover:underline">See the brain regions in the TARA Brain Atlas &rarr;</AtlasExplorerLink>

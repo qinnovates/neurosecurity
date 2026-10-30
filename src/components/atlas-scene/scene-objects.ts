@@ -1,19 +1,19 @@
 /**
  * Builds the three.js objects for the shapes the view draws. It decides
- * nothing: fill, colour, size mark, what is pickable and the selection mark all
- * arrive already chosen (scene-drawing.ts), and this turns them into objects.
- * The three marks stay on three channels: the fill is the mesh's material, the
- * size mark is a ring, the selection is corner brackets (scene-marks.ts draws
- * one set around everything selected together, from each shape's box here).
+ * nothing: fill, colour, size mark and what is pickable all arrive already
+ * chosen (scene-drawing.ts), and this turns them into objects. The marks stay
+ * on their own channels: the fill is the mesh's material, the size mark is a
+ * ring, and the selection is the renderer lighting the selected shapes from
+ * within (scene-renderer.ts); nothing is drawn around a selection.
  */
 
 import {
-  BufferAttribute, BufferGeometry, DoubleSide, Float32BufferAttribute, FrontSide, Group, LineBasicMaterial, LineSegments, Mesh, MeshBasicMaterial, MeshLambertMaterial,
+  BufferAttribute, BufferGeometry, DoubleSide, FrontSide, Group, Mesh, MeshBasicMaterial, MeshLambertMaterial,
   RingGeometry, SphereGeometry, type Material, type Object3D,
 } from 'three';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import { positionsToScene, rasToScene } from '@/lib/anatomy/ras-to-scene';
-import { DRAW_ORDER, RING_OUTER_MM, SURFACE_INK, isPickable, materialParamsFor, ringParamsFor, selectionBrackets, type Box, type RingParams } from '@/lib/atlas-explorer/scene-drawing';
+import { DRAW_ORDER, RING_OUTER_MM, isPickable, materialParamsFor, ringParamsFor, type Box, type RingParams } from '@/lib/atlas-explorer/scene-drawing';
 import type { SceneShape, SceneTheme } from '@/lib/atlas-explorer/scene-shapes';
 
 /** How many segments a whole turn of a ring is drawn in; an arc gets its share of them, never fewer than three, which is three.js's own floor. */
@@ -47,21 +47,6 @@ function fillMaterial(shape: SceneShape, isCut: boolean, theme: SceneTheme): Mat
   const params = materialParamsFor(shape, isCut, theme);
   const shared = { color: params.colour, transparent: params.opacity < 1, opacity: params.opacity, depthWrite: params.writesDepth, side: params.isDoubleSided ? DoubleSide : FrontSide };
   return params.shading === 'flat' ? new MeshBasicMaterial({ ...shared, wireframe: params.isWireframe }) : new MeshLambertMaterial(shared);
-}
-
-/**
- * Corner brackets around a box given in scene axes: lines only, drawn over
- * everything so the mark is never hidden.
- *
- * The ink is the surface's, not a constant: near-black brackets on the dark
- * surface read at 1.10:1, which is a mark drawn and then hidden.
- */
-export function buildBrackets({ min, max }: Box, theme: SceneTheme): LineSegments {
-  const geometry = new BufferGeometry();
-  geometry.setAttribute('position', new Float32BufferAttribute(selectionBrackets(min, max), 3));
-  const brackets = new LineSegments(geometry, new LineBasicMaterial({ color: SURFACE_INK[theme].selection, depthTest: false, transparent: true }));
-  brackets.renderOrder = DRAW_ORDER.mark;
-  return brackets;
 }
 
 /**

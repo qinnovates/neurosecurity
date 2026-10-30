@@ -82,14 +82,15 @@ export default function ViewportLegend({ caption, drawnShapes, assets, assetStat
     <div className="atlas-legend">
       <AssetStatuses assets={assets} assetStates={assetStates} onRetryAssets={onRetryAssets} />
       {picked !== null && <PickedPanel picked={picked} onSelectRegion={onSelectRegion} onClearPick={onClearPick} />}
+      {/* Rows are typed so a compact mount (the homepage hero) can keep the colour steps on screen and read the rest to assistive technology only. */}
       <ul className="atlas-legend-marks" aria-label="What the marks mean">
-        <li><MarkGlyph mark="solid" /> filled: the lens holds a value for this shape</li>
-        <li><MarkGlyph mark="inside_or_mixed" /> pale: somewhere inside, or records differ</li>
-        <li><MarkGlyph mark="no_data" /> lines only: no data</li>
-        {hasCoarseRing && <li><span className="atlas-ring-swatch" data-ring="coarse_outline" aria-hidden="true" /> ring: the shape it sits on is outlined only roughly</li>}
-        {hasPlaceOnlyRing && <li><span className="atlas-ring-swatch" data-ring="place_only" aria-hidden="true" /> ring with a centre: no outline at all, only a place</li>}
-        <li><span className="atlas-selection-swatch" aria-hidden="true" /> corner marks with a name above them: selected</li>
-        {steps.map((entry) => <li key={entry.step}><span className="atlas-step-swatch" style={{ background: entry.colour }} aria-hidden="true" /> {entry.step.replaceAll('_', ' ')}</li>)}
+        <li data-legend-row="mark"><MarkGlyph mark="solid" /> filled: the lens holds a value for this shape</li>
+        <li data-legend-row="mark"><MarkGlyph mark="inside_or_mixed" /> pale: somewhere inside, or records differ</li>
+        <li data-legend-row="mark"><MarkGlyph mark="no_data" /> lines only: no data</li>
+        {hasCoarseRing && <li data-legend-row="mark"><span className="atlas-ring-swatch" data-ring="coarse_outline" aria-hidden="true" /> ring: the shape it sits on is outlined only roughly</li>}
+        {hasPlaceOnlyRing && <li data-legend-row="mark"><span className="atlas-ring-swatch" data-ring="place_only" aria-hidden="true" /> ring with a centre: no outline at all, only a place</li>}
+        <li data-legend-row="mark"><span className="atlas-selection-swatch" aria-hidden="true" /> lit from within: selected</li>
+        {steps.map((entry) => <li key={entry.step} data-legend-row="step"><span className="atlas-step-swatch" style={{ background: entry.colour }} aria-hidden="true" /> {entry.step.replaceAll('_', ' ')}</li>)}
       </ul>
       {/* How a ring reads under the lens is a limit sentence like the others now: it arrives in caption.markLimits, from limits-copy.ts, rather than being typed here. */}
       {caption.markLimits.map((limit) => <LimitNote key={limit.id} limit={limit} />)}

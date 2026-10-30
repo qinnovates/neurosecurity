@@ -97,9 +97,20 @@ describe('the brain hero: the way in', () => {
     expect(fetchedGeometry.sort()).toEqual(expected.sort());
     expect(HERO_LAYERS.deep).toBe(false);
     expect(new Set(canvasProps?.shapes.map((shape) => shape.layer))).toEqual(new Set(['outline', 'cortical']));
-    // The view's own words stay in the picture: the caption, its sources link and the lens it colours by.
-    expect(container.querySelector('[data-viewport-caption]')?.textContent).toContain('NISS severity lens.');
+    // The view's own words stay in the picture: the caption, its sources link and the lens it colours by. Band first: every region holds a value under it.
+    expect(container.querySelector('[data-viewport-caption]')?.textContent).toContain('Band lens.');
     expect(container.querySelector('[data-viewport-caption] a')?.getAttribute('href')).toBe('/atlas/attribution/');
+    // The lens switch under the picture: two choices, the pressed one first, and the picture follows the choice.
+    const lensSwitch = container.querySelector('.brain-hero-lenses') as HTMLElement;
+    const lensButtons = within(lensSwitch).getAllByRole('button');
+    expect(lensButtons.map((button) => [button.textContent, button.getAttribute('aria-pressed')])).toEqual([['Band', 'true'], ['NISS severity', 'false']]);
+    act(() => { lensButtons[1].click(); });
+    await waitFor(() => expect(container.querySelector('[data-viewport-caption]')?.textContent).toContain('NISS severity lens.'));
+    expect(lensButtons[1].getAttribute('aria-pressed')).toBe('true');
+    expect(container.querySelector('[data-brain-hero]')?.getAttribute('data-hero-lens')).toBe('niss');
+    // The picture carries the three moves as a hint until the first touch, and nothing is drawn around a selection.
+    expect(container.querySelector('[data-picture-hint]')?.textContent).toContain('Drag to turn');
+    expect(canvasProps).not.toHaveProperty('bracketGroups');
     // The view's heading is kept for assistive technology and the keyboard proxy still moves the camera.
     expect(screen.getByRole('heading', { name: '3D view' })).not.toBeNull();
     expect(container.querySelector('[data-viewport-proxy]')).not.toBeNull();

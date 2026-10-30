@@ -56,23 +56,26 @@ describe('the surface inks: the selection is findable and a pale shape is denser
     { name: 'dark', theme: 'dark' as SceneTheme, surface: DARK_SURFACE, steps: NISS_COLOURS_DARK },
   ];
 
-  it('holds one ink per role for each surface, and no two the same', () => {
+  it('holds the pale ink for each surface, stepped apart, and the selection ink beside it as a role of its own', () => {
     expect(Object.keys(SURFACE_INK).sort()).toEqual(['dark', 'light']);
-    expect(SURFACE_INK.light).toEqual({ selection: SELECTION_COLOUR, inside: INSIDE_COLOUR });
-    expect(SURFACE_INK.dark).toEqual({ selection: SELECTION_COLOUR_DARK, inside: INSIDE_COLOUR_DARK });
-    expect(new Set(Object.values(SURFACE_INK).flatMap((ink) => [ink.selection, ink.inside])).size).toBe(4);
+    expect(SURFACE_INK.light).toEqual({ inside: INSIDE_COLOUR });
+    expect(SURFACE_INK.dark).toEqual({ inside: INSIDE_COLOUR_DARK });
+    expect(INSIDE_COLOUR).not.toBe(INSIDE_COLOUR_DARK);
+    // The selection no longer inks a shape (a selected shape is lit from within), but the role keeps a neutral ink per surface for the picked electrode dot and the palette guards.
+    expect(new Set([SELECTION_COLOUR, SELECTION_COLOUR_DARK, INSIDE_COLOUR, INSIDE_COLOUR_DARK]).size).toBe(4);
   });
 
   for (const { name, theme, surface, steps } of surfaces) {
     describe(`${name} surface`, () => {
       const ink = SURFACE_INK[theme];
+      const selection = theme === 'light' ? SELECTION_COLOUR : SELECTION_COLOUR_DARK;
 
-      it('draws the selection mark as a deliberate mark on this surface', () => {
-        expect(contrast(ink.selection, surface), `selection on ${name}`).toBeGreaterThanOrEqual(MIN_SELECTION_CONTRAST);
+      it('keeps a selection ink that stands as a deliberate mark on this surface', () => {
+        expect(contrast(selection, surface), `selection on ${name}`).toBeGreaterThanOrEqual(MIN_SELECTION_CONTRAST);
       });
 
       it('keeps the selection neutral, so it can never read as a band or a step', () => {
-        const spread = Math.max(...channels(ink.selection)) - Math.min(...channels(ink.selection));
+        const spread = Math.max(...channels(selection)) - Math.min(...channels(selection));
         expect(spread, `selection on ${name} must have no hue`).toBeLessThan(0.1);
       });
 
@@ -87,8 +90,8 @@ describe('the surface inks: the selection is findable and a pale shape is denser
         expect(contrast(ink.inside, surface), `the pale ink on ${name}`).toBeLessThan(contrast(steps.critical, surface));
       });
 
-      it('tells the two inks apart from each other', () => {
-        expect(contrast(ink.selection, ink.inside), `selection against pale on ${name}`).toBeGreaterThanOrEqual(MIN_SEPARATION);
+      it('tells the selection ink and the pale ink apart from each other', () => {
+        expect(contrast(selection, ink.inside), `selection against pale on ${name}`).toBeGreaterThanOrEqual(MIN_SEPARATION);
       });
 
       it('is the ink the drawing layer actually reaches for on this surface', () => {

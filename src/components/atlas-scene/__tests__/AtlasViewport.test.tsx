@@ -236,25 +236,30 @@ describe('AtlasViewport: open', () => {
     expect(canvasProps?.focusMm?.every((value) => Number.isFinite(value))).toBe(true);
   });
 
-  it('names the selection in the picture and beside it, and offers the way to its details where the page has them', async () => {
+  it('names the selection beside the picture and not in it, and offers the way to its details where the page has them', async () => {
     const regionId = resolvePick(model, ownShapeKey)?.selectedRegionId ?? '';
     const regionName = model.regionsById.get(regionId)?.name ?? '';
     const onShowDetails = vi.fn();
     const container = await openViewport({ selectedRegionId: regionId, onShowDetails });
-    expect(canvasProps?.selectionLabel).toBe(regionName);
+    // The picture is handed the selected shapes to light from within, and no label: nothing is drawn around a selection.
+    expect(model.regionsById.get(regionId)?.structure_keys.every((key) => canvasProps?.selectedKeys.has(key))).toBe(true);
+    expect(canvasProps).not.toHaveProperty('selectionLabel');
     const row = container.querySelector('[data-picture-selected]');
     expect(row?.getAttribute('data-picture-selected')).toBe(regionName);
     expect(container.querySelector('figure')?.contains(row)).toBe(true);
     fireEvent.click(within(row as HTMLElement).getByRole('button', { name: 'See its details' }));
     expect(onShowDetails).toHaveBeenCalledTimes(1);
-    expect(screen.getByText(/corner marks with a name above them: selected/)).not.toBeNull();
+    expect(screen.getByText(/lit from within: selected/)).not.toBeNull();
   });
 
-  it('names a picked shape above its brackets when the pick selects no region, and says nothing beside the picture', async () => {
+  it('lights a picked shape that selects no region and names it in the legend, and says nothing beside the picture', async () => {
     const container = await openViewport();
     expect(container.querySelector('[data-picture-selected]')).toBeNull();
     canvasProps?.onPick(sharedShapeKey);
-    await waitFor(() => expect(canvasProps?.selectionLabel).toBe(resolvePick(model, sharedShapeKey)?.label));
+    await waitFor(() => expect(canvasProps?.selectedKeys.has(sharedShapeKey)).toBe(true));
+    const picked = container.querySelector('[data-picked-key]');
+    expect(picked?.getAttribute('data-picked-key')).toBe(sharedShapeKey);
+    expect(picked?.textContent).toContain(resolvePick(model, sharedShapeKey)?.label ?? '');
     expect(container.querySelector('[data-picture-selected]')).toBeNull();
     expect(container.querySelector('button[name="See its details"]')).toBeNull();
   });

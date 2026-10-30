@@ -1,15 +1,15 @@
 /**
- * The marks drawn over the shapes: the selection brackets, the number of a
- * threat-model step on the shapes its technique marks, and the text labels.
- * Brackets are short lines around one box. A label is text at one place.
- * Nothing here draws a line, an arrow or anything else from one shape to another.
+ * The marks drawn over the shapes: the number of a threat-model step on the
+ * shapes its technique marks, as text labels. A label is text at one place.
+ * Nothing here draws a line, an arrow or anything else from one shape to
+ * another, and nothing is drawn around a selection: a selected shape is lit
+ * from within by the renderer, and its name stands beside the picture.
  */
 
-import { CanvasTexture, Sprite, SpriteMaterial, type LineSegments, type Material, type Mesh, type Object3D } from 'three';
+import { CanvasTexture, Sprite, SpriteMaterial, type Material, type Mesh, type Object3D } from 'three';
 import type { Point3 } from '@/lib/anatomy/ras-to-scene';
-import { DRAW_ORDER, unionBoxes, type Box } from '@/lib/atlas-explorer/scene-drawing';
-import type { SceneTheme } from '@/lib/atlas-explorer/scene-shapes';
-import { buildBrackets, type ShapeObjects } from './scene-objects';
+import { DRAW_ORDER, type Box } from '@/lib/atlas-explorer/scene-drawing';
+import type { ShapeObjects } from './scene-objects';
 
 const FALLBACK_FONT = 'system-ui, sans-serif';
 /** The label texture, in canvas pixels. Large enough to stay sharp when the visitor zooms in. */
@@ -25,9 +25,6 @@ const LABEL_BORDER_PX = 3;
 const LABEL_INK = '#1c1e26';
 const LABEL_PAPER = 'rgba(255, 255, 255, 0.94)';
 const STEP_LABEL_HEIGHT_MM = 9;
-const SELECTION_LABEL_HEIGHT_MM = 7;
-/** How far above the top of the bracketed box the selection's name stands. */
-const SELECTION_LABEL_LIFT_MM = 4;
 
 /**
  * The face the canvas inherits from the explorer: the Lab's sans body face, which the stylesheet sets and its
@@ -71,30 +68,7 @@ export function buildLabelSprite(text: string, at: Point3, heightMm: number, fon
   return sprite;
 }
 
-/**
- * One bracket set for each group of shapes selected together: a region drawn
- * as many shapes gets one mark around all of them, not one per shape.
- */
-export function buildSelectionMarks(groups: ReadonlyArray<readonly string[]>, entries: readonly ShapeObjects[], theme: SceneTheme): LineSegments[] {
-  return groups.flatMap((keys) => {
-    const box = unionBoxes(entries.filter((entry) => keys.includes(entry.shape.structureKey)).flatMap((entry) => entry.box ?? []));
-    return box === null ? [] : [buildBrackets(box, theme)];
-  });
-}
-
 const middleOf = (box: Box): Point3 => [(box.min[0] + box.max[0]) / 2, (box.min[1] + box.max[1]) / 2, (box.min[2] + box.max[2]) / 2];
-
-/**
- * The selected region's name, standing just above the box its brackets mark,
- * so the selection can be found among many shapes. Null where none of the
- * group's shapes is drawn, or where the browser gives no 2D canvas for the words.
- */
-export function buildSelectionLabel(keys: readonly string[], entries: readonly ShapeObjects[], text: string, fontFamily: string): Sprite | null {
-  const box = unionBoxes(entries.filter((entry) => keys.includes(entry.shape.structureKey)).flatMap((entry) => entry.box ?? []));
-  if (box === null) return null;
-  const middle = middleOf(box);
-  return buildLabelSprite(text, [middle[0], box.max[1] + SELECTION_LABEL_LIFT_MM, middle[2]], SELECTION_LABEL_HEIGHT_MM, fontFamily);
-}
 
 /** "Step 4", or "Steps 1, 3" where several steps mark the same shape, at the middle of each marked shape. */
 export function buildStepLabels(entries: readonly ShapeObjects[], fontFamily: string): Sprite[] {

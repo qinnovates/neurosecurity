@@ -194,25 +194,24 @@ describe('createSceneRenderer', () => {
     expect(wheel({ deltaY: 400, ctrlKey: true }).defaultPrevented).toBe(false);
   });
 
-  it('marks a selected shape with line brackets and adds no second surface to it', () => {
+  it('draws a selection on the selected shape itself, adding no second surface, line or material to it', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
-    renderer.setShapes(SHAPES, NODES, new Set([SHAPES[1].structureKey]), [[SHAPES[1].structureKey]]);
+    renderer.setShapes(SHAPES, NODES, new Set([SHAPES[2].structureKey]));
     three.hits = [];
     click(5, 5);
     const drawn = three.pickTargets as Array<{ kind: string }>;
     expect(drawn.every((target) => target.kind === 'mesh')).toBe(true);
     renderer.dispose();
-    // Three shapes, one of them selected: its brackets add one line geometry and one line material, and no mesh.
-    expect(three.disposed.filter((kind) => kind === 'material')).toHaveLength(SHAPES.length + 1);
+    // Three shapes, one of them selected: the selection is the shape's own material lit, so nothing was added to dispose.
+    expect(three.disposed.filter((kind) => kind === 'material')).toHaveLength(SHAPES.length);
   });
 
-  it('draws one bracket set around a region made of many shapes, not one per shape', () => {
+  it('selects a region made of many shapes on each of its shapes, still adding nothing', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     const regionKeys = [SHAPES[1].structureKey, SHAPES[2].structureKey];
-    renderer.setShapes(SHAPES, NODES, new Set(regionKeys), [regionKeys]);
+    renderer.setShapes(SHAPES, NODES, new Set(regionKeys));
     renderer.dispose();
-    // Two selected shapes in one region: one line material for the one bracket set, beside the three fills.
-    expect(three.disposed.filter((kind) => kind === 'material')).toHaveLength(SHAPES.length + 1);
+    expect(three.disposed.filter((kind) => kind === 'material')).toHaveLength(SHAPES.length);
   });
 
   it('reports which way is left as the camera turns', () => {

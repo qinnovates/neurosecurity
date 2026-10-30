@@ -99,7 +99,7 @@ describe('the viewport once the page\'s own control has asked for it', () => {
 });
 
 describe('the visitor\'s selection in the picture', () => {
-  it('brackets each chosen group and changes no fill, colour or step of any shape', async () => {
+  it('selects every shape of each chosen group, lit from within, and changes no fill, colour or step of any shape', async () => {
     const plain = await openViewport();
     const plainShapes = plain.shapes.map((shape) => ({ ...shape }));
     cleanup();
@@ -107,14 +107,15 @@ describe('the visitor\'s selection in the picture', () => {
     const groups = [[drawn[0].id], [drawn[1].id, drawn[2].id]];
     const chosen = await openViewport({ selectedRegionGroups: groups });
     expect(chosen.shapes).toEqual(plainShapes);
-    expect(chosen.bracketGroups).toEqual([drawn[0].structure_keys, [...new Set([...drawn[1].structure_keys, ...drawn[2].structure_keys])]]);
     expect([...chosen.selectedKeys].sort()).toEqual([...new Set(groups.flat().flatMap((regionId) => model.regionsById.get(regionId)?.structure_keys ?? []))].sort());
-    expect(plain.bracketGroups).toEqual([]);
+    expect(plain.selectedKeys.size).toBe(0);
+    // Nothing is handed to the picture to draw around the selection: no groups, no label. The name stands beside it.
+    expect(Object.keys(chosen)).not.toContain('bracketGroups');
+    expect(Object.keys(chosen)).not.toContain('selectionLabel');
   });
 
-  it('draws no mark for a region that has no shape, and none for an id the index does not hold', async () => {
+  it('selects nothing for a region that has no shape, and nothing for an id the index does not hold', async () => {
     const chosen = await openViewport({ selectedRegionGroups: [[shapeless?.id ?? ''], ['not-a-region']] });
-    expect(chosen.bracketGroups).toEqual([]);
     expect(chosen.selectedKeys.size).toBe(0);
   });
 });

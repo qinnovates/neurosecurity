@@ -27,9 +27,9 @@ const RIM_COLOUR = '#1c1e26';
  * overlooked. A dot is white with a dark rim on both surfaces, so what the
  * picked one has to stand out against is the dot beside it, not the page: this
  * ink reads 17.8:1 against the white dot, where the dark surface's selection ink
- * (`#fcfcfb`) would be the white dot. The brackets around a shape are the other
- * way round -- they stand against the page -- which is why they take the surface's
- * ink and this does not. See `SURFACE_INK` in scene-drawing.ts.
+ * (`#fcfcfb`) would be the white dot. That is why this takes the one ink on both
+ * surfaces rather than a surface ink: it stands against the dot, not the page.
+ * See `SELECTION_COLOUR` in scene-drawing.ts.
  */
 const PICKED_DOT_COLOUR = SELECTION_COLOUR;
 

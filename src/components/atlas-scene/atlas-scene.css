@@ -253,3 +253,14 @@
 }
 @media (prefers-reduced-motion: reduce) { .atlas-canvas { animation-duration: 120ms; } }
 @media print { .atlas-canvas, .atlas-orientation, .atlas-controls { display: none; } }
+
+/* The pick cursor while a shape a click would pick lies under the pointer (the renderer sets the attribute); the grab cursor otherwise. */
+.atlas-canvas[data-pick="shape"] { cursor: pointer; }
+
+/* The three moves, over the picture until the first touch: drag, zoom, click. Shown once something is drawn; gone at the first press or wheel, or after a few seconds. */
+.atlas-picture-hint {
+  position: absolute; top: 0.75rem; left: 50%; transform: translateX(-50%); max-width: calc(100% - 1.5rem); margin: 0; padding: 0.3125rem 0.875rem;
+  font-size: 0.75rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--atlas-ink);
+  background: var(--atlas-panel); border: 1px solid var(--atlas-line-strong); border-radius: 999px; pointer-events: none;
+  animation: atlas-fade var(--atlas-move) var(--atlas-ease) both;
+}

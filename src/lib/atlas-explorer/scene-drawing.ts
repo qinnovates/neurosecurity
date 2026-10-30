@@ -5,9 +5,11 @@
  * pointer is, which way each anatomical direction points on screen, and the
  * selection mark.
  *
- * The selection mark is corner brackets around the shape's box: line segments
- * only. It paints nothing inside the shape, whatever the shape's fill, so a
- * selected shape can never read as filled.
+ * The selection is drawn on the selected shapes themselves: lit from within,
+ * in white light at a level below the pointer's lift, and a see-through shape
+ * drawn denser. Nothing is drawn around a selection and no hue is added, so a
+ * selected shape keeps its own colour and never reads as holding a value it
+ * does not hold.
  */
 
 import type { Point3 } from '@/lib/anatomy/ras-to-scene';
@@ -15,11 +17,12 @@ import { positionOfPose, type OrbitPose } from './camera-views';
 import { NEUTRAL_COLOUR, type FillKind, type SceneShape, type SceneTheme } from './scene-shapes';
 
 /**
- * Selection is a state, not a category, so it wears neutral ink rather than a
- * hue. The previous orange sat at 2:1 against the light surface, under the 3:1
- * floor, and it now shares a hue family with bands N3-N1, where it could read
- * as a band rather than as "this one is selected". No band is neutral, so this
- * cannot be mistaken for one.
+ * The selection role's ink: neutral, because selection is a state and not a
+ * category. A hue could read as a band (the previous orange shared a hue family
+ * with bands N3-N1), and no band is neutral. Shapes no longer wear it -- a
+ * selected shape is lit from within instead -- but the picked electrode dot
+ * does (device-objects.ts), and the palette tests hold the role apart from
+ * every band on both surfaces.
  */
 export const SELECTION_COLOUR = '#1a1a19';
 /** The same role stepped for the dark surface. */
@@ -43,23 +46,20 @@ export const INSIDE_COLOUR = '#5b6170';
 export const INSIDE_COLOUR_DARK = '#a7adbd';
 
 /**
- * The inks that belong to the surface rather than to a shape, in one table.
+ * The ink that belongs to the surface rather than to a shape.
  *
  * A shape arrives with its own colour already resolved for the surface (see
- * `SceneTheme` in scene-shapes.ts). These two cannot: the selection brackets are
- * drawn around a group of shapes and the pale fill stands for the lens holding
- * no colour at all, so neither has a step to read a palette with. They are the
- * drawing layer's own inks, and this is the only place they are chosen.
+ * `SceneTheme` in scene-shapes.ts). The pale fill cannot: it stands for the
+ * lens holding no colour at all, so it has no step to read a palette with. It
+ * is the drawing layer's own ink, and this is the only place it is chosen.
  */
 export interface SurfaceInk {
-  /** The corner brackets. Named nowhere in the copy, because it is not one colour. */
-  selection: string;
   /** The "inside or mixed" fill. */
   inside: string;
 }
 export const SURFACE_INK: Readonly<Record<SceneTheme, SurfaceInk>> = {
-  light: { selection: SELECTION_COLOUR, inside: INSIDE_COLOUR },
-  dark: { selection: SELECTION_COLOUR_DARK, inside: INSIDE_COLOUR_DARK },
+  light: { inside: INSIDE_COLOUR },
+  dark: { inside: INSIDE_COLOUR_DARK },
 };
 
 const OUTLINE_LAYER = 'outline';
@@ -111,6 +111,12 @@ export const HOVER_OPACITY: Readonly<Record<FillKind, number>> = { solid: 1, tra
 /** White light added to a filled shape under the pointer: brighter, not another colour. */
 export const HOVER_EMISSIVE = '#ffffff';
 export const HOVER_EMISSIVE_INTENSITY = 0.7;
+/**
+ * The selection: the same white light, held, at a lower level than the pointer's lift, so a selected shape stays
+ * recognisably its own colour and the one under the pointer still stands out over it. Nothing is drawn around a
+ * selection; its name stands beside the picture.
+ */
+export const SELECTED_EMISSIVE_INTENSITY = 0.35;
 
 export interface HoverParams {
   opacity: number;
@@ -288,31 +294,6 @@ export function axisDirectionsFor(pose: OrbitPose): AxisDirections {
   return { left: project(SCENE_AXES.left), right: project(SCENE_AXES.right), front: project(SCENE_AXES.front), back: project(SCENE_AXES.back), top: project(SCENE_AXES.top), bottom: project(SCENE_AXES.bottom) };
 }
 
-/** The share of each box edge a corner bracket runs along. */
-const BRACKET_SHARE = 0.22;
-/** How far outside the shape's box the brackets stand, in millimetres, so they never touch its surface. */
-const BRACKET_MARGIN_MM = 1.5;
-
-/**
- * The selection mark: three short lines at each corner of the shape's box, as
- * pairs of end points (x, y, z, x, y, z per line). Lines only, for every fill.
- */
-export function selectionBrackets(min: Point3, max: Point3): number[] {
-  const low = [min[0] - BRACKET_MARGIN_MM, min[1] - BRACKET_MARGIN_MM, min[2] - BRACKET_MARGIN_MM];
-  const high = [max[0] + BRACKET_MARGIN_MM, max[1] + BRACKET_MARGIN_MM, max[2] + BRACKET_MARGIN_MM];
-  const segments: number[] = [];
-  for (const corner of [0, 1, 2, 3, 4, 5, 6, 7]) {
-    const at = [0, 1, 2].map((axis) => ((corner >> axis) & 1) === 1 ? high[axis] : low[axis]);
-    for (const axis of [0, 1, 2]) {
-      const end = [...at];
-      const reach = (high[axis] - low[axis]) * BRACKET_SHARE;
-      end[axis] += at[axis] === low[axis] ? reach : -reach;
-      segments.push(...at, ...end);
-    }
-  }
-  return segments;
-}
-
 /** How long a threat-model step's own marks take to appear, in place. Nothing moves, and under reduced motion nothing fades. */
 export const STEP_EASE_MS = 450;
 export function stepEaseDuration(prefersLessMotion: boolean): number {
@@ -323,5 +304,5 @@ export function stepEaseDuration(prefersLessMotion: boolean): number {
 export function idleTurnSpeed(prefersLessMotion: boolean): number {
   return prefersLessMotion ? 0 : IDLE_RADIANS_PER_MS;
 }
-/** One slow turn takes about two minutes: enough to show depth, too slow to suggest activity. */
-export const IDLE_RADIANS_PER_MS = (Math.PI * 2) / 120_000;
+/** One slow turn takes about a minute: fast enough that the picture is seen to be a solid thing with depth, slow enough not to read as activity. */
+export const IDLE_RADIANS_PER_MS = (Math.PI * 2) / 60_000;

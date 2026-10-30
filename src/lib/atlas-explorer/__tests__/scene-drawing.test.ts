@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { poseForView, turnPose } from '../camera-views';
 import {
-  BRAIN_OUTLINE_OPACITY, DRAW_ORDER, FILL_OPACITY, HOVER_OPACITY, IDLE_RADIANS_PER_MS, INSIDE_COLOUR, RING_OUTER_MM, SELECTION_COLOUR, axisDirectionsFor, choosePick, hoverParamsFor, idleTurnSpeed,
-  isPickable, materialParamsFor, pointerToNdc, ringParamsFor, selectionBrackets, type PickHit, type RingParams,
+  BRAIN_OUTLINE_OPACITY, DRAW_ORDER, FILL_OPACITY, HOVER_EMISSIVE_INTENSITY, HOVER_OPACITY, IDLE_RADIANS_PER_MS, INSIDE_COLOUR, RING_OUTER_MM, SELECTED_EMISSIVE_INTENSITY, axisDirectionsFor, choosePick, hoverParamsFor, idleTurnSpeed,
+  isPickable, materialParamsFor, pointerToNdc, ringParamsFor, type PickHit, type RingParams,
 } from '../scene-drawing';
 import { FILL_KINDS, NEUTRAL_COLOUR, NISS_COLOURS, NISS_COLOURS_DARK, SIZE_MARKS } from '../scene-shapes';
 
@@ -22,7 +22,6 @@ describe('materialParamsFor', () => {
       const params = materialParamsFor(shape(fill), false, 'light');
       expect(params.opacity, fill).toBeLessThan(0.5);
       expect(params.colour, fill).not.toBe('#123456');
-      expect(params.colour, fill).not.toBe(SELECTION_COLOUR);
     }
     expect(FILL_OPACITY.translucent).toBeGreaterThan(FILL_OPACITY.neutral);
     expect(INSIDE_COLOUR).not.toBe(NEUTRAL_COLOUR);
@@ -104,20 +103,10 @@ describe('axisDirectionsFor', () => {
   });
 });
 
-describe('the selection mark', () => {
-  it('is corner brackets: 24 short lines outside the shape\'s box, the same for every fill, with nothing inside it', () => {
-    const segments = selectionBrackets([0, 0, 0], [10, 20, 30]);
-    expect(segments).toHaveLength(24 * 6);
-    const points = Array.from({ length: segments.length / 3 }, (_unused, index) => segments.slice(index * 3, index * 3 + 3));
-    // Every end point lies on the surface of the padded box: no line crosses the inside of the shape.
-    const onFace = (point: number[]): boolean => point.some((value, axis) => value === -1.5 || value === [10, 20, 30][axis] + 1.5);
-    expect(points.every(onFace)).toBe(true);
-    // Lines only: each segment runs along one axis, so the mark has no area to fill.
-    for (let line = 0; line < points.length; line += 2) expect(points[line].filter((value, axis) => value !== points[line + 1][axis])).toHaveLength(1);
-  });
-
-  it('uses a colour no fill uses', () => {
-    expect([NEUTRAL_COLOUR, INSIDE_COLOUR]).not.toContain(SELECTION_COLOUR);
+describe('the selection glow', () => {
+  it('is held below the pointer\'s lift, so the shape under the pointer still stands out over a selected one', () => {
+    expect(SELECTED_EMISSIVE_INTENSITY).toBeGreaterThan(0);
+    expect(SELECTED_EMISSIVE_INTENSITY).toBeLessThan(HOVER_EMISSIVE_INTENSITY);
   });
 });
 
@@ -153,7 +142,6 @@ describe('ringParamsFor', () => {
       expect(params.colour, fill).toBe(NEUTRAL_COLOUR);
       expect(params.colour, fill).not.toBe(NISS_COLOURS.critical);
       expect(params.colour, fill).not.toBe(INSIDE_COLOUR);
-      expect(params.colour, fill).not.toBe(SELECTION_COLOUR);
     }
   });
 
@@ -206,9 +194,9 @@ describe('ringParamsFor', () => {
 });
 
 describe('idleTurnSpeed', () => {
-  it('is zero under reduced motion and one slow turn in two minutes otherwise', () => {
+  it('is zero under reduced motion and one slow turn in a minute otherwise', () => {
     expect(idleTurnSpeed(true)).toBe(0);
     expect(idleTurnSpeed(false)).toBe(IDLE_RADIANS_PER_MS);
-    expect((Math.PI * 2) / IDLE_RADIANS_PER_MS).toBeCloseTo(120_000);
+    expect((Math.PI * 2) / IDLE_RADIANS_PER_MS).toBeCloseTo(60_000);
   });
 });
